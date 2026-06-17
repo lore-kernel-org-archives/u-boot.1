@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9633ECD98E1
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 05:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B868CCD98EE
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 05:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A68578493A;
-	Wed, 17 Jun 2026 07:30:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E828D8494B;
+	Wed, 17 Jun 2026 07:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="6K3lZ+oy";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="rp1Vc/AM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD932848E2; Wed, 17 Jun 2026 07:30:09 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 2D37B84942; Wed, 17 Jun 2026 07:30:12 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3E7284894
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:30:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A2284704
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:30:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GfRSQDsssULuetcih10Uu7pifLNgtRzTStpAdybq0tfDZrOAc1rmc6PP++m5YxdDJoAxOz7vcbuS8opDHi+HAf8341+ATkMzVDo8ZFt4dvH2Hpz2tq0yOfPqvKV/RFxcNzPJf5FDXWuLNXqsKZSQq6clRw9HI78FCUYP+U8unotDVx1Syw9wVD6eLgOMeD0iK15bTrsbh6lm4JZLLCx5/Ehv4X1OYvniY7KCnisLkOj5QjnMVmRN069qQspXTGBKpJ0PrGXTaZOkNuM5AT/rXyxDPnWW8UO4l8B5ipoALqDh3BEj7H/MqhWZnGI5LbfzK5d/BxnNgjcLhkD8XxvRfg==
+ b=RLyIRV31A9xLAtPhdsXjhKUsLBu/dudwGp5I81ReL0aX/qLx0FV2+FKBiiZUNyi1VoDPwzYGts37UImAZEGsybbYljv3RZFck2jAGRmmWq9jo3u/RkWTxKS7U7Qn0k6vpDtX31vpUb51zC9H4saqxM8gI2Lkdx0girNlmSFpBCmB8KCl+MV1hI1DbPnGWuCq3icWv2Xep1xgr+crsk26EM76ccG0hFCbTLQPdIINFF6dssfxy9CTOA3I21ZCjOcuzUieiKE9L3lPB4hw3cBC4J7VjdFwivsebhERmnqiVZvGoJz8TGwSBgtIQ7c4IKXzCKAtSqK1tX/AKB+qXWENBg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UwGtMN9Os7jyoHslScncDC+cMQd/0IbRVAK0rBi5rg0=;
- b=qn/C0M+hP/nrHwOOZq1w+tAseA9eGRN7m9DMMOq6tdL9oerCJN1HGm0KrNZjfbkFWDMoAZSNMpWPRLcoz2xFn3wlrCkRFydomYy7t00fkY/T5WjSXFmudeSQhqbRyn965QGxnJNXcmf4sNyusePWaPmCgAho+1SVzRFilJ5lSt2droaMnmIYDylNBDPLQoQ+yM5O8LpyZQjRBh46rxjC11WKUKqTkbf/s3PxwpDg+c3972hzSRul6wMoYXZpzurvDbCIJbSgvj8iGsq2egWEwK7qDv3rFFDRep7jTH2eO+2jbbRDBIxyy3W4FPxzSw7yslitxhf/TAvvzTFOuspyJg==
+ bh=2CTuSEJtUONRqJV+obdsb4ncvj1FKSUiAO0dNj6Vmt8=;
+ b=Dan8gNPfStTmVoiw8MRt7t8wAgaJePfthElMkYcMGa0Wck+nUBFB94KT5sv+1PJkhn5K0jFUe2gHsNWdxPVz3aFPHX+39xuvhMwwE+ZKjBxyFeRTulPol4ut1wPs9Dr5GIN7jBcnNChjoa+yTh86eh2LmHN9oILVRLKtVwQCApNowMku4w4Gh+lhNE2rFj7FXbvFRf7BK/2+K+TXINhsa7Y4XG/BMn6COWcmrXUsifkn97g+PU+aKEqFdU7YOJHzMKbEbMbOhj68rww1JWQQusK1j0lDlJzprkzX4egbRYEcfglq27wKUGThty57Q2kltB9q0mxj6XAfot8dVrZYVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UwGtMN9Os7jyoHslScncDC+cMQd/0IbRVAK0rBi5rg0=;
- b=6K3lZ+oyt810huMJZtYJ2Zi09oKgexwxDJhBSsz/gb4PCXJMiSi88Xub9oQXpsF0ziH+SOXXvpqHr+PPW5xPgzHPJun54P4WlePPoJbuVgJpEUQhqQWHTo0Nd/Oc5lm79INvujK4q+gsOaeFkkvwNcUMY1W+94ADh1KhEsvK+XfZwfuqgdeVMJwwrR/lpzZAuVhfG6yGUXkwnQgLX0CR6yv8P0ln8OEvcxdkEY15MVMOn1yjkUMOTMSZjoX/MNXWmnn6+AAcB+B/RjNdpLLt9gKdpXGM2WSpE3umEDE/9Kt1A3zq2M8J1fyUbjoLUi1MBRcK//gE0UU7FKtexCs9Aw==
+ bh=2CTuSEJtUONRqJV+obdsb4ncvj1FKSUiAO0dNj6Vmt8=;
+ b=rp1Vc/AM0+kvlQLhQI/k//Xupsgo8y9zzS60EINGdogSgMOU5ur+15ICFcWSjGUNMxk4Nrg6s550uWRnFMmrPB/dJTkobhqCRH1hnVFouFXqs/K2Z4UZHlo/aMG7Sb0f1Aq/zGvf9iFLkHpCVuIqEIEsDgg9qA/GUuPerSsUYv1ni0aDfzWRTyZsDt5j6l/oWCyYu1xbwCOi9rsHVuk6RKZpzgRICcpZNa6VgE/eUNz2uSwHJlDnJAEzj/3LbeJOqGK2CgPVbuXzKzuZtYdT/Z9vFaNsIyRL96dhDFzCBzki6Cl69bn8QiPrCSqJ1kqDhZ4eSvPdbw+MzvPyJJHS0A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by DU0PR08MB9653.eurprd08.prod.outlook.com (2603:10a6:10:449::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Wed, 17 Jun
- 2026 05:30:06 +0000
+ 2026 05:30:08 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0113.013; Wed, 17 Jun 2026
- 05:30:06 +0000
+ 05:30:08 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
@@ -68,9 +68,10 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Markus Gothe <markus.gothe@genexis.eu>,
  Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v13 04/12] pinctrl: add more pinconf/pinctrl definitions
-Date: Wed, 17 Jun 2026 08:29:40 +0300
-Message-ID: <20260617052948.2815870-5-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v13 05/12] pinctrl: sort and format the contents of the
+ makefile
+Date: Wed, 17 Jun 2026 08:29:41 +0300
+Message-ID: <20260617052948.2815870-6-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260617052948.2815870-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260617052948.2815870-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,56 +83,56 @@ X-ClientProxiedBy: FR0P281CA0222.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|DU0PR08MB9653:EE_
-X-MS-Office365-Filtering-Correlation-Id: 54b8a69a-8c17-4ee4-76a6-08decc317d17
+X-MS-Office365-Filtering-Correlation-Id: 5e260775-b45f-423e-540b-08decc317e78
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|1800799024|366016|7416014|23010399003|921020|38350700014|22082099003|18002099003|11063799006|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: iFn3fUJA823zCCToMF2pYz3u5Hu+P442Cm+2G3aPYa8ENgvIIuJw8yFh6zQd4zL9Wp9OaeaXxdyyJKve+fR8i7brs2ATawgJH6Jqqk4MHid0UNFRIVW1YQL8X0ilzXddUXer6lHwJVo5mNnzxnT7piLq8Dz7JH4j3lWBIWPzXrKJJi7F/N8sgrAvxp2haa0XM5jVj2NhUs6+X+nCXZa8uwqM1+TuTon0S/whv1QYqmNgXww+HgTez2ahPEfCneIQDOq+5CHRPXuYWpnUARUIyF1I1Az4jKDCTdCaKRmugdWPkX+hpsMR3ip3vBabDq+9368yi6daq856u5TvevizVodUIjevCn3PqWIzXqrzO+kHxOGH/bGSSpt1yx/Xr1hYKC+26E0P9dSwSYzYnZgPfvwzHVpO7egDzZJUNwEnAqCpCnQsL1AJPJUeHGxhr/wvXsvTj11IdviAOGo0eO1itEv06QZ8cPimBtZWzuEgyJHBJXxLpuuqxVQSpOP3T/QpLTkJ/L5FI8K9JJOqa69wd5rEz2RJHm6JVhruX2O7qKILYZRjVgI5E0yKSq/pIzF3lqJPzp8a3BkwkIfjb1dmRr96aE7oUwAusmg3R0o2o6Hs3P2CKGIU0muis8fM/akuKbOigOeaQG5eRTlpcRKRhFW/5egqdl+2STo2wwFcrIRhNEgfg3P+OAkEPyL3NpxIZN2CsQTa8j1h+bOBlmAoiC4kJXQPGP1UpafkJZAjb62yl+/fm+Vs6t5xOdC+Zy+W4idoaZyb1lYNnfeaDGefSQ==
+ ARA:13230040|376014|52116014|1800799024|366016|7416014|23010399003|921020|38350700014|22082099003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: H5bxSYzwdnzvuLaqt7N7YUYA0XDC9t3fBAkFw+M0U7XyumQ9Mdr5ASG+RVN1rsd5eGsYq97jC/vPd2EaEK2MkYyVwd201MLLqzrvOkCOZgHs8Ivx31Y2f8//t2Gsnnw+J+636f3Vrf7b/S90rZ1Rc87GOYWQIfuJ2xHJ9EPj4KcYmdyELm2Ul7f52QKdP91hEzmXNPJHmEhV/3x0Kgt+eKiUWMMTBdPDCfLgRrFYyLPwJyRFjM4AaiiWvQ0ZjuN3oPFAhkidrmDYKbmM7uCW7J2vxI9IJM2b1/Az+y5fCqStsTPdm3hVrFt31zAoeofaZkWo3BDA3pPNZHH303L0/qhgbTlOPSOSHg94jZaLN1WXsCGd4YJ70BTVmgr1CL7j2GS/8GRg+COxlP3BF98BNwswXthoGP6ff9Ipt3fth5naYBvst3s7AINoL77ccIYSUGy+WcvkLp7HY4y4NT+YoRVtcVAc3hK3kmjS747vHh8Bk0DTdzDIGmgl2NIbUAI5jNr9lgXw8q3Jl0LilaxaQ7SbG20bEZbGTSpAss/WSVKX3iNAG7nVWUSDASxwzLIHepf5Jqt56GndgFF7SMAbE+JS1A0OKYBXWG5RJ9U5iGbnb24H+d5TvAS5+SzaaIHFy+U7wbIUHDfMkXVBn+GYn4uR1xEOuSE/QtqpiEs6q7D4fRXI5izIg93FVvnKvfw8HOzBQdyN2PoNAasUCW1lyc3RbhZpo6Z0016dku+k6SfRzx+vSnUISiYF5U/zKAdJvmITNduab4kZComSnKqveA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(1800799024)(366016)(7416014)(23010399003)(921020)(38350700014)(22082099003)(18002099003)(11063799006)(56012099006)(6133799003);
+ SFS:(13230040)(376014)(52116014)(1800799024)(366016)(7416014)(23010399003)(921020)(38350700014)(22082099003)(18002099003)(11063799006)(56012099006);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kmUWlImIGmgJOjqDay7K8JsDyUholWKGX9sfdS7GJi2K2TsYjhBa68UjquHT?=
- =?us-ascii?Q?OKfZ8/QFlJvxftYIk1tMItnC0J4yHIz3TqhngbC2OOxiQ8RaPhGJ2q/u9XFa?=
- =?us-ascii?Q?iMs2OmuqoTI3xMbfyE/7w9klpg5/DlYwGWktZnAKo4DcWDBFqlyUDbxwOb5D?=
- =?us-ascii?Q?egWK9u32Xud6EJ9embsESVhXRexG73ch5FpqWXE0gs+lEJtbH1LSCsO0AYZ5?=
- =?us-ascii?Q?w9asSCZ91YMwRRF6hxNnWa+4v6pGGfTju6Sqyse605YHcoCFDDo4zcdsSuS6?=
- =?us-ascii?Q?5qUcQQ+G8GU4La2ESb49iGYQUkmAQBIDNpnYovgrqaHqZrBBGCxIs1gQpccx?=
- =?us-ascii?Q?r1zdxgZ8lXUVFkPdVToLT/JKp6X+V04CfwhAU7GPrrzD6o/i10rcruBouRRc?=
- =?us-ascii?Q?zozCgRH1MKe8In5CmtS4O34g+PPHqmOpys3jtQihXJF+kHxNSStw5SV6w+b+?=
- =?us-ascii?Q?CTCflWKGqzf4Cg8JRBp8K7TdhElo85hBdKSsvxDZz0y0dITOdQsB/Fs9EPwa?=
- =?us-ascii?Q?tamaVbAM4IAcstcfI5Ue+Db8vDJgR33gV2b1nS3hriD085+sQ6Tm61F2qGwH?=
- =?us-ascii?Q?6tAA/QCCITG1gn1Eem1192Bw/VMdBdrRhjO3nVv2LZ7nSdaPqgdCHtqEW2Kj?=
- =?us-ascii?Q?t5Ho2n0gou7hirAqLgjDCnheREyfpa2vgglHCX3ZdDqMIbozNibL+CSIOxSg?=
- =?us-ascii?Q?2Xmu4LlfS5HPJc+y2O3K5dyfhhOGaQNjtr1v6RJhreTbSrGK9/LdMKi4I0cH?=
- =?us-ascii?Q?zZPr8FsjOIFJwRYFZ0FS2SqCAswVUbEiPZDErhNchzr+Ojop6fMKO/8jDwmQ?=
- =?us-ascii?Q?Uh1mjhAIriokfcrdbHfaXl4T+ry4C3elylX8wRtlAloN9gOTcndx3QjKC5eq?=
- =?us-ascii?Q?cT77UJslr8iO/yOK166eOG+qo1L+9C6TZAJ/AM2DZTn+9U8kaiCrrj8mihmP?=
- =?us-ascii?Q?C1ISWi8nl6RyRrMzqvKEjp9fvbPPYePF7qfy+jTcXSL4xv35ceVmkEdJjyLx?=
- =?us-ascii?Q?dYPZrv3Bq7iOH/8ES1fPmPwvtUX9jquYN149y1aBl+IfutLEmi83ydY2ieKd?=
- =?us-ascii?Q?eBXxS1ZcPTki2Y0d3f7dRoLGiCIbuf39GHOUuyeAHNBRZllku1QKrfQOTFXf?=
- =?us-ascii?Q?cI4xD7Yxzep2D/OCgpCXGuG2SRTpbMyckgQ8rnTRZINa2Dd1PesR9k8t6Zow?=
- =?us-ascii?Q?0kfGcNBpLLGJeGCP8zG0R4/Yl4W81C7mX/lKvIPzbjSgx8b0KeE+2ii/llzV?=
- =?us-ascii?Q?KDDP3UBUzIvuTlc2urGGcir8d2frUeDFeWIplib2NSAYzbP972LxrV98yxox?=
- =?us-ascii?Q?AU+weqYlmgj7nEljucQOhFh6mLU0c7zqlmL6bkGA66c65VwVTJHe5Nw7wrWr?=
- =?us-ascii?Q?i/xt+4EqFDcO7W/JCwIfR6UlNlQ5gtLMdoElyumT+6oMkQR/kK6L5PmqzshD?=
- =?us-ascii?Q?qdPQBKFYKQMviczar203UCmwxhmRLW2zJIajgjUhiXewUTJhjAEPbtRYtA7E?=
- =?us-ascii?Q?CnfgZPIkHAkJO0i8BDObh+LryIXqt9ukuSxHmRkanuASboc7D5ieY6TNIO66?=
- =?us-ascii?Q?HPk3TuQd1ehR1wkw22satjYDwfusjWjqv8fy2eT1WFmkwi1ZqNAvT8dvFKs9?=
- =?us-ascii?Q?1mztQ5iDVniUnqBzM3BE5Mhqau8se7ZCZMfe31Xqhz2q1GrKpm/DRw0LVWFt?=
- =?us-ascii?Q?dmlZdntiSvQecrtia0eQWrZdofQR4gtTIRYMIfiZNCv61lVxcmjae16DIIWB?=
- =?us-ascii?Q?ZYNiA+mCGnXSprxgQTUYYiiumSHoOoE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?c2JTnWAukyp0quLa56PUr1ifLIYzsbQI8CD5WaB4SOMygQlEVfmFRsdc5IOU?=
+ =?us-ascii?Q?DF7ZZ1RX+JbtV4hA8pdrl0aWrAesESp+uInvpqdJJuHjnppBO7qpXMGnf7Yz?=
+ =?us-ascii?Q?dVqX//3qYML3ZX/DSNNwO/w1aFBOmJpUHuSEYYsCti90M2zr3xueVnt32fEz?=
+ =?us-ascii?Q?QSPBvWdQOrbCB0QZP9hBCc3ZgSpz7LecSVSuvOPGjDnVEAb5U7Kg85Tua8iS?=
+ =?us-ascii?Q?Co2LhOjXauP3sALd/JxRfXKZ+v8SsF8xDfMlIGBVcWWKnANXtXwviVHe116O?=
+ =?us-ascii?Q?WZjPuQ2o2EjJHE7ig7ZhYT0wNSdZak2zCldxcUWL9Cl6P2iPIUp22zs60y5q?=
+ =?us-ascii?Q?B+EvHOAegJroXf1C0PavHAr2bz4sByJDibPrxMy9ri4046Ll58j32omotsEi?=
+ =?us-ascii?Q?EAX3aPVHKh2vZR/QnVfQohIAbmOsZsd/B+Gemla1S+/VDSML2CSMBH5cMwGW?=
+ =?us-ascii?Q?T1MV78lcmHx17/6qGy+CcZ9YKfn3Sax3b+EzfYv7b7bFKsN3gFgGCBFXuF5Y?=
+ =?us-ascii?Q?CsQNS+rL429U2qpj0Iza9dHvqHYe3KLXZLCR/nEgl+6dEAszRNz/rbU2Catb?=
+ =?us-ascii?Q?Ms8JUhHVmQA/q4WjgivZVvDyVGg6sFZQe3gGuyrou8cG1RtTCV0aY6fwh4zy?=
+ =?us-ascii?Q?xF4qSMlK8x2QOCN0XCyWS0XE8dNkbbziRx8nlVEluMpxIjsISJf/c42JFrVy?=
+ =?us-ascii?Q?nwGvWhn2bPKhe7Ex+KKrjKFNT9So5+ltccPvmpKz/o+JgSSE7rPCn40anZFB?=
+ =?us-ascii?Q?4/rjNBS71Ix+nnQcwMrhVCPx//XMtBxSuitGFWKVP2sZtW8PBVnMF3s/2GSF?=
+ =?us-ascii?Q?QrulhGSxfkd8M0xV8lCIgdanBSG7/WjbbvbA0uxDSSPlYMOTXovB/mue6OF2?=
+ =?us-ascii?Q?W1Sfspx0K7r0rlwwLCThCVRPMx651nT99kb7mjdUCUUp6/a7evxhod1cdE1W?=
+ =?us-ascii?Q?tHTG0qvM6KiN9DQgktLeEQuKa6xRbl8T5vxhO3VWBVyGWrXaL4r4Q9uPNNk5?=
+ =?us-ascii?Q?2GrkhIob0vGX1FNvN9iPAORQwLfCduk9SjPgj7usebEkxrKoKU8JjcHu1Gpw?=
+ =?us-ascii?Q?JG2eWkZnFc+/zxrRpxDmPgN9iF7XgGT/FRkT/SMCPQ4TbHaCV7UMpchBDNf3?=
+ =?us-ascii?Q?mR3VMuP/gQml/w5HBV4+Bzozwzct3G/diFS5u+FKL0hrgPYzgfmrei/p3s0s?=
+ =?us-ascii?Q?+ZdLctZ0fkbs7IhCiAm7mwi1FDVOQUb62w489deSq8uBwk3l0kBftj/0G906?=
+ =?us-ascii?Q?3QQUP2HqSeyhKXxOYuTZjY4sGS7AvFaozChpWqRQREr1Kwn/+2GUUFN5rpKs?=
+ =?us-ascii?Q?YpX2QAhKOjpI6X6w8NrHEH6ywfY4uWOWGd1liTZ8dN3M9RXgOQgEta3DMMQW?=
+ =?us-ascii?Q?pnLKqEb6SdFl3cjBSGnM9XllfLGco7YH2GzdU6uT7rcihTBclsj3SVIl/PKR?=
+ =?us-ascii?Q?lPgQwzyX6Ml7R0RMibgn0VsgjujdPkwhGsi3dA/5qE3FAq3TW2cvHSPAv44E?=
+ =?us-ascii?Q?cMoVh+EKBvSs/AyDaYikgqMYP0sDsicgT1PavoXqtbD/oCKwfsQah8ACk4Hb?=
+ =?us-ascii?Q?mla20wzmt49d5/6jTf4sVO6+bbuJvM3bZS9rnVd30sO73RAxZX71zuyBIc3B?=
+ =?us-ascii?Q?/L4RMZC3SAZJ99n2hPEzYo5mMSUuHrKyp2pE6APbjENDlBfNyzvxspaigQp8?=
+ =?us-ascii?Q?I86bh7GVVw9VFWlkiP5N7PAGgupW/RtvIIZxcRZ2b7D9tSfrj6voQ4vTIduV?=
+ =?us-ascii?Q?xWciD4L0KfuhntOf+O4Lrjaaafq0MmM=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54b8a69a-8c17-4ee4-76a6-08decc317d17
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e260775-b45f-423e-540b-08decc317e78
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 05:30:05.9207 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 05:30:08.2367 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ru+tV9ui3E4oLExmCXO9HTIIOu3LVo3S92vmQxSvRlSz0TWdBZkem8NL0gfCTOG/sN11cVrRSEkqSnYpLpOOX9PLLuGOCYvyZFqYeCNhu6g=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 57gcceKuybL1EleQ/1eMrB/wqDf69AFCs9XVwZj7cEwCRJM9hqx3zV23fbfZ33Q9ihyoLhIvb3+GprW35aYimMP0+DXWRtjn7HeGo28a30c=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9653
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -149,143 +150,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These pinconf/pinctrl definitions will be used by the next patches.
-
-The definitions was taken from public headers of linux-7.0. It's used
-by several linux pinctrl drivers, so it might be helpful for U-Boot as
-well.
-
-Pinconf definitions are placed near the corresponding U-Boot definitions
-in file include/dm/pinctrl.h. Pin/group/function definitions stored within
-the same path as in linux (include/linux/pinctrl/pinctrl.h).
+sorting rules:
+ * rules for generic pinctrl files placed first,
+ * obj-y rules,
+ * obj-$(CONFIG_ARCH_something) rules
+ * obj-$(CONFIG_PINCTRL_something) rules
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: David Lechner <dlechner@baylibre.com>
 ---
- include/dm/pinctrl.h            | 28 +++++++++++++
- include/linux/pinctrl/pinctrl.h | 74 +++++++++++++++++++++++++++++++++
- 2 files changed, 102 insertions(+)
- create mode 100644 include/linux/pinctrl/pinctrl.h
+ drivers/pinctrl/Makefile | 60 +++++++++++++++++++++-------------------
+ 1 file changed, 31 insertions(+), 29 deletions(-)
 
-diff --git a/include/dm/pinctrl.h b/include/dm/pinctrl.h
-index e41baea6200..36db47802c7 100644
---- a/include/dm/pinctrl.h
-+++ b/include/dm/pinctrl.h
-@@ -481,6 +481,34 @@ enum pin_config_param {
- 	PIN_CONFIG_MAX = 255, /* 0xFF */
- };
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index 29fb9b484d0..df52c6db8c2 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -3,39 +3,41 @@
+ obj-y					+= pinctrl-uclass.o
+ obj-$(CONFIG_$(PHASE_)PINCTRL_GENERIC)	+= pinctrl-generic.o
  
-+/*
-+ * Helpful configuration macro to be used in tables etc.
-+ */
-+#define PIN_CONF_PACKED(p, a) ((a << 8) | ((unsigned long) p & 0xffUL))
++obj-y					+= broadcom/
++obj-y					+= nxp/
 +
-+/*
-+ * The following inlines stuffs a configuration parameter and data value
-+ * into and out of an unsigned long argument, as used by the generic pin config
-+ * system. We put the parameter in the lower 8 bits and the argument in the
-+ * upper 24 bits.
-+ */
++obj-$(CONFIG_ARCH_ASPEED)		+= aspeed/
++obj-$(CONFIG_ARCH_ATH79)		+= ath79/
++obj-$(CONFIG_ARCH_MTMIPS)		+= mtmips/
++obj-$(CONFIG_ARCH_MVEBU)		+= mvebu/
++obj-$(CONFIG_ARCH_NEXELL)		+= nexell/
++obj-$(CONFIG_ARCH_NPCM)			+= nuvoton/
++obj-$(CONFIG_ARCH_RENESAS)		+= renesas/
 +
-+static inline enum pin_config_param pinconf_to_config_param(unsigned long config)
-+{
-+	return (enum pin_config_param) (config & 0xffUL);
-+}
-+
-+static inline u32 pinconf_to_config_argument(unsigned long config)
-+{
-+	return (u32) ((config >> 8) & 0xffffffUL);
-+}
-+
-+static inline unsigned long pinconf_to_config_packed(enum pin_config_param param,
-+			     u32 argument)
-+{
-+	return PIN_CONF_PACKED(param, argument);
-+}
-+
- #if CONFIG_IS_ENABLED(PINCTRL_GENERIC)
- /**
-  * pinctrl_generic_set_state() - Generic set_state operation
-diff --git a/include/linux/pinctrl/pinctrl.h b/include/linux/pinctrl/pinctrl.h
-new file mode 100644
-index 00000000000..32b56e0ab18
---- /dev/null
-+++ b/include/linux/pinctrl/pinctrl.h
-@@ -0,0 +1,74 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef __LINUX_PINCTRL_PINCTRL_H
-+#define __LINUX_PINCTRL_PINCTRL_H
-+
-+#include <linux/types.h>
-+
-+/**
-+ * struct pingroup - provides information on pingroup
-+ * @name: a name for pingroup
-+ * @pins: an array of pins in the pingroup
-+ * @npins: number of pins in the pingroup
-+ */
-+struct pingroup {
-+	const char *name;
-+	const unsigned int *pins;
-+	size_t npins;
-+};
-+
-+/* Convenience macro to define a single named or anonymous pingroup */
-+#define PINCTRL_PINGROUP(_name, _pins, _npins)	\
-+(struct pingroup) {				\
-+	.name = _name,				\
-+	.pins = _pins,				\
-+	.npins = _npins,			\
-+}
-+
-+/**
-+ * struct pinctrl_pin_desc - boards/machines provide information on their
-+ * pins, pads or other muxable units in this struct
-+ * @number: unique pin number from the global pin number space
-+ * @name: a name for this pin
-+ * @drv_data: driver-defined per-pin data. pinctrl core does not touch this
-+ */
-+struct pinctrl_pin_desc {
-+	unsigned int number;
-+	const char *name;
-+	void *drv_data;
-+};
-+
-+/* Convenience macro to define a single named or anonymous pin descriptor */
-+#define PINCTRL_PIN(_number, _name)		\
-+(struct pinctrl_pin_desc) {			\
-+	.number = _number,			\
-+	.name = _name,				\
-+}
-+
-+#define PINCTRL_PIN_ANON(_number)		\
-+(struct pinctrl_pin_desc) {			\
-+	.number = _number,			\
-+}
-+
-+/**
-+ * struct pinfunction - Description about a function
-+ * @name: Name of the function
-+ * @groups: An array of groups for this function
-+ * @ngroups: Number of groups in @groups
-+ * @flags: Additional pin function flags
-+ */
-+struct pinfunction {
-+	const char *name;
-+	const char * const *groups;
-+	size_t ngroups;
-+};
-+
-+/* Convenience macro to define a single named pinfunction */
-+#define PINCTRL_PINFUNCTION(_name, _groups, _ngroups)	\
-+(struct pinfunction) {					\
-+	.name = (_name),				\
-+	.groups = (_groups),				\
-+	.ngroups = (_ngroups),				\
-+}
-+
-+#endif /* __LINUX_PINCTRL_PINCTRL_H */
+ obj-$(CONFIG_PINCTRL_ADI)		+= pinctrl-adi-adsp.o
+ obj-$(CONFIG_PINCTRL_APPLE)		+= pinctrl-apple.o
+ obj-$(CONFIG_PINCTRL_AT91)		+= pinctrl-at91.o
+ obj-$(CONFIG_PINCTRL_AT91PIO4)		+= pinctrl-at91-pio4.o
+-obj-y					+= nxp/
++obj-$(CONFIG_PINCTRL_EXYNOS)		+= exynos/
++obj-$(CONFIG_PINCTRL_INTEL)		+= intel/
++obj-$(CONFIG_PINCTRL_K210)		+= pinctrl-k210.o
++obj-$(CONFIG_PINCTRL_MESON)		+= meson/
++obj-$(CONFIG_PINCTRL_MSCC)		+= mscc/
++obj-$(CONFIG_PINCTRL_MTK)		+= mediatek/
++obj-$(CONFIG_PINCTRL_PIC32)		+= pinctrl_pic32.o
++obj-$(CONFIG_PINCTRL_QCOM)		+= qcom/
++obj-$(CONFIG_PINCTRL_QE)		+= pinctrl-qe-io.o
+ obj-$(CONFIG_$(PHASE_)PINCTRL_ROCKCHIP)	+= rockchip/
+-obj-$(CONFIG_ARCH_ASPEED) += aspeed/
+-obj-$(CONFIG_ARCH_ATH79) += ath79/
+-obj-$(CONFIG_PINCTRL_INTEL) += intel/
+-obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
+-obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
+-obj-$(CONFIG_PINCTRL_QCOM) += qcom/
+-obj-$(CONFIG_ARCH_RENESAS) += renesas/
+-obj-$(CONFIG_PINCTRL_SANDBOX)	+= pinctrl-sandbox.o
+-obj-$(CONFIG_PINCTRL_SUNXI)	+= sunxi/
+-obj-$(CONFIG_$(PHASE_)PINCTRL_TEGRA)	+= tegra/
+-obj-$(CONFIG_PINCTRL_UNIPHIER)	+= uniphier/
+-obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
+-obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
+-obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
+-obj-$(CONFIG_PINCTRL_MESON)	+= meson/
+-obj-$(CONFIG_PINCTRL_MTK)	+= mediatek/
+-obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
+-obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
+-obj-$(CONFIG_ARCH_NEXELL)	+= nexell/
+-obj-$(CONFIG_PINCTRL_QE)	+= pinctrl-qe-io.o
+-obj-$(CONFIG_PINCTRL_SCMI)	+= pinctrl-scmi.o
+-obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
+-obj-$(CONFIG_PINCTRL_STI)	+= pinctrl-sti.o
+-obj-$(CONFIG_PINCTRL_STM32)	+= pinctrl_stm32.o
+-obj-$(CONFIG_$(PHASE_)PINCTRL_SX150X) += pinctrl-sx150x.o
++obj-$(CONFIG_PINCTRL_SANDBOX)		+= pinctrl-sandbox.o
++obj-$(CONFIG_PINCTRL_SCMI)		+= pinctrl-scmi.o
++obj-$(CONFIG_PINCTRL_SINGLE)		+= pinctrl-single.o
++obj-$(CONFIG_PINCTRL_STARFIVE)		+= starfive/
++obj-$(CONFIG_PINCTRL_STI)		+= pinctrl-sti.o
++obj-$(CONFIG_PINCTRL_STM32)		+= pinctrl_stm32.o
+ obj-$(CONFIG_$(PHASE_)PINCTRL_STMFX)	+= pinctrl-stmfx.o
+-obj-$(CONFIG_PINCTRL_TH1520)	+= pinctrl-th1520.o
+-obj-y				+= broadcom/
++obj-$(CONFIG_PINCTRL_SUNXI)		+= sunxi/
++obj-$(CONFIG_$(PHASE_)PINCTRL_SX150X)	+= pinctrl-sx150x.o
++obj-$(CONFIG_$(PHASE_)PINCTRL_TEGRA)	+= tegra/
++obj-$(CONFIG_PINCTRL_TH1520)		+= pinctrl-th1520.o
++obj-$(CONFIG_PINCTRL_UNIPHIER)		+= uniphier/
+ obj-$(CONFIG_$(PHASE_)PINCTRL_ZYNQMP)	+= pinctrl-zynqmp.o
+-obj-$(CONFIG_PINCTRL_STARFIVE)	+= starfive/
 -- 
 2.53.0
 
