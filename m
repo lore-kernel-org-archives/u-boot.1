@@ -4,77 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B760CD98E1
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 02:45:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AF7CD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 02:49:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D58D5848D8;
-	Wed, 17 Jun 2026 04:45:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B236848D8;
+	Wed, 17 Jun 2026 04:49:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="j058IUi1";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g0tcTLbF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XKnw84F9";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kFTmLBAt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C35B8493A; Wed, 17 Jun 2026 04:45:21 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 5779B8495E; Wed, 17 Jun 2026 04:49:11 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEBD2848A2
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 04:45:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 216B9848A2
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 04:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg7WL0QYJz9t8w;
- Wed, 17 Jun 2026 04:45:18 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg7bm5X87z9t8w;
+ Wed, 17 Jun 2026 04:49:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781664318;
+ s=mail20150812; t=1781664548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=JIMKv+LK9izpLO3BZ7zSsO06uEpMHLzxg2QuXK8wk7M=;
- b=j058IUi1f2oehBKZXlauJy9YleYmreqeOzsVEJrKI5RpTuLtRnGWTA507fC3g3nGomZKb/
- ypd0ZDaBhoQQGf2cj2+TUsh/3nzd8B0PELaK0H/BmTYmIHJT7B7biio35nyNjobMe2hs9g
- 8MQkU9obI5TihGLm5ijmMDhZ2sZ+zqJUndBhskt9XU4atOt2IcyMacBV4pKZRlh/LpLGPV
- twhIIp55VMUDc13S5v2PNWu1cvVYfUPc9S387zBShoHTlCDvbj4yMn0DgEgJthukO6IlWv
- PTotWsZ8SpfIEreZ5OBMeajHXuEMyVlLv5QIJHX70qiPj8C7uf6gmI9G3o+pOA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=g0tcTLbF;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=/5tnsibk2QAbpZ6sa5W5Clbj18f20prR/5vsqAgughY=;
+ b=XKnw84F93L8XzgWxFs0mVFVC5WsTxQo6vsaDO4s6Sl72ECnXlmKNuBOk5FydvHEHBvU6H/
+ BdqubgZqjVVzB+UAbjzzw+bvcEuI5geTquGwmzUzjc2UfY25Ixkj4a/FCgt9HhqXVBH76w
+ Y9V76VokQK5zvJpjO0mKxgo2ZO0kC3eGlEAOzBqhVcAB2UyTp/FE+y9aicYxpGxP0hM++U
+ pmLwYleBiXEw4Ui6/StMuPrZ/drVfxqtIKjVX1/BCamvxVw2OpW2MkEo5cho04+zNnohaU
+ H+ey8/IGLwFV8v5XxglpFf2tXrxkZeNqs1EAf0C14nCVjuLItn0s1mpOd4WIIQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781664315;
+ s=mail20150812; t=1781664546;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=JIMKv+LK9izpLO3BZ7zSsO06uEpMHLzxg2QuXK8wk7M=;
- b=g0tcTLbFW7XLiXUqEXy2A+/WyW/Vq+Hn5sKL7jdy2bHFF2tWqcYB5zFQnTmLMxNQtdj5Hk
- 65VTV1sJoYgsQF5Mzoxs6yVUyG30UGpV9tJLqi6Pxs9NAdZQMDNj4tVoRL/LJyPaDjRDUC
- D/HVdvGhx5bC3SUc28DMxJ8TBlrqXNHkW34OjG7bPZPgKlk5WZMwo4o92aWNGhUtYUusxq
- OA9m4IZoW1EbgvmVKsj/Mp/RcmpcupKQtSNT6MeajWmfuU1n/ObdGTPnCKC5LujTwKOkyf
- GK/MjE4xhWLbJH7e3VrJ7wqr/wVj7VFCrnQpcHL4UYarz/F13NGhgkq9F5fhTg==
+ bh=/5tnsibk2QAbpZ6sa5W5Clbj18f20prR/5vsqAgughY=;
+ b=kFTmLBAt48G4F/f5dcujWw4i3SiNsfkX747FA/RnPRrDyOWvNMURVczU+n4Qf1GcgHbt3j
+ b0Nx1sWRFs8zK2fohBNdLwAMd/IzmByHcyt0ktE6B2ovmUsbFbPMqpT/+2+mMXi+hOUp8C
+ vyOAUHFPExZX+zB2VjqqeC7Oogf5m/hNtd8daa7kskvcQ9iw4GtEs4B34UNEIWjWc4YiXC
+ S4ew0FZvF6l5Yx6J+429H2iyCUFqOwcV8PrKI5pI6q6DedSsY2wHbdkDaK4u+gD7h1fP3w
+ VCHGAHuxsSHpZaPDExwpVC6Q8USHfpeejWxuG8S+OX1feZqMhnMFsPiQvtWUlA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] MAINTAINERS: Replace STM32 and STPMIC with N:
-Date: Wed, 17 Jun 2026 04:44:59 +0200
-Message-ID: <20260617024511.153241-1-marek.vasut+renesas@mailbox.org>
+ Michal Simek <monstr@monstr.eu>, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] MAINTAINERS: Replace Zynq/ZynqMP with N:
+Date: Wed, 17 Jun 2026 04:48:46 +0200
+Message-ID: <20260617024902.153555-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 85f19840fc23ae310bf
-X-MBO-RS-META: u3zwc9gsbsugpzz9u7d6ba18trimw9m8
-X-Rspamd-Queue-Id: 4gg7WL0QYJz9t8w
+X-MBO-RS-ID: 5cd42bce0edb8953615
+X-MBO-RS-META: 5694p97k6cnza8rgyim7obbwe8yxbcws
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,73 +82,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use N: to match on all stm/stm32/stpmic1 files, drop the large list of
+Use N: to match on all zynq/zynqmp files, drop the large list of
 entries which represent the same set of relevant files and miss a
-few in the process.
+few in the process. Combine Zynq and ZynqMP entries into single
+entry to further cut down the duplication.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Michal Simek <monstr@monstr.eu>
+Cc: Michal Simek <michal.simek@amd.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 Cc: u-boot@lists.denx.de
 ---
- MAINTAINERS | 36 +-----------------------------------
- 1 file changed, 1 insertion(+), 35 deletions(-)
+ MAINTAINERS | 56 ++++-------------------------------------------------
+ 1 file changed, 4 insertions(+), 52 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index edab1622bc4..c862b206a85 100644
+index c862b206a85..7eeaeb4583f 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -623,46 +623,12 @@ M:	Patrice Chotard <patrice.chotard@foss.st.com>
- L:	uboot-stm32@st-md-mailman.stormreply.com (moderated for non-subscribers)
- T:	git https://source.denx.de/u-boot/custodians/u-boot-stm.git
- S:	Maintained
--F:	arch/arm/mach-stm32mp/
- F:	doc/board/st/
--F:	drivers/adc/stm32-adc*
--F:	drivers/clk/stm32/
--F:	drivers/gpio/stm32_gpio.c
--F:	drivers/hwspinlock/stm32_hwspinlock.c
--F:	drivers/i2c/stm32f7_i2c.c
--F:	drivers/mailbox/stm32-ipcc.c
--F:	drivers/memory/stm32-omm.c
--F:	drivers/misc/stm32mp_fuse.c
--F:	drivers/misc/stm32_rcc.c
--F:	drivers/mmc/stm32_sdmmc2.c
--F:	drivers/mtd/nand/raw/stm32_fmc2_nand.c
--F:	drivers/phy/phy-stm32-usbphyc.c
--F:	drivers/pinctrl/pinctrl_stm32.c
--F:	drivers/power/pmic/stpmic1.c
--F:	drivers/power/regulator/stm32-vrefbuf.c
--F:	drivers/power/regulator/stpmic1.c
--F:	drivers/ram/stm32mp1/
--F:	drivers/remoteproc/stm32_copro.c
--F:	drivers/reset/stm32/
- F:	drivers/rng/optee_rng.c
--F:	drivers/rng/stm32_rng.c
--F:	drivers/rtc/stm32_rtc.c
--F:	drivers/serial/serial_stm32.*
--F:	drivers/spi/stm32_ospi.c
--F:	drivers/spi/stm32_qspi.c
--F:	drivers/spi/stm32_spi.c
--F:	drivers/video/stm32/stm32_ltdc.c
--F:	drivers/video/stm32/stm32_lvds.c
--F:	drivers/watchdog/stm32mp_wdt.c
--F:	include/dt-bindings/clock/stm32fx-clock.h
--F:	include/dt-bindings/clock/stm32mp*
--F:	include/dt-bindings/pinctrl/stm32-pinfunc.h
--F:	include/dt-bindings/reset/stm32mp*
--F:	include/stm32_rcc.h
- F:	tools/logos/st.bmp
--F:	tools/stm32image.c
- N:	stm
- N:	stm32
-+N:	stpmic
+@@ -749,72 +749,24 @@ T:	git git://github.com/ARM-software/u-boot.git
+ F:	drivers/misc/vexpress_config.c
+ N:	vexpress
  
- ARM SUNXI
- M:	Andre Przywara <andre.przywara@arm.com>
+-ARM ZYNQ
++ARM ZYNQ and ZYNQMP
+ M:	Michal Simek <monstr@monstr.eu>
++M:	Michal Simek <michal.simek@amd.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-microblaze.git
+-F:	arch/arm/mach-zynq/
+ F:	doc/board/xilinx/
+ F:	doc/device-tree-bindings/video/syncoam,seps525.txt
+-F:	drivers/clk/clk_zynq.c
+-F:	drivers/fpga/zynqpl.c
+-F:	drivers/gpio/zynq_gpio.c
+-F:	drivers/i2c/i2c-cdns.c
+-F:	drivers/i2c/muxes/pca954x.c
+-F:	drivers/i2c/zynq_i2c.c
+-F:	drivers/mmc/zynq_sdhci.c
+-F:	drivers/mtd/nand/raw/zynq_nand.c
+-F:	drivers/net/phy/ethernet_id.c
+-F:	drivers/net/phy/xilinx_phy.c
+-F:	drivers/net/zynq_gem.c
+-F:	drivers/pinctrl/pinctrl-zynqmp.c
+-F:	drivers/serial/serial_zynq.c
+-F:	drivers/spi/zynq_qspi.c
+-F:	drivers/spi/zynq_spi.c
+-F:	drivers/usb/host/ehci-zynq.c
+-F:	drivers/watchdog/cdns_wdt.c
+-F:	include/zynqpl.h
+-F:	tools/zynqimage.c
+-N:	zynq
+-
+-ARM ZYNQMP
+-M:	Michal Simek <michal.simek@amd.com>
+-S:	Maintained
+-T:	git https://source.denx.de/u-boot/custodians/u-boot-microblaze.git
+-F:	arch/arm/mach-zynqmp/
+-F:	drivers/bootcount/bootcount_zynqmp.c
+-F:	drivers/clk/clk_zynqmp.c
+-F:	driver/firmware/firmware-zynqmp.c
+-F:	drivers/fpga/zynqpl.c
+ F:	drivers/gpio/gpio_slg7xl45106.c
+-F:	drivers/gpio/zynq_gpio.c
+-F:	drivers/gpio/zynqmp_gpio_modepin.c
+ F:	drivers/i2c/i2c-cdns.c
+ F:	drivers/i2c/muxes/pca954x.c
+-F:	drivers/i2c/zynq_i2c.c
+-F:	drivers/mailbox/zynqmp-ipi.c
+-F:	drivers/mmc/zynq_sdhci.c
+-F:	drivers/mtd/nand/raw/zynq_nand.c
++F:	drivers/net/phy/ethernet_id.c
+ F:	drivers/net/phy/xilinx_phy.c
+-F:	drivers/net/zynq_gem.c
+-F:	drivers/phy/phy-zynqmp.c
+-F:	drivers/power/domain/zynqmp-power-domain.c
+ F:	drivers/pwm/pwm-cadence-ttc.c
+-F:	drivers/serial/serial_zynq.c
+-F:	drivers/reset/reset-zynqmp.c
+-F:	drivers/rtc/zynqmp_rtc.c
+-F:	drivers/soc/soc_xilinx_zynqmp.c
+-F:	drivers/spi/zynq_qspi.c
+-F:	drivers/spi/zynq_spi.c
+ F:	drivers/timer/cadence-ttc.c
+ F:	drivers/video/seps525.c
+-F:	drivers/video/zynqmp/
+ F:	drivers/watchdog/cdns_wdt.c
+-F:	include/zynqmppl.h
+-F:	include/zynqmp_firmware.h
+-F:	tools/zynqmp*
+ N:	ultra96
+-N:	zynqmp
++N:	zynq
+ 
+ ARM ZYNQMP R5
+ M:	Michal Simek <michal.simek@amd.com>
 -- 
 2.53.0
 
