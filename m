@@ -4,85 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E1ABCD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2D11CD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B349849BD;
-	Wed, 17 Jun 2026 14:30:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id ACA0F846B0;
+	Wed, 17 Jun 2026 14:30:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kbKp/P/q";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cGWQGxON";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 479D9848D7; Wed, 17 Jun 2026 11:26:38 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id B69ED848EB; Wed, 17 Jun 2026 10:19:25 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF1D88494B
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 11:26:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5933A848D8
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id B7DDA60128;
- Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B1C8C4AF0E;
- Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1781688391;
- bh=9FDXds7AaI2edHzaxpfajw6u4zuBF2P0n4i8oql7l1A=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=kbKp/P/q7px72JJ4JVGWgRIU+MhPQXEExfTwGX7IQe/TP0BlEomU+P7Xw4eenvJ8E
- VkTWdHwyQfExcLE5r4qZSUFL/W917in3jGafqdCt+iC75AXWGpqqKw8hL3h9hpHetb
- 8tlPE0X7UZsYCOvMMDCPWMH8hIrFR3OtvHQTIl+wG9iOvkv+LYeeqakhkHTeAnxFkY
- Zeq/kioHCYZm/gAMzM4u00Nu7lHUwPQ9KxeayM1AN3PT2jPJTi47g0LA9xWOOJkz+6
- ouaaiymMYFSrntbMNETTsdtAgXmS0qfIWnwFVr4sszV2Hlx/v9NpkgWXY4s4LZYJYW
- Bv5ZkD65Skmow==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 83662CD98E4;
- Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
-From: Raz Ben Yehuda via B4 Relay
- <devnull+raz.benyehuda.mobileye.com@kernel.org>
-Date: Wed, 17 Jun 2026 12:26:16 +0300
-Subject: [PATCH v5 4/5] ufs: extend the current command-line interface
+ header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eballetb@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1781684362;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=liO0tyEiQq9PdqRr1Cdn6SWK0qs7SMr4HDItsYFR+KM=;
+ b=cGWQGxON/t9mxWL/EFiNucglnhf8HpzsLEAw1XdhvLGph5jeTA4RcTnrYYt1OLO27z/Ex0
+ nwFNk+PnV6Iefl5dCKFiuKKiCEGTyTaBuwMza87Pfm1cwWXEiofdMdyGLTyAcqrzV3ypV7
+ EJjGgcGtXwADghxpTqyhWI59AslzeQA=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-471-uAEBhISPNbWslWYi4vzq_A-1; Wed, 17 Jun 2026 04:19:21 -0400
+X-MC-Unique: uAEBhISPNbWslWYi4vzq_A-1
+X-Mimecast-MFC-AGG-ID: uAEBhISPNbWslWYi4vzq_A_1781684360
+Received: by mail-yw1-f199.google.com with SMTP id
+ 00721157ae682-7d38b23d6cfso9808537b3.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:19:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781684360; x=1782289160;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=liO0tyEiQq9PdqRr1Cdn6SWK0qs7SMr4HDItsYFR+KM=;
+ b=a++G+YLsmAPtsqwLpk+Aq7SBD6iC/nJmkCIX3MX2igVFPB9R1Msiyp+ljKAcVBLuZr
+ hdNkfAOhE1JUF9k9efR0b0l01XM8JL68miYiIh0xE6w0wm39cMmzG42UW/9hdzrYw+tC
+ pPJgL80FDXKeirfzwQClpKtQ7RDVCWfTGyUT3wX745XMcZKuTug2KwyrhpWdMDup9MUs
+ xkgO74RxKjbaz2bcGkX920bVAtavl9aTi8GjYsWy60hvFpWT5wWjjp6jpM4wuJurBrfJ
+ h1rlV9giecgA0UbmnBMBbeEWZTqmS5v0N7IjFhC1H8l63KLfXzqa9f5BENXft26mWFEy
+ Inog==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8cdbmdI55iCsGK2mdDHE4WuwMWxYq4Bx8MJEGCnVmUmdVVDNVCuCF5AtCTfynBkCIazD4DcHI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5ua0tt02lCSZII5kxWmjjFPjVJGdZIbP+kNhROV3O1xLjRuji
+ pIauXKyk+4e4SrYqXyxSLuxb69578bp571gBPMh3EcOaRS/4qRsj9If/gse0V6RHEEHB3iSXBwU
+ emZhLm6t5+Ew19rc5dUj5uO/kK+jo1QkxJVOCnwssz7XrJxHFge0vYP6FrBsbF4/qx/nA5YiOWI
+ 1cd3t3PXdt0BLSIV2lcIySjxkMMo5cLQ==
+X-Gm-Gg: AfdE7clrtkfs/vUF2JYUutZrJOfdvB3UseWMKpZqMQAzDiLaRP8ZqOiIASzirRQ68pj
+ oD7TCoWV+/HqXg/XBQIIwJR9gd8HNrU56nRbnRQmyhFSLWp2Ko6CaEQiyjsDORurz0+YBFKdBch
+ GgR6z7wXoT0wpXkJP0c2eP2Qe9Ld4kXHwvpj1XIDESMCHPmwmaFYyG4DhdLg9Gc/Mn
+X-Received: by 2002:a05:690e:408b:b0:660:376b:5437 with SMTP id
+ 956f58d0204a3-662cbc2c7f3mr1353967d50.7.1781684360284; 
+ Wed, 17 Jun 2026 01:19:20 -0700 (PDT)
+X-Received: by 2002:a05:690e:408b:b0:660:376b:5437 with SMTP id
+ 956f58d0204a3-662cbc2c7f3mr1353954d50.7.1781684359765; Wed, 17 Jun 2026
+ 01:19:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260617-ufs_tool2-v5-4-1cf099f71111@mobileye.com>
-References: <20260617-ufs_tool2-v5-0-1cf099f71111@mobileye.com>
-In-Reply-To: <20260617-ufs_tool2-v5-0-1cf099f71111@mobileye.com>
-To: u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Tawfik Bayouk <tawfik.bayouk@mobileye.com>, 
- Vladimir Kondratiev <vladimir.Kondratiev@mobileye.com>, 
- Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=51597;
- i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
- bh=+lRP0Wskam6pu5NPGvEpGxfWXt3IYeFBQp/5eEappY0=;
- b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqMmhEslWckZfdjwjxjQgc6LgCptKyEltrJUOvv
- s7ewvMOgbSJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCajJoRAAKCRCfmumUluiO
- ORAPD/wJRqKVDY0RXEb/p7ces9nTog2Rp4BDynf3P04Q3270FZKFtlj6kCKVcO646H4RSm9/uXW
- yn64qjzcjJvxnNzejQaSMFJlK0NMCUqyruNTTs8n+7zxQsSzi44GsQNdo22SqdkL+0n/VlxGOyb
- H7IczUAS6ejkjyW6LLqQpRuA3UGZXPUoqfbNB50wZtoPnBt7o8qyHIqRlsKnOu6kBIrXP49YmMn
- BSRzfjCiS2ADFj0xXdaamYb/ghlKWTotxuXkJ1qXcSxvIj1lE+wlKwoTK05e/FbS1nu2mzAXqQu
- RMCscMI1aBxeUPb0cnlD4IkJCugb8b5pmllBCR/RfZeIP8RKakqShAKWkRN2DCNpGOJzyCHEyAC
- zcYxXyng2x6znUyia16+pOu2SUMnYMl3syVKkmN6HFZGveOjW+4wm3SmF3z6km7ZaOI6ToDczFi
- Zrf3LCvUAFAJOfDqbLqq7dsRFuDTzGJP7l8Hm+qnZWqTTIs/gvv8KuavQ66mXcSrSUXgYd9hj2I
- wT7ZBE91U3nDTfEKbAxSVPobTEtF1qcR6TIV8LL08Gd0EdIugJKSzJCcry+tUZO2Qguu9RaKmSs
- 4nKuAjBa750jBK4m8aHquKy/YOnu6fyveBXuyEIYEyNvgbr5HLfH5Aw9sbwAKddRBl/GLcrVxpe
- dZaQOmROSq9m8eg==
-X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
- fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
-X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
- with auth_id=808
-X-Original-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-X-Mailman-Approved-At: Wed, 17 Jun 2026 14:29:55 +0200
+References: <20260429180247.83091-1-ekovsky@redhat.com>
+ <482dbc09-e78e-42e7-9915-bdc105652494@cherry.de>
+ <ag-EpjuQlre9QmYN@daedalus> <8d7ff3b6-abb9-4441-8491-99c538ea5f2d@cherry.de>
+ <CALE0LRtVVwJpmaLn6=95BihVZA3pWPAwM1t7zENSsKdaxzWk8g@mail.gmail.com>
+ <eca33072-97bf-49fc-890a-a51b7fdc4d62@cherry.de>
+In-Reply-To: <eca33072-97bf-49fc-890a-a51b7fdc4d62@cherry.de>
+From: Enric Balletbo i Serra <eballetb@redhat.com>
+Date: Wed, 17 Jun 2026 10:19:06 +0200
+X-Gm-Features: AVVi8CcysWgRT-oYESnGzwdcaZQPzjUjoUsnmAgrmXCSjm3DQs_QLXmrPtIyBtY
+Message-ID: <CALE0LRvobvMnm=P4qqcNjzWPhRjtYLO4sbHP4UHOKLTdUoaryA@mail.gmail.com>
+Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>, 
+ Tobias Olausson <tobias@eub.se>, Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ a.fatoum@pengutronix.de, 
+ mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ u-boot@lists.denx.de
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Xngweq0U36dTaU9HkozJDZq4HjdaJonePeaQuwc9Pjk_1781684360
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,1675 +108,152 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: raz.benyehuda@mobileye.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+Hi Quentin,
 
-    Extend the ufs command line. Provide techniques for querying,
-    displaying, and modifying UFS device configuration and
-    descriptor information.
+On Tue, Jun 16, 2026 at 6:43=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+>
+> Hi Enric,
+>
+> Thanks for chiming in.
+>
+> On 6/4/26 8:22 AM, Enric Balletbo i Serra wrote:
+> > Hi Quentin and Eddie,
+> >
+> > On Fri, May 22, 2026 at 4:38=E2=80=AFPM Quentin Schulz <quentin.schulz@=
+cherry.de> wrote:
+> >>
+> >> Hi Eddie,
+> >>
+> >> On 5/22/26 12:29 AM, Eddie Kovsky wrote:
+> >>> On 05/12/26, Quentin Schulz wrote:
+> >>>> Hi Eddie,
+> >>>>
+> >>>> On 4/29/26 8:02 PM, Eddie Kovsky wrote:
+> [...]
+> > My understanding is that to fix the Fedora build issues without
+> > breaking existing workflows, Eddie just needs to adjust the control
+> > flow for v4 like you suggested:
+> >
+> > If the user explicitly commands an engine via -N, prioritize the
+> > legacy engine path=E2=80=94guarding the engine headers and blocks with =
+#ifndef
+> > OPENSSL_NO_ENGINE instead of a blanket OpenSSL version check.
+> >
+> > If no engine flag is passed, route seamlessly into the new Provider API=
+ backend.
+>
+> Fix the build issue by checking whether OpenSSL engines are supported
+> (and no, a version check is not enough for OpenSSL 3.x (it is for
+> OpenSSL 4.x though)). If they are, keep the same logic as today. If they
+> aren't, fail hard when an engine is requested, otherwise keep the same
+> logic as today. Make use of #ifdef to guard code that cannot compile
+> when engine support is disabled and you should be good to go. This will
+> still fail unit tests because we are testing and building a dummy engine
+> regardless of support. But last time I checked (years ago), many
+> unrelated unit tests are also failing on Fedora, so it wouldn't be a
+> deal breaker for me (and I have some "interesting" ideas on how to
+> handle this in a later commit).
+>
 
-    Features:
-    - Query and display Device, Geometry, Unit, Configuration, and Power
-      Descriptors
-    - Display LUN configuration and calculated capacities
-    - Modify LUN, Configuration, and Device Descriptor fields
-    - Query common UFS runtime flags
-    - Commit configuration changes or clear all LUN configurations
-    - Decode and format descriptor contents for easier debugging
-    - Clear all luns
+This makes perfect sense to me. Since you already have a provider
+series in your local queue, pivoting v4 to strictly implement these
+compile-guards looks like the best path forward. I also appreciate the
+clarification regarding the unit tests, knowing that the expected
+dummy engine test failures block the patch, as they did before.
 
-Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
----
- cmd/ufs.c | 1612 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 1602 insertions(+), 10 deletions(-)
+> Also, please do not use USE_PKCS11_PROVIDER when it has nothing to do
+> with PKCS11 provider. I understand this was imported from the kernel,
+> but they do only support PKCS11 as far as I could tell, so it makes
+> sense for them.
+>
 
-diff --git a/cmd/ufs.c b/cmd/ufs.c
-index 790dab50f18..24ac374900d 100644
---- a/cmd/ufs.c
-+++ b/cmd/ufs.c
-@@ -3,13 +3,1504 @@
-  * ufs.c - UFS specific U-Boot commands
-  *
-  * Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
-- *
-+ * Copyright (C) 2026 Mobileye Incorporated - https://www.mobileye.com
-  */
-+
-+#include <dm/uclass.h>
-+#include <dm/device.h>
- #include <command.h>
-+#include <malloc.h>
-+#include <linux/math64.h>
- #include <ufs.h>
--#include <vsprintf.h>
--#include <linux/string.h>
- 
-+static struct ufs_config_desc g_cfg_desc;
-+static int hba_id;
-+
-+/**
-+ * ufstool_probe_dev() - Get a UFS HBA instance
-+ * @index: UFS device index
-+ *
-+ * Retrieves the UFS host bus adapter associated with @index.
-+ *
-+ * Return: Pointer to the UFS HBA on success, or NULL on failure.
-+ */
-+static struct ufs_hba *ufstool_probe_dev(int index)
-+{
-+	struct udevice *dev;
-+	struct ufs_hba *hba = NULL;
-+
-+	if (!uclass_get_device(UCLASS_UFS, index, &dev))
-+		hba = dev_get_uclass_priv(dev);
-+
-+	return hba;
-+}
-+
-+/**
-+ *
-+ * ufshcd_query_desc_idn_device() - Read the UFS Device Descriptor
-+ * @hba: UFS host bus adapter instance
-+ * @desc: Pointer to device descriptor buffer
-+ *
-+ * Reads the Device Descriptor (IDN 0x00) from the attached UFS device
-+ * and stores the contents in @desc.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+static int ufshcd_query_desc_device(struct ufs_hba *hba,
-+				    struct ufs_device_desc *desc)
-+{
-+	int param_offset = 0;
-+	int desc_index = 0;	/* LUNS 0-7 controlled by index 0 */
-+
-+	return ufshcd_read_desc_param(hba, QUERY_DESC_IDN_DEVICE, desc_index,
-+				      param_offset, (void *)desc,
-+				      UFS_DESC_SIZE);
-+}
-+
-+/**
-+ * ufshcd_query_desc_geometry() - Read the UFS Geometry Descriptor
-+ * @hba: UFS host bus adapter instance
-+ * @desc: Pointer to geometry descriptor buffer
-+ *
-+ * Reads the Geometry Descriptor (IDN 0x07) from the attached UFS device
-+ * and stores the contents in @desc.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+static int ufshcd_query_desc_geometry(struct ufs_hba *hba,
-+				      struct ufs_geometry_desc *desc)
-+{
-+	int param_offset = 0;
-+	int desc_index = 0;
-+
-+	return ufshcd_read_desc_param(hba, QUERY_DESC_IDN_GEOMETRY, desc_index,
-+				      param_offset, (void *)desc,
-+				      QUERY_DESC_GEOMETRY_DEF_SIZE);
-+}
-+
-+/**
-+ * ufshcd_query_desc_config() - Read the UFS Configuration Descriptor
-+ * @hba: UFS host bus adapter instance
-+ * @cfg: Pointer to configuration descriptor buffer
-+ *
-+ * Reads the Configuration Descriptor (IDN 0x01) from the attached UFS
-+ * device and stores the contents in @cfg.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+static int ufshcd_query_desc_config(struct ufs_hba *hba,
-+				    struct ufs_config_desc *cfg)
-+{
-+	int param_offset = 0;
-+	int desc_index = 0;
-+	int ret;
-+
-+	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_CONFIGURATION,
-+				     desc_index, param_offset,
-+				     (void *)cfg,
-+				     QUERY_DESC_CONFIGURATION_DEF_SIZE);
-+	if (ret)
-+		log_err("Failed to read config\n");
-+
-+	return ret;
-+}
-+
-+/**
-+ * ufshcd_query_desc_power() - Read a UFS Power Parameters Descriptor
-+ * @hba: UFS host bus adapter instance
-+ * @lun: Logical unit number associated with the descriptor query
-+ * @desc: Pointer to power parameters descriptor buffer
-+ *
-+ * Reads the Power Parameters Descriptor (IDN 0x08) from the attached
-+ * UFS device and stores the contents in @desc.
-+ *
-+ * Return: 0 on success, negative error code on failure
-+ */
-+static int ufshcd_query_desc_power(struct ufs_hba *hba, int lun,
-+				   struct ufs_power_param_desc *desc)
-+{
-+	int ret;
-+
-+	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_POWER,
-+				     lun, 0, (void *)desc, QUERY_DESC_POWER_DEF_SIZE);
-+
-+	if (ret) {
-+		log_err("Err: UFS power Descriptor");
-+		return ret;
-+	}
-+
-+	return ret;
-+}
-+
-+/**
-+ * ufshcd_query_desc__unit() - Read a UFS Unit Descriptor
-+ * @hba: UFS host bus adapter instance
-+ * @lun: Logical unit number
-+ * @desc: Pointer to unit descriptor buffer
-+ *
-+ * Reads the Unit Descriptor (IDN 0x02) associated with @lun and stores
-+ * the contents in @desc.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+static int ufshcd_query_desc_unit(struct ufs_hba *hba, int lun,
-+				  struct ufs_unit_desc *desc)
-+{
-+	int ret;
-+
-+	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_UNIT, lun, 0,
-+				     (void *)desc, QUERY_DESC_UNIT_DEF_SIZE);
-+	if (ret) {
-+		log_err("Err: UFS unit Descriptor");
-+		return ret;
-+	}
-+
-+	return ret;
-+}
-+
-+/**
-+ * ufshcd_print_device_descriptor() - Print a UFS Device Descriptor
-+ * @desc: Device descriptor to display
-+ *
-+ * Prints the contents of a Device Descriptor in a human-readable format.
-+ */
-+static void ufshcd_print_device_descriptor(struct ufs_device_desc *descriptor)
-+{
-+	u32 val = descriptor->num_shared_write_booster_buffer_allocunits;
-+
-+	printf("--- UFS Device Descriptor (IDN: 00h) ---\n");
-+
-+	printf(" Name | Value | Description\n");
-+	printf("-----------------------------------------------------------\n");
-+	/* Descriptor Header (Offset 00h – 01h) */
-+	printf("Length | 0x%x\n", descriptor->length);
-+	printf("DescriptorIdn | 0x%x\n", descriptor->descriptor_idn);
-+
-+	/* Device Identification & Core configuration (Offset 02h – 0Dh) */
-+	printf("Device | 0x%x\n", descriptor->device);
-+	printf("DeviceClass | 0x%x\n", descriptor->device_class);
-+	printf("DeviceSubClass | 0x%x\n", descriptor->device_sub_class);
-+	printf("protocol | 0x%x\n", descriptor->protocol);
-+	printf("NumberLu | %d\n", descriptor->number_lu);
-+	printf("NumberWLu | %d\n", descriptor->number_wlu);
-+	printf("BootEnable | 0x%x\n", descriptor->boot_enable);
-+	printf("DescrAccessEn | 0x%x\n", descriptor->descr_access_en);
-+	printf("InitPowerMode | 0x%x\n", descriptor->init_power_mode);
-+	printf("highPriorityLun | 0x%x\n",
-+	       descriptor->high_priority_lun);
-+	printf("SecureRemovalType | 0x%x\n",
-+	       descriptor->secure_removal_type);
-+	printf("SecurityLu | 0x%x\n", descriptor->security_lu);
-+
-+	/* power Management, Version & Pointers (Offset 0Eh – 2Ah) */
-+	printf("b_background_ops_term_lat | 0x%x\n",
-+	       descriptor->background_ops_term_lat);
-+	printf("b_init_active_icc_level | 0x%x\n",
-+	       descriptor->init_active_icc_level);
-+	printf("SpecVersion | 0x%x\n",
-+	       __builtin_bswap16(descriptor->spec_version));
-+	printf("ManufactureDate | 0x%x\n", descriptor->manufacture_date);
-+	printf("ManufacturerName | 0x%x\n", descriptor->manufacturer_name);
-+	printf("ProductName | 0x%x\n", descriptor->product_name);
-+	printf("SerialNumber | 0x%x\n", descriptor->serial_number);
-+	printf("OEMId | 0x%x\n", descriptor->oem_id);
-+	printf("ManufacturerId | 0x%x\n", descriptor->manufacturer_id);
-+	printf("Ud0BaseOffset | %d\n", descriptor->ud0_base_offset);
-+	printf("DConfigLength | %d\n",
-+	       descriptor->config_length);
-+	printf("DeviceRttCap | 0x%x\n", descriptor->device_rtt_cap);
-+	printf("PeriodicRtcUpdate | 0x%x\n",
-+	       descriptor->periodic_rtc_update);
-+	printf("UfsFeaturesSupport | 0x%x\n",
-+	       descriptor->ufs_features_support);
-+	printf("FfuTimeout | %d\n", descriptor->ffu_timeout);
-+	printf("QueueDepth | %d\n", descriptor->queue_depth);
-+	printf("DeviceVersion | 0x%x\n", descriptor->device_version);
-+	printf("NumSecureWpArea | 0x%x\n",
-+	       descriptor->num_secure_wp_area);
-+	printf("PsaMaxDataSize | 0x%x\n",
-+	       descriptor->psa_max_data_size);
-+	printf("PsaStateTimeout | 0x%x\n",
-+	       descriptor->psa_state_timeout);
-+	printf("ProductRevisionLevel | 0x%x\n",
-+	       descriptor->product_revision_level);
-+
-+	/* Extended Features (Offset 4Fh – 58h) */
-+	printf("ExtendedUfsFeaturesSupport ");
-+	printf("| 0x%x |(includes  WriteBooster/Throttling)\n",
-+	       be32_to_cpu(descriptor->extended_ufs_features_support));
-+
-+	printf("WriteBoosterBufferPreserveUserSpaceEn");
-+	printf("| 0x%x | Preserve User Space mode for WriteBooster Buffer\n",
-+	       descriptor->write_booster_buffer_preserve_user_space_en);
-+
-+	printf("write booster buffer type");
-+	printf("| 0x%x | WriteBooster Buffer Type",
-+	       descriptor->write_booster_buffer_type);
-+	puts("(00h: LU dedicated, 01h: shared)\n");
-+
-+	printf("NumSharedWriteBooster_buffer_allocunits |");
-+	printf("%d | Shared WriteBooster Buf size (in Allocation units)\n",
-+	       be32_to_cpu(val));
-+}
-+
-+/**
-+ *
-+ * ufshcd_print_idn_geometry_desc() - Print a UFS Geometry Descriptor
-+ * @desc: Geometry descriptor to display
-+ *
-+ * Prints the contents of a Geometry Descriptor in a human-readable format.
-+ */
-+static void ufshcd_print_idn_geometry_desc(struct ufs_geometry_desc *desc)
-+{
-+	u64 cap = be64_to_cpu(desc->total_raw_device_capacity);
-+
-+	cap = ((cap << 9) >> 30);
-+
-+	printf("--- UFS geometry Descriptor (IDN: 07h) ---\n");
-+	printf(" Name   | Value              | Description\n");
-+	printf("-------------------------------------------------------\n");
-+
-+	/* Header and Core Capacity (Offset 00h - 0Ch) */
-+	printf("Length | 0x%x  | Size of descriptor\n", desc->length);
-+	printf("DescriptorIdn   | 0x%x | geometry Descriptor ID\n",
-+	       desc->descriptor_idn);
-+	printf("MediaTechnology | 0x%x | Reserved (00h)\n",
-+	       desc->media_technology);
-+
-+	printf("TotalRawDeviceCapacity | %lld GB\n", cap);
-+
-+	printf("MaxNumberLu | %d | Max LUs (00h: 8, 01h: 32)\n",
-+	       desc->max_number_lu);
-+
-+	/* Segment and Allocation unit constraints (Offset 0Dh - 12h) */
-+	printf("SegmentSize | %d | Segment size (512B units)\n",
-+	       be32_to_cpu(desc->segment_size));
-+
-+	printf("AllocationunitSize | %d | Alloc unit size (in segments)\n",
-+	       desc->allocationunit_size);
-+
-+	printf("MinAddrBlockSize | %d | Min addressable block size\n",
-+	       desc->min_addr_block_size);
-+
-+	/* Performance and Buffer parameters (Offset 13h - 17h) */
-+	printf("OptimalReadBlockSize");
-+	printf("| %d | Optimal read size (512B units)\n",
-+	       desc->optimal_read_block_size);
-+
-+	printf("OptimalWriteBlockSize ");
-+	printf("| 0x%x | Optimal write size (512B units)\n",
-+	       desc->optimal_write_block_size);
-+
-+	printf("MaxInBufferSize | 0x%x | Max Data-In buffer (512B units)\n",
-+	       desc->max_in_buffer_size);
-+
-+	printf("MaxOutBufSize | 0x%x | Max Data-Out buffer (512B)\n",
-+	       desc->max_out_buffer_size);
-+
-+	printf("bRPMBReadWriteSize | 0x%x | Max RPMB frames per command\n",
-+	       desc->rpmb_read_write_size);
-+
-+	/* Feature Support Bitmaps (Offset 18h - 1Fh) */
-+	printf("DynamicCapacityResourcePolicy| 0x%x |",
-+	       desc->dynamic_capacity_resource_policy);
-+
-+	printf("00h: per LU, 01h: per Memory Type\n");
-+	printf("DataOrdering | 0x%x | 01h: Out-of-order supported\n",
-+	       desc->data_ordering);
-+	printf("MaxContexIdNumber | 0x%x | Max supported contexts (min 5)\n",
-+	       desc->max_contex_id_number);
-+
-+	printf("SysDataTagUnitSize | 0x%x | System data tag granularity\n",
-+	       desc->sys_data_tagunit_size);
-+
-+	printf("SysDataTagResSize  | 0x%x | Max area for tagged system data\n",
-+	       desc->sys_data_tag_res_size);
-+
-+	printf("SupportedSecRTypes | 0x%x | Supported secure removal types\n",
-+	       desc->supported_sec_r_types);
-+
-+	printf("SupportedMemoryTypes | 0x%x | Bitmap of memory types\n",
-+	       be16_to_cpu(desc->supported_memory_types));
-+	/*
-+	 * Memory Type Specific Capacities and Adjustment Factors
-+	 */
-+	printf("SystemCodeMaxNAlloc | 0x%x | Max Alloc units\n",
-+	       desc->system_code_max_n_alloc_u);
-+
-+	printf("SystemCodeCapAdjFac | 0x%x | cap_adj_factor: System Code\n",
-+	       desc->system_code_cap_adj_fac);
-+
-+	printf("NonPersistMaxNAlloc | 0x%x | Max Alloc units: Non-Persist\n",
-+	       desc->non_persist_max_n_alloc_u);
-+
-+	printf("NonPersistCapAdjFac   | 0x%x | cap_adj_factor: Non-Persist\n",
-+	       desc->non_persist_cap_adj_fac);
-+
-+	printf("Enhanced1MaxNAlloc | %d | Max Alloc units: Enhanced 1\n",
-+	       be32_to_cpu(desc->enhanced1_max_n_alloc_u));
-+
-+	printf("Enhanced1CapAdjFac | %d | cap_adj_factor: Enhanced 1\n",
-+	       be16_to_cpu(desc->enhanced1_cap_adj_fac));
-+
-+	printf("Enhanced2MaxNAlloc_u | %d | Max Alloc units: Enhanced 2\n",
-+	       be32_to_cpu(desc->enhanced2_max_n_alloc_u));
-+
-+	printf("Enhanced2CapAdjFac | %d | cap_adj_factor: Enhanced 2\n",
-+	       be16_to_cpu(desc->enhanced2_cap_adj_fac));
-+	printf("Enhanced3MaxNAlloc | %d | Max Alloc units: Enhanced 3\n",
-+	       be32_to_cpu(desc->enhanced3_max_n_alloc_u));
-+
-+	printf("Enhanced3CapAdjFac | %d | cap_adj_factor: Enhanced 3\n",
-+	       be32_to_cpu(desc->enhanced3_cap_adj_fac));
-+
-+	printf("Enhanced4MaxNAlloc | %d | Max Alloc units: Enhanced 4\n",
-+	       be32_to_cpu(desc->enhanced4_max_n_alloc_u));
-+
-+	printf("Enhanced4CapAdjFac | %d | cap_adj_factor: Enhanced 4\n",
-+	       be16_to_cpu(desc->enhanced4_cap_adj_fac));
-+
-+	/* Performance and WriteBooster (Offset 44h - 56h) */
-+	printf("OptimalLogicalBlockSize | %d | Optimal Blk Size per type\n",
-+	       be32_to_cpu(desc->optimal_logical_block_size));
-+
-+	printf("WriteBoosterBufferMaxNAllocunits");
-+	printf("| %u | Max tot WB buf size\n",
-+	       be32_to_cpu(desc->write_booster_buffer_max_alloc_units));
-+
-+	printf("DeviceMaxWriteBoosterLus ");
-+	printf("| %d | Max LUs supporting WB (MDV:1)\n",
-+	       desc->device_max_write_booster_lus);
-+
-+	printf("WriteBoosterBufferCapAdjFac");
-+	printf("| %d | WB Capacity Adjustment Factor\n",
-+	       desc->write_booster_buffer_capadjfac);
-+
-+	printf("SupportedwbBufferUserSpaceReductionType");
-+	printf(" | 0x%x | Reduction/Preserve mode support\n",
-+	       desc->supported_write_booster_buffer_userspace_reduction_types);
-+
-+	printf("SupportedWriteBoosterBufferTypes");
-+	printf("| 0x%x | 00h: LU based, 01h: Shared\n",
-+	       desc->supported_write_booster_buffer_types);
-+}
-+
-+static void ufshcd_print_config_descriptor(const struct config_descriptor *cd)
-+{
-+	if (!cd)
-+		return;
-+
-+	printf("Config Descriptor: (0x%p)\n", (void *)cd);
-+	printf("Length                          : 0x0%x\n", cd->length);
-+	printf("DescriptorIdn                   : 0x0%x\n",
-+	       cd->descriptor_idn);
-+	printf("ConfDescContinue                : 0x0%x\n",
-+	       cd->conf_desc_continue);
-+
-+	printf("BootEnable                      : 0x0%x\n",
-+	       cd->boot_enable);
-+	printf("DescrAccess_en                   : 0x0%x\n",
-+	       cd->descr_access_en);
-+	printf("InitPowerMode                   : 0x0%x\n",
-+	       cd->initpower_mode);
-+	printf("HighPriorityLun                 : 0x0%x\n",
-+	       cd->high_priority_lun);
-+	printf("SecureRemovalType               : 0x0%x\n",
-+	       cd->secure_removal_type);
-+	printf("InitActiveIccLevel              : 0x0%x\n",
-+	       cd->init_active_icc_level);
-+	printf("PeriodicRtcUpdate               : 0x0%x\n",
-+	       cd->periodic_rtc_update);
-+	printf("Reserved_HPB                    : 0x0%x\n",
-+	       cd->reserved_HPB);
-+
-+	printf("RpmbRegionEnable                : 0x0%x\n",
-+	       cd->rpmb_region_enable);
-+	printf("RpmbRegion1Size                 : 0x0%x\n",
-+	       cd->rpmb_region1_size);
-+	printf("RpmbRegion2Size                 : 0x0%x\n",
-+	       cd->rpmb_region2_size);
-+	printf("RpmbRegion3Size                 : 0x0%x\n",
-+	       cd->rpmb_region3_size);
-+
-+	printf("WriteBoosterBufferPreserveUserSpaceEN : 0x0%x\n",
-+	       cd->write_booster_buffer_preserve_user_space_en);
-+	printf("WriteBoosterBufferType           : 0x0%x\n",
-+	       cd->write_booster_buffer_type);
-+	printf("NumSharedWriteBoosterBufferAllocUnits : %d\n",
-+	       be32_to_cpu(cd->num_shared_write_booster_buffer_allocunits));
-+}
-+
-+static void ufshcd_print_unit_param_descriptor(struct ufs_unit_cfg_parameters *unit)
-+{
-+	/* Header segment (Offset 00h - 03h) */
-+	printf("LuEnable  | 0x%x  | Enabled, 00h: Disabled\n",
-+	       unit->lu_enable);
-+	printf("BootLunId | 0x%x  | Boot LU A, 02h: Boot LU B\n",
-+	       unit->boot_lun_id);
-+	printf("LuWriteProtect | 0x%x | power-on, 02h: Permanent\n",
-+	       unit->lu_write_protect);
-+	printf("MemoryType| 0x%x | Normal, 01h: System Code\n",
-+	       unit->memory_type);
-+	/* Allocation and Sizing (Offset 04h - 0Ah) */
-+	printf("NumAllocunits | %d | Number of Allocation units for LU\n",
-+	       be32_to_cpu(unit->num_allocunits));
-+	printf("DataReliability | 0x%x | power failure protection\n",
-+	       unit->data_reliability);
-+	printf("LogicalBlockSize | 0x%x | Block size exponent (Min: 0Ch)\n",
-+	       unit->logical_block_size);
-+	printf("ProvisioningType | 0x%x | Full, 02h/03h: Thin\n",
-+	       unit->provisioning_type);
-+
-+	/* Context and HPB (Offset 0Bh - 15h) */
-+	puts("ContextCapabilities");
-+	printf("	| 0x%x | LU Context support/multipliers\n",
-+	       unit->context_capabilities);
-+	/* printf("Reserved  | --   | Reserved\n"); */
-+	/* printf("Reserved (HPB) | -- | Reserved for HPB Extension\n"); */
-+	/* WriteBooster (Offset 16h) */
-+	printf("LuNumWriteBoosterBufferAllocunits");
-+	printf("| %d | WB Buffer size (LUs 0-7 only)\n",
-+	       be32_to_cpu(unit->lu_num_write_booster_buffer_allocunits));
-+}
-+
-+/**
-+ * ufshcd_clearall_luns() - Clear all LUN configuration entries
-+ * @user_cfg: Configuration descriptor to update
-+ * @base_offset: Offset of the first LUN configuration entry
-+ * @config_length: Size of each LUN configuration entry
-+ *
-+ * Resets all configurable LUN entries to their default values.
-+ */
-+static void ufshcd_clearall_luns(struct ufs_config_desc *user_cfg,
-+				 u32 base_offset, u32 config_length)
-+{
-+	struct ufs_unit_cfg_parameters *unit;
-+	u8 *config = (u8 *)user_cfg;
-+	int off;
-+	int i;
-+
-+	for (i = 0; i < 8; i++) {
-+		off = base_offset + (i * config_length);
-+
-+		unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+
-+		unit->num_allocunits = cpu_to_be32(0);
-+		unit->memory_type = 0;
-+		unit->lu_enable = 0;
-+		unit->boot_lun_id = 0;
-+		unit->logical_block_size = 0xC;
-+		unit->data_reliability = 0;
-+		unit->provisioning_type = 0;
-+		unit->context_capabilities = cpu_to_be16(0);
-+		unit->lu_num_write_booster_buffer_allocunits = cpu_to_be32(0);
-+	}
-+}
-+
-+/**
-+ * calc_lun_capacity() - Calculate configured LUN capacity
-+ * @unit: LUN configuration entry
-+ * @geometry: Device geometry descriptor
-+ *
-+ * Calculates the effective LUN capacity from allocation units and
-+ * geometry descriptor parameters.
-+ *
-+ * Return: Capacity in MiB.
-+ */
-+static u32 calc_lun_capacity(struct ufs_unit_cfg_parameters *unit,
-+			     struct ufs_geometry_desc *geometry)
-+{
-+	u16 cap_adj_fac = 1;
-+	u64 cap_adj_facfl = 1;
-+	u64 lun_capacity;
-+
-+	switch (unit->memory_type) {
-+	case 0:	/* Normal */
-+		cap_adj_fac = 1;
-+		break;
-+	case 1:
-+		cap_adj_fac = be16_to_cpu(geometry->system_code_cap_adj_fac);
-+		break;
-+	case 2:
-+		cap_adj_fac = be16_to_cpu(geometry->non_persist_cap_adj_fac);
-+		break;
-+	case 3:
-+		cap_adj_fac = be16_to_cpu(geometry->enhanced1_cap_adj_fac);
-+		break;
-+	case 4:
-+		cap_adj_fac = be16_to_cpu(geometry->enhanced2_cap_adj_fac);
-+		break;
-+	case 5:
-+		cap_adj_fac = be16_to_cpu(geometry->enhanced3_cap_adj_fac);
-+		break;
-+	case 6:
-+		cap_adj_fac = be16_to_cpu(geometry->enhanced4_cap_adj_fac);
-+		break;
-+	default:
-+		log_err("ilegal memory type\n");
-+	}
-+
-+	if (unit->memory_type) {
-+		/* See geometry Descriptor/cap_adj_fac in Jedec. */
-+		cap_adj_facfl = cap_adj_fac >> 8;
-+	}
-+
-+	lun_capacity = 512 * (u64)be32_to_cpu(unit->num_allocunits) *
-+		    geometry->allocationunit_size *
-+		    (u64)be32_to_cpu(geometry->segment_size);
-+	lun_capacity = div_u64(lun_capacity, cap_adj_facfl);
-+
-+	return (u32)(lun_capacity >> 20);
-+}
-+
-+/**
-+ * ufs_tool_print_luns() - Display configured LUNs
-+ *
-+ * Prints all enabled logical units and their calculated capacities.
-+ *
-+ * Return: %CMD_RET_SUCCESS on success or %CMD_RET_FAILURE on failure.
-+ */
-+static int ufs_tool_print_luns(void)
-+{
-+	struct ufs_geometry_desc geometry;
-+	struct ufs_device_desc device_desc;
-+	struct ufs_hba *hba;
-+	const int COL_WIDTH  = 14;
-+	u8 *config;
-+	int i;
-+
-+	hba = ufstool_probe_dev(hba_id);
-+	if (!hba) {
-+		log_err("ufs_tool: Failed to get hba\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (g_cfg_desc.cfg_desc.length == 0 &&
-+	    ufshcd_query_desc_config(hba, &g_cfg_desc))
-+		return CMD_RET_FAILURE;
-+
-+	if (ufshcd_query_desc_device(hba, &device_desc)) {
-+		log_err("Failed to read DeviceConfig IDN\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (ufshcd_query_desc_geometry(hba, &geometry)) {
-+		log_err("Failed to read Geometry IDN\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	config = (u8 *)&g_cfg_desc;
-+
-+	for (i = 0; i < 8; i++) {
-+		struct ufs_unit_cfg_parameters *unit;
-+		char buf[32];
-+		int off;
-+
-+		off = device_desc.ud0_base_offset +
-+		      (i * device_desc.config_length);
-+
-+		unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+		if (unit->lu_enable != 1)
-+			continue;
-+
-+		snprintf(buf, sizeof(buf), "LUN %d", i);
-+		printf("| %-*s", COL_WIDTH - 2, buf);
-+	}
-+
-+	printf("|\n");
-+
-+	for (i = 0; i < 8; i++) {
-+		struct ufs_unit_cfg_parameters *unit;
-+		char size_str[32];
-+		int off;
-+		s64 mb;
-+
-+		off = device_desc.ud0_base_offset + (i * device_desc.config_length);
-+		unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+
-+		if (unit->lu_enable != 1)
-+			continue;
-+
-+		mb = calc_lun_capacity(unit, &geometry);
-+		snprintf(size_str, sizeof(size_str), "%lld MB", mb);
-+		printf("| %-*s", COL_WIDTH - 2, size_str);
-+	}
-+
-+	printf("|\n");
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufshcd_print_desc_config() - Display configuration descriptor data
-+ * @user_cfg: Configuration descriptor to display
-+ * @geometry: Geometry descriptor used for capacity calculations
-+ * @base_offset: Offset of first unit configuration entry
-+ * @config_ength: Size of each unit configuration entry
-+ *
-+ * Prints the configuration descriptor and all configured LUN entries.
-+ */
-+static void ufshcd_print_desc_config(struct ufs_config_desc *user_cfg,
-+				     struct ufs_geometry_desc *geometry,
-+				     u32 base_offset, u32 config_ength)
-+{
-+	struct ufs_unit_cfg_parameters *unit;
-+	u8 *config = (u8 *)user_cfg;
-+	u32 mb;
-+	int off;
-+	int i;
-+
-+	ufshcd_print_config_descriptor(&user_cfg->cfg_desc);
-+	for (i = 0; i < 8; i++) {
-+		off = base_offset + (i * config_ength);
-+
-+		unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+		mb = calc_lun_capacity(unit, geometry);
-+		printf("-------------------------------------------------\n");
-+		printf("LUN %d Capacity %d MB\n", i, mb);
-+		printf("Name  | Value      | Description\n");
-+		printf("-------------------------------------------------\n");
-+		ufshcd_print_unit_param_descriptor(unit);
-+	}
-+}
-+
-+static void print_power_element(struct ufs_power_parameter_element desc)
-+{
-+	static const char * const units[] = { "n_a", "u_a", "m_a", "A" };
-+	u16 element = desc.upower_value;
-+
-+	u8 unit_code = (element >> 14) & 0x03;
-+	u16 value = element & 0x03FF;
-+
-+	printf("%d %s", value, units[unit_code]);
-+}
-+
-+/**
-+ *
-+ * ufshcd_print_power_params() - Print a UFS Power Parms Descriptor
-+ * @desc: ufs_power_param_desc
-+ *
-+ * Prints the contents of ufs_power_param_desc Descriptor in a human-readable format.
-+ */
-+static void ufshcd_print_power_params(struct ufs_power_param_desc *desc)
-+{
-+	printf("--- UFS power Parameters Descriptor (IDN: 08h) ---\n");
-+	printf("Descriptor Length: 0x%x (%u bytes)\n", desc->length, desc->length);
-+	printf("Descriptor IDN:    0x%x\n\n", desc->descriptor_idn);
-+
-+	printf("Level | VCC Current | VCCQ Current | VCCQ2 Current\n");
-+	printf("--------------------------------------------------\n");
-+
-+	for (int i = 0; i < 5; i++) {
-+		printf(" %x  | ", i);
-+		/* Accessing the  levels for each supply (VCC, VCCQ, VCCQ2) */
-+		/* Values represent worst-case maximum peak current */
-+		print_power_element(desc->active_icc_levels_vcc[i]);
-+		printf("      | ");
-+		print_power_element(desc->active_icc_levels_vccq[i]);
-+		printf("       | ");
-+		print_power_element(desc->active_icc_levels_vccq2[i]);
-+		printf("\n");
-+	}
-+}
-+
-+/**
-+ * ufshcd_print_unit_descriptor() - Print a UFS Unit Descriptor
-+ * @desc: Unit descriptor to display
-+ *
-+ * Prints the contents of a Unit Descriptor in a human-readable format.
-+ *
-+ */
-+static void ufshcd_print_unit_desc(struct ufs_unit_desc *desc)
-+{
-+	printf("--- UFS unit Descriptor (IDN: 02h) ---\n");
-+	printf(" Name   | Value              | Description\n");
-+	printf("---------------------------------------------\n");
-+
-+	/* Descriptor Header */
-+	printf("Length | %d    | Size of descriptor\n", desc->length);
-+	printf("DescriptorIdn | 0x%x | unit Descriptor ID\n",
-+	       desc->descriptor_idn);
-+	printf("BunitIndex     | 0x%x | Logical unit Index\n",
-+	       desc->bunit_index);
-+
-+	/* configuration Parameters */
-+	printf("luEnable | 0x%x | LU Enabled (01h) or Disabled (00h)\n",
-+	       desc->lu_enable);
-+	printf("BootLunId | 0x%x| Boot LU ID (01h: A, 02h: B\n",
-+	       desc->boot_lun_id);
-+	printf("luWriteProtect | 0x%x | WP (01h: power-on, 02h: Perm)\n",
-+	       desc->lu_write_protect);
-+	printf("luQueueDepth | 0x%x | Queue depth (0 if shared)\n",
-+	       desc->lu_queue_depth);
-+	printf("psaSensitive | 0x%x  | Soldering sensitivity indicator\n",
-+	       desc->psa_sensitive);
-+	printf("MemoryType | 0x%x  | Memory type (00h: Normal\n",
-+	       desc->memory_type);
-+	printf("DataReliability | 0x%x | power failure protection enabled\n",
-+	       desc->data_reliability);
-+	printf("LogicalBlockSize| 0x%x | Block size exponent (2^n)\n",
-+	       desc->logical_block_size);
-+
-+	printf("LogicalBlockCount | %d %d | Total addressable blocks\n",
-+	       be32_to_cpu(upper_32_bits(desc->logical_block_count)),
-+	       be32_to_cpu(lower_32_bits(desc->logical_block_count)));
-+	printf("EraseBlockSize | 0x%x | Optimal erase granularity\n",
-+	       desc->erase_block_size);
-+	printf("ProvisioningType | 0x%x | 00h: Full, 02h/03h: Thin\n",
-+	       desc->provisioning_type);
-+	printf("phyMemResourceCount| %d %d  Available physical resources\n",
-+	       lower_32_bits(desc->phy_mem_resource_count),
-+	       upper_32_bits(desc->phy_mem_resource_count));
-+
-+	printf("ContextCapabilities | 0x%x | Context ID & LU Multiplier\n",
-+	       desc->context_capabilities);
-+	printf("LargeunitGranularity_M1|");
-+	printf("0x%x | Large unit granularity minus one\n",
-+	       desc->largeunit_granularity_M1);
-+	puts("luNumWriteBoosterBufferAllocunits");
-+	printf(" | %d | WB Buffer size in Alloc units\n",
-+	       be32_to_cpu(desc->lu_num_write_booster_buffer_allocunits));
-+}
-+
-+static int set_param_field(struct ufs_unit_cfg_parameters *ud,
-+			   const char *name, u32 value)
-+{
-+	if (!strcmp(name, "boot_lun_id"))
-+		ud->boot_lun_id = (u8)value;
-+	else if (!strcmp(name, "lu_enable"))
-+		ud->lu_enable = (u8)value;
-+	else if (!strcmp(name, "lu_write_protect"))
-+		ud->lu_write_protect = (u8)value;
-+	else if (!strcmp(name, "memory_type"))
-+		ud->memory_type = (u8)value;
-+	else if (!strcmp(name, "data_reliability"))
-+		ud->data_reliability = (u8)value;
-+	else if (!strcmp(name, "num_allocunits"))
-+		ud->num_allocunits = cpu_to_be32(value);
-+	else if (!strcmp(name, "provisioning_type"))
-+		ud->provisioning_type = (u8)value;
-+	else if (!strcmp(name, "context_capabilities"))
-+		ud->context_capabilities = cpu_to_be16(value);
-+	else if (!strcmp(name, "lu_num_write_booster_buffer_allocunits"))
-+		ud->lu_num_write_booster_buffer_allocunits = cpu_to_be32(value);
-+	else
-+		return CMD_RET_FAILURE;
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufshcd_get_lun() - Display a LUN configuration entry
-+ * @hba: UFS host controller instance
-+ * @lun: Logical unit number
-+ *
-+ * Return: Command status.
-+ */
-+static int ufshcd_get_lun(struct ufs_hba *hba, int lun)
-+{
-+	struct ufs_unit_cfg_parameters *unit;
-+	struct ufs_device_desc dev_desc;
-+	u8 *config;
-+	int off;
-+
-+	// Populate descriptor
-+	if (g_cfg_desc.cfg_desc.length == 0 &&
-+	    ufshcd_query_desc_config(hba, &g_cfg_desc))
-+		return CMD_RET_FAILURE;
-+
-+	if (ufshcd_query_desc_device(hba, &dev_desc)) {
-+		log_err("Failed to read IDN DeviceDesc IDN\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	config = (__u8 *)&g_cfg_desc;
-+	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
-+	unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+	ufshcd_print_unit_param_descriptor(unit);
-+	return CMD_RET_FAILURE;
-+}
-+
-+/**
-+ * ufshcd_clear_lun() - Reset a LUN configuration entry
-+ * @hba: UFS host controller instance
-+ * @lun: Logical unit number
-+ *
-+ * Clears the specified LUN configuration.
-+ *
-+ * Return: Command status.
-+ */
-+static int ufshcd_clear_lun(struct ufs_hba *hba, int lun)
-+{
-+	struct ufs_unit_cfg_parameters *unit;
-+	struct ufs_device_desc dev_desc;
-+	u8 *config;
-+	int off;
-+
-+	// Populate descriptor
-+	if (g_cfg_desc.cfg_desc.length == 0 &&
-+	    ufshcd_query_desc_config(hba, &g_cfg_desc))
-+		return CMD_RET_FAILURE;
-+
-+	if (ufshcd_query_desc_device(hba, &dev_desc)) {
-+		log_err("Failed to read IDN DeviceDesc IDN\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	config = (__u8 *)&g_cfg_desc;
-+	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
-+	unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+	memset(unit, 0x00, sizeof(*unit));
-+	unit->logical_block_size = 0xC;
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufshcd_update_lun() - Update a LUN configuration field
-+ * @hba: UFS host controller instance
-+ * @lun: Logical unit number
-+ * @field: Configuration field name
-+ * @val: New field value
-+ *
-+ * Return: Command status.
-+ */
-+static int ufshcd_update_lun(struct ufs_hba *hba, int lun,
-+			     const char *field, u32 val)
-+{
-+	struct ufs_unit_cfg_parameters *unit;
-+	struct ufs_device_desc dev_desc;
-+	u8 *config;
-+	int off;
-+
-+	// Populate descriptor
-+	if (g_cfg_desc.cfg_desc.length == 0 &&
-+	    ufshcd_query_desc_config(hba, &g_cfg_desc))
-+		return CMD_RET_FAILURE;
-+
-+	if (ufshcd_query_desc_device(hba, &dev_desc)) {
-+		log_err("Failed to read IDN DeviceDesc IDN\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	config = (__u8 *)&g_cfg_desc;
-+	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
-+	unit = (struct ufs_unit_cfg_parameters *)&config[off];
-+	if (set_param_field(unit, field, val)) {
-+		log_err("Ilegal value to set %s\n", field);
-+		return CMD_RET_FAILURE;
-+	}
-+	ufshcd_print_unit_param_descriptor(unit);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufshcd_write_desc_param() - Write a UFS descriptor
-+ * @hba: UFS host controller instance
-+ * @desc_id: Descriptor identifier
-+ * @desc_index: Descriptor index
-+ * @param_offset: Descriptor offset
-+ * @param_write_buf: Data to write
-+ * @param_size: Size of data buffer
-+ *
-+ * Return: 0 on success or negative error code on failure.
-+ */
-+static int ufshcd_write_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
-+				   int desc_index, unsigned char param_offset,
-+				   unsigned char *param_write_buf,
-+				   unsigned char param_size)
-+{
-+	int ret;
-+	int buff_len;
-+	int selector = 0;
-+
-+	if (desc_id >= QUERY_DESC_IDN_MAX || !param_size)
-+		return -EINVAL;
-+
-+	buff_len = param_size;
-+	ret = ufshcd_query_descriptor_retry(hba, UPIU_QUERY_OPCODE_WRITE_DESC,
-+					    desc_id, desc_index, selector,
-+					    param_write_buf, &buff_len);
-+	if (!ret)
-+		return 0;
-+	log_err("Err: desc_id %d desc_index %d, param_offset %d,buflen %d,ret=%d\n",
-+		(unsigned int)desc_id, desc_index, (unsigned int)param_offset, buff_len, ret);
-+
-+	return ret;
-+}
-+
-+static enum flag_idn ufshcd_get_flag(const char *name)
-+{
-+	if (!strcmp(name, "deviceinit"))
-+		return QUERY_FLAG_IDN_FDEVICEINIT;
-+
-+	if (!strcmp(name, "permanent_wpe"))
-+		return QUERY_FLAG_IDN_PERMANENT_WPE;
-+
-+	if (!strcmp(name, "pwr_on_wpe"))
-+		return QUERY_FLAG_IDN_PWR_ON_WPE;
-+
-+	if (!strcmp(name, "bkops_en"))
-+		return QUERY_FLAG_IDN_BKOPS_EN;
-+
-+	if (!strcmp(name, "life_span_mode"))
-+		return QUERY_FLAG_IDN_LIFE_SPAN_MODE_ENABLE;
-+
-+	if (!strcmp(name, "purge_enable"))
-+		return QUERY_FLAG_IDN_PURGE_ENABLE;
-+
-+	if (!strcmp(name, "fphy_resource_removal"))
-+		return QUERY_FLAG_IDN_FPHYRESOURCEREMOVAL;
-+
-+	if (!strcmp(name, "busy_rtc"))
-+		return QUERY_FLAG_IDN_BUSY_RTC;
-+
-+	if (!strcmp(name, "permanently_disable_fw_update"))
-+		return QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE;
-+
-+	if (!strcmp(name, "write_booster_en"))
-+		return QUERY_FLAG_IDN_F_WRITE_BOOSTER_EN;
-+
-+	if (!strcmp(name, "wb_buf_flush_en"))
-+		return QUERY_FLAG_IDN_F_WB_BUF_FLUSH_EN;
-+
-+	if (!strcmp(name, "wb_buf_flush_h8"))
-+		return QUERY_FLAG_IDN_F_WB_BUF_FLUSH_HIBERN8;
-+
-+	return -EINVAL;
-+}
-+
-+/**
-+ * ufshcd_query_user_flag() - Read a UFS flag attribute
-+ * @hba: UFS host bus adapter instance
-+ * @flag_name: Name of the flag to query
-+ *
-+ * Translates @flag_name to the corresponding UFS flag identifier,
-+ * reads the flag value from the device and prints the result.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+static int ufshcd_query_user_flag(struct ufs_hba *hba, const char *flag_name)
-+{
-+	enum flag_idn idn;
-+	bool flag_res;
-+	int ret;
-+
-+	if (!hba) {
-+		log_err("query flag: invalid hba\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	idn = ufshcd_get_flag(flag_name);
-+	if ((int)idn < 0) {
-+		log_err("query flag: invalid flag name\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	ret = ufshcd_query_flag(hba, UPIU_QUERY_OPCODE_READ_FLAG, idn, &flag_res);
-+	if (ret) {
-+		log_err("QueryFlag: flag %s idn query failed\n", flag_name);
-+		return CMD_RET_FAILURE;
-+	}
-+	printf("%s = %x\n", flag_name, flag_res);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int print_query_help(void)
-+{
-+	puts("Supported descriptor IDNs:\n"
-+	     "\t0 - Device Descriptor\n"
-+	     "\t1 - Configuration Descriptor\n"
-+	     "\t2 - Unit Descriptor\n"
-+	     "\t7 - Geometry Descriptor\n"
-+	     "\t8 - Power Descriptor\n");
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+/**
-+ * idn_read() - Read and display a descriptor by IDN
-+ * @hba: UFS host controller instance
-+ * @idn: Descriptor identifier
-+ * @lun: Logical unit number for unit-specific descriptors
-+ *
-+ * Return: Command status.
-+ */
-+static int idn_read(struct ufs_hba *hba, int idn, char *lunp)
-+{
-+	void *desc = NULL;
-+	int ret = CMD_RET_FAILURE;
-+
-+	switch (idn) {
-+	case QUERY_DESC_IDN_DEVICE:
-+		desc = malloc(sizeof(struct ufs_device_desc));
-+		if (!desc) {
-+			log_err("failed to allocate device descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+		if (!ufshcd_query_desc_device(hba, desc)) {
-+			ufshcd_print_device_descriptor(desc);
-+			ret = CMD_RET_SUCCESS;
-+		} else {
-+			log_err("failed to read device descriptor\n");
-+		}
-+		break;
-+
-+	case QUERY_DESC_IDN_GEOMETRY:
-+		desc = malloc(sizeof(struct ufs_geometry_desc));
-+		if (!desc) {
-+			log_err("failed to allocate geometry descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		if (!ufshcd_query_desc_geometry(hba, desc)) {
-+			ufshcd_print_idn_geometry_desc(desc);
-+			ret = CMD_RET_SUCCESS;
-+		} else {
-+			log_err("failed to read geometry descriptor\n");
-+		}
-+		break;
-+
-+	case QUERY_DESC_IDN_UNIT: {
-+		int lun;
-+
-+		if (!lunp)
-+			return print_query_help();
-+		lun = dectoul(lunp, NULL);
-+		desc = malloc(sizeof(struct ufs_unit_desc));
-+		if (!desc) {
-+			log_err("failed to allocate unit descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		if (!ufshcd_query_desc_unit(hba, lun, desc)) {
-+			ufshcd_print_unit_desc(desc);
-+			ret = CMD_RET_SUCCESS;
-+		} else {
-+			log_err("failed to read unit descriptor\n");
-+		}
-+	}
-+		break;
-+
-+	case QUERY_DESC_IDN_POWER:
-+		desc = malloc(sizeof(struct ufs_power_param_desc));
-+		if (!desc) {
-+			log_err("failed to allocate power descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		if (!ufshcd_query_desc_power(hba, 0, desc)) {
-+			ufshcd_print_power_params(desc);
-+			ret = CMD_RET_SUCCESS;
-+		} else {
-+			log_err("failed to read power descriptor\n");
-+		}
-+		break;
-+
-+	case QUERY_DESC_IDN_CONFIGURATION: {
-+		struct ufs_device_desc *device_desc;
-+		struct ufs_geometry_desc *geometry;
-+
-+		device_desc = malloc(sizeof(*device_desc));
-+		if (!device_desc) {
-+			log_err("failed to allocate device descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		geometry = malloc(sizeof(*geometry));
-+		if (!geometry) {
-+			log_err("failed to allocate geometry descriptor\n");
-+			free(device_desc);
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		if (ufshcd_query_desc_device(hba, device_desc)) {
-+			log_err("failed to read IDN DeviceDesc\n");
-+			goto cfg_out;
-+		}
-+
-+		if (ufshcd_query_desc_geometry(hba, geometry)) {
-+			log_err("failed to read Geometry\n");
-+			goto cfg_out;
-+		}
-+
-+		if (ufshcd_query_desc_config(hba, &g_cfg_desc)) {
-+			log_err("failed to read Configuration Descriptor\n");
-+			goto cfg_out;
-+		}
-+
-+		ufshcd_print_desc_config(&g_cfg_desc, geometry,
-+					 device_desc->ud0_base_offset,
-+					 device_desc->config_length);
-+
-+		ret = CMD_RET_SUCCESS;
-+
-+cfg_out:
-+		free(geometry);
-+		free(device_desc);
-+		return ret;
-+	}
-+
-+	default:
-+		log_err("illegal IDN %d\n", idn);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	free(desc);
-+	return ret;
-+}
-+
-+/**
-+ * ufs_tool_get_config_desc() - Display the configuration descriptor
-+ *
-+ * Reads dependent descriptors and prints the current configuration.
-+ *
-+ * Return: Command status.
-+ */
-+static int ufs_tool_get_config_desc(void)
-+{
-+	struct ufs_device_desc *device_desc;
-+	struct ufs_geometry_desc *geometry;
-+	int ret = CMD_RET_FAILURE;
-+
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (!hba)
-+		return CMD_RET_FAILURE;
-+
-+	device_desc = malloc(sizeof(*device_desc));
-+	if (!device_desc) {
-+		log_err("Failed to allocate device descriptor\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	geometry = malloc(sizeof(*geometry));
-+	if (!geometry) {
-+		log_err("Failed to allocate geometry descriptor\n");
-+		free(device_desc);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (ufshcd_query_desc_device(hba, device_desc)) {
-+		log_err("Failed to read DeviceDesc\n");
-+		goto cfg_out;
-+	}
-+
-+	if (ufshcd_query_desc_geometry(hba, geometry)) {
-+		log_err("Failed to read Geometry\n");
-+		goto cfg_out;
-+	}
-+
-+	ufshcd_print_desc_config(&g_cfg_desc, geometry,
-+				 device_desc->ud0_base_offset,
-+				 device_desc->config_length);
-+
-+	ret = CMD_RET_SUCCESS;
-+cfg_out:
-+	free(geometry);
-+	free(device_desc);
-+	return ret;
-+}
-+
-+/**
-+ * set_config_desc_field() - Update a configuration descriptor field
-+ * @desc: Descriptor to update
-+ * @fieldname: Field name
-+ * @value: New value
-+ *
-+ * Return: 0 on success or -EINVAL if unsupported.
-+ */
-+static int set_config_desc_field(struct config_descriptor *desc,
-+				 const char *fieldname, u32 value)
-+{
-+	if (!strcmp(fieldname, "length"))
-+		desc->length = (u8)value;
-+	else if (!strcmp(fieldname, "descriptor_idn"))
-+		desc->descriptor_idn = (u8)value;
-+	else if (!strcmp(fieldname, "conf_desc_continue"))
-+		desc->conf_desc_continue = (u8)value;
-+	else if (!strcmp(fieldname, "boot_enable"))
-+		desc->boot_enable = (u8)value;
-+	else if (!strcmp(fieldname, "descr_access_en"))
-+		desc->descr_access_en = (u8)value;
-+	else if (!strcmp(fieldname, "initpower_mode"))
-+		desc->initpower_mode = (u8)value;
-+	else if (!strcmp(fieldname, "high_priority_lun"))
-+		desc->high_priority_lun = (u8)value;
-+	else if (!strcmp(fieldname, "secure_removal_type"))
-+		desc->secure_removal_type = (u8)value;
-+	else if (!strcmp(fieldname, "init_active_icc_level"))
-+		desc->init_active_icc_level = (u8)value;
-+	else if (!strcmp(fieldname, "periodic_rtc_update"))
-+		desc->periodic_rtc_update = (u16)value;
-+	else if (!strcmp(fieldname, "reserved_HPB"))
-+		desc->reserved_HPB = (u8)value;
-+	else if (!strcmp(fieldname, "rpmb_region_enable"))
-+		desc->rpmb_region_enable = (u8)value;
-+	else if (!strcmp(fieldname, "rpmb_region1_size"))
-+		desc->rpmb_region1_size = (u8)value;
-+	else if (!strcmp(fieldname, "rpmb_region2_size"))
-+		desc->rpmb_region2_size = (u8)value;
-+	else if (!strcmp(fieldname, "rpmb_region3_size"))
-+		desc->rpmb_region3_size = (u8)value;
-+	else if (!strcmp(fieldname, "write_booster_buffer_preserve_user_space_en"))
-+		desc->write_booster_buffer_preserve_user_space_en = (u8)value;
-+	else if (!strcmp(fieldname, "write_booster_buffer_type"))
-+		desc->write_booster_buffer_type = (u8)value;
-+	else if (!strcmp(fieldname, "num_shared_write_booster_buffer_allocunits"))
-+		desc->num_shared_write_booster_buffer_allocunits =
-+		cpu_to_be32(value);
-+	else
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+/**
-+ * ufs_tool_set_config_desc() - Update cached configuration descriptor
-+ * @name: Field name
-+ * @value: New value
-+ *
-+ * Return: Command status.
-+ */
-+static int ufs_tool_set_config_desc(const char *name, u32 value)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (g_cfg_desc.cfg_desc.length == 0) {
-+		if (ufshcd_query_desc_config(hba, &g_cfg_desc)) {
-+			log_err("Failed to read Device Descriptor\n");
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+
-+	if (set_config_desc_field(&g_cfg_desc.cfg_desc, name, value)) {
-+		log_err("Failed to set parameters %s descriptor\n", name);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ufshcd_print_config_descriptor(&g_cfg_desc.cfg_desc);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufs_tool_commit() - Commit configuration descriptor changes
-+ *
-+ * Writes the cached configuration descriptor to the device.
-+ *
-+ * Return: Command status.
-+ */
-+static int ufs_tool_commit(void)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+	u8 *config;
-+	int ret;
-+
-+	config = (__u8 *)&g_cfg_desc;
-+	ufshcd_cache_flush(config, QUERY_DESC_UNIT_DEF_SIZE);
-+	ret = ufshcd_write_desc_param(hba,
-+				      QUERY_DESC_IDN_CONFIGURATION,
-+				      0, 0, config,
-+				      g_cfg_desc.cfg_desc.length);
-+
-+	if (ret) {
-+		log_err("Failed to write Configuration\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * ufs_tool_clearall() - Clear all configured logical units
-+ *
-+ * Resets all LUN entries and writes the updated configuration.
-+ *
-+ * Return: Command status.
-+ */
-+static int ufs_tool_clearall(void)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+	struct ufs_device_desc device_desc;
-+	u8 *config;
-+	int ret;
-+
-+	// Populate descriptor
-+	if (g_cfg_desc.cfg_desc.length == 0 &&
-+	    ufshcd_query_desc_config(hba, &g_cfg_desc)) {
-+		return CMD_RET_FAILURE;
-+	}
-+	config = (__u8 *)&g_cfg_desc;
-+
-+	ufshcd_cache_flush(config, QUERY_DESC_UNIT_DEF_SIZE);
-+	ret = ufshcd_query_desc_device(hba, &device_desc);
-+	if (ret) {
-+		log_err("Failed to read DeviceDesc\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ufshcd_clearall_luns(&g_cfg_desc,
-+			     device_desc.ud0_base_offset,
-+			     device_desc.config_length);
-+
-+	ret = ufshcd_write_desc_param(hba,
-+				      QUERY_DESC_IDN_CONFIGURATION,
-+				      0, 0, config,
-+				      g_cfg_desc.cfg_desc.length);
-+
-+	if (ret) {
-+		log_err("Failed to clear Configuration\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+int ufs_tool_get_lun(int lun)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (!hba)
-+		return -EINVAL;
-+	return ufshcd_get_lun(hba, lun);
-+}
-+
-+int ufs_tool_clear_lun(int lun)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (!hba)
-+		return -EINVAL;
-+	return ufshcd_clear_lun(hba, lun);
-+}
-+
-+int ufs_tool_set_lun(int lun, const char *parm, u32 val)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (!hba)
-+		return -EINVAL;
-+	return ufshcd_update_lun(hba, lun, parm, val);
-+}
-+
-+static int ufs_tool_query_flag(const char *flag)
-+{
-+	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
-+
-+	if (!hba)
-+		return -EINVAL;
-+	return ufshcd_query_user_flag(hba, flag);
-+}
-+
-+static int ufs_tool_query(int idn, char *lunp)
-+{
-+	struct ufs_hba *hba;
-+
-+	hba = ufstool_probe_dev(hba_id);
-+	if (!hba) {
-+		log_err("ufs_tool: failed to get hba\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (idn >= 0)
-+		return idn_read(hba, idn, lunp);
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+static int ufs_tool_set_hba(int val)
-+{
-+	if (val < 0) {
-+		printf("ufs_tool: invalid hba id\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	hba_id = val;
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int ufs_tool_provision(long addr)
-+{
-+	memcpy(&g_cfg_desc, (void *)addr, sizeof(g_cfg_desc));
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int print_provision_help(void)
-+{
-+	puts("<addr> - address of the loaded binary\n");
-+	return CMD_RET_FAILURE;
-+}
-+
-+static int print_flags_help(void)
-+{
-+	puts("Supported flags:\n"
-+	     "\tdeviceinit\n"
-+	     "\tpermanent_wpe\n"
-+	     "\tpwr_on_wpe\n"
-+	     "\tbkops_en\n"
-+	     "\tlife_span_mode\n"
-+	     "\tpurge_enable\n"
-+	     "\tfphy_resource_removal\n"
-+	     "\tbusy_rtc\n"
-+	     "\tpermanently_disable_fw_update\n"
-+	     "\twrite_booster_en\n"
-+	     "\twb_buf_flush_en\n"
-+	     "\twb_buf_flush_h8\n");
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+static int print_set_lun_help(void)
-+{
-+	puts("Supported LUN fields:\n"
-+	     "\tlu_enable\n"
-+	     "\tboot_lun_id\n"
-+	     "\tlu_write_protect\n"
-+	     "\tmemory_type\n"
-+	     "\tdata_reliability\n"
-+	     "\tnum_allocunits\n"
-+	     "\tlogical_block_size\n"
-+	     "\tprovisioning_type\n"
-+	     "\tcontext_capabilities\n"
-+	     "\tlu_num_write_booster_buffer_allocunits\n");
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+static int print_set_cfg_desc_help(void)
-+{
-+	puts("Supported configuration descriptor fields:\n"
-+	     "\tlength\n"
-+	     "\tdescriptor_idn\n"
-+	     "\tconf_desc_continue\n"
-+	     "\tboot_enable\n"
-+	     "\tdescr_access_en\n"
-+	     "\tinitpower_mode\n"
-+	     "\thigh_priority_lun\n"
-+	     "\tsecure_removal_type\n"
-+	     "\tinit_active_icc_level\n"
-+	     "\tperiodic_rtc_update\n"
-+	     "\treserved_HPB\n"
-+	     "\trpmb_region_enable\n"
-+	     "\trpmb_region1_size\n"
-+	     "\trpmb_region2_size\n"
-+	     "\trpmb_region3_size\n"
-+	     "\twrite_booster_buffer_preserve_user_space_en\n"
-+	     "\twrite_booster_buffer_type\n"
-+	     "\tnum_shared_write_booster_buffer_allocunits\n");
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+/**
-+ * do_ufs() - Execute the UFS command
-+ * @cmdtp: Command table entry
-+ * @flag: Command flags
-+ * @argc: Number of arguments
-+ * @argv: Command arguments
-+ *
-+ * Dispatches UFS subcommands.
-+ *
-+ * Return: Command status.
-+ */
- static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
- 	int dev, ret;
-@@ -20,19 +1511,120 @@ static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 				dev = dectoul(argv[2], NULL);
- 				ret = ufs_probe_dev(dev);
- 				if (ret)
--					return CMD_RET_FAILURE;
-+					return CMD_RET_USAGE;
- 			} else {
- 				ufs_probe();
- 			}
--
- 			return CMD_RET_SUCCESS;
- 		}
--	}
- 
-+		if (!strcmp(argv[1], "query")) {
-+			char *lun = NULL;
-+			int idn;
-+
-+			if (argc <= 2)
-+				return print_query_help();
-+			idn  = dectoul(argv[2], NULL);
-+			if (argc == 4)
-+				lun = argv[3];
-+			return ufs_tool_query(idn, lun);
-+		}
-+
-+		if (!strcmp(argv[1], "set_hba")) {
-+			int val;
-+
-+			if (argc <= 2)
-+				return CMD_RET_USAGE;
-+
-+			val  = dectoul(argv[2], NULL);
-+			return ufs_tool_set_hba(val);
-+		}
-+
-+		if (!strcmp(argv[1], "get_lun")) {
-+			int lun;
-+
-+			if (argc <= 2)
-+				return CMD_RET_USAGE;
-+
-+			lun  = dectoul(argv[2], NULL);
-+			return ufs_tool_get_lun(lun);
-+		}
-+
-+		if (!strcmp(argv[1], "set_lun")) {
-+			int lun;
-+			u32 val;
-+
-+			if (argc <= 4)
-+				return print_set_lun_help();
-+			lun  = dectoul(argv[2], NULL);
-+			val  = dectoul(argv[4], NULL);
-+			return ufs_tool_set_lun(lun, argv[3], val);
-+		}
-+
-+		if (!strcmp(argv[1], "clear_lun")) {
-+			int lun;
-+
-+			if (argc <= 2)
-+				return CMD_RET_USAGE;
-+			lun  = dectoul(argv[2], NULL);
-+			return ufs_tool_clear_lun(lun);
-+		}
-+
-+		if (!strcmp(argv[1], "set_cfg_desc")) {
-+			const char *name;
-+			u32 val;
-+
-+			if (argc <= 3)
-+				return print_set_cfg_desc_help();
-+			name = argv[2];
-+			val  = dectoul(argv[3], NULL);
-+			return ufs_tool_set_config_desc(name, val);
-+		}
-+
-+		if (!strcmp(argv[1], "get_flag")) {
-+			if (argc <= 2)
-+				return print_flags_help();
-+			return ufs_tool_query_flag(argv[2]);
-+		}
-+
-+		if (!strcmp(argv[1], "commit"))
-+			return ufs_tool_commit();
-+
-+		if (!strcmp(argv[1], "clearall"))
-+			return ufs_tool_clearall();
-+
-+		if (!strcmp(argv[1], "luns"))
-+			return ufs_tool_print_luns();
-+
-+		if (!strcmp(argv[1], "get_cfg_desc"))
-+			return ufs_tool_get_config_desc();
-+
-+		if (!strcmp(argv[1], "provision")) {
-+			long addr;
-+
-+			if (argc <= 2)
-+				return print_provision_help();
-+			addr = dectoul(argv[2], NULL);
-+			return ufs_tool_provision(addr);
-+		}
-+	}
- 	return CMD_RET_USAGE;
- }
- 
--U_BOOT_CMD(ufs, 3, 1, do_ufs,
--	   "UFS sub-system",
--	   "init [dev] - init UFS subsystem\n"
--);
-+U_BOOT_LONGHELP(ufs,
-+		"init [dev]                           - init UFS subsystem\n"
-+		"query <lun> <idn>                    - read and display descriptor\n"
-+		"get_flag <flag>                      - read a UFS flag\n"
-+		"commit                               - write configuration descriptor\n"
-+		"provision <addr>                     - overwrite config descriptor\n"
-+		"set_hba <id>                         - select active HBA\n"
-+		"luns                                 - print configured LUNs\n"
-+		"clearall                             - clear all LUN configuration\n"
-+		"get_lun <lun>                        - display LUN configuration\n"
-+		"clear_lun <lun>                      - clear a LUN configuration\n"
-+		"set_lun <lun> <field> <value>        - update a LUN field\n"
-+		"get_cfg_desc                         - display configuration descriptor\n"
-+		"set_cfg_desc <field> <value>         - update configuration descriptor\n");
-+
-+U_BOOT_CMD(ufs, 5, 1, do_ufs, "UFS sub-system", ufs_help_text);
-+
+I agree now that I have a bit more knowledge.
 
--- 
-2.43.0
+> I honestly don't want to see the Provider/Store API being used only for
+> loading simple keys. It already works without the provider API and isn't
+> deprecated as far as I know? Let someone who's interested (my employer
+> is, therefore I have to be :) ) in supporting OpenSSL providers do the
+> work of implementing support for OpenSSL providers, with unit tests,
+> backward compatibility with engines through the OpenSSL provider API, etc=
+...
+>
 
+Agreed if protecting backward compatibility for OpenSSL 1.x
+distributions are critical, and we definitely shouldn't break those
+existing legacy engine setups.
+
+> For PKCS11, we have some interesting logic for the OpenSSL engine, and I
+> think we may want something similar for the OpenSSL provider.
+>
+> Note that OpenSSL 1.x is still used in some distros (Bullseye, Slackware
+> 15, AlmaLinux/RockyLinux 8 according to pkgs.org) so I think it's still
+> premature to entirely remove OpenSSL engine support (and OpenSSL 1.x
+> doesn't have the provider API).
+>
+> >
+> > This fixes the compilation bottleneck on some distros, completely
+> > preserves legacy engine setups, and allows real providers URI
+> > string-mangling issue to be handled as clean, independent follow-up
+> > patches.
+> >
+>
+> We need proper unit tests for supporting OpenSSL providers (and not only
+> a local key using the Provider/Store API). I'll repeat it once more, I
+> have local WIP (but tested) patches for OpenSSL provider support, so I
+> don't think it makes sense for someone to redo the work. The fact this
+> was started back in November 2025 and it hasn't been really pushed hard
+> since kinda hinted at this not being a big issue for RH (or they keep
+> their stuff downstream and upstream can take the time it'll take), hence
+> why I was waiting for Eddie to answer/send a new version (I've also been
+> swamped at work for a few weeks, which should end soon hopefully, so it
+> also worked out for me to wait on Eddie).
+>
+
+Knowing that, there is no reason to duplicate your efforts. Please cc
+me when you send it upstream, as I'm interested.
+
+> > Does it makes sense?
+> >
+>
+> Somewhat. I still don't understand the obsession with the Provider API
+> when the issue (as I understand it) is "I cannot compile OpenSSL engine
+> support and I don't need it".
+>
+
+To clarify the "obsession" point, which I think is an unfortunate
+take, my impression was that this wasn't just about throwing a quick,
+blind hack at a Fedora compiler error. The build failure was simply
+the trigger.
+
+Eddie put significant effort into researching the modern OpenSSL 3.x
+API, studying how to phase out legacy, deprecated components, looking
+at the U-Boot's testing infrastructure, and trying to proactively
+modernize U-Boot's backend based on established upstream kernel
+patterns.
+
+I agree, now, and this is the beauty of discussions, that the kernel
+approach is not enough due to its narrow scope. U-Boot=E2=80=99s edge cases
+make a full API migration heavier than expected. However, trying to
+actively clean up technical debt is a valuable goal, and
+characterizing it as a mere obsession with a build error can be quite
+discouraging for new contributors putting in real work to improve the
+codebase.
+
+That said, if Eddie is willing to do so, keeping that patch focused
+strictly on the #ifndef compile-guards looks like the right approach
+to me too, and it leaves the runway entirely clear for your provider
+migration patches later.
+
+Cheers,
+Enric
+
+> Cheers,
+> Quentin
+>
 
