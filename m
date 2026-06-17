@@ -4,98 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F27CD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:16:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3A3CD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB58A848C5;
-	Wed, 17 Jun 2026 16:16:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CF15A846B0;
+	Wed, 17 Jun 2026 16:56:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ImNe6/bt";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iIkI6vCR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YGlMS0W9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9ED1E848E2; Wed, 17 Jun 2026 16:16:02 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 186AC84833; Wed, 17 Jun 2026 16:56:46 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E209084833
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:15:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 358858460E
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:56:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ggQrF3b5Nz9tnq;
- Wed, 17 Jun 2026 16:15:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781705757;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LZdsSwp8XmKeF3O1PCzcKgrsTUvFGbyY7+7oebFJyFE=;
- b=ImNe6/btYFnaJ2hJutKyGyz9NYotGqE7FmrTrP/A1d8Z9QsP6XNcdKAwhYR58t6Pfxr3n4
- Lh6R2ZvpNO6xBKxIPhRX0eO8yYAfrpp1GLpQNSj9Pi3866KwlnBxpM6bkNcj8MpgmVUT4m
- BSGuWq8vxzX76KwvobqJ7g5VYD1INOq34YnEqL7T+HXE80M6i5yI66VoqDhr6qtJQITAfs
- 56gQvoPDtWUcb5F3m0WXJ0QScUbMOeMy8ROtB0jmya3yjedcpXsyCG+PuWoRHq6F/R/lzf
- YkImq/dTmn5g+4CyVr/ZOWFfuK3LQipNMHX+Me54ALo6lCpQX0JO1sqOnV1Jeg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=iIkI6vCR;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <bf2ab861-b9d2-424b-a839-58abf074a449@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781705754;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LZdsSwp8XmKeF3O1PCzcKgrsTUvFGbyY7+7oebFJyFE=;
- b=iIkI6vCRdHnwaplnkz0aShJaa6Ni8i5LtFmMT3JU9kdYd4P2wo1HMs7mj5RC1UxuvL1DfP
- owhKhKsJcNWwvzxErN1cwfBbWak8agkFljb1qQRzv0JEahBjwD9DfNYFe9Tmcc0/cpzuFd
- KbLN7SQquebV1BKL/+zMn3sG9eRmZ4Q874K5XLlcHItMpM/yC38EBnKqjAAtYOY3hH4YvT
- Sce2huFlwZHpoDiCN6/SvAr6kouFGR0LPXUz2lOAUi/DG5Wenfr/LI1nv6ekefdIsaA1Fh
- DLenQwdqSn5CSEVl+ogPZF/iIOI1V+s/ukwVjCj8quu3WLCNZk0bXnNG11d05w==
-Date: Wed, 17 Jun 2026 13:15:14 +0200
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5aa5f11deb2so6719391e87.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:56:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781708202; x=1782313002; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pLfCHs1isAKbYtJwnU64ykdKZwXC9YS00gdF0EwLapc=;
+ b=YGlMS0W9+WV5FvBff4T64dCcpjSXrhHvyzNAh7tvrkmM/dvWyJiwssR6W818JnkMHt
+ 7IY+3yjs0HGugHchDoB0oNGZI0UsCqqaZwhq8I1VFk4ThJQnbeYcpPBodyzBkUD6CEmh
+ DIQQaPrXskWjzDEU1Y5Aw+xd2ji+LsBBtGPtCluMZwhz0clPEb2FuKtnGpI/TgfQ9JG/
+ PKNN8MqRuJGYwzUdQP1/wgoy+AwEVjF31n1vGUIDIjGsIlpGYFIfIqOl3V+qWBcOlrAn
+ v8P9+Og+Rt+xGR12n/jqI8cOwQrn9sKoL36YKYvQT0hPfqHLnPQMoGnbseElB3ooaw+6
+ MKPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781708202; x=1782313002;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pLfCHs1isAKbYtJwnU64ykdKZwXC9YS00gdF0EwLapc=;
+ b=bI33GM1IS8+XdFeThXj+FkKpPJ7+PXEQwHrrsIbecG3xD7A5U91sUvjn8++o/zP0yd
+ UZd0t7x23+KDJ2FpkgSI9uusIH3Dz+C7rxG2Lrldnh5MyQ3vZ+EtTjRWdVL4Ni42PI0A
+ 3RlibqPP/yyT35qWvwB2FFkt3+N5qjSo1r+fuAxrES86hB1nNCl2EDm2AiT24t/+NIej
+ 09RqpKbn0oRZ+0RkWFiq3U382JTGWHZTCAJ4iauZddvftipwTJPkXzvZQjz6pwO6mhPN
+ nSUXLnz1lPCihaCl+7ttxx7TXlZTt2vbpJv7jkQyDlbdpeKOXLgkOczRCT3fwzWyvS7u
+ 0vPw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/4mdDtLVbsu5VTFek8jmsYBA5BR1AW1nw/Cg+RrD+dkJZlJGYWVOPeUFyo4uDSgrkH6VBoGX4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzEpOU2GJ0P/L+fLx959rwLWI5kIYefy47OQHnIWtuqvnbWlpk4
+ nMP7zRtnCBV4+dx7I4XylVWUXkH9SAXgCdk31k3RTPTTBwDBZyH/PjdC36V847l67gw=
+X-Gm-Gg: AfdE7cmeMua4Gz5FbU3eOlLnXtswEOiZZ6Q/kJRtelhSR+mIqNKsZ/Ohoj3xKG8INvR
+ +xkqc9i1O4gg+mlEuYEM9wufW82vgAtC6c4LLJxOs8F8QBCaD9hDibHPrSgp4GOjXfJN/Hr6cHm
+ d5X3Afyy4bHmiZWhV9qS9X4bzqG7NTQsHxRG9B7GCWiNbNGZ6w6u8fw5O9P9kpbAS0nJCSQPPzg
+ Im6RZ2j2W/3tiwnIsqeR+34s0Ts05GwzSSuY2rTm4q0sEJJTodj6M1T+q0AOa965+UfX78TBZmA
+ zcna+ovVwp00TQzUG/KvKwFHNp2t8KYqQc7umuXRe14Gih5ETdzsGWAVdn7yajjryEZBMeki2gg
+ iHjrumcgXGgHYwpVM4Pd01cRVbAc8PjVWGwg3ehAD78KsWz7qQYiJv2Y6JxaaFVEWFUZKunsNGa
+ OwgdgsqyY01+ZbBiARObaGjUTS4FZGYO/G0xUCCYgj46zz4CAQDqsm
+X-Received: by 2002:a05:6512:3c9a:b0:5aa:6cd6:a7f0 with SMTP id
+ 2adb3069b0e04-5ad47029368mr1226323e87.44.1781708202303; 
+ Wed, 17 Jun 2026 07:56:42 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5ad2e1b08d4sm4489856e87.66.2026.06.17.07.56.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jun 2026 07:56:41 -0700 (PDT)
+Message-ID: <9c9fe6c4-06f0-401f-b670-3135347a92e7@linaro.org>
+Date: Wed, 17 Jun 2026 16:56:40 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/11] usb: tcpm: fix inverted poll condition in
- tcpm_pd_transmit()
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Wang Jie <dave.wang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Casey Connolly <casey.connolly@linaro.org>, Ye Li <ye.li@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Balaji Selvanathan
- <balaji.selvanathan@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260617-tcpci-dwc3-v1-0-b824fe1e9299@nxp.com>
- <20260617-tcpci-dwc3-v1-1-b824fe1e9299@nxp.com>
- <3ed2c692-28cb-4ae0-910f-d022d9b7e73d@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm: mach-snapdragon: increase compat buffer size and
+ warn on root compatible string truncation
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <3ed2c692-28cb-4ae0-910f-d022d9b7e73d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: tqh1k7whzdo8j1431q7nmj3kepfmxrao
-X-MBO-RS-ID: 57b4122bd0736d5a124
-X-Rspamd-Queue-Id: 4ggQrF3b5Nz9tnq
+To: Vivek Ray <vk092kumar@gmail.com>, u-boot@lists.denx.de
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, u-boot-qcom@groups.io
+References: <20260610093726.1231041-1-vk092kumar@gmail.com>
+ <20260610135440.1589268-1-vk092kumar@gmail.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260610135440.1589268-1-vk092kumar@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,49 +104,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/17/26 9:41 AM, Neil Armstrong wrote:
-> On 6/17/26 10:23, Peng Fan (OSS) wrote:
->> From: Peng Fan <peng.fan@nxp.com>
->>
->> The read_poll_timeout() macro breaks out of its loop when the condition
->> evaluates to true. The current code uses "!tx_complete" as the
->> condition, which means it exits immediately when tx_complete is false
->> (i.e., transmission has NOT completed yet), rather than waiting for
->> completion.
->>
->> Fix the condition to "tx_complete" so that the poll loop waits until
->> the TCPC signals transmission success/failure/discard before
->> proceeding.
->>
->> Without this fix, tcpm_pd_transmit() returns before the TCPC has
->> finished transmitting, causing the PD state machine to proceed with
->> stale tx_status values.
->>
->> Fixes: 1db4c0ac77e3 ("usb: tcpm: add core framework")
->> Signed-off-by: Peng Fan <peng.fan@nxp.com>
->> ---
->>   drivers/usb/tcpm/tcpm.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
->> index 3061b466d7c..d6c0be82333 100644
->> --- a/drivers/usb/tcpm/tcpm.c
->> +++ b/drivers/usb/tcpm/tcpm.c
->> @@ -207,7 +207,7 @@ static int tcpm_pd_transmit(struct udevice *dev,
->>        */
->>       timeout_us *= 5;
->>       ret = read_poll_timeout(tcpm_transmit_helper, tx_complete,
->> -                !tx_complete, false, timeout_us, dev);
->> +                tx_complete, false, timeout_us, dev);
->>       if (ret < 0) {
->>           dev_err(dev, "TCPM: PD transmit data failed: %d\n", ret);
->>           return ret;
->>
+Hi Vivek,
+
+On 10/06/2026 15:54, Vivek Ray wrote:
+> The configure_env() function copies root compatible strings into a
+> 32-byte buffer prior to parsing. If a compatible string exceeds this
+> limit, strlcpy() silently truncates it, producing a malformed fdtfile
+> path and a silent boot failure with no indication of the root cause.
 > 
-> I just figured out the similar patch sent last year was never applied:
-> https://lore.kernel.org/all/20250526-topic-tcpm-tx-poll-cond- 
-> v1-1-38a81560ffff@linaro.org/
+> Bump buf[] to 128 bytes and dt_path[] to 256 bytes to accommodate longer
+> compatible strings. Also, add explicit truncation checks after both
+> strlcpy() calls and emit a log_warning() with the offending compatible
+> string to make such failures easier to diagnose.
 > 
-> Whichever patch is applied it fine for me:
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Is this a fix for current release ? Can you send it separately ?
+> Signed-off-by: Vivek Ray <vk092kumar@gmail.com>
+
+Thanks for the quick respin!
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+> 
+> ---
+> 
+> Changes in V2:
+> - Bump buf[] from 32 to 128 bytes and dt_path[] from 64 to 256 (Casey Connolly)
+> - Fix line size check, use > not >= (Casey Connolly)
+> 
+> ---
+>  arch/arm/mach-snapdragon/board.c | 18 ++++++++++++++----
+>  1 file changed, 14 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 829a0109ac7..d9390d9b5d3 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -390,13 +390,14 @@ static void configure_env(void)
+>  {
+>  	const char *first_compat, *last_compat;
+>  	char *tmp;
+> -	char buf[32] = { 0 };
+> +	char buf[128] = { 0 };
+> +	int len = 0;
+>  	/*
+>  	 * Most DTB filenames follow the scheme: qcom/<soc>-[vendor]-<board>.dtb
+>  	 * The vendor is skipped when it's a Qualcomm reference board, or the
+>  	 * db845c.
+>  	 */
+> -	char dt_path[64] = { 0 };
+> +	char dt_path[256] = { 0 };
+>  	int compat_count, ret;
+>  	ofnode root;
+>  
+> @@ -417,7 +418,11 @@ static void configure_env(void)
+>  		return;
+>  	}
+>  
+> -	strlcpy(buf, first_compat, sizeof(buf) - 1);
+> +	/* A safety check to avoid silent failure due to name truncation */
+> +	len = strlcpy(buf, first_compat, sizeof(buf) - 1);
+> +	if (len > sizeof(buf) - 1)
+> +		log_warning("compatible '%s' got truncated, fdtfile name too long\n",
+> +			    first_compat);
+>  	tmp = buf;
+>  
+>  	/* The Qualcomm reference boards (RBx, HDK, etc)  */
+> @@ -468,7 +473,12 @@ static void configure_env(void)
+>  
+>  		/* Copy the last compat (e.g. "qcom,sdm845") into buf */
+>  		memset(buf, 0, sizeof(buf));
+> -		strlcpy(buf, last_compat, sizeof(buf) - 1);
+> +
+> +		/* check for name truncation */
+> +		len = strlcpy(buf, last_compat, sizeof(buf) - 1);
+> +		if (len > sizeof(buf) - 1)
+> +			log_warning("compatible '%s' got truncated, fdtfile name too long\n",
+> +				    last_compat);
+>  		tmp = buf;
+>  
+>  		/* strsep() is destructive, it replaces the comma with a \0 */
+
+-- 
+// Casey (she/her)
+
