@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05B54CD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E1ABCD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:30:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 188CE849B8;
+	by phobos.denx.de (Postfix) with ESMTP id 5B349849BD;
 	Wed, 17 Jun 2026 14:30:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UJpvpR7u";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kbKp/P/q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36F19838BB; Wed, 17 Jun 2026 11:26:37 +0200 (CEST)
+ id 479D9848D7; Wed, 17 Jun 2026 11:26:38 +0200 (CEST)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4527848D1
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 11:26:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF1D88494B
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 11:26:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 907E960103;
+ by tor.source.kernel.org (Postfix) with ESMTP id B7DDA60128;
  Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 63BF5C4AF10;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B1C8C4AF0E;
  Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1781688391;
- bh=qSssYu7RMrcqTavCjSbikMHT+3IuOP3S1M5ZjK8aaQw=;
+ bh=9FDXds7AaI2edHzaxpfajw6u4zuBF2P0n4i8oql7l1A=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=UJpvpR7uaaRX2HmVyDi9V1gUhZCM0Hct2XrOM4SnrlijQ4dNL4S2pn/XmpsRZinHW
- gnsy+km8nChrp3jFq8UsAPvqD+XkF1zArqpJwH5g1XLBFxie8G2QKY/aoYohsMwWpb
- qSLgy55Lic4xGJ4eFNBkIBbU4x2bePr0oh90UJlQo8EobEmUl68bEJxi8l1z/aOs1T
- wD4Ra6eW5/8vaipCH+FfmCm0hvZ3YTBt1vtYaXqGl0P1hLIg+qbJQ+nlJeEoAnYGAq
- 3xkx+cg6MELZhLsbY7iLELCXF3jEmq/edqPEzXutGZ/g4OKCl5+YH8/ylseVNXpQKz
- QrzL16d1bcSRA==
+ b=kbKp/P/q7px72JJ4JVGWgRIU+MhPQXEExfTwGX7IQe/TP0BlEomU+P7Xw4eenvJ8E
+ VkTWdHwyQfExcLE5r4qZSUFL/W917in3jGafqdCt+iC75AXWGpqqKw8hL3h9hpHetb
+ 8tlPE0X7UZsYCOvMMDCPWMH8hIrFR3OtvHQTIl+wG9iOvkv+LYeeqakhkHTeAnxFkY
+ Zeq/kioHCYZm/gAMzM4u00Nu7lHUwPQ9KxeayM1AN3PT2jPJTi47g0LA9xWOOJkz+6
+ ouaaiymMYFSrntbMNETTsdtAgXmS0qfIWnwFVr4sszV2Hlx/v9NpkgWXY4s4LZYJYW
+ Bv5ZkD65Skmow==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 56947CD98F3;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 83662CD98E4;
  Wed, 17 Jun 2026 09:26:31 +0000 (UTC)
 From: Raz Ben Yehuda via B4 Relay
  <devnull+raz.benyehuda.mobileye.com@kernel.org>
-Date: Wed, 17 Jun 2026 12:26:14 +0300
-Subject: [PATCH v5 2/5] ufs: Expose selected UFS functions
+Date: Wed, 17 Jun 2026 12:26:16 +0300
+Subject: [PATCH v5 4/5] ufs: extend the current command-line interface
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260617-ufs_tool2-v5-2-1cf099f71111@mobileye.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260617-ufs_tool2-v5-4-1cf099f71111@mobileye.com>
 References: <20260617-ufs_tool2-v5-0-1cf099f71111@mobileye.com>
 In-Reply-To: <20260617-ufs_tool2-v5-0-1cf099f71111@mobileye.com>
 To: u-boot@lists.denx.de
@@ -62,21 +62,21 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Vladimir Kondratiev <vladimir.Kondratiev@mobileye.com>, 
  Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=21355;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=51597;
  i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
- bh=unPHi062ct0o/NxqzX2skor9nBwxti4HHHVomPADUNA=;
- b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqMmhDLZgbE5zPnXxt6vFCVF+zLC+HHurNCVL5s
- tNfIA+8r6+JAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCajJoQwAKCRCfmumUluiO
- Oe1DEACyeRyFrqpsFFcUH0eLcXeLguKyRAVonIqs+t/11J5/THNr/abqWAzlKIzKnml0Dv42iPT
- bgbuczl5eRVb441gy4xowBe86RHvASBAshrQP8UskKlce+OFnxQhPQqISEnhsaest6Bp4L3SD/N
- t2Ti4bKY8bnbSlcLGehxQemOtZFQM9t03T5Ap0gYo4JWkWheksKPmpqyA3AdHWIiE5NC8M+mLBv
- 85jjD2HflMiCSQxj9OhwFBMvbO9mLnOPKOBeI6k01PBGE6pn80j4jthPslxvIIbMv37XwX0cotp
- piAfi/m8/jfWu+xY3M3mUSBo7m2Qfk1buQvmYAuN/fk+Ip+/b4W3jdHi9ee39MH13Y2xGeaZDTd
- QgAz87ez6edSAoNiB9DDyGsbiCPnP6UpMqR+bz6JKzBYxepdC2fKcLN9PD9H/DVrtWXTteNL8Vh
- cyeRsbVTdX4QTCzmEHnZe+G7JjXKw7YsXPO18rsXNqn9LwnUqo5kwMc2u2CLp4eeAfj8a3wEn26
- A+sEmUE8Q89GHoKZDCCnYi0o90v125wSILbA94n/rfXvOiFuJFXlIS2/0R904S0O9pLU3/gRoBn
- J9T0axW/8sSfA8Pq89mczqXiQK12JrweZmRPvViVHqtBcgqxa1qx7cUDLxcNz0CG7q0Um+SnSZQ
- neK7XfztBMEBYPg==
+ bh=+lRP0Wskam6pu5NPGvEpGxfWXt3IYeFBQp/5eEappY0=;
+ b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqMmhEslWckZfdjwjxjQgc6LgCptKyEltrJUOvv
+ s7ewvMOgbSJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCajJoRAAKCRCfmumUluiO
+ ORAPD/wJRqKVDY0RXEb/p7ces9nTog2Rp4BDynf3P04Q3270FZKFtlj6kCKVcO646H4RSm9/uXW
+ yn64qjzcjJvxnNzejQaSMFJlK0NMCUqyruNTTs8n+7zxQsSzi44GsQNdo22SqdkL+0n/VlxGOyb
+ H7IczUAS6ejkjyW6LLqQpRuA3UGZXPUoqfbNB50wZtoPnBt7o8qyHIqRlsKnOu6kBIrXP49YmMn
+ BSRzfjCiS2ADFj0xXdaamYb/ghlKWTotxuXkJ1qXcSxvIj1lE+wlKwoTK05e/FbS1nu2mzAXqQu
+ RMCscMI1aBxeUPb0cnlD4IkJCugb8b5pmllBCR/RfZeIP8RKakqShAKWkRN2DCNpGOJzyCHEyAC
+ zcYxXyng2x6znUyia16+pOu2SUMnYMl3syVKkmN6HFZGveOjW+4wm3SmF3z6km7ZaOI6ToDczFi
+ Zrf3LCvUAFAJOfDqbLqq7dsRFuDTzGJP7l8Hm+qnZWqTTIs/gvv8KuavQ66mXcSrSUXgYd9hj2I
+ wT7ZBE91U3nDTfEKbAxSVPobTEtF1qcR6TIV8LL08Gd0EdIugJKSzJCcry+tUZO2Qguu9RaKmSs
+ 4nKuAjBa750jBK4m8aHquKy/YOnu6fyveBXuyEIYEyNvgbr5HLfH5Aw9sbwAKddRBl/GLcrVxpe
+ dZaQOmROSq9m8eg==
 X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
  fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
 X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
@@ -102,587 +102,1665 @@ X-Virus-Status: Clean
 
 From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 
-    Remove the static qualifier from selected functions to allow
-    future reuse. Add flags according to UFS 3.1.
+    Extend the ufs command line. Provide techniques for querying,
+    displaying, and modifying UFS device configuration and
+    descriptor information.
+
+    Features:
+    - Query and display Device, Geometry, Unit, Configuration, and Power
+      Descriptors
+    - Display LUN configuration and calculated capacities
+    - Modify LUN, Configuration, and Device Descriptor fields
+    - Query common UFS runtime flags
+    - Commit configuration changes or clear all LUN configurations
+    - Decode and format descriptor contents for easier debugging
+    - Clear all luns
 
 Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
- drivers/ufs/ufs-uclass.c |  18 +-
- drivers/ufs/ufs.h        |  52 ------
- include/ufs.h            | 421 +++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 430 insertions(+), 61 deletions(-)
+ cmd/ufs.c | 1612 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 1602 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 6a51f337e47..78f6064ddea 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -757,7 +757,7 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+diff --git a/cmd/ufs.c b/cmd/ufs.c
+index 790dab50f18..24ac374900d 100644
+--- a/cmd/ufs.c
++++ b/cmd/ufs.c
+@@ -3,13 +3,1504 @@
+  * ufs.c - UFS specific U-Boot commands
   *
-  * Flush cache in aligned address..address+size range.
+  * Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
+- *
++ * Copyright (C) 2026 Mobileye Incorporated - https://www.mobileye.com
   */
--static void ufshcd_cache_flush(void *addr, unsigned long size)
-+void ufshcd_cache_flush(void *addr, unsigned long size)
- {
- 	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
- 	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
-@@ -1089,8 +1089,8 @@ static inline void ufshcd_init_query(struct ufs_hba *hba,
- /**
-  * ufshcd_query_flag() - API function for sending flag query requests
-  */
--static int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
--			     enum flag_idn idn, bool *flag_res)
-+int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
-+		      enum flag_idn idn, bool *flag_res)
- {
- 	struct ufs_query_req *request = NULL;
- 	struct ufs_query_res *response = NULL;
-@@ -1320,9 +1320,9 @@ out:
- /**
-  * ufshcd_query_descriptor_retry - API function for sending descriptor requests
-  */
--static int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
--					 enum desc_idn idn, u8 index, u8 selector,
--					 u8 *desc_buf, int *buf_len)
-+int  ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
-+				   enum desc_idn idn, u8 index, u8 selector,
-+				   u8 *desc_buf, int *buf_len)
- {
- 	int err;
- 	int retries;
-@@ -1457,9 +1457,9 @@ static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_
-  * ufshcd_read_desc_param - read the specified descriptor parameter
-  *
-  */
--static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
--				  int desc_index, u8 param_offset,
--				  u8 *param_read_buf, u8 param_size)
-+int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
-+			   int desc_index, u8 param_offset,
-+			   u8 *param_read_buf, u8 param_size)
- {
- 	int ret;
- 	u8 *desc_buf;
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index 0f6c93fbce7..03c0a46a4cf 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -43,15 +43,6 @@ struct ufs_pwr_mode_info {
- 	struct ufs_pa_layer_attr info;
- };
++
++#include <dm/uclass.h>
++#include <dm/device.h>
+ #include <command.h>
++#include <malloc.h>
++#include <linux/math64.h>
+ #include <ufs.h>
+-#include <vsprintf.h>
+-#include <linux/string.h>
  
--enum ufs_desc_def_size {
--	QUERY_DESC_DEVICE_DEF_SIZE		= 0x40,
--	QUERY_DESC_CONFIGURATION_DEF_SIZE	= 0x90,
--	QUERY_DESC_UNIT_DEF_SIZE		= 0x23,
--	QUERY_DESC_INTERCONNECT_DEF_SIZE	= 0x06,
--	QUERY_DESC_GEOMETRY_DEF_SIZE		= 0x48,
--	QUERY_DESC_POWER_DEF_SIZE		= 0x62,
--	QUERY_DESC_HEALTH_DEF_SIZE		= 0x25,
--};
- 
- struct ufs_desc_size {
- 	int dev_desc;
-@@ -162,19 +153,6 @@ enum {
- 	MASK_TM_FUNC			= 0xFF,
- };
- 
--/* UTP QUERY Transaction Specific Fields OpCode */
--enum query_opcode {
--	UPIU_QUERY_OPCODE_NOP		= 0x0,
--	UPIU_QUERY_OPCODE_READ_DESC	= 0x1,
--	UPIU_QUERY_OPCODE_WRITE_DESC	= 0x2,
--	UPIU_QUERY_OPCODE_READ_ATTR	= 0x3,
--	UPIU_QUERY_OPCODE_WRITE_ATTR	= 0x4,
--	UPIU_QUERY_OPCODE_READ_FLAG	= 0x5,
--	UPIU_QUERY_OPCODE_SET_FLAG	= 0x6,
--	UPIU_QUERY_OPCODE_CLEAR_FLAG	= 0x7,
--	UPIU_QUERY_OPCODE_TOGGLE_FLAG	= 0x8,
--};
--
- /* bRefClkFreq attribute values */
- enum ufs_ref_clk_freq {
- 	REF_CLK_FREQ_19_2_MHZ	= 0,
-@@ -205,21 +183,6 @@ enum {
- 	UPIU_COMMAND_SET_TYPE_QUERY	= 0x2,
- };
- 
--/* Flag idn for Query Requests*/
--enum flag_idn {
--	QUERY_FLAG_IDN_FDEVICEINIT			= 0x01,
--	QUERY_FLAG_IDN_PERMANENT_WPE			= 0x02,
--	QUERY_FLAG_IDN_PWR_ON_WPE			= 0x03,
--	QUERY_FLAG_IDN_BKOPS_EN				= 0x04,
--	QUERY_FLAG_IDN_LIFE_SPAN_MODE_ENABLE		= 0x05,
--	QUERY_FLAG_IDN_PURGE_ENABLE			= 0x06,
--	QUERY_FLAG_IDN_RESERVED2			= 0x07,
--	QUERY_FLAG_IDN_FPHYRESOURCEREMOVAL		= 0x08,
--	QUERY_FLAG_IDN_BUSY_RTC				= 0x09,
--	QUERY_FLAG_IDN_RESERVED3			= 0x0A,
--	QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE	= 0x0B,
--};
--
- /* Attribute idn for Query requests */
- enum attr_idn {
- 	QUERY_ATTR_IDN_BOOT_LU_EN		= 0x00,
-@@ -247,21 +210,6 @@ enum attr_idn {
- 	QUERY_ATTR_IDN_PSA_DATA_SIZE		= 0x16,
- };
- 
--/* Descriptor idn for Query requests */
--enum desc_idn {
--	QUERY_DESC_IDN_DEVICE		= 0x0,
--	QUERY_DESC_IDN_CONFIGURATION	= 0x1,
--	QUERY_DESC_IDN_UNIT		= 0x2,
--	QUERY_DESC_IDN_RFU_0		= 0x3,
--	QUERY_DESC_IDN_INTERCONNECT	= 0x4,
--	QUERY_DESC_IDN_STRING		= 0x5,
--	QUERY_DESC_IDN_RFU_1		= 0x6,
--	QUERY_DESC_IDN_GEOMETRY		= 0x7,
--	QUERY_DESC_IDN_POWER		= 0x8,
--	QUERY_DESC_IDN_HEALTH           = 0x9,
--	QUERY_DESC_IDN_MAX,
--};
--
- enum desc_header_offset {
- 	QUERY_DESC_LENGTH_OFFSET	= 0x00,
- 	QUERY_DESC_DESC_TYPE_OFFSET	= 0x01,
-diff --git a/include/ufs.h b/include/ufs.h
-index f6e27d90e43..da51988d93e 100644
---- a/include/ufs.h
-+++ b/include/ufs.h
-@@ -2,6 +2,64 @@
- #ifndef _UFS_H
- #define _UFS_H
- 
-+#include <linux/types.h>
++static struct ufs_config_desc g_cfg_desc;
++static int hba_id;
 +
-+/* Descriptor idn for Query requests */
-+enum desc_idn {
-+	QUERY_DESC_IDN_DEVICE		= 0x0,
-+	QUERY_DESC_IDN_CONFIGURATION	= 0x1,
-+	QUERY_DESC_IDN_UNIT		= 0x2,
-+	QUERY_DESC_IDN_RFU_0		= 0x3,
-+	QUERY_DESC_IDN_INTERCONNECT	= 0x4,
-+	QUERY_DESC_IDN_STRING		= 0x5,
-+	QUERY_DESC_IDN_RFU_1		= 0x6,
-+	QUERY_DESC_IDN_GEOMETRY		= 0x7,
-+	QUERY_DESC_IDN_POWER		= 0x8,
-+	QUERY_DESC_IDN_HEALTH           = 0x9,
-+	QUERY_DESC_IDN_MAX,
-+};
-+
-+/* Flag idn for Query Requests*/
-+enum flag_idn {
-+	QUERY_FLAG_IDN_FDEVICEINIT			= 0x01,
-+	QUERY_FLAG_IDN_PERMANENT_WPE			= 0x02,
-+	QUERY_FLAG_IDN_PWR_ON_WPE			= 0x03,
-+	QUERY_FLAG_IDN_BKOPS_EN				= 0x04,
-+	QUERY_FLAG_IDN_LIFE_SPAN_MODE_ENABLE		= 0x05,
-+	QUERY_FLAG_IDN_PURGE_ENABLE			= 0x06,
-+	QUERY_FLAG_IDN_RESERVED2			= 0x07,
-+	QUERY_FLAG_IDN_FPHYRESOURCEREMOVAL		= 0x08,
-+	QUERY_FLAG_IDN_BUSY_RTC				= 0x09,
-+	QUERY_FLAG_IDN_RESERVED3			= 0x0A,
-+	QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE	= 0x0B,
-+	QUERY_FLAG_IDN_F_WRITE_BOOSTER_EN               = 0x0E,
-+	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_EN                = 0x0F,
-+	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_HIBERN8           = 0x10
-+};
-+
-+enum ufs_desc_def_size {
-+	QUERY_DESC_DEVICE_DEF_SIZE		= 0x40,
-+	QUERY_DESC_CONFIGURATION_DEF_SIZE	= 0x90,
-+	QUERY_DESC_UNIT_DEF_SIZE		= 0x23,
-+	QUERY_DESC_INTERCONNECT_DEF_SIZE	= 0x06,
-+	QUERY_DESC_GEOMETRY_DEF_SIZE		= 0x48,
-+	QUERY_DESC_POWER_DEF_SIZE		= 0x62,
-+	QUERY_DESC_HEALTH_DEF_SIZE		= 0x25,
-+};
-+
-+/* UTP QUERY Transaction Specific Fields OpCode */
-+enum query_opcode {
-+	UPIU_QUERY_OPCODE_NOP		= 0x0,
-+	UPIU_QUERY_OPCODE_READ_DESC	= 0x1,
-+	UPIU_QUERY_OPCODE_WRITE_DESC	= 0x2,
-+	UPIU_QUERY_OPCODE_READ_ATTR	= 0x3,
-+	UPIU_QUERY_OPCODE_WRITE_ATTR	= 0x4,
-+	UPIU_QUERY_OPCODE_READ_FLAG	= 0x5,
-+	UPIU_QUERY_OPCODE_SET_FLAG	= 0x6,
-+	UPIU_QUERY_OPCODE_CLEAR_FLAG	= 0x7,
-+	UPIU_QUERY_OPCODE_TOGGLE_FLAG	= 0x8,
-+};
-+
- struct udevice;
- 
- /**
-@@ -20,4 +78,367 @@ int ufs_probe(void);
-  */
- int ufs_probe_dev(int index);
- 
-+/*
-+ * In a QUERY REQUEST UPIU, the Device Descriptor
-+ * is addressed setting: DESCRIPTOR IDN = 00h
-+ */
-+struct ufs_device_desc {
-+	u8 length;		/* Size of this descriptor */
-+	u8 descriptor_idn;	/* Descriptor Type Identifier (00h) */
-+	u8 device;		/* Device type (00h: Device) */
-+	u8 device_class;
-+	/* UFS Device Class (00h: Mass Storage) */
-+	u8 device_sub_class;
-+	/* UFS Mass Storage Subclass (e.g., 00h: Embedded Bootable) */
-+	u8 protocol;
-+	/* Protocol supported by UFS Device (00h: SCSI) */
-+	u8 number_lu;
-+	/* Number of Logical units (non-well known)  */
-+	u8 number_wlu;
-+	/* Number of Well known Logical units (MDV = 04h) */
-+	u8 boot_enable;	/* Boot Enable (01h: enabled) */
-+	u8 descr_access_en;
-+	/* Descriptor Access Enable during partial boot initialization */
-+
-+	/* --- power Management & Priority (Offset 0x0A) --- */
-+	u8 init_power_mode;
-+	/* Initial power Mode after device initi (00h: UFS-Sleep, 01h: */
-+	/*   Active) [4, 5] */
-+	u8 high_priority_lun;
-+	/* High Priority Logical unit (7Fh if all LUs have same priority) */
-+	u8 secure_removal_type;
-+	/* Secure Removal Type (00h: erase, 01h: overwrite/erase, etc.) */
-+	u8 security_lu;
-+	/* Support for security LU (01h: RPMB) */
-+	u8 background_ops_term_lat;
-+	/* Background Operations Termination Latency (in units of 10 ms) */
-+	u8 init_active_icc_level;
-+	/* Initial Active ICC Level after power on/reset (00h to 0Fh) */
-+
-+	/* --- Version, Naming, & configuration Pointers (Offset 0x10) --- */
-+	u16 spec_version;
-+	/* Specification version in BCD format (e.g., 3.1 = 0310h) */
-+	u16 manufacture_date;	/* Manufacturing Date in BCD format */
-+	u8 manufacturer_name;
-+	/* Index to the Manufacturer Name string descriptor */
-+	u8 product_name;
-+	/* Index to the Product Name string descriptor */
-+	u8 serial_number;
-+	/* Index to the Serial Number string descriptor */
-+	u8 oem_id;
-+	/* Index to the OEM ID string descriptor */
-+	u16 manufacturer_id;
-+	/* Manufacturer ID code and Bank Index (JEP106 definition) */
-+	u8 ud0_base_offset;
-+	/* Offset of unit Descriptor 0 configurable parameters within the */
-+	/* configuration Descriptor */
-+	u8 config_length;
-+	/* Total size of the configurable unit Descriptor parameters */
-+	u8 device_rtt_cap;
-+	/* Maximum number of outstanding Ready To Transfer (RTT) UPIUs */
-+	/* supported  (min 2) */
-+	u16 periodic_rtc_update;
-+	/* Frequency and method of Real-Time Clock update */
-+
-+	/* --- Feature Support & Device Status (Offset 0x1F) --- */
-+	u8 ufs_features_support;
-+	/* Bitmap indicating supported UFS features (FFU, PSA, etc.) */
-+	u8 ffu_timeout;
-+	/* Field Firmware Update Timeout (in seconds) */
-+	u8 queue_depth;
-+	/* Queue Depth (0: per-LU queueing; 1-255: shared queue depth) */
-+	u16 device_version;	/* Device Version */
-+	u8 num_secure_wp_area;
-+	/* Total number of Secure Write Protect */
-+	/* Areas supported (max 32) */
-+	u32 psa_max_data_size;
-+	/* PSA Maximum Data Size (in units of 4 Kbyte) */
-+	u8 psa_state_timeout;
-+	/* PSA State Timeout (max command timeout for b_psa_state change) */
-+	u8 product_revision_level;
-+	/* Index to the Product Revision Level string descriptor */
-+	u8 reserved_2bh[18];	/* reserved */
-+	u8 reserved_30h[19];
-+	/* Reserved for Unified Memory Extension standard */
-+	u8 reserved_40h[20];
-+	/* Reserved for Host Performance Booster (HPB) Extension Standard */
-+	u8 reserved_43h[21];	/* Reserved */
-+
-+	/* --- Extended Feature Support (Offset 0x4F) --- */
-+	u32 extended_ufs_features_support;
-+	/* Extended UFS Features Support (including WriteBooster, */
-+	/* offset 53h Performance Throttling) */
-+	u8 write_booster_buffer_preserve_user_space_en;
-+	/* offset 54h Preserve User Space mode for WriteBooster Buffer */
-+	u8 write_booster_buffer_type;
-+	/*  offset 55h WriteBooster Buffer Type
-+	 *  (0h:dedicated buffer,01h: shared buffer)
-+	 */
-+	u32 num_shared_write_booster_buffer_allocunits;
-+	/* WriteBooster Buffer size for shared configuration */
-+	/* (in Allocation units) */
-+} __packed;
-+
-+struct ufs_unit_desc {
-+	u8 length;		/* Size of this descriptor (Default: 2Dh) */
-+	u8 descriptor_idn;	/* unit Descriptor Type Identifier (02h) */
-+	u8 bunit_index;		/* The index of the Logical unit */
-+
-+	/* --- configuration Parameters --- */
-+	u8 lu_enable;		/* 01h: LU enabled, 00h: LU disabled */
-+	u8 boot_lun_id;
-+	/* 01h: Boot LU A, 02h: Boot LU B, 00h: Not bootable */
-+	u8 lu_write_protect;
-+	/* 01h: power-on WP, 02h: Permanent WP, 00h: None */
-+	u8 lu_queue_depth;
-+	/* LU-specific queue depth (0 if shared queuing is used) */
-+	u8 psa_sensitive;
-+	/* 01h: Sensitive to soldering, 00h: Not sensitive */
-+	u8 memory_type;
-+	/* Memory type (e.g., 00h: Normal, 01h: System Code) */
-+	u8 data_reliability;
-+	/* 01h: Data protected against power failure */
-+	u8 logical_block_size;
-+	/* Logical Block Size exponent (e.g., 0Ch = 4 Kbyte) */
-+
-+	/* --- Capacity and geometry --- */
-+	u64 logical_block_count;
-+	/* Total number of addressable logical blocks in the LU */
-+	u32 erase_block_size;
-+	/* Optimal granularity for erase/discard operations */
-+	u8 provisioning_type;
-+	/* 00h: Full, 02h: Thin (TPRZ=0), 03h: Thin (TPRZ=1) */
-+	u64 phy_mem_resource_count;
-+	/* Total physical memory resources available to the LU */
-+
-+	/* --- Performance and Extended Features --- */
-+	u16 context_capabilities;
-+	/* Bits [3:0]: MaxContextID; Bits [6:4]: Large unit Multiplier */
-+	u8 largeunit_granularity_M1;
-+	/* Large unit Granularity = 1MB * (value + 1) */
-+	u8 reserved[11];	/* Reserved for HPB Extension Standard */
-+	u32 lu_num_write_booster_buffer_allocunits;
-+	/* WriteBooster Buffer size in Allocation units */
-+} __packed;
-+
-+/*
++/**
++ * ufstool_probe_dev() - Get a UFS HBA instance
++ * @index: UFS device index
 + *
-+ * UFS Geometry Descriptor (IDN 07h)
-+ * Total Size: 87 bytes (0x57)
++ * Retrieves the UFS host bus adapter associated with @index.
++ *
++ * Return: Pointer to the UFS HBA on success, or NULL on failure.
 + */
-+struct ufs_geometry_desc {
-+	/* --- Descriptor Header (Offset 0x00) --- */
-+	u8 length;		/* Size of this descriptor (57h) */
-+	u8 descriptor_idn;	/* geometry Descriptor ID (07h) */
-+	u8 media_technology;	/* Reserved (00h) */
-+	u8 reserved_03h;	/* Reserved (00h) */
++static struct ufs_hba *ufstool_probe_dev(int index)
++{
++	struct udevice *dev;
++	struct ufs_hba *hba = NULL;
 +
-+	/* --- Capacity and Device geometry (Offset 0x04) --- */
-+	u64 total_raw_device_capacity; /* Total memory available (units of 512B) */
-+	u8 max_number_lu;	/* Max LUs: 00h (8 LUs) or 01h (32 LUs) */
-+	u32 segment_size;	/* Segment size (units of 512B) */
-+	u8 allocationunit_size;	/* Allocation unit Size (number of segments) */
-+	u8 min_addr_block_size;
-+	/* Min addressable block size (units of 512B, min 08h) */
-+	u8 optimal_read_block_size;	/* Optimal read granularity (units of 512B) */
-+	u8 optimal_write_block_size;	/* Optimal write granularity (units of 512B) */
-+	u8 max_in_buffer_size;	/* Max data-in buffer size (units of 512B) */
-+	u8 max_out_buffer_size;	/* Max data-out buffer size (units of 512B) */
-+	u8 rpmb_read_write_size;	/* Max RPMB frames (256B) per command */
-+	u8 dynamic_capacity_resource_policy;	/* 00h: per LU, 01h: per memory type */
-+	u8 data_ordering;	/* 01h: Out-of-order data transfer supported */
-+	u8 max_contex_id_number;	/* Maximum supported contexts (min 5) */
-+	u8 sys_data_tagunit_size;	/* Granularity for System Data Tagging */
-+	u8 sys_data_tag_res_size;	/* Max storage area for system data tagging */
-+	u8 supported_sec_r_types;	/* Bitmap of supported Secure Removal Types */
-+	u16 supported_memory_types;
-+	/* Bitmap of supported memory types (Normal, Enhanced, etc.) */
++	if (!uclass_get_device(UCLASS_UFS, index, &dev))
++		hba = dev_get_uclass_priv(dev);
 +
-+	/* --- Memory Type Capacity and Factors (Offset 0x20) --- */
-+	u32 system_code_max_n_alloc_u;
-+	/* Max Allocation units for System Code memory */
-+	u16 system_code_cap_adj_fac;
-+	/* Capacity Adjustment Factor for System Code */
-+	u32 non_persist_max_n_alloc_u;
-+	/* Max Allocation units for Non-Persistent memory */
-+	u16 non_persist_cap_adj_fac;
-+	/* Capacity Adjustment Factor for Non-Persistent */
-+	u32 enhanced1_max_n_alloc_u;
-+	/* Max Allocation units for Enhanced memory */
-+	/* Capacity Adjustment Factor for Enhanced */
-+	u16 enhanced1_cap_adj_fac;
-+	u32 enhanced2_max_n_alloc_u;
-+	/* Max Allocation units for Enhanced memory */
-+	/* Capacity Adjustment Factor for Enhanced */
-+	u16 enhanced2_cap_adj_fac;
-+	u32 enhanced3_max_n_alloc_u;
-+	/* Max Allocation units for Enhanced memory */
-+	/* Capacity Adjustment Factor for Enhanced */
-+	u16 enhanced3_cap_adj_fac;
-+	u32 enhanced4_max_n_alloc_u;
-+	/* Max Allocation units for Enhanced memory */
-+	/* Capacity Adjustment Factor for Enhanced */
-+	u16 enhanced4_cap_adj_fac;
-+	/* --- Performance Optimization (Offset 0x44) --- */
-+	/* Optimal Logical Block Size per memory type */
-+	u32 optimal_logical_block_size;
-+	u8  reserved_hpb[4]; // 48h: Reserved for HPB Extension
-+	u16 reserved2;   // 4Dh: Reserved
-+	/* WriteBooster Parameters */
-+	/* 4Fh: Max total WriteBooster Buffer size */
-+	u32 write_booster_buffer_max_alloc_units;
-+	/* 53h: Max LUs supporting WriteBooster (Valid: 1) */
-+	u8  device_max_write_booster_lus;
-+	/* 54h: LBA space reduction factor (e.g., 3 for TLC) */
-+	u8  write_booster_buffer_capadjfac;
-+	/* 55h: User space vs Preserve types */
-+	u8  supported_write_booster_buffer_userspace_reduction_types;
-+	/* 56h: LU based vs Shared buffer type */
-+	u8  supported_write_booster_buffer_types;
-+} __packed;
++	return hba;
++}
 +
 +/**
-+ * UFS configuration Descriptor - Header and Device configurable Parameters
-+ * Based on Table 14.10 (INDEX = 00h)
++ *
++ * ufshcd_query_desc_idn_device() - Read the UFS Device Descriptor
++ * @hba: UFS host bus adapter instance
++ * @desc: Pointer to device descriptor buffer
++ *
++ * Reads the Device Descriptor (IDN 0x00) from the attached UFS device
++ * and stores the contents in @desc.
++ *
++ * Return: 0 on success, negative error code on failure.
 + */
-+struct config_descriptor {
-+	/* --- Descriptor Header --- */
-+	u8 length;
-+	/* 00h: Size of this descriptor (MDV: E6h) */
-+	u8 descriptor_idn;
-+	/* 01h: configuration Descriptor Type ID (01h) */
++static int ufshcd_query_desc_device(struct ufs_hba *hba,
++				    struct ufs_device_desc *desc)
++{
++	int param_offset = 0;
++	int desc_index = 0;	/* LUNS 0-7 controlled by index 0 */
 +
-+	/* --- configuration Flow Control --- */
-+	u8 conf_desc_continue;
-+	/* 02h: 00h = Last descriptor (apply config); */
-+	/* 01h = More descriptors follow */
-+
-+	/* --- Device Descriptor configurable Parameters --- */
-+	u8 boot_enable;
-+	/* 03h: Enables boot feature (01h: enabled) */
-+	u8 descr_access_en;
-+	/* 04h: Enables Device Descriptor access after partial init */
-+	u8 initpower_mode;
-+	/* 05h: Initial power Mode after reset (01h: Active) */
-+	u8 high_priority_lun;
-+	/* 06h: LUN of the high priority logical unit */
-+	u8 secure_removal_type;
-+	/* 07h: configures secure removal (e.g., 00h: erase) */
-+	u8 init_active_icc_level;
-+	/* 08h: Initial ICC level after reset (00h-0Fh) */
-+	u16 periodic_rtc_update;
-+	/* 09h: Frequency/method of Real-Time Clock update */
-+	u8 reserved_HPB;
-+	/* 0Bh: Reserved for Host Performance Booster */
-+
-+	/* --- RPMB configuration Parameters --- */
-+	u8 rpmb_region_enable;
-+	/* 0Ch: Bitmask to enable RPMB regions 1-3 */
-+	u8 rpmb_region1_size;
-+	/* 0Dh: Size of RPMB region 1 in 128KB units */
-+	u8 rpmb_region2_size;
-+	/* 0Eh: Size of RPMB region 2 in 128KB units */
-+	u8 rpmb_region3_size;
-+	/* 0Fh: Size of RPMB region 3 in 128KB units */
-+
-+	/* --- WriteBooster configuration Parameters --- */
-+	u8 write_booster_buffer_preserve_user_space_en;
-+	/* 10h: 01h = Preserve user space */
-+	u8 write_booster_buffer_type;
-+	/* 11h: 00h = Dedicated LU; 01h = Shared */
-+	u32 num_shared_write_booster_buffer_allocunits;
-+	/* 12h: Shared buffer size in Alloc units */
-+} __packed;
++	return ufshcd_read_desc_param(hba, QUERY_DESC_IDN_DEVICE, desc_index,
++				      param_offset, (void *)desc,
++				      UFS_DESC_SIZE);
++}
 +
 +/**
-+ * UFS unit Descriptor configurable Parameters
-+ * Found within the configuration Descriptor (IDN: 01h)
-+ * Based on Table 14.12
++ * ufshcd_query_desc_geometry() - Read the UFS Geometry Descriptor
++ * @hba: UFS host bus adapter instance
++ * @desc: Pointer to geometry descriptor buffer
++ *
++ * Reads the Geometry Descriptor (IDN 0x07) from the attached UFS device
++ * and stores the contents in @desc.
++ *
++ * Return: 0 on success, negative error code on failure.
 + */
-+struct ufs_unit_cfg_parameters {
-+	u8 lu_enable;		/* 01h: Enabled, 00h: Disabled */
++static int ufshcd_query_desc_geometry(struct ufs_hba *hba,
++				      struct ufs_geometry_desc *desc)
++{
++	int param_offset = 0;
++	int desc_index = 0;
 +
-+	u8 boot_lun_id;		/* 0 Not Bootable,1-A or 2-B */
++	return ufshcd_read_desc_param(hba, QUERY_DESC_IDN_GEOMETRY, desc_index,
++				      param_offset, (void *)desc,
++				      QUERY_DESC_GEOMETRY_DEF_SIZE);
++}
 +
-+	/* 01h: Boot LU A, 02h: Boot LU B, 00h: Not bootable */
-+	u8 lu_write_protect;
-+	/* 00h: None, 01h: power-on WP, 02h: Permanent WP */
-+	u8 memory_type;
-+	/* Memory type (00h: Normal, 01h: System Code) */
++/**
++ * ufshcd_query_desc_config() - Read the UFS Configuration Descriptor
++ * @hba: UFS host bus adapter instance
++ * @cfg: Pointer to configuration descriptor buffer
++ *
++ * Reads the Configuration Descriptor (IDN 0x01) from the attached UFS
++ * device and stores the contents in @cfg.
++ *
++ * Return: 0 on success, negative error code on failure.
++ */
++static int ufshcd_query_desc_config(struct ufs_hba *hba,
++				    struct ufs_config_desc *cfg)
++{
++	int param_offset = 0;
++	int desc_index = 0;
++	int ret;
 +
-+	/* Number of allocation units assigned to the LU. */
-+	u32 num_allocunits;
++	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_CONFIGURATION,
++				     desc_index, param_offset,
++				     (void *)cfg,
++				     QUERY_DESC_CONFIGURATION_DEF_SIZE);
++	if (ret)
++		log_err("Failed to read config\n");
 +
-+	u8 data_reliability; /* 01h: Protected against power failure */
++	return ret;
++}
 +
-+	/* Block size exponent (e.g., 0Ch = 4 KB) */
-+	u8 logical_block_size;
++/**
++ * ufshcd_query_desc_power() - Read a UFS Power Parameters Descriptor
++ * @hba: UFS host bus adapter instance
++ * @lun: Logical unit number associated with the descriptor query
++ * @desc: Pointer to power parameters descriptor buffer
++ *
++ * Reads the Power Parameters Descriptor (IDN 0x08) from the attached
++ * UFS device and stores the contents in @desc.
++ *
++ * Return: 0 on success, negative error code on failure
++ */
++static int ufshcd_query_desc_power(struct ufs_hba *hba, int lun,
++				   struct ufs_power_param_desc *desc)
++{
++	int ret;
 +
-+	/* 00h: Full, 02h: Thin (TPRZ=0), 03h: Thin (TPRZ=1) */
-+	u8 provisioning_type;
++	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_POWER,
++				     lun, 0, (void *)desc, QUERY_DESC_POWER_DEF_SIZE);
 +
-+	u16 context_capabilities; /* LU Context support and multipliers */
++	if (ret) {
++		log_err("Err: UFS power Descriptor");
++		return ret;
++	}
 +
-+	u8 reserved_0dh[6];	/* Reserved */
++	return ret;
++}
 +
-+	u8 reserved_hpb[7];
-+	/* Reserved for Host Performance Booster Extension */
++/**
++ * ufshcd_query_desc__unit() - Read a UFS Unit Descriptor
++ * @hba: UFS host bus adapter instance
++ * @lun: Logical unit number
++ * @desc: Pointer to unit descriptor buffer
++ *
++ * Reads the Unit Descriptor (IDN 0x02) associated with @lun and stores
++ * the contents in @desc.
++ *
++ * Return: 0 on success, negative error code on failure.
++ */
++static int ufshcd_query_desc_unit(struct ufs_hba *hba, int lun,
++				  struct ufs_unit_desc *desc)
++{
++	int ret;
 +
-+	u32 lu_num_write_booster_buffer_allocunits;
-+	/* WriteBooster Buffer size in Allocation units. */
-+} __packed;
++	ret = ufshcd_read_desc_param(hba, QUERY_DESC_IDN_UNIT, lun, 0,
++				     (void *)desc, QUERY_DESC_UNIT_DEF_SIZE);
++	if (ret) {
++		log_err("Err: UFS unit Descriptor");
++		return ret;
++	}
 +
-+#define UFS_DESC_SIZE (unsigned char)0xff
++	return ret;
++}
 +
-+struct ufs_config_desc {
-+	struct config_descriptor cfg_desc;
++/**
++ * ufshcd_print_device_descriptor() - Print a UFS Device Descriptor
++ * @desc: Device descriptor to display
++ *
++ * Prints the contents of a Device Descriptor in a human-readable format.
++ */
++static void ufshcd_print_device_descriptor(struct ufs_device_desc *descriptor)
++{
++	u32 val = descriptor->num_shared_write_booster_buffer_allocunits;
++
++	printf("--- UFS Device Descriptor (IDN: 00h) ---\n");
++
++	printf(" Name | Value | Description\n");
++	printf("-----------------------------------------------------------\n");
++	/* Descriptor Header (Offset 00h – 01h) */
++	printf("Length | 0x%x\n", descriptor->length);
++	printf("DescriptorIdn | 0x%x\n", descriptor->descriptor_idn);
++
++	/* Device Identification & Core configuration (Offset 02h – 0Dh) */
++	printf("Device | 0x%x\n", descriptor->device);
++	printf("DeviceClass | 0x%x\n", descriptor->device_class);
++	printf("DeviceSubClass | 0x%x\n", descriptor->device_sub_class);
++	printf("protocol | 0x%x\n", descriptor->protocol);
++	printf("NumberLu | %d\n", descriptor->number_lu);
++	printf("NumberWLu | %d\n", descriptor->number_wlu);
++	printf("BootEnable | 0x%x\n", descriptor->boot_enable);
++	printf("DescrAccessEn | 0x%x\n", descriptor->descr_access_en);
++	printf("InitPowerMode | 0x%x\n", descriptor->init_power_mode);
++	printf("highPriorityLun | 0x%x\n",
++	       descriptor->high_priority_lun);
++	printf("SecureRemovalType | 0x%x\n",
++	       descriptor->secure_removal_type);
++	printf("SecurityLu | 0x%x\n", descriptor->security_lu);
++
++	/* power Management, Version & Pointers (Offset 0Eh – 2Ah) */
++	printf("b_background_ops_term_lat | 0x%x\n",
++	       descriptor->background_ops_term_lat);
++	printf("b_init_active_icc_level | 0x%x\n",
++	       descriptor->init_active_icc_level);
++	printf("SpecVersion | 0x%x\n",
++	       __builtin_bswap16(descriptor->spec_version));
++	printf("ManufactureDate | 0x%x\n", descriptor->manufacture_date);
++	printf("ManufacturerName | 0x%x\n", descriptor->manufacturer_name);
++	printf("ProductName | 0x%x\n", descriptor->product_name);
++	printf("SerialNumber | 0x%x\n", descriptor->serial_number);
++	printf("OEMId | 0x%x\n", descriptor->oem_id);
++	printf("ManufacturerId | 0x%x\n", descriptor->manufacturer_id);
++	printf("Ud0BaseOffset | %d\n", descriptor->ud0_base_offset);
++	printf("DConfigLength | %d\n",
++	       descriptor->config_length);
++	printf("DeviceRttCap | 0x%x\n", descriptor->device_rtt_cap);
++	printf("PeriodicRtcUpdate | 0x%x\n",
++	       descriptor->periodic_rtc_update);
++	printf("UfsFeaturesSupport | 0x%x\n",
++	       descriptor->ufs_features_support);
++	printf("FfuTimeout | %d\n", descriptor->ffu_timeout);
++	printf("QueueDepth | %d\n", descriptor->queue_depth);
++	printf("DeviceVersion | 0x%x\n", descriptor->device_version);
++	printf("NumSecureWpArea | 0x%x\n",
++	       descriptor->num_secure_wp_area);
++	printf("PsaMaxDataSize | 0x%x\n",
++	       descriptor->psa_max_data_size);
++	printf("PsaStateTimeout | 0x%x\n",
++	       descriptor->psa_state_timeout);
++	printf("ProductRevisionLevel | 0x%x\n",
++	       descriptor->product_revision_level);
++
++	/* Extended Features (Offset 4Fh – 58h) */
++	printf("ExtendedUfsFeaturesSupport ");
++	printf("| 0x%x |(includes  WriteBooster/Throttling)\n",
++	       be32_to_cpu(descriptor->extended_ufs_features_support));
++
++	printf("WriteBoosterBufferPreserveUserSpaceEn");
++	printf("| 0x%x | Preserve User Space mode for WriteBooster Buffer\n",
++	       descriptor->write_booster_buffer_preserve_user_space_en);
++
++	printf("write booster buffer type");
++	printf("| 0x%x | WriteBooster Buffer Type",
++	       descriptor->write_booster_buffer_type);
++	puts("(00h: LU dedicated, 01h: shared)\n");
++
++	printf("NumSharedWriteBooster_buffer_allocunits |");
++	printf("%d | Shared WriteBooster Buf size (in Allocation units)\n",
++	       be32_to_cpu(val));
++}
++
++/**
++ *
++ * ufshcd_print_idn_geometry_desc() - Print a UFS Geometry Descriptor
++ * @desc: Geometry descriptor to display
++ *
++ * Prints the contents of a Geometry Descriptor in a human-readable format.
++ */
++static void ufshcd_print_idn_geometry_desc(struct ufs_geometry_desc *desc)
++{
++	u64 cap = be64_to_cpu(desc->total_raw_device_capacity);
++
++	cap = ((cap << 9) >> 30);
++
++	printf("--- UFS geometry Descriptor (IDN: 07h) ---\n");
++	printf(" Name   | Value              | Description\n");
++	printf("-------------------------------------------------------\n");
++
++	/* Header and Core Capacity (Offset 00h - 0Ch) */
++	printf("Length | 0x%x  | Size of descriptor\n", desc->length);
++	printf("DescriptorIdn   | 0x%x | geometry Descriptor ID\n",
++	       desc->descriptor_idn);
++	printf("MediaTechnology | 0x%x | Reserved (00h)\n",
++	       desc->media_technology);
++
++	printf("TotalRawDeviceCapacity | %lld GB\n", cap);
++
++	printf("MaxNumberLu | %d | Max LUs (00h: 8, 01h: 32)\n",
++	       desc->max_number_lu);
++
++	/* Segment and Allocation unit constraints (Offset 0Dh - 12h) */
++	printf("SegmentSize | %d | Segment size (512B units)\n",
++	       be32_to_cpu(desc->segment_size));
++
++	printf("AllocationunitSize | %d | Alloc unit size (in segments)\n",
++	       desc->allocationunit_size);
++
++	printf("MinAddrBlockSize | %d | Min addressable block size\n",
++	       desc->min_addr_block_size);
++
++	/* Performance and Buffer parameters (Offset 13h - 17h) */
++	printf("OptimalReadBlockSize");
++	printf("| %d | Optimal read size (512B units)\n",
++	       desc->optimal_read_block_size);
++
++	printf("OptimalWriteBlockSize ");
++	printf("| 0x%x | Optimal write size (512B units)\n",
++	       desc->optimal_write_block_size);
++
++	printf("MaxInBufferSize | 0x%x | Max Data-In buffer (512B units)\n",
++	       desc->max_in_buffer_size);
++
++	printf("MaxOutBufSize | 0x%x | Max Data-Out buffer (512B)\n",
++	       desc->max_out_buffer_size);
++
++	printf("bRPMBReadWriteSize | 0x%x | Max RPMB frames per command\n",
++	       desc->rpmb_read_write_size);
++
++	/* Feature Support Bitmaps (Offset 18h - 1Fh) */
++	printf("DynamicCapacityResourcePolicy| 0x%x |",
++	       desc->dynamic_capacity_resource_policy);
++
++	printf("00h: per LU, 01h: per Memory Type\n");
++	printf("DataOrdering | 0x%x | 01h: Out-of-order supported\n",
++	       desc->data_ordering);
++	printf("MaxContexIdNumber | 0x%x | Max supported contexts (min 5)\n",
++	       desc->max_contex_id_number);
++
++	printf("SysDataTagUnitSize | 0x%x | System data tag granularity\n",
++	       desc->sys_data_tagunit_size);
++
++	printf("SysDataTagResSize  | 0x%x | Max area for tagged system data\n",
++	       desc->sys_data_tag_res_size);
++
++	printf("SupportedSecRTypes | 0x%x | Supported secure removal types\n",
++	       desc->supported_sec_r_types);
++
++	printf("SupportedMemoryTypes | 0x%x | Bitmap of memory types\n",
++	       be16_to_cpu(desc->supported_memory_types));
 +	/*
-+	 * NOTE: For INDEX = 00h, configurable parameters
-+	 * for unit Descriptors 0 to 7
++	 * Memory Type Specific Capacities and Adjustment Factors
 +	 */
-+	/* follow this header at the offset defined
-+	 * by b_ud0_base_offset
-+	 */
-+	unsigned char space[UFS_DESC_SIZE];
-+} __packed;
++	printf("SystemCodeMaxNAlloc | 0x%x | Max Alloc units\n",
++	       desc->system_code_max_n_alloc_u);
++
++	printf("SystemCodeCapAdjFac | 0x%x | cap_adj_factor: System Code\n",
++	       desc->system_code_cap_adj_fac);
++
++	printf("NonPersistMaxNAlloc | 0x%x | Max Alloc units: Non-Persist\n",
++	       desc->non_persist_max_n_alloc_u);
++
++	printf("NonPersistCapAdjFac   | 0x%x | cap_adj_factor: Non-Persist\n",
++	       desc->non_persist_cap_adj_fac);
++
++	printf("Enhanced1MaxNAlloc | %d | Max Alloc units: Enhanced 1\n",
++	       be32_to_cpu(desc->enhanced1_max_n_alloc_u));
++
++	printf("Enhanced1CapAdjFac | %d | cap_adj_factor: Enhanced 1\n",
++	       be16_to_cpu(desc->enhanced1_cap_adj_fac));
++
++	printf("Enhanced2MaxNAlloc_u | %d | Max Alloc units: Enhanced 2\n",
++	       be32_to_cpu(desc->enhanced2_max_n_alloc_u));
++
++	printf("Enhanced2CapAdjFac | %d | cap_adj_factor: Enhanced 2\n",
++	       be16_to_cpu(desc->enhanced2_cap_adj_fac));
++	printf("Enhanced3MaxNAlloc | %d | Max Alloc units: Enhanced 3\n",
++	       be32_to_cpu(desc->enhanced3_max_n_alloc_u));
++
++	printf("Enhanced3CapAdjFac | %d | cap_adj_factor: Enhanced 3\n",
++	       be32_to_cpu(desc->enhanced3_cap_adj_fac));
++
++	printf("Enhanced4MaxNAlloc | %d | Max Alloc units: Enhanced 4\n",
++	       be32_to_cpu(desc->enhanced4_max_n_alloc_u));
++
++	printf("Enhanced4CapAdjFac | %d | cap_adj_factor: Enhanced 4\n",
++	       be16_to_cpu(desc->enhanced4_cap_adj_fac));
++
++	/* Performance and WriteBooster (Offset 44h - 56h) */
++	printf("OptimalLogicalBlockSize | %d | Optimal Blk Size per type\n",
++	       be32_to_cpu(desc->optimal_logical_block_size));
++
++	printf("WriteBoosterBufferMaxNAllocunits");
++	printf("| %u | Max tot WB buf size\n",
++	       be32_to_cpu(desc->write_booster_buffer_max_alloc_units));
++
++	printf("DeviceMaxWriteBoosterLus ");
++	printf("| %d | Max LUs supporting WB (MDV:1)\n",
++	       desc->device_max_write_booster_lus);
++
++	printf("WriteBoosterBufferCapAdjFac");
++	printf("| %d | WB Capacity Adjustment Factor\n",
++	       desc->write_booster_buffer_capadjfac);
++
++	printf("SupportedwbBufferUserSpaceReductionType");
++	printf(" | 0x%x | Reduction/Preserve mode support\n",
++	       desc->supported_write_booster_buffer_userspace_reduction_types);
++
++	printf("SupportedWriteBoosterBufferTypes");
++	printf("| 0x%x | 00h: LU based, 01h: Shared\n",
++	       desc->supported_write_booster_buffer_types);
++}
++
++static void ufshcd_print_config_descriptor(const struct config_descriptor *cd)
++{
++	if (!cd)
++		return;
++
++	printf("Config Descriptor: (0x%p)\n", (void *)cd);
++	printf("Length                          : 0x0%x\n", cd->length);
++	printf("DescriptorIdn                   : 0x0%x\n",
++	       cd->descriptor_idn);
++	printf("ConfDescContinue                : 0x0%x\n",
++	       cd->conf_desc_continue);
++
++	printf("BootEnable                      : 0x0%x\n",
++	       cd->boot_enable);
++	printf("DescrAccess_en                   : 0x0%x\n",
++	       cd->descr_access_en);
++	printf("InitPowerMode                   : 0x0%x\n",
++	       cd->initpower_mode);
++	printf("HighPriorityLun                 : 0x0%x\n",
++	       cd->high_priority_lun);
++	printf("SecureRemovalType               : 0x0%x\n",
++	       cd->secure_removal_type);
++	printf("InitActiveIccLevel              : 0x0%x\n",
++	       cd->init_active_icc_level);
++	printf("PeriodicRtcUpdate               : 0x0%x\n",
++	       cd->periodic_rtc_update);
++	printf("Reserved_HPB                    : 0x0%x\n",
++	       cd->reserved_HPB);
++
++	printf("RpmbRegionEnable                : 0x0%x\n",
++	       cd->rpmb_region_enable);
++	printf("RpmbRegion1Size                 : 0x0%x\n",
++	       cd->rpmb_region1_size);
++	printf("RpmbRegion2Size                 : 0x0%x\n",
++	       cd->rpmb_region2_size);
++	printf("RpmbRegion3Size                 : 0x0%x\n",
++	       cd->rpmb_region3_size);
++
++	printf("WriteBoosterBufferPreserveUserSpaceEN : 0x0%x\n",
++	       cd->write_booster_buffer_preserve_user_space_en);
++	printf("WriteBoosterBufferType           : 0x0%x\n",
++	       cd->write_booster_buffer_type);
++	printf("NumSharedWriteBoosterBufferAllocUnits : %d\n",
++	       be32_to_cpu(cd->num_shared_write_booster_buffer_allocunits));
++}
++
++static void ufshcd_print_unit_param_descriptor(struct ufs_unit_cfg_parameters *unit)
++{
++	/* Header segment (Offset 00h - 03h) */
++	printf("LuEnable  | 0x%x  | Enabled, 00h: Disabled\n",
++	       unit->lu_enable);
++	printf("BootLunId | 0x%x  | Boot LU A, 02h: Boot LU B\n",
++	       unit->boot_lun_id);
++	printf("LuWriteProtect | 0x%x | power-on, 02h: Permanent\n",
++	       unit->lu_write_protect);
++	printf("MemoryType| 0x%x | Normal, 01h: System Code\n",
++	       unit->memory_type);
++	/* Allocation and Sizing (Offset 04h - 0Ah) */
++	printf("NumAllocunits | %d | Number of Allocation units for LU\n",
++	       be32_to_cpu(unit->num_allocunits));
++	printf("DataReliability | 0x%x | power failure protection\n",
++	       unit->data_reliability);
++	printf("LogicalBlockSize | 0x%x | Block size exponent (Min: 0Ch)\n",
++	       unit->logical_block_size);
++	printf("ProvisioningType | 0x%x | Full, 02h/03h: Thin\n",
++	       unit->provisioning_type);
++
++	/* Context and HPB (Offset 0Bh - 15h) */
++	puts("ContextCapabilities");
++	printf("	| 0x%x | LU Context support/multipliers\n",
++	       unit->context_capabilities);
++	/* printf("Reserved  | --   | Reserved\n"); */
++	/* printf("Reserved (HPB) | -- | Reserved for HPB Extension\n"); */
++	/* WriteBooster (Offset 16h) */
++	printf("LuNumWriteBoosterBufferAllocunits");
++	printf("| %d | WB Buffer size (LUs 0-7 only)\n",
++	       be32_to_cpu(unit->lu_num_write_booster_buffer_allocunits));
++}
 +
 +/**
-+ * UFS power Parameter Element Format
-+ * Based on Table 7.13
++ * ufshcd_clearall_luns() - Clear all LUN configuration entries
++ * @user_cfg: Configuration descriptor to update
++ * @base_offset: Offset of the first LUN configuration entry
++ * @config_length: Size of each LUN configuration entry
++ *
++ * Resets all configurable LUN entries to their default values.
 + */
-+struct ufs_power_parameter_element {
-+	/* Bits [15:14]: unit (00b:n_a, 01b:u_a, 10b:m_a, 11b:A) */
-+	/* Bits [13:10]: Reserved (0000b) */
-+	/* Bits [9:0]:   Value (Maximum current expected) */
-+	u16 upower_value;
-+};
++static void ufshcd_clearall_luns(struct ufs_config_desc *user_cfg,
++				 u32 base_offset, u32 config_length)
++{
++	struct ufs_unit_cfg_parameters *unit;
++	u8 *config = (u8 *)user_cfg;
++	int off;
++	int i;
++
++	for (i = 0; i < 8; i++) {
++		off = base_offset + (i * config_length);
++
++		unit = (struct ufs_unit_cfg_parameters *)&config[off];
++
++		unit->num_allocunits = cpu_to_be32(0);
++		unit->memory_type = 0;
++		unit->lu_enable = 0;
++		unit->boot_lun_id = 0;
++		unit->logical_block_size = 0xC;
++		unit->data_reliability = 0;
++		unit->provisioning_type = 0;
++		unit->context_capabilities = cpu_to_be16(0);
++		unit->lu_num_write_booster_buffer_allocunits = cpu_to_be32(0);
++	}
++}
 +
 +/**
-+ * UFS power Parameters Descriptor (IDN: 08h)
-+ * Based on Table 14.16
++ * calc_lun_capacity() - Calculate configured LUN capacity
++ * @unit: LUN configuration entry
++ * @geometry: Device geometry descriptor
++ *
++ * Calculates the effective LUN capacity from allocation units and
++ * geometry descriptor parameters.
++ *
++ * Return: Capacity in MiB.
 + */
-+struct ufs_power_param_desc {
-+	/* Offset 00h */
-+	u8 length;		/* Size of descriptor (62h) */
-+	u8 descriptor_idn;	/* Descriptor Type ID (08h) */
++static u32 calc_lun_capacity(struct ufs_unit_cfg_parameters *unit,
++			     struct ufs_geometry_desc *geometry)
++{
++	u16 cap_adj_fac = 1;
++	u64 cap_adj_facfl = 1;
++	u64 lun_capacity;
 +
-+	/* Offset 02h: Maximum current for VCC (16 levels) */
-+	struct ufs_power_parameter_element active_icc_levels_vcc[5];
-+	/* Offset 22h: Maximum current for VCCQ (16 levels) */
-+	struct ufs_power_parameter_element active_icc_levels_vccq[5];
-+	/* Offset 42h: Maximum current for VCCQ2 (16 levels) */
-+	struct ufs_power_parameter_element active_icc_levels_vccq2[5];
-+} __packed;
++	switch (unit->memory_type) {
++	case 0:	/* Normal */
++		cap_adj_fac = 1;
++		break;
++	case 1:
++		cap_adj_fac = be16_to_cpu(geometry->system_code_cap_adj_fac);
++		break;
++	case 2:
++		cap_adj_fac = be16_to_cpu(geometry->non_persist_cap_adj_fac);
++		break;
++	case 3:
++		cap_adj_fac = be16_to_cpu(geometry->enhanced1_cap_adj_fac);
++		break;
++	case 4:
++		cap_adj_fac = be16_to_cpu(geometry->enhanced2_cap_adj_fac);
++		break;
++	case 5:
++		cap_adj_fac = be16_to_cpu(geometry->enhanced3_cap_adj_fac);
++		break;
++	case 6:
++		cap_adj_fac = be16_to_cpu(geometry->enhanced4_cap_adj_fac);
++		break;
++	default:
++		log_err("ilegal memory type\n");
++	}
 +
-+struct ufs_hba;
++	if (unit->memory_type) {
++		/* See geometry Descriptor/cap_adj_fac in Jedec. */
++		cap_adj_facfl = cap_adj_fac >> 8;
++	}
 +
-+int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
-+			   int desc_index, u8 param_offset,
-+			   u8 *param_read_buf, u8 param_size);
-+void ufshcd_cache_flush(void *addr, unsigned long size);
-+int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
-+		      enum flag_idn idn, bool *flag_res);
-+int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
-+				  enum desc_idn idn, u8 index,
-+				  u8 selector, u8 *desc_buf, int *buf_len);
- #endif
++	lun_capacity = 512 * (u64)be32_to_cpu(unit->num_allocunits) *
++		    geometry->allocationunit_size *
++		    (u64)be32_to_cpu(geometry->segment_size);
++	lun_capacity = div_u64(lun_capacity, cap_adj_facfl);
++
++	return (u32)(lun_capacity >> 20);
++}
++
++/**
++ * ufs_tool_print_luns() - Display configured LUNs
++ *
++ * Prints all enabled logical units and their calculated capacities.
++ *
++ * Return: %CMD_RET_SUCCESS on success or %CMD_RET_FAILURE on failure.
++ */
++static int ufs_tool_print_luns(void)
++{
++	struct ufs_geometry_desc geometry;
++	struct ufs_device_desc device_desc;
++	struct ufs_hba *hba;
++	const int COL_WIDTH  = 14;
++	u8 *config;
++	int i;
++
++	hba = ufstool_probe_dev(hba_id);
++	if (!hba) {
++		log_err("ufs_tool: Failed to get hba\n");
++		return CMD_RET_FAILURE;
++	}
++
++	if (g_cfg_desc.cfg_desc.length == 0 &&
++	    ufshcd_query_desc_config(hba, &g_cfg_desc))
++		return CMD_RET_FAILURE;
++
++	if (ufshcd_query_desc_device(hba, &device_desc)) {
++		log_err("Failed to read DeviceConfig IDN\n");
++		return CMD_RET_FAILURE;
++	}
++
++	if (ufshcd_query_desc_geometry(hba, &geometry)) {
++		log_err("Failed to read Geometry IDN\n");
++		return CMD_RET_FAILURE;
++	}
++
++	config = (u8 *)&g_cfg_desc;
++
++	for (i = 0; i < 8; i++) {
++		struct ufs_unit_cfg_parameters *unit;
++		char buf[32];
++		int off;
++
++		off = device_desc.ud0_base_offset +
++		      (i * device_desc.config_length);
++
++		unit = (struct ufs_unit_cfg_parameters *)&config[off];
++		if (unit->lu_enable != 1)
++			continue;
++
++		snprintf(buf, sizeof(buf), "LUN %d", i);
++		printf("| %-*s", COL_WIDTH - 2, buf);
++	}
++
++	printf("|\n");
++
++	for (i = 0; i < 8; i++) {
++		struct ufs_unit_cfg_parameters *unit;
++		char size_str[32];
++		int off;
++		s64 mb;
++
++		off = device_desc.ud0_base_offset + (i * device_desc.config_length);
++		unit = (struct ufs_unit_cfg_parameters *)&config[off];
++
++		if (unit->lu_enable != 1)
++			continue;
++
++		mb = calc_lun_capacity(unit, &geometry);
++		snprintf(size_str, sizeof(size_str), "%lld MB", mb);
++		printf("| %-*s", COL_WIDTH - 2, size_str);
++	}
++
++	printf("|\n");
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufshcd_print_desc_config() - Display configuration descriptor data
++ * @user_cfg: Configuration descriptor to display
++ * @geometry: Geometry descriptor used for capacity calculations
++ * @base_offset: Offset of first unit configuration entry
++ * @config_ength: Size of each unit configuration entry
++ *
++ * Prints the configuration descriptor and all configured LUN entries.
++ */
++static void ufshcd_print_desc_config(struct ufs_config_desc *user_cfg,
++				     struct ufs_geometry_desc *geometry,
++				     u32 base_offset, u32 config_ength)
++{
++	struct ufs_unit_cfg_parameters *unit;
++	u8 *config = (u8 *)user_cfg;
++	u32 mb;
++	int off;
++	int i;
++
++	ufshcd_print_config_descriptor(&user_cfg->cfg_desc);
++	for (i = 0; i < 8; i++) {
++		off = base_offset + (i * config_ength);
++
++		unit = (struct ufs_unit_cfg_parameters *)&config[off];
++		mb = calc_lun_capacity(unit, geometry);
++		printf("-------------------------------------------------\n");
++		printf("LUN %d Capacity %d MB\n", i, mb);
++		printf("Name  | Value      | Description\n");
++		printf("-------------------------------------------------\n");
++		ufshcd_print_unit_param_descriptor(unit);
++	}
++}
++
++static void print_power_element(struct ufs_power_parameter_element desc)
++{
++	static const char * const units[] = { "n_a", "u_a", "m_a", "A" };
++	u16 element = desc.upower_value;
++
++	u8 unit_code = (element >> 14) & 0x03;
++	u16 value = element & 0x03FF;
++
++	printf("%d %s", value, units[unit_code]);
++}
++
++/**
++ *
++ * ufshcd_print_power_params() - Print a UFS Power Parms Descriptor
++ * @desc: ufs_power_param_desc
++ *
++ * Prints the contents of ufs_power_param_desc Descriptor in a human-readable format.
++ */
++static void ufshcd_print_power_params(struct ufs_power_param_desc *desc)
++{
++	printf("--- UFS power Parameters Descriptor (IDN: 08h) ---\n");
++	printf("Descriptor Length: 0x%x (%u bytes)\n", desc->length, desc->length);
++	printf("Descriptor IDN:    0x%x\n\n", desc->descriptor_idn);
++
++	printf("Level | VCC Current | VCCQ Current | VCCQ2 Current\n");
++	printf("--------------------------------------------------\n");
++
++	for (int i = 0; i < 5; i++) {
++		printf(" %x  | ", i);
++		/* Accessing the  levels for each supply (VCC, VCCQ, VCCQ2) */
++		/* Values represent worst-case maximum peak current */
++		print_power_element(desc->active_icc_levels_vcc[i]);
++		printf("      | ");
++		print_power_element(desc->active_icc_levels_vccq[i]);
++		printf("       | ");
++		print_power_element(desc->active_icc_levels_vccq2[i]);
++		printf("\n");
++	}
++}
++
++/**
++ * ufshcd_print_unit_descriptor() - Print a UFS Unit Descriptor
++ * @desc: Unit descriptor to display
++ *
++ * Prints the contents of a Unit Descriptor in a human-readable format.
++ *
++ */
++static void ufshcd_print_unit_desc(struct ufs_unit_desc *desc)
++{
++	printf("--- UFS unit Descriptor (IDN: 02h) ---\n");
++	printf(" Name   | Value              | Description\n");
++	printf("---------------------------------------------\n");
++
++	/* Descriptor Header */
++	printf("Length | %d    | Size of descriptor\n", desc->length);
++	printf("DescriptorIdn | 0x%x | unit Descriptor ID\n",
++	       desc->descriptor_idn);
++	printf("BunitIndex     | 0x%x | Logical unit Index\n",
++	       desc->bunit_index);
++
++	/* configuration Parameters */
++	printf("luEnable | 0x%x | LU Enabled (01h) or Disabled (00h)\n",
++	       desc->lu_enable);
++	printf("BootLunId | 0x%x| Boot LU ID (01h: A, 02h: B\n",
++	       desc->boot_lun_id);
++	printf("luWriteProtect | 0x%x | WP (01h: power-on, 02h: Perm)\n",
++	       desc->lu_write_protect);
++	printf("luQueueDepth | 0x%x | Queue depth (0 if shared)\n",
++	       desc->lu_queue_depth);
++	printf("psaSensitive | 0x%x  | Soldering sensitivity indicator\n",
++	       desc->psa_sensitive);
++	printf("MemoryType | 0x%x  | Memory type (00h: Normal\n",
++	       desc->memory_type);
++	printf("DataReliability | 0x%x | power failure protection enabled\n",
++	       desc->data_reliability);
++	printf("LogicalBlockSize| 0x%x | Block size exponent (2^n)\n",
++	       desc->logical_block_size);
++
++	printf("LogicalBlockCount | %d %d | Total addressable blocks\n",
++	       be32_to_cpu(upper_32_bits(desc->logical_block_count)),
++	       be32_to_cpu(lower_32_bits(desc->logical_block_count)));
++	printf("EraseBlockSize | 0x%x | Optimal erase granularity\n",
++	       desc->erase_block_size);
++	printf("ProvisioningType | 0x%x | 00h: Full, 02h/03h: Thin\n",
++	       desc->provisioning_type);
++	printf("phyMemResourceCount| %d %d  Available physical resources\n",
++	       lower_32_bits(desc->phy_mem_resource_count),
++	       upper_32_bits(desc->phy_mem_resource_count));
++
++	printf("ContextCapabilities | 0x%x | Context ID & LU Multiplier\n",
++	       desc->context_capabilities);
++	printf("LargeunitGranularity_M1|");
++	printf("0x%x | Large unit granularity minus one\n",
++	       desc->largeunit_granularity_M1);
++	puts("luNumWriteBoosterBufferAllocunits");
++	printf(" | %d | WB Buffer size in Alloc units\n",
++	       be32_to_cpu(desc->lu_num_write_booster_buffer_allocunits));
++}
++
++static int set_param_field(struct ufs_unit_cfg_parameters *ud,
++			   const char *name, u32 value)
++{
++	if (!strcmp(name, "boot_lun_id"))
++		ud->boot_lun_id = (u8)value;
++	else if (!strcmp(name, "lu_enable"))
++		ud->lu_enable = (u8)value;
++	else if (!strcmp(name, "lu_write_protect"))
++		ud->lu_write_protect = (u8)value;
++	else if (!strcmp(name, "memory_type"))
++		ud->memory_type = (u8)value;
++	else if (!strcmp(name, "data_reliability"))
++		ud->data_reliability = (u8)value;
++	else if (!strcmp(name, "num_allocunits"))
++		ud->num_allocunits = cpu_to_be32(value);
++	else if (!strcmp(name, "provisioning_type"))
++		ud->provisioning_type = (u8)value;
++	else if (!strcmp(name, "context_capabilities"))
++		ud->context_capabilities = cpu_to_be16(value);
++	else if (!strcmp(name, "lu_num_write_booster_buffer_allocunits"))
++		ud->lu_num_write_booster_buffer_allocunits = cpu_to_be32(value);
++	else
++		return CMD_RET_FAILURE;
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufshcd_get_lun() - Display a LUN configuration entry
++ * @hba: UFS host controller instance
++ * @lun: Logical unit number
++ *
++ * Return: Command status.
++ */
++static int ufshcd_get_lun(struct ufs_hba *hba, int lun)
++{
++	struct ufs_unit_cfg_parameters *unit;
++	struct ufs_device_desc dev_desc;
++	u8 *config;
++	int off;
++
++	// Populate descriptor
++	if (g_cfg_desc.cfg_desc.length == 0 &&
++	    ufshcd_query_desc_config(hba, &g_cfg_desc))
++		return CMD_RET_FAILURE;
++
++	if (ufshcd_query_desc_device(hba, &dev_desc)) {
++		log_err("Failed to read IDN DeviceDesc IDN\n");
++		return CMD_RET_FAILURE;
++	}
++
++	config = (__u8 *)&g_cfg_desc;
++	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
++	unit = (struct ufs_unit_cfg_parameters *)&config[off];
++	ufshcd_print_unit_param_descriptor(unit);
++	return CMD_RET_FAILURE;
++}
++
++/**
++ * ufshcd_clear_lun() - Reset a LUN configuration entry
++ * @hba: UFS host controller instance
++ * @lun: Logical unit number
++ *
++ * Clears the specified LUN configuration.
++ *
++ * Return: Command status.
++ */
++static int ufshcd_clear_lun(struct ufs_hba *hba, int lun)
++{
++	struct ufs_unit_cfg_parameters *unit;
++	struct ufs_device_desc dev_desc;
++	u8 *config;
++	int off;
++
++	// Populate descriptor
++	if (g_cfg_desc.cfg_desc.length == 0 &&
++	    ufshcd_query_desc_config(hba, &g_cfg_desc))
++		return CMD_RET_FAILURE;
++
++	if (ufshcd_query_desc_device(hba, &dev_desc)) {
++		log_err("Failed to read IDN DeviceDesc IDN\n");
++		return CMD_RET_FAILURE;
++	}
++
++	config = (__u8 *)&g_cfg_desc;
++	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
++	unit = (struct ufs_unit_cfg_parameters *)&config[off];
++	memset(unit, 0x00, sizeof(*unit));
++	unit->logical_block_size = 0xC;
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufshcd_update_lun() - Update a LUN configuration field
++ * @hba: UFS host controller instance
++ * @lun: Logical unit number
++ * @field: Configuration field name
++ * @val: New field value
++ *
++ * Return: Command status.
++ */
++static int ufshcd_update_lun(struct ufs_hba *hba, int lun,
++			     const char *field, u32 val)
++{
++	struct ufs_unit_cfg_parameters *unit;
++	struct ufs_device_desc dev_desc;
++	u8 *config;
++	int off;
++
++	// Populate descriptor
++	if (g_cfg_desc.cfg_desc.length == 0 &&
++	    ufshcd_query_desc_config(hba, &g_cfg_desc))
++		return CMD_RET_FAILURE;
++
++	if (ufshcd_query_desc_device(hba, &dev_desc)) {
++		log_err("Failed to read IDN DeviceDesc IDN\n");
++		return CMD_RET_FAILURE;
++	}
++
++	config = (__u8 *)&g_cfg_desc;
++	off = dev_desc.ud0_base_offset + (lun * dev_desc.config_length);
++	unit = (struct ufs_unit_cfg_parameters *)&config[off];
++	if (set_param_field(unit, field, val)) {
++		log_err("Ilegal value to set %s\n", field);
++		return CMD_RET_FAILURE;
++	}
++	ufshcd_print_unit_param_descriptor(unit);
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufshcd_write_desc_param() - Write a UFS descriptor
++ * @hba: UFS host controller instance
++ * @desc_id: Descriptor identifier
++ * @desc_index: Descriptor index
++ * @param_offset: Descriptor offset
++ * @param_write_buf: Data to write
++ * @param_size: Size of data buffer
++ *
++ * Return: 0 on success or negative error code on failure.
++ */
++static int ufshcd_write_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++				   int desc_index, unsigned char param_offset,
++				   unsigned char *param_write_buf,
++				   unsigned char param_size)
++{
++	int ret;
++	int buff_len;
++	int selector = 0;
++
++	if (desc_id >= QUERY_DESC_IDN_MAX || !param_size)
++		return -EINVAL;
++
++	buff_len = param_size;
++	ret = ufshcd_query_descriptor_retry(hba, UPIU_QUERY_OPCODE_WRITE_DESC,
++					    desc_id, desc_index, selector,
++					    param_write_buf, &buff_len);
++	if (!ret)
++		return 0;
++	log_err("Err: desc_id %d desc_index %d, param_offset %d,buflen %d,ret=%d\n",
++		(unsigned int)desc_id, desc_index, (unsigned int)param_offset, buff_len, ret);
++
++	return ret;
++}
++
++static enum flag_idn ufshcd_get_flag(const char *name)
++{
++	if (!strcmp(name, "deviceinit"))
++		return QUERY_FLAG_IDN_FDEVICEINIT;
++
++	if (!strcmp(name, "permanent_wpe"))
++		return QUERY_FLAG_IDN_PERMANENT_WPE;
++
++	if (!strcmp(name, "pwr_on_wpe"))
++		return QUERY_FLAG_IDN_PWR_ON_WPE;
++
++	if (!strcmp(name, "bkops_en"))
++		return QUERY_FLAG_IDN_BKOPS_EN;
++
++	if (!strcmp(name, "life_span_mode"))
++		return QUERY_FLAG_IDN_LIFE_SPAN_MODE_ENABLE;
++
++	if (!strcmp(name, "purge_enable"))
++		return QUERY_FLAG_IDN_PURGE_ENABLE;
++
++	if (!strcmp(name, "fphy_resource_removal"))
++		return QUERY_FLAG_IDN_FPHYRESOURCEREMOVAL;
++
++	if (!strcmp(name, "busy_rtc"))
++		return QUERY_FLAG_IDN_BUSY_RTC;
++
++	if (!strcmp(name, "permanently_disable_fw_update"))
++		return QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE;
++
++	if (!strcmp(name, "write_booster_en"))
++		return QUERY_FLAG_IDN_F_WRITE_BOOSTER_EN;
++
++	if (!strcmp(name, "wb_buf_flush_en"))
++		return QUERY_FLAG_IDN_F_WB_BUF_FLUSH_EN;
++
++	if (!strcmp(name, "wb_buf_flush_h8"))
++		return QUERY_FLAG_IDN_F_WB_BUF_FLUSH_HIBERN8;
++
++	return -EINVAL;
++}
++
++/**
++ * ufshcd_query_user_flag() - Read a UFS flag attribute
++ * @hba: UFS host bus adapter instance
++ * @flag_name: Name of the flag to query
++ *
++ * Translates @flag_name to the corresponding UFS flag identifier,
++ * reads the flag value from the device and prints the result.
++ *
++ * Return: 0 on success, negative error code on failure.
++ */
++static int ufshcd_query_user_flag(struct ufs_hba *hba, const char *flag_name)
++{
++	enum flag_idn idn;
++	bool flag_res;
++	int ret;
++
++	if (!hba) {
++		log_err("query flag: invalid hba\n");
++		return CMD_RET_FAILURE;
++	}
++
++	idn = ufshcd_get_flag(flag_name);
++	if ((int)idn < 0) {
++		log_err("query flag: invalid flag name\n");
++		return CMD_RET_FAILURE;
++	}
++	ret = ufshcd_query_flag(hba, UPIU_QUERY_OPCODE_READ_FLAG, idn, &flag_res);
++	if (ret) {
++		log_err("QueryFlag: flag %s idn query failed\n", flag_name);
++		return CMD_RET_FAILURE;
++	}
++	printf("%s = %x\n", flag_name, flag_res);
++
++	return CMD_RET_SUCCESS;
++}
++
++static int print_query_help(void)
++{
++	puts("Supported descriptor IDNs:\n"
++	     "\t0 - Device Descriptor\n"
++	     "\t1 - Configuration Descriptor\n"
++	     "\t2 - Unit Descriptor\n"
++	     "\t7 - Geometry Descriptor\n"
++	     "\t8 - Power Descriptor\n");
++
++	return CMD_RET_FAILURE;
++}
++
++/**
++ * idn_read() - Read and display a descriptor by IDN
++ * @hba: UFS host controller instance
++ * @idn: Descriptor identifier
++ * @lun: Logical unit number for unit-specific descriptors
++ *
++ * Return: Command status.
++ */
++static int idn_read(struct ufs_hba *hba, int idn, char *lunp)
++{
++	void *desc = NULL;
++	int ret = CMD_RET_FAILURE;
++
++	switch (idn) {
++	case QUERY_DESC_IDN_DEVICE:
++		desc = malloc(sizeof(struct ufs_device_desc));
++		if (!desc) {
++			log_err("failed to allocate device descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++		if (!ufshcd_query_desc_device(hba, desc)) {
++			ufshcd_print_device_descriptor(desc);
++			ret = CMD_RET_SUCCESS;
++		} else {
++			log_err("failed to read device descriptor\n");
++		}
++		break;
++
++	case QUERY_DESC_IDN_GEOMETRY:
++		desc = malloc(sizeof(struct ufs_geometry_desc));
++		if (!desc) {
++			log_err("failed to allocate geometry descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++
++		if (!ufshcd_query_desc_geometry(hba, desc)) {
++			ufshcd_print_idn_geometry_desc(desc);
++			ret = CMD_RET_SUCCESS;
++		} else {
++			log_err("failed to read geometry descriptor\n");
++		}
++		break;
++
++	case QUERY_DESC_IDN_UNIT: {
++		int lun;
++
++		if (!lunp)
++			return print_query_help();
++		lun = dectoul(lunp, NULL);
++		desc = malloc(sizeof(struct ufs_unit_desc));
++		if (!desc) {
++			log_err("failed to allocate unit descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++
++		if (!ufshcd_query_desc_unit(hba, lun, desc)) {
++			ufshcd_print_unit_desc(desc);
++			ret = CMD_RET_SUCCESS;
++		} else {
++			log_err("failed to read unit descriptor\n");
++		}
++	}
++		break;
++
++	case QUERY_DESC_IDN_POWER:
++		desc = malloc(sizeof(struct ufs_power_param_desc));
++		if (!desc) {
++			log_err("failed to allocate power descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++
++		if (!ufshcd_query_desc_power(hba, 0, desc)) {
++			ufshcd_print_power_params(desc);
++			ret = CMD_RET_SUCCESS;
++		} else {
++			log_err("failed to read power descriptor\n");
++		}
++		break;
++
++	case QUERY_DESC_IDN_CONFIGURATION: {
++		struct ufs_device_desc *device_desc;
++		struct ufs_geometry_desc *geometry;
++
++		device_desc = malloc(sizeof(*device_desc));
++		if (!device_desc) {
++			log_err("failed to allocate device descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++
++		geometry = malloc(sizeof(*geometry));
++		if (!geometry) {
++			log_err("failed to allocate geometry descriptor\n");
++			free(device_desc);
++			return CMD_RET_FAILURE;
++		}
++
++		if (ufshcd_query_desc_device(hba, device_desc)) {
++			log_err("failed to read IDN DeviceDesc\n");
++			goto cfg_out;
++		}
++
++		if (ufshcd_query_desc_geometry(hba, geometry)) {
++			log_err("failed to read Geometry\n");
++			goto cfg_out;
++		}
++
++		if (ufshcd_query_desc_config(hba, &g_cfg_desc)) {
++			log_err("failed to read Configuration Descriptor\n");
++			goto cfg_out;
++		}
++
++		ufshcd_print_desc_config(&g_cfg_desc, geometry,
++					 device_desc->ud0_base_offset,
++					 device_desc->config_length);
++
++		ret = CMD_RET_SUCCESS;
++
++cfg_out:
++		free(geometry);
++		free(device_desc);
++		return ret;
++	}
++
++	default:
++		log_err("illegal IDN %d\n", idn);
++		return CMD_RET_FAILURE;
++	}
++
++	free(desc);
++	return ret;
++}
++
++/**
++ * ufs_tool_get_config_desc() - Display the configuration descriptor
++ *
++ * Reads dependent descriptors and prints the current configuration.
++ *
++ * Return: Command status.
++ */
++static int ufs_tool_get_config_desc(void)
++{
++	struct ufs_device_desc *device_desc;
++	struct ufs_geometry_desc *geometry;
++	int ret = CMD_RET_FAILURE;
++
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (!hba)
++		return CMD_RET_FAILURE;
++
++	device_desc = malloc(sizeof(*device_desc));
++	if (!device_desc) {
++		log_err("Failed to allocate device descriptor\n");
++		return CMD_RET_FAILURE;
++	}
++
++	geometry = malloc(sizeof(*geometry));
++	if (!geometry) {
++		log_err("Failed to allocate geometry descriptor\n");
++		free(device_desc);
++		return CMD_RET_FAILURE;
++	}
++
++	if (ufshcd_query_desc_device(hba, device_desc)) {
++		log_err("Failed to read DeviceDesc\n");
++		goto cfg_out;
++	}
++
++	if (ufshcd_query_desc_geometry(hba, geometry)) {
++		log_err("Failed to read Geometry\n");
++		goto cfg_out;
++	}
++
++	ufshcd_print_desc_config(&g_cfg_desc, geometry,
++				 device_desc->ud0_base_offset,
++				 device_desc->config_length);
++
++	ret = CMD_RET_SUCCESS;
++cfg_out:
++	free(geometry);
++	free(device_desc);
++	return ret;
++}
++
++/**
++ * set_config_desc_field() - Update a configuration descriptor field
++ * @desc: Descriptor to update
++ * @fieldname: Field name
++ * @value: New value
++ *
++ * Return: 0 on success or -EINVAL if unsupported.
++ */
++static int set_config_desc_field(struct config_descriptor *desc,
++				 const char *fieldname, u32 value)
++{
++	if (!strcmp(fieldname, "length"))
++		desc->length = (u8)value;
++	else if (!strcmp(fieldname, "descriptor_idn"))
++		desc->descriptor_idn = (u8)value;
++	else if (!strcmp(fieldname, "conf_desc_continue"))
++		desc->conf_desc_continue = (u8)value;
++	else if (!strcmp(fieldname, "boot_enable"))
++		desc->boot_enable = (u8)value;
++	else if (!strcmp(fieldname, "descr_access_en"))
++		desc->descr_access_en = (u8)value;
++	else if (!strcmp(fieldname, "initpower_mode"))
++		desc->initpower_mode = (u8)value;
++	else if (!strcmp(fieldname, "high_priority_lun"))
++		desc->high_priority_lun = (u8)value;
++	else if (!strcmp(fieldname, "secure_removal_type"))
++		desc->secure_removal_type = (u8)value;
++	else if (!strcmp(fieldname, "init_active_icc_level"))
++		desc->init_active_icc_level = (u8)value;
++	else if (!strcmp(fieldname, "periodic_rtc_update"))
++		desc->periodic_rtc_update = (u16)value;
++	else if (!strcmp(fieldname, "reserved_HPB"))
++		desc->reserved_HPB = (u8)value;
++	else if (!strcmp(fieldname, "rpmb_region_enable"))
++		desc->rpmb_region_enable = (u8)value;
++	else if (!strcmp(fieldname, "rpmb_region1_size"))
++		desc->rpmb_region1_size = (u8)value;
++	else if (!strcmp(fieldname, "rpmb_region2_size"))
++		desc->rpmb_region2_size = (u8)value;
++	else if (!strcmp(fieldname, "rpmb_region3_size"))
++		desc->rpmb_region3_size = (u8)value;
++	else if (!strcmp(fieldname, "write_booster_buffer_preserve_user_space_en"))
++		desc->write_booster_buffer_preserve_user_space_en = (u8)value;
++	else if (!strcmp(fieldname, "write_booster_buffer_type"))
++		desc->write_booster_buffer_type = (u8)value;
++	else if (!strcmp(fieldname, "num_shared_write_booster_buffer_allocunits"))
++		desc->num_shared_write_booster_buffer_allocunits =
++		cpu_to_be32(value);
++	else
++		return -EINVAL;
++
++	return 0;
++}
++
++/**
++ * ufs_tool_set_config_desc() - Update cached configuration descriptor
++ * @name: Field name
++ * @value: New value
++ *
++ * Return: Command status.
++ */
++static int ufs_tool_set_config_desc(const char *name, u32 value)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (g_cfg_desc.cfg_desc.length == 0) {
++		if (ufshcd_query_desc_config(hba, &g_cfg_desc)) {
++			log_err("Failed to read Device Descriptor\n");
++			return CMD_RET_FAILURE;
++		}
++	}
++
++	if (set_config_desc_field(&g_cfg_desc.cfg_desc, name, value)) {
++		log_err("Failed to set parameters %s descriptor\n", name);
++		return CMD_RET_FAILURE;
++	}
++
++	ufshcd_print_config_descriptor(&g_cfg_desc.cfg_desc);
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufs_tool_commit() - Commit configuration descriptor changes
++ *
++ * Writes the cached configuration descriptor to the device.
++ *
++ * Return: Command status.
++ */
++static int ufs_tool_commit(void)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++	u8 *config;
++	int ret;
++
++	config = (__u8 *)&g_cfg_desc;
++	ufshcd_cache_flush(config, QUERY_DESC_UNIT_DEF_SIZE);
++	ret = ufshcd_write_desc_param(hba,
++				      QUERY_DESC_IDN_CONFIGURATION,
++				      0, 0, config,
++				      g_cfg_desc.cfg_desc.length);
++
++	if (ret) {
++		log_err("Failed to write Configuration\n");
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * ufs_tool_clearall() - Clear all configured logical units
++ *
++ * Resets all LUN entries and writes the updated configuration.
++ *
++ * Return: Command status.
++ */
++static int ufs_tool_clearall(void)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++	struct ufs_device_desc device_desc;
++	u8 *config;
++	int ret;
++
++	// Populate descriptor
++	if (g_cfg_desc.cfg_desc.length == 0 &&
++	    ufshcd_query_desc_config(hba, &g_cfg_desc)) {
++		return CMD_RET_FAILURE;
++	}
++	config = (__u8 *)&g_cfg_desc;
++
++	ufshcd_cache_flush(config, QUERY_DESC_UNIT_DEF_SIZE);
++	ret = ufshcd_query_desc_device(hba, &device_desc);
++	if (ret) {
++		log_err("Failed to read DeviceDesc\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ufshcd_clearall_luns(&g_cfg_desc,
++			     device_desc.ud0_base_offset,
++			     device_desc.config_length);
++
++	ret = ufshcd_write_desc_param(hba,
++				      QUERY_DESC_IDN_CONFIGURATION,
++				      0, 0, config,
++				      g_cfg_desc.cfg_desc.length);
++
++	if (ret) {
++		log_err("Failed to clear Configuration\n");
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++int ufs_tool_get_lun(int lun)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (!hba)
++		return -EINVAL;
++	return ufshcd_get_lun(hba, lun);
++}
++
++int ufs_tool_clear_lun(int lun)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (!hba)
++		return -EINVAL;
++	return ufshcd_clear_lun(hba, lun);
++}
++
++int ufs_tool_set_lun(int lun, const char *parm, u32 val)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (!hba)
++		return -EINVAL;
++	return ufshcd_update_lun(hba, lun, parm, val);
++}
++
++static int ufs_tool_query_flag(const char *flag)
++{
++	struct ufs_hba *hba = ufstool_probe_dev(hba_id);
++
++	if (!hba)
++		return -EINVAL;
++	return ufshcd_query_user_flag(hba, flag);
++}
++
++static int ufs_tool_query(int idn, char *lunp)
++{
++	struct ufs_hba *hba;
++
++	hba = ufstool_probe_dev(hba_id);
++	if (!hba) {
++		log_err("ufs_tool: failed to get hba\n");
++		return CMD_RET_FAILURE;
++	}
++
++	if (idn >= 0)
++		return idn_read(hba, idn, lunp);
++
++	return CMD_RET_FAILURE;
++}
++
++static int ufs_tool_set_hba(int val)
++{
++	if (val < 0) {
++		printf("ufs_tool: invalid hba id\n");
++		return CMD_RET_FAILURE;
++	}
++	hba_id = val;
++	return CMD_RET_SUCCESS;
++}
++
++static int ufs_tool_provision(long addr)
++{
++	memcpy(&g_cfg_desc, (void *)addr, sizeof(g_cfg_desc));
++	return CMD_RET_SUCCESS;
++}
++
++static int print_provision_help(void)
++{
++	puts("<addr> - address of the loaded binary\n");
++	return CMD_RET_FAILURE;
++}
++
++static int print_flags_help(void)
++{
++	puts("Supported flags:\n"
++	     "\tdeviceinit\n"
++	     "\tpermanent_wpe\n"
++	     "\tpwr_on_wpe\n"
++	     "\tbkops_en\n"
++	     "\tlife_span_mode\n"
++	     "\tpurge_enable\n"
++	     "\tfphy_resource_removal\n"
++	     "\tbusy_rtc\n"
++	     "\tpermanently_disable_fw_update\n"
++	     "\twrite_booster_en\n"
++	     "\twb_buf_flush_en\n"
++	     "\twb_buf_flush_h8\n");
++
++	return CMD_RET_FAILURE;
++}
++
++static int print_set_lun_help(void)
++{
++	puts("Supported LUN fields:\n"
++	     "\tlu_enable\n"
++	     "\tboot_lun_id\n"
++	     "\tlu_write_protect\n"
++	     "\tmemory_type\n"
++	     "\tdata_reliability\n"
++	     "\tnum_allocunits\n"
++	     "\tlogical_block_size\n"
++	     "\tprovisioning_type\n"
++	     "\tcontext_capabilities\n"
++	     "\tlu_num_write_booster_buffer_allocunits\n");
++
++	return CMD_RET_FAILURE;
++}
++
++static int print_set_cfg_desc_help(void)
++{
++	puts("Supported configuration descriptor fields:\n"
++	     "\tlength\n"
++	     "\tdescriptor_idn\n"
++	     "\tconf_desc_continue\n"
++	     "\tboot_enable\n"
++	     "\tdescr_access_en\n"
++	     "\tinitpower_mode\n"
++	     "\thigh_priority_lun\n"
++	     "\tsecure_removal_type\n"
++	     "\tinit_active_icc_level\n"
++	     "\tperiodic_rtc_update\n"
++	     "\treserved_HPB\n"
++	     "\trpmb_region_enable\n"
++	     "\trpmb_region1_size\n"
++	     "\trpmb_region2_size\n"
++	     "\trpmb_region3_size\n"
++	     "\twrite_booster_buffer_preserve_user_space_en\n"
++	     "\twrite_booster_buffer_type\n"
++	     "\tnum_shared_write_booster_buffer_allocunits\n");
++
++	return CMD_RET_FAILURE;
++}
++
++/**
++ * do_ufs() - Execute the UFS command
++ * @cmdtp: Command table entry
++ * @flag: Command flags
++ * @argc: Number of arguments
++ * @argv: Command arguments
++ *
++ * Dispatches UFS subcommands.
++ *
++ * Return: Command status.
++ */
+ static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	int dev, ret;
+@@ -20,19 +1511,120 @@ static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 				dev = dectoul(argv[2], NULL);
+ 				ret = ufs_probe_dev(dev);
+ 				if (ret)
+-					return CMD_RET_FAILURE;
++					return CMD_RET_USAGE;
+ 			} else {
+ 				ufs_probe();
+ 			}
+-
+ 			return CMD_RET_SUCCESS;
+ 		}
+-	}
+ 
++		if (!strcmp(argv[1], "query")) {
++			char *lun = NULL;
++			int idn;
++
++			if (argc <= 2)
++				return print_query_help();
++			idn  = dectoul(argv[2], NULL);
++			if (argc == 4)
++				lun = argv[3];
++			return ufs_tool_query(idn, lun);
++		}
++
++		if (!strcmp(argv[1], "set_hba")) {
++			int val;
++
++			if (argc <= 2)
++				return CMD_RET_USAGE;
++
++			val  = dectoul(argv[2], NULL);
++			return ufs_tool_set_hba(val);
++		}
++
++		if (!strcmp(argv[1], "get_lun")) {
++			int lun;
++
++			if (argc <= 2)
++				return CMD_RET_USAGE;
++
++			lun  = dectoul(argv[2], NULL);
++			return ufs_tool_get_lun(lun);
++		}
++
++		if (!strcmp(argv[1], "set_lun")) {
++			int lun;
++			u32 val;
++
++			if (argc <= 4)
++				return print_set_lun_help();
++			lun  = dectoul(argv[2], NULL);
++			val  = dectoul(argv[4], NULL);
++			return ufs_tool_set_lun(lun, argv[3], val);
++		}
++
++		if (!strcmp(argv[1], "clear_lun")) {
++			int lun;
++
++			if (argc <= 2)
++				return CMD_RET_USAGE;
++			lun  = dectoul(argv[2], NULL);
++			return ufs_tool_clear_lun(lun);
++		}
++
++		if (!strcmp(argv[1], "set_cfg_desc")) {
++			const char *name;
++			u32 val;
++
++			if (argc <= 3)
++				return print_set_cfg_desc_help();
++			name = argv[2];
++			val  = dectoul(argv[3], NULL);
++			return ufs_tool_set_config_desc(name, val);
++		}
++
++		if (!strcmp(argv[1], "get_flag")) {
++			if (argc <= 2)
++				return print_flags_help();
++			return ufs_tool_query_flag(argv[2]);
++		}
++
++		if (!strcmp(argv[1], "commit"))
++			return ufs_tool_commit();
++
++		if (!strcmp(argv[1], "clearall"))
++			return ufs_tool_clearall();
++
++		if (!strcmp(argv[1], "luns"))
++			return ufs_tool_print_luns();
++
++		if (!strcmp(argv[1], "get_cfg_desc"))
++			return ufs_tool_get_config_desc();
++
++		if (!strcmp(argv[1], "provision")) {
++			long addr;
++
++			if (argc <= 2)
++				return print_provision_help();
++			addr = dectoul(argv[2], NULL);
++			return ufs_tool_provision(addr);
++		}
++	}
+ 	return CMD_RET_USAGE;
+ }
+ 
+-U_BOOT_CMD(ufs, 3, 1, do_ufs,
+-	   "UFS sub-system",
+-	   "init [dev] - init UFS subsystem\n"
+-);
++U_BOOT_LONGHELP(ufs,
++		"init [dev]                           - init UFS subsystem\n"
++		"query <lun> <idn>                    - read and display descriptor\n"
++		"get_flag <flag>                      - read a UFS flag\n"
++		"commit                               - write configuration descriptor\n"
++		"provision <addr>                     - overwrite config descriptor\n"
++		"set_hba <id>                         - select active HBA\n"
++		"luns                                 - print configured LUNs\n"
++		"clearall                             - clear all LUN configuration\n"
++		"get_lun <lun>                        - display LUN configuration\n"
++		"clear_lun <lun>                      - clear a LUN configuration\n"
++		"set_lun <lun> <field> <value>        - update a LUN field\n"
++		"get_cfg_desc                         - display configuration descriptor\n"
++		"set_cfg_desc <field> <value>         - update configuration descriptor\n");
++
++U_BOOT_CMD(ufs, 5, 1, do_ufs, "UFS sub-system", ufs_help_text);
++
 
 -- 
 2.43.0
