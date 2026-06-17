@@ -4,117 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7CECD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 15:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04A8CD98F2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 15:07:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63AE484833;
-	Wed, 17 Jun 2026 17:05:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D34484833;
+	Wed, 17 Jun 2026 17:07:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QGccekJs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WXXSYQ0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03D02846B0; Wed, 17 Jun 2026 17:05:33 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 13D08848EB; Wed, 17 Jun 2026 17:07:26 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92C93846B0
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 17:05:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCD09846B0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 17:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GQ4syI4ctnIsYeiCKAjDVmpYC5PFMI+14nuDM36GkoEOuLV8UEtzapEtHbXxwo8q2NVse5mCpmeB/aB3ol7t+yQTo6nJZYsqpR0BrCyTeTASx3lKcJBQqp7e5EgWdQlTyH2VRBozFrnoqC3a6kPWw+mnBUSHsCamXvmMzAFXHeJRT/i+Y+RbtqZOX8nSxNHonVPykYzP+OmRQ56tLL1eLMtxiB0Ht4LXQb8Iw26iTCENexKvz1VTmXBezw+BOfrfx22Rb/V+D3L7nJQrqqJx9wnHqKNAhzYO3bawAxa8minr6eCd8S00L6ohsqefYenN4iK9eyTUg7iSZvKJo+TTKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KE3VxHTwO0FqzzBhI8Jd3xIPdhJWtTbCm0SGc+P2qP0=;
- b=AKvz4iVLSA7dDWiVrHbSegYQMJ7zMNapS/+l1+w3cxbrVsU908HCkOoVjl0C/vFXSXUm7xU/nXNU+Qdh8oYK7JlsM8lqlu9pfEqUy9wfy36di4KWfy/ppFpSsY6/4BO5ERhQd+ayf8mlfJOxec+OaJ6tHb802WgxmbbciILqZHo65X4znJEsI+rxZg0GR9tIRyHMVW9mc68TUv8oFtc/Qx0VY7T29rpJt8TYlcYXvlM7UXq7dLXs9+5vErGIDF2IQlAXEGmblKZoNWcvtLfSHFzgLYFoBmOIBfIFEOC7lwTGKZ4f+RBuNM/aMICWVex3aT9xE+aIZ3P2kFDLVZDnAQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=kernel.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KE3VxHTwO0FqzzBhI8Jd3xIPdhJWtTbCm0SGc+P2qP0=;
- b=QGccekJsFF11n9xvvD63HBMCB9O4f+PepPuQnGE0o8l+Lw2OFtOQugNLGslqFwSjnOAffvU0qOFPkARhZHirwirWJ2uxccMjc4iELruoeSl+Ny8eHskVxfYww0SUaPMNysj1thk5ydzMJdfcTagHBEIfOz9uLPFCU8Kgpj8HkzMhFA3Z+8e6p75Xwli2RNq/KyRV7M+U48AHrIErygGqIWKuG4AOI2CRZLVstrr2ANI7jFGTv+yNoJlNcEr260vPVzKcWEDRLwRK1v9Uh3o8DVOqy6ivgBriCzl/6Jho08e61c2KJ7ufRJDpa/fmyg4g+Hz3J6GgCLhhkG8pnznf1w==
-Received: from DUZPR01CA0023.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:46b::17) by DU2PR10MB7694.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:493::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
- 2026 15:05:26 +0000
-Received: from DU2PEPF00028D12.eurprd03.prod.outlook.com
- (2603:10a6:10:46b:cafe::18) by DUZPR01CA0023.outlook.office365.com
- (2603:10a6:10:46b::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Wed,
- 17 Jun 2026 15:05:26 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DU2PEPF00028D12.mail.protection.outlook.com (10.167.242.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Wed, 17 Jun 2026 15:05:26 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 17 Jun
- 2026 17:09:25 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 17 Jun
- 2026 17:05:19 +0200
-Message-ID: <884e052a-cd12-4076-97e7-13b1e549324f@foss.st.com>
-Date: Wed, 17 Jun 2026 17:05:19 +0200
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-49222b6e871so43492735e9.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 08:07:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781708843; x=1782313643; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=M4kMg99vyUMcHCY4P77cHcEjP/FIp+sBvZYnwTD5Nek=;
+ b=WXXSYQ0l9QCjdGvIKJ9YJm90F2XE2CdOVU49D49oTBNM95ibVDCArHfQKdjukDJ+HC
+ MAzD1cS7xayffrkkc1BJMvzPrc/cr468AsW8B8rvImFueBEQEFh8deAotn5cN5GwCUgc
+ lf1U6QPi/5RsglALUpo0GWYwAT7PTqZwyD8tJWAsrl2m4e7uvDe3eCO4RMot1d3Vq2ij
+ mc+ZAGg3jR89WCpLYbqv58MLUBHZsu9WIDBRP7Pch+G6WSE/HI6Rob3nPFL1T72EpweH
+ jZfuOptZq9sJCc6uUW/Kl26v/UYSqVCennHb0d9t72XOGpuGWYUgePTDflgGEWiTuzD7
+ SinQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781708843; x=1782313643;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M4kMg99vyUMcHCY4P77cHcEjP/FIp+sBvZYnwTD5Nek=;
+ b=Qh7WbOyP6ZSLi2Eih2jJ1FQ7EFUsrmJJ77iiqIhT/F/4UKfUW56QAlZOiD0eCh6eNq
+ ctjOLDwYYTpoq6JRXAMnXz9TFjmImgz9q2liH+qzUKJRY9hOlnEQ2oZ9CO7hBb3FMal8
+ OuImV2HNNkrsmptyJ5JN2J9BjG2jzqI2b6qA5d+we8jKgK0xBHCIiQ6ZTzk+Pp0Z2IJS
+ UCwFqO2Zy96hrNworUv5ydxvc2ozCs6Y/pqu1zNtctjYENzM1go2N0LkOvGxugqPvIsA
+ BmYDMS8d9Fm8E1LA7p9TxSj4PwqZmvy8jQ9KJEGLMSCXLDvTl8WXQwkLx+s7c1W+WU/8
+ zcWQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+oMUIrpLt9pDBQAFz4RyNMUEjzS744FGIrSwDMTg/prHdNRz0MCwQDB79sxwUg/e0p/CeHW/I=@lists.denx.de
+X-Gm-Message-State: AOJu0YyOy7yCsaHoXSWh62lJm3tdecvTwLNGqOr3GNK/r49F8JSO/ozb
+ FJItaz+yYUquMQjY3SyIpYXNY2F0+BxQ9xEePPzQeBibILmRXnFVb0MHyQJ899fTYlE=
+X-Gm-Gg: Acq92OHWD66DmpeioQOjeHcrJJ45FBl755wf4+07r0K3WCzc2VoaUKd2F865VYTRsy3
+ 5X7F506yg5J6hP26ULYspG3MuZHoYmQZrPpzkbgmI7tQZGXJVxAyyKRx4TWU+p9AWRa9Y1mceh4
+ VwMLLEUHnvMQgGI5B5zKNZw4gVFGPdjrcTMFtdtIOgkIaHeKjONZrxTpsjUX6dxQo1hd5Z3TAtU
+ k0MtW0bdEJie9WPNyk8NpQOXWQRyQ+5KCzgU9H/8tmRYOt7Fiq0MD6v2BmcmaIpi6WM8m7W2Jsv
+ oD2oCe1m0JrACxUW6AM+Qrz5WnbI4dE1mEN17DsyXXPpjIH3jgA886lZlrZPgFYdPdFe/P+8aG/
+ w9klfr72nU9BZIG5qlTZn7yLKUgOQRjqyEz0mafw5P00soHfHy+OlOh8PouqFCbW8tFFCOXZ3HY
+ ydcoR7aOYLtsqNz0WqySzCE4YwkdlBBMrM7nN9S652IjdkH48xKLBbMQZWml1o1q0=
+X-Received: by 2002:a05:600c:820d:b0:490:4b89:5361 with SMTP id
+ 5b1f17b1804b1-4923678873cmr23562695e9.7.1781708842902; 
+ Wed, 17 Jun 2026 08:07:22 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4619a041986sm29969427f8f.23.2026.06.17.08.07.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jun 2026 08:07:22 -0700 (PDT)
+Message-ID: <095e2faf-1f06-4139-bd9b-1d278b60ddff@linaro.org>
+Date: Wed, 17 Jun 2026 17:07:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: gadget: f_mass_storage: Disable eps during
- disconnect
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Stephan Gerhold
- <stephan.gerhold@linaro.org>, <u-boot@lists.denx.de>
-CC: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>
-References: <20260617-ums-disconnect-v2-1-6e52d9de1d36@kernel.org>
+Subject: Re: [PATCH v3 0/6] arm: snapdragon: Add snagboot support for
+ Lemans-EVK
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260617-ums-disconnect-v2-1-6e52d9de1d36@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot-qcom@groups.io,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ George Chan <gchan9527@gmail.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+ <64718934-b054-4c47-9d01-dc6fac01dbd7@linaro.org>
+ <tgqh8m.i5334p2b63jo@postmarketos.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <tgqh8m.i5334p2b63jo@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D12:EE_|DU2PR10MB7694:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2087b055-6509-4ac6-6298-08decc81dd4b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|23010399003|1800799024|376014|11063799006|3023799007|56012099006|6133799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: K3Zu1dZeAAG+EwyVLDL3UzHD3ckeQ/hLLmnxQhsRC6LuDzPabbXo300g6aPQEOapTIBqpQX5m1R0KVAvxUSbZthk8mpBR/s0U1j+D4msiHnfviazgmJzDMRHZ3dhx+eSpiofPpJKBE576hCgtg4Q9J8hu5iE287PybpT6sY+K8Oz4IG2jLGGILOBt0Mxo2EPidsJT+3byrB0nYtOJYZb0frAvmxrINTLdYZ5Nm2YnTaGbSjbusAXzi60Y0+VpLF8M+Vx4iOthU6wcWpIkmAZjTYse4515Jvqxrqkr6G86HAsEdz6ttaJ8EWMU/o8BA10fukHpx9FFIJS/fFY3bXyddugur67UcpIjzXqK6RinVHeF1fVnrNsr4MNWV0ErcooVabJ4txeTmhzh7ZxaWP7p/k8nqA70gi2lbtBlDEhKeZKd0agzoDmRRQtnjPTjhp2C6TskL1FDsXCD67jiMwjEC3QUAbr0EwJPDQWn4xi93zZzUPTzHOUaBshgCEz53i58lKi1j0ZOXoSXJLJv9AkDhV1AyNFXlp/2aPi+bP55VHw0P8RRxazkPxNJ2E4oMmCrw8cu9IUAg4+ysbjaiPH+LMMUysOSt1r/A2zatXWVLnca2OEYh3h3XgqTLQwBFoNvG0O1Iqqzsz5tMheHxZSOr3goMZhN3OF54gJJ9CpWUmdvenL7+PoLbesXX/p0TDT
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(23010399003)(1800799024)(376014)(11063799006)(3023799007)(56012099006)(6133799003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: JhzMNI6TdBLyOm51CXcItUlOCGD9zMCaiKjLmWGwG132bD5sIcVtKvzjBPaBIqC34uMPm5Bv5YYntL5F27lL23rG1XWxADr5RJZbW0kYMcMq9mpQRx7q5oL4H2xa8eg58/BSDdRNhldOWxz/7F8CF3yBJNyvcpuGh3TsS+7WTIQmq5aG1gpytdojlu+VHgYZqr2u8Jv0ZZ8AwU5Zegp+v58wzatXPJbNZelJR47Yu9kwrZJifx34ayehqMuvovZKS5hruW/zPM9nOV6w+yyGuBzFpbEU0Cq3pDuubjIFAkpAsA5O9/K8FvBBetWmRWbY08mHZOE52h/ewPU0ZXZLdeNybL++QvIlbDNkrPTR+n006Lyb6JkE2XJuVjg/Ubibs9aoxPW0s2Nj8DDTBnAU4IYvridoIn6EuJMKXNyYzIZNht9P+NJDIb6t/wZ2ItZp
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 15:05:26.7611 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2087b055-6509-4ac6-6298-08decc81dd4b
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D12.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR10MB7694
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,79 +123,64 @@ X-Virus-Status: Clean
 
 
 
-On 6/17/26 13:14, Mattijs Korpershoek wrote:
-> When trying two ums commands in a row, the second one no longer
-> enumerates properly from the host.
+On 16/06/2026 18:42, Ferass El Hafidi via groups.io wrote:
+> Hi,
 > 
-> This happens since commit
-> 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-> causing usb_ep_enable() to return early when ep->enabled is already set.
+> On Tue, 16 Jun 2026 12:26, "Casey Connolly via groups.io"
+> <casey.connolly=linaro.org@groups.io> wrote:
+>> Hi Balaji,
+>>
+>> On 16/06/2026 11:22, Balaji Selvanathan wrote:
+>>> This series adds support for running U-Boot in snagboot mode on
+>>> Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
+>>
+>> You didn't respond to my reply on v2 of this series.
+>>>
+>>> Snagboot is an open-source, scriptable flashing framework that provides
+>>> an alternative to the proprietary Firehose protocol for device
+>>> provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
+>>> Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
+>>> and execute bootloaders. However, instead of using the proprietary
+>>> Firehose programmer, Snagboot loads U-Boot into DDR and uses the
+>>> standard fastboot protocol for device flashing.
+>>
+>> Glad to have some more info here. Please also add a doc page with this
+>> information as well as a list of supported platforms.
+>>
 > 
-> Gadget function drivers (such as f_fastboot or f_mass_storage) implement
-> a disable() function which is called whenever we are done using the
-> gadget.
+> I suppose they are talking about this snagboot: https://github.com/
+> bootlin/snagboot
 > 
-> Because f_mass_storage driver does not disable the endpoints,
-> ep->enabled will never be set to false again.
-> 
-> This can be reproduced on the STM32MP157C-DK2 or the Khadas VIM3 boards.
-> 
-> Add calls to usb_ep_disable() as done in linux [1] to fix this.
-> 
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9fff139aeb11186fd8e75860c959c86cb43ab2f6
-> 
-> Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-> Reported-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> ---
-> This was initially reported by Patrice Chotard at:
-> https://lore.kernel.org/all/20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com/
-> 
-> That thread contains reproduction steps.
-> ---
-> Changes in v2:
-> - Add missing Reported-by to commit message
-> - Link to v1: https://patch.msgid.link/20260617-ums-disconnect-v1-1-a5ff9011d49a@kernel.org
-> ---
->  drivers/usb/gadget/f_mass_storage.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-> index 71dc58da3f03..87ed25e8bb3a 100644
-> --- a/drivers/usb/gadget/f_mass_storage.c
-> +++ b/drivers/usb/gadget/f_mass_storage.c
-> @@ -2275,6 +2275,17 @@ static int fsg_set_alt(struct usb_function *f, unsigned intf, unsigned alt)
->  static void fsg_disable(struct usb_function *f)
->  {
->  	struct fsg_dev *fsg = fsg_from_func(f);
-> +
-> +	/* Disable the endpoints */
-> +	if (fsg->bulk_in_enabled) {
-> +		usb_ep_disable(fsg->bulk_in);
-> +		fsg->bulk_in_enabled = 0;
-> +	}
-> +	if (fsg->bulk_out_enabled) {
-> +		usb_ep_disable(fsg->bulk_out);
-> +		fsg->bulk_out_enabled = 0;
-> +	}
-> +
->  	fsg->common->new_fsg = NULL;
->  	raise_exception(fsg->common, FSG_STATE_CONFIG_CHANGE);
->  }
-> 
-> ---
-> base-commit: a7830e87555abfb81cc69275cecb2bc0fbde5b28
-> change-id: 20260617-ums-disconnect-d839bc17a47d
+> But what's confusing me is there is no mention of any Qualcomm board,
+> nor any PR to add support for it. Is that in some downstream tree
+> somewhere? (to be clear I'm just someone interested in understanding
+> this better, snagboot is a very cool project that already supports
+> plenty of SoCs and it's great if it has or will have qcom support)
+
+ah yep, there's a fork here
+https://github.com/qualcomm-linux/snagboot/tree/qcom-next
+
+Balaji: it would be great if you would include context like this in the
+cover letter.
+
+Kind regards,
+
 > 
 > Best regards,
-> --  
-> Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Ferass
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Groups.io Links: You receive all messages sent to this group.
+> View/Reply Online (#3922): https://groups.io/g/u-boot-qcom/message/3922
+> Mute This Topic: https://groups.io/mt/119832159/8413174
+> Group Owner: u-boot-qcom+owner@groups.io
+> Unsubscribe: https://groups.io/g/u-boot-qcom/
+> leave/13197796/8413174/1557304080/xyzzy [casey.connolly@linaro.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 > 
 
+-- 
+// Casey (she/her)
 
-Hi Mattijs
-
-Tested on STM32MP157c-dk2 board.
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
