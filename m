@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 060F2CD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609FECD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D4E9849ED;
+	by phobos.denx.de (Postfix) with ESMTP id 4CA18849F3;
 	Wed, 17 Jun 2026 14:30:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="HZdhyBgv";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ix0Z8cxT";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="SAk+orWg";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lg0qzkkl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83D69841F2; Wed, 17 Jun 2026 12:18:56 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 9799F841F2; Wed, 17 Jun 2026 12:19:08 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52C13838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:18:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46B37838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:19:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65H8VZbN2190769
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:18:53 GMT
+ 65H8Ung71608102
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- XPlKuCyk2aMflSV0MAsDdIjlvoFXqmOmf3GBuZXcvG8=; b=HZdhyBgv9kHh6uNL
- UjBNFzv/t91pQVvVlEx9itJNXtrSoZHFPBPv3nn8mxzPmn2XgVag0Y2SAMp7V2wS
- hZmJL3JnNdqvmZqnZQO16v6hcWw3/t4pn+5ItsWOqtCqca6nKG0j5BEJP3ewewT7
- /mPYbBYUqYh1ykfA9JKpFKEluA7gR5mi5EPJzo79N98Yzgfakrtiaro8MkHvSAZA
- JClVhicBObcucJGCCwI9hfacz7Fbo13kgSwYdC911KyItvAcL+1drFxLuRAdcJV+
- T8rRhz2XiBUgURLagoH7tRmBb5OHpBFq8Vhgbhu032MGbktHCLXuzZ4klwI75JFa
- lxdirg==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueesjn8q-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=RtfhJDkeXNG
+ nX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=; b=SAk+orWgfjx39vT864fnXmW69NA
+ sNDjUIyY9sl4asSkPBD8CRhDIEPfAWW0Ln+Cl+E2OyqlWx1O0FWmF+QKtQPer20f
+ s9TuqPyQ1IiGHuq7sgxeXjTa50fWMbSu3kkr0YTYzKHG6J4haKGUO5XcBAXCx52T
+ 96vKLVK1iONgMJXPsqHw76H/gqHNyrNTgBhE1gr8Asa6OWC4Yq2cL8fTakNo+jSb
+ 9CDgBwYQOqOa7hSZWti6zaQ4pIMQbV46L9oDlzDIKO/9IsaSJNb6mcWFvfqEQcDg
+ 5F+lMgq5NyRjQZGpLWzvwuYLck0z4SnVidnuvkIbR43ehbp9Vrk3z0tcAIg==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4euef22k0t-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:18:52 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-8422ca754d8so4288335b3a.1
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:18:52 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:04 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-8423f544944so3930720b3a.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781691532; x=1782296332; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781691544; x=1782296344; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=XPlKuCyk2aMflSV0MAsDdIjlvoFXqmOmf3GBuZXcvG8=;
- b=ix0Z8cxTvndSjk9RcQpDL5SWKmuPaM/KBOhpLtMC1l4qPSJYJAAYBJyQamdD7RuI7l
- hcYfAJf09QBthzyOzaAy+ahe43xMnf9WihWSPfedyNsu5nQWqWGqGr2G/K6bbSWdmuLK
- U7mmNBMuLlQBMZF7XgBhe6WthUi8qKw5JQUcoyt1EflObY3S0yeRK0OHe6U9l+UVMfA7
- N6c9TsJdon8PWQAKeBGZ+YVlcHR5vNCaMUAZPScE+PYF0RQVTDZDub/kwiApGyR7cVZ4
- 0zd+cfONPYR/0/qrCe5xEmaxtCsNYMkpe8CI8rDqslteD92jGjKEddBMHz0Jir4Dpab/
- iMUg==
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RtfhJDkeXNGnX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=;
+ b=Lg0qzkklEKwFrDGx4RdQ/6B2yK/P1Isd1KP3b7ZsRH7J9s3dxdt2bDoEpUps94zXn6
+ dnwhGkWwsHFVXUxlavMF4DWUg9uX9TpTNXEZ9VKxIloVVrrP/nHMDaFeP3QeelPIj1VM
+ OJCaRO1JdLQYPO7XoX8j1EWFQwf6ZZK5dJwv5gMzmpPZgBLtHds1S9Xowf2JtInsb40Y
+ D2QLS6wkl7ThWD8/cLN3uovTZo4sDB0e8nJIGd5IpQdUp4n9StgVkjMiONFCDq4s+Ijp
+ hltC/rb3pWTuKspY3ZS4Btq3aKWDYCYYMuY/AXnk69JQcpC17cLD3RF85zqao2FWBOT7
+ aNQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781691532; x=1782296332;
+ d=1e100.net; s=20251104; t=1781691544; x=1782296344;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=XPlKuCyk2aMflSV0MAsDdIjlvoFXqmOmf3GBuZXcvG8=;
- b=rz4Dr0TWhZEGmpGfbR8Mp2jHNoEAiMMnKIyT7qTKTCFoDyuq4TgxJnH/luXA2cSDv1
- gNMreveCra2C7XpJlxKbhAs27xsKjnJk0CfxGf8OJYyWHqezxB5EpBhPg6blWc0gDVbM
- VMel8DooimH2yBHBnJsNIkVtzOwbbK/M8SUVATDPrdlCwyiqW7vLTIx3EvbdSRhztNVH
- F0Ak1rD9ESAnYWkNa34h0Ns1c1pszNA6pNbCzFOc7jlp62rsOZAz0WB9IPUIhXfDElnS
- +0naS11AIpazC61j1TiZyh1AJAswx1d3dIv4+7iTADWWrepMIEL8BaoCcbfRP53L/0tp
- EcDQ==
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=RtfhJDkeXNGnX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=;
+ b=m9h1t/bjno/zf49usxaTL8lffLuX0pqc2D25vbc5Tfp0P0xwf1aZkL7fU8Hl8m8LF8
+ Ak5H2w2p8mr81W+VdoKBd6kFjvjXXKqCndwLXlM11jluvZWh2+ybvFxjxHUwATFVn85+
+ bocajNTqSj4Q9VKyhqR/HZwOZRjxE6wXdgvLP+cBRA5vtMFlO7fAuk9vtTzk/KFrZ8WM
+ qp3inJKeFWUdAqExHWNcBvwXxwKOzioHUfAHbmLaw1jLbvisIRPH6Out2i3NebUbgsM7
+ nBIS2Ka1Aamz8GgDW5vAUmVUZWZJYvk/g+lIevS5VnYFOA3ZuOkzibSeJPTs9j6jVU3O
+ EDNA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8rW977h8udESJoybQMrUN+l4OG8eNa/Q1TVMnp7LGSQdWlbQ1kP8FblcoNhM2UZtShwbm1Rts=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDfnDP53mawdFJQOmvuoAHjPbRNAf/bFuUQjx3NXfFlM0qRQ+I
- RoYMpkfUf1RFMmWWZDBTj8zZU9PpjOCoA3MxLFH2u+gVvm3zLdCgGf3Z/eFX4+sGYf23BBTYxwB
- qENPz1isTepH+7++duG1ZhtjYYIlQ4ntXJQ4rmTCW3uxXVKIgqqUoGtfe
-X-Gm-Gg: Acq92OF4q1Y0daZw7GjINcNhbBKyc5bf8XaDrACyfGBuY7tlwT7vdv1MrXzPFaz87XE
- 39+g7Rdnk227P4mXrtSN6dz2fKNLwZJJtw/CuSmcYu+g4yuWU9Z1LSPI3BhQLkQ/oKpIEEX/dQp
- VoC2A4IbCUpQd3jMqF4KIjUN69vPDi6vwL2ApLSTQ6omil7auwooleLGvEh0nxZBWgYqaukfYZL
- Z8ukj2m2cAOB0v50SqN+qIBCzHqN4tYww6SyNT5EFXMobflp98Xh6lzkdVYSJ0kkAK6TPSa0V1a
- LXWeP5IQVD3x3mnMSj5SV9QtobYxTEbUfNsBaVPMoaDxuZNCe6TB3rHfGPR/fY5yszrGJO9A4y2
- Jqj/+Vby+1RryKcf1/5H6s7IemhKl0L/4liOB4+yUqRrEJwDWoPo/rkf7Vt2hggW0HVzi9RXIeY
- RlZcnfRs0SUtU0xy4l+NtEcHNauv6ARxWrYvOyXgH+
-X-Received: by 2002:a05:6a00:993:b0:83e:3050:d0b with SMTP id
- d2e1a72fcca58-8452441c8bemr3290043b3a.1.1781691531822; 
- Wed, 17 Jun 2026 03:18:51 -0700 (PDT)
-X-Received: by 2002:a05:6a00:993:b0:83e:3050:d0b with SMTP id
- d2e1a72fcca58-8452441c8bemr3290000b3a.1.1781691531337; 
- Wed, 17 Jun 2026 03:18:51 -0700 (PDT)
+ AFNElJ8ZTduRANiSDll/rDIvgT6hkjh+itCQn6iWMcNXKuwJ5OdaoXhi0cxx8aABO2kINwgH0uvz0OM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSpT9EirLGA4H2tuiHMMPJnF3iKdjxRS+j9Ul70fLW+Swq68hp
+ VWYoS5oMDKdpp7X5/g9rUauMzLE1CVAQYXj64+ZYsj6+5gv8Tx7MVKytCR0Xy5xPr5/7ZAi4+DQ
+ lMIEITQuYtfewDkvUkMWOb0P2tVD8bhhyJN3CGv6iRkZvQgAPC5SCBlqc
+X-Gm-Gg: Acq92OHRI+kyZ5ilQ2f4YmygxZ83Jnl939RQ/F9ofu1EYHtX7VdHrfurt9lN6mJW9q8
+ noz0WHEdNNU/S875cGIhJzrb4uTCWNOSYaXlaJQB8SNdN7zSxqMP0r1ftMbOj2rkHPZ8IxgY0qu
+ M0ZoEGkYa5SRpW1jOayDWsv+8fkhaL+kyB07Qms47lTnSZknwgV3+sjQ5SiELnaSeEZwvnbvodq
+ UIaFqMuEsXNVmXyDB6LowdrwpA+f3RakvQekbj1mmSbhCvvunLzFze/wZEiLAZyd3oel6BzhydH
+ wVsjhVc0gNaaZG0U7jLVFes1Nh88bn/dZWsI9bLjsnqBUFxf7Nqlf2jf+VI1Sr5ALIGooYjonRK
+ d6FL+9O3u4LlC6W69JEqlOdaE3FHAdkzuqtBDNPEfa3Lt5ibpzQLM47ez/sYp7zjjcfKFEAjRo3
+ RC2puJTiRuxCj8iNCg+bws8NnK2dDylTYr84qCZ1nk
+X-Received: by 2002:a05:6a00:2e17:b0:842:6004:3fb9 with SMTP id
+ d2e1a72fcca58-845245577f8mr3340942b3a.25.1781691543460; 
+ Wed, 17 Jun 2026 03:19:03 -0700 (PDT)
+X-Received: by 2002:a05:6a00:2e17:b0:842:6004:3fb9 with SMTP id
+ d2e1a72fcca58-845245577f8mr3340875b3a.25.1781691542887; 
+ Wed, 17 Jun 2026 03:19:02 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.18.40
+ d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.18.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 03:18:50 -0700 (PDT)
+ Wed, 17 Jun 2026 03:19:02 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -115,41 +115,39 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  david.wronek@mainlining.org, james.hilliard1@gmail.com,
  bdklingerman@gmail.com, richard.genoud@bootlin.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 02/13] binman: qcom: Add type definitions for Qualcomm
- binaries
-Date: Wed, 17 Jun 2026 15:48:01 +0530
-Message-Id: <20260617101812.299586-3-varadarajan.narayanan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: [PATCH v5 03/13] dts: ipq5210-rdp504-u-boot: add override dtsi
+Date: Wed, 17 Jun 2026 15:48:02 +0530
+Message-Id: <20260617101812.299586-4-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX7DNWZQzaFc36
- NQnVKrX2LFsmC20KytmBSFqMlD+yfppjOROEVtudhb0RnUWafd0+9S1k6Ni1vGAKA6E5WWUm27n
- tFMQfxRHhmCSml9tcdpS2eItD3IfcgrewxoDTCRez/KoaRH2cuJpebLH5smxi8vfaN6m9aa/7wL
- MBW7JNeYk7kwUqGWiMCTr7RpTOOgbno6oDDMZHEd2PsPZGOM5cMTOSklHdv0XjdcQ7CKaX6fafz
- DilahAN27zuA/+04fKhY6RRpC+X5eMWtObUcWdCLywSSxksQPFXUq5hc+2Tt4fa4s60DA/h6eym
- ueIxkJNuyH++x2TBh1fSmudxBBxBseX/E0DRDxeVOnnZbdsov5r6PZd0rflP+VTfUL1pVNdsZJ6
- YhLeVYB9XkqeLatxbztzGiQ6+BGKSW207YLeQDOEuyda4WG/RsoJJzTsQe9h6/Av8UB+01elgve
- Y12oALaXNgwT5NtWK8Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfXxbxWwCWMsH1S
- Q+0iUW4Z3WVCNQNKrKIwCwVW3SPG1kedRL67KCRZxDLX2aAxYXlmde15K5YlXK7m95VipWLcXe6
- y3lD73a58v0biTCCYtNzkBEwHodqRmc=
-X-Proofpoint-ORIG-GUID: ZSs0ZxbXq3BzLUz2Nkyr4m2PKhf-Hfyr
-X-Proofpoint-GUID: ZSs0ZxbXq3BzLUz2Nkyr4m2PKhf-Hfyr
-X-Authority-Analysis: v=2.4 cv=ePojSnp1 c=1 sm=1 tr=0 ts=6a32748c cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=dzUh2ppR8F7ShpQMaCIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX2gktThfwGEdw
+ iOWrW4CLPxIf1g5WD31jOJeXyhStaf/4gSybBJ4bsXEnHPpMAuR0/qWXh58w2X7hZFtzk05xbTV
+ xP16DZpNEqfYBThkKCGloPAUWaE2HZU=
+X-Proofpoint-ORIG-GUID: qA5ujbE2zz_EwazAc-fbXrLc4c6ePTe9
+X-Proofpoint-GUID: qA5ujbE2zz_EwazAc-fbXrLc4c6ePTe9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX3h8tED+SqItb
+ L4I0ev+3qF5d+A/95DmqE/uqmze2QLWjxFgsMIO8G86l3cNYFb4w369BJ+dwJg0dqbdi60cai0u
+ CDkzkYzSscQBYOEW5x6qiXKDxPSis+OyLeuAjxS1QF3y1szDI6ZKN6jjSae2aY8HiPKH3Isd2LC
+ ZYtGDbEKuPRG4pvm7IApH6tPP7fCWXFUcVsOxntK74dZrdBLxbVeUNTmbAo/5BlGVOOtcz/gFwx
+ NUYwVPeUdmT/HMk9+myX2mASrNZzmR2xmvkVj2zOHaHug7478K2ffEuFdwsHk7A2cAb2AVC/+qR
+ k/tzxzun9xfwqWff+k063Q/W4qses/CgtyU+7ucLPh+ukIht7UkorU4ankW3NbpxxjAIWPLwe2i
+ cVFhOCg4uKY3VafZmIQTWaW3MRI80wxtl/6dSp+iJvU09KcyP0ybnIiuB3UAZXFEiB4iKp17d/n
+ YfhJs6PfYexn8qkOebA==
+X-Authority-Analysis: v=2.4 cv=acpRWxot c=1 sm=1 tr=0 ts=6a327498 cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=cm27Pg_UAAAA:8
+ a=EUspDBNiAAAA:8 a=-Vm6e4HSz0gDw6bjX8oA:9 a=zc0IvFSfCIW2DFIPzwfm:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 adultscore=0 priorityscore=1501 lowpriorityscore=0
- malwarescore=0 bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0
+ phishscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
+ clxscore=1015 bulkscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606170097
 X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:36 +0200
@@ -169,110 +167,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add type definitions for Qualcomm's
+* Add initial support for the IPQ5210 MMC based RDP platforms.
+* Define memory layout statically.
+* Mark the nodes that would be needed for SPL.
 
-	appsbl	-> APPS Boot Loader (U-Boot)
-	config	-> Board/DDR related configuration
-	lib	-> Library of proprietary routines
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- tools/binman/etype/qcom_appsbl.py | 23 +++++++++++++++++++++++
- tools/binman/etype/qcom_config.py | 26 ++++++++++++++++++++++++++
- tools/binman/etype/qcom_lib.py    | 21 +++++++++++++++++++++
- 3 files changed, 70 insertions(+)
- create mode 100644 tools/binman/etype/qcom_appsbl.py
- create mode 100644 tools/binman/etype/qcom_config.py
- create mode 100644 tools/binman/etype/qcom_lib.py
+v4: Add binman details
+---
+ arch/arm/dts/ipq5210-rdp504-u-boot.dtsi | 128 ++++++++++++++++++++++++
+ 1 file changed, 128 insertions(+)
+ create mode 100644 arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
 
-diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_appsbl.py
+diff --git a/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
 new file mode 100644
-index 00000000000..f25bcbec37d
+index 00000000000..5f19915047b
 --- /dev/null
-+++ b/tools/binman/etype/qcom_appsbl.py
-@@ -0,0 +1,23 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+#
-+# Entry-type module for U-Boot MBN image
-+#
++++ b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
+@@ -0,0 +1,128 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * IPQ5210 RDP504 board device tree source
++ *
++ * Copyright (c) 2026 The Linux Foundation. All rights reserved.
++ */
 +
-+from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++/ {
++	/* Will be removed when SMEM parsing is updated */
++	memory@80000000 {
++		bootph-all;
++		device_type = "memory";
++		reg = <0x0 0x80000000 0x0 0x20000000>;
++	};
 +
-+class Entry_qcom_appsbl(Entry_blob_named_by_arg):
-+    """U-Boot mbn image
++	binman: binman {
++		description = "IPQ5210 boot loader";
++		fit {
++			description = "IPQ5210 Boot Loader FIT";
++			fit,fdt-list = "of-list";
++			fit,external-offset = <0x0>;
 +
-+    MBN is a Qualcomm‑specific signed firmware container that packages
-+    executable images (typically ELF) along with metadata such as hash,
-+    signature, and certificate chain, enabling the secure boot chain and Root
-+    of Trust (RoT) to load and authenticate images.
++			images {
++				@qcom-config-SEQ {
++					fit,operation = "split-elf";
++					description = "QC Config";
++					type = "qcom-config";
++					arch = "arm64";
++					os = "elf";
++					compression = "none";
++					fit,load;
++					fit,entry;
++					fit,data;
 +
-+    Properties / Entry arguments:
-+        - filename: Filename of U-Boot MBN (default 'u-boot.mbn')
++					qcom-config {
++					};
++				};
 +
-+    This is the U-Boot MBN image.
-+    """
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node, 'qcom-appsbl')
-diff --git a/tools/binman/etype/qcom_config.py b/tools/binman/etype/qcom_config.py
-new file mode 100644
-index 00000000000..93951a162b9
---- /dev/null
-+++ b/tools/binman/etype/qcom_config.py
-@@ -0,0 +1,26 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+#
-+# Entry-type module for QC Config ELF
-+#
++				@qcom-lib-SEQ {
++					fit,operation = "split-elf";
++					description = "QC Lib";
++					arch = "arm64";
++					os = "elf";
++					type = "qcom-lib";
++					compression = "none";
++					fit,load;
++					fit,entry;
++					fit,data;
 +
-+from binman.entry import Entry
-+from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++					qcom-lib {
++					};
++				};
 +
-+class Entry_qcom_config(Entry_blob_named_by_arg):
-+    """QC Config ELF
++				@atf-SEQ {
++					fit,operation = "split-elf";
++					description = "ARM Trusted Firmware";
++					type = "atf_bl31";
++					arch = "arm64";
++					os = "arm-trusted-firmware";
++					compression = "none";
++					fit,load;
++					fit,entry;
++					fit,data;
 +
-+    Although the QC Config image primarily contains configuration data that
-+    could be represented as a raw binary, it is maintained in ELF format to
-+    ensure compatibility with Root of Trust (RoT) based image authentication
-+    during the secure boot process.
++					atf-bl31 {
++					};
++				};
 +
-+    Properties / Entry arguments:
-+        - qcom-config-path: Filename of QC Config ELF (typically 'qcconfig.elf')
++				@qcom-appsbl-SEQ {
++					fit,operation = "split-elf";
++					type = "qcom-appsbl";
++					os = "U-Boot";
++					arch = "arm64";
++					compression = "none";
++					fit,load;
++					fit,entry;
++					fit,data;
 +
-+    This will be part of the Qualcomm SPL based bootloader image
++					qcom-appsbl {
++					};
++				};
 +
-+    """
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node, 'qcom-config')
-+        self.external = True
-diff --git a/tools/binman/etype/qcom_lib.py b/tools/binman/etype/qcom_lib.py
-new file mode 100644
-index 00000000000..ca7666fe6e6
---- /dev/null
-+++ b/tools/binman/etype/qcom_lib.py
-@@ -0,0 +1,21 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+#
-+# Entry-type module for QC LIB ELF
-+#
++				@tee-SEQ {
++					fit,operation = "split-elf";
++					description = "TEE";
++					type = "tee_os";
++					arch = "arm64";
++					os = "tee";
++					compression = "none";
++					fit,load;
++					fit,entry;
++					fit,data;
 +
-+from binman.entry import Entry
-+from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++					tee-os {
++					};
++				};
++			};
 +
-+class Entry_qcom_lib(Entry_blob_named_by_arg):
-+    """QC LIB ELF
++			configurations {
++				default = "pre-ddr";
 +
-+    Properties / Entry arguments:
-+        - qcom-lib-path: Filename of QC LIB ELF (typically 'QCLib.elf')
++				pre-ddr {
++					description = "pre-ddr";
++					loadables = "qcom-config-1",
++						    "qcom-config-2",
++						    "qcom-config-3",
++						    "qcom-config-4",
++						    "qcom-lib-1",
++						    "qcom-lib-2",
++						    "qcom-lib-3",
++						    "qcom-lib-4";
++				};
 +
-+    This will be part of the Qualcomm SPL based bootloader image
-+
-+    """
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node, 'qcom-lib')
-+        self.external = True
++				post-ddr {
++					description = "post-ddr";
++					loadables = "atf-1",
++						    "atf-2",
++						    "atf-3",
++						    "atf-4",
++						    "atf-5",
++						    "atf-6",
++						    "qcom-appsbl-1",
++						    "tee-1";
++				};
++			};
++		};
++	};
++};
 -- 
 2.34.1
 
