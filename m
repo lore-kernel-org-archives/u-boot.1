@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DCDCD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915B4CD98E2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A4D3849BB;
-	Wed, 17 Jun 2026 16:11:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2CE1849C6;
+	Wed, 17 Jun 2026 16:12:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ihF3HZ+g";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="xl8LhyIH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3D07849BC; Wed, 17 Jun 2026 16:11:54 +0200 (CEST)
+ id DFB0F849C5; Wed, 17 Jun 2026 16:12:01 +0200 (CEST)
 Received: from OSPPR02CU001.outbound.protection.outlook.com
  (mail-norwayeastazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7D7E849BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0181849DA
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:11:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ye.li@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UwacXunXd9hH2t503b+bfJr8R0QjHtqllrPOx7PM4Lab4xx3pzRa3BoKn40JbgtfxVGoV6uzVHWJRWOHaWWsiaK1B+iNhTgqbxv/iMas66sMmNCH94vrBxzV7gOAhN72v10uSL5GeqLKIp0hcn4c0EkLfcCnP6EwciGc7Nx6y+zI8Ge62q/GUjql91SlRY9Cs3wViC4HdXJAzMzHUuL8sh0akj/lKZbdqh71fjSBHp6lFuzdH9MlSKTMQAf3HI9VLHWRpL9Z2DuX258guZRv1z/wcS+U4aeo+z/rNMnUhvf+aqUPCj0QYHhxWBkhUwg3hXHLXlDPbbrZZ1wVSswmXg==
+ b=aLOiJpdpzEXooLH0Ph2JQx1qahLRFS5tTDyQ7oT5B8HzROjxwZ8XcACrN78bCFm0z95pq2bdFE3K2rd8P3W83P6HqQGnUyESMDWSMxppcrJwsxHPVwI1TgbG4QHOATkOE8BP3Sp3tTPNlYCTnUr4ha+TVLeX7VC/iHmwiJvbXu/fDep9XrxerPq6dpjWil2uqivSxs3zovj7Yn6y3TTGbiyRTHTRidRp5XopcOKZae6+ES4dSrJQL9wAYUDIWgBmR18PSKAfgB64ORJkT4aa6KQ8Szsk03caNLR7bTemzDUSabJaIGuXBb3vWdC6I/7OYAKraO2lVqX6QpukhTNAPg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/Jm5WO5SkbG9Y/qt2VAEMJQxgBjOY/x5uNWAQP4v08k=;
- b=KeLJpxCU4IjAyzOU7Kg+V1xuXD5D85fHHkE9WYll0bwpRuqojTDwOeVTPu2IIDJy2v4bFBCjaAq572ufPCS87qpZiocoEZywACpTVuOn6QY9d2F5fm3Z4NEmMQVc0xxMfNtqYkBfcILrZQ5H6HcAf5PwEp7kGCsNJk/oSwAxU9r5h5yMYD5t/wtUOjlb5HXRir+5XcvrGV8JcaVjL2A0yt62Aq/p7E5ORrJ/+8IV5QNGDTA3Hae+5ScViOGkDXKxI24DJoHiesEG6w22tREwuesOobcsdJbTWaDAUR+9JvSJw+7c+CPNKcTh24pdhj2eJ5KiBs8yqf6odo2xdLrBIw==
+ bh=o8Gsa4mXEOVRjGc2f5volgG7JfMVuHaTnI+vlbvTV/w=;
+ b=sKg1CSWo0SUC0TW3PXQ9ZbiGFeMRMCrGbDwSbJ6XDlY/EQ2CyVvqqiQauDunpQ1MqJVGKpzMeRaZF7cdRT36D8tUPfw8iG4TOVirONmV/QKi596fTaaypsydwOjknue+dW2K0b7rdFjOzhM/3JWMzToYoGjnnRvTjYHh2Xb7bt1wENyCdtlWEb77/Kt0duw7wu1MQaxxGLiMdC3xmoVpEJDzweObv73tuKhpAO7K+qZuCAqVPfxtNDrMH5+iZoGvzToDID7M9S2a9pU3zH/FckeEeGdi4BJTwJMXli3L31zE+iY549hHIva6wu28CtNIek9DqV8PnJEUHYQRanOojg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/Jm5WO5SkbG9Y/qt2VAEMJQxgBjOY/x5uNWAQP4v08k=;
- b=ihF3HZ+gc/w7eviBdRGe7uJEvUAD6bUMnD0uXjbcC+MfU8weNHhLoGb29iiF899UgRUrpitgb6w5351zgw6LkpOknGQLZ3nEnHxPM6FpNdgwgYe2AiVWIrbGkWxPOp8JdGOdyvWyY7u7+yQE+Y+N6xzOu6vKInJ3qPYSR56dNASVNNtf9kQGGRckre6wt/joWqnXLx+X/dp3DmOQGzlWyneF6sIBULB9hyxZ9ZqBuhTt+j3XQxXwMPD1ih2+7zYksnhXDsvmEkzF9a9jkwzDDCwuHXpC95nNMyX1S3g98HpWt1xa98w1fzLyybsvb/z2GBg9ej61apWXygKv5MaswA==
+ bh=o8Gsa4mXEOVRjGc2f5volgG7JfMVuHaTnI+vlbvTV/w=;
+ b=xl8LhyIH8Qsccj/o7qCLqUKa1y12u+5hC5Mr4KLbSmp7zXq8De9RVfN2vvXpi4lcKuk6ZsbG2lXm49lbulZdDvRDYfJHIgSZW2gFbfZkLcXtWXhb3QNXmQozMb0ULPbTZAj92GYpG/cpvTfnzwUB3S2M26OCUsyHqkeNApfCc4KymOCatlnGe/RGROh7VaIwi38K8s1hrgu0nhq8J596hqYgrvU4AHwm6MmATpRIb9zfJj3myZI1kNDoaRYH6gTkX1Oy9SPzJ/s50uVMeW6jvedtFAMKezRFzJv2ezhPnX4EY+SyUrLo5xM9CzeQGrw6961CyWY5+j664l/mC+M2ZA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from AM0PR04MB5121.eurprd04.prod.outlook.com (2603:10a6:208:c1::16)
  by AS8PR04MB7623.eurprd04.prod.outlook.com (2603:10a6:20b:29c::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
- 2026 14:11:51 +0000
+ 2026 14:11:58 +0000
 Received: from AM0PR04MB5121.eurprd04.prod.outlook.com
  ([fe80::da59:a278:1b1a:4592]) by AM0PR04MB5121.eurprd04.prod.outlook.com
  ([fe80::da59:a278:1b1a:4592%7]) with mapi id 15.21.0139.009; Wed, 17 Jun 2026
- 14:11:51 +0000
+ 14:11:58 +0000
 From: ye.li@oss.nxp.com
 To: festevam@gmail.com,
 	u-boot@lists.denx.de
@@ -60,71 +60,70 @@ Cc: peng.fan@nxp.com,
 	uboot-imx@nxp.com,
 	alice.guo@nxp.com,
 	ye.li@nxp.com
-Subject: [PATCH 3/4] nxp: imx9{4, 5,
- 52}_evk: power on mcore according to SM config
-Date: Wed, 17 Jun 2026 22:14:45 +0800
-Message-Id: <20260617141446.2794896-3-ye.li@oss.nxp.com>
+Subject: [PATCH 4/4] imx9: scmi: reset GPIO2 according its node status
+Date: Wed, 17 Jun 2026 22:14:46 +0800
+Message-Id: <20260617141446.2794896-4-ye.li@oss.nxp.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617141446.2794896-1-ye.li@oss.nxp.com>
 References: <20260617141446.2794896-1-ye.li@oss.nxp.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MA5P287CA0233.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1b1::12) To AM0PR04MB5121.eurprd04.prod.outlook.com
+X-ClientProxiedBy: MA0PR01CA0056.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:ac::12) To AM0PR04MB5121.eurprd04.prod.outlook.com
  (2603:10a6:208:c1::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM0PR04MB5121:EE_|AS8PR04MB7623:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b5f7ab0-dc49-48b3-81ee-08decc7a607f
+X-MS-Office365-Filtering-Correlation-Id: 21f8e2ff-6d3d-42b5-b9c1-08decc7a64c6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|19092799006|56012099006|3023799007|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: LhIYYqAlexO43jSNA28VWZLDDgU/cmmNlyj+xoZ957ldch0HmBmX5gqBnnSPe/eu2sDIForGkkyXkXEH/jGo5qDf0TYHiHxDA75wZtFGMgMyrGjhPaIp4LE5Pnvc4O8LocED/cMo2xlyG8WLedNO/Yng82FeAcPbx9DMwA9u8urhEXGElnN1MKHMYFJgm1fQRWo76GAizobO3dKaaYu8yXpaF0c+MuQKXzYuSmoGE3HtxgMOXFrIg3FdXl/ZVAV44s8DYY7LHMs1yhcwQnISCvxVBgNXEitB66sMPu3PIOAS7INyFEFWsDvEQ6dap0xHGIXhhqCpLSREcLXI9dSKU8LVJQeD6P91nklvA77CZd/5jLuuWHpv5pBcjAyJlsjQITfEzuY3ow3t+fOYwKntRi2ukgWzawLXqvP3wJGaGdhuZrMgdLVjpkNlSYtyXXyS5qEKbPKYHxOEAxsn4XvDsb43NaA6oe47ZZzUGUW8RTHzpzgd2WQ70xUqsa4LXQLgKhQD7mxX8ct1nhpVX9q3SN8u5xMiHh+6KAHqdt3K87T8futYbpOPeCuyZ3ELDcqzjjkJ/lJD30qyv0ZSvYKi1Lng++12O15ug9+v6e21gLX8ApvCmW72VlEvjbIEw9MsFg8vtsvMhHoFQYrMaOiBZT6+TZayTWjGXCE21sxrPuXD79MEzAj3w0T6zQyZcYLH
+ ARA:13230040|366016|23010399003|376014|1800799024|19092799006|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: sWJhCIm18qD4x76NiktDGIhNOyish2iiCluf5hrYtFqP1yyXnVrQLMiqklmBPTYWWS/GrqVT3niCtj4xe0XMT+Il7gkWY6JdsPwnvyGnH1qRa+9J88XyuXqMeFe2jGIMfwtAPmd73gfHjz2sVzeqZJfOIORi2GTepDhY6X03fge/u5KKPxfQNfLHB1CH9vzqIlyxGO50d0fSJt/cuRq9rPw056PwP/ao+j37BGuyxto7hL/Sen1T5i3UQt6mJX4Bd7BFnQlgmmVcCfCaWT2Qv8cfPbADHwOgO/T6y2tZn2X+7t0IGO+xVKQ18aVDzL7s2VdcxbzeqCSEYmeJ5DqyEweQcJIg/UFubrJZi/mS5NV/IDgLet3a3de6f3EHezL5tn+Ul+HjSz1eB9/5PeqORazJLlUDNL95WjekG+r3X16tITSkd5sM/vqnCW31G4cLSzuTNuX/0HCTKjRCvwRfZ0u170B//9yfYGeK+pU4YHxtcV84bNKre+Jc+kor8ekf3VhTiClzSIF6g1c+N0Pnj7QFpthoBA6a3xh+hSnwoUuRAbiEeML8+aukuW4ejFIKDAWbgmZgQK3MjZnHF7QwzEpl5Edktq0NhAEKzhn10N2LXJlIOXv1V4xTBO4RHJmjOVt7gRtD9gU0nskEDah3Sg+77qWZZTNhwCS/9cZa7ag/2RmhEPssBDSypT3uyEkf
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR04MB5121.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(19092799006)(56012099006)(3023799007)(11063799006)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(19092799006)(56012099006)(11063799006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PnPpMvZmGNv2zf+zywjgtLcIrVoCM9NmUnY1wwAGnz9Ki1aOYFjnJn77RHQX?=
- =?us-ascii?Q?6IS1QcaOPjIaMO+tG1vLTbTSpFi6kUfaSRF4xnJbCOdAp/jfXWMWafy/31EN?=
- =?us-ascii?Q?tucNFqUYyaD9FM/MgmA1pgA+vt1jQq8Aix16JLaZpJGUle2pW7WeLqaLUKYF?=
- =?us-ascii?Q?uebt9iju6vk4kFICIL411rI8O24kGeDvqDVtGGNgXEv+f0/Zegt2iwZQKr+q?=
- =?us-ascii?Q?Bd5dpzl59r3XuiFPeMizGTop08+AjoJeKC+pbJvyPc0mCUTi2CZTC/Z0fNOw?=
- =?us-ascii?Q?Uc+msMgHrl4WwIFULCwGNqoq0d3mxKWOkjAdpdIrjN69P9H44GSaxXOtdaLf?=
- =?us-ascii?Q?qZJUwOzJuuLede3e7ovJp33JMrQq0BwUFHUdQg147uy4yeEEfe4U07R3PPKS?=
- =?us-ascii?Q?g6gvMCjmUw1Gs3wcqGatv/1jF05E42zxIMdbuk+PvPx1c8QdXr/Vn6XUatKQ?=
- =?us-ascii?Q?eBJQpsKc0kNT7ww0JDFBh9OrkR3cDD2paq1P00CEAWPPA/gVcntObi81UTS7?=
- =?us-ascii?Q?kqYCImfn+eVDSL2L+QHgcI6odr6+31DJRTfzZuqKZcTVcj+5J1nav8pYotha?=
- =?us-ascii?Q?hvlNpnl1bjQmyCpIwGalEixArD8sy4EjTyp/Nw0lnd+yyVz8yTTKGOj0PmW2?=
- =?us-ascii?Q?e0JyfwLik8iNRdK6EcEdREC6h+pBJvdqqkTvlZb5ajwSm0EfGj56FiwJZiRQ?=
- =?us-ascii?Q?knRw6RHWE5jPLvIG6gCYg1dMnClmMOI9fnV9xiSu5dCVGpQ6eTjmz1BaCc4J?=
- =?us-ascii?Q?eyKRYrNmFhFFU2dUluH9RelAOhO5S9jbp9VkUgWfDPll6oiy2Ogc0nRf0xNx?=
- =?us-ascii?Q?5hbOWEaKqzSz7Av6VJKoJsVfkrT94eoBwPpvooHxoyMv4BwZZ2Qtd+7UxPeq?=
- =?us-ascii?Q?2PSuWLbBPZ/OUWlXmx+j7KxMNS8ygXggw4lepSONcr7aEdsF7MuJttCWt8me?=
- =?us-ascii?Q?5aDtrC0fnPXN323UPL2yuTYXQkUjW3U/GDTgrIbOGJXWVPUPVfPOVXmsFUgh?=
- =?us-ascii?Q?F890YBgEgkcooDIPv7jSN0a5mdG5hKs+eg6gb54KxV5UBEPyURcwRkULCBm2?=
- =?us-ascii?Q?JxdFXK5Z4XGXz43l47fDCu8Wscyn0DZBs4AmHGbzLWIqaCyXGZ+6Nm1wH82S?=
- =?us-ascii?Q?Snd6oW675N0nPkxS0itBN69mC7UE8A4ID1BOHoG9wL4d0CkgX81cKRWqyMO6?=
- =?us-ascii?Q?0/woGzqlraP1KtzbelJzWgaahm4ySOb41B8DsCNNqyQPW5P7ugPipHZoUpP6?=
- =?us-ascii?Q?my02w6aAkAI7BFxfn1YAdsGcF5m9pfjKF92POuk+20d45kJMR0zkziYH9p6R?=
- =?us-ascii?Q?WxEQ/2eDB3NO5fsOPzXN+4u8Vfz3tbfEZtY10psJVmtBMj6pea+dCxoqW33/?=
- =?us-ascii?Q?efjs37Ic/qLSYMuqqj1AdJm5BWr4ss5kHhp22PlD/iaI1ULmh2Jnyw5ZZ8yK?=
- =?us-ascii?Q?UqfaPfny+EMi5ryOA3+R4AffgBMiG21X6wFe4Xs36xUPByMybHBuFVWRJ00O?=
- =?us-ascii?Q?nZcEeshNJb3IMI+9XXU6Y41KZV0el53pKgv1mEnL4/IyGM5ai+22Emagkuan?=
- =?us-ascii?Q?iPxmy5lVqZXdyIQZghy2IUBmWDVGB4setwhePjibOs772cRMGt0tRjmDGuVf?=
- =?us-ascii?Q?fgiX9YvvHmYCMOcOYRHh1jkDqUCBuLpX/cUJz80UWiJ5TSHJEOUKpGXa9bWz?=
- =?us-ascii?Q?wTLG71ow49MioMKI2N3u7XoJ+3QJNP9ySVBg6ofANtYR5aS4MW8+5oVnlkqb?=
- =?us-ascii?Q?5ZjJxDqDefAwwfPtYu1SQPlpcdIiazc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ju+9VuA4rMGP36lIDYbL+yirFe638fhBJ3wm2p6XCEV4Bk+ugMf1VoQOAEl8?=
+ =?us-ascii?Q?P255dvS6w8IuwzqzbQE7vkbYUIBVhgKbGDn573eTXmVtewiHADi3Xim+oCa4?=
+ =?us-ascii?Q?Ck0rwEry4hkfLw20nbtlTeUyI0F5Mh2RPQcIz9Rk5EMiC/iAdE5HHjIvwIIT?=
+ =?us-ascii?Q?/9TSYQFHoi//VPwMZ7rlWKh5vuhFSij+xM7BMxZBvjhdlnhJxkTvA2X5PJg3?=
+ =?us-ascii?Q?+rlOeLJngbLsSiLXs2L93Oopq/KepKaPBBS0s2SzLallU/yWkUPa1og24krJ?=
+ =?us-ascii?Q?Qw/mWBD7HAVG7r/XldTf1/09zYwnGBFbdDQTKV6g0MFjQD6ECddvdmGtohHr?=
+ =?us-ascii?Q?jLwTV4WyrJMOYDHJRvRT8ppemQ4gRu35mNMn+o0hsP6y8zWI20zRdXxUUdHV?=
+ =?us-ascii?Q?DqGWKsROJ0qr2w5r7cSCNzyUWsVAePuTVpw1HPK3A9l9v8kTyENbdL81EZeE?=
+ =?us-ascii?Q?M4d303DskBXLunG0KgoTJjLA0QemHUUJE0k+LIlGoMtLsSjLjt695+f8KCMo?=
+ =?us-ascii?Q?MOoYzo9hgYnCleJMhxHB3vgp5mSQ5tcDT16UnY+n6U49hQvYJtb8gOlbaFEI?=
+ =?us-ascii?Q?c67bJ93WrPSu/MfB7T8UJUuE0+LSthpDAkioh/b44paie9MjtwXZg+4fMrNs?=
+ =?us-ascii?Q?paVY0XJzh2pSfOAUgu8OSoTdB7pLQ4nzkJLG5Oplve/sLt60kyqJTD/iqy4G?=
+ =?us-ascii?Q?VZcPsucycXhSIcv3Q8XOKsZVXcj9Cz3CAapq+U8F9BHOWJnddNFJIIxU3hXK?=
+ =?us-ascii?Q?TQrn1wtDVWWXrqHEzop7FISzc6MK+AaVx3PDZrO0CNxQbtuSyraXaAE2mQPP?=
+ =?us-ascii?Q?7/lxw5iL92dRis/LxasfbfG9Pk8ih1A8Op0tgqi6HkXkdeWQoOPu1LM96zcf?=
+ =?us-ascii?Q?4SJcMvbDn+mlBq/yco8FXJW7T8zsddv02FFFQvO0a0Ita98Zs3wJTWne2ydL?=
+ =?us-ascii?Q?moKRJqzBnmQvWQd/7Xc4UXvNUIj4VhYkladZPnsCRf6itW6owZk9LXmM3seb?=
+ =?us-ascii?Q?BNB2ZK8yTheq8+oDL5aPaxOj+YE4BN+RZ7qX0wr9ttJOEXssQgVMlPQ1KLJB?=
+ =?us-ascii?Q?wXI4AaxCHKyQWI+a3SJ6NaDiRFsAgv18EhNm5jCAeUuNpYnrq/tl4il1RVq2?=
+ =?us-ascii?Q?o8CR8LHCeTW0NnQ5LiMEdzXBSnFI6jhHgXIXOdWilGgDnqSxqJOtaSDWpzek?=
+ =?us-ascii?Q?ume4BtY5SLsnPzAapqQ+JkGfdPFP/0nnFsUdVstvwh7ErLdcCQSZq2zV9tvN?=
+ =?us-ascii?Q?Wf1fbGlx1DeRwF87NKA3MtHPkKeFufAZnaOnCXAAjTkH+1rX+4TahYdwcxEd?=
+ =?us-ascii?Q?uXwhc/6hrcuBeKFmioGbB4CeQQAHtyt1jMefYJUKQcoJb/cobxdfWwC9o8Jw?=
+ =?us-ascii?Q?1SE5DgjeuFjsyV+/F8VNMRuuy+dinoK7W7cK4Ru+zrRi4Cs6e/KDiHrgSnG7?=
+ =?us-ascii?Q?bG4R0yV7H/0u9V+W4oJX5OsiWMUd2eMleisnyXW+cpw898CA+/aMpwJI/0Cz?=
+ =?us-ascii?Q?85oAzlaHheGYJMfmBDVZd53rI7sCIUzcYnWlXuXm3SPQsLTwl+vGruzTt3wu?=
+ =?us-ascii?Q?mXNoN6iHB149gl2RorgqKeGyaKlO9zGW8b6H46Kz02ub3ODT9CdUWl+n7ULF?=
+ =?us-ascii?Q?kbZW9Rdy88yTa9vf0HPfhLxiv5uWySvFBIZq3a1tNX7gGw9cWEfJOIBE8ESc?=
+ =?us-ascii?Q?+aggQEAniURXYAUNQnJPLj9aZwSZ/rfSgZ67JmB9mluprbP7SS7uZYrMYgpn?=
+ =?us-ascii?Q?P9xPQMF0XyiNJqIXlVsHv503ZszBQ0U=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b5f7ab0-dc49-48b3-81ee-08decc7a607f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21f8e2ff-6d3d-42b5-b9c1-08decc7a64c6
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5121.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 14:11:51.1400 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 14:11:58.4858 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AT68uM8mtzDUgrDcoTcERevUXK0OOdniRfymxG0bf24yxc2Nx6m6CZaYpKi27ZGexjg8jsFTPwwY7vvEo+Z7Ou6Mu2YBOuImbhryDVD+4BE=
+X-MS-Exchange-CrossTenant-UserPrincipalName: t18HsIQWt0skYnCKUPSPGN2Lwn0ZdqRmR8kojUo4KnAaDWObY5r7fL6s0nPTkmnorxiILtciorp4v0fh2IsMKHaV2dAllddYfLtPjQwuRtI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7623
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,246 +141,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+From: Peng Fan <peng.fan@nxp.com>
 
-When working with SM config mx9{4,5,52}evkrpmsg, mcores are not booted
-by ROM. Hence, power on the mcore and initialize TCM ECC in u-boot for
-subsequent mcore booting.
+Check the GPIO2 dts node status to determine reset it or not.
+On iMX952 single SPL/U-Boot image is shared for both mx952evk
+and mx952evkrpmsg SM configs. GPIO2 is assigned to M7 domain
+in mx952evkrpmsg, and there is no active user of GPIO2 for
+mx952evk and mx952evkrpmsg in SPL/U-Boot, so it is disabled in
+DTS. Otherwise, reset GPIO2 will meet hang when working with
+mx952evkrpmsg SM.
 
 Signed-off-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/include/asm/arch-imx9/sys_proto.h |  2 +
- arch/arm/mach-imx/imx9/scmi/soc.c          | 98 ++++++++++++++++++++++
- board/nxp/imx94_evk/imx94_evk.c            |  5 +-
- board/nxp/imx952_evk/imx952_evk.c          |  3 +
- board/nxp/imx95_evk/imx95_evk.c            | 10 ++-
- configs/imx95_evk.config                   |  2 +-
- include/scmi_nxp_protocols.h               | 11 +++
- 7 files changed, 128 insertions(+), 3 deletions(-)
+ arch/arm/mach-imx/imx9/scmi/soc.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/arch-imx9/sys_proto.h b/arch/arm/include/asm/arch-imx9/sys_proto.h
-index b5e7d7d6855..5551ebaa68d 100644
---- a/arch/arm/include/asm/arch-imx9/sys_proto.h
-+++ b/arch/arm/include/asm/arch-imx9/sys_proto.h
-@@ -27,6 +27,8 @@ int scmi_get_boot_device_offset(unsigned long *img_off);
- int scmi_get_boot_stage(u8 *stage);
- u8 scmi_get_imgset_sel(void);
- 
-+int power_on_mcore(const char *sm_cfgname);
-+
- #define is_voltage_mode(mode) (soc_target_voltage_mode() == (mode))
- 
- #endif
 diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index 372dfc5518e..c4127349aa3 100644
+index c4127349aa3..00b8693fbe0 100644
 --- a/arch/arm/mach-imx/imx9/scmi/soc.c
 +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -58,6 +58,43 @@ uint32_t scmi_get_rom_data(rom_passover_t *rom_data)
- 	return 0;
+@@ -14,6 +14,7 @@
+ #include <asm/setup.h>
+ #include <dm/uclass.h>
+ #include <dm/device.h>
++#include <dm/ofnode.h>
+ #include <env_internal.h>
+ #include <fuse.h>
+ #include <imx_thermal.h>
+@@ -949,6 +950,22 @@ static void gpio_reset(ulong gpio_base)
+ 	writel(0, gpio_base + 0x1c);
  }
  
-+int scmi_misc_cfginfo(u32 *msel, char *cfgname)
++static int gpio_available(const char *nodes_path)
 +{
-+	struct scmi_imx_misc_cfg_info_out out = {};
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_IMX_MISC,
-+		.message_id = SCMI_IMX_MISC_CFG_INFO,
-+		.in_msg = (u8 *)NULL,
-+		.in_msg_sz = 0,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+	struct udevice *dev;
++	ofnode gpio_node = ofnode_path(nodes_path);
++	const char *status;
 +
-+	if (!msel || !cfgname)
-+		return -EINVAL;
++	if (!ofnode_valid(gpio_node))
++		return false;
 +
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "protocol@14", &dev);
-+	if (ret)
-+		return ret;
++	status = ofnode_read_string(gpio_node, "status");
 +
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
++	if (status && !strcmp(status, "disabled"))
++		return false;
 +
-+	if (out.status) {
-+		printf("Failed to get cfg name, scmi_err = %d\n",
-+		       out.status);
-+		return scmi_to_linux_errno(out.status);
-+	}
-+
-+	*msel = out.msel;
-+	strcpy(cfgname, (const char *)out.cfgname);
-+
-+	return 0;
++	return true;
 +}
 +
- int scmi_misc_ddrinfo(u32 ddrc_id, struct scmi_ddr_info_out *out)
+ int arch_cpu_init(void)
  {
- 	u32 in = ddrc_id;
-@@ -746,6 +783,67 @@ int get_reset_reason(bool sys, bool lm)
- 	return 0;
- }
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
+@@ -964,7 +981,9 @@ int arch_cpu_init(void)
+ 			disable_wdog((void __iomem *)base);
+ 		}
  
-+int power_on_mcore(const char *sm_cfgname)
-+{
-+	char cfgname[MISC_MAX_CFGNAME];
-+	u32 msel;
-+	int ret;
-+	struct udevice *dev;
+-		gpio_reset(GPIO2_BASE_ADDR);
++		if (gpio_available("/soc/gpio@43810000"))
++			gpio_reset(GPIO2_BASE_ADDR);
 +
-+	ret = scmi_misc_cfginfo(&msel, cfgname);
-+	if (ret)
-+		return ret;
-+
-+	if (strncmp(cfgname, sm_cfgname, MISC_MAX_CFGNAME))
-+		return -EINVAL;
-+
-+	printf("power on mcore for %s\n", sm_cfgname);
-+
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "protocol@14", &dev);
-+	if (ret)
-+		return ret;
-+
-+	if (!arch_auxiliary_core_check_up(1)) {
-+		/* Power up M7MIX */
-+		ret = scmi_pwd_state_set(dev, 0, SCMI_PD(M70), 0);
-+		if (ret) {
-+			printf("Power M7 failed\n");
-+			return -EIO;
-+		}
-+
-+		/* In case OEI not init ECC, do it here */
-+		memset_io((void *)0x203c0000, 0, 0x40000);
-+		memset_io((void *)0x20400000, 0, 0x40000);
-+	}
-+
-+#if IS_ENABLED(CONFIG_IMX94)
-+	if (!arch_auxiliary_core_check_up(7)) {
-+		ret = scmi_pwd_state_set(dev, 0, SCMI_PD(M71), 0);
-+		if (ret) {
-+			printf("Power M71 failed\n");
-+			return -EIO;
-+		}
-+
-+		memset_io((void *)0x202c0000, 0, 0x40000);
-+		memset_io((void *)0x20300000, 0, 0x40000);
-+	}
-+
-+	if (!arch_auxiliary_core_check_up(8)) {
-+		ret = scmi_pwd_state_set(dev, 0, SCMI_PD(NETC), 0);
-+		if (ret) {
-+			printf("Power M33S failed\n");
-+			return -EIO;
-+		}
-+
-+		memset_io((void *)0x209c0000, 0, 0x40000);
-+		memset_io((void *)0x20A00000, 0, 0x40000);
-+		memset_io((void *)0x20800000, 0, 0xa1000);
-+	}
-+#endif
-+
-+	return 0;
-+}
-+
- void build_info(void)
- {
- 	u32 fw_version, sha1, res = 0, status;
-diff --git a/board/nxp/imx94_evk/imx94_evk.c b/board/nxp/imx94_evk/imx94_evk.c
-index 4731b79b55d..f0edd7d131f 100644
---- a/board/nxp/imx94_evk/imx94_evk.c
-+++ b/board/nxp/imx94_evk/imx94_evk.c
-@@ -7,10 +7,13 @@
- #include <fdt_support.h>
- #include <asm/gpio.h>
- #include <asm/arch/clock.h>
--#include <asm/mach-imx/sys_proto.h>
-+#include <asm/arch/sys_proto.h>
- 
- int board_init(void)
- {
-+	/* Power on mcores when using rpmsg cfg */
-+	power_on_mcore("mx94evkrpmsg");
-+
- 	return 0;
- }
- 
-diff --git a/board/nxp/imx952_evk/imx952_evk.c b/board/nxp/imx952_evk/imx952_evk.c
-index 2a61817939e..74ef87b50c0 100644
---- a/board/nxp/imx952_evk/imx952_evk.c
-+++ b/board/nxp/imx952_evk/imx952_evk.c
-@@ -9,6 +9,9 @@
- 
- int board_init(void)
- {
-+	/* Power on mcores when using rpmsg cfg */
-+	power_on_mcore("mx952evkrpmsg");
-+
- 	return 0;
- }
- 
-diff --git a/board/nxp/imx95_evk/imx95_evk.c b/board/nxp/imx95_evk/imx95_evk.c
-index 99a37e0593f..0de7fbe3f63 100644
---- a/board/nxp/imx95_evk/imx95_evk.c
-+++ b/board/nxp/imx95_evk/imx95_evk.c
-@@ -5,7 +5,15 @@
- 
- #include <asm/gpio.h>
- #include <asm/arch/clock.h>
--#include <asm/mach-imx/sys_proto.h>
-+#include <asm/arch/sys_proto.h>
-+
-+int board_init(void)
-+{
-+	/* Power on mcores when using rpmsg cfg */
-+	power_on_mcore("mx95evkrpmsg");
-+
-+	return 0;
-+}
- 
- int board_late_init(void)
- {
-diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
-index 743778d9554..7c429fe0bfe 100644
---- a/configs/imx95_evk.config
-+++ b/configs/imx95_evk.config
-@@ -37,7 +37,7 @@ CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
- CONFIG_DEFAULT_FDT_FILE="imx95-19x19-evk.dtb"
- CONFIG_SYS_CBSIZE=2048
- CONFIG_SYS_PBSIZE=2074
--# CONFIG_BOARD_INIT is not set
-+CONFIG_BOARD_INIT=y
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_PCI_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x20000
-diff --git a/include/scmi_nxp_protocols.h b/include/scmi_nxp_protocols.h
-index c17f3663eba..184dcc1e04b 100644
---- a/include/scmi_nxp_protocols.h
-+++ b/include/scmi_nxp_protocols.h
-@@ -18,6 +18,7 @@
- #define SCMI_ARRAY(X, Y)	((SCMI_PAYLOAD_LEN - (X)) / sizeof(Y))
- 
- #define SCMI_IMX_MISC_RESET_REASON	0xA
-+#define SCMI_IMX_MISC_CFG_INFO		0xC
- 
- struct scmi_imx_misc_reset_reason_in {
- #define MISC_REASON_FLAG_SYSTEM		BIT(0)
-@@ -119,4 +120,14 @@ static inline int scmi_imx_cpu_start(struct udevice *dev, u32 cpuid, bool start)
- 	return -EOPNOTSUPP;
- }
- #endif
-+
-+struct scmi_imx_misc_cfg_info_out {
-+	s32 status;
-+	/* Mode selector value */
-+	u32 msel;
-+#define MISC_MAX_CFGNAME	16
-+	/* Config (cfg) file basename */
-+	char cfgname[MISC_MAX_CFGNAME];
-+};
-+
- #endif
+ 		gpio_reset(GPIO3_BASE_ADDR);
+ 		gpio_reset(GPIO4_BASE_ADDR);
+ 		gpio_reset(GPIO5_BASE_ADDR);
 -- 
 2.34.1
 
