@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A492CCD98EE
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 07:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F47CCD98F2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 07:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5807D848D1;
-	Wed, 17 Jun 2026 09:07:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A61B484987;
+	Wed, 17 Jun 2026 09:07:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="IQZl7Qhm";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="dbgxc4sf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CA9284981; Wed, 17 Jun 2026 09:07:14 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 71FCD84987; Wed, 17 Jun 2026 09:07:16 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55022803F0
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 09:07:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F74D8497A
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 09:07:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FnUfYrdOWK89ZPgWTW1kfIqEyiFLUg9a+r/w3IJGFWv5ntj5snnW40e9Wvwztjm5BWC7PAcK9C1iZj1Z9hoEVhS29lBPearbp222TeMzYrZUG/HuluONDS1QOhWl7K9uHAarBsQF4cwrwEJvrsEbqJ4cWF4CXx63n3eC6HFH2WmCBeW2T0DM9bh4j+zvqxNlZ/QJC965hYn4DuybU+PdJD6VLi412UnEFRJdof+SZGJ3zQRVgiDaQ+k7T9NhyYBScoJY6J25VTbm9FQ/H4tbRsJtvVMoMTcXsGuPJ5/hW47AvaNgqOarj/QB75ehQZhMYCvp7vdU7dJ/nEcVSpAu4A==
+ b=DUrixpZCf2zt9RMPsdjw7Q0DJhtwBY30eUOBtcj3Mt2aN/h0qCxyuNLaV/0rBTRhj972u4a26CN76vGV7/ODVafFZ0quh+gkdXkafTISO0fsRCBqm+xNGieCTQXCBpuBdq4zNSiG45ou5SxV7e7kdjqqqCAJquPE1i/TjPwYGR9mwvd5X2oScOcwA53LcqZvydY6z0haid3EbvmuuOW6lX5PA6H7THmpJaOtC3ordw0RqhdbdvBZkYhKRbyI5a+plDtioawixl4FmA1vmPVobWws5Ik+VdeC0mFjPGGKUXPXg0zk83grMK8nv+cLzDg3dAnjQ4DhHlBX74x2unZJCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BuYWieIo/Oz4c9UrPveglWb1Tq+9lMVgXR+sZMekAAE=;
- b=B+ZSorXAWQZejiObBBXqMOOx0hxmvZeAPlvEqldOjS9v7Ic6/Fnkolz+oPEn4mDKC8MA5dHLIgimY858aTxH/4Wd04D6/IILbSMjG+ZwvjlWUtA/y+ieqOXC7s571UyYV2CqNdEnF+rMjeS+Ysgz2YpUllrDa5kC1xCYRJ69aabySeWILMnw5i1eJTqtiW/IMPppHxhFi7EAgGgyvyIiEm1BZtei7Xtk79BoTWY5RBHTjg8yWmQ0CpCV0cnyoyE8uqh4a806F6bmDQX5dHSAvsCF6FT0y/GGsfsWKfrFIqNC0SJseWsRfup6FI5sZ30WBeayOoFvAELexdu+YFVT1w==
+ bh=LyGT7NZSR1oABfWAWX2DtpNvl+lZkcZnVyqOLqYksRM=;
+ b=Gudqp9HHeTA5AO/JJpcG3miv5BMDEgH58c9aG5pCReQkZFYfqrpk34HYLDlUzXF5QmFGXakNeiIcpVOaVngbRMZK+3sywVUHuQKrwWaaAAXluQt1sI3OKkgYWEf+HN7XMpiRNy1e0Nw5mZI/Glsx9uD6QivrJ+lZgk8dqkSIk9bt2UvlLCTKXsqXt5iMcON8CmZ7699iKTNHhUwL7w6dYEbFAau5jH4wIrACSA9IANWlijZwn66r4xAfp/Iu05Rrbj0rS6VIDcdSHu9RSGcEMSo8z3hTvKdTR22aDEBHjCqUfskKuFx6up4m0L0ACz0DKV0iDKOFCdJ/RCvenX/56Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BuYWieIo/Oz4c9UrPveglWb1Tq+9lMVgXR+sZMekAAE=;
- b=IQZl7QhmE9UZrqPNdOCFP3+iolczhOYEp4cmhYSMotV5g2g9YJceUwGe2xlFfrBcuRcyMq+sRmHtpHwSa+KwKOm45YT/6xWv/DQgkOjjJowqmKpBrrk1ftFG4q71P48bw3WOhATYraY3tsX9cHxArHVpvTKUp4pWK/m3r6gBJQTiBBhlX9k1Y7z+sWOc0DUe/wToWPtu3ANvWPEG0on1XG3HKZ2p5Z4kuGDVK6Ava8z+UXH/OsOj2UYkr89zd0IiN9UBqOgBOgWycN50ZZGa7SCFK+6WLsqrKBP3Q83vzjnC4S6g+U/QJd8VEiOUkCCzKaCkGmFTJ2EdYjRUPs5P3Q==
+ bh=LyGT7NZSR1oABfWAWX2DtpNvl+lZkcZnVyqOLqYksRM=;
+ b=dbgxc4sfHiFQZOVsw1IWuLmCDBTKBKtPsoiUnOXOEXqvgP8RRYjaGxbrAofVGIUYH6Whi8sLsDI5UCSgWyxGzHCF9zxrZp5y3pE5gEDbEArbw+iqLopbp5A+xQHu/35LOK1VOaS4fdQoBz59VQ6pwFMEAQ7Mg4gEOT2aAJ5GcLAFwYlURiyh7gLoBsYQtdSJp7RxUWcEnVbM7/U2BFhHFdnkdib/jJXhxMm/d3+GUdy17NYOZYLYiYhEb2AzsxNbt8XpMmtrrrILHktmzUr4ugAN3k5g6NZdyFXqGjDUohmMq2iPX8oZzsfYC12JrqiRFNf0v21+sLYVGvJ4sa/W0g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by VI0PR04MB10832.eurprd04.prod.outlook.com (2603:10a6:800:267::21)
+ by VI1PR04MB9906.eurprd04.prod.outlook.com (2603:10a6:800:1e1::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Wed, 17 Jun
- 2026 07:07:04 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
+ 2026 07:07:12 +0000
 Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
  ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
  ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0139.009; Wed, 17 Jun 2026
- 07:07:04 +0000
+ 07:07:12 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Wed, 17 Jun 2026 16:23:08 +0800
-Subject: [PATCH 09/11] usb: dwc3: generic: support OTG dual-bind for
- runtime host/device switching
+Date: Wed, 17 Jun 2026 16:23:09 +0800
+Subject: [PATCH 10/11] board: imx8mp_evk: enable USB PD sink via TCPCI
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260617-tcpci-dwc3-v1-9-b824fe1e9299@nxp.com>
+Message-Id: <20260617-tcpci-dwc3-v1-10-b824fe1e9299@nxp.com>
 References: <20260617-tcpci-dwc3-v1-0-b824fe1e9299@nxp.com>
 In-Reply-To: <20260617-tcpci-dwc3-v1-0-b824fe1e9299@nxp.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -79,73 +78,73 @@ Cc: Tom Rini <trini@konsulko.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Peng Fan <peng.fan@nxp.com>
 X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SI2PR02CA0025.apcprd02.prod.outlook.com
- (2603:1096:4:195::21) To AM8PR04MB7874.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SG2PR04CA0215.apcprd04.prod.outlook.com
+ (2603:1096:4:187::14) To AM8PR04MB7874.eurprd04.prod.outlook.com
  (2603:10a6:20b:24d::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|VI0PR04MB10832:EE_
-X-MS-Office365-Filtering-Correlation-Id: 01b6e980-d206-4938-cde7-08decc3f091c
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|VI1PR04MB9906:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0892ea3-1865-4b65-3ef7-08decc3f0dd2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|366016|19092799006|23010399003|376014|1800799024|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: bO70TC6b7iwUvRDPEGkuYyXGmIgGw3nEzeN747xkp7X9eTXX92XhKfBsP/cHbcnUQcg5axxdo7dv+wVDymlTe8yAX1vAHcxDV/1OOEDXoYKahVHRKhQYDOBXt+9g1uOEtqDplj+0GmltLYKWyqjgHW3WLDy4+soZNAFq93JInb5FkBwZ77E8OO0XBpVEPyL6kQBCTYrLmgiqGtCNw1rv1kSWgKWutP71TY0VAZRa7+wqE02QJMAggZAFhhXmOUmTXUNue/N5ISKfnKi5GhW59erASFgMqYA0oIaCTGqDyumhZwP0J2rA0PvoHRuVQWpjFgcacSqldvn8DcvIoEjI5gryBbNFV1dbx2iPhp1FPiYrS37myb4bpLvRlJsStmYYnZM3ehEHX/oAvYBaTVP5dmVEGCdvCroVBENJDWs6WOvTp/5RR/b0jTJ+f85PtPhMJAGqDynh3rtdf4PfBgMnii5xinBK4r1wZ3m2UkvaWukW5wSUGWHo+WUCMgo664e58jxoz3Y5W3p0Cc6WmvoHfQau+46TA1o80opZRBJWaGUFWKk0cwo1SaV2AQO+RVDapmwMHQQ1iSYdC5WwB0JAOTyDTy7VOQBlkk1rkBlwjowlagTyTvXz9+iO2ZC77SLc1wgfk2ne6dhE3xOYsS/amMX6KO12Q5Wc/8TQHubIiJH5zZCw4b1CRD5HD+NkZ9hQ
+ ARA:13230040|366016|19092799006|7416014|376014|23010399003|1800799024|18002099003|22082099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: P5vtXPleqE+hmAmGGH5bvPhNfz6VclvezIt56CcFswd84MojZratgFnC3v2StpOTneKC/ZP0CfUNyuQSbvAEWnj8v9aDA8dmDxOVOJEYGeAxz5J0hxsQ0+mW+muKoTLwi+GeW5FfyRNI5S6lZ/3P7ubFk575u4wzZY1xQrMMUZNcm7Bm+Zu4gj7fNNGpFqsohrTaejm9nQnOHEf5JDk/n9quyqnPnfb4HgLKVEbxtmGuez27/F4K5WCRNwHyajV5AZeqn2MdMOmDhd5rITlw/8NhzVPUxbCV4XDpBbTnrnUNHFYzz3Jxl/BMznY7FBWtp5u8GoQvdUx+ZbDDh5lw2NLyWLJ3mYsLpmw+TET7/9b9orCINZYAxqWc6hBZx/sMLbEp/XdCh7EkbJfyYA/xgs1rGewm1aGAH6G/swG9wCpnmiJBRTb/jdTICbHflt0mkruDeIee1lVmjaL6GljFSkeCOzx4EZU4bUFo+c+BTUXi1QOHHHXowOVAk7QrNi1LK9sMMtXO2yfG5WJV4umx13E800dEx8xTFY11VM4Y26XDlIuF6YcwFnooysmkv7E8qxMHXrnedEH9SyIJUNgSn/IpXs1nKbU0yD1Lq/CPW/KGuRQ2Pr1ZsdUvHF/0uu0WDGu0rtXu+HS25QfSCcpIJpixlpghi30jiGEgBGdbrycDOZQwtX6LxBAVxpOO+Is1
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(366016)(19092799006)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(22082099003)(18002099003);
+ SFS:(13230040)(366016)(19092799006)(7416014)(376014)(23010399003)(1800799024)(18002099003)(22082099003)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXVNYTJROXlTQkJDZHA5dWZwY05PTHU4RnBhT2hjTFdseDBZN01FNStORXU0?=
- =?utf-8?B?NURmYXZuZllabVhETWl5Y2w2UnZSM2RiTWovRFN4UHRveDQrZHdGc2lnVDVl?=
- =?utf-8?B?dGhGNCtlWVJTMDZhc0lUNXVpcGRUeE5nVkJWNkxhMXgwMlFHT0x1VW1DczJp?=
- =?utf-8?B?RXFOTFBqaXV1RzJFdDJHMUlZaWVsOHlabzlVTEh1cjA2MXY3YmVLZ3ZPU2VZ?=
- =?utf-8?B?dGpNeC94dzJmbmxQMC9ObkIxak12MFpjWW02K1pBT0JGelU3WVVvU3VwMzNi?=
- =?utf-8?B?dnY4MWhiQms4UTJRM1l5SnNiSlczUEgyL25WVE9hZVNsb2VwM0lRT1E1bHRn?=
- =?utf-8?B?QlZqVG9QTlFvV3BZcHlhVVJsWUhySDNXdXIreGFmdVJ2Mm40bU8xL2Y5MmJi?=
- =?utf-8?B?aXhQb1NRK0drSitEVlZjSDcvSHd4QkNoQm5NTklnaFoweFpUTGpiRnRmOW56?=
- =?utf-8?B?VTJxOHhyL3FmODZsMkdQbzhnVlh6RjN2SGZac2dSL0IraEtqR3IzOSsxb1F5?=
- =?utf-8?B?dWV1d1VDTDNWN1oxTUlpemVyelQyTW5PT0c4aFhkWkp3VTFIM3FtUTZHUnpX?=
- =?utf-8?B?NFFTWjJnUk56VVAzV1NSY3lOSk4wMmFoK3h5NGcwMFNNN2NQQXVVQnR3ZkVO?=
- =?utf-8?B?eDFzT2VTcTRYSGNaNTVXdWxsU2ZuNkVpMjJvdjRrd2RsSkl5dGd4MDZHN0dP?=
- =?utf-8?B?dXhMU1V4eVcyRmNSNjJZVGcwMktKUHMvTkt4Vm5OWWFkMCtGQmdEZHJhbHMz?=
- =?utf-8?B?eWlJSHVnUlphZzFNbldNQUJ3OEh6WFQ2U2JoeXpNNjkzNzdUZCtFRFRUV1dG?=
- =?utf-8?B?NVF0MTRBMjlKWVFXd21URVVCQXZiNHVPTXY1dUtjRmlDajJ2cWZpUldWRk1L?=
- =?utf-8?B?eHpRTDUrcHZ5Rlo3b2EwUHRGald1aXhQWVFoNEtiYVpwTzlNdWRVQk84TDla?=
- =?utf-8?B?ZjJvN3lZUVVYWjRqR2M0T3Uyc001L29hQm9uWmgwdjNDSnFtQ1FvMDJqL3c1?=
- =?utf-8?B?NWpjL3JZdXJjS050Tmhma2cxQVJXYW1kendEQUFGSVh0dGdVb3FQbjVGaC9t?=
- =?utf-8?B?NzRqSXg0VTRCRldqb3ZNSTI4VjR2RGtyMkVKN3hQRGZ1dm4wN1MyVEdLWHNn?=
- =?utf-8?B?aCtKamtkT2d6Z0x5eEJvc0hlRFBkaFB3REpEZ3JKMDdoZFdHbWNUWFdETFFZ?=
- =?utf-8?B?UUU5R1dFWkZCTHJoanVXcVY4cWZMZzRMdENMN3FtWCttZjZjaTVCMW8walJk?=
- =?utf-8?B?QzhCZ3pUbURmZWdzMW1NbmNQRFJKSWVBK0FYZ2RQTVF2YVNCeHp0ZERWN3JN?=
- =?utf-8?B?d1pIbjJFWDZZSm5UL2d0cUxQbkJHN0dwaG5RSDhmZkhvd2RWV2d2NjJpNytr?=
- =?utf-8?B?b043cTl4bDJ2b1BLeldpYTNQRjZTQlQrZlBJdWFOZ0V0NUU4ZDd3WHo0MHBY?=
- =?utf-8?B?ZUV6dTVKUlRkcjB1dHBjdGhiQUFpZFpSYitjeVcwdk1aZ3FUbWJCckovUTdj?=
- =?utf-8?B?OWk5Mjd3ZStjcHlKNnplS0ZRRmFVZ01qWDZxUDFiY25lMU1PMUxjU3BSb0RT?=
- =?utf-8?B?c2F1QmV5TnlEaE5OZGFFOXp1cnJ4cFlhN2NpMEYvUDdaaWlDajBUU0dmRS9y?=
- =?utf-8?B?aFQ4NmNoTElUNWJ3Y0QzMUNqQk5ad0h0dmZiVGwrRVFqZDd3Ti85S1czdmVu?=
- =?utf-8?B?MUo5bko3R3pkVkhvby9xaGNiVjk1NTdZZHIxKyszeXlKcUh1VG5rZXdxajg3?=
- =?utf-8?B?Qk5xK3E3dDRnbXQ0ZDZERWZyeitZYmZIRWExY2RvV2VKVzlzbVdIanRkencz?=
- =?utf-8?B?bEprOFhrSklFMlVsWThxSThuZldkTXpHR2F4aHJrd1VxUWgvVW9XNjU1RzBn?=
- =?utf-8?B?Nmp4dU54dHpVMjBrNFhtelFRdUZJTTZYRWJFeEZndU5sRmt3R2RWaTR2ZFA2?=
- =?utf-8?B?RlNsOE0xTmZsVnB5bVlnS2dSSEpSTFY3eFVGZXdxRGFlcm9QNGl6UXlFK1lt?=
- =?utf-8?B?YktQaUtENWJzU1ZEU0ljcW5lR2FFd09TUnlFVUFzUkVjeG9lZ0lJeElpdFU1?=
- =?utf-8?B?U1dQWlN3TENnVEh6MWtzU1lXOFNmVXFyT1czYmt3N0xJOXkxOVpzNEdxbkVo?=
- =?utf-8?B?eGh2WGlZWVRIYWlRTkw5ZnFOVXVNekRReTBwVmsvKzBzMnEvYkJKY3RZdEpQ?=
- =?utf-8?B?akt6WkVZcTlXTTN2b0RPb0VQV2F0SzF3WTJvNjR5TW5qRW1vcGxFUTFKMEJm?=
- =?utf-8?B?Z2ppM2ZidVgxSk1CQm5aNFBiWjMyYVRGS3BxQUpSNFpqcWI5dWpWcjNmMkxX?=
- =?utf-8?B?aGpWM29DcFlWNFNsTk15VHBjV240YkUwc09USTUwSjd5UnV6ZTNNNGlQSldC?=
- =?utf-8?Q?rg9Gddhv7cc2eoXbUp3KjNAofFrev4X3a3hZn?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NlZ5RXlYZkpJNCthRkhYVnhtZUJBTFVUUVhmYzk4clhXL1kvUzFobVdWTitR?=
+ =?utf-8?B?SGxLeTNiL25kdEpEc0VLb21WUlVWc0RjTHEzZG01NjRTb0lVWGR4dDdSN0J3?=
+ =?utf-8?B?cEovcUFob3JKdlRORUtHUUNDZ0l0K0p4TTNya1Q3Q2taRmo4VzEvNmwvVmFm?=
+ =?utf-8?B?VGhhRlZSbGl5RHlobS9WbWdWK2liLzExWXlQbVN4MUdiemthNllYYWdEcFhl?=
+ =?utf-8?B?dG4yWnp1RVVSeGFNTDBTeTV3Uy9kSHVHVmRwN2FrQmRzdnlVTDNmR1dyRDRT?=
+ =?utf-8?B?VlBucGxRTmhXNE41ejRsMkR6TE5PenN2VHNiL095N1ZpNlNBQm5DcUJRZUp3?=
+ =?utf-8?B?OFpHL3IzL1R4NWV4a1Iya2ZSdHRIdExkazBJR0dQa3NEU1pJNmtDWDdGWUZ3?=
+ =?utf-8?B?S0RJV0RsaXdVNVlQZWNmdEM0OW1CYmkyZk1zRkxvMHl4M2FJSmhSUStnQWZ6?=
+ =?utf-8?B?aG9YY2UvbThEazVVNlFoSXAwUXFPUWRGdndYcURRYTY5QlJmOFprMVlJTkta?=
+ =?utf-8?B?Z3Z0czcvQkJqdG82ZklZMXBMM1I2eHZUU0J1S3VqT1VSUVdORFlNQVJ6NkpJ?=
+ =?utf-8?B?L09uZlNQN0NCZGhxTmVLcTlpNzI4RHN5dlJxYzhWL0gyenlhaElvWk1KZjBu?=
+ =?utf-8?B?ckZRUHJHVVJmQ2FIb3NyNWUvaEc1M3hzM1RNZWZSNERrdzJHaVR5cTJmd2J4?=
+ =?utf-8?B?SnE5em8vUFpzTTNkeklKcDQ0Y2ZaQ0VxTjIydUVTQzVpQ3QyTkEyZFlCQWhm?=
+ =?utf-8?B?TW9GMEowZjBzTU5FREdPQytPU0lqZ1RYTVduUnBkbC9MMTRPMEFmMnJpSVUz?=
+ =?utf-8?B?UUZLWlVMTFROK0hRWTdib3RLY1cxNTh6TUhuUGNiRmh2K3c3bzBKdTdHNGs1?=
+ =?utf-8?B?NjBsVSt0cU1Rcnc1ZVFxQ25UR0xvR3B6eFNoRUU3MXkvNnpVREpQWlNxZ0FW?=
+ =?utf-8?B?UnNkMEt3MUlaOFM2V0ZCUUJaV2h6YXpMck1mbVNIK09tcG9UV3BVbXBYVytT?=
+ =?utf-8?B?a2NMcEVtSHF1WlBtUFN6cVR0enBHZGY3enNOY3d3UXdldGxsTStZVzl0R211?=
+ =?utf-8?B?bE80VjlKWWdEbGRacWxoTlY2OEswS05yZ0pKbE85Y1pkZmRFUjJCYkVldmQ2?=
+ =?utf-8?B?cjd4RG1KQ2hNcGl5Y3RTL21BbUYzOGJxRitYSVZBWlZuMGR3TWdNYytIMHNp?=
+ =?utf-8?B?VG1UWDdkdEphc0N2OU1zd0tlbjJLbUZyTDFIeitUMUw1d1AxS09RaG1TZTBG?=
+ =?utf-8?B?THdFN2pWN3lOT0dyUXlubCtHK1llM0EwcjRtQVZ6cWkrdHdVbGdIN2VQTHVY?=
+ =?utf-8?B?MUwxZnF2OFRoZkRWRSt6MklPUHdnVnZld3VoZnFPV2VQaUZ6WFg4Wkd2eWxQ?=
+ =?utf-8?B?bzc3eVhycklsNm56WGgwb1dVMTlhMDFnYVRUc2hYcEI3dWhFb3psR29Pc1Fl?=
+ =?utf-8?B?TUZQbE4zSzR4eHZnaEx1UHFTNjZvVUxzZGl3Wi9JRmViTDdPd3AwVkdCNURW?=
+ =?utf-8?B?ZWx5citDcDg2ei9DT3ZiMXJ0akV1SVhsNVZxWURqK0tXQnh4OXBER2ZQQ3FN?=
+ =?utf-8?B?b2gxWS9GN2dXZ3liSit4VWtwY2hwWVlWa2hsMmFZSmFjZjErbnh1U1Nsd2Ex?=
+ =?utf-8?B?Vm05eXB4SUxjTUZOR1prMUhwaWd1NjhUNWcyUUZKVUt4YXdPR21ndE9rMTQr?=
+ =?utf-8?B?Zm1OMHdSSUgwS0l3eHBmenJHOHU1R2Z4K3pxTkN3QmwyTWhjdmFDSHlLNVp3?=
+ =?utf-8?B?enI0anpnZ1dMTU5PZ3NKSE9DQ1ZVNXJjVnBvTmN1TjBxM3BqdDZ3WmlVZm5Q?=
+ =?utf-8?B?YlFGdHRpbSszOGwzTHpFRmdFZ242eXAwWmZhQS9FTmtua2xnYjN6M044aUl2?=
+ =?utf-8?B?UWpKMGFXWU1WcTYwNlBjOHU0bkNhMnYvd3hyVGsyb2UydGN5OHdBb1l0blZX?=
+ =?utf-8?B?Q0RRQWZ0cmorYWMySTlETUVMVXBKbDF4ekJxczlJNUhnWkZxZ2FvY29PanVy?=
+ =?utf-8?B?S2VWL0pmUVJnQy9MRS9tQnZueXNXK0FocExTT01ZRXRoZ3lJaWlsUGY1STJB?=
+ =?utf-8?B?cVo4aEplNzg0aGxmTVZNMEpIRENrUDgvVFRXb0VSQmVZaVdmQXhhNWcxNVhp?=
+ =?utf-8?B?eFowQThZQmpTcUlmUDRRczlCSFRvUkllWjlOZEFlNUE2NlhseXF0aERpTzYw?=
+ =?utf-8?B?RjBqbHhKcVBNbnZpTVNxdVIwbC8xUUVVWWVLTFNoQUFXaXIrby9vdnBBcWdi?=
+ =?utf-8?B?NStoMEh3NUNMeS9ENXNSaSs0Zm02bVFQZ3Z5b3NIRlNnZmtLbjExdXZQZC85?=
+ =?utf-8?B?NXpKQmgvQ3JUbzlhT2gxbXhQMmR1K1RRRHBEanBWY0VoRXAyaDIvcGdiQ1N1?=
+ =?utf-8?Q?lN4do2/ZWNWjikJgnn5cGtFWR8arUBawszY8k?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01b6e980-d206-4938-cde7-08decc3f091c
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0892ea3-1865-4b65-3ef7-08decc3f0dd2
 X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 07:07:04.2560 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 07:07:12.1312 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: muBWgRmTbhydU6mX0zJI6Uuc+5y/2HAJ3RnBZYnG88t08xizHMbqPh+WmDpso8TVLUAuwfTDwEO2LyIOBnB2QiUDL61PK6wfANXEE7O6LguzitzKLPar6Tny8mVzx+ox
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10832
+X-MS-Exchange-CrossTenant-UserPrincipalName: DMMwvQ+0y5L7Y59S3fuKSMN4OXVkuTPnha0aDxd/KS9ocpCwkqIxHgK7+dFzwTCrDHTrthQLyigo9HnJWYIBmsTvJNfkaRh3JwskbAycK6hNq0SbkyLAgYYP+BYfWlB/
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9906
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,120 +163,68 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-When dr_mode is "otg", bind both dwc3-generic-host and
-dwc3-generic-peripheral children to the same DT node. This allows
-runtime mode switching: "usb start" probes the host child while
-"ums" or "fastboot" probes the peripheral child.
+Add PTN5110 TCPCI node on I2C3 with USB-C connector configured as
+sink-only. The sink PDOs advertise 5V/3A fixed and 5-20V/2.25A
+variable, enabling PD negotiation up to 45W.
 
-Add dwc3_otg_deactivate_sibling() which is called at the top of both
-host and peripheral probe. It removes the active sibling via
-device_remove() so the DWC3 core can be re-initialized in the new
-mode (PHY teardown, GCTL.PRTCAPDIR flip, board_usb_cleanup/init).
+Enable TYPEC_TCPM, TYPEC_TCPCI and CMD_TCPM in defconfig.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/usb/dwc3/dwc3-generic.c | 61 +++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 59 insertions(+), 2 deletions(-)
+ arch/arm/dts/imx8mp-evk-u-boot.dtsi | 18 ++++++++++++++++++
+ configs/imx8mp_evk_defconfig        |  3 +++
+ 2 files changed, 21 insertions(+)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 2c6f8e6d8ba..7fcb201d5f0 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -8,6 +8,7 @@
+diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+index 51c84383673..fc9e9da09dd 100644
+--- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+@@ -3,6 +3,7 @@
+  * Copyright 2019, 2021 NXP
   */
  
- #include <dm.h>
-+#include <dm/device-internal.h>
- #include <reset.h>
- #include <usb.h>
- #include <asm/gpio.h>
-@@ -194,11 +195,33 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
- 	return 0;
- }
++#include <dt-bindings/usb/pd.h>
+ #include "imx8mp-u-boot.dtsi"
  
-+/*
-+ * When OTG mode is used, both host and peripheral children are bound to
-+ * the same DWC3 node.  Only one can be active at a time.  Before probing
-+ * one child, remove the other if it is currently active so that the DWC3
-+ * core can be re-initialized in the new mode.
-+ */
-+static void dwc3_otg_deactivate_sibling(struct udevice *dev)
-+{
-+	struct udevice *parent = dev->parent;
-+	struct udevice *child;
-+
-+	device_foreach_child(child, parent) {
-+		if (child != dev && device_active(child)) {
-+			debug("%s: deactivating sibling %s\n",
-+			      dev->name, child->name);
-+			device_remove(child, DM_REMOVE_NORMAL);
-+		}
-+	}
-+}
-+
- #if CONFIG_IS_ENABLED(DM_USB_GADGET)
- static int dwc3_generic_peripheral_probe(struct udevice *dev)
- {
- 	struct dwc3_generic_priv *priv = dev_get_priv(dev);
+ / {
+@@ -91,6 +92,23 @@
  
-+	dwc3_otg_deactivate_sibling(dev);
+ &i2c3 {
+ 	bootph-pre-ram;
 +
- 	return dwc3_generic_probe(dev, priv, USB_DR_MODE_PERIPHERAL);
- }
++	tcpc_port2: i2c3-ptcpc@50 {
++		compatible = "nxp,ptn5110", "tcpci";
++		reg = <0x50>;
++
++		connector {
++			compatible = "usb-c-connector";
++			label = "USB-C-2";
++			power-role = "sink";
++			data-role = "device";
++			try-power-role = "sink";
++			sink-pdos =
++				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
++				<PDO_VAR(5000, 20000, 2250)>;
++			op-sink-microwatt = <15000000>;
++		};
++	};
+ };
  
-@@ -243,6 +266,8 @@ static int dwc3_generic_host_probe(struct udevice *dev)
- 	struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
- 	int rc;
- 
-+	dwc3_otg_deactivate_sibling(dev);
-+
- 	rc = dwc3_generic_probe(dev, &priv->gen_priv, USB_DR_MODE_HOST);
- 	if (rc)
- 		return rc;
-@@ -550,9 +575,41 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
- 	if (dr_mode == USB_DR_MODE_UNKNOWN)
- 		dr_mode = USB_DR_MODE_OTG;
- 
-+	/*
-+	 * For OTG mode, bind both host and peripheral children so that
-+	 * runtime mode switching is possible via usb start / ums / fastboot.
-+	 * Only the one that gets probed first will actually initialize;
-+	 * the other stays bound but inactive until needed.
-+	 */
-+	if (dr_mode == USB_DR_MODE_OTG) {
-+		if (CONFIG_IS_ENABLED(USB_HOST)) {
-+			ret = device_bind_driver_to_node(parent, "dwc3-generic-host",
-+							 name, node, &dev);
-+			if (ret) {
-+				debug("%s: failed to bind host: %d\n",
-+				      __func__, ret);
-+				return ret;
-+			}
-+			debug("%s: OTG: bound host child\n", __func__);
-+		}
-+
-+		if (CONFIG_IS_ENABLED(DM_USB_GADGET)) {
-+			ret = device_bind_driver_to_node(parent, "dwc3-generic-peripheral",
-+							 name, node, &dev);
-+			if (ret) {
-+				debug("%s: failed to bind peripheral: %d\n",
-+				      __func__, ret);
-+				return ret;
-+			}
-+			debug("%s: OTG: bound peripheral child\n", __func__);
-+		}
-+
-+		return 0;
-+	}
-+
- 	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
--	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
--		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
-+	    dr_mode == USB_DR_MODE_PERIPHERAL) {
-+		debug("%s: dr_mode: Peripheral\n", __func__);
- 		driver = "dwc3-generic-peripheral";
- 	} else if (CONFIG_IS_ENABLED(USB_HOST) && dr_mode == USB_DR_MODE_HOST) {
- 		debug("%s: dr_mode: HOST\n", __func__);
+ &i2c4 {
+diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
+index 7af538ee367..2849d910538 100644
+--- a/configs/imx8mp_evk_defconfig
++++ b/configs/imx8mp_evk_defconfig
+@@ -150,6 +150,9 @@ CONFIG_USB_EHCI_HCD=y
+ # CONFIG_USB_EHCI_MX7 is not set
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
++CONFIG_TYPEC_TCPM=y
++CONFIG_TYPEC_TCPCI=y
++CONFIG_CMD_TCPM=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="FSL"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
 
 -- 
 2.51.0
