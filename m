@@ -4,150 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC93CD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 20:33:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE142CD98ED
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 20:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54531846B0;
-	Wed, 17 Jun 2026 22:33:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
+	by phobos.denx.de (Postfix) with ESMTP id 971B9848D7;
+	Wed, 17 Jun 2026 22:33:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="DH1SyJZw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="paEI/Dy2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F85C84874; Wed, 17 Jun 2026 17:19:24 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB3A2848C5; Wed, 17 Jun 2026 21:47:17 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD63F8460E
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 17:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7A118460E
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 21:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nokia.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=mateusz.furdyna@nokia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=utxYwQAGUGjxnJN2hMFptgGGoG+xIPj7Ir69gO7cA+/A71P7W9nh0ANzz85Bh1AODWsj3j2nCv7EYiU7DxQRbVj61woJ0jv3Ny4JJyg8dp2102uhJ61OrHnHaI+cN1HY31p6nFXQtpGJJ0w4T6LgkizqfGVY0AHfaje1HYw9sthUwyCi7WyRoaj0DFMFWdsstrfCTewBEOADqyMoCR64wpofcU594a3mjwxG4JoECDT9iXN1zMHbw79iHZQM4Vx2lw/pdDkV6I3MnDJHVhbV3iBdXsZgcIu88Q4Ge9ikEVxl3NmnaGx/GgshX8zdyioVLJKmvhk+gGfPsFDdQ3yjAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0FL6PIqDc2MMZnrwQziE+3Hg6RcM9N1J0uyieruxiI8=;
- b=tUzwHtiswZXc1P/+ZP5T7s8fpWDV70HIDBULwVOvrdIdJmPnRzHDDHtk5Uz7cXB6s0BJhdXE0c0yrumB1lYuAMHQmFkTJ5lVgPpgtDPeOqQspCb1VooArIpyYl/KfgTX227Xpw13ttQyDmeS7VvHIaMMe03KwHFgDQk5T8RBZcd7d34n/UmKsTupcfLA6/PrnFsBvRadSuOFL9pMwphqcK/7qEzG4+TXeTv9IeOTeGQZAm9Qq6wbUzJaomi1wOqbncRNmJUFv2or+IWwTACbJyhoeMrEYPWhAHQi1HOqWXP4DnIW3OsItiw3zC0yhg8yG+Qbyh7UqphCVaxtzH5NEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
- dkim=pass header.d=nokia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0FL6PIqDc2MMZnrwQziE+3Hg6RcM9N1J0uyieruxiI8=;
- b=DH1SyJZwmuQ42AvISVCAaXocAOyOPooiTf/rDq6YCiRB9ZnxJbh133J0jrME29C2DCxeyHfj43lImFSj8sv+elXpaJkCMBLM3G7pTdAPUtG9zWUTHXwK9YyM0YOfeSn4E1z1DjhWK0H4lu6bPsWveKaGK7k+2eJ28tkCb+s6SdVHxvSchuiRZRSWiIUAJQTssbzd7drFm6dyq/oaScfq2YWwWMG1s6gT3Iiu4dptiwrsGM2xyAUKlAI+STlLHb3S0Z+dkTZW7sA5PE4do6JnTkqY6g9YgmmSk8/5c7pb9YAHn3A7/3Za56KKQlkYhVk0GK28RedTp+38AoustIR9RA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nokia.com;
-Received: from AS8PR07MB7461.eurprd07.prod.outlook.com (2603:10a6:20b:2af::12)
- by DB9PR07MB8703.eurprd07.prod.outlook.com (2603:10a6:10:30e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Wed, 17 Jun
- 2026 15:19:17 +0000
-Received: from AS8PR07MB7461.eurprd07.prod.outlook.com
- ([fe80::8dc8:cbbd:e4cf:83bc]) by AS8PR07MB7461.eurprd07.prod.outlook.com
- ([fe80::8dc8:cbbd:e4cf:83bc%3]) with mapi id 15.21.0139.009; Wed, 17 Jun 2026
- 15:18:55 +0000
-Message-ID: <dfa39230-ac45-44bd-a2f3-4baf840d34fe@nokia.com>
-Date: Wed, 17 Jun 2026 17:18:53 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] test: net: add IP defragmentation
- duplicate-fragment regression test
-To: Simon Glass <sjg@chromium.org>
-Cc: Ben Warren <biggerbadderben@gmail.com>,
- Alessandro Rubini <rubini-list@gnudd.com>, u-boot@lists.denx.de,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Max Merchel <Max.Merchel@ew.tq-group.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Mariusz Madej <mariusz.madej@nokia.com>,
- Mikko Heinonen <mikko.heinonen@nokia.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alessandro Rubini <rubini@gnudd.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Heiko Schocher <hs@nabladev.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>
-References: <20260610-ip_defrag-v2-0-060f6eeaeaa1@nokia.com>
- <20260610-ip_defrag-v2-2-060f6eeaeaa1@nokia.com>
- <CAFLszTiiBtrthYHEAeppEqUoksW3fv7j9UNmztPOVd0MVCV8Mw@mail.gmail.com>
-Content-Language: en-US
-From: "Mateusz Furdyna (Nokia)" <mateusz.furdyna@nokia.com>
-In-Reply-To: <CAFLszTiiBtrthYHEAeppEqUoksW3fv7j9UNmztPOVd0MVCV8Mw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0017.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::16) To AS8PR07MB7461.eurprd07.prod.outlook.com
- (2603:10a6:20b:2af::12)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-4877a7b451dso107506b6e.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:47:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1781725632; x=1782330432; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TQhwbHYUHEzfrZFP3yTn5Iv5m+QMmOLccAAlGYA3ajg=;
+ b=paEI/Dy2O5y0kM49hAjaTUK2r2ROY1YNOJ1HBvU0WJlWVMJDOXBT0fPwDkZESOLke4
+ FzsVsKCsZ//Z2bXwnZzeAadXwa8kN6CTHw3nBwQRRYSgQ2asDdSATpYVGmyHu5nGWdxZ
+ eN6JwRuBEkwBviuyjq+r1BcwmsdWHyQ1hzmbg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781725632; x=1782330432;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=TQhwbHYUHEzfrZFP3yTn5Iv5m+QMmOLccAAlGYA3ajg=;
+ b=q082Yr4yGdy0FJwj8hu/TiIUn5asI3OhUKkPvSD/77lL3wrOxpytJ3/7kyh01xwStm
+ vN+OCFjiS7v9DZDONTkYGkWnrbc/yP9+ym7HYtpRKLQkP24oJ1SQ5nvRW5gn7i1HkDiX
+ FIXmujCg/tyUBVKKTO9HeqiE1Xo1r6KEts4KfvnTlV8nnL85SpmTN7wHgaZQLX9IeVpV
+ pLkGdXALc9FDZKMRUudk8WlBcxJInc/ePPGdiWSzW2oaefkBGcV98aQPdrX4I/sg/CDb
+ 9IvSrczR3UdZjWhuN8qW0Kn+6LzOhPVaVViuRstQLmkZ3MSpgLuK+zqd590pdT/Kur/5
+ GSWA==
+X-Gm-Message-State: AOJu0YxgIHsWrct+ZkpjRF3IREjhTG5jyqkst0obajZH8veQrfACwS26
+ 8WYnjWUEwEVTZ+OrzhYJQu5PWdnEQ/tEMMGCsfx2oMh8beBp4SL6BG04eRzKI8cnmGM=
+X-Gm-Gg: Acq92OEchs+jV3X3tn/nUcRXY293ris+gEGxzTguxWdfdk2FyA0i+3Jub/sXXpAi6Zl
+ bAgELfqw3G5eDNY+RHXJXMMFFXsp3tMqgq9vWAw4MmsyzvPYchl/oGXQJ556vnvdNS9og9sqd6L
+ wSBPWXNpIbSutVyFb2Mk40h5Py+wmLcyDbCowvSzfnAGvmlz3V1TWJ7vzptQ3RWgWNsLTaX1MHn
+ dJRCQ2dEAOfqiybel251h5rWZeHIIBvb5WLdixaio5UQtPQYcNQdEUAlMgGT7YaPgMEnF3JVA5G
+ hhMGqiG1wtNp6K6hAnRzdOhNioP4TGebNeCMZ2Leh8dRbyL2N1tnEyBknmbveG2AoFevazcMdB6
+ jJ+QdvftiMU22THDYzAO0gOd6s+Z8fqUXc+wMS6sGF7+zoBBZGN45qoZIgbIfdk2d6YqI9CCN94
+ CdzUAWnO76uugtlwoPaKTpSuwSDu7hG6gaX95raJcr8OPQILUyHaeFNHfSKvFLBWoCxsw+uYigM
+ kBtZ1t2WUuGXoAvFvhbVR6ZK8Mw6L74Gq4OILw=
+X-Received: by 2002:a05:6808:3a11:b0:489:47f1:504b with SMTP id
+ 5614622812f47-4895701b7f5mr664441b6e.26.1781725632509; 
+ Wed, 17 Jun 2026 12:47:12 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
+ [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4875dda5f7csm6798219b6e.1.2026.06.17.12.47.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jun 2026 12:47:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Heiko Schocher <hs@nabladev.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Charkov <alchark@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Yao Zi <me@ziyao.cc>, Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
+References: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
+Subject: Re: [PATCH v3 0/6] arm: omap: Add back omap4 support
+Message-Id: <178172562987.2028295.17012196970784373353.b4-ty@konsulko.com>
+Date: Wed, 17 Jun 2026 13:47:09 -0600
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR07MB7461:EE_|DB9PR07MB8703:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7fd41d01-4ee5-4bef-3aae-08decc83bf66
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|23010399003|1800799024|376014|366016|11063799006|56012099006|5023799004|6133799003|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: gQZAbBaYekIqENvScGVYgF/tn1dk/5dioPHG+Myr8CCKV0JT6n4mBFzXjVSR7bd2KRPvn7X8Mqc17sp+Gqb30FgTQUgJc5heNiv6wGxG301oFMPVvdO1TSndUus1GOFiuG5ebpoDKA/c2ozYie26e1JId1Aem6vcqxrc08dygv0uWbgOo2Mfz9Sojr6R7HapZ7xWY/SPkCL8HjNFWVpxvCALJaHwwEqvG0apQPLm1qBcrXwszC26BsOgys2TjDwaAHqdgg58lQCLVZCq7kxTVTv5GHzritNes/JdKOpAq0AJ/iEFgf6NGFm0Qt/qffuoE2WgNkHi9DWN7x2jG0OpWsMrj690gK3B1/J6l7B1v8LwfnCgkFhlqaR20kI7HcJiHJEK1j8264ebyA5GZLWuuYN1JvhBtdCwrnbeWEzWihVsidJdcVb/jtV7v6mnzVJZ97lEgB/E6sKHKlIM29iRBlIyrCxjP0yYthyzebTO2pK26PMYp4Mc+P+lGRpeYfusDHfK8u8PGWs4s9oi+3YNQcMepPiji5FC5aERhR1ftvXzgYqf+/byX3fD0Nv8PkzZtDBjYwJ8g3U3UR09V+CjQqenl4g1yqcvgyVvU2wyUrP2nQJArmznDGS7ZI4JPidMUE+7S7GUr6suwKW5WpXuUIVAzOaMNgeiXsdAmNh3PrrsmHrQON8n+U3nqxbK5/eO
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR07MB7461.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(23010399003)(1800799024)(376014)(366016)(11063799006)(56012099006)(5023799004)(6133799003)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bW9wenpwSFA2ek42NEZhK1dFbjZsdFg1bjZ5bk9TY1hybHBPWW9vN2FxUDhO?=
- =?utf-8?B?UHl1YWUyVHBseVpmOWxQVFF0RTNicUVyNFlORStqUEM3aUVNQjVac1pLd1g2?=
- =?utf-8?B?clVRb0VHdllCbnBiWXlqNGpQeGZRNmtCYWZkWmo5ajNrTWVRWmRUcVNzOGgy?=
- =?utf-8?B?amhpY1l5YUlDZTMxaUpuNlVzS2pwQnpDUjNZNUZpaDF1dFRVWFdmMzlMRGho?=
- =?utf-8?B?ME1tMG5KbS9QU053Nk5RSnNSejg1QUk3Wi91S1V2TVBsWnNoMmExNGVpZDYy?=
- =?utf-8?B?djBodDFEQWExcUoydzFaekJDeVV4MnhRTzAzQWhVWmcyRUl1ZDJDcFpiV1Za?=
- =?utf-8?B?a0tZTm5zRFBHTHR2ZGpabzQzSTVxdnpLWmlob0RIL1BkdXNZWDR6MUc0ZG03?=
- =?utf-8?B?UzhFaTBZQmt1eUZYcHIraEtwZVc0c2luUzN4elVxODVnUVp6OXArdVMvcXlu?=
- =?utf-8?B?TXgzRExKT1NYQXJCejhjSG1sNzByZ2pRakJWcnR0MlFCb3RXemxqdkhDbGo2?=
- =?utf-8?B?VjNCUUQ4cXBGcDdhLyt0ZkdVdjJqSjA0eWx6aWhvbEpLSU00N1hiY1pNUUQr?=
- =?utf-8?B?NTlVbmNRNWIvc3ZtTU55LzN5RUpmYTdNVkRybENvNTgrYjJzb1c0SEtUVWRw?=
- =?utf-8?B?VUNsN2l4S2R5THZRZ0FYWXhaQ0FmUGJ5ZGhUc2V1ZkwwWXNwMFFCT0IwQmRC?=
- =?utf-8?B?NWQ5UTRWNm1aN3VqNzdPSGN6aWpUNnUrS3lycEhJM2VyUmJQTk5LMVMvTVVO?=
- =?utf-8?B?Qm5PZFNNSDEzOS96aC90a3hPQ0EvY0JHMC9XbUhPYjR1OHVHSWcyVmNUR2FM?=
- =?utf-8?B?ZFIwUnZiVEdROGxPWEVoWTdZZ3I0dnp5WnM0alJTSEZsdkE3WjhGMlVrV01h?=
- =?utf-8?B?TnJEMysrZEllS2pTQUMwOGxwOWhxV3Rob29qQlppY2h6U3RKM3RQYkJTamhY?=
- =?utf-8?B?THBRS2tObnByczRReVkrd3ovVWdiLzBKdnhQZVRzQ1dMdWREUitsZWdiRlBw?=
- =?utf-8?B?VFNQdndSbTVsNTlMTUZKYmF3WDQ3M0ZadStCQUgwSk0vUlpjcmxFRHJXMXla?=
- =?utf-8?B?bFFhdm9BRHVkek43SE9QbnVqTkVDRjcrOWJqQnpxc2trRm0rNW9QT1dTTnNw?=
- =?utf-8?B?Z2pZRklzQU15dXhlNStzQlZqYWYxc3A2enhqdm5sTVZFbUtXV1dFMXNwanZH?=
- =?utf-8?B?UHpwV09BODFYQWNxM1B0WnVLaEdWN0Z4QW9pRWlmVVhPemtKYjg2cXB2L2VN?=
- =?utf-8?B?c0tpVHFyYkIvanhrOVlWd1gxWEdGdXBwQ2ptR3RjYkl5V1F4U0tsNUw3dFIx?=
- =?utf-8?B?ZU5NODRhUUZ6endqU05Hdy9wVk9qL0RVYVJvNWxrV1pXdUpqNmwyRng0Nmhl?=
- =?utf-8?B?REJ2RkpyTTRkbFJZNXBsdlBEUWdQTlN5bzF1TnRVMXA3bDJkMlJXd0tFUWhj?=
- =?utf-8?B?U2NDYTROV1F0VlJ1S0FySmY0TVJ2dm0yMDRzWDJIWTMrYWNlakcxQTZuWVZk?=
- =?utf-8?B?RkZzNklhK2NjbVZtU3dVcXA0aUJhLy9MZEtuV0pERzhyTStLNENMZEV0KzZH?=
- =?utf-8?B?a3NRZmJZTXp3cmR5bGJsbE5oMkZ2MlROQzcrUWt6THJNaFZJSVVEUzdCc01X?=
- =?utf-8?B?d1NLYnVVaEVqSE9hV3Y1ODZBL3dUanFEbnZER3BTdWg1Rm9hUDNwbWp0SmRO?=
- =?utf-8?B?Tno1WjNyYnJBVloyN3A5NWZjVFRzMHYySHhTNmZZZnM4Ti9oNlF0Z2lvMVpl?=
- =?utf-8?B?N1k3aGw3N2JrQS9xbXFaeElMd3JiS2V5c3pONUZVZTY4aEVJR3dadDZRQVpl?=
- =?utf-8?B?dGJYc3BkT3ZXK2Znam9QN1owcGd3d0dQV0tHMEQvc042eFBsc0hTNmc3bEpN?=
- =?utf-8?B?YWVUNTdUc21lN3VIOTdiNEtjN1pRRmQ0enZETFhpV1NKWi92cnJYMGlKUXp5?=
- =?utf-8?B?L0lRQjJzT3hXeVdOWW05OHRxT3ZpKzRiNjFwYTVvLzUwMnIxZk1kK3J5TUY3?=
- =?utf-8?B?c0RZbzQvRTR4eHMyVXMrZWUxMUh1UFVORGhzZFh3UjVWNHBLT0F5WHk0UEVk?=
- =?utf-8?B?US9HdEUxT0lmUlNUSER3cHBxcEhmY0w5RjRmV0QxZTcvVXFsS3lGMC9FTWd0?=
- =?utf-8?B?STJoNkVSTTdLUzIyRk1EWDRTaEFYZzJqQ2JyeDlmMytRWm1WNHJkUEJxdG13?=
- =?utf-8?B?TkpHbjFyOU15SW5SbTgwQmVjSzVzV3VDcEpobUZTT0N4OC94NVUvelVMWkx1?=
- =?utf-8?B?Y1VKUDArY3dLK0VIK0RZUGtnaHJHcHhYS1ZBb3JvNHZqMVZTR09UTGF6dFQ0?=
- =?utf-8?B?NnlQT2Z2WDBUVlRYU3R3US9hRGZmN2xnNXI4Qk8wQzFhWEdHQ2hrYWxQeG1Z?=
- =?utf-8?Q?EvSwfr4XYAWnz8+c=3D?=
-X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7fd41d01-4ee5-4bef-3aae-08decc83bf66
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR07MB7461.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 15:18:55.8812 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b7Psum4vPSLZcSEosbphunClKqRnUR8vxQs5eEpAC29sGUK4rfoEmZoc/IgyePEgWjkwCu1ipwNiB+6aeNivgtT/XBXiEKDZOfSnv/4FBes=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR07MB8703
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-Mailman-Approved-At: Wed, 17 Jun 2026 22:33:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,48 +120,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 08 Jun 2026 15:11:56 +0200, Bastien Curutchet wrote:
+
+> This series aims to add back the omap4 support. This support was removed
+> by commit b0ee3fe642c ("arm: ti: Remove omap4 platform support") because
+> at that moment, none of the OMAP4-based boards had done the migration to
+> DM_I2C.
+> My use case is an old product based on the Variscite's omap4 system on
+> module. I needed to upgrade U-Boot on it for security reasons. I think
+> that this work could benefit to other people who may have same kind of
+> product to maintain.
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+[1/6] arm: omap: Move PRM I2C channel frequency to vc.c
+      commit: bc93b4bcb312644bdab114b4601e2db0c8837343
+[2/6] arm: ti: omap: Extract common clock definitions
+      commit: 9a4f6790967912b1a3518abdbe9236fce5b49dfe
+[3/6] clk: ti: Remove AM33xx dependency
+      commit: de2e3f00f2fa3fc4c11be48b3ef6af7b0fd7bd33
+[4/6] configs: omap4: remove unused boot target devices
+      commit: 196b1fe9bf80959648cf54b2e36c08dfd24fc1ad
+[5/6] arm: ti: Introduce back omap4 support
+      commit: 93d204f7175cb52fa57ebef63a0d940ad5940dbe
+[6/6] board: variscite: add support for the omap4_var_som
+      commit: 8974dd64e621d3a2c5d2d1fe038bacac35996758
+-- 
+Tom
 
 
-On 14/06/2026 14:16, Simon Glass wrote:
-> Hi Mateusz,
-> 
-> On 2026-06-10T14:25:33, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
->> test: net: add IP defragmentation duplicate-fragment regression test
->>
->> Add a unit test for the IP datagram reassembler (CONFIG_IP_DEFRAG) that
->> covers the duplicate-last-fragment scenario.
->>
->> Without the fix the last fragment will re-trigger datagram delivery,
->> increasing udp_rx_count to 2 and effectively failing the test; with it
->> applied the test passes with udp_rx_count == 1.
->>
->> Signed-off-by: Mateusz Furdyna <mateusz.furdyna@nokia.com>
->>
->> test/dm/Makefile     |  1 +
->>   test/dm/net_defrag.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 83 insertions(+)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
->> diff --git a/test/dm/net_defrag.c b/test/dm/net_defrag.c
->> @@ -0,0 +1,82 @@
->> +DM_TEST(dm_test_net_ip_defrag_dup_last, 0);
-> 
-> Just to check, does this test actually use driver model?
-No, it doesn't. It drives net_process_received_packet() directly, 
-nothing is actually using DM in the test path.
-
-I'd followed the existing precedent in test/dm/eth.c 
-(dm_test_string_to_ip6(), which similarly doesn't exercise DM), which is 
-what prompted my earlier question about whether "ut dm" was the right 
-home for this (and stopped me for looking further, my bad).
-
-I'm happy to move it to the lib suite, for instance. Since Jerome has 
-already queued this v2 for net/master: should I create v3, a follow-up 
-on top of what's queued or just leave it as-is in DM?
-> 
-> Regards,
-> Simon
-
-Best Regards,
-Mateusz
