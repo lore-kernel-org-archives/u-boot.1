@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E610CCD98F6
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A67CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:52:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A57880287;
-	Thu, 18 Jun 2026 17:51:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F03F784995;
+	Thu, 18 Jun 2026 17:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GDxJVm5j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DKur8D3h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3B30847EF; Thu, 18 Jun 2026 17:51:42 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id DB86A848EB; Thu, 18 Jun 2026 17:52:00 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 772D78005D
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:51:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1DC48499C
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-68d233bf083so1754223a12.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:51:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781797900; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-696bf0e7c9cso174217a12.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:51:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781797918; cv=none;
  d=google.com; s=arc-20240605;
- b=RmCFo2Bbj2FRe9eaOkkoVXjYrS5S5SE6hlXCbW4B8o0NfUlXHDyAsLMPJTEqtCUQVi
- YErWigy/TNGXLBzMuKmsiH6DNL1N+VnYy8hIrkucrLM030axo9JhQm7rqTVTHoS+bjiC
- 2bYNBQp2P2JXZsLyLJRFmwfIlIir6Tea1JwEc3Wq0sr35IfeVSmim4ZIZtLk6tJ/nGHA
- U/JCqdOTxjXKhy0YQy9zqYmTqUWSlgCz/VGu54X05GhAkhNfXhI1iH6G+pk3RIZYLDET
- sHHUagOtr7kTg7jUjybsqGn50I2P9OYiuXjpPgE/wy5MJDG7uOgentcEh22fOaB6SJuk
- EctA==
+ b=lNJsAALtCsU+k+lEXBuKFwYJWnDhf5SZidJFaAAFJpV37zh+BsLJutylznh2/VSleh
+ DpuBXCuXkGC4GCuERIdwXx0A2Mfh7wcr0vtj9ejHRgHmVXnTb/enPkXZWOcAr8xLif8p
+ SM2zXqpT4qINswQFQBfX+EltpKRnrsiHzMa2JqU53aw6bR3qfLPAtvkVU9BLLZzw24Je
+ jSh4MTe1zFPzhyWDR8O7gg3+sITxzUtuqYVp16DNh89NDrD604rJG6Dvta4h+nzYkEZ0
+ ZrF5G3+l3s4oEirqsWU3XzXIe1yzx9fV9K+Z4CJWvJQ3XkP2/8vJYchQH12S/zodwm72
+ sjng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
+ bh=QoCJzoHorl6MTJEOsvfuJ2jLaMOkap2pPXr/FO7XB6c=;
  fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=MCveKXyAZGEdTTTDwXAVs0HYbVyQqR+Qa47pAiHs4lIUnptWlZhRHovv8Jk2sY4Ekj
- IbIAgTMdWLVoQDEw6tDyOL0Yy25cYry0olC27EQVlq3hxvxXWcnksvLk9LF1U1uzKmPg
- M/qdrRTntv6zf+ryvJXMrxip63TYCqVsgBskuwwLISZLaTSdIxcYUI+M9pkjjWrsEwAB
- wRp0wqv6Z8YQle6dmdUczPcmLYOx2+BInxmlB+LYypI64SHddd6rXjJDPxRw9TCYuWAq
- S9Ftaf0QONy/6NVwtqiKPVHBGnCJjesC2l/N9tmuKHfzSLn5La13srIe9y4PdMFNo3Vq
- HLJg==; darn=lists.denx.de
+ b=ZoW0qYeG0cBc1wLrU8c9nCF1JdD5J39XbQBKN+hLzt1oBZ0SHRYmAEJ8VXi6oJaOFP
+ CsWyVNKCMZ7oXWkm3hcuf+tDFiBw62Z0i0cEwEIxaIy+7bTMbaOyW1WS4hsQkbn26g1O
+ wiUyCD9dh799gq63ndGNmIBCX7S4FxCinBd2MEfziXZ/5DzDc1pm4oDW1cF6aWFMxa9N
+ JeChNtGccMh7vZQvC0QjMoEnMaI/xJOfsoEfKwVsOyKXGS2iAHXsnp/cOrOtnbjpcw4v
+ sHB4ROp0Wc92mVjRfMtBItTUjYuhiqtGzRDKhfQaoSNYuo+4+F5HmLrIV5PJEqRuSAUs
+ i5Hg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781797900; x=1782402700; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781797918; x=1782402718; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
- b=GDxJVm5jc61Q/oV8MSST/SdH6D3oaoVQDo2jMdQLFoOW9AnIHUdauJMzC7eZHiNl9q
- rZ569F0T8cem6wBInGIWj1oLk6XbCTLluD85NOoGBw6IEIL9/ZKw8OSa5UxtCdAMrcor
- UQ86EzsyUofAC+f4LGtvgfEqGy28IVGOtw/oM=
+ bh=QoCJzoHorl6MTJEOsvfuJ2jLaMOkap2pPXr/FO7XB6c=;
+ b=DKur8D3h9n3p+ylPKVDxr30Rv1qKFQobIr5pJrTpQeLghvSurH2BdIJTxvsJn2E/xz
+ tCKntUS7qsLgW9ijspkvnm/U1Gs0sYpyzgSLAa8uPAMtuOJoZQQ/xOv0RlCNYvc9l/tX
+ 4w8ljp/dgovsWX2K1knsVrTaN48XDIdoXED7s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781797900; x=1782402700;
+ d=1e100.net; s=20251104; t=1781797918; x=1782402718;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
- b=YjUKtoUhDp691EbjOKNvyKYBm7Wh/j5I3fG7BmHAzYtqayqnUqPbOMkR1G14S5qa/F
- aaYep6g8Nmn2snid2jzu/eNiIz/YSSSptkKIVaIJYLmF40hreC//QQJK/vJq1G1hUTC7
- 1TEvUsarP3wOpG+uTIyYKb5A7+jJTl25gDWOUIJWW+E+Brxr8+6RM9fFz8YZsCnmAa7T
- ZH9lATt5R2Oy18Oam13jJZh/ZwQRMwwVANQ7WIJpWjM1b+e9gkN/928HYEeS3YIlhGM5
- Uu8P/mYDehldRl5obnNCMYu7qC/CTb8SYm733c7ahuMDmopB9IvL8PD94rbcJNbbgYqz
- Ivpw==
-X-Gm-Message-State: AOJu0YzfXXlrFJIep0K6qWwOqVM0fDaqHRCcGEi65Zpofku8aIk1V2un
- 9EqPwd+Bxgt0zEJlyxZB/4R+QOKlhGhqoScfITMGLG0u177NatLwOldy56HH47kRdQvD5QJKUWY
- /CGDxlzg4ctj+s5shjVZNuo+fU6MLejeod88wq2nF
-X-Gm-Gg: AfdE7cmAgkw8Ub0l8civmt/hlDZXBg7Yf6LbkPGbufmd6F3OSt2jlshBPjoxXb2dkfO
- /hwOV1Fd6HMgFf5HpjjEmZ/h+Su+ckrOu6lJEdCfZmteKrBwFaMpOcyABGQNFs9s+P1pI5k4JGn
- nAprWHe2+u8ho686WcoFCWZtTYppY1zTPoOEOKj1Gc/jN6iuKkrO6k80eHf3Zh1gH+ZEdXBwCE1
- sxaMk/xchKbiB70TN/B+7qJfmkxzbJXGAI+L74LSVeNP3mlKrgelPYI9cCakM+BQkuTd6RBAg==
-X-Received: by 2002:a05:6402:370f:b0:691:6fca:c1a6 with SMTP id
- 4fb4d7f45d1cf-695476db4eamr4972548a12.26.1781797899850; Thu, 18 Jun 2026
- 08:51:39 -0700 (PDT)
+ bh=QoCJzoHorl6MTJEOsvfuJ2jLaMOkap2pPXr/FO7XB6c=;
+ b=KxLTA73UzR6txNUEgyKlFjcKksH3dLS7Hr4wRUDC6LgpCe130Tp/8gaQhihjj/uTn4
+ wgRuxcDaIaoJxryFCJII5fVuVDcoSX7kQ3iNEwxFx9VFlE+Z0yGfsSzmPPQX9gAsvFMC
+ UJvaIk//+OM4+V/UtsnqITzr+X9YWFU+xDkI4SGtkE/8H91LzaoqiAo7rGy92NnF+113
+ SFntnAupQprRM31e8hkkSzisBtvfkRXj2lbbKewsoDYFjO+PSAbulmHF4XsGHJ1aUTn+
+ f9SIfUBBw0moQLZKRqsf4m10BLKkzvsatXf3PMXS7K7dDcganoJOpHRqqjsZlQ/Qqabm
+ CT0g==
+X-Gm-Message-State: AOJu0Yzr73+qfwcMcKuo3pOBHoR/7zTozajXmzuoAQLEyvM4BNRYGRtV
+ LkReKvbHjsn5CjlDWJsB3A8xnANIO/TjYeDKZwNm1uc7A4Jx0VjFPrx0E3H29B5ubN7uwbYCT1M
+ zLRZ8JOkyAzxPDwQpEly4FvoEm2uz0/KPSilPrif7
+X-Gm-Gg: AfdE7cnyHH4FYPNr3ZFsT3VhKw/lFN3cIExxv7ovxBrO4qTxvwqn6EMt5T6svL8IcxD
+ dOYapt0od9jcDs+VCbCMPaJdmga4v38pYzMHTYLkcgOjS4nIAlieEwhpZD4xfU4DuRrPuz7Uw1Z
+ GZZM2eIWF3yKLEAs2YwH0HEMu9lknpeSqxls/Jnk6RQxmYQUsTF9u8LxHcJx0nxn5kgNGyvCK9j
+ pLdG1+/TDqpsnBlrX2U5VP63HEolyY5G0xoRCEsQ81yBuViHV93jaLsByml1M/Na2cVH89PuQ==
+X-Received: by 2002:a05:6402:886:b0:691:957a:bd61 with SMTP id
+ 4fb4d7f45d1cf-695ba7eef09mr1700867a12.7.1781797918185; Thu, 18 Jun 2026
+ 08:51:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260605033907.1909319-1-dmukhin@ford.com>
- <20260605033907.1909319-2-dmukhin@ford.com>
-In-Reply-To: <20260605033907.1909319-2-dmukhin@ford.com>
+ <20260605033907.1909319-3-dmukhin@ford.com>
+In-Reply-To: <20260605033907.1909319-3-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:51:28 +0100
-X-Gm-Features: AVVi8Cd5qhiGLMHvVAPS8iEnCxE0nVgHCYzKzZiTaAjvKPbB2my3lPeF5Q1UNhs
-Message-ID: <CAFLszTiW818ybDfmgDfgE3_YnSfrZC7g3RWJeRmch5BRoOQUiw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/8] cros: add common helpers for GPT flags
+Date: Thu, 18 Jun 2026 16:51:46 +0100
+X-Gm-Features: AVVi8CdMRWIe-7UR8qqzjskYQURxxh4pmbdNA7fmKBmtac7b_17LJ1gy18-DKck
+Message-ID: <CAFLszThjYU6WC+NAPHwmK6SZSMQvEcGrCdD7gjSAa5xU3EXvpw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/8] disk: efi: introduce {read,write}_disk_flags
 To: dmukhin@ford.com
 Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
@@ -110,92 +110,143 @@ X-Virus-Status: Clean
 Hi Denis,
 
 On 2026-06-05T03:38:59, None <dmukhin@ford.com> wrote:
-> cros: add common helpers for GPT flags
+> disk: efi: introduce {read,write}_disk_flags
 >
-> Add common helper to decode/encode ChromuimOS-style GPT attributes
-> similarly to [1].
+> Introduce helper functions for updating top 16 bits of GUID partition
+> table entry attributes. The value can be used to store extra information
+> about bootflow, such as counters and status.
 >
-> [1] https://chromium.googlesource.com/chromiumos/platform/vboot_reference/+/master/cgpt
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> include/cros_flags.h | 74 ++++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 74 insertions(+)
+> disk/part_efi.c | 129 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  include/part.h  |  24 +++++++++++
+>  2 files changed, 153 insertions(+)
 
-> diff --git a/include/cros_flags.h b/include/cros_flags.h
-> @@ -0,0 +1,74 @@
-> + * Bit definitions and masks for GPT attributes for Chromium OS.
-> + *
-> + *  63-61  -- (reserved)
-> + *     60  -- read-only
-> + *  59-58  -- (reserved)
-> + *     57  -- error counter
-> + *     56  -- success
-> + *  55-52  -- tries
-> + *  51-48  -- priority
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +int read_disk_flags(struct blk_desc *desc, int partnum, u16 *flags)
+> +int write_disk_flags(struct blk_desc *desc, int partnum, u16 flags)
 
-The table describes bit positions in the full 64-bit GPT attribute
-field, but the masks and helpers below operate on a 16-bit value (the
-top 16 bits, already shifted down to bits 0-15). So priority lives at
-bits 0-3 here, not 48-51. Please reconcile the two - either
-re-document the table in terms of the 16-bit value the helpers
-consume, or have the helpers take the full 64-bit attribute and shift
-internally. As written, a reader who trusts the comment writes wrong
-code.
+These names are too generic - they are not disk operations, they
+read/write the top 16 bits of a GPT PTE in a ChromiumOS-specific
+layout. Please rename to gpt_read_flags()/gpt_write_flags() and put
+the prototypes alongside the other GPT helpers (next to
+part_get_gpt_pte()). As-is, a casual reader would expect them to work
+on any partition table.
 
-> diff --git a/include/cros_flags.h b/include/cros_flags.h
-> @@ -0,0 +1,74 @@
-> +#ifndef _CROS_FLAGS_H
-> +#define _CROS_FLAGS_H
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +int read_disk_flags(struct blk_desc *desc, int partnum, u16 *flags)
+> +{
+> +     ALLOC_CACHE_ALIGN_BUFFER_PAD(gpt_header, gpt_head, 1, desc->blksz);
+> +     gpt_entry *gpt_pte = NULL;
+> +     u64 attrs;
 > +
-> +#define CROS_FLAG_PRIORITY_MASK      0x000fU
+> +     /* 'part' argument must be at least 1 */
+> +     if (partnum < 1)
+> +             return -EINVAL;
+> +
+> +     gpt_repair_headers(desc);
 
-The header uses bool without including <stdbool.h> or <linux/types.h>,
-so it is not self-contained - it only compiles where the includer
-happens to have pulled those in first. Please add the include.
+A read must not mutate the disk. gpt_repair_headers() performs writes
+when one of the two headers is bad - please drop this call from
+read_disk_flags(). The return value is also ignored in both functions:
+if both GPTs are invalid the caller falls through into
+find_valid_gpt()/is_gpt_valid() anyway, so the call adds nothing for
+the read path and should be the caller's choice for the write path.
 
-> diff --git a/include/cros_flags.h b/include/cros_flags.h
-> @@ -0,0 +1,74 @@
-> + *     57  -- error counter
-> + *     56  -- success
+The doxygen says flags cannot be NULL but the function does not check
+it - either drop the comment or add a check.
 
-Re bit 57 the cover letter talks about counters/flags logic, but there
-are no get/set helpers for it. Does that mean it is not actually used?
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +     if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
+> +             return -EINVAL;
+> +
+> +     if (partnum > le32_to_cpu(gpt_head->num_partition_entries) ||
+> +         !is_pte_valid(&gpt_pte[partnum - 1])) {
+> +             free(gpt_pte);
+> +             return -EPERM;
+> +     }
 
-> diff --git a/include/cros_flags.h b/include/cros_flags.h
-> @@ -0,0 +1,74 @@
-> +static inline unsigned int
-> +cros_flags_set_priority(unsigned int flags, unsigned int priority)
+...
+> +     rc = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_h1, &gpt_e1);
+> +     if (!rc) {
+> +             rc = -EPERM;
+> +             goto out;
+> +     }
+> +     if (partnum > le32_to_cpu(gpt_h1->num_partition_entries) ||
+> +         !is_pte_valid(&gpt_e1[partnum - 1])) {
+> +             rc = -EINVAL;
+> +             goto out;
+> +     }
 
-You can likely use uint here if it is only compiled for U-Boot and not
-the tools.
+The errno choices are odd and inconsistent. -EPERM (operation not
+permitted) does not describe 'GPT could not be parsed' or 'partition
+does not exist'. read returns -EINVAL for invalid GPT and -EPERM for
+bad partnum; write swaps them. I suggest -EIO for the unreadable-GPT
+case and -ENOENT for 'partition does not exist', consistently.
 
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +     rc = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_h1, &gpt_e1);
+
+...
+> +     attrs = le64_to_cpu(gpt_e1[partnum - 1].attributes.raw);
+> +     attrs &= ~(0xFFFFULL << 48);
+
+Please use lower-case hex.
+
+> +     attrs |= ((u64)flags << 48);
+> +     gpt_e1[partnum - 1].attributes.raw = cpu_to_le64(attrs);
+> +
+> +     rc = write_gpt_pte(desc, gpt_h1, gpt_e1);
+...
+> +     rc = is_gpt_valid(desc, desc->lba - 1, gpt_h2, &gpt_e2);
+...
+> +     attrs = le64_to_cpu(gpt_e2[partnum - 1].attributes.raw);
+> +     attrs &= ~(0xFFFFULL << 48);
+> +     attrs |= ((u64)flags << 48);
+> +     gpt_e2[partnum - 1].attributes.raw = cpu_to_le64(attrs);
+> +
+> +     rc = write_gpt_pte(desc, gpt_h2, gpt_e2);
+
+Two copies of the same logic varying only by LBA. Please factor into a
+helper that takes the LBA (or a primary/backup flag) and call it
+twice. Also please #define a constant for the bit-48 shift
+(CROS_FLAGS_SHIFT, or similar in cros_flags.h) rather than open-coding
+'<< 48' and '0xFFFFULL << 48' in three places.
+
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +     rc = blk_dwrite(desc, le64_to_cpu(gpt_h->my_lba), 1, gpt_h);
+> +     if (rc != 1) {
+> +             pr_err("device %d: failed to update GPT header: %d\n",
+> +                    desc->devnum, rc);
+> +             return rc ?: -EIO;
+> +     }
+> +
+> +     rc = blk_dwrite(desc, le64_to_cpu(gpt_h->partition_entry_lba), cnt, gpt_e);
+
+Please write the PTE array first, then the header - that is what
+write_gpt_table() does, and it is the safer ordering: a torn write
+leaves the on-disk header pointing at a CRC that does not match the
+on-disk PTE if you do header-first.
+
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> @@ -980,6 +980,135 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+> +static int write_gpt_pte(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
 > +{
-> +     flags &= ~CROS_FLAG_PRIORITY_MASK;
-> +     flags |= (priority & 0xf) << CROS_FLAG_PRIORITY_SHIFT;
-> +     return flags;
-> +}
+> +     const int cnt = BLOCK_CNT((le32_to_cpu(gpt_h->num_partition_entries)
+> +                                        * sizeof(gpt_entry)), desc);
 
-The bare 0xf (and 0xf in set_tries()) duplicates the field width
-already encoded in CROS_FLAG_PRIORITY_MASK. Please express this as
-(CROS_FLAG_PRIORITY_MASK >> CROS_FLAG_PRIORITY_SHIFT) so the width
-lives in one place.
-
-> diff --git a/include/cros_flags.h b/include/cros_flags.h
-> @@ -0,0 +1,74 @@
-> +static inline bool
-> +cros_flags_get_successful(unsigned int flags)
-> +{
-> +     return (flags & CROS_FLAG_SUCCESSFUL_MASK) >> CROS_FLAG_SUCCESSFUL_SHIFT;
-> +}
-
-Simpler as !!(flags & CROS_FLAG_SUCCESSFUL_MASK) - no shift needed,
-and the bool conversion is explicit.
-
-> Add common helper to decode/encode ChromuimOS-style GPT attributes
-> similarly to [1].
-
-Typo - ChromuimOS should be ChromiumOS (or the old Chromium OS, which
-is what the header uses).
+If primary write succeeds but the backup write fails (bad block at end
+of disk, etc.) you leave the two GPTs out of sync and return an error
+to the caller, who has no way to know what state the disk is in.
+Please mention this in the function comment, and consider attempting
+to roll back / retry rather than silently leaving an inconsistent
+state. Yes I know this shouldn't happen, but power can fail, device
+can reset, etc.
 
 Regards,
 Simon
