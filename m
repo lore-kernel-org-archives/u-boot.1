@@ -4,47 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D3FCD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB97CD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54796849F3;
-	Thu, 18 Jun 2026 15:09:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D52B849D1;
+	Thu, 18 Jun 2026 15:09:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="StW1UUVv";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="LyUAKfcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E9E6849F0; Thu, 18 Jun 2026 15:09:51 +0200 (CEST)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ id 163C1849F3; Thu, 18 Jun 2026 15:09:52 +0200 (CEST)
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88360849AA
+ by phobos.denx.de (Postfix) with ESMTPS id 98330849CB
  for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 20260618130947be4442767d000207de for <u-boot@lists.denx.de>;
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 20260618130947ecb71a4bde00020778 for <u-boot@lists.denx.de>;
  Thu, 18 Jun 2026 15:09:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
- b=StW1UUVvG+zaPillIcKBMIO4dwUDqsF356UeGwdNkuHAHenfTtwokPst2KrDGQHnkSvP5Q
- YOuPBHFhBQAXmhHygkhOwKWPGZzuNRo5aX+jV5eBrQY9+EwrWrRw9/MiLiIJSejYP6iMQOnP
- t0Dz0b1ls8K6JNaO/v6q25EX0b1k3zr0F52e5cci/N6pqwpPXPkKYnJgg/mv+aYqVK15DRFJ
- aza32A4teQfXB3YuaNoCDBuuEWSf7FOi5WdLCAAZ5ksdN8CNRIbup0vxpXzrp056zaeplg9F
- udsroNxqK4noHXcrzZDbT8WtDDLmAd/lhLvuxw5XwnfMiqrRGyuUDxMg==;
+ bh=1fIKevgcvs3kW0fofu71uES9TuAjHWpZed0ECgTyfgY=;
+ b=LyUAKfcjzxrIJgwtMmNoxL8NgqrVvYE+rEzOLtA81rCcqGbPIrevaYVLC51yA23WUwcAjq
+ bvA0V7SOEO50bqhK2LLBLtsZau3xgEPBpN2hpowxv5v/wdzkRaHxQGFO3PuR5KhRWOUFIDNx
+ mK7Tvtc5tnpQq47iJd7K23S1vebPStEQBl6iG6JVJRA0xjnjj5x9mj4t2bzCJuiO7o2Nx2c1
+ 34UwoVUB3Dw3eoJ1vtpcj8869duUDcTh4NfemjKPlRGlcvPtQZDqjAdWidKCIVUc+1KzkAxU
+ t7BBvwwgSQ0XFbaatdd+hmvSF3bD2io8YMqIsHKa43Rg5T4oUS8GzHdQ==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 3/8] mkimage: define log_err and log_info
-Date: Thu, 18 Jun 2026 14:47:38 +0200
-Message-ID: <20260618144742.v7.3.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Raymond Mao <raymondmaoca@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v7 2/8] qemu-arm64: merge built-in DT
+Date: Thu, 18 Jun 2026 14:47:37 +0200
+Message-ID: <20260618144742.v7.2.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
 In-Reply-To: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 References: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -67,60 +71,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define log_err and log_info centrally in mkimage.h so any file used in
-this context benefits from it.
+The keys trusted for FIT signature verification are supposed to be
+embedded in the device tree built into u-boot. When running in Qemu it's
+convenient to use the device tree provided by the VM which doesn't know
+about signatures though. So merge both device trees at startup.
 
-This patch is in preparation for a change in image-fit-sig.c in the
-next patch.
+Make sure CONFIG_OF_OMIT_DTB is not set in qemu_arm64_defconfig to take
+advantage of the feature by default.
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-(no changes since v4)
+Changes in v7:
+- add guard for OF_LIBFDT_OVERLAY
+
+Changes in v6:
+- fix comment style and typos
+- fix error message
+- return error from board_fdt_blob_setup() if dt couldn't be resized or
+  merged. Unfortunately fdtdec_ret_to_errno() is static elsewere so
+  -EINVAL has to suffice
+- mention CONFIG_OF_OMIT_DTB in commit message
 
 Changes in v4:
-- fix and reword comment
+- mention arm in subject
+- correctly change defconfig
 
 Changes in v3:
-- make log_err use stdout too
+- enable CONFIG_OF_OMIT_DTB=n in defconfig
+- add error returns
+- document decission about dt merging direction
 
- boot/image-pre-load.c | 3 ---
- tools/mkimage.h       | 6 ++++++
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ board/emulation/qemu-arm/qemu-arm.c | 51 +++++++++++++++++++++++++++--
+ configs/qemu_arm64_defconfig        |  1 +
+ 2 files changed, 50 insertions(+), 2 deletions(-)
 
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..cd319ddb777 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -35,9 +35,6 @@ ulong image_load_offset;
-  */
- static struct image_sig_info *host_info;
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 38f0ec5f2fb..590a336380b 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -144,10 +144,57 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
  
--#define log_info(fmt, args...)	printf(fmt, ##args)
--#define log_err(fmt, args...)	printf(fmt, ##args)
--
- void image_pre_load_sig_set_info(struct image_sig_info *info)
- {
- 	host_info = info;
-diff --git a/tools/mkimage.h b/tools/mkimage.h
-index 5d6bcc9301a..d8d292a8098 100644
---- a/tools/mkimage.h
-+++ b/tools/mkimage.h
-@@ -31,6 +31,12 @@
- #endif /* MKIMAGE_DEBUG */
- 
- #define log_debug(fmt, args...)	debug(fmt, ##args)
-+#define log_info(fmt, args...)	printf(fmt, ##args)
 +/*
-+ * Use stdout rather than stderr so error messages stay
-+ * interleaved with normal output in the order produced.
++ * QEMU loads a generated DTB for us at the start of RAM.
++ * When using signatures we may have a built-in FDT that contains
++ * our known public keys nevertheless. So merge the built-in FDT
++ * into QEMU's. We cannot merge the other way around (e.g. in
++ * fdtdec_board_setup()) or board_fix_fdt() at this stage as U-Boot
++ * might be started from a ROM location. At the same time U-Boot
++ * needs QEMU's FDT to initialize serial devices even before
++ * relocation.
 + */
-+#define log_err(fmt, args...)	printf(fmt, ##args)
- 
- static inline void *map_sysmem(ulong paddr, unsigned long len)
+ int board_fdt_blob_setup(void **fdtp)
  {
+-	/* QEMU loads a generated DTB for us at the start of RAM. */
+-	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
++	void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
++	int ret;
++
++	if (fdt_check_header(qemu_fdt) != 0) {
++		log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
++		return -EINVAL;
++	}
++
++	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY))
++		goto out;
++
++	if (fdt_check_header(*fdtp) != 0) {
++		/* this was a perfectly normal condition before
++		 * (CONFIG_OF_OMIT_DTB was set for qemu). So to avoid
++		 * breaking existing configs don't error out. This
++		 * might mean that we don't have keys in case
++		 * FIT_SIGNATURE is on. We can't know though as
++		 * existing setups might have injected them into
++		 * QEMU's FDT already.
++		 */
++		goto out;
++	}
++
++	log_debug("Found built-in FDT at %p. Merging into %p...\n", *fdtp, qemu_fdt);
++
++	ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
++	if (ret) {
++		log_err("Failed to grow QEMU FDT: %s\n", fdt_strerror(ret));
++		return -EINVAL;
++	}
++
++	ret = fdt_overlay_apply_node(qemu_fdt, 0, *fdtp, 0);
++	if (ret) {
++		log_err("Failed to apply FDT overlay: %s\n", fdt_strerror(ret));
++		return -EINVAL;
++	}
++
++out:
++	*fdtp = qemu_fdt;
+ 
+ 	return 0;
+ }
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 5bdbd6fb59a..0fd7016c045 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -38,6 +38,7 @@ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_TPM=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_SPAWN=y
++# CONFIG_OF_OMIT_DTB is not set
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_AHCI=y
+ CONFIG_SCSI_AHCI=y
 -- 
 2.43.0
 
