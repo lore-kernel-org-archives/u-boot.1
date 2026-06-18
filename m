@@ -4,104 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF0F6CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:13:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7C36CD98F6
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 682AD8499C;
-	Thu, 18 Jun 2026 17:13:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 56CCC847C3;
+	Thu, 18 Jun 2026 17:19:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cMA7M36j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HkcaZCmF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BEFD849AE; Thu, 18 Jun 2026 17:13:07 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 0CEEC847EF; Thu, 18 Jun 2026 17:19:15 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A95AC847C3
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:13:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C65E78063E
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-6870ad8072eso69793a12.0
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:13:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781795584; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6956a8abe7aso1513511a12.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:19:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781795952; cv=none;
  d=google.com; s=arc-20240605;
- b=UVBYmCobV0kKo5khLesh8r2DcKjIzCatp2jE2xwBgfkEHfSIQsC/ocdmKBYdAbZLWT
- ZX8WFrwZZPLjKtSGueFhJUpQ2gPQmC10Q5iHhR8yse01ySy4J8H4rgOR+LdLXgEpK3GR
- Ri3CGk+WlUZXY+/r3dJehHGFFrBui/h/6Uuoqp8TQXWVWki0ZLiFLJh7LxUQ1/ZHaBFE
- aRUvJjiX7uByo3tIYmzjPgkzdEkLedwR4po31C0vifBXGMaagvPjQJTTi6P/C1h22xXr
- XEzJGASEeNPHFHBBAKj1Po8eduZYYJJj9N/iGVSRHvV8oAh/XfV0PbtP4Bkc5MkvBlAG
- IXMQ==
+ b=hPUDz2tTSxqDW06NrtreUfvC5Tkix13dvAY8ggCtBbemwvdUJ/moiW4wdo0OD2mmNt
+ qX1jkaK2PLWeQVgeuyvMqEOcedWRgLsnjz7D6UNR5M3TAhty5Ip0aveNF4ns7zcE+FD6
+ RiSQuVg8rvyyjZqFZliuSnruNbNw2WFiXJY8jGGz8FpNhzfO79r+HcUkm//OF7scL79Z
+ uNnFwwHsAkHE5nOFXFQawJpD9siAwJQFzTanU4p8Qvy4F9TiRXw+bNTPR6ybKXfIu306
+ 1wBBdX/U6wKRtgQ325xT7yXrBed+oP0H/vRZdskvFrkXfy9qh5gQkE79qKI8W5JIuq5u
+ yHAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=EtnNhmDR1QOm0jOAMCPdURitg2T0nlqC53yz9s/gYmo=;
- fh=VbcbHNWEtkMfc6LdZPwyljz3n5rXCa7uQDYXWjQsMbg=;
- b=I8DklgAECm9t/xi0yFFCcKGASchcgGMPAzCV0Au1LMDnb9JEwTfhXGcymPdlGGdUoo
- 8uzTvsWUrl4ok4HkUWIz5nKOshIxOgZaHPXDAV3MOLFgxZMrbf9DFaUcykb7OjF7Cam2
- vFIWB4lXLFl/7OPuQYaR4SxJEiCtHRFNJaKjAZo0uaiK4vIA8UFecxuatpjK0+LUpWsD
- Nb7dZ1jQpKKWw0ycZNTkEFPyraAMqZrTnktUnGHZzZo5crlm7VQyWza8P6FeTejm1/5F
- icTHvSDJAXV+23qKoCZzs/0blDsid+e/TNblk028mJ//oS8vN+FjQk0z2HX71QXyfXdB
- Xc6Q==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vaoum5FFnGwJ9nHsbUeefS81IGroY8m3rw+qJ1R/0C0=;
+ fh=PLpFEHlVZYOnentfpY57U4X7O2wr2LlW+LHPXEYY5RY=;
+ b=jA/VcNR3Y9IG7qwX+IffEJ92vNA8oRCjL0xyMBOrlfYXszRKBEsU2oLAuK8RyeTcWk
+ /KZANLBGcVGpaIul2V041nvQWPEtFWKD1mEE1CxFpWU0qPXac8eLNg11L3qhVeqwuMXz
+ RE8Sl2JiORvJlrG1H33jRsv3o0pkYwMRxj+rZwDjqfbXGY9eW1Yvk4zSlUcc4kemUyN8
+ iCRF+QCcFc6RuExDzI0XeJjRXGeUBQqrcta92XfAHJBO/patz8feif+ve2U7sjHvKhkW
+ ReMQwBXH6CF+C94IvO4WU3LdAy1lTDeiw9mS2lAxq3rs/B2UKRPaI6lvwXgH2u62q07P
+ hZqw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781795584; x=1782400384; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EtnNhmDR1QOm0jOAMCPdURitg2T0nlqC53yz9s/gYmo=;
- b=cMA7M36jIUV/Rh6FaGcxHRTNJvZA0o9XOywucAVKhs7ePRoz5/8D9nRtZY33IQfj20
- v0nimi/rQRhdR9yfCo5IUewQGR7xJv9m7tyiW1HOLjSu6jRKeMI00S6fWgvaXeFKGnZF
- PkoHOrGYZQWjFLHDBd0f+sJgpRCjINQ2stncY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781795584; x=1782400384;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1781795952; x=1782400752; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EtnNhmDR1QOm0jOAMCPdURitg2T0nlqC53yz9s/gYmo=;
- b=VtLoHW6U3SP5cDCCsSiWY06hwQRg3Mhzk1Jj0DpENdif3gBIzTDZuW41NF1vhHRD0d
- sdSfJMtHA2VkZMyBX+Hq0tIqrbX+dKYllR43dXXr+20mW23k75gO2J4IX7lUNclr6DvD
- GdmwVtQReJ8fdCGPyQeCweW5IRoUwdPKEs1U6lEzIDRCidfokH1VmkDIKQ+7cfnBqzUC
- 3YTPJz4NbT1rcS1SuPXE3xdSlqomswFmFRB7tCmtcSy1ggGCWZQZ//rjS/rM5PZmSI1Z
- w4RH8Mqe+wtCZQEAA0uhze+JxMLDYJxZqzQJjI22Nk8D2r9clZd/mcFfvIuKlpD+hD1p
- 7A+w==
-X-Gm-Message-State: AOJu0YygqFjZzEaHy6/kBk/QwTcq37HSQqWYx/PMEivYlN4uoe2x3kNn
- uH/aloyexHmK3bkKPMBBQDKiptlFdKgDlmpoHHWXKF8pcY9+rqBOrnvmmSRNAlP6ybIDSKWd9vy
- 2WYgJWduh1OWyvwLn20qCFd/yHpvQqiebbDjtfhOQ
-X-Gm-Gg: AfdE7cnA/t/CPNlfA1OxGkzcVbmW/YqbRUBbOFZcMAx9xBqLTyUpPb/F5Y8ayeAg480
- o4busMfaTfSHyGVDdggoR4rX9F+FAnqroHkCLbAfs8rU9J8geWYUsiSZqEYzaCqF9OyJw5GbiHT
- KJ9UnCAyIOtr1+Qxy0SKeNWeHzuYJx70eExRv++E6t/t3ssfUuaT8hvRnwhs6dmyUX8q9V2J6t+
- ZwwHbiGGYAlUqhgcuQvee6nvS+mOXgwq6XOKxhKzC83otqprX2XycCIrlEuf0eLskXTi7evtg==
-X-Received: by 2002:a05:6402:28cb:b0:68f:cd4c:7297 with SMTP id
- 4fb4d7f45d1cf-695baa10f17mr2075502a12.14.1781795584186; Thu, 18 Jun 2026
- 08:13:04 -0700 (PDT)
+ bh=vaoum5FFnGwJ9nHsbUeefS81IGroY8m3rw+qJ1R/0C0=;
+ b=HkcaZCmFW/2D8at9GVkpfgAuTnY5+ChTGQCkk4To//+m7h3YoDLHAaWRCzwjs7QttT
+ UpJWIxE96P5sjtb04xmr1rNxuXwXi8IJXUYiKnuhwOhdvARK/f+g1eplBLCOV7GLCNSl
+ wzfswf92+UVCfSpeCuh+ZvuwkTcC9Cno3WR+Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781795952; x=1782400752;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vaoum5FFnGwJ9nHsbUeefS81IGroY8m3rw+qJ1R/0C0=;
+ b=faHTMVG29fvEk0/9pvSoW3EQS+RsURT6WGqK4/OW3OnfhTq4asixZN62R9IVcoHGvz
+ W7lJ8572PiXg70k8BCJqZsc8LgvK4M2LsURZEQnAv9iM3Er7FW8n44RiEGKNRS/1lv10
+ ofHYZCYB22nZmPx9ompwy9eXKyC8/JU/938uchWkdtSO4++7nY/zNiiCR7lQP7yn63Yl
+ KtVsphfqOE0LrCHn+RUeJDSi8h9QGLliLzeYo2O0sEHCs7pTCBrQPijt8HQlG03BO+jo
+ n6hWHKjSd1hnG5K8CjPDSVAlQN5aNgwAKEJala4XcapXObMzF+eD5yHSjDAjjJf830KZ
+ tRHQ==
+X-Gm-Message-State: AOJu0YwbgNb4lCFl5lkjcwcvWGft7hXq5MVHIS/iVHXYm7AzDg3G24Uy
+ ezf+TC/5bKUr8mgU/1LCBwpcSfYcfGBk/ZhJtQGwdNsG/7OIrBfwxHgYlbYVON2e7pruUP4Z+gp
+ khHAB80mj+iKuLqFk4OtwE8VkAHINhltFlquzwBnw
+X-Gm-Gg: AfdE7cm/tNBmmSUoaAq7XDKxET48qRSOkyl1Qx4IfAhCUAVTI0eJuv1IxuMrTeB6H3L
+ AOmLcPxsFh6CQn7W71W6NqFrlPxgspFPz9TD4RqdfDFEKqlkIXoU/gQk3ErvBBJDcL60YaCM6HV
+ m4EZ538j8r7JOI8JQHFmdSD8gdZQq1jTfh84XDfDOLE8qroBkiVHmuXfuy7+Ulu1ZiZrtcV6hYv
+ VkOjL+GeoEI9RfbdJPtjVO4dAruG1EhHyXaZAYnfPcm2KO9MF8VijJus3sgqaDKCq7q+WyHVQ==
+X-Received: by 2002:a05:6402:42d4:b0:696:2f6e:5e7c with SMTP id
+ 4fb4d7f45d1cf-6962f6e61a5mr773398a12.4.1781795952169; Thu, 18 Jun 2026
+ 08:19:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260523085455.750591-1-sjg@chromium.org>
- <87ik7tzcvs.fsf@kernel.org>
-In-Reply-To: <87ik7tzcvs.fsf@kernel.org>
+References: <20260618150913.314507-1-vincent.stehle@arm.com>
+In-Reply-To: <20260618150913.314507-1-vincent.stehle@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:12:50 +0100
-X-Gm-Features: AVVi8CcL5GPFL5jfwdTq2FV_nRFVZ4exBtblhM0YwOvzdw_UNPfqVx5Y1imwoaw
-Message-ID: <CAFLszTiW0Q0U4NVSpWvve3y0k4NT7_XrorQiE-T6arbiLoXnUQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/11] Move test/py image creation into separate modules
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Kory Maincent <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Marek Vasut <marex@denx.de>, Martin Schwan <m.schwan@phytec.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Philip Molloy <philip.molloy@analog.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Date: Thu, 18 Jun 2026 16:18:59 +0100
+X-Gm-Features: AVVi8CdEHCssy-cWhR2rY3vgGu_0V4aHcDXeBSTGnrhRD6ulIlS8BS_G1kVaSyw
+Message-ID: <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
+ efi_disconnect_controller
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,44 +112,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+Hi Vincent,
 
-On Mon, 8 Jun 2026 at 09:53, Mattijs Korpershoek
-<mkorpershoek@kernel.org> wrote:
+On Thu, 18 Jun 2026 at 16:09, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+wrote:
 >
-> Hi Simon,
+> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when returni=
+ng
+> after having called EFI_ENTRY().
 >
-> Thank you for the series.
->
-> On Sat, May 23, 2026 at 02:54, Simon Glass <sjg@chromium.org> wrote:
->
-> > test_ut.py has accumulated a setup_*_image() helper for each image that
-> > the bootflow tests want to boot. Each one is mostly shell script and
-> > partition layout, so the file is large and the test logic is hidden
-> > among image-creation details.
-> >
-> > Move each setup function to its own module under test/py/img/, with a
-> > shared common.py for mkdir_cond(), copy_partition() and the
-> > make_extlinux_disk() helper. Each patch moves one image at a time so
-> > reviewers can see the relocation cleanly. The modules are named after
-> > the bootmeth or feature they exercise rather than the distribution they
-> > are modelled on.
-> >
-> > While here, also redirect the generated disk images to the
-> > persistent-data directory instead of writing them under the source
-> > tree. The sandbox mmc, scsi and usb-flash drivers now look there first.
-> >
-> > Further improvements are planned, such as using the context manager
-> > when creating partitions.
->
-> I've tested this on sandbox using:
->
-> $ ./test/py/test.py --bd sandbox --build -k ut
-> $ ./test/py/test.py --bd sandbox --build -k bootflow_android
->
-> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> This is inspired by a barebox fix. [1]
 
-I appreciate you reviewing this - quite tedious work!
+Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
+projects back together :-)
+
+>
+> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=3D080db65e39a877=
+b000baaf843c997a69821dfe69 [1]
+> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole chi=
+ld")
+> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  lib/efi_loader/efi_boottime.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.=
+c
+> index de57823bd44..b6966652d97 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
+>                                       &number_of_children,
+>                                       &child_handle_buffer);
+>         if (r !=3D EFI_SUCCESS)
+> -               return r;
+> +               return EFI_EXIT(r);
+>         sole_child =3D (number_of_children =3D=3D 1);
+>
+>         if (child_handle) {
+> --
+> 2.53.0
+>
 
 Regards,
 Simon
