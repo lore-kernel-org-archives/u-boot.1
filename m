@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7815CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD00DCD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:57:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02A7B847C3;
-	Thu, 18 Jun 2026 13:57:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7608F849A1;
+	Thu, 18 Jun 2026 13:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AcZygZH4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sEXOppsg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05FDF84995; Thu, 18 Jun 2026 13:57:00 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 8DB27849A1; Thu, 18 Jun 2026 13:57:02 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE8D780287
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:56:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCBCD84874
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:56:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-490c1915793so6582745e9.2
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:56:57 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-4624a44e152so726163f8f.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781783817; x=1782388617; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781783819; x=1782388619; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5aQLbR86oCqyKVGd3/wgakBb8cfQvhvGfwVwGZ8LETg=;
- b=AcZygZH4ug43Gqr3mT7pFMs1ij4znBkzLVKCgiIyGR+9txiNCHI7o6tPuRrlbW5Mkj
- ctkrusPr3xCb2Mjd5mXgw5XPERBSqkqDBRMqjRsL+W4Pice7s6XnOMmadBZ5FuxY1V3+
- XVOuN58RlPR5E3AoNZ6pYpCrNttVgWSlDwVS5RPnVaEdzptTy2rf45RPHpS6d51VWhWD
- QT75pSmw4hOaffML28foKlhTzRvjsnjixw44OFtPIym1p0u3Kpy4nj24YmzFL0ROQ/Au
- odqyT6VFZVQyJrJO0sWcq+fE4C4RgCGZl7/uKXPSP/Q1s+Bg1SiaoyrR8rRunEp0pwYj
- n3JQ==
+ :reply-to; bh=gJXp7AxrFf+W929yA2oVXxgG5hS+pwszDwWBFC5JElg=;
+ b=sEXOppsgb0u6TOtNyCe9tJeoPwOjE1Iyr8FjZnK15OQZk/Wt/EHrFZezwdaPur4xsd
+ WAroPiUH7K4u3LAz6Ikj6NGOH5f9Aa8dcnewYj9QaQ5mnI5oAhbsfZIZQlNXuo9my/Qk
+ +KsC1nanIngDLlK9FsSD1FlVcM9Pf0qCQzpC6FfeMwkhDBVhdmTP8l1O1tmRujrzDB5f
+ iIxJ/pU+xIjux5youGQKiiGLxW8LNzbe6ntrM3HZYMJ2/ta3pBIywWZTLeRWqgC5g4oc
+ ni37qoKr8A9nUHz5ZXsCiESNOaK9yb20XO+VxOlLCIu1jeYA5YXwQoh+oFc8DAyXlXur
+ qhGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781783817; x=1782388617;
+ d=1e100.net; s=20251104; t=1781783819; x=1782388619;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=5aQLbR86oCqyKVGd3/wgakBb8cfQvhvGfwVwGZ8LETg=;
- b=fEZV2hK80vkDp/zS10NqClzmTuyboCKenX0zj8WX63yfbc5UJWYADSUBGnSGEI7LL7
- VDPvg15xwZf2nnv4xS9wLX3UxzJZ6IieQV6jdbmYTxlCcDljMDgr2yAjl+Uqs+ddEBch
- cgiAYrWFU2SzHGNj95RqdJ6majkKJxgajUWbwhXt2/4hkz5WmHMQuSNdYmn+iPijU+35
- vEPYM0qfJHpYkKy9TfARoPh02rWkz2nY0MD8yvLf4qbehXzDdhu9WHeWTU7Vl/nDcsuM
- 7Gy31tlrIu8ISg7L9W8emmfPBw375FLP9+w8gaQtZhaZShQOyc1s/Nc4TsQKp8nndwqP
- n9fQ==
-X-Gm-Message-State: AOJu0Yxc2uBGgJwmvnI67pkYTp7D8JA0vridIQcjPaaX0DoQT1fnvqym
- nzEPxG9IsYf7weydW8sWe6QY2A/WzUvYNb5w70Ytnr5SL/VSeZlaFHiSfsKCk0VsTj0=
-X-Gm-Gg: AfdE7cmHCxNST2QB5bLWJScRElkT3cbULwZ6b+iR8DKY2NzhdoxTEze5eCfKApWJKDA
- jDaifCo4ibjs4OoYH8F6UflfqkrbLztQeT1fNGRqIFjFENq4ms+QI7fLO59Wp3A1nwCp/N0eZKS
- ph+l1YY+k4KwOXC7JYvgdmUTg4DLeD9ZZRswUm9qApXE1go92OSroMTQ9zTQGvKexRwq/9/dP5S
- 4qbddIFn6Z31DJWUkwD6S+ZZHWcds/F+hqX4WOMtySphYEC2DuxvoeGN4RjrPnt9BqvsMfaFash
- uph3ahNCo0cDqhjuN6Na57vAjbt73zXAQ9DNwylnYU8dDKncjdYfTLE3HZP9RdNWStk8PSf/Ftn
- /9FdxjVnOS5zhiL9YG6cccCTr39S5C7opMoaT/Ktn11tFl0n3wFnTX2IlgN62qoV3ZhySi9uPMb
- dnZ7wvNmb3pHx4PFa45cuyPknBNUBCmBhfuFXHkuelknBHFQa4/Vx6PDk=
-X-Received: by 2002:a05:600c:6089:b0:490:b8c0:d46a with SMTP id
- 5b1f17b1804b1-4923412f185mr121188195e9.22.1781783817235; 
- Thu, 18 Jun 2026 04:56:57 -0700 (PDT)
+ bh=gJXp7AxrFf+W929yA2oVXxgG5hS+pwszDwWBFC5JElg=;
+ b=bTsOyFT14KwYasN/2Wdg916BdZPcKZ+NJqPm+l6aSP8p3w31iqJp0PzsT7zWoHSKtl
+ 5NNh7+i0t0c77quqYkPPp7TNudlEQoRyAfimWOM6KtImWAUzmxgvTURklQoC3p0Cylrv
+ j+H27cVwsWOf4L0fDPnFZApIXBuUjH0wRDd0mBm88CO6gFKZLINGMYo0TkF9ei0X7sSg
+ UNsMeZbcz0W/xri8hlBQ+FxZMlCiFzPQC7ZOLTuW4wqG+uOuyfKv3OpE9VylgstNCOYl
+ Uh4/JIKI5s7WhjjnsyCIFm4v7e8xzAG/Dh25jagQipMV4hWyYpxuJTXutUupUO67p+iw
+ yp5w==
+X-Gm-Message-State: AOJu0YymuGUEaVVFgl2oB5o47IEmQPuvKviQiNZL1ruUPTSmt5xZNxXW
+ 1V+6yUz7rjy6ywbJ58JxEDStm7P6a6wMeTz8szDQrXasK50Qbp0IoJgxbJM43M3n6Yo=
+X-Gm-Gg: AfdE7clPhAIQ3pieP/XrXKO+eZig/dGb3Csg2NhF2z11K4uctq+1whJurEs1JEZpvT/
+ yhwK2vqs18+abWTsoouvdA8/nErngiIIymOK3XDQ+Vmh+6FGsKHTH0QrFsNFylsi4KtoVR2aYLf
+ oshV4lwq2l84lDJoj47EeTcISNjL/kPla1HPOa5W1AEYz1eMCz7ImkE8jHp3pj8imFQvf+a6R83
+ X9QHSgXvr8xTncKDwalhr4sgLIqK46iJiWwo+qXn2ruEMXOWEZttrgxbtXRlFTDolcM3tQKcg2I
+ v66+GzKVNrvLv3Oa+LTEWzG9S3yovnUqFtjsxlHvJA4eOHILTGhct7QpPO5V/pdxTLt4lPft24t
+ niprT3kCGqKlZbJHP+HIdToqV2h84WQHfyeTJCjFVf/KfPk+kkWbdl1ufsoff7PODZbmv0aXKzf
+ K1LKkV7dPz4+D0+j0v7C8kdPsoBdcBa52s4Xwl/iV6tZK7hQuCs5fEW6Q=
+X-Received: by 2002:a05:6000:461e:b0:45e:f2bd:2b17 with SMTP id
+ ffacd0b85a97d-46238acb523mr14328776f8f.21.1781783818946; 
+ Thu, 18 Jun 2026 04:56:58 -0700 (PDT)
 Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.56.55
+ ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.56.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 04:56:56 -0700 (PDT)
+ Thu, 18 Jun 2026 04:56:58 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 18 Jun 2026 13:56:49 +0200
-Subject: [PATCH v3 01/15] Revert "dm: SMEM (Shared memory) uclass"
+Date: Thu, 18 Jun 2026 13:56:50 +0200
+Subject: [PATCH v3 02/15] smem: drop drivers/smem
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260618-b4-modernise-smem-v3-1-472391477988@linaro.org>
+Message-Id: <20260618-b4-modernise-smem-v3-2-472391477988@linaro.org>
 References: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 In-Reply-To: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8369;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=29710;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=9FDuMPu13fZb3kHmJxYtXDf/mc6VQF3sWcLj1QBfniI=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizjuyxf3dwX2PlNaGVUaa0OVPrBfOXdDmb5sOPM8vKnP
- 7zvvb+jo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzkfTPDXxHOZrXLiVm8+jfd
- jYs/S3b5KbnFs7b0iT+M8FZfXXhtFsP/yPPeigel9P8/3BfRLnI2vUS/oE5Redb/6BmPLaP/KBm
- zAAA=
+ bh=0LjoxPbyH4pMMkIgkwUAJ5G8mwsc67gtc8RNWkdUubE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizjuyxfzz2JNkh53/TQPTj+GI+D85SUqDN8ZS/vCGRrv
+ g/c7Pywo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyEcxrDP0tJfe2QTaeqfB7/
+ WT458vA8Xv8122+X6V46E/3+2DRXzdsM/2yC6jgO99vbvxRPPbZl29PJgcd17W+YsRbdXcAgcU+
+ JNwcA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -127,277 +127,1059 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SMEM is a highly Qualcomm specific interface, while having a dedicated
-UCLASS for it offers a nice abstraction, for things like memory layout
-parsing we need to use it before the driver model is available.
-
-Therefore, it doesn't make sense to fit SMEM into the driver model.
-Instead let's adopt a model closer to Linux, and parse SMEM really early
-during boot (as soon as we have the FDT).
-
-This reverts commit 7b384eccc785b596f68448b155cbda26df57fb23.
+Remove the old qcom SMEM driver port and the sandbox stub
+implementation.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- arch/arm/Kconfig           |  1 -
- drivers/Kconfig            |  2 --
- drivers/Makefile           |  1 -
- drivers/smem/Kconfig       | 25 -------------
- drivers/smem/Makefile      |  7 ----
- drivers/smem/smem-uclass.c | 46 ------------------------
- include/dm/uclass-id.h     |  1 -
- include/smem.h             | 90 ----------------------------------------------
- 8 files changed, 173 deletions(-)
+ MAINTAINERS                 |   1 -
+ arch/arm/Kconfig            |   1 -
+ drivers/smem/msm_smem.c     | 958 --------------------------------------------
+ drivers/smem/sandbox_smem.c |  44 --
+ 4 files changed, 1004 deletions(-)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 370bcff56c19..0a66499f6e1a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -688,9 +688,8 @@ F:	drivers/mmc/msm_sdhci.c
+ F:	drivers/phy/msm8916-usbh-phy.c
+ F:	drivers/phy/qcom/
+ F:	drivers/serial/serial_msm.c
+ F:	drivers/serial/serial_msm_geni.c
+-F:	drivers/smem/msm_smem.c
+ F:	drivers/spmi/spmi-msm.c
+ F:	drivers/usb/host/ehci-msm.c
+ N:	qcom
+ N:	snapdragon
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 8047c5e1f879..d252514cca57 100644
+index d252514cca57..8563f38c71df 100644
 --- a/arch/arm/Kconfig
 +++ b/arch/arm/Kconfig
-@@ -1142,9 +1142,8 @@ config ARCH_SNAPDRAGON
+@@ -1140,9 +1140,8 @@ config ARCH_SNAPDRAGON
+ 	select DM_SERIAL
+ 	select DM_RESET
  	select POWER_DOMAIN
  	select GPIO_EXTRA_HEADER
- 	select MSM_SMEM
+-	select MSM_SMEM
  	select OF_CONTROL
--	select SMEM
  	select SPMI
  	select BOARD_LATE_INIT
  	select OF_BOARD
- 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
-diff --git a/drivers/Kconfig b/drivers/Kconfig
-index 47606ddc6c8b..aa293df37c57 100644
---- a/drivers/Kconfig
-+++ b/drivers/Kconfig
-@@ -123,10 +123,8 @@ source "drivers/scsi/Kconfig"
- source "drivers/serial/Kconfig"
- 
- source "drivers/sm/Kconfig"
- 
--source "drivers/smem/Kconfig"
--
- source "drivers/sound/Kconfig"
- 
- source "drivers/soc/Kconfig"
- 
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 43d0ba332818..ca3e87ffb102 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -118,9 +118,8 @@ obj-y += pwm/
- obj-y += reset/
- obj-y += input/
- obj-y += iommu/
- # SOC specific infrastructure drivers.
--obj-y += smem/
- obj-y += thermal/
- obj-$(CONFIG_TEE) += tee/
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += firmware/arm-ffa/
- obj-y += axi/
-diff --git a/drivers/smem/Kconfig b/drivers/smem/Kconfig
+diff --git a/drivers/smem/msm_smem.c b/drivers/smem/msm_smem.c
 deleted file mode 100644
-index e5d7dcc81b17..000000000000
---- a/drivers/smem/Kconfig
+index 7a50d5a5792c..000000000000
+--- a/drivers/smem/msm_smem.c
 +++ /dev/null
-@@ -1,25 +0,0 @@
--menuconfig SMEM
--	bool  "SMEM (Shared Memory mamanger) support"
+@@ -1,958 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (c) 2015, Sony Mobile Communications AB.
+- * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+- * Copyright (c) 2018, Ramon Fried <ramon.fried@gmail.com>
+- */
 -
--if SMEM
+-#include <errno.h>
+-#include <dm.h>
+-#include <dm/device_compat.h>
+-#include <dm/devres.h>
+-#include <dm/of_access.h>
+-#include <dm/of_addr.h>
+-#include <asm/io.h>
+-#include <linux/bug.h>
+-#include <linux/err.h>
+-#include <linux/ioport.h>
+-#include <linux/io.h>
+-#include <linux/sizes.h>
+-#include <smem.h>
 -
--config SANDBOX_SMEM
--    bool "Sandbox Shared Memory Manager (SMEM)"
--    depends on SANDBOX && DM
--    help
--      enable SMEM support for sandbox. This is an emulation of a real SMEM
--      manager.
--      The sandbox driver allocates a shared memory from the heap and
--      initialzies it on start.
+-/*
+- * The Qualcomm shared memory system is an allocate-only heap structure that
+- * consists of one of more memory areas that can be accessed by the processors
+- * in the SoC.
+- *
+- * All systems contains a global heap, accessible by all processors in the SoC,
+- * with a table of contents data structure (@smem_header) at the beginning of
+- * the main shared memory block.
+- *
+- * The global header contains meta data for allocations as well as a fixed list
+- * of 512 entries (@smem_global_entry) that can be initialized to reference
+- * parts of the shared memory space.
+- *
+- *
+- * In addition to this global heap, a set of "private" heaps can be set up at
+- * boot time with access restrictions so that only certain processor pairs can
+- * access the data.
+- *
+- * These partitions are referenced from an optional partition table
+- * (@smem_ptable), that is found 4kB from the end of the main smem region. The
+- * partition table entries (@smem_ptable_entry) lists the involved processors
+- * (or hosts) and their location in the main shared memory region.
+- *
+- * Each partition starts with a header (@smem_partition_header) that identifies
+- * the partition and holds properties for the two internal memory regions. The
+- * two regions are cached and non-cached memory respectively. Each region
+- * contain a link list of allocation headers (@smem_private_entry) followed by
+- * their data.
+- *
+- * Items in the non-cached region are allocated from the start of the partition
+- * while items in the cached region are allocated from the end. The free area
+- * is hence the region between the cached and non-cached offsets. The header of
+- * cached items comes after the data.
+- *
+- * Version 12 (SMEM_GLOBAL_PART_VERSION) changes the item alloc/get procedure
+- * for the global heap. A new global partition is created from the global heap
+- * region with partition type (SMEM_GLOBAL_HOST) and the max smem item count is
+- * set by the bootloader.
+- *
+- */
 -
--config MSM_SMEM
--    bool "Qualcomm Shared Memory Manager (SMEM)"
--    depends on DM
--    depends on ARCH_SNAPDRAGON || ARCH_IPQ40XX
--    select DEVRES
--    help
--      Enable support for the Qualcomm Shared Memory Manager.
--      The driver provides an interface to items in a heap shared among all
--      processors in a Qualcomm platform.
+-/*
+- * The version member of the smem header contains an array of versions for the
+- * various software components in the SoC. We verify that the boot loader
+- * version is a valid version as a sanity check.
+- */
+-#define SMEM_MASTER_SBL_VERSION_INDEX	7
+-#define SMEM_GLOBAL_HEAP_VERSION	11
+-#define SMEM_GLOBAL_PART_VERSION	12
 -
--endif # menu "SMEM Support"
-diff --git a/drivers/smem/Makefile b/drivers/smem/Makefile
+-/*
+- * The first 8 items are only to be allocated by the boot loader while
+- * initializing the heap.
+- */
+-#define SMEM_ITEM_LAST_FIXED	8
+-
+-/* Highest accepted item number, for both global and private heaps */
+-#define SMEM_ITEM_COUNT		512
+-
+-/* Processor/host identifier for the application processor */
+-#define SMEM_HOST_APPS		0
+-
+-/* Processor/host identifier for the global partition */
+-#define SMEM_GLOBAL_HOST	0xfffe
+-
+-/* Max number of processors/hosts in a system */
+-#define SMEM_HOST_COUNT		25
+-
+-/**
+- * struct smem_proc_comm - proc_comm communication struct (legacy)
+- * @command:	current command to be executed
+- * @status:	status of the currently requested command
+- * @params:	parameters to the command
+- */
+-struct smem_proc_comm {
+-	__le32 command;
+-	__le32 status;
+-	__le32 params[2];
+-};
+-
+-/**
+- * struct smem_global_entry - entry to reference smem items on the heap
+- * @allocated:	boolean to indicate if this entry is used
+- * @offset:	offset to the allocated space
+- * @size:	size of the allocated space, 8 byte aligned
+- * @aux_base:	base address for the memory region used by this unit, or 0 for
+- *		the default region. bits 0,1 are reserved
+- */
+-struct smem_global_entry {
+-	__le32 allocated;
+-	__le32 offset;
+-	__le32 size;
+-	__le32 aux_base; /* bits 1:0 reserved */
+-};
+-#define AUX_BASE_MASK		0xfffffffc
+-
+-/**
+- * struct smem_header - header found in beginning of primary smem region
+- * @proc_comm:		proc_comm communication interface (legacy)
+- * @version:		array of versions for the various subsystems
+- * @initialized:	boolean to indicate that smem is initialized
+- * @free_offset:	index of the first unallocated byte in smem
+- * @available:		number of bytes available for allocation
+- * @reserved:		reserved field, must be 0
+- * toc:			array of references to items
+- */
+-struct smem_header {
+-	struct smem_proc_comm proc_comm[4];
+-	__le32 version[32];
+-	__le32 initialized;
+-	__le32 free_offset;
+-	__le32 available;
+-	__le32 reserved;
+-	struct smem_global_entry toc[SMEM_ITEM_COUNT];
+-};
+-
+-/**
+- * struct smem_ptable_entry - one entry in the @smem_ptable list
+- * @offset:	offset, within the main shared memory region, of the partition
+- * @size:	size of the partition
+- * @flags:	flags for the partition (currently unused)
+- * @host0:	first processor/host with access to this partition
+- * @host1:	second processor/host with access to this partition
+- * @cacheline:	alignment for "cached" entries
+- * @reserved:	reserved entries for later use
+- */
+-struct smem_ptable_entry {
+-	__le32 offset;
+-	__le32 size;
+-	__le32 flags;
+-	__le16 host0;
+-	__le16 host1;
+-	__le32 cacheline;
+-	__le32 reserved[7];
+-};
+-
+-/**
+- * struct smem_ptable - partition table for the private partitions
+- * @magic:	magic number, must be SMEM_PTABLE_MAGIC
+- * @version:	version of the partition table
+- * @num_entries: number of partitions in the table
+- * @reserved:	for now reserved entries
+- * @entry:	list of @smem_ptable_entry for the @num_entries partitions
+- */
+-struct smem_ptable {
+-	u8 magic[4];
+-	__le32 version;
+-	__le32 num_entries;
+-	__le32 reserved[5];
+-	struct smem_ptable_entry entry[];
+-};
+-
+-static const u8 SMEM_PTABLE_MAGIC[] = { 0x24, 0x54, 0x4f, 0x43 }; /* "$TOC" */
+-
+-/**
+- * struct smem_partition_header - header of the partitions
+- * @magic:	magic number, must be SMEM_PART_MAGIC
+- * @host0:	first processor/host with access to this partition
+- * @host1:	second processor/host with access to this partition
+- * @size:	size of the partition
+- * @offset_free_uncached: offset to the first free byte of uncached memory in
+- *		this partition
+- * @offset_free_cached: offset to the first free byte of cached memory in this
+- *		partition
+- * @reserved:	for now reserved entries
+- */
+-struct smem_partition_header {
+-	u8 magic[4];
+-	__le16 host0;
+-	__le16 host1;
+-	__le32 size;
+-	__le32 offset_free_uncached;
+-	__le32 offset_free_cached;
+-	__le32 reserved[3];
+-};
+-
+-static const u8 SMEM_PART_MAGIC[] = { 0x24, 0x50, 0x52, 0x54 };
+-
+-/**
+- * struct smem_private_entry - header of each item in the private partition
+- * @canary:	magic number, must be SMEM_PRIVATE_CANARY
+- * @item:	identifying number of the smem item
+- * @size:	size of the data, including padding bytes
+- * @padding_data: number of bytes of padding of data
+- * @padding_hdr: number of bytes of padding between the header and the data
+- * @reserved:	for now reserved entry
+- */
+-struct smem_private_entry {
+-	u16 canary; /* bytes are the same so no swapping needed */
+-	__le16 item;
+-	__le32 size; /* includes padding bytes */
+-	__le16 padding_data;
+-	__le16 padding_hdr;
+-	__le32 reserved;
+-};
+-#define SMEM_PRIVATE_CANARY	0xa5a5
+-
+-/**
+- * struct smem_info - smem region info located after the table of contents
+- * @magic:	magic number, must be SMEM_INFO_MAGIC
+- * @size:	size of the smem region
+- * @base_addr:	base address of the smem region
+- * @reserved:	for now reserved entry
+- * @num_items:	highest accepted item number
+- */
+-struct smem_info {
+-	u8 magic[4];
+-	__le32 size;
+-	__le32 base_addr;
+-	__le32 reserved;
+-	__le16 num_items;
+-};
+-
+-static const u8 SMEM_INFO_MAGIC[] = { 0x53, 0x49, 0x49, 0x49 }; /* SIII */
+-
+-/**
+- * struct smem_region - representation of a chunk of memory used for smem
+- * @aux_base:	identifier of aux_mem base
+- * @virt_base:	virtual base address of memory with this aux_mem identifier
+- * @size:	size of the memory region
+- */
+-struct smem_region {
+-	u32 aux_base;
+-	void __iomem *virt_base;
+-	size_t size;
+-};
+-
+-/**
+- * struct qcom_smem - device data for the smem device
+- * @dev:	device pointer
+- * @global_partition:	pointer to global partition when in use
+- * @global_cacheline:	cacheline size for global partition
+- * @partitions:	list of pointers to partitions affecting the current
+- *		processor/host
+- * @cacheline:	list of cacheline sizes for each host
+- * @item_count: max accepted item number
+- * @num_regions: number of @regions
+- * @regions:	list of the memory regions defining the shared memory
+- */
+-struct qcom_smem {
+-	struct udevice *dev;
+-
+-	struct smem_partition_header *global_partition;
+-	size_t global_cacheline;
+-	struct smem_partition_header *partitions[SMEM_HOST_COUNT];
+-	size_t cacheline[SMEM_HOST_COUNT];
+-	u32 item_count;
+-
+-	unsigned int num_regions;
+-	struct smem_region regions[0];
+-};
+-
+-static struct smem_private_entry *
+-phdr_to_last_uncached_entry(struct smem_partition_header *phdr)
+-{
+-	void *p = phdr;
+-
+-	return p + le32_to_cpu(phdr->offset_free_uncached);
+-}
+-
+-static void *phdr_to_first_cached_entry(struct smem_partition_header *phdr,
+-					size_t cacheline)
+-{
+-	void *p = phdr;
+-
+-	return p + le32_to_cpu(phdr->size) - ALIGN(sizeof(*phdr), cacheline);
+-}
+-
+-static void *phdr_to_last_cached_entry(struct smem_partition_header *phdr)
+-{
+-	void *p = phdr;
+-
+-	return p + le32_to_cpu(phdr->offset_free_cached);
+-}
+-
+-static struct smem_private_entry *
+-phdr_to_first_uncached_entry(struct smem_partition_header *phdr)
+-{
+-	void *p = phdr;
+-
+-	return p + sizeof(*phdr);
+-}
+-
+-static struct smem_private_entry *
+-uncached_entry_next(struct smem_private_entry *e)
+-{
+-	void *p = e;
+-
+-	return p + sizeof(*e) + le16_to_cpu(e->padding_hdr) +
+-	       le32_to_cpu(e->size);
+-}
+-
+-static struct smem_private_entry *
+-cached_entry_next(struct smem_private_entry *e, size_t cacheline)
+-{
+-	void *p = e;
+-
+-	return p - le32_to_cpu(e->size) - ALIGN(sizeof(*e), cacheline);
+-}
+-
+-static void *uncached_entry_to_item(struct smem_private_entry *e)
+-{
+-	void *p = e;
+-
+-	return p + sizeof(*e) + le16_to_cpu(e->padding_hdr);
+-}
+-
+-static void *cached_entry_to_item(struct smem_private_entry *e)
+-{
+-	void *p = e;
+-
+-	return p - le32_to_cpu(e->size);
+-}
+-
+-/* Pointer to the one and only smem handle */
+-static struct qcom_smem *__smem;
+-
+-static int qcom_smem_alloc_private(struct qcom_smem *smem,
+-				   struct smem_partition_header *phdr,
+-				   unsigned int item,
+-				   size_t size)
+-{
+-	struct smem_private_entry *hdr, *end;
+-	size_t alloc_size;
+-	void *cached;
+-
+-	hdr = phdr_to_first_uncached_entry(phdr);
+-	end = phdr_to_last_uncached_entry(phdr);
+-	cached = phdr_to_last_cached_entry(phdr);
+-
+-	while (hdr < end) {
+-		if (hdr->canary != SMEM_PRIVATE_CANARY) {
+-			dev_err(smem->dev,
+-				"Found invalid canary in hosts %d:%d partition\n",
+-				phdr->host0, phdr->host1);
+-			return -EINVAL;
+-		}
+-
+-		if (le16_to_cpu(hdr->item) == item)
+-			return -EEXIST;
+-
+-		hdr = uncached_entry_next(hdr);
+-	}
+-
+-	/* Check that we don't grow into the cached region */
+-	alloc_size = sizeof(*hdr) + ALIGN(size, 8);
+-	if ((void *)hdr + alloc_size >= cached) {
+-		dev_err(smem->dev, "Out of memory\n");
+-		return -ENOSPC;
+-	}
+-
+-	hdr->canary = SMEM_PRIVATE_CANARY;
+-	hdr->item = cpu_to_le16(item);
+-	hdr->size = cpu_to_le32(ALIGN(size, 8));
+-	hdr->padding_data = cpu_to_le16(le32_to_cpu(hdr->size) - size);
+-	hdr->padding_hdr = 0;
+-
+-	/*
+-	 * Ensure the header is written before we advance the free offset, so
+-	 * that remote processors that does not take the remote spinlock still
+-	 * gets a consistent view of the linked list.
+-	 */
+-	dmb();
+-	le32_add_cpu(&phdr->offset_free_uncached, alloc_size);
+-
+-	return 0;
+-}
+-
+-static int qcom_smem_alloc_global(struct qcom_smem *smem,
+-				  unsigned int item,
+-				  size_t size)
+-{
+-	struct smem_global_entry *entry;
+-	struct smem_header *header;
+-
+-	header = smem->regions[0].virt_base;
+-	entry = &header->toc[item];
+-	if (entry->allocated)
+-		return -EEXIST;
+-
+-	size = ALIGN(size, 8);
+-	if (WARN_ON(size > le32_to_cpu(header->available)))
+-		return -ENOMEM;
+-
+-	entry->offset = header->free_offset;
+-	entry->size = cpu_to_le32(size);
+-
+-	/*
+-	 * Ensure the header is consistent before we mark the item allocated,
+-	 * so that remote processors will get a consistent view of the item
+-	 * even though they do not take the spinlock on read.
+-	 */
+-	dmb();
+-	entry->allocated = cpu_to_le32(1);
+-
+-	le32_add_cpu(&header->free_offset, size);
+-	le32_add_cpu(&header->available, -size);
+-
+-	return 0;
+-}
+-
+-/**
+- * qcom_smem_alloc() - allocate space for a smem item
+- * @host:	remote processor id, or -1
+- * @item:	smem item handle
+- * @size:	number of bytes to be allocated
+- *
+- * Allocate space for a given smem item of size @size, given that the item is
+- * not yet allocated.
+- */
+-static int qcom_smem_alloc(unsigned int host, unsigned int item, size_t size)
+-{
+-	struct smem_partition_header *phdr;
+-	int ret;
+-
+-	if (!__smem)
+-		return -ENOMEM;
+-
+-	if (item < SMEM_ITEM_LAST_FIXED) {
+-		dev_err(__smem->dev,
+-			"Rejecting allocation of static entry %d\n", item);
+-		return -EINVAL;
+-	}
+-
+-	if (WARN_ON(item >= __smem->item_count))
+-		return -EINVAL;
+-
+-	if (host < SMEM_HOST_COUNT && __smem->partitions[host]) {
+-		phdr = __smem->partitions[host];
+-		ret = qcom_smem_alloc_private(__smem, phdr, item, size);
+-	} else if (__smem->global_partition) {
+-		phdr = __smem->global_partition;
+-		ret = qcom_smem_alloc_private(__smem, phdr, item, size);
+-	} else {
+-		ret = qcom_smem_alloc_global(__smem, item, size);
+-	}
+-
+-	return ret;
+-}
+-
+-static void *qcom_smem_get_global(struct qcom_smem *smem,
+-				  unsigned int item,
+-				  size_t *size)
+-{
+-	struct smem_header *header;
+-	struct smem_region *area;
+-	struct smem_global_entry *entry;
+-	u32 aux_base;
+-	unsigned int i;
+-
+-	header = smem->regions[0].virt_base;
+-	entry = &header->toc[item];
+-	if (!entry->allocated)
+-		return ERR_PTR(-ENXIO);
+-
+-	aux_base = le32_to_cpu(entry->aux_base) & AUX_BASE_MASK;
+-
+-	for (i = 0; i < smem->num_regions; i++) {
+-		area = &smem->regions[i];
+-
+-		if (area->aux_base == aux_base || !aux_base) {
+-			if (size != NULL)
+-				*size = le32_to_cpu(entry->size);
+-			return area->virt_base + le32_to_cpu(entry->offset);
+-		}
+-	}
+-
+-	return ERR_PTR(-ENOENT);
+-}
+-
+-static void *qcom_smem_get_private(struct qcom_smem *smem,
+-				   struct smem_partition_header *phdr,
+-				   size_t cacheline,
+-				   unsigned int item,
+-				   size_t *size)
+-{
+-	struct smem_private_entry *e, *end;
+-
+-	e = phdr_to_first_uncached_entry(phdr);
+-	end = phdr_to_last_uncached_entry(phdr);
+-
+-	while (e < end) {
+-		if (e->canary != SMEM_PRIVATE_CANARY)
+-			goto invalid_canary;
+-
+-		if (le16_to_cpu(e->item) == item) {
+-			if (size != NULL)
+-				*size = le32_to_cpu(e->size) -
+-					le16_to_cpu(e->padding_data);
+-
+-			return uncached_entry_to_item(e);
+-		}
+-
+-		e = uncached_entry_next(e);
+-	}
+-
+-	/* Item was not found in the uncached list, search the cached list */
+-
+-	e = phdr_to_first_cached_entry(phdr, cacheline);
+-	end = phdr_to_last_cached_entry(phdr);
+-
+-	while (e > end) {
+-		if (e->canary != SMEM_PRIVATE_CANARY)
+-			goto invalid_canary;
+-
+-		if (le16_to_cpu(e->item) == item) {
+-			if (size != NULL)
+-				*size = le32_to_cpu(e->size) -
+-					le16_to_cpu(e->padding_data);
+-
+-			return cached_entry_to_item(e);
+-		}
+-
+-		e = cached_entry_next(e, cacheline);
+-	}
+-
+-	return ERR_PTR(-ENOENT);
+-
+-invalid_canary:
+-	dev_err(smem->dev, "Found invalid canary in hosts %d:%d partition\n",
+-			phdr->host0, phdr->host1);
+-
+-	return ERR_PTR(-EINVAL);
+-}
+-
+-/**
+- * qcom_smem_get() - resolve ptr of size of a smem item
+- * @host:	the remote processor, or -1
+- * @item:	smem item handle
+- * @size:	pointer to be filled out with size of the item
+- *
+- * Looks up smem item and returns pointer to it. Size of smem
+- * item is returned in @size.
+- */
+-static void *qcom_smem_get(unsigned int host, unsigned int item, size_t *size)
+-{
+-	struct smem_partition_header *phdr;
+-	size_t cacheln;
+-	void *ptr = ERR_PTR(-ENOMEM);
+-
+-	if (!__smem)
+-		return ptr;
+-
+-	if (WARN_ON(item >= __smem->item_count))
+-		return ERR_PTR(-EINVAL);
+-
+-	if (host < SMEM_HOST_COUNT && __smem->partitions[host]) {
+-		phdr = __smem->partitions[host];
+-		cacheln = __smem->cacheline[host];
+-		ptr = qcom_smem_get_private(__smem, phdr, cacheln, item, size);
+-	} else if (__smem->global_partition) {
+-		phdr = __smem->global_partition;
+-		cacheln = __smem->global_cacheline;
+-		ptr = qcom_smem_get_private(__smem, phdr, cacheln, item, size);
+-	} else {
+-		ptr = qcom_smem_get_global(__smem, item, size);
+-	}
+-
+-	return ptr;
+-
+-}
+-
+-/**
+- * qcom_smem_get_free_space() - retrieve amount of free space in a partition
+- * @host:	the remote processor identifying a partition, or -1
+- *
+- * To be used by smem clients as a quick way to determine if any new
+- * allocations has been made.
+- */
+-static int qcom_smem_get_free_space(unsigned int host)
+-{
+-	struct smem_partition_header *phdr;
+-	struct smem_header *header;
+-	unsigned int ret;
+-
+-	if (!__smem)
+-		return -ENOMEM;
+-
+-	if (host < SMEM_HOST_COUNT && __smem->partitions[host]) {
+-		phdr = __smem->partitions[host];
+-		ret = le32_to_cpu(phdr->offset_free_cached) -
+-		      le32_to_cpu(phdr->offset_free_uncached);
+-	} else if (__smem->global_partition) {
+-		phdr = __smem->global_partition;
+-		ret = le32_to_cpu(phdr->offset_free_cached) -
+-		      le32_to_cpu(phdr->offset_free_uncached);
+-	} else {
+-		header = __smem->regions[0].virt_base;
+-		ret = le32_to_cpu(header->available);
+-	}
+-
+-	return ret;
+-}
+-
+-static int qcom_smem_get_sbl_version(struct qcom_smem *smem)
+-{
+-	struct smem_header *header;
+-	__le32 *versions;
+-
+-	header = smem->regions[0].virt_base;
+-	versions = header->version;
+-
+-	return le32_to_cpu(versions[SMEM_MASTER_SBL_VERSION_INDEX]);
+-}
+-
+-static struct smem_ptable *qcom_smem_get_ptable(struct qcom_smem *smem)
+-{
+-	struct smem_ptable *ptable;
+-	u32 version;
+-
+-	ptable = smem->regions[0].virt_base + smem->regions[0].size - SZ_4K;
+-	if (memcmp(ptable->magic, SMEM_PTABLE_MAGIC, sizeof(ptable->magic)))
+-		return ERR_PTR(-ENOENT);
+-
+-	version = le32_to_cpu(ptable->version);
+-	if (version != 1) {
+-		dev_err(smem->dev,
+-			"Unsupported partition header version %d\n", version);
+-		return ERR_PTR(-EINVAL);
+-	}
+-	return ptable;
+-}
+-
+-static u32 qcom_smem_get_item_count(struct qcom_smem *smem)
+-{
+-	struct smem_ptable *ptable;
+-	struct smem_info *info;
+-
+-	ptable = qcom_smem_get_ptable(smem);
+-	if (IS_ERR_OR_NULL(ptable))
+-		return SMEM_ITEM_COUNT;
+-
+-	info = (struct smem_info *)&ptable->entry[ptable->num_entries];
+-	if (memcmp(info->magic, SMEM_INFO_MAGIC, sizeof(info->magic)))
+-		return SMEM_ITEM_COUNT;
+-
+-	return le16_to_cpu(info->num_items);
+-}
+-
+-static int qcom_smem_set_global_partition(struct qcom_smem *smem)
+-{
+-	struct smem_partition_header *header;
+-	struct smem_ptable_entry *entry = NULL;
+-	struct smem_ptable *ptable;
+-	u32 host0, host1, size;
+-	int i;
+-
+-	ptable = qcom_smem_get_ptable(smem);
+-	if (IS_ERR(ptable))
+-		return PTR_ERR(ptable);
+-
+-	for (i = 0; i < le32_to_cpu(ptable->num_entries); i++) {
+-		entry = &ptable->entry[i];
+-		host0 = le16_to_cpu(entry->host0);
+-		host1 = le16_to_cpu(entry->host1);
+-
+-		if (host0 == SMEM_GLOBAL_HOST && host0 == host1)
+-			break;
+-	}
+-
+-	if (!entry) {
+-		dev_err(smem->dev, "Missing entry for global partition\n");
+-		return -EINVAL;
+-	}
+-
+-	if (!le32_to_cpu(entry->offset) || !le32_to_cpu(entry->size)) {
+-		dev_err(smem->dev, "Invalid entry for global partition\n");
+-		return -EINVAL;
+-	}
+-
+-	if (smem->global_partition) {
+-		dev_err(smem->dev, "Already found the global partition\n");
+-		return -EINVAL;
+-	}
+-
+-	header = smem->regions[0].virt_base + le32_to_cpu(entry->offset);
+-	host0 = le16_to_cpu(header->host0);
+-	host1 = le16_to_cpu(header->host1);
+-
+-	if (memcmp(header->magic, SMEM_PART_MAGIC, sizeof(header->magic))) {
+-		dev_err(smem->dev, "Global partition has invalid magic\n");
+-		return -EINVAL;
+-	}
+-
+-	if (host0 != SMEM_GLOBAL_HOST && host1 != SMEM_GLOBAL_HOST) {
+-		dev_err(smem->dev, "Global partition hosts are invalid\n");
+-		return -EINVAL;
+-	}
+-
+-	if (le32_to_cpu(header->size) != le32_to_cpu(entry->size)) {
+-		dev_err(smem->dev, "Global partition has invalid size\n");
+-		return -EINVAL;
+-	}
+-
+-	size = le32_to_cpu(header->offset_free_uncached);
+-	if (size > le32_to_cpu(header->size)) {
+-		dev_err(smem->dev,
+-			"Global partition has invalid free pointer\n");
+-		return -EINVAL;
+-	}
+-
+-	smem->global_partition = header;
+-	smem->global_cacheline = le32_to_cpu(entry->cacheline);
+-
+-	return 0;
+-}
+-
+-static int qcom_smem_enumerate_partitions(struct qcom_smem *smem,
+-					  unsigned int local_host)
+-{
+-	struct smem_partition_header *header;
+-	struct smem_ptable_entry *entry;
+-	struct smem_ptable *ptable;
+-	unsigned int remote_host;
+-	u32 host0, host1;
+-	int i;
+-
+-	ptable = qcom_smem_get_ptable(smem);
+-	if (IS_ERR(ptable))
+-		return PTR_ERR(ptable);
+-
+-	for (i = 0; i < le32_to_cpu(ptable->num_entries); i++) {
+-		entry = &ptable->entry[i];
+-		host0 = le16_to_cpu(entry->host0);
+-		host1 = le16_to_cpu(entry->host1);
+-
+-		if (host0 != local_host && host1 != local_host)
+-			continue;
+-
+-		if (!le32_to_cpu(entry->offset))
+-			continue;
+-
+-		if (!le32_to_cpu(entry->size))
+-			continue;
+-
+-		if (host0 == local_host)
+-			remote_host = host1;
+-		else
+-			remote_host = host0;
+-
+-		if (remote_host >= SMEM_HOST_COUNT) {
+-			dev_err(smem->dev,
+-				"Invalid remote host %d\n",
+-				remote_host);
+-			return -EINVAL;
+-		}
+-
+-		if (smem->partitions[remote_host]) {
+-			dev_err(smem->dev,
+-				"Already found a partition for host %d\n",
+-				remote_host);
+-			return -EINVAL;
+-		}
+-
+-		header = smem->regions[0].virt_base + le32_to_cpu(entry->offset);
+-		host0 = le16_to_cpu(header->host0);
+-		host1 = le16_to_cpu(header->host1);
+-
+-		if (memcmp(header->magic, SMEM_PART_MAGIC,
+-			    sizeof(header->magic))) {
+-			dev_err(smem->dev,
+-				"Partition %d has invalid magic\n", i);
+-			return -EINVAL;
+-		}
+-
+-		if (host0 != local_host && host1 != local_host) {
+-			dev_err(smem->dev,
+-				"Partition %d hosts are invalid\n", i);
+-			return -EINVAL;
+-		}
+-
+-		if (host0 != remote_host && host1 != remote_host) {
+-			dev_err(smem->dev,
+-				"Partition %d hosts are invalid\n", i);
+-			return -EINVAL;
+-		}
+-
+-		if (le32_to_cpu(header->size) != le32_to_cpu(entry->size)) {
+-			dev_err(smem->dev,
+-				"Partition %d has invalid size\n", i);
+-			return -EINVAL;
+-		}
+-
+-		if (le32_to_cpu(header->offset_free_uncached) > le32_to_cpu(header->size)) {
+-			dev_err(smem->dev,
+-				"Partition %d has invalid free pointer\n", i);
+-			return -EINVAL;
+-		}
+-
+-		smem->partitions[remote_host] = header;
+-		smem->cacheline[remote_host] = le32_to_cpu(entry->cacheline);
+-	}
+-
+-	return 0;
+-}
+-
+-static int qcom_smem_map_memory(struct qcom_smem *smem, struct udevice *dev,
+-				const char *name, int i)
+-{
+-	int ret;
+-	struct ofnode_phandle_args args;
+-	struct resource r;
+-
+-	if (!dev_read_prop(dev, name, NULL)) {
+-		dev_err(dev, "%s prop not found\n", name);
+-		return -EINVAL;
+-	}
+-
+-	ret = dev_read_phandle_with_args(dev, name, NULL, 0, 0, &args);
+-	if (ret) {
+-		dev_err(dev, "%s phandle read failed\n", name);
+-		return -EINVAL;
+-	}
+-
+-	if (!ofnode_valid(args.node)) {
+-		dev_err(dev, "Invalid node from phandle args\n");
+-		return -EINVAL;
+-	}
+-
+-	ret = ofnode_read_resource(args.node, 0, &r);
+-	if (ret) {
+-		dev_err(dev, "Can't get mmap base address(%d)\n", ret);
+-		return ret;
+-	}
+-	smem->regions[i].aux_base = (u32)r.start;
+-	smem->regions[i].size = resource_size(&r);
+-	smem->regions[i].virt_base = devm_ioremap(dev, r.start, resource_size(&r));
+-	if (!smem->regions[i].virt_base)
+-		return -ENOMEM;
+-
+-	return 0;
+-}
+-
+-static int qcom_smem_probe(struct udevice *dev)
+-{
+-	struct smem_header *header;
+-	struct qcom_smem *smem;
+-	size_t array_size;
+-	int num_regions;
+-	u32 version;
+-	int ret;
+-	fdt_addr_t addr;
+-	fdt_size_t size;
+-
+-	if (__smem)
+-		return 0;
+-
+-	num_regions = 1;
+-	if (dev_read_prop(dev, "qcom,rpm-msg-ram", NULL))
+-		num_regions++;
+-
+-	array_size = num_regions * sizeof(struct smem_region);
+-	smem = devm_kzalloc(dev, sizeof(*smem) + array_size, GFP_KERNEL);
+-	if (!smem)
+-		return -ENOMEM;
+-
+-	smem->dev = dev;
+-	smem->num_regions = num_regions;
+-
+-	addr = dev_read_addr_size(dev, &size);
+-	if (addr == FDT_ADDR_T_NONE) {
+-		ret = qcom_smem_map_memory(smem, dev, "memory-region", 0);
+-		if (ret)
+-			return ret;
+-	} else {
+-		smem->regions[0].aux_base = (u32)addr;
+-		smem->regions[0].size = size;
+-		smem->regions[0].virt_base = devm_ioremap(dev, addr, size);
+-		if (!smem->regions[0].virt_base)
+-			return -ENOMEM;
+-	}
+-
+-	if (num_regions > 1) {
+-		ret = qcom_smem_map_memory(smem, dev,
+-					"qcom,rpm-msg-ram", 1);
+-		if (ret)
+-			return ret;
+-	}
+-
+-	header = smem->regions[0].virt_base;
+-	if (le32_to_cpu(header->initialized) != 1 ||
+-	    le32_to_cpu(header->reserved)) {
+-		dev_err(dev, "SMEM is not initialized by SBL\n");
+-		return -EINVAL;
+-	}
+-
+-	version = qcom_smem_get_sbl_version(smem);
+-	switch (version >> 16) {
+-	case SMEM_GLOBAL_PART_VERSION:
+-		ret = qcom_smem_set_global_partition(smem);
+-		if (ret < 0)
+-			return ret;
+-		smem->item_count = qcom_smem_get_item_count(smem);
+-		break;
+-	case SMEM_GLOBAL_HEAP_VERSION:
+-		smem->item_count = SMEM_ITEM_COUNT;
+-		break;
+-	default:
+-		dev_err(dev, "Unsupported SMEM version 0x%x\n", version);
+-		return -EINVAL;
+-	}
+-
+-	ret = qcom_smem_enumerate_partitions(smem, SMEM_HOST_APPS);
+-	if (ret < 0 && ret != -ENOENT)
+-		return ret;
+-
+-	__smem = smem;
+-
+-	return 0;
+-}
+-
+-static int qcom_smem_remove(struct udevice *dev)
+-{
+-	__smem = NULL;
+-
+-	return 0;
+-}
+-
+-const struct udevice_id qcom_smem_of_match[] = {
+-	{ .compatible = "qcom,smem" },
+-	{ }
+-};
+-
+-static const struct smem_ops msm_smem_ops = {
+-	.alloc = qcom_smem_alloc,
+-	.get = qcom_smem_get,
+-	.get_free_space = qcom_smem_get_free_space,
+-};
+-
+-U_BOOT_DRIVER(qcom_smem) = {
+-	.name	= "qcom_smem",
+-	.id	= UCLASS_SMEM,
+-	.of_match = qcom_smem_of_match,
+-	.ops = &msm_smem_ops,
+-	.probe = qcom_smem_probe,
+-	.remove = qcom_smem_remove,
+-};
+diff --git a/drivers/smem/sandbox_smem.c b/drivers/smem/sandbox_smem.c
 deleted file mode 100644
-index af3e9b50883c..000000000000
---- a/drivers/smem/Makefile
+index fec98e5611d6..000000000000
+--- a/drivers/smem/sandbox_smem.c
 +++ /dev/null
-@@ -1,7 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Makefile for the U-Boot SMEM interface drivers
--
--obj-$(CONFIG_SANDBOX_SMEM) += sandbox_smem.o
--obj-$(CONFIG_SMEM) += smem-uclass.o
--obj-$(CONFIG_MSM_SMEM) += msm_smem.o
-diff --git a/drivers/smem/smem-uclass.c b/drivers/smem/smem-uclass.c
-deleted file mode 100644
-index 4dea5cc4bf1c..000000000000
---- a/drivers/smem/smem-uclass.c
-+++ /dev/null
-@@ -1,46 +0,0 @@
+@@ -1,44 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
 - * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
 - */
 -
--#define LOG_CATEGORY UCLASS_SMEM
--
 -#include <dm.h>
+-#include <errno.h>
 -#include <smem.h>
+-#include <asm/test.h>
 -
--int smem_alloc(struct udevice *dev, unsigned int host,
+-static int sandbox_smem_alloc(unsigned int host,
 -		unsigned int item, size_t size)
 -{
--	struct smem_ops *ops = smem_get_ops(dev);
--
--	if (!ops->alloc)
--		return -ENOSYS;
--
--	return ops->alloc(host, item, size);
+-	return 0;
 -}
 -
--void *smem_get(struct udevice *dev, unsigned int host,
+-static void *sandbox_smem_get(unsigned int host,
 -		unsigned int item, size_t *size)
 -{
--	struct smem_ops *ops = smem_get_ops(dev);
--
--	if (!ops->get)
--		return NULL;
--
--	return ops->get(host, item, size);
+-	return NULL;
 -}
 -
--int smem_get_free_space(struct udevice *dev, unsigned int host)
+-static int sandbox_smem_get_free_space(unsigned int host)
 -{
--	struct smem_ops *ops = smem_get_ops(dev);
--
--	if (!ops->get_free_space)
--		return -ENOSYS;
--
--	return ops->get_free_space(host);
+-	return 0;
 -}
 -
--UCLASS_DRIVER(smem) = {
--	.id     = UCLASS_SMEM,
--	.name       = "smem",
--};
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 36b5d87c304f..fe0aae2720ca 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -133,9 +133,8 @@ enum uclass_id {
- 	UCLASS_SCMI_BASE,	/* Interface for SCMI Base protocol */
- 	UCLASS_SCSI,		/* SCSI device */
- 	UCLASS_SERIAL,		/* Serial UART */
- 	UCLASS_SIMPLE_BUS,	/* Bus with child devices */
--	UCLASS_SMEM,		/* Shared memory interface */
- 	UCLASS_SOC,		/* SOC Device */
- 	UCLASS_SOUND,		/* Playing simple sounds */
- 	UCLASS_SPI,		/* SPI bus */
- 	UCLASS_SPI_FLASH,	/* SPI flash */
-diff --git a/include/smem.h b/include/smem.h
-deleted file mode 100644
-index b19c534ebc43..000000000000
---- a/include/smem.h
-+++ /dev/null
-@@ -1,90 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * The shared memory system is an allocate-only heap structure that
-- * consists of one of more memory areas that can be accessed by the processors
-- * in the SoC.
-- *
-- * Allocation can be done globally for all processors or to an individual processor.
-- * This is controlled by the @host parameter.
-- *
-- * Allocation and management of heap can be implemented in various ways,
-- * The @item parameter should be used as an index/hash to the memory region.
-- *
-- * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
-- */
--
--#ifndef _smemh_
--#define _smemh_
--
--/* struct smem_ops: Operations for the SMEM uclass */
--struct smem_ops {
--	/**
--	 * alloc() - allocate space for a smem item
--	 *
--	 * @host:	remote processor id, or -1 for all processors.
--	 * @item:	smem item handle
--	 * @size:	number of bytes to be allocated
--	 * @return 0 if OK, -ve on error
--	 */
--	int (*alloc)(unsigned int host,
--		unsigned int item, size_t size);
--
--	/**
--	 * get() - Resolve ptr of size of a smem item
--	 *
--	 * @host:	the remote processor, of -1 for all processors.
--	 * @item:	smem item handle
--	 * @size:	pointer to be filled out with the size of the item
--	 * @return	pointer on success, NULL on error
--	 */
--	void *(*get)(unsigned int host,
--		unsigned int item, size_t *size);
--
--	/**
--	 * get_free_space() - Get free space in smem in bytes
--	 *
--	 * @host:   the remote processor identifying a partition, or -1
--	 *			for all processors.
--	 * @return	free space, -ve on error
--	 */
--	int (*get_free_space)(unsigned int host);
+-static const struct smem_ops sandbox_smem_ops = {
+-	.alloc	= sandbox_smem_alloc,
+-	.get	= sandbox_smem_get,
+-	.get_free_space	= sandbox_smem_get_free_space,
 -};
 -
--#define smem_get_ops(dev)	((struct smem_ops *)(dev)->driver->ops)
+-static const struct udevice_id sandbox_smem_ids[] = {
+-	{ .compatible = "sandbox,smem" },
+-	{ }
+-};
 -
--/**
-- * smem_alloc() - allocate space for a smem item
-- * @host:	remote processor id, or -1
-- * @item:	smem item handle
-- * @size:	number of bytes to be allocated
-- * Return: 0 if OK, -ve on error
-- *
-- * Allocate space for a given smem item of size @size, given that the item is
-- * not yet allocated.
-- */
--int smem_alloc(struct udevice *dev, unsigned int host, unsigned int item, size_t size);
--
--/**
-- * smem_get() - resolve ptr of size of a smem item
-- * @host:	the remote processor, or -1 for all processors.
-- * @item:	smem item handle
-- * @size:	pointer to be filled out with size of the item
-- * Return:	pointer on success, NULL on error
-- *
-- * Looks up smem item and returns pointer to it. Size of smem
-- * item is returned in @size.
-- */
--void *smem_get(struct udevice *dev, unsigned int host, unsigned int item, size_t *size);
--
--/**
-- * smem_get_free_space() - retrieve amount of free space in a partition
-- * @host:	the remote processor identifying a partition, or -1
-- *			for all processors.
-- * Return:	size in bytes, -ve on error
-- *
-- * To be used by smem clients as a quick way to determine if any new
-- * allocations has been made.
-- */
--int smem_get_free_space(struct udevice *dev, unsigned int host);
--
--#endif /* _smem_h_ */
+-U_BOOT_DRIVER(smem_sandbox) = {
+-	.name		= "smem_sandbox",
+-	.id		= UCLASS_SMEM,
+-	.of_match	= sandbox_smem_ids,
+-	.ops		= &sandbox_smem_ops,
+-};
 
 -- 
 2.53.0
