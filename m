@@ -4,157 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3A8CD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 10:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC330CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:02:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDA818460E;
-	Thu, 18 Jun 2026 12:42:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 39B558056B;
+	Thu, 18 Jun 2026 13:02:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="m7aTB5HR";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="geZLevsC";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="cxKQW2qR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8890C8499C; Thu, 18 Jun 2026 12:42:09 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id B104E8460E; Thu, 18 Jun 2026 13:02:37 +0200 (CEST)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1295A80287
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 12:42:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD50280287
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:02:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65I8x2j8722620
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 10:42:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- UTHqzA1IDfZR+ao10s1vDdz8Tb4BplaiYDdBEksbQ8g=; b=m7aTB5HRiZgRX3Nn
- X91Zh2MmDlQbxjVz1r3o9oapjxR//uV1ypJ226RFaW4Svh0iyRcJZHAV+JbDOetr
- 71audVPoEPqq3bu/Fua1zEG+cit1k/3aZAgIxI5aQQ/UfZvrm2GgmHeSck1FJPBu
- OrWHNdJrA9HX4Bq1vDvB60SXnUzfatSjbDOt5FW3FENudlC9eqYAopS3uKaOi9t5
- /hNQp4TY2krdZEAOBXtxtzoiCIWhPZEDVK3gwmA16g8i5L48fJ01uNtx9le+cRKL
- SQviQ1SQmoJEFJDEprgiNFXtuFK7BKldgC86UOEmz/TRf9peV27kM8RJ/tn6tGjo
- kQ3R+Q==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4evdn40bpw-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 10:42:05 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-842208d5b0eso540525b3a.3
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 03:42:04 -0700 (PDT)
+ header.from=softathome.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aquPf4DkJaSkHPeA3KtpNukJTUZ20WEDmOtjjP1YHlXMyF5s8UyEOLsajipQRB+tunLIOxs2ulOk8bR8ruAbcAkhyPe7n1c4mhYOf2DqtGLnN2sqH5XHIgrBDx6P3mg7llWs78m4y+TANrdpDsymkGv03zNON2VJZ3qL06GsKRN7q3M6FgNicog+//eM0orBeYrCcvTI83LW74puf6bLkjLgRVp+axKY97n1RfvQPDBzbJXi/VX76ccne5NDysyemg/C20Ha/wnh48A0tH6Bz+XHPx52yWgrjkNXVaAcCCJzxKsw1OwfTGLM8MEYKCHjlliKS9Tx5cgLk4XObPFDkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HjjMGWz00H0OG4IN9opAojd3WeORw6TGcb9gIx5Gte8=;
+ b=zMh2CI30jHhzXsJao0YfqxSzfef/RJ4f4D2zsPpjJ+tFcSW2tRcLUaj3nJRXp0q6gT88RSuA4oTyRgiGRFYzBX6Acpuz5+yFah2tY9bPvBAlDQ/iEpxl1GhYeV0USZpQ4RGYNL7wVcnAcNeaoyBXSgY8yBwz89nULjHzAYUS60WyW9BWfPBzqsHTw4V4bl7b2fgUVlMFEergPGR4AdDZV/M8CytcIgm8J4iwjRwsF99gh0SA3xyFdRZpjeb31v63JUnf+nMOYY5AZ/Bw0O2LAOLLkK+X/Obee8AFJAD1mzizWz3f1Iq+pKfa7bpBTgXxn+XB8oyziLjNtGd9pjzzBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=softathome.com; dmarc=pass action=none
+ header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781779324; x=1782384124; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UTHqzA1IDfZR+ao10s1vDdz8Tb4BplaiYDdBEksbQ8g=;
- b=geZLevsCJl/pR5EeyXc+KC2ejP/p2/aGXzke4NKRYryHUpSWpJiefjr805qO5bOrxl
- 5oklMyM2cINrJ55MAWvvGtIEVfORdGWr3JbTUomx9TS4jqXIuoG2qa+vA75kK6ubyxWb
- +fMkzP11gG09L2omfEdEICSEhG0xjVF1wd5HXyoB5JlJ547bAPJDcVrPNZN8tDBKDJlG
- SyOs5lQ1yp3Suz9qgX74T28598EVcOY9vKXaMUiOxTpiLYNFFBzaB/GHLuhAJyUgWgiN
- fR0Zlt4UdLSTSfOFohJPRWJYq22DU7yG4gNcNOk9I2TEKZ0dKekHpVLT8V99wsnCew+/
- ETlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781779324; x=1782384124;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UTHqzA1IDfZR+ao10s1vDdz8Tb4BplaiYDdBEksbQ8g=;
- b=lXV+s9eFVCX7RXVoVx4d06v30ah/6tagULeF0kGDsHJctS4Qjr7WOwUqDFCEobimHS
- xQJ9oWeji8k9E3o3m3++BlF7Mowbmzw5Ta4e1Q6u8UYyJAPtl3FuRDxrpjqpWerHlPLI
- hgxgx+syh7rwYAi6tDw9flKTz+9hDrS3wryi7gcYi/4jxO1uXZiVcZBkH7d0RGuEf87K
- P51gDiH9csfsmOQ6CL2NLjtEyJFZZydpDcQPGYsbN6FSLyJR4NNtj3Tmcj7JubXF0802
- zAWKB2qwpGpoy9gPPxCgqQNB99t0iDuelgFbPlAAzaSGYYlD9J9HXtm0Tf86afdiHgwM
- AEhQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ92i8f8i9W0J+d+TPx+xbXOP6VTaVvzyigwVbasv2XCkn/zxdWXdRXN5+ugK0mXMALRI916MlQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyr+oG64plo17ctTpFGJeBGs/hxVFnKo2mty90uTyiNom1Oz49d
- pL+drtUw1c1xVXAK7VdFI4lrWuHiiwQWA/szYMBIGhmuKGFJ+yH3dqfNOr5sbFBKkSGp3esuvI6
- z6C0TkrfnOpRSzAufon1wtJFt0kOlhfHY8dpZyeeSsDtojrpVUhlpJCPdxSUaDQmIyAY=
-X-Gm-Gg: AfdE7clqXHNZY6MXPRR9S9US+xV5NvXJ1l1BZ76uU6cSi7rldONgrLaAIRNedrmF4jz
- EuxtI9NpzD9ynybbDRrhFkwLuBQz9Y11sEg/gXN6hpSRIDo6heDyZm1/0mcKA6fV2gwC9Sji2jp
- f5eXpRJHo16pN/nd7DMgRLxhsnC82iuiVkul4oKKOebl9GsKwL2DNoLBctlDPbWF99K04xTqmge
- +IAHtVdmev95YbzkxwNOSKryqLpp0CY3DVTlYQfQPE9FBX1JuEwLLYbtr3L9J7GsTmxHBsrTHqz
- Tz+cr+u2Kf0qi92FCQM1QtB5Iw+j3BxYZxrlYE9JpgvdQpamqPZnHHDjaRe1g/XLmuQgg2evLj6
- zA3XdyRhswQgFli2AdDiuMBbzXGs/hTw0Fmsa5gAhJFFvjT4/
-X-Received: by 2002:a05:6a00:4218:b0:842:7992:bdc5 with SMTP id
- d2e1a72fcca58-845247b84b3mr8547933b3a.41.1781779324272; 
- Thu, 18 Jun 2026 03:42:04 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4218:b0:842:7992:bdc5 with SMTP id
- d2e1a72fcca58-845247b84b3mr8547889b3a.41.1781779323683; 
- Thu, 18 Jun 2026 03:42:03 -0700 (PDT)
-Received: from [10.151.41.150] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434afc8fc7sm20663321b3a.37.2026.06.18.03.41.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jun 2026 03:42:03 -0700 (PDT)
-Message-ID: <c1a02c92-3df6-47b6-bc92-8e1c721ee36d@oss.qualcomm.com>
-Date: Thu, 18 Jun 2026 16:11:53 +0530
-MIME-Version: 1.0
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HjjMGWz00H0OG4IN9opAojd3WeORw6TGcb9gIx5Gte8=;
+ b=cxKQW2qRAeuGO5MH8I5MjwZUdAlG/zJ0PqC/C7PRzfsyFruK5aaeeEEcxZC+t9L+v5NhgfUqH8Q6vHkmFGXF9T0qtdcMpjnWWuhuys9jOlXxdK0vY/DdhXVFKm6nDbl62SnZMET0Pcqo6TQl83t4BCxggB0K2cn6fQHX89ipBan39L1L+drZW+VhHJjMhVMWFm4ZFibMUhbjMB5nx7xHPq16J+E4pElkL/qkq6+CiVGp08qfsyIvKZkrMVd0Liewrcllm3zc1akBzrU2NAnRdozlf9tAeOGlYgUppwVN4cRYEilO9gL1480oRfOSGN/P9kuyJcUnVuuXW2oKf/45xg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=softathome.com;
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
+ by MR0P264MB4970.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:4d::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Thu, 18 Jun
+ 2026 11:02:31 +0000
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557%3]) with mapi id 15.21.0139.011; Thu, 18 Jun 2026
+ 11:02:31 +0000
+Message-ID: <01441137-deb3-4322-b5b3-b27ebc63f351@softathome.com>
+Date: Thu, 18 Jun 2026 13:02:30 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] arm: snapdragon: Add snagboot support for
- Lemans-EVK
-To: Ferass El Hafidi <funderscore@postmarketos.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- George Chan <gchan9527@gmail.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
- <64718934-b054-4c47-9d01-dc6fac01dbd7@linaro.org>
- <tgqh8m.i5334p2b63jo@postmarketos.org>
+Subject: Re: [PATCH v8 06/15] test: dm: ecdsa.c: clean this test as software
+ ecdsa is now implemented
+To: Simon Glass <sjg@chromium.org>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+ trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
+References: <20260601134310.2452454-1-philippe.reynes@softathome.com>
+ <20260601134310.2452454-7-philippe.reynes@softathome.com>
+ <CAFLszTjx=CJxjp-ji+n2MF2znfeN5zPQhTO1TnBhLE3J_WMRpw@mail.gmail.com>
 Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <tgqh8m.i5334p2b63jo@postmarketos.org>
+From: Philippe Reynes <philippe.reynes@softathome.com>
+In-Reply-To: <CAFLszTjx=CJxjp-ji+n2MF2znfeN5zPQhTO1TnBhLE3J_WMRpw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE4MDA5OSBTYWx0ZWRfX0mmAKwqfXIeC
- 1ygMwLrgGyelLrTBmfOQihvFGmKyrYcgTEwQRsVQllXK/l6OBB3gFTuZDDqjb1skiR38jjRUopL
- HDRDPjPLGCqerKwK+zWyi/EzXMv8Sf5+55g1+8jI713tR6jNv0t0oFqAdfRo/0kTuOVNZHllsFI
- 7k4YE/SZn649rUgrKhSLtrgE7kzAWxK8EK616CxWeKKEND7/Qec6fHguOUdT86v5x0hsFX7FPGO
- lHVKVZUWXk8l3yLDpMSQC/LIFTW2URoLOyuOANK/wDffKhsOblfpNHtOFQkI5CclvrhBvUJpRG4
- C2fZeltHUCFOM7ZcHd+GDvR6Og00SW0R4+Kfs0su7ipm3PSTv0U3EzDagooop2Oe0oVxV6i5S3K
- ZPyys5n/XTyAlcL5B5UjxzOzCj9awtl2km7LFhO4DyaCys7BD93tUdK1yUK2CPC9Q21yDOL4t4P
- ssJdD9V6GSdmVTEQtgg==
-X-Proofpoint-ORIG-GUID: JeYIJrUIOD7yNYb2JzHvwi1G4orz8EMv
-X-Authority-Analysis: v=2.4 cv=FN4rAeos c=1 sm=1 tr=0 ts=6a33cb7d cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=NEAV23lmAAAA:8 a=KKAkSRfTAAAA:8 a=l0xRoyPhJoKGvZmW1_8A:9 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: JeYIJrUIOD7yNYb2JzHvwi1G4orz8EMv
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE4MDA5OSBTYWx0ZWRfX8Dfs6fymPePU
- finn72A5U5SgT+VsnMYHZXJlCeu5XvB+7MemlAqz8qj7ILRBu2OmTYkbhu3lSYML6GgkDUiR55J
- R5POA4Z5N5JeNuI5uUS0Ah7ANP5/zFg=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-18_01,2026-06-17_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 bulkscore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 phishscore=0 suspectscore=0 clxscore=1015
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606180099
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PR1P264CA0184.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:344::12) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1d0::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|MR0P264MB4970:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0432aecf-c34f-4ca4-1dc3-08decd2917e6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|23010399003|1800799024|18002099003|22082099003|5023799004|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info: Dx8IEEFLFjrGtSiQipSabCPiapcE/9ixbfZemHahLbxqmn5iCVZFBh49KX/Qy0j6jkS99j+7S/cOpRIlEV20JTLsFBTpWUC0SeTOmtq1eT9J7RYriwT54KoIxMRBp+fhXE4ql51b+aFVOOZVT2Ar7T2hNoZk5wQvYGZArXvsLI7I5Qfnf0s8YGXtGe+2C+dllTQKOGXgxvEnPebMJQVb/qP4jhcFjaGKWck6ce7YWtiIBdMJBIdqhRtFHntRY7qr4L7Sbc0GlEOB7oXQ6kepISQfzQMtU+1lZL4IVgBkjBmdrYK4FXQ8JtJVw9LrVnWhSJahMC5MCdjaTlcWKcQOLoLbHgQqpmLpDwgbBNKlWWsIkWmw+8K4vgPV8SA4O9d3dQFJoAv7EwS/IuDFWvyWHQJV+x1O4AmU869tyHqi6Un58j+JeytEBGWjvQljcT4Vog5q0838veuG11rjDFgw8PLRluglsqYVBpHkCF3X/FsfMbbGsgKsaN5MONFgyay7ZGCMppmhQlLg9wyniWUmccAIK9jIeYgMbZQnFlA37KZfsO3ugTuyF2FYi4CpOGjZNu3/sBxFrXkrYjqNsIs/oKM1Ntj5B/xdMkEyAhxH5I1o7YfmcnvZcxlOcWr1F6c7EpeCpZXe+KPYLfUgDSpucsTYAZrXU0eNY/bt9Qbkr0Ym4HdMb/vo+iUVDq+AuLms
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(18002099003)(22082099003)(5023799004)(4143699003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Wnp3N3VIRUdTMkgyWmpkTmlIZmdOUVprbXFoYmZJanI1Mk1kaEZXOUlWUUln?=
+ =?utf-8?B?Y1p5SDhQMVgzTWh4K3p6Q1V5bGV6NVZ1MWJieFNIc2o5VkJFcnpGQjNNM0pO?=
+ =?utf-8?B?eHFxd3o3eHdYbCtwNE9vOTRrT3MvRDUzNk1ySWlpcW9DMjgvMjl6M2tRVmZi?=
+ =?utf-8?B?TWsrQVBJaVpTZ0wyTTZOUmdxNG1XMzZSL0JNUmhWL2hzVlN0bHlJQnNva0ds?=
+ =?utf-8?B?RGZFUWFhZnJKUGpTMngxSEQ2b0lNY01YK09vWDZ5NEx3L2h1TFN6WW5WYmxY?=
+ =?utf-8?B?dzJRYURXSnFDejlWNUJFdlZpWjZjK21SQkQybEpEUlRreFFjd0VHMHpxVktM?=
+ =?utf-8?B?WnREMWIyVmpHSElFTEZMb05lb3JPQWlkMHhtaVMrcDg4L0doY3BOdVJSa2Iw?=
+ =?utf-8?B?WDlOY3F2NDZjdmhmQXhBNG1LRFdwLzJpMU9HL0gyamNyZWVIOW11cWN4UzBC?=
+ =?utf-8?B?aW0yZEQ4dnUzcy9vUm90RXRXNDRXR0E5dEVzdC9XRkRVM29QTEhpTmFUNkFQ?=
+ =?utf-8?B?OFNTQmVXSWd4RCt5OHlVb3NzN0FVNk0yRW15NElsbzZ4VDZsQTM5bTVuQ0pi?=
+ =?utf-8?B?bWtFQ0c5dDhHVTR2UW8wMWdZaFhJY0NtbytKZHlzZGVSNGN2QytUVmhublZs?=
+ =?utf-8?B?dkNQUU5vNytDWlkrY2grK0EwZTZsYmRUblBmanZFQVBQdkMycE5LQmlWU2E0?=
+ =?utf-8?B?K2JrdjFZUjlQdkFFRDFNUVNVK1JpaUx3cmV3dUV2MHJKWktodENSRFZvYWFy?=
+ =?utf-8?B?TWZudWFOLzVFN1hrcTBEdjZqZVZWQktiaDlJNldQOGtDdzdLbTc1bDBFcnF5?=
+ =?utf-8?B?cXI5ZnZ3anR2ekMyR3FKd3QxNHltTENmUnA2Qys4RlVTb0pEYVBwSVZ1UGRz?=
+ =?utf-8?B?akJiY0hKNmlmMnY3TnVrRmZEaXdwV2Y4WTBpNk1OOTFMRCtsZjJBV1VvWit6?=
+ =?utf-8?B?bTBvMmUwU1R0Qy9KeUZOS3BtSzZtQUpsUUh3Z29RSm12c2JoQitwbk1mbjAv?=
+ =?utf-8?B?UC9DS2NjU0tNL24rRHZOaHdYbGtOcGxXU0dtZlBEYjV5VnlqeDE2VkU2cUhN?=
+ =?utf-8?B?bkc5ZFdWV0hOeDIzVEZLVHNzWWMvbVpNU09UQVRrazVqVWV5Ulg4TndoNnpF?=
+ =?utf-8?B?cjlLazM1U1BiUnpvVjZLM0dKOThYNTA3UERVUmJyRUtHVktUUGo0eStLaHZC?=
+ =?utf-8?B?bGpNY2dhRGpWTjlPKysybFlLdHhyOWdCa2ZRcXJMZE1KY1NkS05zQmhURERz?=
+ =?utf-8?B?bG5rWENTMHZCTGVoT25vVEkzSlZkSU15OHJ1YTdRVFE0eHJ2WXQ1NFZsWWZ3?=
+ =?utf-8?B?Mnk2UzRQRWtBWlFiLzJ6M1RTWSs4TkRuVmdqRExReVUrOFR3dk1BSGtBTW1X?=
+ =?utf-8?B?enRsSmZkcEVWVk1KeG44UlR1MEYzMXU4QzNHbVJGcENIdXQ3em45Yk56clZh?=
+ =?utf-8?B?OTBVVTVrbkFFeVVNWmZpaXdYbkdDZzJraGlwaG9XcWZuM3AydWFVWHQ2WUph?=
+ =?utf-8?B?YndtUlVDOEhUQnA1SDJLbG03L3RGZkc1eWN3ZXFNTjB5VTlIZkJpcTdjdndv?=
+ =?utf-8?B?MUVHV2FnTmNTZFgrR0Jld3hYYUZ0KzVvS0sxbjJDNTFCc3BIZXJjM0VIRjJz?=
+ =?utf-8?B?bGY5cE9WTjRKaDF6TmEwSlp3VXdyZ2VCUERhQmVESkkzekpUNVlyT0ZzK2Vm?=
+ =?utf-8?B?NUNtajZxSGx0MUtDRTBUYzdGR2NKL2x6VnF6SkZ1MHAzdUhBek1mcnlFWXM3?=
+ =?utf-8?B?WGU5QUdzTjQ5cE1IVDY5VThoOHV2Z1dHVTJ1TWszbGgzRWhHOEdFd1lKbzZ1?=
+ =?utf-8?B?R0pvdTJJS0NpTWg4WW91Q2hxK0kvcFBSNzRqcE9YelUvMnZrb1ArZzFrMGpu?=
+ =?utf-8?B?NFBod0NDVHI0ZmpKS2FCQnBjV2JoWC90U3dJVVdUV3BISGNpZ08zcU1IRGpu?=
+ =?utf-8?B?cnl6ZWRyeDlVK3ZIeFdrZGVDVXpvbm9ETnRpS3EzZlMxZWJsZmwvNkIwNnp4?=
+ =?utf-8?B?RUtDb2lvaEl6TklLZGJWVVN5a1hiNHYwOWwvbitFS2pzU294V1hCN0UzaGNu?=
+ =?utf-8?B?R25JaHM5d1ppT0FQWHhqWnpiTzlubGVwTWpzYnd2VzdtY2xzRmRiVnY0Y08w?=
+ =?utf-8?B?NnNHNEFEdStZZk9meEgyYnU5M094ZzJrZjE4aHMrQmxNZmJXZmxKeEwvSXdC?=
+ =?utf-8?B?R0JhRnNHZE96S0J0TmlYYUFzbmt0cDhXNUZiQktkVUZ6SnF4a2x4TEpLdTRp?=
+ =?utf-8?B?T2lEaTRMeVdYbmhHanB2Q0txbjRnT0dLVVUwakFNTWZIeXpSRW43S2JoTmhq?=
+ =?utf-8?B?Z2YxWFZLQTdHem9nVzdsQ1IvUVpsSlEwaTczOXhMVWcyRlQwYXBQenBOV0Qy?=
+ =?utf-8?Q?2ZU9WNaak1oQB5Kk=3D?=
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0432aecf-c34f-4ca4-1dc3-08decd2917e6
+X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 11:02:31.8194 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fGnzpCJ39vY6M1kD1x4uasbTYGIc8RQ9mMAuq3LyFCZtHWPpfXlH7n2Vj9VrDKq1rVJuHRhI3E1KVcaXZ5y8YKmenM0nXpQiitRMA40p2ws=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR0P264MB4970
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,43 +152,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ferass,
+Hi Simon,
 
-On 6/16/2026 10:12 PM, Ferass El Hafidi wrote:
-> Hi,
+Le 12/06/2026 à 20:32, Simon Glass a écrit :
+> This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
 >
-> On Tue, 16 Jun 2026 12:26, "Casey Connolly via groups.io" 
-> <casey.connolly=linaro.org@groups.io> wrote:
->> Hi Balaji,
->>
->> On 16/06/2026 11:22, Balaji Selvanathan wrote:
->>> This series adds support for running U-Boot in snagboot mode on
->>> Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
->>
->> You didn't respond to my reply on v2 of this series.
->>>
->>> Snagboot is an open-source, scriptable flashing framework that provides
->>> an alternative to the proprietary Firehose protocol for device
->>> provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
->>> Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
->>> and execute bootloaders. However, instead of using the proprietary
->>> Firehose programmer, Snagboot loads U-Boot into DDR and uses the
->>> standard fastboot protocol for device flashing.
->>
->> Glad to have some more info here. Please also add a doc page with this
->> information as well as a list of supported platforms.
->>
+> Hi Philippe,
 >
-> I suppose they are talking about this snagboot: 
-> https://github.com/bootlin/snagboot
+> On 2026-06-01T13:42:58, Philippe Reynes <philippe.reynes@softathome.com> wrote:
+>> test: dm: ecdsa.c: clean this test as software ecdsa is now implemented
+>>
+>> The test ecdsa was done when ecdsa was only supported by hardware.
+>> So it wasn't possible to test ecdsa on sandbox, and there is a test
+>> to check that ecdsa is not supported on sandbox.
+>> Now, there is a software implementation of ecdsa. So we add a test
+>> to verify that ecdsa_verify may be used on sandbox.
+>>
+>> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+>> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+>>
+>> test/dm/ecdsa.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++++------
+>>   1 file changed, 97 insertions(+), 10 deletions(-)
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> But what's confusing me is there is no mention of any Qualcomm board,
-> nor any PR to add support for it. Is that in some downstream tree
-> somewhere? (to be clear I'm just someone interested in understanding
-> this better, snagboot is a very cool project that already supports
-> plenty of SoCs and it's great if it has or will have qcom support)
-Sure, will add more information regarding this in v4 respin, which i 
-will send shortly.
+> with nits below
+
+Thanks a lot for this feedback.
+Do you prefer that I send a v9 or is this v8 acceptable please ?
+
+Regards,
+Philippe
+
+
+>> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+>> @@ -3,36 +3,123 @@
+>> +     ret = fdt_property(fdt, name, value, len);
+>> +     if (ret)
+>> +             goto out;
+>> +
+>> +out:
+>> +     free(value);
+>> +     return ret;
+> The 'if (ret) goto out' jumps to the very next statement, so it does
+> nothing - please drop it and fall through to the label. Also, since
+> this is test code and all callers pass valid pointers, the NULL checks
+> on fdt, name and data at the top of this helper are not really needed.
 >
-> Best regards,
-> Ferass
+>> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+>> @@ -3,36 +3,123 @@
+>> +     /* prepare the signature */
+>> +     ut_assertok(hex2bin(sig + 0, r, strlen(r) / 2));
+>> +     ut_assertok(hex2bin(sig + 32, s, strlen(s) / 2));
+> The 32 here hard-codes the size of r, while you already compute
+> strlen(r) / 2 on the same line - please use that (or a named constant)
+> for the offset, so the two cannot get out of sync.
+>
+>> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+>> @@ -3,36 +3,123 @@
+>>        ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
+>>        ut_assertnonnull(ucp);
+>> -     ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
+>> +     ut_assertok(ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
+> Can you drop ucp now?
+>
+> Also, the subject says 'clean this test' but the patch actually
+> extends it to do a real verification against an RFC 6979 vector.
+> Please can you reword it to describe that, and use 'test: dm: ecdsa:'
+> rather than 'ecdsa.c:' as the tag, matching the usual style?
+>
+> Regards,
+> Simon
