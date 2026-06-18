@@ -4,60 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 697AFCD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E610CCD98F6
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:51:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A4B680287;
-	Thu, 18 Jun 2026 17:49:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A57880287;
+	Thu, 18 Jun 2026 17:51:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Rp21n61M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GDxJVm5j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D3458063E; Thu, 18 Jun 2026 17:49:05 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F23FD8005D
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:49:02 +0200 (CEST)
+ id D3B30847EF; Thu, 18 Jun 2026 17:51:42 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 772D78005D
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:51:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 87AF848FF;
- Thu, 18 Jun 2026 08:48:57 -0700 (PDT)
-Received: from debian (X72Y076X74-2.nice.arm.com [10.34.129.30])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 04D573F62B;
- Thu, 18 Jun 2026 08:49:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1781797742; bh=HTEJAfbwll9zqLJlF4Nf5j8pE35QTwyUDiFH9ouB3rE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Rp21n61MRn5pSkRk8gMsqJrru9u+3kh8dmMBNxq9Oxu/oSOSUckgHwhQNzkkyutKl
- A9PUiQKhLj9LVoP5xxePxKitmXwo05sPO/2EqmWzXpNZ9JfpuTaKKRq0ITbUZt955Y
- KckaCSI/1/9an7m2tB4r8k3Zr01krebGZg+meqao=
-Date: Thu, 18 Jun 2026 17:48:58 +0200
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
- efi_disconnect_controller
-Message-ID: <ajQTatAxaa2nS5PV@debian>
-Mail-Followup-To: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20260618150913.314507-1-vincent.stehle@arm.com>
- <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
- <CAC_iWj+5u3P3r2jfeXXT=n13uAnStE+vAPxPWS0F2SwjSZP7rw@mail.gmail.com>
- <CAFLszTjXd441uA4-aF4AvUCFvdOvYdVCcEw8AZ12MrEaEyRuvQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-68d233bf083so1754223a12.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:51:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781797900; cv=none;
+ d=google.com; s=arc-20240605;
+ b=RmCFo2Bbj2FRe9eaOkkoVXjYrS5S5SE6hlXCbW4B8o0NfUlXHDyAsLMPJTEqtCUQVi
+ YErWigy/TNGXLBzMuKmsiH6DNL1N+VnYy8hIrkucrLM030axo9JhQm7rqTVTHoS+bjiC
+ 2bYNBQp2P2JXZsLyLJRFmwfIlIir6Tea1JwEc3Wq0sr35IfeVSmim4ZIZtLk6tJ/nGHA
+ U/JCqdOTxjXKhy0YQy9zqYmTqUWSlgCz/VGu54X05GhAkhNfXhI1iH6G+pk3RIZYLDET
+ sHHUagOtr7kTg7jUjybsqGn50I2P9OYiuXjpPgE/wy5MJDG7uOgentcEh22fOaB6SJuk
+ EctA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
+ fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
+ b=MCveKXyAZGEdTTTDwXAVs0HYbVyQqR+Qa47pAiHs4lIUnptWlZhRHovv8Jk2sY4Ekj
+ IbIAgTMdWLVoQDEw6tDyOL0Yy25cYry0olC27EQVlq3hxvxXWcnksvLk9LF1U1uzKmPg
+ M/qdrRTntv6zf+ryvJXMrxip63TYCqVsgBskuwwLISZLaTSdIxcYUI+M9pkjjWrsEwAB
+ wRp0wqv6Z8YQle6dmdUczPcmLYOx2+BInxmlB+LYypI64SHddd6rXjJDPxRw9TCYuWAq
+ S9Ftaf0QONy/6NVwtqiKPVHBGnCJjesC2l/N9tmuKHfzSLn5La13srIe9y4PdMFNo3Vq
+ HLJg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1781797900; x=1782402700; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
+ b=GDxJVm5jc61Q/oV8MSST/SdH6D3oaoVQDo2jMdQLFoOW9AnIHUdauJMzC7eZHiNl9q
+ rZ569F0T8cem6wBInGIWj1oLk6XbCTLluD85NOoGBw6IEIL9/ZKw8OSa5UxtCdAMrcor
+ UQ86EzsyUofAC+f4LGtvgfEqGy28IVGOtw/oM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781797900; x=1782402700;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vx9SzL6euLI7dTwnk9Ou7+rCy4nuZwhD/w4ogMh5CXo=;
+ b=YjUKtoUhDp691EbjOKNvyKYBm7Wh/j5I3fG7BmHAzYtqayqnUqPbOMkR1G14S5qa/F
+ aaYep6g8Nmn2snid2jzu/eNiIz/YSSSptkKIVaIJYLmF40hreC//QQJK/vJq1G1hUTC7
+ 1TEvUsarP3wOpG+uTIyYKb5A7+jJTl25gDWOUIJWW+E+Brxr8+6RM9fFz8YZsCnmAa7T
+ ZH9lATt5R2Oy18Oam13jJZh/ZwQRMwwVANQ7WIJpWjM1b+e9gkN/928HYEeS3YIlhGM5
+ Uu8P/mYDehldRl5obnNCMYu7qC/CTb8SYm733c7ahuMDmopB9IvL8PD94rbcJNbbgYqz
+ Ivpw==
+X-Gm-Message-State: AOJu0YzfXXlrFJIep0K6qWwOqVM0fDaqHRCcGEi65Zpofku8aIk1V2un
+ 9EqPwd+Bxgt0zEJlyxZB/4R+QOKlhGhqoScfITMGLG0u177NatLwOldy56HH47kRdQvD5QJKUWY
+ /CGDxlzg4ctj+s5shjVZNuo+fU6MLejeod88wq2nF
+X-Gm-Gg: AfdE7cmAgkw8Ub0l8civmt/hlDZXBg7Yf6LbkPGbufmd6F3OSt2jlshBPjoxXb2dkfO
+ /hwOV1Fd6HMgFf5HpjjEmZ/h+Su+ckrOu6lJEdCfZmteKrBwFaMpOcyABGQNFs9s+P1pI5k4JGn
+ nAprWHe2+u8ho686WcoFCWZtTYppY1zTPoOEOKj1Gc/jN6iuKkrO6k80eHf3Zh1gH+ZEdXBwCE1
+ sxaMk/xchKbiB70TN/B+7qJfmkxzbJXGAI+L74LSVeNP3mlKrgelPYI9cCakM+BQkuTd6RBAg==
+X-Received: by 2002:a05:6402:370f:b0:691:6fca:c1a6 with SMTP id
+ 4fb4d7f45d1cf-695476db4eamr4972548a12.26.1781797899850; Thu, 18 Jun 2026
+ 08:51:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFLszTjXd441uA4-aF4AvUCFvdOvYdVCcEw8AZ12MrEaEyRuvQ@mail.gmail.com>
+References: <20260605033907.1909319-1-dmukhin@ford.com>
+ <20260605033907.1909319-2-dmukhin@ford.com>
+In-Reply-To: <20260605033907.1909319-2-dmukhin@ford.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 18 Jun 2026 16:51:28 +0100
+X-Gm-Features: AVVi8Cd5qhiGLMHvVAPS8iEnCxE0nVgHCYzKzZiTaAjvKPbB2my3lPeF5Q1UNhs
+Message-ID: <CAFLszTiW818ybDfmgDfgE3_YnSfrZC7g3RWJeRmch5BRoOQUiw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/8] cros: add common helpers for GPT flags
+To: dmukhin@ford.com
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,73 +107,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 18, 2026 at 04:27:00PM +0100, Simon Glass wrote:
-> On Thu, 18 Jun 2026 at 16:21, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Vincent,
-> >
-> >
-> > On Thu, 18 Jun 2026 at 18:19, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi Vincent,
-> >>
-> >> On Thu, 18 Jun 2026 at 16:09, Vincent Stehlé <vincent.stehle@arm.com> wrote:
-> >> >
-> >> > Make sure to call EFI_EXIT() in efi_disconnect_controller(), when returning
-> >> > after having called EFI_ENTRY().
-> >> >
-> >> > This is inspired by a barebox fix. [1]
-> >>
-> >> Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
-> >> projects back together :-)
-> >>
-> >> >
-> >> > Link: https://git.pengutronix.de/cgit/barebox/commit/?id=080db65e39a877b000baaf843c997a69821dfe69 [1]
-> >> > Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole child")
-> >> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> >> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> > Cc: Tom Rini <trini@konsulko.com>
-> >> > ---
-> >> >  lib/efi_loader/efi_boottime.c | 2 +-
-> >> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >> >
-> >> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> >> > index de57823bd44..b6966652d97 100644
-> >> > --- a/lib/efi_loader/efi_boottime.c
-> >> > +++ b/lib/efi_loader/efi_boottime.c
-> >> > @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
-> >> >                                       &number_of_children,
-> >> >                                       &child_handle_buffer);
-> >> >         if (r != EFI_SUCCESS)
-> >> > -               return r;
-> >> > +               return EFI_EXIT(r);
-> >
-> >
-> > Any reason we can just goto out;
-> 
-> +1...every other error path uses 'goto out' so the single EFI_EXIT()
-> at the bottom handles things - child_handle_buffer is initialised to
-> NULL so the free() at out is safe.
+Hi Denis,
 
-Hi,
+On 2026-06-05T03:38:59, None <dmukhin@ford.com> wrote:
+> cros: add common helpers for GPT flags
+>
+> Add common helper to decode/encode ChromuimOS-style GPT attributes
+> similarly to [1].
+>
+> [1] https://chromium.googlesource.com/chromiumos/platform/vboot_reference/+/master/cgpt
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+>
+> include/cros_flags.h | 74 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 74 insertions(+)
 
-I think you are right; I will send a v2.
+> diff --git a/include/cros_flags.h b/include/cros_flags.h
+> @@ -0,0 +1,74 @@
+> + * Bit definitions and masks for GPT attributes for Chromium OS.
+> + *
+> + *  63-61  -- (reserved)
+> + *     60  -- read-only
+> + *  59-58  -- (reserved)
+> + *     57  -- error counter
+> + *     56  -- success
+> + *  55-52  -- tries
+> + *  51-48  -- priority
 
-Best regards,
-Vincent.
+The table describes bit positions in the full 64-bit GPT attribute
+field, but the masks and helpers below operate on a 16-bit value (the
+top 16 bits, already shifted down to bits 0-15). So priority lives at
+bits 0-3 here, not 48-51. Please reconcile the two - either
+re-document the table in terms of the 16-bit value the helpers
+consume, or have the helpers take the full 64-bit attribute and shift
+internally. As written, a reader who trusts the comment writes wrong
+code.
 
-> 
-> >
-> > Thanks
-> > /Ilias
-> >>
-> >> >         sole_child = (number_of_children == 1);
-> >> >
-> >> >         if (child_handle) {
-> >> > --
-> >> > 2.53.0
-> 
-> Regards,
-> Simon
+> diff --git a/include/cros_flags.h b/include/cros_flags.h
+> @@ -0,0 +1,74 @@
+> +#ifndef _CROS_FLAGS_H
+> +#define _CROS_FLAGS_H
+> +
+> +#define CROS_FLAG_PRIORITY_MASK      0x000fU
+
+The header uses bool without including <stdbool.h> or <linux/types.h>,
+so it is not self-contained - it only compiles where the includer
+happens to have pulled those in first. Please add the include.
+
+> diff --git a/include/cros_flags.h b/include/cros_flags.h
+> @@ -0,0 +1,74 @@
+> + *     57  -- error counter
+> + *     56  -- success
+
+Re bit 57 the cover letter talks about counters/flags logic, but there
+are no get/set helpers for it. Does that mean it is not actually used?
+
+> diff --git a/include/cros_flags.h b/include/cros_flags.h
+> @@ -0,0 +1,74 @@
+> +static inline unsigned int
+> +cros_flags_set_priority(unsigned int flags, unsigned int priority)
+
+You can likely use uint here if it is only compiled for U-Boot and not
+the tools.
+
+> +{
+> +     flags &= ~CROS_FLAG_PRIORITY_MASK;
+> +     flags |= (priority & 0xf) << CROS_FLAG_PRIORITY_SHIFT;
+> +     return flags;
+> +}
+
+The bare 0xf (and 0xf in set_tries()) duplicates the field width
+already encoded in CROS_FLAG_PRIORITY_MASK. Please express this as
+(CROS_FLAG_PRIORITY_MASK >> CROS_FLAG_PRIORITY_SHIFT) so the width
+lives in one place.
+
+> diff --git a/include/cros_flags.h b/include/cros_flags.h
+> @@ -0,0 +1,74 @@
+> +static inline bool
+> +cros_flags_get_successful(unsigned int flags)
+> +{
+> +     return (flags & CROS_FLAG_SUCCESSFUL_MASK) >> CROS_FLAG_SUCCESSFUL_SHIFT;
+> +}
+
+Simpler as !!(flags & CROS_FLAG_SUCCESSFUL_MASK) - no shift needed,
+and the bool conversion is explicit.
+
+> Add common helper to decode/encode ChromuimOS-style GPT attributes
+> similarly to [1].
+
+Typo - ChromuimOS should be ChromiumOS (or the old Chromium OS, which
+is what the header uses).
+
+Regards,
+Simon
