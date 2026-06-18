@@ -4,83 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD78CD98F0
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 22:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2936CD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 23:48:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDBC2847C3;
-	Fri, 19 Jun 2026 00:37:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B91AB84671;
+	Fri, 19 Jun 2026 01:48:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H8PaZ4Ey";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="LyOyHBvQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E4D3847C3; Fri, 19 Jun 2026 00:37:10 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6F40A846E1; Fri, 19 Jun 2026 01:48:31 +0200 (CEST)
+Received: from mail-4396.protonmail.ch (mail-4396.protonmail.ch [185.70.43.96])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 349F5847C3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 00:37:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F16288460E
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 01:48:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-43fc82b52afso995955fac.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:37:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781822227; x=1782427027; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HIj6YLeP5KiJI0zN5ticKJM3hCzHf6UxPG1Uss98B6E=;
- b=H8PaZ4EyEQXA2gpJ20d8JNP8fnZKFagYQdfIR2FrIrWV+6OWkxBKtD0BVX548NG9IO
- bUBKebaYuzm6tzFWwNyn5WdatSooRzPttwSyxoME1yGBKQdGIh9ff0QnTn7z5w+3/x4i
- /u4Xxji49dPOngrt9n6UYnjkRnOcXB/p6eiYM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781822227; x=1782427027;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HIj6YLeP5KiJI0zN5ticKJM3hCzHf6UxPG1Uss98B6E=;
- b=KNyWwDzUkWQ4nFy1b1I5YPKc6sIC209UG4ZV7VdMfvUiJ+MbvETorzWObPDfv/5JKH
- M3NxA4M+Q+JjX8UU/h7pDAdSvlcC4V5aGqnoV0yBHHgZiMumAZ+iOPexxmoFrckMxPaO
- IVh3cItVmkKl+3BXk0wAx52SKAZcIwk8es/VqhAovx+xibgH8JnGcRgZrUqgHyXpk+/S
- AzYRqRxdhj5G+5MKGZbovF0frWAgoAG79LNNBJ7q6ZQn6PtKNUMQZ0Ti6u4hBW6Tt01o
- MY8JokI7x9ZN0TkuIy2hNtEg9HaZhTqONlm1PcH+z7Evoxc9IsirmwGeUL1Us/lluGt6
- z8iw==
-X-Gm-Message-State: AOJu0Yz/Zy1wbLAye3Qc2s5I8w76npvJ0MABgyKJ0nr/DVsR5HznfsbV
- CopBDWIyCtJGL3ByclGEy/9OHDx3iihX8hEANB5bhXMUmccS2h6Fa49ZrSmSUssftVFXYlTXtJY
- YAs8Kwuc=
-X-Gm-Gg: AfdE7cmq/udJtpPV0NolN0/OQS7fCGI6CEBxYBHvEaxtu3J5kWyyOsUgspn1S1YHs/9
- /SFr5kN+nDWs25OKeTEC433QF39K7a4hV3PR5xfmKFarbbM5KXrwCHrVf6XVzWK+6ocg3alJfX4
- vKHNIrYHUbUTmegSWhkQeZFyG8Tuvtxx/L7inkbm9tOWllZDalJ1d0KjlAuzyVxF/tVkScoAngL
- 6pyGNlw+Qo1bNtfK8GwDBMxlH/PwCx3zT5xzkJDdumanlKpfYpVZmxU8LtfZ6RQOA1hEQmajidV
- 6LOZ+dNLhN1H8Db47fQooEYP9gDxnLZ6LTE4idmJhZ+DLTYzvsaQgDv34RamskjI4Hkrcl7v6Yo
- G4louhMcrwOY0OtWtUvMmpdECfJXVh7otMzmCqcNRyrn2ZIYnP95SPAwzIdcnVs8jyF9yANb+Uy
- rZU+/Ee5eBo07I2i1oLgUpwh9598rBIWxcK3dSewLkJ9Z0YQ433flaz+VmNU7G3XFKR4GgFYFe7
- TUhKPmiH/hbn3Qx/c6Z98rwSGHAEXyBwArfXh8=
-X-Received: by 2002:a05:6871:29d:b0:43d:5d0e:fa4b with SMTP id
- 586e51a60fabf-447072a78e7mr1253205fac.22.1781822226934; 
- Thu, 18 Jun 2026 15:37:06 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-189-154-245.totalplay.net.
- [187.189.154.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44709d2ee07sm700520fac.7.2026.06.18.15.37.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 15:37:06 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20260618171352.23873-1-marek.vasut+usb@mailbox.org>
-References: <20260618171352.23873-1-marek.vasut+usb@mailbox.org>
-Subject: Re: [PULL] u-boot-usb/master
-Message-Id: <178182222625.2736082.10995763046892135083.b4-ty@konsulko.com>
-Date: Thu, 18 Jun 2026 16:37:06 -0600
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1781826507; x=1782085707;
+ bh=9HhIC29hMVPRygcwczwuYjrPkRb2QiUjxgpZQOpPIxQ=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=LyOyHBvQP4k9Q0h+VSj8C/T3oeFLJWFiRZiBmlVEemZJn9mfhzkHuykahJR5m+kxG
+ PmOgpOO2qpDz2qM505ULV8m73M7V919ioTUnBf2TXNdbrllDn2KAHwZtCGMvWapfy/
+ P+Vlqnxno6OpDpOcjqdekUXynV97kmORopM0knuI567GO4AOUEzJfhQ3I3avAqN9E/
+ 2CF7eKm5PC4P58CemMSY1w3OTQ/O78KE6faLb0lCa39Z1uUljPYQAZQTTdtxicddVw
+ L+fgAURYSOj2hTUSaBb901cUOGev+XUHN2IJZBIKOjTWtjc4DkGLqs8toszwJDu6nq
+ hDwDuWCzB6AYw==
+Date: Thu, 18 Jun 2026 23:48:24 +0000
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+From: Sam Day <me@samcday.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/2] cmd: fastboot: Add keyed abort option
+Message-ID: <0XlljVtpUbM_toRIsxmCcT9kvIUKxSwWAj8q3uUXpbjbNbBiThvWXUvS1o-IY00pY4jTF5F3u_bzQ4dW7K5IfnEC9PGh2sGNOaf62WmzDT4=@samcday.com>
+In-Reply-To: <87wlw0gf4c.fsf@kernel.org>
+References: <20260602-fastboot-abort-keyed-v1-0-414aac5a06b8@samcday.com>
+ <20260602-fastboot-abort-keyed-v1-1-414aac5a06b8@samcday.com>
+ <CAFLszTgX3x2hoFTWVy2WCuKRuZAB_T+QLAp13YTkhbM8wpkZRg@mail.gmail.com>
+ <87wlw0gf4c.fsf@kernel.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 398e1669d329b61f51cca1656aaba5d1b3a139ed
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +80,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Jun 2026 19:13:41 +0200, Marek Vasut wrote:
+Hello Mattijs & Simon,
 
-> The following changes since commit a7830e87555abfb81cc69275cecb2bc0fbde5b28:
+On Monday, 15 June 2026 at 10:30 PM, Mattijs Korpershoek <mkorpershoek@kern=
+el.org> wrote:
+
+> Hi Simon,
+>=20
+> On Sun, Jun 14, 2026 at 05:49, Simon Glass <sjg@chromium.org> wrote:
+>=20
+> > Hi Sam,
+> >
+> > On 2026-06-02T08:45:46, Sam Day via B4 Relay
+> > <devnull+me.samcday.com@kernel.org> wrote:
+> >> cmd: fastboot: Add keyed abort option
+> >>
+> >> Works the same as CONFIG_CMD_UMS_ABORT_KEYED does: any keypress will
+> >> abort fastboot mode (rather than only ctrl-c).
+> >>
+> >> Signed-off-by: Sam Day <me@samcday.com>
+> >>
+> >> cmd/Kconfig    | 6 ++++++
+> >>  cmd/fastboot.c | 9 ++++++++-
+> >>  2 files changed, 14 insertions(+), 1 deletion(-)
+> >
+> >> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+> >> @@ -103,8 +103,15 @@ static int do_fastboot_usb(int argc, char *const =
+argv[],
+> >>       while (1) {
+> >>               if (g_dnl_detach())
+> >>                       break;
+> >> -             if (ctrlc())
+> >> +             if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
+> >> +                     if (tstc()) {
+> >> +                             getchar();
+> >> +                             puts("\rOperation aborted.\n");
+> >> +                             break;
+> >> +                     }
+> >> +             } else if (ctrlc()) {
+> >>                       break;
+> >> +             }
+> >
+> > I wonder if you could create a shared function (gadget_abort_check()
+> > ?) to keep this and the code in usb_mass_storage.c in sync?
+>=20
+> While I usually advocate to avoid code duplication, I don't think it's
+> needed to create a new function here. It's only a couple of very simple
+> lines.
+>=20
+> To me this can stay as is.
+
+I lean this way too, so I opted to leave this code as it is.
+
+>=20
+> >
+> >> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+> >> @@ -103,8 +103,15 @@ static int do_fastboot_usb(int argc, char *const =
+argv[],
+> >> +             if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
+> >> +                     if (tstc()) {
+> >> +                             getchar();
+> >> +                             puts("\rOperation aborted.\n");
+> >> +                             break;
+> >> +                     }
+> >
+> > Can you please update doc/android/fastboot.rst to mention the new
+> > Kconfig and the abort behaviour. There is currently nothing in that
+> > file about how to leave fastboot mode at all.
+>=20
+> For the current behaviour, I have send:
+> https://lore.kernel.org/all/20260615-fastboot-doc-ctrl-c-v1-1-f932dea17c0=
+a@kernel.org/
+
+Thanks, I've added that as a dependency to the v2 of this series, and
+supplemented it with a paragraph about CONFIG_CMD_FASTBOOT_ABORT_KEYED.
+
+Cheers,
+-Sam
+
+>=20
+> >
+> > Regards,
+> > Simon
 > 
->   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2026-06-16 17:39:13 -0600)
-> 
-> are available in the Git repository at:
-> 
->   git://source.denx.de/u-boot-usb.git master
-> 
-> [...]
-
-Merged into u-boot/master, thanks!
-
--- 
-Tom
-
-
