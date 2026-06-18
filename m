@@ -4,137 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAEECD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 16:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22BFCD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 17:14:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE77380287;
-	Thu, 18 Jun 2026 18:51:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id D1C3080287;
+	Thu, 18 Jun 2026 19:14:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bOL8JCEV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XB+qAZQO";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="U/+pB6J/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 499538056B; Thu, 18 Jun 2026 18:51:08 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id BDFF38056B; Thu, 18 Jun 2026 19:14:07 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FEFB8005D
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 18:51:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 9003C8005D
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 19:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N3py0troYIHpqqAqxi4PT2BfrBXVPEp0+zLetuDNjGSYn7q4HaWamyONVA4Yx27OI8BEpPz4vKkWqWehGNgyZt/L1IvisasnvWFcagC3tYH3LL2Rg23zEiKLFfYfnKQAUs42MufsraY3nLb51eJKBzS3U3v/jzEPBUHBQDO+EnENkJutrpXuwXv5Z0RqEKPzZdGCZucOWJDLihVw4TFgYFYibppTWEyl4P9VwFIwghM/TKSOieQdb/apAIMwPIQDrqSXqozRqj7Q5jXvd94rL+TbnADDbEs8832laLf5oKkJ+RlBCwdeBzQCeyzirAIJRptswoXVYht0ZSCyvx8iYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ORDYzvaqg3zQca2ONFMhXpmVX1cqLgzF53ogxu2PlaY=;
- b=TAbi/s3jGdyzj5m5ybE7rpJpqlWleZK0SyeWsH+y75MSWKcYQJqAWw02N3FyQrsRhMx0cQ8KcQZqjZPYk4AUphUDquhtX+Jc/E1sJoe+8Xx9oXK4J3l/R3riEE4IhznMf7uvL0QWviVL71ZFeHOHDYMULbe8kIAyCrp1Ufx9q6EKX1aphhw43NygMWOuwv6D0CvpUjcwMpC26u1LI2ptI2tyW4pM2ilIzWmByb+1RL7JJcG/nT09bjv/qgHIPIovsn4vC7PVGwF01DVuNibAE/5T9oIIgS6iOucfELln8xZXbuskA/11ujClUzg6ft1Je3bFO4NoNLr0CgI/A+q62Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ORDYzvaqg3zQca2ONFMhXpmVX1cqLgzF53ogxu2PlaY=;
- b=bOL8JCEVw5VMR73RHJek4LVwAc/XBHaCxRSCsS4lp6MF599KeF82NX3wFu8nXHYfEn7E/+Sn2RfoXIcWcLEjZFPcutWWFx3habvzu69uYxWIsOHxkBmuNrqJCTT3eMQolZMJGXU0A5xnMQbo33TSLUzYeDr+30HN8+fhqJb6bLw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by PAXPR04MB8096.eurprd04.prod.outlook.com (2603:10a6:102:1c7::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.13; Thu, 18 Jun
- 2026 16:51:03 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Thu, 18 Jun 2026
- 16:51:03 +0000
-Message-ID: <09c695c9-1786-4232-889a-6696e4a0aa86@cherry.de>
-Date: Thu, 18 Jun 2026 18:51:02 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/2] binman: x509_cert: document Entry_x509_cert
- properties
-To: Sergio Prado <sergio.prado@e-labworks.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
- xypron.glpk@gmx.de, y.moog@phytec.de, afd@ti.com, Wojciech.Dubowik@mt.com
-References: <20260525132828.3348679-1-sergio.prado@e-labworks.com>
- <20260525132828.3348679-2-sergio.prado@e-labworks.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260525132828.3348679-2-sergio.prado@e-labworks.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0012.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a::22) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gh6lJ1Xgnz9vCX;
+ Thu, 18 Jun 2026 19:14:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781802844;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=nJFdXMJMo5jYeq8bieFSJUqaznLAIfHIBPP6UTKAoZk=;
+ b=XB+qAZQOsdlh7yS0nmLpoLk/nv91N1LR13XkZA6ao/ZpWnEUAJPsPWHVRlLClrFzv4PPO0
+ jqgvYyuXc+SRWlVqBU0oUE4Cb1pe1ZISojcZnQky5g7bYghAdOlA45UeYITd7f+W28udvA
+ 6LbN//fIAbFODHblUZmVV8F4rZidyXnqDVcPC6N7MGGFGI6BMsc0J4S7QQcG9UIKdJMOdJ
+ BgGVEgOXCxTcYg1nyMoqoVgeAY+Y2y9j6ESnpFNyl6QLBEF9XhlbnFlAcyzz1sJ5Gsnwx9
+ j+QiTcre671O7j3wZTd6df0nDrVeZGnZOAUYYSKau73h2FviPGTSuh8fTBIjcg==
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781802842;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=nJFdXMJMo5jYeq8bieFSJUqaznLAIfHIBPP6UTKAoZk=;
+ b=U/+pB6J/e6wIfNE1xqdjyn5Rv0ylmGprExVp10QzHO+qrj84/UvRQTJhu9eeBdzb3gaBW9
+ Sdncv2ERYDo0DpFvH+EcpXX9uWpVhrxlmUlFSEG1S70m/RHsGbWNykSuBQdi03gcWzqd8R
+ aYwLw5hDy8DqXf4mM3EMSXAjunM/EWoiEHQ5NN6R1VgEbRJpcd5Bz6G7mVQIECj5q5KcKY
+ FyorByA4tZTnWEaFy3T7dIZHL7zsCbp1o9KG4IU0qXR2U3b+8g2Jdf8JgWIMZW/kKwZuOT
+ z+Mg81pPbHukKBHgz0MC++tMPVUIHu75KiREd1JXj+jQDDXNX5EPHW7De8Pwog==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+	Peng Fan <peng.fan@nxp.com>
+Subject: [PULL] u-boot-usb/master
+Date: Thu, 18 Jun 2026 19:13:41 +0200
+Message-ID: <20260618171352.23873-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|PAXPR04MB8096:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4dddfd9f-8d5a-4c48-8449-08decd59c88c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|7416014|56012099006|5023799004|11063799006|6133799003|18002099003|22082099003|4143699003;
-X-Microsoft-Antispam-Message-Info: xH427aNJIpGWVBQ46/9ZJSURLyH4JdQzdqVao7lAx0QuuaaiUHuhtJNtrYIh82nqgvfJxUTRrfc3MevKSfyAy65wFWGltV7RI9tUo2tUdat5f+C0xxvPBKg5LVrK1fOs6yz3PmKwYUjCdMhL6+ulyVrOM9TzzSkc/wWgMxMTDy7at4fcAnEp+dQQoo5GP2KTl9E0Q1idT2T0LGH6CimUDivWVWfojRHyg0fEWeAGyacw+eFOkXRtzfwhVX+T1h4yevao59iuZ8ACmuxGYWiEWZxe29h4yhbGp4TOidwRwESILNN6/ipsaCURG5pFUfPqrsm+GyNGZyfRTmZK+OB952j3LVtBJozmZ5GThgzH4lezJr2Na/oLDgqriwgjaaBMgKtTvUTrmHcBp9TXZUpEyO4M7MqQEBcah8kyKzvJSiZJuqDWgvXLX9bAPH6r1udn0RgP5egzMOT+WigmSeiGZySfjlAAATvuv1a2XCWt5YSV6G/0fUS9GrbjoFlE/2MDXT+s+OK5sCeB9x7oMKdOobXrEdAI+r5eG2J5ySIDcVxobk2GMyh+ESrEEMjZCahfUbNLtDa+tC9tqO4R06pIUDtZ2+/4XLpzbkLOaf3zR/x3fRlzfFEBbWaMAIbrHYQRlvpfrGkhk4uTNGqeOW+DbcB2SiU1+o4bByby9P1hX1bOPu1fB8nwh2KTdf/LejY4
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(7416014)(56012099006)(5023799004)(11063799006)(6133799003)(18002099003)(22082099003)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QUxsZzQzRlNvbEdPb2RLbXVUMmRxcHdHOHcvUXRwZk5RR3RibUpVWG5JdFB3?=
- =?utf-8?B?Y3pUQjFFc01qcjJiQzVMYWcwS0piNFpFUUVhK2lYb0RTUDlmWjNVKytERHJO?=
- =?utf-8?B?NzNlWXBrdVp2TGkwN3JFVldGZElMdzVWb2NxSkFqaEpyakpybWxoRFVhK2Iy?=
- =?utf-8?B?cVE5Z3dTRDJTRDhMR0JiZW9zc1h5UUlyOUxzbU5URXoycGtNVUdpM0YwU2Jm?=
- =?utf-8?B?RUgvZ202OE1CZ3ZCalpjV08vZ3VrVGwwNnhWOUdIZjJaSUpYdkcwN0JEM3I1?=
- =?utf-8?B?Wjg2OVlMUGVmUGtwd0VVaGRwLzI3TmExK1A2Uk0wZFgvK1lPRXlrRlkvRW8w?=
- =?utf-8?B?MllQZm1BSlJHc1doeXZIYUxvb1RQVmZwYjl2UjN3SDg3RitNZkVGdnRuU1Fi?=
- =?utf-8?B?dERxdlNwWitsNFJiYWVrQWxZY2llUWY1UlRsY0d6cW1sVHdReGRya0xqVFJw?=
- =?utf-8?B?UFF2YmduNElqYmhLZXZBTGVBTmFsWThySCtTT0ZQK2FoWWJPa25mUFdKNXIz?=
- =?utf-8?B?c25lNXRnMEFMUnY4UktaUklhS0M2KzhLVWJGQmZsRFpUVGdpOTc5akdNcVV1?=
- =?utf-8?B?OXpkdWwyb0NHczBqRWVCK3Q4d3Y5UmRyOXJwaUhpMENhelNIblh0cHVpL3Vs?=
- =?utf-8?B?Nmd1NlhxcVlpcERKemFucDFWOExiTzdBYjNWWDFpNit0RS9WcGdCdVFCcVUx?=
- =?utf-8?B?dGtnZU5XRHkzVGJOOS95RnB6dEtGbmx1U3o1WGZaVHFXaGs2SUdKNmpBOFVW?=
- =?utf-8?B?ZVI5TmhpQ2pxNWtBS3dZT3AvTlVtYWZlMForY1F0RjM0cW5zU1BPVkJaU0Z2?=
- =?utf-8?B?N1g1RkFjNnljUmp4Q0lmYUdNaHEvSFVlQVo1MkgxSW0wUzRyc0UybjdSQWR2?=
- =?utf-8?B?MGYzc2NmVE5kZkR3cS8wV0NtTjF1ZjM1cTcwb2VHZGF0QmhlZVhUWFpaOUc2?=
- =?utf-8?B?VklrYzFyTm1pUjF5R0hrWFBNNVBMZklzV0Z0U1JESkFHK211eFZJcHRndndK?=
- =?utf-8?B?RDJUYjQvWU5VMlcydXdpVzBud2Q4alU1NDM4TklmZmhJQXBmRjBsMlpuS0Nx?=
- =?utf-8?B?eGU4c2ZkaHhMWGZWRHFVYXZ2MUVFcnhsaU5ubFU4YWRnbC92ZG1uVXhyREVR?=
- =?utf-8?B?alZwclg3dHFNN3dUOElsSk5ERUNTdGIzRTEyWGtBZjBoTDVDS3VSNm1IbVVu?=
- =?utf-8?B?aGZvcHFKdWtRY0hyTTFmWkpZeWVWcXJrWUZHRVNBdFdYWjBOTzVudllacDFo?=
- =?utf-8?B?NSs3S05DTVQzUjBJeDFLdmFZNnlJSFM0RTNQeWNxNCsxaEsrckRXNFU5Z2xO?=
- =?utf-8?B?TnNPc1NLbjdIYittR0I0eDU2dkhLb2hlVkllQ2VZcUQzYzQ0Z2NNZFJLNzZS?=
- =?utf-8?B?WFNoNHpWTzhzRFhxTXorRWZYa0RvcFdoTWp1QUw5c1ZFM2s0MFp2V0s4OUZh?=
- =?utf-8?B?TlFBZ2I2a2NycENqcml4bytBd1c1ZmdmWnlFL01zZlFrS2FqYVZ6MlNzTmFT?=
- =?utf-8?B?NVFrUFc2d0NSYXluWTUrQWRENU1hek1ab2tqWWM4R1RTQ0lXL0lnNUg4Q1k3?=
- =?utf-8?B?cjFSbkhSSWlCVWRUaXhvYXNzR0RmV2JiTnU0YlB0N2VtYlBvZStLMExZb0Ru?=
- =?utf-8?B?NXh5Q3FuV01LTDZJelhjaFBCTFBZZE1KYVl0QTZ6b25ZVkV0dklyRWkyaE1u?=
- =?utf-8?B?WVZpaENGMVJiRFZVWjM1T1FXb0l4ZlByRjNrZVlmQS94NlE1d0MrZWZwSkxR?=
- =?utf-8?B?U0gzUHIrK3Q2cTVjVCtVQXJNcURCT0tFWXFVUkFZZHMxa0d6ZXIwRDFCVUxL?=
- =?utf-8?B?TTZReTBWTjBXYzh5RGF5TUUvaEFXK2dzK2NYS3J5VWI1Nlh4VUdVV2QrK2ht?=
- =?utf-8?B?eUYrYXRnalFWNXc5WVRORUl5a0ppSy9MRS9TbTNRTWxESmxPSWxjLzhCSGNR?=
- =?utf-8?B?SFd5MHVQL3ZDSlA0dWhNbUUvZnp4YVdvRGkxOUNJK0Y4R1VIVzVBSm5QNGh0?=
- =?utf-8?B?YzZQbnpzR1IvNlZldHJpOEptT0tCUWllU1BIZW1GMkVqYUJmR0Q5bDIrWHFY?=
- =?utf-8?B?djVmRjZpYUZkWDVFN1RQbHQvUFlzQ3Z3OEd3UE5QOGpNODZrVFBCd25uZ2lN?=
- =?utf-8?B?NkZkMkJKNk5EZ0tBS2dyczViMG5DbDFPSHNJYUd2a2JCZm94Rmk4SXhwdlha?=
- =?utf-8?B?aGppV1BTVm9SV2NJWldKQitPZWIvNzVyMVJrczM2b29QdXBnUk9XM1BhL0JT?=
- =?utf-8?B?ais5UFpPbnlOcFMveWVOQlRhd1E4bkxYRlRKMHJJNXlmRVVjdk5rVXRpelF2?=
- =?utf-8?B?Rk5ZYm9kd2E0TEhCNlNseGYyak5xTWI2SFIvTTZ3M2JGT2M5RWVFQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4dddfd9f-8d5a-4c48-8449-08decd59c88c
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 16:51:03.4760 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j2zkZqQ45kaN6HLgItEaekfySnRzlXjw48BeutpVWdKDFBPrFv/drOK20bRaiXEhIxPcI65Hq6x7il3M4WxYNdUkplzcmMeKsk9yNnE3wSs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8096
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: db3c5fefb53f0ebfd63
+X-MBO-RS-META: zndb84dujtrtui3zyios7wf1xqrzur3u
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,65 +82,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sergio,
+The following changes since commit a7830e87555abfb81cc69275cecb2bc0fbde5b28:
 
-On 5/25/26 3:28 PM, Sergio Prado wrote:
-> The Entry_x509_cert class only listed 'content' in its
-> 'Properties / Entry arguments' section, even though 'keyfile',
-> 'cert-ca', 'cert-revision-int' and 'sw-rev' are also read from the
-> entry node and passed through to openssl.
-> 
-> Expand the docstring so the binman documentation generated from it
-> matches the actual behavior of the entry.
-> 
-> No functional change.
-> 
-> Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
-> ---
->   tools/binman/etype/x509_cert.py | 10 +++++++++-
->   1 file changed, 9 insertions(+), 1 deletion(-)
-> 
-> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> index b6e8b0b4fb09..efa85f9553e7 100644
-> --- a/tools/binman/etype/x509_cert.py
-> +++ b/tools/binman/etype/x509_cert.py
-> @@ -18,7 +18,15 @@ class Entry_x509_cert(Entry_collection):
->       """An entry which contains an X509 certificate
->   
->       Properties / Entry arguments:
-> -        - content: List of phandles to entries to sign
-> +        - content: List of phandles to entries to sign.
-> +        - keyfile: Filename of the PEM key file used to sign the binary.
-> +        - cert-ca: Common Name (CN) embedded in the certificate. Used when
-> +            generating a generic x509 certificate.
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2026-06-16 17:39:13 -0600)
 
-You know what's funny? This isn't used at all. Parsed and passed to the 
-openssl bintool, and it does nothing with it. I bet
+are available in the Git repository at:
 
-CN                     = {cert_fname}
+  git://source.denx.de/u-boot-usb.git master
 
-should actually be
+for you to fetch changes up to 78d5f8cb50090a2888df284564f43f4ebfbf663c:
 
-CN                     = {cn}
+  usb: tcpm: fix inverted poll condition in tcpm_pd_transmit() (2026-06-18 16:48:16 +0200)
 
-and we probably should add a test to whatever's using 
-tools/binman/test/security/x509_cert.dts to actually test the CN is the 
-expected one.
+----------------------------------------------------------------
+Peng Fan (1):
+      usb: tcpm: fix inverted poll condition in tcpm_pd_transmit()
 
-> +        - cert-revision-int: Integer certificate revision number. Used when
-> +            generating a generic x509 certificate. Defaults to 0.
-> +        - sw-rev: Software revision number embedded in the certificate by
-> +            the sysfw/rom variants used by the TI K3 secure boot subclasses.
-> +            Defaults to 1.
->   
-
-Sigh.. It seems like cert-revision-int and sw-rev are actually used for 
-the same thing, just with a different default value.
-
-It'd be nice to send a follow-up commit either fixing the non-use of 
-cert-ca, or remove it entirely. Not necessary for this patch series though.
-
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
+ drivers/usb/tcpm/tcpm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
