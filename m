@@ -4,93 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01104CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 874B2CD98F5
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 16:09:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ECF0849E0;
-	Thu, 18 Jun 2026 17:54:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1488780287;
+	Thu, 18 Jun 2026 18:09:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZORRx2Jz";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="iJ8oEIJ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39D5C849DA; Thu, 18 Jun 2026 17:54:53 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B39784874
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:54:51 +0200 (CEST)
+ id D52288063E; Thu, 18 Jun 2026 18:09:45 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4E2938005D
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 18:09:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-68852b58d87so2144272a12.3
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:54:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781798091; cv=none;
- d=google.com; s=arc-20240605;
- b=UqNz1gA0gKZc99DF6DrkLC19emFO8U5xMEaBjoKUbYEuyh6g0yEYoNdWpo25wL+0Ft
- o4p1fFudTGIQWzEpt1Lc3h6HRylBKeaVLpa4NyNPMgl7lcihmTkTxOLOZ0psT3XSetUr
- EqXPwDFIMk51ODcWqM3vW9oUN1H0ioGMxBdt8LGLZh0S5oFSzo9GY6wtv4YhJSdhwjUY
- 0AqP0EivMK8oLL90LJGjgroC165OqnLWH/WP9U56KYS7/lfDSDnhpUZ2Lq+adE7j50qH
- JG851glvmt/aUqxAk4m+J6iXYbVHLg/7djXP7eDP/euDRYMwLzBoQbklbVvCXj/0ckhA
- ySvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=s9vHEatK5CmH0zllX0wD9sGvyxebk/fhuozum4IqBGE=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=R14xzTKuzyrQdsVer0DKSQH9YXJr7yiUyq45FZRlmkKlQruP+B5uG+UpSzcuiYVdTB
- uCUkvlmWEuY5F+zzln3pWfiyU2uHlayF+gcwJf/U8dbMM6jBhrYdqhVQ0jKoblExRq6B
- ecWmRNsRf/cODY+V3qDBdiyvBZ99SGgJeh+muDvnOkuq2Kr+iK0oXAa7EMT+yJD1rADP
- SNdc83Xgha/y9mBkECaaYrjUunPSiG7Cx90e0slxTyLz6VM9WWe5iVdT8bv6ZQkvNBg+
- 0HncSHHNROynqrBpMHrqfmPpldyfuiIGnOYYDnUhdlpgmf69/PG2ttOazbjXIR6hSmOK
- UBjQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781798091; x=1782402891; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s9vHEatK5CmH0zllX0wD9sGvyxebk/fhuozum4IqBGE=;
- b=ZORRx2JzU8HuNPM5JfSHFKCofjbS8imIr3+ECm6Ls7VhjGfzXHWtd9daAJ7s1d9e5V
- ht0tHlyL2cO7k1Dnp8LczuQqPDy9QE4moJcLkxOeSOSCKPU5sGNDoNCGfiOIEcmvoiXy
- NGT3bLHNM/7IilWomuuUxbi4+iVY1Rsm0fCoc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781798091; x=1782402891;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=s9vHEatK5CmH0zllX0wD9sGvyxebk/fhuozum4IqBGE=;
- b=NK1r+jG1OC6ttwuTM0QW+4FRcMMdP7Z4b7CM6ARmGOFIqM/w2gHkZqCZUI9dyES19m
- HPniHASNnHm1hFBvr+9kiMQZPHzjV4cHgVsYdNb+HJrJe6KKqRuU8F4pKbnwTkgwQKKI
- Rp/ovdHp+kd9KTV7DTCvZO9mvNCcGpDYRoqcuVzHmRXAvlpDdaoBVZdF+Uqj9TjgEEWe
- 9wbMu8LVOp5XrYb1JGuKjpY7IFNno8sEkIUyvB7SSMG5yXuADwtcCpCMTTjWGJgRR6XR
- Osgd5P9Ed6sSh295jEjFnZN87yTCa7RRILKnyFhhwGvKdZGJhzXw5taPC6ED0CN6lx/0
- OkgA==
-X-Gm-Message-State: AOJu0YwSHZLYvlnkrpwWVR9mlI4O1XMTlJo5rLNOMZooCaRyj5K4Yo09
- jgOpQtRP2kQsTBUDsO//Y6cjeXMQOjJQuaT37+rt4XcLTqlqHaaGKYZcMArX95WqLWQIK7ex0O8
- oQYhPmxp+rDd+k3HGeKoXlEhhjnsAzd6n2s8rFzw2
-X-Gm-Gg: AfdE7cmOX6XPMnNTGRgLCTC04wipeC6lV0QVgXNIxGdbujyI6lrn+xUqwL1CpKgRl4I
- ugp/MfuQtDjeMS0zyi9QWCXpXEsuv3Fn1IuelaDt7uBfgOBAMqIdzO9Xs8xuIU9eors3r1qEEDV
- 91NU3rQopOR6kR0ugdwvYCsu5VB9q6peAUzR5QamEeasJ+T/76hAf/Ik21WlS54JZgqZqa4yrR+
- NokIK2FVttyrknWchj8t5reveLpBqXlzPcZiLiaNi7VIg+PR2DqlX3S65V6wZXb+2Tyv4DgkQ==
-X-Received: by 2002:a05:6402:3511:b0:696:a4fb:f222 with SMTP id
- 4fb4d7f45d1cf-696e4a4bc0dmr1918a12.13.1781798090848; Thu, 18 Jun 2026
- 08:54:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AED7E493F;
+ Thu, 18 Jun 2026 09:09:37 -0700 (PDT)
+Received: from debian (unknown [10.34.129.30])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2BB963F632;
+ Thu, 18 Jun 2026 09:09:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1781798982; bh=fO/zbKg77zLD7rBvjCIlk3+KXu7U7hzIG/lL2J7q8PQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=iJ8oEIJ5pkjToOjHMcXaS0hBEF/+IunhrWD4DFvPWdHhzRPRAEH0PojZeIynZICeX
+ /bXAgzOk1HAYzIemPwj0PEYl0CZGYk3AXkVXo4jn8SRRKHIPfMSyQnmZW2Oxm1mM3D
+ Cw4/X60CZ4fKgc6ND/j45dgLkfOj3Rq7oxmmYYrs=
+From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] efi_loader: fix missing EFI_EXIT in
+ efi_disconnect_controller
+Date: Thu, 18 Jun 2026 18:09:30 +0200
+Message-ID: <20260618160930.345040-1-vincent.stehle@arm.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260618150913.314507-1-vincent.stehle@arm.com>
+References: <20260618150913.314507-1-vincent.stehle@arm.com>
 MIME-Version: 1.0
-References: <20260605033907.1909319-1-dmukhin@ford.com>
- <20260605033907.1909319-6-dmukhin@ford.com>
-In-Reply-To: <20260605033907.1909319-6-dmukhin@ford.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:54:33 +0100
-X-Gm-Features: AVVi8Cck4eRRil5DODxggzjJ9UQ6cSbI-FWrTPOcXlPlEGVKGQJpbdcF-ViWVBc
-Message-ID: <CAFLszTiZ-W8xVACQ6Nx1HWY+N8bTgsfp_3=Z4FoK68y0PdXafg@mail.gmail.com>
-Subject: Re: [PATCH v1 5/8] configs: sandbox: enable GPT flags extension
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,15 +68,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-05T03:38:59, None <dmukhin@ford.com> wrote:
-> configs: sandbox: enable GPT flags extension
->
-> Enable CONFIG_CMD_GPT_FLAGS to allow users experiment with GPT
-> flags manipulation via 'gpt' command.
->
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->
-> configs/sandbox_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+We are missing a call to EFI_EXIT() when returning from
+efi_disconnect_controller(), which we need after having called EFI_ENTRY().
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Fix this by jumping to the common error path, which does call EFI_EXIT().
+
+Even though the common error path may try to free child_handle_buffer, this
+cannot harm in our case as it always NULL.
+
+This is inspired by a barebox fix. [1]
+
+Link: https://git.pengutronix.de/cgit/barebox/commit/?id=080db65e39a877b000baaf843c997a69821dfe69 [1]
+Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole child")
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+
+
+Changes for v2:
+- Drop the return and jump to the common error path with a goto instead
+
+
+ lib/efi_loader/efi_boottime.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index de57823bd44..bcb01c92cf4 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
+ 				      &number_of_children,
+ 				      &child_handle_buffer);
+ 	if (r != EFI_SUCCESS)
+-		return r;
++		goto out;
+ 	sole_child = (number_of_children == 1);
+ 
+ 	if (child_handle) {
+-- 
+2.53.0
+
