@@ -4,51 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB97CD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE46CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D52B849D1;
+	by phobos.denx.de (Postfix) with ESMTP id C47BD849E0;
 	Thu, 18 Jun 2026 15:09:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="LyUAKfcj";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="dFlWKcmJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163C1849F3; Thu, 18 Jun 2026 15:09:52 +0200 (CEST)
-Received: from mta-65-225.siemens.flowmailer.net
- (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ id 651E3849F7; Thu, 18 Jun 2026 15:09:53 +0200 (CEST)
+Received: from mta-64-225.siemens.flowmailer.net
+ (mta-64-225.siemens.flowmailer.net [185.136.64.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98330849CB
+ by phobos.denx.de (Postfix) with ESMTPS id 9B386849CE
  for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 20260618130947ecb71a4bde00020778 for <u-boot@lists.denx.de>;
- Thu, 18 Jun 2026 15:09:47 +0200
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
+ 20260618130949b9dc8710ac00020796 for <u-boot@lists.denx.de>;
+ Thu, 18 Jun 2026 15:09:49 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=1fIKevgcvs3kW0fofu71uES9TuAjHWpZed0ECgTyfgY=;
- b=LyUAKfcjzxrIJgwtMmNoxL8NgqrVvYE+rEzOLtA81rCcqGbPIrevaYVLC51yA23WUwcAjq
- bvA0V7SOEO50bqhK2LLBLtsZau3xgEPBpN2hpowxv5v/wdzkRaHxQGFO3PuR5KhRWOUFIDNx
- mK7Tvtc5tnpQq47iJd7K23S1vebPStEQBl6iG6JVJRA0xjnjj5x9mj4t2bzCJuiO7o2Nx2c1
- 34UwoVUB3Dw3eoJ1vtpcj8869duUDcTh4NfemjKPlRGlcvPtQZDqjAdWidKCIVUc+1KzkAxU
- t7BBvwwgSQ0XFbaatdd+hmvSF3bD2io8YMqIsHKa43Rg5T4oUS8GzHdQ==;
+ bh=UCfuJnfroQ5xu26gVF9FCG6xAUZWOzRyRteQmyFanqM=;
+ b=dFlWKcmJ8lnZGkHLqmRIYE44xbiaO3raM4iMvs7DbladLvyPkMMhanQIN+/RuUoR0F0FOP
+ O9svI7l4KhYWyHHAs4+FsIUNPpaa1V30NyeiI1xSDGRLCd0MDWxO355B0+zvGjWZzDtk95kj
+ rwxu4S3fyiqKhjvI4mHGc4+1XRHqlis2ReyMAJEXx/EF98HUOc4JImXiwieFNF7m18+IQjGq
+ vGaRBaTELCEI+yZY31FsLjsQYMOQhxyrlUzAHbCaEbWCdDt7mxb5t4V60sC0pKYXu0x2p0t4
+ Ac4uxiysrWJFyPHrwUaCHi6Ts+OjZ/tTECgAKQYDdBHct7FY1O+u8Kog==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Raymond Mao <raymondmaoca@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Subject: [PATCH v7 2/8] qemu-arm64: merge built-in DT
-Date: Thu, 18 Jun 2026 14:47:37 +0200
-Message-ID: <20260618144742.v7.2.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Julien Stephan <jstephan@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Shiji Yang <yangshiji66@outlook.com>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH v7 6/8] iminfo: also verify signatures
+Date: Thu, 18 Jun 2026 14:47:41 +0200
+Message-ID: <20260618144742.v7.6.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
 In-Reply-To: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 References: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -71,119 +76,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The keys trusted for FIT signature verification are supposed to be
-embedded in the device tree built into u-boot. When running in Qemu it's
-convenient to use the device tree provided by the VM which doesn't know
-about signatures though. So merge both device trees at startup.
+The iminfo command already verifies hashes of images. This change
+also verifies signatures of configurations if enabled.
+If FIT_REQUIRE_CONFIG_SIGS is enabled, iminfo also fails if
+signatures are missing.
 
-Make sure CONFIG_OF_OMIT_DTB is not set in qemu_arm64_defconfig to take
-advantage of the feature by default.
+While at it print "OK\n" in success case of fit_all_image_verify()
+too so iminfo output matches bootm. This will simplify the tests.
+
+Adjusts error output slightly to be on stderr
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-Changes in v7:
-- add guard for OF_LIBFDT_OVERLAY
+(no changes since v6)
 
 Changes in v6:
-- fix comment style and typos
-- fix error message
-- return error from board_fdt_blob_setup() if dt couldn't be resized or
-  merged. Unfortunately fdtdec_ret_to_errno() is static elsewere so
-  -EINVAL has to suffice
-- mention CONFIG_OF_OMIT_DTB in commit message
+- move 'ret' declaration to top of block
+
+Changes in v5:
+- rely on inline dummy for fit_all_configurations_verify
+- use CONFIG_IS_ENABLED(FIT_SIGNATURE) to guard fit_all_configurations_verify
+- print warning if /configurations node is missing
+- print "OK\n" in fit_all_image_verify()
 
 Changes in v4:
-- mention arm in subject
-- correctly change defconfig
+- fix documentation to use kdoc style
 
 Changes in v3:
-- enable CONFIG_OF_OMIT_DTB=n in defconfig
-- add error returns
-- document decission about dt merging direction
+- use log_err instead of printf in fit_config_verify_required_keys()
+- don't make iminfo fail unless FIT_SIGNATURE_REQUIRED is set
+- update fit_all_configurations_verify documentation
+- stub fit_all_configurations_verify unless FIT_SIGNATURES
 
- board/emulation/qemu-arm/qemu-arm.c | 51 +++++++++++++++++++++++++++--
- configs/qemu_arm64_defconfig        |  1 +
- 2 files changed, 50 insertions(+), 2 deletions(-)
+Changes in v2:
+- document fit_all_configurations_verify()
 
-diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-index 38f0ec5f2fb..590a336380b 100644
---- a/board/emulation/qemu-arm/qemu-arm.c
-+++ b/board/emulation/qemu-arm/qemu-arm.c
-@@ -144,10 +144,57 @@ int dram_init_banksize(void)
- 	return 0;
+ boot/image-fit.c | 55 +++++++++++++++++++++++++++++++++++++++++++++++-
+ cmd/bootm.c      | 10 +++++++++
+ include/image.h  |  8 +++++++
+ 3 files changed, 72 insertions(+), 1 deletion(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index b0fcaf6e17f..7b5c51fab73 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1506,12 +1506,65 @@ int fit_all_image_verify(const void *fit)
+ 
+ 			if (!fit_image_verify(fit, noffset))
+ 				return 0;
+-			printf("\n");
++			printf("OK\n");
+ 		}
+ 	}
+ 	return 1;
  }
  
-+/*
-+ * QEMU loads a generated DTB for us at the start of RAM.
-+ * When using signatures we may have a built-in FDT that contains
-+ * our known public keys nevertheless. So merge the built-in FDT
-+ * into QEMU's. We cannot merge the other way around (e.g. in
-+ * fdtdec_board_setup()) or board_fix_fdt() at this stage as U-Boot
-+ * might be started from a ROM location. At the same time U-Boot
-+ * needs QEMU's FDT to initialize serial devices even before
-+ * relocation.
++/**
++ * fit_all_configurations_verify() - verify signatures of all configurations
++ * @fit: pointer to the FIT format image header
++ *
++ * fit_all_configurations_verify() iterates over all configurations
++ * in the FIT and checks the signatures. Returns success if all
++ * configurations have valid signatures. See documentation at
++ * fit_config_verify_required_keys() or fit_config_verify_key().
++ *
++ * Return:
++ * * 0, all configurations have valid signatures
++ * * -ENOENT, no configurations found
++ * * < 0, -errno
 + */
- int board_fdt_blob_setup(void **fdtp)
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++int fit_all_configurations_verify(const void *fit)
++{
++	int confs_noffset;
++	int noffset;
++	int r = -ENOENT;
++
++	/* Find configurations parent node offset */
++	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
++	if (confs_noffset < 0) {
++		log_info("Missing '%s' node: %s\n",
++			 FIT_CONFS_PATH, fdt_strerror(confs_noffset));
++		return r;
++	}
++
++	/* Process all config subnodes, check signature for each */
++	log_info("## Checking configuration signatures ...\n");
++
++	fdt_for_each_subnode(noffset, fit, confs_noffset) {
++		int ret;
++
++		log_info("   %s ... ", fit_get_name(fit, noffset, NULL));
++		ret = fit_config_verify(fit, noffset);
++		if (ret) {
++			r = ret;
++			log_err("FAIL\n");
++			continue;
++		}
++		/* valid config found */
++		if (r == -ENOENT)
++			r = 0;
++
++		log_info("OK\n");
++	}
++
++	return r;
++}
++#endif
++
+ static int fit_image_uncipher(const void *fit, int image_noffset,
+ 			      void **data, size_t *size)
  {
--	/* QEMU loads a generated DTB for us at the start of RAM. */
--	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
-+	void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
+diff --git a/cmd/bootm.c b/cmd/bootm.c
+index ca7cec91fad..25cc51cbab2 100644
+--- a/cmd/bootm.c
++++ b/cmd/bootm.c
+@@ -279,6 +279,9 @@ static int do_iminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int image_info(ulong addr)
+ {
+ 	void *hdr = (void *)map_sysmem(addr, 0);
++#if defined(CONFIG_FIT)
 +	int ret;
-+
-+	if (fdt_check_header(qemu_fdt) != 0) {
-+		log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
-+		return -EINVAL;
-+	}
-+
-+	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY))
-+		goto out;
-+
-+	if (fdt_check_header(*fdtp) != 0) {
-+		/* this was a perfectly normal condition before
-+		 * (CONFIG_OF_OMIT_DTB was set for qemu). So to avoid
-+		 * breaking existing configs don't error out. This
-+		 * might mean that we don't have keys in case
-+		 * FIT_SIGNATURE is on. We can't know though as
-+		 * existing setups might have injected them into
-+		 * QEMU's FDT already.
-+		 */
-+		goto out;
-+	}
-+
-+	log_debug("Found built-in FDT at %p. Merging into %p...\n", *fdtp, qemu_fdt);
-+
-+	ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
-+	if (ret) {
-+		log_err("Failed to grow QEMU FDT: %s\n", fdt_strerror(ret));
-+		return -EINVAL;
-+	}
-+
-+	ret = fdt_overlay_apply_node(qemu_fdt, 0, *fdtp, 0);
-+	if (ret) {
-+		log_err("Failed to apply FDT overlay: %s\n", fdt_strerror(ret));
-+		return -EINVAL;
-+	}
-+
-+out:
-+	*fdtp = qemu_fdt;
++#endif
  
- 	return 0;
+ 	printf("\n## Checking Image at %08lx ...\n", addr);
+ 
+@@ -329,6 +332,13 @@ static int image_info(ulong addr)
+ 
+ 		fit_print_contents(hdr);
+ 
++		ret = fit_all_configurations_verify(hdr);
++		if (ret != 0 && (ret != -ENOENT ||
++				 CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))) {
++			unmap_sysmem(hdr);
++			return 1;
++		}
++
+ 		if (!fit_all_image_verify(hdr)) {
+ 			puts("Bad hash in FIT image!\n");
+ 			unmap_sysmem(hdr);
+diff --git a/include/image.h b/include/image.h
+index 34efac6056d..841b6fb77cf 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1355,6 +1355,14 @@ static inline int fit_config_verify(const void *fit, int conf_noffset)
  }
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 5bdbd6fb59a..0fd7016c045 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -38,6 +38,7 @@ CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_CMD_SPAWN=y
-+# CONFIG_OF_OMIT_DTB is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_AHCI=y
- CONFIG_SCSI_AHCI=y
+ #endif
+ int fit_all_image_verify(const void *fit);
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++int fit_all_configurations_verify(const void *fit);
++#else
++static inline int fit_all_configurations_verify(const void *fit)
++{
++	return 0;
++}
++#endif
+ int fit_config_decrypt(const void *fit, int conf_noffset);
+ int fit_image_check_os(const void *fit, int noffset, uint8_t os);
+ int fit_image_check_arch(const void *fit, int noffset, uint8_t arch);
 -- 
 2.43.0
 
