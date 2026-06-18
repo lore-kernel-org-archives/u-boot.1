@@ -4,52 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45FDCD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE7BCD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0974F84A02;
+	by phobos.denx.de (Postfix) with ESMTP id 3DB3284A0B;
 	Thu, 18 Jun 2026 15:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="n5umH1tp";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="Cas74oIh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B139A849CE; Thu, 18 Jun 2026 15:09:53 +0200 (CEST)
+ id 043E3849BB; Thu, 18 Jun 2026 15:09:54 +0200 (CEST)
 Received: from mta-65-225.siemens.flowmailer.net
  (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D49E849D2
+ by phobos.denx.de (Postfix) with ESMTPS id F37F4849DA
  for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
 Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 20260618130948539e00ad7500020781 for <u-boot@lists.denx.de>;
- Thu, 18 Jun 2026 15:09:48 +0200
+ 20260618130949e237230617000207d9 for <u-boot@lists.denx.de>;
+ Thu, 18 Jun 2026 15:09:49 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=ck/8Zte8Y1HxcreY+yPV7NQ3TqYi8FDXvFyWTq57908=;
- b=n5umH1tpf2dW6/U3oUGFr2KuWKWRct1XWkwOAUuuBVNS0T5liRyvXwes2Mmt94BwtSV+zp
- f746NleyVL+RAt7PipUqQ7cYx16tKtQ/baOIXi9VumUK807OQY1uX4t9ddQzCtBptsNWN2Q7
- Jk+HKi39UddDYdU1tJ+HMEKdG/Ygb49Ceo8lh+SepL+ZMC5BlC+q7/8K/g2MIqo8odFQhhuv
- vaCu5A9ZnWahQIqh6de/e6YtKhokUG9l9XBbhXRPh5yMPemVHMcEDpU7P05HSx8eb9sPrPEq
- p9HOq7PV/FUoIMF5nXLQYFgAB/OdknxaJl9PM9ICqTiKU7AAI6qdqdDw==;
+ bh=HAeA9BfaKX6ydfAr01sw86PjpLddr4h3awZ4DdqL09o=;
+ b=Cas74oIhrgOaU+HiMiKW8cMM/gUfB9DVGWMBaj4AOxzDDkJKG+q4M4pji5p5ejibdyiC7V
+ sc0jiWfTW2Nd+aqUMbPzJ0kAMFS5GizFqwLoPWC4QXprk/BqnW2t+2g4KiQeEnGwuzErtlzy
+ EQuDMpCEaGa8abtsuPzhSr712b7qSrHUylSVYc8od8VCQ7M42T9E7rIxhxJ9beJOunv2zKVs
+ YwhY0/G6ZUy2yDZUr+aXs16GA/hC+H8WWRPMbyg/ayLzyZZO9QAbLIwr5vsasSzXXKsjcv/s
+ 0LwEFlREPCj+IQClbHnIuAZm3aO3c+DygEeT6bJzB4sCJzSpNok3FWBg==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Anshul Dalal <anshuld@ti.com>,
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 4/8] image-fit-sig: Optionally require signatures
-Date: Thu, 18 Jun 2026 14:47:39 +0200
-Message-ID: <20260618144742.v7.4.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v7 7/8] test: vboot: refactor run_bootm
+Date: Thu, 18 Jun 2026 14:47:42 +0200
+Message-ID: <20260618130943.549083-3-ludwig.nussel@siemens.com>
 In-Reply-To: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 References: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -72,170 +67,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If U-Boot is built with signature verification but no keys are
-included in the device tree, the boot would still continue.
-Introduce FIT_SIGNATURE_REQUIRED to avoid a fail-open setup.
-Defaults to off so existing setups are not affected; boards wanting
-fail-closed behaviour must enable it explicitly.
+- split off a generic part of run_bootm. The helper function is for
+  future use in similar commands
+- moves u-boot restart below section opening for better log structuring
+- only look for expected string in last command. This way a failed
+  assert() doesn't dump unrelated output.
+- use f-strings in the refactored code while at it
 
-Consistently use log_err for errors in fit_config_verify_required_keys()
-while at it
-
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Series-Changes: 7
-- mention CONFIG_FIT_REQUIRE_CONFIG_SIGS in documentation
-
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 ---
 
-(no changes since v4)
+(no changes since v6)
 
-Changes in v4:
-- reword Kconfig help text
-- rename option to FIT_REQUIRE_CONFIG_SIGS
-- introduce SPL_FIT_REQUIRE_CONFIG_SIGS
+Changes in v6:
+- Add missing return value documentation to run_fit_commands()
+- use f-strings for the refactored code
+- drop not needed length check for command list
 
-Changes in v3:
-- clarify error message when no keys were found
-- change printfs to log_err
-- reword Kconfig
-- keep FIT_SIGNATURE_REQUIRED off by default
+Changes in v5:
+- new patch
 
-Changes in v2:
-- introduce FIT_SIGNATURE_REQUIRED
+ test/py/tests/test_vboot.py | 55 +++++++++++++++++++++++++++----------
+ 1 file changed, 41 insertions(+), 14 deletions(-)
 
- boot/Kconfig                | 22 ++++++++++++++++++++++
- boot/image-fit-sig.c        | 22 ++++++++++++++--------
- doc/usage/fit/signature.rst | 13 ++++++++++---
- 3 files changed, 46 insertions(+), 11 deletions(-)
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index ae6f09a6ede..c36a403063e 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -124,6 +124,23 @@ config FIT_SIGNATURE
- 	  format support in this case, enable it using
- 	  CONFIG_LEGACY_IMAGE_FORMAT.
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 6459c7c313e..df5db157a52 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -151,6 +151,39 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                                  tmpdir, '-I', tmpdir])
+         os.environ['PYTHONPATH'] = pythonpath
  
-+config FIT_REQUIRE_CONFIG_SIGS
-+	bool "Require configuration signature verification of FIT uImages"
-+	depends on FIT_SIGNATURE
-+	help
-+	  This option requires that FIT uImages have configuration
-+	  nodes that are signed or boot will fail.
-+	  That means the U-Boot device tree must contain a
-+	  "/signature" node and at least one public key with
-+	  required="conf".
-+	  All configuration sections of a FIT file must be signed
-+	  using those keys based on "required-mode" policy.
-+	  The option is useful to avoid fail-open situations so it
-+	  is recommended to enable. The option currently defaults to
-+	  off to avoid breaking existing setups. Keep it off if you
-+	  need to reuse the same u-boot binary in setups without
-+	  keys or rely on image node only signatures.
 +
- config FIT_SIGNATURE_MAX_SIZE
- 	hex "Max size of signed FIT structures"
- 	depends on FIT_SIGNATURE
-@@ -224,6 +241,11 @@ config SPL_FIT_SIGNATURE_MAX_SIZE
- 	  device memory. Assure this size does not extend past expected storage
- 	  space.
- 
-+config SPL_FIT_REQUIRE_CONFIG_SIGS
-+	bool "Require signature verification of FIT firmware within SPL"
-+	depends on SPL_FIT_SIGNATURE
-+	select FIT_REQUIRE_CONFIG_SIGS
++    def run_fit_commands(commands, expect_string, fit=None):
++        """Load fit image and run commands in U-Boot.
 +
- config SPL_LOAD_FIT
- 	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
- 	depends on SPL
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index 433df20281f..dc38a2413b0 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -632,15 +632,16 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 	 * name root but different @ suffix to be equal
- 	 */
- 	if (strchr(name, '@')) {
--		printf("Configuration node '%s' contains '@'\n", name);
-+		log_err("Configuration node '%s' contains '@'\n", name);
- 		return -EPERM;
- 	}
- 
- 	/* Work out what we need to verify */
- 	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
- 	if (key_node < 0) {
--		debug("%s: No signature node found: %s\n", __func__,
--		      fdt_strerror(key_node));
-+		log_err("No signature node found: %s\n", fdt_strerror(key_node));
-+		if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))
-+			return -EPERM;
- 		return 0;
- 	}
- 
-@@ -674,8 +675,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 					    noffset);
- 		if (ret) {
- 			if (reqd_policy_all) {
--				printf("Failed to verify required signature '%s'\n",
--				       fit_get_name(key_blob, noffset, NULL));
-+				log_err("Failed to verify required signature '%s'\n",
-+					fit_get_name(key_blob, noffset, NULL));
- 				return ret;
- 			}
- 		} else {
-@@ -685,9 +686,14 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 		}
- 	}
- 
--	if (reqd_sigs && !verified) {
--		printf("Failed to verify 'any' of the required signature(s)\n");
--		return -EPERM;
-+	if (!verified) {
-+		if (reqd_sigs) {
-+			log_err("Failed to verify 'any' of the required signature(s)\n");
-+			return -EPERM;
-+		} else if (CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS)) {
-+			log_err("No suitable keys found for configuration verification\n");
-+			return -EPERM;
-+		}
- 	}
- 
- 	return 0;
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index da08cc75c3a..73153c97367 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -420,11 +420,14 @@ below examples::
- 
- Enabling FIT Verification
- -------------------------
--In addition to the options to enable FIT itself, the following CONFIGs must
--be enabled:
-+In addition to the options to enable FIT itself, the following
-+settings configure signature verification support:
- 
- CONFIG_FIT_SIGNATURE
--    enable signing and verification in FITs
-+    required to enable signing and verification in FITs
++        Asserts that 'expect_string' is contained in the output of the last command
 +
-+CONFIG_FIT_REQUIRE_CONFIG_SIGS
-+    make signature verification mandatory
- 
- CONFIG_RSA
-     enable RSA algorithm for signing
-@@ -436,6 +439,10 @@ WARNING: When relying on signed FIT images with required signature check
- the legacy image format is default disabled by not defining
- CONFIG_LEGACY_IMAGE_FORMAT
- 
-+WARNING: CONFIG_FIT_REQUIRE_CONFIG_SIGS is not set by default for
-+backwards compatibility. It is recommended to be turned on whenever
-+configuration signatures are used to avoid fail-open behavior
++        This always starts a fresh U-Boot instance since the device tree may
++        contain a new public key.
 +
++        Args:
++            commands: list of commands to run
++            expect_string: A string which is expected in the output
++            fit: FIT filename to load and verify
++
++        Returns:
++            The joined output of the last command run.
++        """
++
++        ubman.restart_uboot()
++
++        if not fit:
++            fit = f'{tmpdir}test.fit'
++        # run commands that just prepare for the actually relevant one
++        ubman.run_command(f'host load hostfs - 100 {fit}')
++        for cmd in commands[:-1]:
++            ubman.run_command(cmd)
++
++        output = ''.join(ubman.run_command(commands[-1]))
++
++        assert expect_string in output
++
++        return output
++
+     def run_bootm(sha_algo, test_type, expect_string, boots, fit=None):
+         """Run a 'bootm' command U-Boot.
  
- Testing
- -------
+@@ -166,20 +199,14 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                     we are expected to not boot
+             fit: FIT filename to load and verify
+         """
+-        if not fit:
+-            fit = '%stest.fit' % tmpdir
+-        ubman.restart_uboot()
+-        with ubman.log.section('Verified boot %s %s' % (sha_algo, test_type)):
+-            output = ubman.run_command_list(
+-                ['host load hostfs - 100 %s' % fit,
+-                 'fdt addr 100',
+-                 'bootm 100'])
+-        assert expect_string in ''.join(output)
+-        if boots:
+-            assert 'sandbox: continuing, as we cannot run' in ''.join(output)
+-        else:
+-            assert('sandbox: continuing, as we cannot run'
+-                   not in ''.join(output))
++
++        with ubman.log.section(f'Verified boot {sha_algo} {test_type}: looking for "{expect_string}"'):
++            output = run_fit_commands(['fdt addr 100', 'bootm 100'], expect_string, fit)
++
++            if boots:
++                assert 'sandbox: continuing, as we cannot run' in output
++            else:
++                assert 'sandbox: continuing, as we cannot run' not in output
+ 
+     def sign_fit(sha_algo, options):
+         """Sign the FIT
 -- 
 2.43.0
 
