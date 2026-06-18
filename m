@@ -4,101 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0976FCD98F6
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50350CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98891849CA;
-	Thu, 18 Jun 2026 17:12:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E345B849ED;
+	Thu, 18 Jun 2026 17:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M35WPtY6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2A0JI4f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68F7A8460E; Thu, 18 Jun 2026 17:12:40 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 2481E849E9; Thu, 18 Jun 2026 17:12:56 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ABE18460E
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:12:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41682849C9
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-695f5ae95e1so1167814a12.2
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:12:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781795558; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6912f4acca4so1801498a12.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:12:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781795574; cv=none;
  d=google.com; s=arc-20240605;
- b=XObDDW7LB1GKcchpS0augqvvrI9jhg9g5VME8If+QWQZAB4OaNH9hFEw5CUYAPGClJ
- EZa+7UYVUX8aKiXK4ZJL519FGuQzZOj13zZY23Kpn7A3ndb3CadrZOm/mppzFv3LjUKH
- QyegINLCOF80x5FEWuntgjwNuwaW4U/VXO95eF03WhyBOm1gRRZqLtYX8QCKTJppd+qu
- rh1mka7PvPx+AJazk0Q7HbnbXQ3DdU4OpDfujm/4N0kWk+nGddKHdBzxjGTmH6parx4t
- bq3tF//vuMvwsTwboV61KaTuyEQ6AW9b4EROaBRj1B/QIFUp+1+Ikew96sqVHX9GFe9l
- x6PA==
+ b=bSTy2SGrvvaFlXpeJALQm//VLxnTjpwiXEo4NmMzRExi0VV99qtUMKLGvOZVKvrpx/
+ /TK8A9Vu73mwYi/I+LzVklq4vwxjlHuQPrCRQUGu/m6ApJjdk1TkXU2jZefnnJS3MwJ3
+ Ci90YEBrqmS+vDMyw6LyO4f/tleeurAdjf3wSY7aHA3I8oOlwBEFZEDJhFOx0LmK3jIj
+ pH+EN6VFUjozOgUcwtQeYOEkOeC3tbqcbfP6HFDczG3vjjafPmbIDtxQIddjMHJxXAKd
+ TjoqMXNsjI2ejEWNY8LxGjGpQt8hmT+W3ct4Cwi17WNziy2L7F77rsBMeSSXG/0yul/w
+ 96Ew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=dRfcWvD+dF7fmbXJ6V5OnkJFE4hn0gp5umQFd8sEYWk=;
- fh=pqQDfe3LJMDmm+c9NDum1Jzf1ll4C62eeHhIID4fPOY=;
- b=W/ON+OfOPNg3P190J0Uc+AOP9/QirP7gt7GFMN7IFDKds2+LxVHQZnklVza9R/VHie
- yqYzRZku674rbdpUA3Z5ykCcLuXO5x/ICUJmWzKkJ8avEBWCm0orIeUt9lW5rx033FIp
- d/Kt1pBEWMH3wySRqOLR/OfJbj0izVcjhGNdj7qy5VTA0EBpFizR0px3pszwV4z7FNht
- reLL0kO5P9+Ba/71P7wwjqpXhLi27rjVIS+yM6tbdReQK0bJ/goUTnT9JmZz7d63r7NJ
- C+dTz4F3gyI78KAJLC8R+KcY5Sz7zOKCZhS6wsuaCzUaWZwv8skKt5MYiBVZjaIMbE7z
- 3KQg==; darn=lists.denx.de
+ bh=TLEWP35bin9HKy3bSZU6hhBWbjkyDB4An4WOhiXsLcs=;
+ fh=yOpbVoGHCXeHD/e/WwluEoSkycH7ou1R4r9lMor1N4A=;
+ b=Omw2ZZBhevtaLzd4aYRnB3Jk+8PM38iNDPqShmspke0GXhFJIv8Gg4QG/DYprf7grM
+ 9ulc7CA16yZxxYmWjcGNoFvweXVL5xqNRN/Lcir2DyPYZnXey+sGCvrmjrq98QYoiby1
+ M0A417CFz/hmTHECJSlz88esNAaAwprBE8N8KfjxlRW1VKdIIcAWo6msvlt1RvNP65M1
+ is4czp6ie+eJ7yDQ77EpHQPDlAFz3dBoTm+wWXTPVNV0XOibCMc4fFb8jy5BPXMwGEER
+ JBVNfHwzDR6sOfNv48tmdgE/f08+plWTOizAoyCpRws8rpkomjpKfKkQeUOmN/TqNPqE
+ zEUA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781795558; x=1782400358; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781795574; x=1782400374; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dRfcWvD+dF7fmbXJ6V5OnkJFE4hn0gp5umQFd8sEYWk=;
- b=M35WPtY63P1BK7VX1rpeRlqv6fQmzeH4cz+9qGPLxSbomDrg/qllBtVK+NAWxyS5Gt
- m7vdTtkMF3Wwnoge4KNHba2wGKO2MFq0W/I8DxfnB0M+dAgdCHVH9CKGCXoLuj2H2z83
- nJfCYH1hZBb21ZlAVSobkf91m4/05LjWAn9yw=
+ bh=TLEWP35bin9HKy3bSZU6hhBWbjkyDB4An4WOhiXsLcs=;
+ b=M2A0JI4fJNFrUTr7Bb8FSRxrw+6+/8YZjW0xVvKQpA/X4YBgu/Cj5k0MxSzygjCH7t
+ VDhad+LZQK4JcxvUmWeDrQkHHUES7FF56mNt+L2AbfP7P29ap2tNLZXptKd1i6ZKt+ZX
+ 9aqnB3bCQjNfq+Ht+ftGS59z1+CqaycAxugHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781795558; x=1782400358;
+ d=1e100.net; s=20251104; t=1781795574; x=1782400374;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dRfcWvD+dF7fmbXJ6V5OnkJFE4hn0gp5umQFd8sEYWk=;
- b=jgUW5hobPhsJNNucJmuRP0yfYGc+VVpCVw/TAJ1IxlmgkiM13aIlrH0uROCtNXzadw
- vrzHDoKXscobXI5GYJDHuDOhZ4RI3oefh+rtlAzg7AuDw6LNW7VidCybmPvLMbAyclqL
- wEdT1jdRFSPl8TQTH+GOtSkMxPRaULh49q92nLr40H47lWEIvSSq/R4RjTXKJSQSW7eC
- hkXJRxznp8OwLf02+VZLEEytM/lhWKGI7ersR5YgpLez2KUBvdSvHyVgNkvpJYNo2WtG
- 6H31X0UVKRM7AURY76I0ciDIWBOP5Ki8HmugPMQMoIdJpfuFlmzQCZ/xtYnFZDbJ6M+x
- s4QQ==
-X-Gm-Message-State: AOJu0YyTyxIdaeRGVUjvSXJc5JlYokxMe8CxvV1PIaVFk92QUNWr35EY
- vKeu08Qya91USA9Y5lpzMR7JS9WHPhxykEct6kinmtOo2b+VBD0EQb/1NAqqCwQ0UO+Oz6BJYSg
- TJD774EomtDWf1mK3ff8hqRG6GovSHrQxoV4uxqLN
-X-Gm-Gg: AfdE7cnQY2AoONTbege//+imkor7rKXSTY2NRFqubf7tfmLPNP+fw8l2Dq9W5U1DITa
- pqbibF1cH+XmdqTD1WeoW3Q1USrQl4DxdYiO6sYnntcaquyJL5VYfPzJ1LUtA6d70TdIij1oiqm
- aXEQhfNH2Xu/eqHfcy43n/o7ph5OPDEC6CUKZ7hhlreIlvVUch3BLEGpgExEjdT9rWPW60KOYu6
- eie3jMtuGRCM27SlAhg+Osce4O0P4QahxE/z2Oj6p/Ji9yaJr5hp5k/guc0FqbyKj5ODpNMmw==
-X-Received: by 2002:a05:6402:28c4:b0:695:a13c:ebd4 with SMTP id
- 4fb4d7f45d1cf-695a13cf5bfmr3364303a12.9.1781795557906; Thu, 18 Jun 2026
- 08:12:37 -0700 (PDT)
+ bh=TLEWP35bin9HKy3bSZU6hhBWbjkyDB4An4WOhiXsLcs=;
+ b=MLy6kPm/wNhMhNahwQ0pWaT3BZvKxCC4NGU+0kMIFhAZDJ/i4gduBQAwxbcF9V/osQ
+ 5MMLVxo1akjQ1PA7tCLQcR3J/9iN1JdiH8kxZABm4diOArmQLZpv72ci35P4NhENxpvB
+ GGv08Dh0RZagQpKmRx72Zo59Er1Tdxs8m2locPDalYFRyB2YUdMCyqmBNWup7eUKrzbk
+ IJ39d0VdMOoKBFgjx3+OA09i3+sJNjIYD6j/d1NaqgyLqpmDX4JAQ7UkyqgR1LJTNCko
+ pulM0Mf7aXN1ev27lhCfGgGfYCQy8Cuf7SfbZyJdWr/skvpblDnRXquNdiMkUN3HJunA
+ AZIQ==
+X-Gm-Message-State: AOJu0YzbqvdkN7CjTm5cmyfeBWlu1ZJwCwvhd7HAAiVIkUewbbmPLW+A
+ K4aFj5qWRYmvdjLyfDfARX0FXta2SGhDFWkQNixkHEHHArtT4TOIGIePHmlExZqnwW9z9dglIgE
+ HnZaxGPOMbtRDBUPXkMWq4G2/j8vqaU0XDdA+fFte
+X-Gm-Gg: AfdE7ckUqMh0yl4GFPXjXTj0bPaSGy3hwRK2QO0Hb2BQNj+Wk7/U1WLO6G26NNkYQZr
+ ajWeeFV/JTNSY0WDWOYge0oqntBP6/C2O3eaZnMoTJ3O4MTizRvWF+bWSPLSCOht6ALIRd5y2Ze
+ qozm3shfPxO0yD58sDvAt59HgTiWtHkxNtJK1zreta55cKb61u4hhGNJu9IoFbacq/GlzM6FaCm
+ be7AVp+1WfCx+6ChHWwDqipNRXXjLl017vLvpzaRLX7yEYPqJIa//meKQ87dcJEqNLuvpCEaw==
+X-Received: by 2002:a05:6402:2743:b0:689:92c0:22b0 with SMTP id
+ 4fb4d7f45d1cf-695bb1b6afbmr2265688a12.3.1781795573650; Thu, 18 Jun 2026
+ 08:12:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604-bls-v1-3-4ce6d1ee4711@flipper.net>
-In-Reply-To: <20260604-bls-v1-3-4ce6d1ee4711@flipper.net>
+References: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
+ <20260604-spl_fit_full_cleanup-v1-5-ec036b5872e2@valla.it>
+In-Reply-To: <20260604-spl_fit_full_cleanup-v1-5-ec036b5872e2@valla.it>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:12:25 +0100
-X-Gm-Features: AVVi8CfvvhVeILc9HLmijGTb8r8uukzGdE7bisDkAulxtHq7JX4iKQ8YL3sWYM4
-Message-ID: <CAFLszTjK8sYQwzEuKghSq47ktssMVSEnD6Gifsfe3BUNkV4zLg@mail.gmail.com>
-Subject: Re: [PATCH 3/7] pxe_utils: extract per-entry key parsing into
- parse_label_keys()
-To: alchark@flipper.net
+Date: Thu, 18 Jun 2026 16:12:39 +0100
+X-Gm-Features: AVVi8CeO6yqcGN-d6z9KsUql9RVEX4adG50xSOfIkpTOPeWA4YPj8KwSMIX37qs
+Message-ID: <CAFLszTifNxVOm=_1n+vUmRaHzA+bDR8ZwmNCU6+x6sQdVmwU2w@mail.gmail.com>
+Subject: Re: [PATCH 5/6] spl: fit: use CONFIG_IS_ENABLED whenever possible
+To: francesco@valla.it
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ David Lechner <dlechner@baylibre.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Walle <mwalle@kernel.org>, 
+ Anshul Dalal <anshuld@ti.com>, Marek Vasut <marek.vasut@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,48 +115,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
-
-On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wrote:
-> pxe_utils: extract per-entry key parsing into parse_label_keys()
+On 2026-06-04T20:41:35, Francesco Valla <francesco@valla.it> wrote:
+> spl: fit: use CONFIG_IS_ENABLED whenever possible
 >
-> Split the body of parse_label() into a standalone parse_label_keys()
-> helper that walks key/value lines and populates a pre-existing
-> struct pxe_label. parse_label() becomes a thin wrapper that creates
-> the label, reads its name, attaches it to the menu, and delegates.
+> Replace #ifdef directives with the CONFIG_IS_ENABLED() for better
+> coverage and cleaner code. In the mean time, convert the last
+> IS_ENABLED() to CONFIG_IS_ENABLED().
 >
-> This is a pure refactor: the new helper contains the original loop
-> verbatim, with the local variable declarations moved to its scope.
-> No call sites or behaviour change.
+> Signed-off-by: Francesco Valla <francesco@valla.it>
 >
-> A subsequent change will export this helper so callers parsing
-> formats that lack a 'label' header (notably Boot Loader Specification
-> type #2 entries) can populate a label directly from a file body
-> without duplicating the parser.
->
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->
-> boot/pxe_utils.c | 58 ++++++++++++++++++++++++++++++++++++--------------------
->  1 file changed, 37 insertions(+), 21 deletions(-)
+> common/spl/spl_fit.c | 17 +++++++----------
+>  1 file changed, 7 insertions(+), 10 deletions(-)
 
-> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> A subsequent change will export this helper so callers parsing
-> formats that lack a 'label' header (notably Boot Loader Specification
-> type #2 entries) can populate a label directly from a file body
-> without duplicating the parser.
-
-This should be type #1, not type #2, right? The cover letter and patch
-7 both make clear that BLS type #2 are EFI binaries (out of scope),
-and the new bootmeth parses BLS type #1 .conf entry files.
-
-> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> @@ -1288,34 +1288,20 @@ static int parse_label_kernel(char **c, struct pxe_label *label)
-> +static int parse_label_keys(char **c, struct pxe_menu *cfg,
-> +                         struct pxe_label *label)
-
-Please can you add a kernel-doc style comment, since patch 4 promotes
-this to a public symbol. The file uses /** ... */ for the exported
-helpers added in patch 2.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
