@@ -4,113 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81266CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42323CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:09:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F098A847C3;
-	Thu, 18 Jun 2026 15:05:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97429847C3;
+	Thu, 18 Jun 2026 15:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LTMLhTmE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jTPHxRCf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCF8F84874; Thu, 18 Jun 2026 15:05:57 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C13918460E; Thu, 18 Jun 2026 15:09:31 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3F538460E
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:05:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBED28499C
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bec4639953dso145483866b.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 06:05:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781787955; cv=none;
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-695f5ae95e1so878544a12.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 06:09:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781788169; cv=none;
  d=google.com; s=arc-20240605;
- b=BfIaeGOiARKDQRgdM7koQFIVf2pWR5bhCYPRY9caOgQaxF1NpOwqlQv7y+mdL1BgV0
- v4jYgU/n5EhDGkXiW1rdztg0g4FYTcNJkh+ELhwLq3M3CYO8EzNs2YLrDCRjkvrVEiUt
- zn4+n1qfZCHgX2KmgamTIFFvFYrMqHTlbe/+h4TKR4vVcyHCC2cKvb/ONEUO2kUZJNOI
- DcRf1kyxrYpT9EdwdW19i9nv3rzUD+JX8ZJgqcZvrS/rY4pTpZGC4nV/Kc/V3bUZkBGG
- YC3py4SQHk5Q15X2g6JSe9Y6k0oGpTv24AASPrENA91SswoTsMwvyIN76wkIV2wU23ff
- 62Rw==
+ b=IK7Pdon3zYAz/3Ifo6eZnCnprMmTrQUZhalqhpHIrUMGIZSF42awBD/48X9mswxcaV
+ HgaWaw8hqEpOJb5vPkn547Ne2YkBI8DR9AwIc0Qcro8P7lNzIP00CrSHR9rttwaXS6sF
+ reVQBF1cbdC/XRoF68FtJnp63ZCmD05yuevN4nRtM0Q814tyireJn+mTvqAIF0mTVIa3
+ PWU+iiKKgxK+dQ+Ov4TReBINshaApmV/tDCp2kZXIUbxAPkxotYLvxocclRG9FpDu8HY
+ Tpjctr2PnIFsKwPMfdhV1Yt3jB4sN0wNgXoqqL/ljFDSm8jIsvEJrts8A4hTFjAHyTle
+ zLuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
- fh=aCJ9LYRt3Tx3PJdHtcGy/8qd+yIJTSdchejP/X/BvkQ=;
- b=DdQYjUecNs05PLKmzkgjqTsd0rz6DL8e8g49LhmQgKpI12sEiX15Ome8qyzvF1K8cI
- 7sJxErTflUYsWNihmuPU3SjvwQ95iul7K4YT9tOrkn6NxFnCOGaCTL3rEk6rihiQtx2L
- RPmK9P9f8RqVH/axv7Ezsf8LktDJtuvZ1BE/UafhD8wNCt515Ksp39YSyH8KGoT7sP10
- VIJ7fLw1Qe6AwaP2ztkfrAHc0KrWoPAZM1l/YTwXWFkh0UmLb8dO12aQpHdQcJaHXXqT
- MHJAMxRWrsgHaTMe4pjwaEeIV7RKujY1lH7t0N9DChy/uI7W9/VWAo9vvGyJ4EEX0efD
- vw6w==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=yeXsTXHyzB6MJAjHSvl1Akab/5DUxmC5B5ciCPITkok=;
+ fh=6ILcjaCPxFU0o2uokYJ+boEjPeGZWg073HPUeaVo6z8=;
+ b=BapDt4ScenVoGbE9uwNyjpGuo2HoChht37CTXPZVgxvWjVXMwfCcUFtjM9kPi+Q8BB
+ xib2Q+DOwGHOeGt72xIxE1KxAE8ukJRrgz8pIzGknWDp5vB01uW2ObH8DzOpbntkTmrL
+ u8T3oz0zCn3AtLoQcYCxa/pItaCgrN0YEy0TIAhxQZOR23mKZquCjz5d5fGbQnlMypm2
+ XAPZuYT83uSYX+/rEyidSGfjPYsgRBT/RdPmh1AwTigoz1cYYD8C/Hk5sZrPhoHPt8wn
+ NUodjxZgJUaXLH7t3bdBmauSW/MzrUKMgcBB9yr2W1Oc1yvagf8AMFZK9SVPPfAmZcrv
+ YMJA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781787955; x=1782392755; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
- b=LTMLhTmEGZGlweBe9LD5aj82YWgbOU6NB4NaqyYcRok8ZrIU77muyKH0++YuxXpNry
- lWrQUGPVcR/WyHlh4ucjvxKick3Mhf++Wo9rIvWIZKCFQRPy2xb+6Valkvg93SVPh9hW
- HClNN7QzBIUrwSEUiEYwBL5lcxMsWlbnvbhdo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781787955; x=1782392755;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1781788169; x=1782392969; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
- b=K1SUEaq3ZQx4CT2cApDJ2Jc0zvvdo8lCKMKdIHYr7EmeFjj8kKtRHroj+S0aDn/8CU
- TZMq77pNy636M9iOkv2INH/3knRzFa/vl6zlC5MHNnKfU/ZqCcXv+C4alPhmzxSHgOkB
- Lt6zIa7Y6Th+ykrNaqZjP738d2RqA12Gmm+xsZTaH2eesAGvhdAlGp/Xg5ab3e/gve0B
- ppfol1rthS8uBwoXVVN1FREwB39f/MwsAyF72uFy6k2MHpiQ69V80vvUa/V8Tc56/+hX
- 2k1kpVfS2UbRw64I04U/5ne7FNKZWU7jsjG9auP+qbrqpXxJXQkjuMjq9ujINOIDrZll
- 2GUw==
+ bh=yeXsTXHyzB6MJAjHSvl1Akab/5DUxmC5B5ciCPITkok=;
+ b=jTPHxRCfSkkuuIBkw1flvusiG04xj7P7V1DS0ExM+5UPaxienYZTY+a9XVWDbTBqXK
+ IbN88lq9eTDXkN1UfdSeUAq2MJ9o3MmbkKa2V8rfpflYs81cTi3KRcZfk+RNm/qtishQ
+ 4MQ1MW/na0lxRRyueL1lCHokn+52Y33I934G0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781788169; x=1782392969;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=yeXsTXHyzB6MJAjHSvl1Akab/5DUxmC5B5ciCPITkok=;
+ b=FU9gCjF7Bm+eieqjojKgexs/mXFyuiBO/2+x7Aq+GmBdXf6R7XzBDPCkEVunokxpdo
+ koRSzwyf4gh2XSUG4jnonzuNUjSAIN85FJa52MHBd4d5SbT0EOeeKWTtZ7oEepZ0QulV
+ hGT9SI3FfDXf5FUDAZWDcHCyYQf835TtPjrhOHS8K1UPiM7Eo7/0vE1yQaZlpT3p7S12
+ 19gz1IJlkQ/6ONlOukHH2CmA7isyPcK8sE8p8m2kHOE1jWs9qd6Xuy1FMyVWry8qKTZO
+ D0ym1EE251kk3C1JOMKiAihVnK/xMBxA8DdUV/KnDgzI9cInkz4KZvB3Uh4ix5AXBTwK
+ Af/Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/MgSVVebsAs67VARI5+DodwpMkR5xRMpYL7ll5eTG45rXSXAkp0fWiBXrIgptIASanuBJzddA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxf0Xv4xpglYuRyYabkT3a36V5WLYz/YXaBwbPIPDgdFj082zHv
- WqzR1WKhQiGJWiz09IWFbpnqWPgA+S2oyp8XnKEGpYEtCNDP3s27ugdVaPD0Zg9fR4JrdCd+yBD
- 4Uw5a7dbrFszH/D0Je/lNpzG+UnDu85ucJ1a8cRa/
-X-Gm-Gg: AfdE7cnAa/T5mSvUS4PV8HZDH/5Vks8EpgO3+c1vfKZHs8UR56Oinc1Vzoyruj641Oh
- ggniFahvu6ArgoazOC1xRw1TtLg4vBOi6piFKrEp20pmWAmvE79Dx/UK5c/KdlH4rnpvotBg0bf
- mF9dBwP+CGzRNw3Uu7TbCmk2sZGvA0Yzejx5aC8AiaLwBBhiJrkPMfqLBiGexg8k0NRNkD5eAWu
- uy4wPgiN0LgUBIAeiAzDaDqXYbJBveuzfp8xQ82sgnDqCtF+Pn0DuHGGCOoegIGsgZD8AzC9A==
-X-Received: by 2002:a17:907:801:b0:c07:e025:154d with SMTP id
- a640c23a62f3a-c07e02527aemr98377466b.52.1781787954999; Thu, 18 Jun 2026
- 06:05:54 -0700 (PDT)
+ AFNElJ9FzMqk4vMp83MmEIIWBbIGpaOek1wPOXQPTpavK5EpwHKBDibv1PXU8O1saa6DXUVRR3Ih7Co=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxn/3wbTkVxTxS7Y4y9XVMCiM8eOVu50Prg8UkrfFztxJMFr2xm
+ Y835BoFUC/diCI1WTSD4GKlGVylXRwtykZ4mLG89zn0zfJGNwqmeuG8I8mvOm7lO95t94gpevH3
+ lNwXXmpdwepTsSQd9k5Pj6TwPKQU5ZXZlHKvyr4jD
+X-Gm-Gg: AfdE7clztgvLVVVTlpK7VnYM8b9dUtlfpD5XuN9rusDIiZ0FUh98nY8amMRTks82tFO
+ TjgGax23NophzcJMcCKwR8BaQyBnAcq1cgHZwdbqwcqN3YDmljKvLvQ75VXcv6Qzp9UOR1Ampkj
+ LS5zQlpAvakjzVRB0yEeRg1xJ5tFVtLuWON5+26FJSn095Sr4BgS/mtXlBcUvSB6x5EsUfc1s9f
+ FK6Z/5aFWYZQAvR1QlplL0KfV3M7zNrtROEx4sv7NaHGmQ5SNrR92gQiIyDftiMavenjT4mtQ==
+X-Received: by 2002:a05:6402:280e:b0:687:3580:fc26 with SMTP id
+ 4fb4d7f45d1cf-695476e2faemr4746802a12.13.1781788169365; Thu, 18 Jun 2026
+ 06:09:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260610-ip_defrag-v2-0-060f6eeaeaa1@nokia.com>
- <20260610-ip_defrag-v2-2-060f6eeaeaa1@nokia.com>
- <CAFLszTiiBtrthYHEAeppEqUoksW3fv7j9UNmztPOVd0MVCV8Mw@mail.gmail.com>
- <dfa39230-ac45-44bd-a2f3-4baf840d34fe@nokia.com>
-In-Reply-To: <dfa39230-ac45-44bd-a2f3-4baf840d34fe@nokia.com>
+References: <20260601134310.2452454-1-philippe.reynes@softathome.com>
+ <20260601134310.2452454-7-philippe.reynes@softathome.com>
+ <CAFLszTjx=CJxjp-ji+n2MF2znfeN5zPQhTO1TnBhLE3J_WMRpw@mail.gmail.com>
+ <01441137-deb3-4322-b5b3-b27ebc63f351@softathome.com>
+In-Reply-To: <01441137-deb3-4322-b5b3-b27ebc63f351@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 14:05:42 +0100
-X-Gm-Features: AVVi8CdqvD7k52VCJp8IiGXTDhHQCDPOHWxPLNkd04qCJv2B-7tfbbO70mw7kKY
-Message-ID: <CAFLszTjLeaohZWKR7u0OGh8kVXWiv9JJ8yNJ7+TxqV4MA_XuDg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] test: net: add IP defragmentation
- duplicate-fragment regression test
-To: "Mateusz Furdyna (Nokia)" <mateusz.furdyna@nokia.com>
-Cc: Ben Warren <biggerbadderben@gmail.com>,
- Alessandro Rubini <rubini-list@gnudd.com>, 
- u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
- Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Mariusz Madej <mariusz.madej@nokia.com>, 
- Mikko Heinonen <mikko.heinonen@nokia.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Alessandro Rubini <rubini@gnudd.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>
+Date: Thu, 18 Jun 2026 14:09:13 +0100
+X-Gm-Features: AVVi8CccSN2hp6U9rsI3pkFBG8-CWh0_D3Xsa0puqcKpyekRCtIK7lPAjYUJ0T4
+Message-ID: <CAFLszTgct63tEGccK=W=rXK31dNcC=50upi-X0uVsDCHvs14-A@mail.gmail.com>
+Subject: Re: [PATCH v8 06/15] test: dm: ecdsa.c: clean this test as software
+ ecdsa is now implemented
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
+ trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,52 +115,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mateusz,
+Hi Philippe,
 
-On Wed, 17 Jun 2026 at 16:19, Mateusz Furdyna (Nokia)
-<mateusz.furdyna@nokia.com> wrote:
+On Thu, 18 Jun 2026 at 12:02, Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
 >
+> Hi Simon,
 >
->
-> On 14/06/2026 14:16, Simon Glass wrote:
-> > Hi Mateusz,
+> Le 12/06/2026 =C3=A0 20:32, Simon Glass a =C3=A9crit :
+> > This Mail comes from Outside of SoftAtHome: Do not answer, click links =
+or open attachments unless you recognize the sender and know the content is=
+ safe.
 > >
-> > On 2026-06-10T14:25:33, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
-> >> test: net: add IP defragmentation duplicate-fragment regression test
-> >>
-> >> Add a unit test for the IP datagram reassembler (CONFIG_IP_DEFRAG) that
-> >> covers the duplicate-last-fragment scenario.
-> >>
-> >> Without the fix the last fragment will re-trigger datagram delivery,
-> >> increasing udp_rx_count to 2 and effectively failing the test; with it
-> >> applied the test passes with udp_rx_count == 1.
-> >>
-> >> Signed-off-by: Mateusz Furdyna <mateusz.furdyna@nokia.com>
-> >>
-> >> test/dm/Makefile     |  1 +
-> >>   test/dm/net_defrag.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++++++++
-> >>   2 files changed, 83 insertions(+)
+> > Hi Philippe,
 > >
+> > On 2026-06-01T13:42:58, Philippe Reynes <philippe.reynes@softathome.com=
+> wrote:
+> >> test: dm: ecdsa.c: clean this test as software ecdsa is now implemente=
+d
+> >>
+> >> The test ecdsa was done when ecdsa was only supported by hardware.
+> >> So it wasn't possible to test ecdsa on sandbox, and there is a test
+> >> to check that ecdsa is not supported on sandbox.
+> >> Now, there is a software implementation of ecdsa. So we add a test
+> >> to verify that ecdsa_verify may be used on sandbox.
+> >>
+> >> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> >> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+> >>
+> >> test/dm/ecdsa.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++=
+++------
+> >>   1 file changed, 97 insertions(+), 10 deletions(-)
 > > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> >> diff --git a/test/dm/net_defrag.c b/test/dm/net_defrag.c
-> >> @@ -0,0 +1,82 @@
-> >> +DM_TEST(dm_test_net_ip_defrag_dup_last, 0);
-> >
-> > Just to check, does this test actually use driver model?
-> No, it doesn't. It drives net_process_received_packet() directly,
-> nothing is actually using DM in the test path.
+> > with nits below
 >
-> I'd followed the existing precedent in test/dm/eth.c
-> (dm_test_string_to_ip6(), which similarly doesn't exercise DM), which is
-> what prompted my earlier question about whether "ut dm" was the right
-> home for this (and stopped me for looking further, my bad).
->
-> I'm happy to move it to the lib suite, for instance. Since Jerome has
-> already queued this v2 for net/master: should I create v3, a follow-up
-> on top of what's queued or just leave it as-is in DM?
+> Thanks a lot for this feedback.
+> Do you prefer that I send a v9 or is this v8 acceptable please ?
 
-Since it works, this is fine. We can always adjust it later if problems come up.
+Yes v8 is fine, these are just nits in case you do re-issue for some
+other reason.
 
 Regards,
 Simon
