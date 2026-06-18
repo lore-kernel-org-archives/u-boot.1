@@ -4,92 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F08CD98E4
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 01:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499F0CD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 01:14:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9005E8495C;
-	Thu, 18 Jun 2026 03:08:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 85A7884908;
+	Thu, 18 Jun 2026 03:14:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dwLL0SnF";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="v48Sd5jj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2563F846B0; Thu, 18 Jun 2026 03:08:25 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6A3E08495C; Thu, 18 Jun 2026 03:14:50 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0492584874
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 03:08:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A964847C3
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 03:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e71198e0adso140292a34.2
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 18:08:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781744902; x=1782349702; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3szZWhUUe8Nxe5T8tQo4ECvdS2hWtVriKrbK6L6nvMs=;
- b=dwLL0SnFgfCgEu7yPW9Wq8sWZJT8x+2HBi660C8oI+x5dErH8o4B6uqz6KpHT5knpP
- NOnUC3tqmTqWwcSc1IIpWS1K8Ao/3TsHrMfKxLGjofkODe204A1kq+h9KuXNngmrthxa
- msTKNtFXugOsoUbNHlFuTNMy7drScKT2psNxc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781744902; x=1782349702;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3szZWhUUe8Nxe5T8tQo4ECvdS2hWtVriKrbK6L6nvMs=;
- b=oazB+kNY28hDCfjrdzgD4yHtr5U72KjsTAL89kl5cyDUo6mFSObVQ1cfpdzcSDIU07
- mGFt7SeMBkYJKNOCTJRJJ7/K4CEoDw+jQY30qfdpjrlz/4aFQABaCRouOoW0icCH/0uq
- JEV0RJ8mWru6GnP8te8zZmpfnJCqizMjMBFTIDpPRjB0dfv8g/LXCCNqaeFzDIPp32ea
- kykfxcw1d5da0rpqMWd8CH0ODgXN/eBdDEV7wbPJvluXoTuSKr4+ZiM8ssbJXopn0AUf
- vHnzVr2geCSeIs0yj4YceoGy8PgbnPjPN1Ru06W8Nn1DijmroeJZZEHrbD2f840KbxHZ
- Q+gQ==
-X-Gm-Message-State: AOJu0Yzs5qzGrJrfZLkwAON0jMI0K4dt/zXn6AV9AFg7vBu25SUDGSwx
- xRfyj7qPqoFo34M5LDANEAwOnBSXKH4H7UvccORJ9uluqpieqJ/O3tEQKlFmBswgM0R2IBq3n9p
- LDbtJcBk=
-X-Gm-Gg: Acq92OHIWCjPsI3CWCDyU9OiyHaNGmByydDlIz3f0r9iZYFNzmPlzpLLreAeIMpCz0L
- iQphlqPP7Q8FTGxQrTlQLQs79wqL9vwyNX5RM9ikAJdODGOZGSDc3GBWMNsx/meSP98i1r0KrSs
- J+h5VAoaP4+1MlnMlPj3MCHfLt/MG6jXP0//fZR7JWkIdqBNRKfHnlQ5DBRkkj+ucC6vwCZf1wp
- vZhkM/eINA5xXXPEoT8rdpqbV3q8X0l+bVMdN2pZZmTxTPFWENpMGBYJQgo0NStnVqvv+tnhBiR
- Jo7eMYJ5PG7Tc53jYard32vUjPjEEuGZd4222LXcTpFck6fpY658AsKFSM9b+XuqeLCnPIA9vDS
- 1BAAJl1q8HNP2+WC99UQACI9pQPEq7rarnw536Nthu5K4szTdEdrJL9O7xwPyR8bGNEnixz7m5j
- +AGNEa1h2+v0P2DujtNzsXtt2NqYwVHFVVfzv1npXCjmQc5/P93mH1O1Gjoopse/QN9UPNLYWA9
- QT5TT3X7YMhCsIw5aNXbpfA/N3R1ApLo/era+k=
-X-Received: by 2002:a05:6830:2405:b0:7e6:c9eb:535a with SMTP id
- 46e09a7af769-7e90c65fd58mr4637745a34.6.1781744901653; 
- Wed, 17 Jun 2026 18:08:21 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
- [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e79f6f9f48sm10464553a34.25.2026.06.17.18.08.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 18:08:21 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Francesco Valla <francesco@valla.it>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- James Hilliard <james.hilliard1@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- David Lechner <dlechner@baylibre.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Walle <mwalle@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
- Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
-References: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
-Subject: Re: [PATCH 0/6] Fixes, cleanup and a test for the SPL FIT "full"
- loader
-Message-Id: <178174490013.2512035.15332419793966760116.b4-ty@konsulko.com>
-Date: Wed, 17 Jun 2026 19:08:20 -0600
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jVohQyx5YfjBIFmo8FjJ9YmEt2qRBGuO2Z7pAXTSaPFFAvLfjqL50+uUyPZknfC85iFMGHwo8E9ZhpACgBucRnywrNGm6IvuDj4G4IfweSqcM4ttHywVCRJ+lm0OwlsIYL9d18aTXKE6CblyRev+buSCbLa1q61OTenqXMFvDydCPCEan4gDEWg6XbYzTz1TizixCKP8d0bVtCWyaUGTyCgA/FsvxdvE42i0kJiC4m4XkFIvtliI/VP1YEOUZraYNaSYAgTRnmoE213iZfwNRCPAyFtUC6V59HxXxWmB6wUlWUTTA9RdlnvIHKnsMdz+spTgN7kJw8Ihg0FNAE8J6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WNGQyVpvvk7C2rquJK3j8M+kDWqHu+RbS8iLEepg/eM=;
+ b=ceWDRHe7glwEqwTD33iAfuVNviqT7y9/RcyZpVoJBcfoyB2qlG5PV+XYBSIOpn8DeT3xtn5mhDORu6W4r/BW/iCA2M0kWAp5OylGfLbULOjhLZe0kdS9Ejg1Cj4ttwSGKkEYWDMpgcUhczcK3z+t5ZiziA99/zeN2/alWTj+6Arvjg4F9MXxABH87QwxkVYImlG26S3pRAgTlhkYwRQ5Vs4rrXzNY5/sMihGG5OmdgOHxgCoYyyvYacOwz2uR/iTmWP71hoUD0COobGAv4NkogM9lDTLoGQ7qHCxi1e33a7WpjrAK3cYUcLYIkhTdh3dsp4Z+haZBHxI2neN39OqcA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WNGQyVpvvk7C2rquJK3j8M+kDWqHu+RbS8iLEepg/eM=;
+ b=v48Sd5jjVknK0/rEF/G7bcWE6ROe6Jtzomc+UmOawk2Q2Grtzfpi3R433Z6c7OOU1SSrxz5e3Rw79dJFl8fbzGjUUrAN69gVvHlX+x7s5j9an5/o2RDRuHb/aZaAZE5wKpR25f6P+Ravw4WdUtAbc8pMFjK/zuhZaZ3VCSC+3tssSJqAEgGIo0QGhWHByRpGFiLIHZnCbSpwQSmwJBlO1KVXcSOsYOZkbW7nrY5u+eN5fXkhS+RirbHsewHO0sCq7rmiNVU4hVx9Y++DK3nSOs+cFGhz9UT0LxfFoPwy6mj+0JOOAX1VUyy3D5gV4pY0989Xf5ZHJQ6/0lkFmcH7Bg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM0PR04MB5121.eurprd04.prod.outlook.com (2603:10a6:208:c1::16)
+ by PAXPR04MB8174.eurprd04.prod.outlook.com (2603:10a6:102:1c4::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Thu, 18 Jun
+ 2026 01:14:45 +0000
+Received: from AM0PR04MB5121.eurprd04.prod.outlook.com
+ ([fe80::da59:a278:1b1a:4592]) by AM0PR04MB5121.eurprd04.prod.outlook.com
+ ([fe80::da59:a278:1b1a:4592%7]) with mapi id 15.21.0139.009; Thu, 18 Jun 2026
+ 01:14:45 +0000
+From: ye.li@oss.nxp.com
+To: festevam@gmail.com,
+	u-boot@lists.denx.de
+Cc: peng.fan@nxp.com,
+	uboot-imx@nxp.com,
+	alice.guo@nxp.com,
+	ye.li@nxp.com
+Subject: [PATCH 1/3] imx9: scmi: Fix SPL trampoline buffer for 1GB DDR
+Date: Thu, 18 Jun 2026 09:17:47 +0800
+Message-Id: <20260618011749.2871269-1-ye.li@oss.nxp.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR06CA0008.apcprd06.prod.outlook.com
+ (2603:1096:4:186::23) To AM0PR04MB5121.eurprd04.prod.outlook.com
+ (2603:10a6:208:c1::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0PR04MB5121:EE_|PAXPR04MB8174:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75bf2fa3-e109-4ef8-e5aa-08deccd6fb6c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|19092799006|23010399003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: gEz4p4Gwfk05hGIvcGKpB06hCSeP0P0lQB3J9TUQmjeZkFLTiJUhpfs+lyFJp21EyhFhL+Bm7gAcrpAXed/XjQ0JWzvNfLVdMQnluLrgBuwgxi6qf+zdfMks7AIDcG3sYNwjHVxi2KPRhBNoCFOYwwnrf8gNFfEO2isWUFmPa29DktBhN2XWK6VdRQ95zf5KYJDhtIRT9YUhb0lLJVJthlop0s18+wLsSC3Hjkl0CLXg/+Ib3KAE3jieb/NwqPEn3fLLU0QzFZzxy0xa8VYFt8ac9wtzYgqG6tYBc9IiXNQemSo/wrx/W5PdEw40Vfsrbw0uWQCTzR61Wz3+FEbn41mCbhOdwLLLv2uEGYha4dw2C+p0vQsRgaFo5rwQMdFW4HAD01OIDwq8Ev09B6IHGN32G3Miba2o2q25XIEuo2deasaK0H1OY0SAG9MoDTumj8bmJxIpNUXj7bpO1vmg8FrxC6eJZjwge4K8NVnhIhro6gAbEUDuoguBtKZSpSccZ0LjhKNuoSziOOn+dP2Pgo7VyLHwD+OCn+pvFy/Xo9LdP1eYyZA7esEO/pGtZjMUPkUS3rR+z8ZdjBiSi4KWBGRWAc+gCEi8/OCkUdrXViAZ7kuXst+BYlSnqSYXP9uCA68l+RMql8zOlsd7yHlMlrRJyoS/J4f2zheeVIidi9RlygzdMC9wDT+4a+heYwOt
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM0PR04MB5121.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(19092799006)(23010399003)(18002099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cBTN/URqbittVSYvPHXSjxry7ycY76U6sQunl76O9Kqm4+TOKXj1m/WcSvyy?=
+ =?us-ascii?Q?TXbDx/3cpSYumpv3IxUWi9D8V8EdRgYVopQFsM8JBKLYex5tN0aK4Of8JQJO?=
+ =?us-ascii?Q?KFnxizPdHNL+leCQBrV9DUeoLpb/GEol+NfmOHD/xZbkXnvWo/USkdufsU2i?=
+ =?us-ascii?Q?LmO24Q92GOOl3nqj2DQMIvl830IkQ/QKGFs18+cTaA4E27tqaQQ0PFxp7val?=
+ =?us-ascii?Q?QFLGYc//zTxRiJE5VkqLx5aPT8J1Y63GAhyixHaEratHVm2/8vipzbnkBXTH?=
+ =?us-ascii?Q?sZTCf6w9R/5aQjVGXp9i7AfQoKDIdu8QLlnORbxxji3yEgbwSPZSpJ+0PZcW?=
+ =?us-ascii?Q?I4IxLOkgRfoXEJLN+VWxdrtIS05GCyEifI4Qj1KbIxHkiKNpTKR+MUQNE7t+?=
+ =?us-ascii?Q?FvpMty2yamKMHwolmQdr8lKZmbBQRKoltxgEd87sURLGwEY5zJ5Xyt7GdyQU?=
+ =?us-ascii?Q?RXZT4mWO2PByZL8Ous1QrMfkwYAFwssinvx6Oy9CiBGHmleXiB3Snjf211tF?=
+ =?us-ascii?Q?LAUuhu124DxQhNc8SAqFRgp9n9AafcZVHByz3i3cypnp/MCwfaZS2ixAGH1A?=
+ =?us-ascii?Q?xzrKkTOXIW1iOhzsGiVwn7vB2uMBXYVB4x/3K8sOjKTg1ELqCLwLPfeMl34X?=
+ =?us-ascii?Q?a5CzBYVZfzQLkUAuhTrDKONEiLmUAQxU6Uwd5liIzknfZwokYrA3nBeixGPB?=
+ =?us-ascii?Q?zmF+KJYh9K25QUdgT7zPYz6ODe1eAoy3b4yJieJsyQ1hx4tWOlLady0dHP1Z?=
+ =?us-ascii?Q?k03XCcz/epVRcoxjXDF0jVwE00xilukiypRlHIXcbqM0V2m10XV5wbqpyoH8?=
+ =?us-ascii?Q?+pj37uuP0AAPKUXHe2WBKJ71tDNDbSbuPmPMK8fXP3WqBPsyPVh9DPN1y8BY?=
+ =?us-ascii?Q?tuiUx5X2LT3p0AKMC9DZgLtL53BhOc6ldjLqbnfipX+3Jsbn8V8QaihJPjEB?=
+ =?us-ascii?Q?P4+uClpr+NHuKj7oFlpjsV7eQxaU7YGEI7ZDQmOaGsAcqpuSmADut3fEKCov?=
+ =?us-ascii?Q?UFEMVwuM8CySwMqUlGr7j5alhvI0GOb1OrB0PKXyOMnP94IJluTa70gaVTvm?=
+ =?us-ascii?Q?W8msaUrKk3zI3IYtmIaKxOVtvboIVDcIz1Ee9PNjZYsNZ1aQ/2jhVFKPf7I0?=
+ =?us-ascii?Q?ibsXgx0xHQzK74hCiUKVYinl1EsetpRa6t1IpIzw6ZDv0DcXiKB8uPpHlXSB?=
+ =?us-ascii?Q?6/a8jpL1yH1sybJ9J1gNORhvcyb30NwoMvS+6OsAOT0c36u56kZx9fNvaw+H?=
+ =?us-ascii?Q?lyd1tJqEkFXr76UnsDKR5y7NFwZJYP5ybHE2BXJvPwN9dlYC95g1FbXEOaK3?=
+ =?us-ascii?Q?IV+gv9QK/MIrKK44h9Yr3zWayVtUjQr6fK+ld/YZOxakAlx5aViruilZ99TO?=
+ =?us-ascii?Q?rnh5Tk1DjdB4HmEcaVhWi0BXOl/qtmFYh3MaUsep0A6p0p7EPDjrYjI2L2F2?=
+ =?us-ascii?Q?9TsfBc+dFUZhbzAoHOyb9VZVJFx6TRVx11bpnuDlQjwdKQOPtSynB1E+rErt?=
+ =?us-ascii?Q?FCo/P8U58eOn21KnQUr+F1u/LtFBujac0za0aPIrokvUepFB/61dgtYSYu5t?=
+ =?us-ascii?Q?6y7H1Dn8BAosRHnhnH9lslstinIMAOGPj/8ovTzmTi1kYJxScurikWn4IlIx?=
+ =?us-ascii?Q?/F7DQ/t5KruMdDOO3kQKbDUrVoRX6m4nkDUULYRNof29kXq+ToUaSeiyG7h+?=
+ =?us-ascii?Q?XDWg8R6cjzCQIzxRoqbyiAcAnj0wRAwi0tLM2wKlUnGEA2QDH04QcrCu4mqm?=
+ =?us-ascii?Q?YXqXLDy6ZUuhkie160AJXhrl4d7I9N4=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75bf2fa3-e109-4ef8-e5aa-08deccd6fb6c
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5121.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 01:14:45.0499 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lJ5n4sXEWpnlYi1xQhF6sHzMer9xn0fcXVRNJISFD/JH8Ms2sKgGop7gI1Ux9OCcxe6E0/Dju69UNNttZXZ1TGeKY251I927jNvgWRC2FeU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8174
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,34 +139,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 04 Jun 2026 22:41:34 +0200, Francesco Valla wrote:
+From: Ye Li <ye.li@nxp.com>
 
-> this patch set contains a collection of small fixes and cleanups for the
-> "full" FIT loader that can be used for the SPL. The main beneficiary is
-> the falcon boot flow, but the same loader can be used also for U-Boot
-> proper.
-> 
-> Patch 1 was part of another set [1], but I decided to put it here for a
-> better separation between plumbing (here) and new features (there).
-> I kept the Reviewed-by tag collected from Simon in that occasion.
-> 
-> [...]
+After supporting get DRAM size from SM, the trampoline buffer address
+still depends on PHYS_SDRAM_SIZE. If the real DDR size is less than
+PHYS_SDRAM_SIZE, the trampoline buffer address is invalid and SPL will
+crash. So use board_phys_sdram_size to get real DDR size to calculate
+correct address.
 
-Applied to u-boot/next, thanks!
+Fixes: e1cc7117b630 ("imx9: scmi: Get DDR size through SM SCMI API")
+Signed-off-by: Ye Li <ye.li@nxp.com>
+---
+ arch/arm/mach-imx/imx9/scmi/soc.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-[1/6] boot: fit: fix FIT verification in SPL
-      commit: e50ee1acd4a519cb0320d7227581b7a7841e8a47
-[2/6] spl: fit: fix loadables load under sandbox
-      commit: 2a70a7e2252ecf01057592bb163a11cd337bcc95
-[3/6] spl: fit: rework the FDT load hack
-      commit: fffbb6f428ff81236d6092bec0d161904ca50335
-[4/6] spl: fit: drop the 'standalone' load attempt
-      commit: cd9c7bc3b4d2bac01c9dbe39171acedf281506cb
-[5/6] spl: fit: use CONFIG_IS_ENABLED whenever possible
-      commit: 99b9223948a4361daff09bc973c2d283e48d8bd6
-[6/6] test: spl: add unit test for the "full" FIT loader
-      commit: e41a770f3800f9c0d2f74fedc04eea09a29a3776
+diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+index 00b8693fbe0..ce86cdf8574 100644
+--- a/arch/arm/mach-imx/imx9/scmi/soc.c
++++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+@@ -1177,10 +1177,11 @@ enum boot_device get_boot_device(void)
+ 
+ bool arch_check_dst_in_secure(void *start, ulong size)
+ {
+-	ulong ns_end = CFG_SYS_SDRAM_BASE + PHYS_SDRAM_SIZE;
+-#ifdef PHYS_SDRAM_2_SIZE
+-	ns_end += PHYS_SDRAM_2_SIZE;
+-#endif
++	ulong ns_end;
++	phys_size_t dram_size;
++
++	board_phys_sdram_size(&dram_size);
++	ns_end = CFG_SYS_SDRAM_BASE + dram_size;
+ 
+ 	if ((ulong)start < CFG_SYS_SDRAM_BASE || (ulong)start + size > ns_end)
+ 		return true;
+@@ -1190,5 +1191,10 @@ bool arch_check_dst_in_secure(void *start, ulong size)
+ 
+ void *arch_get_container_trampoline(void)
+ {
+-	return (void *)((ulong)CFG_SYS_SDRAM_BASE + PHYS_SDRAM_SIZE - SZ_16M);
++	phys_size_t size;
++
++	board_phys_sdram_size(&size);
++	size = (size > PHYS_SDRAM_SIZE) ? PHYS_SDRAM_SIZE : size;
++
++	return (void *)((ulong)CFG_SYS_SDRAM_BASE + size - SZ_16M);
+ }
 -- 
-Tom
-
+2.34.1
 
