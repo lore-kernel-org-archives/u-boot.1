@@ -4,89 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F21BDCD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 12:01:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA485CD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 12:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6DC84874;
-	Thu, 18 Jun 2026 14:01:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C78828460E;
+	Thu, 18 Jun 2026 14:45:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFzLqTkR";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LkXHBm6y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2DA8849A4; Thu, 18 Jun 2026 14:01:00 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3837784874; Thu, 18 Jun 2026 12:05:16 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 111EB8056B
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 14:00:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4885A8460E
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 12:05:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c0840dc2859so12495666b.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 05:00:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781784058; x=1782388858; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Hr18yYg4tEmCyMZ1dTiXRDzUpaPT11n6f4HnHpvLcEw=;
- b=uFzLqTkRYxkbpnalVEU4l6HKrPlr8XgA9QFvaVI5Q6EjVuid5myekAEZGyQgsBNZRI
- 8tRDD5NQpnOpUY5VVuWtERVHCIbF/0NmDpjDd2rL9F/mX0E78rWjbkgzCKKsPRXb7qBi
- E/tg37VzAtTMJeQ83UgJTU7E0BHV0x9FX7u0fhzXaPFiJPbbvC0VFTMoioKQaorZF4bM
- fN0RPHuDw9V2zGOVSV8z8AzZWeNZKPNGLrlWw95ZKJrzU5NOxJodXCUy7cUPEvHBP5YR
- zoGV5B8tDYIU4J0RZknhzN4vPmTRhPXekN8udQy0zhVV/7vhNBA3ZdQtAY8jmlnXsi09
- iaRg==
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9F0A83F844
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 10:05:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1781777112;
+ bh=6IzVGVl8yhTdpFWExYa+19YTlA+q7bzERrRd6pSxx+U=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=LkXHBm6y/3u3YzC6JNXeJLVNOGxV1w+vxM9qH2UPl8aHdZLOHgl82TxXyvDb1/5dR
+ ZVNJLy3X61OIM3ByRJl+TMkj5TZ4s+/0Qx04heGq2CPjjLrYpak8/EzBxtrQGzPFSO
+ iAb489sUO0xHhfIjVKjxbtiSHX9UMUt1tFkHDsKX1XjUl19F52+/rmcSl5fkkFPT0y
+ MIiM6XHztK+yXDpXeAYs07TIAiiguwx6U12V6/MmsxBxtNnqoxXClMCBDohWAroKAD
+ JP/ihsQxPqj+RHJbTuhCwSxWEigWYTpUSvM3izwl37h69fPjRjn2koV1Gnz6RBjipp
+ Txu/nUs4Lu/gR7Bv4Rv5Y8n6BxRZQ9H6j3UX3+EvXUSRz+re9k0JD2r15UBjgJ0iMD
+ YAFGHb3bFtQpcSqX+UJ4revC6ECFCCqjY1sC7vRwijYclSPMSCDKhCiuIKo+V/fAZr
+ gRT7fCBrZGMVPqDIijtIjNx7uuh4rMme1ACFJfz1K16eq/ZYlJdX94IL0Wgq2Vpcfz
+ 45oNPFgRdEOtk9Gf1iVxksAxnTj1fCEJmhxcvRr5scAE99HUv4SyTCxCIiGO2Nw32z
+ cONbE6gZ21NfXuvHlVKHVd1tf4ePciV+WHtfRoHTjK2HfG5jCnkM47ibUWAL51YshR
+ LQ3C21m+g+ZDtItjRKnuceRQ=
+Received: by mail-ed1-f70.google.com with SMTP id
+ 4fb4d7f45d1cf-695c0775f8aso643636a12.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 03:05:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781777112; cv=none;
+ d=google.com; s=arc-20240605;
+ b=X/6FjbXG4cGm482+IuWWDeFIg4DIxZjFUzIqskkOHyiQ/A7zDhmeFsBuTBFk5IsrFt
+ v8IvBGiYbTjjaErO4+AobBVudOHrYRgPEnBdITFRbHMLpuMGj5pju0tBFM9Rrl1kouR+
+ XyUhMG+gi/mZNlgU5Euo5elORRwFS5MXkbIEvxPwoN550A79V5oihWRVYDJ2LX3AZzD1
+ xdHik6VTsWH/f5A0Tg8qmTBzvhVD0twFUT/MJtBe15C+pjasfpcIKdTzLyuOA8wgzOJb
+ k0mKm7vJXzTyKtlgFgASOcUX3GjsuSS/Rp82DA7J/t+Rk/pCzKRkYq2X82Kq4OqNIkub
+ 9UTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version;
+ bh=6IzVGVl8yhTdpFWExYa+19YTlA+q7bzERrRd6pSxx+U=;
+ fh=WXaNV54bF9Uhi3fQuzHZccizLCM32VQJIM2GDk48r5o=;
+ b=FPHxoSKRpEJKNCvA5N4GcMATQXr+MQAzEIKwHUF0prXfBfDVrk24hH8hDqOYodj30S
+ wbvy7G/xBAIzk+9Z6NndQd4qqumzJrBWYq4ktXYwsuNnFbN0RGGsyFxz6co+CefpkpfQ
+ WvFRAtquWLRzczJ6laSNr2ZB8hvn4FUY2q0IggjarJVBHdleGkfsT7KAbWDSoMfWsc0Q
+ p32ut28inOcMAn38KuHV7KDMZ3oIY62mbEljN9V73thMznnItqA9elg4Jgsoer3+8mle
+ /kT4e3VOc1mdU9QoVh5EIrFWUpd2Xq4M4eZIeqfSZ69fgSuJj7UlegKTJ55Hm3CjfzxP
+ CoLw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781784058; x=1782388858;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Hr18yYg4tEmCyMZ1dTiXRDzUpaPT11n6f4HnHpvLcEw=;
- b=o9dnHPfV8A3I+WMZKkCwwLuvYZtuH+j4UfufC9VasBo3dRmXuMIu6gjkqN0Ebv77A0
- qcDhCuUhwuHyEVzHaTskBP01S2TIs2U06/rgKk1LfuxSV0OTxKMYUc8u79h2CFVtfiM0
- oY0EoBQsctSiCHj1LSk52OtuNpTdic5OeK5m8BTBPwgQZ7LrWcFASB2ZZ/M9mCJeBIMn
- Qxk/3J9JRCnctitMb5tab2MYumFhy7OhdBGWsbStr9GfIZCv8Yh6/ckwdOEVpKUiX1Ep
- AQTBcBbRdQ7csy5i6lKTUzI2JgZMXkQpKdi3hztwk7Zv9TRwW8gWci2v7N3/5b7mKeti
- VqYg==
+ d=1e100.net; s=20251104; t=1781777112; x=1782381912;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6IzVGVl8yhTdpFWExYa+19YTlA+q7bzERrRd6pSxx+U=;
+ b=A/uKJ87F39Hf25QOV7CMp1DT0MNMPzRG1utNwW2wCGHpLL6qfZozmFYkU2mGqt1SQJ
+ gFFf2bvJ8xU0sL4hWucvasANE2RmVbbnQxJ4gSPmKTVB8gdMFTUDgidiEFdW1WKuLbSh
+ gDKkEH/1M1xTDwvmKrKGnq5N5jUfjDrxwBMgpfSoLAtDC5N02eXQzwvHFmDptcpjZvIw
+ 62f/qqlPZcJt5M83SILqLXyV3lga3b1L/qIV8GmgpEoI7GXNIZxkzSxjSOeAlzGzay7C
+ 1y7/vjVP7Q/SHc4D5c9p7DQhPVf+7XyzemMjV7z9ap8nSgeWAzjF+CNEx5qS3S9KUhR7
+ JMsg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/aLeAY5gCXvErrbq79ONrabWGlm+B4u/q+141sdL8jfDhc+BL82FlbbxStNMopkBRUii4ycsQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEf2R0rFPf04qru31UlygU3/Aa/y9FWia6koTcIVVLrCbqTv/0
- /qxWSJMFSPNo/cFd92cw7njp5xWofzKfSKcFb/SLg3j3ZrEveiMYQv0Eo13wUPcfJgs=
-X-Gm-Gg: AfdE7ckc9/Fbdiwig7IYZWAoAAlO8H7/DpEYWfjQGgChDyqZbjYPuHFxKNxhoBk0WiE
- P3VKhixozKSGNbxEqVj0D4G8psUqM3zY8rkD7YesvmJuyySe2fP5+8Iu42ASdzAcHnKABnemNxt
- 31fMRQNqFApV3wWMKy+v3rgu3NU92DMGz5T4Xubhj19Miy54fhFn84lIGaoqO+8drr7zt70eqw3
- wcL2Kh/O+OCYZbCXamdjTLKySPz5ltaudJDtJWQ65gHwjWkq4/AlKYmhFBzYGQAA+i3VzwjA7AF
- Ehu24gM776dR798QuRHZyBHZt8aMj8FSXqqvRwej7lr9t9H87TvKwm5pASQctKx1XXqypvqhUk1
- x3+1gvhhauYG1peThRm9tyaB8vTB4mjVxSdpl0N4cmkvLmz5mmj3tvtNv+fSQwKYs4ia1cTnxig
- geMVIdgHVKgS31QkSXT5aOWbK4FIjV0ljKFgWfVGQkEfQA6uv44DTz
-X-Received: by 2002:a17:906:2090:b0:c05:abc0:dc7c with SMTP id
- a640c23a62f3a-c05abc0dd02mr506401266b.40.1781784056915; 
- Thu, 18 Jun 2026 05:00:56 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bfdb8b1bb64sm967130166b.52.2026.06.18.05.00.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jun 2026 05:00:56 -0700 (PDT)
-Message-ID: <e1fa3df2-ff4f-4c18-bdd6-703d9da850c1@linaro.org>
-Date: Thu, 18 Jun 2026 14:00:54 +0200
+ AFNElJ/KdvYbtHXF20Bo+fGLdEuv5nLkGUk0JRMUcDLjFSVzko/WSKwxMnIHmV6NTWew47A/+bMaois=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRKH+ypTcC42jDTu62/l+cVqLV9KzO/1KEVoQ0hCwRQjgbLcAD
+ PS7uhm3at7mdxtmis0DUbmNcwaMo0hOIeSEm8Ed3ZpvnRwUSDUVMX5BI1UUgwzVExpCFFJsvgxV
+ Lw0XL4fjwB8diLXEZolsagFm5yfzE7y5CN5a5aJfxKawlGHxjpCFEIDpVPxraxaXf82HE8b0bPz
+ mW9eZa+FYBYaDAnnpyjbZ9AY4fdiU3HUbtOGYX2dD5ISGLSl8mK9Kgf/2H
+X-Gm-Gg: AfdE7cl4NLVH4gggOTqAEDzpc6MqtKBA0ur6Jz32UNu4tb/4a9mEoXErjsmv1T6XFQU
+ 8No6t8haGfkdeGz7NIgMtL//At5VBZEAerkGla/UDc3DMAvOaRwApl9kwxibc9KcBsxUQfRJQ2K
+ xCekY1c+VJn2ikJwP9XGFtwlLtaYS+k/u5cdsts07QoKKSm6vNd55MO1qQwGXCzljsXPml
+X-Received: by 2002:a05:6402:2b93:b0:684:32ec:2332 with SMTP id
+ 4fb4d7f45d1cf-695473e5120mr3965945a12.2.1781777112087; 
+ Thu, 18 Jun 2026 03:05:12 -0700 (PDT)
+X-Received: by 2002:a05:6402:2b93:b0:684:32ec:2332 with SMTP id
+ 4fb4d7f45d1cf-695473e5120mr3965930a12.2.1781777111696; Thu, 18 Jun 2026
+ 03:05:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] serial: msm_geni: fix clock rate return type truncation
-Content-Language: en-US
-To: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <6wv2gjh4bkxttxxriqx25k43qkeg2sraknwaffxahcyqxedfm5@uuxaorwsolbm>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <6wv2gjh4bkxttxxriqx25k43qkeg2sraknwaffxahcyqxedfm5@uuxaorwsolbm>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260610090125.99112-1-nora.schiffer@ew.tq-group.com>
+ <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
+ <20260610194840.GH382693@bill-the-cat>
+ <be080a107555cdbad6828af2a36be013ec186477.camel@ew.tq-group.com>
+In-Reply-To: <be080a107555cdbad6828af2a36be013ec186477.camel@ew.tq-group.com>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Thu, 18 Jun 2026 18:04:59 +0800
+X-Gm-Features: AVVi8Cf_ohv_muqzDuNrkbdF8GwbtZ7sSWWbX4cabCIDZrAsceWU3wmaVc3T2s0
+Message-ID: <CAA=k7=na+bmcMj5bw8rZF05eDOV0tfydzpSP_4BbDiEg_LhKjw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] bootm: use CONFIG_SYS_BOOTM_LEN for
+ IH_TYPE_KERNEL_NOLOAD decompression buffer
+To: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot@ew.tq-group.com,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 18 Jun 2026 14:45:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,49 +134,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Nora
 
+On Thu, Jun 18, 2026 at 4:30=E2=80=AFPM Nora Schiffer
+<nora.schiffer@ew.tq-group.com> wrote:
+>
+> On Wed, 2026-06-10 at 13:48 -0600, Tom Rini wrote:
+> > On Wed, Jun 10, 2026 at 11:01:23AM +0200, Nora Schiffer wrote:
+> >
+> > > CONFIG_SYS_BOOTM_LEN is passed to image_decomp(), so the same should =
+be
+> > > used for the buffer allocation. Deriving a buffer size from the
+> > > compressed size if not possible, as the compression ratio may be
+> > > arbitrarily high for data with many repititions (for example ranges o=
+f
+> > > 0x00 or 0xff).
+> > >
+> > > Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
+> > > Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+> >
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+>
+>
+> Hi Tom,
+>
+> I saw you applied a different fix for the same issue to master. I think u=
+sing
+> CONFIG_SYS_BOOTM_LEN is a better solution than trying to derive the buffe=
+r size
+> from the compressed size at all - isn't that pretty much what
+> CONFIG_SYS_BOOTM_LEN is for?
 
-On 07/06/2026 17:41, Naveen Kumar Chaudhary wrote:
-> get_clk_cfg() and get_clk_div_rate() return 'int' but operate on
-> 'unsigned long' clock frequencies. If a supported frequency exceeds
-> INT_MAX, the return value gets silently truncated or sign-extended,
-> causing the caller to misinterpret valid clock rates.
-> 
-> Change both functions to return 'unsigned long' to match the data type
-> they actually operate on. This matches the callers accepted data types
-> as well.
-> 
-> Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+Previously Simon also suggested using the CONFIG_SYS_BOOTM_LEN in this
+thread(https://patchwork.ozlabs.org/project/uboot/patch/20260527150637.2850=
+104-2-aristo.chen@canonical.com/).
+It was considered a follow-up at the moment, so maybe rebase (and keep
+the CONFIG_SYS_BOOTM_LEN) your patch on top of mine?
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+>
+> Let me know how you want to proceed with this. If you want to keep the al=
+ready
+> applied fix, I'll rebase the rest of my series.
+>
+> Best,
+> Nora
+>
+>
+> >
+>
+> --
+> TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Ge=
+rmany
+> Amtsgericht M=C3=BCnchen, HRB 105018
+> Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan S=
+chneider
+> https://www.tq-group.com/
 
-> ---
->  drivers/serial/serial_msm_geni.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-> index 3dca581f68f..9de193355e4 100644
-> --- a/drivers/serial/serial_msm_geni.c
-> +++ b/drivers/serial/serial_msm_geni.c
-> @@ -109,7 +109,7 @@ unsigned long root_freq[] = {7372800,  14745600, 19200000, 29491200,
->   *
->   * Return: frequency, supported by clock supplier, multiple of clk_freq.
->   */
-> -static int get_clk_cfg(unsigned long clk_freq)
-> +static unsigned long get_clk_cfg(unsigned long clk_freq)
->  {
->  	for (int i = 0; i < ARRAY_SIZE(root_freq); i++) {
->  		if (!(root_freq[i] % clk_freq))
-> @@ -130,7 +130,7 @@ static int get_clk_cfg(unsigned long clk_freq)
->   *
->   * Return: frequency, supported by clock supplier, multiple of clk_freq.
->   */
-> -static int get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
-> +static unsigned long get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
->  {
->  	unsigned long ser_clk;
->  	unsigned long desired_clk;
-
--- 
-// Casey (she/her)
-
+Best regards,
+Aristo
