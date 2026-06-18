@@ -4,63 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2936CD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 23:48:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66617CD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 23:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B91AB84671;
-	Fri, 19 Jun 2026 01:48:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEDCC84671;
+	Fri, 19 Jun 2026 01:53:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="LyOyHBvQ";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="CkFxQmzM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F40A846E1; Fri, 19 Jun 2026 01:48:31 +0200 (CEST)
-Received: from mail-4396.protonmail.ch (mail-4396.protonmail.ch [185.70.43.96])
+ id 60BE9848EB; Fri, 19 Jun 2026 01:53:31 +0200 (CEST)
+Received: from mail-24421.protonmail.ch (mail-24421.protonmail.ch
+ [109.224.244.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F16288460E
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 01:48:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C8548460E
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 01:53:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1781826507; x=1782085707;
- bh=9HhIC29hMVPRygcwczwuYjrPkRb2QiUjxgpZQOpPIxQ=;
+ s=protonmail3; t=1781826808; x=1782086008;
+ bh=Y0D6sVi6+VqzI5WMixgK4FcybS4oZVkKmU1K+0bopck=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=LyOyHBvQP4k9Q0h+VSj8C/T3oeFLJWFiRZiBmlVEemZJn9mfhzkHuykahJR5m+kxG
- PmOgpOO2qpDz2qM505ULV8m73M7V919ioTUnBf2TXNdbrllDn2KAHwZtCGMvWapfy/
- P+Vlqnxno6OpDpOcjqdekUXynV97kmORopM0knuI567GO4AOUEzJfhQ3I3avAqN9E/
- 2CF7eKm5PC4P58CemMSY1w3OTQ/O78KE6faLb0lCa39Z1uUljPYQAZQTTdtxicddVw
- L+fgAURYSOj2hTUSaBb901cUOGev+XUHN2IJZBIKOjTWtjc4DkGLqs8toszwJDu6nq
- hDwDuWCzB6AYw==
-Date: Thu, 18 Jun 2026 23:48:24 +0000
+ b=CkFxQmzMZhLSUDnN957AxGb4Xk38iwpwel0tnH4KeJvp8Zs2dCLIRK4JGQOx7vNJL
+ bSE7WqqjM+xX+dWdWlg/oDm98Xgi9DWG17xyOUxVW05cdKA0S0+hYCgdCHE9KQV7J3
+ 9DIBILqNRjEBrfsArpOMmZtS4LZdPdzn9+0db10jXKw1aDGjfVUl2DG+iqf8NgW9aE
+ 1Q7XCH2croLofegDlSDWcGglGZb1MqB3DMkKMSSGIsk51IbX4IJ7vNdCtBBnWJgoo8
+ NYg3PHT3OvTaeKDVwnVTc758Zk9q7FVr9UwaEyKwdvp8FKfdFiJUtI45SZJzW3z+LK
+ GvIx2K0pTUnCg==
+Date: Thu, 18 Jun 2026 23:53:23 +0000
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 From: Sam Day <me@samcday.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Jerome Forissier <jerome.forissier@arm.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@nabladev.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/2] cmd: fastboot: Add keyed abort option
-Message-ID: <0XlljVtpUbM_toRIsxmCcT9kvIUKxSwWAj8q3uUXpbjbNbBiThvWXUvS1o-IY00pY4jTF5F3u_bzQ4dW7K5IfnEC9PGh2sGNOaf62WmzDT4=@samcday.com>
-In-Reply-To: <87wlw0gf4c.fsf@kernel.org>
-References: <20260602-fastboot-abort-keyed-v1-0-414aac5a06b8@samcday.com>
- <20260602-fastboot-abort-keyed-v1-1-414aac5a06b8@samcday.com>
- <CAFLszTgX3x2hoFTWVy2WCuKRuZAB_T+QLAp13YTkhbM8wpkZRg@mail.gmail.com>
- <87wlw0gf4c.fsf@kernel.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] doc: android: fastboot: Document halt behaviour
+Message-ID: <6zjo6pj8iO7TsStZIhljqTqhPIHy225E4-AVp-uL5CO0a_JRgO7hdwN5JiGBfKnm8cOcFt6arN1DhXoyVdZiVR4-DZUfOIKmTd7tVcR0bJc=@samcday.com>
+In-Reply-To: <20260615-fastboot-doc-ctrl-c-v1-1-f932dea17c0a@kernel.org>
+References: <20260615-fastboot-doc-ctrl-c-v1-1-f932dea17c0a@kernel.org>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 398e1669d329b61f51cca1656aaba5d1b3a139ed
+X-Pm-Message-ID: 14941845201b45bd02288d8a23e7c2861d70beab
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -80,86 +68,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Mattijs & Simon,
+Hello Mattijs,
 
-On Monday, 15 June 2026 at 10:30 PM, Mattijs Korpershoek <mkorpershoek@kern=
+On Monday, 15 June 2026 at 10:29 PM, Mattijs Korpershoek <mkorpershoek@kern=
 el.org> wrote:
 
-> Hi Simon,
+> It's possible to interrupt the fastboot command from the U-Boot shell
+> using the Ctrl-c keybinding.
 >=20
-> On Sun, Jun 14, 2026 at 05:49, Simon Glass <sjg@chromium.org> wrote:
+> Document this.
 >=20
-> > Hi Sam,
-> >
-> > On 2026-06-02T08:45:46, Sam Day via B4 Relay
-> > <devnull+me.samcday.com@kernel.org> wrote:
-> >> cmd: fastboot: Add keyed abort option
-> >>
-> >> Works the same as CONFIG_CMD_UMS_ABORT_KEYED does: any keypress will
-> >> abort fastboot mode (rather than only ctrl-c).
-> >>
-> >> Signed-off-by: Sam Day <me@samcday.com>
-> >>
-> >> cmd/Kconfig    | 6 ++++++
-> >>  cmd/fastboot.c | 9 ++++++++-
-> >>  2 files changed, 14 insertions(+), 1 deletion(-)
-> >
-> >> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-> >> @@ -103,8 +103,15 @@ static int do_fastboot_usb(int argc, char *const =
-argv[],
-> >>       while (1) {
-> >>               if (g_dnl_detach())
-> >>                       break;
-> >> -             if (ctrlc())
-> >> +             if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
-> >> +                     if (tstc()) {
-> >> +                             getchar();
-> >> +                             puts("\rOperation aborted.\n");
-> >> +                             break;
-> >> +                     }
-> >> +             } else if (ctrlc()) {
-> >>                       break;
-> >> +             }
-> >
-> > I wonder if you could create a shared function (gadget_abort_check()
-> > ?) to keep this and the code in usb_mass_storage.c in sync?
->=20
-> While I usually advocate to avoid code duplication, I don't think it's
-> needed to create a new function here. It's only a couple of very simple
-> lines.
->=20
-> To me this can stay as is.
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> ---
 
-I lean this way too, so I opted to leave this code as it is.
+LGTM, thanks. I added this patch as a dependency of the v2 series for
+introducing CONFIG_CMD_FASTBOOT_ABORT_KEYED.
 
->=20
-> >
-> >> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-> >> @@ -103,8 +103,15 @@ static int do_fastboot_usb(int argc, char *const =
-argv[],
-> >> +             if (IS_ENABLED(CONFIG_CMD_FASTBOOT_ABORT_KEYED)) {
-> >> +                     if (tstc()) {
-> >> +                             getchar();
-> >> +                             puts("\rOperation aborted.\n");
-> >> +                             break;
-> >> +                     }
-> >
-> > Can you please update doc/android/fastboot.rst to mention the new
-> > Kconfig and the abort behaviour. There is currently nothing in that
-> > file about how to leave fastboot mode at all.
->=20
-> For the current behaviour, I have send:
-> https://lore.kernel.org/all/20260615-fastboot-doc-ctrl-c-v1-1-f932dea17c0=
-a@kernel.org/
-
-Thanks, I've added that as a dependency to the v2 of this series, and
-supplemented it with a paragraph about CONFIG_CMD_FASTBOOT_ABORT_KEYED.
-
-Cheers,
+Kind regards,
 -Sam
 
+Reviewed-by: Sam Day <me@samcday.com>
+
+>  doc/android/fastboot.rst | 5 +++++
+>  1 file changed, 5 insertions(+)
 >=20
-> >
-> > Regards,
-> > Simon
+> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+> index 19e2ee9d4074..818b8815ebdc 100644
+> --- a/doc/android/fastboot.rst
+> +++ b/doc/android/fastboot.rst
+> @@ -212,6 +212,11 @@ or initiate a reboot::
+>=20
+>  and once the client comes back, the board should reset.
+>=20
+> +It's possible to interrupt the fastboot command using Ctrl-c::
+> +
+> +   =3D> fastboot usb 0
+> +   Operation aborted.
+> +
+>  You can also specify a kernel image to boot. You have to either specify
+>  the an image in Android format *or* pass a binary kernel and let the
+>  fastboot client wrap the Android suite around it. On OMAP for instance y=
+ou
+>=20
+> ---
+> base-commit: 1e80ee41441c612f05787a93bbef4e6e422e29d1
+> change-id: 20260615-fastboot-doc-ctrl-c-3fac73518cfe
+>=20
+> Best regards,
+> --
+> Mattijs Korpershoek <mkorpershoek@kernel.org>
+>=20
 > 
