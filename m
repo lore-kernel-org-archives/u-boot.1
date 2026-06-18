@@ -4,92 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EED7CD98F6
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7564CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D2A0848EB;
-	Thu, 18 Jun 2026 17:54:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5182E849D1;
+	Thu, 18 Jun 2026 17:54:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cQE1zK+N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DC+8Nwis";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57535849BF; Thu, 18 Jun 2026 17:54:38 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 07DE2849DA; Thu, 18 Jun 2026 17:54:47 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7009484874
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:54:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE40784874
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-691c5776f95so1835847a12.3
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:54:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781798076; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6870ad8072eso179270a12.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:54:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781798084; cv=none;
  d=google.com; s=arc-20240605;
- b=T2Csno0McW2/xK9JVKVtDuNbfa6B0uDQrWEAPuMBuOrLz0CpvETxoH1CYA+f3I5y0L
- T57Ith+AAY2mQ6vK7FqSikHKChAzjGvALRu+28up1oq8WTCyyIoShYyANWp2J3D8Vb0Y
- FQlJ8xa0hDLR/2wtBB8eLjGU6QSIN6zrg12T7cRVxsEXJ3R9s2G9GHtQmaBcXNYrRjTq
- gPedfb/Wf0RxuuBgGVyw/NqscBE/cZIt1pZ/gfw1L60I1DqBGOzjwIIb9nzdiDECJug0
- dY8vy1Czm8Zts+o8b2+2ak58Ptxyq6sVa+njjOrFMxnAjKNmYzN6pP+O9nGby3/SSLHB
- TUYQ==
+ b=Eje9NCk7HqusXpNIw/usTsJZP+Zc8M/ojHvJPRf+1wfV34ylLgUo5SbivdNs25/QEL
+ 55/0y9+AUkrX2sd/oubnLjKHKvz9CwGVu5Pu1Dtx6lce3nkHE3CAmg3k6tXLHqWL/2hf
+ r0rx9bGWGzuVtE/lOOQjgepaqftFEKtQXZ+v8R+B1NPYHXYTYo2YPZ9qoaWP39gXL1nV
+ AHKaYYcpEKaHkT6Wr/SjCRyPMeO0rAUYNY2zn1AhRb23JryzadPpJQFzF8oWFC8bTpx5
+ dNHvtEkfqMGnbv8+vvJVayMBdlnqWjzA1pI0VEkI6tB5hpXf143s0FF2QNjN3/zWYctp
+ 24vA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
- fh=rLQMN6a/UX9jMmUsQuTe1A8wK9bTo6tPxTHfkaExRTU=;
- b=DX/NPCZXF5hOI64kvVK7UhPncm6tx9F6r7Gnlakw/HhXb7OsNhPc2dOsVKD+GKLZqh
- fXsc1lfMppx7DJ+sG7GXRnIqZ6w2efq5X/z2lqCM3+GIyJHV6l4CCgWH/Hqkwgz3Cgib
- VHl6nzzRT/0wgA387duv2D0Y7FLEcEfuaqoevGRpDsrdXcdhbqM0vU8TbT4v5f+YZIGd
- NgbW969sv8nxoZQy0CZSRBVAuKjtZ9lchwXo4gXraaqpNR60AwA0vGaOH5snPP4c575t
- AbVVBAY9V+JcY5CsNakckJRvZrGg36xVTpyQjH3XFhLdRUNE8dM82OtvUUatz6I+TQAs
- GEug==; darn=lists.denx.de
+ bh=jnLBW1Ynx5IPDPsbGDYl2W7m5CYfRep2wTe09Y7YRyQ=;
+ fh=upkYJoYWU8qjVWIteQ02TepH03lJcEMYfBNmBkVTMPM=;
+ b=GKFOHH99sROWXNjwWhWV5iDDWi7URH+uwl3Ig/2rSvC6gObfxmUluzTn3JJGxjAh35
+ XXQM2gMeULzHuqVBKzsgkNFP2Qn/GmnYvZSgHSMuvJUXbIt74TXGxy0DJ7D8WEYibZYe
+ i7S7moDalihDvJYxALNV3rI15eO/9KFacqQkcSgVFu50uSVXxhKXY6HJJ2ffkqZSAO55
+ aNWR8Y0RIcoEpEfBMzT6x+5ez53ydpZwfPHUC+9vZSXQbT70d1ZRzEP9ltxIv8lqYOEs
+ vD+DMxWrKnocFb7SdEMG7z0mPk9ErJtAKPouk/Wb5HE3KwrSsPmUWJVt68cwshn2iO+d
+ se6w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781798076; x=1782402876; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781798084; x=1782402884; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
- b=cQE1zK+Ny/nXt0MdO+VYn2F78OAih42R0OnzxXiLe2cgZ4zH8625d5r5z0s2JQrwmQ
- +FpYUJPK1YAT/ZZOo8eqFNuidAiWWhV2XlfJ44fwaCWVs77tPOYqx7zXhXdCTr5EpkXu
- /58H+Pz2c7ysAoJ44hq9nbPW9hk95Faz/ez0s=
+ bh=jnLBW1Ynx5IPDPsbGDYl2W7m5CYfRep2wTe09Y7YRyQ=;
+ b=DC+8NwisKsHFn8KYPX0BYBvP7YvBBmig8Olo/G1Jmg0c8O0qwsA5AjXGksNISonb+J
+ ECU/Kbv4U20ebsPqGwE1pX3gky04hDnXprchgXQFnPWZIolx7IdAC6bnwi+rwH3Ny9xH
+ P8qJCr8aroM3cgg0ii+8BAnzPm55oXFEE8piY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781798076; x=1782402876;
+ d=1e100.net; s=20251104; t=1781798084; x=1782402884;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
- b=rZNiLrOL1vXQJ/voO2zANrt7Haw0Sl8W+jUCK67rKf/AHjwk45BXdOYhjkfFGU/WAC
- 3hB+RLDXPwI510bRQrTddexOBPFrg8bGfF5Rz3siJ07CNh5NvTsXzm0HjzTrJrUI87vy
- Il7O3vfXLQtIPinAyf+jERwBZ6QEcCnZaFuSvFddw/U7iAX1RE+p2Sg9wQShfpT8hKDJ
- XCIvYAkk0O5+M+73t8shhaVfE+yErqEHwPdd20naIl3YqvRVALNsJxoE8O/xNuEwB9bL
- Oa69aRKWzWBmplfTX0vBKelAUqThTSK16vMX2SOEHv/c7WG+lHF3veMbsvkGSotJkJed
- 0foA==
-X-Gm-Message-State: AOJu0YyiVbPtIP5wUDN4yCAq8G7D9kBs2qZKGIksLpK6B6aXuAfrZJ/T
- EFGTsReP0YnnUIciCkUwyiKf6lxulP/g3AuJOR4kgygLr4mFbzA7asqHDHhJerCWv0VJopgFQSm
- o2+8imEgJwP490qDTRH5f9s9Lm8Sa55PDGA7Ttn2yHPBYUHuQkhNRQw==
-X-Gm-Gg: AfdE7cn4PqGVGwm8Wk3MUXsj78DvrP56Be9xUkiNXhzsloFjb+fmeAXUYoSc6qmWisP
- /npby+7YoJ7Y9wB37MXN9HepzFfCxzED2ApsKpoCLEnmZQeWn5Z7JKD5GcI/HgzZII+3kiyyXmu
- 7NeOOkx3C9Jw9vtfgLOFgv+yXJW7zspueF6E2cz1rp/zYFgjFuD7d2n1/DVUtQV3EMY9OG4vjcB
- 1kB++ewTaVJVbX6Sr1mx4FSm+slFnSmZrFEJVen0UcsLqSFqg/Tb/Q1J3pCUmu+v6IQUgozonqQ
- YjdjF9Mx
-X-Received: by 2002:a05:6402:158b:b0:68f:cca5:51e8 with SMTP id
- 4fb4d7f45d1cf-6954771020emr5187451a12.27.1781798075958; Thu, 18 Jun 2026
- 08:54:35 -0700 (PDT)
+ bh=jnLBW1Ynx5IPDPsbGDYl2W7m5CYfRep2wTe09Y7YRyQ=;
+ b=I8FVxvf90D8+c6RB4Ybg5XFcXb65WisYKNMjEfyqsw3w6gJdq4kPBbsAatVfunQ0hm
+ B6T/s9WQwa6/xzIN96LaqcjNeWpxbJD+G7Up2nO64CUpaHXS6hnjGuYpWwGDsj9TXaQl
+ lyVCKB757rWZS7rerCO2lxxvwkWT/5pdBbWOym/uB6b/88aBqjcqhz5lE2XadU8vg/ms
+ iJs5p/vezuNrzk1Mt4E9q2VxzNPphKKOsxVT5L6VVLd5ndvSGiVO02v2v7SSBk2jzvyl
+ XxD3yRPpgfQqJzczqa29iVB3KRjfGMZbRReMVVHyinUabc/7iBicArKoV/wIKAHVieR+
+ HCWg==
+X-Gm-Message-State: AOJu0Yy3MOXJIzvhDHv5J3e/KPaisSjT9FOgGxx7SJblI7SjpzUszMQe
+ hwLCGJZERvmM3expRKWThH5W40XtgJkKzEzfs1vEa+B02DrgSXufVRFZguAZwzgkpq1uCfb5laB
+ LXWm7aU5bhD5aqTqYZc3fisXXKr1cg/gfLciYhGvg
+X-Gm-Gg: AfdE7cn19fUP/QwozN55iLVhPhyLiYrnH95U9Y/dvoHfyjdIeZjeolvhCaWrePWypXk
+ NsGYkEOmJIsZ6wCKecoJMoCFqMZud84qFpKNJhLki1/JKbg8J69E4fKm3/fqJ2oB+Aof1F+HUTp
+ 2WDF8uyz2uqyCY/PtWPuiPyRVo7i53CnsvB+wGoo4aXuQV1FJoxcWDQ6mmEXr8xucGTYaejG0Kl
+ 6xasRmhH4MYISHlkGMSdsFdm75Vr/psL3hXgECjokTHNA3KzLDWKzNG1JQ8/0386Gy+DOHIzQ3K
+ B0qSq3hM
+X-Received: by 2002:a05:6402:1356:b0:691:2ef1:d7d1 with SMTP id
+ 4fb4d7f45d1cf-695baa3561bmr1609963a12.16.1781798084151; Thu, 18 Jun 2026
+ 08:54:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260605033907.1909319-1-dmukhin@ford.com>
-In-Reply-To: <20260605033907.1909319-1-dmukhin@ford.com>
+References: <20260616142859.54136-1-sjg@chromium.org>
+ <20260616142859.54136-6-sjg@chromium.org>
+ <CALeDE9PFgy-GcCRiEavFxLR8fWJri8QYzRpc-1MLOcdyFNthgg@mail.gmail.com>
+In-Reply-To: <CALeDE9PFgy-GcCRiEavFxLR8fWJri8QYzRpc-1MLOcdyFNthgg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:54:23 +0100
-X-Gm-Features: AVVi8CeI1bU34P1UaiM1Sw9KTdBrhG-AdUjYk1OXCjZYPft7z6Q-Lewg4RO1Fxw
-Message-ID: <CAFLszThSEcn4MUu67w0ZdHJoiyM9hqpe7_r7WiFWKq6bA89cyA@mail.gmail.com>
-Subject: Re: [v1,0/8] bootcount: introduce GPT-backed bootcount device
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de
+Date: Thu, 18 Jun 2026 16:54:29 +0100
+X-Gm-Features: AVVi8CfBYVQysHc9irP6b_8PcyXiblZz0Y-n4DkD0c--cgcZjkhZSIjK7WyJWcI
+Message-ID: <CAFLszTgfHzsyEdvf2XHbO-gGFpBTq2t9Wt2YV_XYSeJ_PHUw0A@mail.gmail.com>
+Subject: Re: [PATCH 5/9] patman: Replace the documentation with a stub
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,35 +110,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
+Hi Peter,
 
-On 2026-06-05T03:38:59, None <dmukhin@ford.com> wrote:
+On Tue, 16 Jun 2026 at 21:38, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> On Tue, 16 Jun 2026 at 15:39, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > The full patman manual now lives with the standalone patch-manager
+> > package, making the 1000-line copy in the tree redundant. Its published
+> > page is a long-standing URL, though, so removing it outright would break
+> > existing links.
+> >
+> > Replace the in-tree manual with a short stub that points readers at the
+> > patch-manager package, and keep the toctree entry so the page still
+> > builds. Drop the README and the tool's own rst, and point the
+> > patch-sending docs at the standalone package too.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  doc/develop/driver-model/spi-howto.rst |    5 +-
+> >  doc/develop/patman.rst                 |   15 +-
+> >  doc/develop/sending_patches.rst        |    4 +-
+> >  tools/patman/README.rst                |    1 -
+> >  tools/patman/patman.rst                | 1023 ------------------------
+> >  5 files changed, 20 insertions(+), 1028 deletions(-)
+> >  mode change 120000 => 100644 doc/develop/patman.rst
+> >  delete mode 120000 tools/patman/README.rst
+> >  delete mode 100644 tools/patman/patman.rst
+> >
+> > diff --git a/doc/develop/driver-model/spi-howto.rst b/doc/develop/driver-model/spi-howto.rst
+> > index 9dc3b9b4aac..c5b07ba0e47 100644
+> > --- a/doc/develop/driver-model/spi-howto.rst
+> > +++ b/doc/develop/driver-model/spi-howto.rst
+> > @@ -649,8 +649,9 @@ board.
+> >  Prepare patches and send them to the mailing lists
+> >  --------------------------------------------------
+> >
+> > -You can use 'tools/patman/patman' to prepare, check and send patches for
+> > -your work. See tools/patman/README for details.
+> > +You can use the patman tool to prepare, check and send patches for your work.
+> > +Install it with ``pip install patch-manager``; see the
+> > +`patman documentation <https://deinde.dev/patman>`_.
+>
+> So this URL seems weird, and it redirects to
+> https://patman.readthedocs.io/en/latest/
+>
+> If I search for patch-manager on pypi.org the project goes to
+> https://github.com/nxtboot/patman
+>
+> May I suggest that deinde.dev and nxtboot and patman and patch-manager
+> as different names all feel disconnected, maybe some consistency
+> around patman for the URLs, even if the github project is nxtboot, may
+> provide less confusion for the users.
 
-> This series adds new GPT-backed bootcount device with
-> ChromiumOS-inspired counters/flags logic [1].
+Yes I agree and I would like to, but it's a matter of what is available:
 
-There is no update to doc/api/bootcount.rst describing the new
-backend, how to wire it into the DT, or the autoboot interaction
-introduced by patch 8. Please add a short section so users can
-discover it.
+- patman is used for something else on pypi
+- nextboot and deinde are taken on github
 
-The use of include/cros_flags.h consumed by generic disk and bootcount
-code feels awkward - the bootcount driver itself does not include
-cros_flags.h, only the gpt command does, and read/write_disk_flags()
-operate on plain u16. It might be cleaner to put the generic 16-bit
-accessors in part.h (or a new gpt_flags.h) and keep the cros_*
-wrappers in cros_flags.h for the cgpt-compatible command surface only.
-What do you think?
+I didn't cconsider using patch-manager as the github name, but that
+seems wrong because everyone thinks of it as 'patman'. It is somewhat
+of a mess, but I'm open to suggestions.
 
-> Patch 6 introduces the new bootcount device with compatible
->         'u-boot,bootcount-gpt'
-
-I can't find a device-tree binding document for the new compatible.
-The other bootcount drivers have entries under
-doc/device-tree-bindings/ (e.g. bootcount-syscon.txt,
-misc/bootcounter.txt) - please add one describing
-'u-boot,bootcount-gpt' and its device-type, devnum and partition-name
-properties.
+[..]
 
 Regards,
 Simon
