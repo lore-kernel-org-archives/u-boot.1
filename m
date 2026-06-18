@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A21CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:09:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D3FCD98ED
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E077849CA;
+	by phobos.denx.de (Postfix) with ESMTP id 54796849F3;
 	Thu, 18 Jun 2026 15:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="nqVfv+9i";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="StW1UUVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69C5C849ED; Thu, 18 Jun 2026 15:09:51 +0200 (CEST)
-Received: from mta-64-225.siemens.flowmailer.net
- (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ id 7E9E6849F0; Thu, 18 Jun 2026 15:09:51 +0200 (CEST)
+Received: from mta-65-227.siemens.flowmailer.net
+ (mta-65-227.siemens.flowmailer.net [185.136.65.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73AE9849C9
+ by phobos.denx.de (Postfix) with ESMTPS id 88360849AA
  for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
- 20260618130946813ca0d04e00020744 for <u-boot@lists.denx.de>;
- Thu, 18 Jun 2026 15:09:46 +0200
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
+ 20260618130947be4442767d000207de for <u-boot@lists.denx.de>;
+ Thu, 18 Jun 2026 15:09:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=POXwMJWCLdIjh3Xsi/N8Pfhd5RkczbfS++CgUdJSink=;
- b=nqVfv+9iTMEkXeeEndGxJDTsOY/gBp4NE7zpAW6hXmO/OwyMWm7ikZR21O7Prrive+s85i
- jBLCtyIxml8bLVCJargk9P1v6scHvcQB1u/FgvOR13bhTuESkDOc661JaMEHyjS5PTz2UzQh
- BQSHDM6YO8rDAU7CGQN44sOxeP909TJAvxZTOj57jSpOiK7SFw3lD4ODiDpmPZbA33DivGqE
- miy2wUYipp1h4G4kUogVN/1ILvRtpT/lSTnUjnrvCGB/ir6LqXsM8UxZkzhvz4WIgrVHdZ0y
- iM/hiBy4FLHKg5fUFS05wzIciGKTocGPaZEcWZ3WT101x3LoC7jqE4Cg==;
+ bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
+ b=StW1UUVvG+zaPillIcKBMIO4dwUDqsF356UeGwdNkuHAHenfTtwokPst2KrDGQHnkSvP5Q
+ YOuPBHFhBQAXmhHygkhOwKWPGZzuNRo5aX+jV5eBrQY9+EwrWrRw9/MiLiIJSejYP6iMQOnP
+ t0Dz0b1ls8K6JNaO/v6q25EX0b1k3zr0F52e5cci/N6pqwpPXPkKYnJgg/mv+aYqVK15DRFJ
+ aza32A4teQfXB3YuaNoCDBuuEWSf7FOi5WdLCAAZ5ksdN8CNRIbup0vxpXzrp056zaeplg9F
+ udsroNxqK4noHXcrzZDbT8WtDDLmAd/lhLvuxw5XwnfMiqrRGyuUDxMg==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 1/8] test: include mapmem.h explicitly
-Date: Thu, 18 Jun 2026 14:47:36 +0200
-Message-ID: <20260618144742.v7.1.20756bff4397b8b9e5cd57e4be96a99118b7c1ba@changeid>
+Subject: [PATCH v7 3/8] mkimage: define log_err and log_info
+Date: Thu, 18 Jun 2026 14:47:38 +0200
+Message-ID: <20260618144742.v7.3.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
 In-Reply-To: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 References: <20260618130943.549083-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -67,31 +67,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The file uses map_to_sysmem() from mapmem.h but relies on implicit
-includes which may not work in all circumstances
+Define log_err and log_info centrally in mkimage.h so any file used in
+this context benefits from it.
+
+This patch is in preparation for a change in image-fit-sig.c in the
+next patch.
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-(no changes since v1)
+(no changes since v4)
 
- test/boot/measurement.c | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v4:
+- fix and reword comment
 
-diff --git a/test/boot/measurement.c b/test/boot/measurement.c
-index 71f503f1567..de4f7ff6196 100644
---- a/test/boot/measurement.c
-+++ b/test/boot/measurement.c
-@@ -9,6 +9,7 @@
- #include <bootm.h>
- #include <env.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <test/test.h>
- #include <test/ut.h>
- #include <asm/io.h>
+Changes in v3:
+- make log_err use stdout too
+
+ boot/image-pre-load.c | 3 ---
+ tools/mkimage.h       | 6 ++++++
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+index 2f851ebb28c..cd319ddb777 100644
+--- a/boot/image-pre-load.c
++++ b/boot/image-pre-load.c
+@@ -35,9 +35,6 @@ ulong image_load_offset;
+  */
+ static struct image_sig_info *host_info;
+ 
+-#define log_info(fmt, args...)	printf(fmt, ##args)
+-#define log_err(fmt, args...)	printf(fmt, ##args)
+-
+ void image_pre_load_sig_set_info(struct image_sig_info *info)
+ {
+ 	host_info = info;
+diff --git a/tools/mkimage.h b/tools/mkimage.h
+index 5d6bcc9301a..d8d292a8098 100644
+--- a/tools/mkimage.h
++++ b/tools/mkimage.h
+@@ -31,6 +31,12 @@
+ #endif /* MKIMAGE_DEBUG */
+ 
+ #define log_debug(fmt, args...)	debug(fmt, ##args)
++#define log_info(fmt, args...)	printf(fmt, ##args)
++/*
++ * Use stdout rather than stderr so error messages stay
++ * interleaved with normal output in the order produced.
++ */
++#define log_err(fmt, args...)	printf(fmt, ##args)
+ 
+ static inline void *map_sysmem(ulong paddr, unsigned long len)
+ {
 -- 
 2.43.0
 
