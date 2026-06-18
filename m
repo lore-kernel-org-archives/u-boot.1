@@ -4,53 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88D9CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03E2CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B068A849EF;
-	Thu, 18 Jun 2026 15:09:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3437B849A1;
+	Thu, 18 Jun 2026 15:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="j6x2koC4";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="GLSr0OdF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FB25849BB; Thu, 18 Jun 2026 15:09:54 +0200 (CEST)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E3C5D849A4; Thu, 18 Jun 2026 15:11:51 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70807849E0
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:09:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8266B8460E
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:11:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 20260618130949e82760063e000207d0 for <u-boot@lists.denx.de>;
- Thu, 18 Jun 2026 15:09:50 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=94E/KYvESseIbLUh2FrKeqbYMLlJRXH8lRS+AF4eer4=;
- b=j6x2koC4PpcNTNbKP2yNtXQnefBKf8LCWv6j3lbT3fQO703JaFz/9DCGwOsebo5V6g57XL
- MEUGvOdnr2bjQRnF868kGUZs1miHQZSjwso5loG2YEe2acczek2jBy8AyrGF+GKCqiYCZqdB
- q6/fmnSn7ZqS7BMQMd/dLAKP9NR2e6HQ2SLHN4wGwf0lM/e3H9zMCj2cqFZiqMR8qd2boK6L
- NYRcKnLqrRHVQw1asUwf+/vwB/kSAy+d9QUBK2hmW3RfamxOoKD12RPyEuJcN0KJLcBAo7NH
- O6QsGpfh1nw1Ot+BlPhJn4w6QhmXhS4p+XcNSC8w5WuPBh7/EfK5revQ==;
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gG7ld+MZbHLqNHEbYC670sS2UaTsOOjn3D5q3NQ0+NjHV0hI16ZSzt7nh7niEg2vbXeCbKJc2Uc8kESnphF8wWYMcG1A98GSYHwrUM+LLW6r9GlphbfGqoxSZ0vm7nuag8suS8fMdBIFAvWT4Kt2j+UlEcRSZRHcGAUNuI6OPnNX3NIfbbeOLZJQF26Db9yDeKmIG1/2IWjrJkkBtf8FToOyxnf2K+bqZY92U7OEzELPI1IsrwwKEV4MtWgPHgxtyB0alS60M8x40vvco955ZD6leDS4BH6J7sNY/VUYlW59aTddZf/gpWY1aOy0CsaONmN059A39mCJqlagUHc+QQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kLOEG0RVuposcAkabfLJP2pulZxAS/SsoCKS9GpxcWg=;
+ b=UvLb9rnOw6P5fUpbpfYpLucDdCRs2QcnJTEAGj9BRKMkNUELx/QUxMAkm/YtPjU+vBqXob2tv59G0d8JM6uSLqTurKnEgXc4N05ibSdcj63QyH9Q78mOI+O0JxWyHcWttaTyzjGWSPz5QlPpI+pCvcyUPUpixi18y3RcgaiWnBvYnQ9JZIqUYAXfnTuWon44Uihz+h0BSk1DeL84OkiG7sW4JLXmEVf49MrbkfGV+2OlFa794im20S+2JJf7ZlVfmQiZ1Eogm+oMGsk0KPyyZRtrdOhELzuZVgk8Mn0uUSVt8BWXTkX5O3SXJgyUMagebMsO2J4XvHbKdLVwcPojUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kLOEG0RVuposcAkabfLJP2pulZxAS/SsoCKS9GpxcWg=;
+ b=GLSr0OdFPW9Aq0+NhvZZxJ/99G8Q5Vj/ju3TjhT2dGirj1MG5V0av9EKdz7mQqPaznGaC1bJC+W6h7YuEbJVtiF21wuICJc0dydOm6WsruUbVOsVu95w/sdQVgJVpuFEYFK+PWlYqFmPwkj4fAigZOclBBvl9FpEbSuV4Le0HEy40veNLc1tj4RI8lY2yP2rJh2m9+l1S1kcCrhwzfCTdpWhHjG6DwB6tzoMAVHBybvNXk1KHJ/98fd/klZpFvBdQd2UTrSc9c9iLwM8q1ROrx+JSscNx4WcIinen208Z1OEm3kuWgHmzktW1Iyn+HGvKbYycexZdRPl87OTV4U4Fg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2cc::12)
+ by DB9PR10MB6667.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3d1::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.13; Thu, 18 Jun
+ 2026 13:11:47 +0000
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1]) by DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1%7]) with mapi id 15.21.0139.009; Thu, 18 Jun 2026
+ 13:11:47 +0000
+Message-ID: <2b359cb3-be59-41f2-8730-8dbbbd292e86@siemens.com>
+Date: Thu, 18 Jun 2026 15:11:45 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/7] qemu-arm64: merge built-in DT
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+References: <20260608130924.112831-1-ludwig.nussel@siemens.com>
+ <20260608150852.v6.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ <20260617170720.GA1942927@bill-the-cat>
+Content-Language: en-US
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 8/8] test: vboot: add iminfo checks
-Date: Thu, 18 Jun 2026 14:47:43 +0200
-Message-ID: <20260618130943.549083-4-ludwig.nussel@siemens.com>
-In-Reply-To: <20260618130943.549083-1-ludwig.nussel@siemens.com>
-References: <20260618130943.549083-1-ludwig.nussel@siemens.com>
+In-Reply-To: <20260617170720.GA1942927@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0325.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:eb::20) To DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:2cc::12)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB5019:EE_|DB9PR10MB6667:EE_
+X-MS-Office365-Filtering-Correlation-Id: c4f064c0-cef6-4991-f3c8-08decd3b269d
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|23010399003|366016|56012099006|11063799006|18002099003|22082099003|4143699003|55112099003;
+X-Microsoft-Antispam-Message-Info: S3h+vb9BfcxYAWn9TvwmTEIsaxMD0sB4cwUfxdsAiCkoks58SbD05pDxkbQUUub63jyuJ3RmZtHvCRtEiw1dcWvXermHZtTz7I9EuT3eJesbnH16Nq+vtEkb2cO1z30MU8KN87EQj6/uvrU79hIk4I+K0f4xW9YFQq4KeHaU5KXJj8vbSJstjH5s7uZAAzXhocmMoGJRk6zzOj6wOhAKUkMZ1Ph8mghdc0qTKFgqUqwYbLr+AulXMJbHCtr4/aLFOua2oM7L5rrhvMhkHl5U0dyUsV+QfrolAJLaX6kwyLezZdmq2ixHKYl0caynjHXFvMrW6hrHuwuFcAD8RMUSDRCWF/zMnmvpKO1TP6gnN9/3WVF9UizAL2MZqYYAlpP1SuQLdHYi35GPdV3A4cKEM8ubVhGxRDo+3E7SV5XeZKd3VK7yNCoo71C4n+MeAUn+lJWWp256ydVvbPlso9hu82hwtj6bfdKbnTs1Jf8Mne7bYAUyqnDl8JeLjJwTL6xe6EbM5KgHdSo1rQ8H4vq6lhxuADkS1/bSxZGCf29MyDJcV3B/vudMsRLm+fvCHtrHyVDLBV9726veJwpBi9ttrGhUQoX2dPSYsqDBW6Me+/6e1W0Gi8tYRwjEuzE8d6kydQz/4G/sir9MmLERwqGJqg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(56012099006)(11063799006)(18002099003)(22082099003)(4143699003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WjRvVTZUVmlxUStvS2VlZWlhVGFnK2RvdklWUCtiRmwvbWRKR0wvT2FQRHRJ?=
+ =?utf-8?B?aGRJeFFPNFRDZVp0eGtycDRiZUlMaVhXRGd2U2FzU2loSmxhNWxLNEtKdmxS?=
+ =?utf-8?B?QmxZNnlORUttMUpyalFLYzJoS0lOeTE5ckEzVUhIYW5NUm5Fa3BEMDJnMXZk?=
+ =?utf-8?B?Y1RPQWE0WmRGOFBUNXZuZHQ5ZzRhU1V5QnQ4U2lFOGpGTUtuQzZEa3EzakdV?=
+ =?utf-8?B?dDZtRFNrSTdQS05SSVlPV21QdVpxRnMvWEU2dkw3THBJaWh5TUdTYnp0R3Rp?=
+ =?utf-8?B?YlUxTXpreUk4U2Jra3VtMStndjlzNnE4SVhKcGtRQUhBV0sxTUdIazlHeHhk?=
+ =?utf-8?B?OXpYRVhiVXoycmpJdFh4U1ZKYVpWc3k4TFNBMnRkbm00aG1Rdkx0VlFzTm1m?=
+ =?utf-8?B?U2RGQjlTT2dTaW1wMWh2K3RianJ0VENLaHZma1NIVGNrYlFLcmdLTlNxV25Q?=
+ =?utf-8?B?RDY0QXVDdFlZZ1pFSHk1Z21EVitscHRMTXV1aUN0am9PTWh3TEFjSmVQeEhq?=
+ =?utf-8?B?SGF2Q2E0YlJRZ3BZN0NrQU9lbitVUUwxUytCM3FvQXAydEhaSkpsdmRCWWVx?=
+ =?utf-8?B?cXI0RzNBZnE1YVRrM3BsV0o2YmxLUWxhQkpTdEtrbEhuZXc4NDFQck9NeWcv?=
+ =?utf-8?B?dG0yMHhPcEd1WGlKRmJ1SGtLcnJaQzFxQ05LM2ZjOSsxWEJIZ1pKbXkrM2sz?=
+ =?utf-8?B?WmV6NVhLSk95OHBlSTdPV1R0M3NxaCtMcUZ5eHVGQWRkcUZXcjZ3Zk1rYndn?=
+ =?utf-8?B?VkRJNUIzMk0raU4vV05wYTRQRzdPQ3pRanlDbzNHd3pQblQ1Zyt2VUZhSUNE?=
+ =?utf-8?B?OHJreCtEQUU5V1ljNGd5RE9TT3ZlQ2plczVzUXprVEZYRFNrTGx4d2F5aGVj?=
+ =?utf-8?B?V0FNUWdwSUpUYnU1aDd6ek1iaDF4OWVFMjNyOFVPUGNzVTI4cVo5YURXa20z?=
+ =?utf-8?B?NEVDWTY5RHBOeVFOcko3SVpYckZrUVlQcHVjTmZhR3RydWdTd3lObFNVemhR?=
+ =?utf-8?B?UGkxVWFTd3VMZ1JacEVMSGs1QXlKTEw0bDMvKzhKT29zbTRnSi9XOU5hSE5V?=
+ =?utf-8?B?eUg2MlVLNXpJcGhBdlNvYWl1U2RvbHFpZFFSbnIvak9jcFVYeUtpL3hlMDdR?=
+ =?utf-8?B?OFozWlNVNnFjVFZOM0lCbEtJeENBd2EzRC84SEZBSFlFUllkMEZiRVBDazBP?=
+ =?utf-8?B?bE13YUZwRVV0WDFzT25TcXE2UlpEOGd3WkhxbnJhdFBnZktsWi96K2FobWJE?=
+ =?utf-8?B?MGpYZU13R2M1Z291eWZSYW5wRU5keHhsRkRFQ2MwSGljV3FhNGVKMUhxSVJ4?=
+ =?utf-8?B?dWVGRHFTY2FiYllJNmYzMWh1UXVuYUd1SjRmMzJKa2daSzlLL2lWWHRuNmxx?=
+ =?utf-8?B?TzhlWU40T3A3TE56eHptUmhJSUpaaDR4ZlljaUh1VTRKNUIzdkxjMHBLRi9t?=
+ =?utf-8?B?Y0hlMWUyU1dmZDg0aGo3TGlTUmhRYjc3NmRwTVRGNEdHb1g5Rm5OTVJCeExs?=
+ =?utf-8?B?UG84Mm1KYVB4dCtNbVIrTHRwYkJmWWlYdHo0UDBNdXl5K2ZoeDRpUlZrRlJB?=
+ =?utf-8?B?aGxabXo0SjQrY1p1NHYyU1B3Y0pxaUZPWjVnc2Uxazgyalg2aWIzeEpqeDJS?=
+ =?utf-8?B?NzFpRFc3amJHMVkvTVpaVTMyaUFXeC9IWG5yOTFRanhQbXVQN3M0V2xXak5l?=
+ =?utf-8?B?VjlPUHdTOUNYdFZTTUhDMUNQdi9qMld1alFXL3VXeU04bUVOUjVoUFlBK0tr?=
+ =?utf-8?B?SXF6S0xBWW9WSmlNRFYxQVBSZk94YWZDQWk3dmFDTEloMVV2VzZvcEpyaTNT?=
+ =?utf-8?B?YlRKZzVXanA1Rm04b1hacE1tT0VwN2xJMW9WekxzZHlPcU5nNUd1SU5Bb0dH?=
+ =?utf-8?B?L3JwVml1dkFkUkkraE9kNXJUOVg2eVMyK3cwRjZHWEpseVRZRkM2MkttQlpo?=
+ =?utf-8?B?N1hKUm9FQ2UyMHoyWjA2b0xOcVJGWEdUWUJ5M1h4aUVraTQvamF4VHhCNEJo?=
+ =?utf-8?B?OWEvUmVwK1lvNG5aK043ZjFTUVVuMUVoVnVEMmFJbHI1eXd1RzhoU0VwTjF3?=
+ =?utf-8?B?aVNzM3l3bFFkK3JGdnpnSUZ2b1NrNmRvbFhBZXlaaHN5RXJ1SGNTK0YyTFFW?=
+ =?utf-8?B?bS8vRDB2dThsTS92akN4U2FDcVBXUWtQWHkyYWpDaDFHK3BXWGxMTXhQaGl3?=
+ =?utf-8?B?ZC9VMDBhak1jQ3lTazFLeXMrRSs5R0pnVEVVYzJKamsvbVloMlduNUI4UVY2?=
+ =?utf-8?B?dzVEbXlSQ1lqNVhrWGdlQTl1RU1pQTNOQzNOSzNrUjBNUTFCQ2F0cXdUNEZ4?=
+ =?utf-8?B?MUVzeWdzdEd0V2psdFJ5U3hPUUl0YTE1WlI0bCtLNkc3MlVjRTF0QUcyQklq?=
+ =?utf-8?Q?Ed7TQ36H55EL7+3w=3D?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4f064c0-cef6-4991-f3c8-08decd3b269d
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 13:11:47.0138 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: z3SkligiweRAqxg2W2V6APQusem0TMlwPbI53620tJzDa7vqzf8qMz6hdPAphtWxR7DWeHl+M8osrNBJ1Rdvu5l1XgT1fHmA43lztsx6jvU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB6667
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,209 +156,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When testing bootm also test iminfo at the same time
-Introduces a new assert_fit() function that runs bootm and iminfo tests.
-In some cases bootm and iminfo behave slightly differnt so call iminfo
-separatey in those cases.
+On 6/17/26 19:07, Tom Rini wrote:
+> On Mon, Jun 08, 2026 at 03:08:47PM +0200, Ludwig Nussel wrote:
+> 
+>> The keys trusted for FIT signature verification are supposed to be
+>> embedded in the device tree built into u-boot. When running in Qemu it's
+>> convenient to use the device tree provided by the VM which doesn't know
+>> about signatures though. So merge both device trees at startup.
+>>
+>> Make sure CONFIG_OF_OMIT_DTB is not set in qemu_arm64_defconfig to take
+>> advantage of the feature by default.
+>>
+>> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> This leads to failure to build on qemu_arm and qemu_arm64 in CI. Please
+> see https://docs.u-boot-project.org/en/latest/develop/ci_testing.html
+> and resubmit, thanks.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
----
+I've found two issues with the github ci. I forgot to include the 
+mapmem.h patch I included in the tpm submission and also had to add 
+check check for overlay support in qemu-arm. Resubmitted as v7.
 
-(no changes since v6)
+cu
+Ludwig
 
-Changes in v6:
-- remove superfluous blank line
-
-Changes in v5:
-- use helper function shared with bootm
-- introduce assert_fit()
-
-Changes in v4:
-- test iminfo in test_vboot
-
- test/py/tests/test_vboot.py | 66 ++++++++++++++++++++++++++++---------
- 1 file changed, 50 insertions(+), 16 deletions(-)
-
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index df5db157a52..3e02f0dfdac 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -208,6 +208,34 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             else:
-                 assert 'sandbox: continuing, as we cannot run' not in output
- 
-+    def run_iminfo(sha_algo, test_type, expect_string, succeeds, fit=None):
-+        """Run 'iminfo' in U-Boot.
-+
-+        This always starts a fresh U-Boot instance since the device tree may
-+        contain a new public key.
-+
-+        Args:
-+            test_type: A string identifying the test type.
-+            expect_string: A string which is expected in the output.
-+            sha_algo: Either 'sha1' or 'sha256', to select the algorithm to
-+                    use.
-+            succeeds: A boolean that is True if iminfo should succeed and
-+                    False if failure is expected.
-+            fit: FIT filename to load and verify
-+        """
-+
-+        with ubman.log.section(f'iminfo {sha_algo} {test_type}: looking for "{expect_string}"'):
-+            output = run_fit_commands(['iminfo 100'], expect_string, fit)
-+
-+            if succeeds:
-+                assert 'FAIL' not in output
-+            else:
-+                assert 'FAIL' in output
-+
-+    def assert_fit(sha_algo, test_type, expect_string, boots, fit=None):
-+        run_bootm(sha_algo, test_type, expect_string, boots, fit)
-+        run_iminfo(sha_algo, test_type, expect_string, boots, fit)
-+
-     def sign_fit(sha_algo, options):
-         """Sign the FIT
- 
-@@ -338,11 +366,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # Build the FIT, but don't sign anything yet
-             ubman.log.action('%s: Test FIT with signed images' % sha_algo)
-             make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
--            run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
-+            assert_fit(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
- 
-             # Sign images with our dev keys
-             sign_fit(sha_algo, sign_options)
--            run_bootm(sha_algo, 'signed images', 'dev+', True)
-+            assert_fit(sha_algo, 'signed images', 'dev+', True)
- 
-             # Create a fresh .dtb without the public keys
-             dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-@@ -352,16 +380,16 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         if require_config_sigs:
-             # DTB has no /signature node; FIT_REQUIRE_CONFIG_SIGS makes this
-             # fail-closed, so U-Boot must reject the unsigned config FIT.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       'No signature node found', False)
-         else:
-             # No required keys in the DTB, so an unsigned config FIT is fine.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
- 
-         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
-         sign_fit(sha_algo, sign_options)
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
- 
-         # Test a signed FIT config when the DTB has no keys at all.
-         # Without FIT_REQUIRE_CONFIG_SIGS the absence of keys in the DTB means
-@@ -371,10 +399,10 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         ubman.log.action('%s: Test signed FIT with no keys in DTB' % sha_algo)
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-         if require_config_sigs:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       'No signature node found', False)
-         else:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
-         # Restore keys in the DTB for the checks that follow.
-         sign_fit(sha_algo, sign_options)
-@@ -397,7 +425,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                 ubman, [fit_check_sign, '-f', ffit, '-k', dtb],
-                 1, 'Failed to verify required signature')
- 
--            run_bootm(sha_algo, 'forged config', 'Bad Data Hash', False, ffit)
-+            assert_fit(sha_algo, 'forged config', 'Failed to verify required signature', False, ffit)
- 
-             # Try adding an evil root node. This should be detected.
-             efit = '%stest.evilf.fit' % tmpdir
-@@ -407,8 +435,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
-+            # Different code path between iminfo and bootm here
-             run_bootm(sha_algo, 'evil fakeroot', 'Bad FIT kernel image format',
-                       False, efit)
-+            run_iminfo(sha_algo, 'evil fakeroot', 'Bad FIT image format',
-+                      True, efit)
- 
-             # Try adding an @ to the kernel node name. This should be detected.
-             efit = '%stest.evilk.fit' % tmpdir
-@@ -424,6 +455,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # bootm catches it earlier, at fit_check_format() time
-             msg = 'Signature checking prevents use of unit addresses (@) in nodes'
-             run_bootm(sha_algo, 'evil kernel@', msg, False, efit)
-+            # iminfo has no special error message
-+            run_iminfo(sha_algo, 'evil kernel@',
-+                       "Bad FIT image format", True, efit)
- 
-             # Try doing a clone of the images
-             efit = '%stest.evilclone.fit' % tmpdir
-@@ -433,20 +467,20 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
--            run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
-+            assert_fit(sha_algo, 'evil clone', 'Failed to verify required signature', False, efit)
- 
-         # Create a new properly signed fit and replace header bytes
-         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-         existing_size = replace_fit_totalsize(max_size + 1)
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
-+        assert_fit(sha_algo, 'Signed config with bad hash', "Total size too large for 'conf-1' config node",
-                   False)
-         ubman.log.action('%s: Check overflowed FIT header totalsize' % sha_algo)
- 
-         # Replace with existing header bytes
-         replace_fit_totalsize(existing_size)
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
-         ubman.log.action('%s: Check default FIT header totalsize' % sha_algo)
- 
-         # Increment the first byte of the signature, which should cause failure
-@@ -459,8 +493,8 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'fdtput -t bx %s %s value %s' %
-                           (fit, sig_node, sig))
- 
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
--                  False)
-+        assert_fit(sha_algo, 'corrupted signature',
-+                   'Failed to verify required signature', False)
- 
-         ubman.log.action('%s: Check bad config on the host' % sha_algo)
-         utils.run_and_log_expect_exception(
-@@ -502,7 +536,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # a dev signature only (sign_fit_norequire() overwrites the FIT).
-         # Try to boot the FIT with dev key. This FIT should not be accepted by
-         # U-Boot because the prod key is required.
--        run_bootm(sha_algo, 'required key', '', False)
-+        assert_fit(sha_algo, 'required key', '', False)
- 
-         # Build the FIT with dev key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'.
-@@ -517,7 +551,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the dev key is required and policy is "any" required key.
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode any' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', 'dev+', True)
-+        assert_fit(sha_algo, 'multi required key', 'dev+', True)
- 
-         # Set the required-mode policy to "all".
-         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
-@@ -527,7 +561,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the prod key is required and policy is "all" required key
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode all' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', '', False)
-+        assert_fit(sha_algo, 'multi required key', '', False)
- 
-     def test_global_sign(sha_algo, padding, sign_options):
-         """Test global image signature with the given hash algorithm and padding.
 -- 
-2.43.0
-
+Ludwig Nussel
+Siemens AG
+www.siemens.com
