@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C60CCD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54280CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:59:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F92F84A09;
-	Thu, 18 Jun 2026 13:57:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A85078056B;
+	Thu, 18 Jun 2026 13:57:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n2Xs+Wyf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LknHlegD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 935688005D; Thu, 18 Jun 2026 13:57:26 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id AE0608005D; Thu, 18 Jun 2026 13:57:29 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2588056B
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:57:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C887184A02
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-463f1165e16so686747f8f.0
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:57:24 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-4631679f204so844216f8f.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781783844; x=1782388644; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781783847; x=1782388647; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=y2MwtdeN4kBgUZOBXCfFvVgDrwStiqshYVRHAo8vWno=;
- b=n2Xs+WyfIwc5GG6LFf+XvdFt2pU0Tyf5wWVp+q2gMEvawvHxgU4Dbs1CpCG8wbb2SO
- eypgw96OvOrWRIrocjyLvrNoiyc81UJnPKtODxR6kBC2dDDxi8KYnDU0uoKc/6XN4Amw
- oqE5V7UBwqvbR4aMO9qwePLi9h2WWnFmnfmTM5iHSQrshjQFg3Wq1Ic7YhujlWk3GdaP
- 8RgzUnd7dllWzprc6vXNPsCFqcDHHoDEZ8301ZXoCxP0vB5Ey+wVsc12YUslOKz0pk2J
- oqdfGdbdtq3r8H7ju4Z+X8RwrLnBsT+MtEnKdjD9zpWBSnObJuN+zmkf0xfJ10JtVx99
- emLQ==
+ :reply-to; bh=S/7DcN5oXldjQ2j9sj9vg3PcG/T/e1DxcbxwoH5+uJs=;
+ b=LknHlegDZt6utMmSZcPQmij+f37TU1EBs7mbN/MCmHLV/SH/4ckgz/yKl5uj3kCsyU
+ hFZttO+/mCQHvKDAxOI49gvbOEC7uQto2qn4L5iNP/73oxLHr4WptAU30LBlwJsjW3Hf
+ 3WpDi6CSRADqVkAOBfg7DF/l3+6oj9n5Wk1hQvnWgSlaqrGC1wTp9iKNF5o8BIF5EgRQ
+ zcqhLhL1cuiAUHb2ByYBwW/OdoKUWSTTm+Gi6484H/iwAIXxYWvvUWT0t1iV4qHqQzvL
+ 8e08XOC0CLq0hX5P8R/HDp2ontbVEFpeJOh7MleSsBpb1bAkKgfBlaasJevz1K3Y1OYU
+ coHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781783844; x=1782388644;
+ d=1e100.net; s=20251104; t=1781783847; x=1782388647;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=y2MwtdeN4kBgUZOBXCfFvVgDrwStiqshYVRHAo8vWno=;
- b=crHWhCDrXWqjwjFuvFaCWYcCbgOlBKgErmQO5ciN25HB2Hhu5q5h+3a/CUlgUzcO7R
- sg0w56P5PAU2pHuxCu4uirp3sNumBOTEtVupxnJ2I3iG1p/aQo6CWTDWa1vJYLmpknY3
- 8HeF8zw1RMZ/KRD903NrKCfT3puHCmdcSLqz+ueNvs/I0GZ62+tQIWaiKdmr6dTcjO8W
- Pn7gEflPCIGYtxUXzVSvUa2FU9mpDyCFKQKCDRFgtDd1wB2rAO3Vy36GSP343VJEwN1t
- +k3VTskt4NwF83disLflJqsty9MFk5kIEaIS+WM20ufQ89xmIP/C7HhkPkgSE4Nu9s+D
- JTrg==
-X-Gm-Message-State: AOJu0Yyp46hpAw40jzlFcC29VjB2yQdXwUnCzA4ZcJpzZ5GQ2BGDtJUb
- 4mmxzGf4b97LpNvqb67ry1dYp4R+o4zq5I7jlivnxMb2wSwcu95UBD8QJzHQzyb/5CY=
-X-Gm-Gg: AfdE7cmLwUxjsC1tsTMzMBc+CnXJQZ4OU5GeRFvmqAji5AycAsXvbqX40DGmYMLrCkY
- 04REK8K/K2RsOm9AgEIaiqPzDGBhpel8EN9Ygm1N1Mnw10KCYEDCDd8vtMwGuU1ptbqi7AbCbSp
- M93FJwLg/xiwzw2g6CwC0ZhqbfcsUXQpvt1GAOjVKWBPIBLUXUXEvodj1Rj/4Tv/Wv/Uq8mJgaa
- gdnVOd/lgN7EDjAQ2+3UmrBHO7T4s25nas/3pJCrC4fk1vtqTBnErZwCehc+UtgLLdlJb7PVgaz
- qUqecvY4/oP4ZYi8cROi6rp32xvTFy8ngZegtKftaim0O+wOXo6URXteZzTA3ssBsBUYJWsECgG
- uC12Kjo9WB2KI0bf/eflge0w2IUjhTPMCzs2SgWc4/y1yD1V0NCWL6XTO2vSwgX13gIPJSV7jiX
- wQCC/AHy9DS0czucoAjL9GGVGsTm168W1deo2sm5FJY9zSZhIDcTU6kVmiwqg2E6cHxw==
-X-Received: by 2002:a5d:5443:0:b0:460:2477:2284 with SMTP id
- ffacd0b85a97d-4623955c2d9mr11381651f8f.39.1781783844189; 
- Thu, 18 Jun 2026 04:57:24 -0700 (PDT)
+ bh=S/7DcN5oXldjQ2j9sj9vg3PcG/T/e1DxcbxwoH5+uJs=;
+ b=r63lDwY2me1JQ9JnmDWpauJdLFs5FoCAP1NjhHTC0JconSy2ZNgGolwTA0Z/7573un
+ vfV4VbUfkxa/YN6USMsMn7Rhkvdnj8cXJvGTtOCK9EUjxPXAQjWkCU9OVfZCynXG9CkS
+ Y31uXq/tYK9mWas7b9qaYVIUC83hXXo712Hz2NhB6ESAE/h8PaJe696NWG5bd90jg8BL
+ buWybURtg2BGURXMvfjwfjHWh4/gkHd5gdkmUrndFpG8nDNY431RADnSJ88em+ljo6K0
+ AwQoFk0PacH8or4QeDW01rcRpz3DVp5MxptP6hxntvTVt2Pw85LC1po8g7z542nqVSeK
+ qJ8w==
+X-Gm-Message-State: AOJu0YylSqrHJASJTyVp+KuM5NdzR5l/0aIePdqsXc3ecwLFO0TTFwAO
+ FrL+O6/WsNfXe1iYalw/Zswghdks1VWNeBBqk7xTVBaU2FE6FGQ5McEglly8DNyU0ag=
+X-Gm-Gg: AfdE7cnyvlhiyiGLDmatv6jxDtWZB/o1rXt+i221BeRc1mrDaEfHM58dmXf7m9HkvV3
+ xmGM+JXk2+pDXTGQm8Rl9JRRvWOVSdvQNp7glb1j5visalHKrlvL20qbQhADpRhaN1tgljLmv3o
+ /GNpGSFGqrcbL/5DYFkJO6k1FuGk0fz7pl/l5WD57CshO4CXD3gU2O2DstOHViT2XA1xj55PKl4
+ t2JxEas8lK6O2g8dcT6pjq1vc7rz5Z8CHF/laZu8LhwCv5wIFF1tDn8wVo5UNUEFwlH17o5QIWK
+ 7+FPSm/lnCxhqnULOdUcDutO+kVm8SjIUwd2LQjSrw5fF5EGalwvAOBAd5Vyg8wy1flASYdCgdT
+ 0/Gjt8yfHMVUETDjdtyg7cVFWaT5fHEX9jpieDqxfENFqeu7fPHlFc17PwnboL0XX+MvywsM83J
+ O2XKt33KE04aZ5Z7OwKdsc2HWXbgmiPjVSmzx2dNOXFe9mCM0HGM0TCBg=
+X-Received: by 2002:a05:6000:2387:b0:460:6a3d:a114 with SMTP id
+ ffacd0b85a97d-463992b0983mr5872402f8f.30.1781783847312; 
+ Thu, 18 Jun 2026 04:57:27 -0700 (PDT)
 Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.57.22
+ ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 04:57:23 -0700 (PDT)
+ Thu, 18 Jun 2026 04:57:25 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 18 Jun 2026 13:57:02 +0200
-Subject: [PATCH v3 14/15] mach-snapdragon: fetch serial# from SMEM
+Date: Thu, 18 Jun 2026 13:57:03 +0200
+Subject: [PATCH v3 15/15] configs: add qcom_sm8650_defconfig and debug fragment
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260618-b4-modernise-smem-v3-14-472391477988@linaro.org>
+Message-Id: <20260618-b4-modernise-smem-v3-15-472391477988@linaro.org>
 References: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 In-Reply-To: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1367;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1368;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=K26Rs1uX2gWOY87qO92bapcJkY4Xb3SuedemIjO31cU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizju6wbpodU3ojI55/5J2vjalXLi7Hesx1WWhXt9/336
- pjUYVn2jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRHc4Mf7gvup/c9UZ5f5Hz
- FHb+Px+cXruaV6QuO/Hr+e1JVuz/1Bcy/LOb/dz/mX5EZFK1udnWFyEHKlRWulf5C19I+zr39qK
- qfi8A
+ bh=nJSqQlQgYIDyVV4sMBRSZ6oNXxk3DOKau1HlGQElwc0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizju6wPfn98rpM4b5+S6pL6hK4rz1bO2qyc+Hbmr+Ckm
+ T/NBKpEOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEFCMY/srynshevfRXw43Z
+ 5qcrVvZsfnwr9nD/8vOBRSvTOVvmsIgzMuxZd8R3oe/U+LPKYVx3tt3gEqlvWN54lbmx+f6yMxd
+ Z58sAAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -127,58 +127,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If available, otherwise fall back to cmdline. We call qcom_smem_init()
-during board_init() so that it will be functional post-relocation
-regardless of if SMEM was used pre-relocation.
+Add a defconfig for running on sm8650 as the first stage bootloader and
+associated debug config fragment.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ board/qualcomm/debug-sm8650.config |  5 +++++
+ configs/qcom_sm8650_defconfig      | 16 ++++++++++++++++
+ 2 files changed, 21 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index b87c12e102e1..4ef046942d82 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -31,8 +31,9 @@
- #include <fdt_support.h>
- #include <usb.h>
- #include <soc/qcom/smem.h>
- #include <sort.h>
-+#include <soc/qcom/smem.h>
- #include <time.h>
- 
- #include "qcom-priv.h"
- 
-@@ -200,8 +201,10 @@ void __weak qcom_board_init(void)
- 
- int board_init(void)
- {
- 	show_psci_version();
-+	/* Initialise SMEM if it wasn't done already and ensure it's memory is mapped */
-+	qcom_smem_init();
- 	qcom_board_init();
- 	return 0;
- }
- 
-@@ -251,11 +254,16 @@ static const char *get_cmdline(void)
- }
- 
- void qcom_set_serialno(void)
- {
--	const char *cmdline = get_cmdline();
-+	const char *cmdline;
- 	char serial[32];
- 
-+	if (!qcom_socinfo_init())
-+		return;
+diff --git a/board/qualcomm/debug-sm8650.config b/board/qualcomm/debug-sm8650.config
+new file mode 100644
+index 000000000000..8323bf25e9c1
+--- /dev/null
++++ b/board/qualcomm/debug-sm8650.config
+@@ -0,0 +1,5 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x89c000
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_CLOCK=14745600
+diff --git a/configs/qcom_sm8650_defconfig b/configs/qcom_sm8650_defconfig
+new file mode 100644
+index 000000000000..e0a82c460337
+--- /dev/null
++++ b/configs/qcom_sm8650_defconfig
+@@ -0,0 +1,16 @@
++# Configuration for building U-Boot to be flashed
++# to the uefi partition of QCM6490 dev boards with
++# the "Linux Embedded" partition layout (which have
++# a dedicated "uefi" partition for edk2/U-Boot)
 +
-+	cmdline = get_cmdline();
++#include "qcom_defconfig"
 +
- 	if (!cmdline) {
- 		log_debug("Failed to get bootargs\n");
- 		return;
- 	}
++# Otherwise buildman thinks this isn't an ARM platform
++CONFIG_ARM=y
++
++# Address where U-Boot will be loaded
++CONFIG_TEXT_BASE=0xa7000000
++CONFIG_REMAKE_ELF=y
++
++CONFIG_DEFAULT_DEVICE_TREE="qcom/sm8650-hdk"
++
 
 -- 
 2.53.0
