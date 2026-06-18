@@ -4,93 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBA5CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 262FBCD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:09:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BF538460E;
-	Thu, 18 Jun 2026 17:08:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A31718499C;
+	Thu, 18 Jun 2026 17:09:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bx/oHYs2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FekwUHoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB1FE848EB; Thu, 18 Jun 2026 17:08:38 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6640B8063E; Thu, 18 Jun 2026 17:09:10 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6939D8063E
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:08:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D82BA849AC
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:09:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-695427c153fso1421270a12.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:08:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781795316; cv=none;
- d=google.com; s=arc-20240605;
- b=ShgAyVUf3yHBOzQ1ignzRnfjaHAjE3Plg5R9IwgKIJ4bZR5/AViJw8O+C860TUdNzt
- WWaB9fWZVMa1hwnXhOCHff81C/Qr1XqOg3TYA7zm6smcP3M6E0/XnkFzvB3ZA2qRItV0
- c+N7rJbgyv3gVKKtDHUhT0B2xGFhNTKkVBvPzCk1obWzYR+2LzpEsKNhtGhpLIvGcHjj
- x8dqXVzrePI6M7EjAiYk4GvutwcWJFleyMZZhXG+yB333RfAmzj6jL5Z0pPpGY/LjfsF
- gr8c5UEVqnmFPh/n/4BTSVvCQef8+ZFlD4aA1OLLhU9iq90In+nJCyaY/G7nAI3OwvK4
- Atdw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ZkBk65jbLw/slfBaUDcBoGTgxtHHgewg/YSq1i2Hy0w=;
- fh=GQyKwPRr8dOXk65gAXuiKSXcuQM8h6Aog4njpiF9nLE=;
- b=QDS9CzWniT8BB1Ks4EoyxgSy6v3sPIgYb4Q8wypkbm9xfUIGS5+1UfTjXofayr/uuo
- NgBGltDy3yPX0PzXES+k/veO6xAMGHYGhuynC7FoIBRcZ6BzBc2mxlyyjr7BlmsyQgbn
- EwKWiKNpXVVBAui6vWEQ394s9BlN+WCyOmLv3eZv87+YmMDWSvcpqVgqdWkY5DzOcUme
- NZ6uOHVsPQzBZHCLIDVDqLtPm8MMXRzB7ZUYkN3St1a1zFU89IOctPh7YkLhVzEc8d6n
- UrL7bz7u+lSj2E/j871p1Ch4rF5tenWVs54YD5lv1E3ai1RoSVSBfNqpDzoxbmA+AUdQ
- KLNA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-440df1c768bso664637fac.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781795316; x=1782400116; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZkBk65jbLw/slfBaUDcBoGTgxtHHgewg/YSq1i2Hy0w=;
- b=bx/oHYs2ms3PGI5WpPSe+nRPvUBlgeqkh4Mv72tciQMbaaOhI3S1XMBjE15dTH9TPO
- ZPnuYuGmH7DIRKnKa4710GiCwzfcWoXLhPOih7Uy/dMLccKnZjEZFtQaQ/eqkcm/OcsH
- OCPw6KiGhBLgo9ACDK7a1UhCvsciCZ5nYnL4U=
+ d=konsulko.com; s=google; t=1781795346; x=1782400146; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XHZ4dyWh/M4+anr5RK0ceDTGQ7rZfrS7kqGr4DwYY/M=;
+ b=FekwUHoHT5TD1bIxSIwUOWt+r2v7G7sK/n1p6QLTRAFVCEnNKg7URHMMu9H7J5wv+J
+ iuLiP0monZggYBitO6nblcRLq34SBl+kF5/VgcGc2nyM8xxe4QVX8CCC0sduOqw1xN16
+ wqzAral79ya1Jk6cBq5I0odesXZ25eUb2gTe8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781795316; x=1782400116;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ZkBk65jbLw/slfBaUDcBoGTgxtHHgewg/YSq1i2Hy0w=;
- b=BlA3h50veElJZCKXwDxnBaF3/9pb+s6PWJ+Fe5FLFNgmWahfRwB8+Kwlwmsiq/wXJ+
- W6ZKs/MR30OBFpPtydv/jIgSYluk+dJwk4nwfwGyBSkVXKdxPTThlU31j0eNi2qxpYc8
- H7LIu/Ut6SFFBqg4TefwSnaFyNVM/6O1xlOhwdKAVCaPsCxtiHhOC6fWdVQ/D7l2dWrt
- vkNMGwraMkVClnHUsJYGKntjzfA+G1Vzu52zWjXkZJCEnLoVPZDhh1gq/iSyMCDqSESa
- jH7+YkZQKkF0sgYCsgAQAIoEuyuYXGCV7oElM+HGGQtB2gKwvHEQ2/cdtH7vrUiV+Hj1
- T4qg==
-X-Gm-Message-State: AOJu0Yx0vzmEoyf8GUbcZazLuglXxiX7kznbr62QiVOHDuLnA+R161gu
- w99z8jswewfPOZUK6LGb8Lc+uxe6LmyTQiqBw1GbhAfRBMGPruaiJboRSBNsjAZ76lErPUhs96n
- qkhpg0T6/xZzGuXRtBqIc4YuYuQ4Qyo5HdKFpec8V9IqnDjtJNhOTA8wK
-X-Gm-Gg: AfdE7cmDOqYtaQ8/HRRHNuQmkKPutTCdLSeKxUT3p9VCG7pwnDh0aFdd/HOYSrxAa7w
- InmxvnDbVzFiNu5nWx66ahDGVSmrTFK/Pb9GqG7VA8SfavBfe/arlHTJTid0KmEY1zCWa/R9wev
- in0xhZ5hCOUNi5sjx+EizD2CenaIsxexQFEFZzRjw+hIKeJgn16U9YZ6lcFPBCdZWDjYa2EP/PN
- 9l+3+M2BSR/ZySTCAeXKOQEPwhQFe65WWIYHxQZB6fdJCWZLraO38wRbXALpYY7Bj/j+DUzHg==
-X-Received: by 2002:a05:6402:4485:b0:68f:cc95:8c11 with SMTP id
- 4fb4d7f45d1cf-69547450050mr4982202a12.28.1781795315769; Thu, 18 Jun 2026
- 08:08:35 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781795346; x=1782400146;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XHZ4dyWh/M4+anr5RK0ceDTGQ7rZfrS7kqGr4DwYY/M=;
+ b=bwO+T0hfGvMmioxWU5XwWN3ZO/xjfpW43vPCmreeZjJ0JWhqYSdAuW9gmIk0Re+Efb
+ 4pvV6+0j7rH/hBD1CCBss/XCABLJx/QQJ3UK7KSOnNoSCwMyPo7xfyCoBNqOlM+pxj6D
+ LuIlnCMC0RLew5FGY8WctetkEQ7ltkxTF/LSM1m0Sgx5SNtDOFNswRxHW48u9gSAqOk8
+ fNu8HapAhmaRNz925mjhCgIIiVUuOXv7DVxhQx4GTZxHtB2ZNRCCfRgnCZHS8kBg7NQ3
+ GOJqiZSUUCqP9ZGMxQdohZgcNxXtYSQnA8LeTQ+NvkwbGlyn/5W3fddJb6XphmpMce55
+ 56/Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8RL/CAGZXizr0fTHYS4HUL63qfSvIORMCGu8xAcjwODwzWpL2OOVxD0k5QQJ7je6jRqSdgDxk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCDpLL1lc97x+HAEUgavqIAdUDUSy9Ll/KvfsMcuzNdCfW0Yxi
+ A4UXJCedbaG7EM8Fmn0wWspxuK9+VP4vOJCiQs1OeI0ZdqoZHiBIVpeLiTepJanGFJ8=
+X-Gm-Gg: AfdE7cmGSDTZA59VpcAQ7SNhN5G+V4MB1xU5alNHxP7KAIum2WCHLO7CGYM9aqmuXWn
+ qmy5BaCM33JMtYJNPYHZJvFEnupkm83f7vCzsfEVQGUrLYzHqYG9GAEruPG12x99XIP+zrtqjG3
+ fUfJK6TU+GcgNPSHXre73rD/93rtdAUv25vZgOZ7GnPlWqQK+lfYIXJnzQGznY0QIgaYAx9VHAZ
+ t+8M9UCAQ190Gz7ykdf81VAHdxkgEP7IpwxAzQyUeqQ5rqr0J6bBBxL64P2X3vzwxcfyrduqg5h
+ KQB+fwrT4kMmNNlschqg48GxwJZkR142FpuUJ518SYucSRTCueqrWqutvPDjSHXCKLjPMVr9bBk
+ soY4Z81uVHiWDYQptlDq4zN4tGak+xc6wTdejwCrOpyLA/i9vRBcqXn3PylHEtEm8xE47nawWx+
+ wZ72P9N1XEwliDY/5wk3I6QMUiLgfDKYRFyDjfcDBKlsQbwb2lryyYoQohBwOhIXSfIe6do2A3D
+ etVUH0mk194zbBnZPA+RkAzdzcDaQc4+N/0y/5R
+X-Received: by 2002:a05:6870:21e1:b0:441:f960:a7d5 with SMTP id
+ 586e51a60fabf-4469061f0femr6560522fac.28.1781795346492; 
+ Thu, 18 Jun 2026 08:09:06 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-245.totalplay.net.
+ [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-44308a5712fsm6882497fac.4.2026.06.18.08.09.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jun 2026 08:09:05 -0700 (PDT)
+Date: Thu, 18 Jun 2026 09:09:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/4] bootm: use CONFIG_SYS_BOOTM_LEN for
+ IH_TYPE_KERNEL_NOLOAD decompression buffer
+Message-ID: <20260618150903.GV382693@bill-the-cat>
+References: <20260610090125.99112-1-nora.schiffer@ew.tq-group.com>
+ <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
+ <20260610194840.GH382693@bill-the-cat>
+ <be080a107555cdbad6828af2a36be013ec186477.camel@ew.tq-group.com>
+ <CAA=k7=na+bmcMj5bw8rZF05eDOV0tfydzpSP_4BbDiEg_LhKjw@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
-In-Reply-To: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:08:23 +0100
-X-Gm-Features: AVVi8CfPTPUmDMsDMerOYJ_YmD8TZ4Loc1EfJoQM_6rqt7nsUR3RGplHlNJYvt4
-Message-ID: <CAFLszThH0A1XMv7P=QA7HreiSq6MLEriE7hODxk6S6MA5t6+rA@mail.gmail.com>
-Subject: Re: U-Boot Concept Tree Proposal
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="x1Tk/zwN4Qv++aXl"
+Content-Disposition: inline
+In-Reply-To: <CAA=k7=na+bmcMj5bw8rZF05eDOV0tfydzpSP_4BbDiEg_LhKjw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,101 +104,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Wed, 3 Jun 2026 at 06:06, Simon Glass <sjg@chromium.org> wrote:
->
-> Dear U-Boot Contributors,
->
-> I would like to introduce the U-Boot Concept tree along with a few though=
-ts on its role in U-Boot.
->
-> By way of background, I have been a contributor for about 15 years - arou=
-nd 10k commits and countless reviews. I have introduced many innovations in=
-to the project: e.g. sandbox, device tree, C test infrastructure, Binman, s=
-tandard boot. Of course I could not have done any of this without the U-Boo=
-t community (nor would there be any point).
->
-> As the U-Boot project has matured, the demands for mainline stability and=
- rigorous review have created a natural friction for landing complex, large=
--scale feature and refactoring series at the necessary pace. This structura=
-l reality, which has slowed the adoption of ambitious efforts like bootstd,=
- VBE, xPL [1], and CI-connected hardware labs, is what the Concept tree is =
-designed to alleviate.
->
-> I strongly believe that projects must evolve in order to stay relevant in=
- the long term. This includes code-refactoring, new features and subsystems=
-, along with migration of old code to use them.  A look back at the U-Boot =
-of 2010 shows how far the project has come. I don't think anyone would stil=
-l be using U-Boot if it had not evolved.
->
-> I have set up a 'Concept' tree, a possible future for U-Boot, as a way to=
- regain the old pace of innovation. This environment is a proving ground fo=
-r new features where we maintain a lower bar for risk tolerance and complet=
-eness. We will accept partial and speculative features, provided the underl=
-ying code remains robust and of high quality, with the shared understanding=
- that features may be dropped if they do not prove beneficial.
->
-> Another difference is AI. I believe that AI is the next step on from comp=
-ilers, which also took a long time to produce good code and find acceptance=
-. The Concept tree welcomes (and encourages) high-quality AI contributions =
-and reviews. It accepts PRs and allows reviews on PRs or the mailing list. =
-It relies 99% on automated tests (sandbox, QEMU and labs) so sets a high ba=
-r for testing. It uses a separate Gitlab instance for now and of course use=
-s a separate mailing list and Patchwork project to avoid cluttering the mai=
-n list. Concept runs an AI-powered cherry-picker so that it keeps up with m=
-ainline. In no sense is it operated as a fork.
->
-> Once features are landed and functional in Concept I hope that many will =
-find their way to mainline, although inevitably some rework will be needed.
->
-> I recognise that introducing a new 'Concept' tree might initially cause c=
-onfusion or concern. This is an invitation to work together to define its r=
-ole. I welcome all feedback - positive or negative - here on the mailing li=
-st, privately, or on irc. Let=E2=80=99s discuss how this initiative can hel=
-p U-Boot remain the defining firmware for the 2030s.
->
-> [1]  https://lore.kernel.org/u-boot/CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=3DieT2o=
-aHfgLf3_nC+xXA9g@mail.gmail.com/
+--x1Tk/zwN4Qv++aXl
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Just to report that after some brief discussions, we have agreed on a
-path forward here (thank you Peter!).
+On Thu, Jun 18, 2026 at 06:04:59PM +0800, Aristo Chen wrote:
+> Hi Nora
+>=20
+> On Thu, Jun 18, 2026 at 4:30=E2=80=AFPM Nora Schiffer
+> <nora.schiffer@ew.tq-group.com> wrote:
+> >
+> > On Wed, 2026-06-10 at 13:48 -0600, Tom Rini wrote:
+> > > On Wed, Jun 10, 2026 at 11:01:23AM +0200, Nora Schiffer wrote:
+> > >
+> > > > CONFIG_SYS_BOOTM_LEN is passed to image_decomp(), so the same shoul=
+d be
+> > > > used for the buffer allocation. Deriving a buffer size from the
+> > > > compressed size if not possible, as the compression ratio may be
+> > > > arbitrarily high for data with many repititions (for example ranges=
+ of
+> > > > 0x00 or 0xff).
+> > > >
+> > > > Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression=
+")
+> > > > Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+> > >
+> > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >
+> >
+> > Hi Tom,
+> >
+> > I saw you applied a different fix for the same issue to master. I think=
+ using
+> > CONFIG_SYS_BOOTM_LEN is a better solution than trying to derive the buf=
+fer size
+> > from the compressed size at all - isn't that pretty much what
+> > CONFIG_SYS_BOOTM_LEN is for?
+>=20
+> Previously Simon also suggested using the CONFIG_SYS_BOOTM_LEN in this
+> thread(https://patchwork.ozlabs.org/project/uboot/patch/20260527150637.28=
+50104-2-aristo.chen@canonical.com/).
+> It was considered a follow-up at the moment, so maybe rebase (and keep
+> the CONFIG_SYS_BOOTM_LEN) your patch on top of mine?
 
-Concept will become a custodian tree in U-Boot's Gitlab instance. I
-will run it, with access to my hardware lab. It will cherry-pick from
-mainline and accept code through its own channels (PRs and separate
-mailing list + patchwork). When features are ready for mainline, I
-will send patches to the main list for review in the normal way.
+Yes, I took Aristo's series to the next branch (which predated Nora's
+series). My only real concern right now is, certainly we must have had a
+reason to not be using CONFIG_SYS_BOOTM_LEN here to start with. And
+digging more, yes, we have platforms that have CONFIG_SYS_BOOTM_LEN far
+larger than the malloc pool. That's why we did an estimate before. I had
+missed that when I R-b'd Nora's patch.
 
-I have been working to migrate things off u-boot.org (lab, gitlab,
-blog... and email). I am transferring u-boot.org to the SFC once this
-is finished in the next few days. If we do end up setting up email
-addresses for people on u-boot.org, I'd appreciate keeping sjg@
+--=20
+Tom
 
-Tom, Neil Peter, please can you ack this to confirm you are happy with it?
+--x1Tk/zwN4Qv++aXl
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
-> Concept tree:
->                        :
->                        ::
->                      ...:::.
->                  ::  :. -
->            .   ::::::-  - ::. ..
->           .:: .:      -=3D=3D  =3D.:.
->         ::.- ::::. ::. :=3D:. ::::
->   ::. ::   =3D..  :.-::: =3D:
->     .:-:-. -.::  ::=3D-:=3D:
->   ::::::=3D.  -.::   =3D=3D=3D:       ::.
->     ::.:::=3D::=3D:   -=3D=3D=3D:--=3D=3D-::--::
->       :.    :-=3D-.:=3D=3D:.   .:  ::
->                =3D=3D=3D:       ::  :
->                =3D=3D:
->                =3D=3D
->               :=3D=3D
->               -=3D=3D:
->               -+=3D:
->               =3D++=3D.
->              .-=3D=3D=3D:
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajQKCwAKCRAr4qD1Cr/k
+CswbAQCCEv6n9DFAAm57rBFKjVNI3prABc3UJIrtdXdRfZnhmQEA6RiLAQWaUbBt
+6mbQVZcotC5wxZwpsC5vTBho2o2OWAw=
+=/Ig0
+-----END PGP SIGNATURE-----
+
+--x1Tk/zwN4Qv++aXl--
