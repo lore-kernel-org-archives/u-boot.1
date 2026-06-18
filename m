@@ -4,137 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E65ECD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 16:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAEECD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 16:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8961C80287;
-	Thu, 18 Jun 2026 18:28:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id CE77380287;
+	Thu, 18 Jun 2026 18:51:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="IbBmdfZj";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SVNQmtjI";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bOL8JCEV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A5308056B; Thu, 18 Jun 2026 18:28:01 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 499538056B; Thu, 18 Jun 2026 18:51:08 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2DC48005D
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 18:27:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0FEFB8005D
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 18:51:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65IFDupG1559270
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 16:27:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=rjskPnDHbgqB2RGvGMlR7GXzPCltlFq04Kp
- FB9dyJvM=; b=IbBmdfZjXu0ZLW8Cpt2aUgLUa7oIxE5H1EyF1EgZ8iUdLvoM5ie
- 8Z5v3OptIbZnK+uGK+HLJpl402Na2MDd2rHLLp+LHwSNCPufu1VuYXmGyRHn5xc9
- NU4K6lTx5Z/H7kzYxTPIISQgmv9RfmOiM5LUtnwow4xD/DiHhiz+ERboqTmuJbiD
- NNX+dnlx8vCzyYJckZ6KKf7UDdgCDXyXBNAM8364sZDPuiwYgh3XXVxFjQ60JljA
- OSlUqOg9+xGx2gT+BT9dIBOWEVvMbr5ym1BYCQM/iacq1/JnSaojq5EC+Ouzg19U
- CE+D+DHdHJaTiGZz5tsnsOjBKcSyp5GRtBw==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4evdn41nm1-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 16:27:56 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2c6b4271491so8874475ad.2
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 09:27:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781800075; x=1782404875; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=rjskPnDHbgqB2RGvGMlR7GXzPCltlFq04KpFB9dyJvM=;
- b=SVNQmtjIOMNVWItlr44MRST0vXrglbRHv6E4Iji4LKVmrfDLl/ghv4OarMJsm5BC6p
- g7v7Q4k8PR/Jxp8/u/pWTHMFHYxQ8t2aDhN7TsScG9nKgWTaQOLki/wfC276rmfrk7P/
- YImeSIydsg1u2ZRSMqctq5sZCze9TIE4FIKFtmGlqg9RvhPtaly8e9Du+GFa4GzE8f3t
- rYxNRKY3E0MGW9lz1zvDczjSwVZ2dL4bTJj/1u6oL4qJCqnSeXiQD1IHp3T9jxHCr9M+
- awepOGWs3n+eJDgBRIe9ckspVeMS+fwFVMnLaLspLyRYiTNiE4v0t4N57KG7pa/KPMDR
- uhqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781800075; x=1782404875;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rjskPnDHbgqB2RGvGMlR7GXzPCltlFq04KpFB9dyJvM=;
- b=UvNi+lQg9ojpVe5fCqwvuWlJmnfvXygFYi6qzO+lxVDxAyoPdYhErIxjhB17TMfbBm
- vnDdHNkJhgkBnBWt5RJVe3biVgC2cv7a4EaqCzPLR+BRHEfzZrSzVP4mVWectBjZrHB+
- jRcAVySAwofGa4WjHaMXKFplX7SsfZhIpBR9xyNQzA/g9My0e/VwPeehbfIQ2wcJ/0ik
- bI3T1O7SX/hgnqmYWdlD29AfXioCejUoxHoGfdnlRrIA4776BOPZl9VACPKCq+Baz5hi
- 0oIVmBgvCBQ0GYwlkWWVzGHHrRzNBJHuD4tDGlZiJAc467p+6bv0gd/Po0FNwaRLI90W
- Xobw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/bcStNx1Qr1/Gbik8egZ8rLmYGkS5BtOX4OKHivcAt6vDhjmeuFUu7rcfRP7dS696CaQSZc68=@lists.denx.de
-X-Gm-Message-State: AOJu0YyUHAPafGrw/JH1MAgM+16JK2W/h4eGJn8aYEB5exYR60FfPcfE
- FfJC01liYFxZgoE1ONSfTpU0bdYx18nx3lFxsSnGkLQ8K3v5Ws2VELBMS2VXm86td5D6UDWDRsh
- r+BFFpysrtS9RsZLGomQBaNpiFIwjZ0PAL2Ac6faYVg/uhuauciuAQVqY
-X-Gm-Gg: AfdE7cnxKU1nVJWdJgBmRfDK8mF67PVl0ByjpLNJYchPS5zM9BkrUluvKuwhPVyJj8g
- Iakfh8ZTNVZnprdutpzkjZCHK+1tcmZEFnS+boGj7ITN5lQUQCsStQC+mlhfrTanMVRc/ER/Asz
- lWN4Hd8cGLQnHY3V/GM6AZtc9FTeBhr0De12v70Z69eXUQbvbgKDhIWB47H0i23i8PZqbsLMb+q
- qoFb97sU8yS/rwkjzRma1wiPLIofv56/Ny6fPa8atqQDhVL4KTAPf1fOgxrnPltuVKxXHBp8L4q
- VoiPZbEDg5aSvWcd2qFQa//Zq6NeZQWt/yY3dai1iDxD+UTdGTOd26GrZMEdUG7EHB0IJvnEK2j
- xcr8h94Og1z/D97xjC7oiKw6exJQOMV+Plkgqs1vd/ky4Yc3pyyrvIEww4VVQnG2QXHV0PSwvti
- gtULRlSKMn6C2eQWc3ryJ5REyDiUKcbQ==
-X-Received: by 2002:a17:903:234c:b0:2bf:379b:53f5 with SMTP id
- d9443c01a7336-2c6f3465c9emr39945445ad.23.1781800075257; 
- Thu, 18 Jun 2026 09:27:55 -0700 (PDT)
-X-Received: by 2002:a17:903:234c:b0:2bf:379b:53f5 with SMTP id
- d9443c01a7336-2c6f3465c9emr39945135ad.23.1781800074826; 
- Thu, 18 Jun 2026 09:27:54 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c6e54e823esm40789475ad.72.2026.06.18.09.27.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 09:27:54 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, mateusz.kulikowski@gmail.com,
- trini@konsulko.com, aswin.murugan@oss.qualcomm.com, peng.fan@nxp.com,
- me@ziyao.cc, patrice.chotard@foss.st.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: [PATCH v1] spmi: msm: Fix V5 ownership table offset
-Date: Thu, 18 Jun 2026 21:57:18 +0530
-Message-Id: <20260618162718.1984873-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=N3py0troYIHpqqAqxi4PT2BfrBXVPEp0+zLetuDNjGSYn7q4HaWamyONVA4Yx27OI8BEpPz4vKkWqWehGNgyZt/L1IvisasnvWFcagC3tYH3LL2Rg23zEiKLFfYfnKQAUs42MufsraY3nLb51eJKBzS3U3v/jzEPBUHBQDO+EnENkJutrpXuwXv5Z0RqEKPzZdGCZucOWJDLihVw4TFgYFYibppTWEyl4P9VwFIwghM/TKSOieQdb/apAIMwPIQDrqSXqozRqj7Q5jXvd94rL+TbnADDbEs8832laLf5oKkJ+RlBCwdeBzQCeyzirAIJRptswoXVYht0ZSCyvx8iYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ORDYzvaqg3zQca2ONFMhXpmVX1cqLgzF53ogxu2PlaY=;
+ b=TAbi/s3jGdyzj5m5ybE7rpJpqlWleZK0SyeWsH+y75MSWKcYQJqAWw02N3FyQrsRhMx0cQ8KcQZqjZPYk4AUphUDquhtX+Jc/E1sJoe+8Xx9oXK4J3l/R3riEE4IhznMf7uvL0QWviVL71ZFeHOHDYMULbe8kIAyCrp1Ufx9q6EKX1aphhw43NygMWOuwv6D0CvpUjcwMpC26u1LI2ptI2tyW4pM2ilIzWmByb+1RL7JJcG/nT09bjv/qgHIPIovsn4vC7PVGwF01DVuNibAE/5T9oIIgS6iOucfELln8xZXbuskA/11ujClUzg6ft1Je3bFO4NoNLr0CgI/A+q62Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ORDYzvaqg3zQca2ONFMhXpmVX1cqLgzF53ogxu2PlaY=;
+ b=bOL8JCEVw5VMR73RHJek4LVwAc/XBHaCxRSCsS4lp6MF599KeF82NX3wFu8nXHYfEn7E/+Sn2RfoXIcWcLEjZFPcutWWFx3habvzu69uYxWIsOHxkBmuNrqJCTT3eMQolZMJGXU0A5xnMQbo33TSLUzYeDr+30HN8+fhqJb6bLw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by PAXPR04MB8096.eurprd04.prod.outlook.com (2603:10a6:102:1c7::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.13; Thu, 18 Jun
+ 2026 16:51:03 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Thu, 18 Jun 2026
+ 16:51:03 +0000
+Message-ID: <09c695c9-1786-4232-889a-6696e4a0aa86@cherry.de>
+Date: Thu, 18 Jun 2026 18:51:02 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/2] binman: x509_cert: document Entry_x509_cert
+ properties
+To: Sergio Prado <sergio.prado@e-labworks.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
+ xypron.glpk@gmx.de, y.moog@phytec.de, afd@ti.com, Wojciech.Dubowik@mt.com
+References: <20260525132828.3348679-1-sergio.prado@e-labworks.com>
+ <20260525132828.3348679-2-sergio.prado@e-labworks.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260525132828.3348679-2-sergio.prado@e-labworks.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0012.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a::22) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE4MDE1MiBTYWx0ZWRfX88DuJ1eExITT
- BORjarwy1KzjCx8sMO3SLdoZZ1x88uw6hD5Xvvnb6g+2b8QliC73lPNoaRSwkbLKwxm0+llWRH2
- B+UL2NFmJ1tPvRSCoyxJ45riUWfnAk+DD0gqoAltLxosJpgVF+lc+Kb1gJJEZ83jvbs5Z9rKBDt
- q5lXfQ6RYDg+/bzd5QQo8vbwPsLv6jA+Tkqt2JgSM4FkQOdLpVGz+QBS9zqbRLsovIFercexZSO
- iMNSX/UQC7a8eC21Pgr2PRk/u7cfw0QQtZiSCeugz5HNXI80FzAul0THjtl0nmBdzHJzsT9tSb6
- bC65VsuXsPrlK5LFIAAWhsbd+ihRd/ALRHwPpqj85pOnmVBxY9bSk/BkDRFU9G/qS9ILsG7/vkJ
- 8P/yL1BFQC8bV22vmQ9aMreq2nM9q3oEvkQP+V9tgEbQlEh4EgpKYUap2R4KzZvKsI05rbFhJ9j
- 8f6EtC5eKijT+B5/YRQ==
-X-Proofpoint-ORIG-GUID: H5WAW1fKuF5FwHOz76exrvs4jgNLoimk
-X-Authority-Analysis: v=2.4 cv=FN4rAeos c=1 sm=1 tr=0 ts=6a341c8c cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=9AdMxfjQAAAA:20
- a=EUspDBNiAAAA:8 a=_l2AY-rO-Bj6gyqKvEcA:9 a=uG9DUKGECoFWVXl0Dc02:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-GUID: H5WAW1fKuF5FwHOz76exrvs4jgNLoimk
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE4MDE1MiBTYWx0ZWRfX7sA1neGb8nwU
- MVasDm3kDUwZG7BaoU2gmB5e1vzk65O+yKSOyYC/Tlo5rz7gxsbmjGSv3y2EjgG3coVohwoK8yw
- 6KM1gwkHEFs57rKz5Ee8FuFUtAgR1LQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-18_02,2026-06-18_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 bulkscore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 phishscore=0 suspectscore=0 clxscore=1015
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606180152
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|PAXPR04MB8096:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4dddfd9f-8d5a-4c48-8449-08decd59c88c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|1800799024|376014|7416014|56012099006|5023799004|11063799006|6133799003|18002099003|22082099003|4143699003;
+X-Microsoft-Antispam-Message-Info: xH427aNJIpGWVBQ46/9ZJSURLyH4JdQzdqVao7lAx0QuuaaiUHuhtJNtrYIh82nqgvfJxUTRrfc3MevKSfyAy65wFWGltV7RI9tUo2tUdat5f+C0xxvPBKg5LVrK1fOs6yz3PmKwYUjCdMhL6+ulyVrOM9TzzSkc/wWgMxMTDy7at4fcAnEp+dQQoo5GP2KTl9E0Q1idT2T0LGH6CimUDivWVWfojRHyg0fEWeAGyacw+eFOkXRtzfwhVX+T1h4yevao59iuZ8ACmuxGYWiEWZxe29h4yhbGp4TOidwRwESILNN6/ipsaCURG5pFUfPqrsm+GyNGZyfRTmZK+OB952j3LVtBJozmZ5GThgzH4lezJr2Na/oLDgqriwgjaaBMgKtTvUTrmHcBp9TXZUpEyO4M7MqQEBcah8kyKzvJSiZJuqDWgvXLX9bAPH6r1udn0RgP5egzMOT+WigmSeiGZySfjlAAATvuv1a2XCWt5YSV6G/0fUS9GrbjoFlE/2MDXT+s+OK5sCeB9x7oMKdOobXrEdAI+r5eG2J5ySIDcVxobk2GMyh+ESrEEMjZCahfUbNLtDa+tC9tqO4R06pIUDtZ2+/4XLpzbkLOaf3zR/x3fRlzfFEBbWaMAIbrHYQRlvpfrGkhk4uTNGqeOW+DbcB2SiU1+o4bByby9P1hX1bOPu1fB8nwh2KTdf/LejY4
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(7416014)(56012099006)(5023799004)(11063799006)(6133799003)(18002099003)(22082099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QUxsZzQzRlNvbEdPb2RLbXVUMmRxcHdHOHcvUXRwZk5RR3RibUpVWG5JdFB3?=
+ =?utf-8?B?Y3pUQjFFc01qcjJiQzVMYWcwS0piNFpFUUVhK2lYb0RTUDlmWjNVKytERHJO?=
+ =?utf-8?B?NzNlWXBrdVp2TGkwN3JFVldGZElMdzVWb2NxSkFqaEpyakpybWxoRFVhK2Iy?=
+ =?utf-8?B?cVE5Z3dTRDJTRDhMR0JiZW9zc1h5UUlyOUxzbU5URXoycGtNVUdpM0YwU2Jm?=
+ =?utf-8?B?RUgvZ202OE1CZ3ZCalpjV08vZ3VrVGwwNnhWOUdIZjJaSUpYdkcwN0JEM3I1?=
+ =?utf-8?B?Wjg2OVlMUGVmUGtwd0VVaGRwLzI3TmExK1A2Uk0wZFgvK1lPRXlrRlkvRW8w?=
+ =?utf-8?B?MllQZm1BSlJHc1doeXZIYUxvb1RQVmZwYjl2UjN3SDg3RitNZkVGdnRuU1Fi?=
+ =?utf-8?B?dERxdlNwWitsNFJiYWVrQWxZY2llUWY1UlRsY0d6cW1sVHdReGRya0xqVFJw?=
+ =?utf-8?B?UFF2YmduNElqYmhLZXZBTGVBTmFsWThySCtTT0ZQK2FoWWJPa25mUFdKNXIz?=
+ =?utf-8?B?c25lNXRnMEFMUnY4UktaUklhS0M2KzhLVWJGQmZsRFpUVGdpOTc5akdNcVV1?=
+ =?utf-8?B?OXpkdWwyb0NHczBqRWVCK3Q4d3Y5UmRyOXJwaUhpMENhelNIblh0cHVpL3Vs?=
+ =?utf-8?B?Nmd1NlhxcVlpcERKemFucDFWOExiTzdBYjNWWDFpNit0RS9WcGdCdVFCcVUx?=
+ =?utf-8?B?dGtnZU5XRHkzVGJOOS95RnB6dEtGbmx1U3o1WGZaVHFXaGs2SUdKNmpBOFVW?=
+ =?utf-8?B?ZVI5TmhpQ2pxNWtBS3dZT3AvTlVtYWZlMForY1F0RjM0cW5zU1BPVkJaU0Z2?=
+ =?utf-8?B?N1g1RkFjNnljUmp4Q0lmYUdNaHEvSFVlQVo1MkgxSW0wUzRyc0UybjdSQWR2?=
+ =?utf-8?B?MGYzc2NmVE5kZkR3cS8wV0NtTjF1ZjM1cTcwb2VHZGF0QmhlZVhUWFpaOUc2?=
+ =?utf-8?B?VklrYzFyTm1pUjF5R0hrWFBNNVBMZklzV0Z0U1JESkFHK211eFZJcHRndndK?=
+ =?utf-8?B?RDJUYjQvWU5VMlcydXdpVzBud2Q4alU1NDM4TklmZmhJQXBmRjBsMlpuS0Nx?=
+ =?utf-8?B?eGU4c2ZkaHhMWGZWRHFVYXZ2MUVFcnhsaU5ubFU4YWRnbC92ZG1uVXhyREVR?=
+ =?utf-8?B?alZwclg3dHFNN3dUOElsSk5ERUNTdGIzRTEyWGtBZjBoTDVDS3VSNm1IbVVu?=
+ =?utf-8?B?aGZvcHFKdWtRY0hyTTFmWkpZeWVWcXJrWUZHRVNBdFdYWjBOTzVudllacDFo?=
+ =?utf-8?B?NSs3S05DTVQzUjBJeDFLdmFZNnlJSFM0RTNQeWNxNCsxaEsrckRXNFU5Z2xO?=
+ =?utf-8?B?TnNPc1NLbjdIYittR0I0eDU2dkhLb2hlVkllQ2VZcUQzYzQ0Z2NNZFJLNzZS?=
+ =?utf-8?B?WFNoNHpWTzhzRFhxTXorRWZYa0RvcFdoTWp1QUw5c1ZFM2s0MFp2V0s4OUZh?=
+ =?utf-8?B?TlFBZ2I2a2NycENqcml4bytBd1c1ZmdmWnlFL01zZlFrS2FqYVZ6MlNzTmFT?=
+ =?utf-8?B?NVFrUFc2d0NSYXluWTUrQWRENU1hek1ab2tqWWM4R1RTQ0lXL0lnNUg4Q1k3?=
+ =?utf-8?B?cjFSbkhSSWlCVWRUaXhvYXNzR0RmV2JiTnU0YlB0N2VtYlBvZStLMExZb0Ru?=
+ =?utf-8?B?NXh5Q3FuV01LTDZJelhjaFBCTFBZZE1KYVl0QTZ6b25ZVkV0dklyRWkyaE1u?=
+ =?utf-8?B?WVZpaENGMVJiRFZVWjM1T1FXb0l4ZlByRjNrZVlmQS94NlE1d0MrZWZwSkxR?=
+ =?utf-8?B?U0gzUHIrK3Q2cTVjVCtVQXJNcURCT0tFWXFVUkFZZHMxa0d6ZXIwRDFCVUxL?=
+ =?utf-8?B?TTZReTBWTjBXYzh5RGF5TUUvaEFXK2dzK2NYS3J5VWI1Nlh4VUdVV2QrK2ht?=
+ =?utf-8?B?eUYrYXRnalFWNXc5WVRORUl5a0ppSy9MRS9TbTNRTWxESmxPSWxjLzhCSGNR?=
+ =?utf-8?B?SFd5MHVQL3ZDSlA0dWhNbUUvZnp4YVdvRGkxOUNJK0Y4R1VIVzVBSm5QNGh0?=
+ =?utf-8?B?YzZQbnpzR1IvNlZldHJpOEptT0tCUWllU1BIZW1GMkVqYUJmR0Q5bDIrWHFY?=
+ =?utf-8?B?djVmRjZpYUZkWDVFN1RQbHQvUFlzQ3Z3OEd3UE5QOGpNODZrVFBCd25uZ2lN?=
+ =?utf-8?B?NkZkMkJKNk5EZ0tBS2dyczViMG5DbDFPSHNJYUd2a2JCZm94Rmk4SXhwdlha?=
+ =?utf-8?B?aGppV1BTVm9SV2NJWldKQitPZWIvNzVyMVJrczM2b29QdXBnUk9XM1BhL0JT?=
+ =?utf-8?B?ais5UFpPbnlOcFMveWVOQlRhd1E4bkxYRlRKMHJJNXlmRVVjdk5rVXRpelF2?=
+ =?utf-8?B?Rk5ZYm9kd2E0TEhCNlNseGYyak5xTWI2SFIvTTZ3M2JGT2M5RWVFQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4dddfd9f-8d5a-4c48-8449-08decd59c88c
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2026 16:51:03.4760 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: j2zkZqQ45kaN6HLgItEaekfySnRzlXjw48BeutpVWdKDFBPrFv/drOK20bRaiXEhIxPcI65Hq6x7il3M4WxYNdUkplzcmMeKsk9yNnE3wSs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,51 +151,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver reads ownership registers from the wrong address for V5.
-The ownership table is at offset 0x700 from spmi_cnfg base, not 0x0.
-This causes incorrect peripheral ownership detection and potential
-access violations.
+Hi Sergio,
 
-Add the missing 0x700 offset to match the kernel driver [1]
+On 5/25/26 3:28 PM, Sergio Prado wrote:
+> The Entry_x509_cert class only listed 'content' in its
+> 'Properties / Entry arguments' section, even though 'keyfile',
+> 'cert-ca', 'cert-revision-int' and 'sw-rev' are also read from the
+> entry node and passed through to openssl.
+> 
+> Expand the docstring so the binman documentation generated from it
+> matches the actual behavior of the entry.
+> 
+> No functional change.
+> 
+> Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
+> ---
+>   tools/binman/etype/x509_cert.py | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
+> 
+> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+> index b6e8b0b4fb09..efa85f9553e7 100644
+> --- a/tools/binman/etype/x509_cert.py
+> +++ b/tools/binman/etype/x509_cert.py
+> @@ -18,7 +18,15 @@ class Entry_x509_cert(Entry_collection):
+>       """An entry which contains an X509 certificate
+>   
+>       Properties / Entry arguments:
+> -        - content: List of phandles to entries to sign
+> +        - content: List of phandles to entries to sign.
+> +        - keyfile: Filename of the PEM key file used to sign the binary.
+> +        - cert-ca: Common Name (CN) embedded in the certificate. Used when
+> +            generating a generic x509 certificate.
 
-[1] https://github.com/torvalds/linux/blob/4b99990cdf9560e8a071640baf19f312e6ae02f4/drivers/spmi/spmi-pmic-arb.c#L1737
+You know what's funny? This isn't used at all. Parsed and passed to the 
+openssl bintool, and it does nothing with it. I bet
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- drivers/spmi/spmi-msm.c | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
+CN                     = {cert_fname}
 
-diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-index b89dd0b406b..a665850cd65 100644
---- a/drivers/spmi/spmi-msm.c
-+++ b/drivers/spmi/spmi-msm.c
-@@ -260,11 +260,21 @@ static struct dm_spmi_ops msm_spmi_ops = {
- static void msm_spmi_channel_map_v5(struct msm_spmi_priv *priv, unsigned int i,
- 				    uint8_t slave_id, uint8_t pid)
- {
--	/* Mark channels read-only when from different owner */
--	uint32_t cnfg = readl(priv->spmi_cnfg + ARB_CHANNEL_OFFSET(i));
--	uint8_t owner = SPMI_OWNERSHIP_PERIPH2OWNER(cnfg);
--	bool prev_valid = priv->channel_map[slave_id][pid] & SPMI_CHANNEL_VALID;
--	uint32_t prev_read_only = priv->channel_map[slave_id][pid] & SPMI_CHANNEL_READ_ONLY;
-+	phys_addr_t owner_addr;
-+	uint32_t cnfg;
-+	uint8_t owner;
-+	bool prev_valid;
-+	uint32_t prev_read_only;
-+
-+	if (priv->arb_ver == V5)
-+		owner_addr = priv->spmi_cnfg + 0x700 + ARB_CHANNEL_OFFSET(i);
-+	else /* V7 */
-+		owner_addr = priv->spmi_cnfg + ARB_CHANNEL_OFFSET(i);
-+
-+	cnfg = readl(owner_addr);
-+	owner = SPMI_OWNERSHIP_PERIPH2OWNER(cnfg);
-+	prev_valid = priv->channel_map[slave_id][pid] & SPMI_CHANNEL_VALID;
-+	prev_read_only = priv->channel_map[slave_id][pid] & SPMI_CHANNEL_READ_ONLY;
- 
- 	if (!prev_valid) {
- 		/* First PPID mapping */
--- 
-2.34.1
+should actually be
 
+CN                     = {cn}
+
+and we probably should add a test to whatever's using 
+tools/binman/test/security/x509_cert.dts to actually test the CN is the 
+expected one.
+
+> +        - cert-revision-int: Integer certificate revision number. Used when
+> +            generating a generic x509 certificate. Defaults to 0.
+> +        - sw-rev: Software revision number embedded in the certificate by
+> +            the sysfw/rom variants used by the TI K3 secure boot subclasses.
+> +            Defaults to 1.
+>   
+
+Sigh.. It seems like cert-revision-int and sw-rev are actually used for 
+the same thing, just with a different default value.
+
+It'd be nice to send a follow-up commit either fixing the non-use of 
+cert-ca, or remove it entirely. Not necessary for this patch series though.
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
