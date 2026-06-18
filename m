@@ -4,71 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB58CD98ED
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 12:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81266CD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 13:06:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9655C847C3;
-	Thu, 18 Jun 2026 14:54:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id F098A847C3;
+	Thu, 18 Jun 2026 15:05:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="vILLLJUy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LTMLhTmE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8439E84874; Thu, 18 Jun 2026 14:54:51 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BCF8F84874; Thu, 18 Jun 2026 15:05:57 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B16E8460E
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 14:54:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3F538460E
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 15:05:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 5C22FC06CCC;
- Thu, 18 Jun 2026 12:54:54 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C113A5FF03;
- Thu, 18 Jun 2026 12:54:48 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D66C3106C8177; 
- Thu, 18 Jun 2026 14:54:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1781787287; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=dZSNy2mcN3DuY0OYiXy91aEkfQbZ3lJKK3hhb4owN5A=;
- b=vILLLJUy56U42r5aBA8MLHs2qpG2SnlwRpGOZWkHE6tYKdENDH+jQfT6EuUwsRhuU01Wqo
- VxMLeekcXhCKBnre7BUFiFNEfJoDDZqIwGDBhbTBmb2OD+wg4FITP6N+5ypI1xOtT4tLhN
- UJJiPaMZYCRJP97FdbIV/J8EevDP2fwZMTfxEi7dLmQj/AUeSsXORlRqJnjo+taHRKKwmt
- netSemYC5ipvlEQ2NT6QwYQRAmXGujjP/hLB+KMUC5sAKcO4lM5vBp7X4/B+SAF/UrppqM
- kuxvIxdzpiRhZZwQ7ost+CbCZgwrjnR8nXN9CjrPM7ZzL3dwykOYd6dwl+gq5g==
-Message-ID: <3990ac94-3bf8-421c-bac8-2111fef42029@bootlin.com>
-Date: Thu, 18 Jun 2026 14:54:43 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bec4639953dso145483866b.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 06:05:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781787955; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BfIaeGOiARKDQRgdM7koQFIVf2pWR5bhCYPRY9caOgQaxF1NpOwqlQv7y+mdL1BgV0
+ v4jYgU/n5EhDGkXiW1rdztg0g4FYTcNJkh+ELhwLq3M3CYO8EzNs2YLrDCRjkvrVEiUt
+ zn4+n1qfZCHgX2KmgamTIFFvFYrMqHTlbe/+h4TKR4vVcyHCC2cKvb/ONEUO2kUZJNOI
+ DcRf1kyxrYpT9EdwdW19i9nv3rzUD+JX8ZJgqcZvrS/rY4pTpZGC4nV/Kc/V3bUZkBGG
+ YC3py4SQHk5Q15X2g6JSe9Y6k0oGpTv24AASPrENA91SswoTsMwvyIN76wkIV2wU23ff
+ 62Rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
+ fh=aCJ9LYRt3Tx3PJdHtcGy/8qd+yIJTSdchejP/X/BvkQ=;
+ b=DdQYjUecNs05PLKmzkgjqTsd0rz6DL8e8g49LhmQgKpI12sEiX15Ome8qyzvF1K8cI
+ 7sJxErTflUYsWNihmuPU3SjvwQ95iul7K4YT9tOrkn6NxFnCOGaCTL3rEk6rihiQtx2L
+ RPmK9P9f8RqVH/axv7Ezsf8LktDJtuvZ1BE/UafhD8wNCt515Ksp39YSyH8KGoT7sP10
+ VIJ7fLw1Qe6AwaP2ztkfrAHc0KrWoPAZM1l/YTwXWFkh0UmLb8dO12aQpHdQcJaHXXqT
+ MHJAMxRWrsgHaTMe4pjwaEeIV7RKujY1lH7t0N9DChy/uI7W9/VWAo9vvGyJ4EEX0efD
+ vw6w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1781787955; x=1782392755; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
+ b=LTMLhTmEGZGlweBe9LD5aj82YWgbOU6NB4NaqyYcRok8ZrIU77muyKH0++YuxXpNry
+ lWrQUGPVcR/WyHlh4ucjvxKick3Mhf++Wo9rIvWIZKCFQRPy2xb+6Valkvg93SVPh9hW
+ HClNN7QzBIUrwSEUiEYwBL5lcxMsWlbnvbhdo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781787955; x=1782392755;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tOw7g3BLJkGjXE9wXKtT4SYPnFfO4tJJ5DmOBkYVBPo=;
+ b=K1SUEaq3ZQx4CT2cApDJ2Jc0zvvdo8lCKMKdIHYr7EmeFjj8kKtRHroj+S0aDn/8CU
+ TZMq77pNy636M9iOkv2INH/3knRzFa/vl6zlC5MHNnKfU/ZqCcXv+C4alPhmzxSHgOkB
+ Lt6zIa7Y6Th+ykrNaqZjP738d2RqA12Gmm+xsZTaH2eesAGvhdAlGp/Xg5ab3e/gve0B
+ ppfol1rthS8uBwoXVVN1FREwB39f/MwsAyF72uFy6k2MHpiQ69V80vvUa/V8Tc56/+hX
+ 2k1kpVfS2UbRw64I04U/5ne7FNKZWU7jsjG9auP+qbrqpXxJXQkjuMjq9ujINOIDrZll
+ 2GUw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/MgSVVebsAs67VARI5+DodwpMkR5xRMpYL7ll5eTG45rXSXAkp0fWiBXrIgptIASanuBJzddA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxf0Xv4xpglYuRyYabkT3a36V5WLYz/YXaBwbPIPDgdFj082zHv
+ WqzR1WKhQiGJWiz09IWFbpnqWPgA+S2oyp8XnKEGpYEtCNDP3s27ugdVaPD0Zg9fR4JrdCd+yBD
+ 4Uw5a7dbrFszH/D0Je/lNpzG+UnDu85ucJ1a8cRa/
+X-Gm-Gg: AfdE7cnAa/T5mSvUS4PV8HZDH/5Vks8EpgO3+c1vfKZHs8UR56Oinc1Vzoyruj641Oh
+ ggniFahvu6ArgoazOC1xRw1TtLg4vBOi6piFKrEp20pmWAmvE79Dx/UK5c/KdlH4rnpvotBg0bf
+ mF9dBwP+CGzRNw3Uu7TbCmk2sZGvA0Yzejx5aC8AiaLwBBhiJrkPMfqLBiGexg8k0NRNkD5eAWu
+ uy4wPgiN0LgUBIAeiAzDaDqXYbJBveuzfp8xQ82sgnDqCtF+Pn0DuHGGCOoegIGsgZD8AzC9A==
+X-Received: by 2002:a17:907:801:b0:c07:e025:154d with SMTP id
+ a640c23a62f3a-c07e02527aemr98377466b.52.1781787954999; Thu, 18 Jun 2026
+ 06:05:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/20] board: ti: j721s2: Add resume detection
-To: Richard GENOUD <richard.genoud@bootlin.com>, "Kumar, Udit"
- <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Bryan Brattlof <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
- Abhash Kumar <a-kumar2@ti.com>, Gregory CLEMENT
- <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-7-richard.genoud@bootlin.com>
- <18d03aa5-0c4b-461d-a408-74fb3eeafe0f@ti.com>
- <01148745-2fd2-46b4-9dd5-415fce69e1f2@bootlin.com>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <01148745-2fd2-46b4-9dd5-415fce69e1f2@bootlin.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260610-ip_defrag-v2-0-060f6eeaeaa1@nokia.com>
+ <20260610-ip_defrag-v2-2-060f6eeaeaa1@nokia.com>
+ <CAFLszTiiBtrthYHEAeppEqUoksW3fv7j9UNmztPOVd0MVCV8Mw@mail.gmail.com>
+ <dfa39230-ac45-44bd-a2f3-4baf840d34fe@nokia.com>
+In-Reply-To: <dfa39230-ac45-44bd-a2f3-4baf840d34fe@nokia.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 18 Jun 2026 14:05:42 +0100
+X-Gm-Features: AVVi8CdqvD7k52VCJp8IiGXTDhHQCDPOHWxPLNkd04qCJv2B-7tfbbO70mw7kKY
+Message-ID: <CAFLszTjLeaohZWKR7u0OGh8kVXWiv9JJ8yNJ7+TxqV4MA_XuDg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] test: net: add IP defragmentation
+ duplicate-fragment regression test
+To: "Mateusz Furdyna (Nokia)" <mateusz.furdyna@nokia.com>
+Cc: Ben Warren <biggerbadderben@gmail.com>,
+ Alessandro Rubini <rubini-list@gnudd.com>, 
+ u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Mariusz Madej <mariusz.madej@nokia.com>, 
+ Mikko Heinonen <mikko.heinonen@nokia.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Alessandro Rubini <rubini@gnudd.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Heiko Schocher <hs@nabladev.com>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,95 +127,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Richard,
+Hi Mateusz,
 
-On 5/21/26 11:27 AM, Richard GENOUD wrote:
-> Le 11/05/2026 à 12:48, Kumar, Udit a écrit :
->>
->>
->> On 4/30/2026 2:13 PM, Richard Genoud (TI) wrote:
->>> From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
->>>
->>> Add the capability to detect a resume. This overrides the weak function
->>> j7xx_board_is_resuming(void).
->>> To detect the resume, SPL searches a magic value (0xBA) in a register of
->>> PMICA.
->>> This value is set by DM-Firmware during the suspend sequence.
->>>
->>> Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
->>> ---
->>>   board/ti/j721s2/evm.c | 37 +++++++++++++++++++++++++++++++++++++
->>>   1 file changed, 37 insertions(+)
->>>
->>> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
->>> index 92d5c8498643..e18ba1a540c9 100644
->>> --- a/board/ti/j721s2/evm.c
->>> +++ b/board/ti/j721s2/evm.c
->>> @@ -22,9 +22,11 @@
->>>   #include <dm/uclass-internal.h>
->>>   #include <dm/root.h>
->>>   #include <asm/arch/k3-ddr.h>
->>> +#include <power/pmic.h>
->>>     #include "../common/board_detect.h"
->>>   #include "../common/fdt_ops.h"
->>> +#include "../common/k3-lpm.h"
->>>     DECLARE_GLOBAL_DATA_PTR;
->>>   @@ -304,6 +306,41 @@ int board_late_init(void)
->>>       return 0;
->>>   }
->>>   +#if (IS_ENABLED(CONFIG_SPL_BUILD) &&
->>> IS_ENABLED(CONFIG_TARGET_J721S2_R5_EVM) &&
->>> IS_ENABLED(CONFIG_PMIC_TPS65941))
->>> +
->>> +/* in board_init_f(), there's no BSS, so we can't use global/static
->>> variables */
->>> +bool j7xx_board_is_resuming(void)
->>> +{
->>> +    struct udevice *pmic;
->>> +    int err;
->>> +
->>> +    if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
->>> +        goto end;
->>> +
->>> +    err = uclass_get_device_by_name(UCLASS_PMIC,
->>> +                    "pmic@48", &pmic);
->>> +    if (err) {
->>> +        printf("Getting PMIC init failed: %d\n", err);
->>> +        goto end;
->>> +    }
->>> +    debug("%s: PMIC is detected (%s)\n", __func__, pmic->name);
->>> +
->>> +    if (pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG) ==
->>> K3_LPM_MAGIC_SUSPEND) {
->>> +        debug("%s: board is resuming\n", __func__);
->>> +        gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->>> +
->>> +        /* clean magic suspend */
->>> +        if (pmic_reg_write(pmic, K3_LPM_SCRATCH_PAD_REG, 0))
->>> +            printf("Failed to clean magic value for suspend
->>> detection in PMIC\n");
->>> +    } else {
->>> +        debug("%s: board is booting (no resume detected)\n", __func__);
->>> +        gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
->>> +    }
->>
->> Could all function be combined into common_j7xx_lpm.c for all supporting
->> SOCs.
-> J722s function is a little bit different, but I'll find a way to
-> factorize them.
+On Wed, 17 Jun 2026 at 16:19, Mateusz Furdyna (Nokia)
+<mateusz.furdyna@nokia.com> wrote:
+>
+>
+>
+> On 14/06/2026 14:16, Simon Glass wrote:
+> > Hi Mateusz,
+> >
+> > On 2026-06-10T14:25:33, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
+> >> test: net: add IP defragmentation duplicate-fragment regression test
+> >>
+> >> Add a unit test for the IP datagram reassembler (CONFIG_IP_DEFRAG) that
+> >> covers the duplicate-last-fragment scenario.
+> >>
+> >> Without the fix the last fragment will re-trigger datagram delivery,
+> >> increasing udp_rx_count to 2 and effectively failing the test; with it
+> >> applied the test passes with udp_rx_count == 1.
+> >>
+> >> Signed-off-by: Mateusz Furdyna <mateusz.furdyna@nokia.com>
+> >>
+> >> test/dm/Makefile     |  1 +
+> >>   test/dm/net_defrag.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+> >>   2 files changed, 83 insertions(+)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> >> diff --git a/test/dm/net_defrag.c b/test/dm/net_defrag.c
+> >> @@ -0,0 +1,82 @@
+> >> +DM_TEST(dm_test_net_ip_defrag_dup_last, 0);
+> >
+> > Just to check, does this test actually use driver model?
+> No, it doesn't. It drives net_process_received_packet() directly,
+> nothing is actually using DM in the test path.
+>
+> I'd followed the existing precedent in test/dm/eth.c
+> (dm_test_string_to_ip6(), which similarly doesn't exercise DM), which is
+> what prompted my earlier question about whether "ut dm" was the right
+> home for this (and stopped me for looking further, my bad).
+>
+> I'm happy to move it to the lib suite, for instance. Since Jerome has
+> already queued this v2 for net/master: should I create v3, a follow-up
+> on top of what's queued or just leave it as-is in DM?
 
-Also PMIC NSLEEP triggers bits shall be set to prevent transition to S2R
-state while clearing interrupts.
-For example PMIC RTC Linux driver accesses to interrupt registers during
-resume, in this case if NSLEEP triggers bits are not set it triggers a
-S2R transition.
+Since it works, this is fine. We can always adjust it later if problems come up.
 
-To set these bits, just write 0x03 in FSM_NSLEEP_TRIGGERS register of
-the PMIC (0x86).
-
-This shall be done for J7200/J784s4/J721s2.
-
-For J722s, I don't know.
-
-Best Regards,
-Thomas
+Regards,
+Simon
