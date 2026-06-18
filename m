@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CEB3CD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F97FCD98F2
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 11:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A418849C9;
-	Thu, 18 Jun 2026 13:57:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7690E849E9;
+	Thu, 18 Jun 2026 13:57:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UwufFssc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p3SJLUE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1773849EA; Thu, 18 Jun 2026 13:57:16 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 87AD8849EA; Thu, 18 Jun 2026 13:57:18 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA2A38005D
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:57:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AFF4849E8
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 13:57:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-490bb83a3f6so5334715e9.0
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:57:14 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-490b7866869so7723755e9.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 04:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781783834; x=1782388634; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781783836; x=1782388636; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WTxaFyE2qhtnyBQx2cPM39mlRKtlfrEkHE0SKEiXpCk=;
- b=UwufFssc50HXlghhyNaLQexP7aCxdK5c5OKSDuzf0UNwz+/KRMBsarfPOeumCosUlW
- 2H3TTX8XWEo69K3kkUI1VJyQh+NY51LogxJPz8hQYFvbP/lVVrTG4CVnW6XlkIeUGbAN
- 6t5PwMk9Vh70QFVvyqQ/7f7CVXmEa4egEcv7+ooOrvqxvu43h159d4Mq13okhLl4tYOR
- uGZmzGDZnBQ/T1ClfckkS90ay8c+va2EW1KrBqUwNfUHDPXSFfMO/tDVHhHMAzgBJjPL
- u2H1A0jE2V4XE26YOq3+1kvE3asdyr2/6lG5v9SJOicxkHF/jFiAl33vgQsiMMMlarH9
- JaRA==
+ :reply-to; bh=L3QhoSmltGAVG5n+3Eg5AeyiVEqAAVMRwmgimpQY6Kg=;
+ b=p3SJLUE9egnyBpuXVA90ERYIrBTXlBRpFbpEHVqAjZqkoufEAQNI6fxHhr0L16GPvY
+ LUh9iKGOBypyI+h0vjrHPF6VNFgax9CTIV+0FVOjGfj6V19SFGMN0QHHIAJpE7NJilyN
+ YdjtXTkakUDJWkKUJp6LWT+aVf5lf+m8oDFpQNSPkS+LkO6hpx8WU5okPtlwGwiJ/c1q
+ yrtSE3+QTqupuB5ozx8ElJ2y+S+M39U0zJdvFJf/+BAJXRI9o81MfT89N5uCEsBvxK2U
+ e2HT8zPbaEMXvLXPQZVhyQ4csM2KumZNIPkl18mZxBjHuP8Ay5kjtY9xVS5PWGPhJtLs
+ p6Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781783834; x=1782388634;
+ d=1e100.net; s=20251104; t=1781783836; x=1782388636;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=WTxaFyE2qhtnyBQx2cPM39mlRKtlfrEkHE0SKEiXpCk=;
- b=l4lKAiwkCtjhVCqBggb0eTGvJcelLG6CB+GpkvNYFQ/IqnrPjRgoIFxjWlNGwr+zZg
- e6KD0C63IBdjuwDoGTf92LB/gox9BxJqJ9IayieKbw7TEQ+wmKoRf6ZoDFH7zjNe7OYj
- uuoAdBTpFT6pYHq3wlB8dUrTOkNKknwc2V9tHvlbFWKauJPMjiOb2RZFjgcv/sRJK6ZR
- cOZ2Rumprm98diLF10r8obqKjWfqNxEm9NmwN/WtCeMSlCvtMBlSoTSglxcpceLyD8cv
- aKMmngW0qzDbYJxOFpz8suyVTdTVu6986DilDiz181jkaM6YFdBYKDFnAp63xzMeBoqB
- A1KA==
-X-Gm-Message-State: AOJu0YwNrRoHPLGhbVDGa5S+8vTOWcyAQRbsikoUnRb0ttZGO3TmhoD2
- YaFzUf658eLNU270pW5iPAlFcn1k8439bRNtYtcJIB2iJay9wWXF3BheTrzV271hSFY=
-X-Gm-Gg: AfdE7cl8ejH7VqEi6FCtQewykeb9x8mbEBbG0IzICB4WJ88Sz9vRaG99Yj9TpYO0VD7
- Junn1QW5kP2lb6a2r9qm3MZa8aeHPAVwwQeoH3hnJrgBMkvE9GyY2KDE4i9W3V5rBhHRury9HbK
- ReMXsZILkUruFkM2vL9nFFusxAxBbfBrHSpKITWVg3q/nzOFguv6zm4N7rPlbkfP470Wq5g+8Zi
- RPL7xN5fGDNyIUFXp5iHKL7SLNDpEAYRpD94YZb39WsfvvXvANfMJIAtHZJ1OSI6zMkAWCeoUJ3
- ooGUU/DflG9zlTIk2oxibLO4FYuAiJYArF7nEi/sZM2k3FBxSJjeX+6tesdNgK/W//eV9FluGD4
- bI/QuX66K6GuQc+4Ji5Obhn4iR6lLKT8ScFgtxPoQ9towFazZfZICH2kHqj4HYAb0H3uXxm2Xwc
- hHAzf1JOIn+j3persyLhVqkI/Ij6evzNHLq+iNm7CzXE3XifMLPTPP7Tk=
-X-Received: by 2002:a05:600c:1395:b0:490:e5c1:b8b9 with SMTP id
- 5b1f17b1804b1-4923a8c402emr30969415e9.0.1781783834028; 
- Thu, 18 Jun 2026 04:57:14 -0700 (PDT)
+ bh=L3QhoSmltGAVG5n+3Eg5AeyiVEqAAVMRwmgimpQY6Kg=;
+ b=Rh4s1Az36Zj6SbxiXZS/O5KDFjXGeI303TgDVTnzNQQf2mCT/COkHtlR4kEPyFzTn4
+ t0vG9EiZBZQ/CGDyFOtDjjAo5QnKIgAWrBIQxqL647AZg57Yg74HuywkQDk4nNATrnj3
+ H+NGjWk+7Qt0qMpwPxgqTIBXtQZ5EZDrKqbkLVrlyWL7tt1TCPE51C4xX0PdsLIMqG4U
+ Og4JzVT7tlQHMOe6/0Jz9r5MUAWuSSDBwH3iOEyTashXSeGTc7F6tNf5JmsbC1KM9LeN
+ oRMmEtGjGMAcgBlLm+cXk/z9kuykkrtvNInbiAzca+VPscO7RzkcvyGkk9WHJrLh9Jsw
+ dCrw==
+X-Gm-Message-State: AOJu0YwFT5kGKov8gL6kCjGgL9N/bZ+3snuSXCmafMcjZ/fBc6PWGlqm
+ kc+0+/4P3SZswpbqAENIahIqnsROgZ8Te9bWQQ/aV+7gPvXtHcWo9g0Xm/Vvt2YcHig=
+X-Gm-Gg: AfdE7clQLkYxsG7vpKsPaAFVgz0lXVe71wtJQ+MvuQi2o69yx+USkFZdgTmYf2Rrox4
+ Ga1NjNGFmHByWrm0xkd+RI3qfbzm6qrTJFDa6pFSMUnylJTZjwN7TOBCSwBoOr8l87+2g3wRTAa
+ 7T8XLyp3iIvhghI77HT1jpVHRHu5vz8sWoLvad70Cqcf6tC8VJb5SECBpvr8h9UAjOlw3EhwZJu
+ zT8RD8MHX66KokNRDhEtjSOPeEahMehoNan2JpkUhOek0vRBnJ8hXjG69x5lDfi0bggqz9XsRa9
+ 6l7HUijd99Rs21S2Y4gWzvv8Gj5E6FyBZOdnFsHgPz2oJ8cvZQFE62fc9zygMkC9VJ4caB4kAjW
+ Ew8LO74bL6ikGZNqQeZHmw9Qm72sSpZ1c0yopOQYH0eZMLcci+LkIQBKuxk+ElTQYCh6qabNW16
+ 96PowE9OIuTUNtJn0BnbsW/TBiCNwUpzx6uBgw3mttHmgyQBbaX8h8f5s=
+X-Received: by 2002:a05:600c:6045:b0:490:7dfd:f7c2 with SMTP id
+ 5b1f17b1804b1-49234104447mr92028495e9.11.1781783835721; 
+ Thu, 18 Jun 2026 04:57:15 -0700 (PDT)
 Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.57.11
+ ffacd0b85a97d-46289c3b3a3sm14448355f8f.30.2026.06.18.04.57.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 04:57:12 -0700 (PDT)
+ Thu, 18 Jun 2026 04:57:15 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 18 Jun 2026 13:56:57 +0200
-Subject: [PATCH v3 09/15] soc: qcom: smem: get serial number from socinfo
+Date: Thu, 18 Jun 2026 13:56:58 +0200
+Subject: [PATCH v3 10/15] soc: qcom: smem: stub functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260618-b4-modernise-smem-v3-9-472391477988@linaro.org>
+Message-Id: <20260618-b4-modernise-smem-v3-10-472391477988@linaro.org>
 References: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 In-Reply-To: <20260618-b4-modernise-smem-v3-0-472391477988@linaro.org>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1995;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1326;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=B7TNnkjwSQ3jYFv20YwxadVuoGWOjCu7WiCVmzeuxPM=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizju6z3kurDXQymGbefmcMw67X6tVpH6SlRqXNPXgt/8
- 0ZVJmFvRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhIYQzDT0bHv0fDdbI8Sies
- 3vKAN/bJdfffG9nOFs7wqvywUXK562aGv8K182/MNZ+uNW/ZnGu7yw7/m2h2eV/HjnrNSx/eVx7
- RqPEGAA==
+ bh=Kpf7oPUZiLsp66tntSnobYX6XDPd7K0gNGokIwI8meY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizju6wrdy9nbfz8625aoNENT+5OsTVJgoVumSk+lr8Ka
+ pqaFXs7SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwETYnzIyLLdwU3My3/Tu6Lk3
+ d1l6IraalEnpS/I4Cec+8xCZ4XJ6ByND+53Kr9a+fGKVi1d1S1WZuPEpzdszveq9zPtKN1k/Zz5
+ rAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -127,75 +127,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement socinfo support to fetch the serial number if available.
+Allow smem to be optional for Qualcomm platforms by providing stub
+functions.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/soc/qcom/smem.c | 25 +++++++++++++++++++++++++
- include/soc/qcom/smem.h |  1 +
- 2 files changed, 26 insertions(+)
+ include/soc/qcom/smem.h | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
-index 7a3c63cdcde2..9d81a31a0e90 100644
---- a/drivers/soc/qcom/smem.c
-+++ b/drivers/soc/qcom/smem.c
-@@ -14,8 +14,10 @@
- #include <linux/io.h>
- #include <linux/ioport.h>
- #include <linux/sizes.h>
- #include <soc/qcom/smem.h>
-+#include <soc/qcom/socinfo.h>
-+#include <env.h>
- 
- /*
-  * The Qualcomm shared memory system is a allocate only heap structure that
-  * consists of one of more memory areas that can be accessed by the processors
-@@ -997,8 +999,31 @@ static int qcom_smem_map_global(struct qcom_smem *smem, u32 size)
- 
- 	return 0;
- }
- 
-+int qcom_socinfo_init(void)
-+{
-+	struct socinfo *info;
-+	size_t item_size;
-+	char buf[32] = { 0 };
-+
-+	info = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_HW_SW_BUILD_ID,
-+			     &item_size);
-+	if (IS_ERR(info)) {
-+		log_err("Couldn't find socinfo: %ld\n", PTR_ERR(info));
-+		return PTR_ERR(info);
-+	}
-+
-+	if (offsetof(struct socinfo, serial_num) + sizeof(info->serial_num) <= item_size) {
-+		snprintf(buf, sizeof(buf), "%u", le32_to_cpu(info->serial_num));
-+		env_set("serial#", buf);
-+	} else {
-+		return -ENOENT;
-+	}
-+
-+	return 0;
-+}
-+
- int qcom_smem_init(void)
- {
- 	struct smem_header *header;
- 	int num_regions;
 diff --git a/include/soc/qcom/smem.h b/include/soc/qcom/smem.h
-index a955db08c0f0..755003807dba 100644
+index 755003807dba..586432412eb8 100644
 --- a/include/soc/qcom/smem.h
 +++ b/include/soc/qcom/smem.h
-@@ -4,8 +4,9 @@
+@@ -1,16 +1,36 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ #ifndef __QCOM_SMEM_H__
+ #define __QCOM_SMEM_H__
  
++#include <linux/err.h>
++#include <stdbool.h>
++
  #define QCOM_SMEM_HOST_ANY -1
  
++#if defined(CONFIG_QCOM_SMEM)
  int qcom_smem_init(void);
-+int qcom_socinfo_init(void);
+ int qcom_socinfo_init(void);
  
  bool qcom_smem_is_available(void);
  int qcom_smem_alloc(unsigned host, unsigned item, size_t size);
  void *qcom_smem_get(unsigned host, unsigned item, size_t *size);
+ 
+ int qcom_smem_get_free_space(unsigned host);
++#else
++static int qcom_smem_init(void) { return -ENOSYS; }
++
++static bool qcom_smem_is_available(void) { return false; }
++int qcom_smem_alloc(unsigned host, unsigned item, size_t size)
++{
++	return -ENOSYS;
++}
++
++void *qcom_smem_get(unsigned host, unsigned item, size_t *size)
++{
++	return ERR_PTR(-ENOSYS);
++}
++
++int qcom_smem_get_free_space(unsigned host);
++#endif
+ 
+ #endif
 
 -- 
 2.53.0
