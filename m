@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B1D4CD98F6
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EED7CD98F6
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jun 2026 15:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADFC184995;
-	Thu, 18 Jun 2026 17:54:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D2A0848EB;
+	Thu, 18 Jun 2026 17:54:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gpM47csg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cQE1zK+N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E324F849C5; Thu, 18 Jun 2026 17:54:25 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 57535849BF; Thu, 18 Jun 2026 17:54:38 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C2B384874
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7009484874
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 17:54:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-687ed9aabb3so2025528a12.1
- for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:54:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781798063; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-691c5776f95so1835847a12.3
+ for <u-boot@lists.denx.de>; Thu, 18 Jun 2026 08:54:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781798076; cv=none;
  d=google.com; s=arc-20240605;
- b=jsiW2UQDlJYL8wUBcB8WMDLPHdBJm7oVjJjoUioM9WyrGeFqkytQP1rOIe/Y8VPWH2
- XCVpKjVP7dCC5yZ5iTvehjnVN2cGgLtiHHLAnwigASUkvyYrSASa8iFfhWLIY/+H6mpe
- xNTT1tRqauDY9e03Qaj1NfZaMEGPKci7TiH5agm0MRri5b4Cjxc4luPqavhWxzJlh/9f
- WRUrqLP58KTopVCgs6Of5w2hgHf8sA+vZGhUNbHhY0mxTZAgJCQkT3WGkvwlfqqC3iSy
- 3ZtNYaLzOePvPjRU8EDSj2/vHoqfQ8AwiSRspwwEs7rGPMTWI12od1WinVYV4VjiTJup
- csew==
+ b=T2Csno0McW2/xK9JVKVtDuNbfa6B0uDQrWEAPuMBuOrLz0CpvETxoH1CYA+f3I5y0L
+ T57Ith+AAY2mQ6vK7FqSikHKChAzjGvALRu+28up1oq8WTCyyIoShYyANWp2J3D8Vb0Y
+ FQlJ8xa0hDLR/2wtBB8eLjGU6QSIN6zrg12T7cRVxsEXJ3R9s2G9GHtQmaBcXNYrRjTq
+ gPedfb/Wf0RxuuBgGVyw/NqscBE/cZIt1pZ/gfw1L60I1DqBGOzjwIIb9nzdiDECJug0
+ dY8vy1Czm8Zts+o8b2+2ak58Ptxyq6sVa+njjOrFMxnAjKNmYzN6pP+O9nGby3/SSLHB
+ TUYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=lUBUHwSkYvsouhdf6M6zj2mbyM9upfGHoq3dW/ZI+X4=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=avxNWv63bdeEFwjysz0qeupTbqX/GOAGgT5NcYmVYc53Jy5KylQDdW2EvgjKQ/8vpU
- woTi4xssB2kFxNtJAxI5oVyMhhh9ShkOduhXTyT0dndcNpCQyZ7IjPcZwydC/n4b191h
- dV/mQpuaCk1hF52uwvQFoT+3sSbUY4sKORTySvF9rcPMfXX3Q/VQP5KsQxprzowf7A9I
- Iw3S+evwQmuwhhTbK50DWOeDrNIxxhc7e551wgbqyH2QXuBQ4/+SjDviSDuo93jnjYPE
- 5v4nfZCsxBc10URvVUljsqjQ2gpEVii1szo1vPcszXx9bKmMRukcZBETr6mkt5JZ+sXh
- Amgw==; darn=lists.denx.de
+ bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
+ fh=rLQMN6a/UX9jMmUsQuTe1A8wK9bTo6tPxTHfkaExRTU=;
+ b=DX/NPCZXF5hOI64kvVK7UhPncm6tx9F6r7Gnlakw/HhXb7OsNhPc2dOsVKD+GKLZqh
+ fXsc1lfMppx7DJ+sG7GXRnIqZ6w2efq5X/z2lqCM3+GIyJHV6l4CCgWH/Hqkwgz3Cgib
+ VHl6nzzRT/0wgA387duv2D0Y7FLEcEfuaqoevGRpDsrdXcdhbqM0vU8TbT4v5f+YZIGd
+ NgbW969sv8nxoZQy0CZSRBVAuKjtZ9lchwXo4gXraaqpNR60AwA0vGaOH5snPP4c575t
+ AbVVBAY9V+JcY5CsNakckJRvZrGg36xVTpyQjH3XFhLdRUNE8dM82OtvUUatz6I+TQAs
+ GEug==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781798063; x=1782402863; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781798076; x=1782402876; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lUBUHwSkYvsouhdf6M6zj2mbyM9upfGHoq3dW/ZI+X4=;
- b=gpM47csg9S5/zruhoy3ISlT9xDf6ykCqvFhlxZfE7NO+6Zg3qv6OvAMQeOR6rCRFxE
- t5OrFIwBseMH6oB8wfKBl5PBPcJRxCbLcAY3Azyg/yipBWtXghncPgul1r9MSrhclR/O
- N1mYSbliASZbqMn6SlBDpesUURasF+m5JIVQQ=
+ bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
+ b=cQE1zK+Ny/nXt0MdO+VYn2F78OAih42R0OnzxXiLe2cgZ4zH8625d5r5z0s2JQrwmQ
+ +FpYUJPK1YAT/ZZOo8eqFNuidAiWWhV2XlfJ44fwaCWVs77tPOYqx7zXhXdCTr5EpkXu
+ /58H+Pz2c7ysAoJ44hq9nbPW9hk95Faz/ez0s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781798063; x=1782402863;
+ d=1e100.net; s=20251104; t=1781798076; x=1782402876;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lUBUHwSkYvsouhdf6M6zj2mbyM9upfGHoq3dW/ZI+X4=;
- b=Q/t81V4KfUhAVW0wH49Oqo1jQRPVPLPaoSkrmTPZUAH9Hy9u5A0Zp2ohG2Bm8r4uGT
- id0x0dKXnn2BOtGVqi+wOMGiIACpc7UGCJ5UvQ82hp0doRvboNZZz4dMHlIbojWfR/S3
- PUcDMUcQI/sLoxjyNSgOBWh7e77UwvPYCdaPpTqmtX27EORkYF0GXdyQ2EkdwY2sQ/xr
- hW+eOwSVzKH1sm3Z/LZ//t7w+N9lU4cluz4hHcYqdbtDHoQ6oI6xvqFUIrRSBRSavx4F
- wCWtJo2yYw+GPKaDbrPunw1E9TRI1L9ObRUSOTVkWozl4V22G93KbEH2CBUoIQL3zUFI
- NTQQ==
-X-Gm-Message-State: AOJu0YzOudS2Tcaw0pmrMj8Ur6h07u6tnQMSLqK3ogQpkxbXiDacqtl9
- eskqJhsxhUoDB+nkmmTuHuSDVmG1JpvT150LBHqTwak+vtxhVjm7dwspfQRCMyAe34GlWSoqzKB
- wRfgX6afUdXdcUxfJrUDxPYMs/dDUK2prnUGZg5weX2xef1ETXgBw/w==
-X-Gm-Gg: AfdE7cngD8epgqrgDoGla+y+bdT2/oQZbmVubEo9H3kApyKIcYB3JQ+iTvfU4QyeKF+
- EsK6H7k9rVdCyPCIsf0611ZfzGgcNdf1rPcBPAsb0JyZC0DGaEgm4EWMwgzw2s/M0XZ4FS2nbsf
- u6A/ZFUt6MEcro0dqCCeve2VVOdAOqvRGsjOjUETcMHIgtviJsBV2PP3y4tBI857HIAtpl+Haxo
- w4j4f3d8oedcHGjOX3Dpd6yH+OLBsJKu1HVs3EXfdsomN6v1WmfxAVPFlJpSLXxTr2Nir1wfk/I
- YCTaKM+z
-X-Received: by 2002:a05:6402:3583:b0:67f:e9d0:d819 with SMTP id
- 4fb4d7f45d1cf-695bb20f8c5mr2297470a12.22.1781798062654; Thu, 18 Jun 2026
- 08:54:22 -0700 (PDT)
+ bh=DwmYascwjtxu50E95dOJ2YT33Pza3UDb/vYwBd6vkAg=;
+ b=rZNiLrOL1vXQJ/voO2zANrt7Haw0Sl8W+jUCK67rKf/AHjwk45BXdOYhjkfFGU/WAC
+ 3hB+RLDXPwI510bRQrTddexOBPFrg8bGfF5Rz3siJ07CNh5NvTsXzm0HjzTrJrUI87vy
+ Il7O3vfXLQtIPinAyf+jERwBZ6QEcCnZaFuSvFddw/U7iAX1RE+p2Sg9wQShfpT8hKDJ
+ XCIvYAkk0O5+M+73t8shhaVfE+yErqEHwPdd20naIl3YqvRVALNsJxoE8O/xNuEwB9bL
+ Oa69aRKWzWBmplfTX0vBKelAUqThTSK16vMX2SOEHv/c7WG+lHF3veMbsvkGSotJkJed
+ 0foA==
+X-Gm-Message-State: AOJu0YyiVbPtIP5wUDN4yCAq8G7D9kBs2qZKGIksLpK6B6aXuAfrZJ/T
+ EFGTsReP0YnnUIciCkUwyiKf6lxulP/g3AuJOR4kgygLr4mFbzA7asqHDHhJerCWv0VJopgFQSm
+ o2+8imEgJwP490qDTRH5f9s9Lm8Sa55PDGA7Ttn2yHPBYUHuQkhNRQw==
+X-Gm-Gg: AfdE7cn4PqGVGwm8Wk3MUXsj78DvrP56Be9xUkiNXhzsloFjb+fmeAXUYoSc6qmWisP
+ /npby+7YoJ7Y9wB37MXN9HepzFfCxzED2ApsKpoCLEnmZQeWn5Z7JKD5GcI/HgzZII+3kiyyXmu
+ 7NeOOkx3C9Jw9vtfgLOFgv+yXJW7zspueF6E2cz1rp/zYFgjFuD7d2n1/DVUtQV3EMY9OG4vjcB
+ 1kB++ewTaVJVbX6Sr1mx4FSm+slFnSmZrFEJVen0UcsLqSFqg/Tb/Q1J3pCUmu+v6IQUgozonqQ
+ YjdjF9Mx
+X-Received: by 2002:a05:6402:158b:b0:68f:cca5:51e8 with SMTP id
+ 4fb4d7f45d1cf-6954771020emr5187451a12.27.1781798075958; Thu, 18 Jun 2026
+ 08:54:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260605033907.1909319-1-dmukhin@ford.com>
- <20260605033907.1909319-9-dmukhin@ford.com>
-In-Reply-To: <20260605033907.1909319-9-dmukhin@ford.com>
+In-Reply-To: <20260605033907.1909319-1-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 18 Jun 2026 16:54:10 +0100
-X-Gm-Features: AVVi8CeAwp9rcXVUjt1gsmER_rB8rv_r65DNDQxiCos_U4Ckp1MTG8F6pVFhJsQ
-Message-ID: <CAFLszTjwQc5B7GFhX3CadSA9Vwqoo1h7h0UAq1n6hcYTobaMTg@mail.gmail.com>
-Subject: Re: [PATCH v1 8/8] bootcount: gate bootcount_{inc,
- error}() behind !CONFIG_DM_BOOTCOUNT_GPT
+Date: Thu, 18 Jun 2026 16:54:23 +0100
+X-Gm-Features: AVVi8CeI1bU34P1UaiM1Sw9KTdBrhG-AdUjYk1OXCjZYPft7z6Q-Lewg4RO1Fxw
+Message-ID: <CAFLszThSEcn4MUu67w0ZdHJoiyM9hqpe7_r7WiFWKq6bA89cyA@mail.gmail.com>
+Subject: Re: [v1,0/8] bootcount: introduce GPT-backed bootcount device
 To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,67 +110,32 @@ X-Virus-Status: Clean
 Hi Denis,
 
 On 2026-06-05T03:38:59, None <dmukhin@ford.com> wrote:
-> bootcount: gate bootcount_{inc, error}() behind !CONFIG_DM_BOOTCOUNT_GPT
->
-> Autoboot calls into bootcount_inc()/bootcount_error() which rely on
-> environment variable.
->
-> Specifically, it may corrupt the state of a GPT-backed counter.
->
-> Gate bootcount_inc()/bootcount_error() by !CONFIG_DM_BOOTCOUNT_GPT to
-> compile out bootcount_store() calls on autoboot path.
->
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->
-> include/bootcount.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
 
-> diff --git a/include/bootcount.h b/include/bootcount.h
-> @@ -74,7 +74,8 @@ void bootcount_store(ulong);
->   */
->  ulong bootcount_load(void);
->
-> -#if defined(CONFIG_SPL_BOOTCOUNT_LIMIT) || defined(CONFIG_TPL_BOOTCOUNT_LIMIT) || defined(CONFIG_BOOTCOUNT_LIMIT)
-> +#if (defined(CONFIG_SPL_BOOTCOUNT_LIMIT) || defined(CONFIG_TPL_BOOTCOUNT_LIMIT) || defined(CONFIG_BOOTCOUNT_LIMIT)) && \
-> +     !defined(CONFIG_DM_BOOTCOUNT_GPT)
+> This series adds new GPT-backed bootcount device with
+> ChromiumOS-inspired counters/flags logic [1].
 
-Hmm this needs a Kconfig solution...I don't like baking a specific
-driver's symbol into the generic bootcount header - it inverts the
-usual layering (the uclass header should not know about its drivers)
-and it does not scale: the next backend that wants the same behaviour
-has to add another '&& !defined(...)' here.
+There is no update to doc/api/bootcount.rst describing the new
+backend, how to wire it into the DT, or the autoboot interaction
+introduced by patch 8. Please add a short section so users can
+discover it.
 
-This also gates the inline helpers everywhere, not just on the
-autoboot path. The SPL increment at common/spl/spl.c:792 becomes a
-no-op too, as does any board code calling
-bootcount_inc()/bootcount_error(). That is a much bigger behavioural
-change than the subject suggests, and should be called out in the
-commit message.
+The use of include/cros_flags.h consumed by generic disk and bootcount
+code feels awkward - the bootcount driver itself does not include
+cros_flags.h, only the gpt command does, and read/write_disk_flags()
+operate on plain u16. It might be cleaner to put the generic 16-bit
+accessors in part.h (or a new gpt_flags.h) and keep the cros_*
+wrappers in cros_flags.h for the cgpt-compatible command surface only.
+What do you think?
 
-Instead, how about you introduce a generic Kconfig
-(BOOTCOUNT_NO_INCREMENT, selected by DM_BOOTCOUNT_GPT) so the gate
-stays driver-agnostic, or handle it inside bootcount_store()/the
-uclass so the increment is silently dropped when the backend
-implements its own semantics. What do you think?
+> Patch 6 introduces the new bootcount device with compatible
+>         'u-boot,bootcount-gpt'
 
-> diff --git a/include/bootcount.h b/include/bootcount.h
-> @@ -74,7 +74,8 @@ void bootcount_store(ulong);
->   */
->  ulong bootcount_load(void);
->
-> -#if defined(CONFIG_SPL_BOOTCOUNT_LIMIT) || defined(CONFIG_TPL_BOOTCOUNT_LIMIT) || defined(CONFIG_BOOTCOUNT_LIMIT)
-> +#if (defined(CONFIG_SPL_BOOTCOUNT_LIMIT) || defined(CONFIG_TPL_BOOTCOUNT_LIMIT) || defined(CONFIG_BOOTCOUNT_LIMIT)) && \
-> +     !defined(CONFIG_DM_BOOTCOUNT_GPT)
-
-The commit message says "may corrupt the state of a GPT-backed
-counter" but does not explain why - please spell out that the top 16
-bits encode structured ChromiumOS flags (priority/tries/successful),
-so a plain ++ on the loaded value scrambles those fields rather than
-producing a meaningful count.
-
-Subject also has a stray space inside the brace expansion:
-'bootcount_{inc, error}()' - please make it 'bootcount_{inc,error}()'
-to match the body.
+I can't find a device-tree binding document for the new compatible.
+The other bootcount drivers have entries under
+doc/device-tree-bindings/ (e.g. bootcount-syscon.txt,
+misc/bootcounter.txt) - please add one describing
+'u-boot,bootcount-gpt' and its device-type, devnum and partition-name
+properties.
 
 Regards,
 Simon
