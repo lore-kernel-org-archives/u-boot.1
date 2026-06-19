@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4988CD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 08:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D03AACD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 08:38:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CD09847C3;
-	Fri, 19 Jun 2026 10:33:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 225FB847C3;
+	Fri, 19 Jun 2026 10:38:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w7Tx6Ugg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PPQD7+7h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 140A7849A4; Fri, 19 Jun 2026 10:33:48 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 00D1A849AA; Fri, 19 Jun 2026 10:38:37 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DB26847C3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 10:33:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16823846E1
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 10:38:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-490aaeabdb4so10736745e9.1
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 01:33:43 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-490afc47455so7334695e9.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 01:38:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781858022; x=1782462822; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781858314; x=1782463114; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CYPeBF15Bn+C0ixNxE3VaHJdGF4sJDPI+Wu7ozk4PqU=;
- b=w7Tx6UggehD9WIoT55fJKurgVTNjUwNwNGUZpGIkBewEVK099cBHYMyzHfvZnxjbZ2
- qazRmagusm9cXRWUzJ1mkqHEfWIGq+MclkUNsh2igaO+/s33mBKHp8b2OkzwFo2RYgh4
- 5Dq9bKCw3aWaV5TTf1ZW5S+wU+2y5H5MqENvrtBxyM7JPTVyrumpdiGlKi+fmyTyRPXs
- XSomYbKBJ1SedEZGJy4W+ti1wv+YMqgK5SbUTHJQ4mF8zQLdOM1BJU33BCnm58yUqert
- UuvpsBXjWlLh0TG+BJjgn7WYDgHS+X3n5y3IvGRiPIy+ChYJSQCoEUQVVjzODQWRlMe7
- andQ==
+ bh=edNs+LLcJfsNAKWxRc38vPdq/2nK/HXOEC7okINGLs8=;
+ b=PPQD7+7h32P4bDmv2Tw79kuMyBLmYt/fp1RStRpzRwIHJ2qnXrnV9c7z4c4zAObcTj
+ ClENsJUcJpeqeqes3VjIGm09MyfCQPRc6iKd/5tavFlzJTOCQ30VlhRPycyKLqc9XBeU
+ 6CVwr8hxLREHYWMdCva0sk81rHktMBppFfyBTHOwe3tNMaDXyZ39I82GWTzZdLxjIn3C
+ S5Hnf8PBSacadW8PzWHWBYsEFnaO9z0/7jTUhXtlLTG3DnjybzCtVtDt3BHLAXuDScTU
+ hv0Zlvd2PWN3ew8T6ZF3RdPg2KlZUaPbQX9AIvFVWw1CKHmMNqeG0Bcidu2+L9NW+Hjj
+ Gwdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781858022; x=1782462822;
+ d=1e100.net; s=20251104; t=1781858314; x=1782463114;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CYPeBF15Bn+C0ixNxE3VaHJdGF4sJDPI+Wu7ozk4PqU=;
- b=Aa9Wa7gmTKz/2oaX2i7G6v8O32hAX7tlDe9TBVdcqcf27eU6kLjNqh2x4789u0GvjG
- JxNxwzo8jUsv7uMlOPR9vJFu9ntq81wniRV2mTW3nY/wPywpMvqYfchDfLDtg3s2beOn
- 2SNQYfEq//2fTQ6COhUuzIC+oLmJ9lffV7WzO2NdKolF9j4vJIGiSZqKA2R/U1oUAb2H
- D/ybXsdGrSHYMpoAY0xRVEVJXLYZDQ1nU0uYCaIwJWsCvTUP+EcMezfq7lFK4TqG7+Ra
- 6VQA1lm4IQ+EhUJmgfwYBzxCPCwOsQ8xbKzJ08/DcgmYfbFJwi2D601CFR+sPnk6f/oj
- LTlg==
+ bh=edNs+LLcJfsNAKWxRc38vPdq/2nK/HXOEC7okINGLs8=;
+ b=lziwUlk6Vl40Y2ObhPL8Y5tHeYIbhRt4hCz7hLrkaTF279dTJc6KXsufT5kS9FhSLE
+ 7ogcwZ6XrCVA0cuR0p6MATsWylxpkfp7RSZHhJDLzGcQdyRjC9Od6+smCIjhRMSamQeW
+ HuEbT/1Ig62mZpz3VIdBQiTbpxRiQToVAzreKd9LmP/4ciJcm5SIC3PpHdH3qbuxEgMq
+ OkOHyOK/yby+lP6ObXxW9f3hmJZOIvcCypVSRRGLXe59THS2rxkN7f8ijMwjLqEON1F1
+ 7c9EhztJk+iTiatFeGpmSCAOYxaRNEEImW5uNiLbS1u+7eqZ6NlEsRK3SPLBbDBW+oYO
+ AiqA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ986asmGpHLYPmR2NP/B5JtBNmIPcR9Cr8XAl2zO3sMuKHnjZdO3H4inP6YXAz3ItJnUqwrpEM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdVooGT0vTmJYpmiCxZFLbXDDp2SrUalPAAJta6J0GG2KZDI5q
- ulCwuC4KmgoZShxGF2+oVR+adaUjw3S78aMW6f7jRy2FmD0qvRWiSexiQEMuSyIfUC0=
-X-Gm-Gg: AfdE7clRZT14q3OcYkbPyLAX48SdfmbX1dbvvcX8Wy+dV8OQ8DEjrLg+haTGJjhjngP
- XadMFK7tElnhlWhkZkC/mzUzxywCUwpSYPwXFmA9ckMm/aALqp76vbwyWbHXoBGD1/K7m5xfrnO
- 9DYDNPlJYLNpe4slckkaSdBzZkFPGkW884ZZtUnYkwvMhT/7bzsA0wtkITyr8q5di9XXd5NNfgF
- nutP+mD2cqVm2574TR4HHlEOzcvLW614r1qcqwX0FzZHgSsAw/ud5/7QFpK1R9kbqm5Tm9dhkN1
- PU+KO3hu5JLo9B8gGTs6p8qC03W5On+0kpNkdOXL89A6Mf+/mHozYbIi4gWWsLFWt80AYOFN7qa
- y3bY1JsoA17omyFm3C2sF9a1p+Xx8njxBnfsZInmyDVzx7mdgG8pNfTZbMsHYA+Xfvk+1bUxJSK
- qGAaOxpPMfmCMdoWypyzzPcCnfsxb3dRv5IF4m9BRNoAtkIaAXCqGNpb6N7EEKBk2d32Mhg7j4j
- 5a/N9MO9Z5SO8rGUfCx5BWrSXrCf+DC5iNjK5/cE+tqiUtD1TlGFTP19zOPwfYIa3743VZ3d4FY
- sH0QkNtItLLpwoMo2RXf5OzypPQ/5QVyoePFluh4yvtKTrlGxnnFQcIVvgxKLYB+zbY7dvk9B9f
- HfC//5VP+Ym03FFaUPUKECaZCAGpzxD+OO7Lb4lEAic/ZKF0R6syKNg0hQHxMzxadt2JyFOyac5
- wQSYsr748Vur+835tELl/WZe2QEtR2cHF8SAgigQhTNDSZwAin/BkJX98BcZBrKF0uOhsHlb9vP
- Ov4fb9jSGGBBwhl/w==
-X-Received: by 2002:a05:600c:a088:b0:491:9969:739d with SMTP id
- 5b1f17b1804b1-4923f5895f5mr50156745e9.29.1781858022490; 
- Fri, 19 Jun 2026 01:33:42 -0700 (PDT)
+ AFNElJ+EalfqxpQHmaB9UvPiT0LBrnAi5AfZh3p+bGjsA/H10KP3JwqW1GEYb1fqAkEz/cV5TohSyLc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3xjsx24RTuOFrG0drFaYToz424bBk2oLpUN4g3W5sqKKmS6Ba
+ oB62thSzmnKeW99DyCGL3ENVWNhhJnwxLC+QRJ0McAhi1lW2t1Hv/b/SLS89U7f+cPc=
+X-Gm-Gg: AfdE7cmIU9Kw5SFcoueVKQAVxaCM6UDDl7379GlvIsR5XV8cBbpXzHAE4Z0F9IR9wmY
+ dbehNif3aP9MT8+Q57TaO1od9mpNkjUyJJAuj5/tH0nFwUicI2XhGkgjKbGTRCf0amkXICGUnko
+ khIn4a93z9LA1FGHS7JKWkVzgqGROY2fhZYAUUqZAzd4MC7c3oSaCJV5zS32IWy1tmqcYevo2op
+ lDJm/DmlgMQDLnKMAAIDk5p6ODi/8M5WQHnthsgpazHOvgOGhQWC2yu+YdSW8mhxClFWmTs7Fyi
+ tphZfXBz7hzUharauOVM6CbjuWOkshVrDLAtH1T9dFmEwPG/GT8VVVzcc0vfoifAloQYXJnGUdd
+ nP9P+uD9SZSpJtcktHbs7R9Js+30RjPNBUQlPLk2XtZvsW3CcCsDtWr7Lk4blDrbju0fsFzI87c
+ KlCT8VG0OgCyFhn4Is8hUpRRfdRpPTrIH+oqww97xHKDf2rHmthvOUIw+rhaPK1Ny6BwnOS15BP
+ VADBdkWUYBRMyKTDgfg9ngeebuO29BCXb6aLjDc41vYLq+aaVix6nki5rsrmMJEz/Sg3LW+Z7uE
+ +x86BbBQc0upuXOlFmrM6N1TZATjuCbRjlMSFFGuip8fe+vFI9e+DJPwdPhiSRTR1wBEPL2w0Uu
+ k/wtVDm7O+9mbtf1t4YxgSnT+2/mPTIzdRX3bVmkmuSSScc79blY7YQZ+TOUcJdohBhq0ol6xNZ
+ on8uUcEaS9bLJaEvkNr2l0FhZgUDH6EquAhgFpPnLss8HEiO+E8rmKv/ChIMjHDSV5B3nWhAWYG
+ uvkovf2eGFkvOVhZA==
+X-Received: by 2002:a05:600c:c4a7:b0:492:34f5:94cb with SMTP id
+ 5b1f17b1804b1-4923f584b83mr44766965e9.26.1781858314484; 
+ Fri, 19 Jun 2026 01:38:34 -0700 (PDT)
 Received: from hades.. ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923ff8a712sm49146695e9.13.2026.06.19.01.33.41
+ 5b1f17b1804b1-4923fd1f886sm48074975e9.4.2026.06.19.01.38.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 01:33:41 -0700 (PDT)
+ Fri, 19 Jun 2026 01:38:33 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: heinrich.schuchardt@canonical.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Subject: [PATCH] efi_loader: fix memory leak in efi_var_collect
-Date: Fri, 19 Jun 2026 11:33:33 +0300
-Message-ID: <20260619083334.113161-1-ilias.apalodimas@linaro.org>
+Date: Fri, 19 Jun 2026 11:38:29 +0300
+Message-ID: <20260619083830.128164-1-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -107,6 +107,7 @@ they found some bugs.
 In this case when the variable buffer is too small, efi_var_collect()
 returns EFI_BUFFER_TOO_SMALL but doesn't free the allocated 'buf'.
 
+Fixes: 5f7dcf079de8c ("efi_loader: UEFI variable persistence")
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
  lib/efi_loader/efi_var_common.c | 4 +++-
