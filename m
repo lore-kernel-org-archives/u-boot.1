@@ -4,82 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E95BCD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A797CCD98F2
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACE28849E9;
-	Fri, 19 Jun 2026 18:31:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 66200849EE;
+	Fri, 19 Jun 2026 18:31:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="larsFY/+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MFmNI/mA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B6EC849AE; Fri, 19 Jun 2026 12:55:53 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 074CF849EE; Fri, 19 Jun 2026 14:13:08 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29C0C847C3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 12:55:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36D51849E4
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:13:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=qstrydom0@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4908b92904fso25301745e9.0
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 03:55:51 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-687ed9aabb3so3625772a12.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:13:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781871184; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Coxxw+hVRwvtpf1wn0ipRDrsQz9sB4rDLmBhVV6562gRveZALBVgVUoUqGEyqz4+TI
+ ZaB7ySyDT5BXd1bv3ZNMfo0BmyoCpkkze1YMgLJYeUi95I/pkBpmumwZ3LLMd59d40+y
+ JSV1ha4jAVRS31nLkNYHvLVb1l0Rdk/MRtLCE44ulEidEInl12v9rUn5Kur7Thxhuz4/
+ 2fig0fbRAXSdUpCgfUHDAhqvJ3AOYLAHV5OUpiXibGoMlY7z4w44Y7w/LwuX+USAvqVD
+ UdX8szXsoqrBWr4Rk1D49ajsEhx0eqxe4SVStmMXX2T5mMLacHRkN+X2oyDLqzZx1wME
+ oNtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
+ fh=6BofvcUmIiQeHzHIX2MbnlBB2XYmbzLlXbfWHMVTWAg=;
+ b=iz7fpm1hOFPuY2f+rE/rOdbVy42czVI1RD/4od0tVbTK2tkFlHU2CFS0YBnptJ9WOR
+ pCe5W0442Rcef7TFPwJ7gX5hlnILw1y6oue/lYs3K2DgKoP1qyj83MyM5d+eQy9TswE3
+ maSdFC7VfJekaptE2p1Cl3B7gKEwheG4pJDjcL2knhEGVU+JGUepY2D27fpAD52EXmrP
+ vaKKX5QdAVyNtvmj8jMJ0q3Su7I4+5stqi1PntsNZ4hEvLkkEo3NLMJUACrD1ahdn8VV
+ kf2Eb/lm/dYGoybwfAueNbOImc7pwL7t6hOTisd0CKnoenF8IwHBUHdP9P3vfj7W7ayR
+ oxRw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781866550; x=1782471350; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rO96LYYvM6BGZ1Ik9iDxoCKy0gb+183SoZNvF55aDYM=;
- b=larsFY/+wJZleFbz3UCMspQxBCGkV+DWAa27PW791LlfhvM++EIsKKuZKoSKfgSFC8
- IhfZ/okPqIsnsiiQZZFc2ViJjUbCIAwgSJ7Pq5iDj19v/WlOq3X0zf52xTbXhT4G+jsM
- jm53ESx/D2cvXjG0QZEMAIKi524wUO0I+J5Sh34lUpmL49IBQL8RpdD9hGw3Tp0CkyYm
- AA1jta2vUiiOvanBbqS4wXGwfq3n2jk6iqEq2WrjX+enRhJSEgTPh2KX0NOaZIhYgHOF
- ZeRBdyHyW8VVCXq08IxU01diQCzywUr2Gv3T+qsHK+DhbVxtZZD5K2nMXgmDqIS6AcvK
- 5dqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781866550; x=1782471350;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1781871184; x=1782475984; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rO96LYYvM6BGZ1Ik9iDxoCKy0gb+183SoZNvF55aDYM=;
- b=Wui21rfI5gOIYoS6Vrds00p7D91thDNpZgPlCjo7m/cubEZLc9Foh+2fGbvmtY16vG
- 0KUyjzqB0YeQI7uVBnfq47VoC+FgrkzISrYUFEZ4B+ADGAq/C+229PRYrFL8vI1eoPfD
- CCwbW+CLzSQw/cRrYjfSNKI5vz0UeSJkxb8cpDCCDmdiv8L6tQX78J3y4epd/yVLCFlU
- BjIdQEBHT5xoI6aZDCkjFc7LCopWrWJ6XZa2oMAt51895a+zjmZbvwK2YG85dM6zKEwE
- TW+MK70I9qZCCw1ux9OMwDSWi3pyxgT70qBx5gkQjiP+wk+HKjBcs4Y2f9vtMAiApR+X
- 7F6g==
-X-Gm-Message-State: AOJu0YwIQlFD9CkU7Q5yeq7Ay/CVjQO+DRxcGmACUcxfuoLBLljje2ka
- Gv0h6lFdBORsmKurvqO5t8Sx3m5e4Dhu/JU/+6d6XeaEtvtYRaLnWPI04DsJNrMC
-X-Gm-Gg: AfdE7cm9mre2qWouuzUqi925rDkpTRt46wqkkzTfJ9LpOHDjQtF+8PyrS0Ff6GpogQ9
- tYzrICQcMMuaxJCMbL9gvZQkzqSGIaci/w62h/Qb0n0PU7v/0BBW3eNPaHinqi5c8WGyzTEiC3m
- A8sSNki1+hR6T3EwOan/67aFvx9kjZWpdgg0xYXEMQoho2ZuAjGzMh9OX6a8v2A1zghHavUIxTB
- Tt/NxJ2kZf1gqve18wqAaJRRLjsGipmuMCG+XtrZsyKhi+DVY+KDay/XlijTEEhmg5Qzm6nwmDZ
- woLeB5BOR7MWO7Xo1G6fFdQTh6PvVILbHY/zUvX+PnSrT6s/m3R6lhzfqi6lpHjCWkglp1q32b9
- rGeNaRjqlDThnMug2ckoUc52RB9R5YckbBCRIegCGb9hJKIlsuuNX4ak1joZt/coRWWjmdUB9ov
- JsJ9riysy6os4jBXA=
-X-Received: by 2002:a05:600c:a40f:b0:492:432b:d78b with SMTP id
- 5b1f17b1804b1-492432bdad3mr26279365e9.15.1781866550405; 
- Fri, 19 Jun 2026 03:55:50 -0700 (PDT)
-Received: from home.powerhub ([2a0a:ef40:30:7801:4c2b:2403:9030:81cb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923fe7b9e5sm60655175e9.10.2026.06.19.03.55.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 03:55:50 -0700 (PDT)
-From: Quentin Strydom <qstrydom0@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, sjg@chromium.org,
- james.hilliard1@gmail.com, malysagreg@gmail.com, tien.fong.chee@altera.com,
- sughosh.ganu@arm.com, philip.molloy@analog.com, qstrydom0@gmail.com
-Subject: [PATCH] spl: pad external DTB to _image_binary_end with separate BSS
-Date: Fri, 19 Jun 2026 11:55:29 +0100
-Message-ID: <20260619105529.50815-1-qstrydom0@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
+ b=MFmNI/mA1gv6BfDtRtnZaFtVLUfxC3QGlpNjgkUNBzHG4T8bgVt8PmA43O28yttu8/
+ BrzwsmxZlYXW+TJE62H2/GtWROfquk/MNbfgdCddJZa0qV4yfMXiJnRtsFJ3MdegSUER
+ F5+gqxg3yPCPede/GyZVPpqiFuGwm7M714/D4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781871184; x=1782475984;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
+ b=ic/+kW5CtbgVE+OAcMEhvILOwQAkeOLxCSy60DKrtDoCC4iSq4B3BkNEyJWhRMWTcU
+ S9QfyLrxlmGSVg8AvbG5M7jAt+xwTlqzfKcrdR71N82DHM9OncVqOOh/GXAwdhPbByT+
+ SFcYOMmR/33JuNTZTha2wR0Z3YXw4ypoQ9jb4/FMSOl341zwTDnt4VlTCqJ5YWpweIsg
+ bRatoG4omB0Grs77P80naHt0UaOk5YbHmr2OnRjUz1OyvE8UJg4FAM6pJhZzx87OURJK
+ IUvNl+KCOH5aTTDpW2XQRRE86w7/I4u7aNFRk9MRR8TCMNui+Q49ENbpAf+/egIzOxXo
+ jXnw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+Qt8WDRysGaJNUgN4/Hewg8tWb8s57NTAqYlyMj5Ica5tVea/EMC5SIIV7jnrkX6pxWLObmiA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzlzsk9pY5KIJU/5MJ7sQ4Xt5I7Qw0sFQtIuul2DNaiBSapxwzv
+ Gs58tiN6Bx4+gAxc8bFlvbgQeOyaOIuoiE5zbZoCKAJ45y+FXXIJiGQfwsISBRsG5gQz7Q1zdL6
+ 4HHm47w4PGXEPrOC0vTzHj7FAbqHR717fIdxKFVNI
+X-Gm-Gg: AfdE7cndTqDXoyJfBVcSqp41oY3qyuEf5jp/8YVc0qbM9O59ZSv4W29iDLpHeHAFw7p
+ AstJsjjOsxNW/fh1SwTeW12BkVgKy8Owrivpqf9oOzjre7a4GDoBtYYkbQSJqR6HQBZZ5wCcd+G
+ hybdOnBvKeKP8onUkQX0YjnZtDsnapp5PevAwjWKtpsRXJI0mICFeTzCBXWBe943okL6thEm5pa
+ vlrpAdIyRt4XOZDNMH2HhXxzpzuNcMaFxVMvFQBvEybhWvbsDJyluLn1/0tm15bpYe/JobBDg==
+X-Received: by 2002:a05:6402:c44:b0:695:4649:ca62 with SMTP id
+ 4fb4d7f45d1cf-696e521d8a6mr1612071a12.21.1781871183531; Fri, 19 Jun 2026
+ 05:13:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260617101812.299586-2-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260617101812.299586-2-varadarajan.narayanan@oss.qualcomm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 19 Jun 2026 13:12:51 +0100
+X-Gm-Features: AVVi8Cf_UP2Si1QDlf79IvJHv18X_r77DoeNPvEzM9SzoXLEf9A54g4O8cxaYHw
+Message-ID: <CAFLszTgkDHA+c4ayPo4kcAxanPsOWU3x7jDU1H6HEQpd9doNrQ@mail.gmail.com>
+Subject: Re: [PATCH v5 01/13] binman: Ignore noload segments for image
+ numbering
+To: varadarajan.narayanan@oss.qualcomm.com
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
+ casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, sjg@chromium.org, 
+ alpernebiyasak@gmail.com, tien.fong.chee@altera.com, anshuld@ti.com, 
+ alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com, 
+ marek.vasut+renesas@mailbox.org, alice.guo@nxp.com, quentin.schulz@cherry.de, 
+ ilias.apalodimas@linaro.org, mkorpershoek@kernel.org, andre.przywara@arm.com, 
+ afd@ti.com, h-salunke@ti.com, alchark@gmail.com, dinesh.maniyam@altera.com, 
+ luca.weiss@fairphone.com, adrian@mainlining.org, danila@jiaxyga.com, 
+ balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com, 
+ ycliang@andestech.com, mateuslima.ti@gmail.com, jamie.gibbons@microchip.com, 
+ n-francis@ti.com, david.wronek@mainlining.org, james.hilliard1@gmail.com, 
+ bdklingerman@gmail.com, richard.genoud@bootlin.com, sughosh.ganu@arm.com, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 19 Jun 2026 18:31:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,61 +126,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_SPL_SEPARATE_BSS is enabled, fdt_find_separate()
-expects the SPL control DTB at _image_binary_end. However,
-u-boot-spl-dtb.bin is currently generated by concatenating
-u-boot-spl-nodtb.bin and the SPL DTB directly, without padding
-up to _image_binary_end.
+Hi Varadarajan,
 
-On evb-ast2600 this places the appended SPL DTB at 0xc92c while
-_image_binary_end is 0xc930. The SPL therefore checks four bytes
-past the FDT header and fails early with:
+On 2026-06-17T10:17:59, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
+> binman: Ignore noload segments for image numbering
+>
+> While including the partial images of a split-elf, binman gives the
+> segment number as found in the input ELF. However this results in 'gaps'
+> if the NOLOAD segments appear in between LOAD segments. Hence track the
+> LOAD segments separately and number the partial images accordingly.
+>
+> Update the read segments test to verify this.
+>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
+com>
+>
+> tools/binman/elf.py      | 4 +++-
+>  tools/binman/elf_test.py | 4 ++++
+>  2 files changed, 7 insertions(+), 1 deletion(-)
 
-  Missing DTB
-  No serial driver found
+> diff --git a/tools/binman/elf_test.py b/tools/binman/elf_test.py
+> @@ -288,6 +288,10 @@ class TestElf(unittest.TestCase):
+>              self.skipTest('Python elftools not available')
+>          fname =3D self.ElfTestFile('embed_data')
+>          segments, entry =3D elf.read_loadable_segments(tools.read_file(f=
+name))
+> +        n =3D 0
+> +        for (i, start, data) in segments:
+> +            self.assertEqual(i, n)
+> +            n =3D n + 1
 
-Add padding between the xPL nodtb binary and the DTB when separate
-BSS is enabled, so the DTB is placed where fdt_find_separate()
-expects it.
+This doesn't exercise the change. The embed_data ELF has a single
+PT_LOAD segment (see test/embed_data.lds), so the old code already
+returns 0, 1, 2, ... =E2=80=94 the loop index i and the LOAD count coincide=
+.
+To regression-test the fix you need an ELF with a non-PT_LOAD program
+header between two PT_LOAD ones, so the old code produces a gap and
+the new code does not. Please add a fixture (or extend embed_data.lds
+with a NOTE/NOLOAD segment) that demonstrates the previous behaviour
+was wrong.
 
-Signed-off-by: Quentin Strydom <qstrydom0@gmail.com>
----
- scripts/Makefile.xpl | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+> diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+> @@ -551,6 +551,7 @@ def read_loadable_segments(data):
+>              raise ValueError(err)
+>          entry =3D elf.header['e_entry']
+>          segments =3D []
+> +        n =3D 0
+>          for i in range(elf.num_segments()):
+>              segment =3D elf.get_segment(i)
+>              if segment['p_type'] !=3D 'PT_LOAD' or not segment['p_memsz'=
+]:
+> @@ -558,7 +559,8 @@ def read_loadable_segments(data):
+>                  continue
+>              start =3D segment['p_offset']
+>              rend =3D start + segment['p_filesz']
+> -            segments.append((i, segment['p_paddr'], data[start:rend]))
+> +            segments.append((n, segment['p_paddr'], data[start:rend]))
+> +            n =3D n + 1
 
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index a3fd3e1375f..fcb79df3cc4 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -332,8 +332,8 @@ endif
- 
- ifneq ($(build_dtb),)
- $(obj)/$(SPL_BIN)-dtb.bin: $(obj)/$(SPL_BIN)-nodtb.bin \
--		$(if $(CONFIG_$(PHASE_)SEPARATE_BSS),,$(obj)/$(SPL_BIN)-pad.bin) \
--		$(FINAL_DTB_CONTAINER)  FORCE
-+		$(if $(CONFIG_$(PHASE_)SEPARATE_BSS),$(obj)/$(SPL_BIN)-image-end-pad.bin,$(obj)/$(SPL_BIN)-pad.bin) \
-+		$(FINAL_DTB_CONTAINER) FORCE
- 	$(call if_changed,cat)
- 
- $(obj)/$(SPL_BIN).bin: $(obj)/$(SPL_BIN)-dtb.bin FORCE
-@@ -343,6 +343,17 @@ $(obj)/$(SPL_BIN).bin: $(obj)/$(SPL_BIN)-nodtb.bin FORCE
- 	$(call if_changed,copy)
- endif
- 
-+# Create a file that pads from the end of the xPL nodtb binary to _image_binary_end
-+$(obj)/$(SPL_BIN)-image-end-pad.bin: $(obj)/$(SPL_BIN) $(obj)/$(SPL_BIN)-nodtb.bin
-+	@image_end=$$($(NM) $(obj)/$(SPL_BIN) | awk '/ _image_binary_end/ {print "ibase=16; " toupper($$1)}' | bc); \
-+	actual=$$(wc -c < $(obj)/$(SPL_BIN)-nodtb.bin); \
-+	count=$$((image_end - actual)); \
-+	if [ $$count -lt 0 ]; then \
-+		echo "Invalid xPL padding: image_end=$$image_end actual=$$actual"; \
-+		exit 1; \
-+	fi; \
-+	dd if=/dev/zero of=$@ bs=1 count=$$count 2>/dev/null
-+
- # Create a file that pads from the end of u-boot-spl-nodtb.bin to bss_end
- $(obj)/$(SPL_BIN)-pad.bin: $(obj)/$(SPL_BIN)
- 	@bss_size_str=$(shell $(NM) $< | awk 'BEGIN {size = 0} /__bss_size/ {size = $$1} END {print "ibase=16; " toupper(size)}' | bc); \
--- 
-2.43.0
+The docstring (lines 534-540) describes the first tuple element as
+'Segment number (0 =3D first)', which is ambiguous on whether gaps are
+allowed. Please update it to make clear this is the index into the
+returned LOAD segments, not the program-header index. Also,
+enumerate() over the filtered iteration would read more naturally;
+drop n and use enumerate at the append point. Minor: n +=3D 1 is the
+usual style.
 
+I also suggest a sentence in the commit message noting this is a
+behaviour change for split-elf FIT nodes (SEQ substitution now
+produces contiguous numbers when NOLOAD segments are present).
+
+Regards,
+Simon
