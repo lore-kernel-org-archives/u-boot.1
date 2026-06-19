@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37D6CD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4178ACD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:46:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D21AB801A9;
-	Fri, 19 Jun 2026 14:46:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18FD1849F7;
+	Fri, 19 Jun 2026 14:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jwDT6+vp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VWm7wP2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 646CC849D1; Fri, 19 Jun 2026 14:46:18 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id F30F384A0B; Fri, 19 Jun 2026 14:46:21 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54B948005D
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10B18849F7
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-696bf0e7c9cso2129144a12.1
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:46:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781873176; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-69531108f25so3926203a12.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:46:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781873179; cv=none;
  d=google.com; s=arc-20240605;
- b=l0Srb2V1qTZ9y9hn0AcXLtrF8iX0Qt/s2dEeKU/3+4B6v3f9yjE76B87ALWMADfaR8
- SG7yyN1tnUbTvGUDdXWjjDpoHglRBLqNkdGprkgy2JWwmd6sPE6flwrteJVpNeBvlTbr
- L5s7IUdcEwJToQfWKQuoElj8tTuToQnEoMsF014Alu125fYIkDIYGiGlsJ0SN2N57QSN
- IVCYLTi04NM8+JjqR9N31e6e7bVgT83YV9ihLhmSS7KhAd8lve3Q/S28gQm6kDOBB2+C
- KNpxcQbg7M7reBLYuK3Wes5443y9VjIWvBjJJkvz1qH7n+rNE48oOyx7RLnN/HtpjipW
- zgtA==
+ b=jQQOKSm8OLYeB7Eq+03hJUM/dcpoIXAIovs4jWB5t2oVXreFySQWKYik2N7AEDx/at
+ qdQ5GgLiP8QKRDqN8+FzrUuJtiCS1MrmuqQ+MIsKix6Cv+G21iH03WlSLDSnGoJHwGb6
+ x7nOCC7XD0Vtiio+xxfH+F0QL3OAGW1TzZQHfPgpjz/BSkOuPGtEUmIAzCojHTxUnNzy
+ yuKvDTcrOjB5TWbdwk2njngCqvg8gSG0SmVIYdh7ZabBTx7uZ9MvClQtR7gG69qGX4NB
+ e/8km0pXhw644FX7JBCTfFIbUZnzXPjp+X3CwJeL3erziHJJaGyPUgEfkQf6cHuAVuh7
+ q4zA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
- fh=RfFqkv5HraktqGzXnud/hDh3OBnLEMp0b4peWnkt0DQ=;
- b=dzyQRo/d3Ab5YyboEGH7X7txXg7lQ/i0SDfkG1MgBPbkak8i3KDvP6Rd3sip8rAltq
- 81s4nFWqXZXczdflF8iGOwApfbWKHyQVvCMQpTzaNdedfMf2uvO7hbyq6ESUWJxx8kCc
- hedRMnzi7n4BlJSNenaOECGrytPKqCh0z1eCwpZfQC7KsJj7P2k4NWC/l03BxGp1yFj9
- yS89bEMKcUocqlU645z0Et0yjgWPuAwObbj/9FVEnRiNqCfjHaRiI8sK/2E5nlQfYOww
- xqJO85Rv512ZDHQ4/tI3RsgYf1m8QTnGdYOGLY1koEOQTEbwPLYkHXXgRNHzV5xXtesx
- Ozdw==; darn=lists.denx.de
+ bh=KcDa8pX5clDXTwEwiBqHkfXW0dnikvYL/JfbOXVK5n0=;
+ fh=TbghQz01ZiT8JyjnPNfPfWAtdj1jNj2NBDdNdBYZb8Q=;
+ b=QN8uDviHhHY/8bbn/4cVzgpbDajFhiTQkZadY/RDEjBaznsqT3qe2qh2R1CXPjSFRg
+ lN8qaum260tRmBfIWqA3THoQboIJ0fpZc9WGSrWJN3gTReV+VwHRAjZo+IuMUp7I60YZ
+ b87v4o8CBYuBfIU8fCaStkmRMFNke9SF6Px86Bxj80Q++6dgma91AyXcKgcGJYmErWAU
+ WWrerj3jPjsxMyy8cyyLXVJTLahrC1yML6z52z6/+FmQhsEWIKqXyKiCEUwEr7lG0ykm
+ iEejxHN2za6/5gEDhIQ3R1kgdtilDt17/0RHt9QBzrv5yk77q899HRKw+PQsKZ/HJobV
+ 2CrQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781873176; x=1782477976; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781873179; x=1782477979; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
- b=jwDT6+vpS9iZrLb9cCK0Zc2fE/a1u3vOM5JeA81DFlM0VE/wZvALFQugTRrUk091Bf
- axR6+Rq1EwHvtMtv2BYRkAtKg2TMbFjevt47tZC/EPvwVlVDjGdHiK764Li4hW6z8T4G
- z3fRvNSgF7RMwlHPCh/arwDLxDUcwbl/4FUnU=
+ bh=KcDa8pX5clDXTwEwiBqHkfXW0dnikvYL/JfbOXVK5n0=;
+ b=VWm7wP2PMl2JiMhYWt/75q4JBfr1JhHCV8dZ6uXDhXd3odZAZZGBv7w6GFniIxeR7D
+ /SL7z+OqQim6ujaxVuzLfYTv5ZeP/U8KoIIEJT4oLCypcXVk3ayhzj+bzo6s4iUv2Cuj
+ 7ryMJF0jEODlbVgSTW8uWC7pGwv/3xs9AlT2s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781873176; x=1782477976;
+ d=1e100.net; s=20251104; t=1781873179; x=1782477979;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
- b=TLogaLItBidetamU9BYNmkk51YRj59L6UcxFdacwpi+7LR3ASbxp8I2yEh776IUg6T
- GgnNeWDwZvD3iq6zsSVAbz4Vpr2LYG6Ltjn99HISD9WNMAAEVuJFTii6MS4GbhJ7aRDw
- NL7MYuppbUKB81yLxMjHzegjajl6E9e77F7VSEUUrz35EzkymHBW2zFwrque62Uyd2Qc
- DTZBhtC9qGXokyIrHKTal9Fyn5BbMPYZM9wEeOvmJ/NVSPsyAzeyNGFjdfbFm2HBEcKm
- Gy4yd93kfJBrZzbWpm2ce/wzyX1aMXIE/dGnSJg5chMsZBUVZnfFhZp8Pzz2LfFm7CdZ
- r8dg==
+ bh=KcDa8pX5clDXTwEwiBqHkfXW0dnikvYL/JfbOXVK5n0=;
+ b=lxSOW7woEeE00qPbFOIhdtZ2+Oh2vRh0oEqlMRK8lxGH/3/mV9QA8i47CbeJQ8zNUW
+ 2f201EnuIHjglCHW5rRin/AmRHOOogUGBHsDFvTwuhYlo2BVQa+K4s95fEK7wzkEEOoy
+ YbPoeHRJbNv2wQloPOIeNndfKN6fDNZOWTcFnCkBq+9jH6OTW6o3GlnQy/32buENjmaE
+ ifPHA7b+k3bBJ3EurgaYes+KFig8WdC2XmiCoART517Ag8dSQV+tMznBgstBlYORmNUI
+ KOjSC1eXBvzeztpjwM+P7tJ0UUYnBQyuDC+fFcwcpi+cCvXolLx+8Hm1Y+1j6mBFowNY
+ Qv7w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8z1JnxZxvu/AK9ppWE9lb8K/LVMzhKZjpF15V0ViBpYXW2tVV7Bfd1B7C11vuprGjAM+itMHM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4qC6qnirhWy7Eq6socZoIr8CYTJWshD7XAbh1r6hrrmMaze5G
- Db34n9NA8beyp7iqUvwIVbtd+LVG6ustAeqBn91IpAW0b6w45aybWSn0EG5jFWxRJbDNUzrdwXY
- L3mturdYtiRAwTu5gTYkp3YDMvH/VuLVMmiWEEOTu
-X-Gm-Gg: AfdE7cnjBVv5CMOHfV49wdxadD0OOtAiEgrtqfg1VyUyWrBWS8ovoB64aaAe3St3r8P
- lTm7hW7j0NI0K3roZU6EjMLf3imXTIao24DTFdwN6QSqds6KiBoTnMfQlIoYXNkBGLhazJr/l7P
- YNbWQH+SOVV426DFUwmzmPcIGP1wPOPc9fLzLdu2WueJKLB3iUSae50kAYVtoWPC6nxNE1PgnrL
- d/kJiFkX+qp9T0e5MfYPgqFuoIRjePAx0zNNCbTCJVPAyM7F6hzDGILtyW2GvTk1smzkUo1yQ==
-X-Received: by 2002:aa7:c541:0:b0:68f:9fd9:435a with SMTP id
- 4fb4d7f45d1cf-6973bca5918mr1083026a12.17.1781873175733; Fri, 19 Jun 2026
- 05:46:15 -0700 (PDT)
+ AFNElJ/sGhLoX4Mo1lz5gUxwkpgFxp5Fdqcyjulxno+RWzihScYiGA11zKakEZnlrCPzPL1GnPw15QE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRXp++J2BmeoZWi4J4I6Xy8qs88EY8YKvu+OV0J7SvDro7llqM
+ mZ5NG+sx7YrIyRb99oCEDc9SsqnA03Xu79TUXl8JHmPHmQGaa0th2E1b7C0gwtJrspxUoVY2CsH
+ 2m9+9zyokwd6bQ+/Q5unb1QS5f+vFQCAZknXBLfM2
+X-Gm-Gg: AfdE7cmM4fKBB63nPnIuGkvwKIqFyw9nKWHyNvjsjl8jbCQScNhDWgt98ay4NVRUsZE
+ O9Ks2RG25t8LXIUBHVv6/ZyEE0S5ADObrUFjm690ejH76I20TD1jJ3HS+uh/zJ2UNBcNDlX4Lzl
+ 8J4ob5jHOh3E42KqopSz8N5Gbizp+khO/GLfpDR/vxjFo0oE7F1A4PayrhPePLaL33VXkfwPx0d
+ FlBVKh3Y4Wfut0rMO9sTUu5y3wHtVzA/92qBNuvVb4tieIipKuVgYgiv3kNEqjrQk6MpFeplMOi
+ ECy/Hvlo
+X-Received: by 2002:a05:6402:5256:b0:670:8acb:e822 with SMTP id
+ 4fb4d7f45d1cf-696dde6e53fmr1712956a12.12.1781873179539; Fri, 19 Jun 2026
+ 05:46:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260616191845.6182-1-ansuelsmth@gmail.com>
- <20260616191845.6182-3-ansuelsmth@gmail.com>
-In-Reply-To: <20260616191845.6182-3-ansuelsmth@gmail.com>
+ <20260616191845.6182-4-ansuelsmth@gmail.com>
+In-Reply-To: <20260616191845.6182-4-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jun 2026 13:46:02 +0100
-X-Gm-Features: AVVi8CfGtWRJXlk4A_Qz-HZrRMRzQzNbruQ7ElwN0kC1O0a0q4r8B6iIZjqcpBE
-Message-ID: <CAFLszTgNhwG_tx0x9HNCCftiUif2JN3U0iE4nQCvNnP1k-00uA@mail.gmail.com>
-Subject: Re: [PATCH v7 2/7] misc: fs_loader: reorganize and split to FS loader
- and FW UCLASS
+Date: Fri, 19 Jun 2026 13:46:05 +0100
+X-Gm-Features: AVVi8Cdbh7BJtqJQoi7whlbKzNwWQGbb4ea_fAFT3g-SNaUKLLIbnbQ8EjZjehw
+Message-ID: <CAFLszThvS7k9jM6f_s0y3YhkYedrfLAHX-HU3ad2cXTAc5Gw5w@mail.gmail.com>
+Subject: Re: [PATCH v7 3/7] misc: fw_loader: implement generic
+ get_fw_loader_from_node()
 To: ansuelsmth@gmail.com
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
@@ -129,106 +130,50 @@ X-Virus-Status: Clean
 Hi Christian,
 
 On 2026-06-16T19:18:35, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fs_loader: reorganize and split to FS loader and FW UCLASS
+> misc: fw_loader: implement generic get_fw_loader_from_node()
 >
-> In preparation to the introduction of variant of the FS loader,
-> reorganize and split the driver to generic fw_loader UCLASS and
-> specific fs_loader function. Create a dedicated directory for the loader
-> and move the internal structs and functions to a dedicated header file.
-> While at it also drop some redundant check and rename some variables as we
-> are updating the code for the UCLASS rework.
+> Implement a generic function to get a FW loader dev from a node.
 >
-> This will permit to reuse all the property and logic of FS loader
-> with container that are not exactly a readable filesystem.
+> There is currently only get_fs_loader() but that is limited to chosen
+> node and is limited only to FS loader.
+>
+> Introduce get_fw_loader_from_node() that will parse the
+> 'firmware-loader' from a specified node and will search and probe a
+> matching FW loader device, if found.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 >
-> drivers/misc/Kconfig                      |   5 +
->  drivers/misc/Makefile                     |   2 +-
->  drivers/misc/fs_loader.c                  | 328 ------------------------------
->  drivers/misc/fw_loader/Makefile           |   4 +
->  drivers/misc/fw_loader/fs_loader.c        | 186 +++++++++++++++++
->  drivers/misc/fw_loader/fw_loader-uclass.c | 159 +++++++++++++++
->  drivers/misc/fw_loader/internal.h         |  73 +++++++
->  include/dm/uclass-id.h                    |   2 +-
->  include/fs_loader.h                       |  47 +----
->  include/fw_loader.h                       |  19 ++
->  10 files changed, 450 insertions(+), 375 deletions(-)
-
-> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-> @@ -69,7 +69,7 @@ enum uclass_id {
-> -     UCLASS_FS_FIRMWARE_LOADER,              /* Generic loader */
-> +     UCLASS_FIRMWARE_LOADER, /* Firmware loader */
-
-This rename leaves doc/develop/driver-model/fs_firmware_loader.rst
-stale - it still has two references to UCLASS_FS_FIRMWARE_LOADER
-(around lines 90 and 148). Please update the rst file (or rename it)
-in this patch.
+> drivers/misc/fw_loader/fw_loader-uclass.c | 23 +++++++++++++++++++++++
+>  include/fw_loader.h                       | 14 ++++++++++++++
+>  2 files changed, 37 insertions(+)
 
 > diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
-> @@ -0,0 +1,159 @@
-> +static int fw_loader_pre_probe(struct udevice *dev)
+> @@ -108,6 +110,27 @@ UCLASS_DRIVER(fw_loader) = {
+> +int get_fw_loader_from_node(ofnode node, struct udevice **dev)
 > +{
-> +#if CONFIG_IS_ENABLED(DM)
-> +     struct device_plat *plat = dev_get_uclass_plat(dev);
-> +     ofnode fw_loader_node;
+> +     struct udevice *fw_dev;
+> +     int ret;
 > +
-> +     if (!IS_ENABLED(CONFIG_DM))
-> +             return 0;
-
-The outer #if CONFIG_IS_ENABLED(DM) already gates this body, so the
-runtime if (!IS_ENABLED(CONFIG_DM)) is dead code - and it confuses the
-meaning, since CONFIG_IS_ENABLED() is phase-aware while
-IS_ENABLED(CONFIG_DM) is not. Please drop the inner check.
-
-> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
-> @@ -0,0 +1,159 @@
-> +#else
-> +static int fw_loader_get_blk_dev_from_node(ofnode node)
-> +{
-> +     debug("fw_loader: No block device support\n");
-> +     return -EINVAL;
+> +     node = ofnode_parse_phandle(node, 'firmware-loader', 0);
+> +     if (!ofnode_valid(node))
+> +             return -ENODEV;
+> +
+> +     ret = device_find_global_by_ofnode(node, &fw_dev);
+> +     if (ret)
+> +             return ret;
+> +
+> +     ret = device_probe(fw_dev);
+> +     if (ret)
+> +             return ret;
+> +
+> +     *dev = fw_dev;
+> +     return 0;
 > +}
-> +#endif
 
-This changes behaviour from the original driver. Previously the entire
-phandlepart block was wrapped in #if CONFIG_IS_ENABLED(DM) &&
-CONFIG_IS_ENABLED(BLK), so a board with BLK disabled would probe with
-the phandle silently ignored. With this patch, the stub returns
--EINVAL and pre_probe propagates it, so probe fails. If intentional,
-please call it out in the commit message; otherwise the stub should
-return 0.
+Can you use uclass_get_device_by_ofnode(UCLASS_FIRMWARE_LOADER, node,
+dev) here? It is more specific.
 
-> diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-> @@ -0,0 +1,73 @@
-> +struct device_plat {
-> +     struct phandle_part phandlepart;
-> +     char *mtdpart;
-> +     char *ubivol;
-> +};
-
-Please rename struct device_plat to something like struct
-fw_loader_plat - device_plat reads as a generic DM type and is
-misleading even when internal to the uclass.
-
-> diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-> @@ -0,0 +1,73 @@
-> +#define fw_loader_get_ops(dev)       ((struct fw_loader_ops *)(dev)->driver->ops)
-
-The fs_loader_ops table is static const, so this macro silently casts
-the const away. Please return const struct fw_loader_ops * - the
-callers in request_firmware_into_buf() only need read access.
-
-> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-> @@ -36,7 +36,7 @@ obj-$(CONFIG_FSL_DEVICE_DISABLE) += fsl_devdis.o
-> -obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
-> +obj-$(CONFIG_FW_LOADER_UCLASS) += fw_loader/
-
-FW_LOADER_UCLASS is not phase-aware, so once any phase selects
-FS_LOADER the uclass object is linked into every phase that descends
-here. Worth making FW_LOADER_UCLASS phase-scoped (SPL_/TPL_/VPL_) and
-gating both the subdir and fw_loader-uclass.o on
-CONFIG_$(PHASE_)FW_LOADER_UCLASS.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
