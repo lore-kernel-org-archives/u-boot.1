@@ -4,111 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8BDCD98F2
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93EADCD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0AFA849F7;
+	by phobos.denx.de (Postfix) with ESMTP id E445584A0A;
 	Fri, 19 Jun 2026 18:31:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tr6/MUVm";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CP7W74/W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2883849EE; Fri, 19 Jun 2026 14:15:15 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D300184A3C; Fri, 19 Jun 2026 16:46:23 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2AFC849E4
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:15:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02DE4849BF
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 16:46:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c07c246ad7bso215140566b.2
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:15:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781871312; cv=none;
- d=google.com; s=arc-20240605;
- b=S+dbGA1k8/hStFCisz6AgiD7ba0qWlx+7n6iRbc/TyYm7hdt3VOQerN8apA79/acIH
- +6oger0Fu5KUqASyXoBbiTP8ppDAMnbfV3Wqh60pMZg4IK0KaDaOmJUnhj7Sz0VELX1W
- JQnowUg1sJ4swGkSNqBpsxcDitoK5V2fzshqXIXCydOw2tI+kh6zBERcWn57qp8OoZY6
- AjE+OMlydrAiY8I/fkjW+T+MB+E2kaZMs7WhlfuvUTLn5u4cH5isYgWP2GDNGaas8Xoo
- roCQ9vR+j6K8Ja6vsJ/LzQc2OZW9E5vy0AGIv7HK+yZV8i6mMSVG3zAv8RM9pcJ2zaY9
- crJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
- fh=cGbkB1gSdVXOC84nKkk1tOGrLgUOp8IPv9WeMZyLdSc=;
- b=QP5bJ0J+1UEBjTIEpP/AURN+UO3E+xkjhfzYrF2E7iGTP6xfOyUS4NUY9CT4HPXoYk
- NNvXGU5J9o7UW/DLnmndxOOcLXKkKA1S3LdgTpFu1hIomAYrBlh5sX2W4CTbc4eS06ur
- M75qb+sG09m11TQt1r2V982z6pqD8teGY3ZUd5ygLDRQRDi19zql7/aUP8NylozpSVdg
- 9NtizcBYdInB6IwTjU3dCoabrHiG7U/Gz2xD4jGk5Pd6yMO7bLQzbzsQ/8z9p79pfYfl
- EE/XaZE1YlcxEB2Zf/gXMwqHk0sk5qO4qQOlNZKNH0Sk/UCUolAQX4vDjbUzZxkiOdXh
- DX4w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781871312; x=1782476112; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
- b=Tr6/MUVmVmQoRlrqV8UvxsGX/b/8FrLranRWt1k/NlbUNV4m+FskDeZlCjGfxf5w0i
- TqyShIJhhGHQwhYPPuW5JvVyRBYLQQoTcULWAd+8rzYdRZ8hYhsdRpps+ugZILZsYK/1
- /ymsvQF53Zu+946XJmmZOCnaKsRgaznqjxA7o=
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 7E13B3FAEA
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1781880378;
+ bh=S8gUAICdVno8FrVBjBJDEdkkpFX4GaSvDFshUeFqkdk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=CP7W74/W2BlNQE0z9vijhWkBYJhxekOIDzD8IqRZ4i/3MGiHJJb9CUixfdOomEaEw
+ r2LViL4KpwM1Mn+lyTy9QNKxqFrIJnlehPNGwcDBc+ZUhi/wrK+wyv34IUCSV0o5Jh
+ NMhoYIIQB0Ao7cEgitDdCaJKwyrVHv4NkdTRLnWbDTDBnoouI+II2kxfSBiDzRFVdj
+ Z0BkWYNRrn+WPpjVsejJpfWN0FcYaH4McSEP+LCaReyLTSjEFoP7m7vkW0uPzKOckF
+ zagPhoeudGl7vx2xXcZfMdpNw+2B01raDyEQK1vH81DEAQ8YrMFcpZBhmWiJi3u1Wb
+ 7D99B3JRdr73IQg6R09NPFJj9EiVZV06Mfid30bBgS/f2U+BwhuTGIli4T9GcrcR7p
+ v54lb5IcI3tF+AmY+vJQ7RbTtJRxuKUGXgEbZ8AoBRNr0uy22E2Rc7CYrBURHZw9rL
+ FX+glpY+2dBru4bGe2TgVwWVTw+KJkF1fr+xooNZMDUduSNLeLChN2645rvLne81ou
+ NVRJqQqx5nTvybZcSfGuUf/OHTv0GQcznsq68JA5cUN5t/nfISDZ3dm56FB2ixFlcz
+ WzUkag8h6nk2brErx5ECJsUP1AnBKEPTPu/MoFaFH7kXkodGjNpQ68XRxRBzeG3w4Z
+ CqhxbHE/Qcxxm4ZpFr2xulv0=
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-c856470fe9fso1639385a12.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 07:46:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781871312; x=1782476112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
- b=fv+NJOfYp94CO32/OhCP7yOC7ZYo1EpMVPEq/GLuOVTCU8ravq0PzwwcjkwgbThuHz
- 5/WorxuVHEo+c6BCcfNzJ+cACANj86MffWfaLKoxzHzn2AmgO660Tz0+/Tm4R/QEWv8Y
- WNii8UNhIpbW/BNVAJ55Cbd75Q/ywiUK98FkJZwRC6zsU5ojeatu7EB0eYotyxnkzZOn
- ZiUo9bhG5BApg5jnCreQd0pu7doL8x4OPvIAzFwpMqMx6ndZZY8cXmr22B9lCWiQJnx5
- nDHNihAtWWtMhIQuFiaPZvJgh892IoARLofrR/8MdfpN1QnMzJP163PsZM5M/HNCb/hP
- aqXA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+fE/TQN5PC3qx+GhnmT+f+aAgfjPIz437mbt6D77i7uOGl2+p1VfPsnh27uQfA3w69kmTEm5A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvoB0St3k1xkmAS1mHTGTvTD2luSklE7JiwOAWPYQ8urF2lqpH
- jIF4PAjZDqB5CC87D+WabK9p9JUNBje9EXbBXdeQ4QbNa9gkbA5lU7sEJfO3KEY8ewDBsptYKaj
- Ob6GA3W+y9dZxqtioJukpi0ppGDof3yKB62h4JpUA
-X-Gm-Gg: AfdE7cl5u4rOUKjw3s1eyG2lEXqzfQ1DKofXuRdFJjcK8siPWpLFAkXn4nqBfUS/sM1
- 39u+PfkrqWLnE3Xp1gJXu9fq9NCp3rhzEjsrDJmvoFb6OtOOwCrvRoNP5nFaU4O74RfXTKl49Q6
- A3h0CXNSRhkx71iGJFKOdPraB0BMjMBDIYjT0zTQtObxbW6NxMvAh0A/fMmU6CYmJy+84R5DO+7
- Sw6gv2J80gvsKjghRb8ayTY9IPnwPiEtO+MogMDSKmYK+oDA2H69eVjalQvbfCYHDanTnQrZA==
-X-Received: by 2002:a17:907:5ce:b0:c07:e025:154d with SMTP id
- a640c23a62f3a-c0990ae342bmr180374466b.52.1781871312153; Fri, 19 Jun 2026
- 05:15:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781880377; x=1782485177;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S8gUAICdVno8FrVBjBJDEdkkpFX4GaSvDFshUeFqkdk=;
+ b=GBGALbGCBM6IFQnagbnvg0QVue7/V8D+A/oA78+65HAgxq+G8jrb6CpciFLVlvjZhz
+ IgZyfnOq1y7FKcbcISNYzUnr/QPYLpeHpAU4SjrcAEy5k0owuXcBTzCu9XDncFASMqeb
+ WlUVYDhFWFgG83k8xm34hI+zVpZcGyg6lIe91uiR5N7yN49CGiG9GfseJh3lCTc2wwVM
+ rE59NZVtoxKWRapRGF170gMJ0E2X+qLqwkpD2Bw9zipBG82tPglfs2wgm99S7J0KtpTW
+ 0WvwyN6tef0h3JtaSmByIROTKRp4H3udxOaqJtTKJ6KTn/wIQl6ETWmmpls0EET/y0CM
+ Q/yg==
+X-Gm-Message-State: AOJu0YzXUd8919CwG2zk+9e5YqiABQHBexObCqTFtnJ/hw3a7xH4/KFO
+ sAriK8rtfM8KPOHuzjoKnT1oD9ie3Ctfo41GRaQgSR5l+FGPlKap9J1fPtEeTwBF3p1fn8ArKR3
+ bU6Cc6hSKMORmyPWsUDITBmOXShKCknVBgb2plvqnzBlLXzA0svPJfW8JX0dnMXtwvRBjQMOwn5
+ vGaXlwXw==
+X-Gm-Gg: AfdE7ckzjhyYj9EN+pv42RsQgcd7Ssvtx3eN+wBUkSaHjMTgEv1z2gnCoK3SsqKrG0K
+ m42j9VCQlqlEjk2lusKb4k3XhWziXuYV0M7pQW6mSPk3EQbG72OMbk850W86ibQRr8SYw9SA/nb
+ 5EiKiVCaa4JPXH6QhYkAejJfX7lZprgIfbVaJBz5fay16JT6BM5iuZ7m0DpKZYsFNWI5PajYl67
+ +R53QZZcoAwWZXeHm5CbQJs0ygA2SyEBE4eEGGXXQ/xLr+McKeyTZ57aC/J8wuISyese6ZrAxFx
+ LtaYk9GGDNOothHtiF+kwRSIZXxDAmV+PnIXI6phZpqqStxsrY8RDhtzI9zjFEjjGyJ0SBHwHx0
+ Do0RIwsho8OpkLI7KmRaMjIeVunoS+9zSCPobGZ3dANXUsUSchL9Lk4op4REbNg==
+X-Received: by 2002:a05:6a20:734b:b0:3b4:774f:d18e with SMTP id
+ adf61e73a8af0-3bb3476459cmr4168677637.36.1781880376953; 
+ Fri, 19 Jun 2026 07:46:16 -0700 (PDT)
+X-Received: by 2002:a05:6a20:734b:b0:3b4:774f:d18e with SMTP id
+ adf61e73a8af0-3bb3476459cmr4168647637.36.1781880376454; 
+ Fri, 19 Jun 2026 07:46:16 -0700 (PDT)
+Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
+ [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c8bc5d04858sm10151a12.28.2026.06.19.07.46.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jun 2026 07:46:15 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ =?UTF-8?q?=E7=89=9B=20=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>
+Subject: [PATCH v1 1/1] bootm: move OS index bound check into the legacy path
+Date: Fri, 19 Jun 2026 14:45:51 +0000
+Message-ID: <20260619144554.5963-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260617101812.299586-3-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260617101812.299586-3-varadarajan.narayanan@oss.qualcomm.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jun 2026 13:14:56 +0100
-X-Gm-Features: AVVi8CeR1WGu_X_ChvpoTJcvSeLuiacTrDPMcCNnb84FqVJ8OX-Tx4LdfBxP5pE
-Message-ID: <CAFLszThw0BNAqzJuqWNRwViyTi6-Ez1e=d2jnV9QhWbDrGQgRA@mail.gmail.com>
-Subject: Re: [PATCH v5 02/13] binman: qcom: Add type definitions for Qualcomm
- binaries
-To: varadarajan.narayanan@oss.qualcomm.com
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, sjg@chromium.org, 
- alpernebiyasak@gmail.com, tien.fong.chee@altera.com, anshuld@ti.com, 
- alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com, 
- marek.vasut+renesas@mailbox.org, alice.guo@nxp.com, quentin.schulz@cherry.de, 
- ilias.apalodimas@linaro.org, mkorpershoek@kernel.org, andre.przywara@arm.com, 
- afd@ti.com, h-salunke@ti.com, alchark@gmail.com, dinesh.maniyam@altera.com, 
- luca.weiss@fairphone.com, adrian@mainlining.org, danila@jiaxyga.com, 
- balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com, 
- ycliang@andestech.com, mateuslima.ti@gmail.com, jamie.gibbons@microchip.com, 
- n-francis@ti.com, david.wronek@mainlining.org, james.hilliard1@gmail.com, 
- bdklingerman@gmail.com, richard.genoud@bootlin.com, sughosh.ganu@arm.com, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 19 Jun 2026 18:31:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,94 +117,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+Commit 103b1e7ce8cc ("bootm: bound-check OS index in
+bootm_os_get_boot_func()") added a range check to the shared accessor so
+an out-of-range OS id can no longer drive an out-of-bounds read of
+boot_os[]. That accessor is reached by every image format, but only a
+legacy uImage can deliver an unchecked value. bootm_find_os() takes the
+raw 8-bit ih_os byte straight from image_get_os() for legacy images,
+whereas the FIT path reaches the accessor only after fit_image_load()
+has rejected any image whose os is not one of the supported types, and
+the Android path hardcodes IH_OS_LINUX. The check can therefore never
+fail for FIT, where it only adds confusion and code.
 
-On 2026-06-17T10:17:59, Varadarajan Narayanan
-<varadarajan.narayanan@oss.qualcomm.com> wrote:
-> binman: qcom: Add type definitions for Qualcomm binaries
->
-> Add type definitions for Qualcomm's
->
->         appsbl  -> APPS Boot Loader (U-Boot)
->         config  -> Board/DDR related configuration
->         lib     -> Library of proprietary routines
->
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
-com>
->
-> tools/binman/etype/qcom_appsbl.py | 23 +++++++++++++++++++++++
->  tools/binman/etype/qcom_config.py | 26 ++++++++++++++++++++++++++
->  tools/binman/etype/qcom_lib.py    | 21 +++++++++++++++++++++
->  3 files changed, 70 insertions(+)
+Move the test to the legacy branch of bootm_find_os(), rejecting an
+out-of-range OS where the untrusted byte enters. This keeps the FIT path
+clear and lets the check be compiled out when CONFIG_LEGACY_IMAGE_FORMAT
+is disabled. A valid OS id that has no handler is still reported by the
+existing NULL return path in bootm_run_states().
 
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
-appsbl.py
-> @@ -0,0 +1,23 @@
-> +    Properties / Entry arguments:
-> +        - filename: Filename of U-Boot MBN (default 'u-boot.mbn')
-> +
-> +    This is the U-Boot MBN image.
-> +    """
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'qcom-appsbl')
+Suggested-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/bootm.c    | 4 ++++
+ boot/bootm_os.c | 2 --
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-Not quite. blob_named_by_arg looks up an entry-arg called
-<blob_fname>-path, so the actual property is qcom-appsbl-path
-(matching what your doc patch passes with -a qcom-appsbl-path=3D...).
-There is no filename property and no default. Please update the
-docstring to match the other two new etypes.
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 4c260a5f5ce..f9f0b2e918a 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -330,6 +330,10 @@ static int bootm_find_os(const char *cmd_name, const char *addr_fit)
+ 		images.os.type = image_get_type(os_hdr);
+ 		images.os.comp = image_get_comp(os_hdr);
+ 		images.os.os = image_get_os(os_hdr);
++		if (images.os.os >= IH_OS_COUNT) {
++			printf("Unsupported OS type %d\n", images.os.os);
++			return 1;
++		}
+ 
+ 		images.os.end = image_get_image_end(os_hdr);
+ 		images.os.load = image_get_load(os_hdr);
+diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+index 69aa577a2fc..ae20b555f5c 100644
+--- a/boot/bootm_os.c
++++ b/boot/bootm_os.c
+@@ -599,7 +599,5 @@ int boot_selected_os(int state, struct bootm_info *bmi, boot_os_fn *boot_fn)
+ 
+ boot_os_fn *bootm_os_get_boot_func(int os)
+ {
+-	if (os < 0 || os >= ARRAY_SIZE(boot_os))
+-		return NULL;
+ 	return boot_os[os];
+ }
+-- 
+2.43.0
 
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
-appsbl.py
-> @@ -0,0 +1,23 @@
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'qcom-appsbl')
-
-qcom_config and qcom_lib set self.external =3D True, but this one
-doesn't, even though u-boot.mbn is supplied via -a qcom-appsbl-path=3D.
-Should this also be external? Otherwise a missing blob produces a hard
-error rather than the usual missing-blob warning.
-
-> diff --git a/tools/binman/etype/qcom_config.py b/tools/binman/etype/qcom_=
-config.py
-> @@ -0,0 +1,26 @@
-> +from binman.entry import Entry
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-
-The Entry import is unused - same in qcom_lib.py. Please drop it.
-
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
-appsbl.py
-> @@ -0,0 +1,23 @@
-> +# SPDX-License-Identifier: GPL-2.0
-
-The rest of tools/binman/etype/ uses GPL-2.0+. Please align (all three
-new files).
-
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
-appsbl.py
-> @@ -0,0 +1,23 @@
-> +    MBN is a Qualcomm=E2=80=91specific signed firmware container that pa=
-ckages
-> +    executable images (typically ELF) along with metadata such as hash,
-> +    signature, and certificate chain, enabling the secure boot chain and=
- Root
-> +    of Trust (RoT) to load and authenticate images.
-
-Just to clarify - the doc patch shows this entry is fed u-boot.mbn
-produced by running elftombn.py over u-boot.elf, but the binman node
-in the dtsi treats it as an ELF (fit,operation =3D 'split-elf', os =3D
-'U-Boot'). Is the input actually a raw MBN container or the wrap-elf?
-The docstring should describe whichever binman consumes.
-
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
-appsbl.py
-> @@ -0,0 +1,23 @@
-> +class Entry_qcom_appsbl(Entry_blob_named_by_arg):
-> +    """U-Boot mbn image
-
-New binman etypes normally come with an ftest entry and a small test
-data file. Please add coverage for these three.
-
-Regards,
-Simon
