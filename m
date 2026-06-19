@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A797CCD98F2
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8BDCD98F2
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66200849EE;
+	by phobos.denx.de (Postfix) with ESMTP id A0AFA849F7;
 	Fri, 19 Jun 2026 18:31:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MFmNI/mA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tr6/MUVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 074CF849EE; Fri, 19 Jun 2026 14:13:08 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id D2883849EE; Fri, 19 Jun 2026 14:15:15 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36D51849E4
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:13:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2AFC849E4
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:15:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-687ed9aabb3so3625772a12.1
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:13:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781871184; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c07c246ad7bso215140566b.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:15:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781871312; cv=none;
  d=google.com; s=arc-20240605;
- b=Coxxw+hVRwvtpf1wn0ipRDrsQz9sB4rDLmBhVV6562gRveZALBVgVUoUqGEyqz4+TI
- ZaB7ySyDT5BXd1bv3ZNMfo0BmyoCpkkze1YMgLJYeUi95I/pkBpmumwZ3LLMd59d40+y
- JSV1ha4jAVRS31nLkNYHvLVb1l0Rdk/MRtLCE44ulEidEInl12v9rUn5Kur7Thxhuz4/
- 2fig0fbRAXSdUpCgfUHDAhqvJ3AOYLAHV5OUpiXibGoMlY7z4w44Y7w/LwuX+USAvqVD
- UdX8szXsoqrBWr4Rk1D49ajsEhx0eqxe4SVStmMXX2T5mMLacHRkN+X2oyDLqzZx1wME
- oNtw==
+ b=S+dbGA1k8/hStFCisz6AgiD7ba0qWlx+7n6iRbc/TyYm7hdt3VOQerN8apA79/acIH
+ +6oger0Fu5KUqASyXoBbiTP8ppDAMnbfV3Wqh60pMZg4IK0KaDaOmJUnhj7Sz0VELX1W
+ JQnowUg1sJ4swGkSNqBpsxcDitoK5V2fzshqXIXCydOw2tI+kh6zBERcWn57qp8OoZY6
+ AjE+OMlydrAiY8I/fkjW+T+MB+E2kaZMs7WhlfuvUTLn5u4cH5isYgWP2GDNGaas8Xoo
+ roCQ9vR+j6K8Ja6vsJ/LzQc2OZW9E5vy0AGIv7HK+yZV8i6mMSVG3zAv8RM9pcJ2zaY9
+ crJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
- fh=6BofvcUmIiQeHzHIX2MbnlBB2XYmbzLlXbfWHMVTWAg=;
- b=iz7fpm1hOFPuY2f+rE/rOdbVy42czVI1RD/4od0tVbTK2tkFlHU2CFS0YBnptJ9WOR
- pCe5W0442Rcef7TFPwJ7gX5hlnILw1y6oue/lYs3K2DgKoP1qyj83MyM5d+eQy9TswE3
- maSdFC7VfJekaptE2p1Cl3B7gKEwheG4pJDjcL2knhEGVU+JGUepY2D27fpAD52EXmrP
- vaKKX5QdAVyNtvmj8jMJ0q3Su7I4+5stqi1PntsNZ4hEvLkkEo3NLMJUACrD1ahdn8VV
- kf2Eb/lm/dYGoybwfAueNbOImc7pwL7t6hOTisd0CKnoenF8IwHBUHdP9P3vfj7W7ayR
- oxRw==; darn=lists.denx.de
+ bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
+ fh=cGbkB1gSdVXOC84nKkk1tOGrLgUOp8IPv9WeMZyLdSc=;
+ b=QP5bJ0J+1UEBjTIEpP/AURN+UO3E+xkjhfzYrF2E7iGTP6xfOyUS4NUY9CT4HPXoYk
+ NNvXGU5J9o7UW/DLnmndxOOcLXKkKA1S3LdgTpFu1hIomAYrBlh5sX2W4CTbc4eS06ur
+ M75qb+sG09m11TQt1r2V982z6pqD8teGY3ZUd5ygLDRQRDi19zql7/aUP8NylozpSVdg
+ 9NtizcBYdInB6IwTjU3dCoabrHiG7U/Gz2xD4jGk5Pd6yMO7bLQzbzsQ/8z9p79pfYfl
+ EE/XaZE1YlcxEB2Zf/gXMwqHk0sk5qO4qQOlNZKNH0Sk/UCUolAQX4vDjbUzZxkiOdXh
+ DX4w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781871184; x=1782475984; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781871312; x=1782476112; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
- b=MFmNI/mA1gv6BfDtRtnZaFtVLUfxC3QGlpNjgkUNBzHG4T8bgVt8PmA43O28yttu8/
- BrzwsmxZlYXW+TJE62H2/GtWROfquk/MNbfgdCddJZa0qV4yfMXiJnRtsFJ3MdegSUER
- F5+gqxg3yPCPede/GyZVPpqiFuGwm7M714/D4=
+ bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
+ b=Tr6/MUVmVmQoRlrqV8UvxsGX/b/8FrLranRWt1k/NlbUNV4m+FskDeZlCjGfxf5w0i
+ TqyShIJhhGHQwhYPPuW5JvVyRBYLQQoTcULWAd+8rzYdRZ8hYhsdRpps+ugZILZsYK/1
+ /ymsvQF53Zu+946XJmmZOCnaKsRgaznqjxA7o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781871184; x=1782475984;
+ d=1e100.net; s=20251104; t=1781871312; x=1782476112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=1PGiYonDpp1j3UE3mcz1qA0zs801oVw02qiXwx1WIqY=;
- b=ic/+kW5CtbgVE+OAcMEhvILOwQAkeOLxCSy60DKrtDoCC4iSq4B3BkNEyJWhRMWTcU
- S9QfyLrxlmGSVg8AvbG5M7jAt+xwTlqzfKcrdR71N82DHM9OncVqOOh/GXAwdhPbByT+
- SFcYOMmR/33JuNTZTha2wR0Z3YXw4ypoQ9jb4/FMSOl341zwTDnt4VlTCqJ5YWpweIsg
- bRatoG4omB0Grs77P80naHt0UaOk5YbHmr2OnRjUz1OyvE8UJg4FAM6pJhZzx87OURJK
- IUvNl+KCOH5aTTDpW2XQRRE86w7/I4u7aNFRk9MRR8TCMNui+Q49ENbpAf+/egIzOxXo
- jXnw==
+ bh=34+M5Ypf0r38iWNbxI2TS8fsIPiwcy1WHlVS657k9i8=;
+ b=fv+NJOfYp94CO32/OhCP7yOC7ZYo1EpMVPEq/GLuOVTCU8ravq0PzwwcjkwgbThuHz
+ 5/WorxuVHEo+c6BCcfNzJ+cACANj86MffWfaLKoxzHzn2AmgO660Tz0+/Tm4R/QEWv8Y
+ WNii8UNhIpbW/BNVAJ55Cbd75Q/ywiUK98FkJZwRC6zsU5ojeatu7EB0eYotyxnkzZOn
+ ZiUo9bhG5BApg5jnCreQd0pu7doL8x4OPvIAzFwpMqMx6ndZZY8cXmr22B9lCWiQJnx5
+ nDHNihAtWWtMhIQuFiaPZvJgh892IoARLofrR/8MdfpN1QnMzJP163PsZM5M/HNCb/hP
+ aqXA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+Qt8WDRysGaJNUgN4/Hewg8tWb8s57NTAqYlyMj5Ica5tVea/EMC5SIIV7jnrkX6pxWLObmiA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzlzsk9pY5KIJU/5MJ7sQ4Xt5I7Qw0sFQtIuul2DNaiBSapxwzv
- Gs58tiN6Bx4+gAxc8bFlvbgQeOyaOIuoiE5zbZoCKAJ45y+FXXIJiGQfwsISBRsG5gQz7Q1zdL6
- 4HHm47w4PGXEPrOC0vTzHj7FAbqHR717fIdxKFVNI
-X-Gm-Gg: AfdE7cndTqDXoyJfBVcSqp41oY3qyuEf5jp/8YVc0qbM9O59ZSv4W29iDLpHeHAFw7p
- AstJsjjOsxNW/fh1SwTeW12BkVgKy8Owrivpqf9oOzjre7a4GDoBtYYkbQSJqR6HQBZZ5wCcd+G
- hybdOnBvKeKP8onUkQX0YjnZtDsnapp5PevAwjWKtpsRXJI0mICFeTzCBXWBe943okL6thEm5pa
- vlrpAdIyRt4XOZDNMH2HhXxzpzuNcMaFxVMvFQBvEybhWvbsDJyluLn1/0tm15bpYe/JobBDg==
-X-Received: by 2002:a05:6402:c44:b0:695:4649:ca62 with SMTP id
- 4fb4d7f45d1cf-696e521d8a6mr1612071a12.21.1781871183531; Fri, 19 Jun 2026
- 05:13:03 -0700 (PDT)
+ AFNElJ+fE/TQN5PC3qx+GhnmT+f+aAgfjPIz437mbt6D77i7uOGl2+p1VfPsnh27uQfA3w69kmTEm5A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvoB0St3k1xkmAS1mHTGTvTD2luSklE7JiwOAWPYQ8urF2lqpH
+ jIF4PAjZDqB5CC87D+WabK9p9JUNBje9EXbBXdeQ4QbNa9gkbA5lU7sEJfO3KEY8ewDBsptYKaj
+ Ob6GA3W+y9dZxqtioJukpi0ppGDof3yKB62h4JpUA
+X-Gm-Gg: AfdE7cl5u4rOUKjw3s1eyG2lEXqzfQ1DKofXuRdFJjcK8siPWpLFAkXn4nqBfUS/sM1
+ 39u+PfkrqWLnE3Xp1gJXu9fq9NCp3rhzEjsrDJmvoFb6OtOOwCrvRoNP5nFaU4O74RfXTKl49Q6
+ A3h0CXNSRhkx71iGJFKOdPraB0BMjMBDIYjT0zTQtObxbW6NxMvAh0A/fMmU6CYmJy+84R5DO+7
+ Sw6gv2J80gvsKjghRb8ayTY9IPnwPiEtO+MogMDSKmYK+oDA2H69eVjalQvbfCYHDanTnQrZA==
+X-Received: by 2002:a17:907:5ce:b0:c07:e025:154d with SMTP id
+ a640c23a62f3a-c0990ae342bmr180374466b.52.1781871312153; Fri, 19 Jun 2026
+ 05:15:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260617101812.299586-2-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260617101812.299586-2-varadarajan.narayanan@oss.qualcomm.com>
+ <20260617101812.299586-3-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260617101812.299586-3-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jun 2026 13:12:51 +0100
-X-Gm-Features: AVVi8Cf_UP2Si1QDlf79IvJHv18X_r77DoeNPvEzM9SzoXLEf9A54g4O8cxaYHw
-Message-ID: <CAFLszTgkDHA+c4ayPo4kcAxanPsOWU3x7jDU1H6HEQpd9doNrQ@mail.gmail.com>
-Subject: Re: [PATCH v5 01/13] binman: Ignore noload segments for image
- numbering
+Date: Fri, 19 Jun 2026 13:14:56 +0100
+X-Gm-Features: AVVi8CeR1WGu_X_ChvpoTJcvSeLuiacTrDPMcCNnb84FqVJ8OX-Tx4LdfBxP5pE
+Message-ID: <CAFLszThw0BNAqzJuqWNRwViyTi6-Ez1e=d2jnV9QhWbDrGQgRA@mail.gmail.com>
+Subject: Re: [PATCH v5 02/13] binman: qcom: Add type definitions for Qualcomm
+ binaries
 To: varadarajan.narayanan@oss.qualcomm.com
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -130,72 +130,90 @@ Hi Varadarajan,
 
 On 2026-06-17T10:17:59, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> binman: Ignore noload segments for image numbering
+> binman: qcom: Add type definitions for Qualcomm binaries
 >
-> While including the partial images of a split-elf, binman gives the
-> segment number as found in the input ELF. However this results in 'gaps'
-> if the NOLOAD segments appear in between LOAD segments. Hence track the
-> LOAD segments separately and number the partial images accordingly.
+> Add type definitions for Qualcomm's
 >
-> Update the read segments test to verify this.
+>         appsbl  -> APPS Boot Loader (U-Boot)
+>         config  -> Board/DDR related configuration
+>         lib     -> Library of proprietary routines
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
 com>
 >
-> tools/binman/elf.py      | 4 +++-
->  tools/binman/elf_test.py | 4 ++++
->  2 files changed, 7 insertions(+), 1 deletion(-)
+> tools/binman/etype/qcom_appsbl.py | 23 +++++++++++++++++++++++
+>  tools/binman/etype/qcom_config.py | 26 ++++++++++++++++++++++++++
+>  tools/binman/etype/qcom_lib.py    | 21 +++++++++++++++++++++
+>  3 files changed, 70 insertions(+)
 
-> diff --git a/tools/binman/elf_test.py b/tools/binman/elf_test.py
-> @@ -288,6 +288,10 @@ class TestElf(unittest.TestCase):
->              self.skipTest('Python elftools not available')
->          fname =3D self.ElfTestFile('embed_data')
->          segments, entry =3D elf.read_loadable_segments(tools.read_file(f=
-name))
-> +        n =3D 0
-> +        for (i, start, data) in segments:
-> +            self.assertEqual(i, n)
-> +            n =3D n + 1
+> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
+appsbl.py
+> @@ -0,0 +1,23 @@
+> +    Properties / Entry arguments:
+> +        - filename: Filename of U-Boot MBN (default 'u-boot.mbn')
+> +
+> +    This is the U-Boot MBN image.
+> +    """
+> +    def __init__(self, section, etype, node):
+> +        super().__init__(section, etype, node, 'qcom-appsbl')
 
-This doesn't exercise the change. The embed_data ELF has a single
-PT_LOAD segment (see test/embed_data.lds), so the old code already
-returns 0, 1, 2, ... =E2=80=94 the loop index i and the LOAD count coincide=
-.
-To regression-test the fix you need an ELF with a non-PT_LOAD program
-header between two PT_LOAD ones, so the old code produces a gap and
-the new code does not. Please add a fixture (or extend embed_data.lds
-with a NOTE/NOLOAD segment) that demonstrates the previous behaviour
-was wrong.
+Not quite. blob_named_by_arg looks up an entry-arg called
+<blob_fname>-path, so the actual property is qcom-appsbl-path
+(matching what your doc patch passes with -a qcom-appsbl-path=3D...).
+There is no filename property and no default. Please update the
+docstring to match the other two new etypes.
 
-> diff --git a/tools/binman/elf.py b/tools/binman/elf.py
-> @@ -551,6 +551,7 @@ def read_loadable_segments(data):
->              raise ValueError(err)
->          entry =3D elf.header['e_entry']
->          segments =3D []
-> +        n =3D 0
->          for i in range(elf.num_segments()):
->              segment =3D elf.get_segment(i)
->              if segment['p_type'] !=3D 'PT_LOAD' or not segment['p_memsz'=
-]:
-> @@ -558,7 +559,8 @@ def read_loadable_segments(data):
->                  continue
->              start =3D segment['p_offset']
->              rend =3D start + segment['p_filesz']
-> -            segments.append((i, segment['p_paddr'], data[start:rend]))
-> +            segments.append((n, segment['p_paddr'], data[start:rend]))
-> +            n =3D n + 1
+> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
+appsbl.py
+> @@ -0,0 +1,23 @@
+> +    def __init__(self, section, etype, node):
+> +        super().__init__(section, etype, node, 'qcom-appsbl')
 
-The docstring (lines 534-540) describes the first tuple element as
-'Segment number (0 =3D first)', which is ambiguous on whether gaps are
-allowed. Please update it to make clear this is the index into the
-returned LOAD segments, not the program-header index. Also,
-enumerate() over the filtered iteration would read more naturally;
-drop n and use enumerate at the append point. Minor: n +=3D 1 is the
-usual style.
+qcom_config and qcom_lib set self.external =3D True, but this one
+doesn't, even though u-boot.mbn is supplied via -a qcom-appsbl-path=3D.
+Should this also be external? Otherwise a missing blob produces a hard
+error rather than the usual missing-blob warning.
 
-I also suggest a sentence in the commit message noting this is a
-behaviour change for split-elf FIT nodes (SEQ substitution now
-produces contiguous numbers when NOLOAD segments are present).
+> diff --git a/tools/binman/etype/qcom_config.py b/tools/binman/etype/qcom_=
+config.py
+> @@ -0,0 +1,26 @@
+> +from binman.entry import Entry
+> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
+
+The Entry import is unused - same in qcom_lib.py. Please drop it.
+
+> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
+appsbl.py
+> @@ -0,0 +1,23 @@
+> +# SPDX-License-Identifier: GPL-2.0
+
+The rest of tools/binman/etype/ uses GPL-2.0+. Please align (all three
+new files).
+
+> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
+appsbl.py
+> @@ -0,0 +1,23 @@
+> +    MBN is a Qualcomm=E2=80=91specific signed firmware container that pa=
+ckages
+> +    executable images (typically ELF) along with metadata such as hash,
+> +    signature, and certificate chain, enabling the secure boot chain and=
+ Root
+> +    of Trust (RoT) to load and authenticate images.
+
+Just to clarify - the doc patch shows this entry is fed u-boot.mbn
+produced by running elftombn.py over u-boot.elf, but the binman node
+in the dtsi treats it as an ELF (fit,operation =3D 'split-elf', os =3D
+'U-Boot'). Is the input actually a raw MBN container or the wrap-elf?
+The docstring should describe whichever binman consumes.
+
+> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_=
+appsbl.py
+> @@ -0,0 +1,23 @@
+> +class Entry_qcom_appsbl(Entry_blob_named_by_arg):
+> +    """U-Boot mbn image
+
+New binman etypes normally come with an ftest entry and a small test
+data file. Please add coverage for these three.
 
 Regards,
 Simon
