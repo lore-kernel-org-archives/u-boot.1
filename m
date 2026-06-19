@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7822BCD98F6
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 23:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4135DCD98F6
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 23:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7ABA84874;
-	Sat, 20 Jun 2026 01:29:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C5C6849AE;
+	Sat, 20 Jun 2026 01:29:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="snNtvc4K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RBWXJFCt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18515849AA; Sat, 20 Jun 2026 00:09:16 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 1A85C848EB; Sat, 20 Jun 2026 00:09:17 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26D4D848EB
- for <u-boot@lists.denx.de>; Sat, 20 Jun 2026 00:09:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34B148499C
+ for <u-boot@lists.denx.de>; Sat, 20 Jun 2026 00:09:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andreas.zdziarstek@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-4627adcf4d6so1666972f8f.3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 15:09:14 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so20356275e9.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 15:09:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781906953; x=1782511753; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2Tf+oqHNcvVQA8SVZRJnT/KZlDw1EdrCbD6z3+xMpdY=;
- b=snNtvc4KWrz5qidfZ79pPLjYLuH2Ij2l1NQz9csOQnBlTzGmhvLFBnKwsJDIGqg/m7
- wgwQsXNbYSBYXCFfG7e9bQMmUwH8Ox+MEV4bAwz0GDnNYVv1WbJzDosDw0+ZNQZGcUNx
- FBP6dsc95dbK8HH+bOQVM3Rrye0X2T7AV5xt9MKtZoP7xE2fIf9hwlmWeVfLMvbDysXc
- dQILdDJYVvxUq9UuDnSX9ldMr+ET3YjSX3H3ZjWRvai+3Ll1jiQfyoKcJ7u4hPqtpbCW
- hbXw7vj0jIbvMMQ4uWws2OwlwD85B+hJhXLtJyUwsmP5b7i83Afv5LjSs31stVisCCZA
- P/xA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781906953; x=1782511753;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1781906955; x=1782511755; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2Tf+oqHNcvVQA8SVZRJnT/KZlDw1EdrCbD6z3+xMpdY=;
- b=YFAV4oNvvc97+iMNOZxAJcx7ATXPQecdVuDhGcEwK55RPbcTvGHEx+FlqSh+G9s7xo
- d/1AnIz2gIXstvT8g2rHa6FW48HpovbxZwXFesrLsu1PAMqxNXFMbQh8JGoABwMhDqz1
- Oa11F4d1a501jVZWnaChgV2IS5ig80vp7KammQriLMPDHzdw11DWYDQN5jVKUvG077KR
- BngPrSPTmGTGLDH6hracYCctiOQsLFbkmhJW0JiPwqbSlSLhz9eoywNahv5WFNY/dg0R
- GcJxIYq/BDvIhBpcZAUNxQHfK0kXhNmlChTCDLHE0KI76f1gWlo3xg62VpMduX5OUvkk
- YBsA==
-X-Gm-Message-State: AOJu0YzGzQeXl8BgD57W4DJrCBPiJNjX+9lAJdrNOTpHDogIxIVZ1qQF
- Rxky5SuLu8/CY01bz787Gafs7HiGsCCBWv1+ZoWFIamCfYXu4LsKLBRDer5r74qV
-X-Gm-Gg: AfdE7clS5ndtkxgzpRGYVg2tSCv5YVjCLTo6JDpqi1UPOa9YSH8UC4LKCu3KqF60g2P
- 2y7Y+qYgpsNryCYsvHoHvtAz2XdFcItax/Y+yoR0vR2SAnOdWzs3M3CsRH9xUyYQYQr6b3hSyAF
- nkJu40kQgh1rB9T/1CFcnh4xQRxmT87yClQEIG1mil6kzQvoXxLpxfmBC9TE5JYM4Y1sk/4HQYP
- 3Zdbd1FzHxE4YP7D4RpVDL+Dhtd55F8CsMC5uZEEU9Qx7fVl8Luge5J99PHT7i2T7ahtxwsbDXb
- /qov4AuoTijQ2G9vOEUbkgun/0l9Xu1HM2eABwrWqKLaLLXLjgSQr1+2fcDH8/CbtrINLPYvc0l
- ErerYJFXxSSpc0ie8G/9jdo+5m31d5SuSfWizoZRSgoXF4whvIbpNCuk8IqKqmyQ7ybAErTyFkr
- IbVOOaf457Jkzy3I0f6Opp2XQViVXkp7H/Q8V0viV8+KP0R4iEgryAiJ6IjGW4tfA=
-X-Received: by 2002:a5d:6652:0:b0:460:e00:121c with SMTP id
- ffacd0b85a97d-465097867c3mr7619455f8f.28.1781906953337; 
- Fri, 19 Jun 2026 15:09:13 -0700 (PDT)
+ bh=CfdUnSqz2oiuMSgGKyTf0fY3jqUk+tbpP7MrkV6b0nQ=;
+ b=RBWXJFCt/QXVdA0MOP9Y0S3lvDWKphDj5mYK5EjWCqdzAaTawyPw8GGe0UDi8h4zsP
+ D27JHlIy2ZwfYpRVA/awwdX7r4b4jsD5nsbv4bTSGBjiB2AgWB8mZHEs9G1rfpndRSKS
+ tqxttp3PTy3Af9IcbTNo+eESl4ozZPXDFNS69q6eKeCv3PQOiPFBCaRGmChpbb7KTMDI
+ NiGfT9YOSfBQISfa6abnVBDkWguwtFvG7Y+uonQyC5MtQ5Fx+DWMBBwTZ14T4mGQ/7CL
+ KkH5uFw5eGh6TxiyymC4CUlgPrPk4ksOmX752JzyfRHfsq/9zlwU8qfSRBZO6EV/ob8u
+ IlpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781906955; x=1782511755;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=CfdUnSqz2oiuMSgGKyTf0fY3jqUk+tbpP7MrkV6b0nQ=;
+ b=p8KK1f1nCLN0TkezfcA0/gFXtsCQMSLxUvcjtK26GcK0+IbKWNgOL65TokkTUSUvY6
+ BVFR8rRyGIDGMDOXOIxbZT8J3tI4x0nV8Y+1MZns/G9I7uAm6NKdtkcQ6nyXyQ9FNPuB
+ r3uQrt4JCdj0ffiiGuyHnGem4ytc1WXt1egz0Rev3W+D4K8IFJEE8HFJMB1vWnOuY9KJ
+ LDz6PPaqih9SbgxWeJqWl+wGFprP6Fa18OxGlik0jyIBKdobOv+9M4khWhyCT7ppBeEw
+ nUg/2KtFRW+457A7MRKcHLSBur9klLK1PE0S0riSU4OqZoG390nl/jO58dlQtzJOqfxU
+ qesQ==
+X-Gm-Message-State: AOJu0YxWWJ6f4dxPQfWrRSxcpU44KW+DdhEUGF6hH7iutWIg2g1ETZrJ
+ p4ZE0blpVl2nBACx1WdYSskx4+tnfgHGd6vL2xUUvG1FLStQs0y7GOC/nRTCBCr+
+X-Gm-Gg: AfdE7cl19dyrpW8OClLcmogfGO/Jkg+t2vtgbsFAAMlBOad3gwq8y065oZ33mnZS9u0
+ XHn4zTs1USNbUSWGVt+hOtiiU1SI+wyEv6nF+kY2FH98TYHqSBvveWJagDDhmfTcYnsobH4OkGI
+ bBuT72Owc92cE/+IBHrGh5mEyL3q6VeHA5TvW5Jnxtta3rhb4/iDspeGEuX7GMEF2Y+jF+Z/HAG
+ 2NtVitaGgFn754n+TejRk4Nc2eMkZDYi6k0a0a77TuojWaLnCZlbYyFCzPwSp1vwZErR1gDVXe9
+ yMWGHT/GbDNVanUGh+xDvtVhoL3QcXPO/2h8wJetQdT9qiumX6fOY5TB7D5f45BB1BLYHjXgCN6
+ RkHLxrcmhVzWYN7IAacmdUMNQXyYf1j/HlX5FNoBDcl4j5eJ+HhunejqvAsJjqYHCqxbaa2Vo1a
+ mCMIf5dxxI9QtdoUeMKw3Q+Jc4DX/X9zUlf9ZRhCaVYS6xVSCWjj4bdhbNKVmmPQmchSMX1zMqC
+ g==
+X-Received: by 2002:a05:600c:1d24:b0:490:be78:1861 with SMTP id
+ 5b1f17b1804b1-492423140d1mr67875295e9.4.1781906954438; 
+ Fri, 19 Jun 2026 15:09:14 -0700 (PDT)
 Received: from turbine.fritz.box (p578499fa.dip0.t-ipconnect.de.
  [87.132.153.250]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-466643f4d9csm2176698f8f.4.2026.06.19.15.09.12
+ ffacd0b85a97d-466643f4d9csm2176698f8f.4.2026.06.19.15.09.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 15:09:12 -0700 (PDT)
+ Fri, 19 Jun 2026 15:09:14 -0700 (PDT)
 From: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -76,10 +78,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Subject: [PATCH 0/2] rockchip: odroid-m1s/rk3566 watchdog support
-Date: Sat, 20 Jun 2026 00:08:18 +0200
-Message-ID: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
+Subject: [PATCH 1/2] rockchip: rk3568: make the WDT trigger a first global
+ reset
+Date: Sat, 20 Jun 2026 00:08:19 +0200
+Message-ID: <20260619220820.301787-2-andreas.zdziarstek@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
+References: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 20 Jun 2026 01:29:08 +0200
@@ -99,39 +104,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I experimented with the Synopsys DesignWare watchdog on an Odroid-M1S
-(RK3566). On current master, the watchdog is present in device-tree.
-After activating the relevant options in .config, U-Boot tried probing
-it but failed, aborting at a failing clk_enable(). Current next branch
-already has a patch for that in the driver (d62801d09441) and with that
-wdt query and servicing works.
+Default is a second global reset which causes a system hang on a timeout
+in U-Boot.
 
-However, a timeout or wdt expire causes a hung SoC. There are two
-possible "global resets" the watchdog may trigger, set in the CRU
-registers, as per the TRM. Default is the "second" reset.
+Verified on the Hardkernel ODROID-M1S (RK3566): a watchdog timeout now
+cleanly reboots the board.
 
-Unfortunately, the TRM is rather tight-lipped about what each one really
-does. Per experimentation: Setting it to the "first" global reset fixes
-the hang and makes the watchdog work as expected in U-Boot. This is the
-first patch. As the PX30 does the same thing in its arch_cpu_init(), I
-believe this to be the way to go but I am curious to hear if anybody has
-more technical insight on this.
-
-Second patch adds watchdog support (per wdt command) to the Odroid-M1S
-defconfig, which was my original goal. I didn't enable AUTOSTART and
-cyclic servicing to not break any existing systems. However, I tested
-both and they too work as expected with the reset fix.
-
-Andreas Zdziarstek (2):
-  rockchip: rk3568: make the WDT trigger a first global reset
-  rockchip: odroid-m1s: enable watchdog support
-
+Signed-off-by: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
+---
  arch/arm/mach-rockchip/rk3568/rk3568.c | 8 ++++++++
- configs/odroid-m1s-rk3566_defconfig    | 5 +++++
- 2 files changed, 13 insertions(+)
+ 1 file changed, 8 insertions(+)
 
-
-base-commit: 298d44464dc63a4f3f5489150acd7958f359f9bd
+diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+index 2b1eafee37c..77610a6a6ec 100644
+--- a/arch/arm/mach-rockchip/rk3568/rk3568.c
++++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+@@ -37,6 +37,10 @@
+ #define CPU_GRF_BASE		0xfdc30000
+ #define GRF_CORE_PVTPLL_CON0	(0x10)
+ 
++#define CRU_BASE		0xfdd20000
++#define CRU_GLB_RST_CON		(CRU_BASE + 0x0dc)
++#define WDT_GLB_SRST_CTRL	BIT(1)
++
+ /* PMU_GRF_GPIO0D_IOMUX_L */
+ enum {
+ 	GPIO0D1_SHIFT		= 4,
+@@ -146,6 +150,10 @@ int arch_cpu_init(void)
+ 	writel((PMU_PD_VO_DWN_ENA << 16),
+ 	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
+ #endif
++
++	/* Make WDT trigger a first global reset */
++	setbits_le32((void __iomem *)CRU_GLB_RST_CON, WDT_GLB_SRST_CTRL);
++
+ 	return 0;
+ }
+ 
 -- 
 2.53.0
 
