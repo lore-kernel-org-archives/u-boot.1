@@ -4,92 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5CEBCD98F2
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 13:15:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E63BCD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 13:39:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7F45849BF;
-	Fri, 19 Jun 2026 15:15:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 91197849BF;
+	Fri, 19 Jun 2026 15:39:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="QFnrcFrO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fw/C3Dhn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75D68801A9; Fri, 19 Jun 2026 15:15:46 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 97CBF84A12; Fri, 19 Jun 2026 15:39:01 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBBD3849BF
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 15:15:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6ED801A9
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 15:38:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-4627adcf4d6so1406140f8f.3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 06:15:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-695f6438518so2781560a12.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 06:38:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781876339; cv=none;
+ d=google.com; s=arc-20240605;
+ b=IH/8L/YnuWDUISNIlEyxN4sb32skLaTfIRBvG1N3kBJfveXMqJpi1hxhNRrCKybl5F
+ DuGDpTmW3mexPvUlHQ14vwszwj/idQ99voPKvd941gCUXHZZByIuHD3p/6h0SFC0mFGc
+ 90nKAUBitvUovGyIuEbt0VQdRP+lGh/gsI1z91TscT4I6q0k8UJAD/UlBIpWLbBPmISJ
+ f6mJFrodsmB30LMiYJhaCMGECPsmv6O8VWsTk+SASNSkYU9FV9pZ39XMTnW0//PMxCsJ
+ nSL8HsD27ussQEDh8xg6iF5a7oPYEZkdHjDv9ipOLADkHr/h6YwPSszmHzIPFzBUzLDz
+ yHOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=YhmNJv0tBBqorQ2zeQq9rrwqg7YD4fPxCyWWWje/8gQ=;
+ fh=rdY9HAj/TUsXz7s2nKT/0L4YR9A/lqlP4ai30Pukds8=;
+ b=IHIj3yB7Rt1GNTjJdOb3oYHXGWOgf6iZsZOwexCKuMfzjbmX90b6TM0rgPwScSMidE
+ Nl722sgN2pU6sV4zI+hdv1zF6nnGWq7zBKpG3E+gnFitEUMiJQiIgcop6+et2gvvgsVT
+ V/ezt4OBppx6pLqnf29Lhaq8QNBQqCGe3+c7q+4ksmcwRsjHXCBNadhSitoRVDRhyvi9
+ mW6vHGeoXmEhE0WgzsullENYjDXJFa9JDPKk+OsG8M+8CLM+a+gRwyngMFsJ97QzhtrX
+ IZ/fN3OHcebOZMaqVVsX2Uz9OLjxfc3v0UWGVAjbLmr2uJGkm5McY7fN9FL7IPxmul/g
+ fZIg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781874942; x=1782479742; darn=lists.denx.de;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
+ d=chromium.org; s=google; t=1781876339; x=1782481139; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bBS6Y9/ThE4y9wvJiPlblV2p0YXNAvQlVOg/NP3579U=;
- b=QFnrcFrOWZhRNflAjI55KHRo7JKLXUJvWVtFdacJP2k4FLbk64+I89tYv8b/bco6YU
- iOZcdNDP5cf1MFchIbQAFHDKV1WYMfjIo3OqYop9m5d+f/w4qBe+ePEQwstXanwViyeI
- DJMMKwMLVaD3qFog/FW8hTJ13hdil5J4Z0Od9ZAavrtgX2v0SscDL31rHl+OeBCZ3QPK
- IocJZNF1596ehLOBBWLepAmMQZYwUaoOX0N4pjmffI07R5PNlplbHZI5gyUmb+iWzeNK
- g0e0w/SZat4dWM6Qc3WujlrrAg+4xyq/GQ4SZuiDaFyJVj2PhNM78xtbQyp2Ch97Vb2/
- ECog==
+ bh=YhmNJv0tBBqorQ2zeQq9rrwqg7YD4fPxCyWWWje/8gQ=;
+ b=Fw/C3DhnGZeMALYOtD+RK6BNhY7lBr1wVUz7d2AqPJctMRjq8GDAa8qL1wKbUhyueF
+ k9J49fSVCP5iScm22ZwxBik5FDw85hx7JlLhMvqsPYAXa9EiZRGVRJcESBeFavKJxDH6
+ MUjJz63tTspbrp3hH8iHuYS1fViz/SPI9wd34=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781874942; x=1782479742;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
+ d=1e100.net; s=20251104; t=1781876339; x=1782481139;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bBS6Y9/ThE4y9wvJiPlblV2p0YXNAvQlVOg/NP3579U=;
- b=JZVXXxGdBrqHRtk5kfW8CXmBX3j/2ux4IvC6TEprFOAi6yCkp/mfzv+0Y2fK7THYSp
- 5uQcqzFCBOCBPx5E1ZJugCoDWWW2eQmDHEQY37OM7zMDpke4SO910YaKiCPhmxj4n8YF
- kE4U8jhs/bCBaTEUQoMmfYMGjyk5F22EKhkF5gwywR4Pee44l93W9Vjm/9AZvwyN/a9b
- kYOPib7SagAFSZ3z8W478Dl/uzg6+st7cD40ecwV4TCKmbZCtJ1dQh7omA92GuVO2A8J
- 9d/E3lznPezI+N2c2H8uLB85XR4BVehSHYgZYcltOMzhWprGstn2qz1FTjvYLdt+iK3J
- tTig==
+ bh=YhmNJv0tBBqorQ2zeQq9rrwqg7YD4fPxCyWWWje/8gQ=;
+ b=nB67OLDCbzRXP/kgbhKLklzQpWe9/SqsHH0lKsNQ25k+/m7rmSaW9MIoJHUFErKuQ3
+ b0V4In/+1BuKmJYHWbC0OWwR4HokszwtQN8VT37qUJmk8QuvC+vXTqFt+krpePm/rnAf
+ L2Ie5N63OwwZwe+1aMQJTSTaST4JK7v7zYAtHnZw3qZxXKphCjISsDTZ9c1JnYMxOP4e
+ oTkWkEJL1MZrVsYYV/bqVQUULRg+bP8JMlzGcWm4Xq3Y0eiayGwcU0voBqHDExw52o/0
+ pQVBQwCJeNxq7RSAhWcZktDqZ2cnbzz/Zhvi7zmSbFAj0Zm8wdZqlOi9VnINcHSSEsOg
+ 9ggg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9/EMopfoprsVqoBTduBcridRJOEXw6zEvDDKk6QkK0wQPrbwNhSZn62H74gVg2Y3YmIQIQmBU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQl5ApGJOsRkSpe6rAKFsfmbU8gAxNCIcgvIvqE8T78exIElZK
- IzM4P+PgmRpPYkaXcbAp3QDQgI2X5homTdjhjUbfBRVzOvWVWTu39MKUT4WciAwXhy0=
-X-Gm-Gg: AfdE7cnTx2bRejiDL3+mVvVEluGEVN4gNkfZw5Id1q7NrSnh+wwLlTUJZKSG/taX99/
- HiilbngiDYjWyrCQcTdMIKJ+Wakchi0p+Ht9BT+WvXEkdjaZBr75UPluYGbcSzIYHx8+c0LQ+ty
- j0XiuwHoypm6/COVfDRxU85gTgqGtzAysU19bT/nOwpYlMY6KOac5DEmRxmdBPL4/YKZUBkDicG
- EU0qqrljd71ABYrzJhO4t1tWlv0g9YwJ8g6O+p07WvIVt3T3UDtL0MaNVdtu41CHN3jL8s+vmTS
- YkwLeGHitjo6NOiwd3B3w44Cx+XD04nszl4pU1OC5fWhT6B5oYxUgB6NwqItWPyXLh+7lSHMIv/
- O8bPB92Rayogoi4eaTpStbLc93or4eMiAO9XkN78KrQOwIL3N4mOeGiBwxPH6ibBlN1Nkkg==
-X-Received: by 2002:a05:6000:41e6:b0:465:7c2f:c09 with SMTP id
- ffacd0b85a97d-4657c2f0c7cmr4231670f8f.16.1781874942223; 
- Fri, 19 Jun 2026 06:15:42 -0700 (PDT)
-Received: from localhost ([2001:4091:a245:857c:6881:1355:3b75:b347])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46508a04dd1sm8786286f8f.7.2026.06.19.06.15.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 06:15:41 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=e95009888694f4829f4fd2b0e445c540bb5414aeb4dbcfaa2e9947504710;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Fri, 19 Jun 2026 15:15:32 +0200
-Message-Id: <DJD1Y3G9S1SP.2GHOZ5X4RYJFA@baylibre.com>
-Subject: Re: [PATCH 0/4] arm: mach-k3: Add DM firmware memory fixup
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Bryan Brattlof" <bb@ti.com>, "Markus Schneider-Pargmann"
- <msp@baylibre.com>
-Cc: "Paresh Bhagat" <p-bhagat@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>, <praneeth@ti.com>, <vigneshr@ti.com>,
- <b-liu@ti.com>, <afd@ti.com>, <anshuld@ti.com>, "U-Boot"
- <u-boot-bounces@lists.denx.de>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260609181006.460401-1-p-bhagat@ti.com>
- <DJ57VBSU0GI1.1WEU7NE9FYE46@baylibre.com>
- <c329501b-ae4a-4fd1-8fb3-0489a7f269a4@ti.com>
- <DJ71RUV8QWDN.4QHDEL6ZHAU9@baylibre.com>
- <20260612135507.ndfsmjxs34fu6stk@bryanbrattlof.com>
-In-Reply-To: <20260612135507.ndfsmjxs34fu6stk@bryanbrattlof.com>
+ AFNElJ+IWQqYPet3npnowdkUKRA9jZGqCuTHkSXmBk+GU2OAYvTQDid1VRE1Ob44PkqJxxhvS48z8Wg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb1OQItivlmhU6OVWvWpS5e2Nop/Tdyh9aOIr1k3ForqBy2fW5
+ xmZ7t3SCytY9cbLcwvp30AdCFddPdhedoZdS5zgIb/8u/Sc1PzjTKz4v9IRBMu7re+Uef9F3NfT
+ WDZM3fdvF8A54QEyAjXDyNxATrXz5aO2ebiIMLdRZ
+X-Gm-Gg: AfdE7cn/Jm4sMKJbPEDXDEoSuyeQb1ZXSTQNmwG8sUgR5sNSyQkEMq3pE7ir6OAGDyk
+ Q6WNdCuTM5vhE1u3A0MJpYWtSI9jrKZIV/HFdpRE7N+nmHzYJfpjNfic8xvjWbTcb4OJ4xKoZR9
+ T7vn2SI26whepOANvArJCflSx9B18FEv+0tf7ucXaPsREJBRM/BNBA+P0KdcuRjcEb3zIgJ8XIF
+ LM843WKGeBJR37EnV9wLsbnvBQFUeysQjYLgcX3UZ7eTndM+SEsK6TuYi+kM8ZXeE0T0XpClQ==
+X-Received: by 2002:a05:6402:5194:b0:684:95a:4d05 with SMTP id
+ 4fb4d7f45d1cf-696edc8d1f8mr1968890a12.8.1781876338680; Fri, 19 Jun 2026
+ 06:38:58 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260616191845.6182-1-ansuelsmth@gmail.com>
+ <20260616191845.6182-8-ansuelsmth@gmail.com>
+In-Reply-To: <20260616191845.6182-8-ansuelsmth@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 19 Jun 2026 14:38:46 +0100
+X-Gm-Features: AVVi8Cdc1VPcb44lsHU6VCGYEYb61ru8UBuKTjgDIfcnmbe1RBLN8FB6YMAyTMw
+Message-ID: <CAFLszThXdwM=6DoZbeYsd6d2Y2CrwOr2ZuW4rzB3C46nzDwOWw@mail.gmail.com>
+Subject: Re: [PATCH v7 7/7] test: dm: Add test for FW Loader feature
+To: ansuelsmth@gmail.com
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Martin Schwan <m.schwan@phytec.de>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, 
+ Randolph Sapp <rs@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,158 +125,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---e95009888694f4829f4fd2b0e445c540bb5414aeb4dbcfaa2e9947504710
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Christian,
 
-Hi Bryan,
-
-On Fri Jun 12, 2026 at 3:55 PM CEST, Bryan Brattlof wrote:
-> On June 12, 2026 thus sayeth Markus Schneider-Pargmann:
->> Hi Paresh,
->>=20
->> On Thu Jun 11, 2026 at 8:14 PM CEST, Paresh Bhagat wrote:
->> > Hi Markus,
->> >
->> > Btw Had a quick look at series
->> >
->> > https://lore.kernel.org/all/20260609-topic-am62a-ioddr-dt-v6-19-v6-0-1=
-6afba97fbe0@baylibre.com/
->> >
->> > I did not know this problem was for other devices too.
->> >
->> >
->> > On 10/06/26 13:42, Markus Schneider-Pargmann wrote:
->> >> Hi Paresh,
->> >>
->> >> On Tue Jun 9, 2026 at 8:10 PM CEST, Paresh Bhagat wrote:
->> >>> This patch series addresses DM firmware reserved memory fixup for AM=
-62a
->> >>> and AM62d:
->> >>>
->> >>> 1. AM62D is missing OF_SYSTEM_SETUP config, required for FDT fixups =
-to
->> >>>     be applied before passing dtb to kernel.
->> >>>
->> >>> 2. DM firmware reserved memory region is insufficient to accommodate=
- the
->> >>>     binary. Analysis of the DM firmware binary using objdump reveals=
- that
->> >>>     the resource_table section and .stack section occupies memory fr=
-om
->> >>>     0x9c900000 to 0x9e608000. So increase the reserved region size f=
-rom
->> >>>     0xf00000 to 0x1f00000 via fdt fixup. Add new configs in Kconfig.
->> >> I am wondering why you chose 0x1f00000 and not 0x1d08000?
->> >>
->> >> Also for am62a the firmware linker file says it is shorter:
->> >>      /* DDR for DM R5F code/data [ size 27 MiB + 364 KB ] */
->> >>      DDR                         : ORIGIN =3D 0x9CAA5000 LENGTH =3D 0=
-x1B5B000
->> >>
->> >>      https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main=
-/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62px-sk/wkup-r5fss0-0_freertos=
-/ti-arm-clang/linker.cmd#L175
->> >>
->> >> I am wondering what is correct, the linker file or the objdump you di=
-d?
->> >
->> >
->> > Yes apart from the objdump output I noticed a gap between end of=20
->> > wkup_r5fss0_core0_memory_region and start of secure_ddr. So intention =
-to=20
->> > fix the bug and use all of the available space.
->> >
->> >
->> >>
->> >>> 3. The existing fdt_fixup_reserved_memory() used a delete/recreate
->> >>>     approach which corrupted phandle references to DM node, causing =
-DM
->> >>>     initialization failures. Fixed it by updating nodes in-place usi=
-ng
->> >>>     fdt_setprop() to preserve original phandles.
->> >> I haven't looked at the code yet, why do you use a fixup instead of
->> >> fixing the devicetree?
->> >>
->> >> Best
->> >> Markus
->> >
->> >
->> > I had a discussion with bryan regarding the device tree fix approach. =
-He=20
->> > pointed out that firmware and kernel versions can be updated=20
->> > independently which can lead to unused reserved memory. So bootloaders=
-=20
->> > should dynamically update the reserved memory based on firmware=20
->> > requirements before handing off to kernel.
->>=20
->> Maybe I am missing something here, but isn't the firmware distributed
->> together with u-boot? u-boot gets the devicetree merged from upstream
->> every major version. So isn't a kernel update independent of
->> u-boot/firmware/devicetree update?
->>=20
->> Also do updates to the memory regions of your firmware really happen
->> that often?
+On 2026-06-16T19:18:35, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> test: dm: Add test for FW Loader feature
 >
-> This originally spawned because the reserved memory size in Linux's DT=20
-> was wrong. Fortunately it was a simple math error and yeah we should fit=
-=20
-> it there as well. But the fix exposed another issue.=20
+> Add basic test for FW Loader feature for the Filesystem way.
 >
-> If DM _was_ to change its memory layout we don't have a way to fix it=20
-> unless we keep the U-Boot build and Linux in sync. Unfortunately most of=
-=20
-> the distributions do not pin them together as tightly as we need for=20
-> that to work.
+> An additional MMC testing image is added that loads a dummy firmware.bin in
+> a fat partition. Update all the affected test for this additional eMMC
+> node.
 >
-> For SoCs like the 62 you are correct. There hasn't been much of a need=20
-> to change the memory layout at all however for devices like the AM67A,=20
-> AM62A and AM62D we've found people are starting to use different=20
-> firmware to help with whatever they are tasking the DSP to do.
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 >
-> The fdt fixup approach also has the added benefit of allowing people to=
-=20
-> try out different RTOS builds without having the headache of needing to=
-=20
-> modify DT to get the board to boot.
+> arch/sandbox/dts/test.dts          |  20 +++++++
+>  configs/sandbox64_defconfig        |   1 +
+>  configs/sandbox_defconfig          |   1 +
+>  configs/sandbox_flattree_defconfig |   1 +
+>  configs/sandbox_noinst_defconfig   |   1 +
+>  configs/sandbox_spl_defconfig      |   1 +
+>  configs/sandbox_vpl_defconfig      |   1 +
+>  test/boot/bootdev.c                |  34 +++++++----
+>  test/boot/bootflow.c               |  12 +++-
+>  test/dm/Makefile                   |   1 +
+>  test/dm/blk.c                      |  41 +++++++++-----
+>  test/dm/fw_loader.c                | 112 +++++++++++++++++++++++++++++++++++++
+>  test/py/tests/test_ut.py           |  18 ++++++
+>  13 files changed, 216 insertions(+), 28 deletions(-)
 
-Thanks for explaining. If you prefer the fixups, can you please change
-the code to be able to work with both layouts as documented in the
-binding documentation?
+> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> @@ -123,6 +123,7 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
+>        * 8   [   ]      OK  mmc       mmc2.bootdev
+>        * 9   [ + ]      OK  mmc       mmc1.bootdev
+>        * a   [   ]      OK  mmc       mmc0.bootdev
+> +      * a   [   ]      OK  mmc       mmc11.bootdev
+>        *
 
-  oneOf:
-    - description: Basic layout
-      items:
-        - description: region used for dynamic DMA allocations like vrings =
-and
-                       vring buffers
-        - description: region reserved for firmware image sections
-    - description: Detailed layout
-      items:
-        - description: region used for dynamic DMA allocations like vrings =
-and
-                       vring buffers
-        - description: region reserved for IPC resources
-        - description: LPM FS stub binary
-        - description: LPM metadata
-        - description: LPM FS context data and reserved sections
-        - description: DM RM/PM trace and firmware code/data
+The label here should be b for the new bootdev, not a second a.
 
-You can use the memory-region-names to know what is what.
+> diff --git a/test/dm/fw_loader.c b/test/dm/fw_loader.c
+> @@ -0,0 +1,112 @@
+> +static int dm_test_fw_loader_get_fw_size(struct unit_test_state *uts)
+> +{
+> +     struct udevice *mdio_dev, *fw_loader_dev = NULL;
+> +     ofnode mdio_node, phy_node;
+> +     int ret;
+> +
+> +     ut_assertok(uclass_get_device_by_name(UCLASS_MDIO, 'mdio-test',
+> +                                           &mdio_dev));
+> +
+> +     mdio_node = dev_ofnode(mdio_dev);
+> +     ut_assert(ofnode_valid(mdio_node));
+> +
+> +     phy_node = ofnode_find_subnode(mdio_node, 'ethernet-phy@2');
+> +     ut_assert(ofnode_valid(phy_node));
+> +
+> +     ret = get_fw_loader_from_node(phy_node, &fw_loader_dev);
+> +     ut_assertok(ret);
+> +     ut_assertnonnull(fw_loader_dev);
 
-Best
-Markus
+All three tests repeat the same six-line dance to look up the mdio
+device, walk to ethernet-phy@2 and resolve the loader. Please factor
+this into a helper (or per-suite fixture).
 
---e95009888694f4829f4fd2b0e445c540bb5414aeb4dbcfaa2e9947504710
-Content-Type: application/pgp-signature; name="signature.asc"
+> diff --git a/test/dm/fw_loader.c b/test/dm/fw_loader.c
+> @@ -0,0 +1,112 @@
+> +     ret = request_firmware_into_buf(fw_loader_dev, 'firmware.bin',
+> +                                     buf, firmware_size, firmware_size);
+> +     ut_asserteq(0, ret);
+> +
+> +     ret = request_firmware_into_buf(fw_loader_dev, 'firmware.bin',
+> +                                     buf, firmware_size, 0);
+> +     ut_asserteq(firmware_size, ret);
 
------BEGIN PGP SIGNATURE-----
+Please also exercise the past-the-end case (offset > firmware_size)
+and a missing-file case (does-not-exist.bin). Also free(buf) before
+returning.
 
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCajVA9RsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMY
-nQD/VKg0h3lua/a5o6rpPJ2hOLiaD6N9iN8kcAeGqeBEwp8BANzCgzubEvpYGI/r
-Be3JrPl6iJqwU58Igzy0x2KRy4kA
-=Nc+R
------END PGP SIGNATURE-----
+> diff --git a/test/dm/fw_loader.c b/test/dm/fw_loader.c
+> @@ -0,0 +1,112 @@
+> +DM_TEST(dm_test_fw_loader_get_fw_in_buf, UTF_SCAN_FDT);
 
---e95009888694f4829f4fd2b0e445c540bb5414aeb4dbcfaa2e9947504710--
+The FIP loader is the headline feature of the series but has no
+coverage here - only the FS loader path is exercised. Given that the
+FIP parser does UUID lookups, header validation and offset accounting,
+please add at least one test (a small canned FIP blob in an image, or
+a sandbox helper to fabricate one). Otherwise regressions in
+fip_loader.c will go unnoticed.
+
+> diff --git a/test/dm/blk.c b/test/dm/blk.c
+> @@ -208,14 +212,15 @@ static int dm_test_blk_iter(struct unit_test_state *uts)
+>       i = 0;
+>       blk_foreach_probe(BLKF_REMOVABLE, dev)
+> -             ut_asserteq_str(i++ ? 'mmc0.blk' : 'mmc1.blk', dev->name);
+> -     ut_asserteq(2, i);
+> +             ut_asserteq_str((++i == 1 ? 'mmc1.blk' : i == 2 ?
+> +                     'mmc0.blk' : 'mmc11.blk'), dev->name);
+> +     ut_asserteq(3, i);
+
+The nested ternary is hard to read; with three entries a small const
+char *expected[] = { ... } indexed by i would be clearer, matching the
+BLKF_BOTH case below.
+
+Regards,
+Simon
