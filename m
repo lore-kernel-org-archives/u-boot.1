@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F6FCD98F2
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B8BCD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:47:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9B4B801A9;
-	Fri, 19 Jun 2026 14:46:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C8FF84A12;
+	Fri, 19 Jun 2026 14:47:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CItaHzF8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WdkSLuQ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01E4849F7; Fri, 19 Jun 2026 14:46:53 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 2967184A1C; Fri, 19 Jun 2026 14:47:04 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74BC48005D
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CDC8005D
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-36b8d414666so1167935a91.3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:46:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781873209; cv=none;
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2bf22d29dabso13177255ad.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:46:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781873216; cv=none;
  d=google.com; s=arc-20240605;
- b=ZALVpz1eOC+a5LGGG7+xTpqI3/LjSpZ2w8RBvdPrVtLjK7FdemCB/I+5h6L9tpCQlN
- uIIOSZkqCG4Vc/pg7//1sKrI20umH68aKGJMiyR6zJJuqUsz3CMOr33cd1Lmu7v3vM4b
- mgHPoMjz6//w9N2wggwZkEo2iZYVw4FvSc17k4MEoDDPXZKNa85w4V8/coyXM85+m+79
- phBgGZIv1iqIurSkOuqTitDJLlTk3cUPEeIuuhipAqBA41a7MoYxeLPHPCkEkyT9HmQI
- JVQW/Ffw88Vq+n+GTIEKdtijvjZFla7oQG25qrgrET8Fs90oiENlQt0ToGUH/y0UyttH
- weWw==
+ b=drpbMB72Gy2Nsw0dMMJJLunzEDZxhde+PbTVZWH9wlj1kiS+q4Q4MRmq/ivAMpdhN9
+ 0ddGmoYUXrGoRasJbbfi+NfEYgOs1J9UI6uQB72LyR+6wrk0i8NiI8qDZpzB4xyz8p27
+ LN07sxrijDzhcWrz3SNOgBQ2w2tFDZt+vVSin+PsT1L+yffJLW6WepaQ05zx8wB7Mk21
+ xn3icGw73kxiBBeEPTD2q4T0pGWTALPZVJ2yWo0KytsqTqWC9ns9LB+coHkjYmggDdnK
+ 0m8CuwSqKD0F6jpj3WTJMStgeSRPA/6P1sDVfqV0msrjGMJYbwnEv9NvnRH5/iIBU4vl
+ 15wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=mBYZAOt06nvm3fMiW35jcE14wse2hQ/qfQv6+g1ZNJk=;
- fh=P5dfihBhuYb6HiPn4TVHGjBYMZhWTgXtL6TF3NUL5Q8=;
- b=MRXHbWaxpwPxROMICEnSGEehCuUx2sMcyS7Tn2Ft2kYlvvXOA3f4VxxP2CQ4jGG+0s
- A2yYb+JHMYjsneKgf12ExE6oX+vznik9NY3M814VGG1dAl+ot3GowQOWWXjlom8sVyr6
- MS49HZi/Yqj3+ISacfoHpL/36t86wIC1VGk8jeILN+ezBkRUyjbS/pSFB5i/hGal3YPh
- 7YY+5+RQRduSnmMzO17SYsxHoCwOFbRHfrWDiGnIRe1AX/zaI1K5k+IXlijFNLdZaXVx
- JvxvO18Be/mkzKNp2vi0HCWKJzL0f7vXLfPaI+sak/WT/upvnjProfxglsKdkBcnIrIV
- mZmw==; darn=lists.denx.de
+ bh=GEycztTv8ukGT/wEDu9Qq+3i5V/m0Hwi7WldIq/BoyU=;
+ fh=y7o2TCmmFfsuyzoRhzA8JmBDqQfKr374S1By4hpjEaA=;
+ b=UExdU6IWtN4hb+v/xgYh7JACd18oYm2gbIpGP5FyR1jwy5ewIeADPpZ2I3DmVV6iFE
+ 9XVvEBag5Iqr7OYIXgVF5Exg5jbA97gQ16adengC7RuAaN1Ru5rzRdNLgwr2J06AIgwc
+ 3czvBi/gP9HQGms/fSIbw3bWvO33XTEIKsI6IBH4Yj+PNrIL3S8zUi1vYoaLBVj0Nr+Y
+ fnvvSUOtw82EV7Z2zVywgV0fUm/Z5+QhI1sIsa5yiJkOochJutAyTgOmsGSj+cvpmyYL
+ B/xNSSfEzqpNk5zUsbszQ7GTx7lnMpXp3mN8+JOdP99Cwoz79nQmN0k20ysuuAAudd80
+ 3LLQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781873209; x=1782478009; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781873216; x=1782478016; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mBYZAOt06nvm3fMiW35jcE14wse2hQ/qfQv6+g1ZNJk=;
- b=CItaHzF807Gnam8XJT9T8aIC5txoYBT4wZ+ALwUUQ1kfsfPMhEgQk2MuxVvPz6wntb
- Cnz5ipInwH6iNzRwiruErz4ctZ4bGoiqGHQg+dYe/MxVslh991vOcsR/gOjAO8ju5AQn
- LQH/C67MzCwLNUiBUCO74XsHovnZYBnKT3cIY=
+ bh=GEycztTv8ukGT/wEDu9Qq+3i5V/m0Hwi7WldIq/BoyU=;
+ b=WdkSLuQ9klOCIiQO1yerMtgPsGjZrW3q/Uv9HhoqXFX2caUs1An35W/jgmPzdrQVpe
+ xE9h4knjI6r+yiyngbuKjRWyWIVe38w6tSRwjvCw6qa1BDRRpFJYe9DrGMLqtEBAt6W6
+ oyMC6JdPJk7g46DxZtJqa7eXvRh4dwAmGLYe0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781873209; x=1782478009;
+ d=1e100.net; s=20251104; t=1781873216; x=1782478016;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mBYZAOt06nvm3fMiW35jcE14wse2hQ/qfQv6+g1ZNJk=;
- b=Ui2jhLWscwSKZ/YDKvfDefUEY7KScbJ63leSD3Q/awRk1oBIP5vFi4MXTk/zuPWG1r
- PhLEvQclMcCkeN1Q5/1VMu4Oxd12gtR8KnQu1TZHJo4Wt8b1MPzd1FvSuYXivKhKLRXC
- qaR6YrmbCDCEnHWrpY8peCUNFwGOL4AP0pYVlrUd2J+HlaaanXtp2xKYTu9KQf3dAhlm
- N0iqvcLb+YlVrMHmrL1u7kbgRM7gILn2NawU2ycUtMJ0yZwamn2Gz1six5sdTpeZNZvI
- C1XyTmv9Vu0i/8R507BVrCntZcUusk6CJo/zc8iNCFp+xuET0vG0r7AvhCc8VL2AwDnc
- vqbw==
+ bh=GEycztTv8ukGT/wEDu9Qq+3i5V/m0Hwi7WldIq/BoyU=;
+ b=SXP8w5ABx3uum8TF+1pERHVG2zedrogys50Te37V5n+YMQlZZqJ97prU8HR95qbzzU
+ X4EzSjrVNnMBBFreqs1yJY94hK+ViF7YcthhVSVYbd4KkDvjvqaardSNAHDtIATgvJvg
+ 9dg2Jdqb5LuN1L92ffIm18cjP4uucbGBVKS0qAzANWS0hE83SWnwbenGYk9qtwEjjr6v
+ r9Od32V+3Z/lrlzfU2D+xsx25zgHb9J8VdSuY6bPHbgUwb1HTLSIXXGNDDQtgKdi34hf
+ +OaS+1LRuI7bpakFrs5SaQHcZujRDnlrkFKJs6YVoltJl1hxZJW5Xyuvkzl6CebMBFh8
+ oGtw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9gmiCp27qy7EPwX36/F5Ci4JF7hFXMYG9YmIdxXdns3hHpyQLPrukmzKX0WOHgRD+FCCSWw2w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLdalTm/+4yfQmhSPVkVGswYT68ezg88OygX7+RRdgW6wWw4Do
- wsRy+8A/j1r5IL3yTHlkSzaXwxHFmi5k8LHA6dd2pwkjWjRNbSalhETPhE3NfmPFWg9HSfFX4Tx
- mXhH2UHq8qdkTIjdDsXeOmF79B4n8g+33corUdOdw
-X-Gm-Gg: AfdE7ck7exy1N7xF/727i/zNgFbMr5pp7JMcXMafCmYN8ZE4cGOrhFM4oFVrxqkKK6K
- fZ+/9ywjXrT52Iv1cvYHanADCAC6qO1tJo45j1R5Kc/Y/40vCHp5fr1kcIqPiHGZ0ZBohGtIUGY
- TL8HzkIb9YC8a+1WmuPtM37IoLo+7Nd/9NWn8W/BvfXYqPjTdbxh8YRo06Fyzvfpza65idJS4qJ
- wgb2o6+YEv4UbeOaf16GiK5BM3wrAEtGALldsf6GdRkiFinK2JmP1HuwxWDP4MxeRKQ0jiaRaDp
- dwBySfqd
-X-Received: by 2002:a17:902:ea08:b0:2c0:a711:539 with SMTP id
- d9443c01a7336-2c718ef88c4mr37792885ad.5.1781873208677; Fri, 19 Jun 2026
- 05:46:48 -0700 (PDT)
+ AFNElJ+eaP7i9wSyngJUQo7Cjy0s3lblfwwz2bUaJBF3zqVxB/xGxkxJL1xtK7ntoZIXAFAIEMh9dsc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+FYl61DLMp/a19+6hxGUPgfka3LrSfsaXeJm+Bye0+laLTeFU
+ k6a2KSj+4j4F5RiYx+vJJ8HXORhZvvOEroXbP9RxUGm169DjgweBT/Qwx7Qzg5fiKCLpCWX1Exw
+ syYWJfZpiQq1CBNpmWN0CqMKTm62WsCNsj8+BRpsb
+X-Gm-Gg: AfdE7cnRPuOqByxEgA/AL7X06c94MbGoWMv9yLyxfXUMl4WjJuWrXS6muAgM23zjgph
+ zkeqc1lX9+ttcrc1O0Rv1Ql6T+mMhhH/gQ8gTa06WlRQ2D1mZh6hbAC/nO6BLw7lkujAZL0Yxt1
+ vx8iilMNafIy+5STPmFh4zSREC494+xnLDGhMWEx3k10Vc4m6u4EKFG+qn1PxFXYXAEiqm+mwuw
+ yAB85l2wylFmbudAZesK7cpojeRnqpeFmvyM+sRgSsvqQQuqHCK1/oVhUCULLclnCRZGt1TkQ==
+X-Received: by 2002:a17:902:ec84:b0:2bf:372a:830c with SMTP id
+ d9443c01a7336-2c718f34407mr37871435ad.11.1781873215840; Fri, 19 Jun 2026
+ 05:46:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260616191845.6182-1-ansuelsmth@gmail.com>
- <20260616191845.6182-6-ansuelsmth@gmail.com>
-In-Reply-To: <20260616191845.6182-6-ansuelsmth@gmail.com>
+ <20260616191845.6182-7-ansuelsmth@gmail.com>
+In-Reply-To: <20260616191845.6182-7-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jun 2026 13:46:14 +0100
-X-Gm-Features: AVVi8CdQrhBZWoClknZoToPpOkRluJM1n6NDp0eO-JKpSdR0j2-0df7dvXoaZwc
-Message-ID: <CAFLszTgR3+She6vFe-ji9rEpXShKoYLheDox3iJ22oxUX1MVVg@mail.gmail.com>
-Subject: Re: [PATCH v7 5/7] misc: fw_loader: introduce FIP loader driver
+Date: Fri, 19 Jun 2026 13:46:24 +0100
+X-Gm-Features: AVVi8CfZAGu_PsFTyj3R-7qGmIjZH1U81QNVTPxZanEcFbL8iLrstWgfULn8UIU
+Message-ID: <CAFLszThQkPNuZwgVoNfz60nJ2jqpN7_0NK3OnZ3ocDoxPfGVAQ@mail.gmail.com>
+Subject: Re: [PATCH v7 6/7] doc: dtbinding: Update documentation for Generic
+ Firmware loader
 To: ansuelsmth@gmail.com
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
@@ -129,189 +129,77 @@ X-Virus-Status: Clean
 Hi Christian,
 
 On 2026-06-16T19:18:35, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fw_loader: introduce FIP loader driver
+> doc: dtbinding: Update documentation for Generic Firmware loader
 >
-> Introduce a variant of the FS loader driver to extract images from FIP
-> image. These image can contain additional binary used to init Network
-> accelerator or PHY firmware blob.
+> Update documentation for Generic Firmware loader, generalize it from FS
+> specific and add new property and example for FIP loader.
 >
-> The way FIP handle image type is with the usage of UUID.
+> Also add details on the usage of 'phandlepart', 'mtdpart' and 'ubivol'
+> property.
 >
-> This FIP loader driver implement a simple FIP image parser that check
-> every entry for a matching UUID.
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 >
-> Similar to FS loader, this driver also support both UBI and Block
-> devices.
->
-> Also an additional property is added to handle special case with eMMC
-> that doesn't have a GPT partition and require a global offset to
-> reference the FIP partition.
->
-> An example usage of this driver is the following:
->
-> [...]
->
-> drivers/misc/Kconfig                      |  11 +
->  drivers/misc/fw_loader/Makefile           |   1 +
->  drivers/misc/fw_loader/fip_loader.c       | 544 ++++++++++++++++++++++++++++++
->  drivers/misc/fw_loader/fw_loader-uclass.c |   3 +
->  drivers/misc/fw_loader/internal.h         |   2 +
->  5 files changed, 561 insertions(+)
+> .../misc/{fs_loader.txt => fw_loader.txt}          | 33 ++++++++++++++++++++--
+>  1 file changed, 30 insertions(+), 3 deletions(-)
 
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +static int fw_parse_storage_info(struct udevice *dev,
-> +                              struct fip_storage_info *info)
-> +{
-> +     char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
-> +     struct device_plat *plat = dev_get_uclass_plat(dev);
-> +     int ret;
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -46,3 +56,20 @@ ubi in device tree source as shown in below:
+> +     Example for FIP from eMMC:
+> +     fs_loader4: fip-loader@4 {
+> +             bootph-all;
+> +             compatible = 'u-boot,fip-loader';
+> +             phandlepart = <&mmc0 0>;
+> +             partoffset = <0x100>;
+> +     };
 > +
-> +     storage_interface = env_get('storage_interface');
-> +     dev_part = env_get('fw_dev_part');
-> +     ubi_mtdpart = env_get('fw_ubi_mtdpart');
-> +     ubi_volume = env_get('fw_ubi_volume');
-> +     info->part_offset = env_get_hex('fw_partoffset', 0);
+> +     Example for FIP from ubi:
+> +     fs_loader4: fip-loader@4 {
+> +             bootph-all;
+> +             compatible = 'u-boot,fip-loader';
+> +             mtdpart = 'ubi',
+> +             ubivol = 'bl31';
+> +     };
 
-A large chunk of this - the env lookups, the phandlepart resolution
-and the mtdpart/ubivol fallback - duplicates
-fw_get_filesystem_prepare()/select_fs_dev() in fs_loader.c almost
-line-for-line. Please factor the common storage-selection logic into
-the uclass (or into a helper in internal.h) so both drivers share one
-implementation.
+Two issues. First, both nodes reuse the same label and unit address
+(fs_loader4: fip-loader@4) - please bump the second to fs_loader5:
+fip-loader@5
 
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +static int blk_parse_fip_firmware(struct firmware *firmwarep,
-> +                               struct blk_desc *desc,
-> +                               struct disk_partition *part_info,
-> +                               unsigned int part_offset,
-> +                               struct fip_toc_entry *dent)
-> +{
-> +     unsigned int offset = part_info->start + part_offset;
+Second, mtdpart = 'ubi', terminates the property with a comma but
+should be a semicolon.
 
-part_info->start is lbaint_t, which is 64-bit on most modern targets.
-Storing it in unsigned int silently truncates partitions whose start
-LBA is beyond 4G blocks; the same applies to blkstart further down and
-to part_offset in struct fip_storage_info. Please use lbaint_t for the
-on-device block coordinates.
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -1,17 +1,27 @@
+> +- partoffset: valid ONLY for 'u-boot,fip-loader'. Offset of the partition to
+> +           parse the FIP partition from.
 
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +#define TOC_HEADER_NAME      0xaa640001
+Wording is confusing - partition appears twice with different
+meanings. I suggest "byte offset within the selected partition where
+the FIP header is located". Also worth stating the units (bytes) and
+whether the offset must be block-aligned.
+
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -1,17 +1,27 @@
+> -- compatible: should contain 'u-boot,fs-loader'
+> +- compatible: should contain 'u-boot,fs-loader' or 'u-boot,fip-loader'
 > +
-> +struct fip_toc_header {
-> +     u32 name;
-> +     u32 serial_number;
-> +     u64 flags;
-> +};
+> +Optional properties:
+> +--------------------
 > +
-> +struct fip_toc_entry {
-> +     struct uuid uuid;
-> +     u64 offset_address;
-> +     u64 size;
-> +     u64 flags;
-> +};
+>  - phandlepart: which block storage device and partition the image loading from,
 
-These describe an on-disk format that TF-A defines as little-endian,
-but the code reads them straight into native u32/u64 and compares with
-TOC_HEADER_NAME directly. Do we have to worry about big-endian
-targets?
+Just to check - phandlepart/mtdpart move from required to optional,
+but at least one must be present in practice. Please spell it out,
+e.g. "exactly one of phandlepart or mtdpart must be provided".
 
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +#ifdef CONFIG_CMD_UBIFS
-> +static int ubi_parse_fip_firmware(struct firmware *firmwarep,
-> +                               char *ubi_vol,
-> +                               struct fip_toc_entry *dent)
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -1,17 +1,27 @@
+> -* File system firmware loader
+> +* Generic Firmware loader
 
-The rest of the FW loader code gates UBI support with
-CONFIG_IS_ENABLED(CMD_UBIFS) so it works correctly across SPL/VPL
-phases. Please use the same idiom here, otherwise an SPL build with
-CONFIG_SPL_CMD_UBIFS but no CONFIG_CMD_UBIFS will silently drop the
-UBI path.
-
-> diff --git a/drivers/misc/fw_loader/Makefile b/drivers/misc/fw_loader/Makefile
-> @@ -1,4 +1,5 @@
->  # SPDX-License-Identifier: GPL-2.0+
->
->  obj-y += fw_loader-uclass.o
-> +obj-$(CONFIG_FIP_LOADER) += fip_loader.o
->  obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
-
-FS_LOADER uses the $(PHASE_) prefix so it can be enabled per-phase,
-but FIP_LOADER is gated on a single non-phased symbol. Was that
-intentional? If FIP is meant to be usable in SPL/TPL/VPL too (the
-cover letter suggests it is), this should probably be
-CONFIG_$(PHASE_)FIP_LOADER
-
-> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
-> @@ -87,6 +87,9 @@ static int fw_loader_pre_probe(struct udevice *dev)
->
->               plat->ubivol = (char *)ofnode_read_string(fw_loader_node,
->                                                         'ubivol');
-> +
-> +             ofnode_read_u32(fw_loader_node, 'partoffset',
-> +                             &plat->partoffset);
->       }
-
-partoffset is a FIP-specific concept (a byte offset inside a partition
-where the FIP image lives), but it is being parsed in the generic
-uclass and stored in the common device_plat - either document it as
-applying to every loader and have fs_loader honour it, or move the DT
-read into the FIP driver so the uclass stays neutral.
-
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +static int fw_get_fip_firmware_size(struct udevice *dev)
-> +{
-> +     struct fip_storage_info info = { };
-> +     struct firmware *firmwarep;
-> +     struct fip_toc_entry ent;
-> +     int ret;
-> +
-> +     ret = fw_parse_storage_info(dev, &info);
-> +     if (ret)
-> +             return ret;
-> +
-> +     firmwarep = dev_get_uclass_priv(dev);
-> +     if (!firmwarep)
-> +             return -EINVAL;
-> +
-> +     ret = parse_fip_firmware(firmwarep, &info, &ent);
-> +     if (ret)
-> +             return ret;
-> +
-> +     return ent.size;
-> +}
-
-get_size() returns ent.size, but the get_firmware() path treats the
-usable size as ent.size - firmwarep->offset. A caller using
-request_firmware_size() to size a buffer and then passing a non-zero
-offset to request_firmware_into_buf() will get an over-large
-allocation, or interpret size inconsistently between the two calls.
-Please pick one definition (most likely ent.size - firmwarep->offset)
-and use it in both ops.
-
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +#include <dm.h>
-> +#include <div64.h>
-> +#include <env.h>
-> +#include <errno.h>
-> +#include <blk.h>
-> +#include <fs.h>
-> +#include <linux/kernel.h>
-> +#include <log.h>
-> +#include <mapmem.h>
-> +#include <malloc.h>
-> +#include <memalign.h>
-> +#include <part.h>
-> +#include <u-boot/uuid.h>
-
-map_to_sysmem()/memalign() are not used; please drop mapmem.h and
-memalign.h. Also please sort the includes properly - e.g. blk.h should
-come before dm.h
+BTW new bindings in U-Boot are expected to be YAML schemas (or
+upstreamed to dt-schema), not free-form .txt. Since you are
+effectively rewriting this binding for a new compatible, it would be a
+good opportunity to convert. What do you think?
 
 Regards,
 Simon
