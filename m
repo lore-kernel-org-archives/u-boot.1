@@ -4,91 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10513CD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37D6CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A8E3849ED;
-	Fri, 19 Jun 2026 14:16:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D21AB801A9;
+	Fri, 19 Jun 2026 14:46:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MbW50LBp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jwDT6+vp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19041849EE; Fri, 19 Jun 2026 14:16:04 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 646CC849D1; Fri, 19 Jun 2026 14:46:18 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E507E849E4
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:16:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54B948005D
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:46:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-695737cf38bso2911039a12.0
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:16:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781871361; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-696bf0e7c9cso2129144a12.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:46:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781873176; cv=none;
  d=google.com; s=arc-20240605;
- b=X0t/6748iDSHEmUTfH65LuV/rfb9lNBXENdqHcqivNw1LBd100XM1VrublFgpqcgCD
- cCw8t7Tmm67bfhaTqXumHTCgz6iqFZZ8r/rF8PKLNQP1B+JKMDcjXK91xd5ZI2ANkP4I
- bMBEi8NjTgeRhNAZl1+cSejG/rOPf3vtxlQ5/HV5LI7qq4vjzzCJAYb9VhFzvwb+LVPH
- UvuNMDuevIjkDoOMfZFovSUgpf8fqMNsQAfQYXyeArqeBRgUBdz0b/qwFuHhSL+yrB2N
- YXeZJHndFVc+5RIGJ69YFMi5525rTMfDfQCYCnFtpRIbHKvH0uPB1YcWx3eG1zHOd6yl
- K01A==
+ b=l0Srb2V1qTZ9y9hn0AcXLtrF8iX0Qt/s2dEeKU/3+4B6v3f9yjE76B87ALWMADfaR8
+ SG7yyN1tnUbTvGUDdXWjjDpoHglRBLqNkdGprkgy2JWwmd6sPE6flwrteJVpNeBvlTbr
+ L5s7IUdcEwJToQfWKQuoElj8tTuToQnEoMsF014Alu125fYIkDIYGiGlsJ0SN2N57QSN
+ IVCYLTi04NM8+JjqR9N31e6e7bVgT83YV9ihLhmSS7KhAd8lve3Q/S28gQm6kDOBB2+C
+ KNpxcQbg7M7reBLYuK3Wes5443y9VjIWvBjJJkvz1qH7n+rNE48oOyx7RLnN/HtpjipW
+ zgtA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
- fh=LNzFrO3x4ja7y8VIEf3TUbrT4J7d+qKtvjb5Ne2aQZE=;
- b=Z+038NV/IKgrGern2W+yOli8DQS+9ewE3jU+J/ybVC1JCyNdFDZVB5cJ7/Ju1IFy5Q
- o5VsIyxBbU2QaaEFVj2GP+9plQjrS+YS9xdaDSvw8O4VxiUxrC6CIPztcPoceH7+ebDj
- rqzSfsR/UEIRFqIZYPjYAKPWRqB5DG7JI8Y63qObm17j3xHwJd5XHWqizjcWDCom5j0s
- ovckDOReFZflDAjv/TWaOMpG++DoOasF/4kxzKoTrwHivLFxW9zuurKUQmAcskLb1dI8
- 6bGgFJS0iMc8IZSlI4c4ejkyHq5kJbjlJKoJ9YGx/+av5cpWCIWokTZaRpvtXgdwHbEI
- G9Ug==; darn=lists.denx.de
+ bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
+ fh=RfFqkv5HraktqGzXnud/hDh3OBnLEMp0b4peWnkt0DQ=;
+ b=dzyQRo/d3Ab5YyboEGH7X7txXg7lQ/i0SDfkG1MgBPbkak8i3KDvP6Rd3sip8rAltq
+ 81s4nFWqXZXczdflF8iGOwApfbWKHyQVvCMQpTzaNdedfMf2uvO7hbyq6ESUWJxx8kCc
+ hedRMnzi7n4BlJSNenaOECGrytPKqCh0z1eCwpZfQC7KsJj7P2k4NWC/l03BxGp1yFj9
+ yS89bEMKcUocqlU645z0Et0yjgWPuAwObbj/9FVEnRiNqCfjHaRiI8sK/2E5nlQfYOww
+ xqJO85Rv512ZDHQ4/tI3RsgYf1m8QTnGdYOGLY1koEOQTEbwPLYkHXXgRNHzV5xXtesx
+ Ozdw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781871361; x=1782476161; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781873176; x=1782477976; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
- b=MbW50LBpqTL644trbXENlcBH9qE8SGjBR7TQkZy2lPcDhZfFEXD7hEWKjbJmMzRH+K
- teqP6SsLzYeN4P/fjIVOxhOlt8NagGLHS5HMVt44cbNyux5Akpha/LISpAhh3tQtIbfM
- 48I/irG+xLMhhM5CprwFazSvqbpInWwe4CiO8=
+ bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
+ b=jwDT6+vpS9iZrLb9cCK0Zc2fE/a1u3vOM5JeA81DFlM0VE/wZvALFQugTRrUk091Bf
+ axR6+Rq1EwHvtMtv2BYRkAtKg2TMbFjevt47tZC/EPvwVlVDjGdHiK764Li4hW6z8T4G
+ z3fRvNSgF7RMwlHPCh/arwDLxDUcwbl/4FUnU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781871361; x=1782476161;
+ d=1e100.net; s=20251104; t=1781873176; x=1782477976;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
- b=XgKPfCAT4rmUARtHq1kH1f3AtGvj1cR2k4Q95pXF3XmNZsrTGahJjLrHp7SoeEi4kx
- ae9B0p3ybo4ART7sBkLWX0IJu6QQcizyYEgrFWOxbTxwzEPHyumWT8CdBGCH0lyZvXhp
- x9m5iia/2NV2YvuF3FaxtLtb3sNqjtB2+TgqKviMB+kNYSD+0bwmCSQ5aFVy/OmbCbrf
- ulO95avfKMUZzHIFtuj17K0FlDQh8vg3utI41k7RQIAHQYGUxVt7dppS+fID8kXAa5Ib
- HHDxKiy74iAaE6sT79tDe8Y8pRCOzvY5tHcfEuu258vh2STYfhYoxhPiGTgURtbQONmd
- Nm0w==
-X-Gm-Message-State: AOJu0Ywg0qeRysSZwGkZbzbrTV3PC6KsSmEy8KMwensG8GToFd90Kv/4
- l6mROy47QJrJ90JOjZj20YnKnArqdheFLl48Z594tSByQ7s/OEUKA1u/5/UkJfTXpRS0kVPHF4D
- K9H+5IrH+Fg7QAceXB8VYfbY/pQu3W/eCHcjTd5dnRKELHxSfZzg1SA==
-X-Gm-Gg: AfdE7ckZA6U925w9Rr6UeVlHmrnCGO6gJGsIisMe2oxT4+i3jo1w+7VBlZ6wj+dH0FE
- KyIQeXCRt+63dQTLCsWTO3t/gtZdCgLJaRQEImtUeslrOLPqxtv2dyI4HUDEJWiFeN/Zy2AVHdE
- GEWcM11qpL+FgMQr+LH+2jH6ucpN1+063KUFBkwJpjc1r4+vtkaKtCkE4T58NBo9fu0maAofKL/
- qBV3rVX5z6M7CsNQH789iPbkkC8JOnU1waU3cxDTf5sxpndhHGB2bTTAqMevYLHMa3oPwDfRQ==
-X-Received: by 2002:a05:6402:5256:b0:683:1cc8:84ae with SMTP id
- 4fb4d7f45d1cf-696ee437a29mr1662003a12.7.1781871361302; Fri, 19 Jun 2026
- 05:16:01 -0700 (PDT)
+ bh=hLu+AOaJvU+QZaMAAa96CfbOkJOt6sSkN9q3+qP8N68=;
+ b=TLogaLItBidetamU9BYNmkk51YRj59L6UcxFdacwpi+7LR3ASbxp8I2yEh776IUg6T
+ GgnNeWDwZvD3iq6zsSVAbz4Vpr2LYG6Ltjn99HISD9WNMAAEVuJFTii6MS4GbhJ7aRDw
+ NL7MYuppbUKB81yLxMjHzegjajl6E9e77F7VSEUUrz35EzkymHBW2zFwrque62Uyd2Qc
+ DTZBhtC9qGXokyIrHKTal9Fyn5BbMPYZM9wEeOvmJ/NVSPsyAzeyNGFjdfbFm2HBEcKm
+ Gy4yd93kfJBrZzbWpm2ce/wzyX1aMXIE/dGnSJg5chMsZBUVZnfFhZp8Pzz2LfFm7CdZ
+ r8dg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8z1JnxZxvu/AK9ppWE9lb8K/LVMzhKZjpF15V0ViBpYXW2tVV7Bfd1B7C11vuprGjAM+itMHM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4qC6qnirhWy7Eq6socZoIr8CYTJWshD7XAbh1r6hrrmMaze5G
+ Db34n9NA8beyp7iqUvwIVbtd+LVG6ustAeqBn91IpAW0b6w45aybWSn0EG5jFWxRJbDNUzrdwXY
+ L3mturdYtiRAwTu5gTYkp3YDMvH/VuLVMmiWEEOTu
+X-Gm-Gg: AfdE7cnjBVv5CMOHfV49wdxadD0OOtAiEgrtqfg1VyUyWrBWS8ovoB64aaAe3St3r8P
+ lTm7hW7j0NI0K3roZU6EjMLf3imXTIao24DTFdwN6QSqds6KiBoTnMfQlIoYXNkBGLhazJr/l7P
+ YNbWQH+SOVV426DFUwmzmPcIGP1wPOPc9fLzLdu2WueJKLB3iUSae50kAYVtoWPC6nxNE1PgnrL
+ d/kJiFkX+qp9T0e5MfYPgqFuoIRjePAx0zNNCbTCJVPAyM7F6hzDGILtyW2GvTk1smzkUo1yQ==
+X-Received: by 2002:aa7:c541:0:b0:68f:9fd9:435a with SMTP id
+ 4fb4d7f45d1cf-6973bca5918mr1083026a12.17.1781873175733; Fri, 19 Jun 2026
+ 05:46:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
+References: <20260616191845.6182-1-ansuelsmth@gmail.com>
+ <20260616191845.6182-3-ansuelsmth@gmail.com>
+In-Reply-To: <20260616191845.6182-3-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 19 Jun 2026 13:15:49 +0100
-X-Gm-Features: AVVi8Cd1g183GVl3Yecr-1KZMADtH33MZZwtbjdtAs_UbmQlaOQw5GO6m87OkEA
-Message-ID: <CAFLszTi2atMKBen5inTP+XUTJNZEYGGdz136da8HFUxoX4dW-A@mail.gmail.com>
-Subject: Re: [v5,00/13] Qualcomm IPQ5210 SoC bringup
-To: varadarajan.narayanan@oss.qualcomm.com
-Cc: u-boot@lists.denx.de
+Date: Fri, 19 Jun 2026 13:46:02 +0100
+X-Gm-Features: AVVi8CfGtWRJXlk4A_Qz-HZrRMRzQzNbruQ7ElwN0kC1O0a0q4r8B6iIZjqcpBE
+Message-ID: <CAFLszTgNhwG_tx0x9HNCCftiUif2JN3U0iE4nQCvNnP1k-00uA@mail.gmail.com>
+Subject: Re: [PATCH v7 2/7] misc: fs_loader: reorganize and split to FS loader
+ and FW UCLASS
+To: ansuelsmth@gmail.com
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Martin Schwan <m.schwan@phytec.de>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, 
+ Randolph Sapp <rs@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,25 +126,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+Hi Christian,
 
-On 2026-06-17T10:17:59, Varadarajan Narayanan
-<varadarajan.narayanan@oss.qualcomm.com> wrote:
+On 2026-06-16T19:18:35, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> misc: fs_loader: reorganize and split to FS loader and FW UCLASS
+>
+> In preparation to the introduction of variant of the FS loader,
+> reorganize and split the driver to generic fw_loader UCLASS and
+> specific fs_loader function. Create a dedicated directory for the loader
+> and move the internal structs and functions to a dedicated header file.
+> While at it also drop some redundant check and rename some variables as we
+> are updating the code for the UCLASS rework.
+>
+> This will permit to reuse all the property and logic of FS loader
+> with container that are not exactly a readable filesystem.
+>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+>
+> drivers/misc/Kconfig                      |   5 +
+>  drivers/misc/Makefile                     |   2 +-
+>  drivers/misc/fs_loader.c                  | 328 ------------------------------
+>  drivers/misc/fw_loader/Makefile           |   4 +
+>  drivers/misc/fw_loader/fs_loader.c        | 186 +++++++++++++++++
+>  drivers/misc/fw_loader/fw_loader-uclass.c | 159 +++++++++++++++
+>  drivers/misc/fw_loader/internal.h         |  73 +++++++
+>  include/dm/uclass-id.h                    |   2 +-
+>  include/fs_loader.h                       |  47 +----
+>  include/fw_loader.h                       |  19 ++
+>  10 files changed, 450 insertions(+), 375 deletions(-)
 
-> mach-snapdragon: Add commands to create wrapper ELF
+> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+> @@ -69,7 +69,7 @@ enum uclass_id {
+> -     UCLASS_FS_FIRMWARE_LOADER,              /* Generic loader */
+> +     UCLASS_FIRMWARE_LOADER, /* Firmware loader */
 
-Patches 1 and 2 introduce binman etypes (qcom-config, qcom-lib,
-qcom-appsbl) to build the next-stage FIT, but patch 11 then drops back
-to a custom Makefile.xpl + linker-script mechanism to wrap the SPL in
-an ELF for the boot ROM. Two image-creation mechanisms for the same
-SoC is what binman exists to avoid. Please can you see whether the
-wrap-elf step can be expressed as a binman entry (an objcopy/ld
-wrapping etype, or extending the existing qcom-* etypes) so the whole
-flow lives in the binman dts?
+This rename leaves doc/develop/driver-model/fs_firmware_loader.rst
+stale - it still has two references to UCLASS_FS_FIRMWARE_LOADER
+(around lines 90 and 148). Please update the rst file (or rename it)
+in this patch.
 
-> Working features ... Serial console, UART, MMC
+> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
+> @@ -0,0 +1,159 @@
+> +static int fw_loader_pre_probe(struct udevice *dev)
+> +{
+> +#if CONFIG_IS_ENABLED(DM)
+> +     struct device_plat *plat = dev_get_uclass_plat(dev);
+> +     ofnode fw_loader_node;
+> +
+> +     if (!IS_ENABLED(CONFIG_DM))
+> +             return 0;
 
-Serial console and UART are the same thing here.
+The outer #if CONFIG_IS_ENABLED(DM) already gates this body, so the
+runtime if (!IS_ENABLED(CONFIG_DM)) is dead code - and it confuses the
+meaning, since CONFIG_IS_ENABLED() is phase-aware while
+IS_ENABLED(CONFIG_DM) is not. Please drop the inner check.
+
+> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
+> @@ -0,0 +1,159 @@
+> +#else
+> +static int fw_loader_get_blk_dev_from_node(ofnode node)
+> +{
+> +     debug("fw_loader: No block device support\n");
+> +     return -EINVAL;
+> +}
+> +#endif
+
+This changes behaviour from the original driver. Previously the entire
+phandlepart block was wrapped in #if CONFIG_IS_ENABLED(DM) &&
+CONFIG_IS_ENABLED(BLK), so a board with BLK disabled would probe with
+the phandle silently ignored. With this patch, the stub returns
+-EINVAL and pre_probe propagates it, so probe fails. If intentional,
+please call it out in the commit message; otherwise the stub should
+return 0.
+
+> diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
+> @@ -0,0 +1,73 @@
+> +struct device_plat {
+> +     struct phandle_part phandlepart;
+> +     char *mtdpart;
+> +     char *ubivol;
+> +};
+
+Please rename struct device_plat to something like struct
+fw_loader_plat - device_plat reads as a generic DM type and is
+misleading even when internal to the uclass.
+
+> diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
+> @@ -0,0 +1,73 @@
+> +#define fw_loader_get_ops(dev)       ((struct fw_loader_ops *)(dev)->driver->ops)
+
+The fs_loader_ops table is static const, so this macro silently casts
+the const away. Please return const struct fw_loader_ops * - the
+callers in request_firmware_into_buf() only need read access.
+
+> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+> @@ -36,7 +36,7 @@ obj-$(CONFIG_FSL_DEVICE_DISABLE) += fsl_devdis.o
+> -obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
+> +obj-$(CONFIG_FW_LOADER_UCLASS) += fw_loader/
+
+FW_LOADER_UCLASS is not phase-aware, so once any phase selects
+FS_LOADER the uclass object is linked into every phase that descends
+here. Worth making FW_LOADER_UCLASS phase-scoped (SPL_/TPL_/VPL_) and
+gating both the subdir and fw_loader-uclass.o on
+CONFIG_$(PHASE_)FW_LOADER_UCLASS.
 
 Regards,
 Simon
