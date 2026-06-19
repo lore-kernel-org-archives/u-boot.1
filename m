@@ -4,157 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F77CD98F6
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 11:17:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10513CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 12:16:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2175E849D1;
-	Fri, 19 Jun 2026 13:17:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A8E3849ED;
+	Fri, 19 Jun 2026 14:16:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Dw1e6v4L";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gotEOpNT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MbW50LBp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B271849E5; Fri, 19 Jun 2026 13:17:00 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 19041849EE; Fri, 19 Jun 2026 14:16:04 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB34D847C3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 13:16:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65J7OhtU1104952
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 11:16:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- jNB3icaaxb6A/CztbL9qMB1R1dBg1OND3Aub01JzNPY=; b=Dw1e6v4L4UfajN24
- ErsS2437aeEWAroj048+RrAF3Ef3pmrtkSwRCCBQZZ+b3qdkhIQ1XJ1zg+4DkHBU
- 5ch6HmYNK0XEFxHQPJCoQ2JIoXA/5U8FG2BjvTskDiP5+wBn22M+NHqvy4g8rc0F
- xqWNH6mDlIbEAEAl3YOhAAt5y40DK9aerRc+kYFwibKOaH6rlDbqIGyHuBd0nwoh
- 1YngjKn/h+MdGYXVXIlMpru1+XetOb0vuArVeqqj5ETSvzL8vgTcEwhb4tsu+lmt
- kwUYK5VaVAcS7AdtBN13oCHmWKCvWAM4Ge3MUsYm0SZiwcBaL0EpPEWQ8y6Fcu+E
- rwNtNA==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4evgtmmf7v-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 11:16:55 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-8428419982eso1927561b3a.3
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 04:16:55 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id E507E849E4
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 14:16:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-695737cf38bso2911039a12.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 05:16:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781871361; cv=none;
+ d=google.com; s=arc-20240605;
+ b=X0t/6748iDSHEmUTfH65LuV/rfb9lNBXENdqHcqivNw1LBd100XM1VrublFgpqcgCD
+ cCw8t7Tmm67bfhaTqXumHTCgz6iqFZZ8r/rF8PKLNQP1B+JKMDcjXK91xd5ZI2ANkP4I
+ bMBEi8NjTgeRhNAZl1+cSejG/rOPf3vtxlQ5/HV5LI7qq4vjzzCJAYb9VhFzvwb+LVPH
+ UvuNMDuevIjkDoOMfZFovSUgpf8fqMNsQAfQYXyeArqeBRgUBdz0b/qwFuHhSL+yrB2N
+ YXeZJHndFVc+5RIGJ69YFMi5525rTMfDfQCYCnFtpRIbHKvH0uPB1YcWx3eG1zHOd6yl
+ K01A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
+ fh=LNzFrO3x4ja7y8VIEf3TUbrT4J7d+qKtvjb5Ne2aQZE=;
+ b=Z+038NV/IKgrGern2W+yOli8DQS+9ewE3jU+J/ybVC1JCyNdFDZVB5cJ7/Ju1IFy5Q
+ o5VsIyxBbU2QaaEFVj2GP+9plQjrS+YS9xdaDSvw8O4VxiUxrC6CIPztcPoceH7+ebDj
+ rqzSfsR/UEIRFqIZYPjYAKPWRqB5DG7JI8Y63qObm17j3xHwJd5XHWqizjcWDCom5j0s
+ ovckDOReFZflDAjv/TWaOMpG++DoOasF/4kxzKoTrwHivLFxW9zuurKUQmAcskLb1dI8
+ 6bGgFJS0iMc8IZSlI4c4ejkyHq5kJbjlJKoJ9YGx/+av5cpWCIWokTZaRpvtXgdwHbEI
+ G9Ug==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781867815; x=1782472615; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jNB3icaaxb6A/CztbL9qMB1R1dBg1OND3Aub01JzNPY=;
- b=gotEOpNT0bYFGncfy5lZj/hCmz4UQXBKoO+zRyXCW89ctpOR49jiOqlpf/I6EDOpFo
- WP/BvxCf+FdgxfNBsJpv+n7cKFPfjJ1OkxTXmeKfkVLqWqLywH7VkMgH/JRnBScE0JFn
- 0G7rG9qQ/MMwW3JV9ilrG1MAqlDlf9ZOTH6yDkcHcU7/Wx1bB403FFoPgKv07dYv0Wkx
- YHmtZqhsKvROcz+0iPXyGFyXMQ4Y36eslvAGMkYO907nA8bYZVieqM6LMTcuHaTftaMb
- q6oK03Entpn2iA/BRutp/doONSKYBcI4EwMMwY2ItDMM26wNGUIkeHzCFFAhe7v9MUNj
- NEGw==
+ d=chromium.org; s=google; t=1781871361; x=1782476161; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
+ b=MbW50LBpqTL644trbXENlcBH9qE8SGjBR7TQkZy2lPcDhZfFEXD7hEWKjbJmMzRH+K
+ teqP6SsLzYeN4P/fjIVOxhOlt8NagGLHS5HMVt44cbNyux5Akpha/LISpAhh3tQtIbfM
+ 48I/irG+xLMhhM5CprwFazSvqbpInWwe4CiO8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781867815; x=1782472615;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jNB3icaaxb6A/CztbL9qMB1R1dBg1OND3Aub01JzNPY=;
- b=nioeGU+XJyhF5OFZWzkHtiuGLBBxfKmHXgkWDrFmRn2I4VENzkFuR91KRdNnyKYzhd
- PeyqK7MtoKYwC8Rq+rOv3wJ88QMlIf2Fjxn+oHF6ShP4fjJTTlEdyfxoSQrGNB5zBWVR
- lWhzK5Z4A2No252mNa8W5TZdUCaL1KT25l/yopCWRKS8s8vE+3RdqAmFYxKXrwNwYugS
- eTGetaZC7LcDDojfcSurpl3g6n0noBHswKU8spNLQr18/bPgYw+jtmGHJ7CPXMxDqAHk
- qsklUNH23V+jFpxZJVblzJ6RH8wUyz6a9lzhJsaVONbNWzh/QHorGI+y7nG+GuJbskAM
- B4ag==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/gq95Y57JSS2fvY+crLjJZDIVZR0XbCsJZ5wSs2olnQnXNnlkY5WrZO3Ocwm2pn63MJQg4YC8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVRQ79aPDOMH/pqYHxksUeP44pofGqeszn/1akPtvOzfcXoGhg
- 16+KQ1kt3LqJ89GeWGA+RJilak3oJL0mkc/fnkiH5VmKkqnOhumB5ygEarNhyMlXc3/HkOKbCkW
- rbKz/Q4k+9tEhytoIPjOlg+AaQPSqnxPn0XO0SQ7XJMmN2gyJvCt7plJa
-X-Gm-Gg: AfdE7cnVxTz///d9mQlkYbXSZSnZU4DdsgU7Q5xIzrOf1aNQ/H/8mLDPTaPopvzTr4j
- H3FKRPDzwqCK/8h5/pQbFUAyz/Twc+dxO2iqzuRgYKQZqkJIAEsVi6Zf/B3OnxQ4QY3BlU8r6Wp
- 9AxYoCgQ3Je8+wfmtQeY7lClA7kE+nMjy74JMdZm8t4amuOxurmsueJOhqIsEZdeMT53MlgLDcS
- ruGz984HT5gvVbaRO2PD1CN/kmQxdun6/nS0LurmeNWe8Nco6v3evjyI9CsZYpeeLIui43NIl9m
- HUbBzozCjYe0k62atyFF5Ioqg6YicPvdUh4EnOnLhk35+N6NtlpwZqtCqUZRrsmlo3pE01uBO2s
- 5QzPiL7Ymxxi+6z5gjTUY1zn9n5LWtjBstFZqtJzMqYqUWj+j
-X-Received: by 2002:a05:6a00:cc4:b0:83e:b443:965e with SMTP id
- d2e1a72fcca58-8455079e772mr3996505b3a.3.1781867815301; 
- Fri, 19 Jun 2026 04:16:55 -0700 (PDT)
-X-Received: by 2002:a05:6a00:cc4:b0:83e:b443:965e with SMTP id
- d2e1a72fcca58-8455079e772mr3996471b3a.3.1781867814873; 
- Fri, 19 Jun 2026 04:16:54 -0700 (PDT)
-Received: from [10.151.41.150] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8455382586fsm2119198b3a.43.2026.06.19.04.16.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Jun 2026 04:16:54 -0700 (PDT)
-Message-ID: <75c644d2-ac2b-46a5-986d-6e5557002068@oss.qualcomm.com>
-Date: Fri, 19 Jun 2026 16:46:46 +0530
+ d=1e100.net; s=20251104; t=1781871361; x=1782476161;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MmeTkNdz5tZU3Vf9/3JJlULtplNxtLMNfwDycBRLMa0=;
+ b=XgKPfCAT4rmUARtHq1kH1f3AtGvj1cR2k4Q95pXF3XmNZsrTGahJjLrHp7SoeEi4kx
+ ae9B0p3ybo4ART7sBkLWX0IJu6QQcizyYEgrFWOxbTxwzEPHyumWT8CdBGCH0lyZvXhp
+ x9m5iia/2NV2YvuF3FaxtLtb3sNqjtB2+TgqKviMB+kNYSD+0bwmCSQ5aFVy/OmbCbrf
+ ulO95avfKMUZzHIFtuj17K0FlDQh8vg3utI41k7RQIAHQYGUxVt7dppS+fID8kXAa5Ib
+ HHDxKiy74iAaE6sT79tDe8Y8pRCOzvY5tHcfEuu258vh2STYfhYoxhPiGTgURtbQONmd
+ Nm0w==
+X-Gm-Message-State: AOJu0Ywg0qeRysSZwGkZbzbrTV3PC6KsSmEy8KMwensG8GToFd90Kv/4
+ l6mROy47QJrJ90JOjZj20YnKnArqdheFLl48Z594tSByQ7s/OEUKA1u/5/UkJfTXpRS0kVPHF4D
+ K9H+5IrH+Fg7QAceXB8VYfbY/pQu3W/eCHcjTd5dnRKELHxSfZzg1SA==
+X-Gm-Gg: AfdE7ckZA6U925w9Rr6UeVlHmrnCGO6gJGsIisMe2oxT4+i3jo1w+7VBlZ6wj+dH0FE
+ KyIQeXCRt+63dQTLCsWTO3t/gtZdCgLJaRQEImtUeslrOLPqxtv2dyI4HUDEJWiFeN/Zy2AVHdE
+ GEWcM11qpL+FgMQr+LH+2jH6ucpN1+063KUFBkwJpjc1r4+vtkaKtCkE4T58NBo9fu0maAofKL/
+ qBV3rVX5z6M7CsNQH789iPbkkC8JOnU1waU3cxDTf5sxpndhHGB2bTTAqMevYLHMa3oPwDfRQ==
+X-Received: by 2002:a05:6402:5256:b0:683:1cc8:84ae with SMTP id
+ 4fb4d7f45d1cf-696ee437a29mr1662003a12.7.1781871361302; Fri, 19 Jun 2026
+ 05:16:01 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] arm: snapdragon: Add snagboot support for
- Lemans-EVK
-To: Ferass El Hafidi <funderscore@postmarketos.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- George Chan <gchan9527@gmail.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
- <64718934-b054-4c47-9d01-dc6fac01dbd7@linaro.org>
- <tgqh8m.i5334p2b63jo@postmarketos.org>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <tgqh8m.i5334p2b63jo@postmarketos.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 9XD3cmDTuCwK_r8qpsc7TJ58lwi8wZNR
-X-Proofpoint-ORIG-GUID: 9XD3cmDTuCwK_r8qpsc7TJ58lwi8wZNR
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE5MDEwNSBTYWx0ZWRfX8zXUDMqqFryG
- jB/EdhtqPNVSxx0SayKgsv7ZLOXIHQ25E77pRWBtbbOJ+vP2mpWHQfJH1jhsEM4deWoY1Ym7ESb
- JD0eL7B7FqYOU5RrcTpDsb45umpoM/KqYqb0IaojRnzilQ3xKTcyS/I0Y46cAt0ThTP6S4Ocd2d
- eUedRX5K92UKPW4G+DWbobsloVbcYymgp5MqLt1PmjdRV3jbCoUACPtd3fJLx1Jz5G7mcv529wp
- 476VoPiXukcaA1dydpN5WJvYpY26w+EKDqLBqVCsNZKToO/XMl3A0p3LBk2ORTsUd+X0F7Mmlbs
- zVWXv7ctI15ttOQWRdoOUkHcBJEKkyUFbcADxiLRbOW4yQ8GtlcUn/UmO1Z+Tj+tXWWj8+1+wn9
- TSVDwdptl82QuASeJGXDoaJN1zqIq6oUh0IohxGo1pQ+WzUfTiuPCKHzmQY8t010CsAV/W13fiV
- JCTl59lhzHmh9kgeQGQ==
-X-Authority-Analysis: v=2.4 cv=Qb9WeMbv c=1 sm=1 tr=0 ts=6a352527 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8
- a=l0xRoyPhJoKGvZmW1_8A:9 a=QEXdDO2ut3YA:10 a=IoOABgeZipijB_acs4fv:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE5MDEwNSBTYWx0ZWRfX0UUUO6F1ybQa
- Ppui56dNdt+2iOQeluFTlvDzstCjKKJByeKasxy/+F8ZcxWHoReKONGFQBFIncWbHo96X52abIq
- jKin25i498iFe/6nU6gJ1nZJDMwS/uc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-19_02,2026-06-18_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 impostorscore=0 adultscore=0 phishscore=0
- spamscore=0 bulkscore=0 priorityscore=1501 clxscore=1015 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606190105
+References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 19 Jun 2026 13:15:49 +0100
+X-Gm-Features: AVVi8Cd1g183GVl3Yecr-1KZMADtH33MZZwtbjdtAs_UbmQlaOQw5GO6m87OkEA
+Message-ID: <CAFLszTi2atMKBen5inTP+XUTJNZEYGGdz136da8HFUxoX4dW-A@mail.gmail.com>
+Subject: Re: [v5,00/13] Qualcomm IPQ5210 SoC bringup
+To: varadarajan.narayanan@oss.qualcomm.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,50 +106,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ferass,
+Hi Varadarajan,
 
-On 6/16/2026 10:12 PM, Ferass El Hafidi wrote:
-> Hi,
->
-> On Tue, 16 Jun 2026 12:26, "Casey Connolly via groups.io" 
-> <casey.connolly=linaro.org@groups.io> wrote:
->> Hi Balaji,
->>
->> On 16/06/2026 11:22, Balaji Selvanathan wrote:
->>> This series adds support for running U-Boot in snagboot mode on
->>> Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
->>
->> You didn't respond to my reply on v2 of this series.
->>>
->>> Snagboot is an open-source, scriptable flashing framework that provides
->>> an alternative to the proprietary Firehose protocol for device
->>> provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
->>> Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
->>> and execute bootloaders. However, instead of using the proprietary
->>> Firehose programmer, Snagboot loads U-Boot into DDR and uses the
->>> standard fastboot protocol for device flashing.
->>
->> Glad to have some more info here. Please also add a doc page with this
->> information as well as a list of supported platforms.
->>
->
-> I suppose they are talking about this snagboot: 
-> https://github.com/bootlin/snagboot
->
-> But what's confusing me is there is no mention of any Qualcomm board,
-> nor any PR to add support for it. Is that in some downstream tree
-> somewhere? (to be clear I'm just someone interested in understanding
-> this better, snagboot is a very cool project that already supports
-> plenty of SoCs and it's great if it has or will have qcom support)
+On 2026-06-17T10:17:59, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
 
-Please find v4 here: 
-https://lore.kernel.org/u-boot/20260619-snagboot-v4-0-385497442db2@oss.qualcomm.com/ 
-whose cover letter has more info on Snagboot Qcom.
+> mach-snapdragon: Add commands to create wrapper ELF
+
+Patches 1 and 2 introduce binman etypes (qcom-config, qcom-lib,
+qcom-appsbl) to build the next-stage FIT, but patch 11 then drops back
+to a custom Makefile.xpl + linker-script mechanism to wrap the SPL in
+an ELF for the boot ROM. Two image-creation mechanisms for the same
+SoC is what binman exists to avoid. Please can you see whether the
+wrap-elf step can be expressed as a binman entry (an objcopy/ld
+wrapping etype, or extending the existing qcom-* etypes) so the whole
+flow lives in the binman dts?
+
+> Working features ... Serial console, UART, MMC
+
+Serial console and UART are the same thing here.
 
 Regards,
-
-Balaji
-
->
-> Best regards,
-> Ferass
+Simon
