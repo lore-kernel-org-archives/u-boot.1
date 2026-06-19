@@ -4,133 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A6A6CD98F2
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D44C5CD98F2
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jun 2026 16:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E9F884873;
+	by phobos.denx.de (Postfix) with ESMTP id A1909849A4;
 	Fri, 19 Jun 2026 18:31:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=etu.esisar.grenoble-inp.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="LgdbZEsb";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aJmch7KD";
+	dkim=pass (1024-bit key; unprotected) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="j7xrJ5DO";
+	dkim=pass (1024-bit key) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="j7xrJ5DO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC5B084873; Fri, 19 Jun 2026 09:34:17 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 26351849C5; Fri, 19 Jun 2026 10:33:45 +0200 (CEST)
+Received: from mx1.esisar.grenoble-inp.fr (mx1.esisar.grenoble-inp.fr
+ [195.220.36.33])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9731F846E1
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 09:34:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C470846E1
+ for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 10:33:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ header.from=etu.esisar.grenoble-inp.fr
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=manivannan.sadhasivam@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65J7S11F4001582
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 07:34:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=h4p9piVfh+9etyk9LJnfwqOt47k8FlM16m8
- TyotLEnc=; b=LgdbZEsbAPeGCQE9p/JHvPedlJXStYf36ruOXeRC8pMUpKVOkMG
- 8tq5jarGo20Sw9w8hnhQHzpBR82/qoKS7keFR0ZUNPzygIkW+4DdZzqQS8DtuAy7
- YUkUT5qLrq7u6dItfRoGPwEw8TAWTk0IfEaMaqa8r7Cqu26Rid9XRJi1ZhRXIWoz
- 2O/ibOagIn9t1x36D5+cblUutPKfxhWbrmOAd6mUlodNpUUSSR1d8hlXce08xlNl
- xYhBO23tUxRYYdMsu9fdGuByq/Se/Vxw6+YEu2FLEww4pHYMoqyO4kiChfsPRW8I
- YltppQMg14q3sYlmhVQ2GFn5k2R59QJs6sg==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4evpyut3fu-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 07:34:14 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2c6a997c400so23377285ad.1
- for <u-boot@lists.denx.de>; Fri, 19 Jun 2026 00:34:13 -0700 (PDT)
+ smtp.mailfrom=theodore.oviguian@etu.esisar.grenoble-inp.fr
+Received: from mx1.esisar.grenoble-inp.fr (localhost [127.0.0.1])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id 76B5722404E;
+ Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTP id 5EBBC224055;
+ Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mx1.esisar.grenoble-inp.fr 5EBBC224055
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781854453; x=1782459253; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=h4p9piVfh+9etyk9LJnfwqOt47k8FlM16m8TyotLEnc=;
- b=aJmch7KDNuD1FPHuhIXz853SzyF7SkQ8jjoxcw1u1k9A7PKUYnMm1S60f1oppi0gSh
- wnzzQivMVpMtDNtslsRRxF5YR2tHjKMx+evEqTkNlh/afxv5MKAZkgevKa9wj+LTPKTx
- UyEK+qVXiX9pwe7pznpm4Qo7URYmH/gXx31+lawr9ngZqABGyN4fgYrOoDnufQXUI+/r
- 6U8WEmrd2RBqsdWdc4b4/oxTzRHFFGiVineCJXSMu/N5r2mfGxqhlEri7U9C+Yhbs3Zi
- +JDr0zscnN8rB5DraYglCEEZo/g13jbtdFlzVIRIKOx/Xw6hdu0+odaF/Oa2uCWGodia
- nikg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781854453; x=1782459253;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=h4p9piVfh+9etyk9LJnfwqOt47k8FlM16m8TyotLEnc=;
- b=Mf9FS5naNa87vIQpXZWonoKZiXrofk/QsQ0Ojfcy9/NU3auoIjIVM/SfE+oPSqwBDq
- hW5ygr98yLb8AcOv+hy3xhItdJamqwnW/KUe0I1od1B5KgcmZnI/LqaxYxMd/m1MtOJ3
- nU6UxJrtNfCxawjNHhvbvcMpH8yxEdSiI0+EzIjXVkjUfDr2/bMHhjxmW83TFS8f4lTU
- QMoOtohc4FcviP46I5tq80tsjnbTMJiQtcuO4cchkD8IoSlcpgPRNmRTX6ypbo178b/e
- SWLmSQb6iXX11mVgQTpI/l2zyR1UX/ThwAIlxggV2T90q0az+r0fpDZpJS169sRkUP4Z
- uDHg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/a3nC0PvIA6V3P5yEsuq0TEBZMF4G7uKL2Gpm+T9j7/hTkn1YGZvYqn1MYqegZby6H7UyO+h0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYIECtZ7RmVas9OpADpZ9iin9oY/L003Txkftvz1vYYjBjejKb
- oQFoafP7J4nDQ/j1UHRTPVadOKa3e+nQY/2aFfuJvxSzD+T1kU9+PwkkTDdysunwKAPpHxpkyCf
- ZcIgRf8qFdwGVmEFIoXpTkJofFyg62mHMmFaxp/IO0on4X8fp6+KcrH8w
-X-Gm-Gg: AfdE7cnRk7on42v3C17PaynMVPyLUGZijclpgC46lk1x+cx/aNOys7fKiPrWFzxNMny
- Fcc+W5xgeQ/aZHH66Lgbp8mXUv65RYvBb++pLO15uRFdQptT/RSo2FuZuApx1VgQi1Bo8hOCv6J
- E0bxNUpgh+SGtPz8utXOzXqdjl2HRsbYav/NNLmdSioDZ18VEw8lP33262O0KGLRUbUun4ssm87
- OgQYbBR6zBGbsOOgwBWoWx3MdP3KQRDyPTAMcQKaUAwGo9YkwkTm7q+KcPK04rQ3A65yxu8c8Db
- /iz4cXUPnJBYPxeF7sg1xEqG5o0+OQf3KffyKfZFrjbWE/kwBQEOS3ss51y+xtllQ+rSP0nvLok
- SPWrdjoOONd9HP/qNd7IbvzUPTJPT7He0RuGHMbb3uyXfuIS6U+OGEIKGh0Wp
-X-Received: by 2002:a17:903:13ce:b0:2bd:d6f1:3388 with SMTP id
- d9443c01a7336-2c719653813mr21963405ad.28.1781854453004; 
- Fri, 19 Jun 2026 00:34:13 -0700 (PDT)
-X-Received: by 2002:a17:903:13ce:b0:2bd:d6f1:3388 with SMTP id
- d9443c01a7336-2c719653813mr21963015ad.28.1781854452423; 
- Fri, 19 Jun 2026 00:34:12 -0700 (PDT)
-Received: from QCOM-IvKeorbwK5.na.qualcomm.com ([120.60.68.216])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c7209bbb53sm16395235ad.51.2026.06.19.00.34.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jun 2026 00:34:11 -0700 (PDT)
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org
-Cc: sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, mani@kernel.org,
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Subject: [PATCH] configs: qcm6490_defconfig: Enable SCSI as the Fastboot flash
- block interface
-Date: Fri, 19 Jun 2026 09:34:00 +0200
-Message-ID: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
+ d=etu.esisar.grenoble-inp.fr;
+ s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1781858016;
+ bh=WkKJI9H96S0IYjXzHQbcwr71Xyf7rNHOVU0fphfgLvg=;
+ h=From:To:Date:Message-ID:MIME-Version;
+ b=j7xrJ5DOXd+LPVlaphX92IQEy0KjlPgh5X5m0WURuPT971zJmkdXnCoZVRe+DVGq3
+ yOT6Xlw8n6h+uAWiP2Dx4nFklCDdhaD9Ff74cpg0e9u7uEeRax3IZ8vyg0P7oGKvHh
+ V9RDiJidbb5XoRveZXcBt79LQifrXWRPAy/X76C4=
+Received: from mx1.esisar.grenoble-inp.fr ([127.0.0.1])
+ by localhost (mx1.esisar.grenoble-inp.fr [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id G2wZGQ8QSuFx; Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+Received: from srv-zimbra.esisar.grenoble-inp.fr (unknown [172.21.100.139])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id 3149022404E;
+ Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+Received: from srv-zimbra.esisar.grenoble-inp.fr (localhost [127.0.0.1])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPS id 206716E15D9;
+ Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTP id 0AD4B6E1600;
+ Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 srv-zimbra.esisar.grenoble-inp.fr
+ 0AD4B6E1600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=etu.esisar.grenoble-inp.fr;
+ s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1781858016;
+ bh=WkKJI9H96S0IYjXzHQbcwr71Xyf7rNHOVU0fphfgLvg=;
+ h=From:To:Date:Message-ID:MIME-Version;
+ b=j7xrJ5DOXd+LPVlaphX92IQEy0KjlPgh5X5m0WURuPT971zJmkdXnCoZVRe+DVGq3
+ yOT6Xlw8n6h+uAWiP2Dx4nFklCDdhaD9Ff74cpg0e9u7uEeRax3IZ8vyg0P7oGKvHh
+ V9RDiJidbb5XoRveZXcBt79LQifrXWRPAy/X76C4=
+Received: from srv-zimbra.esisar.grenoble-inp.fr ([127.0.0.1])
+ by localhost (srv-zimbra.esisar.grenoble-inp.fr [127.0.0.1]) (amavis,
+ port 10026)
+ with ESMTP id XLS85s7Uojzm; Fri, 19 Jun 2026 10:33:36 +0200 (CEST)
+Received: from Ubuntu.eur.gad.schneider-electric.com
+ (81.168.185.81.rev.sfr.net [81.185.168.81])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPSA id ACA026E15D9;
+ Fri, 19 Jun 2026 10:33:35 +0200 (CEST)
+From: theodore.oviguian@etu.esisar.grenoble-inp.fr
+To: u-boot@lists.denx.de
+Cc: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>,
+ Theodore Oviguian <theodore.oviguian@se.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH 0/3] Fix TI AM64X ERHPWM 
+Date: Fri, 19 Jun 2026 08:32:10 +0000
+Message-ID: <20260619083217.12930-1-theodore.oviguian@etu.esisar.grenoble-inp.fr>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE5MDA2OSBTYWx0ZWRfX0O7VJ9G7Jlwf
- 39rZNLakxdpZxuD7ZzbKcL3pmVrvhy3NFeNKWOEOgtpMC9Y9mWtPjnzb0rzV197xtcrmmcnmJM/
- aULOeIBbsKWwkOx3Eo8T/ZwRF0C5rC0=
-X-Proofpoint-GUID: _79MimFdGXMzSY4iudA83fIZTgEAsJd6
-X-Proofpoint-ORIG-GUID: _79MimFdGXMzSY4iudA83fIZTgEAsJd6
-X-Authority-Analysis: v=2.4 cv=cY3iaHDM c=1 sm=1 tr=0 ts=6a34f0f6 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZRjYPw5CqDOT13eA26lF3g==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=g77dXaux-1903aQYT9YA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE5MDA2OSBTYWx0ZWRfX7IwnRsZ39JP/
- F3xa2WaoinPpcrBrkwXcRUWMzhGkOoWxRtryHi/+hXCvA1ljunacBXJWLlAzRCTRkjdOYAhwLM4
- Q8r4vtisANvjVj9OSlpNhjEV0V+NZsRJMBY0jnKDnqcxzMMBoESK2XZxaRLRA5uJOJQumE5qUVE
- IidEIEYWcftMQbrkEhZrSRVRulxglLrS3uZ2Ol0YdWOjRcVXCLsghGBHCZKDT3uxUEdEH2YkhLb
- 4b4rk5QZUa0EX3I2b0BEP4/g/1IWld7lKH4QWsoaeA0+0Wlk25g4t2uBQXH882XOvorK8HP4SkY
- kBItCI5Zz36+7jGG83Ea3MTlHZm44pgzxjFQo/GjH1FV9gijiS8U9hc9TgC+lPvSTpXq0asR+F9
- B3FbD04uoqz2KCK7VLygLYQBNdmSQORQHyMG75zgVID4It05oqeyVT7SKesL9urcLTChxjjEEHu
- gG4mRDMuYbzivgE2bew==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-19_02,2026-06-18_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0 clxscore=1011 suspectscore=0 phishscore=0
- impostorscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606190069
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 19 Jun 2026 18:31:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -148,29 +100,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-qcom_defconfig uses EMMC as the flash interface for Fasboot, but QCS6490
-RB3Gen2 has no on-board eMMC. So override the config to use UFS as the
-flash medium by selecting 'scsi' interface.
+From: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>
 
-This enables flashing the images over Fastboot on this board.
+This patch serie fix the TI AM64X eHRPWM.=20
 
-Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
----
- configs/qcm6490_defconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+Hello to everyone thank you for your implication in a great software,
+The goal of this patch serie is the to fix "failed to get tbclk
+clock" error who appair when you probe (patch 1) ti pwm driver=20
+and to fix a following error who sometime froze pwm (patch 2)
+The code was build and tested on a TI AM64X board with U-Boot next
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-index b088367f86c..d599e7611c1 100644
---- a/configs/qcm6490_defconfig
-+++ b/configs/qcm6490_defconfig
-@@ -16,3 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
- 
- CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
- CONFIG_PHY_QCOM_QMP_COMBO=y
-+
-+CONFIG_FASTBOOT_FLASH_BLOCK=y
-+CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
-+CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=0
--- 
+Signed-off-by: Theodore Oviguian <theodore.oviguian@se.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>
+
+Theodore Oviguian (3):
+  ti_pwm: Add EHRPWM TBCLK clock driver
+  ti_pwm: Fix EHRPWM issue
+  ti_pwm: Add support for arch k3
+
+ drivers/clk/ti/Kconfig        |  7 ++++
+ drivers/clk/ti/Makefile       |  1 +
+ drivers/clk/ti/ehrpwm-tbclk.c | 69 +++++++++++++++++++++++++++++++++++
+ drivers/pwm/Kconfig           |  2 +-
+ drivers/pwm/pwm-ti-ehrpwm.c   | 17 ++++++++-
+ 5 files changed, 93 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/clk/ti/ehrpwm-tbclk.c
+
+--=20
 2.43.0
 
