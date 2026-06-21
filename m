@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1E6CD98F0
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:20:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5272DCD98F0
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:20:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F39E84A0A;
-	Sun, 21 Jun 2026 10:19:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA301848DC;
+	Sun, 21 Jun 2026 10:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IoidUhYm";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rSjNLrf1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D39C84844; Sun, 21 Jun 2026 10:19:27 +0200 (CEST)
+ id 0AB3084844; Sun, 21 Jun 2026 10:19:28 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D47684901
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 379E3849BA
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-176-006-085-155.176.6.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8EA3742083; 
- Sun, 21 Jun 2026 08:19:23 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9483B3F1E4; 
+ Sun, 21 Jun 2026 08:19:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782029963;
- bh=d7yLB1Sn7awc+SjUT1GgEhbFI2sltWZ3MtqloUJc9/w=;
+ s=20251003; t=1782029964;
+ bh=GNa5Lqk6MlMcSKMl5xCvXxxIiflIZSi7xrvsapjGCpo=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=IoidUhYmkqQHDAU/VJCeJoED2VF73OCh2c3vawCnJm0X/2Z8U/YE6/TcqiWu6YuU4
- 1/AoyQqgGs8OX40e6vJOCGofb6pSI0cNGD6MBuqEgkPu7H/5cma+u/I04rGkofcnLd
- xEQ8v6uDLzn3oBAyLIHYedFvqBUzbNcbcatwAjs2mIHy9LoJZ4E3jPT34pFGz3bBrX
- vIVFukbj96Y6Og/uLEccYFQX/0Oc7GZ/2IQc3+mmM2KTiXAl7GxHKrxLzo5jHQrrzi
- NtJV35v8UWuFddvTxM8QqldORNXcmZITS1vjI5idWfdIEGYqSmMLoLN5b4jMhfyOcQ
- 7Y2SQgLGJLyf95UoMOHQhUpV78A2x3yCmNfkXF+1lwm8novNBAnAftTvObw/kOq1Ws
- vZcwYv1UzTaJrmHw3pK/liMX/+Rt8WH9p5ZqhCzzIl/Urw2HTZ/Jpv4XjzXAYcLRuA
- lywTwe8Pb+va0pqhQTPMtqIkm7+Ol1SBDl4ZpdkzYjhitlFcD7yjJ4sHkQutoc4+tP
- uC+us7EcoqJLF87UH7DTX5v9hY2Eu5N47QLUMxQwz45N2P9MSwtrg7DzVv3517WDIJ
- jISPwnINwD/omERbZuqpGgwiZtKf9Rh0tK5zTLlIk92B65q2usLcLTE6V50TzN2nQA
- cCjqfFhOCkKob2kT0RhV/GFc=
+ b=rSjNLrf1FhafAJdQkfmVegEk1EpZ3o4Q7YvVVHYSH5uKWjAR3nwfg3esYeCDTnATi
+ cztVZWMGgyGo0Zn4KaSxFcGRgsxZZY0rZ0KzlpFd0eOCOfBkEjT8xzxMHu0oLoMJof
+ 25UYWExNUkhuJi427azuZM8Wi1+dx15FFyVa4nUWW7MppQitsv8kUy0V/0L2Fa7O1v
+ cM078FQ1PM3O46avSiRhvuNjSW9wv87My5UeNlV3/iBKtBqmiOPgGL3f2JjMCf6IZ4
+ hK9zBF70e7spV8bOdXAtOWAWSSveVjlHXN53ZBqpS+XBJnU34rYU2J8/5NEHQlUb2M
+ SZfSKPaXSoAn19nTE0hfnGUq5CIDb2pmptPIiS1cXny6prDYEG8YkIW0X4smfWn5ds
+ 1s0NSvkpoQIv/FR/LWBUq/OWFajcFItIFcPWVj4cGhKPmwAM9zEo3Py8gI2I4vrIGg
+ nsRyIXNY+8g/VO7hY1wSZWNatdvGWuGYi59gs4pBCZGYBeZhaBvfyZuLG6mZrpqgHO
+ Ocote3XAeoubogwUstx1B63sOjoh6ZWvoXztN399vv9NzIJz2eqIoAxIRPYC6zqDDx
+ I3LnKbTMYC3bUPhFdN00eCt3JR5+fe2/1JWMjbKoeTZfFaAK55wjhsDXzSIZh6TJ4b
+ FCPxKaqNpTGfWCENw/BWzZ9c=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -56,10 +56,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 08/11] efi_loader: move file-system helpers to
- efi_app_common
-Date: Sun, 21 Jun 2026 10:19:12 +0200
-Message-ID: <20260621081915.19154-9-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 10/11] qfw: fix RSDP ext_checksum recomputation
+Date: Sun, 21 Jun 2026 10:19:14 +0200
+Message-ID: <20260621081915.19154-11-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
@@ -81,678 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the shared file-system utilities to efi_app_common:
-
-* open_file_system() - open the simple file system protocol, first
-  trying the partition the image was loaded from, then the UEFI system
-  partition.
-* get_config_table()  - look up an EFI configuration table by GUID.
-* save_file()         - write a buffer to a named file, prompting for
-  confirmation if the file already exists.
-
-get_config_table() supersedes the private get_dtb() in dtbdump and
-get_dbg_info() in dbginfodump; both call-sites are updated to use it.
-
-dtbdump's do_save() and initrddump's do_save() are simplified to use
-the common save_file(), eliminating duplicate file-open/write/close
-sequences.
-
-smbiosdump's private get_config_table(), open_file_system() and
-save_file() are removed; the common versions take their place.
-
-GUID declarations that are no longer referenced after these removals
-are dropped from each app's file-scope variables.
+table_compute_checksum() returns the value that makes the byte sum of
+the buffer zero. If the ext_checksum field already contains a non-zero
+value (as QEMU's firmware-provided RSDP does), adding that existing
+value into the sum produces an incorrect complement. Zero the field
+before calling table_compute_checksum() so the calculation starts from
+a clean state, matching the pattern used in acpi_write_rsdp().
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
 	new patch
 ---
- lib/efi_loader/dbginfodump.c    |  22 +-----
- lib/efi_loader/dtbdump.c        | 120 +-----------------------------
- lib/efi_loader/efi_app_common.c | 105 +++++++++++++++++++++++++++
- lib/efi_loader/efi_app_common.h |  27 +++++++
- lib/efi_loader/initrddump.c     |  69 +-----------------
- lib/efi_loader/smbiosdump.c     | 125 --------------------------------
- 6 files changed, 141 insertions(+), 327 deletions(-)
+ drivers/misc/qfw_acpi.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
-index 4808fe254fe..b54c3830a66 100644
---- a/lib/efi_loader/dbginfodump.c
-+++ b/lib/efi_loader/dbginfodump.c
-@@ -91,26 +91,6 @@ static void do_help(void)
- 	error(u"exit       - exit the shell\r\n");
- }
+diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
+index 721f42ecbc3..afa3b820395 100644
+--- a/drivers/misc/qfw_acpi.c
++++ b/drivers/misc/qfw_acpi.c
+@@ -265,6 +265,7 @@ out:
+ 	struct acpi_rsdp *rsdp = ctx->rsdp;
  
--/**
-- * get_dbg_info_table() - get debug info table
-- *
-- * Return:	debug info table or NULL
-- */
--static void *get_dbg_info(void)
--{
--	void *dbg = NULL;
--	efi_uintn_t i;
--
--	for (i = 0; i < systable->nr_tables; ++i) {
--		if (!memcmp(&systable->tables[i].guid, &dbg_info_guid,
--			    sizeof(efi_guid_t))) {
--			dbg = systable->tables[i].table;
--			break;
--		}
--	}
--	return dbg;
--}
--
- /**
-  * print_info() - print loaded image protocol
-  */
-@@ -144,7 +124,7 @@ static efi_status_t do_dump(void)
- 	struct dbg_info_header *dbg;
- 	u32 count;
+ 	rsdp->length = sizeof(*rsdp);
++	rsdp->ext_checksum = 0;
+ 	rsdp->ext_checksum = table_compute_checksum((u8 *)rsdp, sizeof(*rsdp));
  
--	dbg = get_dbg_info();
-+	dbg = get_config_table(&dbg_info_guid);
- 	if (!dbg) {
- 		error(u"Debug info table not found\r\n");
- 		return EFI_NOT_FOUND;
-diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-index 559c64be7f7..0d56a41ecf6 100644
---- a/lib/efi_loader/dtbdump.c
-+++ b/lib/efi_loader/dtbdump.c
-@@ -7,7 +7,6 @@
-  */
- 
- #include <efi_dt_fixup.h>
--#include <part.h>
- #include <linux/libfdt.h>
- #include "efi_app_common.h"
- 
-@@ -18,14 +17,10 @@
- 
- static struct efi_boot_services *bs;
- static const efi_guid_t fdt_guid = EFI_FDT_GUID;
--static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
--static const efi_guid_t guid_simple_file_system_protocol =
--					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
- static efi_handle_t handle;
- static struct efi_system_table *systable;
- static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
- static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
--static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
- 
- /**
-  * print_char() - print character
-@@ -66,27 +61,6 @@ static u32 f2h(fdt32_t val)
- 	return *(u32 *)buf;
- }
- 
--/**
-- * get_dtb() - get device tree
-- *
-- * @systable:	system table
-- * Return:	device tree or NULL
-- */
--static void *get_dtb(struct efi_system_table *systable)
--{
--	void *dtb = NULL;
--	efi_uintn_t i;
--
--	for (i = 0; i < systable->nr_tables; ++i) {
--		if (!memcmp(&systable->tables[i].guid, &fdt_guid,
--			    sizeof(efi_guid_t))) {
--			dtb = systable->tables[i].table;
--			break;
--		}
--	}
--	return dtb;
--}
--
- /**
-  * do_help() - print help
-  */
-@@ -98,52 +72,6 @@ static void do_help(void)
- 	error(u"exit       - exit the shell\r\n");
- }
- 
--/**
-- * open_file_system() - open simple file system protocol
-- *
-- * file_system:	interface of the simple file system protocol
-- * Return:	status code
-- */
--static efi_status_t
--open_file_system(struct efi_simple_file_system_protocol **file_system)
--{
--	struct efi_loaded_image *loaded_image;
--	efi_status_t ret;
--	efi_handle_t *handle_buffer = NULL;
--	efi_uintn_t count;
--
--	ret = bs->open_protocol(handle, &loaded_image_guid,
--				(void **)&loaded_image, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS) {
--		error(u"Loaded image protocol not found\r\n");
--		return ret;
--	}
--
--	/* Open the simple file system protocol on the same partition */
--	ret = bs->open_protocol(loaded_image->device_handle,
--				&guid_simple_file_system_protocol,
--				(void **)file_system, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret == EFI_SUCCESS)
--		return ret;
--
--	/* Open the simple file system protocol on the UEFI system partition */
--	ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
--				       NULL, &count, &handle_buffer);
--	if (ret == EFI_SUCCESS && handle_buffer)
--		ret = bs->open_protocol(handle_buffer[0],
--					&guid_simple_file_system_protocol,
--					(void **)file_system, NULL, NULL,
--					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS)
--		error(u"Failed to open simple file system protocol\r\n");
--	if (handle_buffer)
--		bs->free_pool(handle_buffer);
--
--	return ret;
--}
--
- /**
-  * do_load() - load and install device-tree
-  *
-@@ -289,13 +217,11 @@ out:
-  */
- static efi_status_t do_save(u16 *filename)
- {
--	struct efi_simple_file_system_protocol *file_system;
--	efi_uintn_t dtb_size;
--	struct efi_file_handle *root, *file;
- 	struct fdt_header *dtb;
-+	efi_uintn_t dtb_size;
- 	efi_uintn_t ret;
- 
--	dtb = get_dtb(systable);
-+	dtb = get_config_table(&fdt_guid);
- 	if (!dtb) {
- 		error(u"DTB not found\r\n");
- 		return EFI_NOT_FOUND;
-@@ -308,45 +234,7 @@ static efi_status_t do_save(u16 *filename)
- 
- 	filename = skip_whitespace(filename);
- 
--	ret = open_file_system(&file_system);
--	if (ret != EFI_SUCCESS)
--		return ret;
--
--	/* Open volume */
--	ret = file_system->open_volume(file_system, &root);
--	if (ret != EFI_SUCCESS) {
--		error(u"Failed to open volume\r\n");
--		return ret;
--	}
--	/* Check if file already exists */
--	ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
--	if (ret == EFI_SUCCESS) {
--		file->close(file);
--		print(u"Overwrite existing file (y/n)? ");
--		ret = efi_input_yn();
--		print(u"\r\n");
--		if (ret != EFI_SUCCESS) {
--			root->close(root);
--			error(u"Aborted by user\r\n");
--			return ret;
--		}
--	}
--
--	/* Create file */
--	ret = root->open(root, &file, filename,
--			 EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
--			 EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
--	if (ret == EFI_SUCCESS) {
--		/* Write file */
--		ret = file->write(file, &dtb_size, dtb);
--		if (ret != EFI_SUCCESS)
--			error(u"Failed to write file\r\n");
--		file->close(file);
--	} else {
--		error(u"Failed to open file\r\n");
--	}
--	root->close(root);
--
-+	ret = save_file(filename, dtb, dtb_size);
- 	if (ret == EFI_SUCCESS) {
- 		print(filename);
- 		print(u" written\r\n");
-@@ -479,7 +367,7 @@ static efi_status_t do_dump(void)
- 	const char *strings;
- 	u32 level = 0;
- 
--	fdt = get_dtb(systable);
-+	fdt = get_config_table(&fdt_guid);
- 	if (!fdt) {
- 		error(u"DTB not found\r\n");
- 		return EFI_NOT_FOUND;
-diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
-index 6bd52e08d28..af9799557fc 100644
---- a/lib/efi_loader/efi_app_common.c
-+++ b/lib/efi_loader/efi_app_common.c
-@@ -6,6 +6,7 @@
-  */
- 
- #include <efi_api.h>
-+#include <part.h>
- #include "efi_app_common.h"
- 
- static efi_handle_t app_handle;
-@@ -15,6 +16,9 @@ struct efi_boot_services *bs;
- static bool nocolor;
- static struct efi_system_table *systable;
- static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-+static const efi_guid_t guid_simple_file_system_protocol =
-+	EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
-+static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
- 
- static u16 *get_load_options(void)
- {
-@@ -199,3 +203,104 @@ efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
- 		}
- 	}
- }
-+
-+void *get_config_table(const efi_guid_t *guid)
-+{
-+	size_t i;
-+
-+	for (i = 0; i < systable->nr_tables; ++i) {
-+		if (!memcmp(guid, &systable->tables[i].guid, 16))
-+			return systable->tables[i].table;
-+	}
-+
-+	return NULL;
-+}
-+
-+efi_status_t
-+open_file_system(struct efi_simple_file_system_protocol **file_system)
-+{
-+	struct efi_loaded_image *loaded_image;
-+	efi_status_t ret;
-+	efi_handle_t *handle_buffer = NULL;
-+	efi_uintn_t count;
-+
-+	ret = bs->open_protocol(app_handle, &loaded_image_guid,
-+				(void **)&loaded_image, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Loaded image protocol not found\r\n");
-+		return ret;
-+	}
-+
-+	/* Open the simple file system protocol on the same partition */
-+	ret = bs->open_protocol(loaded_image->device_handle,
-+				&guid_simple_file_system_protocol,
-+				(void **)file_system, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret == EFI_SUCCESS)
-+		return ret;
-+
-+	/* Open the simple file system protocol on the UEFI system partition */
-+	ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
-+				       NULL, &count, &handle_buffer);
-+	if (ret == EFI_SUCCESS && handle_buffer)
-+		ret = bs->open_protocol(handle_buffer[0],
-+					&guid_simple_file_system_protocol,
-+					(void **)file_system, NULL, NULL,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS)
-+		error(u"Failed to open simple file system protocol\r\n");
-+	if (handle_buffer)
-+		bs->free_pool(handle_buffer);
-+
-+	return ret;
-+}
-+
-+efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
-+{
-+	efi_uintn_t ret;
-+	struct efi_simple_file_system_protocol *file_system;
-+	struct efi_file_handle *root, *file;
-+
-+	ret = open_file_system(&file_system);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	/* Open volume */
-+	ret = file_system->open_volume(file_system, &root);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open volume\r\n");
-+		return ret;
-+	}
-+	/* Check if file already exists */
-+	ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
-+	if (ret == EFI_SUCCESS) {
-+		file->close(file);
-+		print(u"Overwrite existing file (y/n)? ");
-+		ret = efi_input_yn();
-+		print(u"\r\n");
-+		if (ret != EFI_SUCCESS) {
-+			root->close(root);
-+			error(u"Aborted by user\r\n");
-+			return ret;
-+		}
-+	}
-+
-+	/* Create file */
-+	ret = root->open(root, &file, filename,
-+			 EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
-+				 EFI_FILE_MODE_CREATE,
-+			 EFI_FILE_ARCHIVE);
-+	if (ret == EFI_SUCCESS) {
-+		/* Write file */
-+		ret = file->write(file, &size, buf);
-+		if (ret != EFI_SUCCESS)
-+			error(u"Failed to write file\r\n");
-+		file->close(file);
-+	} else {
-+		error(u"Failed to open file\r\n");
-+	}
-+	root->close(root);
-+
-+	return ret;
-+}
-diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
-index ff37f3413eb..77fe100afd9 100644
---- a/lib/efi_loader/efi_app_common.h
-+++ b/lib/efi_loader/efi_app_common.h
-@@ -101,4 +101,31 @@ efi_status_t efi_input_yn(void);
-  */
- efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
- 
-+/**
-+ * get_config_table() - get configuration table
-+ *
-+ * @guid:       GUID of the configuration table
-+ * Return:      pointer to configuration table or NULL
-+ */
-+void *get_config_table(const efi_guid_t *guid);
-+
-+/**
-+ * open_file_system() - open simple file system protocol
-+ *
-+ * @file_system: interface of the simple file system protocol
-+ * Return:       status code
-+ */
-+efi_status_t
-+open_file_system(struct efi_simple_file_system_protocol **file_system);
-+
-+/**
-+ * save_file() - save buffer to a file on the EFI system partition
-+ *
-+ * @filename:   file name
-+ * @buf:        buffer to write
-+ * @size:       size of the buffer
-+ * Return:      status code
-+ */
-+efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size);
-+
- #endif /* _EFI_APP_COMMON_H */
-diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
-index 0a025c1a841..c3e6f2b683f 100644
---- a/lib/efi_loader/initrddump.c
-+++ b/lib/efi_loader/initrddump.c
-@@ -19,9 +19,6 @@
- 
- static struct efi_system_table *systable;
- static struct efi_boot_services *bs;
--static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
--static const efi_guid_t guid_simple_file_system_protocol =
--					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
- static const efi_guid_t load_file2_guid = EFI_LOAD_FILE2_PROTOCOL_GUID;
- static efi_handle_t handle;
- 
-@@ -143,9 +140,6 @@ static efi_status_t do_load(void)
-  */
- static efi_status_t do_save(u16 *filename)
- {
--	struct efi_loaded_image *loaded_image;
--	struct efi_simple_file_system_protocol *file_system;
--	struct efi_file_handle *root, *file;
- 	void *initrd;
- 	efi_uintn_t initrd_size;
- 	efi_uintn_t ret;
-@@ -156,68 +150,13 @@ static efi_status_t do_save(u16 *filename)
- 
- 	filename = skip_whitespace(filename);
- 
--	ret = bs->open_protocol(handle, &loaded_image_guid,
--				(void **)&loaded_image, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS) {
--		error(u"Loaded image protocol not found\r\n");
--		goto out;
--	}
--
--	/* Open the simple file system protocol */
--	ret = bs->open_protocol(loaded_image->device_handle,
--				&guid_simple_file_system_protocol,
--				(void **)&file_system, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS) {
--		error(u"Failed to open simple file system protocol\r\n");
--		goto out;
--	}
--
--	/* Open volume */
--	ret = file_system->open_volume(file_system, &root);
--	if (ret != EFI_SUCCESS) {
--		error(u"Failed to open volume\r\n");
--		goto out;
--	}
--	/* Check if file already exists */
--	ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
--	if (ret == EFI_SUCCESS) {
--		file->close(file);
--		efi_drain_input();
--		print(u"Overwrite existing file (y/n)? ");
--		ret = efi_input_yn();
--		print(u"\r\n");
--		if (ret != EFI_SUCCESS) {
--			root->close(root);
--			error(u"Aborted by user\r\n");
--			goto out;
--		}
--	}
--
--	/* Create file */
--	ret = root->open(root, &file, filename,
--			 EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
--			 EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
-+	ret = save_file(filename, initrd, initrd_size);
- 	if (ret == EFI_SUCCESS) {
--		/* Write file */
--		ret = file->write(file, &initrd_size, initrd);
--		if (ret != EFI_SUCCESS) {
--			error(u"Failed to write file\r\n");
--		} else {
--			print(filename);
--			print(u" written\r\n");
--		}
--		file->close(file);
--	} else {
--		error(u"Failed to open file\r\n");
-+		print(filename);
-+		print(u" written\r\n");
- 	}
--	root->close(root);
- 
--out:
--	if (initrd)
--		bs->free_pages((uintptr_t)initrd,
--			       efi_size_in_pages(initrd_size));
-+	bs->free_pages((uintptr_t)initrd, efi_size_in_pages(initrd_size));
- 	return ret;
- }
- 
-diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index 351e103fb97..8aa6f594a07 100644
---- a/lib/efi_loader/smbiosdump.c
-+++ b/lib/efi_loader/smbiosdump.c
-@@ -8,7 +8,6 @@
-  * clearing of the screen.
-  */
- 
--#include <part.h>
- #include <smbios.h>
- #include <string.h>
- #include "efi_app_common.h"
-@@ -20,56 +19,6 @@ static efi_handle_t handle;
- static struct efi_system_table *systable;
- static const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
- static const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
--static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
--static const efi_guid_t guid_simple_file_system_protocol =
--					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
--static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
--
--/**
-- * open_file_system() - open simple file system protocol
-- *
-- * file_system:	interface of the simple file system protocol
-- * Return:	status code
-- */
--static efi_status_t
--open_file_system(struct efi_simple_file_system_protocol **file_system)
--{
--	struct efi_loaded_image *loaded_image;
--	efi_status_t ret;
--	efi_handle_t *handle_buffer = NULL;
--	efi_uintn_t count;
--
--	ret = bs->open_protocol(handle, &loaded_image_guid,
--				(void **)&loaded_image, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS) {
--		error(u"Loaded image protocol not found\r\n");
--		return ret;
--	}
--
--	/* Open the simple file system protocol on the same partition */
--	ret = bs->open_protocol(loaded_image->device_handle,
--				&guid_simple_file_system_protocol,
--				(void **)file_system, NULL, NULL,
--				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret == EFI_SUCCESS)
--		return ret;
--
--	/* Open the simple file system protocol on the UEFI system partition */
--	ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
--				       NULL, &count, &handle_buffer);
--	if (ret == EFI_SUCCESS && handle_buffer)
--		ret = bs->open_protocol(handle_buffer[0],
--					&guid_simple_file_system_protocol,
--					(void **)file_system, NULL, NULL,
--					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--	if (ret != EFI_SUCCESS)
--		error(u"Failed to open simple file system protocol\r\n");
--	if (handle_buffer)
--		bs->free_pool(handle_buffer);
--
--	return ret;
--}
- 
- /**
-  * do_help() - print help
-@@ -81,24 +30,6 @@ static void do_help(void)
- 	error(u"exit        - exit the shell\r\n");
- }
- 
--/**
-- * get_config_table() - get configuration table
-- *
-- * @guid:	GUID of the configuration table
-- * Return:	pointer to configuration table or NULL
-- */
--static void *get_config_table(const efi_guid_t *guid)
--{
--	size_t i;
--
--	for (i = 0; i < systable->nr_tables; ++i) {
--		if (!memcmp(guid, &systable->tables[i].guid, 16))
--			return systable->tables[i].table;
--	}
--
--	return NULL;
--}
--
- /**
-  * checksum() - calculate checksum
-  *
-@@ -211,62 +142,6 @@ static efi_status_t do_check(void)
- 	return EFI_SUCCESS;
- }
- 
--/**
-- * save_file() - save file to EFI system partition
-- *
-- * @filename:	file name
-- * @buf:	buffer to write
-- * @size:	size of the buffer
-- */
--static efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
--{
--	efi_uintn_t ret;
--	struct efi_simple_file_system_protocol *file_system;
--	struct efi_file_handle *root, *file;
--
--	ret = open_file_system(&file_system);
--	if (ret != EFI_SUCCESS)
--		return ret;
--
--	/* Open volume */
--	ret = file_system->open_volume(file_system, &root);
--	if (ret != EFI_SUCCESS) {
--		error(u"Failed to open volume\r\n");
--		return ret;
--	}
--	/* Check if file already exists */
--	ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
--	if (ret == EFI_SUCCESS) {
--		file->close(file);
--		print(u"Overwrite existing file (y/n)? ");
--		ret = efi_input_yn();
--		print(u"\r\n");
--		if (ret != EFI_SUCCESS) {
--			root->close(root);
--			error(u"Aborted by user\r\n");
--			bs->free_pool(buf);
--			return ret;
--		}
--	}
--
--	/* Create file */
--	ret = root->open(root, &file, filename,
--			 EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
--			 EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
--	if (ret == EFI_SUCCESS) {
--		/* Write file */
--		ret = file->write(file, &size, buf);
--		if (ret != EFI_SUCCESS)
--			error(u"Failed to write file\r\n");
--		file->close(file);
--	} else {
--		error(u"Failed to open file\r\n");
--	}
--	root->close(root);
--
--	return ret;
--}
--
- /**
-  * do_save() - save SMBIOS table
-  *
+ 	gd_set_acpi_start(acpi_get_rsdp_addr());
 -- 
 2.53.0
 
