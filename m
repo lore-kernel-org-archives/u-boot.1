@@ -4,198 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68733CD98F0
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 05:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEEBCD98F0
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 07:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E106E84874;
-	Sun, 21 Jun 2026 07:15:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CE3F84844;
+	Sun, 21 Jun 2026 09:19:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="D8LNZ/I2";
-	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="iO2BeLXB";
-	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="b0vy105N";
-	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="ICx558Vl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pBEA4LEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30997849D2; Sun, 21 Jun 2026 07:15:09 +0200 (CEST)
-Received: from mx0b-00498f03.pphosted.com (mx0b-00498f03.pphosted.com
- [148.163.143.241])
+ id CA4F784873; Sun, 21 Jun 2026 09:19:24 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F59483FEE
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 07:15:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F47683FEE
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 09:19:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ford.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
-Received: from pps.filterd (m0367130.ppops.net [127.0.0.1])
- by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65L4wA2H2392644
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 05:15:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=ppford; bh=tZf
- tnT+iiG13OvcyJqPZeVTFQ3FisWn8SQhCygEwfBE=; b=D8LNZ/I25rFhDKgir2z
- ubICpfeF/QouTP11FQ833Pw31PLgSFp9qUHN1hFuWahgbRsZmaZlFp5F20PamuQZ
- sK+8gkVcwn0iW5QrXgcQc5uvLB5PU3TrjiCwIpZQd2s+hAsPgXSvYmuxWxfW5A7l
- 9FPwe3as6wIzh8Ojh8WO7UpI1vU5gESJ1Gsen/f5dqsTaSUVPR9yRrRE76lB5F1n
- 6Q+6BlQeHLcpg4mK1dAOfp+arhseObTq66KXAkoZA9qf3DwhOBqAlEwWvaf4u36c
- YRRNJswyxQQHNwR++NXyGbPjgmknFPzKMTYJgXHR64lCuAOHsJwkkNvVgaT13yuy
- K1Q==
-Received: from dm1pr04cu001.outbound.protection.outlook.com
- (mail-centralusazon11010007.outbound.protection.outlook.com [52.101.61.7])
- by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4ex5290rut-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 05:15:03 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dSQNbeOEx8t8zMqLYMps2KAY1oYe3HwSW6pypkr7AM1KuAXozbd2wQwRP8kGk1GWp9f1cgEvbiFotm3MrLI8flCs7jUL3/aqf24LWB1JQx7W4liLiPE5mKXnx2pYlDjwixArfj+OQNtU2NXvouLJgI0pV09J8GrXJSLUWhTDLvrQmYTLc+imss85RrXpos2toKW7fdxTV9E2BTuuKgvhjIxuE10D/MxcUXFHeqpveJL6HL7UvH07QoeXtDnPlzDkso6v4BlwWU1cOzXCwnT1ZkCV5w2ucMoMJgx1oMR7+sr72xYkNXzQCHnahH7G/YGQUgGrutSuYk/l4RYrQmRNLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tZftnT+iiG13OvcyJqPZeVTFQ3FisWn8SQhCygEwfBE=;
- b=ARr3fSYnL1hku0p24a3uFOFd8At5LMI3yyik64IlF/NSiNjbBNF1y8H0FO81ACYqX2jFbXRiPa2lGPIyI3e4TXHuI7lTzdOxGBnCQ/L+kYw8C9DYOJaGpXMIn4WpdCV0eWj+M2yb8zVa1t4dsngpD7oV/uEfSWF3pGleTyQPJPSwYTuhn2qwVOAUgrZh9PrnzoEnX/hEkNvSU/87UXRgQAysJ6TZrkDjzlonrQT9/+Mkep6MbykkZzJ0VvpQEvlejCTlico6boh7ZQjNDyaqcRQg0rUvO0zZEFf/UZn3t2jeSPGS9djkhH+CMZfx7Lo2pw3F20mokv4qWWlXGzSELg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 205.220.161.53) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
- dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
- (signature was verified) header.d=ford.com; arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tZftnT+iiG13OvcyJqPZeVTFQ3FisWn8SQhCygEwfBE=;
- b=iO2BeLXBt3E6vTugFVgpe2qLRpC/jKXgWSmwFtEjSRJEU9T40EO0H1zIlW8jw8TH6ZalySvIfOkdUditmHF8fUKubCvDbGf0BdDEdyUJifsP1Klxkc9+62t/dxL8e7nHFyjqhbn5DwOfPo5lBUazfvu/usGL0f1y3j1PiAAu65c=
-Received: from CH2PR07CA0027.namprd07.prod.outlook.com (2603:10b6:610:20::40)
- by LV8PR16MB5912.namprd16.prod.outlook.com (2603:10b6:408:1e5::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Sun, 21 Jun
- 2026 05:14:58 +0000
-Received: from CH1PEPF0000AD80.namprd04.prod.outlook.com
- (2603:10b6:610:20:cafe::54) by CH2PR07CA0027.outlook.office365.com
- (2603:10b6:610:20::40) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.18 via Frontend Transport; Sun,
- 21 Jun 2026 05:14:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
- smtp.mailfrom=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com;dkim=pass (signature was verified)
- header.d=ford.com;dmarc=pass action=none header.from=ford.com;
-Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
- client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
-Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- CH1PEPF0000AD80.mail.protection.outlook.com (10.167.244.90) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.8
- via Frontend Transport; Sun, 21 Jun 2026 05:14:57 +0000
-Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
- by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65L4pZLr3159726
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 01:14:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
- :in-reply-to:message-id:mime-version:references:subject:to; s=
- ppserprodsaar; bh=tZftnT+iiG13OvcyJqPZeVTFQ3FisWn8SQhCygEwfBE=; b=
- b0vy105NX6Fl1zf7tweb2dEXHQbVlsEVp9guvjUOfFRyDfWcn2Da8bGm7CzX1zNx
- Jyp3rh/Ox6QwhbpFdZUf9mMshqZeLy8Hokru3wHtUs8wvWbsa7O1vBITQ85SckPL
- Sa293Spy7eGZDwYXyk9AhZwzmt2UtcWg6WOVEPPzdREa8UN4WnJchOa3RKzL9GKm
- 9sZW4NSHO2tukvn86xhk/zskSfedlXq24B4RnzGwsPZXbo4ZUKr+5vUXWkCEtPPX
- ERD2c7HvEwFZ2ccHjcNatDCbpxrNBuFDMRb2qlEcvw0mTTU4uj7IhyCOalpWHNtI
- WLpECXget+zSgYozUh6d/A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=ppfserpocford; bh=tZftnT+
- iiG13OvcyJqPZeVTFQ3FisWn8SQhCygEwfBE=; b=ICx558VlrwmYZhJx9b0r90J
- TrM5eSdAxQ5ED7tyFiTBCI82jQdXMGvQKYBcriYl/JpVOnsBU+xcJGfuIirOtLz1
- 8Y8Nr7VWCAJUaw/zyJ0+hk9pi9zba38De3BptDEYM77/ns8EPW59LNzTk+xFB9bJ
- cNStUqHPWIG4k4Tvqf+Ctq1zf6DdDSPvuX2llti17JiYGfFM7UZ+CZTK0aWpfWYi
- 305LGn/QPgKF++RkApHWQdgOQGdLUv4GCWljaPz2bQr2n6XCWSZmrv5XQ/6eLMZ8
- PA72GP8kYcLZxT89yFdSQmOWdYg7ZJE2I7iu1hlSrNyWviTiXu0ioxFerCsoSNg=
- =
-Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
- [3.215.31.156])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4ex9a4r0gn-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 01:14:56 -0400 (EDT)
-Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
- id bAWEwnXGieBX2bAWFwUZjP; Sun, 21 Jun 2026 05:14:55 +0000
-X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: bAWEwnXGieBX2bAWFwUZjP
-X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
-From: dmukhin@ford.com
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, dmukhin@ford.com
-Subject: [PATCH v3 3/3] test: bootdev: scan with a broken high-priority device
-Date: Sat, 20 Jun 2026 22:14:45 -0700
-Message-ID: <20260621051445.1763952-4-dmukhin@ford.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260621051445.1763952-1-dmukhin@ford.com>
-References: <20260621051445.1763952-1-dmukhin@ford.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1782026362; x=1782631162; i=xypron.glpk@gmx.de;
+ bh=TLfkW6yctG4B00cVQ9c4Kwk9lJ8AeuW/hnEG1Yi+HVk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=pBEA4LEyO0A10fQudBH/cWILDdURFSqCghe6t72mqUV2j5QzIUMG2iprX3StTkZ2
+ CsSMZbAi/n/LEQWfcgWSnmhWMcxI6xt0yBmxHSvcP+AL2sXzOSAxm4WkiLwjjlLCi
+ ScKy6GF/ni7D0zVTx/+oJO7/X14REJkm0GXxrpUr+i3Io+xtla6nIpXsHWYvpWAzg
+ AdlySgKZIGzDj56+DOZ3E6zfCFQS3nPiIXx4p4hVETyPkEHfpc3JaG95RNyjupEGl
+ gwkhtMlWNPE59d7tnE0bLjq5Wa0Q361cZpzLCFeL0b8L816THJxL3jPRmH6dY4HpP
+ QEYw/gG/04GTvoJ8TQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MysW2-1xMxmy0PQY-016FbQ; Sun, 21
+ Jun 2026 09:19:22 +0200
+Message-ID: <38727cdc-5675-432d-abc9-092eb49fbace@gmx.de>
+Date: Sun, 21 Jun 2026 09:19:17 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-PSER-M365-App: SER-APP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-20_04,2026-06-18_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- lowpriorityscore=0 phishscore=0 suspectscore=0 bulkscore=0 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606210049
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD80:EE_|LV8PR16MB5912:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: eab0f510-a0af-45e9-95e8-08decf5409ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|23010399003|376014|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: Kf6cY6TZ7Au3LGvwGrcXcgt+V6GrAdzF5xOLIKzxFFd4ORFoqtJckLwEMBxEomnN3OQTrmzc2FO8VG/nyuuAamAjjgU7gk5aewSscX7t362a2wcVomow3rTZ7DChhJpERYAl8wSXfHqKuAZzmW3xa7Z+P0x22UG07+cBDN1eWxOyFp8kUTSI3wEMFFb82Gcxn5+rvHNS/15tHqg69ePh1A/wqvOEFiypu31P00A133cC5NAyc3WGPIVG4NdtnTtgDJJlMkbTyMd+/p9B14Gk2tQ8RHh0rwAcHpUWG7/XFv9+CZJSjT3uPk8i1ucjLJo8r0mlQPNSotSkvAvTyKH6JbPQg8bZLpKKk3cR9jPrvdCNHPKFUv25ZId8lpjzATqlCBWZjd/gBV51hVri3hTdPEbanPI5oFZaqObiABNK/4E1FjGotzSDHmHv/fTjIImNfWf+Nj2E2vd/avsVFWT78AYUNhsymtLkwf6A/3jT20FZO+xaOuiXGnHA7R/RqULXMW6WksnLyFZL8rE2kwrHox0SrABTZvJ/4wbcGzNgDZV/XqnT1Ga5NzZErTWjaUXccLYgl7ShucYJKv3B6tZaORxLAP00c34QGDWMjhfVqSUBlHs9iXeZs0pyEcX2KcuLROahADPRkKeJaoHZOp6x2k8YzEP1gDzAcMv2O+YTlqi5bUUztCCFTOgccUf2eHFmO3JgL1DU17LZMSdGgQe6Ow==
-X-Forefront-Antispam-Report: CIP:205.220.161.53; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mx0a-00498f04.pphosted.com;
- PTR:mx0a-00498f04.pphosted.com; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(23010399003)(376014)(22082099003)(18002099003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: n9GhzI8fM7p/WGOc8C7+NlPBqiMCnrnFH0Kby1ZHRg3vsrswnbaqm+UAQzK88OBH88SdkiNwiDqqvliXipwwFpNcExAW4krm3Pgmy5z3NZOo1AxKbOEp4xj2qNUOHfmFFC+IMnOEiun8fDKBEIcvXejYeA+kVJhC2tx9ornL2t3hAs+YNZWELNijdtN8nBOcGgDwKc/WlS6U6MWoV4h718fWiT7GMA/aXwjLSIkHc4/+Y95YoYMGNLOr1Spdm2hHgLwL+rDN7zpq2uO7eruplSG536pLRKt9wer44Ay7ggh9NhXVHiw8X+00Jy9jZXjRPYNobK7QvpcN0oDWHzKwzo6Y95ByVL+LF0F6Wrl4E2j7LrKg24jdbcurmlnl0v6jyAzddRqlI9BepA08bV0MGZw8a97F+/jLR0Drgr7INav17EEKM9WKFVvFwUCkBEdE
-X-Exchange-RoutingPolicyChecked: h9yV4vFEuk878AvDcj4Be+zPmSR308i6KJYLEsaYQO8MUbBd6dpJdgyn2osWJjzMF7gvNAW9LTNf6ac2ij6iXLGI2xcxx+qvi0CcjfZlFTJzV4AQHE1ncWg0SAiioYzPVPfhQTPqWQualwM/UON73aKFwYR0bJ+aBGRYQkPaayH1cwVKv5wO52vuy40YRUBsWFWagerhtezOmrA9l3vic+5URS11pnBWK+P48TZPOodZ6CuLDno07XxGUT6y7J8QOPkfEoSRKI+M+DFLCWthvSTFLlPjOIFuo7EJqngrif6KHZU9scKabmbEL79qbGrZLOaw1lXulQZPTX6y25LkHA==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: OU30caGoWnIWCo4uLIx5B/iKS5INQs50Ipv7dpFSxCGHRolbfrBoysIdO649qVX4jSgls4t10ZDQVyToI4retruQOmCNW0+8aZiG68uBeTbjIE2P/bxAePvpx/6yRBFIP+zHtGIStAdGjoKptkOfsdi+siXcsXKDAu8BwaH6y+r8MxfQ2UbrxVpyjQ0LhIXiyLJ1oY0d0EFEK581TW23in5yGvdmOgAohmOw7+cZAFLOm/T6DyqiF1/J0oD76S1rdYGZijrviyoEjhYqxXRSQuK0inTAXPrAFnUovqGdUd0H3g/lt70lUKsAlCygWaKYSqrL4q6rSZNslUpiD4B4Y++1pFeYbVMiwPzIsBFtI3TMP3WEhhQS9Gb7IgdEdke36OG7o5cq4bDgqAmLhX1A2PC4LHlK6c9x2OMRj6Fz9ZC2ylha7VrGfmvrmZjxsv3qlMzIMn+fMHVStbPRZt0ESA0X9wD5FJ8hs3VwjMbrroHqSO8to12XvBgnIwfF8QSjFvRroWVo6937jyAuJOEWFK89bngs/DVf9tSFSO4B7nvDJux08EJRz8xctysvxAB/wIbnNeyd4ARjMhswJU4SUOM4X1WmCQlDBfuf8l5g3HubMbmBEKBQmIB/+/cP7OLhxOfxJx1vMWFgJ4/8Q3aKYQ==
-X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2026 05:14:57.7378 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eab0f510-a0af-45e9-95e8-08decf5409ad
-X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[205.220.161.53];
- Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD80.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR16MB5912
-X-Proofpoint-GUID: gN4U0k0I-JXpB51dIjLlKW2fWKK3vE7E
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIxMDA0OSBTYWx0ZWRfXxuM2GdDiT+oc
- ZVG+AxC7RMmLe+NoxkHPSJXe0BmxpLPjex30Ptwm5dm/z6od6ApcNbxglh3X5eweDVsUn+m8HCO
- sr+AWyGZCzrsvthzSVxs9w0vKPqoBv8r1k/SbDzSnwC/GuELXT9TwG4lpOxMLOjDvhmvxbSMrU5
- X3riZmX0rP2GS3hIEzmbDhVvxdyRHBbOvHKQLUxPh0gm5pfG9a3VNfIPEMILnxMRuB6pWZzFp8V
- 6T8PX1ZuUJxvCBZNsBSBA+XPrz4/cLKvrM+AoTElEAcqJnF0xKPVHNJEMVh1iuL/4R78nssF4aG
- 7HOsEaaWXM3F1q0u8l50Dt1ly2xG7XyH1YO7ao5188lOS06GpK+0LP5akuo/ADCun2l0f3hUOZq
- 4Efv6fBi18w4+hLa45tQ3sLdycur/XhlB7cJYJyrQdi5Ikg1E7a82hqEW1Y8j9uJ32bbS+gsOms
- C1qUno905SYs0rRsczg==
-X-Authority-Analysis: v=2.4 cv=T6q8ifKQ c=1 sm=1 tr=0 ts=6a377358 cx=c_pps
- a=jRvQvoFr2LhS1HEjeZSEyQ==:117 a=lOEMawUel/sSvQipkIvNbg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=FelO9ux0wxsA:10 a=3PXLN80vpJUA:10
- a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=vnUQfov-gS4s1L7hHvr-:22 a=cbNQJ9GKAAAA:8
- a=i1MxBqhcqyiCWgHNAf4A:9 a=G69WFyCBNqGPyalROSdv:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIxMDA0OSBTYWx0ZWRfXwU1AiTm5GJNB
- 7qeUM85+q7VSU+Zvsim3gVa5+H/vAn/n7+w8KyPEgqlmKwBZKzFRbC54L/Pes0Pqhn4Pq9lnxWf
- xZcx/vgmmz6SZMg4AxcrE6QvEvLOcQPn2FWFQ7S0JeMjhJZDSQWl
-X-Proofpoint-ORIG-GUID: gN4U0k0I-JXpB51dIjLlKW2fWKK3vE7E
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-20_04,2026-06-18_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- priorityscore=1501 bulkscore=0 phishscore=0 malwarescore=0 impostorscore=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606210049
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: board: renesas: Document Renesas RZ/N1D and RZ/N1S
+ as arm
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260616033614.137946-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20260616033614.137946-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+Rnk1Q+pB5oo+n85SUdiWOr3mzB8N3Is221HEOgKYtl7a1xfrA9
+ ad4nA10Lu0Gh6DTr1aZRZD3hOxJwL681XRF0IOde0WzykCkJSt6wDDDLor30keYOudyO5P7
+ zqP1fMvAJ6GrV/8ESoY0/qhr7cJ4QM7XBWiSa0OswkLP9yrfpLF2Vs113M1uxcBAZtbxhgQ
+ SIC2pmo6YJ1c5sz/9U14w==
+UI-OutboundReport: notjunk:1;M01:P0:liu+EzJHchw=;0vUe+jedTIVolgvqeT/fPMkUgol
+ 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
+ 9t6iOdEagpXD8tYztfc4dg6hUZM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -212,378 +158,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Denis Mukhin <dmukhin@ford.com> 
+On 6/16/26 05:36, Marek Vasut wrote:
+> The RZ/N1D and RZ/N1S contain Cortex-A7 core, which is 32bit ARM core.
+> Document the SoC as 32bit ARM instead of aarch64.
+>=20
+> Fixes: a5b9f959439b ("doc: renesas: add Renesas board docs")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Add bootdev_hunt_fallthrough() test to verify that 'bootflow scan -l'
-falls back to a lower-priority bootdev when a higher-priority hunter
-fails.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Introduce a simple 'sandbox-bootdev' device for the test. The new
-bootdev can be configured to produce an error at the hunting stage.
-
-Adjust boot{dev,flow} tests which depend on bootdev hunters.
-
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
-Changes since v2:
-- dropped 'flags' from 'host_priv'
-- added description for 'flags' in host_sb_plat
-- switched to log_xxx() calls in sandbox-bootdev.c
-- corrected sandbox_bootdev_hunt()
-- updated boot{dev,flow} tests which depend on bootdev hunters
-
-Changes since v1:
-- new patch
----
- drivers/block/Makefile          |  2 +-
- drivers/block/host-uclass.c     | 17 +++++++++
- drivers/block/sandbox-bootdev.c | 62 +++++++++++++++++++++++++++++++++
- include/sandbox_host.h          | 18 ++++++++++
- test/boot/bootdev.c             | 25 +++++++------
- test/boot/bootflow.c            | 51 +++++++++++++++++++++++++++
- test/boot/bootstd_common.h      |  2 +-
- 7 files changed, 164 insertions(+), 13 deletions(-)
- create mode 100644 drivers/block/sandbox-bootdev.c
-
-diff --git a/drivers/block/Makefile b/drivers/block/Makefile
-index f5a9d8637a3c..c827fa81a2d8 100644
---- a/drivers/block/Makefile
-+++ b/drivers/block/Makefile
-@@ -13,7 +13,7 @@ ifndef CONFIG_XPL_BUILD
- obj-$(CONFIG_IDE) += ide.o
- obj-$(CONFIG_RKMTD) += rkmtd.o
- endif
--obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
-+obj-$(CONFIG_SANDBOX) += sandbox.o sandbox-bootdev.o host-uclass.o host_dev.o
- obj-$(CONFIG_$(PHASE_)BLOCK_CACHE) += blkcache.o
- obj-$(CONFIG_$(PHASE_)BLKMAP) += blkmap.o
- obj-$(CONFIG_$(PHASE_)BLKMAP) += blkmap_helper.o
-diff --git a/drivers/block/host-uclass.c b/drivers/block/host-uclass.c
-index cf42bd1e07ac..7862b988fd68 100644
---- a/drivers/block/host-uclass.c
-+++ b/drivers/block/host-uclass.c
-@@ -150,6 +150,23 @@ struct udevice *host_find_by_label(const char *label)
- 	return NULL;
- }
- 
-+int host_set_flags_by_label(const char *label, unsigned int flags)
-+{
-+	struct udevice *dev;
-+	struct uclass *uc;
-+
-+	uclass_id_foreach_dev(UCLASS_HOST, dev, uc) {
-+		struct host_sb_plat *plat = dev_get_plat(dev);
-+
-+		if (plat->label && !strcmp(label, plat->label)) {
-+			plat->flags = flags;
-+			return 0;
-+		}
-+	}
-+
-+	return -ENODEV;
-+}
-+
- struct udevice *host_get_cur_dev(void)
- {
- 	struct uclass *uc = uclass_find(UCLASS_HOST);
-diff --git a/drivers/block/sandbox-bootdev.c b/drivers/block/sandbox-bootdev.c
-new file mode 100644
-index 000000000000..ccd3a379dd21
---- /dev/null
-+++ b/drivers/block/sandbox-bootdev.c
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#define LOG_CATEGORY	UCLASS_HOST
-+
-+#include <bootdev.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <sandbox_host.h>
-+
-+static int sandbox_bootdev_bind(struct udevice *dev)
-+{
-+	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
-+
-+	ucp->prio = BOOTDEVP_4_SCAN_FAST; /* at least priority 4 */
-+
-+	return 0;
-+}
-+
-+static int sandbox_bootdev_hunt(struct bootdev_hunter *info, bool show)
-+{
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	int ret;
-+
-+	uclass_id_foreach_dev(UCLASS_HOST, dev, uc) {
-+		struct host_sb_plat *plat = dev_get_plat(dev);
-+
-+		log_debug("hunting %s\n", plat->label);
-+
-+		if (plat->flags & BLK_HOST_BROKEN) {
-+			ret = -ETIME;
-+			log_err("cannot hunt sandbox device '%s': %d\n",
-+			       plat->label, ret);
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+struct bootdev_ops sandbox_bootdev_ops = {
-+};
-+
-+static const struct udevice_id sandbox_bootdev_ids[] = {
-+	{ .compatible = "u-boot,bootdev-sandbox" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(sandbox_bootdev) = {
-+	.name		= "sandbox_bootdev",
-+	.id		= UCLASS_BOOTDEV,
-+	.ops		= &sandbox_bootdev_ops,
-+	.bind		= sandbox_bootdev_bind,
-+	.of_match	= sandbox_bootdev_ids,
-+};
-+
-+BOOTDEV_HUNTER(sandbox_bootdev_hunter) = {
-+	.prio		= BOOTDEVP_4_SCAN_FAST,
-+	.uclass		= UCLASS_HOST,
-+	.hunt		= sandbox_bootdev_hunt,
-+	.drv		= DM_DRIVER_REF(sandbox_bootdev),
-+};
-diff --git a/include/sandbox_host.h b/include/sandbox_host.h
-index f7a5fc672300..075d39cfecea 100644
---- a/include/sandbox_host.h
-+++ b/include/sandbox_host.h
-@@ -8,17 +8,26 @@
- #ifndef __SANDBOX_HOST__
- #define __SANDBOX_HOST__
- 
-+/**
-+ * Device flags.
-+ */
-+enum {
-+	BLK_HOST_BROKEN			= BIT(0), /* Simulate broken device */
-+};
-+
- /**
-  * struct host_sb_plat - platform data for a host device
-  *
-  * @label: Label for this device (allocated)
-  * @filename: Name of file this is attached to, or NULL (allocated)
-  * @fd: File descriptor of file, or 0 for none (file is not open)
-+ * @flags: Device flags (e.g. for unit tests).
-  */
- struct host_sb_plat {
- 	char *label;
- 	char *filename;
- 	int fd;
-+	unsigned int flags;
- };
- 
- /**
-@@ -122,4 +131,13 @@ struct udevice *host_get_cur_dev(void);
-  */
- void host_set_cur_dev(struct udevice *dev);
- 
-+/**
-+ * host_set_flags_by_label() - Set the host device test flags
-+ *
-+ * @label: Label of the attachment, e.g. "test1"
-+ * @flags: Device flags
-+ * Returns: 0 if OK, -ve on error
-+ */
-+int host_set_flags_by_label(const char *label, unsigned int flags);
-+
- #endif /* __SANDBOX_HOST__ */
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 0820bf10ee08..fedb2ce90565 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -384,19 +384,20 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
- 	ut_assert_nextline("   2        mmc              mmc_bootdev");
- 	ut_assert_nextline("   4        nvme             nvme_bootdev");
- 	ut_assert_nextline("   4        qfw              qfw_bootdev");
-+	ut_assert_nextline("   4        host             sandbox_bootdev");
- 	ut_assert_nextline("   4        scsi             scsi_bootdev");
- 	ut_assert_nextline("   4        spi_flash        sf_bootdev");
- 	ut_assert_nextline("   5        usb              usb_bootdev");
- 	ut_assert_nextline("   4        virtio           virtio_bootdev");
--	ut_assert_nextline("(total hunters: 9)");
-+	ut_assert_nextline("(total hunters: 10)");
- 	ut_assert_console_end();
- 
- 	ut_assertok(bootdev_hunt("usb1", false));
- 	ut_assert_skip_to_line("Bus usb@1: 5 USB Device(s) found");
- 	ut_assert_console_end();
- 
--	/* USB is 8th in the list, so bit 7 */
--	ut_asserteq(BIT(7), std->hunters_used);
-+	/* USB is 9th in the list, so bit 8 */
-+	ut_asserteq(BIT(8), std->hunters_used);
- 
- 	return 0;
- }
-@@ -417,7 +418,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 	ut_assert_nextline("Prio  Used  Uclass           Hunter");
- 	ut_assert_nextlinen("----");
- 	ut_assert_nextline("   6        ethernet         eth_bootdev");
--	ut_assert_skip_to_line("(total hunters: 9)");
-+	ut_assert_skip_to_line("(total hunters: 10)");
- 	ut_assert_console_end();
- 
- 	/* Use the MMC hunter and see that it updates */
-@@ -425,7 +426,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 	ut_assertok(run_command("bootdev hunt -l", 0));
- 	ut_assert_skip_to_line("   5        ide              ide_bootdev");
- 	ut_assert_nextline("   2     *  mmc              mmc_bootdev");
--	ut_assert_skip_to_line("(total hunters: 9)");
-+	ut_assert_skip_to_line("(total hunters: 10)");
- 	ut_assert_console_end();
- 
- 	/* Scan all hunters */
-@@ -441,6 +442,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 
- 	ut_assert_nextline("Hunting with: nvme");
- 	ut_assert_nextline("Hunting with: qfw");
-+	ut_assert_nextline("Hunting with: host");
- 	ut_assert_nextline("Hunting with: scsi");
- 	ut_assert_nextline("scanning bus for devices...");
- 	ut_assert_skip_to_line("Hunting with: spi_flash");
-@@ -458,11 +460,12 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 	ut_assert_nextline("   2     *  mmc              mmc_bootdev");
- 	ut_assert_nextline("   4     *  nvme             nvme_bootdev");
- 	ut_assert_nextline("   4     *  qfw              qfw_bootdev");
-+	ut_assert_nextline("   4     *  host             sandbox_bootdev");
- 	ut_assert_nextline("   4     *  scsi             scsi_bootdev");
- 	ut_assert_nextline("   4     *  spi_flash        sf_bootdev");
- 	ut_assert_nextline("   5     *  usb              usb_bootdev");
- 	ut_assert_nextline("   4     *  virtio           virtio_bootdev");
--	ut_assert_nextline("(total hunters: 9)");
-+	ut_assert_nextline("(total hunters: 10)");
- 	ut_assert_console_end();
- 
- 	ut_asserteq(GENMASK(MAX_HUNTER, 0), std->hunters_used);
-@@ -646,8 +649,8 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
- 	ut_asserteq_str("scsi.id0lun0.bootdev", dev->name);
- 	ut_asserteq(BOOTFLOW_METHF_SINGLE_UCLASS, mflags);
- 
--	/* SCSI is 6th in the list, so bit 5 */
--	ut_asserteq(BIT(MMC_HUNTER) | BIT(5), std->hunters_used);
-+	/* SCSI is 7th in the list, so bit 6 */
-+	ut_asserteq(BIT(MMC_HUNTER) | BIT(6), std->hunters_used);
- 
- 	ut_assertok(bootdev_next_label(&iter, &dev, &mflags));
- 	ut_assert_console_end();
-@@ -657,7 +660,7 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
- 		    mflags);
- 
- 	/* dhcp: Ethernet is first so bit 0 */
--	ut_asserteq(BIT(MMC_HUNTER) | BIT(5) | BIT(0), std->hunters_used);
-+	ut_asserteq(BIT(MMC_HUNTER) | BIT(6) | BIT(0), std->hunters_used);
- 
- 	ut_assertok(bootdev_next_label(&iter, &dev, &mflags));
- 	ut_assert_console_end();
-@@ -667,7 +670,7 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
- 		    mflags);
- 
- 	/* pxe: Ethernet is first so bit 0 */
--	ut_asserteq(BIT(MMC_HUNTER) | BIT(5) | BIT(0), std->hunters_used);
-+	ut_asserteq(BIT(MMC_HUNTER) | BIT(6) | BIT(0), std->hunters_used);
- 
- 	mflags = 123;
- 	ut_asserteq(-ENODEV, bootdev_next_label(&iter, &dev, &mflags));
-@@ -675,7 +678,7 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
- 	ut_assert_console_end();
- 
- 	/* no change */
--	ut_asserteq(BIT(MMC_HUNTER) | BIT(5) | BIT(0), std->hunters_used);
-+	ut_asserteq(BIT(MMC_HUNTER) | BIT(6) | BIT(0), std->hunters_used);
- 
- 	return 0;
- }
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 56ee1952357b..65ad72e0d6bf 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -19,6 +19,8 @@
- #include <mapmem.h>
- #ifdef CONFIG_SANDBOX
- #include <asm/test.h>
-+#include <sandbox_host.h>
-+#include <os.h>
- #endif
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-@@ -1532,3 +1534,52 @@ static int bootstd_images(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootstd_images, UTF_CONSOLE);
-+
-+#ifdef CONFIG_SANDBOX
-+/*
-+ * Check that bootdev scanning does not stop if higher-priority bootdevs
-+ * are failed to be hunted.
-+ */
-+static int bootdev_hunt_fallthrough(struct unit_test_state *uts)
-+{
-+	struct bootstd_priv *std;
-+	struct udevice *dev;
-+	const char **old_order;
-+
-+	test_set_skip_delays(true);
-+	bootstd_reset_usb();
-+	console_record_reset_enable();
-+
-+	/* Reset bootstd state */
-+	ut_assertok(bootstd_get_priv(&std));
-+	old_order = std->bootdev_order;
-+	std->bootdev_order = NULL;
-+	std->hunters_used = 0;
-+
-+	/*
-+	 * Create a sandbox block device (BOOTDEVP_4_SCAN_FAST) and mark it as
-+	 * broken so that bootdev_hunt_prio() returns an error.
-+	 */
-+	ut_asserteq(0, uclass_id_count(UCLASS_HOST));
-+	ut_assertok(host_create_device("test", true, DEFAULT_BLKSZ, &dev));
-+	ut_assertok(host_set_flags_by_label("test", BLK_HOST_BROKEN));
-+	ut_asserteq(1, uclass_id_count(UCLASS_HOST));
-+
-+	/*
-+	 * Scan with hunting.
-+	 * The sandbox hunter at priority 4 must fail, but the USB hunter at
-+	 * priority 5 must still be reached.
-+	 */
-+	ut_assertok(run_command("bootflow scan -l", 0));
-+
-+	/* USB was hunted despite the sandbox hunter failure */
-+	ut_assert_skip_to_line("Bus usb@1: 5 USB Device(s) found");
-+
-+	/* Clean up */
-+	std->bootdev_order = old_order;
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootdev_hunt_fallthrough,
-+             UTF_DM | UTF_SCAN_FDT | UTF_SF_BOOTDEV | UTF_CONSOLE);
-+#endif /* CONFIG_SANDBOX */
-diff --git a/test/boot/bootstd_common.h b/test/boot/bootstd_common.h
-index dd769313a842..e60f6ba6a0e0 100644
---- a/test/boot/bootstd_common.h
-+++ b/test/boot/bootstd_common.h
-@@ -21,7 +21,7 @@
- #define TEST_VERNUM		0x00010002
- 
- enum {
--	MAX_HUNTER	= 8,
-+	MAX_HUNTER	= 9,
- 	MMC_HUNTER	= 2,	/* ID of MMC hunter */
- };
- 
--- 
-2.54.0
+> ---
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   doc/board/renesas/renesas.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.r=
+st
+> index 6702d5879b5..fcfd51aa19c 100644
+> --- a/doc/board/renesas/renesas.rst
+> +++ b/doc/board/renesas/renesas.rst
+> @@ -255,13 +255,13 @@ Renesas is a SoC solutions provider for automotive=
+ and industrial applications.
+>      * - :doc:`RZ/N1 Family <rzn1>`
+>        - Schneider RZ/N1D board
+>        - R9A06G032 (RZ/N1D)
+> -     - arm64
+> +     - arm
+>        - rzn1_snarc_defconfig
+>  =20
+>      * -
+>        - Schneider RZ/N1S board
+>        - R9A06G033 (RZ/N1S)
+> -     - arm64
+> +     - arm
+>        - rzn1_snarc_defconfig
+>  =20
+>   Build
 
