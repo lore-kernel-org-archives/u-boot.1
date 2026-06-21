@@ -4,141 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 844CACD98F2
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 09:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8BACD98F0
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 15:24:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 780298499C;
-	Sun, 21 Jun 2026 11:59:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 998A084119;
+	Sun, 21 Jun 2026 17:24:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AP7W0Elv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k+G5Vhsr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D52D7849BA; Sun, 21 Jun 2026 11:59:55 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 08C3C8499C; Sun, 21 Jun 2026 12:29:03 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F7E3848DC
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:59:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA1784873
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 12:29:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1782035979; x=1782640779; i=xypron.glpk@gmx.de;
- bh=LmBzB8muSxA+l2d3bZRsiVKnRIzl6OtODWGEC6Po1X4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=AP7W0ElvNPkygFuL5IWAF8eSoX4ipZ39ZAA13g7sJeuTcTdBG003P2qKz5wyUjK4
- d0FqCJEI0Lv9buQwVhkyKM/PLihf08h9fZESP7vLe4xsnosC0Jf5rE4u7e5v8oIsr
- N2SajcFsxn6chRSHtkdYeIgIDOHJoNQzOUXBDGGEWmHtvB+8XFPjnjk43dezMrFcX
- zWFebBjTFuU3Vgm49mSj+Zm6uUr6fD4S4vaQ/ZLWpeNci1AKFBAP9PfqDdTx4fX9D
- oKJqnKDIjC7QIwapV71Oz2eJwTuCbeYogk9uUOA5ls2hkrRRwb0lv5CZMPrBbYJCh
- Yw+DmX1qzPvkb5gXQQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNswE-1wqhRz2vV2-00NGOf; Sun, 21
- Jun 2026 11:59:39 +0200
-Message-ID: <aaa976b5-693b-48db-bd26-6be981757413@gmx.de>
-Date: Sun, 21 Jun 2026 11:59:38 +0200
+ spf=pass smtp.mailfrom=dayalancse@gmail.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c07ea058c1aso544479166b.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 03:29:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782037740; cv=none;
+ d=google.com; s=arc-20240605;
+ b=baAMckLVvLT8By1KyV3EVLQEM1C65Yakfy2JRU+YXKMFmjko6jHWvd9vKljt/4KWsR
+ QOJIW/7gANqbqHw1zFaZX1FcEcUzs3dK0pzU4m7YEpsW45p6j0vL1uyRNw+tvaRMrGmn
+ H9xxTHaG+F/5EG7G4nF2yn0GUFLF70Ps4nz7AypWDI/a3I+XqNIvlpk2+y5qn9ZArOM/
+ r4ZBmiypHg39DaFEhzaQu4kZxhAvKOyy2H8f++ydVx2v2xWw6h0zQjuxvag1/KPnpcy5
+ gNe3Rf1rvFxWe18parJ5N5BtXYQyebse6T4hGGlLax2p1vYm7bulnH/xjV4Zb5f5Pnc7
+ Symg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=0zn/J0V143cnogOdtwosIK0ZZYbeqU1kJ6FDNCKqJkU=;
+ fh=iD0H1zGIvA+qt6AJweV011prSwEpMYd5z6I7jCXfi7k=;
+ b=koQYkFoQ3ZunZXm4AvnwZ9X/juYKAR4G1p4rRfQFXAoQZ/srt0yrgxscwE9qCDxwko
+ BUoP3mpZxcog9MAuNJNdNRxWJWsNp528SbKb89etcQo93YAUR2gRKueoM/cFfQ47Fchi
+ dO3zlWpK2tPsmUVTo57i/Gw4POKnv9fTgCkLw5nrjUL2RHkFeib5ZfONE/D0lyjRI1oN
+ ToBJJG3Q2/jL9C1BWllZNZal7cRVLq9n8/RuW9bYsb5XsM40cGJfWg1UGILh7R34aGsb
+ DVKjPknQRLCjBTqDpssDcyKgKyEY1ljcnuy+klRdXLSVqjW1l8yvl8g2XeBntQNcfmLK
+ G7hQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782037740; x=1782642540; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=0zn/J0V143cnogOdtwosIK0ZZYbeqU1kJ6FDNCKqJkU=;
+ b=k+G5Vhsr+J54RaG7H4CitFhOEnu1IZC6QWTGpUnnNdZ+2vJA6W/lkQG/i+YJnK2d90
+ +fRWrpxwVD5BfQT6u0gAUsQiIdY/AdQKsQ28Tju/wJpy+G5qydxVd/yJ1dFcShotvUm4
+ f+pd9Kh32ViGZ5dp+OPfppDkJcoALlq56GXIan9Qz0nseU0C9jpKR+zcf9yZ0yXcGObP
+ 5TzaNzcP50ePqJyWz786m7sXBBw6dZz3X4tJbOhfXveSQFOG/PBQF0CHkjUUmnFJHNKe
+ uEyHwC+9X5vKzG07Q9f9IcSLO3kIr3SIkBE8pLrH3gA2N3UMoSkBLAgF/QlKuHYeJzMv
+ VBxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782037740; x=1782642540;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0zn/J0V143cnogOdtwosIK0ZZYbeqU1kJ6FDNCKqJkU=;
+ b=NIbXzYbMldRABrry24q7wEgZTVA/C8ZVNx09Jk+zf7O70eqDk/ymO/F69AU/yCEFjd
+ UygRyRW4rpXznn0YQ1w+uMhDLTa4wf4SUa7PCxGY2D7wRYK7vTjZZoEbGkOm/iod6E2W
+ o97JnORuq6SG0KmnDXyPI6ieY078L2tUYs1raOiZkfmI3Yl08OKtecJR8RKfqTje7EbO
+ pj9fUpkA0QZE+gLn8YuuILQo7knVeBm7tHwHQ4XE2b95G0ePHm7zfPxbCVW3VMTqJYbQ
+ TaXujJ0vhvK8ypSRXdwepxxzivYLxaLe1FW1EeXK8UuDXGb0cBfAtP63/K0LEFe+t5au
+ EX0A==
+X-Gm-Message-State: AOJu0YxGj+gzYZ7auNpEN1l5Cl7dPXBazCeRGhDBtP/BezT3g1tNsLX0
+ e8EFfvmT+QULbbwlQ6e0VAg/lDfxgjCp2KT4hK1a85LGuMGfi4HGvA7ywo9MBScK1v0kbMZC8qn
+ 4Cc9DcXHHCkYnWe0zIu+bbjH2K/Sq2L2yyk36
+X-Gm-Gg: AfdE7cm9BtX9Qb2GS+BCCfnsJMy+y6zEO6jtJwpTqboPP8tmMtXfSJYXRos1ntxUAMv
+ fOThe+4TAdToMXsRgXKc+zqctWhiQKnY6P27kPmHONSJkCsp8cMG/AgyfN5aiJTrGuD7/STXijN
+ A8bzaWwWtu+CDQCTAP2RRbcLtV960kPHbbRIa+Irk7G16EtJXp/kHh5q0AlbiozfIE4EvAJwjQ/
+ AXd+y3yi41zl5tRR5rcTd+AfyF98wbmNoRXHRxOlxY/EnIB6TRJeypVAPU28TRNQT16N9stTjQg
+ l5MKQDViYjWGmUoTWE6ZEcIELkm+9lrP5W6ioidD0Q==
+X-Received: by 2002:a17:906:518f:10b0:c0a:5acd:ecc4 with SMTP id
+ a640c23a62f3a-c0a5ace09e2mr328484366b.36.1782037739977; Sun, 21 Jun 2026
+ 03:28:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Denis Mukhin <dmukhin@ford.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2026-07-rc6
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:X7siHmLX8pAwdxjbHJjsCNnN0xOtAdPXqIF4hT2qHooSxpMa4cc
- W6gAolF8d54BJhUoLzc/cxYTbQsyxR4C0TiYnlz4KEXUhf9GMvnCV27d/p/iEWPG60J3tsj
- qF6rUCMfNFmg4kizvlkIDFluCSXKD1oR7zWQ5w+Eszlvvf8xiomzg7JovcK2mdNoHoo232L
- OA61DO2/eRU6orMGp4g7g==
-UI-OutboundReport: notjunk:1;M01:P0:mEyNQBdc+h8=;m23cfMV1LhQ8XohHgPI25PhyDdI
- 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
- szZlTNFdGAbMQqK9MT6SU9ZQ8KYQLpttkasM=
+From: Deenadayalan K <dayalancse@gmail.com>
+Date: Sun, 21 Jun 2026 15:58:47 +0530
+X-Gm-Features: AVVi8Cd7hwwNImmBVYuJ0Eb7jRxkm7zuIsBUYPZhrHfYH26jUPebJC5qXOewMj4
+Message-ID: <CALENcY8ruCKbtyphfmpwPmcCfwjo8_72Nh9J6Qq74WoUxfVPrw@mail.gmail.com>
+Subject: [PATCH] UFS error handling for reject upiu.
+To: u-boot@lists.denx.de
+Cc: neil.armstrong@linaro.org, bhupesh.linux@gmail.com, n-francis@ti.com, 
+ trini@konsulko.com, marek.vasut+renesas@mailbox.org, padmarao.begari@amd.com, 
+ michal.simek@amd.com, macpaul.lin@mediatek.com, 
+ Deenadayalan K <dayalancse@gmail.com>, jstephan@baylibre.com
+X-Mailman-Approved-At: Sun, 21 Jun 2026 17:24:44 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,74 +112,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+From 8ce84d4e1e9c34d7b36d40e5e5678da52070af02 Mon Sep 17 00:00:00 2001
+From: Deenadayalan K <dayalancse@gmail.com>
+Date: Sun, 21 Jun 2026 15:15:16 +0530
+Subject: [PATCH] UFS error handling for reject upiu.
 
-The following changes since commit 922cf29dd8045f7348ce0f20145f46e8235faf2=
-1:
+ufshcd_handle_reject_upiu - Handle and display REJECT UPIU fields
 
-   Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-18=20
-11:41:22 -0600)
+Per UFS spec, the device sends a REJECT UPIU when it
+receives a UPIU with an invalid Transaction Type. This function extracts
+and displays the REJECT UPIU header fields for diagnostics.
 
-are available in the Git repository at:
+task tag appears default 0 for UPIUs, it is a unique id for each UPIU
+If UFS host controller gets a reject upiu for the request UPIU then
+it does make sense to reattempt to issue the same request UPIU again
+a possible scenario where UFS device is not supporting though it is a valid
+transaction type.
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
-tags/efi-2026-07-rc6
+Signed-off-by: Deenadayalan K <dayalancse@gmail.com>
+---
+ drivers/ufs/ufs-uclass.c | 60 ++++++++++++++++++++++++++++++++++------
+ 1 file changed, 52 insertions(+), 8 deletions(-)
 
-for you to fetch changes up to ad90d1ec8b43aa3d7ec5790db5c5740472e47c96:
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 6a51f337e47..fcafebd5203 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -1020,6 +1020,56 @@ static int ufshcd_copy_query_response(struct ufs_hba
+*hba)
+  return 0;
+ }
 
-   doc: android: fastboot: Document halt behaviour (2026-06-21 10:56:37=20
-+0200)
++/**
++ * ufshcd_handle_reject_upiu - Handle and display REJECT UPIU fields
++ *
++ * Per UFS spec, the device sends a REJECT UPIU when it
++ * receives a UPIU with an invalid Transaction Type. This function extracts
++ * and displays the REJECT UPIU header fields for diagnostics.
++ */
++static int ufshcd_handle_reject_upiu(struct ufs_hba *hba)
++{
++ u32 dword_0 = be32_to_cpu(hba->ucd_rsp_ptr->header.dword_0);
++ u32 dword_1 = be32_to_cpu(hba->ucd_rsp_ptr->header.dword_1);
++ u8 *rsp = (u8 *)&hba->ucd_rsp_ptr->header;
++ u8 trans_type = (dword_0 >> 24) & 0xFF;
++ u8 hd = (trans_type >> 7) & 0x1;
++ u8 dd = (trans_type >> 6) & 0x1;
++ u8 flags = (dword_0 >> 16) & 0xFF;
++ u8 lun = (dword_0 >> 8) & 0xFF;
++ u8 task_tag = dword_0 & 0xFF;
++ u8 iid = (dword_1 >> 24) & 0x0F;
++ u8 ext_iid = (dword_1 >> 20) & 0x0F;
++ u8 response = (dword_1 >> 8) & 0xFF;
++ u8 basic_hdr_status = rsp[12];
++ u8 e2e_status = rsp[14];
++
++ dev_err(hba->dev, "%s: Reject UPIU: LUN=0x%02x Task Tag=0x%02x IID=0x%x
+EXT_IID=0x%x Response=0x%02x Basic Header Status=0x%02x E2E Status=0x%02x",
++ __func__, lun, task_tag, iid, ext_iid, response, basic_hdr_status,
+e2e_status);
++
++ if (response != 0x01)
++ dev_warn(hba->dev, "Reject UPIU: Unexpected Response=0x%02x (expected
+0x01 Target Failure)\n",
++ response);
++
++ if (hd && (e2e_status & BIT(0)))
++ dev_err(hba->dev, "Reject UPIU: Header E2ECRC error detected (HD=1, E2E
+Status bit0=1)\n");
++
++ if (dd && (e2e_status & BIT(1)))
++ dev_err(hba->dev, "Reject UPIU: Data E2ECRC error detected (DD=1, E2E
+Status bit1=1)\n");
++
++ if (!hd && !dd && (e2e_status & (BIT(0) | BIT(1))))
++ dev_warn(hba->dev, "Reject UPIU: Unexpected E2E Status=0x%02x when CRC is
+disabled (HD=0, DD=0)\n",
++ e2e_status);
++
++  /* task tag appears default 0 for UPIUs, it is a unique id for each UPIU
++   * If UFS host controller gets a reject upiu for the request UPIU then
++   * it does make sense to reattempt to issue the same request UPIU again
++   * a possible scenario where UFS device is not supporting though it is a
+valid
++   * transaction type.
++   */
++ return -EPERM;
++}
++
+ /**
+  * ufshcd_exec_dev_cmd - API for sending device management requests
+  */
+@@ -1053,10 +1103,7 @@ static int ufshcd_exec_dev_cmd(struct ufs_hba *hba,
+enum dev_cmd_type cmd_type,
+  err = ufshcd_copy_query_response(hba);
+  break;
+  case UPIU_TRANSACTION_REJECT_UPIU:
+- /* TODO: handle Reject UPIU Response */
+- err = -EPERM;
+- dev_err(hba->dev, "%s: Reject UPIU not fully implemented\n",
+- __func__);
++ err = ufshcd_handle_reject_upiu(hba);
+  break;
+  default:
+  err = -EINVAL;
+@@ -1687,10 +1734,7 @@ static int ufs_scsi_exec(struct udevice *scsi_dev,
+struct scsi_cmd *pccb)
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/30505
-
-=2D---------------------------------------------------------------
-Pull request efi-2026-07-rc6
-
-Documentation:
-
-* bootdev: fix typos
-* board: renesas: Document Renesas RZ/N1D and RZ/N1S as arm
-* board: renesas: Document Renesas Geist board support
-* board: renesas: Document Renesas Gray Hawk board support
-* board: renesas: Document Renesas Ironhide board support
-* android: fastboot: Document halt behaviour
-
-UEFI:
-
-* fix memory leak in efi_var_collect()
-* set revision field in block IO protocol
-* fix guid comparison in efi_selftest_loaded_image.c
-* fix use-after-free in efi_selftest_memory.c
-
-=2D---------------------------------------------------------------
-Denis Mukhin (1):
-       bootdev: fix typos
-
-Ilias Apalodimas (1):
-       efi_loader: fix memory leak in efi_var_collect
-
-Marek Vasut (4):
-       doc: board: renesas: Document Renesas RZ/N1D and RZ/N1S as arm
-       doc: board: renesas: Document Renesas Geist board support
-       doc: board: renesas: Document Renesas Gray Hawk board support
-       doc: board: renesas: Document Renesas Ironhide board support
-
-Mattijs Korpershoek (1):
-       doc: android: fastboot: Document halt behaviour
-
-Vincent Stehl=C3=A9 (3):
-       efi_selftest: fix guid comparison
-       lib/efi_loader: fix block io revision
-       efi_selftest: fix use-after-free
-
-  doc/android/fastboot.rst                     |  5 +++++
-  doc/board/renesas/renesas.rst                | 28=20
-++++++++++++++++++++++++++--
-  include/bootdev.h                            |  8 ++++----
-  lib/efi_loader/efi_disk.c                    |  1 +
-  lib/efi_loader/efi_var_common.c              |  4 +++-
-  lib/efi_selftest/efi_selftest_loaded_image.c |  4 ++--
-  lib/efi_selftest/efi_selftest_memory.c       | 17 +++++++++--------
-  7 files changed, 50 insertions(+), 17 deletions(-)
-
+  break;
+  case UPIU_TRANSACTION_REJECT_UPIU:
+- /* TODO: handle Reject UPIU Response */
+- dev_err(hba->dev,
+- "Reject UPIU not fully implemented\n");
+- return -EINVAL;
++ return ufshcd_handle_reject_upiu(hba);
+  default:
+  dev_err(hba->dev,
+  "Unexpected request response code = %x\n",
