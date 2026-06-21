@@ -4,143 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EA7CDB466
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 844CACD98F2
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 09:59:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DE3A8499C;
-	Sun, 21 Jun 2026 10:51:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 780298499C;
+	Sun, 21 Jun 2026 11:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TICJUbgd";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AP7W0Elv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0032849AE; Sun, 21 Jun 2026 10:51:30 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id D52D7849BA; Sun, 21 Jun 2026 11:59:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6ADC848DC
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:51:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F7E3848DC
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:59:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1782031886; x=1782636686; i=xypron.glpk@gmx.de;
- bh=BDm8ogOLejQs2OlOlO6f2Fvt2h5LIrmyqmPFZVgBC4o=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=TICJUbgdgz8cKoPLkJaRMbQEAnR+e6vQMl5qr9jpiW3UmmnzYiDVwdEEC1C0+B5C
- 1phWDFskYJ2Jxy03d5ysb3T8dMYNxVkf2+VnoUnmiK3j+FvnyYhLAWnxZm2stFE3G
- qDaNNd72GvmOA3LudXByejSqkEHmOUWIVIushGLgR3HwZ5MZshDDRAc5PwoXqN2+z
- NQoQDScD2XuqJrCRrIliTWRYjPDpTBKKTPwMrPzGiOeo35yFZLU7TPFeHWP4sTIyD
- N4+2ulyPdeEoyhTXdulHoP/puYWoK5euji2YCrHIOwSgTdlfujH1Sa/G5IKb8H/Z8
- 2sC8t/Hj8h6LPr94nA==
+ s=s31663417; t=1782035979; x=1782640779; i=xypron.glpk@gmx.de;
+ bh=LmBzB8muSxA+l2d3bZRsiVKnRIzl6OtODWGEC6Po1X4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=AP7W0ElvNPkygFuL5IWAF8eSoX4ipZ39ZAA13g7sJeuTcTdBG003P2qKz5wyUjK4
+ d0FqCJEI0Lv9buQwVhkyKM/PLihf08h9fZESP7vLe4xsnosC0Jf5rE4u7e5v8oIsr
+ N2SajcFsxn6chRSHtkdYeIgIDOHJoNQzOUXBDGGEWmHtvB+8XFPjnjk43dezMrFcX
+ zWFebBjTFuU3Vgm49mSj+Zm6uUr6fD4S4vaQ/ZLWpeNci1AKFBAP9PfqDdTx4fX9D
+ oKJqnKDIjC7QIwapV71Oz2eJwTuCbeYogk9uUOA5ls2hkrRRwb0lv5CZMPrBbYJCh
+ Yw+DmX1qzPvkb5gXQQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MDhhX-1wQSXB0lQV-003nEB; Sun, 21
- Jun 2026 10:51:26 +0200
-Message-ID: <95af39e2-2f7a-4886-b0dc-2aded14b46c3@gmx.de>
-Date: Sun, 21 Jun 2026 10:51:25 +0200
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNswE-1wqhRz2vV2-00NGOf; Sun, 21
+ Jun 2026 11:59:39 +0200
+Message-ID: <aaa976b5-693b-48db-bd26-6be981757413@gmx.de>
+Date: Sun, 21 Jun 2026 11:59:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] lib/efi_selftest: test block io revision
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
- <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Denis Mukhin <dmukhin@ford.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
+Subject: Pull request efi-2026-07-rc6
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:b+1Zq4AIPnN0mripDIBIOOzkHD7tLIbBDBEyuLhcI5GEMl+P93J
- GEHN17DoCfevBE8jBpMfMq70qqrXnLo7A/dRk6OmifAy9pMyg72bfx+GHWIA+u5T9Bp4DFk
- ce0oMEEDYMtlupSiy30mTfAvqrkPW/RvgdZbQUWO+BHmQbMPC0KKdmjTY5aqdU09mCsWy94
- 6hPNcl1GjpwJMQ72/wHwQ==
-UI-OutboundReport: notjunk:1;M01:P0:SGHEf6E8i0Q=;iqw7lglXLueAz+JRxEQicD0wSnw
- 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
- sJR9wKV9+Rpr+iOSqdpJsv4zrAk=
+X-Provags-ID: V03:K1:X7siHmLX8pAwdxjbHJjsCNnN0xOtAdPXqIF4hT2qHooSxpMa4cc
+ W6gAolF8d54BJhUoLzc/cxYTbQsyxR4C0TiYnlz4KEXUhf9GMvnCV27d/p/iEWPG60J3tsj
+ qF6rUCMfNFmg4kizvlkIDFluCSXKD1oR7zWQ5w+Eszlvvf8xiomzg7JovcK2mdNoHoo232L
+ OA61DO2/eRU6orMGp4g7g==
+UI-OutboundReport: notjunk:1;M01:P0:mEyNQBdc+h8=;m23cfMV1LhQ8XohHgPI25PhyDdI
+ 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
+ szZlTNFdGAbMQqK9MT6SU9ZQ8KYQLpttkasM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,111 +155,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/9/26 10:07, Vincent Stehl=C3=A9 wrote:
-> Enhance the unit test to verify all Revision fields of all the
-> EFI_BLOCK_IO_PROTOCOL structures.
-> As the unit test registers its own block io protocol for test purposes,
-> make sure to initialize its revision properly, as it will be verified as
-> well.
->=20
-> This can run on the sandbox with the following command:
->=20
->    ./u-boot -T -c 'setenv efi_selftest block device; bootefi selftest'
->=20
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->   lib/efi_selftest/efi_selftest_block_device.c | 50 ++++++++++++++++++++=
-++++++++
->   1 file changed, 50 insertions(+)
->=20
-> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_self=
-test/efi_selftest_block_device.c
-> index 9c4be834eeb..6fade3e9159 100644
-> --- a/lib/efi_selftest/efi_selftest_block_device.c
-> +++ b/lib/efi_selftest/efi_selftest_block_device.c
-> @@ -170,6 +170,7 @@ static efi_status_t decompress(u8 **image)
->   static struct efi_block_io_media media;
->  =20
->   static struct efi_block_io block_io =3D {
-> +	.revision =3D EFI_BLOCK_IO_PROTOCOL_REVISION3,
->   	.media =3D &media,
->   	.reset =3D reset,
->   	.read_blocks =3D read_blocks,
-> @@ -603,6 +604,55 @@ static int execute(void)
->   		return EFI_ST_FAILURE;
->   	}
->  =20
-> +	/* Get all handles with block io. */
-> +	ret =3D boottime->locate_handle_buffer(BY_PROTOCOL,
-> +					     &block_io_protocol_guid, NULL,
-> +					     &no_handles, &handles);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		efi_st_error("Failed to locate block io handles\n");
-> +		return EFI_ST_FAILURE;
-> +	}
+Dear Tom,
 
-Thank you for providing this test.
+The following changes since commit 922cf29dd8045f7348ce0f20145f46e8235faf2=
+1:
 
-The test should pass when invoking U-Boot without any block device.
+   Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-18=20
+11:41:22 -0600)
 
-EFI_NOT_FOUND should not be reported as failure instead you should leave=
-=20
-with EFI_ST_SUCCESS.
+are available in the Git repository at:
 
-> +
-> +	/*
-> +	 * Verify all handles with block io.
-> +	 * If an error is encountered, the loop exits early instead of
-> +	 * returning, to free the handles buffer.
-> +	 */
-> +	for (i =3D 0; i < no_handles; ++i) {
-> +		u64 rev;
-> +
-> +		ret =3D boottime->open_protocol(handles[i],
-> +					      &block_io_protocol_guid,
-> +					      (void *)&block_io_protocol,
-> +					      NULL, NULL,
-> +					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("Failed to open block io protocol %d\n",
-> +				     (unsigned int)i);
-> +			break;
-> +		}
-> +
-> +		/* Verify block io revision. */
-> +		rev =3D block_io_protocol->revision;
-> +		if (rev !=3D EFI_BLOCK_IO_PROTOCOL_REVISION2 &&
-> +		    rev !=3D EFI_BLOCK_IO_PROTOCOL_REVISION3) {
-> +			efi_st_error("Bad block io revision %d\n",
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
+tags/efi-2026-07-rc6
 
-The field is unsigned. So we need %u here.
+for you to fetch changes up to ad90d1ec8b43aa3d7ec5790db5c5740472e47c96:
 
-Best regards
+   doc: android: fastboot: Document halt behaviour (2026-06-21 10:56:37=20
++0200)
 
-Heinrich
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/30505
 
-> +				     (unsigned int)rev);
-> +			break;
-> +		}
-> +	}
-> +
-> +	/* Free handles buffer. */
-> +	ret =3D boottime->free_pool(handles);
-> +	if (ret !=3D EFI_SUCCESS) {
-> +		efi_st_error("Failed to free block io handles\n");
-> +		return EFI_ST_FAILURE;
-> +	}
-> +
-> +	/* If we exited the loop on block io handles early this is a failure. =
-*/
-> +	if (i !=3D no_handles)
-> +		return EFI_ST_FAILURE;
-> +
->   	return EFI_ST_SUCCESS;
->   }
->  =20
->=20
+=2D---------------------------------------------------------------
+Pull request efi-2026-07-rc6
+
+Documentation:
+
+* bootdev: fix typos
+* board: renesas: Document Renesas RZ/N1D and RZ/N1S as arm
+* board: renesas: Document Renesas Geist board support
+* board: renesas: Document Renesas Gray Hawk board support
+* board: renesas: Document Renesas Ironhide board support
+* android: fastboot: Document halt behaviour
+
+UEFI:
+
+* fix memory leak in efi_var_collect()
+* set revision field in block IO protocol
+* fix guid comparison in efi_selftest_loaded_image.c
+* fix use-after-free in efi_selftest_memory.c
+
+=2D---------------------------------------------------------------
+Denis Mukhin (1):
+       bootdev: fix typos
+
+Ilias Apalodimas (1):
+       efi_loader: fix memory leak in efi_var_collect
+
+Marek Vasut (4):
+       doc: board: renesas: Document Renesas RZ/N1D and RZ/N1S as arm
+       doc: board: renesas: Document Renesas Geist board support
+       doc: board: renesas: Document Renesas Gray Hawk board support
+       doc: board: renesas: Document Renesas Ironhide board support
+
+Mattijs Korpershoek (1):
+       doc: android: fastboot: Document halt behaviour
+
+Vincent Stehl=C3=A9 (3):
+       efi_selftest: fix guid comparison
+       lib/efi_loader: fix block io revision
+       efi_selftest: fix use-after-free
+
+  doc/android/fastboot.rst                     |  5 +++++
+  doc/board/renesas/renesas.rst                | 28=20
+++++++++++++++++++++++++++--
+  include/bootdev.h                            |  8 ++++----
+  lib/efi_loader/efi_disk.c                    |  1 +
+  lib/efi_loader/efi_var_common.c              |  4 +++-
+  lib/efi_selftest/efi_selftest_loaded_image.c |  4 ++--
+  lib/efi_selftest/efi_selftest_memory.c       | 17 +++++++++--------
+  7 files changed, 50 insertions(+), 17 deletions(-)
 
