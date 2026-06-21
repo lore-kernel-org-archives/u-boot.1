@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2381CDB466
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:20:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF9F2CDB466
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D33A84A0E;
+	by phobos.denx.de (Postfix) with ESMTP id 658B784A17;
 	Sun, 21 Jun 2026 10:19:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rJ6LaE/f";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hUaysfnp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65D2A849BB; Sun, 21 Jun 2026 10:19:28 +0200 (CEST)
+ id 07346849F0; Sun, 21 Jun 2026 10:19:29 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC23D849E8
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CDC3849AC
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-176-006-085-155.176.6.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0FAB142081; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0945A42075; 
  Sun, 21 Jun 2026 08:19:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782029964;
- bh=iF/7LaiyYb7PTyPxt5WaOm+yEUE3hKq/2DowPi9K/h0=;
+ s=20251003; t=1782029965;
+ bh=fDL2LgwQET+DPwh+Iezs5PfAQJ7BD1KIweUTeHnzb5I=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=rJ6LaE/fVoRV33HSc6oQst/gGdoGWHSaxnD8Ii5kiCEhos4BvXYZYIJLsxE1Mu0wz
- hdNR9KhUmab3jF/anDwaqHdeNgAj8dMO2buDguLxDhN46qgIcMMeWmkoXjh6NxesBl
- mvphIkVBduPzYLyTSluuTdRRYnlDqP8pLutJBtk0qhQc+GhtdVjspYjPFUJM27x/W5
- 0XaL1t8dp7qEWbE2npF6ffGuZan9q9Ir1Np/bfUBN33UDp5E+r2Cp5WjhvnXjEzxFY
- CovniAN8giZJkq4eQNUIhVNlM1rcXIkkNTYzg4TEtVjVn8LYFjJQoqUu59UHqu5oEq
- LmLyvvVasaY34XzTuORDe0AQc76bXbwh1XTheMQta5VGQ2vwvepc/vCahld77WVDar
- 9kRZYmb79FB6uL0uRrbBeGOfcUfXcCooBELYjX+78pB/YAHEc4Gr2PSIhFEhvEssIx
- KRaFipN/nuDj/xL3j8sA0qXTtbR9BogwsTeEw1JJeF1YciUvcDjlRUoMWlFrajOzWS
- 1uATzBIVjYGkes3f4mGd86VCujaGLOoM3mDlOTJ47zHi7stcKxZHv5lrss2dkhFV9+
- 4fKUG0FsrYZvjw8LIZ3SX2v8GvO0CB20dYSpv27jrkNeWtVS8/KoBR01pqDafNyj0f
- ozEH9zTHBcN8cYFPrzKA3Vq0=
+ b=hUaysfnpOV07GkKogzu0+U3MmMOWkglwNR17UdyxHNvncnELTpu8yUp/mWfTUPfQi
+ UVf4VjE4Qe67qhn/vTkSM6wEvlfmWNwKs3G3EcdReXYgORTSdGXnC2yeODSRF2DUXH
+ i0ELLDULAQiGZZ9XP862PzCnHsGTi02h8P4PtJ6VTbQ9Paoxzs1hXyCIP2SZUrdWgo
+ T4DOgfASvDuqlcVHnuGtIr5mQYkbYuokz/8EMVGwQKIpWhLmdgbYlMMw2gOQk+i2hc
+ zbqGA16fSGNHOD093E/TSfGI0GFhQ/vKVBebJ2lsgAEmvP+gACXPBqOBR9p1VMU7Ww
+ XZqIU3lJ7w1OK1ey8HQhQfZdZsnQDlgS6ZcqfPPlS4Z9qP2jqcOKovxj1yKFg07GGK
+ QXs5nFH3pQSmZ8N7btUU294KX/b2ZSwyFs3+nPAY/bjqtaP2wFYDZCAERwYEjpPpdo
+ ymQLmPkF5K3d9JsSyCdkN+wnGB3zPWv6aEo7LRWX7RIyL+U3rleCPch9w75RuQACmB
+ /MqtfnZIlWnIT9/zbJasAMQ2aCzCons8VZN0ZIvQIRBn/Dp7ijFoSg8bQytPzauyKW
+ Du3IlIknWTfaL/80Jem73Okr7CISHgyZIgOD2/42/8LfnzuGKEHWmWcoUnZIiPOUlt
+ eT9Ez6+oFDtmxyMDFSkO7gy0=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -56,10 +56,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 09/11] efi_loader: move efi_main and command loop to
- efi_app_common
-Date: Sun, 21 Jun 2026 10:19:13 +0200
-Message-ID: <20260621081915.19154-10-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 11/11] efi_loader: add ACPI table dump EFI app
+Date: Sun, 21 Jun 2026 10:19:15 +0200
+Message-ID: <20260621081915.19154-12-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
@@ -81,1024 +80,609 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the remaining shared code to efi_app_common to complete the
-refactoring:
-
-* efi_main() - common entry point; calls efi_app_init(), prints
-  app_banner, calls command_loop(), then clears the screen on exit.
-* struct efi_app_cmd - table entry holding the keyword, help text,
-  and a handler of type void (*fn)(u16 *args).
-* command_loop() - iterates app_cmds[], matches keywords with
-  starts_with(), and falls back to efi_app_help() on no match.
-* efi_app_help() - prints each table entry's help line plus the
-  built-in "exit" line.
-
-Each dump app is updated accordingly:
-* efi_main is removed; command_loop becomes non-static.
-* app_banner[] is defined at file scope with the application's
-  title string.
-* Per-app duplicate state (bs, handle, systable) is removed; apps
-  now use the common module's state.
-* do_help() and command_loop() are removed; each app instead provides
-  a file-scope app_cmds[] dispatch table whose entries point directly
-  to the do_* functions.
-
-dtbdump: the private printx(unsigned char) and print_hex_digit() are
-removed; call sites are updated to use the common printx(u64, u32)
-with a precision of 2.
-
-dbginfodump: the device-path-to-text protocol lookup is moved from
-efi_main into command_loop so the protocol handle is local to the
-function that uses it.
+Provide an EFI binary that can dump all ACPI tables to files
+<table_name>.dat. These can then be further analyzed by decompiling
+with iasl.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	new patch
+	Check checksums.
+	Check both RSDT and XSDT if both exist.
 ---
- lib/efi_loader/dbginfodump.c    |  95 ++++--------------------
- lib/efi_loader/dtbdump.c        | 109 ++++++---------------------
- lib/efi_loader/efi_app_common.c | 111 +++++++++++++++++++++++++++-
- lib/efi_loader/efi_app_common.h |  31 ++++----
- lib/efi_loader/initrddump.c     |  91 ++++-------------------
- lib/efi_loader/smbiosdump.c     | 126 +++++++-------------------------
- 6 files changed, 205 insertions(+), 358 deletions(-)
+ lib/efi_loader/Makefile   |   3 +-
+ lib/efi_loader/acpidump.c | 563 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 565 insertions(+), 1 deletion(-)
+ create mode 100644 lib/efi_loader/acpidump.c
 
-diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
-index b54c3830a66..0be41ed5fb5 100644
---- a/lib/efi_loader/dbginfodump.c
-+++ b/lib/efi_loader/dbginfodump.c
-@@ -5,26 +5,16 @@
-  * dbginfodump.efi prints out the content of the EFI_DEBUG_IMAGE_INFO_TABLE.
-  */
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 94ad6721a70..b9a3433a0c5 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -16,6 +16,7 @@ CFLAGS_efi_boottime.o += \
+ apps-$(CONFIG_RISCV) += boothart
+ apps-$(CONFIG_BOOTEFI_HELLO_COMPILE) += helloworld
+ apps-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbiosdump
++apps-$(CONFIG_GENERATE_ACPI_TABLE) += acpidump
+ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+ ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+ apps-y += dtbdump
+@@ -103,7 +104,7 @@ $(foreach f,$(apps-y) $(efi-obj-y),\
+ 	$(eval CFLAGS_REMOVE_$(f).o := $(CFLAGS_NON_EFI)))
  
--#include <efi_api.h>
- #include "efi_app_common.h"
+ # Link efi_app_common.o into each dump app
+-$(obj)/dbginfodump_efi.so $(obj)/dtbdump_efi.so \
++$(obj)/acpidump_efi.so $(obj)/dbginfodump_efi.so $(obj)/dtbdump_efi.so \
+ $(obj)/initrddump_efi.so $(obj)/smbiosdump_efi.so: $(obj)/efi_app_common.o
  
--/**
-- * BUFFER_SIZE - size of the command line input buffer
-- */
--#define BUFFER_SIZE 64
--
--static struct efi_simple_text_output_protocol *cout;
--static efi_handle_t handle;
--static struct efi_system_table *systable;
--static struct efi_boot_services *bs;
-+u16 app_banner[] = u"Debug Info Table Dump\r\n=====================\r\n\r\n";
- 
- static efi_guid_t guid_device_path_to_text_protocol =
- 	EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID;
- 
- static struct efi_device_path_to_text_protocol *device_path_to_text;
- 
--static const efi_guid_t dbg_info_guid =
--	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
-+static const efi_guid_t dbg_info_guid = EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
- 
- /* EFI_DEBUG_IMAGE_INFO_NORMAL */
- struct dbg_info {
-@@ -82,15 +72,6 @@ static void printp(void *p)
- 	print(str);
- }
- 
--/**
-- * do_help() - print help
-- */
--static void do_help(void)
--{
--	error(u"dump       - print debug info table\r\n");
--	error(u"exit       - exit the shell\r\n");
--}
--
- /**
-  * print_info() - print loaded image protocol
-  */
-@@ -118,20 +99,27 @@ static void print_info(struct efi_loaded_image *info)
- 
- /**
-  * do_dump() - print debug info table
+ always-y += $(foreach f,$(apps-y),$(f).efi)
+diff --git a/lib/efi_loader/acpidump.c b/lib/efi_loader/acpidump.c
+new file mode 100644
+index 00000000000..3e5635fce5a
+--- /dev/null
++++ b/lib/efi_loader/acpidump.c
+@@ -0,0 +1,563 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright 2026, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 + *
-+ * @args:	unused command arguments
-  */
--static efi_status_t do_dump(void)
-+static void do_dump(u16 * __maybe_unused args)
- {
- 	struct dbg_info_header *dbg;
-+
-+	if (!device_path_to_text)
-+		bs->locate_protocol(&guid_device_path_to_text_protocol, NULL,
-+				     (void **)&device_path_to_text);
-+
- 	u32 count;
- 
- 	dbg = get_config_table(&dbg_info_guid);
- 	if (!dbg) {
- 		error(u"Debug info table not found\r\n");
--		return EFI_NOT_FOUND;
-+		return;
- 	}
- 	if (dbg->status & 0x01) {
- 		error(u"Update in progress\r\n");
--		return EFI_LOAD_ERROR;
-+		return;
- 	}
- 	if (dbg->status & 0x02)
- 		print(u"Modified\r\n");
-@@ -164,60 +152,9 @@ static efi_status_t do_dump(void)
- 		print(u"\r\n");
- 	}
- 
--	return EFI_SUCCESS;
- }
- 
--/**
-- * efi_main() - entry point of the EFI application.
-- *
-- * @handle:	handle of the loaded image
-- * @systab:	system table
-- * Return:	status code
-- */
--efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
--			     struct efi_system_table *systab)
--{
--	efi_status_t ret;
--
--	efi_app_init(systab, image_handle);
--
--	handle = image_handle;
--	systable = systab;
--	cout = systable->con_out;
--	bs = systable->boottime;
--
--	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
--	cout->clear_screen(cout);
--	cout->set_attribute(cout, EFI_WHITE | EFI_BACKGROUND_BLACK);
--	print(u"Debug Info Table Dump\r\n=====================\r\n\r\n");
--	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
--
--	ret = bs->locate_protocol(&guid_device_path_to_text_protocol,
--				  NULL, (void **)&device_path_to_text);
--	if (ret != EFI_SUCCESS)	{
--		error(u"No device path to text protocol\r\n");
--		device_path_to_text = NULL;
--	}
--
--	for (;;) {
--		u16 command[BUFFER_SIZE];
--		u16 *pos;
--		efi_uintn_t ret;
--
--		print(u"=> ");
--		ret = efi_input(command, sizeof(command));
--		if (ret == EFI_ABORTED)
--			break;
--		pos = skip_whitespace(command);
--		if (starts_with(pos, u"exit"))
--			break;
--		else if (starts_with(pos, u"dump"))
--			do_dump();
--		else
--			do_help();
--	}
--
--	cout->set_attribute(cout, EFI_LIGHTGRAY | EFI_BACKGROUND_BLACK);
--	cout->clear_screen(cout);
--	return EFI_SUCCESS;
--}
-+struct efi_app_cmd app_cmds[] = {
-+	{ u"dump", u"dump - print debug info table\r\n", do_dump },
-+	{ }
-+};
-diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-index 0d56a41ecf6..ba15c198b51 100644
---- a/lib/efi_loader/dtbdump.c
-+++ b/lib/efi_loader/dtbdump.c
-@@ -10,15 +10,13 @@
- #include <linux/libfdt.h>
- #include "efi_app_common.h"
- 
--#define BUFFER_SIZE 64
- #define ESC 0x17
- 
- #define efi_size_in_pages(size) ((size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
- 
--static struct efi_boot_services *bs;
-+u16 app_banner[] = u"DTB Dump\r\n========\r\n\r\n";
-+
- static const efi_guid_t fdt_guid = EFI_FDT_GUID;
--static efi_handle_t handle;
--static struct efi_system_table *systable;
- static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
- static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
- 
-@@ -61,24 +59,12 @@ static u32 f2h(fdt32_t val)
- 	return *(u32 *)buf;
- }
- 
--/**
-- * do_help() - print help
-- */
--static void do_help(void)
--{
--	error(u"dump       - print device-tree\r\n");
--	error(u"load <dtb> - load device-tree from file\r\n");
--	error(u"save <dtb> - save device-tree to file\r\n");
--	error(u"exit       - exit the shell\r\n");
--}
--
- /**
-  * do_load() - load and install device-tree
-  *
-  * @filename:	file name
-- * Return:	status code
-  */
--static efi_status_t do_load(u16 *filename)
-+static void do_load(u16 *filename)
- {
- 	struct efi_dt_fixup_protocol *dt_fixup_prot;
- 	struct efi_simple_file_system_protocol *file_system;
-@@ -94,11 +80,9 @@ static efi_status_t do_load(u16 *filename)
- 				  (void **)&dt_fixup_prot);
- 	if (ret != EFI_SUCCESS) {
- 		error(u"Device-tree fix-up protocol not found\r\n");
--		return ret;
-+		return;
- 	}
- 
--	filename = skip_whitespace(filename);
--
- 	ret = open_file_system(&file_system);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
-@@ -206,16 +190,14 @@ out:
- 		if (ret2 != EFI_SUCCESS)
- 			error(u"Can't close volume\r\n");
- 	}
--	return ret;
- }
- 
- /**
-  * do_save() - save current device-tree
-  *
-  * @filename:	file name
-- * Return:	status code
-  */
--static efi_status_t do_save(u16 *filename)
-+static void do_save(u16 *filename)
- {
- 	struct fdt_header *dtb;
- 	efi_uintn_t dtb_size;
-@@ -224,23 +206,19 @@ static efi_status_t do_save(u16 *filename)
- 	dtb = get_config_table(&fdt_guid);
- 	if (!dtb) {
- 		error(u"DTB not found\r\n");
--		return EFI_NOT_FOUND;
-+		return;
- 	}
- 	if (f2h(dtb->magic) != FDT_MAGIC) {
- 		error(u"Wrong device tree magic\r\n");
--		return EFI_NOT_FOUND;
-+		return;
- 	}
- 	dtb_size = f2h(dtb->totalsize);
- 
--	filename = skip_whitespace(filename);
--
- 	ret = save_file(filename, dtb, dtb_size);
- 	if (ret == EFI_SUCCESS) {
- 		print(filename);
- 		print(u" written\r\n");
- 	}
--
--	return ret;
- }
- 
- /**
-@@ -357,8 +335,10 @@ static void print_mem_res_block(const struct fdt_reserve_entry *rsvblk)
- 
- /**
-  * do_dump() - print device-tree
++ * acpidump.efi saves the ACPI table set as file.
 + *
-+ * @args:	unused command arguments
-  */
--static efi_status_t do_dump(void)
-+static void do_dump(u16 * __maybe_unused args)
- {
- 	const unsigned char *fdt;
- 	struct fdt_header *header;
-@@ -370,14 +350,14 @@ static efi_status_t do_dump(void)
- 	fdt = get_config_table(&fdt_guid);
- 	if (!fdt) {
- 		error(u"DTB not found\r\n");
--		return EFI_NOT_FOUND;
-+		return;
- 	}
- 
- 	header = (struct fdt_header *)fdt;
- 	if (f2h(header->magic) != FDT_MAGIC) {
- 		error(u"Wrong device tree magic\r\n");
- 		error(u"Not a device-tree\r\n");
--		return EFI_LOAD_ERROR;
-+		return;
- 	}
- 
- 	pos = (u32 *)(fdt + f2h(header->off_dt_struct));
-@@ -430,7 +410,7 @@ static efi_status_t do_dump(void)
- 		case FDT_END_NODE:
- 			if (!level) {
- 				error(u"Extraneous end node\r\n");
--				return EFI_LOAD_ERROR;
-+				return;
- 			}
- 
- 			--level;
-@@ -441,66 +421,21 @@ static efi_status_t do_dump(void)
- 		case FDT_END:
- 			if (level) {
- 				error(u"Missing end node\r\n");
--				return EFI_LOAD_ERROR;
-+				return;
- 			}
- 			print(u"\r\n");
--			return EFI_SUCCESS;
-+			return;
- 		default:
- 			error(u"Invalid device tree token\r\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 	}
- 	error(u"Overrun\r\n");
--
--	return EFI_LOAD_ERROR;
- }
- 
--/**
-- * efi_main() - entry point of the EFI application.
-- *
-- * @handle:	handle of the loaded image
-- * @systab:	system table
-- * Return:	status code
-- */
--efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
--			     struct efi_system_table *systab)
--{
--	efi_app_init(systab, image_handle);
--
--	handle = image_handle;
--	systable = systab;
--	bs = systable->boottime;
--
--	color(EFI_LIGHTBLUE);
--	cls();
--	color(EFI_WHITE);
--	print(u"DTB Dump\r\n========\r\n\r\n");
--	color(EFI_LIGHTBLUE);
--
--	for (;;) {
--		u16 command[BUFFER_SIZE];
--		u16 *pos;
--		efi_uintn_t ret;
--
--		efi_drain_input();
--		print(u"=> ");
--		ret = efi_input(command, sizeof(command));
--		if (ret == EFI_ABORTED)
--			break;
--		pos = skip_whitespace(command);
--		if (starts_with(pos, u"exit"))
--			break;
--		else if (starts_with(pos, u"dump"))
--			do_dump();
--		else if (starts_with(pos, u"load "))
--			do_load(pos + 5);
--		else if (starts_with(pos, u"save "))
--			do_save(pos + 5);
--		else
--			do_help();
--	}
--
--	color(EFI_LIGHTGRAY);
--	cls();
--	return EFI_SUCCESS;
--}
-+struct efi_app_cmd app_cmds[] = {
-+	{ u"dump",  u"dump - print device-tree\r\n", do_dump },
-+	{ u"load ", u"load <dtb> - load device-tree from file\r\n", do_load },
-+	{ u"save ", u"save <dtb> - save device-tree to file\r\n", do_save },
-+	{ }
-+};
-diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
-index af9799557fc..49a47c686d7 100644
---- a/lib/efi_loader/efi_app_common.c
-+++ b/lib/efi_loader/efi_app_common.c
-@@ -9,6 +9,8 @@
- #include <part.h>
- #include "efi_app_common.h"
- 
-+#define CMD_BUFFER_SIZE 64
-+
- static efi_handle_t app_handle;
- static struct efi_simple_text_input_protocol *cin;
- static struct efi_simple_text_output_protocol *cout;
-@@ -39,7 +41,18 @@ static u16 *get_load_options(void)
- 	return loaded_image->load_options;
- }
- 
--void efi_app_init(struct efi_system_table *sys_table, efi_handle_t image_handle)
-+/**
-+ * efi_app_init() - initialize the EFI application
-+ *
-+ * Sets up global pointers to the EFI system table, boot services,
-+ * console I/O protocols, and the application handle. Processes
-+ * load options (e.g. "nocolor").
-+ *
-+ * @sys_table:		EFI system table
-+ * @image_handle:	image handle of the application
++ * Specifying 'nocolor' as load option data suppresses colored output and
++ * clearing of the screen.
 + */
-+static void efi_app_init(struct efi_system_table *sys_table,
-+			 efi_handle_t image_handle)
- {
- 	u16 *load_options;
- 
-@@ -304,3 +317,99 @@ efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
- 
- 	return ret;
- }
 +
-+extern u16 app_banner[];
-+extern struct efi_app_cmd app_cmds[];
++#include <efi_api.h>
++#include <part.h>
++#include <string.h>
++#include <acpi/acpi_table.h>
++#include "efi_app_common.h"
++
++#define MAX_FILENAME_LENGTH	32
++
++u16 app_banner[] = u"ACPI Dump\r\n=========\r\n\r\n";
++
++struct acpi_dump_table {
++	char signature[5];
++	uintptr_t addr;
++	u32 len;
++};
++
++static const efi_guid_t acpi2_guid = EFI_ACPI_TABLE_GUID;
++static const efi_guid_t acpi1_guid = EFI_GUID_EFI_ACPI1;
 +
 +/**
-+ * efi_app_help() - print application command help
++ * checksum_ok() - check if byte-sum of buffer is zero
 + *
-+ * Prints the help text for each entry in @cmds, then appends a fixed
-+ * line for the built-in "exit" command.
-+ *
-+ * @cmds:	null-fn-terminated application command table
++ * @buf:	buffer to check
++ * @len:	buffer length
++ * Return:    true if checksum is valid
 + */
-+static void efi_app_help(const struct efi_app_cmd *cmds)
++static bool checksum_ok(const void *buf, efi_uintn_t len)
 +{
-+	const struct efi_app_cmd *cmd;
++	const u8 *pos = buf;
++	u8 sum = 0;
 +
-+	for (cmd = cmds; cmd->fn; ++cmd)
-+		error((u16 *)cmd->help);
-+	error(u"exit - exit the shell\r\n");
++	for (; len; --len, ++pos)
++		sum += *pos;
++
++	return !sum;
 +}
 +
 +/**
-+ * command_loop() - read and dispatch application commands
++ * read_u32() - read 32-bit value via memcpy
 + *
-+ * Reads commands from the console and dispatches them via the
-+ * application's @app_cmds table.  Exits when the user types "exit"
-+ * or presses Escape.
++ * @src:	source address
++ * Return: value
 + */
-+static void command_loop(void)
++static u32 read_u32(const void *src)
 +{
-+	for (;;) {
-+		u16 command[CMD_BUFFER_SIZE];
-+		const struct efi_app_cmd *cmd;
-+		u16 *pos;
-+		bool found;
-+		efi_uintn_t ret;
++	u32 val;
 +
-+		efi_drain_input();
-+		print(u"=> ");
-+		ret = efi_input(command, CMD_BUFFER_SIZE);
-+		if (ret == EFI_ABORTED)
-+			break;
-+		pos = skip_whitespace(command);
-+		if (starts_with(pos, u"exit"))
-+			break;
-+		found = false;
-+		for (cmd = app_cmds; cmd->fn; ++cmd) {
-+			if (starts_with(pos, (u16 *)cmd->cmd)) {
-+				efi_uintn_t len;
++	memcpy(&val, src, sizeof(val));
 +
-+				for (len = 0; cmd->cmd[len]; ++len)
-+					;
-+				/*
-+				 * If the keyword ends with a space the
-+				 * command expects an argument.  Show help
-+				 * when none is provided.
-+				 */
-+				if (cmd->cmd[len - 1] == ' ' &&
-+				    !*skip_whitespace(pos + len)) {
-+					efi_app_help(app_cmds);
-+				} else {
-+					cmd->fn(pos + len);
-+				}
-+				found = true;
-+				break;
-+			}
-+		}
-+		if (!found)
-+			efi_app_help(app_cmds);
++	return val;
++}
++
++/**
++ * read_u64() - read 64-bit value via memcpy
++ *
++ * @src:	source address
++ * Return: value
++ */
++static u64 read_u64(const void *src)
++{
++	u64 val;
++
++	memcpy(&val, src, sizeof(val));
++
++	return val;
++}
++
++/**
++ * is_filename_char() - check if a signature byte is filename-safe
++ *
++ * @ch:	character to check
++ * Return: true if filename-safe
++ */
++static bool is_filename_char(char ch)
++{
++	return (ch >= 'A' && ch <= 'Z') ||
++	       (ch >= 'a' && ch <= 'z') ||
++	       (ch >= '0' && ch <= '9') || ch == '_';
++}
++
++/**
++ * append_uint_dec() - append decimal representation of integer to UTF-16 string
++ *
++ * @str:	destination UTF-16 string
++ * @pos:	current write position
++ * @size:	destination size in UTF-16 code units
++ * @val:	value to append
++ * Return:	updated write position
++ */
++static efi_uintn_t append_uint_dec(u16 *str, efi_uintn_t pos,
++				   efi_uintn_t size, u32 val)
++{
++	u16 tmp[11];
++	efi_uintn_t n = 0;
++	efi_uintn_t i;
++
++	if (!val)
++		tmp[n++] = u'0';
++	while (val && n < ARRAY_SIZE(tmp)) {
++		tmp[n++] = u'0' + val % 10;
++		val /= 10;
 +	}
++
++	for (i = 0; i < n && pos + 1 < size; ++i)
++		str[pos++] = tmp[n - i - 1];
++
++	if (pos < size)
++		str[pos] = 0;
++
++	return pos;
 +}
 +
 +/**
-+ * efi_main() - entry point of the EFI application
++ * u32_to_utf16_dec() - convert unsigned integer to UTF-16 decimal string
 + *
-+ * @image_handle:	image handle
-+ * @systab:	EFI system table
-+ * Return:         status code
++ * @dst:	destination UTF-16 buffer
++ * @dst_size:	destination size in UTF-16 code units
++ * @val:	value to convert
 + */
-+efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
-+			     struct efi_system_table *systab)
++static void u32_to_utf16_dec(u16 *dst, efi_uintn_t dst_size, u32 val)
 +{
-+	efi_app_init(systab, image_handle);
++	append_uint_dec(dst, 0, dst_size, val);
++}
 +
-+	color(EFI_WHITE);
-+	cls();
-+	print(app_banner);
-+	color(EFI_LIGHTBLUE);
++/**
++ * build_table_filename() - construct table filename
++ *
++ * @sig:	4-byte ACPI signature string
++ * @instance:	duplicate instance number (0 for first)
++ * @name:	output filename buffer (UTF-16)
++ * @name_size:	output filename buffer size in UTF-16 code units
++ */
++static void build_table_filename(const char *sig, u32 instance, u16 *name,
++				 efi_uintn_t name_size)
++{
++	efi_uintn_t pos = 0;
++	int i;
 +
-+	command_loop();
++	if (!name_size)
++		return;
 +
-+	color(EFI_LIGHTGRAY);
-+	cls();
++	for (i = 0; i < 4 && pos + 1 < name_size; ++i)
++		name[pos++] = is_filename_char(sig[i]) ? (u16)sig[i] : u'_';
++
++	if (instance)
++		pos = append_uint_dec(name, pos, name_size, instance);
++
++	if (pos + 4 < name_size) {
++		name[pos++] = u'.';
++		name[pos++] = u'd';
++		name[pos++] = u'a';
++		name[pos++] = u't';
++	}
++	name[pos] = 0;
++}
++
++/**
++ * get_acpi_rsdp_addr() - find ACPI RSDP via EFI config table GUID
++ *
++ * Return:	pointer to RSDP or NULL
++ */
++static struct acpi_rsdp *get_acpi_rsdp_addr(void)
++{
++	struct acpi_rsdp *rsdp;
++
++	rsdp = get_config_table(&acpi2_guid);
++	if (rsdp)
++		return rsdp;
++
++	rsdp = get_config_table(&acpi1_guid);
++
++	return rsdp;
++}
++
++/**
++ * add_table() - append one ACPI table entry
++ *
++ * @tables:	table array
++ * @table_count:	current table count
++ * @addr:	table address
++ * @len:	table length
++ * @sig:	4-character ACPI signature
++ * Return:	status code
++ */
++static efi_status_t add_table(struct acpi_dump_table *tables, u32 *table_count,
++			      uintptr_t addr, u32 len, const char *sig)
++{
++	struct acpi_dump_table *table = &tables[*table_count];
++
++	memset(table, 0, sizeof(*table));
++	memcpy(table->signature, sig, 4);
++	table->addr = addr;
++	table->len = len;
++	++*table_count;
 +
 +	return EFI_SUCCESS;
 +}
-diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
-index 77fe100afd9..7d1754d4d2a 100644
---- a/lib/efi_loader/efi_app_common.h
-+++ b/lib/efi_loader/efi_app_common.h
-@@ -10,16 +10,7 @@
- 
- #include <efi_api.h>
- 
--/**
-- * efi_app_init() - initialize common EFI application state
-- *
-- * Must be called from efi_main() before any other common function.
-- *
-- * @sys_table:          EFI system table
-- * @image_handle:       image handle
-- */
--void efi_app_init(struct efi_system_table *sys_table,
--		  efi_handle_t image_handle);
-+extern struct efi_boot_services *bs;
- 
- /**
-  * print() - print string
-@@ -95,8 +86,8 @@ efi_status_t efi_input_yn(void);
- /**
-  * efi_input() - read string from console
-  *
-- * @buffer:             input buffer
-- * @buffer_size:        buffer size
-+ * @buffer:	input buffer
-+ * @buffer_size:	buffer size
-  * Return:              status code
-  */
- efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
-@@ -104,7 +95,7 @@ efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
- /**
-  * get_config_table() - get configuration table
-  *
-- * @guid:       GUID of the configuration table
-+ * @guid:	GUID of the configuration table
-  * Return:      pointer to configuration table or NULL
-  */
- void *get_config_table(const efi_guid_t *guid);
-@@ -128,4 +119,18 @@ open_file_system(struct efi_simple_file_system_protocol **file_system);
-  */
- efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size);
- 
++
 +/**
-+ * struct efi_app_cmd - entry in the application command table
++ * has_table_addr() - check if a table address is already in the list
 + *
-+ * @cmd:	keyword; a trailing space indicates the command takes an argument
-+ * @help:	help text line printed by the built-in help handler
-+ * @fn:	handler; called with a pointer past the keyword
-+ *          (may be an empty string for no-argument commands)
++ * @tables:	table array
++ * @table_count:	number of used entries
++ * @addr:	table address to search
++ * Return: true if found
 + */
-+struct efi_app_cmd {
-+	const u16 *cmd;
-+	const u16 *help;
-+	void (*fn)(u16 *args);
-+};
++static bool has_table_addr(struct acpi_dump_table *tables, u32 table_count,
++			   uintptr_t addr)
++{
++	u32 i;
 +
- #endif /* _EFI_APP_COMMON_H */
-diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
-index c3e6f2b683f..ee93d151e81 100644
---- a/lib/efi_loader/initrddump.c
-+++ b/lib/efi_loader/initrddump.c
-@@ -12,15 +12,11 @@
- #include <efi_load_initrd.h>
- #include "efi_app_common.h"
- 
--#define BUFFER_SIZE 64
--#define ESC 0x17
--
- #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
- 
--static struct efi_system_table *systable;
--static struct efi_boot_services *bs;
-+u16 app_banner[] = u"INITRD Dump\r\n===========\r\n\r\n";
++	for (i = 0; i < table_count; ++i) {
++		if (tables[i].addr == addr)
++			return true;
++	}
 +
- static const efi_guid_t load_file2_guid = EFI_LOAD_FILE2_PROTOCOL_GUID;
--static efi_handle_t handle;
- 
- /*
-  * Device path defined by Linux to identify the handle providing the
-@@ -42,16 +38,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
- 	}
- };
- 
--/**
-- * do_help() - print help
-- */
--static void do_help(void)
--{
--	error(u"load          - show length and CRC32 of initial RAM disk\r\n");
--	error(u"save <initrd> - save initial RAM disk to file\r\n");
--	error(u"exit          - exit the shell\r\n");
--}
--
- /**
-  * get_initrd() - read initial RAM disk via EFI_LOAD_FILE2_PROTOCOL
-  *
-@@ -103,19 +89,18 @@ static efi_status_t get_initrd(void **initrd, efi_uintn_t *initrd_size)
- /**
-  * do_load() - load initial RAM disk and display CRC32 and length
-  *
-- * @filename:	file name
-- * Return:	status code
++	return false;
++}
++
++/**
++ * collect_tables() - parse ACPI table structure and collect ACPI tables
++ *
++ * @tablesp:	output table array
++ * @table_count:	output table count
++ * Return:	status code
++ */
++static efi_status_t collect_tables(struct acpi_dump_table **tablesp,
++				   u32 *table_count)
++{
++	struct acpi_rsdp *rsdp;
++	struct acpi_table_header *root;
++	struct acpi_dump_table *tables;
++	uintptr_t root_addr;
++	u32 rsdp_len, root_len, max_tables;
++	u32 i, entries, entry_size;
++	bool use_xsdt;
++	efi_status_t ret;
++
++	rsdp = get_acpi_rsdp_addr();
++	if (!rsdp) {
++		error(u"No ACPI configuration table\r\n");
++		return EFI_NOT_FOUND;
++	}
++	print(u"RSDP address: 0x");
++	printx((uintptr_t)rsdp, 2 * sizeof(void *));
++	print(u"\r\n");
++
++	if (memcmp(rsdp->signature, RSDP_SIG, sizeof(rsdp->signature))) {
++		error(u"Invalid RSDP signature\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	if (!checksum_ok(rsdp, 20)) {
++		error(u"Invalid RSDP checksum\r\n");
++		return EFI_LOAD_ERROR;
++	}
++
++	rsdp_len = rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0 ?
++		read_u32(&rsdp->length) : 20;
++	if (rsdp_len < 20) {
++		error(u"Invalid RSDP length\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	if (rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0) {
++		if (rsdp_len < sizeof(struct acpi_rsdp)) {
++			error(u"Invalid ACPI 2.0 RSDP length\r\n");
++			return EFI_LOAD_ERROR;
++		}
++		if (!checksum_ok(rsdp, rsdp_len)) {
++			error(u"Invalid ACPI 2.0 RSDP checksum\r\n");
++			return EFI_LOAD_ERROR;
++		}
++	}
++
++	if (rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0 &&
++	    read_u64(&rsdp->xsdt_address)) {
++		root_addr = read_u64(&rsdp->xsdt_address);
++		use_xsdt = true;
++	} else {
++		root_addr = read_u32(&rsdp->rsdt_address);
++		use_xsdt = false;
++	}
++
++	if (!root_addr) {
++		error(u"Invalid RSDT/XSDT address\r\n");
++		return EFI_LOAD_ERROR;
++	}
++
++	root = (struct acpi_table_header *)root_addr;
++	root_len = read_u32(&root->length);
++	if (root_len < sizeof(*root)) {
++		error(u"Invalid RSDT/XSDT length\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	if (use_xsdt && memcmp(root->signature, "XSDT", 4)) {
++		error(u"Invalid XSDT signature\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	if (!use_xsdt && memcmp(root->signature, "RSDT", 4)) {
++		error(u"Invalid RSDT signature\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	if (!checksum_ok(root, root_len)) {
++		error(u"Invalid RSDT/XSDT checksum\r\n");
++		return EFI_LOAD_ERROR;
++	}
++
++	entry_size = use_xsdt ? sizeof(u64) : sizeof(u32);
++	if ((root_len - sizeof(*root)) % entry_size) {
++		error(u"Invalid RSDT/XSDT entry list\r\n");
++		return EFI_LOAD_ERROR;
++	}
++	entries = (root_len - sizeof(*root)) / entry_size;
++	/* RSDP + root + each root entry + up to DSDT/FACS per entry */
++	max_tables = 2 + 3 * entries;
++
++	ret = bs->allocate_pool(EFI_LOADER_DATA,
++			       max_tables * sizeof(struct acpi_dump_table),
++			       (void **)&tables);
++	if (ret != EFI_SUCCESS) {
++		error(u"Out of memory\r\n");
++		return ret;
++	}
++	*table_count = 0;
++
++	ret = add_table(tables, table_count, (uintptr_t)rsdp, rsdp_len, "RSDP");
++	if (ret != EFI_SUCCESS)
++		goto err_out;
++
++	ret = add_table(tables, table_count, root_addr, root_len, root->signature);
++	if (ret != EFI_SUCCESS)
++		goto err_out;
++
++	for (i = 0; i < entries; ++i) {
++		uintptr_t addr;
++		struct acpi_table_header *table;
++		u32 len;
++
++		if (use_xsdt) {
++			u64 *entry = (u64 *)((u8 *)root + sizeof(*root));
++
++			addr = read_u64(&entry[i]);
++		} else {
++			u32 *entry = (u32 *)((u8 *)root + sizeof(*root));
++
++			addr = read_u32(&entry[i]);
++		}
++		if (!addr)
++			continue;
++		if (has_table_addr(tables, *table_count, addr))
++			continue;
++
++		table = (struct acpi_table_header *)addr;
++		len = read_u32(&table->length);
++		if (len < sizeof(*table)) {
++			error(u"Invalid ACPI table length\r\n");
++			ret = EFI_LOAD_ERROR;
++			goto err_out;
++		}
++		if (!checksum_ok(table, len)) {
++			error(u"Invalid ACPI table checksum\r\n");
++			ret = EFI_LOAD_ERROR;
++			goto err_out;
++		}
++
++		ret = add_table(tables, table_count, addr, len, table->signature);
++		if (ret != EFI_SUCCESS)
++			goto err_out;
++
++		/*
++		 * FADT (signature FACP) references DSDT and FACS outside RSDT/XSDT.
++		 * Include them so output matches acpidump -b style completeness.
++		 */
++		if (!memcmp(table->signature, "FACP", 4)) {
++			struct acpi_fadt *fadt = (struct acpi_fadt *)table;
++			uintptr_t dsdt_addr;
++			uintptr_t facs_addr;
++
++			if (len >= offsetof(struct acpi_fadt, x_dsdt) +
++				    sizeof(fadt->x_dsdt))
++				dsdt_addr = read_u64(&fadt->x_dsdt);
++			else
++				dsdt_addr = 0;
++			if (!dsdt_addr)
++				dsdt_addr = read_u32(&fadt->dsdt);
++			if (dsdt_addr && !has_table_addr(tables, *table_count,
++						      dsdt_addr)) {
++				struct acpi_table_header *dsdt;
++				u32 dsdt_len;
++
++				dsdt = (struct acpi_table_header *)dsdt_addr;
++				if (memcmp(dsdt->signature, "DSDT", 4)) {
++					error(u"Invalid DSDT signature\r\n");
++					ret = EFI_LOAD_ERROR;
++					goto err_out;
++				}
++				dsdt_len = read_u32(&dsdt->length);
++				if (dsdt_len < sizeof(*dsdt)) {
++					error(u"Invalid DSDT length\r\n");
++					ret = EFI_LOAD_ERROR;
++					goto err_out;
++				}
++				if (!checksum_ok(dsdt, dsdt_len)) {
++					error(u"Invalid DSDT checksum\r\n");
++					ret = EFI_LOAD_ERROR;
++					goto err_out;
++				}
++
++				ret = add_table(tables, table_count, dsdt_addr, dsdt_len,
++						dsdt->signature);
++				if (ret != EFI_SUCCESS)
++					goto err_out;
++			}
++
++			if (len >= offsetof(struct acpi_fadt, x_firmware_ctrl) +
++				    sizeof(fadt->x_firmware_ctrl))
++				facs_addr = read_u64(&fadt->x_firmware_ctrl);
++			else
++				facs_addr = 0;
++			if (!facs_addr)
++				facs_addr = read_u32(&fadt->firmware_ctrl);
++			if (facs_addr && !has_table_addr(tables, *table_count,
++						      facs_addr)) {
++				struct acpi_facs *facs;
++				u32 facs_len;
++
++				facs = (struct acpi_facs *)facs_addr;
++				if (memcmp(facs->signature, "FACS", 4)) {
++					error(u"Invalid FACS signature\r\n");
++					ret = EFI_LOAD_ERROR;
++					goto err_out;
++				}
++				facs_len = read_u32(&facs->length);
++				if (facs_len < sizeof(*facs)) {
++					error(u"Invalid FACS length\r\n");
++					ret = EFI_LOAD_ERROR;
++					goto err_out;
++				}
++				ret = add_table(tables, table_count, facs_addr, facs_len,
++						facs->signature);
++				if (ret != EFI_SUCCESS)
++					goto err_out;
++			}
++		}
++	}
++
++	*tablesp = tables;
++
++	return EFI_SUCCESS;
++
++err_out:
++	bs->free_pool(tables);
++	return ret;
++}
++
++/**
++ * do_check() - parse ACPI tables and report success/failure
++ *
 + * @args:	unused command arguments
-  */
--static efi_status_t do_load(void)
-+static void do_load(u16 * __maybe_unused args)
- {
- 	void *initrd;
- 	efi_uintn_t initrd_size;
- 	u32 crc32;
- 	efi_uintn_t ret;
- 
--	ret =  get_initrd(&initrd, &initrd_size);
-+	ret = get_initrd(&initrd, &initrd_size);
- 	if (ret != EFI_SUCCESS)
--		return ret;
-+		return;
- 	print(u"length: 0x");
- 	printx(initrd_size, 1);
- 	print(u"\r\n");
-@@ -123,22 +108,19 @@ static efi_status_t do_load(void)
- 	ret = bs->calculate_crc32(initrd, initrd_size, &crc32);
- 	if (ret != EFI_SUCCESS) {
- 		error(u"Calculating CRC32 failed\r\n");
--		return EFI_LOAD_ERROR;
-+		return;
- 	}
- 	print(u"crc32: 0x");
- 	printx(crc32, 8);
- 	print(u"\r\n");
--
--	return EFI_SUCCESS;
- }
- 
- /**
-  * do_save() - save initial RAM disk
-  *
-  * @filename:	file name
-- * Return:	status code
-  */
--static efi_status_t do_save(u16 *filename)
-+static void do_save(u16 *filename)
- {
- 	void *initrd;
- 	efi_uintn_t initrd_size;
-@@ -146,9 +128,7 @@ static efi_status_t do_save(u16 *filename)
- 
- 	ret = get_initrd(&initrd, &initrd_size);
- 	if (ret != EFI_SUCCESS)
--		return ret;
--
--	filename = skip_whitespace(filename);
-+		return;
- 
- 	ret = save_file(filename, initrd, initrd_size);
- 	if (ret == EFI_SUCCESS) {
-@@ -157,53 +137,10 @@ static efi_status_t do_save(u16 *filename)
- 	}
- 
- 	bs->free_pages((uintptr_t)initrd, efi_size_in_pages(initrd_size));
--	return ret;
- }
- 
--/**
-- * efi_main() - entry point of the EFI application.
-- *
-- * @handle:	handle of the loaded image
-- * @systab:	system table
-- * Return:	status code
-- */
--efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
--			     struct efi_system_table *systab)
--{
--	efi_app_init(systab, image_handle);
--
--	handle = image_handle;
--	systable = systab;
--	bs = systable->boottime;
--
--	color(EFI_WHITE);
--	cls();
--	print(u"INITRD Dump\r\n===========\r\n\r\n");
--	color(EFI_LIGHTBLUE);
--
--	for (;;) {
--		u16 command[BUFFER_SIZE];
--		u16 *pos;
--		efi_uintn_t ret;
--
--		efi_drain_input();
--		print(u"=> ");
--		ret = efi_input(command, sizeof(command));
--		if (ret == EFI_ABORTED)
--			break;
--		pos = skip_whitespace(command);
--		if (starts_with(pos, u"exit"))
--			break;
--		else if (starts_with(pos, u"load"))
--			do_load();
--		else if (starts_with(pos, u"save "))
--			do_save(pos + 5);
--		else
--			do_help();
--	}
--
--	color(EFI_LIGHTGRAY);
--	cls();
--
--	return EFI_SUCCESS;
--}
-+struct efi_app_cmd app_cmds[] = {
-+	{ u"load",  u"load - show length and CRC32 of initial RAM disk\r\n", do_load },
-+	{ u"save ", u"save <initrd> - save initial RAM disk to file\r\n", do_save },
-+	{ }
-+};
-diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index 8aa6f594a07..d334c1fa7cc 100644
---- a/lib/efi_loader/smbiosdump.c
-+++ b/lib/efi_loader/smbiosdump.c
-@@ -12,24 +12,11 @@
- #include <string.h>
- #include "efi_app_common.h"
- 
--#define BUFFER_SIZE 64
-+u16 app_banner[] = u"SMBIOS Dump\r\n===========\r\n\r\n";
- 
--static struct efi_boot_services *bs;
--static efi_handle_t handle;
--static struct efi_system_table *systable;
- static const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
- static const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
- 
--/**
-- * do_help() - print help
-- */
--static void do_help(void)
--{
--	error(u"check       - check SMBIOS table\r\n");
--	error(u"save <file> - save SMBIOS table to file\r\n");
--	error(u"exit        - exit the shell\r\n");
--}
--
- /**
-  * checksum() - calculate checksum
-  *
-@@ -50,9 +37,9 @@ static u8 checksum(void *buf, int len)
- /**
-  * do_check() - check SMBIOS table
-  *
-- * Return:	status code
-+ * @args:	unused command arguments
-  */
--static efi_status_t do_check(void)
++ */
 +static void do_check(u16 * __maybe_unused args)
- {
- 	struct smbios3_entry *smbios3_anchor;
- 	void *table, *table_end;
-@@ -65,16 +52,16 @@ static efi_status_t do_check(void)
- 		r = memcmp(smbios3_anchor->anchor, "_SM3_", 5);
- 		if (r) {
- 			error(u"Invalid anchor string\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		print(u"Found SMBIOS 3 entry point\n");
- 		if (smbios3_anchor->length != 0x18) {
- 			error(u"Invalid anchor length\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		if (checksum(smbios3_anchor, smbios3_anchor->length)) {
- 			error(u"Invalid anchor checksum\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		table = (void *)(uintptr_t)smbios3_anchor->struct_table_address;
- 		len = smbios3_anchor->table_maximum_size;
-@@ -85,37 +72,37 @@ static efi_status_t do_check(void)
- 		smbios_anchor = get_config_table(&smbios_guid);
- 		if (!smbios_anchor) {
- 			error(u"No SMBIOS table\n");
--			return EFI_NOT_FOUND;
-+			return;
- 		}
- 		r = memcmp(smbios_anchor->anchor, "_SM_", 4);
- 		if (r) {
- 			error(u"Invalid anchor string\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		print(u"Found SMBIOS 2.1 entry point\n");
- 		if (smbios_anchor->length != 0x1f) {
- 			error(u"Invalid anchor length\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		if (checksum(smbios_anchor, smbios_anchor->length)) {
- 			error(u"Invalid anchor checksum\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		r = memcmp(smbios_anchor->intermediate_anchor, "_DMI_", 5);
- 		if (r) {
- 			error(u"Invalid intermediate anchor string\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		if (checksum(&smbios_anchor->intermediate_anchor, 0xf)) {
- 			error(u"Invalid intermediate anchor checksum\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		table = (void *)(uintptr_t)smbios_anchor->struct_table_address;
- 		len = smbios_anchor->struct_table_length;
- 	}
- 
- 	table_end = (void *)((u8 *)table + len);
--	for (struct smbios_header *pos = table; ;) {
-+	for (struct smbios_header *pos = table;;) {
- 		u8 *str = (u8 *)pos + pos->length;
- 
- 		if (!*str)
-@@ -124,7 +111,7 @@ static efi_status_t do_check(void)
- 			for (; *str; ++str) {
- 				if ((void *)str >= table_end) {
- 					error(u"Structure table length exceeded\n");
--					return EFI_LOAD_ERROR;
-+					return;
- 				}
- 			}
- 			++str;
-@@ -132,40 +119,35 @@ static efi_status_t do_check(void)
- 		++str;
- 		if ((void *)str > table_end) {
- 			error(u"Structure table length exceeded\n");
--			return EFI_LOAD_ERROR;
-+			return;
- 		}
- 		if (pos->type == 0x7f) /* End of table */
- 			break;
- 		pos = (struct smbios_header *)str;
- 	}
- 
--	return EFI_SUCCESS;
++{
++	struct acpi_dump_table *tables;
++	u32 table_count;
++	u16 num[11] = {0};
++	efi_status_t ret;
++
++	ret = collect_tables(&tables, &table_count);
++	if (ret != EFI_SUCCESS)
++		return;
++
++	u32_to_utf16_dec(num, ARRAY_SIZE(num), table_count);
++
++	print(u"ACPI tables found: ");
++	print(num);
++	print(u"\r\n");
++
++	bs->free_pool(tables);
 +	print(u"OK\r\n");
- }
- 
- /**
-  * do_save() - save SMBIOS table
-  *
-  * @filename:	file name
-- * Return:	status code
-  */
--static efi_status_t do_save(u16 *filename)
-+static void do_save(u16 *filename)
- {
- 	struct smbios3_entry *smbios3_anchor;
- 	u8 *buf;
- 	efi_uintn_t size;
- 	efi_uintn_t ret;
- 
--	ret = do_check();
--	if (ret != EFI_SUCCESS)
--		return ret;
--
- 	smbios3_anchor = get_config_table(&smbios3_guid);
- 	if (smbios3_anchor) {
- 		size = 0x20 + smbios3_anchor->table_maximum_size;
- 		ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
- 		if (ret != EFI_SUCCESS) {
- 			error(u"Out of memory\n");
--			return ret;
-+			return;
- 		}
- 
- 		memset(buf, 0, size);
-@@ -183,9 +165,8 @@ static efi_status_t do_save(u16 *filename)
- 
- 		smbios_anchor = get_config_table(&smbios_guid);
- 		if (!smbios_anchor) {
--			/* Should not be reached after successful do_check() */
- 			error(u"No SMBIOS table\n");
--			return EFI_NOT_FOUND;
-+			return;
- 		}
- 
- 		size = 0x20 + smbios_anchor->struct_table_length;
-@@ -193,7 +174,7 @@ static efi_status_t do_save(u16 *filename)
- 		ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
- 		if (ret != EFI_SUCCESS) {
- 			error(u"Out of memory\n");
--			return ret;
-+			return;
- 		}
- 
- 		memset(buf, 0, size);
-@@ -210,8 +191,6 @@ static efi_status_t do_save(u16 *filename)
- 			checksum(smbios_anchor, smbios_anchor->length);
- 	}
- 
--	filename = skip_whitespace(filename);
--
- 	ret = save_file(filename, buf, size);
- 
- 	if (ret == EFI_SUCCESS) {
-@@ -220,65 +199,10 @@ static efi_status_t do_save(u16 *filename)
- 	}
- 
- 	bs->free_pool(buf);
--
--	return ret;
- }
- 
--/**
-- * command_loop() - process user commands
-- */
--static void command_loop(void)
--{
--	for (;;) {
--		u16 command[BUFFER_SIZE];
--		u16 *pos;
--		efi_uintn_t ret;
--
--		efi_drain_input();
--		print(u"=> ");
--		ret = efi_input(command, sizeof(command));
--		if (ret == EFI_ABORTED)
--			break;
--		pos = skip_whitespace(command);
--		if (starts_with(pos, u"exit")) {
--			break;
--		} else if (starts_with(pos, u"check")) {
--			ret = do_check();
--			if (ret == EFI_SUCCESS)
--				print(u"OK\n");
--		} else if (starts_with(pos, u"save ")) {
--			do_save(pos + 5);
--		} else {
--			do_help();
--		}
--	}
--}
--
--/**
-- * efi_main() - entry point of the EFI application.
-- *
-- * @handle:	handle of the loaded image
-- * @systab:	system table
-- * Return:	status code
-- */
--efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
--			     struct efi_system_table *systab)
--{
--	efi_app_init(systab, image_handle);
--
--	handle = image_handle;
--	systable = systab;
--	bs = systable->boottime;
--
--	color(EFI_WHITE);
--	cls();
--	print(u"SMBIOS Dump\r\n===========\r\n\r\n");
--	color(EFI_LIGHTBLUE);
--
--	command_loop();
--
--	color(EFI_LIGHTGRAY);
--	cls();
--
--	return EFI_SUCCESS;
--}
++}
++
++/**
++ * do_write() - ask filename and save ACPI table set
++ *
++ * @args:	unused command arguments
++ */
++static void do_write(u16 * __maybe_unused args)
++{
++	struct acpi_dump_table *tables;
++	u16 filename[MAX_FILENAME_LENGTH];
++	u32 table_count;
++	u32 i;
++	efi_status_t ret;
++
++	ret = collect_tables(&tables, &table_count);
++	if (ret != EFI_SUCCESS)
++		return;
++	if (!table_count) {
++		print(u"No ACPI tables found\r\n");
++		bs->free_pool(tables);
++		return;
++	}
++
++	for (i = 0; i < table_count; ++i) {
++		u8 *buf;
++		u32 instance = 0;
++		u32 same_type = 0;
++		u32 j;
++
++		for (j = 0; j < table_count; ++j) {
++			if (!memcmp(tables[i].signature, tables[j].signature, 4))
++				++same_type;
++		}
++
++		if (same_type > 1) {
++			/* Number duplicates starting at 1 for the first instance. */
++			for (j = 0; j <= i; ++j) {
++				if (!memcmp(tables[i].signature, tables[j].signature, 4))
++					++instance;
++			}
++		}
++
++		build_table_filename(tables[i].signature, instance, filename,
++				     ARRAY_SIZE(filename));
++
++		ret = bs->allocate_pool(EFI_LOADER_DATA, tables[i].len,
++				       (void **)&buf);
++		if (ret != EFI_SUCCESS) {
++			error(u"Out of memory\r\n");
++			break;
++		}
++
++		memcpy(buf, (void *)tables[i].addr, tables[i].len);
++		ret = save_file(filename, buf, tables[i].len);
++		if (ret == EFI_SUCCESS) {
++			print(filename);
++			print(u" written\r\n");
++		}
++
++		bs->free_pool(buf);
++		if (ret == EFI_ACCESS_DENIED)
++			continue;
++		if (ret != EFI_SUCCESS)
++			break;
++	}
++
++	bs->free_pool(tables);
++}
++
 +struct efi_app_cmd app_cmds[] = {
-+	{ u"check", u"check - check SMBIOS table\r\n", do_check },
-+	{ u"save ", u"save <file> - save SMBIOS table to file\r\n", do_save },
++	{ u"check", u"check - parse ACPI table list\r\n", do_check },
++	{ u"write", u"write - save one file per ACPI table\r\n", do_write },
 +	{ }
 +};
 -- 
