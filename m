@@ -4,144 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2C43CD98F0
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EA7CDB466
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 625A4849BA;
-	Sun, 21 Jun 2026 10:39:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DE3A8499C;
+	Sun, 21 Jun 2026 10:51:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="q8SzNxSC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TICJUbgd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58520849BB; Sun, 21 Jun 2026 10:39:54 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id C0032849AE; Sun, 21 Jun 2026 10:51:30 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 105938499C
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:39:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6ADC848DC
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:51:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1782031189; x=1782635989; i=xypron.glpk@gmx.de;
- bh=m5z432yl+SQCzB7Pwy+dpG+18zYiRTQfk5k3k5pKOYo=;
+ s=s31663417; t=1782031886; x=1782636686; i=xypron.glpk@gmx.de;
+ bh=BDm8ogOLejQs2OlOlO6f2Fvt2h5LIrmyqmPFZVgBC4o=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=q8SzNxSCV//v4R+sY1Kqu6QGP6j/EI4++PpX/cLB8GJSkWZhrUUNfSNlimVXAX9t
- JAJK+G0qyfeX/7H2ojn1dXCQqzJXiAhj2jzUMQbwy2lFzSn669dJlWT61iXU4LcTQ
- 6ZF1ib3jWuVX5ow0wwAJXw5eACYNjwoycwEG0Wk1GA+Ekxp8uHoRNFXzz2LS53ory
- zPpBGOa6pGtE+SPUcIDywl1Y/PF2fdGmcv8o5pba7GLfqITTtvmyBVJXaNGkB170G
- mInq+39yOPnS1vuIwNtORum11JOcgMqZD7TLbdUtI1xCiMqCo0b/gNbMNQjnbAUzn
- yyvZpGFKkV5gMh+lQQ==
+ b=TICJUbgdgz8cKoPLkJaRMbQEAnR+e6vQMl5qr9jpiW3UmmnzYiDVwdEEC1C0+B5C
+ 1phWDFskYJ2Jxy03d5ysb3T8dMYNxVkf2+VnoUnmiK3j+FvnyYhLAWnxZm2stFE3G
+ qDaNNd72GvmOA3LudXByejSqkEHmOUWIVIushGLgR3HwZ5MZshDDRAc5PwoXqN2+z
+ NQoQDScD2XuqJrCRrIliTWRYjPDpTBKKTPwMrPzGiOeo35yFZLU7TPFeHWP4sTIyD
+ N4+2ulyPdeEoyhTXdulHoP/puYWoK5euji2YCrHIOwSgTdlfujH1Sa/G5IKb8H/Z8
+ 2sC8t/Hj8h6LPr94nA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MBm1U-1wTV1d0OJo-001rOa; Sun, 21
- Jun 2026 10:39:49 +0200
-Message-ID: <39fc6fd8-cd7e-4cbd-8957-67b3215e5129@gmx.de>
-Date: Sun, 21 Jun 2026 10:39:48 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MDhhX-1wQSXB0lQV-003nEB; Sun, 21
+ Jun 2026 10:51:26 +0200
+Message-ID: <95af39e2-2f7a-4886-b0dc-2aded14b46c3@gmx.de>
+Date: Sun, 21 Jun 2026 10:51:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] lib/efi_loader: fix block io revision
+Subject: Re: [PATCH 2/2] lib/efi_selftest: test block io revision
 To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
- <20260609-rev-v1-1-0ccae5bf0fc5@arm.com>
+ <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260609-rev-v1-1-0ccae5bf0fc5@arm.com>
+In-Reply-To: <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:x3RircYZSCeo8KL/VgRi87OFFaa52Nq4YOUvfO2dhH6NK0pXWrg
- jOPdrE8/VEQG/wZQROueEW0IJGPzDYXZxTZgNGOpTK7147mA4LCpXdLAoDnImUJIw/CdOCq
- 8h8NyO1nRZG1bV2pHwZ3lQnAIz2/RbPSIYQQjz1OEtqVHUFf9gIci8RkOA6cmsKpfRCyQyG
- sPHBAiyPNiRzwSXCPtXwA==
-UI-OutboundReport: notjunk:1;M01:P0:TV3LdG8xHLY=;oxVzC6HNMGv0OYopjOYJePIZBRX
- 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
- ikRZ6wjq7inCU7YNts=
+X-Provags-ID: V03:K1:b+1Zq4AIPnN0mripDIBIOOzkHD7tLIbBDBEyuLhcI5GEMl+P93J
+ GEHN17DoCfevBE8jBpMfMq70qqrXnLo7A/dRk6OmifAy9pMyg72bfx+GHWIA+u5T9Bp4DFk
+ ce0oMEEDYMtlupSiy30mTfAvqrkPW/RvgdZbQUWO+BHmQbMPC0KKdmjTY5aqdU09mCsWy94
+ 6hPNcl1GjpwJMQ72/wHwQ==
+UI-OutboundReport: notjunk:1;M01:P0:SGHEf6E8i0Q=;iqw7lglXLueAz+JRxEQicD0wSnw
+ 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
+ sJR9wKV9+Rpr+iOSqdpJsv4zrAk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,35 +158,110 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 6/9/26 10:07, Vincent Stehl=C3=A9 wrote:
-> The Revision field of the EFI_BLOCK_IO_PROTOCOL structure must be set to
-> one of the two valid values [1], but this is not initialized in the
-> efi_loader; fix it.
+> Enhance the unit test to verify all Revision fields of all the
+> EFI_BLOCK_IO_PROTOCOL structures.
+> As the unit test registers its own block io protocol for test purposes,
+> make sure to initialize its revision properly, as it will be verified as
+> well.
 >=20
-> Link: https://uefi.org/specs/UEFI/2.11/13_Protocols_Media_Access.html#ef=
-i-block-io-protocol [1]
+> This can run on the sandbox with the following command:
+>=20
+>    ./u-boot -T -c 'setenv efi_selftest block device; bootefi selftest'
+>=20
 > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
 > ---
->   lib/efi_loader/efi_disk.c | 1 +
->   1 file changed, 1 insertion(+)
+>   lib/efi_selftest/efi_selftest_block_device.c | 50 ++++++++++++++++++++=
+++++++++
+>   1 file changed, 50 insertions(+)
 >=20
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index f8a57539ec6..4a3ace3a304 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -305,6 +305,7 @@ static efi_status_t EFIAPI efi_disk_flush_blocks(str=
-uct efi_block_io *this)
+> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_self=
+test/efi_selftest_block_device.c
+> index 9c4be834eeb..6fade3e9159 100644
+> --- a/lib/efi_selftest/efi_selftest_block_device.c
+> +++ b/lib/efi_selftest/efi_selftest_block_device.c
+> @@ -170,6 +170,7 @@ static efi_status_t decompress(u8 **image)
+>   static struct efi_block_io_media media;
+>  =20
+>   static struct efi_block_io block_io =3D {
+> +	.revision =3D EFI_BLOCK_IO_PROTOCOL_REVISION3,
+>   	.media =3D &media,
+>   	.reset =3D reset,
+>   	.read_blocks =3D read_blocks,
+> @@ -603,6 +604,55 @@ static int execute(void)
+>   		return EFI_ST_FAILURE;
+>   	}
+>  =20
+> +	/* Get all handles with block io. */
+> +	ret =3D boottime->locate_handle_buffer(BY_PROTOCOL,
+> +					     &block_io_protocol_guid, NULL,
+> +					     &no_handles, &handles);
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		efi_st_error("Failed to locate block io handles\n");
+> +		return EFI_ST_FAILURE;
+> +	}
+
+Thank you for providing this test.
+
+The test should pass when invoking U-Boot without any block device.
+
+EFI_NOT_FOUND should not be reported as failure instead you should leave=
+=20
+with EFI_ST_SUCCESS.
+
+> +
+> +	/*
+> +	 * Verify all handles with block io.
+> +	 * If an error is encountered, the loop exits early instead of
+> +	 * returning, to free the handles buffer.
+> +	 */
+> +	for (i =3D 0; i < no_handles; ++i) {
+> +		u64 rev;
+> +
+> +		ret =3D boottime->open_protocol(handles[i],
+> +					      &block_io_protocol_guid,
+> +					      (void *)&block_io_protocol,
+> +					      NULL, NULL,
+> +					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_st_error("Failed to open block io protocol %d\n",
+> +				     (unsigned int)i);
+> +			break;
+> +		}
+> +
+> +		/* Verify block io revision. */
+> +		rev =3D block_io_protocol->revision;
+> +		if (rev !=3D EFI_BLOCK_IO_PROTOCOL_REVISION2 &&
+> +		    rev !=3D EFI_BLOCK_IO_PROTOCOL_REVISION3) {
+> +			efi_st_error("Bad block io revision %d\n",
+
+The field is unsigned. So we need %u here.
+
+Best regards
+
+Heinrich
+
+> +				     (unsigned int)rev);
+> +			break;
+> +		}
+> +	}
+> +
+> +	/* Free handles buffer. */
+> +	ret =3D boottime->free_pool(handles);
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		efi_st_error("Failed to free block io handles\n");
+> +		return EFI_ST_FAILURE;
+> +	}
+> +
+> +	/* If we exited the loop on block io handles early this is a failure. =
+*/
+> +	if (i !=3D no_handles)
+> +		return EFI_ST_FAILURE;
+> +
+>   	return EFI_ST_SUCCESS;
 >   }
 >  =20
->   static const struct efi_block_io block_io_disk_template =3D {
-> +	.revision =3D EFI_BLOCK_IO_PROTOCOL_REVISION3,
->   	.reset =3D &efi_disk_reset,
->   	.read_blocks =3D &efi_disk_read_blocks,
->   	.write_blocks =3D &efi_disk_write_blocks,
 >=20
 
