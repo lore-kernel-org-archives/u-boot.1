@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC657CD98F0
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 19:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698E9CD98F2
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 19:02:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E32738499C;
-	Sun, 21 Jun 2026 21:02:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 300FF849BB;
+	Sun, 21 Jun 2026 21:02:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VGEqhJWK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H2WZ8o2N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FF6484874; Sun, 21 Jun 2026 18:47:10 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id E763484874; Sun, 21 Jun 2026 18:47:15 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD43E84119
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 18:47:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D776484119
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 18:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xerikasxx@gmail.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-7e2fd65f968so35799187b3.3
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 09:47:07 -0700 (PDT)
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-660e9fef1d4so3538456d50.1
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 09:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782060427; x=1782665227; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782060433; x=1782665233; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ldboJQ2opZXPF2QT3G3a5Y1Pc2McCcUhG10c8BpavnA=;
- b=VGEqhJWKGid9usS30//yg3xF8M7hYk7A7HH1llGcogK+IXN8YY4RF77c+zKuVuivTJ
- drKTD+Ij95dYQwxjS0q4QkdOxMtK0lNsgPJ1dg9AU0tWileacG1/JHzWKLh4Wa8JFVWJ
- A22MIf1BmzkupghyWtD3fYeCxh2YJfBkjhNWpCv6JtcAaS4IBZlSFzrgA9Zjn4pfPkkO
- OxBX3538bPMN4VPXT8m+njmzhG/QqXTqvt/ZoAhh4edgAKpnrNnlt3l/r39BzkfMIsnK
- aFhF4uYV9zaoWOM50/5nV6r0UvL3nP19JQgIhzyEJco/UDPN4rYjvmRINEi9gROPpn7N
- /gxA==
+ :reply-to; bh=fjuUz6uTucmOvvrSAyx760d0HnNGCFowoPAbxV9/R2A=;
+ b=H2WZ8o2Ngk5P6uhjbEaAKuc/orm9uoU8wWR28W679Szln6afAoEIdfYsrVv0s5fkMi
+ kV2rWOvFGAxIBrmB0kOBY9YTfrOjZGyIon8kUhvz93M6Jkc94BAarx7VcdEJIua5FYPT
+ FtDLXfDePNw41pJLj4RYrxiY8mVRlVo7fhqPnwxlXQs70n3e5yVfChQrQZr8LVa+SM+i
+ ohXOHKSlBMX6WuMuFH95meDt4AH5OWWI+cLep9tegO0YUhuYpLRm2S6VHRBVS0JpW3FV
+ ol6JhlmBTARA1xnZRItkhWnFlCPt1aT/eHcEWs/NtPnlZ6nlStQxs5pcoNzBQGC2uaEu
+ 6d3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782060427; x=1782665227;
+ d=1e100.net; s=20251104; t=1782060433; x=1782665233;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ldboJQ2opZXPF2QT3G3a5Y1Pc2McCcUhG10c8BpavnA=;
- b=NoL6ojeeoo+eFz9gJROmJjA/SUP5ssqn8mzj9iX9wFTvXZPdRuHZg+0oFIg+1xwYuG
- ppPn5jgLBA3X6fHE+tD+gzynLDgm1Z8gjPG8lbxCYEsHygdSK178hdkDEYKSgWM/aM4u
- c4g7xu9e1CX987QpgDNaGVpJzUJEmxysmrpY3Da7cssQgI/GFuI+YkugT809CAAiiMRL
- WCFUFZIgdfsagEtkOw+6TOuPfdqjLIiPk/p1qREanFl6RYjF/UHMjcvWBgtnMH2jOl5F
- FNOi6lWCBNSuYb/QkKEw/9B77EBqkSrdMEPapqAXi10O3msL6tenRYSPh/lCRuawtGNC
- vLpg==
+ bh=fjuUz6uTucmOvvrSAyx760d0HnNGCFowoPAbxV9/R2A=;
+ b=Yx3whWr5Cv5jKxRvq4uqG4JKJ1BaD/UB034LMyJqD1WxuijQO964G+b57OwFivT2Ed
+ BVBmxy2HxFfbuWMtR6T33uhGkpO99PReaSY32BCv47p9VS32u1sCEY4KkSFUyhkDY3iV
+ cVXl1lhmrPPWR/lPPhW+YqnZxHl2vFXc9OFW4LIsPgGPXqRw5bD1CLAvqcXvFnHpFmqn
+ j9LU8pCMy59Hzz1zfhND7RxnEC7j4PTg7NzguQ+ZPg0QhS3vKQQmRftaJywO2GTUecKR
+ ztLpHZieqXg6OxbZ+SHCroNYZI8dRzGRGO2itdG0VXyom4AWgfoIqB8SVflmKQGoyMFz
+ UStg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq/yXOctpR8kdAUiv96/d6dTGhBDNwXU/DKb0BNRZTAUHDuXQXkBK2FRZj+EFBLrEpNRsxuswI=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywjjw2bn3gimOs7zE2H6D0fYPWqepzfcK5iRohzr+0HWDC1G2iA
- 2gMdOiXY6G1VhgIt8AZq+OPxA5wkpQ8cAOZrIhGIOg/cms/ABWMBDwAU
-X-Gm-Gg: AfdE7cnYhYg9Vx6oz+vbii5xJkycElnF5cSmLsj0eCbSNcJ7clyTpxjKDFdmaI/UmcQ
- jQr7beP0vKfjKMuOLAidQpXhWGDXcjsnW+De7mScOlud8v8zL0EO0jfImepYNoinHm6PsyxAY/F
- BjonzPDgUeBAIH1RzB7mF/uFXN5g08802O/6TKq/lIlF6n1V7pBOndKzl2XSOiYarRvLfOIg2kg
- 00Bb+Ic7+gZpHZxj2N8FQ4n1g/O4nr6XhBVyK4O0n8stPrcrwzJW1cd5TtO0+dy5xVuEyyJncuv
- 5yhxHHU4HZQc8qZmp5Mio6Quab9xADKGabpGKrTgduYUHsbebGmgqPPTegeFzuPcivpMYiFgW9+
- XI13tAzFiqAyTV49OzEcuSC3wP/z7Mj91ycRtcNoOd7gpcI59RWq/Natf2OT///G7OiSRJrOQ8u
- llA/Da4LcAR5HYAmOzrsSmuVrukQ==
-X-Received: by 2002:a05:690e:43db:b0:660:265f:b4dc with SMTP id
- 956f58d0204a3-66312e4df19mr5148663d50.28.1782060426596; 
- Sun, 21 Jun 2026 09:47:06 -0700 (PDT)
+ AHgh+Rqhi3k8P7vEwxzIRCCAWSotuvkQIRS3ck96/Otv7xfW2Pf70bX1vJcgE+1FBj2oOz03/LVIFP8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzX5L5qr0L4TNUPw0cpDtYFB/4wDRVoDMHr2XKrwmXMGCqJWNJm
+ lEYia8LQa3XoFqGXJUzjcRNyYFG1azOxRKhp3Z+q4jh+YFzk1rJJtyg0
+X-Gm-Gg: AfdE7cmVtBrQxJkiIchW8bfrk51M5P8sHu8YYv8CIOrVee/U/BrzjinCfTlIaORtwdI
+ 8EIC/OkO1Qot1eLTxPb2CpM5Oj7exuhxZVvRW/Imzxr86Nz8APzTqVevW0ZReK4KiSt42pqULDp
+ C05E0QF0pjoBXIpVFFzpPe08wp7NcqelMi6Gtkv+CX0b0HlNm9ZWrfCb7pHrpdsu7okOpwdTts9
+ WvLNoXgqhi8K8RELVSte4ETFtRaE70tJHLKcW0U8jdDjrYUm7ynjnSoGGfpaBhiplnbS5fDBdhx
+ vDzIv8SEwWR32Wv8NOG3qpedTMSI3Bdm05i9b6HKu02yrzPOjj6nfs/lhFfS2HevJToFqGID9P9
+ MKbVk1Ch8+KKq6GJsDRt4B/3fn0CYP6Upus8yKFrOSGfT5RkovQFlorEb16tTOnUyCmb0yIkdJE
+ X+Zs+W93ObH8IVCXA=
+X-Received: by 2002:a53:b3c8:0:b0:65c:477a:2ad7 with SMTP id
+ 956f58d0204a3-662fc7ea94dmr8866708d50.25.1782060432591; 
+ Sun, 21 Jun 2026 09:47:12 -0700 (PDT)
 Received: from [192.168.0.39] ([79.133.247.80])
  by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-66314d8c3f1sm2498215d50.15.2026.06.21.09.47.01
+ 956f58d0204a3-66314d8c3f1sm2498215d50.15.2026.06.21.09.47.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jun 2026 09:47:06 -0700 (PDT)
+ Sun, 21 Jun 2026 09:47:12 -0700 (PDT)
 From: Erikas Bitovtas <xerikasxx@gmail.com>
-Date: Sun, 21 Jun 2026 19:46:22 +0300
-Subject: [PATCH 2/4] pinctrl: qcom: add SC7180 pinctrl driver
+Date: Sun, 21 Jun 2026 19:46:23 +0300
+Subject: [PATCH 3/4] qcom_defconfig: Enable SC7180 GCC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260621-sm7125-support-v1-2-5ad69a39781a@gmail.com>
+Message-Id: <20260621-sm7125-support-v1-3-5ad69a39781a@gmail.com>
 References: <20260621-sm7125-support-v1-0-5ad69a39781a@gmail.com>
 In-Reply-To: <20260621-sm7125-support-v1-0-5ad69a39781a@gmail.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
@@ -119,148 +119,26 @@ X-Virus-Status: Clean
 
 From: Vitalii Skorkin <nikroks@mainlining.org>
 
-This SoC features a pinctrl block with north, south, and west tiles
-accessible to the AP. Add support for SC7180 pinctrl block.
+Enable Generic Clock Controller for SC7180 in qcom_defconfig.
 
 Signed-off-by: Vitalii Skorkin <nikroks@mainlining.org>
 Signed-off-by: Erikas Bitovtas <xerikasxx@gmail.com>
 ---
- drivers/pinctrl/qcom/Kconfig          |  7 +++
- drivers/pinctrl/qcom/Makefile         |  1 +
- drivers/pinctrl/qcom/pinctrl-sc7180.c | 95 +++++++++++++++++++++++++++++++++++
- 3 files changed, 103 insertions(+)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 43100d5d981..8befcf24781 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -94,6 +94,13 @@ config PINCTRL_QCOM_SA8775P
- 	  Say Y here to enable support for pinctrl on the Snapdragon SA8775P SoC,
- 	  as well as the associated GPIO driver.
- 
-+config PINCTRL_QCOM_SC7180
-+	bool "Qualcomm SC7180 Pinctrl"
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon SC7180 SoC,
-+	  as well as the associated GPIO driver.
-+
- config PINCTRL_QCOM_SC7280
- 	bool "Qualcomm SC7280/QCM6490 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 87cb128c4d4..a7a9ad03569 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
- obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
-+obj-$(CONFIG_PINCTRL_QCOM_SC7180) += pinctrl-sc7180.o
- obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-sc7180.c b/drivers/pinctrl/qcom/pinctrl-sc7180.c
-new file mode 100644
-index 00000000000..5494094f2cb
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-sc7180.c
-@@ -0,0 +1,95 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Pinctrl driver for Qualcomm SC7180
-+ *
-+ * (C) Copyright 2024 Nikroks <nikroksm@mail.ru>
-+ *
-+ * Based on Linux Kernel driver
-+ */
-+
-+#include <dm.h>
-+
-+#include "pinctrl-qcom.h"
-+
-+#define WEST 0x00000000
-+#define SOUTH 0x00400000
-+#define NORTH 0x00800000
-+
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+static const struct pinctrl_function msm_pinctrl_functions[] = { { "qup12", 1 },
-+								 { "gpio", 0 },
-+								 { "sdc2_clk", 0 } };
-+
-+static const unsigned int sc7180_pin_offsets[] = {
-+	[0] = SOUTH,   [1] = SOUTH,   [2] = SOUTH,   [3] = SOUTH,   [4] = NORTH,
-+	[5] = NORTH,   [6] = NORTH,   [7] = NORTH,   [8] = NORTH,   [9] = NORTH,
-+	[10] = NORTH,  [11] = NORTH,  [12] = SOUTH,  [13] = SOUTH,  [14] = SOUTH,
-+	[15] = SOUTH,  [16] = SOUTH,  [17] = SOUTH,  [18] = SOUTH,  [19] = SOUTH,
-+	[20] = SOUTH,  [21] = NORTH,  [22] = NORTH,  [23] = SOUTH,  [24] = SOUTH,
-+	[25] = SOUTH,  [26] = SOUTH,  [27] = SOUTH,  [28] = SOUTH,  [29] = NORTH,
-+	[30] = SOUTH,  [31] = NORTH,  [32] = NORTH,  [33] = NORTH,  [34] = SOUTH,
-+	[35] = SOUTH,  [36] = SOUTH,  [37] = SOUTH,  [38] = SOUTH,  [39] = SOUTH,
-+	[40] = SOUTH,  [41] = SOUTH,  [42] = NORTH,  [43] = NORTH,  [44] = NORTH,
-+	[45] = NORTH,  [46] = NORTH,  [47] = NORTH,  [48] = NORTH,  [49] = WEST,
-+	[50] = WEST,   [51] = WEST,   [52] = WEST,   [53] = WEST,   [54] = WEST,
-+	[55] = WEST,   [56] = WEST,   [57] = WEST,   [58] = WEST,   [59] = NORTH,
-+	[60] = NORTH,  [61] = NORTH,  [62] = NORTH,  [63] = NORTH,  [64] = NORTH,
-+	[65] = NORTH,  [66] = NORTH,  [67] = NORTH,  [68] = NORTH,  [69] = WEST,
-+	[70] = NORTH,  [71] = NORTH,  [72] = NORTH,  [73] = WEST,   [74] = WEST,
-+	[75] = WEST,   [76] = WEST,   [77] = WEST,   [78] = WEST,   [79] = WEST,
-+	[80] = WEST,   [81] = WEST,   [82] = WEST,   [83] = WEST,   [84] = WEST,
-+	[85] = WEST,   [86] = NORTH,  [87] = NORTH,  [88] = NORTH,  [89] = NORTH,
-+	[90] = NORTH,  [91] = NORTH,  [92] = NORTH,  [93] = NORTH,  [94] = SOUTH,
-+	[95] = WEST,   [96] = WEST,   [97] = WEST,   [98] = WEST,   [99] = WEST,
-+	[100] = WEST,  [101] = NORTH, [102] = NORTH, [103] = NORTH, [104] = WEST,
-+	[105] = NORTH, [106] = NORTH, [107] = WEST,  [108] = SOUTH, [109] = SOUTH,
-+	[110] = NORTH, [111] = NORTH, [112] = NORTH, [113] = NORTH, [114] = NORTH,
-+	[115] = WEST,  [116] = WEST,  [117] = WEST,  [118] = WEST,  [119] = 0,
-+	[120] = 0,     [121] = 0,     [122] = 0,     [123] = 0,     [124] = 0,
-+	[125] = 0,     [126] = 0,
-+};
-+
-+static const char *sc7180_get_function_name(struct udevice *dev, unsigned int selector)
-+{
-+	return msm_pinctrl_functions[selector].name;
-+}
-+
-+static const char *sc7180_get_pin_name(struct udevice *dev, unsigned int selector)
-+{
-+	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+	return pin_name;
-+}
-+
-+static int sc7180_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+{
-+	return msm_pinctrl_functions[selector].val;
-+}
-+
-+static struct msm_pinctrl_data sc7180_data = {
-+	.pin_data = {
-+		.pin_offsets = sc7180_pin_offsets,
-+		.pin_count = ARRAY_SIZE(sc7180_pin_offsets),
-+		.special_pins_start = 120,
-+	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = sc7180_get_function_name,
-+	.get_function_mux = sc7180_get_function_mux,
-+	.get_pin_name = sc7180_get_pin_name,
-+};
-+
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{
-+		.compatible = "qcom,sc7180-pinctrl",
-+		.data = (ulong)&sc7180_data
-+	},
-+	{ /* Sentinel */ } };
-+
-+U_BOOT_DRIVER(pinctrl_sc7180) = {
-+	.name = "pinctrl_sc7180",
-+	.id = UCLASS_NOP,
-+	.of_match = msm_pinctrl_ids,
-+	.ops = &msm_pinctrl_ops,
-+	.bind = msm_pinctrl_bind,
-+};
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index ecd77388763..115a37f3bc3 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -73,6 +73,7 @@ CONFIG_CLK_QCOM_SM8150=y
+ CONFIG_CLK_QCOM_SM8250=y
+ CONFIG_CLK_QCOM_SM8550=y
+ CONFIG_CLK_QCOM_SM8650=y
++CONFIG_CLK_QCOM_SC7180=y
+ CONFIG_CLK_QCOM_SC7280=y
+ CONFIG_CLK_QCOM_X1E80100=y
+ CONFIG_DFU_MMC=y
 
 -- 
 2.54.0
