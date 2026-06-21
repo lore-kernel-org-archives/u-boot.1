@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05309CDB466
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:19:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A879CDB466
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:19:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA101849BF;
-	Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CF6E84901;
+	Sun, 21 Jun 2026 10:19:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KYdRcqQt";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XVNjpmGq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75961849D1; Sun, 21 Jun 2026 10:19:24 +0200 (CEST)
+ id 2DA40849EA; Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 212C4848DC
+ by phobos.denx.de (Postfix) with ESMTPS id E045E849AE
  for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-176-006-085-155.176.6.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 58F6442075; 
- Sun, 21 Jun 2026 08:19:20 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4E37342083; 
+ Sun, 21 Jun 2026 08:19:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782029960;
- bh=qDYhxTUngbWNLRRrbcNzFNFp9S5A3qPqajl9FGoEAgA=;
+ s=20251003; t=1782029961;
+ bh=k8p1A89nJKPvmLAikJ8h+a/GIDc2sGoQkyMwEqIeThM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=KYdRcqQtkPpU+X60BMA4yXXBMV8vwPCy5+lDi0ltUBWgjx0vJUH7S26yXCXfw5Vza
- Na0wusAqsu3q7T/ocQQQNupwZwbTMSqm2RvHXbRv1QEsEKe0vD9I+nFdBhTOL9HFJp
- ttcZ5pXN/b/6GDJpUm8gkqFEMzLp0fjXXKVO36V6qyQa+jW36A1i1klnIxq5EOEiti
- 0E9U6XegnE4Ii8GnyU47QiT1LCTOJD7DqKcbJJWIrpIJ2sb3R8LD4ialp6oYBTdWoz
- aScINCF36Y4GJhDAZqnc06rtglTfjzLI378nYvH9HH8vg0RwkF9eS5JGFbi0ylUslD
- GzMbhDEQ5/pm6SSr5QSfUONDcJ9Q+sBizljSPlACnARoxeR5wc5K4qCXEBNCDQOCxV
- sQkxZvg/yOBTA7ZmG9zWL0stKTZ17COcOIN+KgxrP2+sls/yFeWcTdBkTRUKfwhDtt
- AX2hrHov9PN2Q5iTwMMmTdbwC/TN/fxSzh/5SyE3T3jPVE1ZCvISTI3PNuNENSf56A
- s2tIbtuc7wtKJCcxO4ixERPmzP4x2Z1MVRvmt3yKJFUQCk+ceaWMswjlft8LYFamBY
- BObV/Yb1bm1DVhC0AfQJYbadZuiG5grVONxbG/pCgs3RY8rqn8lDJcIAuB8EjyzqyW
- wZAzWRDRjpc6/TRxg7PEQWhY=
+ b=XVNjpmGqq8+pWU6LIJ2jf7MQbmzoNtb/uP+1rMg8njP752CmboPWH06bXeoLepvSP
+ FcHvVCEylUVn01G5RbnSbU66E+Ox7CXwQwx/SnL4P7tFWqP1SA+H9cL0sAfK6+ZAzq
+ nTrNAa4K4l/UEnprSu/Ck5fYYCbfH2wq7Kj1+t4LcSKp9PFis9O/r341ne7T9c5B1j
+ foHdcIbFi9TkuB62yw+sv3Cf9x0tJrsPj2tRJWOKVbMVuu1JmjDyia/mhgSSlHOZKA
+ L48P0ONubrz9AyU2P8mAfli/B+8oRQMW2hIcAhzVciheK+l182su1XWhgpdu9Xg5l/
+ GA80XBT7Wl9Jfi2R3x0jrepvjHex483ckqjnJQDGnuKTqaIPo0W35O9Dpwh51mjYdp
+ o4rw3IQ/fv8+t31yctFrDmkfBaxT9wxzASikXqLd/8GOdlyOF27KAjzagn2jIlZLc+
+ 9bnIoC+tZQzUj8NzJl7EXSNwWylaLXAA1OVkloHcdW8fGGpWWoMSMBEccLq0qbW8vX
+ Zrk9s8AiWs13d8n8duK7M7bxpGvT2c7iYPu9Trfrwu59okX5C1RNk9tht11tRp7OTG
+ 13pX8cIxZDF8C43jiBYkzvW2PzRSUbXEZYFSHWYSTqGcLEW1CpNQk261XU76O3lbpm
+ GdeBKzOKYcDLK+F02MQpFIjQ=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -56,9 +56,10 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 01/11] efi_loader: use pointers in efi_acpi_register()
-Date: Sun, 21 Jun 2026 10:19:05 +0200
-Message-ID: <20260621081915.19154-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 03/11] efi_loader: smbiosdump: fix starts_with() returning
+ NULL
+Date: Sun, 21 Jun 2026 10:19:07 +0200
+Message-ID: <20260621081915.19154-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
@@ -80,94 +81,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Both efi_add_memory_map() and efi_install_configuration_table() expect
-pointers and not virtual sandbox addresses.
-
-We need to convert the virtual sandbox addresses in efi_acpi_register() to
-pointers in memory before using them.
+starts_with() is declared as returning bool, but the null-argument
+guard returned NULL (a pointer cast to bool) instead of false.
+While harmless on most platforms where NULL and false both have
+value zero, it is technically incorrect.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	Use uintptr_t instead of void* to simplify code.
-	Use EFI_PAGE_SIZE instead of EFI_PAGE_MASK.
+	new patch
 ---
- lib/efi_loader/efi_acpi.c | 35 +++++++++++++++++++++--------------
- 1 file changed, 21 insertions(+), 14 deletions(-)
+ lib/efi_loader/smbiosdump.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-index 046986a7518..43a6cbe6cfc 100644
---- a/lib/efi_loader/efi_acpi.c
-+++ b/lib/efi_loader/efi_acpi.c
-@@ -25,7 +25,8 @@ static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
-  */
- efi_status_t efi_acpi_register(void)
+diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
+index d7f2ba30a95..974728a43af 100644
+--- a/lib/efi_loader/smbiosdump.c
++++ b/lib/efi_loader/smbiosdump.c
+@@ -199,7 +199,7 @@ static u16 *skip_whitespace(u16 *pos)
+ static bool starts_with(u16 *string, u16 *keyword)
  {
--	ulong addr, start, end;
-+	void *addr;
-+	uintptr_t start, end;
- 	efi_status_t ret;
+ 	if (!string || !keyword)
+-		return NULL;
++		return false;
  
- 	/*
-@@ -37,39 +38,45 @@ efi_status_t efi_acpi_register(void)
- 	 */
- 	if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
- 		int size;
--		void *tab = bloblist_get_blob(BLOBLISTT_ACPI_TABLES, &size);
- 
--		if (!tab)
-+		addr = bloblist_get_blob(BLOBLISTT_ACPI_TABLES, &size);
-+
-+		if (!addr)
- 			return EFI_NOT_FOUND;
--		addr = map_to_sysmem(tab);
- 
--		ret = efi_add_memory_map(addr, size,
-+		ret = efi_add_memory_map((uintptr_t)addr, size,
- 					 EFI_ACPI_RECLAIM_MEMORY);
- 		if (ret != EFI_SUCCESS)
- 			return ret;
- 	} else {
- 		/* Mark space used for tables */
--		start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
--		end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
-+		start = ALIGN_DOWN((uintptr_t)map_sysmem(gd->arch.table_start,
-+							 0),
-+				   EFI_PAGE_SIZE);
-+		end = ALIGN((uintptr_t)map_sysmem(gd->arch.table_end, 0),
-+			    EFI_PAGE_SIZE);
- 		ret = efi_add_memory_map(start, end - start,
- 					 EFI_ACPI_RECLAIM_MEMORY);
- 		if (ret != EFI_SUCCESS)
- 			return ret;
- 		if (gd->arch.table_start_high) {
--			start = ALIGN_DOWN(gd->arch.table_start_high,
--					   EFI_PAGE_MASK);
--			end = ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
-+			start = ALIGN_DOWN(
-+				(uintptr_t)map_sysmem(gd->arch.table_start_high,
-+						      0),
-+				EFI_PAGE_SIZE);
-+			end = ALIGN((uintptr_t)map_sysmem(
-+					    gd->arch.table_end_high, 0),
-+				    EFI_PAGE_SIZE);
- 			ret = efi_add_memory_map(start, end - start,
- 						 EFI_ACPI_RECLAIM_MEMORY);
- 			if (ret != EFI_SUCCESS)
- 				return ret;
- 		}
- 
--		addr = gd_acpi_start();
-+		addr = map_sysmem(gd_acpi_start(), 0);
- 	}
--	log_debug("EFI using ACPI tables at %lx\n", addr);
-+	log_debug("EFI using ACPI tables at %p\n", addr);
- 
- 	/* And expose them to our EFI payload */
--	return efi_install_configuration_table(&acpi_guid,
--					       (void *)(ulong)addr);
-+	return efi_install_configuration_table(&acpi_guid, addr);
- }
+ 	for (; *keyword; ++string, ++keyword) {
+ 		if (*string != *keyword)
 -- 
 2.53.0
 
