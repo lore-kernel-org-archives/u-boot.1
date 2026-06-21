@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BAECD98F0
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:19:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325C4CD98F0
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 08:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52599849BA;
+	by phobos.denx.de (Postfix) with ESMTP id 8D4C4849C5;
 	Sun, 21 Jun 2026 10:19:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fuS1xTH0";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MwaHxnTb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D98A849ED; Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
+ id BC745849ED; Sun, 21 Jun 2026 10:19:25 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87FFB8499C
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB7E0849BF
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 10:19:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-176-006-085-155.176.6.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BF45242081; 
- Sun, 21 Jun 2026 08:19:20 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 35E6742075; 
+ Sun, 21 Jun 2026 08:19:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782029961;
- bh=+6gOZUozGJt9mdiNwP01DiGXx0p9Hhwv9VvP/xzz7Yo=;
+ s=20251003; t=1782029962;
+ bh=Tz5Fe6uO/HdyfjSPX39H/qpNT5NvtOyLOtiyR7TNss0=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=fuS1xTH0bW9LTx+lhVIFgc92zRzpvFZ4jkCXFx2ToUJ0MLCcxq3G+SrinOzSVwB7V
- 2ZtH/GILr3bi8mi/yueCeJxRZoZHsyQoLg6371IHvPYmVSlQtM+yZ81ZfvK8XXA1jG
- iutX1YBrngDLVucNI7F+N7dt4rZ9pNQCpeftJkOLg9iQ6YeSeaDLNgNj98v/n4FvZy
- Q6sT0NeiNfENWCeaYDfKp2lIyJk/5pFzZk1zIRXXRhmX9QKOQK3sIE+JHvjY0IxuDZ
- USc7vh4GXxHqwuas6KsT4h3ouTmtXf9NZpKXchtfFBXomRkaMspnQATmK+4+rORCpE
- AXwvHaZxBUsvVL7m4HX5tJPYnB64sZMBn1A16SyKCMLzzRx0Nsiv0jt37WyP7C8yEN
- vz53+8H5Yp4zYmIQWd5pkgf0XfGLACuuoRge7r7Fc9ByWjnWoVIQsHzg/YclsxYP0x
- djUhu+FuXHoZv/fZ5L486z1DVm5oIVBRexucaziKmINC8u6ZfiTkm4cW+KctEJ0z9S
- z2wD62o0rDohgSpH8vsn35SlWxuSYObFZ8++ml4MDzHC81jDr0Y8z8RGTbFcXOrD4p
- 483bnQdvkp9O27eWXz500ZXZxE7Knt2eIUpPObQ6sUP+tusx3CtfVLaHGEA5qJmW8s
- nQh6bAylR2opOWIRgEmhSnzE=
+ b=MwaHxnTbHowi6OdK4BmhIzmP5XXbFDn5bEOR1Pg+XnktK/Tw7uKBcvaUm+eIFlLeY
+ ezx7l400IrqBYL/KpqJVXY34bccPQb2GXzOXF/J725mFbrCFZyPXiz/L1DBP7nZmvr
+ 2so37RQGtX7q+chD6Kiq/JwpUqLmXV8YS+AhUsj+Nboz/Mr6jll6VI0bhZqqjmGpjx
+ VlrOMrRaY0Soo3aJOPm4xYGgaEttKEq1PLOVuhlEdxlaO1Z4/y/dYgZPe5jhw7c3j6
+ 38xgHzwLWOSTLZRPbaEti/PEqURqphda0rFJjbflRQ2ZVYZLsd3chJV1TnwC5TOVpa
+ fIvo+cw/Dm01/Fc+SpWPZtC40M+HDekY3hp0juPQ524ueuPwM2XS0b38MbHRVExLJu
+ bkoFASRbZLYUy51vwIk0y68XN61HHmWN0qP+kfjEcuXU7SDK+GXvnq4/BRICYWeep6
+ gXYnFpS28auUz3BACq0LE+rRC72B1h9uKjlP65MGQcqv7ZqGj/4sN2KQjpL4YkL1NQ
+ /MxnoCoPLwXEvAba/lKcDU9K/GUaG0HCACFJEz+ulHq9w5FPXVFwyS4TzNW3Hf8ja/
+ hhmuDUqyXA9AOpeLW/mFNkid4OCA5QQMzxkO+jBcXQ2qifuIUoUDAl7NJwpStmzIgw
+ VDxMvCIEm3GzOdxCGPbeMiaU=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -56,9 +56,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 02/11] efi_selftest: add ACPI configuration table test
-Date: Sun, 21 Jun 2026 10:19:06 +0200
-Message-ID: <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 05/11] efi_loader: add efi_app_common skeleton
+Date: Sun, 21 Jun 2026 10:19:09 +0200
+Message-ID: <20260621081915.19154-6-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
@@ -80,178 +80,897 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The new unit test checks if ACPI tables are available.
+The EFI dump applications (acpidump, dbginfodump, dtbdump, initrddump,
+smbiosdump) each contain duplicate copies of the same output and
+input helpers, and each has its own command loop. This patch series
+deduplicates that code by introducing a shared module.
 
-If yes, it checks if the RSDP correctly points to the RSDT or XSDT.
+Create lib/efi_loader/efi_app_common.c and efi_app_common.h to hold
+utilities shared across the EFI dump applications.
+
+This first patch adds the module skeleton:
+
+* State variables (app_handle, cout, bs, nocolor, systable) owned by
+  the common module.
+* efi_app_init() to initialize them from sys_table and image_handle,
+  including detecting the 'nocolor' load option via get_load_options()
+  and starts_with().
+* Output helpers: print(), printx(), color(), cls(), error().
+* starts_with() - test whether a UTF-16 string begins with a keyword.
+* get_load_options() - retrieve the load options of the loaded image.
+
+Eliminate the unused state variable cerr from all apps.
+
+The Makefile is updated to compile efi_app_common.o with EFI CFLAGS
+and link it into every dump application's .so so that later patches
+can progressively remove duplicate code from the individual apps.
+
+Each dump application is updated to call efi_app_init() at the start
+of its efi_main(), wiring up the common module's state before any
+common helper is invoked. The now-duplicate static definitions of
+cerr, cout, nocolor, starts_with() and get_load_options() are removed
+from all apps.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	Correct commit message %s/RSDT/RSDP/.
-	Check checksums.
-	Add a 'skipped' message.
+	new patch
 ---
- lib/efi_selftest/Makefile            |   1 +
- lib/efi_selftest/efi_selftest_acpi.c | 138 +++++++++++++++++++++++++++
- 2 files changed, 139 insertions(+)
- create mode 100644 lib/efi_selftest/efi_selftest_acpi.c
+ lib/efi_loader/Makefile         |  13 +++-
+ lib/efi_loader/dbginfodump.c    |  43 +----------
+ lib/efi_loader/dtbdump.c        | 133 ++------------------------------
+ lib/efi_loader/efi_app_common.c | 106 +++++++++++++++++++++++++
+ lib/efi_loader/efi_app_common.h |  67 ++++++++++++++++
+ lib/efi_loader/initrddump.c     | 126 +-----------------------------
+ lib/efi_loader/smbiosdump.c     | 100 +-----------------------
+ 7 files changed, 196 insertions(+), 392 deletions(-)
+ create mode 100644 lib/efi_loader/efi_app_common.c
+ create mode 100644 lib/efi_loader/efi_app_common.h
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 67102648703..c6cc2430bbf 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -17,6 +17,7 @@ CFLAGS_REMOVE_efi_selftest_miniapp_return.o := $(CFLAGS_NON_EFI)
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index d73ad43951b..94ad6721a70 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -94,10 +94,17 @@ $(obj)/efi_capsule.o: $(objtree)/capsule_esl_file FORCE
+ asflags-y += -DCAPSULE_ESL_PATH=\"$(objtree)/capsule_esl_file\"
+ endif
  
- obj-y += \
- efi_selftest.o \
-+efi_selftest_acpi.o \
- efi_selftest_bitblt.o \
- efi_selftest_config_table.o \
- efi_selftest_controllers.o \
-diff --git a/lib/efi_selftest/efi_selftest_acpi.c b/lib/efi_selftest/efi_selftest_acpi.c
+-# Set the C flags to add and remove for each app
+-$(foreach f,$(apps-y),\
++# Shared EFI objects (compiled with EFI flags, but not standalone apps)
++efi-obj-y += efi_app_common
++
++# Set the C flags to add and remove for each app and shared EFI object
++$(foreach f,$(apps-y) $(efi-obj-y),\
+ 	$(eval CFLAGS_$(f).o := $(CFLAGS_EFI) -Os -ffreestanding)\
+ 	$(eval CFLAGS_REMOVE_$(f).o := $(CFLAGS_NON_EFI)))
+ 
++# Link efi_app_common.o into each dump app
++$(obj)/dbginfodump_efi.so $(obj)/dtbdump_efi.so \
++$(obj)/initrddump_efi.so $(obj)/smbiosdump_efi.so: $(obj)/efi_app_common.o
++
+ always-y += $(foreach f,$(apps-y),$(f).efi)
+-targets += $(foreach f,$(apps-y),$(f).o)
++targets += $(foreach f,$(apps-y) $(efi-obj-y),$(f).o)
+diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
+index 55186bd03f4..2dcff2a11fe 100644
+--- a/lib/efi_loader/dbginfodump.c
++++ b/lib/efi_loader/dbginfodump.c
+@@ -6,13 +6,13 @@
+  */
+ 
+ #include <efi_api.h>
++#include "efi_app_common.h"
+ 
+ /**
+  * BUFFER_SIZE - size of the command line input buffer
+  */
+ #define BUFFER_SIZE 64
+ 
+-static struct efi_simple_text_output_protocol *cerr;
+ static struct efi_simple_text_output_protocol *cout;
+ static struct efi_simple_text_input_protocol *cin;
+ static efi_handle_t handle;
+@@ -41,28 +41,6 @@ struct dbg_info_header {
+ 	struct dbg_info **info;
+ };
+ 
+-/**
+- * print() - print string
+- *
+- * @string:	text
+- */
+-static void print(u16 *string)
+-{
+-	cout->output_string(cout, string);
+-}
+-
+-/**
+- * error() - print error string
+- *
+- * @string:	error text
+- */
+-static void error(u16 *string)
+-{
+-	cout->set_attribute(cout, EFI_LIGHTRED | EFI_BACKGROUND_BLACK);
+-	print(string);
+-	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
+-}
+-
+ /**
+  * printu() - print unsigned
+  *
+@@ -177,22 +155,6 @@ static u16 *skip_whitespace(u16 *pos)
+ 	return pos;
+ }
+ 
+-/**
+- * starts_with() - check if @string starts with @keyword
+- *
+- * @string:	string to search for keyword
+- * @keyword:	keyword to be searched
+- * Return:	true fi @string starts with the keyword
+- */
+-static bool starts_with(u16 *string, u16 *keyword)
+-{
+-	for (; *keyword; ++string, ++keyword) {
+-		if (*string != *keyword)
+-			return false;
+-	}
+-	return true;
+-}
+-
+ /**
+  * do_help() - print help
+  */
+@@ -310,9 +272,10 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+ {
+ 	efi_status_t ret;
+ 
++	efi_app_init(systab, image_handle);
++
+ 	handle = image_handle;
+ 	systable = systab;
+-	cerr = systable->std_err;
+ 	cout = systable->con_out;
+ 	cin = systable->con_in;
+ 	bs = systable->boottime;
+diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
+index 865edc33a97..1468955eb8c 100644
+--- a/lib/efi_loader/dtbdump.c
++++ b/lib/efi_loader/dtbdump.c
+@@ -6,18 +6,16 @@
+  * to a file.
+  */
+ 
+-#include <efi_api.h>
+ #include <efi_dt_fixup.h>
+ #include <part.h>
+ #include <linux/libfdt.h>
++#include "efi_app_common.h"
+ 
+ #define BUFFER_SIZE 64
+ #define ESC 0x17
+ 
+ #define efi_size_in_pages(size) ((size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+ 
+-static struct efi_simple_text_output_protocol *cerr;
+-static struct efi_simple_text_output_protocol *cout;
+ static struct efi_simple_text_input_protocol *cin;
+ static struct efi_boot_services *bs;
+ static const efi_guid_t fdt_guid = EFI_FDT_GUID;
+@@ -29,28 +27,6 @@ static struct efi_system_table *systable;
+ static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
+ static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
+ static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
+-static bool nocolor;
+-
+-/**
+- * color() - set foreground color
+- *
+- * @color:	foreground color
+- */
+-static void color(u8 color)
+-{
+-	if (!nocolor)
+-		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
+-}
+-
+-/**
+- * print() - print string
+- *
+- * @string:	text
+- */
+-static void print(u16 *string)
+-{
+-	cout->output_string(cout, string);
+-}
+ 
+ /**
+  * print_char() - print character
+@@ -74,54 +50,6 @@ static void print_char(unsigned char c)
+ 	print(out);
+ }
+ 
+-/**
+- * print_hex_digit() - print hexadecimal digit
+- *
+- * @digit:	digit to print
+- */
+-static void print_hex_digit(unsigned char digit)
+-{
+-	if (digit < 10)
+-		digit += '0';
+-	else
+-		digit += 'a' - 10;
+-	print_char(digit);
+-}
+-
+-/**
+- * printx() - print hexadecimal byte
+- *
+- * @val:	value to print
+- */
+-static void printx(unsigned char val)
+-{
+-	print_hex_digit(val >> 4);
+-	print_hex_digit(val & 0xf);
+-}
+-
+-/**
+- * cls() - clear screen
+- */
+-static void cls(void)
+-{
+-	if (nocolor)
+-		print(u"\r\n");
+-	else
+-		cout->clear_screen(cout);
+-}
+-
+-/**
+- * error() - print error string
+- *
+- * @string:	error text
+- */
+-static void error(u16 *string)
+-{
+-	color(EFI_LIGHTRED);
+-	print(string);
+-	color(EFI_LIGHTBLUE);
+-}
+-
+ /**
+  * efi_drain_input() - drain console input
+  */
+@@ -280,25 +208,6 @@ static u16 *skip_whitespace(u16 *pos)
+ 	return pos;
+ }
+ 
+-/**
+- * starts_with() - check if @string starts with @keyword
+- *
+- * @string:	string to search for keyword
+- * @keyword:	keyword to be searched
+- * Return:	true fi @string starts with the keyword
+- */
+-static bool starts_with(u16 *string, u16 *keyword)
+-{
+-	if (!string || !keyword)
+-		return false;
+-
+-	for (; *keyword; ++string, ++keyword) {
+-		if (*string != *keyword)
+-			return false;
+-	}
+-	return true;
+-}
+-
+ /**
+  * do_help() - print help
+  */
+@@ -639,7 +548,7 @@ static void print_property(const unsigned char *val, u32 len)
+ 		for (int i = 0; i < len; ++i) {
+ 			if (i)
+ 				print(u" ");
+-			printx(val[i]);
++			printx(val[i], 2);
+ 		}
+ 		print(u"]\"");
+ 	} else {
+@@ -651,7 +560,7 @@ static void print_property(const unsigned char *val, u32 len)
+ 					print(u" ");
+ 				print(u"0x");
+ 			}
+-			printx(val[i]);
++			printx(val[i], 2);
+ 		}
+ 		print(u">");
+ 	}
+@@ -670,11 +579,11 @@ static void print_mem_res_block(const struct fdt_reserve_entry *rsvblk)
+ 		print(u"/memreserve/ 0x");
+ 		val = (const unsigned char *)&rsvblk->address;
+ 		for (u32 i = 0; i < sizeof(u64); ++i)
+-			printx(val[i]);
++			printx(val[i], 2);
+ 		print(u" 0x");
+ 		val = (const unsigned char *)&rsvblk->size;
+ 		for (u32 i = 0; i < sizeof(u64); ++i)
+-			printx(val[i]);
++			printx(val[i], 2);
+ 		print(u";\r\n");
+ 	}
+ }
+@@ -779,30 +688,6 @@ static efi_status_t do_dump(void)
+ 	return EFI_LOAD_ERROR;
+ }
+ 
+-/**
+- * get_load_options() - get load options
+- *
+- * Return:	load options or NULL
+- */
+-static u16 *get_load_options(void)
+-{
+-	efi_status_t ret;
+-	struct efi_loaded_image *loaded_image;
+-
+-	ret = bs->open_protocol(handle, &loaded_image_guid,
+-				(void **)&loaded_image, NULL, NULL,
+-				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+-	if (ret != EFI_SUCCESS) {
+-		error(u"Loaded image protocol not found\r\n");
+-		return NULL;
+-	}
+-
+-	if (!loaded_image->load_options_size || !loaded_image->load_options)
+-		return NULL;
+-
+-	return loaded_image->load_options;
+-}
+-
+ /**
+  * efi_main() - entry point of the EFI application.
+  *
+@@ -813,18 +698,12 @@ static u16 *get_load_options(void)
+ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+ 			     struct efi_system_table *systab)
+ {
+-	u16 *load_options;
++	efi_app_init(systab, image_handle);
+ 
+ 	handle = image_handle;
+ 	systable = systab;
+-	cerr = systable->std_err;
+-	cout = systable->con_out;
+ 	cin = systable->con_in;
+ 	bs = systable->boottime;
+-	load_options = get_load_options();
+-
+-	if (starts_with(load_options, u"nocolor"))
+-		nocolor = true;
+ 
+ 	color(EFI_LIGHTBLUE);
+ 	cls();
+diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
 new file mode 100644
-index 00000000000..94cf5c00484
+index 00000000000..e9e9334acc7
 --- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_acpi.c
-@@ -0,0 +1,138 @@
++++ b/lib/efi_loader/efi_app_common.c
+@@ -0,0 +1,106 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * efi_selftest_acpi
++ * Common utilities for EFI dump applications
 + *
-+ * Copyright 2026, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-+ *
-+ * Check ACPI configuration table availability and root table presence.
++ * Copyright 2026, Heinrich Schuchardt <xypron.glpk@gmx.de>
 + */
 +
-+#include <efi_selftest.h>
-+#include <acpi/acpi_table.h>
++#include <efi_api.h>
++#include "efi_app_common.h"
 +
-+static const efi_guid_t acpi2_guid = EFI_ACPI_TABLE_GUID;
-+static const efi_guid_t acpi1_guid = EFI_GUID_EFI_ACPI1;
++static efi_handle_t app_handle;
++static struct efi_simple_text_output_protocol *cout;
++struct efi_boot_services *bs;
++static bool nocolor;
++static struct efi_system_table *systable;
++static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
 +
-+/**
-+ * checksum_ok() - check if byte-sum of buffer is zero
-+ *
-+ * @buf:	buffer to check
-+ * @len:	buffer length
-+ * Return:	true if checksum is valid
-+ */
-+static bool checksum_ok(const void *buf, efi_uintn_t len)
++static u16 *get_load_options(void)
 +{
-+	const u8 *pos = buf;
-+	u8 sum = 0;
++	efi_status_t ret;
++	struct efi_loaded_image *loaded_image;
 +
-+	for (; len; --len, ++pos)
-+		sum += *pos;
++	ret = bs->open_protocol(app_handle, &loaded_image_guid,
++				(void **)&loaded_image, NULL, NULL,
++				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
++	if (ret != EFI_SUCCESS) {
++		error(u"Loaded image protocol not found\r\n");
++		return NULL;
++	}
 +
-+	return !sum;
++	if (!loaded_image->load_options_size || !loaded_image->load_options)
++		return NULL;
++
++	return loaded_image->load_options;
 +}
 +
-+/**
-+ * check_rsdp() - validate RSDP signature, checksum and root table pointer
-+ *
-+ * @rsdp:	RSDP to validate
-+ * Return:	EFI_ST_SUCCESS or EFI_ST_FAILURE
-+ */
-+static int check_rsdp(struct acpi_rsdp *rsdp)
++void efi_app_init(struct efi_system_table *sys_table, efi_handle_t image_handle)
 +{
-+	struct acpi_table_header *table;
-+	u32 rsdt_addr32;
-+	u64 xsdt_addr64;
-+	uintptr_t rsdt_addr;
-+	uintptr_t xsdt_addr;
-+	u32 rsdp_len;
++	u16 *load_options;
 +
-+	if (memcmp(rsdp->signature, RSDP_SIG, sizeof(rsdp->signature))) {
-+		efi_st_error("Wrong RSDP signature\n");
-+		return EFI_ST_FAILURE;
-+	}
++	app_handle = image_handle;
++	systable = sys_table;
++	cout = sys_table->con_out;
++	bs = sys_table->boottime;
 +
-+	if (!checksum_ok(rsdp, 20)) {
-+		efi_st_error("Invalid RSDP checksum\n");
-+		return EFI_ST_FAILURE;
-+	}
++	load_options = get_load_options();
++	if (starts_with(load_options, u"nocolor"))
++		nocolor = true;
++}
 +
-+	if (rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0) {
-+		rsdp_len = rsdp->length;
-+		if (rsdp_len < sizeof(*rsdp)) {
-+			efi_st_error("Invalid ACPI 2.0 RSDP length\n");
-+			return EFI_ST_FAILURE;
++void print(u16 *string)
++{
++	cout->output_string(cout, string);
++}
++
++void printx(u64 val, u32 prec)
++{
++	int i;
++	u16 c;
++	u16 buf[16];
++	u16 *pos = buf;
++
++	for (i = 2 * sizeof(val) - 1; i >= 0; --i) {
++		c = (val >> (4 * i)) & 0x0f;
++		if (c || pos != buf || !i || i < prec) {
++			c += '0';
++			if (c > '9')
++				c += 'a' - '9' - 1;
++			*pos++ = c;
 +		}
-+		if (!checksum_ok(rsdp, rsdp_len)) {
-+			efi_st_error("Invalid RSDP extended checksum\n");
-+			return EFI_ST_FAILURE;
-+		}
 +	}
-+
-+	memcpy(&rsdt_addr32, &rsdp->rsdt_address, sizeof(rsdt_addr32));
-+	rsdt_addr = rsdt_addr32;
-+
-+	xsdt_addr64 = 0;
-+	if (rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0)
-+		memcpy(&xsdt_addr64, &rsdp->xsdt_address, sizeof(xsdt_addr64));
-+	xsdt_addr = xsdt_addr64;
-+
-+	if (!rsdt_addr && !xsdt_addr) {
-+		efi_st_error("Neither RSDT nor XSDT address is set\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	if (xsdt_addr) {
-+		table = (struct acpi_table_header *)xsdt_addr;
-+		if (!memcmp(table->signature, "XSDT", 4))
-+			return EFI_ST_SUCCESS;
-+		efi_st_error("XSDT address does not point to XSDT\n");
-+	}
-+
-+	if (rsdt_addr) {
-+		table = (struct acpi_table_header *)rsdt_addr;
-+		if (!memcmp(table->signature, "RSDT", 4))
-+			return EFI_ST_SUCCESS;
-+		efi_st_error("RSDT address does not point to RSDT\n");
-+	}
-+
-+	return EFI_ST_FAILURE;
++	*pos = 0;
++	print(buf);
 +}
++
++void color(u8 c)
++{
++	if (!nocolor)
++		cout->set_attribute(cout, c | EFI_BACKGROUND_BLACK);
++}
++
++void cls(void)
++{
++	if (nocolor)
++		print(u"\r\n");
++	else
++		cout->clear_screen(cout);
++}
++
++void error(u16 *string)
++{
++	color(EFI_LIGHTRED);
++	print(string);
++	color(EFI_LIGHTBLUE);
++}
++
++bool starts_with(u16 *string, u16 *keyword)
++{
++	if (!string)
++		return false;
++	for (; *keyword; ++string, ++keyword) {
++		if (*string != *keyword)
++			return false;
++	}
++	return true;
++}
+diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
+new file mode 100644
+index 00000000000..45c17a8ed99
+--- /dev/null
++++ b/lib/efi_loader/efi_app_common.h
+@@ -0,0 +1,67 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Common utilities for EFI dump applications
++ *
++ * Copyright 2026, Heinrich Schuchardt <xypron.glpk@gmx.de>
++ */
++
++#ifndef _EFI_APP_COMMON_H
++#define _EFI_APP_COMMON_H
++
++#include <efi_api.h>
 +
 +/**
-+ * efi_st_acpi_execute() - execute ACPI selftest
++ * efi_app_init() - initialize common EFI application state
 + *
-+ * Return: status code
++ * Must be called from efi_main() before any other common function.
++ *
++ * @sys_table:          EFI system table
++ * @image_handle:       image handle
 + */
-+static int efi_st_acpi_execute(void)
-+{
-+	struct acpi_rsdp *rsdp2, *rsdp1;
-+	int ret;
++void efi_app_init(struct efi_system_table *sys_table,
++		  efi_handle_t image_handle);
 +
-+	rsdp2 = efi_st_get_config_table(&acpi2_guid);
-+	rsdp1 = efi_st_get_config_table(&acpi1_guid);
++/**
++ * print() - print string
++ *
++ * @string:	text
++ */
++void print(u16 *string);
 +
-+	if (!rsdp2 && !rsdp1) {
-+		efi_st_printf("No ACPI configuration table, test skipped\n");
-+		return EFI_ST_SUCCESS;
-+	}
++/**
++ * printx() - print hexadecimal number
++ *
++ * @val:	value to print
++ * @prec:	minimum number of digits to print
++ */
++void printx(u64 val, u32 prec);
 +
-+	if (rsdp2) {
-+		ret = check_rsdp(rsdp2);
-+		if (ret != EFI_ST_SUCCESS)
-+			return ret;
-+	}
++/**
++ * color() - set foreground color
++ *
++ * @c:	foreground color
++ */
++void color(u8 c);
 +
-+	if (rsdp1) {
-+		ret = check_rsdp(rsdp1);
-+		if (ret != EFI_ST_SUCCESS)
-+			return ret;
-+	}
++/**
++ * cls() - clear screen
++ */
++void cls(void);
 +
-+	return EFI_ST_SUCCESS;
-+}
++/**
++ * error() - print error string
++ *
++ * @string:	error text
++ */
++void error(u16 *string);
 +
-+EFI_UNIT_TEST(acpi) = {
-+	.name = "acpi",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.execute = efi_st_acpi_execute,
-+};
++/**
++ * starts_with() - check if string starts with keyword
++ *
++ * @string:	UTF-16 string to check (may be NULL)
++ * @keyword:	UTF-16 keyword
++ * Return:      true if string starts with keyword
++ */
++bool starts_with(u16 *string, u16 *keyword);
++
++#endif /* _EFI_APP_COMMON_H */
+diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
+index 615119043d1..60f8a020e8c 100644
+--- a/lib/efi_loader/initrddump.c
++++ b/lib/efi_loader/initrddump.c
+@@ -9,8 +9,8 @@
+  * clearing of the screen.
+  */
+ 
+-#include <efi_api.h>
+ #include <efi_load_initrd.h>
++#include "efi_app_common.h"
+ 
+ #define BUFFER_SIZE 64
+ #define ESC 0x17
+@@ -19,15 +19,12 @@
+ 
+ static struct efi_system_table *systable;
+ static struct efi_boot_services *bs;
+-static struct efi_simple_text_output_protocol *cerr;
+-static struct efi_simple_text_output_protocol *cout;
+ static struct efi_simple_text_input_protocol *cin;
+ static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+ static const efi_guid_t guid_simple_file_system_protocol =
+ 					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
+ static const efi_guid_t load_file2_guid = EFI_LOAD_FILE2_PROTOCOL_GUID;
+ static efi_handle_t handle;
+-static bool nocolor;
+ 
+ /*
+  * Device path defined by Linux to identify the handle providing the
+@@ -49,76 +46,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
+ 	}
+ };
+ 
+-/**
+- * color() - set foreground color
+- *
+- * @color:	foreground color
+- */
+-static void color(u8 color)
+-{
+-	if (!nocolor)
+-		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
+-}
+-
+-/**
+- * print() - print string
+- *
+- * @string:	text
+- */
+-static void print(u16 *string)
+-{
+-	cout->output_string(cout, string);
+-}
+-
+-/**
+- * cls() - clear screen
+- */
+-static void cls(void)
+-{
+-	if (nocolor)
+-		print(u"\r\n");
+-	else
+-		cout->clear_screen(cout);
+-}
+-
+-/**
+- * error() - print error string
+- *
+- * @string:	error text
+- */
+-static void error(u16 *string)
+-{
+-	color(EFI_LIGHTRED);
+-	print(string);
+-	color(EFI_LIGHTBLUE);
+-}
+-
+-/*
+- * printx() - print hexadecimal number
+- *
+- * @val:	value to print;
+- * @prec:	minimum number of digits to print
+- */
+-static void printx(u64 val, u32 prec)
+-{
+-	int i;
+-	u16 c;
+-	u16 buf[16];
+-	u16 *pos = buf;
+-
+-	for (i = 2 * sizeof(val) - 1; i >= 0; --i) {
+-		c = (val >> (4 * i)) & 0x0f;
+-		if (c || pos != buf || !i || i < prec) {
+-			c += '0';
+-			if (c > '9')
+-				c += 'a' - '9' - 1;
+-			*pos++ = c;
+-		}
+-	}
+-	*pos = 0;
+-	print(buf);
+-}
+-
+ /**
+  * efi_drain_input() - drain console input
+  */
+@@ -239,25 +166,6 @@ static u16 *skip_whitespace(u16 *pos)
+ 	return pos;
+ }
+ 
+-/**
+- * starts_with() - check if @string starts with @keyword
+- *
+- * @string:	string to search for keyword
+- * @keyword:	keyword to be searched
+- * Return:	true if @string starts with the keyword
+- */
+-static bool starts_with(u16 *string, u16 *keyword)
+-{
+-	if (!string || !keyword)
+-		return false;
+-
+-	for (; *keyword; ++string, ++keyword) {
+-		if (*string != *keyword)
+-			return false;
+-	}
+-	return true;
+-}
+-
+ /**
+  * do_help() - print help
+  */
+@@ -434,30 +342,6 @@ out:
+ 	return ret;
+ }
+ 
+-/**
+- * get_load_options() - get load options
+- *
+- * Return:	load options or NULL
+- */
+-static u16 *get_load_options(void)
+-{
+-	efi_status_t ret;
+-	struct efi_loaded_image *loaded_image;
+-
+-	ret = bs->open_protocol(handle, &loaded_image_guid,
+-				(void **)&loaded_image, NULL, NULL,
+-				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+-	if (ret != EFI_SUCCESS) {
+-		error(u"Loaded image protocol not found\r\n");
+-		return NULL;
+-	}
+-
+-	if (!loaded_image->load_options_size || !loaded_image->load_options)
+-		return NULL;
+-
+-	return loaded_image->load_options;
+-}
+-
+ /**
+  * efi_main() - entry point of the EFI application.
+  *
+@@ -468,18 +352,12 @@ static u16 *get_load_options(void)
+ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+ 			     struct efi_system_table *systab)
+ {
+-	u16 *load_options;
++	efi_app_init(systab, image_handle);
+ 
+ 	handle = image_handle;
+ 	systable = systab;
+-	cerr = systable->std_err;
+-	cout = systable->con_out;
+ 	cin = systable->con_in;
+ 	bs = systable->boottime;
+-	load_options = get_load_options();
+-
+-	if (starts_with(load_options, u"nocolor"))
+-		nocolor = true;
+ 
+ 	color(EFI_WHITE);
+ 	cls();
+diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
+index 494c3d18945..e19214d798f 100644
+--- a/lib/efi_loader/smbiosdump.c
++++ b/lib/efi_loader/smbiosdump.c
+@@ -8,15 +8,13 @@
+  * clearing of the screen.
+  */
+ 
+-#include <efi_api.h>
+ #include <part.h>
+ #include <smbios.h>
+ #include <string.h>
++#include "efi_app_common.h"
+ 
+ #define BUFFER_SIZE 64
+ 
+-static struct efi_simple_text_output_protocol *cerr;
+-static struct efi_simple_text_output_protocol *cout;
+ static struct efi_simple_text_input_protocol *cin;
+ static struct efi_boot_services *bs;
+ static efi_handle_t handle;
+@@ -27,51 +25,6 @@ static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+ static const efi_guid_t guid_simple_file_system_protocol =
+ 					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
+ static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
+-static bool nocolor;
+-
+-/**
+- * color() - set foreground color
+- *
+- * @color:	foreground color
+- */
+-static void color(u8 color)
+-{
+-	if (!nocolor)
+-		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
+-}
+-
+-/**
+- * print() - print string
+- *
+- * @string:	text
+- */
+-static void print(u16 *string)
+-{
+-	cout->output_string(cout, string);
+-}
+-
+-/**
+- * cls() - clear screen
+- */
+-static void cls(void)
+-{
+-	if (nocolor)
+-		print(u"\r\n");
+-	else
+-		cout->clear_screen(cout);
+-}
+-
+-/**
+- * error() - print error string
+- *
+- * @string:	error text
+- */
+-static void error(u16 *string)
+-{
+-	color(EFI_LIGHTRED);
+-	print(string);
+-	color(EFI_LIGHTBLUE);
+-}
+ 
+ /**
+  * efi_input_yn() - get answer to yes/no question
+@@ -189,25 +142,6 @@ static u16 *skip_whitespace(u16 *pos)
+ 	return pos;
+ }
+ 
+-/**
+- * starts_with() - check if @string starts with @keyword
+- *
+- * @string:	string to search for keyword
+- * @keyword:	keyword to be searched
+- * Return:	true fi @string starts with the keyword
+- */
+-static bool starts_with(u16 *string, u16 *keyword)
+-{
+-	if (!string || !keyword)
+-		return false;
+-
+-	for (; *keyword; ++string, ++keyword) {
+-		if (*string != *keyword)
+-			return false;
+-	}
+-	return true;
+-}
+-
+ /**
+  * open_file_system() - open simple file system protocol
+  *
+@@ -532,30 +466,6 @@ static efi_status_t do_save(u16 *filename)
+ 	return ret;
+ }
+ 
+-/**
+- * get_load_options() - get load options
+- *
+- * Return:	load options or NULL
+- */
+-static u16 *get_load_options(void)
+-{
+-	efi_status_t ret;
+-	struct efi_loaded_image *loaded_image;
+-
+-	ret = bs->open_protocol(handle, &loaded_image_guid,
+-				(void **)&loaded_image, NULL, NULL,
+-				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+-	if (ret != EFI_SUCCESS) {
+-		error(u"Loaded image protocol not found\r\n");
+-		return NULL;
+-	}
+-
+-	if (!loaded_image->load_options_size || !loaded_image->load_options)
+-		return NULL;
+-
+-	return loaded_image->load_options;
+-}
+-
+ /**
+  * command_loop - process user commands
+  */
+@@ -595,18 +505,12 @@ static void command_loop(void)
+ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+ 			     struct efi_system_table *systab)
+ {
+-	u16 *load_options;
++	efi_app_init(systab, image_handle);
+ 
+ 	handle = image_handle;
+ 	systable = systab;
+-	cerr = systable->std_err;
+-	cout = systable->con_out;
+ 	cin = systable->con_in;
+ 	bs = systable->boottime;
+-	load_options = get_load_options();
+-
+-	if (starts_with(load_options, u"nocolor"))
+-		nocolor = true;
+ 
+ 	color(EFI_WHITE);
+ 	cls();
 -- 
 2.53.0
 
