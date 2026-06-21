@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1683CD98F2
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 18:17:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B73CD98F2
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 18:18:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C307484119;
-	Sun, 21 Jun 2026 20:17:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 805DE84119;
+	Sun, 21 Jun 2026 20:18:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dY85N68t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HFFy/aXJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 119D284844; Sun, 21 Jun 2026 20:17:07 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 5BAFC84869; Sun, 21 Jun 2026 20:17:59 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F2B584105
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 20:17:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A45984105
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 20:17:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-693c69b97e7so5859570a12.2
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:17:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782065823; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-69764612e55so3277706a12.3
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:17:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782065876; cv=none;
  d=google.com; s=arc-20240605;
- b=GhiHEiLdsWEvkyhoUoUSrgpZo7s0Bs+7NiZ5q20ckgmoawGGZBVSk+PqPDi6k3StMi
- xC0XUM7G7Ygpia93nPDTvjj+YZOZP2gSdGWiOpCkivM7UZe3DX4FRPZLTQPJ+9nwml3W
- RhmhsCPWI0OQtnUkTiA8wB3Uw4DbBvS5BKidmhpszzzQmmVjXuCqnx0NIOSWozK6Qw9p
- uc0xoytJ2GbrDar43+DG1qHKcbVvP7X6rjhJrcRt/thub9m6lk51YcrQfsOePu391fDI
- MREr7QG8CumH0hrR4JqfOWspQp/CuMhOheM2fur7gsx9yUx4n8iS4A00hCvidhTRUjUB
- zxPQ==
+ b=BWnoVB8hpflmBmvAlXVuCTQNP782h81jkvy7ZpCCyhq5P7brk/GnHOsV30sjUToE/V
+ FKAQ9g0iEURizdcSMIvzjFVS2NwvXWryzdOJbuUYpTZm3PJyZNJUWEgNoHj62g+JPEdJ
+ DbPl5n2uN/qq3bVQFiEkfvdtWXpbLzWLVwmAgWm7W27xCEZRvt+yZV+YM3+yGXOdd4Lp
+ cdYNj05cbN34wWee7Y6hzuqKgRAiyulUM5O704YKHemoGbppwV/B8CPLlA7tf0qcLzi5
+ KV4D739OvIwhaNn+ffHQc7pQkvruyfIIGvLRCgTE1lRgcs1bX0fYMsLpG0w/YY1JSCg7
+ F0Zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=HZ/7+Qhwx5J6SPXiAKFeeJI1pMAXX5wnK1guaOI5xng=;
+ bh=cbjQFmwhAeFUE8xPrGspM++kIbcBeGQTqC+rcqwbSQs=;
  fh=T2gsTWyhJ/JEA8HZ9q6S8I9r06x7Bla+FvlPy9O7BgQ=;
- b=AZoJqpw1ovZG2NoQfYqapNwpYbWaqoRSVxuo5qu2U/RqVnKL7g3HCZ4iYZineMiVzk
- Owq5dOousx/RMeo9+zKGyBAv7lT+ajHFX2jJaGNivkKdJNIg9nfmiJVfu69+qBkTGDVE
- h1EKin2tk5z9ilPS2LGdaW5WR1I6e7zeF2INCsvkqMJUbjqk5LJN0iaOHuSLS12k0Hej
- dyg3iSAx+JzGA0w6x5t4SWFd8Vpw711jVEQncIJCaWKzmdq9MNFqndj3ihigD/4soGUd
- /Lkb62yz4gqPSZeTzA90TQQfc9Ar6W0MXoPQXaMmVUbsNVeSJwcIIgMcWi/wJA2buIp/
- CEmg==; darn=lists.denx.de
+ b=ADJx5eFxny06tZQ/AebdhVCSGxPAzKcUA5Iapa6KaZB8DlmPb/qW5/OhVkKqXyBHZY
+ 3kl1qFVOb66kkF/AugDPkcM+y6dZDqBosaKK7gKEOVWcAGqYbMCqedv+kUq718RDJ10z
+ I8jhygrwXMXtThppxv4RQid85HrvtWF0G01KMl9WA7Hi7f5i1xDsH4t2JM96gjLyAnpY
+ w7q9QZHSBfqOxVPTzHIDZFedz/5yEypi/RpYBtlRdPnkT3eqTeidEITxNGgJsg73gSPY
+ Ia57QZrrV+ndwMVMXYWt8zrFXdV2eSNIgzCZ9N59utufcTG1wPnHap/lKVqlJsoGdQny
+ kQcg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782065823; x=1782670623; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782065876; x=1782670676; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HZ/7+Qhwx5J6SPXiAKFeeJI1pMAXX5wnK1guaOI5xng=;
- b=dY85N68tRTLSIxtAlKlphnVq/T77t9rDwYC+nac++oOot63lSKk1zoHwJ7U614YZsg
- Pl5HkqV1IPcWvTSoGnWBCP3zZlPDTveg9DLoTcbG/YRTqN/9o/1uRx8FPPsASDIJFLcI
- xPUcHKdExid5aeBk8xY/rq+g68YCZOR1CODfE=
+ bh=cbjQFmwhAeFUE8xPrGspM++kIbcBeGQTqC+rcqwbSQs=;
+ b=HFFy/aXJEztRkGVL8Fs26znDpC8pqSbVsEtvrZcICiU8VBEs1uzQArWrF56xDSCPSJ
+ RRDacqOvqFgmiza3Zd3MH+72uTNy/i2+3Q6wlbVAl8xu7womXI8F4yNhFfGpi8JuSTgL
+ a2q/970WwJrkPTzRC/8F4dorlOFaTMP166nb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782065823; x=1782670623;
+ d=1e100.net; s=20251104; t=1782065876; x=1782670676;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HZ/7+Qhwx5J6SPXiAKFeeJI1pMAXX5wnK1guaOI5xng=;
- b=MGAN5qxRriV8gmAUlhKGZDhoysTeNJnuFXfChUxYwbOzC0YnaBAk3t1YrVVjmvC1sT
- jzORpKoudHRCkUC/wdoF9eC3oXc2XZjJBgRIblS317F51u0KReVZUTFKqqrd5ogaCaY5
- VzCLKpMQO5bfy/m2ZM9gil/2aaM2SiM6b6KVg3NCo8tScuzi8yDxj9X4VF07knXdIDKI
- q9bjDQVtp9Uhz3y+O6FC5JA2Ug6vUNvkxeZWcz42yNLwPqnxfcd1G71hcYE0Cfji0VCO
- mUB/xDEYjxUzS1cPiFAHsgN7g7bWHFOUGj8lShkw6XSztKlShtGKaq7crBmVyLRPGUpH
- iRyw==
-X-Gm-Message-State: AOJu0Yw4nL9Tmf1LjoEc2tOSjAPB28ti2t/aQL7NW/JdW9UOUOKb8fU5
- KLrsV7viLk8azPKmIM2Mk6LXcGpxkzUE52LgxaV0n14Vh9GE8wdIVXoFk1Rk8lDBfJyko/lgg8v
- dEWrcY0jOLYtjzembMLgmDeorsEAir3cP/x35YUPH
-X-Gm-Gg: AfdE7cm/ehH2wRzaPYUBR6kSN0x+4EjevPo9lu6yZWQlhKSuopzXB2WMBfnG3dbL/FN
- SNXuB0epq+kkQVVkZKjAQeknNLt+IAGANDkrMFLdbaVUzNi5P9HUjxJsFBwZ7+0TemPQ4DK7n3q
- Mv8GszNGHuq6obLeXpMPN0oiXXEwg1e5XFimqh/vKds9kL6mRsndIOmGACeFC41NJtZ5XlrnqnS
- 1xyX7laUxxGdcAp7+gAcZwXNEqExzB5MYSfBA73dcVCY4IrjdIhMDx0lK+FHjRUCyoZkpm486TS
- hfnXJwo5
-X-Received: by 2002:a05:6402:268a:b0:674:5b2c:d42c with SMTP id
- 4fb4d7f45d1cf-696edc828fcmr5339201a12.3.1782065823604; Sun, 21 Jun 2026
- 11:17:03 -0700 (PDT)
+ bh=cbjQFmwhAeFUE8xPrGspM++kIbcBeGQTqC+rcqwbSQs=;
+ b=aQ9B9EKA3GNkuaciiUxh2rvTJQTLCTlt7JKFogvCYFIMLjeLClgHW8Y+yU0acQbLKw
+ DltkgavKcMDfSNOoPRLYxF4gtOpgz8YInwU1Wy6Yv9ZyhbMsSmCnsj5UCYFwz5ucWg9v
+ Z+FwlPEf7+FchHaIdxE2pCetdxwH0oE7pRVyhqYMzxu+BWMVyeg+Mim8PFFfyTnusCw9
+ r8srklHihpAd9fMLBXyYoFfeHJOSf/tX3n1LIF0gBxZYqaIbyYtncqHQHC5lEJt+uq/5
+ wNRnDNkg1znPTsyb7oVJ+q5M/a4Ed35H//3H2YcP5c6pFSlrR+EPtxv4VpvveupXYcnq
+ dLbg==
+X-Gm-Message-State: AOJu0Ywox/N8pMSVnZS1HJJADt4TgJy6YLDl7++bGZprmt5OD3ugOXRy
+ ADJkCvOXrG75ad1lVonc21dCiJs6zRysGzU8tLmJt2o0DsU1AJX85iVGUtTIgeujN/xuQHTRiqZ
+ +ugFhWPlaamWewUJ79aAI4mWoIHHskHyc43zxUME1
+X-Gm-Gg: AfdE7cnAprRYy2oc/ad33pIuUWkR9ZC8xDQZWtSiW7beEbio9+PuzqIq+QMUriJQjOF
+ thAPVsUmYFiL12C7CkVbutf/zKCFvO3BU4RrGtkkDNx7RRLx1wtzFofdeo5ulIboC5fCiiqWqYp
+ CSwRYVBbngWhYYz4Vuki6CoGFZksPjntQXG6sd9kQ5ukWQF+AxHhZenH5E3e9g9KcNIEUo51vgD
+ 1gFuFqxVQMVP69/vViM+WzJlmlv/BqYkj65Cuc3MX84MI7KaSyPRcOJgJFjdSI1ilHDLAiCFg==
+X-Received: by 2002:a05:6402:50d4:b0:695:d6fa:4de4 with SMTP id
+ 4fb4d7f45d1cf-696e521d910mr5859117a12.24.1782065876416; Sun, 21 Jun 2026
+ 11:17:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-1-b8203682507f@samcday.com>
- <CAFLszThpB_C7fdqJC=CRx3qm+jjvykHJgSKvz+s_xbngCCXSxQ@mail.gmail.com>
- <jyKa6pVYveQ4p_bPFRjTZZYE1_2BzhtpTq2JOWxf_Kg9M11SW11LLzQtJy54OqGkfO3z8KanForRXUJt6vTgtr71L6jI-ZATQmUmE3zVDT4=@samcday.com>
-In-Reply-To: <jyKa6pVYveQ4p_bPFRjTZZYE1_2BzhtpTq2JOWxf_Kg9M11SW11LLzQtJy54OqGkfO3z8KanForRXUJt6vTgtr71L6jI-ZATQmUmE3zVDT4=@samcday.com>
+ <20260608-android-binman-v2-4-b8203682507f@samcday.com>
+ <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+ <mFBeep4TItLmAzHEARn8dSSTsKEDywCH4tWLz1ExMQY93_zF4kTZCAZZOzrAPLRLFAkaiqS8R9QB5GkbDUqLU1phHrwlRrZdeVKgm7WiZDo=@samcday.com>
+In-Reply-To: <mFBeep4TItLmAzHEARn8dSSTsKEDywCH4tWLz1ExMQY93_zF4kTZCAZZOzrAPLRLFAkaiqS8R9QB5GkbDUqLU1phHrwlRrZdeVKgm7WiZDo=@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 21 Jun 2026 19:16:51 +0100
-X-Gm-Features: AVVi8CdKpOo-3M74GUNO8yNvCnrqBYhFn76480K5ym82FbgvQLLd94pyrEBcueQ
-Message-ID: <CAFLszTg1cz8CC1mzsbubPkADrRneCfCYbpeR+T96jirgW6a61w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] binman: Android boot image support
+Date: Sun, 21 Jun 2026 19:17:45 +0100
+X-Gm-Features: AVVi8Ce-KEBA8S6h3N3_NlGIShaKu1KSSNTXwPl9DuqC3P0EuydcaLdh7WPEHSo
+Message-ID: <CAFLszTiEiXjMc5YFMQMTHn+nsibzpkaOXo=9TVepWebiP56W6w@mail.gmail.com>
+Subject: Re: [PATCH v2 4/8] binman: Add QCDT support
 To: Sam Day <me@samcday.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
@@ -124,195 +123,192 @@ X-Virus-Status: Clean
 
 Hi Sam,
 
-On Tue, 9 Jun 2026 at 08:20, Sam Day <me@samcday.com> wrote:
+On Wed, 10 Jun 2026 at 02:43, Sam Day <me@samcday.com> wrote:
 >
-> Hello Simon,
+> Greetings Simon,
 >
-> On Monday, 8 June 2026 at 11:25 PM, Simon Glass <sjg@chromium.org> wrote:
+> On Monday, 8 June 2026 at 11:27 PM, Simon Glass <sjg@chromium.org> wrote:
 >
 > > Hi Sam,
 > >
 > > On 2026-06-07T23:37:09, Sam Day via B4 Relay
 > > <devnull+me.samcday.com@kernel.org> wrote:
-> > > binman: Android boot image support
+> > > binman: Add QCDT support
 > > >
-> > > Introduce initial support for Android boot images (abootimgs). This
-> > > initial stab supports both v0 and v2 headers. The AOSP implementation
-> > > was used as a reference.
+> > > This vendor-specific format is used by many bootloaders on older qcom
+> > > SoCs, such as msm8916. It's a container for N FDTs. Each one is
+> > > contained in a record that includes metadata about the platform/variant
+> > > it targets. The previous bootloader picks the 'right' record based on
+> > > this metadata.
 > > >
-> > > Since we're targeting U-Boot use cases here, a couple of things were
-> > > omitted from this impl, namely 'second' and recovery_dtbo support.
+> > > This initial impl targets a streamlined v2 path, with no support for
+> > > different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
+> > > that's needed it will be implemented in a follow-up.
 > > >
-> > > Link: https://android.googlesource.com/platform/system/tools/mkbootimg/
 > > > Signed-off-by: Sam Day <me@samcday.com>
 > > >
-> > > tools/binman/etype/android_boot.py           | 313 +++++++++++++++++++++++++++
-> > >  tools/binman/ftest.py                        |  66 ++++++
-> > >  tools/binman/test/vendor/android_boot_v0.dts |  29 +++
-> > >  tools/binman/test/vendor/android_boot_v2.dts |  46 ++++
-> > >  4 files changed, 454 insertions(+)
+> > > tools/binman/etype/android_boot.py           |  30 +++++
+> > >  tools/binman/etype/qcdt.py                   | 160 +++++++++++++++++++++++++++
+> > >  tools/binman/ftest.py                        |  22 ++++
+> > >  tools/binman/test/vendor/qcdt.dts            |  20 ++++
+> > >  tools/binman/test/vendor/qcdt_bad_msm_id.dts |  17 +++
+> > >  5 files changed, 249 insertions(+)
 > >
-> > > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> > > @@ -0,0 +1,313 @@
-> > > +    @staticmethod
-> > > +    def _CheckFit(name, data, size):
-> > > +        if len(data) > size:
-> > > +            raise ValueError('%s is %d bytes, maximum is %d' %
-> > > +                             (name, len(data), size))
+> > Your comment says "A legacy QCDT abootimg, the kind msm8916 bootloaders expect"
+> >
+> > Please can you spell out the acronym...
+>
+> I'd love to, but I think nobody can actually do that. There's not
+> really any canonical impl or reference point for this stuff. I believe the
+> reason everyone calls it "QCDT" is because that's the magic identifier in
+> the header.
+>
+> Maybe it means "QualComm Device(tree) Table"? Or perhaps it means
+> "Qualcomm/CodeAurora Device Trees"? We may never truly know :)
+
+Hilarious :-)
+
+>
+> > I would also prefer qcom_xxx
+> > for the etype name where xxx is whatever this means, since presumably
+> > this is Qualcomm-specific.
+>
+> Given the acronym doesn't have a canonical definition, and the limited
+> references to it use the "QCDT" moniker directly, I opted to keep it as-is
+> for v3, since `qcom_cdt` is confusing and would be a unique reference that
+> exists only in U-Boot. Or would you prefer qcom_qcdt?
+
+Let me look. Mostly it is about being unique...I quite like the idea
+of a qcom_ prefix but it isn't very important.
+
+>
+> >
+> > > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > > @@ -0,0 +1,160 @@
+> > > +from binman.entry import Entry
+> > > +from binman.etype.section import Entry_section
+> > > +from dtoc import fdt_util
+> >
+> > The _align_up()/_pad() helpers at the top are duplicated from
+> > android_boot.py in patch 1, and will be again in dtbh.py in patch 6.
+> > Please factor them into a shared helper module (or stick them on
+> > Entry_section).
+>
+> I opted for the latter. v3 introduces a new patch to put these
+> shared helpers in Entry_section.
+>
+> >
+> > > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > > @@ -0,0 +1,160 @@
+> > > +    def ReadEntries(self):
+> > > +        for node in self._node.subnodes:
+> > > +            if self.IsSpecialSubnode(node):
+> > > +                continue
 > > > +
-> > > +        return data + b'\0' * (size - len(data))
+> > > +            payloads = self._GetPayloadSubnodes(node)
+> > > +            if len(payloads) > 1:
+> > > +                raise ValueError("Node '%s': must contain exactly one DTB "
+> > > +                                 "payload subnode" % node.path)
 > >
-> > Please raise via self.Raise() so the user gets the node path. A bare
-> > ValueError makes it hard to track down which entry overflowed when
-> > several android-boot images are present.
+> > Please use self.Raise() throughout - that's the binman convention and
+> > it adds the node path for you. The static/classmethod helpers should
+> > become plain methods so they can use self.Raise() too.
 >
 > Ack, done in v3.
 >
 > >
-> > > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> > > @@ -0,0 +1,313 @@
-> > > +    def _GetEntryData(self, name, required):
-> > > +        entry = self._entries.get(name)
-> > > +        data = entry.GetData(required)
-> > > +        if data is None and not required:
-> > > +            return None
+> > > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > > @@ -0,0 +1,160 @@
+> > > +        dtb_offset = _align_up(12 + len(dtbs) * 24, page_size)
+> > > +        records = []
+> > > +        payloads = bytearray()
+> > > +        for msm_id, board_id, dtb in dtbs:
+> > > +            dtb_size = _align_up(len(dtb), page_size)
+> > > +            records.append((*msm_id, *board_id, dtb_offset, dtb_size))
+> > > +            payloads += _pad(dtb, page_size)
+> > > +            dtb_offset += dtb_size
 > > > +
-> > > +        return data
-> > > +
-> > > +    def _GetOptionalEntryData(self, name, required, default=b''):
-> > > +        entry = self._entries.get(name)
-> > > +        if not entry:
-> > > +            return default
-> > > +
-> > > +        data = entry.GetData(required)
-> > > +        if data is None and not required:
-> > > +            return None
-> > > +
-> > > +        return data
+> > > +        qcdt = bytearray(struct.pack('<4sII', QCDT_MAGIC, QCDT_VERSION,
+> > > +                                     len(records)))
+> > > +        for platform_id, soc_rev, variant_id, subtype, offset, size in records:
+> > > +            qcdt += struct.pack('<IIIIII', platform_id, variant_id, subtype,
+> > > +                                soc_rev, offset, size)
 > >
-> > These two are almost identical and the names don't distinguish them,
-> > i.e. _GetEntryData() will AttributeError if the name isn't present,
-> > while _GetOptionalEntryData() returns the default. Please fold them
-> > into one with a default=None parameter: None means required, anything
-> > else means optional (function comment). Also, the 'if data is None and
-> > not required' branch in _GetEntryData() does nothing - both arms
-> > return data.
+> > The 12 and 24 magic numbers should be struct.calcsize() of named
+> > header/record format strings, the way android_boot.py does for
+> > BOOT_IMAGE_HEADER_V0_SIZE. That also documents the layout.
 >
-> Good catch, collapsed and simplified _GetEntryData() in v3.
+> Hm yeah, I got lazy here. v3 removes the magic values and formalizes
+> the format/size calculations like android_boot does.
 >
 > >
-> > > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> > > @@ -0,0 +1,313 @@
-> > > +    def ReadNode(self):
-> > > +        super().ReadNode()
-> > > +        self.header_version = fdt_util.GetInt(self._node, 'header-version', 0)
-> >
-> > ...
-> > > +        if self.header_version not in (0, 2):
-> > > +            self.Raise('Only Android boot image header versions 0 and 2 are '
-> > > +                       'supported')
-> >
-> > Please call this out in the commit message - AOSP defines v0..v4 and
-> > readers will wonder why v1/v3/v4 are missing. Something like "v1, v3,
-> > v4 are not implemented as no use case has come up yet" would help.
+> > Also, unpacking msm-id as (platform_id, soc_rev) and board-id as
+> > (variant_id, subtype), then packing in the swapped order (platform_id,
+> > variant_id, subtype, soc_rev) is hard to read. Please build each
+> > record directly with the on-disk field order and add a comment
+> > referencing the LK/AOSP source for the QCDT v2 record layout.
 >
-> Noted, added the explicit callout in v3.
+> Ack - this isn't very readable, I agree. Overhauled in v3.
+>
+> >
+> > > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > > @@ -0,0 +1,160 @@
+> > > +    def BuildSectionData(self, required):
+> > > +        if not self._node.subnodes:
+> > > +            raise ValueError("Node '%s': Missing required DTB subnodes" %
+> > > +                             self._node.path)
+> >
+> > Redundant with the 'if not dtbs:' check further down (which correctly
+> > handles the case where the only subnodes are special). Please drop it.
+>
+> Ack. v3 refactors this heavily and the redundant check is gone.
+>
+> >
+> > > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > > @@ -0,0 +1,160 @@
+> > > +    def _GetPageSize(self):
+> > > +        if self._page_size is not None:
+> > > +            return self._page_size
+> > > +
+> > > +        return getattr(self.section, 'page_size', 2048)
+> >
+> > The docstring says "defaults to the parent android-boot page size",
+> > but in practice this picks it up from the vendor-dt section that
+> > _ReadVendorDtEntries() stamps with a page_size attribute. Please
+> > update the docstring - or better, but really you should look up the
+> > enclosing android-boot section directly rather than relying on an
+> > attribute being monkey-patched onto an intermediate generic section.
+>
+> Indeed. v3 refactors this heavily to introduce a shared base class, which
+> prefers a locally set page-size, falling back to traversing the ancestry
+> to find an android-boot preference (and finally falling back to 2048).
 >
 > >
 > > > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > > @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> > > +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
-> > > +        self.assertEqual(U_BOOT_DTB_DATA,
-> > > +                         data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
+> > > @@ -5673,6 +5673,28 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> > > +    def testAndroidBootQcdt(self):
+> > > +        """Test that binman can produce a QCDT container"""
+> > > +        data, dtb_data, _map, _dtb = self._DoReadFileDtb(
+> > > +            'vendor/qcdt.dts', use_real_dtb=True)
+> >
+> > Only one record is covered. Since the whole point of QCDT is to hold
+> > multiple DTBs picked by msm-id/board-id, please add a test with at
+> > least two dtb-* records so the offset/size table-walking code is
+> > actually exercised.
+>
+> Agree. Done in v3.
+>
+> >
+> > > +    binman: Add QCDT support
 > > > +
-> > > +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
+> > > +    This initial impl targets a streamlined v2 path, with no support for
+> > > +    different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
+> > > +    that's needed it will be implemented in a follow-up.
 > >
-> > Last assertion duplicates the first - please drop it.
+> > How abouta Link: to the LK/AOSP reference for the QCDT v2 record format?
 >
-> Apologies, this was junk I didn't properly catch in the zillionth rebasing
-> session. It was already cleaned up in a subsequent commit. v3 will clean it
-> up properly.
+> Good idea, done in v3.
 >
-> >
-> > > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > > @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> > > +    def testAndroidBootV0(self):
-> > > +        """Test that binman can produce a plain legacy Android boot image"""
-> > > +        data = self._DoReadFile('vendor/android_boot_v0.dts')
-> >
-> > Missing coverage for several error paths - U haven't run this but
-> > there is Raise() for unsupported header_version, non-power-of-two
-> > page-size, etc. Binman aims for full branch coverage - please add
-> > tests for these, and verify 'binman test -T' still shows 100% coverage
-> > for your etype
->
-> As discussed in IRC, I agree this is very reasonable... I didn't appreciate
-> just how far the proposed code was from that 100% goal, though ;)
-
-Indeed...in particularly we are not used to adding tests for failure
-cases and it can be a bit tedious. It does make you think though,
-whether an error is needed, whether a condition should be removed,
-etc. Also it becomes very hard for future changes to break your etype.
-
->
-> v3 introduces a much more comprehensive suite that hits 100% coverage.
->
-> >
-> > > diff --git a/tools/binman/test/vendor/android_boot_v2.dts b/tools/binman/test/vendor/android_boot_v2.dts
-> > > @@ -0,0 +1,46 @@
-> > > +                     kernel-offset = <0x00008000>;
-> > > +                     ramdisk-offset = <0x01000000>;
-> > > +                     second-offset = <0x00f00000>;
-> > > +                     tags-offset = <0x00000100>;
-> >
-> > 'second-offset' is silently ignored - the etype doesn't parse it and
-> > the commit message says 'second' support is dropped. Do you need it?
->
-> Nope, another vestige of a previous iteration that I didn't clean up
-> properly in the rebasing, sorry about that! Removed in v3.
->
-> >
-> > > diff --git a/tools/binman/test/vendor/android_boot_v0.dts b/tools/binman/test/vendor/android_boot_v0.dts
-> > > @@ -0,0 +1,29 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +
-> > > +/dts-v1/;
-> >
-> > Why a new 'vendor/' subdirectory? The contents here are plain Android
-> > boot images, not anything vendor-specific. I'd suggest 'android/' (or
-> > leaving them in test/ alongside other etype .dts files), which also
-> > leaves a clearer naming pattern for QCDT/DTBH later.
->
-> Fair call - I've yanked everything up to the top level in v3.
->
-> >
-> > > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> > > @@ -0,0 +1,313 @@
-> > > +    Example::
-> > > +        A v2 abootimg with control FDT placed in the DTB section:
-> > > +
-> > > +        android-boot {
-> >
-> > ...
-> > > +        A v0 abootimg with embedded control FDT (v0 doesn't support DTBs) and
-> > > +        an empty ramdisk (some bootloaders insist on a ramdisk being present):
-> > > +        android-boot {
-> >
-> > These render as one big code block in the auto-generated docs, with
-> > the v0 description folded into the literal. Please split into two
-> > 'Example::' blocks, with a blank line between the v0 prose and its
-> > 'android-boot {'.
->
-> Ack, fixed in v3.
->
-> >
-> > Regards,
-> > Simon
-> >
->
-> Thanks for the thorough review Simon, much appreciated.
-
-You're welcome.
 
 Regards,
 Simon
