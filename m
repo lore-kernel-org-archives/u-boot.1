@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82AACCD98F2
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 18:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA594CD98F0
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jun 2026 18:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBCE084119;
-	Sun, 21 Jun 2026 20:24:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3235D84119;
+	Sun, 21 Jun 2026 20:37:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WjK6NPzb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KvgqVcsh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA4A84119; Sun, 21 Jun 2026 20:24:56 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id F1A2884844; Sun, 21 Jun 2026 20:37:45 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AF9784105
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 20:24:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EAB284105
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 20:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-45fd464d51fso2129418f8f.3
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:24:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4864a8e80bbso1713250b6e.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 11:37:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782066294; x=1782671094; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Q+Vim3zkDFv5g4DV/erpVH2TWwh67XVgfPr58ghMev8=;
- b=WjK6NPzbp2qUu3MmYvZI/mL4kqaOMNJ6PLTrjymC/7B1DeCFUdNN/AUZjKqmJkVkgK
- zDBzGlswZ+iFwboEaAfir1JptwpaYVkm/sI1X8xYU86ydrOT/435iGnrnmk9IAWFr1wE
- 6LAJ4xZ/3XSNvM0JRC7/yB/BT2KIt5MkwnEuQWyFQKG3oqSmXBsxQCh/JgigHtV2pVAN
- g9uQA5VF/xAJwFpGEV3POn8hxH4eIprjziaB2JWkFrtbHfXBXqfJhONl1F8tbKL2JX8f
- QzS4xm3b0LRD2f3MToBSv/wwRO13F89TRV6GwbU7cLR6LsA6c3RoZzytv/KrwfDEsuB4
- CO7w==
+ d=konsulko.com; s=google; t=1782067062; x=1782671862; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B1z6z27aGiXnQSDGYjG/G3oZmnLEGaXF9obhbfk6oE4=;
+ b=KvgqVcsh8PeMaNSdFmtS/CVnMqK0JtIULyfWJhspyOAIZJwxjbBgdaMjmXLQC6AKVI
+ 2NsVog0lDc2Hw/QoZZK8eoYiaToMyXrpFRZ787IPRoM3BdrtmYZPirI//EjGvDiZRPTI
+ hyVW1bikOMZpP1EoUjut72UHMxx/f7svbWyoM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782066294; x=1782671094;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q+Vim3zkDFv5g4DV/erpVH2TWwh67XVgfPr58ghMev8=;
- b=ssBiZXKn4S5cDwXKFGw8w09STWdsvDbMvZC04WoxgoL/mpmYbDEBoEN8LW/HzJx+4t
- 2mlLpDGr0u0D8Cwkp/Ss/WILH+r4axc2iP9ldsoXN9o7ZG2wTH4O4xK5MQnejIdJr03B
- ECXnIOgMGXcXGA5drTYE64JcMMngTUVzsI3ki5MtmNNVMdxIY/IGqU4Ow/DEz9BbKDqZ
- +T/nRj6hKYZLFDz3TQL2jbtIf3F3fPEmlUGdBUPbFwD5Z+8MMIVxBM4a+ICMcFJl0mo7
- tnWHOXkKaxOKC8xFXXiiC1eXi8dAPSW4PWLRCPPsXoFNQZIY4KiY28kgR+ipKLQOBK2V
- ecGA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RorAPAJbDmr82j8WFjeLhKpwjoS+VK3ZqkHCQETRJ/FsP7Vk9Yjz1z81IawYkLIxNiEVbCKhJM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJZuQphUrYnecr5JqdANJviJw6H+v8/roH1t5IZDbU9+THWVPX
- kmTGsIDqWCsP20IbZHDYkhIOdLMBKurwOxJVJ6dncPzzZaceTho4eEZ0jrdKK0Y+gOY=
-X-Gm-Gg: AfdE7clntRl9bvkEsQCfNO1LqMEpVEUgOwYZNjeyw5yFulTMXgu5l5aEwxlh3jOEx5x
- wNRB2FzmzukGOkxybN+MCpsR69wCQ95C9qdWtdgX+CUU+zUliX0e8+lZXc0NDDwss7Ok95AZFfQ
- wT2t9jvYOWcws69EIuYcUJdg7mcsP9pQDy3JCUXYkBC89RkvBGlCgqWsZ1tdyqWKXJm7KoF1Zdn
- I7SQKEgeSkzeE5JAHgQcj6gsGHizlbpuaS3LmSFevDbWP0h5QcwGDKN5EWi0C3bfx3WLgOcU24M
- fy4TntpIbrqNLr3NfukmPjzGedANaB1twusI0kmJGRHYbg63fyzCF+HmRWzPvlJt7HfAOEkf7dq
- x37XXjBD2vPvDe/PZdI5ACRPYlGlQelsMbXdMYknzHQCMdV26xOWIXIQiWIpc7cfqEZBrvYA/Cy
- u7jlYvNj8z/XKiW5eH7S3L8LjA9Q1Kjl/P+bsP7HrRS8HhsoHaAaxvIg==
-X-Received: by 2002:a5d:42cf:0:b0:460:6731:6165 with SMTP id
- ffacd0b85a97d-46502bb13b7mr12538032f8f.22.1782066293583; 
- Sun, 21 Jun 2026 11:24:53 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29eb88.dip0.t-ipconnect.de. [91.41.235.136])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46666c57b95sm17172333f8f.30.2026.06.21.11.24.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Jun 2026 11:24:52 -0700 (PDT)
-Message-ID: <6e7b4040-ae86-4f40-8d62-bc1d5660e4a5@linaro.org>
-Date: Sun, 21 Jun 2026 20:24:51 +0200
+ d=1e100.net; s=20251104; t=1782067062; x=1782671862;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=B1z6z27aGiXnQSDGYjG/G3oZmnLEGaXF9obhbfk6oE4=;
+ b=P2b/lWcsEnMD2Z6TLk/Gbh+vMU8UdPUqyJ45df4x0PL3GfqYNqhEB4APs0AVub7gPZ
+ P1JwPUh2nUweIIY0s2L1CeX6SC/d/Df0auoew6Xon2ZtSXOdfBj1Fr2bsj742Kox1b+y
+ mC8Bzu2to3ddvWfXvW717RtzHEpLfVowvsNBWown6fhphAiYenDlenSUqcjHu6uFcLCi
+ VYyGzYd9O8DQfGsSAUJwrrZBCcy1xylO+wpRYVMUd+NBFV+P5MKAlET3ALxjZDHx9i6g
+ 3cWdjTPylYsgN7aHoA6idymRl2SsmI34Eo2ofYS+U/gxsF6eIfP4adEiltSfbuDi+DQG
+ Uf3A==
+X-Gm-Message-State: AOJu0Yw9LB8Wgp79rfW1nmwuGK/B1rbeUIUsr4tIFTVg6qB1UVva9xre
+ m5XCUyOZDrG1i7/CXpfcevUXRH0ZpN5J18SR6XOrD41njkqfP1TT9AeintDabZ2EEUg=
+X-Gm-Gg: AfdE7cmBhxTV6Oa9dYCe7kB0Kify8tqhpoH/HURNPKgH1iKIA3OZUjfRtu3HIuORWjr
+ fukmJ5MCcrrsrm+/M1saJ5RKhxnZv8dQMA3IPyCrzKJJyh9qPySLxOFjgcLdFuRIdKjMx4u+HwG
+ +PBZIXF5KRiHQm+Mdzezy6Z9Ll9OpYTscq6oNGyeBboKxJAVsOSoRo4hsYjer1ynLGZXd7uOR2p
+ jY5KlkDu4FKQD6i6fntLrnKuyw4VjdQahcT+ZosJD4gfgqJ6pJjqgQsti2vNZO8vAJwesCQ8Z3u
+ d9hLTI6x7jlLTL7Y+Ro+NWWP59CJrbkHM1fJt/brgmKwEU9JgK4L46xPcsAbgdioDfmqqBrAtvA
+ ir/6UBgn2iJsM8HAQOa5IHA++DQPvfldrUI2EiHfUMj4pCfJE7eUA7lI75Hat7jYUkGS19oPjSy
+ cIJ7jfRjqJrL/cbEc0r/5CqndMqFVJodSoRd8EQ7HSuLXnIvtvwgJckl37MAUPSl9fXodWFo5I0
+ AdoCwYxlHU0u/aBC/md60PNuY2ic4ABxrDQMDc=
+X-Received: by 2002:a05:6808:13c4:b0:48a:3f80:ee5c with SMTP id
+ 5614622812f47-48a3f80fb5fmr6899535b6e.23.1782067062248; 
+ Sun, 21 Jun 2026 11:37:42 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-189-154-245.totalplay.net.
+ [187.189.154.245]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-48aec0ddd7bsm3210170b6e.7.2026.06.21.11.37.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 21 Jun 2026 11:37:41 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Denis Mukhin <dmukhin@ford.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+In-Reply-To: <aaa976b5-693b-48db-bd26-6be981757413@gmx.de>
+References: <aaa976b5-693b-48db-bd26-6be981757413@gmx.de>
+Subject: Re: Pull request efi-2026-07-rc6
+Message-Id: <178206706089.4100406.8962840667735740961.b4-ty@konsulko.com>
+Date: Sun, 21 Jun 2026 12:37:40 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: qcm6490_defconfig: Enable SCSI as the Fastboot
- flash block interface
-Content-Language: en-US
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
- neil.armstrong@linaro.org
-Cc: sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, mani@kernel.org
-References: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,38 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Mani,
+On Sun, 21 Jun 2026 11:59:38 +0200, Heinrich Schuchardt wrote:
 
-On 19/06/2026 09:34, Manivannan Sadhasivam wrote:
-> qcom_defconfig uses EMMC as the flash interface for Fasboot, but QCS6490
-> RB3Gen2 has no on-board eMMC. So override the config to use UFS as the
-> flash medium by selecting 'scsi' interface.
+> The following changes since commit 922cf29dd8045f7348ce0f20145f46e8235faf21:
 > 
-> This enables flashing the images over Fastboot on this board.
-
-Thanks for the patch!
+>    Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-18
+> 11:41:22 -0600)
 > 
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> ---
->  configs/qcm6490_defconfig | 4 ++++
->  1 file changed, 4 insertions(+)
+> are available in the Git repository at:
 > 
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> index b088367f86c..d599e7611c1 100644
-> --- a/configs/qcm6490_defconfig
-> +++ b/configs/qcm6490_defconfig
-> @@ -16,3 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
->  
->  CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
->  CONFIG_PHY_QCOM_QMP_COMBO=y
-> +
-> +CONFIG_FASTBOOT_FLASH_BLOCK=y
-> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
-> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=0
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2026-07-rc6
+> 
+> [...]
+
+Merged into u-boot/master, thanks!
 
 -- 
-// Casey (she/her)
+Tom
+
 
