@@ -4,86 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8779BCDB46F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 14:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0237CD98F2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 17:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD94484931;
-	Mon, 22 Jun 2026 16:40:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EB03784931;
+	Mon, 22 Jun 2026 19:18:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T6Rapr6h";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="d+R/U2e0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1019B849BA; Mon, 22 Jun 2026 16:40:29 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 71C30849BA; Mon, 22 Jun 2026 19:18:44 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69E0C848EB
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 16:40:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 493CF848EB
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 19:18:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-48633190849so1749691b6e.3
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 07:40:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782139225; x=1782744025; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=43pyoXY90i8ZCaMcsrtryHHymA7Pcl70Rof56B5mXyk=;
- b=T6Rapr6hS0I1qyidec8N2tc39KmOHE/RNsJzRm7/C/MMVUjqhh3zArxHQjkAnnXWIM
- Ba1iZw6747WlLnXDvSyKZ/7n/yngEpK3o55w02+xlm0swzGoCW3MDYq8zSPHwkwtDRE4
- beM3F9H/lDH4iILRyZ6/4lL67xkKNc6Mf/xW0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782139225; x=1782744025;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=43pyoXY90i8ZCaMcsrtryHHymA7Pcl70Rof56B5mXyk=;
- b=H7AapuqXmOYyE+iJA+j9Kn5szbFolZmpIfFSoL7M2U/04Eo6mfLrBVMRpNRtfE9Q5f
- iDeiu8MkNpd9tgWHQ79waJjmMGc+MQiUdo3xzGLWXDtP0AduH9g07Zc1VwkLTyhIEK+7
- /ZCY7beD0rshVtdvqL++yak0HqvbAe1NpAEkl05mkZ6id6BvANgyZP/43262r+zYgaTt
- GZgawub1F+yHdv52J6zE5/NEOb4cW6wvLFNd3bm+Ikx7NAUzvWT8dD20T4b8i8gjjOIj
- PhOFqGhzUfdsKOdWA+GCmEUWLlVEeRYDNTWHVsfmiWBn8oa+WSgrwZA0DvmxDEXOVzDH
- CwFQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9KJAgHvhlonamPd8PZGWE+/keXsDuJDHKb44LoLanWfgKkjVjn1VFdDERSB1MKuN26DvWQu0c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzonXC/pxPxPFk9vT9Kh2NpE0udPj/lU1VXeKbCvlVDJWEWByL+
- eikGhfT5Yo7Ml2nrhp1NrSAFfwc9oDobYVqsv6yDZW642Rfuwq9JUA9n8De5PrxNnwA=
-X-Gm-Gg: AfdE7cnE9/1QO08mWFWbWe0if2fB79W2FBg0FcZKV9X7VFHEkHj4KWKNEai3WYHY0zL
- HoYjq4p3qu1BvkqBwpJJ7qWtuU5dnvkd/+TlCIgr9vk14we32XNvARB5c6EjwO8OXBjBSszIUeo
- cZzpYPpLXg0KU+upoHG+6zRF2/Bc+WMT0yX3Mek2DMtIp8AsjhDDpTaDtotSx7Z4fETkuYLQ9hg
- NCmdXri2U+zvZ8QeakSPVzh1QviqN76f7h1lym0goJFMTSw35Gja2/KYj0bHnXXyTE7z2PGzkr1
- jzIK68iikq3FJxmEFFsPUv4NZ6HVdCszyMdoyX7poP/hi8+7EOYX9XSkGxxAiBKMkzngGT4JMEA
- cIq8rUpSsPrVT2vKhFc33zixN0Px9Z9pMG+aXt/0FgyLkIMfPGUQvS4qsn/lT+1zmFzkvI3eusK
- 3LsPeAjRZINAYvlWkgUD+9hs8mtkUlhjlgRQCUQRXf0x2I9iBcBy59V+8FyK0NlSDtyI82MID2Y
- W9bYjwz9BBZXtiYvaJALQog7R0QVe3avZ5DhAz8
-X-Received: by 2002:a05:6808:1812:b0:489:9f26:feaa with SMTP id
- 5614622812f47-4899f271e22mr13804494b6e.35.1782139225096; 
- Mon, 22 Jun 2026 07:40:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-189-154-245.totalplay.net.
- [187.189.154.245]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-48aeea473f4sm4752202b6e.18.2026.06.22.07.40.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jun 2026 07:40:23 -0700 (PDT)
-Date: Mon, 22 Jun 2026 08:40:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: U-Boot Concept Tree Proposal
-Message-ID: <20260622144021.GY382693@bill-the-cat>
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <CAFLszThH0A1XMv7P=QA7HreiSq6MLEriE7hODxk6S6MA5t6+rA@mail.gmail.com>
- <CALeDE9P8GozaHwkV54LXkES6sWXyNUibs5tmvuV1VgMtxEpLiA@mail.gmail.com>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xqmdlVza9KB4kWtesSn0ULRCRNUW2JwmoW0mRRwEihqQbGMTdD/W9YyczQTe2zFYnNQwr4isNxsr3CzwN59c1Eodq2qXHMBt9j/suH4oieEuP1RUR1rLFY655L1MfiJ6IntYNIRFIoBx/mcHxeLk53SsOKdcV4IXlOXs4Wm4BTAHK/G2OmVXpgw+MapXtUkHNjuDViYbEb73hTzD3H8Ih4P6oEJafcTIEbuRH5VkI55I8ClMAG9osh/2x4fS640hpWwRGecct0H26+LXX7JIANUXQ8+QlHOVXgPXYE0Rr6kfz9YKmUuFB73VysPVumzyvj/xrmxMEc9obIqw44+5yg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TWfKuhCbTL+Q2fGMEiktLP6W4RAzrooqBXWnmYpDvOs=;
+ b=dIoLL3pU3kEFRexaC0k8+p/kVFjGMXE3KO1iYeuWX2RF1ZkVKpOKndscBGNVbeP94j68Eg4ijbVyIyY/bLYqzmb9uakdEEa0UnnoocF2i5Qgp9V2tw4tnD9usuLQ1buQ+Qx9LtXT940fD+2im9P9pgxbhSt0/rHY2NkuYyGwg+BWyBuwxOjBG/IWmUbK2EDk68AvTlQ9NWN/YjzetUwmjnTH3DA292mCJniDDtQGLikWzT2IEUSUVhp3haH+lW9ubH0CPni5jnrQYvXeYhX+jkKmXGO3uQAUIs3XPq9nu3fpqy55ri29MOhe282C8KnYupeh7g7bZvW4FZLxPGvNDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=denx.de smtp.mailfrom=foss.st.com; dmarc=fail
+ (p=none sp=none pct=100) action=none header.from=foss.st.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TWfKuhCbTL+Q2fGMEiktLP6W4RAzrooqBXWnmYpDvOs=;
+ b=d+R/U2e0F3od2OOt0H9y6uuTeWC/OSvwfaNtg5LnkPd5JJAxAYARj67hD4CHgoJYgpCvz3ok7/sUNYZr4jKYY9IObuvH3oa4/XJViaovu/V2zlrYjqHV9q+f/GUGGXu6FXOF1B7vhg6Qs4IGoc2piyvTNdHY/0ajRgjx2vM18zrcmjq7URRNyXv558eVAxDvDe2wFKEEHE5hRrRjm1pDxIyYpG38HestLMOEAbcV7LTuYEIWm8qXvy6x+ywLkNY62ayifOtX/4Cad+hbC3umuT6RZ3OqUdVRRrHX+RL8wULloKINhbVItlG1DyBld70t5/EhZGPU1X8S7j8HUiKhwA==
+Received: from CWLP123CA0247.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19e::9)
+ by PAWPR10MB7152.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2f1::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.19; Mon, 22 Jun
+ 2026 17:18:30 +0000
+Received: from AM4PEPF00027A69.eurprd04.prod.outlook.com
+ (2603:10a6:400:19e:cafe::87) by CWLP123CA0247.outlook.office365.com
+ (2603:10a6:400:19e::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.19 via Frontend Transport; Mon,
+ 22 Jun 2026 17:18:30 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM4PEPF00027A69.mail.protection.outlook.com (10.167.16.87) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.159.10 via Frontend Transport; Mon, 22 Jun 2026 17:18:30 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 22 Jun
+ 2026 19:22:41 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 22 Jun
+ 2026 19:18:29 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Mon, 22 Jun 2026 19:18:28 +0200
+Subject: [PATCH] usb: gadget: f_mass_storage: Move schedule() in sleep_thread()
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xKzpQf9uNG78D6R6"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9P8GozaHwkV54LXkES6sWXyNUibs5tmvuV1VgMtxEpLiA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260622-move_schedule-v1-1-4b5dac252b70@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIAGNuOWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDMyMj3dz8stT44uSM1JTSnFRdwzRLk2RL41RDg+QUJaCegqLUtMwKsHn
+ RsRB+cWlSVmpyCcgQpdpaAIdCTTVxAAAA
+X-Change-ID: 20260622-move_schedule-1f94c93e10cd
+To: <u-boot@lists.denx.de>
+CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.15.2
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A69:EE_|PAWPR10MB7152:EE_
+X-MS-Office365-Filtering-Correlation-Id: f8ec55bf-b7ce-42fa-179e-08ded0824811
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|376014|82310400026|36860700016|18002099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: jTgXaZJuC3SEJU5NwH6P7JInA2oXbB5w/7LMqojRjSyd0U/dm9k4VeRK1CSYH6jDfTqShJuy/PqkdSJKVhd04/Ro2Wz+qxUXiGpgwfsA5/9dAOzbQ/a3bLvbvg9SMbjMQrNM1FyKLFsA6nSUwKv1DoI7Z9uHSiSBbxyVcHjGIIG3OOAMNCZa90fokw4wHy5eO1fvo/HeMUKqDEG0FT2Is2QKmxn5GFzgZ2UdNhPfDpU/tIk+ZZPHx+en2V0JjK1AKzOdhg4tLqkyZ3EGoWVqSwCVHrYtwK6f6jDgzZ4rg2qIHEXTdAfmy/QmCTUD4K8Nnn3lG262JdFudIZVbEsPV2Yw5FfIMH6CDplnLRbsRvTzSl8jK+r4jhKMqpEmE2+utzi5mcs+W3jVpSKmT4HmdJITD0Qr+l8TYdoz/HQlYR47Zc+Ci5TXhlCaRg5WOfvc32Bcwx31QNNOrq9WGthNU9ty/yh7OHbRkPoE1NklgMN8VWsWryO5Zdae1gkOoCwIfEme2t0vVR+UFxFrUxH9E2xh3uO9PkJWpS/jMyLY7JX21vgLMEZekA1Tc1TzLONUQWWuKODUcWVdhaGuEVXGaqwRyhdD2gZQMLwHlcKsygubvWwdPu54kzmx+wkVjKKntJXvIYH1LpFbu4qPb6sVFvHbXcW0pkEwbEqUj458Z9Rycb+s1Xt9uwlJae/xglqQ
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(376014)(82310400026)(36860700016)(18002099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: WwF1g+To7c5HB8zaFyR//KnROtXQL3gpp2Lcg+Y+eTm99XozvJ82boYhgGkl+Ur87Rb5AEOeIpW99M8yt6BTvwPyfRB8Nsh5PUBfIDogFPfBkTLcZF763iFBZvMeW/pVa3Ae7MBixfksYL+sLfeH4bO3KHuqWWcatdsuAYHpz3rp8lBynvDJ+4PUPxNFiH/Pmc9CCtCJHJVprclvwuqAh+/jt8fFWBJTjgI5gK20gXs2I5zh/kwE7liz5woJ3D1VBc22cI4dPFTfHtmB/GuU3WTllBPRWcikBxWWBg9PrOt72/oBZV+YRNdSqezAekWvt3tX0WNiv1aHnj+PPevXzn0rFh3KXjPIcWs30setd2T1y5ioz9NrZy8WlFRfXSH1nDo6b3v95ahqOBGrWOE4rbblDwpkKgtjZJXF3q+areoFjRDtzvgnKX4aCpXRO9zL
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2026 17:18:30.5655 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8ec55bf-b7ce-42fa-179e-08ded0824811
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A69.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB7152
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,122 +131,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move schedule() in order to call it only every 10 loop iteration
+to avoid useless overhead.
 
---xKzpQf9uNG78D6R6
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ drivers/usb/gadget/f_mass_storage.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Mon, Jun 22, 2026 at 03:32:21PM +0100, Peter Robinson wrote:
-> On Thu, 18 Jun 2026 at 16:19, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi,
-> >
-> > On Wed, 3 Jun 2026 at 06:06, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Dear U-Boot Contributors,
-> > >
-> > > I would like to introduce the U-Boot Concept tree along with a few th=
-oughts on its role in U-Boot.
-> > >
-> > > By way of background, I have been a contributor for about 15 years - =
-around 10k commits and countless reviews. I have introduced many innovation=
-s into the project: e.g. sandbox, device tree, C test infrastructure, Binma=
-n, standard boot. Of course I could not have done any of this without the U=
--Boot community (nor would there be any point).
-> > >
-> > > As the U-Boot project has matured, the demands for mainline stability=
- and rigorous review have created a natural friction for landing complex, l=
-arge-scale feature and refactoring series at the necessary pace. This struc=
-tural reality, which has slowed the adoption of ambitious efforts like boot=
-std, VBE, xPL [1], and CI-connected hardware labs, is what the Concept tree=
- is designed to alleviate.
-> > >
-> > > I strongly believe that projects must evolve in order to stay relevan=
-t in the long term. This includes code-refactoring, new features and subsys=
-tems, along with migration of old code to use them.  A look back at the U-B=
-oot of 2010 shows how far the project has come. I don't think anyone would =
-still be using U-Boot if it had not evolved.
-> > >
-> > > I have set up a 'Concept' tree, a possible future for U-Boot, as a wa=
-y to regain the old pace of innovation. This environment is a proving groun=
-d for new features where we maintain a lower bar for risk tolerance and com=
-pleteness. We will accept partial and speculative features, provided the un=
-derlying code remains robust and of high quality, with the shared understan=
-ding that features may be dropped if they do not prove beneficial.
-> > >
-> > > Another difference is AI. I believe that AI is the next step on from =
-compilers, which also took a long time to produce good code and find accept=
-ance. The Concept tree welcomes (and encourages) high-quality AI contributi=
-ons and reviews. It accepts PRs and allows reviews on PRs or the mailing li=
-st. It relies 99% on automated tests (sandbox, QEMU and labs) so sets a hig=
-h bar for testing. It uses a separate Gitlab instance for now and of course=
- uses a separate mailing list and Patchwork project to avoid cluttering the=
- main list. Concept runs an AI-powered cherry-picker so that it keeps up wi=
-th mainline. In no sense is it operated as a fork.
-> > >
-> > > Once features are landed and functional in Concept I hope that many w=
-ill find their way to mainline, although inevitably some rework will be nee=
-ded.
-> > >
-> > > I recognise that introducing a new 'Concept' tree might initially cau=
-se confusion or concern. This is an invitation to work together to define i=
-ts role. I welcome all feedback - positive or negative - here on the mailin=
-g list, privately, or on irc. Let=E2=80=99s discuss how this initiative can=
- help U-Boot remain the defining firmware for the 2030s.
-> > >
-> > > [1]  https://lore.kernel.org/u-boot/CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=3Di=
-eT2oaHfgLf3_nC+xXA9g@mail.gmail.com/
-> >
-> > Just to report that after some brief discussions, we have agreed on a
-> > path forward here (thank you Peter!).
-> >
-> > Concept will become a custodian tree in U-Boot's Gitlab instance. I
-> > will run it, with access to my hardware lab. It will cherry-pick from
-> > mainline and accept code through its own channels (PRs and separate
-> > mailing list + patchwork). When features are ready for mainline, I
-> > will send patches to the main list for review in the normal way.
->=20
-> Thanks not entirely what I envisioned with the custodian tree, cherry
-> pickign from mainline and accepting PRs is very much a fork in my
-> opinion.
->=20
-> My intention was that it's a place for you to collaborate with others
-> on feature branches to get them to a point they are ready to go out
-> for review to go into mainline, not pull features from others etc
-> which sounds like to me a fork of stuff that may not reach mainline.
->=20
-> > I have been working to migrate things off u-boot.org (lab, gitlab,
-> > blog... and email). I am transferring u-boot.org to the SFC once this
-> > is finished in the next few days. If we do end up setting up email
-> > addresses for people on u-boot.org, I'd appreciate keeping sjg@
->=20
-> As I've stated elsewhere the only emails will be for the admin
-> required for the running of the project as a whole.
->=20
-> > Tom, Neil Peter, please can you ack this to confirm you are happy with =
-it?
->=20
-> With the caveats outlined above, basically yes.
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index 71dc58da3f0..fb0803e856f 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -676,10 +676,10 @@ static int sleep_thread(struct fsg_common *common)
+ 			if (!g_dnl_board_usb_cable_connected())
+ 				return -EIO;
+ 
++			schedule();
+ 			k = 0;
+ 		}
+ 
+-		schedule();
+ 		dm_usb_gadget_handle_interrupts(udcdev);
+ 	}
+ 	common->thread_wakeup_needed = 0;
 
-I've been quiet on this thread as I think I've already put more than
-enough words out already about this situation. So to repeat what Peter
-said, yes, a custodian tree (which is a well defined thing for the last
-two decades, predating both of us in the project) but not a parallel
-and divergent tree.
+---
+base-commit: 1296a428c67cf103eca482d4a63349661c1b799f
+change-id: 20260622-move_schedule-1f94c93e10cd
 
---=20
-Tom
+Best regards,
+--  
+Patrice Chotard <patrice.chotard@foss.st.com>
 
---xKzpQf9uNG78D6R6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajlJUQAKCRAr4qD1Cr/k
-CmQQAP904ya2WugA/AErl09yi0MxvrzHosTuiztckexYtstrsAEA8V0JNrB2zFMG
-l3x1rVTpYEb3esAeICEdgWcIfHfA9Qc=
-=ydek
------END PGP SIGNATURE-----
-
---xKzpQf9uNG78D6R6--
