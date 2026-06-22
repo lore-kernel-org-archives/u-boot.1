@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F17EDCDB46F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 11:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB44CDB46F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 11:20:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A2F5849BB;
+	by phobos.denx.de (Postfix) with ESMTP id D9124849D1;
 	Mon, 22 Jun 2026 13:20:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="fOAsSXzc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="YNyUc+yW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E6DF84866; Mon, 22 Jun 2026 13:20:26 +0200 (CEST)
+ id 10682849BD; Mon, 22 Jun 2026 13:20:27 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B307E84832
+ by phobos.denx.de (Postfix) with ESMTPS id F1BAE849BA
  for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 13:20:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -27,32 +27,35 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=nora.schiffer@ew.tq-group.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References;
- bh=AaCpbqsTMWd4mCEIPJ+pb/OV3J8goFNGxOcaBXWzU+o=; b=fOAsSXzchpp1iv3U5VOtPx/ABS
- 2SZAdzb8QcpVHIaSQKciMrMOJ3l2QgjzXIk1wyHQcu6LZDEDxALTyYLZn1LqzfrcAS6zyEdy7axWu
- EXO786a/W/bwJrF8nUsMupBPAtaRIsvu9Jj1abWC99fd4/2bTUGi3o/d6zWhYf2vY9vtYj019IN1w
- FE2UC//S/k6U88KuRpoMMqf/uiqWA4NwgYfe0g4ty5bpOWkijV3swVa/NPe+ZIsGtn+4LasYYjLZn
- bhobu3aW1QrPahxYKGbD6L+hPNsWSn6joS/6gtXKKlCYtjRfVvLknE3eVR8nC109GmwwQmekftZgu
- KVPXf1Kg==;
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=kctJwTdYKj+2lsGEcqisifHHlazFA/wsdGSd/4LBS4Y=; b=YNyUc+yWgH59qJWJlpivaLw4x9
+ NhAAhqhWcXPOsvBmZTY5HKhZSAxfkQar/N6e2Pdr+G6S3JWA7hxl2yF3BW4H28d5xbrhvfdm5vsNb
+ 0iu2mQHfWiSgQd4bOoO9TTKwe6VPIYMgcCji9ky9pTAzkTLMN7QfrBxhWSaq7t1I+VEFOMUWsPpdk
+ aK8lkmEUXavYUvkT3FprmnotipLQDCsh79uv1ekcMbEhCx3aHoEzHav0Ocmiwc3Fg3xVsAuPCE/jN
+ fWCMJTkkip012t8v3SE1YqNFt3+NaBQNYg1SIDcn3vGLO5OCTuZ9Iwso6qFDnsqC2UfrlbAOKJFb/
+ 2BF/a65Q==;
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1wbchR-0002Xl-1g; Mon, 22 Jun 2026 13:20:21 +0200
+ id 1wbchR-0002Xo-3D; Mon, 22 Jun 2026 13:20:22 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1wbchQ-000N6e-1L; Mon, 22 Jun 2026 13:20:21 +0200
+ id 1wbchQ-000N6e-2u; Mon, 22 Jun 2026 13:20:21 +0200
 From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 To: u-boot@lists.denx.de
 Cc: u-boot@ew.tq-group.com, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
  Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Subject: [PATCH v2 1/3] bootm: fix flush_cache() with IH_TYPE_KERNEL_NOLOAD
-Date: Mon, 22 Jun 2026 13:19:31 +0200
-Message-ID: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
+Subject: [PATCH v2 3/3] bootm: allow omitting entry point for
+ IH_TYPE_KERNEL_NOLOAD
+Date: Mon, 22 Jun 2026 13:19:33 +0200
+Message-ID: <20260622111933.1488593-3-nora.schiffer@ew.tq-group.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
+References: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -72,46 +75,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-`flush_start` must be set after `load` has been assigned.
+For IH_TYPE_KERNEL_NOLOAD, the entry point is given relative to the
+image start, making 0 a valid default, and for IH_OS_EFI, it is ignored
+altogether, so it may be preferable to omit it.
 
-Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
 Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-v2:
-- Rebased onto next
-- Collected Reviewed-by
+v2: no changes
 
-Patch 2/4 from v1 has been dropped, as an alternative solution has been
-merged. Whether CONFIG_SYS_BOOTM_LEN should be used for the allocation
-size is undecided.
-
-
- boot/bootm.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ boot/bootm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 4c260a5f5ce..7c9a6f82976 100644
+index b1cc6fe6c5c..1aeabdd5db1 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -618,7 +618,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	ulong image_start = os.image_start;
- 	ulong image_len = os.image_len;
- 	ulong decomp_len = CONFIG_SYS_BOOTM_LEN;
--	ulong flush_start = ALIGN_DOWN(load, ARCH_DMA_MINALIGN);
-+	ulong flush_start;
- 	bool no_overlap;
- 	void *load_buf, *image_buf;
- 	int err;
-@@ -663,6 +663,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	/* We need the decompressed image size in the next steps */
- 	images->os.image_len = load_end - load;
+@@ -429,7 +429,7 @@ static int bootm_find_os(const char *cmd_name, const char *addr_fit)
  
-+	flush_start = ALIGN_DOWN(load, ARCH_DMA_MINALIGN);
- 	flush_cache(flush_start, ALIGN(load_end, ARCH_DMA_MINALIGN) - flush_start);
- 
- 	debug("   kernel loaded at 0x%08lx, end = 0x%08lx\n", load, load_end);
+ 		ret = fit_image_get_entry(images.fit_hdr_os,
+ 					  images.fit_noffset_os, &images.ep);
+-		if (ret) {
++		if (ret && images.os.type != IH_TYPE_KERNEL_NOLOAD) {
+ 			puts("Can't get entry point property!\n");
+ 			return 1;
+ 		}
 -- 
 TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
 Amtsgericht München, HRB 105018
