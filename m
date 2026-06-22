@@ -4,109 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52404CDB46B
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 09:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83EBCCDB46B
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 10:04:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3E8F84832;
-	Mon, 22 Jun 2026 11:44:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A672184866;
+	Mon, 22 Jun 2026 12:04:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VS7eFqqP";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nqvTQzrY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D2Juj8HL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0866784832; Mon, 22 Jun 2026 11:44:27 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 411D2848DC; Mon, 22 Jun 2026 12:04:56 +0200 (CEST)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FD9D846A4
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 11:44:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D86FF3F27B
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 09:44:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782121463;
- bh=jpck0L+EaLMuLKsMfBjcgnocBPsPU8WtFUzKNAF1Wb0=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=VS7eFqqPEKFeHLg4WE2BPpSsBtTfGhuF8U7oYT+2z0nk+qO9r8ZDwbRJTxTxqhNjq
- XwTJezUc4ceqN6meTxXjaYm/hkEc3KplrRdjWZnco+J8omcDAkRrTd8fWg9B3HUj8b
- 8m/f53SRE+on37g/7k3dC9M2k337kSsOTlUBq6akzhXTjbMuWrii79mI0kWy+CRy3d
- GGuRkyfSpOZWxbrFUCKc8veX8xdWYLkZeoaR6x2U6T2qrznoa/2Un+SVtKfXCuthfP
- REzQNgq8cJNAv9fpY1CCiCmncbzYuMaBVZzk55/2d6msPhfaIFbgK48w+bPbnWf5EW
- ZjfPOe0eG1rZ+dJBZq12zefRDokJ0/BFVln9/BcOtbkwaiOLlMh0gT20veAUhhLDHh
- +0EskfTFuQfrGxiMWs7jwwqTE1yx2Yno+gD2XeUa5QCAWMSMnklaRKAysA6+guKxmM
- jNDgDXnCwpQyti71uJQhLF0KouzGfSo+OrUNDnY7/fQkBYYiZZZ/2b3EHsVpjvYWY0
- urkY7IrzYhF3RqpJdcGfV6KIsrKaEZBKnBeJxNBXwHz2QYAi+xJsxqvNv56mZDZU+S
- rg+PaM3jb/WGRVMo1DaN3VkJu2rA93RV5KRG9Woot1tmrIO6BPNZnmcRLHj4S3ZfrU
- X6Hrc/NP6I0VeqYb/OBLgYgg=
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-469675e37e8so330557f8f.1
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 02:44:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782121463; x=1782726263;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jpck0L+EaLMuLKsMfBjcgnocBPsPU8WtFUzKNAF1Wb0=;
- b=ATZzsRQyc/e728ZBdYeGPB1i0pl43VL7aEqSztFWj/JIpEDjmmpvbFFjWoVj6iH0Hi
- 8VKwD3xLhOj97Y5imzrxA8HfRptgNO1G7bWorWNd9py4sWpin4gOl7Ywpd1UYBcWlLUP
- eNBYJHQPXYUtT+zT+6JLOWfLfwdhO9D3Zz87O8Fs+PDOv0uMcrl2Xj4zLuL31OgkEJkE
- +wEWkPkrACBijbkAnzbDYocX1eh04MMQOFMYJ2CYqWrJ+VMtMmSISLFtzFZqvhK8bSyI
- bk/IMJOipqj9ix5B/BMoSYSxGbncdEeC14N3fOF94rTZsypxc8q1fANZTms3yEZb6Lxi
- p9TQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rrx/MgS+qA/xG/xVijWqjDMNXgNzdpwDJbiVVcL+Wdj+RfbVE8RJtL6TUqFpI5wIbaTzyBZM6c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yybdrj22IDVXFJUrWwYG+Lntlyk1cYcBj1ZA6+864Th460DwkII
- Gy3j52AcbP81ivAB5YyNlCo3P2fjCoJDKBywlelXVJYiYVZ4n9dMb2oknr0MDu9kw7Y1R5Yr7L6
- z8R+6DMdPU8FXhGbipIGnXtxzpaEFRCMuMS+p0QiZhi8/hx8UipVayAvTemNmOXz5zFdV6o0=
-X-Gm-Gg: AfdE7clCmdI0cifmqilQl42XETEHX9JOy/cfTveD6DI/4VI3H+3Bp73CpZM4hQBVzmX
- xlwn+f01+WwgXZcrPUiiJCLMjHFhcRNLdZLbwajIrnznEEvMYFpUZkP7bjrWl7/sHmjJ3L8Eo94
- IZiNr+B26WiD/C+kaOFtA72QOVn/wumPgqaGdUQsaqjzi22MU6Vu6ganU9FBnAtOP9hyMa8zhCq
- 7mEpCrv+wLqaCdgUKVbQgSd4bjO65K3Gk/7z9JUzbpTrrOK1z1TX9rv5Xc8FtL/iUje8fwlgG43
- nLCifvpaq+3twvBwvsALYjJdR8SLYbIGDkbvkpp9bQWpNliP6ytOdIl1Ntd8VFFeovPK8eo5qV5
- kzt7yQOcCLqnLuC+lrus0m06FBPaFRNm9UF9rM96NnEUgVDX76H+0dxYFs1ns4z+NFlu4pASu4W
- PRv7phHu9ZvFBVzD0JSmm9zmDObJXUzBOQEg==
-X-Received: by 2002:a05:6000:4918:b0:469:763f:942d with SMTP id
- ffacd0b85a97d-469763f96e8mr3195484f8f.5.1782121463101; 
- Mon, 22 Jun 2026 02:44:23 -0700 (PDT)
-X-Received: by 2002:a05:6000:4918:b0:469:763f:942d with SMTP id
- ffacd0b85a97d-469763f96e8mr3195419f8f.5.1782121462549; 
- Mon, 22 Jun 2026 02:44:22 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:605:b91c:8708:9b24:1b42:7a43?
- ([2a02:3035:605:b91c:8708:9b24:1b42:7a43])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46666788282sm35306447f8f.17.2026.06.22.02.44.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jun 2026 02:44:21 -0700 (PDT)
-Message-ID: <7f8263b9-ee4e-46f5-a890-eee826fc9d85@canonical.com>
-Date: Mon, 22 Jun 2026 11:44:20 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id B3D6584832
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 12:04:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65M6nXqK2132029;
+ Mon, 22 Jun 2026 05:04:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=ifqgj3W8me2bJG2H0GMAtbiwD0OvHiVkD3GPBiE91
+ Qk=; b=nqvTQzrYYzTIps8tDceWd9lhA965SaHS7/MKxjNHWOB+jjTlBEACjXNoP
+ QJtbWNlW2gxa3q5m2Zo5S7z5b4oomN6PZnHg5b/TNEmHDfoACnJgXZWqYc9+gUHx
+ P1pWXhOOvigKqlT31bN2Oum5RvNP4veSGGuOZR66lyvwY4RWBdldGN5foqUdA3kC
+ PiXd/p+SttQ2CckRIBsfatrbuS3+g1l11SLj3XlYJMzYmof7PNrVNd2zJYvLB9jP
+ fCS32J0gnRUaloMo9LBu/F06e+rr7O6Ylqf4X8xyNzlRVCp1SasfTkdLgpbHvf9q
+ 4ej89rb8qLHPZHvCSdNx83OwIaLbg==
+Received: from cy3pr05cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11013058.outbound.protection.outlook.com
+ [40.93.201.58])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4ey04e8xak-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Mon, 22 Jun 2026 05:04:48 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MZ1qdLtZ/hKlKbcLZ7QgtgDGq1iahojYN9Qf2n8q4KQpr91Xvitbs7gT0kBrdDAtCdStMu6Z2NdNFJ3aXWZKpQiGeaJ/c7B3YqxgBxM8gGeO/lBvJ38kaTOHuHusYEr5lvUvgOuz2K1pMtdDdRCbtubWAK6NBUTUb66wAwUQiJirrqmENjGQRPFbkxSvSphEYkcZt0RAYWSQ9FTPbPAWMDXnQduFqeZkcFWiNC3E8gDwFNhB2usMIfUR6uSvumHQ3SteamkauECpokqtI4k5UE8AGKjnvBrePYcuaJD8R8pJHyCUfoRk8fPsZ04ol+oAR4KXV+3T66BpRsyYtJLLfA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ifqgj3W8me2bJG2H0GMAtbiwD0OvHiVkD3GPBiE91Qk=;
+ b=hJsOS1p7LlhUidT54o+mc6ThC+Qi01YtYB46gFxc09fig/iLLbU/1bZ7eNlUVrOg4TjJYM0G4Q5kEtCLmqbaffHOxiLsEZqAzk0DgMcB7/BZ9CxkExQ0JNuPwJmbi+sW+UXBwkAIw3qnj81D6OJ1EnDhfYv3wL4w/NDYzH9bHEsPsoDZ+mrDCdBkJCT9BzdNqw8KHRrmr0tPhBDOcxhap6ZAayfe3DnWGa5g1zQyh4s7rTsI+y5JjJB4EjYSQ57jh7eKu/in53r9T5CEoBWJ/Uuu1J8QR7n3qWWeED8xQbFyXag2pg3vJGmYMSceLRO0A7a/w9hrgZ57tqaaDP/DqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ifqgj3W8me2bJG2H0GMAtbiwD0OvHiVkD3GPBiE91Qk=;
+ b=D2Juj8HL0ZNjj79uYxqCi7qSd2y/8OaxC82tnwWTrKS2WfBK7xPaZ3phnKZjltI2RzcEOZNfuDjRbssJCkw3FmSoGFkfhJGVezR2L0A/txUXm+Z4+Qa7E6sL95mAByl2tjGevPX8nThFutN+CLJ6SgOrW8Sc53q74vy0ZaWnykU=
+Received: from CH0PR13CA0056.namprd13.prod.outlook.com (2603:10b6:610:b2::31)
+ by DM4PR10MB5944.namprd10.prod.outlook.com (2603:10b6:8:aa::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Mon, 22 Jun
+ 2026 10:04:46 +0000
+Received: from DS3PEPF000099E1.namprd04.prod.outlook.com
+ (2603:10b6:610:b2:cafe::3) by CH0PR13CA0056.outlook.office365.com
+ (2603:10b6:610:b2::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.12 via Frontend Transport; Mon,
+ 22 Jun 2026 10:04:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ DS3PEPF000099E1.mail.protection.outlook.com (10.167.17.196) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.159.10 via Frontend Transport; Mon, 22 Jun 2026 10:04:45 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 22 Jun
+ 2026 05:04:45 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 22 Jun
+ 2026 05:04:44 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 22 Jun 2026 05:04:44 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65MA4hIB3863418;
+ Mon, 22 Jun 2026 05:04:44 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/11] efi_loader: move file-system helpers to
- efi_app_common
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, u-boot@lists.denx.de
-References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-9-heinrich.schuchardt@canonical.com>
- <CAC_iWjK_OLhXc7Z93_EW2ECWTEqSUnoqLE60=aa7FEv5vrqTVQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWjK_OLhXc7Z93_EW2ECWTEqSUnoqLE60=aa7FEv5vrqTVQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] pinctrl: single: parse gpio-range as a raw array
+ (O(N^2) -> O(N))
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <vigneshr@ti.com>, <nm@ti.com>, 
+ <anshuld@ti.com>, Jordi Trepat Mur <yordy1902@gmail.com>
+In-Reply-To: <20260614103232.3586246-1-yordy1902@gmail.com>
+References: <20260614103232.3586246-1-yordy1902@gmail.com>
+Date: Mon, 22 Jun 2026 15:34:41 +0530
+Message-ID: <178212268104.3933933.6321183759645640242.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782122683; l=3081;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=t+tE491bzDDC33Z7ebSKSR0MB5zZ1xp77RCUAu5D2wM=;
+ b=qzBK2fIIqkHjtnG2CeEjn1yRePnZS5tQ/4HO1xwmqKIp0/5wQMNex9DOQZb3CyVleXgwqbSaY
+ 8qJjaAikx0cA3O7K4P0/VJ2W4PefChrnjs5v9e6qKRpDtH3X2+e2N4z
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099E1:EE_|DM4PR10MB5944:EE_
+X-MS-Office365-Filtering-Correlation-Id: cf81bea0-fe17-4fc7-67a7-08ded045afef
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|36860700016|82310400026|1800799024|56012099006|5023799004|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: BN6MKSzDhqB4gvz1jIsw1l5AAc0iW3DHD1Z7qMDOsauXJ6CFzgyF2HVAkSQnvpC+v18cf0BAXEEox2yLxtojftpQE4z7ybKN1Rzw3/lwyRXCmshsXyZTzR+pmOsM2GpQfL79BbRwXDaitGETHusEtNR4U7PxeyTTaeDFQ6QsNloXmxPEm/QprPlD70c/zsvIXqe5HF2JBnevVi+HxTHOU8HHjH/7IH5NsaIcrCGQv1w0TAxnR4jsymrz5KwCM7jNs6Rg/GgDsETw5Qk2FHsH6/c0sCKUGQn47KyqwZM2PXh6zw33mL2Wo4zMQLmM6x5M19xtQsrgx6zgy+6hHMVKYfmchNdTxIIIBpVF+PRpRA8HwTvPs3xl/Aj/tosjNvg3jUlNE9G0ALs26AtquZsjuyNq9au/Tsm0l2auTmeWd61L4UZf92cAZYL9Dm8trHbyq1iodkLJQkcy5wFKBfP1E58L5zrqg+8lwwfLCdBkfEZpOcucyjrlfykoBU72T7D1LxPfnG4g9SGj6/ZPU+iWWvTQiOidBC63y5BnCpSxZrCck6h0ZBVoipEPpGHErfvyF4GEZADYS+xwE5YrP+MG0To3KDyzI/4u3fMUmxA4hjqqAHh66iqBEV5hwJbjqe2AsTkA+kcInu19oQyhGdyUhfDHGByLjCx5f4z7U5H5WV/qm8MAZIwU0ToRmux/fH+QkqI69pwcZDQXu/lNZutnMg==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(36860700016)(82310400026)(1800799024)(56012099006)(5023799004)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: gncKzcYjDFRtQjexB/zw03xWooeMU/WoF3qMgvxK5CDXrds1QKYCgSxX20klQ8jAJYLE4crrpGOYR82FjDl7qWjTX6W0VVLiqjCiXe26hrMKSFgE4Gda5yjO2WMXCaYpgE3ZynKLQ55kB9xw8HVM1iB/b7qoviBn4BhODdRbGjIf+ArK+lV0LgrpculYnQKFoGVjbiVbf6bKxTJdt9aiABFvQ4sS5llFqefVTa/vn1pFgLGbpmKx66JO8CxJeniwu38yPz2wcSBoHo47DIFI3xBWavyA7WKbYP18/sndT9geQ9rJF6wJ1q0mn/5xKn6AFRsTO3/VcoxXGWN9VdsVzmsB8n7uJoZI/9JHxsWE/DUBqzpDUFX/xmuVsGD/oXHL8CuaERZXvmezGWnAlF6cMg9q2GFoHHnxuKimHERwRuh0GkQ1MkexJiJBeKFhIAAR
+X-Exchange-RoutingPolicyChecked: CrdITn8Kxn7+Uld8kAa7u9XW1h5CS9ASzmPURo8tvhD7nLPK0wEKOIR0SLISzMvcpA/IpPaOEkG6iauLNTub0/w8eGOsTJI+lVjYCUmcJURYWJ+XzTkoVH3ZWz551jR9h5SoY8mLYRISoG0O6bCDNWI+qXpK/QjpF9ZwA6Arr3JV6jdrkzWxZ20t8oFyt28DS2TeWuLW5YK4NrFfIMdY9GQ9tCF84f0ur7mzs+TMe6aYahWfOL8OOZ9PWP+5xjQYCJ/OfQERQ9KIJnlKVm4XaZthSCKlVotFQgfAUdGkhNKtOTCgfzOkYS4zJR1Jk6Hy4UkGuIJJPsMkloe9OUuR/w==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2026 10:04:45.5161 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf81bea0-fe17-4fc7-67a7-08ded045afef
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099E1.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB5944
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDA5OSBTYWx0ZWRfX2aVbhCIOpqbU
+ eGkQGkD1GUFmDGznmDAiZI+QdswPg8sYRmBb4D/yeWRimjUpoiLRgTUxHN9n7A0/u+TPWgPIlda
+ ec3VjqNwBqbvrQVidr5olqkbUVsZxvw=
+X-Authority-Analysis: v=2.4 cv=X/Fi7mTe c=1 sm=1 tr=0 ts=6a3908c0 cx=c_pps
+ a=+UayH2mdqs80qU9+PBkj6w==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22 a=pGLkceISAAAA:8
+ a=sozttTNsAAAA:8 a=Yx4SyzFDe5jPTd1-q0gA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDA5OSBTYWx0ZWRfX3UXOgsick0A4
+ E8H2zjmhaqWz3iCa0PmWrktR/ub1GOTqETquGOGL616dK6WhlIldxpcH63j9N0AYAOfWtO51udh
+ iovJQMhIOOnsyzgQJik3Nhri6bXP7cLZTWM/ZV/Uk/dcK7gi+DHz0SSLjAMnWa4UlQETG1r5nHI
+ hhgskjPtnExLiYf9v/iqk2y2cXrSv1nhPPFOpLPN2zAD7if0B6MD4fuPYPPn3cjpOoNiwVpcwBV
+ bp3CqZew02weRxKqpB8rR9gq+sp5Wvp2YMt4JHkhVc0SXgYiQYY8gjlyXEIHWiOuAadsYKUpL1P
+ nStXnki1CPoki2sK8zFRbKMJWkAXJMqeZ0qBjdTV9xk0CUI3P6v/qxxq7p+YfPKwYUciRWaVmzY
+ bXtNYyqKe4V7XTjZYrbQOvC1yPtFlvvzeSMprAX64LIkqkZoWpjKLk0W432BCr8XIPi0T90bkMS
+ GI5jy1vqtDUBBlv2a0Q==
+X-Proofpoint-ORIG-GUID: -Bqm58VwmNiIkISKF6CnKxvn-NlGYh-3
+X-Proofpoint-GUID: -Bqm58VwmNiIkISKF6CnKxvn-NlGYh-3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-22_01,2026-06-18_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1011 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606220099
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,705 +187,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/22/26 10:08, Ilias Apalodimas wrote:
-> Hi Heinrich
+On Sun, 14 Jun 2026 12:32:32 +0200, Jordi Trepat Mur <yordy1902@gmail.com> wrote:
+> single_add_gpio_func() calls ofnode_parse_phandle_with_args() once per
+> gpio-range entry. With a flat device tree, every call re-iterates the
+> property from index 0 and, because cellname is set, performs an
+> fdt_node_offset_by_phandle() (a full-FDT scan) at every step. The total
+> cost is therefore quadratic in the number of entries and proportional
+> to the size of the device tree.
 > 
-> On Sun, 21 Jun 2026 at 11:19, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Move the shared file-system utilities to efi_app_common:
->>
->> * open_file_system() - open the simple file system protocol, first
->>    trying the partition the image was loaded from, then the UEFI system
->>    partition.
->> * get_config_table()  - look up an EFI configuration table by GUID.
->> * save_file()         - write a buffer to a named file, prompting for
->>    confirmation if the file already exists.
->>
->> get_config_table() supersedes the private get_dtb() in dtbdump and
->> get_dbg_info() in dbginfodump; both call-sites are updated to use it.
->>
->> dtbdump's do_save() and initrddump's do_save() are simplified to use
->> the common save_file(), eliminating duplicate file-open/write/close
->> sequences.
->>
->> smbiosdump's private get_config_table(), open_file_system() and
->> save_file() are removed; the common versions take their place.
->>
->> GUID declarations that are no longer referenced after these removals
->> are dropped from each app's file-scope variables.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
-> 
-> Don't we need the function description for the documentation now that
-> it's in a common file?
+> On a TI J722S board this makes the pinctrl probe take 723 ms
 
-Thank you for reviewing.
+I'm unable to reproduce the delays you have observed with the J722s EVM. Are you
+using a custom DT perhaps?
 
-Exported functions have descriptions in efi_app_common.h.
+>
+>
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> index 42980e097e0..442979519d4 100644
+> --- a/drivers/pinctrl/pinctrl-single.c
+> +++ b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+>  	const char *cellname = "#pinctrl-single,gpio-range-cells";
+>  	struct single_gpiofunc_range *range;
+>  	struct ofnode_phandle_args gpiospec;
+> -	int ret, i;
+> -
+> -	for (i = 0; ; i++) {
+> -		ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), propname,
+> -						     cellname, 0, i, &gpiospec);
+> -		/* Do not treat it as error. Only treat it as end condition. */
+> -		if (ret) {
+> -			ret = 0;
+> -			break;
+> +	const __be32 *list;
+> +	int size, total_cells, cells_per_entry, entries, ret, i;
+> +	int ret_total = 0;
 
-Adding a chapter to the documentation to explain how to create a new app 
-including a link to efi_app_common.h make sense. I guess this can be 
-done in a follow up patch.
+Why rename 'ret' to 'ret_total' here? From what I can see, it's still being used
+for the same purpose.
 
-Best regards
+> +
+> +	/*
+> +	 * Read the property once and iterate over the raw cell array in
+> +	 * memory. Calling ofnode_parse_phandle_with_args() once per index
+> +	 * re-walks the property from the start on every call and resolves
+> +	 * the phandle (a full-FDT scan) at each step, which is O(N^2) in
+> +	 * the number of entries and very slow pre-relocation with caches
+> +	 * off. Resolve only the first entry's phandle to validate the
+> +	 * cell layout; the target node itself is never used here.
+> +	 */
+> +	list = ofnode_get_property(dev_ofnode(dev), propname, &size);
+> +	if (!list || size <= 0)
 
-Heinrich
+The size check is redundant here, the size is only negative with error code if
+list is NULL.
 
-> 
-> In any case
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> 
->> v2:
->>          new patch
->> ---
->>   lib/efi_loader/dbginfodump.c    |  22 +-----
->>   lib/efi_loader/dtbdump.c        | 120 +-----------------------------
->>   lib/efi_loader/efi_app_common.c | 105 +++++++++++++++++++++++++++
->>   lib/efi_loader/efi_app_common.h |  27 +++++++
->>   lib/efi_loader/initrddump.c     |  69 +-----------------
->>   lib/efi_loader/smbiosdump.c     | 125 --------------------------------
->>   6 files changed, 141 insertions(+), 327 deletions(-)
->>
->> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
->> index 4808fe254fe..b54c3830a66 100644
->> --- a/lib/efi_loader/dbginfodump.c
->> +++ b/lib/efi_loader/dbginfodump.c
->> @@ -91,26 +91,6 @@ static void do_help(void)
->>          error(u"exit       - exit the shell\r\n");
->>   }
->>
->> -/**
->> - * get_dbg_info_table() - get debug info table
->> - *
->> - * Return:     debug info table or NULL
->> - */
->> -static void *get_dbg_info(void)
->> -{
->> -       void *dbg = NULL;
->> -       efi_uintn_t i;
->> -
->> -       for (i = 0; i < systable->nr_tables; ++i) {
->> -               if (!memcmp(&systable->tables[i].guid, &dbg_info_guid,
->> -                           sizeof(efi_guid_t))) {
->> -                       dbg = systable->tables[i].table;
->> -                       break;
->> -               }
->> -       }
->> -       return dbg;
->> -}
->> -
->>   /**
->>    * print_info() - print loaded image protocol
->>    */
->> @@ -144,7 +124,7 @@ static efi_status_t do_dump(void)
->>          struct dbg_info_header *dbg;
->>          u32 count;
->>
->> -       dbg = get_dbg_info();
->> +       dbg = get_config_table(&dbg_info_guid);
->>          if (!dbg) {
->>                  error(u"Debug info table not found\r\n");
->>                  return EFI_NOT_FOUND;
->> diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
->> index 559c64be7f7..0d56a41ecf6 100644
->> --- a/lib/efi_loader/dtbdump.c
->> +++ b/lib/efi_loader/dtbdump.c
->> @@ -7,7 +7,6 @@
->>    */
->>
->>   #include <efi_dt_fixup.h>
->> -#include <part.h>
->>   #include <linux/libfdt.h>
->>   #include "efi_app_common.h"
->>
->> @@ -18,14 +17,10 @@
->>
->>   static struct efi_boot_services *bs;
->>   static const efi_guid_t fdt_guid = EFI_FDT_GUID;
->> -static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
->> -static const efi_guid_t guid_simple_file_system_protocol =
->> -                                       EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
->>   static efi_handle_t handle;
->>   static struct efi_system_table *systable;
->>   static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
->>   static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
->> -static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
->>
->>   /**
->>    * print_char() - print character
->> @@ -66,27 +61,6 @@ static u32 f2h(fdt32_t val)
->>          return *(u32 *)buf;
->>   }
->>
->> -/**
->> - * get_dtb() - get device tree
->> - *
->> - * @systable:  system table
->> - * Return:     device tree or NULL
->> - */
->> -static void *get_dtb(struct efi_system_table *systable)
->> -{
->> -       void *dtb = NULL;
->> -       efi_uintn_t i;
->> -
->> -       for (i = 0; i < systable->nr_tables; ++i) {
->> -               if (!memcmp(&systable->tables[i].guid, &fdt_guid,
->> -                           sizeof(efi_guid_t))) {
->> -                       dtb = systable->tables[i].table;
->> -                       break;
->> -               }
->> -       }
->> -       return dtb;
->> -}
->> -
->>   /**
->>    * do_help() - print help
->>    */
->> @@ -98,52 +72,6 @@ static void do_help(void)
->>          error(u"exit       - exit the shell\r\n");
->>   }
->>
->> -/**
->> - * open_file_system() - open simple file system protocol
->> - *
->> - * file_system:        interface of the simple file system protocol
->> - * Return:     status code
->> - */
->> -static efi_status_t
->> -open_file_system(struct efi_simple_file_system_protocol **file_system)
->> -{
->> -       struct efi_loaded_image *loaded_image;
->> -       efi_status_t ret;
->> -       efi_handle_t *handle_buffer = NULL;
->> -       efi_uintn_t count;
->> -
->> -       ret = bs->open_protocol(handle, &loaded_image_guid,
->> -                               (void **)&loaded_image, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Loaded image protocol not found\r\n");
->> -               return ret;
->> -       }
->> -
->> -       /* Open the simple file system protocol on the same partition */
->> -       ret = bs->open_protocol(loaded_image->device_handle,
->> -                               &guid_simple_file_system_protocol,
->> -                               (void **)file_system, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret == EFI_SUCCESS)
->> -               return ret;
->> -
->> -       /* Open the simple file system protocol on the UEFI system partition */
->> -       ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
->> -                                      NULL, &count, &handle_buffer);
->> -       if (ret == EFI_SUCCESS && handle_buffer)
->> -               ret = bs->open_protocol(handle_buffer[0],
->> -                                       &guid_simple_file_system_protocol,
->> -                                       (void **)file_system, NULL, NULL,
->> -                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS)
->> -               error(u"Failed to open simple file system protocol\r\n");
->> -       if (handle_buffer)
->> -               bs->free_pool(handle_buffer);
->> -
->> -       return ret;
->> -}
->> -
->>   /**
->>    * do_load() - load and install device-tree
->>    *
->> @@ -289,13 +217,11 @@ out:
->>    */
->>   static efi_status_t do_save(u16 *filename)
->>   {
->> -       struct efi_simple_file_system_protocol *file_system;
->> -       efi_uintn_t dtb_size;
->> -       struct efi_file_handle *root, *file;
->>          struct fdt_header *dtb;
->> +       efi_uintn_t dtb_size;
->>          efi_uintn_t ret;
->>
->> -       dtb = get_dtb(systable);
->> +       dtb = get_config_table(&fdt_guid);
->>          if (!dtb) {
->>                  error(u"DTB not found\r\n");
->>                  return EFI_NOT_FOUND;
->> @@ -308,45 +234,7 @@ static efi_status_t do_save(u16 *filename)
->>
->>          filename = skip_whitespace(filename);
->>
->> -       ret = open_file_system(&file_system);
->> -       if (ret != EFI_SUCCESS)
->> -               return ret;
->> -
->> -       /* Open volume */
->> -       ret = file_system->open_volume(file_system, &root);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Failed to open volume\r\n");
->> -               return ret;
->> -       }
->> -       /* Check if file already exists */
->> -       ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
->> -       if (ret == EFI_SUCCESS) {
->> -               file->close(file);
->> -               print(u"Overwrite existing file (y/n)? ");
->> -               ret = efi_input_yn();
->> -               print(u"\r\n");
->> -               if (ret != EFI_SUCCESS) {
->> -                       root->close(root);
->> -                       error(u"Aborted by user\r\n");
->> -                       return ret;
->> -               }
->> -       }
->> -
->> -       /* Create file */
->> -       ret = root->open(root, &file, filename,
->> -                        EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
->> -                        EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
->> -       if (ret == EFI_SUCCESS) {
->> -               /* Write file */
->> -               ret = file->write(file, &dtb_size, dtb);
->> -               if (ret != EFI_SUCCESS)
->> -                       error(u"Failed to write file\r\n");
->> -               file->close(file);
->> -       } else {
->> -               error(u"Failed to open file\r\n");
->> -       }
->> -       root->close(root);
->> -
->> +       ret = save_file(filename, dtb, dtb_size);
->>          if (ret == EFI_SUCCESS) {
->>                  print(filename);
->>                  print(u" written\r\n");
->> @@ -479,7 +367,7 @@ static efi_status_t do_dump(void)
->>          const char *strings;
->>          u32 level = 0;
->>
->> -       fdt = get_dtb(systable);
->> +       fdt = get_config_table(&fdt_guid);
->>          if (!fdt) {
->>                  error(u"DTB not found\r\n");
->>                  return EFI_NOT_FOUND;
->> diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
->> index 6bd52e08d28..af9799557fc 100644
->> --- a/lib/efi_loader/efi_app_common.c
->> +++ b/lib/efi_loader/efi_app_common.c
->> @@ -6,6 +6,7 @@
->>    */
->>
->>   #include <efi_api.h>
->> +#include <part.h>
->>   #include "efi_app_common.h"
->>
->>   static efi_handle_t app_handle;
->> @@ -15,6 +16,9 @@ struct efi_boot_services *bs;
->>   static bool nocolor;
->>   static struct efi_system_table *systable;
->>   static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
->> +static const efi_guid_t guid_simple_file_system_protocol =
->> +       EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
->> +static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
->>
->>   static u16 *get_load_options(void)
->>   {
->> @@ -199,3 +203,104 @@ efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
->>                  }
->>          }
->>   }
->> +
->> +void *get_config_table(const efi_guid_t *guid)
->> +{
->> +       size_t i;
->> +
->> +       for (i = 0; i < systable->nr_tables; ++i) {
->> +               if (!memcmp(guid, &systable->tables[i].guid, 16))
->> +                       return systable->tables[i].table;
->> +       }
->> +
->> +       return NULL;
->> +}
->> +
->> +efi_status_t
->> +open_file_system(struct efi_simple_file_system_protocol **file_system)
->> +{
->> +       struct efi_loaded_image *loaded_image;
->> +       efi_status_t ret;
->> +       efi_handle_t *handle_buffer = NULL;
->> +       efi_uintn_t count;
->> +
->> +       ret = bs->open_protocol(app_handle, &loaded_image_guid,
->> +                               (void **)&loaded_image, NULL, NULL,
->> +                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> +       if (ret != EFI_SUCCESS) {
->> +               error(u"Loaded image protocol not found\r\n");
->> +               return ret;
->> +       }
->> +
->> +       /* Open the simple file system protocol on the same partition */
->> +       ret = bs->open_protocol(loaded_image->device_handle,
->> +                               &guid_simple_file_system_protocol,
->> +                               (void **)file_system, NULL, NULL,
->> +                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> +       if (ret == EFI_SUCCESS)
->> +               return ret;
->> +
->> +       /* Open the simple file system protocol on the UEFI system partition */
->> +       ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
->> +                                      NULL, &count, &handle_buffer);
->> +       if (ret == EFI_SUCCESS && handle_buffer)
->> +               ret = bs->open_protocol(handle_buffer[0],
->> +                                       &guid_simple_file_system_protocol,
->> +                                       (void **)file_system, NULL, NULL,
->> +                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> +       if (ret != EFI_SUCCESS)
->> +               error(u"Failed to open simple file system protocol\r\n");
->> +       if (handle_buffer)
->> +               bs->free_pool(handle_buffer);
->> +
->> +       return ret;
->> +}
->> +
->> +efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
->> +{
->> +       efi_uintn_t ret;
->> +       struct efi_simple_file_system_protocol *file_system;
->> +       struct efi_file_handle *root, *file;
->> +
->> +       ret = open_file_system(&file_system);
->> +       if (ret != EFI_SUCCESS)
->> +               return ret;
->> +
->> +       /* Open volume */
->> +       ret = file_system->open_volume(file_system, &root);
->> +       if (ret != EFI_SUCCESS) {
->> +               error(u"Failed to open volume\r\n");
->> +               return ret;
->> +       }
->> +       /* Check if file already exists */
->> +       ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
->> +       if (ret == EFI_SUCCESS) {
->> +               file->close(file);
->> +               print(u"Overwrite existing file (y/n)? ");
->> +               ret = efi_input_yn();
->> +               print(u"\r\n");
->> +               if (ret != EFI_SUCCESS) {
->> +                       root->close(root);
->> +                       error(u"Aborted by user\r\n");
->> +                       return ret;
->> +               }
->> +       }
->> +
->> +       /* Create file */
->> +       ret = root->open(root, &file, filename,
->> +                        EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
->> +                                EFI_FILE_MODE_CREATE,
->> +                        EFI_FILE_ARCHIVE);
->> +       if (ret == EFI_SUCCESS) {
->> +               /* Write file */
->> +               ret = file->write(file, &size, buf);
->> +               if (ret != EFI_SUCCESS)
->> +                       error(u"Failed to write file\r\n");
->> +               file->close(file);
->> +       } else {
->> +               error(u"Failed to open file\r\n");
->> +       }
->> +       root->close(root);
->> +
->> +       return ret;
->> +}
->> diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
->> index ff37f3413eb..77fe100afd9 100644
->> --- a/lib/efi_loader/efi_app_common.h
->> +++ b/lib/efi_loader/efi_app_common.h
->> @@ -101,4 +101,31 @@ efi_status_t efi_input_yn(void);
->>    */
->>   efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
->>
->> +/**
->> + * get_config_table() - get configuration table
->> + *
->> + * @guid:       GUID of the configuration table
->> + * Return:      pointer to configuration table or NULL
->> + */
->> +void *get_config_table(const efi_guid_t *guid);
->> +
->> +/**
->> + * open_file_system() - open simple file system protocol
->> + *
->> + * @file_system: interface of the simple file system protocol
->> + * Return:       status code
->> + */
->> +efi_status_t
->> +open_file_system(struct efi_simple_file_system_protocol **file_system);
->> +
->> +/**
->> + * save_file() - save buffer to a file on the EFI system partition
->> + *
->> + * @filename:   file name
->> + * @buf:        buffer to write
->> + * @size:       size of the buffer
->> + * Return:      status code
->> + */
->> +efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size);
->> +
->>   #endif /* _EFI_APP_COMMON_H */
->> diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
->> index 0a025c1a841..c3e6f2b683f 100644
->> --- a/lib/efi_loader/initrddump.c
->> +++ b/lib/efi_loader/initrddump.c
->> @@ -19,9 +19,6 @@
->>
->>   static struct efi_system_table *systable;
->>   static struct efi_boot_services *bs;
->> -static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
->> -static const efi_guid_t guid_simple_file_system_protocol =
->> -                                       EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
->>   static const efi_guid_t load_file2_guid = EFI_LOAD_FILE2_PROTOCOL_GUID;
->>   static efi_handle_t handle;
->>
->> @@ -143,9 +140,6 @@ static efi_status_t do_load(void)
->>    */
->>   static efi_status_t do_save(u16 *filename)
->>   {
->> -       struct efi_loaded_image *loaded_image;
->> -       struct efi_simple_file_system_protocol *file_system;
->> -       struct efi_file_handle *root, *file;
->>          void *initrd;
->>          efi_uintn_t initrd_size;
->>          efi_uintn_t ret;
->> @@ -156,68 +150,13 @@ static efi_status_t do_save(u16 *filename)
->>
->>          filename = skip_whitespace(filename);
->>
->> -       ret = bs->open_protocol(handle, &loaded_image_guid,
->> -                               (void **)&loaded_image, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Loaded image protocol not found\r\n");
->> -               goto out;
->> -       }
->> -
->> -       /* Open the simple file system protocol */
->> -       ret = bs->open_protocol(loaded_image->device_handle,
->> -                               &guid_simple_file_system_protocol,
->> -                               (void **)&file_system, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Failed to open simple file system protocol\r\n");
->> -               goto out;
->> -       }
->> -
->> -       /* Open volume */
->> -       ret = file_system->open_volume(file_system, &root);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Failed to open volume\r\n");
->> -               goto out;
->> -       }
->> -       /* Check if file already exists */
->> -       ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
->> -       if (ret == EFI_SUCCESS) {
->> -               file->close(file);
->> -               efi_drain_input();
->> -               print(u"Overwrite existing file (y/n)? ");
->> -               ret = efi_input_yn();
->> -               print(u"\r\n");
->> -               if (ret != EFI_SUCCESS) {
->> -                       root->close(root);
->> -                       error(u"Aborted by user\r\n");
->> -                       goto out;
->> -               }
->> -       }
->> -
->> -       /* Create file */
->> -       ret = root->open(root, &file, filename,
->> -                        EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
->> -                        EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
->> +       ret = save_file(filename, initrd, initrd_size);
->>          if (ret == EFI_SUCCESS) {
->> -               /* Write file */
->> -               ret = file->write(file, &initrd_size, initrd);
->> -               if (ret != EFI_SUCCESS) {
->> -                       error(u"Failed to write file\r\n");
->> -               } else {
->> -                       print(filename);
->> -                       print(u" written\r\n");
->> -               }
->> -               file->close(file);
->> -       } else {
->> -               error(u"Failed to open file\r\n");
->> +               print(filename);
->> +               print(u" written\r\n");
->>          }
->> -       root->close(root);
->>
->> -out:
->> -       if (initrd)
->> -               bs->free_pages((uintptr_t)initrd,
->> -                              efi_size_in_pages(initrd_size));
->> +       bs->free_pages((uintptr_t)initrd, efi_size_in_pages(initrd_size));
->>          return ret;
->>   }
->>
->> diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
->> index 351e103fb97..8aa6f594a07 100644
->> --- a/lib/efi_loader/smbiosdump.c
->> +++ b/lib/efi_loader/smbiosdump.c
->> @@ -8,7 +8,6 @@
->>    * clearing of the screen.
->>    */
->>
->> -#include <part.h>
->>   #include <smbios.h>
->>   #include <string.h>
->>   #include "efi_app_common.h"
->> @@ -20,56 +19,6 @@ static efi_handle_t handle;
->>   static struct efi_system_table *systable;
->>   static const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
->>   static const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
->> -static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
->> -static const efi_guid_t guid_simple_file_system_protocol =
->> -                                       EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
->> -static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
->> -
->> -/**
->> - * open_file_system() - open simple file system protocol
->> - *
->> - * file_system:        interface of the simple file system protocol
->> - * Return:     status code
->> - */
->> -static efi_status_t
->> -open_file_system(struct efi_simple_file_system_protocol **file_system)
->> -{
->> -       struct efi_loaded_image *loaded_image;
->> -       efi_status_t ret;
->> -       efi_handle_t *handle_buffer = NULL;
->> -       efi_uintn_t count;
->> -
->> -       ret = bs->open_protocol(handle, &loaded_image_guid,
->> -                               (void **)&loaded_image, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Loaded image protocol not found\r\n");
->> -               return ret;
->> -       }
->> -
->> -       /* Open the simple file system protocol on the same partition */
->> -       ret = bs->open_protocol(loaded_image->device_handle,
->> -                               &guid_simple_file_system_protocol,
->> -                               (void **)file_system, NULL, NULL,
->> -                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret == EFI_SUCCESS)
->> -               return ret;
->> -
->> -       /* Open the simple file system protocol on the UEFI system partition */
->> -       ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
->> -                                      NULL, &count, &handle_buffer);
->> -       if (ret == EFI_SUCCESS && handle_buffer)
->> -               ret = bs->open_protocol(handle_buffer[0],
->> -                                       &guid_simple_file_system_protocol,
->> -                                       (void **)file_system, NULL, NULL,
->> -                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
->> -       if (ret != EFI_SUCCESS)
->> -               error(u"Failed to open simple file system protocol\r\n");
->> -       if (handle_buffer)
->> -               bs->free_pool(handle_buffer);
->> -
->> -       return ret;
->> -}
->>
->>   /**
->>    * do_help() - print help
->> @@ -81,24 +30,6 @@ static void do_help(void)
->>          error(u"exit        - exit the shell\r\n");
->>   }
->>
->> -/**
->> - * get_config_table() - get configuration table
->> - *
->> - * @guid:      GUID of the configuration table
->> - * Return:     pointer to configuration table or NULL
->> - */
->> -static void *get_config_table(const efi_guid_t *guid)
->> -{
->> -       size_t i;
->> -
->> -       for (i = 0; i < systable->nr_tables; ++i) {
->> -               if (!memcmp(guid, &systable->tables[i].guid, 16))
->> -                       return systable->tables[i].table;
->> -       }
->> -
->> -       return NULL;
->> -}
->> -
->>   /**
->>    * checksum() - calculate checksum
->>    *
->> @@ -211,62 +142,6 @@ static efi_status_t do_check(void)
->>          return EFI_SUCCESS;
->>   }
->>
->> -/**
->> - * save_file() - save file to EFI system partition
->> - *
->> - * @filename:  file name
->> - * @buf:       buffer to write
->> - * @size:      size of the buffer
->> - */
->> -static efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
->> -{
->> -       efi_uintn_t ret;
->> -       struct efi_simple_file_system_protocol *file_system;
->> -       struct efi_file_handle *root, *file;
->> -
->> -       ret = open_file_system(&file_system);
->> -       if (ret != EFI_SUCCESS)
->> -               return ret;
->> -
->> -       /* Open volume */
->> -       ret = file_system->open_volume(file_system, &root);
->> -       if (ret != EFI_SUCCESS) {
->> -               error(u"Failed to open volume\r\n");
->> -               return ret;
->> -       }
->> -       /* Check if file already exists */
->> -       ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
->> -       if (ret == EFI_SUCCESS) {
->> -               file->close(file);
->> -               print(u"Overwrite existing file (y/n)? ");
->> -               ret = efi_input_yn();
->> -               print(u"\r\n");
->> -               if (ret != EFI_SUCCESS) {
->> -                       root->close(root);
->> -                       error(u"Aborted by user\r\n");
->> -                       bs->free_pool(buf);
->> -                       return ret;
->> -               }
->> -       }
->> -
->> -       /* Create file */
->> -       ret = root->open(root, &file, filename,
->> -                        EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
->> -                        EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
->> -       if (ret == EFI_SUCCESS) {
->> -               /* Write file */
->> -               ret = file->write(file, &size, buf);
->> -               if (ret != EFI_SUCCESS)
->> -                       error(u"Failed to write file\r\n");
->> -               file->close(file);
->> -       } else {
->> -               error(u"Failed to open file\r\n");
->> -       }
->> -       root->close(root);
->> -
->> -       return ret;
->> -}
->> -
->>   /**
->>    * do_save() - save SMBIOS table
->>    *
->> --
->> 2.53.0
->>
+> [ ... skip 20 lines ... ]
+> +
+> +	for (i = 0; i < entries; i++) {
+> +		const __be32 *entry = list + i * cells_per_entry;
+> +		u32 phandle_i = be32_to_cpup(entry + 0);
+> +
+> +		if (phandle_i == 0) {
 
+You could just do `if (!phandle_i)` here. Also, is the validation for a null
+phandle required here? Wouldn't a properly configured DT never hit this case?
+
+> +			/* empty entry - match original: skip without creating range */
+> +			continue;
+>  		}
+>  		range = devm_kzalloc(dev, sizeof(*range), GFP_KERNEL);
+
+I wonder if we can just allocate a pool of ranges[entries] outside the loop
+since we already know how many entries we would need. This would avoid the
+repeated calls to malloc and the subsequent null check.
+
+-- 
+Anshul Dalal <anshuld@ti.com>
