@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC52CD98F2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 22:22:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09519CDB46F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 22:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DDC984931;
-	Tue, 23 Jun 2026 00:22:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69004849C5;
+	Tue, 23 Jun 2026 00:23:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KsicaB+j";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gi1FxPhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08E4884944; Tue, 23 Jun 2026 00:22:47 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 513CF849CE; Tue, 23 Jun 2026 00:23:32 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A919B848EB
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 00:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD4CA848EB
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 00:23:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e6d14aaef8so2081800a34.3
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 15:22:44 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-6a0b1edbe32so3925778eaf.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 15:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782166963; x=1782771763; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LDLjuem6/EgmX+lXVx3Ev4nz6zAVZHY7amvu4W7QNvY=;
- b=KsicaB+j9ARTOniRKkki6g0k7MAQXmeEBOvDLT1xVFDbyD/EmIN2sWNL3Uwqb9Rfj5
- OogbL3ONTXOSheRxqphXAsT5Sxgs3ssG5TZfxLOSGvVVZiLJinWIFadTq7+4pHqpOhDy
- Q7eK7f4tB+9nnfG6HGiiYlohQNCFFapbKHpi4=
+ d=konsulko.com; s=google; t=1782167008; x=1782771808; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nhQ8Uf27nhVc5IaW2NHfYylbjpAM4vbI0ObBMIEriuU=;
+ b=gi1FxPhjKsPIB0RByGyIKjGfG/bMCXKuE0D630AM01JTi0ZW9gR9YUDuzNaezeJxCL
+ eNmb2gn4WYkHQU+2s7TKkwwDxAZZ+xCLYADCA8RURHq5VPL3zKn0NUW2vYpsqx7MRpIo
+ VIgS0mj9rY32SRzCY8sB8RqwXu6SkZouPiWQc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782166963; x=1782771763;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LDLjuem6/EgmX+lXVx3Ev4nz6zAVZHY7amvu4W7QNvY=;
- b=fZt9de02TK0aG8r9obId+SIe9sIyWxodnlmM++07yC4SSQSyIOsSrnQx6lz434J4j8
- NsPCqH8xdgxsLNFL/a7wQ3TMoZLa095a8+12q1Zya/nDSvhcyAkFgQkQaNUYhLZcG6kj
- 4R6ZXpBPXdF8h+1tewPWaWFwtgUMdecbLZBu2yGF8V4ZNiAS6fEoHZQ5UBho0zeIcqHh
- hQyvlZzsVZjejRtkzn8qpBXOKhA0a629D1n7DCDrLwHxbsjyddP0K5lZYN1cZCTa+8Ps
- OXG8KTTbXadcG6T3QfcOAb26DuSFjBP9gmSLk1cOW/99S0C18zEtKB40cBpuF7NYvF3x
- jQ8w==
-X-Gm-Message-State: AOJu0YzUR4UgMdIFiSLtCLtu5sdLEEByZpTR/qa8eX9xbNm3EFe8iMhk
- Yp6vMtu5pvpEaYKbMA0/Q7Bg4Dj09IzOc7e3/AeFmUq7UtM10FsVlqIsM18AaFHSsXyhlGf8OZ6
- UXP6+H3Y=
-X-Gm-Gg: AfdE7ckhpTd4QEkOMd1FDSBZu4PrWkXhcOOHwC+FJLxmqBzTfEVfM88gbKYePHEUe5x
- NVv/ZaJSxrEjeo3wrtEYLgdUb9+6emDYIxDACFLpPHJYElHysGav1vcHc7QcPHISbD8tqVeau7T
- DPX8lGH4Nk9+sCCWpfy4zmRBdxqJ9qJyEieEa/aASwl7Apn2bsNjYOrXbmsLaJI5XIyyGEZDqEt
- gwHRou7udwSamHzbpljnZcITZdwNxePzi4eVdxjCXkdk1EmTslIlUlXbSW16miBRZgueiLbvCBJ
- kxNfuDB8YSCna0g57C2We5SUopnfQ5w678qxVtQbbviQ9CseCk+3tuWP3xRfKi3Qa7kalQmDLQX
- cFWA8ZHd8pKLzYwcLBoE4sDeml2Sg8K2OiImbQVjcI4lD62eDHUXAHqSSzrF7FEPt2dpYA0rrrU
- do92j2sMx5YwlpOZfE5LGEduCnCwVzQmiDOjhLcHP9t4ZqLyB9Isy6psih7BBVS145G5VN9Sk2k
- zfzVHFXBgQ8w2eMG+bRL3CN/nZTR2tKQw==
-X-Received: by 2002:a05:6830:700e:b0:7e6:c752:3f0c with SMTP id
- 46e09a7af769-7e97996c452mr41108a34.24.1782166963215; 
- Mon, 22 Jun 2026 15:22:43 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-191-8-245.totalplay.net. [187.191.8.245])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e94429778csm7506887a34.20.2026.06.22.15.22.42
+ d=1e100.net; s=20251104; t=1782167008; x=1782771808;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nhQ8Uf27nhVc5IaW2NHfYylbjpAM4vbI0ObBMIEriuU=;
+ b=n4KhDt2pMYkSW+n+xQnTeiFfxYReKOuwUcL7SWlNaP95d4q6TjVZRIy47pqjPnVXAR
+ 9mNfr6e0v9BiAlgPipw68qpy1qP4Q329jjgmNg3xdS1jmzpUop4ArBQSV+c/xMWX+LwK
+ xuZ5tqDATNnGi70iG2ylu57dZ+ja7fAS97KWyOm3+imGKbG+Sn+aIRVihPyfnmIRxoGR
+ 85v8/hk3+HMDuvHHJ8+7cDKCNxaPIabJPu7S6stCT5ZAAvZw9E0br8nLCq/xbKgmG2+0
+ 5krJAf70c7ohWJXypmKx1h0MpNcHco/kyQWySNF8xISNiyNCm71mABVkmSmk2sblF0Np
+ Aqgw==
+X-Gm-Message-State: AOJu0YxMn/iLS1fTLMzm0J+YfQAzxP/qn0uQd0MXzum4HgEmhHKN66we
+ 8Hq5lyj9Xys156f9RdBG5/C37qJ+r+umLpVQvM53ckX0h5m4WwlvaTKsVSu9RzDjyN5+Yff7O0L
+ ai67w2HA=
+X-Gm-Gg: AfdE7clMEwOLFyaOgQeayAUD2GEDSZEvwscV4cubkwP9CkZ1X/6Hk5uglJS7kX6TKoa
+ iRLaBO2+V76cXXLDUP03Ch3iDbAH5+a2Tu+vgt14czl9O9KBOVq/7VifvYqjiztQSAMVGc3o1sp
+ R6WQuAwcFk4vccxai9Qz/07AX+XRi106qISVTtMVuAQLuaAC4601tvQ5Oi5NdbTsULzWiY6PuG1
+ RwWBfjbIsuMDdWx3nZ6ovoCe6xUN8kb8y9dGR/a/UUmmWkKuVt3zTepcdKZfg+IsRWRzugsCeG+
+ 7al0ZKh6l0CF2iEVPqATpuBGyTrUPbTcBj5pP3KL6XG6so6hIKvuxAQxrPsJ82+kTyowXysGdKp
+ q1lzr6sydZWRk6jYs2SMMdwpoBgvuVy6YDz2R5d21GzcL/qdkeRqlxfTqo385Zcvmp+KlQks3st
+ O5fKS+tU97luj0ty00zFp90Dn/HJiV2DI0CYXcsVBuTUwZFbpW6E/lEAYmiTWxy2tqzpvUe3Al3
+ G40jDuGmBKNq8uvoZbFLyV25XNX0UM3tdU=
+X-Received: by 2002:a05:6820:4b93:b0:69e:158c:8998 with SMTP id
+ 006d021491bc7-6a114c71b35mr360047eaf.38.1782167008633; 
+ Mon, 22 Jun 2026 15:23:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-245.totalplay.net.
+ [187.191.8.245]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a0ea0c378csm5443910eaf.10.2026.06.22.15.23.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jun 2026 15:22:42 -0700 (PDT)
+ Mon, 22 Jun 2026 15:23:28 -0700 (PDT)
+Date: Mon, 22 Jun 2026 16:23:26 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Francois Berder <fberder@outlook.fr>
-In-Reply-To: <20260622140616.12182-1-marek.vasut+renesas@mailbox.org>
-References: <20260622140616.12182-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <178216696259.1691113.9143134411838154940.b4-ty@konsulko.com>
-Date: Mon, 22 Jun 2026 16:22:42 -0600
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.07-rc5 released
+Message-ID: <20260622222326.GE382693@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Legz1ZRVcM1neoX0"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +94,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Jun 2026 16:06:06 +0200, Marek Vasut wrote:
 
-> The following changes since commit d57ea0d9edf5e5babffd280f7352f23a33a00948:
-> 
->   Merge tag 'efi-2026-07-rc6' of https://source.denx.de/u-boot/custodians/u-boot-efi (2026-06-21 09:27:12 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
-> 
-> [...]
+--Legz1ZRVcM1neoX0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+Hey all,
 
--- 
+So it's release day and I have tagged and pushed things out.
+
+As I've said in the last few -rc emails, we're working with OSU OSL to
+migrate our existing infrastructure. At this point I want to announce
+that https://lists.u-boot-project.org/mailman/listinfo is up with a test
+migration. Subscribers have been moved, archives are re-created. We
+expect to announce a cut-over period this week. That will mean a short
+pause in emails as we stop the current instance, archive and copy it
+over, then start the new one. There's coordination to be done, and more
+details will be provided once we know them.
+
+Once again, the delta between -rc4 and -rc5 overall is fine, even if
+diffstat says it's much larger. This is because we've pulled in a few
+isolated but large changes.  If there are fixes people know to be
+outstanding and haven't been applied yet, please reach out and let me
+know. We are running out of time.
+
+To repeat what I said in rc2 (and will keep repeating) is that it might
+really be time to retire support for running our tools on Windows under
+MSYS, rather than something like WSL. The move to support more modern
+OpenSSL versions has hit a lack of support problem in MSYS[2].
+
+We're continuing with a community meeting following the release and the
+calendar link is
+https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
+Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
+mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
+89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
+lendar.google.com&scp=3DALL
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/yyx-dsaj-iwr
+June 23rd, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/yyx-dsaj-iwr?pin=3D7760044274127&hs=3D1
+
+In terms of a rough changelog:
+- Platform fixes for Rockchip, Microchip, TI K3, Qualcomm, Renesas,
+  i.MX and x86 Edison.
+- Fixes in our documentation, EFI Loader and USB subsystems.
+
+We now have one final RC, in two weeks time, before the final release on
+06 July 2026.
+
+Thanks all!
+
+[1]: https://lore.kernel.org/u-boot/20260511174116.GJ1858239@bill-the-cat/
+[2]: https://lore.kernel.org/u-boot/ae_KfGqNrsWZ1rfQ@daedalus/
+
+--=20
 Tom
 
+--Legz1ZRVcM1neoX0
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajm13QAKCRAr4qD1Cr/k
+Crh9AQCQf1Ib3hSlJTs5dqoGWAV0Q8slv46m3uWUQjVBy60SLQEA2yS8TwsThovL
+JPiveGMwpMCPb+UVEBgjAGl1NnpiIg0=
+=UfoO
+-----END PGP SIGNATURE-----
+
+--Legz1ZRVcM1neoX0--
