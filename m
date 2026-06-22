@@ -4,167 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4EB2CD98F2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 19:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E1DCD98F2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 20:32:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2003C84931;
-	Mon, 22 Jun 2026 21:15:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 95F3D84931;
+	Mon, 22 Jun 2026 22:32:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mL1q28J3";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fTMb96Io";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D7Lo+8DV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B82FD849BA; Mon, 22 Jun 2026 21:15:22 +0200 (CEST)
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1382B849BA; Mon, 22 Jun 2026 22:32:30 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 517DE848EB
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 21:15:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3ABC848EB
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 22:32:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65MFWFLF3196290;
- Mon, 22 Jun 2026 14:15:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=gsjz7ClENqG6VgOmM+EVOfvl3aHELLSrPY5CmybzZ
- Pg=; b=mL1q28J3Rbh/3EPeIbYOJgmYBHMjpnA4CI62G2SXsEtGBVXwdqHCh+FvL
- jCiAXhkiq7EIeYU2l8PjDoiV2G7G+yWACM8puhpR9jyWuxAcAkuCSfFxpRSdRQeO
- EKttWB56hWkvFWXIlA7ODoTe9ZKjvp7wq7iYetKTB92kHHWo/IHafV1sBVcRgHYM
- /rOZV0VjkAZ4ZaIFk0c1wefYq4p9v14Py8wdFOnYZhBzop1oQU/aE/1r7d4AhPkM
- CPGPMOjvJCArAeRGbI/4rduEFxAhUnceh54qfz5dDUfHj53HcE8Skssq1qgEHDEe
- zoxh9lxoxhveF2iMBkb4e8Y7WLkhA==
-Received: from dm5pr21cu001.outbound.protection.outlook.com
- (mail-centralusazon11011052.outbound.protection.outlook.com [52.101.62.52])
- by m0380145.ppops.net (PPS) with ESMTPS id 4ey04ebxaf-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 22 Jun 2026 14:15:09 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LmAcYLybrXI1ew8GVuiJjg3kx84gFjhadAmn1zq70e0P8B97COV52uCBFNWGwaKkYlxCkOP1Hs5It14Eum4Bog6MJcKcIzOtw8Alg6vdhtHj/kcvV6GEOa7kFhLxLuCUfIN1s4Gp8BFeRt0upPQE37GEoUwmoCasjOSolJUSp9Te/XvD0hTJjVgaxdkA06bTJy79yzIsz7VV9pdJVO0dT5AGlqLUK86ZQM3D+2HMJeDesaTXPSdL5nuBXfy2SBkhsZRMth3waCL0inauH8//avZDnp+UlPH5l2TuXJA+sP895TDBAWhW1A88xAi0K/Cr0nuUepSdXS9K5gSefsWwCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gsjz7ClENqG6VgOmM+EVOfvl3aHELLSrPY5CmybzZPg=;
- b=SstsxFH+2Y+YySEwyNkrzMYENLRFsXAtpUAZBe7cOd05JgZA8fbNBNDIWiMWu3cBQCKnONBnpY94zAJG618ShxYJlYB7HffCkZl2gAPyfw32zqRvBbCmzq4zz//8KNX6YiaheYRPxqZyoZNlMA8pRViAJEmfo0lDSLjoHmYsv5hMGlwZ02tsGzGUl0/dUXUpB4PM2pRs+T/vDtC9O8sN4CCPvZ4Z5l2yRcSChkqIfj2iPYdNiJOkQ0ijdCR01OjyaF6HLb5OVjChroGPql6oWkBs9R0RLLGuJtkICZMvSW62uApgaHDVJ6L/TMwZI7liLZAbN/ATN/3D+vM2XjldKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gsjz7ClENqG6VgOmM+EVOfvl3aHELLSrPY5CmybzZPg=;
- b=fTMb96IovRfXfgaebHrtAoRl9NmODRd7A6DtWgZR+eC42ybjP5mMY7oAIyw1TT21utr36WQaCVRm/P/9s6TBgQ89Yqjmi0GvgNOW/Y83+UHdaThgWzLvdFJJ6EEmqR4YiY5lWmu1sO58+e/1Q4Cab+ThYUPRqobnziqvwdYXaGo=
-Received: from PH7P221CA0083.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:328::8)
- by IA4PR10MB8424.namprd10.prod.outlook.com (2603:10b6:208:56d::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Mon, 22 Jun
- 2026 19:15:05 +0000
-Received: from CY4PEPF0000FCC5.namprd03.prod.outlook.com
- (2603:10b6:510:328:cafe::57) by PH7P221CA0083.outlook.office365.com
- (2603:10b6:510:328::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.20 via Frontend Transport; Mon,
- 22 Jun 2026 19:15:04 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CY4PEPF0000FCC5.mail.protection.outlook.com (10.167.242.107) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Mon, 22 Jun 2026 19:15:03 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 22 Jun
- 2026 14:15:02 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 22 Jun
- 2026 14:15:01 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 22 Jun 2026 14:15:01 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65MJF10P578699;
- Mon, 22 Jun 2026 14:15:01 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-4479ab2e41eso648634fac.2
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 13:32:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782160346; x=1782765146; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xGFORM7KHa/GowAoLjrYDfDZ4wNqXEI+0/eRRvr6DaI=;
+ b=D7Lo+8DVhYEAH04PXxTAyXTcQom0VyBuWwMyYRocfbKtSCmi1rb0YlJeovqow4PQDr
+ hk+s06q3Vvb1dYeqCtZeMjsM/lG6VCDgVlKcFJkGXBxsEVUChbUhtMXfdZbwxbL0llSz
+ xLmyey46awh3vWGvVhw/f+JRYJ0IkWjBbfrZ+RkiR7YDScCS4Am6WQPeiY8HG1sU/v1Z
+ of/NMKowF7QrKJIt/M16cT5DCYSSgeSAgZv4ecdlY7gqgTIoEyJNGYaxhbby3/3orxaZ
+ Po8WM+IN30TqXjnHvOQx5nCEwHmFDQpsbzV1u0HIvU7IxNAjvLhKKpVSGjGs8MpYKO0F
+ 1uwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782160346; x=1782765146;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xGFORM7KHa/GowAoLjrYDfDZ4wNqXEI+0/eRRvr6DaI=;
+ b=H+g1FCmqY/UTM6jiIAYNusKqzEvyAQp6D8OF5YR6gndaODLlS6+O/yVxSyLwP811oL
+ clQUUMH6X0jW2vY4xLhjXSVarkqMLm087TOV6LlHounY26bbs2Kltyp11m400hFfHaYR
+ asilNN9rniq3g4XPGaHWoYF1QMr/V5bLyJR5LqlVS/5YpBcH6CI5fYg2NuyDpdRNdPe7
+ H7ark8ktD6TM5IEytdh3bZsmaA+b1Ne+ZMJUJYoJ5z1GINhGDT6I5ydJ2aL39QYmqnsT
+ 2sD4upyhr8ZRNrImFZRswi8EBKfd9D+mJ8ALhp3svXypSISGC0BYfxynOOXrEgER4Oub
+ 6+5g==
+X-Gm-Message-State: AOJu0YzQCpQUQGF/9BSZDXspy+Fl2fbM9gL7Gx95yLsZtrNfgBJjuA2F
+ kCYLCTVv5g0i1Y2t0sRTyKaNoKjRKgiyTzuNGVLfSFmozx/Vyj/UvkvVrSyLQa7pxXM=
+X-Gm-Gg: AfdE7cmnADNZMOiepCRxs1lts7cINArncJgTpM4RNB/Y4n2maC1GSIsIvuyWpYALFds
+ vRDObO0KeDsAtLP6JA+noAvYshyItIf/Q8ZufhpNq704YnqBwr0XwfDgRETcItRB2bdFup0TmGs
+ V/7ULOdcKAhUyltYdv/5s1lJi724W4EtiX5l2DhOmaE7NX/plq2YD64kTwBRWucv80plBrECX4r
+ SjTLbO/jg2da422TSCjHCr3bPBeVQuTP2MzXuVI4q0IP9FxdFlYA8s8rz96p/HeQcV/GFk2V8gw
+ gSqvOLep0RfEN91efpY+cpG1I0G3HyyLrMpwb8JwGPoDEPTwL5Z7raePl5z/njCmhOLfAzT3ot9
+ dzPXvPyZC6eCmby1SCbJRO53n7fi1rWNUwbMSS/B0gBL1mllSJRbfDmKsJKa28hjasozzRoNTT2
+ WlR1oRZU6+44GHRbhAmayCvQlcTgT6PZFy2F9Gb3ovc4zd6LXppXxj1xYYa/2RPvNhN0aqioII3
+ 7Dp1y0YpFWY7KuKYrSxB2apiy3YMi83uZIiefAkAeyCDw99TwG7yG2GgcvMVnuhYQYgHeX9J5X/
+ UaZdbSAAwr2+O9k=
+X-Received: by 2002:a05:6808:1b06:b0:479:eb19:6e66 with SMTP id
+ 5614622812f47-48f29eb5fcamr42375b6e.38.1782160346246; 
+ Mon, 22 Jun 2026 13:32:26 -0700 (PDT)
+Received: from james-x399.tailafd1a.ts.net (97-118-25-163.hlrn.qwest.net.
+ [97.118.25.163]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-48aec0dd2bbsm5313693b6e.6.2026.06.22.13.32.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jun 2026 13:32:25 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Tim Harvey <tharvey@gateworks.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Pranav Sanwal <pranav.sanwal@amd.com>
+Subject: [PATCH] net: lwip: add tftpsrv command
+Date: Mon, 22 Jun 2026 14:31:54 -0600
+Message-ID: <20260622203157.73416-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 22 Jun 2026 14:15:01 -0500
-Message-ID: <DJFTGZ0I5LGG.218A8NZ1QBD6G@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCHv2 1/5] board_f: add a board_setup_dest_addr function
-From: Randolph Sapp <rs@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260619231719.3823195-1-rs@ti.com>
- <20260619231719.3823195-2-rs@ti.com>
- <CAC_iWjLszH6_c4DXFV2qqQoyhEC9R7emeOKoBO4WvEn5Zza2SA@mail.gmail.com>
-In-Reply-To: <CAC_iWjLszH6_c4DXFV2qqQoyhEC9R7emeOKoBO4WvEn5Zza2SA@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|IA4PR10MB8424:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5e14a392-775b-494e-3bd5-08ded0928fff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|22082099003|18002099003|56012099006|3023799007|4143699003;
-X-Microsoft-Antispam-Message-Info: fsT/alnK4RKlOrsb9xSbJNPL19gYslWIllusPlB4Glro5caN4BwHXZdGBuf0BKMRoOv8Pzoio/LeZfIUVyahipsPPP7Nas/Gm8ba4X/xs9GOGjnieRVX2Hdrg2rcNQz/zokROuEXAF90fP6W7S464lpR4uYc4QZR6IT2HknUhXao2e/vkhcV+5xebtiWz4YdUcX3rGPYDrsa4cMrUjQpwPKMmxl/Z0rRr3KdlVyllvWGXGT3IoXGZ6lkBe6/4ctdWFHWPtz1DKN+UAMBItPQdANzQNSQx+Tk4FGHRQ/Z4hzX9SbwGgbC9Ft/w/gv6zCkL6wn1zR6YZyYhqTP8tY4VZxWQTBCNT3ztPZh0t05motZmhdMIQXeDHi5QbVw5/BHoTXJVXE0WHfcVhJR6gUUzPEW4rv87iCL4QIBZyL/usx2UMJDcgOYG8G8n3XwxYUmxbpINb5TSSED+imTDUkBoj+7ALnn19HZzKD9cDDq7P7IcXlRhjtWC+Et5KLDYpVPvjVCVT2S3pLpCWsg64ojv5aqzKijRE7Htc1P4lp1ObvpormH4CeK7Zf42nkS9LYI/OuPNnDpKMEhok46ESTdjdCdHUqLT0ZCs4+hwBBh2EocEGEA5Btvi0KxumQko257c9GQcjVPv8UB/pFLP2J2GIQapRGuqt+UX5x5rTDXVZJen1CxLS6VfrTogpiKa0pUibp034wf19uEWzhoQAeR/g==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(22082099003)(18002099003)(56012099006)(3023799007)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: J3QbOPbh95T2BZhs73njqD/5uE/1d0Xj6ZzCntfKhu1t+q9zxCWHjkw8x0ktKfD5/wCp92PGJIb4r8BaUvyPCXs/j98lheAb7+TFKp1lPSHJeHwfwARpq0/FV6xwv+Owr6Pw5FjdNq91ZTVGsTVw0abtirpY1umJbYTvMw+prxPbaJqCWCB+DxWg5XjL6lI8zevZ/ncVYiiZjixghNDjQqz4xBhJOXf8kRSN4SbeTuQplUJWdDXIjdZCxpmfk4ooPQVTQBV7PDTcC50FpcQxpUwAwI+FSK4e4wQwkYxPYBCwo33KkdPK3+0t0IP4L191k0NgispUakO2xCIrMbmLeXVxWotfjQeTCg4IYtfiAS6LlvSspbsj78fbyKQY86HuGGXgAq/BJlMR2mwb/q6BTCEM9RhFXAtojBZno3fMC0EKlHpNLL31aKk72mZ4+riO
-X-Exchange-RoutingPolicyChecked: OGXRB9cbJSBgOXf/YCGhdyjT8qe313ynJQBqU7Ju3lG+z2W4CUoOse5ZHLII5x93gYZAVGgEJvq6eyvyfSw6LG09uuZJt74Qvpxj5KzMpDVn+o6iVGPfPpUNUYf4LEN/U6+/BDb+ZJKWABhNe/eQMD9cwQxvhLGP4sJaZ5++cKaAQCFYKnKEWF8eLmeDklq+dNiZaMtKU/HI3TdLnejvsokScc3pgFbeT4YBS5Fw60Lktshvz7Yg4Df/zco/KYEjKCyTQ7MIlO6DForaf4n7NXej+kZBF519mboftP2D1Ln2kinsMxC/7HKRT354Vbvq1faOuti7sZgGDuUxZ1KLDw==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2026 19:15:03.2041 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e14a392-775b-494e-3bd5-08ded0928fff
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC5.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR10MB8424
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDE4NyBTYWx0ZWRfX5pK1r4PwDDHH
- 0ycfSP0DqHdpuXY0/OkeuAQD4U1KD6dENFUx5Dtmz/JkyG4m6JS1hOV3JI7BFFrKZgqlYQkj5sC
- jm2XR12h/nAMaJZLLWVGCPwAM/M5YT8=
-X-Authority-Analysis: v=2.4 cv=X/Fi7mTe c=1 sm=1 tr=0 ts=6a3989bd cx=c_pps
- a=9kClBOisnrQnHM/oUG6sgA==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=avX7pZ9RvaPbP4zhlxMA:9
- a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDE4NyBTYWx0ZWRfX9wVYgjYLTbUg
- AjkX4otd9NnWWWy1IYSpnzTWa0GkG0R4TPXl78thtCgNyz0pmb8yanC0Ac5DWsjCu/gCkNnCZ3x
- H0VYMaN4GtHwmEOsMyKKkW2l0woLGLGXe2OJddsa5iYdTpmd7kRCnnRfV79RkdIjPo5XwMZ985Q
- sGvZIxDuhEk+GivPWpEEVrwaHlZ3zPQ1R/afHGCUf9nnr5wraXTzCjuSWHzrjyg/xd0LFF9EXtb
- w/z0qiL303AcwOE/p3rSZhw6MdSww5vmwnlNenrQ1HQy+xCrMANl301ikO7jOAYvRWmWSeBgHtS
- TRWzHS0pR0CLssamt+7FrpHJzvdfel0mFIbeHBNLEARbAFsnA0zzMb8tP2rSFtNSJ/XdtUL4F6l
- ZxhY3Ham72xlI8jC9HisuXZC/smmM4oHwZpphIuK78z1lJnBbUPhuh+E0gQfvtqOqMiBBX+eX4i
- MWtr0U7t+XUEUu4sNIw==
-X-Proofpoint-ORIG-GUID: FK6Xwrpxlpb4OPTZLUJ5UmN__5c6S9wD
-X-Proofpoint-GUID: FK6Xwrpxlpb4OPTZLUJ5UmN__5c6S9wD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-22_03,2026-06-22_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
- suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606220187
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,69 +106,360 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon Jun 22, 2026 at 3:12 AM CDT, Ilias Apalodimas wrote:
-> Hi Randolph
->
-> On Sat, 20 Jun 2026 at 02:17, <rs@ti.com> wrote:
->>
->> From: Randolph Sapp <rs@ti.com>
->>
->> Add a weak definition for board_setup_dest_addr, as a way for specific
->> boards to override the gd->relocaddr address before the relocation
->> actually occurs.
->>
->> Signed-off-by: Randolph Sapp <rs@ti.com>
->> ---
->
-> board_get_usable_ram_top() can be used instead.
->
-> Cheers
-> /Ilias
+The legacy network stack supports tftpsrv, which listens for an
+incoming TFTP write request and receives the first file into memory.
+The lwIP stack already builds the lwIP TFTP application, but only wires
+it up for client-side tftpboot.
 
-It *could*. Just felt a little weird to artificially restrict the usable me=
-mory
-because the stack just barely runs into one of our reserved regions long en=
-ough
-to break a dt reserved-memory allocation.
+Add a lwIP tftpsrv command and implement the server path with
+tftp_init_server(). Reuse the existing lwIP TFTP write callback and
+memory copy path so LMB checks, progress output, filesize/fileaddr
+updates and EFI bootdev handling stay consistent with tftpboot.
 
-Initially this was proposed because there are multiple runtimes with their =
-own
-allocation techniques that could potentially take advantage of that space. =
-If
-it's still preferable to use board_get_usable_ram_top though I will change =
-it.
+Track receive timeout and write-failure state around the lwIP callbacks
+so a stalled or rejected receive is not reported as a successful close.
 
->>  common/board_f.c | 9 +++++++++
->>  1 file changed, 9 insertions(+)
->>
->> diff --git a/common/board_f.c b/common/board_f.c
->> index fdb3577fec09..d9d09ac94bf2 100644
->> --- a/common/board_f.c
->> +++ b/common/board_f.c
->> @@ -328,6 +328,11 @@ __weak int arch_setup_dest_addr(void)
->>         return 0;
->>  }
->>
->> +__weak int board_setup_dest_addr(void)
->> +{
->> +       return 0;
->> +}
->> +
->>  static int setup_dest_addr(void)
->>  {
->>         int ret;
->> @@ -362,6 +367,10 @@ static int setup_dest_addr(void)
->>         if (ret)
->>                 return ret;
->>
->> +       ret =3D board_setup_dest_addr();
->> +       if (ret)
->> +               return ret;
->> +
->>         gd->initial_relocaddr =3D gd->relocaddr;
->>         return 0;
->>  }
->> --
->> 2.54.0
->>
+Move CMD_TFTPSRV out of the legacy-only Kconfig block so it can be
+enabled with either network stack.
+
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ cmd/Kconfig        |  14 ++--
+ cmd/lwip/Makefile  |   1 +
+ cmd/lwip/tftpsrv.c |  11 +++
+ include/net-lwip.h |   1 +
+ net/lwip/tftp.c    | 181 +++++++++++++++++++++++++++++++++++++++++++--
+ 5 files changed, 197 insertions(+), 11 deletions(-)
+ create mode 100644 cmd/lwip/tftpsrv.c
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 032e55e8127..8f3d66ddc77 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2127,12 +2127,6 @@ config CMD_TFTPPUT
+ 	help
+ 	  TFTP put command, for uploading files to a server
+ 
+-config CMD_TFTPSRV
+-	bool "tftpsrv"
+-	depends on CMD_TFTPBOOT
+-	help
+-	  Act as a TFTP server and boot the first received file
+-
+ config NET_TFTP_VARS
+ 	bool "Control TFTP timeout and count through environment"
+ 	depends on CMD_TFTPBOOT
+@@ -2279,6 +2273,14 @@ config CMD_TFTPBOOT
+ 	help
+ 	  tftpboot - load file via network using TFTP protocol
+ 
++config CMD_TFTPSRV
++	bool "tftpsrv"
++	depends on CMD_TFTPBOOT
++	help
++	  Act as a TFTP server and receive the first incoming file into
++	  memory. The command returns successfully after the transfer so
++	  boot scripts can boot the received image from the load address.
++
+ config CMD_WGET
+ 	bool "wget"
+ 	default y if SANDBOX || ARCH_QEMU
+diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+index 90df1f5511c..245683a9672 100644
+--- a/cmd/lwip/Makefile
++++ b/cmd/lwip/Makefile
+@@ -4,4 +4,5 @@ obj-$(CONFIG_CMD_NFS) += nfs.o
+ obj-$(CONFIG_CMD_PING) += ping.o
+ obj-$(CONFIG_CMD_SNTP) += sntp.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
++obj-$(CONFIG_CMD_TFTPSRV) += tftpsrv.o
+ obj-$(CONFIG_CMD_WGET) += wget.o
+diff --git a/cmd/lwip/tftpsrv.c b/cmd/lwip/tftpsrv.c
+new file mode 100644
+index 00000000000..522a7ccacdf
+--- /dev/null
++++ b/cmd/lwip/tftpsrv.c
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <command.h>
++#include <net.h>
++
++U_BOOT_CMD(tftpsrv, 2, 1, do_tftpsrv,
++	   "act as a TFTP server and boot the first received file",
++	   "[loadAddress]\n"
++	   "Listen for an incoming TFTP transfer, receive a file and boot it.\n"
++	   "The transfer is aborted if a transfer has not been started after\n"
++	   "about 50 seconds or if Ctrl-C is pressed.");
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 20cb0992cce..571d8941ff0 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -52,6 +52,7 @@ bool wget_validate_uri(char *uri);
+ 
+ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ 
+ #endif /* __NET_LWIP_H__ */
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+index 7f3b28b8507..af25aabc973 100644
+--- a/net/lwip/tftp.c
++++ b/net/lwip/tftp.c
+@@ -11,6 +11,7 @@
+ #include <linux/delay.h>
+ #include <linux/kconfig.h>
+ #include <lwip/apps/tftp_client.h>
++#include <lwip/apps/tftp_server.h>
+ #include <lwip/timeouts.h>
+ #include <mapmem.h>
+ #include <net.h>
+@@ -19,6 +20,8 @@
+ #define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
+ /* Max time to wait for first data packet from server */
+ #define NO_RSP_TIMEOUT_MS 10000
++/* Max time to wait for an incoming TFTP write request */
++#define NO_WRQ_TIMEOUT_MS (TFTP_TIMEOUT_MSECS * TFTP_MAX_RETRIES)
+ 
+ enum done_state {
+ 	NOT_DONE = 0,
+@@ -34,8 +37,27 @@ struct tftp_ctx {
+ 	ulong hash_count;
+ 	ulong start_time;
+ 	enum done_state done;
++	bool is_server;
++	bool wrq_accepted;
++	char fname[TFTP_MAX_FILENAME_LEN + 1];
+ };
+ 
++static struct tftp_ctx *tftpsrv_active_ctx;
++
++static void transfer_timeout(void *arg)
++{
++	struct tftp_ctx *ctx = (struct tftp_ctx *)arg;
++
++	printf("Timeout!\n");
++	ctx->done = FAILURE;
++}
++
++static void restart_transfer_timeout(struct tftp_ctx *ctx)
++{
++	sys_untimeout(transfer_timeout, ctx);
++	sys_timeout(TFTP_TIMEOUT_MSECS, transfer_timeout, ctx);
++}
++
+ /**
+  * store_block() - copy received data
+  *
+@@ -71,7 +93,7 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ 	ctx->size += len;
+ 	ctx->block_count++;
+ 
+-	tftp_tsize = tftp_client_get_tsize();
++	tftp_tsize = ctx->is_server ? 0 : tftp_client_get_tsize();
+ 	if (tftp_tsize) {
+ 		pos = clamp(ctx->size, 0UL, tftp_tsize);
+ 
+@@ -92,7 +114,20 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ 
+ static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
+ {
+-	return NULL;
++	struct tftp_ctx *ctx = tftpsrv_active_ctx;
++
++	if (!IS_ENABLED(CONFIG_CMD_TFTPSRV) || !ctx || !is_write)
++		return NULL;
++
++	ctx->wrq_accepted = true;
++	ctx->start_time = get_timer(0);
++	snprintf(ctx->fname, sizeof(ctx->fname), "%s", fname);
++	restart_transfer_timeout(ctx);
++
++	printf("\nReceiving '%s' mode '%s'\n", fname, mode);
++	puts("Loading: ");
++
++	return ctx;
+ }
+ 
+ static void tftp_close(void *handle)
+@@ -101,13 +136,15 @@ static void tftp_close(void *handle)
+ 	ulong tftp_tsize;
+ 	ulong elapsed;
+ 
++	sys_untimeout(transfer_timeout, ctx);
++
+ 	if (ctx->done == FAILURE || ctx->done == ABORTED) {
+ 		/* Closing after an error or Ctrl-C */
+ 		return;
+ 	}
+ 	ctx->done = SUCCESS;
+ 
+-	tftp_tsize = tftp_client_get_tsize();
++	tftp_tsize = ctx->is_server ? 0 : tftp_client_get_tsize();
+ 	if (tftp_tsize) {
+ 		/* Print hash marks for the last packet received */
+ 		while (ctx->hash_count < 49) {
+@@ -142,9 +179,14 @@ static int tftp_write(void *handle, struct pbuf *p)
+ 	struct tftp_ctx *ctx = handle;
+ 	struct pbuf *q;
+ 
+-	for (q = p; q; q = q->next)
+-		if (store_block(ctx, q->payload, q->len) < 0)
++	for (q = p; q; q = q->next) {
++		if (store_block(ctx, q->payload, q->len) < 0) {
++			ctx->done = FAILURE;
+ 			return -1;
++		}
++	}
++
++	restart_transfer_timeout(ctx);
+ 
+ 	return 0;
+ }
+@@ -204,6 +246,9 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	ctx.block_count = 0;
+ 	ctx.hash_count = 0;
+ 	ctx.daddr = addr;
++	ctx.is_server = false;
++	ctx.wrq_accepted = false;
++	ctx.fname[0] = '\0';
+ 
+ 	printf("Using %s device\n", udev->name);
+ 	printf("TFTP from server %s; our IP address is %s\n",
+@@ -258,6 +303,132 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	return -1;
+ }
+ 
++static void no_request(void *arg)
++{
++	struct tftp_ctx *ctx = (struct tftp_ctx *)arg;
++
++	if (ctx->wrq_accepted)
++		return;
++
++	printf("Timeout!\n");
++	ctx->done = FAILURE;
++}
++
++static int tftpsrv_loop(struct udevice *udev, ulong addr)
++{
++	struct netif *netif;
++	struct tftp_ctx ctx;
++	const char *ipaddr;
++	err_t err;
++
++	if (addr == 0)
++		return -1;
++
++	ipaddr = env_get("ipaddr");
++	if (!ipaddr || !*ipaddr) {
++		log_err("error: ipaddr has to be set\n");
++		return -1;
++	}
++
++	netif = net_lwip_new_netif(udev);
++	if (!netif)
++		return -1;
++
++	memset(&ctx, 0, sizeof(ctx));
++	ctx.done = NOT_DONE;
++	ctx.daddr = addr;
++	ctx.is_server = true;
++
++	printf("Using %s device\n", udev->name);
++	printf("Listening for TFTP transfer on %s\n", ipaddr);
++	printf("Load address: 0x%lx\n", ctx.daddr);
++
++	tftpsrv_active_ctx = &ctx;
++	err = tftp_init_server(&tftp_context);
++	if (err != ERR_OK) {
++		log_err("tftp_init_server err: %d\n", err);
++		tftpsrv_active_ctx = NULL;
++		net_lwip_remove_netif(netif);
++		return -1;
++	}
++
++	ctx.start_time = get_timer(0);
++	sys_timeout(NO_WRQ_TIMEOUT_MS, no_request, &ctx);
++	while (!ctx.done) {
++		net_lwip_rx(udev, netif);
++		if (ctrlc()) {
++			printf("\nAbort\n");
++			ctx.done = ABORTED;
++			break;
++		}
++	}
++	sys_untimeout(no_request, (void *)&ctx);
++
++	tftp_cleanup();
++	tftpsrv_active_ctx = NULL;
++	net_lwip_remove_netif(netif);
++
++	if (ctx.done == SUCCESS) {
++		if (env_set_hex("fileaddr", addr)) {
++			log_err("fileaddr not updated\n");
++			return -1;
++		}
++		efi_set_bootdev("Net", "", ctx.fname, map_sysmem(addr, 0),
++				ctx.size);
++		return 0;
++	}
++
++	return -1;
++}
++
++int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	int ret = CMD_RET_SUCCESS;
++	char *end;
++	ulong laddr;
++	ulong addr;
++
++	if (!IS_ENABLED(CONFIG_CMD_TFTPSRV))
++		return CMD_RET_FAILURE;
++
++	laddr = env_get_ulong("loadaddr", 16, image_load_addr);
++
++	switch (argc) {
++	case 1:
++		break;
++	case 2:
++		addr = hextoul(argv[1], &end);
++		if (end == argv[1] || *end) {
++			ret = CMD_RET_USAGE;
++			goto out;
++		}
++		laddr = addr;
++		break;
++	default:
++		ret = CMD_RET_USAGE;
++		goto out;
++	}
++
++	if (!laddr) {
++		log_err("error: no load address\n");
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	if (net_lwip_eth_start() < 0) {
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	if (tftpsrv_loop(eth_get_dev(), laddr) < 0)
++		ret = CMD_RET_FAILURE;
++	else
++		image_load_addr = laddr;
++
++out:
++	return ret;
++}
++
+ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	int ret = CMD_RET_SUCCESS;
+-- 
+2.53.0
 
