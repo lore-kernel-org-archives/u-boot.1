@@ -4,95 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD7ECD98F6
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 06:48:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5C13CDB471
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 08:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA5658467F;
-	Mon, 22 Jun 2026 08:48:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EA076848BA;
+	Mon, 22 Jun 2026 10:04:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yltul9t3";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gX8SzYcZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ED5E84832; Mon, 22 Jun 2026 08:48:36 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 347B3848DC; Mon, 22 Jun 2026 10:04:25 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9776801A9
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 08:48:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3ECD84832
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 10:04:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-695f539fc8cso5280855a12.0
- for <u-boot@lists.denx.de>; Sun, 21 Jun 2026 23:48:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782110913; cv=none;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-662dc3879acso3630721d50.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 01:04:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782115462; cv=none;
  d=google.com; s=arc-20240605;
- b=cwY7mdePHQKEZwIPF5YwgXeiP0VdHnKFAA7oZiwSwFcUpYFCEH685DGuGl5ztpxj/M
- RnAPVD7Si+zorCA0PH78wz7hxbvnR5zZ7yy2r9YhBH1AIexYdkzqcmFyTwpfNLXBsENb
- abzwd0Nwe9I6MuVOGCDKeO6WoroxVuVVxXPnz+f7Dfo2fOBpglrt6sFgrCsNcwzwWv9v
- 84uxu5HrT5rkwy0T954+YLU9MU4gIf5Afyf/JpEjP7ZZZzzYdM1igPc4y65Fx3ZmpQMh
- dFNcW+5djK/822c466iltWByEFQl2MVFHT9CZg/iJQDWi2t51Tw0OVx5yOWpGZLLmt7p
- 87lw==
+ b=gmDy4zphYGsRIYWAatyqCgABq8u/VZkxaUluxmG3IYrvC9tQP1aWHP6mLio2e4N4N5
+ wncLdHbMzQ/w8lAtIc6oFB96GBLoqp6Pc6O5n6vgnvCQ1mDQQ7+zK2kX8xwSBTWJpHLD
+ hlJcl/t2G6xQM+aoigup1Wwu/FCKKsaxow9gMhTjK3L4XkNdJmmdAaHK25S01W4tEOnz
+ lB0dMjSvs+C/UNNOAMTcQElZ8OhQ2uMcswzwJYAyq7ELDII2xfHOBCWEaaYstErlfo9l
+ jlghSW3zAeSeUv4m7Hc3cnAxS0p48ujoin+BrOawc4qgwjzYKbRP4LZCCo/s2/Uq3oTM
+ PNNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=p4MTzdsdUw2Ctlc5Y1/2Aj55e3mrtNfDVZLo+gsH1yM=;
- fh=z8Fv8qoovpnooC66MRyMNzFYNXD5mKrJnpAhm5VjGg0=;
- b=TvFfI/NIC6XPgvSZB7A8Dqr1rR/kSN+l6O8zCeO8Fn1PNB8i+GbcoPr/75ueM7UmMx
- OJWnOW67MHlrfxeTK4nE6mQPkLD0ZyBTneWPbfh98v3l7o2vPnGlpzKUkcnjmM5fzHw8
- C+W4/vd3pTUO2Mc+8oTdk/iNO4pgXofEIOcwzsuGbFgJkS6JGybqkyByA9ilv3VHSBdl
- bwLdvP2J4wWQgLtZqdGaGrgMwDPLNVR8EVRuVAq/Hg5U3yaH4IBLLasIr6NWk3yUO+ru
- XAFYnAqE0pv0RPx2Ezg0Gyrg5E9mClpN674MFG22NSoA7WLf3dseVcLis+00/4Bz3YAd
- BltA==; darn=lists.denx.de
+ bh=a4XYabP2qFZTEBt1iCtD19+be3qmcHK7nWd5pdkX8Oc=;
+ fh=0G8wOfqcebRkhFk1zr8IqT1/qppHAlISwH/QHkPv2L0=;
+ b=UqVFiGra+12iNlYvZ/P+KEum0eUxXLmUBo2Wa3xY3OJRz0CGWgeK+yRJgmv0MA3LDB
+ u7RwUAOJs7CHLzPZtwjje4a7rJXXQSqSXK7iUdt4DTgiGwyzTWa0UQmpImK0ynPnaVkr
+ z5ibWSbNhESWnXN03wpHxXWBtJ/l3yIIHkuWBDvzTZhFBcCdVaBXUqXrEuEXZBthq0g1
+ rVL7J+dOn0icpeCY7/6O5RsdVfkvo457eGoMFA5Ebt9TS0rRv+V+syXNgT0hT1NoedYm
+ IJOeHryJhccb5MwelJQlMiwT3q+cgd3lONHAUnPmTg4YYcTdRWyzXuihYrtpjhn+m/ld
+ 1daQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782110913; x=1782715713; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782115462; x=1782720262; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p4MTzdsdUw2Ctlc5Y1/2Aj55e3mrtNfDVZLo+gsH1yM=;
- b=Yltul9t3BDVxKzpiuD6eanse7Tsy2hgJ0i+8UTdHtPrE1GoIIxCQe0OaQktBPRA9p0
- PnUNTI6VElUdIeicfcYBR8NIyhdQ6Gha9XrKFqsmFGM7sJ+OUegqvFoaMXyC1RgYTsk9
- rjD2T9u0E13QIEsWKbU+11SgEcpNfBSxKZoAk=
+ bh=a4XYabP2qFZTEBt1iCtD19+be3qmcHK7nWd5pdkX8Oc=;
+ b=gX8SzYcZQxWflXf6rsqGFQj+I5Guxlxatsun73nX9e+AKUTrCXK4UB2IPy/kpqwOVd
+ XQGKThrnaa+pfp6m0OtS0IHNAk1EATIzz3/md8B+8fPEhre/3Tmkeq9shA3fGNauJYy7
+ sqW2dHNnCUhdarP6NZNUnLSZkwoPp9Zw2gzAK8NPY87b55nTtrxTFFsG1uw71Xzwbb2F
+ a1TPuOWb9qLLuBOGfEEFho8m5u8onkpjdjV9naxIlP5+3GHYnT/krFasdNnLKUjUDrsf
+ 4GrtLdhtVQXFWOemvhsW6SPMNk546hedUos17542PpjaqgysTnYD9cFOtK6nwR7/KWje
+ Be4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782110913; x=1782715713;
+ d=1e100.net; s=20251104; t=1782115462; x=1782720262;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p4MTzdsdUw2Ctlc5Y1/2Aj55e3mrtNfDVZLo+gsH1yM=;
- b=RuD0hRT+ZddjI4eva3xWlAVED337YvtfkFFJ1+ghIb020dvlafW1X72eHiM85kT8Zf
- 04jRj90EIwQrfxfJXwGx5hC1DyrlgrpK73beCU49bUiys67nAArfy1KrqauYxjvo8iuh
- VfA81sZdntRzrlgmNUWFgzpCgm26ZOuV5jshdfxA++b9GcHOoeHZx5tMnKD83B1JaOFK
- Xrojo1zl8z/TdcT+23+twLMjnF6ra6K9MULwsdOMlYiRfOH4ZjX/HPQ0PCXwbQAKZxBC
- X9f3DiduENlXgQu9i/iMBorN0FpNAdZUbMO/33TQPid2U3sRTsbjqsfq9qIBy88KmsBk
- 486g==
-X-Gm-Message-State: AOJu0YwxUaJgXi/qH4WtSJV/ej/sE12475ja7Qxw7miNWD2guksAo1B8
- KkChk0oEmZH3Ybj04pIPah28Y9UX2N/pPNh65ftlub2/TG0MbASeb5jpT7C6o+/6oaxzTSj8z1l
- iV8l3TpjlGr6zPioeHMbOWLupMIrGrO5jurYVNTrN9jxh5HyDw6YCZg==
-X-Gm-Gg: AfdE7ckLfOc31Mf5vQ0qz8n4GwCsVZkUnUQJdmM1TawW3iySjPOYyD+HmsUf9D7GXHj
- nWG0JlFWrT5IVdEp7+GDJKikK8CYHxdX6zNmM8uE58r57+acz8mnXq/P6SQWHSuO7H9GU4nTCro
- 7rcnhfnXhQBaDi7qFoftMw5neLwtvmhed6LyEoB5WGJLsRXIDqzP8AnM/eYuBPuNVXqrfGn/doZ
- D/CSlEgRefumMiIEKA2ehLBjSZcMrX5zzoMkgbGTu1r+qP64Nw6qFtche5ndptvOPB8PdhUew==
-X-Received: by 2002:a17:906:5189:10b0:bee:d654:a00e with SMTP id
- a640c23a62f3a-c09b96816c9mr384248866b.28.1782110912257; Sun, 21 Jun 2026
- 23:48:32 -0700 (PDT)
+ bh=a4XYabP2qFZTEBt1iCtD19+be3qmcHK7nWd5pdkX8Oc=;
+ b=X/hYehPVtm/T3KteYJcBTU0lzSUPMpsxTfwOkb+sAx+JcTinMcS4tqJPNy8mG1OQPi
+ 02JkoZd8Vs4Meuhxy34QcDAcZSfCaWSJohurfYGWZ5TJqODSYBRK0Ddv+FWyCOKeoD+M
+ kEzp/nnrdRQeI+fZu0/gDRghpR8RsbwYMnbMjTmI+318Awxcdr8Q8OD2E46xdKUY8XRC
+ s1A4h4SI9lyAiZwkkoBu9PAbZmwa4Wf8GVJZkPprxGxK4q8DMlwMyY3Fpkg46R0D+YiR
+ u1i6pEMduhXU/D3WSpldwNZ4d0PsekfXOM1o0PONTZdTqBDtnv+nTNiXFtYKl0QzFUlJ
+ 7roA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rri029jppFj3dYyzQYZzYZZQp5Ecpok4mL/kukIqTXBqY2X6N8EZDcN07uxpgJqlEX6lm/Xivk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvfkkdANKDpaVNq+FBRTzSkWNU7Xpr4Xltk3qAR5ATz071Lqem
+ LZH3a8go1GPtebG7dKT6XT4WoAemlMmQDQgjjNCndTAvRGjDCrtWzFg/Z8FxZRS1wrTSPpR415J
+ lMKmCcQxTN73DYFdUVf3B5HLIFotVHnn0iNzkXedJXg==
+X-Gm-Gg: AfdE7cmizrJ5ui7X/FA8iodC7bse5lDJIuXBLeMl4sU/FcMfRD4AL3StfZ8Oz+9vwVg
+ V5+06ZhwYypWcwXnBRrrEUVgJKuEAjK9XfRRfZqCiox+63T9TKsvvrsuFn4X/rQA/M+EBbv/qHI
+ o9q3dtjm9BRp0s3ef/g3SsBx3wYoDodc4TbHWf61BFmWC9dr7lcWNTPDY/khj1yCGbisc50+M1+
+ 4INc4IaquB0+i9PpbawZvX2K/I2QUNgGhhLWw6yqeJ+EUkUcb+ODt0NK78gdnW6muZNparli0Hv
+ 4xoe3Mi7UETRQruTv/9PTUpP5LV/KV55NESSNvs7ouER8Gi3hUupEDwf/G9LQivhgj7q5xXBcjh
+ IDPmyYPwkRCVlILApd9OriUDXhja1LmqteakFQWbLDWYUl+wKNyxFYw3pVeGtBwoVgMORyTjx4m
+ +PDhQMpDDcekMkNHrZnkKl5O3Y7Mo4yH3WsZkzpEjfxYEUU4hyl8DzLShmbvA1vICzfg2vtTx3z
+ /qe+YPj8CFFVjOwNPsabTIPDEVM4Zyy7lWtZnRPnNkp9zRrhJpQgseynToU7OxQHLkawWR6hs5n
+ 7TXusG+2mvTsWh/czQZQjWokTYLk0AEKVAju8QocNQigct3wlhk722gTk0YvYtoltW/o3xs=
+X-Received: by 2002:a05:690e:12cd:b0:660:9c4e:a44d with SMTP id
+ 956f58d0204a3-662ffb9debbmr11192842d50.6.1782115461706; Mon, 22 Jun 2026
+ 01:04:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <CAFLszThH0A1XMv7P=QA7HreiSq6MLEriE7hODxk6S6MA5t6+rA@mail.gmail.com>
-In-Reply-To: <CAFLszThH0A1XMv7P=QA7HreiSq6MLEriE7hODxk6S6MA5t6+rA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 22 Jun 2026 07:48:21 +0100
-X-Gm-Features: AVVi8CeKMUJr_fPPKNKRFQjXOx9BAPsKoiKT_zeuvtCpYihtsiriYOfjFnujCMo
-Message-ID: <CAFLszTgjX7nv-MBX0ayEcoowBRUCSCS7XE3jHSjL=o0GH2POag@mail.gmail.com>
-Subject: Re: U-Boot Concept Tree Proposal
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
+References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
+ <20260621081915.19154-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260621081915.19154-5-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 22 Jun 2026 11:03:44 +0300
+X-Gm-Features: AVVi8CewCa_cOs73dZZuRqVhesPXH583s8ke7-7hudHX4h5NqHqpfA9Bvg_u0pU
+Message-ID: <CAC_iWjKhmkpzGJOpsVt1Q8ASMcvts7A-3LU+JQowDpatYfcchg@mail.gmail.com>
+Subject: Re: [PATCH v2 04/11] efi_loader: fix open_file_system() memory leak
+ on fallback path
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,123 +123,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding to cc
+On Sun, 21 Jun 2026 at 11:19, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
-On Thu, 18 Jun 2026, 16:08 Simon Glass, <sjg@chromium.org> wrote:
+> In dtbdump.c and smbiosdump.c, open_file_system() falls back to
+> locating the UEFI system partition via locate_handle_buffer() when
+> the loaded image's own partition does not expose the simple file
+> system protocol. The handle buffer returned by locate_handle_buffer()
+> must be freed via free_pool().
+>
+> The guard condition read 'if (handle)' (checking the image handle,
+> which is never NULL) instead of 'if (handle_buffer)', so the buffer
+> was freed unconditionally even when locate_handle_buffer() was never
+> called and handle_buffer remained NULL, and it also obscured the
+> intent. Change the condition to 'if (handle_buffer)'.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>
 
-> Hi,
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+> v2:
+>         new patch
+> ---
+>  lib/efi_loader/dtbdump.c    | 2 +-
+>  lib/efi_loader/smbiosdump.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> On Wed, 3 Jun 2026 at 06:06, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Dear U-Boot Contributors,
-> >
-> > I would like to introduce the U-Boot Concept tree along with a few
-> thoughts on its role in U-Boot.
-> >
-> > By way of background, I have been a contributor for about 15 years -
-> around 10k commits and countless reviews. I have introduced many
-> innovations into the project: e.g. sandbox, device tree, C test
-> infrastructure, Binman, standard boot. Of course I could not have done an=
-y
-> of this without the U-Boot community (nor would there be any point).
-> >
-> > As the U-Boot project has matured, the demands for mainline stability
-> and rigorous review have created a natural friction for landing complex,
-> large-scale feature and refactoring series at the necessary pace. This
-> structural reality, which has slowed the adoption of ambitious efforts li=
-ke
-> bootstd, VBE, xPL [1], and CI-connected hardware labs, is what the Concep=
-t
-> tree is designed to alleviate.
-> >
-> > I strongly believe that projects must evolve in order to stay relevant
-> in the long term. This includes code-refactoring, new features and
-> subsystems, along with migration of old code to use them.  A look back at
-> the U-Boot of 2010 shows how far the project has come. I don't think anyo=
-ne
-> would still be using U-Boot if it had not evolved.
-> >
-> > I have set up a 'Concept' tree, a possible future for U-Boot, as a way
-> to regain the old pace of innovation. This environment is a proving groun=
-d
-> for new features where we maintain a lower bar for risk tolerance and
-> completeness. We will accept partial and speculative features, provided t=
-he
-> underlying code remains robust and of high quality, with the shared
-> understanding that features may be dropped if they do not prove beneficia=
-l.
-> >
-> > Another difference is AI. I believe that AI is the next step on from
-> compilers, which also took a long time to produce good code and find
-> acceptance. The Concept tree welcomes (and encourages) high-quality AI
-> contributions and reviews. It accepts PRs and allows reviews on PRs or th=
-e
-> mailing list. It relies 99% on automated tests (sandbox, QEMU and labs) s=
-o
-> sets a high bar for testing. It uses a separate Gitlab instance for now a=
-nd
-> of course uses a separate mailing list and Patchwork project to avoid
-> cluttering the main list. Concept runs an AI-powered cherry-picker so tha=
-t
-> it keeps up with mainline. In no sense is it operated as a fork.
-> >
-> > Once features are landed and functional in Concept I hope that many wil=
-l
-> find their way to mainline, although inevitably some rework will be neede=
-d.
-> >
-> > I recognise that introducing a new 'Concept' tree might initially cause
-> confusion or concern. This is an invitation to work together to define it=
-s
-> role. I welcome all feedback - positive or negative - here on the mailing
-> list, privately, or on irc. Let=E2=80=99s discuss how this initiative can=
- help
-> U-Boot remain the defining firmware for the 2030s.
-> >
-> > [1]
-> https://lore.kernel.org/u-boot/CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=3DieT2oaHfgL=
-f3_nC+xXA9g@mail.gmail.com/
+> diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
+> index 1e72404ecc1..865edc33a97 100644
+> --- a/lib/efi_loader/dtbdump.c
+> +++ b/lib/efi_loader/dtbdump.c
+> @@ -350,7 +350,7 @@ open_file_system(struct
+> efi_simple_file_system_protocol **file_system)
+>                                         EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+>         if (ret != EFI_SUCCESS)
+>                 error(u"Failed to open simple file system protocol\r\n");
+> -       if (handle)
+> +       if (handle_buffer)
+>                 bs->free_pool(handle_buffer);
 >
-> Just to report that after some brief discussions, we have agreed on a
-> path forward here (thank you Peter!).
+>         return ret;
+> diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
+> index 974728a43af..494c3d18945 100644
+> --- a/lib/efi_loader/smbiosdump.c
+> +++ b/lib/efi_loader/smbiosdump.c
+> @@ -248,7 +248,7 @@ open_file_system(struct
+> efi_simple_file_system_protocol **file_system)
+>                                         EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+>         if (ret != EFI_SUCCESS)
+>                 error(u"Failed to open simple file system protocol\r\n");
+> -       if (handle)
+> +       if (handle_buffer)
+>                 bs->free_pool(handle_buffer);
 >
-> Concept will become a custodian tree in U-Boot's Gitlab instance. I
-> will run it, with access to my hardware lab. It will cherry-pick from
-> mainline and accept code through its own channels (PRs and separate
-> mailing list + patchwork). When features are ready for mainline, I
-> will send patches to the main list for review in the normal way.
+>         return ret;
+> --
+> 2.53.0
 >
-> I have been working to migrate things off u-boot.org (lab, gitlab,
-> blog... and email). I am transferring u-boot.org to the SFC once this
-> is finished in the next few days. If we do end up setting up email
-> addresses for people on u-boot.org, I'd appreciate keeping sjg@
->
-> Tom, Neil Peter, please can you ack this to confirm you are happy with it=
-?
->
-> >
-> > Concept tree:
-> >                        :
-> >                        ::
-> >                      ...:::.
-> >                  ::  :. -
-> >            .   ::::::-  - ::. ..
-> >           .:: .:      -=3D=3D  =3D.:.
-> >         ::.- ::::. ::. :=3D:. ::::
-> >   ::. ::   =3D..  :.-::: =3D:
-> >     .:-:-. -.::  ::=3D-:=3D:
-> >   ::::::=3D.  -.::   =3D=3D=3D:       ::.
-> >     ::.:::=3D::=3D:   -=3D=3D=3D:--=3D=3D-::--::
-> >       :.    :-=3D-.:=3D=3D:.   .:  ::
-> >                =3D=3D=3D:       ::  :
-> >                =3D=3D:
-> >                =3D=3D
-> >               :=3D=3D
-> >               -=3D=3D:
-> >               -+=3D:
-> >               =3D++=3D.
-> >              .-=3D=3D=3D:
->
-> Regards,
-> Simon
 >
