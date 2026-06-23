@@ -4,118 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D5ECDB46F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 12:55:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8D5CD98F2
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 12:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A45B084A3C;
-	Tue, 23 Jun 2026 14:55:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DABC84A35;
+	Tue, 23 Jun 2026 14:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rFTK+QV4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1BbGOwDY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3004849F7; Tue, 23 Jun 2026 14:55:00 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 5759C849CE; Tue, 23 Jun 2026 14:55:08 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3232849CE
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 14:54:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9113E84A35
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 14:55:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jNxSf0QJZCRML0SI4kqOcoQ69mcRzkl+ObxUWNCP9knDQDlQDABWSfAKKRWLzNvDeK8KrEyvmq1x8OQ3+Hap9FF3A0z2yEEGnu9oD4wpb+PjH4e3SPAhJpvXOtbn5e6uEWY1cuhRf6rkm5yG/GNzJBtJHhud41lf1IkWV6ALdsbAilnPVi/5fKFtgf1cwerklrUux9GA1YLxk0TlgrkRxDG6XfjupgpDz9evnvjmXaCmvtHq2bLVpfrJRfP5uEnNIkp7AXNrmMeH215otS0ihcrZgayzUoHZoqe/hY95bBzCk5Y8Ckx+0DW3Cy5apUeHy9+rhKif6nzNXWcOcACt7A==
+ b=x+wYvZqc2WfKinVe0t3usmvCTJLawNMSrOncMd0hUpPv55alH17H3C3E/noI8F9ybIJKdw9km0243a3K18cMAh12yEkxDCe8sBuXTQ/cBQrtbI8fwFVQy6sKmWRYPa4AV/v/+T6A1EcTc1BhVp9WliRlJxJOIaqDIEkzMNh7O92qeCVzQygj3d3Lx11f4Ba7338JOKryIDMalbWGcUkokUPFFAQ7DWJEIdrbPLC1wZDcUHVtsvX/4c9lwLwKSjqqwgzj2ZcekEeq68DQTDBNUPWhnD0yC0zFtIrRDHHy1XwfbPwzD8UcgqcWgrXAPMaeWlWfAlQzElZRa1MM/O2wWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LXPFrnZYiXkfOItdZFwmWyanqMdRk6w8T18StovAHgU=;
- b=cN49sgyD8mRXZ/Fu1TsoTdcu+RuewAVPDulz4fRoMW1F9WJjvaAji83bBjSmCxnNH40J+0wFubc4Hhr6TonfiYtzS8BkhzETHQXn5HhhS5QGgjzDqjvIPTgMLVpyPzIWrVQ8rdxvCHkGW+c1k44QOlGTMRXdWcf+1CHkwmwjMBDRAENffNOYtZA/WJMkOeIACeuMK9xIIm7vrilxcRaRE1EwK8Mbm0OGkpa4ZCdST6Zd6/Si1otwnfRucizAriumN1+icCU8LwSJtPOZ72ALmhRaHYikCRj5VqQZug7sYaPthhQ5H/CSuYyzBh6k3e7OhuO4TDLDsXZdcKapydPc7A==
+ bh=1oNRgbTfov295+qF9Y3OM61lL7VqjqNvO30gbP+8Wi4=;
+ b=Oa2jv+v7KgZofogAhjkF3y2EQJcDnKJD1WmqiQsmMtvT4MLU1vcquYicCO4mbkCcOa/Tj6Einddsvvv8uo70PbJdaDNTmKJE+olP2LldAmCV2D5vetYY9j1e1GhNEC2NcSfWRBpnT4RRuewYp0SYHdm3LlEsy4s9YbAf1U/43RUL5qlw3z5kwNyZvnnq6dxGNo4Ft6XU3ebJDHhKvMCR6xCeSpP7qoT6oOBX7yohS9MNrXSu+3iyHSHBuhyoJpwTXB8Yfawt5rNyC00GjAY7Z6v5tXApEPMjMPbmXW9io/9/VoHgqiYximmfoyA3PbDnWcZpALWaRdi5jwMqDExpUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LXPFrnZYiXkfOItdZFwmWyanqMdRk6w8T18StovAHgU=;
- b=rFTK+QV4PVSPfZfqmtOChxHYSjRMge7cgF/1UrSueFu28TjHTTk2u/VjvT2k16As1csHQLbb6tzDT++O8uWnUYaQ7E3m/CHxK4CNvVPUi/vTe9tprimyoD5rSKg/nkixt+pTimwspjYzuDBFBlTbyobgErErPCOV6lXmiA5Z7Kk=
-Received: from SA1PR02CA0002.namprd02.prod.outlook.com (2603:10b6:806:2cf::6)
- by PH7PR12MB9222.namprd12.prod.outlook.com (2603:10b6:510:2ef::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Tue, 23 Jun
- 2026 12:54:54 +0000
-Received: from SN1PEPF00026369.namprd02.prod.outlook.com
- (2603:10b6:806:2cf:cafe::6b) by SA1PR02CA0002.outlook.office365.com
- (2603:10b6:806:2cf::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.12 via Frontend Transport; Tue,
- 23 Jun 2026 12:54:54 +0000
+ bh=1oNRgbTfov295+qF9Y3OM61lL7VqjqNvO30gbP+8Wi4=;
+ b=1BbGOwDYwSDSBhbxgv9uAQKUqM5f/KZ+6moNc8qCgyvEXGclCM+fZ0yn0epxNmPI6+BGH5qUBam1Mv5pXniOBmQxW39WqDjNViqYivmf322MxjfkNYnzjgrYmxZIGZsRp769AgxLzZ90NBldUq++3iaDslOLEuEFYKoIhB7LQe0=
+Received: from CY5PR22CA0027.namprd22.prod.outlook.com (2603:10b6:930:16::8)
+ by DM6PR12MB4233.namprd12.prod.outlook.com (2603:10b6:5:210::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.16; Tue, 23 Jun
+ 2026 12:54:59 +0000
+Received: from CH1PEPF0000AD83.namprd04.prod.outlook.com
+ (2603:10b6:930:16:cafe::6a) by CY5PR22CA0027.outlook.office365.com
+ (2603:10b6:930:16::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.13 via Frontend Transport; Tue,
+ 23 Jun 2026 12:54:59 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF00026369.mail.protection.outlook.com (10.167.241.134) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH1PEPF0000AD83.mail.protection.outlook.com (10.167.244.85) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.159.10 via Frontend Transport; Tue, 23 Jun 2026 12:54:54 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.159.10 via Frontend Transport; Tue, 23 Jun 2026 12:54:59 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 23 Jun
- 2026 07:54:48 -0500
+ 2026 07:54:58 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 23 Jun
+ 2026 07:54:57 -0500
 Received: from localhost (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 23 Jun 2026 07:54:47 -0500
+ Transport; Tue, 23 Jun 2026 07:54:57 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
 CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/18] arm64: versal-net: Move board_early_init_r clock setup
- to mach code
-Date: Tue, 23 Jun 2026 14:53:33 +0200
-Message-ID: <10dd9f35d03be0402ce13475f20b2cd3761189a6.1782219202.git.michal.simek@amd.com>
+Subject: [PATCH 11/18] arm64: versal-net: Move SoC detection out of board code
+Date: Tue, 23 Jun 2026 14:53:36 +0200
+Message-ID: <8757111cb254543d61541fb030d51f62c3c555a8.1782219202.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1782219202.git.michal.simek@amd.com>
 References: <cover.1782219202.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4519; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=Yr1yo9MD0McE73xEhB+Z/fywF8eZbx7wG9mwqkcaYXE=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRZNb4uSc5h4+WedUFuH/P+l0cfJyvLuOZedrcJbDJ+U
- LzkYpRqRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAExk+jmGX8yv9/QvDlRY9OzE
- FCWBI5b/Xmh/cOf28U9tKbV7VO3/upORoaug6bL5S6HpAi6Jm54EX+jjXe8dvW9J3ow7t73ZD8y
- Q4wYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6467; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=+2vz6EpG3B1ajNnVKWIdBiOGSRBPpj2T9wKJD+UnZic=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRZNb6t1DV9F3rk5bptqnfNJgV5Fz9OuLuM/4WNX2/mo
+ TA7+6yJHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjAR+wCG//mJl93kw5k27buW
+ 6+ovqtrGduvGS7UW5lfum7c8Zt0p8oORYVU3/+O1WS/ttgnZarfEa6dO1X9nsyLo6BNnLvfnC92
+ UuAE=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00026369:EE_|PH7PR12MB9222:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5025c421-5c8d-4f9c-17d1-08ded1269f38
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD83:EE_|DM6PR12MB4233:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b82d31e-b7d6-4af0-95fb-08ded126a225
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|23010399003|36860700016|1800799024|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: Jf1U4Pmcr+ZbMdk/AMqiPdQ7cQuhwchzpkAmRYfcLHZI2Gg3S9uUiR+9GcGvKxDjCauoi0O6C+KUpJSGHKNMqrRQXjJgKmuoJKdXXJrMztc6cQqFqQRxUngQ5BO5r73VZIBLT3GKNjTjZGssFwwrhosXTpeRRVxNMLmuxKCxFlhBH1PTbKmvt+wDLavYSszFCikoOpcpVs5zO2byOnNzhHyRU2ABXltjKD10sc8f+f7ik6nXIaWQXxlKdbL9ZXkXw+bRxEmS7OXBEUoMKhK17jo58NVaVSfDokdT2TxUsDLLbMaCijPV0xiz3lNZ6RqKcK2uu7a10s7Cjf5dbdyS4K+k2GW5UzDgE1J3Xe5BqxWIdEvSyEcAJJKNINMfHHevWtmccxvlwSRvDAmGb4S76NCWbM6oW6O4PQe7LYaoFwWZIuOLKbuJNUPEOnA5NsjrWkxJFc9BdrprXaGyFYdVqIrGlulffWAgvhIYkrYn5U5VLenxIhe8sHwFQvvNFjl/By/uvGlHSBKkjv9IsEsMGcSvlHgYlUFnz3c6hPZNzG0AiHGBJ06hyrqrBB/Aao692X+FaP2xTcETuIRKpZ4R2kHLzVZvbEL051WMgbtu6D0oruugyL6O4ih+09XzpiQ3jmgWLgCOl76s6a6bJOBZ1mnJ8AIt4ZuY0wcnbSQ6yZKbXulyrUoZMeLiFcOJJX+aQMB78a8nrSpi9gkF2Q+9YQ==
+ ARA:13230040|82310400026|23010399003|36860700016|1800799024|376014|56012099006|11063799006|6133799003|3023799007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: clBur9vAW8wM+GESEuqR0N0ZNIGWFHyyJa51mxAFNcGs1tOcxjM19+RWRNNHDCwCOeTW/l7w+VR5NX08T4WE1VGH3ipZL+MFBfDOWDN5sWtzntqji1Dck7z0cONaeV3fBbvcWS6qnwACpaiHzyqnpT+9UZ8tj6+6gCDKIw99K+gOLHdtXYp2tovOuMYEg285/ADhXIYgH2HILAVuZFTzGM2GI2IlLwL8yrTw1zFo8IpLrtxT/vfSIDS817ZZfOjJH+zla84/sC13bUmu7+wC5aAg/jZmkIQKAiVJUAkQh42ucWtlRhguXWuEQNX40wL/TzBl2AmK10hFBaNage7uD2VlYCaJv4AlNDyzFw5FTFmw4dbCqYTEhGsU5d9kKMmywPrej7Lql1aJ7rvDHf71g0CURJ3GjSul1ydebMy/zmTF/QRYMI/woEKQ/pI8Y/xVMIscOp5THZ9K8LtcbNHmBmRsoNqDTQ9ftnvaOjLz5zrK42Uo1esZlcgkPpZ3OVqwXLlBGt652dZdUnm/Nwg/BJ+DCN+gLCkAGA1XaHQmXUi+Z1bjI28x4AbYMaPDy7g8vXVAigm5tvqHLaPooavVSpEzSeHnMwZmffpH+DM+xtzp/Ox5M1ZGmjVQhfjwgim5qo+JyZHbvpWlvLIvfWQRKdpx6wLGoZ6jXMs2Y2H/pv2Nq6DY2O/+64g9XOHokxlVAByshorUnvVLn7il1Up4HA==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(23010399003)(36860700016)(1800799024)(56012099006)(11063799006)(22082099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(23010399003)(36860700016)(1800799024)(376014)(56012099006)(11063799006)(6133799003)(3023799007)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: bUrn/8Q6DwwNpJz7aPsUOXq5jIRT+DR8O92qvn4nuj0OUI73kTP64V9cZTbV8sN2j4CxeruvUpltJ4LaCWN1B4gjDnthrIdERAUrcavuLT8rRQBBk2omDhMh8+4mw63SSryM2MYQIy2RfUzMfiZfC1lv/rhq7OEVYG4lF2H86qYotE7SqvUSk597uTYfvdFAieRc5vmdl2Imcqz72Cn7VL190LUd2WI8MW2cZY0rEAtWqxICFox+I+gOCpgrqYdRD7QOAGKQqtILbbn+Ohc3EoDXnkk+iwIchK5tFF1bFgT18IzCW1kv+E+5e0EMMi0BFBUwYF8H3DR1M1mpr20ts5+2Y1uLk8ItN1D/KT5AABL5D3aUoC1AybJNL6tYZ6e6hU26NdH3SVP1JMdsiWCnK5bFU1EM02iUxyoJPTaCKKyCgiG6ANjv3wKoWjNKPlEg
+X-MS-Exchange-AntiSpam-MessageData-0: IHKlNy6EYp3XQ8Vdyz2zY4RRe153671zduMuko5+o2qBqjx811OTbZb8jF5pIEAerWp6Ad/TSD8za5p4kr1c/6Cc9Itb9EkfPkqBE5AL3Yw6VHv/wddur+QCcoi74C2x94N9koCYE12NgRO7Q7QUMkAdLaNm+jcPFxOUjkg7DK46vS3Sh95LWzgIlGOmoTh+PvlCYsb8MMWMuF/Ppr6RqXX7prt+G/0Kb/xaemH/kqsYm20zfxNX7z+M2wH1KK3L5E18nRVj0XqLrNEWxv1Cei9OKxddRKen3BrZHfGQzJ2VvfTHO0tw7/PRUgluKKBWKo/QBnx6wDvdpmGQNmR3GD/XgWFUKcHswLO4ZEOkLiuUYLOvq965gRhATuQrIyn6X44nQuhGkq4Ht775CP30Z4aN9CWWDI7vaib5Se18FSf/aY5RJEkjaVMEtVE9dDqp
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 12:54:54.2940 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5025c421-5c8d-4f9c-17d1-08ded1269f38
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 12:54:59.1980 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b82d31e-b7d6-4af0-95fb-08ded126a225
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026369.namprd02.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD83.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9222
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4233
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,145 +135,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-board_early_init_r() programmed the IOU switch clock and the system
-timestamp counter directly with readl()/writel() in board code. This is
-SoC register setup rather than board policy, and the same block is
-duplicated across the Xilinx SoCs.
+soc_detection() and soc_name_decode() read the PMC_TAP version/idcode
+registers and decode the platform. This is SoC information rather than
+board policy, and a firmware interface could provide it instead, so it
+does not belong in board code.
 
-Move it into versal_net_timer_setup() in arch/arm/mach-versal-net so the
-board hook only keeps the EL3 guard and calls the helper.
+Move both functions, together with the shared platform_id and
+platform_version state, into arch/arm/mach-versal-net where they still
+override the weak stubs in the Xilinx common board code. The board file
+drops the now unused linux/bitfield.h include.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- arch/arm/mach-versal-net/cpu.c                | 43 +++++++++++++++++++
- .../mach-versal-net/include/mach/sys_proto.h  |  2 +
- board/xilinx/versal-net/board.c               | 38 +---------------
- 3 files changed, 46 insertions(+), 37 deletions(-)
+ arch/arm/mach-versal-net/cpu.c  | 91 +++++++++++++++++++++++++++++++++
+ board/xilinx/versal-net/board.c | 87 -------------------------------
+ 2 files changed, 91 insertions(+), 87 deletions(-)
 
 diff --git a/arch/arm/mach-versal-net/cpu.c b/arch/arm/mach-versal-net/cpu.c
-index d088e440f638..5e7c1bebf2cc 100644
+index 5e7c1bebf2cc..4cbcb119ccb8 100644
 --- a/arch/arm/mach-versal-net/cpu.c
 +++ b/arch/arm/mach-versal-net/cpu.c
-@@ -7,6 +7,8 @@
-  */
+@@ -8,7 +8,9 @@
  
  #include <init.h>
-+#include <log.h>
-+#include <time.h>
+ #include <log.h>
++#include <malloc.h>
+ #include <time.h>
++#include <vsprintf.h>
  #include <asm/armv8/mmu.h>
  #include <asm/cache.h>
  #include <asm/global_data.h>
-@@ -88,6 +90,47 @@ u64 get_page_table_size(void)
- 	return 0x14000;
+@@ -17,6 +19,9 @@
+ #include <asm/arch/sys_proto.h>
+ #include <asm/cache.h>
+ #include <dm/platdata.h>
++#include <linux/bitfield.h>
++#include <linux/string.h>
++#include "../../../board/xilinx/common/board.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -131,6 +136,92 @@ void versal_net_timer_setup(void)
+ 	debug("timer 0x%llx\n", get_ticks());
  }
  
-+void versal_net_timer_setup(void)
++static u32 platform_id, platform_version;
++
++char *soc_name_decode(void)
 +{
-+	u32 val;
++	char *name, *platform_name;
 +
-+	debug("iou_switch ctrl div0 %x\n",
-+	      readl(&crlapb_base->iou_switch_ctrl));
-+
-+	writel(IOU_SWITCH_CTRL_CLKACT_BIT |
-+	       (CONFIG_IOU_SWITCH_DIVISOR0 << IOU_SWITCH_CTRL_DIVISOR0_SHIFT),
-+	       &crlapb_base->iou_switch_ctrl);
-+
-+	/* Global timer init - Program time stamp reference clk */
-+	val = readl(&crlapb_base->timestamp_ref_ctrl);
-+	val |= CRL_APB_TIMESTAMP_REF_CTRL_CLKACT_BIT;
-+	writel(val, &crlapb_base->timestamp_ref_ctrl);
-+
-+	debug("ref ctrl 0x%x\n",
-+	      readl(&crlapb_base->timestamp_ref_ctrl));
-+
-+	/* Clear reset of timestamp reg */
-+	writel(0, &crlapb_base->rst_timestamp);
++	switch (platform_id) {
++	case VERSAL_NET_SPP:
++		platform_name = "ipp";
++		break;
++	case VERSAL_NET_EMU:
++		platform_name = "emu";
++		break;
++	case VERSAL_NET_QEMU:
++		platform_name = "qemu";
++		break;
++	default:
++		return NULL;
++	}
 +
 +	/*
-+	 * Program freq register in System counter and
-+	 * enable system counter.
++	 * --rev. are 6 chars
++	 * max platform name is qemu which is 4 chars
++	 * platform version number are 1+1
++	 * Plus 1 char for \n
 +	 */
-+	writel(CONFIG_COUNTER_FREQUENCY,
-+	       &iou_scntr_secure->base_frequency_id_register);
++	name = calloc(1, strlen(CONFIG_SYS_BOARD) + 13);
++	if (!name)
++		return NULL;
 +
-+	debug("counter val 0x%x\n",
-+	      readl(&iou_scntr_secure->base_frequency_id_register));
++	sprintf(name, "%s-%s-rev%d.%d", CONFIG_SYS_BOARD,
++		platform_name, platform_version / 10,
++		platform_version % 10);
 +
-+	writel(IOU_SCNTRS_CONTROL_EN,
-+	       &iou_scntr_secure->counter_control_register);
++	return name;
++}
 +
-+	debug("scntrs control 0x%x\n",
-+	      readl(&iou_scntr_secure->counter_control_register));
-+	debug("timer 0x%llx\n", get_ticks());
-+	debug("timer 0x%llx\n", get_ticks());
++bool soc_detection(void)
++{
++	u32 version, ps_version;
++
++	version = readl(PMC_TAP_VERSION);
++	platform_id = FIELD_GET(PLATFORM_MASK, version);
++	ps_version = FIELD_GET(PS_VERSION_MASK, version);
++
++	debug("idcode %x, version %x, usercode %x\n",
++	      readl(PMC_TAP_IDCODE), version,
++	      readl(PMC_TAP_USERCODE));
++
++	debug("pmc_ver %lx, ps version %x, rtl version %lx\n",
++	      FIELD_GET(PMC_VERSION_MASK, version),
++	      ps_version,
++	      FIELD_GET(RTL_VERSION_MASK, version));
++
++	platform_version = FIELD_GET(PLATFORM_VERSION_MASK, version);
++
++	if (platform_id == VERSAL_NET_SPP ||
++	    platform_id == VERSAL_NET_EMU) {
++		if (ps_version == PS_VERSION_PRODUCTION) {
++			/*
++			 * ES1 version ends at 1.9 version where there was +9
++			 * used because of IPP/SPP conversion. Production
++			 * version have platform_version started from 0 again
++			 * that's why adding +20 to continue with the same line.
++			 * It means the last ES1 version ends at 1.9 version and
++			 * new PRODUCTION line starts at 2.0.
++			 */
++			platform_version += 20;
++		} else {
++			/*
++			 * 9 is diff for
++			 * 0 means 0.9 version
++			 * 1 means 1.0 version
++			 * 2 means 1.1 version
++			 * etc,
++			 */
++			platform_version += 9;
++		}
++	}
++
++	debug("Platform id: %d version: %d.%d\n", platform_id,
++	      platform_version / 10, platform_version % 10);
++
++	return true;
 +}
 +
  U_BOOT_DRVINFO(soc_xilinx_versal_net) = {
  	.name = "soc_xilinx_versal_net",
  };
-diff --git a/arch/arm/mach-versal-net/include/mach/sys_proto.h b/arch/arm/mach-versal-net/include/mach/sys_proto.h
-index 23374d10a6b4..33253ca88bfe 100644
---- a/arch/arm/mach-versal-net/include/mach/sys_proto.h
-+++ b/arch/arm/mach-versal-net/include/mach/sys_proto.h
-@@ -7,3 +7,5 @@
- #include <linux/build_bug.h>
- 
- void mem_map_fill(void);
-+/* EL3 clock/timer register setup, called from board_early_init_r() */
-+void versal_net_timer_setup(void);
 diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index 65b2a451ad7a..a40039a1dc8e 100644
+index a40039a1dc8e..3c69edc22606 100644
 --- a/board/xilinx/versal-net/board.c
 +++ b/board/xilinx/versal-net/board.c
-@@ -148,46 +148,10 @@ int board_early_init_f(void)
+@@ -25,7 +25,6 @@
+ #include <versalpl.h>
+ #include "../common/board.h"
  
- int board_early_init_r(void)
- {
--	u32 val;
--
- 	if (current_el() != 3)
- 		return 0;
+-#include <linux/bitfield.h>
+ #include <debug_uart.h>
+ #include <generated/dt.h>
  
--	debug("iou_switch ctrl div0 %x\n",
--	      readl(&crlapb_base->iou_switch_ctrl));
--
--	writel(IOU_SWITCH_CTRL_CLKACT_BIT |
--	       (CONFIG_IOU_SWITCH_DIVISOR0 << IOU_SWITCH_CTRL_DIVISOR0_SHIFT),
--	       &crlapb_base->iou_switch_ctrl);
--
--	/* Global timer init - Program time stamp reference clk */
--	val = readl(&crlapb_base->timestamp_ref_ctrl);
--	val |= CRL_APB_TIMESTAMP_REF_CTRL_CLKACT_BIT;
--	writel(val, &crlapb_base->timestamp_ref_ctrl);
--
--	debug("ref ctrl 0x%x\n",
--	      readl(&crlapb_base->timestamp_ref_ctrl));
--
--	/* Clear reset of timestamp reg */
--	writel(0, &crlapb_base->rst_timestamp);
--
--	/*
--	 * Program freq register in System counter and
--	 * enable system counter.
--	 */
--	writel(CONFIG_COUNTER_FREQUENCY,
--	       &iou_scntr_secure->base_frequency_id_register);
--
--	debug("counter val 0x%x\n",
--	      readl(&iou_scntr_secure->base_frequency_id_register));
--
--	writel(IOU_SCNTRS_CONTROL_EN,
--	       &iou_scntr_secure->counter_control_register);
--
--	debug("scntrs control 0x%x\n",
--	      readl(&iou_scntr_secure->counter_control_register));
--	debug("timer 0x%llx\n", get_ticks());
--	debug("timer 0x%llx\n", get_ticks());
-+	versal_net_timer_setup();
- 
+@@ -49,92 +48,6 @@ int board_init(void)
  	return 0;
  }
+ 
+-static u32 platform_id, platform_version;
+-
+-char *soc_name_decode(void)
+-{
+-	char *name, *platform_name;
+-
+-	switch (platform_id) {
+-	case VERSAL_NET_SPP:
+-		platform_name = "ipp";
+-		break;
+-	case VERSAL_NET_EMU:
+-		platform_name = "emu";
+-		break;
+-	case VERSAL_NET_QEMU:
+-		platform_name = "qemu";
+-		break;
+-	default:
+-		return NULL;
+-	}
+-
+-	/*
+-	 * --rev. are 6 chars
+-	 * max platform name is qemu which is 4 chars
+-	 * platform version number are 1+1
+-	 * Plus 1 char for \n
+-	 */
+-	name = calloc(1, strlen(CONFIG_SYS_BOARD) + 13);
+-	if (!name)
+-		return NULL;
+-
+-	sprintf(name, "%s-%s-rev%d.%d", CONFIG_SYS_BOARD,
+-		platform_name, platform_version / 10,
+-		platform_version % 10);
+-
+-	return name;
+-}
+-
+-bool soc_detection(void)
+-{
+-	u32 version, ps_version;
+-
+-	version = readl(PMC_TAP_VERSION);
+-	platform_id = FIELD_GET(PLATFORM_MASK, version);
+-	ps_version = FIELD_GET(PS_VERSION_MASK, version);
+-
+-	debug("idcode %x, version %x, usercode %x\n",
+-	      readl(PMC_TAP_IDCODE), version,
+-	      readl(PMC_TAP_USERCODE));
+-
+-	debug("pmc_ver %lx, ps version %x, rtl version %lx\n",
+-	      FIELD_GET(PMC_VERSION_MASK, version),
+-	      ps_version,
+-	      FIELD_GET(RTL_VERSION_MASK, version));
+-
+-	platform_version = FIELD_GET(PLATFORM_VERSION_MASK, version);
+-
+-	if (platform_id == VERSAL_NET_SPP ||
+-	    platform_id == VERSAL_NET_EMU) {
+-		if (ps_version == PS_VERSION_PRODUCTION) {
+-			/*
+-			 * ES1 version ends at 1.9 version where there was +9
+-			 * used because of IPP/SPP conversion. Production
+-			 * version have platform_version started from 0 again
+-			 * that's why adding +20 to continue with the same line.
+-			 * It means the last ES1 version ends at 1.9 version and
+-			 * new PRODUCTION line starts at 2.0.
+-			 */
+-			platform_version += 20;
+-		} else {
+-			/*
+-			 * 9 is diff for
+-			 * 0 means 0.9 version
+-			 * 1 means 1.0 version
+-			 * 2 means 1.1 version
+-			 * etc,
+-			 */
+-			platform_version += 9;
+-		}
+-	}
+-
+-	debug("Platform id: %d version: %d.%d\n", platform_id,
+-	      platform_version / 10, platform_version % 10);
+-
+-	return true;
+-}
+-
+ int board_early_init_f(void)
+ {
+ 	if (IS_ENABLED(CONFIG_DEBUG_UART)) {
 -- 
 2.43.0
 
