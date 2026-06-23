@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D4ACD98F2
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 13:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41E3CDB46F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 13:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E89E584A2C;
-	Tue, 23 Jun 2026 15:22:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DDB984A48;
+	Tue, 23 Jun 2026 15:22:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uzIiu8iG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h0Z4n1MK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54C4284A20; Tue, 23 Jun 2026 15:22:36 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 8461A84A2C; Tue, 23 Jun 2026 15:22:37 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02284849FB
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 15:22:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A67B849ED
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 15:22:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4908b92904fso80218605e9.0
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 06:22:33 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-490c0c92cffso38990865e9.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 06:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782220953; x=1782825753; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782220955; x=1782825755; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=njZ7iX419khtpTvWA+PcuM7+SceI1nyN7tzK3t8gSDE=;
- b=uzIiu8iGT3kADtwIY/1l7hmF/CTRa81Z9NQeMVyP2DLN9h5fcCKUHCcsHo8j+QWBbS
- vXBlklqcg5MnzU9fFq5+FAiKLVZ+w9BEcn95B19hmdM0lnj7x4O7DmSpi+f+MXIzK/DD
- EGWh0IYm50INGXyDCNCgV5HnrbKSZ3cwP0MxY2ZX8wzu9CwSm9SEBdkOutj9Dc1UVhgx
- 2Fsv6CqumfJ6NmNHgz/dTOhWJItBttmK5Z9KlHfhvSECgwgTXBDr396YktuCPEAnBHq1
- eASgvcv9hDbUprXA2hNfQpyZL7Bg5czQsGHCAmAtxeA4xLTN4cRBDr/HpwsHe3hngKfi
- w74Q==
+ :reply-to; bh=XPIuf3aeuSgL2monyfUCi1aJow67ShsME9iLAP6rv1g=;
+ b=h0Z4n1MKJGfrlieDQP9NwMVy5U8c1kxeE/FZaoyPEB6qM86MDy9HxlAvfIb2TiQc58
+ Wv+m0fJJ/GDAB5EJvbMZLRr0fwAvlOIvNPlz38Td+JdXhERZDgCOwIYbX7WQuHwDcL7k
+ ZJQ3XWBq6mzol9tV1I13vzXMBMc7t29qA9AyPlRc+obVObeibUcJ4vjXNZQ4EefULCPK
+ mMaf60YX7FJa8xn2+DSmWvdmOlSfaFhQxkYiYHR6atTXUFa4oeQmD3ttbGmnJqCj27iu
+ lk5+EM5fmSC1E11vPnvHrumRGrVDxq2nRe9nDHitVN9sMCxsHKtJ8kbmYlZxyNuHMchl
+ 2uwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782220953; x=1782825753;
+ d=1e100.net; s=20251104; t=1782220955; x=1782825755;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=njZ7iX419khtpTvWA+PcuM7+SceI1nyN7tzK3t8gSDE=;
- b=KaWTM9WBmH0e9MPlu/QY5HqyUjldvOF4avjK2qyjOVTgZ1yhFeVElwE2VbbyIXvhGN
- a/dooRmAB/IhADJI3NAkKj1+6Xbs8AkeYubZ27jy5CTJYqC4peysOAjZ5mUXBM9di974
- xYlHRCXCk+ViIXyJm74j/SkH0lq/E47+0dL37t5ERoVDQRmrgI0afnZPBOKu0ojcDwiC
- GxoevJCck7Ap/TTeoLKmP4lG4qoN6jkfuwcgGf08BUmKfS1AFaV3SgalgjFkhDctU7Y3
- oXk55S8ptxPBDPfw7UK/xvBxZG+p3pbW4tPG1ZnvF8/urRGDCIhGYulBOqmj7wGGXk8h
- b5og==
+ bh=XPIuf3aeuSgL2monyfUCi1aJow67ShsME9iLAP6rv1g=;
+ b=pWQlWTe5F634yRbqZ3byo5Yk8d8IovvpSudDlk89FajhAR3He5NyL8rRUb+03UzeXG
+ VVmgerPwX5meLOTH0ZxBbz5+UjyjsW6zE1y9g5DxxrS9mMy6LADmKj2cmEZeNmeq7IFM
+ 45XOwSGVvRwgq1+gydv6VrREq8i/tsE1wehVKZQapw8HeChvQxpYVsCeGp8mN4aI9DHn
+ CB8JOfjChVbQYAWdaoDIsbDKIV83NLA+0pTVF9owOZjNSUpdjE56IAFepLQYjWkWYoLx
+ 1x86Y+CrW/6ml4BJrnAQ8/WxCO9rWzyqCO98MvyL5S3S2xy6sL8knxvjXQVs/W/6Kn5G
+ Mv9g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8R3Y9QKJE+fIEx0ejhoc9xFnkCuggJ09ZBmbSGAK+Ruq9IPScuQIAlxSKM+U4V8YGvbg2uFXE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxObEyAU0wypC5pxgD1q6KzQUbF6xf1WNTjsq2Lck0n/LL8cxdn
- wE4bMZ01FHbT5zu+lgOtkxm8pX6O3TVTHp2DvW6XFwliYnS+ri68aLjUVJlismTL8bc=
-X-Gm-Gg: AfdE7claBm+2RzHgLZIXQyeSSaZ0J66SavQrIv82BFY5CD7xhTgaolcTqNfao8N6byc
- IcCUuk1TRml4PI1yh5U+FTuS5XkhkhiBYNL/iwNG/m1L4g2+N6+AZ/BlEPfu51DvqcyYufER+C7
- 4C6IjEEeRbR97oAhzhQaVQUsuOfNne8rcu0WZ5I3+wlUROCVrFqeID9bC8ZP9n3pJl+VICe1MtI
- ZaBhHaQjS6Wu+eOIg4Ga1S/0XKYV9lcJ4wCli6n0O1B0aB8GtOCqopvebbo7pojxBVBBD86Rvsi
- F+DzDvLW/k5WqrFAGCh5ZRHWCLXYFmA+5la5kylYMteh1QejU8lqPyZzeB8K5iio198dD93z0RI
- vDSuAw2C4I+UtdpHjaO8gSxe9ix8khtxOQmjbZhiaf8MS4GeARxyHS9VoxxwE+Pi6pT2JfIAJkb
- Py4wM08pkPHSKwaToZlpyiGWgzYsM=
-X-Received: by 2002:a05:600c:818d:b0:492:2f2e:e7e7 with SMTP id
- 5b1f17b1804b1-4925b37ec5bmr35891915e9.17.1782220953249; 
- Tue, 23 Jun 2026 06:22:33 -0700 (PDT)
+ AFNElJ/lQBSJz79Q/8Hcq5yQDDX1E0QZTlxPJ0/fSeF+Im2EC1klPMSP/cinhVCrOAdav1zKWp5JWJE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0sdB0m8DOg9Bq32qCgZ3SX/ACtRttIU5c04WVchBg1n+HoR2j
+ /ky8qeMd6T1nN7cNkUDih0GB21JIbshPacJvUTE9hO252rtJcTPU7HalJj07TJTJL2U=
+X-Gm-Gg: AfdE7cnaPn5BpSRjjrwqLYdy+uNXzBnfq4z4xhDyfxysnQd0sB+443opx0JY+gP7fe1
+ VU7Lnb02yNe59Dqad8BNBmtCE+5zjci1xBJnpsZ9+6mY4RPZfbYxuJaaFRY4H+kEpaIUkHyl1AG
+ p5YAG7x0/5jzXdBdjN5S2/IaPC2fR7oRB0hskdfVTg5vjfHWczmhl3Z0B+fdARiUVG+tf0/kOZG
+ 9D0PEP1NfhjPiefEFyB8cQKF+EKuVIcveMVg2AXWW6sfFuXl3LMavbjBy51DP4+Z+I1Xkc+A3cW
+ 42OQhfcAflU7jLLHYx59VfAklVnxw0otRFkK4xBn00kLf6lrvkVGiaR9p4Qp/QnWGTKyNYaaoRh
+ GuvLLSB+TrrmX8/3ETUsXsOUSA11XBLNLBzM6S0n1NLVU9YMzpflRfpWVQ3gt+h8YoSroScH0Dg
+ B5NWQuxMNvHD6tZp/Te6XEstBxzh8=
+X-Received: by 2002:a05:600d:6402:20b0:492:1e36:1fe9 with SMTP id
+ 5b1f17b1804b1-49240eb56b9mr227531085e9.37.1782220954523; 
+ Tue, 23 Jun 2026 06:22:34 -0700 (PDT)
 Received: from arrakeen-2.home ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923ff8a712sm349965745e9.13.2026.06.23.06.22.31
+ 5b1f17b1804b1-4923ff8a712sm349965745e9.13.2026.06.23.06.22.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jun 2026 06:22:32 -0700 (PDT)
+ Tue, 23 Jun 2026 06:22:34 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 23 Jun 2026 15:22:26 +0200
-Subject: [PATCH RFC v2 3/4] MAINTAINERS/README: Migrate mailing-list to
+Date: Tue, 23 Jun 2026 15:22:27 +0200
+Subject: [PATCH RFC v2 4/4] all: Fix lists.denx.de links to
  lists.u-boot-project.org
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260623-osuosl-ml-switch-v2-3-28fd46e89e46@linaro.org>
+Message-Id: <20260623-osuosl-ml-switch-v2-4-28fd46e89e46@linaro.org>
 References: <20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org>
 In-Reply-To: <20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org>
 To: u-boot@lists.u-boot-project.org, u-boot@lists.denx.de
@@ -103,20 +103,20 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Xuhui Lin <xuhui.lin@rock-chips.com>, Yao Zi <me@ziyao.cc>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2258;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3345;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=O8e7ndlqO1X38Y+rY349ANYu5otivdSRKIY/CkwT/F8=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqOoiRnEfsfm2NJ4AXUROFicUkW6SqS5hXlH9GIcOh
- FUptJR2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCajqIkQAKCRB33NvayMhJ0SezD/
- 4268afoPxN2fnyg31Rc0p8SXyiaiRtyTYLyIQpdOD2mx7EASCYt/J6vlcGYoAXG8S4EhoqNMtgOpcE
- TaZYKtJguwO0w3e/s2gXQpIgbr2Xl3/LFbGaEJN0ah4PduoitA3WcCA7IgnhRWUJ69R31R4h5dx0rr
- rKzYsjp8fRUIXUisY3hspTKW0ve7VVa13z5D+NTV6kZigNxh3oKEH6jCYaXDJ2KMFvEBuBNpiUBMtQ
- LRlHnsT24MXgkRw6D+HRr4MF7M1LgqDQuRtEEtF8unDgmAHevZ4O9mvMF2WIQ0DF3o8AMbw/k9qGEJ
- 3iQF7sIxdXKqRsnbYeTAxnW89yXU0n/WT5/SKOXku/EWvEe2IWyPfIbQLRFCGCq6ZEqN9g4VBgO+tw
- 9YcacTpd7TdIkp6dBleP9//m4MTRXAC5ZIgaMrmeNj8CX/PcRg0lhNQ2wZF4anG7DfnZxLbMRD2kgv
- LbCxdCvIh8kiFR+M7QhRTSKsugEO+II7j96oOqLQowCXIBfsYmEw9K4LdHrAQnUwtza65xXB7YiiWi
- 2fsfLCRG6TGQexgn/+IH1ZSYC/tB1pStkIZimhbXl5fpd9tDFZmWPaZv7HnFhxfbR6qY11+64IOZr0
- n6zKQ5vcMGlyNHBMPdkHaDprk1Kt+QJUx55dhlXZLxBX2o1lybH23vpz6r7Q==
+ bh=H9bxa2Rbb1NemaWmXnPOUNy8TPmQhCx3hYP2F2d9EQI=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqOoiSaGBz2DKTifD4SVweNChjr51Fmaze5iZLkAIv
+ pjztV0iJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCajqIkgAKCRB33NvayMhJ0dphD/
+ 40fAXkOgMphReSumT9dm9Gr3OyAtIVZy5UUqYLBcp2LDf/MI/Ys0a/Fwhy2CZZRrEpR+bOTYcPTolT
+ vnyhNqJBBicRgq4csZXxtKpzWo01uW2ubSqDuibBmgmrLJy4+osLhTxa75FK8klIk7tuje0qZEPGd7
+ Z8axDonCMSQqmlVZ1Zq1AaCyVB1qo4tQHwiF/B/Q0d91P7s+0HXYvx6AcQapVi0OlUggVtePFD53rC
+ xTATidLlz3SHw2GmXeb1el4XLBetZ/LUzokHgqoHPoK8x6G1d86vOg+Ih6WqY6YAlNAqHIOiiwPUJk
+ Ryhtgx9IK3u5dTtesgO5y8YnFUPsRuArqyUPCDeepjfslxkvHbaI+Z0U01fI+FGt6QotDaQf6VRdzB
+ 1/rpDImqEYt64xhIRzGEemG2XkqmkBTf9UdBlqTZyawJvr8YPTT7TEJSfV+4Okk131yPs8xpsRkGPu
+ lfbux+vdLEgMP2q7OXQJ+fD7Y7UJBsU0yXeRKfBjy5dJ5utk3K+pon5yhfqM1EpG9jGrgA8xdMdwRN
+ HAUuuF5lRyxjOpypcGBWihu9+kabuThiDgU67THujIVfnyK0Ud36iKGxuylUHapTzO8JfwKPOD5zIL
+ Oj+N+fyPUWDXsQISYxTVIHatff2L/Yh4c0cAxnkZ5fRwF4Dbgn4LS2/EeMmg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -136,58 +136,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 The U-Boot Mailing-list is moving to the lists.u-boot-project.org
-domain, so update all references of list.denx.de to the new
-domain in the main README and MAINTAINERS files.
+domain, so fix all the links in comments still referencing the
+list.denx.de domain to the new domain.
+
+The URLs were manually updated since the mailman links don't
+match anymore after the archive import in the new mailman instance.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- MAINTAINERS                   | 2 +-
- README                        | 4 ++--
- tools/u_boot_pylib/gitutil.py | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ arch/powerpc/config.mk           | 2 +-
+ board/boundary/nitrogen6x/README | 2 +-
+ lib/efi_selftest/efi_selftest.c  | 2 +-
+ tools/rkcommon.c                 | 4 ++--
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 571af196465..a3777cafeee 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2049,7 +2049,7 @@ F:	test/py/tests/test_xxd/
+diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
+index 6e30df6504e..26fcdc4e884 100644
+--- a/arch/powerpc/config.mk
++++ b/arch/powerpc/config.mk
+@@ -32,7 +32,7 @@ archprepare: checkgcc4
  
- THE REST
- M:	Tom Rini <trini@konsulko.com>
--L:	u-boot@lists.denx.de
-+L:	u-boot@lists.u-boot-project.org
- Q:	http://patchwork.ozlabs.org/project/uboot/list/
- S:	Maintained
- T:	git https://source.denx.de/u-boot/u-boot.git
-diff --git a/README b/README
-index 5653f687e82..b7b5e7a4bad 100644
---- a/README
-+++ b/README
-@@ -45,9 +45,9 @@ Where to get help:
+ # GCC 3.x is reported to have problems generating the type of relocation
+ # that U-Boot wants.
+-# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
++# See http://lists.u-boot-project.org/pipermail/u-boot/2012-September/135156.html
+ checkgcc4:
+ 	@if test "$(call cc-name)" = "gcc" -a \
+ 			$(call cc-version) -lt 0400; then \
+diff --git a/board/boundary/nitrogen6x/README b/board/boundary/nitrogen6x/README
+index 0b59289e7f0..ea92554287f 100644
+--- a/board/boundary/nitrogen6x/README
++++ b/board/boundary/nitrogen6x/README
+@@ -17,7 +17,7 @@ and saving the environment to SPI NOR.
  
- In case you have questions about, problems with or contributions for
- U-Boot, you should send a message to the U-Boot mailing list at
--<u-boot@lists.denx.de>. There is also an archive of previous traffic
-+<u-boot@lists.u-boot-project.org>. There is also an archive of previous traffic
- on the mailing list - please search the archive before asking FAQ's.
--Please see https://lists.denx.de/pipermail/u-boot and
-+Please see https://lists.u-boot-project.org/pipermail/u-boot and
- https://marc.info/?l=u-boot
+ It does not support 'boot from SD' at offset 0x400
+ except through the 'bmode' command.
+-	http://lists.denx.de/pipermail/u-boot/2012-August/131151.html
++	http://lists.u-boot-project.org/pipermail/u-boot/2012-August/130745.html
  
- Where to get source code:
-diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
-index 34b4dbb4839..59688aa7147 100644
---- a/tools/u_boot_pylib/gitutil.py
-+++ b/tools/u_boot_pylib/gitutil.py
-@@ -528,7 +528,7 @@ send --cc-cmd cc-fname" cover p1 p2'
-                   "Please add something like this to a commit\n"
-                   "Series-to: Fred Bloggs <f.blogs@napier.co.nz>\n"
-                   "Or do something like this\n"
--                  "git config sendemail.to u-boot@lists.denx.de")
-+                  "git config sendemail.to u-boot@lists.u-boot-project.org")
-             return None
-     cc = build_email_list(list(set(series.get('cc')) - set(series.get('to'))),
-                           alias, '--cc', warn_on_error)
+ 2. Boots using 6x_bootscript on SATA or SD card
+ -----------------------------------------------
+diff --git a/lib/efi_selftest/efi_selftest.c b/lib/efi_selftest/efi_selftest.c
+index 2b95713afb4..41638dea7fe 100644
+--- a/lib/efi_selftest/efi_selftest.c
++++ b/lib/efi_selftest/efi_selftest.c
+@@ -284,7 +284,7 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+ 			 * implemented we should call
+ 			 *   st_boottime->exit(image_handle, EFI_SUCCESS, 0, NULL);
+ 			 * here, cf.
+-			 * https://lists.denx.de/pipermail/u-boot/2017-October/308720.html
++			 * https://lists.u-boot-project.org/pipermail/u-boot/2017-October/308144.html
+ 			 */
+ 			return EFI_SUCCESS;
+ 		}
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index cb2d30bfd57..77e762b1f27 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -205,7 +205,7 @@ static int rkcommon_get_aligned_size(struct image_tool_params *params,
+ 
+ 	/*
+ 	 * Pad to a 2KB alignment, as required for init/boot size by the ROM
+-	 * (see https://lists.denx.de/pipermail/u-boot/2017-May/293268.html)
++	 * (see https://lists.u-boot-project.org/pipermail/u-boot/2017-May/292692.html)
+ 	 */
+ 	return ROUND(size, RK_SIZE_ALIGN);
+ }
+@@ -328,7 +328,7 @@ static void rkcommon_set_header0(void *buf, struct image_tool_params *params)
+ 	 * to determine the size of the next-stage bootloader (e.g. U-Boot
+ 	 * proper), when used with the back-to-bootrom functionality.
+ 	 *
+-	 * see https://lists.denx.de/pipermail/u-boot/2017-May/293267.html
++	 * see https://lists.u-boot-project.org/pipermail/u-boot/2017-May/292691.html
+ 	 * for a more detailed explanation by Andy Yan
+ 	 */
+ 	if (spl_params.boot_file)
 
 -- 
 2.34.1
