@@ -4,123 +4,184 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0CECDB46F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 13:23:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F56CDB479
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EABA084A3C;
-	Tue, 23 Jun 2026 15:23:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 091AB849BB;
+	Tue, 23 Jun 2026 16:08:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TQo1Riy4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ahxwyMyq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31C2684A12; Tue, 23 Jun 2026 15:22:33 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A1BE1849BF; Tue, 23 Jun 2026 16:08:46 +0200 (CEST)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96123849FB
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 15:22:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDB41848DC
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:08:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-490cdae130cso28230955e9.0
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 06:22:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782220950; x=1782825750; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ecMTmK/L8cz36AAEvUR1jVQZJaFux0cKAo92D86JUgs=;
- b=TQo1Riy4D4HhT17UnWEY8m68Hk2zcNBl9i9RTdWOiRxMkVn2o2hlMRG/t7AYJA4HLq
- d3pJZIfoRxXr/8APxkCAOUTjq+lHSEUpWaMvwiiy/S9ZztxPSVqWPEDrqVHBb7m1c/1z
- NNMx+X6iyffQT8YKoPKRn4C1ogGczvu2+ijKW22yuEWx+eVqP0A97wxUy9f30IxaCLJ7
- vqoMhQt7w3OiKcnZ64eHLoapvarY3kQUElVhMuwwLCLpl/LDPrN7ivnagbOMl9V6qH+f
- ke0PeUQ4DfuXvj2eLeLDcQU+ct5HVZDvRFVWUPKd7sRb0vWtkZEYeIUDhCVGkeItNnXr
- SaQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782220950; x=1782825750;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ecMTmK/L8cz36AAEvUR1jVQZJaFux0cKAo92D86JUgs=;
- b=r7QhDe7dm1a6u16VuoG9EIx5TnK60jv8gB8YgFinXVR3pqIExAelJOr7SAwGLCxRkr
- CR8B0VwRXXmGt7EfymySfBNtjjcTMz2yuoEIs9gcXMtGY9drjqOjXz6vUtk1P7Hth9B7
- moUatagyb3YS++PZ2WFsNNb96RpDjf5vgerI8f+tvcNWBki4pEvvLxzRH62ijb5oqvTT
- iOoJ4lLhn8ThbzPUhfoF/QugDoUJcvQItIa1NVKsmTEjyPQEEbIBkTs6jq+jW7bzmXbk
- dCRZ5LuNeY4VhlLrFi+kvt4pNUWk4pmu+H+J7rpZ0bPfObrt7ZR0JRczMxpxqqUO7aqi
- bRlA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9oHbmGFHkkGkCbGHn0fwP/6aRSHl88dG6fXioz2g2nAecWswkROryCRm1VBFU/aCveeNAZHJI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqudRDHwvxIIqRSSUm3cVYgvbZhfBbJXqXcxEdHeEThmLYtfgO
- jy95iIlAYipw7ZPJ0+G9A7dZuzBQWMCel00B5VaUwcmO5cZz5A45y1+w2V9d+cz+iyw=
-X-Gm-Gg: AfdE7ckodHMAZg8CF+NFp+Gntwg6+8Ombik4CyrLPg8/74UeuPz84DPOlT9WtrWT/FK
- dYr0S7xJ7mwAC/UuFiB853+OoJstaJkmhhT/qUT/CJqnCJIup+uXroT1kyZoIIb+9DiQTSroQv4
- iLiBk50lX2FK6nK14M0494PaD3vXBYha7F3hfduVO87Wpu6571bvT474AwOOm50z3dNSUNfc9Ax
- JHQXaIvYYkTFTlzK2A04t7gn/WWU9LJmpxLS7WDx96L4ioTniPJj8gh3qtQhZ53U6Ys8hBdQd6d
- sF7B6BmDtPXIHM0hrse2frNmDMY1nrIWLbNHCA4od84E+ul7y+awS5Ia1P2FRgnTMYDGDw0MK8u
- YMZRn1d4q2STz8A9tV6AoELwVLaeURDqzN4A3+V/cCMNUfISCFva/QEcJ/UmaN2PgR6befTQCx0
- ae1MS6Wt2CBMGGfr5IGUN2M/d5GHw=
-X-Received: by 2002:a05:600c:620f:b0:490:c024:2ec8 with SMTP id
- 5b1f17b1804b1-4925b345230mr44821925e9.0.1782220949644; 
- Tue, 23 Jun 2026 06:22:29 -0700 (PDT)
-Received: from arrakeen-2.home ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4923ff8a712sm349965745e9.13.2026.06.23.06.22.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jun 2026 06:22:29 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 23 Jun 2026 15:22:24 +0200
-Subject: [PATCH RFC v2 1/4] tools/patman: Migrate mailing-list to
- lists.u-boot-project.org
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SxzDjPReU/lq+Y2jeXyf8ITkqYRRWCdjYkz91IExzSCGzQROjpy21mwzoVGhA3QSooRlyj470D+iAJGJVUELQ7xHoboU5E3qDVkE0NEAhUw0BpSIyDR7ZCTVAkHVOyxyPfrvsiD7rIKC9YXVb63gmjpn8SrNMIkoKP0oXJSgSs/H2r27V99x3chn8qKIAYajgBU4/HyV+ofi9zNIl+WOLR5uO8jaEwTYd7S900CSJs6Wu160b7wqbEg7CbsNxrOcYx+3HOgthx9eqd99k4g29IC01A6+DLFOH2D1od3prMRou7QRuLI/bGsOWDIvbX6uwzGU9u3xT3jtP1Mej6QYdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GO9GqLxPOD5k28QmLoW/C5SwMvrhvYjcclbGslN5Rmk=;
+ b=gra/bkyT9zH1cOGE3qekLIWOpRojdlwY3xCOw8rO4d7N7CyjZP5x8XDfeIkrAEd51Li3cVB8So0fSiVorI37lSB/GDYXVEvOVhYTr/3BcQSxAesW1SPrOLWt8Ddyy6L8R+9i0VsZQrnvqimYf8V3sMxPuf4DGwvqiwmA93hF1d0+mgFw54sXwzYc7J+cSwa0D3faCCB0ORjTNDBEEDzA12lvl0eShZtjyCQwEBgYNg3qLKAxG4gMs62jSqeNOSEGVJk5ujZ9CPKPIdya6S/rY63rDmzIOTpHv49DdD+L8Anp1AnuWaog2MMeRGcDrMiXcZltZ4xW/+Nb2p4S74LbHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GO9GqLxPOD5k28QmLoW/C5SwMvrhvYjcclbGslN5Rmk=;
+ b=ahxwyMyqaUllHhser8VpjpNoLPG3rjIjbp0vVEbUc9OmPIWAbYeiFhsf2sTXx4sX5gqop4h6KUcDJS7aHhx2vJFW60Rw0Mv9BmZLW1hmBBXY1hAtyiQdWyDIBpN8VoOl9WhP57cbeEM6DbCTmMv38V1evYBvR6r59m2OgqQ8Xjk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by SJ5PPF4C62B9E70.namprd12.prod.outlook.com
+ (2603:10b6:a0f:fc02::991) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 23 Jun
+ 2026 14:08:35 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0139.018; Tue, 23 Jun 2026
+ 14:08:35 +0000
+Message-ID: <f6ac3655-c6da-4daf-b6f4-73fe41ed4c01@amd.com>
+Date: Tue, 23 Jun 2026 16:08:28 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
+ instead of Agilex/Stratix10
+To: Chen Huei Lok <chen.huei.lok@altera.com>, u-boot@lists.denx.de
+Cc: Alexander Dahl <ada@thorsis.com>, Tom Rini <trini@konsulko.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+References: <20260428053030.19532-1-chen.huei.lok@altera.com>
+ <20260608094547.3026-1-chen.huei.lok@altera.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <20260608094547.3026-1-chen.huei.lok@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260623-osuosl-ml-switch-v2-1-28fd46e89e46@linaro.org>
-References: <20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org>
-In-Reply-To: <20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org>
-To: u-boot@lists.u-boot-project.org, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tony Dinh <mibodhi@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Javier Tia <floss@jetm.me>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, Stefan Roese <stefan.roese@mailbox.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, Daniel Golle <daniel@makrotopia.org>, 
- Simon Gaynor <simon.gaynor@ezurio.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Alice Guo <alice.guo@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, Yao Zi <me@ziyao.cc>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Wolfgang Denk <wd@denx.de>, 
- "Mike Frysinger <vapier@gentoo.org>, Fred Bloggs" <f.bloggs@napier.net>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9465;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=vd7zFH1xQPDGDYqHYyO8o5l69Ceu6cV900F3iJtGyqs=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqOoiQYkBtv+w0Xk5iVcaTaIHoNhtRAljbxeXl73v+
- 4R+rzNaJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCajqIkAAKCRB33NvayMhJ0W7ND/
- 0Zayfcq9B79AI6li2/QmN/rLTAyiTTV6CGFpntJYEIHEC6lMhXuTfteZV9aiPJhWo+9Uh3KofjG7yM
- NOqPtfU2ARgvJQtm8Pu1y10j+Wfb6V/0jP/B12Y/y1JSI7m7w5CRWiUxJSQaEhgsT45Oexr1WbyD7N
- ajUYDEAuM91rT065RF9z7plD3Tp3kTAax8UnmZvhWhSS3iqjLEWmw/cNQxAH+6tyJzCsAWTUjM1t+H
- 51fBef0SunXPLfMe3Yudip+bVYy8V4bKRhbe1FMaYOf5qujdROmNYRVVGuKcO4xzEEeXrWakKVs6fh
- lw2XmkUfnwj49OitfwC9RXDCOKXjyQPgqpR8xq4GTHCv8fiUa+luAk4cjEp8rYg9tZ8fLdmIBB+7jA
- 6w/+TEr1N4kpde0Z9Yn3aa4w/Xiz6YyUk+ANy8LimlitB4X5yMYP8p6R8VkWzlVFxGL/CoCd9Pv2ao
- 31rxPvg1tFFh2emR1y5HV3tkwWZj8R8oa9CAKtzExF/WG3X3s7YvS8ljw+zYiNOcz2RzxUrsCriFwY
- KFTBe1B3Z69KIAqHAJCGUd5XlnQtqTCNcNzbCCj3CXEBW0EmIFoBUu9UI0nhRBadA/JmwOy02ZzFv3
- 29z5w33uHeXaAL1UaroKWMgFSrgcyxa84/lMlHJ5inZYf3te/z6FH/WkLTYA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
-X-Mailman-Approved-At: Tue, 23 Jun 2026 15:23:02 +0200
+X-ClientProxiedBy: SJ0PR05CA0097.namprd05.prod.outlook.com
+ (2603:10b6:a03:334::12) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SJ5PPF4C62B9E70:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c5b74e1-fb3e-412a-c3bb-08ded130e9ff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|23010399003|376014|7416014|18002099003|22082099003|56012099006|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info: awKJw7TrTNZQl2txPrwDd4MPihjqJ1OV9grOyb38z+E3RkdmoXLpdVi3XiDgDh3uJzXNR+uk43N660wQ8h7FO/ZqbFi9bsiZnPPn4yS/Non2WJsujnEeG/Js0EdszkfBwswDiz3lbLTUGAkKv9QWxrCscjdZe/XEDZCNSK+IpTyuOBdKcPWX/X/OkzzPhzYANqK3zf+uxUwXzbDBsOr+LS4c6dzetEXfSv+w2s2P04NEXr8nfTAqbnoxw/6w7PMzXi+u9wIFStxAX4lJhzhf0deCsDA9mB3+wAp4LyM6Lg65biUDipeZi2nA32WFosSpcgj7WOP4y9T1+zOTae/4KvRoLWcubafuNm2QylCcJ335lflk5WJqJ0b6fI0gBlmfkhwpdvU9GTZwwIZ+0iSucoecIMP8sdOcLmcmGUp+6Xs+WJh0u5zbDQAl274G2Zgj3yA6eE+XGBNp/MLk8sSKb7gU8XiwUMbjZbpAgTdqgN3ERSvZAsx+7X+1AHRTsyPEuxqs2R04ZRYXuCiVPPj3wDgl3rILAvHKby3VKhCfRgMlRE+ZdArfl66NxszP+EguMV007WouiUvrF9O7DjdEWoMVy8uTN0NDmUv3l1wP5lEdqP5Kh5057NNllKOb301YWfwAqXc8SEBbH45Em+iOKyQmWCpug7zzXCbJ24kMiGM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(18002099003)(22082099003)(56012099006)(11063799006)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RURlRjVPdTc1SERoNFAwZkpwM3lmeHBYMzlTd2hTNi9TM1lJUEE4NzQvZXNQ?=
+ =?utf-8?B?Qk1vSkpMbjIxSU5QU0dKUWRINDVTM0tNUGo0VCt3RzNsRWRLWlYvWmVTem1G?=
+ =?utf-8?B?TlJZQWZ2dWNWb2RDbGkyUmRPY01HdTQxdTNvdVo5NWVXVTh1bTdoLzJ4c2RR?=
+ =?utf-8?B?eEJ3YnZhNGZuZWlPanRhUzZ4TVNqajM4aVUrdlkxMnppQU1tWXYrbnAyRy9h?=
+ =?utf-8?B?aHFzRUVjRzJnTE9zbEN0bXAyYk1qRnZ3MEhBdCtDVzhqWnEvQThLbUV3b24y?=
+ =?utf-8?B?RnpXU1lmT2RDSnlIeHg5eXJRRlBrYTdZWlhvcjBOdXVwZ0o3eU9HeG56bTN6?=
+ =?utf-8?B?b2E4aFZMZUF3dTN3cUJlYmVFaWRUYTl3eXN1RTdRMzRnU1dJemtURWFrZUo0?=
+ =?utf-8?B?dVhFYWdKU3BxRDNHVXdoY05hQ0VGb2ZFb3l5d256NWFtMk5IVlh6QWRNNGZh?=
+ =?utf-8?B?THJQd3AxV1M1TXdaSkV4S21vc1RZTDZwYUMrR0tqQ2F2NDhucjIrTFI1dXlR?=
+ =?utf-8?B?S01KTGpsVTlubnZMd3JDSG4zc0tYWmhmR0F4TWNkMC85QTcwd0lHK1lDdkVH?=
+ =?utf-8?B?d25kd29XSWVrQzVHZk1yMEZaWHF4c05saGJKZmdWSVhCM3NXK3grcUtWbFhT?=
+ =?utf-8?B?S3dySW5CU1llUTZmYUg0VjZGNTV4UzhhOHh6eGlxSXhIaHRxQ00xR1JGb1Bj?=
+ =?utf-8?B?VkloZUFmRzEremVmNm93azgvU0ZlREJ1eExjc3hkdWZjdU9HTS9mVWpodDJP?=
+ =?utf-8?B?QUMvY3NxSVpDTU85aEYzSzVlU3NWSytNcWtPT3crOFR0cTFEcUdjQ1U0a1hl?=
+ =?utf-8?B?Z0dtcS9XRzRUVUUycXFrS1lUVFdTc3RHa0RPWHFmZXlIdFFtM3lpd3h4eUdU?=
+ =?utf-8?B?bW8vcFVXOUQ3SzVJeUgvWGFZL3NSU09OVTJwY1ZKbCtReHFTVi9VTVorZmRq?=
+ =?utf-8?B?b0EwN004VGU3RjVLNlpBTXVpdG5vbCtTWU4yL1NidzE0dnZoUWRvektIVXlS?=
+ =?utf-8?B?ZHVtUk1BaG5CKzFSR242T3EyaldqdVlLeEJLbFpCdElKcFcrLzRXSzRRUzN4?=
+ =?utf-8?B?Q0R3SnNYOG0rYkd6c3FJRUJWSjVuTTYwTlNIam1raEltbU45cEVnanpQMlpW?=
+ =?utf-8?B?dVdsWWNSOGhFODhMbDZPdmlkK29LZUJNY20zMTZzZmg2QVBQanAxcFkvUEdU?=
+ =?utf-8?B?U3l4aEZOQk9tWXREOHplNkZyZzFVSUZ2RDdrZ3JYMWxQNmV5OEpvK01XQkFv?=
+ =?utf-8?B?OU8yaHVqNHZKUS9jeHltOU9QN3p6UVpXc3VzUkZlRmQ0YllpNHdhekxQL3VO?=
+ =?utf-8?B?QVpVTkxuTnplME9KcWJsQWVJNGxwYlNqdldTeVJkNlFFejJZQXJWZThsOVMz?=
+ =?utf-8?B?Sm80ZHZkbDhYZkxOckdXbW8rMGIrL3FBajltYk5yRm1VTUpkQkViYTEyZzVw?=
+ =?utf-8?B?N1ZBRURYNkl6a0FUWjBTZ3hoOHpjSzJWOGJ2OGphcDQwOWlmUXVOVi9zZ25Y?=
+ =?utf-8?B?Z2hLbFpYaUhzL1ZHT2w2dzdsY0lucE9iUGJQY2QreEp2V3c3aEViRGZ4eW9C?=
+ =?utf-8?B?R1ZYM0JTQXpDdFpvaURMa0V5OFNpUXBsQkZ5cnJySGRJMGp6UGtBY1N6NWpE?=
+ =?utf-8?B?SEhwYVJFZXNDLzJWaEh2S3hmZ0RRVkt6YkZtMUlucS9yZUdmdEdxT2ZEMkFa?=
+ =?utf-8?B?WlVPTDgvQlF6dkMyT3RRV1RBSEdydHhCY0ZDTmlpaTdlcU9QM1hvYy90cE9Z?=
+ =?utf-8?B?M05xYm9YdlBpSVJWeUpyYlhubjZxQTVMblFRUXBSN3pMb0R2QitKa0RpUlhm?=
+ =?utf-8?B?bmZUQVNGMmhuQ0JYV2hyTEp6cW95NkNRR21uaS9wSDRtamhWT1hkRjNaUHZ1?=
+ =?utf-8?B?NmJwejBUaU45MDlRalBXc1IyMXE2Y1NwM1ZFaFVvU2dZY3NWV2JHdzREZWJs?=
+ =?utf-8?B?MW0zcG1MWkNTVE83SHBaWWd3aEtPTEFQTUxPTElTdUdEOFIvQjQyRkN2TnU0?=
+ =?utf-8?B?K2s2b1pnQzd4VTZ5UEYzL2hZRDc5aFdaTDd4RTZiRHFSRGxxUWxiczdGQWlt?=
+ =?utf-8?B?VG9QVyt5Mk9VS01xQm5ENXJrMkJtYkhwWmtNVkJwZUdqcVVIUnI5Y2lsak5y?=
+ =?utf-8?B?dS92TkVEc2lVdVRRc0xUTjNvNjYwRk9VWURxWUVpZGRrUy9TbkpFb3p4bDBL?=
+ =?utf-8?B?NkdqNjlhWlBSSzRCWWxLTkFiTTFmcVo0V25yMWM4Vlc3MXNJb1lXQzlONlVy?=
+ =?utf-8?B?bC9GWnpJeDVTZWRqbU5XSzJ1SEFwUlg4S2lURGl3ZEpYNFMxd29XNUxYdDdT?=
+ =?utf-8?B?aVdRLzFnUGFrOEI1WW5mVThPQ2k0Rk85Z0JDYXhEOGdxcm9EVFQvUT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c5b74e1-fb3e-412a-c3bb-08ded130e9ff
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 14:08:34.9164 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MVYcjCj4J1BwfQ4abhs2hBI52NtsdzrKTtYDDiVR02Y2xdCdR9mYDPVt1vInCvvy
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF4C62B9E70
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,182 +198,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U-Boot Mailing-list is moving to the lists.u-boot-project.org
-domain, so update all references of the list.denx.de to the new
-domain in the patman code.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- tools/patman/func_test.py       |  6 +++---
- tools/patman/patchwork.py       | 38 +++++++++++++++++++-------------------
- tools/patman/patman.rst         |  2 +-
- tools/patman/settings.py        |  2 +-
- tools/patman/test_checkpatch.py |  2 +-
- 5 files changed, 25 insertions(+), 25 deletions(-)
 
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index d029181765c..3ed0e79d8d4 100644
---- a/tools/patman/func_test.py
-+++ b/tools/patman/func_test.py
-@@ -209,7 +209,7 @@ class TestFunctional(unittest.TestCase, TestCommon):
-         count = 2
-         alias = {
-             'fdt': ['simon'],
--            'u-boot': ['u-boot@lists.denx.de'],
-+            'u-boot': ['u-boot@lists.u-boot-project.org'],
-             'simon': [self.leb],
-             'fred': [self.fred],
-             'joe': [self.joe],
-@@ -256,7 +256,7 @@ class TestFunctional(unittest.TestCase, TestCommon):
-                 prev = next(itr)
-                 if 'Cc:' not in prev:
-                     break
--        self.assertEqual('To:	  u-boot@lists.denx.de', prev)
-+        self.assertEqual('To:	  u-boot@lists.u-boot-project.org', prev)
-         self.assertEqual('Cc:	  %s' % stefan, next(itr))
-         self.assertEqual('Version:  3', next(itr))
-         self.assertEqual('Prefix:\t  RFC', next(itr))
-@@ -269,7 +269,7 @@ class TestFunctional(unittest.TestCase, TestCommon):
-         self.assertEqual('      Cc:  %s' % mel, next(itr))
-         self.assertEqual('      Cc:  %s' % rick, next(itr))
-         expected = ('Git command: git send-email --annotate '
--                    '--in-reply-to="%s" --to u-boot@lists.denx.de '
-+                    '--in-reply-to="%s" --to u-boot@lists.u-boot-project.org '
-                     '--cc "%s" --cc-cmd "%s send --cc-cmd %s" %s %s'
-                     % (in_reply_to, stefan, sys.argv[0], cc_file, cover_fname,
-                        ' '.join(args)))
-diff --git a/tools/patman/patchwork.py b/tools/patman/patchwork.py
-index d485648e467..70eb45a98a6 100644
---- a/tools/patman/patchwork.py
-+++ b/tools/patman/patchwork.py
-@@ -588,7 +588,7 @@ class Patchwork:
-                 "mbox": "https://patchwork.ozlabs.org/series/446956/mbox/"
-             comments: Web URL to comments: 'https://patchwork.ozlabs.org/api/covers/2054866/comments/'
-             headers: dict: e.g.:
--                "Return-Path": "<u-boot-bounces@lists.denx.de>",
-+                "Return-Path": "<u-boot-bounces@lists.u-boot-project.org>",
-                 "X-Original-To": "incoming@patchwork.ozlabs.org",
-                 "Delivered-To": "patchwork-incoming@legolas.ozlabs.org",
-                 "Authentication-Results": [
-@@ -598,13 +598,13 @@ class Patchwork:
-  header.s=google header.b=dG8yqtoK;
- \tdkim-atps=neutral",
-                     "legolas.ozlabs.org;
-- spf=pass (sender SPF authorized) smtp.mailfrom=lists.denx.de
-+ spf=pass (sender SPF authorized) smtp.mailfrom=lists.u-boot-project.org
-  (client-ip=85.214.62.61; helo=phobos.denx.de;
-- envelope-from=u-boot-bounces@lists.denx.de; receiver=patchwork.ozlabs.org)",
-+ envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=patchwork.ozlabs.org)",
-                     "phobos.denx.de;
-  dmarc=pass (p=none dis=none) header.from=chromium.org",
-                     "phobos.denx.de;
-- spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de",
-+ spf=pass smtp.mailfrom=u-boot-bounces@lists.u-boot-project.org",
-                     "phobos.denx.de;
- \tdkim=pass (1024-bit key;
-  unprotected) header.d=chromium.org header.i=@chromium.org
-@@ -632,10 +632,10 @@ class Patchwork:
-  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
-  (No client certificate requested)
-  by phobos.denx.de (Postfix) with ESMTPS id 48AE281426
-- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:09:55 +0100 (CET)",
-+ for <u-boot@lists.u-boot-project.org>; Tue,  4 Mar 2025 14:09:55 +0100 (CET)",
-                     "by mail-io1-xd2e.google.com with SMTP id
-  ca18e2360f4ac-85ae33109f6so128326139f.2
-- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:09:55 -0800 (PST)",
-+ for <u-boot@lists.u-boot-project.org>; Tue, 04 Mar 2025 05:09:55 -0800 (PST)",
-                     "from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
-  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
-  ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.09.49
-@@ -649,7 +649,7 @@ class Patchwork:
-  RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-  autolearn_force=no version=3.4.2",
-                 "DKIM-Signature": "v=1; a=rsa-sha256; c=relaxed/relaxed;
-- d=chromium.org; s=google; t=1741093792; x=1741698592; darn=lists.denx.de;
-+ d=chromium.org; s=google; t=1741093792; x=1741698592; darn=lists.u-boot-project.org;
-  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-  :to:from:from:to:cc:subject:date:message-id:reply-to;
-  bh=B2zsLws430/BEZfatNjeaNnrcxmYUstVjp1pSXgNQjc=;
-@@ -683,7 +683,7 @@ class Patchwork:
-  ca18e2360f4ac-85881fdba3amr1839428939f.13.1741093792636;
-  Tue, 04 Mar 2025 05:09:52 -0800 (PST)",
-                 "From": "Simon Glass <sjg@chromium.org>",
--                "To": "U-Boot Mailing List <u-boot@lists.denx.de>",
-+                "To": "U-Boot Mailing List <u-boot@lists.u-boot-project.org>",
-                 "Cc": "Simon Glass <sjg@chromium.org>, Alexander Kochetkov <al.kochet@gmail.com>,
-  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
-  Brandon Maier <brandon.maier@collins.com>,
-@@ -701,19 +701,19 @@ class Patchwork:
-                 "X-Mailer": "git-send-email 2.43.0",
-                 "MIME-Version": "1.0",
-                 "Content-Transfer-Encoding": "8bit",
--                "X-BeenThere": "u-boot@lists.denx.de",
-+                "X-BeenThere": "u-boot@lists.u-boot-project.org",
-                 "X-Mailman-Version": "2.1.39",
-                 "Precedence": "list",
--                "List-Id": "U-Boot discussion <u-boot.lists.denx.de>",
--                "List-Unsubscribe": "<https://lists.denx.de/options/u-boot>,
-- <mailto:u-boot-request@lists.denx.de?subject=unsubscribe>",
--                "List-Archive": "<https://lists.denx.de/pipermail/u-boot/>",
--                "List-Post": "<mailto:u-boot@lists.denx.de>",
--                "List-Help": "<mailto:u-boot-request@lists.denx.de?subject=help>",
--                "List-Subscribe": "<https://lists.denx.de/listinfo/u-boot>,
-- <mailto:u-boot-request@lists.denx.de?subject=subscribe>",
--                "Errors-To": "u-boot-bounces@lists.denx.de",
--                "Sender": "\"U-Boot\" <u-boot-bounces@lists.denx.de>",
-+                "List-Id": "U-Boot discussion <u-boot.lists.u-boot-project.org>",
-+                "List-Unsubscribe": "<https://lists.u-boot-project.org/options/u-boot>,
-+ <mailto:u-boot-request@lists.u-boot-project.org?subject=unsubscribe>",
-+                "List-Archive": "<https://lists.u-boot-project.org/pipermail/u-boot/>",
-+                "List-Post": "<mailto:u-boot@lists.u-boot-project.org>",
-+                "List-Help": "<mailto:u-boot-request@lists.u-boot-project.org?subject=help>",
-+                "List-Subscribe": "<https://lists.u-boot-project.org/listinfo/u-boot>,
-+ <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>",
-+                "Errors-To": "u-boot-bounces@lists.u-boot-project.org",
-+                "Sender": "\"U-Boot\" <u-boot-bounces@lists.u-boot-project.org>",
-                 "X-Virus-Scanned": "clamav-milter 0.103.8 at phobos.denx.de",
-                 "X-Virus-Status": "Clean"
-             content (str): Email content, e.g. 'This series adds a cover-coverage check to CI for Binman. The iMX8 tests
-diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
-index 549e203c254..a3cf81e6e8b 100644
---- a/tools/patman/patman.rst
-+++ b/tools/patman/patman.rst
-@@ -110,7 +110,7 @@ To add your own, create a file `~/.patman` like this::
-     [alias]
-     me: Simon Glass <sjg@chromium.org>
- 
--    u-boot: U-Boot Mailing List <u-boot@lists.denx.de>
-+    u-boot: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
-     wolfgang: Wolfgang Denk <wd@denx.de>
-     others: Mike Frysinger <vapier@gentoo.org>, Fred Bloggs <f.bloggs@napier.net>
- 
-diff --git a/tools/patman/settings.py b/tools/patman/settings.py
-index 17229e0d823..fe65b1d3fb7 100644
---- a/tools/patman/settings.py
-+++ b/tools/patman/settings.py
-@@ -162,7 +162,7 @@ class _ProjectConfigParser(ConfigParser.ConfigParser):
- def ReadGitAliases(fname):
-     """Read a git alias file. This is in the form used by git:
- 
--    alias uboot  u-boot@lists.denx.de
-+    alias uboot  u-boot@lists.u-boot-project.org
-     alias wd     Wolfgang Denk <wd@denx.de>
- 
-     Args:
-diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
-index b4722330f86..923a275c617 100644
---- a/tools/patman/test_checkpatch.py
-+++ b/tools/patman/test_checkpatch.py
-@@ -283,7 +283,7 @@ index b167b028ec..beb7dc634f 100644
- +
- +BOOTSTAGE
- +M:	Simon Glass <sjg@chromium.org>
--+L:	u-boot@lists.denx.de
-++L:	u-boot@lists.u-boot-project.org
- +F:	common/bootstage.c
- diff --git a/common/bootstage.c b/common/bootstage.c
- new file mode 100644
+On 6/8/26 11:45, Chen Huei Lok wrote:
+> From: Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>
+> 
+> Replace the conditional compilation checks for
+> CONFIG_ARCH_SOCFPGA_AGILEX and CONFIG_ARCH_SOCFPGA_STRATIX10 with
+> CONFIG_FPGA_INTEL_SDM_MAILBOX.
+> 
+> Signed-off-by: Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>
+> Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
+> ---
+> v4->v5:
+> --------
+> Fix Signed-off-by to use real full name.
+> 
+> v3->v4:
+> --------
+> Replace conditional check with CONFIG_FPGA_INTEL_SDM_MAILBOX.
+> 
+> History:
+> --------
+> https://patchwork.ozlabs.org/project/uboot/patch/20260428053030.19532-1-chen.huei.lok@altera.com/
+> 
+>   drivers/fpga/altera.c | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/fpga/altera.c b/drivers/fpga/altera.c
+> index 822183c5785..xxxxxxx 100644
+> --- a/drivers/fpga/altera.c
+> +++ b/drivers/fpga/altera.c
+> @@ -12,8 +12,7 @@
+>   /*
+>    *  Altera FPGA support
+>    */
+> -#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) || \
+> -	IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)
+> +#if IS_ENABLED(CONFIG_FPGA_INTEL_SDM_MAILBOX)
+>   #include <asm/arch/misc.h>
+>   #endif
+>   #include <errno.h>
+> @@ -48,8 +47,7 @@ static const struct altera_fpga {
+>   #endif
+>   };
+>   
+> -#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) || \
+> -	IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)
+> +#if IS_ENABLED(CONFIG_FPGA_INTEL_SDM_MAILBOX)
+>   int fpga_is_partial_data(int devnum, size_t img_len)
+>   {
+>   	/*
+> --
+> 2.43.7
 
--- 
-2.34.1
-
+Applied.
+M
