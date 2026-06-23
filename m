@@ -4,135 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A83CDB46F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 09:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D393CD4F26
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 09:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07DB4849C5;
-	Tue, 23 Jun 2026 11:33:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8EF1D849C5;
+	Tue, 23 Jun 2026 11:42:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OO2huqCy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RsJ+bLqv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1993B849D2; Tue, 23 Jun 2026 11:33:41 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 66462849CE; Tue, 23 Jun 2026 11:42:51 +0200 (CEST)
+Received: from mail-dy1-x1330.google.com (mail-dy1-x1330.google.com
+ [IPv6:2607:f8b0:4864:20::1330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D042C849BF
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 11:33:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 28AB1849BF
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 11:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UATbWQvq0gkpuulHVWp0PVbTWi1CyjaAq2KNA9yBQ75H0BROlUHkH2DhkozyztPPkwnSbtzAmbQm+8i4BDm69RuNAV1/TeYW+3VlfUgERJ9jmPR/h11OmwMZHiF6Ev1JZbfT1KefFoJH5f2A3oGuUR+Vhynw+kLJx7oFFT8i4fe3Z+kLwH8Dr1IDT69dDkIKZ7tbjOR1SH3tE9WM/ttt6hPCLgIhpsX+NoercR8k6JwD64aUc/SA6qrdQniS/gXNCJRgGZQJ5N2iuWXcRDv9+sbbFiJ0mmrtnPAv0/FtP0NRAJPAQzBErLBAvS1XPU8uloLwT2OdMpOO5PIVBVylug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zXpkHQ6sA3VM1rQjsJSTSUH0BXuglISo/w9l9w3nTe4=;
- b=X7rcwK4cyL2Ca4a2KL76Eaq0gVxgcrd/voargS2mnajmgEQjdSuxHYAqQtyZcBBghYQjDzDPVPoU4A8nn7Fv2laMAC4ajL9nINYPfo96GZWA8DQQVBZDkEVp7wpbHa5OSd7NE1aFqIKVCj3u+5O23smaJ6F9KneyhOXnuOgYepvRZcbfxuronVMJfouUUDq9DMGTlFlcVz+nnRscQLAPE8wGtgcYPzrmty/pvY3oH304FPuHzTQrt6oLUbaYeqrlvGgIqU3i6NRLLeRnPVLpjQVHlkxMZCJzg7mYa9D2R8mWkGr/P8ea07g8QgGSN/jYpYiOgPofTJYH4wAerfTYQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zXpkHQ6sA3VM1rQjsJSTSUH0BXuglISo/w9l9w3nTe4=;
- b=OO2huqCyCpnzCf/3d73XoBwcINfyAdyMgQOoWnC1TUyt5inZQcpHj7NFW14LGpNyk0XkODjELvWXGtXdiqklTRodgXw1DiTiDP3n9X5t/dDOoLINz4hCLk2UG+DObLVZHhQUfRYc+HjiAYSOeTM13ylqoycxzZdhIzpfolTbkH8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by DU4PR04MB10885.eurprd04.prod.outlook.com (2603:10a6:10:587::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.18; Tue, 23 Jun
- 2026 09:33:36 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0139.018; Tue, 23 Jun 2026
- 09:33:36 +0000
-Message-ID: <e3fc0fe2-dbde-42e0-9512-6e7696625667@cherry.de>
-Date: Tue, 23 Jun 2026 11:33:34 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] rockchip: odroid-m1s: enable watchdog support
-To: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-References: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
- <20260619220820.301787-3-andreas.zdziarstek@gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260619220820.301787-3-andreas.zdziarstek@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0016.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a::26) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andreas.zdziarstek@gmail.com
+Received: by mail-dy1-x1330.google.com with SMTP id
+ 5a478bee46e88-30bbe98c3f0so10382568eec.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 02:42:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782207767; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NFKsM0Erk9SJ2nsF6WDNbk4RPCk+CGkWy5fbDwL7P2CfnHBEFdGg4T+MnNSmCyx7ck
+ 8g+6dTLu1F3mW3tgmewzc3Tt/pk11NXvvVkgR+Ttsz3KvpGRZIHtgV3LifAiZ6YdAJAp
+ nQRhSuVlkFY3AtT42pkw6Ul0CeuZqybLOvkIAKGGJri3Rt427CaUeopbFg/QO8izFg+n
+ fTLmaK7na9bHr0JVf1s5prnHG5AZ4GJ4cty3UJABM8XAKKE86N0PlXG5Hrbg50edLOxO
+ pfkf+hAEt4eGn4lZHXhTtmH9mo7LZCDWc4hc++JHnlOgakmDTX5JobGZekUAqwBK48cB
+ INeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
+ fh=yhzy5YT8XMI8z2O5Icaj7D0Wz9zv6LlAkU2kKa5KxXk=;
+ b=A5F9ugLQ4cd7bJfjGzSHR1lvlv+ieVprpCqYs/ZXHVkwm85Hx3lTP1nLJOr/rgcxcM
+ JVr7qsJ9TkDdjf375ALrz5fLx6sXGo6hbduilzB4ayNzUDHOiF1zf2L+HnF7soDQENhS
+ bCbvPfJcYc3M4WA/W6D/zzaQrHrbH+HwICRgsAcLlwkJXZgZud1NbXzMRRteTQeLFOdt
+ qS+GuJHUc3yZYSgAex7FYNBU83y1L7SrnDkJgaFjkrVNkdOHzlQIwJThwN+DmhbZqgL6
+ NyEc7n6xCTCWhSuthsx1BJ83D7yOfApt8QitATJaGtTNVC7X7E4vjMRpCKJhPJj/cC5T
+ p5RQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782207767; x=1782812567; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
+ b=RsJ+bLqvV1xj1hI58ekyMzL77TUJPCTOiQwYbdZmG1yJOpt3VuMgksWufge+vpK6Ex
+ PR0w6IfDqMRyrhIaK1EMM0QCW/DcDYX2U3frTet39F8XUAU8689XbAb/japAd7IXPzAG
+ h9WwKGQsNCf3MQITrq++s+69Lf6Qb1FRqeJXIgA/CUfGCHkjbL+2deHDOhvMTA2jtgZ9
+ Sp64MiJTKTFzbmezzZft+NnnmC1svhXW01REcAht3Rz0dZuYpd03Q0IPeU2FP1thcGiM
+ zwDO5AKlLYdrTuFgccZXAxQ+PU/A4ke17ofl+LyQosyKTO5sSAd0VNwJFwd8lm1Y7OJ1
+ hUWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782207767; x=1782812567;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
+ b=UVYs8Tk5y7Yqs12NH+KWksY+yzh7j6iyv2pY5kzZXP6SX0sba3sSuK7W2+u+SXAySO
+ 89wRV6m47BHgo8CHUQLdolY/kk9BJ1Yrrk1UxYXQMRwaV/eKg9h5oa8Xot2T5qozvsR0
+ nMwhCP+jDkRBxjdXITBnozHliP5FmBKjrBOq+uLwOYcID0r/phQnavO/JakQ2f+4p9W5
+ VgKfFau00CIMeTITC4U3cTeoNYaX4abljeJOG1XfxFMccy14+wzRXnEkgmpv0Vt/zTev
+ ywKEmb5s6tkxqaaijr1bM5KHUa0h0VXYtHf0LVIb0Bg90HJn7J9yaQKiBp8wwXGXPbT5
+ WJ0Q==
+X-Gm-Message-State: AOJu0YyK4JZYOWdVnvDD+BDLnaKxOUXKsKPaaoti+K+kh+C65maztzBp
+ QbHwMkBIheCjLLFh0Jfui9VNyLLWHh5O0wkLcqaY9FPdDbHcDea1UtrcOjQD/fiUwW5MXcnX5Yo
+ zNayWDFXoyI80EhYIRiIq7JChtMYICOQ=
+X-Gm-Gg: AfdE7cn9af0O57kdgToBVusNThShKZoapJ+VvMGN3nFYwjxlEtM7bUjltv/8+e087a0
+ 1+ObawEB2LXhP0q2y+JYzngsaK2wgxHG6nO3iRVeGp4iRlfA/SFnNMvIyVIsr0HcisIzJgDhRcg
+ gPn5EX884i6f4Z52MgErZnlfMxNQFQVrMoYv1qMJe0BItRP87D4UGnjlDJFn/FAaHxcwrHP24wy
+ fttJmLMNKcDuOR69AGeGabimps4kf/V0WpWy6UxqBfitBPez+3Q5/ZkaZkOJrTfMa182L5eK2mt
+ Be50hQ==
+X-Received: by 2002:a05:7300:53d1:b0:30b:d31f:1577 with SMTP id
+ 5a478bee46e88-30c58c821b6mr2031221eec.34.1782207767359; Tue, 23 Jun 2026
+ 02:42:47 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DU4PR04MB10885:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8d33ad1c-4573-4924-18e1-08ded10a7ffd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|18002099003|22082099003|4143699003|11063799006|6133799003|56012099006;
-X-Microsoft-Antispam-Message-Info: v2J9oyqCUWa3oPKWaEGgYlNTUdRx79cGqxuXz/HWQH5xhMCOm/4QmXUCns6IHs3UkGS8P1ki/utwwQBR79wimbKT5MrwjGaq0VTflDjTMptGQ10Y14m761xDvIM0uv5HysjWqnJA/e36D+u+bn1pAAKm2E93gIm2+vycv55W+bJpUvalJRpXyNZFRBsbQacOC/99jBJSIt4yfVSFAPmS3FgLv/0pAIhNmJ4CSJU0RmZVWQKDHAPlDWNqFm1l0BPyoQLYKy6iHKpw/bYGXb1ebyW5wt33dnyKofirVDCnxGZlZ+lm+MeHYBmHab65I2ksziUNyS6ZJ5qYnpJvnDF4VfbaVLifjqF9zAECQNEWgDFKGts6zLF6OnUftSW3ZyFoVYQjeVcqNzqp00bk/TVnL9ggRfYcRb2s4qxWkPd9aMdsLEOxz1coHZ0WZ5pcirRCrdRhRLK1UK0F8c6X04NjnEJ4+SpptqkhYGtd7/1+gbNQOYu4ZCi7ZpQMTnm8/LFApp/W4OKyewX2JMLDdulTEao74oMWIuVeWH4UYg4UHNVwGM/Rjjcl13cRD0m4Qw2ZxvGB90zB1l7BkfxGNdyiM6YqJC2iKpFK1SxyrwQxA9ene8i7V84We0yml20UGPegs3i76mdonZouEGQl0W9yUpk7Ozd0kbqNVj7u6AeF+us=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(18002099003)(22082099003)(4143699003)(11063799006)(6133799003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UTI0dVpVQkIvLzdQbXZWU0Vsdkx3QUNEZWNnRFF6Z1dLbEhXRE5VOVo1MS94?=
- =?utf-8?B?alVkYXh5MS9yTkFJekVDVC83RERQZzJFd3NuYlcwOFV4N0hQNkRxd1NxSXNu?=
- =?utf-8?B?U0Rlc0ZYRCtUbFNRb0ZWRjhHMHFZMkJEa0FPajliL1lFOVNuL3FhQlRKWFNG?=
- =?utf-8?B?RFNFUjFYR1pWeVhJVCtLdjc1OVlOSGhxV25HUlFDN2xMcXVmQXk1WDZGVGNl?=
- =?utf-8?B?NlFjN2o1aUxxMmRxa3I0V1MxbTlwdjdkZWZMdEtkaDliUXJxN0h3M1FQcUUw?=
- =?utf-8?B?TVE3cFdWMGVLM2lGNnVEcGpsYWdkZjNBV3NSNm9DOWh1RnZBWFA3eVZoN2tS?=
- =?utf-8?B?cnlieGdDaFZ4WXk4RFZKZEttNmZEQnNMbVlHWi9GOHBVU2Iwb0ZVQ0t0Q2F3?=
- =?utf-8?B?cXFGcnBlYmZDVGovNmMxVmhuYk4zNkZuT0ZWanZJU0lYT2NUTVBjU3ZmdWN0?=
- =?utf-8?B?bm5ack9QUW1WTlBKWnF1RE82QjZsNzI0V3RxalZXR1VyMy9tNFhrM0ZVTkdW?=
- =?utf-8?B?TnBDTVJCODllOEoxQngwb01TNlUyVFFHMGpVa3ZBS3ZNMU1OOStCdmVpKzBp?=
- =?utf-8?B?N0RNWEJ6alI5MGMyMFl6MndhVngvSUtmRWs4Yy9VVnBuRWp6SHVDLy9MWDlJ?=
- =?utf-8?B?cVhXRng4WXFwMXc1bVNwVkUzeEFTeGNMdXB0ZkM4WFdZQlo4MkNzUUVidTMy?=
- =?utf-8?B?NkNFZnM5TGQ3cXpUcHB4bnJLRlUzK2hXd0c2SlJpNHBHMVBiR0pXTUg4aVU2?=
- =?utf-8?B?Um5TWSszNmxaNE9QQkFuSXBhbFg5NXkvVStxQ3BSN0x6bFozSng4RnlvU20v?=
- =?utf-8?B?b1FQeEdaZ1hwRWtqOVUzWlFZMHNQcmp3ajlnWS9pNnQrZlBUVFpZU3M0V2ZF?=
- =?utf-8?B?T2tQc09kZlpZM2Z0TW1EYjNpV0xUbTlVdytEZ29ucFZuQ1ZLRmwrMVE4NDFB?=
- =?utf-8?B?ZXJIbUxPOHpYL1FzUlJia0JIc2lYUlZqOTlSQ1VlenliZFVzZlJRdlhodU9y?=
- =?utf-8?B?YnJCSjE3VW53TEpvdXB2UjltaW9mT2YzSjlSeFk4dVloVTAvZHVWUytUaVpC?=
- =?utf-8?B?TnlNUkhvd1pGTFJmcXZTNFYwemw5Y2cxOU9mS2VWVi9FUWd5a1FRZkxiejlw?=
- =?utf-8?B?eDBoaXVGOE5qUWRCdGdwcDJ6WlFZNTNzaVBVVXV1bEIwdCtHcFp4VlJRYlpL?=
- =?utf-8?B?eW90QkxkeU9rc3RzUXEvNGlKS3dhUEhvN1N6QUJyaEM5MHVyNTlQNEZObzFY?=
- =?utf-8?B?WEY4MmtwM2dZOU8yVFB0aGw2Wno3Y1djY3pxNmxKOWhpRzV4ZWVLcTFSRnZm?=
- =?utf-8?B?M0NnNUpwVjFvVkJWbG13djRTRmk4bUozYXdBWGhtWnVSY24vRzdNRjg2a3c5?=
- =?utf-8?B?U2VYUWNtay9yNGR2b3dDb2FXN3lJRTNGemVxR0NiMk5QS1hiUjU3cDBlQlBt?=
- =?utf-8?B?Nzh5c20rS1JvakpaNkFvSDJUbHhINGVDVjc3L1hBdmFOTUtUeVhEZXRscG90?=
- =?utf-8?B?YnV3MHFHeWVldWR5OUE1ZDkwb2srN01FVE1KWWJRQnJTTlEzblVUcUVaeHB4?=
- =?utf-8?B?WjFsbm5lU0h4OFhCTGNHeFlCaTFNMDdIWEFsOTFKdXNjWGRBNTdFM3ViWFVF?=
- =?utf-8?B?VC9DVVhncFVSbFMrREIraXBObWMyVVZJcVJycDVFMEZySlJiQXR0NTYzMDZn?=
- =?utf-8?B?OEt3MkVpZzQ2OTZGRjhKWUNGV1lOZTJGZEg4V1F3dFVDcTV2a04rZDc0WWJp?=
- =?utf-8?B?WWRiclkwVCtkT2RHek40dHNkZWtoSy9nREJTTlVJWW5sa2ZrclBScGcvM2dy?=
- =?utf-8?B?OHJpMmdKeTFKbFlsZ3RuYkR1eWFuLzNSTDNldjBPRFVvazRUMGJNRXFwSmNV?=
- =?utf-8?B?eUR5bmc4TCtRSDFIWWVtSUUyVzRYYlRFL0ErU0xzWkJWZDRUbkZLVXZDWEJi?=
- =?utf-8?B?cWl6TGRtbzJQNVhRTTUwVTU3WThvZzM2K3NvT3B6Z0oxRGoyaVgvc2JwSjFi?=
- =?utf-8?B?OHZHV3lvZm9DaGJ3cUxwbVhWZU1iYkNCWjFic282OHVqMGtUNGdRTWNBRmRT?=
- =?utf-8?B?VG5QSFArVG5MMHUrQ0huN0V6eEw5UGw5NmM0NnJtQ01qWVRUSkh3Q3VQVThJ?=
- =?utf-8?B?ZHBLMGdITUhaSTlMaVhVTFhTWW5IMGZNM1VFOTAwTUkvbWhqZ2ZSK1NjVGV1?=
- =?utf-8?B?TXBJMUVqTXh3akNPZDJ5dkViMnFZSHpKN0ZqeDVVa1AzdkxPakFVeDVGR3hi?=
- =?utf-8?B?STFuNk8wMzVmVlk5N0NxbnFQRGRYd3ZCR0FlMG1JRTlVN2pGVUp5b3lKeFpB?=
- =?utf-8?B?VzdOT3pCUUVSU3MrcVpjNFRWbXJwQ25XdkJKZVhPZm1zeEpUQ0VKUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d33ad1c-4573-4924-18e1-08ded10a7ffd
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 09:33:36.1335 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nY+DBn9V621/UdydlrNNtqQvmHTqcZOWlJWx+LH1mIBcmUEe9TnIiKjGNQFc1crVSl2PqTXUlz7HOV4zmsjx7m2PgNl0EM8UjFpD1bBJ8TM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10885
+References: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
+ <0ee5047b-3421-4657-a4ef-6261954fe526@cherry.de>
+In-Reply-To: <0ee5047b-3421-4657-a4ef-6261954fe526@cherry.de>
+From: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
+Date: Tue, 23 Jun 2026 11:42:36 +0200
+X-Gm-Features: AVVi8CegFDzwP2ZqUBd8D8v5G-BFBM1MqRVL9KubOest1L0JrGnPsLflju83yIQ
+Message-ID: <CADU25KKvYc4xsPY6E7-r_pQvuKAdMBY3w0D+-R-x=zh+vfL_5w@mail.gmail.com>
+Subject: Re: [PATCH 0/2] rockchip: odroid-m1s/rk3566 watchdog support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,32 +114,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andreas,
+Hi Quentin,
 
-On 6/20/26 12:08 AM, Andreas Zdziarstek wrote:
-> [You don't often get email from andreas.zdziarstek@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> The rk3566 ODROID-M1S has a DesignWare watchdog. Enable CONFIG_WDT,
-> CONFIG_DESIGNWARE_WATCHDOG and CONFIG_CMD_WDT so it can be driven via
-> the wdt command.
-> 
-> CONFIG_WATCHDOG and CONFIG_WATCHDOG_AUTOSTART are left explicitly unset
-> to not cause any breaking changes on existing systems.
-> 
+Am Di., 23. Juni 2026 um 11:10 Uhr schrieb Quentin Schulz
+<quentin.schulz@cherry.de>:
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > Unfortunately, the TRM is rather tight-lipped about what each one really
+> > does. Per experimentation: Setting it to the "first" global reset fixes
+>
+> As per TRM (2.8.4 Global Software Reset):
+>
+> """
+> glb_srstn_1 resets almost all logic except some registers just
+> supporting hardware reset.
+> glb_srstn_2 resets almost all logic except GRFs and GPIOs.
+> """
+>
+> which is similarly worded in PX30 TRM for example.
+>
 
-Please note that an SoC watchdog may not be enough to be able to 
-properly restart a board. When IO domains are in play (they are for the 
-overwhelming majority of Rockchip SoCs), the SoC with the default IO 
-domain configuration may expect a different voltage than provided by the 
-PMIC, since the PMIC won't (necessarily) be reset along with the SoC. 
-This is an issue on our PX30 Ringneck for example where you cannot use a 
-watchdog reset if you're booting from SD card otherwise the BootROM 
-won't be able to interact with the device after a watchdog reset (due to 
-the power rails being stuck at 1.8V while 3+V is expected by default). 
-Unfortunately, the Rockchip PMIC on our PX30 Ringneck (and on your 
-Odroid M1S) does not have a watchdog so that's not an option.
+Yep, it certainly sounds like srstn_1 is the more "complete" reset but that's
+mostly just a guess from the wording
+
+> > the hang and makes the watchdog work as expected in U-Boot. This is the
+> > first patch. As the PX30 does the same thing in its arch_cpu_init(), I
+> > believe this to be the way to go but I am curious to hear if anybody has
+> > more technical insight on this.
+> >
+>
+> I'm not sure there's much more we can know (would debugging this with
+> JTAG help? I've never used it so don't know). But it's been a pain point
+> on various Rockchip SoCs already, I'm quite surprised the default is
+> still global reset 1 and not global reset 2.
+
+It seemed to me that the default is just "don't touch the register bit". The
+hardware initialization value is 0 which triggers srstn_2. The question is if
+srstn_2 might be the correct choice for some boards? As you say this has
+been a problem on other SoCs already, I would guess "not likely".
+
+I have a little prior JTAG Debugging experience but no usable hardware in
+my private posession. (Don't think the Odroid has the relevant pins even
+broken out). However, I doubt we could do much more with it than confirm
+if srst_2 locks up the SoC or if it hangs for some other reason.
 
 Cheers,
-Quentin
+Andreas
