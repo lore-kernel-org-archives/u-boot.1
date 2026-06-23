@@ -4,95 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94306CDB479
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B61CDB46F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E86DC849EA;
-	Tue, 23 Jun 2026 16:47:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 456CC849E5;
+	Tue, 23 Jun 2026 16:47:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bAJaoO/z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P5pGKPIf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1AC5849EB; Tue, 23 Jun 2026 16:47:07 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id A04BB849C5; Tue, 23 Jun 2026 16:47:36 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2D33849E5
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:47:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA746849EA
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:47:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6976b0c5adbso7767539a12.2
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:47:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782226025; cv=none;
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-697b8540279so3012678a12.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:47:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782226054; cv=none;
  d=google.com; s=arc-20240605;
- b=MarYq3lzArS62T2pQFMoEazNsumq8NH3O4SCa9/Vtj3cQaKD5U7NLk4TrrnE+sAb5W
- h8qXoFUTfrtpeybRNPReecU5AC6Ij0KTLEHeIzbyL70s5/7Hv6lYDEfzFX+4w23NvUdQ
- z0K2WFr64g2ubs9pfU6Q44MRaBfG3WuOxJ4fPd9ABUu+/w1M9sKTsEXLuY/hM+wvr5BX
- yBaB34MSVXqnlAn2Jm9J8dDJtokWaZewVmXJJFRX+PVyoaWp8qbgid7drmeCJeAJlmiZ
- vrg99SufW+zc2tAXHFkh075gYyfKCVjM8hFU0BNSxEaXFsitoWnWwF0w807wLBJ1yqfA
- AmuQ==
+ b=MGoS0af+UlYt87QJaoBjh10Y5D+9YmMD8GYuwDfyHTPJFpJSQEpIWJDcu07jd9Kggu
+ +yjNc8kuaNICyknwQizpt7Gt8j0KeCbBt9y06Q3P2n3Vr0rNBatNrjEgjXt9AjZjq9+h
+ WXoMKczpAKx31TBHNajhiq+3dSvkqjyoCRKUpgs+vAqsrN1STxbLq8ddW2Mew6Rr4SrO
+ c1OwywqD2VIndckEm/nJEN4Kx2PoXG/NFcwSr1SzmmamCSamCgOSk3nIfP/7zEEjh4qo
+ QgQ4RUFm1irxrhDbbj5HWxk5cUUlS0basOzzsVXB177qk3tVdrM2y9J3FBZQfuBol+VP
+ stdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=+m2TwPEC6bUYoDmjShOVoH6v3+KcoJrEk89DxE9sX2s=;
- fh=SJzU0vqhCd6XZ12LivayWWnEo0s7vlwiBzlNcKhQZ8Y=;
- b=L/4+HcjMNrkZs4M7xyBHSCVS1X/NnOiX+jm+M0pjULxkZwdYTZMhWac+6PvaB2CsTk
- 5xzkSw1F5DJQ56TdV3dBxZU3gPgNkPF4my1zM2KgY8FH87yhAft2G4KLlZxlyVkcNx7X
- D5a4WrAzv0YNgkviFjoiT8SzeEK2N9z27uYBGbuk/hDg/RU6jPDCVZ2gF1gtI0nVvx8k
- lO8QDT1gLptxLXHEiScojN+zeKJmEtfbF8j7hW0+sun87HOTNqr+/useWwip5V+4EPbk
- 6YZhwiYtZPinShzowPnvW8xeK2sFIj1iycLa/Wdwh0KyomXDXH4JxLWTkxQeg4j7CN9W
- RX3A==; darn=lists.denx.de
+ bh=vGJ/M896Skt+wCLU1XLFusutYIS5nnu6Fqha0MD2QJw=;
+ fh=EwJU1mVuO3sY+j+e45zVUlabzQ1yFmJAhesnaad0Pbo=;
+ b=PEzCuTFSmnmSR0qLcSR9Q0IxRbsTCBz1Xa7bwgvFBcZOdFZymso7mXu/3ypI/7nyBT
+ Z113NZzfb4UDAsrlXSG53kgeTWj+sKYNbkG3y4NNouRhPy1JthOzEyRTUkx5iCDAad1K
+ J0DV+ca2vhAXsJoP5yBF3DZlw2XYSaKgZMMjVXBL3CMbCTBh5H/i7v7jp45sV49FQ9/d
+ b0YsxEMuc2k5ZLFND5NqnCMKBg30je8GL3be/ebOU5TZVvfJ/ZxymL/jURHE1jX3hY9c
+ 3sD1dCbh1ARHYc+fMoyWHjnIs9TCfXz/vZKAzQfA+V/ieTCiRVDgFcCG73VhugSU+XFD
+ H8sg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782226025; x=1782830825; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782226054; x=1782830854; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+m2TwPEC6bUYoDmjShOVoH6v3+KcoJrEk89DxE9sX2s=;
- b=bAJaoO/z162zVGZXh1gPOZ7GN5yotrzKZiEm+jHmtOWs9VzqvtZbVw38OtSrhx7wjV
- kXZHfbQpX4rvJXZ3slnR1hJ0VEINHKpIWmD5iFgzt7K+YR3vevwDtCSdqRD0Jz4dszii
- siCu0JSEkuOadP2XDrR5qB9I7d3828C6VdwuE=
+ bh=vGJ/M896Skt+wCLU1XLFusutYIS5nnu6Fqha0MD2QJw=;
+ b=P5pGKPIfJrQF4eZVnc4OOwaTiqpEx4OFHenFQQiUXpCserirtHyMiI3CRrCN1XM0xS
+ ecCM65M07V/ceikuaZ7lXM6UyIqa+C5INGVnOazyq/Zd28SkTyzlpcH/Z9IWAsGS1cH7
+ eEZPZ17edgDxwQa2eZXZr+gs0D0sfnW/6HkHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782226025; x=1782830825;
+ d=1e100.net; s=20251104; t=1782226054; x=1782830854;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+m2TwPEC6bUYoDmjShOVoH6v3+KcoJrEk89DxE9sX2s=;
- b=OIGdrcZ1kkBoX6ARqRxjpdOxOZ9G14K1oeXCUcC9nGFC+GsRXv0NbfviG9MTip9H0W
- TWlJiDBOI/bEA8o3wEE3gDfbH0r1ioHb9EaRIPN2U54Jw+vk6EWr46VXTpRwYITt4yji
- wwQYUX06fNeVD8qWE+yf9QpbrmLReVdu4eqIzufL8v8pV3G7Uhf7SXA9+92QEBeLCd4g
- d8oGqaTw3QF9E+LfolUTGwLmsnXpfEadw4RHxWx2XfQk4FUt8pX4etsLvvTa1zo/9k1M
- 1LAfOZgZj8/mr/GgO5Usn6Jh5WnJ2LVLY6RhwVbhn59Tq15etNl/xn6PG4Xc4NHIZrPF
- BbOg==
-X-Gm-Message-State: AOJu0Yy3J3rP9wnDPUljRpEysSzz9JQoyzB481K+Im8wgQISxGqgll2b
- mgz4qfjLVTRsfhAwJf8JlYrGiPvu481BUIYQOpTPaP2GTjeVeyth/lD1/ifsmf1yZe+aWZEFetI
- ZF5wj8s+tXk/NIBTxMcKMhCTS903o/B7w6QQ1B65c
-X-Gm-Gg: AfdE7cmeXbQH05w/j7QXY4j7Ksbn1209EDdVcwxr2QYFkgoWDwArsymBD3hRjNO2qXt
- loNAo4eRSGdIgSyUIdQnMeuu7yC4H61Ti6t0VY8uOH7Gl+fEcSd6l8OP0DxvO8SfAL/BEEIZUzD
- bP0sBthVMw3S3gNGiV6m1jjLSCG/yzGkha/p0M1dWOQYLl8+OlSco9iF9ib4lz8e2zJmxIWRYDT
- THsuOhb/ovBHtSkX8reUsQfrW6UMOSOjxG41MGSkDBYAyCTJgzKZ8Y7A0Yjk43hv/qjHjaNtw==
-X-Received: by 2002:a05:6402:4515:b0:697:e94c:1d93 with SMTP id
- 4fb4d7f45d1cf-697e94c20a3mr635223a12.19.1782226025114; Tue, 23 Jun 2026
- 07:47:05 -0700 (PDT)
+ bh=vGJ/M896Skt+wCLU1XLFusutYIS5nnu6Fqha0MD2QJw=;
+ b=kLrx/nOG7ilh7985nFLXl2lHA3kNHeGTdaSWA082w+UH4VZ3aTw/s+JYlSLGKx7R4y
+ WwSSIkhkJr7akY3AXbA47vsoNsEvWPFgnpYTZ87FfL4HuIDxKN5TTWAZt3dgNlE8hJFS
+ ITdc7sTGFVIsqE5jxvizWrB34woUeadL0rlDOglBZ0gGi5iGyrAPL1ybynomwtK0vYSx
+ Dlfx8XTc0SYg77MQtgy6q3GKuL4t9LHER+0vYQrEA1yqtfMXNXOcpktlM0dHgQ7Lgrz9
+ IAhEi5DL5g+KlrfmqBl3Ux2KxJCIJbDYc/NijJwcD4l8RH8xKytflnvfymNbxA0s/96P
+ cZ4g==
+X-Gm-Message-State: AOJu0YxIMJLeVLZ0+EHKa4V7vILK6hjHfSCoB2sncQvh7uUktjdfF/55
+ pDMrXP0TpfK+w7tSbT1II3fyRUppwyHBPr/CCIRItWdorubj+dLFgeAWNTRbQZj/5anysp5JS8b
+ hkJOa9NwxqlSI3QT4LGWtwGJIAszgJoC3UZ0xx1h0
+X-Gm-Gg: AfdE7cnZ53WbpmwoQFlY9GUBsZY7+03xt5omNxUQq0R3437HT8aNXzdE+tWYlrYLJmZ
+ PPfCwnwStHORxn06/LbkuoigITXbCnP0JD+dirNTWe75SS5yzo39/fOjE/jf77tT1XL3+digVaJ
+ nZFrlGKRKcr6o+U6lJ86YPd0ajySqZXrSPDrs+eFSAV5+y+EJx2miMz+wGFSjySqnq2u26BIM3d
+ Z/0wMm3UCsEe6fxAuNmpRGi6ZczrLU7ARuWwpoP5hom7Atls2cTNHsI8dghKS7cBoa0V8hczlsw
+ Am5Pcprq
+X-Received: by 2002:a05:6402:5309:b0:697:e6d1:d007 with SMTP id
+ 4fb4d7f45d1cf-697e6d1d17amr1015726a12.28.1782226054213; Tue, 23 Jun 2026
+ 07:47:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
- <20260622111933.1488593-2-nora.schiffer@ew.tq-group.com>
-In-Reply-To: <20260622111933.1488593-2-nora.schiffer@ew.tq-group.com>
+References: <20260619-riscv-full-fit-image-support-v1-0-c6477cf4f410@maquefel.me>
+ <20260619-riscv-full-fit-image-support-v1-1-c6477cf4f410@maquefel.me>
+In-Reply-To: <20260619-riscv-full-fit-image-support-v1-1-c6477cf4f410@maquefel.me>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Jun 2026 15:46:52 +0100
-X-Gm-Features: AVVi8CcPBX4wf40n7WJnYMImn6ocumHpKZiJ_1Va-xGYuW_7plvKGFxWPc_EOtk
-Message-ID: <CAFLszTi2pDzmBdCLWA2KM5_YzjgcRHZ2r4XWikOHQgP141bo-g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] bootm: warn about load address for
- IH_TYPE_KERNEL_NOLOAD in FIT
-To: nora.schiffer@ew.tq-group.com
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Aristo Chen <aristo.chen@canonical.com>
+Date: Tue, 23 Jun 2026 15:47:22 +0100
+X-Gm-Features: AVVi8Cc2rY5r9U1jZrxGBBDYjY1fqVdzcXc9UlQASNKox2AUSDQZjxu5HFGcLnE
+Message-ID: <CAFLszTiF4Jz7d=PdXvXsusQZ5436qUaFMBYsa76CS_G6uHDwpQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/2] image: fit: allow IH_OS_OPENSBI in
+ fit_image_load()
+To: nikita.shubin@maquefel.me
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, 
+ David Lechner <dlechner@baylibre.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Anshul Dalal <anshuld@ti.com>,
+ Michael Walle <mwalle@kernel.org>, 
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>, 
+ Dhruva Gole <d-gole@ti.com>, Richard Genoud <richard.genoud@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,16 +121,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-22T11:19:32, Nora Schiffer <nora.schiffer@ew.tq-group.com> wrote:
-> bootm: warn about load address for IH_TYPE_KERNEL_NOLOAD in FIT
->
-> The load address is ignored for IH_TYPE_KERNEL_NOLOAD. Instead of
-> failing the boot when none is set, it makes more sense to warn when it
-> *is* set.
->
-> Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
->
-> boot/bootm.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+Hi Nikita,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-06-19T12:52:56, Nikita Shubin <nikita.shubin@maquefel.me> wrote:
+> image: fit: allow IH_OS_OPENSBI in fit_image_load()
+>
+> Add IH_OS_OPENSBI to the list of supported OS types in the os_ok check
+> so that FIT images containing an OpenSBI firmware can be loaded without
+> error. Otherwise loading OpenSBI in full FIT Image is not possible.
+>
+> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+>
+> boot/image-fit.c | 1 +
+>  1 file changed, 1 insertion(+)
+
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> @@ -2258,6 +2258,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>               fit_image_check_os(fit, noffset, IH_OS_U_BOOT) ||
+>               fit_image_check_os(fit, noffset, IH_OS_TEE) ||
+>               fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
+> +             fit_image_check_os(fit, noffset, IH_OS_OPENSBI) |
+>               fit_image_check_os(fit, noffset, IH_OS_EFI) ||
+
+Should be || not |
+
+Regards,
+Simon
