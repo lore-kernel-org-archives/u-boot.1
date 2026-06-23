@@ -4,90 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653F2CD4F26
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 06:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DC0CDB470
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 06:56:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65A8A849BD;
-	Tue, 23 Jun 2026 08:56:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E87DF849D8;
+	Tue, 23 Jun 2026 08:56:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rz7Ln59s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eGYFZv62";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63CBB849C5; Tue, 23 Jun 2026 08:56:21 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 8AAB6849D2; Tue, 23 Jun 2026 08:56:37 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E08B848DC
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:56:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A014A848DC
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:56:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-4602e2a0372so4022494f8f.3
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 23:56:18 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-45ef6565cfdso2253600f8f.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 23:56:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782197778; x=1782802578; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782197794; x=1782802594; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=U96EJr2OLLI2ulcUIwnY+XgmIuCmKRickJm3XmAsbs0=;
- b=Rz7Ln59sQQsJ+HtJyaks6cBaFRfwqtjGlAaEw+Ks6BqRz+rLOjcN8rki4T4yGIrMAv
- 6WAzA9Kw0tWwbwaduneaxZ89h4xU+1cbxtGPM4d/rujY2LIpuNrq00s2tsETYS1TEsHQ
- pIEU9bFc+3RuMmjbjpmI+R+FL/AZ0WkftED0QV3VbTxanSt4f7Nv1LcrGEwf4lwCvfaR
- FLv4SoXM4735eKmxjOTB8Dbk5cinbotWtfpKeZZboFjqo54HtqJwIulWkGLMyrEPidMy
- wmSCZLkfM7cOR9d8ksg7KCjUQhMsS7pq3eYcmiRvfv7KbjATrZ7gj2Uv7myhXNqi5zjI
- j9ew==
+ :reply-to; bh=d1tXsfHu5AZQDzRwCEMOm2QPJhILCHNbjErRXcwHLSw=;
+ b=eGYFZv62803d0fWLQET2VS/igFxt0joQqUswiUd9cgpTUkqC7clEVNxOtFTcxaE9tj
+ wUaDHdYJ9LCXljOQJXDKCTTlj0NpzFtlMkhVVHhbuY9OOmYQvM6hbeyHf2Op9YAvndJU
+ 6OoXpQC+XhPBncvtPbra8FTcLUhXZunhYSyu4gVMI5sVZC/3TkveCUX1JwU1BIIxI4Z3
+ nxUQpDADQhilg1H7dPfPYbgPCGP+P/5fz3CC998sBmfekEVhmQSFFqF/f/GteZr7BNIM
+ j37VshUs4+Ou43KOCAf3W/Wp610ZTZ2GTAMbe+G8SNY8hRXF6mnE0XuWHuv2UI7ilqiH
+ /rGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782197778; x=1782802578;
+ d=1e100.net; s=20251104; t=1782197794; x=1782802594;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U96EJr2OLLI2ulcUIwnY+XgmIuCmKRickJm3XmAsbs0=;
- b=lMfYxk1As/rrNdg70GSVyCzxPb4YfmoTjPrIGjq95xkTRZ5BsbfrwCPOHGXcYsQdTO
- UfAGKBcGYzNHlhH6u7MMqXfBLVafItZLK1+jHu9e2iBWyMShlJtuzrnI0d02ZoVshpvY
- GpJ2sXdqARJvMIQnCQaXIZtu9pfLRwl0dyabAx0wWskzIunntP1KJpsxv93/s8j7MQQs
- TH0S3e0jPuaBYKKVhUYStcvqTMh+K0Kp7WRQtwr4CsFaSdzcGKK1nGiVM2aEv98LQm0F
- pBkgcO6AB4tgRWEof1zKrEwx3DiFj7QZMCVe/retLT+fawFUdlcnKZ6QWNpS5t92nvFs
- QukQ==
+ bh=d1tXsfHu5AZQDzRwCEMOm2QPJhILCHNbjErRXcwHLSw=;
+ b=kbJax7uGZ/ZiQdU7iw7aMq/aVZDa14uVHMoY1+hVW7WkZVbCN1wbdYSfyyv32z+WWF
+ ElY48iK9hbStWC3BitJO0eLPe6qR9LGZSaQiCqzYpvfDOqF5SnTQuVPplo4QaHT8AMLw
+ 9nnA8F8iy/F/CAa4YT2aHTO7uQHjYmxgvlp2e1c4JKedIQbCVqjJhM8ZqtOGc1XgTNte
+ RS4in9vtwO6rojHnzBo08kuhIk1GrNeQ3lTVBXIrM7t7EH3mebatkpM9SfVdCdcrh7t9
+ RvQecZfSZXR7ve0RGlQT9clDMBtdmwQcSFt6MsNstp8vBscSSxIoi6yUULwuosuA597E
+ RbfA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpPwJyLlXvyZHvIV6AJzSWC8oDdPg3mPuETt92PsvTxScxUYh2Tu6HDgYrkzSsohtlZ2pF698A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0AIS+o/xrlNJADhJRXLGV033o/jutXHKwqrXXPp31Q+ML3NxV
- WbnWqGj7p2o28h1TBEpH5LCjMYBQRi4yxiFhjXnTcJonPt0lHAe6J2lhJsMZpE6mgqc=
-X-Gm-Gg: AfdE7ck090wFhYPBJgO8l/ABbX9KN5utkPyGH32Ql3it9gzpJ04ImN6eTIfE5N/Q8VA
- JK4Xnhq/HCMChFDucRVMnNWrnjiwljmWY+96f6QNB2mlItSguZS3HKKL9g4HeT9oYq4sAcCi8r2
- oJ03L8TYpJO+Q03rDWCgHXRppXydt0dsFfLnELTcHKVmGUieMWljUACJUgIjbOo0AjhW5VOLae4
- mYqQpkHCijF3Hc3cgvtnAZ0ScaeB1kiV0X+ignf2Ei+lWzrkN9tt1XhGsX0xv5UBiWJh+D4ZaGf
- ppm0RMcWhTo1jpzE5pKGdpMXHCMKT+KqwAfvdJOsDMuTuFBB2k3WPP/CJNzZXfVHM6RfJi9fuJ6
- V+mAFu4pMXft300PNO2XM29MRrWEBkUS0qte0Af3Rw1GgY4JTlbKUIOhV+TYVty30BdkaLyNYJy
- 7KEBS1BFKS6w49BViREwxshQmv7ner47N6FWoqqy9rEi+PHOGxSop1hWXiTyAPCbgGJnyD
-X-Received: by 2002:a05:6000:4703:b0:44a:247e:67b1 with SMTP id
- ffacd0b85a97d-46ad8c243cdmr1736134f8f.5.1782197777737; 
- Mon, 22 Jun 2026 23:56:17 -0700 (PDT)
+ AFNElJ/W43r+PFTI/K6daGJgabLgU0eAIxUmlBKhf0wuhnpcqBBH9slEqWMv2uGdimVTxw9NA+FmipE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYVVBU5A9iASj+dWpXDl+iym7e1RZSj8vInRoofOzwTy4ThLnn
+ 0Z0RVhJ2DfKz3PRSwFa45VFouvGNH230IbFAmBMNdT4+PZELVge5m6ZbI13pgXxCcZQ=
+X-Gm-Gg: AfdE7ckuRma4kFHjVOhf3inuaaC+XLNK14zY+3f+Y2+wciKr91i147qXWNhv0vBmbQb
+ 7/2vyC7IzQ+Y7JHzO2+1ErQpU/nGYj+GzUDbnU0HrylbVcjH8CeXagqx6mWeP9i6HoHamenT9He
+ WRO/80Z1UuCJV4nWTgkkbMpntXnY2xKD8hfDurk1sbPR4mx8vTmvnN3G7NwXFKi2VR8aIqV7qSy
+ UliDhO3loNCuzhj4PQdiU5Y98r3uD+1enEPc9O3wPko5Ivt8sj9mVd6iNF/EIIZ0RkbF8C2K5Cz
+ ofG6K0vfjCfWRYg8TGNjZTf2IlP3ccAqzhu5JjI3uuKkbXfRfBaMlnaw9AXzeLX/lNS8tGTDYSS
+ r4J9qjmDLyWDqNJcNR5xHnWbUaOq/VS5wbFeeL9ewvpHPU9itq2qSkngVH2S/w6DjzYCKXW2VJI
+ 01uMnyvCU2oalTztgP0lI2wp8oG+JN0D2K1CW9JXCMyRYv6acU8O0AeWou0tAvlcV8pyDw
+X-Received: by 2002:a05:600c:698d:b0:490:d354:bd00 with SMTP id
+ 5b1f17b1804b1-492490ae3a4mr193741315e9.25.1782197793984; 
+ Mon, 22 Jun 2026 23:56:33 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:1ad1:3e6d:c980:680b?
  ([2a01:e0a:106d:1080:1ad1:3e6d:c980:680b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46666c579dfsm33098660f8f.31.2026.06.22.23.56.16
+ 5b1f17b1804b1-49249238bfbsm288419115e9.5.2026.06.22.23.56.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jun 2026 23:56:16 -0700 (PDT)
-Message-ID: <877bc347-cd46-4132-91f1-73208ec5526c@linaro.org>
-Date: Tue, 23 Jun 2026 08:56:15 +0200
+ Mon, 22 Jun 2026 23:56:33 -0700 (PDT)
+Message-ID: <70a9a7b0-b6dc-4b55-97ee-9c0551ceb4a7@linaro.org>
+Date: Tue, 23 Jun 2026 08:56:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] ufs: amd-versal2: Fix missing .priv_auto in driver
- registration
-To: Pranav Tilak <pranav.vinaytilak@amd.com>, u-boot@lists.denx.de,
- michal.simek@amd.com
-Cc: git@amd.com, padmarao.begari@amd.com, akshay.belsare@amd.com,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <20260623035411.2088224-1-pranav.vinaytilak@amd.com>
+Subject: Re: [PATCH 4/4] phy: qcom-qmp-ufs: Add SC7180 support
+To: Erikas Bitovtas <xerikasxx@gmail.com>, Sumit Garg
+ <sumit.garg@kernel.org>, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Vitalii Skorkin <nikroks@mainlining.org>,
+ Biswapriyo Nath <nathbappai@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Jens Reidel <adrian@mainlining.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Paul Sajna <sajattack@postmarketos.org>,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20260621-sm7125-support-v1-0-5ad69a39781a@gmail.com>
+ <20260621-sm7125-support-v1-4-5ad69a39781a@gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -114,7 +125,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260623035411.2088224-1-pranav.vinaytilak@amd.com>
+In-Reply-To: <20260621-sm7125-support-v1-4-5ad69a39781a@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -134,27 +145,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/23/26 05:53, Pranav Tilak wrote:
-> Add missing .priv_auto field to the driver. Without it,
-> struct ufs_versal2_priv is never properly allocated and dev_get_priv()
-> returns NULL, leading to DDR corruption at low DDR addresses.
+On 6/21/26 18:46, Erikas Bitovtas wrote:
+> From: Vitalii Skorkin <nikroks@mainlining.org>
 > 
-> Fixes: b5ac5f030720 ("ufs: ufs-amd-versal2: Add support for AMD UFS controller")
-> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+> The SC7180 UFS PHY is identical to the one found on SM7150. Add support
+> for SC7180 UFS PHY by reusing configuration for SM7150.
+> 
+> Signed-off-by: Vitalii Skorkin <nikroks@mainlining.org>
+> Signed-off-by: Erikas Bitovtas <xerikasxx@gmail.com>
 > ---
->   drivers/ufs/ufs-amd-versal2.c | 1 +
+>   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 1 +
 >   1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-> index 6c949b2ca76..3369d32d924 100644
-> --- a/drivers/ufs/ufs-amd-versal2.c
-> +++ b/drivers/ufs/ufs-amd-versal2.c
-> @@ -563,4 +563,5 @@ U_BOOT_DRIVER(ufs_versal2_pltfm) = {
->   	.id		= UCLASS_UFS,
->   	.of_match	= ufs_versal2_ids,
->   	.probe		= ufs_versal2_probe,
-> +	.priv_auto	= sizeof(struct ufs_versal2_priv),
->   };
+> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> index 3df88189a90..35fa38a5b37 100644
+> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> @@ -1750,6 +1750,7 @@ static const struct udevice_id qmp_ufs_ids[] = {
+>   	{ .compatible = "qcom,qcs8300-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg },
+>   	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
+>   	{ .compatible = "qcom,sm8650-qmp-ufs-phy", .data = (ulong)&sm8650_ufsphy_cfg },
+> +	{ .compatible = "qcom,sc7180-qmp-ufs-phy", .data = (ulong)&sm7150_ufsphy_cfg, },
+>   	{ .compatible = "qcom,sc7280-qmp-ufs-phy", .data = (ulong)&sc7280_ufsphy_cfg, },
+>   	{ .compatible = "qcom,qcs615-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
+>   	{ }
+> 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
