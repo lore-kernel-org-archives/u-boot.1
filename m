@@ -4,103 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 722FBCD98F2
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 12:46:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CFFDCDB46F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 12:54:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B27C8849CE;
-	Tue, 23 Jun 2026 14:46:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 62B40849CE;
+	Tue, 23 Jun 2026 14:54:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WwdLvGgd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZcxNtXBi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B17A849CE; Tue, 23 Jun 2026 14:46:14 +0200 (CEST)
-Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
- [IPv6:2607:f8b0:4864:20::1331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 97757849D2; Tue, 23 Jun 2026 14:54:23 +0200 (CEST)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B1A5849C5
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 14:46:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F169A849C5
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 14:54:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andreas.zdziarstek@gmail.com
-Received: by mail-dy1-x1331.google.com with SMTP id
- 5a478bee46e88-30c23abc62eso3591956eec.1
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 05:46:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782218770; cv=none;
- d=google.com; s=arc-20240605;
- b=WgkmxEojEYwTjaIM0U4J59tzVPjIo6dI6cFwaw8iInsVlqd+1uBkSStGpT5aHhvyqP
- YmhvkjymOLrXe3Y9R9ljnxlrdQoQwW6/Gn0Rw3HeQ6dMbEOsCba7ydO32fxCOgeKrjV7
- jsvYhC1r7Fd/iPHzgxt+pqrCWW1MpOq3w7SvzhiR+TJrSzsA3RMvB44NKh5FOQZyhJS3
- uYhBlE6pbFmwT4kaYU1Vim9xfias3Npx1ncZkIl1IqMUZXg0IWbLh21fuzkeKxUB5Xtt
- p5JWUWPKm6xnDmWBdlP93uJD/KPlLdJUrI6u+e5ySG8pGRdEZgFgTJOogfQBWR7fITqq
- t4bQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xLauE7n351hvrNEFpGJ2fOUnqdFx0WgKwTNteQx5THg=;
- fh=xvaab2g0CTbS4ZCXMOWlyZS61qQTtaM+PvqZdyx2ZJE=;
- b=CQXzD/p3g8/V6w7rkKP6JRBv7jFGr3KkHEcUSStq76uF4f+OOsfEWo2dLL5aGkxqMZ
- A3KdcHsN3dQIc/ay1+UZNpW5VJmGtYQ6JtaSedDBxmjatgUa+Jn8KVyQSFFba7tKH04/
- eopXzxbAk+/hEha09dsGEuvQfrHQtnYV7/q2ZyRS6Bcjcf6RGYpzLdQ6iNvbTULYSWGN
- MmxA8pf/EorNs8vmmqiRxe2QRR1mJ2lhhtzOK15mLETLdQPOYQJNxb4jVcGTnVqUiEh+
- lDkQDpo2tyFR88dIVt7FdD/i9uDjikAj/mX4hGL0018kCpnvDTpbZ5/rA9YQZ0G/Xm5P
- tW3g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782218770; x=1782823570; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xLauE7n351hvrNEFpGJ2fOUnqdFx0WgKwTNteQx5THg=;
- b=WwdLvGgd4PBkVGL+nrnG5d8YPT6td59ihXClCrqY365/MwZs2F+KCu+nFFD0POe66y
- /X34qiy2bYRBT6IJD7vsjpjrxunmwtTCKhCJHwER3NquC0TczZVZrgVadx1yJtbwr5IJ
- B6lkKWSWCB18doEIeN2c87EvUzF6tmJ/4OCYvdfjSt+cCEenWlMAcJ149uR5I8DonaKR
- 5hTIUL+TVzyqjlnXHWvo4J+dCrwC7MoKkAREsP9NXE/yWuHo1AEbMyQtpaEoLm1Yb5rc
- Yo13pBaWnV/gqF9FzrX1N8Iqwk+2SklpNvEg9GhkGJCzdQivnzrLeZLB2kOHu1I3nQLv
- VM+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782218770; x=1782823570;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xLauE7n351hvrNEFpGJ2fOUnqdFx0WgKwTNteQx5THg=;
- b=Y/XPM1pCtW+Szq6j2O9BBBa8IpgOESQbSWAMYt4TP6nkBprNtEyO3645uCkUyJHbdP
- igf7to2KbYLX/zXw/cL5K+vpjBkaSQjMCX4pLWUpfN6Kq1q+6s/ldYp0Su8sn58RR2Z2
- 0oOPk5u4PBX8hNDNTGY87O/tXOjiL+zggfAc73JVKsZKc5163+R01s5FevL0jGnABxRA
- rxgpRnOhUYZ8YRmxC6JL+l/caJq0t/tjz4PgkW9DGBEStXbSoTrgduL9vPsxJFQdY50S
- PyJ8DmI6QTNNO4azYom1NapmoxRB5xznJzx7oQKX+exXYFuB2jBVAVg1OfEbQZMBpuE5
- oVDw==
-X-Gm-Message-State: AOJu0YxynsrgwGhhWC5C21pea2Sb4vMp1Z5aMzFajm3yBKYYTeZW1OTD
- wnC/wygrZn+P8fpY1lCgL77jRUPqkKZXF2diOCBtyYKD1TUTOUqZpgfHz5ox0EnHK5N/PyFAqo4
- JMk5nO5OojxY6sNZjHxtjhnbAMwy8e/c=
-X-Gm-Gg: AfdE7cn7MwVBQ3eLUgzJjkgQSBLApA6+xoT5FzWj0Wubp4Y402qeI6JjM0PmiGI8+HZ
- 69Ltz4vvfMcrSgsBQUgozvT+kOoiQBM65TQQMskT0tz3k9GDOR12CSJPD6nZSPapbJEV6+AzJbe
- JZgJlPV2F48/DtSl5J9sRZIGS3ZxOawEl9xprWyO4g5LlbQYrHn67wWpqBzXDbNqy3r4UkaBWQm
- 6ocDqugGxUoMCm9Ywq+LuHw7yvkLTcwiD6Lh5v2uybzNUxHG0nrFi9Hx+jIRxtOOpRRYJku
-X-Received: by 2002:a05:7300:d507:b0:30c:1276:cdf7 with SMTP id
- 5a478bee46e88-30c5bc78138mr1758446eec.25.1782218769420; Tue, 23 Jun 2026
- 05:46:09 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qzu9bi5DQ/lStvFmwGf6TEh8WM+ekIgEI7jnmS2gbFP+5B+UMfLPDfP9OMDTxXPnBPL2pUQC+VyJOLr/xJYIkNxvTv/n4xXf6VtDQFT4uefbQKWbhzSyGVYau9lRQlVQs4bybgzr/1fUvpgquzzbDBJtRRLmVT7EEaYTlfN7wZKVvkIGN9M0EFghhRbRnhg5w0mikNswL1Nt0ioMHO2V3jWUZygZ26N3VR4i2SMomIH6MqTD9yv8pJNGr7rgsnZ3E5/iYinrwTz4E/fGas3+D/XnAJuz4cOTuY60wjpnGOFyu+1VyNY9bucgeLoIA6uReFFmFz7HuycSSUHwag0zmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dy8qjGoCHbS/QgsnIAjAh4uwo3xv/h7lgaJ4OIaxVhU=;
+ b=BFEVwvtTkz+ef+nAFjm4QVa6klefYhYa4Eg+BYOm3YkGJocuCXYVsmEEyH4SOiqs85srvjfA33ivx6Z1JJh36zDR54dbn6DlvJXWFJYi6PMcAJBDjh5nts9HQi8/BssPczIdBL2e97zWB0lDGVVxNqm7FJDwFffd2TI/ntIvB8TRcbGlBtU6TcP9rj6VdjRIggwe2fr9SV+Rpvta1av510IIKNTP+gE+VVr80vhAUxwmq1sVHjF+9J3l/HqMzNV75CfrN0jtcrQ2DxehZLrzI7YK/KUjgHB3M6IGKl9+9vBiyQ+WHUVS8ZuGYnlRpfTt8zqQDzcZMMXQT93XqhF00Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dy8qjGoCHbS/QgsnIAjAh4uwo3xv/h7lgaJ4OIaxVhU=;
+ b=ZcxNtXBiqN5ju4tlNucZ7d1a4XxsHWoH176rI86ox2ZWq6OpvmTYBTE/vjA8rG8a+q8M/uxa7ZksYMU6c4biuJ3yOS/FCYqsP2daQBiESjs1cb3gPFkhv/7SKZYNzN+i5zT7aUHoxrnKQz2dbGQ6OsxAeRaG7rvRGdOwTgZ05AI=
+Received: from CH0PR03CA0032.namprd03.prod.outlook.com (2603:10b6:610:b3::7)
+ by MN2PR12MB4456.namprd12.prod.outlook.com (2603:10b6:208:266::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Tue, 23 Jun
+ 2026 12:54:14 +0000
+Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
+ (2603:10b6:610:b3:cafe::97) by CH0PR03CA0032.outlook.office365.com
+ (2603:10b6:610:b3::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.13 via Frontend Transport; Tue,
+ 23 Jun 2026 12:54:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.159.10 via Frontend Transport; Tue, 23 Jun 2026 12:54:14 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 23 Jun
+ 2026 07:54:14 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 23 Jun
+ 2026 07:54:13 -0500
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
+ Transport; Tue, 23 Jun 2026 07:54:12 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Francois Berder <fberder@outlook.fr>, Naman Trivedi
+ <naman.trivedimanojbhai@amd.com>, Neal Frager <neal.frager@amd.com>, Padmarao
+ Begari <padmarao.begari@amd.com>, Pranav Sanwal <pranav.sanwal@amd.com>,
+ Pranav Tilak <pranav.vinaytilak@amd.com>, "Sean Anderson"
+ <sean.anderson@linux.dev>, Senthil Nathan Thangaraj
+ <senthilnathan.thangaraj@amd.com>, Suraj Kakade
+ <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: [PATCH 00/18] arm64: xilinx: Decouple firmware interface
+Date: Tue, 23 Jun 2026 14:53:25 +0200
+Message-ID: <cover.1782219202.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
- <20260619220820.301787-2-andreas.zdziarstek@gmail.com>
- <5e0b06e0-5003-4242-a1b0-ea76fa5808d4@kwiboo.se>
-In-Reply-To: <5e0b06e0-5003-4242-a1b0-ea76fa5808d4@kwiboo.se>
-From: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Date: Tue, 23 Jun 2026 14:45:57 +0200
-X-Gm-Features: AVVi8Ce6pzgwauxvJ3EPAj0PGSg_zRF6u5Dz9jyZWaojR2icpPUgUpM4ItrRW4o
-Message-ID: <CADU25K+Ne+4up8qZYKO1SdvJTHYn_=H1qUbnTuAY8UVW7ptc+w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] rockchip: rk3568: make the WDT trigger a first global
- reset
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2490; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=mCj483Hy+HZVyxl8DxEb+0jHAmS7lSvxLXYOeRebDjA=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRZNd51PBdwR9jWwkNVhlXKsOjhAjvdjJkOFep/juxRN
+ J6n0ZnSUcrCIMbBICumyDKdScdhzbdrS8WWR+bDzGFlAhnCwMUpABMRuM/wP+1yQKeSyfljj4t2
+ 7jcRac94kKxQfcd/ycakkoML+fmichn+Shw7s/fthxU9PwV6vQ50v2AzXsggaNKvrL8s8azra/U
+ LTAA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|MN2PR12MB4456:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5aee3427-74b1-4e79-ce03-08ded126877c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|32650700020|376014|23010399003|82310400026|1800799024|56012099006|11063799006|6133799003|18002099003;
+X-Microsoft-Antispam-Message-Info: yQvXnhx2Dy79pFp7E989jhzhHstJVoBGFplA1Tp8CgNiYFNsH0iVAiPyso2BAqjsd5Em/Hx46UCkAzdvH29ipYO1lrO7Av1R84ORz5CoWrM9VmfhH5EaV5+IUQLarNdE6EUGAlB4tweoKvG/0tXrwFkCeuKmQ3TBlvRTwXJw4j0IbklIGQe+5j5TdE/WMhNpFNwb8NY5FXj/uo3fstBfpUKeBbqPx3u+Ilry9NdbFDN6+HVPRFPTVOn0TOTWa4/pbdnXWVRIVhu6XS3HZ6Wlyx0aXrY1wA/N257aUekY8sKBD+vf6NimZXhOs22ZndnDl1/heGUEDoDjxSxW+3ufQazRlJCTT0qIxVIKc9ffaPH/8PtgQN/V0Alo88ny4GvrSfhEMy7MEg+IDqe6Mnn4NU0SL49E43s/KU4zKeK6BPtL+ysEYKSNcZyLEplglphXl8JrO53yuolUjrUQdcHDtVB5PiJrOm8kFsE+qSCTs3EeqCBkubj0vr9dC29MHAfMDkAPMSROjnXklopwww+UaLiBRn7C1i9ROxGoh9LDnsGZxnVaap/NssQeBUVv7f2Sev86UOewvfSbET+6RlLyCWTL82PuIQ3qQOZsIh8aHy/Byv9lzEnPXCku/Q1dQ2XKT/+ySua7Fsyrr8BSlQAf9QfdsRrzmq4FCVukvJKtwejk+uWLRS4oki/QK77pDl9clb6z7a0BGzyyfS6J1AWRFA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(32650700020)(376014)(23010399003)(82310400026)(1800799024)(56012099006)(11063799006)(6133799003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 8IQfGgwYOMiu4R8liyoEDlGeW8lCJzKjvJe4t3qiv1H4yHrP5+HA/vnyWFNeuavjyr//StIqyM1tlXVY76jz6N1UA1I/bKwUxGyUVnMmacdt4hNP8fpl3Zg1sXTy+C6oOR+tZutt/gkMCWprq9CJp/+cJ5xppJ+Bd0iAxIdNoDrVQkgA+ogTaWiiNR212oi3MMiqM5DW/JwXq0wTamFo8mGnJqNCUAP2ER/xwWm7ODKMM1TIQZ57iNrcvh3oYWXTeFj/5g2a0KVJuq6rfqMeZxwDFHgWIwoEeaH/0ekbq1Gyvv8CZzqcjtdecwIpEUNg7U7lofrQx+Jjt88NTMVpkxRtIXa5JXLzNQQRKLWcOiTvX5t64kmjurK+kIzNAJf2RqY5tg0BG8yT8aa2ENYbmGB5AAr8QCf6ZHrN1qYbtAJTAfZRePUvDAUZSKayYWY0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 12:54:14.4715 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5aee3427-74b1-4e79-ce03-08ded126877c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4456
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,42 +140,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas
+Hi,
 
-Am Di., 23. Juni 2026 um 12:53 Uhr schrieb Jonas Karlman <jonas@kwiboo.se>:
-> It should likely be enough to configure this in XPL_BUILD?
+firmware calls are spread across board functions and even drivers.
+It shouldn't be like that and it is time to clean it up. Pretty much board
+or drivers shouldn't really have zynqmp_firmware.h included. Generic
+functions should be called which have MMIO version or firmware version when
+firmware is enabled. This is the first set of patches to achieve this goal.
 
-Generally yes. I'd like to point out though, that PX30 currently sets
-it unconditionally
-as well. I thought there may be valid reason to do so in cases where
-we don't actually
-use the mainline SPL but an rkbin miniloader blob or something. There
-was a mention
-of that in rockchip.rst.
+Thanks,
+Michal
 
-In that case, moving it into XPL_BUILD might break, depending on
-whatever the mini-
-loader does.
 
->
-> We should possibly also clear SOC_CON1 to handle reset in similar way as
-> TF-A / PSCI reset. RK356x boards use PSCI reset in U-Boot proper
-> primarily to work around issues found when working on [1], using first
-> global reset seemed to wipe too much information we may want to retain.
->
-> [1] https://lore.kernel.org/u-boot/20240202001221.531207-1-jonas@kwiboo.se/
+Michal Simek (18):
+  arm: xilinx: Guard mach sys_proto.h against multiple inclusion
+  arm64: versal2: Decouple multiboot register access from firmware
+  arm64: versal2: Move bootmode decoding out of board code
+  arm64: versal: Decouple multiboot register access from firmware
+  arm64: versal: Move bootmode decoding out of board code
+  arm64: versal: Move board_early_init_r clock setup to mach code
+  arm64: versal2: Move board_early_init_r clock setup to mach code
+  arm64: versal-net: Move board_early_init_r clock setup to mach code
+  arm64: zynqmp: Move board_early_init_r clock setup to mach code
+  arm64: versal2: Move SoC detection out of board code
+  arm64: versal-net: Move SoC detection out of board code
+  arm64: versal-net: Move bootmode decoding out of board code
+  arm64: zynqmp: Decouple MMIO accessors from firmware
+  arm64: versal-net: Deduplicate SPI bootmode handling
+  arm64: versal-net: Simplify spi_get_bootseq() bootmode switch
+  arm64: versal-net: Do not print bootmode from spi_get_env_dev()
+  arm64: versal-net: Look up eMMC device in boot_targets_setup()
+  arm64: versal-net: Add mmc_get_env_dev() and deduplicate MMC handling
 
-If we want to clear SOC_CON1, we must do it at init as well, as there
-is (I think)
-no good way to clear it during a WDT reset as it's hardware-autonomous. So this
-would make the BOOT_MODE_REG survive every global reset regardless of
-cause. Is that the intention?
+ arch/arm/mach-versal-net/cpu.c                | 149 +++++++++
+ .../mach-versal-net/include/mach/sys_proto.h  |   6 +
+ arch/arm/mach-versal/cpu.c                    |  68 ++++
+ arch/arm/mach-versal/include/mach/sys_proto.h |  16 +
+ arch/arm/mach-versal2/cpu.c                   | 143 +++++++++
+ .../arm/mach-versal2/include/mach/sys_proto.h |  14 +
+ arch/arm/mach-zynqmp/cpu.c                    |  69 ++--
+ arch/arm/mach-zynqmp/include/mach/sys_proto.h |   5 +
+ board/amd/versal2/board.c                     | 133 +-------
+ board/xilinx/versal-net/board.c               | 295 +++++-------------
+ board/xilinx/versal/board.c                   |  66 +---
+ board/xilinx/zynqmp/zynqmp.c                  |  18 +-
+ drivers/firmware/firmware-zynqmp.c            |  89 ++++++
+ 13 files changed, 606 insertions(+), 465 deletions(-)
 
-I could see a wrinkle with a watchdog specifically: What if the cause of the WDT
-reboot is related to BOOT_MODE_REG? E.g. we built a U-Boot that somehow
-locks up during USB boot, then trips the watchdog. The philosophical question
-now: Should the watchdog go back to maskrom again or resume the standard
-boot behavior? I guess my expectation would be the latter but not totally sure.
+---
+base-commit: e01bb5b8ad09464b8cbf9c4186683e998c2d40fe
 
-Best,
-Andreas
+-- 
+2.43.0
+
