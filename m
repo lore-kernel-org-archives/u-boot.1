@@ -4,100 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E9FCDB479
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A972CDB479
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 15:02:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 586E6849ED;
-	Tue, 23 Jun 2026 16:50:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CA0F849EA;
+	Tue, 23 Jun 2026 17:02:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T1XLy2l7";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c6TXT9ps";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15768849F0; Tue, 23 Jun 2026 16:50:37 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 46871849EB; Tue, 23 Jun 2026 17:02:06 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DD0849E5
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:50:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E0FE849E5
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 17:02:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c0b97e268f3so565650466b.1
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:50:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782226234; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-697ce8cfe65so2755582a12.3
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:02:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782226922; cv=none;
  d=google.com; s=arc-20240605;
- b=BSp8rKWdS4EYfvAAY9cGdrkOrp6Dn/wgZ+IKC0d1OZdhflvvgb3VHcfqpMoXu1TxXf
- s9JEjh0MlcGvkuJn2ia5t93ULKeaWG4jNP9FV9wVmIb5REcIUoex2TZN3t/Kv2mjnC1n
- 9AKrpy7z1Uivu6j3PnJGYMzxHd8G0awrL+jtsEdILyODiAuwsJhogYXhEs2g7lKSWj5g
- wZxARlUBY6sRnfQldHwDnX3aFu0pZDVsAfyJV16cKwFfrzR2VVIyK2MOrSNCUJPCnqci
- xoq0JNHarCxoqstifyW1U6ieV8Jj99znp8LVb1jYKXOEj2uUD8xb64tEwiwdA8UxG70h
- 762A==
+ b=DGcsNvzugl58CIV0KPLxx4cu4j12BS/lTVGApXOZ10srLKYMoY/H+G/RHXZssknxrZ
+ mh9td8yHwz0fwJWFelwNcZym1ii9prKq7Gx5ThLq63Yfg0kR5x0oaOkyfsxEftlMobw/
+ gMkei3akP5ubRskFhokBzXJJky0wgXxFBSeMAT1BOOVixF+XPQs61d8nMkB/DfBJscg6
+ Lpfi2RF4CUrSJe36Lsn33kVN5gL9EegUQZAfcwpAI14a+M0acGjxof+ZqYFSvUdACkkQ
+ bVuuPMks5bB9mGKBGOukQqsARBY+/5uhfMvtpvbqmsXm7lsk5lLjrJ0R9oyqmbpwcMJ1
+ 1Xdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
- fh=rYeNvwZ95QoTu4VTExaF80OtbJOrvs3SV3AkioWYlR8=;
- b=ha/M1VAzycUDEX9W6DzEwen54ACEh7GsiSJ33DC8rmZtJ9ZlvT6yZR/AqFhSGpF5p0
- OaxCUye7liQgqj7A9CrAlbJWlqFUkOT49KU/iDk5B2N4xTbUTCF/puri4MnkT4PfMeGl
- F/wa5LdEm8BL4U0nT+YxBZa9pvviOe1UhY9AePcv3WOajV71WRjqGYiw6BgQWyJueSGJ
- H8/fzU58Y5aza+bct1y5Mtiae8IujwV/COht95j3Rbbz23xhQHufDAKM1aLsGhfo8KVC
- zNYJ2P4nkGZRyh9Aea/MocSVyjC7vFsugGHgMqvx682gV3ciM2/oRTg4GOniRKBNpf3J
- 9BBw==; darn=lists.denx.de
+ bh=2ub3mS+uLLA9DDklaQX1e4rVNj9IbgeNbKBXFkAuOXw=;
+ fh=PeEydQ2hvwtp+1/k8K8imEwfaH20KPrHght1b4v3g9w=;
+ b=hL8XojNGhsNyCZP3NkZv1K/TvKHXIokIUPWlgQwo7D3BwFc6E71rkAKa2PvMeFCfOL
+ PKRhXSrRczodXQwPkTMzQqt/t9gG4ajLuaT2avyWa0b5gTVyZ6FJ6IlEs6ABrdaqa0p5
+ 77DvzmlEb/HdADcKoVQoFJHHdhUkbfs3i0tcZEncusOcI1ayOtYOZqIP7Xvibz2KWxdf
+ 9piDNV/EHruVp4d0ut1eFC+MCgwoTZ+K42GMTaBqR3FMHYaNtEEp8ADNgrmSmr5Ql6ix
+ fK4fv3MCJ/3k4QT1gKTRntjfbigmm3Lb9qEubE4aVRzS0wNejOu5B5k8Q0vxe7/a7+x8
+ UdLg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782226234; x=1782831034; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782226922; x=1782831722; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
- b=T1XLy2l7ruXKnswuJxMVy7MulY6c5Omkb/LJNdXUd2Pp9mN0pcuFs5oDI+UOCmT6WS
- +6LmGjzN2DO60K8wsTlXpqOVSh+dhf+5n66WS/9I5LT37IgkzYa3NyfqWf0QiinaHSht
- qkqtRtG5KWr5iTPA/FBUkpq7so+DRIzjld33Y=
+ bh=2ub3mS+uLLA9DDklaQX1e4rVNj9IbgeNbKBXFkAuOXw=;
+ b=c6TXT9psIAxtoInc6QWzfoIT8Xc5nKsl81erIY9yhFn1GqbcutpHCpwOdBEvqhbBY6
+ bs+wSsGWSwSyxLhhLVark6HTM2uGYQ1ncpXVe3vjMrGYW3s4IEoGXs7lnrUEDBNVhKr8
+ ZpCCJCBFRmRgEr0w/rLJO54UG8aFOFXqeijPw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782226234; x=1782831034;
+ d=1e100.net; s=20251104; t=1782226922; x=1782831722;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
- b=ozw4aKq1Q1xcSiqGas8DoKk1Nk17gYXTIfOc3HxmHW1X0Bkpllqa7tXBXhLTnfN9q/
- vKc/hORdHyikG9vh9q8efvsvuLlpYv5fLgtVMoMrgpcndIEOSXfh2xq6lDpyoVbh3aL2
- +PeqHthdi+2uQ7i3QnwPw0dypLDR9kPEY9APCWYInyAF9V3OEml7qcQUmCFx1X7Q8jCl
- L72igjlMnwjioEh49XrjfMNqF6n31K45e3dJS3YMfUpgn54Ph4PtruMai8yQWskoD9AK
- Jy0mVMhSl5OHRrCPnz6AyyO0O3o7n73c3BVep01MqIMlx+nBLFkQ5V3Wv8PuHRF7mA/Q
- C6UA==
-X-Gm-Message-State: AOJu0Yw03kF+/njFBwfSiaqM/5w1wbhIgPP+Nwoo8frecEZIPnQCG8qA
- j45PJRsrssJ0wDktpPqSz8HlY0UjRhV7g2G4ysI8A8QVdDvj2K8632t9lIBkKz0Tsmm5wAXouwK
- OsA6KDfsJXbiZuqCi+3HA0RS7fVR16tZIMDbWrGJt
-X-Gm-Gg: AfdE7cnfxgyyJft1pv3Ze/ZpTpx8O6gIbJ54S4U2w94lFuzOJxMKbNW0jaTbO1trS1R
- aRSQ1eOSAiw5aVuvWInNwYXsmoUkpsal5RpM9ZS4PAux4oFq1RjDOWlZ7SBZEDBMzO+W2kwE9vB
- iXL/vgdpvk6sBRI1f/hiavHZZmo9yPfo9X4YSxyzXRiA+kGI2cpcVZy30OyYzooacqYoEKK54VC
- 6XDxC88XESxpcaQ3hWn4CccorbcQaOBNIpBncFG/grQXH2OUTFFFd4jDW61EtkTCiqKceIS3Q==
-X-Received: by 2002:a17:906:6184:b0:c0d:4971:2eed with SMTP id
- a640c23a62f3a-c108fdd6614mr150887366b.33.1782226234433; Tue, 23 Jun 2026
- 07:50:34 -0700 (PDT)
+ bh=2ub3mS+uLLA9DDklaQX1e4rVNj9IbgeNbKBXFkAuOXw=;
+ b=OiWlV73pXk4thHRAmCHyZh4WTGwIdra7XCRvQFfEjXx9F5n/lgpRQo8w7HZmIiOXui
+ jumDQOwixyZpYUBk0q465AdpufgcHcDo0xMXB7DSCBpH4N2uAac/t955FjGv6uFkx4/p
+ 0eMOwbItB9zVAWnxuVH6Nq0NG9NRdCRSv3R0RUF8ow3NFb6blBwZ5LvJBaux+9raQnfq
+ XCj/RsvJs0lzMwORVINia8981omfSEFGTmqpOrmb5Mx+wEn8HS9MLlhgfSUx4oz1yQhH
+ wXFzgKItTkQXwZ6B+SuUhoY8PNMf0d0omdCFtEgfdqp9uIIMXobgMvRzXRPHxm5Tdnx1
+ DDdQ==
+X-Gm-Message-State: AOJu0YyM5lCReGiYQPhqQE1I4ZIYozUqo1V0bzy42vkDCpsOfAvu1M3v
+ YfvwGbVsBXsWXXrNrXVN8BayS06VYwSfIYc5y2dhHe4hHTmN2SARWUnKmqUGn4Bx9OB23m74DsY
+ SZ6mzesK3388d1VLfwJ7HXHMkM3C+rbKZQxM9niaonPuCB3WqeCpxPA==
+X-Gm-Gg: AfdE7cnwIqGwQOgJGvmSkF8izXMQSeOu9HTICgSYW5VtPhJGa3wDDAU+t2EyYqpTlII
+ iN5kOghITZ/w/O2faqcOCh7qtBamBcC9Q2o7HJvZdZ4KeTdW7taDVtmYyEtWBgwdbKUcsj5m57n
+ smbXdrG/d4q/0/BXqK8iDOZgVfE5yT3VIDlEJuIRO/lY3HZ2al9CyG8NNrIDdMkaVBunWWBfFd/
+ 3uZkWjQf6HthKLQEtq5NmgNZujCsa4HpqSZ8QGOWwhNVjAYQRtbwyje7W8fxgiJaJLIzPB5fg==
+X-Received: by 2002:a17:907:1998:b0:c0d:ab45:a070 with SMTP id
+ a640c23a62f3a-c10901da8d8mr177774066b.35.1782226922095; Tue, 23 Jun 2026
+ 08:02:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260621143938.2863-1-aristo.chen@canonical.com>
- <20260621143938.2863-2-aristo.chen@canonical.com>
-In-Reply-To: <20260621143938.2863-2-aristo.chen@canonical.com>
+In-Reply-To: <20260621143938.2863-1-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Jun 2026 15:50:21 +0100
-X-Gm-Features: AVVi8CclEEDRDOKGNubcGk69R_DEox3Ut8pUjyvzap5jW-mle5mxjA8hD8R89Fg
-Message-ID: <CAFLszTiPpm-15dwp32i9gRj9+wqpEvEhiAF4duH1AzaPH38w2w@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] sandbox: vbe: size firmware1 area to fit the
- binman fw-update section
+Date: Tue, 23 Jun 2026 16:01:48 +0100
+X-Gm-Features: AVVi8CfY0D0cU2RPwxHB30E9ul7A8lZ7d09H75OLea_cmvXTtjoHpj7PQHJLyB0
+Message-ID: <CAFLszTjaFQL2jbAdn=E44iz1OHN=1PDEne9m+nwvRMHWA3y+bQ@mail.gmail.com>
+Subject: Re: [v1,
+ 0/2] vbe: bound FIT external-data reads against the firmware area
 To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heiko Schocher <hs@nabladev.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, Martin Schwan <m.schwan@phytec.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,28 +107,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
-> sandbox: vbe: size firmware1 area to fit the binman fw-update section
->
-> The firmware1 node in test.dts declares area-size = 0xe00000 (14 MiB)
-> but the binman fw-update section in sandbox_vpl.dtsi is 0x2000000
-> (32 MiB) and the FIT inside it carries ~16 MiB of external data
-> (spl + u-boot subimages). The FIT therefore extends past the
-> declared firmware area, contradicting the documented contract of
-> vbe_read_fit() that the FIT must fit within @area_size.
->
-> The mismatch was tolerated because no caller actually bounded the
-> external-data load against area_size. Bring the devicetree in line
-> with the binman section size so the FIT extent stays within the
-> trusted firmware area, in preparation for vbe_read_fit() enforcing
-> that bound.
->
-> state-offset and version-offset are left as-is; they were already
-> inside the FIT data region and are not exercised by test_vbe_vpl.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> arch/sandbox/dts/test.dts | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Aristo,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
+
+> One open question: should the external-data blk_read() in vbe_read_fit()
+> also be deferred until after the phase has been signature-verified,
+> rather than just bounded?
+
+The bounded read is the right first step. Deferring until after
+verification touches the SPL/TPL/VPL call paths and the bootmeth flow,
+so that could be done as a separate series.
+
+> Patch 2 adds the missing range check ...
+
+This could use a sandbox test that gives vbe_read_fit() a FIT with an
+out-of-range data-position or oversized data-size and checks it
+returns -E2BIG
+
+Regards,
+Simon
