@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D393CD4F26
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 09:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42DC4CDB470
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 10:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EF1D849C5;
-	Tue, 23 Jun 2026 11:42:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4232D849CE;
+	Tue, 23 Jun 2026 12:33:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RsJ+bLqv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ByRCN6ki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66462849CE; Tue, 23 Jun 2026 11:42:51 +0200 (CEST)
-Received: from mail-dy1-x1330.google.com (mail-dy1-x1330.google.com
- [IPv6:2607:f8b0:4864:20::1330])
+ id C83BB849D2; Tue, 23 Jun 2026 12:33:34 +0200 (CEST)
+Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
+ [IPv6:2607:f8b0:4864:20::1333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28AB1849BF
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 11:42:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 394B0849C5
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 12:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andreas.zdziarstek@gmail.com
-Received: by mail-dy1-x1330.google.com with SMTP id
- 5a478bee46e88-30bbe98c3f0so10382568eec.0
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 02:42:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782207767; cv=none;
+Received: by mail-dy1-x1333.google.com with SMTP id
+ 5a478bee46e88-30c55adcf66so740872eec.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 03:33:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782210809; cv=none;
  d=google.com; s=arc-20240605;
- b=NFKsM0Erk9SJ2nsF6WDNbk4RPCk+CGkWy5fbDwL7P2CfnHBEFdGg4T+MnNSmCyx7ck
- 8g+6dTLu1F3mW3tgmewzc3Tt/pk11NXvvVkgR+Ttsz3KvpGRZIHtgV3LifAiZ6YdAJAp
- nQRhSuVlkFY3AtT42pkw6Ul0CeuZqybLOvkIAKGGJri3Rt427CaUeopbFg/QO8izFg+n
- fTLmaK7na9bHr0JVf1s5prnHG5AZ4GJ4cty3UJABM8XAKKE86N0PlXG5Hrbg50edLOxO
- pfkf+hAEt4eGn4lZHXhTtmH9mo7LZCDWc4hc++JHnlOgakmDTX5JobGZekUAqwBK48cB
- INeQ==
+ b=kLT3A+FZALJk6IUIJ1cww+upiBmGb65cU2D8QqDQeaIyeNby31eSM0xIaCVkct4Zgh
+ OhdZkATsK+Ua12GJ4vzJtYKcLbsM5zrAJKHi3Q/sx9ngmPY3zySt4sfra1bSgLm/TtBj
+ LWdlzs/5hZHUKl7SoaHXsAVoJuOt1r9v3LDX523NZfkK4T0/+BqV9DyX5bH/HbCsLRVz
+ QGRaT9rkhzryWozJV3vLBKNGzGCeO9ZZ4W3X/G8WOHpEggSx50ynIIgDYLG75CCOAo5a
+ ZxLJoZPEcYkgGwhsOz64S2DRqYIquaWhiexb+4Y4iZU9a0MyqyuZV9+F/RIEJcPufUvu
+ a1Qw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
+ bh=RgDpas7cxeIy+ip0Czx2L03TPhbhJqvNCW3dgCDZiSo=;
  fh=yhzy5YT8XMI8z2O5Icaj7D0Wz9zv6LlAkU2kKa5KxXk=;
- b=A5F9ugLQ4cd7bJfjGzSHR1lvlv+ieVprpCqYs/ZXHVkwm85Hx3lTP1nLJOr/rgcxcM
- JVr7qsJ9TkDdjf375ALrz5fLx6sXGo6hbduilzB4ayNzUDHOiF1zf2L+HnF7soDQENhS
- bCbvPfJcYc3M4WA/W6D/zzaQrHrbH+HwICRgsAcLlwkJXZgZud1NbXzMRRteTQeLFOdt
- qS+GuJHUc3yZYSgAex7FYNBU83y1L7SrnDkJgaFjkrVNkdOHzlQIwJThwN+DmhbZqgL6
- NyEc7n6xCTCWhSuthsx1BJ83D7yOfApt8QitATJaGtTNVC7X7E4vjMRpCKJhPJj/cC5T
- p5RQ==; darn=lists.denx.de
+ b=P3+fIniTjPqEej3JaUlcF01ZKX9isLok1s0rxKJbfoR/wD9Me133stPtoBzDRkfHQE
+ oIYpje/13Xw/vsDfXBOt00dtS3Ya6qcoINFq8U4QlMJdAw7F9/wGrOOK2Nqi5huPRkr/
+ tPEUBkKB/i3nc/eCA0Lz9wkMnrVKJSr5fDrV7aEmJFAT+wsTlSCx5szSTdeXsyxlhrkp
+ 84rGwiQ8eDOg/PvC5haZFC2FljO6o/XRWye4gUeqecG2kjWxd9XwxSr/VbNmLOfkbX4G
+ UX05OV9e6wLXG3bvkE6nOKZ5lIpEVPMSXCMrQigYpDU6Bm+RZyQXVma4fqO2YeoSlDPv
+ NxvQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782207767; x=1782812567; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782210809; x=1782815609; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
- b=RsJ+bLqvV1xj1hI58ekyMzL77TUJPCTOiQwYbdZmG1yJOpt3VuMgksWufge+vpK6Ex
- PR0w6IfDqMRyrhIaK1EMM0QCW/DcDYX2U3frTet39F8XUAU8689XbAb/japAd7IXPzAG
- h9WwKGQsNCf3MQITrq++s+69Lf6Qb1FRqeJXIgA/CUfGCHkjbL+2deHDOhvMTA2jtgZ9
- Sp64MiJTKTFzbmezzZft+NnnmC1svhXW01REcAht3Rz0dZuYpd03Q0IPeU2FP1thcGiM
- zwDO5AKlLYdrTuFgccZXAxQ+PU/A4ke17ofl+LyQosyKTO5sSAd0VNwJFwd8lm1Y7OJ1
- hUWw==
+ bh=RgDpas7cxeIy+ip0Czx2L03TPhbhJqvNCW3dgCDZiSo=;
+ b=ByRCN6kiyh+WqXjasdoigIxpglooH80H9vu+k329HynlCzD8507BqOjOfy1YBVpqi3
+ yz9K0QwbR1DBjDWtx7wjuCwhW0UchEXiaUJ4bSoKgqYO9AKiQvcxkhwhDVjEp0qjY+ey
+ DZ9wWG8T4hPGCUleuKDXurXRo6M4NU0eY6lY+wm3xhi5GJ54kT2wtcLlaMBfh5bucY+d
+ 5a76kZVp9vqnhxb/wB4Q0sGSWMBCHMLk9LBu3U/WqhjWtoIcw8XAatXqKOOiA9UtGJRG
+ AH74rrZ4hyi4larrSDLgUZR/cmZPBUhHAn7NZvYPauG/UKQV+UcNNTvFWZDbYIr516cA
+ P2Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782207767; x=1782812567;
+ d=1e100.net; s=20251104; t=1782210809; x=1782815609;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xvta7ZL8YIktGcPTRt//weulLDrx0uWseJqn2V/H+5Q=;
- b=UVYs8Tk5y7Yqs12NH+KWksY+yzh7j6iyv2pY5kzZXP6SX0sba3sSuK7W2+u+SXAySO
- 89wRV6m47BHgo8CHUQLdolY/kk9BJ1Yrrk1UxYXQMRwaV/eKg9h5oa8Xot2T5qozvsR0
- nMwhCP+jDkRBxjdXITBnozHliP5FmBKjrBOq+uLwOYcID0r/phQnavO/JakQ2f+4p9W5
- VgKfFau00CIMeTITC4U3cTeoNYaX4abljeJOG1XfxFMccy14+wzRXnEkgmpv0Vt/zTev
- ywKEmb5s6tkxqaaijr1bM5KHUa0h0VXYtHf0LVIb0Bg90HJn7J9yaQKiBp8wwXGXPbT5
- WJ0Q==
-X-Gm-Message-State: AOJu0YyK4JZYOWdVnvDD+BDLnaKxOUXKsKPaaoti+K+kh+C65maztzBp
- QbHwMkBIheCjLLFh0Jfui9VNyLLWHh5O0wkLcqaY9FPdDbHcDea1UtrcOjQD/fiUwW5MXcnX5Yo
- zNayWDFXoyI80EhYIRiIq7JChtMYICOQ=
-X-Gm-Gg: AfdE7cn9af0O57kdgToBVusNThShKZoapJ+VvMGN3nFYwjxlEtM7bUjltv/8+e087a0
- 1+ObawEB2LXhP0q2y+JYzngsaK2wgxHG6nO3iRVeGp4iRlfA/SFnNMvIyVIsr0HcisIzJgDhRcg
- gPn5EX884i6f4Z52MgErZnlfMxNQFQVrMoYv1qMJe0BItRP87D4UGnjlDJFn/FAaHxcwrHP24wy
- fttJmLMNKcDuOR69AGeGabimps4kf/V0WpWy6UxqBfitBPez+3Q5/ZkaZkOJrTfMa182L5eK2mt
- Be50hQ==
-X-Received: by 2002:a05:7300:53d1:b0:30b:d31f:1577 with SMTP id
- 5a478bee46e88-30c58c821b6mr2031221eec.34.1782207767359; Tue, 23 Jun 2026
- 02:42:47 -0700 (PDT)
+ bh=RgDpas7cxeIy+ip0Czx2L03TPhbhJqvNCW3dgCDZiSo=;
+ b=jOK6oIAFUls8FxUVpdP6qRd3YKd6gaQMfPSmEiWInfLBa+592Dxq2Zan6sglldTloi
+ X5JJRPk/THGos09AiRBetVRNUFIbxQwRQVhnFEeMcOhhayhTn/CwBmGf8g059Moheo8Q
+ u6gImhGjnH2neMoujnvARG7VMwbBIedCB3wgTOMrmpnDfLtlBgxKX841+OMuwKHM44Ic
+ Jmp4RsCVFBvDaw9MYkT1F2J06EE92y3phU9NP4bHe7YmzrUtmKRizrIR+6LRQe5I+onB
+ DNnp4x3uddVg8cUVp/x1JkE96DuqSJVny8njOairCITmhGdVkTlaGEvrBhuTqxnfVEIS
+ lUMA==
+X-Gm-Message-State: AOJu0Ywv5+BH0SG8aa8hcWNN4cIkBcfiIuABD4GI0QuFuZ0m4BiQuCDK
+ e833yD+SzK2S7i31wJUDbXVw0F0G5OrXoW0XRbsCWrQjuyn2HfQsAYzHzRZeHbzCpgp9BjgtXtN
+ czdCF/R6ITjasSPKVp2rlevG5TgDavBM=
+X-Gm-Gg: AfdE7cmj8/cueD4EEZ1hS6jT2zP+vAvW2c67PinX/o4JOPFNemI+aSBCo2IEAppS6/6
+ 4XZ6cFkYsvWpjfdgQyvPQ/0YubtnYWMsvcqUhP08/XYuYxkJH7DGbPhT5PEnJHtb3FgabRRDNgP
+ 1XkjJdETRH1yVqN/sbNSD/KTAvvBzhVJyFsfsfDr//3Z+STuqdMZ4ClYQdtQcivyeeo6e19WsdF
+ g1hbANZNxfWGewVIx45Va2fM+hK0ltV04o0R6rCre1pcTmkIxUr4x1H0cF8gUi6HIy1V8P+
+X-Received: by 2002:a05:7300:3081:b0:30c:553d:81af with SMTP id
+ 5a478bee46e88-30c553d823cmr2992955eec.27.1782210809444; Tue, 23 Jun 2026
+ 03:33:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260619220820.301787-1-andreas.zdziarstek@gmail.com>
- <0ee5047b-3421-4657-a4ef-6261954fe526@cherry.de>
-In-Reply-To: <0ee5047b-3421-4657-a4ef-6261954fe526@cherry.de>
+ <20260619220820.301787-2-andreas.zdziarstek@gmail.com>
+ <c81e9331-b847-4716-a100-5aa5cd570c45@cherry.de>
+In-Reply-To: <c81e9331-b847-4716-a100-5aa5cd570c45@cherry.de>
 From: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Date: Tue, 23 Jun 2026 11:42:36 +0200
-X-Gm-Features: AVVi8CegFDzwP2ZqUBd8D8v5G-BFBM1MqRVL9KubOest1L0JrGnPsLflju83yIQ
-Message-ID: <CADU25KKvYc4xsPY6E7-r_pQvuKAdMBY3w0D+-R-x=zh+vfL_5w@mail.gmail.com>
-Subject: Re: [PATCH 0/2] rockchip: odroid-m1s/rk3566 watchdog support
+Date: Tue, 23 Jun 2026 12:33:18 +0200
+X-Gm-Features: AVVi8Ce3KtSR2dDaWMHenV5UGaY3XGSrjzogq7qOA0qJ8Vh6nGheALgz_tTmM4k
+Message-ID: <CADU25KKBf8LKqY4eiwzf=nYxk_UQLBrR2zmbarw08L2T2kLQ2g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] rockchip: rk3568: make the WDT trigger a first global
+ reset
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
@@ -116,46 +117,43 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-Am Di., 23. Juni 2026 um 11:10 Uhr schrieb Quentin Schulz
+Am Di., 23. Juni 2026 um 11:25 Uhr schrieb Quentin Schulz
 <quentin.schulz@cherry.de>:
-
-> > Unfortunately, the TRM is rather tight-lipped about what each one really
-> > does. Per experimentation: Setting it to the "first" global reset fixes
 >
-> As per TRM (2.8.4 Global Software Reset):
+> Hi Andreas,
 >
-> """
-> glb_srstn_1 resets almost all logic except some registers just
-> supporting hardware reset.
-> glb_srstn_2 resets almost all logic except GRFs and GPIOs.
-> """
+> On 6/20/26 12:08 AM, Andreas Zdziarstek wrote:
+
+> You should be able to use:
 >
-> which is similarly worded in PX30 TRM for example.
+> #define CRU_BASE               0xfdd20000
 >
-
-Yep, it certainly sounds like srstn_1 is the more "complete" reset but that's
-mostly just a guess from the wording
-
-> > the hang and makes the watchdog work as expected in U-Boot. This is the
-> > first patch. As the PX30 does the same thing in its arch_cpu_init(), I
-> > believe this to be the way to go but I am curious to hear if anybody has
-> > more technical insight on this.
-> >
+> int arch_cpu_init(void)
+> {
+>      static struct rk3568_cru * const cru = (void *)CRU_BASE;
+> [...]
+>      setbits_le32(&cru->glb_rst_con, WDT_GLB_SRST_CTRL);
+> }
 >
-> I'm not sure there's much more we can know (would debugging this with
-> JTAG help? I've never used it so don't know). But it's been a pain point
-> on various Rockchip SoCs already, I'm quite surprised the default is
-> still global reset 1 and not global reset 2.
+> and it would match how we did it for PX30.
 
-It seemed to me that the default is just "don't touch the register bit". The
-hardware initialization value is 0 which triggers srstn_2. The question is if
-srstn_2 might be the correct choice for some boards? As you say this has
-been a problem on other SoCs already, I would guess "not likely".
+Ok, makes sense. ty
 
-I have a little prior JTAG Debugging experience but no usable hardware in
-my private posession. (Don't think the Odroid has the relevant pins even
-broken out). However, I doubt we could do much more with it than confirm
-if srst_2 locks up the SoC or if it hangs for some other reason.
+>
+> I think we should probably enable the second global reset for TSADC as
+> well, like we did on PX30. While we don't have a driver for it in
+> U-Boot, we do in the Linux kernel and we don't configure the global
+> reset level there I think? So a thermal shutdown would properly also
+> reset the whole SoC (or as much as allowed by Rockchip :) ).
+>
+> What do you think?
+
+I'll have a look at the Kernel. Could be a good thing to add in general. I am
+a little unsure though if it belongs more into the Kernel if U-boot does not
+use it?
+
+For now, I'll make a v2 series using the struct schema. I will also add a
+commit for the TSADC reset. Then we can decide if we keep it in or defer.
 
 Cheers,
 Andreas
