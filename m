@@ -4,115 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BB5CD98F2
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 17:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C84CDB470
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 17:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3174C849EB;
-	Tue, 23 Jun 2026 19:44:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 63CD3849C5;
+	Tue, 23 Jun 2026 19:55:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gnjtxjdU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrGZp5Bk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 574FF849E5; Tue, 23 Jun 2026 17:42:32 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 513EB849EB; Tue, 23 Jun 2026 19:55:22 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 594DE849BF
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 17:42:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id DCED3847C8
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 19:55:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id ECC123F584
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 15:42:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782229349;
- bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=gnjtxjdUP+HAYXI/Y7H9AaNLufSAKmnJXsb6KjYVkK8NfEqLh3wyeX9D3XeFdf3UC
- b1o02HMt5gcqP58sTe/4JsbpSbExakBrn+32kJYEuVPUAfxCEXow6xxbw2hxsPQUlx
- j5gdgB+B0/UUBvgqeLcPNtF0Clah+/tMWSBhGNz6VS7cp+iD2Kqf+47eqKJeZJxKMw
- EWqJ72tV2KU0KOmiR5HlltHQievYs7r/2btasLXTPHTe+385RsC25L8cOJBE1Kml4N
- 8Stxbfvf9gWgT77pI+zhClcj8VjkyrH03OSV61auV9cc2niKVH9PiAIAM7pvKwC6Bj
- GHP90Tvya8NMVR/Q0XlX1WW0bu/L2MgznfoL71iDZGPK/XPqAmU5SboZHzqGn2pULx
- QvaDDRGMmihzThD54xAPCWFsw0OvdUJIAnvewuIFkPcmeUt8LhgAewI7IZJQC6O1xx
- SJ6DcPcTYDzQeWdl+eetWVbHlLipyl4gJ6ddnHZv/a10LhmPZ4U6wljmqkkcTuOMTM
- f7U/EK/QOZrm/BKL7CUsOBPnbdlxPi7aRIn0CUu7jHbP5fqmSSY6H8taP/YsWHrMZE
- jv5Psso9QWvH69WRM6iC4Nj0P6vCOBz005Jz6xFzAmfOgi4qWUAO5HxWMdlMCucPri
- s1WUS5gR0tFtTb+11XApemL8=
-Received: by mail-ed1-f71.google.com with SMTP id
- 4fb4d7f45d1cf-695c0775f8aso7180522a12.0
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:42:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782229349; cv=none;
- d=google.com; s=arc-20240605;
- b=W14gAUU6J96pxbUctbzuLrmnup8FWv0nxyfVtVqh84HD2YCDTp6a1HmiwBTsQCSKU1
- qXJSFQ8deAoPcJNolr28bA0lguVZnp/O3Tk4iy2SKgS25L8cfIMSvgAFPwIeH/jmBGX6
- 0c/8L8go6Q5on3pUBatQ6Lxfch2sxRZvrkaGPy0GuMuVLfNyzb4AtEN/hv9We4WDWuBR
- HmJ5es+UGwPrSmqRouOnEWQW1dzZQsYLXKV0qZloqYugJ8FKVZ+rHaQpfMbo/qkSj563
- 7i3c7CUfhRGtaujaMoYv09vzAp5Y2u5YEikkVfPpS6j2w7jwPRPc8Ih1nMpt9TdPJFMn
- kT9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version;
- bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
- fh=RdGkvKMvuRusWJvZUna/mKxw9cwzaobPq8+52GVNl1g=;
- b=KoJLf3s1N6YS0rNTE1lCeJBu3OPVQqlOOfW5IpGpa3CCBsf4IeDwRI57PaAoyn/Se2
- WwyESoQvwp5ePK0r2rKqxCJ5IoYYzgvOJ0DITpu6BovZYr0eSWxyGHVFOwOCehpP1sbn
- 7wEZo/iVS1SkvXeXIqaCqru11IytSXMWmJ4a57p6Q3z4SxRVy2zNMB66IS0Nkrz+yEe6
- U+lMik1tx0yM/OJZzik8N35eIwUlj9fD5KDUYAt72HvGx74JyZxxyeN0rxX5jtNZHR0e
- ochoj+bWU3ymbhtq3SOc4DPGCEMjy6dwSO/Q2KJW1Dt2oPDx1oA7nSfSVzc/4P3gMNlJ
- YsaA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6a11eb98e8aso79156eaf.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 10:55:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1782237318; x=1782842118; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pg/XwGSREXutCMHhWf6wcXVIvu2LcFik11qz48LOULs=;
+ b=XrGZp5BkNbEBMraN0llctp2mu5SE/4MYZ2LtCk4s59+4MsRa6r70HU6bB/UwXrv+QE
+ c0A56DCAN95V6OfOlOPoBhmFfNHztPel3375v3NypPc4fUg1J0YKEAmfAInnODDqhOw9
+ MRI0ULy+HlCJLr3nZqUFK3YpQuX9lHBxdmoKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782229349; x=1782834149;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1782237318; x=1782842118;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
- b=JDWIXBXLAjvcyJ7yQqoL0VoPCAXDPQd2JVjthwU2x/ja3wzdq3gYMtLZl7/EGtqOc0
- Ua+4gyZYOjS2+uDrmbp4Yc7EWq7H6hYEu2E3iy5Y0NiCCPOSazlii+82BVcS0No9WIRn
- 2HRZqaNW1ftSVOOD70JUbxz6xJ2ydJ9mMxM40UGNM7YulqjSZ/ko5Wx88o//igI8TKTO
- 7oyha2z5tIwD6kpbBqeS0NU3HVBmRnXlOngbO+pSSjYba8HIsWCae3LkDbPPH68HLclE
- j3O1vvGis7kSI8PV0EkshzAtBRZXx/q8WJXk9BnEOPfAta8oQpRPaROw6uM9zup3f4EP
- bOTA==
-X-Gm-Message-State: AOJu0Yw3mN3sa2xr8Q1kZoNl7XpFpbYkxsBCiJwtJSGhTshlevquUWeQ
- DASiZn/sWap2prLLcv2+VlyZYiU04IE0SnZ1DIp+GZI3kz2/pCLv/yNc1ByICwzu3xa8Uxf66Ix
- 79Z47ZhXVTYIn2AtD5Y1CnjcJb8mXB91ZSJmJZA/qflfYKedke5BRdJOxtxn0j6ChiM9yz3JlpY
- w794e9WKePIcT6ohQOVmm1wq3J8t/20e9BUsGC5fvotij4Fg==
-X-Gm-Gg: AfdE7cl/zkkItzX3geCvT+vVuYc3A0liIt2v6Ih/dRy8LIlQKUOHLtDvEm2vblnWSqp
- P+UHGMQ8hxG9bvdgJmnqYwLWwmSY4uobGQKNRaBfr+MnAJUUlnEqEqorMuGOwH1Vhd2WaKU2BsI
- rwTJm49sdiucmRiOr8VnJ4mEU+W5GZm7tD+1Dse1FRdBNrVbffX2QgKDrT1ry2w6Z7Hag=
-X-Received: by 2002:a05:6402:5203:b0:68d:d511:4a9f with SMTP id
- 4fb4d7f45d1cf-6970f7bb394mr12887973a12.18.1782229349619; 
- Tue, 23 Jun 2026 08:42:29 -0700 (PDT)
-X-Received: by 2002:a05:6402:5203:b0:68d:d511:4a9f with SMTP id
- 4fb4d7f45d1cf-6970f7bb394mr12887955a12.18.1782229349196; Tue, 23 Jun 2026
- 08:42:29 -0700 (PDT)
+ bh=Pg/XwGSREXutCMHhWf6wcXVIvu2LcFik11qz48LOULs=;
+ b=gs08DxbdFIidpOv80ekiNPJgAFuGKG3HDZwe27bnjeqCahFHi4XOZKVGtYaW09Q6Ij
+ 60Z95otJsmGMLy5+Blk93lomn5O35rn4cs1zmpAKl/I8Fdl0VGbQA9D2fjOpjgI0Hr5P
+ wkKZQqwN1qNky0znzjS6SGOeUoLTdr2ADvw3WvicdxA0Gw41FabnwljHx1EjCcrdrfcN
+ UPpzmzspWsxrlDM/T9t2kHc3EtiZ+IPg9uW2/vVjS5PBZ+qS3BTPD5SnxZoDkCEPaE7o
+ 65yqMJ5gVVP0ON5lQPlGay/pRz6IcIicRLBRnI0Z104jvjE4sNJ30LQEHo1o/MnWcA/j
+ gGMg==
+X-Gm-Message-State: AOJu0YychMQEmApburhmMZpnmf5pgTixJnAxkJVd2i45Pv6+fCXFGO2I
+ N5EWWizW8y8rTlk5XJvSXbQe7zqPUWHcFrZwpyXhSX2FbDUb3L4vMvNLtsajXMBgsL1sK7Hh736
+ PV8/9p1Q=
+X-Gm-Gg: AfdE7ck8aQPxXICZRZsvN9V8EMWv3qee1VHx8ieBEvcNJUds5+uLsuA7R6DEcFbTCkp
+ Ag0P+vZTFZ6iCZRZwcfLe0CQcULFtIsHtdikzWdXGyWqtkryMVxRU60ZhJSieGP8Ea1EReyRhtU
+ rK6II/6JtApYAStsSDYwAQCcOBCgaFzr/rd8gCIdBFYrjV2J/6H6QG1QD4LzhcENBbJ+Eo0G8e5
+ uKmQVcv+VdK1Q3lYsLAJPqGiMUiz1X5m6hx29m1peb0Jf6r9NxfDtMewFgR/JbUWqlxXcZ96APf
+ z6JSs1QjJ4eblD3tubCIavbPh9ZbC2f8Pdc4c/12bhepBCTtNkUXTtIZOroD9nUoO4wJMzLP8nV
+ lA5bjyh7DWsccIKSOqc1W7FN8IqrDQUpnq/xLDTt9feuSTi8fwQCtnGe222IELGC7ZnE3eMwLuM
+ qx9bwUbolywI3UHtGO8gZ2j5VtIaWZku7TS6XJPEtIEWZiiPbvScrL3atVcLyPNzFnNbZQxS8DB
+ Dj3dARC6JCrXMaX9h/mdo7iLlha75l3pw==
+X-Received: by 2002:a05:6820:220a:b0:6a0:e02c:8b4d with SMTP id
+ 006d021491bc7-6a116608a51mr2189137eaf.53.1782237318533; 
+ Tue, 23 Jun 2026 10:55:18 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-191-8-245.totalplay.net. [187.191.8.245])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a0ea0f9dc3sm7709245eaf.12.2026.06.23.10.55.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Jun 2026 10:55:17 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@arm.com>
+Cc: u-boot@lists.denx.de, nd@arm.com
+In-Reply-To: <77625247-d661-4104-b3c5-61dd0d413d5f@arm.com>
+References: <77625247-d661-4104-b3c5-61dd0d413d5f@arm.com>
+Subject: Re: Please pull net-20260623
+Message-Id: <178223731739.3376589.7708661809207952343.b4-ty@konsulko.com>
+Date: Tue, 23 Jun 2026 11:55:17 -0600
 MIME-Version: 1.0
-References: <20260621143938.2863-1-aristo.chen@canonical.com>
- <CAFLszTjaFQL2jbAdn=E44iz1OHN=1PDEne9m+nwvRMHWA3y+bQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjaFQL2jbAdn=E44iz1OHN=1PDEne9m+nwvRMHWA3y+bQ@mail.gmail.com>
-From: Aristo Chen <aristo.chen@canonical.com>
-Date: Tue, 23 Jun 2026 23:42:18 +0800
-X-Gm-Features: AVVi8CfgsZgXSwG1uEJ_-RWOUc_-uJ6QsqDjal9awEOewXpgrx-2JjG9OMzWSq8
-Message-ID: <CAA=k7=nqO5N99YvS1rd-d8k_c-fy=ymoHJMGCj6kow6S6+zFWw@mail.gmail.com>
-Subject: Re: [v1,
- 0/2] vbe: bound FIT external-data reads against the firmware area
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 23 Jun 2026 19:44:54 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,38 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+On Tue, 23 Jun 2026 15:01:41 +0200, Jerome Forissier wrote:
 
-On Tue, Jun 23, 2026 at 11:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> Hi Aristo,
->
-> On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
->
-> > One open question: should the external-data blk_read() in vbe_read_fit(=
-)
-> > also be deferred until after the phase has been signature-verified,
-> > rather than just bounded?
->
-> The bounded read is the right first step. Deferring until after
-> verification touches the SPL/TPL/VPL call paths and the bootmeth flow,
-> so that could be done as a separate series.
+> The following changes since commit f072620dc9ffda00b010783da27c41231c3a439b:
+> 
+>   Prepare v2026.07-rc5 (2026-06-22 16:22:08 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20260623
+> 
+> [...]
 
-Noted, I will prepare a separate patch set after this is merged
+Merged into u-boot/master, thanks!
 
->
-> > Patch 2 adds the missing range check ...
->
-> This could use a sandbox test that gives vbe_read_fit() a FIT with an
-> out-of-range data-position or oversized data-size and checks it
-> returns -E2BIG
+-- 
+Tom
 
-I will figure it out and send a V2
 
->
-> Regards,
-> Simon
-
-Best Regards,
-Aristo
