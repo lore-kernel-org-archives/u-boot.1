@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B340CD4F26
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 06:59:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352CDCDB470
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 06:59:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D493849BD;
+	by phobos.denx.de (Postfix) with ESMTP id BAF1C849D8;
 	Tue, 23 Jun 2026 08:59:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="0nV+Gp+v";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="AciACm9Y";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="IOpd74CI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A71D6849BA; Mon, 22 Jun 2026 21:43:36 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ id 2663C849D1; Tue, 23 Jun 2026 08:25:14 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C662848EB
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 21:43:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=62683ec8b=Charles.Perry@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1782157414; x=1813693414;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=WkVMqIh5A1GdO+UsVUsLLb76pLAZW5W7zGf81KQ581I=;
- b=0nV+Gp+vlriU+Xicar4mcRqU+s9k0iF0I+OakVfK9rzX07E+JyVzshCV
- 27f+/Kya8DebjdZN6GB61RL/HWMtUXoI0c8/+SW6/FbO5ATizs0fLLsfE
- E506VfgZ8pglHX5mO5gIXehKeNtIRuTkrNxa3cbF71vM8J0lVvJaLjLZr
- uh0U+/8Pw4tbVvyeZp5PJerPGzx5/LrEBTFROOnsEx3sBu1UVAZTVaqJN
- iSqfiL8mVMyD5Q/PKNsOCxDwETvT2XimGEKrytxSkvZd6E/iBZFMgmp1a
- ftYKVHESVXSPAwv3WWwXNjIx9y1tFszJARuZ//U5bYRVENzw2O76SfnXy w==;
-X-CSE-ConnectionGUID: NYlbG8noR/ONL3P1tXBknQ==
-X-CSE-MsgGUID: xUQ+t7cPS5OE4q11Z5ay/w==
-X-IronPort-AV: E=Sophos;i="6.24,219,1774335600"; d="scan'208";a="58667736"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jun 2026 12:43:32 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
- chn-vm-ex4.mchp-main.com (10.10.87.33) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.41; Mon, 22 Jun 2026 12:43:32 -0700
-Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Mon, 22 Jun 2026 12:43:31 -0700
-From: Charles Perry <charles.perry@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Charles Perry <charles.perry@microchip.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Tom Rini
- <trini@konsulko.com>, Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [PATCH] riscv: remove log_debug() in enable_caches()
-Date: Mon, 22 Jun 2026 12:43:07 -0700
-Message-ID: <20260622194308.70639-1-charles.perry@microchip.com>
-X-Mailer: git-send-email 2.47.3
+ by phobos.denx.de (Postfix) with ESMTPS id 0463D849BD
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:25:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ingo.rah@linutronix.de
+From: INgo Rah <ingo.rah@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1782195911;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sekxL5oIOJJuEfaPZl2ejhRwLCZuycdwlhFSYB2ogVE=;
+ b=AciACm9YCXN+t7anXp50lszDrcQwi3x5kr2zhsthjPuh1vA76I/Mnu4JpXqUh/PZU4ayM2
+ Oi4gwSuBGWGp8Ic0WQK3M9M/XzZ9E6WVpDucQPZACn9NXDFd2eKbmJfO1PD3guBLJkMscG
+ an8l24VBRtfs+xeCRk16X/bDfDvI7F4M3q23rlOZuxPyCvp/wLlfpjAHOqNDMkfaeT1Lq0
+ 4LSqBBmqlDKdoiHPkAKGAEhODfMTaRENVEABoc25D4ImTMhoHUvKb0pIgD8I77bfSTGcn8
+ rfqGSNKblLGC/X1lY0cJshQvcSI2CawRhHTjQxekarnywxRJs7ecxa6HmH1OdQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1782195911;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sekxL5oIOJJuEfaPZl2ejhRwLCZuycdwlhFSYB2ogVE=;
+ b=IOpd74CIc2FtgEpUGhvCufIVUCuStj4P1ywK/CCl982ZC+lQBMAzMpzviBTtD7nlIZU9Bo
+ R/0pdpQVZjHbBbBg==
+To: u-boot@lists.denx.de
+Cc: INgo Rah <ingo.rah@linutronix.de>,
+ Benedikt Spranger <b.spranger@linutronix.de>,
+ Gregor Herburger <gregor.herburger@linutronix.de>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Teresa Remmet <t.remmet@phytec.de>,
+ Tom Rini <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>,
+ Yao Zi <me@ziyao.cc>, upstream@lists.phytec.de
+Subject: [PATCH] Board phycore_imx8mm: spl: add 1 and 4GB RAM timings
+Date: Tue, 23 Jun 2026 08:24:07 +0200
+Message-ID: <20260623062429.532567-1-ingo.rah@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-Mailman-Approved-At: Tue, 23 Jun 2026 08:59:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,33 +78,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-log_debug() cannot be used before log_init() has been called. Remove the
-log_debug() statement in enable_caches() since it is called after
-log_init() in initcall_run_r().
+The Phytec Tauri L is sold with other memory configurations then 2 GB.
+Gather the memory size from the EEPROM of the underlaying PhyCore module
+and set timing information accordingly.
 
-This fixes a bug where a RISC-V system which does not have the "zicbom"
-extension (such as PIC64-HPSC/HX) would get lost in an infinite loop in
-log_dispatch().
-
-Fixes: 9e859849e2ca ("riscv: cache: Add CBO instructions")
-Signed-off-by: Charles Perry <charles.perry@microchip.com>
+Signed-off-by: INgo Rah <ingo.rah@linutronix.de>
+Reviewed-by: Benedikt Spranger <b.spranger@linutronix.de>
+Reviewed-by: Gregor Herburger <gregor.herburger@linutronix.de>
 ---
- arch/riscv/lib/cache.c | 2 --
- 1 file changed, 2 deletions(-)
+Board phycore_imx8mm: spl: add 1 and 4GB RAM timings
+  This patch heavily borrowed code from git://git.phytec.de/u-boot-imx commit
+  00ac765d6032 ("BSPIMX8M-2893 board: phycore_imx8mm: spl: add 1 and 4GB RAM
+  timings") and commit 93962421d7b4 ("BSPIMX8M-2893 board: phycore_imx8mm:
+  spl: add 1 and 4GB RAM timings")
 
-diff --git a/arch/riscv/lib/cache.c b/arch/riscv/lib/cache.c
-index 31aa30bc7d72..ac5136fa6bec 100644
---- a/arch/riscv/lib/cache.c
-+++ b/arch/riscv/lib/cache.c
-@@ -149,8 +149,6 @@ __weak int dcache_status(void)
- __weak void enable_caches(void)
+ .../dts/imx8mm-phygate-tauri-l-u-boot.dtsi    |  8 ++++++
+ board/phytec/common/imx8m_som_detection.h     |  7 ++++++
+ board/phytec/phycore_imx8mm/lpddr4_timing.c   | 25 +++++++++++++++++++
+ board/phytec/phycore_imx8mm/lpddr4_timing.h   | 12 +++++++++
+ board/phytec/phycore_imx8mm/spl.c             | 24 +++++++++++++++++-
+ configs/imx8mm-phygate-tauri-l_defconfig      |  1 +
+ 6 files changed, 76 insertions(+), 1 deletion(-)
+ create mode 100644 board/phytec/phycore_imx8mm/lpddr4_timing.h
+
+diff --git a/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi b/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
+index 26361780c01..79ddb1ade44 100644
+--- a/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
+@@ -29,6 +29,10 @@
+ 	};
+ };
+ 
++&pinctrl_i2c1 {
++	bootph-pre-ram;
++};
++
+ &pinctrl_uart3 {
+ 	bootph-pre-ram;
+ };
+@@ -73,6 +77,10 @@
+ 	bootph-pre-ram;
+ };
+ 
++&i2c1 {
++	bootph-pre-ram;
++};
++
+ &usdhc2 {
+ 	bootph-pre-ram;
+ };
+diff --git a/board/phytec/common/imx8m_som_detection.h b/board/phytec/common/imx8m_som_detection.h
+index 0176347414f..794d3add0d5 100644
+--- a/board/phytec/common/imx8m_som_detection.h
++++ b/board/phytec/common/imx8m_som_detection.h
+@@ -13,6 +13,13 @@
+ #define PHYTEC_IMX8MM_SOM       69
+ #define PHYTEC_IMX8MP_SOM       70
+ 
++enum phytec_imx8mm_ddr_eeprom_code {
++	INVALID = PHYTEC_EEPROM_INVAL,
++	PHYTEC_IMX8MM_DDR_1GB = 1,
++	PHYTEC_IMX8MM_DDR_2GB = 3,
++	PHYTEC_IMX8MM_DDR_4GB = 5,
++};
++
+ int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_imx8m_ddr_size(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data);
+diff --git a/board/phytec/phycore_imx8mm/lpddr4_timing.c b/board/phytec/phycore_imx8mm/lpddr4_timing.c
+index f5a2f3268b3..73e35c7c3b9 100644
+--- a/board/phytec/phycore_imx8mm/lpddr4_timing.c
++++ b/board/phytec/phycore_imx8mm/lpddr4_timing.c
+@@ -1842,3 +1842,28 @@ struct dram_timing_info dram_timing = {
+ 	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
+ 	.fsp_table = { 3000, 400, 100,},
+ };
++
++void set_dram_timings_1gb(void)
++{
++	dram_timing.ddrc_cfg[5].val = 0x2d0087;
++	dram_timing.ddrc_cfg[21].val = 0x8d;
++	dram_timing.ddrc_cfg[42].val = 0xf070707;
++	dram_timing.ddrc_cfg[58].val = 0x60012;
++	dram_timing.ddrc_cfg[73].val = 0x13;
++	dram_timing.ddrc_cfg[83].val = 0x30005;
++	dram_timing.ddrc_cfg[98].val = 0x5;
++}
++
++void set_dram_timings_4gb(void)
++{
++	dram_timing.ddrc_cfg[2].val = 0xa3080020;
++	dram_timing.ddrc_cfg[37].val = 0x17;
++	dram_timing.fsp_msg[0].fsp_cfg[8].val = 0x310;
++	dram_timing.fsp_msg[0].fsp_cfg[20].val = 0x3;
++	dram_timing.fsp_msg[1].fsp_cfg[9].val = 0x310;
++	dram_timing.fsp_msg[1].fsp_cfg[21].val = 0x3;
++	dram_timing.fsp_msg[2].fsp_cfg[9].val = 0x310;
++	dram_timing.fsp_msg[2].fsp_cfg[21].val = 0x3;
++	dram_timing.fsp_msg[3].fsp_cfg[10].val = 0x310;
++	dram_timing.fsp_msg[3].fsp_cfg[22].val = 0x3;
++}
+diff --git a/board/phytec/phycore_imx8mm/lpddr4_timing.h b/board/phytec/phycore_imx8mm/lpddr4_timing.h
+new file mode 100644
+index 00000000000..5334fa5b4ee
+--- /dev/null
++++ b/board/phytec/phycore_imx8mm/lpddr4_timing.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) 2025 PHYTEC Messtechnik GmbH
++ */
++
++#ifndef __LPDDR4_TIMING_H__
++#define __LPDDR4_TIMING_H__
++
++void set_dram_timings_1gb(void);
++void set_dram_timings_4gb(void);
++
++#endif /* __LPDDR4_TIMING_H__ */
+diff --git a/board/phytec/phycore_imx8mm/spl.c b/board/phytec/phycore_imx8mm/spl.c
+index e688793bc74..c9f2243c819 100644
+--- a/board/phytec/phycore_imx8mm/spl.c
++++ b/board/phytec/phycore_imx8mm/spl.c
+@@ -16,6 +16,7 @@
+ #include <log.h>
+ #include <spl.h>
+ 
++#include "lpddr4_timing.h"
+ #include "../common/imx8m_som_detection.h"
+ 
+ #define EEPROM_ADDR		0x51
+@@ -42,6 +43,7 @@ int spl_board_boot_device(enum boot_device boot_dev_spl)
+ static void spl_dram_init(void)
  {
- 	zicbom_block_size = riscv_get_cbom_block_size();
--	if (!zicbom_block_size)
--		log_debug("Zicbom not initialized.\n");
+ 	int ret;
++	enum phytec_imx8mm_ddr_eeprom_code size = PHYTEC_EEPROM_INVAL;
+ 
+ 	ret = phytec_eeprom_data_setup_fallback(NULL, 0, EEPROM_ADDR,
+ 			EEPROM_ADDR_FALLBACK);
+@@ -49,10 +51,30 @@ static void spl_dram_init(void)
+ 		goto out;
+ 
+ 	ret = phytec_imx8m_detect(NULL);
+-	if (!ret)
++	if (!ret) {
+ 		phytec_print_som_info(NULL);
++		size = phytec_get_imx8m_ddr_size(NULL);
++	}
+ 
++	switch (size) {
++	case PHYTEC_IMX8MM_DDR_1GB:
++		puts("1 GiB\n");
++		set_dram_timings_1gb();
++		break;
++	case PHYTEC_IMX8MM_DDR_2GB:
++		puts("2 GiB\n");
++		break;
++	case PHYTEC_IMX8MM_DDR_4GB:
++		puts("4 GiB\n");
++		set_dram_timings_4gb();
++		break;
++	default:
++		goto out;
++	}
++	ddr_init(&dram_timing);
++	return;
+ out:
++	puts("Could not detect correct RAM size. Fall back to default.\n");
+ 	ddr_init(&dram_timing);
  }
  
- int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
+diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
+index e34f12cabf3..866e5d1dbb3 100644
+--- a/configs/imx8mm-phygate-tauri-l_defconfig
++++ b/configs/imx8mm-phygate-tauri-l_defconfig
+@@ -4,6 +4,7 @@ CONFIG_TEXT_BASE=0x40200000
+ CONFIG_SYS_MALLOC_LEN=0x2000000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_PHYTEC_SOM_DETECTION=y
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x3C0000
+ CONFIG_DM_GPIO=y
+---
+base-commit: f072620dc9ffda00b010783da27c41231c3a439b
+branch: feature/phygate
+
 -- 
 2.47.3
 
