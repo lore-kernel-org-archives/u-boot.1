@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B3DCDB46B
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jun 2026 22:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0669FCDB466
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 01:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDDE284944;
-	Tue, 23 Jun 2026 00:43:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D460A849BB;
+	Tue, 23 Jun 2026 03:39:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nnp9uw0P";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jxrFZpzx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XXwtC9D0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035F5849BB; Tue, 23 Jun 2026 00:43:52 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E897A849D2; Tue, 23 Jun 2026 03:39:39 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 441AF84931
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 00:43:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27E3E848DC
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 03:39:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7e6b5737bb2so4043632a34.1
- for <u-boot@lists.denx.de>; Mon, 22 Jun 2026 15:43:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782168227; x=1782773027; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XMmJgJjVLEz7gGmH0awpe+ahMsFCG9LfRuYCgYPJXo0=;
- b=Nnp9uw0PB/+jAu4ck1Yjf+JEAkxBkKnX4Cmp9OY+xESu8zYM+ROXhFDkrNqubYh3xU
- cgrGMp2PcJgPeKDx6gxJR9g6tGvHO8IAf4pNH1cBK2Ma8VV2Ocjm2f9JRkvRnS2zs1AQ
- iHkEOF3iW2J6nvaTBbZOmaXEvtWFN+M1pFPpU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782168227; x=1782773027;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XMmJgJjVLEz7gGmH0awpe+ahMsFCG9LfRuYCgYPJXo0=;
- b=QzRPEbg9/BpYpTVPLJ5syevix7mqi/m+XGCmbQ6IwI/7WBpKoE8Zkn3Rby51Jj9Kkm
- yC8R78MTnDqtxr3JNu5imeaCsY/Tr71NPvMSv0vS7rk8fT6I6wfh6BmHZICpb1TrY3Av
- AM+H+fT5J1fJCFGtbckIB0R97Z2wi+pxi8LvDc43Pb/1TXsqQBWxrqUeNDxNAvdzoB4l
- 13+GLHKKINNiNCh/YEclCBT34tNWmaxObZKi595/kN7patObMCjEVBE5bU8+v4AM3y+q
- l2yXmWQXJOWhCsF+CIT+B5mSLnT4CyAsfKsmIAFQ+83+BL3U63EFGL9VN0cT0R1r8VDj
- O+nA==
-X-Gm-Message-State: AOJu0YxljSqUdXxAzc/XBtnMREAaz+VhxACFhyoXJaY+wP3nkOv53Wkj
- +RCgfadOeH9+kOpxFIex5erKNsr7cvPpwUWdKHQa7zZCIKq31wqJVqm+fEgsvNfRyKImKijypNN
- AqrS8l4M=
-X-Gm-Gg: AfdE7clwzJKtnIH2jzphEJRY9OaacAAjutPdy1Yy1n7r+F69FseX3Cc+/IIsJr2dn4x
- 4MPWx7tqccNLWuH9Qn6R9DFHtxeyn8umd42ux2Nw3JhPen16g7y2JKe9DfJlw3nmfpHFXx1ySY0
- ByAHzzs4T6QamRGvglbaTlnZdQgaH7uihz+Zzl/H++/rj2KC/z/FTnFyUqondEJxknxPH8sPhAG
- /RR5O4qGveVqlN4B7VcwAwuhFBZ09HbbLxOd1dCnfI9hiWUHiq7SweYY6TIFMsB84Sp04pA7TtW
- Ij9DxMh2zemDnJugQ3httaZsd46HB1fY2t3VLDl5mDlDz+tMHF3chU+ZESpaFrCDZoxNkfApZGx
- YQILY+bexY2JhMcVXOY90kChDsgotIFJULUgKvGIjO2vTcsD+CUh2Zl7nyjzAnjoRnhbrvooVO0
- RxPcmRtX8PbqkkOPwOhQz4ujVRkIhAkpHC8+o2S6Z5x0g2RxW9HZ6/lgnmHII8+3Alg017SymNj
- ougNE1w9VdJmPEiqjFn/OecSvkdV8CkcFA=
-X-Received: by 2002:a05:6830:6c0f:b0:7d7:d524:bc88 with SMTP id
- 46e09a7af769-7e9793bc01emr159996a34.10.1782168226914; 
- Mon, 22 Jun 2026 15:43:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-245.totalplay.net.
- [187.191.8.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e9442e98e9sm7384635a34.25.2026.06.22.15.43.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jun 2026 15:43:46 -0700 (PDT)
-Date: Mon, 22 Jun 2026 16:43:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260622224344.GF382693@bill-the-cat>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gknmm477sz9v0L;
+ Tue, 23 Jun 2026 03:39:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1782178776;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dUp3Q2SQWzy7nB0rgydpk59Eg54C+qBcNrsAaAV5Cy0=;
+ b=jxrFZpzxyysj4/BBlm6SJq+hSyDulQTFw6E9Ll5Ky/UhyCM5EQbRlzmahnGsrhjEIAGc8F
+ GILaRvCrndVXnUWi+whCQU/zfSjz5JJEnjsHgaUWqhFgd8TwkAXwCJf2qdwYvjfpnLYnwo
+ wVaHH5+JRSa2iN+pm5TnXwoIRL+udjclo6HZ6ygVYx9Q12fJzJEg+nTnYx442Us9PPIXJk
+ T4cSUGtbXOgojIrdV+G6GkwgAT+LpkrJ7chTmW1KpwEqCgqKWwgO5slBl+zTzy9z67vur7
+ icSQX2JPbPEG/QIFtj4vhFLF1Oqxj+vkSroU2KvHG8QJb0MCtiNdqj01I4Khzg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=XXwtC9D0;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1782178775;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dUp3Q2SQWzy7nB0rgydpk59Eg54C+qBcNrsAaAV5Cy0=;
+ b=XXwtC9D0y1SoM8AjG0OrFnbBf60kdBCLW912wf4ZpKgR03bQ4O9lJKcGoOSbaakOz0SuMY
+ JNjfZmo1QeCcYX2aD8CYmPoChVUY4Eb7azTZ5WbayBrbWhD+qPpzRgOXbPnseWG+jJ4Gx+
+ IpZMXBBoAGNz0JZb05bTv+TGqfm58oCNyAZLIdhiB5gL52yrAvRCmhyCAbxrRfy9wZTsua
+ 2UYF8MYBS83ceiFtFsJB1mPCZfLS+x6gr+ziiaAHmRWDZnnQJy0E/PMpQpEtepHwkBx6YB
+ rTgjZ5wycWoIdVghJaQ+ktcsx3iuIuFUvIahtbgXPhR2p93L2ig3n51ZjwOCBQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 00/11] doc: board: renesas: Update Renesas documentation
+Date: Tue, 23 Jun 2026 03:38:26 +0200
+Message-ID: <20260623013929.114641-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="faJYaX37rZNSE1jB"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 0410bba6353f87d2d92
+X-MBO-RS-META: 6pca61sxse6jh7hgy74hu87sfbxocybh
+X-Rspamd-Queue-Id: 4gknmm477sz9v0L
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,83 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Update and expand the Renesas documentation. Fill in toolchain setup pages,
+U-Boot build and installation pages for a subset of Gen3, Gen4, Gen5 SoCs,
+rework the toplevel hardware table into grid layout to improve its readability.
 
---faJYaX37rZNSE1jB
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Marek Vasut (11):
+  doc: board: renesas: Document SH/Aarch32/Aarch64 toolchain setup
+  doc: board: renesas: Document Aarch32 toolchain setup in RZ/N1
+  doc: board: renesas: Document Renesas R-Car Gen3 H3/M3-W/M3-N
+    Salvator-X(S) board
+  doc: board: renesas: Document Renesas R-Car Gen3 H3/M3-W/M3-N ULCB
+    board
+  doc: board: renesas: Document Renesas R-Car Gen3 M3Le Geist board
+  doc: board: renesas: Document Renesas R-Car Gen3 E3 Ebisu board
+  doc: board: renesas: Document Renesas R-Car Gen3 D3 Draak board
+  doc: board: renesas: Document Retronix R-Car Gen4 V4H Sparrow Hawk
+    board
+  doc: board: renesas: Document Renesas R-Car Gen5 X5H Ironhide board
+  doc: board: renesas: Update Renesas generic build section
+  doc: board: renesas: Convert Renesas board support table to grid table
 
-Hey all,
+ doc/board/renesas/build-env-aarch32.rst      |  25 ++
+ doc/board/renesas/build-env-aarch64.rst      |  25 ++
+ doc/board/renesas/build-env-sh.rst           |  25 ++
+ doc/board/renesas/index.rst                  |  13 +
+ doc/board/renesas/rcar-gen3-draak.rst        |  47 +++
+ doc/board/renesas/rcar-gen3-ebisu.rst        |  47 +++
+ doc/board/renesas/rcar-gen3-geist.rst        |  45 +++
+ doc/board/renesas/rcar-gen3-install-hf.rst   |  76 ++++
+ doc/board/renesas/rcar-gen3-install-sf.rst   |  29 ++
+ doc/board/renesas/rcar-gen3-install.rst      |  34 ++
+ doc/board/renesas/rcar-gen3-salvator-x.rst   |  48 +++
+ doc/board/renesas/rcar-gen3-ulcb.rst         |  49 +++
+ doc/board/renesas/rcar-gen4-sparrow-hawk.rst |  91 +++++
+ doc/board/renesas/rcar-gen5-ironhide.rst     | 204 +++++++++++
+ doc/board/renesas/renesas.rst                | 353 +++++--------------
+ doc/board/renesas/rzn1.rst                   |   2 +
+ 16 files changed, 858 insertions(+), 255 deletions(-)
+ create mode 100644 doc/board/renesas/build-env-aarch32.rst
+ create mode 100644 doc/board/renesas/build-env-aarch64.rst
+ create mode 100644 doc/board/renesas/build-env-sh.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-draak.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-ebisu.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-geist.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-install-hf.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-install-sf.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-install.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-salvator-x.rst
+ create mode 100644 doc/board/renesas/rcar-gen3-ulcb.rst
+ create mode 100644 doc/board/renesas/rcar-gen4-sparrow-hawk.rst
+ create mode 100644 doc/board/renesas/rcar-gen5-ironhide.rst
 
-Coverity is back up finally and so here's the result of changes for the
-last three RCs.
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Jun 22, 2026 at 4:40=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+-- 
+2.53.0
 
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 1
-   - 4 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 1 of 1 defect(s)
-
-Defect Details
-
-** CID 646439:       Integer handling issues  (INTEGER_OVERFLOW)
-/test/cmd/part.c: 53           in setup_gpt_partitions()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 646439:         Integer handling issues  (INTEGER_OVERFLOW)
-/test/cmd/part.c: 53             in setup_gpt_partitions()
-47     	snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
-48
-49     	ret =3D blk_get_device_by_str("mmc", dev_str, &mmc_dev_desc);
-50     	if (ret =3D=3D -ENODEV)
-51     		return -EAGAIN;
-52
->>>     CID 646439:         Integer handling issues  (INTEGER_OVERFLOW)
->>>     Expression "_val2", where "ret" is known to be equal to -22, overfl=
-ows the type of "_val2", which is type "unsigned int".
-53     	ut_asserteq(mmc_dev_num, ret);
-54
-55     	if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
-56     		for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++)
-57     			gen_rand_uuid_str(gpt_parts[i].uuid,
-58     					  UUID_STR_FORMAT_STD);
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---faJYaX37rZNSE1jB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajm6nAAKCRAr4qD1Cr/k
-CuW/AP9hlSFUkMAEJUEtsrnOkDHVejlaYKoayHFt6PzLeUw11gD/Tg118TA/lmn4
-TWAT74pkYkvtbhzle3aFqQyt1wZwHAk=
-=/JV+
------END PGP SIGNATURE-----
-
---faJYaX37rZNSE1jB--
