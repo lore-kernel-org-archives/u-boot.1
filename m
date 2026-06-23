@@ -4,60 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 924EBCDB46F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED66CD98F2
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:19:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9F16849BB;
-	Tue, 23 Jun 2026 16:12:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 30325849E5;
+	Tue, 23 Jun 2026 16:19:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="naNxOZGm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OW34cMOD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB10B849D2; Tue, 23 Jun 2026 16:12:15 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 610F2849EA; Tue, 23 Jun 2026 16:19:06 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75066848DC
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:12:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id CDD5D849CE
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:19:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xCvlpdz0AjDikt5VcBZKChcNZFZu1PR7cNSz7oppzn4X+lJPOFi4FBY2mVjG0HNAoy75/3ck65y8xsvRraaSj28J98KnouTqCPcUAJHBljjwrKf6e+Wp17MwG8S85Ox3OYF1EwR32Txc5NjRYQLWgb13IhGnB8/V1D/YR8ySqfPznZ2tHgJOIaxoO2MlFOlWLAIHvXC7BPq7PWG/Rp0uKXZuddKww/8usIO0mBhJuI55OfYkhEj9QfJUS5ijheNM8wiiO/Jonu0bgAv0MKb1+VD7UXyyBkeUcAm1zEB4dIUQFCpYv3H9Hb5NSCyxF18cORGpTs70qBvbOOgBego/Sw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MVtLda3RAYk1Gx6gb0uYN9vUvPHcuQ/011H6xtCOZiY=;
- b=Cq5YoEHCwv8Jd+mPzukcnMtfSmtNmXOeeA1J4B9jL94WXB4fdS7kpOV20xAOVbXiLKuD0p05Vw+Lc/i3ouHxPp+to8i0OdqNDQl3Ueg4lvGIuptWJZlea3BCppTYFiliEBCvrtWVgEg0M/UP32Mu44TZKlynOeUh/3hMRGAgMmCbuynMtDocTC8p61UwKSNgQjORXY49o8gfDFuXk7h5Sz8sk0+dgBgSrdMIb7fBw+blcH1tbfPwzScofitDjX4slIzBMf3zpw9X7zyTW30kyPVdjBTRke0K9r8u2nFEEA4zkozbqwE/+TRxt5CL9iYDPIYGNRQeTs7gF88bYDkpsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MVtLda3RAYk1Gx6gb0uYN9vUvPHcuQ/011H6xtCOZiY=;
- b=naNxOZGmIaEVGSBK5FmkQvQ5BBICOfEb9s8nday1uJmfhMU5ZhedO8TAC0joa5ibEEPhIugDiUXXxVfy+ytYp0WCXMqgtuphX63Kse961uXWU6HE2BuuXjKNpZLHuh5t2GAKR3PRUvYFaLmicFqYMX7ekiL8jLI8FVyY86rHaus=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by PA2PR04MB10471.eurprd04.prod.outlook.com (2603:10a6:102:41f::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Tue, 23 Jun
- 2026 14:12:10 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0139.018; Tue, 23 Jun 2026
- 14:12:10 +0000
-Message-ID: <d40725cf-7f70-4038-8a67-aafe04f90119@cherry.de>
-Date: Tue, 23 Jun 2026 16:12:06 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-3967738c801so53536591fa.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:19:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1782224343; x=1782829143; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=1QNFPOt15OI7TybwNlQneidcDYOrAbOUUNpsCvFybos=;
+ b=OW34cMODchtgzLmmKHm10VJ4KxrBUrgDYoq4UIHA/u8JF3CSEESnV1kLN1SyJVaP7e
+ POU9gNNqg+w53fzbf/h5EYDzPtmXnpuUANE8GGXR72fMtvZSHezqoyEPFCv0Fw/S4Q6z
+ 4wp3xkdxc5qztoWU9gpXaIQHumDlkpoKSMKRLHNEeVtcc8pkzMcBza44ADoNnDWhOxK8
+ eE+6wu8SWu/6oEiSuxhT72nR/Amn/KLuYEJ1zsqFieX/uYqLcTZ4TWq6NAXdlOV5NRkr
+ 6rGtoRZIBe3JiiqktdjTfLwRRXbwMgLs0mMNXMAR5wHqMWhZd0dQZ8w7k8Je44mBHToV
+ QT4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782224343; x=1782829143;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1QNFPOt15OI7TybwNlQneidcDYOrAbOUUNpsCvFybos=;
+ b=GWGiLk4wpzcLHyU4Mu5IqxUA5EYX8b7QkLx8X0EbslzI/WBd28kVmc9bJo0d1JI6Vb
+ aqYkBsH1QOgWErYZmBqGr8nxKcg3G9T5zwWs5tZTHwt6/NQ1bix2ET1YrUH1IlnhU1n5
+ uko989pj7IYJj/0D9yYOQ81eTpDt8/V3vs7AwvUo7P3KKcjAFC/WbyO3dccjnSxPMGhL
+ TDZZ0jdePPoEy9qWCsPP88zSrensN7+ysbxzjq5D7DrDxEaE0tP0MmNcQsmEs0nmtNuf
+ 65oSgwqmQ2ipXEb3QMEHQ5wJU5TMV2o7day5tbpSWanZWLTxZDQ6RhTX1vEI6Zg2Dg8p
+ jIAw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/TX4D4S+hz9Y85/sChWx6DQINYpZsW4MOxvyEr4IN0yOAE0S6qWgI6S+B3LycgFRcwkUAPJYQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgWorkFNaRWNvz+jR5SGihbrOLwP+V3wCBcuUWcVMO3fIV8pdg
+ NStPDufucCZwcYxjQTWn8f6TcItcY0wUaEF6GAgRTpXsD7WKNx9xxFgTbgIZvm3SbIs=
+X-Gm-Gg: AfdE7cmcFAb0FuMtfw0NE2s2Tfj1Dw/NVUQ0GBq4tmM6nYrT6GEKsJXZQmcKSuoRrPE
+ GvWWSRq/JmDrZQ2kYFz9KC2+0J4mcrev7LTf+mTNmVrTUB8sVSy13Rau316RwpJ95yuV9SqLCjw
+ iw/4J5UyY3tYZ4Aw+0NHHtll6E4+CjXmRW56X1kEdvVOefF3uYkI/rlSPpKKiW4g+ixqL4mkItD
+ AsTsmLfWiHXbfSjG7cQiqjPNXy7YagxF7SW9tquyqAWJaF39diXFcaUxj/HAr3SuC/mBh7KzZrJ
+ lXLSqPE6OzAdSMrfg7NrjtEwROJdupSyLv31dL6QDY68G4jKdGvZ3eNVDkv/55quv6v6hANyuCC
+ ta9RU7i85gj1i8JFHtzv+yaw3xlVKXDHPI6laya4/kzWP+PXUN/IMRsHvJBLnk/Ku5U81P8CYx5
+ nj7BCeYKUENgxbMG15kEJ4yAwFXbCQFU8VW8BYLhFBBc1Y4U6u9DmdvKATwCHeXUSycrx0HFryZ
+ hJOh/w=
+X-Received: by 2002:a05:651c:513:b0:396:9b1f:a8b9 with SMTP id
+ 38308e7fff4ca-3998bc2b690mr53985831fa.6.1782224342566; 
+ Tue, 23 Jun 2026 07:19:02 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:1ad1:3e6d:c980:680b?
+ ([2a01:e0a:106d:1080:1ad1:3e6d:c980:680b])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-3999b1b1a7esm27534201fa.40.2026.06.23.07.18.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 23 Jun 2026 07:19:01 -0700 (PDT)
+Message-ID: <f0044913-eab2-4493-9dd5-c1ade7973db6@linaro.org>
+Date: Tue, 23 Jun 2026 16:18:59 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
 Subject: Re: [PATCH RFC v2 4/4] all: Fix lists.denx.de links to
  lists.u-boot-project.org
-To: Neil Armstrong <neil.armstrong@linaro.org>,
+To: Quentin Schulz <quentin.schulz@cherry.de>,
  u-boot@lists.u-boot-project.org, u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Peter Robinson <pbrobinson@gmail.com>,
@@ -78,76 +103,36 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Xuhui Lin <xuhui.lin@rock-chips.com>, Yao Zi <me@ziyao.cc>
 References: <20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org>
  <20260623-osuosl-ml-switch-v2-4-28fd46e89e46@linaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260623-osuosl-ml-switch-v2-4-28fd46e89e46@linaro.org>
+ <d40725cf-7f70-4038-8a67-aafe04f90119@cherry.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <d40725cf-7f70-4038-8a67-aafe04f90119@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: WA3PEPF0000051B.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::676) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PA2PR04MB10471:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30e9e7ce-fa66-45bb-3713-08ded1316a4b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|7416014|376014|366016|4143699003|5023799004|56012099006|11063799006|6133799003|22082099003|18002099003|4133799003;
-X-Microsoft-Antispam-Message-Info: lI9Yb3cxS6mkYNKOcAfRe5EBfyEEFJSUbn30LC4JkTiZiR/FmroWKGPgfFUKF2BNtcDtg6N4/B9rNxEJ6nePJwUgQ6IXCqvCLU/LAcqc7luEhnu67ZrLDuzw1kiqeG0vfopxsZA5PJpSMgYPXZWwbE2PzJtoMg+04Fp8EOfrJ3PPBQ5pYD0Cu/l2Z3Aq2fUNa8jXt9XcSCC9nDzX0uTZw7RRxBqIcd42cqaP23fH2etNra69KnsEBMhZPOHwXGnwW+dbKanLpUZTieweEOGU+y5s2YguX2Dvq1Qen2CGOX4zWl+zb21sEnc6AcX0tnfVNN1IVAvwK3nRm4xxGm+30kzyrBldH/Yxd7Gr3gruTjjLaMIb/K+REswryHU3Jf62b8FXuyZgs24dbk534zdepQM3G17LtwiQpQ2hwFNYENzih5YG2lBxJXKWhr14TKGSp0Ke+/U/KR/hzn59P2nQxrixJLKmWWLj/Zs3mtLe8Hxs+aTkPpmVkco4QRVcVkDW0WQeNCNISdbTyq2/zeqEiayRtvrXibBklAWGXsVTvmMS/EVS4gv2Vckgknqwb7Ym+Xsb2ioZxLhtUdlTBXpZEPkrIKo5CHCiLx7mEv0K/ev7EJ12vRfQNvdRmsFHDjjj
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(7416014)(376014)(366016)(4143699003)(5023799004)(56012099006)(11063799006)(6133799003)(22082099003)(18002099003)(4133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NjJCMDNpSlAxcDFNSHlZMXFtUWY0OXYvVGVVQTNpWXZKRWoxbnRPNE9sM2kw?=
- =?utf-8?B?NU9LbEVja1BiYmNlSTlBcjFLUXFodC9ZTEJQU2xHK2w4cFVnUTFsV2s3dTJQ?=
- =?utf-8?B?cG1SMXZMdG80eGNlWXlOTDJudjNuekhNTE5ReDloUGoyVVlDWnVpN0tkNVhh?=
- =?utf-8?B?akZHNjdBZ2JtUm13aHVFYUpOMUJjNkNCeTlzTTdBWGxmWmVRMklDL3VUb09u?=
- =?utf-8?B?MGRWdElpdUFsVlRBYlZzbjdmUXlOUUUwbWtveHVqZFd0TTJ5THpZbGtJRWNt?=
- =?utf-8?B?UTR0N3lTZ082cHJMeWp0VXgxNGNQSnZFancyREdpTkdHcG1ZcStGdklSZnJI?=
- =?utf-8?B?VWRGOTNPSjRJUHYxSS9sRWxKSDR1RCtleUNlUnlaOHdLWHNRQ1pCSTV6MWMw?=
- =?utf-8?B?LzQrMGw5ODhDbFVNcXdNOE5PMGprWnNHOEx0d1hWb1J4OVVKdVh2ckxkV29G?=
- =?utf-8?B?eDA0clFLdnhnRXNJRjRUYy9xTjNpb1pqSXo2YjJSbWJWaWJ1TDI1akhLL01S?=
- =?utf-8?B?OGkyL1JHK2RMTTRsNDdBN2FSOFJyQWNxdXgxeUhHTkJMZVFOKzRYUHh6cWRK?=
- =?utf-8?B?RFh2TUdmT1JrVlJRc0c1UDVQZnJObkVSK0FFeUdpVWdSMi8xVkVuOEJVcGsx?=
- =?utf-8?B?RENpTEFDOWsxT1NRSjRJQkFwVmhtUjVpV2NzMXlQRnJhY2JudndxQWxabWhx?=
- =?utf-8?B?K0hDZStJcHUvNTRPaVpPUFNZUWZGSnNHS296NFRMeXpjbmVBM2J3cEN2YVhG?=
- =?utf-8?B?bTQ4eG9GZjlpeXR5UG4xMUxJTm4yeHhwdEtOdll0N3lvaXl1SEg2RW9HUmxF?=
- =?utf-8?B?OWxLcnh2ZW1URGlIWjNTSjlnOGR0VXBHM2Zqb1cwRE5OSS93ajUwSU1idEZo?=
- =?utf-8?B?VExDaDN2TEsvMGprci9aVnNlSFdTVDhQdm9LVzdRSG85UXIyNkFhV05JclRK?=
- =?utf-8?B?SGVDV0JhUUt1cHRVU2ZNQlBpTGhOOUE4VVJzdUVQa0pBUEVYc1E2emZ4TGhG?=
- =?utf-8?B?WWV1UXRQYlRqTTk4TnQvbGtOeUdNMDNDUU5ZU0RWMmZpZ0I4U2JJNnVJSVpM?=
- =?utf-8?B?ZHdldkFkRlpyMFhZRGdEaUh5TXNDME1Jek4rWWVLSVJTTGVUWkEvdGV6Z0lq?=
- =?utf-8?B?THBpZ0ZrRUxHTERpeE9lM1lpRVUxeEx0V2VHcDJDZ2lHNXJRUytNU0RLdlAz?=
- =?utf-8?B?RWJIUUJuM3M5bTJSeU9qOVFPQnJabUJadnFwWGYycHB6TWZwWGcya1E0Mkxp?=
- =?utf-8?B?U1FBZFZVSzN3WXh2VnJ2MHI1YnN6UlpNSlZ6UXBvOCtrTWJRcnVSWEpnWlVU?=
- =?utf-8?B?QUt6dXRUaHdSd1I0L25VdElVSmhuODQrL0J0eW9odjVTbFNlOUpDVUdjdURo?=
- =?utf-8?B?b2wyNnRiUVpqU2tpU1llSE9aV2ZoUEU2VzAwTjIxZ28yVUNmc3dIQTNxZ3Rq?=
- =?utf-8?B?TlFwbXgrSW90TFFiNWtTWFFGS2txWkFvdkdISkhONHdNTnJrMUVpb0d4RWJC?=
- =?utf-8?B?TzM2ckZHck9IY2ZXSzlaZWRCNCt2YmRWM1R3SGJCRzV5Q0ZuSFZlQ0RnOUFR?=
- =?utf-8?B?d3dzeFl4dENJcHFKN2lQVE1vNE1jWG5YeXhaR1RncVhZT2R1bXZmL3VEZVNl?=
- =?utf-8?B?VVRLSkJiUjE5UnBncEJ5ZmRPL2c4NkxtKzJJV0RHcEh3K0tJRXd0OHFmYmxk?=
- =?utf-8?B?Nzg0SGNHK0lMUFd6b1JoZ1JqQ2NPb0pKeTdpTytrS2FnaGhBYkNHRG1LRWRB?=
- =?utf-8?B?UjZCam1KZUVxQ0p4aDBjbnc1Z0tuUkJUOGg1Mk1OSVBNTkZ3Mk96L2pjNlNL?=
- =?utf-8?B?dWVmQml5QVduWXNWQllGcmJZOEg0TmN5TGk3bzJVdmJmc24xYkNHMVV2VnRp?=
- =?utf-8?B?UHZwWnhkQ2tENzlyaHlaa1hGaU9kbFhEK3Jrb1JlNW16RlhHeXc0dytHcXcr?=
- =?utf-8?B?dE8wdEtuVTUzTjBtMlZ0UTBlQnZDeHpRRW5KR0R0S2hHY0tLMnQwengrb1Bn?=
- =?utf-8?B?a2d1elhmTCtBNFVUR2hKMmpBbkVwSUdqVkt5eG16RFNtdHZJUU9XVFpUOUlP?=
- =?utf-8?B?MFhqZ0lxQVlSR0VKSm1RNGFhQStoeUk3WWRjdnI5NHdHeHYzNWFwa3VVQStP?=
- =?utf-8?B?MTl6aTEzUGlITnVaeTd1NUdIYzdTc1M5M3VBOXRkOWlXaEYxUUVJd1BPM3Zj?=
- =?utf-8?B?YjhuY3hXUUZnZmdaVDFIbVQxS0YyWXBiQ214VW5PUFp1ZDRTVkRuVEY2S3p1?=
- =?utf-8?B?VnpRY2VxUE9pbXh0UkcxRFNGZ1lLakczSHUzdElienB2UHBGaEVoL2Z3NGZv?=
- =?utf-8?B?Ym5EZDhJdUlYWnJwOXBQUTBObHhtZUY4TEtQUzBwOXRlN2hpM2hxdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30e9e7ce-fa66-45bb-3713-08ded1316a4b
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2026 14:12:10.2467 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Xo+/2yfryUDzvmRekvlEfbMVmKuS+HKOrx73rV0C7CZcOdpzxja3YIuyAUwkjrMllHq51ziEbdZLpNETF53mKaXW5p8dcA8TlQv+gNTIFTg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10471
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,49 +144,54 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
-
-On 6/23/26 3:22 PM, Neil Armstrong wrote:
-> The U-Boot Mailing-list is moving to the lists.u-boot-project.org
-> domain, so fix all the links in comments still referencing the
-> list.denx.de domain to the new domain.
+On 6/23/26 16:12, Quentin Schulz wrote:
+> Hi Neil,
 > 
-> The URLs were manually updated since the mailman links don't
-> match anymore after the archive import in the new mailman instance.
+> On 6/23/26 3:22 PM, Neil Armstrong wrote:
+>> The U-Boot Mailing-list is moving to the lists.u-boot-project.org
+>> domain, so fix all the links in comments still referencing the
+>> list.denx.de domain to the new domain.
+>>
+>> The URLs were manually updated since the mailman links don't
+>> match anymore after the archive import in the new mailman instance.
+>>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   arch/powerpc/config.mk           | 2 +-
+>>   board/boundary/nitrogen6x/README | 2 +-
+>>   lib/efi_selftest/efi_selftest.c  | 2 +-
+>>   tools/rkcommon.c                 | 4 ++--
+>>   4 files changed, 5 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
+>> index 6e30df6504e..26fcdc4e884 100644
+>> --- a/arch/powerpc/config.mk
+>> +++ b/arch/powerpc/config.mk
+>> @@ -32,7 +32,7 @@ archprepare: checkgcc4
+>>   # GCC 3.x is reported to have problems generating the type of relocation
+>>   # that U-Boot wants.
+>> -# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
+>> +# See http://lists.u-boot-project.org/pipermail/u-boot/2012-September/135156.html
 > 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->   arch/powerpc/config.mk           | 2 +-
->   board/boundary/nitrogen6x/README | 2 +-
->   lib/efi_selftest/efi_selftest.c  | 2 +-
->   tools/rkcommon.c                 | 4 ++--
->   4 files changed, 5 insertions(+), 5 deletions(-)
+> Sorry for the mangled URLs, it's changed company-wide at the server-level so nothing I can do about it. We went from "please don't click on any suspicious link because security" to "click on this very long and incomprehensible link wink wink", I'll never understand.....
 > 
-> diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
-> index 6e30df6504e..26fcdc4e884 100644
-> --- a/arch/powerpc/config.mk
-> +++ b/arch/powerpc/config.mk
-> @@ -32,7 +32,7 @@ archprepare: checkgcc4
->   
->   # GCC 3.x is reported to have problems generating the type of relocation
->   # that U-Boot wants.
-> -# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
-> +# See http://lists.u-boot-project.org/pipermail/u-boot/2012-September/135156.html
+> In any case, wrong link. You want: https://lore.kernel.org/u-boot/1348500648.2514.2.camel@petert/ or https://lists.u-boot-project.org/pipermail/u-boot/2012-September/134737.html if you want to stay on our archives.
 
-Sorry for the mangled URLs, it's changed company-wide at the 
-server-level so nothing I can do about it. We went from "please don't 
-click on any suspicious link because security" to "click on this very 
-long and incomprehensible link wink wink", I'll never understand.....
+I think we should move the links of the mailman archive since they can possibly change if we re-import or migrate
+to a new mailing list server.
 
-In any case, wrong link. You want: 
-https://lore.kernel.org/u-boot/1348500648.2514.2.camel@petert/ or 
-https://lists.u-boot-project.org/pipermail/u-boot/2012-September/134737.html 
-if you want to stay on our archives.
+So my best would be to switch to https://patch.msgid.link/ with the message-ids, I'll try to cook that but since
+the mailman interface doesn't provide the message-id it takes some time...
 
-Cheers,
-Quentin
+Neil
+
+> 
+> Cheers,
+> Quentin
+
