@@ -4,113 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF5BDCDB471
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 17:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BB5CD98F2
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 17:45:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D48E6849C5;
-	Tue, 23 Jun 2026 19:44:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3174C849EB;
+	Tue, 23 Jun 2026 19:44:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nJVwIRsy";
+	dkim=fail reason="signature verification failed" (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gnjtxjdU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A985849F0; Tue, 23 Jun 2026 16:50:03 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 574FF849E5; Tue, 23 Jun 2026 17:42:32 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0323849E5
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:50:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 594DE849BF
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 17:42:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-693c51a8a19so8981226a12.3
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:50:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782226200; cv=none;
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id ECC123F584
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 15:42:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1782229349;
+ bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=gnjtxjdUP+HAYXI/Y7H9AaNLufSAKmnJXsb6KjYVkK8NfEqLh3wyeX9D3XeFdf3UC
+ b1o02HMt5gcqP58sTe/4JsbpSbExakBrn+32kJYEuVPUAfxCEXow6xxbw2hxsPQUlx
+ j5gdgB+B0/UUBvgqeLcPNtF0Clah+/tMWSBhGNz6VS7cp+iD2Kqf+47eqKJeZJxKMw
+ EWqJ72tV2KU0KOmiR5HlltHQievYs7r/2btasLXTPHTe+385RsC25L8cOJBE1Kml4N
+ 8Stxbfvf9gWgT77pI+zhClcj8VjkyrH03OSV61auV9cc2niKVH9PiAIAM7pvKwC6Bj
+ GHP90Tvya8NMVR/Q0XlX1WW0bu/L2MgznfoL71iDZGPK/XPqAmU5SboZHzqGn2pULx
+ QvaDDRGMmihzThD54xAPCWFsw0OvdUJIAnvewuIFkPcmeUt8LhgAewI7IZJQC6O1xx
+ SJ6DcPcTYDzQeWdl+eetWVbHlLipyl4gJ6ddnHZv/a10LhmPZ4U6wljmqkkcTuOMTM
+ f7U/EK/QOZrm/BKL7CUsOBPnbdlxPi7aRIn0CUu7jHbP5fqmSSY6H8taP/YsWHrMZE
+ jv5Psso9QWvH69WRM6iC4Nj0P6vCOBz005Jz6xFzAmfOgi4qWUAO5HxWMdlMCucPri
+ s1WUS5gR0tFtTb+11XApemL8=
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-695c0775f8aso7180522a12.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 08:42:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782229349; cv=none;
  d=google.com; s=arc-20240605;
- b=lY5Yg8Z8MxbAMF/4FoFmOxTXM1vqfqcMjr9qbR+ckmqJjkR/MCtEdKRtejWEq5kR0r
- fBgegamHqdOSIaD6rtV+9ENIt00a51eq0V3LTFiN1e3A3enqnKjgAM+vZ1GZRAJzeaxj
- 784Y5ZQ5RB1p8JlQti1eTqnnV1EG+rzC+g7H85ct7PCHQiyZkIVaemJ3fU3aAmzLQ84i
- Ip8RdPsMAnMr8Zbj93Q9GSl2oU81QQpogCIPWfCf9Cn2U5UDx5HLsfPvzY5JX84C1ifu
- wrIkVqP4UECBrKb1ZH6oa2k0y7tUaHtzIYIoovXf0fzLe+F8JxsRLWxwtkdy/sC8heI3
- FSSg==
+ b=W14gAUU6J96pxbUctbzuLrmnup8FWv0nxyfVtVqh84HD2YCDTp6a1HmiwBTsQCSKU1
+ qXJSFQ8deAoPcJNolr28bA0lguVZnp/O3Tk4iy2SKgS25L8cfIMSvgAFPwIeH/jmBGX6
+ 0c/8L8go6Q5on3pUBatQ6Lxfch2sxRZvrkaGPy0GuMuVLfNyzb4AtEN/hv9We4WDWuBR
+ HmJ5es+UGwPrSmqRouOnEWQW1dzZQsYLXKV0qZloqYugJ8FKVZ+rHaQpfMbo/qkSj563
+ 7i3c7CUfhRGtaujaMoYv09vzAp5Y2u5YEikkVfPpS6j2w7jwPRPc8Ih1nMpt9TdPJFMn
+ kT9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=NO3F3n9p/0o+F60JLE3tMFWZ6tz6fJjZOdWh8u0PeE0=;
- fh=lcAyxsZ9JwtEGqPTrhtQVLZl2EY6xbKqEJeupciMXR4=;
- b=kSca0gJ0V26DIxxLizhaoV2wJJ6mkjQh2F1BPMMoB82CVbCu3viWQhMZvnPXfBr7Tc
- 9LhUj+SHqUW4lhqTeSMtzGCRSA3QYm992MGnIPzxvqxetcFkbMNeifMUU/tXxby9NLt9
- f+28cgRsYkUqobi7M4XhDXt+3wqN/5ejL5YyPhmiMPWv8sHd+8ohaxCWfPc0hti55IWJ
- fbfrXz4BlsGOFUwlupVTpPRAyCiclzLRd2gDRanYM2cacO6kXedu6XiEahbupGpWvjVO
- 7F71aoftYto+SYs4tImKeuNK8UF0TwKFyndK42IZcU2Kn2Jc8Z6pVhTCltuYBsWjWlQU
- EntQ==; darn=lists.denx.de
+ :in-reply-to:references:mime-version;
+ bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
+ fh=RdGkvKMvuRusWJvZUna/mKxw9cwzaobPq8+52GVNl1g=;
+ b=KoJLf3s1N6YS0rNTE1lCeJBu3OPVQqlOOfW5IpGpa3CCBsf4IeDwRI57PaAoyn/Se2
+ WwyESoQvwp5ePK0r2rKqxCJ5IoYYzgvOJ0DITpu6BovZYr0eSWxyGHVFOwOCehpP1sbn
+ 7wEZo/iVS1SkvXeXIqaCqru11IytSXMWmJ4a57p6Q3z4SxRVy2zNMB66IS0Nkrz+yEe6
+ U+lMik1tx0yM/OJZzik8N35eIwUlj9fD5KDUYAt72HvGx74JyZxxyeN0rxX5jtNZHR0e
+ ochoj+bWU3ymbhtq3SOc4DPGCEMjy6dwSO/Q2KJW1Dt2oPDx1oA7nSfSVzc/4P3gMNlJ
+ YsaA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782226200; x=1782831000; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NO3F3n9p/0o+F60JLE3tMFWZ6tz6fJjZOdWh8u0PeE0=;
- b=nJVwIRsypg8o7jEFXSCTcauy+TRpfoaWR7QGBBjURbb7IaKLjBa2lrpbaZPxj38kKw
- HixaWfVPlavTfi5JmBOLReHenRfcYAkR+6bblQVH+AJyN96u+uXZqh6V5GwpcIKXzA8M
- dfCqUFcJHwOimZ1LUutAbymU17jzubJjp5hF4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782226200; x=1782831000;
+ d=1e100.net; s=20251104; t=1782229349; x=1782834149;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NO3F3n9p/0o+F60JLE3tMFWZ6tz6fJjZOdWh8u0PeE0=;
- b=iwOkxKRuS+GXHzGmhweP/F8mUpxiUMyPbc706vnbCZLm5KUcigw4cFhDYR2oz1MshC
- AESW9NH8XCK12nv1yJZRziwmt7gc/0bVmHOkw/LHy5EYA2cawgGKzHNAzRsVSXVaebne
- zu6qnHtc7zWacJ6NpXYXXxGj51b9M6uMPgWSrqqbvrj5clzHwS+beLCviutRomStGLm6
- KIQftlxHNBKs4/yIe+lin/rrwHwjDRpOF7DNqvkbueqKoxjr0KyLCIIiRVe9wJQXFXnR
- epT3e4IltmxYgC5Pt80wLTi0Mt8GV8rCKYzKcGUe4nw5MSeKMWsyprykWi2FdiEeYUpO
- F3/w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9pmG/OLIZqcw9WH/jvWK6MWejd5TqxbO/mAQKQpJmTSXQzVKW70D+o8HLMViY+0kqiOs0bGN0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4PNjCHOSp9VUaAllBjECGW0VrMtmRx0dg6wla5fS7L1pzVtZI
- wupBdfAcd/XWUwuCa44EkSxAljqKGppCFVvihoyO5S0HGWTcZb9+HfJliBNgdL6jUBmhkkkVgsx
- JH4bJLhtg5+FAS7kgyZvpMnI7soQWBUotLYZBalAv
-X-Gm-Gg: AfdE7clZo52ireL4fAsb2+EeFE1VL3QHtJa68yiQTP+QikbMci8vxQoNCvyEOBsXEi2
- 1MNFea6uRSmoJVmsZ0WzF5u8rrjEY0LH902DlPpTzSOKTJkQpDEnNDuLAuiHjqgkFKGbZYdr0HX
- u66zDghEcmOq5kT2sbTtrpCUzm0a76wgL+CoWoJygrKNixVlqXubDr5ygwaO2rOR5ezkWDtJPNN
- M4I1dhY0J2k7I+8QkwL1CnGeAlWoHG+PkLD5c7vAz0jIbAPRDAerOBzOT6EE3TSQSI97FkH2gcT
- nv50sJvg
-X-Received: by 2002:a05:6402:5413:b0:695:bb9d:62ec with SMTP id
- 4fb4d7f45d1cf-697dbad391amr1777932a12.18.1782226200139; Tue, 23 Jun 2026
- 07:50:00 -0700 (PDT)
+ bh=00Ima/pLjBVZ79euCybcE/qS+fJJY3n+ya7J/PXl7Sw=;
+ b=JDWIXBXLAjvcyJ7yQqoL0VoPCAXDPQd2JVjthwU2x/ja3wzdq3gYMtLZl7/EGtqOc0
+ Ua+4gyZYOjS2+uDrmbp4Yc7EWq7H6hYEu2E3iy5Y0NiCCPOSazlii+82BVcS0No9WIRn
+ 2HRZqaNW1ftSVOOD70JUbxz6xJ2ydJ9mMxM40UGNM7YulqjSZ/ko5Wx88o//igI8TKTO
+ 7oyha2z5tIwD6kpbBqeS0NU3HVBmRnXlOngbO+pSSjYba8HIsWCae3LkDbPPH68HLclE
+ j3O1vvGis7kSI8PV0EkshzAtBRZXx/q8WJXk9BnEOPfAta8oQpRPaROw6uM9zup3f4EP
+ bOTA==
+X-Gm-Message-State: AOJu0Yw3mN3sa2xr8Q1kZoNl7XpFpbYkxsBCiJwtJSGhTshlevquUWeQ
+ DASiZn/sWap2prLLcv2+VlyZYiU04IE0SnZ1DIp+GZI3kz2/pCLv/yNc1ByICwzu3xa8Uxf66Ix
+ 79Z47ZhXVTYIn2AtD5Y1CnjcJb8mXB91ZSJmJZA/qflfYKedke5BRdJOxtxn0j6ChiM9yz3JlpY
+ w794e9WKePIcT6ohQOVmm1wq3J8t/20e9BUsGC5fvotij4Fg==
+X-Gm-Gg: AfdE7cl/zkkItzX3geCvT+vVuYc3A0liIt2v6Ih/dRy8LIlQKUOHLtDvEm2vblnWSqp
+ P+UHGMQ8hxG9bvdgJmnqYwLWwmSY4uobGQKNRaBfr+MnAJUUlnEqEqorMuGOwH1Vhd2WaKU2BsI
+ rwTJm49sdiucmRiOr8VnJ4mEU+W5GZm7tD+1Dse1FRdBNrVbffX2QgKDrT1ry2w6Z7Hag=
+X-Received: by 2002:a05:6402:5203:b0:68d:d511:4a9f with SMTP id
+ 4fb4d7f45d1cf-6970f7bb394mr12887973a12.18.1782229349619; 
+ Tue, 23 Jun 2026 08:42:29 -0700 (PDT)
+X-Received: by 2002:a05:6402:5203:b0:68d:d511:4a9f with SMTP id
+ 4fb4d7f45d1cf-6970f7bb394mr12887955a12.18.1782229349196; Tue, 23 Jun 2026
+ 08:42:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260604093132.757583-3-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszTivKopo8v0v3yad5HCvSSaDygkQ-u7QJ5QR0WkKsTi-4A@mail.gmail.com>
- <aipOsPHycEvZLuV6@hu-varada-blr.qualcomm.com>
-In-Reply-To: <aipOsPHycEvZLuV6@hu-varada-blr.qualcomm.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Jun 2026 15:49:48 +0100
-X-Gm-Features: AVVi8Cdzh7qvZn04HtjTBsHBQZwN_Wn44rgqmd_I4Xz4UjNjtti6L-btpRZ3oY4
-Message-ID: <CAFLszTjOUPXM6APT3W1XQF9YxbSKUwxz4E6NPqHjpZ7fCDPdUQ@mail.gmail.com>
-Subject: Re: [PATCH v4 02/13] binman: qcom: Add type definitions for Qualcomm
- binaries
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, 
- alpernebiyasak@gmail.com, tien.fong.chee@altera.com, anshuld@ti.com, 
- alif.zakuan.yuslaimi@altera.com, afd@ti.com, marek.vasut+renesas@mailbox.org, 
- tingting.meng@altera.com, alice.guo@nxp.com, quentin.schulz@cherry.de, 
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, mkorpershoek@kernel.org, 
- andre.przywara@arm.com, h-salunke@ti.com, alchark@gmail.com, 
- dinesh.maniyam@altera.com, luca.weiss@fairphone.com, 
- balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com, 
- danila@jiaxyga.com, n-francis@ti.com, ycliang@andestech.com, 
- mateuslima.ti@gmail.com, justin@tidylabs.net, jamie.gibbons@microchip.com, 
- david.wronek@mainlining.org, james.hilliard1@gmail.com, 
- bdklingerman@gmail.com, sughosh.ganu@arm.com, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
+References: <20260621143938.2863-1-aristo.chen@canonical.com>
+ <CAFLszTjaFQL2jbAdn=E44iz1OHN=1PDEne9m+nwvRMHWA3y+bQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjaFQL2jbAdn=E44iz1OHN=1PDEne9m+nwvRMHWA3y+bQ@mail.gmail.com>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Tue, 23 Jun 2026 23:42:18 +0800
+X-Gm-Features: AVVi8CfgsZgXSwG1uEJ_-RWOUc_-uJ6QsqDjal9awEOewXpgrx-2JjG9OMzWSq8
+Message-ID: <CAA=k7=nqO5N99YvS1rd-d8k_c-fy=ymoHJMGCj6kow6S6+zFWw@mail.gmail.com>
+Subject: Re: [v1,
+ 0/2] vbe: bound FIT external-data reads against the firmware area
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 23 Jun 2026 19:44:54 +0200
@@ -130,64 +129,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+Hi Simon
 
-On Thu, 11 Jun 2026 at 06:59, Varadarajan Narayanan
-<varadarajan.narayanan@oss.qualcomm.com> wrote:
+On Tue, Jun 23, 2026 at 11:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
 >
-> Simon,
+> Hi Aristo,
 >
-> [...]
+> On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
 >
-> > > +    Properties / Entry arguments:
-> > > +        - filename: Filename of u-boot MBN (default 'u-boot.mbn')
-> >
-> > U-Boot (not u-boot)
+> > One open question: should the external-data blk_read() in vbe_read_fit(=
+)
+> > also be deferred until after the phase has been signature-verified,
+> > rather than just bounded?
 >
-> Ok.
->
-> > > +    This is the U-Boot MBN image.
-> >
-> > It is good to have this etype, but please document it properly. We
-> > need to know what MBN stands for, along with a link to the spec, etc.
-> > Also please describe its role in booting.
-> >
-> > Please do the same for the others below too.
->
-> MBN is a Qualcomm=E2=80=91specific signed firmware container that package=
-s
-> executable images (typically ELF) along with metadata such as hash,
-> signature, and certificate chain, enabling the secure boot chain and Root
-> of Trust (RoT) to load and authenticate images.
+> The bounded read is the right first step. Deferring until after
+> verification touches the SPL/TPL/VPL call paths and the bootmeth flow,
+> so that could be done as a separate series.
 
-OK, please add this information to the etype...you should point to the
-file format too.
+Noted, I will prepare a separate patch set after this is merged
 
 >
-> [...]
+> > Patch 2 adds the missing range check ...
 >
-> > > +class Entry_qcom_config(Entry_blob_named_by_arg):
-> > > +    """QC Config ELF
-> >
-> > Does QC Config mean Qualcomm Config? Is this a configuration file? If
-> > so, why is it in elf format?
->
-> Although the QC Config image primarily contains configuration data that
-> could be represented as a raw binary, it is maintained in ELF format to
-> ensure compatibility with Root of Trust (RoT)=E2=80=93based image authent=
-ication
-> during the secure boot process.
->
-> The current implementation aligns with standard verified boot requirement=
-s,
-> however, support for full secure boot is planned for future enablement. I=
-n
-> that context, retaining the ELF format allows the image to be processed a=
-nd
-> signed using the standard Qualcomm image signing infrastructure, ensuring
-> seamless integration with the trusted boot chain.
+> This could use a sandbox test that gives vbe_read_fit() a FIT with an
+> out-of-range data-position or oversized data-size and checks it
+> returns -E2BIG
 
-Hmmm, well probably we just need more docs and pointers to docs.
+I will figure it out and send a V2
 
-Regards,
-Simon
+>
+> Regards,
+> Simon
+
+Best Regards,
+Aristo
