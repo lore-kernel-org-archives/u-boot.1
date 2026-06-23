@@ -4,71 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA72ACDB470
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 04:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74890CDB470
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 04:48:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 114618460E;
-	Wed, 24 Jun 2026 06:47:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id DFF7C8460E;
+	Wed, 24 Jun 2026 06:48:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kudzu.us
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Mkrd5jSa";
+	dkim=pass (2048-bit key; unprotected) header.d=kudzu-us.20251104.gappssmtp.com header.i=@kudzu-us.20251104.gappssmtp.com header.b="pe2eHrIi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A04C84671; Wed, 24 Jun 2026 06:47:14 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7099A849CE; Tue, 23 Jun 2026 21:03:53 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF39980287
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 06:47:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782276424; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=K4OnYxVkzVVT/vUQanJH/mb8Sui4s+WJQGmXQ9GIPD24/bSXXtI+kCK1Otoj4ATRhWXpjicZjQdhDguf9BOy+MeMf5gRPAPYRIEvFVXiXWVnlGUHHC3T2oCjyVamrkG1L56OwHAWa1xynJ3MDdPuKfbM9BbsqFS8CXiiYTTFSkQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782276424;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=44cj+C2Qe2k/Juo7eKK+/Quoz7tpze6s+/LCJ6rVjkc=; 
- b=B0QIgGWxI0iDDwPVlo4BkyhsVjn8QRf19bNyGtCn6vGZOL0rJo483mJnslX8buCNN6xn7fSLk+c8wTgR6VyyYMu3z8Vnu9N8uouwwuNVyeC8VHGL/JWcywMCGjXUzRJ43cWbxZkazTSaCtc28vXnyXPmB0Ep2iFSeDQTwkEKSUE=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782276424; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=44cj+C2Qe2k/Juo7eKK+/Quoz7tpze6s+/LCJ6rVjkc=;
- b=Mkrd5jSaEH/1G11Inpr1DfT02aUC8Y34i5ojg0SRvWiPjkkqO6UqN6lPm0jbnZRn
- BH/tT8z8TQx4tLZQYKxHymyPT+7NSHycnmJIDdhUdgA9xN57GCb70LRwCYVbAC5ZwVM
- BdnzBLJmHldYZdC59h5E7G/7N++GCKyiSfwpCggE=
-Received: by mx.zohomail.com with SMTPS id 1782276421587121.03361146736268;
- Tue, 23 Jun 2026 21:47:01 -0700 (PDT)
-Date: Wed, 24 Jun 2026 04:46:50 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
-Cc: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de,
- uboot@riscstar.com, u-boot-spacemit@groups.io,
- raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
- trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
- jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de,
- randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech,
- neil.armstrong@linaro.org, quentin.schulz@cherry.de,
- samuel@sholland.org, Guodong Xu <guodong@riscstar.com>,
- Scott Bambrough <scott@riscstar.com>
-Subject: Re: [PATCH 2/8] mmc: k1: add sdhci platform driver
-Message-ID: <ajthOhWTPVMIyMfH@pie>
-References: <20260612201901.73657-1-raymondmaoca@gmail.com>
- <20260612201901.73657-3-raymondmaoca@gmail.com>
- <aiz8E_EFaSj9q-Fl@pie>
- <CAH22mJwsH9gPo6xTrX6G+9weAbaV2pk6XGqi=Xshng4XuaNvcg@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 303BC849BF
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 21:03:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=kudzu.us
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=jdmason@kudzu.us
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-44748131f58so789327fac.1
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 12:03:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782241430; cv=none;
+ d=google.com; s=arc-20260327;
+ b=RBqJjZU228+GGMoLTf7JCmPYkD50flCgEtrWAQQe0jsOdJ9yv9tssmgPOE1uqlsjty
+ Hc5Klc3HCBo3y3n9RNB35YXjNNGT8d1J6Sx6QYC503p7JOzmDWu0KtIMRgupfmB8X0AJ
+ hIXPpGUt3PkpGdXfgikRswX9RhRv5Zt5V9SWK33rGW4lVk7idG1cu2TXV4jeWn0IAjm9
+ dtVInLG73wUQpKYmULl/TkHDjnBTtt8eprAY3qpg5y0OWS03TAkj1FRa67hk2M1fqZ+O
+ BkfkAYQW6mWIc4eHm2Ic+lEYL+usc280rfmQ5zvoinb9wUalKf8iDOlqFv4Lw6hq1loR
+ prVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=CUq1KRDvZQy2wmHqeKAMiIdfEjL6uH4Tn7M2IrtO5mw=;
+ fh=U/S4rzFgNMUwn8iPYnrtNIJ8B7S5qJ/RAodxROmakPs=;
+ b=iEFYLtgutywcGTAReXNh1LWRK5mcdhXtRrYqoBTST5bg2qTpvUziu7+FfYyDyEBYCG
+ eszH7vPGGRWeXvQHwtLhDlzLZ1/rrTE27336GNdDR3r2mJSwyv5L20W2z1iQPkoUOn6R
+ i5BbPsk4LLUXUKToFG21xa9pTH8bBa3JvN6vlztEidfL+QaGqfjHRvVFts3CnX4H7jSJ
+ RLEK0c2/75jBUpmHTd/IDyvVZTvY56Zyo4eEPlJNDYxtw27bcl6UpqEnbnTiLvWJzGZ+
+ e8qoTfBTixcZqdLD3ylIOXu2yN+rSLy6han/Cp4XQrX7Dl7tgd45hortyFEqYbRcCQeL
+ OQfQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kudzu-us.20251104.gappssmtp.com; s=20251104; t=1782241430; x=1782846230;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CUq1KRDvZQy2wmHqeKAMiIdfEjL6uH4Tn7M2IrtO5mw=;
+ b=pe2eHrIinGMge/GHGbl77Eq7mPevgmu4T8fwoHgn8dJxt8tBOEttwF4GVRD6IwvXJv
+ e7JM1cQhh6mxHDLL73bxI1cgyGMFTGlORb1d85fBYlKmALZ/GTSPz70yxCjyFy+Lucar
+ O02/NMTCDZyODWdALHH0aVJwGwSODsjdY0V9TPjInhlsvuhUKvjdNhxIJXIh8jli6uFI
+ kwgWBzd6MNMmzB2Sxb/nJCFQk+HAnCwRzYfGXbVk9LcSF/gDw++PI7y4OY/IeMo70OUQ
+ ibJ+FWGDnLOsO9urRn+HT5He2gAG274iXIH+oK2KNl3VuFh38qv5Giu8mlZbSGWFfzLX
+ gnzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782241430; x=1782846230;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=CUq1KRDvZQy2wmHqeKAMiIdfEjL6uH4Tn7M2IrtO5mw=;
+ b=knFoZxEKL9L/IfQGPBDMFQGRpkM3+IKKtwuHWHc3yARJOmkp3Sqc3n0jRJ+SvUtBoR
+ B7NexM8jLGkDqMsEQhM9VK1C06Rw9SJRFhkEljnhtjPsWgKkcOhL3quKkashkJfdPq9y
+ adVLtoOJwYJc40+HbJbGaIDtUa6KlGFqAFETYJ4oHNyu1TjL4zisT1ARX7hn7KKA3Jeh
+ wKB6TRBcePoRr6OO8zNYMGesYRKwj7Omn9fKHd2iA3xt3dHflfRskUFtnBEdq8qvQiWL
+ ALHK0vOOa/dmcW6XX92MVfwe6iF/DJN+cW8f7EP/J/XKCqyx3NxJQB8URnfiSnK3bavf
+ ZhrQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8zUpJL9LzhP6YYAKPdrfLZEidMx155A+gES99l0fJZuUDwYJxrEswwe0Wcfp9usm5RvFDIYG0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwmvMOrkSPHMIa5xM2HYMyf+FdPAbv5s4OW/40XKzBGhvldRpRn
+ u8cPmT4N5JEZVZQOxBMZjEVNOZ/KkxtQy95YMyipX5wXhvfHuJafaABENzzC1RT2IKVvhOO/bUV
+ BsDD0GJLbh1R1dEguqRHRlSjSuOL7blnAEdSbh7AF
+X-Gm-Gg: AfdE7clO7kiC+ksEiUfiD01u4HACK42G/1NTsO82kCo6sSN2ArZ2v+Sw2i8dphMToeO
+ y50PCUF7shBshOCEpGeOd3H+6jf7vZHLJBPFXl7vf4f8Yz+vhDza9YUmAhx00auJP1/61K51exg
+ 3+p+Wydz029C41ix/1LKhFe7DfAtYpuK/MqQ3wNyqZt+1U/ZxECDM/VjOFTG3mCeEG/1Q6mNEHf
+ 9N/Y6PO40kzZQQIAJIf+utoo9J+795yL4qWdcMfItmbL80Y93KJrxFnOXhhDNo/AmEtKnqM
+X-Received: by 2002:a05:6808:e58b:b0:48f:46fe:ebd1 with SMTP id
+ 5614622812f47-48f46ff1cf5mr1471137b6e.9.1782241429660; Tue, 23 Jun 2026
+ 12:03:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH22mJwsH9gPo6xTrX6G+9weAbaV2pk6XGqi=Xshng4XuaNvcg@mail.gmail.com>
-X-ZohoMailClient: External
+References: <20260619155857.9665-1-jon.mason@arm.com>
+ <FC600559-0FE9-4EA3-B047-F69CEAB64795@gmx.de>
+In-Reply-To: <FC600559-0FE9-4EA3-B047-F69CEAB64795@gmx.de>
+From: Jon Mason <jdmason@kudzu.us>
+Date: Tue, 23 Jun 2026 15:03:38 -0400
+X-Gm-Features: AVVi8CezvL-NrD3fbtQMNNAJnsmmvYBNw8qCYVcJmVt1w-uore9deZQkgxCc234
+Message-ID: <CAPoiz9zGJuhZjGgWTV1dz1mh9KET6zBaL62LB4upooUSNYyj5g@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: move efi_var_seed.o to objtree
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jon Mason <jon.mason@arm.com>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 24 Jun 2026 06:48:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,78 +117,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 24, 2026 at 10:23:35AM +0800, Eric Chung wrote:
-> On Sat, Jun 13, 2026 at 2:44 PM 'Yao Zi' via uboot <uboot@riscstar.com> wrote:
-> >
-> > On Fri, Jun 12, 2026 at 04:18:55PM -0400, Raymond Mao wrote:
-> > > From: Guodong Xu <guodong@riscstar.com>
-> > >
-> > > Add SDHCI platform driver support for SpacemiT K1 SoC. This driver
-> > > implements the necessary platform-specific operations for the SDHCI
-> > > controller, enabling MMC/SD card functionality on K1-based platforms.
-> >
-> > Is there any reason not to re-use Linux-side K1 MMC driver,
-> > sdhci-of-k1.c, and its companion ABI? Since Linux commit e9cb83c10071
-> > (mmc: sdhci-of-k1: add comprehensive SDR tuning support, 2026-05-11)
-> > it is now capable of operating on SD cards, too.
-> >
-> Excuse me. Is there any ABI breakage in this SD/eMMC device?
+On Fri, Jun 19, 2026 at 12:46=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+>
+> Am 19. Juni 2026 17:58:57 MESZ schrieb Jon Mason <jon.mason@arm.com>:
+> >With commit bd3f9ee679b4d1456d0d3c261ab76788950e6096
+> >(kbuild: Bump the build system to 6.1), there is an issue when trying to
+> >build out of tree, where efi_var_seed.S wants ubootefi.var to be in the
+> >object tree, but lib/efi_loader/efi_var_seed.o wants ubootefi.var to be
+> >in the source tree.
+>
+> Ubootefi.var is an optional file with the EFI security database. Why woul=
+d you ever put it into the build directory?
 
-Yes, I only take a brief look, and at least the names for pinctrl states
-differ from Linux upstream, as mentioned below.
+I didn't know that was a limitation.
 
-So are there any reasons not to re-use it? This driver has been
-carefully reviewed in Linux side, has the expected ABI, which would
-reduce your work of upstreaming.
+Would you prefer that I make a change like:
+-$(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
++$(obj)/efi_var_seed.o: $(srctree)/lib/efi_loader/$(EFI_VAR_SEED_FILE)
 
-> > > Signed-off-by: Guodong Xu <guodong@riscstar.com>
-> > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> > > ---
-> > >  drivers/mmc/Kconfig          |   7 +
-> > >  drivers/mmc/Makefile         |   1 +
-> > >  drivers/mmc/spacemit_sdhci.c | 934 +++++++++++++++++++++++++++++++++++
-> > >  3 files changed, 942 insertions(+)
-> > >  create mode 100644 drivers/mmc/spacemit_sdhci.c
-> >
-> > ...
-> >
-> > > diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sdhci.c
-> > > new file mode 100644
-> > > index 00000000000..392ca389fa9
-> > > --- /dev/null
-> > > +++ b/drivers/mmc/spacemit_sdhci.c
+This seems to work for my use case, and still keeps it in the src directory=
+.
 
-...
+Thanks,
+Jon
 
-> > > +static void spacemit_sdhci_set_control_reg(struct sdhci_host *host)
-> > > +{
+>
+> Heinrich
+>
 > >
-> > ...
+> >If we change efi_var_seed.o to look in the objtree, then it should work
+> >in both local and out-of-tree.  However, it would require anything
+> >previously working to put ubootefi.vars to the objtree, but it's broken
+> >now anyway.
 > >
-> > > +     /* Set pinctrl state */
-> > > +     if (IS_ENABLED(CONFIG_PINCTRL)) {
-> > > +             if (mmc->clock >= 200000000)
-> > > +                     pinctrl_select_state(mmc->dev, "fast");
-> > > +             else
-> > > +                     pinctrl_select_state(mmc->dev, "default");
-> > > +     }
+> >Signed-off-by: Jon Mason <jon.mason@arm.com>
+> >---
+> > lib/efi_loader/Makefile | 2 +-
+> > 1 file changed, 1 insertion(+), 1 deletion(-)
 > >
-> > This doesn't match Linux side ABI, where when card operates in UHS mode,
-> > pinctrl state "uhs" is selected.
+> >diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> >index f490081f6542..9c836f6ee237 100644
+> >--- a/lib/efi_loader/Makefile
+> >+++ b/lib/efi_loader/Makefile
+> >@@ -74,7 +74,7 @@ obj-$(CONFIG_EFI_ECPT) +=3D efi_conformance.o
+> > obj-$(CONFIG_EFI_DEBUG_SUPPORT) +=3D efi_debug_support.o
 > >
-> OK. Switch to "uhs". By the way, the upstream DTS file hasn't been
-> synced into uboot yet. This is not easy to find.
-
-I'm not sure what do you mean by "not easy to find". You could always
-refer to the dt-bindings maintained by Linux side for ABI description,
-and we want to keep aligned with it in U-Boot side as long as possible
-to reduce maintenance burden and improve interoperability.
-
-> > Regards,
-> > Yao Zi
+> > EFI_VAR_SEED_FILE :=3D $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+> >-$(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+> >+$(obj)/efi_var_seed.o: $(objtree)/$(EFI_VAR_SEED_FILE)
 > >
-> > [1]: https://lore.kernel.org/linux-riscv/aUDwDkd8k_4gD1yc@pie/
-> > [2]: https://lore.kernel.org/linux-riscv/20260108-kx-pinctrl-aib-io-pwr-domain-v2-0-6bcb46146e53@linux.spacemit.com
-
-Regards,
-Yao Zi
+> > ifeq ($(CONFIG_EFI_CAPSULE_AUTHENTICATE),y)
+> > capsule_crt_path=3D($(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE)))
+>
