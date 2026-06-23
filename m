@@ -4,93 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0511BCDB46F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E9FCDB479
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jun 2026 14:50:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48775849F3;
-	Tue, 23 Jun 2026 16:49:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 586E6849ED;
+	Tue, 23 Jun 2026 16:50:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CD7QH45k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T1XLy2l7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35395849F0; Tue, 23 Jun 2026 16:49:51 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 15768849F0; Tue, 23 Jun 2026 16:50:37 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C27E849E5
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:49:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21DD0849E5
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 16:50:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-697edb1bf6eso55669a12.1
- for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:49:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782226189; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-c0b97e268f3so565650466b.1
+ for <u-boot@lists.denx.de>; Tue, 23 Jun 2026 07:50:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782226234; cv=none;
  d=google.com; s=arc-20240605;
- b=jEwQhd2SeEVkoUCcnwlMXzghA3asgKduRufT7aGvoON9u8CpF9WtSTsWL5aX8Jka3j
- QrIHPd+q8U6W7xT+nRVpaUYrQH8NPRYn8ciB4ssmgMx3fhyCppLghbUWVNqIyTD4WP0D
- Vsk72cVozYJuZZk9qvhbAIN6Jfw10ZA7lXHIaPhooBkJ1J59+IVtjvTqSgXk89K1MODX
- 0ZQsSQVsB37ONZs94QUlFGTSD8ogEnRMU+C7ngukPTWRcTHAMVh5fUe74UOtT2eToTX6
- yd6sJ1ncAXVDk5cT+iE6RW85F7E+Be3knBYtXSXGiDkiYdFWILVMO5HSVbmtDId7An6L
- huUw==
+ b=BSp8rKWdS4EYfvAAY9cGdrkOrp6Dn/wgZ+IKC0d1OZdhflvvgb3VHcfqpMoXu1TxXf
+ s9JEjh0MlcGvkuJn2ia5t93ULKeaWG4jNP9FV9wVmIb5REcIUoex2TZN3t/Kv2mjnC1n
+ 9AKrpy7z1Uivu6j3PnJGYMzxHd8G0awrL+jtsEdILyODiAuwsJhogYXhEs2g7lKSWj5g
+ wZxARlUBY6sRnfQldHwDnX3aFu0pZDVsAfyJV16cKwFfrzR2VVIyK2MOrSNCUJPCnqci
+ xoq0JNHarCxoqstifyW1U6ieV8Jj99znp8LVb1jYKXOEj2uUD8xb64tEwiwdA8UxG70h
+ 762A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=fb4ub1DQmWoF2yf27p11i3DIH7KPN8EzWBqyGoh3cr4=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=EUBCALOs4Eiv4mrIu2J8eej06m3Zaum3Vq2+V/3KBk0EkjoMr/TWJgY7zubb6my1MR
- 6c+1RbwcVCi2bJiIo8PO1Apm+hL0kmG5y+cHZJunphuw/P4PIDpBwVZKRywZSAsZQ5In
- fWA8bK75jqmagYwbc1Mg58T5naAJWNCkbdr+G24p5DIF9Bsij3IWgjWWGYPWnBE3OjYa
- /x1NzfY7Y+8z985mX9P90+AFyOo23hmNR5vO4tC2wGUC6KgIzA58AwAKKrHjvYXVqT/V
- tOVy1s65eglbycU8QtEmlfDd7Hd0Ko+WzcqTfE5OpChFtjP4zoxJqQkSwCyJmp3ktAmI
- rw3g==; darn=lists.denx.de
+ bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
+ fh=rYeNvwZ95QoTu4VTExaF80OtbJOrvs3SV3AkioWYlR8=;
+ b=ha/M1VAzycUDEX9W6DzEwen54ACEh7GsiSJ33DC8rmZtJ9ZlvT6yZR/AqFhSGpF5p0
+ OaxCUye7liQgqj7A9CrAlbJWlqFUkOT49KU/iDk5B2N4xTbUTCF/puri4MnkT4PfMeGl
+ F/wa5LdEm8BL4U0nT+YxBZa9pvviOe1UhY9AePcv3WOajV71WRjqGYiw6BgQWyJueSGJ
+ H8/fzU58Y5aza+bct1y5Mtiae8IujwV/COht95j3Rbbz23xhQHufDAKM1aLsGhfo8KVC
+ zNYJ2P4nkGZRyh9Aea/MocSVyjC7vFsugGHgMqvx682gV3ciM2/oRTg4GOniRKBNpf3J
+ 9BBw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782226189; x=1782830989; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782226234; x=1782831034; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fb4ub1DQmWoF2yf27p11i3DIH7KPN8EzWBqyGoh3cr4=;
- b=CD7QH45kKPZnp0yXCu/Ba7n3ZnMHsSnDmcAwWMz2QTF9VYar6HcR/4EaDsNgxFeG7o
- DdCSa3BDIS9hKL3mOkV49V3oRCT0sEuBZk3gqo9MxlZfB2QKmsfgR6/8GJrsr7ciiFIW
- UYXW5roHnFq9pZzQ35Dd7j9m8+Vf+cF31p6Uw=
+ bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
+ b=T1XLy2l7ruXKnswuJxMVy7MulY6c5Omkb/LJNdXUd2Pp9mN0pcuFs5oDI+UOCmT6WS
+ +6LmGjzN2DO60K8wsTlXpqOVSh+dhf+5n66WS/9I5LT37IgkzYa3NyfqWf0QiinaHSht
+ qkqtRtG5KWr5iTPA/FBUkpq7so+DRIzjld33Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782226189; x=1782830989;
+ d=1e100.net; s=20251104; t=1782226234; x=1782831034;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fb4ub1DQmWoF2yf27p11i3DIH7KPN8EzWBqyGoh3cr4=;
- b=k/sTylp/dlHXO9ayb9ilKUJ4oqHdz94rZJRelGS+DIHiIkSa1Z/DYC56alxFABreAU
- cxt86paqYHHF3iucF6WkFjDzk5fg/+NiYmABwOEbBJ3vL1Y7vmX77EbemGVHihCJpHun
- XLkzlnJ3lDdcF5UE/GShBorYlsVQqSO5GVL3+9/1XztGCLqcQyPAvhEyJa35hxYsXahr
- JonvtQZxggIrvFPFqSfDZP1TftsjfQ7JpfpOUMzKpZKyyZ70YlcSWI8mLSRnuXhA72wP
- iNxoOt1p+ZgilhTbnYKy0Azpm3SihAaEEnynaWwPU/ur6Q6zbVMFCfi7T4B5vwjn2dr5
- RTWQ==
-X-Gm-Message-State: AOJu0Yw81/xH8uRuiJmLtTJ0LdBalvR29gSfou+ODvmmttwTMoeI3j3A
- 3X4Ep0KzPXmmT4xkszb+jcAS4B/C8xJkY3B0gbyAb6jzwilt8OQYVA3jQVtHv+5ZaWGKHDYhEyp
- EusQvYJ2WbsZHs8G77rOs974YRO4/6OysUBckrHcQ
-X-Gm-Gg: AfdE7cltfEEw4uxxxy7y4M4RCWE7ksJvHUA2U1JwNJ++GUbwPeln+gsFtMNJRvuI2J0
- wkljyYt7K24m+L8Uwc++RKbTNTWh2PqnArzcSEnXA/qWsG5g12qsgI7X3lutkQE7j+T+imkgjiP
- EwNfOBnUkOQhuSbntiHxjXiepIiLZ9PKdEapJ2bGAZVTLSgs8f40SC3ymcwQTjLHOG1D7P3GBU/
- q2U29GAK4ZcI8GgA1g+ljuKhygk7ROEVw5OI57ZhWbVzJ/IF7Cznn/8UFfCOzz9caKCTne51w==
-X-Received: by 2002:a05:6402:541b:b0:695:ec53:976f with SMTP id
- 4fb4d7f45d1cf-697dbb0b6f2mr1513450a12.10.1782226188663; Tue, 23 Jun 2026
- 07:49:48 -0700 (PDT)
+ bh=BfI9//pBvrCr+2wfCgd3RcO76dLV1XVbjSCKzzk6bDY=;
+ b=ozw4aKq1Q1xcSiqGas8DoKk1Nk17gYXTIfOc3HxmHW1X0Bkpllqa7tXBXhLTnfN9q/
+ vKc/hORdHyikG9vh9q8efvsvuLlpYv5fLgtVMoMrgpcndIEOSXfh2xq6lDpyoVbh3aL2
+ +PeqHthdi+2uQ7i3QnwPw0dypLDR9kPEY9APCWYInyAF9V3OEml7qcQUmCFx1X7Q8jCl
+ L72igjlMnwjioEh49XrjfMNqF6n31K45e3dJS3YMfUpgn54Ph4PtruMai8yQWskoD9AK
+ Jy0mVMhSl5OHRrCPnz6AyyO0O3o7n73c3BVep01MqIMlx+nBLFkQ5V3Wv8PuHRF7mA/Q
+ C6UA==
+X-Gm-Message-State: AOJu0Yw03kF+/njFBwfSiaqM/5w1wbhIgPP+Nwoo8frecEZIPnQCG8qA
+ j45PJRsrssJ0wDktpPqSz8HlY0UjRhV7g2G4ysI8A8QVdDvj2K8632t9lIBkKz0Tsmm5wAXouwK
+ OsA6KDfsJXbiZuqCi+3HA0RS7fVR16tZIMDbWrGJt
+X-Gm-Gg: AfdE7cnfxgyyJft1pv3Ze/ZpTpx8O6gIbJ54S4U2w94lFuzOJxMKbNW0jaTbO1trS1R
+ aRSQ1eOSAiw5aVuvWInNwYXsmoUkpsal5RpM9ZS4PAux4oFq1RjDOWlZ7SBZEDBMzO+W2kwE9vB
+ iXL/vgdpvk6sBRI1f/hiavHZZmo9yPfo9X4YSxyzXRiA+kGI2cpcVZy30OyYzooacqYoEKK54VC
+ 6XDxC88XESxpcaQ3hWn4CccorbcQaOBNIpBncFG/grQXH2OUTFFFd4jDW61EtkTCiqKceIS3Q==
+X-Received: by 2002:a17:906:6184:b0:c0d:4971:2eed with SMTP id
+ a640c23a62f3a-c108fdd6614mr150887366b.33.1782226234433; Tue, 23 Jun 2026
+ 07:50:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260623014930.2741494-1-dmukhin@ford.com>
- <20260623014930.2741494-3-dmukhin@ford.com>
-In-Reply-To: <20260623014930.2741494-3-dmukhin@ford.com>
+References: <20260621143938.2863-1-aristo.chen@canonical.com>
+ <20260621143938.2863-2-aristo.chen@canonical.com>
+In-Reply-To: <20260621143938.2863-2-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Jun 2026 15:49:36 +0100
-X-Gm-Features: AVVi8CfV0pnbAfOWL9rHi407cGpQy7XJtfbKWEnWtT7zydoKl51TJGdWBDgYyMo
-Message-ID: <CAFLszThk7mWg+7LrVcN9xY5owrpUwhCTLdf=XHi0K-M-uPKzXg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/2] test: bootdev: scan with a broken high-priority
- device
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Date: Tue, 23 Jun 2026 15:50:21 +0100
+X-Gm-Features: AVVi8CclEEDRDOKGNubcGk69R_DEox3Ut8pUjyvzap5jW-mle5mxjA8hD8R89Fg
+Message-ID: <CAFLszTiPpm-15dwp32i9gRj9+wqpEvEhiAF4duH1AzaPH38w2w@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] sandbox: vbe: size firmware1 area to fit the
+ binman fw-update section
+To: aristo.chen@canonical.com
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Heiko Schocher <hs@nabladev.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Martin Schwan <m.schwan@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,76 +115,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
-
-On 2026-06-23T01:49:28, None <dmukhin@ford.com> wrote:
-> test: bootdev: scan with a broken high-priority device
+On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
+> sandbox: vbe: size firmware1 area to fit the binman fw-update section
 >
-> Add bootdev_hunt_fallthrough() test to verify that 'bootflow scan -l'
-> falls back to a lower-priority bootdev when a higher-priority hunter
-> fails.
+> The firmware1 node in test.dts declares area-size = 0xe00000 (14 MiB)
+> but the binman fw-update section in sandbox_vpl.dtsi is 0x2000000
+> (32 MiB) and the FIT inside it carries ~16 MiB of external data
+> (spl + u-boot subimages). The FIT therefore extends past the
+> declared firmware area, contradicting the documented contract of
+> vbe_read_fit() that the FIT must fit within @area_size.
 >
-> Introduce a simple 'sandbox-bootdev' device for the test. The new
-> bootdev can be configured to produce an error at the hunting stage.
+> The mismatch was tolerated because no caller actually bounded the
+> external-data load against area_size. Bring the devicetree in line
+> with the binman section size so the FIT extent stays within the
+> trusted firmware area, in preparation for vbe_read_fit() enforcing
+> that bound.
 >
-> Introduce new host_set_flags_by_label() API and a flags field to
-> 'host_sb_plat' to simulate a bootdev hunter failure for the test.
+> state-offset and version-offset are left as-is; they were already
+> inside the FIT data region and are not exercised by test_vbe_vpl.
 >
-> Adjust boot{dev,flow} tests which depend on bootdev hunters.
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 >
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->
-> drivers/block/Makefile          |  2 +-
->  drivers/block/host-uclass.c     | 15 +++++++++
->  drivers/block/sandbox-bootdev.c | 73 +++++++++++++++++++++++++++++++++++++++++
->  include/sandbox_host.h          | 18 ++++++++++
->  test/boot/bootdev.c             | 23 ++++++-------
->  test/boot/bootflow.c            | 46 ++++++++++++++++++++++++++
->  test/boot/bootstd_common.h      |  5 ++-
->  7 files changed, 169 insertions(+), 13 deletions(-)
+> arch/sandbox/dts/test.dts | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-code-style nits below
-
-> diff --git a/drivers/block/sandbox-bootdev.c b/drivers/block/sandbox-bootdev.c
-> @@ -0,0 +1,73 @@
-> +/**
-> + * sandbox_bootdev_hunt() - Hunt host bootdev.
-> + *
-> + * Note, this hunter exists for bootdev testing to simulate a fail
-> + * mode.  Do not use as an example of a real hunter.
-> + *
-> + * @info: Hunder details.
-> + * @show: Enable extra printouts.
-> + *
-> + * Returns: 0 if OK, -ve on error (expected by the test)
-> + */
-
-Typo: Hunder -> Hunter. Also 'a fail mode' reads better as 'a failure mode'.
-
-> diff --git a/drivers/block/sandbox-bootdev.c b/drivers/block/sandbox-bootdev.c
-> @@ -0,0 +1,73 @@
-> +             if (plat->flags & HOST_FLAG_BROKEN) {
-> +                     ret = -ETIME;
-> +                     log_debug("cannot hunt sandbox device '%s': %d\n",
-> +                                     plat->label, ret);
-> +                     return ret;
-> +             }
-
-Please align the continuation with the character after the open
-parenthesis (tab + spaces) (patman will check this for you)
-
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> @@ -1532,3 +1534,47 @@ static int bootstd_images(struct unit_test_state *uts)
-> +     ut_assert(!(std->hunters_used & BIT(HOST_HUNTER)));
-> +
-> +     /* USB was hunted despite the sandbox hunter failure */
-> +     ut_assert(std->hunters_used & BIT(USB_HUNTER));
-> +     ut_assert_skip_to_line("Bus usb@1: 5 USB Device(s) found");
-
-It might be worth asserting that 'Hunting with: host' appears before
-the USB one, so we know the host hunter was attempted?
-
-Regards,
-Simon
