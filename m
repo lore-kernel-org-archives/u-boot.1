@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B65CDB470
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 04:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60D1ACDB470
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 05:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FA584671;
-	Wed, 24 Jun 2026 06:57:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id 5A9F78460E;
+	Wed, 24 Jun 2026 07:48:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="O2BlcaQu";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VvD+sCAa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA80A848DC; Wed, 24 Jun 2026 06:57:27 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
+ id 9E41384671; Wed, 24 Jun 2026 07:48:29 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCD718460E
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 06:57:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782277038; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=DeVLmihhUm2kxKyvzlXRCZrR/LtZQO0Q599pSgbinIfhSNOJy8qlSKMcyVJLrDkZWH7jHaOi8m9a8+RCV8pI6mRbBGiockwcN3o3XwatVonF2Moe6K4AP5/Fxy0Yqx2IFm4vyBGO/23WsGhvrPSVIFdkL6QiT8WfDiWfYIxXKc0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782277038;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=SAZwtRdlq7/PIRsm0jkqUFyPO42bp3ItrpcA+IobeGE=; 
- b=PCwMWBqL1e+QArhb/iQw6xA5KxCg7SkcRDcVN66gJVpGqKOureF4lP16MmnQRFNrRdtHLGiV+e/dp2ZEJGP7ZdbJKbF6lD9cGMyNB7rKi7VMraMiN6mjQ9fRgCVzul+P6FRsBr6hGpPRkLgwZWQXjeg6pOTDZnyHA2XO91js5XA=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782277038; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=SAZwtRdlq7/PIRsm0jkqUFyPO42bp3ItrpcA+IobeGE=;
- b=O2BlcaQuDd0M771bpAWVqn4P29aivPGujqfRT5fG8+S9ZCKCEzrWQbRiOpB7wQ2/
- AcHFRzJrpd34VdyVp3sGnlY4DwDL+8UlhOwQJbDYE3nx+a2fSXAl2wfKDMif1SaquXl
- r3NWulk2EKsGuCMlTtNZRUg3uobD7gHaxQhF88ds=
-Received: by mx.zohomail.com with SMTPS id 1782277036301181.89180882017126;
- Tue, 23 Jun 2026 21:57:16 -0700 (PDT)
-From: Yao Zi <me@ziyao.cc>
-To: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Leo Liang <ycliang840519@gmail.com>,
- Tim Ouyang <tim609@andestech.com>
-Cc: u-boot@lists.denx.de,
-	Yao Zi <me@ziyao.cc>
-Subject: [PATCH] MAINTAINERS: riscv: Add myself as a reviewer
-Date: Wed, 24 Jun 2026 04:56:49 +0000
-Message-ID: <20260624045648.524454-2-me@ziyao.cc>
-X-Mailer: git-send-email 2.54.0
+ by phobos.denx.de (Postfix) with ESMTPS id 36A6380287
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 07:48:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (dynamic-176-006-031-178.176.6.pool.telefonica.de
+ [176.6.31.178])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1127F3F6AD; 
+ Wed, 24 Jun 2026 05:48:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1782280106;
+ bh=t6sjRCZGL/LnhOW0TMrpqCTa+pKvO4jy+nFmB7cWL8g=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=VvD+sCAaq5xkIx81D1Wjb3aNh+9oJUSK1LQzpLP/vsGj7dmmn9bf8b/FmJtRpK4E2
+ V+tbLKOkiDqDTnNaG326/LcLW18+fw93i7e/EWCZ4GZiFrZwHy9c7GWvzw0+8/Biu4
+ yzUeAWbnO0KbBiTgbtCK4P/bqVFfWei1pjt9wIgTvWSadF8HR3aqDfvPr9zt3qR3BM
+ tZa2vRYnXWVlZkZs4kvWXz3D+F7xp5VhdUj29lFl+tMxKnCyxNwXPkVQOMv9yK4zVw
+ emx0h0qNNW4cpBD/X8Ap9mFzZhNLznFxsWX5IZ2Dvgl99gvLMQ05KVq1XyswOdz94G
+ dzhHzHeKDS2/oAi+acToGgnHZtl1TEi7H7uwEwF/QgxoOOjryJE56ezW3tp158uyJL
+ NlBA2ErOXtrxWrrt3lP3qWA/V5oE0nngQ21cVnPJ9XE6JSpXroq0tGP56T4YBh6Ik7
+ JRduhDtRmMHqeRbZJLFYGP+K0Fr2txhtYfXwVcV0y6YMsqaYD3/XohwTU7Sun5LbC8
+ VC5dbx45pR4zKgbv6OBQj5kPKTcaUalz4OTu08yZaYVlsv19PJwvHnESHhhnMTpv9D
+ BONXwa90pzoo9z0rsqDak/SLL1bZp5/0RrMdS8SC8Vb3hs1/5Agveywh21iGcBd/7Q
+ xhbAjHJRn1FkMzk7mXgJM7TA=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Jon Mason <jon.mason@arm.com>
+Subject: [PATCH 1/1] efi_loader: fix building with
+ CONFIG_EFI_VARIABLES_PRESEED=y
+Date: Wed, 24 Jun 2026 07:48:19 +0200
+Message-ID: <20260624054819.493294-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,25 +77,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself to help review patches for RISC-V port.
+Since commit bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+out-of-tree builds with CONFIG_EFI_VARIABLES_PRESEED=y fail with errors
+like:
 
-Signed-off-by: Yao Zi <me@ziyao.cc>
+    ../lib/efi_loader/efi_var_seed.S:14: Error: file not found:
+    ubootefi.var
+
+For out-of-tree build we cannot use CONFIG_EFI_VAR_SEED_FILE in the
+.incbin statement of file efi_var_seed.S.
+
+* We have to prepend $(srctree) if the path is relative.
+* We must not prepend $(srctree) if the path is absolute.
+
+Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+Reported-by: Jon Mason <jon.mason@arm.com>
+Closes: https://lore.kernel.org/u-boot/CAPoiz9zg4OXgHo5J3WtJHKOEuWOdCDrugWfAt6Z+d71j=+q8oA@mail.gmail.com/T/#mffaca10a9e812d03eceafad59999a02e57258b9a
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ lib/efi_loader/Makefile       | 7 +++++--
+ lib/efi_loader/efi_var_seed.S | 4 +---
+ 2 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 370bcff56c19..85fedd169a9b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1651,6 +1651,7 @@ F:	drivers/mtd/nand/raw/
- RISC-V
- M:	Rick Chen <rick@andestech.com>
- M:	Leo <ycliang@andestech.com>
-+R:	Yao Zi <me@ziyao.cc>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-riscv.git
- F:	arch/riscv/
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index d73ad43951b..567db518a8f 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -74,8 +74,11 @@ obj-$(CONFIG_EFI_SIGNATURE_SUPPORT) += efi_signature.o
+ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+ obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_debug_support.o
+ 
+-EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+-$(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
++TMP_VAR_SEED := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
++EFI_VAR_SEED_FILE := $(if $(filter /% ,$(TMP_VAR_SEED)) \
++  ,$(TMP_VAR_SEED),$(srctree)/$(TMP_VAR_SEED))
++AFLAGS_efi_var_seed.o := -DEFI_VAR_SEED_FILE=\"$(EFI_VAR_SEED_FILE)\"
++$(obj)/efi_var_seed.o: $(EFI_VAR_SEED_FILE)
+ 
+ ifeq ($(CONFIG_EFI_CAPSULE_AUTHENTICATE),y)
+ capsule_crt_path=($(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE)))
+diff --git a/lib/efi_loader/efi_var_seed.S b/lib/efi_loader/efi_var_seed.S
+index e0a40cf46c8..008a505d19e 100644
+--- a/lib/efi_loader/efi_var_seed.S
++++ b/lib/efi_loader/efi_var_seed.S
+@@ -5,13 +5,11 @@
+  * Copyright (c) 2020, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ 
+-#include <config.h>
+-
+ .section .rodata.efi_seed.init,"a"
+ .balign 16
+ .global __efi_var_file_begin
+ __efi_var_file_begin:
+-.incbin CONFIG_EFI_VAR_SEED_FILE
++.incbin EFI_VAR_SEED_FILE
+ .global __efi_var_file_end
+ __efi_var_file_end:
+ .balign 16
 -- 
-2.54.0
+2.53.0
 
