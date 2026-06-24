@@ -4,111 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C386ACDB481
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 14:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8007CDB479
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 14:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4344E8460E;
-	Wed, 24 Jun 2026 16:39:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F1708460E;
+	Wed, 24 Jun 2026 16:45:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OFAFKwNL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i/HGDVJc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 119708460E; Wed, 24 Jun 2026 16:39:48 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id BA5C4847C3; Wed, 24 Jun 2026 16:45:57 +0200 (CEST)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75DF280398
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 16:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0741A80398
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 16:45:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4629051c9d1so761454f8f.2
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 07:39:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-664346e66daso646549d50.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 07:45:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782312354; cv=none;
+ d=google.com; s=arc-20240605;
+ b=CzgLioz//XeQ3Wwb/aKqAPlDfGfEY8kGJpntLU3k0YFmED01jYzZ8Qz4nnw2sD6pMA
+ uhl9BFDEuaMsrANH2JZ1tuoFIMPixZW3vvlocDbwmPnFpelvlILadC49XpbkVYagqfDV
+ 9lr/3fguK9gihQGiQK/5GspWJd6yo+2w+8K1U1eGX2Wy1uB9VcI859uzPMv8gPHKiq5E
+ GQrkrmm9q5j5E1FV7EORvrTX7pSJ9NY4xy2Zoozbwo+Fsog/tcxMZ3O3caUlVDVouA7K
+ dhQtbOesgM4q7yKN150QNwpJBfbeyYPU9A+OZPu43hYeP05UbjdJs/kxq8eS4ZO1CsgB
+ pybA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=OCzSvwaGXMydlrsrLqzqhQ1umkMMGkeCGf7gPFTvlGw=;
+ fh=Wj0+F2iHUAGVlbRmGHl1FASXTe9L+x7n+R9LhGxDZV0=;
+ b=jhfTTMY7BqGuvhSUyJ2ECBISD4Xoq3t80dWfo+P+1B+6zNDfo0byaPJcxDnaakYIxq
+ 4jp6QkUTDG13Y9hQRaDPOFRFOrf2pJKIlAwlRuIOlFRjFRy4AFS1gfNvIkJ9mVUqCq8i
+ R1V+F+4047aybhQh727+s4b96v0N1AXOEU1WczB3cB+yK8eI2K6lUBiIEMOxWZMP19Pf
+ 4KG3BFGv10scSVzMShJ4V3J+AstiLpOqGJMs22avVC0VX2s/S4n0nUgEw5LgdcaZWktd
+ vWtEhm+QQv3xaAdGTXysYlSHQTV+MYxvbx2RsVVhEbDPE2m21DhSrlwVwoBGTKpz8c4E
+ B0AA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782311985; x=1782916785; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hlMFXNryErR3yH5DBObe1aU+Po4eoGJiESXSOZEFhM4=;
- b=OFAFKwNL36dgXkDi5ph59EEx5wE/glxXqCwlf9nGvkEKAdynQ7J3TBOXPFBCTGoh1a
- Q+Xob0EJR3tPuAYAKKXFWMyeeHLfYCtpyp9SfpW6b3rPxYIh5syf2OAoZv45YhaB/+kg
- Qi7K+Ke3hzxtgUmnjjpLNyJv7JvbzqiL+aWxKK9E7tnDsLuXa+iuUM6Laoz2bTObRH/t
- l2X1uE54gfYtx7pnUHsDIc3n8NpGqlQS2MF3tE1mshngFLDY2lSXi797izwq7Qbh7Wbw
- i9XYDoB0hj4PmUjNW1hhxxtn/lgV4qAu2VsfM5mnblg5apx9vgON06Ee0UN1m77ggsoL
- P8MQ==
+ d=linaro.org; s=google; t=1782312354; x=1782917154; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=OCzSvwaGXMydlrsrLqzqhQ1umkMMGkeCGf7gPFTvlGw=;
+ b=i/HGDVJcwt/Ei0kcMHqtWQ74CXY0W8AFW5amNm+QVnpVmgz5l4mdKEoi6tVaTu/nGX
+ 4R7HpeUMdjXHgUkcH5S5QIqUedZvWnaVhfLQ71clrFFoalcRzx71UXYJqFYgHB+xPQP2
+ aYaq0mAbXNYjCD/z0CqxtaYlnpNTy3GPtQhEK3XypmAniZefiTrOT6ijoInjDo0u7jdT
+ TyYaGocGNAEekGmTTjphJ2J0x0nh8SfNeZeAI5h16XKqWzHv/Wnoh0r/Nr9pfRdoTJKp
+ lqFMc4GVeG4qeKFfT0YQfjV0JW7QtT8wI4rb3ScaNw/n/e8Tw4r6yOo1POBKJnkQnCxA
+ aczA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782311985; x=1782916785;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1782312354; x=1782917154;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hlMFXNryErR3yH5DBObe1aU+Po4eoGJiESXSOZEFhM4=;
- b=VPQGSOjOpz4bP6mJ7/mv9TFdrVNzLjnWrQ30/tZgxLNKawEdwSQ9zs1I+I6fy5Szso
- 8k4Sr3ekpFZPLrE6AyDPs9IWKujKbjMuc9aw7m08jC0UegCXYrfRDQY8TbGl+8eIzX8U
- 34dy2OX7fdQMe4ZDeNRFm6URAcQ5/kDHov02yxKYTYOJY+edj97N+ZD4J5AXvMISEL0c
- oWQ0FbrWYkyguA2DJTUq4r4jld8OCJ6ZHtSgTqRv+0Z+ybXDpcxsruyOVPItrpQM7bv3
- YQKRyelu6d0N1VBTKr03nr20s4BkbYgZ7tkfbasbUzEz/pI3IzyjV3Ym9KE39dp75oRQ
- X0Mg==
-X-Gm-Message-State: AOJu0Yxz/dX2g2ZXFGptt6d3nF+SQSZbfx+1R1Wca8J+kSB/FWW4y82R
- JZu1kHKK8dMC2bcTmQP94TDuKpb3AkCvzq4kgI+Ffke3B+VWUL/OtTfYy3ty852LTJE=
-X-Gm-Gg: AfdE7cn1HT948ZhNA/Io4Ow+GsGdcWFKu22HzicphZFEr4dBqYMs4SuW1XWogn6mYvV
- 7rFoK2dQmxjCXyvEcyQ152E6YgChQM5a2tKjosa5a0AobrRGAto/Ky8vH/7fvkVn3RrIieDEVYX
- Bj2b9HjwreCmxuiTmIQ5gukid/lwk0pDkdoIWcNfy+1GTw/ix7oba/ZksUoe6KYvvAo1yCyOarM
- /e8K1q8Lr1W1g2KZHha7QqHg99ZCFBPs+PaJLHUW9EC8k6Ff8xba8DIYWRuOwGpTxILAxQOhyc6
- r/+qIB7Ic0x0/N+1BYmhkyu7fjTah7j/u6FdLGPsTcoWoxoZYF9nRQgpCrjK2llHzr52TpH2q1A
- 34ZUkewMAVGQXq6vNJ3Byv3O3M3xfuJgd3dHunIkdurN6jRMYK2vYRpTXEDg8D1okxB9sNQSl7D
- YwPEDkymKn9XKTcAo94Fb6H6MWm8g=
-X-Received: by 2002:a5d:5d02:0:b0:461:a1c5:8348 with SMTP id
- ffacd0b85a97d-46c0cbecfebmr5752878f8f.42.1782311984638; 
- Wed, 24 Jun 2026 07:39:44 -0700 (PDT)
-Received: from arrakeen-2.home ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46c22b73badsm7392450f8f.33.2026.06.24.07.39.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jun 2026 07:39:44 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 24 Jun 2026 16:39:42 +0200
-Subject: [PATCH] treewide: change email links from mailman to
- patch.msgid.link with message-id
+ bh=OCzSvwaGXMydlrsrLqzqhQ1umkMMGkeCGf7gPFTvlGw=;
+ b=j6fUEa7uPPbj7y9DdWbqOg1TxTbZEDco+fAmzAX04QfcOkWXam9sf1QzR8WoLBL0yr
+ J9ri6K5ugpl+7evOgHJpWHek3ki2FrcoEmZzikewEUC+O8kB+pnbt4ING0O+RN6GBlgf
+ ClzD7S2JXf1BBaZlQ/0dDdSpQvmkvAiWC4u9bySIfJw3TcCy9o/x57fn5g5iQTyuAwW/
+ DMRj0CNx/KIrUYBJ6TEroycCPlSxtZ21G+4HXeQMlOqK90uiwN/8wM8iRtd3hMnvUAAM
+ VCKPKBq7E1+dA1z7SNmUohz+ashYqqi3heBrZyWRKyANqYRq9TK63EkWNoYhvG1i3r8/
+ 1i7Q==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rpa5dWOZEtOHxPZbVtpdy5oYFhSYnhDlS277t/bte0aferbGVWaBRpnfI2k0+SlD/xYt5zcz4s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpX8kaUjzkXWkAGKqK4B8KfCuAUnbQjc9k0tdw3JGjsKZm7qlJ
+ r5cQJaAh/Mm/icOqlyCTiTtMebxltZ3M7xPT/Scf8pMuapxQoOQ1sP/uBmjezwjyeMmTUK9LpEn
+ TiRibqpFlOI8Ods+UQEYJxNHdwQMSbkxjK4r9+XQVHg==
+X-Gm-Gg: AfdE7clVkG0EDmBfUemPYO/MmZCigFLPoeH10W1K/2Uqnt/E4mHPoD77OV/Sw9IVuns
+ WQsa7vexl5KlPINAFcDaAqP8LhCI/WDpadCPDUhRSJfXGisXOGWn/7Zl12YE1UqNwh9V7YR5AuD
+ BNN3iBTybFMERXy1eRxf1MWtru6MH5g1x5Omck6ScswrCfrxVR5+xcg8xi+xsAcP2/xLFJquah+
+ whW8V0WjCYSTSrsFysnqjXdqDG9jsZfx/VLGROg2PkUzYLLLB4bb/3Acj1guyqC+YGsACfwFmmz
+ HMtvLEVvrSt6z9KrJrWhREu4uX7CzgmbrtyKoBGL3Zc+hhVHZ1ngEuzXNnDZup1VZJCcauOjiWx
+ YQqtIWRnOQOhBG4m91d5vphB4upPtBam7s/ppVF4mSoE4YZyKYGfutU6qbkdUWFJMnrvrRdRhiM
+ ePkCtvUeYoXmR6EMMzA4hVo6Ir7Ic3alA8T5zvd1QqiLgjifRDXtfCSCH5Daw9OCLwWDvRzm69Q
+ K9ZK6BExVgS2UiwsrCayKyx/oR5IfwLIA09/WJe+nmdGsJXyGA/SpVybiwBI0wqceKzOubUzkhE
+ T2AlKrdmuWan+my7yNCLkTwn56k/3IPDDZ5OaM6JuNkyMR0rvGSo4otmIYGlyzhEanyqnsrZuz/
+ j6wRojg==
+X-Received: by 2002:a05:690e:b88:b0:660:8e61:1a60 with SMTP id
+ 956f58d0204a3-6636e45dd15mr3188583d50.14.1782312353634; Wed, 24 Jun 2026
+ 07:45:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260624-ml-switch-ml-links-to-patch-msg-id-v1-1-da694b9ba71c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAC3sO2oC/yWN2w6CMBBEf4Xss5vUVUD9FeNDKQusYiHdekkI/
- 06BtzmTyZkJlIOwwi2bIPBXVAaf4HjIwHXWt4xSJwYyVJiCzvjuUX8SXbemXvxLMQ442q3RNs2
- Rr5TbU1mZiyFIojFwI//t5P7YWT/Vk11czTDPC4pgxTOGAAAA
-X-Change-ID: 20260624-ml-switch-ml-links-to-patch-msg-id-e925a37b0802
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Simon Gaynor <simon.gaynor@ezurio.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Alice Guo <alice.guo@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5896;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=I58Ebvnr2pgXEbzA70fg/oyQy6xycjsf8UdtJyLOyaE=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqO+wvcETMqh+5PRjDqnfgmkuT8NoZO1OeKbWyq702
- LVTC8t+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCajvsLwAKCRB33NvayMhJ0dbPD/
- 9Z7FOy5N3WOI3YA7L95gTODsSA5rM/Lsot6ddKYaf/5cDUSBZpCxkDUbvX3MVpWsyIj8E9ZO6uJi7+
- 3QfUFodKd00fSZPgHP1yFP/PpVOh/gpPPns+wGqYZKioIbcKe/qRlDPckMpkcoTY3xLz51VK4nlydI
- w150PT3dlufVtpZ3OPUOMR0Yo7QdcHl3EQ6/jSTVvok2WcXpvaYcLTCNbvin/eMG9eg81kAaGPD9bD
- CKK3gc4hcDwYu4/QndRIENB9XoyAcebNLQMvS79bEpoNkQDDe2HDlzKbqtVehoTCcIyu/gn2wMUS5K
- bw6iHZu7mK3SBlXP2UX7c9/0Lo9Ii+RaGhMIsqLLZn7sLn5DfZIXm1WS5O3f+sbOyEeyThe9JGvH2N
- GqrKGGzopP4TYP2FbULoeTAAoCHJonl7L4G7w0cvIP1dMyOBJYnbe7ibjA/xm2Vc0qOgkYM06+QvO4
- N8TdBarCCbBugc4N/eTsHRuHc2tl66MLFlXJJDDzTq5KCW3uC0HLnLFnZyJ9XliZMAzAG7do7Ob04E
- f2rQCyf8/VF10JZ0cvOm8xKvPJZeRQba9AZ7uYKHQ89KgpoYm04xAz/Z0S6ZVnC5++SRvfKNLo5Mb1
- 4oRErDyTuoB1sbRBU1pVUYG2EDPaYZBD1WPby/3gREExQ2iC6dXv6Y/eL29Q==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+References: <20260624054819.493294-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260624054819.493294-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 24 Jun 2026 17:45:17 +0300
+X-Gm-Features: AVVi8CcprfQp6saOxE8OP6-_7P5hi1dNaot_oIRGuGSmFtQM9V_kKalFfz01X0M
+Message-ID: <CAC_iWj+DiO65LsXMXAXXoAvvcVdpYFgGSYa_xf++vdb_pgS3kw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: fix building with
+ CONFIG_EFI_VARIABLES_PRESEED=y
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de,
+ Jon Mason <jon.mason@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,132 +122,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation of the migration of the mailmain mailing-list currently
-hosted on the denx.de infrastructure, migrate the links in the code,
-comments and documentation to http://patch.msgid.link to be future proof
-and always link to the expected content data and uses the message-id in
-the URL which will help find the appropriate e-mail in the future.
+Hi Heinrich
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
-[1] https://lore.kernel.org/all/20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org/
----
- arch/powerpc/config.mk                   | 2 +-
- board/boundary/nitrogen6x/README         | 2 +-
- doc/chromium/chainload.rst               | 4 ++--
- doc/develop/historical/generic_board.rst | 6 +++---
- lib/efi_selftest/efi_selftest.c          | 2 +-
- tools/rkcommon.c                         | 4 ++--
- 6 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
-index 6e30df6504e..18aaae037f6 100644
---- a/arch/powerpc/config.mk
-+++ b/arch/powerpc/config.mk
-@@ -32,7 +32,7 @@ archprepare: checkgcc4
- 
- # GCC 3.x is reported to have problems generating the type of relocation
- # that U-Boot wants.
--# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
-+# See https://patch.msgid.link/1348500648.2514.2.camel@petert
- checkgcc4:
- 	@if test "$(call cc-name)" = "gcc" -a \
- 			$(call cc-version) -lt 0400; then \
-diff --git a/board/boundary/nitrogen6x/README b/board/boundary/nitrogen6x/README
-index 0b59289e7f0..114f81f1d1a 100644
---- a/board/boundary/nitrogen6x/README
-+++ b/board/boundary/nitrogen6x/README
-@@ -17,7 +17,7 @@ and saving the environment to SPI NOR.
- 
- It does not support 'boot from SD' at offset 0x400
- except through the 'bmode' command.
--	http://lists.denx.de/pipermail/u-boot/2012-August/131151.html
-+	https://patch.msgid.link/1345062683-19134-1-git-send-email-troy.kisky@boundarydevices.com/
- 
- 2. Boots using 6x_bootscript on SATA or SD card
- -----------------------------------------------
-diff --git a/doc/chromium/chainload.rst b/doc/chromium/chainload.rst
-index b00ee94eaa4..0f61e020db8 100644
---- a/doc/chromium/chainload.rst
-+++ b/doc/chromium/chainload.rst
-@@ -42,9 +42,9 @@ Nyan-big
- 
- Compiled based on information here::
- 
--   https://lists.denx.de/pipermail/u-boot/2015-March/209530.html
-+   https://patch.msgid.link/1427703262.24522.59.camel@collabora.co.uk/
-    https://git.collabora.com/cgit/user/tomeu/u-boot.git/commit/?h=nyan-big
--   https://lists.denx.de/pipermail/u-boot/2017-May/289491.html
-+   https://patch.msgid.link/CALr8Vo1WvO=m1W2zvT=MOQ3k-fNtcCtBjk2+zgKha0j28s8g6A@mail.gmail.com/
-    https://github.com/chromeos-nvidia-androidtv/gnu-linux-on-acer-chromebook-13#copy-data-to-the-sd-card
- 
- 1. Build U-Boot
-diff --git a/doc/develop/historical/generic_board.rst b/doc/develop/historical/generic_board.rst
-index 12550a140e0..17a92687c5b 100644
---- a/doc/develop/historical/generic_board.rst
-+++ b/doc/develop/historical/generic_board.rst
-@@ -64,17 +64,17 @@ separate function calls so that they can easily be included or excluded
- for a particular architecture. It also makes it easier to adopt Graeme's
- initcall proposal when it is ready.
- 
--http://lists.denx.de/pipermail/u-boot/2012-January/114499.html
-+https://patch.msgid.link/4F019ABB.9010201@gmail.com/
- 
- This series removes the dependency on generic relocation. So relocation
- happens as one big chunk and is still completely arch-specific. See the
- relocation series for a proposed solution to this for ARM:
- 
--http://lists.denx.de/pipermail/u-boot/2011-December/112928.html
-+https://patch.msgid.link/CAPnjgZ0jesqX1Y71S5xoYQDGPuARfOX48RGbU9Mw=P5HGYcOKg@mail.gmail.com/
- 
- or Graeme's recent x86 series v2:
- 
--http://lists.denx.de/pipermail/u-boot/2012-January/114467.html
-+https://patch.msgid.link/1325477374-6417-1-git-send-email-graeme.russ@gmail.com/
- 
- Instead of moving over a whole architecture, this series takes the approach
- of simply enabling generic board support for an architecture. It is then up
-diff --git a/lib/efi_selftest/efi_selftest.c b/lib/efi_selftest/efi_selftest.c
-index 2b95713afb4..ca23438bb94 100644
---- a/lib/efi_selftest/efi_selftest.c
-+++ b/lib/efi_selftest/efi_selftest.c
-@@ -284,7 +284,7 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
- 			 * implemented we should call
- 			 *   st_boottime->exit(image_handle, EFI_SUCCESS, 0, NULL);
- 			 * here, cf.
--			 * https://lists.denx.de/pipermail/u-boot/2017-October/308720.html
-+			 * https://patch.msgid.link/44453b06-5a09-ee3c-0a6a-b54bee9020e4@gmx.de
- 			 */
- 			return EFI_SUCCESS;
- 		}
-diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-index cb2d30bfd57..b39777fc060 100644
---- a/tools/rkcommon.c
-+++ b/tools/rkcommon.c
-@@ -205,7 +205,7 @@ static int rkcommon_get_aligned_size(struct image_tool_params *params,
- 
- 	/*
- 	 * Pad to a 2KB alignment, as required for init/boot size by the ROM
--	 * (see https://lists.denx.de/pipermail/u-boot/2017-May/293268.html)
-+	 * (see https://patch.msgid.link/CANbgqAQPw5Dxp7Qm_aZoL1nggg9Mm1SQoKvx=V5a8p-9+DTDNw@mail.gmail.com/)
- 	 */
- 	return ROUND(size, RK_SIZE_ALIGN);
- }
-@@ -328,7 +328,7 @@ static void rkcommon_set_header0(void *buf, struct image_tool_params *params)
- 	 * to determine the size of the next-stage bootloader (e.g. U-Boot
- 	 * proper), when used with the back-to-bootrom functionality.
- 	 *
--	 * see https://lists.denx.de/pipermail/u-boot/2017-May/293267.html
-+	 * see https://patch.msgid.link/CANbgqAQ5p-fE4T-Ye9UAMs-nRGU8AP_yxDf+5SbZbP8bxLa0dg@mail.gmail.com/
- 	 * for a more detailed explanation by Andy Yan
- 	 */
- 	if (spl_params.boot_file)
+On Wed, 24 Jun 2026 at 08:48, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
----
-base-commit: f072620dc9ffda00b010783da27c41231c3a439b
-change-id: 20260624-ml-switch-ml-links-to-patch-msg-id-e925a37b0802
+> Since commit bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+> out-of-tree builds with CONFIG_EFI_VARIABLES_PRESEED=y fail with errors
+> like:
+>
+>     ../lib/efi_loader/efi_var_seed.S:14: Error: file not found:
+>     ubootefi.var
+>
+> For out-of-tree build we cannot use CONFIG_EFI_VAR_SEED_FILE in the
+> .incbin statement of file efi_var_seed.S.
+>
+> * We have to prepend $(srctree) if the path is relative.
+> * We must not prepend $(srctree) if the path is absolute.
+>
+> Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
+> Reported-by: Jon Mason <jon.mason@arm.com>
+> Closes:
+> https://lore.kernel.org/u-boot/CAPoiz9zg4OXgHo5J3WtJHKOEuWOdCDrugWfAt6Z+d71j=+q8oA@mail.gmail.com/T/#mffaca10a9e812d03eceafad59999a02e57258b9a
+> Signed-off-by
+> <https://lore.kernel.org/u-boot/CAPoiz9zg4OXgHo5J3WtJHKOEuWOdCDrugWfAt6Z+d71j=+q8oA@mail.gmail.com/T/#mffaca10a9e812d03eceafad59999a02e57258b9aSigned-off-by>:
+> Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/Makefile       | 7 +++++--
+>  lib/efi_loader/efi_var_seed.S | 4 +---
+>  2 files changed, 6 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index d73ad43951b..567db518a8f 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -74,8 +74,11 @@ obj-$(CONFIG_EFI_SIGNATURE_SUPPORT) += efi_signature.o
+>  obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+>  obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_debug_support.o
+>
+> -EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+> -$(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+> +TMP_VAR_SEED := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+> +EFI_VAR_SEED_FILE := $(if $(filter /% ,$(TMP_VAR_SEED)) \
+>
 
-Best regards,
---  
-Neil Armstrong <neil.armstrong@linaro.org>
+Nit, but the whitespace after /% is harmless, but not needed
 
+In any case
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
++  ,$(TMP_VAR_SEED),$(srctree)/$(TMP_VAR_SEED))
+> +AFLAGS_efi_var_seed.o := -DEFI_VAR_SEED_FILE=\"$(EFI_VAR_SEED_FILE)\"
+> +$(obj)/efi_var_seed.o: $(EFI_VAR_SEED_FILE)
+>
+>  ifeq ($(CONFIG_EFI_CAPSULE_AUTHENTICATE),y)
+>  capsule_crt_path=($(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE)))
+> diff --git a/lib/efi_loader/efi_var_seed.S b/lib/efi_loader/efi_var_seed.S
+> index e0a40cf46c8..008a505d19e 100644
+> --- a/lib/efi_loader/efi_var_seed.S
+> +++ b/lib/efi_loader/efi_var_seed.S
+> @@ -5,13 +5,11 @@
+>   * Copyright (c) 2020, Heinrich Schuchardt <xypron.glpk@gmx.de>
+>   */
+>
+> -#include <config.h>
+> -
+>  .section .rodata.efi_seed.init,"a"
+>  .balign 16
+>  .global __efi_var_file_begin
+>  __efi_var_file_begin:
+> -.incbin CONFIG_EFI_VAR_SEED_FILE
+> +.incbin EFI_VAR_SEED_FILE
+>  .global __efi_var_file_end
+>  __efi_var_file_end:
+>  .balign 16
+> --
+> 2.53.0
+>
+>
