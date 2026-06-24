@@ -4,140 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC47CDB47C
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 10:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35449CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 12:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF1EC847C8;
-	Wed, 24 Jun 2026 12:55:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BDEE846E1;
+	Wed, 24 Jun 2026 14:30:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pqKOdJ7L";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FuO1iYMm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WEIzPg6v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A969A848DC; Wed, 24 Jun 2026 12:55:14 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E94BA848DC; Wed, 24 Jun 2026 14:30:33 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF385846E1
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 12:55:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65OANcO11148196
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 10:55:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- YhzYDa1QbY1iFzr9wax75+0GVXk6S3Gppz5f+BC191M=; b=pqKOdJ7LgyOccUbd
- WWXeX3q5Ml7yOTahlpbTllE3ovdQshycjVbw2USyAPSaCH8KFBFANobIV2vFX+8I
- W0zoD7BTYq5NQEjFr+4jfo20jZFd8mqpLCNWSILhc5RYiHVhw4tXJdwW2knBRaj/
- h7+FGNc5wvPQ7FjyHMeIKa0NCiJlkkKvgTDCpUWFyzvyeKYB7mBbZpVvDHcZRuQS
- CchhoeydOi9E4KMRM0Fh/SyWV99P2+JcxXps8//lkHU4rceAg/J+ZPLrnwSEzLv5
- K1ickwbrnpeL4yXiUF96i0pNjh4hRj3GLmzoxenttxq8PXHtjFxSiCNxTXvJnAzG
- XSZ/+w==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f06r31q3r-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 10:55:08 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2bf11699875so11851835ad.1
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 03:55:08 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A48484671
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 14:30:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6978f1eeb87so1596787a12.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 05:30:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782298508; x=1782903308; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1782304230; x=1782909030; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YhzYDa1QbY1iFzr9wax75+0GVXk6S3Gppz5f+BC191M=;
- b=FuO1iYMm6+d8lyr919Tf2QR7gyGZB1cgNMhtLiJCnfMv/B0NWRWbVB9KTNNZPBqWQB
- xA//TvxOB5T1ajUWNviMAiHVluAC5jIVK7ONUdxoJWHVk/k2YBqt0TBT6fNLepkTpB8C
- wLOCJeK3CQ9O0JxjFw9yGFABy+LNmz6Z87a2m3wn5l8RD0BNuttwgZ/FS8OoNCYIHuEa
- MyX1qQCX6zbq6ZqoquFNLqiVgciPmgwkDPnKVnLuQFnfzzBXFAgJGuOuodhC0WduOL+z
- hrwDyHyfl73vDJ8xDPSgYOhlXonslOC6d7A2acaE+9QpZaU8ErCXtqjHdqQTsz1AFvn3
- /elg==
+ bh=Zj+MHkyP1C84Qx7cmGF2yRQSnNeHTJdoz4j1fWQfGHs=;
+ b=WEIzPg6vIIYKCJdnjWkG+Xc79jOywMspDv02PlXIzp2ocqo5ltp/mnHq2x8BX8udPQ
+ ex3Zshw4GkRId+fNNaoY7D4f9SZWPKvEl9ivw5qfoC8pWmP0dK5VUG0VnIiR/INSE5KK
+ h1rdJpBMsy07GcNnAlKOG86KK5bFPNsuGV6CKCr7Wwa8g56K0rYZHuDYmk2wLk9t9i2i
+ I4Qh/T6x/K3UmXnEKY30mhRwa8MedvWSrDMELZigygLk+qOozu2Ye5vMvqZz1zsx261K
+ LYrVlfkeEo0kjzIxM8LAJjTYvfSLxDwrpUZNz2GbbJoizLl2GA5owPD2G+yesQM6hnbR
+ hE/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782298508; x=1782903308;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20251104; t=1782304230; x=1782909030;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YhzYDa1QbY1iFzr9wax75+0GVXk6S3Gppz5f+BC191M=;
- b=Wwsm3+G9SZjzWzoenXMumsELMERNeh+siVLiTQyIMwUkCl6GqtOITY261w49qbTjn7
- Ot5a37tnczIBVOLYoHQeCosvKAYrA+X+LDTrls7dI2NBNQ1GHvdt5UMlhoeHefFI6mHw
- rbFhm4dI0M6w6ijriRJpz73PG1DoFG5tgCYC2j2JwbkJW7UilXHdukk0CU9TTqvSOKR3
- D5+3RJMovcNlu6mt762BtKNpTvV3LlNewjZEysZjEyhsf9MWU20e0jcL5ijU+paNriuo
- aj0i4lEkEoIA3fQD3nNM/tTyKNNJ3i2eepXEoXCMI/XCqDc6YLuZ3HlBJmPqTojaUOhJ
- l3Bw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrKsAibDFmtJFikxaeq9jDHw3OAO4jdwubm2rZtjpTSU8Xoo7O1ZlL9vP+Q8dhpsjgNx8IE3j8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFQg3YnsDRpUkBDzxuQhR18CJTH/Qe3/ZiDEqe5MRRjnLrUKGg
- kd5cE7SPyaj3A5L/y9wjYAk0vuJ5flVhZnp6zmd855fpKf3fRKjI951j6X/bzqlPrZT2GTqM/W0
- Onf6WPQrS2pMxhNdvQNVFhaSSYBZ1S2znOwTYraMPIDy0+XOqMHbbKXkC
-X-Gm-Gg: AfdE7cmtEzO2GdKoGAZbfQIF5Jpv6cMQUCEuivp15lIHSRnePq5fTsjkqMebJNYL+sM
- AYIZBhaRAR5qvNk0xFEgzbGzRo8ULLxXS+cKTgUZ8SlFWzjXt8oPR4tlo15TECW7LaFhTWZ36Y2
- JZ/ZHnsrDSgb9cAt0YH/cf1u5qHk4N9GjSiKuI3niFCjlOxmNvHhTyYbW7Jgau1furrsUniSGTV
- nYzpS3XTWZ5TxrBC51XbUWfK2HkZpCtxPipj05e+9KXt5+IjDiZWu/OxJN1tWVx/j5Xt5sPzu55
- 7w754/06E/7TdcVtpQCP7ngsbW97yDsP9jAxGiGaSAu2uILmsVc/GkM9U0mPv+W4FT2rwNXkbuA
- nfng58Y1Bng2JkkYfYf+U5TOXQLr4Zqoe4BI+Rpt3UTbInN5T
-X-Received: by 2002:a17:903:2441:b0:2c0:d29b:34ff with SMTP id
- d9443c01a7336-2c7c3d5fe99mr63879695ad.10.1782298508245; 
- Wed, 24 Jun 2026 03:55:08 -0700 (PDT)
-X-Received: by 2002:a17:903:2441:b0:2c0:d29b:34ff with SMTP id
- d9443c01a7336-2c7c3d5fe99mr63879395ad.10.1782298507757; 
- Wed, 24 Jun 2026 03:55:07 -0700 (PDT)
-Received: from [10.151.40.144] ([202.46.23.19])
+ bh=Zj+MHkyP1C84Qx7cmGF2yRQSnNeHTJdoz4j1fWQfGHs=;
+ b=TngjNab2IG91TOaKR15Z/iqwzC0n+P6OHrFAcgt5TAsR3uU7d9nf7Dznf5vidDXF00
+ 8AGjVIm74HMWD1Yu5yhbr2/X9cbHpWg6rPBRakWnJ79NFrKGKQFaRXIOHl37YlmqH78R
+ O60iqBz824HiGknI0I5Bc3wqsO1gRY5RnJ5DCuUVoJu7czspdDv9XI5BDxAHcV0FhVzx
+ KoTDrma8Nn/vi50x7PFjSJfqfrxTQDc0/3FbtHZwnX66X+WvnhgwIHKXDcU/VJb9AIsU
+ riedIPwWmLXQ1+o3Jx4oNLtNGtIhYMZn0VCnVMv3fA7A6fQQQedEagCTYOPfgVxPEer5
+ mPMw==
+X-Gm-Message-State: AOJu0YzFsS/u/T5aBOEAoj05bI2mtBqaSdWZH9eOzwrlQw8DMoze3vgY
+ e80Gvfx2pQxtW5/fuq/WfuV81skXcQhMMSbw9U195D/6bmie4B54znAOs+mgy3N2RcwWroybg10
+ sbjBh/1M=
+X-Gm-Gg: AfdE7cnsrCsiFLw+bWcp7zaqzsvHn56UnmgH9sWED7dIzWjtzFegT0O/GJbgM01hYja
+ 8YQLZW3SxbWc4dy3n6FRP7yuJF9X77+kiHcsC7Dj8Mrvstc2zHu4728wJqjPXvqRJrEgvsP46wK
+ eipB92pF0hFeoD6uw8RXPg+f9PdIesOCAKYuCNZIhbjF+D0oUoliznYUvudbrWMC4M7HVlDGiuy
+ mC6kMNJgPwauDrFWM1jeLr3T/vYE/1ZNVOQmoptOsdOqgOjdvdECtr9qmQrqIEe+ewjexdIuRro
+ Mnk3jR/ywuvokgYlI9ncWpVPD+YPQ8nIQaXsE/K6C1THIY3rllpUeWpOKGZBfV+GbkFJBL5lThD
+ J7anAbsAmTwIPp9fCCUoLabxvX8Fi0Q3n3mLhH4bFXyCCUHo1HLoPKE6qcfSY8eQub68DOQxGGH
+ dUl2B/mjNnZDRQtTCoNA1ZSPmK3F5xY/CQQViK9v4sDpI4JPLrIDYUuQC4RHGFe0nrCJi5/AjdL
+ QzhfLoViA==
+X-Received: by 2002:a05:6402:3227:b0:697:edf5:20d1 with SMTP id
+ 4fb4d7f45d1cf-697f3771108mr1604869a12.6.1782304230185; 
+ Wed, 24 Jun 2026 05:30:30 -0700 (PDT)
+Received: from rayden (h-79-136-84-34.A175.priv.bahnhof.se. [79.136.84.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c7c7411f85sm45093945ad.22.2026.06.24.03.55.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jun 2026 03:55:07 -0700 (PDT)
-Message-ID: <95fb2056-aa96-47db-bd58-3faa870071e2@oss.qualcomm.com>
-Date: Wed, 24 Jun 2026 16:25:02 +0530
+ 4fb4d7f45d1cf-697f46e15b1sm1038288a12.16.2026.06.24.05.30.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jun 2026 05:30:28 -0700 (PDT)
+Date: Wed, 24 Jun 2026 14:30:25 +0200
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Chintan Vankar <c-vankar@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
+Subject: [PATCH v3] drivers: usb: dwc3: sync code with Linux v6.16
+Message-ID: <20260624123025.GA3245275@rayden>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: qcm6490_defconfig: Enable SCSI as the Fastboot
- flash block interface
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
- casey.connolly@linaro.org, neil.armstrong@linaro.org
-Cc: sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, mani@kernel.org
-References: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDA5MSBTYWx0ZWRfX9bFxkHMYK8Fw
- Tptbx2kVERPe0eYB19ragzuuNoG/HOjeXFfcMMA9x2dpRri1UHNPrOMqbfKhRWAFEKRQ11sfEmR
- uEdWDkx4sqqKBc2ttieoJyGdA164QpWWVPvvyXJFjq9VgxAhVesemtecPRacHcM0FPPwXGlVnOk
- lkajIFn3U8b/5Hgu5QixaB6zPx6d3kCiFNUWwOs2VAKbNWgsIu/WiwNeZSecJz/0D03Oc+J6PYi
- kSHUiByjVbmBN/ioA9GSWtaeJrHJmMdOEswnBHNKLXVHHjfJ5QTX3Vljo2/FfRNEAK/C7Tr6b58
- 37D/HZKhnoJbjOgM1pjJ75yVoC8UmQPIvlfKYuORrhQefrJz4Z0uhvqTytjD5vZFHebDBTotAf9
- 8uTh4L2ccSFcMdk059srU2dnSWVRDw==
-X-Proofpoint-ORIG-GUID: UEvImVJYlwGYSioxPu8I04Lb9ee6it6Z
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDA5MSBTYWx0ZWRfXy6shb4jB82uq
- 8JRhmmQKH2migZpeoAyQhSBoKdjk14QBt48gmEa9Bd7oaayunG4wWMk6MzlqvCOYaOhRhIJXGw0
- r2IiqCl7e68xkIOMr4jPqkggc6LHV80=
-X-Authority-Analysis: v=2.4 cv=ZM7nX37b c=1 sm=1 tr=0 ts=6a3bb78c cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KWi98b1VZoOImPBiGIIA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: UEvImVJYlwGYSioxPu8I04Lb9ee6it6Z
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-24_03,2026-06-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 bulkscore=0 suspectscore=0 adultscore=0
- lowpriorityscore=0 spamscore=0 classifier=typeunknown authscore=0 authtc=
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.22.0-2606150000 definitions=main-2606240091
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,42 +117,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manivannan, Casey,
+Hi,
 
-On 6/19/2026 1:04 PM, Manivannan Sadhasivam wrote:
-> qcom_defconfig uses EMMC as the flash interface for Fasboot, but QCS6490
-> RB3Gen2 has no on-board eMMC. So override the config to use UFS as the
-> flash medium by selecting 'scsi' interface.
->
-> This enables flashing the images over Fastboot on this board.
->
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> ---
->   configs/qcm6490_defconfig | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> index b088367f86c..d599e7611c1 100644
-> --- a/configs/qcm6490_defconfig
-> +++ b/configs/qcm6490_defconfig
-> @@ -16,3 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
->   
->   CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
->   CONFIG_PHY_QCOM_QMP_COMBO=y
-> +
-> +CONFIG_FASTBOOT_FLASH_BLOCK=y
-> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
-> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=0
+This is a follow up on my last patchset [1]. I'm addressing feedback on
+the previous post. Since there's quite a few patches I've published a
+branch instead as requestsed. Last in this mail follows a summary of the
+branch (it looks like a pull request, but I'm only reusing a well-known
+format, it's not intended as a pull request at this stage).
 
-Similar patch is submitted and under review: 
-https://lore.kernel.org/u-boot/20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com/ 
-<https://lore.kernel.org/u-boot/20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com/>
+The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven years
+ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel
+to u-boot"). Since then, not many kernel changes have been ported back into
+U-Boot.
 
-Since most of the Dragonwing boards has UFS as default, we wanted to 
-change default to UFS in qcom_defconfig itself and then for eMMC boards, 
-we can modify in their board specific defconfigs.
+This series synchronizes the DWC3 core with Linux v6.16. To provide 
+a clear audit trail and maintain bisectability, I have structured the 
+series as follows:
+
+1. Restore to Baseline: The first commit reverts U-Boot-specific changes 
+   to drivers/usb/dwc3 to return the directory to a clean v3.19-rc1 state.
+2. Milestone Imports: A sequence of 50+ commits follows, each performing 
+   a "snapshot" import of the drivers/usb/dwc3 directory for every major 
+   kernel version (v3.19 through v6.16). 
+3. U-Boot Adaptation: The final commits (based on Jerome's original work [2]) 
+   re-introduce the necessary glue code, XHCI/UDC updates, and build fixes 
+   required for U-Boot integration.
+
+Note that this is compile-tested only. The CI pipeline on source.denx.de
+was used as an OK/NOK indicator [3]. 
 
 Thanks,
+Jens
 
-Balaji
+[1] https://lore.kernel.org/u-boot/20260507092843.358908-1-jens.wiklander@linaro.org/
+[2] https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
+[3] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/30524
 
+RFC v2 -> v3:
+- Rebased on v2026.07-rc3
+- Configured out a few prints in drivers/usb/gadget/udc/udc-core.c
+  to make it build for am335x_evm_defconfig
+- Applied provided tags in [1]
+- Published as a branch
+
+RFC v1 -> RFC v2:
+- Split the v1 ("usb: dwc3: re-import from kernel v6.16-rc7") into ("usb:
+  dwc3: restore to original v3.19-rc1 kernel import"),  ("usb: dwc3: import
+  from kernel v3.19)..("usb: dwc3: import from kernel v6.16-rc7")
+
+
+The following changes since commit 76d62273bc8a5dc126ed79ed0fb65e5a97359577:
+
+  Prepare v2026.07-rc3 (2026-05-25 11:05:37 -0600)
+
+are available in the Git repository at:
+
+  https://github.com/jenswikl/u-boot tags/usb-dwc3-sync-v3
+
+for you to fetch changes up to 2e3b14270a8e9dc5e6836f0f011fd97d491a89f7:
+
+  usb: fix build after resync of DWC3 with kernel v6.16 (2026-06-24 09:48:03 +0200)
+
+----------------------------------------------------------------
+drivers: usb: dwc3: sync code with Linux v6.16
+
+----------------------------------------------------------------
+Jens Wiklander (60):
+      usb: dwc3: restore to original v3.19-rc1 kernel import
+      usb: dwc3: import from kernel v3.19
+      usb: dwc3: import from kernel v4.0
+      usb: dwc3: import from kernel v4.1
+      usb: dwc3: import from kernel v4.2
+      usb: dwc3: import from kernel v4.3
+      usb: dwc3: import from kernel v4.4
+      usb: dwc3: import from kernel v4.5
+      usb: dwc3: import from kernel v4.6
+      usb: dwc3: import from kernel v4.7
+      usb: dwc3: import from kernel v4.8
+      usb: dwc3: import from kernel v4.9
+      usb: dwc3: import from kernel v4.10
+      usb: dwc3: import from kernel v4.11
+      usb: dwc3: import from kernel v4.12
+      usb: dwc3: import from kernel v4.13
+      usb: dwc3: import from kernel v4.14
+      usb: dwc3: import from kernel v4.15
+      usb: dwc3: import from kernel v4.16
+      usb: dwc3: import from kernel v4.17
+      usb: dwc3: import from kernel v4.18
+      usb: dwc3: import from kernel v4.19
+      usb: dwc3: import from kernel v4.20
+      usb: dwc3: import from kernel v5.0
+      usb: dwc3: import from kernel v5.1
+      usb: dwc3: import from kernel v5.2
+      usb: dwc3: import from kernel v5.3
+      usb: dwc3: import from kernel v5.4
+      usb: dwc3: import from kernel v5.5
+      usb: dwc3: import from kernel v5.6
+      usb: dwc3: import from kernel v5.7
+      usb: dwc3: import from kernel v5.8
+      usb: dwc3: import from kernel v5.9
+      usb: dwc3: import from kernel v5.10
+      usb: dwc3: import from kernel v5.11
+      usb: dwc3: import from kernel v5.12
+      usb: dwc3: import from kernel v5.13
+      usb: dwc3: import from kernel v5.14
+      usb: dwc3: import from kernel v5.15
+      usb: dwc3: import from kernel v5.16
+      usb: dwc3: import from kernel v5.17
+      usb: dwc3: import from kernel v5.18
+      usb: dwc3: import from kernel v5.19
+      usb: dwc3: import from kernel v6.0
+      usb: dwc3: import from kernel v6.1
+      usb: dwc3: import from kernel v6.2
+      usb: dwc3: import from kernel v6.3
+      usb: dwc3: import from kernel v6.4
+      usb: dwc3: import from kernel v6.5
+      usb: dwc3: import from kernel v6.6
+      usb: dwc3: import from kernel v6.7
+      usb: dwc3: import from kernel v6.8
+      usb: dwc3: import from kernel v6.9
+      usb: dwc3: import from kernel v6.10
+      usb: dwc3: import from kernel v6.11
+      usb: dwc3: import from kernel v6.12
+      usb: dwc3: import from kernel v6.13
+      usb: dwc3: import from kernel v6.14
+      usb: dwc3: import from kernel v6.15
+      usb: dwc3: import from kernel v6.16
+
+Jerome Forissier (4):
+      usb: host: re-import xhci-ext-caps.h from kernel v6.16
+      usb: gadget: re-import epautoconf.c from kernel v6.16
+      usb: udc: re-import udc-core.c from kernel v6.16
+      usb: fix build after resync of DWC3 with kernel v6.16
+
+ drivers/usb/cdns3/ep0.c                |    8 +-
+ drivers/usb/common/common.c            |   23 +
+ drivers/usb/dwc3/Makefile              |   57 +-
+ drivers/usb/dwc3/core.c                | 1710 ++++++++-----
+ drivers/usb/dwc3/core.h                | 1060 ++++++--
+ drivers/usb/dwc3/debug.h               |  432 ++++
+ drivers/usb/dwc3/dwc3-omap.c           |    2 -
+ drivers/usb/dwc3/ep0.c                 |  737 +++---
+ drivers/usb/dwc3/gadget.c              | 4256 ++++++++++++++++++++++----------
+ drivers/usb/dwc3/gadget.h              |  112 +-
+ drivers/usb/dwc3/glue.h                |   36 +
+ drivers/usb/dwc3/io.h                  |   29 +-
+ drivers/usb/dwc3/linux-compat.h        |   16 -
+ drivers/usb/dwc3/samsung_usb_phy.c     |   77 -
+ drivers/usb/dwc3/ti_usb_phy.c          |    2 -
+ drivers/usb/gadget/at91_udc.c          |   46 -
+ drivers/usb/gadget/atmel_usba_udc.c    |  102 +-
+ drivers/usb/gadget/ci_udc.c            |  470 ----
+ drivers/usb/gadget/composite.c         |    2 +-
+ drivers/usb/gadget/dwc2_udc_otg.c      |  174 +-
+ drivers/usb/gadget/epautoconf.c        |  289 +--
+ drivers/usb/gadget/ether.c             |   21 +-
+ drivers/usb/gadget/f_acm.c             |   20 +-
+ drivers/usb/gadget/f_fastboot.c        |   10 +-
+ drivers/usb/gadget/f_mass_storage.c    |    5 +-
+ drivers/usb/gadget/f_rockusb.c         |   11 +-
+ drivers/usb/gadget/f_sdp.c             |   12 +-
+ drivers/usb/gadget/f_thor.c            |   19 +-
+ drivers/usb/gadget/udc/Makefile        |    1 +
+ drivers/usb/gadget/udc/udc-core.c      | 1099 ++++++++-
+ drivers/usb/host/xhci-dwc3.c           |    4 +-
+ drivers/usb/host/xhci-ext-caps.h       |  158 ++
+ drivers/usb/host/xhci-exynos5.c        |    2 +-
+ drivers/usb/mtu3/mtu3_gadget_ep0.c     |   16 +-
+ drivers/usb/musb-new/musb_gadget_ep0.c |   24 +-
+ drivers/usb/musb-new/musb_uboot.c      |   39 -
+ include/dm/device_compat.h             |   13 +
+ include/dm/read.h                      |   46 +
+ include/linux/compat.h                 |   15 +
+ include/linux/usb/ch9.h                |   25 +-
+ include/linux/usb/gadget.h             |  520 +---
+ include/linux/usb/otg.h                |   10 +
+ include/linux/usb/phy.h                |   56 +
+ 43 files changed, 7591 insertions(+), 4175 deletions(-)
+ create mode 100644 drivers/usb/dwc3/debug.h
+ create mode 100644 drivers/usb/dwc3/glue.h
+ delete mode 100644 drivers/usb/dwc3/linux-compat.h
+ delete mode 100644 drivers/usb/dwc3/samsung_usb_phy.c
+ create mode 100644 drivers/usb/host/xhci-ext-caps.h
