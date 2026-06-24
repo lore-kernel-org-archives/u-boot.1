@@ -4,68 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD508CDB479
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 17:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF41CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 17:23:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30A6E8460E;
-	Wed, 24 Jun 2026 19:14:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B8BA38460E;
+	Wed, 24 Jun 2026 19:23:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yKrkr8BT";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XZLBjs7N";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="IGHTzLtW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AFC384659; Wed, 24 Jun 2026 19:14:35 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 9B2388460E; Wed, 24 Jun 2026 19:23:40 +0200 (CEST)
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8BEF80398
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 19:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B82180398
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 19:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4glpT42181z9vC1;
- Wed, 24 Jun 2026 19:14:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1782321272;
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4glpgS2Qdzz49Pxr;
+ Wed, 24 Jun 2026 20:23:32 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1782321812;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=U+AS91x54xgP3hiMJ5bUV+ddV0cpK4OqMalIpnjvYkU=;
- b=yKrkr8BTe2XZ6lLYcn1S6eTsfnGNfyjF1N3J8xTgHigWJ6keLf3VyvR5omOfBvB6tdJ/3b
- 3u2U+BMCi0zFzL14df8dPT9ayn9Fg1a/y6ndbI4ha2QnMYRmObLoTlzfJXyrNO3uPn+Ufp
- FVnqpM3r/hPF55HkuiQmI7/3woyuKBf4UdaeNb7uWD8+9yYfcAeeZbSePAbLU9j26HfU+J
- OXYTchtrA+sguot3Pn9/kyQjqa43JQ8E34UIkIxe5u00g5//P2I0DcjU9FO9P1T1C8YyE/
- 0SrcBe6633fpMDGRvMagSGLlcCb3NpNNBQxSMtwLyhFuTzPunepdXZDktnIYDQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1782321270;
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GpvOo7qwPQsR11Lvndv417fJTUQGMlF+r5gFGbLxtv4=;
+ b=IGHTzLtWIF8XtviBOWba849Y3s1GNxNJ9qOYK3mD7HJeV1O3ypvnZaun8VfOcYaoyJdu/u
+ T80qMQnGwOW6SbhMdLIhv1thC7/TwWziTxXMAt2qejcpM84wcTs6CQRcE4ZmERaO9Gh+CE
+ uBSl4/c76ac7RRpp2Z7NM78U1INDbOB4os8pmbbfPWYGP50IWC8QqhzJsu0edDUGsU/aPw
+ 52uUhtAvRLaBwTkzzlYm9F1ftar8z9f0DHvdoScJfmyXCwEfftmkaT+KI6S2YIi9ra4fAe
+ oS25jr2YWizP4tQ5Qs2jEUMuHjI0bvada+EBTLUYtDziyeLHbIc1FpjyFDf1uQ==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1782321812;
+ b=RJsJe1NZIccbgWtN9CtKWqsr+vXeYZYjFKXlmM2w9iRxwvlv5TM1IYFduPQrd2sDOeDDMl
+ w6hDqp/iQ7vUgkQ0eEXxZRtozwSDjMjnPH5HYfMX7v06IHMpa+0pAEyKAKQy/OZ3AcNydb
+ qB8K2YokX0H6bm3DoZGz8EXr0eTcASWMp733hjWHKXP463N6pz34PLr0Vzgr3xk7hjBPiB
+ UFsbCku4gPKuIUdjA/V3ArX1ueT9nRzElMHGcKLphfr6hKjCtNZqA1XVh/CYQKS/eiuRbw
+ z89wnFNwheePb7XYJblEpixfYVQE+hGV0/eto+/9cA5N9nlQzYlLJkTb+hKejw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1782321812;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=U+AS91x54xgP3hiMJ5bUV+ddV0cpK4OqMalIpnjvYkU=;
- b=XZLBjs7NY/HQSTALtShaSPd9iJxSRTgFMQJHr88d5sO7vEQpb+0raFeHCIyEnQx9dvA6eW
- GRBHAjHW7UxvHSdVrBycvut+kxH3jUhsDN00F02SNgYHI+yK6NfysFLnExBQF/pP7AQgsl
- QhuM0OiZjvpFBjrshPAno7b97g98rRr6aDB1VA5fbPd/oCG72ypPH2K4jQKWpqpXEtoDEY
- NiJbPprvyewTw0qdOEpwptykurxqO9wduGm2XrUofnQPTeFsjMB9ujD4TWszR8v1aqHmdY
- ROS/CQ/bJyR4QSYraSGcIpVzTefOAyZjmbnqLudAes4loRYuvR1Fies1+f638Q==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] MAINTAINERS: Update SH/SoCFPGA/USB email addresses
-Date: Wed, 24 Jun 2026 19:13:49 +0200
-Message-ID: <20260624171428.33523-1-marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GpvOo7qwPQsR11Lvndv417fJTUQGMlF+r5gFGbLxtv4=;
+ b=VU1XcdsKPe9qOD5xKIAJjW4fGjuRzSgVbY2IxVKn++mpbCTVEByKZM2F76hiZymKgCxFMl
+ ixN5WiQq6+9kB/kIoUCCFbaysakDBJZVDJR1RblkaVsuTMWCYoKk9Y8+Wj+Gmh4+0G/QKX
+ EulKhMW9AsBCmql9WakJzojkV8CFFW1504QsqgVyIyctxfq4gS7kkxe+JSWdW+x6yR+o84
+ OV4/EWVEJB2Y6r9M5HLJpnXEEqKtw5V+WHoI7RBTr7+ukWuAwiC9M6dTFqW58C5PYHP3Ns
+ 1i7Zu+t/mVxcrFgSk/kB6IMpkokFZuzQJDguVkTp7V7OKrulLnFC7n7IwycZQA==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+Date: Wed, 24 Jun 2026 20:23:30 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org,
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com,
+ trini@konsulko.com, afd@ti.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCHv2 0/5] k3-am62-pocketbeagle2: add board and variant support
+Message-ID: <ajwSkh6Pa97LPVi5@kehys.lan>
+References: <20260619231719.3823195-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 4h8k4y4xruqhx46rj8dnaeiha4fbgqxe
-X-MBO-RS-ID: 20e7ec3f2bb148635aa
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20260619231719.3823195-1-rs@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,56 +92,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the email addresses to a valid one.
-Use N: usb to match on all USB related bits.
+Hi Randolph, all,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>
----
- MAINTAINERS | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+>Add initial board support for the PocketBeagle 2 from BeagleBoard.org.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 571af196465..ba5ba77b0ed 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -161,7 +161,7 @@ F:	arch/arm/dts/Makefile
- F:	cmd/arm/
- 
- ARM ALTERA SOCFPGA
--M:	Marek Vasut <marex@denx.de>
-+M:	Marek Vasut <marek.vasut+socfpga@mailbox.org>
- M:	Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
- M:	Tien Fong Chee <tien.fong.chee@altera.com>
- S:	Maintained
-@@ -1725,7 +1725,7 @@ F:	cmd/printf.c
- F:	doc/usage/setexpr.rst
- 
- SH
--M:	Marek Vasut <marek.vasut+renesas@gmail.com>
-+M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
- M:	Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-sh.git
-@@ -1938,14 +1938,10 @@ F:	test/boot/upl.c
- F:	test/py/tests/test_upl.py
- 
- USB
--M:	Marek Vasut <marex@denx.de>
-+M:	Marek Vasut <marek.vasut+usb@mailbox.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-usb.git
--F:	drivers/usb/
--F:	common/usb.c
--F:	common/usb_kbd.c
--F:	common/usb_storage.c
--F:	include/usb.h
-+N:	usb
- 
- USB TCPM
- M:	Sebastian Reichel <sebastian.reichel@collabora.com>
--- 
-2.53.0
+Thank you, this is very small, and best of all, it works for me, on top 
+of master d57ea0d9edf5e5babffd280f7352f23a33a00948 from last Sunday. I 
+slightly adjusted the board_setup_dest_addr() injection in the first 
+patch in order to resolve a code conflict:
 
+@@ -356,6 +361,8 @@ static int setup_dest_addr(void)
+  	gd->relocaddr = gd->ram_top;
+  	debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
+  
++	if (board_setup_dest_addr()) return board_setup_dest_addr();
++
+  	return arch_setup_dest_addr();
+  }
+  
+I successfully booted this together with a version of the software ECDSA 
+patch, but did not try to load a signed FIT image yet.
+
+	Marko
