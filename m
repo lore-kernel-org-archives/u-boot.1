@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3BECDB470
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 033A8CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:46:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90B1F849ED;
-	Wed, 24 Jun 2026 09:45:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D080884A29;
+	Wed, 24 Jun 2026 09:45:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="AnrO56jG";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="rqg/DvqQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 069A384A26; Wed, 24 Jun 2026 09:45:34 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id D39A484A26; Wed, 24 Jun 2026 09:45:40 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11D8C84A0B
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7E5180287
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id AEDD94E407B2;
- Wed, 24 Jun 2026 07:45:31 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 995081A0911;
+ Wed, 24 Jun 2026 07:45:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 7D5BF601C5;
- Wed, 24 Jun 2026 07:45:31 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 66C1B601C5;
+ Wed, 24 Jun 2026 07:45:38 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 49B9C106C85CF; 
- Wed, 24 Jun 2026 09:45:28 +0200 (CEST)
+ with ESMTPSA id E6F6C106C8382; 
+ Wed, 24 Jun 2026 09:45:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782287129; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1782287137; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=1H0w5GbHirg2OohcwmMAN9xkH8jpdDKfgtPWGCWLEsQ=;
- b=AnrO56jGFyEhQRhCf16mNn9UUmDSjHhFPlXVqpat0b95zPfr8m8FLRQf8ovN6vKf37cks7
- NQB1NGqdDffp7VqO331699VM5/VA0O4crcUkheZ905eddqDfXEFfljVCamLc2l/pY1rXCK
- kHgGAGH73i2PTIljwr1VQwCdAKsUfisoE2I2l1kvDeVhFdzfCJ5NT7ZQHByGnJrdENi9yK
- hBTqd0LbsIsmdMlfGrfKh6mD/12T1UUCP6n9IivSvkGKwMycjrnnIeMfKIJC6hISv6JihZ
- Oh2anwaGx9P6ga09xFQgjyak1D2g2Tk2Ax7O2IMRr2r9tbj0X0OI4cKragWrjw==
+ bh=QU9skfSlmz7cazyfck/ELdfgNiS6lDC+QJfqIWQxHLw=;
+ b=rqg/DvqQT4j2kzeCMzIIdT/L1dH+Z2NhoWmB9QpK8J/vEQQAdemVdL58XZzAix/0tXIwOa
+ 6AulxtexCuSd5rwafrSKgr/XkdL93zu4wTFqCz82w9eM+bdUXU8JVAWIH+sWLnAkxRg1xG
+ JfwPDUKdPg3W6eSdZdTwxEWgsKkiNuTqFr3jmFbfn6QnUwWVERqFVUsqQlXYbAREl/PRYh
+ lRwuGZ4suUREVfQ2dJ83i03b6Y4Z4yUtJZlSJzLzoqDxi/bX4wJ2gkvM+e8yZTDkCl69BZ
+ j/wq3+mSyxKvCaDnkYPYiunJAC9QYlj5NeNYQdyPoOxtsPHxqVTL37I6ZKh77A==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,10 +56,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 09/19] board: mach-k3: r5: common: Set PMIC NSLEEP triggers
- bits at resume
-Date: Wed, 24 Jun 2026 09:44:49 +0200
-Message-ID: <20260624074459.873906-10-richard.genoud@bootlin.com>
+Subject: [PATCH v3 11/19] ram: k3-ddrss: Add j722s DDR resume sequence
+Date: Wed, 24 Jun 2026 09:44:51 +0200
+Message-ID: <20260624074459.873906-12-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260624074459.873906-1-richard.genoud@bootlin.com>
 References: <20260624074459.873906-1-richard.genoud@bootlin.com>
@@ -82,59 +81,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If we are resuming NSLEEP triggers bits of PMIC-A and PMIC-B shall be set
-to prevent transition to S2R state while clearing interrupts.
-For example PMIC RTC Linux driver accesses to interrupt registers, in this
-case if NSLEEP triggers bits are not set it triggers a S2R transition.
+As the j722s and am62p resume sequence differs on the way they are
+detecting that the board is resuming, we should have a specific
+compatible for each one of them.
 
-Suggested-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
+For that purpose, introduce ti,j722s-ddrss compatible.
+
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/r5/lpm-common.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ arch/arm/dts/k3-j722s-r5-evm.dts | 4 ++++
+ drivers/ram/k3-ddrss/k3-ddrss.c  | 8 ++++++++
+ 2 files changed, 12 insertions(+)
 
-diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
-index 862f5ab62a3d..426166006afa 100644
---- a/arch/arm/mach-k3/r5/lpm-common.c
-+++ b/arch/arm/mach-k3/r5/lpm-common.c
-@@ -29,6 +29,9 @@
- /* PMIC register where the magic value resides */
- #define K3_LPM_SCRATCH_PAD_REG_3 0xcb
+diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts b/arch/arm/dts/k3-j722s-r5-evm.dts
+index e1ef5d181ed7..cc4a5910673b 100644
+--- a/arch/arm/dts/k3-j722s-r5-evm.dts
++++ b/arch/arm/dts/k3-j722s-r5-evm.dts
+@@ -11,6 +11,10 @@
+ #include "k3-am62a-ddr.dtsi"
+ #include "k3-j722s-r5.dtsi"
  
-+/* PMIC NSLEEP register */
-+#define K3_LPM_NSLEEP_TRIGGER_REG 0x86
++&memorycontroller {
++	compatible = "ti,j722s-ddrss", "ti,am62a-ddrss";
++};
 +
- /* Wake-up source IDs */
- #define K3_LPM_WAKE_SOURCE_MAIN_IO 0x80
- #define K3_LPM_WAKE_SOURCE_MCU_IO 0x81
-@@ -161,6 +164,30 @@ bool j7xx_board_is_resuming(void)
+ /* WKUP UART0 is used for DM firmware logs */
+ &wkup_uart0 {
+ 	status = "okay";
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+index 6185e9be5fe3..42992412a071 100644
+--- a/drivers/ram/k3-ddrss/k3-ddrss.c
++++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+@@ -19,6 +19,7 @@
+ #include <power-domain.h>
+ #include <wait_bit.h>
+ #include <power/regulator.h>
++#include <mach/hardware.h>
+ #include <mach/k3-ddr.h>
  
- 		if (ret)
- 			printf("Failed to clean magic value for suspend detection in PMIC\n");
+ #include "k3-ddrss-lpm.h"
+@@ -1301,11 +1302,18 @@ static const struct k3_ddrss_data j721s2_data = {
+ 	.flags = MULTI_DDR_SUBSYSTEM,
+ };
+ 
++static const struct k3_ddrss_data j722s_data = {
++	.flags = SINGLE_DDR_SUBSYSTEM,
++	.is_lpm_resume = j7xx_board_is_resuming,
++	.ddrss_deassert_retention = am62xx_ddrss_deassert_retention,
++};
 +
-+		/*
-+		 * Ensure that NSLEEP triggers bits are set to prevent a
-+		 * suspend/resume transition when accessing PMIC interrupt
-+		 * registers.
-+		 */
-+		if (IS_ENABLED(CONFIG_SOC_K3_J722S)) {
-+			ret = dm_i2c_reg_write(pmic, K3_LPM_NSLEEP_TRIGGER_REG, 0x3);
-+		} else {
-+			struct udevice *pmic_b;
-+
-+			/* Some boards may have more than one pmic */
-+			ret = uclass_get_device_by_name(UCLASS_PMIC, "pmic@4c", &pmic_b);
-+			if (ret == 0) {
-+				ret = pmic_reg_write(pmic_b, K3_LPM_NSLEEP_TRIGGER_REG, 0x03);
-+				if (ret)
-+					printf("Failed to set NSLEEP triggers bits on PMIC-B\n");
-+			}
-+
-+			ret = pmic_reg_write(pmic, K3_LPM_NSLEEP_TRIGGER_REG, 0x3);
-+		}
-+		if (ret)
-+			printf("Failed to set PMIC NSLEEP triggers. Spurious suspend/resume may happen.\n");
-+
- 		/*
- 		 * For robustness, the DM should also clean the magic value at
- 		 * startup.
+ static const struct udevice_id k3_ddrss_ids[] = {
+ 	{.compatible = "ti,am62a-ddrss", .data = (ulong)&am62xx_data, },
+ 	{.compatible = "ti,am64-ddrss", .data = (ulong)&k3_data, },
+ 	{.compatible = "ti,j721e-ddrss", .data = (ulong)&k3_data, },
+ 	{.compatible = "ti,j721s2-ddrss", .data = (ulong)&j721s2_data, },
++	{.compatible = "ti,j722s-ddrss", .data = (ulong)&j722s_data, },
+ 	{}
+ };
+ 
