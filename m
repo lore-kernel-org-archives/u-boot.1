@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A18CDB47F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:45:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEADECDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:45:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDE22847C8;
-	Wed, 24 Jun 2026 09:45:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14257849E5;
+	Wed, 24 Jun 2026 09:45:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="zVF3KGeS";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="HbnjVLQv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BECEC849E5; Wed, 24 Jun 2026 09:45:15 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 59AD784995; Wed, 24 Jun 2026 09:45:16 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3812C80287
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3010D84671
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 22113C6B3A9;
- Wed, 24 Jun 2026 07:45:19 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id D3BED1A0911;
+ Wed, 24 Jun 2026 07:45:13 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 42C65601C5;
- Wed, 24 Jun 2026 07:45:11 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id A8456601C5;
+ Wed, 24 Jun 2026 07:45:13 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8857F106C8382; 
- Wed, 24 Jun 2026 09:45:07 +0200 (CEST)
+ with ESMTPSA id 8398D106C85A3; 
+ Wed, 24 Jun 2026 09:45:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782287109; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1782287112; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=pAoEt8RJH1YL2MdmqeCv3W1tr1DqWt53vS8YgKTdT88=;
- b=zVF3KGeSbtJSwnuSO7WeKauUgMV93gRXEvJvWhgTgRGC3GquWRj3wznNsYoSKU7kOLBpFV
- wt4qxZzEJq8qIrOdNmhDpqtgE063GTC9kx2AxwhJjy5E0CjzCjgSwurx7ZxoqXoMtXgsCO
- sCLW201LCkjKUOsuzV7qKb4JPckIyW3k4AI+tSnzz8wH9nBA3/SLmjEqwXiaXZVhB4fY59
- lRS4f62EO91K2wGvM4/0h2Prnw1jG6S+6LY4zl0AyNCOMt6ZTj8Y35bUOGQp2PcC0lVSvZ
- BpRkqEdWSdpl8XHGeouEYvb/UuJWY2ksc5e/nP57wiP7qv7xOcirOb6G5dp1Mg==
+ bh=dWex8iUEAEMjrmiWY7gwQFF+Rfx81FwT+DSNiHvR/hs=;
+ b=HbnjVLQv2MtzssdjA1tcd3KnFhMvd4Cz9o4eTL3hlc1pJpz+D9bQUvP+SPvmRKuscGtrwb
+ NEa5jRyCduQb1ITL8XNQw3SoKHnfdv3Va4lRIBaXteuj4McLgyeD43tvcjnL6XoYqKPYsn
+ tH2fb9aDcZawpW7df5W7PvGk3YFdkaDYkoKIOrg+6q4DprNnmnmp0TAL5TxSxK3EV7Ur6t
+ LivNr20XPiSx1B/PA4emWuTCIdQWkHU6f5qFH+LYeTedmJIk31yhnD+hoi+O3jc/U3RZe6
+ pcaQHuSyMdF/LLVtvjgguo/f/jsgQp4WZ/W4Lgf5jtOKa+M26gjoRQept7oYRg==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,10 +56,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 02/19] mach-k3: r5: common: add helper functions needed in
- LPM resume sequence
-Date: Wed, 24 Jun 2026 09:44:42 +0200
-Message-ID: <20260624074459.873906-3-richard.genoud@bootlin.com>
+Subject: [PATCH v3 03/19] global: k3: use gd to store the resume state
+Date: Wed, 24 Jun 2026 09:44:43 +0200
+Message-ID: <20260624074459.873906-4-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260624074459.873906-1-richard.genoud@bootlin.com>
 References: <20260624074459.873906-1-richard.genoud@bootlin.com>
@@ -82,385 +81,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Prasanth Babu Mantena <p-mantena@ti.com>
+For J7200, J784s4, J721e, j722s, j721s2 SoCs, the everything is shutdown
+at suspend but the PMIC and the DDR.
+In order for U-Boot SPL to know that it is resuming from suspend and not
+booting, a flag is set in a PMIC register.
+So, at startup, U-Boot will read the PMIC register and deduce if the
+board is resuming from suspend or not.
 
-Add helper functions that are used by respective SoCs in LPM resume flow.
+This state (resuming or not) is consulted at several places (in
+board_init_f() and in k3_ddrss_probe().
+As it takes some time to read a i2c register, it's best to cache the
+information.
+But, as stated by the README, in board_init_f(), the BSS is not
+available, so we cannot use global/static variables, only stack
+variables and global_data.
 
-- lpm_process() is called at boot time to:
-  - retrieve the LPM memory region from DTS
-  - save ATF/OPTEE certificates information and DM code in this memory
-    region
-  - Forward the LPM address to TIFS via TISCI_MSG_LPM_SAVE_ADDR
-TIFS will use this address to save TFA context and its own minimal
-context just before suspend.
+Thus, we use gd to store the resume state of the board.
 
-- do_resume() is called at resume, just after bringing the DDR out of
-  retention to:
-  - retrieve the LPM memory region from DTS
-  - authenticate certificates from LPM memory region and apply firewalls
-  - ask TIFS to restore TFA and its own minimal context
-  - start TFA on remote proc
-  - load and jump to DM
-
-https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html#lpm-msg-lpm-save-addr
-
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/common.h        |  16 +++
- arch/arm/mach-k3/lpm-common.h    |  15 +++
- arch/arm/mach-k3/r5/Kconfig      |   4 +
- arch/arm/mach-k3/r5/Makefile     |   1 +
- arch/arm/mach-k3/r5/common.c     |  17 +--
- arch/arm/mach-k3/r5/lpm-common.c | 214 +++++++++++++++++++++++++++++++
- 6 files changed, 255 insertions(+), 12 deletions(-)
- create mode 100644 arch/arm/mach-k3/lpm-common.h
- create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
+ arch/arm/include/asm/global_data.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index e970076d08ec..50e670f845e3 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -8,6 +8,7 @@
+diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+index b2ec450f9002..a146206fdff9 100644
+--- a/arch/arm/include/asm/global_data.h
++++ b/arch/arm/include/asm/global_data.h
+@@ -14,6 +14,14 @@
+ #include <linux/types.h>
+ #include <asm/u-boot.h>
  
- #include <asm/armv7_mpu.h>
- #include <asm/hardware.h>
-+#include <image.h>
- #include <mach/security.h>
- 
- /* keep ram_top in the 32-bit address space */
-@@ -16,6 +17,21 @@
- #define K3_FIREWALL_BACKGROUND_BIT	(8)
- #define K3_SPEED_GRADE_UNKNOWN		'\0'
- 
-+#if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
-+enum {
-+	IMAGE_ID_ATF,
-+	IMAGE_ID_OPTEE,
-+	IMAGE_ID_SPL,
-+	IMAGE_ID_DM_FW,
-+	IMAGE_ID_TIFSSTUB_HS,
-+	IMAGE_ID_TIFSSTUB_FS,
-+	IMAGE_ID_TIFSSTUB_GP,
-+	IMAGE_AMT,
++#if IS_ENABLED(CONFIG_ARCH_K3)
++enum k3_resume_state {
++	K3_RESUME_STATE_UNKNOWN = 0,
++	K3_RESUME_STATE_BOOTING,
++	K3_RESUME_STATE_RESUMING
 +};
-+
-+extern struct image_info fit_image_info[IMAGE_AMT];
 +#endif
 +
- struct fwl_data {
- 	const char *name;
- 	u16 fwl_id;
-diff --git a/arch/arm/mach-k3/lpm-common.h b/arch/arm/mach-k3/lpm-common.h
-new file mode 100644
-index 000000000000..2b360e6f03f3
---- /dev/null
-+++ b/arch/arm/mach-k3/lpm-common.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * K3: LPM Architecture common definitions
-+ *
-+ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+#ifndef _LPM_COMMON_H_
-+#define _LPM_COMMON_H_
-+
-+void __noreturn do_resume(void);
-+void lpm_process(void);
-+
-+#endif
-diff --git a/arch/arm/mach-k3/r5/Kconfig b/arch/arm/mach-k3/r5/Kconfig
-index 12335880e106..7a9c005a6d7c 100644
---- a/arch/arm/mach-k3/r5/Kconfig
-+++ b/arch/arm/mach-k3/r5/Kconfig
-@@ -1,6 +1,10 @@
- config K3_LOAD_SYSFW
- 	bool
- 
-+config K3_LPM
-+	bool
-+	default y if SOC_K3_J721E || SOC_K3_J7200 || SOC_K3_J784S4 || SOC_K3_J722S || SOC_K3_J721S2
-+
- config K3_OPP_LOW
- 	depends on ARCH_K3 && K3_AVS0
- 	bool "Enable OPP_LOW on supported TI K3 SoCs"
-diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
-index 074e3b61a262..ccededbc0d60 100644
---- a/arch/arm/mach-k3/r5/Makefile
-+++ b/arch/arm/mach-k3/r5/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_SOC_K3_J722S) += j722s/
- obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
- 
- obj-y += common.o
-+obj-$(CONFIG_K3_LPM) += lpm-common.o
- obj-y += lowlevel_init.o
- obj-y += r5_mpu.o
- 
-diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index 03638366046b..a80e903de85a 100644
---- a/arch/arm/mach-k3/r5/common.c
-+++ b/arch/arm/mach-k3/r5/common.c
-@@ -18,19 +18,9 @@
- #include <elf.h>
- 
- #include "../common.h"
-+#include "../lpm-common.h"
- 
- #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
--enum {
--	IMAGE_ID_ATF,
--	IMAGE_ID_OPTEE,
--	IMAGE_ID_SPL,
--	IMAGE_ID_DM_FW,
--	IMAGE_ID_TIFSSTUB_HS,
--	IMAGE_ID_TIFSSTUB_FS,
--	IMAGE_ID_TIFSSTUB_GP,
--	IMAGE_AMT,
--};
--
- #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
- static const char *image_os_match[IMAGE_AMT] = {
- 	"arm-trusted-firmware",
-@@ -43,7 +33,7 @@ static const char *image_os_match[IMAGE_AMT] = {
- };
+ /* Architecture-specific global data */
+ struct arch_global_data {
+ #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
+@@ -108,8 +116,19 @@ struct arch_global_data {
+ #ifdef CONFIG_SMBIOS
+ 	ulong smbios_start;		/* Start address of SMBIOS table */
  #endif
++#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_ARCH_K3))
++	enum k3_resume_state k3_resuming;
++#endif
+ };
  
--static struct image_info fit_image_info[IMAGE_AMT];
-+struct image_info fit_image_info[IMAGE_AMT];
++#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_ARCH_K3))
++#define gd_k3_resuming() gd->arch.k3_resuming
++#define gd_set_k3_resuming(state) gd->arch.k3_resuming = (state)
++#else
++#define gd_k3_resuming() 0
++#define gd_set_k3_resuming(state)
++#endif
++
+ #include <asm-generic/global_data.h>
  
- void init_env(void)
- {
-@@ -170,6 +160,9 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
- 	if (ret)
- 		panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
- 
-+	if (IS_ENABLED(CONFIG_K3_LPM))
-+		lpm_process();
-+
- #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
- 	/* Authenticate ATF */
- 	void *image_addr = (void *)fit_image_info[IMAGE_ID_ATF].image_start;
-diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
-new file mode 100644
-index 000000000000..6bab0189b032
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/lpm-common.c
-@@ -0,0 +1,214 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * K3: R5 Common LPM Architecture initialization
-+ *
-+ * Copyright (C) 2023-2026 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+#include <clk.h>
-+#include <dm/read.h>
-+#include <elf.h>
-+#include <linux/printk.h>
-+#include <linux/soc/ti/ti_sci_protocol.h>
-+#include <power-domain.h>
-+#include <remoteproc.h>
-+#include <mach/security.h>
-+
-+#include "../common.h"
-+#include "../lpm-common.h"
-+
-+#define FW_IMAGE_SIZE 0x80000
-+
-+struct lpm_addr_info {
-+	unsigned long context_save_addr;
-+	unsigned long atf_cert_addr;
-+	unsigned long optee_cert_addr;
-+	unsigned long dm_save_addr;
-+	u32 size;
-+};
-+
-+__weak bool j7xx_board_is_resuming(void)
-+{
-+	return false;
-+}
-+
-+static int extract_lpm_region(struct lpm_addr_info *mem_addr_lpm)
-+{
-+	ofnode node;
-+	fdt_addr_t lpm_reg_addr;
-+	fdt_size_t lpm_reg_size;
-+
-+	node = ofnode_path("/reserved-memory/lpm-memory");
-+	if (!ofnode_valid(node)) {
-+		printf("lpm will not be functional\n");
-+		return -ENODEV;
-+	}
-+
-+	lpm_reg_addr = ofnode_get_addr(node);
-+	if (lpm_reg_addr == FDT_ADDR_T_NONE) {
-+		printf("Can't find a valid reserved node!\n");
-+		return -ENODEV;
-+	}
-+
-+	lpm_reg_size = ofnode_get_size(node);
-+	if (lpm_reg_size == FDT_ADDR_T_NONE) {
-+		printf("Can't find a valid reserved node!\n");
-+		return -ENODEV;
-+	}
-+
-+	mem_addr_lpm->context_save_addr = lpm_reg_addr;
-+	mem_addr_lpm->atf_cert_addr = mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE;
-+	mem_addr_lpm->optee_cert_addr = mem_addr_lpm->atf_cert_addr + FW_IMAGE_SIZE;
-+	mem_addr_lpm->dm_save_addr = mem_addr_lpm->optee_cert_addr + (2 * FW_IMAGE_SIZE);
-+	mem_addr_lpm->size = lpm_reg_size;
-+
-+	return 0;
-+}
-+
-+static int save_certificate(struct lpm_addr_info *mem_addr_lpm)
-+{
-+	int ret;
-+
-+	if (!fit_image_info[IMAGE_ID_ATF].image_start ||
-+	    !fit_image_info[IMAGE_ID_OPTEE].image_start ||
-+	    !fit_image_info[IMAGE_ID_DM_FW].image_start) {
-+		pr_err("Invalid images to save\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = extract_lpm_region(mem_addr_lpm);
-+	if (ret) {
-+		pr_err("Cannot find valid LPM address range..\n");
-+		return -ENOMEM;
-+	}
-+
-+	memcpy((void *)mem_addr_lpm->atf_cert_addr,
-+	       (void *)fit_image_info[IMAGE_ID_ATF].image_start,
-+	       fit_image_info[IMAGE_ID_ATF].image_len);
-+
-+	memcpy((void *)mem_addr_lpm->optee_cert_addr,
-+	       (void *)fit_image_info[IMAGE_ID_OPTEE].image_start,
-+	       fit_image_info[IMAGE_ID_OPTEE].image_len);
-+
-+	memcpy((void *)mem_addr_lpm->dm_save_addr,
-+	       (void *)fit_image_info[IMAGE_ID_DM_FW].image_start,
-+	       fit_image_info[IMAGE_ID_DM_FW].image_len);
-+
-+	return 0;
-+}
-+
-+void lpm_process(void)
-+{
-+	int ret = 0;
-+	struct lpm_addr_info mem_addr_lpm;
-+	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-+
-+	ret = save_certificate(&mem_addr_lpm);
-+	if (ret)
-+		return;
-+	/*
-+	 * As there is no function to check TIFS capabilities, we can't really
-+	 * know if the call failed because it's not supported by TIFS or for
-+	 * another reason.
-+	 */
-+	ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci,
-+						mem_addr_lpm.context_save_addr,
-+						mem_addr_lpm.size);
-+	if (ret)
-+		pr_err("TIFS lpm save addr fails (message not supported?)\n");
-+}
-+
-+static unsigned long resume_to_dm_f(const struct lpm_addr_info *mem_addr_lpm)
-+{
-+	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-+	unsigned long loadaddr;
-+	int ret = 0;
-+
-+	loadaddr = mem_addr_lpm->dm_save_addr;
-+	if (!valid_elf_image(loadaddr))
-+		panic("%s: DM-Firmware image is not valid, it cannot be loaded\n",
-+		      __func__);
-+
-+	loadaddr = load_elf_image_phdr(loadaddr);
-+	ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci,
-+						mem_addr_lpm->context_save_addr,
-+						mem_addr_lpm->size);
-+	if (ret)
-+		panic("TIFS lpm save addr fail : %x\n", ret);
-+
-+	/*
-+	 * TIFS minimal context restore
-+	 * This restores also the firewall
-+	 */
-+	ret = ti_sci->ops.lpm_ops.min_context_restore(ti_sci, 0);
-+	if (ret)
-+		panic("TIFS restore_context failed (%d)\n", ret);
-+
-+	/*
-+	 * Restore TFA in msmc memory
-+	 */
-+	ret = ti_sci->ops.lpm_ops.decrypt_tfa(ti_sci,
-+					      CONFIG_K3_ATF_LOAD_ADDR);
-+	if (ret)
-+		panic("%s: TIFS failed to decrytp TFA : %x\n", __func__, ret);
-+
-+	/* restore TFA resume vector address in main core */
-+	ret = ti_sci->ops.lpm_ops.core_resume(ti_sci);
-+	if (ret)
-+		panic("ATF failed to resume (%d)\n", ret);
-+
-+	return loadaddr;
-+}
-+
-+static void resume_rproc_f(void)
-+{
-+	struct power_domain rproc_pwrdmn;
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, 1, &dev);
-+	if (ret)
-+		panic("Unknown remote processor 1 (%d)\n", ret);
-+
-+	ret = power_domain_get_by_index(dev, &rproc_pwrdmn, 1);
-+	if (ret)
-+		panic("power_domain_get_rproc() failed: %d\n", ret);
-+
-+	ret = power_domain_on(&rproc_pwrdmn);
-+	if (ret)
-+		panic("power_domain_on failed: %d\n", ret);
-+}
-+
-+typedef void __noreturn (*image_entry_noargs_t)(void);
-+
-+void __noreturn do_resume(void)
-+{
-+	struct lpm_addr_info mem_addr_lpm;
-+	image_entry_noargs_t image_entry;
-+	size_t sz = FW_IMAGE_SIZE;
-+	unsigned long loadaddr;
-+	void *image_addr;
-+	int ret;
-+
-+	ret = extract_lpm_region(&mem_addr_lpm);
-+	if (ret)
-+		panic("Cannot find valid LPM address range... LPM resume failed\n");
-+
-+	ret = rproc_load(1, mem_addr_lpm.atf_cert_addr, 0x200);
-+	if (ret)
-+		panic("rproc failed to be initialized (%d)\n", ret);
-+
-+	image_addr = (void *)mem_addr_lpm.atf_cert_addr;
-+	ti_secure_image_auth_apply_fwls(&image_addr, sz);
-+
-+	image_addr = (void *)mem_addr_lpm.optee_cert_addr;
-+	ti_secure_image_auth_apply_fwls(&image_addr, sz);
-+
-+	loadaddr = resume_to_dm_f(&mem_addr_lpm);
-+	printf("Starting ATF on ARM64 core...\n\n");
-+	resume_rproc_f();
-+
-+	image_entry = (image_entry_noargs_t)loadaddr;
-+	image_entry();
-+}
+ #if defined(__clang__) || defined(LTO_ENABLE)
