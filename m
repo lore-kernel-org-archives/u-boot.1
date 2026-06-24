@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44416CDE000
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 21:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AEB2CDE000
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 21:20:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E963849F3;
-	Wed, 24 Jun 2026 23:20:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3B93847C3;
+	Wed, 24 Jun 2026 23:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PHb40MtT";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N5YhFz0g";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DScf+ZJa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JsdBV76q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB31A8460E; Wed, 24 Jun 2026 23:20:12 +0200 (CEST)
+ id 530F884A06; Wed, 24 Jun 2026 23:20:15 +0200 (CEST)
 Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
  [148.163.150.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ACA6847C3
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 23:20:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D998849CB
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 23:20:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
 Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65OJshVI1056749;
- Wed, 24 Jun 2026 16:20:00 -0500
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 65OJs52E1056094;
+ Wed, 24 Jun 2026 16:20:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=P6EmrwJ9cjzfa4Kp7NocaJZ+MSnxt0FE6mN18A0eS
- dA=; b=PHb40MtTEEWoiA++3ORR6AI6ZpgOfyRccPOqcOJ1txx7/6bGHnUk+iZME
- oavnIXPwAQwNrkFcat27SfmPvicrJlg6VXrfR+dQyMlyPGljbdPzfZ/MU0KTLDRK
- Z6XiwtC6MeFmJQGMv1CiLq5lUVdtFeP/68Z68joCwctxm1mHtUi1QP9+c2lqiB5I
- 24/KkfDAaXyykP0ZBRO7km8YzM1DvS/fLil1wM2J+CciKwM06h0Tuj1GB62aTk7H
- 8X+/+HUHTuQGaBZ/UAYA/fJsgGaK7J1ur85TCucExbB7zI257RKyHTGh860PCDSx
- XUZN5Li065DUuaSEVQ41A37O2g6TA==
-Received: from sa9pr02cu001.outbound.protection.outlook.com
- (mail-southcentralusazon11013057.outbound.protection.outlook.com
- [40.93.196.57])
- by m0380145.ppops.net (PPS) with ESMTPS id 4f0e5ybu64-1
+ proofpoint-05-2026; bh=Z4dbLNxauxjWuGiauO45qWGtW4zoQVgPo+HzDcljV
+ Ks=; b=DScf+ZJazPk8dgL2ESD+hmu/Buy5wqlfapOqLPLAuWpqEcBWkfcuNpDGR
+ aejngNxB+ZsyY/LqFj/qA3CMm75JOGii8lcsvo5s485SHUMaBM4k0pvejdvBzhG4
+ hJOIzig61q/YvwwDqHh+fyNQq7t028vVFYbIG390BmRiyVi3ok3HypWTLZDkq6w8
+ 7I6soS5cWqWitykXsDjX9XzcAzeySnREWdppQlWu7w98j58dzMjex2PYp69P6Zl3
+ MKwjFvqqgqtM9x50y0TAEnVFBhfVzr05TjRE0ykP2MJtQ+2/SMR5GY6p9/vbs55N
+ 8VeQBrugsq/VNK9NfB4WVMdz/Brig==
+Received: from ch1pr05cu001.outbound.protection.outlook.com
+ (mail-northcentralusazon11010065.outbound.protection.outlook.com
+ [52.101.193.65])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4f0e5ybu6d-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 24 Jun 2026 16:20:00 -0500 (CDT)
+ Wed, 24 Jun 2026 16:20:02 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZERJDT8agP+RsRX/xaOPQcrtqwgPz6m+prSymlpRgOqx5w+sOaj+N2y/DRGP/IeDv/MZ+KNIu7Bd52ECzgpm/eB9SqOu4+7TzNoclB8HSudeUBLKpf/Ta7pSwztYVg9kk+poXMGz5CV8r63dQvxApxkwfj4EJPE6Zc/NUk973zw1JqL2zZajqwRw0SN5qlkwZtZdb8TYZu9kHv+rTQKtDRgvwn7tU/IuZqhQ1HTnxSPzUdDcEJ7hYWqg9MSPbtuT6GeYP48HuR+TegxHWG+88RfhSOG3+ik02i0WJoY+QZfs9Keq14eINIXzHLJiqK5Ud9mhN7EruyZQ8R0jo+05tw==
+ b=pn6U37SC3mtokrdsaTx5BzY8P6NI2TxrdMFjMRzCsD6TxEz90VIKaY92Ok5u14g6AUmgXoSnP3wsESdZLAWX3AofrQL9QIqnXITzuhmOvi7ABSed21Mv1RS3zDj+AalG329EcmspEt4EF53VJOUnrE3uHP3NKhDRhnyHwfd2C8RLc0iXHJSQwyfByNzEWit2hw155jxV7/PtVFDZ1pAps5bzjhQRJ+ZF7NO+4WHlmKEXJm8G5QVqIeQjAXpd0hvi0a8Xdsm9SDwMogfPdGj+hEooFmgKBF4/IQAYnqgFjBdyIcpXyPp/Ib9NCVR9EoZnjguyL8LnhNybn5YWPfD9pA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P6EmrwJ9cjzfa4Kp7NocaJZ+MSnxt0FE6mN18A0eSdA=;
- b=NCjn6/9ayyl4qgS+g7sr//knTTvTPJ/PESqoyoAHdihoxDUEeH6XFKM/tUq+vlDFIpuFaTL6AlscndrPQFOxI1z5WVXA01BPni0vX2LN13j038o1W1Ap64UzNVD5FFoe6cvsEN6iOhAOa/U6jXJwXNLo5CIHTcdcbz2imV1lPIyhs/mMSyQL1wfjwdhPmNzITZmPTKzEe2krLAlgvAl+7N8QarrURXm6MGryeTIjphT6VxDc0g7OHM7tjAlaNdHpCQtZzMpF96LQTqU3KJ5EbjuCZkoPlu6Bdh/XO+o0ayE9rNTY7NIlQvKhq3LtlyIXToy2jPIBNHVsfAxqmPL9Ow==
+ bh=Z4dbLNxauxjWuGiauO45qWGtW4zoQVgPo+HzDcljVKs=;
+ b=uq0QPYQes3eAnY7sfzMD00WS9GqEQynmGFultHZlM8j8J5QJm3d18t1AV76opznsAb+4nQsE27yn1nwqfK2xWdl9TLosSVQeCLjdbJuCsZxgzkY9tJ7Bj+z3Kyd9ovJQbc2obHbbHcF8O1eLhulPGsiJ2vqIzyCr9v13l/XqaVdB4YmMPPqwQhiaa7QuaIkgMbsMa1EjPcCPUfEDeKUBOwkX5cT9v8lTDbYAlcgnKEQ7XH5S7ddrSne+uMvVUhkpuaNUBFuiI/NSatFpZ9AojoKr2mXT9u7SOG/1dmn6z7Ho/dUD8mMuAnlN6C4nj1Aai+50bkI3Dvp5KH9WPh8nfA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P6EmrwJ9cjzfa4Kp7NocaJZ+MSnxt0FE6mN18A0eSdA=;
- b=N5YhFz0gRmIIHUfbrLmw2aNgB1xvh69tsq8OSVeN/Q0h5B0rJz8haYNQuYWnKxptDHUo9u5gqyH4Izf7oVI2dZi4g5Aj7cx60r1rfVRnhYxAdj+M6VviqKmE0QJjFhJtNSLDAN3oYWDg3GboMxBAEyYZ955UKtbKOjCA6B1bRH0=
-Received: from MN2PR03CA0002.namprd03.prod.outlook.com (2603:10b6:208:23a::7)
- by CH3PR10MB7611.namprd10.prod.outlook.com (2603:10b6:610:176::6)
+ bh=Z4dbLNxauxjWuGiauO45qWGtW4zoQVgPo+HzDcljVKs=;
+ b=JsdBV76qw294XfrblIg5lQozFUg2TrCqsZJAWUY0aeEmP45qVLZ69pOkr0gh4xsHkzxYB96xr7dEL2E9zcMn1LgltZG0K4I8mlJL15DmcSCg17bvKNMmBB3p/4pxhy9lGYGK0hBERwIYHAEHsgaKGADdJUPPOASQM7ki0h5lOOw=
+Received: from BN9PR03CA0527.namprd03.prod.outlook.com (2603:10b6:408:131::22)
+ by PH8PR10MB6525.namprd10.prod.outlook.com (2603:10b6:510:22b::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Wed, 24 Jun
- 2026 21:19:53 +0000
-Received: from MN1PEPF0000F0E1.namprd04.prod.outlook.com
- (2603:10b6:208:23a:cafe::82) by MN2PR03CA0002.outlook.office365.com
- (2603:10b6:208:23a::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.13 via Frontend Transport; Wed,
- 24 Jun 2026 21:19:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.14; Wed, 24 Jun
+ 2026 21:19:56 +0000
+Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
+ (2603:10b6:408:131:cafe::3a) by BN9PR03CA0527.outlook.office365.com
+ (2603:10b6:408:131::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.14 via Frontend Transport; Wed,
+ 24 Jun 2026 21:19:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- MN1PEPF0000F0E1.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.159.10 via Frontend Transport; Wed, 24 Jun 2026 21:19:53 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 24 Jun
- 2026 16:19:52 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.181.0 via Frontend Transport; Wed, 24 Jun 2026 21:19:55 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 24 Jun
  2026 16:19:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 24 Jun
+ 2026 16:19:51 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
  Transport; Wed, 24 Jun 2026 16:19:51 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65OLJprG1851589;
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65OLJprF1851589;
  Wed, 24 Jun 2026 16:19:51 -0500
 From: <rs@ti.com>
 To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
@@ -101,9 +101,9 @@ To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCHv3 4/4] k3-am62-pocketbeagle2: add support for efi capsules
-Date: Wed, 24 Jun 2026 16:19:49 -0500
-Message-ID: <20260624211949.327905-5-rs@ti.com>
+Subject: [PATCHv3 3/4] k3-am62-pocketbeagle2: add support for 1GB variant
+Date: Wed, 24 Jun 2026 16:19:48 -0500
+Message-ID: <20260624211949.327905-4-rs@ti.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260624211949.327905-1-rs@ti.com>
 References: <20260624211949.327905-1-rs@ti.com>
@@ -113,50 +113,49 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E1:EE_|CH3PR10MB7611:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3d4b56c5-3eb0-443e-1e39-08ded2365520
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|PH8PR10MB6525:EE_
+X-MS-Office365-Filtering-Correlation-Id: aef685bf-0aa7-451e-e0f6-08ded2365654
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|23010399003|921020|6133799003|3023799007|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 1SNbBYtaA1Qa/SqWvtqv+HbP0gF21fWGSAu1WjLavchS7T3ebMVf6SPVafin2ZRVEfToqOmqd2muyYRsbYBHibXlqMj5/ysrHyDnfca1w9pHU11KHj01gTlSltr9Gr/xIN44NME8O5jeoOra5W3V0z2fNioZoU4kg9YRrpjZm5YtZxj8pvcTzwhkUtoMC2ttc7wFEsmWd9x2TFBnFQnPE8KI4mb110PKTYOlrTFy3TZTr++pEnJcDazIrJbezzu1lQ+7FbD2ss+aNXoNx5njSFZoED08VC2VvD+aczMimyFzQAsxHZMIjMeaertVZ13Ox9HJJ9ENnfPX99/B1v1lo6cx5fJNuIsqLFduP6t/98HgQSfQDZql/exvVqnB2A0Vtnar59IhH8cfPUvzQjXuGb+hosml1yjwihvKxVK7ncWtZ/VEqwwWgsLXCXtFAV1rgF4U/KE+cEUq1fyQr1dwtBpR4XLixb8hR+9z5qX1onRUEi8TMk2NUPN1/oPVvPfvY9ju2+c4lhVAl8lkaXe90mr272njuquCc6Y0r7sDef5rgzwk6OqPgd6VGn0SE4WT8QYRq6xoxG+APOKKp2zmZVGV7TfoTYtmkQOx8odyGhTsJoLONV8XTrENhDhdyB7/ox9d4B061bKLafmcsljeNKE9xteKU8DJVVsW+qIMFTTN+Gej3ivs+TRDjEl9s/yvLYq9uyI2JecEfcJVnlTsGw+UUK4mLIIuRhindecbtUpYzaydrZyH8YoJGiFuo3rk
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(23010399003)(921020)(6133799003)(3023799007)(18002099003)(22082099003)(56012099006);
+ ARA:13230040|23010399003|36860700016|1800799024|82310400026|376014|921020|22082099003|18002099003|13003099007|3023799007|56012099006|6133799003;
+X-Microsoft-Antispam-Message-Info: LDv9g0og5gEcQerC00/6niEYxdjAB5Kjvh+xiBZ+F+yVcHl01Efe2v9KNuUOZVkHUmf1izHxlUCLP4URwqih+gjBqDak7WxMEK4ckIOIuYshjUh8f7LpNMz8xZ155YWWpKoXK42LuHnlM7QmMu64DGgrzmvFZlVl+ImX4VGK0QvChGKwR3KW/8EP0e2evWWBV8/zqCr5aNvxp8F4GZvKAJ8670YWPATh3z+qWRtTt/+HngOgFAjXR+L/umrcwnuRuhI2//NEoAYWBWcRLCLs8J/u19wvo+D4fX5tPtyrF7ezvvi3O8MusqTr/YHLIHvUcz0ttOOAIpaBcSHNcqtfGYPV5O8XjPYCz2/zt3kiYRtFgLilS4CNbqabyWQLfI9iEqCjYV5guRP4yCv6nGx/ypW7ZQtrQdJ3QNL10PHzERcVEjowIBBGcceS1jQcscHIAwoG2ghI3k98spYl6R1RjOgj5MdGgXmJnc5RDmKU6RkMC2HknKaFkfdUL7LpKJh38exZaNrSs7ZpGZ/5Up2kS9s/j+9thA1+OhNV7pMlTyVCc4is5zZqSR9sJs38FAQMZCOA0d1/YVoVx1BDvbIaH61mXXgbh8i0ECbvuLvCnvcvhNb20WxzNFQHf/rvyPIoj6MHMXYhnUh34riMX37L0+rBK5bLiUj8I7diwe4gx22+zag/cHF4BD7B8cCum+Sv
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(23010399003)(36860700016)(1800799024)(82310400026)(376014)(921020)(22082099003)(18002099003)(13003099007)(3023799007)(56012099006)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 3/ICu8XuKB1fcXmhu0fRT7jBZ+EW+RajgJaT0PC5SBOjtB228fqNaGc8RuQ+8Y5k4qQwSSzmU7Bn3NDS0t06StW+Bvep1pstEB2OEWgTRVQknaYgUcqCZtC1yweSAXHuwwx629PHE2klwQLUHCII38DTmYKb+aGWiJKyTVnOFdyPn9kI9Lsk2fwwd9uoD2WmKHtBxvbOzbHeSPdKHh5Z4dT1hjN6VD7TUSmRJpACwKcR8zuk5p/eSONmpvuPhUGwHAAf2iEBCi/1+xgO4XNjYSwfAD8ocw9lUAOH4/svniAZrUwyyhK3xTAufFsnrUpFyHcsgMPUgcTNv27aFoFD4rq2MT93YL9Mfpv8sWXvfAHFIlHrw7O224Uli0UAUr1iI21SSEGTm6rq7ftqDdrmYVU7l0t65NbHy63Iru5ZQJj7rA7hUtTqJuLGw9yUPdyj
-X-Exchange-RoutingPolicyChecked: XPJjzIdDtGKo9jLYCMEbBDf6y1QaJpdCK95bEI00n88a6dz++mU+WsborUmkqHl2tQMg/DIn6hbtr/S15MfhrtA0asxfyTtTyUlNrdV6d3eZKlLHXBMozOZhzCptZ6SeMn57PAaP3FCz2qfiicxWaQW/advTMIdzAeFBVd1FzKkwE5VeahQ15G+WVJFY6aWCECnICQTkKTphsMipUgtFu6wzPFiuamwpVvnCukAYisD8NnXR97cm1C6sBr++ph506NQ6esCKIdtVdvTeOa0/Ylz79qlN7o6jAUW7laGzmfMBOWtM74oyimsXq2KNA/nTNReg9avSdBZjLEWbc2BHLg==
+X-MS-Exchange-AntiSpam-MessageData-0: bTjk4gtPzsg8kTZc97iZ4AMLfR29GBSu5u24dJ1UmFUIIg/TQ1zJQtc8mSgZAzR+J3q+C3YAJ8dSVKLv4C4Bm8+TmQ7yHzZ5CLXQwPKIJMB9lc3/RB4ggoYxpuA7pZ1SUpjjYAoM3uZArt/cPvEoi2rTJDQwELuQEbIORLm6CtuyKoyaSrO8Q0zXGYZX13iQ7B+AJxicCZRlNMP/AOb0bUvQtmm/LPrQUj8R0mve/GsRbq1gkip2SoIqgWkW/MfNDOTqxdE66TppuzqR2ry0vVaa3wZLR/L7ErsJd+lDH2L/m4en+YEdfQ0yq9w5ZNPNefAiM55SjytXTcBx+0tEaDgaL3DwYPMmyjn7jvsJ4M9TXqnAdgiAnlYedslPwnBiIAB1jA2e/3T+JaCaxE7aXy+4jPUc8vLT/ygj34uMdIgZW30da1+bgM09XgE6d3Pj
+X-Exchange-RoutingPolicyChecked: azxSRQN+RXvZ7lvsuuuhEjnw02bqz04UWv/cTeB4aR5NuUC3U9murbIweKAe5T9Nl7h8i+vE1UM/m26JPWlW2PdHQkaYHsmXje6IZJdYiKSRTQQYQWWm8ZiyI2Sa8ezFLNaRDS7zfnoqDtqLyxVh9N9TMO1dMS+Utrdsg3z91i7YWh4VG+rWajvheaTVWjJtq2PaYImM5xi8Xik+Tn2BqF3lJRdGj9RRhTvw5XMf7S3QUuEvPU1aY8TIF5IbRh+zNcZnqOPUlO3kdS2zXOnaYk/ku7567klcmUb8pA4hR4xOXEw7khwrqP72lF3uJDL7W+FhBMZE/sYoSbV2xEhNPA==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2026 21:19:53.0239 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d4b56c5-3eb0-443e-1e39-08ded2365520
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2026 21:19:55.0401 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aef685bf-0aa7-451e-e0f6-08ded2365654
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E1.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7611
-X-Authority-Analysis: v=2.4 cv=R6cz39RX c=1 sm=1 tr=0 ts=6a3c4a00 cx=c_pps
- a=u5eD0AXnJOl2BG6obV1kTA==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=FelO9ux0wxsA:10 a=s63m1ICgrNkA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=fGhLjsSNAAAA:8
- a=zziTSyxZXs25WCk4eZ0A:9 a=LYKFdyShAPKLkGq8p7WX:22
-X-Proofpoint-ORIG-GUID: OwPHliHPAsDWHx4DC8GNcNKkiK23UN9V
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDE3OCBTYWx0ZWRfX0WV992Dl5J0a
- WZzvPE5lWIVyvATgz0792mCA26e+/2vFtNZLPBiYzVqkDsY/1J/mWrtpZpLYuN3+hELt5HX+zB0
- JgIOTSgPbS1MoSucXhC0wYWn+WWqxl4=
-X-Proofpoint-GUID: OwPHliHPAsDWHx4DC8GNcNKkiK23UN9V
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDE3OCBTYWx0ZWRfX9Dnqwm7ZEsj/
- RhjD3ZTA+A7Rg6J9Pu66YW4kMQrIB7WF4IfXvG81SQeT69hzEJnXgtF804HG3SODhtkalU1WhdG
- UN+9liwJkrk+iRlz4y5by6or0j51FSGULuJzIp1XQmcXDQ1LlbVNrjpl58U7DNz6C1hYfinjgu6
- WBoVKN8Q0sD5uETVNs7KHrpb0KtaB2cnRkefYlmJ5nZkhQdfyWCqS8t9wV+liqSktjUHPWp0wY4
- 0fcDY2vOTj60DZh1LWsLBlpWwH5lUFmQBPno7iTWa0JA0JMxi/svxNVbdmLyPfYvqfUPyo+kuTq
- oKlcYzx1XP536v7h/dmX61PFHtGTLP5Jz54Yds+7ifz6KZS4ek5BcpaN7UR+9Wd7/r9JOIuenEo
- jbVRkP8VyP1gFkq6RQhClpYcr+zAfDJRezmshMlxWwIiViBCPeWHn+EHgsQIhSllWTpUQQqILrV
- NbUsreLzs1u0neGg1Zw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB6525
+X-Authority-Analysis: v=2.4 cv=R6cz39RX c=1 sm=1 tr=0 ts=6a3c4a02 cx=c_pps
+ a=wAiiizkMq93U2JYT/wsFEQ==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=FelO9ux0wxsA:10 a=V5UXEbMT0ywA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22
+ a=lLZmtIKjAAAA:8 a=NEAV23lmAAAA:8 a=fGhLjsSNAAAA:8 a=sozttTNsAAAA:8
+ a=mb9bpXRMdmiVFoUIA2EA:9 a=q5Nj8NTjyn2D8kUwajRn:22 a=LYKFdyShAPKLkGq8p7WX:22
+X-Proofpoint-ORIG-GUID: V8LF6vVGzy-aBNMwzxN7knJfsAhr78Gz
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDE3OCBTYWx0ZWRfX6q3y2ZZEIwXr
+ KMLm1JMBXnzt2R8dvRjV/TYke2BmgZruZrcnG263cQOZ6/sOj11tb4bt+3eSLkRu2zBIJALlBJJ
+ 7cpdQBI+VQaX4/CEN19MIOgMefJEbP8=
+X-Proofpoint-GUID: V8LF6vVGzy-aBNMwzxN7knJfsAhr78Gz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDE3OCBTYWx0ZWRfX1pKOaIQvk3e/
+ +jxws3dY6w1IEP7CxRY3kXvDSB8Snu/VXq9TXMF0JaILeHt7cU2zZah+TJ/h1Epk7Kwp4VCd6ES
+ LD7YRskhwPu2/qnzYyy+dmSaBXCfWibUR+qXLRVnyY1pG/wveG35afOlvcwbsnsdjX3eHSyQQAW
+ b0IkoIhtPVyjQzHVYMOQcryEWVN/1BGFRJgk/OG9LK+nMSb5SGxsjpjW8Oi2xTV+3E62eCRoZAw
+ P6Dy29+asGaWAvOnZuBTqP+/JjZ/3fqP6SRHw46l7GHntNcEMvoIVwgWknmrQBD0BrQLbM676iD
+ zCVSqOTooLT2mK6fMrZc2cD3QOdk2bY2SEV4bBpX2PWVfaF3Rx9hA+WZxXByYjJneqB+MdOVMQD
+ pLX6Su37AfgZN3R7qF8zOVo+wMVyFh/+C3xGP8kZT5rW6I+SVMRt5zjqf4TRxMOXwXf1IV2VaHp
+ mO+YAidOtMBbwgIb4dw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-24_04,2026-06-24_01,2025-10-01_01
@@ -184,160 +183,295 @@ X-Virus-Status: Clean
 
 From: Randolph Sapp <rs@ti.com>
 
-Add support for EFI capsules for this device. One large caveat is that
-the partition holding boot binaries cannot be the ESP partition due to
-the following ROM limitations.
+Take Phytec's current DDR fixup functions and utilize them to
+dynamically adjust for variants in the pocketbeagle2. There are
+currently 3 skews, two of which are both 512MB with the same memory
+configuration, and one which is 1GB using the same CWL and CL settings
+but a modified density [1].
 
-- The boot disk must be MBR
-- The boot partition must be labeled 0x0c with a boot flag
+Based off of Bryan Brattlof's patch [2].
 
-A separate ESP partition should be provided for EFI capabilities.
+[1] https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/5411/8G%20Bits%20DDR4%20SDRAM.pdf
+[2] https://github.com/bryanbrattlof/beagleboot/commit/fb2f022e27427e990d7a33fd001ffb571e13cfc3
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
-v3:
-	- Remove unnecessary dfu_alt_info_ram variable
----
- .../arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi | 29 +++++++++++++++++++
- board/beagle/pocketbeagle2/pocketbeagle2.c    | 26 +++++++++++++++++
- configs/am62_pocketbeagle2_a53_defconfig      |  1 +
- include/configs/pocketbeagle2.h               | 25 ++++++++++++++++
- 4 files changed, 81 insertions(+)
+ board/beagle/pocketbeagle2/Kconfig            |  26 +++++
+ board/beagle/pocketbeagle2/Makefile           |   2 +
+ board/beagle/pocketbeagle2/pocketbeagle2.c    | 103 +++++++++++++++++-
+ .../beagle/pocketbeagle2/pocketbeagle2_ddr.h  |  50 +++++++++
+ configs/am62_pocketbeagle2_r5_defconfig       |   5 +-
+ 5 files changed, 184 insertions(+), 2 deletions(-)
+ create mode 100644 board/beagle/pocketbeagle2/pocketbeagle2_ddr.h
 
-diff --git a/arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi b/arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi
-index 452161115318..283e26380e48 100644
---- a/arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am62-pocketbeagle2-u-boot.dtsi
-@@ -181,6 +181,17 @@
- 		};
- 	};
- };
-+
-+#include "k3-binman-capsule-r5.dtsi"
-+
-+// Capsule update GUIDs in string form. See pocketbeagle2.h
-+#define POCKETBEAGLE2_TIBOOT3_IMAGE_GUID_STR "F0D53723-106E-5346-8A41-85EB2D07C720"
-+
-+&capsule_tiboot3 {
-+	efi-capsule {
-+		image-guid = POCKETBEAGLE2_TIBOOT3_IMAGE_GUID_STR;
-+	};
-+};
- #endif /* CONFIG_TARGET_AM62X_R5_POCKETBEAGLE2 */
+diff --git a/board/beagle/pocketbeagle2/Kconfig b/board/beagle/pocketbeagle2/Kconfig
+index e957b8e8377e..a361fcebfc1d 100644
+--- a/board/beagle/pocketbeagle2/Kconfig
++++ b/board/beagle/pocketbeagle2/Kconfig
+@@ -12,6 +12,7 @@ config TARGET_AM62X_A53_POCKETBEAGLE2
+ 	select ARM64
+ 	select BINMAN
+ 	select OF_SYSTEM_SETUP
++	imply TI_I2C_BOARD_DETECT
  
- #if IS_ENABLED(CONFIG_TARGET_AM62X_A53_POCKETBEAGLE2)
-@@ -304,4 +315,22 @@
- 		};
- 	};
- };
+ config TARGET_AM62X_R5_POCKETBEAGLE2
+ 	bool "BeagleBoard.org AM62X PocketBeagle 2 running on R5"
+@@ -23,6 +24,7 @@ config TARGET_AM62X_R5_POCKETBEAGLE2
+ 	select K3_DDRSS
+ 	select BINMAN
+ 	imply SYS_K3_SPL_ATF
++	imply TI_I2C_BOARD_DETECT
+ 
+ endchoice
+ 
+@@ -58,3 +60,27 @@ config SPL_LDSCRIPT
+ source "board/ti/common/Kconfig"
+ 
+ endif
 +
-+#include "k3-binman-capsule.dtsi"
++config POCKETBEAGLE2_AM62X_RAM_SIZE_FIX
++	bool "Set the PocketBeagle 2 RAM size instead of detecting it"
++	default false
++	help
++	  RAM size is automatically detected through the device revision stored
++	  in EEPROM. This overrides the detection logic with a fixed value.
 +
-+// Capsule update GUIDs in string form. See pocketbeagle2.h
-+#define POCKETBEAGLE2_SPL_IMAGE_GUID_STR "C73FDEA2-3964-58C8-8A25-E55102172E1D"
-+#define POCKETBEAGLE2_UBOOT_IMAGE_GUID_STR "520E1012-DE6C-5992-B43A-95D53D8332F2"
++choice
++	prompt "PocketBeagle 2 RAM size"
++	depends on POCKETBEAGLE2_AM62X_RAM_SIZE_FIX
++	default POCKETBEAGLE2_AM62X_RAM_SIZE_512MB
 +
-+&capsule_tispl {
-+	efi-capsule {
-+		image-guid = POCKETBEAGLE2_SPL_IMAGE_GUID_STR;
-+	};
-+};
++config POCKETBEAGLE2_AM62X_RAM_SIZE_512MB
++	bool "512MB RAM"
++	help
++	  Set RAM size fix to 512MB for the PocketBeagle 2.
 +
-+&capsule_uboot {
-+	efi-capsule {
-+		image-guid = POCKETBEAGLE2_UBOOT_IMAGE_GUID_STR;
-+	};
-+};
- #endif /* CONFIG_TARGET_AM62X_A53_POCKETBEAGLE2 */
++config POCKETBEAGLE2_AM62X_RAM_SIZE_1GB
++	bool "1GB RAM"
++	help
++	  Set RAM size fix to 1GB for the PocketBeagle 2.
++
++endchoice
+diff --git a/board/beagle/pocketbeagle2/Makefile b/board/beagle/pocketbeagle2/Makefile
+index 3d42c160716e..dd529fe6d75e 100644
+--- a/board/beagle/pocketbeagle2/Makefile
++++ b/board/beagle/pocketbeagle2/Makefile
+@@ -7,3 +7,5 @@
+ #
+ 
+ obj-y += pocketbeagle2.o
++obj-${CONFIG_K3_DDRSS} += ../../phytec/common/k3/k3_ddrss_patch.o
++obj-${CONFIG_TI_I2C_BOARD_DETECT} += ../../ti/common/board_detect.o
 diff --git a/board/beagle/pocketbeagle2/pocketbeagle2.c b/board/beagle/pocketbeagle2/pocketbeagle2.c
-index 8463d82ef9d8..b6a136a93c0a 100644
+index 291a1c6c3db7..8463d82ef9d8 100644
 --- a/board/beagle/pocketbeagle2/pocketbeagle2.c
 +++ b/board/beagle/pocketbeagle2/pocketbeagle2.c
-@@ -7,6 +7,7 @@
-  * Copyright (C) 2025 Robert Nelson, BeagleBoard.org Foundation
-  */
+@@ -17,17 +17,118 @@
+ #include <dm/uclass.h>
+ #include <linux/sizes.h>
  
-+#include <efi_loader.h>
- #include <env.h>
- #include <fdt_support.h>
- #include <spl.h>
-@@ -22,6 +23,31 @@
- 
++#include "../../ti/common/board_detect.h"
++#include "pocketbeagle2_ddr.h"
++
  DECLARE_GLOBAL_DATA_PTR;
  
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.image_type_id = POCKETBEAGLE2_TIBOOT3_IMAGE_GUID,
-+		.fw_name = u"POCKETBEAGLE2_TIBOOT3",
-+		.image_index = 1,
-+	},
-+	{
-+		.image_type_id = POCKETBEAGLE2_SPL_IMAGE_GUID,
-+		.fw_name = u"POCKETBEAGLE2_SPL",
-+		.image_index = 2,
-+	},
-+	{
-+		.image_type_id = POCKETBEAGLE2_UBOOT_IMAGE_GUID,
-+		.fw_name = u"POCKETBEAGLE2_UBOOT",
-+		.image_index = 3,
++static int pocketbeagle2_get_ddr_size(void)
++{
++	// check config overrides first
++	if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_FIX)) {
++		if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_512MB))
++			return EEPROM_RAM_SIZE_512MB;
++		if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_1GB))
++			return EEPROM_RAM_SIZE_1GB;
 +	}
-+};
 +
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "mmc 1=tiboot3.bin fat 1 1;"
-+		      "tispl.bin fat 1 1;u-boot.img fat 1 1",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
++#if IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)
++	// dynamically detect the config if we can
++	if (!do_board_detect_am6()) {
++		struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
 +
- static int pocketbeagle2_get_ddr_size(void)
++		if (strlen(ep->name) > 11 && ep->name[0] == 'P') {
++			/*
++			 * POCKETBEAGL2A00 (am6232 512MB)
++			 * POCKETBEAGL2A10 (am625 512MB)
++			 * POCKETBEAGL2A1I (am625 1GB)
++			 */
++			if (!strncmp(&ep->name[11], "2A1I", 4))
++				return EEPROM_RAM_SIZE_1GB;
++		}
++	}
++#endif
++
++	return EEPROM_RAM_SIZE_512MB;
++}
++
+ int dram_init(void)
  {
- 	// check config overrides first
-diff --git a/configs/am62_pocketbeagle2_a53_defconfig b/configs/am62_pocketbeagle2_a53_defconfig
-index 8964cb3b1955..7428926a8ba6 100644
---- a/configs/am62_pocketbeagle2_a53_defconfig
-+++ b/configs/am62_pocketbeagle2_a53_defconfig
-@@ -122,3 +122,4 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
+ 	return fdtdec_setup_mem_size_base();
+ }
  
- #include <configs/am62x_a53_usbdfu.config>
-+#include <configs/k3_efi_capsule.config>
-diff --git a/include/configs/pocketbeagle2.h b/include/configs/pocketbeagle2.h
-index dd6956aa8b90..aed60d325742 100644
---- a/include/configs/pocketbeagle2.h
-+++ b/include/configs/pocketbeagle2.h
-@@ -8,6 +8,31 @@
- #ifndef __CONFIG_POCKETBEAGLE2_H
- #define __CONFIG_POCKETBEAGLE2_H
++// logic after this block assumes that there is only 1 DRAM bank currently
++#if CONFIG_NR_DRAM_BANKS != 1
++#error Unsupported number of DRAM banks!
++#endif
++
+ int dram_init_banksize(void)
+ {
+-	return fdtdec_setup_memory_banksize();
++	eeprom_ram_size ram_size;
++
++	memset(gd->bd->bi_dram, 0, sizeof(gd->bd->bi_dram[0]));
++
++	ram_size = pocketbeagle2_get_ddr_size();
++	switch (ram_size) {
++	case EEPROM_RAM_SIZE_1GB:
++		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
++		gd->bd->bi_dram[0].size = SZ_1G;
++		gd->ram_size = SZ_1G;
++		break;
++	case EEPROM_RAM_SIZE_512MB:
++		fallthrough;
++	default:
++		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
++		gd->bd->bi_dram[0].size = SZ_512M;
++		gd->ram_size = SZ_512M;
++		break;
++	}
++
++	return 0;
++}
++
++#if IS_ENABLED(CONFIG_K3_DDRSS)
++static int update_ddrss_timings(void)
++{
++	int ret = 0;
++	eeprom_ram_size ram_size;
++	struct ddrss *ddr_patch = NULL;
++	void *fdt = (void *)gd->fdt_blob;
++
++	ram_size = pocketbeagle2_get_ddr_size();
++	ddr_patch = &pocketbeagle2_ddrss_data[ram_size];
++
++	if (!ddr_patch)
++		return ret;
++
++	ret = fdt_apply_ddrss_timings_patch(fdt, ddr_patch);
++	if (ret) {
++		printf("Failed to apply ddrs timings patch: %d\n", ret);
++		return ret;
++	}
++
++	return ret;
++}
++
++int do_board_detect(void)
++{
++	void *fdt = (void *)gd->fdt_blob;
++	u64 start[] = { gd->bd->bi_dram[0].start };
++	u64 size[] = { gd->bd->bi_dram[0].size };
++	int ret;
++
++	dram_init();
++	dram_init_banksize();
++
++	ret = fdt_fixup_memory_banks(fdt, start, size, 1);
++	if (ret) {
++		printf("Failed to fixup memory banks: %d\n", ret);
++		return ret;
++	}
++
++	return update_ddrss_timings();
+ }
++#endif /* CONFIG_K3_DDRSS */
  
-+/**
-+ * define POCKETBEAGLE2_TIBOOT3_IMAGE_GUID - firmware GUID for PocketBeagle 2
-+ *                                           tiboot3.bin
-+ * define POCKETBEAGLE2_SPL_IMAGE_GUID     - firmware GUID for PocketBeagle 2 SPL
-+ * define POCKETBEAGLE2_UBOOT_IMAGE_GUID   - firmware GUID for PocketBeagle 2 UBOOT
+ /*
+  * The U-Boot stack can collide with some dt reservations in the 512MB
+diff --git a/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h b/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h
+new file mode 100644
+index 000000000000..c144dbafe059
+--- /dev/null
++++ b/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h
+@@ -0,0 +1,50 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * DDR override logic for AM625 PocketBeagle 2
++ * https://www.beagleboard.org/boards/pocketbeagle-2
 + *
-+ * These GUIDs are used in capsules updates to identify the corresponding
-+ * firmware object.
-+ *
-+ * Board developers using this as a starting reference should
-+ * define their own GUIDs to ensure that firmware repositories (like
-+ * LVFS) do not confuse them.
++ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
 + */
-+#define POCKETBEAGLE2_TIBOOT3_IMAGE_GUID                                   \
-+	EFI_GUID(0xF0D53723, 0x106E, 0x5346, 0x8A, 0x41, 0x85, 0xEB, 0x2D, \
-+		 0x07, 0xC7, 0x20)
 +
-+#define POCKETBEAGLE2_SPL_IMAGE_GUID                                       \
-+	EFI_GUID(0xC73FDEA2, 0x3964, 0x58C8, 0x8A, 0x25, 0xE5, 0x51, 0x02, \
-+		 0x17, 0x2E, 0x1D)
++#ifndef __POCKETBEAGLE2_DDR_H
++#define __POCKETBEAGLE2_DDR_H
 +
-+#define POCKETBEAGLE2_UBOOT_IMAGE_GUID                                     \
-+	EFI_GUID(0x520E1012, 0xDE6C, 0x5992, 0xB4, 0x3A, 0x95, 0xD5, 0x3D, \
-+		 0x83, 0x32, 0xF2)
++#include "../../phytec/common/k3/k3_ddrss_patch.h"
 +
- /* Now for the remaining common defines */
- #include <configs/ti_armv7_common.h>
- 
++typedef enum {
++	EEPROM_RAM_SIZE_512MB = 0,
++	EEPROM_RAM_SIZE_1GB = 1
++} eeprom_ram_size;
++
++struct ddr_reg ddr_1gb_ctl_regs[] = {
++	{ 317, 0x00000101 },
++	{ 318, 0x1FFF0000 },
++};
++
++struct ddr_reg ddr_1gb_pi_regs[] = {
++	{ 77, 0x04010100 },
++};
++
++struct ddrss pocketbeagle2_ddrss_data[] = {
++	// default configuration
++	[EEPROM_RAM_SIZE_512MB] = {
++		.ctl_regs = NULL,
++		.ctl_regs_num = 0,
++		.pi_regs = NULL,
++		.pi_regs_num = 0,
++		.phy_regs = NULL,
++		.phy_regs_num = 0,
++	},
++
++	// industrial configuration
++	[EEPROM_RAM_SIZE_1GB] = {
++		.ctl_regs = &ddr_1gb_ctl_regs[0],
++		.ctl_regs_num = ARRAY_SIZE(ddr_1gb_ctl_regs),
++		.pi_regs = &ddr_1gb_pi_regs[0],
++		.pi_regs_num = ARRAY_SIZE(ddr_1gb_pi_regs),
++		.phy_regs = NULL,
++		.phy_regs_num = 0,
++	},
++};
++
++#endif /* __POCKETBEAGLE2_DDR_H */
+diff --git a/configs/am62_pocketbeagle2_r5_defconfig b/configs/am62_pocketbeagle2_r5_defconfig
+index 90e577e8ce16..82919d559d5e 100644
+--- a/configs/am62_pocketbeagle2_r5_defconfig
++++ b/configs/am62_pocketbeagle2_r5_defconfig
+@@ -14,7 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-pocketbeagle2"
+ CONFIG_DM_RESET=y
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_I2C=y
+ CONFIG_SPL_DM_MAILBOX=y
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SPL_POWER_DOMAIN=y
+@@ -72,6 +73,8 @@ CONFIG_SPL_CLK_K3_PLL=y
+ CONFIG_SPL_CLK_K3=y
+ CONFIG_TI_SCI_PROTOCOL=y
+ CONFIG_DA8XX_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
+ CONFIG_SPL_MISC=y
 -- 
 2.54.0
 
