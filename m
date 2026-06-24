@@ -4,63 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F9FCDB481
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 14:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEDC3CDB479
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 14:52:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51F378460E;
-	Wed, 24 Jun 2026 16:49:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B56B8460E;
+	Wed, 24 Jun 2026 16:52:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="bj/DKpJi";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="GI4n9fs2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D04CA848DC; Wed, 24 Jun 2026 16:49:55 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 19F8A849BF; Wed, 24 Jun 2026 16:52:09 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A06CC80398
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 16:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B339E80398
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 16:52:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 21CE3C6B3A5;
- Wed, 24 Jun 2026 14:50:01 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 17050601C5;
- Wed, 24 Jun 2026 14:49:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8D2A3106C8210; 
- Wed, 24 Jun 2026 16:49:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782312592; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=+JWHlbfRX35PV6rEjJ3/XLZHlO61SuaW7GalT0MIpIw=;
- b=bj/DKpJiE1rXWojP0djT9pkM8RttKpTVc6ij2sVWdxrZyiz1x8bqde1Qns5yj91V/ou/6+
- 4HVIJtKQkHrXt4RxvESWm/AaE9/vQm/p6yFzWTIRv54xNBomjKIEVqcs1vLTuKdVQUlE/I
- CFjyDdkoxi1CpYkT4OTOIOAgNqmujUpqmVwgQ+gAo9r7dTaDfQ3IthkvtR+vSE9/5FvHAf
- sZMpo6sn1XrO6+zUyVRYpNlKImW4rehfoq+jpO5LC1O7ikyVr7OftIcINn0VH0/5Hj2A6k
- oTl2/qNS23l8IiNjcyTnzllxPYlq9MkCiGPHlupwIE63V8xO/UvLABHb3gJFjw==
-Message-ID: <6652f7ee-e479-4b47-b984-435f82879d1a@bootlin.com>
-Date: Wed, 24 Jun 2026 16:49:50 +0200
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7e6da33a561so733854a34.3
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 07:52:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1782312725; x=1782917525; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m3DD+OVN4UCGT92O72z0IOw251/I58NPs/xo6oBatmY=;
+ b=GI4n9fs2VHWh9n4d1g1aZI984uPTtc9efyLK9x/dHhYncLe85UpH4xEnZDg1xxVII6
+ K/cBB926Nx4Q1Plkq18rfRmGft5t29909NA8V+OOUpRZw1sQwjbe8i/fherBYDYeJ914
+ 5CU93M3WgiMyNudsgxDWamDTmr4ivCGCa6hx/r7zk1V8HKDNtRSsWtXUd9PDLj08CSH+
+ +/pPCDPju7rjND2hGMZIRGruCOwJ10iBVkFBp3//IPwUTVeo+uoItgFrfq/c6STZuWvP
+ RTGDXV87syek3x0R0BnsEF4L9GZeYrYgy1zwS6VU0iOlMSBabDzt/JEK9HcA6aDA6xGM
+ oYIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782312725; x=1782917525;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=m3DD+OVN4UCGT92O72z0IOw251/I58NPs/xo6oBatmY=;
+ b=putZcXO86bfKfkN/xXr55rEUA8tTQ3tAfc3IzAEA6YF5CXD5moyvMWu654S7zsOMRa
+ z4FHnD6LbN2POw+WIrmdBpumIMKXk6veW+JL9+ViFicqiDZ8RmaNMSKSIi60aJviwjKg
+ QtvHrv/lF1eZrYK5o2YFg6sGWwDR7+TdAWnnosJLn14DzKy/wFjbpRGuz3vqOUdYU5I2
+ rosO0/OJzuel8ZhtSeRSLeJxKOo3BlhgJpPZwefCKjpnxMJVB6CS8l2H+u70epIoDTup
+ rbcRDtEAL/ASPOuzwuQHqY5e2ZaLlhd9QRvecQldTH0bEQO3VAp6iRIApvRLPWpRwlC5
+ ixUg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8RWso6M/bz83DRHkDX+UfcqB8/+gIZKj1G9kph7lvESB1ONETdtwEdcDsI7a6zClRVNDJ2n54=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcvUVISg4rCWXvt7WyuMEG0jG+qTsIFKgkSxrGHNZjysU/Zvil
+ NMozVGmgfKWU5wOTRYjqQICywML75lfy5eToMTvbsC3xpqvvDkO3mqSJf4w8FNSRF/0=
+X-Gm-Gg: AfdE7cnu3O9QdCvt+pz9v/84g5S5huRosx+AkMV4aOqdBO8H5bgqIueFK5fmIDYyc7+
+ 3aBo0ycHtbBwTJrsyenZi1CqfLS/GeCVhcODG/dSN+g3mlX3hYQg0VNMNXRGyYjUpDZKCFcWKfd
+ Do/gxaMuSqgDJf/OaU1WFANmeLAaBGmZQZ5XnvFws5DPV1HMX0w5ROtLMJNfl+gWQO6f3gfjb7Z
+ 7OhtAvKpUv8lTWSj53DitCQ77sxQUb0Ri8OwnsewDfyOuD14y8lVtFiEKOoCsY3GNqpQSEumbKO
+ MJKJ/+OR32WE8jCqMLKZbZnzcvrjdoQfPn91fDGFqW15Ocffrhrui8RNBjxQX1B9QPptKveyCKU
+ /l18blBMq20SbaHZYc0JJKRxnjRp1RGzPyVgsdbjamVitLMgMnfnIAeslubD7pOA5ZFQfmVrqXt
+ SdKJdneNDcLauMjSSR6Q==
+X-Received: by 2002:a05:6830:4c0c:b0:7e6:fd45:9cbc with SMTP id
+ 46e09a7af769-7e986a8f246mr3700129a34.14.1782312725492; 
+ Wed, 24 Jun 2026 07:52:05 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:68dc:b788:b3ac:e34e])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e944296d7asm11481082a34.19.2026.06.24.07.52.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jun 2026 07:52:05 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Sumit Garg <sumit.garg@kernel.org>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+In-Reply-To: <20260611-mtk-pick-dt-mt6359-unique-names-v1-1-601546be1210@baylibre.com>
+References: <20260611-mtk-pick-dt-mt6359-unique-names-v1-1-601546be1210@baylibre.com>
+Subject: Re: [PATCH] arm64: dts: mediatek: mt6359: give regulators unique names
+Message-Id: <178231271387.3619522.3038568095627357795.b4-ty@b4>
+Date: Wed, 24 Jun 2026 09:51:53 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] fs/squashfs: add sqfs_dir_offset() error checks
-To: Allan ELKAIM <allan.elkaim@gmail.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-References: <20260611094353.722555-1-allan.elkaim@gmail.com>
- <20260611094353.722555-3-allan.elkaim@gmail.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20260611094353.722555-3-allan.elkaim@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=348; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=gLL/Tn2kBdNNVw+dqs8AmWqrAuobw+S00+VSbDSrh48=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqO+8MDni3iAjhSAZOXNjgg+HXKKnaX9RBNHnBo
+ 0frx87m0riJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCajvvDBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AHBEIAI1/Ucjp2nIRzJuU63m+OxYdggk/ybLcT2MlC0P
+ zeEkDzGDtrAUd0pCUmyfVwAb/4gJbPLIZw0NNKyJw9UAr26deM/b7SzlKrnKcaG7xjEYD/1qpyH
+ mmg7gKPnSRSxcgtTKUKxVUduxr5otUTTxLRDTIzyTv+j0kUzc5ZZMbS3WMqSjO/kcAQ+snVFSPm
+ i8/aqXnnTWRZkkbiZKY2KAejXBVjFq2ITDFgCyn/Y5nF7/oOpk7jt8PTPDhoTBcoqjiq2+6lDac
+ eSiPNaF/nrhCshqmkB8zC4L5jv5KiLjggfKzUTrPqpX5+pKm3hvHQCJ4HB/P/hM+L35zK4VFr2A
+ dysg=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,79 +119,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 11/06/2026 à 11:43, Allan ELKAIM a écrit :
-> sqfs_dir_offset() returns a negative errno on failure, but three
-> call sites in sqfs_search_dir() use the return value as an array
-> index without checking for errors first. If the lookup fails,
-> dirs->table is set to an invalid address, leading to undefined
-> behavior.
-> 
-> Add negative-value guards after each sqfs_dir_offset() call so
-> that any lookup failure propagates cleanly as an error rather
-> than producing incorrect results.
-> 
-> Note: the corresponding sqfs_find_inode() NULL checks and the
-> heap exhaustion fix during symlink resolution are applied in
-> separate patches.
-> 
-> Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
-> Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+On Thu, 11 Jun 2026 19:12:20 -0500, David Lechner wrote:
+> arm64: dts: mediatek: mt6359: give regulators unique names
 
-nip-tick: It's more common to put the Acked/Reviewed-by you gathered 
-before your Signed-off-by, but IHMO, you don't have to send another 
-revision just for that.
+Applied to mediatek-for-master, thanks!
 
-Reviewed-by: Richard Genoud <richard.genoud@bootlin.com>
+[1/1] arm64: dts: mediatek: mt6359: give regulators unique names
+      commit: 7aedd1f7fb5ead34df91979bdf9459dac6613a0c
 
-
-Thanks!
-> ---
-> 
-> Changes in v2:
-> - Free dirs->entry and reset it to NULL in the two error paths
->    reachable while a directory entry is held, so a lookup failure
->    no longer leaks the entry (reported by Richard Genoud)
-> 
->   fs/squashfs/sqfs.c | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
-> 
-> diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-> index 07e2bd82..af32d008 100644
-> --- a/fs/squashfs/sqfs.c
-> +++ b/fs/squashfs/sqfs.c
-> @@ -496,6 +496,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
->   
->   	/* get directory offset in directory table */
->   	offset = sqfs_dir_offset(table, m_list, m_count);
-> +	if (offset < 0)
-> +		return offset;
->   	dirs->table = &dirs->dir_table[offset];
->   
->   	/* Setup directory header */
-> @@ -627,6 +629,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
->   
->   		/* Get dir. offset into the directory table */
->   		offset = sqfs_dir_offset(table, m_list, m_count);
-> +		if (offset < 0) {
-> +			free(dirs->entry);
-> +			dirs->entry = NULL;
-> +			ret = offset;
-> +			goto out;
-> +		}
->   		dirs->table = &dirs->dir_table[offset];
->   
->   		/* Copy directory header */
-> @@ -651,6 +659,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
->   	}
->   
->   	offset = sqfs_dir_offset(table, m_list, m_count);
-> +	if (offset < 0) {
-> +		free(dirs->entry);
-> +		dirs->entry = NULL;
-> +		ret = offset;
-> +		goto out;
-> +	}
->   	dirs->table = &dirs->dir_table[offset];
->   
->   	if (get_unaligned_le16(&dir->inode_type) == SQFS_DIR_TYPE)
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
