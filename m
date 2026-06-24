@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C624BCDE002
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 13:16:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13499CDB479
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 13:16:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E8DD84995;
+	by phobos.denx.de (Postfix) with ESMTP id 76E57849CE;
 	Wed, 24 Jun 2026 15:15:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="rz1Uu45E";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="MRNlYLjI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61735848DC; Wed, 24 Jun 2026 13:41:20 +0200 (CEST)
+ id BCD47848DC; Wed, 24 Jun 2026 14:15:31 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 49A9B84671
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 13:41:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4C00D84671
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 14:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C213D15A1;
- Wed, 24 Jun 2026 04:41:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C324E1713;
+ Wed, 24 Jun 2026 05:15:23 -0700 (PDT)
 Received: from e132995.arm.com (e132995.arm.com [10.1.29.35])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C62A13F632;
- Wed, 24 Jun 2026 04:41:13 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E91B73F62B;
+ Wed, 24 Jun 2026 05:15:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1782301275; bh=gjWZoW8cfR/bhNr/LUUvu6NkvlqvaCwYdhuG5pyePoM=;
+ t=1782303328; bh=olbUXZqQiYHGCABeqDpbcyXm5K4WduGY0NCqwFnle6E=;
  h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=rz1Uu45EI8mlotfmpGwcuk/0/JaUKjoBgtEm64lEzF3imF7QtdaMukZ4cLv6ACFBA
- CIbiDdZHKT3XrcaqeWbadSylc6eii+n35ZDhPakaZb9a+QPdcBGmnUukV8FewfLFcO
- cT05VOqCYYz36p9+wJTeDiKPUQdn/C06zKwx6B+g=
+ b=MRNlYLjIb4B5SJfG4jS64RcA/I2HSP+PDO5d57lW5FeFmXFeDn5qx6FzoYnvMZ4AR
+ XR+mRsYtWiVUZYsX+Bdf7oK2diIsFKw5BC3dG6JEiZpv4M2NgPfcffZmj/W8tgC12A
+ yzVeuzMoybfJyAP37LeLxqN/eWYE/BquzmHI1AM0=
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 03/11] efi_loader: add FF-A runtime support in EFI
- variable TEE driver
+Subject: Re: [PATCH v2 06/11] efi_loader: move runtime variable read
+ helpers to efi_variable.c
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
  u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
  xypron.glpk@gmx.de, hugues.kambampiana@arm.com, sjg@chromium.org
-In-Reply-To: <CAC_iWjKtPCfiDEkT8H2KGuJE5dpNsS18dnyPdDgiiX0W-MoejA@mail.gmail.com>
+In-Reply-To: <CAC_iWjLBc2sCTeO-voXRaJu34vft+cq4s2qbF=cpqNvNYxZc_w@mail.gmail.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
  <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
- <CAC_iWjKtPCfiDEkT8H2KGuJE5dpNsS18dnyPdDgiiX0W-MoejA@mail.gmail.com>
-Date: Wed, 24 Jun 2026 12:41:08 +0100
-Message-Id: <178230126816.4073031.10941263792926021769.b4-reply@b4>
+ <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
+ <CAC_iWjLBc2sCTeO-voXRaJu34vft+cq4s2qbF=cpqNvNYxZc_w@mail.gmail.com>
+Date: Wed, 24 Jun 2026 13:15:21 +0100
+Message-Id: <178230332182.4122019.1939205928978533568.b4-reply@b4>
 X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Wed, 24 Jun 2026 15:15:53 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -70,205 +70,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-05 13:46 +0300, Ilias Apalodimas wrote:
+On 2026-06-05 14:04 +0300, Ilias Apalodimas wrote:
 > Hi Harsiman
 > 
-> [...]
-> 
-> > +/**
-> > + * ffa_map_sp_event() - Map MM SP response to errno
-> > + * @sp_event_ret: MM SP return code from MM SP notification
-> > + *
-> > + * Convert the MM SP return code into a standard U-Boot errno. This helper
-> > + * is marked __efi_runtime so it can be shared by both the boot and runtime
-> > + * FF-A notification paths.
-> > + *
-> > + * Return: 0 on success, negative errno on failure
-> > + */
-> > +static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
-> > +{
-> > +       int idx = -sp_event_ret;
-> > +
-> > +       if (sp_event_ret == MM_SUCCESS)
-> > +               return 0;
-> > +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
-> > +           mm_sp_errmap[idx])
-> > +               return mm_sp_errmap[idx];
-> > +       return -EACCES;
-> > +}
-> > +
-> >  /**
-> >   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
-> >   *
-> > @@ -177,52 +225,36 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
-> >   * This is a blocking call during which trusted world has exclusive access
-> >   * to the MM shared buffer.
-> >   *
-> > - * Return:
-> > - *
-> > - * 0 on success
-> > + * Return: 0 on success
-> >   */
-> > -static int ffa_notify_mm_sp(void)
-> > +static int __efi_runtime ffa_notify_mm_sp(void)
-> >  {
-> >         struct ffa_send_direct_data msg = {0};
-> >         int ret;
-> >         int sp_event_ret;
-> > -       struct udevice *dev;
-> > +       bool at_runtime = efi_at_runtime();
+> On Thu, 14 May 2026 at 15:50, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
 > >
-> > -       ret = uclass_first_device_err(UCLASS_FFA, &dev);
-> > -       if (ret) {
-> > -               log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
-> > -               return ret;
-> > -       }
-> > +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
-> > +
-> > +       if (at_runtime) {
-> > +               ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
-> > +       } else {
-> > +               struct udevice *dev;
+> > Relocate the generic runtime variable read helpers from
+> > efi_var_common.c to efi_variable.c.
 > >
-> > -       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET; /* x3 */
-> > +               ret = uclass_first_device_err(UCLASS_FFA, &dev);
-> > +               if (ret) {
-> > +                       log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
-> 
-> This will crash at runtime, we don't have access to log_XXX.
-> Please go through the entire patchset and make sure you aren't calling
-> core functions that haven't been marked as such for v3
-> Thre functions that do make sense can be converted to __efit_runtime.
-> log_XXXX is not one of them though.
-> 
-> > +                       return ret;
-> > +               }
+> > efi_var_common.c is always built, while efi_variable.c is only built
+> > when CONFIG_EFI_MM_COMM_TEE is unset. Earlier patches in this series
+> > add TEE/FF-A-specific runtime read helpers in efi_variable_tee.c.
+> > Leaving the generic definitions in efi_var_common.c would therefore
+> > cause a symbol clash in EFI_MM_COMM_TEE builds.
 > >
-> > -       ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-> > +               ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-> > +       }
-> >         if (ret)
-> >                 return ret;
+> > Move efi_get_variable_runtime() and
+> > efi_get_next_variable_name_runtime() into efi_variable.c so the
+> > non-TEE backend keeps the generic memory-backed implementations,
+> > while the TEE/FF-A backend continues to provide its own runtime read
+> > helpers in efi_variable_tee.c.
 > >
-> > -       sp_event_ret = msg.data0; /* x3 */
+> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> >
+> > ---
+> >
+> > Changelog:
+> > ===============
+> >
+> > v2:
+> >
+> > Ilias, Simon:
+> >
+> > - Reword commit message to include relocation of generic non-TEE
+> >   helpers and broaden the wording to cover both runtime read helpers
+> >
+> >  lib/efi_loader/efi_var_common.c | 24 ------------------------
+> >  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
+> >  2 files changed, 24 insertions(+), 24 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+> > index d63c2d1b1cd..7cbf098c64a 100644
+> > --- a/lib/efi_loader/efi_var_common.c
+> > +++ b/lib/efi_loader/efi_var_common.c
+> > @@ -173,30 +173,6 @@ efi_status_t EFIAPI efi_query_variable_info(
+> >         return EFI_EXIT(ret);
+> >  }
+> >
+> > -efi_status_t __efi_runtime EFIAPI
+> > -efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> > -                        u32 *attributes, efi_uintn_t *data_size, void *data)
+> > -{
+> > -       efi_status_t ret;
 > > -
-> > -       switch (sp_event_ret) {
-> > -       case MM_SUCCESS:
-> > -               ret = 0;
-> > -               break;
-> > -       case MM_NOT_SUPPORTED:
-> > -               ret = -EINVAL;
-> > -               break;
-> > -       case MM_INVALID_PARAMETER:
-> > -               ret = -EPERM;
-> > -               break;
-> > -       case MM_DENIED:
-> > -               ret = -EACCES;
-> > -               break;
-> > -       case MM_NO_MEMORY:
-> > -               ret = -EBUSY;
-> > -               break;
-> > -       default:
-> > -               ret = -EACCES;
-> > -       }
-> > +       sp_event_ret = msg.data0;
-> >
+> > -       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
+> > -                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
+> > -
+> > -       /* Remove EFI_VARIABLE_READ_ONLY flag */
+> > -       if (attributes)
+> > -               *attributes &= EFI_VARIABLE_MASK;
+> > -
 > > -       return ret;
-> > +       return ffa_map_sp_event(sp_event_ret);
-> >  }
-> >
-> >  /**
-> > @@ -266,36 +298,41 @@ static int ffa_discover_mm_sp_id(void)
-> >  }
-> >
-> >  /**
-> > - * ffa_mm_communicate() - Exchange EFI services data with  the MM partition using FF-A
-> > + * ffa_mm_communicate() - Exchange EFI services data with the MM partition using FF-A
-> >   * @comm_buf:          locally allocated communication buffer used for rx/tx
-> > - * @dsize:                             communication buffer size
-> > + * @comm_buf_size:     communication buffer size
-> >   *
-> >   * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
-> >   * that there is data to read from the shared buffer.
-> >   * Communication with the MM SP is performed using FF-A transport.
-> >   * On the event, MM SP can read the data from the buffer and
-> >   * update the MM shared buffer with response data.
-> > - * The response data is copied back to the communication buffer.
-> > - *
-> > - * Return:
-> > + * The response data is copied back to the communication buffer during the
-> > + * boot phase. At runtime, the communication buffer is already the FF-A
-> > + * shared buffer and is updated in place.
-> >   *
-> > - * EFI status code
-> > + * Return: EFI status code
-> >   */
-> > -static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> > +static efi_status_t __efi_runtime ffa_mm_communicate(void *comm_buf,
-> > +                                                    ulong comm_buf_size)
-> >  {
-> >         ulong tx_data_size;
-> >         int ffa_ret;
-> >         efi_status_t efi_ret;
-> >         struct efi_mm_communicate_header *mm_hdr;
-> > -       void *virt_shared_buf;
-> > +       u8 *shared_buf;
-> > +       bool at_runtime = efi_at_runtime();
-> >
-> >         if (!comm_buf)
-> >                 return EFI_INVALID_PARAMETER;
-> >
-> > -       /* Discover MM partition ID at boot time */
-> > -       if (!mm_sp_id && ffa_discover_mm_sp_id()) {
-> > -               log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
-> > -               return EFI_UNSUPPORTED;
-> > +       if (!mm_sp_id) {
-> > +               if (at_runtime)
-> > +                       return EFI_UNSUPPORTED;
-> > +               if (ffa_discover_mm_sp_id()) {
-> > +                       log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
-> > +                       return EFI_UNSUPPORTED;
-> > +               }
-> >         }
-> >
-> >         mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
-> > @@ -304,30 +341,61 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> >         if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
-> >                 return EFI_INVALID_PARAMETER;
-> >
-> > -       /* Copy the data to the shared buffer */
+> > -}
 > > -
-> > -       virt_shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
-> > -       memcpy(virt_shared_buf, comm_buf, tx_data_size);
-> > +       if (at_runtime) {
-> > +               shared_buf = comm_buf;
-> > +       } else {
-> > +               /* Copy the data to the shared buffer */
-> > +               shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
-> > +               memcpy(shared_buf, comm_buf, tx_data_size);
-> > +       }
 > 
-> Does the shared_buf live in the same memory space for linux ? How is
-> that communicated to the OS?
+> I think I mentioned this on the previous version as well.
+> The reason that we represent variables in memory at runtime, is that
+> it works for both secure and non secure world storage. In the secure
+> world case, Linux scans that OP-TEE can support variables at runtime
+> and swtiches get/setVariable to point in op-tee functions.
+> Due to the above we were less strict wth the API, since evenryone just
+> called the _mem variant for runtime calls and it saved us a function
+> call.
+> 
+>  If we want to change this, the right fix would be to define _int
+> variants in the efi_variable.c and efi_variable_tee.c and call them
+> from efi_var_common.c. This basically boils down to calling the _int
+> version in efi_get_variable_runtime and efi_get_next_variable_runtime
+> on the common code.
+> 
+> Thanks
+> /Ilias
+> 
 >
-
 Hi Ilias,
-Yes, the FF-A shared buffer is added to the EFI
-memory map as EFI_RUNTIME_SERVICES_DATA, so the OS sees it as runtime
-memory. In v3, we will register an EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE callback
-and convert ffa_shared_buf with efi_convert_pointer(), so if the OS calls
-SetVirtualAddressMap(), runtime variable calls use the converted virtual
-address instead of relying on identity mapping. This will be handles in
-v3 patchset.
+Thanks, that makes sense.
+
+Just to confirm the intended scope: should I apply this pattern only to
+efi_get_variable_runtime() and efi_get_next_variable_name_runtime(), since
+those are the helpers moved by this patch, or would you prefer the same
+common-wrapper plus backend-specific _int pattern for all four runtime
+variable service functions:
+
+efi_get_variable_runtime()
+efi_get_next_variable_name_runtime()
+efi_set_variable_runtime()
+efi_query_variable_info_runtime()
+
+I will make relevant changes as per your feedback in v3.
+Thanks
 
 Regards
 Harsimran Singh Tungal
 
-> [...]
-> 
-> 
-> Thanks
-> /Ilias
+> > -efi_status_t __efi_runtime EFIAPI
+> > -efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
+> > -                                  u16 *variable_name, efi_guid_t *guid)
+> > -{
+> > -       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
+> > -                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
+> > -}
+> > -
+> >  /**
+> >   * efi_set_secure_state - modify secure boot state variables
+> >   * @secure_boot:       value of SecureBoot
+> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> > index 9923936c1b5..f2e0e1ad4e2 100644
+> > --- a/lib/efi_loader/efi_variable.c
+> > +++ b/lib/efi_loader/efi_variable.c
+> > @@ -579,6 +579,30 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+> >         return EFI_SUCCESS;
+> >  }
+> >
+> > +efi_status_t __efi_runtime EFIAPI
+> > +efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> > +                        u32 *attributes, efi_uintn_t *data_size, void *data)
+> > +{
+> > +       efi_status_t ret;
+> > +
+> > +       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
+> > +                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
+> > +
+> > +       /* Remove EFI_VARIABLE_READ_ONLY flag */
+> > +       if (attributes)
+> > +               *attributes &= EFI_VARIABLE_MASK;
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +efi_status_t __efi_runtime EFIAPI
+> > +efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
+> > +                                  u16 *variable_name, efi_guid_t *guid)
+> > +{
+> > +       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
+> > +                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
+> > +}
+> > +
+> >  /**
+> >   * efi_variables_boot_exit_notify() - notify ExitBootServices() is called
+> >   */
+> > --
+> > 2.34.1
+> >
 > 
 
 
