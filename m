@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6836FCDB479
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 04:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8764BCDB479
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 04:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A30180398;
-	Wed, 24 Jun 2026 06:13:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+	by phobos.denx.de (Postfix) with ESMTP id B83328460E;
+	Wed, 24 Jun 2026 06:36:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="o2usk4Nw";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="iwOxeJdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B317784671; Wed, 24 Jun 2026 06:13:48 +0200 (CEST)
-Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
- [202.36.163.20])
+ id C43F184671; Wed, 24 Jun 2026 06:36:23 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5B580287
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 06:13:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E86F80287
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 06:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=alliedtelesis.co.nz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ronand@alliedtelesis.co.nz
-Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 7D80D2C03E8;
- Wed, 24 Jun 2026 16:13:32 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
- s=mail181024; t=1782274412;
- bh=5hLEAFiXuPtkj0P4SXQwTEnENyT6H2uAaSZ6ShLTbZM=;
- h=From:To:Cc:Subject:Date:From;
- b=o2usk4NwyAVHmegr6FYoPlk5kRuhgi6YsKk9nhtx1bE7ODfD7ToraW/vkQzfEov87
- N8emPgW7VxAOfU+Mbvr7AWIHbsO9QFLYU8XYTNltAUCJhI18lLVONBMEx/g6lmnR/Z
- xKGU4682BGaI1R1XTQDh1Qs0H2R5vFhCcT46M5f+BnCndGR1uSWcOve+VBjtbrXM7L
- OFcX9avKEK2r/DBOknWucnj7CVShiKrTTFDrfGQqyXbvAvR/8NIL7oJIalRI7jvqv5
- AY4t3NV4fe9FbhY0+A9q4efOZ+dsxpui1byAMTAH3k4Wq7lvuChI11phvGV+yZUGWn
- E1UgthOCulHMg==
-Received: from pat.atlnz.lc (Not Verified[10.32.16.33]) by
- svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
- id <B6a3b596c0000>; Wed, 24 Jun 2026 16:13:32 +1200
-Received: from ronand-dl.ws.atlnz.lc (ronand-dl.ws.atlnz.lc [10.33.12.18])
- by pat.atlnz.lc (Postfix) with ESMTP id 4562913EDE9;
- Wed, 24 Jun 2026 16:13:32 +1200 (NZST)
-Received: by ronand-dl.ws.atlnz.lc (Postfix, from userid 1930)
- id 4D57C4E10ED; Wed, 24 Jun 2026 16:13:32 +1200 (NZST)
-From: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
-To: u-boot@lists.denx.de
-Cc: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Aryan Srivastava <aryan.srivastava@alliedtelesis.co.nz>
-Subject: [PATCH] mtd: nand: pxa3xx: Fallback to 1-bit ECC when chip
- requirement is zero
-Date: Wed, 24 Jun 2026 16:12:44 +1200
-Message-ID: <20260624041243.1045912-2-ronan.dalton@alliedtelesis.co.nz>
-X-Mailer: git-send-email 2.54.0
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1782275776; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Tms2lkoWTSXQzMSPklEzXK4sk812N5XcbnvskJoj7HfGYpeDVbv1NPpC2StaKwhXHw0teFhgH6sRwLSXco4E5u2NC5ZL9Ww4Mvf14b7CNJaJyq0BZEL11HOHe+VH5PZImkx0zfU1qJ2k27hBNYPXB63L5SHm65mzuU7PzdBGnAk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1782275776;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=IGIj+9B7jK9ecHn7547L0AcGcx1FgaoKPCAYTfqSdEA=; 
+ b=hn/JYa5QWXmZmrFI7smiRzU5VyW3ZmjWEtB9TA+jToXmfQlo7p/y+UKT0f66SnQxD0s5NFA6KfCjZbfg5NqYgjpFZs9A/QQxMLx/lOwrdq69J4r4eFHdV6tPxRtJQl1qyzQIR9SGuIgtYIFub9ix2Npwo3VHWsFcw7mWailbQtM=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782275776; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+ bh=IGIj+9B7jK9ecHn7547L0AcGcx1FgaoKPCAYTfqSdEA=;
+ b=iwOxeJdI3KJynihnFL9yb4Kkm9I3ODoHJVJRW2wPrIQmVUQPmNCc1EquG5ZP7nlf
+ X0OBp/h6zzistFtUrj/0l4CUlRnJcoxFR5VZnQYClq5v3XHgkpSSF/8Ll9ARS0UC96m
+ zwfvPDSfP6h5cFWJvxXrfYmgVvlRIYOTnKJh3p5Q=
+Received: by mx.zohomail.com with SMTPS id 178227577225278.05734883231958;
+ Tue, 23 Jun 2026 21:36:12 -0700 (PDT)
+Date: Wed, 24 Jun 2026 04:35:55 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Eric Chung <eric.chung@riscstar.com>, Yao Zi <me@ziyao.cc>
+Cc: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de,
+ uboot@riscstar.com, u-boot-spacemit@groups.io,
+ raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
+ trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
+ jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de,
+ randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech,
+ neil.armstrong@linaro.org, quentin.schulz@cherry.de,
+ samuel@sholland.org, Guodong Xu <guodong@riscstar.com>
+Subject: Re: [PATCH 1/8] spacemit: k1: select boot device via config registers
+Message-ID: <ajteq071XCoIDM8-@pie>
+References: <20260612201901.73657-1-raymondmaoca@gmail.com>
+ <20260612201901.73657-2-raymondmaoca@gmail.com>
+ <aizTnMlko1Pg9pMb@pie>
+ <CAH22mJxFe79308nCXOpCtgrHhvw86EXjKZz5XAKKTVnGx_MzHA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-SEG-SpamProfiler-Analysis: v=2.4 cv=TI3mSEla c=1 sm=1 tr=0 ts=6a3b596c
- a=KLBiSEs5mFS1a/PbTCJxuA==:117 a=FelO9ux0wxsA:10 a=iP-xVBlJAAAA:8
- a=P-IC7800AAAA:8 a=77_9g-B9473SHJmiyHcA:9 a=3ZKOabzyN94A:10
- a=lHLH-nfn2y1bM_0xSXwp:22 a=d3PnA9EDa4IxuAV0gXij:22
-X-SEG-SpamProfiler-Score: 0
-x-atlnz-ls: pat
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAH22mJxFe79308nCXOpCtgrHhvw86EXjKZz5XAKKTVnGx_MzHA@mail.gmail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,47 +84,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently there is no fallback condition for when a NAND chip connected
-reports an ECC requirement of zero and no value is specified in the DTS.
-When this happens, pxa_ecc_init attempts to find a match, but fails with
-the following error message:
+On Wed, Jun 24, 2026 at 08:46:40AM +0800, Eric Chung wrote:
+> On Sat, Jun 13, 2026 at 11:51 AM 'Yao Zi' via uboot <uboot@riscstar.com> wrote:
+> >
+> > On Fri, Jun 12, 2026 at 04:18:54PM -0400, Raymond Mao wrote:
+> > > From: Guodong Xu <guodong@riscstar.com>
+> > >
+> > > Add logic to determine the current boot device by reading the
+> > > SoC's configuration registers, rather than using a hardcoded
+> > > default.
+> > >
+> > > Signed-off-by: Guodong Xu <guodong@riscstar.com>
+> > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> > > ---
+> > >  board/spacemit/k1/spl.c | 77 ++++++++++++++++++++++++++++++++++++++++-
+> > >  1 file changed, 76 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+> > > index 0db362130e4..d5e87d79fa2 100644
+> > > --- a/board/spacemit/k1/spl.c
+> > > +++ b/board/spacemit/k1/spl.c
+> >
+> > ...
+> > > +             switch (sel) {
+> > > +             case BOOT_STRAP_MODE_EMMC:
+> > > +                     mode = BOOT_MODE_EMMC;
+> > > +                     break;
+> > > +             case BOOT_STRAP_MODE_NAND:
+> > > +                     mode = BOOT_MODE_NAND;
+> > > +                     break;
+> > > +             case BOOT_STRAP_MODE_SPI:
+> > > +                     mode = BOOT_MODE_SPI;
+> > > +                     break;
+> > > +             case BOOT_STRAP_MODE_SD:
+> > > +             default:
+> > > +                     mode = BOOT_MODE_SD;
+> > > +                     break;
+> > > +             }
+> > > +     }
+> > > +     /* TODO:
+> > > +      *   The current upstream DTS file only contains the eMMC node. When
+> > > +      *   the SD node is added via an overlay, the eMMC device ends up as
+> > > +      *   MMC1 in SPL.
+> >
+> > Why not fix this with an extra alias in the overlay dt?
+> >
+> 
+> That approach doesn't really help — with the alias, mmc0 and mmc1 get
+> swapped, which ultimately breaks ABI consistency.
 
-  ECC strength 0 at page size N is not supported
+Sorry I didn't read you correctly, I'm not sure which you are trying to
+keep consistency with.
 
-Linux already has a fallback case for this scenario.
+I did a check in Linux next-20260623, and the aliases for bananapi-f3
+look like,
 
-Make u-boot match the Linux behavior by triggering the fallback when the
-ECC strength requirement reported by the chip is zero. Changing && to ||
-is sufficient to make the behavior equivalent.
+        aliases {
+		ethernet0 = &eth0;
+		ethernet1 = &eth1;
+		serial0 = &uart0;
+		spi3 = &spi3;
+		i2c2 = &i2c2;
+		i2c8 = &i2c8;
+		mmc0 = &emmc;
+		mmc1 = &sdhci0;
+	};
 
-Signed-off-by: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>
-Cc: Aryan Srivastava <aryan.srivastava@alliedtelesis.co.nz>
----
- drivers/mtd/nand/raw/pxa3xx_nand.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+and for musepi-pro,
 
-diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c b/drivers/mtd/nand/raw/px=
-a3xx_nand.c
-index 7324dc72e0a..4a2c1c4bad2 100644
---- a/drivers/mtd/nand/raw/pxa3xx_nand.c
-+++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
-@@ -1625,8 +1625,10 @@ static int pxa3xx_nand_scan(struct mtd_info *mtd)
- 		ecc_step =3D chip->ecc_step_ds;
- 	}
-=20
--	/* Set default ECC strength requirements on non-ONFI devices */
--	if (ecc_strength < 1 && ecc_step < 1) {
-+	/* Set default ECC strength requirements on non-ONFI devices or devices
-+	 * that report a requirement of zero.
-+	 */
-+	if (ecc_strength < 1 || ecc_step < 1) {
- 		ecc_strength =3D 1;
- 		ecc_step =3D 512;
- 	}
---=20
-2.54.0
+	aliases {
+		ethernet0 = &eth0;
+		serial0 = &uart0;
+		i2c2 = &i2c2;
+		i2c8 = &i2c8;
+		mmc0 = &emmc;
+		mmc1 = &sdhci0;
+	};
 
+So both of them assign emmc to mmc0 and sdhci0 (SD) to mmc1.
+
+As a summary of the situation,
+
+- Linux before SD card support is merged: emmc becomes mmc0 (without
+  other hotpluggable devices present), no SD card
+- Linux after SD card support is merged: emmc becomes mmc0, SD becomes
+  mmc1
+
+But PATCH 3 in the series assigns SD to mmc0 and emmc to MMC1, this
+instead looks like an ABI breakage, and would go away as long as you
+change the aliases? At the same time the comment here could be dropped.
+
+> The hack on MMC1 only affects its role in SPL and doesn't impact the
+> ABI in the devicetree. It's just a workaround. Eventually, both the
+> overlay and the hack will be removed once the upstream DTS is robust
+> enough.
+> 
+> 
+> > > +      *   However, the SD device should be the first device (MMC1).
+> > > +      *   This sequence needs to be corrected once the SD node is merged
+> > > +      *   into the upstream U-Boot DTS file.
+> > > +      */
+> > > +     switch (mode) {
+> > > +     case BOOT_MODE_EMMC:
+> > > +             ret = BOOT_DEVICE_MMC1;
+> > > +             break;
+> > > +     case BOOT_MODE_NAND:
+> > > +             ret = BOOT_DEVICE_NAND;
+> > > +             break;
+> > > +     case BOOT_MODE_SPI:
+> > > +             ret = BOOT_DEVICE_SPI;
+> > > +             break;
+> > > +     case BOOT_MODE_USB:
+> > > +             ret = BOOT_DEVICE_USB;
+> > > +             break;
+> > > +     case BOOT_MODE_SD:
+> > > +             ret = BOOT_DEVICE_MMC2;
+> > > +             break;
+> > > +     default:
+> > > +             ret = BOOT_DEVICE_MMC1;
+> > > +             break;
+> > > +     }
+> > > +     return ret;
+> > >  }
+> > >
+> > >  void spl_board_init(void)
+> > > --
+> > > 2.25.1
+> > >
+> >
+> > Regards,
+> > Yao Zi
+
+Regards,
+Yao Zi
