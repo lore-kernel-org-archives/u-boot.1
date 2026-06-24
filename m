@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C387CDB47F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:46:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3BECDB470
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:46:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 528C184A1E;
-	Wed, 24 Jun 2026 09:45:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 90B1F849ED;
+	Wed, 24 Jun 2026 09:45:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Tbhx6WYi";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="AnrO56jG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79A4F80287; Wed, 24 Jun 2026 09:45:31 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 069A384A26; Wed, 24 Jun 2026 09:45:34 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C7F0849ED
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D8C84A0B
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 2E9621A090F;
- Wed, 24 Jun 2026 07:45:29 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id AEDD94E407B2;
+ Wed, 24 Jun 2026 07:45:31 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 0246F601C5;
- Wed, 24 Jun 2026 07:45:29 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7D5BF601C5;
+ Wed, 24 Jun 2026 07:45:31 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 230A6106C81A8; 
- Wed, 24 Jun 2026 09:45:24 +0200 (CEST)
+ with ESMTPSA id 49B9C106C85CF; 
+ Wed, 24 Jun 2026 09:45:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782287127; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1782287129; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=skovOpwywAgUSDPPWoseDDs3fYAHF441PO8Mvd3k47w=;
- b=Tbhx6WYiChytyjwFAJEcmBkpumNlVeMQ9guNKmxcPUxovUIg+caQfyQTFljqz52y3id4zT
- sKt5VCSqM4nqMtvlQYorm+EoGLartQ5f6K3m50R4sfvOeN97NOwXXUhNFCe11SrJ3AJmgn
- XTBMKGzlPj5bZurnZjbGRuFObQA/yAWinUgp4b0MxkmL04CPJiD9+xcg+/PDI3Hg7DnHvB
- 4WKvYj19jOFMJ556bDo7VNc/vkZ5qT+p/Jia1RuJZpZS7YEwsD0e09P0CScKR6rE94P34O
- 41rCDfsus3r3HBSBsJtmsOj49kkDAR0VuVar1JhJI5glk9N2QJnLbU8p4lBZhQ==
+ bh=1H0w5GbHirg2OohcwmMAN9xkH8jpdDKfgtPWGCWLEsQ=;
+ b=AnrO56jGFyEhQRhCf16mNn9UUmDSjHhFPlXVqpat0b95zPfr8m8FLRQf8ovN6vKf37cks7
+ NQB1NGqdDffp7VqO331699VM5/VA0O4crcUkheZ905eddqDfXEFfljVCamLc2l/pY1rXCK
+ kHgGAGH73i2PTIljwr1VQwCdAKsUfisoE2I2l1kvDeVhFdzfCJ5NT7ZQHByGnJrdENi9yK
+ hBTqd0LbsIsmdMlfGrfKh6mD/12T1UUCP6n9IivSvkGKwMycjrnnIeMfKIJC6hISv6JihZ
+ Oh2anwaGx9P6ga09xFQgjyak1D2g2Tk2Ax7O2IMRr2r9tbj0X0OI4cKragWrjw==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,10 +56,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 08/19] board: mach-k3: r5: common: Store wakeup reason on
- scratchpad memory
-Date: Wed, 24 Jun 2026 09:44:48 +0200
-Message-ID: <20260624074459.873906-9-richard.genoud@bootlin.com>
+Subject: [PATCH v3 09/19] board: mach-k3: r5: common: Set PMIC NSLEEP triggers
+ bits at resume
+Date: Wed, 24 Jun 2026 09:44:49 +0200
+Message-ID: <20260624074459.873906-10-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260624074459.873906-1-richard.genoud@bootlin.com>
 References: <20260624074459.873906-1-richard.genoud@bootlin.com>
@@ -82,106 +82,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Abhash Kumar Jha <a-kumar2@ti.com>
+If we are resuming NSLEEP triggers bits of PMIC-A and PMIC-B shall be set
+to prevent transition to S2R state while clearing interrupts.
+For example PMIC RTC Linux driver accesses to interrupt registers, in this
+case if NSLEEP triggers bits are not set it triggers a S2R transition.
 
-While resuming from suspend, the wakeup reason need to be stored
-and this will be used by the Linux kernel once its up.
-
-Use the 32 bytes of MCU_PSRAM0_RAM area (addr = 0x40280000) to
-store the wakeup reason.
-
-Read the value as soon as it starts and store it internally.
-
-Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
-Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
+Suggested-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/Kconfig         | 10 ++++++++++
- arch/arm/mach-k3/r5/lpm-common.c | 24 ++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
+ arch/arm/mach-k3/r5/lpm-common.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 4b7cef64935c..667e23bf2293 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -101,6 +101,16 @@ config SYS_K3_BOOT_CORE_ID
- 	int
- 	default 16
- 
-+config SYS_K3_SCRATCH_LPM_ADDR
-+	hex
-+	default 0x40280000 if SOC_K3_J721E || SOC_K3_J7200 || SOC_K3_J784S4
-+	default 0x0
-+	help
-+	  Address where the wake-up reason is stored at resume (32 bits).
-+	  It will be read by the Linux kernel once its up.
-+	  On J7200/J784s4 the MCU_PSRAM0_RAM is used by default.
-+	  Set it to 0 if unused.
-+
- config K3_EARLY_CONS
- 	bool "Activate to allow for an early console during SPL"
- 	depends on SPL
 diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
-index 1e31b86d26c6..862f5ab62a3d 100644
+index 862f5ab62a3d..426166006afa 100644
 --- a/arch/arm/mach-k3/r5/lpm-common.c
 +++ b/arch/arm/mach-k3/r5/lpm-common.c
-@@ -29,6 +29,11 @@
+@@ -29,6 +29,9 @@
  /* PMIC register where the magic value resides */
  #define K3_LPM_SCRATCH_PAD_REG_3 0xcb
  
-+/* Wake-up source IDs */
-+#define K3_LPM_WAKE_SOURCE_MAIN_IO 0x80
-+#define K3_LPM_WAKE_SOURCE_MCU_IO 0x81
-+#define K3_LPM_WAKE_SOURCE_PMIC_GPIO 0xB0
++/* PMIC NSLEEP register */
++#define K3_LPM_NSLEEP_TRIGGER_REG 0x86
 +
- #define IO_ISO_STATUS BIT(25)
- #define FW_IMAGE_SIZE 0x80000
+ /* Wake-up source IDs */
+ #define K3_LPM_WAKE_SOURCE_MAIN_IO 0x80
+ #define K3_LPM_WAKE_SOURCE_MCU_IO 0x81
+@@ -161,6 +164,30 @@ bool j7xx_board_is_resuming(void)
  
-@@ -40,6 +45,11 @@ struct lpm_addr_info {
- 	u32 size;
- };
- 
-+struct lpm_scratch_space {
-+	u16 wake_src;
-+	u16 reserved;
-+} __packed;
+ 		if (ret)
+ 			printf("Failed to clean magic value for suspend detection in PMIC\n");
 +
- __weak void clear_isolation(void) { }
- 
- /* This is used by J722s */
-@@ -75,6 +85,7 @@ void k3_deassert_ddr_ret(const char *pmic_name, unsigned int ddr_ret_val,
- /* in board_init_f(), there's no BSS, so we can't use global/static variables */
- bool j7xx_board_is_resuming(void)
- {
-+	struct lpm_scratch_space *lpm_scratch;
- 	struct udevice *pmic, *i2c;
- 	u32 pmctrl_val = 0;
- 	int ret, magic;
-@@ -85,7 +96,18 @@ bool j7xx_board_is_resuming(void)
- #ifdef PMCTRL_IO_LPM
- 	pmctrl_val = readl(PMCTRL_IO_LPM);
- #endif
-+	lpm_scratch = (struct lpm_scratch_space *)CONFIG_SYS_K3_SCRATCH_LPM_ADDR;
-+	if (lpm_scratch) {
-+		lpm_scratch->wake_src = 0;
-+		lpm_scratch->reserved = 0;
-+	}
- 	if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
-+		if (lpm_scratch) {
-+			if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
-+				lpm_scratch->wake_src = K3_LPM_WAKE_SOURCE_MCU_IO;
-+			else
-+				lpm_scratch->wake_src = K3_LPM_WAKE_SOURCE_MAIN_IO;
++		/*
++		 * Ensure that NSLEEP triggers bits are set to prevent a
++		 * suspend/resume transition when accessing PMIC interrupt
++		 * registers.
++		 */
++		if (IS_ENABLED(CONFIG_SOC_K3_J722S)) {
++			ret = dm_i2c_reg_write(pmic, K3_LPM_NSLEEP_TRIGGER_REG, 0x3);
++		} else {
++			struct udevice *pmic_b;
++
++			/* Some boards may have more than one pmic */
++			ret = uclass_get_device_by_name(UCLASS_PMIC, "pmic@4c", &pmic_b);
++			if (ret == 0) {
++				ret = pmic_reg_write(pmic_b, K3_LPM_NSLEEP_TRIGGER_REG, 0x03);
++				if (ret)
++					printf("Failed to set NSLEEP triggers bits on PMIC-B\n");
++			}
++
++			ret = pmic_reg_write(pmic, K3_LPM_NSLEEP_TRIGGER_REG, 0x3);
 +		}
- 		clear_isolation();
- 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
- 		debug("board is resuming from IO_DDR mode\n");
-@@ -127,6 +149,8 @@ bool j7xx_board_is_resuming(void)
- 
- 	if (magic == K3_LPM_MAGIC_SUSPEND) {
- 		debug("%s: board is resuming\n", __func__);
-+		if (lpm_scratch)
-+			lpm_scratch->wake_src = K3_LPM_WAKE_SOURCE_PMIC_GPIO;
- 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
- 
- 		/* clean magic suspend */
++		if (ret)
++			printf("Failed to set PMIC NSLEEP triggers. Spurious suspend/resume may happen.\n");
++
+ 		/*
+ 		 * For robustness, the DM should also clean the magic value at
+ 		 * startup.
