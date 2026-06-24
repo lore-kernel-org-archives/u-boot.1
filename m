@@ -4,132 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D438CDB47F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 17:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F81ACDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 18:19:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93214849C5;
-	Wed, 24 Jun 2026 19:37:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 5DEC48460E;
+	Wed, 24 Jun 2026 20:19:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="HWIP4MBP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OmI3BlXA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DBC5849CB; Wed, 24 Jun 2026 19:37:47 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E9D43847C8; Wed, 24 Jun 2026 20:19:32 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69AFE80398
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 19:37:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 41C0280398
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 20:19:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xg45Xy3hII8fX045/GOuovvMj9b6IEdZZRlzTo49KuxxV2v2MtnBlsHHiTDwBYpUi1Hhgoq7Qd+YUG9YlCjF7wsn7v22lVXep5Um4QLT72KB5N2u47Sn1tuajqS8sfEkmllKBKVIVE954CMH+/JyUdMzKNjZkNrA9YHGjSFy9iy3Fp64v7f8C6s0S/zGTrh11S24U61bYf8wTcox/eXqhB9BgKaAKcDfLqZ8w4r0tJ/goNNks6w/vnETsx0KDtbqKwLL9hW6VeUykI+B7XRk6TU6wVlfafyTNyoSmzT6R0DcO19EDwkaIf6ilrwdHDZ28msdqu5pymGaEHAh3NMI4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=64TQYQiZ0pVXBJjIp3VPKMGkRWpf6WukXoeS5mxXg+8=;
- b=iDKgqARxnzQNJq6aGcHSqjbtZtE/7KWR6bU1z9PwOd9opWtrKDGLlckSXCXIihQT7Qc1xbBqbH4xlyyc0vKeBIX1PaHVd3GlBs2IyxsIVs6YIrxlD0fdavvrpfXd8OUr7xs6J4xV5OAHZiElc7E1zXDtj+WczkKC3xPDgy09Mx/AQh8ICkiqtT9Yd3Amr9UQkCmoapLl3V+bs/GykJhbYBbFsvxg6gAYur9vNwkIMaJ1OeKJXJ72pPiNuwoRkkqek3htXrI0B/Qagt83aqs9ZqWVcgoV7PsExGEHj3Hw/vy0TrXRM+e3idwo52WOSW25y7D3wY21QiKX46x0WvQArw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=64TQYQiZ0pVXBJjIp3VPKMGkRWpf6WukXoeS5mxXg+8=;
- b=HWIP4MBPYSJupQNlnfoGT9+W05GOQSOS+DjxD5kjmRUCKZ11VDaA7McseZlfzSVPPxINLp5U9GDYhPOZiZpeNuAWDE/V5QqU+4Lsrn16YA++bIJCUulrzpK+m/4dLxh+OozEN5grWJXxAgvb89HcKpd3VR5Qv1whhEMWdJF221Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by GV2PR04MB11422.eurprd04.prod.outlook.com (2603:10a6:150:2b2::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.20; Wed, 24 Jun
- 2026 17:37:43 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0139.018; Wed, 24 Jun 2026
- 17:37:43 +0000
-Message-ID: <deba897c-5fdf-4de8-8de3-b4cb671ed12d@cherry.de>
-Date: Wed, 24 Jun 2026 19:37:42 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: Update SH/SoCFPGA/USB email addresses
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20260624171428.33523-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260624171428.33523-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0191.eurprd06.prod.outlook.com
- (2603:10a6:803:c8::48) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-6a11f19fcf6so929381eaf.3
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 11:19:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1782325169; x=1782929969; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=I1ONeqIS0Kv9szY8PCTMDatEhdIeJJOTN4n9S86pE2Y=;
+ b=OmI3BlXA7zrpLbGnwhXO8PyR/+6BYKMQ7UT++a1jc79Cc0XJ+A1nInlDd8KQaGhKyj
+ r8pcmUelds5QnA7uyUrzzXfqsdcciixYxk/6V8+afUvgIt/xooAWVyvzZQsM61isduBc
+ B5KplvZ3WT2g5+vgQSxH6pOlXlAaDcqx6SooE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782325169; x=1782929969;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I1ONeqIS0Kv9szY8PCTMDatEhdIeJJOTN4n9S86pE2Y=;
+ b=hIQQSGMCb4Hn/md49U9o8i3Z+ebU1hgJWmO/Ye+9Cs06lu0o1SyQL8GIzbSjJ7PR6a
+ 6zhKeV27dEOuoNT4sGOwZqo+1J/ft0SDN+QszXHL5E6o16+PtTryfRDTu6T3+YyPqlZn
+ qVep+NBjZ3+Pb8DHn34c4StUBQ0/O/+FEE+9v3a7bc3b70Jg3JCz86jyJHBb1JJvxI5b
+ m3dzp88a4H8C8HQUT6L5FDGkjk5c/nVbzLVZG+rUNplNxMQ11NhhuTBh2MEHFdkl15kQ
+ zc3dpaYuqN2npjeeBgIfGaUalIA9EMr8FUPnvKEW/XlXIxrFJ9p5xbK4K7V5KrKisALs
+ BhRQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/9I14ItsAfn6KwdFv4O0XeVzH4xLTk6uiv05yepAd4JHhLBbpHnkdrYUoyZFazNnln9zFUzms=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/x2x692w2KjjmxRo16nAmyZQb+75Q2teF2glubcD4tr7+KqR7
+ 0JlgslRoWf7FC9eIUmC+47VpMftWBCUVgKlAVi3+G7/n5q6VSHXZe7Jl9VNZJmk5a9U=
+X-Gm-Gg: AfdE7clb8hOHmiGJyCsAOfb3OveoE2uy1dmOSU7V7+fBCQsaHLkJ0eW7E6oBqJ+TeUf
+ BCOfKr5uLmeL5CYJ6C3mX3r3jN16rnP5pnQzWQlQ34enrWVALW+i/khwxFEXbSHhQrTbq7yO3yH
+ FcBRdE54x7iKXjz2fJfEN7M/Uls2cPK9+JKFMKULbqGF9ITcSWAwc+tzV1mORV+L5APJczDfpv+
+ acwMdA1aAjou9ninNoCH4KnpDppFOyTSLf6xfpEoJgSGuN5xiQkQ7uDJpp+R11s1hgDDAcyAte6
+ 4ZWbnNui+Ln9+L2q0z60c41FZqw5LOal1rJu0dYJy2fauWvwPMl1DhqDZYCaRfCLw7zMPUzl24T
+ L0w16IzD82Q3B06CXVv/+ZU1lt9bAgkKiDytwYlMMyrBnJ1SOnUb5/LQbpmWcZQLpoJBneWKRTT
+ pwz8+iQF/kQEwQHqtQI4lqHHxbBG/xv2zxyadK4vVB0f6TalIgKxytI0t8YwvXdkxjwDpHdKvc
+X-Received: by 2002:a05:6820:2222:b0:6a1:2295:f476 with SMTP id
+ 006d021491bc7-6a12295f6f3mr3132966eaf.13.1782325168892; 
+ Wed, 24 Jun 2026 11:19:28 -0700 (PDT)
+Received: from bill-the-cat ([145.14.135.239])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4472f04236fsm9914613fac.14.2026.06.24.11.19.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jun 2026 11:19:27 -0700 (PDT)
+Date: Wed, 24 Jun 2026 12:19:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Sean Anderson <seanga2@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH 0/2] Convert env export and import to use getopt()
+Message-ID: <20260624181925.GP382693@bill-the-cat>
+References: <20260520201218.3752042-1-sjg@chromium.org>
+ <20260522170328.GU1858239@bill-the-cat>
+ <e56cb70e-1a66-4ebf-8014-7fd6be9c69ef@cherry.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GV2PR04MB11422:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8fe9d47-c9fd-4066-d669-08ded2174c0e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: obwPZVdgSjq2E9zWTCxEKlNGfikBBODcdf5F15kO2OsdUgTtxn173oBLswgR6+KnMtyxA4Zitw9lrVNSKaXrwFwOM9YJ7uHnoydD+l8hV0q1mbwbQDeqiT6dxSfqpqFzaMjrCXkDkAQUrfcPxe038woZGbc7HMfDdC6UR6/W5X3xLFpPKSiYm2kPiP+ManNkOhZVcAR3YYuWP88gPOLr0IUluYXyt90onuhned+Je3HeKQsvDCMx5aOt3OE7As42Kte24BYIKCYOql1PpjhrdepqlRCKzg9hyf7TURPaoWddrhPM3uBOpmSmNOaumUIrVQ5Jg0Y4+jsp8HxosDrg2sEc/Ldshwv3v5fWhr+O3i3dilJXeWcm7DGN3MOtqOMHg7b2oN5WRxC0bZV62lHXsp2wlAEAF0Ma8t8nZUsUH48nGLV/IMF8M2YVTsBAq9eYtrTISzk8ySM1/CBm1r387x32gVHaW3INNcJ+8/ULmvQcfgoVSK8l+KF68Q8EtzNoRo6dRzWUQHEGS0LLjvqzqtdty+J40ou9Oab/5ptsKni/H7x0D2yFOPxqk66afjO2/bfPj7QL6OSXf+FPgL72kGr0tDRHSVpeW5Jnz9V6Md24mvEIe85VWLKXlg4XglAh9j7lGjwvcW9BTpQbc51oICKyLRdhvZIzsIpsDiElrCY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(22082099003)(18002099003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Umt1c05BQlhEbnBSS25PV0g0dlk0NGFBdld1bUxEZkhYRVhvaGFjNjduemdR?=
- =?utf-8?B?dHQrYU5FWTdIaEpGZjJZUzRKMVRNdnh0R3hBNEhiWW5WTXVENkF5eEZ1UmFm?=
- =?utf-8?B?eExwNCtDd2ppRzU5MmtYQ2hpSmUyRjdMaVpiMUUyUWFKdEdqVWJ2UE9rdVVa?=
- =?utf-8?B?enlyR3pRNzdRY2c5WWRCUXhqcUM4VE5tb2pxa2ExajBNUkJPSi80d28rc0M5?=
- =?utf-8?B?NDVLeDJ6dlBTVkkxQXBQOUx1NldiS29ERFFzVThHS1hIUkpzSjBGV09hMHVS?=
- =?utf-8?B?eXVPS2N0WDYyZy9KSm1Cd0p0UW5UWVRoVFNoSU9pS0grUzN2clNBV0oyNEZ0?=
- =?utf-8?B?aW52N3F4cDJ1bzNVTzhwYXZIWFUrRTQ4KzlaVWp2dXdxV0dXOEtRdnl0dmMz?=
- =?utf-8?B?S2x6QzV3UWVpenBldHc3eW16MlBxb255VkdGeXNZSW1yN0JQbXFUOE5QOE03?=
- =?utf-8?B?TzVCVkU2SHh6ZHhWdzFiL2lOSVFnRUJMMU1VTjNxOFRxZEFrV1dWWjBOc0FV?=
- =?utf-8?B?S2N3eW5NajAybmZaazFvQ3lsS0ZpNzRuOUxFdkt4eFhDRk43R0dDNEZTZ2Ny?=
- =?utf-8?B?UXZxSFhQUTg0VFNqa0UrOTYrUnBBbnNMM0hiSHBsRi9WaFVQQlFGZklpbzJx?=
- =?utf-8?B?NUtoSElJMFFZUVovU0VLbXNXVkJBOE82bmF6SnoyeVRTNUh2RW5hZGhqR1hD?=
- =?utf-8?B?L21nbzhyR2pTVm1vNVR0L0VkY3JQMjNhVy8xZ1plMXJhLzliWGJyWHlTWWxq?=
- =?utf-8?B?SExtbDd0Ulp0a3VvYUFXdlJIc1MwaHp5VlNDQzhqVmEreWVWRVhFNHBVSTNC?=
- =?utf-8?B?emU4T3czNkNBa0NFajBoMjRjeVpoNDg1c3JwYlZsRGNJK29xaDB1Q0pYM2Ev?=
- =?utf-8?B?UkJmcmsyeC9WZWVuREFYT3F4OXIvaEszMVZFQ2RQSzhLcGIxUVNkV29JZEU5?=
- =?utf-8?B?WVovaDhYalVqa3JOcEVNY1VsRm5WbWxSL1Y2czF5MkxXZUNuTTlsR1lOcFpk?=
- =?utf-8?B?NXBRcnYxcWpBUVYraWwrVmtmRHdkQlAzRXc1U0xOZUsybCtDbFBQMjQ3L1dz?=
- =?utf-8?B?dU9USUtwTzdpYkpqZW55TlMxaDNQRzVjVDdMdThUWWdYWnRON0Evd2k1cHF3?=
- =?utf-8?B?YlNFQ2RiOTdiaWJXUndIKzg5UU05RWYvOGlPOTBWc0VzM3MwN3dBWlgvVThh?=
- =?utf-8?B?TVNWZFI0TzhQcTI0dlE1ajBkWi91dzlMSGhrcWp5WFRVQXlGZzljWjluYUJJ?=
- =?utf-8?B?Z1YrdzByQnBHcmthZHNodktsTU14UkQzK3hoY1ZicGQxdi81ZGJvYnExWFVU?=
- =?utf-8?B?ZUFBUkpuYkVyMnQ5VjRMSVZVRnFIVUoyYWU2UFBZM2VDMXJGbFMwOWducGdn?=
- =?utf-8?B?eVRodFlEN2pZdTEwUzlya0E3cEU1djhzUHZIYkNVL05jZUgwWUpJTVBXNWc0?=
- =?utf-8?B?djgySHNSVWVLMFB1NnBDaHpDNy9ERjlMOUxrUkpSVzdIcmRYQUx0Y0ZITkJ0?=
- =?utf-8?B?MHFYS2RTSzNTMzIrQXdRcXp2c1JmMGFPeUttbGszRTc1eWJGOEMyRnZXY3dB?=
- =?utf-8?B?a1hMeWlFdDljeGJOU25BY2I5bGMvOWxlUzNjZGphODJMSTNNTzZ5M2RvTmIw?=
- =?utf-8?B?RzFCR0ZnTVpON3A3M3dzeklHTWs2Vm9KVi9VcXlCWHNiWTZwaHJKL1FqS1Z2?=
- =?utf-8?B?OXV2M3JCbnJvRG1Od1ZTa0xXa1REWDMyQXRFblVZZTlpc1JqNnZBdFJEaG5y?=
- =?utf-8?B?c0JMQ0dFcFpvam1qRGRyWmRzUlF4RFBVRjR1YTNjUEdPVnFOZXgxQldaK091?=
- =?utf-8?B?TktPSWlXVlptdWhMUnBpZUpKbUlvOWJ1Qk1yUW4zdHBzMFpXaEVlOEZ5K1FJ?=
- =?utf-8?B?dVJzWVl6cW1MNnNQcDdkWmNaQlh5QTJ6R0o1UW8yeVZkSW4wQ1BGQzlPa1V0?=
- =?utf-8?B?SmZLdkpZVmRHRVB3V3pYZCtzWFZGVG90NWxmSnJobXVvQkdUN1FvQlFSaGtn?=
- =?utf-8?B?eGV3cFpxTVhoa21IUkh4RFpIMXlXaXBIQjVxQzFLS2hwdmE1S2xUNzcvRUpR?=
- =?utf-8?B?dVBEZStaL2tOY2pJdWszRmpMZElMbzFmSFM3Q0wrYnh2SFhRbGgvbnlSVWJ3?=
- =?utf-8?B?U0RvOHVMaTFjbWtpcGF1ZmZjNzNaWW5HdkpLUC9Cb3Z1VVVVZlc3TFQrLzh2?=
- =?utf-8?B?VUMzRTN6aWg4L1YvdDlkSGtCMWVFbVFkNHplUmhYbHNNT1hMTkk3SkRLWW1k?=
- =?utf-8?B?ZUFZNlZ4WWlDVjJ1RVR5dUp2cithSDZCS0Y3RnJsd1VSR3kxMisxVjg5V0F3?=
- =?utf-8?B?bkxkcmRBSlZWK09WRXdVODlIK2xYalRNQ1JaaVhKNzFYMDZUVHhCUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8fe9d47-c9fd-4066-d669-08ded2174c0e
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2026 17:37:43.6775 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZiCQNOCh30J7TJEJRIcfieUlO7oh7a+TOn67V50wUVDQDdRpy+jBk4PiaIdGeUJ/KzxLMLWV1LU1pca5nlxsAHb3u93o9UwtQ730zLJfTm4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11422
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/MVx47pRlMyXeUjk"
+Content-Disposition: inline
+In-Reply-To: <e56cb70e-1a66-4ebf-8014-7fd6be9c69ef@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,14 +108,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-On 6/24/26 7:13 PM, Marek Vasut wrote:
-> Update the email addresses to a valid one.
-> Use N: usb to match on all USB related bits.
-> 
+--/MVx47pRlMyXeUjk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Wed, Jun 24, 2026 at 07:35:49PM +0200, Quentin Schulz wrote:
+> On 5/22/26 7:03 PM, Tom Rini wrote:
+> > On Wed, May 20, 2026 at 02:12:12PM -0600, Simon Glass wrote:
+> >=20
+> > > U-Boot has had a getopt() implementation for over five years but it is
+> > > not used much; most commands hand-roll their own argv loops to spot
+> > > -x style flags. The env export and env import sub-commands have the
+> > > gnarliest of these parsers in nvedit.c
+> > >=20
+> > > Each one walks every -prefixed argv element by hand, opens an inner
+> > > loop to split grouped flags and tracks a counter to catch a repeated
+> > > format flag.
+> > >=20
+> > > This short series converts both sub-commands to getopt(). The mutex
+> > > check for the format flags is done after the option loop, since it is
+> > > a per-command rule rather than an option-parsing rule, and the traili=
+ng
+> > > positional list is read straight out of argv from gs.index onwards.
+> > >=20
+> > > There is no functional change. getopt() stops at the first non-option,
+> > > just as the hand-rolled loops did, so options still have to appear
+> > > before the positional arguments.
+> > >=20
+> > > Each command gains a 'select GETOPT' so the parser is linked in on
+> > > boards that do not already enable it.
+> > >=20
+> > > For firefly-rk3399:
+> > >=20
+> > >    03: cmd: nvedit: Use getopt() in env export
+> > >       aarch64: (for 1/1 boards) all -45.0 rodata +27.0 text -72.0
+> > >    04: cmd: nvedit: Use getopt() in env import
+> > >       aarch64: (for 1/1 boards) all -27.0 rodata -55.0 text +28.0
+> > >=20
+> > >=20
+> > > Simon Glass (2):
+> > >    cmd: nvedit: Use getopt() in env export
+> > >    cmd: nvedit: Use getopt() in env import
+> > >=20
+> > >   cmd/Kconfig  |   2 +
+> > >   cmd/nvedit.c | 186 +++++++++++++++++++++++-------------------------=
+---
+> > >   env/common.c |   2 +-
+> > >   3 files changed, 85 insertions(+), 105 deletions(-)
+> >=20
+> > For the record, here's a link to v2:
+> > https://lore.kernel.org/u-boot/20260519233207.2765755-1-sjg@chromium.or=
+g/
+> > And here's the full size change for firefly-rk3399:
+> > Summary of 3 commits for 1 boards (1 thread, 12 jobs per thread)
+> > 01: arm: Fix typo in linker script
+> >     aarch64:  w+   firefly-rk3399
+> > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is n=
+on-functional: atf-bl31
+> > +(firefly-rk3399)
+> > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-=
+bl31):
+> > +(firefly-rk3399)    See the documentation for your board. You may need=
+ to build ARM Trusted
+> > +(firefly-rk3399)    Firmware and build with BL31=3D/path/to/bl31.bin
+> > +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs=
+ but is still functional: tee-os
+> > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os=
+):
+> > +(firefly-rk3399)    See the documentation for your board. You may need=
+ to build Open Portable
+> > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build w=
+ith TEE=3D/path/to/tee.bin
+> > +(firefly-rk3399) Some images are invalid
+> > 02: cmd: nvedit: Use getopt() in env export
+> >     aarch64: (for 1/1 boards) all +883.0 rodata +199.0 text +684.0
+> >              firefly-rk3399 : all +883 rodata +199 text +684
+> >                 u-boot: add: 5/0, grow: 0/-2 bytes: 1184/-500 (684)
+> >                   function                                   old     ne=
+w   delta
+> >                   __getopt                                     -     52=
+0    +520
+> >                   static.bdinfo_print_all                      -     32=
+4    +324
+> >                   print_eth                                    -     23=
+6    +236
+> >                   print_bi_dram                                -      9=
+2     +92
+> >                   getopt_init_state                            -      1=
+2     +12
+> >                   do_env_export                              548     47=
+6     -72
+> >                   do_bdinfo                                  588     16=
+0    -428
+> > 03: cmd: nvedit: Use getopt() in env import
+> >     aarch64: (for 1/1 boards) all -27.0 rodata -55.0 text +28.0
+> >              firefly-rk3399 : all -27 rodata -55 text +28
+> >                 u-boot: add: 0/0, grow: 1/0 bytes: 28/0 (28)
+> >                   function                                   old     ne=
+w   delta
+> >                   do_env_import                              668     69=
+6     +28
+> >=20
+> > And so this is why I'm just deferring this until someone has the time to
+> > pick up and address the underlying problems with this potential
+> > migration that have been raised in the previous iterations.
+> >=20
+>=20
+> Chiming in because I was put in Cc...
+>=20
+> Do I understand correctly that this only impacts U-Boot proper? If so, is=
+ a
+> size increase in proper that much of a blocker? As opposed to xPL which
+> usually resides in SRAM, I'm assuming U-Boot proper would run in RAM wher=
+e I
+> hope an additional ~700B shouldn't be too much to ask for? The issue howe=
+ver
+> could be on the storage medium where U-Boot proper is located, maybe this
+> gets the binary above the max space allowed for U-Boot proper to be stored
+> (e.g. on some of my boards I'm (self-imposed) limited to 2000KiB) though =
+I'm
+> assuming it could be less than 700B if U-Boot proper is compressed for
+> example. But I'm also lucky enough to have storage space and (D)RAM to sp=
+are
+> on my boards.
+>=20
+> Out of the RFC, I see the strlower() part as being separate from the rest,
+> maybe that's something we could revisit separately? Reading the cover
+> letter, we should even spare 60B with that alone, with the added benefit =
+of
+> easier maintainability?
 
-Thanks!
-Quentin
+This was just impacting U-Boot proper. However, it showed I think two
+sets of problems. The first of which is that there was an expectation
+that switching the code should result in some sort of savings,
+somewhere. And it didn't. And we do have boards where the space between
+the end of U-Boot and the start of the environment is small and so
+global changes that aren't just bug fixes need careful consideration
+(and they've already turned off things that aren't needed for them such
+as EFI loader). The second thing was that the code wasn't really easier
+to read / follow. So I don't object to the concept but I think the
+outcome of this series was that our getopt needs to be looked at in a
+bit more detail, and figure out if it's really designed the way we need
+it.
+
+--=20
+Tom
+
+--/MVx47pRlMyXeUjk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajwfrQAKCRAr4qD1Cr/k
+CnRQAPwI6dkZNn1LewswJR9JFipTlO1jkenroM/J1F9fXzn1dQD9ERexz86fE2I3
+bekf/8zBembeLKrU4pC0ynJBsLBi6ww=
+=Qu5f
+-----END PGP SIGNATURE-----
+
+--/MVx47pRlMyXeUjk--
