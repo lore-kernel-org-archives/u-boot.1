@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F47CDB470
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:45:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50CE2CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:46:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C14849F0;
-	Wed, 24 Jun 2026 09:45:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CAD30849EF;
+	Wed, 24 Jun 2026 09:45:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="lUvAIFkS";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="E0Kx96fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48DB484A04; Wed, 24 Jun 2026 09:45:23 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id A30A884A0A; Wed, 24 Jun 2026 09:45:25 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52C14849BF
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F30A80287
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:45:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 858C8C6B3AA;
- Wed, 24 Jun 2026 07:45:28 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 613101A090F;
+ Wed, 24 Jun 2026 07:45:23 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id A743D601C5;
- Wed, 24 Jun 2026 07:45:20 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 361F4601C5;
+ Wed, 24 Jun 2026 07:45:23 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 30D53106C8606; 
- Wed, 24 Jun 2026 09:45:16 +0200 (CEST)
+ with ESMTPSA id BA376106C846B; 
+ Wed, 24 Jun 2026 09:45:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782287119; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1782287121; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=d3RmSDdGDsY//nd7Ib9sx50532vyKSc5p5/8+r6sDKI=;
- b=lUvAIFkSv5heMKP/WKMYajXkNNRtxGleDwWVr86T/QKjO9GGOCGLs1pe1FTzOAyG71PHI8
- GrWu1tDDbHqe3t6E6EPsmG6Ve0jOklz2LThyWNJ0SlrHmcUV8j6Zq3ioP0agdS8JHbTp/C
- Vw/qE7uIpSX3G43by5nrwJj8/d83cTR1P+0/dHLD5QafXeZ7y3Wjgl7n2CkVqAM9b08BAT
- AHhx61VKm5vGn0d4lmc7vHfE3EVM1xWDzBahfAeP/kJgyhfvTS3DE+V5kIH8eZFSwLVCvr
- 9HHW5Rt4YfVJaqTw71d6NWF00PDq3STozcIsKTI1vDC4D9iVaRr+im9JTLGLgw==
+ bh=50YgtahBJDGU7nFfsnCYcWQjMwBvrmUq5qvL7eTgWOg=;
+ b=E0Kx96fpJ1npDffuFR0003S6W0/SkSd6quC23imwHYsA2NS0B7V9AwcxsdsJgTX+CisbTi
+ F/LbOg0TXDrmeLDjujdR5ZBXiT9qXEC8x/opf49znp9CIq0h/BPXpQuHiz2LdngECOTWxD
+ MNXyIM855mJhc+QJDYYhA5EYsc1/qQZtRBcRA4VrgiA4qPXBfkc/3O/VPJf1vTWatJOF/q
+ lkcvLdANbDcDAy68rQPTGspDmS9gQ0975L384QCk983Uqnixtj2VjsBbgSPV8xZvXrMUde
+ pG144+Pg1jzEGwY9dX0dMRCw+mi+MBTsaeuofBPfuDEU8YYCtZDX8dqnin1cSg==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,9 +56,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 05/19] mach-k3: r5: common: introduce k3_deassert_ddr_ret()
-Date: Wed, 24 Jun 2026 09:44:45 +0200
-Message-ID: <20260624074459.873906-6-richard.genoud@bootlin.com>
+Subject: [PATCH v3 06/19] board: mach-k3: r5: common: enable GTC after
+ core_resume
+Date: Wed, 24 Jun 2026 09:44:46 +0200
+Message-ID: <20260624074459.873906-7-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260624074459.873906-1-richard.genoud@bootlin.com>
 References: <20260624074459.873906-1-richard.genoud@bootlin.com>
@@ -81,66 +82,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deasserting DDR retention pin is quite similar from J7200, J784s4,
-J721e, and j721s2 SoCs.
+From: Abhash Kumar Jha <a-kumar2@ti.com>
 
-Instead of duplicating almost the same code, add it in lpm-common.c.
+The GTC counter values are restored in the resume sequence by TIFS as
+part of the core_resume API. Enable GTC counter after it is restored.
 
-NB: On J7200, there's a latch, so the clock needs to be toggled.
+Also add a check to make sure that rproc_load only enables the GTC counter
+in the case of a cold boot.
 
+Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/lpm-common.h    |  2 ++
- arch/arm/mach-k3/r5/lpm-common.c | 27 +++++++++++++++++++++++++++
- 2 files changed, 29 insertions(+)
+ arch/arm/mach-k3/r5/lpm-common.c       | 11 +++++++++++
+ drivers/remoteproc/ti_k3_arm64_rproc.c | 10 ++++++++--
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-k3/lpm-common.h b/arch/arm/mach-k3/lpm-common.h
-index 2b360e6f03f3..2e3ea4428124 100644
---- a/arch/arm/mach-k3/lpm-common.h
-+++ b/arch/arm/mach-k3/lpm-common.h
-@@ -11,5 +11,7 @@
- 
- void __noreturn do_resume(void);
- void lpm_process(void);
-+void k3_deassert_ddr_ret(const char *pmic_name, unsigned int ddr_ret_val,
-+			 unsigned int ddr_ret_clk, bool toggle);
- 
- #endif
 diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
-index 95f777c5029f..afc6b5cf5376 100644
+index afc6b5cf5376..7889922a7e24 100644
 --- a/arch/arm/mach-k3/r5/lpm-common.c
 +++ b/arch/arm/mach-k3/r5/lpm-common.c
-@@ -41,6 +41,33 @@ struct lpm_addr_info {
- /* This is used by J722s */
- __weak void ctrl_mmr_unlock(void) { }
- 
-+#define GPIO_OUT_1 0x3D
-+void k3_deassert_ddr_ret(const char *pmic_name, unsigned int ddr_ret_val,
-+			 unsigned int ddr_ret_clk, bool toggle)
-+{
-+	struct udevice *pmic;
-+	int regval;
-+	int err;
-+
-+	err = uclass_get_device_by_name(UCLASS_PMIC, pmic_name, &pmic);
-+	if (err) {
-+		printf("Getting %s init failed: %d\n", pmic_name, err);
-+		return;
-+	}
-+
-+	/* Set DDR_RET Signal Low on PMIC */
-+	regval = pmic_reg_read(pmic, GPIO_OUT_1) & ~ddr_ret_val;
-+	pmic_reg_write(pmic, GPIO_OUT_1, regval);
-+
-+	if (toggle) {
-+		/* Now toggle the CLK of the latch for DDR retention */
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval | ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval & ~ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval | ddr_ret_clk);
-+		pmic_reg_write(pmic, GPIO_OUT_1, regval & ~ddr_ret_clk);
-+	}
-+}
-+
- /* in board_init_f(), there's no BSS, so we can't use global/static variables */
- bool j7xx_board_is_resuming(void)
+@@ -266,6 +266,7 @@ static void resume_rproc_f(void)
  {
+ 	struct power_domain rproc_pwrdmn;
+ 	struct udevice *dev;
++	void *gtc_base;
+ 	int ret;
+ 
+ 	ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, 1, &dev);
+@@ -276,6 +277,16 @@ static void resume_rproc_f(void)
+ 	if (ret)
+ 		panic("power_domain_get_rproc() failed: %d\n", ret);
+ 
++	gtc_base = dev_read_addr_ptr(dev);
++	if (!gtc_base)
++		panic("Get GTC address failed\n");
++
++#define GTC_CNTCR_REG	0x0
++#define GTC_CNTR_EN	0x3
++
++	/* GTC counter values have been restored by TIFS, so enable the counter */
++	writel(GTC_CNTR_EN, gtc_base + GTC_CNTCR_REG);
++
+ 	ret = power_domain_on(&rproc_pwrdmn);
+ 	if (ret)
+ 		panic("power_domain_on failed: %d\n", ret);
+diff --git a/drivers/remoteproc/ti_k3_arm64_rproc.c b/drivers/remoteproc/ti_k3_arm64_rproc.c
+index 403c6bed2e8c..9b8a6b7dc53a 100644
+--- a/drivers/remoteproc/ti_k3_arm64_rproc.c
++++ b/drivers/remoteproc/ti_k3_arm64_rproc.c
+@@ -17,6 +17,7 @@
+ #include <dm/device_compat.h>
+ #include <linux/err.h>
+ #include <linux/soc/ti/ti_sci_protocol.h>
++#include <mach/hardware.h>
+ #include "ti_sci_proc.h"
+ 
+ #define INVALID_ID	0xff
+@@ -78,8 +79,13 @@ static int k3_arm64_load(struct udevice *dev, ulong addr, ulong size)
+ 	/* Store the clock frequency down for GTC users to pick  up */
+ 	writel((u32)gtc_rate, rproc->gtc_base + GTC_CNTFID0_REG);
+ 
+-	/* Enable the timer before starting remote core */
+-	writel(GTC_CNTR_EN, rproc->gtc_base + GTC_CNTCR_REG);
++	if (!j7xx_board_is_resuming()) {
++		/*
++		 * In case of a fresh boot, enable the timer before
++		 * starting the remote core.
++		 */
++		writel(GTC_CNTR_EN, rproc->gtc_base + GTC_CNTCR_REG);
++	}
+ 
+ 	/*
+ 	 * Setting the right clock frequency would have taken care by
