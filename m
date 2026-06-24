@@ -4,79 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDED8CDB47C
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 00:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F61CDB47C
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 00:12:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25E8B8460E;
-	Thu, 25 Jun 2026 02:01:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 444D28460E;
+	Thu, 25 Jun 2026 02:12:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BNjuKSSn";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="aSRxTwMs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FAE784704; Thu, 25 Jun 2026 02:01:21 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 3B7B88460E; Thu, 25 Jun 2026 00:06:20 +0200 (CEST)
+Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7133380287
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 02:01:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B5778460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 00:06:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4glzVL38n1z9vC3;
- Thu, 25 Jun 2026 02:01:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1782345674;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9TJDkQecwL6IGep9iv3SsZzcF3nScidQOAbCVpn2tuY=;
- b=BNjuKSSn2rLHzNNhriwLoVgIUGKRVqsgZVz7YicIHiwceA30I6aizRptgqcgvUvtRNpNJ4
- bqkJpeY2RO+vjo3+j1AWVXuh9fyRikjQpNOswSL121KRZMQgOdAUcJ9Afo8xunphYIHMds
- nvAOnNxr5pNtctpnQUyrWl2nOqACTZqBNLA1DOeysqqMP8yDvTv/T8iVP8OdMYD5syc1ea
- FgdAJtCUY9jOR/i6V/JsKVOK/YY0ipgSQEV+2D2e+bONSBphcPoxDgkIu4Qhr5W5+3FyEX
- 94J80D7sFddHv4kN8mFTXfy/sY6i7x4EcNTFPWfAvzd+TfVhK/oK4dbp2NHcTA==
-Message-ID: <f9e7f058-9531-4dc3-8241-6415ec011bc7@mailbox.org>
-Date: Wed, 24 Jun 2026 14:41:26 +0200
+ spf=pass smtp.mailfrom=johan.axelsson@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=f5ptaqgmmndx7p76cguvtev4mi.protonmail; t=1782338776; x=1782597976;
+ bh=jVwZI16le5GhXL2CXooU9Ymu07v3/eJcdo3LOyBgBsM=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=aSRxTwMss+rjFDsO+xqre5Ej4l09hfSZdp2f7fleOmzQ+BXzEDMRjdyiTHmV6bf4w
+ M38trYGpAScfX1EqdhR6XAETN5Yh2XkhQ6xf8x2kmBR9GmHSFnu4/r0i5nghfk5ls1
+ F8F8VRneRXCtKN4AICNTQLt4zg80hxfz8Pro6TR8QVSFMiEPasZWK+Hd85KcpkGB77
+ 0E5P08MYfb8sJ//lxB9j/tsJRZCQQRUIlnA7jgQziC/ANxswpD/7wuXZAXngFNTp0k
+ 8VIweUPX75E0MQCcXz8hHUmnDTBcqH7i+Jkkkz7iuEAomAFpLPoj1N3XjbyE9DuctS
+ A/PKlywkWCS0Q==
+Date: Wed, 24 Jun 2026 22:06:10 +0000
+To: jonas@kwiboo.se
+From: Johan Axelsson <johan.axelsson@proton.me>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu
+Subject: Re: [RFC PATCH v1 00/14] arm: rockchip: rk3576: BLOB-free TPL DRAM
+ init
+Message-ID: <20260624220551.334-1-johan.axelsson@proton.me>
+In-Reply-To: <32dd997a-38c1-4f36-9b90-9d27fb592db4@kwiboo.se>
+References: <20260525012824.121-1-johan.axelsson@proton.me>
+ <32dd997a-38c1-4f36-9b90-9d27fb592db4@kwiboo.se>
+Feedback-ID: 111481869:user:proton
+X-Pm-Message-ID: 8f81ab4cd851421c5baf9ec9ff5af0e88879e34c
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] drivers: usb: dwc3: sync code with Linux v6.16
-To: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes
- <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Stephan Gerhold
- <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Chintan Vankar
- <c-vankar@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
-References: <20260624123025.GA3245275@rayden>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260624123025.GA3245275@rayden>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: hpsyqyhuruii773ebmtn3sigpr8wxnqm
-X-MBO-RS-ID: f5f88092860d24615ed
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 25 Jun 2026 02:12:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,37 +70,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/24/26 2:30 PM, Jens Wiklander wrote:
+Hi Jonas, Simon,
 
-Hello Jens,
+Thanks for the review -- much appreciated. A short status and plan rather
+than a new posting.
 
-> This is a follow up on my last patchset [1]. I'm addressing feedback on
-> the previous post. Since there's quite a few patches I've published a
-> branch instead as requestsed. Last in this mail follows a summary of the
-> branch (it looks like a pull request, but I'm only reusing a well-known
-> format, it's not intended as a pull request at this stage).
-> 
-> The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven years
-> ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel
-> to u-boot"). Since then, not many kernel changes have been ported back into
-> U-Boot.
-> 
-> This series synchronizes the DWC3 core with Linux v6.16. To provide
-> a clear audit trail and maintain bisectability, I have structured the
-> series as follows:
-> 
-> 1. Restore to Baseline: The first commit reverts U-Boot-specific changes
->     to drivers/usb/dwc3 to return the directory to a clean v3.19-rc1 state.
-> 2. Milestone Imports: A sequence of 50+ commits follows, each performing
->     a "snapshot" import of the drivers/usb/dwc3 directory for every major
->     kernel version (v3.19 through v6.16).
-> 3. U-Boot Adaptation: The final commits (based on Jerome's original work [2])
->     re-introduce the necessary glue code, XHCI/UDC updates, and build fixes
->     required for U-Boot integration.
-> 
-> Note that this is compile-tested only. The CI pipeline on source.denx.de
-> was used as an OK/NOK indicator [3].
-This is fine by me, but please do make sure the patches are posted to 
-the ML.
+Following the feedback, the work-in-progress series now:
+- drops OF_PLATDATA and the clock driver from TPL (DRAM init uses the CRU
+  registers directly), keeping TPL minimal;
+- drops the DT / syscon additions (no dt-bindings submitted yet);
+- restores the original Rockchip copyright notices;
+- stays TPL-only, no DVFS or other complex scenarios.
 
-Thanks
+Still to do before the next revision: Simon's
+obj-$(CONFIG_$(PHASE_)SYSRESET_PSCI) suggestion, and the substantive part -=
+-
+real timing values (the tables are still TRM reset defaults) plus hardware
+bring-up. That last piece is the real gate; I would rather not re-post a
+series that does not train DRAM yet.
+
+Per your note, I will hold the next RK3576 revision until Pavel's RK3568
+series settles, to avoid two parallel reviews. I am following that thread
+and will rebase onto the agreed approach (including the TPL size work)
+before re-posting.
+
+WIP and notes live at https://github.com/OpenHorse/rk3576-dram-init for
+anyone following along.
+
+Thanks again,
+Johan
+
