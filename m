@@ -4,64 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF25ECDB479
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 15:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E906BCDB479
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 15:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDFB38460E;
-	Wed, 24 Jun 2026 17:24:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B4A88460E;
+	Wed, 24 Jun 2026 17:28:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hXL9mTzI";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Mn8apXCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68E3F847C8; Wed, 24 Jun 2026 17:24:05 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2432184671; Wed, 24 Jun 2026 17:28:31 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46F4180398
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 17:24:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D00DC80398
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 17:28:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 86D06C6B3B3;
- Wed, 24 Jun 2026 15:24:10 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 58668601C5;
- Wed, 24 Jun 2026 15:24:02 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id AB949106C8373; 
- Wed, 24 Jun 2026 17:24:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782314641; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=7VUY9GJUVwTvK7gNnb69fS1YcHgTh2/r4wr02MUuJRk=;
- b=hXL9mTzIphrKpIQZcEOthw+LKe+pPzO/k28p+TotplpnVJWA2eWYVDBKkZ7YlpWe5Mq71U
- Zfi31YF0InHLbD2nB7kixI2R8xniVQCLZBZNzdQuaXqHkTrmi5Vq5UlwKSbOHVYY7KMMko
- ndMu7pW+q4EsQ5hDxrscQ8lfvsVVa6vuW4v5384b2FIUB2QPpFRA5KcGYFK3tdUyLFhHrk
- olaFiITcyGpIoAyWAK6gi3YgPbTEAzswU69SfGihjjWddOJR24PSGoFBW3Ssi+pQ2EGTC+
- LWsRZzE6DkXIs8EnZq8eEYbyraTx4hOBiZYp8abfoUQDXwtJ8+PqnP9AIObO7Q==
-Message-ID: <1bfb8b3a-5204-47ef-9aa7-fc5748248453@bootlin.com>
-Date: Wed, 24 Jun 2026 17:23:59 +0200
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-48b7df4b4ccso1288659b6e.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 08:28:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1782314907; x=1782919707; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=en4i/KtqDpWswHqrZ+f8n+OGkjhnEAe0qZhPlur3grY=;
+ b=Mn8apXCzevbQhYP82ntpX9LCcx8ZQk7hbk9NdzmgqkCWPBlPwbWK2Ae9bQE4Z1leir
+ 3T1/GEY/ybIQRRGJdLQZR4TdUkAXeXBkjP/ZSlsfs0o5I6lRtj6rAhaeEjMqC/YFUuKi
+ 2Qrvrfbs29Nz4xrR/qjv87jtNh76calTZcgQtBDtkmeHCG8/ED1LiZsMNUj81gY5yNcY
+ Pa3XuM0Zu0Y6kUSgn3E/M+d8cY0XXzPnHp7Mz4/DA5d3rFm2CIBy5y87dg+QjrQIDUVX
+ IIAg8kf/w8ublcq3XkUbzreQAMxbAa7g2kBC6OLv6Piru/lRXKT6NuquNNPZU10Hp1/4
+ yijA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782314907; x=1782919707;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=en4i/KtqDpWswHqrZ+f8n+OGkjhnEAe0qZhPlur3grY=;
+ b=VrzSZ3Sa38ehJYgSw9P2IYB4qe/RDISYfgNB2LeSR9LoYkpSBMcGzfupxXjlp+Zv8A
+ 0PZdQo3WkKrsUZpTLGFrICfG1PNor/8xu2f7beZ4ICpGiS1Xci+hGBtv4s2hQ2WBX8L/
+ ChxK8Y3pvS30k1vw3gyR837cH42uSKxJzG487XZtA4Baxq90Oiptb7RtZKq4q4xIr+aq
+ cGjRTcD9yc9+efYdClNcY37Sk7dPOdu7jJmf7lXz+UIJCGzHqA2FJ5DkBVa6g/TFTAWQ
+ Sa8baGXZAgnNF7K7/M4iY6H6VCCMB6Zxx66rIUvuhukFGf/lsJt17n0xTIJP9QiK24sx
+ LuAg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+CF3hVfPGxPwQ7SlyEh7GkMwSwMrbNPdwu/cFqRqQBxpPtrP+6cGI3PN1MSibFlvazpmiZgPI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZ/uAovEfCpu2+Gm82/mUkEghwLbvw6UPYwaxrTFJJOh4GW2Yz
+ p4B90GxAHnjxEUOoNDgd1XK0Zab271d6ua932sHWimqUKsFhrtU3PuCf5u7zDuQFhR8=
+X-Gm-Gg: AfdE7cnv0cACZjC9QZkkGfthB7lRGdZ2/U0S21G3zbvJaWC6AmEXsHS8GC9ZGDa/HPE
+ CZxi3ijbOt4OD7uvuYCEGmo4l4+3mdw7JuEGI3NFGAzpjV94w8NW1efyBTGBaCSoYqIm9DuE6DW
+ 3rRmW+eaIMoLEsjdmNjxqR2LDz111VuR3xxZ3qFdFtMcUt7WHWrG7LorVo5K3UzFm66d42lsuRA
+ /lPtD39T95bD5RyB8mspF/HewdDMvto1HwYgEKFxyR4kWTMqRXyTosMvCsATOFTzcGFGi6YoNIq
+ zJFuKKgyJrVRzl7SVhMgK4T9CUzZJGnCzuJAutoqP00Fjd1hDPxQKloXZ6my9Z580sdsYbmEIFn
+ 6bpPI60LJKCaePTyY8LQFkS2ryeRGcB/s7SCPau8bsmIJY91LTgO56740JL1GDmtJxPqEhjxOuQ
+ herL4hkh9yiLeGddBCqw==
+X-Received: by 2002:a05:6808:6602:b0:479:fca7:4650 with SMTP id
+ 5614622812f47-48ee556c405mr5084647b6e.31.1782314907519; 
+ Wed, 24 Jun 2026 08:28:27 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:68dc:b788:b3ac:e34e])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-48aee43c088sm8985730b6e.14.2026.06.24.08.28.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jun 2026 08:28:26 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Sam Shih <sam.shih@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Rudy Andram <rmandrad@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260615-mtk-fix-ram-size-v2-0-f72cfc52ce58@baylibre.com>
+References: <20260615-mtk-fix-ram-size-v2-0-f72cfc52ce58@baylibre.com>
+Subject: Re: [PATCH v2 0/8] arm: mediatek: fix gd->bd->bi_dram[0].size
+Message-Id: <178231489670.3619522.4421316885006430352.b4-ty@b4>
+Date: Wed, 24 Jun 2026 10:28:16 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] fs/squashfs: fix dirs->entry leak on inode lookup
- failure
-To: Allan ELKAIM <allan.elkaim@gmail.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-References: <20260611094353.722555-1-allan.elkaim@gmail.com>
- <20260611094353.722555-4-allan.elkaim@gmail.com>
-Content-Language: en-US, fr
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <20260611094353.722555-4-allan.elkaim@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1668; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=to1+/LyAurQczwAyWAGF40SF5j5b6mzCd6ZJ1FxI7fk=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqO/eTq+CnZ3l+Cf4uU9aygtZVfygDbhnA5xptx
+ zAyk2iYaiWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCajv3kxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A6pUH/0bD/aOFFUC4LR1KxjVlq6weLGYf6iBUOJdzzJB
+ bO+36Y1j2ooH/U481SKZhw/z24y/pmBjBPNQpfhoJ4mhWDuYUDXi13Mrz60R+dh5DF61K3NEXPL
+ EQ1st5atGRi5li7m9DFNP/YIr6DGOsX5Dznrl+LLKuCYacwMR/dTGbRvxHEfaI34J8Er8seV1Wo
+ TNIfell7QAjK/1pegPh7HRcR2cM9sn5Nh2ng7J2YjFfAtShwwXGHgiNJ3AgCZ8Pdo4XJoM3OYQ4
+ fCpXbeFezvKfQ87m5DNTNkOSEn/AFw4Yryj/20Yhe1elcDFgrqSPxSSOqUT4csXrQrQRt09Suy7
+ J2WI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,94 +123,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 11/06/2026 à 11:43, Allan ELKAIM a écrit :
-> In sqfs_search_dir(), when sqfs_find_inode() fails to locate the inode
-> of a directory entry just returned by sqfs_readdir_nest(), the function
-> returns directly while dirs->entry still holds the entry allocation,
-> leaking it. The bare return also bypasses the regular error path.
+On Mon, 15 Jun 2026 14:23:30 -0500, David Lechner wrote:
+> arm: mediatek: fix gd->bd->bi_dram[0].size
 > 
-> Free the entry and leave through the out label instead, consistent
-> with the other error paths in this function.
+> During some recent cleanups we made some changes that had an unintended
+> consequence of changing the value of gd->bd->bi_dram[0].size on some
+> boards.
 > 
-> Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
-> ---
+> 64-bit Mediatek ARM SoCs have some peripherals that require DMA memory
+> to be allocated below the 4GB boundary. We were using
+> get_effective_memsize() to work around this. However, this also sets
+> gd->bd->bi_dram[0].size to the value of get_effective_memsize(). This
+> variable can be used for other things, so needs to be set to the actual
+> size of the DRAM.
 > 
-> Changes in v2:
-> - New patch, fixing a pre-existing leak of the same kind as the ones
->    addressed in patch 2 (suggested by Richard Genoud's review)
-> 
->   fs/squashfs/sqfs.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-> index af32d008..df988774 100644
-> --- a/fs/squashfs/sqfs.c
-> +++ b/fs/squashfs/sqfs.c
-> @@ -547,8 +547,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
->   		/* Get reference to inode in the inode table */
->   		table = sqfs_find_inode(dirs->inode_table, new_inode_number,
->   					sblk->inodes, sblk->block_size);
-> -		if (!table)
-> -			return -EINVAL;
-> +		if (!table) {
-> +			free(dirs->entry);
-> +			dirs->entry = NULL;
-> +			ret = -EINVAL;
-> +			goto out;
-> +		}
->   		dir = (struct squashfs_dir_inode *)table;
->   
->   		/* Check for symbolic link and inode type sanity */
+> [...]
 
-Having a 2nd look at the whole function, it seems that there a lot of:
-ret = -Exxx;
-goto out;
-without freeing dirs->entry
+Applied to mediatek-for-master, thanks!
 
-Like here:
-			[...]
-			if (++symlinknest == MAX_SYMLINK_NEST) {
-				ret = -ELOOP;
-				goto out;
-			}
+[1/8] mmc: mtk-sd: select LMB_LIMIT_DMA_BELOW_RAM_TOP
+      commit: ae73cc6df7246b80ebc3c602da952e13fa72f2f7
+[2/8] net: mtk_eth: select LMB_LIMIT_DMA_BELOW_RAM_TOP
+      commit: 2d9a9f1cad906bbc13e8c131ed6932d0da4e28ee
+[3/8] arm: mediatek: mt7987: fix gd->bd->bi_dram[0].size
+      commit: c074950b489957931296bc1efdb5e19f6f64e9a5
+[4/8] arm: mediatek: mt7988: fix gd->bd->bi_dram[0].size
+      commit: 3b7adad0b5223422d9993e08faa9c879c023742d
+[5/8] arm: mediatek: mt8188: fix gd->bd->bi_dram[0].size
+      commit: 6f274732f7960319ea0337e34210d440753ff11e
+[6/8] arm: mediatek: mt8189: fix gd->bd->bi_dram[0].size
+      commit: 58c7145d687a6442c077b0ed0a8c57012de347af
+[7/8] arm: mediatek: mt8195: fix gd->bd->bi_dram[0].size
+      commit: ec457f7cfde59a2122297a7a217c88f02acc63a5
+[8/8] arm: mediatek: mt8512: fix gd->bd->bi_dram[0].size
+      commit: b4fa246a1565aa63375de06b732c6d1eb1f82d27
 
-			sym = (struct squashfs_symlink_inode *)table;
-			/* Get first j + 1 tokens */
-			path = sqfs_concat_tokens(token_list, j + 1);
-			if (!path) {
-				ret = -ENOMEM;
-				goto out;
-			}
-			/* Resolve for these tokens */
-			target = sqfs_resolve_symlink(sym, path);
-			if (!target) {
-				ret = -ENOMEM;
-				goto out;
-			}
-			[...]
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-It seems to me that we could keep free(dirs->entry):
-- in the while (!sqfs_readdir_nest(dirsp, &dent)) loop
-- at the end of the for (j = 0; j < token_count; j++) loop
-- and before the recursive call to sqfs_search_dir()
-
-And remove all the rest to add something like:
-@@ -677,6 +677,10 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
-                 memcpy(&dirs->i_ldir, ldir, sizeof(*ldir));
-  
-  out:
-+       if (ret < 0) {
-+               free(dirs->entry);
-+               dirs->entry = NULL;
-+       }
-         free(res);
-         free(rem);
-         free(path);
-
-(not tested)
-
-What do you think?
-
-
-Regards,
-Richard
