@@ -4,102 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBCECCDB470
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E847CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jun 2026 07:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45A9A8460E;
-	Wed, 24 Jun 2026 09:26:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACC568460E;
+	Wed, 24 Jun 2026 09:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="MGaPS/eS";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="EMF3dzCQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DE5984671; Wed, 24 Jun 2026 09:26:04 +0200 (CEST)
+ id 2B8B284671; Wed, 24 Jun 2026 09:35:05 +0200 (CEST)
 Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
  [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22DD080287
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:25:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DBD880287
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 09:35:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eric.chung@riscstar.com
 Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5aa2c25c632so683924e87.1
- for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 00:25:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782285956; cv=none;
+ 2adb3069b0e04-5ad53c8d4dfso813337e87.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jun 2026 00:35:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782286501; cv=none;
  d=google.com; s=arc-20240605;
- b=ROdPgHfgbNFkbVBHS4NJmW8lvqYhGiPmOmpfgaCgjuWLQvElUWaMd1tcxWzG9kQHoI
- oDRUkieB8+nZNPy/3yuO3tjOvDp7fVV0ExBzllBOvvD+bD5nx/cTjkftX8Xbgfkn6Tl3
- mq9WPIoQe1mAUqP2pR8Oo/ey4orSE8Ngxh2SrV1odgGj9Q0SjX2vk5tymAWjNfwvtxcg
- jZo9b+JIEUZWBWCvG/z5BArlxP4cqkjqWBtZSa/7X7DWsTfwE1mBE+QW5SGBg792MrUI
- X2192iwq60qJQRiUA68M43glnDUNCLVkXxBEIiWvkDJegWHOpl+VS4X4Ji3yM0JKv2+j
- JFQA==
+ b=lEQwHlCPvf1fvFUAw3oRG83xhnkrsXj216EucJaHKeE5l81L4OsR5kL/hJtQGV+A2F
+ yzl7mV190ZMKNLwLQowUKvfh30ZovmpbHuYvyYklaJCj/csFVfiwp24nxGMK5vijJsUh
+ SXhWlxrnHxPzFMtrvtu227vsYv96HAnEW4BBEx23gJ6+ekdPH0umjA6sc4tfCkFLUbyc
+ 1fChcI5jEH1+q9cUi/E3zifMWeSwlRAnpINkq2D99UIt0Nzt3xxJ/LqsebM2Q/R77uOS
+ E+uR2qmJzCCJ8VIL06h4oi3M30NZtO1ZLjezD5jy1wgm/bsJUf7gLALFmKXBu/UW46mS
+ 6XxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=iOK/p/mgHsH2KufZeHLljOIxp5gI43acyDMqBdDG/hU=;
- fh=ZADCylbINlJ1lUV7lYqvxrRz9Xg2SHqJs4yArFKHN3k=;
- b=OpuD0XPFSSUm2Wf+R54kZ3/48xh7FsJvFPaW8kz/sU0vjk0eZ5VH7o/2ySAqDXWnGk
- mi75XfS4jRnQvutlqlKN3Gz8SxwJKFoPzvJQTmcjQJGqpQkfX3cOOm4quDwNV8ktxDba
- EbMIYQKYVBIrlEmkOCGqkUJT50UZppCDV90h5XKg3KcKmzPzo6e3zVraW8w3d5foD00b
- UprRw7x6VTuy52+r28lgVO0YeS7JC2vzPx70fn/xvClaV5XeQ3kVjTtUl3Dj3TGQxPrg
- 8+oypWUNRRR1OSnmEc0G13JF/5Iej++oyrVGaPLNZIJkuSFMvb5st1xfyRrkFF7nlZnm
- Ak6w==; darn=lists.denx.de
+ bh=3N3uYG7nQwf2KO3DSs1QFZmCLxRdwEloOmYtrF77GmI=;
+ fh=ZaJr1b5w+RYALWcTbYsAJyeoMZdkKB4d9gt7dTB7Tts=;
+ b=eGCcEmJzzV7MAI2izef64LLYgJaS0vebZEurX/vYRwzyQjdUce7h7bOQGYIaLR73O1
+ gcSdNxTNfOV1swo7q2J9LdxxIid6Sg7JkLuZALnyJcn4TKwn/in6Voj9QxR55RLS1aUz
+ 7U7L5z4OsmrX2hnyPDIkz9GQ77+hvfW5Th18POewyG2OO6Rh9qr6NMGP3uw3X4QG1R7V
+ abpCp0MJt8UtN58xO64qzcEFSq6ZIgt+ccQdrNvDekIOq5aAxEx8izBUFwGJokPkF6Vu
+ y2C7kZGjQ9eGz9ej3v4yQi6zTXLnSzo8Qeuv7TkvhwVGGlpkPonE2iBi9juQKsTJDNXu
+ YmUw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1782285956; x=1782890756;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1782286501; x=1782891301;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iOK/p/mgHsH2KufZeHLljOIxp5gI43acyDMqBdDG/hU=;
- b=MGaPS/eSdA55BFg5uj+iQkipBeHau9nMYuO/cus+8/Aqhys8DtDeV1/xozl/JCUXGC
- uZEgYFzPywUzoQ0ypq+ctzS9f3UGkxTntY65JMt/YJIz1T+k4Ud/zvIwd7Ei9uiyNbuK
- FM40IexkBMD+WGa0WHIutE5AZ5P1PoUz5POOpxRpdWmg/EQ+6skW/imDZNH+FE+Z0MfM
- UKqsq2ITaaXq1RDhCGpOnNPVOW0v6zL654pAh6PsmQoRG3Y7+IDCKMamArm+pKOHdAZK
- s/d+yphWHn5RalXgZ1X62Fx9voNk11+9JMkGj5yQr/8c9pWH8Mso+mDnh2iB1Tl+TXrI
- UjEg==
+ bh=3N3uYG7nQwf2KO3DSs1QFZmCLxRdwEloOmYtrF77GmI=;
+ b=EMF3dzCQkPs7//UP4BMBiErNhjkhhHEdbHQkf+P6pVk8XOXFZ3DpJzgd+ch39pqepG
+ Bdd6CRCzD5y6I6FwVuRwV7r/QG0NupcltF9QDQeCRb7f9TGY833r63uJSyUR9lygPkjT
+ hRWn5rYdzic+9iweWIPgYF5DQXIowmeram00qIn/haCw7CJFmqM4IR83/SypECpTMEv0
+ oEOAXx+hfIFtgvn7aVi8ktnJFRCJFfyHr6f28QQxVIWUrhQ5appKGc040sAhsUiWaV7v
+ acLmI/GduGOh59GZzfGgljnwp6RxmlqqFFChLxYmLER4DpgXpCIeXAw/AI6iDYgT5PyR
+ 4fMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782285956; x=1782890756;
+ d=1e100.net; s=20251104; t=1782286501; x=1782891301;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=iOK/p/mgHsH2KufZeHLljOIxp5gI43acyDMqBdDG/hU=;
- b=b/rIZzE0IG9AKY9qMK8rN38FPmUGKvxkEz67iGMBjITYjYqk4NjhIX7CweQeCzEL5Z
- yIK0JLWeR4I/xhMQoAr3gLTWxIe0l+rjGuLtq7HUl5wX0dTmBdPmjEt5BMM4HY3eQdG6
- VNQ8ob+kqfouo9g5U/NNFDZFqCk0wqvUoJJ3LeEttRva7h9/JbcUg2iijzd7r01gk7Mp
- UYEF3qbiK1MZ8EyFtmj37PvxQcjdzGA5gjHbuVqLLKbRQXiXOUwJYo2ZKlPgy2jgiL5P
- H4X41cP61TcOYqtyWmgAwDh+LW2HSWX7BifmAd0JrVMjR2UO/Bn5bDmTQE5rqui5CgmK
- oxxA==
+ bh=3N3uYG7nQwf2KO3DSs1QFZmCLxRdwEloOmYtrF77GmI=;
+ b=if8TQEMgYczSvVuZ94Iw6aVobT1CSMV/nwJoR/k3mrbm1xn/xu31m8Z8Rbve9fl6HU
+ 59/K22hn+9rePUZYZcvoiWIeGhwXyR3B9Ix6ZxU+f8BF0Dz3KxdYyN8OgpjMkoLp3UOF
+ aGMEQ+c/Yahkr2HEKqO8dbrHBtrQt8rn0J4RG8WW6pP5ICO/8pvvkNcPFDsgBhZicfnH
+ OWvOF12zPbxMQXM/h9DTGsN9p1W9AaYkc3jXYHDmv+fwcBR9E5dBe6tWwh20mhcTUPmJ
+ 0YzsN0wO+GV6YA54lY3u8wTnMEpdURWcJdQ1svOX2WsUX+tQhcdxq0QZJ4CVdGhyvlcV
+ 7GFg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/cCyQ99nMDCmeS96JOtlkHTi1xQvUSwSweDS0LPZt8ydA1C32OdYPP4DbfucuAnXHRHKn6RGM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwpaD6ANiySqJouqYt6dgVp82g0JzX/srK7XSKTHy4kKCYGzCSC
- b7U3Z2cmgsw7NhA4/zwZtKXGILN9vAUIpWeoEYGVC19hTTJGomov8Wy7HzSYJGzLdpSQluQitDU
- BaydCHSxmUEHNO6X+7dk5v5LTIQGufuIoQcEwpayImQ==
-X-Gm-Gg: AfdE7cmrPVIxoNOlz+bglstT07l1bem3o/koSedr3RPNmFZlhiJE0WTQOujvI4keguT
- 31FjeQCJdNM7HS4NPlMcYsm/SIt8VXtwHPwsGWyDRkczEXiS/WLXLQFMbixY0/d9ZCIc95bbpdR
- Y/nDMB5CcW+wN5BmUa/qCEG3lcc6o4N1Dx5vFrm0Awl5BsB5HCOQJZtgzBnoWcllEruxYezhZb5
- qfXwYa+fF7vgPUmwqw8EYADBwuqP/GbwX4wBMPWEOK3tHLFd/nXg2OBF8gU77Mm/cSGGKSLs83t
- 3npgLM4mbEdLorWqow+nIA9BmeSOcikRBF9BAiP3Dpm9aq2osECSvUQ8/U/iC7j2V6Fgn5B8YA=
+ AFNElJ8ubB3rbI3MSgdZnwC5m78fFRW/lUeh+mmauNZ2BewR3iin7HL9X0YgF1GE85RXy2j06bLvl/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzL7GtkLjnLS8Xd6XcQSkBc4hzuggRfDuZkwTa4Po0W+BNEFwE6
+ Ah7L6J8k4gr9uwlzHlXdQldWowPjxyJ2qyeChNNdpSHunQkezv6EkiyqEbbFWbxZaCR9vZWnNiz
+ CnttSTXSW/ro1Es3PIT8LM+XExXzzcihCoELCaz1UNg==
+X-Gm-Gg: AfdE7ckd2BcUuXEo0EiyJmPKYmo5vlXvwmsLalSNfJAPUffIOtHWyyoDOWVbyZ2arSF
+ 3PR00fX2YlbepZ9/0MJ077HpQED6Ntd6Xce9+E+PNm8LiqkpodtE22ILWV3ywNMx1SkgWwoRrU8
+ JdUjX6BbrkDMP0AOGnUNSknVby1FiHk/D9DgRcYuWpJEYXT2hFLBq/e4IOV3/5PxiBlT53MnuLz
+ Uv6SWBSjh+6y25fQ4VWRzwUrOjzM3BXiXhHSb2OpVFlhYD4pOkcETbcnfTlDRv1SlvAHn7QpxN/
+ p9gJs6iI+2icxqFc28XUNXEHgt9ZSn654aRxxU2+NRjCo7T1BS7ibFPGsHnwM7UZyql+OcxGPA=
  =
-X-Received: by 2002:ac2:4883:0:b0:5ad:68a7:e0fe with SMTP id
- 2adb3069b0e04-5ae9d5886b0mr335919e87.37.1782285956174; Wed, 24 Jun 2026
- 00:25:56 -0700 (PDT)
+X-Received: by 2002:ac2:4c4b:0:b0:5aa:4a98:bdb0 with SMTP id
+ 2adb3069b0e04-5ad695820dbmr1883724e87.4.1782286501221; Wed, 24 Jun 2026
+ 00:35:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260612201901.73657-1-raymondmaoca@gmail.com>
- <20260612201901.73657-2-raymondmaoca@gmail.com> <aizTnMlko1Pg9pMb@pie>
- <CAH22mJxFe79308nCXOpCtgrHhvw86EXjKZz5XAKKTVnGx_MzHA@mail.gmail.com>
- <ajteq071XCoIDM8-@pie>
-In-Reply-To: <ajteq071XCoIDM8-@pie>
+ <20260612201901.73657-3-raymondmaoca@gmail.com> <aiz8E_EFaSj9q-Fl@pie>
+ <CAH22mJwsH9gPo6xTrX6G+9weAbaV2pk6XGqi=Xshng4XuaNvcg@mail.gmail.com>
+ <ajthOhWTPVMIyMfH@pie>
+In-Reply-To: <ajthOhWTPVMIyMfH@pie>
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Wed, 24 Jun 2026 15:25:43 +0800
-X-Gm-Features: AVVi8CfBDko_6pBWEZKF_O925z5iv-Je5uC1ua-p9m835XtFw0tP4jmpLGB8CR4
-Message-ID: <CAH22mJw48+TQN=3BOETgc5RvD_U_keTraFusBiM2N08EKsFfrw@mail.gmail.com>
-Subject: Re: [PATCH 1/8] spacemit: k1: select boot device via config registers
+Date: Wed, 24 Jun 2026 15:34:48 +0800
+X-Gm-Features: AVVi8CcTThTclZqdu7XDjdW5wqesyXgcGZNqiT9_QMqBerc-qfFFZx9b1wb-Rkk
+Message-ID: <CAH22mJzRLNufQ1wA2n9NUY6CoZTt2tXLrN7Av=qL2+v6wqLRyQ@mail.gmail.com>
+Subject: Re: [PATCH 2/8] mmc: k1: add sdhci platform driver
 To: Yao Zi <me@ziyao.cc>
 Cc: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de,
  uboot@riscstar.com, 
@@ -108,7 +108,7 @@ Cc: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de,
  jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de, 
  randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech, 
  neil.armstrong@linaro.org, quentin.schulz@cherry.de, samuel@sholland.org, 
- Guodong Xu <guodong@riscstar.com>
+ Guodong Xu <guodong@riscstar.com>, Scott Bambrough <scott@riscstar.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -127,148 +127,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 24, 2026 at 12:36=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
+On Wed, Jun 24, 2026 at 12:47=E2=80=AFPM Yao Zi <me@ziyao.cc> wrote:
 >
-> On Wed, Jun 24, 2026 at 08:46:40AM +0800, Eric Chung wrote:
-> > On Sat, Jun 13, 2026 at 11:51=E2=80=AFAM 'Yao Zi' via uboot <uboot@risc=
-star.com> wrote:
+> On Wed, Jun 24, 2026 at 10:23:35AM +0800, Eric Chung wrote:
+> > On Sat, Jun 13, 2026 at 2:44=E2=80=AFPM 'Yao Zi' via uboot <uboot@riscs=
+tar.com> wrote:
 > > >
-> > > On Fri, Jun 12, 2026 at 04:18:54PM -0400, Raymond Mao wrote:
+> > > On Fri, Jun 12, 2026 at 04:18:55PM -0400, Raymond Mao wrote:
 > > > > From: Guodong Xu <guodong@riscstar.com>
 > > > >
-> > > > Add logic to determine the current boot device by reading the
-> > > > SoC's configuration registers, rather than using a hardcoded
-> > > > default.
-> > > >
+> > > > Add SDHCI platform driver support for SpacemiT K1 SoC. This driver
+> > > > implements the necessary platform-specific operations for the SDHCI
+> > > > controller, enabling MMC/SD card functionality on K1-based platform=
+s.
+> > >
+> > > Is there any reason not to re-use Linux-side K1 MMC driver,
+> > > sdhci-of-k1.c, and its companion ABI? Since Linux commit e9cb83c10071
+> > > (mmc: sdhci-of-k1: add comprehensive SDR tuning support, 2026-05-11)
+> > > it is now capable of operating on SD cards, too.
+> > >
+> > Excuse me. Is there any ABI breakage in this SD/eMMC device?
+>
+> Yes, I only take a brief look, and at least the names for pinctrl states
+> differ from Linux upstream, as mentioned below.
+>
+I can change the pinctrl state.
+
+> So are there any reasons not to re-use it? This driver has been
+> carefully reviewed in Linux side, has the expected ABI, which would
+> reduce your work of upstreaming.
+>
+There is no tuning support in linux driver when I write the mmc driver in u=
+boot.
+
 > > > > Signed-off-by: Guodong Xu <guodong@riscstar.com>
 > > > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 > > > > ---
-> > > >  board/spacemit/k1/spl.c | 77 +++++++++++++++++++++++++++++++++++++=
-+++-
-> > > >  1 file changed, 76 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-> > > > index 0db362130e4..d5e87d79fa2 100644
-> > > > --- a/board/spacemit/k1/spl.c
-> > > > +++ b/board/spacemit/k1/spl.c
+> > > >  drivers/mmc/Kconfig          |   7 +
+> > > >  drivers/mmc/Makefile         |   1 +
+> > > >  drivers/mmc/spacemit_sdhci.c | 934 +++++++++++++++++++++++++++++++=
+++++
+> > > >  3 files changed, 942 insertions(+)
+> > > >  create mode 100644 drivers/mmc/spacemit_sdhci.c
 > > >
 > > > ...
-> > > > +             switch (sel) {
-> > > > +             case BOOT_STRAP_MODE_EMMC:
-> > > > +                     mode =3D BOOT_MODE_EMMC;
-> > > > +                     break;
-> > > > +             case BOOT_STRAP_MODE_NAND:
-> > > > +                     mode =3D BOOT_MODE_NAND;
-> > > > +                     break;
-> > > > +             case BOOT_STRAP_MODE_SPI:
-> > > > +                     mode =3D BOOT_MODE_SPI;
-> > > > +                     break;
-> > > > +             case BOOT_STRAP_MODE_SD:
-> > > > +             default:
-> > > > +                     mode =3D BOOT_MODE_SD;
-> > > > +                     break;
-> > > > +             }
+> > >
+> > > > diff --git a/drivers/mmc/spacemit_sdhci.c b/drivers/mmc/spacemit_sd=
+hci.c
+> > > > new file mode 100644
+> > > > index 00000000000..392ca389fa9
+> > > > --- /dev/null
+> > > > +++ b/drivers/mmc/spacemit_sdhci.c
+>
+> ...
+>
+> > > > +static void spacemit_sdhci_set_control_reg(struct sdhci_host *host=
+)
+> > > > +{
+> > >
+> > > ...
+> > >
+> > > > +     /* Set pinctrl state */
+> > > > +     if (IS_ENABLED(CONFIG_PINCTRL)) {
+> > > > +             if (mmc->clock >=3D 200000000)
+> > > > +                     pinctrl_select_state(mmc->dev, "fast");
+> > > > +             else
+> > > > +                     pinctrl_select_state(mmc->dev, "default");
 > > > > +     }
-> > > > +     /* TODO:
-> > > > +      *   The current upstream DTS file only contains the eMMC nod=
-e. When
-> > > > +      *   the SD node is added via an overlay, the eMMC device end=
-s up as
-> > > > +      *   MMC1 in SPL.
 > > >
-> > > Why not fix this with an extra alias in the overlay dt?
+> > > This doesn't match Linux side ABI, where when card operates in UHS mo=
+de,
+> > > pinctrl state "uhs" is selected.
 > > >
-> >
-> > That approach doesn't really help =E2=80=94 with the alias, mmc0 and mm=
-c1 get
-> > swapped, which ultimately breaks ABI consistency.
+> > OK. Switch to "uhs". By the way, the upstream DTS file hasn't been
+> > synced into uboot yet. This is not easy to find.
 >
-> Sorry I didn't read you correctly, I'm not sure which you are trying to
-> keep consistency with.
+> I'm not sure what do you mean by "not easy to find". You could always
+> refer to the dt-bindings maintained by Linux side for ABI description,
+> and we want to keep aligned with it in U-Boot side as long as possible
+> to reduce maintenance burden and improve interoperability.
 >
-> I did a check in Linux next-20260623, and the aliases for bananapi-f3
-> look like,
->
->         aliases {
->                 ethernet0 =3D &eth0;
->                 ethernet1 =3D &eth1;
->                 serial0 =3D &uart0;
->                 spi3 =3D &spi3;
->                 i2c2 =3D &i2c2;
->                 i2c8 =3D &i2c8;
->                 mmc0 =3D &emmc;
->                 mmc1 =3D &sdhci0;
->         };
->
-> and for musepi-pro,
->
->         aliases {
->                 ethernet0 =3D &eth0;
->                 serial0 =3D &uart0;
->                 i2c2 =3D &i2c2;
->                 i2c8 =3D &i2c8;
->                 mmc0 =3D &emmc;
->                 mmc1 =3D &sdhci0;
->         };
->
-> So both of them assign emmc to mmc0 and sdhci0 (SD) to mmc1.
->
-> As a summary of the situation,
->
-> - Linux before SD card support is merged: emmc becomes mmc0 (without
->   other hotpluggable devices present), no SD card
-> - Linux after SD card support is merged: emmc becomes mmc0, SD becomes
->   mmc1
->
-Because I don't know there's a new alias in upstream DTS.
-OK. I can use the alias in uboot.
-
-> But PATCH 3 in the series assigns SD to mmc0 and emmc to MMC1, this
-> instead looks like an ABI breakage, and would go away as long as you
-> change the aliases? At the same time the comment here could be dropped.
->
-> > The hack on MMC1 only affects its role in SPL and doesn't impact the
-> > ABI in the devicetree. It's just a workaround. Eventually, both the
-> > overlay and the hack will be removed once the upstream DTS is robust
-> > enough.
-> >
-> >
-> > > > +      *   However, the SD device should be the first device (MMC1)=
-.
-> > > > +      *   This sequence needs to be corrected once the SD node is =
-merged
-> > > > +      *   into the upstream U-Boot DTS file.
-> > > > +      */
-> > > > +     switch (mode) {
-> > > > +     case BOOT_MODE_EMMC:
-> > > > +             ret =3D BOOT_DEVICE_MMC1;
-> > > > +             break;
-> > > > +     case BOOT_MODE_NAND:
-> > > > +             ret =3D BOOT_DEVICE_NAND;
-> > > > +             break;
-> > > > +     case BOOT_MODE_SPI:
-> > > > +             ret =3D BOOT_DEVICE_SPI;
-> > > > +             break;
-> > > > +     case BOOT_MODE_USB:
-> > > > +             ret =3D BOOT_DEVICE_USB;
-> > > > +             break;
-> > > > +     case BOOT_MODE_SD:
-> > > > +             ret =3D BOOT_DEVICE_MMC2;
-> > > > +             break;
-> > > > +     default:
-> > > > +             ret =3D BOOT_DEVICE_MMC1;
-> > > > +             break;
-> > > > +     }
-> > > > +     return ret;
-> > > >  }
-> > > >
-> > > >  void spl_board_init(void)
-> > > > --
-> > > > 2.25.1
-> > > >
-> > >
 > > > Regards,
 > > > Yao Zi
+> > >
+> > > [1]: https://lore.kernel.org/linux-riscv/aUDwDkd8k_4gD1yc@pie/
+> > > [2]: https://lore.kernel.org/linux-riscv/20260108-kx-pinctrl-aib-io-p=
+wr-domain-v2-0-6bcb46146e53@linux.spacemit.com
 >
 > Regards,
 > Yao Zi
