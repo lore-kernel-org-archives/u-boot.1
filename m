@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2795CDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F776CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 796068495B;
-	Thu, 25 Jun 2026 16:38:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA4838496E;
+	Thu, 25 Jun 2026 16:38:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X2xOutxo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bIYANjFd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0BC8495B; Thu, 25 Jun 2026 16:38:53 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id B009584962; Thu, 25 Jun 2026 16:38:56 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B700584704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:38:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A9B484962
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:38:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bec423a5265so515334866b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 07:38:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782398330; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-bec450b950dso542780966b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 07:38:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782398334; cv=none;
  d=google.com; s=arc-20260327;
- b=qLVCnP8VMzNKGY/EbSOm8Iovm22OgEMmPJy3XT2qYQobMy/PRECLNIf+rmPHI068c7
- 7llLODLUuK/zLO8vSnf/JW8HiDeerbmEdI2W1/qWJrxMk0/8yQFXWCsN0UK0M99eLyrF
- SD192Y6Ssmq8s1lN4M1Uh0QJHTAWe8BP2NN2aKU5rkqBH3GwVopk0QK+Yr+O/cIHRwPR
- s5EDHk46QqUNON3fBN7G/oNTOUxDsPyUoMjUzYCKxMhYmgQT9E4z5rfrZbCXov5wIBkZ
- KExS3x1aF4kIjl2MTWZvxEmxKK6ipLgmiKR1Sqye+6oP4rOh9icVK2lpVO4dE9ONRu4C
- kSQg==
+ b=FCRNJC6XDej+sgXnocIZkjMumKVzRdjFyZxJ8bF2aBQfr6CmfCJAzVEZ3fXQR6mpFL
+ 9PdpByywqw0dQdk/9ML8pL5CWwpURwvBCrB9LWdYttmM59nDmhWhtSvx166pVl4mpQIh
+ dwxU962UEItHy5iMQ87xQ+E4YY13XqSP96cBk59IshBcLABsdQjwfhS3rMqgLZ94TU1J
+ CJZEYlUJuKp389fAOg0/DtGC6RPVcZVSoW+9AngSWSTTXTCdNaFNSO5yQVMdGC5FHBNB
+ ZtrKd+iMCs0L0RQVbWAM2OKNMZbTsN5nd7yeqCLkq74aWEVN4BfLByZ1UTPoLQKdmmZ3
+ wXGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vBvS+noZBaZQ0N/vcZ2iv5jpinv2pzBbpanpbZzuseU=;
+ bh=IkXNrhypC0poiJnLmVPmW0lauPRRzuTVSRAxsWRvUIo=;
  fh=eIExS0ApvoHXzoHaeZPvhgA2i643iHXhJkaiwQaioTU=;
- b=dx6rizMIgYtRzNNl4HAagQypdDyVOPVBGwZVCcFyjIHfFCt/FnOnuwgMQRGNvvKKCz
- 69ETGIPbc1LVs/ovgRmI5l+qvfE2sFL8VRXjdo6u9SlvG2sz5iYnEt8oG2AOeTdjyR2p
- zZZJy1uwHu10glit6z2SggUNaSR/4fB/LNbypKCxK8lXUPdtRg/XzfKBS8g3oTZgO9tF
- Y59GE1uvJDhU2k+Imy02L8gEIM+pD0Hcf4tp1e0YtI0RouZ4KCnE5LZA1PC5CoQ/PWMI
- DLGkiSib3eSUL1VwKrQKs7vVzcXbLmqijNmY1CoqthGPMG9JYLUwIkHCMDCswA1DW7wU
- 3Yog==; darn=lists.denx.de
+ b=Tsp5cCl6XgvfpvOCedJ01EG9ESE6JFFIkUnkk7fcoDv13A8tLxBZk4jgN7F1DAYzZ6
+ NpV1TBu+y8Dea1cKIclC81sHRkYOnjf7tEFEFaWZOisM8U5k7rQCNYghWpHZzEYiuIBM
+ eh2qcIWdWt4lrU2E6TdPjsIk1Jca+pN0mfJ1LLAzASEJNTiwFUUw7sJIRNsgGnvtXKed
+ VJKIze6coaR++RgPH8DI5Ryk82zkqWblcAc8vZLO52Na8eX2pKckwFrFx958EfHBT/t1
+ ex7u2od8uOpl1/hCHlBPtqKermBr3OTQVRKzO3D/eTACPLMzhP6fkI+j0hmnZ3VGWZg/
+ uUfw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782398330; x=1783003130; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782398334; x=1783003134; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vBvS+noZBaZQ0N/vcZ2iv5jpinv2pzBbpanpbZzuseU=;
- b=X2xOutxo7Hn72kGEOpe2r5YC4eg/JuHhq1M2ncA/VayLlpj4FREh54op74XNACxffZ
- tbnX0hhkCIorjiM7YeUbnDj7drs7B67MEKaIACxqmsSZgI+1Ge4vX2d1UOLZJ9udtq5Q
- Sa38rmyWy9AW5TFEMsQMbvuanBJ5YkW10/XAI=
+ bh=IkXNrhypC0poiJnLmVPmW0lauPRRzuTVSRAxsWRvUIo=;
+ b=bIYANjFdzJVizoRThpHWQXP7N53xESq/wFbREeg5Fc3jexRr2KbBT8OAitDZYxG65u
+ Liw2/SL0PrvAdo9+bMmq3kCjqAAFeGA/+dna5Xk0dSgKSWBKhKYMU5gT8xW77PYEQuR6
+ a4f63WnLk0KtRrj3BhiPMqvfrkOLIVXzVuNWI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782398330; x=1783003130;
+ d=1e100.net; s=20251104; t=1782398334; x=1783003134;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vBvS+noZBaZQ0N/vcZ2iv5jpinv2pzBbpanpbZzuseU=;
- b=aSqTWUhGqm6fd8hh+e0dXVzXhfTMblnNnAviK4ElPlJAd5g0b4iJrAS7Zt4YLkKs97
- 6yjZK11dLJ6wzjO54JuMbutQAAF1g3Lss/bsDX78VsoJuR67THNxss2EnJee7KqPebpF
- wtToGipEAHcOFPrrjMXC9TwjMuMxnr1KVhQdF4UF30oeeRS0u1nQVJGt2tRFRATeYTjI
- blbK6p1UJ8TzE1r5j9+wtggAl4wUtMqBZ+JoBftQwCA0i7WZKct6/5BpGobXlgYaMNH8
- JjsBuiXY3S0SwKfRvDxp1jbiQh/U0eQcZvs7DI7uLORxWUrF0Uo9nsCdW1ana1r5qtwG
- gAbA==
-X-Gm-Message-State: AOJu0YyhA+oFeXpG0Nt64C8LRfTE9FLVlqT/7lZgKl8vZ5bVP/C/uJuP
- /C7C1SeRZQ2mLvBBYT/SwTxckuAVu/ah+Id3zMhzyPYK3d9FFvCW2J2Stj33pznMTLRj0HQ7XCj
- Mt2jNpXbDHirG+8RcpiF8LH+HyRDsY7eU14GJyGY9GYQr18y0CuTwig==
-X-Gm-Gg: AfdE7cl7KeB4XE5nHCL3pWsnN/Vte4srpfFbIs76N/d2fT2UpxHhdUmM5FOKjITz2fY
- AHoBhoA4ENtyAoYkvORl2i4cmSRxqS7/RLQTFWcINWVeEJdtLm4J53L4hRKyVrHehDtbcAAvCF0
- dwtZ4eS6rzkdFwGRZZ90vaz8wbbnfsNvIJmgP0CUG5th94WBfmKrO7Q9y+BNZA52JPHgyab1clh
- L5N8U1XghGEAQHbiMtcEk6qidJXnrjrlHCmPzTUqOGcc9U2BXtXhW2Fp715yIGe8ovBfdf/bQ==
-X-Received: by 2002:a17:907:d5a2:b0:c12:1992:2caa with SMTP id
- a640c23a62f3a-c1219923919mr38474966b.4.1782398330108; Thu, 25 Jun 2026
- 07:38:50 -0700 (PDT)
+ bh=IkXNrhypC0poiJnLmVPmW0lauPRRzuTVSRAxsWRvUIo=;
+ b=E1Z3uEyuifbJzoih0aWuWAMa5IkkfIhzK5v6Lh+JBYsIkxLgWd6h5TIGGCltW3+1aM
+ PIaCJMT75NTpdPu8CN+45pyt8d+EBZRfDAWHvWCmSzXdXHsdJP8sRsvHrQM8eP6zTs4/
+ tedwTJzejnhgxfnWfumHog+dBoTQrIDnlon8zqzWNaYqUKTA02MuCpTsUMm7h+io0wwz
+ FPrlMV3iV17MEZMvmmPJFBIf2QoklatyphGx78C0F5jCP28eeRAV4Ok3tUPXjYbuTXZv
+ 2ByOuYn2pmpjIP3NtS4AqMPFLcCx2s7sTbU8fN4zCvVfrYDu5v4bmLUgesFClM1VXlco
+ WarQ==
+X-Gm-Message-State: AOJu0Yyzhwvyw8Z1p5DR7W0SgAZyQ7qvpUDUhp1PcVtmfYlBZTYWHdYb
+ yUK3cZTPKCnPC2JV6aVhJ69a/0166c1aXiCa/DmEy3fv8RyhNvxdu9t/w+dWbZadVyN/ylAumVY
+ zPqO5O1cFPWXEqSQuNsSyGAx4XPNlGm16q0sxWn+L
+X-Gm-Gg: AfdE7clxDLNtKlstuSFBzmUUO+66cDT7AeoZ3S/Rd4GVHLrm3t3MK4wSrRtabTvXbIN
+ Y9IKC6EmUdPsk8VW7++7uFZclHtTqOerwq4Qi4d/xuYfE9dvkPQXpoT9Z++zjgShxoB9qTe8smr
+ bWIWSO1keJj3900pYwm/Cwh2ZG3+pNCmtOgjv1vrNlbfvrh4JFZhe4llb62+QBpZ7HN05Ajj2Ij
+ +VZWbU/tdPYCcaiLnTer34dSGEEFEgBeE4+5NoCtVWF8jBJ+wcVbcBlSW7f8jjADbZBQ1E5jw==
+X-Received: by 2002:a17:907:724f:b0:bed:bb08:ab68 with SMTP id
+ a640c23a62f3a-c1205f34503mr214040666b.39.1782398333913; Thu, 25 Jun 2026
+ 07:38:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260625122325.834568-1-jamie.gibbons@microchip.com>
- <20260625122325.834568-2-jamie.gibbons@microchip.com>
-In-Reply-To: <20260625122325.834568-2-jamie.gibbons@microchip.com>
+ <20260625122325.834568-9-jamie.gibbons@microchip.com>
+In-Reply-To: <20260625122325.834568-9-jamie.gibbons@microchip.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 15:38:36 +0100
-X-Gm-Features: AVVi8CfsbtH0B6rFLxXyXEpYLA4UeeRUs-h9_5el98lmYXL3hKw3LTaayNiEbi8
-Message-ID: <CAFLszTig25Z38Hoc=nf=6fGq=wXuxtf8MGGKJvN6vudFpqiQkQ@mail.gmail.com>
-Subject: Re: [PATCH 1/8] cmd: rng: fix error handling for dm_rng_read()
+Date: Thu, 25 Jun 2026 15:38:38 +0100
+X-Gm-Features: AVVi8CfCtZI_N3X3j4d28hQoy_soL7rpo5QXmb4q9Rr4NRZDSvQ3u3xYe-Nr-WQ
+Message-ID: <CAFLszThdbWpLe7dH0OvYh-QYxPDMw=OYipbwAR-k+EfT78Z0kQ@mail.gmail.com>
+Subject: Re: [PATCH 8/8] boot: fdt: downgrade KASLR RNG failure to warning
 To: jamie.gibbons@microchip.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -110,54 +110,81 @@ X-Virus-Status: Clean
 Hi Jamie,
 
 On 2026-06-25T12:23:17, Jamie Gibbons <jamie.gibbons@microchip.com> wrote:
-> cmd: rng: fix error handling for dm_rng_read()
+> boot: fdt: downgrade KASLR RNG failure to warning
 >
-> The rng command treated any non-zero return value from dm_rng_read() as
-> an error, even though the API returns the number of bytes read on
-> success.
+> During early boot, dm_rng_read() may fail if the underlying RNG
+> is temporarily unavailable. This causes KASLR seeding to fail,
+> but does not affect boot correctness.
 >
-> Update the error handling to only report a failure when dm_rng_read()
-> returns a negative error code, or when a short read occurs.
+> Currently, fdt_kaslrseed() treats this condition as a hard error
+> and logs an error message, even though the system continues to
+> boot normally.
 >
-> This fixes false "Reading RNG failed" messages when RNG drivers
-> successfully return data.
+> Downgrade the failure to a warning and continue booting without
+> KASLR, making the behaviour explicit without implying a fatal
+> error.
 >
 > Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 >
-> cmd/rng.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> boot/fdt_support.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
 
-> diff --git a/cmd/rng.c b/cmd/rng.c
-> @@ -62,7 +62,7 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->       n = min(n, sizeof(buf));
->
->       err = dm_rng_read(dev, buf, n);
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> @@ -314,9 +314,16 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
+>       err = dm_rng_read(dev, &data, sizeof(data));
 > -     if (err) {
-> +     if (err < 0 || err != n) {
->               puts(err == -EINTR ? 'Abort\n' : "Reading RNG failed\n");
->               ret = CMD_RET_FAILURE;
->       } else {
+> -             dev_err(dev, "dm_rng_read failed: %d\n", err);
+> -             return err;
+> +     if (err < 0) {
+> +             /*
+> +             * RNG may be unavailable during early boot.
+> +             * KASLR is best-effort in this case; warn and continue.
+> +             */
 
-Not quite. The contract in include/rng.h is:
+The continuation '*' should be aligned with the '*' of '/*':
 
-    Return:     0 if OK, -ve on error
+checkpatch should catch this.
 
-and every existing driver (arm_rndr, sandbox_rng, stm32_rng, etc.)
-returns 0 on success, not the byte count. With this change those
-drivers will hit err != n and the command will print 'Reading RNG
-failed' for every successful read.
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> @@ -314,9 +314,16 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
+> +     } else if (err != sizeof(data)) {
+> +             dev_warn(dev, "KASLR seed unavailable (no entropy), continuing without KASLR\n");
+> +             return 0;
+>       }
 
-The real problem is that the new mpfs_rng driver in patch 4 returns
-len on success instead of 0. Fix it there - make mpfs_rng_read()
-return 0 on success like the rest of the uclass.
+Please drop this branch - see comments on patch 1 about the
+dm_rng_read() contract.
 
-If you want to change the uclass contract to "returns bytes read"
-(matching Linux hwrng semantics), that is a much bigger change: update
-dm_rng_read()'s kerneldoc, convert every in-tree driver, and update
-all callers (cmd/rng.c, boot/fdt_support.c, lib/uuid.c, efi_loader,
-etc.). It should not be slipped in via a one-line cmd/rng.c tweak.
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> @@ -314,9 +314,16 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
+> -     if (err) {
+> -             dev_err(dev, "dm_rng_read failed: %d\n", err);
+> -             return err;
+> +     if (err < 0) {
+> +             /*
+> +             * RNG may be unavailable during early boot.
+> +             * KASLR is best-effort in this case; warn and continue.
+> +             */
+> +             dev_warn(dev, "KASLR seed unavailable (RNG error %d), continuing without KASLR\n", err);
+> +             return 0;
 
-Also, n is size_t and err is int, so err != n is a signed/unsigned comparison.
+This is a behavioural change for every platform that uses
+fdt_kaslrseed(), not just MPFS - the commit message frames it as
+MPFS-specific but the effect is global. cmd/kaslrseed.c does 'if
+(fdt_kaslrseed(working_fdt, true) < 0)' to decide CMD_RET_FAILURE, so
+the user-invoked kaslrseed command will now silently succeed even when
+no seed was written. Please mention the cross-platform impact in the
+commit message, and consider whether the explicit command should still
+propagate the error (e.g. keep the propagation in the caller, or add a
+best_effort flag).
+
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> @@ -314,9 +314,16 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
+> +             dev_warn(dev, "KASLR seed unavailable (RNG error %d), continuing without KASLR\n", err);
+
+Just to check - have you considered log_warning() at a lower
+verbosity, or only warning once? Repeated boot messages tend to
+attract bug reports.
 
 Regards,
 Simon
