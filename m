@@ -4,100 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5BFCDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:55:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C768CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:13:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E088484704;
-	Thu, 25 Jun 2026 16:55:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1764384704;
+	Thu, 25 Jun 2026 17:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QvCx7PWN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HIOzUjL3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 732F0847C8; Thu, 25 Jun 2026 16:55:22 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 0BFFB847C8; Thu, 25 Jun 2026 17:13:12 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 537588460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:55:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80BAF8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:13:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c0c964d6470so418802666b.3
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 07:55:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782399320; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bed19623d6eso440570366b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:13:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782400389; cv=none;
  d=google.com; s=arc-20260327;
- b=SoLKH1zugRvm+wW/OSGnpL8pu/vejEGAuGo+iO9uDwsI+NFtnblX4AHm2URVRfkClx
- hRd+XGELeA56BLrBP9gAHz5yLjdiG9UjgnoLcozbsx4tA0ldKKTYLfpSfZyGOtGDikXq
- 3g7z5q1dFXqbudqG87orQBzIXhYJEcUZxHNYrhtxCBZEEPTYT/vtAHhDHc4uNgbQypXc
- e7IqLNdg1UASJJ3iw6YBSYjrq/z8pnNQvVkU32+PH8TrM8X+5z/TC8RTmWgGhJD4CuWe
- vNylb8Y81Q+9vTFP3ayLoaUMeUFQp3y+J9XAvCmiYtAqM4cendxW8CL5cmQDFN45984p
- 4R/w==
+ b=s3RGUKKiHjH87SW4Hu/kFgBq662nV0iV4OvwwgpDk0sDCY+SPl488TllSLobOM6c1+
+ RYqZSUlByFBJy24StLe3Ufy5soR34gJRUFr9CnQPbZ+z4nUTQQMZy2o7Qm3765ubwdBC
+ u3T5FqSbAuwybVw3JX7Qoh8eUW4iC8HB2sYThU6nkTTnZDucdFybZeFXPQUZRACsOjLn
+ 3DONu4Ixd9IH5JkM6mjWWVh3P3E8V9t/jHLZIw2BrIxZwL9hDN9wr0RQxuFuX21JtiWs
+ mzrkmBaHpCW8gwZvOgwkPz1UMGReskw3j28hRhbc4IKCx+QXcx2FzfEvfJHrAMBGo5HC
+ M43Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=WWf7qkkefZS7klVI/yWyUmHv3bNdZIKYhErrnAPnHas=;
- fh=nvWXBzM7H+2SWq6TxayLG2f3U3bE/EkBS/MqXJY1b+0=;
- b=cx1l3PhIfX4NZvqvcI1+HoT6g/sVVg77B3xsMQj6IPRYXnx84eI/dA74eCbjTDhTQJ
- 1ONnYE0/iFAhmb14TfNvnbb5P2dpp1LPypglinNCH0weKq+YB+03dl1IQCFCcrXv0GOr
- DvkT7UUDDo+0+o/lAe8+Bux0hiTUawd2UA1JDATF1KZvG2E0BJGABUAZF+Z8Q/azoLHm
- cGLJFRsOQKsGbpFmR5mgMxRoQz+D0x47WoCbdAHKwyAUKm69w5+aj+cKoiAO4fOeGEcO
- mxqLz8fa43yE1OFLgaacXlZE1VkTnP3OjTBcO4yOgGe+pOqkW0EsAYqmznLVsZUgvXWA
- zitw==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
+ fh=IIgt66E0vMH58kRgarRMMZtzmWpVr2vTRhmJ5C9+8PE=;
+ b=GT6cdf7eWFNtKhlcyFWBvSHG7TGLnFE0J7TSoK6JgHhr+P0m0S9HqkwOxdl2toaue8
+ zBwUo3z26l6Rb9/kk+FQKImghnbGNeJyO7nc5E+/6TEXXaNPhLyQiW9Mf3nvQe/yJLfC
+ Ea3qBXj4NN8jBD6cIKphJL8KQYmk4l4JhHYZsO64MSW+wBGpuk+GFGnQSvM9WptUTVvi
+ 95wAxjQZytYGzs0Lr2FKwRznexCm/CarZwfyGpM9d7icKz8FiQjQsymNL7+HY3GqtLhf
+ 13e2J8/IqUjBA1BHpBZ3HS7Z+tFeBWFGTvoOA4J7bLEkBPjrQSul7pcaZlthIqebOybE
+ FD9w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782399320; x=1783004120; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WWf7qkkefZS7klVI/yWyUmHv3bNdZIKYhErrnAPnHas=;
- b=QvCx7PWNnYf1ooxQHjXcQXqsjp9J/4/sNwuBBhrI9ZP720xShWUQ33OBnvJETctOxQ
- Kz9Y51LUqUp32vrb8MkQ3JX/k5a5gKGpzpfaJw3WqnZSLthJzfgZM1qoPwUfZ6MKSkY2
- 3RqpFkwOzSRp1srxccG6sw13qiIRSu2RUsgPI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782399320; x=1783004120;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1782400389; x=1783005189; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WWf7qkkefZS7klVI/yWyUmHv3bNdZIKYhErrnAPnHas=;
- b=Q7vtrHjzZyXZVNrxgMRlNYM016RYor16B8wL/ciFieiUOUS/EySpvAnGKyLRfeEJ23
- RJUdq7rIQFptLvVu5E8J479PTVv+f68rueJZIZq13piKQ6T/u6WCcV8boph3Qvqxns4l
- bCbYpPgS+agM3XJaMJIpHANoRExbfR1zzpDdzZyFeCKuRWxYQKYybL2Ond53H9Ccbxrv
- 9qWiJ95lCkthCGzzyaIdbdBCkgwU5275xjsNyh9AvXQTRpgpHGha4/i3aCsp3dpY4OnU
- S8mmYQj6ypwIenLJWdk4LJYgHo8ojUs53dutj3l8FyFrPLtN9BGPnL16JeZwRyk2NGa3
- EkEg==
+ bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
+ b=HIOzUjL3U6nFrl/VnjExnRBcnUYIFvRSAx5Ja4VUmS08pebwu9FbzV2r9IDT2zijrM
+ xsfa4J2SodmB87yRJU/d1bHTHAiY/54BFeqqXbemHVpv6kMygYckGGxDpLJAuAooRibh
+ nTtPQ9Zm4z91s/A8uIWF3tZ6rLUitqQLE6tUw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782400389; x=1783005189;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
+ b=V3aXiz7/fVeKg2AWYuRXMSGpWsi22pRhWcUsKbsP95WDVoFoNL1kycKL6IikSQnvtf
+ kqOTE+qbjdNX497uNXBV1aupkwSmIYuxtHuQb7yS2XvM1OGzOWl4CSavFiqf8cguNvpP
+ 2XSnnTniDlwlVpdoTOqp9CK5SGWKspP3XDdE+2Q9OOCkUFHQjB6tVhvDiACJiIgUqjN5
+ os0R0/hB+8wx2M79pxdmhHHYvBHuNOpjNpcMGUn3S838jDefdCYdLSOZd3LrAU/4IFt4
+ XyHCBive8TAGDVcjgxsK8/dfnJjArwghMvXINXZp6RS8av8R7NRdeLAPvrehLh3qrGXT
+ a8fQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrkTSnoijD/wO8zc48SBKqGAUqWT3ctqIY82Tw8qI26W79rahZ7f/dW8rUc/PTte71u5LAmBvA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvNr6pgxA7Q0TiuERR4JSKQ1bo4A6UhT7opKZS9MkTpOQcvgFh
- +2jEKTy6/qdhTTQgywLJe1V5zmsmXRIUY9ueDmYcKu0PlRIc4NqaKZPOMAU0vgweARUS1uykVpj
- /S/GlNRFuNR+fbi1LqFitc+dbYOrWiBbjA3OXhmnX
-X-Gm-Gg: AfdE7cn6ti+kbtn6LZSUHsN3KteDvdvMv5kGjJlYavTu7Z7rcj1AL31LseQ94z5V2SF
- wTOKW1YE/Swv4ngItj5wLrNMtS79UJauv8uYGRhUJ9IhHNSHB8aQQ+lRVXAavX8n5EnnD1ikTGF
- mCMnzIPJmne/kAr11PSeDenACHlNdxMEq/DhabDK1nwXj9Nms1X0tdutu2uIa1EyfU4wuQ7ASEb
- e8mTfoUIBVVnvrW5zqydD4/6A4p8cqgKglRyCnaDEk+trVNbisGKg3YpiBLQ/rXtt8AjJ9Axg==
-X-Received: by 2002:a17:906:6a19:b0:c0e:5893:196f with SMTP id
- a640c23a62f3a-c1205d2cc59mr235015766b.1.1782399319763; Thu, 25 Jun 2026
- 07:55:19 -0700 (PDT)
+ AHgh+RqtzajCGN4zJvHqTA2GQMg0C13dktBjHfZT262z7+dYYhvpaz2fRbhRahCIeGkzUAW78mXgMcA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMtyc9JWYC77MIeb0UHDH+GSL3mAK6KsVWo3c5CKxBSOYrG2QH
+ ZORtG4mQ91EavUOnyP3Qo5HtZrAxels60P7J4B3s8ZqPEh1n3svDYmS4CgOHIE7pszL8+I2ZXda
+ C/tiydD4yDtk3QLctRPHpWcskZB3ryGn99cADLsLB
+X-Gm-Gg: AfdE7cnI1OIHYpOV9taafUMi5ox5omdV1v85Fc4xp2KkaRhMY7cA/jfsfeXI4ZC+dJM
+ C1T8mb/yshEvpymI3tEuK2yptiACjlwQlmgcy8O6YhG/VYF8qc6Q0/tzpjvQPKydqBCA9ivk8Gs
+ OstxQPbCVGRTGjAtqTuGD1VhIMgTA5/miS2zZ7NGcrnQ7Ep+3HWD7RDZ65E46pCZ1kFW4BCNEE3
+ gfEoyEqTP8pYPDkPFoJTbMqQXetKfU8h/2lZyxWgKZq/px1veHm94EFo92x3WIxXnlpaXFKsg==
+X-Received: by 2002:a17:907:968a:b0:bd2:bd3:1ef8 with SMTP id
+ a640c23a62f3a-c1205ec5915mr210118066b.35.1782400388913; Thu, 25 Jun 2026
+ 08:13:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
- <CAFLszTiu0HSZ4JJ7ggMMAk4oe0-h=Xq-Wnw=hqwGr80wBdrGXQ@mail.gmail.com>
- <e262d779-4854-4360-8d9a-a91ff76b5347@canonical.com>
-In-Reply-To: <e262d779-4854-4360-8d9a-a91ff76b5347@canonical.com>
+References: <20260618150913.314507-1-vincent.stehle@arm.com>
+ <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
+ <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
+In-Reply-To: <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 15:55:07 +0100
-X-Gm-Features: AVVi8CdQ-shy4wkZrxgbqSu4gRxTtIEQUytkmeL8anSYew7IKWz8pPVjJKr_Kbs
-Message-ID: <CAFLszTj7D-q5QtKTDX07t529wS+hfUUjEq2vK+6rJF9psC8KGw@mail.gmail.com>
-Subject: Re: [PATCH v2 02/11] efi_selftest: add ACPI configuration table test
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de
+Date: Thu, 25 Jun 2026 16:12:56 +0100
+X-Gm-Features: AVVi8Cc5HArUIZAYX2iLDwizCFhvLfvH-XWkSmyC3j5B9Ju9yeQ8VlwVzuNCDkc
+Message-ID: <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
+ efi_disconnect_controller
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,78 +115,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Ahmad,
 
-On Thu, 25 Jun 2026 at 12:26, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Thu, 18 Jun 2026 at 16:28, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
 >
-> On 6/25/26 10:52, Simon Glass wrote:
-> > Hi Heinrich,
+> Hello,
+>
+> On 6/18/26 5:18 PM, Simon Glass wrote:
+> > Hi Vincent,
 > >
-> > On 2026-06-21T08:19:04, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >> efi_selftest: add ACPI configuration table test
+> > On Thu, 18 Jun 2026 at 16:09, Vincent Stehl=C3=A9 <vincent.stehle@arm.c=
+om> wrote:
 > >>
-> >> The new unit test checks if ACPI tables are available.
+> >> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when retu=
+rning
+> >> after having called EFI_ENTRY().
 > >>
-> >> If yes, it checks if the RSDP correctly points to the RSDT or XSDT.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>
-> >> lib/efi_selftest/Makefile            |   1 +
-> >>   lib/efi_selftest/efi_selftest_acpi.c | 138 +++++++++++++++++++++++++++++++++++
-> >>   2 files changed, 139 insertions(+)
+> >> This is inspired by a barebox fix. [1]
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> >> diff --git a/lib/efi_selftest/efi_selftest_acpi.c b/lib/efi_selftest/efi_selftest_acpi.c
-> >> @@ -0,0 +1,138 @@
-> >> +     if (!checksum_ok(rsdp, 20)) {
-> >> +             efi_st_error("Invalid RSDP checksum\n");
-> >> +             return EFI_ST_FAILURE;
-> >> +     }
-> >
-> > Please avoid the magic 20 - how about offsetof(struct acpi_rsdp,
-> > length) or a named constant?
-> >
-> > Regards,
-> > Simon
+> > Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
+> > projects back together :-)
 >
-> Thank you for reviewing.
->
-> 20 is not an offset. It is the length of the ACPI 1.0 RSDP header.
+> It's not as extensive as U-Boot's yet, but it's usable for the common
+> boot me a distro GRUB use case. The code originated from U-Boot with
+> some parts heavily rewritten to fit barebox, e.g. the EFI filesystem
+> protocol is implemented on top of dirfds, so it reuses VFS path handling
+> and other such things.
 
-...which is the offset of the length field. See the struct:
-
-struct __packed acpi_rsdp {
-   char signature[8];   /* RSDP signature */
-   u8 checksum;      /* Checksum of the first 20 bytes */
-   char oem_id[6];      /* OEM ID */
-   u8 revision;      /* 0 for ACPI 1.0, others 2 */
-   u32 rsdt_address;   /* Physical address of RSDT (32 bits) */
-   u32 length;      /* Total RSDP length (incl. extended part) */
-   u64 xsdt_address;   /* Physical address of XSDT (64 bits) */
-   u8 ext_checksum;   /* Checksum of the whole table */
-   u8 reserved[3];
-};
-
-The original struct ended with rsdt_address as the final field. Then
-they added a length and some more information. So the offset of
-'length' is actually what you want.
-
-My failure to use offsetof() was probably just that I didn't know it
-existed, or perhaps because some of the code came from coreboot.
+OK good. I did create a VFS in Concept but I have not tried to get it
+into mainline yet.
 
 >
-> Below is the precedent that Bin and you have been setting:
->
-> arch/x86/lib/acpi.c:18: if (table_compute_checksum((void *)rsdp, 20) != 0)
-> drivers/misc/qfw_acpi.c:310:    rsdp->checksum =
-> table_compute_checksum(rsdp, 20);
-> lib/acpi/base.c:36:     rsdp->checksum = table_compute_checksum(rsdp, 20);
-> test/dm/acpi.c:371:     ut_assertok(table_compute_checksum(rsdp, 20));
+> The imported files have Origin-URL comments pointing back at U-Boot
+> including the revision they originated from, but we are still in need of
+> better tooling to make use of these tags.
 
-Yes, this is quite common. How about declaring a constant for it?
+On another topic - where did we get to with the whole-FITsigning
+thing? Should we set up a call to talk it through?
 
 Regards,
 Simon
+
+>
+> @Vincent, I suspect a number of fixes in [1] are also applicable to
+> U-Boot, but I haven't checked.
+>
+> [1]:
+> https://lore.kernel.org/barebox/20260216084758.3548990-1-a.fatoum@pengutr=
+onix.de/
+>
+> Cheers,
+> Ahmad
+>
+>
+>
+> >
+> >>
+> >> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=3D080db65e39a=
+877b000baaf843c997a69821dfe69 [1]
+> >> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole =
+child")
+> >> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> ---
+> >>  lib/efi_loader/efi_boottime.c | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_bootti=
+me.c
+> >> index de57823bd44..b6966652d97 100644
+> >> --- a/lib/efi_loader/efi_boottime.c
+> >> +++ b/lib/efi_loader/efi_boottime.c
+> >> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
+> >>                                       &number_of_children,
+> >>                                       &child_handle_buffer);
+> >>         if (r !=3D EFI_SUCCESS)
+> >> -               return r;
+> >> +               return EFI_EXIT(r);
+> >>         sole_child =3D (number_of_children =3D=3D 1);
+> >>
+> >>         if (child_handle) {
+> >> --
+> >> 2.53.0
+> >>
+> >
+> > Regards,
+> > Simon
+> >
+>
+> --
+> Pengutronix e.K.                  |                             |
+> Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+> 31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+> Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
+>
