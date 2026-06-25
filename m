@@ -4,135 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADCD8CDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB64CDE00B
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:36:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BA4D847C8;
-	Thu, 25 Jun 2026 16:34:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id B2D87847C8;
+	Thu, 25 Jun 2026 16:36:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="haEGjLLO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OdAcL790";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A5B884894; Thu, 25 Jun 2026 16:34:57 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED86084956; Thu, 25 Jun 2026 16:36:45 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92C6884704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:34:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id D9F3F84704
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:36:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LhfxPkA60W3PYkRUuLwCfThR7JoO8IT5i79QbzDvDtkvrcua0OfGG67jB2CKj9rIm/a5cJDi2cFfJGYjErLtTI3mllpaWymgap/uAWd9p85WjrF4fasbpfWas3+dLAnZlqcdPPDtW1bWB81CII/t6r3QyjGfdwnr99ZCHJLIF0JEX8N2OxLSlw8GqvEB24/2GVQACatR84b45YPCxEYp87mu3erVV7qN8GPw6T0OdQj70pz9HtYnH04Jvqeod4yTSEhrul2pAaT2vEE2DMHBHqLGmLxPzgJkMdZJZ9hix65F2CayZP5QnSSsEWmEVbLS6XQqLJelSVFwKH8ove8Rsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6bq+TPt7qRJGgLx1//x14apmiWVrTC+25HRf+kqBcZE=;
- b=N8zrExCjEu1zhE/jP/lbi0p43tl2Bg9d8Bb9f26XSRDF+/bVX0DiUC81qlYdjJ6XmzqJqS2aGllMLwq2Ig7fD8hqEbZkyqHbwyFfzuj6SPGGwuG8MdPEMc/SSBNDdXJzWeb59BLDRzkDnSpIB99CjMMLfc7lzddu07gKVfvK7EK3HluO0N4LDYst4ZvbTwDqDT2D3mxHKAf2B9Y+TQibUzUQVMhORfnT2Kc1ChavbMUqdtOVCAW/vPlETyqNQay0Sm3Bhff+yjhth0ajsgIoN9jTYURAqNunhp6pNeDSyAImbNl7VNy/P9MAGNm+DZnCgR4xvF9OkInUBoxLmamB5A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6bq+TPt7qRJGgLx1//x14apmiWVrTC+25HRf+kqBcZE=;
- b=haEGjLLOgp3aMp0UPD7e5RxArIROPiQTipArE+HVBOTV7+vQtAj2862xSQf/uR+E8lfW4k75Ok52TjpzTk8/MmtAIbSQX+pP8KDsmPDVEK5T6dJnpb11i9zVT+PifKct6zmNInOEfDhdKMagAJk7eJmgFJwhsMWHEwEuVxT6YN8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by DU2PR04MB8583.eurprd04.prod.outlook.com (2603:10a6:10:2da::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.20; Thu, 25 Jun
- 2026 14:34:51 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.015; Thu, 25 Jun 2026
- 14:34:51 +0000
-Message-ID: <cff24101-e314-489e-abdb-782994fb401f@cherry.de>
-Date: Thu, 25 Jun 2026 16:34:49 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] cmd: mmc: fix help and parameter verification with
- MMC_SPEED_MODE_SET not set
-To: Alexander Stein <alexander.stein@ew.tq-group.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Aswath Govindraju <a-govindraju@ti.com>
-Cc: Markus Niebel <Markus.Niebel@ew.tq-group.com>, u-boot@lists.denx.de
-References: <20260601101319.475824-1-alexander.stein@ew.tq-group.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260601101319.475824-1-alexander.stein@ew.tq-group.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1PEPF00005B9E.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::629) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-bebb72b845aso97263066b.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 07:36:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782398203; cv=none;
+ d=google.com; s=arc-20260327;
+ b=JX9kglK76Oaiy3AudWYhNgoxTaTWI9vemq4Q3hAGZr24rzkyxuhU7+3JePt7tMPjOZ
+ 1Ft/OdqoKAdofAB5n8d7qS27ootvZpE+TA8b7v46TFgEdyS0CXGajB2fRp1OKjbL2tmL
+ Loo1wnYIVYPXYEZtA2fqKi2qI1s5C6GhAwKaMkB/Zn8TQC+yAA1khS/gTUvR9il6aIWY
+ TJuKsJLlRZRLCpwyQEAjB6PytWaPewGATA1nCYjc/Sdu9CriyeMBamB574XbofcDAJXa
+ Wk4x+6YF18ReSWITMWjfZanY4M1IwRyhpkkKs0aeR7LpzS5fEx2VwzDRyXJqGITaTQw1
+ tTfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ypHiuOTijGqJWmOeLM9iT0jcf7Ilw7Th22La9yX0IlE=;
+ fh=ap3JSCHKFlQxe3PRZHqNaZKWCMHl64M2z/wxOe58JVc=;
+ b=LCMt9oIsfmTAQIfUmFyh0jk+qMF7YwxM2UMFRVsrGfb6hGHyzBM/GG0qmG/NAEwhoG
+ V2BLt6+8Lj92Z+9fAICjN33QyeZKC1X/I7kGAwwUgYHNcnA03oU+PXa4MM6QgVSgfe6I
+ SKvJZRKNU7sXHVbg1d+t46LxL8mjKM97V/5+tdDmW/Un+95/4BOPK3HTS9z4Jci0vNgX
+ bgzCLChlWgMeAmUkJfLfww3JVMMDk1rc62FDgE5YaOX1xh9TMhgBqCFleg8pJRlZjpQO
+ f+3J5Ohalc8F15WS6u8qBU9FBpf9dVw4K5N3vJu56NUJ5H8ZoRfuXvN1d2AmgnPBpzK4
+ rSxQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1782398203; x=1783003003; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ypHiuOTijGqJWmOeLM9iT0jcf7Ilw7Th22La9yX0IlE=;
+ b=OdAcL790u7KQn8HB7+S2/JNy6Huz+rKhxEv7Pby4k0laXNJyfiZdL5YaskS/2tsCrX
+ FdzakzTLtesSZ21HMA2RfaBu2HPCoHS+rgnr342QVxy0x1dItFajqmb/v0qrqnFlj1Cu
+ 7iEk2aqk66XcARWjnMy4hYeEci+yOEMoP467Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782398203; x=1783003003;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ypHiuOTijGqJWmOeLM9iT0jcf7Ilw7Th22La9yX0IlE=;
+ b=s6w9eHraXADfpzhmCG9tTV7Ff6ULumEtl23GsTfrorn8VVE8rQJT9O/1P7QnYgrL5T
+ zAmmJv7Jhi4A3NWlmXUaTMlaaYZm5D98R9BUknFl0buvyJBTkf4c77XUmFKNkKO1yWJQ
+ +WA59IcwBx1P9vmppRa1yyy46aLSh6hCdNYWw3NP8TCm/GIvFCKif9zEhWuniObSR4VD
+ 1lDfTAerZt7Whg6WmBMmb6v+2UjER1Iw0iQ6q+1jMOhn+v9tFhEix/UgYei3FZsqbS4L
+ kEJeAcJH8Nik8ajh/fK2iA+JTAFshCVYTcPA/7HZBQoygERP3rQOyjC1GgYk9vSAe9/8
+ 6jhA==
+X-Gm-Message-State: AOJu0Yw0y6BS2BNcdeWuJty/0M2jjkexEPIBc+NhFXX2WVkxLmc0SsCB
+ sXuxax9+ySA2rFoqhU6FiTq6Jvktjnr/uajTMgB2DZMCGBf+nREOR/J9wsjz1mpv1wgxzx0W3EX
+ UFFFoQkwkECKk/R8dhkrWm+kY+xwhE+49CfSW8sat
+X-Gm-Gg: AfdE7cnHDUksEzDDILEGI/e30MebRrN3mCgYpYMr8chVEk6TXFUnmrVSCR96vdn1z3v
+ gxYUv/aTHDMjyeXFlTYBVcZ9Zoq0Xp2aG+jKOYmP8qvP7vZxTHEUEaFEBIIvGBQFPsW046AdL0O
+ EsTm5a7GuDxi/0y54pC/c8yolItUObg017i3XeTkl+o+OtZojgMB2BlzDOrQ+CxOhg9nHK86uQE
+ tYxTE7DtyFR7V6D7sUh4i9Jk/VDm4SbFD3wvc2p8/xofmoCd+Ca4SHyulO5HYJrAr0gQ3azbQ==
+X-Received: by 2002:a17:906:ef06:b0:c0c:9f16:90df with SMTP id
+ a640c23a62f3a-c1205d8c0a1mr222783366b.13.1782398203235; Thu, 25 Jun 2026
+ 07:36:43 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DU2PR04MB8583:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c239193-7683-4e1a-90f7-08ded2c6ea41
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|1800799024|366016|18002099003|22082099003|18092099006|56012099006|3023799007|11063799006;
-X-Microsoft-Antispam-Message-Info: jykbUNboUAWeFHtgy2gRNLReUqOWF7g8D5qA8OynP2O8irvPnd0HnNHMEWlrg1baudfcsMf2UFX1QxBkE4dxcwm9ppi1dKHX8hqnvpb3NAkMNFNDAxVYXRE01P9qOynGzcx+FcyNRbxHylUATPXpxklxb/dsGjfz1PrSQAvXTcm1f/rjkwPJPwfelePUHrcSMfroqH91cyMZh38BNSrqAi5w494qaXM7DMspsIiza4GuV1Uowc2PIPiTrdmTaLL9etOPkwICHYYkHiZnbwLF6BF4b/JFt2bcjqQCRmZ/XVgTQXKXsALJrGXbrBsZqnD5QWESpba213SdN3prMzIfusRW7VcIHaet4l/027N+aLxHTtDsWZgs20BAX7nLk19SwHgjAbMmyXFc5f7dhBelSYJPlpb0r14imLzn0BMiAiCITVr4hE0RrK/psvsXVD07E3G9+juE2QnKjkkPO0/pPjZLwrXgyjzpSFCcA/1jyeKSRPEdEC4Uq45ZU8AWTPque3AfgFnUNTlXUo/dERXcp/Lh2Rea4OY4v8VSNps3OxDd14vXOhLJRmXTjAsecIL0//BHGsAYsqaaJOH2k5JrZWu8oVRifHGw/DAAG/rTHFduBjBkuB/DqwC/Xc0fDrJX/mTx/qAFo80sytGILgh6K4kXxlJ7zi6gPaqDuk413qk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(18002099003)(22082099003)(18092099006)(56012099006)(3023799007)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TEFmMnBQaXg4WWFaVEcvMGZIY3poNEZtN1kyUWs4bGlCeGttcTV3VEFZbkc0?=
- =?utf-8?B?QUozZ1hmQ0J0cnlPS0Q3TUZzNlRCT0VtVVUwZmwyM0ErRzFCVUlJQnEyb3Qx?=
- =?utf-8?B?QmpmS2U2Mk9ValE4bnF0bk0xcnZMbFg5YW41TFdtaGJ5aFlYdGMzREc1ekdD?=
- =?utf-8?B?QnVXeUEyYWxkOXRvOFNUQTFvVnE1TWdQZlZsYnhpQ1lUbkE5OWo1VThyeG5u?=
- =?utf-8?B?emdUZlY3RFJGZGpNYUdvUTdZd3JKTC9Hd2hFL3l6KytZNWhmdkRvNVN2Y2Vp?=
- =?utf-8?B?MjFHWlZlWG1hUnVhSFJLeDl2anhBOVFOVlRDY3NwOVROaG5iSExDTGRrQzNK?=
- =?utf-8?B?alJEdmNDOU9naWpLZDJiRjNjWVlhcGdHQjVCN2hnd3NNNVc2aFlSWmFCOXR0?=
- =?utf-8?B?ME5LSkdxUmdUNlpHU056am41ZkRZQUNHUzVaUVpBTFQyUjlYeGpoTllWNHJ6?=
- =?utf-8?B?bklueDFua1ZpUldJWjVFelppR09YVnhIRnBmaFcyd3Zpc0s4a2VlZ3pOdVRx?=
- =?utf-8?B?aTdKMnc2ZHVJWEkxbW5zKzluRklFL1FzcE9RTEdVaEJPQlppa3lEWTNJTncy?=
- =?utf-8?B?T25KRm5tdlYvRzc3UXRtVFRjSWU5VTVBemJpVnFjSGNqTmJnUWd4RHlJSVFR?=
- =?utf-8?B?eE9xcFJqNFhPenhaME9PUWVBRFhBUDBvTDk1VzdQMHZMcTBSa0IzNk8yVFNs?=
- =?utf-8?B?MS9JeGNJVmhUVCs0MFI5N0d0QmhpMWJVWDAxV3YxdlBzNDRvak1aNkZxbkxy?=
- =?utf-8?B?QjE3TXBIcko4U2czQkYvWDhvdy80Mm90bHMvcERmYk02UmN6MEwrejZHd2F0?=
- =?utf-8?B?Y3drak56ekdFZktoOStEMjJySGdTcWlLV0NHTTZVMDVzUlpFTXU5aDFBUkMy?=
- =?utf-8?B?aWhqZXBHajdhYjZTRFlNb1ZMNmE5S2lKQ0svSFpYN3k0emRzS2ZOTldyWW9n?=
- =?utf-8?B?VzNBWW5SRjlmbHljRDhKRGxGNExuUENpTHlyVlNURlJyaXp3aFgySFAyUTB6?=
- =?utf-8?B?cXR6ZFBvMXQ4OG9MVm5LTy9ET0EwaXg1NUVGd2Q5emJNVnN0RkJXd1huVGpt?=
- =?utf-8?B?SUttWTMwQWZpRDMwWCtFK0NEWlNuNVFWY2JDNHFOZnZSZFlqTExaN3poeXgz?=
- =?utf-8?B?NXFmWGRaN092MzJqeXF2eGVpdFZlajU4Y2J5aGR6VHk1TTM2c0Y3Q0ZWZzI3?=
- =?utf-8?B?NGxRTWxOWERXN1h1dlNBZGpaOEhXTTdYVjVYQkhMNEdRNEVkVHR3cW95dTlJ?=
- =?utf-8?B?UTBiN2s0WDNXNDJTbFN5V3l4cXZNTXRwampZZEgyOEQ2MncwQVAzbEhxV1Rq?=
- =?utf-8?B?bmpBczI5TVJxN09Gd012RGpFUkk2OG9rOHZUMXNoREVUNFVnc21lUGRZRDVm?=
- =?utf-8?B?Nk9FUjNrSkxzWVdwZFFIcXdGV2syWWNXRlI3VnJYOFJYdkg0aG8xbW5Qd0Jk?=
- =?utf-8?B?ekRyKzJSM2crQitUNlNqeU5GYzUrNnYwQ0xzQThIY3dWYzR4TTlpTmFpZEZG?=
- =?utf-8?B?czgrTEpvZmtuWGxnT3B5RWJXZVBUNlQ5bU1YU2U0bmNSV1p6TGpOT1UzMm5Q?=
- =?utf-8?B?NW5qeTV4VTBaOVlGWnduUktxT0RWZkhBQlF0UDhNRUxLZktLT1pRenBhbG9U?=
- =?utf-8?B?bUhBajRZQlJYb05UOFNzUkM2clNxSVZrTGpHRHJFMjBHdEJOZWtwaGJERTY3?=
- =?utf-8?B?NVZoc2U2bThLUXlnTEVYZnVLVjh3ZW9lVjlVenFXYkFsS29xR2o1Yzk2UXhK?=
- =?utf-8?B?OU9YU2d0WUx5L1Zlb0R0OUtoT0YzVGhNZW5wV0U0UHp5NzdCRyt4MmFOajRU?=
- =?utf-8?B?WnNCS2pRMXhqaE5RM0Z0QWIvejQ3a2w2RFNOTEJOKzdPYllLN3lERnA3ZVla?=
- =?utf-8?B?RkRhaFpLeUtmM0NaVWh2Wlg3Q2JKdlRUM1JoakRGRzVJUTA2N0pVdXJyRitH?=
- =?utf-8?B?a21EYnppbjRseFZOd1JZQzFEVkdXbFl5aTU0YnlRTWFnSXNuMkVwZ0VScm9C?=
- =?utf-8?B?eENEVGpPUUtCZTVyMXJORENTUEFLWkwrN1JPMHgwVGY2MHA5TEJjWU9pREFD?=
- =?utf-8?B?c1p2bzdBWkowT1ZTUHN4bFVLVlFwL1N0em5YS1M4MWRWZ2pQUTk4c1Q1Yllo?=
- =?utf-8?B?SGlMb1ZTcTF1M1VKNFh0ejZMMUdxYXk4c25FRm9rbjloc2dQb1A3MjZHWUg2?=
- =?utf-8?B?V3g5MXUzTitUWnJyMDI2U1Q5QjJsZk1jQUt3T0RhNlFVL3UxQWVOa24yaVNw?=
- =?utf-8?B?R2xER0lnUXpxMjNQaEFhR2F0enZhVWFyNlQzOTlJOUQ0Mm5OMGE2cm92WnQy?=
- =?utf-8?B?bU1XTVhVVUtWUmNnbkhYcldhazk1UkVnRFFuWWlkZGhRQU8ydVVEZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c239193-7683-4e1a-90f7-08ded2c6ea41
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 14:34:51.0030 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9EnNXi5wvktMwlUuPIPDdLr+h5B3cjNbs24FAWOamOtbbI3fISE9yNMp7woP445lOPCvYRrUOBmIgAIRgI7zl744Ilv2JTTa5nKhWPSeY7s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8583
+References: <20260614103232.3586246-1-yordy1902@gmail.com>
+In-Reply-To: <20260614103232.3586246-1-yordy1902@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Jun 2026 15:36:31 +0100
+X-Gm-Features: AVVi8CfVT5wvfX8hxdxGjbquBn-39YTa2Kd2OgHfRo-Vnx_s6DpfXPc9K-dOOMU
+Message-ID: <CAFLszTixG59bQQEsYU0nR=oLdvjHSRcy+4CUpEcR6ZWBAJGh_A@mail.gmail.com>
+Subject: Re: [PATCH] pinctrl: single: parse gpio-range as a raw array (O(N^2)
+ -> O(N))
+To: yordy1902@gmail.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ vigneshr@ti.com, nm@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,87 +108,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
+Hi Jordi,
 
-On 6/1/26 12:13 PM, Alexander Stein wrote:
-> From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-> 
-> Currently help and parameter scanning does not check whether the feature
-> is enabled or not. This leads to wrong expectations based on help output
-> and no clear sign why the mmc dev and mmc rescan do not enforce the
-> supplied mode.
-> 
-> Fixes: 19f7a34a4642 ("mmc: Add support for enumerating MMC card in a given mode using mmc command")
-> 
-> Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-> Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
-> ---
->   cmd/mmc.c | 21 ++++++++++++++-------
->   1 file changed, 14 insertions(+), 7 deletions(-)
-> 
-> diff --git a/cmd/mmc.c b/cmd/mmc.c
-> index 81b1ca4ad84..54c799891e1 100644
-> --- a/cmd/mmc.c
-> +++ b/cmd/mmc.c
-> @@ -519,7 +519,7 @@ static int do_mmc_rescan(struct cmd_tbl *cmdtp, int flag,
->   
->   	if (argc == 1) {
->   		mmc = init_mmc_device(curr_device, true);
-> -	} else if (argc == 2) {
-> +	} else if ((argc == 2) && (CONFIG_IS_ENABLED(MMC_SPEED_MODE_SET))) {
->   		enum bus_mode speed_mode;
->   
->   		speed_mode = (int)dectoul(argv[1], NULL);
-> @@ -564,11 +564,13 @@ static int do_mmc_dev(struct cmd_tbl *cmdtp, int flag,
->   
->   	switch (argc) {
->   	case 4:
-> -		speed_mode = (int)dectoul(argv[3], &endp);
-> -		if (*endp) {
-> -			printf("Invalid speed mode index '%s', did you specify a mode name?\n",
-> -			       argv[3]);
-> -			return CMD_RET_USAGE;
-> +		if (CONFIG_IS_ENABLED(MMC_SPEED_MODE_SET)) {
-> +			speed_mode = (int)dectoul(argv[3], &endp);
-> +			if (*endp) {
-> +				printf("Invalid speed mode index '%s', did you specify a mode name?\n",
-> +				       argv[3]);
-> +				return CMD_RET_USAGE;
-> +			}
+On 2026-06-14T10:32:32, Jordi Trepat Mur <yordy1902@gmail.com> wrote:
+> pinctrl: single: parse gpio-range as a raw array (O(N^2) -> O(N))
+>
+> single_add_gpio_func() calls ofnode_parse_phandle_with_args() once per
+> gpio-range entry. With a flat device tree, every call re-iterates the
+> property from index 0 and, because cellname is set, performs an
+> fdt_node_offset_by_phandle() (a full-FDT scan) at every step. The total
+> cost is therefore quadratic in the number of entries and proportional
+> to the size of the device tree.
+>
+> On a TI J722S board this makes the pinctrl probe take 723 ms
+> pre-relocation (caches off) for only 7 entries; with this change it
+> takes 22 ms (-97%). Any pinctrl-single user with a populated
+> pinctrl-single,gpio-range property pays this cost.
+>
+> Read the property once with ofnode_get_property() and iterate over the
+> raw cells in memory instead. The phandle target node is never used by
+> this function (only the three argument cells are stored), so resolve
+> only the first entry with ofnode_parse_phandle_with_args() to validate
+> the cell layout. Empty entries (phandle == 0) are skipped, matching the
+> previous behaviour.
+> [...]
+>
+> drivers/pinctrl/pinctrl-single.c | 62 +++++++++++++++++++++++++++++++---------
+>  1 file changed, 48 insertions(+), 14 deletions(-)
 
-This results in a different behavior for
-mmc rescan mode
-and
-mmc dev dev part mode mode
-when MMC_SPEED_MODE_SET is disabled as the former will fail and return 
-usage, while the latter will silently ignore it. We need consistency I 
-believe. Which one to pick, I don't know.
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+> +             if (phandle_i == 0) {
+> +                     /* empty entry - match original: skip without creating range */
+> +                     continue;
+> +             }
 
->   		}
->   
->   		fallthrough;
-> @@ -1312,12 +1314,17 @@ U_BOOT_CMD(
->   #endif
->   	"mmc erase blk# cnt\n"
->   	"mmc erase partname\n"
-> +#if CONFIG_IS_ENABLED(MMC_SPEED_MODE_SET)
->   	"mmc rescan [mode]\n"
-> -	"mmc part - lists available partition on current mmc device\n"
->   	"mmc dev [dev] [part] [mode] - show or set current mmc device [partition] and set mode\n"
->   	"  - the required speed mode is passed as the index from the following list\n"
->   	"    [MMC_LEGACY, MMC_HS, SD_HS, MMC_HS_52, MMC_DDR_52, UHS_SDR12, UHS_SDR25,\n"
->   	"    UHS_SDR50, UHS_DDR50, UHS_SDR104, MMC_HS_200, MMC_HS_400, MMC_HS_400_ES]\n"
-> +#else
-> +	"mmc rescan\n"
-> +	"mmc dev [dev] [part] - show or set current mmc device [partition]\n"
-> +#endif
-> +	"mmc part - lists available partition on current mmc device\n"
->   	"mmc list - lists available devices\n"
->   	"mmc wp [PART] - power on write protect boot partitions\n"
->   	"  arguments:\n"
+Not quite. ofnode_parse_phandle_with_args() returns an error for a
+zero phandle, and the old loop treats any error as end-of-list and
+breaks. So phandle == 0 used to terminate the scan; now it is silently
+skipped. Either restore the break, or call out the behaviour change in
+the commit message and update the comment.
 
-Just so no one else has to check: the docs already mention this 
-limitation so they don't need an update.
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+> +     if (gpiospec.args_count != 3) {
+> +             dev_err(dev, "expected 3 gpio-range args/entry, got %d\n",
+> +                     gpiospec.args_count);
+> +             return -EINVAL;
+> +     }
+> +     cells_per_entry = 1 + gpiospec.args_count;      /* phandle + args */
+> +     if (total_cells % cells_per_entry) {
+> +             dev_err(dev, "gpio-range size %d cells not multiple of %d\n",
+> +                     total_cells, cells_per_entry);
+> +             return -EINVAL;
+> +     }
 
-Cheers,
-Quentin
+These two turn a silent no-op (return 0) into a hard probe failure.
+args_count is already pinned by #pinctrl-single,gpio-range-cells, and
+the size-mismatch case did not exist as an error path before. Please
+either keep the lenient behaviour (warn and return 0) or justify the
+stricter validation in the commit message.
+
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+> +     const __be32 *list;
+> +     int size, total_cells, cells_per_entry, entries, ret, i;
+
+Did you consider ofnode_read_u32_array() (or reading into a small u32
+buffer) instead of open-coding the __be32 walk with be32_to_cpup() ?
+
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+> +     int ret_total = 0;
+...
+> -                     ret = -ENOMEM;
+> +                     ret_total = -ENOMEM;
+>                       break;
+
+The ret/ret_total split is unnecessary - by the time you enter the
+loop the earlier ret has been consumed. Just reuse ret.
+
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> @@ -511,27 +511,61 @@ static int single_add_gpio_func(struct udevice *dev)
+> +             range->offset   = be32_to_cpup(entry + 1);
+> +             range->npins    = be32_to_cpup(entry + 2);
+> +             range->gpiofunc = be32_to_cpup(entry + 3);
+
+Please drop the extra spacing - single space after the field name, as
+in the rest of the file.
+
++1 to Anshui's suggestion of avoiding alloc. You can create a
+variable-length local var, for example.
+
+Is every entry in the 'propname' property always for the same device?
+I might be a bit confused, but I am not sure where that is required in
+the schema.
+
+Regards,
+Simon
