@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8784ACDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 13:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43357CDE000
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 13:00:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEC5C84A1D;
+	by phobos.denx.de (Postfix) with ESMTP id EA63484A29;
 	Thu, 25 Jun 2026 14:59:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="h6v4fQoB";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="u8RBYXQw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AC6B8460E; Thu, 25 Jun 2026 14:20:04 +0200 (CEST)
+ id 73A19848F0; Thu, 25 Jun 2026 14:20:06 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5492C8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:19:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4425484704
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=629d8e15b=Jamie.Gibbons@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1782389998; x=1813925998;
+ t=1782390002; x=1813926002;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=OwdubEtS3LbW5epHAZ/pyWrVwtKzP8I7cbOxT84gMP8=;
- b=h6v4fQoBDGA0RxvP/2urgr7DNhAr9FzgjFVkAK+/qVOpy8qTOaM1oA3j
- jtFv6V73Fety7CjJy4jZR0/UtXsy7UsehEiRziBREjEsyIEDDbgis9aHu
- i1XR+CCn3tVutksJfWws+r1PrgmudqdsPWIi1ZmN+IJ7xbq/w6MT1uoG6
- 2ivClYgvqbTQHHr1dAPKpft1WK9solE0d06mzU01IoYPV0WX1NyVZ31Wi
- Eaf2mvKyg5E6OC2N+HzND7/hsQLBwtp/Kx+6gDcBc8CMhGvm0ReOm9ldd
- 4GybTO1zpoa8b62FiLz6gWQU968XLcWfbUMjAthKYFMQr1jtpZMd96REE Q==;
-X-CSE-ConnectionGUID: NnZEgitoQ6mjUTDJ3r4f8A==
-X-CSE-MsgGUID: bMYloFbkTluMKmm7VkgeSw==
-X-IronPort-AV: E=Sophos;i="6.24,224,1774335600"; d="scan'208";a="60031775"
+ bh=wtOQFyBf9UNBeRTukA8uIta1nuFU2lz0Jy4BxabHaGo=;
+ b=u8RBYXQwUVieZz2jR99NBDHFGgNNJ/ARz9HhPnv5C+TdKYCP7e6zP2w0
+ 3CmmXgO6b+WkFBKbvXJP2UImDlSCqo42xQdpE/9jhbIVkEeKYQBHxHObD
+ ZhJZ1VgC1aIRWJnYDMk17f3BCVKd0jNTIhsbdAdpyxBt1PT94mXz3pvzJ
+ 6UAunyqQVusLLc/ZknO73sIq7A0hTXakVgSHRkSa8qyC7an6kQTNDa8e5
+ Aoh6Lq6Uv53dgHGRdZzWY5i2gqgNjOzHjLr1KeeeZEQK/c7B+p7APmwgk
+ +0t1447vhuxkt6sAnNlrkGGAxIFfu1aF00qZme8BiCI4A+NRsSn5b5HGs g==;
+X-CSE-ConnectionGUID: 1rN9PuDNTkylOL4TgwPcBA==
+X-CSE-MsgGUID: 6B1gzZYfSpaBnBt1uP92fw==
+X-IronPort-AV: E=Sophos;i="6.24,224,1774335600"; d="scan'208";a="291054888"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Jun 2026 05:19:56 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.87.72) by
- chn-vm-ex2.mchp-main.com (10.10.87.31) with Microsoft SMTP Server
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 25 Jun 2026 05:20:00 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.43; Thu, 25 Jun 2026 05:19:56 -0700
+ 15.1.2507.58; Thu, 25 Jun 2026 05:19:59 -0700
 Received: from jamie-dev.microchip.com (10.10.85.11) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Thu, 25 Jun 2026 05:19:53 -0700
+ 15.1.2507.58 via Frontend Transport; Thu, 25 Jun 2026 05:19:56 -0700
 From: Jamie Gibbons <jamie.gibbons@microchip.com>
 To: <u-boot@lists.denx.de>
 CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
@@ -61,9 +61,10 @@ CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
  Schuchardt" <xypron.glpk@gmx.de>, Martin Herren <sputnik@on-the-web.ch>,
  Michal Simek <michal.simek@amd.com>, Adriana Nicolae <adriana@arista.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, <jamie.gibbons@microchip.com>
-Subject: [PATCH 1/8] cmd: rng: fix error handling for dm_rng_read()
-Date: Thu, 25 Jun 2026 13:23:18 +0100
-Message-ID: <20260625122325.834568-2-jamie.gibbons@microchip.com>
+Subject: [PATCH 2/8] misc: mpfs_syscontroller: add mailbox RX helper for
+ service responses
+Date: Thu, 25 Jun 2026 13:23:19 +0100
+Message-ID: <20260625122325.834568-3-jamie.gibbons@microchip.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260625122325.834568-1-jamie.gibbons@microchip.com>
 References: <20260625122325.834568-1-jamie.gibbons@microchip.com>
@@ -87,34 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The rng command treated any non-zero return value from dm_rng_read() as
-an error, even though the API returns the number of bytes read on
-success.
+The MPFS system controller run_service() helper only submits the mailbox
+request but does not read back the response data. However, the caller
+must explicitly receive the response.
 
-Update the error handling to only report a failure when dm_rng_read()
-returns a negative error code, or when a short read occurs.
+Add a public system controller helper to receive mailbox service
+responses to populate the response buffer after issuing a system
+controller request.
 
-This fixes false "Reading RNG failed" messages when RNG drivers
-successfully return data.
+Without this, the drivers copy uninitialised stack data instead of
+mailbox response data, resulting in deterministic output.
 
 Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 ---
- cmd/rng.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/misc/mpfs_syscontroller.c | 28 ++++++++++++++++++++++++----
+ include/mpfs-mailbox.h            |  1 +
+ 2 files changed, 25 insertions(+), 4 deletions(-)
 
-diff --git a/cmd/rng.c b/cmd/rng.c
-index 4d91094a8ec..18c0b6c9ca1 100644
---- a/cmd/rng.c
-+++ b/cmd/rng.c
-@@ -62,7 +62,7 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	n = min(n, sizeof(buf));
+diff --git a/drivers/misc/mpfs_syscontroller.c b/drivers/misc/mpfs_syscontroller.c
+index f608d5518b0..61d6780f0b9 100644
+--- a/drivers/misc/mpfs_syscontroller.c
++++ b/drivers/misc/mpfs_syscontroller.c
+@@ -85,6 +85,28 @@ int mpfs_syscontroller_run_service(struct mpfs_syscontroller_priv *sys_controlle
+ }
+ EXPORT_SYMBOL_GPL(mpfs_syscontroller_run_service);
  
- 	err = dm_rng_read(dev, buf, n);
--	if (err) {
-+	if (err < 0 || err != n) {
- 		puts(err == -EINTR ? "Abort\n" : "Reading RNG failed\n");
- 		ret = CMD_RET_FAILURE;
- 	} else {
++/**
++ * mpfs_syscontroller_recv_response() - Receive the MPFS system service response
++ * @sys_controller:	MPFS system controller instance
++ * @msg:			System service message
++ * @timeout_ms:		Timeout in milliseconds
++ * 
++ * Receive the mailbox response for a previously issued MPFS system
++ * controller service request and populate the response buffer.
++ * 
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++int mpfs_syscontroller_recv_response(struct mpfs_syscontroller_priv *sys_controller, struct mpfs_mss_msg *msg, unsigned long timeout_ms)
++{
++	int ret;
++
++	ret = mbox_recv(&sys_controller->chan, msg, timeout_ms);
++	if (ret)
++		dev_err(sys_controller->chan.dev, "Service failed: %d, abort. Failure: %u\n", ret, msg->response->resp_status);
++	return ret;
++}
++EXPORT_SYMBOL_GPL(mpfs_syscontroller_recv_response);
++
+ /**
+  * mpfs_syscontroller_read_sernum() - Use system service to read the device serial number
+  * @sys_serv_priv:	system service private data
+@@ -116,11 +138,9 @@ int mpfs_syscontroller_read_sernum(struct mpfs_sys_serv *sys_serv_priv, u8 *devi
+ 	}
+ 
+ 	/* Receive the response */
+-	ret = mbox_recv(&sys_serv_priv->sys_controller->chan, &msg, timeoutsecs);
+-	if (ret) {
+-		dev_err(sys_serv_priv->sys_controller->chan.dev, "Service failed: %d, abort. Failure: %u\n", ret, msg.response->resp_status);
++	ret = mpfs_syscontroller_recv_response(sys_serv_priv->sys_controller, &msg, timeoutsecs);
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	debug("%s: Read successful %s\n",
+ 	      __func__, sys_serv_priv->sys_controller->chan.dev->name);
+diff --git a/include/mpfs-mailbox.h b/include/mpfs-mailbox.h
+index c0ff327a4ce..3922e8d1019 100644
+--- a/include/mpfs-mailbox.h
++++ b/include/mpfs-mailbox.h
+@@ -58,6 +58,7 @@ struct mpfs_sys_serv {
+ };
+ 
+ int mpfs_syscontroller_run_service(struct mpfs_syscontroller_priv *sys_controller, struct mpfs_mss_msg *msg);
++int mpfs_syscontroller_recv_response(struct mpfs_syscontroller_priv* sys_controller, struct mpfs_mss_msg* msg, unsigned long timeout_ms);
+ int mpfs_syscontroller_read_sernum(struct mpfs_sys_serv *sys_serv_priv, u8 *device_serial_number);
+ void mpfs_syscontroller_process_dtbo(struct mpfs_sys_serv *sys_serv_priv);
+ struct mpfs_syscontroller_priv *mpfs_syscontroller_get(struct udevice *dev);
 -- 
 2.43.0
 
