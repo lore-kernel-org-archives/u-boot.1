@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C768CDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:13:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB423CDB479
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:18:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1764384704;
-	Thu, 25 Jun 2026 17:13:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BF7D84704;
+	Thu, 25 Jun 2026 17:18:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HIOzUjL3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ekyvmvpQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BFFB847C8; Thu, 25 Jun 2026 17:13:12 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 9DCA084894; Thu, 25 Jun 2026 17:18:34 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80BAF8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:13:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C9BF8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bed19623d6eso440570366b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:13:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782400389; cv=none;
- d=google.com; s=arc-20260327;
- b=s3RGUKKiHjH87SW4Hu/kFgBq662nV0iV4OvwwgpDk0sDCY+SPl488TllSLobOM6c1+
- RYqZSUlByFBJy24StLe3Ufy5soR34gJRUFr9CnQPbZ+z4nUTQQMZy2o7Qm3765ubwdBC
- u3T5FqSbAuwybVw3JX7Qoh8eUW4iC8HB2sYThU6nkTTnZDucdFybZeFXPQUZRACsOjLn
- 3DONu4Ixd9IH5JkM6mjWWVh3P3E8V9t/jHLZIw2BrIxZwL9hDN9wr0RQxuFuX21JtiWs
- mzrkmBaHpCW8gwZvOgwkPz1UMGReskw3j28hRhbc4IKCx+QXcx2FzfEvfJHrAMBGo5HC
- M43Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
- fh=IIgt66E0vMH58kRgarRMMZtzmWpVr2vTRhmJ5C9+8PE=;
- b=GT6cdf7eWFNtKhlcyFWBvSHG7TGLnFE0J7TSoK6JgHhr+P0m0S9HqkwOxdl2toaue8
- zBwUo3z26l6Rb9/kk+FQKImghnbGNeJyO7nc5E+/6TEXXaNPhLyQiW9Mf3nvQe/yJLfC
- Ea3qBXj4NN8jBD6cIKphJL8KQYmk4l4JhHYZsO64MSW+wBGpuk+GFGnQSvM9WptUTVvi
- 95wAxjQZytYGzs0Lr2FKwRznexCm/CarZwfyGpM9d7icKz8FiQjQsymNL7+HY3GqtLhf
- 13e2J8/IqUjBA1BHpBZ3HS7Z+tFeBWFGTvoOA4J7bLEkBPjrQSul7pcaZlthIqebOybE
- FD9w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e9784666b3so1878302a34.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:18:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782400389; x=1783005189; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1782400711; x=1783005511; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
- b=HIOzUjL3U6nFrl/VnjExnRBcnUYIFvRSAx5Ja4VUmS08pebwu9FbzV2r9IDT2zijrM
- xsfa4J2SodmB87yRJU/d1bHTHAiY/54BFeqqXbemHVpv6kMygYckGGxDpLJAuAooRibh
- nTtPQ9Zm4z91s/A8uIWF3tZ6rLUitqQLE6tUw=
+ bh=TPX8lYU3dgjm590kJ6H3w+KmEA0ZALonGUEULAdLGYE=;
+ b=ekyvmvpQpIAXNvw5VNcnHpDD4R3Pxp2uDLi0REbIXRvDTB+LvmHjudomV0hFwq4PbB
+ co83q3V1MmzI6HiI3AKHBZ6nFmz89MKhfkcGr1tmlOiRJOxkymYE1CwkA+iFgtZeO4v1
+ OdIjdbWqFouPwhXucNhjgx7N2vVJ/hsLlNT/0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782400389; x=1783005189;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1782400711; x=1783005511;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Je+rN6q714X6BFJMilPYlCPJ3qB22+3AOIaT1OAsI8M=;
- b=V3aXiz7/fVeKg2AWYuRXMSGpWsi22pRhWcUsKbsP95WDVoFoNL1kycKL6IikSQnvtf
- kqOTE+qbjdNX497uNXBV1aupkwSmIYuxtHuQb7yS2XvM1OGzOWl4CSavFiqf8cguNvpP
- 2XSnnTniDlwlVpdoTOqp9CK5SGWKspP3XDdE+2Q9OOCkUFHQjB6tVhvDiACJiIgUqjN5
- os0R0/hB+8wx2M79pxdmhHHYvBHuNOpjNpcMGUn3S838jDefdCYdLSOZd3LrAU/4IFt4
- XyHCBive8TAGDVcjgxsK8/dfnJjArwghMvXINXZp6RS8av8R7NRdeLAPvrehLh3qrGXT
- a8fQ==
+ bh=TPX8lYU3dgjm590kJ6H3w+KmEA0ZALonGUEULAdLGYE=;
+ b=P/P1UVueP34kGZM6ACVYtBPAJJ67Hr7WY1bmLIjYpQvrw7WBnu+6Sl9Jw7PNk4AuBO
+ owyJXzds8rE+w4/nr9S0/q5aJvH75fsXHypUDaYEgWpkk01EQVFF50Ix6H6h13Oy60xh
+ lOmwyGIKBIRViwTZzJEHuA0pJe0+6TtPM6E9UizzOJW9yaqMb6e3iDz7X5UZ0WEaTAOr
+ PK0+XvyqOhMsEgUIxyh/oosCsPWMlhYkdCkKajNDi3BvQGqmBij39ZjJv0jznfx46QzK
+ B8xTRwTlfSD5AdQYfNffHrnjgNnuv03YHexXPiYDXTjbFzKx0LYRFKeC5rhynl0Q5g8t
+ Hy4A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqtzajCGN4zJvHqTA2GQMg0C13dktBjHfZT262z7+dYYhvpaz2fRbhRahCIeGkzUAW78mXgMcA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMtyc9JWYC77MIeb0UHDH+GSL3mAK6KsVWo3c5CKxBSOYrG2QH
- ZORtG4mQ91EavUOnyP3Qo5HtZrAxels60P7J4B3s8ZqPEh1n3svDYmS4CgOHIE7pszL8+I2ZXda
- C/tiydD4yDtk3QLctRPHpWcskZB3ryGn99cADLsLB
-X-Gm-Gg: AfdE7cnI1OIHYpOV9taafUMi5ox5omdV1v85Fc4xp2KkaRhMY7cA/jfsfeXI4ZC+dJM
- C1T8mb/yshEvpymI3tEuK2yptiACjlwQlmgcy8O6YhG/VYF8qc6Q0/tzpjvQPKydqBCA9ivk8Gs
- OstxQPbCVGRTGjAtqTuGD1VhIMgTA5/miS2zZ7NGcrnQ7Ep+3HWD7RDZ65E46pCZ1kFW4BCNEE3
- gfEoyEqTP8pYPDkPFoJTbMqQXetKfU8h/2lZyxWgKZq/px1veHm94EFo92x3WIxXnlpaXFKsg==
-X-Received: by 2002:a17:907:968a:b0:bd2:bd3:1ef8 with SMTP id
- a640c23a62f3a-c1205ec5915mr210118066b.35.1782400388913; Thu, 25 Jun 2026
- 08:13:08 -0700 (PDT)
+ AFNElJ/mC1WYNf7qRdHSm5mBaTZQdtOdRfvgVp/CtpYJUcojnoQj0U5mZDA6JXNOAhMNsq0uAvyLQXU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyY+OodAjuHQUHBeRAYIeE3Bxw0axOHNjeVMKIiONmJsiCMcm7N
+ k6u2zyW0iWoz8FVVSbkU2tQ4GqPioSOTS3xq/C5S6mfJhCskwulWSw4THUhK0DZqGfqmR8Joy1N
+ gYb4VHvs=
+X-Gm-Gg: AfdE7clOM/NbNpobhFo77ROqFsN4SXfTfeJ7agc6QW6AMk1RBYul3kPDOrlzy6irGuN
+ JhU01p78v8OZs3F5QPkNPwTfAZCdJMKeyR0+G/TxFYoYmXLIwZWUK8SwZjZEwFuGeFucTbFs6lM
+ 1cnYERWnyyLcb4frgJaD+oovB6Yj6gaY7BPgqsoI83JskOpw8hY68FUqxv29Y9LOpEj6OOlpm5R
+ vM/2nT07Fz9xt7ooGisC17scIYoJnP7dNuRsrbND3z7K397TqkkDMPeiuqZraVzG84aTXe0l2PI
+ 3bPMvnyOXho0r3ShP9774P6jienTrVm1ZG2ATwCdP05to4oI7JFLBnq19omd+/E6Tn3F8+Ue1pL
+ wvn6I/Emf16xRTMrdNh6VyPwnixe3qDysi8QN2hsKNa10rvsur2zOqupeHK/QpI90JiQYryiTuQ
+ xVSt/O4eA8Ob6ja7BstzntvQNPXmHsC3L1DvOl1LELHp8/DsfSTG4fiiEwUY7eEItbtJ/flyunh
+ ztMVInTi4aj9q4DfhMdn65WJcurDb+XCasbE+8=
+X-Received: by 2002:a05:6830:25c6:b0:7e6:ef2e:28a5 with SMTP id
+ 46e09a7af769-7e99c2050afmr2966431a34.15.1782400711083; 
+ Thu, 25 Jun 2026 08:18:31 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-245.totalplay.net.
+ [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e94429e0cesm14251742a34.21.2026.06.25.08.18.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jun 2026 08:18:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com, 
+ sjg@chromium.org, christophe.leroy@csgroup.eu, u-boot@lists.denx.de
+In-Reply-To: <20260617074846.84362-1-ilias.apalodimas@linaro.org>
+References: <20260617074846.84362-1-ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v7 0/7] Relocate U-Boot in the last bank
+Message-Id: <178240070996.3860609.12716856774955880596.b4-ty@konsulko.com>
+Date: Thu, 25 Jun 2026 09:18:29 -0600
 MIME-Version: 1.0
-References: <20260618150913.314507-1-vincent.stehle@arm.com>
- <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
- <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
-In-Reply-To: <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 16:12:56 +0100
-X-Gm-Features: AVVi8Cc5HArUIZAYX2iLDwizCFhvLfvH-XWkSmyC3j5B9Ju9yeQ8VlwVzuNCDkc
-Message-ID: <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
- efi_disconnect_controller
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,99 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+On Wed, 17 Jun 2026 10:48:18 +0300, Ilias Apalodimas wrote:
 
-On Thu, 18 Jun 2026 at 16:28, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->
-> Hello,
->
-> On 6/18/26 5:18 PM, Simon Glass wrote:
-> > Hi Vincent,
-> >
-> > On Thu, 18 Jun 2026 at 16:09, Vincent Stehl=C3=A9 <vincent.stehle@arm.c=
-om> wrote:
-> >>
-> >> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when retu=
-rning
-> >> after having called EFI_ENTRY().
-> >>
-> >> This is inspired by a barebox fix. [1]
-> >
-> > Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
-> > projects back together :-)
->
-> It's not as extensive as U-Boot's yet, but it's usable for the common
-> boot me a distro GRUB use case. The code originated from U-Boot with
-> some parts heavily rewritten to fit barebox, e.g. the EFI filesystem
-> protocol is implemented on top of dirfds, so it reuses VFS path handling
-> and other such things.
+> There was a discussion recently on the mailing lists regarding our
+> management of memory above ram_top [0]. The tl;dr is that we have two problems.
+> 
+> The first one is that U-Boot always relocates to the top of the first available
+> bank unless there's special board code to sidestep that. The second is we don't
+> successfully deal with devices that can only do 32-bit DMA.
+> 
+> [...]
 
-OK good. I did create a VFS in Concept but I have not tried to get it
-into mainline yet.
+Applied to u-boot/next, thanks!
 
->
-> The imported files have Origin-URL comments pointing back at U-Boot
-> including the revision they originated from, but we are still in need of
-> better tooling to make use of these tags.
+[1/7] treewide: move bi_dram[] from bd to gd
+      commit: 1174c99ab421168221be372bd83a4143bf5f167d
+[2/7] common: move ram_base calculation to independent INITCALL()
+      commit: 15b35e4289e11f1ab201701dfb6dc0232b30be48
+[3/7] common: Clean up setup_dest_addr()
+      commit: 0943f107ce4adb47d4b01c06e046dce130a1de50
+[4/7] rpi: Add a local get_effective_memsize()
+      commit: d19d9e1c064b6c782959d1da7bddf1e9da1c55d4
+[5/7] common: Add an option to relocate on ram top
+      commit: 55a34217698491cc0bb8d53d630644dc8756629c
+[6/7] configs: Enable RELOC_ADDR_TOP on arm64 QEMU
+      commit: aefd4a769bb6727978c408ff24b93ba9047d535d
+[7/7] doc: Add a warning about using RELOC_ADDR_TOP
+      commit: fb537c85bca0e3d29a62fe119181bf1744b8c91a
+-- 
+Tom
 
-On another topic - where did we get to with the whole-FITsigning
-thing? Should we set up a call to talk it through?
 
-Regards,
-Simon
-
->
-> @Vincent, I suspect a number of fixes in [1] are also applicable to
-> U-Boot, but I haven't checked.
->
-> [1]:
-> https://lore.kernel.org/barebox/20260216084758.3548990-1-a.fatoum@pengutr=
-onix.de/
->
-> Cheers,
-> Ahmad
->
->
->
-> >
-> >>
-> >> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=3D080db65e39a=
-877b000baaf843c997a69821dfe69 [1]
-> >> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole =
-child")
-> >> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> ---
-> >>  lib/efi_loader/efi_boottime.c | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_bootti=
-me.c
-> >> index de57823bd44..b6966652d97 100644
-> >> --- a/lib/efi_loader/efi_boottime.c
-> >> +++ b/lib/efi_loader/efi_boottime.c
-> >> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
-> >>                                       &number_of_children,
-> >>                                       &child_handle_buffer);
-> >>         if (r !=3D EFI_SUCCESS)
-> >> -               return r;
-> >> +               return EFI_EXIT(r);
-> >>         sole_child =3D (number_of_children =3D=3D 1);
-> >>
-> >>         if (child_handle) {
-> >> --
-> >> 2.53.0
-> >>
-> >
-> > Regards,
-> > Simon
-> >
->
-> --
-> Pengutronix e.K.                  |                             |
-> Steuerwalder Str. 21              | http://www.pengutronix.de/  |
-> 31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
-> Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
->
