@@ -4,100 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 073BDCDE002
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5086CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:48:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33C6A847C8;
-	Thu, 25 Jun 2026 19:33:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 07487846F4;
+	Thu, 25 Jun 2026 19:48:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=mechasystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e8PUdSHC";
+	dkim=pass (2048-bit key; unprotected) header.d=mechasystems.com header.i=@mechasystems.com header.b="svDTHrPs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCA348495B; Thu, 25 Jun 2026 19:33:05 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 6527284949; Thu, 25 Jun 2026 15:29:58 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 118C5846F4
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BB4C847C8
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 15:29:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=mechasystems.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-69e46524711so67290eaf.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:33:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=advaitd@mechasystems.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6a11ee16bafso1677957eaf.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 06:29:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782408781; x=1783013581; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ynoq8dRBJQwOhv6HOFDbhiPQ7IPfDgzQZ7QBehW0TXg=;
- b=e8PUdSHC/vBFKBRNGZjk4AtNgxP1ZIdNpDbnVf2k8JlM+9hWhN/vAg5wDlZwZn5kDm
- 3nFkLtzbbuW+9ee71dBZh8xU2U1EUDNLksJJ1NWubhstBIYQy29V4rLGxvOIuhQdcT/v
- AoUFBELrV8Y6DlvTnWOxd3KUSS7UtUwxJmL8Q=
+ d=mechasystems.com; s=google; t=1782394194; x=1782998994; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V2sQXSw0o8FIjJ9viMDdKkMxc1/Lp+1pcXritCfXv0E=;
+ b=svDTHrPsO5/fM2nCro3uBfFuOjUWV5yVySZ2NWl7BP0VCp+I7u3P60xlGSObU03eJl
+ Lnl6xXexuc6mCB17gwKORD9WR1wNEphj+dlxLohNBxflLk0CyyouUoN+WJTZAi6KIOqn
+ 4wTvIMy5zeEfKB136uMJnJkh6T+Kq45TLY9VSH6zA92V74zOM4bzyXaFmbrELRIFFvpr
+ hlovR2WxVEWLW9TOBPEeGR1iMxcki0qbPhRPs59+F+GMvE4/HzSODo+KsIFFDTlKvek4
+ qdB9kkWoZG8AaoAD3PpXKpP7ET+PoGZzvFy0fiA/EwLCld9FSOLyqaLwMyyxE8i4aGU+
+ J1ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782408781; x=1783013581;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ynoq8dRBJQwOhv6HOFDbhiPQ7IPfDgzQZ7QBehW0TXg=;
- b=WWcVN5WbcnJxcWat6hPNmPZaXJ3WCyBEA6/2zTEG8rnOEapypYMZhcIrK2eZck87bN
- pgifZTbz/4L4Ne6DKEVCAZZPztYkb7i31IEuFfi1KygNCSEqdt6OItcJXQzhEytyqd+2
- aUepASuWWaYVfFabyTwaeYKqC62PZdgBWmmF2wbMxUV2e3tPFpcqAq8G6hDgYEzxAT/D
- 1ucOLEY6ecuBDkokRvuicHujF+vmMONxq+Kn45cQj/zZYJUBoCbxlaHOzRsGCBmqZFQu
- kQ6xxa+qqh0y6t4pfqx25XoZeMe1Zm9L4059vnDvpbmuoK+EMmgUSXRVKqyHIE3qDljZ
- gGWw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+Kk7w/Q7pqCjC+yjGvVuIkaZK4vSaFWSJaVqLxgA7uzYZJoCFH+ummr5tXah2ZrpI1pvdQWy4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPepfEEUY8RkGeZa1ScJnQTFH7W9sO/dy/MG+15n5Ue5g0cLZW
- /sFYgYNqHOheJ0gW4196Hcn77a1KTd+meG5X2r/Ftch+gCfxY+1QwsyoR7ajVYlhijp02UPqIre
- JUoa361s=
-X-Gm-Gg: AfdE7cnw3+0ZCMx92CfGtXnkI+Mz/rUbh2Flb3ZXcmpUD8+2HvGKZP53VlorGuJkNuQ
- JlABmxjMYt6HuQ6sTdl3Tyd/k0oqsRBoi8ZOcb5fwCCUL/bK2RvK39AzkvaMSogsI6Bjn7wTM+Z
- v4Sove/8/GjbN8sDcXJP0BJMKbexe3m2oPiToSW9X86oXYWgr6GyK6AAvVKdRTlonRPmUuJZizr
- nM5oR4WJP/tauMbFcxQZe3hcsVPAYiNR/EOzTuBAFpCF01BmWJOCRjnUUKH/vAKQwez0kKuAqst
- l5DCElqOiKl8uwAyrxqjj5pxpf/QPdNISrrClWjuHlKPVABl/szRreSIJyUGjXZrp0B7ruihkYQ
- ac39SUc7E0VIorw2qY/dDo/qlxqmvAlSgGwOuNKPu/GBwaVYeC6JF807WN7XOExYe6qrfgERLZd
- de74vP9Q+JFPllD+BnJmfzHnIFwfdIBB/hUHpf8MqRvfmSKyQQjhVijnYpXYngIPCgyx+oppTrU
- /jUcVjco2IixNVQd73IUa9zliG4quYYp89IlRzs
-X-Received: by 2002:a05:6820:2d0c:b0:69b:8ded:f933 with SMTP id
- 006d021491bc7-6a135244a6bmr3063388eaf.36.1782408781394; 
- Thu, 25 Jun 2026 10:33:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a0ea1520e4sm11288931eaf.15.2026.06.25.10.32.59
+ d=1e100.net; s=20251104; t=1782394194; x=1782998994;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V2sQXSw0o8FIjJ9viMDdKkMxc1/Lp+1pcXritCfXv0E=;
+ b=bmISeuHTufgW8qYs4tPp2svSpV00AIEpc41jZoYD9N18572vy1+4LbYbpZ6XQ0JoEf
+ DWj1+2PhPGhXKP+2hTNaZD8VSjPMl5B5Tv/kpDoGpW1zs79IdIyvg9sM2vUhQprQY4fK
+ GZhh3wYCT+qw1JUWKm27tuf+xnjy9HNEbRSQRezA1J0jap1Lm5mlNtQsobJZ85NzyfPf
+ QvPXB/gjOOYXDfnuk4SUeLx5mhTCNH9YilNbpnhyD2mErdrPikoCQEosPUaGD66hUWHJ
+ rozq3nDUjtqX74Jw+JtuUAqLJM6mPa9lBTOje+gkxbYY+q4EougXmwsB5MdadNICNjmx
+ Ig7A==
+X-Gm-Message-State: AOJu0YwrouUlbHGgg5Zq1sup3hmtLNNX3MCVf4ElaVFUETJpBBmPrEgu
+ xzISHjR+dZtYSgXdwaXR/BiCNOukFsm6g/JSKN82EsdsZI8GhaCVmnIwq9lbM6Ffcqk=
+X-Gm-Gg: AfdE7clyyW9s/SyITOdNrcZAQQvjJNB8APIebi+R+rKTbI5l3L+aJbPbgRPAETsGLQf
+ nYq79nk7sq6KaYyKj9Q6lsdqCaEGd1+TF/NlEXm4sqsCTt4OHcNGQC0EbEVWnJX8x3yYDhNdMn6
+ a9T+gmpv42o0TzVWKVyvgyIX8BNYMlsonjhsdvj5u/QTvzn/d6PxHatnWKD9zOt4G3e/kJUfw0o
+ rTep4TblZRb9e01WczM+aATQrTldo1674SodUfj8bszJiMZzfO3GqduUM359fGmqeDE3qA/LDGZ
+ MwqhIQcCS2f32Od0pQfirItmVJEdtCRWKLeqN01KEMEw+s7cDLBk5VGiDPtQ8DJr963JtaIxiZT
+ voj3r5D9HmdZqUS9sBud0nqgerauavgBWs/wBAAwT/D+tuJru5FAy8mowAmHIrhbfyO+Ob+pTc9
+ 9bwA2y4iHmPuK8i/X350Z+oiGN/NM=
+X-Received: by 2002:a05:6820:162c:b0:69e:3acb:316c with SMTP id
+ 006d021491bc7-6a13519fa4bmr2300447eaf.25.1782394194025; 
+ Thu, 25 Jun 2026 06:29:54 -0700 (PDT)
+Received: from advait-work.lan ([2001:df0:e1c0:3414:c3a1:d99c:b1e3:8cf3])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4472ec5fd4csm13050031fac.2.2026.06.25.06.29.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 10:33:00 -0700 (PDT)
-Date: Thu, 25 Jun 2026 11:32:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH 7/7] boot: add a minimal bootmeth for the Boot Loader
- Specification
-Message-ID: <20260625173258.GV382693@bill-the-cat>
-References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604-bls-v1-7-4ce6d1ee4711@flipper.net>
- <CAFLszTikihqsUmOGdmb8Q9WypiEHb0nq-a7vXH5XrXNxRVeNjg@mail.gmail.com>
- <CAKTNdwEkt+YMq-SG=PVTGzGztyeujVr=fEje74NnSbBbiswd7w@mail.gmail.com>
- <CAFLszTg7DJW4b0JhuPgCQe2TdMEdUagdGqRu7UG_j__S=4MjMQ@mail.gmail.com>
- <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
- <20260625172422.GU382693@bill-the-cat>
- <CAFLszTg5sBQiVw_guWhNjg8PQ2d+KyVXw0=Q0igjxSeuxerqsQ@mail.gmail.com>
+ Thu, 25 Jun 2026 06:29:52 -0700 (PDT)
+From: Advait Dhamorikar <advaitd@mechasystems.com>
+To: trini@konsulko.com,
+	ag.dev.uboot@gmail.com
+Cc: u-boot@lists.denx.de,
+	Advait Dhamorikar <advaitd@mechasystems.com>
+Subject: [PATCH] video: add ChipWealth CH13726A AMOLED panel driver
+Date: Thu, 25 Jun 2026 18:59:43 +0530
+Message-ID: <20260625132943.208178-1-advaitd@mechasystems.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="v/ztPpGOnaEpTvWS"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg5sBQiVw_guWhNjg8PQ2d+KyVXw0=Q0igjxSeuxerqsQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 25 Jun 2026 19:48:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,197 +97,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add support for AMOLED panels based on the ChipWealth CH13726A
+MIPI DSI display driver IC.
 
---v/ztPpGOnaEpTvWS
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The driver configures the MIPI DSI interface for 4 data lanes in RGB888
+video mode, performs the panel reset sequence, sends the vendor-specific
+initialization commands required by the controller, and enables the
+panel using the standard MIPI DCS Sleep Out and Display On commands.
 
-On Thu, Jun 25, 2026 at 06:29:18PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 25 Jun 2026 at 18:24, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Jun 25, 2026 at 08:57:13PM +0400, Alexey Charkov wrote:
-> > > On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Alexey,
-> > > >
-> > > > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.net> =
-wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chromium=
-=2Eorg> wrote:
-> > > > > >
-> > > > > > Hi Alexey,
-> > > > > >
-> > > > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wr=
-ote:
-> > > > > > > boot: add a minimal bootmeth for the Boot Loader Specification
-> > > > > > >
-> > > > > > > Add a bootmeth that finds and boots Boot Loader Specification=
- (BLS)
-> > > > > > > type #1 entry files [1]. On each block-device partition it sc=
-ans, the
-> > > > > > > bootmeth looks for files matching '<prefix>loader/entries/*.c=
-onf'
-> > > > > > > (where <prefix> comes from bootstd_get_prefixes(), typically =
-'/' and
-> > > > > > > '/boot/'), picks the highest-sorting filename, parses it, and=
- exposes
-> > > > > > > it as a bootflow.
-> > > > > > >
-> > > > > > > Implementation reuses the existing pxelinux infrastructure.
-> > > > > > >
-> > > > > > > For now the entry chosen on a partition is purely the lexicog=
-raphic
-> > > > > > > maximum of *.conf filenames; sort-key / version field handling
-> > > > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIES_LE=
-FT'
-> > > > > > > filename suffix) are left as TODOs. Likewise, only the top-so=
-rted entry
-> > > > > > > is surfaced because the bootstd framework currently allows on=
-e bootflow
-> > > > > > > per (bootmeth, partition); exposing every discovered entry wi=
-ll require
-> > > > > > > a framework extension.
-> > > > > > >
-> > > > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of sco=
-pe here;
-> > > > > > > [...]
-> > > > > > >
-> > > > > > > boot/Kconfig        |  17 +++
-> > > > > > >  boot/Makefile       |   1 +
-> > > > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++++++=
-++++++++++++++++++
-> > > > > > >  3 files changed, 351 insertions(+)
-> > > > > >
-> > > > > > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
-> > > > > > > +config BOOTMETH_BLS
-> > > > > > > +     bool "Bootdev support for Boot Loader Specification ent=
-ries"
-> > > > > > > +     select PXE_UTILS
-> > > > > > > +     default y
-> > > > > >
-> > > > > > Wherever the 'default y' discussion lands, this will be enabled=
- on
-> > > > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth.c w=
-ill
-> > > > > > fail since they check the exact list and count. Please can you =
-run the
-> > > > > > sandbox tests and update them as needed?
-> > > > > >
-> > > > > > Since you are adding a new bootmeth you also need a sandbox tes=
-t that
-> > > > > > exercises it (see the extlinux tests in test/boot/bootflow.c, w=
-ith a
-> > > > > > fixture disk image) and a documentation page, e.g.
-> > > > > > doc/develop/bootstd/bls.rst with an entry in the index there.
-> > > > >
-> > > > > Will do, thanks!
-> > > > >
-> > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > > > @@ -0,0 +1,333 @@
-> > > > > > > +static int bls_getfile(struct pxe_context *ctx, const char *=
-file_path,
-> > > > > > > +                    char *file_addr, enum bootflow_img_t typ=
-e, ulong *sizep)
-> > > > > >
-> > > > > > This is a verbatim copy of extlinux_getfile() - please can you =
-export
-> > > > > > that, or move it into a shared helper?
-> > > > >
-> > > > > Ack
-> > > > >
-> > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > > > @@ -0,0 +1,333 @@
-> > > > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_EXTLI=
-NUX_CFG);
-> > > > > >
-> > > > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since the =
-buffer
-> > > > > > is filled by a block-device read which may use DMA on some plat=
-forms.
-> > > > > > An alignment of 1 risks cache-line corruption there, so please =
-use
-> > > > > > ARCH_DMA_MINALIGN.
-> > > > >
-> > > > > Ack
-> > > > >
-> > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > > > @@ -0,0 +1,333 @@
-> > > > > > > +     bflow->bootmeth_priv =3D label;
-> > > > > > > +     free(fpath);
-> > > > > >
-> > > > > > This leaks memory: bootflow_free() releases bootmeth_priv with =
-a plain
-> > > > > > free(), so the label's string members (name, menu, kernel, appe=
-nd,
-> > > > > > initrd, etc.) are never freed - for every bootflow discarded af=
-ter a
-> > > > > > scan, not just on error paths.
-> > > > > >
-> > > > > > Since get_string() copies tokens out of the buffer rather than
-> > > > > > modifying it in place, you could follow the extlinux approach: =
-keep
-> > > > > > only bflow->buf across the scan (already populated by
-> > > > > > bootmeth_alloc_file() and freed by the framework), use a tempor=
-ary
-> > > > > > label in bls_read_bootflow() just to extract the title, destroy=
- it
-> > > > > > with label_destroy(), and re-parse the buffer in bls_boot(). Th=
-en
-> > > > > > bootmeth_priv is not needed at all. What do you think?
-> > > > >
-> > > > > Will address the leak, thanks for pointing it out!
-> > > > >
-> > > > > The bls_priv structure is needed for my follow-up extension which
-> > > > > allows multiple boot entries to be returned by each (bootdev,
-> > > > > bootmeth, partition) tuple, and I wanted to minimize churn between
-> > > > > those two. I haven't sent that follow-up for review yet, as I wan=
-ted
-> > > > > to confirm this simpler version is acceptable first.
-> > > >
-> > > > We should implement this using an generic index rather than somethi=
-ng
-> > > > bls-specific...please see some commits at:
-> > > >
-> > > > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
-> > >
-> > > Oh, there's already BLS in your tree :-D
-> > >
-> > > Would you like to merge that instead? Your version looks much more
-> > > full-fledged. If you happen to have one rebased on master or next I'd
-> > > be happy to test!
-> >
-> > Unfortunately Simon's work here is AI-generated and so not particularly
-> > welcome, among other problems right now.
->=20
-> No, not AI-generated, but certainly AI-assisted (perhaps that is what
-> you meant?)
+This driver is based on an earlier implementation by Pratham Malaviya.
 
-I didn't dig back super far to see what all AI-generated (such as your
-dlmalloc upgrade) vs "AI-assisted" (commit from just a few months ago)
-and try and guess based on the quality if it's "generated" or
-"assisted". But it doesn't really matter in the AI context. And it
-certainly doesn't matter until you've donated u-boot.org to the project.
+Signed-off-by: Advait Dhamorikar <advaitd@mechasystems.com>
+---
+ drivers/video/Kconfig               |   8 ++
+ drivers/video/Makefile              |   1 +
+ drivers/video/chipwealth-ch13726a.c | 193 ++++++++++++++++++++++++++++
+ 3 files changed, 202 insertions(+)
+ create mode 100644 drivers/video/chipwealth-ch13726a.c
 
---=20
-Tom
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index c2acc13139c..7e82778e294 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -533,6 +533,14 @@ config VIDEO_BCM2835
+ 	  that same resolution (or as near as possible) and 32bpp depth, so
+ 	  that U-Boot can access it with full colour depth.
+ 
++config VIDEO_AMOLED_CHIPWEALTH_CH13726A
++	bool "ChipWealth CH13726A AMOLED panel support"
++	depends on VIDEO
++	select VIDEO_MIPI_DSI
++	help
++	  Say Y here if you want to enable support for AMOLED panels
++	  based on the ChipWealth CH13726A MIPI DSI display driver IC.
++
+ config VIDEO_LCD_ENDEAVORU
+ 	tristate "Endeavoru 720x1280 DSI video mode panel"
+ 	depends on PANEL && BACKLIGHT
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 082b8967982..56df5e1860d 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -55,6 +55,7 @@ obj-$(CONFIG_VIDEO_DW_HDMI) += dw_hdmi.o
+ obj-$(CONFIG_VIDEO_DW_MIPI_DSI) += dw_mipi_dsi.o
+ obj-$(CONFIG_VIDEO_EFI) += efi.o
+ obj-y += imx/
++obj-$(CONFIG_VIDEO_AMOLED_CHIPWEALTH_CH13726A) += chipwealth-ch13726a.o
+ obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) += ivybridge_igd.o
+ obj-$(CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804) += anx9804.o
+ obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
+diff --git a/drivers/video/chipwealth-ch13726a.c b/drivers/video/chipwealth-ch13726a.c
+new file mode 100644
+index 00000000000..e6fef6c8e7f
+--- /dev/null
++++ b/drivers/video/chipwealth-ch13726a.c
+@@ -0,0 +1,193 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * ChipWealth CH13726A DSI panel driver
++ *
++ * Copyright (C) 2026 Mecha Systems
++ * Author(s):
++ *   Advait Dhamorikar <advaitd@mechasystems.com>
++ *   Pratham Malaviya  <prathamm@mechasystems.com>
++ */
++
++#include <backlight.h>
++#include <dm.h>
++#include <mipi_dsi.h>
++#include <panel.h>
++#include <asm/gpio.h>
++#include <linux/delay.h>
++#include <log.h>
++
++struct ch13726a_panel_priv {
++	struct udevice *reg;
++	struct udevice *backlight;
++	struct gpio_desc reset;
++};
++
++static const struct display_timing default_timing = {
++	.pixelclock.typ			=	59832000,
++	.hactive.typ			=	1080,
++	.hfront_porch.typ		=	12,
++	.hback_porch.typ		=	12,
++	.hsync_len.typ			=	28,
++	.vactive.typ			=	1240,
++	.vfront_porch.typ		=	2,
++	.vback_porch.typ		=	2,
++	.vsync_len.typ			=	2,
++};
++
++static int ch13726a_dcs_write_buf(struct udevice *dev, const void *data,
++				  size_t len)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	int ret;
++
++	ret = mipi_dsi_dcs_write_buffer(plat->device, data, len);
++	if (ret < 0)
++		log_err("failed to write dcs sequence: %d\n", ret);
++
++	return ret;
++}
++
++#define dcs_write_seq(dev, cmd, seq...)				\
++({								\
++	const u8 d[] = { cmd, seq };			\
++								\
++	ch13726a_dcs_write_buf(dev, d, ARRAY_SIZE(d));		\
++})
++
++static void ch13726a_reset(struct udevice *dev)
++{
++	struct ch13726a_panel_priv *priv = dev_get_priv(dev);
++
++	dm_gpio_set_value(&priv->reset, true);
++	mdelay(10);
++	dm_gpio_set_value(&priv->reset, false);
++	mdelay(10);
++	dm_gpio_set_value(&priv->reset, true);
++	mdelay(5);
++}
++
++static int ch13726a_set_backlight(struct udevice *dev, int percent)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = plat->device;
++	u8 brightness;
++
++	if (percent < 0)
++		percent = 0;
++	else if (percent > 100)
++		percent = 100;
++
++	brightness = (percent * 255) / 100;
++
++	return mipi_dsi_dcs_set_display_brightness(device, brightness);
++}
++
++static int ch13726a_panel_enable_backlight(struct udevice *dev)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = plat->device;
++	int ret;
++
++	device->lanes = plat->lanes;
++	device->format = plat->format;
++	device->mode_flags = plat->mode_flags;
++
++	ret = mipi_dsi_attach(device);
++	if (ret < 0)
++		return ret;
++
++	ch13726a_reset(dev);
++
++	device->mode_flags |= MIPI_DSI_MODE_LPM;
++
++	ret = dcs_write_seq(dev, 0x53, 0x00);
++	if (ret < 0) {
++		log_debug("%s: Init command failed(%d)\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = dcs_write_seq(dev, 0x17, 0x00);
++	if (ret < 0) {
++		log_debug("%s: Init command failed (%d)\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = dcs_write_seq(dev, 0x41, 0x00);
++	if (ret < 0) {
++		log_debug("%s: Init command failed (%d)\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_exit_sleep_mode(device);
++	if (ret)
++		return ret;
++
++	mdelay(120);
++
++	ret = mipi_dsi_dcs_set_display_on(device);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int ch13726a_panel_get_display_timing(struct udevice *dev,
++					     struct display_timing *timings)
++{
++	memcpy(timings, &default_timing, sizeof(*timings));
++	return 0;
++}
++
++static int ch13726a_panel_of_to_plat(struct udevice *dev)
++{
++	struct ch13726a_panel_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = gpio_request_by_name(dev, "reset-gpios", 0,
++				   &priv->reset,
++				   GPIOD_IS_OUT);
++	if (ret) {
++		log_err("%s: cannot get reset GPIO (%d)\n",
++			__func__, ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++static int ch13726a_panel_probe(struct udevice *dev)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++
++	plat->lanes = 4;
++	plat->format = MIPI_DSI_FMT_RGB888;
++	plat->mode_flags = MIPI_DSI_MODE_VIDEO |
++			   MIPI_DSI_MODE_VIDEO_BURST;
++
++	return 0;
++}
++
++static const struct panel_ops ch13726a_panel_ops = {
++	.enable_backlight	=	ch13726a_panel_enable_backlight,
++	.set_backlight		=	ch13726a_set_backlight,
++	.get_display_timing	=	ch13726a_panel_get_display_timing,
++};
++
++static const struct udevice_id ch13726a_panel_ids[] = {
++	{ .compatible	=	"chipwealth,ch13726a" },
++	{ }
++};
++
++U_BOOT_DRIVER(ch13726a_panel) = {
++	.name		=	"ch13726a_panel",
++	.id			=	UCLASS_PANEL,
++	.of_match	=	ch13726a_panel_ids,
++	.ops		=	&ch13726a_panel_ops,
++	.of_to_plat	=	ch13726a_panel_of_to_plat,
++	.probe		=	ch13726a_panel_probe,
++	.plat_auto	=	sizeof(struct mipi_dsi_panel_plat),
++	.priv_auto	=	sizeof(struct ch13726a_panel_priv),
++};
+-- 
+2.43.0
 
---v/ztPpGOnaEpTvWS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj1mSgAKCRAr4qD1Cr/k
-CmGDAQCqqKy1+LRhhn3BUBlonNNZDkhOWG4aLFpwA3DFKdvstgD/UUkegA4uy3J2
-Z3KPwigIDL1dEArttz4TnaAywrjKUgE=
-=t/2H
------END PGP SIGNATURE-----
-
---v/ztPpGOnaEpTvWS--
