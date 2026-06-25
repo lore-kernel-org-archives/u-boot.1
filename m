@@ -4,134 +4,208 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D58D5CDE000
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BECCACDE000
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17313847C8;
-	Thu, 25 Jun 2026 14:54:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CC2EF846F4;
+	Thu, 25 Jun 2026 14:58:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="aEdnnlsw";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GRe5L8LZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r2ks1nCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 323C884894; Thu, 25 Jun 2026 14:54:14 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 2AC87847C8; Thu, 25 Jun 2026 05:18:48 +0200 (CEST)
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27CCC8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:54:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 0C68E8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 05:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65OJsJvg1332358; Wed, 24 Jun 2026 22:17:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=proofpoint-05-2026; bh=hdhLQDVk7YVQw
+ Gab0+aESlLiu559EYN+jaO5dGDlPOQ=; b=GRe5L8LZj12YQIpiTCDu3/bPgiUDM
+ VsdMlj/fkwdnW3fZYlLgvw3gfWQGJ6fsFAQ7PapyufGqLM29at9Mm68Fexf8/1V5
+ HGq08Y1k/S2sh7uAGR52A70QWCOxmCqHNNoErceKDKFAbVbq7STX0SPRsWtEk22/
+ d9AHIimXKs2MOGGIL8dCwEKv1p4tenKT/zYbV0HOgHY/O/C0AkuNR16ujhNvZ9KF
+ NXRl1DBQgWhTNxHgU99OpMP/sdAfRC9oLr6O7mn1BTO2gInrb3VhAytSwKTFXiAV
+ RQclLGFhGxAMdA5/RC4GAZDIz5PDSKUviLOkxZhFl5ZW0mCisgOs+mXhQ==
+Received: from sa9pr02cu001.outbound.protection.outlook.com
+ (mail-southcentralusazon11013002.outbound.protection.outlook.com
+ [40.93.196.2])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4f0aspefdx-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 24 Jun 2026 22:17:48 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eKaa7S7f7Fda6Y6wY/XDNt6YU44oZeIUixO4/eNy7wLzYIaq4ktQiC3Orr3sBgf/LqzhBKWU+7VvlD9TrSpIByahIGXjof1no3PVVP5VnK6/9HqHjymISjV3jDmCbj4PDBLFBgjaCzpW5tW7YSwopaNmhLcBu3nzgC7CdXaZ7Th91LDPMc5UM6pVN9/RxY9DgguVQyglovjC/5cH7MsJIRPA4EhoPwaGYQeehzlOGTEJfAwI7YK1npEZvrTrDEmMapfgQueGFfrVTIZeaUFwKx1C93+Jc7G+WVwkaqlQMa807BlAT4uELskRcqv3CQr4Ir6LA0wOMuLWLtBly+MRIA==
+ b=VHBqbEdU0+U6JopUbp+ORC1szrAgL5ElOl2TD9Vsgw1Ad8m9UQf8BZwXmfCmnzFe4laU/mANFL7rBUupzDsc80P1C7IRpnt41QSf+JutftYzaD80yF8IznPPp8+oUYDDXkIzvdkaeVO3w0TBBYZYW+sEShyHWBwYL72T4Me8Gvj+2/p8ffFRyr8HE3Xbsx4A2vtQqYUJFU4uHReEwdExum5HUtmZN4e9yf9gn0rLP38f/mYydYlX7vXxKYpD2it1cQKJ2TmixGO7JefwFfnz97QkfVeouHK2kELU0omAwb+yE17Zf796p22Ttdv8vakpk6UTw8934d2RCG/Am/fPLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FeklfXRbFmQJy8TPqjoTti1LXNQYCp+ZGyW6TcMly8g=;
- b=Sg/xjWsKPjSyKq6+gpg9f9tIItaXuyy/xwAqMtF1mxI/eLmt77hlRQbfgZyzRiPkyx5U2cTyzO59qjsPznlvDlaV9JBu+WGVBHAZDue+fwPod4UHvSX5Se1b7jfmAU4Y3Wt14llDVfKPHIfXbDRVS4ygV94VfRfdk/7aVk5+j3wV2YpQxb4cHb0YnVn8Jv5CZvrFV81g7mSPHerDDvDHsMjv7trdJ/eP7vSMA7riEj7Zancq4dQ+PEubbyoVQGSJLYPwSUwZilfFNqJdxXwCCnDuns8WsZHhEgW89fWeUcoJkFCbsPJUHseHj71scGlhmom5bVD2I+RwT0rmu1g8rg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=hdhLQDVk7YVQwGab0+aESlLiu559EYN+jaO5dGDlPOQ=;
+ b=eue/MnSnvF95p/QKNm5KYN6ALUoUQr7wRXMvV8pr1z2zsUM4nuTTLIRHaNgN9IRBAeC/4fJLeBnxp+tsL2+ivp++OhaqSkLKQDc6M48nnHxsS8Myq7qttu3bOtzWWCrXtg2suKxAuuZ0MCSuVYx2C6TvA24sIvy0ukTW1zn7UIrmYZ0SBcko+6KVQViGlkIm0Q5NC9jm/hiFy+L5YS7bBJG5/dUYQLTNjCO2WxUv4DymspUXbr12zkBtnuEisu3nPHRb5ul/zUYCopMkQ3HZfSsNjVldQntb2OXoNRo4is9vwPZanyEAo4me3jZTuIuOppC77sUmtbppCUxMy7HRDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=collabora.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FeklfXRbFmQJy8TPqjoTti1LXNQYCp+ZGyW6TcMly8g=;
- b=aEdnnlsw0wlXNmOU0SkNuFv/YM2BpBQUqpxOLHLAprfHM4sYi4OBWYdUBmkhj5bBGNrAZ5kO/cyqhTRw86c5K2QGbfKN1+veupi/eUu5EuOFRF0r0D3Wy8qyA+/7waKEzc8iI18ZLzhdalRBWxpWEyIZW4tqnj/j1NL3jt14TAk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by GV1PR04MB9118.eurprd04.prod.outlook.com (2603:10a6:150:25::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.16; Thu, 25 Jun
- 2026 12:54:03 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.015; Thu, 25 Jun 2026
- 12:54:03 +0000
-Message-ID: <2f36b972-a8e3-4bf1-8848-5a9fd8c9713b@cherry.de>
-Date: Thu, 25 Jun 2026 14:54:02 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] .mailmap: map old addresses to their up-to-date
- counterparts
-To: =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
- u-boot@lists.denx.de
-Cc: thomas.petazzoni@bootlin.com
-References: <20260625120344.274592-1-joaomarcos.costa@bootlin.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260625120344.274592-1-joaomarcos.costa@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0168.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::17) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ bh=hdhLQDVk7YVQwGab0+aESlLiu559EYN+jaO5dGDlPOQ=;
+ b=r2ks1nCogpsvAjNa+NNa9/ePW2CaqaTTl2ikj0wmjgW3m5GvHdc5qeDX3x1bPynfrmCBSg51TC0mWAN8GlDhMyhRXJquzbkLNVp5KCRgqo8SgYL21WtHTsrn/mZrLBAOem0N03FXuutm9mk0r/ycIE9F3dXAGPpvib76G5NWYD4=
+Received: from DS1P221CA0011.NAMP221.PROD.OUTLOOK.COM (2603:10b6:8:451::11) by
+ SN7PR10MB6363.namprd10.prod.outlook.com (2603:10b6:806:26d::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Thu, 25 Jun
+ 2026 03:17:44 +0000
+Received: from DS2PEPF00003448.namprd04.prod.outlook.com
+ (2603:10b6:8:451:cafe::85) by DS1P221CA0011.outlook.office365.com
+ (2603:10b6:8:451::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.16 via Frontend Transport; Thu,
+ 25 Jun 2026 03:17:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS2PEPF00003448.mail.protection.outlook.com (10.167.17.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Thu, 25 Jun 2026 03:17:42 +0000
+Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 24 Jun
+ 2026 22:17:30 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 24 Jun
+ 2026 22:17:29 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 24 Jun 2026 22:17:29 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65P3HSNm1802616;
+ Wed, 24 Jun 2026 22:17:29 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Date: Thu, 25 Jun 2026 08:47:06 +0530
+Subject: [PATCH] treewide: Kconfig: use bool instead of tristate
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260625-tristate_fix-v1-1-95e16153d752@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqEMBBE0atIrw1kAkbwKoMMSSy1XTiSjiKId
+ zfq8hXUP0gQGUJNcVDExsL/OeNTFhRGNw9Q3GWT0cZqayqVIktyCb+ed6V1712wcF0NypclIs9
+ P7tu+ltVPCOlu0Hlejkc6tXAAAAA=
+X-Change-ID: 20260625-tristate_fix-00fbac6ead7e
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Heiko Schocher
+ <hs@nabladev.com>, Dinesh <dinesh.maniyam@altera.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Marek Vasut <marex@denx.de>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, Simon Glass
+ <sjg@chromium.org>, Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ "Nick Hu" <nick.hu@sifive.com>, Jimmy Ho <jimmy.ho@sifive.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peter Korsgaard <peter@korsgaard.com>, Casey Connolly
+ <casey.connolly@linaro.org>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, Jonathan Stroud
+ <jonathan.stroud@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ "Mateus Lima Alves" <mateuslima.ti@gmail.com>, Jamie Gibbons
+ <jamie.gibbons@microchip.com>, Daniel Palmer <daniel@thingy.jp>, "Angelo
+ Dureghello" <angelo@kernel-space.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Lucien.Jheng <lucienzx159@gmail.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Beiyan Yun <root@infi.wang>, Weijie Gao
+ <weijie.gao@mediatek.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ "Romain Gantois" <romain.gantois@bootlin.com>,
+ Alice Guo <alice.guo@nxp.com>, "Tien
+ Fong Chee" <tien.fong.chee@altera.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Boon Khai Ng <boon.khai.ng@altera.com>,
+ Shawn Lin <shawn.lin@rock-chips.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>,
+ Alexey Charkov <alchark@gmail.com>, Tuyen Dang <tuyen.dang.xa@renesas.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782357448; l=11913;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=8Halbynn5QxfJ99qHY9DO0P2yWwxtOTJriItBDulxlQ=;
+ b=ihhrKZyH20U1GCIQ8gdX9uA8ujxF33Lnvu+yhVsNJWgCnH7/y2FNDmhNmVKWytMN1455TrqNs
+ TmnNmgYBDFQBfW371KGcQwaT9at566oSrWBnX7VC4lF+IjHwmS4yK7H
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GV1PR04MB9118:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74d595d8-5e22-41bf-37c9-08ded2b8d559
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003448:EE_|SN7PR10MB6363:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02ad64a8-5ebd-48ae-447f-08ded26851fb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|23010399003|22082099003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 8wtXi2a5yOdK6wmQLm0DG/bSw8dXyV1tVeWzQJqtNVdwKXkcodPE4q9uMLjNGjlkN1rZgk4Xo6q12knILhvPf0w2tdNy2E3eU30sviNOgNUs5jUeuyD5pmVJ1AkhHf9MUaDqZ96yAFhDw82uMqn0vGJhObQevweDH4dhGaiNfeo5iUkhmRbV9NHZIPzpW+0zaOTZOC7kKT+PVjty5vbchIt88FgN7Kfk9JH2fqV1VMEaJbp3JBEFhGLgVEGRkwoeGM5yTpST7IJutCTQG5AdaidvvZchm8CI5HprjDRxE0NSjTOgyE5UWilBnWZ0U372x8kJ81Y1DRIEN8M3+bRkuaGQvL4C+wmGA4cQFGLHUv47EdJGh3rP3JEy56SvBKa9Xg2Oi4llegkc/jkz3Mh8sRnXF4z0ThcLj4mWwoyB1mDbvTCwoVKnFaUHRccM4pVbYcVr+Lwuakg2l7aXPQDXhGRN0aDgd2Q6zk4VGEw/+3KxSjgQ2Q58OzlNX8zLEqa/2HfDqY9LYJnbZ8Dl7g2lmVLGoSMmt5pUia79bXhde9W2xjFLJhO1XH2X0IdfKhy44oYUJ0NnH3BV2tNUR6p4TPb9j9UJ2V5Ob6TuUMBPRXRk3pDRjYhO2v6Q/Fbxr3qoxrmjlGzJ2If6keCVGAbBOe9FeScwWrBoGO5XS7Kzfsw=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(22082099003)(18002099003)(11063799006)(56012099006);
+ ARA:13230040|1800799024|7416014|36860700016|23010399003|376014|82310400026|18002099003|6133799003|3023799007|13003099007|56012099006;
+X-Microsoft-Antispam-Message-Info: Lkax79pew9BOYGIvCJZy69JpgV4uNuMRqZA0IXKJiuROgQ3nRRpvUl1Wi6ucMw1r3S/AhBUnXb3h3JRrznmGA4qGeEvaRqe+6XfR+BKODBUnNTuUFxYnW0zcrI9ZHAW7jQJZYevumAuXWlmcyvtDoa9tU0zuFXMbK8fq/dVpoMjl7K3gU5wvd6C1asqKXyf72o/+JoF5F1eArsXopB1RqrlwP8pH0RrJNOl9XRY4LBZtTdNhJXfGf1LmmdQ7cBMelNyZXh0nzk7yJ3LlMhju23f9g3V99mS7APMnxGEHS8hUjipsY5MSP3xkZM13cLajT6x+G5V4vYp0TR4i0hmqWgmLYQK+1UJCAr0pUvW8HfWS7yiusvCOJHugvLGvVWxsXv57rqi4KxyRgfvnhGS1O6AivKdBsVoE1W7Lzw/BAL8HjG551LLxIpLtw86h45JuTp8BcLH4BlGvI6ADh0SV0aW6Ymvba8v0bg9AXxePvokUh8RUjl64MEd4eLgUHfPl1lFNynxn4f4TyYeyABeew9INbTG9miK7J9rcfj7eySGvHIGilxjQlFowKMRerrAWV7fSc5BizK+w96iH2IWa7kejJsPv3etIbgkq4/1op9wd40p4vLTe/XtL97RuUcZHhN5azbYA/j8lPAvI8lDJdJg5KVbGj5m3bqCb9zyrD43Pi6qD0UHeF2COEstoZ8BRutQDGQs9/RgSCxSaZLn9Ug==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(7416014)(36860700016)(23010399003)(376014)(82310400026)(18002099003)(6133799003)(3023799007)(13003099007)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aG4zK1JBa1lpR05RanBLMy9vMWFYemh4S0dPOWFQZjgyU0JzSTVTNy80dFJO?=
- =?utf-8?B?a1k3Ti95YVlGSm5wNzk1Wi9IZ3lQY01CTE1xR1R0Z2YzRmJVWVBtUDFJZGEy?=
- =?utf-8?B?NFRYN1VRQmI1UDZabUZIdS9ZZ2hXQjUwWTZiU3hLTHNuT0RUVGt0b1QwNTRr?=
- =?utf-8?B?Sk16ODlpL3MvSG8zWGJiZ3Z2eGNnanhkQ3FJZWVUaEVKQzMzd1Z0OWt1a1px?=
- =?utf-8?B?NTdiYWRXdFF4WmpLcnUrWWRwV3BWUWQxTHlRQ0RTN1hFU0RCekU2QTY1KzNI?=
- =?utf-8?B?K1VUOU4rSVllOXRaajhWdkk5M2ZzQlNRYkhnN01va0dQUjJLZGlibllCZS9z?=
- =?utf-8?B?RlpHbE8yNUwzQzRRTSthd2tyb0g0SkhVYzR6L2dlWXdwVHBpcEQzVktQTEc1?=
- =?utf-8?B?SUxPajVBUFlSbFB2Zi9JdDJpMVpWb2JhMHpvS1dQOUx4dTZFejZnZmx2ZVl5?=
- =?utf-8?B?N0FuY2NvL1J5c2g0TzJYbFI5K1Q2VFp0UWl6ZkRtM0VHUzBzWTdYRk9lL1hi?=
- =?utf-8?B?bHY4KzJxZngxNWQwT1dvWklvcXo3SHo1bUJoWUNtSEh2d3E4RVJkN01YbVpl?=
- =?utf-8?B?bm9keXNvOUd1b1g5UFZRYkZ2SDdaWVpnVGR3aXNoVlhtbVlMR1pZV01Eb0dn?=
- =?utf-8?B?cDdmMk5oQVF6NHhQYTc5MGxzRzZWTXRWV3ZPdUZXa2I4WWR2M2huMHVvNUYy?=
- =?utf-8?B?VVdhOEJXSzlnV3FoWjN6UWRrSEpiZXlWcE1qa0dlS2NLRmx5ZlVpR21TdWFh?=
- =?utf-8?B?Vi80cXgxeFZHdllERU84VCtDa2RsOWZZNE95M0VrR0VpNHVvcVNkUmpueUVy?=
- =?utf-8?B?ays5UkhsN1JjeTZmWmozRHkxWCtlenhQdWRZcjZsdDNpbzVUcmdEQjZQcVRw?=
- =?utf-8?B?V1VQRWV5bnE0UEE2eWNzSjlOQ0UwSGRnWFdubVlDbEQwVkhnKzR4OGR4TWxJ?=
- =?utf-8?B?RmVZRkdQTU4yVkx4UGdXcFVSTVlrNEFOU1k5MXJwa3JjZTVIZE9LcmVzRE1E?=
- =?utf-8?B?TXJNaC9ISVRpckVJUkN3QktnL1FnRWQ0UFdtc2tmRytVOWxiQVVteW13YVA0?=
- =?utf-8?B?UEFSQjlKNTJ0OHExUTNzTVE2VS8ydWF6d0lPazdhYzRNNEdGTVNTcjBUQzk5?=
- =?utf-8?B?NmM0aDJHcUYzdUVVT0tjSFo0emdqaHJmQ1BLNTgyTjZXVUhkcUkycWlwYTVD?=
- =?utf-8?B?WjFGRXpmTVlDVHJOeHNWQnE3cng1SGtjSUpJT3BjV09JNW91aXZldEhmbnV0?=
- =?utf-8?B?UGZMZGFvNkJIM2prOEhQazRLei95RVBKWHhkV2tobFprNzNHb2o3Y09aRWRk?=
- =?utf-8?B?dDROV3A0UnZwYkhJSS9Wbmw5S2xZRi9EcGE1VDZSaldEdTZHUm85RnBXc29t?=
- =?utf-8?B?c2lkUmVTTWlRUTJVbmxVS2JSRUlPTkdKNDgrOE5rL3NSZU1nc1JSaENWVnRv?=
- =?utf-8?B?cGYvVURjZHFBYi9rRWJOR281eUtmRytvb1NkZHUxVUtqSVovR1NwNHNGTllW?=
- =?utf-8?B?b1l1UTgwaUZXMHc2YTQzZmtYbG44NGY4RlF4NEFoUnNtb2ErSHRtUm9KaGEy?=
- =?utf-8?B?NHl3dUl0dGhQQUhQSmdoVytZNVRWZVBnN1JJMUlqS21zQXJydjZ1NjJaVDA1?=
- =?utf-8?B?ZGZtSEQrVmxxWHVVTkZjUEdBbEs4TVorUS9UN3JZR0sxVFIydTFNSUdPY0RH?=
- =?utf-8?B?dFZCSWVjeXV0bVhYVDhVeFB2K0pGVmNaaHJmd245S1M5NFJTeHFvM01Qd29t?=
- =?utf-8?B?eHVEVHR0SlMrL000NFJjRmhYRmJiRk4xYTRyVkovcHNJaHJKOTd6ZHl4bjF1?=
- =?utf-8?B?QldCbjIxaTloOFJhVjFlRnN4MW10RFV1WUdrNjQvam1iWnBpUWMyUkFDZ3Jz?=
- =?utf-8?B?bEpKSUpKdjdISEYrWVoxdVhpRnZFUE1vbTZNSkFPakFRcDEvRkJpdHV4MURn?=
- =?utf-8?B?L3RTVkFQRHI0eDRKUWhUak5xTGQzWGVxc0NnQkkzV1hId2lwL0tvaVpnc0Er?=
- =?utf-8?B?eU1KVE56ekZoNDdyU3NrTmxyV0tCSC9YWTM0aWRPNWlBdnROaitCUnBNSERx?=
- =?utf-8?B?dlg1RnZGbEtlNldOcklwSk5wSkQwUkk5c0taZll1bFJLVG12OTArdGwrcnRx?=
- =?utf-8?B?bjZZWXdsZ1U4NHBJMGJYOWN3YUNNc2R5aUZsUVlGYVVTb0I2bVVTdjlrT25O?=
- =?utf-8?B?RWo3VHYrdldKSVNsL3pzd0tSY1B4dVhEdDlQREVyR0tXL3NFeTh2aUNXT3VL?=
- =?utf-8?B?MlB4dHBPK2lEeUdEczY5TUk4OGJTNmxhQzRvNUVZa3FLQ0Z1NFNWaHlrYXdp?=
- =?utf-8?B?SFVmOFFrb09tK2R6VERiZUZ0aDdRK2RJK0NJOE1qWnd5amh6MFp4UT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74d595d8-5e22-41bf-37c9-08ded2b8d559
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 12:54:03.1122 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3OZrwx5wrLIp9EzHedbWfkZ2PYrZefa/zYtWPBHtPOJMQSJI+MnKCbH+xq1nV3girw/COozBZGAonQBJC5N0o9cQm/1SIRx7YPqudlgd1yE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9118
+X-MS-Exchange-AntiSpam-MessageData-0: ntzAPwRDkSVTTVFzmfduFpvI+0rRFBlWe4uiX71jfi7iabg3FvYI6HBWaVzF+WfhFFlHAct3D3BHOASJhNpdhhR437joHPS300WZgnJoDMaxbgB4w8M100SvZQlwYjKueBTHuaZ7KDzXIamPSxXFztlTWzq7C9iVAHVHHdAJ+4ZZVenQMoH764HJiVjwJcvn/xNwY5WVhr3t7avj6GOMos/IYR+RrvqN4mwylX4lEXodY1zV1sg+gvrjG098Qx1+GwfVqQyIhgarogyAHQAA13sqiI2RaxSsZ5fKh3EpAMWExfQf9ltQEcErcZMH4qy7+SkozxAgQD8UWFRCH3wuaqrz9y+HypSdAKvdp4/1/BEoPkL7bWko8x3MGlQD9Lav8Vxcski3Mnv5SfpJCmDj9vJzdpwJw7EaUOtfLz6z4IWFFkj47OfEbAIK1Jw2bQWf
+X-Exchange-RoutingPolicyChecked: b5/MP3sYr43FZhN8hyvS3oueqz+AKTSmr6zW+n4wqFY6dm//vV+uFKRzEWMYwb8fNikUp/mIAlI4AZHMpkLDuH/kRA9HdwZDpp/G8cLpXpuPCQCEGMWW6051X5nKXkctlLQk1QV86DdxhQ/RF6YPax/XQlcS7q5jo8aRZzx6PiBVJFJl27vrH3VUrLXzlFQdLtIiTWazyRiqQV5yh0FJGoDIh+Z3pWyVgJdA2z03RehlKlcUXNjGYuDY111RrpDBwLftJjc8Uhg9vw/bmZPzgoPc6lNiDGvjlKSPZlz6dcdpp4Mv50otbFSd9eoDf02jHakXqyQew+xMMZNV3khK6A==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 03:17:42.6419 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02ad64a8-5ebd-48ae-447f-08ded26851fb
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003448.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6363
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI1MDAyNSBTYWx0ZWRfX3e35l8i9fkrv
+ k5elVfCugVi4CCP+GiWpjubgmOjzL5cPJc8CERoHr+rEZT33FfljhLc8iULRSjlTQPn1twVNZqf
+ e7c8JmHF1c+zwvXh1T9cAZ6Slv3zjBqr8UVgU06wgvzqJD+izRFjX99bYyMVWCttr4KFA3biQmk
+ zDbWdlyZ8NZP1BG8emnsFYabvBgh+mlFodKBqv7BPs6oMozat0e+OS/KE6cnkQ1X/ooHzQYWUuI
+ X6EDYygxjCJpR5mvn6IcAi93okkSHsX9Bi3GRJszy2zeLzpaWlYNrB1QM1Xr+gLk924TMKnXrUH
+ 0SeXtl2XA/vliR5vYBJ+jZ7SuoXNno6vEd5+qPb0EW6KpVcpeoDFKbCqCLYnb1wa8YQ21BCy93L
+ BeQ/hiMvc5abvOwwnSYZhQB6bSoDVDKWDgiC7VtAMC4cZan2rpDXHwm5oIlD0KtAjYTzO5zrIuq
+ fdxWosRm16oAvG7K8aA==
+X-Proofpoint-ORIG-GUID: uuBHw6QUnfF_thyr7Vzivqm7pxspwaKY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI1MDAyNSBTYWx0ZWRfX+T347x0iA3Cn
+ Cj3izFqCSnnYedoOO83yhARc76uhyjVEUbYe6wK5UasO/+rM5YRXPCclNyrfIGDLj1cwML7QSCE
+ 7eTpd2bKwZhHmbrNXyQ0+h1oSEg8LBM=
+X-Authority-Analysis: v=2.4 cv=RMCD2Yi+ c=1 sm=1 tr=0 ts=6a3c9ddc cx=c_pps
+ a=qSv8Sft3UEt4GReRCOm4JQ==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=fPAWb5peG099m5CrUpKH:22 a=NEAV23lmAAAA:8 a=sozttTNsAAAA:8
+ a=RNFsm8_HPad9dN9_EfgA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: uuBHw6QUnfF_thyr7Vzivqm7pxspwaKY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-24_04,2026-06-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1011
+ bulkscore=0 priorityscore=1501 suspectscore=0 phishscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606250025
+X-Mailman-Approved-At: Thu, 25 Jun 2026 14:58:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,14 +222,367 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi João,
+U-Boot does not support modules, so having tristate options is useless.
 
-On 6/25/26 2:03 PM, João Marcos Costa wrote:
-> This essentially maps @free-electrons.com to @bootlin.com addresses.
-> 
+Therefore this patch does a blind replace of all tristate options to
+bool tree-wide.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+CI: https://github.com/u-boot/u-boot/pull/998
+---
+ board/st/common/Kconfig      | 2 +-
+ cmd/Kconfig                  | 4 ++--
+ drivers/cache/Kconfig        | 2 +-
+ drivers/clk/Kconfig          | 2 +-
+ drivers/firmware/Kconfig     | 2 +-
+ drivers/i2c/Kconfig          | 6 +++---
+ drivers/i2c/muxes/Kconfig    | 6 +++---
+ drivers/i3c/Kconfig          | 2 +-
+ drivers/i3c/master/Kconfig   | 2 +-
+ drivers/memory/Kconfig       | 2 +-
+ drivers/misc/Kconfig         | 2 +-
+ drivers/mmc/Kconfig          | 4 ++--
+ drivers/mtd/nand/Kconfig     | 2 +-
+ drivers/net/phy/Kconfig      | 4 ++--
+ drivers/spi/Kconfig          | 2 +-
+ drivers/ufs/Kconfig          | 2 +-
+ drivers/usb/cdns3/Kconfig    | 6 +++---
+ drivers/usb/musb-new/Kconfig | 2 +-
+ drivers/usb/tcpm/Kconfig     | 4 ++--
+ 19 files changed, 29 insertions(+), 29 deletions(-)
 
-Thanks for the quick fix :)
+diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
+index 3d00f3f3331..aafbffbf6db 100644
+--- a/board/st/common/Kconfig
++++ b/board/st/common/Kconfig
+@@ -14,7 +14,7 @@ config DFU_ALT_RAM0
+ 	  This defines the partitions of ram used to build dfu dynamically.
+ 
+ config TYPEC_STUSB160X
+-	tristate "STMicroelectronics STUSB160X Type-C controller driver"
++	bool "STMicroelectronics STUSB160X Type-C controller driver"
+ 	depends on DM_I2C
+ 	help
+ 	  Say Y if your system has STMicroelectronics STUSB160X Type-C port
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 032e55e8127..452d11fc493 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -3177,7 +3177,7 @@ config CMD_STACKPROTECTOR_TEST
+ endmenu
+ 
+ config CMD_UBI
+-	tristate "Enable UBI - Unsorted block images commands"
++	bool "Enable UBI - Unsorted block images commands"
+ 	select MTD_UBI
+ 	help
+ 	  UBI is a software layer above MTD layer which admits use of LVM-like
+@@ -3197,7 +3197,7 @@ config CMD_UBI_RENAME
+ 	   ubi rename <oldname> <newname>
+ 
+ config CMD_UBIFS
+-	tristate "Enable UBIFS - Unsorted block images filesystem commands"
++	bool "Enable UBIFS - Unsorted block images filesystem commands"
+ 	depends on CMD_UBI
+ 	default y if CMD_UBI
+ 	select LZO
+diff --git a/drivers/cache/Kconfig b/drivers/cache/Kconfig
+index 3bf5c7f5dbf..5ebc8842acd 100644
+--- a/drivers/cache/Kconfig
++++ b/drivers/cache/Kconfig
+@@ -14,7 +14,7 @@ config CACHE
+ 	  configuring settings that be found from a device tree file.
+ 
+ config L2X0_CACHE
+-	tristate "PL310 cache driver"
++	bool "PL310 cache driver"
+ 	select CACHE
+ 	depends on ARM
+ 	help
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c2da7b3938b..9080a9750d8 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -216,7 +216,7 @@ config CLK_HSDK
+ 	  Synopsys ARC HSDK-4xD boards
+ 
+ config CLK_VERSACLOCK
+-	tristate "Enable VersaClock 5/6 devices"
++	bool "Enable VersaClock 5/6 devices"
+ 	depends on CLK
+ 	depends on CLK_CCF
+ 	depends on OF_CONTROL
+diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
+index 220de731950..f524f741e54 100644
+--- a/drivers/firmware/Kconfig
++++ b/drivers/firmware/Kconfig
+@@ -14,7 +14,7 @@ config ARM_PSCI_FW
+ 	select FIRMWARE
+ 
+ config TI_SCI_PROTOCOL
+-	tristate "TI System Control Interface (TISCI) Message Protocol"
++	bool "TI System Control Interface (TISCI) Message Protocol"
+ 	depends on K3_SEC_PROXY
+ 	select DEVRES
+ 	select FIRMWARE
+diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+index 8c2f71b9fe2..063db80b7bb 100644
+--- a/drivers/i2c/Kconfig
++++ b/drivers/i2c/Kconfig
+@@ -98,7 +98,7 @@ config SYS_I2C_EARLY_INIT
+ 	  board_early_init_f.
+ 
+ config I2C_CROS_EC_TUNNEL
+-	tristate "Chrome OS EC tunnel I2C bus"
++	bool "Chrome OS EC tunnel I2C bus"
+ 	depends on CROS_EC
+ 	help
+ 	  This provides an I2C bus that will tunnel i2c commands through to
+@@ -213,14 +213,14 @@ config SYS_FSL_I2C4_OFFSET
+ endif
+ 
+ config SYS_I2C_CADENCE
+-	tristate "Cadence I2C Controller"
++	bool "Cadence I2C Controller"
+ 	depends on DM_I2C
+ 	help
+ 	  Say yes here to select Cadence I2C Host Controller. This controller is
+ 	  e.g. used by Xilinx Zynq.
+ 
+ config SYS_I2C_CA
+-	tristate "Cortina-Access I2C Controller"
++	bool "Cortina-Access I2C Controller"
+ 	depends on DM_I2C && CORTINA_PLATFORM
+ 	help
+ 	  Add support for the Cortina Access I2C host controller.
+diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
+index 3b1220b2105..89a4b82458a 100644
+--- a/drivers/i2c/muxes/Kconfig
++++ b/drivers/i2c/muxes/Kconfig
+@@ -26,14 +26,14 @@ config I2C_ARB_GPIO_CHALLENGE
+ 	  a GPIO.
+ 
+ config I2C_MUX_PCA9541
+-	tristate "NXP PCA9541 I2C Master Selector"
++	bool "NXP PCA9541 I2C Master Selector"
+ 	depends on I2C_MUX
+ 	help
+ 	  If you say yes here you get support for the NXP PCA9541
+ 	  I2C Master Selector.
+ 
+ config I2C_MUX_PCA954x
+-	tristate "TI PCA954x I2C Mux/switches"
++	bool "TI PCA954x I2C Mux/switches"
+ 	depends on I2C_MUX
+ 	help
+ 	  If you say yes here you get support for the TI PCA954x I2C mux/switch
+@@ -49,7 +49,7 @@ config I2C_MUX_PCA954x
+ 		MAX7356, MAX7357, MAX7358, MAX7367, MAX7368 and MAX7369
+ 
+ config I2C_MUX_GPIO
+-        tristate "GPIO-based I2C multiplexer"
++	bool "GPIO-based I2C multiplexer"
+ 	depends on I2C_MUX && DM_GPIO
+ 	select DEVRES
+ 	help
+diff --git a/drivers/i3c/Kconfig b/drivers/i3c/Kconfig
+index 48341f9b873..41a4177b3ae 100644
+--- a/drivers/i3c/Kconfig
++++ b/drivers/i3c/Kconfig
+@@ -1,5 +1,5 @@
+ menuconfig I3C
+-	tristate "I3C support"
++	bool "I3C support"
+ 	select I2C
+ 	select DEVRES
+ 	help
+diff --git a/drivers/i3c/master/Kconfig b/drivers/i3c/master/Kconfig
+index 79776f60ae4..63467ef9cc2 100644
+--- a/drivers/i3c/master/Kconfig
++++ b/drivers/i3c/master/Kconfig
+@@ -1,5 +1,5 @@
+ config DW_I3C_MASTER
+-	tristate "Synopsys DesignWare I3C master driver"
++	bool "Synopsys DesignWare I3C master driver"
+ 	depends on I3C
+ 	help
+ 	  Support for Synopsys DesignWare MIPI I3C Controller.
+diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+index 591d9d9c656..adec8efd58c 100644
+--- a/drivers/memory/Kconfig
++++ b/drivers/memory/Kconfig
+@@ -55,7 +55,7 @@ config STM32_OMM
+ 	    - the time between 2 transactions in multiplexed mode.
+ 
+ config TI_AEMIF
+-	tristate "Texas Instruments AEMIF driver"
++	bool "Texas Instruments AEMIF driver"
+ 	depends on ARCH_KEYSTONE || ARCH_DAVINCI
+ 	help
+ 	  This driver is for the AEMIF module available in Texas Instruments
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index ea785793d18..8205b501c7f 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -505,7 +505,7 @@ config TURRIS_OMNIA_MCU
+ 	  board power off.
+ 
+ config USB_HUB_USB251XB
+-	tristate "USB251XB Hub Controller Configuration Driver"
++	bool "USB251XB Hub Controller Configuration Driver"
+ 	depends on I2C
+ 	help
+ 	  This option enables support for configuration via SMBus of the
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 0996d9fc30d..8ddea79741b 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -576,7 +576,7 @@ config MMC_SDHCI_ATMEL
+ 	  specification.
+ 
+ config MMC_SDHCI_BCM2835
+-	tristate "SDHCI support for the BCM2835 SD/MMC Controller"
++	bool "SDHCI support for the BCM2835 SD/MMC Controller"
+ 	depends on ARCH_BCM283X
+ 	depends on MMC_SDHCI
+ 	select MMC_SDHCI_IO_ACCESSORS
+@@ -589,7 +589,7 @@ config MMC_SDHCI_BCM2835
+ 	  If unsure, say N.
+ 
+ config MMC_SDHCI_BCMSTB
+-	tristate "SDHCI support for the BCMSTB SD/MMC Controller"
++	bool "SDHCI support for the BCMSTB SD/MMC Controller"
+ 	depends on MMC_SDHCI && (ARCH_BCMSTB || ARCH_BCM283X)
+ 	help
+ 	  This selects the Broadcom set-top box SD/MMC controller.
+diff --git a/drivers/mtd/nand/Kconfig b/drivers/mtd/nand/Kconfig
+index 78ae04bdcba..5ffec9502b6 100644
+--- a/drivers/mtd/nand/Kconfig
++++ b/drivers/mtd/nand/Kconfig
+@@ -1,5 +1,5 @@
+ config MTD_NAND_CORE
+-	tristate
++	bool
+ 
+ source "drivers/mtd/nand/raw/Kconfig"
+ 
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 0025c895f12..98d686d9f41 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -233,7 +233,7 @@ config PHY_MICREL_KSZ8XXX
+ endif # PHY_MICREL
+ 
+ config PHY_MOTORCOMM
+-	tristate "Motorcomm PHYs"
++	bool "Motorcomm PHYs"
+ 	help
+ 	  Enables support for Motorcomm network PHYs.
+ 	  Currently supports the YT8511 and YT8531 Gigabit Ethernet PHYs.
+@@ -246,7 +246,7 @@ config PHY_NATSEMI
+ 	bool "National Semiconductor Ethernet PHYs support"
+ 
+ config PHY_NXP_C45_TJA11XX
+-	tristate "NXP C45 TJA11XX PHYs"
++	bool "NXP C45 TJA11XX PHYs"
+ 	select DEVRES
+ 	help
+ 	  Enable support for NXP C45 TJA11XX PHYs.
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index cfbedd64c4c..85016ec84b9 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -548,7 +548,7 @@ config SOFT_SPI
+ 	 the SPI protocol.
+ 
+ config SPI_SN_F_OSPI
+-	tristate "Socionext F_OSPI SPI flash controller"
++	bool "Socionext F_OSPI SPI flash controller"
+ 	select SPI_MEM
+ 	help
+ 	  This enables support for the Socionext F_OSPI controller
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 49472933de3..6ddf0820102 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -24,7 +24,7 @@ config UFS_CADENCE
+ 	  controller present on present TI's J721e devices.
+ 
+ config UFS_MEDIATEK
+-	tristate "MediaTek UFS Host Controller Driver"
++	bool "MediaTek UFS Host Controller Driver"
+ 	depends on UFS && ARCH_MEDIATEK
+ 	select PHY_MTK_UFS
+ 	help
+diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
+index 7964f3f41d5..ad0ef8ac2ba 100644
+--- a/drivers/usb/cdns3/Kconfig
++++ b/drivers/usb/cdns3/Kconfig
+@@ -1,5 +1,5 @@
+ config USB_CDNS3
+-	tristate "Cadence USB3 Dual-Role Controller"
++	bool "Cadence USB3 Dual-Role Controller"
+ 	depends on USB_XHCI_HCD || USB_GADGET
+ 	select DEVRES
+ 	help
+@@ -51,14 +51,14 @@ config SPL_USB_CDNS3_HOST
+ 	  standard XHCI driver.
+ 
+ config USB_CDNS3_STARFIVE
+-	tristate "Cadence USB3 support on Starfive platforms"
++	bool "Cadence USB3 support on Starfive platforms"
+ 	default y if STARFIVE_JH7110
+ 	help
+ 	  Say 'Y' here if you are building for Starfive platforms
+ 	  that contain Cadence USB3 controller core. E.g.: JH7110.
+ 
+ config USB_CDNS3_TI
+-	tristate "Cadence USB3 support on TI platforms"
++	bool "Cadence USB3 support on TI platforms"
+ 	default USB_CDNS3
+ 	help
+ 	  Say 'Y' here if you are building for Texas Instruments
+diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
+index f8daaddc657..eb8c9af8020 100644
+--- a/drivers/usb/musb-new/Kconfig
++++ b/drivers/usb/musb-new/Kconfig
+@@ -48,7 +48,7 @@ config USB_MUSB_TI
+ 	  silicon IP.
+ 
+ config USB_MUSB_OMAP2PLUS
+-	tristate "OMAP2430 and onwards"
++	bool "OMAP2430 and onwards"
+ 	depends on ARCH_OMAP2PLUS
+ 
+ config USB_MUSB_AM35X
+diff --git a/drivers/usb/tcpm/Kconfig b/drivers/usb/tcpm/Kconfig
+index 9be4b496e82..b1ea7253720 100644
+--- a/drivers/usb/tcpm/Kconfig
++++ b/drivers/usb/tcpm/Kconfig
+@@ -1,14 +1,14 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ config TYPEC_TCPM
+-	tristate "USB Type-C Port Controller Manager"
++	bool "USB Type-C Port Controller Manager"
+ 	depends on DM
+ 	help
+ 	  The Type-C Port Controller Manager provides a USB PD and USB Type-C
+ 	  state machine for use with Type-C Port Controllers.
+ 
+ config TYPEC_FUSB302
+-	tristate "Fairchild FUSB302 Type-C chip driver"
++	bool "Fairchild FUSB302 Type-C chip driver"
+ 	depends on DM && DM_I2C && TYPEC_TCPM
+ 	help
+ 	  The Fairchild FUSB302 Type-C chip driver that works with
 
-Quentin
+---
+base-commit: 9f16b258e5632d74fa4a1c2c93bea4474e05234b
+change-id: 20260625-tristate_fix-00fbac6ead7e
+
+Best regards,
+--  
+Anshul Dalal <anshuld@ti.com>
+
