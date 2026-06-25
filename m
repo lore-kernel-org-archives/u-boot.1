@@ -4,85 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1352CDE000
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8CFCDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:48:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE6F684979;
-	Thu, 25 Jun 2026 19:48:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15EC58498B;
+	Thu, 25 Jun 2026 19:48:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kQD1BrXQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rNPBnBzN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5810847C8; Thu, 25 Jun 2026 19:41:36 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 503A984704; Thu, 25 Jun 2026 19:46:45 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5C29846F4
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:41:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A59BE8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:46:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=yordy1902@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-46caaa805b2so12383f8f.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:41:34 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5aea5e1775fso51950e87.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:46:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782409602; cv=none;
+ d=google.com; s=arc-20260327;
+ b=dBfw1abB5mDMhubfcgKw2w7h/GsFbhYwxREH0UTtobBII06drBZTycY+MvfJwjsnJR
+ jRZiyjHAvY7TPcNE2kLx8B+H3st40I11wKbfsDV361zsiGMDV3cmck6Bfy9QcwTbye/x
+ YQsm3Ne0ZQXGLlOsXdVNytpi0esimZDPiX0c2EnlZHeqmFR0sCFPqun8AjKPZdGqQnWz
+ 4IAvv8NZVmA4jmb0aCC6aFxyqncTNZ9n9ozu4RoXlY7frfXqyRWg3hjGpkUgHjQ9EXTG
+ UbA9GpzvF0JiJ4XdcDib/KAuFF+rZmKrYeZEoH0SIJ+TpMwr9yUlH/+Lt6Hl6dVLVE4B
+ tApw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ARjmXG/R0X58MPlNhRyOFpxRi3dxSuFid/X6Zwe6U6k=;
+ fh=FCmzCjCQ1MwpOEssjdJ+0XFkTIwVdmA93Y2/YC4POb8=;
+ b=SIQHyz+n2kcomg6GnTuVhFo6lJ9demRJ+jtyoK1x8zhbloJSzV5F8I7KoHZ7Hrz5N3
+ Pg1fstIClB5CGVpAhJv47v7R8T3yIrOrGyCleYG1LHe0tPMjzy0ThMQuAGFJIw9yNo6K
+ ssR8xLjdSr102z68XrYPhrmGlwLAxgMap0rcdfRToXcW94C5lzxaJAzX1G5pbQCIENwF
+ +5wXq7aLg4SK3wLVEFwy1dfQcDoCTP093ml4BXcYesK/Z4CH+CWHPU3jDPr9+egTAbKe
+ 4eYo2+dGBAtIYJqsC/CoVs+UGrhdNf20GftEpYQTt+SGLL3iQ+1kNVWPUoM39C6djPun
+ uQlw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782409294; x=1783014094; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4q3kqBKSoU2iT7cmM32hL+hegKeEUaVALBLKa/6aNAE=;
- b=kQD1BrXQFFsHCYmCpbXA40CQHnsuW48Mx00CsQNmxc+VZ6Ikd0vC2o1WCL/KNRLdk7
- g5EQImICezXCO35AJlmJkHeCt9/VL46dxEq+b6HTOG2Mt/h5ccAh+UyDmxhgBMw5flNJ
- 0lbQgeoKUIiOt+0dDJIoeJQTlQ293Y3RsvUL/6sNwqnnguk3AOCCTcn+UYco0Ih2xWrz
- mRsM8gNr+ulch8a8MpBHXQ13BbxIH6RTzQJ6vxDSwzu/drQX3qcTY4N4RaWyHsAVrD+d
- +XVJ/bomCJIMh+qAUBAh+MMpz6F7q0XGdQQGJITZtveQT9y6FIdDmlBnu2/lRqGI4gWI
- /RqA==
+ d=gmail.com; s=20251104; t=1782409602; x=1783014402; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ARjmXG/R0X58MPlNhRyOFpxRi3dxSuFid/X6Zwe6U6k=;
+ b=rNPBnBzNw3swnTgENYeRW/8/feXy3rssygKQSz3bd0IQ5a+gzJiy/hTPnS6LJzsMqw
+ MFvAKUVZeVtAnVBkJL3mzSgckPiQqJI8g1/8RB3FHLt1vjv8yM/JBt6HjGzrRL4v9k/g
+ FCDRi6Cs28UZcEo7PkvXmgUkTgi1v4GT1mrCjpqK350jhwi9qCQO5PesVlBHf2dGip/S
+ 0zFNgi/MdQ+sViTO0wnfzBmyS10OFA/nv9JQFrBGz9wmVctxMyb1TJa3tE/tON8OEgwa
+ TMSgNRmNf4x7uRXVL+qOaC4UCVk7k+BL/3Zz6XG+q53ZPDAPfCIeVUTpKIMcPNcgeS4i
+ fmrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782409294; x=1783014094;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=4q3kqBKSoU2iT7cmM32hL+hegKeEUaVALBLKa/6aNAE=;
- b=jqU0DdzwY6TgDopa6LqP5nGp+XRcY+hytu1lTYrtb1mr70rWSDsQz6ubJosZnp2x+b
- MGoqV9NtvI7gTwiic2y76JWsoQL05H5sSV077W3wQPeFMi+OPq9NblismhOA4JtfngAV
- LfX0MmX/ttUwc623EhLjgRnDONVoSMR9zYgWwo80HQOlENnTUjhKP5VgwWoH2hd/jbAB
- 6dqYzoLjYI10gWa+5e/+okJSKA/b4EBXdvzKRxFtyAV6rOvKKXLRjoeMuFhzo0CuyaHL
- 4uEUZFqQUVZ+xriwPEZ5ic3SJwnWpq+hMxWP0lCMcvtIwduZXTtbvEveF7GtsLKVjzC6
- RNbQ==
-X-Gm-Message-State: AOJu0YxH/SRrbRkzllJgyIFGIxaCbb90vGA5KJBfEecSwc+zjeuE8DW8
- 8DvHtXMtG20wOutKLBMloC2XvzP6mkJPmPaB9Y5MM1BnP5gu+4uTjzUy0ITTOBNa
-X-Gm-Gg: AfdE7cm6YSkissZovLEldYClfX2Thd4C1eV3PEdIRH+JB0s2HUr8H3UpprgrXSRiWfw
- Em5Cmz6MO6MQhPEs8taAOBiVMdoiBB1BSkDxItVw+zhyLy43qjOltXIabBAH3fMZBvMe+poz3J0
- 1jo1jqdHUT8gULE34lP8S+UNJFIXspibokAgcoO15rOPAIdvi4g5OhLq5ChIUfayGzG547I+ywt
- /35ifCYU9NbTYs0a9BpWQQJka3tz9Pwtm1AE4u0+cwD+GXnn01mzXRdEFPwFW8eQAZQeRiqp9//
- D3jD4EBl1Nny4GSXyJt40nz62tHMepY6SXlgKrYQDIaRqVoBAzgWuuzyENF/KSrjVaWGv+vwmyJ
- HICgywfOAK1STlXy6uAd8+p0aFg62Izt8hX8Fm07/VZyIgm4HqGn1+T1WOzstCHIpKNWNwiIm7U
- 4L7sdiqDBpQGq1ZrRxF8rYKqwWkUEe5+T6zbi8heVmCbqwlQhw0KUeRto=
-X-Received: by 2002:a05:6000:2893:b0:45e:73eb:5119 with SMTP id
- ffacd0b85a97d-46dc0d0ea60mr5630332f8f.22.1782409293827; 
- Thu, 25 Jun 2026 10:41:33 -0700 (PDT)
-Received: from FV4JTM0LIN.. (205.red-79-156-71.staticip.rima-tde.net.
- [79.156.71.205]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46e95f3d71fsm1280876f8f.12.2026.06.25.10.41.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 10:41:33 -0700 (PDT)
-From: Jordi Trepat Mur <yordy1902@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, vigneshr@ti.com, nm@ti.com,
- anshuld@ti.com, Jordi Trepat Mur <yordy1902@gmail.com>
-Subject: [PATCH v2] pinctrl: single: parse gpio-range as a raw array (O(N^2)
- -> O(N))
-Date: Thu, 25 Jun 2026 19:41:21 +0200
-Message-Id: <20260625174121.3633162-1-yordy1902@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260614103232.3586246-1-yordy1902@gmail.com>
-References: <20260614103232.3586246-1-yordy1902@gmail.com>
+ d=1e100.net; s=20251104; t=1782409602; x=1783014402;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ARjmXG/R0X58MPlNhRyOFpxRi3dxSuFid/X6Zwe6U6k=;
+ b=adm3yuXChSFpsab6wCJ0UXi5b3+NRUvGrRBhJ8rBA5vWvaG8gumUGrfXhgGUjQZFNe
+ xJarZbmmp+8E4tmuMlLKoxZYp/l5tChWjlsqAHfUBSZRHV4bQK/DfazDGMgi3KkCMkRw
+ cqJDQqWY2fEXJTNUnzE9iKud+jphzZznyx3FVbr2uqD2jLOlmfR0KczMv5xJ+sY+EC16
+ LsiBrhDYKj1m291OVTAxHksBimUGn1oSobdnXakrzIAyFj6J+Ud+nbwdfLG2QDXRfplY
+ q4FgqJPMCHd721m3GJCWdjADwT8P0TazFsZbMKfggvCVaQvfO+gi/6j1jAgs54VX33Pp
+ HQ8w==
+X-Gm-Message-State: AOJu0Yw/dHasBI8EULogLd4UxjpWQzd1mgq1RJ18a9KUueVAj0/LLjO5
+ 95s9l0OBiRwLpaeelE8YCNPm3S+Hpk4PcdQqHMqMajs175LVKrrJ+YL2sBQOOjYC3EOOVBmlXMN
+ 60d1/uqqD6ffzBTQeJf8kPjHlrWqjnEz2EtwOB5E=
+X-Gm-Gg: AfdE7cm5wvEnqk5jv8dXL0b7q3IuSeKdFlaH2v3wsxF+Zo59OJIbnPDPVDiy6C8UxV2
+ Qxs7PEzKHeBJqAEMhbE/GPMGOcSTpjKDHEa0MBCCvDPuU7Oa6v91ZlcBPs+ullzcu4p7PZc1ThU
+ 2bdNFEubp3kVylQU43Heid6acPpovy7x7O5EaeHFsX84AsOowhasm4/ObFJiq2Mn3W9TFbgEKvi
+ mXJJCLu2ATHnDGVOtoZDVauH5GwmbgH2BGTDJR1eN6ufrHD4lzkb9jEUMspK7GnYA9sRj4H
+X-Received: by 2002:a05:6512:4509:b0:5aa:75f2:c996 with SMTP id
+ 2adb3069b0e04-5aea1f2f77fmr1164449e87.16.1782409601506; Thu, 25 Jun 2026
+ 10:46:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260614103232.3586246-1-yordy1902@gmail.com>
+ <20260625174121.3633162-1-yordy1902@gmail.com>
+In-Reply-To: <20260625174121.3633162-1-yordy1902@gmail.com>
+From: Jordi T <yordy1902@gmail.com>
+Date: Thu, 25 Jun 2026 19:46:29 +0200
+X-Gm-Features: AVVi8CdlLMUH6lh6qYixVxvixbpM4UWHc_p-1ab_Bh6k6Fcs3Uz1vjR7GGtl4j0
+Message-ID: <CAKqxRA_cKJdQUwsH-s6Dte6AX0oDptDRtfEg2FuJYzeS5L-j9w@mail.gmail.com>
+Subject: Re: [PATCH v2] pinctrl: single: parse gpio-range as a raw array
+ (O(N^2) -> O(N))
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, vigneshr@ti.com, nm@ti.com, 
+ anshuld@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Thu, 25 Jun 2026 19:48:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,145 +114,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-single_add_gpio_func() calls ofnode_parse_phandle_with_args() once per
-gpio-range entry. With a flat device tree, every call re-iterates the
-property from index 0 and, because cellname is set, performs an
-fdt_node_offset_by_phandle() (a full-FDT scan) at every step. The total
-cost is therefore quadratic in the number of entries and proportional to
-the size of the device tree.
+Hi Anshul,
 
-The impact depends on when the pinctrl is probed. On the J722S EVM
-defconfig, pinctrl@f4000 (main_pmx0, the SoC's stock 7-entry gpio-range)
-is probed after relocation (caches on): single_add_gpio_func() takes
-~18 ms there and ~1 ms with this change. When the node is probed before
-relocation (caches off) the same parse takes hundreds of ms; on a board
-that probes it pre-relocation and runs LPDDR4 clocked down it reached
-723 ms, cut to 22 ms here. Any pinctrl-single user with a populated
-gpio-range property pays this cost.
+Thanks for the review and for trying to reproduce it.
 
-The phandle target is never dereferenced by this function (only the
-argument cells are stored), so resolve it only for the first entry to
-learn the per-entry cell count, then read the argument cells directly
-with ofnode_read_u32_index() and allocate the ranges in one block. A
-zero phandle still terminates the list, as in the original loop. This
-follows the existing pinctrl-single,gpio-range usage observed in current
-DTs, where entries use the same provider and therefore a uniform
-per-entry cell count.
+> I'm unable to reproduce the delays you have observed with the J722s EVM.
+> Are you using a custom DT perhaps?
 
-Signed-off-by: Jordi Trepat Mur <yordy1902@gmail.com>
----
-Changes in v2:
- - Restore terminate-on-zero-phandle: the original breaks on the first
-   ofnode_parse_phandle_with_args() error and a zero phandle is one such
-   error, so v1's "skip" was a behaviour change (Simon Glass).
- - Drop the args_count and size-multiple -EINVAL paths; malformed or
-   partial data no longer turns into a hard probe failure and is handled
-   leniently, as before (Simon Glass).
- - Read the argument cells with ofnode_read_u32_index() instead of an
-   open-coded be32_to_cpup() walk; works for OF_LIVE too (Simon Glass).
- - Coalesce the per-entry devm_kzalloc() into a single devm_kcalloc()
-   (Anshul Dalal, Simon Glass).
- - Drop the unused ret_total; reuse the single ret (Anshul, Simon).
- - Use single-space field assignment, matching the file (Anshul, Simon).
- drivers/pinctrl/pinctrl-single.c | 79 +++++++++++++++++++++++++-------
- 1 file changed, 62 insertions(+), 17 deletions(-)
+You're right that the default EVM build doesn't show a large delay, and it took
+a board test on my side to understand why. No custom gpio-range property is
+involved - it is the SoC's stock 7-entry main-domain gpio-range. What changes
+is when pinctrl@f4000 (main_pmx0) is probed.
 
-diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
-index 42980e09..0029a7e1 100644
---- a/drivers/pinctrl/pinctrl-single.c
-+++ b/drivers/pinctrl/pinctrl-single.c
-@@ -509,29 +509,74 @@ static int single_add_gpio_func(struct udevice *dev)
- 	struct single_priv *priv = dev_get_priv(dev);
- 	const char *propname = "pinctrl-single,gpio-range";
- 	const char *cellname = "#pinctrl-single,gpio-range-cells";
-+	ofnode node = dev_ofnode(dev);
- 	struct single_gpiofunc_range *range;
- 	struct ofnode_phandle_args gpiospec;
--	int ret, i;
--
--	for (i = 0; ; i++) {
--		ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), propname,
--						     cellname, 0, i, &gpiospec);
--		/* Do not treat it as error. Only treat it as end condition. */
--		if (ret) {
--			ret = 0;
-+	int size, total_cells, cells_per_entry, entries, ret, i;
-+
-+	/*
-+	 * The original loop called ofnode_parse_phandle_with_args() once per
-+	 * entry. On a flat DT each call resolves the phandle, which scans the
-+	 * whole tree, so the repeated parse is quadratic in the number of
-+	 * entries and proportional to the tree size. This is very slow
-+	 * pre-relocation with caches off.
-+	 *
-+	 * The phandle target is not used here (only the argument cells are
-+	 * stored), so resolve it only for the first entry to learn the
-+	 * per-entry cell count, then read the argument cells directly. This
-+	 * follows the existing pinctrl-single,gpio-range usage observed in
-+	 * current DTs, where entries use the same provider and therefore a
-+	 * uniform per-entry cell count.
-+	 */
-+	ret = ofnode_parse_phandle_with_args(node, propname, cellname, 0, 0,
-+					     &gpiospec);
-+	if (ret)
-+		return 0;
-+	if (gpiospec.args_count != 3)
-+		return 0;
-+
-+	cells_per_entry = 1 + gpiospec.args_count;
-+	size = ofnode_read_size(node, propname);
-+	if (size < (int)sizeof(u32))
-+		return 0;
-+	total_cells = size / sizeof(u32);
-+	entries = total_cells / cells_per_entry;
-+	if (!entries)
-+		return 0;
-+
-+	range = devm_kcalloc(dev, entries, sizeof(*range), GFP_KERNEL);
-+	if (!range)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < entries; i++) {
-+		int base = i * cells_per_entry;
-+		u32 phandle;
-+
-+		ret = ofnode_read_u32_index(node, propname, base, &phandle);
-+		if (ret)
- 			break;
--		}
--		range = devm_kzalloc(dev, sizeof(*range), GFP_KERNEL);
--		if (!range) {
--			ret = -ENOMEM;
-+
-+		/* A zero phandle terminates the list, as in the original loop. */
-+		if (!phandle)
- 			break;
--		}
--		range->offset = gpiospec.args[0];
--		range->npins = gpiospec.args[1];
--		range->gpiofunc = gpiospec.args[2];
-+
-+		ret = ofnode_read_u32_index(node, propname, base + 1, &range->offset);
-+		if (ret)
-+			break;
-+
-+		ret = ofnode_read_u32_index(node, propname, base + 2, &range->npins);
-+		if (ret)
-+			break;
-+
-+		ret = ofnode_read_u32_index(node, propname, base + 3, &range->gpiofunc);
-+		if (ret)
-+			break;
-+
- 		list_add_tail(&range->node, &priv->gpiofuncs);
-+		range++;
- 	}
--	return ret;
-+
-+	return 0;
- }
- 
- static int single_probe(struct udevice *dev)
--- 
-2.34.1
+On the stock EVM defconfig it is first probed after relocation (caches on).
+There, single_add_gpio_func() is only ~18 ms, and ~1 ms with this patch - easy
+to miss in the overall boot unless you time the function directly. If you put a
+get_timer() around single_add_gpio_func() on a stock EVM, you should see that
+~18 ms -> ~1 ms.
 
+The 723 ms in the commit came from a product configuration where the node is
+probed before relocation (caches off). This happens during the pre-relocation
+console bring-up: setting up the main UART applies its pin mux, which probes
+main_pmx0 with caches off. That board also runs its LPDDR4 clocked down, as it
+is an early sample and needed that for stability. The two factors decompose
+cleanly from real measurements of the same unpatched function:
+
+    caches off vs on, same board   : ~17x  (723 ms vs 41 ms post-reloc)
+    reduced DDR vs EVM, caches on  : ~2x   (41 ms vs the EVM's 18 ms)
+
+i.e. 723 ms = O(N^2) x caches-off x reduced-DDR. On the EVM's stock DDR, a
+pre-relocation probe would land around ~300 ms. Either way, the patch removes a
+genuinely quadratic full-FDT scan per entry and produces an identical
+gpio-range list.
+
+On the code points, all addressed in v2:
+
+> Why rename 'ret' to 'ret_total' here?
+
+Leftover, dropped. A single 'ret' is used only for the one phandle lookup.
+
+> The size check is redundant
+
+Agreed, dropped; v2 uses just if (!list).
+
+> You could just do if (!phandle_i) ... is the validation required?
+
+Correct, a valid gpio-range never has a null phandle. v2 reads the entries
+directly; a zero phandle terminates the list, as in the original loop.
+
+> I wonder if we can just allocate a pool of ranges[entries] ...
+
+Done: v2 does a single devm_kcalloc(dev, entries, ...) and walks the array,
+removing the per-entry allocation and its null check.
+
+v2 follows shortly.
+
+Thanks again.
+
+Jordi
