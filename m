@@ -4,98 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B316ECDB47F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B66F4CDB466
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E77A0847C8;
-	Thu, 25 Jun 2026 10:03:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E31A84704;
+	Thu, 25 Jun 2026 10:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kZRqSG/B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NLHg+Cxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 909E484894; Thu, 25 Jun 2026 10:03:45 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 7638484704; Thu, 25 Jun 2026 10:03:51 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92AE684704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:03:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 740A38493A
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bed19623d6eso321711366b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:03:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782374623; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-c07ea058c1aso253523266b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:03:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782374629; cv=none;
  d=google.com; s=arc-20260327;
- b=n/5KSqundhPP+BS3NhmO1574JbkwqQrlqdzx+NpPH72A054By487tNdvy5RPv4o4b9
- HIUjdFj7PEk3I0Pj1o6xSpXdLV/tcPTcwOtN6BnXQWKJgG2SZyPnxIKirF57NDCPAGqu
- ICiClU0rgYH8Ww83f+Q7YYCEbjCWmfE5bGRqTnUldrMV1pjQPiE+x71wHxOYBNahWQwx
- vVhH9rQ05kkvPWfF0CHZCaegDSVfzx1JD6MFB2LV7z6azWGETktGeUZbwvrWetRYKQr4
- JaKAgtOlvFKaf9z2SnJzGlt5UP01ks/S/89EXkpF4pK8IJXrtyXaENDDXpj2ji3Ms6Kc
- SH6g==
+ b=LDj600e+KFjoCWfLO1LdEhcyNYaNiiUP79XU8C+03lKXI5X3T1CqtHHBDWx4PV5Y1G
+ 746wtnGbFJB8d/cCxC6rHmPWcaUgMHTaRfn2rMziQk4kgO8zrFY1Jk1PsAm46SXaEZC2
+ CMMbHZpMuD/CQZ/myEMLy9phFaHBi7fP62FWWKEjjT1hyOpGDwknIz3PVCc+oeLsULU3
+ lsEY1q1DXwu2LREKy+VyN/30xm5XADA4RMhTowg9hOj7j75SG/8Hbfgs9JWSifHkwSvh
+ YUDui0pAJbWjaHNNruQS/nDVG/UoXYGbGSpDD4AezWNDYfoNO3VYL/6J5wd1zzzIuIou
+ oarg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=gL4kp8GzfPu+ONpjUOu1YQNXNN1Yu6RUcQToNBQ1qqE=;
- fh=LI8+INkLzzoRu4ENIv4WWgUUefmR4YBUllTyPBoZuOk=;
- b=XHcYDeVIkvdwHK4EraXGq2kJ8+g5M79b51U9/mBpkgvchHkJhQhJpuD6QjAXGLfkoh
- ZXgP4ithyjAfYw3fuw0nEhCP3IIYfCC56uPUautspEg5GwUKRCAsPnlR90WzQ2/sZrIk
- OYSXGFOZ6yZvZryQo2X7XqG/S7+N3C+ZFDvn1HAxLfqRurA9feg/yy0JJxjSLw9lH8Fs
- KCwBbW8TwtHJf+Jfx+DvAy751GUaX4iuEb4odjwB8OJnvK7F6DMfnVrOjeimzdQVm0Ub
- CFu7HeRjbeaUqn7bLvhtUPjvdDNXp/HEzvLOtVPXQ9y6KkoGeuDzVzz67vCXV2jaGUIM
- xc7g==; darn=lists.denx.de
+ bh=S1DGDKIu8m/bPLQCnMIt7B9RknqkFKR0Uc6etSH4vJg=;
+ fh=ZKENcj3LLg7FvwzPCU8kb3oWCO29ckMXLdn+MUd0Y7U=;
+ b=qaKjJSXgKhC8bCb4r9hk+5LE1utJZDsjSDpzrqb5fDm9VO12tKRidhQ5EbZGMdsySX
+ J+TTgVSKL0yK/848at+X/yKhQ1zoCoAqQuyLXbbLhJot6mYVRERNsS2YqxvEhAefGQEW
+ 0ZeGrs+khCL171zF3mGfSopLOKrv+qXi5EdJWGPmB+rcKMycAC2+Hx9kB5yNIOEM0MR7
+ UkqYw4mT7oWOXgODeiL6A//LBpTOh5XZY6FY21LA15RRI7fIAf90mcMVFl52U0Magqfz
+ vExwJhVI1C8uusqfH9UDIWGKuvzIKkZdfXhm5L//et2vHC//p293tVjs2CIAwrGR3xyT
+ Tjjg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782374623; x=1782979423; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782374629; x=1782979429; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gL4kp8GzfPu+ONpjUOu1YQNXNN1Yu6RUcQToNBQ1qqE=;
- b=kZRqSG/BPqQDsDgZMoZkM3MQ7nBDdlBcFxT/IyVDJssV6yPfUh2vod1JRmEAQ/bIvD
- UE1PYRBaKUsDSbRiFwiPTlzNxqxTiL7lyLgcvSp70eTtdMIx8GoPlpKJsIAJ7t16s9rl
- qDGJugLtm9erTrGms/EKrf2951Tj/2zBEfgVI=
+ bh=S1DGDKIu8m/bPLQCnMIt7B9RknqkFKR0Uc6etSH4vJg=;
+ b=NLHg+CxowJjQ++o+gJLUDykPxI3cTXa0QHFPho8i2jHcKsDcEln1dgKYS5fVuUiq2D
+ 50KwGleK8ryhmYdv4XmuHxQjf1/Lk6CACGxthfDcAKMMurFDtRfVeHY2Rh4Y9SoCerFx
+ VLn4RX29DLjeV7Sn8XtWbh2p3jlgGNIM/aHqg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782374623; x=1782979423;
+ d=1e100.net; s=20251104; t=1782374629; x=1782979429;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gL4kp8GzfPu+ONpjUOu1YQNXNN1Yu6RUcQToNBQ1qqE=;
- b=BFGUZmBQNbhwlfifgt4/jjQ2rTyVrLzcgzU9L9OwhDzLbRU2fmm3D506P0SnIJlwsH
- 9Qu0xXKfUeIrsbNTB9De/3XX3HsHubcSObFeWQqK61s7pgjdugIqfUAchVzNgn7CuRU0
- Wk6a4nUcnB5lakNxQ27C+CWmV29r23PLJDJc51T4NDP894ABnObLace5SlLo8GuZnt4V
- xvDWl2w0lUbIPo4tz9mU7ILwhUgQc8R0qI6rDFKi3ZF+0nQoC3Jrq75o+ArD7M8Vkymp
- GGYto+gSbHwuNsJ5QobabpKlfrkg3WB8maFdyS1TVzreu7achbzJQHD+yLwMcFVJAFv7
- npDA==
-X-Gm-Message-State: AOJu0YzHoocKL4AugOus1xBke1uenvXNzxYrFm3xzFMn7PT9QUxNpYds
- AQURjGzCrKFD6/IYjt3beq14+u7vzTdgRVHT8qkrHJa0OcPNqZhiirZenC5CeIWqP+ACADK62Mt
- o3vA+x7tBE8+RkEujwDGyKN8fZNEjSX1aAR1/n2jr
-X-Gm-Gg: AfdE7cmR11wpuDQJlbhi20gyWSMpSE/hE1X3DL9+EEKPYHW9Gjs+f/H2oXt994X8onh
- YwlCj8ImmyxG56YdtX1T5PnpWh18n3ZddB1o1y6P0omQHJlLMDQ0TW1GV2QpMgZ6f5jpOPAw3h8
- NQ+pOa+J2Ger4qZGvYqn2dV9A0UqrhFrU7KC49LOYOPEXrr8naqXsahtODfiBFOh/FuzzoGbGDw
- QoixKv9tngPt74S5t5D59w1mXPxltVEfL+tl1TPuQ4r2gbOCyrbOfuVowx5oLKW7LhoYonQNA==
-X-Received: by 2002:a17:907:1c93:b0:c08:3409:b747 with SMTP id
- a640c23a62f3a-c1205e9e280mr86255266b.33.1782374622801; Thu, 25 Jun 2026
- 01:03:42 -0700 (PDT)
+ bh=S1DGDKIu8m/bPLQCnMIt7B9RknqkFKR0Uc6etSH4vJg=;
+ b=Ga3hJeKjtsuRDCsCuur1w4/e9+iGYLa2EIsOcQo3YjuZK2HjPJCoP+gdGFuElcOsh2
+ uuhthkyuiBSMKQ4zkzIY8RE3ARpEG+DDd9bLYz/jCiF3NtJmuqGUVSleDcXl6wrm8aJ5
+ sMH0LHH62ba1FMMhqPElf433tvLUiBi8uXTfT8bA1tOmbPvvJhqqCgWgBiDjEeh80iIB
+ 0EI2Fzc7Amxpk571SJHGBf7KujlZcczw2E79qBFte2XxTfDajqzIWErfU6n1F5GrEMMB
+ o7bUGKa4DVCNa0rfqf155Xok4Lzpf1diYgtowVqYzKcf8oM1AC/cajXMP/aE1VnoisQ1
+ XM/w==
+X-Gm-Message-State: AOJu0YxxVShz4x12hjq+tRSVX0EDfhmuYQXnTGQppPyCcEbG1qpx2Fid
+ B6/hadr2X1BgZUtQEay2OA6FCANMPBgTMWKMQGDGYE/3eGdQ3fgu6+K/sipI0atEbjKaAw87ZOV
+ 0yYJauq6zCTP9MjbYDY76nbC7d6JZk9xtBA8aZ3cn
+X-Gm-Gg: AfdE7cmSnVaeaJiCLovpxiN0m2NwdLDRx+aIRu4xW1y5AyyGBFYKHmoli7YoHrztcfz
+ Bgt7pk5m/Gi5PbqIqyJBFK1S0JSNhMerxL0eap+pRFaxTTQ0UvwN2ejJvQrlULdm1OyII76jLAN
+ PkjTq83dfcfGBSgbyd9SjJ4tjQ+GLRbJIK2CfW06A/Rj8LL1sXu8QEKrtPfyHvXYjYmgdNpLt9S
+ cdDAXmWSM9xj47tlbh4dKuMlo+0e1ehvMSeCA4mgBx/Ror0RO9BOULkKDthMChIdV30mgKB+bT6
+ 8AiUNxMP
+X-Received: by 2002:a17:906:7304:b0:c0f:bebb:8fc4 with SMTP id
+ a640c23a62f3a-c1205d8f440mr88658966b.4.1782374628443; Thu, 25 Jun 2026
+ 01:03:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260619144554.5963-1-aristo.chen@canonical.com>
-In-Reply-To: <20260619144554.5963-1-aristo.chen@canonical.com>
+References: <20260621143938.2863-1-aristo.chen@canonical.com>
+ <20260621143938.2863-3-aristo.chen@canonical.com>
+In-Reply-To: <20260621143938.2863-3-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 09:03:31 +0100
-X-Gm-Features: AVVi8Cdz4SKFDeNdSvjwxRwW3DfU8iCIe_K2lsaCRPd23rUTf6k4NQ-EQ6JJP14
-Message-ID: <CAFLszTjNDjTGw_GjsF6CntUa1x8S7oFxnfvd3JscQo_H-QFmMg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] bootm: move OS index bound check into the legacy
- path
+Date: Thu, 25 Jun 2026 09:03:36 +0100
+X-Gm-Features: AVVi8CfwhlhGFcqGLGAKEvBAU2VC1qY71FNVcggMXbX5mVXEnquT-K_MAl3hpPc
+Message-ID: <CAFLszTgvwfZ3fE2QmTBda3iS4rW6Dc8daPujDw+fG5uSBGOSTA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] vbe: bound FIT external-data offset and size
+ before blk_read
 To: aristo.chen@canonical.com
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Ludwig Nussel <ludwig.nussel@siemens.com>, Daniel Golle <daniel@makrotopia.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,31 +110,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-19T14:45:51, Aristo Chen <aristo.chen@canonical.com> wrote:
-> bootm: move OS index bound check into the legacy path
+On 2026-06-21T14:39:32, Aristo Chen <aristo.chen@canonical.com> wrote:
+> vbe: bound FIT external-data offset and size before blk_read
 >
-> Commit 103b1e7ce8cc ("bootm: bound-check OS index in
-> bootm_os_get_boot_func()") added a range check to the shared accessor so
-> an out-of-range OS id can no longer drive an out-of-bounds read of
-> boot_os[]. That accessor is reached by every image format, but only a
-> legacy uImage can deliver an unchecked value. bootm_find_os() takes the
-> raw 8-bit ih_os byte straight from image_get_os() for legacy images,
-> whereas the FIT path reaches the accessor only after fit_image_load()
-> has rejected any image whose os is not one of the supported types, and
-> the Android path hardcodes IH_OS_LINUX. The check can therefore never
-> fail for FIT, where it only adds confusion and code.
+> vbe_read_fit() loads a firmware-phase FIT from the trusted firmware area
+> and then issues a blk_read() to pull in the image, and optionally an
+> FDT, referenced by the FIT image node. The source offset on the device
+> and the read length both come from the FIT's data-position or data-offset
+> property and its data-size property, which live on mutable boot media
+> and can be controlled by an attacker with prior write access to the
+> firmware area.
 >
-> Move the test to the legacy branch of bootm_find_os(), rejecting an
-> out-of-range OS where the untrusted byte enters. This keeps the FIT path
-> clear and lets the check be compiled out when CONFIG_LEGACY_IMAGE_FORMAT
-> is disabled. A valid OS id that has no handler is still reported by the
-> existing NULL return path in bootm_run_states().
+> Without a range check the resulting blk_read() can read past the
+> firmware area on the device and, on the non-SPL path, write an
+> attacker-chosen number of blocks past the malloc(aligned_size) FIT
+> buffer into adjacent memory. Only the SPL branch routes through
+> spl_load_simple_fit(), which hashes the data. The external-data block
+> reached from TPL or VPL, and from the bootflow path via
+> abrec_read_bootflow_fw() and vbe_simple_read_bootflow_fw(), runs before
+> any signature or hash check on the loaded phase.
 >
-> Suggested-by: Simon Glass <sjg@chromium.org>
+> Confine the FIT-supplied [load_addr, load_addr + len) window to
+> [addr, addr + area_size] before computing block numbers and lengths,
+> and apply the same constraint to fdt_load_addr and fdt_size. The checks
+> are written in subtraction-only form against the trusted area_size so
+> the comparison itself cannot overflow.
+>
 > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 >
-> boot/bootm.c    | 4 ++++
->  boot/bootm_os.c | 2 --
->  2 files changed, 4 insertions(+), 2 deletions(-)
+> boot/vbe_common.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
