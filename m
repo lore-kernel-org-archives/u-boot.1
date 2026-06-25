@@ -4,100 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC47ECDE000
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A62BCDE007
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:59:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E2AA84996;
+	by phobos.denx.de (Postfix) with ESMTP id A2CF2849D1;
 	Thu, 25 Jun 2026 14:59:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bEweLSRd";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="iSi6HQit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A74284894; Thu, 25 Jun 2026 11:25:25 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B1034847C8; Thu, 25 Jun 2026 13:17:45 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC04D84704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 11:25:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B82A8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 13:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jjm2473@gmail.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-8ce0f17a69cso16153446d6.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 02:25:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782379521; cv=none;
- d=google.com; s=arc-20260327;
- b=k90dZ/OOt3VIXPdk9N5CSFfPCMrGNtxbwnn/coGLyKKHYjgC3ImoVXzN7RI2OzHnBf
- mZT6bHn3vE/InNOCZ+Ia2+oc4FXci9YJzcZXGO0CYLmgGGdCeod05tQgs66pkEFa1cU1
- WZI9WLeY59aVrf6+WeSPTSiWFUf8iajBdDWN/zcuycq+6tJZE3qGcN0kF7zXNlt11OW0
- DyjQnLUktsnU9UbMmtOyMLkP7G6/UA/gwmM5l0i1ZMpX8bd84eWn7os5LCIIO/M8Axpg
- jCbUxoQHmrZtXPT6Vkcmf+ClJCjt9q86bEatxaGqiufLaxmPH5FHH7JVngAN4gGdNGmA
- W/OA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=026/qN0ps0DLDR91lFZJx3PLPNmWZyCF0D3+YSlcKUc=;
- fh=x73HISMD02Ddlm4UL9P4qFt+bKnpXc6gYNbl/Hv7Q+Q=;
- b=E+hprruoWyCPfbTITBGCFkGWN62J1LM467DjFumTzZjMRNkRWhF+j5uD6tGtbfgu2m
- z7pwdbeyiKVDZtk+r8WbwETqerHeRH6uhj6QjIwVHbkxlYbX8K3EV6tds5fGANTfKe4w
- A5x9DmjhgYcGcIti6VAWrWP9yg/ZRLaIwL9QpidHMq0GITBwdB28PEpVOnZneweNngpi
- GI8KL+lwyQt/VDjshPEaXgOolub3bJHWrH71QOmA5t9EOQg6xq3B5htXUzGf5jHfdVm2
- FOPxvDRjWPs0yJaSi+czTcmsLlB/+MzsO+kzyETHuRjMQsXRmB9qc3hch+Ob9gMdu87T
- ajhg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782379521; x=1782984321; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=026/qN0ps0DLDR91lFZJx3PLPNmWZyCF0D3+YSlcKUc=;
- b=bEweLSRdXE9xMDut9RuYtMpTcMafihS+Gza5sarhB3pzWsswTVUH+Qe8hl7rdvt/7t
- 7KykoG3hJbI3BeUaBnD2ZoxZ7UEwZXYW75hlP7t7m5pRo6qtJI4PMW9uFPZ6SoZBY9JS
- 4SNDXRPRnzdd26mehOPKTxwTBMTsPWakcStesYxf9CNEcPWb3NGJIEJYOXvafG5o+UC5
- NcsScGZd6LxBIuE7p0eVSgTEsWGKiI68KfQtAa9veeISLDXEOlGaI/l4V3L8BUc++cWJ
- 5QRopjXFANkkSNHE6Ir5Xzrl6y8jbKic1eKpXBZfH1pZyQWBrIuCMN/rbijiAQq1+D8a
- TqxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782379521; x=1782984321;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=026/qN0ps0DLDR91lFZJx3PLPNmWZyCF0D3+YSlcKUc=;
- b=Kp+k3WN7QXNz4VypHp+Sz8NLEIuTZs3FjhUXnIchVmFMZAEAFM1MAL9yivUft32scm
- fFxs7EV31M5WcrqhjdgUDBO0lTHh4M5hc28XTQdn18xn+bDm4b96fophz/cct1btvOGl
- W2AZfO2nUwme6uAAFHYEwL5XyOZ3isRjLwfmDdeQR6ficZ/DOYDFURcmCa355nWvEtP0
- N6b0IajPUbt+30YHAPuE6J95DuV2Qd/JKgJxxCIy5TRBbq0v/tH2NyKXzX4RZUM5hnL+
- eiFFU5bMb3KEFGsaswfjMv7Mxh65/lXvl1NnJRmK31153Np7V/5EkVlMm+NaPJqFlwSO
- 6ljA==
-X-Gm-Message-State: AOJu0YxNj0unvHvvLqqoyIXaDRikOV02n3+Q/qO2r1bdPT4kEfyJZP6u
- OyzwriyGMqYh6C1iyGCiLt+gED8fnAhTebSOd0JimH93EOEUHOuLOTBLBEUOlnRMo4qmZaLg+DO
- 0sU6vKlHpUCy1UccaxIZlgFi+Pomlf+542xVhBUd5c3pa
-X-Gm-Gg: AfdE7clPCFe/0iADWShzYBVxvoUacFQuEyD0lGmh3hXitzhra8gbeVaOH0iaqSul1pX
- VH/2wXNqoRKu3xhSEwH2Ew2G+rv+qoq9ppSBV8Rskhyaou3vdx8hwtjll0LeAT2EQym5+F40Ohb
- RZWaUKdiOJVX8Ec0RGmX1q6b4+JSdLd5s4O9SVRfID/6HYXEp351NW+5NAPlLTs83dNAqiE42o5
- SmQ29CKT5xd7pKf+tlQvrbY6dSVAmMpxh0TBADpLrm0sUbday1v6f7fPdM/jG5GTiX1Z+Q=
-X-Received: by 2002:a05:6214:4506:b0:8b2:13cd:ad38 with SMTP id
- 6a1803df08f44-8e6d6781076mr30802506d6.11.1782379521370; Thu, 25 Jun 2026
- 02:25:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=herve.codina@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 8508AC5CD50;
+ Thu, 25 Jun 2026 11:17:51 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 20E695FF03;
+ Thu, 25 Jun 2026 11:17:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D2D71106F081B; 
+ Thu, 25 Jun 2026 13:17:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1782386261; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=SBn6mDXRFPsELbRSp9+xtHhiQx2WAS/VZZsh0hsBVUk=;
+ b=iSi6HQitDU/btmXA+4jfNxdtsH8kXzVGayIq/FD0bw7SYmtYs4xMjD5Z17ldcWU3bDOTti
+ TWV6mDcOUYdZKvwGlf2KiMxfLsw5xIg4GQp9X3AuHP5FUdHdtoULT3kEj9jLEvJr2NGe9k
+ ehNruFkoPLPN0VPfzLKE7ZVaXKzGSXZqHPkNmDpU1hMbo5v6ykhfWGhIEoOfrg7ktIUD2/
+ RCI1IglKoZNpJx9ZT3fkOvwseSrFPYTbRV4QTJP4JXzo/Q9AiG3MOgtd8bZjns48QeWo4U
+ sN+qmnScQIbsKpYozCG+E3OGm+U2jEXgYM7bujhNx6o7TwjMFD3h5y0pDe9X9g==
+Date: Thu, 25 Jun 2026 13:17:30 +0200
+From: Herve Codina <herve.codina@bootlin.com>
+To: Romain Gantois <romain.gantois@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Kever Yang <kever.yang@rock-chips.com>, Peter
+ Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, George
+ Chan <gchan9527@gmail.com>, Balaji Selvanathan
+ <balaji.selvanathan@oss.qualcomm.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Peng Fan
+ <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Kuan-Wei Chiu
+ <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, Stefan
+ Roese <stefan.roese@mailbox.org>, Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, David Lechner
+ <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>
+Subject: Re: [PATCH 1/2] linux/list.h: Add list_is_first()
+Message-ID: <20260625131730.6464dc03@bootlin.com>
+In-Reply-To: <20260625-rzn1-usbf-v1-1-0e1a38f7b82c@bootlin.com>
+References: <20260625-rzn1-usbf-v1-0-0e1a38f7b82c@bootlin.com>
+ <20260625-rzn1-usbf-v1-1-0e1a38f7b82c@bootlin.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20260512091532.97256-1-jjm2473@gmail.com>
- <20260512091532.97256-2-jjm2473@gmail.com>
- <b2b25f9e-336e-419f-b2a0-e5942df246af@cherry.de>
- <CAP_9mL409bOVu1kg-y07ZxNpfdb--g8A1T2hUbRUetXfeMF81w@mail.gmail.com>
- <be4cde3b-4565-48b8-9e12-40a874c89bc1@cherry.de>
-In-Reply-To: <be4cde3b-4565-48b8-9e12-40a874c89bc1@cherry.de>
-From: Liangbin Lian <jjm2473@gmail.com>
-Date: Thu, 25 Jun 2026 17:25:09 +0800
-X-Gm-Features: AVVi8CeNlUSG6mt6aazQav2VP6lOux6PrC1zk1q7Z9b26IYgaclGjyo0Op76cUk
-Message-ID: <CAP_9mL7kfqbwEeokHdt7j53uioAEp4QCsxvYFxBsPogdn22phQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] rockchip: rk3568: Add support for LinkEase EasePi R1
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Thu, 25 Jun 2026 14:58:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,22 +89,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Romain,
 
-> So I guess it's "fine" (although you won't be able to do a proper secure
-> boot with this enabled). So you can keep it in.
+On Thu, 25 Jun 2026 11:05:25 +0200
+Romain Gantois <romain.gantois@bootlin.com> wrote:
 
-I discovered that OpenWRT is still using the legacy U-Boot image file
-format script [1], too.
-And the `source` command for executing this type script also requires
- `CONFIG_LEGACY_IMAGE_FORMAT=y` [2].
+> Include the list_is_first() kernel function, which will be used by the
+> Renesas USBF driver.
+> 
+> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
+> ---
+>  include/linux/list.h | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 
-Therefore, CONFIG_LEGACY_IMAGE_FORMAT=y is still required in many
-open-source projects.
-(Actually, Armbian also used the legacy U-Boot image file format script)
+Reviewed-by: Herve Codina <herve.codina@bootlin.com>
 
-[1] https://github.com/openwrt/openwrt/blob/7edb29d241dbd4acd0a716a3735dedd5ac3b36e2/target/linux/rockchip/image/Makefile#L24
-[2] https://github.com/u-boot/u-boot/blob/master/doc/usage/cmd/source.rst
-
-Cheers,
-Liangbin
+Best regards,
+Hervé
