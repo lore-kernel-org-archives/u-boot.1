@@ -4,130 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F937CDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 16:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9992CDE000
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:02:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8159C84704;
-	Thu, 25 Jun 2026 18:59:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A1C184704;
+	Thu, 25 Jun 2026 19:02:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="oXIfhR5y";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ml/uurBU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A5F384894; Thu, 25 Jun 2026 18:59:28 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id 6E0F184942; Thu, 25 Jun 2026 19:02:15 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7E9A8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 18:59:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC7E08460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:02:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F0UmYRV5QLsQL0+PW2UyaYOqll37GB8u1FOWnahO1orpeU8tS/VL1+bsdXbRKy8njuCDDrFDzRZShZ9pjsI4G7WD3PZ4+7f+HYtv9EA5iLS0BdEAcmuY5n1y6eiPAkQkh6/T60Y4/UN45kpSoukDV13v2AmI/X69P+T4jrYWmtTFKgbx33OneFW80isc1srEQHHPGabLkTIH6u8hgkUFtd074APORTxsNCuhhr8ZGe1CETMH/EZFEI0YdvJF5AuVjtPzNPPLgy8xCbHWOEl2h0hpevw4kKzGFJ+3cUlydczm3sSxckgUq1EzOBB6xLkBhTMAi8uZyistPKzg7MkHDg==
+ b=MFFphJtBk7b5GCAdAssf8/gnPErqpe/AbPKFXdrUbbsofA8LUUupK1ELUoXYwNryFmQTdk6MTXwEYnvv29OgCdzr8ndG+IsRf5cuhaYbhMYZrx5jfCEWM+pXbgkGNp1z/hf7FEKNcr3IsjoBIoL6IvZRE0z9/OCTR7ST/WdQE7bwz3LpsOXC+MGzL1+XpgyQ6RXjVPw8+wAyZibaCVLr3866zTlhYORlRJ3m7bR9Ov7joma1H+qLYI4In2tDHizuf3l52hyRttlseE/3/sSrca/1E9AL9Xt3IprC4V+ISQa9E4HWzuK9ReZpq1C8QEioiZes20f9TmZMpGy0V0gPrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P9zv7V0zyG7luXdl0x1INEvzUJMuLu9UqKw5kYiQekI=;
- b=TWawVD8p4nq7q86ile8Db8hN/6NDKt94LTD0tvLmp4Y6BzmmhVudASgidSCO6bYa/PmNjaEonAJ9iQ0MWR309YaIKXnvXbWIBvPPRTx1k4RXrqA0txmGMjN0SOeInbr60J+V4EZyAyvmlLVz73WcZS2rsfHTEQwdjcYhz1FZKLB+pkGOLSB63AVEb99yD+q87pkyBGZabhcMI4t87zkb94kTYAROH7SzknRetPQNEgGJ0GDPiPTykGOEJD9cD+ZPR/rIu/5ralkbzBXJgVMxFRQFyefMJNCZ8JbTzjNRSrCdoDCNegW5B1lvlUsbkkJu1MB+PVCO4MMUAGZLWckcRw==
+ bh=aPDQMwrsS4nyWYqvKDJPH6V7v9GPIwNrkhJ+yRg9sts=;
+ b=US5ID2hml4/j2PeKLDPYRu3vJ6ENwgov0RfExOmSYU6z2JsQ1HBf9KNEwQJ1QvVIqRjZ4kIew9ICmj1QQF4gg8o7KOYESSVh177kh+X+OfatT6C2Zy/LWiVJvLOABXa3ALxQU7jf6i420Ws/bDII38R7Td1eNi+pdh+e9T7C8j7oNPxRtrZ3maZ/4nCjpPU7w/WJAFtYDXdhy4imaGb3OXRPbPBBBq/Kj+mZv/7Kt1BIeCbN96kXXM9sltGkih6DuPBoQdMIB62NzxLk3wxBuCMcnX3Xl/CHaclWwSTmKGJIMuWmT+QSyxKt4aJ1V0YvzaX1C6ThFZSYwEXrc1L/EQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P9zv7V0zyG7luXdl0x1INEvzUJMuLu9UqKw5kYiQekI=;
- b=oXIfhR5ywknLQI0jf9ZKObtwJWGD+XfQnFDZBMLCOk3IJVObnmxo+9wrRPWeVvSNSgRuA7/Lu7oZ8wOBDZh3QWlIRbkD+pj9Xsq8k9TvKaiIqAR1fA5ojSjkvX+PIptHgUxTo+pQiy/2PIzXFfk3WE8EvDGu9OjF+2mFlc/xVxfgw8riVj5WBL67t3yqkrizC7q74yjPJArAy3enub/MZEbjsdPdJZQXTlMZmmgg8S/0f7aa/VZM7m2hNEyM5H/C45S6DlYVr6PTbTeQW2leZrUhZC0HE2CPJ4OblENENeHccwOKfbNyBhHenlJR/zRQqU+XnGCOBhIbiXj/nhZWTQ==
+ bh=aPDQMwrsS4nyWYqvKDJPH6V7v9GPIwNrkhJ+yRg9sts=;
+ b=ml/uurBU+KUPq8ls5AKYect7IiQH5XvaMBH52CuX4TYJooORX8LRVJRnIJJAoXDT5/B5oq7dBd04XwN5iVSyC88swLPmZarWGSnv5tTLXS6Y7VvR9tIDs5yMEtuROBfcJl+Hv0TivrCS9g+n9ACuqxniohHVIzB3/bOJHQeW9x2ABJL9bobE96DoJAMH1l7tbqxZdNdujre/jK3CJZQgoZObOYGdus1n0W81WL4usBU8uWHdB8nfKTuRuvWCjVr6NE+yNouAYOojM9iyboA/u0wUbdGxKJ85SQkBABTufalGe8t+LQgJ/Q1bXKfFi7SldbDytzpxgJ8AbABNSOShAg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by CY3PR03MB8128.namprd03.prod.outlook.com (2603:10b6:930:ff::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Thu, 25 Jun
- 2026 16:59:21 +0000
+ by DM6PR03MB4922.namprd03.prod.outlook.com (2603:10b6:5:1e1::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Thu, 25 Jun
+ 2026 17:02:08 +0000
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a%6]) with mapi id 15.21.0139.018; Thu, 25 Jun 2026
- 16:59:20 +0000
+ 17:02:07 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+Cc: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, Peng Fan <peng.fan@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Anshul Dalal <anshuld@ti.com>,
+ Andrew Davis <afd@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Chen Huei Lok <chen.huei.lok@altera.com>,
  Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
-Subject: [PATCH] arm: dts: socfpga: Add Agilex5 E-Series 013B SoCDK variant
-Date: Fri, 26 Jun 2026 00:59:09 +0800
-Message-Id: <20260625165909.32177-1-dinesh.maniyam@altera.com>
+Subject: [PATCH] mtd: rawnand: denali: add NAND_DENALI_SKIP_BBTSCAN_SPL Kconfig
+Date: Fri, 26 Jun 2026 01:01:53 +0800
+Message-Id: <20260625170153.2593-1-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0368.namprd03.prod.outlook.com
- (2603:10b6:a03:3a1::13) To PH7PR03MB6942.namprd03.prod.outlook.com
+X-ClientProxiedBy: SJ0PR05CA0196.namprd05.prod.outlook.com
+ (2603:10b6:a03:330::21) To PH7PR03MB6942.namprd03.prod.outlook.com
  (2603:10b6:510:157::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|CY3PR03MB8128:EE_
-X-MS-Office365-Filtering-Correlation-Id: e0601ae7-2196-485e-130f-08ded2db1993
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|DM6PR03MB4922:EE_
+X-MS-Office365-Filtering-Correlation-Id: c091918c-4bb6-4b6f-7405-08ded2db7d24
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|366016|18002099003|55112099003|6133799003|56012099006|11063799006|13003099007;
-X-Microsoft-Antispam-Message-Info: TKUADaWdDgg0NIGNeXhTUEFWN0TS39UU6KXa8Ev6eYm2dA3GQNQffaJy01wJ/hm92CH8omuMBfjTKxe6XrRFCTEO/BznFi2gYYif0pTxVs6HQMIGjAezVn09gbt9GlDmBcm6zYAaKZpx9tP6p6NziYJg6lz3ObNpBLP/G9BV3zNmeGQ0VHu+m8YMME3zxw71S7b0So8DX00C+tPx0/FMPOrewiwLAme9w7MyiZHpu3vM7USCqNyst4Q1Nrh9+Grz2ucuEp7zwVH3kHoqQP0dN0L28tgMKRB4RphCREu3IPkCQilvtGOh4bD4ekAulP+XVN4YgzPvG+E1BzZa+EcDmqRg1RIEmUIrHY7H4G2iEKz6NGY/CsxlURdLGs9Q7LyQMWlAFMkYWs+0BkQYhog4Gf5lc20PhQ8h9wgGMOM5gu8CS4a6FRCD3nl5T5zR9OnenlvmwS8kxnfVjxzK8+iQz44FT9LMHz2nxqHB/u66SAxQAFaEP1YCHj67/VPIVUp1Y21YOprS2fRo+3c4BpsrNzW2ChVDGbhim64ibCbNUMbjMXBo5MCkgSje75uLYTjkwrZwQ4ytIFRouVvKkJqsXoSIiPbRR378HvOIGQBgsQ8=
+ ARA:13230040|1800799024|366016|7416014|376014|23010399003|56012099006|11063799006|5023799004|6133799003|18002099003|55112099003;
+X-Microsoft-Antispam-Message-Info: WW5aleEnWiBKHUU/PIUzax7KVowib/u/YeVVv/kyq9USfOEugUu0G1gNW/rxaWgtQxfDk1OSJ8MUaZeYDooiTBQzKzIRzVLUNg3amZIRGr1+WEvjaMUy6NJIkjipzERj5ruQZbj+Gb6pEyWtOZ1P9h73kMdQzvwgD5hCEpYX6cwUgrQu6029PYTuguxG5UnAoxKoVPw6JrAhIXHbIwM+aReFZZejTFkVdOZ3qydB1zuRpFOmvj5NfCZoYtt95WfUzoEr/jUhyLmdiMWd80AR66srNj8F+dsdrFA9M+QWjtJP8v7cbN/aWpe8t7w0iP607eBPGPCWylI+t7NKBzxBLkTAQUqD3K9hrDEvMFpuNt0weED4KKsD1Ln86mKdSRIjd8FsMcv0mlXCqMlBYZRO33vu+H+WmS5nb6e4acz8VC9SrkCNHlDzbb/dwC3xm1wKBYTgiz+9dSpIKimSyLrOW9kvCwkkDc2AmMcRIlkJQSS/hdEEJ0vy+RMJM5LolStM0YubOc7gEFqXzn0x+NTDZ9QOaPwJuppDYQxuBApKGDBhM1F6bzLiPsJ4ewLX2u50m4OdZo1H9ucW4DxoY/DfdN9ARC1Dxbtf6FiYbpxH8GEEhwF50sycCOi1H+jS45y/wGx7NtNjQzPfTZtM5kP1mCrECukJeSTSPvV0lrM3g+o=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(55112099003)(6133799003)(56012099006)(11063799006)(13003099007);
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(23010399003)(56012099006)(11063799006)(5023799004)(6133799003)(18002099003)(55112099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+4SvmxzeyH/tcqSdXzTD1uOpoP8E9ovdRbrESWaG2laSWZgR9uGNgbK6PK7w?=
- =?us-ascii?Q?k/4/iFnjxdS+56UNH4w1b42OI1d2u3uhBe+qXk1gSMDTR4LSl8ZrAMD26Yl2?=
- =?us-ascii?Q?Sd2i5uOCrXSwP+Z+Ib76QcM+2fDW8CGcViB1V2tTjnuxRMtBRYLJSmXxJTtp?=
- =?us-ascii?Q?+2SobqirA38SexQ5ylg/BawYnm/xdMl8rLzzpYg6nhHs43r9XCL7k0ysSm63?=
- =?us-ascii?Q?hVCmCfngu8JtIc2Rj/8hkbDUHusi2UBnxiTRRf8LmxhsDT8tqezm5k+sPw1F?=
- =?us-ascii?Q?m61BDvr62NH5dHc8NW+nUj/ix7azpiEa46R0OHFYgPHT61yeHgttgcLiOzMZ?=
- =?us-ascii?Q?a8FsYWfvG+hTTLmopcJL+NgB/heBiVXUG0yJlx3bRjkarv14AI5AXXHbrjdr?=
- =?us-ascii?Q?tklfWTCtPlzLSrvFWwICDUmGlxc3VL+/o+uJzR4GrMZ/1g5y0oNck4wTKL4N?=
- =?us-ascii?Q?uwExyeZylWxcwsHk4RrlNab/uVWFYMPl37kG7LwyI4YOLVaIHTUNFRBUIdtk?=
- =?us-ascii?Q?1SLGlh64Njn5G/bK8E9r2cxWW6+jnnj87SEGq55JmM3ofC9TixkKyAumxLjS?=
- =?us-ascii?Q?z+q7tBULtv+mRkJrGz0DycB6Op4TyP0XpZGHbv1mPe1Hq/ZN5QtWrMXhlb2x?=
- =?us-ascii?Q?JzbHMMzzmpUc8UYNclWxk176f1lufJr0f5a+9HI27dxDnttlTDU8v2D4/whO?=
- =?us-ascii?Q?fjEnPQyBSD4IYjMPq9Jav7Aa6bCrCdao15PMLOPanVDd7S35OGDtxSxkogNo?=
- =?us-ascii?Q?ZpEhpN2qqTRo0uvj0+B/LzSt/XffK6iD4n8rE5C/UEYl3w/I5rkPMS5VM8Ag?=
- =?us-ascii?Q?t8w3mdoKC58MBdGHrHqOI8g1JFgBCjniEh1ZlF9IqX5w7qphue84wE+eARB5?=
- =?us-ascii?Q?P3vEkC/gppT8aoUDmByQOoHb12O3nR7NCCwRXqFU8Nq55108UyBIxQtrU/yr?=
- =?us-ascii?Q?o98Q+mLLzrvT1SuYKaAXjcJ+WvFc4optVgU/tbDOSf5I4Dvk23JwfclPRmQF?=
- =?us-ascii?Q?0s4Ho1Yu00+lO0kkeqj1qVt3D2x9hE/Z5u6PO+9wrZECJ/UrUEuXbVY0DYZw?=
- =?us-ascii?Q?p473gZT/4CFy/p87zPOoh9QWAs90WSbPt9gr+udWMxyz3nTdt284vQHyTrmw?=
- =?us-ascii?Q?6vSnIbDwRJwWgLMRHbY0FdKiKCBYNoJyIjFXOvMUQn5D9h9EYI05lG7Ewjrs?=
- =?us-ascii?Q?47PMNcoymWmBR+Ib9Wf8/p0QtXgmlQe80Qp9ozbD+EYPpN2+ntEcuPorDCz7?=
- =?us-ascii?Q?U76fET0BiM63cLYJm1achgtqq5OVg+hsEHxyRZ00Y6H40g2NkPezd9FxjV2c?=
- =?us-ascii?Q?b9jPRFa7oXaDmh/asxkY+d1VVAKNS23NSJWYTFvdKtlog2raL8iDUafQ+DE4?=
- =?us-ascii?Q?jSKpLZmtHsgURzOLDXtgPNYGUNUHpDUWcV3+S7IjlMlgK1ZPna1pbZH5BaDh?=
- =?us-ascii?Q?hMIIlJAwBvt0Y/0+eF7pxWpG2bb8yO+bOLJaCPMdu4Lumw/Y96+OdbUEnCbt?=
- =?us-ascii?Q?sOSJEYW6jBrYOq4li7x+n5YbY0F3qFEaWiyg4qa10cgtPhec8LqFXqvqnSb0?=
- =?us-ascii?Q?MuCJ+SPvzDjZ7Jq013dD7fwxqFFpJFOkt/tMNxw5sR6LN4PjYNiao8Jl1HWg?=
- =?us-ascii?Q?9iTlBkCx+zCRt8H/sppNx4kExdWLP+NcdyoNIBHzeCF9lJdVtdqFgMxZiEWv?=
- =?us-ascii?Q?D0a6OogwU7b77APmPIaFmFuwRcRuzVyUDYuHhmgybTx9Au2GoFZEbqOunH4A?=
- =?us-ascii?Q?XmIE13qv0855kOzf0PxKFg2IDWC+rJU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?12uhwSFeloD0TKDnODS9Xu+hEm7uII8qxqA9lYTmXYHzRAjEWlqtPomuhl59?=
+ =?us-ascii?Q?2yduKEVPXs9Q5d44A6ti3JlX8zKTaDiEoYYe0A2HsP7LBvfIwe+DV8FNorXy?=
+ =?us-ascii?Q?iJKDSmkHepCVBhC4A1MfzvvDO6EAe1XfQ21Te3YHVbxp+6Jk1tz04RS/xnUI?=
+ =?us-ascii?Q?Nz4U4MUA5eDHUTmOsz+nmNEmzFpbnw120v3SBHUCxkNqZNoJuIZ/oiL20YNW?=
+ =?us-ascii?Q?MncGvgWSEdu0ZU/K7LMp9xRxho280QX0soaQ7rPO51V+fpym+VRDfJw+lWc9?=
+ =?us-ascii?Q?SphI5iffxUbDd7qukAJ83OH7zHWeVex4IZphP7mwRmSW2Lu55vB5T+fopml7?=
+ =?us-ascii?Q?CmauP35LQrTJ3YGpyvbnH0jkL+celew7DcwNbJcxLoByQCeDoXxZM65d2XTp?=
+ =?us-ascii?Q?6Ze4+pTWec6uD6MAtLYTklLagaMmI6yVYoEu2idph+ikWguZ8qyfGM9Rg4u9?=
+ =?us-ascii?Q?jVz0/zmMDN6u2Zid0FJ66Xjy3AK1Cs0NXKzLt7RT5AnEbCuzHKps3SwuW0ZT?=
+ =?us-ascii?Q?wphd2thkN3+Lh2t6rn5UeUfe8E89da/CKJ9Oakw7yHjxWp1Q//9iXsJn/LR0?=
+ =?us-ascii?Q?EvkjANZaIP8/Co/BUKh5eBoLIaiGWqHfPyJxM7+5gzSHyHyD3Fs5v/gsfp1I?=
+ =?us-ascii?Q?QD9c0BDRhpASHODW1osOFPkYIGrOy2xdyv+AOMglRAbMze0HLdznzJef8TPu?=
+ =?us-ascii?Q?18pWrzc+oNGSGI5qO/CtwYWazNfY277nkao24ue9M4gqgKW0u0jc4Exs0/Dr?=
+ =?us-ascii?Q?bwSpqZVmllsqICrYy/TLMmaJs5KBCnMnEEl5P4eWEOmd4IQVpD24qeDnKRrD?=
+ =?us-ascii?Q?0dmgfTSVOdKfPhMXJ+PaNyVOqcCvPTnX09wEGkzBWyUhb8aN6MkIbt7x6pUh?=
+ =?us-ascii?Q?zIGzMWEEQtEOq0GZ8KKdM1wl/DanfRDOCMq93iASXXYrUSZxTVga72UyOdmk?=
+ =?us-ascii?Q?AXmSdYDk2ryGUoPFqX9Fvd4C7wTNx5CntfilRafJ93CqXorQCiQjXF3Fsn93?=
+ =?us-ascii?Q?SWJHUYcJqjXwgo7aHfkcVd0KmBH9KAMqFpQyUrDdUkuNbypN7oC+dYVDDeSq?=
+ =?us-ascii?Q?WifNfTvzEyBw+z7MCzR4DIe/6sToCIy1azvPLjkElwbcbt7VWgDKqpD0ewfE?=
+ =?us-ascii?Q?BBEUDgc8FJiMmN+wyLJb6mJ/S9H2JlpnHv9DH9JiuOkPSI4gad+QFqKHXnqT?=
+ =?us-ascii?Q?fPpDe/egCU6r2wKwIfFJnS8JTy3zFfYUvS8RdDZi3V1edzc0VsigJZyjGFu0?=
+ =?us-ascii?Q?uo8UVc0JMHQf2GV8GrV0F97nNfh6ix1eKtWrAJCqBzG8ebOt7VSfWgiTEl02?=
+ =?us-ascii?Q?zHPRtCYhf4GF/4mCXbil2nq7QtK6l5KY7TffTODw1XfAi+lSFGO9Yqxfz5td?=
+ =?us-ascii?Q?A6GrpftPhB0mi91glE1d9OJ+cLtuQsUi132uZTrrqI29i3POOBeUapA6lDMI?=
+ =?us-ascii?Q?REMO3dBXO5DXV1cuzAuUlSd0PZC6wVEi9AkIW4wVQK7uIl0KWTk5GQkyasSF?=
+ =?us-ascii?Q?ukpieXRLXxCkzWRngkLMlai8bfU12bPUxODy4j09sf/xPMK3O2zwIJdpKdqc?=
+ =?us-ascii?Q?qSGMV3o5K1wP3ttn7QVZ6d9eLgCCPbKZtyxRNP13HVdU5NUh8waZiFmTJ1Vl?=
+ =?us-ascii?Q?JVDAvctWyQIe9a1+W+FxGlRDIF9I8kOI/9WolyJBO2d5SDNv4zUwWUOe5vGi?=
+ =?us-ascii?Q?qTIUg4C5ezBKuk1vQhQSKvKYw+jpi+b0xrE8PHa3uFX5Fwm1hnHJ4d4TWN/H?=
+ =?us-ascii?Q?nwx4z30HsWHK9IACi8INWfcmhjjiNy4=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0601ae7-2196-485e-130f-08ded2db1993
+X-MS-Exchange-CrossTenant-Network-Message-Id: c091918c-4bb6-4b6f-7405-08ded2db7d24
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 16:59:20.6874 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 17:02:07.5821 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aifMMh0FGuma193u/dvFeFICANy+cWPdPmy84B6KSeh6Bola9SiIxm9Tyk9rHFnNcezoIKiTHRHsoW9GdHLCChxd6VwOioerFyEErj04lYE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR03MB8128
+X-MS-Exchange-CrossTenant-UserPrincipalName: IBxjRBXmIyYjthkJK69Ygf6kgeQaKnBYgrXqpf5sRznnXBzGnd81OrAD7WQ77qKsr517bhkXqA9ptfksTqDsnRxqYkrFkbsBphN98ucjBIU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4922
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,503 +154,81 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Add device tree, U-Boot dtsi and a defconfig for the Agilex5 E-Series
-013B SoCDK variant. The board uses a 64 MB QSPI flash with a different
-layout than the base SoCDK, so it needs its own DT and defconfig
-rather than just a DT overlay on the existing target.
+The full Linux/MTD bad-block-table (BBT) scanner lives in
+drivers/mtd/nand/raw/nand_bbt.c, which is *not* linked into the
+U-Boot SPL build. In SPL, nand_base.c still calls the chip->scan_bbt
+hook from nand_block_checkbad(), so each driver must either provide
+its own scan_bbt stub or set NAND_SKIP_BBTSCAN so the hook is never
+invoked. The Denali driver currently does neither.
 
-New files:
-- arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-- arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-- configs/socfpga_agilex5_013b_defconfig
+For SPL the cheapest and most appropriate option is to simply skip
+the BBT scan: SPL only loads a single FIT image from a known offset,
+nand_block_checkbad() falls through to chip->block_bad() (an on-demand
+single-page OOB read), and we save both code size and boot time.
 
-Build system:
-- Add socfpga_agilex5_socdk_013b.dtb to the SOCFPGA dtb list
-
-The new -u-boot.dtsi guards its &binman { /delete-node/ kernel; }
-fixup with CONFIG_FIT, mirroring the surrounding #if defined(CONFIG_FIT)
-block in socfpga_soc64_fit-u-boot.dtsi. Without this guard the dtb
-build breaks for non-FIT SoCFPGA defconfigs (socfpga_stratix10,
-socfpga_n5x, socfpga_arria5_secu1) which also compile every
-arch/arm/dts/socfpga_*.dtb via dtb-$(CONFIG_ARCH_SOCFPGA).
+Add NAND_DENALI_SKIP_BBTSCAN_SPL (depends on NAND_DENALI && SPL) and
+honour it in denali_init() under CONFIG_XPL_BUILD by ORing
+NAND_SKIP_BBTSCAN into chip->options. Have ARCH_SOCFPGA imply the new
+symbol so all Altera/Intel SoCFPGA boards using the Denali controller
+get the safe SPL default automatically without per-defconfig churn;
+other Denali users (e.g. UniPhier) keep their existing behaviour.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- arch/arm/dts/Makefile                         |   3 +-
- .../socfpga_agilex5_socdk_013b-u-boot.dtsi    | 216 ++++++++++++++++++
- arch/arm/dts/socfpga_agilex5_socdk_013b.dts   | 198 ++++++++++++++++
- board/intel/agilex5-socdk/MAINTAINERS         |   3 +
- configs/socfpga_agilex5_013b_defconfig        |   7 +
- 5 files changed, 426 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
- create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_013b.dts
- create mode 100644 configs/socfpga_agilex5_013b_defconfig
+ arch/arm/Kconfig              |  1 +
+ drivers/mtd/nand/raw/Kconfig  | 11 +++++++++++
+ drivers/mtd/nand/raw/denali.c |  4 ++++
+ 3 files changed, 16 insertions(+)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 2b65cd9105c..483ab671895 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -427,7 +427,8 @@ dtb-$(CONFIG_TARGET_THUNDERX_88XX) += thunderx-88xx.dtb
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index f624675eadf..db8d4a121b0 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1195,6 +1195,7 @@ config ARCH_SOCFPGA
+ 	imply DM_SPI_FLASH
+ 	imply FAT_WRITE
+ 	imply MTD
++	imply NAND_DENALI_SKIP_BBTSCAN_SPL
+ 	imply SPL
+ 	imply SPL_DM
+ 	imply SPL_DM_SPI
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 69a254f6650..261b9a51dd7 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -223,6 +223,17 @@ config NAND_DENALI_DT
+ 	  Enable the driver for NAND flash on platforms using a Denali NAND
+ 	  controller as a DT device.
  
- dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
- 	socfpga_agilex5_socdk.dtb			\
--	socfpga_agilex5_socdk_emmc.dtb		\
-+	socfpga_agilex5_socdk_013b.dtb			\
-+	socfpga_agilex5_socdk_emmc.dtb			\
- 	socfpga_arria5_secu1.dtb			\
- 	socfpga_arria5_socdk.dtb			\
- 	socfpga_arria10_chameleonv3_270_2.dtb		\
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-new file mode 100644
-index 00000000000..75d51ef06e3
---- /dev/null
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-@@ -0,0 +1,216 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * U-Boot additions for Agilex5 SocDK 013B
-+ *
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
++config NAND_DENALI_SKIP_BBTSCAN_SPL
++	bool "Skip the bad-block-table scan in SPL with the Denali NAND driver"
++	depends on NAND_DENALI && SPL
++	help
++	  Skip the full bad-block-table scan during SPL boot. With this
++	  option, SPL keeps chip->bbt NULL and nand_block_checkbad()
++	  falls through to chip->block_bad() - an on-demand single-block
++	  OOB read - which is sufficient when SPL only loads a single
++	  FIT image at a known offset and the full BBT scan is too slow
++	  or otherwise problematic in the limited SPL environment.
 +
-+#include "socfpga_agilex5-u-boot.dtsi"
+ config NAND_FSL_ELBC
+ 	bool "Support Freescale Enhanced Local Bus Controller FCM NAND driver"
+ 	select TPL_SYS_NAND_SELF_INIT if TPL_NAND_SUPPORT
+diff --git a/drivers/mtd/nand/raw/denali.c b/drivers/mtd/nand/raw/denali.c
+index 39cb641e0b3..74e19922645 100644
+--- a/drivers/mtd/nand/raw/denali.c
++++ b/drivers/mtd/nand/raw/denali.c
+@@ -1291,6 +1291,10 @@ int denali_init(struct denali_nand_info *denali)
+ 	/* no subpage writes on denali */
+ 	chip->options |= NAND_NO_SUBPAGE_WRITE;
+ 
++	if (IS_ENABLED(CONFIG_XPL_BUILD) &&
++	    IS_ENABLED(CONFIG_NAND_DENALI_SKIP_BBTSCAN_SPL))
++		chip->options |= NAND_SKIP_BBTSCAN;
 +
-+/{
-+	aliases {
-+		spi0 = &qspi;
-+		freeze_br0 = &freeze_controller;
-+	};
-+
-+	soc {
-+		freeze_controller: freeze_controller@0x20000450 {
-+			compatible = "altr,freeze-bridge-controller";
-+			reg = <0x20000450 0x00000010>;
-+			status = "disabled";
-+		};
-+	};
-+
-+	/*
-+	 * Both Memory base address and size default info is retrieved from HW setting.
-+	 * Reconfiguration / Overwrite these info can be done with examples below.
-+	 *
-+	 * When LPDDR ECC is enabled, the last 1/8 of the memory region must
-+	 * be reserved for the Inline ECC buffer.
-+	 *
-+	 * Example for memory size with 2GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 8GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x1 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 32GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x7 0x80000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 512GB:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x7 0x80000000>,
-+	 *	      <0x88 0x00000000 0x78 0x00000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 2GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x70000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 8GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x1 0x40000000>;
-+	 * };
-+	 */
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+		u-boot,spl-boot-order = &mmc,&flash0,"/memory";
-+	};
-+};
-+
-+&flash0 {
-+	bootph-all;
-+	/delete-property/ cdns,read-delay;
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&i2c1 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&i2c3 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&i3c0 {
-+	bootph-all;
-+};
-+
-+&i3c1 {
-+	bootph-all;
-+};
-+
-+&usbphy0 {
-+	status = "okay";
-+};
-+
-+&gpio1 {
-+	portb: gpio-controller@0 {
-+		bootph-all;
-+	};
-+};
-+
-+&sd_emmc_power {
-+	bootph-all;
-+};
-+
-+&sd_io_1v8_reg {
-+	gpios = <&portb 3 GPIO_ACTIVE_HIGH>;
-+	bootph-all;
-+};
-+
-+&mmc {
-+	status = "okay";
-+
-+	no-mmc;
-+	no-1-8-v;
-+	disable-wp;
-+	cap-sd-highspeed;
-+	vmmc-supply = <&sd_emmc_power>;
-+	vqmmc-supply = <&sd_io_1v8_reg>;
-+	max-frequency = <200000000>;
-+	sdhci-caps = <0x00000000 0x0000c800>;
-+	sdhci-caps-mask = <0x00002007 0x0000ff00>;
-+
-+	/* SD card default speed (DS) and UHS-I SDR12 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-sd-ds = <0x00780000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-sd-ds = <0x81a40040>;
-+	cdns,phy-dll-slave-ctrl-sd-ds = <0x00a000fe>;
-+	cdns,phy-dq-timing-delay-sd-ds = <0x28000001>;
-+
-+	/* SD card high speed and UHS-I SDR25 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-sd-hs = <0x780001>;
-+	cdns,phy-gate-lpbk-ctrl-delay-sd-hs = <0x81a40040>;
-+	cdns,phy-dq-timing-delay-sd-hs = <0x10000001>;
-+	cdns,ctrl-hrs16-slave-ctrl-sd-hs = <0x101>;
-+	cdns,ctrl-hrs07-timing-delay-sd-hs = <0xA0001>;
-+
-+	/* SD card UHS-I SDR50 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-sdr = <0x780004>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-sdr = <0x80a40040>;
-+	cdns,phy-dll-slave-ctrl-emmc-sdr = <0x4000004>;
-+	cdns,phy-dq-timing-delay-emmc-sdr = <0x38000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-sdr = <0xf1c1800c>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-sdr = <0x20000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-sdr = <0x101>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-sdr = <0x90005>;
-+
-+	bootph-all;
-+};
-+
-+&qspi {
-+	status = "okay";
-+};
-+
-+&timer0 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&timer1 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&timer2 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&timer3 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&spi0 {
-+	status = "okay";
-+};
-+
-+&spi1 {
-+	status = "okay";
-+};
-+
-+&watchdog0 {
-+	status = "okay";
-+	bootph-all;
-+};
-+
-+&watchdog1 {
-+	status = "okay";
-+};
-+
-+&watchdog2 {
-+	status = "okay";
-+};
-+
-+&watchdog3 {
-+	status = "okay";
-+};
-+
-+&watchdog4 {
-+	status = "okay";
-+};
-+
-+#if defined(CONFIG_FIT) && !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
-+&binman {
-+	/delete-node/ kernel;
-+};
-+#endif
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_013b.dts b/arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-new file mode 100644
-index 00000000000..9605fa4cb00
---- /dev/null
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-@@ -0,0 +1,198 @@
-+// SPDX-License-Identifier:     GPL-2.0
-+/*
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
-+
-+#include "socfpga_agilex5.dtsi"
-+
-+/ {
-+	model = "SoCFPGA Agilex5 013B SoCDK";
-+
-+	aliases {
-+		serial0 = &uart0;
-+		ethernet0 = &gmac0;
-+		ethernet1 = &gmac1;
-+		ethernet2 = &gmac2;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led0 {
-+			label = "hps_led0";
-+			gpios = <&porta 1 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		led1 {
-+			label = "hps_led1";
-+			gpios = <&porta 12 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		/* We expect the bootloader to fill in the reg */
-+		reg = <0 0 0 0>;
-+	};
-+};
-+
-+&gpio0 {
-+	status = "okay";
-+};
-+
-+&gpio1 {
-+	status = "okay";
-+};
-+
-+&gmac2 {
-+	status = "okay";
-+	/* No PCB-induced RGMII delays; clock and data skew are added on the
-+	 * PHY side via the rx*-skew-ps / tx*-skew-ps properties below.
-+	 */
-+	phy-mode = "rgmii";
-+	phy-handle = <&emac2_phy0>;
-+	max-frame-size = <9000>;
-+	mdio0 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "snps,dwmac-mdio";
-+		emac2_phy0: ethernet-phy@0 {
-+			reg = <0>;
-+			rxc-skew-ps = <0>;
-+			rxdv-skew-ps = <0>;
-+			rxd0-skew-ps = <0>;
-+			rxd1-skew-ps = <0>;
-+			rxd2-skew-ps = <0>;
-+			rxd3-skew-ps = <0>;
-+			txc-skew-ps = <0>;
-+			txen-skew-ps = <60>;
-+			txd0-skew-ps = <60>;
-+			txd1-skew-ps = <60>;
-+			txd2-skew-ps = <60>;
-+			txd3-skew-ps = <60>;
-+		};
-+	};
-+};
-+
-+&i3c0 {
-+	status = "okay";
-+};
-+
-+&i3c1 {
-+	status = "okay";
-+};
-+
-+&mmc {
-+	status = "okay";
-+	bus-width = <4>;
-+	no-1-8-v;
-+	cap-sd-highspeed;
-+	cap-mmc-highspeed;
-+	disable-wp;
-+	sd-uhs-sdr50;
-+	cdns,phy-use-ext-lpbk-dqs = <1>;
-+	cdns,phy-use-lpbk-dqs = <1>;
-+	cdns,phy-use-phony-dqs = <1>;
-+	cdns,phy-use-phony-dqs-cmd = <1>;
-+	cdns,phy-io-mask-always-on = <0>;
-+	cdns,phy-io-mask-end = <5>;
-+	cdns,phy-io-mask-start = <0>;
-+	cdns,phy-data-select-oe-end = <1>;
-+	cdns,phy-sync-method = <1>;
-+	cdns,phy-sw-half-cycle-shift = <0>;
-+	cdns,phy-rd-del-sel = <52>;
-+	cdns,phy-underrun-suppress = <1>;
-+	cdns,phy-gate-cfg-always-on = <1>;
-+	cdns,phy-param-dll-bypass-mode = <1>;
-+	cdns,phy-param-phase-detect-sel = <2>;
-+	cdns,phy-param-dll-start-point = <254>;
-+	cdns,phy-read-dqs-cmd-delay = <0>;
-+	cdns,phy-clk-wrdqs-delay = <0>;
-+	cdns,phy-clk-wr-delay = <0>;
-+	cdns,phy-read-dqs-delay = <0>;
-+	cdns,phy-phony-dqs-timing = <0>;
-+	cdns,hrs09-rddata-en = <1>;
-+	cdns,hrs09-rdcmd-en = <1>;
-+	cdns,hrs09-extended-wr-mode = <1>;
-+	cdns,hrs09-extended-rd-mode = <1>;
-+	cdns,hrs10-hcsdclkadj = <3>;
-+	cdns,hrs16-wrdata1-sdclk-dly = <0>;
-+	cdns,hrs16-wrdata0-sdclk-dly = <0>;
-+	cdns,hrs16-wrcmd1-sdclk-dly = <0>;
-+	cdns,hrs16-wrcmd0-sdclk-dly = <0>;
-+	cdns,hrs16-wrdata1-dly = <0>;
-+	cdns,hrs16-wrdata0-dly = <0>;
-+	cdns,hrs16-wrcmd1-dly = <0>;
-+	cdns,hrs16-wrcmd0-dly = <0>;
-+	cdns,hrs07-rw-compensate = <10>;
-+	cdns,hrs07-idelay-val = <0>;
-+};
-+
-+&osc1 {
-+	clock-frequency = <25000000>;
-+};
-+
-+&qspi {
-+	status = "okay";
-+	cdns,fifo-depth = <0x400>;
-+	flash0: flash@0 {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <100000000>;
-+		m25p,fast-read;
-+		cdns,read-delay = <2>;
-+		cdns,tshsl-ns = <50>;
-+		cdns,tsd2d-ns = <50>;
-+		cdns,tchsh-ns = <4>;
-+		cdns,tslch-ns = <4>;
-+		spi-tx-bus-width=<4>;
-+		spi-rx-bus-width=<4>;
-+
-+		partitions {
-+			compatible = "fixed-partitions";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			rsu-handle = <&qspi_boot>;
-+
-+			qspi_boot: partition@0 {
-+				label = "u-boot";
-+				reg = <0x0 0x00c00000>;
-+			};
-+
-+			root: partition@c00000 {
-+				label = "root";
-+				reg = <0x00c00000 0x03400000>;
-+			};
-+		};
-+	};
-+};
-+
-+&smmu {
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
-+
-+&usb0 {
-+	status = "okay";
-+	disable-over-current;
-+};
-+
-+&usb31 {
-+	status = "okay";
-+	dr_mode = "host";
-+	maximum-speed = "high-speed";
-+};
-+
-+&watchdog0 {
-+	status = "okay";
-+};
-diff --git a/board/intel/agilex5-socdk/MAINTAINERS b/board/intel/agilex5-socdk/MAINTAINERS
-index 30d8815d202..d78e2fa1b67 100644
---- a/board/intel/agilex5-socdk/MAINTAINERS
-+++ b/board/intel/agilex5-socdk/MAINTAINERS
-@@ -7,4 +7,7 @@ S:	Maintained
- F:	board/intel/agilex5-socdk/
- F:	include/configs/socfpga_agilex5_socdk.h
- F:	configs/socfpga_agilex5_defconfig
-+F:	configs/socfpga_agilex5_013b_defconfig
- F:	configs/socfpga_agilex5_nand2_defconfig
-+F:	arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-+F:	arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-diff --git a/configs/socfpga_agilex5_013b_defconfig b/configs/socfpga_agilex5_013b_defconfig
-new file mode 100644
-index 00000000000..4aeaf6374e3
---- /dev/null
-+++ b/configs/socfpga_agilex5_013b_defconfig
-@@ -0,0 +1,7 @@
-+#include <configs/socfpga_agilex5_defconfig>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_013b"
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x0a00000
-+# CONFIG_PHY_MARVELL is not set
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
+ 	ret = denali_ecc_setup(mtd, chip, denali);
+ 	if (ret) {
+ 		dev_err(denali->dev, "Failed to setup ECC settings.\n");
 -- 
 2.43.7
 
