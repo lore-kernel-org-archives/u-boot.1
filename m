@@ -4,94 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B96ABCDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F3BCDE000
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D36E84975;
+	by phobos.denx.de (Postfix) with ESMTP id E3A9A849D8;
 	Thu, 25 Jun 2026 19:48:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="D8+30Trc";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="NFUiZqVt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7178B847C8; Thu, 25 Jun 2026 15:01:14 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 99E968495B; Thu, 25 Jun 2026 15:14:49 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2229F84996
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 15:01:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4E28C117E50; Thu, 25 Jun 2026 15:00:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1782392465;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=iBN3p3oV6p8B8VxWuZOChaUrZ/MS+9QNW4z95J+FmU4=;
- b=D8+30TrcF7yhGtGVpYixFs0vlz3IuRNwD0PrrlcMCoR/UwkP0OGG9nYHdLf/Wy3QzsFHOk
- cJKTL143NH8tfUbly+H08OaKCzI1R7kzwI1nnhMr0RpVZKAV/gIshugCmkH0qEmeSEuoAI
- FMpAzXHEAlDmOi+pjIMp1qwOamu+Z0BXRUq/ca8q1r0P6C4MKtwbHFy50amIkj+qIU59/r
- CA+XLmjUvTe6Ej4svNM+W4zQUMMS7BeZgqrM875B4TxDB54gtBGl/kedijCzAGJlmY3BYa
- wYxPKduExn6Iv0Ourf4ob85ezibSWgoqXVtaOSxf/tSxFN5Y6Qs2XutTjK8xAg==
-Message-ID: <55cf3846-702e-f0d0-5534-ef76acc8dd29@nabladev.com>
-Date: Thu, 25 Jun 2026 15:00:18 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 7C21384949
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 15:14:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=fairphone.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-c0868ca8738so486377066b.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 06:14:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fairphone.com; s=fair; t=1782393287; x=1782998087; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MHZ1EfG86XdYoyaDotnVy+nk+jR7f31zY7jlba4mvi4=;
+ b=NFUiZqVti6+9xg3+76xAVP2OURhXrvmhh3ijZUOekRMQzxVCbHFkqb8whoNLEDs6Cm
+ LFe/uOkTRtVsrK89xDtUOWkQ9nrQvKSasIEMy2DN6De0XfOz35cG5MP0tvtUA2VC4YBp
+ wWzyYxuK7EY26bSuRjjo5Qlw/G8/9eb4gqdQnmQ8w7k2FC5i6PV3klPgc297ojuWX/gs
+ 2U1ZfgfoTRTmMoDpmAw7D9sheHnl/O5wm7uPZHN9+1G0IrItiaF81d02MH67yNtJY/gG
+ tbKbCer6J/mr27f4TvwmFk7edEnN6yC36SR73yfvZYVBIRIhYGmOEu6pnCOWazVi4eVR
+ cMnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782393287; x=1782998087;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MHZ1EfG86XdYoyaDotnVy+nk+jR7f31zY7jlba4mvi4=;
+ b=Fo7w1uCeoLRznIpDFO+nYp+FUHd8WB1C7+vRXeFvnTt+/RuYUnrlJZo2sIUFK8xRw/
+ LiYIliFDO1/6g6+LTOmiWRFk2EQLvxeRI5exwO6aDXkStL6yM+sWT17MKOf8nAzfhkuu
+ +tTuqjyqT04GAeajdtxrqX9FWP1Lk4Hij48i+mBMo6gnN4F6E4juznSCKirrg7ZQ7sBI
+ 2gGBIkczI8tEgeW/DE971fekeJmSXJvn1qYHJY2TlXb0BkzQzvxDHW2sg5b3FK6dJNf0
+ oLiFnmWJ1+m9wzKLsZrB90X14SGOdchwQj5nT/OHEx2k1aFQZ+4omMTIExrjd0lVntOR
+ pFmw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqRoKDsrW+QWH3xHnEBglUP0yRSWQuLaAl0ysnDQXmAWfyqmq1d4HtmI925aWlqVKesJW+oxYU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBrHg35/w/TSbN3INvJ8QxMhtAiW6SjGmI4TWCwyfI/Dkub1n4
+ hEZ9mfHHbBKTlZqyTzp8/0QBsaQJSVwfqgADOGRyvHBqujxL/bw9L8PjstSK+xLapSE=
+X-Gm-Gg: AfdE7ckI4897depDbOVY000ywCemvLfxztJQ4anDPkFx7+2f0/pE9+OrBS6HfauuMeD
+ 0DhZ7wAHBlSvhs0TX6A7LWJ5iviSDrgmgrmYc7nxzp+i66zeGjHvanytiarklmEaEfVYRJQqcDQ
+ xCb89LROj4FSgDkVaxCfYqFbYtL+viWQ61FmQnTdYt/JFlntDFjyEJtWlSNaTJwvn8THqpKCwir
+ +bJHd4pLoUGkOY5cjZCLkKiqa+Jsrtawp9+Picbci32tR5TeuaxrPFw16KCmms2DGmlvAqJO24K
+ eyb33IPfALyjpkjJ80a+gf6EssRQEzCcnAgEYLAFsoARjlOOp5bN9Q9I59ZSgxajFwW+qa0vcb2
+ axp23RMyfKZZ6J/RWr7J77vUqWJ2g65noNGVlKwcQdr2vXbC1KDUiliCey7r+Xu3pre73Oe+AHI
+ gCyW6UWUNB0eZt1Gdigs88J3porQ==
+X-Received: by 2002:a17:906:e10c:20b0:c12:b31:65bf with SMTP id
+ a640c23a62f3a-c120b3190e8mr98891666b.42.1782393286891; 
+ Thu, 25 Jun 2026 06:14:46 -0700 (PDT)
+Received: from [172.16.168.121] ([195.76.196.164])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c11fbe05fa8sm180365066b.38.2026.06.25.06.14.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jun 2026 06:14:46 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH 0/2] UFS clock fixes for Milos
+Date: Thu, 25 Jun 2026 15:14:37 +0200
+Message-Id: <20260625-milos-ufs-fix-v1-0-b0923dabc35f@fairphone.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] treewide: Kconfig: use bool instead of tristate
-Content-Language: en-US
-To: Anshul Dalal <anshuld@ti.com>, uboot-stm32@st-md-mailman.stormreply.com,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM3QpAQBCG4VvRHJtaG8KtyAFrlpG/dpCSe7c4f
+ L763guEHJNAEVzg6GDhZfaIwgBMX88dIbfeoJVOVaoTnHhcBHcraPlEskmtmsjEeZyB/6yO/Pz
+ 1yuq37M1AZnsjcN8Pfe7Nr3EAAAA=
+X-Change-ID: 20260625-milos-ufs-fix-ef5a0b1c4948
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Dinesh <dinesh.maniyam@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Marek Vasut <marex@denx.de>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Nick Hu <nick.hu@sifive.com>,
- Jimmy Ho <jimmy.ho@sifive.com>, Michal Simek <michal.simek@amd.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Jonathan Stroud <jonathan.stroud@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>, Daniel Palmer
- <daniel@thingy.jp>, Angelo Dureghello <angelo@kernel-space.org>,
- Peter Robinson <pbrobinson@gmail.com>, "Lucien.Jheng"
- <lucienzx159@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Beiyan Yun <root@infi.wang>, Weijie Gao <weijie.gao@mediatek.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Romain Gantois <romain.gantois@bootlin.com>, Alice Guo <alice.guo@nxp.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Boon Khai Ng <boon.khai.ng@altera.com>, Shawn Lin
- <shawn.lin@rock-chips.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Alexey Charkov <alchark@gmail.com>, Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Yegor Yefremov <yegorslists@googlemail.com>
-References: <20260625-tristate_fix-v1-1-95e16153d752@ti.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260625-tristate_fix-v1-1-95e16153d752@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782393284; l=573;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=VFD75GYa8Slwr1wCyakda9yCyK25p4nUrHRc848bags=;
+ b=w16BGetw5QATT0QaqlXmPnG0N/Bi+ldUJ0GjgxTpHAPXG+c4eJTxMWXLYtz8EkGKc330n27wt
+ S9LU/+36eQNAon5XumQh+gZdf87GRZfuSmKmBA2jvMH7zex1LJvX9UG
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Thu, 25 Jun 2026 19:48:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,50 +113,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Anshul,
+With recent changes in u-boot, more clock support in the Milos driver is
+needed. Add it, so that UFS works again.
 
-On 25.06.26 05:17, Anshul Dalal wrote:
-> U-Boot does not support modules, so having tristate options is useless.
-> 
-> Therefore this patch does a blind replace of all tristate options to
-> bool tree-wide.
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> CI: https://github.com/u-boot/u-boot/pull/998
-> ---
->   board/st/common/Kconfig      | 2 +-
->   cmd/Kconfig                  | 4 ++--
->   drivers/cache/Kconfig        | 2 +-
->   drivers/clk/Kconfig          | 2 +-
->   drivers/firmware/Kconfig     | 2 +-
->   drivers/i2c/Kconfig          | 6 +++---
->   drivers/i2c/muxes/Kconfig    | 6 +++---
->   drivers/i3c/Kconfig          | 2 +-
->   drivers/i3c/master/Kconfig   | 2 +-
->   drivers/memory/Kconfig       | 2 +-
->   drivers/misc/Kconfig         | 2 +-
->   drivers/mmc/Kconfig          | 4 ++--
->   drivers/mtd/nand/Kconfig     | 2 +-
->   drivers/net/phy/Kconfig      | 4 ++--
->   drivers/spi/Kconfig          | 2 +-
->   drivers/ufs/Kconfig          | 2 +-
->   drivers/usb/cdns3/Kconfig    | 6 +++---
->   drivers/usb/musb-new/Kconfig | 2 +-
->   drivers/usb/tcpm/Kconfig     | 4 ++--
->   19 files changed, 29 insertions(+), 29 deletions(-)
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+---
+Luca Weiss (2):
+      clk/qcom: milos: Add remaining UFS clocks
+      clk/qcom: milos: Add TCSRCC clocks
 
-Thanks!
+ drivers/clk/qcom/clock-milos.c | 73 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
+---
+base-commit: 2a571a94d18287ad4bd6a69b91bd90c3817f245f
+change-id: 20260625-milos-ufs-fix-ef5a0b1c4948
 
-for the i2c parts:
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
-
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
