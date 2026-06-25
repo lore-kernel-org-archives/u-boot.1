@@ -4,99 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB6CCDE000
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:25:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A14CCCDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03E478495B;
-	Thu, 25 Jun 2026 19:24:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 3298D847C8;
+	Thu, 25 Jun 2026 19:25:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="BYlCkExK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mMNtpRNs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 895CB8495B; Thu, 25 Jun 2026 19:24:56 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id B966B84894; Thu, 25 Jun 2026 19:25:40 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD71A8496E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:24:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id 088FD846F4
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:25:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-4629d80fa08so2349638f8f.3
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:24:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-697de335c18so48729a12.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:25:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782408337; cv=none;
+ d=google.com; s=arc-20260327;
+ b=B3kFfc0qIds4Elpa+Bbw9/xGStUaEUW3PMgVNp86tWJEwJc4nh4gerAhwyaC1f/W+e
+ o3TyQek53RA5PtgMMNmki+XS5oc3cw6E5X7PPuEOIWjQG/lEuD+Hq+GIaOmzESnpMAxo
+ GYzkHCGfur6K4dIxO8nEGL6RzCBUlQfG2ZPt37LYg8boa84Wt1TQk870Aj5nTZDTMKb8
+ Wr2n61Y+6TWbngFkBvhfmOGfyXHO26RjaH9laczc+9EFJK0Nwr8nIKwdXyUGmRWF88lf
+ vc0QtMfAl2+CXdFBq3zR+/f2vDQEHwjcia34GtUPrWJfYkPnpfFmv4Cdq6X1PJ3vxVR+
+ n7ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
+ fh=1IBpGH+Xd/YdfaKFMxo1vol56mWfSqB2hhB/lOynXBQ=;
+ b=Rq699dnJqTQVwP7mB0iR4c/EUI6lBhH2azXpFQmA9k4ZhQV4HZiTWnwg1W3N86dFWf
+ ZuT0GeME19bic30YrHHZgUS/a5LIK+PGp1v8jWRbISi8tnXn3s+40vbjOCvrYVlQFnej
+ PMScRyJPXUxC0OzmTv28gRdiQmdI6p8/X52b1uWmSgVJhQdaoXyk9Hpf2NpVondSAsdQ
+ +N55WMhiDJwxjJQsHNlCqdqkMGLIXSgghU1h+b+yhcNvEmalZdhN6x25te49NwZnLLNr
+ H5SsVL8F9sUTvJSOMkpX6jz2WMRonpz888zMSiOT/2eD0lJuJzPpK4cNGf8MmrBvIqQZ
+ p+9A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1782408293; x=1783013093; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HAy5E/RT9dtJBEcYwCOZkE4Y70iWOvGi1RgfWX7kUvw=;
- b=BYlCkExK4dxJyZivV4e9/OZtHhUfJst3+fvJUNqXSMjwQjd0/jjWicHAIs+lbC0A0N
- l1rihxufnqOdmZKi05j+Qr36m3vPj1pOshQF+oqTybn5v4WD9nf1eQsh5mieEDGNFEpO
- +KKS4zsaotwJbi6teref4lh8lm8C1niPJBCFHnjGFnuFjI3XbR2HA0r37GvFVHFF/x5O
- m2xi7VxE7Vpdtr0F5KkTnmUv9tpXhs4QlptbJkgkjK76zgbTgVYFoLUIwPB82x0k2+Mr
- GOvesdNMI12YS4nASXRguVLTEkmPRHa9biqQ/k6RuaH7CBZqBy9fJrc8OD4+2WBmh1ee
- 3s6g==
+ d=chromium.org; s=google; t=1782408337; x=1783013137; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
+ b=mMNtpRNsi06cyE2vBFqbMiqNvuqjSejfeErR0iHeq4nqz4oAEbTpMzaZhCdslVgjZW
+ lfHI58e0yHzSY8kqbNDoEMfPndk/aYi1nguvhNG/KUEOgqnTm4bKbboEFui5Jcfp6YYQ
+ gedA31gESQEjlXfdVW6B+5xPjVBm6+BukMrzs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782408293; x=1783013093;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=HAy5E/RT9dtJBEcYwCOZkE4Y70iWOvGi1RgfWX7kUvw=;
- b=Gh9hKrX2tBUMleFrVGbaRFvCR/mNoBIlmkY3pWC0OaWJq190K9u1Crqd3fWV3OtASp
- iYfUJPAfJ+JwEJVZbF/r9XXwZYLZ44myM62T7Gj4NlIfohyTAjLTrjdqIgrXmXtq7k+Z
- OY9xJ+3DiGyF+ohOyXKLIIEQXU47EsiYJz/goWfx8mdwcc7O1MWKDdblI6j+mEA2hMQo
- KUEN6LMtxA2zDUVh4G/VS2D0RCpwfzx3LNldvk++V2UkYk+Bps8aCtcYAuJsImMCjZpA
- dJgM+sP9c1nv+PkRZBO8Yh525qOiBzRo9GigbaJDx4SqzGTpLoGi1A+/kJEEeUkyR75I
- Nj3w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8f4WCDVBaB7UaPaUg/vTkUPMlybEfqDk13yYMkKme36bhj5cRq1wpgr0bJryr5q107nz/CSZ0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwsjK1j/T8E2e2gndo2q7zMfPGDqLAVsGCCBkVdNp0Sn04BiEF
- qS0L9N7kuswGA/iOGs4WvEtOGmKfx8+sLcL6As6KkKokQD89gtwd93odqKaRc1Nh2jo=
-X-Gm-Gg: AfdE7cnBycxxsAT5roqmyfwhipYlyhOdNA3rp84iqDw+JBPj/u4t9He+sIja3Sb45aS
- vHg0q3G6jdoHav4CIbCOmlUVJj/IGN4EDtglERApU5lvlP95jgzsUaDpY5ZZamUpJqaFekywEL/
- nqFvh0zDzNhxO3y1/hRtJhsKZMhfCXBWbZ9+43RbFp9LVq+F1q/hP2sBPNiUSMUeWxHyoZvo5sR
- SYQacMQbIu0jsDE12akwogwYrv9hDW+WHYIlzGIzCy7cRiKQw+/deM8AhF1M60mlqn8GuVcTiAU
- RQt55i4A+bQd/o1QYp2RSIB7uUGCac+ckKocAAL7A7RWp31M/oiy9jMB4t5t6gP/IO85uxVD+sn
- 1HD4bw2qWjznrDqA06d+7uz1s6Xa+cH9LxlOx4OidTSRI8GcGDEfy+JTbe+GiQ5imwLawhdqIw9
- rBoKuUIugcquo+RRGW541DCzVnz7oFNA==
-X-Received: by 2002:a05:600c:3e0d:b0:492:4723:166b with SMTP id
- 5b1f17b1804b1-49266873f80mr46441545e9.13.1782408293091; 
- Thu, 25 Jun 2026 10:24:53 -0700 (PDT)
-Received: from alchark-surface.localdomain ([5.194.92.128])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492697ba453sm2585755e9.0.2026.06.25.10.24.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 10:24:52 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 25 Jun 2026 21:24:22 +0400
-Subject: [PATCH 2/2] fs: btrfs: use fs_ls_generic() and drop custom
- implementation
+ d=1e100.net; s=20251104; t=1782408337; x=1783013137;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
+ b=dZiFN8ab7WQR/rnMgduzgjyhnePeKSszJ/ATgFFSIRjbEY+UknzMe3MVBUEAgUwhRz
+ +3q1/NDl6YgOXNWrrV4YoAegeDLZuwsmQ0lIyURqlqW2vfrUNCGf2nP5k9Q6oiVtFqqT
+ Yx7p7ioISnQLWVPZPyi96oQu3rGcDVEiVN1ACqnCph0JDJeN2+RgC9Xz10B/jl/ULSTT
+ LcEeOLePOQWOPTMD4Jfs3MXzf22Qa+Ug6iGZGNL99eTzm351gufNq0++RK365w4gTt7M
+ Yi1qIPEWoYrjwFmcpNWNTk3YzEYrBdixtUI/r00t1H9xw/J6wdfxKhNUyhYG9mLxxG8f
+ 7GZw==
+X-Gm-Message-State: AOJu0YxV62lileF0Okx5+nYzN7Wb/WH19AmauwlFybrNZZFBtmFBvovl
+ L7sncAe+HU8oULDLiQi/8oBCbCpd/8R3vEQgLukupc2+wPakiAOwbFJUJXaMNiZxlRpSAGZYP61
+ QBTuQj8olxP4IZCQrygHMzN6fMD0csZ8qFVmxWro+
+X-Gm-Gg: AfdE7cnOOV5OjswnwSdD1aEeujKQD5eGoq79+fJmdEVJlEX2pC8nYWU3fat+qkiV3Bw
+ b9em1gVMBWWvDTEMBcT0k17jJSLsu4ViXWW5pcDuGJiDjEUjA85MhO+fBExQxmic0zCrg8tpXm6
+ 3ArAIKjP1LThZL2ReK6G1Y80Zi9w6rcGiWpje9xAEB4DViCehFtiOYUx5B3M6Kg58g7yd8+rOch
+ GSnYAiFva69TdDU6hVmGZahaUXINnddqvEsgCYMpV5p+i+BsN5CMWoSnIL+raMwBIcwhnBulQ==
+X-Received: by 2002:a05:6402:1473:b0:698:f7d:4e01 with SMTP id
+ 4fb4d7f45d1cf-69810a457admr207433a12.6.1782408337427; Thu, 25 Jun 2026
+ 10:25:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260625-btrfs-readdir-v1-2-dd781a2b3965@flipper.net>
-References: <20260625-btrfs-readdir-v1-0-dd781a2b3965@flipper.net>
-In-Reply-To: <20260625-btrfs-readdir-v1-0-dd781a2b3965@flipper.net>
-To: Qu Wenruo <wqu@suse.com>, linux-btrfs@vger.kernel.org, 
- u-boot@lists.denx.de
-Cc: =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- =?utf-8?q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Yao Zi <me@ziyao.cc>, Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3452; i=alchark@flipper.net;
- h=from:subject:message-id; bh=HPc9KiFewGFxcjuXSS5JQGLOe88A69dyt5yVBlQUUUI=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTZpsRN3sA25dK7Yj6tBqa/MQVuLp/iXC/Xzj7HzDNVr
- 9A1L3Fqx0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
- aKRjrGPEwMUpAFPtsYGRoaOze4pEk9j02HVqstk1nn1z+6Q/iT6X5diSNH3lr7PStxgZbrgZbHo
- 0Ob5zdt+cOR0MYcYP25Z9ePiHX8BRtES8eeNhVgA=
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
+ <20260604-bls-v1-7-4ce6d1ee4711@flipper.net>
+ <CAFLszTikihqsUmOGdmb8Q9WypiEHb0nq-a7vXH5XrXNxRVeNjg@mail.gmail.com>
+ <CAKTNdwEkt+YMq-SG=PVTGzGztyeujVr=fEje74NnSbBbiswd7w@mail.gmail.com>
+ <CAFLszTg7DJW4b0JhuPgCQe2TdMEdUagdGqRu7UG_j__S=4MjMQ@mail.gmail.com>
+ <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
+In-Reply-To: <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Jun 2026 18:25:25 +0100
+X-Gm-Features: AVVi8Cf457ok4zpQRmBCXjWK35dK5RlDxc4SvUTwnBnNAGj_uDnVY_h2iLFBC00
+Message-ID: <CAFLszTghO2OM44ZvPg+L2aufKH9ztBz=cCx9sTjNU-eyeS_8AQ@mail.gmail.com>
+Subject: Re: [PATCH 7/7] boot: add a minimal bootmeth for the Boot Loader
+ Specification
+To: Alexey Charkov <alchark@flipper.net>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,118 +121,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that generic callbacks for opendir/readdir/closedir are implemented,
-the custom btrfs_ls() implementation is no longer needed, along with the
-btrfs_iter_dir() callback iterator.
+Hi Alexey,
 
-Use fs_ls_generic() instead.
+On Thu, 25 Jun 2026 at 17:57, Alexey Charkov <alchark@flipper.net> wrote:
+>
+> On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Alexey,
+> >
+> > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.net> wrot=
+e:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Alexey,
+> > > >
+> > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wrote:
+> > > > > boot: add a minimal bootmeth for the Boot Loader Specification
+> > > > >
+> > > > > Add a bootmeth that finds and boots Boot Loader Specification (BL=
+S)
+> > > > > type #1 entry files [1]. On each block-device partition it scans,=
+ the
+> > > > > bootmeth looks for files matching '<prefix>loader/entries/*.conf'
+> > > > > (where <prefix> comes from bootstd_get_prefixes(), typically '/' =
+and
+> > > > > '/boot/'), picks the highest-sorting filename, parses it, and exp=
+oses
+> > > > > it as a bootflow.
+> > > > >
+> > > > > Implementation reuses the existing pxelinux infrastructure.
+> > > > >
+> > > > > For now the entry chosen on a partition is purely the lexicograph=
+ic
+> > > > > maximum of *.conf filenames; sort-key / version field handling
+> > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIES_LEFT'
+> > > > > filename suffix) are left as TODOs. Likewise, only the top-sorted=
+ entry
+> > > > > is surfaced because the bootstd framework currently allows one bo=
+otflow
+> > > > > per (bootmeth, partition); exposing every discovered entry will r=
+equire
+> > > > > a framework extension.
+> > > > >
+> > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of scope h=
+ere;
+> > > > > [...]
+> > > > >
+> > > > > boot/Kconfig        |  17 +++
+> > > > >  boot/Makefile       |   1 +
+> > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++++++++++=
+++++++++++++++
+> > > > >  3 files changed, 351 insertions(+)
+> > > >
+> > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
+> > > > > +config BOOTMETH_BLS
+> > > > > +     bool "Bootdev support for Boot Loader Specification entries=
+"
+> > > > > +     select PXE_UTILS
+> > > > > +     default y
+> > > >
+> > > > Wherever the 'default y' discussion lands, this will be enabled on
+> > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth.c will
+> > > > fail since they check the exact list and count. Please can you run =
+the
+> > > > sandbox tests and update them as needed?
+> > > >
+> > > > Since you are adding a new bootmeth you also need a sandbox test th=
+at
+> > > > exercises it (see the extlinux tests in test/boot/bootflow.c, with =
+a
+> > > > fixture disk image) and a documentation page, e.g.
+> > > > doc/develop/bootstd/bls.rst with an entry in the index there.
+> > >
+> > > Will do, thanks!
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +static int bls_getfile(struct pxe_context *ctx, const char *file=
+_path,
+> > > > > +                    char *file_addr, enum bootflow_img_t type, u=
+long *sizep)
+> > > >
+> > > > This is a verbatim copy of extlinux_getfile() - please can you expo=
+rt
+> > > > that, or move it into a shared helper?
+> > >
+> > > Ack
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_EXTLINUX_=
+CFG);
+> > > >
+> > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since the buff=
+er
+> > > > is filled by a block-device read which may use DMA on some platform=
+s.
+> > > > An alignment of 1 risks cache-line corruption there, so please use
+> > > > ARCH_DMA_MINALIGN.
+> > >
+> > > Ack
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +     bflow->bootmeth_priv =3D label;
+> > > > > +     free(fpath);
+> > > >
+> > > > This leaks memory: bootflow_free() releases bootmeth_priv with a pl=
+ain
+> > > > free(), so the label's string members (name, menu, kernel, append,
+> > > > initrd, etc.) are never freed - for every bootflow discarded after =
+a
+> > > > scan, not just on error paths.
+> > > >
+> > > > Since get_string() copies tokens out of the buffer rather than
+> > > > modifying it in place, you could follow the extlinux approach: keep
+> > > > only bflow->buf across the scan (already populated by
+> > > > bootmeth_alloc_file() and freed by the framework), use a temporary
+> > > > label in bls_read_bootflow() just to extract the title, destroy it
+> > > > with label_destroy(), and re-parse the buffer in bls_boot(). Then
+> > > > bootmeth_priv is not needed at all. What do you think?
+> > >
+> > > Will address the leak, thanks for pointing it out!
+> > >
+> > > The bls_priv structure is needed for my follow-up extension which
+> > > allows multiple boot entries to be returned by each (bootdev,
+> > > bootmeth, partition) tuple, and I wanted to minimize churn between
+> > > those two. I haven't sent that follow-up for review yet, as I wanted
+> > > to confirm this simpler version is acceptable first.
+> >
+> > We should implement this using an generic index rather than something
+> > bls-specific...please see some commits at:
+> >
+> > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
+>
+> Oh, there's already BLS in your tree :-D
+>
+> Would you like to merge that instead? Your version looks much more
+> full-fledged. If you happen to have one rebased on master or next I'd
+> be happy to test!
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
- fs/btrfs/dir-item.c | 59 +++--------------------------------------------------
- fs/fs.c             |  2 +-
- include/btrfs.h     |  1 -
- 3 files changed, 4 insertions(+), 58 deletions(-)
+Unfortunately there is a lot of pxe refactoring, because I wanted to
+make it possible to fully parse an extlinux file (plus includes)
+without actually booting anything. I actually did look at it a few
+weeks back.
 
-diff --git a/fs/btrfs/dir-item.c b/fs/btrfs/dir-item.c
-index 8cf5be3790e7..e8aebc0c7366 100644
---- a/fs/btrfs/dir-item.c
-+++ b/fs/btrfs/dir-item.c
-@@ -114,65 +114,12 @@ struct btrfs_dir_item *btrfs_lookup_dir_item(struct btrfs_trans_handle *trans,
- 	return btrfs_match_dir_item_name(root, path, name, name_len);
- }
- 
--int btrfs_iter_dir(struct btrfs_root *root, u64 ino,
--		   btrfs_iter_dir_callback_t callback)
--{
--	struct btrfs_path path;
--	struct btrfs_key key;
--	int ret;
--
--	btrfs_init_path(&path);
--	key.objectid = ino;
--	key.type = BTRFS_DIR_INDEX_KEY;
--	key.offset = 0;
--
--	ret = btrfs_search_slot(NULL, root, &key, &path, 0, 0);
--	if (ret < 0)
--		return ret;
--	/* Should not happen */
--	if (ret == 0) {
--		ret = -EUCLEAN;
--		goto out;
--	}
--	if (path.slots[0] >= btrfs_header_nritems(path.nodes[0])) {
--		ret = btrfs_next_leaf(root, &path);
--		if (ret < 0)
--			goto out;
--		if (ret > 0) {
--			ret = 0;
--			goto out;
--		}
--	}
--	do {
--		struct btrfs_dir_item *di;
--
--		btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
--		if (key.objectid != ino || key.type != BTRFS_DIR_INDEX_KEY)
--			break;
--		di = btrfs_item_ptr(path.nodes[0], path.slots[0],
--				    struct btrfs_dir_item);
--		if (verify_dir_item(root, path.nodes[0], di)) {
--			ret = -EUCLEAN;
--			goto out;
--		}
--		ret = callback(root, path.nodes[0], di);
--		if (ret < 0)
--			goto out;
--	} while (!(ret = btrfs_next_item(root, &path)));
--
--	if (ret > 0)
--		ret = 0;
--out:
--	btrfs_release_path(&path);
--	return ret;
--}
--
- /*
-  * btrfs_next_dir_entry() - read one directory entry at or after a cursor
-  *
-- * Streaming counterpart to btrfs_iter_dir() for the fs-layer readdir, which
-- * is re-entered once per entry: returns the first real entry whose
-- * BTRFS_DIR_INDEX_KEY offset is >= *offset and advances *offset past it.
-+ * Iterator for the fs-layer readdir, which is re-entered once per entry:
-+ * returns the first real entry whose BTRFS_DIR_INDEX_KEY offset is
-+ * >= *offset and advances *offset past it.
-  *
-  * @root, @ino:		directory to read
-  * @offset:		in/out cursor; DIR_INDEX offset to resume from
-diff --git a/fs/fs.c b/fs/fs.c
-index 4694a88f776b..1ebda6f4ee2a 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -320,7 +320,7 @@ static struct fstype_info fstypes[] = {
- 		.null_dev_desc_ok = false,
- 		.probe = btrfs_probe,
- 		.close = btrfs_close,
--		.ls = btrfs_ls,
-+		.ls = fs_ls_generic,
- 		.exists = btrfs_exists,
- 		.size = btrfs_size,
- 		.read = btrfs_read,
-diff --git a/include/btrfs.h b/include/btrfs.h
-index 6fff45a497ee..3878b7817ea6 100644
---- a/include/btrfs.h
-+++ b/include/btrfs.h
-@@ -15,7 +15,6 @@ struct fs_dirent;
- 
- int btrfs_probe(struct blk_desc *fs_dev_desc,
- 		struct disk_partition *fs_partition);
--int btrfs_ls(const char *);
- int btrfs_exists(const char *);
- int btrfs_size(const char *, loff_t *);
- int btrfs_read(const char *, void *, loff_t, loff_t, loff_t *);
+Your approach is easier. I can easily add my patches on top of yours
+once they land.
 
--- 
-2.53.0
+>
+> In my attempt at multi-bootflows I just pass an extra 'seq' parameter
+> to each bootmeth. If all bootflows on a partition are exhausted, or if
+> the bootmeth in question doesn't support multiple bootflows per
+> partition (and seq > 0 is passed) they return -ENOENT, so that the
+> caller can proceed to the next (bootdev, bootmeth, partition) tuple.
+> Otherwise the caller repeats with the same tuple until it gets
+> -ENOENT. So no extra flag to indicate the multi-bootflow capability as
+> in your version.
 
+I'm not wedded to the flag - we can update other bootmeths to return
+-ENOENT if the seq is non-zero.
+
+>
+> For BLS, I store an alist caching all discovered entries per partition
+> inside the `priv` structure to avoid needlessly repeating directory
+> operations.
+
+So long as you handle clearing that out, that seems fine.
+
+>
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +     ret =3D pxe_setup_ctx(&ctx, &cmdtp, bls_getfile, &info, tru=
+e,
+> > > > > +                         NULL, false, false);
+> > > >
+> > > > Just to check, how does this behave when the entry is found under a
+> > > > non-empty prefix? bls_pick_entry() searches every bootstd prefix, b=
+ut
+> > > > the prefix the winning entry came from is not recorded. The spec sa=
+ys
+> > > > paths in an entry are relative to the root of $BOOT, so for an entr=
+y
+> > > > under '/boot/loader/entries/' the kernel must be fetched from
+> > > > '/boot/...', yet with allow_abs_path set and a NULL bootfile,
+> > > > get_relfile() uses the absolute path from the partition root and th=
+e
+> > > > lookup will miss. I suspect you need to remember the discovered pre=
+fix
+> > > > (bflow->subdir is a natural place, and is freed automatically) and
+> > > > prepend it when fetching files.
+> > >
+> > > Hmm, I am booting it with a non-empty prefix and it works as-is (I us=
+e
+> > > a single ext4 partition for the root fs, and my entries are under
+> > > /boot, i.e. there is this "boot/" prefix from the root of the
+> > > partition to get to "loader/entries").
+> > >
+> > > My loader entries use full absolute paths including the "/boot"
+> > > component, which is the way systemd's 90-loaderentry.install creates
+> > > them in this setup. Or did you mean that this behavior is not
+> > > spec-compliant? Not sure if prefixes are spec-compliant anyway, but
+> > > definitely useful as an extension.
+> >
+> > Ah OK. I was thinking of extlinux - but what happens if you don't use
+> > full absolute paths? There is the case where the boot partition is a
+> > separate filesystem and the OS files are there, so the running system
+> > sees the file as e.g. /boot/vmlinux (since the boot partition is
+> > mounted at /boot) but U-Boot sees it as /vmlinux (since it does not
+> > have a VFS).
+>
+> I will recheck with a separate partition and paths stemming from its
+> root (i.e. /vmlinuz or /[entry-key]/[entry-id]/linux), thank you!
+
+Good to have a test :-)
+
+Regards,
+Simon
