@@ -4,93 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41CE3CDB466
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D9E9CDB47F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C576F84949;
-	Thu, 25 Jun 2026 10:04:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12C9D8493F;
+	Thu, 25 Jun 2026 10:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QJ74uPSO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHy5MrVB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 944FA8494B; Thu, 25 Jun 2026 10:04:06 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 2B915847C8; Thu, 25 Jun 2026 10:04:18 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A64AF8493F
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:04:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BFD68493F
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:04:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-bec3ffb95dbso369003966b.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:04:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782374644; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c0d6c75c58cso57250166b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:04:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782374655; cv=none;
  d=google.com; s=arc-20260327;
- b=GBCmr3v9qy3ErLiJ7psuuerxOEJa7MCTBnww1sQ4uJd0SKge4BKD9PiZjWinB2fApe
- fBQVU2/V+nOLltjrvgU+tesFLDqQYmEqEmi7icqX+zQmlGKLR5goeRefOXUD1MO3YU6V
- Qsl73SqTue5nw61u5MRKXlzRVAifpzjXrae0JLVuCB5JiVLD3WhB7nqIaQHIFlIRj3Cn
- ybEMyMc7n+OTDVhkS2VKLl4jnUFuiA6Oa7fCA6Y/171QWU4MnsFh+Ur/+SKj8I2CGFA1
- KKoX/qX7N85maR+EkZyc26EWsSaTq9AKkBOPvnwcdk+KzbyPdkxjwZoDiuYb355NtCxS
- pjaw==
+ b=CVaXoapXaINlUwF1yL4JJ2LOM+wCMl5joga7Whfm1PjVjeBsQGezQsiMvlNV5Whe3I
+ k1jx/j4pU98x1d8tQ7+gY6Ab8ftuuwJuqU9Xbic9g2gUBoDH7F3f8yUf1aXO8Qc6WjKa
+ IedMTZir9tvWlfjLXDJ3uu44iRy/S+0prEv1/kHAYSYp7VjRbEu18qksIro38++/VtHT
+ O/8wpLeOWED1U2yjdnhlDVC7gPx1Yx6EbmnzS6K+JoFdie+P4i8cpR4qgKavA2z+TStP
+ 0n4Ct1bnX15mRnW1ts3epfavoJIFx5mb16rcVtr/QocdUGtaoIUQ9Qw6zP732vCeYy6Z
+ WMIQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FjTX7yCZQRYR9cKkuJgDUNz+c0rclUyecAxw0cz1ego=;
- fh=RMotW0d5XlV4ufFtnrZdzQ0yk4gZppNtVCUWCpNgShU=;
- b=offJCLR1iurhgg5uuuUyogrYq1N0yqPKXaAKs/WaK5H1jW3XRiFTFMmmX9/Vm6if3f
- /bK7UqPeqMhPM+qGNQVcuY4VlAZSjesfKTnLqV2v3sPA29V6CABvZBx2kHwA25lFUIxm
- FTsgVfXb+kOrHPW+yjI10ufVVq74B6cZD58Oj9XYj6A9GLIm3/DEpvALpGAPpmGcrLU1
- ePn2nAEdFzP8p9AeBxYfoXlASs0h9jZbkn8zL3KA6k8z69pnWeNTxsrIj8OFUcPTmdV2
- ntfVHjKJnG6sjihfJIeIWUPpZOP/9zJlIEmdE8jTbFla5enAYFo0KPTZguxl1AcUJzai
- w2jw==; darn=lists.denx.de
+ bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
+ fh=oyiS1HjGAHh/b0PCGs8ZrowVSKDYk28OUZ+G4f/As28=;
+ b=q1v+h9zImQIVCEOOhKshxdW6D7gKzjbRRRPPsqsDqCW7U752OMKkRacNgen29So0/u
+ 8tT7Edqw5qHkTTDYluErxTIsqeo9MPczcrb0x/ocWVU+pC8dS++as7/3HSXlecv9mH8I
+ bjbObsGCXmHa0uZV1xqp8Zy27kmPFxwsP78OVE52xxXeuQxgiWDQ+0+WQXoT7DJPscpB
+ HjtrFVH8kiuXBTlmE2hCp5wGRJy011U0/ZF1395Zqbg2onjhGDftLUM6XzjJhbxBEo1Z
+ o1RqmVrmv1uM5fBBa3c5Atl5Xvlml/Kcef25SbcSA0jy+6oSdMX3N6AWX9nxf+0uo/or
+ J2/A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782374644; x=1782979444; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782374655; x=1782979455; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FjTX7yCZQRYR9cKkuJgDUNz+c0rclUyecAxw0cz1ego=;
- b=QJ74uPSOrWwXFdbOtp9lGo3ZrliCifW5CpoGMFkNBo8VXWa7rdzO1TIXISqLh5WtGm
- UhLDqf5mb3FmxxLyDgW+P9pgzBV7pF54saoGzr4i9vOoORaRFBxmSHYyZofxHisQ7Yba
- /d6r9RhMQbLD1NikZ0P66ATNYR6P6LgAH6RLc=
+ bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
+ b=EHy5MrVBjStu5H0xJG1ZxTYSnlCpdNL3d9TneV/88R2y7A0W1wB6t7ykRKm2j9qdVM
+ 8/fMKd5uxLtkLVeQ6RWb1mIxhF+irZFP5tqRixtfXV9GV8J4oj1EU/N9uVfs3kyEzCP6
+ KhNBnX/GpzSpaqrPGuuqflISRlejfqBD81ydw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782374644; x=1782979444;
+ d=1e100.net; s=20251104; t=1782374655; x=1782979455;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FjTX7yCZQRYR9cKkuJgDUNz+c0rclUyecAxw0cz1ego=;
- b=eNyL4ylSctneVzTYLs2bMIRC7af/2Qwmf9Ppb0P2PTuqAA5WLlP5HD3/izgnKNDYb+
- GbYH8mrS1DBjSdgwUSQXjxYrkmkX2lCPG84li/HvZjsmNz6E/gUZiZX8lZcJVo7FGVEM
- oJ7ujdE04XQGYKw5MnBBGLSvBBour09/NWXsLVMVXSsuyMbZDhIZaK5IcRd9Eq1WfTaJ
- hBogc9dNaw0hPKioAo6aC3xkT8RQHp9nYrTLKzZgpWRt3SGaC1ueZxcVer7Kt28pCehN
- 9ekc3KrKJda1UzkthhUczEQUfB/I7U2OgSdjoumaWwJK5rvwWKPRD0hTYZ6p9hYI6vH1
- XxZA==
-X-Gm-Message-State: AOJu0Yw6CgwC7nN1dg7uaEIxBRxIHPrmMl8DlggWl6OsoHIuiEiP6Oai
- MgCH2l5oBpaQ17CQZUEhQo0dRTX8HTz9LVafXhxaiUDOHtT7iCQUOTk6O8pvMI54PoeXiAMk4G7
- uXemHDED9VNcZ5z459rQilZMkTWo4zumEGCJvg1Pw
-X-Gm-Gg: AfdE7cnc32KsZ6WJCq1OnkQMEn5cQGGMHi4OF54+FJpTSB3bdx2kDCR3F1fdws86Svj
- SD/HBLpnFOTkPJU+BwXex3izpznrqm5P5Hkp5ak9RAJZrNFvBoTfEG7KgEMq0LjZ6ytXIWE87Gk
- GUZ7YIJ1aN14DKAa2IK1Wjiyn4ywTWCcCU48y/Mles7xb8bGOrEnv9SK9jujAwNLPpRiBKIoyoS
- EpnomnwGHo1zyFQPRNSWW5NDLtmbzKs2BIA3JpTZsHQvwEcVQIbU0m7eTmeLO02WpJCh/1Ipw==
-X-Received: by 2002:a17:907:3f88:b0:c10:d41c:e540 with SMTP id
- a640c23a62f3a-c1205e3bf79mr81061566b.11.1782374643560; Thu, 25 Jun 2026
- 01:04:03 -0700 (PDT)
+ bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
+ b=mmYFx3CjsxM/G3Xy96qk1mV7UQoLxLhanYv8HpBfreZduGb+zHG0Y8xSCNOW8fu4JJ
+ 0DjPcxeLPQroKs2YweAwSjJIFTY7hTDPMiXRrpeAHJayhqnCxyVAo2N8LNxR9pmTqNBd
+ TTKY8geBtzIx7cDI03MEDWFpAvjB6GXRGpRG0Sehdr0AX1cmRlhobYD4swWoOZTEXjBv
+ nERG9AxcpqraoiQYzfCbQpkuk3Uy2BB+vgTd2ft4vv2WdP1R9bTFV9ybRQ0dxsEg2pjW
+ 2VFijTKQiUXtvq9AiqL1b/bZ1T607hwlYboisUa4PiQxUHgsYZvfGeAuSw8eKm+xBkSW
+ MsuQ==
+X-Gm-Message-State: AOJu0YwNCABUHcguP51zR1iIFRML9LYuXxendbz1vc2PVUbRj68O75+u
+ EAlcxkbnF0MY13pgZlsgWNBk6DgprOaVKJ1Z9uWTXOMKyLHq91QJljPVntrd6EC4LvbwJt2uFGZ
+ z3wqwmRTwtnHBdmhQQhimmpL7xeDzdThhgimUlkXJ
+X-Gm-Gg: AfdE7cm3ZUR/eICe2vUURYXJ9S03gteynsS9MCW7FUAbCt4Gou/wiYU34kPNX8oOYr8
+ uYJxd9kQhyaYorJi+Jo2Kaond4nsxZfR2erUN94n4XY0WjCeyNgq9BTY/RzKQVLObavbXJWm5Hs
+ +QWJj9MT7JQYkPdn1QWM6rZllZ5MkXKGJtR3gCHvwog0uX2/LbCN61ueQjApiTOXvCMewwu3Y4S
+ 7siBnS2gbJ3pnkzIEeqN9kqjJzMT0spNKPh0LSGbvbXoUU+DgD1AcXe3mua/ZvNcOiO7htsPA==
+X-Received: by 2002:a17:907:d15:b0:bc6:14b3:e835 with SMTP id
+ a640c23a62f3a-c1205ef2174mr85092266b.32.1782374655290; Thu, 25 Jun 2026
+ 01:04:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260618154750.180675-1-aristo.chen@canonical.com>
- <20260618154750.180675-3-aristo.chen@canonical.com>
-In-Reply-To: <20260618154750.180675-3-aristo.chen@canonical.com>
+ <20260618154750.180675-2-aristo.chen@canonical.com>
+In-Reply-To: <20260618154750.180675-2-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 09:03:50 +0100
-X-Gm-Features: AVVi8CcmYrtAUNPm2aMmizHIi4sSifCheUGOn_39oLB5EFRdhe1KgoSr9MCidXY
-Message-ID: <CAFLszTgiYQLugJ4Qm6ATwF3YyznsRzFhwNqgcXajNyFrSE740A@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] test: spl: check load_simple_fit() rejects an
- oversized data-size
+Date: Thu, 25 Jun 2026 09:04:03 +0100
+X-Gm-Features: AVVi8CccUN4KfDdJY4DzB0jCBKtNme8O9O-oi-rx2-0Wl_zcMMLzyWxu5G_9lMI
+Message-ID: <CAFLszTg-SvwvkULgG3=VdxOY90Rv=EdXE+kYjp4dzCdEfXZ5Xw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] spl: fit: bound the external data size before
+ reading it
 To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Anshul Dalal <anshuld@ti.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Marek Vasut <marek.vasut@mailbox.org>, Michael Walle <mwalle@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,19 +112,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-18T15:47:45, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: spl: check load_simple_fit() rejects an oversized data-size
->
-> Add a regression test that builds a FIT with external data, inflates
-> the data-size property far beyond the image and any plausible load
-> region, and confirms that spl_load_simple_fit() returns -EFBIG instead
-> of reading the declared size off the device. Without the bounds check
-> in load_simple_fit() this test overruns memory and crashes; with it the
-> load is rejected cleanly.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> test/image/spl_load.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 49 insertions(+)
+Hi Aristo,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-06-18T15:47:45, Aristo Chen <aristo.chen@canonical.com> wrote:
+> spl: fit: bound the external data size before reading it
+>
+> load_simple_fit() loads an image stored as external data by reading it
+> from the boot device with a transfer sized from the FIT data-size
+> property. That property is listed in exc_prop[] in image-fit-sig.c, so
+> it is excluded from the configuration signature and stays under the
+> control of anyone able to modify the boot medium even when
+> CONFIG_SPL_FIT_SIGNATURE is enabled. The read happens before
+> fit_image_verify_with_data() checks the image hash, so an inflated
+> data-size overruns the destination before the corruption can be
+> detected. The device-tree overlay path is the sharpest case, because
+> there the destination is a fixed CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
+> heap buffer.
+>
+> Pass the size of the destination into load_simple_fit() and reject an
+> image whose data does not fit before the read is issued. The data-size
+> property is read into an int, so a value with bit 31 set arrives as a
+> negative number, and comparing it as an unsigned quantity rejects that
+> case as well. The block-aligned transfer length is checked too, because
+> info->read() moves data-size rounded up to the device block length.
+> [...]
+>
+> common/spl/spl_fit.c | 41 +++++++++++++++++++++++++++++++++++------
+>  1 file changed, 35 insertions(+), 6 deletions(-)
+
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> @@ -291,6 +294,18 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+> +             if ((ulong)len > max_size)
+> +                     goto too_big;
+> +
+
+> @@ -302,6 +317,15 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+> +             /* The block-aligned read size must also fit the destination */
+> +             if (size > max_size) {
+> +too_big:
+> +                     printf("%s: FIT image too large (max %lu)\n",
+> +                            __func__, max_size);
+> +                     return -EFBIG;
+> +             }
+
+Please can you avoid jumping into the body of an if-statement. A goto
+landing inside a conditional block and falling through the printf and
+return is hard to follow, and will likely trip up static analysers.
+Put the shared label at the end of the function:
+
+    if ((ulong)len > max_size)
+        goto too_big;
+    ...
+    if (size > max_size)
+        goto too_big;
+    ...
+    return 0;
+    too_big:
+        printf(...);
+        return -EFBIG;
+
+The cover letter quotes 57 bytes for the current shape; what does the
+cleaner form cost on am335x_hs_evm? If it really does push past
+CONFIG_SPL_MAX_SIZE then we'll have to use your code, but please say
+so in the commit message.
+
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> @@ -291,6 +294,18 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+> +             if ((ulong)len > max_size)
+> +                     goto too_big;
+
+Since size is the block-aligned length and size >= len, the second
+check already covers everything this one catches, including the
+negative-len case. The value of the early check is that it bails
+before get_aligned_image_size() runs on a hostile value - please
+mention that in the comment rather than the bit-31 reasoning, which
+applies equally to the later check.
+
+Also, the diagnostic only prints max_size. Including len (or size)
+would make a real failure much easier to triage from a board log.
+
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> @@ -427,7 +451,8 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+>       } else {
+> -             ret = load_simple_fit(info, offset, ctx, node, &image_info);
+> +             ret = load_simple_fit(info, offset, ctx, node, &image_info,
+> +                                   CONFIG_SYS_BOOTM_LEN);
+
+Just to check - the destination here is image_info.load_addr, set a
+few lines up to ALIGN(spl_image->load_addr + spl_image->size, 8)  --
+CONFIG_SYS_BOOTM_LEN is a sensible upper bound for the overall image,
+but it isn't the space available at that address; the FDT is just
+placed after the loaded image. Please note in the commit message that
+for the non-overlay paths this is a conservative ceiling rather than
+the true destination size, so it isn't mistaken for a tight bound
+later. The overlay caller is the one actually sized to the buffer.
+
+Regards,
+Simon
