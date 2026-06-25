@@ -4,91 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB4C5CDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 10:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E584CDB479
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 10:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5966A847C8;
-	Thu, 25 Jun 2026 12:56:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C902B847C8;
+	Thu, 25 Jun 2026 12:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bZtpkcrU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JiwKVmj4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E71A1847C8; Thu, 25 Jun 2026 12:56:19 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 8DC8584954; Thu, 25 Jun 2026 12:59:11 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDB768460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 12:56:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB76B8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 12:59:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c07c67ad9f2so197242366b.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 03:56:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782384977; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-c0d6c75c58cso33508866b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 03:59:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782385148; cv=none;
  d=google.com; s=arc-20260327;
- b=piWNbrdeVXd9MIESYNFYhSk2SGw2V/KXxjbud0ry3+Spf2eAUVe1KwH4uyn9Ycrl/Z
- UMl9mFf8GOc/Rp9nTWGF6MB5DTnpGTehbgQSPz4OojJhMixo6dDCDrqeBumm7/i9ligz
- FWw33A1jsZcWeTv2WfuAnVKnnk1S74qyDiHhecx0uvkzuTh2B4A3T1OjxuqMYgeJ1GO3
- qbeVWxvwJnqXols3W62g1lpXrlatvtzN/ECD4hcaU9sUU4qEtHEbRfw3j0MAXDc7Ht6J
- TZ4Q2c3HMSODx7CSeqi7gvAirr12d1vaxnEOrVVW0phM/gck0dASPVzJKk7uZkCx50tn
- XkjQ==
+ b=JJ4KboVNUn0BIV90fCmPEQRlFjz/2jxlkNDbQHwy6ar8G4VU0UgXKfF1nM7rQdxB8G
+ MblgwS+u2OtB/IZNhAFsIfJ7J6KrIdDCl0wtF2kKkb2AHDC8vbWIf3HrJWo3S6nOkh+U
+ i4RZfObc1702bAqZMQQ38iYsh9DGIxP1aKFovWzClvj5Yqnaiyt8GNex3dHqeBJUqzS5
+ BQa7ieMf4RMVsAqm/0cn8yif27YDXQuVlUn145NYTT4Rsr4hl3EfvP/5i/WK3upiv6G8
+ gegyi+/RtAVvkvRogkVezaf0DpoMpWt61NmjXcrFLtpS32cQJG8QrhGTQ3ecv50af7Nj
+ ADTg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zYOaSYsUqNffsBKo4JdtQo7G1WkUHpEzDpmsGmbx6SA=;
- fh=hl+4EPCgakLOnk7XW3qrLoLdx2BF565tvPN7+O4zasE=;
- b=egpdw7YyOVn8W1QsE6QnLZo+dxvUyi9TFGN1p7i7d2TwlSnUCYiUlFXwaf0Il8IOfG
- SySmeUM/tCXFDX06HiEMRgQ9jVTGB+fiBVP66Aj5Jig9RZx75d9P1oZIspHLRZXgpuLx
- NYTh0FH4HGKnrK+8nwfvvItPB6y8Zy6Ao2ltt77VhXeSetLbKwC7AV73dzYKj9lpds6X
- 1qvTecCmr8uSpf0xZLxA1XaxKyA/bJpBTjU+/xxgeY+/mcrdDs9vMnA3XvFefwCWnnj2
- YxUE8E7bsrCu8RnxiFSu34+SzAMrF0s3K8SVDDKnlaz6JIghkK+sd1Z6h6+v/30UsgiA
- dXqw==; darn=lists.denx.de
+ bh=5SXAbI567M9ai/vSwBBq8hYCT9W7X2aQ6VWikbgyE54=;
+ fh=EwJU1mVuO3sY+j+e45zVUlabzQ1yFmJAhesnaad0Pbo=;
+ b=F8XmfppoM8XEgzKkh+DmNrHsVMvFD3SBp8cyt/TIHqxQA7DleH7oahByGKd4Zl9Z2H
+ 0cwtyq0cUSkdPT6pA+LADlvVx8LCQOrZ9JX5eQCn3JfsgcTOli4DoQr2wcg0Jq+0qzS0
+ opNdJrGcuED64VMS61ClDQusZYCIlsqerDiU82IR1R7L9ofZiFtTMfP2sHW2+cfT/Mlk
+ dnZEvTBk/uZ6vlo3GUzxA91BuNfPezDzVJzOudccrJjJWwf/SgQshP36kFgULDzg3Tyi
+ UG2H/jAJGfwi2xGF4x0dWSbl1L55F2lVK65Y4So/jWbQ2Z43coejv2hHvR1D3zVPHMH/
+ +p4Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782384977; x=1782989777; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782385148; x=1782989948; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zYOaSYsUqNffsBKo4JdtQo7G1WkUHpEzDpmsGmbx6SA=;
- b=bZtpkcrUmXMUuxmO82bDPQJDWjHHDGxiS9VQQMAG7fcB+ru5dCvee81Z8r2bjE5n/x
- lj/wRzevX8fOG4E7zjLGogq024NYdDNi8wpaUzG6lWXOaZVbv0AyYjmWJb+34Ju0sRqx
- JNtiKVTzg33p3hWPP88y4yndaAlk3zWtxXcvs=
+ bh=5SXAbI567M9ai/vSwBBq8hYCT9W7X2aQ6VWikbgyE54=;
+ b=JiwKVmj48HIW0l6x+YjPl/5bODioVyGrU2NXkvcjuDS2qTLpH6IGdHSqzfnbBOMX0q
+ ALxroPcZDe7qj73rGkphJJsq+BChJ11/uwuXpoKGYnxZMemL8a3DTpqWGiJ4xxeYmtYW
+ M7lN5kSLkAeSnfTRsD70cIU+366PCDBu0EAXA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782384977; x=1782989777;
+ d=1e100.net; s=20251104; t=1782385148; x=1782989948;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zYOaSYsUqNffsBKo4JdtQo7G1WkUHpEzDpmsGmbx6SA=;
- b=HBk1YX1B0MR5oPBqCDmeEvRBW5D98Bc2nEaBZuWTsA5fpdgVhtf9+OwSx6G8BLhqjs
- XgQCzty3Nh9tdzrV2gChM5c+hooERwLE6JwWpDX6gh88YlLP4tGdbxYePEsldGbkM1b1
- kUCYxXwGNOm0+UzfnG9zdyU+YLw1roOn4MHxy/bf/WNN4bHAFaTvAF4CMRgTctER5l1z
- 3rKhV4v/DqOLCE/WPc6z9Z0IhgtLC41nRAVhAYqPOUda+bzPpXOeQXW/EVCTg293yUAC
- 7kFjFWolI+VwQ2j9+A1gOhPqIHUk+BPPfWnl+5UbhT53NOQz9G1+VBLjgPCR3ysXf/64
- ibyw==
-X-Gm-Message-State: AOJu0YyrRVFgdyhwp/cZyJVc/Rwccv42MtZ2s112TqgrYR/og7Ea8G6D
- pCLaqi6VBU6+Apf+QSlwSULRC+0X+BQDMcNh7mFaWdwQdZTRD/xfPaZuuIm/0TJopYDgUxCwA6g
- n/Gv9hTOFaTino+ObwqQI08DaEgDTfAJDqKPqISeszWwgCI7EcdkT/A==
-X-Gm-Gg: AfdE7cl/cq310AH3YV/cmYR4KM08ukmiysZntm8FgX6a5EGlNwLrZbjakMAQ4iY/MW7
- /AqZo2r6CN936WBAUmSK+Ik2jIit10e/uNkM0VSjNAAfLTX2xpQbwy+TCakwAvFv79VAcF3gRZg
- jqQLBqVoMo9nj3fysLUPSl9ehi74dSOam5TrxmvJYqzJsVuhsNSXQ3xP7BZ8j4CV57DHJVcWDAA
- 73X3c+70kjIN/PjE0EcB5zHOCxdC3k6AR7X4lvvZS3NFZejuPrEWyf13e7B3l6QXkF5JLYFiA==
-X-Received: by 2002:a17:907:6c10:b0:c11:5a8d:74e6 with SMTP id
- a640c23a62f3a-c115a8d7715mr422742466b.6.1782384977362; Thu, 25 Jun 2026
- 03:56:17 -0700 (PDT)
+ bh=5SXAbI567M9ai/vSwBBq8hYCT9W7X2aQ6VWikbgyE54=;
+ b=gqE+Dd5jtXgiHbIYTaJd+QAhRO+4zrH99M2XaGugx+plNKsir7Hedljo9ug9T/1bq+
+ 20xOvbLl6WWYF0N9Gwu7NMQ9mCQqCeCkHFC0WflQsJ5EewT2/Hf9XGo+nF3JRS5iVWYL
+ JThOcr8tHu40g8Oxe9ZKLKdcWOxnalqQn1IPoIEBDB6A1vWKpDNxprzzIDKF8pw22mUC
+ 2Hf0narwyS4g+oITo15ePIuSc2C9GTaBZnrq2gBpjcsMZ/p5Hu+H0zVDDefQg4ZCy6VQ
+ 3Iq7Lc9z61ido3PcXhtn4QLuqXyvneyzyG7kI2350h2ndzvHHl+CnGdwlM8EdUcpEKMl
+ IQAQ==
+X-Gm-Message-State: AOJu0Yzqe/8fSX8aNPfKXUGRTVgVjFxmcD+KFfC67TDWyeRzNC54BIIZ
+ /ok+PqDim0t5QARg4AKZxhZDLpUVQZjLSs61aezTtZ6b5ClM19TQR7/mk4/HqYecojgAMiIQo4B
+ n8XXFRVJ00k7d5inZBPR+RY3nKWFQ7ZczzOEO5vcq
+X-Gm-Gg: AfdE7cns0+z/tKW69+uEkJWEVeyS0op1k7VhGUKHelYhTWcuKdUMqsjGYmrfDD61liH
+ RXRDSVAi2nzYSgBn3FsKy1z27DrYLiCOODClMXe+x0nLOViyA1A3d9JfOEX+ld2FPLy+rI+tZa/
+ BaGN0Y9Tl5SBFb0blNpciTeaOYiUu+/qXspFXCYjlv6cvb5a0yipFQuBM2re6OzCUdUPMkr41Ey
+ 5LMm0Wn/5zNIe4P/JoaVDLGm8ipe9ZZiPEfh/ksDJrmNPeUivkfHJC3a29xgq208Cu98kXbgQ==
+X-Received: by 2002:a17:907:868b:b0:bd7:f75a:817c with SMTP id
+ a640c23a62f3a-c1205deeee3mr144564266b.17.1782385148122; Thu, 25 Jun 2026
+ 03:59:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <3b2cd566-a043-4e8e-96e8-914d50b70133@proton.me>
-In-Reply-To: <3b2cd566-a043-4e8e-96e8-914d50b70133@proton.me>
+References: <20260619-riscv-full-fit-image-support-v1-0-c6477cf4f410@maquefel.me>
+ <20260619-riscv-full-fit-image-support-v1-2-c6477cf4f410@maquefel.me>
+In-Reply-To: <20260619-riscv-full-fit-image-support-v1-2-c6477cf4f410@maquefel.me>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 11:56:03 +0100
-X-Gm-Features: AVVi8CdfB30N8gBj9zZfCNV1LG48BvFFOQcW0nMZCnQ5RqXo1FfgzN_FOb_YPho
-Message-ID: <CAFLszThWcLd0_84CmHLmr8tyTO5-yRRnWO9KLN+GQpqt_NtTDw@mail.gmail.com>
-Subject: Re: cmd: bootelf: executing ELF files requires variable autostart
-To: Johannes Krottmayer <krotti83@proton.me>
-Cc: u-boot@lists.denx.de
+Date: Thu, 25 Jun 2026 11:58:55 +0100
+X-Gm-Features: AVVi8CeHyupajCzEQsIK9aifeDgSQKT19F44TFKwaaaf4u76yc1Z03q8Rlb9Tdk
+Message-ID: <CAFLszTgi=hWWoEZVx9iKprQ6xkMb=8F115m-hW=bcqR2sJGBZQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 2/2] spl: opensbi: fix OS image address retrieval from
+ FIT
+To: nikita.shubin@maquefel.me
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, 
+ David Lechner <dlechner@baylibre.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Anshul Dalal <anshuld@ti.com>,
+ Michael Walle <mwalle@kernel.org>, 
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>, 
+ Dhruva Gole <d-gole@ti.com>, Richard Genoud <richard.genoud@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,43 +120,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johannes,
+Hi Nikita,
 
-On Sun, 14 Jun 2026 at 19:50, Johannes Krottmayer <krotti83@proton.me> wrote:
+On 2026-06-19T12:52:56, Nikita Shubin <nikita.shubin@maquefel.me> wrote:
+> spl: opensbi: fix OS image address retrieval from FIT
 >
-> Hello U-Boot list members!
+> The current implementation of spl_invoke_opensbi() attempts to locate
+> the next-stage OS (U-Boot proper or Linux) by parsing the FDT blob
+> pointed to by spl_image->fdt_addr. This FDT, however, is the one that
+> will be passed to the OS (e.g. a kernel device tree), not the FIT image
+> itself. As a result, when a FIT image containing multiple components
+> (firmware, loadables, fdt) is loaded, U-Boot SPL cannot find the OS node
+> because it searches in the wrong FDT.
 >
-> I have a question about the 'bootelf' command. Use U-Boot
-> as loader for my bare-metal projects, but noticed maybe an
-> issue when trying to execute an ELF binary.
+> Fix this by storing the load addresses of U-Boot and Linux in
+> spl_image_info during the loadables phase (spl_load_fit_image()).
+> In spl_invoke_opensbi(), use these stored addresses if they are
+> non-zero, and fall back to parsing the FDT only if no address is stored,
+> maintaining backward compatibility.
 >
-> I'm not really sure whether this is intentional or this is
-> an issue. Wasted a lot of time for trying to run a simple
-> 'Hello World" program on RISC-V (both QEMU and real
-> hardware). Then I looked into the source code from
-> the command and noticed that currently the environment
-> variable 'autostart' must be set, if not the command
-> simple returns without any error or warning message:
+> This ensures that the correct entry point is passed to OpenSBI,
+> allowing proper boot flow with FIT images.
 >
-> Source: lib/elf.c:bootelf():
+> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
 >
-> ---
-> if (!flags.autostart)
->      return 0;
-> ---
->
-> Please can somebody clarify why 'autostart' must
-> be set to successful use the command 'bootelf'?
->
-> Thanks in advance!
+> common/spl/spl_fit.c     |  8 ++++++++
+>  common/spl/spl_opensbi.c | 33 +++++++++++++++++++--------------
+>  include/spl.h            |  8 ++++++++
+>  3 files changed, 35 insertions(+), 14 deletions(-)
 
-Hmm, yes. The real defects are that it's silent and returns success
-when it declines to run. It's also undocumented in bootelf.rst
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> @@ -1020,6 +1020,14 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+>                                    &img_data, &img_len);
+>               if (ret < 0)
+>                       return ret;
+> +
+> +#if CONFIG_IS_ENABLED(OPENSBI)
+> +             if (fit_image_check_os((const void *)header, ret, IH_OS_LINUX))
+> +                     spl_image->kernel_addr = img_data;
+> +
+> +             if (fit_image_check_os((const void *)header, ret, IH_OS_U_BOOT))
+> +                     spl_image->uboot_addr = img_data;
+> +#endif
+>       }
 
-I think it should run if 'autoboot' is unset - that's how bootm works
-with ELF files.
+I don't like this approach. The real reason spl_invoke_opensbi() fails
+in the LOAD_FIT_FULL path is that nothing populates the /fit-images
+node in the outgoing FDT - the simple FIT loader does this via
+spl_fit_record_loadable() / fdt_record_loadable(), and spl_opensbi.c
+then walks it.
 
-Would you like to create a patch?
+I think it would be better to fix it that way: call
+fdt_record_loadable() for each loadable (and for the firmware/fdt) so
+the OS DT carries /fit-images just like in the simple-FIT case. Then
+spl_invoke_opensbi() needs no changes, ATF gets the same fix for free,
+and we avoid carving out RISC-V/OpenSBI-specific fields in struct
+spl_image_info...I wonder if you are deliberately wanting the
+simple-FIT case to be different? If so can you please explain why?
+
+If you do want to cache the addresses on spl_image_info, drop the
+OPENSBI-specific naming and guards - the loadables loop has no
+business knowing about OpenSBI, and the fields should be filled in
+both spl_load_simple_fit() and spl_load_fit_image() for consistency.
+
+> diff --git a/include/spl.h b/include/spl.h
+> @@ -288,6 +292,10 @@ struct spl_image_info {
+>       ulong entry_point;
+>  #if CONFIG_IS_ENABLED(LOAD_FIT) || CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+>       void *fdt_addr;
+> +#if CONFIG_IS_ENABLED(OPENSBI)
+> +     ulong uboot_addr;
+> +     ulong kernel_addr;
+> +#endif
+>  #endif
+
+Nesting OPENSBI inside LOAD_FIT is fragile - if anyone enables
+SPL_OPENSBI without SPL_LOAD_FIT these fields silently vanish while
+spl_opensbi.c still references them. At minimum the guards should
+match spl_opensbi.c.
+
+Also, uboot_addr here is the load address of the loadable, but the
+existing spl_invoke_opensbi() prefers the entry point
+(fit_image_get_entry()), falling back to the load address. Storing
+only the load address is a behavioural change for images that set an
+explicit entry property - please mention this in the commit message,
+or store entry_point instead.
+
+> diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
+> @@ -81,22 +81,27 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
+> -     if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOOT))
+> +     if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOOT)) {
+>               os_type = IH_OS_LINUX;
+> -     else
+> +             os_entry = spl_image->kernel_addr;
+> +     } else {
+>               os_type = IH_OS_U_BOOT;
+> -
+> -     ret = spl_opensbi_find_os_node(spl_image->fdt_addr, &os_node, os_type);
+> -     if (ret) {
+> -             pr_err("Can't find %s node for opensbi, %d\n",
+> -                    genimg_get_os_name(os_type), ret);
+> -             hang();
+> +             os_entry = spl_image->uboot_addr;
+>       }
+
+Using 0 as a sentinel for "no cached address" is dodgy - a load
+address of 0 is unusual but not impossible, and silently falling
+through to FDT parsing is hard to debug. A separate bool would be
+cleaner, or better, record loadables into the FDT as suggested above.
 
 Regards,
 Simon
