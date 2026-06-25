@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F37CDB466
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 07:15:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD33CDB47F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 07:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F7D84962;
-	Thu, 25 Jun 2026 09:15:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C47B884979;
+	Thu, 25 Jun 2026 09:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="FnD3+eP9";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="AXAyqkuG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE306847C8; Thu, 25 Jun 2026 09:15:28 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 8155584949; Thu, 25 Jun 2026 09:15:29 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F63A84949
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 09:15:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 674D880398
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 09:15:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 5C8971A098B;
- Thu, 25 Jun 2026 07:15:25 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 5D5D9C5CD49;
+ Thu, 25 Jun 2026 07:15:35 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 3139D5FF03;
- Thu, 25 Jun 2026 07:15:25 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 19BB65FF03;
+ Thu, 25 Jun 2026 07:15:27 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A8A05106C8543; 
- Thu, 25 Jun 2026 09:15:22 +0200 (CEST)
+ with ESMTPSA id 5D097106C85A3; 
+ Thu, 25 Jun 2026 09:15:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782371724; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1782371725; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=dWex8iUEAEMjrmiWY7gwQFF+Rfx81FwT+DSNiHvR/hs=;
- b=FnD3+eP90v8KruWknS9uiFoksuJ2FVzuEC9NL8AFw/npzorFpTD54A57bt51nYLkQiImB5
- UHyN6ADlnY1CS/gk5SKFyrxggatFBVpylBV0f3P4dSCfIjik0CLhSt3Rq20W3fgjoWGJdm
- 4LA5eJgmXpe8oGJZlYLvR1E4M2OfyVKOxTK8PRWpIQzqVJi+0cLlLFGGWYk57zOrfCJ75+
- zvdrmrkbHTEfEfwmPy+Z1K0s5QjlC72LwgE1DmXgGlfYRiZHGKHanoJZ5OMT9GhtNNanwK
- 39W1hX0ZeaJi6jQA5rmfoeE95i2yC4az+o8G6IvaO318/M6AmtlKN0A0XN6Hqg==
+ bh=f5glhSQX9maQrNi3mU/TDQ5tX0HkNe9k3965VhkaMXM=;
+ b=AXAyqkuGchPEyrnUWb/dNkrbfeistorxSKdoM80d3fBU8etM6s/P4zG7ZL9wxQmXGZADl0
+ KoB0MIKdeax8XrbekxmeMpOks8TJxPNvtQ3O2x4fTT+IsVfSgss5ovoKchkflTr3CBcTPW
+ oN/4bGSaEsGoBW2gk/6l73hBMjyEghWaLg3cOGjrBuSDpMFkiSgFVPGQdHO/Tpf+o6Ea/H
+ 5HBrCIJGuP2H6Z6Udwx4Xsk3jEPT1nKIfK4K1Y4N+qbv/h4oB3wtqKKBqLVZYv4ToT8Go9
+ 5O89XIGMc2E5iG/hxqiWCoeMsyFUKJ+DJU0Wl8PAaCzyvdJmqGy8jjqK4ZpLtg==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,9 +56,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v4 03/19] global: k3: use gd to store the resume state
-Date: Thu, 25 Jun 2026 09:14:59 +0200
-Message-ID: <20260625071515.91243-4-richard.genoud@bootlin.com>
+Subject: [PATCH v4 04/19] mach-k3: r5: common: introduce
+ j7xx_board_is_resuming()
+Date: Thu, 25 Jun 2026 09:15:00 +0200
+Message-ID: <20260625071515.91243-5-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260625071515.91243-1-richard.genoud@bootlin.com>
 References: <20260625071515.91243-1-richard.genoud@bootlin.com>
@@ -81,65 +82,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For J7200, J784s4, J721e, j722s, j721s2 SoCs, the everything is shutdown
-at suspend but the PMIC and the DDR.
-In order for U-Boot SPL to know that it is resuming from suspend and not
-booting, a flag is set in a PMIC register.
-So, at startup, U-Boot will read the PMIC register and deduce if the
-board is resuming from suspend or not.
+Add the capability to detect a resume on J7200, J784s4, J721e, j722s,
+j721s2 SoCs.
 
-This state (resuming or not) is consulted at several places (in
-board_init_f() and in k3_ddrss_probe().
-As it takes some time to read a i2c register, it's best to cache the
-information.
-But, as stated by the README, in board_init_f(), the BSS is not
-available, so we cannot use global/static variables, only stack
-variables and global_data.
+To detect the resume, SPL searches a magic value (0xBA) in a register
+of PMIC.
+This value is set by DM-Firmware during the suspend sequence.
 
-Thus, we use gd to store the resume state of the board.
+NB: As this is called in board_init_f(), there's no BSS, so we can't
+use global/static variables.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+NB2: For j722s HS-* devices, we need an extra call to ctrl_mmr_unlock(),
+and we have to use I2C API instead of PMIC API for this to work.
+This is because bind is called before anything comes up, in between either
+bootrom or TIFS messing up, clearing pad config and pd config.
+
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/include/asm/global_data.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ arch/arm/mach-k3/common.c                |  6 ++
+ arch/arm/mach-k3/include/mach/hardware.h |  1 +
+ arch/arm/mach-k3/r5/lpm-common.c         | 78 +++++++++++++++++++++++-
+ 3 files changed, 83 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
-index b2ec450f9002..a146206fdff9 100644
---- a/arch/arm/include/asm/global_data.h
-+++ b/arch/arm/include/asm/global_data.h
-@@ -14,6 +14,14 @@
- #include <linux/types.h>
- #include <asm/u-boot.h>
- 
-+#if IS_ENABLED(CONFIG_ARCH_K3)
-+enum k3_resume_state {
-+	K3_RESUME_STATE_UNKNOWN = 0,
-+	K3_RESUME_STATE_BOOTING,
-+	K3_RESUME_STATE_RESUMING
-+};
-+#endif
-+
- /* Architecture-specific global data */
- struct arch_global_data {
- #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
-@@ -108,8 +116,19 @@ struct arch_global_data {
- #ifdef CONFIG_SMBIOS
- 	ulong smbios_start;		/* Start address of SMBIOS table */
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 19a6e24f38b2..c8e709d5b05c 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -686,3 +686,9 @@ int spl_start_uboot(void)
+ 	return 0;
+ }
  #endif
-+#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_ARCH_K3))
-+	enum k3_resume_state k3_resuming;
-+#endif
++
++/* if r5/lpm-common.c is compiled, this will be overridden */
++__weak bool j7xx_board_is_resuming(void)
++{
++	return false;
++}
+diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+index b337a71956fb..f20ce4ce01a4 100644
+--- a/arch/arm/mach-k3/include/mach/hardware.h
++++ b/arch/arm/mach-k3/include/mach/hardware.h
+@@ -126,6 +126,7 @@ struct rom_extended_boot_data {
+ 
+ u32 get_boot_device(void);
+ const char *get_reset_reason(void);
++bool j7xx_board_is_resuming(void);
+ 
+ #define writel_verify(val, addr) \
+ do { \
+diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
+index 6bab0189b032..95f777c5029f 100644
+--- a/arch/arm/mach-k3/r5/lpm-common.c
++++ b/arch/arm/mach-k3/r5/lpm-common.c
+@@ -6,18 +6,28 @@
+  * Copyright (C) 2026 Bootlin
+  */
+ 
++#include <asm/global_data.h>
+ #include <clk.h>
++#include <dm/device.h>
+ #include <dm/read.h>
+ #include <elf.h>
++#include <i2c.h>
+ #include <linux/printk.h>
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <power-domain.h>
++#include <power/pmic.h>
+ #include <remoteproc.h>
+ #include <mach/security.h>
+ 
+ #include "../common.h"
+ #include "../lpm-common.h"
+ 
++/* Magic value in PMIC register to indicate the suspend state (SOC_OFF) */
++#define K3_LPM_MAGIC_SUSPEND 0xba
++
++/* PMIC register where the magic value resides */
++#define K3_LPM_SCRATCH_PAD_REG_3 0xcb
++
+ #define FW_IMAGE_SIZE 0x80000
+ 
+ struct lpm_addr_info {
+@@ -28,9 +38,73 @@ struct lpm_addr_info {
+ 	u32 size;
  };
  
-+#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_ARCH_K3))
-+#define gd_k3_resuming() gd->arch.k3_resuming
-+#define gd_set_k3_resuming(state) gd->arch.k3_resuming = (state)
-+#else
-+#define gd_k3_resuming() 0
-+#define gd_set_k3_resuming(state)
-+#endif
+-__weak bool j7xx_board_is_resuming(void)
++/* This is used by J722s */
++__weak void ctrl_mmr_unlock(void) { }
 +
- #include <asm-generic/global_data.h>
++/* in board_init_f(), there's no BSS, so we can't use global/static variables */
++bool j7xx_board_is_resuming(void)
+ {
+-	return false;
++	struct udevice *pmic, *i2c;
++	int ret, magic;
++
++	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
++		goto end;
++
++	if (IS_ENABLED(CONFIG_SOC_K3_J722S)) {
++		/*
++		 * On J722S devices, i2c access fails unless MMR
++		 * registers are unlocked.
++		 * Moreover, it fails also if we use PMIC API instead of I2C API.
++		 */
++		ctrl_mmr_unlock();
++		ret = uclass_get_device_by_name(UCLASS_I2C,
++						"i2c@2b200000", &i2c);
++		if (ret) {
++			printf("Getting I2C failed: %d\n", ret);
++			goto end;
++		}
++		ret = dm_i2c_probe(i2c, 0x48, 0, &pmic);
++		if (ret) {
++			printf("Getting PMIC failed: %d\n", ret);
++			goto end;
++		}
++	} else {
++		ret = uclass_get_device_by_name(UCLASS_PMIC,
++						"pmic@48", &pmic);
++		if (ret) {
++			printf("Getting PMIC init failed: %d\n", ret);
++			goto end;
++		}
++	}
++	debug("%s: PMIC is detected (%s)\n", __func__, pmic->name);
++
++	if (IS_ENABLED(CONFIG_SOC_K3_J722S))
++		magic = dm_i2c_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG_3);
++	else
++		magic = pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG_3);
++
++	if (magic == K3_LPM_MAGIC_SUSPEND) {
++		debug("%s: board is resuming\n", __func__);
++		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
++
++		/* clean magic suspend */
++		if (IS_ENABLED(CONFIG_SOC_K3_J722S))
++			ret = dm_i2c_reg_write(pmic, K3_LPM_SCRATCH_PAD_REG_3, 0);
++		else
++			ret = pmic_reg_write(pmic, K3_LPM_SCRATCH_PAD_REG_3, 0);
++
++		if (ret)
++			printf("Failed to clean magic value for suspend detection in PMIC\n");
++		/*
++		 * For robustness, the DM should also clean the magic value at
++		 * startup.
++		 */
++	} else {
++		debug("%s: board is booting (no resume detected)\n", __func__);
++		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
++	}
++end:
++	return gd_k3_resuming() == K3_RESUME_STATE_RESUMING;
+ }
  
- #if defined(__clang__) || defined(LTO_ENABLE)
+ static int extract_lpm_region(struct lpm_addr_info *mem_addr_lpm)
