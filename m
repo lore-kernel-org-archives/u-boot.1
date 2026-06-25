@@ -4,119 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAF8CDB466
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:38:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0CBCDB47F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9ABE847C8;
-	Thu, 25 Jun 2026 10:38:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A6AF9846F4;
+	Thu, 25 Jun 2026 10:52:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GoSBXD/l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HcqB97tf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADFB8848F0; Thu, 25 Jun 2026 10:38:22 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0C9BB847C8; Thu, 25 Jun 2026 10:52:13 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A7A8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:38:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23B3E8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:52:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q1wgLEoyZQUbhowtjO63WUiYxfDE+E8ij8bTY9zLX1LZwtVk4U2umWgXR+kSE526OfV8+XbAgnAYMKYxNtz+AIGyQbS+8xIOwcBv6kjrP0N7q8WqsCL3jVTqTI0xmgp+T9LYk3wdYpCrodU5nB1yUOrn5vIRsXEc0L9AWhyJQ41eIjkglH03VB+ARHABF53HFjI5FHN/L/sHU/TQYF/51A1K0TkdAtGqgWgkHDVnoZzxWans/OJ0voE8C8vjNaS4Yr9CwCOB1OiEV6uGHD+DiAwJhDZEyJ6wMkHu321ghRMHrfCbl4wfTmWxmtU4L6nMHVumCYNHjieM60EiCQuFJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sP31b9DVf/I9gBLP+FDcB8zQHUMIC4bdF3hpWBNS8ek=;
- b=J047t3biGQ1crIX7P9dJ407hTer/JYusIcCAgfIzL4fNe1/4jS9cRzCIUrJDs3ON3XxZiwUm2igOlvfcHYyh4JS7WzIZblNad2UgUQJZLBZrVMVzzNLrfuVlz0LpYkxsp+rRiKrGDdC8Zcwg816aY5cYPZn95AJRy7WRgJaE7VWin20kxD1KVnRl97rzTEh08KXbzh3kvmLgLLy8G/9oABikM4ifsQyjeSNURU2bllplXQjx5uNp+IVfXAWEBoxvb15nSh9NCp7r+PSL6viFGJDEb0H48V9gASq4et9ufC6V0H1UgcbhdurmKJR7i5VoRspqfSA+LeDOWBaV3kLAQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sP31b9DVf/I9gBLP+FDcB8zQHUMIC4bdF3hpWBNS8ek=;
- b=GoSBXD/lUOhOecOR6PhiBSWkkox46Llcaxk44T2oH+1HF3zZ4afcPVRyQpTisHP8egbjxVYs9Yh/HDa0/gUF2k76OQU9rWwC4kzPB4F0q3mE2a/QRZO3Vp3ePEuv3/mKBOiVmC/rvHOyv5VaacQdfgJhxiwlTnpii87w8pBipfJWC0Sv0L7octsAtxz68np9FTsFefAS4UPmfy/2HO+kJJn13Lkx/QDbQ2LofhEkfQHHMTR6u0kdYAGIHhbWAkN50lAv8J6QLfInrHiio5KMHzvQKe/S94EAzgnp9E1RWDnr+pMbcAYyXegnVvNhj8bnXeHzWMIlpcNx+YT4n9HXSA==
-Received: from DU2PR04CA0036.eurprd04.prod.outlook.com (2603:10a6:10:234::11)
- by DU0PR10MB5430.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:329::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.16; Thu, 25 Jun
- 2026 08:38:14 +0000
-Received: from DB1PEPF000509EF.eurprd03.prod.outlook.com
- (2603:10a6:10:234:cafe::8) by DU2PR04CA0036.outlook.office365.com
- (2603:10a6:10:234::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.14 via Frontend Transport; Thu,
- 25 Jun 2026 08:38:14 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB1PEPF000509EF.mail.protection.outlook.com (10.167.242.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Thu, 25 Jun 2026 08:38:14 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 25 Jun
- 2026 10:42:54 +0200
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 25 Jun
- 2026 10:38:13 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Thu, 25 Jun 2026 10:38:13 +0200
-Subject: [PATCH v2] usb: gadget: f_mass_storage: Move schedule() in
- sleep_thread()
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bec43ee8ff0so188317966b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:52:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782377529; cv=none;
+ d=google.com; s=arc-20260327;
+ b=eegH4+qzM8UjhpmlMzX4Ia10jk+gpQ98uyacNmn7Tcd2JAIxFBwOl+1IJwILDOayH6
+ jusf96T9pLRmEyjKMyFWZmf/NuHVzkKI8vl1WfH+z6ITn76RndoA09RNohBP/2R42xWD
+ lz+Tl8pHL4FOEBsSA4EHx+j2LQiYChVRfECCAohQIohX0dtbYykRhyWjpVXrfVViSQWc
+ A38ZwGXJPPYolsFBD6UUWQvZ55mAAw+HLCsApV/k4YRERP5R/qSJp5PaYjCmnc4WWEy+
+ 1EHQrzmdAPq29OO25OCLPEumfD00sg4ybmpD7SySVOEeC77/SCSLi5Au4CO+L5Q0BQf3
+ BA7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
+ fh=oik2cKbUefHtkvEZWL3qj4nW1fZik1DcKWq+k+G2QPo=;
+ b=lOWNNCEeEJT9g2hdDlMH3kfBB6D1XM6S4mwjMZReim+iXeeSdLzCMXXPAX5AhvH7j3
+ aC1lYN4CpmZwyBid7kgUhILfgYkX/722dzpg0PLXCOm0vB+kZfOCDdsk3tY3WZGevzXW
+ ywH6FbSUWSsb1L2qlH6r1g0xnUF9wmLedgmVDa3u3unHb+ckQFFzjuxYnuxxfU5UVtCL
+ JUVcI/PLFc/kf+oBtZfwp+qmoudWlPI8/57fcU+/+ovXfqPvmTR0Wa25eZOyoTtaibuv
+ op1OvvEZ6EyLQ57v2AF/356ZZaF4es9ZXeuXVeueXaTgw7Rg5XMhUxkk5Efkz71iotk+
+ sluQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1782377529; x=1782982329; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
+ b=HcqB97tfptqZkP4bKpB+HgMcbDZSgTVXVdiML34Ua1cRwqL7eFKdsTSTX9vNFFl1zR
+ WJGlzHIhNejl2in07uGsXRAU309WR645+RSlX6sBN0HzkHZGrlo/40gh+NScXJwveXdl
+ 6PwGUUaDEzLkzD0sIISvDoo7HrfYnnxyEZfzE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782377529; x=1782982329;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
+ b=iM1glMZdyb6lfaj6phJi8koNVu22dT2+FF4j558pqJmdOGzIB4JoxyUEMCK2XhjuWV
+ Ny4IwMF5cEsdyH00UTbNTdcdwEB3dUVpKHwi4N2rjnquLnsxL1j0FO0+kKpFAz0JCNAj
+ 9xW1x1eq4Xwxg9YoJECy64wdW10dHEbFD5tT1JZYC6m7RegWVZrXkXIvVCpz4SOOVqAl
+ iziq/w5MvAsh+BnT6pXahlfYBIE6SK4ruB8/zEpowo8r82K+3VdpN+rv++y7B6YfFvtn
+ ZlOpf1ZH4eOr3Nxg3qOGbwPImWCWojDlUT7xjHXmojplRUuFlm2iyxGWUjeSubXWDtjF
+ bmxw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rqs/UZCxx3sLpo5W3+KIs2oY9fHQgJHk1H4UbXVpAje3TepkPjcp3eBCQZ5VFQ50UpuNAlQU8A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxtDMvbh+bWmoP7eWp4yN8fRA/1jMl0T5Yv3o+t1k70kDavBunI
+ /NcbdhsXbOVivpDCUNxOUh/CfSmmZ2MCPvXH00Rt/LWN8lr9ICkjeZ+sdsCaJb4JXeWPednauAw
+ I2uHY42fFR4py8K+auJPysU1l3Rt3SJdi9YTxOCjp
+X-Gm-Gg: AfdE7ckLyQotRS+tMPcbd4UzMUnRT5wWs8q4nsXZfPAJKBdw+IBrgYRJ6l0yOSsTUN+
+ pkqE1PHtUTK7WS5sJDNOsPdbEJAGdi+jT+sYj6r6KhXppzfLyjVaGtK29KLk0gskZqPF+wF3nxN
+ P42QU2SAriRIh8NF9uWYIbq7kza337LDMUYjSuuTpcvrnXPafifgIonR3ePDpaE5sRcLGNUZ4bx
+ gkXkrC6F2+/Zaeaa8oyY6tC70fDXs/zzjCUymw/FCUo1gJpLwVk/m5DRFnqTMwk+3vRIfYFaw==
+X-Received: by 2002:a17:907:72c7:b0:c0e:7f2a:ee96 with SMTP id
+ a640c23a62f3a-c103158cdd0mr660682166b.29.1782377529539; Thu, 25 Jun 2026
+ 01:52:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260625-move_schedule-v2-1-2e4abf0c5425@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIAPToPGoC/3WNQQ6CMBBFr0JmbUk7AgZX3sMQA9NBaoSaDjQaw
- t0FXLt8yfvvzyAcHAuckxkCRyfODyvgIQHq6uHOytmVATUWukBUvY98E+rYTk9Wpi0zKo9sNFl
- YN6/ArXvvvWv1Y5maB9O4RTajczL68NkPo9m8f+1olFFZk9uaMMfmpC+tF0llTMn3UC3L8gX8K
- ZoCvgAAAA==
-X-Change-ID: 20260622-move_schedule-1f94c93e10cd
-To: <u-boot@lists.denx.de>
-CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.15.2
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509EF:EE_|DU0PR10MB5430:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22e92361-5cc3-4184-d67f-08ded29518ea
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|36860700016|1800799024|82310400026|13003099007|11063799006|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info: knzksAR8KdbOt/rHQIAid+oFh0lQeYbaItiW3cTxGwhRbHZd9E/RnWoIo9wyEFSEMqTDMCU+z/tpwnuMq6smsaNcGYRMwsh+FqEb3AAbYgDvLA9Zm+F7Ec+NL14KaGgBuEVA2VHrsL6bTij0KjBUBXh+LJq8eyg3yQAT5QF/OOM7gkszgBGOV3Bqsga4Sk4xMyG9i+D5udhNTORwMDOdVoZAQrUEfpr06/9gX/T9QVvAk3O6jhrr4awEOzfeOR5Xu0hsOqTT7zhTSS4Zg3WlFZerccKfvWc6SmMy4G/zSdeeTYa6yBl60EKbXfu0K0Q34eQioxxx0obJjdCIptg1EdsDCJAoCzyTZ4hanJ9Aj49biHYxYva064LsGUYlm+RfdCX8ZV6Q9ISwgg+wxkhcVshI2+QHpokNr0vgWLsvewVE6DtYrqYOFHyUstVDrG/uW6Lvr/svgS1oJ8rl9tVRNwZf8MT2oDmesISx7Y0db3zI4KuVkiC8D43D1StPEbwYGr7cCc0Rq8QxgqaFJ6dYqZq2HmL2+rTsdO8FKjO1/FX1QbRjeqrpUGqlxI2+6Fx95nFEJkIzDH5dZa1eRorcXxbMh07ETJNSx/jSWDbplHslefJR0K5ZcKoRGJwynYfPqj4B1Ms7Ck2MCfYh5aafDw==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(36860700016)(1800799024)(82310400026)(13003099007)(11063799006)(56012099006)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Q3pHlfEKdO/8pVJSn8teEPICc/co7wiYABBtAjh7WlmyAjVpJdd20szCTXSUClag2Y/xCHh0Hi88ufbeex8zSSiWS54IPUiYWp4PQSatUhUPGV0YXYJGcnsUdjSbsXwubqSOCUGv5yN7vNovmW72qXto/U6sVvaqxjH6aAc1GnSaHv/GBY83wywhjNpXc/sAJAima1T+JriaVkA3m8Xf+1uUsn8S7Fg9uprQQ2jSnAuD0buEGPgiNVo9wO+cP/H/KTYJbHLTRp8AxdDS+fSuvtHbkO5n4dF+fcGj+ocEUewPmKIG9YuRVEPeWeYS6Ub94+9r9Uir/DD4zURpdgSmcYW//Oz8EJHj1A2y3JmgtvfuaBHa64HpivKkiE2glcqdDu38VY65n+lI5OkrKNOF5Bk7ezfi/YU61/1r3jdM9uBhmwz8Ae/yBiqaDHzGGlBs
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 08:38:14.2003 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22e92361-5cc3-4184-d67f-08ded29518ea
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509EF.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5430
+References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
+ <20260621081915.19154-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260621081915.19154-2-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Jun 2026 09:51:55 +0100
+X-Gm-Features: AVVi8CdVz7RwCqHOyjEKjN9b2lydJiAFfTo8tgq9gZqXo_MSXAU9H2aURcd0CiE
+Message-ID: <CAFLszTjWb+X_-Stz=e1ntGtA3N45kmakUbe-puO+WCr+snkzSA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/11] efi_loader: use pointers in efi_acpi_register()
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,51 +113,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On STM32MP157C-DK2, when aborting the command "ums" using CTRL-C
-it may take a while to get the control back on the console,
-sometimes around 1 second.
+Hi Heinrich,
 
-By moving schedule() in order to call it only every 10 loop iteration
-it increases the CTRL+C reactivity.
+On 2026-06-21T08:19:04, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> efi_loader: use pointers in efi_acpi_register()
+>
+> Both efi_add_memory_map() and efi_install_configuration_table() expect
+> pointers and not virtual sandbox addresses.
+>
+> We need to convert the virtual sandbox addresses in efi_acpi_register() to
+> pointers in memory before using them.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> lib/efi_loader/efi_acpi.c | 35 +++++++++++++++++++++--------------
+>  1 file changed, 21 insertions(+), 14 deletions(-)
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
-Changes in v2:
-- Update commit message with more details.
-- Link to v1: https://patch.msgid.link/20260622-move_schedule-v1-1-4b5dac252b70@foss.st.com
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> @@ -37,39 +38,45 @@ efi_status_t efi_acpi_register(void)
+>       } else {
+>               /* Mark space used for tables */
+> -             start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+> -             end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
+> +             start = ALIGN_DOWN((uintptr_t)map_sysmem(gd->arch.table_start,
 
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
----
- drivers/usb/gadget/f_mass_storage.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+gd->arch.table_start is an address and then you are converting it to a
+pointer, which is fine. The confusing thing here is that
+efi_add_memory_map() takes u64 arguments which are actually pointers
+(in sandbox terms) and has no comment as to what the arguments mean
+(in samdbox terms). But we have already had that discssion and I don't
+want to reopen it.
 
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index 71dc58da3f0..fb0803e856f 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -676,10 +676,10 @@ static int sleep_thread(struct fsg_common *common)
- 			if (!g_dnl_board_usb_cable_connected())
- 				return -EIO;
- 
-+			schedule();
- 			k = 0;
- 		}
- 
--		schedule();
- 		dm_usb_gadget_handle_interrupts(udcdev);
- 	}
- 	common->thread_wakeup_needed = 0;
+I would prefer that you declare start and end as void * so that it is
+clear that they are pointers. We should do alignment before the
+pointer conversion (sandbox uses 4K-aligned addresses anyway) so
+something like:
 
----
-base-commit: 1296a428c67cf103eca482d4a63349661c1b799f
-change-id: 20260622-move_schedule-1f94c93e10cd
+void *start, end;
 
-Best regards,
---  
-Patrice Chotard <patrice.chotard@foss.st.com>
+start = map_sysmem(ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK), 0);
+end = map_sysmem(ALIGN_DOWN(gd->arch.table_end, EFI_PAGE_MASK), 0);
+ret = efi_add_memory_map(nomap_to_sysmem(start), end - start,
+EFI_ACPI_RECLAIM_MEMORY);
 
+Reading this, we can see that we align the address, convert it to a
+pointer and then pass the pointer as an address without doing the
+sandbox unmapping. This makes it clear what is going on - and avoids
+casts in the C code.
+
+> +                                                      0),
+> +                                EFI_PAGE_SIZE);
+> +             end = ALIGN((uintptr_t)map_sysmem(gd->arch.table_end, 0),
+> +                         EFI_PAGE_SIZE);
+
+This silently changes the alignment argument from EFI_PAGE_MASK to
+EFI_PAGE_SIZE. The old code was wrong, but this should be its own
+commit or at least mentioned in the commit message.
+
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> @@ -37,39 +38,45 @@ efi_status_t efi_acpi_register(void)
+> +             if (gd->arch.table_start_high) {
+> +                     start = ALIGN_DOWN(
+> +                             (uintptr_t)map_sysmem(gd->arch.table_start_high,
+> +                                                   0),
+> +                             EFI_PAGE_SIZE);
+> +                     end = ALIGN((uintptr_t)map_sysmem(
+> +                                         gd->arch.table_end_high, 0),
+> +                                 EFI_PAGE_SIZE);
+
+See above for the pattern to use. The nested map_sysmem() calls inside
+ALIGN_DOWN()/ALIGN() are hard to read. A pair of local pointer
+variables would make this much clearer and avoid the awkward line
+breaks. What do you think?
+
+Regards,
+Simon
