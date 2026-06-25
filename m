@@ -4,133 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5236BCDE000
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E10CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:24:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDC5A846F4;
-	Thu, 25 Jun 2026 19:02:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 140F8846F4;
+	Thu, 25 Jun 2026 19:24:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="syTVxlIg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hUZgM/qQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE7F784704; Thu, 25 Jun 2026 19:02:55 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8E4DB84704; Thu, 25 Jun 2026 19:24:30 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 345168460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:02:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 720E48460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:24:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t2yFOnS8zFaxwbdwSh69Qx4uJ070ZeF6bYHKVUA/Ax7Vfg6dntKtDZoYcPLVvGcdoYrB0bQu5ew+zfayR5i8kxH3JiLGSN9hce7F9oU00L5yREI6zyWEAHqGo+hS+w83BRXKhWcV0sABe9KyHwUqJypDX6U29xRtWDwnQRvVK8oA7vPeUmrFb+1QoTITfawq753NdUc+jtFUoAwJEXNb0QOdaHjJMK7fiKDMrdVvkqWp5yaz9ODxoe89SWNJDbrA9jzAnZg1Eow5zVra9+5yt57sXOUiluqLwW/yYxoofmMWonNtPHQuyAbEyQOEDoeV/nHQ2xrs2ssyQTgdKqGT8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0SEFd9veboM4Uha0jtjC+wQaNWgfS9ocwQM74XddAhc=;
- b=e6J+JCo0iwjHDWeeLDON1TpPUvBq9Hvk97stOategy256XbjPAhRVZCaAWPK7GbO2S6+LHPzKtek4X2k6YZUO3AyJ0Lsgkx6cLFACCklBvSIpDpquf6YKY6X1/Wd80wFqxB1DGkI8nDR1PDNvxl2hPIwu3zNZXrh5QqUvyipKUWrAxAntzGP+OCiP/Myrf92nW2600NUB+OCboele2PSwyaTUaSd5GolnokIlegHYc0SVEx1hpk7smcxHx3/CZJuk0G/oFNSfxr8440IZ4FWg9mi+QgHWfvjq3NFW40dX9GX1uACxt7iJQ0QxjIr0+JJ+7K4eY130b0DYI5cpeGkHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0SEFd9veboM4Uha0jtjC+wQaNWgfS9ocwQM74XddAhc=;
- b=syTVxlIgBMLK3G7AVNcaVv7yedALGFw4zCVtZX5Eg7PBuH2bkVaxnvFv2Ga96gVbJnxlV2fkl2yS/padtMCgkT6/PiLegNPEJTAxp0x6g/LU+8oUJFX+Gh/YS+YCD7bV/QrYzyjbgyG0kqTdMnvwXwps23DSmOgrhozC4YqkK5711dnsIgdd9xVNShm61VyLQHpfkUcvFprR71D1VDfbp67iKB6Cwy650nhLynHcvQ7d9aRJ9fJ3jGMN4MLyzMVATIL9zUm8ElXA+eS29optT6mFcOFvdGeRE91rAW4z1/M+9IYHK3dLdh1GOEjqy34e8a8ESb7n7BdRtTlerLiWCA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by CO1PR03MB5811.namprd03.prod.outlook.com (2603:10b6:303:91::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Thu, 25 Jun
- 2026 17:02:36 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a%6]) with mapi id 15.21.0139.018; Thu, 25 Jun 2026
- 17:02:36 +0000
-From: dinesh.maniyam@altera.com
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
-Subject: [PATCH] mtd: rawnand: allow SYS_NAND_BLOCK_SIZE when SPL_NAND_CADENCE
- is set
-Date: Fri, 26 Jun 2026 01:02:23 +0800
-Message-Id: <20260625170223.2963-1-dinesh.maniyam@altera.com>
-X-Mailer: git-send-email 2.26.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0125.namprd05.prod.outlook.com
- (2603:10b6:a03:33d::10) To PH7PR03MB6942.namprd03.prod.outlook.com
- (2603:10b6:510:157::18)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-43d16405b54so30199fac.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:24:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1782408266; x=1783013066; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CpZq0cHmUnvAk98lonIeWaBq1QrgfVayHRR/GfZuKTc=;
+ b=hUZgM/qQNrZy8jIM8owX5wf9G6yUXbccp/8OoMWJ/8L4PqtLYDqGKNFlryEOklQxfa
+ YqRBK2LfP+iVFXBPl/YMNpyq1qojM+uCQB/LxtjI1eqvzbW9Lm3NX13c3SAk2hvqyXQq
+ avHATsab6/UGJIiaCCk6i+ZX8rtmWgOS1uyC4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782408266; x=1783013066;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CpZq0cHmUnvAk98lonIeWaBq1QrgfVayHRR/GfZuKTc=;
+ b=SygccA/Dcn/C9atPMj+JQ/k6E31tgTBBGd+fopQapQjyCsticA4GPaHKUchemiHos/
+ 5ANMgmvmE764yvqAKVaGiQa6d74CCLMzxTkKcUu3cSyrREZYpT4cuHS/4C+RVY92e8Xh
+ ysXLSeawQDP9Qdqo7js24Jr+zV8v2vDKt3O3VrJjHRO/exRnejUSUKlQlsv461vtKRL0
+ C2txu2m0L5DGvyARaM6AoPhtq2MDjJR1FGAyNvBH3oJsRr/iOrrqKdkT7YBoqNzZLoNt
+ hSXLsBKtk1K6pxPEQYy6JUXvQLrJ02fZ2kgitGGAmai/peUmNVVUPSo5FbQgkwui/5Wz
+ J61g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqkRQr0cqekB1O0Pp0G0uEzEIgdU/AkrnLF+MFulttm0UmPURwVmyS45I34Ex3KR6YzBLQVmZY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+yBcKS2u3d1MMl5TVHHRyuEPurEKY0Y0CRjclFXvyZgj+pnII
+ aUSfqve4vf64UZlQBfBETqkamDFp9etQSv6VKvbd5i4yK3K9Zksv8/T0/TJNIsr+4CE=
+X-Gm-Gg: AfdE7ck2oAA617IctIeEdS2I6MS0BoYUp732Tm/RNynrFfF6EaN0b2PK5FP/Wwc9N8W
+ qyo4hZzHpUKMROMctVjbAiDotH1P9ycWtMTaF+S8oSD1Z7uuhgfui81N6CNgj+DjRVg1/glcBWr
+ frEuQylgf9/Aaj1R7lDnWs0sFY2Uxo4rnRVGJGktyiHbgCgA96hxaaEFHZ6NsV3f4a+4A0Bo03h
+ EhZUzgOSSaxYQlV6epW4gbB14AvRMvzYGygmEVtah01Tpll/qUOzYNjpwr6eD24YffzSGhh4T4G
+ pH/BucQmjquR4fQucK5OskuN9RV0DlWU1sS99xp6FXHKKtubAAi7I7FjnazhTpD8Ng4X++GDkpt
+ rJRYzarEmG1rfqO1PacVSfwO7YuCiQJR6OP9WqjuW+/IvuL+zevCs/CyTNdlq1J2UtFBI8D0wql
+ 0PAGgSPMNxy9mlsXttUB0irgDHYV6jilbzhKSJaosgFHYMNN2v1H95Az/VqFO7kTwzwGLqXVoHc
+ UjDluYiw0xV01z92mReOxp89qGUzMLUYWeRYwOw
+X-Received: by 2002:a05:6870:b0d3:b0:447:261d:fd9d with SMTP id
+ 586e51a60fabf-448117f1bf8mr2938720fac.4.1782408266107; 
+ Thu, 25 Jun 2026 10:24:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
+ [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-447ec359d9csm3655460fac.12.2026.06.25.10.24.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jun 2026 10:24:25 -0700 (PDT)
+Date: Thu, 25 Jun 2026 11:24:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH 7/7] boot: add a minimal bootmeth for the Boot Loader
+ Specification
+Message-ID: <20260625172422.GU382693@bill-the-cat>
+References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
+ <20260604-bls-v1-7-4ce6d1ee4711@flipper.net>
+ <CAFLszTikihqsUmOGdmb8Q9WypiEHb0nq-a7vXH5XrXNxRVeNjg@mail.gmail.com>
+ <CAKTNdwEkt+YMq-SG=PVTGzGztyeujVr=fEje74NnSbBbiswd7w@mail.gmail.com>
+ <CAFLszTg7DJW4b0JhuPgCQe2TdMEdUagdGqRu7UG_j__S=4MjMQ@mail.gmail.com>
+ <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|CO1PR03MB5811:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0312b801-04b9-4f19-0c5f-08ded2db8e1e
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|23010399003|55112099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: 0tBA3I/kFL2cjb0JLy+eNkHONGRakAUhq3eEnIz5/PI1vthBWSWVgJqRAJfuNkdDIJv5YA8qUWos0dSRLAKwa4bA+wto6Ag7jH8OV5YzUHLo9O1ZJUAQbGpgRYqL3bXDQdvKlbzIGbNJ9DEEfi0TF6MLNFpnjz4AyhdoFZmHOKIIh3cNHU4zSEHqQ2BaHk2XtPOCizGWPhV7JCq++FEBixQ9Apmo9ee8yAKKA/qLtrPXKWrHCrGdVSRwXeapMhJNxe2re5dsamrbeTDOYpxW8C6fBgcbLeoGNk9CAQvB4I1SbUIh79Xg+sO8Q+OloVIF/cFICFdybCiD0LZRihdQefgSHvD3uqLIZkqR6n1k++7F0lEbDTByr7X3PetibFFakV3draFdzsZ4SG8UeyP76no+nykgd/EUv8B2huLfCok6ZELo+ccH9QlNGwQhljIcgqYNNasE+TywcYdIKYVGpovEZTvwgN16wTYsjU09VbDvbpND72/lSYAIaH5FaNnJIvNdfoRQaEuwPZqvBayOPhDFhyE2a7QDIUyB/mwhAfadTENYl4LT22upvSZjXTWUQry9XRcce4+C6wroZtnb6w2wW278s9nomOuNzrNkXUbYM7pUCs7/FND/eFunYlqUTZOuzIHtb2ncBJy+i7E5oGmgbvC2knEosYREv9x1GRY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(55112099003)(18002099003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Eq/VOJqaO461uIWpwdQuYYl6DaQl4um/xRq+KYIHEddJYxJmlgfDMttO1NmC?=
- =?us-ascii?Q?J4p9Bjsfg+ZKLHGPHkhIyq6SKmu8RQfIg8xUFpU/1AalplY103+ERSI7G+yg?=
- =?us-ascii?Q?52pPA0JrxGyHnraJPHIYL187GIP7xbALv/4Zo3MufDbtXAy4M6z1557tGbHm?=
- =?us-ascii?Q?ZUZzKK4n97zLz5IEkYNLCPzY+yxGT0pGK/v+fJt9HruBgsn+n+KNClwYU5pH?=
- =?us-ascii?Q?qrKVb5x20SUYOQvLYbCZueZvjX17O54YjUdQwj/Efl+OpYe9QB4+MwQw4ug8?=
- =?us-ascii?Q?WC00qecikXY5bZ1fe1JpeAXNI1X4Ow2KLuHBhHwZj3wjECMe44vSr6dy1+sr?=
- =?us-ascii?Q?R1WQa3TKiIw3vhiOXV7PPnzq4d75z1urQBbOxW7KioUg8VhjWg8Zqp497CQH?=
- =?us-ascii?Q?S/wvZoBXwBjyN8wHYvLSJvHA000OiCw5FfmCKWAr6WD7ADYxq9ZUbyLJiKdX?=
- =?us-ascii?Q?pgwzLkC+f+QdCwzK14tTkY811B7evb7pmRmb7bvf5QCCKUU9loph/utWgl80?=
- =?us-ascii?Q?dX3LL2Nb7ak54u0HJGnMn5DMGXyGNjEht97rYM4tMgzJuW20JD4iSNa+jYb9?=
- =?us-ascii?Q?YCf8Im8izn5Exq0lmdg8nDQFTQUHSYN1tHjj0/TuTyaBBx8DUl9O8g0Riqtz?=
- =?us-ascii?Q?RUddqy0QUIW/VqKSxyC1KwSeOJcvm0bpgbqejlkU+PsmaQY8M0VdwuS7BO0K?=
- =?us-ascii?Q?CCEQoTreKxoMKoPhAHs1lPtg6/9517weOxGk7RjAGZ2Jq+LrNZmr1qsJ1YkB?=
- =?us-ascii?Q?HOHzok1T+9N2vYuVwnfpb4dW9HfsES15hpV1x+ns1sUhxorEU356ZMLxj1SQ?=
- =?us-ascii?Q?bv0EtubdC9TQS2GOYdtc+YjAFD4IuqRaFBW+E9FSyFLKNzwwTPoeREEKxoGz?=
- =?us-ascii?Q?PqeuUOWdaXY9wNr57A4waAcfgyIm4IuAYs5IJhird1O82T4w2BHw+YV8hAkQ?=
- =?us-ascii?Q?tHscldDbWsB7PO8DnubmyUYP5B6Da3FNHT/UfqNRT2ZANaCJ/9jkzFRB6Z7z?=
- =?us-ascii?Q?DohFkmAIjfqtUC7+Y4/nwTw/Gv0rvQ4uFLYhInHmXRZwYIhGh2oe+oiwtQcf?=
- =?us-ascii?Q?Xy+opXuuPWRU7McJ9XBLj4Scrtq/HKGbWU58dmh0EZcH4eWykA9p+wEkcXnS?=
- =?us-ascii?Q?h8X8YtsqL+XclytXtBluSjkFpKc7b4Apg5n5T4gGcKTgYcwytOuQnJBV7iGI?=
- =?us-ascii?Q?E0gQ1Lvu35Wqal8G3Qa7b2EcUfIthu4/8El3jQE/4WZVSaEYabvJt7tqTXxC?=
- =?us-ascii?Q?bXESmE2eqpqC+q+8MlNSuvDzJXYtB+57OzEFbG+GkC6SRIajxlmvO3vm/J9A?=
- =?us-ascii?Q?8LghDlrIzTbKL4hpenHQXKklwlaf2UMxZ/W4fSuUTWRTJ4WFO/3DfkWSCgDu?=
- =?us-ascii?Q?9TtGHaKd5aim4zquP28XzxoNqBEHlypNA7rB/6A5I7CgSj7gnJAPPt3nU6C+?=
- =?us-ascii?Q?A34x/27yDmovxqpZEwxveMgiblk1THXYVqkFChbp5klaja+HRbPVUEThbnxI?=
- =?us-ascii?Q?jlWUpTuiX5Rx4kG29lj3zxgtT1wa8H6TcHT9e6xMQtYj/GBgzNzVqL1YkQtw?=
- =?us-ascii?Q?rfCkYqlhECC0OonKRZDkkEHCAPs8JdRv+aUPivzGJsNl/qF2fMk0+5dDNn2O?=
- =?us-ascii?Q?at+eedOKu//ZzMpHud7WHqhZuQmhIk3YJvJU4sNzp8yayrRpm5ulBnJLW1Q0?=
- =?us-ascii?Q?liH+FIKDyPQ0xRxzC1xIzV+Ti03ehGXpuVgS1FWJ7aMGKd87f6W12/xBK9es?=
- =?us-ascii?Q?Bp/Rxitis/hno3nkcli/aIRtVWbAbOE=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0312b801-04b9-4f19-0c5f-08ded2db8e1e
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 17:02:36.0936 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8IpCMbK4g0tW1Dpfy9QwSs5uBBEFfCqSA9/qlp9MeD/Q1lQaUqcGWsgrkD4TbLNbAPmDvY3oKJ6MXUeWR4TYvTExdLrU5DpyqBYdqsFUsLc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5811
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GVDzaqHWdDYQUQ/P"
+Content-Disposition: inline
+In-Reply-To: <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,46 +111,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-drivers/mtd/nand/raw/cadence_spl.c, selected by SPL_NAND_CADENCE,
-is a thin generic SPL helper on top of the nand_chip framework
-rather than a Cadence-specific driver: nand_is_bad_block() uses
-CONFIG_SYS_NAND_BLOCK_SIZE to compute block offsets for
-chip->block_bad(), and nand_read_page() calls nand_read(). It
-works with any full NAND driver that registers a chip.
+--GVDzaqHWdDYQUQ/P
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-SYS_NAND_BLOCK_SIZE currently excludes NAND_DENALI_DT boards on
-the (correct) assumption that the full Denali driver auto-detects
-geometry via ONFI at runtime. This precludes boards like SoCFPGA
-Arria 10 SoCDK that pair NAND_DENALI_DT (full U-Boot) with
-SPL_NAND_CADENCE (SPL loader) and need the eraseblock size
-statically for the SPL helper.
+On Thu, Jun 25, 2026 at 08:57:13PM +0400, Alexey Charkov wrote:
+> On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Alexey,
+> >
+> > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.net> wrot=
+e:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Alexey,
+> > > >
+> > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wrote:
+> > > > > boot: add a minimal bootmeth for the Boot Loader Specification
+> > > > >
+> > > > > Add a bootmeth that finds and boots Boot Loader Specification (BL=
+S)
+> > > > > type #1 entry files [1]. On each block-device partition it scans,=
+ the
+> > > > > bootmeth looks for files matching '<prefix>loader/entries/*.conf'
+> > > > > (where <prefix> comes from bootstd_get_prefixes(), typically '/' =
+and
+> > > > > '/boot/'), picks the highest-sorting filename, parses it, and exp=
+oses
+> > > > > it as a bootflow.
+> > > > >
+> > > > > Implementation reuses the existing pxelinux infrastructure.
+> > > > >
+> > > > > For now the entry chosen on a partition is purely the lexicograph=
+ic
+> > > > > maximum of *.conf filenames; sort-key / version field handling
+> > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIES_LEFT'
+> > > > > filename suffix) are left as TODOs. Likewise, only the top-sorted=
+ entry
+> > > > > is surfaced because the bootstd framework currently allows one bo=
+otflow
+> > > > > per (bootmeth, partition); exposing every discovered entry will r=
+equire
+> > > > > a framework extension.
+> > > > >
+> > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of scope h=
+ere;
+> > > > > [...]
+> > > > >
+> > > > > boot/Kconfig        |  17 +++
+> > > > >  boot/Makefile       |   1 +
+> > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++++++++++=
+++++++++++++++
+> > > > >  3 files changed, 351 insertions(+)
+> > > >
+> > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
+> > > > > +config BOOTMETH_BLS
+> > > > > +     bool "Bootdev support for Boot Loader Specification entries"
+> > > > > +     select PXE_UTILS
+> > > > > +     default y
+> > > >
+> > > > Wherever the 'default y' discussion lands, this will be enabled on
+> > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth.c will
+> > > > fail since they check the exact list and count. Please can you run =
+the
+> > > > sandbox tests and update them as needed?
+> > > >
+> > > > Since you are adding a new bootmeth you also need a sandbox test th=
+at
+> > > > exercises it (see the extlinux tests in test/boot/bootflow.c, with a
+> > > > fixture disk image) and a documentation page, e.g.
+> > > > doc/develop/bootstd/bls.rst with an entry in the index there.
+> > >
+> > > Will do, thanks!
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +static int bls_getfile(struct pxe_context *ctx, const char *file=
+_path,
+> > > > > +                    char *file_addr, enum bootflow_img_t type, u=
+long *sizep)
+> > > >
+> > > > This is a verbatim copy of extlinux_getfile() - please can you expo=
+rt
+> > > > that, or move it into a shared helper?
+> > >
+> > > Ack
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_EXTLINUX_=
+CFG);
+> > > >
+> > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since the buff=
+er
+> > > > is filled by a block-device read which may use DMA on some platform=
+s.
+> > > > An alignment of 1 risks cache-line corruption there, so please use
+> > > > ARCH_DMA_MINALIGN.
+> > >
+> > > Ack
+> > >
+> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > @@ -0,0 +1,333 @@
+> > > > > +     bflow->bootmeth_priv =3D label;
+> > > > > +     free(fpath);
+> > > >
+> > > > This leaks memory: bootflow_free() releases bootmeth_priv with a pl=
+ain
+> > > > free(), so the label's string members (name, menu, kernel, append,
+> > > > initrd, etc.) are never freed - for every bootflow discarded after a
+> > > > scan, not just on error paths.
+> > > >
+> > > > Since get_string() copies tokens out of the buffer rather than
+> > > > modifying it in place, you could follow the extlinux approach: keep
+> > > > only bflow->buf across the scan (already populated by
+> > > > bootmeth_alloc_file() and freed by the framework), use a temporary
+> > > > label in bls_read_bootflow() just to extract the title, destroy it
+> > > > with label_destroy(), and re-parse the buffer in bls_boot(). Then
+> > > > bootmeth_priv is not needed at all. What do you think?
+> > >
+> > > Will address the leak, thanks for pointing it out!
+> > >
+> > > The bls_priv structure is needed for my follow-up extension which
+> > > allows multiple boot entries to be returned by each (bootdev,
+> > > bootmeth, partition) tuple, and I wanted to minimize churn between
+> > > those two. I haven't sent that follow-up for review yet, as I wanted
+> > > to confirm this simpler version is acceptable first.
+> >
+> > We should implement this using an generic index rather than something
+> > bls-specific...please see some commits at:
+> >
+> > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
+>=20
+> Oh, there's already BLS in your tree :-D
+>=20
+> Would you like to merge that instead? Your version looks much more
+> full-fledged. If you happen to have one rebased on master or next I'd
+> be happy to test!
 
-Allow the symbol to also be visible when SPL_NAND_CADENCE is set.
-Pure Denali boards (uniphier) keep the existing behaviour and
-their .config is unchanged.
+Unfortunately Simon's work here is AI-generated and so not particularly
+welcome, among other problems right now.
 
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
----
- drivers/mtd/nand/raw/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+--=20
+Tom
 
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 261b9a51dd7..4850e0b2554 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -662,8 +662,9 @@ config SYS_NAND_BLOCK_SIZE
- 	hex "NAND chip eraseblock size"
- 	depends on ARCH_SUNXI || SPL_NAND_SUPPORT || TPL_NAND_SUPPORT || \
- 		MVEBU_SPL_BOOT_DEVICE_NAND
--	depends on !NAND_MXS && !NAND_DENALI_DT && !NAND_LPC32XX_MLC && \
-+	depends on !NAND_MXS && !NAND_LPC32XX_MLC && \
- 		!NAND_FSL_IFC && !NAND_MT7621
-+	depends on !NAND_DENALI_DT || SPL_NAND_CADENCE
- 	help
- 	  Number of data bytes in one eraseblock for the NAND chip on the
- 	  board. This is the multiple of NAND_PAGE_SIZE and the number of
--- 
-2.43.7
+--GVDzaqHWdDYQUQ/P
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj1kQwAKCRAr4qD1Cr/k
+Cv2eAQD+3iKw2Lqh1pUQfvrPHO8xYe7BY+F/7Ke3G+v0TZWrZgD/a/Xp8Ab1M7pi
+QWcBxhNBkSc/I0nbHX9jJDmshZM8TgY=
+=9YCr
+-----END PGP SIGNATURE-----
+
+--GVDzaqHWdDYQUQ/P--
