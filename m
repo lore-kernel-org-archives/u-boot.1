@@ -4,107 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D17C4CDE009
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 18:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB33CDE009
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 18:53:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E0E2847C8;
-	Thu, 25 Jun 2026 20:36:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BC0C8847C8;
+	Thu, 25 Jun 2026 20:53:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t1l8hRuN";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="tOOAfEcE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F64584894; Thu, 25 Jun 2026 20:18:22 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 25B3684894; Thu, 25 Jun 2026 20:53:08 +0200 (CEST)
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2C1D84704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 20:18:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 424B784704
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 20:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-486d0e175e9so81694b6e.3
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 11:18:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782411497; x=1783016297; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=r4I4UkouYBBuICi4hliYS4flSYDsbuzV2mxNy2exJtQ=;
- b=t1l8hRuNCanpO3B8SpQm6eju+2kk7pfCKdVYYLAA4HGYA82C6RomOFfBWaFC/BhkLf
- SDGezIpDz6YfR7eJAaBGu3qbGRpaU9koCDkfo3i2hHeKTOZIH6PAd5DhcCFKMk6JypgR
- 3LnRsBlx069+A6tEZU1SXGbtZsbvzkt9DG2/A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782411497; x=1783016297;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r4I4UkouYBBuICi4hliYS4flSYDsbuzV2mxNy2exJtQ=;
- b=RNEIGhySgda8zmJ71/NWrseEvR5TvuBCxOj2eZKhfEHiRHbnfUuabtw8HScA/4X9UQ
- a95riYVWTkjrzmPVEMygD0cNnHVBeNOKcVyQnM95nTHkfO4dDHvvL3E3Ty8KYJjzW/AF
- EaUrlGFk+mtBzQ0nBVGyD5mBFwmVnMv7BelGG1IyhPekb/jMHM7VYNHfd/xpuMvfhjsg
- q62OnKpjjvWwU5461hlQ7sZE237oCwDksK8x/irA7TqV0i6clhsZ9NOXzCkh3uv/8xBW
- htOYNH4AR6+PDTCpeoiEXK2tG4ndCWaTwH9Vodp2ns7ZlR+dmZ+gwqWylhSnb4KEiekY
- /Cfw==
-X-Gm-Message-State: AOJu0YzRn/q5+iAkynTUSLsnmcw8PRO30afUNEIcHhkss4nHiUVS86ak
- P7whQU+JdPnHPPaYWDltrChqxfOveyD5O97t/v14wsL4F4vJVxeQ5aN+GdZybYbn6+o=
-X-Gm-Gg: AfdE7cmX1ES8qEU0dw+J3PmUmWzCnXhEs3xv0z/jbbv42OICEcUTrupe3bvkkNA1cyR
- wCQqlIQkIB0T6EXhNkP9PbISbuNcRqrByHH/NMz0J2TyyAT0Ez8Moqc3V6aSWe0e1nh5boEG+fM
- KvUTX+lejiF5UfhiU9y9Nw+BaR8UgPKjSUPVoEpiFh7iDUhYRlJWzPjLz6XQn+Rs6OPfItMUCGX
- ZD+DyR3qtFetF308JcM4lYAfdlhZJKgHR1PT0CWcviYsQZLcyXXL4wNdtr+7K/Pr7OjoF4Fq56Y
- RDQL9/GzFJiHFnqR116N2TkEjrE774tU2CXjrVtXoZv++BCgaqyXeQivYDYP8OkEUbqLq5UpVPQ
- NsBI97R18ehhO0DdwfppogW9YfBU3Kff/CrhPOzd+ae0Gk5cneCyNED6kpj/voCQhWM2Vdf80Y8
- zZoAkrxPPmVgfo4QkudMQh6Hh6RULCOoCDa7Y2faj7Hj4NG9jDwr8S9DEmDtzfNUiJz9KeKa/sg
- H8vrTrWOVzqLbcTd+wmkEnZ0kuC8zjJf9loN5kG
-X-Received: by 2002:a05:6808:e84:b0:493:260b:562d with SMTP id
- 5614622812f47-493260b7c9emr332787b6e.9.1782411496616; 
- Thu, 25 Jun 2026 11:18:16 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-48aec0dd2bbsm11079243b6e.6.2026.06.25.11.18.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 11:18:15 -0700 (PDT)
-Date: Thu, 25 Jun 2026 12:18:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Heiko Schocher <hs@nabladev.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Andre Przywara <andre.przywara@arm.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Charkov <alchark@gmail.com>, Simon Glass <sjg@chromium.org>,
- Yao Zi <me@ziyao.cc>, Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-Subject: Re: [PATCH v3 3/6] clk: ti: Remove AM33xx dependency
-Message-ID: <20260625181812.GA3892257@bill-the-cat>
-References: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
- <20260608-omap4-support-v3-3-8595ccd203f0@bootlin.com>
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4gmScG0h7BzyNS;
+ Thu, 25 Jun 2026 21:53:01 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1782413582;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jDSdOx5xDh2QJkEzZgB0VxyAwI/N+0H7bu5/ob6iZw0=;
+ b=tOOAfEcECfEG1P1U2S5/EA3MTCv156GUVjMTIzGmNbOi97FXnOM53J/PV6Iptzs0H7CQjt
+ op5coTvTGBupJhRGAxJ39LFVhZnIamEF64MHvUguOMkF8Ai/DgisbcaSSa0mloxMWqUOYM
+ 9GPaZ+VHShM23MhfOrRkHERsQlEuiPk=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1782413582;
+ b=a6bfCA3VnFR+gXIFh9XEUJRtrvZy/QaGys7f2N0EwGKTXQJBm6pR3CPCRogErWieDEuH+C
+ QCEFYa4dNml/3W/QUfTBbHkKl3NA3wxsgmVpo/t8jlTGso93YU7D0MKzg7CG7lwfXXaQeX
+ 61o6oypZlgtZYdMQ60sqrqqF36Fhy4c=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1782413582;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jDSdOx5xDh2QJkEzZgB0VxyAwI/N+0H7bu5/ob6iZw0=;
+ b=nqs0xX0AriTx2yD+foLv4c7HjvlmBQPRJ1XQRSYAdavTGAhjBNBTvnLOJ5V5+pAd6WXc1r
+ t5zMINB1paICiaYE36L5rixxxmB2ruFEQR6caefbGOVLCR0GN9qhM6VmfxljIpdDSNX/OD
+ jO7nwaqhG2kTDBgnSozIzhR6L3SFaxg=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+Date: Thu, 25 Jun 2026 21:52:59 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org,
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com,
+ trini@konsulko.com, afd@ti.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCHv2 0/5] k3-am62-pocketbeagle2: add board and variant support
+Message-ID: <aj15C4bUnYHve9yk@kehys.lan>
+References: <20260619231719.3823195-1-rs@ti.com> <ajwSkh6Pa97LPVi5@kehys.lan>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BAhwmPZ5JOaxfVn0"
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Disposition: inline
-In-Reply-To: <20260608-omap4-support-v3-3-8595ccd203f0@bootlin.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 25 Jun 2026 20:36:42 +0200
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ajwSkh6Pa97LPVi5@kehys.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,59 +89,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Wed, Jun 24, 2026 at 08:23:37PM +0300, Marko Mäkelä wrote:
+>I successfully booted this together with a version of the software 
+>ECDSA patch, but did not try to load a signed FIT image yet.
 
---BAhwmPZ5JOaxfVn0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is Linux flexible about the kernel and FDT load addresses, or is there a 
+recommendation that I should follow? I see that earlier when I tested 
+CONFIG_FIT_SIGNATURE based boot on a Phytec phyBOARD Lyra, I had used 
+0x81000000 and 0x83000000, respectively. I didn't test those addresses 
+on the PocketBeagle 2 yet.
 
-On Mon, Jun 08, 2026 at 03:11:59PM +0200, Bastien Curutchet wrote:
+My initial experiment failed, because my image had specified the entry 
+and load addresses 0x82000000 for the kernel, which is the same as the 
+$loadaddr. It is thinkable that zlib inflate() returns -3 (Z_DATA_ERROR) 
+because it is simply corrupting its input (data start: 0x820000c4) when 
+decompressing it to 0x82000000 onwards.
 
-> The clock controller driven by this driver exists on other OMAP platforms
-> than the AM33xx. Yet, it uses functions provided by
-> arch/arm/mach-omap2/am33xx/clock.c making it unusable by other OMAPs.
->=20
-> Replace am33xx-specific do_{enable/disable}_clocks() with new static
-> functions implemented locally.
-> Replace the am33xx-specific clock header with the one shared by all OMAP
-> platforms.
->=20
-> Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
-> ---
->  drivers/clk/ti/clk-ctrl.c | 48 ++++++++++++++++++++++++++++++++++++-----=
-------
->  1 file changed, 37 insertions(+), 11 deletions(-)
+Here is some output from a failing run:
+=> load mmc 1:1 $loadaddr fitImage
+15014068 bytes read in 180 ms (79.5 MiB/s)
+=> bootm
+…
+Working FDT set to 88000000
+    Uncompressing Kernel Image to 82000000
+Error: inflate() returned -3
+gzip compressed: uncompress error -3
+Must RESET board to recover
 
-The labgrid issue we had meant that I didn't get this tested again on
-beaglebone black until now, and *this* commit leads to:
-U-Boot SPL 2026.07-rc4-00462-g7b87c16a2945 (Jun 25 2026 - 18:10:48 +0000)
-Trying to boot from MMC1
+Below is the start of a succesful run when I invoke the image from a 
+non-overlapping address:
 
+=> load mmc 1:1 0x89000000 fitImage
+15014068 bytes read in 179 ms (80 MiB/s)
+=> setenv bootargs "console=ttyS2,115200n8 earlycon=ns16550a,mmio32,0x02860000 root=/dev/mmcblk1p3 ro rootfstype=ext4 fsck.repair=yes resume=/dev/mmcblk1p2 rootwait net.ifnames=0"
+=> bootm 0x89000000
+…
+    Verifying Hash Integrity ... sha256+ OK
+    Loading fdt from 0x89e430d4 to 0x88000000
+    Booting using the fdt blob at 0x88000000
+Working FDT set to 88000000
+    Uncompressing Kernel Image to 82000000
+    Loading Device Tree to 00000000996b2000, end 00000000996c2d82 ... OK
+Working FDT set to 996b2000
 
-U-Boot 2026.07-rc4-00462-g7b87c16a2945 (Jun 25 2026 - 18:10:48 +0000)
+Starting kernel ...
 
-CPU  : AM335X-GP rev 2.1
-Model: TI AM335x BeagleBone Black
-DRAM:  512 MiB
-### ERROR ### Please RESET the board ###
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+[    0.000000] Linux version 7.0.0 …
 
-Rather than...:
-Core:  205 devices, 20 uclasses, devicetree: separate
-WDT:   Started wdt@0 with servicing every 1000ms (60s timeout)
-=2E.. and the rest of boot. Do you have any ideas?
+The kernel was configured as follows:
 
---=20
-Tom
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
 
---BAhwmPZ5JOaxfVn0
-Content-Type: application/pgp-signature; name="signature.asc"
+It seemed to boot well into the user space of
+https://www.beagleboard.org/distros/pocketbeagle-2-debian-13-5-2026-05-19-minimal-v6-12-x-ti
 
------BEGIN PGP SIGNATURE-----
+where I had simply replaced the bootloader files and added the signed 
+fitImage to the root directory of the boot partition.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj1w4AAKCRAr4qD1Cr/k
-CmSDAQDxGPR5WWFbbX/d42ku5vSdaZXg8lXKPAkkcoqgO/AlXgEAlskR+EI7ZDml
-QcK4JodAYq9mSBcG66c6HP+Ekw4XIAc=
-=L24R
------END PGP SIGNATURE-----
+With best regards,
 
---BAhwmPZ5JOaxfVn0--
+	Marko
