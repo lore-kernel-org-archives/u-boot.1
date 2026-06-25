@@ -4,68 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 923C6CDB47F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 07:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17796CDB466
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 07:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD8DD84704;
-	Thu, 25 Jun 2026 09:08:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 70E0084704;
+	Thu, 25 Jun 2026 09:15:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DYDBT8F7";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="C86qWvl9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11196848F0; Thu, 25 Jun 2026 09:08:23 +0200 (CEST)
+ id A68FA848F0; Thu, 25 Jun 2026 09:15:22 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEB7880398
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 09:08:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A52780398
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 09:15:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 4F7274E408CB;
- Thu, 25 Jun 2026 07:08:20 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id BCB8F4E408C9;
+ Thu, 25 Jun 2026 07:15:19 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 20EC35FF03;
- Thu, 25 Jun 2026 07:08:20 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8D6305FF03;
+ Thu, 25 Jun 2026 07:15:19 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7B795106C84DD; 
- Thu, 25 Jun 2026 09:08:14 +0200 (CEST)
+ with ESMTPSA id 830FD106C81A8; 
+ Thu, 25 Jun 2026 09:15:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782371298; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=XNg24OrSinXHeF0MIjZq4V/gyjYHQFJDr56HtVUALQY=;
- b=DYDBT8F7nEbnGoij0PzLqYztUm7U6H6KV4mF1H36LzZiSxxJ8TBeO4kxqZHZfRbjX+Vjcl
- QVIwJ/tYD3n5upRJM0ftlWo347QlAO5k8+QGtUrIZKaFI2RWmpGOyOPM70RdF4bp3TJ5jz
- s8KC/8oFj1JgzkzUQU6MCEQb9EHHcYjXR0uHCPUtxsXWqZhpiY7NrGDLz8pza9U4YEMJoQ
- /kKarFPn4zrL8JeEwhy3VHm6Ek4DyPL2MPXNdYR9Qto5SBTBtIm8FOmwHeF3/O3UAxeHy4
- J2G9uGpqhNt1gMjrX35z9VwptTMg4uw/wfO9zhSKuhIiIa745UYdAXuPg+tPeg==
-Message-ID: <666483d3-0053-4218-9c46-a092dbb029b0@bootlin.com>
-Date: Thu, 25 Jun 2026 09:08:14 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/19] Introduce resume for J7xx SoCs
-To: Anshul Dalal <anshuld@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ t=1782371718; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=HwuriYLTyUzl7aK3Ynyof35wj5mmsC9Bjd/G8lONQzc=;
+ b=C86qWvl9ttGVLOEqx+bkOHSUz6B+8nab/U/NhopPyV3eIrTyfJFxLyROn3LQmvZb5XtbJ/
+ sSRtMJSgSX9seAiTh0NpfPD+J9Z1fL+CC3eZBlMUzo1fvYY7CrRvMdcnnOAVKg154jcVrz
+ OmN+pNYWdYWi+NmezVy3sTKRMRB3A8tD5F/DLFNfAKc7dkyNgTDntTz7Hl1W+YlslNjaOW
+ kWYwtRYW8WEzyGjoh2zMNcqpSXNfNBUy+I74wxfdDPM02MmQ8nwe1qYmFTszUpnADAcb/E
+ nZ6SohfBUVrzuvJaRZJE/l8ki/4SDMTjcoOEToo6+RHoqDw2TsoRjuyPVbE8Nw==
+From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
+To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Markus Schneider-Pargmann <msp@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Kendall Willis <k-willis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Abhash Kumar <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>,
+ Abhash Kumar <a-kumar2@ti.com>,
+ Thomas Richard <thomas.richard@bootlin.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260624074459.873906-1-richard.genoud@bootlin.com>
- <178236663369.80761.5454834032276538887.b4-review@b4>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <178236663369.80761.5454834032276538887.b4-review@b4>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
+Subject: [PATCH v4 00/19] Introduce resume for J7xx SoCs
+Date: Thu, 25 Jun 2026 09:14:56 +0200
+Message-ID: <20260625071515.91243-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -84,27 +78,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 25/06/2026 à 07:50, Anshul Dalal a écrit :
-> On Wed, 24 Jun 2026 09:44:40 +0200, Richard Genoud (TI) <richard.genoud@bootlin.com> wrote:
->> [...]
->>
->> BEWARE: This series is based on v2026.04 + AM62 LPM series:
->> https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
->>
->> It needs lpm_memory_regions described in DTS:
->> https://lore.kernel.org/lkml/20260427160326.370415-1-richard.genoud@bootlin.com/
-> 
-> Hi Richard,
-> 
-> The series doesn't apply cleanly on next, could you rebase and resend.
-Hi Anshul,
+This series allows J7200/J721e/J721s2/J784s4/J722s to resume from
+suspend.
 
-Of course, I'll re-send that in a few jiffies.
+On those SoCs, a magic value is set in a PMIC register by the DM
+firmware just before suspend, then everything but the PMIC and DDR is
+powered off.
+At resume/boot time, the magic value has to be read back by U-Boot SPL in
+order to know if we are indeed in a resume situation.
+That's the purpose of j7xx_board_is_resuming() introduced here.
 
-(NB: you'll also need to apply AM62 LPM series beforehand)
+Then, if the SoC is resuming, the DDR has to be brought out of
+retention, at full speed and get out of low power mode.
+Between those steps, the DDR_RET pin has to be de-asserted. But the
+DDR_RET pins of all DDR chips are tied together on a single GPIO, so
+it's impossible to resume one DDR chip after the other, they must be all
+resumed at once.
+That's why it's orchestrated from board_init_f() and not in the k3ddrss
+driver.
 
-Thanks!
-> 
-> Thanks
-> 
+Once the DDR is fully functional, the next steps are:
+- retrieve the LPM memory region from DTS
+- authenticate certificates from LPM memory region and apply firewalls
+- ask TIFS to restore TFA and its own minimal context
+- start TFA on remote proc
+- load and jump to DM
+
+Patches 1-3 add LPM helpers for all SoCs
+Patch 4 adds the resume detection for all SoCs
+Patch 5 adds common code for DDR retention pin
+Patch 6 enables GTC at resume
+Patch 7 detects IO+DDR resume state for j7200/j784s4
+Patch 8 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
+Patch 9 sets the PMIC NSLEEP triggers
+Patches 10-12 add the DDR resume sequence for all SoCs
+Patches 13-16 add the resume flow for all SoCs
+Patch 17 updates the pm-cfg and schema to a new version
+Patch 18 removes now unneeded background firewall on DDR for j7200/j784s4
+Patch 19 extends the firewall for ATF region to TIFS
+
+Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
+
+BEWARE: This series is based on:
+ commit 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"")
+ + AM62 LPM series:
+https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
+
+It needs lpm_memory_regions described in DTS:
+https://lore.kernel.org/lkml/20260427160326.370415-1-richard.genoud@bootlin.com/
+
+It also needs a bootph-pre-ram property in PMIC-B for j721s2:
+https://lore.kernel.org/linux-arm-kernel/20260429-k3-j721s2-som-bootph-pre-ram-pmic-4c-v2-1-31a0e7677216@bootlin.com/
+
+Changes from v3:
+- rebase on commit 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"") + AM62 LPM series
+
+Changes from v2:
+- enable GTC counter at resume
+- factorise __weak j7xx_board_is_resuming()
+- reset PMIC NSLEEP triggers register in one place
+- gather Reviewed-by
+- fix comment style in k3-ddrss.c
+- clean and Factorize k3_deassert_ddr_ret()
+- change printf in dev_err in ti_sci_cmd_proc_auth_apply_fwls()
+
+Changes from v1:
+- drop unneeded patch: configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
+- factorize j7xx_board_is_resuming (that lead to patch renumbering)
+- drop From: field duplication from patch 1
+- use SYS_K3_SCRATCH_LPM_ADDR config option instead of hardcoded value
+- add missing board/ti/j722s/pm-cfg.yaml
+- migrate missing K3 platforms to new pm-boardcfg
+- remove struct lpm_addr_info mem_addr_lpm; (globals are forbidden at this stage)
+- rework ti_secure_image_auth_apply_fwls()
+- Fix pointer arithmetic: mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE
+- Fix K3_LPM_WAKE_SOURCE_PMIC_GPIO value
+- Fix spellings/comments
+
+Abhash Kumar Jha (4):
+  board: mach-k3: r5: common: enable GTC after core_resume
+  board: evm: Enable de-isolation of IOs at resume for j7200 and j784s4
+  board: mach-k3: r5: common: Store wakeup reason on scratchpad memory
+  arm: mach-k3: Update pm-boardcfg for all k3 platforms
+
+Prasanth Babu Mantena (3):
+  firmware: ti_sci: add low power mode operations
+  arm: dts: k3-j7200: Remove background firewall on DDR
+  arm: dts: k3-j7200: Extend firewall for ATF region to TIFS
+
+Richard Genoud (TI) (9):
+  mach-k3: r5: common: add helper functions needed in LPM resume
+    sequence
+  global: k3: use gd to store the resume state
+  mach-k3: r5: common: introduce j7xx_board_is_resuming()
+  mach-k3: r5: common: introduce k3_deassert_ddr_ret()
+  board: mach-k3: r5: common: Set PMIC NSLEEP triggers bits at resume
+  ram: k3-ddrss: Add j722s DDR resume sequence
+  ram: k3-ddrss: support j784s4/j721e/j721s2 DDR resume
+  arm: mach-k3: j784s4: Enable LPM resume flow for J784s4/J742s2 SOCs
+  arm: mach-k3: j722s: Enable LPM resume flow
+
+Thomas Richard (TI) (3):
+  ram: k3-ddrss: Add exit retention support
+  arm: mach-k3: j721e: Enable LPM resume flow for J7200/J721e SOC
+  arm: mach-k3: j721s2: Enable LPM resume flow
+
+ arch/arm/dts/k3-binman.dtsi                   |   7 +-
+ arch/arm/dts/k3-j7200-binman.dtsi             |  14 -
+ arch/arm/dts/k3-j722s-r5-evm.dts              |   4 +
+ arch/arm/dts/k3-security.h                    |   1 +
+ arch/arm/include/asm/global_data.h            |  19 +
+ arch/arm/mach-k3/Kconfig                      |  10 +
+ arch/arm/mach-k3/common.c                     |   6 +
+ arch/arm/mach-k3/common.h                     |  16 +
+ arch/arm/mach-k3/include/mach/hardware.h      |   1 +
+ .../arm/mach-k3/include/mach/j721e_hardware.h |  11 +
+ .../mach-k3/include/mach/j784s4_hardware.h    |  10 +
+ arch/arm/mach-k3/include/mach/k3-ddr.h        |  16 +
+ arch/arm/mach-k3/include/mach/security.h      |   1 +
+ arch/arm/mach-k3/j721e/j721e_init.c           |  24 ++
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |  49 ++-
+ arch/arm/mach-k3/j722s/j722s_init.c           |   6 +-
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  44 +-
+ arch/arm/mach-k3/lpm-common.h                 |  17 +
+ arch/arm/mach-k3/r5/Kconfig                   |   4 +
+ arch/arm/mach-k3/r5/Makefile                  |   1 +
+ arch/arm/mach-k3/r5/common.c                  |  17 +-
+ arch/arm/mach-k3/r5/lpm-common.c              | 392 ++++++++++++++++++
+ arch/arm/mach-k3/schema.yaml                  | 146 ++++++-
+ arch/arm/mach-k3/security.c                   |  62 +++
+ board/beagle/beagleboneai64/pm-cfg.yaml       |   5 +-
+ board/beagle/beagleplay/pm-cfg.yaml           |   7 +-
+ board/beagle/beagley-ai/pm-cfg.yaml           |   7 +-
+ board/phytec/phycore_am62ax/pm-cfg.yaml       |   7 +-
+ board/phytec/phycore_am62x/pm-cfg.yaml        |   7 +-
+ board/phytec/phycore_am64x/pm-cfg.yaml        |   5 +-
+ board/phytec/phycore_am68x/pm-cfg.yaml        |   7 +-
+ board/ti/am62ax/pm-cfg.yaml                   |   7 +-
+ board/ti/am62px/pm-cfg.yaml                   |   7 +-
+ board/ti/am62x/pm-cfg.yaml                    |   7 +-
+ board/ti/am64x/pm-cfg.yaml                    |   5 +-
+ board/ti/am65x/pm-cfg.yaml                    |   7 +-
+ board/ti/j7200/pm-cfg.yaml                    |  92 +++-
+ board/ti/j721e/evm.c                          |  25 ++
+ board/ti/j721e/pm-cfg.yaml                    |  92 +++-
+ board/ti/j721s2/pm-cfg.yaml                   |  94 ++++-
+ board/ti/j722s/pm-cfg.yaml                    |  94 ++++-
+ board/ti/j784s4/evm.c                         |  25 ++
+ board/ti/j784s4/pm-cfg.yaml                   |  94 ++++-
+ board/toradex/aquila-am69/pm-cfg.yaml         |   7 +-
+ board/toradex/verdin-am62/pm-cfg.yaml         |   7 +-
+ board/toradex/verdin-am62p/pm-cfg.yaml        |   7 +-
+ drivers/firmware/ti_sci.c                     | 181 ++++++++
+ drivers/firmware/ti_sci.h                     |  92 ++++
+ drivers/ram/k3-ddrss/k3-ddrss.c               | 269 ++++++++++++
+ drivers/ram/k3-ddrss/lpddr4_k3_reg.h          |  94 +++++
+ drivers/remoteproc/ti_k3_arm64_rproc.c        |  10 +-
+ include/linux/soc/ti/ti_sci_protocol.h        |   8 +
+ tools/binman/etype/ti_board_config.py         |   4 +-
+ 53 files changed, 2049 insertions(+), 102 deletions(-)
+ create mode 100644 arch/arm/mach-k3/lpm-common.h
+ create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
+ create mode 100644 drivers/ram/k3-ddrss/lpddr4_k3_reg.h
 
