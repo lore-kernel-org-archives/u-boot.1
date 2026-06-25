@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A14CCCDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E8BCDE000
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 17:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3298D847C8;
-	Thu, 25 Jun 2026 19:25:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 323DC847C8;
+	Thu, 25 Jun 2026 19:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mMNtpRNs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ClIm2HTH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B966B84894; Thu, 25 Jun 2026 19:25:40 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id E629D84942; Thu, 25 Jun 2026 19:29:32 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 088FD846F4
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:25:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 770C3846F4
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 19:29:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-697de335c18so48729a12.2
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:25:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782408337; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-c0d6c75c58cso11508366b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:29:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782408570; cv=none;
  d=google.com; s=arc-20260327;
- b=B3kFfc0qIds4Elpa+Bbw9/xGStUaEUW3PMgVNp86tWJEwJc4nh4gerAhwyaC1f/W+e
- o3TyQek53RA5PtgMMNmki+XS5oc3cw6E5X7PPuEOIWjQG/lEuD+Hq+GIaOmzESnpMAxo
- GYzkHCGfur6K4dIxO8nEGL6RzCBUlQfG2ZPt37LYg8boa84Wt1TQk870Aj5nTZDTMKb8
- Wr2n61Y+6TWbngFkBvhfmOGfyXHO26RjaH9laczc+9EFJK0Nwr8nIKwdXyUGmRWF88lf
- vc0QtMfAl2+CXdFBq3zR+/f2vDQEHwjcia34GtUPrWJfYkPnpfFmv4Cdq6X1PJ3vxVR+
- n7ng==
+ b=XHSbZCoxAO4XDWYIFS0e4xrVCzQi7gy2UtJZJGI7ZZstOBaJbFryIGTjp8Dwf5+7nG
+ 5r3MSqOYQaEoxNarUsU90mw/73qS0rwRDSfPJGfdBEt67sywSMPwvnrU4KwOjo4yX6BH
+ IkbgYmP3XxnKkM6xxvESAjvHPT2IMc2WhOH9g0A5B7jPCqxqx3pl6W+BHrwoomE2Gsa1
+ V2oa0EXz1pSeAFLUMwSl6jhPLDGT024mPFEx4vhzGmyJzl01cg5eBO1OEhNVls/WNc77
+ P1as2Cj45OYkJQtHRe/Gx/rHrnRML6uXvgbzzZquldjfpF2aS0/93IdIKkTkImxCqF+F
+ kyFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
- fh=1IBpGH+Xd/YdfaKFMxo1vol56mWfSqB2hhB/lOynXBQ=;
- b=Rq699dnJqTQVwP7mB0iR4c/EUI6lBhH2azXpFQmA9k4ZhQV4HZiTWnwg1W3N86dFWf
- ZuT0GeME19bic30YrHHZgUS/a5LIK+PGp1v8jWRbISi8tnXn3s+40vbjOCvrYVlQFnej
- PMScRyJPXUxC0OzmTv28gRdiQmdI6p8/X52b1uWmSgVJhQdaoXyk9Hpf2NpVondSAsdQ
- +N55WMhiDJwxjJQsHNlCqdqkMGLIXSgghU1h+b+yhcNvEmalZdhN6x25te49NwZnLLNr
- H5SsVL8F9sUTvJSOMkpX6jz2WMRonpz888zMSiOT/2eD0lJuJzPpK4cNGf8MmrBvIqQZ
- p+9A==; darn=lists.denx.de
+ bh=f3FzFY5cHZydkLByVxp0BBgVrPgdC9hhEQi37HUm3A4=;
+ fh=qGSvnoLRuBd/y+HqgM3FQxtyrVNcAIB0PYb2wpCY7E4=;
+ b=At1dqiaFiyVB/l5M/KdTnM3J8mHC31Awkvbgfw/mHhDoxswzcrH7ZStJi07Rodyfcv
+ 0dWbNwTP1bCAr2gyoR8y+9XPqcCTIkA5/KtOVwLyubeOMlez8TgQRoLjeNuTeOT4ZM7O
+ kFDnGl6T32Z4glwuRX/bjfyRUrdLcVHrU/5Ax0F1yY2fB8dyO1jJMBLRIYKgKmt5+lAK
+ dYhYq+IEQ8aaqMQqVjRTWj1DVc4wYavPPJgedqZIvI/1J6djqpq8FrbApvZ3k43uOU0t
+ kaPHJiY0chXfr4G0U1+W6PsKbSXbYmOiKmXFX30aT0AtQeXxsbGIBDQkSqQwCo7247DA
+ c2Ug==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782408337; x=1783013137; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782408570; x=1783013370; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
- b=mMNtpRNsi06cyE2vBFqbMiqNvuqjSejfeErR0iHeq4nqz4oAEbTpMzaZhCdslVgjZW
- lfHI58e0yHzSY8kqbNDoEMfPndk/aYi1nguvhNG/KUEOgqnTm4bKbboEFui5Jcfp6YYQ
- gedA31gESQEjlXfdVW6B+5xPjVBm6+BukMrzs=
+ bh=f3FzFY5cHZydkLByVxp0BBgVrPgdC9hhEQi37HUm3A4=;
+ b=ClIm2HTHaZ2Uzz5au+PI7ib0otT7MgpwosmxJLMTLsxr1vQwQyI4JFAcgDjkVo9gdM
+ 2cxJZzHg45xF6R337OW+L8sL+ClqhC4FZ/revDJOrNvtQfJriItsvwxAr+9UATgc1Qz2
+ n3m+Sb0GW8xy98TNhdZg0oy9xcn6l2wcaV7lk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782408337; x=1783013137;
+ d=1e100.net; s=20251104; t=1782408570; x=1783013370;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=mZoPiTuwDDaSmaQH0WRyg4emX7Og344X0UD/vsQ3POM=;
- b=dZiFN8ab7WQR/rnMgduzgjyhnePeKSszJ/ATgFFSIRjbEY+UknzMe3MVBUEAgUwhRz
- +3q1/NDl6YgOXNWrrV4YoAegeDLZuwsmQ0lIyURqlqW2vfrUNCGf2nP5k9Q6oiVtFqqT
- Yx7p7ioISnQLWVPZPyi96oQu3rGcDVEiVN1ACqnCph0JDJeN2+RgC9Xz10B/jl/ULSTT
- LcEeOLePOQWOPTMD4Jfs3MXzf22Qa+Ug6iGZGNL99eTzm351gufNq0++RK365w4gTt7M
- Yi1qIPEWoYrjwFmcpNWNTk3YzEYrBdixtUI/r00t1H9xw/J6wdfxKhNUyhYG9mLxxG8f
- 7GZw==
-X-Gm-Message-State: AOJu0YxV62lileF0Okx5+nYzN7Wb/WH19AmauwlFybrNZZFBtmFBvovl
- L7sncAe+HU8oULDLiQi/8oBCbCpd/8R3vEQgLukupc2+wPakiAOwbFJUJXaMNiZxlRpSAGZYP61
- QBTuQj8olxP4IZCQrygHMzN6fMD0csZ8qFVmxWro+
-X-Gm-Gg: AfdE7cnOOV5OjswnwSdD1aEeujKQD5eGoq79+fJmdEVJlEX2pC8nYWU3fat+qkiV3Bw
- b9em1gVMBWWvDTEMBcT0k17jJSLsu4ViXWW5pcDuGJiDjEUjA85MhO+fBExQxmic0zCrg8tpXm6
- 3ArAIKjP1LThZL2ReK6G1Y80Zi9w6rcGiWpje9xAEB4DViCehFtiOYUx5B3M6Kg58g7yd8+rOch
- GSnYAiFva69TdDU6hVmGZahaUXINnddqvEsgCYMpV5p+i+BsN5CMWoSnIL+raMwBIcwhnBulQ==
-X-Received: by 2002:a05:6402:1473:b0:698:f7d:4e01 with SMTP id
- 4fb4d7f45d1cf-69810a457admr207433a12.6.1782408337427; Thu, 25 Jun 2026
- 10:25:37 -0700 (PDT)
+ bh=f3FzFY5cHZydkLByVxp0BBgVrPgdC9hhEQi37HUm3A4=;
+ b=aEIcZEMTaQZEEDDb2cCMdlS8NWv1fiv/MlT5ZJDABNxS5ehyrsSn7+rgPEtEqXlTkS
+ Bff0MBrDScJsnyB0hiYXUVh0MzBDwIMldsGxJNnlFRfsCNNsOxOCaQWFBdFPaKRuAtaU
+ lmCqYBG3OSwChhCdShoyJcqBJtlXTxiXAWRYUQdZJIHFK90QGqyDqd3had2cY2VliqWs
+ cNJQjugdQz3Ckgoxeb1MPuBPakuqCDgS2NgFcNjEUZG2RMO9WgdOW4+IlSbcwHS/+DZk
+ IXkW1YRG3C2in43KtfldWoY2T3W/PD1ICQPJLl0LL4RMnNeXntqsxpJLtJa/zoyO3ww0
+ 3SWw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RozvJjghjmIHBa8oqK11Dmii0MtlZDW7zFK5CfWYGSrk88BYfW2ZYcvJ7X/ymMA6i8m/XhjRrk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxofeAqi+P1L2PCitVbwXRGT/FoXawX5sAmXcq7bk/dpr8JncdL
+ aQ3Fd1eLsOm4F0dxFT94r3SreM2ByW+jhrpJ53zQ0fZ/96vBUUBkiluTeKLVql9bQqqlWu5HOqp
+ BRRvWZjMMWH6+MdprfdLK9bmMlSeyp/+d3a5ljhS7
+X-Gm-Gg: AfdE7ckf8kGPOt3Z5/QY2uYJBKLY/P7LCcmSPo5w3718ehF5AwEkD08C4doI8OBD5ZD
+ SVnP/VoCuyhm/sUKj/mRcKJ72c6Uzx5uE+bbXLo+sBHHGVJLZbHBZ4HJd28j5bWcNGaNkvaSxFn
+ Rjp3UdsSybqyt+saHkMpJ1ufzIGZNkbWC3E9Nw9EHsx0KbCTmAkjeeIsaLvSAonoIzU0a5pXKym
+ 3HJdfowCFjdPZQlFKzk7as4hFtyUUMUuzxylQG+5SnycvVj3YZvlsRFb0rCRHXwAaRCXySgyQ==
+X-Received: by 2002:a17:906:f5a8:b0:bfb:13b8:2ac4 with SMTP id
+ a640c23a62f3a-c1205de8db7mr274119666b.13.1782408569827; Thu, 25 Jun 2026
+ 10:29:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
  <20260604-bls-v1-7-4ce6d1ee4711@flipper.net>
@@ -87,15 +89,16 @@ References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
  <CAKTNdwEkt+YMq-SG=PVTGzGztyeujVr=fEje74NnSbBbiswd7w@mail.gmail.com>
  <CAFLszTg7DJW4b0JhuPgCQe2TdMEdUagdGqRu7UG_j__S=4MjMQ@mail.gmail.com>
  <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
-In-Reply-To: <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
+ <20260625172422.GU382693@bill-the-cat>
+In-Reply-To: <20260625172422.GU382693@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 18:25:25 +0100
-X-Gm-Features: AVVi8Cf457ok4zpQRmBCXjWK35dK5RlDxc4SvUTwnBnNAGj_uDnVY_h2iLFBC00
-Message-ID: <CAFLszTghO2OM44ZvPg+L2aufKH9ztBz=cCx9sTjNU-eyeS_8AQ@mail.gmail.com>
+Date: Thu, 25 Jun 2026 18:29:18 +0100
+X-Gm-Features: AVVi8CdC-QD3XBc-IXA1TyHtMQIt2qduA_tOD4FXPDgnB0SCOHT7XJbKJMxmOi4
+Message-ID: <CAFLszTg5sBQiVw_guWhNjg8PQ2d+KyVXw0=Q0igjxSeuxerqsQ@mail.gmail.com>
 Subject: Re: [PATCH 7/7] boot: add a minimal bootmeth for the Boot Loader
  Specification
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+To: Tom Rini <trini@konsulko.com>
+Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de, 
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>,
@@ -121,226 +124,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hi Tom,
 
-On Thu, 25 Jun 2026 at 17:57, Alexey Charkov <alchark@flipper.net> wrote:
+On Thu, 25 Jun 2026 at 18:24, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+> On Thu, Jun 25, 2026 at 08:57:13PM +0400, Alexey Charkov wrote:
+> > On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Alexey,
+> > >
+> > > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.net> wr=
 ote:
-> >
-> > Hi Alexey,
-> >
-> > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.net> wrot=
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chromium.o=
+rg> wrote:
+> > > > >
+> > > > > Hi Alexey,
+> > > > >
+> > > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wrot=
 e:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Alexey,
-> > > >
-> > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net> wrote:
-> > > > > boot: add a minimal bootmeth for the Boot Loader Specification
+> > > > > > boot: add a minimal bootmeth for the Boot Loader Specification
+> > > > > >
+> > > > > > Add a bootmeth that finds and boots Boot Loader Specification (=
+BLS)
+> > > > > > type #1 entry files [1]. On each block-device partition it scan=
+s, the
+> > > > > > bootmeth looks for files matching '<prefix>loader/entries/*.con=
+f'
+> > > > > > (where <prefix> comes from bootstd_get_prefixes(), typically '/=
+' and
+> > > > > > '/boot/'), picks the highest-sorting filename, parses it, and e=
+xposes
+> > > > > > it as a bootflow.
+> > > > > >
+> > > > > > Implementation reuses the existing pxelinux infrastructure.
+> > > > > >
+> > > > > > For now the entry chosen on a partition is purely the lexicogra=
+phic
+> > > > > > maximum of *.conf filenames; sort-key / version field handling
+> > > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIES_LEFT=
+'
+> > > > > > filename suffix) are left as TODOs. Likewise, only the top-sort=
+ed entry
+> > > > > > is surfaced because the bootstd framework currently allows one =
+bootflow
+> > > > > > per (bootmeth, partition); exposing every discovered entry will=
+ require
+> > > > > > a framework extension.
+> > > > > >
+> > > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of scope=
+ here;
+> > > > > > [...]
+> > > > > >
+> > > > > > boot/Kconfig        |  17 +++
+> > > > > >  boot/Makefile       |   1 +
+> > > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++++++++=
+++++++++++++++++
+> > > > > >  3 files changed, 351 insertions(+)
 > > > > >
-> > > > > Add a bootmeth that finds and boots Boot Loader Specification (BL=
-S)
-> > > > > type #1 entry files [1]. On each block-device partition it scans,=
- the
-> > > > > bootmeth looks for files matching '<prefix>loader/entries/*.conf'
-> > > > > (where <prefix> comes from bootstd_get_prefixes(), typically '/' =
-and
-> > > > > '/boot/'), picks the highest-sorting filename, parses it, and exp=
-oses
-> > > > > it as a bootflow.
+> > > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
+> > > > > > +config BOOTMETH_BLS
+> > > > > > +     bool "Bootdev support for Boot Loader Specification entri=
+es"
+> > > > > > +     select PXE_UTILS
+> > > > > > +     default y
 > > > > >
-> > > > > Implementation reuses the existing pxelinux infrastructure.
+> > > > > Wherever the 'default y' discussion lands, this will be enabled o=
+n
+> > > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth.c wil=
+l
+> > > > > fail since they check the exact list and count. Please can you ru=
+n the
+> > > > > sandbox tests and update them as needed?
 > > > > >
-> > > > > For now the entry chosen on a partition is purely the lexicograph=
-ic
-> > > > > maximum of *.conf filenames; sort-key / version field handling
-> > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIES_LEFT'
-> > > > > filename suffix) are left as TODOs. Likewise, only the top-sorted=
- entry
-> > > > > is surfaced because the bootstd framework currently allows one bo=
-otflow
-> > > > > per (bootmeth, partition); exposing every discovered entry will r=
-equire
-> > > > > a framework extension.
+> > > > > Since you are adding a new bootmeth you also need a sandbox test =
+that
+> > > > > exercises it (see the extlinux tests in test/boot/bootflow.c, wit=
+h a
+> > > > > fixture disk image) and a documentation page, e.g.
+> > > > > doc/develop/bootstd/bls.rst with an entry in the index there.
+> > > >
+> > > > Will do, thanks!
+> > > >
+> > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > @@ -0,0 +1,333 @@
+> > > > > > +static int bls_getfile(struct pxe_context *ctx, const char *fi=
+le_path,
+> > > > > > +                    char *file_addr, enum bootflow_img_t type,=
+ ulong *sizep)
 > > > > >
-> > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of scope h=
-ere;
-> > > > > [...]
+> > > > > This is a verbatim copy of extlinux_getfile() - please can you ex=
+port
+> > > > > that, or move it into a shared helper?
+> > > >
+> > > > Ack
+> > > >
+> > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > @@ -0,0 +1,333 @@
+> > > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_EXTLINU=
+X_CFG);
 > > > > >
-> > > > > boot/Kconfig        |  17 +++
-> > > > >  boot/Makefile       |   1 +
-> > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++++++++++=
-++++++++++++++
-> > > > >  3 files changed, 351 insertions(+)
+> > > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since the bu=
+ffer
+> > > > > is filled by a block-device read which may use DMA on some platfo=
+rms.
+> > > > > An alignment of 1 risks cache-line corruption there, so please us=
+e
+> > > > > ARCH_DMA_MINALIGN.
 > > > >
-> > > > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
-> > > > > +config BOOTMETH_BLS
-> > > > > +     bool "Bootdev support for Boot Loader Specification entries=
-"
-> > > > > +     select PXE_UTILS
-> > > > > +     default y
+> > > > Ack
 > > > >
-> > > > Wherever the 'default y' discussion lands, this will be enabled on
-> > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth.c will
-> > > > fail since they check the exact list and count. Please can you run =
-the
-> > > > sandbox tests and update them as needed?
-> > > >
-> > > > Since you are adding a new bootmeth you also need a sandbox test th=
-at
-> > > > exercises it (see the extlinux tests in test/boot/bootflow.c, with =
-a
-> > > > fixture disk image) and a documentation page, e.g.
-> > > > doc/develop/bootstd/bls.rst with an entry in the index there.
-> > >
-> > > Will do, thanks!
-> > >
-> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > @@ -0,0 +1,333 @@
-> > > > > +static int bls_getfile(struct pxe_context *ctx, const char *file=
-_path,
-> > > > > +                    char *file_addr, enum bootflow_img_t type, u=
-long *sizep)
-> > > >
-> > > > This is a verbatim copy of extlinux_getfile() - please can you expo=
-rt
-> > > > that, or move it into a shared helper?
-> > >
-> > > Ack
-> > >
-> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > @@ -0,0 +1,333 @@
-> > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_EXTLINUX_=
-CFG);
-> > > >
-> > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since the buff=
-er
-> > > > is filled by a block-device read which may use DMA on some platform=
-s.
-> > > > An alignment of 1 risks cache-line corruption there, so please use
-> > > > ARCH_DMA_MINALIGN.
-> > >
-> > > Ack
-> > >
-> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > @@ -0,0 +1,333 @@
-> > > > > +     bflow->bootmeth_priv =3D label;
-> > > > > +     free(fpath);
-> > > >
-> > > > This leaks memory: bootflow_free() releases bootmeth_priv with a pl=
-ain
-> > > > free(), so the label's string members (name, menu, kernel, append,
-> > > > initrd, etc.) are never freed - for every bootflow discarded after =
-a
-> > > > scan, not just on error paths.
-> > > >
-> > > > Since get_string() copies tokens out of the buffer rather than
-> > > > modifying it in place, you could follow the extlinux approach: keep
-> > > > only bflow->buf across the scan (already populated by
-> > > > bootmeth_alloc_file() and freed by the framework), use a temporary
-> > > > label in bls_read_bootflow() just to extract the title, destroy it
-> > > > with label_destroy(), and re-parse the buffer in bls_boot(). Then
-> > > > bootmeth_priv is not needed at all. What do you think?
-> > >
-> > > Will address the leak, thanks for pointing it out!
-> > >
-> > > The bls_priv structure is needed for my follow-up extension which
-> > > allows multiple boot entries to be returned by each (bootdev,
-> > > bootmeth, partition) tuple, and I wanted to minimize churn between
-> > > those two. I haven't sent that follow-up for review yet, as I wanted
-> > > to confirm this simpler version is acceptable first.
-> >
-> > We should implement this using an generic index rather than something
-> > bls-specific...please see some commits at:
-> >
-> > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
->
-> Oh, there's already BLS in your tree :-D
->
-> Would you like to merge that instead? Your version looks much more
-> full-fledged. If you happen to have one rebased on master or next I'd
-> be happy to test!
-
-Unfortunately there is a lot of pxe refactoring, because I wanted to
-make it possible to fully parse an extlinux file (plus includes)
-without actually booting anything. I actually did look at it a few
-weeks back.
-
-Your approach is easier. I can easily add my patches on top of yours
-once they land.
-
->
-> In my attempt at multi-bootflows I just pass an extra 'seq' parameter
-> to each bootmeth. If all bootflows on a partition are exhausted, or if
-> the bootmeth in question doesn't support multiple bootflows per
-> partition (and seq > 0 is passed) they return -ENOENT, so that the
-> caller can proceed to the next (bootdev, bootmeth, partition) tuple.
-> Otherwise the caller repeats with the same tuple until it gets
-> -ENOENT. So no extra flag to indicate the multi-bootflow capability as
-> in your version.
-
-I'm not wedded to the flag - we can update other bootmeths to return
--ENOENT if the seq is non-zero.
-
->
-> For BLS, I store an alist caching all discovered entries per partition
-> inside the `priv` structure to avoid needlessly repeating directory
-> operations.
-
-So long as you handle clearing that out, that seems fine.
-
->
-> > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
-> > > > > @@ -0,0 +1,333 @@
-> > > > > +     ret =3D pxe_setup_ctx(&ctx, &cmdtp, bls_getfile, &info, tru=
-e,
-> > > > > +                         NULL, false, false);
-> > > >
-> > > > Just to check, how does this behave when the entry is found under a
-> > > > non-empty prefix? bls_pick_entry() searches every bootstd prefix, b=
-ut
-> > > > the prefix the winning entry came from is not recorded. The spec sa=
-ys
-> > > > paths in an entry are relative to the root of $BOOT, so for an entr=
+> > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > @@ -0,0 +1,333 @@
+> > > > > > +     bflow->bootmeth_priv =3D label;
+> > > > > > +     free(fpath);
+> > > > >
+> > > > > This leaks memory: bootflow_free() releases bootmeth_priv with a =
+plain
+> > > > > free(), so the label's string members (name, menu, kernel, append=
+,
+> > > > > initrd, etc.) are never freed - for every bootflow discarded afte=
+r a
+> > > > > scan, not just on error paths.
+> > > > >
+> > > > > Since get_string() copies tokens out of the buffer rather than
+> > > > > modifying it in place, you could follow the extlinux approach: ke=
+ep
+> > > > > only bflow->buf across the scan (already populated by
+> > > > > bootmeth_alloc_file() and freed by the framework), use a temporar=
 y
-> > > > under '/boot/loader/entries/' the kernel must be fetched from
-> > > > '/boot/...', yet with allow_abs_path set and a NULL bootfile,
-> > > > get_relfile() uses the absolute path from the partition root and th=
-e
-> > > > lookup will miss. I suspect you need to remember the discovered pre=
-fix
-> > > > (bflow->subdir is a natural place, and is freed automatically) and
-> > > > prepend it when fetching files.
+> > > > > label in bls_read_bootflow() just to extract the title, destroy i=
+t
+> > > > > with label_destroy(), and re-parse the buffer in bls_boot(). Then
+> > > > > bootmeth_priv is not needed at all. What do you think?
+> > > >
+> > > > Will address the leak, thanks for pointing it out!
+> > > >
+> > > > The bls_priv structure is needed for my follow-up extension which
+> > > > allows multiple boot entries to be returned by each (bootdev,
+> > > > bootmeth, partition) tuple, and I wanted to minimize churn between
+> > > > those two. I haven't sent that follow-up for review yet, as I wante=
+d
+> > > > to confirm this simpler version is acceptable first.
 > > >
-> > > Hmm, I am booting it with a non-empty prefix and it works as-is (I us=
-e
-> > > a single ext4 partition for the root fs, and my entries are under
-> > > /boot, i.e. there is this "boot/" prefix from the root of the
-> > > partition to get to "loader/entries").
+> > > We should implement this using an generic index rather than something
+> > > bls-specific...please see some commits at:
 > > >
-> > > My loader entries use full absolute paths including the "/boot"
-> > > component, which is the way systemd's 90-loaderentry.install creates
-> > > them in this setup. Or did you mean that this behavior is not
-> > > spec-compliant? Not sure if prefixes are spec-compliant anyway, but
-> > > definitely useful as an extension.
+> > > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
 > >
-> > Ah OK. I was thinking of extlinux - but what happens if you don't use
-> > full absolute paths? There is the case where the boot partition is a
-> > separate filesystem and the OS files are there, so the running system
-> > sees the file as e.g. /boot/vmlinux (since the boot partition is
-> > mounted at /boot) but U-Boot sees it as /vmlinux (since it does not
-> > have a VFS).
+> > Oh, there's already BLS in your tree :-D
+> >
+> > Would you like to merge that instead? Your version looks much more
+> > full-fledged. If you happen to have one rebased on master or next I'd
+> > be happy to test!
 >
-> I will recheck with a separate partition and paths stemming from its
-> root (i.e. /vmlinuz or /[entry-key]/[entry-id]/linux), thank you!
+> Unfortunately Simon's work here is AI-generated and so not particularly
+> welcome, among other problems right now.
 
-Good to have a test :-)
+No, not AI-generated, but certainly AI-assisted (perhaps that is what
+you meant?)
 
 Regards,
-Simon
+SImon
