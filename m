@@ -4,102 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52ECFCDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:36:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897C6CDB479
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE6198494B;
-	Thu, 25 Jun 2026 17:36:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1923B84962;
+	Thu, 25 Jun 2026 17:36:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kLxDQ9EA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d8RYBM6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 885D68495B; Thu, 25 Jun 2026 17:36:13 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 85D9E84968; Thu, 25 Jun 2026 17:36:22 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20F8B84894
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:36:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C4C884894
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-c858961a8efso939442a12.2
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:36:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782401769; cv=none;
- d=google.com; s=arc-20260327;
- b=MCK1CRfd+ntW5Srbb9IORD1KAobRLAj55dp3Z1LTB0ElmJwoplRYIdlrt3fMLTWuSD
- rhYBpp6XE1wKhBnmznSJSRsvQb/jOZrXdoOH7oiSPg23qb7SI0vQErhAvMEEDV6I977K
- A3f4Tbqg2g7aclx4bDgepFqT27nZTVKWO3IUM+6O0yt6LRt4UM96ggBEjArf8s5yAvXX
- FHa91dXeMi1W+coZ77fS+VohYIiBS7jH4B4eHpDjmkswjp6VDHMneOTPpFcC6X7sEHUC
- lYT8nmgo/hyOZ3dCWQNPNsoCedN/DXBjZ0CLHvuTwZBI3HLKZi1OBtE4esurtumXRgA4
- 4jrw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
- fh=OaOIJxNuzpS1jjpTnPygbJf0gYDy1uz8TatCAc5/vg8=;
- b=TBslzZdnQmAUT+DNNKCECIfyrSLUNmMFDZ+uYNftNbN5dILFJJi/VBIAXhOzVmlcMr
- pxKuNWKXMQYJHwOUTB5pUZuhoRY/xcQEt6TPNjSYjF1be9ze36CSYuENAHPpLExMLMXW
- 4pYh2Mtn330YkAV5+OLW1FdWT86Pdq9tPFPFVg+YEk91HL9mvSrQb7jHm+yY8E4zL1Az
- xaQJk502KbBDjxgFi8/dBt8t4Dgy/7yYefS4+FIYMXV9ieWHbsgk1bFkXaqP8Cro2yZ9
- XP9r5ivCDfk7mCYnnYp3Pod/as0KPckfhSB5hY4n12uC5u87Jdwr8yD5Qq7QoUTee2Iq
- CV0g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-49241dbf9c1so20845265e9.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782401769; x=1783006569; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
- b=kLxDQ9EAEh+ktykOQdrHdu1+wu76r5y/AVzw4tmJrnWdWXpNSl09pac8LvfF2r4qXD
- J/YvzE1XF6xfd2kyGdz1525EIniCG78r8lp4jJN0TeAqMpGlwHMLiHF+VZpXMrzmOco7
- QLog+1LvbN4VWCA3FcKl5VjDPnID8pRB9hNH8=
+ d=linaro.org; s=google; t=1782401779; x=1783006579; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=05luFp9g6fBGFg2OMnBuz/K0CfShmXphyS0RZ51O6SY=;
+ b=d8RYBM6KQB3/99kot/vphQZE2yGH2jNpJk1SA9tNy8lNkslv6MahjACIQjZuybf9sG
+ h1u+wIp5qlGqZLjNaqvRdNPREP2I9z39g7q0ohAp1cTzB7Vb+aN4JrJ3CyldpnOtc03i
+ oqkXjBfAIWHtddRx3/IXRQIcPnm6Mucu2SN6O3EMWUOgZc/A82KcoXnWeGO9vYaSjGvr
+ /x48naZHrxAIJ8rerDIQeD7W4fOsGyxnkbseWaOaVnwmVsQmt8fOSrt6mifB/PXpLUPL
+ lG4orm+XTCSL5TSBf8Sqb4LBZ/UHadXK0vcmoenRcUzGFZWZp2j2pQoREarDxvC2+w6T
+ 7v2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782401769; x=1783006569;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1782401779; x=1783006579;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
- b=F9/tXEMLhMSth4CtDLAhzbW2RfHXc8jGzoWHP7dqPmZRD/OMve3FESGvl4X2nyIodo
- p3qUCC3VQRO6hePqQcOGnFF1EPvAxVAH2QsCt4PUS30oZs7B7yxDFDndzhqso4e6Wqr9
- Ohhher1d4qYnue16DIs2Cry8Lv7XP7Nists3epHv/k14Q6buIYxvPmVzV42bazt9HLB6
- M7t0E1aGbNUFEwKgpb2kSqX0Fvb3SwGCazfWRSNa/JhHYjwkXbi2jbHbZkVNPgg4lBa3
- 4H6SnaR+ufUstZykkpA+Teytjows4ZTS6e9FVp5FBL/+/BN8fh59EpladSETIKctEoQ9
- fiSw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoET67lCQUS1A9QCWPgvaFsVyWaZIq9U1vR9UOTpsNUQbcsmf9G1q+lbXGMLKNt2kSP/4Kj5/8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWuodiit1uINr0F8GResa1dc2FTaqOsApaeG8zrCbtyoV1maJY
- SumElZ888N1lRwQt/uGTe3ExDpCqUtb8qlh2IR8naGJJ0QlHXI+jfu6QbIdZlJQvIBydhh9br6H
- Ag/QqskEpQy7N7zkBFPpGWtwsj/5To7Ix9fLvRx59
-X-Gm-Gg: AfdE7ckMq3ENVtyEj0YjnzTOp5RslqYZOnt1koiRh6j2pBT9cMcA+J4JMgKI19xpihe
- IOVezbDk4Q8ZFY1uofEWO/WFsM6oGexizE8vEQ1Wg3XH7YXpRWn6LOYxhPbxliMFrTNkiRh+vyy
- KNwSE/mkVx7AftpWqGGEO4GngGzUpcvl2QWZExFk+FRlHnhGDOSgfqicSZ/6NeJY1wXo5asP9GL
- Q3yiqWPm2V1gerPN0xJRIKEMnAxqr5E5jDJLG5/+6fmQzzMn7CcGjDBiFVWlC1qbE5LCYJXAQ==
-X-Received: by 2002:a17:902:ce06:b0:2bd:606d:b339 with SMTP id
- d9443c01a7336-2c7fc9c08ebmr37168645ad.21.1782401769453; Thu, 25 Jun 2026
- 08:36:09 -0700 (PDT)
+ bh=05luFp9g6fBGFg2OMnBuz/K0CfShmXphyS0RZ51O6SY=;
+ b=WUwpW+uRJABFryTKqy2JrsXRKqlDXbtxwH0TweQqQVsvTcmsD5kqW9mPUAgvwKfzZ7
+ Qa+ChaGZbXh2ELekCDaFF8AJ5yqo4o2uiD+QoHCMd2HA/mQ7cOVRN+puouFFJ3gnMm5g
+ j+CccFewkie1/Bmof69/YeUvP8MMLWxOCkVHBTbu8OAKxdio79aChyZ6g/EVOLKEi3jb
+ n8YecCwkV882sCNw4+eQMuf0/D+ZRf9ZutCCSRDcqiXQ1UhXaL+ux+cM2JHpxjjcR7mM
+ KZ2CuP2FksPxwFYIrNUWPDgwGM31CS9mrA7mnUrRITeDCTbfmbJEgowmhOW171lFZZ6i
+ 22cA==
+X-Gm-Message-State: AOJu0YzIYLmh7H6yHu2XpQCCkCBL3KxB03wJfzGBaWl4Lxky9R0l/D8/
+ hEMxiSyOyP29uI5P+HLod70ovx7bMFnTarjbZyjdqllw/P1jItfrio0t07E3jjbPcTQ=
+X-Gm-Gg: AfdE7cloxbzV1n4YOJBfM9RB2T3XpqWSZaRYpOzoqHuO59XAkl/OdEnkZgqAFzecZMc
+ xKLAhcaTKuwsBLBFShDusDuabs3Fnlruf0kDqL5jqQwFZmC1uuoDgty8+Yq5vTqzKnwQzitrCLv
+ 0K2Gxx7gyWGKbwzh306qZwob0BI7iL/TG9LGfLF4rrmC1Y6U5JqBPfiwz1Izm6RwvEj4fOUtqUW
+ n/nDKqHjkHeqsWt081gOHw61/YLcRUmN1r0ka3si4Vy1MXAjfUTMweOAlqEeoG/g5RxWTZ9Dzv6
+ lrOx1uaJCIFEHCv1AZg+cTUApzc6n3vDzJ7OnuFX6qHI8gXO81zVR3bsCMPUf6Y6HIonf2Iltce
+ Xf0TVT4e2bvZcyASJvpl4bjbQSIKYSlb5gkJqc7a7v17/RFIw4L0StBNzjOWW5zTueT+g2V+Mim
+ CgC09YIP3ZLUSqiI69e7ScCa9JJKWcMi8Vvw==
+X-Received: by 2002:a05:600c:6748:b0:490:c024:2eba with SMTP id
+ 5b1f17b1804b1-4926688598fmr42063365e9.22.1782401778272; 
+ Thu, 25 Jun 2026 08:36:18 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49269071c9esm4761965e9.9.2026.06.25.08.36.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jun 2026 08:36:17 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Thu, 25 Jun 2026 17:36:15 +0200
+Subject: [PATCH v2] treewide: change email links from mailman to
+ patch.msgid.link with message-id
 MIME-Version: 1.0
-References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
- <CAFLszTiu0HSZ4JJ7ggMMAk4oe0-h=Xq-Wnw=hqwGr80wBdrGXQ@mail.gmail.com>
- <e262d779-4854-4360-8d9a-a91ff76b5347@canonical.com>
- <CAFLszTj7D-q5QtKTDX07t529wS+hfUUjEq2vK+6rJF9psC8KGw@mail.gmail.com>
- <fa63ad61-57e8-4302-a3f9-a3dd86d07db3@canonical.com>
-In-Reply-To: <fa63ad61-57e8-4302-a3f9-a3dd86d07db3@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 16:35:32 +0100
-X-Gm-Features: AVVi8CeYRot2H-B-t27nRpPI3n9l4kQDtf0nG4zWOufAJC2x1xXa9vdeMB7TH2o
-Message-ID: <CAFLszTgZsQd99eVRn4Qp+MHOxqG0q47it+mo_=91sBrjN1xkqw@mail.gmail.com>
-Subject: Re: [PATCH v2 02/11] efi_selftest: add ACPI configuration table test
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260625-ml-switch-ml-links-to-patch-msg-id-v2-1-1f15d8655c8c@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAO5KPWoC/5WOQQ6CMBBFr0K6dkxbEcSV9zAs2lJhFCjpVNQQ7
+ m6LJ3A37+fl/1kYWY+W2DlbmLczEroxgtxlzHRqbC1gE5lJLgteyByGHuiFwXTp6nF8EAQHk9o
+ SaqMOtpJHdSg1P3HJYtHk7Q3f28i1/jE99d2akJqT0SEF5z/bF7NI3l+DswABjSqqXFdalcJco
+ qe82zvfsnpd1y83dZs45wAAAA==
+X-Change-ID: 20260624-ml-switch-ml-links-to-patch-msg-id-e925a37b0802
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Simon Gaynor <simon.gaynor@ezurio.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Alice Guo <alice.guo@nxp.com>, 
+ Fabio Estevam <festevam@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6110;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=d5rjdVUT/xSrPXpHiNBCvMT7OHXKYGkVa227y4FDKkI=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqPUrwaLExEOxpZuwI8X+cAO4BKdfhi0iQCCmsX6g4
+ jNBinJeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaj1K8AAKCRB33NvayMhJ0QJKEA
+ DKcY+AFK9FWI2C+wA1PUCcF0NTJEUuc3VAvkL1JjateECxZ3lCZOItFEJcoSd8HxYcPL322Hr07nF3
+ VJdg0iv6spY0KAj6nkoAFQLI9Zi2OG/wkZrbVW3e2Vv0Gmfu0robNvxQ+kzKs9bUzlXbDxYyr9/Jbk
+ NKfvgg/kwjHyBZyNdZ/tgFCjF8e4uiD9dxlb2YVZNVuxBCX3yq4mWxHpB/r42HhDltpbj7CTUUJqU2
+ o/zM9EAz47ujeKUCaAleelNGXrssCNUIIOBSMdgRvlKJN2WfSvFjdH8/AF+q+HrWvQm+EwIcPGZa5G
+ 07Y3HQJ41nZhH8WFpqLKydtBbxDtBtnl6Tx1rno/H7CfBT7Z8eR+o68eToCMbP3cvg0sWnP6LejYua
+ aB1FZsAwag5+erc7PBz2xVhjYOA6Oe6yDmfObNHHkrrVCXk/SbL/BIcTcXqjfjXQb/E9gwe5zLUcYc
+ qiTtXmsWRzo+FUCw7Ct5ZO5uSupQkooRxU9hq44YzaKr1LjsrkHedZNmNjXrJbf2X+SZ21w0Q2gkbg
+ SQhdA4FKFxAgz2BrLFfCsYcfEhHd+xHo6hM1HBQ+l7azn5ya5DmZUhU67ynjRbfOahuZyLRmOONuEc
+ Y+H9/LG2EO71zbtiq/mnjyyVAgxhFt5frfMIKW0IwtOgW/TBWm8ay//KEL6A==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,98 +126,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+In preparation of the migration of the mailman mailing-list currently
+hosted on the denx.de infrastructure, migrate the links in the code,
+comments and documentation to https://patch.msgid.link to be future proof
+and always link to the expected content data and uses the message-id in
+the URL which will help find the appropriate e-mail in the future.
 
-On Thu, 25 Jun 2026 at 16:23, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 6/25/26 16:55, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Thu, 25 Jun 2026 at 12:26, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 6/25/26 10:52, Simon Glass wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On 2026-06-21T08:19:04, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>> efi_selftest: add ACPI configuration table test
-> >>>>
-> >>>> The new unit test checks if ACPI tables are available.
-> >>>>
-> >>>> If yes, it checks if the RSDP correctly points to the RSDT or XSDT.
-> >>>>
-> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>>
-> >>>> lib/efi_selftest/Makefile            |   1 +
-> >>>>    lib/efi_selftest/efi_selftest_acpi.c | 138 +++++++++++++++++++++++++++++++++++
-> >>>>    2 files changed, 139 insertions(+)
-> >>>
-> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >>>
-> >>>> diff --git a/lib/efi_selftest/efi_selftest_acpi.c b/lib/efi_selftest/efi_selftest_acpi.c
-> >>>> @@ -0,0 +1,138 @@
-> >>>> +     if (!checksum_ok(rsdp, 20)) {
-> >>>> +             efi_st_error("Invalid RSDP checksum\n");
-> >>>> +             return EFI_ST_FAILURE;
-> >>>> +     }
-> >>>
-> >>> Please avoid the magic 20 - how about offsetof(struct acpi_rsdp,
-> >>> length) or a named constant?
-> >>>
-> >>> Regards,
-> >>> Simon
-> >>
-> >> Thank you for reviewing.
-> >>
-> >> 20 is not an offset. It is the length of the ACPI 1.0 RSDP header.
-> >
-> > ...which is the offset of the length field. See the struct:
-> >
-> > struct __packed acpi_rsdp {
-> >     char signature[8];   /* RSDP signature */
-> >     u8 checksum;      /* Checksum of the first 20 bytes */
-> >     char oem_id[6];      /* OEM ID */
-> >     u8 revision;      /* 0 for ACPI 1.0, others 2 */
-> >     u32 rsdt_address;   /* Physical address of RSDT (32 bits) */
-> >     u32 length;      /* Total RSDP length (incl. extended part) */
-> >     u64 xsdt_address;   /* Physical address of XSDT (64 bits) */
-> >     u8 ext_checksum;   /* Checksum of the whole table */
-> >     u8 reserved[3];
-> > };
-> >
-> > The original struct ended with rsdt_address as the final field. Then
-> > they added a length and some more information. So the offset of
-> > 'length' is actually what you want.
-> >
-> > My failure to use offsetof() was probably just that I didn't know it
-> > existed, or perhaps because some of the code came from coreboot.
->
-> The field length does not exist in ACPI 1.0. So it does not make any
-> sense to relate to it for calculating the checksum field.
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+[1] https://lore.kernel.org/all/20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org/
+---
+Changes in v2:
+- fix commit message (mailman typo, https)
+- add missing / trailer on links
+- Link to v1: https://patch.msgid.link/20260624-ml-switch-ml-links-to-patch-msg-id-v1-1-da694b9ba71c@linaro.org
+---
+ arch/powerpc/config.mk                   | 2 +-
+ board/boundary/nitrogen6x/README         | 2 +-
+ doc/chromium/chainload.rst               | 4 ++--
+ doc/develop/historical/generic_board.rst | 6 +++---
+ lib/efi_selftest/efi_selftest.c          | 2 +-
+ tools/rkcommon.c                         | 4 ++--
+ 6 files changed, 10 insertions(+), 10 deletions(-)
 
-Well in v1.0 we would just have used sizeof() of the whole struct.
-Creating v2 created the length field.
+diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
+index 6e30df6504e..32e86d84a12 100644
+--- a/arch/powerpc/config.mk
++++ b/arch/powerpc/config.mk
+@@ -32,7 +32,7 @@ archprepare: checkgcc4
+ 
+ # GCC 3.x is reported to have problems generating the type of relocation
+ # that U-Boot wants.
+-# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
++# See https://patch.msgid.link/1348500648.2514.2.camel@petert/
+ checkgcc4:
+ 	@if test "$(call cc-name)" = "gcc" -a \
+ 			$(call cc-version) -lt 0400; then \
+diff --git a/board/boundary/nitrogen6x/README b/board/boundary/nitrogen6x/README
+index 0b59289e7f0..114f81f1d1a 100644
+--- a/board/boundary/nitrogen6x/README
++++ b/board/boundary/nitrogen6x/README
+@@ -17,7 +17,7 @@ and saving the environment to SPI NOR.
+ 
+ It does not support 'boot from SD' at offset 0x400
+ except through the 'bmode' command.
+-	http://lists.denx.de/pipermail/u-boot/2012-August/131151.html
++	https://patch.msgid.link/1345062683-19134-1-git-send-email-troy.kisky@boundarydevices.com/
+ 
+ 2. Boots using 6x_bootscript on SATA or SD card
+ -----------------------------------------------
+diff --git a/doc/chromium/chainload.rst b/doc/chromium/chainload.rst
+index b00ee94eaa4..0f61e020db8 100644
+--- a/doc/chromium/chainload.rst
++++ b/doc/chromium/chainload.rst
+@@ -42,9 +42,9 @@ Nyan-big
+ 
+ Compiled based on information here::
+ 
+-   https://lists.denx.de/pipermail/u-boot/2015-March/209530.html
++   https://patch.msgid.link/1427703262.24522.59.camel@collabora.co.uk/
+    https://git.collabora.com/cgit/user/tomeu/u-boot.git/commit/?h=nyan-big
+-   https://lists.denx.de/pipermail/u-boot/2017-May/289491.html
++   https://patch.msgid.link/CALr8Vo1WvO=m1W2zvT=MOQ3k-fNtcCtBjk2+zgKha0j28s8g6A@mail.gmail.com/
+    https://github.com/chromeos-nvidia-androidtv/gnu-linux-on-acer-chromebook-13#copy-data-to-the-sd-card
+ 
+ 1. Build U-Boot
+diff --git a/doc/develop/historical/generic_board.rst b/doc/develop/historical/generic_board.rst
+index 12550a140e0..17a92687c5b 100644
+--- a/doc/develop/historical/generic_board.rst
++++ b/doc/develop/historical/generic_board.rst
+@@ -64,17 +64,17 @@ separate function calls so that they can easily be included or excluded
+ for a particular architecture. It also makes it easier to adopt Graeme's
+ initcall proposal when it is ready.
+ 
+-http://lists.denx.de/pipermail/u-boot/2012-January/114499.html
++https://patch.msgid.link/4F019ABB.9010201@gmail.com/
+ 
+ This series removes the dependency on generic relocation. So relocation
+ happens as one big chunk and is still completely arch-specific. See the
+ relocation series for a proposed solution to this for ARM:
+ 
+-http://lists.denx.de/pipermail/u-boot/2011-December/112928.html
++https://patch.msgid.link/CAPnjgZ0jesqX1Y71S5xoYQDGPuARfOX48RGbU9Mw=P5HGYcOKg@mail.gmail.com/
+ 
+ or Graeme's recent x86 series v2:
+ 
+-http://lists.denx.de/pipermail/u-boot/2012-January/114467.html
++https://patch.msgid.link/1325477374-6417-1-git-send-email-graeme.russ@gmail.com/
+ 
+ Instead of moving over a whole architecture, this series takes the approach
+ of simply enabling generic board support for an architecture. It is then up
+diff --git a/lib/efi_selftest/efi_selftest.c b/lib/efi_selftest/efi_selftest.c
+index 2b95713afb4..b284132c0a2 100644
+--- a/lib/efi_selftest/efi_selftest.c
++++ b/lib/efi_selftest/efi_selftest.c
+@@ -284,7 +284,7 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+ 			 * implemented we should call
+ 			 *   st_boottime->exit(image_handle, EFI_SUCCESS, 0, NULL);
+ 			 * here, cf.
+-			 * https://lists.denx.de/pipermail/u-boot/2017-October/308720.html
++			 * https://patch.msgid.link/44453b06-5a09-ee3c-0a6a-b54bee9020e4@gmx.de/
+ 			 */
+ 			return EFI_SUCCESS;
+ 		}
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index cb2d30bfd57..b39777fc060 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -205,7 +205,7 @@ static int rkcommon_get_aligned_size(struct image_tool_params *params,
+ 
+ 	/*
+ 	 * Pad to a 2KB alignment, as required for init/boot size by the ROM
+-	 * (see https://lists.denx.de/pipermail/u-boot/2017-May/293268.html)
++	 * (see https://patch.msgid.link/CANbgqAQPw5Dxp7Qm_aZoL1nggg9Mm1SQoKvx=V5a8p-9+DTDNw@mail.gmail.com/)
+ 	 */
+ 	return ROUND(size, RK_SIZE_ALIGN);
+ }
+@@ -328,7 +328,7 @@ static void rkcommon_set_header0(void *buf, struct image_tool_params *params)
+ 	 * to determine the size of the next-stage bootloader (e.g. U-Boot
+ 	 * proper), when used with the back-to-bootrom functionality.
+ 	 *
+-	 * see https://lists.denx.de/pipermail/u-boot/2017-May/293267.html
++	 * see https://patch.msgid.link/CANbgqAQ5p-fE4T-Ye9UAMs-nRGU8AP_yxDf+5SbZbP8bxLa0dg@mail.gmail.com/
+ 	 * for a more detailed explanation by Andy Yan
+ 	 */
+ 	if (spl_params.boot_file)
 
->
-> >
-> >>
-> >> Below is the precedent that Bin and you have been setting:
-> >>
-> >> arch/x86/lib/acpi.c:18: if (table_compute_checksum((void *)rsdp, 20) != 0)
-> >> drivers/misc/qfw_acpi.c:310:    rsdp->checksum =
-> >> table_compute_checksum(rsdp, 20);
-> >> lib/acpi/base.c:36:     rsdp->checksum = table_compute_checksum(rsdp, 20);
-> >> test/dm/acpi.c:371:     ut_assertok(table_compute_checksum(rsdp, 20));
-> >
-> > Yes, this is quite common. How about declaring a constant for it?
->
-> That is beyond the scope of this series. It has enough patches.
->
-> Let's do it separately.
+---
+base-commit: f072620dc9ffda00b010783da27c41231c3a439b
+change-id: 20260624-ml-switch-ml-links-to-patch-msg-id-e925a37b0802
 
-Yes, sounds good. Either offsetof() or 20 is fine by me.
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
-Regards,
-Simon
