@@ -4,110 +4,180 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6433CCDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 11:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80A3CDE007
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58B8984704;
-	Thu, 25 Jun 2026 13:52:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 23DAA846F4;
+	Thu, 25 Jun 2026 14:02:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Us2f9ZOF";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qo2qkzp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59D06847C8; Thu, 25 Jun 2026 13:52:36 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 2DC3B846F4; Thu, 25 Jun 2026 14:02:26 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 128418460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 13:52:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8374F3FB8B
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 11:52:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782388353;
- bh=tAJYJImSsuhlkJ4a88q4VxkP/6NqF7lkEItclEbkCQg=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Us2f9ZOFBlDgJRTvPekOc8hvUXSe3uFj/yA6dQthKL/NxrR3E6+a1qyVO0gM8q8RH
- GYyuBsjNsRChyGso81adbUxkJTCS1/Q27JnP0orwRpH66kEAbtb364FG8U0P1VyoKr
- sUyJhZcTSby7CvE958Cd3HrDReae+kGhDqdUSNtHmgMTalDFbiHJIT672Mo8/wLYm2
- OphECmXmqBSN4y3xcCIVPVt4b31D8vfJLrdku8YgdbxZ2/acmavjHFaSwlQrtATNOW
- mE3SxeOd0vWA2mNCJu4hpa1L1OLVP10ZI+ZWTlJTif96O0SjAIK3sFGjiiSdutbehu
- LTT9EZdtRJy5KxT6g0geNQC3LQCGpvXjlrU0eNuxp8wCiSU+9ifN+UnVNXk61VKLNZ
- M6MRZw4YD5jshOvKCBF2+x/CPyarO9xSssKKhZ8YsYdMpBcAuidK/gHuhYeGRmnQJd
- Mp1Z8ro+RnImtNT/a4CGBkBxVOT4BNQi9Ahtken0uGa39JrX6QdwmDI8lGl8lon3vX
- tLMC7M3he4JUVEM52pfwAMAExWw5ErQCla1/y9sYFJmhEKMbcLlYo7nB/EsHrqewyX
- BNx81l58taLqa6Ouc1H7hv9OOebtxFaNFyPUsZzAHFIYwtYrQZDLmR5YqFzsHfGl4C
- u2HlpP9KE8RPfArXLIRVqQhE=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4923411f041so19147625e9.2
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 04:52:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782388353; x=1782993153;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tAJYJImSsuhlkJ4a88q4VxkP/6NqF7lkEItclEbkCQg=;
- b=Wy6zhxMXgxxb1HHTultNrPmKO7MYP3sWhysYEKmpgyrA3BhHv719FH1jLasYHcXA+S
- Cq6G9W9PvhXO2EUztVQsoLiJQVPjr8l6bnqg4R5L/29RWkasgKCZ31uecclXPcb4Rsph
- ZXSqSoK1e4FvWriz/DJJ+qPsEBAJUjGsgXj8FjJozrwX/O2wiKz69BSRCIJK5dZSO7BC
- 3gFFlPEZy4E0QD08E5Pki8vbcER/QO5C9Kb6I9emNstfxtSI45K0YRzwKVAfgu43se5v
- +uYBj/K8wq5qXbj7gs44PcoR27gXVMiASQH4Cc/LlwoWGKP0b8/VeJsP6sg37L+fCJ2G
- oAPg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/OIgjTxQ0cr4C2L07vKq8wHMG44QRHafibeaI5TrBF0BfkPIjeVIBNmRdoa9zofkC68db4dL0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyaI95LAZUb9iKWpNMC8g9v6iX7zA6TTRs/4Po3rl1FdugMHOiH
- rlkmGXtex6dkINZZ3xJPD7xMWvpQ9c7Rj5dA3DpvXHfZJjvLdn/5L7SWNpKQf8FNEOIGunJda6P
- OlFgAejLbvdAujw6/Lx9QH5Br5P6TDEBQGfwsjNaok6PLhg/YYyTkgLrqFDRwikbDGE+TGbk=
-X-Gm-Gg: AfdE7clSu/U71lhcaTBtkh7UAJY/qxt6D21FTUh0le+oAW6teR+LaY9dyt5v9+Jde1E
- Wn+x6eKgLW6HRkfp4aocK38AOuLz0nEXEzzc3Os1HWmQucULfpUM/ll/MlxpVDme1OXxT/h+s5E
- 7ohaOIJz8PQRv0v1sXrtvCIaeTbkPo0ZmHhdAI1H9DzVHBja1SYat4wJcMTZ9LqJocRi50TtCvE
- +WTZczRem1rQ20e1KAC7KW1DN8ISQ+z0Uv0w492jkTyZUyrbvSzEtL5XNOUilXDJmu2D8K+X4ik
- K7QzXGHyfMehFYutrfSsc/xzCCsJQ9kDHOmCcYj032DDqN6aCpARvSx3HmrHjkbo96AHZyBuQ+7
- U6owiwgJGqPkLwhxM3FAK/+BUn3ntKj96NizMOBmik5HCr05DRHee5D5BMZ9K38pQBqCCPeBAGR
- REps0+vlzuzAOvZVo46RZU8qs9fCceNok=
-X-Received: by 2002:a05:600c:c3c1:20b0:492:4335:4d4c with SMTP id
- 5b1f17b1804b1-492668833c0mr23871635e9.30.1782388353067; 
- Thu, 25 Jun 2026 04:52:33 -0700 (PDT)
-X-Received: by 2002:a05:600c:c3c1:20b0:492:4335:4d4c with SMTP id
- 5b1f17b1804b1-492668833c0mr23871345e9.30.1782388352629; 
- Thu, 25 Jun 2026 04:52:32 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:680:3cd0:3c05:30a:d738:8c39?
- ([2a02:3035:680:3cd0:3c05:30a:d738:8c39])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46c1ee01c3bsm16344877f8f.10.2026.06.25.04.52.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 25 Jun 2026 04:52:31 -0700 (PDT)
-Message-ID: <f824b5ae-8fc1-44be-9267-4177bb2cdc9c@canonical.com>
-Date: Thu, 25 Jun 2026 13:52:30 +0200
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id 4FAAF8460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:02:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pCPs3BFrqEKuSZBtV0aDuXFR12C0tDCOBQIEHJ8aobnO5S8TzLuIPxOCVjNFHsSLK7saR3J9upRmmS5PKqK3D1A9L0BtiMMBI7LiXDOA/R0oSsYTI6jOiv1MXislBT+8St5+GyvqmqaA0tXCtE3Prqegl2wXxkUmSdOuy4OLl5lJ8NCP48FG309g7Jdq8WH4nGmSFMHxkzgfhdqpH3WZmzhfKmiGrr2bpktvbtfjezelFTgUdFRZcwkJRTzxbIpkJHBa7CZoAIgnWMaL/M+VrjacmoX701VnuMia1OgBX+xa6eDZXyS15yfrJcynRBx7Fi7/byHarEo0D8vwCf25eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QV51g+KC/vvaLeDBGxZP9/yTfCk7n4JeTVFy/BkKrbs=;
+ b=WLUV5U5L0VT9nqrUiWdpwPKUfNcA+kV+izEF5KycMNMxhKupS678UUyR0MB9cQEv7R4xhngz4MnUt9Nvh4mgryueP+/0Y4mI+AB56COldyZZyv8v6OEMWMsd7uZT+lWtr3w6k29W7MnyxNtI7Bl7gAWMxZc1pksAhjXPvJXc+A+kHnYfxHPHI6N1WbiqMZscutt9vRAS4haK9a+EzC4vF2BVRH44RjiHHtdQUg9zDKHjqkVD3vg7CHGR/dTjnh3sbmixpogBcD+yODKZHLxgE+v28QM/cXNdEEXaf3/4BJ4ZDd9yrwmXfxhlToRLb/2h5I0ZG/5WZdF0WTmBK7O3ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QV51g+KC/vvaLeDBGxZP9/yTfCk7n4JeTVFy/BkKrbs=;
+ b=qo2qkzp2+1amo+z1GEAUsJNnmT2XJLMffVGqf+7ra3V9/bZUd/0A7BXc/AT0MerbyuL8S9eDsl2oXmwLVWWGaAv0VB4GXc39D9EhrJbNEhvlzlZUO+QyDePqrdnohz8GWDdIoxmiyMk89JkWJCHrcxFou6WMWIj+fZUFkp2tH2g=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by SAWPR12MB999142.namprd12.prod.outlook.com (2603:10b6:806:4e1::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.20; Thu, 25 Jun
+ 2026 12:02:14 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0159.013; Thu, 25 Jun 2026
+ 12:02:13 +0000
+Message-ID: <73b81cb5-ccaf-439b-a327-54b4e15acb12@amd.com>
+Date: Thu, 25 Jun 2026 14:02:08 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/11] efi_loader: move console-input helpers to
- efi_app_common
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- u-boot@lists.denx.de
-References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-7-heinrich.schuchardt@canonical.com>
- <CAFLszTjyf2u2oNMGVdpQv1pEo5Y0APOkwkgBiV0_RiZfS+9q0g@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: expand disk device names with drive details
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Padmarao Begari <padmarao.begari@amd.com>
+Cc: git@amd.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260420072935.3024696-1-padmarao.begari@amd.com>
+ <3443228d-66d6-4908-a619-d57f590b8880@gmx.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTjyf2u2oNMGVdpQv1pEo5Y0APOkwkgBiV0_RiZfS+9q0g@mail.gmail.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <3443228d-66d6-4908-a619-d57f590b8880@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: CH2PR07CA0039.namprd07.prod.outlook.com
+ (2603:10b6:610:5b::13) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SAWPR12MB999142:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ce990b2-2b19-47ec-c9ea-08ded2b1982c
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|23010399003|18002099003|22082099003|4143699003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: ihM/9GDIujNoTP32N5Z7gIQ7C28E1gDdd8fQh4xlVKn0nSfG3ZVFMXyeY6AJx1AaAgWTFxoH54FbPHaJcm6wPVzFMpqkj+NVJd7rB4b4n26KUHMRz4hhfSS5hcUcK5DoValIbG0ZMgqkegJDhsoewxdGRxtjZ5vwyqnwIf0bROfxY/IxUZXDGGG32juVjAUNwbvN3E+f6OfHJ9Hc4kGzgiVHCxCNnOjPSUh81oQs1RpVO8Zr3W22xJLCNGYm47r3PcSFpaR5yS7tEl9MVDZN/U89tECxGHbCCv2/n8axK7tLhlak3v1n93dvpLx3gdzFv3bsqWU8xzGfYMrSXQUdy5bAygimJK+JG4sZmTHavZMv/F1ADuRuSK6XEWOUHJ1loL/6VYi0go/Rpix8Efu9qKfgT6K38X0wPppqY53+kbNGiZ45jgMBURZVaPy3CLVIJIrb5ZwGPsDHAWVbrI0dNHDZvHD4hXwGOypkCVy7dPnU87aYZmRhf4DcaVyVnheHqQlEAdb6qgCw24DuwJgSBjQ/wuGIfFm73AQ4+LYejqS3lVCfuthhRRiXa+QMBbM7ZXBE8wpuGg7n15iumLC1lbchAr5duAZ5gUDJdw/0A0+DDQYyg8xTlVKtkoK7xbM5cTknLaVc8c6u5IkgiJ5TtYt9jF5tcQVYDwbVFrCLpEY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1hQM05oRDAvZXZDWmxYcjBkcUlwOXoxQ3F6L25STjlSZFNzWDZxSU1abll3?=
+ =?utf-8?B?T2ljeEdZOU80UURFbi9BdVlRaXZoK0tBMjRYRTk1ckpDSlVuTFhYV2Rld0VO?=
+ =?utf-8?B?aWJUTUdjU05QVlBiUlYyTGduRUFKS05jQ0N6KzliWFRtR3dKN09Ib2UrS0hv?=
+ =?utf-8?B?QWxLMG9DOHVyWm5nYlQ1MjU1WnBzbTdiVFlpNi8rOHE4TC9SZWJLVTRSaFEv?=
+ =?utf-8?B?WXMrL1cyWUtMTVlIcE16dEVGUkRhY3dubDZ5TWxCREIySjhwSDI5OEhlb1dS?=
+ =?utf-8?B?U0RmRW9zaGlFYU83QTlXSGZnZklycjRleFN3N1NNeXdVcElNdUlOWXNwNWRy?=
+ =?utf-8?B?d2JkQTh6WkU0bVpReGc2OFVFNTNFMEtIb1ZGV08yMDg5NDdXeGJnc2R1czl5?=
+ =?utf-8?B?eWhPOTFZSXBVVnhDcEU5WG9YbjQwM29ZRDgvNzMrQU15eTZLc1NDTTUzVzZI?=
+ =?utf-8?B?dHo2MFdNNFcwVHlUY2xJMjUvaS9KcmVkaHJjT24rUVh3T1BDamExSVFydjZF?=
+ =?utf-8?B?UStEVUI1RUgzMTVsWDlIM1RtQWRtajE0Yk9sRUpUdys5VUlTUXd2MkxNQUpV?=
+ =?utf-8?B?aUpnZm9XMjRGVjhmYlhVb0xlS1paZkVrNTZjQmxRV1h4aU9Zc0R5akIrMlhq?=
+ =?utf-8?B?Q0gvQUxaWDVpb3B0cmN6eVVUU0pPQ0dwSThwTThyQmhLSUhHZXJYMlQwd3M0?=
+ =?utf-8?B?ZUplZUVvbTNqNk5DWjk0a1R1UndLNU5uS2s4K3cweklkeGJrSnY2RDBTalVS?=
+ =?utf-8?B?VXQ2eld6cWRpWWhzWHBNS1JoTVlTbzA3YVhMWm1OTDZqeUw4UkJIcUVXdW1r?=
+ =?utf-8?B?N1BIcGVpNGY0bzZ1aEtoLzJKclJDbS9qVG03V2tmWnc2MDZ4a0VQemY4U3kz?=
+ =?utf-8?B?RnhveG5uUzNIWUtXeU0vZGh6dWg5eVgwTzJOZko5OTRQakg1V3dpTjVJYm55?=
+ =?utf-8?B?UGNDQ0c5Z01yQjhqQ1A2RDZVRnNlWlZ2dnJKZzN2MjhKWEpIMEJsTTlad0pB?=
+ =?utf-8?B?OU55cWhlNm1BSFd6SXlCTzZhVTl0YTVqR3lZQUY4NEkxQk5xbVYxcXh1Ykd0?=
+ =?utf-8?B?SGRwK0JGMTNzNVRwdC9nT3FlZzByVGxxTjVBWmxTTXNabFJvN2FRUFo4T3Za?=
+ =?utf-8?B?RFE2NElqYlRyMjdlMDRoUVRna2JEdXJKVXgxSEVKYWdKd0JRbGk1blhTdEtk?=
+ =?utf-8?B?ZEhvMnJaQStVR3JKeWxZTEdaLzRvdVdvYUYvaXB3WDZSNkM1aGJQM1U4cmIz?=
+ =?utf-8?B?N0lCaHZPSjdhOUhRSFg4TUZQVTY1UzBpYlRRWUxCd2NIQ2dnU0h0Z09GU2tM?=
+ =?utf-8?B?bUJaVXNkdE8wMzFEaWdPa0F0ZTlxZk5HRXNoZy9qcnVNQzNFN3krZVcwcnlS?=
+ =?utf-8?B?ZDltZTJrY0pJa1NRbUM2ZTl6M1IyWVZpYkNCUy9IWnhicUFjeVVoRlRGRFBE?=
+ =?utf-8?B?cU8xS3p3WE9xZUx0K01Da2NNWGU3d09zYTdvVEV0RHkrR21EeWdMUFE5SEVL?=
+ =?utf-8?B?ZDZ4TzVxaHhpbGtrRGhhdnZIMVJnWDNZOWZqZnlUYUdVNERnZ1NFMVNVRjVW?=
+ =?utf-8?B?MXk2Z1gxZHBkS0poMlFVdm9CajljSFhvSUNqclNDZmNOaEVoMHBCKzdORU5Y?=
+ =?utf-8?B?RWpOc1d5bE53bVBibTR1cUNJdEliZUZ4R2s0WUEvRVBOUTcwQXloQnQzQ1g4?=
+ =?utf-8?B?YlQ5cXpvYzV6ejM4VTBkTnVucll0bjZtcFJEZlJhUGNnRzBkTUFlK1pvVm9T?=
+ =?utf-8?B?U2tXemY4eDkveGYvTkFqd2xvT3BkUmJTNjMwRS9iUytDdnBQWCtIUEtaSHVE?=
+ =?utf-8?B?RjN3T2g1Y211a2x5eFV4T1ZvY0NjbTJjQkZUVVhYbzFTVnlTeHY4cUo3RkVJ?=
+ =?utf-8?B?Y09KZzdKeWtwVjVNUFZkNUwycHdVK2ZWb2FlN0NmaU5ReHl5ZWt3clFlazJH?=
+ =?utf-8?B?ZUZxVE9nbnY0d0lXRFBLelY5WjAwWlA1bmhMRG05SWlOZXdMejM4Vm9kemEr?=
+ =?utf-8?B?d0I4MDdLYWhISXEybUF2NVY1UTNOR2FNOW94ckllL256VDgyRmxXOGlRRjdU?=
+ =?utf-8?B?T01WL285ZzdlNWprTnlCQnQ1Yzc2UU0vdFFEWWJMQTQ3NGQxNWlldzc2dTNK?=
+ =?utf-8?B?YVNJNXVOckdsMTE0Tk04V3ZxZzJ2UUZFS0RySjlsQzRWZU9HZ1E3cXpxUFRZ?=
+ =?utf-8?B?WE5NNGhOSTJ0dW5ISm1BUUwwZVZmYXk0Y2lJa1ZMcEJqMmdHQ2pkZkwrY0xL?=
+ =?utf-8?B?Rmp4UDlacWlXQ0hGbXBSRHRycG1aNWtxT3FQS1ZNSFhUdXFyaytOOU5WVWp5?=
+ =?utf-8?B?U3o3R05RaHE3RHZzaFh4dzBCaURJS3BBLzZLOTY1elpuTlNhOTJJdz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ce990b2-2b19-47ec-c9ea-08ded2b1982c
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 12:02:13.8373 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5xgOqw9ZMwhs2l5/GO1SbzdijL6MBa6DSN4C4bDoHe7tYuycB8tY3ITGPToaj5gJ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAWPR12MB999142
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,103 +194,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/25/26 10:54, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On 2026-06-21T08:19:04, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->> efi_loader: move console-input helpers to efi_app_common
+
+
+On 5/1/26 10:23, Heinrich Schuchardt wrote:
+> On 4/20/26 09:28, Padmarao Begari wrote:
+>> Increase the boot menu device name buffer so we can append extra
+>> metadata. Append the disk capacity and trimmed vendor/product strings
+>> to the device name so users can differentiate drives in the EFI boot
+>> menu. Also tighten the parameter validation and pull in linux/string.h
+>> for strl* helpers.
 >>
->> Move the shared console-input helpers to efi_app_common:
+>> For example, the U-Boot boot menu now shows entries such as:
 >>
->> * efi_drain_input() - drain the console input queue
->> * efi_input_yn()    - read a y/n/ESC key from the user
->> * efi_input()       - read a UTF-16 string from the console
->>
->> The common efi_input_yn() calls efi_drain_input() once at entry,
->> replacing the open-coded cin->reset() calls that each application
->> previously duplicated.
->>
->> dbginfodump and smbiosdump had no efi_drain_input() call in their
->> command loops; add the call so the console queue is drained before
->> each prompt, fixing a latent input-echo artefact.
->>
->> The common state is extended with a cin pointer (initialized by
->> efi_app_init from sys_table->con_in) so the helpers can access the
->> console-input protocol without additional parameters.
->>
->> [...]
->>
->> lib/efi_loader/dbginfodump.c    |  61 ----------------------
->>   lib/efi_loader/dtbdump.c        | 109 ----------------------------------------
->>   lib/efi_loader/efi_app_common.c |  88 ++++++++++++++++++++++++++++++++
->>   lib/efi_loader/efi_app_common.h |  29 +++++++++++
->>   lib/efi_loader/initrddump.c     | 109 ----------------------------------------
->>   lib/efi_loader/smbiosdump.c     | 108 +--------------------------------------
->>   6 files changed, 119 insertions(+), 385 deletions(-)
+>>      usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
+>>      usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
+>>      scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Adding a descriptive text looks like a good idea to me. I am just not sure if 
+> with the patch we are showing the relevant information.
 > 
-> thoughts below
+> nvme 0 (953 GiB, SKHynix_HFS001TEM4X169N)
+> nvme 1 (953 GiB, SKHynix_HFS001TEM4X169N)
+> nvme 2 (953 GiB, SKHynix_HFS001TEM4X169N)
 > 
->> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
->> @@ -277,7 +217,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
->>        handle = image_handle;
->>        systable = systab;
->>        cout = systable->con_out;
->> -     cin = systable->con_in;
->>        bs = systable->boottime;
-> 
-> The commit message says efi_drain_input() is added to dbginfodump and
-> smbiosdump command loops, but only smbiosdump's command_loop() gets it
-> - dbginfodump's efi_main() loop does not. On top of that, the old
-> dbginfodump efi_input() opened with cin->reset(cin, true); the new
-> common efi_input() does not drain at entry, so this patch silently
-> removes drain-on-input from dbginfodump. Please add efi_drain_input()
-> to dbginfodump's command loop too, or update the commit message.
-> 
->> diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
->> @@ -104,3 +106,89 @@ bool starts_with(u16 *string, u16 *keyword)
->> +efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
->> +{
->> +     struct efi_input_key key = { 0 };
->> +     efi_uintn_t index;
->> +     efi_uintn_t pos = 0;
->> +     u16 outbuf[2] = u" ";
->> +     efi_status_t ret;
->> +
->> +     *buffer = 0;
-> 
-> efi_input_yn() drains at entry but efi_input() does not - easy to trip
-> over later. Either drain inside efi_input() too (matching the old
-> dbginfodump/smbiosdump versions), or document in the header that
-> callers must drain themselves. What do you think?
-> 
-> Regards,
-> Simon
+> I would not know if these are 3 namespaces on the same drive or different drives.
 
-In the end this is the only usage of efi_input():
+yes that's limitation of this patch but more information could be added on the 
+top to differentiate the same devices.
 
-lib/efi_loader/efi_app_common.c:359:            ret = efi_input(command, 
-CMD_BUFFER_SIZE);
-
-One could argue if draining the console in the command() loop is needed 
-or if we want a type ahead buffer.
-
-For input_yn() I think draining is a necessity.
-
-For input() I could imagine future usages where you want to be able to 
-paste multiple lines.
-
-The description of efi_status_t efi_input_yn() clearly states that it 
-drains the input. While efi_input() does not mention it. So I think the 
-documentation is clear.
-
-Thanks for pointing out the discrepancy for dtbdump. Missed that when 
-splitting the original single patch.
-
-In the end all apps use the same command loop with efi_drain().
-
-Best regards
-
-Heinrich
+Thanks,
+Michal
