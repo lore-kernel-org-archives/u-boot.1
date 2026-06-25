@@ -4,107 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B2CCDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F932CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 12:13:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17F92846F4;
-	Thu, 25 Jun 2026 14:12:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2FDF846F4;
+	Thu, 25 Jun 2026 14:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kMk9JZu5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sl04QY1i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19A45847C8; Thu, 25 Jun 2026 14:12:08 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 229D884894; Thu, 25 Jun 2026 14:13:55 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAD678460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:12:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E05C88460E
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 14:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-c8deb37737dso802333a12.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 05:12:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782389524; cv=none;
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2c7f11150cfso7842315ad.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 05:13:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782389631; cv=none;
  d=google.com; s=arc-20260327;
- b=ATPBKQibGa/y17xsFHjDYTaJ10MXU7mgzrhkX2InwVBHfr2ISHzlUhiPvNfyZWYCo3
- dZc2fYYWltyjkNNDRCS9ctykmtVBik0iIYcw6SSoIch4mXPev7rJdJTUVhpS1ZGSgvpS
- UJLfTdU4cylLYnRF38akeIZqCgXU1HtxzHcUys260zAiXA/uiSItVJsGI7vnbY1zRKHS
- 7pmYtsOjeKHHXcU7oy1RbLIf0aLMWGHJSGmaNSOU5Xzn7vgGd8WpIg2mSyxYDiHnRsHv
- FFvKRDmhlH3bb4ibBbBTaOvLV6GK2TWx29/iXl/rZ8sOvO7eO5GKIUVYutyEZOBkrTy8
- pykw==
+ b=S+xHGkzUtHAegxe74sl7EPYbq++fgftVpe1jefdMX9oRYBnkBDjmfA1Wp0i83yzlHh
+ BuT+RU37tjgo9b0Z/F1UejMm81f9UPA8ZVd1VOIenZ7GKzdPDKwiJ9fZSaIbY/oUCayv
+ 9HeaLYdSK6Uyu7ceTdFJ2hvnhFi4rzqYjXW22eNr1Si1lg8IaVoQAXKjzA+ue+BthOCS
+ LFgr9SXzBJCJGN2YyeUm9hFAwbsjdmZSnZGlvCWm3u8T8FlDzavqnhQnwhMCNCzLi7eL
+ KuZ8LF4ONf0s5cMIGWlUJJzdgsuQfW97Y2u0lTi00/uikJZfjQjF6QUQxK4j/Vf7q4qt
+ Bs5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=4Q4wPNO+D+7OOhObgqpZj/FxlX0+wFqxrqJPR2q5+RE=;
- fh=3qSlUqf4T6N07J1kFFAyvtIlTLdPD9Hl/P02ibjqRDQ=;
- b=LpP4BMSi4utVlkRzYw0V9VWgnn7jM7Y6CiGfsblHDcIn2pKmH8Fy9K7V1XK58QKrZE
- 7Flj4iEiNATntk5vhSI/vPlkdtM6pa+Jv42/PJ44jaXYwqOelMOOdt4TLYRIJFTTjaPm
- OENI87g1YfhV1Xla9D1nOmtDKXAnCOCwfvmLu2vLY3OdKIB/Sxfx2JhEbjLuizHx9hf9
- sa4Ql7ezfteu6ysQTUhlX6AdiipVjZ6IeQoj/SCUZDsh+fJ2Zh8ImfEu5ciJNY6RhvNN
- DJuxgvZz5UbNr4azEhUZPyBJhwxwGZ9CsC1QY+HYOHsHwUkrO8DrKyUOqHVkZmjQk9z3
- N13w==; darn=lists.denx.de
+ bh=+Ym2Ga8kbhUE3XqB830FxZQsl2YTi5S4LaT2gXiBfCg=;
+ fh=28iG3kVR2siwnk9LAUcpAX60kx8af6cAG2obkWVxDT4=;
+ b=PRI812lc6iuazF2ywYD+QkdIncVr8KOggzDe5oeX+R4ELarxf88xs2bJN5yjPqLxVh
+ sqAmkcdY5VuT8heRxtYi86JIOx/nfNoJGM7bTKXqevJR+8oJQ3xHEHvYb69ZJ0rdTaYN
+ IWtnGXxU+iS2rPcM/1WpRkwpX4fRTew6o1wx0YJyKTlte5QLGlyFOPfhn7xKrciaQ0Km
+ Zo9g/h7fwaleyJjgxzcTNslZxjBtv2S9xobtXcHKDk5v4MSI7sP3D837QJjg9HCsIYnN
+ NTtrwrdjgoG9RdWfF9V4g/ppms7qYRxl6xX/ArKV0ukpPQm5qbcshPnZwmLsWx16UXWD
+ WOfA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782389524; x=1782994324; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782389631; x=1782994431; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4Q4wPNO+D+7OOhObgqpZj/FxlX0+wFqxrqJPR2q5+RE=;
- b=kMk9JZu5iuuTqpYBoxnDJMTIPOeWanvLj7aTLfB/7Tuwmm42VyIcJuQvLAdxR2JYeF
- NZRNRVV7g880y76hMSVro7kX4qY1FEmgxvAJzWxPYeHgi5AktzX8389l9n58Uqq9rLtl
- wd4DXOlJeBnbrJUO1Jnnu/q2Zl+1ltZ6iEJAE=
+ bh=+Ym2Ga8kbhUE3XqB830FxZQsl2YTi5S4LaT2gXiBfCg=;
+ b=Sl04QY1irb2SBUrrr3oOtyx+zp0/yLbwQhp22VTezulNHHLI35Rkhz6uBEkheFIEwd
+ 8Kq6xDa4+7jXAVTz7Fagkctbtl1PHXlJfgbKNT1ahNuVnGAQmDHi5q2mEgJTKFxgwJbK
+ htV5lKKFghjOpaaVhEL6rHz3f8Ai1HruicAyw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782389524; x=1782994324;
+ d=1e100.net; s=20251104; t=1782389631; x=1782994431;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Q4wPNO+D+7OOhObgqpZj/FxlX0+wFqxrqJPR2q5+RE=;
- b=Aw/bPqAS4ek/6o7o3vnxrv2CKCvfGipxyMUPBSUiW+dZ+tUs5D8JihcXQ6q6ihnoqK
- wqYu9D/dcwrDLTFow/GURo8LuUPmRGa8XMA6vxbJISUSdUKqwxEfUn4cWA6RlPQO0DvL
- DymrMYZOmWPj/xhgbP3WvtWTizgTMzXTPMOmBALHZw8S1itGXR21MhZo9rjWz1ceDZUm
- vSq8qwziRkTbRygg8EUjcJFNTWTZZ/MbPaZSpipSaOiIZ9cVweXu+FPvMz0/lKAMMwTr
- Ie+3vTfcq+o22oy0FeqkmK3yITcFoRUWEeJ0Cr+q8gu0EPrKjPuh3XDa+M3Slzc/XbRM
- kQzg==
-X-Gm-Message-State: AOJu0YwJdfwEdtFI3tJ4WcnWRLzYjVRFJx62jODYAj60m9THpdzPYnoe
- Je2Mv2i9GK/kGACXUOen30vKowoq+wQHd9eN7W5/utPgVycmCLEz7nKgUPSltE/k9KJNznCw7fW
- 1GpX1E3oed2b216CiOji0v0N3Jbp3T5pExsF/EoGR
-X-Gm-Gg: AfdE7cnplDCfVIH7H4WthuxP0mX+j810nEEIysc7h2vLCaZxwXjBEArRsR1L86fbEeI
- AlFVb4MsfTtTyANv/0TwBGYYcx6LlXv48IJzAK1OBF+wl0BOclN7Di2jaNa01nyb/exX4DSZ+pN
- 83tkJo1LCAy1dQA+fuTaq0EGL9OWO81sjBJTBnqSxY+TnTN9nSjC9OOZBlz1zGkZpK4mXZT4HtK
- WzXEOfLR7N5eSHjVyvpFPup7g/R3Q1Noi+4fkVwyfz+2LFNe22GXSpKKGBg3LlhvlY6m+5sPA==
-X-Received: by 2002:a17:902:fc47:b0:2bf:305a:310b with SMTP id
- d9443c01a7336-2c7fc75a02emr22547605ad.1.1782389524125; Thu, 25 Jun 2026
- 05:12:04 -0700 (PDT)
+ bh=+Ym2Ga8kbhUE3XqB830FxZQsl2YTi5S4LaT2gXiBfCg=;
+ b=LK2WyWZB1yUVcbFt60Lqm7Fn0tEou8hP6GAPSCk73f8Tu2z5bhNOQS0wYfur6ggzsp
+ AD0faotnHtG1LwDEJgudDRcCWkVKTek11+MMJfDseWgB07hToQv/CuABxS+f9gy19d9P
+ iquUBkJSJlb45PE7xmFoaprHGTfYvCtQzqKqjj75CDGTKqnRWq0VFfS+cjVqUIPbDsL0
+ gfymr84SiRBDcIqEpnV8mLLfdaAatBxdOaHxKEee8z9MQgl/5mUtKizJ+AV9m+G1c+a9
+ EjikZBhYDizvqQeHe0+1Om565h7bgl6BR1LawNp+6WveYcQXYlXRUOIYb6RsEqhFiVPD
+ Qf8A==
+X-Gm-Message-State: AOJu0Yx8Wg+4ZA3upnpUYpdGGOjeGig9PyP0XnQLl7dgy+ZsqLC4KIQ2
+ QPm/SQP6E7oVPM2j15bPLrG7KmZKEu6vlJZp9P44K3G7W4hNNwzS2hs0CooEKDUT9s7HyZN6s9i
+ CRdyCqmnXPj2ek9S3JOlmDitSXyr0QciWW3e2/Oed8F3eqdF2kI+fsA==
+X-Gm-Gg: AfdE7cnAognekaIanLimf6qjJT8Y/2lFPtb5dGvGZ77/0PcVh56afX5QEHcaMivApPL
+ alOJw/3ByQDnaeZuTjwRPOGfLoa8b2IiNnHYPtXVKpn8u840G3vZgB70jrtonETgIi8JillV0yd
+ w8XKqbjTz41DzjKHFCzqSOfINej7PhAHGV/xEyYjBJDwv+dWdVqnz6ciE7bNBiEMF+Ix4t28eGx
+ 3ntscDC+x3afTTTlm3LZOfllEk/TRRkYLNuteZNMtZtwRIYC/cqbZtNMIsUSPF3p9R6bOHZfA==
+X-Received: by 2002:a17:902:d2c8:b0:2c7:e823:6834 with SMTP id
+ d9443c01a7336-2c7fc657e3dmr24446195ad.8.1782389631178; Thu, 25 Jun 2026
+ 05:13:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260619-fastboot-abort-keyed-v2-0-684e53949a42@samcday.com>
- <20260619-fastboot-abort-keyed-v2-1-684e53949a42@samcday.com>
-In-Reply-To: <20260619-fastboot-abort-keyed-v2-1-684e53949a42@samcday.com>
+References: <20260619155857.9665-1-jon.mason@arm.com>
+In-Reply-To: <20260619155857.9665-1-jon.mason@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 13:11:49 +0100
-X-Gm-Features: AVVi8CdOfrza3PORfmN3Sl278QK4XlDRpTGzGCEGkVZk4wZJKHAmAuAcIKTHYIw
-Message-ID: <CAFLszTjW_Q+9ZVyrtO+AVgyEw6uvkqqWnJ-xjPuC=pkXu5_kMQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] cmd: fastboot: Add keyed abort option
-To: me@samcday.com
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, 
- Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Heiko Schocher <hs@nabladev.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>,
- "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>
+Date: Thu, 25 Jun 2026 13:13:30 +0100
+X-Gm-Features: AVVi8CdUDAfQPoIiTsgeLunsOfqC-jxOaZ7ltHniMpv4Q6NijdAldyPGWfat7fw
+Message-ID: <CAFLszTiCVzQTd+5H1SKp+4PSizJ7KCU7QA-c=xdhvcOPrR45+g@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: move efi_var_seed.o to objtree
+To: jon.mason@arm.com
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,21 +107,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-18T23:55:00, Sam Day via B4 Relay
-<devnull+me.samcday.com@kernel.org> wrote:
-> cmd: fastboot: Add keyed abort option
->
-> Works the same as CONFIG_CMD_UMS_ABORT_KEYED does: any keypress will
-> abort fastboot mode (rather than only ctrl-c).
->
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-> Signed-off-by: Sam Day <me@samcday.com>
->
-> cmd/Kconfig              | 7 +++++++
->  cmd/fastboot.c           | 9 ++++++++-
->  doc/android/fastboot.rst | 4 ++++
->  3 files changed, 19 insertions(+), 1 deletion(-)
+Hi Jon,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-06-19T15:58:57, Jon Mason <jon.mason@arm.com> wrote:
+> efi_loader: move efi_var_seed.o to objtree
+>
+> With commit bd3f9ee679b4d1456d0d3c261ab76788950e6096
+> (kbuild: Bump the build system to 6.1), there is an issue when trying to
+> build out of tree, where efi_var_seed.S wants ubootefi.var to be in the
+> object tree, but lib/efi_loader/efi_var_seed.o wants ubootefi.var to be
+> in the source tree.
+>
+> If we change efi_var_seed.o to look in the objtree, then it should work
+> in both local and out-of-tree.  However, it would require anything
+> previously working to put ubootefi.vars to the objtree, but it's broken
+> now anyway.
+>
+> Signed-off-by: Jon Mason <jon.mason@arm.com>
+>
+> lib/efi_loader/Makefile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> @@ -75,7 +75,7 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+>  obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_debug_support.o
+>
+>  EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+> -$(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+> +$(obj)/efi_var_seed.o: $(objtree)/$(EFI_VAR_SEED_FILE)
+
+A couple of things beyond Heinrich's objection.
+
+This only changes the make-level prerequisite. The actual lookup
+happens inside efi_var_seed.S via .incbin, which resolves through the
+assembler's -I search paths. In your failing log the assembler is
+invoked with -I. (the objtree root) and -I ./lib/efi_loader, but no -I
+pointing at $(srctree), so the file is only found if it sits in the
+objtree. Flipping the make dep to $(objtree) papers over the symptom
+but doesn't wire the search path to anything new - the build works for
+you because -I. was already resolving there.
+
+If the intent is to keep the file in $(srctree) (which is what the
+Kconfig help promises - 'If a relative file path is used, it is
+relative to the source directory'), the real fix is probably to add -I
+$(srctree) to the asflags for this object, e.g.
+
+    AFLAGS_efi_var_seed.o := -I $(srctree)
+
+and leave the prerequisite pointing at $(srctree). Otherwise the
+Kconfig help in lib/efi_loader/Kconfig needs updating in the same
+patch, since this silently inverts the documented behaviour.
+
+Commit-message nits: 'efi_var_seed.S wants ubootefi.var to be in the
+object tree' isn't quite right - it wants it on the assembler include
+path, which today happens to be the objtree; and 'ubootefi.vars'
+should be 'ubootefi.var'.
+
+Regards,
+Simon
