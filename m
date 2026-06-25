@@ -4,122 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D46ACDB479
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52ECFCDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 15:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0656A84994;
-	Thu, 25 Jun 2026 17:33:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CE6198494B;
+	Thu, 25 Jun 2026 17:36:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yF2iPydr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kLxDQ9EA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A831E849C5; Thu, 25 Jun 2026 17:33:09 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 885D68495B; Thu, 25 Jun 2026 17:36:13 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39A488498C
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20F8B84894
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 17:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4924593f45dso29077995e9.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:33:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-c858961a8efso939442a12.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 08:36:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782401769; cv=none;
+ d=google.com; s=arc-20260327;
+ b=MCK1CRfd+ntW5Srbb9IORD1KAobRLAj55dp3Z1LTB0ElmJwoplRYIdlrt3fMLTWuSD
+ rhYBpp6XE1wKhBnmznSJSRsvQb/jOZrXdoOH7oiSPg23qb7SI0vQErhAvMEEDV6I977K
+ A3f4Tbqg2g7aclx4bDgepFqT27nZTVKWO3IUM+6O0yt6LRt4UM96ggBEjArf8s5yAvXX
+ FHa91dXeMi1W+coZ77fS+VohYIiBS7jH4B4eHpDjmkswjp6VDHMneOTPpFcC6X7sEHUC
+ lYT8nmgo/hyOZ3dCWQNPNsoCedN/DXBjZ0CLHvuTwZBI3HLKZi1OBtE4esurtumXRgA4
+ 4jrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
+ fh=OaOIJxNuzpS1jjpTnPygbJf0gYDy1uz8TatCAc5/vg8=;
+ b=TBslzZdnQmAUT+DNNKCECIfyrSLUNmMFDZ+uYNftNbN5dILFJJi/VBIAXhOzVmlcMr
+ pxKuNWKXMQYJHwOUTB5pUZuhoRY/xcQEt6TPNjSYjF1be9ze36CSYuENAHPpLExMLMXW
+ 4pYh2Mtn330YkAV5+OLW1FdWT86Pdq9tPFPFVg+YEk91HL9mvSrQb7jHm+yY8E4zL1Az
+ xaQJk502KbBDjxgFi8/dBt8t4Dgy/7yYefS4+FIYMXV9ieWHbsgk1bFkXaqP8Cro2yZ9
+ XP9r5ivCDfk7mCYnnYp3Pod/as0KPckfhSB5hY4n12uC5u87Jdwr8yD5Qq7QoUTee2Iq
+ CV0g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782401587; x=1783006387; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=utax1RabiMf0ubTzkcZqoJueBxntS2qh3K/01f+kHpM=;
- b=yF2iPydrAa3isVN9KD6R4h58/knT8ek2PRbFJAQoFs7xIh4h54aa1VV42mJcVsRb0m
- esEe17x7Al+CsbI9CgECMq4Lcw5iSokSrGLTdgA2G3pQMsynAlYFncLh4tu4xWRFV72Q
- 64KBcZiQNbr6MdjGv3I65TMThHzbgGexQhoAVvy1apty4+iab4MZlA4ImcBdlMMmpQi8
- HVhFKnrtZ18MWLgWglRVJ4isMfMSXlPejv7Q227sS7aZWo7KbGgXjqGw0M+4J38Rns7R
- dYQs4qo3T7M0/4EJdHzB3kmpR1gWwa+16BffhxAaZ3ajh7/cQYSkJZgaXHW7sYFSts5j
- tjIQ==
+ d=chromium.org; s=google; t=1782401769; x=1783006569; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
+ b=kLxDQ9EAEh+ktykOQdrHdu1+wu76r5y/AVzw4tmJrnWdWXpNSl09pac8LvfF2r4qXD
+ J/YvzE1XF6xfd2kyGdz1525EIniCG78r8lp4jJN0TeAqMpGlwHMLiHF+VZpXMrzmOco7
+ QLog+1LvbN4VWCA3FcKl5VjDPnID8pRB9hNH8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782401587; x=1783006387;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=utax1RabiMf0ubTzkcZqoJueBxntS2qh3K/01f+kHpM=;
- b=mv0qCO677G2hoUIwJ3VibCKfbVCRct94ft+9DchLmElZW2AmSoiYerKhvFmAj2EBO2
- 3VWSDUs0meH0fhrNR8gNymK0VGwVfzrktmaNogxNnKHL4HUkQlUle5cyP4nsjd621iBs
- TPoXLkGvEnaq3pgdDdWGnSd7z8COifSt5rX4jFbsF/T9dV0Wt0z7bIAiVzJ/1k/3bBNX
- aaWCR51c1+3L5bccnhW+BNMTlriNPdcGfkvhS0Dss01yPzfxbBRMmOx5Vchk6pru0XOD
- SamsxlL+m508xYSgEHXm7ZsF+MnkmhErJo07ehQesGd4J6gZbg8mPw7LAf//APE9/7cL
- 5S/g==
-X-Gm-Message-State: AOJu0Yxq6UrkNqbLRRgIlEBlrVoMkQliFUpjZKolD/ouE4TsS/HnbKka
- hIVqpVSpD2xswy6ceuJGJ8h73u33/alUFBv9VD220Y/SGqxgtLoFtZmWEOvqNT/wkuA=
-X-Gm-Gg: AfdE7clzhlixCa9BqvsiZH0gae/wRCtkC0s/cgOwv77wDmBNtleakPrQ0M+NUgaAGpI
- 99NGqLvg5F/V2IyzJex0p+HLjR7OOE93yrNDPLT+Q9P0HUUd2uyBM85TfOGS5lMveHAqL3+CFon
- Mc8Vy3v7kp4yzbDMPgh+SRYpoOlSyDxS4dQnSva850+Q3fPzXUT5CsXoTThhYGK036ysMbUZ4V0
- +mEe01se94IcHgcewAAC8Sc8K2MqNwgSqeyGY+USMlPC/7xwRPAdQ3wUmRH/pjdvMObyobD5aYN
- FxO4Mv0NxfEv5ek4HbvOcoSGJ2JAEN+/KOIO2fUu8ST0C/HOQ8y7qgOABZudbharpZbQw2N6ea4
- MQoW3h9SqTz/qqdwaCGIDWbvHvfbW2be6BQRbv14beDZ/C5VrKctk09LYvV05IRvHL+QTe7KoES
- p2xu0YdinzyHwD9ODGiVfy3PKoZfhqZStumonzvIP8lwg5iWRqJicC7L4XAeg2XuNr6g11
-X-Received: by 2002:a05:600c:8283:b0:492:5551:19c6 with SMTP id
- 5b1f17b1804b1-4926683b0f2mr41741955e9.7.1782401586496; 
- Thu, 25 Jun 2026 08:33:06 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:6762:47bb:1e06:ff70?
- ([2a01:e0a:106d:1080:6762:47bb:1e06:ff70])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49268ff1be9sm5381025e9.8.2026.06.25.08.33.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 25 Jun 2026 08:33:06 -0700 (PDT)
-Message-ID: <f1ca876b-8918-4add-9692-4992de5d552a@linaro.org>
-Date: Thu, 25 Jun 2026 17:33:05 +0200
+ d=1e100.net; s=20251104; t=1782401769; x=1783006569;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NrEY6p22wxWmbAzkF5UBNpGeFHqnfo2e74pbuyrteRo=;
+ b=F9/tXEMLhMSth4CtDLAhzbW2RfHXc8jGzoWHP7dqPmZRD/OMve3FESGvl4X2nyIodo
+ p3qUCC3VQRO6hePqQcOGnFF1EPvAxVAH2QsCt4PUS30oZs7B7yxDFDndzhqso4e6Wqr9
+ Ohhher1d4qYnue16DIs2Cry8Lv7XP7Nists3epHv/k14Q6buIYxvPmVzV42bazt9HLB6
+ M7t0E1aGbNUFEwKgpb2kSqX0Fvb3SwGCazfWRSNa/JhHYjwkXbi2jbHbZkVNPgg4lBa3
+ 4H6SnaR+ufUstZykkpA+Teytjows4ZTS6e9FVp5FBL/+/BN8fh59EpladSETIKctEoQ9
+ fiSw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoET67lCQUS1A9QCWPgvaFsVyWaZIq9U1vR9UOTpsNUQbcsmf9G1q+lbXGMLKNt2kSP/4Kj5/8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWuodiit1uINr0F8GResa1dc2FTaqOsApaeG8zrCbtyoV1maJY
+ SumElZ888N1lRwQt/uGTe3ExDpCqUtb8qlh2IR8naGJJ0QlHXI+jfu6QbIdZlJQvIBydhh9br6H
+ Ag/QqskEpQy7N7zkBFPpGWtwsj/5To7Ix9fLvRx59
+X-Gm-Gg: AfdE7ckMq3ENVtyEj0YjnzTOp5RslqYZOnt1koiRh6j2pBT9cMcA+J4JMgKI19xpihe
+ IOVezbDk4Q8ZFY1uofEWO/WFsM6oGexizE8vEQ1Wg3XH7YXpRWn6LOYxhPbxliMFrTNkiRh+vyy
+ KNwSE/mkVx7AftpWqGGEO4GngGzUpcvl2QWZExFk+FRlHnhGDOSgfqicSZ/6NeJY1wXo5asP9GL
+ Q3yiqWPm2V1gerPN0xJRIKEMnAxqr5E5jDJLG5/+6fmQzzMn7CcGjDBiFVWlC1qbE5LCYJXAQ==
+X-Received: by 2002:a17:902:ce06:b0:2bd:606d:b339 with SMTP id
+ d9443c01a7336-2c7fc9c08ebmr37168645ad.21.1782401769453; Thu, 25 Jun 2026
+ 08:36:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH] treewide: change email links from mailman to
- patch.msgid.link with message-id
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Gaynor
- <simon.gaynor@ezurio.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Alice Guo <alice.guo@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Xuhui Lin <xuhui.lin@rock-chips.com>
-References: <20260624-ml-switch-ml-links-to-patch-msg-id-v1-1-da694b9ba71c@linaro.org>
- <CAFLszTg+EqM+gqmZLrz-M2HRLCR8BrUcEswJ9=e+9Ty-cQtLvw@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <CAFLszTg+EqM+gqmZLrz-M2HRLCR8BrUcEswJ9=e+9Ty-cQtLvw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
+ <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
+ <CAFLszTiu0HSZ4JJ7ggMMAk4oe0-h=Xq-Wnw=hqwGr80wBdrGXQ@mail.gmail.com>
+ <e262d779-4854-4360-8d9a-a91ff76b5347@canonical.com>
+ <CAFLszTj7D-q5QtKTDX07t529wS+hfUUjEq2vK+6rJF9psC8KGw@mail.gmail.com>
+ <fa63ad61-57e8-4302-a3f9-a3dd86d07db3@canonical.com>
+In-Reply-To: <fa63ad61-57e8-4302-a3f9-a3dd86d07db3@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Jun 2026 16:35:32 +0100
+X-Gm-Features: AVVi8CeYRot2H-B-t27nRpPI3n9l4kQDtf0nG4zWOufAJC2x1xXa9vdeMB7TH2o
+Message-ID: <CAFLszTgZsQd99eVRn4Qp+MHOxqG0q47it+mo_=91sBrjN1xkqw@mail.gmail.com>
+Subject: Re: [PATCH v2 02/11] efi_selftest: add ACPI configuration table test
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,54 +111,103 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/25/26 17:30, Simon Glass wrote:
-> Hi Neil,
-> 
-> On 2026-06-24T14:39:42, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->> treewide: change email links from mailman to patch.msgid.link with message-id
->>
->> In preparation of the migration of the mailmain mailing-list currently
->> hosted on the denx.de infrastructure, migrate the links in the code,
->> comments and documentation to http://patch.msgid.link to be future proof
->> and always link to the expected content data and uses the message-id in
->> the URL which will help find the appropriate e-mail in the future.
->>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>
->> arch/powerpc/config.mk                   | 2 +-
->>   board/boundary/nitrogen6x/README         | 2 +-
->>   doc/chromium/chainload.rst               | 4 ++--
->>   doc/develop/historical/generic_board.rst | 6 +++---
->>   lib/efi_selftest/efi_selftest.c          | 2 +-
->>   tools/rkcommon.c                         | 4 ++--
->>   6 files changed, 10 insertions(+), 10 deletions(-)
-> 
-> Typo: 'mailmain' should be 'mailman'. Also the message says 'http://'
-> but the URLs use 'https://'
+Hi Heinrich,
 
-Indeed will fix
+On Thu, 25 Jun 2026 at 16:23, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 6/25/26 16:55, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Thu, 25 Jun 2026 at 12:26, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 6/25/26 10:52, Simon Glass wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On 2026-06-21T08:19:04, Heinrich Schuchardt
+> >>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>> efi_selftest: add ACPI configuration table test
+> >>>>
+> >>>> The new unit test checks if ACPI tables are available.
+> >>>>
+> >>>> If yes, it checks if the RSDP correctly points to the RSDT or XSDT.
+> >>>>
+> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>>>
+> >>>> lib/efi_selftest/Makefile            |   1 +
+> >>>>    lib/efi_selftest/efi_selftest_acpi.c | 138 +++++++++++++++++++++++++++++++++++
+> >>>>    2 files changed, 139 insertions(+)
+> >>>
+> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>>
+> >>>> diff --git a/lib/efi_selftest/efi_selftest_acpi.c b/lib/efi_selftest/efi_selftest_acpi.c
+> >>>> @@ -0,0 +1,138 @@
+> >>>> +     if (!checksum_ok(rsdp, 20)) {
+> >>>> +             efi_st_error("Invalid RSDP checksum\n");
+> >>>> +             return EFI_ST_FAILURE;
+> >>>> +     }
+> >>>
+> >>> Please avoid the magic 20 - how about offsetof(struct acpi_rsdp,
+> >>> length) or a named constant?
+> >>>
+> >>> Regards,
+> >>> Simon
+> >>
+> >> Thank you for reviewing.
+> >>
+> >> 20 is not an offset. It is the length of the ACPI 1.0 RSDP header.
+> >
+> > ...which is the offset of the length field. See the struct:
+> >
+> > struct __packed acpi_rsdp {
+> >     char signature[8];   /* RSDP signature */
+> >     u8 checksum;      /* Checksum of the first 20 bytes */
+> >     char oem_id[6];      /* OEM ID */
+> >     u8 revision;      /* 0 for ACPI 1.0, others 2 */
+> >     u32 rsdt_address;   /* Physical address of RSDT (32 bits) */
+> >     u32 length;      /* Total RSDP length (incl. extended part) */
+> >     u64 xsdt_address;   /* Physical address of XSDT (64 bits) */
+> >     u8 ext_checksum;   /* Checksum of the whole table */
+> >     u8 reserved[3];
+> > };
+> >
+> > The original struct ended with rsdt_address as the final field. Then
+> > they added a length and some more information. So the offset of
+> > 'length' is actually what you want.
+> >
+> > My failure to use offsetof() was probably just that I didn't know it
+> > existed, or perhaps because some of the code came from coreboot.
+>
+> The field length does not exist in ACPI 1.0. So it does not make any
+> sense to relate to it for calculating the checksum field.
 
-> 
->> diff --git a/arch/powerpc/config.mk b/arch/powerpc/config.mk
->> @@ -32,7 +32,7 @@ archprepare: checkgcc4
->> -# See http://lists.denx.de/pipermail/u-boot/2012-September/135156.html
->> +# See https://patch.msgid.link/1348500648.2514.2.camel@petert
-> 
-> Trailing slash is inconsistent - nitrogen6x, chainload, generic_board
-> and rkcommon have it; this one and efi_selftest.c don't. The
-> lore/msgid.link convention seems to be to terminate with '/', so
-> please add it here and in efi_selftest.c
+Well in v1.0 we would just have used sizeof() of the whole struct.
+Creating v2 created the length field.
 
-Thanks, indeed I forgot it on those ones.
+>
+> >
+> >>
+> >> Below is the precedent that Bin and you have been setting:
+> >>
+> >> arch/x86/lib/acpi.c:18: if (table_compute_checksum((void *)rsdp, 20) != 0)
+> >> drivers/misc/qfw_acpi.c:310:    rsdp->checksum =
+> >> table_compute_checksum(rsdp, 20);
+> >> lib/acpi/base.c:36:     rsdp->checksum = table_compute_checksum(rsdp, 20);
+> >> test/dm/acpi.c:371:     ut_assertok(table_compute_checksum(rsdp, 20));
+> >
+> > Yes, this is quite common. How about declaring a constant for it?
+>
+> That is beyond the scope of this series. It has enough patches.
+>
+> Let's do it separately.
 
-Neil
-> 
-> Regards,
-> Simon
+Yes, sounds good. Either offsetof() or 20 is fine by me.
 
+Regards,
+Simon
