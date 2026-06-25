@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0CBCDB47F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D220CCDB47F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:52:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6AF9846F4;
-	Thu, 25 Jun 2026 10:52:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EE6F0848F0;
+	Thu, 25 Jun 2026 10:52:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HcqB97tf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YkCxJ4i2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C9BB847C8; Thu, 25 Jun 2026 10:52:13 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 9DE358460E; Thu, 25 Jun 2026 10:52:17 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23B3E8460E
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:52:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABD53848F0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bec43ee8ff0so188317966b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:52:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782377529; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-bec450b950dso414742666b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:52:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782377535; cv=none;
  d=google.com; s=arc-20260327;
- b=eegH4+qzM8UjhpmlMzX4Ia10jk+gpQ98uyacNmn7Tcd2JAIxFBwOl+1IJwILDOayH6
- jusf96T9pLRmEyjKMyFWZmf/NuHVzkKI8vl1WfH+z6ITn76RndoA09RNohBP/2R42xWD
- lz+Tl8pHL4FOEBsSA4EHx+j2LQiYChVRfECCAohQIohX0dtbYykRhyWjpVXrfVViSQWc
- A38ZwGXJPPYolsFBD6UUWQvZ55mAAw+HLCsApV/k4YRERP5R/qSJp5PaYjCmnc4WWEy+
- 1EHQrzmdAPq29OO25OCLPEumfD00sg4ybmpD7SySVOEeC77/SCSLi5Au4CO+L5Q0BQf3
- BA7A==
+ b=qlKZ8L5/WxELvyrTfvqsCj2Kgo7yizlW2HP47GqqhW6oVU0X+Qo+Z5Sl7h9wqQ1+E/
+ VPKpXZtze4dSOv8lw93q3buGnasAA1uPodrbzASAQhuYVePpwWm8s3WYDV2k6pn2VyZt
+ P5pKu41kD1npHUMAlyufHh/QBAT5SXgyR0pUCePb5xVLd9zSz+x4wtcMbG7+et1gSuCm
+ DM2uf+CX19+od3MbgmdVIGJielmk6qwzdH2Ch1hN6v788GxxRbGCg96gDYODch0WHRwT
+ k/KS67m2Eq1MX4YyCLxDax1r7D4UO6HBvBgS6hyp5PqExDcaSL8VuPnoMZwDjie4ieup
+ JyFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
- fh=oik2cKbUefHtkvEZWL3qj4nW1fZik1DcKWq+k+G2QPo=;
- b=lOWNNCEeEJT9g2hdDlMH3kfBB6D1XM6S4mwjMZReim+iXeeSdLzCMXXPAX5AhvH7j3
- aC1lYN4CpmZwyBid7kgUhILfgYkX/722dzpg0PLXCOm0vB+kZfOCDdsk3tY3WZGevzXW
- ywH6FbSUWSsb1L2qlH6r1g0xnUF9wmLedgmVDa3u3unHb+ckQFFzjuxYnuxxfU5UVtCL
- JUVcI/PLFc/kf+oBtZfwp+qmoudWlPI8/57fcU+/+ovXfqPvmTR0Wa25eZOyoTtaibuv
- op1OvvEZ6EyLQ57v2AF/356ZZaF4es9ZXeuXVeueXaTgw7Rg5XMhUxkk5Efkz71iotk+
- sluQ==; darn=lists.denx.de
+ bh=p7//ewUmhR97k/sawBEQAGScv+55lXirxwaO7u+EjU4=;
+ fh=D8AFZW4V+z4heQTZ6V+/V/FlKWjpLxanOXRhMk5yVW0=;
+ b=Rb3vus7yAGlmppD/yINbs613kK1ohzx6QCRI/H/gE7/6iiOXZTCdIjr3mZaiGoEt5K
+ iW1Zua6XjxW18xvlVZWLAJc46fdcpM1uRRVVMHi16t26RCe+m0CdgbvYnYKs+PEknCvW
+ UZXINhBDb965IOoQI7Kal+7Lx/HvuXBO85aDxP915lRpVTfvKyD2ud8/U26w8kKnRgan
+ BJT8hCPdkyXNjVvdNLhr+WIR4FAnLrqd5y6nPzj9DqthuPjFG+zJcA+uro6HAsodq3kp
+ gyKwjU+/WO4Zp0e/pFPNB1PGEFQIXv3sgWFgRmUsVtrHzYdAkoPAciD0z4rBDha8wmou
+ pmOA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782377529; x=1782982329; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782377535; x=1782982335; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
- b=HcqB97tfptqZkP4bKpB+HgMcbDZSgTVXVdiML34Ua1cRwqL7eFKdsTSTX9vNFFl1zR
- WJGlzHIhNejl2in07uGsXRAU309WR645+RSlX6sBN0HzkHZGrlo/40gh+NScXJwveXdl
- 6PwGUUaDEzLkzD0sIISvDoo7HrfYnnxyEZfzE=
+ bh=p7//ewUmhR97k/sawBEQAGScv+55lXirxwaO7u+EjU4=;
+ b=YkCxJ4i21R9JLT1Rr2gA04q8qnwT4o32aVhoZYjnFkAOlrX+GTEAGOyT/ko7iKF267
+ JFVl4C4mN5S+q2M+fw2ZJY2A8JnxIJYg27j3sFG4otUbmbEqqdX8fALjVrUTzz05gdSV
+ rsFpEcsZtbgUFZlGps6OgNtY5rO/uJffhGghI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782377529; x=1782982329;
+ d=1e100.net; s=20251104; t=1782377535; x=1782982335;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1Vc/BObNJ6R7BQyXVJRxnUGiWyX5mUFz0A1cayYFqqk=;
- b=iM1glMZdyb6lfaj6phJi8koNVu22dT2+FF4j558pqJmdOGzIB4JoxyUEMCK2XhjuWV
- Ny4IwMF5cEsdyH00UTbNTdcdwEB3dUVpKHwi4N2rjnquLnsxL1j0FO0+kKpFAz0JCNAj
- 9xW1x1eq4Xwxg9YoJECy64wdW10dHEbFD5tT1JZYC6m7RegWVZrXkXIvVCpz4SOOVqAl
- iziq/w5MvAsh+BnT6pXahlfYBIE6SK4ruB8/zEpowo8r82K+3VdpN+rv++y7B6YfFvtn
- ZlOpf1ZH4eOr3Nxg3qOGbwPImWCWojDlUT7xjHXmojplRUuFlm2iyxGWUjeSubXWDtjF
- bmxw==
+ bh=p7//ewUmhR97k/sawBEQAGScv+55lXirxwaO7u+EjU4=;
+ b=UlaQdRWyQYoyVS2oT0oXKKk4t6obJ9DONyF+KndrxjAW5R4kkNK6qCoV71wmI4iEGD
+ N1TK532CAUzZCMtExWVA4kHXxCiezZ9MonZ3Jf6yiwTZ2nOFfHMxsF4xBwcorhb5f9ug
+ KRhe0ZUosoLLPpp5NL+CTy0iTabDjxs1yoJ0u7jubMsuZ5N9YxF2eJRNNvx0/Ceo8+iX
+ B7MPKZWL4gsMm2kvHKxBZ99Fx2Ad7itSupcAA7v8gZKd+7TI2Feo2d3/0T8VwcD3Onx1
+ ROqQGShOhodDbD9nA3I58UokBWUKfoS/859dZOZNN9jhpPalXKyP2M84AZddAZeGojU5
+ 0qoA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqs/UZCxx3sLpo5W3+KIs2oY9fHQgJHk1H4UbXVpAje3TepkPjcp3eBCQZ5VFQ50UpuNAlQU8A=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtDMvbh+bWmoP7eWp4yN8fRA/1jMl0T5Yv3o+t1k70kDavBunI
- /NcbdhsXbOVivpDCUNxOUh/CfSmmZ2MCPvXH00Rt/LWN8lr9ICkjeZ+sdsCaJb4JXeWPednauAw
- I2uHY42fFR4py8K+auJPysU1l3Rt3SJdi9YTxOCjp
-X-Gm-Gg: AfdE7ckLyQotRS+tMPcbd4UzMUnRT5wWs8q4nsXZfPAJKBdw+IBrgYRJ6l0yOSsTUN+
- pkqE1PHtUTK7WS5sJDNOsPdbEJAGdi+jT+sYj6r6KhXppzfLyjVaGtK29KLk0gskZqPF+wF3nxN
- P42QU2SAriRIh8NF9uWYIbq7kza337LDMUYjSuuTpcvrnXPafifgIonR3ePDpaE5sRcLGNUZ4bx
- gkXkrC6F2+/Zaeaa8oyY6tC70fDXs/zzjCUymw/FCUo1gJpLwVk/m5DRFnqTMwk+3vRIfYFaw==
-X-Received: by 2002:a17:907:72c7:b0:c0e:7f2a:ee96 with SMTP id
- a640c23a62f3a-c103158cdd0mr660682166b.29.1782377529539; Thu, 25 Jun 2026
- 01:52:09 -0700 (PDT)
+ AHgh+Romv7S0+MiVdo3S/dm6JtgYPL0LIyYCIeU8cgYuhzxFLpxsIqpB/o8EGHsf/dcM004csfdcH5c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4I9jWrdpNOgpKrNoobgAlELMPRc9aaPgz0rrqlN5ySCyJ8cU+
+ rtPYkFoNJTZ1fLdICQoGYhKpUEyteyYQCKiXL710kWs2/ZsAZ8svmvQKyOthTWUwVWbieA/GwvH
+ uhApMpX7P1kZ3BBXwveIe4J0vmBn5X16lZcAxpT2c
+X-Gm-Gg: AfdE7cnJWyqmx99GPIepqWG8IG+q7GuqTLujtGVR4Kkab3rPgqXC1SwhDA+W3aTXSRK
+ RdrEQs2bcMvFhu3eRRbg6UJG6zpCPDfu52amK5hps7qdRGirpgzZit1dJdVJL5inERDNfstILjV
+ NfG03AjB8l6BFRY+01Qjiqx1H8+RWfcVxTb1OYQ9Qe1DZcy8br4I7DLiLyaxm1IRhpA0NjyhjCI
+ KhFvGJOmE2QXyzAnOPtelF+PG3xNQ7xGH/NQywzJFgbP6Ys7G18M7/MezqcHyPbhObmtwoPfg==
+X-Received: by 2002:a17:907:7201:b0:c10:18d5:b659 with SMTP id
+ a640c23a62f3a-c1205d991c5mr111123166b.2.1782377535214; Thu, 25 Jun 2026
+ 01:52:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260621081915.19154-2-heinrich.schuchardt@canonical.com>
+ <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260621081915.19154-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 09:51:55 +0100
-X-Gm-Features: AVVi8CdVz7RwCqHOyjEKjN9b2lydJiAFfTo8tgq9gZqXo_MSXAU9H2aURcd0CiE
-Message-ID: <CAFLszTjWb+X_-Stz=e1ntGtA3N45kmakUbe-puO+WCr+snkzSA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/11] efi_loader: use pointers in efi_acpi_register()
+Date: Thu, 25 Jun 2026 09:52:00 +0100
+X-Gm-Features: AVVi8CfuEvvn_vfm6Q5_mgmnlbNZ13A43AQOAFIeH8rgrqQ44iAcho84PG0XkII
+Message-ID: <CAFLszTiu0HSZ4JJ7ggMMAk4oe0-h=Xq-Wnw=hqwGr80wBdrGXQ@mail.gmail.com>
+Subject: Re: [PATCH v2 02/11] efi_selftest: add ACPI configuration table test
 To: heinrich.schuchardt@canonical.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -117,75 +117,29 @@ Hi Heinrich,
 
 On 2026-06-21T08:19:04, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: use pointers in efi_acpi_register()
+> efi_selftest: add ACPI configuration table test
 >
-> Both efi_add_memory_map() and efi_install_configuration_table() expect
-> pointers and not virtual sandbox addresses.
+> The new unit test checks if ACPI tables are available.
 >
-> We need to convert the virtual sandbox addresses in efi_acpi_register() to
-> pointers in memory before using them.
+> If yes, it checks if the RSDP correctly points to the RSDT or XSDT.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> lib/efi_loader/efi_acpi.c | 35 +++++++++++++++++++++--------------
->  1 file changed, 21 insertions(+), 14 deletions(-)
+> lib/efi_selftest/Makefile            |   1 +
+>  lib/efi_selftest/efi_selftest_acpi.c | 138 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 139 insertions(+)
 
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> @@ -37,39 +38,45 @@ efi_status_t efi_acpi_register(void)
->       } else {
->               /* Mark space used for tables */
-> -             start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
-> -             end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
-> +             start = ALIGN_DOWN((uintptr_t)map_sysmem(gd->arch.table_start,
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-gd->arch.table_start is an address and then you are converting it to a
-pointer, which is fine. The confusing thing here is that
-efi_add_memory_map() takes u64 arguments which are actually pointers
-(in sandbox terms) and has no comment as to what the arguments mean
-(in samdbox terms). But we have already had that discssion and I don't
-want to reopen it.
+> diff --git a/lib/efi_selftest/efi_selftest_acpi.c b/lib/efi_selftest/efi_selftest_acpi.c
+> @@ -0,0 +1,138 @@
+> +     if (!checksum_ok(rsdp, 20)) {
+> +             efi_st_error("Invalid RSDP checksum\n");
+> +             return EFI_ST_FAILURE;
+> +     }
 
-I would prefer that you declare start and end as void * so that it is
-clear that they are pointers. We should do alignment before the
-pointer conversion (sandbox uses 4K-aligned addresses anyway) so
-something like:
-
-void *start, end;
-
-start = map_sysmem(ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK), 0);
-end = map_sysmem(ALIGN_DOWN(gd->arch.table_end, EFI_PAGE_MASK), 0);
-ret = efi_add_memory_map(nomap_to_sysmem(start), end - start,
-EFI_ACPI_RECLAIM_MEMORY);
-
-Reading this, we can see that we align the address, convert it to a
-pointer and then pass the pointer as an address without doing the
-sandbox unmapping. This makes it clear what is going on - and avoids
-casts in the C code.
-
-> +                                                      0),
-> +                                EFI_PAGE_SIZE);
-> +             end = ALIGN((uintptr_t)map_sysmem(gd->arch.table_end, 0),
-> +                         EFI_PAGE_SIZE);
-
-This silently changes the alignment argument from EFI_PAGE_MASK to
-EFI_PAGE_SIZE. The old code was wrong, but this should be its own
-commit or at least mentioned in the commit message.
-
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> @@ -37,39 +38,45 @@ efi_status_t efi_acpi_register(void)
-> +             if (gd->arch.table_start_high) {
-> +                     start = ALIGN_DOWN(
-> +                             (uintptr_t)map_sysmem(gd->arch.table_start_high,
-> +                                                   0),
-> +                             EFI_PAGE_SIZE);
-> +                     end = ALIGN((uintptr_t)map_sysmem(
-> +                                         gd->arch.table_end_high, 0),
-> +                                 EFI_PAGE_SIZE);
-
-See above for the pattern to use. The nested map_sysmem() calls inside
-ALIGN_DOWN()/ALIGN() are hard to read. A pair of local pointer
-variables would make this much clearer and avoid the awkward line
-breaks. What do you think?
+Please avoid the magic 20 - how about offsetof(struct acpi_rsdp,
+length) or a named constant?
 
 Regards,
 Simon
