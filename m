@@ -4,98 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D9E9CDB47F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5CDCDB466
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:08:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12C9D8493F;
-	Thu, 25 Jun 2026 10:04:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E0F1E847C8;
+	Thu, 25 Jun 2026 10:08:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHy5MrVB";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="elNYAObY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B915847C8; Thu, 25 Jun 2026 10:04:18 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D77D8848F0; Thu, 25 Jun 2026 10:08:39 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BFD68493F
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:04:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F86A84704
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:08:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c0d6c75c58cso57250166b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:04:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782374655; cv=none;
- d=google.com; s=arc-20260327;
- b=CVaXoapXaINlUwF1yL4JJ2LOM+wCMl5joga7Whfm1PjVjeBsQGezQsiMvlNV5Whe3I
- k1jx/j4pU98x1d8tQ7+gY6Ab8ftuuwJuqU9Xbic9g2gUBoDH7F3f8yUf1aXO8Qc6WjKa
- IedMTZir9tvWlfjLXDJ3uu44iRy/S+0prEv1/kHAYSYp7VjRbEu18qksIro38++/VtHT
- O/8wpLeOWED1U2yjdnhlDVC7gPx1Yx6EbmnzS6K+JoFdie+P4i8cpR4qgKavA2z+TStP
- 0n4Ct1bnX15mRnW1ts3epfavoJIFx5mb16rcVtr/QocdUGtaoIUQ9Qw6zP732vCeYy6Z
- WMIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
- fh=oyiS1HjGAHh/b0PCGs8ZrowVSKDYk28OUZ+G4f/As28=;
- b=q1v+h9zImQIVCEOOhKshxdW6D7gKzjbRRRPPsqsDqCW7U752OMKkRacNgen29So0/u
- 8tT7Edqw5qHkTTDYluErxTIsqeo9MPczcrb0x/ocWVU+pC8dS++as7/3HSXlecv9mH8I
- bjbObsGCXmHa0uZV1xqp8Zy27kmPFxwsP78OVE52xxXeuQxgiWDQ+0+WQXoT7DJPscpB
- HjtrFVH8kiuXBTlmE2hCp5wGRJy011U0/ZF1395Zqbg2onjhGDftLUM6XzjJhbxBEo1Z
- o1RqmVrmv1uM5fBBa3c5Atl5Xvlml/Kcef25SbcSA0jy+6oSdMX3N6AWX9nxf+0uo/or
- J2/A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782374655; x=1782979455; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
- b=EHy5MrVBjStu5H0xJG1ZxTYSnlCpdNL3d9TneV/88R2y7A0W1wB6t7ykRKm2j9qdVM
- 8/fMKd5uxLtkLVeQ6RWb1mIxhF+irZFP5tqRixtfXV9GV8J4oj1EU/N9uVfs3kyEzCP6
- KhNBnX/GpzSpaqrPGuuqflISRlejfqBD81ydw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782374655; x=1782979455;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lUu6r8xxadRaCdm/r5pUIrTA10IPOZkHGVbkql2TY04=;
- b=mmYFx3CjsxM/G3Xy96qk1mV7UQoLxLhanYv8HpBfreZduGb+zHG0Y8xSCNOW8fu4JJ
- 0DjPcxeLPQroKs2YweAwSjJIFTY7hTDPMiXRrpeAHJayhqnCxyVAo2N8LNxR9pmTqNBd
- TTKY8geBtzIx7cDI03MEDWFpAvjB6GXRGpRG0Sehdr0AX1cmRlhobYD4swWoOZTEXjBv
- nERG9AxcpqraoiQYzfCbQpkuk3Uy2BB+vgTd2ft4vv2WdP1R9bTFV9ybRQ0dxsEg2pjW
- 2VFijTKQiUXtvq9AiqL1b/bZ1T607hwlYboisUa4PiQxUHgsYZvfGeAuSw8eKm+xBkSW
- MsuQ==
-X-Gm-Message-State: AOJu0YwNCABUHcguP51zR1iIFRML9LYuXxendbz1vc2PVUbRj68O75+u
- EAlcxkbnF0MY13pgZlsgWNBk6DgprOaVKJ1Z9uWTXOMKyLHq91QJljPVntrd6EC4LvbwJt2uFGZ
- z3wqwmRTwtnHBdmhQQhimmpL7xeDzdThhgimUlkXJ
-X-Gm-Gg: AfdE7cm3ZUR/eICe2vUURYXJ9S03gteynsS9MCW7FUAbCt4Gou/wiYU34kPNX8oOYr8
- uYJxd9kQhyaYorJi+Jo2Kaond4nsxZfR2erUN94n4XY0WjCeyNgq9BTY/RzKQVLObavbXJWm5Hs
- +QWJj9MT7JQYkPdn1QWM6rZllZ5MkXKGJtR3gCHvwog0uX2/LbCN61ueQjApiTOXvCMewwu3Y4S
- 7siBnS2gbJ3pnkzIEeqN9kqjJzMT0spNKPh0LSGbvbXoUU+DgD1AcXe3mua/ZvNcOiO7htsPA==
-X-Received: by 2002:a17:907:d15:b0:bc6:14b3:e835 with SMTP id
- a640c23a62f3a-c1205ef2174mr85092266b.32.1782374655290; Thu, 25 Jun 2026
- 01:04:15 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 3A9724E408CB;
+ Thu, 25 Jun 2026 08:08:37 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 087D05FF03;
+ Thu, 25 Jun 2026 08:08:37 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2622E106C8210; 
+ Thu, 25 Jun 2026 10:08:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1782374916; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=CTdMyzsgtZY27ZOSwlp41pC9H2y1+zx63n11CXl47pM=;
+ b=elNYAObYiU3blaClDMDjJYCHMBbmFxGbxItGwgbCNh7I4itfOQvXKIhgqdIhREtoBEyl9f
+ rvKVRMd34xfMdaeCV3jwMnqVft1IkXsRAs/Ich0ptAbjg97StRAsAq1/b/3SsNMRVpw5/D
+ TP2qjNjngcl1wpiCy3kHZSsFraCfdfyg4OECZW7Fmv5ZKTRld3qAAWqMIreP0sDDoWmS1D
+ qpSjl95ll4a84rNfJWrrpgzmYTXD4edlBaoDWAvOPDoYBu5jYIZqcDKggE1EmQmsOu9x1p
+ s1IUbVPi9h9oFkQNNya0HsLtSjfp4NSE1cX3vYHRihK+rkXSLrfMUZdNDdvp9A==
+Message-ID: <cef44406-c4cf-4795-931f-e0b110d36282@bootlin.com>
+Date: Thu, 25 Jun 2026 10:08:34 +0200
 MIME-Version: 1.0
-References: <20260618154750.180675-1-aristo.chen@canonical.com>
- <20260618154750.180675-2-aristo.chen@canonical.com>
-In-Reply-To: <20260618154750.180675-2-aristo.chen@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 09:04:03 +0100
-X-Gm-Features: AVVi8CccUN4KfDdJY4DzB0jCBKtNme8O9O-oi-rx2-0Wl_zcMMLzyWxu5G_9lMI
-Message-ID: <CAFLszTg-SvwvkULgG3=VdxOY90Rv=EdXE+kYjp4dzCdEfXZ5Xw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] spl: fit: bound the external data size before
- reading it
-To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Anshul Dalal <anshuld@ti.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut@mailbox.org>, Michael Walle <mwalle@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] fs/squashfs: fix two out-of-bounds reads on crafted
+ images
+To: Piyush Paliwal <piyushthepal@gmail.com>, u-boot@lists.denx.de
+Cc: joaomarcos.costa@bootlin.com, miquel.raynal@bootlin.com,
+ thomas.petazzoni@bootlin.com, trini@konsulko.com, eric.kilmer@trailofbits.com
+References: <20260612075424.83462-1-piyushthepal@gmail.com>
+Content-Language: en-US, fr
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20260612075424.83462-1-piyushthepal@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,100 +76,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
+Hi Piyush,
 
-On 2026-06-18T15:47:45, Aristo Chen <aristo.chen@canonical.com> wrote:
-> spl: fit: bound the external data size before reading it
->
-> load_simple_fit() loads an image stored as external data by reading it
-> from the boot device with a transfer sized from the FIT data-size
-> property. That property is listed in exc_prop[] in image-fit-sig.c, so
-> it is excluded from the configuration signature and stays under the
-> control of anyone able to modify the boot medium even when
-> CONFIG_SPL_FIT_SIGNATURE is enabled. The read happens before
-> fit_image_verify_with_data() checks the image hash, so an inflated
-> data-size overruns the destination before the corruption can be
-> detected. The device-tree overlay path is the sharpest case, because
-> there the destination is a fixed CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
-> heap buffer.
->
-> Pass the size of the destination into load_simple_fit() and reject an
-> image whose data does not fit before the read is issued. The data-size
-> property is read into an int, so a value with bit 31 set arrives as a
-> negative number, and comparing it as an unsigned quantity rejects that
-> case as well. The block-aligned transfer length is checked too, because
-> info->read() moves data-size rounded up to the device block length.
-> [...]
->
-> common/spl/spl_fit.c | 41 +++++++++++++++++++++++++++++++++++------
->  1 file changed, 35 insertions(+), 6 deletions(-)
+Le 12/06/2026 à 09:54, Piyush Paliwal a écrit :
+> Two independent out-of-bounds reads in the SquashFS driver, both reachable
+> by pointing U-Boot at an attacker-supplied image (e.g. ls/load on a crafted
+> USB/SD/netboot rootfs). Either one crashes the bootloader (DoS); patch 2 can
+> also copy adjacent heap memory into the loaded file (information disclosure).
+> 
+>    1/2 sqfs_find_inode()/sqfs_inode_size() walk the decompressed inode table
+>        using on-disk sizes with no check that the cursor stays inside the
+>        buffer -> wild read / SEGV, e.g. from a simple "ls".
+>    2/2 sqfs_read_nest() uses the on-disk fragment offset as an unbounded
+>        source index into the fragment block -> out-of-bounds heap read when
+>        loading a fragment-backed file.
+> 
+> Both were found by fuzzing the sandbox build (CONFIG_ASAN) of sqfsls/sqfsload
+> with mutated images. With the fixes, the crashing inputs are rejected
+> cleanly, 2000 fuzz iterations produce no further crashes, and the valid-image
+> path is unchanged.
+> 
+> These are distinct from the 2024 SquashFS CVE cluster (CVE-2024-57254..57259,
+> fixed in 2025.01-rc1) and from the sqfs_frag_lookup() fix (e365a269df5): the
+> earlier work added NULL checks at the callers and fixed the symlink-size and
+> fragment-table paths, but left these inode-table-walk and fragment-data
+> paths unbounded.
+> 
+> The two patches are independent and can be applied in either order.
+> 
+> Piyush Paliwal (2):
+>    fs/squashfs: bound the inode table walk in sqfs_find_inode()
+>    fs/squashfs: bound fragment offset/size in sqfs_read_nest()
+> 
+>   fs/squashfs/sqfs.c            |  50 ++++++++++++----
+>   fs/squashfs/sqfs_filesystem.h |   6 +-
+>   fs/squashfs/sqfs_inode.c      | 106 +++++++++++++++++++++++++++++-----
+>   3 files changed, 134 insertions(+), 28 deletions(-)
+> 
+Those patches look good.
 
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -291,6 +294,18 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
-> +             if ((ulong)len > max_size)
-> +                     goto too_big;
-> +
+NB: a patch correcting the same issue as patch 1 was sent 12 hours 
+earlier by Hem Parekh, but it fixes less problems than this one.
 
-> @@ -302,6 +317,15 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
-> +             /* The block-aligned read size must also fit the destination */
-> +             if (size > max_size) {
-> +too_big:
-> +                     printf("%s: FIT image too large (max %lu)\n",
-> +                            __func__, max_size);
-> +                     return -EFBIG;
-> +             }
+Reviewed-by: Richard Genoud <richard.genoud@bootlin.com>
 
-Please can you avoid jumping into the body of an if-statement. A goto
-landing inside a conditional block and falling through the printf and
-return is hard to follow, and will likely trip up static analysers.
-Put the shared label at the end of the function:
-
-    if ((ulong)len > max_size)
-        goto too_big;
-    ...
-    if (size > max_size)
-        goto too_big;
-    ...
-    return 0;
-    too_big:
-        printf(...);
-        return -EFBIG;
-
-The cover letter quotes 57 bytes for the current shape; what does the
-cleaner form cost on am335x_hs_evm? If it really does push past
-CONFIG_SPL_MAX_SIZE then we'll have to use your code, but please say
-so in the commit message.
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -291,6 +294,18 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
-> +             if ((ulong)len > max_size)
-> +                     goto too_big;
-
-Since size is the block-aligned length and size >= len, the second
-check already covers everything this one catches, including the
-negative-len case. The value of the early check is that it bails
-before get_aligned_image_size() runs on a hostile value - please
-mention that in the comment rather than the bit-31 reasoning, which
-applies equally to the later check.
-
-Also, the diagnostic only prints max_size. Including len (or size)
-would make a real failure much easier to triage from a board log.
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -427,7 +451,8 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
->       } else {
-> -             ret = load_simple_fit(info, offset, ctx, node, &image_info);
-> +             ret = load_simple_fit(info, offset, ctx, node, &image_info,
-> +                                   CONFIG_SYS_BOOTM_LEN);
-
-Just to check - the destination here is image_info.load_addr, set a
-few lines up to ALIGN(spl_image->load_addr + spl_image->size, 8)  --
-CONFIG_SYS_BOOTM_LEN is a sensible upper bound for the overall image,
-but it isn't the space available at that address; the FDT is just
-placed after the loaded image. Please note in the commit message that
-for the non-overlay paths this is a conservative ceiling rather than
-the true destination size, so it isn't mistaken for a tight bound
-later. The overlay caller is the one actually sized to the buffer.
-
-Regards,
-Simon
+Thanks!
