@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C57C8CDE002
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F67CCDB466
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 08:54:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4820484981;
-	Thu, 25 Jun 2026 10:54:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0E3C8498C;
+	Thu, 25 Jun 2026 10:54:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jzH2ewhX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DEki3A5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C299B84981; Thu, 25 Jun 2026 10:54:44 +0200 (CEST)
+ id B147C849CE; Thu, 25 Jun 2026 10:54:53 +0200 (CEST)
 Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
  [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA698846F4
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:54:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7278084A06
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 10:54:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c07ea058c1aso268506866b.2
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:54:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782377682; cv=none;
+ a640c23a62f3a-c07a6527453so351136266b.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 01:54:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782377689; cv=none;
  d=google.com; s=arc-20260327;
- b=h4BXk1n2EpnN9FOaUcPqE0nco5ig6I4nwo5P6gFJxcGloIWOtDTPLZlBpgho+MxmXn
- EAmeMAK2NLR8l3RpVFDecIQitx4Jd/4XEsRSz9p8YrAcR0bol7/2YIoPo/izqjqFx9f0
- PaYJf3vqlGfu1HnXhvFdq5biWDT9YayoXTGaTzS4fWbPnjor7cgUOwBmB9R1c7kpKn5v
- ev4eqqa5QEUtzFxwWnDtXhvls962Hn39ooJw5KYMVK3kj/eqAzcVwt29fxTPHOsjBdRr
- iFHG2I584iIuve+iSz3L1Qag+T+HJtvWq6WA/wMtx/3iEJcuz0qNZvi/96c/QL1jjU7T
- v67g==
+ b=YX4pzShoaJ8MIH1Ob/i7AFk0YWmFBexBet19Fi+UsPD0rA6lWFmsIwqgB3Sa44v6le
+ d40mTSKtdOpejB2Q9RcpYhi0c2s8ibj3HOQqqe0kA4xIO/4Xgxoy/m473TGjbvMFirTZ
+ GjhqY1jNWxJbI4e8ZzAVDm4QuKXkGRDLKkXbFaRtI6lTCCZiKLldBeD6XkEWgSxI7Zl/
+ j+Nfzo9cYL8ETpblVqeeb4M008j+L70tceNZ2lM4rdfGYS8rqgdDHWhl7qkDfkb85Bdg
+ EJU5KI2HWZ53pmZaUS6jFiBc0iG0LHI/f72SsPkqnHCSrYEZbHJha7jE9unY5ukn+ZkO
+ /Clg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=axBPk/B+mAPGU2nvAotvK7xiPqGWfuHhFpmblLbxoos=;
- fh=N329o0+WNi3gsUp1Dez6W/3snJ5w8E/W+IhF1lZLJVs=;
- b=WM86Ng4Mv3ZHfelDoYx1mhmcm9iKSS10sVSU4FXQ3fT7zQAq3AFNfHYkQTKOzWO5Uc
- jhG9TUdB2zbWic+hrbhJ6lR/6GZNCwIitJT2jJgjw6uVTEE3oUBsZmYFjm6VQHJ1t8EV
- YJ4Mc302LR/tydqnVZU42kZ4AJdXZGrrVdliHi6+70SEiVVoWj6yQ0376mU4txreeHk5
- gtbBUJE70vDisWEKkLdMEYKIEFEiWUBlRso6LZIL0L//+rML6f6vmNkkxK66jEWOYCUi
- Hf5Frsd1rUbOLBx0WOeno4Jao+pP6itA4OVeDIVdPHxJ6TgsJY17Li/X3M/kXJiMODG/
- FYGw==; darn=lists.denx.de
+ bh=pI2s9+D9kn1OQNWyvX0mKqTDXcVWL+3/DXy6ClV/RDo=;
+ fh=8bu+8j5OjBJsJE6XfjivLImgYotwkHNSzjUGStlmYis=;
+ b=gr/7L6n9Tu9elDsuIEweek9oz5rqaXVWhAIi5eQpYz7jtfDDlXVD+xH1h2IXYX0dkG
+ LWRDKVL4lahfFsgQQaOEHMvHxU1UNFQqeEw7/h2QHK7BbAyUPIysS8kUC+KhW1qKnRM8
+ 2ByhFLtiAwRvbMBKYQI5jCM0kri1V2jMx9dJVThWxQ7yoweTtfggq4yDWVyni5xIy/jz
+ YtkIigU8zg/b0ZsJl/wQK3hZfi0Zpmp7DPn1GdOwuFrEvfxVdVtqmwXK9AqM6tJLLFAs
+ WLptclJ3inwIYr2le3ej6V6EbeOkU9Z3czAgNI/7UvxkkpyjLkd2CFZA8Ec60uNmUTJK
+ /8WQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782377682; x=1782982482; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782377689; x=1782982489; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=axBPk/B+mAPGU2nvAotvK7xiPqGWfuHhFpmblLbxoos=;
- b=jzH2ewhX+iXmFYBsj9RKr+RtKCyWTlM/Ip1EGDtFcznT3yqdBMqfoisrsaPykC4QJH
- ohogzEo95yMbTOaRT86igv0UfWo+UAmfpaYDgb5v4H9sJja4WHRYkjhAI0EBIcA10oDU
- kwAVUt7FdE9XwqZuqxnSF+wuwNOe5mOF0EXa0=
+ bh=pI2s9+D9kn1OQNWyvX0mKqTDXcVWL+3/DXy6ClV/RDo=;
+ b=DEki3A5DhCcnVeIYkXXcLWzOH7q/A0f7FbYoOxkYcr1OzH+9vaSZe+YFhL2dPuXY5K
+ 4Tr6vUoHkmwXKYrBGYjclHL4pcTlhJg4xH7cLUjBeQ3n33lRl4+R4SKqD0eZKbF+XnHp
+ uowsJtbppAVhqitdkcm6OOMEoRQ3PjQ2kxlOA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782377682; x=1782982482;
+ d=1e100.net; s=20251104; t=1782377689; x=1782982489;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=axBPk/B+mAPGU2nvAotvK7xiPqGWfuHhFpmblLbxoos=;
- b=afbGWjnJStrHfoYSkQ+TSnf4eDU5n9gesD9IMe0hEiYDumPjPZYcfXvD8TT2TnCrBH
- 6fNbbVlFIElFXPjV0qbkrSFSg1XzEJkuxfQvJSln1B6PvKal6HIunzmJ2QR5HDktFccA
- Gzat8bz8ZSvs86l9rxCvI81g1AqoaZzzeeL9RbF72+yV4bnxA+bbPmhPygU4yIRLIfaO
- naDSX1HNyAuBQxsp7DW6ZixhjDkyQG5U3iu1U4c/IVu8QaIQCbUnZq3Nb3NryoT0mXjx
- AFBJXYespbYkDjpwj5kPa5Eu17vrUOliVoURHOD9Fw0t9c/IyMQpFfijdeb3kSZXDz6h
- ghPQ==
+ bh=pI2s9+D9kn1OQNWyvX0mKqTDXcVWL+3/DXy6ClV/RDo=;
+ b=ZBnEFPEsZCsic5wt/XhTwkq851gMuP9i9de3JCTfUjlDswLF3BIZezn0ZyDRbTwq4r
+ cLxaoDgpARO8hUluKvi+aB8aEgQ9TiEHbShcrBKaFeneMphbqX9oazByNQxf0MEUi0HX
+ NCnS4Z6nV0jovoYmidELoQ62KODBpQCRmRfvmxsKfaS3F9MFp0pMj10LOUg5Cb7rf5Ui
+ ieVwQsdxxttz1P3tPGPpFsUpdHhcuA/lS++zzGg/Z1NV7Mk/Zm4rgty6k9+Mz26HuNal
+ AEZD6lLCCMHPWvZPCeTQZbxK+iD5o9/irngoOP4f6HaLQmv2hflrBHTplrb7j5mz1QPC
+ QIvw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoMsjDdUXGiP6bLOIjL9b1r7X4hEqLyeXjNIKMNxbYz0AMo5QnSu4MryVkXUibbsOQ1tpj6xN0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFr2eaoSR886AWINCMzvE9THVSH6EROcWHvfukZdL5gRM8BE7Q
- t50M+0JB/snW4gzzLiKUmfUNoIPjHYqscwljRalLbaXUdXINI30b82P3t23PvoU0MpFh6XQ2ZR2
- Q9ZnvoteWBbv7eWzfkI/IAA+7021dCWCdLTTw+tw/
-X-Gm-Gg: AfdE7clQ10mu7ZrF2VGwLaDyMZH7oKC7LEXD/ZVh1W7CoMuDQqPPrlRnjEgoj0zWCqy
- ZFJ3CZGbU9JvuZw6LteZg4KPMIkq7X/IlXHAMrGJXfoSnnfGbd7Ow1LMQuTIxz4cp+oCL31BiKO
- ofiksSJ/z/jH4FWBeRBT3kdWIvkS92FK48jYJAVa4saicy+wVeQ5/lkWlWL9Z05E2WAIcxf47Bc
- k/Cj9n/sfYexwC9DrihaapNzov16b6EP1XdnJiOedupgE2asayjl9W+wyI0jiq9aXb+LXCiXg==
-X-Received: by 2002:a17:906:6206:b0:c12:db:3062 with SMTP id
- a640c23a62f3a-c1205f15deamr87897766b.35.1782377682060; Thu, 25 Jun 2026
- 01:54:42 -0700 (PDT)
+ AHgh+Rr7aOBBoc84a/346nTRdzqJ0VmvrkJ9D9ht0/KHXcTBEfP8bBi/IrvThOIq2evUTnVgAestpTY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHM9xb7zq99wwxQ2LSF5+FdRzCEri4Ayw8c+j48EwKhx3QwyYQ
+ BA11AXKhuN7THXcUDEqzwIfR5NUsVssft2Rptmzmn+cjhREdszT0ISPfPz8Y+zwR+tdrD9jYSn3
+ oSbi1NaFsKakneMUn99Hcb+npaTqcdNYCYeWqG5b6HCw0wPeGVvJwvg==
+X-Gm-Gg: AfdE7clshqDf5eXsrIqZGbV5RNI9DFhcH5QKK+Wo1ge0A0E+mhLPnvG1EcfK2POFPAQ
+ VJEs4PIpYthjpnBcibRI5bi+oO3/oVyWoRwbHO6FR4kNq7RxcSCKCBc2w1c9j2PknZF5mQ6/QcE
+ azrombuKjiUeDGVTw+h+ZWCClllXonyA+TI7rBQ3p55XnWmHOjXCKYP0ArJL4pe+SusMnhC4Try
+ ATGsP8lfqfMTSu8IOEQsGJ+IM0PuKkX8EFR755lJA887UhRgClAOb+NPozVwmVvytmrqZ1pdA==
+X-Received: by 2002:a17:907:968c:b0:c12:3f6:f644 with SMTP id
+ a640c23a62f3a-c1205f178b3mr95215266b.36.1782377688926; Thu, 25 Jun 2026
+ 01:54:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-7-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260621081915.19154-7-heinrich.schuchardt@canonical.com>
+ <20260621081915.19154-10-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260621081915.19154-10-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 25 Jun 2026 09:54:03 +0100
-X-Gm-Features: AVVi8CcZ37SWqVYFAOBdJEKeECPJy7-XAfXWDCvPknJvCyR6azfp_RmOxrfHFig
-Message-ID: <CAFLszTjyf2u2oNMGVdpQv1pEo5Y0APOkwkgBiV0_RiZfS+9q0g@mail.gmail.com>
-Subject: Re: [PATCH v2 06/11] efi_loader: move console-input helpers to
+Date: Thu, 25 Jun 2026 09:54:34 +0100
+X-Gm-Features: AVVi8Cc4NZeRum7Yts97n27ObEmrXX7hkoyFcAWvxoUJSjaa5rtg55Bqg5vt90k
+Message-ID: <CAFLszThopRDCMspX9yMC3f72fOj9mzqDcFmDVDO-UmucCBUMiw@mail.gmail.com>
+Subject: Re: [PATCH v2 09/11] efi_loader: move efi_main and command loop to
  efi_app_common
 To: heinrich.schuchardt@canonical.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -118,72 +118,115 @@ Hi Heinrich,
 
 On 2026-06-21T08:19:04, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: move console-input helpers to efi_app_common
+> efi_loader: move efi_main and command loop to efi_app_common
 >
-> Move the shared console-input helpers to efi_app_common:
+> Add the remaining shared code to efi_app_common to complete the
+> refactoring:
 >
-> * efi_drain_input() - drain the console input queue
-> * efi_input_yn()    - read a y/n/ESC key from the user
-> * efi_input()       - read a UTF-16 string from the console
+> * efi_main() - common entry point; calls efi_app_init(), prints
+>   app_banner, calls command_loop(), then clears the screen on exit.
+> * struct efi_app_cmd - table entry holding the keyword, help text,
+>   and a handler of type void (*fn)(u16 *args).
+> * command_loop() - iterates app_cmds[], matches keywords with
+>   starts_with(), and falls back to efi_app_help() on no match.
+> * efi_app_help() - prints each table entry's help line plus the
+>   built-in 'exit' line.
 >
-> The common efi_input_yn() calls efi_drain_input() once at entry,
-> replacing the open-coded cin->reset() calls that each application
-> previously duplicated.
->
-> dbginfodump and smbiosdump had no efi_drain_input() call in their
-> command loops; add the call so the console queue is drained before
-> each prompt, fixing a latent input-echo artefact.
->
-> The common state is extended with a cin pointer (initialized by
-> efi_app_init from sys_table->con_in) so the helpers can access the
-> console-input protocol without additional parameters.
->
+> Each dump app is updated accordingly:
+> * efi_main is removed; command_loop becomes non-static.
+> * app_banner[] is defined at file scope with the application's
+>   title string.
+> * Per-app duplicate state (bs, handle, systable) is removed; apps
+>   now use the common module's state.
 > [...]
 >
-> lib/efi_loader/dbginfodump.c    |  61 ----------------------
->  lib/efi_loader/dtbdump.c        | 109 ----------------------------------------
->  lib/efi_loader/efi_app_common.c |  88 ++++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_app_common.h |  29 +++++++++++
->  lib/efi_loader/initrddump.c     | 109 ----------------------------------------
->  lib/efi_loader/smbiosdump.c     | 108 +--------------------------------------
->  6 files changed, 119 insertions(+), 385 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-thoughts below
-
-> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
-> @@ -277,7 +217,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
->       handle = image_handle;
->       systable = systab;
->       cout = systable->con_out;
-> -     cin = systable->con_in;
->       bs = systable->boottime;
-
-The commit message says efi_drain_input() is added to dbginfodump and
-smbiosdump command loops, but only smbiosdump's command_loop() gets it
-- dbginfodump's efi_main() loop does not. On top of that, the old
-dbginfodump efi_input() opened with cin->reset(cin, true); the new
-common efi_input() does not drain at entry, so this patch silently
-removes drain-on-input from dbginfodump. Please add efi_drain_input()
-to dbginfodump's command loop too, or update the commit message.
+> lib/efi_loader/dbginfodump.c    |  95 +++++-------------------------
+>  lib/efi_loader/dtbdump.c        | 109 +++++++---------------------------
+>  lib/efi_loader/efi_app_common.c | 111 ++++++++++++++++++++++++++++++++++-
+>  lib/efi_loader/efi_app_common.h |  31 +++++-----
+>  lib/efi_loader/initrddump.c     |  91 +++++------------------------
+>  lib/efi_loader/smbiosdump.c     | 126 ++++++++--------------------------------
+>  6 files changed, 205 insertions(+), 358 deletions(-)
 
 > diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
-> @@ -104,3 +106,89 @@ bool starts_with(u16 *string, u16 *keyword)
-> +efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
-> +{
-> +     struct efi_input_key key = { 0 };
-> +     efi_uintn_t index;
-> +     efi_uintn_t pos = 0;
-> +     u16 outbuf[2] = u" ";
-> +     efi_status_t ret;
-> +
-> +     *buffer = 0;
+> @@ -304,3 +317,99 @@ efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
+> +extern u16 app_banner[];
+> +extern struct efi_app_cmd app_cmds[];
 
-efi_input_yn() drains at entry but efi_input() does not - easy to trip
-over later. Either drain inside efi_input() too (matching the old
-dbginfodump/smbiosdump versions), or document in the header that
-callers must drain themselves. What do you think?
+Please move these extern declarations into efi_app_common.h next to
+struct efi_app_cmd - inline externs in the .c file hide the contract
+that every consumer must define both symbols; putting them in the
+header makes the interface explicit and lets the compiler catch type
+mismatches.
+
+> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
+> @@ -118,20 +99,27 @@ static void print_info(struct efi_loaded_image *info)
+> -static efi_status_t do_dump(void)
+> +static void do_dump(u16 * __maybe_unused args)
+>  {
+>       struct dbg_info_header *dbg;
+> +
+> +     if (!device_path_to_text)
+> +             bs->locate_protocol(&guid_device_path_to_text_protocol, NULL,
+> +                                  (void **)&device_path_to_text);
+> +
+>       u32 count;
+
+Declarations should be at the top of the block; u32 count lands after
+the locate_protocol() call. Also, the locate_protocol() return value
+is now ignored, so a permanent failure silently leaves
+device_path_to_text NULL with no diagnostic; the previous code printed
+'No device path to text protocol' on error. Please restore that or at
+least check the return.
+
+> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
+> @@ -164,60 +152,9 @@ static efi_status_t do_dump(void)
+>               print(u'\r\n');
+>       }
+>
+> -     return EFI_SUCCESS;
+>  }
+
+Stray blank line before the closing brace.
+
+> diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
+> @@ -156,16 +143,13 @@ static efi_status_t do_save(u16 *filename)
+> -     ret = do_check();
+> -     if (ret != EFI_SUCCESS)
+> -             return ret;
+> -
+>       smbios3_anchor = get_config_table(&smbios3_guid);
+
+Behaviour change not mentioned in the commit message: previously
+'save' refused to write a malformed table because it ran do_check()
+first; now it happily writes whatever is there. If intentional, please
+call it out; otherwise restore the check.
+
+> diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
+> @@ -304,3 +317,99 @@ efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
+> +                     for (cmd = app_cmds; cmd->fn; ++cmd) {
+> +                             if (starts_with(pos, (u16 *)cmd->cmd)) {
+> +                                     efi_uintn_t len;
+> +
+> +                                     for (len = 0; cmd->cmd[len]; ++len)
+> +                                             ;
+
+Isn't there a u16 strlen-style helper that exists here? Also,
+cmd->cmd[len - 1] below assumes len > 0; an empty keyword would
+underflow. Worth an assertion or comment documenting the invariant.
+
+> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
+> @@ -0,0 +0,0 @@
+> +struct efi_app_cmd app_cmds[] = {
+> +     { u'dump', u"dump - print debug info table\r\n", do_dump },
+> +     { }
+> +};
+
+The original help text column-aligned the dash ('dump       - print
+...') across all apps. With the new table the dash sits right after
+the keyword, so 'load' and 'save <initrd>' no longer line up in
+initrddump, and likewise for dtbdump/smbiosdump. Easy to restore by
+padding the help strings.
 
 Regards,
 Simon
