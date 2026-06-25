@@ -4,76 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2535CDE001
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E1D5CDE001
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jun 2026 14:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50CB9847C8;
-	Thu, 25 Jun 2026 16:26:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B4EBC847C8;
+	Thu, 25 Jun 2026 16:29:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gvF4iSDw";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Rnh34syn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IQmZDBVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F1CA847C8; Thu, 25 Jun 2026 16:26:39 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 48D328494B; Thu, 25 Jun 2026 16:29:21 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED11084704
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:26:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4676984704
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 16:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gmLhr5ZRMz9tqT;
- Thu, 25 Jun 2026 16:26:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1782397596;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=rm4biqpOrLOguwwCvhyE31x86AOvEOAosdjdL5svPVg=;
- b=gvF4iSDwYKbhaPPJs+l0RCSnM+Tj6TAd0u7o30/Hqb9ylJTdUgd7UNzn9Ihpj7WHhkSlwH
- qTD7SzqCmDQvLkjctNduAPGwDV32G+6XFuoNcPJfLw97o2rz0P3rKqK6I711F5Zpl3dzDG
- plAzX/En6i3/RWojp+iYOtNZfGEd0LTjO+GJdJuACWNazzupXR7N+E9PSCorhfYjmrRSyW
- PqTekKjQ9/oacY3aj5X2D44M4vuk/kJIidk+S4Ase7XMdtYYHrQ/swgZrQESqa8L0YDgfm
- BrJ+FxfdlBI2oMd8O0bZ6LxYqD1ZicZjzs7lpNl92wg6sQTzF5+QWkQixhcsIg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Rnh34syn;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+usb@mailbox.org
-From: Marek Vasut <marek.vasut+usb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1782397595;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=rm4biqpOrLOguwwCvhyE31x86AOvEOAosdjdL5svPVg=;
- b=Rnh34synhd8qBl4PvuqNTG1RwGQKBL57+Y/J4IXocZlroats2y4E8oDygPjfaPlppZ8/Li
- gQG0PAh41dR0MyAtQm65LS4lvoQhKE+6kdpmIRtTv7iRDYkOSyRGsWhUDcilEbNcDEnLo6
- jo7VY8LeDEoVMNdhcdY0PSnJLWb+X30zCv55TsVKxDBI3DunAGvG0xQEjwHNk0jVztGqdS
- 2ulsl5fRIAmfc0HfeW+iwRhLYLYSRZI5wr9P901vZrDgKGlamPnWJB+EdS0tqyiE8S70GO
- /iITAX4eQqUZW/SIX7LnvkSwkrtD6Xz+TnXziwidfGNy+0VQzYplGB12X3/9pg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Alexey Charkov <alchark@flipper.net>
-Subject: [PULL] u-boot-usb/master
-Date: Thu, 25 Jun 2026 16:26:13 +0200
-Message-ID: <20260625142625.18375-1-marek.vasut+usb@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-c07a6520cafso431753866b.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 07:29:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782397759; cv=none;
+ d=google.com; s=arc-20260327;
+ b=BLmfytXdD6v+WR/8cv8dSGtbtg7XjRROr3KtJ/Bp444VH0mfEq2w7LELpFhOnHDj6e
+ 52iW+lxe3aOJaelgIEgKyTddC06RYKTPpq7q+diD2goysVW8dC7aSmisQJAbkrcALrkX
+ Mbbs5NEU4PZvgM58yaHltu4EKPflqr0vOZ7/hkV0ms4dQih+l9P7RhEv8DwLzb3HhEZa
+ zJiHL7vmUsYLIXcv5AJBJZyLJbBKUa5VoTyF1sQFu8NiejOoKG844k+zmAA7uK0XStT/
+ +7KGnaLQ9MaImhPA4espJhqZdHKHk1hmNNWacMfKJWteCP0dRg2NY6BKVYwJYDKaJVsW
+ +Ceg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=g/QYF/4T44dqwTdyWTTKK+oZ0PQf1C7k4zmnaAfUdJo=;
+ fh=SJzU0vqhCd6XZ12LivayWWnEo0s7vlwiBzlNcKhQZ8Y=;
+ b=hweSpxbLTw0o3DYFGogN3yxFC7sF7Fjdr8nIYGkQ/cV0fCqL6df/O09Tln8jyhmoA9
+ zRKynNEJgHzVH3Mmqss8bbun+BuP16hm2hvkznqTSPTyKyc5QFywdn6ZeKJ9UPh7YmFw
+ muJkGXWx5Z2UOkXdFuYCGuQaxhK61jXGG/0R7ICGr1hz4k2PzgofNOQHWPl6bELsgN9i
+ likuHxbHfkoDVzYqDs2qvZ356e5oDMdd2ENkSfaTSklmrUnvsM/U1kzFqAIJmwr4VZxu
+ EmieIkSVYBzFgcIIfYK4U7BebU4PmKaZDHSCGChzlHenb+oAmVsYQYBSoR13dl+woZnR
+ bXTQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1782397759; x=1783002559; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=g/QYF/4T44dqwTdyWTTKK+oZ0PQf1C7k4zmnaAfUdJo=;
+ b=IQmZDBVTNT4kR0rmE+lIfKt+E1h3xr0lqONP+LQtII3cAyZJHog1g8C+7avnyDC4GN
+ 8T4/xP11pL74rfW3m6RLECi1QGaQpTetHYO/Ifi9y/9qGAxaUOLLF4IC7v7hs6IZT5+y
+ BLMw6Wa+3seVPcPfaqrmXVSqFL878WEd4B2Qs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782397759; x=1783002559;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g/QYF/4T44dqwTdyWTTKK+oZ0PQf1C7k4zmnaAfUdJo=;
+ b=Eqk4chqMWAfdbaLPtNEN+G39P96IZ2fa92BqyyZhgBIBwcbSnfliNTFfXMyjBliYFr
+ 0Q/W5hmURvLykM2KGaIQ9LdTcefn3M/BD/BUhH5wRyQ+yzgaBOf8R3n+lMB7I5d01wYE
+ lEuE31m3xwgR9GuZlpIRDLqMMSruLxUF/+cOvywc4QI1mC3ZpnCqxJo2VENVMla1ZAXt
+ 6BbGQ+wvxiHhuV5CjdM3bDf/Gvh1QfOlKjnJxrrlbK+syc5wO5HVu85nQvM5KhK7Lrn0
+ Sj50DEU9mDBItORfDhwknHIvdaKNo+I1C6u6/h2lc5IpUeRVw/zJqzpjX+bdujXLXwRJ
+ thCQ==
+X-Gm-Message-State: AOJu0YzMqtNCOpnxu1/nrD25yvEspAVVhy7fHrLNiQd7eboyNf8Zg/0f
+ hAQPgoIC58eWx13L5YhCkcsKjMY7CZu4P+vzovl++BfgDSe24YASnlOTcx3fGgepYK02t+b6oME
+ KuVVorQ9al5aakvXr60nPy4CBFpHH8GERQKpXWq7M
+X-Gm-Gg: AfdE7cm4uManUp9LWHUlKry0MV/86PGQs92bLkB7BB9DE+c1f26S6+UcCqLiJsTm5Uz
+ lvU62xwukp3AqyWbGEhnLj728iO0yynjsMtHxSNBiN4gf6BPmsKUawZBAd3IUfkBoJSKEO/0YCz
+ 7ImdSGdqvyimMRznkcazvPubvXOYVbzQPUtDpsMQwuclgCoq8aMoH4fqfQCxGHqatr5UZ/NyTiK
+ dNYYHg+R8LTsXD4HshIYJyncfqNs7ewo8x760T/FVuqkiDi6iogNloaU2C3+NIwh43gnpmsIA==
+X-Received: by 2002:a17:907:980f:b0:c10:fd1:4fd with SMTP id
+ a640c23a62f3a-c1205dafad1mr261190066b.2.1782397758695; Thu, 25 Jun 2026
+ 07:29:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 1zybqckbtmffdbso9xuwf3oupcg5jk4q
-X-MBO-RS-ID: af2c3ed7791e925547c
-X-Rspamd-Queue-Id: 4gmLhr5ZRMz9tqT
+References: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
+ <20260622111933.1488593-3-nora.schiffer@ew.tq-group.com>
+In-Reply-To: <20260622111933.1488593-3-nora.schiffer@ew.tq-group.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Jun 2026 15:29:05 +0100
+X-Gm-Features: AVVi8CdXOl5iXVib4egInj9RzwkIGg5IJ_ezfBTZnhkchBNDzYcPz_IsJK09wjE
+Message-ID: <CAFLszTii-g=ipzxoSL5OrK_V+gvDT_K4tHfdgtLUb6KoSRHySg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] bootm: allow omitting entry point for
+ IH_TYPE_KERNEL_NOLOAD
+To: nora.schiffer@ew.tq-group.com
+Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Aristo Chen <aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,21 +110,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit fcda974e36033ad5331a9b4a4a551af4e141ad7d:
+On 2026-06-22T11:19:32, Nora Schiffer <nora.schiffer@ew.tq-group.com> wrote:
+> bootm: allow omitting entry point for IH_TYPE_KERNEL_NOLOAD
+>
+> For IH_TYPE_KERNEL_NOLOAD, the entry point is given relative to the
+> image start, making 0 a valid default, and for IH_OS_EFI, it is ignored
+> altogether, so it may be preferable to omit it.
+>
+> Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+>
+> boot/bootm.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-  arm: aspeed: Fix AST2600 SPL external DTB alignment (2026-06-23 10:41:25 -0600)
-
-are available in the Git repository at:
-
-  git://source.denx.de/u-boot-usb.git master
-
-for you to fetch changes up to f519a74a32b076e548f2637e9a00b8d3110d8bfe:
-
-  usb: onboard-hub: Add support for Corechips SL6341 USB 2.0/3.0 hub controller (2026-06-25 00:06:47 +0200)
-
-----------------------------------------------------------------
-Alexey Charkov (1):
-      usb: onboard-hub: Add support for Corechips SL6341 USB 2.0/3.0 hub controller
-
- common/usb_onboard_hub.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+Reviewed-by: Simon Glass <sjg@chromium.org>
