@@ -4,142 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC75C43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:46:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FE9C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:51:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7085584704;
-	Fri, 26 Jun 2026 17:46:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF2D684704;
+	Fri, 26 Jun 2026 17:51:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="i3JW9Iq/";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oKhY70WO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D438495B; Fri, 26 Jun 2026 17:46:38 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 3D73384894; Fri, 26 Jun 2026 17:51:45 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82DE28404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:46:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB87B8404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Mt6CXpZkp7s6y7gzDvFCbRnmYQD7PxPnLzif69L9rXObYPCuraADHW+Zzy7GFySEDYcD8D+2Yq6oSXVld2PM7X1qKZwEyqpaB3QNWGRu0W8iQSWiXKW6HPTBeY5ob2isl9WuypjnXZGys6MuZ8kCDXai/1MrbYKWstzJu4ooQ/c0HKGBdQT6DE++DhCFt+GtuBFoJiPjjz01s/uttxXDVo1dDj/ZPe7nZkBhyVjfLasYvadsEMLSTXRzLgV4Zc6/EhQCyIMfIh6r303ZN/JmQ6JfKuOKuPwvy2t2UO0YUkEXxmSpx1vCt58U2zDZHjfwEIrTEHzOTYevr6Rpl2VjPw==
+ b=bkQ6PTvhw+DlmeGkgxTotqPT+fKcUn4gsE92kSkZTFfKiwjGpcsu+pr66o/mX0nV61uV5YQLg/iJ46IZ8tVxgq0iKsve1s3/E4tvVyOqPutmaeOpHSwh5r4abqj3/BkNpB5Xw+CdW4f4thVHCsyOVLqyDXisDDjBP4alkb6n7DOqaMm6dGP090XpvrxoZC114mkzKTmgoHhLKw/5vsN/NKeBXr4CFY27c0FdHdnPczzzNZMcPLMkKQvSscmk4EB/2v/QPZKCGgkRYuf6GJ/50F1rAYJIL30QizM26kiJ4w5qNy5fS6oCVwCxdszphFMkEmeTbLt7jLwQHERrO0DUfA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=htZ/VeOk/IOdEk6obXfmpIcTxehg920S+WjY6XK4JsA=;
- b=E1H6WjtGDI4+OxAx17bd3uYlICx/R31BNKp8dNEZdGiMrTs95OaMeLfyKtmltMuWof/1YUCDDLi0cIolYdcclG3YS1bDhejCCXK4iDfAxU305LIcVD+BAodBSqeV1GikzSNc2BF6Xz9ke8j5jdOQJ9DrggBqMXfHqgcYZ+DaR2xbwx16xx1pqjRaCxTcyEJ49djnpV3SDhwKcI9yUIJtKTdi7kP8vBx79ovvlt0BdQTZrtuN7aSdsNY0OWbimPSgL6ATljYZDD3Osk2Kcuv5ipM9l/GG1M/N3vFXx9fTZs+08EwxWzpT0IyMq7p6ulzk1VH5UN5myrHIqCeYr957/g==
+ bh=XmBLGT9l/2ljK0Q+GYbTPpl0MQ7HURjUP/RqbaKFzk0=;
+ b=omXo4FtnW4UAD71dfzMnwNvP+6i9EMtt/WDnG/NHnIkXAkBLnAITrVMlHgGfspFnJvJwAHeeBiqx4hfKsc1joBcGa5D8gPiM2edBj1T8SaTH0AfLVbmH/h29FLhDIhiKCyjPpcJ1WAhZ0otr9tFGZtCIaFx0c3cPi9uH0kTMvRoYQmB040W+ibF7zyUAv3EiL88tIFrUSC91nlCuNvq2fVEvMlWUxP0X8NR6r9RswHwTCcmwWlQQgVTXcJveDtK8y/sAqU01CAmuolAppk5F4lDlijfciH9JHMbZTC7wY+dsjQR5lBhGh47azAfwJ7owHec43Lw2paLnXVt1Mo3UBQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=htZ/VeOk/IOdEk6obXfmpIcTxehg920S+WjY6XK4JsA=;
- b=i3JW9Iq/iXVPCLmNzkhaVml8HPz7jpzaUA9x3b0/FcfGdTY2ygO37OPZNFLzPkcsg/YX7uAYkv7H7YFivO93Fh/MnKrimO9ZZdGpjq9gThazZLVZjeIA8RTkVdFQN7hqlhejYiIee1/wiSCXpM8xwYT7Bb4wi9ITUw1yv7FAsbo=
+ bh=XmBLGT9l/2ljK0Q+GYbTPpl0MQ7HURjUP/RqbaKFzk0=;
+ b=oKhY70WOjuqsX7Nr4deo2FLyZ9bWie8B/TQvtL5csG3kllNxZSh372YK8hkJoxJ+9ewUfsdPeCVolKaHL8hA371tJNmSYfTADMtIi0WzBAVqROr845Ny7lKg9g/k+dWJg5HcgNWeMwdyAjTYq1pgGT7/DD2HHbHRBkBGtkK9RJc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by DUZPR04MB9869.eurprd04.prod.outlook.com (2603:10a6:10:4ad::20)
+ by AS8PR04MB9127.eurprd04.prod.outlook.com (2603:10a6:20b:44a::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 26 Jun
- 2026 15:46:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
+ 2026 15:51:34 +0000
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
- 15:46:30 +0000
-Message-ID: <eacd2ffa-a1bd-484b-bf4e-af14fa6c7aba@cherry.de>
-Date: Fri, 26 Jun 2026 17:46:27 +0200
+ 15:51:34 +0000
+Message-ID: <e4f79621-6c6a-4e06-9d35-c673636fd788@cherry.de>
+Date: Fri, 26 Jun 2026 17:51:31 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
-To: Enric Balletbo i Serra <eballetb@redhat.com>
-Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
- Tobias Olausson <tobias@eub.se>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>,
- Jan Stancek <jstancek@redhat.com>, a.fatoum@pengutronix.de,
- mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- u-boot@lists.denx.de
-References: <20260429180247.83091-1-ekovsky@redhat.com>
- <482dbc09-e78e-42e7-9915-bdc105652494@cherry.de> <ag-EpjuQlre9QmYN@daedalus>
- <8d7ff3b6-abb9-4441-8491-99c538ea5f2d@cherry.de>
- <CALE0LRtVVwJpmaLn6=95BihVZA3pWPAwM1t7zENSsKdaxzWk8g@mail.gmail.com>
- <eca33072-97bf-49fc-890a-a51b7fdc4d62@cherry.de>
- <CALE0LRvobvMnm=P4qqcNjzWPhRjtYLO4sbHP4UHOKLTdUoaryA@mail.gmail.com>
-Content-Language: en-US
+Subject: Re: [PATCH v2 4/5] ufs: document the UFS command
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CALE0LRvobvMnm=P4qqcNjzWPhRjtYLO4sbHP4UHOKLTdUoaryA@mail.gmail.com>
+To: raz.benyehuda@mobileye.com, u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Julien Stephan <jstephan@baylibre.com>,
+ Udit Kumar <u-kumar1@ti.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Shawn Lin <shawn.lin@rock-chips.com>, Jared McArthur <j-mcarthur@ti.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher
+ <hs@nabladev.com>, Simon Glass <sjg@chromium.org>,
+ briansune <briansune@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>
+References: <20260607-ufs_tool2-v2-0-f79ff26ab18c@mobileye.com>
+ <20260607-ufs_tool2-v2-4-f79ff26ab18c@mobileye.com>
+ <100d2db4-d05d-4b1c-9576-d83d5c225e38@cherry.de>
+Content-Language: en-US
+In-Reply-To: <100d2db4-d05d-4b1c-9576-d83d5c225e38@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA2PEPF000008A6.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::64b) To DBBPR04MB7737.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA2PEPF000008A7.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::64c) To DBBPR04MB7737.eurprd04.prod.outlook.com
  (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DUZPR04MB9869:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3baadb3-be2c-4045-d422-08ded39a171c
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB9127:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3111dc2-94eb-4524-cdf4-08ded39accbe
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|7416014|1800799024|23010399003|22082099003|18002099003|4143699003|56012099006|6133799003|11063799006;
-X-Microsoft-Antispam-Message-Info: xIYsIxkZMEkqtSBFTphkqu7xVGkSWincAwar6XBSKroL2+5Z+mWtZ0oibqAzfkVhd1go9gFbZG/BbmVgOiPs6oHVVXgUAO0lCUKXNElDLn6SEChQsogPx54I2pYqIOuUewTOB9kIstr+mbkPyEbVvd6alC4FRSJI38YE5BtnUlfd1K7bD8iZmCnnDSTxoHtKt4XU23GKvWW12zUX6p+8XxsOrGe4/Z3wUkWvmBpPrOpmf5/c+Hjhcu/5sDB4VM3QJOCAehLk3Fkik2YNq7+z+H+Tiu2m26LLAEwzteSRrM9oTVEL/MDbsTRVuA0HmoyI5sQxJa3DeVpeb56JRD+6ysvXKVHK+HytcxCImPyn86M+VzRUKvkOO5DDdiah1wjCudbKTrZaRNpjZr/ifcKOzj7a9y+3YvTou57kbpAFI0qmLMdx7byWL6W2a96sdHXm6/v5Cj2iz026adZ/mtzqm5je0SKNGcuesUjhA32vGxD5sROBD2hmg7aKp+NeSdofAz0/aEn/6uHm6y0/UJK9kiSPCXK/MqiRNGO06glzQCu/XE98I04D3kZ8P1sNoFMVFN7W3p4esdrD9kDhpAOiixBwkGBKr1cOAuc6XNw/eJejK9OJVX4zCfVykht0nW0/DECTapyy2CBGllNwCWYpRQyoKwPiZJMmtEpAb+IMf6g=
+ ARA:13230040|23010399003|7416014|376014|366016|1800799024|22082099003|18002099003|56012099006|3023799007|11063799006|4133799003|4143699003|6133799003;
+X-Microsoft-Antispam-Message-Info: FeBWVQArLTpK2aU4Fto+K8wXXO+yvMVGOMV+bx0+q3LDot+M53ATVXK36suTwCp2rmKxx1MK7sPMQl/KIYN6qMt6QFff3Ks198ykCSaN0fdc1BR7TS6r1SM2698mnyLQC6fosW8yckWzpHI9uatphGeY9s7IAPke6VNbCkUIL7vhd9s6EspPRCe8bvKv4y8e0teyP+dcNJRnA0IHimuLGV7bNjXsdHl0qMXWNnjCsafxWZvsYArxnKlS5WiaGT9guigqKT2glYkeQEm7z0oKSpgCf83Bs6ytp47VlTNX/1qoUh1TslQKSMg6tk8n1iDm8fyXS16hjCXvaQ60mxh9XwNkUGRdas+zkCqgNwkz0+qyTckgtnlDsulkTtH5gVin56c5IIC0S6ZGXUnkkue9kKBcagLctyW05WVoO+QfSmmrm5k7/DAVDfEgCV3516AJkkdwG6u/7j/e7C9TKi0qJ6iKd1HfioHdwpSlWbg2tH8hrq7bNGRVwvh4BOsLRzf7ovMMqGZIBR4I8Yt/YCPcx3SLWJEuwC973ej0al4as9bpse3Q/VtDwMQQYLSFS5FsEtyQUICJC+Rm1S+mIsTXcrmoavdPYhY8PGhHLpJnNnm5MYaC1QrmNck/GaBSODX0
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(7416014)(1800799024)(23010399003)(22082099003)(18002099003)(4143699003)(56012099006)(6133799003)(11063799006);
+ SFS:(13230040)(23010399003)(7416014)(376014)(366016)(1800799024)(22082099003)(18002099003)(56012099006)(3023799007)(11063799006)(4133799003)(4143699003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?REtteE1NbEswMUVkOVRuK2FzOVpFQ0lVREVzM013eUlpTCtKOXFMVzhvRy9I?=
- =?utf-8?B?cXZacHhJbWQvcy9sUkZSMGNpRklLME4yNzhEK3Y1Y25lekYvSVR4RWJqVlF6?=
- =?utf-8?B?UFFKU1kvd1Vsb0s3MncvZWpNWS9oSEx5a0grbSt2OURkUGJJWjFYR3dzOHpF?=
- =?utf-8?B?bWhqb1l4bk5MbjR5R2RLM2hJRWgyUERZcjB0WlUwR1dEcFI3T0I1NnBMVHpU?=
- =?utf-8?B?ZnpiZGlxRmZTZjZRY1lGcUQ5ZkozWHF5dGdNWkoxTmwwVEc3QkRzS1pmc2pm?=
- =?utf-8?B?RDBKSTNXNlZOWFF4MHQxWFZnUkthZkZEbDFjbjQ1WGpoOEpTR1FhU0hDYTBu?=
- =?utf-8?B?SGpORlVPN2RKb1NIUmlFWWJPdXBBN3FjUDd1cEdiMDM3ajJlYmhNNXBQdUtD?=
- =?utf-8?B?THhVQ1MrdEZjbGFFc01sNHE5T3hCVDNEVEtDbWVXMEplQStWZTVUUnpaaUlS?=
- =?utf-8?B?M2IzN0IrUysrVXphUitMMWZZakFjYzY1TlIrZUVIb29hZ2I0NE00V3Vua3Ey?=
- =?utf-8?B?REk4L1NjbmZjbkhpZ1dDNnhkU28wNGJZQ3UzOXFNMnFLbDM3MlhGSlRJa1o3?=
- =?utf-8?B?VmNkeEgwbCtTS2w3ejFTRlVVTFAwWkc0eE8rbHI1S21IaGxaSjA4KzFnZVNv?=
- =?utf-8?B?QjJOckZ5YlM5YXR6QmxnOG1lTnM5YmkvZVI1eG5iTTJmaXhHdDFzeWNpbmdl?=
- =?utf-8?B?dmxnM3lBblhHYWFycks0bDZodmU3WlVRWWxyQzNFbnliUVRCVTJRMi9NbDB6?=
- =?utf-8?B?YnJhajEvNE5wbTZRejZjamtySjdiNWZDUzI3RXBML2FmOWFURWRsU1dvZWpp?=
- =?utf-8?B?NjEwanUyNDYvekZ1V0lLME0zK3RCbHByWThqRndENmdDMmU1UFZYZU1KVmZj?=
- =?utf-8?B?cDRLKzk1TnBEYUZzVktOTmxyZldmZ3FEQm9LSEJqUDIxOGt3VEFNZzM4ZFcv?=
- =?utf-8?B?TkF6dFY3aEhaQXU4MDZzL2Iyb1l6NjNENjJFaTVjREVGUm5kL2pNbDhsZ2p1?=
- =?utf-8?B?Tks0a3ZQcWpvamkySEY1U0JZdjVIMzA3cUwyMXIyUUFDR3g1ek5seDZmYXJM?=
- =?utf-8?B?V1F1WjdyRFlwaE9CWDVFZ2RmTGZyeE93QitUSHNxb09vbW8xUVRyR3lGeWdJ?=
- =?utf-8?B?MFk3NitHd3dmcXVzbGErV2JkV2t3aU5DZ3NhZFFFM1QzOXF2UkZtazBlTHFu?=
- =?utf-8?B?WnNMRVIzUXdTQW4ySHFnRnJvWlQrMXFkcy9JZytTbkdaRnVXSTJJOGxCdkc1?=
- =?utf-8?B?S0ZlY3ZmWk0xZmJ3NUdwNlUzWHJZYXNhbXVpaFFNVFFZQTZBWWV1WWJ5YWJS?=
- =?utf-8?B?eU5GQzh5NHZ5NlVKMGVhQ3RWOVF5SjBvMDdqU0p0Q0tBeklSL0psMElVSnBz?=
- =?utf-8?B?TlVleE9MVXNsSDdKOWdoRHpSWkNEZmJrNFhOKzdDQS9wenJCZlE1eERtdXJU?=
- =?utf-8?B?Yi9ZTEdMZytuMWxvZ2x1WDV0Z0MwS3krekN0MEl6VGtDVjQzYTQ3SW1zOVhh?=
- =?utf-8?B?MkJmYnNMKy96aEMySHNERTkvQUhOV25kb3ZUTjZVbEJTZExxTTZsSkxud0FT?=
- =?utf-8?B?MlZWTWgvRnR2YklRN3IzVERNN3Fmd0dHSXNoemYwNUpKenpMS0NtMUE1M05C?=
- =?utf-8?B?T29IUjFMUUVZM0FvZVhMY2VSZFZ0R25Dam1qY1F3RjB4dTlYVmcrQ1FQQVVw?=
- =?utf-8?B?MVJjZVBBd1QvcFVmODBzYTJOSXBlZmF1SkorVG45MnlaajU3N3haWVJla1Rl?=
- =?utf-8?B?RS9nL1pYMVBTRGtNVkRQN1FmRlJtanJUZWlmZnhVQzJSWTRYNSsvQmM0QXFo?=
- =?utf-8?B?QnVHWHAvWW53cmlrZk9xVmg4blN5Yk5weWtQVmJiUXF0N1pHbERGZUwrUWpB?=
- =?utf-8?B?cWxpVFhxT3FxbW9DRXlidmhCK0E4aCtLMEhwSlN2Y1pKMHB1YUVNSDI5NVM1?=
- =?utf-8?B?TkN2KzgydzRkbU9GQW9HbWZYemJRdVBKY2ZjT1VXTjJCWmZjejZkWWFDdk45?=
- =?utf-8?B?RUtZSG5RLytDQTFISG9Sd3RTUDJRSmMwSVBZaUpHQk05Y2xvK0liNEZVQnpB?=
- =?utf-8?B?L0hINUI0R1VMdGk0aW9yelVGQmxIK0NFWHBFTGxrN3RRekwyK0ZzOHhjZmdj?=
- =?utf-8?B?Z1RZNnJmYVRUUUJvR0hrcHgzZVNYaGxmU0ZicFptOG5rMCtyZUpJRVZQTnY3?=
- =?utf-8?B?WVoxeFIwOSs5dkR2Y2Jpb1kwTkkwMGZwK1VKdkU2R0t3OHUybmpVbkdRVTRt?=
- =?utf-8?B?NnhsOERPVTIrSENFZFpuQjl1aXBmU2hXZUpqS1EvWEpBZS9CUW9tbGFMQVVz?=
- =?utf-8?B?ZFo5RzZZUEwrVEQ4Z3NxY3UrK0ZoUFZiSERtR1RNKzRhV0VlOXR4QT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bkkvRWtJeWFweEN5TDA5R05td0V0VWduYWRBejBxK2hBNUlkK2o5azJlSUpj?=
+ =?utf-8?B?Tkw2d08rcjRTZHFxRngzYnJOVzdLQWl2UWh6L0xERmFYc0o1UEhYclI4eEMr?=
+ =?utf-8?B?M1hSY2tOREF2VkVSWGRZNVhSdTJYeFlDN2pIT3dnTmtCT016M3RCYkJETDZ3?=
+ =?utf-8?B?OHp5NjRZdjVleXg1WWVYRlRsVksyRDZ1Y3pVejJycmpmalZaTVoyNnJVR1Nx?=
+ =?utf-8?B?dFhjOUhINDJsbXNvVEF6SWQvUHYrVXhXY3RLbFMrSFBBcWJkaEVUNnY1MWtn?=
+ =?utf-8?B?SmtVUCtWTlFjRkpIQ0JoVTRwaVNKVHZHRkpzc1FUMGx4bTFscytrN29ITHdp?=
+ =?utf-8?B?Qmthb0QzYXZmdTlMYjVaQkF2dUc1bnVSV05OdTUvbUh1eHJja1Z2SGFtR3RU?=
+ =?utf-8?B?dlFZUnJRNmxkVFRnY0tZU0xJa3pzYUdzN2VuTlhuWHpweTBnTXMvN3FlNWFK?=
+ =?utf-8?B?NjhqZFh5MjlHL2JtR0NENEFCcFpvMGpQOXBTZnE4VEV1UDQ5aSt3eHFuN2pS?=
+ =?utf-8?B?MWNTaERZSXFReC9wbDJ0Y3FqYlI4Mko3Qkgzakx0NXliMlRhem9hQS9tVTk5?=
+ =?utf-8?B?VElsU1B4bWdaTDYzODczb1l0b1dPSFptYjV1MXdPaTZhSW1NZmhoL3FsclFO?=
+ =?utf-8?B?Zk4xeHJudkdTVWo2bi91WFZtNjN5NzJsRnk1emx4RzArUzdTZmRXbDBTZXEy?=
+ =?utf-8?B?aFJqb243R3lKSStWbjJRaDY5OTBadTIzUnFHZjRKSlFETUtIT3h4VjNNckwv?=
+ =?utf-8?B?MGRBcWtabi83NVA0YVZIL0NRRzdSQTl2N09Vc0xybkMwbVUyNHZCOHdPbnR1?=
+ =?utf-8?B?eGJqQUI4WDFKVU81bUdFam5lVHdDbmt6emdqcERRWDNKN2tPaFN2RnVnZU83?=
+ =?utf-8?B?N1ZNSG5pdkJmWEk0c0tUaUN0eE9SQXlYdHpocTdTRWRWMk5rRGpTQit5ZTMr?=
+ =?utf-8?B?Z2E3V1pheXVtK0llVU11RDd0NEJmYitxY3pDM3pSSEVJZWRIWFJhY25oNDlz?=
+ =?utf-8?B?V0JKVVphcHU2NG5zUmRsWGRuTHVzQlRxek8zdlYxZHVjK2lYRHdQWHVjZ2FU?=
+ =?utf-8?B?ekJSQjdwU2s3c2hnaHJnUXhhY056dkx3MVJBN3RJTnJUd1I4MmhqQksyZWdj?=
+ =?utf-8?B?UmkrMVZRQXNuM2ZWRlFqUDVqNElNVU4zdUVyYUtOTnlXbmNLZEJCYWJjM0dP?=
+ =?utf-8?B?OEozeENkZk1aazMrVnpabVlrYXY5ZWkwQTFIRjRWYVY2R2NYQTliU3czd2Qx?=
+ =?utf-8?B?VGFyaFpOYkwydFZBK0tyMkEvRlNlV1BveCtlWHVBMldacllUd0RnTzVMcmlC?=
+ =?utf-8?B?V2l2L2REREZzUjVmdi9qcGFkVURybW9hNENiWU9YTUxsTDdBekpRQkhVRHU0?=
+ =?utf-8?B?b0dmTzJyTWE5YzBINmp0NUd1V05BcFdMa0xRWmZ2N2t4UzFwcE12M01WcWlW?=
+ =?utf-8?B?WHY3YlBIcTJBRXFtbHhNSUZvd0VIR1BSNXZsbTJxQkFpTkh0R0kreWhVRG5P?=
+ =?utf-8?B?czZtUUdsbFA3R0NpM05SdFllQkFHeDBFU3RKTU5JbEhESnRrVjdmdlJPK20z?=
+ =?utf-8?B?dE5YU3pLK2ZneDBwVGdnd0FuZjA0VFNWWFkyQjY5Q093aDhiYnFFOFJ3SndH?=
+ =?utf-8?B?eGZiTmxaNzNCcnpSMmZFa0dIMHVzMmJqREI1aXpjdTBBSk0xUnJFUXRuRWZp?=
+ =?utf-8?B?cnZNNXJGczRTa2MvVndIampZUVR3cFpJRGpoa05KRHBpOS9VZ2ZHbkpocE5z?=
+ =?utf-8?B?ZGNLaHdZT2xPUTZ4M0NrY003QnV5VzZXam9vQVZKL0VHNGhnZ1lhVjFHeHJs?=
+ =?utf-8?B?OExZUllweWZRQ25XRFJnbllDcHdwR2Q5ZWVDanU4Q2NXNmFZVElFSTRFaEpW?=
+ =?utf-8?B?cWd1Q1NvajRrNmFyNmcwYVBVTlRXVFZUdE9PUUNmQWpsd2NzS1dQQU9ZVUVG?=
+ =?utf-8?B?NVEzVnk1YWJ3RnQya2hmYnlmd2lhMGh5NHFtRit6WDhRWUo0U1VPeUtJaHZN?=
+ =?utf-8?B?d2tkbjZVTzdIKzJRMU45cy83YzhwcFREYTRpamJld1Q4ek5VamhmbzViRitp?=
+ =?utf-8?B?bGRBSzBEYnBLcXlsWXpwWGVnYWRyeHdYNUxJaHp4S2hub0JYa29ZOVArWml3?=
+ =?utf-8?B?bGxXK1dlYzVtYndtSVN1Y0ZmTWZENTNyNDdGWC8velIzWldWK3NMN0lmcWNZ?=
+ =?utf-8?B?eHpkMUhuVitHdEVSQ1FvTDBQWVk4L0FxWDZnRVZaSDBndm52YXZGdm51akVy?=
+ =?utf-8?B?bzdVbWFUN2hQSW54cHBJamw2cHJVSzhWWE9LWUNCcjB1NFNicFcvektnL3RL?=
+ =?utf-8?B?bXQrcHQvaGxzaUE3cjQ2OFMzbnFwTG8zeG9aU2xXcGJKY2JEMTlLdz09?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3baadb3-be2c-4045-d422-08ded39a171c
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3111dc2-94eb-4524-cdf4-08ded39accbe
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 15:46:30.0958 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 15:51:34.7935 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2Gyz6/xk8Wnimv410R3m63KOZbhQP4AeW9W4Golk8gsnev0RrVtvv7FZIHbyrvq6LJN3CkQjkAdv732QNqHtLd3MBpPiyizuglLszcEYYQw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB9869
+X-MS-Exchange-CrossTenant-UserPrincipalName: PNR4Quh+OeThLQhl7Z8FmgZ3He6In1qC4+AYaytYb6H3VO39eXx3CurJvOP1vVKiS54w+V+Mm+YT77F4xBmsDIY4tV+XoFrjhikRB2xcGSE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9127
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,68 +166,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Enric, Eddie,
+Please ignore this mail, I see there is a v5 of this series (without a 
+cover-letter, hence why I missed it when looking for new versions) and 
+at cursory glance at least a few if not all of the comments have been 
+tackled already.
 
-On 6/17/26 10:19 AM, Enric Balletbo i Serra wrote:
-> Hi Quentin,
-> 
-> On Tue, Jun 16, 2026 at 6:43 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Enric,
->>
->> Thanks for chiming in.
->>
->> On 6/4/26 8:22 AM, Enric Balletbo i Serra wrote:
->>> Hi Quentin and Eddie,
->>>
->>> On Fri, May 22, 2026 at 4:38 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>
->>>> Hi Eddie,
->>>>
->>>> On 5/22/26 12:29 AM, Eddie Kovsky wrote:
->>>>> On 05/12/26, Quentin Schulz wrote:
->>>>>> Hi Eddie,
->>>>>>
->>>>>> On 4/29/26 8:02 PM, Eddie Kovsky wrote:
-[...]
->>> Does it makes sense?
->>>
->>
->> Somewhat. I still don't understand the obsession with the Provider API
->> when the issue (as I understand it) is "I cannot compile OpenSSL engine
->> support and I don't need it".
->>
-> 
-> To clarify the "obsession" point, which I think is an unfortunate
-> take, my impression was that this wasn't just about throwing a quick,
-> blind hack at a Fedora compiler error. The build failure was simply
-> the trigger.
-> 
+Sorry for the noise
 
-I think "no engine support anymore, so providers must be supported" was 
-a shortcut many could have taken. I understand (and really appreciate) 
-the intent of trying to improve the situation instead of "just" patching 
-a build failure and be done with it (after all, I myself just installed 
-openssl-devel-engine when I got the build error instead of putting in 
-the work Eddie did).
-
-> Eddie put significant effort into researching the modern OpenSSL 3.x
-> API, studying how to phase out legacy, deprecated components, looking
-> at the U-Boot's testing infrastructure, and trying to proactively
-> modernize U-Boot's backend based on established upstream kernel
-> patterns.
+On 6/26/26 11:37 AM, Quentin Schulz wrote:
+> Hi Raz Ben Yehuda,
 > 
-> I agree, now, and this is the beauty of discussions, that the kernel
-> approach is not enough due to its narrow scope. U-Boot’s edge cases
-> make a full API migration heavier than expected. However, trying to
-> actively clean up technical debt is a valuable goal, and
-> characterizing it as a mere obsession with a build error can be quite
-> discouraging for new contributors putting in real work to improve the
-> codebase.
+> On 6/7/26 5:45 PM, Raz Ben Yehuda via B4 Relay wrote:
+>> From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+>>
+>> Add documentation for the UFS command-line interface.
+>>
+>> The document describes the available UFS subcommands and their usage,
+>> and provides a complete command-line reference for configuring and
+>> managing UFS devices.
+>>
+>> Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+>> ---
+>>   doc/usage/cmd/ufs.rst | 226 ++++++++++++++++++++++++++++++++++++++++ 
+>> ++++++++++
+>>   1 file changed, 226 insertions(+)
+>>
+>> diff --git a/doc/usage/cmd/ufs.rst b/doc/usage/cmd/ufs.rst
+>> new file mode 100644
+>> index 00000000000..1553bc28935
+>> --- /dev/null
+>> +++ b/doc/usage/cmd/ufs.rst
+>> @@ -0,0 +1,226 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +ufs Tool
+>> +========
+>> +
+>> +The ``ufs`` tool provides utilities for querying, displaying, and 
+>> modifying
+>> +UFS device configuration and descriptor information.
+>> +
 > 
+> It's not a tool, it's a command.
+> 
+> Please follow the same template as other command documentation.
+> 
+> For example, doc/usage/cmd/sm3sum.rst was recently added.
+> 
+> So:
+> 
+> .. index::
+>     single: ufs (command)
+> 
+> ufs command
+> ===========
+> 
+> Synopsis
+> --------
+> 
+> ::
+> 
+> <output of `help ufs` from U-Boot and/or all supported ufs commands, 
+> similarly to SYNOPSIS section in manpage>
+> 
+> Description
+> -----------
+> 
+> <description of each command and their options, see the mmc.rst example 
+> for something that is likely closer to the ufs command>
+> <you *must* specify if parameters, functions, features, etc... are only 
+> available if a specific Kconfig symbol is enabled>
+> 
+> Examples
+> --------
+> 
+> <typical example usage of the ufs tool with the console output kept>
+> 
+> Configuration
+> -------------
+> 
+> <specify which Kconfig symbol is necessary to be able to use the ufs 
+> command at all>
+> <specify which Kconfig symbols are necessary for subcommands or features>
+> 
+> If the ufs command doesn't follow the general rules applicable to 
+> commands (see https://eur02.safelinks.protection.outlook.com/? 
+> url=https%3A%2F%2Fdocs.u-boot- 
+> project.org%2Fen%2Flatest%2Fusage%2Fcmdline.html%23general- 
+> rules&data=05%7C02%7Cquentin.schulz%40cherry.de%7C3871837b97374bfac7e808ded36694bb%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639180634709249262%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=oqfGHsgWJ8kuajTSmBcstmmRyGVu7b29n%2Bd9zWKOiFg%3D&reserved=0) then you must make this clear as well. Specifically, are numbers parsed as hex values by default or not. Does it return something else than 0 on success?
+> 
+> This document is also missing
+> 
+> ufs init
+> ufs luns
+> ufs clearall
+> 
+> It documents `ufs sethba` which isn't implemented (at least not provided 
+> in the help text of the command).
+> 
+>> +Features
+>> +--------
+>> +
+>> +* Query and display Device, Geometry, Unit, Configuration, and Power
+>> +  Descriptors.
+>> +* Display LUN configuration and calculated capacities.
+>> +* Modify LUN, Configuration, and Device Descriptor fields.
+>> +* Configure WriteBooster-related parameters.
+>> +* Query common UFS runtime flags.
+>> +* Commit configuration changes or clear all LUN configurations.
+>> +* Decode and format descriptor contents for easier debugging.
+>> +* Provision UFS devices using exported Configuration Descriptors.
+>> +
+>> +The UFS tool header definitions are based on the JEDEC JESD220E
+>> +*Universal Flash Storage (UFS) Version 3.1* specification.
+>> +
+>> +Usage
+>> +-----
+>> +
+>> +Query descriptors::
+>> +
+>> +    ufs query [lun] [idn]
+>> +
+> 
+> This is wrong, lun and idn aren't optional.
+> 
+>> +Descriptor IDs
+>> +~~~~~~~~~~~~~~
+>> +
+>> +::
+>> +
+>> +    0x00  Device Descriptor
+>> +    0x01  Configuration Descriptor
+>> +    0x02  Unit Descriptor
+>> +    0x07  Geometry Descriptor
+>> +    0x08  Power Descriptor
+>> +
+> 
+> What do they do.
+> 
+>> +Configure a Logical Unit (LUN)
+>> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> +
+>> +::
+>> +
+>> +    ufs set_lun <lun> <parameter> <value>
+>> +
+>> +Supported parameters::
+>> +
+>> +    lu_enable
+>> +    boot_lun_id
+>> +    lu_write_protect
+>> +    memory_type
+>> +    data_reliability
+>> +    num_allocunits
+>> +    logical_block_size
+>> +    provisioning_type
+>> +    context_capabilities
+>> +    lu_num_write_booster_buffer_allocunits
+>> +
+> 
+> What do they do, what are the allowed values.
+> 
+>> +Modify Device Descriptor fields
+>> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> +
+>> +::
+>> +
+>> +    ufs set_dev_desc <parameter> <value>
+>> +
+>> +Supported parameters::
+>> +
+>> +    descriptor_idn
+>> +    device
+>> +    device_class
+>> +    device_sub_class
+>> +    number_lu
+>> +    boot_enable
+>> +    descr_access_en
+>> +    init_power_mode
+>> +    high_priority_lun
+>> +    secure_removal_type
+>> +    initactive_icc_level
+>> +    queue_depth
+>> +    write_booster_buffer_preserve_user_space_en
+>> +    write_booster_buffer_type
+>> +    spec_version
+>> +    manufacturer_id
+>> +    periodic_rtc_update
+>> +    device_version
+>> +    psa_max_data_size
+>> +    extended_ufs_features_support
+>> +    num_shared_write_booster_buffer_allocunits
+>> +
+> 
+> What do they do, what are the allowed values.
+> 
+>> +Modify Configuration Descriptor fields
+>> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> +
+>> +::
+>> +
+>> +    ufs set_cfg_desc <parameter> <value>
+>> +
+>> +Supported parameters::
+>> +
+>> +    length
+>> +    descriptor_idn
+>> +    conf_desc_continue
+>> +    boot_enable
+>> +    descr_access_en
+>> +    initpower_mode
+>> +    high_priority_lun
+>> +    secure_removal_type
+>> +    init_active_icc_level
+>> +    periodic_rtc_update
+>> +    reserved_HPB
+>> +    rpmb_region_enable
+>> +    rpmb_region1_size
+>> +    rpmb_region2_size
+>> +    rpmb_region3_size
+>> +    write_booster_buffer_preserve_user_space_en
+>> +    write_booster_buffer_type
+>> +    num_shared_write_booster_buffer_allocunits
+>> +
+> 
+> What do they do, what are the allowed values.
+> 
+>> +Query UFS flags
+>> +~~~~~~~~~~~~~~~
+>> +
+>> +::
+>> +
+>> +    ufs getflag <flag_name>
+>> +
+>> +Supported flags::
+>> +
+>> +    deviceinit
+>> +    permanent_wpe
+>> +    pwr_on_wpe
+>> +    bkops_en
+>> +    life_span_mode
+>> +    purge_enable
+>> +    fphy_resource_removal
+>> +    busy_rtc
+>> +    permanently_disable_fw_update
+>> +    write_booster_en
+>> +    wb_buf_flush_en
+>> +    wb_buf_flush_h8
+>> +
+> 
+> What do they do, what are the allowed values.
+> 
+> Cheers,
+> Quentin
 
-I do realize that "obsession" was too strong of a word and I apologize 
-to Eddie and you. I appreciate the feedback and will try to do better.
-
-Cheers,
-Quentin
