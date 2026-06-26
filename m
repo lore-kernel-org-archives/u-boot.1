@@ -4,103 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D67F5C43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:24:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B582CC43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:42:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C1F08460E;
-	Fri, 26 Jun 2026 17:24:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 043D084704;
+	Fri, 26 Jun 2026 17:42:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ShIMJNjx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gtv9X3Wc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D11684894; Fri, 26 Jun 2026 17:24:21 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 5ECC384894; Fri, 26 Jun 2026 17:42:26 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16D458460E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:24:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE3B8404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:42:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-915b5ce94c7so102687285a.2
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 08:24:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782487458; cv=none;
- d=google.com; s=arc-20260327;
- b=RvROqzKsgI4O+9Dx/aPLSYtGbjFmQz+SSeOmm2Raa2qYrCTYSjtZMUFPyu2ENPk3su
- RwvgVJNUIMMh+rusLtg/kxa7g7mz8eoZkjfvWciFILa919YZYdAhpyIYIQc1AtFr44IH
- OhGtEzTsdmnt4oEx9Z4j5J9Yi2DfVstjytdIvNDRaEfQg8o4l0h1FeUK0EzAwIS9qdwR
- CElYMmilFyeP9bhrh3+ldDDyulmPamlDwaKomAxKaPqIvD8Xi2gD+vuSQoIPgKE2KxBO
- 8jzRtiwjSBy2rjOg1nAmvRI23JCcspBjnLB02gFuDEr6mPsfAjzGRkkSVI2ywPwxYc9y
- oNSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=v9+thKP1BYrsZ4iOGX5FE7QxKy6KSjR9ISYVmy6jRl0=;
- fh=cz8TAL0JC20oFxAzbTLgPGWZOMYblLpb15aYsSxUNWw=;
- b=SUG3NopGXyh3+iASCnCy9YPViyTLt6TySVAL1YMh8xGG2b7jzpYpANuEPSsKBU/ik3
- +19+P9OF1Fe+4Hls4WDbuSpn/vwcq8hHDkfndjwyuZW/Rgq+jpNaQwmG446YzOrhb9Kt
- fBjgDUQYZwX/bdgnZYF873YX8lBlVEbkev3zJ+LGoCuSItevaUsM+IawosaVb28NRBDd
- IeSazkUx1drNxYzMMVDWUPBGN24x3RcTznk2el5lEQNEw+y951rQaDV/hDsmqKveSFPJ
- Nx+GqwSG3ZEwBX7mjfFnGEvCDWusGmSiJyUQ4j1ALRxLdIAAiyuzofILxhs1o6f7gNuf
- HR0w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-46db1eb3100so188372f8f.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 08:42:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782487458; x=1783092258; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v9+thKP1BYrsZ4iOGX5FE7QxKy6KSjR9ISYVmy6jRl0=;
- b=ShIMJNjxIheh1tuJmDgmnrseB4gvnkofKYQtebOurng7Pl7693sXIi/6zOlZmh7tJj
- +Mv3ef0dnbaMYagVMAz8sJPb8IkA+xQsAx29wAqfdxqrbfHfWCZ6yyYqxNiHztEjHfR2
- ucUOTfphCOFMrRe0P+us+n1ZgobxUrOxKmpatwOrflbNp0n5EuZoIijg9+KG8DoMCC2T
- Prc0jkrqk4aTSMc3UIfEHhx7rDJJ9PP1Y2GCuvDa30IUNh321um8EuouFOKfxNhQZkeL
- QebsKnpTBTmrOxx0DaJs0VmC6ZY/hxye3RtZmP2MdOWlK/yfcYaAwte1lthT6k74SZtB
- 18Dg==
+ d=linaro.org; s=google; t=1782488543; x=1783093343; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OKqoUSJ9S4aExHC4v7AwC6Gq2KFqvVDX3ULZxr75wdc=;
+ b=Gtv9X3WcGGb+3jYJt/4cemctOZCF/3S4iVDgYLWXBfVWil7eUaZhKuw2rr+Yp9yO/F
+ N+bilIAZYSlc/xnobXpWDC+uF4FxWPeRcwbwZp+mLYjIEs+v0v6Y+lUAiABvM+B5jk/i
+ oxruTRzRf9/I7wOXtCDaWGCu7a+21G1l8tZyRnlt5CQr4c3LX1Cx9QENmM64yLZ8z+wf
+ 8ykI4zmvya/x2Ewlxqmv7RWtTqoeg+bMkU7cCfmx9uvf4vj+O6ClsKBzBXO4RnpXQMI+
+ PFEZJibO8cQvQnQ53DH9Ttd4DrLI0ByG55VOGUAPS+xBoWKUx7/PaR6OUv0Vk/0Ot/5O
+ 8ndA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782487458; x=1783092258;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=v9+thKP1BYrsZ4iOGX5FE7QxKy6KSjR9ISYVmy6jRl0=;
- b=q2NJ9GIjun6gQddDae3eL7GeFDvC8nNuAgy49SXlcc7ZMTPMb8Gydj8R5cH2SjeRbH
- QC0OnbNO0PfqYLGCEZOELtRRENfBRDourqccjBgYkqz3L+/j0SHyjSkiBtBAzLc9C4zU
- hBHbCmIW3OOdcQWq3xbmM5vM7MZ2HtgkGyWeHd06xsWOgt0aOFHfn1MIU0idvifzsIXp
- KttjgbU6FB2iRDddpR653h7jX3yq7ROpliHyLk4quTmiD42y3RaMzqSgt0u+oeJ995Et
- fHZgwZxhbHiQasxS+SXEHJkqEUkTlT1d7dcmqRsSqjng8Vaepn0cbpMbEbMPQqj2/6vH
- USfw==
+ d=1e100.net; s=20251104; t=1782488543; x=1783093343;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OKqoUSJ9S4aExHC4v7AwC6Gq2KFqvVDX3ULZxr75wdc=;
+ b=cdcYfqTsxXhABr8O1/m34GuI2PJA0dY9ANQF/JQMyL3Q+j1SZipmAAkXvZPBKhiBms
+ a0Wtp9nrZkjrnAeb/AE0v9f5m1lVcmfsFguRwZ/xNyUWtVWDj3b+bUI4O0qTweGmGUK4
+ GdSxB3H8MNpyAOTrccuhPxSrLepipKTIuiOTgIE+j4Ee30krhjuQLeHpNDcUErOoN6/u
+ KUFmjNdki9AIzxrit8sV7ZQeKFC2ZdVVT+0MoFo1B6r1lHEWd0GNSSH8bBXNSFfzXsYa
+ lxF5Sa1OpguElPPxMjSfv/+ilwAf6BWMkdaVY5UIBzBGbCfrak6+bvnhQTJGpQwHJLX0
+ MnPg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8mMKY7P6RZWDjbaNKRPUSnHrD+WPMSiS1iEtEghwCFxnug4nYNslaQ6FL/zkvhTg7tq+MFnas=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyq2oxaSyuBoHevVgjmT3hGJLVwM90IOtX4lKkn88uHmBV8rhs4
- ppTaw1MRhnDXSv/fvEf+yuFlu2A8hbKq5QXVmbTfc5DDv0G/Gra/v9yTA2T1s+cyuOQirnan12X
- F4DvumhFCCnAA4LB0q00E+6WXnpq3lKs=
-X-Gm-Gg: AfdE7ckono67Yy+2AO68IFCPser5OPyq66ydECwHwzdHdyt7b0eftWLSJYu05pZNOYQ
- 2ooECLFLdOSgOrdDEuNKQuO2KMbxPVFz1CRMHTYMMrFCNwcKCDltbnFJfXFkA60im36cNHkmcol
- pWuRsRIpE0mmTX3vCa6D1FLT/5ziM2U1lwOO/g0uy3MGPfQIOgn507jVZw/Vry+lAwsHF4j1jLS
- 0IYzyjynjBptgWoLww2VT+pyDxup2L/hvhGoZDLU5k1xRYLKVbaX5KKWVU/+S/bOHO6cL/zzOlu
- WTmH4TPZ7GmJ8UZW7s/LvIau07MeXbBeekZoA95duYZdtlPL7c3mqZ1ecn22imREuXZbezmwM+u
- IR+qsqol4f740xfPRYMv3khpAFHaUBQtAI0gIKlCG0xTDeSfloGR7QEFiBZJNx2V5nPg=
-X-Received: by 2002:a05:620a:258b:b0:92b:6805:eae0 with SMTP id
- af79cd13be357-92b6805ee2dmr63521285a.61.1782487457718; Fri, 26 Jun 2026
- 08:24:17 -0700 (PDT)
+ AHgh+RrUGG2PcH/4ow3k9I1qcq69OkwOiPQ/YdVB4QcZCuuhUMbsGrC5Zn6012p3rLNV5q4+lRIuymY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdYHMYmy97689KjW6+ACB+6L/+jHhE5xu3rNTF56F1iMp0zekV
+ 10JxuUNCBhzwdN3PqRrBsqnXDSxL5kaTeWVB/YjxfH4vg+b1EuKuTXK47MAb3HprCnQ=
+X-Gm-Gg: AfdE7ckVF9jikhllYDJYSBXbozwpyufiDv7gFo/CuB8Us0/CYg3gVmrneoywf4d0bAX
+ K6gYW/TKR5giyPuTu68HDogU8EH5g9l0yd0/jAVvoouW3Ja8YYVUjuZwGHFPQpHYYjroiLW3P+q
+ BTxH4TjmCFD+ivfZfL1A88nBfckB4Ht9vYGap3/IhAJGYpqqBtyEp8ChKP/12jbs1pwIrIH73RR
+ A3FQvqRYjV+EUhTOTjDsysRe/YogsQwcxoTyiKKqHugNYpTpPJZo2eD+ZGKPDUdIVZDuH24REr8
+ D5RDdZtLHjHHMqvF+wFJm21zM0FFqY1ai7AgbHa/NxUi0G+f+PZqgND9jGNjo5nstrMsfSkXhBq
+ XWlumN+DxlogiGYrmUutfI8PzizSev7oCztrPiWq1ewsU6bU7DZd9YFE9z0zW7pDd8TBWqyV+w1
+ Pa29X4jPNN2Mr4o3TaewKiMn4bboc4MdLPWbjHiY8tm2DsSVwJYzz/CiSXqw==
+X-Received: by 2002:a5d:5d0b:0:b0:460:1223:a044 with SMTP id
+ ffacd0b85a97d-46dbc3abd1amr11643393f8f.0.1782488543555; 
+ Fri, 26 Jun 2026 08:42:23 -0700 (PDT)
+Received: from [192.168.1.39] (159.89.222.87.dynamic.jazztel.es.
+ [87.222.89.159]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-46efd7ee1c7sm8884933f8f.14.2026.06.26.08.42.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Jun 2026 08:42:22 -0700 (PDT)
+Message-ID: <b187c8fa-1667-47ed-abda-b63a579b68c5@linaro.org>
+Date: Fri, 26 Jun 2026 17:42:21 +0200
 MIME-Version: 1.0
-References: <a5255761-9407-4c06-bbb8-ecee07e67292@syss.de>
- <103cb2c9-fd0d-4531-9e73-d1ba7d61a831@syss.de>
-In-Reply-To: <103cb2c9-fd0d-4531-9e73-d1ba7d61a831@syss.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 26 Jun 2026 16:24:05 +0100
-X-Gm-Features: AVVi8CfPyouJrs8JitMwaMtnNP5BjjJ_ykmdykMt10toZdTKIq8rvmztE8M_iuM
-Message-ID: <CALeDE9P42BJa7cV5mDAPUPVQS8rmcsvaz-vOE+iEoXpVi11wcA@mail.gmail.com>
-Subject: Re: Fwd: SySS Responsible Disclosure Policy
-To: Robin Trost <Robin.Trost@syss.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] clk/qcom: milos: Add remaining UFS clocks
+To: Luca Weiss <luca.weiss@fairphone.com>, Sumit Garg
+ <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260625-milos-ufs-fix-v1-0-b0923dabc35f@fairphone.com>
+ <20260625-milos-ufs-fix-v1-1-b0923dabc35f@fairphone.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260625-milos-ufs-fix-v1-1-b0923dabc35f@fairphone.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,101 +105,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Robin,
 
-> any updates on this issue?
 
-The disclosure policy [1] is to just post the details, including any
-possible patches to resolve the issue, to the mailing list and copy
-the maintainers. Please follow the policy.
+On 6/25/26 15:14, Luca Weiss wrote:
+> With a recent change to the UFS driver, now all clocks need to be
+> available. Add them.
+> 
+> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 
-Peter
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
-[1] https://docs.u-boot-project.org/en/latest/develop/security.html
+> ---
+>   drivers/clk/qcom/clock-milos.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-milos.c b/drivers/clk/qcom/clock-milos.c
+> index afe59108559..571cd134f1c 100644
+> --- a/drivers/clk/qcom/clock-milos.c
+> +++ b/drivers/clk/qcom/clock-milos.c
+> @@ -98,6 +98,13 @@ static const struct gate_clk milos_clks[] = {
+>   	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x39028, BIT(0)),
+>   	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x39024, BIT(0)),
+>   	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x3908c, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x77018, BIT(0)),
+> +	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x770e4, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77024, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77068, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77028, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x7702c, BIT(0)),
+> +	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,		0x770cc, BIT(0)),
+>   };
+>   
+>   static int milos_enable(struct clk *clk)
+> 
 
-> Kind regards,
-> Robin
->
->
-> -------- Forwarded Message --------
-> Subject: Fwd: SySS Responsible Disclosure Policy
-> Date: Fri, 12 Jun 2026 22:47:14 +0200
-> From: Robin Trost <Robin.Trost@syss.de>
-> To: Tom Rini <trini@konsulko.com>
-> CC: u-boot@lists.denx.de
->
-> Hi Tom,
->
-> for the advisory (SYSS-2026-039: Arbitrary OOB Heap Write / Integer
-> Underflow during RSA Public Key Parsing) only you showed up as a
-> maintainer ("THE REST"). Therefore I've resend you the advisory.
->
-> As my last mail was already flaged by your mail provider, I've included
-> only the advisory (including a PoC and a "optional" fix). If necessary,
-> I can provide you a reproducer script, which illustrates arbitrary code
-> execution in the sandbox (including a python script which can be used to
-> build a malicious RSA public key).
->
-> If you have furhter questions, just let me know.
->
-> Kind regards,
-> Robin
->
->
-> -------- Forwarded Message --------
-> Subject: SySS Responsible Disclosure Policy
-> Date: Wed, 10 Jun 2026 15:46:26 +0200
-> From: Robin Trost <Robin.Trost@syss.de>
-> To: u-boot@lists.denx.de <u-boot@lists.denx.de>
-> CC: trini@konsulko.com <trini@konsulko.com>, p_mailqueue_disclosure
-> <disclosure@syss.de>
->
-> Hi all,
->
-> The SySS GmbH deals with security issues in a responsible way. In the
-> form of a security advisory we report security vulnerabilities which are
-> not in products of our customers and which are not excluded from public
-> disclosure due to contractual agreements with vendors.
->
-> The attached security advisories contain detailed information about the
-> found vulnerabilities that allows the vendor to reproduce and further
-> investigate the reported security issue. Vulnerabilities will be
-> disclosed to the public if a solution was published by the vendor or 45
-> days after the initial report by the SySS GmbH, regardless of the
-> vulnerability status, for example if there is a patch or workaround from
-> the affected vendor. In well-founded exceptional cases, this standard
-> procedure may not be followed and an alternative, adjusted publication
-> schedule will be negotiated with the vendor.
->
-> The goal of our Responsible Disclosure Policy is, to weigh up the need
-> of the public to know of security vulnerabilities against the vendor=E2=
-=80=99s
-> time to remedy all security issues effectively. The final publication
-> schedule will be based on the best interests of the community overall,
-> considering both positions. Before the responsible disclosure of a
-> security vulnerability, the SySS GmbH allows vendors the opportunity to
-> analyze reported security issues, to develop effective countermeasures,
-> and to test them thoroughly.
->
-> If there are any further questions regarding the identified
-> vulnerabilities do not hesitate to contact me.
->
-> Kind regards,
-> --
-> Robin Trost
-> Senior IT-Security Consultant
-> ______________________________________________________________
->
-> SySS GmbH
-> Schaffhausenstra=C3=9Fe 77, 72072 T=C3=BCbingen, Germany
-> Tel: +49 (0)7071 - 40 78 56-6169
-> Mobil: +49 (0)151 - 42209330
-> E-Mail: Robin.Trost@syss.de
-> Conf. Calls: https://syss.zoom.us/my/robin.trost
-> Web: https://syss.de
->
-> PGP-Fingerprint: 85FE 80E2 04F3 6177 C61A 4618 61DE F14F 698E 6EB3
->
-> Gesch=C3=A4ftsf=C3=BChrer: Sebastian Schreiber
-> Registergericht: Amtsgericht Stuttgart / HRB 382420
-> Steuernummer: 86118 / 55809
