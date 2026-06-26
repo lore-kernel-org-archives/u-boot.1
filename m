@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2851C43211
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F63C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:45:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5743684894;
-	Fri, 26 Jun 2026 16:45:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05831849BA;
+	Fri, 26 Jun 2026 16:45:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VxsITouQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QJFIgHU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A634D84704; Fri, 26 Jun 2026 16:45:44 +0200 (CEST)
-Received: from mail-dy1-x132f.google.com (mail-dy1-x132f.google.com
- [IPv6:2607:f8b0:4864:20::132f])
+ id 4882D84979; Fri, 26 Jun 2026 16:45:47 +0200 (CEST)
+Received: from mail-dl1-x122b.google.com (mail-dl1-x122b.google.com
+ [IPv6:2607:f8b0:4864:20::122b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3934A8404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:45:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEA288404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:45:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dy1-x132f.google.com with SMTP id
- 5a478bee46e88-30c944aacbaso1612932eec.1
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:45:42 -0700 (PDT)
+Received: by mail-dl1-x122b.google.com with SMTP id
+ a92af1059eb24-13986d61b4eso2848521c88.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782485140; x=1783089940; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=d06NZ8KN5+bzXKzxnma2sLK7pk/1rTPK7joU6HDMXwI=;
- b=VxsITouQgt16Q5EcvqXm5cRwwgJ/xx+xOKr2WJEfxmwrEQg5EuR4B99pXQl+Cjqmg6
- mXCq/JoICDsXcxm+YUNC2FXdBWQKHmZgyxfJnRnHbKm3z9z+USIJEFZd4GAlgc3Nn+gZ
- YvTvZyxKAEG6Wpw8YHvqMlpFHMPT3saZBu7CF1TgHW/lUEz9z1M2/taXe+IlXc6OcnpR
- s+j1RiNugu0s1C6RnwX8RGlfHzsYbSQRFUUgfQ258OQrADd73Oh7fSeoBgnB6keT7UvG
- ZfIWTAvM8feb0MF6kmL4KlLAQ6vARmPyUDiGraOe8fszlecnD9H/yL7LIaJ2Dw1AJx5o
- muMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782485140; x=1783089940;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1782485143; x=1783089943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d06NZ8KN5+bzXKzxnma2sLK7pk/1rTPK7joU6HDMXwI=;
- b=sTzkb+8V7AJKRas6cIq8BXvdcDyVe38JhfDo6xLCx2JyBvIZvQFct5UIhP0RbZ4FDn
- ds3zhLkVdwsJtEHq1anEUjcs59b3+JVma1Rqxk1IYIKYeh279i2NrJB+o+1o1LFpnJC3
- R5KLBKd0N9qNq9D6XC3fWLR9F5hp2etUGldlPlQa4tJxbnn18YEFixm8zVz9/xEODfEB
- wBNlVBPy3S0AbKBoqZxR5eHoxnmR7GDFYnOxcq8d2cSKQ+kEuPcocmbPn1JSnULZXp5b
- wJBrcMgucCw8ngzyEaxIAUnqo7olqIExkEOj3MY9Qt+uZ2WUOnSp+aXnS9AOzfI5spLB
- V19g==
+ bh=G1unF0JUP4AZB9ESUYEk/RgIE11hqaDD+VDJ49OWguE=;
+ b=QJFIgHU9zU+H+D5b6GX0loINgb8CDTEZh07iPM6jqLyAUA6WAGEay1RbQYHqh2bVn1
+ 35B6bVfBS49d4Q1UnikmCspvMlGnxU50U7BEt6qJBQ4117ypzNmHZ1TssvVNkBfM1Rct
+ pyGKKR5Gut7kuEyp4GMeHnaKq65Bm2LR6vplVynWon7b+G/Qj0Z4ylDtDumJtgRdTgF1
+ Yk06/uler8lqVsNSmfkKUfEGgaH2KkvM9sgJG37q/wF1/qBqLNXOa5yXsHkaFTeBy8GX
+ qHS82i6kF2Y0yKe3HDZnjsgC1xlWdKFAI8iR/gSdVDxzjFRpkq56elKhDUJQehev9g0F
+ r+kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782485143; x=1783089943;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=G1unF0JUP4AZB9ESUYEk/RgIE11hqaDD+VDJ49OWguE=;
+ b=BBMsYiV/tTlvULnRZViS96UQF+0Q9cIjvGSR9ZrZphY22T/CJWDTlCJNubk8ZH9kS2
+ HH0gFfkRAdvYql/moVmOIgNjulduqv8t8vY44f07KVuVv2TCpmub9rA92EuaKsdWmm/P
+ YicT0piLeO+kpuZ6hUIq9flJYk7Q5EGdUZAYJ2MQ00fjHU6cz+Xa4xMuHL7iDShvwA/G
+ RrYoZqXrtpkTb+U8vzvPNkxzdTqsMq2gpIMvbLiCWJzS/53rr1OaOJMoEYe3AQAJzL0Q
+ DebPRPQoJEPLxYUikl1HCA9E41ojDvdd+mGWSOxC1aQEZM/RGqli9BAvD2FwJvdOcJKa
+ m9aw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RryHSe+TW25p/8LUMPKqdGcKi6l3t1NaCVioV3l6ducN+e1nrhRnBp8b567PKtO/Nr4NQ8wzAk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6QzsJdKyi6IHzh6loL9FjemHD3X7o0LpG7xESWILamjpHoz2L
- HSbk9QrvA/as4+6sXNv77rCqacUEw7iPhtFFk6WEIS/KRSLDyvD2/L5hpBVW9g==
-X-Gm-Gg: AfdE7cm9kM4vqYVo+7uiMc/uWNdeXVDiJg3mHNYMKxBByx1jmx3yyQM2QamlErs3caX
- GBU5goVujDs/U5GDlOJWSF1e5s/l+qb5JPlrdwGlZ93IyKzHAUltTiEOBgDu9UHoY8KC3iAf1sa
- 1yhdVNQ4JxdLWd8ExYumHCZVLHn/5fN7+BWIwDKtbDf6oZMtdLlJes1ynu+zrSR73zx+osjkDTW
- Ijx1SHo/IcWG4wBuKMiESVyYF+Xdp1s0gLrFwj8LniDLoyevSNtXRPlI5i/1HoCa5egXUhlO3oD
- J/gtrFDFCoPyhY77hAJEZmk6kss58LBTBvSRupCfF+bp0aKg3stZg/PZyo8UXdPPYA/PsRXSZZJ
- CsH9l/knkk2HYzoH1B4u1gBo5oJ8FC/h0buO1glZL17aiZMJ/FayBLNoKxiujvmRu7n3GgZrqdV
- slsABOVsAtJdo0NdMPy0XDox6Fa53jF4NPZtWpNPwzlbwHVCMlz9JJYsMhOMo=
-X-Received: by 2002:a05:7301:3d0d:b0:304:eaa8:11ea with SMTP id
- 5a478bee46e88-30c85124ae2mr6890285eec.34.1782485140362; 
- Fri, 26 Jun 2026 07:45:40 -0700 (PDT)
+ AFNElJ9AFAIORpTpYRmAHkB+l28Kvqs7XQs60Sy60lGHQS1HdCGQnW3CpDxSM+bBMiXwoBxv+228vl4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwT2enMw6RAOLt48yLHaxvY7FMP5DgC+uHpheDzXvkYNBgzijCD
+ e/mG9BH3hgLoivOfVIQ5DoHKVijA8qEzjxs7ZEDHXAo8T7Mf9dxWPeRlYlhLtQ==
+X-Gm-Gg: AfdE7ckEjMg1abGL0IrIap3LD5BphswbCJN3VyPQv/tzbzqzsbByZ+E3eria315I+hQ
+ H8PtzhrP3SZuSe5u/U6oUpYg4ZWuGoJJ9pHRTTlr5ZFTMkoZnk/q9B25ZsGbxyUK5fCMLIN75pS
+ 5wsNeJS4iYKBY4w8X4Gpspw/+n2jDgVmdUiuiigEXB+jI58aPHcDVaeJWYRgQRBau39F4cH89d3
+ vLRYIEM/zA6yqQcOU/kALzfqlkDYb1RH8fYA1xT+K0CFNKxGD6ZDjjOJO58lzmZ7p11J5i4swPt
+ an4h7wUHZHPO9LcshYGazjUeLT0wq2ZqBu5+qsOr+y+FSLYAtzp3kC3nJg/AvW4Yn5mWR6eccUi
+ 8lEowS7I7gFsJrVav+7tTxzWxu252kmAWi4Ppho6nY6J7FWMI4YVfZKZtnN1WE4BIAC4fpNsn8F
+ Fv4J0UOqbsDhBHYW5GdNg7Lsp4seWgpZVhvj8KfrOS/8qQdORlRp61IiHh+1k=
+X-Received: by 2002:a05:7022:527:b0:138:4f8f:e2f3 with SMTP id
+ a92af1059eb24-139eb40d2d8mr614602c88.32.1782485142963; 
+ Fri, 26 Jun 2026 07:45:42 -0700 (PDT)
 Received: from fabio-Precision-3551..
  ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d9105b57sm18823739c88.14.2026.06.26.07.45.37
+ a92af1059eb24-139d9105b57sm18823739c88.14.2026.06.26.07.45.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 07:45:39 -0700 (PDT)
+ Fri, 26 Jun 2026 07:45:42 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: kever.yang@rock-chips.com
 Cc: djw@t-chip.com.cn, sunil@amarulasolutions.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH 1/5] roc-pc-rk3399: Enable redundant SPI flash environment
-Date: Fri, 26 Jun 2026 11:45:29 -0300
-Message-ID: <20260626144533.2925490-1-festevam@gmail.com>
+Subject: [PATCH 2/5] roc-pc-rk3399: Introduce a common defconfig
+Date: Fri, 26 Jun 2026 11:45:30 -0300
+Message-ID: <20260626144533.2925490-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260626144533.2925490-1-festevam@gmail.com>
+References: <20260626144533.2925490-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,39 +103,211 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-Enable redundant environment storage in the SPI NOR flash by enabling
-CONFIG_ENV_REDUNDANT and defining CONFIG_ENV_OFFSET_REDUND.
+Introduce a common roc-pc-rk3399_common.config file to make it easier
+to introduce new roc-pc-rk3399 board variants.
 
-Having two copies of the environment improves robustness against
-power loss or interrupted writes and is useful for software update
-frameworks such as SWUpdate that modify the U-Boot environment during
-system updates.
+No functional change.
 
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 ---
- configs/roc-pc-rk3399_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/roc-pc-rk3399_common.config | 89 ++++++++++++++++++++++++++++
+ configs/roc-pc-rk3399_defconfig     | 90 +----------------------------
+ 2 files changed, 90 insertions(+), 89 deletions(-)
+ create mode 100644 configs/roc-pc-rk3399_common.config
 
+diff --git a/configs/roc-pc-rk3399_common.config b/configs/roc-pc-rk3399_common.config
+new file mode 100644
+index 000000000000..7ead746cec92
+--- /dev/null
++++ b/configs/roc-pc-rk3399_common.config
+@@ -0,0 +1,89 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SPL_GPIO=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_SF_DEFAULT_SPEED=30000000
++CONFIG_ENV_SIZE=0x8000
++CONFIG_ENV_OFFSET=0x3F8000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DM_RESET=y
++CONFIG_ROCKCHIP_RK3399=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_TARGET_ROC_PC_RK3399=y
++CONFIG_SYS_LOAD_ADDR=0x800800
++CONFIG_SF_DEFAULT_BUS=1
++CONFIG_DEBUG_UART_BASE=0xFF1A0000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_ENV_OFFSET_REDUND=0x3F8000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_DEBUG_UART=y
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
++CONFIG_TPL=y
++CONFIG_CMD_BOOTZ=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_REDUNDANT=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_ETH_DESIGNWARE=y
++CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_PWM=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++# CONFIG_RAM_ROCKCHIP_DEBUG is not set
++CONFIG_RAM_ROCKCHIP_LPDDR4=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_KEYBOARD=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_ETHER_ASIX88179=y
++CONFIG_USB_ETHER_MCS7830=y
++CONFIG_USB_ETHER_RTL8152=y
++CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_USB_GADGET=y
++CONFIG_VIDEO=y
++CONFIG_DISPLAY=y
++CONFIG_VIDEO_ROCKCHIP=y
++CONFIG_DISPLAY_ROCKCHIP_HDMI=y
++CONFIG_ERRNO_STR=y
 diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index 1df5cb03adbb..4c9a5a69b4d0 100644
+index 4c9a5a69b4d0..d72e64db1327 100644
 --- a/configs/roc-pc-rk3399_defconfig
 +++ b/configs/roc-pc-rk3399_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0x3F8000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- CONFIG_DEBUG_UART=y
-@@ -39,6 +40,7 @@ CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
+@@ -1,92 +1,4 @@
+-CONFIG_ARM=y
+-CONFIG_SKIP_LOWLEVEL_INIT=y
+-CONFIG_COUNTER_FREQUENCY=24000000
+-CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_SPL_GPIO=y
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_SF_DEFAULT_SPEED=30000000
+-CONFIG_ENV_SIZE=0x8000
+-CONFIG_ENV_OFFSET=0x3F8000
+-CONFIG_ENV_SECT_SIZE=0x1000
++#include <configs/roc-pc-rk3399_common.config>
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc"
+-CONFIG_DM_RESET=y
+-CONFIG_ROCKCHIP_RK3399=y
+-CONFIG_ROCKCHIP_SPI_IMAGE=y
+-CONFIG_TARGET_ROC_PC_RK3399=y
+-CONFIG_SYS_LOAD_ADDR=0x800800
+-CONFIG_SF_DEFAULT_BUS=1
+-CONFIG_DEBUG_UART_BASE=0xFF1A0000
+-CONFIG_DEBUG_UART_CLOCK=24000000
+-CONFIG_ENV_OFFSET_REDUND=0x3F8000
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_DEBUG_UART=y
+-# CONFIG_ANDROID_BOOT_IMAGE is not set
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc.dtb"
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_SPL_MAX_SIZE=0x40000
+-# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+-CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+-CONFIG_TPL=y
+-CONFIG_CMD_BOOTZ=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_TIME=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_REDUNDANT=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_ROCKCHIP_GPIO=y
+-CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_MMC_DW=y
+-CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_MMC_SDHCI=y
+-CONFIG_MMC_SDHCI_SDMA=y
+-CONFIG_MMC_SDHCI_ROCKCHIP=y
+-CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_DM_ETH_PHY=y
+-CONFIG_ETH_DESIGNWARE=y
+-CONFIG_GMAC_ROCKCHIP=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+-CONFIG_PHY_ROCKCHIP_TYPEC=y
+-CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+-CONFIG_SPL_DM_REGULATOR_FIXED=y
+-CONFIG_REGULATOR_RK8XX=y
+-CONFIG_PWM_ROCKCHIP=y
+-# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+-CONFIG_RAM_ROCKCHIP_LPDDR4=y
+-CONFIG_BAUDRATE=1500000
+-CONFIG_DEBUG_UART_SHIFT=2
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_ROCKCHIP_SPI=y
+-CONFIG_SYSRESET=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_GENERIC=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_DWC3_GENERIC=y
+-CONFIG_USB_KEYBOARD=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_ETHER_ASIX88179=y
+-CONFIG_USB_ETHER_MCS7830=y
+-CONFIG_USB_ETHER_RTL8152=y
+-CONFIG_USB_ETHER_SMSC95XX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_VIDEO=y
+-CONFIG_DISPLAY=y
+-CONFIG_VIDEO_ROCKCHIP=y
+-CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_ERRNO_STR=y
 -- 
 2.43.0
 
