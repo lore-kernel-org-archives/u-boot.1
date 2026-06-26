@@ -4,136 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD6BCDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 11:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 016C1CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 12:03:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A6DE8404D;
-	Fri, 26 Jun 2026 13:52:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 2FCC984704;
+	Fri, 26 Jun 2026 14:03:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="komzkKLB";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="DLS3ucJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D568460E; Fri, 26 Jun 2026 13:52:35 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8FC2C84894; Fri, 26 Jun 2026 14:03:42 +0200 (CEST)
+Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
+ [IPv6:2607:f8b0:4864:20::1333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA208805D7
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 13:52:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 933A68404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 14:03:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dDtg1zslJUhhZqzTn4e2MrvFS01HAZA3eSIxE7IqjIGT25dBPmd4wTLcjNdLZ/zkmXbyufb782TG5LD7srljrLJ2tgHx5zhoA/EdzxW8aWRfpqQO9ARbCsMZqFVZwkxCeiDVUuBuqm9XuVmF27dsOc743gxmoCwDfVXh50VCmXSBYJYXsuIzykQsRrGRWkfZZVAJWn/1gn5/DCVeRVCumugJRQ6/MeM8uawVQFS0/kMEshwBPNfdPjTj1q0LFzDYi9SkA58W6HOfwWJKU2EOVqNDgzWqTvnZDVMk+E+5dpcG7IJIs02NgRcaKuMruQ7GIIb04ROtMvlzyFmTVZJxhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Znk2n4t4HCYkiEs3vFsnZaG6r7dCRPSYuf4UH2GAQCA=;
- b=cWToEaiwq0zgO+2kaOMzfyXFhptXuQzYg59Xt1PE7fSIWNNEBzbRbi7qTElG3XqeX+agj3vm6AtzPlJqRdSrNLBTEKb6LaTfRTJAaTvmdftfY2PYpbAJQwxnd185XGsAHFIMUbzMMliz6Fs6O5M6laPEIKZdlRabD7RAL0yjVtnfzovb2d8azcDhBjDt0nu+ijJaSNghY1Bv5llAVtgbA9ihT31sPjrPLDu4o5QOzLKZkeAmmx34BvEStBIj8YPp+llaW5G21YJ2P0HhhVx0f6sreiNffewPC0zR9JPpgIZexOpKlIzHMdFo7vbOTs7A9KLDtwzEzfUJ3Agktg5vWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Znk2n4t4HCYkiEs3vFsnZaG6r7dCRPSYuf4UH2GAQCA=;
- b=komzkKLBF4PXuU3yRbC6BLPoKVH2NaDH2dCKPDtlvWxZYaIPFGfhPPAeS8ATju+TxrMY5sAmzVodqQJPJdcOL2eVf5Z64EBclKQKzRL6NVyJCGckpDPCtu2nSV8flPmC6x2EchbyscB9wQoHJxs0JDuJq+P+VxWNllNtlUZzhYg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AM0PR04MB6788.eurprd04.prod.outlook.com (2603:10a6:208:18e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
- 2026 11:52:31 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
- 11:52:31 +0000
-Message-ID: <d1471aa7-dc32-45f6-93d0-e55fb278945b@cherry.de>
-Date: Fri, 26 Jun 2026 13:52:29 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: boot_mode: fix download key detection
-To: Tianling Shen <cnsztl@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20260610030154.173455-1-cnsztl@gmail.com>
- <d3e58ad8-24b5-4de9-a01b-adfd4825fe75@kwiboo.se>
- <9da8802a-55ff-4797-b748-6963b8cc36a3@gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <9da8802a-55ff-4797-b748-6963b8cc36a3@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VIVP296CA0008.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:357::15) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-dy1-x1333.google.com with SMTP id
+ 5a478bee46e88-3078e0dcd67so1506874eec.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 05:03:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782475413; cv=none;
+ d=google.com; s=arc-20260327;
+ b=TXgHz/kYvSL8RyzPGifBnn2vIUAyLyJq1fjtGZkQYDOiQx64Aa0dxWR1l9V/Mv8KAe
+ Bu/CKCrdnEPiCQAHbocEN/NYiPs31+48LARZ+mfRVR9DFKsYrOXckFmm2kdD9bqrbuwB
+ T+en5xL5mO1xDJM8+POtAeaT/QtfTgBkHtmiNKbfpdc+DHVj4lseY81SqmfdNBxw6gnC
+ 3KDL+Gl5AtohBvb5N9nJ7r0/ktTorOvultTtzdTm2+CwGs9qIMvgqi/UJO6+8+U3Fknf
+ 7B3byVN8Ea6u/1DcgjVGBFuFHMu2OxhyYYS4q+qxthahVshn2dOwrEZ8E5BVW8oQGy9g
+ 2R2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=bd2JNGnvIjYaJ25GdusWaDpdcJ8TGb3j9bgIynHvwnU=;
+ fh=9zifYT3eFxFmXRwMpi8JLyD00eDJBhVv3FGo8TBG4LA=;
+ b=AoAr+n63OT4zFclCDBhZy2KJdlCm+eYcbNvJkT+XTQ+G3B1Ec5ODjGa6965s0+/ERB
+ rtJVoHEeCZxZ4KVWChW5XS3mI1JbwGrWZfh8pMDSI1D3BG3cvRZtOf8UQy63LHzjFfhx
+ 7YrZFubjnmGKB44aV5V+kMb3ydBxDsCr/nwkhkZ1+DmQeXJuzJ0pjYh4pGF18uEJltNw
+ 7bNdTCy8mLexbLg1JDuVOIETQvqgM1YPbfMjCqVxs5IoFM5C6JSJeK40va12DHXvAmnp
+ n2nk/mMD4ljNTpO4IkqnS1kSGMwkmF1lp6sH/BvYdayAVUnGN9WAb+UkaDVwrlCiiGfL
+ dSiA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1782475413; x=1783080213;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bd2JNGnvIjYaJ25GdusWaDpdcJ8TGb3j9bgIynHvwnU=;
+ b=DLS3ucJnbC3f5y2se2b3tx5bG5s/3ET7DWZ5huehmFW2Z7pR6c0ot8+Ew3YuzJTy5t
+ INaNBnu2UPJUSf/Sm0PTJCQNcRM2DAmhiwiu9FjgW5gCHiIy73IXlceE5IDBUAkr2Hj1
+ bG0tlGgWAoNaQSbfxw97pAvF4MNPPOwwRmBC4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782475413; x=1783080213;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=bd2JNGnvIjYaJ25GdusWaDpdcJ8TGb3j9bgIynHvwnU=;
+ b=H+wllm6HzDnh5OGWKAJSRI8mPpOBpJzju+YFn4SAtnkuIGo2Uu1S+bInU0/ilsAcmL
+ U3IN7QYmJP1YnE3mxqyoiCEMwl/PSrfoGZB5dgre7a0hMc+0N0CwJLbYlDlwZF4DYOtI
+ kTtzyZjINKdOhfcm3F+LW1dSObfsCB54fGHWV4rtwMMX0ukRKZnb9dgotGfY6rRfhBzV
+ qcURseaPhrybX9Httxoiin88XplFT2WFv2I4jDBeQj5iMT6NGbcEwoEknvLGw/X1lVHu
+ I7qhL73S/LA20VDwsttztHBF06G+Z+RnkEWYdYZUhe59NsddrKpvOj6kjEHfDzCRXVdd
+ dLaA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr9VWDklTwvypNG/vCYJySmQkKtOYIwis9Rzq9ZkMOYivI5eZ7IR5TNQqQ+z8lP7nJGw4E9ZUQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwnpUtmB0J/AgzBDn4IPYKVCy0h3ygRZdwSa3b0k6PmrMopAwNp
+ yOoCZdo7BwbT6wt3CJOLF+U0yN8Z+wcLfvYGByCH3/tRwbbY4VEG9f2eom46tiqibr+z6b60Hsv
+ vNoG8l3TU5Sa+GfezAbWwdwZ9dmcLvkaMupI4j9xXhEtxtn8YXYTFKvE=
+X-Gm-Gg: AfdE7ckZ7ITkMuPoa1TNEMnQouCTyqn8jNjH7aRdLuygAG6FRTWLKPpd7exZJCA0oOP
+ p+Zrt7CR4wMI9LbvCtO+F8ljaiSNs42nqb/rql2JWL65U7ZVsjavUP5dUBofZlPLcPGNniH0IuG
+ XGZJ+ruA8xpFvxEXBHmSg6toa9eLIUEg1ske+uDnISNuDtSvF7kGc/+IXGoLOl07RPszDf6msfT
+ +IR2m7Z1y2UzGAoXcbF1HrmWbwEXdA1gzp/74l8GlZxLyFth70xakLwsY74407vvtf2dX3ZW0ui
+ N+aeC7DM9/D1hpWmGrvY6839flmj
+X-Received: by 2002:a05:7300:760a:b0:30c:2d3d:7840 with SMTP id
+ 5a478bee46e88-30c84e1987cmr6858514eec.35.1782475413243; Fri, 26 Jun 2026
+ 05:03:33 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM0PR04MB6788:EE_
-X-MS-Office365-Filtering-Correlation-Id: 428b4d98-41a3-453f-e9e5-08ded379676a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|18002099003|22082099003|11063799006|4143699003|56012099006|3023799007;
-X-Microsoft-Antispam-Message-Info: n9W4RzJFIOVImBtiOA1Oz7909TdSrcfRLmhvdBiLCCfPa5VVeLh9jITGkg1ig2uAa95wVtB9L4C3QrHV1lBWs4Tn1JwfXdJskI6tvyeMo/c7yciIbwjfj4sr+aVuI1jKW2KyEdPzcEYuCUfgnTQ6T0TC8sDbtkWMJHL6vFG/Vugsck/d7B/gahrOrczf9uQUkWGWDYiKZ8Iq4t34GTrUprD9E1X9r6oMnWvmiOZ7hE/iDULllUj35zevv6ZbnUz+X74k/n4vi6/lSlxj62B81xicyUw4M4Ww+1WFbgZ9iiW/gPudQzFPmjjB5HdHmuwYtq0YTHrqtgW03vOSjy50MhSg2fzkJNjuA04uO6YSa/rgWoCxOJ+ummmetPbflfVE33wWzOx+oRrc/EkOHM+uolIInmn0WwPekALhDZnd+rqaukuXdmiy3QlGE0RBvc80hHBy+aaLTdErVs3ByxUdEWBRActbJ0ryCjEwtfE6RY2Yduegg0i+hZWyvW95ZwGHDQldRkv3yKnz4v4t5fGT5NytAiLzO+tGGoUwTwp8F6UnYwKKQFeQAt39rzOIficxY2hgB/dxFLS6KTnc9JnyWcf38gK5ougNmHD1teivyvyR6cOZkqpy08REbEqCejJIRo9i4/XjZN1guQ+fdShHkFWIMSYyeV2/gJ9v3Gg5Fjo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(18002099003)(22082099003)(11063799006)(4143699003)(56012099006)(3023799007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MFlSVXRuUnkrankva09VaFlGRVpXcllLVXYrME5mb1ZVZG0zMGtGNTlSQkxX?=
- =?utf-8?B?U0NjR3JqUThYRnB1NEZKb2hwTTMzMjlDMUN0aHBhQjVCbW9jYkg4TEhuZ3hi?=
- =?utf-8?B?d0hpVXQ1SFZXemVBYjBUUHcxU015eDVBdFJLNWl1Zk84elFrWmJHa3lRa0tQ?=
- =?utf-8?B?R0xuVDBEZGRxSUdsRHZyUGJtSUFVbFc0UGM2bk1xTGdHOUNYdTA3Y05QL296?=
- =?utf-8?B?VE5pN29Vd0xFMDZ3SHZFeDQyemZldU4rZVJRRmh6T0k1eVNMczE1Qk9ENDNP?=
- =?utf-8?B?WG1NbnQ0NjNIcktiV05rV0c1ZFh2eER1Nmk2NmRuWDQrOXFrM21nNFVQcDJs?=
- =?utf-8?B?UE1lREMxMVZaZlRMU3M1UWNtQUFxZ21GZ1F4MjZaUXZLNmV1N3BoWTRQR09v?=
- =?utf-8?B?Nm94WFQySXphRy9wRkRzWFVqN2pLSFRwb2llWWVFazJCbDRLV1hSd0pCL0xI?=
- =?utf-8?B?QlNuc1BNbzR0cHE5NTRVOGZ3OHJ3R0E3MENLc2RmS3VvQVVPdWhFSmdTaU03?=
- =?utf-8?B?cG9RVndka2xDcVBPMnAza2JJUnd3SlNCdFJTTmFnaTYzanVlYTZlVWlnR0E1?=
- =?utf-8?B?Uk9VUnhua1hqZlJDNUFlVFdvTnZUMlVIYnhDR25uTDMyS0c3dEtHbUJNMWN3?=
- =?utf-8?B?M3o1YmFvZ21hOWFqSFhJSlhIeFhpOHJzMTQzUzB3UjI0enNpczYwNVNrU0xq?=
- =?utf-8?B?OFFNYlVQMDhoTFk2Vms3SFZlT2lydUZPK2tGaFhjT0dwZE1aV0Zob2pFdGpk?=
- =?utf-8?B?UVRQZ1ZNWCttejNRRGk3RDJGSjhIZkVBbUtmRHZvUy9lNnMwOGVLQk95VWh2?=
- =?utf-8?B?aHFLdjlFK0VRL3M1UXkzbE1YaTlSZXhJeFRHUEFTT1hyRnBSNlo2TjMrRDRF?=
- =?utf-8?B?QTdQbFdkWU85Y1NTQ0gzeHhJZHh5S3ZXWUE1Y2VSSEZuM2RqbDROa0JIOUg5?=
- =?utf-8?B?Y0dLcWZGV3ZjVTlTMTNuTzMxS29nTE1lVzYreWp0OWN6NUZwVUZDd1NXQWsr?=
- =?utf-8?B?cUVhNVBCOWRQVWhjWEcwdDlGQjlUUm5sdjhneGNvOXVrVVp0M1dIZURhcGlO?=
- =?utf-8?B?eUpQT3lwTTZrRkZJcDQ2a05UbHFNQ1g2MktCdTRCQlN5cVhNQ0ptTDhtVktv?=
- =?utf-8?B?WVlwYUovNDlCUHRhT3dPRGpiTEI5M0NyNGFPV2xXSkpzTkFwcUxFRUdHcW5Y?=
- =?utf-8?B?cmRjLzNZSGtjRmlBZGpHUEliMllwdFR5bExmTjNyMWVQZDNIeUNSOTNQNXEx?=
- =?utf-8?B?cTc5Z25KaVRkc1c5OWxBUEVMODRhNmVDYjUxZUhDc01WVnhyNGt3dkJ4Y3Az?=
- =?utf-8?B?SmRNemNhZC9QY2dvb0NMZG80bEY3S0UwSnAreW1UaktSbWp5bUlqU2Q4bW4r?=
- =?utf-8?B?ZmdtZ1JYSzJRVDRGRGNPdTRDcUp1dFFiU1JkSHNuNFk0QUh0c2xUWmcvRmNy?=
- =?utf-8?B?TnplSmhmUzNoQktyTUxScUZFZjAxWThLNkFnazZCd1JFaXZHbE9OZ0xWeXA5?=
- =?utf-8?B?WHZYWFVSWTlBY2NOUjdwTHFsdmRyMVByM1p3L2VnOURyRjgvWEM5ekloWFZ6?=
- =?utf-8?B?cDluK1lTWHRFN1BZMDRqR1huaHhIanI4bWFNSUdYb2RDbTVyZlVvYnFrT2lp?=
- =?utf-8?B?dzNHdEg5aGZxMDhlc2UwYU8xQWJvR1JaK0I5QkI1bXR3STZkeFVRZjBwRmFS?=
- =?utf-8?B?VXNaQ2xlMnRyalBic21ES2ExNFl4eEZHOFIxM051RzVOT2IxWDFmQWRZc0Yz?=
- =?utf-8?B?ZTY2RDczc040clplbWRlNms3YzM1OFlUTmJTUW5keDI0QSt0RndhcERkRU81?=
- =?utf-8?B?ZzcxRVJpeGlHalFZbzRNYi8yTGZkdUJRN081cWJzdG1jRmVEL3JhbjVITmJY?=
- =?utf-8?B?SE1nbkhUL2orM0tkMVUyRXFqeVVpaGFNQVlManRpZnFrYTJhN0FpMGJUM2RE?=
- =?utf-8?B?ZEljZlVybmFWeDVHOTNPLzBNeHA0Uk5RdWJ0bnJyZUVER3hRRFBsUmZCVVp0?=
- =?utf-8?B?V2c0OXZTclZ0OEZsc3k5YlgxSGNGNmpwVTJlckRWSEVZeFV4SCtxc1o2aFYx?=
- =?utf-8?B?SWxpemZHNFFGcTFxbmQ5SytTMkcwcElHR09BSndaMktnZXM4dTUxMWRyZ2Vj?=
- =?utf-8?B?M0JvTXF6KzVHQzNTWVFBaXErVlRCSzJLWHZGVG9zem9ZSG1lcjgreW9iejk2?=
- =?utf-8?B?eWFNbmtYKzkycTZCQWF6UEJCTGFoaUJFa1RRYytSbHZFRWsrZzRGazRQUkNI?=
- =?utf-8?B?aHlYa3lEQWVSZENkZzVzWk5lNGdxSkRQSkN2R2ttSG9DVlZBTVhSU1hVTVRU?=
- =?utf-8?B?VGVyR2RlNGJkajZZeC9zZU9ZV1JpRE8xUmRjWEZBdnJZN0E4KzB3UT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 428b4d98-41a3-453f-e9e5-08ded379676a
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 11:52:31.3759 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JSy6wPPzdu8+ey0BxEJ+YRoTdDHpRJS4AhSq5lg+mSZf0SbpeTTdeqSY4FuOCXJOhVd0L4vMWReO/CQy9Vln2gDlbhn8gBTdNafGnOGNQdQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6788
+References: <6d1d17a4-d914-4136-a90a-0d9073bcf135@syss.de>
+ <4428b405-ea06-4af4-a84d-095d4cbf4609@syss.de>
+In-Reply-To: <4428b405-ea06-4af4-a84d-095d4cbf4609@syss.de>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 26 Jun 2026 14:03:21 +0200
+X-Gm-Features: AVVi8CeGxnEbAtVmkqEg1NI7cWi0FvYZsS3ahgWDt5EzADgUOT7iIpE5TG77p7I
+Message-ID: <CAOf5uw=Ymi_L98crSKdzX12hWGTEohz1MVHchg8mgdoUH+_1=A@mail.gmail.com>
+Subject: Re: Fwd: SySS Responsible Disclosure Policy
+To: Robin Trost <Robin.Trost@syss.de>
+Cc: dario.binacchi@amarulasolutions.com, Tom Rini <trini@konsulko.com>, 
+ andrew.goodbody@linaro.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,151 +115,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tianling, Jonas,
+Hi
 
-On 6/11/26 9:45 AM, Tianling Shen wrote:
-> Hi Jonas,
-> 
-> On 2026/6/10 21:25, Jonas Karlman wrote:
->> Hi Tianling,
->>
->> On 6/10/2026 5:01 AM, Tianling Shen wrote:
->>> rockchip_dnl_key_pressed() looks for the ADC device by checking
->>> whether the device name starts with "saradc".
->>>
->>> On RK3328, RK3576, RK3588 etc., the SARADC node is named "adc@...",
->>> so the device name no longer has the "saradc" prefix. As a result,
->>> U-Boot fails to find the SARADC device and does not sample the
->>> download key state.
->>>
->>> Do not rely on the DT node name. Match the bound Rockchip SARADC
->>> driver instead, which works for both "saradc@..." and "adc@..."
->>> node names.
->>>
->>> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
->>> ---
->>>   arch/arm/mach-rockchip/boot_mode.c | 2 +-
->>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach- 
->>> rockchip/boot_mode.c
->>> index 55e9456668ae..363fad523cbd 100644
->>> --- a/arch/arm/mach-rockchip/boot_mode.c
->>> +++ b/arch/arm/mach-rockchip/boot_mode.c
->>> @@ -51,7 +51,7 @@ __weak int rockchip_dnl_key_pressed(void)
->>>       ret = -ENODEV;
->>>       uclass_foreach_dev(dev, uc) {
->>> -        if (!strncmp(dev->name, "saradc", 6)) {
->>> +        if (!strcmp(dev->driver->name, "rockchip_saradc")) {
->>
->> The adc channel used below may not fit all boards/SoCs, so this change
->> may have unintended consequences.
->>
->> I have previously avoided "fixing"/enable this code path for RK35xx
->> because the download key selection should really be improved when this
->> is fixed/expanded to more boards/SoCs.
->>
->> E.g. maybe add support to declare a recovery button in u-boot,config
->> node and use UCLASS_BUTTON to check if such button was pressed or
->> something similar?
-> 
-> Yes this is much better than evaluating raw ADC values, but BUTTON is 
-> not available in SPL so we cannot have this functionality in SPL (though 
-> this idea was already rejected :P).
-> 
+I have long queue, I will take care of it, but coming out some down
+period. Please I will look in weekend,
 
-I'm sorry my memory is failing me, do you have a link maybe to that 
-discussion?
+I have already other patches to send
 
-> I have made an initial version that use UCLASS_BUTTON:
-> 
-> ```
-> __weak int rockchip_dnl_key_pressed(void)
-> {
-> #if CONFIG_IS_ENABLED(BUTTON)
->      const char *path;
->      struct udevice *button;
->      ofnode node;
->      int ret;
-> 
->      path = ofnode_options_read_str("recovery-key");
->      if (!path)
->          path = ofnode_conf_read_str("u-boot,recovery-key");
->      if (!path)
->          return false;
-> 
->      if (path[0] == '/')
->          node = ofnode_path(path);
->      else
->          node = ofnode_get_aliases_node(path);
-> 
->      if (!ofnode_valid(node)) {
->          pr_err("%s: invalid recovery key '%s'\n", __func__, path);
->          return false;
->      }
-> 
->      ret = uclass_get_device_by_ofnode(UCLASS_BUTTON, node, &button);
->      if (ret) {
->          pr_err("%s: recovery key is not a button: %d\n", __func__, ret);
->          return false;
->      }
-> 
->      ret = button_get_state(button);
->      if (ret < 0) {
->          pr_err("%s: failed to read recovery key: %d\n", __func__, ret);
->          return false;
->      }
-> 
->      return ret == BUTTON_ON;
-> #else
->      return false;
-> #endif
-> }
-> ```
-> 
-> ... so it can be configured in u-boot.dtsi like this:
-> ```
-> / {
->      options {
->          u-boot {
->              recovery-key = "/keys-1/button-recovery";
+Michael
 
-This should absolutely be a phandle and not a path.
+On Fri, Jun 26, 2026 at 12:02=E2=80=AFPM Robin Trost <Robin.Trost@syss.de> =
+wrote:
+>
+> Hi,
+>
+> any updates regarding the issue?
+>
+> Kind regards,
+> Robin
+>
+>
+> -------- Forwarded Message --------
+> Subject: Fwd: SySS Responsible Disclosure Policy
+> Date: Fri, 12 Jun 2026 22:47:10 +0200
+> From: Robin Trost <Robin.Trost@syss.de>
+> To: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+> Tom Rini <trini@konsulko.com>, andrew.goodbody@linaro.org
+> CC: u-boot@lists.denx.de
+>
+> Hi all,
+>
+> during a recent assessment I identified a vulnerability in the OOB data
+> parsing of the NAND chip. As you are the maintainers regarding [1], I've
+> sent you the advisory advisory (SYSS-2026-038: Arbitrary OOB Heap Write)
+> including a "optional" fix and a reproducer script which illustrates
+> that the vulnerability can lead to arbitrary code execution in the sandbo=
+x.
+>
+> If you have further questions, please do not hesitate to contact me.
+>
+> Kind regards,
+> Robin
+>
+> [1] https://docs.u-boot.org/en/latest/develop/security.html
+>
+>
+> -------- Forwarded Message --------
+> Subject: SySS Responsible Disclosure Policy
+> Date: Wed, 10 Jun 2026 15:46:26 +0200
+> From: Robin Trost <Robin.Trost@syss.de>
+> To: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> CC: trini@konsulko.com <trini@konsulko.com>, p_mailqueue_disclosure
+> <disclosure@syss.de>
+>
+> Hi all,
+>
+> The SySS GmbH deals with security issues in a responsible way. In the
+> form of a security advisory we report security vulnerabilities which are
+> not in products of our customers and which are not excluded from public
+> disclosure due to contractual agreements with vendors.
+>
+> The attached security advisories contain detailed information about the
+> found vulnerabilities that allows the vendor to reproduce and further
+> investigate the reported security issue. Vulnerabilities will be
+> disclosed to the public if a solution was published by the vendor or 45
+> days after the initial report by the SySS GmbH, regardless of the
+> vulnerability status, for example if there is a patch or workaround from
+> the affected vendor. In well-founded exceptional cases, this standard
+> procedure may not be followed and an alternative, adjusted publication
+> schedule will be negotiated with the vendor.
+>
+> The goal of our Responsible Disclosure Policy is, to weigh up the need
+> of the public to know of security vulnerabilities against the vendor=E2=
+=80=99s
+> time to remedy all security issues effectively. The final publication
+> schedule will be based on the best interests of the community overall,
+> considering both positions. Before the responsible disclosure of a
+> security vulnerability, the SySS GmbH allows vendors the opportunity to
+> analyze reported security issues, to develop effective countermeasures,
+> and to test them thoroughly.
+>
+> If there are any further questions regarding the identified
+> vulnerabilities do not hesitate to contact me.
+>
+> Kind regards,
+> --
+> Robin Trost
+> Senior IT-Security Consultant
+> ______________________________________________________________
+>
+> SySS GmbH
+> Schaffhausenstra=C3=9Fe 77, 72072 T=C3=BCbingen, Germany
+> Tel: +49 (0)7071 - 40 78 56-6169
+> Mobil: +49 (0)151 - 42209330
+> E-Mail: Robin.Trost@syss.de
+> Conf. Calls: https://syss.zoom.us/my/robin.trost
+> Web: https://syss.de
+>
+> PGP-Fingerprint: 85FE 80E2 04F3 6177 C61A 4618 61DE F14F 698E 6EB3
+>
+> Gesch=C3=A4ftsf=C3=BChrer: Sebastian Schreiber
+> Registergericht: Amtsgericht Stuttgart / HRB 382420
+> Steuernummer: 86118 / 55809
 
->          };
->      };
-> };
-> ```
-> 
-> I have tested this on my DshanPi A1 board and it seems to work okay.
-> 
-> Is this an acceptable way to configure recovery key? I'm also wondering 
 
-It could be. Typically, when a new property makes it to the device tree, 
-it must be documented in the binding. Here it would be part of a 
-u-boot,config node, but I couldn't find a binding in U-Boot, Linux 
-kernel or the Device Tree spec, so I don't know what we're supposed to 
-do here. The button itself will need to be part of the Linux kernel 
-upstream DTS, the difficult part will be which event code it needs to 
-return and will be board-specific.
 
-> if it's necessary to keep compatibility with old adc_channel_single_shot 
-> implementation.
-> 
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-Not necessarily, but we absolutely need all boards using this old 
-mechanism to be supported by the new mechanism, which may be difficult 
-since we don't necessarily have access to their schematics.
-
-I think we can maybe compromise for now on a Kconfig symbol for the 
-channel to use? What do you think? We would still need to check the 
-schematics of all boards that exercise this path and check if fixing the 
-condition won't cause side effects (because it now is reading the ADC 
-channel while it wasn't before due to the typo). The other option is to 
-explicitly disable it for all devices that could never meet the 
-condition with the typo (so even at SoC level since SARADC is an 
-SoC-specific IP) such that it can only be enabled if someone tests it on 
-their board.
-
-Cheers,
-Quentin
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
