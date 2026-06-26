@@ -4,87 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724FCC43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAD2C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EB88849C5;
-	Fri, 26 Jun 2026 16:45:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 091FF84704;
+	Fri, 26 Jun 2026 16:47:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UTbTgYMJ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="plg1H3MX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4A3084987; Fri, 26 Jun 2026 16:45:54 +0200 (CEST)
-Received: from mail-dl1-x122b.google.com (mail-dl1-x122b.google.com
- [IPv6:2607:f8b0:4864:20::122b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7531B849EF
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:45:52 +0200 (CEST)
+ id 99DB28496E; Fri, 26 Jun 2026 16:47:36 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 339708460E
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:47:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dl1-x122b.google.com with SMTP id
- a92af1059eb24-139d5c9a495so3515c88.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:45:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782485151; x=1783089951; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TBT1+Mm5G8FUFxzbA87mUyRoTR1o+Sh/kt+xu7eq2j4=;
- b=UTbTgYMJ6AT4b0GVl4i+rNmKTGX06J6Bdze7KOQ3M5WaVsZnUnMcd+mh4rRtgrP80D
- rxCFtXwgUyLu3fgJi/zKIneWJr2I5gzVDzQ6Wx2uNYp9yk9FHX+PeB77zf05H2dKrbJI
- E9qYLcp0hyFrR1sfAce4cI1cu/iDK+mchhN0UoOk6+tmQnvhBLsqL0anfZwLtM2WD1XG
- d4gf+dRw4gTVj6AYdIirK1H9w7mYQULUTg85TEESSKBNHfpUO2eeVwT7GA8p8bgcpeTE
- PMmHyc+Qm7I0X/XiR4b+LNxYGysqqwb2RjhZ/Aws9sNZWRYHq5fDhUSvhYwxOIjU+Fze
- DpiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782485151; x=1783089951;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=TBT1+Mm5G8FUFxzbA87mUyRoTR1o+Sh/kt+xu7eq2j4=;
- b=MeyItdkYbCMJtfckDGrpxDSZWIKX0+/AXG0rGzZzBLSAZbcl4aVKjj57s6/9UxLaD0
- DLVObajtfEZC7pxfebLpiHKeTN26yuqjkrsSfft8g6xvAWdX+Bg/gem9gSWwfOyleT9w
- xmc2FU4GLS7xPEiJsP1AxrRbqjee+dZIdj3wMnIj22Kl96ABIe7NaDb9zUF3N+qXxRw7
- pnLR+Xj2Rqq7e01CEae3QmV5tuY6z0KY7g7yMiHElBj7YC7s6Uhfv6pA11/+Ou/xIhGg
- ALyPhJ4c5dOGiIldqE3tPFav7sWFZZIGv+hn7LbSgMiLLhJ1CEJ8s/BcbAxjNgv5hv/P
- kr5g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8XW9YLejLRLv2Zw3G24KXfa23erciNrZXwD7xLj2HV2eyot84fKxA6Brv3pA1KUjF4aN9jrNg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPaaUOtp4ByRnd1w0W2cofVgyh1IpwVhdSWZLPUfzpY40NaCzC
- n9dJPdRKRMCwqdThTf/b2PqfwAG/NmBTsek7kkOZB3AyxKOXN5fw/nuGV/dsDg==
-X-Gm-Gg: AfdE7cmpIvMGnsKxs3t96qhQwpeY9sEimPdOZi/kq5yu3IbqcH7hgxddiOIW3JRIv4O
- TLXbXGbhbOpKACkGof3fkN7ZNz4pTnORKqqCIRNGBQjvy/iH/LMWPOOsO0FEIacz5dbbkZFTZky
- +wvfx9Id7REq4hFfqeosGyuzI36jewmWZel4ZNzzDoqHXyiuBoV17jNXphyPGBpBwthcUNolwOd
- mVVdglMlzbXItNOhM9nQf24ddmjkIwi81hAX689R4K1jWNf3XZQULOyrSxlwHa+KjtB/JaGDZ13
- uhn3PSiEQXsaRnxkimXJ7NudRRIRJv22Or1mue0pNUkJw25cr3G2NuMPi8/SrtzUHD7c761D7xD
- US69lRenZ2Ae1sdmksaEC8drYK1XHcmLUiGyt7+QUO1tFOVAiENWclQFECEmP/4SlqUNr5eoi91
- 0DAJqjtTWaBEZKtinfKIz7ZVE7mLdD+2OJhi+qRSK+vIwV5d1ScneL78RiebNZhb6/j6x/hg==
-X-Received: by 2002:a05:7022:fa09:b0:138:14dd:16c6 with SMTP id
- a92af1059eb24-139dbb5b04dmr5785038c88.34.1782485150714; 
- Fri, 26 Jun 2026 07:45:50 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d9105b57sm18823739c88.14.2026.06.26.07.45.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 07:45:50 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: kever.yang@rock-chips.com
-Cc: djw@t-chip.com.cn, sunil@amarulasolutions.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH 5/5] roc-pc-plus-rk3399: Enable USB Mass Storage support
-Date: Fri, 26 Jun 2026 11:45:33 -0300
-Message-ID: <20260626144533.2925490-5-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260626144533.2925490-1-festevam@gmail.com>
-References: <20260626144533.2925490-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E07C91D34;
+ Fri, 26 Jun 2026 07:47:28 -0700 (PDT)
+Received: from debian (X72Y076X74-2.nice.Arm.com [10.34.111.142])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BFA513F905;
+ Fri, 26 Jun 2026 07:47:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1782485253; bh=fso4I64apdPMDsFSzSVUMGeXU7/5mU8PMgEa5RglLgc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=plg1H3MX2b/71dDxhHwu0G+508D5rpt7vKdNsk+8FmswdnAKwh98R1MZKfuBeuXCH
+ nFm3TlOMar/9L2oV/3Jl+4bAL2hIrL62Nvg+bduphyJ4Hm4v0MmgPqz/oCMqt6ysS2
+ nCuiopNnnNs5NYYY1ufWhxl1oFqBfdtEc5id83b8=
+Date: Fri, 26 Jun 2026 16:47:30 +0200
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] lib/efi_selftest: test block io revision
+Message-ID: <aj6RAmTMTCIUw2rC@debian>
+Mail-Followup-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
+ <20260624-rev-v2-1-68beb809891a@arm.com>
+ <f7900ff1-e515-4cba-963b-84d2d6c89ad5@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f7900ff1-e515-4cba-963b-84d2d6c89ad5@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,51 +68,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@nabladev.com>
+Hi Heinrich,
 
-Configure the USB0 DWC3 controller for peripheral mode and enable the
-required USB gadget options to support the U-Boot 'ums' command on the
-ROC-RK3399-PC Plus.
+Thank you for your review; I will send a v3 to address all your feedbacks.
 
-The 'ums' command provides a convenient way to expose the on-board eMMC
-as a USB Mass Storage device to a host computer, simplifying development,
-image installation and recovery without requiring removable media or
-network access.
-
-Limit the controller to High-Speed operation by using the USB2 OTG PHY.
-
-Signed-off-by: Fabio Estevam <festevam@nabladev.com>
----
- arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 7 +++++++
- configs/roc-pc-plus-rk3399_defconfig        | 3 +++
- 2 files changed, 10 insertions(+)
-
-diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-index 7d5af3e234da..f613d75646c3 100644
---- a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-@@ -7,3 +7,10 @@
- &dc_12v {
- 	/delete-property/ vin-supply;
- };
-+
-+&usbdrd_dwc3_0 {
-+	dr_mode = "peripheral";
-+	maximum-speed = "high-speed";
-+	phys = <&u2phy0_otg>;
-+	phy-names = "usb2-phy";
-+};
-diff --git a/configs/roc-pc-plus-rk3399_defconfig b/configs/roc-pc-plus-rk3399_defconfig
-index 4ec2f7d44b5f..f3d78c53e672 100644
---- a/configs/roc-pc-plus-rk3399_defconfig
-+++ b/configs/roc-pc-plus-rk3399_defconfig
-@@ -2,3 +2,6 @@
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-plus"
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-plus.dtb"
- CONFIG_SPI_FLASH_XMC=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_USB_GADGET_DOWNLOAD=y
--- 
-2.43.0
-
+Best regards,
+Vincent.
