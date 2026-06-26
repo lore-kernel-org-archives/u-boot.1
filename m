@@ -4,109 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD189CDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 09:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB3BCDE008
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 09:37:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2DFF84704;
-	Fri, 26 Jun 2026 11:21:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 54A368460E;
+	Fri, 26 Jun 2026 11:37:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="m3PdJMSZ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IElVmMZU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E31D84894; Fri, 26 Jun 2026 11:21:32 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CECC484704; Fri, 26 Jun 2026 11:37:39 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47B828460E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 11:21:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AF218404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 11:37:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-c08922c23ebso111157966b.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 02:21:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782465690; cv=none;
- d=google.com; s=arc-20260327;
- b=oEvPVJG77a5n3wKXz6rwQpN1GRwt7TuQDb3cz07PoE3fX4y6SdyPGb6eHsnH8gJuvx
- 7GfZ7jOV86nIwQlq+w0U9IfSPionTbBb0tuW2lXwPNlCZkyGW2HF9VsOJCDfwQhP1FLq
- dDV56jDav4CuD/ubK9J47RPJeAUyo5uQkQxdmIfOQV9z/wOVhCF4NpY50xJV+MeHEME3
- l2N1e9y83xlAtVmBp4HKiWbaOeHXDk4ALkA8WGXwuzpbc+ehUdW5GwUKbnqSlJeCZ5q1
- hpD2jmLFbe5lb1FOd7flQ6Tj6cn40YPXGDIx99yYbx/wP14VhSdqAkbeNhONeBcExZcx
- 4XOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Jge6G4TAFPrvXC1QniyTn5PKiUjUotDtBmFXmgksvLI=;
- fh=RZ61JktpC6apeX1S8eRfIZBB7ndWano9uzJZzBSj5Bc=;
- b=lQHQ1VA6msgaJpSHDJk6EhdiV/EnVW9U2aDSRbhHAX8qDJXolwrnzaVGRq+8X4iBl8
- lf0/axdzrctLnPUNkCERQ0yQHailQPvNIdU5PoMx9YrqGLas3Msv+sKFSk/sqfiAxe4h
- nHbnOHVo6RegBRnHnr24usw2y7vkgBMGstaZAx7Cw2pQNbNzGCUIvcWLpWSmn+3lZ4OY
- o92kpceIRxCab+hQtpQnWmuSG8hiGeAU0eJ0u29q3mjrXdnWWBD2LPmPHDGVSjZ73pVR
- 179oz5iJIZdPO88BckfVaykLUA4cVuXbjqC4cHjC+mbTmfvrRkFJiDd7qWdNs8fVla40
- Ck3Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1782465690; x=1783070490; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Jge6G4TAFPrvXC1QniyTn5PKiUjUotDtBmFXmgksvLI=;
- b=m3PdJMSZXu3DDcqwQCiP/BS6SjgOz3bQLQG5FRXGwUhlWAysgvudIOC7N0szYtxOAP
- +vUL3EmhSXXRVSQ3Vn3MWbpVJ7LldDFJvOBg6+4bw7DDg7V6nXAyG3s4/1W6t3/xL4bH
- RgHXIUeE2hl61vsJ8/yiJH8GM3+GdIR+X4y3DDBnEgOLenc7mCBT9IDPEDGmkGRnxB1N
- F5Venn+zKzqc6gi17s7QtBa2vLyZc1nV+vu5Y78GJCRrdkWs8q6vyShW+Q22A78izCil
- KK0Zvq7l3LPReCj5RduYLbjZmvLhhScz7+5Qchj+ubFKkar+yi7QYOPS/Qv25IJVBtE9
- dY6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782465690; x=1783070490;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Jge6G4TAFPrvXC1QniyTn5PKiUjUotDtBmFXmgksvLI=;
- b=Pef+/0jDi4e0ITYtyr3FJWg1NRwX+k1jcrSYvDG7MCV++vtdagq0RdVvpg/d2ZGUen
- Lab2js8XM3uBRoXREOjZ8qXRvDSG4Wp0G0geH35hEEjH6MOkv2xkWI59kyVjM78VdQ7f
- jSnH0LgOD3ThUzpYdwpeZ3rS3tuoRIFDuelz9qBIRzrrQo3t1x6z6Mh5PQTwZ0QQpkza
- /f8Z0w0IdkEECnhQtWhRdjlYUwzCML64ler54L4/eZJNOU5sWYWcgNkhQcbetQWtZ5jv
- urKGiLzEPrTQLmULuhisrretV+H5Jm+scuE6tpXR68nEjBYsuCNIVS3p/Hp6YmKPng82
- Il+g==
-X-Forwarded-Encrypted: i=1;
- AHgh+RogMiFFvXSesKQlP886cdJyl7rSoScqafJTTGWZrE3cICl0eLUiruamJHTkjy4KeI9Ay1P3Trw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxk5QMPHPMpOlsYwZ9VCYhD4VLHVg0yYOL65LZzDftUuea93m0N
- Bzycf8stlR/Iwb/mA4xoBmKO/sAk9js6WNiARcfERzcGgnERqcJ6ScmeslUIJJowAOX4A7xgZEG
- tot6KulzMtQ32K+dQMRw+q7wQjIGXj7eteoLvvw1T4xIdA5/+xNhAqZ4ZgQ==
-X-Gm-Gg: AfdE7cnJuOgvh4wSpRuOUiU3eI/bXvP5Bd9BGucCkK+czn9RddeembGQImsEALFuKSQ
- m8PzrIVkdUZ4XZT+bEp25j2E9GiO1GkVMvVFFHhOcf7UxNh//GRklrLHPXSQxQIwqRZnGPWsRSU
- 7eNnxhT86XA47hhIXpORUczWa+sy9Qg+G+GBCL4rWpr4jNg1O/aY6yc0qpjFivTIl+ECkw54tvH
- JZi6VM5W2TdOBQ+XOtOI0W4uLQg8ln0qCdHF7HRQQF1sboXwDY94i36b8JPTkECxWP36UhZj/L0
- ar7EoG2mvnWcUMIddtbOovJKjzi8fQ==
-X-Received: by 2002:a17:907:c445:b0:c09:2c22:16ac with SMTP id
- a640c23a62f3a-c1205f20228mr418020266b.48.1782465689600; Fri, 26 Jun 2026
- 02:21:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I1VXnkMX6QCihvDX5m8F8K5Dh9bDlfOParzs0GbVK+vpg2QuzA3LuzYkfXWjRSBnDxATzpO8zrdHBe3iolbtfVIOLauR6nU6NTqNN5nGF1WHEsTBK5yQDP01PFbDPq5xEmH4zCxa+/c7WDTbsLVVP7FL1GH4CDvGAG41/Az3trDicDLIP3TAyO3yYt/rBUU9DC260/+ULc+Ws6oGyOkrEB+msftA2snor34od+yAd9RYFTlk5G6ISfyVshzKs7p5i9eI2tyrkvNxRSRiFfemynT41YThT/gvmPmn472miRgbTr7aDB8csWllUSpwZ86vifZeTMmuaIVuOJq6i6KTwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=H52rY0p2EtL2wLtcVUj5pQkYTJEAuXFQ6qV6u4Yl6KE=;
+ b=zMRDQG0BREX63oARNznXjUFZRCnvcMJhqm7KuKP0fe+uzNpw09w8GqjxSFtkCsPppHpPWsqV31r5CKJ9ZDd81xNLKk8IKsISSdBP/avb/GCzjW9ERLCSzHCtCfk7vBI3WWUMUsTBcamFFOSLvBe63Quf3HuFjr9stQ4kO5KIF90KeZNThTi2se+0lJEZ9IovL+xASkK9aotqgaJBj7ejfxHnDivS1rvI7IayydgRCP/vLuLth3iTlqUFk+zJGi7dbEKqGC+JwrcumHltFPyzKa0OWCAuQQvhMpMKSWh41QSeJ+luamDMR9/fEv5Ozyvp7QWpza5P5R58oRTw5u8b5A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=H52rY0p2EtL2wLtcVUj5pQkYTJEAuXFQ6qV6u4Yl6KE=;
+ b=IElVmMZUO+Z2GD55olm3J5TFJTdGKTs86QRe7EfZMBJyYHYZo67ecRJZ0yJec+KEkhzo0Tyvi+FS9AW9dfWpewEWtIs9FfNpWj3HFL+zIHNQeiP52UzhYjQtbtLE3VFw6zLALvz94KELg3a+gFQUjzapMzHK5gPlFflrR9yLJnI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB8532.eurprd04.prod.outlook.com (2603:10a6:20b:423::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
+ 2026 09:37:33 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
+ 09:37:32 +0000
+Message-ID: <100d2db4-d05d-4b1c-9576-d83d5c225e38@cherry.de>
+Date: Fri, 26 Jun 2026 11:37:30 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/5] ufs: document the UFS command
+To: raz.benyehuda@mobileye.com, u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Julien Stephan <jstephan@baylibre.com>,
+ Udit Kumar <u-kumar1@ti.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Shawn Lin <shawn.lin@rock-chips.com>, Jared McArthur <j-mcarthur@ti.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Heiko Schocher
+ <hs@nabladev.com>, Simon Glass <sjg@chromium.org>,
+ briansune <briansune@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>
+References: <20260607-ufs_tool2-v2-0-f79ff26ab18c@mobileye.com>
+ <20260607-ufs_tool2-v2-4-f79ff26ab18c@mobileye.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260607-ufs_tool2-v2-4-f79ff26ab18c@mobileye.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0129.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9e::16) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260625-btrfs-readdir-v1-0-dd781a2b3965@flipper.net>
- <20260625-btrfs-readdir-v1-1-dd781a2b3965@flipper.net>
- <bbeac2f6-685d-4ace-b689-10d64c4e3ce5@suse.com>
-In-Reply-To: <bbeac2f6-685d-4ace-b689-10d64c4e3ce5@suse.com>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 26 Jun 2026 13:21:21 +0400
-X-Gm-Features: AVVi8Cfjpor4kVmvFDmltWs24y4yW5kbH4YQTBWs_yPanPJDk7g3J_iinR_jcyk
-Message-ID: <CAKTNdwGH2OCWJ1A=jQWiLYQmxG8UFTBGwGh0Qno7OkUfxs4dtw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] fs: btrfs: implement opendir(),
- readdir() and closedir()
-To: Qu Wenruo <wqu@suse.com>
-Cc: linux-btrfs@vger.kernel.org, u-boot@lists.denx.de, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8532:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5a6f81f7-553c-4bef-1959-08ded3668c3d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|7416014|376014|366016|56012099006|11063799006|3023799007|4143699003|6133799003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: nA0SEa2iNz8tlnlBAS5c3TeqmYYDAl2uvD7Vg1PHf9TSbh4CqRBr3EnfhNaFwVvIMD0UAvYKa/AIji6W4bd5DcxndsB2Es75FL2BbfFLaRcw1YMQIEMS0BFNoInJWUkBJRIu+naNUN2Uwz+F5U92QOTPb+PlFngpfdp3EpG48yyZ0MhMoI2bywAEygT9rV2fSvLHLIN9WLlQkVoGi9evgxj7xi0RUiQftlDqdl/yO1lI0VlxlVqUQFOOiaw+106AyFVPJoHwbXDHK9L+J3tXlwofmQt9Yub2WyGRs2xnTdf991Gs2zdRNX2OtGRg7EgLnmBQkS3xDHGFNQZeUVu8tM7mKNcBOzLn3upgkYLs8Yg2jS/pcsTQ/mtkbAVYY//sh5FlhqMwrqfeDDtFG3p8oC+rlez55byT+bHa7hkBehFIMd0JX9XFUAwktiz5xzOPRtJhFazEJKCnHlKJ4B2jf260iWDufhL9lbA8Nju87vSpW4G5/CyPhEq+jn2+5MdbLlDutVtHWL4GG4UCfxvvYORYVQKa4Lr9ZBWpgdBZXl1jS8uVrWEH9PuQWJjkwUrFrP7Lj05rk84eg9Q2TacTgWtFmkCpb1iq+hWzSueBaZ8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(7416014)(376014)(366016)(56012099006)(11063799006)(3023799007)(4143699003)(6133799003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OFU2SjRGcUZPWUtDSFZXeFA3VU1OSmcwWHNzak1rVnhDclBzQzN0NEhTdTBP?=
+ =?utf-8?B?V0tjeFRKN25nM2czaGJDMVZyNnEvSVJJOHBFV0tYWlBxSWhWQTRINWpJbmlH?=
+ =?utf-8?B?elRrb0dHYi9QODl6YlgwUEg1Zk5pQ0grV01QM3dOZ2Vva3dhUWlCVjltQk5z?=
+ =?utf-8?B?YTl4U0dlU0k4dDh4R3d0bXZOM2V0bFR4WFR3L2tDdGdpRmovZE1YMk4vUFd1?=
+ =?utf-8?B?RERRaFJUbU1RbUh5bXB5b3lIQklnS25Pb0tFcWVqYjUvUk9xNG93RXg4MFp6?=
+ =?utf-8?B?N2ZQUVlLM3M1WkpMc295U3REeDMrVkFNUzZrWTVGaG8zRkZaZEdwS052Szhy?=
+ =?utf-8?B?YnN0NFBucThSMzg3KzI5S0NrOWRyWnVLSE16R0w5RzNvWGFua0QvU0U1Z2F0?=
+ =?utf-8?B?czUydnp5V2pMKzROYy95SXllcWIxU0FEdjlGYUZaY3dZR3R0WTlVZVFndWJK?=
+ =?utf-8?B?UzdJS28vaGNaZC9KTEZHak0vVGlEdExYMjJzUCtPMUxSVEF1eDREcVF5QnEz?=
+ =?utf-8?B?UUdGSlJOeGtvdUloSUhtYXBDY2lOcFRROSs4eDl0dkQ5T3pPMnFnR1BXS2Ri?=
+ =?utf-8?B?cUt4VmpyVThzc041OXZha0lMS3NHZnRHT1pqRzlKMlRzL0w1VTFZTnJId1Rl?=
+ =?utf-8?B?RGlOUDk0VnVkNEp6WFFGRnR2TkdWbjlLeGtLcEdVY3VXc1pvSVhDOHlXWDRr?=
+ =?utf-8?B?aFlHekJtZUEwd0tUWWI2ZFlDNllrVlNXY002dDBLVnFDd1ZjQW1TOFIwelpw?=
+ =?utf-8?B?NUs1WmkzNTl3b1JSWHJ3WGpqeEJzd24zekd6clNEYUJKTGNSZzR2aWlZNUpO?=
+ =?utf-8?B?Q0p6b0ZNcnZ1SWFENjJXRE5ncWkzWVkrQWViNXpZRkpXbTlNUjhGWXVONzBu?=
+ =?utf-8?B?R3JjeU01R1lFT2I1bnBNNTU3bk9QaWt4UFJpaGdKbHZJWDlzV1JRZS92RGQr?=
+ =?utf-8?B?a1ZwSnRKUUlmL2V1dDRaMHVuWWtab3V1Sk9qdnZkdDR1QmEydCtIMlVMOEh5?=
+ =?utf-8?B?S3ZKTDhkVk5LZHNDTndUdXdhZXlpWGZWSkVnUWM0YmhoVVFjMkRPTUdBNEc3?=
+ =?utf-8?B?MzZVcjV1Sy9zL1NLTGI3NDl3cGFXOVAyY2o4UUpidGVkZFdyZHUxWXl5WS92?=
+ =?utf-8?B?V1l2OC9YVm5KRHpaN3RiWHBKY0RhOUdxV0ZNaFRxN0Mxb3VjSGVGTVRJYk1x?=
+ =?utf-8?B?ZEZWa2lCa2Z4akdqaTUzQ0pBNkZoTE9STEJxV09iTnAvMlZjT1Z3Q3g1Y3Bk?=
+ =?utf-8?B?MkM1VUwrN0Jpd28rT2luTTNBdGpUcnBKdllBai84U1VkUFNobXVLSWNIQXpl?=
+ =?utf-8?B?dUlINzVYZUhkb3oyeFFZOEFCci9FU25aOUN5Si9YWHJST2R2bjFmZFNtZ0Fn?=
+ =?utf-8?B?eTR0KzVLSEpOL05NYURQaDF5MnVyalJIcmlSeURXU3BFTnZtSFVJNTR0azZ4?=
+ =?utf-8?B?WEFRRE03MFREc28vK05rbk1tcW1hbzBScnZwYjNoLzBZdy90SXpoWWVqalNp?=
+ =?utf-8?B?Q2puVWpGcW5CelJSMFp4cWtvYW5hYUJFbUE1dW5zT2RhaEVkWm9scm1TOXVV?=
+ =?utf-8?B?K1NWVjR0bGVIN3N6Vm1SUmNGSWJoV1dGRy9kN2dHQjNybXVPS0htN1dpbXdq?=
+ =?utf-8?B?TldkQ0ppYjNocyt2Mk9ldGE0U3oxNkpwSDlOL0trK1laK3ZsU1ZlQVZONHBu?=
+ =?utf-8?B?VkFCTmZXMGlldElvWWVKb1R2Mko4WWVXaTdIRG95UlhESEZiemVjdmFUa2I2?=
+ =?utf-8?B?dy80SzhKN1lzQjBhZFNiZHRBbUJLTlF3SmZzZFRPdk9CZWNqS1ZLdDFQaUlJ?=
+ =?utf-8?B?d0JwMFp0ekcveHFBQzVRbS9HYXRLTC9zMElsVTRpdlhDOVVzWWpLUG9IeXJo?=
+ =?utf-8?B?YXlCWWdYSjRBLytrRGNMbzZPQkdsUzNWbTAzTjIyRzJtOFdkaldPR1o3Q3pC?=
+ =?utf-8?B?UThJSE16aGwzdmZ0S21HR2N1RGN2YUhOMlQ3SjBUVlAyMFovTzI2ZHpOT0Ro?=
+ =?utf-8?B?VEJOWFdpNGd3cmJPbWtkdkRvaFVYdUZtQzVMaVY5RnJIQTMyWE80b082Yzlr?=
+ =?utf-8?B?Vnp2Sjg5aTVPaGFaM3FabW10WGtHTkNGZE5mRVhhY2JIUnRVSnFUN1hneVB1?=
+ =?utf-8?B?czQyV3BqSmk4cGlwRStkQkkySkgyMmswc3FRSHM1a3BidCsxbHlHT29hckg4?=
+ =?utf-8?B?eGpOVTNJR0NiODRURjJpQk5obnRPN2hLcWVqMEpZNkRVZVJVL29VSjFhbC9o?=
+ =?utf-8?B?Y0xyTEhLSVVvL2RlV21iTW10aDlSWnRXejlJczA4dWRsVmFBbDlCWlRqSFdj?=
+ =?utf-8?B?d3lRUVZsOEpRTkxKZUlLVjZtU3c5bFhRMW10WE93T3dZTk1raHZiQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a6f81f7-553c-4bef-1959-08ded3668c3d
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 09:37:32.7715 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YLrsgbwxQlgKVd4Q/HfunwWWf3N/zYthCWmEua8DLilWk+VccVEpSreXl8cDBOiwocCwBBTNwXR3s+i/GD7bGKqjecBOhPYvNJnr1EHLgCk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8532
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,179 +165,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 26, 2026 at 10:38=E2=80=AFAM Qu Wenruo <wqu@suse.com> wrote:
->
->
->
-> =E5=9C=A8 2026/6/26 02:54, Alexey Charkov =E5=86=99=E9=81=93:
-> > Add support for generic directory iteration with opendir(), readdir() a=
-nd
-> > closedir() in the btrfs filesystem driver, following the ext4fs
-> > implementation for opendir()/closedir() and the btrfs_iter_dir() functi=
-on
-> > for readdir().
-> >
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > ---
-> >   fs/btrfs/btrfs.c    | 92 ++++++++++++++++++++++++++++++++++++++++++++=
-+++++++++
-> >   fs/btrfs/ctree.h    |  2 ++
-> >   fs/btrfs/dir-item.c | 91 ++++++++++++++++++++++++++++++++++++++++++++=
-++++++++
-> >   fs/fs.c             |  4 ++-
-> >   include/btrfs.h     |  5 +++
-> >   5 files changed, 193 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
-> > index f3087f690fa4..c647c8dedf4e 100644
-> > --- a/fs/btrfs/btrfs.c
-> > +++ b/fs/btrfs/btrfs.c
-> > @@ -9,6 +9,7 @@
-> >   #include <malloc.h>
-> >   #include <u-boot/uuid.h>
-> >   #include <linux/time.h>
-> > +#include <fs.h>
-> >   #include "btrfs.h"
-> >   #include "crypto/hash.h"
-> >   #include "disk-io.h"
-> > @@ -159,6 +160,97 @@ int btrfs_ls(const char *path)
-> >       return 0;
-> >   }
-> >
-> > +struct btrfs_dir_stream {
-> > +     struct fs_dir_stream parent;
-> > +     struct fs_dirent dirent;
-> > +     char *dirname;
-> > +     u64 offset;
->
-> This doesn't look correct to me, for an opened dir, we should have at
-> least the root id or pointer, and an inode number.
->
-> Not just an @dirname and re-do the path resolution again and again.
->
-> In fact, I do not even think we should save @dirname here.
+Hi Raz Ben Yehuda,
 
-Thanks Qu, let me reshuffle these. I'm not a huge FS guru, so I was
-just parroting what other existing U-Boot code does (ext4 in this
-case). That might well not be the best approach here, even though it
-worked for my use case.
+On 6/7/26 5:45 PM, Raz Ben Yehuda via B4 Relay wrote:
+> From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+> 
+> Add documentation for the UFS command-line interface.
+> 
+> The document describes the available UFS subcommands and their usage,
+> and provides a complete command-line reference for configuring and
+> managing UFS devices.
+> 
+> Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+> ---
+>   doc/usage/cmd/ufs.rst | 226 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 226 insertions(+)
+> 
+> diff --git a/doc/usage/cmd/ufs.rst b/doc/usage/cmd/ufs.rst
+> new file mode 100644
+> index 00000000000..1553bc28935
+> --- /dev/null
+> +++ b/doc/usage/cmd/ufs.rst
+> @@ -0,0 +1,226 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +ufs Tool
+> +========
+> +
+> +The ``ufs`` tool provides utilities for querying, displaying, and modifying
+> +UFS device configuration and descriptor information.
+> +
 
-> > +};
-> > +
-> > +int btrfs_opendir(const char *dirname, struct fs_dir_stream **dirsp)
-> > +{
-> > +     struct btrfs_fs_info *fs_info =3D current_fs_info;
-> > +     struct btrfs_dir_stream *dirs;
-> > +     struct btrfs_root *root;
-> > +     u64 ino;
-> > +     u8 type;
-> > +     int ret;
-> > +
-> > +     *dirsp =3D NULL;
-> > +     ASSERT(fs_info);
-> > +
-> > +     ret =3D btrfs_lookup_path(fs_info->fs_root, BTRFS_FIRST_FREE_OBJE=
-CTID,
-> > +                             dirname, &root, &ino, &type, 40);
->
-> You just discard the most important @root and @ino.
->
-> So what is the point here?
+It's not a tool, it's a command.
 
-Thanks for the pointer, I will switch from repeated lookups to a
-stored ino reference.
+Please follow the same template as other command documentation.
 
-> > +     if (ret < 0)
-> > +             return ret;
-> > +     if (type !=3D BTRFS_FT_DIR)
-> > +             return -ENOTDIR;
-> > +
-> > +     dirs =3D calloc(1, sizeof(*dirs));
-> > +     if (!dirs)
-> > +             return -ENOMEM;
-> > +     dirs->dirname =3D strdup(dirname);
-> > +     if (!dirs->dirname) {
-> > +             free(dirs);
-> > +             return -ENOMEM;
-> > +     }
-> > +
-> > +     *dirsp =3D (struct fs_dir_stream *)dirs;
-> > +     return 0;
-> > +}
-> > +
-> > +int btrfs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **de=
-ntp)
-> > +{
-> > +     struct btrfs_dir_stream *dirs =3D (struct btrfs_dir_stream *)fs_d=
-irs;
-> > +     struct btrfs_fs_info *fs_info =3D current_fs_info;
-> > +     struct fs_dirent *dent =3D &dirs->dirent;
-> > +     struct btrfs_root *root;
-> > +     u64 ino;
-> > +     u8 type;
-> > +     int ret;
-> > +
-> > +     *dentp =3D NULL;
-> > +     ASSERT(fs_info);
-> > +
-> > +     ret =3D btrfs_lookup_path(fs_info->fs_root, BTRFS_FIRST_FREE_OBJE=
-CTID,
-> > +                             dirs->dirname, &root, &ino, &type, 40);
->
-> No, doing the same path resolution again and again is not sane.
+For example, doc/usage/cmd/sm3sum.rst was recently added.
 
-Ack
+So:
 
-> > +     if (ret < 0)
-> > +             return ret;
-> > +     if (type !=3D BTRFS_FT_DIR)
-> > +             return -ENOTDIR;
-> > +
-> > +     memset(dent, 0, sizeof(*dent));
-> > +     ret =3D btrfs_next_dir_entry(root, ino, &dirs->offset, dent->name=
-,
-> > +                                sizeof(dent->name), &type);
-> > +     if (ret < 0)
-> > +             return ret;
-> > +     if (ret > 0)
-> > +             return -ENOENT;
-> > +
-> > +     switch (type) {
-> > +     case BTRFS_FT_DIR:
-> > +             dent->type =3D FS_DT_DIR;
-> > +             break;
-> > +     case BTRFS_FT_SYMLINK:
-> > +             dent->type =3D FS_DT_LNK;
-> > +             break;
-> > +     default:
-> > +             dent->type =3D FS_DT_REG;
-> > +             break;
->
-> So it looks like u-boot only supports the above 3 types, and unlike
-> linux kernel the values doesn't match the btrfs internal ones.
->
-> In that case, I'd still prefer a proper convertor function.
+.. index::
+    single: ufs (command)
 
-Hmm, but the convertor function would still be the same switch
-statement, and it's only used in this single place. Would factoring it
-out actually improve readability?
+ufs command
+===========
 
-> [...]
-> > +
-> > +             *offset =3D key.offset + 1;
-> > +             type =3D btrfs_dir_type(path.nodes[0], di);
-> > +
-> > +             /* XATTRs share the key space but are not directory entri=
-es. */
-> > +             if (type =3D=3D BTRFS_FT_XATTR) {
->
-> This doesn't looks correct again.
->
-> XATTR has their own keys, they should not show up among DIR_INDEX keys.
+Synopsis
+--------
 
-Let me double check and adjust accordingly.
+::
 
-Thanks a lot for your review!
+<output of `help ufs` from U-Boot and/or all supported ufs commands, 
+similarly to SYNOPSIS section in manpage>
 
-Best regards,
-Alexey
+Description
+-----------
+
+<description of each command and their options, see the mmc.rst example 
+for something that is likely closer to the ufs command>
+<you *must* specify if parameters, functions, features, etc... are only 
+available if a specific Kconfig symbol is enabled>
+
+Examples
+--------
+
+<typical example usage of the ufs tool with the console output kept>
+
+Configuration
+-------------
+
+<specify which Kconfig symbol is necessary to be able to use the ufs 
+command at all>
+<specify which Kconfig symbols are necessary for subcommands or features>
+
+If the ufs command doesn't follow the general rules applicable to 
+commands (see 
+https://docs.u-boot-project.org/en/latest/usage/cmdline.html#general-rules) 
+then you must make this clear as well. Specifically, are numbers parsed 
+as hex values by default or not. Does it return something else than 0 on 
+success?
+
+This document is also missing
+
+ufs init
+ufs luns
+ufs clearall
+
+It documents `ufs sethba` which isn't implemented (at least not provided 
+in the help text of the command).
+
+> +Features
+> +--------
+> +
+> +* Query and display Device, Geometry, Unit, Configuration, and Power
+> +  Descriptors.
+> +* Display LUN configuration and calculated capacities.
+> +* Modify LUN, Configuration, and Device Descriptor fields.
+> +* Configure WriteBooster-related parameters.
+> +* Query common UFS runtime flags.
+> +* Commit configuration changes or clear all LUN configurations.
+> +* Decode and format descriptor contents for easier debugging.
+> +* Provision UFS devices using exported Configuration Descriptors.
+> +
+> +The UFS tool header definitions are based on the JEDEC JESD220E
+> +*Universal Flash Storage (UFS) Version 3.1* specification.
+> +
+> +Usage
+> +-----
+> +
+> +Query descriptors::
+> +
+> +    ufs query [lun] [idn]
+> +
+
+This is wrong, lun and idn aren't optional.
+
+> +Descriptor IDs
+> +~~~~~~~~~~~~~~
+> +
+> +::
+> +
+> +    0x00  Device Descriptor
+> +    0x01  Configuration Descriptor
+> +    0x02  Unit Descriptor
+> +    0x07  Geometry Descriptor
+> +    0x08  Power Descriptor
+> +
+
+What do they do.
+
+> +Configure a Logical Unit (LUN)
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +::
+> +
+> +    ufs set_lun <lun> <parameter> <value>
+> +
+> +Supported parameters::
+> +
+> +    lu_enable
+> +    boot_lun_id
+> +    lu_write_protect
+> +    memory_type
+> +    data_reliability
+> +    num_allocunits
+> +    logical_block_size
+> +    provisioning_type
+> +    context_capabilities
+> +    lu_num_write_booster_buffer_allocunits
+> +
+
+What do they do, what are the allowed values.
+
+> +Modify Device Descriptor fields
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +::
+> +
+> +    ufs set_dev_desc <parameter> <value>
+> +
+> +Supported parameters::
+> +
+> +    descriptor_idn
+> +    device
+> +    device_class
+> +    device_sub_class
+> +    number_lu
+> +    boot_enable
+> +    descr_access_en
+> +    init_power_mode
+> +    high_priority_lun
+> +    secure_removal_type
+> +    initactive_icc_level
+> +    queue_depth
+> +    write_booster_buffer_preserve_user_space_en
+> +    write_booster_buffer_type
+> +    spec_version
+> +    manufacturer_id
+> +    periodic_rtc_update
+> +    device_version
+> +    psa_max_data_size
+> +    extended_ufs_features_support
+> +    num_shared_write_booster_buffer_allocunits
+> +
+
+What do they do, what are the allowed values.
+
+> +Modify Configuration Descriptor fields
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +::
+> +
+> +    ufs set_cfg_desc <parameter> <value>
+> +
+> +Supported parameters::
+> +
+> +    length
+> +    descriptor_idn
+> +    conf_desc_continue
+> +    boot_enable
+> +    descr_access_en
+> +    initpower_mode
+> +    high_priority_lun
+> +    secure_removal_type
+> +    init_active_icc_level
+> +    periodic_rtc_update
+> +    reserved_HPB
+> +    rpmb_region_enable
+> +    rpmb_region1_size
+> +    rpmb_region2_size
+> +    rpmb_region3_size
+> +    write_booster_buffer_preserve_user_space_en
+> +    write_booster_buffer_type
+> +    num_shared_write_booster_buffer_allocunits
+> +
+
+What do they do, what are the allowed values.
+
+> +Query UFS flags
+> +~~~~~~~~~~~~~~~
+> +
+> +::
+> +
+> +    ufs getflag <flag_name>
+> +
+> +Supported flags::
+> +
+> +    deviceinit
+> +    permanent_wpe
+> +    pwr_on_wpe
+> +    bkops_en
+> +    life_span_mode
+> +    purge_enable
+> +    fphy_resource_removal
+> +    busy_rtc
+> +    permanently_disable_fw_update
+> +    write_booster_en
+> +    wb_buf_flush_en
+> +    wb_buf_flush_h8
+> +
+
+What do they do, what are the allowed values.
+
+Cheers,
+Quentin
