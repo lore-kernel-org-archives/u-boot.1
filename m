@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F0BC43327
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:46:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46393C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 14:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F29384979;
-	Fri, 26 Jun 2026 16:45:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C83B8497A;
+	Fri, 26 Jun 2026 16:45:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="px9yIwjs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HtRCx2yX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0FF3849E5; Fri, 26 Jun 2026 16:45:50 +0200 (CEST)
-Received: from mail-dl1-x1233.google.com (mail-dl1-x1233.google.com
- [IPv6:2607:f8b0:4864:20::1233])
+ id C3E44849F3; Fri, 26 Jun 2026 16:45:52 +0200 (CEST)
+Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
+ [IPv6:2607:f8b0:4864:20::122f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 536588404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:45:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D65F849C5
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:45:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dl1-x1233.google.com with SMTP id
- a92af1059eb24-139a71baa35so3065938c88.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:45:47 -0700 (PDT)
+Received: by mail-dl1-x122f.google.com with SMTP id
+ a92af1059eb24-139edc6bfc0so5037c88.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:45:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782485146; x=1783089946; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782485148; x=1783089948; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IKlDkATizMtshTsXCe65WrdAFpp7svhGaJJ8ZjtDs8E=;
- b=px9yIwjsCR6YCmxeATpdEuN7bxdku+Axw8vcohvxe5rEGNzDzM0UNzhP6x9HxRenLX
- yJYWMDNNVXi4vl5w8WOwZEWmCwoRTlKCGK6qSxXAS+PTCqTokBthb0JE3MiVkkxnU6XR
- TX3QeQJ8U/8dQ2QH4KC1IVzmXG+A/RMRXRz5TzX4SvE4dZW6RGYUiVyAb/iwYUotIRJ2
- 5hq/RJdkF8S8b302YCvw6D5j52ao28VSzQvp2jgLlV/CPK8w2DGPrz9L6nVrnHyc35Y8
- 5naJBEs7XTQ4O3yzf9QUPfH2xaTMN+b1rqjrJeucnL27wKTGuLNXgILYMCCmneSYoEye
- aFxQ==
+ bh=3lBedHLodvewoIsAc6dMvbiN6nTfjEPBNXL86Vul3K8=;
+ b=HtRCx2yXxt6pFN4m+IPBKC6LR3EPnmO9gzUkSKcdYJXtiIxMARk/lf9Bdh4FxD/xwT
+ 5ZWhgHfn18vI4km624kq2glvDhAWSIkgX8T6ZPhx20jW0UBGfCAdsPeBuBYIKNQ/ICUl
+ 6uz0uL/qAzneYfz9Xo3oc45MtpAio+UZlQXCFL/6JdYsP5d480v0RN9p63WkB0xa1tFT
+ PdDRKcpr/YZsgc5qMHYrExcKEdGjzu3nvah/iPz2R06BJawtjKDm1ucq4mVQaqTGnWoU
+ 2GC53cvmPoZ3OHSHY4aRS4DfBnxrLZi0Zz64k37/7h0hK07WQhJqV8uoK8PsgU7amDbG
+ ZAWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782485146; x=1783089946;
+ d=1e100.net; s=20251104; t=1782485148; x=1783089948;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=IKlDkATizMtshTsXCe65WrdAFpp7svhGaJJ8ZjtDs8E=;
- b=pnQVaGJSjcgajAXCOmKCDfCMP9TCZjn+8zQ9+8e3GBSKHIXNQq1DoCG64BI3yoPEGN
- 3z56Mx5ojsiHCOpwLguxkuez/Leos2r5EV4wq/e1UHYNp0PJn9d54AtftJonbczxppi4
- zieDFeIorTAgLOh+wNrHYmc1yj6vcwmvqgcM9ExrLt51ZO/F0OT91rpzrBL7/aBuYnhk
- saEWDQjiqxsyks/MQx5K8h9wEx2UOaeHibVqEDZK/W8cBHSWNs5L/Hd+hsNn39oX1S1b
- CK9c6lRdMMWAX1PImQkRyYpMoTflTFL8V6TFeo4JiBTGTj2mEXPeRPbPa0qe2NguuwXP
- o/qg==
+ bh=3lBedHLodvewoIsAc6dMvbiN6nTfjEPBNXL86Vul3K8=;
+ b=JeuNv7M5bMa+SoWuYQZpUv0hnpSx2tO5SWO6N1PNGi3BdUMbgNpFdbtZ3wEcY+0tVu
+ X8mHDTQRVFXP1euE4eokneDbcK26hQ3ps/aE+mpEFNcT/Xsq1GK4SqmRJu6xMymZxkZ6
+ kEDiq5pQDJcag9fVzrd/nPCNKInkZYTw023sFZD+mpudlUg4ErL5heO4AmCtsY0BQVw2
+ cHdeM6Ph07jJkHFuVYxSivgd2+S6HRKwr8uWLB/82nt877bHLWOc4iN5Ob/tReImFg7p
+ /Z1ggedP+8pYLmYpJzq0+VvObXrCBdvRjkpa3Y4zICxC+c/cRJyJgGjwGvOJT8ruKDRj
+ b7Xg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9fXCNcbJpD43DUngeD+0W8Q15wXjGfmnmhdy3vXMKN5FFY0JglD6uUBpEvZGVdAQKVaDHk8FY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSBUTr92ntUF2vcK+/j7T5UDaqCa0lhfHtfIb3Gka4Rt/vQ+2j
- hg7HkwOLTMwUarDRPwcrlbZfEMpfSbia8ma2Kmv1WGgNyHl3WNSDRMlhDE4UZg==
-X-Gm-Gg: AfdE7clVIat9pnceJn07jL529yE0tL6nLm3gxhnNmPpVd0UT9FsVobuTLXGLmwgYoD/
- nz68IYTjsM0S0diasd5PWmUNZZoMBe0jx2xA8dcEdtA31AjX9oWZB6oWAehfSulAky/p5pUslBL
- m6RBIllbc8/tQ/USYRYmwmC/E7+dv9c424P6SP8kcpg1nPqjkjWSLXAmDd1Xv6/8AvrAFkKlZIh
- CfA9+ZJQyqJxR1pv4aVAxvUpvANkqVayOV0BQrPawD+hI5/hojWckm9y1ceBIdjMpQ1lJtEI0NB
- lg31WBKr5zk69uU+7YokKhGBqt+7l8heJwUG/MoThQ8heTLjtVgX2kWKge3tSVeH1LjQx1grLCU
- WUw024kBSSFtJzl6z2LaA9lfMfiVs7FcLH+EZv2VRaHgRqEjmJLyufWq9CDl+wXidSZWmAjPBjY
- tYwSJ4O6R3cIvUknjWm+htSaA9+DExBP3qp7j73cZwJzwWrrfGLbj0MWQoATM=
-X-Received: by 2002:a05:7022:390:b0:139:c4e3:9499 with SMTP id
- a92af1059eb24-139db9edd39mr5585803c88.2.1782485145560; 
- Fri, 26 Jun 2026 07:45:45 -0700 (PDT)
+ AFNElJ8cglEdq2PeS7x4xAbDaQ7LfBmDIPdRgT5jiJXP2Qm+0o1Mqrek8q010/UQ0N8Ah5+mKOn5xJw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrkIx/dpggGmzgzIeZ5imIDd6LHpyHJYj7vaMjQgBt78eyPMeJ
+ kzTDj7ErBJqEw1tPpNnUIlKUZVsp0iN4pi20HCAhMlE0wlk6KDmPNI5vsF2dsw==
+X-Gm-Gg: AfdE7cmkH++EVRup96Sz8WthakdwmLnio1VbXHNoJoPaAwLfSiwZ/Y3DNd/omD0oTGb
+ 0KnKvcBhPDed1kqIhFTNOowivdOCNIGK0qHe2kdhf0fwjRL3ISem74kTxEGN6oL2N0SHLz9+xEG
+ q3OI71uPqvA6GxljerysgAAzd/ToZDvbavtVvZW23uKZCKwxepfAbiOuJrjI+Zp5VVeACZGutgJ
+ eFvG9E4NzocFmJszpBQPRKQhnxBL1WePzgvxPrcKD6yWCnLMGyB2I6/rrW0YTArnje4u4suZVt0
+ bvhknhmQoxq+G+wDUp0oLX3ULQu/qN/oVyU/iOGsRxKMaqFiNXBgvQY/TfZZjk66V0XEV3jAWvV
+ NMFhRF/XSUyz+agPdYNU0Tg+BA/jpqPeuc8X7W78/k3U4sB8d61iVO7bzIqD3THQcLZn8kH4wXk
+ jmSzA1PDX0sagPd/J+i9SNqje8W8oZuIPD4bZ9RvnsG1gGIg0AMVEDAXaCnn4=
+X-Received: by 2002:a05:7022:6626:b0:139:8172:76a6 with SMTP id
+ a92af1059eb24-139dbaa5c0fmr5852449c88.1.1782485147996; 
+ Fri, 26 Jun 2026 07:45:47 -0700 (PDT)
 Received: from fabio-Precision-3551..
  ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d9105b57sm18823739c88.14.2026.06.26.07.45.43
+ a92af1059eb24-139d9105b57sm18823739c88.14.2026.06.26.07.45.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 07:45:45 -0700 (PDT)
+ Fri, 26 Jun 2026 07:45:47 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: kever.yang@rock-chips.com
 Cc: djw@t-chip.com.cn, sunil@amarulasolutions.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH 3/5] mtd: spi-nor-ids: Add XMC XM25QH128C
-Date: Fri, 26 Jun 2026 11:45:31 -0300
-Message-ID: <20260626144533.2925490-3-festevam@gmail.com>
+Subject: [PATCH 4/5] roc-pc-plus-rk3399: Introduce new variant
+Date: Fri, 26 Jun 2026 11:45:32 -0300
+Message-ID: <20260626144533.2925490-4-festevam@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260626144533.2925490-1-festevam@gmail.com>
 References: <20260626144533.2925490-1-festevam@gmail.com>
@@ -103,28 +103,77 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-Add the JEDEC ID for the XMC XM25QH128C SPI NOR flash.
+The roc-pc-plus-rk3399 board shares a lot of features with the
+existing supported roc-pc-rk3399 board.
 
-This is a 128Mbit device using 64KiB sectors and supporting 4KiB
-erase, dual read and quad read, matching the other XM25QH128 variants.
+Its devicetree is also supported in the upstream kernel by the
+rockchip/rk3399-roc-pc-plus.dts.
+
+The plus variant has only a 12V supply and different USB circuitry.
+It contains an XMC XM25QH128C SPI NOR flash.
+
+Add support for the roc-pc-plus-rk3399 variant.
 
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 ---
- drivers/mtd/spi/spi-nor-ids.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 9 +++++++++
+ board/firefly/roc-pc-rk3399/MAINTAINERS     | 1 +
+ configs/roc-pc-plus-rk3399_defconfig        | 4 ++++
+ doc/board/rockchip/rockchip.rst             | 3 ++-
+ 4 files changed, 16 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
+ create mode 100644 configs/roc-pc-plus-rk3399_defconfig
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aab..18d61ddd2e33 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -669,6 +669,7 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("XM25QH64A", 0x207017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("XM25QH64C", 0x204017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("XM25QH128A", 0x207018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QH128C", 0x204018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
+new file mode 100644
+index 000000000000..7d5af3e234da
+--- /dev/null
++++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include "rk3399-roc-pc-u-boot.dtsi"
++
++/delete-node/ &vcc_hub_en;
++
++&dc_12v {
++	/delete-property/ vin-supply;
++};
+diff --git a/board/firefly/roc-pc-rk3399/MAINTAINERS b/board/firefly/roc-pc-rk3399/MAINTAINERS
+index 2c0de4432fa8..d32b078431ab 100644
+--- a/board/firefly/roc-pc-rk3399/MAINTAINERS
++++ b/board/firefly/roc-pc-rk3399/MAINTAINERS
+@@ -5,5 +5,6 @@ S:	Maintained
+ F:	board/firefly/roc-pc-rk3399
+ F:	include/configs/roc-pc-rk3399.h
+ F:	configs/roc-pc-rk3399_defconfig
++F:	configs/roc-pc-plus-rk3399_defconfig
+ F:	configs/roc-pc-mezzanine-rk3399_defconfig
+ F:	arch/arm/dts/rk3399-roc-pc*
+diff --git a/configs/roc-pc-plus-rk3399_defconfig b/configs/roc-pc-plus-rk3399_defconfig
+new file mode 100644
+index 000000000000..4ec2f7d44b5f
+--- /dev/null
++++ b/configs/roc-pc-plus-rk3399_defconfig
+@@ -0,0 +1,4 @@
++#include <configs/roc-pc-rk3399_common.config>
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-plus"
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-plus.dtb"
++CONFIG_SPI_FLASH_XMC=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index ae18b08031d2..b87d857a312e 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -81,7 +81,8 @@ List of mainline supported Rockchip boards:
+      - 96boards RK3399 Ficus (ficus-rk3399)
+      - 96boards Rock960 (rock960-rk3399)
+      - Firefly-RK3399 (firefly_rk3399)
+-     - Firefly ROC-RK3399-PC
++     - Firefly ROC-RK3399-PC (roc-pc-rk3399)
++     - Firefly ROC-RK3399-PC Plus (roc-pc-plus-rk3399)
+      - FriendlyElec NanoPC-T4 (nanopc-t4-rk3399)
+      - FriendlyElec NanoPi M4 (nanopi-m4-rk3399)
+      - FriendlyElec NanoPi M4B (nanopi-m4b-rk3399)
 -- 
 2.43.0
 
