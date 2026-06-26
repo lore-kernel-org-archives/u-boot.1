@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB442CDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 07:12:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F504CDE008
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 08:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0604C84894;
-	Fri, 26 Jun 2026 09:12:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AA3928460E;
+	Fri, 26 Jun 2026 10:26:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=maquefel.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l0ViVMLU";
+	dkim=pass (1024-bit key; unprotected) header.d=maquefel.me header.i=@maquefel.me header.b="ioqNPcOr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E36B8495B; Fri, 26 Jun 2026 09:12:10 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6D54884894; Fri, 26 Jun 2026 10:26:45 +0200 (CEST)
+Received: from forward500a.mail.yandex.net (forward500a.mail.yandex.net
+ [178.154.239.80])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E8088460E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 09:12:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABBAC8404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 10:26:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=maquefel.me
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2c818fe1f24so1865925ad.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 00:12:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782457926; x=1783062726; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6NY7CpkeHBX6uGmODvmMFSEBst4ouCVZHp3810tlDH8=;
- b=l0ViVMLU1vS4ppZ377qn4d6b0KKIzbN8Y7v+7seCimtEj+ugoq3ll4l56hCMEEbhvN
- fpDhyiRuCZMa1V/9MHFpntJlkUsnIlhP0OIb5ScDBOuQ3MuU5uXbQbMDdyMsRXfqKzPm
- BwW2pBrcMIiWUbXe8o6EoFiZdD3si1UQCYG4PiUJUcxEJVf2qRfmcXCbT3PCRCk7Hmnm
- 60BNA/FZX4c4NqPandq7b+xJZft2wteAudF/OeQ8VLfw34MizQU9iUVV1uVfC5yNrTaF
- X1vuI1ZfRTMrunkNimGsAdvO6C/TL9PJEBGXStk5OtT93FpfI2WZQWS2TE/lvq/fGZwg
- 6XjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782457926; x=1783062726;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6NY7CpkeHBX6uGmODvmMFSEBst4ouCVZHp3810tlDH8=;
- b=HC+sQlQTTfWzZujVDVFmLpu6AHxb4zQyfmis3QnjVdbDj91BfDdvmkrAlC8eE0Tntx
- NanNgVqWplrGSSmcIeBY4KfXBPMfj/ObgpsRtLnRmZ9VkZbtEOhpRXLvj5kIH+Qt7DWu
- OuiWzM2rQzQHMathwFrK4WuBlp3ZBiCKW+AwvAzkMh26zkoeMo6L6BSkeT5eBvOLrun1
- ww6CMAbP5MVZ8HCmVufBYxV6J0Q4TRJco3P0Uy0H2wO8g2hHFgkk3h6t+9n+WsYs1Ubm
- rwSOSkgpDQ0apE98fMKQ2UYZqHuFj3RkfXJWWuQCS+16AlGJZCCdDX7Ctl+afQ0QH3KX
- YdDw==
-X-Gm-Message-State: AOJu0Ywoo6dMT+Nga/zsk3k9QV+3btFJ0KXH7uGGMmIMxcFPm2A/gYeB
- s+6TtXy85n40HL41DetY8rR8BEewcyT+07fNZ4DwtlozGtsnZSRxNjFr
-X-Gm-Gg: AfdE7ckSZHuibtq1aFgaBbc3JCZyJd2RUUiVBzOtJCei9yZuBhldbeVpg4ZlnW92YzM
- nuDcCJqoojUXtTqarLDXsFWFy8FrpGtWV3/4y8HaKOiXNuNNwwyR7wr8gnr+Cu88CSBqF9ReHAh
- 6+hMsgdggvPtaPUUds7GeFFir0oHkKcw2JFWvYJ8+zi85r1O+QzQUtvroivhdX6aspOBTNQhoS+
- U4ndLMrQy0DjgXKUI+XxpEYGCN8USYwXLKp7NHkCgf9LDUfsyhsehJd2xP000Ogn4s9tnuJLwRA
- jp9IHj5w/iLNfFow7FAMjHttrVX3CrjAc2+oGH/o+UeTn8ZEkUp+77dg26xbTEr86BxpJJxmgvU
- yqbyYCsoFoRCX8DHlyJvTooY/Skz2UqgCk3NrbDGbtsXdanwztTT/1CjJYxuGEYhQtqRLyYhtkf
- yThv+syAr87kZK5EkCsW5s6cCpwEtnhwZyaT2IkjSEVBfpB8y/ZOl42nTjg9o=
-X-Received: by 2002:a17:902:db04:b0:2c6:6425:b343 with SMTP id
- d9443c01a7336-2c7fcea7db4mr40033415ad.6.1782457926439; 
- Fri, 26 Jun 2026 00:12:06 -0700 (PDT)
-Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:9fca:1cb8:c40a:c2e1])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c7f5ac88cfsm35015145ad.2.2026.06.26.00.12.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 00:12:06 -0700 (PDT)
-From: Chris Packham <judge.packham@gmail.com>
-To: stefan.roese@mailbox.org,
-	trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	Chris Packham <judge.packham@gmail.com>
-Subject: [PATCH] arm: mach-mvebu: Add more AC3 & PC3 variants
-Date: Fri, 26 Jun 2026 19:11:56 +1200
-Message-ID: <20260626071156.3129812-1-judge.packham@gmail.com>
-X-Mailer: git-send-email 2.54.0
+ spf=pass smtp.mailfrom=nikita.shubin@maquefel.me
+Received: from mail-nwsmtp-smtp-production-main-81.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-81.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c15:3388:0:640:154:0])
+ by forward500a.mail.yandex.net (Yandex) with ESMTPS id C407FC1366;
+ Fri, 26 Jun 2026 11:26:41 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-81.vla.yp-c.yandex.net (smtp)
+ with ESMTPSA id bQVmcTIqTeA0-uxvb13Eh; 
+ Fri, 26 Jun 2026 11:26:40 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
+ t=1782462400; bh=xxKs+2ocwgMStYAo08kal8clc2AmjGdipUNEoXoYNlQ=;
+ h=References:Date:In-Reply-To:Cc:To:From:Subject:Message-ID;
+ b=ioqNPcOrGCHGxSWyx6oAPFzaQ3IK9B8I/H5jXuWrC1CyFTw+gsXDdMUpgzdpoIP7Q
+ pHdIl+FHdLTsads4uif+2qvEPMrAALWHubT3jew+yf65hAH4KyqHacGAs16VdIWlPq
+ Nm07jSgOpORf75BeH59QogIUm8wUHRvIOf7dK0gw=
+Authentication-Results: mail-nwsmtp-smtp-production-main-81.vla.yp-c.yandex.net;
+ dkim=pass header.i=@maquefel.me
+Message-ID: <265dbef886c0cd6f8402101c1913a7a792e5388b.camel@maquefel.me>
+Subject: Re: [PATCH RFC 2/2] spl: opensbi: fix OS image address retrieval
+ from FIT
+From: Nikita Shubin <nikita.shubin@maquefel.me>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Quentin Schulz	
+ <quentin.schulz@cherry.de>, James Hilliard <james.hilliard1@gmail.com>, 
+ Julien Stephan <jstephan@baylibre.com>, David Lechner
+ <dlechner@baylibre.com>, Frank Wunderlich	 <frank-w@public-files.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>, Rasmus Villemoes <ravi@prevas.dk>, Anshul
+ Dalal	 <anshuld@ti.com>, Michael Walle <mwalle@kernel.org>,
+ =?ISO-8859-1?Q?Jo=E3o?= Marcos Costa <joaomarcos.costa@bootlin.com>, Dhruva
+ Gole <d-gole@ti.com>, Richard Genoud	 <richard.genoud@bootlin.com>, Miquel
+ Raynal <miquel.raynal@bootlin.com>
+Date: Fri, 26 Jun 2026 11:26:41 +0300
+In-Reply-To: <CAFLszTgi=hWWoEZVx9iKprQ6xkMb=8F115m-hW=bcqR2sJGBZQ@mail.gmail.com>
+References: <20260619-riscv-full-fit-image-support-v1-0-c6477cf4f410@maquefel.me>
+ <20260619-riscv-full-fit-image-support-v1-2-c6477cf4f410@maquefel.me>
+ <CAFLszTgi=hWWoEZVx9iKprQ6xkMb=8F115m-hW=bcqR2sJGBZQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,79 +83,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add IDs for more of the Alleycat3 and Poncat3 variants. This makes the
-SoC information at boot say something other than "Unknown-??".
+On Thu, 2026-06-25 at 11:58 +0100, Simon Glass wrote:
+> Hi Nikita,
+>=20
+> On 2026-06-19T12:52:56, Nikita Shubin <nikita.shubin@maquefel.me>
+> wrote:
+> > spl: opensbi: fix OS image address retrieval from FIT
+> >=20
+> > The current implementation of spl_invoke_opensbi() attempts to
+> > locate
+> > the next-stage OS (U-Boot proper or Linux) by parsing the FDT blob
+> > pointed to by spl_image->fdt_addr. This FDT, however, is the one
+> > that
+> > will be passed to the OS (e.g. a kernel device tree), not the FIT
+> > image
+> > itself. As a result, when a FIT image containing multiple
+> > components
+> > (firmware, loadables, fdt) is loaded, U-Boot SPL cannot find the OS
+> > node
+> > because it searches in the wrong FDT.
+> >=20
+> > Fix this by storing the load addresses of U-Boot and Linux in
+> > spl_image_info during the loadables phase (spl_load_fit_image()).
+> > In spl_invoke_opensbi(), use these stored addresses if they are
+> > non-zero, and fall back to parsing the FDT only if no address is
+> > stored,
+> > maintaining backward compatibility.
+> >=20
+> > This ensures that the correct entry point is passed to OpenSBI,
+> > allowing proper boot flow with FIT images.
+> >=20
+> > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+> >=20
+> > common/spl/spl_fit.c=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 8 ++++++++
+> > =C2=A0common/spl/spl_opensbi.c | 33 +++++++++++++++++++--------------
+> > =C2=A0include/spl.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 |=C2=A0 8 ++++++++
+> > =C2=A03 files changed, 35 insertions(+), 14 deletions(-)
+>=20
+> > diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> > @@ -1020,6 +1020,14 @@ int spl_load_fit_image(struct spl_image_info
+> > *spl_image,
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &img_data, &im=
+g_len);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 if (ret < 0)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+> > +
+> > +#if CONFIG_IS_ENABLED(OPENSBI)
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 if (fit_image_check_os((const void *)header, ret,
+> > IH_OS_LINUX))
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spl_image->kernel_addr =
+=3D img_data;
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 if (fit_image_check_os((const void *)header, ret,
+> > IH_OS_U_BOOT))
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spl_image->uboot_addr =
+=3D img_data;
+> > +#endif
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>=20
+> I don't like this approach. The real reason spl_invoke_opensbi()
+> fails
 
-Signed-off-by: Chris Packham <judge.packham@gmail.com>
----
- arch/arm/mach-mvebu/cpu.c              | 24 ++++++++++++++++++++++++
- arch/arm/mach-mvebu/include/mach/soc.h |  6 ++++++
- 2 files changed, 30 insertions(+)
+Neither do I. That's the reason for RFC.
 
-diff --git a/arch/arm/mach-mvebu/cpu.c b/arch/arm/mach-mvebu/cpu.c
-index da44727cf4f5..a1eb6927c3e0 100644
---- a/arch/arm/mach-mvebu/cpu.c
-+++ b/arch/arm/mach-mvebu/cpu.c
-@@ -276,9 +276,27 @@ int print_cpuinfo(void)
- 	case SOC_88F6828_ID:
- 		puts("MV88F6828-");
- 		break;
-+	case SOC_98DX3233_ID:
-+		puts("98DX3233-");
-+		break;
-+	case SOC_98DX3234_ID:
-+		puts("98DX3234-");
-+		break;
-+	case SOC_98DX3235_ID:
-+		puts("98DX3235-");
-+		break;
- 	case SOC_98DX3236_ID:
- 		puts("98DX3236-");
- 		break;
-+	case SOC_98DX3333_ID:
-+		puts("98DX3333-");
-+		break;
-+	case SOC_98DX3334_ID:
-+		puts("98DX3334-");
-+		break;
-+	case SOC_98DX3335_ID:
-+		puts("98DX3335-");
-+		break;
- 	case SOC_98DX3336_ID:
- 		puts("98DX3336-");
- 		break;
-@@ -337,7 +355,13 @@ int print_cpuinfo(void)
- 		}
- 		break;
- 
-+	case SOC_98DX3233_ID:
-+	case SOC_98DX3234_ID:
-+	case SOC_98DX3235_ID:
- 	case SOC_98DX3236_ID:
-+	case SOC_98DX3333_ID:
-+	case SOC_98DX3334_ID:
-+	case SOC_98DX3335_ID:
- 	case SOC_98DX3336_ID:
- 	case SOC_98DX4251_ID:
- 		switch (revid) {
-diff --git a/arch/arm/mach-mvebu/include/mach/soc.h b/arch/arm/mach-mvebu/include/mach/soc.h
-index 495530d84522..33fdfd6d6c1b 100644
---- a/arch/arm/mach-mvebu/include/mach/soc.h
-+++ b/arch/arm/mach-mvebu/include/mach/soc.h
-@@ -21,7 +21,13 @@
- #define SOC_88F6810_ID		0x6810
- #define SOC_88F6820_ID		0x6820
- #define SOC_88F6828_ID		0x6828
-+#define SOC_98DX3233_ID		0xf413
-+#define SOC_98DX3234_ID		0xf412
-+#define SOC_98DX3235_ID		0xf411
- #define SOC_98DX3236_ID		0xf410
-+#define SOC_98DX3333_ID		0xf403
-+#define SOC_98DX3334_ID		0xf402
-+#define SOC_98DX3335_ID		0xf401
- #define SOC_98DX3336_ID		0xf400
- #define SOC_98DX4251_ID		0xfc00
- 
--- 
-2.54.0
+> in the LOAD_FIT_FULL path is that nothing populates the /fit-images
+> node in the outgoing FDT - the simple FIT loader does this via
+> spl_fit_record_loadable() / fdt_record_loadable(), and spl_opensbi.c
+> then walks it.
+>=20
+> I think it would be better to fix it that way: call
+> fdt_record_loadable() for each loadable (and for the firmware/fdt) so
+> the OS DT carries /fit-images just like in the simple-FIT case. Then
+> spl_invoke_opensbi() needs no changes, ATF gets the same fix for
+> free,
+> and we avoid carving out RISC-V/OpenSBI-specific fields in struct
+> spl_image_info...I wonder if you are deliberately wanting the
+> simple-FIT case to be different? If so can you please explain why?
 
+Nope - i don't want it to be different at all. Thank you for tips -
+i'll look into implementing a cleaner approach.
+
+>=20
+> If you do want to cache the addresses on spl_image_info, drop the
+> OPENSBI-specific naming and guards - the loadables loop has no
+> business knowing about OpenSBI, and the fields should be filled in
+> both spl_load_simple_fit() and spl_load_fit_image() for consistency.
+
+Agreed.
+
+>=20
+> > diff --git a/include/spl.h b/include/spl.h
+> > @@ -288,6 +292,10 @@ struct spl_image_info {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ulong entry_point;
+> > =C2=A0#if CONFIG_IS_ENABLED(LOAD_FIT) ||
+> > CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void *fdt_addr;
+> > +#if CONFIG_IS_ENABLED(OPENSBI)
+> > +=C2=A0=C2=A0=C2=A0=C2=A0 ulong uboot_addr;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0 ulong kernel_addr;
+> > +#endif
+> > =C2=A0#endif
+>=20
+> Nesting OPENSBI inside LOAD_FIT is fragile - if anyone enables
+> SPL_OPENSBI without SPL_LOAD_FIT these fields silently vanish while
+> spl_opensbi.c still references them. At minimum the guards should
+> match spl_opensbi.c.
+>=20
+> Also, uboot_addr here is the load address of the loadable, but the
+> existing spl_invoke_opensbi() prefers the entry point
+> (fit_image_get_entry()), falling back to the load address. Storing
+> only the load address is a behavioural change for images that set an
+> explicit entry property - please mention this in the commit message,
+> or store entry_point instead.
+>=20
+> > diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
+> > @@ -81,22 +81,27 @@ void __noreturn spl_invoke_opensbi(struct
+> > spl_image_info *spl_image)
+> > -=C2=A0=C2=A0=C2=A0=C2=A0 if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOO=
+T))
+> > +=C2=A0=C2=A0=C2=A0=C2=A0 if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOO=
+T)) {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 os_type =3D IH_OS_LINUX;
+> > -=C2=A0=C2=A0=C2=A0=C2=A0 else
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 os_entry =3D spl_image->kernel_addr;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 os_type =3D IH_OS_U_BOOT;
+> > -
+> > -=C2=A0=C2=A0=C2=A0=C2=A0 ret =3D spl_opensbi_find_os_node(spl_image->f=
+dt_addr, &os_node,
+> > os_type);
+> > -=C2=A0=C2=A0=C2=A0=C2=A0 if (ret) {
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 pr_err("Can't find %s node for opensbi, %d\n",
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 genimg_get_os_name(os_type), =
+ret);
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 hang();
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 os_entry =3D spl_image->uboot_addr;
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>=20
+> Using 0 as a sentinel for "no cached address" is dodgy - a load
+> address of 0 is unusual but not impossible, and silently falling
+> through to FDT parsing is hard to debug. A separate bool would be
+> cleaner, or better, record loadables into the FDT as suggested above.
+
+Noted. I think most of these issues (if not all) will be resolved by
+taking  spl_fit_record_loadable()/fdt_record_loadable() cleaner
+approach.
+
+Thank you!
+
+Yours,
+Nikita.
+
+>=20
+> Regards,
+> Simon
