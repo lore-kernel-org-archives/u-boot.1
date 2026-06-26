@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B582CC43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF129C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 043D084704;
-	Fri, 26 Jun 2026 17:42:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CA288496E;
+	Fri, 26 Jun 2026 17:42:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gtv9X3Wc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PIximi4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ECC384894; Fri, 26 Jun 2026 17:42:26 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id C6B5984979; Fri, 26 Jun 2026 17:42:52 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DE3B8404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:42:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB13E8404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:42:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-46db1eb3100so188372f8f.1
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 08:42:24 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so8101375e9.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 08:42:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782488543; x=1783093343; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782488570; x=1783093370; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OKqoUSJ9S4aExHC4v7AwC6Gq2KFqvVDX3ULZxr75wdc=;
- b=Gtv9X3WcGGb+3jYJt/4cemctOZCF/3S4iVDgYLWXBfVWil7eUaZhKuw2rr+Yp9yO/F
- N+bilIAZYSlc/xnobXpWDC+uF4FxWPeRcwbwZp+mLYjIEs+v0v6Y+lUAiABvM+B5jk/i
- oxruTRzRf9/I7wOXtCDaWGCu7a+21G1l8tZyRnlt5CQr4c3LX1Cx9QENmM64yLZ8z+wf
- 8ykI4zmvya/x2Ewlxqmv7RWtTqoeg+bMkU7cCfmx9uvf4vj+O6ClsKBzBXO4RnpXQMI+
- PFEZJibO8cQvQnQ53DH9Ttd4DrLI0ByG55VOGUAPS+xBoWKUx7/PaR6OUv0Vk/0Ot/5O
- 8ndA==
+ bh=aj2TNHV7Z4SwaHbc26FN2IPXqmkxDPvwBynrMFWySwQ=;
+ b=PIximi4iuHcvjWtF9UPup63ckx1GPp0jynO0luDHa+FOXqU4uwWDSkc2R3ek8SmGka
+ Huh0Rpdgs6AuVnIYmJVZNW8xl2enBU9FaCIGbr841ZHgf6V5IJ1N1Paer4O7+UxcxG1n
+ UjZY2pkPJHP7sVRZxVLH8fwqjJCC5WG/A3E35hnawV8yBnFCIDDQeYBOfp3cgoXjasgN
+ oONr90kzcUDtODAUu+zCupLWA5qx3TKTHHxS7c5z0PdS3KlFjWpFl8OMZwylRqNrBGW8
+ 3n1GqctZodC/SppRoa+yS179gUCE0gqTX1TPHt4GqaxDTO/Ehrq8HoCnzHG5mDyBqcZ2
+ Jxmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782488543; x=1783093343;
+ d=1e100.net; s=20251104; t=1782488570; x=1783093370;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OKqoUSJ9S4aExHC4v7AwC6Gq2KFqvVDX3ULZxr75wdc=;
- b=cdcYfqTsxXhABr8O1/m34GuI2PJA0dY9ANQF/JQMyL3Q+j1SZipmAAkXvZPBKhiBms
- a0Wtp9nrZkjrnAeb/AE0v9f5m1lVcmfsFguRwZ/xNyUWtVWDj3b+bUI4O0qTweGmGUK4
- GdSxB3H8MNpyAOTrccuhPxSrLepipKTIuiOTgIE+j4Ee30krhjuQLeHpNDcUErOoN6/u
- KUFmjNdki9AIzxrit8sV7ZQeKFC2ZdVVT+0MoFo1B6r1lHEWd0GNSSH8bBXNSFfzXsYa
- lxF5Sa1OpguElPPxMjSfv/+ilwAf6BWMkdaVY5UIBzBGbCfrak6+bvnhQTJGpQwHJLX0
- MnPg==
+ bh=aj2TNHV7Z4SwaHbc26FN2IPXqmkxDPvwBynrMFWySwQ=;
+ b=dLgFM+SW2rcFePA5jyPlzmKmLBemiPkfWwCQtSPvujkR2ujGRt+q7q8VIEPECoFlFA
+ 2PVNaRi2XUyBcd16NGz3y09T0bTeY8pV9AEtTc+jqJJrzz1qvYciX9tsb5H8Xe7UCLo9
+ CxDT7/RbRcUHfrjKvOsSKr8AzWWBwfnihX5KeUxA7A4oDyilmJwS1iUoZbdOzeeHneFk
+ rKxV3+KygJ6WoUKupRXA2rcXOkcy18lZyMrbkDvlY/iVRuroCGubR8YEu9y0+6Q/v3hi
+ 7SYc34iV5jiFNMHWQIyz0/u9pI7x4a47IWGjRV9R+h+G2e9f0qwIUVcJ9WSTRvroFcnJ
+ ySCw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrUGG2PcH/4ow3k9I1qcq69OkwOiPQ/YdVB4QcZCuuhUMbsGrC5Zn6012p3rLNV5q4+lRIuymY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdYHMYmy97689KjW6+ACB+6L/+jHhE5xu3rNTF56F1iMp0zekV
- 10JxuUNCBhzwdN3PqRrBsqnXDSxL5kaTeWVB/YjxfH4vg+b1EuKuTXK47MAb3HprCnQ=
-X-Gm-Gg: AfdE7ckVF9jikhllYDJYSBXbozwpyufiDv7gFo/CuB8Us0/CYg3gVmrneoywf4d0bAX
- K6gYW/TKR5giyPuTu68HDogU8EH5g9l0yd0/jAVvoouW3Ja8YYVUjuZwGHFPQpHYYjroiLW3P+q
- BTxH4TjmCFD+ivfZfL1A88nBfckB4Ht9vYGap3/IhAJGYpqqBtyEp8ChKP/12jbs1pwIrIH73RR
- A3FQvqRYjV+EUhTOTjDsysRe/YogsQwcxoTyiKKqHugNYpTpPJZo2eD+ZGKPDUdIVZDuH24REr8
- D5RDdZtLHjHHMqvF+wFJm21zM0FFqY1ai7AgbHa/NxUi0G+f+PZqgND9jGNjo5nstrMsfSkXhBq
- XWlumN+DxlogiGYrmUutfI8PzizSev7oCztrPiWq1ewsU6bU7DZd9YFE9z0zW7pDd8TBWqyV+w1
- Pa29X4jPNN2Mr4o3TaewKiMn4bboc4MdLPWbjHiY8tm2DsSVwJYzz/CiSXqw==
-X-Received: by 2002:a5d:5d0b:0:b0:460:1223:a044 with SMTP id
- ffacd0b85a97d-46dbc3abd1amr11643393f8f.0.1782488543555; 
- Fri, 26 Jun 2026 08:42:23 -0700 (PDT)
+ AFNElJ941UoUSLY+hAkkYH9hG+q82P50wQvX0m5UErVnJrCxGIo8NkxS/wcTA2tnbx1WGi764sAjDf4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfQWRl3SjsbvZdPkjhk6H3vdui+YEr9D5E5fxEb42A9Mvu2dGc
+ /r1fDJCqxycKm4tY/O5MRxuQsalPIBBpjNPAu7NvSoWIdYTLJwoYbCR5jopbw3K0Tyk=
+X-Gm-Gg: AfdE7cl0+WlCCFXjudEZ5AR1qkNV8gRvRI6pklYlytc7UqTP9ynjxYlegFPHssejjix
+ 3Vg7+QKrfDP+JQeAsEkytfSsOwwDpa1vIyMEmgmHhNDmsci5n8oizJOl0i0rm/sWfk/L3HbJSCm
+ QAgIqxRkJBz9KzWbLm8aY6PDFcGUhglBAclP2xtCHa9QT8rlnhrULiN/Tnc6V0tXGtokX/n6cZ5
+ KohSUkq51G2G3Xsd2+srzMqHZoIW7qFI5xVAjN3tNHvQGmFOXtzCBL687nmylMUoT7ItK2ZEdZt
+ fZCyTpVs2lt27RNpKxszq/o8nEICekZHX30sALERrCMUQASMjWBAEYXM8qts6hBrnGapZzhZKMR
+ tw2fZhJ7Y0n0noTjiM3fdL0o3U5Eo73gOVMv8NGcjmyBYXi21WDXgTD3bpxrJuR8jrKdwm7IZm+
+ 6Oq8d6xeyt8n2epuNJMgR7V5/7TwXxVV6CTKGSUnFDhreq3J/j1GY2ewU1sEAV0AkaxftO
+X-Received: by 2002:a05:600c:c1d7:10b0:492:4667:8c40 with SMTP id
+ 5b1f17b1804b1-492668638c1mr88075725e9.8.1782488570301; 
+ Fri, 26 Jun 2026 08:42:50 -0700 (PDT)
 Received: from [192.168.1.39] (159.89.222.87.dynamic.jazztel.es.
  [87.222.89.159]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46efd7ee1c7sm8884933f8f.14.2026.06.26.08.42.22
+ 5b1f17b1804b1-492692d5149sm87519555e9.9.2026.06.26.08.42.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jun 2026 08:42:22 -0700 (PDT)
-Message-ID: <b187c8fa-1667-47ed-abda-b63a579b68c5@linaro.org>
-Date: Fri, 26 Jun 2026 17:42:21 +0200
+ Fri, 26 Jun 2026 08:42:49 -0700 (PDT)
+Message-ID: <fc60aac4-7af0-48fe-8aa8-1f7fb8815e06@linaro.org>
+Date: Fri, 26 Jun 2026 17:42:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] clk/qcom: milos: Add remaining UFS clocks
+Subject: Re: [PATCH 2/2] clk/qcom: milos: Add TCSRCC clocks
 To: Luca Weiss <luca.weiss@fairphone.com>, Sumit Garg
  <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20260625-milos-ufs-fix-v1-0-b0923dabc35f@fairphone.com>
- <20260625-milos-ufs-fix-v1-1-b0923dabc35f@fairphone.com>
+ <20260625-milos-ufs-fix-v1-2-b0923dabc35f@fairphone.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260625-milos-ufs-fix-v1-1-b0923dabc35f@fairphone.com>
+In-Reply-To: <20260625-milos-ufs-fix-v1-2-b0923dabc35f@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,33 +109,96 @@ X-Virus-Status: Clean
 
 On 6/25/26 15:14, Luca Weiss wrote:
 > With a recent change to the UFS driver, now all clocks need to be
-> available. Add them.
+> available. Add all the clocks from the TCSRCC block on Milos.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 
 Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
 > ---
->   drivers/clk/qcom/clock-milos.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   drivers/clk/qcom/clock-milos.c | 66 ++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 66 insertions(+)
 > 
 > diff --git a/drivers/clk/qcom/clock-milos.c b/drivers/clk/qcom/clock-milos.c
-> index afe59108559..571cd134f1c 100644
+> index 571cd134f1c..54103adc114 100644
 > --- a/drivers/clk/qcom/clock-milos.c
 > +++ b/drivers/clk/qcom/clock-milos.c
-> @@ -98,6 +98,13 @@ static const struct gate_clk milos_clks[] = {
->   	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x39028, BIT(0)),
->   	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x39024, BIT(0)),
->   	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x3908c, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x77018, BIT(0)),
-> +	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x770e4, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77024, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77068, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77028, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x7702c, BIT(0)),
-> +	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,		0x770cc, BIT(0)),
->   };
+> @@ -15,6 +15,7 @@
+>   #include <linux/bitops.h>
+>   #include <dt-bindings/clock/qcom,milos-gcc.h>
+>   #include <dt-bindings/clock/qcom,rpmh.h>
+> +#include <dt-bindings/clock/qcom,sm8650-tcsr.h>
 >   
->   static int milos_enable(struct clk *clk)
+>   #include "clock-qcom.h"
+>   
+> @@ -201,3 +202,68 @@ U_BOOT_DRIVER(milos_rpmh_clk) = {
+>   	.ops		= &milos_rpmh_clk_ops,
+>   	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>   };
+> +
+> +/* TCSRCC */
+> +
+> +static const struct gate_clk milos_tcsr_clks[] = {
+> +	GATE_CLK(TCSR_PCIE_0_CLKREF_EN,		0x31100, BIT(0)),
+> +	GATE_CLK(TCSR_PCIE_1_CLKREF_EN,		0x31114, BIT(0)),
+> +	GATE_CLK(TCSR_UFS_CLKREF_EN,		0x31118, BIT(0)),
+> +	GATE_CLK(TCSR_UFS_PAD_CLKREF_EN,	0x31104, BIT(0)),
+> +};
+> +
+> +static struct msm_clk_data milos_tcsrcc_data = {
+> +	.clks = milos_tcsr_clks,
+> +	.num_clks = ARRAY_SIZE(milos_tcsr_clks),
+> +};
+> +
+> +static int tcsrcc_milos_clk_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	qcom_gate_clk_en(priv, clk->id);
+> +
+> +	return 0;
+> +}
+> +
+> +static ulong tcsrcc_milos_clk_get_rate(struct clk *clk)
+> +{
+> +	return TCXO_RATE;
+> +}
+> +
+> +static int tcsrcc_milos_clk_probe(struct udevice *dev)
+> +{
+> +	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
+> +	struct msm_clk_priv *priv = dev_get_priv(dev);
+> +
+> +	priv->base = dev_read_addr(dev);
+> +	if (priv->base == FDT_ADDR_T_NONE)
+> +		return -EINVAL;
+> +
+> +	priv->data = data;
+> +
+> +	return 0;
+> +}
+> +
+> +static struct clk_ops tcsrcc_milos_clk_ops = {
+> +	.enable = tcsrcc_milos_clk_enable,
+> +	.get_rate = tcsrcc_milos_clk_get_rate,
+> +};
+> +
+> +static const struct udevice_id tcsrcc_milos_of_match[] = {
+> +	{
+> +		.compatible = "qcom,milos-tcsr",
+> +		.data = (ulong)&milos_tcsrcc_data,
+> +	},
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(tcsrcc_milos) = {
+> +	.name		= "tcsrcc_milos",
+> +	.id		= UCLASS_CLK,
+> +	.of_match	= tcsrcc_milos_of_match,
+> +	.ops		= &tcsrcc_milos_clk_ops,
+> +	.priv_auto	= sizeof(struct msm_clk_priv),
+> +	.probe		= tcsrcc_milos_clk_probe,
+> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
 > 
 
