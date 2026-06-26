@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 361B8C43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 21:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EF4C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 21:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43EFB849EE;
+	by phobos.denx.de (Postfix) with ESMTP id 97F54849FB;
 	Fri, 26 Jun 2026 23:20:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="k9AUrs8A";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="OsNG5G50";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F224884105; Fri, 26 Jun 2026 22:17:43 +0200 (CEST)
+ id 690BB84105; Fri, 26 Jun 2026 22:17:53 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14B7383FEE
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 22:17:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 005A783FEE
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 22:17:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6300e006a=Charles.Perry@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1782505061; x=1814041061;
+ t=1782505069; x=1814041069;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=lVE+BD9YqM2zkxCcJ/h3javzbuODscxF6lKqAfNnC6g=;
- b=k9AUrs8AScgaXZOC4uA0Ay/x2SiG4qPhHz98jdAvkEDrMebhecHeHkrT
- a5tFZ8fxCqNoHe6NVzmZH2JayabgGxJ3Kq9PkjD2453BgdLlpNoTI198b
- JrSr06c0Q2Mcno3Bp+Rq6xR4GkB9jeulzGA9/cEMFMmV+qivT1raT5S1p
- sBa04SyX+rsV7h1hCSVATaKqbl9bwDhgANn8DlsWBMplyJrIMaVnCRxCY
- g8D0wOzTj8WlOGZHfRw4DXe5vPh/B48ulSylLCGtwlYcWE5qSdArGiDOo
- dtklFNA4nVmHd9EnPJxuhCncsx5xXSedIU8d5Y0WNIOg2UW/Uv63LzmnH w==;
-X-CSE-ConnectionGUID: cVeUz46+Swy/llcUvVy4hw==
-X-CSE-MsgGUID: mVav5+coSk+il0Gr4d5OxA==
-X-IronPort-AV: E=Sophos;i="6.24,227,1774335600"; d="scan'208";a="60102578"
+ bh=jGQisSZFxCVkcGelDAQ4lzEi5M//r22tIYaR5xZvvTI=;
+ b=OsNG5G50sTn37aPjLRZ4s26vZ3eZXo3km73LkxG9fCinXCnMZQjbe5Uz
+ RjecBpMt52UepRRkfVU0PqSrGk2NNbNlrTjsXNNzXUXJlvVtdrWOVIAdJ
+ ZZQaBnA1aAco+ZnB4aVjMb6NKAIODqSMxHiGV/6wXPfVpO/mTqfREALBw
+ 0yqCraTDrbqaG70Xi6R6esGJxy8lkbJ9xwTDkbd/ttDOc/NLia6GSLcEv
+ x7zAn055Ezl4nq0Pggphf3URU6WSM3Ol72PFr1HL2amZZedFXfKbgvywQ
+ Ye/xRffQCuuqCjzKUXCWkSwWHCClbaSUYqLodrSNYfDB7Flq/qoLWy2yg Q==;
+X-CSE-ConnectionGUID: u2aENTAITI+imMDVFCtctw==
+X-CSE-MsgGUID: BmS87ZRRQJq8dyRtxrwWqQ==
+X-IronPort-AV: E=Sophos;i="6.24,227,1774335600"; d="scan'208";a="68970186"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 26 Jun 2026 13:17:39 -0700
+ by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 26 Jun 2026 13:17:47 -0700
 Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Fri, 26 Jun 2026 13:17:38 -0700
+ 15.1.2507.58; Fri, 26 Jun 2026 13:17:47 -0700
 Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Fri, 26 Jun 2026 13:17:23 -0700
+ 15.1.2507.58 via Frontend Transport; Fri, 26 Jun 2026 13:17:45 -0700
 From: Charles Perry <charles.perry@microchip.com>
 To: <u-boot@lists.denx.de>
 CC: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
  Charles Perry <charles.perry@microchip.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, "Neil
- Armstrong" <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, "Kory
- Maincent" <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Stefan Roese <stefan.roese@mailbox.org>, "Jerome
- Forissier" <jerome.forissier@arm.com>, Philip Molloy
- <philip.molloy@analog.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- "Casey Connolly" <casey.connolly@linaro.org>, Balaji Selvanathan
- <balaji.selvanathan@oss.qualcomm.com>, Alif Zakuan Yuslaimi
- <alif.zakuan.yuslaimi@altera.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Marek Vasut
- <marek.vasut@mailbox.org>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: [PATCH 5/7] drivers: power: add support for RPMI power domains
-Date: Fri, 26 Jun 2026 13:15:46 -0700
-Message-ID: <20260626201613.1035208-6-charles.perry@microchip.com>
+ Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>, "Yao
+ Zi" <me@ziyao.cc>, Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ "Stefan Roese" <stefan.roese@mailbox.org>, Jerome Forissier
+ <jerome.forissier@arm.com>, Philip Molloy <philip.molloy@analog.com>,
+ "Mattijs Korpershoek" <mkorpershoek@kernel.org>, Marek Vasut
+ <marek.vasut@mailbox.org>, Heiko Schocher <hs@nabladev.com>, Rasmus Villemoes
+ <ravi@prevas.dk>, "Martin Schwan" <m.schwan@phytec.de>, Lucien.Jheng
+ <lucienzx159@gmail.com>, "Michal Simek" <michal.simek@amd.com>, Pieter Van
+ Trappen <pieter.van.trappen@cern.ch>, Dinesh Maniyam
+ <dinesh.maniyam@altera.com>, Mateusz Furdyna <mateusz.furdyna@nokia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH 6/7] firmware: rpmi: add a test and a sandbox driver
+Date: Fri, 26 Jun 2026 13:15:47 -0700
+Message-ID: <20260626201613.1035208-7-charles.perry@microchip.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260626201613.1035208-1-charles.perry@microchip.com>
 References: <20260626201613.1035208-1-charles.perry@microchip.com>
@@ -94,326 +95,844 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RISC-V Platform Management Interface (RPMI) defines the device power
-service group [1] that is used to control power domains. This is used to
-implement a UCLASS_POWER_DOMAIN driver.
+Create a new transport layer that sends the messages to a simulated RPMI
+firmware.
 
-[1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 4.9)
+For now, this only contains a simulation of the clock service group
+which is implemented using code from librpmi [1] and adapted.
+
+Also add a test in test/dm that makes use of the RPMI clock driver.
+
+[1]: https://github.com/riscv-software-src/librpmi/blob/3f3c4ca47339a8795432e260f17e1fc5091c9a3a/lib/rpmi_service_group_clock.c
 
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
- MAINTAINERS                              |   1 +
- drivers/power/domain/Kconfig             |   7 +
- drivers/power/domain/Makefile            |   1 +
- drivers/power/domain/rpmi-power-domain.c | 229 +++++++++++++++++++++++
- include/rpmi_proto.h                     |  18 ++
- 5 files changed, 256 insertions(+)
- create mode 100644 drivers/power/domain/rpmi-power-domain.c
+ MAINTAINERS                                |   1 +
+ arch/sandbox/dts/test.dts                  |  12 +
+ configs/sandbox_defconfig                  |   2 +
+ drivers/firmware/rpmi/Kconfig              |   3 +-
+ drivers/firmware/rpmi/Makefile             |   1 +
+ drivers/firmware/rpmi/rpmi-sandbox-clock.c | 446 +++++++++++++++++++++
+ drivers/firmware/rpmi/rpmi-sandbox.c       | 156 +++++++
+ drivers/firmware/rpmi/rpmi-sandbox.h       |  47 +++
+ test/dm/Makefile                           |   1 +
+ test/dm/rpmi.c                             |  48 +++
+ 10 files changed, 716 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/firmware/rpmi/rpmi-sandbox-clock.c
+ create mode 100644 drivers/firmware/rpmi/rpmi-sandbox.c
+ create mode 100644 drivers/firmware/rpmi/rpmi-sandbox.h
+ create mode 100644 test/dm/rpmi.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 0bf6582ef493..d2b18d9b13db 100644
+index d2b18d9b13db..96fee47ade6c 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1694,6 +1694,7 @@ M:	Charles Perry <charles.perry@microchip.com>
- S:	Maintained
- F:	drivers/clk/clk_rpmi.c
+@@ -1696,6 +1696,7 @@ F:	drivers/clk/clk_rpmi.c
  F:	drivers/firmware/rpmi/
-+F:	drivers/power/domain/rpmi-power-domain.c
+ F:	drivers/power/domain/rpmi-power-domain.c
  F:	include/rpmi*
++F:	test/dm/rpmi.c
  
  SANDBOX
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index 4112b777371d..e8484b193cad 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -106,6 +106,13 @@ config RENESAS_R8A78000_POWER_DOMAIN
- 	  and reset driver. The MDLC is responsible for managing both
- 	  power domains and resets on R-Car R8A78000 X5H SoC.
- 
-+config RPMI_POWER_DOMAIN
-+	bool "Enable the RPMI Power domain driver"
-+	depends on POWER_DOMAIN && RPMI_FIRMWARE
-+	help
-+	  Enable this option if you want to support power domains managed by
-+	  the RISC-V Platform Management Interface (RPMI) protocol.
+ M:	Simon Glass <sjg@chromium.org>
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 0887de4333b0..e5d6f398fb35 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -874,6 +874,18 @@
+ 		sm: secure-monitor {
+ 			compatible = "sandbox,sm";
+ 		};
 +
- config SANDBOX_POWER_DOMAIN
- 	bool "Enable the sandbox power domain test driver"
- 	depends on POWER_DOMAIN && SANDBOX
-diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-index 110153d5cf81..9c42160e18be 100644
---- a/drivers/power/domain/Makefile
-+++ b/drivers/power/domain/Makefile
-@@ -16,6 +16,7 @@ obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
- obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
- obj-$(CONFIG_MESON_SECURE_POWER_DOMAIN) += meson-secure-pwrc.o
- obj-$(CONFIG_RENESAS_R8A78000_POWER_DOMAIN) += renesas-r8a78000-power-domain.o
-+obj-$(CONFIG_RPMI_POWER_DOMAIN) += rpmi-power-domain.o
- obj-$(CONFIG_SANDBOX_POWER_DOMAIN) += sandbox-power-domain.o
- obj-$(CONFIG_SANDBOX_POWER_DOMAIN) += sandbox-power-domain-test.o
- obj-$(CONFIG_SCMI_POWER_DOMAIN) += scmi-power-domain.o
-diff --git a/drivers/power/domain/rpmi-power-domain.c b/drivers/power/domain/rpmi-power-domain.c
++		rpmi: rpmi {
++			compatible = "sandbox,rpmi-transport";
++			#mbox-cells = <1>;
++		};
++
++		rpmi_clock: rpmi-clock {
++			compatible = "riscv,rpmi-clock";
++			mboxes = <&rpmi 0x8>;
++			#clock-cells = <1>;
++			clocks = <&rpmi_clock 0>, <&rpmi_clock 1>, <&rpmi_clock 2>, <&rpmi_clock 3>;
++		};
+ 	};
+ 
+ 	fpga {
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index ba800f7d19da..f1637e1ff09c 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -191,6 +191,7 @@ CONFIG_BUTTON_GPIO=y
+ CONFIG_CLK=y
+ CONFIG_CLK_K210=y
+ CONFIG_CLK_K210_SET_RATE=y
++CONFIG_CLK_RPMI=y
+ CONFIG_SANDBOX_CLK_CCF=y
+ CONFIG_CLK_SCMI=y
+ CONFIG_CPU=y
+@@ -207,6 +208,7 @@ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_ARM_FFA_TRANSPORT=y
+ CONFIG_SCMI_FIRMWARE=y
++CONFIG_RPMI_FIRMWARE=y
+ CONFIG_FPGA_ALTERA=y
+ CONFIG_FPGA_STRATIX_II=y
+ CONFIG_FPGA_STRATIX_V=y
+diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
+index 421a1fa9deba..b462d3693987 100644
+--- a/drivers/firmware/rpmi/Kconfig
++++ b/drivers/firmware/rpmi/Kconfig
+@@ -1,6 +1,7 @@
+ config RPMI_FIRMWARE
+ 	bool "Enable RPMI support"
+-	depends on RISCV && DM && OF_CONTROL
++	depends on RISCV || SANDBOX
++	depends on DM && OF_CONTROL
+ 	select FIRMWARE
+ 	help
+ 	  RISC-V Platform Management Interface (RPMI) defines an OS-agnostic
+diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
+index 4f4bcb929db4..150e98a72df9 100644
+--- a/drivers/firmware/rpmi/Makefile
++++ b/drivers/firmware/rpmi/Makefile
+@@ -1,3 +1,4 @@
+ obj-y	+= rpmi-uclass.o
+ obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
+ obj-$(CONFIG_RPMI_SHMEM) += rpmi-shmem.o
++obj-$(CONFIG_SANDBOX)	+= rpmi-sandbox.o rpmi-sandbox-clock.o
+diff --git a/drivers/firmware/rpmi/rpmi-sandbox-clock.c b/drivers/firmware/rpmi/rpmi-sandbox-clock.c
 new file mode 100644
-index 000000000000..f00ebab86686
+index 000000000000..fa205d067b24
 --- /dev/null
-+++ b/drivers/power/domain/rpmi-power-domain.c
-@@ -0,0 +1,229 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/drivers/firmware/rpmi/rpmi-sandbox-clock.c
+@@ -0,0 +1,446 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2024 Ventana Micro Systems Inc.
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#define LOG_CATEGORY UCLASS_RPMI
++
++#include <asm/types.h>
++#include <asm/io.h>
++#include <asm/byteorder.h>
++#include <linux/kernel.h>
++#include <linux/string.h>
++#include <rpmi.h>
++#include "rpmi-sandbox.h"
++
++struct rpmi_clock {
++	enum rpmi_clock_type type;
++	const char *name;
++	u32 rate_count;
++	const u64 *rate_array;
++	u32 transition_latency;
++	enum rpmi_clock_state state;
++	u64 rate;
++};
++
++const u64 discrete_rates[] = { 20000000, 333333333, 500000000, 1000000000 };
++
++const u64 linear_rates[] = { 50000000, 100000000, 1000000 };
++
++#define DISCRETE_CLOCK(name, current_state, current_rate) \
++	{ RPMI_CLK_TYPE_DISCRETE,                         \
++	  name,                                           \
++	  ARRAY_SIZE(discrete_rates),                     \
++	  discrete_rates,                                 \
++	  0,                                              \
++	  current_state,                                  \
++	  current_rate }
++
++#define LINEAR_CLOCK(name, current_state, current_rate)         \
++	{ RPMI_CLK_TYPE_LINEAR, name, ARRAY_SIZE(linear_rates), \
++	  linear_rates,		0,    current_state,            \
++	  current_rate }
++
++struct rpmi_clock clock_simulation[] = {
++	DISCRETE_CLOCK("CLK0", RPMI_CLK_STATE_DISABLED, discrete_rates[0]),
++	DISCRETE_CLOCK("CLK1", RPMI_CLK_STATE_DISABLED, discrete_rates[1]),
++	DISCRETE_CLOCK("CLK2", RPMI_CLK_STATE_ENABLED, discrete_rates[2]),
++	LINEAR_CLOCK("CLK3", RPMI_CLK_STATE_ENABLED, linear_rates[0]),
++};
++
++static u32 clock_count = ARRAY_SIZE(clock_simulation);
++
++static struct rpmi_clock *rpmi_get_clock(u32 clkid)
++{
++	if (clkid >= clock_count)
++		return NULL;
++
++	return &clock_simulation[clkid];
++}
++
++static enum rpmi_error_codes
++rpmi_clock_set_rate(u32 clkid, enum rpmi_clock_rate_match match, u64 rate)
++{
++	struct rpmi_clock *clk = rpmi_get_clock(clkid);
++
++	if (!clk)
++		return RPMI_ERR_INVALID_PARAM;
++
++	clk->rate = rate;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes rpmi_clock_set_state(u32 clkid,
++						  enum rpmi_clock_state state)
++{
++	struct rpmi_clock *clk = rpmi_get_clock(clkid);
++
++	if (!clk)
++		return RPMI_ERR_INVALID_PARAM;
++
++	clk->state = state;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes rpmi_clock_get_state(u32 clkid,
++						  enum rpmi_clock_state *state)
++{
++	struct rpmi_clock *clk = rpmi_get_clock(clkid);
++
++	if (!clk || !state)
++		return RPMI_ERR_INVALID_PARAM;
++
++	*state = clk->state;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes rpmi_clock_get_rate(u32 clkid, u64 *rate)
++{
++	struct rpmi_clock *clk = rpmi_get_clock(clkid);
++
++	if (!clk || !rate)
++		return RPMI_ERR_INVALID_PARAM;
++
++	*rate = clk->rate;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_get_num_clocks(struct rpmi_transport *trans, u16 request_datalen,
++			     const u8 *request_data, u16 *response_datalen,
++			     u8 *response_data)
++{
++	u32 *resp = (void *)response_data;
++
++	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
++	resp[1] = cpu_to_le32(clock_count);
++
++	*response_datalen = 2 * sizeof(*resp);
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_get_attributes(struct rpmi_transport *trans, u16 request_datalen,
++			     const u8 *request_data, u16 *response_datalen,
++			     u8 *response_data)
++{
++	struct rpmi_clock *clk;
++	u16 resp_dlen;
++	u32 flags = 0;
++
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	clk = rpmi_get_clock(clkid);
++	if (!clk) {
++		resp_dlen = sizeof(*resp);
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	/* encode CLOCK_FORMAT */
++	if (clk->type == RPMI_CLK_TYPE_LINEAR)
++		flags |= 1;
++
++	resp[3] = cpu_to_le32(clk->transition_latency);
++	resp[2] = cpu_to_le32(clk->rate_count);
++	resp[1] = cpu_to_le32(flags);
++	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
++
++	if (clk->name)
++		strlcpy((char *)&resp[4], clk->name, RPMI_CLK_NAME_LEN);
++
++	resp_dlen = 8 * sizeof(*resp);
++
++done:
++	*response_datalen = resp_dlen;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_get_supp_rates(struct rpmi_transport *trans, u16 request_datalen,
++			     const u8 *request_data, u16 *response_datalen,
++			     u8 *response_data)
++{
++	u32 i = 0, j = 0;
++	u32 rate_count;
++	u32 resp_dlen = 0, clk_rate_idx = 0;
++	u32 max_rates, remaining = 0, returned = 0;
++	const u64 *rate_array;
++	struct rpmi_clock *clk;
++
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	clk = rpmi_get_clock(clkid);
++	if (clk) {
++		resp_dlen = sizeof(*resp);
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	rate_count = clk->rate_count;
++	rate_array = clk->rate_array;
++	if (!rate_count || !rate_array) {
++		resp_dlen = sizeof(*resp);
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_NOTSUPP);
++		goto done;
++	}
++
++	clk_rate_idx = cpu_to_le32(((const u32 *)request_data)[1]);
++
++	if (clk->type == RPMI_CLK_TYPE_LINEAR) {
++		/* max, min and step */
++		for (i = 0; i < 3; i++) {
++			resp[4 + 2 * i] = cpu_to_le32((u32)(rate_array[i]));
++			resp[5 + 2 * i] =
++				cpu_to_le32((u32)(rate_array[i] >> 32));
++		}
++		remaining = 0;
++		returned = 3;
++	} else if (clk->type == RPMI_CLK_TYPE_DISCRETE) {
++		if (clk_rate_idx > rate_count) {
++			resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++			resp_dlen = sizeof(*resp);
++			goto done;
++		}
++
++		/* max rates a rpmi message can accommodate */
++		max_rates = (trans->msg_data_size - (4 * sizeof(*resp))) /
++			    sizeof(u64);
++		remaining = rate_count - clk_rate_idx;
++		if (remaining > max_rates)
++			returned = max_rates;
++		else
++			returned = remaining;
++
++		for (i = clk_rate_idx, j = 0;
++		     i <= (clk_rate_idx + returned - 1); i++, j++) {
++			resp[4 + 2 * j] = cpu_to_le32((u32)(rate_array[i]));
++			resp[5 + 2 * j] =
++				cpu_to_le32((u32)(rate_array[i] >> 32));
++		}
++
++		remaining = rate_count - (clk_rate_idx + returned);
++	} else {
++		return RPMI_ERR_FAILED;
++	}
++
++	resp[3] = cpu_to_le32((u32)returned);
++	resp[2] = cpu_to_le32((u32)remaining);
++	/* No flags currently supported */
++	resp[1] = cpu_to_le32(0);
++	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
++
++	resp_dlen = (4 * sizeof(*resp)) + (returned * sizeof(u64));
++
++done:
++	*response_datalen = resp_dlen;
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_set_config(struct rpmi_transport *trans, u16 request_datalen,
++			 const u8 *request_data, u16 *response_datalen,
++			 u8 *response_data)
++{
++	enum rpmi_error_codes status;
++	u32 cfg, new_state;
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	if (clkid >= clock_count) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	cfg = cpu_to_le32(((const u32 *)request_data)[1]);
++
++	/* get command from 0th index bit in config field */
++	new_state = (cfg & 0b1) ? RPMI_CLK_STATE_ENABLED :
++				  RPMI_CLK_STATE_DISABLED;
++
++	/* change clock config synchronously */
++	status = rpmi_clock_set_state(clkid, new_state);
++	resp[0] = cpu_to_le32((u32)status);
++
++done:
++	*response_datalen = sizeof(*resp);
++
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_get_config(struct rpmi_transport *trans, u16 request_datalen,
++			 const u8 *request_data, u16 *response_datalen,
++			 u8 *response_data)
++{
++	u16 resp_dlen;
++	enum rpmi_error_codes status;
++	enum rpmi_clock_state state;
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	if (clkid >= clock_count) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		resp_dlen = sizeof(*resp);
++		goto done;
++	}
++
++	status = rpmi_clock_get_state(clkid, &state);
++	if (status) {
++		resp[0] = cpu_to_le32((u32)status);
++		resp_dlen = sizeof(*resp);
++		goto done;
++	}
++
++	/** RPMI config field only return enabled or disabled state */
++	state = (state == RPMI_CLK_STATE_ENABLED) ? 1 : 0;
++
++	resp[1] = cpu_to_le32((u32)state);
++	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
++
++	resp_dlen = 2 * sizeof(*resp);
++
++done:
++	*response_datalen = resp_dlen;
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_set_rate(struct rpmi_transport *trans, u16 request_datalen,
++		       const u8 *request_data, u16 *response_datalen,
++		       u8 *response_data)
++{
++	enum rpmi_error_codes status;
++	enum rpmi_clock_rate_match rate_match;
++	u32 flags;
++	u32 rate_low, rate_hi;
++	u64 rate_u64;
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	if (clkid >= clock_count) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	flags = cpu_to_le32(((const u32 *)request_data)[1]);
++
++	/* get rate match mode from flags */
++	rate_match = flags & 0b11;
++	if (rate_match >= RPMI_CLK_RATE_MATCH_MAX) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	rate_low = cpu_to_le32(((const u32 *)request_data)[2]);
++	rate_hi = cpu_to_le32(((const u32 *)request_data)[3]);
++
++	rate_u64 = ((u64)rate_hi << 32) | rate_low;
++	if (rate_u64 == RPMI_CLOCK_RATE_INVALID || rate_u64 == 0) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		goto done;
++	}
++
++	status = rpmi_clock_set_rate(clkid, rate_match, rate_u64);
++	resp[0] = cpu_to_le32((u32)status);
++
++done:
++	*response_datalen = sizeof(*resp);
++	return RPMI_SUCCESS;
++}
++
++static enum rpmi_error_codes
++rpmi_clock_sg_get_rate(struct rpmi_transport *trans, u16 request_datalen,
++		       const u8 *request_data, u16 *response_datalen,
++		       u8 *response_data)
++{
++	u16 resp_dlen;
++	enum rpmi_error_codes status;
++	u64 rate_u64;
++	u32 *resp = (void *)response_data;
++
++	u32 clkid = cpu_to_le32(((const u32 *)request_data)[0]);
++
++	if (clkid >= clock_count) {
++		resp[0] = cpu_to_le32((u32)RPMI_ERR_INVALID_PARAM);
++		resp_dlen = sizeof(*resp);
++		goto done;
++	}
++
++	status = rpmi_clock_get_rate(clkid, &rate_u64);
++	if (status) {
++		resp[0] = cpu_to_le32((u32)status);
++		resp_dlen = sizeof(*resp);
++		goto done;
++	}
++
++	resp[2] = cpu_to_le32((u32)(rate_u64 >> 32));
++	resp[1] = cpu_to_le32((u32)(rate_u64));
++	resp[0] = cpu_to_le32((u32)RPMI_SUCCESS);
++
++	resp_dlen = 3 * sizeof(*resp);
++
++done:
++	*response_datalen = resp_dlen;
++	return RPMI_SUCCESS;
++}
++
++static const struct rpmi_service rpmi_clock_services[RPMI_CLK_SRV_ID_MAX_COUNT] = {
++	[RPMI_CLK_SRV_GET_NUM_CLOCKS] = {
++		.service_id = RPMI_CLK_SRV_GET_NUM_CLOCKS,
++		.min_a2p_request_datalen = 0,
++		.process_a2p_request = rpmi_clock_sg_get_num_clocks,
++	},
++	[RPMI_CLK_SRV_GET_ATTRIBUTES] = {
++		.service_id = RPMI_CLK_SRV_GET_ATTRIBUTES,
++		.min_a2p_request_datalen = 4,
++		.process_a2p_request = rpmi_clock_sg_get_attributes,
++	},
++	[RPMI_CLK_SRV_GET_SUPPORTED_RATES] = {
++		.service_id = RPMI_CLK_SRV_GET_SUPPORTED_RATES,
++		.min_a2p_request_datalen = 8,
++		.process_a2p_request = rpmi_clock_sg_get_supp_rates,
++	},
++	[RPMI_CLK_SRV_SET_CONFIG] = {
++		.service_id = RPMI_CLK_SRV_SET_CONFIG,
++		.min_a2p_request_datalen = 8,
++		.process_a2p_request = rpmi_clock_sg_set_config,
++	},
++	[RPMI_CLK_SRV_GET_CONFIG] = {
++		.service_id = RPMI_CLK_SRV_GET_CONFIG,
++		.min_a2p_request_datalen = 4,
++		.process_a2p_request = rpmi_clock_sg_get_config,
++	},
++	[RPMI_CLK_SRV_SET_RATE] = {
++		.service_id = RPMI_CLK_SRV_SET_RATE,
++		.min_a2p_request_datalen = 16,
++		.process_a2p_request = rpmi_clock_sg_set_rate,
++	},
++	[RPMI_CLK_SRV_GET_RATE] = {
++		.service_id = RPMI_CLK_SRV_GET_RATE,
++		.min_a2p_request_datalen = 4,
++		.process_a2p_request = rpmi_clock_sg_get_rate,
++	},
++};
++
++const struct rpmi_service_group rpmi_sandbox_clock_sg = {
++	.name = "clk",
++	.max_service_id = RPMI_CLK_SRV_GET_RATE,
++	.servicegroup_version = RPMI_MKVER(1, 0),
++	.services = rpmi_clock_services,
++};
+diff --git a/drivers/firmware/rpmi/rpmi-sandbox.c b/drivers/firmware/rpmi/rpmi-sandbox.c
+new file mode 100644
+index 000000000000..5597c27067eb
+--- /dev/null
++++ b/drivers/firmware/rpmi/rpmi-sandbox.c
+@@ -0,0 +1,156 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#define LOG_CATEGORY UCLASS_RPMI
++
++#include <dm.h>
++#include <log.h>
++#include <rpmi-uclass.h>
++#include <dm/device_compat.h>
++
++#include "rpmi-sandbox.h"
++
++#define RPMI_SANDBOX_MIN_SLOT_SIZE 64
++#define RPMI_SANDBOX_SHMEM_HEADER_SIZE 8
++#define RPMI_SANDBOX_MAX_MSG_SIZE \
++	(RPMI_SANDBOX_MIN_SLOT_SIZE - RPMI_SANDBOX_SHMEM_HEADER_SIZE)
++
++#define DRIVER_NAME "rpmi-sandbox"
++#define DRIVER_NAME_LEN (sizeof(DRIVER_NAME))
++
++struct rpmi_sandbox {
++	struct udevice *dev;
++};
++
++const struct rpmi_service_group *rpmi_sandbox_sg(u32 servicegroup_id)
++{
++	switch (servicegroup_id) {
++	case RPMI_SRVGRP_CLOCK:
++		return &rpmi_sandbox_clock_sg;
++	default:
++		return NULL;
++	}
++}
++
++static int rpmi_sandbox_get_attr(struct rpmi_chan *chan,
++				 enum rpmi_attribute_id id, u32 *data)
++{
++	const struct rpmi_service_group *sg = rpmi_sandbox_sg(chan->id);
++
++	if (!sg)
++		return -EOPNOTSUPP;
++
++	switch (id) {
++	case RPMI_ATTR_SPEC_VERSION:
++		*data = RPMI_MKVER(1, 0);
++		break;
++	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
++		*data = RPMI_SANDBOX_MAX_MSG_SIZE;
++		break;
++	case RPMI_ATTR_SERVICEGROUP_ID:
++		*data = chan->id;
++		break;
++	case RPMI_ATTR_SERVICEGROUP_VERSION:
++		*data = sg->servicegroup_version;
++		break;
++	case RPMI_ATTR_IMPL_ID:
++		*data = 0;
++		break;
++	case RPMI_ATTR_IMPL_VERSION:
++		*data = RPMI_MKVER(1, 0);
++		break;
++	default:
++		return -EOPNOTSUPP;
++	}
++
++	return 0;
++}
++
++static int rpmi_sandbox_request(struct rpmi_chan *chan, u32 service_id,
++				const void *request, unsigned long request_len,
++				void *response, unsigned long max_response_len,
++				unsigned long *out_response_len)
++{
++	const struct rpmi_service_group *sg = rpmi_sandbox_sg(chan->id);
++	const struct rpmi_service *service;
++	u8 slot[RPMI_SANDBOX_MAX_MSG_SIZE];
++	struct rpmi_transport trans = {
++		.msg_data_size = sizeof(slot),
++	};
++	u16 response_data_len = 0;
++	enum rpmi_error_codes err;
++
++	if (!sg)
++		return -EOPNOTSUPP;
++
++	if (service_id > sg->max_service_id)
++		return -EOPNOTSUPP;
++
++	service = &sg->services[service_id];
++
++	if (!service)
++		return -EOPNOTSUPP;
++
++	if (request_len < service->min_a2p_request_datalen)
++		return -EINVAL;
++
++	if (!service->process_a2p_request)
++		return -ENOSYS;
++
++	err = service->process_a2p_request(&trans, request_len, request,
++					   &response_data_len, slot);
++
++	if (err)
++		return rpmi_to_linux_error(err);
++
++	if (out_response_len)
++		*out_response_len = response_data_len;
++
++	if (response)
++		memcpy(response, slot,
++		       min(max_response_len, (unsigned long)response_data_len));
++
++	return 0;
++}
++
++static int rpmi_sandbox_of_xlate(struct rpmi_chan *chan,
++				 struct ofnode_phandle_args *args)
++{
++	if (args->args_count != 1)
++		return -EINVAL;
++
++	chan->id = args->args[0];
++
++	return 0;
++}
++
++static int rpmi_sandbox_probe(struct udevice *dev)
++{
++	struct rpmi_sandbox *priv = dev_get_priv(dev);
++
++	priv->dev = dev;
++
++	return 0;
++}
++
++static const struct udevice_id rpmi_sandbox_ids[] = {
++	{ .compatible = "sandbox,rpmi-transport" },
++	{}
++};
++
++static const struct rpmi_transport_ops rpmi_sandbox_ops = {
++	.of_xlate = rpmi_sandbox_of_xlate,
++	.get_attr = rpmi_sandbox_get_attr,
++	.request = rpmi_sandbox_request,
++};
++
++U_BOOT_DRIVER(rpmi_sandbox) = {
++	.name = "rpmi-sandbox",
++	.id = UCLASS_RPMI,
++	.of_match = rpmi_sandbox_ids,
++	.probe = rpmi_sandbox_probe,
++	.priv_auto = sizeof(struct rpmi_sandbox),
++	.ops = &rpmi_sandbox_ops,
++};
+diff --git a/drivers/firmware/rpmi/rpmi-sandbox.h b/drivers/firmware/rpmi/rpmi-sandbox.h
+new file mode 100644
+index 000000000000..132d1e9e8be6
+--- /dev/null
++++ b/drivers/firmware/rpmi/rpmi-sandbox.h
+@@ -0,0 +1,47 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#ifndef _RPMI_SANDBOX_H
++#define _RPMI_SANDBOX_H
++
++#include <stdbool.h>
++#include <asm/types.h>
++#include <rpmi.h>
++
++struct rpmi_transport {
++	int msg_data_size;
++};
++
++struct rpmi_service {
++	/** ID of the service */
++	u8 service_id;
++
++	/** Minimum data length for handling request */
++	u16 min_a2p_request_datalen;
++
++	/** Callback to process a2p request */
++	enum rpmi_error_codes (*process_a2p_request)(
++		struct rpmi_transport *trans, u16 request_data_len,
++		const u8 *request_data, u16 *response_data_len,
++		u8 *response_data);
++};
++
++struct rpmi_service_group {
++	/** Name of the service group */
++	const char *name;
++
++	/** Maximum service ID of the service group */
++	int max_service_id;
++
++	/** Service group version */
++	u32 servicegroup_version;
++
++	/** Array of services indexed by service ID */
++	const struct rpmi_service *services;
++};
++
++extern const struct rpmi_service_group rpmi_sandbox_clock_sg;
++
++#endif
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 0e3c63568ddb..ee03b4e13de2 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -109,6 +109,7 @@ obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
+ obj-$(CONFIG_$(PHASE_)DM_RNG) += rng.o
+ obj-$(CONFIG_DM_RTC) += rtc.o
+ obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
++obj-$(CONFIG_RPMI_FIRMWARE) += rpmi.o
+ obj-$(CONFIG_SCSI) += scsi.o
+ obj-$(CONFIG_DM_SERIAL) += serial.o
+ obj-$(CONFIG_DM_SPI_FLASH) += sf.o
+diff --git a/test/dm/rpmi.c b/test/dm/rpmi.c
+new file mode 100644
+index 000000000000..1ea29780a480
+--- /dev/null
++++ b/test/dm/rpmi.c
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
 + */
 +
 +#include <dm.h>
-+#include <malloc.h>
-+#include <power-domain.h>
-+#include <power-domain-uclass.h>
 +#include <rpmi.h>
-+#include <dm/device_compat.h>
++#include <clk.h>
++#include <stdio.h>
++#include <dm/device-internal.h>
++#include <dm/test.h>
++#include <test/ut.h>
 +
-+struct rpmi_get_num_pd_rx {
-+	__le32 status;
-+	__le32 num_pd;
-+};
-+
-+struct rpmi_get_attrs_tx {
-+	__le32 pd_id;
-+};
-+
-+struct rpmi_get_attrs_rx {
-+	__le32 status;
-+	__le32 flags;
-+	__le32 trans_latency;
-+	char name[RPMI_DPWR_NAME_LEN];
-+};
-+
-+struct rpmi_set_state_tx {
-+	__le32 pd_id;
-+	__le32 state;
-+};
-+
-+struct rpmi_set_state_rx {
-+	__le32 status;
-+};
-+
-+struct rpmi_pd_def {
-+	u32 transition_latency;
-+	char name[RPMI_DPWR_NAME_LEN + 1];
-+};
-+
-+struct rpmi_pd_priv {
-+	struct rpmi_chan chan;
-+	struct udevice *dev;
-+	u32 num_pd;
-+	struct rpmi_pd_def *defs;
-+};
-+
-+static int rpmi_pd_get_attrs(struct rpmi_pd_priv *priv, u32 pd_id,
-+			     struct rpmi_pd_def *def)
++static int dm_test_rpmi_clock(struct unit_test_state *uts)
 +{
-+	struct rpmi_get_attrs_tx tx = {
-+		.pd_id = cpu_to_le32(pd_id),
-+	};
-+	struct rpmi_get_attrs_rx rx;
-+	int ret, status;
++	struct udevice *rpmi_dev, *clk_dev;
++	struct clk clk0, clk1, clk2, clk3;
 +
-+	ret = rpmi_send_with_resp(&priv->chan, RPMI_DPWR_SRV_GET_ATTRIBUTES,
-+				  &tx, sizeof(tx), &rx, sizeof(rx), NULL);
-+	if (ret)
-+		return ret;
++	ut_assertok(uclass_get_device_by_name(UCLASS_RPMI, "rpmi", &rpmi_dev));
 +
-+	status = le32_to_cpu(rx.status);
-+	if (status)
-+		return rpmi_to_linux_error(status);
++	ut_assertok(
++		uclass_get_device_by_name(UCLASS_CLK, "rpmi-clock", &clk_dev));
 +
-+	def->transition_latency = le32_to_cpu(rx.trans_latency);
-+	memcpy(def->name, rx.name, RPMI_DPWR_NAME_LEN);
-+	def->name[RPMI_DPWR_NAME_LEN] = '\0';
++	// Grab clock 0 and retrieve the rate
++	ut_assertok(clk_get_by_index(clk_dev, 0, &clk0));
++	ut_asserteq_64(20000000, clk_get_rate(&clk0));
++
++	// Change to 1GHz
++	ut_asserteq(1000000000, clk_set_rate(&clk0, 1000000000));
++
++	// Revert back to 200MHz
++	ut_asserteq(20000000, clk_set_rate(&clk0, 20000000));
++
++	// Grab clock 1
++	ut_assertok(clk_get_by_index(clk_dev, 1, &clk1));
++	ut_asserteq_64(333333333, clk_get_rate(&clk1));
++
++	// Grab clock 2
++	ut_assertok(clk_get_by_index(clk_dev, 2, &clk2));
++	ut_asserteq_64(500000000, clk_get_rate(&clk2));
++
++	// Grab clock 3
++	ut_assertok(clk_get_by_index(clk_dev, 3, &clk3));
++	ut_asserteq_64(50000000, clk_get_rate(&clk3));
 +
 +	return 0;
 +}
-+
-+static int rpmi_pd_set_state(struct rpmi_pd_priv *priv, u32 pd_id, u32 state)
-+{
-+	struct rpmi_set_state_tx tx = {
-+		.pd_id = cpu_to_le32(pd_id),
-+		.state = cpu_to_le32(state),
-+	};
-+	struct rpmi_set_state_rx rx;
-+	int ret, status;
-+
-+	ret = rpmi_send_with_resp(&priv->chan, RPMI_DPWR_SRV_SET_DPWR_STATE,
-+				  &tx, sizeof(tx), &rx, sizeof(rx), NULL);
-+
-+	if (ret)
-+		return ret;
-+
-+	status = le32_to_cpu(rx.status);
-+	if (status)
-+		return rpmi_to_linux_error(status);
-+
-+	return 0;
-+}
-+
-+static int rpmi_power_domain_on(struct power_domain *power_domain)
-+{
-+	return rpmi_pd_set_state(dev_get_plat(power_domain->dev),
-+				 power_domain->id, RPMI_DPWR_STATE_ON);
-+}
-+
-+static int rpmi_power_domain_off(struct power_domain *power_domain)
-+{
-+	return rpmi_pd_set_state(dev_get_plat(power_domain->dev),
-+				 power_domain->id, RPMI_DPWR_STATE_OFF);
-+}
-+
-+static int rpmi_power_domain_xlate(struct power_domain *power_domain,
-+				   struct ofnode_phandle_args *args)
-+{
-+	struct rpmi_pd_priv *priv = dev_get_plat(power_domain->dev);
-+
-+	if (args->args_count != 1)
-+		return -EINVAL;
-+
-+	if (args->args[0] >= priv->num_pd)
-+		return -EINVAL;
-+
-+	power_domain->id = args->args[0];
-+
-+	return 0;
-+}
-+
-+static int rpmi_pd_get_num_domains(struct rpmi_pd_priv *priv)
-+{
-+	struct rpmi_get_num_pd_rx rx;
-+	int ret, status;
-+
-+	ret = rpmi_send_with_resp(&priv->chan, RPMI_DPWR_SRV_GET_NUM_DOMAINS,
-+				  NULL, 0, &rx, sizeof(rx), NULL);
-+	if (ret)
-+		return ret;
-+
-+	status = le32_to_cpu(rx.status);
-+	if (status)
-+		return rpmi_to_linux_error(status);
-+
-+	priv->num_pd = le32_to_cpu(rx.num_pd);
-+
-+	return 0;
-+}
-+
-+static int rpmi_pd_probe(struct udevice *dev)
-+{
-+	struct rpmi_pd_priv *priv = (struct rpmi_pd_priv *)dev_get_plat(dev);
-+	struct rpmi_chan *chan = &priv->chan;
-+	int ret, i;
-+
-+	priv->dev = dev;
-+
-+	ret = rpmi_open(chan);
-+	if (ret)
-+		return ret;
-+
-+	ret = rpmi_check_versions(chan, RPMI_MKVER(1, 0),
-+				  RPMI_SRVGRP_DEVICE_POWER, RPMI_MKVER(1, 0));
-+	if (ret)
-+		goto err_out;
-+
-+	ret = rpmi_pd_get_num_domains(priv);
-+	if (ret)
-+		goto err_out;
-+
-+	priv->defs = calloc(priv->num_pd, sizeof(struct rpmi_pd_def));
-+	if (!priv->defs) {
-+		ret = -ENOMEM;
-+		goto err_out;
-+	}
-+
-+	for (i = 0; i < priv->num_pd; i++) {
-+		ret = rpmi_pd_get_attrs(priv, i, &priv->defs[i]);
-+		if (ret)
-+			goto err_out;
-+	}
-+
-+	dev_dbg(dev, "num pd = %i\n", priv->num_pd);
-+
-+	return 0;
-+
-+err_out:
-+	if (priv->defs)
-+		free(priv->defs);
-+	rpmi_close(chan);
-+
-+	return ret;
-+}
-+
-+static int rpmi_pd_remove(struct udevice *dev)
-+{
-+	struct rpmi_pd_priv *priv = (struct rpmi_pd_priv *)dev_get_plat(dev);
-+	struct rpmi_chan *chan = &priv->chan;
-+
-+	if (priv->defs)
-+		free(priv->defs);
-+	rpmi_close(chan);
-+
-+	return 0;
-+}
-+
-+static int rpmi_pd_to_plat(struct udevice *dev)
-+{
-+	struct rpmi_pd_priv *priv = (struct rpmi_pd_priv *)dev_get_plat(dev);
-+
-+	return rpmi_get_by_index(dev, 0, &priv->chan);
-+}
-+
-+static const struct power_domain_ops rpmi_pd_ops = {
-+	.of_xlate = rpmi_power_domain_xlate,
-+	.on = rpmi_power_domain_on,
-+	.off = rpmi_power_domain_off,
-+};
-+
-+static const struct udevice_id rpmi_pd_ids[] = {
-+	{ .compatible = "riscv,rpmi-device-power" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(rpmi_pd) = {
-+	.name = "rpmi-device-power",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.of_match = rpmi_pd_ids,
-+	.probe = rpmi_pd_probe,
-+	.remove = rpmi_pd_remove,
-+	.ops = &rpmi_pd_ops,
-+	.of_to_plat = rpmi_pd_to_plat,
-+	.plat_auto = sizeof(struct rpmi_pd_priv),
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/include/rpmi_proto.h b/include/rpmi_proto.h
-index dc0937ce7053..d2512617f75c 100644
---- a/include/rpmi_proto.h
-+++ b/include/rpmi_proto.h
-@@ -122,4 +122,22 @@ enum rpmi_clock_type {
- 
- #define RPMI_CLOCK_RATE_INVALID		(-1ULL)
- 
-+/* RPMI Device_Power (DPWR) service IDs */
-+enum rpmi_dpwr_service_id {
-+	RPMI_DPWR_SRV_ENABLE_NOTIFICATION = 0x01,
-+	RPMI_DPWR_SRV_GET_NUM_DOMAINS = 0x02,
-+	RPMI_DPWR_SRV_GET_ATTRIBUTES = 0x03,
-+	RPMI_DPWR_SRV_SET_DPWR_STATE = 0x04,
-+	RPMI_DPWR_SRV_GET_DPWR_STATE = 0x05,
-+	RPMI_DPWR_SRV_ID_MAX,
-+};
-+
-+enum rpmi_dpwr_state {
-+	RPMI_DPWR_STATE_INVALID = -1,
-+	RPMI_DPWR_STATE_ON = 0,
-+	RPMI_DPWR_STATE_OFF = 3,
-+};
-+
-+#define RPMI_DPWR_NAME_LEN 16
-+
- #endif
++DM_TEST(dm_test_rpmi_clock, UTF_SCAN_FDT);
 -- 
 2.47.3
 
