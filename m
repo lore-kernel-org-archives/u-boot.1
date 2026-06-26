@@ -4,117 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B580BCD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:45:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D8CCD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:45:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 881CF849EE;
-	Fri, 26 Jun 2026 12:45:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C72E8849BA;
+	Fri, 26 Jun 2026 12:45:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VXjKDkr3";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="zkHwIOEK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29BA4849BA; Fri, 26 Jun 2026 12:45:00 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CD9E849EE; Fri, 26 Jun 2026 12:45:29 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3742C80398
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:44:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9A5D8460E
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:45:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-c122b25cffaso39974566b.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:44:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782470698; cv=none;
- d=google.com; s=arc-20260327;
- b=l4fRBNW8X9hguxVYoPNgdKazVhyUqwH+IXl/JD7OUSIeVFIloKm0QAObWzXimtMT37
- R/zFgaZe4Kz7rt0PsO4G57Z8qT14kBoo+LTYqF9L8ETik3onaGb5e9rCfaSSycC0U2/T
- EEl2ZYzQ9s65PSLraNA6xoLMfpKO1hWwveFWeLtwQfu0zMvom47e5sHXG5/w0ag+IvCs
- Kqnmm1oQYdM2L6dyEhPx//sUvelNH1m9FLFi7S23O9fNBHvCJrU+vT+Y9REmIyG9FEAC
- ejL9K8nn6dcjrwt3DeRJvdU3QdifmeejgnVkE2iDlzWHbvW2CnsHhyXOt5hnN+9+6UdL
- +Xig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Co3UNvXi+2bXMg5nFtJviYDvEgQGbM/u5HQAWNaWnXc=;
- fh=nyKLZbC5pO9EO6FCB5YQSf7kr334RAPXhBSMuZ9b11E=;
- b=aDJ7Re5FbxWGSzWz9bUj3ogTykVjPWkz3bj6p7pERrIsziUPn9HVRP6In2cqCELfQq
- 6/5AZie9AlVBKIsmpgkbOLSXreN7mWjGetY+PrLgDfY7Sc6sg5P9RbfamNoRWoWTZEBo
- 5B+vmWBNrQsxLVp1dHvSjWbZVuozw8vFiCKNAa+nxziF+FUINdkMve+DMxAmTAGAo46h
- oYtAMq3K7b5/30i62KBcAikjyAYhpTdoA2ncRhIeQfXhdYOqG5yMCImHo8nNOmY7mw3a
- aBdfbhCQqvlUSC26BnniEjoxYB30lmkntTE4CAMAIZ0DqlwQcZZLxQY+6QaWxyi11nPT
- /8DQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782470698; x=1783075498; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Co3UNvXi+2bXMg5nFtJviYDvEgQGbM/u5HQAWNaWnXc=;
- b=VXjKDkr3bzznr80DFF2a11k5EBgp6Z1klmm+sswhjVpbeeJY+Sv9JpUVsUK1aoQ0SW
- UmJhMkfCnKrgjfU7RMOessoa3h7RaHFeVyexwG1X8MeY4B/TzghWO4P6LWjbjYfrRHBE
- iicmLNeIr1GPzgRbWSTU1f7WsErPrq6PL0sGk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782470698; x=1783075498;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Co3UNvXi+2bXMg5nFtJviYDvEgQGbM/u5HQAWNaWnXc=;
- b=T8NUqH5a4SkN59nhBrWbuda/IIfwT8a2MgiW4uwG3bWloyg8xI+c4BHpy8DxoiNbSt
- M1zZU93qQDUd3j6M3AJSQZPvy2DQEfhwOPoy8ndH+G5F6paJHFqSBmF3RncPAA4EL/lz
- QnEMkGRTYKqut/+JtEBxsWse9bTK6RGnC/h586IN/aAW+Opm/w4WwP30Glpf8u82vtbF
- 1mHl+YI4rc3uRmbDV83gGxNqSNzcRC9OYmlrC6nd3l+qKmtHMvcP/k/5uSKiXmNGji6J
- /e6KKGTpxS8obEuTNh9hhiJWDUC2HPxbBmuSCHIXG6SmJYOD2zsKCw3UlsrAFAXayi9O
- IMDw==
-X-Gm-Message-State: AOJu0YwsZeqKE+UvZUNycmW4+AErPUrvwEjduB1LtWPioqcuSDvyuSiQ
- JupjFunryO9hd/AZ3hXLD/5p8UgPjkVrc5ydTIyKmTu9g3WnrmK6+D0bfj22HDTAIgWgFd4qpFQ
- lwRzs7T2QWi3JXVkDPseUKnyZ4pweIv9wnk2hQfW3
-X-Gm-Gg: AfdE7cknZHLvKOTSjIOIzWrGHRka6M0Rkh5Qr31HA5dehfGwy0m3riPclyv9F/MyelQ
- EU7Cn8YW9NrtPsvP/bZU2CYDPH08yuCGAq7JVft1YZPjxiwH/MVKo+J599N1LlUv0NJCWy0CAes
- /yB5h6NS18esOS3szKJ5y6WvCaZjCuqdO+w3bqR5gVNHpCvK2Vl/mmXMPqISVu4ocer2P98SNGt
- d5v5QyRFkSGx3JbnxCMsC7r5osSMzaYYlBi/PZ9tAk3X27FsWVOSrw6wKRcszkys2Tl4flha554
- n9mrg7Vx
-X-Received: by 2002:a17:907:728a:b0:c11:f52a:4e70 with SMTP id
- a640c23a62f3a-c12061aca45mr399522566b.44.1782470697710; Fri, 26 Jun 2026
- 03:44:57 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=thomas.richard@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 874F91A08F3;
+ Fri, 26 Jun 2026 10:45:26 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 5A69260232;
+ Fri, 26 Jun 2026 10:45:26 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id F34B0104C97E1; 
+ Fri, 26 Jun 2026 12:45:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1782470725; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=8HNXycZx7oGaDSM4Af2ihVKpaXW6Ah9oqEmQjYiAq3U=;
+ b=zkHwIOEK1CV/HfNDAWkAbrrMdZx/J1lujQrotplZvuIsI7HzDQHpgjGo6XBeb8Lv8XBz3U
+ xnJREqAhAtbkYbGbh0S1eF21GIA4IAgOX0tRm4kwElK/NiRpAMgkX2IXeiQ1gsj+vCwjmv
+ AQ50UrhZsUQoRU9pvWJa5Ym7vEqXa/5h/5uwpJNlok+KUGxYmH9UPN0cFXj7FuWy3SU0EO
+ 58xsy9cFDVQsfMSZv7bvuypkSNSQZ48Vd0K/jPbuXbB1Yd5pJjhrjyDDOCKJB9/sAUrAlR
+ qIdtHwklanbQw1D2vFaEXeTA0rr+jTl2QbGAMfN5s1i5pbkHJWpcQd7A2zRI2A==
+Message-ID: <33a9e8d1-90b2-43cf-a9fd-ffe66f443bce@bootlin.com>
+Date: Fri, 26 Jun 2026 12:45:19 +0200
 MIME-Version: 1.0
-References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-11-170c9cbe5099@samcday.com>
-In-Reply-To: <20260606-pm8916-pon-v1-11-170c9cbe5099@samcday.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Jun 2026 11:44:45 +0100
-X-Gm-Features: AVVi8Cd42NW27eN1yGMTkDf59u-URbAiXV-UjiEvqIrWflvVlUimCljNGiKRZOI
-Message-ID: <CAFLszTjAkPWgjXtu6fKPtw3dRXTR2WErMHNrSV9cQ9_rLkwTRA@mail.gmail.com>
-Subject: Re: [PATCH 11/11] qcom_defconfig: enable reboot modes
-To: me@samcday.com
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, 
- Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Neha Malcom Francis <n-francis@ti.com>,
- Justin Klaassen <justin@tidylabs.net>,
- Jamie Gibbons <jamie.gibbons@microchip.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Luca Weiss <luca.weiss@fairphone.com>, 
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- George Chan <gchan9527@gmail.com>, 
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Peter Robinson <pbrobinson@gmail.com>,
- "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>, 
- Dmitrii Merkurev <dimorinny@google.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Thomas Richard <thomas.richard@bootlin.com>
+Subject: Re: [PATCH v4 00/19] Introduce resume for J7xx SoCs
+To: "Richard Genoud (TI)" <richard.genoud@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Kendall Willis <k-willis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Abhash Kumar <a-kumar2@ti.com>, Gregory CLEMENT
+ <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20260625071515.91243-1-richard.genoud@bootlin.com>
+Content-Language: en-US
+In-Reply-To: <20260625071515.91243-1-richard.genoud@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,18 +82,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-06T08:47:32, Sam Day via B4 Relay
-<devnull+me.samcday.com@kernel.org> wrote:
-> qcom_defconfig: enable reboot modes
->
-> Now that there's a PM8916 PON reboot-mode driver, it's worth enabling
-> the reboot-mode DM uclass. Additionally the newly introduced fastboot
-> support for setting reboot modes is enabled.
->
-> Signed-off-by: Sam Day <me@samcday.com>
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
->
-> configs/qcom_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
+Hi Richard,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 6/25/26 9:14 AM, Richard Genoud (TI) wrote:
+> This series allows J7200/J721e/J721s2/J784s4/J722s to resume from
+> suspend.
+> 
+> On those SoCs, a magic value is set in a PMIC register by the DM
+> firmware just before suspend, then everything but the PMIC and DDR is
+> powered off.
+> At resume/boot time, the magic value has to be read back by U-Boot SPL in
+> order to know if we are indeed in a resume situation.
+> That's the purpose of j7xx_board_is_resuming() introduced here.
+> 
+> Then, if the SoC is resuming, the DDR has to be brought out of
+> retention, at full speed and get out of low power mode.
+> Between those steps, the DDR_RET pin has to be de-asserted. But the
+> DDR_RET pins of all DDR chips are tied together on a single GPIO, so
+> it's impossible to resume one DDR chip after the other, they must be all
+> resumed at once.
+> That's why it's orchestrated from board_init_f() and not in the k3ddrss
+> driver.
+> 
+> Once the DDR is fully functional, the next steps are:
+> - retrieve the LPM memory region from DTS
+> - authenticate certificates from LPM memory region and apply firewalls
+> - ask TIFS to restore TFA and its own minimal context
+> - start TFA on remote proc
+> - load and jump to DM
+> 
+> Patches 1-3 add LPM helpers for all SoCs
+> Patch 4 adds the resume detection for all SoCs
+> Patch 5 adds common code for DDR retention pin
+> Patch 6 enables GTC at resume
+> Patch 7 detects IO+DDR resume state for j7200/j784s4
+> Patch 8 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
+> Patch 9 sets the PMIC NSLEEP triggers
+> Patches 10-12 add the DDR resume sequence for all SoCs
+> Patches 13-16 add the resume flow for all SoCs
+> Patch 17 updates the pm-cfg and schema to a new version
+> Patch 18 removes now unneeded background firewall on DDR for j7200/j784s4
+> Patch 19 extends the firewall for ATF region to TIFS
+> 
+> Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
+> 
+> BEWARE: This series is based on:
+>  commit 8d5f30b52f7c ("Merge patch series "env: migrate static flags list to Kconfig"")
+>  + AM62 LPM series:
+> https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
+> 
+> It needs lpm_memory_regions described in DTS:
+> https://lore.kernel.org/lkml/20260427160326.370415-1-richard.genoud@bootlin.com/
+> 
+> It also needs a bootph-pre-ram property in PMIC-B for j721s2:
+> https://lore.kernel.org/linux-arm-kernel/20260429-k3-j721s2-som-bootph-pre-ram-pmic-4c-v2-1-31a0e7677216@bootlin.com/
+> 
+
+Tested-by: Thomas Richard (TI) <thomas.richard@bootlin.com> # J7200 SR1.0 GP, J721S2 SR1.0 GP
+
+Best Regards,
+Thomas
