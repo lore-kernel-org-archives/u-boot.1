@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0CFBCD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11FFCDE008
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:39:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A78C8498C;
-	Fri, 26 Jun 2026 12:38:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D46E8460E;
+	Fri, 26 Jun 2026 12:39:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WJhRCPOp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f3lIgYTU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA5A98404D; Fri, 26 Jun 2026 12:38:47 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 031288497A; Fri, 26 Jun 2026 12:39:13 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB70A8497A
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:38:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAF578404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-697763eeafcso1260508a12.3
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:38:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782470325; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-697df404e32so1609528a12.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:39:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782470350; cv=none;
  d=google.com; s=arc-20260327;
- b=WHtLYdKQLLvouuIi9FFInz7SawJUobrM0YqpoeVuosCahtVVAGRrdQMDJhA28Q2Pdm
- 00bKSOptCrlWtPJo53cYRX29YLKoBpj3f4UAqIXPfhhDEvVUwDwacCyPsDuByTo1pzZq
- csjL9cmraT0+0nX67AojypON3UZFSiLv8rAUFNgXOLzVgw61t4BaGkpoKW1j3adVjUs8
- jnq7s7lnisCtJVHDMjYgDEllPMYro7eY2IX09C6GXFLBSXyVgCYqdDZTr/3IzpdtrPfp
- BfsL+kVEo2cOqlmin3DXjP4sfqJFOt3T6vjkWnp0L5Ehp468WZnz+sUg+rva6WhdO3+a
- 8KoA==
+ b=sV70ngQPUccCKCAFuc/XHh5QdHrk2ibY1kdXgMXW1P0aoJV9yxd3JNgSMH5boKNye3
+ 6WcSwzt2YRy6X81GXlbqRKDZAysyyqPsBkHAU6fEcE8M3nioal93ScIoVybucgoARaRf
+ 3lK6NJdzirjnzS+2HmvnagaFtZ+qdmKQbSK6sIpaCA+E2TdfC86O0hWylUqa8XEKxCCO
+ W8Iv7IOg/bXwwWTNGFegBIxmbSS3lm+BWd/e+6Wxe1L1CGzrtE3LQq+0ibokwgNmhCBl
+ 684+Ad1pi1joeE7sKPPOvuiOd3Jo05lX//NvKcteJB4gXLOo51AnNM5wQAHMlsJshGud
+ 3meA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=i0p0i9ONpYiHH811x+bVrWjReBEpNVK3+r9RkiOpVSo=;
+ bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
  fh=nyKLZbC5pO9EO6FCB5YQSf7kr334RAPXhBSMuZ9b11E=;
- b=gBAVagAVGGO0NKSD4xW0eiSYpBcHrl5rc1Qz1YB11/bLHkmo4vQLqKqIrnnMdVUadZ
- 4uQTPRLfpdyKOGO+PbKivAoXtLCnkXxdrk5UIfE6IyPR9MFzbSEcX5cn9B05fJXt0ms2
- t8grFyIH5Rzsd9ylarhHEJ3nptePgB7PqRGtcEqSRAw0ZaJ14jAOnIf/MLzMeubIvXCm
- X/MtSD6gYBCmACHDiW2tqTq1MvQCF5WfqyyimmnteXzQ94aORBmiR66JYxEw5s0ojwqD
- VwSMhxC+nK98rjpIce9giRYQYsuEaC/38ftqes2djb1B+uS9JdUaFrTKZrMUAo8I/fuZ
- /ZAQ==; darn=lists.denx.de
+ b=jrYfhkTOVZl7Lg8hvcCU83BYes0EQTP04VMhV8NsWGUGOT0RLOLdEfM1OgtX4bWlpB
+ Oa0rpvxaLTbtaSqgleNJolKJ3A70NoNg3D8Tvk2FGjCOFTlQryh1O7pPdfO9uAR9JXUi
+ 1gCAjUL3NnZl1x9fqgWwJteD3iPjVsoEMKw8nhviA+fG1oErlPNyZ7e1C3v0iOhbRaQY
+ YYfeACHIehxKDZz0xa3CmURcQ/EJAUOcT284yrGiat3bhJC+L3K/ZR2uEarITNpmWp0P
+ Yw6oRKIuyCZEgojR0JbOkjryivhuL0vwwx7jXYrxS/C2J4/nZxayjnZIJSod/JalTdHx
+ abUg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782470325; x=1783075125; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782470350; x=1783075150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i0p0i9ONpYiHH811x+bVrWjReBEpNVK3+r9RkiOpVSo=;
- b=WJhRCPOpGkDRmhYIYtjQOrFHRJgIB+qn+ZWasBWudebkpVct4Us9ub6RuvB9BuiN+8
- JCbQTN8GVx5s2+qQejsZM8Z507gs21inWrmCjn6BNYIiRyhxc4M4ZGG5sMaESJ0RkT9w
- BWQVUACZZwYRcDgxRpDd/uttwsFm8EGTDj/MQ=
+ bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
+ b=f3lIgYTUtXRIFlqPhS3Tj4szynwV5tu0y3ds4crouOdr6HqBgAy8YulItGyB/tDOOb
+ K38GmE7gojmGWOGRFLPQM2o4b7tzSAhYNri10ogLhqiXSIv+JaSoodFWaDAuMQ01AJvO
+ e2v8YyIgOOW9nJeblBH72tcJOdaAhhaXfUIQ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782470325; x=1783075125;
+ d=1e100.net; s=20251104; t=1782470350; x=1783075150;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i0p0i9ONpYiHH811x+bVrWjReBEpNVK3+r9RkiOpVSo=;
- b=XBXg+SJAEt5AtCemSLj7pvO3w4VuVxz/B7/QANu/StiRCP2pm89DC/km2pGo4nHgKU
- 1FPkWG+MycIG4pHCpE2ylzK9BQ9W6A1sPqnrYwN0qA8hfuNdvAWR950Kk7zZJCA3PfNg
- T4Oe2IsCgPk2KLBLwueLmt23u90+Fj8rcShDMAq6IfXPtB03Es+xr8m7glZNqbX4M2/d
- wCAQfvSyZd/txTMOkFepquSWQx5sXk9mmAABizBidWsazISAc3g/f9mYL5BjMi8f3UU9
- FVEl7/UXgUWs15sCC/qt1A8MQFY2M79NNAeOYXikxE/p3JheTTCC4xu7tEjQmxA949eW
- uNQQ==
-X-Gm-Message-State: AOJu0YwuaY3GISTrmfOnZWfGSmwszLcyxlOSKN0DNPqb87LEZuCOh018
- oiNPtHLlzayG3aIv9JZ5hg7LGRkOzL5wm8ZWkykd1d/0kMHTIOZi7OV+pBbTFvqd07AkbB6t896
- skjxrOTJt+za1K86ZW/IHpMHYaicAqgAXSBuru+i9
-X-Gm-Gg: AfdE7cljGYt9D0o19pxB7MaTPXd/uWcqdqrFtQk68d1Cxy6J3TyGPBusFswpqA02axL
- v7CT11am9GB+y5gL3GcxUP7G3NuRz63KL/UXrrsKk5ObFVyEm044ZI7ZXPxJwKIUupmz0dyPij3
- J+pDBE+duNQX/T6hSivmh8qWeoqUSObvowzBM8wKwqaoTjHVnzugTuSyDJwXy5zFKeRC+2Ua77j
- OlQhl3BqD6ObBZwnBaK9t6RNI4txB0nKy07kcko4qhH8mgPCd6dE8emtKQpiNfH/M2ospr9ug==
-X-Received: by 2002:a05:6402:a295:10b0:698:1504:e3de with SMTP id
- 4fb4d7f45d1cf-6981504e4dcmr1192325a12.29.1782470325310; Fri, 26 Jun 2026
- 03:38:45 -0700 (PDT)
+ bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
+ b=W+rCQFiX6VYsmGWZ4yB0I87w5VYVhn/4Zla+SPN+2EMYvOo9eWgFrARsUpzql+4ejo
+ aw+gAlXwiLWRo/ullUG9vqbZ0963N3ZkRbqS7iAD6EGV4zM8OG1NXZkXFQNIwCeP++Kf
+ sUd53VrTQMZIC09EUWimKdkHyItZ1sCKP8Gw/NopeHo7yVF5gAKcfot6tjShetEvN5uK
+ xrSi7nhVB1UGIw7EuHU1oDKIjsP0x66FyTh6BfhpKLijz5X1nmfxTy3UzBoJSWRqeuwD
+ 6P/xFgBHoR46oROYU798Gxf/eqk+n/E4dZFe4wOTsox54tMz+ya+70ZZgoYiEX3614ty
+ FePg==
+X-Gm-Message-State: AOJu0YzVg2f2C2dcRL+zen3s+PedFpBKMkrUdH93NQtNUVXHOM2fu3gM
+ 8wifwi6n31od+oEwCdnIjAIRxwCc/BH92wv0Wc6AzHTiL1eICuCaGdU1X8/rIqzfi/AWeFZ+Pq/
+ pAToyCZYiVKO8N2Wlf8PYSIVNP7VH8AaUXLGpqzor
+X-Gm-Gg: AfdE7ck00X8RoN5bnDot2ISlW4lP2umRy2VgI8TdSqyXhGtsBRtdJrO2bUS3zOTr3JL
+ 93xeyt+cMlgXlRcc6Q85XDbMvsmX7a4iiL+VJhyAdZarP0JWu0wfbAkTi8IoF6mWBG4279X5vob
+ NhkfUM7siFN6d+W/O6oN5W5glA6KohrVWqG/KMG2GUCwjBYg1QApRoqbVnROfNS2hzTRcMaDzvc
+ NwVCb+TsFkA9pXhbOYqu0mYgzBXSjbIaNnw9ZN7Cn1cq4tawh2fQ/k/pbdXKilKZFdl0CAtenPH
+ YN3UFnMP
+X-Received: by 2002:a05:6402:1473:b0:697:ea41:9799 with SMTP id
+ 4fb4d7f45d1cf-69810a4597emr1914091a12.4.1782470350240; Fri, 26 Jun 2026
+ 03:39:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-3-170c9cbe5099@samcday.com>
-In-Reply-To: <20260606-pm8916-pon-v1-3-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-4-170c9cbe5099@samcday.com>
+In-Reply-To: <20260606-pm8916-pon-v1-4-170c9cbe5099@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Jun 2026 11:38:33 +0100
-X-Gm-Features: AVVi8Cd84j2WqVvkOTT60TQNxxIgA-FJWcT8xgNXysK_lsuGULX4Mon_ilUB57E
-Message-ID: <CAFLszTipSeAB_nwqbhtpDmGbY0Sgv+VP7Kqd5hY=3Br0AFrBfw@mail.gmail.com>
-Subject: Re: [PATCH 03/11] qcom_defconfig: enable PM8916_PON
+Date: Fri, 26 Jun 2026 11:38:56 +0100
+X-Gm-Features: AVVi8CdI7ky1qJTRzxfnSubPyI24Z2iIwWx_S06LIdPFOG4CDAdgxgSIdH-QXi8
+Message-ID: <CAFLszThEHyCaV7wgta6vUOF6gDTkiPDEMX9tywus0n2W8KLFrA@mail.gmail.com>
+Subject: Re: [PATCH 04/11] drivers: misc: pm8916_pon: support setting reboot
+ type
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -130,15 +132,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sam,
+
 On 2026-06-06T08:47:32, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> qcom_defconfig: enable PM8916_PON
+> drivers: misc: pm8916_pon: support setting reboot type
 >
-> Enable the new PM8916 PON driver.
+> This is to be used in conjunction with PSHOLD sysreset driver.
+>
+> This code manages the RST_CTL register block, which PM8916 uses to
+> decide what action to take when PS_HOLD is de-asserted.
 >
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> configs/qcom_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+> drivers/misc/pm8916_pon.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++
+>  include/pm8916_pon.h      | 18 +++++++++++
+>  2 files changed, 100 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -10,16 +10,98 @@
+> +     ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +                                       DM_DRIVER_GET(pm8916_pon), &dev);
+> +     if (ret) {
+> +             pr_warn("couldn't find pm8916_pon device: %d\n", ret);
+> +             return ret;
+> +     }
+> +     if (!dev) {
+> +             dev_warn(dev, "couldn't find pm8916_pon device\n");
+> +             return -ENODEV;
+> +     }
+
+As Casey mentions, uclass_get_device_by_driver() either returns an
+error or a valid dev - the second check is dead code, and dev_warn()
+with a NULL dev would dereference it. Please drop the !dev block.
+
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -10,16 +10,98 @@
+> +     ret = pmic_clrsetbits(priv->pmic, priv->base + enable_reg,
+> +                           PON_PS_HOLD_ENABLE, 0);
+> +     if (ret) {
+> +             dev_warn(dev, "clear PON_PS_HOLD_ENABLE failed: %d\n", ret);
+> +             return ret;
+> +     }
+> +
+> +     /* Delay needed for disable to kick in. */
+> +     /* Kernel uses usleep_range(100, 1000), lk2nd waits 300usec */
+> +     udelay(300);
+> +
+> +     ret = pmic_clrsetbits(priv->pmic, priv->base + PON_PS_HOLD_RST_CTL,
+> +                           PON_PS_HOLD_TYPE_MASK, pmic_reset_type);
+> +     if (ret) {
+> +             dev_warn(dev, "RST_CTL set failed: %d\n", ret);
+> +             return ret;
+> +     }
+
+If the type write fails after the enable has been cleared, the PON is
+left disabled and the next PS_HOLD de-assertion will do something
+undefined. Please attempt to restore PON_PS_HOLD_ENABLE on the error
+path, or at least log loudly that the device has been left
+half-configured.
+
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -10,16 +10,98 @@
+> +     switch (reset_type) {
+> +     case SYSRESET_POWER_OFF:
+> +             pmic_reset_type = PON_PS_HOLD_TYPE_SHUTDOWN;
+> +             break;
+> +     case SYSRESET_COLD:
+> +     case SYSRESET_POWER:
+> +             pmic_reset_type = PON_PS_HOLD_TYPE_HARD_RESET;
+> +             break;
+> +     default:
+> +             pmic_reset_type = PON_PS_HOLD_TYPE_WARM_RESET;
+> +     }
+
+Silently mapping every unknown reset_type to a warm reset feels risky
+- SYSRESET_POWER_OFF_WAIT or future additions would unexpectedly
+reboot instead of erroring out. Please either return -ENOTSUPP for
+unhandled values, or list each explicitly so adding a new enumerator
+forces a compile-time review.
+
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -10,16 +10,98 @@
+>     This is to be used in conjunction with PSHOLD sysreset driver.
+>
+>     This code manages the RST_CTL register block, which PM8916 uses to
+>     decide what action to take when PS_HOLD is de-asserted.
+
+Please expand the commit message - mention that this function is
+called from the sysreset driver (patch 5) and briefly describe the
+rev-0 vs rev-1 register layout difference that the code handles, since
+that is the main subtlety here.
+
+Regards,
+Simon
