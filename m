@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E1CFCD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE729CDE008
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:38:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B42D68460E;
-	Fri, 26 Jun 2026 12:37:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41A448460E;
+	Fri, 26 Jun 2026 12:38:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WvXrxbFd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UoYXnwxX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23F3E8495B; Fri, 26 Jun 2026 12:37:48 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 997098495E; Fri, 26 Jun 2026 12:38:43 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19C938404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:37:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5D788404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68852b58d87so1732707a12.3
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:37:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782470265; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0b2c79so784682a12.2
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:38:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782470321; cv=none;
  d=google.com; s=arc-20260327;
- b=WQKbgEdz7s1Ll82EsQEDyHWANITWw86NCbeIjdDwlYdkCMFpLa/msPT/Ic1JuRfE8w
- a67Yh3UmVCLw8KRRQSuJ+Ws1m4up7c1OC8TwfFj3TZ2xb4x+NRkbi/oU5gX3N2ftthaV
- JCrRaSvyjTBZ7cWzBBgsAI6ToDPA+lfrr1yOoxGULBhaRR3Wp1q7z3HiafSGyOBw0fs4
- J6c+5BpIy6WOOgGSRs2QyZQvXnfFlGV4xA7k/dJQJ3YC8Vruto5Ld8XI3HR19jicZ0Uq
- F2tkPebYBbZApdbXXYoTIz26Psv77wXplyegOtIdi3fvec1iOSLJyWwpHChD5yU4+ifj
- dcWg==
+ b=TziteQOkWxMPbyMQyYtAiaR6dzhL0vAm+Gtd5Na3sTAnFOeYfOOQ0BVPY3937gWBim
+ VKOE1BKj/Am2i8wE7op/cgkWmax1h5UJODib5n9uJcRk+m5gU1UZyB4+r/uLEMFRdAzU
+ BkhDpkhMNoPGJXOw/3L2puJ5FtdtiiqrjYcl5mE6rG5Tlbv2nNkht9Y85gOgGHJIVvvX
+ 7PKgM1mMgDVSolw8b1QwPewOV4jmS+AxsJ8aSphwZpz0FIBKYyc6Q/C9a77m47cGNgdX
+ bI2EU1lHyLgcjNDLEIiurijNVwM6yD+2MmhCWWINz4+Jw9gG6AbAmKRHYJ1ihHc4vMye
+ fbmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=bHYtblKt8dkCtFBtAIkxLRyI4bgUCCu13EuFoC0sR3w=;
+ bh=kYFMfIMEI1Daab+rZcPaJjWIz9TW9kQ4BHfRQNtZLZE=;
  fh=nyKLZbC5pO9EO6FCB5YQSf7kr334RAPXhBSMuZ9b11E=;
- b=dJsE94t6/hZ8AoGhuk3o8H4ls7hycI8uTyhE/dY3bJukTz1025e3jA49TDtx5GuU7c
- qG0vLo9NlW2Wu3jGqYauxtCuWouORCCS7PIScinxwIBiCvBibM8KrqTbcnKfmgX4QfQF
- Z8Ps44tmwg+NBIC3CmkCrQHF/5S4fGWD5W84f/0KdD3aAMr5licEG2UEXZ3bt7pgek2y
- jwgdxKCcPqdL8neqOhxoQGFgHKfsH9FkKlHWk/8fsqmAZFgmxL1Urokz+IUKZfDJwc1q
- s+ZWFYfq3mBYLW1yNkZG9zZK2VBf/5xg5huvvc5+3SlFCMoJndIByYQjvVhblLp/CUnu
- KvEQ==; darn=lists.denx.de
+ b=WyG0Mc2pR9rrFOSc8u+7DkXhwgHJ+vopDstII3km70t/W03HFshr2wOgiXTmw34bnJ
+ R9YcrEEznKvmx7lTLkBmHQHLseMaZsGFwY0EPmrbjiUvL1GstWxKpOcsRzZtJsMtPxm5
+ wWXO0mr5HqOC1AiaT5iiTAifnIjshabr/+mPOsz1Uk2AsNELx7XwHHvG/twbD9JIhYxS
+ PUPITuF4QtwgtXGwoMsaV5GUt2aw9H4tKKRjhIbHHniS2++9Oj7dxSweAvaJcU9ELd44
+ zIonhcs2OvVH10mVbClRihIIc6R80o+A6dMbIdl5NH1vDnSv45iDa9ukoZNsFq7Vm3Pt
+ pZGw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782470265; x=1783075065; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782470321; x=1783075121; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bHYtblKt8dkCtFBtAIkxLRyI4bgUCCu13EuFoC0sR3w=;
- b=WvXrxbFdINRKHEeiYcVFiwVlk0OnC/A3bJlh950GpQlSsu/2wb3ofyal+mtm1QpKk8
- TDF+3i9Gjim/7aRx92TenR6N7Jpt1gk4nUAOsRPoyhpl/FCCYDqhCPpnqJ1RJq3Y3A9M
- vUfVNRdwN+wE2LpxFOrJkwC5BLasoX77INCNk=
+ bh=kYFMfIMEI1Daab+rZcPaJjWIz9TW9kQ4BHfRQNtZLZE=;
+ b=UoYXnwxXGJ04sxH9twmylBqr9D3zKjgG38cxaJQ3Acig0s1HKYRGHFSILlPuzE3lSB
+ wseaf3/pieusTA94VejMSeoQEmfPgMSQ4dT2cx+jzz0jxvps5Tsk46lr+1xYfx0+5qGi
+ C3KXQUDK32mQJ/NrEsVoMhPwFonMp9u45JC5k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782470265; x=1783075065;
+ d=1e100.net; s=20251104; t=1782470321; x=1783075121;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bHYtblKt8dkCtFBtAIkxLRyI4bgUCCu13EuFoC0sR3w=;
- b=QqAvdlWtrJqLSJjrHKbstpVSWKQhqvXLFXAXIwEW23+AXr45vuMJiaZYBZlQd3k+vG
- KRdD00vuqheJXCEkDv7mw7lTb6Q5APl9jpg+UKgVLcz9Tq2p1El19BWBY6N5bTOCEeVi
- C1iMWqvuKEPZdsykA3osCHIvYNuUZePWxE0VB2sdG+c9rqXcaVrjfKD4rYWua+sbOGy2
- U6pnQRKsTgYakGHuqY3V7I85ugx9/p4ZS3kKs54fK8uLYYl/PFhZlOOfryYGIJvtVp6/
- qLZlEELy9AjQ/OGXa+d0B5Jvzy/jeF6kG28gBZ0T26xa+E3fQ9MuNHDlgposKaoFH/el
- uuFg==
-X-Gm-Message-State: AOJu0Yyc0UG/s4mW3GmEh/mWYMNnj8SxL/oKM9UIcBHgiQr+hOrA54Ei
- bDR5qcitYZu08gj7rvdQkkPTPOK4EBYs29ydhx6y6NjH9DbxWQsLx8KS4cmBWCuiKmT+aK5hSpg
- b6Tr8BT+Rb2s1EyyXEFyECk6YxtnpoujVAsQm2zrd
-X-Gm-Gg: AfdE7cm0Ch76F+hdmCE18BQp8z7Qe2LbBebuO1ByuK+iKLdHJWRPsSbsYXI+u3uylq3
- N5FPwWQmQxxat3Dp8u6wM0FVwGdDSXQMoG3sV0Jqeanni6WvNUtIFcVj7FcCZO5PW4a5V9b4uu0
- xRv6uGJQTuCS8gqasBVLd4yVz9/SwPxrrOZfUL3pHADKKwGIlvNkj3Ab10NVIQqMmceJp/Zyczq
- gOoNHMq0Wie/nMvaw5DEmbC5emWz54BiRgzHpwStNWQn3rmpTnpMCk1wES6ucvgs5nHXz1Jwg==
-X-Received: by 2002:a05:6402:4314:b0:697:8365:7e63 with SMTP id
- 4fb4d7f45d1cf-69810a5cdebmr1851898a12.7.1782470265505; Fri, 26 Jun 2026
- 03:37:45 -0700 (PDT)
+ bh=kYFMfIMEI1Daab+rZcPaJjWIz9TW9kQ4BHfRQNtZLZE=;
+ b=mVkzBrrIo3BmRun2p7CTB7qbmb8W9x+yfjAAb8cOwu8Vo8hwbyF295yR4iOfrKGKzz
+ dG+tro5CrM7NnUxqfptYxjFbq33bqT0eH7h3gbB87BE/6QTjJWcgo79N8ih12Zbqq8JX
+ b85O0TZN8SVYMT8EBpbo0ftq8MI4s2J9RjuRG9H9/497lZ+U8IQxpPXYX5vY9viG8ffm
+ tHamDXajAJOwteaKNblhGG3dfVrU+VM1Hyyx+L2qIslaPM+AuLUQOsi2ebeQcEaGoTa1
+ 3W/vCXNXi/tBGSA5UUWFz5Yqzat5r9vmY4R/OcpUYrVEvNG2dUTkWD9YZ0W4mArwIv70
+ 18zw==
+X-Gm-Message-State: AOJu0YwtZuv3Rh2cy3NbRQ4qf+7LYt2r8lCaQy/YroFememJBQOo1X4l
+ uNMv+8VTK/MQLkYYE/dJsO/12v8WueFokIw7bL1sTU9EzkVJ1mXOGB9zYuGov6nQWPa+y9EBIia
+ NQhfwSA6vD+beqplzS+30J7yZZS+qQwBhzQEeCarv
+X-Gm-Gg: AfdE7cllCuOb1bJziqD9S/fAIDSNAyn8ulJiKqiVDbeX1TWIN4YEirDnUcCyPWbcmVj
+ zhigKT5XciIaxQtS2gaM+CHgKjZ6AsYvPwU1pJp+vcqcCSyizERB2Xi0PAlHavyhkUT7MvS2S3v
+ JLJKe/BsD8E//4yHewVlWyxvCZQVy0cqOBSLlpdfZCKJ7zdHBHym3ZGXsn7uf7QqjJ/iwYy1m5X
+ TzFda+kJSHW8ST6yGvNXDdH8FHOUyTZHSv22rsDTT4mOe+eAKZvIzksPrSZPpx4Un44qvlnWUji
+ fi5sgEB0
+X-Received: by 2002:a05:6402:321b:b0:697:f6bf:ba85 with SMTP id
+ 4fb4d7f45d1cf-69810aedd9dmr1792374a12.20.1782470321176; Fri, 26 Jun 2026
+ 03:38:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-1-170c9cbe5099@samcday.com>
-In-Reply-To: <20260606-pm8916-pon-v1-1-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-2-170c9cbe5099@samcday.com>
+In-Reply-To: <20260606-pm8916-pon-v1-2-170c9cbe5099@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Jun 2026 11:37:33 +0100
-X-Gm-Features: AVVi8CdYS-aUElTBHxu6KcFi4gNdTxIs1Kx6OOSF0B1mauJ5HHR0P1lySMV1y4o
-Message-ID: <CAFLszThipuAATAXxnAtxK83fLT-xeCxUXCL_qG2FVAvOVViMKg@mail.gmail.com>
-Subject: Re: [PATCH 01/11] button: qcom-pmic: introduce exported setup method
+Date: Fri, 26 Jun 2026 11:38:27 +0100
+X-Gm-Features: AVVi8Cc4XkIPwWmoFJ8X1Cfq8QfhtNRWK3LixxDFZnKUYgmhTOfvhdZ_qV9vCXw
+Message-ID: <CAFLszThqHnWh=oOzDH_1sxSf45L=udFN6Me+EfujUV4mQDiVvQ@mail.gmail.com>
+Subject: Re: [PATCH 02/11] drivers: misc: pm8916_pon: add glue driver
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -134,69 +135,74 @@ Hi Sam,
 
 On 2026-06-06T08:47:32, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> button: qcom-pmic: introduce exported setup method
+> drivers: misc: pm8916_pon: add glue driver
 >
-> The qcom_pwrkey driver is currently binding to both the individual
-> pwrkey/resin nodes, as well as the parent pon node.
+> Initially, this driver binds the existing qcom_pwrkey driver to continue
+> supporting pwrkey/resin buttons. In follow-up commits it will be further
+> extended to bind a reboot-mode driver.
 >
-> In the next commit, a new glue driver will be introduced for pm8916_pon,
-> which will continue binding these buttons, as well as additional
-> drivers.
->
-> button_qcom_pmic_bind was renamed to button_qcom_pmic_setup and exported
-> in a shared header, which the new pm8916_pon driver will call.
+> The 'qcom,pm8916-pon' compatible is removed from qcom_pwrkey, since
+> pm8916_pon owns it and handles binding qcom_pwrkey.
 >
 > Signed-off-by: Sam Day <me@samcday.com>
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 >
-> drivers/button/button-qcom-pmic.c |  6 +++---
->  include/button/qcom-pmic.h        | 17 +++++++++++++++++
->  2 files changed, 20 insertions(+), 3 deletions(-)
+> drivers/button/button-qcom-pmic.c |  1 -
+>  drivers/misc/Kconfig              |  7 ++++
+>  drivers/misc/Makefile             |  1 +
+>  drivers/misc/pm8916_pon.c         | 78 +++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 86 insertions(+), 1 deletion(-)
 
-> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-> @@ -13,9 +13,9 @@
->  #include <power/pmic.h>
-> -#include <spmi/spmi.h>
->  #include <linux/bitops.h>
->  #include <time.h>
-> +#include 'button/qcom-pmic.h'
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -0,0 +1,78 @@
+> +struct pm8916_pon_priv {
+> +     struct udevice *pmic;
+> +     phys_addr_t base;
+> +     u32 revision;
+> +};
 
-Please use angle brackets - this header lives under include/ and is on
-the standard search path, so #include <button/qcom-pmic.h>. The same
-applies to the include in drivers/misc/pm8916_pon.c (and pm8916_pon.h
-itself in a later patch). Quoted includes are reserved for headers
-found relative to the .c file. Also check the order (button/ comes
-before power/)
+In addition to Casey's comments...
 
-> diff --git a/include/button/qcom-pmic.h b/include/button/qcom-pmic.h
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#include <dm/device.h>
-> +#include <linux/errno.h>
+base here is an SPMI register offset within the parent PMIC, not a CPU
+physical address - phys_addr_t is misleading. Please use u32 (or at
+most fdt_addr_t, matching the dev_read_addr() return).
 
-Missing the usual #ifndef __BUTTON_QCOM_PMIC_H / #define / #endif
-guard. The pm8916_pon.h added later in the series has one - please
-match that style.
-
-> diff --git a/include/button/qcom-pmic.h b/include/button/qcom-pmic.h
-> @@ -0,0 +1,17 @@
-> +#else
-> +static int button_qcom_pmic_setup(struct udevice *parent)
+> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+> @@ -0,0 +1,78 @@
+> +static int pm8916_pon_bind(struct udevice *dev)
 > +{
-> +     return -ENOSYS;
+> +     int ret;
+> +
+> +     if (CONFIG_IS_ENABLED(BUTTON_QCOM_PMIC)) {
+> +             ret = button_qcom_pmic_setup(dev);
+> +             if (ret)
+> +                     dev_warn(dev, "failed to bind qcom_pwrkey: %d\n", ret);
+> +     }
+> +
+> +     return 0;
 > +}
-> +#endif
 
-The stub should be static inline - otherwise any translation unit that
-includes this header without calling the function gets an
-unused-function warning, with multiple-definition risk if it does get
-used from more than one .c file. Compare with the pm8916_pon.h stub in
-patch 4 which uses static inline correctly.
+Two things. The CONFIG_IS_ENABLED() guard is redundant - the stub in
+<button/qcom-pmic.h> already returns -ENOSYS when the option is off,
+which is the whole point of the stub. Second, swallowing the error and
+returning 0 means a real binding failure is invisible to the caller;
+please log via dev_err() or propagate it. As written, -ENOSYS from the
+stub would also trigger the warning on every probe when
+BUTTON_QCOM_PMIC=n, which I suspect is not what you want.
 
-With those fixed:
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> @@ -439,6 +439,13 @@ config SPL_PWRSEQ
+> +config PM8916_PON
+> +     bool "Enable PM8916 PON driver"
+> +     depends on PMIC_QCOM && MISC
+> +     help
+> +       The PM8916 PMIC is a multifunction device that handles pwr/resin buttons,
+> +       reboot type (soft/hard/poweroff) and reboot mode (recovery/bootloader).
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The help text describes functionality this patch does not yet provide
+- reboot type and reboot mode come in later patches. Please describe
+what this driver does at this point (binds the pwrkey/resin buttons)
+and expand the text in the patches that add the further functionality,
+so bisection points at a coherent description.
 
 Regards,
 Simon
