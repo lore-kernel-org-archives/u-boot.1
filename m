@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7AF0CDE00B
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 01:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607A4CDE00B
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 03:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED4878495B;
-	Fri, 26 Jun 2026 03:53:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A84D7847C8;
+	Fri, 26 Jun 2026 05:09:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ioSLNHtO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bb0uhslO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 023818496E; Fri, 26 Jun 2026 03:53:52 +0200 (CEST)
-Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
- [IPv6:2607:f8b0:4864:20::1331])
+ id F214B84974; Fri, 26 Jun 2026 05:09:20 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B79A847C8
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:53:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DEBE847C8
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 05:09:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dy1-x1331.google.com with SMTP id
- 5a478bee46e88-30b9e755555so1267655eec.1
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 18:53:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e6128bd9b3so257006a34.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 20:09:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782438828; x=1783043628; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782443357; x=1783048157; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D+h72+2Xo4BLKiO+vvXQCgPhdcsB+Dqc0DpT6Vg7cvs=;
- b=ioSLNHtOueXjnqVeqREjBB2wUum3/E5N2gg3yXplnDr4KEQEg8y2Go8IYeG9TOAAeD
- 6W8fgtoXBvHUphHxRqQxqf4PwQUXKGAt49DScK/ITgdVzIq6Qaqq78WayP+14vp0hGkR
- GPjIbbBYBHqgSzHIkdC3o9xMPlOXlrLcFCLVCLFSdlohHO1TD1jRPnl+VcQNThQvM3oF
- WS7BJtv3DQR0pWsfI+ZWrDGj3zs6702bVIybNmxXFC7dHgRGU3rQn2s+XOOyTZnfNaIu
- AVwSlMkPkrdPB7R4G+i0y3doh2YK+svytmjp6I5WrPasCrJ7dBaaozg19BmdF/F9fHBi
- fJKg==
+ bh=OFUtPEZyxNdqzMb6nYZxIiZNhzjH8hj5do6e7npd4h8=;
+ b=bb0uhslO+Oyihkih8+HTJfdqIsCfyoiFxQYdvU1/xIA1tFEF/AKH8KrNjkeydTlz8q
+ fJtqYzqYZ9jiWMuuINw9T0fQlFT/uZQJ3W/9R0Vkf7wLdTYXb9Xby47RqD4T+J2wGi4O
+ 1sCkAaCBxSGrf2RVBsLGGk7xK3SyNA1AbtEUBe/44o8SIRLgjy7GRw9KypJvEdP979og
+ MADg6r52bW+KR4XTmwEtKPDZUUUjyn0JdpNHAp6VC5jplPQiYv/4BvCZzCqKCMlSrq5a
+ bqsven+q7E6WCxxAhhNI7imcZowJAUFTtDO8HLDJkyigFRCz04RuSfYXVun9XyGmG7Vd
+ 2Xsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782438828; x=1783043628;
+ d=1e100.net; s=20251104; t=1782443357; x=1783048157;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D+h72+2Xo4BLKiO+vvXQCgPhdcsB+Dqc0DpT6Vg7cvs=;
- b=tD01UL6wJK2OWm0b1yen1ME70xLFw0n4G2i7tL4J4JUfFniTI+ziWrXcuipo+tvBBb
- PYwzLK08gBscsRHEs5PUPl9Rbj4cG/INPoewtd/XONRESFt2xCYZ7DEkvQK87h1KZPy2
- 6VwGWqHaoMQcbpPQ61UyvCoDeivc9boxGPEHkb2tSOAcuBUGp0Ce39JY6FsTGWvCTGz0
- GKT/6DIoSkKCABmCOMDIZ8mm6Iu26PAEeqn6hXtJxJJhCgfWvrP1Rx59DfdStaiU643W
- AzmlAJHmpEyHv+bmwUJhCaSyEA0vxLNjstmDbGPbYvpKHp/ZL2RLfTP6LGZTyWXepzY9
- K/Zg==
-X-Gm-Message-State: AOJu0YwKBaF+vBQsJaTHsz7vQzg8ztXU08EXw9ZnmosDX9bd4C5L4b66
- 4dww77Ys+jkG1T22MhxYd5DopVGng5bBRii+Mo0Z2dTw5/6+kJINcDxY
-X-Gm-Gg: AfdE7clPLRS/GQhz8tXCEETUgT+ErnYgbnGaXMHNn40IlbIPu0DNbPPPbuBxKrCRmJI
- iZF8gmQ0RC0mlaXLsCm+V782ReobKEMjxh81YSOGGuBnRkDnImyhHn2wPzoGKamNtsqNcPIbJty
- NA5wtc7EQy3U2xXm8sfz30V4CLOB64Ok6L9lGqEXy5HwLDllR/7L8AyhhrYDG11sUPWAVTAHUNm
- kj8S++5MunfNVKrz5B3WtB6JCiZTq24THeoLc2NR/AN3JgQWrjWlFM1AeLqrzw03toXRrL8PkXk
- ZLCxRSWYJfBxwbRFdPQ/IGBcs4aGIGEKO7EYQXuGLvDX+mDtSOzHN67z5J24Ujhm7rkPN0BS1uD
- MknH5JKwowAfSeEFUBMiQrV8LG3zTIq/UKhABkPs6jG7tg+2OelD7CR0vnDC3Jrt7FRI/B0VoI+
- Klki0Ny70IR57V6gq6DgwfoSE4HGwA7IWp9fIcKl/ny4IsX8YY9Cs4lKQKb2I=
-X-Received: by 2002:a05:7300:547:b0:30c:38ed:46b5 with SMTP id
- 5a478bee46e88-30c84c0506amr5702230eec.12.1782438827684; 
- Thu, 25 Jun 2026 18:53:47 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a803:bcaa:389b:2f9f:e80b:4f62])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c9e220bsm12952673eec.21.2026.06.25.18.53.45
+ bh=OFUtPEZyxNdqzMb6nYZxIiZNhzjH8hj5do6e7npd4h8=;
+ b=NLfOFDd1BZT/Wfg10tayBzY9N+g3awmgvX3a/FscxglaQR0ZM5V/rcFS0/qEofP+dS
+ MgUMXqA+dE7TwrQqSNXtU0vztR6+wjU9bAI9sRDg3bvLOWc9wODtscOTyg8ctOWbszf2
+ mb8xHJMUsI2xXV9HfBBoNyNSakN9NTdyCC0wLuS7Zj72iXwKWCPiR7zt/8+ITtYo7nbt
+ om5I3lGB+QIVGgayUMxfzQdps/TU1MK8l2iu+ftpLVc1LjWXIPRAvTetq/KRNCdxmq6W
+ nidP758wkaOFKWYGe1M30h8a3JGpuhft3uG0zHYhImqRPjEad6wODogw1jJSS3kg1E8d
+ r8nw==
+X-Gm-Message-State: AOJu0YxRuBsyXLciQ5VBgVvYgKyxGHLmsrQRPEvxUWxRsy13qajkREhv
+ UtIBaQ+OK4pmpYkp0YcO+i8ffwgzt/p7DZOdkDLJDaVtNfDeEFRXiYsMaKE2jxLhPHI=
+X-Gm-Gg: AfdE7ckxyHBR3Odq+iTrGbN6r/SJD4stmbuSsRqp1WHa5GDeponBvSaCzr+GmoVIQqs
+ NQ1Pqy9O7bMuVB8ZAkenOEvAsTvk9qvQqi9BXepHkcVFK94jfXioIMqFH0UO/HQUGFgxc++gK4B
+ nPXGY3znbR0aQ/rm1Fh9qWruSZ1yeRpm+8YlnWp+hjnyB++Vffo5bivooHcFZiNxYOW2Idc4c/+
+ u10+QAgOLZOm3oz5fle91i1xd4vfOlYaiAa6gY3gDV4Q76tZl8xExl2t+Jg2v9qaYGpd5cCrC3e
+ PAC+Hr8fhn24QDPw2YKkwXG9m/tdp9lF6l7PKHhXLMjLyund8fGsw5M8Ndvh5FZjRLeUEIJl14D
+ zuCPkx1EhE+Yqp8vY/yUet+Sr5cO9pzrlsgHP4yZeMmGLYI2ZbZKoZi4J8FS1sWofOpoWEP2NdT
+ cAvsCKAyY8jM6qoAS9QSrb98mKj+6Hx+VUJAIZgJGoz5St2QyCUVjMg8Laxv+my2ufEVAbs6Mqe
+ u1up1lf/AR/DN8lRHL/NMSFNTeCmymfEz4bM3vbkWRb40ubngTORAkn3dEEK8OOcdkXCU00zvwl
+ v8DfQYwZG9uJ2Ww=
+X-Received: by 2002:a05:6830:608b:b0:7e7:352:2f74 with SMTP id
+ 46e09a7af769-7e99c18d2f3mr4874501a34.13.1782443356943; 
+ Thu, 25 Jun 2026 20:09:16 -0700 (PDT)
+Received: from james-x399.tailafd1a.ts.net (97-118-25-163.hlrn.qwest.net.
+ [97.118.25.163]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e9aa5d3554sm687966a34.9.2026.06.25.20.09.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 18:53:47 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: kever.yang@rock-chips.com
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] rockchip: rk3588s: Add support for ROC-PC-RK3588S
-Date: Thu, 25 Jun 2026 22:53:40 -0300
-Message-ID: <20260626015340.2375163-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ Thu, 25 Jun 2026 20:09:16 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] sunxi: spl: support DM I2C PMIC bus
+Date: Thu, 25 Jun 2026 21:09:07 -0600
+Message-ID: <20260626030909.2020462-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,219 +100,252 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ROC-PC-RK3588S board is an SBC made by Firefly, based on the RK3588S
-SoC.
+sunxi_board_init() may need to configure AXP regulators before DRAM is
+available. The legacy I2C SPL path calls i2c_init_board() before
+sunxi_board_init(), which enables the TWI clock/reset and pinmux. Do the
+same when SPL DM I2C is enabled, but keep i2c_init() limited to the
+legacy I2C path.
 
-Add support for it.
+Expose i2c_init_board() to DM I2C callers through the I2C header instead
+of adding a local sunxi prototype.
 
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
+The AXP PMIC bus helper path used when SPL_PMIC_AXP is disabled also
+still used the legacy I2C accessors. Add a DM I2C path by resolving the
+PMIC bus and chip address from the control FDT, then using dm_i2c_read()
+and dm_i2c_write(). Return an error if the PMIC node is not present in
+the control FDT rather than guessing at the first I2C bus.
+
+Do not cache the DM bus in static storage: this path runs before DRAM
+init in SPL, and SPL BSS may live in DRAM. Resolve the bus locally
+instead so the early PMIC path does not depend on pre-DRAM BSS.
+
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi  |  7 ++
- arch/arm/mach-rockchip/rk3588/Kconfig    |  7 ++
- board/firefly/roc-pc-rk3588s/Kconfig     | 12 ++++
- board/firefly/roc-pc-rk3588s/MAINTAINERS |  7 ++
- configs/roc-pc-rk3588s_defconfig         | 91 ++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst          |  1 +
- include/configs/roc-pc-rk3588s.h         |  8 +++
- 7 files changed, 133 insertions(+)
- create mode 100644 arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
- create mode 100644 board/firefly/roc-pc-rk3588s/Kconfig
- create mode 100644 board/firefly/roc-pc-rk3588s/MAINTAINERS
- create mode 100644 configs/roc-pc-rk3588s_defconfig
- create mode 100644 include/configs/roc-pc-rk3588s.h
+ arch/arm/mach-sunxi/board.c    |   5 +-
+ arch/arm/mach-sunxi/pmic_bus.c | 127 +++++++++++++++++++++++++++++++++
+ include/i2c.h                  |   3 +-
+ 3 files changed, 133 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-new file mode 100644
-index 000000000000..e2ed7ce6232b
---- /dev/null
-+++ b/arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588s-u-boot.dtsi"
-+
-+&usbdp_phy0 {
-+	status = "okay";
-+};
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 675f13ab66d7..841ae490e85a 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -208,6 +208,12 @@ config TARGET_RK3588_NEU6
- 	  IO board and Neu6a needs to mount on top of this IO board in order to
- 	  create complete Edgeble Neural Compute Module 6B(Neu6B) IO platform.
+diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+index 432b1c10f92..aed50ecbf48 100644
+--- a/arch/arm/mach-sunxi/board.c
++++ b/arch/arm/mach-sunxi/board.c
+@@ -483,10 +483,13 @@ void board_init_f(ulong dummy)
+ 	spl_init();
+ 	preloader_console_init();
  
-+config TARGET_ROC_PC_RK3588S
-+	bool "Firefly ROC PC RK3588S"
-+	help
-+	  ROC-PC-RK3588S is a single board computer from Firefly
-+	  using the Rockchip RK3588S.
+-#if CONFIG_IS_ENABLED(I2C) && CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
++#if CONFIG_IS_ENABLED(I2C) && \
++	(CONFIG_IS_ENABLED(SYS_I2C_LEGACY) || CONFIG_IS_ENABLED(DM_I2C))
+ 	/* Needed early by sunxi_board_init if PMU is enabled */
+ 	i2c_init_board();
++#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
+ 	i2c_init(CONFIG_SYS_I2C_SPEED, CONFIG_SYS_I2C_SLAVE);
++#endif
+ #endif
+ 	sunxi_board_init();
+ }
+diff --git a/arch/arm/mach-sunxi/pmic_bus.c b/arch/arm/mach-sunxi/pmic_bus.c
+index c77dc538456..52594e7896f 100644
+--- a/arch/arm/mach-sunxi/pmic_bus.c
++++ b/arch/arm/mach-sunxi/pmic_bus.c
+@@ -10,6 +10,9 @@
+ 
+ #include <axp_pmic.h>
+ #include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/uclass.h>
++#include <errno.h>
+ #include <asm/arch/p2wi.h>
+ #include <asm/arch/rsb.h>
+ #include <i2c.h>
+@@ -22,6 +25,102 @@
+ static struct udevice *pmic;
+ #endif
+ 
++#if !CONFIG_IS_ENABLED(PMIC_AXP) && CONFIG_IS_ENABLED(DM_I2C)
++static int pmic_bus_get_i2c_bus(struct udevice **busp, ofnode *nodep)
++{
++	static const char * const compatibles[] = {
++#if defined(CONFIG_AXP152_POWER)
++		"x-powers,axp152",
++#endif
++#if defined(CONFIG_AXP209_POWER)
++		"x-powers,axp202",
++		"x-powers,axp209",
++#endif
++#if defined(CONFIG_AXP221_POWER)
++		"x-powers,axp221",
++		"x-powers,axp223",
++#endif
++#if defined(CONFIG_AXP305_POWER)
++		"x-powers,axp305",
++#endif
++#if defined(CONFIG_AXP313_POWER)
++		"x-powers,axp313a",
++		"x-powers,axp323",
++#endif
++#if defined(CONFIG_AXP318W_POWER)
++		"x-powers,axp318w",
++#endif
++#if defined(CONFIG_AXP717_POWER)
++		"x-powers,axp717",
++#endif
++#if defined(CONFIG_AXP803_POWER)
++		"x-powers,axp803",
++#endif
++#if defined(CONFIG_AXP809_POWER)
++		"x-powers,axp809",
++		"x-powers,axp806",
++#endif
++#if defined(CONFIG_AXP818_POWER)
++		"x-powers,axp818",
++		"x-powers,axp813",
++#endif
++	};
++	struct udevice *bus;
++	ofnode node;
++	int i, ret;
 +
- config TARGET_ROCK5A_RK3588
- 	bool "Radxa ROCK5A RK3588 board"
- 	help
-@@ -421,6 +427,7 @@ config SYS_SOC
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/coolpi/genbook_cm5_rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
-+source "board/firefly/roc-pc-rk3588s/Kconfig"
- source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
- source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
-diff --git a/board/firefly/roc-pc-rk3588s/Kconfig b/board/firefly/roc-pc-rk3588s/Kconfig
-new file mode 100644
-index 000000000000..bded7a2fcba1
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROC_PC_RK3588S
++	for (i = 0, node = ofnode_null(); i < ARRAY_SIZE(compatibles); i++) {
++		node = ofnode_by_compatible(ofnode_null(), compatibles[i]);
++		if (ofnode_valid(node))
++			break;
++	}
 +
-+config SYS_BOARD
-+	default "roc-pc-rk3588s"
++	if (!ofnode_valid(node))
++		return -ENODEV;
 +
-+config SYS_VENDOR
-+	default "firefly"
++	ret = uclass_get_device_by_ofnode(UCLASS_I2C, ofnode_get_parent(node),
++					  &bus);
++	if (ret)
++		return ret;
 +
-+config SYS_CONFIG_NAME
-+	default "roc-pc-rk3588s"
++	*busp = bus;
++	if (nodep)
++		*nodep = node;
 +
-+endif
-diff --git a/board/firefly/roc-pc-rk3588s/MAINTAINERS b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-new file mode 100644
-index 000000000000..9a2bb4e69e89
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3588s/MAINTAINERS
-@@ -0,0 +1,7 @@
-+ROC-PC-RK3588S
-+M:	Fabio Estevam <festevam@nabladev.com>
-+S:	Maintained
-+F:	arch/arm/dts/rk3588s-roc-pc-u-boot.dtsi
-+F:	board/firefly/roc-pc-rk3588s/
-+F:	configs/roc-pc-rk3588s_defconfig
-+F:	include/configs/roc-pc-rk3588s.h
-diff --git a/configs/roc-pc-rk3588s_defconfig b/configs/roc-pc-rk3588s_defconfig
-new file mode 100644
-index 000000000000..b625c93ad2d3
---- /dev/null
-+++ b/configs/roc-pc-rk3588s_defconfig
-@@ -0,0 +1,91 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_ENV_OFFSET=0x400000
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-roc-pc"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ROC_PC_RK3588S=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0x500000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-roc-pc.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_REDUNDANT=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_RTL8169=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index a31ee7100b9f..ae18b08031d2 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -153,6 +153,7 @@ List of mainline supported Rockchip boards:
-      - Rockchip EVB (evb-rk3588)
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-+     - Firefly ROC-PC-RK3588S (roc-pc-rk3588s)
-      - FriendlyElec CM3588 NAS (cm3588-nas-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-diff --git a/include/configs/roc-pc-rk3588s.h b/include/configs/roc-pc-rk3588s.h
-new file mode 100644
-index 000000000000..c9316687c38f
---- /dev/null
-+++ b/include/configs/roc-pc-rk3588s.h
-@@ -0,0 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++	return 0;
++}
 +
-+#ifndef __ROC_PC_RK3588S_H
-+#define __ROC_PC_RK3588S_H
++static int pmic_bus_get_i2c_chip(struct udevice **devp)
++{
++	struct udevice *bus;
++	ofnode node;
++	u32 addr;
++	int ret;
 +
-+#include <configs/rk3588_common.h>
++	ret = pmic_bus_get_i2c_bus(&bus, &node);
++	if (ret)
++		return ret;
 +
-+#endif /* __ROC_PC_RK3588S_H */
++	ret = ofnode_read_u32(node, "reg", &addr);
++	if (ret)
++		return ret;
++
++	return i2c_get_chip(bus, addr, 1, devp);
++}
++
++static int pmic_bus_init_i2c(void)
++{
++	struct udevice *bus;
++
++	return pmic_bus_get_i2c_bus(&bus, NULL);
++}
++#else
++static int __maybe_unused pmic_bus_init_i2c(void)
++{
++	return -ENODEV;
++}
++#endif
++
+ int pmic_bus_init(void)
+ {
+ 	/* This cannot be 0 because it is used in SPL before BSS is ready */
+@@ -47,6 +146,8 @@ int pmic_bus_init(void)
+ 
+ 		ret = rsb_set_device_address(AXP_PMIC_PRI_DEVICE_ADDR,
+ 					     AXP_PMIC_PRI_RUNTIME_ADDR);
++	} else if (CONFIG_IS_ENABLED(DM_I2C)) {
++		ret = pmic_bus_init_i2c();
+ 	}
+ #endif
+ 
+@@ -60,13 +161,26 @@ int pmic_bus_read(u8 reg, u8 *data)
+ #if CONFIG_IS_ENABLED(PMIC_AXP)
+ 	return pmic_read(pmic, reg, data, 1);
+ #else
++#if CONFIG_IS_ENABLED(DM_I2C)
++	struct udevice *dev;
++	int ret;
++#endif
++
+ 	if (IS_ENABLED(CONFIG_SYS_I2C_SUN6I_P2WI))
+ 		return p2wi_read(reg, data);
+ 	if (IS_ENABLED(CONFIG_SYS_I2C_SUN8I_RSB))
+ 		return rsb_read(AXP_PMIC_PRI_RUNTIME_ADDR, reg, data);
+ 
++#if CONFIG_IS_ENABLED(DM_I2C)
++	ret = pmic_bus_get_i2c_chip(&dev);
++	if (ret)
++		return ret;
++
++	return dm_i2c_read(dev, reg, data, 1);
++#else
+ 	return i2c_read(CONFIG_AXP_I2C_ADDRESS, reg, 1, data, 1);
+ #endif
++#endif
+ }
+ 
+ int pmic_bus_write(u8 reg, u8 data)
+@@ -74,13 +188,26 @@ int pmic_bus_write(u8 reg, u8 data)
+ #if CONFIG_IS_ENABLED(PMIC_AXP)
+ 	return pmic_write(pmic, reg, &data, 1);
+ #else
++#if CONFIG_IS_ENABLED(DM_I2C)
++	struct udevice *dev;
++	int ret;
++#endif
++
+ 	if (IS_ENABLED(CONFIG_SYS_I2C_SUN6I_P2WI))
+ 		return p2wi_write(reg, data);
+ 	if (IS_ENABLED(CONFIG_SYS_I2C_SUN8I_RSB))
+ 		return rsb_write(AXP_PMIC_PRI_RUNTIME_ADDR, reg, data);
+ 
++#if CONFIG_IS_ENABLED(DM_I2C)
++	ret = pmic_bus_get_i2c_chip(&dev);
++	if (ret)
++		return ret;
++
++	return dm_i2c_write(dev, reg, &data, 1);
++#else
+ 	return i2c_write(CONFIG_AXP_I2C_ADDRESS, reg, 1, &data, 1);
+ #endif
++#endif
+ }
+ 
+ int pmic_bus_setbits(u8 reg, u8 bits)
+diff --git a/include/i2c.h b/include/i2c.h
+index b2572076236..00f33c9e8e2 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -613,6 +613,8 @@ int acpi_i2c_of_to_plat(struct udevice *dev);
+ void i2c_early_init_f(void);
+ #endif
+ 
++void i2c_init_board(void);
++
+ #if !CONFIG_IS_ENABLED(DM_I2C)
+ 
+ /*
+@@ -700,7 +702,6 @@ struct i2c_adapter *i2c_get_adapter(int index);
+  * repeatedly to change the speed and slave addresses.
+  */
+ void i2c_init(int speed, int slaveaddr);
+-void i2c_init_board(void);
+ 
+ #if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
+ /*
 -- 
-2.43.0
+2.53.0
 
