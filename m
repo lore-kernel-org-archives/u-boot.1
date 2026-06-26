@@ -4,135 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9112EC43327
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 13:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075EFC43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 13:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B242B84704;
-	Fri, 26 Jun 2026 15:36:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 3A29584704;
+	Fri, 26 Jun 2026 15:47:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VeZT4TAz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mRuKPRza";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61CB88495B; Fri, 26 Jun 2026 15:36:37 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4C8B88495B; Fri, 26 Jun 2026 15:47:09 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A1688460E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 15:36:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 532378460E
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 15:47:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TRPfSP4kidHaJyNGoc8dFAM+yzH1gjbO5FH1GOTmeSrUx9MhVc1ZY2yEjuBnsVwEJKVaxL2+v1ZzPoQwYdxxg733265GL3xgLywzzyUj9OlR3CitdK4dhE73736yr8iwVX28eIyGADpXt0ylr3paPYzKGWoqa30qTno1gdGiCb7zsRcFf24nwXfJiYmWl5k882sadtzA6Nozk+jTnWo3eS4wGB1h0EM99uLQ0/YVBue70gid5tE6tad0pHd+2HdDSB+N1bZ9x6CyA5ITsfaIBQddQMoo/WyGnEGU5Vs477Q8lRz4gg0V9SLxr/0RPmiFzgmiDrGWOsEzwN1gN0BmOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5kJ/Ox9YWMz7Nj6WzO88nCNZp4R1HLYwyF7KwuRprjU=;
- b=Jat4iJdehj/pmdU1NqDI01/D4yLupR4Xe/Hj4W+ivqQX1MSyxYOJ8edZOV7IkfjqlTB4VDqhGtSkDv+YZBqkXz95Q/h/QBsU8gcFVnFvMteQyluJ+CqMteoRbR4z6W9FW9GQfkiKScEJWjL/xvCVCV9oCUC/Ckvw/HLZXWrB9ny3z4YWta2K8c+pJWECKk9+IUN13n6JjNzGnHjPBJXgDnyPp9QEgNGD8mGz/eJ5tCIScrc1XCJczuBKSWWhhIMwcGSqYi2IXCaql4x5NJjZRnn7KKY7SsSp3Nbf59yEf+wCGU82deQpzqveyjavAoudA5aMPm5gKYf4nJvURfqaLA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5kJ/Ox9YWMz7Nj6WzO88nCNZp4R1HLYwyF7KwuRprjU=;
- b=VeZT4TAzjrTDicOFvbAyrgbSuZ4DnTGwss+j6yO5vYrDWANzpWYw0m+0uRX31eGv9CA3IaQ74LM1H1qC83rNnSPyj2xHlfXK7HlhAlJS2t282bCU/HutIA2CaEn9aV+5NX4+K8hdjEG3I8jMGdxRNfLnR0JbbcOf42d4R22Zrgw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AS8PR04MB9176.eurprd04.prod.outlook.com (2603:10a6:20b:44b::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
- 2026 13:36:32 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
- 13:36:32 +0000
-Message-ID: <f363790f-3d17-49b2-900a-57fbe357af4a@cherry.de>
-Date: Fri, 26 Jun 2026 15:36:31 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: ums: Set Device Descriptor iSerial based on serial#
- env variable
-To: Marek Vasut <marex@nabladev.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@nabladev.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20260613025510.134239-1-marex@nabladev.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260613025510.134239-1-marex@nabladev.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIZP296CA0010.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a1::17) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-44841e9f651so276631fac.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 06:47:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1782481625; x=1783086425; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fYxwnfskk0vDIoudnRa/X34RueE0lgreotok6dEHGms=;
+ b=mRuKPRzacWAQlKLsGVJhoBoEpXuaeTiiSoV02T8ntzsCJcJitcdGFPzhShzxF0XXkW
+ rraUXuRuxeCoB0dJwKa53wvDKGSFf/+vDQAc3UOT2ml3X8rz2QZNOB2EpWq22bJXIQsd
+ WPf+I1QCED7YkC5QdtDUNdbjb3z/C6UXK02Lk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782481625; x=1783086425;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fYxwnfskk0vDIoudnRa/X34RueE0lgreotok6dEHGms=;
+ b=o+9vjL5EdoNZH2OutZo38ABe7/4Ei6BaN2FfyiryD07Tz6zKZNp6nP004OVYeXcHUf
+ ZvMmZkJRxtYsJcpwes48wmJ49zg36CnIoc/1dIly9+clZ2+sxVqg/zv6Z+2e6HXqhn8T
+ U8fFTaQtrDUytb4H+O1HFIkueYuor/4QdQbf3aVVULKReLUqK+nrUtL+cji4KNaMF84n
+ sq9Ns0NXc1QUX6R1wqmN2d+5xY99cM+euZCO9CfuN51fF6L41sYiUftIDMq6IPeyaOOl
+ J7kQdeOMYP5MihiPQNKjHK5LDELsxVUBBWqTNCiDOhxNVRG1WT+L2T8Ykr4yG0NO+jUa
+ MDnQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp6uUHIXNLEXEiNBOovbjp4HpzC8Mv/jVN60qXzR003g1X5a2mPQWcgSVo7Q57brm/+2I+ZXdI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxkm9/Fd3fXqlmFzwgUXbNNYGEwCUp5h+cyoh7XlD6oR2Gwuz4/
+ yD7n/6RuktBi3CkmVmRmU6ealCKsDIA+y17DSJC8WsJDufYI0wPDJ93ES/zXjzPn13M=
+X-Gm-Gg: AfdE7cn8EvStFIyfyTHIeKfWf3GOmUMcu21NSg8flu9QRra9ga/g7FE3S78GjgQQBz7
+ 0yVCerInqWgZXt2wsJqFvuZoQ+CP1dcybS6C2gqFy/4HAVx6pkVOuAm+bY1NHiNUCmwxO26dV5i
+ X1jEOhy9sP5Sop45xNBV5Jiy2kVUm+dUcwbNwQ8FIBLG2nC7SiXQgKLlGa1rRMEo1MMuD/7LDie
+ F6TG/sC1/w/F0HQX2OvcCidXVyFSD5JDgS+5wqAZezDkb9MJ0fi5e0rOw0opFYdnoHI4EY1oqiO
+ SUbM58btJ/6pJsEBDCmhl5lmNTkKstBCfE9sEMpWux1uj5fkFnstr6TkL4icz5PdhZQURoEHc2+
+ iVeIPUjDtrRzMtNkeNa3v9FIjYTwVldACStBsXDOKo6q7KSKhuqClkoLnCTcXajczxSbAaWRp8e
+ iaZwwULNE/EElCyENfZxZt7rKZJW1GZiTaca08sGmA3KKmI9azTCxTAfSEitd2/x0OJ1FOP5uOV
+ yKIES7bYIZKLt72VRx9+/Am3JUvp2EBpOHRnRcP
+X-Received: by 2002:a05:6871:d105:b0:447:4bc9:4b05 with SMTP id
+ 586e51a60fabf-448117a483dmr5386144fac.4.1782481624742; 
+ Fri, 26 Jun 2026 06:47:04 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
+ [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4472eccfa68sm13881636fac.5.2026.06.26.06.47.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Jun 2026 06:47:03 -0700 (PDT)
+Date: Fri, 26 Jun 2026 07:47:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH 7/7] boot: add a minimal bootmeth for the Boot Loader
+ Specification
+Message-ID: <20260626134701.GX382693@bill-the-cat>
+References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
+ <20260604-bls-v1-7-4ce6d1ee4711@flipper.net>
+ <CAFLszTikihqsUmOGdmb8Q9WypiEHb0nq-a7vXH5XrXNxRVeNjg@mail.gmail.com>
+ <CAKTNdwEkt+YMq-SG=PVTGzGztyeujVr=fEje74NnSbBbiswd7w@mail.gmail.com>
+ <CAFLszTg7DJW4b0JhuPgCQe2TdMEdUagdGqRu7UG_j__S=4MjMQ@mail.gmail.com>
+ <CAKTNdwEJuQ_6ROpKb+b_anFH7GbaT8NA2dvmxWmS_m8RSUYxTw@mail.gmail.com>
+ <20260625172422.GU382693@bill-the-cat>
+ <CAFLszTg5sBQiVw_guWhNjg8PQ2d+KyVXw0=Q0igjxSeuxerqsQ@mail.gmail.com>
+ <20260625173258.GV382693@bill-the-cat>
+ <CAFLszTiS3GXAj9XoqfMb-Lf4kbyYJNopDv_yApRoiChqO-8J3A@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB9176:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe663323-3d82-4eb9-707d-08ded387ef95
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|56012099006|3023799007|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: /n/DOcriYXtKsBHUiJ52RiW5ThFJsH2Y8CLuGuz2vc7IUJao3auiBw4XZDP05n4L8tgu6jQ/qNNn0O14fCgxn7yfop8tRGImL2/yrdsrF2IlLSBQ0lVXLb2uK9e2W3r4xzC3cgGYYQFk+fFiZ0U9eCut8WR5q1dGta6qIC7FSQ1YXY1wk20KAy0PH9GNiHMau6debfMWkyK9BoHuLg1Kr1viftv0X62FZ1IB7zvfSSyob8CkAxLuYRR1wZ6lsNrZEf+G41yPVZcfgVBZrtopsCHQTfSRi0oRyqqIZVHcGauaFHPnhOZtZ6XkYVrKXq5lzsoM4q4hvH+jKN8l7k+/zye4xpQHDjnWOnNXiaLxYx+ZRLIP8a29Kdj9PFbICQMTjGEKKTxH2OC4XZeHlupxwZSca0JB6wluJ5kU/vHEAmJw0rYKex9h3nSQFyqY+IX9nAg4myjptINi/pl2ePHUrwfLsOwiyMGBoDbaLng4ugA82Rau2hwLy4y5qVGWpqE2W+aHappHXwpbif46nrpgynloJbhpEPz6GCJKcgCjg8rUFtOiuT/dlqZAvpsedTX169aHytfV5Vr40AdwkeKatuIUVHfwRRIRaPoRyZ6yZ12rI1KpWR/gDNp6x9JaoLRxGu+goE191JLBghr/XSqWAyhLf9uqWwaIztOXxAogv/g=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(3023799007)(11063799006)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NXprd3FtYU80ZXpGbWFVQ0hYS01aMi9NMGIyVnA5QldUOU8xUTJBSDRZRUJa?=
- =?utf-8?B?dHBkMGFtSjNORWZLT2JnQ0xhdmtxcDlBRUFNbGpnTWpaQmRFY3RKS3NSS0pF?=
- =?utf-8?B?WTcrdDdaQm9xcTBJeWluWnA4T0tJTitHSCtlNU5ReHZMTjBuMGFGN2JuYnVa?=
- =?utf-8?B?cUFSWkVrUTBuL1NrZUdoYmtvM3F1Y3JlSnIzSllhTjFzV0RUQThWS0tVTm5F?=
- =?utf-8?B?R0svZWh5MG5INUI4ZkhJM3ptNVRDcXphQ3F3eHIrSzFrQ2h5RExzWHgwQkI0?=
- =?utf-8?B?N0Zsem5mNXN6Vi9FVTkrakRRQ1BPSXo3STFQOTh5MStRWW9TeW1XVTlsQTAv?=
- =?utf-8?B?T2dkNWhUNXN0RGs0SHc2VDB4VGdJVEh2L2JVZCsyNEtTZmN6VnZiZU9jNnZE?=
- =?utf-8?B?Z25TcVpINUdRcnVmRE1nazJoRkc0Tk12OU1yVStXL1pweDluaVFUTmY4V2R5?=
- =?utf-8?B?b0YrWHVTQnY3QnlNN2E2VXh3dWhtM3NFT2dVMUVXZ2lHSE56aTZZRW83SGNH?=
- =?utf-8?B?dUFaSUVPUXI2UURJRUQ4QjQreXpxdm5KYk1vaXJ3clkvNE0za093RVRTSWJI?=
- =?utf-8?B?TXp5OW9PTjZNMFZLVCtqSjA5OXRHL0FvcWhxK011cUg0NDRRVExpVW9yQ2ps?=
- =?utf-8?B?cStiWm1FeEVyNkFIbExxNFVHZzk4d2I2a0UzOEtmNld3M1lLTi9EZUE5b2NX?=
- =?utf-8?B?TGtTY0hMN2hCY1lZK0dPOEJ4V3c3ZXJGU0k3TUhLNFVxcGd3L3FxMVZ2Zmgw?=
- =?utf-8?B?YkpNN2VtZmJ6T29xN0MvVkhMRHZ2bTRUcjIvNW1HeHN0cThLWHVFOEJQNURz?=
- =?utf-8?B?Z1U0UjN3d3k5N2NOY241SVFnWXorVXZMNG9qYTZkRkZHRm1BRzg1QjRZeGJC?=
- =?utf-8?B?T0habFFlRTZzNE11bTJqejlNM2poRExoSmZheDVSeFUrUlJtbnhUeE5mM3pO?=
- =?utf-8?B?bkJ3N0FYY0ZvZ1V4dlhEMXZ6QWc0TUZuc3F4dGMzWHRXUysvOHp1MjdYWC90?=
- =?utf-8?B?OEpNbkxtWnUrWmNxK21sS2szSEVybzFMVi9JdWZlemhna0hlaEZPeWlDUEo3?=
- =?utf-8?B?KytkUGRIMUQ5L3c5U1ZKZER0T3lxc0Zwb1FTcUI0dCtiUUdCTHVkbGt4VzFp?=
- =?utf-8?B?Skh1UXRaNEpmSVB5T0Z6L1l5a0ZmdVRoQ0NKckJzbzBEWlQ2blVXeUNvZ0Fi?=
- =?utf-8?B?d25oOWlzODVxTldFYitRaWRSWXlCc09iSzVzQ2ttM2FvanhsMmY0c2Fsazhv?=
- =?utf-8?B?ak1yMlhLTGRtU3BjZ0JoWEJENFlaeEpobEloVFJqSi84R0Y3U2huMm91TUo3?=
- =?utf-8?B?Nk8reWF0RWJod0swS3JXSzB6Y0RJRmJNNzJReUlqb1pNMDlDYitMTjh3VTBz?=
- =?utf-8?B?ellLQzBMbjQrWjkxLzJmYVRzREQ5SDRJemliV0VvczQ5Z0FzWTlCTEcvOEt4?=
- =?utf-8?B?TGl0d0owM2RTQUlHSVIxYUZDUWdSVVE2RnpUWG1MU0RmYW9xRVNoRXhZbDZ6?=
- =?utf-8?B?a21HV0pCckIvMXgvY00xZVBrRjB2M0ltZFBEQTJLcnRza2xFN0dnRUQyWFlO?=
- =?utf-8?B?dW80VjY1dHhSbVJTWjhQL2Y4MnRCYVVJcjBQdzlNeGsyVDIxZGV6TjBiZkp2?=
- =?utf-8?B?V1pDczh6UnIwemNNZVBGdUNtT1BpVFRPQ0lEdjdyaDlqM04wbmZBbVExZk53?=
- =?utf-8?B?WlZma0NvazFRZVROK0dlOXFCY3N2UGlpQWxmVHlZaUI1dUVwL28valVMaFJR?=
- =?utf-8?B?MytkRC9GOTd6T3A4L2pERkowdWJaaW96eUhCYmNMWmNUWVAyYkFPcUJWa0Z0?=
- =?utf-8?B?VEl5Mnh1WlNvTFhlR3FRamFaYXpaVHgyVDVmY3pKQ3kzNGo4OUlSK2xKSHh6?=
- =?utf-8?B?bG9uM3U4S1RyNENaQ25Ga05MREJ0WVE2aVExNFJGNlBSL1NCMXNMc09MNVl2?=
- =?utf-8?B?aTB6eUlYeDlVa2JVempEVU5MV0hoUkgwcUJscnIzbGVMQ1BOc21FVThhamRW?=
- =?utf-8?B?UnNNOWtUVml5bnUvTzcwaG9oM2JhRjBwMHVVNmVaVC9SS2xiVUo3Q0xjakU3?=
- =?utf-8?B?c1JYVzJuRXRiQVF4TGRnWUZpUmVIZlhUM2FnUzFCMVdYd2w0Nk5aR2lyeElr?=
- =?utf-8?B?cUt2MTd3TkhEdDNLbWRJOG5SRXVHZHZYNm8zeGRIek5BaUdRU3dEK2ZMSVVJ?=
- =?utf-8?B?STNiV2Vlei8zdEhvTWc1QmVGSGx2MDFzeG50S3puZ0RjVUo3VFRBYU0waytV?=
- =?utf-8?B?MHZrWHAxek1wMlhJTGprNHRUVFpWbHg4bCttZkZKRkVVYWxZOGtSWEJFbUd3?=
- =?utf-8?B?d3A5dW9CTlhQSjNNMXdMdE9VVGdhOG5ydm5xeUpjSzJ1L1V2VU5CQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe663323-3d82-4eb9-707d-08ded387ef95
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 13:36:32.8153 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +qKF1HE81EF+49okb3jn9o4MTjW9+0ix8LfdxnNf/cmcL6jdajyUbt46rXTlxOnNoNrk8NDwAYft6PAEDHQDQCcbHO5xNm9Uetf+TqL2UFY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9176
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4rpUjkHGJFHksey/"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiS3GXAj9XoqfMb-Lf4kbyYJNopDv_yApRoiChqO-8J3A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,128 +115,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-On 6/13/26 4:54 AM, Marek Vasut wrote:
-> The DFU code currently sets the content of "serial#" environment
-> variable into Device Descriptor iSerial field. This is useful when
-> there are multiple devices connected to the same host PC and they
-> have to be told apart. Replicate the same behavior in the UMS code.
-> 
-> Example without serial# set, which is the original behavior:
-> "
-> u-boot=> ums 0 mmc 1
-> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
-> 
-> $ dmesg -w
-> ...
-> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
-> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-> usb 5-2.3.7: Product: USB download gadget
-> usb 5-2.3.7: Manufacturer: Vendor
->                              <------------------------------- NOT HERE
-> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-> ...
-> 
-> $ lsusb -vd 0525:a4a5
-> 
-> Bus 005 Device 051: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
-> Negotiated speed: High Speed (480Mbps)
-> Device Descriptor:
->    bLength                18
->    bDescriptorType         1
->    bcdUSB               2.00
->    bDeviceClass            0 [unknown]
->    bDeviceSubClass         0 [unknown]
->    bDeviceProtocol         0
->    bMaxPacketSize0        64
->    idVendor           0x0525 Netchip Technology, Inc.
->    idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
->    bcdDevice           7e.a7
->    iManufacturer           1 Vendor
->    iProduct                2 USB download gadget
->    iSerial                 0 <------------------------------- NOT HERE
-> ...
-> "
-> 
-> Example with serial# set to 1234abcd, which is the optional new behavior:
-> "
-> u-boot=> setenv serial# 1234abcd <------------------------------ HERE
-> u-boot=> ums 0 mmc 1
-> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
-> 
-> $ dmesg -w
-> ...
-> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
-> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-> usb 5-2.3.7: Product: USB download gadget
-> usb 5-2.3.7: Manufacturer: Vendor
-> usb 5-2.3.7: SerialNumber: 1234abcd <--------------------------- HERE
-> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-> ...
-> 
-> $ lsusb -vd 0525:a4a5
-> 
-> Bus 005 Device 052: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
-> Negotiated speed: High Speed (480Mbps)
-> Device Descriptor:
->    bLength                18
->    bDescriptorType         1
->    bcdUSB               2.00
->    bDeviceClass            0 [unknown]
->    bDeviceSubClass         0 [unknown]
->    bDeviceProtocol         0
->    bMaxPacketSize0        64
->    idVendor           0x0525 Netchip Technology, Inc.
->    idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
->    bcdDevice           7e.a7
->    iManufacturer           1 Vendor
->    iProduct                2 USB download gadget
->    iSerial                 3 1234abcd <-------------------------- HERE
-> ...
-> "
-> 
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Lukasz Majewski <lukma@nabladev.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   cmd/usb_mass_storage.c | 9 ++++++++-
->   1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
-> index e8b87045bdc..335258d7a56 100644
-> --- a/cmd/usb_mass_storage.c
-> +++ b/cmd/usb_mass_storage.c
-> @@ -9,6 +9,7 @@
->   #include <blk.h>
->   #include <command.h>
->   #include <console.h>
-> +#include <env.h>
->   #include <errno.h>
->   #include <g_dnl.h>
->   #include <malloc.h>
-> @@ -65,7 +66,7 @@ static void ums_fini(void)
->   
->   static int ums_init(const char *devtype, const char *devnums_part_str)
->   {
-> -	char *s, *t, *devnum_part_str, *name;
-> +	char *s, *t, *devnum_part_str, *name, *sn;
+--4rpUjkHGJFHksey/
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reduce the scope of the variable by declaring this variable in the 
-if-block? I find it easier follow code this way. Additionally, I'm 
-assuming we could get a "variable defined but never used" kinda warning 
-if ENV_SUPPORT is not selected?
+On Fri, Jun 26, 2026 at 11:45:22AM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 25 Jun 2026 at 18:33, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Jun 25, 2026 at 06:29:18PM +0100, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 25 Jun 2026 at 18:24, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Jun 25, 2026 at 08:57:13PM +0400, Alexey Charkov wrote:
+> > > > > On Thu, Jun 25, 2026 at 8:24=E2=80=AFPM Simon Glass <sjg@chromium=
+=2Eorg> wrote:
+> > > > > >
+> > > > > > Hi Alexey,
+> > > > > >
+> > > > > > On Thu, 25 Jun 2026 at 16:52, Alexey Charkov <alchark@flipper.n=
+et> wrote:
+> > > > > > >
+> > > > > > > Hi Simon,
+> > > > > > >
+> > > > > > > On Thu, Jun 25, 2026 at 7:28=E2=80=AFPM Simon Glass <sjg@chro=
+mium.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Alexey,
+> > > > > > > >
+> > > > > > > > On 2026-06-04T15:31:05, Alexey Charkov <alchark@flipper.net=
+> wrote:
+> > > > > > > > > boot: add a minimal bootmeth for the Boot Loader Specific=
+ation
+> > > > > > > > >
+> > > > > > > > > Add a bootmeth that finds and boots Boot Loader Specifica=
+tion (BLS)
+> > > > > > > > > type #1 entry files [1]. On each block-device partition i=
+t scans, the
+> > > > > > > > > bootmeth looks for files matching '<prefix>loader/entries=
+/*.conf'
+> > > > > > > > > (where <prefix> comes from bootstd_get_prefixes(), typica=
+lly '/' and
+> > > > > > > > > '/boot/'), picks the highest-sorting filename, parses it,=
+ and exposes
+> > > > > > > > > it as a bootflow.
+> > > > > > > > >
+> > > > > > > > > Implementation reuses the existing pxelinux infrastructur=
+e.
+> > > > > > > > >
+> > > > > > > > > For now the entry chosen on a partition is purely the lex=
+icographic
+> > > > > > > > > maximum of *.conf filenames; sort-key / version field han=
+dling
+> > > > > > > > > (spec-mandated tiebreakers) and boot-counting (the '+TRIE=
+S_LEFT'
+> > > > > > > > > filename suffix) are left as TODOs. Likewise, only the to=
+p-sorted entry
+> > > > > > > > > is surfaced because the bootstd framework currently allow=
+s one bootflow
+> > > > > > > > > per (bootmeth, partition); exposing every discovered entr=
+y will require
+> > > > > > > > > a framework extension.
+> > > > > > > > >
+> > > > > > > > > Type #2 BLS (drop-in directory of EFI binaries) is out of=
+ scope here;
+> > > > > > > > > [...]
+> > > > > > > > >
+> > > > > > > > > boot/Kconfig        |  17 +++
+> > > > > > > > >  boot/Makefile       |   1 +
+> > > > > > > > >  boot/bootmeth_bls.c | 333 ++++++++++++++++++++++++++++++=
+++++++++++++++++++++++
+> > > > > > > > >  3 files changed, 351 insertions(+)
+> > > > > > > >
+> > > > > > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > > > > > @@ -649,6 +649,23 @@ config BOOTMETH_EXTLINUX_PXE
+> > > > > > > > > +config BOOTMETH_BLS
+> > > > > > > > > +     bool "Bootdev support for Boot Loader Specification=
+ entries"
+> > > > > > > > > +     select PXE_UTILS
+> > > > > > > > > +     default y
+> > > > > > > >
+> > > > > > > > Wherever the 'default y' discussion lands, this will be ena=
+bled on
+> > > > > > > > sandbox, so the 'bootmeth list' tests in test/boot/bootmeth=
+=2Ec will
+> > > > > > > > fail since they check the exact list and count. Please can =
+you run the
+> > > > > > > > sandbox tests and update them as needed?
+> > > > > > > >
+> > > > > > > > Since you are adding a new bootmeth you also need a sandbox=
+ test that
+> > > > > > > > exercises it (see the extlinux tests in test/boot/bootflow.=
+c, with a
+> > > > > > > > fixture disk image) and a documentation page, e.g.
+> > > > > > > > doc/develop/bootstd/bls.rst with an entry in the index ther=
+e.
+> > > > > > >
+> > > > > > > Will do, thanks!
+> > > > > > >
+> > > > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > > > > @@ -0,0 +1,333 @@
+> > > > > > > > > +static int bls_getfile(struct pxe_context *ctx, const ch=
+ar *file_path,
+> > > > > > > > > +                    char *file_addr, enum bootflow_img_t=
+ type, ulong *sizep)
+> > > > > > > >
+> > > > > > > > This is a verbatim copy of extlinux_getfile() - please can =
+you export
+> > > > > > > > that, or move it into a shared helper?
+> > > > > > >
+> > > > > > > Ack
+> > > > > > >
+> > > > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > > > > @@ -0,0 +1,333 @@
+> > > > > > > > > +     ret =3D bootmeth_alloc_file(bflow, SZ_64K, 1, BFI_E=
+XTLINUX_CFG);
+> > > > > > > >
+> > > > > > > > The extlinux bootmeth passes ARCH_DMA_MINALIGN here, since =
+the buffer
+> > > > > > > > is filled by a block-device read which may use DMA on some =
+platforms.
+> > > > > > > > An alignment of 1 risks cache-line corruption there, so ple=
+ase use
+> > > > > > > > ARCH_DMA_MINALIGN.
+> > > > > > >
+> > > > > > > Ack
+> > > > > > >
+> > > > > > > > > diff --git a/boot/bootmeth_bls.c b/boot/bootmeth_bls.c
+> > > > > > > > > @@ -0,0 +1,333 @@
+> > > > > > > > > +     bflow->bootmeth_priv =3D label;
+> > > > > > > > > +     free(fpath);
+> > > > > > > >
+> > > > > > > > This leaks memory: bootflow_free() releases bootmeth_priv w=
+ith a plain
+> > > > > > > > free(), so the label's string members (name, menu, kernel, =
+append,
+> > > > > > > > initrd, etc.) are never freed - for every bootflow discarde=
+d after a
+> > > > > > > > scan, not just on error paths.
+> > > > > > > >
+> > > > > > > > Since get_string() copies tokens out of the buffer rather t=
+han
+> > > > > > > > modifying it in place, you could follow the extlinux approa=
+ch: keep
+> > > > > > > > only bflow->buf across the scan (already populated by
+> > > > > > > > bootmeth_alloc_file() and freed by the framework), use a te=
+mporary
+> > > > > > > > label in bls_read_bootflow() just to extract the title, des=
+troy it
+> > > > > > > > with label_destroy(), and re-parse the buffer in bls_boot()=
+=2E Then
+> > > > > > > > bootmeth_priv is not needed at all. What do you think?
+> > > > > > >
+> > > > > > > Will address the leak, thanks for pointing it out!
+> > > > > > >
+> > > > > > > The bls_priv structure is needed for my follow-up extension w=
+hich
+> > > > > > > allows multiple boot entries to be returned by each (bootdev,
+> > > > > > > bootmeth, partition) tuple, and I wanted to minimize churn be=
+tween
+> > > > > > > those two. I haven't sent that follow-up for review yet, as I=
+ wanted
+> > > > > > > to confirm this simpler version is acceptable first.
+> > > > > >
+> > > > > > We should implement this using an generic index rather than som=
+ething
+> > > > > > bls-specific...please see some commits at:
+> > > > > >
+> > > > > > https://concept.deinde.dev/u-boot/u-boot/-/merge_requests/782
+> > > > >
+> > > > > Oh, there's already BLS in your tree :-D
+> > > > >
+> > > > > Would you like to merge that instead? Your version looks much more
+> > > > > full-fledged. If you happen to have one rebased on master or next=
+ I'd
+> > > > > be happy to test!
+> > > >
+> > > > Unfortunately Simon's work here is AI-generated and so not particul=
+arly
+> > > > welcome, among other problems right now.
+> > >
+> > > No, not AI-generated, but certainly AI-assisted (perhaps that is what
+> > > you meant?)
+> >
+> > I didn't dig back super far to see what all AI-generated (such as your
+> > dlmalloc upgrade) vs "AI-assisted" (commit from just a few months ago)
+> > and try and guess based on the quality if it's "generated" or
+> > "assisted". But it doesn't really matter in the AI context. And it
+> > certainly doesn't matter until you've donated u-boot.org to the project.
+>=20
+> Yes the dlmalloc upgrade was a lot of work and brings a lot of
+> benefits to U-Boot. There is also a backtrace feature which is really
+> handlyfor tracking down memory leaks and hangs. I found a ton of
+> leaks, some of them very large (e.g. SCMI). There was certainly a lot
+> of manual work involved, along with AI assistance. I believe AI is
+> particularly effective when used by someone who knows the project and
+> codebase well.
 
-I don't know anything about USB, but I'm a bit puzzled by the choice of 
-location, as the DFU, fastboot and rockusb USB gadget drivers are 
-setting this in their bind function... shouldn't this be added in 
-drivers/usb/gadget/f_mass_storage.c:fsg_bind() instead to match? I'm 
-thinking, if someone programmatically configures the UMS gadget driver 
-without going through the CLI, they probably would be missing this as well?
+OK, but did you review that dlmalloc upgrade? Did you think Claude did a
+good and appropriate job there?
 
-Cheers,
-Quentin
+--=20
+Tom
+
+--4rpUjkHGJFHksey/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj6C0QAKCRAr4qD1Cr/k
+CnEpAP9pc0bL4IbKYzb4J+VpIpJgJT4zp11U6mIUd0p0GjUCKAD9EJBIpjx0pLT5
+DlDMGYjHyykIjCBoAnf+G8wjT2PwFww=
+=Lvsg
+-----END PGP SIGNATURE-----
+
+--4rpUjkHGJFHksey/--
