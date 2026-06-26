@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11FFCDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:39:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773ACCD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D46E8460E;
-	Fri, 26 Jun 2026 12:39:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4A0F8496E;
+	Fri, 26 Jun 2026 12:40:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f3lIgYTU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BA+rDVc6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 031288497A; Fri, 26 Jun 2026 12:39:13 +0200 (CEST)
+ id 1A46A8498B; Fri, 26 Jun 2026 12:40:09 +0200 (CEST)
 Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
  [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAF578404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:39:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0E2F849A3
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-697df404e32so1609528a12.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:39:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782470350; cv=none;
+ 4fb4d7f45d1cf-69806f118d1so1218673a12.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:40:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782470403; cv=none;
  d=google.com; s=arc-20260327;
- b=sV70ngQPUccCKCAFuc/XHh5QdHrk2ibY1kdXgMXW1P0aoJV9yxd3JNgSMH5boKNye3
- 6WcSwzt2YRy6X81GXlbqRKDZAysyyqPsBkHAU6fEcE8M3nioal93ScIoVybucgoARaRf
- 3lK6NJdzirjnzS+2HmvnagaFtZ+qdmKQbSK6sIpaCA+E2TdfC86O0hWylUqa8XEKxCCO
- W8Iv7IOg/bXwwWTNGFegBIxmbSS3lm+BWd/e+6Wxe1L1CGzrtE3LQq+0ibokwgNmhCBl
- 684+Ad1pi1joeE7sKPPOvuiOd3Jo05lX//NvKcteJB4gXLOo51AnNM5wQAHMlsJshGud
- 3meA==
+ b=Mi+wJCAquq/lGC6mZqkcuX+xbis0P5Paj4BhNr9mu61/qx0RbWcdj6Bfv6lSYpM78k
+ nHsFVgo78tajniTqrlAQvtfUN+mFAtrepSwKyeMs5ga+yF+tjh/p3I7oxJazjB22grIa
+ okvjkvaA8QTktMHTK7FXvZ6F7xHMuQ7rH4NuhkWyJJCdLox0olGQz7EYfgSnZCf/AZdT
+ 3FG+Z/fozMO43xWKRlV3QTeNQhS3xfM1fr4ye97HlgfYmYZWo0z/TYh3dVt4AMMm40lo
+ 1660VnahCLXU8zlEXcfpLogbCm9fXz3LAHpOjnJqa6teDX+tgvTIGI6uZ1UoUww0Al/S
+ dI8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
+ bh=n3a3PyTwgNR+CwaubtfGSj298IvMzGkwTBsVeE/9FOU=;
  fh=nyKLZbC5pO9EO6FCB5YQSf7kr334RAPXhBSMuZ9b11E=;
- b=jrYfhkTOVZl7Lg8hvcCU83BYes0EQTP04VMhV8NsWGUGOT0RLOLdEfM1OgtX4bWlpB
- Oa0rpvxaLTbtaSqgleNJolKJ3A70NoNg3D8Tvk2FGjCOFTlQryh1O7pPdfO9uAR9JXUi
- 1gCAjUL3NnZl1x9fqgWwJteD3iPjVsoEMKw8nhviA+fG1oErlPNyZ7e1C3v0iOhbRaQY
- YYfeACHIehxKDZz0xa3CmURcQ/EJAUOcT284yrGiat3bhJC+L3K/ZR2uEarITNpmWp0P
- Yw6oRKIuyCZEgojR0JbOkjryivhuL0vwwx7jXYrxS/C2J4/nZxayjnZIJSod/JalTdHx
- abUg==; darn=lists.denx.de
+ b=IfSleg1YTC+TFKsmocq/JIgDTAkTRIsT2x1X3OhAE77va60oxLLzLeiZ2LrPNl3V6K
+ A2dZrijYk4ve29fV6hbCLKWQdqdVE+joV+6rrFZFz4FxmPwShuqLyC/8NYHAlJIclAJa
+ QGcJQHQllOzzl16lwGjgJTL3Hhdi6jd0LM9I0DrIxkknyTk+aE++Aqt5ppJXo2GMmZrl
+ fv//i/WTex7CF+iRhrwsTBreySdxZXLkGAThSXHtTHowXFCMJ3sVxFWQXAF9YzT85Fj7
+ LgjUR37UNzX+jCN/C+7vuhD5cobJ0a9qmS64LeRovjgXqkprVB934eAsvFcQSoHouFiG
+ Mtow==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782470350; x=1783075150; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782470403; x=1783075203; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
- b=f3lIgYTUtXRIFlqPhS3Tj4szynwV5tu0y3ds4crouOdr6HqBgAy8YulItGyB/tDOOb
- K38GmE7gojmGWOGRFLPQM2o4b7tzSAhYNri10ogLhqiXSIv+JaSoodFWaDAuMQ01AJvO
- e2v8YyIgOOW9nJeblBH72tcJOdaAhhaXfUIQ8=
+ bh=n3a3PyTwgNR+CwaubtfGSj298IvMzGkwTBsVeE/9FOU=;
+ b=BA+rDVc6gQtpt7s+eCx3dP3fX3VXAEga5dnz1vxcV/BiIBabnD8464x764JrIBa8Qu
+ PFSPp5BryHUE5hfL7tpWb7mJ+VUlE45vplA9baGltmaD7Jqs3JZEd16uvzd+zOkc4OtP
+ BkOhhroVQazhprTjtdfFrIlNhu6qHWZu8WyVw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782470350; x=1783075150;
+ d=1e100.net; s=20251104; t=1782470403; x=1783075203;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BsZ3FnXnZ+fSRm8UMppx9GRcciQGI57TX7ezkogyd/I=;
- b=W+rCQFiX6VYsmGWZ4yB0I87w5VYVhn/4Zla+SPN+2EMYvOo9eWgFrARsUpzql+4ejo
- aw+gAlXwiLWRo/ullUG9vqbZ0963N3ZkRbqS7iAD6EGV4zM8OG1NXZkXFQNIwCeP++Kf
- sUd53VrTQMZIC09EUWimKdkHyItZ1sCKP8Gw/NopeHo7yVF5gAKcfot6tjShetEvN5uK
- xrSi7nhVB1UGIw7EuHU1oDKIjsP0x66FyTh6BfhpKLijz5X1nmfxTy3UzBoJSWRqeuwD
- 6P/xFgBHoR46oROYU798Gxf/eqk+n/E4dZFe4wOTsox54tMz+ya+70ZZgoYiEX3614ty
- FePg==
-X-Gm-Message-State: AOJu0YzVg2f2C2dcRL+zen3s+PedFpBKMkrUdH93NQtNUVXHOM2fu3gM
- 8wifwi6n31od+oEwCdnIjAIRxwCc/BH92wv0Wc6AzHTiL1eICuCaGdU1X8/rIqzfi/AWeFZ+Pq/
- pAToyCZYiVKO8N2Wlf8PYSIVNP7VH8AaUXLGpqzor
-X-Gm-Gg: AfdE7ck00X8RoN5bnDot2ISlW4lP2umRy2VgI8TdSqyXhGtsBRtdJrO2bUS3zOTr3JL
- 93xeyt+cMlgXlRcc6Q85XDbMvsmX7a4iiL+VJhyAdZarP0JWu0wfbAkTi8IoF6mWBG4279X5vob
- NhkfUM7siFN6d+W/O6oN5W5glA6KohrVWqG/KMG2GUCwjBYg1QApRoqbVnROfNS2hzTRcMaDzvc
- NwVCb+TsFkA9pXhbOYqu0mYgzBXSjbIaNnw9ZN7Cn1cq4tawh2fQ/k/pbdXKilKZFdl0CAtenPH
- YN3UFnMP
-X-Received: by 2002:a05:6402:1473:b0:697:ea41:9799 with SMTP id
- 4fb4d7f45d1cf-69810a4597emr1914091a12.4.1782470350240; Fri, 26 Jun 2026
- 03:39:10 -0700 (PDT)
+ bh=n3a3PyTwgNR+CwaubtfGSj298IvMzGkwTBsVeE/9FOU=;
+ b=rVirJdkWsA9VzfWy1K/FHehKU849NLB0KbfedU+Z6eqm5VewseSNBsyern06EzE3mN
+ HEY5CfRoiYse3OTlZ++YDe8bZGvBvDvThOSNugvImyTI/1zj1b0qBzic6T3Crayq+y6Z
+ FeiHF7p7D4u6D3pGJrPStKOpNKDKEQCK9H+WxIbQqpjJSGJllywm7KohgxAsIJJxHsnW
+ JURB6K0tIiJEzW+kc7dS/F3NEFvlu6mifIBvt3O8nHeYKlnsgoFdxeXo6bjCfWw0bCCP
+ siOTwZH83lxcGNEvh5eKGI8oVea1e+saTfzR/VgoGzd7NjFuYM1YiFQRPIM7DOG3IReu
+ FYMg==
+X-Gm-Message-State: AOJu0YzScZCTP/IYPvwO+YiRmYfDt3yBD66fqmrhV/YwgFqnpXvAQHEq
+ ELrE358I8nKOSdnjzzQNvQO/5rGGqPjtdCFl4g0jctvpS6TwMTUhqVds4WnJ9W6iGxs2KMLWjgM
+ LO1zrATptUauGKFcuFqDeEsVlCUXI+qqWMkTttMRl
+X-Gm-Gg: AfdE7clKKH9RePb8MDdBRVDb1Wi1CZzCubj9rnVKpQ5ULZ/+Do87S0RGefin7r7jisG
+ cT2OWqG7CZVuR4KmhpZxNWpLrwdt4kWuU0ps584AQxtQQeA7EwBaXSqhBAxBF+BQsPUVvQD9KmI
+ qBq24ZmWcATNKiyk6bAKapUgG4uWNizehg6dIJaN2FZiqFaV3pOhOC4Piw9+CxMxxQJtyC8iUAu
+ 5Ugrtb6q/KETmavxOO01YNeHlo+MMBPsNmyYDi597iXjm9D7hlWdoG1+kG5rclYxnUlWXBMz7xC
+ vqQc2LLS
+X-Received: by 2002:a05:6402:321b:b0:695:37ba:fa00 with SMTP id
+ 4fb4d7f45d1cf-69810a181f1mr1939691a12.4.1782470403018; Fri, 26 Jun 2026
+ 03:40:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-4-170c9cbe5099@samcday.com>
-In-Reply-To: <20260606-pm8916-pon-v1-4-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-5-170c9cbe5099@samcday.com>
+In-Reply-To: <20260606-pm8916-pon-v1-5-170c9cbe5099@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Jun 2026 11:38:56 +0100
-X-Gm-Features: AVVi8CdI7ky1qJTRzxfnSubPyI24Z2iIwWx_S06LIdPFOG4CDAdgxgSIdH-QXi8
-Message-ID: <CAFLszThEHyCaV7wgta6vUOF6gDTkiPDEMX9tywus0n2W8KLFrA@mail.gmail.com>
-Subject: Re: [PATCH 04/11] drivers: misc: pm8916_pon: support setting reboot
- type
+Date: Fri, 26 Jun 2026 11:39:50 +0100
+X-Gm-Features: AVVi8CeHP3mOGprAJnYkRsrN-qhdEMBcamET3cMZYIFz0OjZkIY6dSEfWgLuQ1Q
+Message-ID: <CAFLszTinhT1GC6-9gL3Fo0hQjee3jQmUu3DnSHaqyXRkKHoKVg@mail.gmail.com>
+Subject: Re: [PATCH 05/11] sysreset: qcom-pshold: PM8916 PON reset type support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -136,93 +135,61 @@ Hi Sam,
 
 On 2026-06-06T08:47:32, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> drivers: misc: pm8916_pon: support setting reboot type
+> sysreset: qcom-pshold: PM8916 PON reset type support
 >
-> This is to be used in conjunction with PSHOLD sysreset driver.
+> Before de-asserting PS_HOLD, PM8916 PMIC can be informed of what kind of
+> reset should take place.
 >
-> This code manages the RST_CTL register block, which PM8916 uses to
-> decide what action to take when PS_HOLD is de-asserted.
+> This might seem a little hacky/weird, but it's a byproduct of how the DT
+> nodes are structured, and the way u-boot handles sysreset.
+>
+> The qcom,pshold node does not belong to the PMIC hierarchy. If U-Boot's
+> sysreset infra was a little more flexible, we might be able to model the
+> qcom,pm8916-pon driver as UCLASS_SYSRESET in order to catch the sysreset
+> type and set the appropriate bits in the PMIC, before chaining to the
+> pshold driver to de-assert PS_HOLD (which actually triggers the reset
+> type that was written in the previous step).
 >
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> drivers/misc/pm8916_pon.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++
->  include/pm8916_pon.h      | 18 +++++++++++
->  2 files changed, 100 insertions(+)
+> drivers/sysreset/sysreset_qcom-pshold.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 
-> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
-> @@ -10,16 +10,98 @@
-> +     ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +                                       DM_DRIVER_GET(pm8916_pon), &dev);
-> +     if (ret) {
-> +             pr_warn("couldn't find pm8916_pon device: %d\n", ret);
-> +             return ret;
-> +     }
-> +     if (!dev) {
-> +             dev_warn(dev, "couldn't find pm8916_pon device\n");
-> +             return -ENODEV;
-> +     }
+> diff --git a/drivers/sysreset/sysreset_qcom-pshold.c b/drivers/sysreset/sysreset_qcom-pshold.c
+> @@ -13,6 +13,8 @@
+>  #include <sysreset.h>
+>  #include <asm/io.h>
+>  #include <linux/delay.h>
+> +#include <dm/device_compat.h>
+> +#include 'pm8916_pon.h'
 
-As Casey mentions, uclass_get_device_by_driver() either returns an
-error or a valid dev - the second check is dead code, and dev_warn()
-with a NULL dev would dereference it. Please drop the !dev block.
+Please use #include <pm8916_pon.h> - quoted form is reserved for
+headers in the same directory as the .c file.
 
-> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
-> @@ -10,16 +10,98 @@
-> +     ret = pmic_clrsetbits(priv->pmic, priv->base + enable_reg,
-> +                           PON_PS_HOLD_ENABLE, 0);
-> +     if (ret) {
-> +             dev_warn(dev, "clear PON_PS_HOLD_ENABLE failed: %d\n", ret);
-> +             return ret;
-> +     }
-> +
-> +     /* Delay needed for disable to kick in. */
-> +     /* Kernel uses usleep_range(100, 1000), lk2nd waits 300usec */
-> +     udelay(300);
-> +
-> +     ret = pmic_clrsetbits(priv->pmic, priv->base + PON_PS_HOLD_RST_CTL,
-> +                           PON_PS_HOLD_TYPE_MASK, pmic_reset_type);
-> +     if (ret) {
-> +             dev_warn(dev, "RST_CTL set failed: %d\n", ret);
-> +             return ret;
-> +     }
-
-If the type write fails after the enable has been cleared, the PON is
-left disabled and the next PS_HOLD de-assertion will do something
-undefined. Please attempt to restore PON_PS_HOLD_ENABLE on the error
-path, or at least log loudly that the device has been left
-half-configured.
-
-> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
-> @@ -10,16 +10,98 @@
-> +     switch (reset_type) {
-> +     case SYSRESET_POWER_OFF:
-> +             pmic_reset_type = PON_PS_HOLD_TYPE_SHUTDOWN;
-> +             break;
-> +     case SYSRESET_COLD:
-> +     case SYSRESET_POWER:
-> +             pmic_reset_type = PON_PS_HOLD_TYPE_HARD_RESET;
-> +             break;
-> +     default:
-> +             pmic_reset_type = PON_PS_HOLD_TYPE_WARM_RESET;
-> +     }
-
-Silently mapping every unknown reset_type to a warm reset feels risky
-- SYSRESET_POWER_OFF_WAIT or future additions would unexpectedly
-reboot instead of erroring out. Please either return -ENOTSUPP for
-unhandled values, or list each explicitly so adding a new enumerator
-forces a compile-time review.
-
-> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
-> @@ -10,16 +10,98 @@
->     This is to be used in conjunction with PSHOLD sysreset driver.
+> diff --git a/drivers/sysreset/sysreset_qcom-pshold.c b/drivers/sysreset/sysreset_qcom-pshold.c
+> @@ -22,6 +24,13 @@ static int qcom_pshold_request(struct udevice *dev, enum sysreset_t type)
+>  {
+>       struct qcom_pshold_priv *priv = dev_get_priv(dev);
 >
->     This code manages the RST_CTL register block, which PM8916 uses to
->     decide what action to take when PS_HOLD is de-asserted.
+> +     if (CONFIG_IS_ENABLED(PM8916_PON)) {
+> +             int ret = pm8916_pon_set_reboot_type(type);
+> +
+> +             if (ret)
+> +                     dev_err(dev, "Failed to set reboot type: %d\n", ret);
+> +     }
 
-Please expand the commit message - mention that this function is
-called from the sysreset driver (patch 5) and briefly describe the
-rev-0 vs rev-1 register layout difference that the code handles, since
-that is the main subtlety here.
+The header already provides a -ENOSYS stub when PM8916_PON is
+disabled, so the CONFIG_IS_ENABLED() guard is redundant - the compiler
+will elide the call. Dropping it would also stop -ENOSYS being logged
+as a spurious error on platforms that don't enable the option (you'd
+want to filter -ENOSYS from the error path, or just rely on the stub
+returning success).
+
+On the design point in the commit message: rather than reaching across
+uclasses with a global lookup, I agree with Casey - better to make the
+qcom,pm8916-pon node a UCLASS_SYSRESET driver itself, with a phandle
+to the pshold node, then chain via sysreset_walk() - that avoids the
+awkward coupling and the CONFIG_IS_ENABLED() gate. What do you think?
 
 Regards,
 Simon
