@@ -4,81 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2E7CDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 03:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 826C3CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 05:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F9448496E;
-	Fri, 26 Jun 2026 05:50:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9865E8460E;
+	Fri, 26 Jun 2026 07:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FWC1cvVd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FDTFe596";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED60C8498B; Fri, 26 Jun 2026 05:50:28 +0200 (CEST)
-Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
- [IPv6:2607:f8b0:4864:20::1331])
+ id F2E2A84704; Fri, 26 Jun 2026 07:44:50 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A78708495E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 05:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE53E805D7
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 07:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-dy1-x1331.google.com with SMTP id
- 5a478bee46e88-30b6dad2382so1175338eec.0
- for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 20:50:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-662c360aa73so638761d50.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jun 2026 22:44:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782452687; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Edo67TUopvc6WVIuxJJ0rTGTm1wAWC+EzARGA8pJRK+60HLYogsyJJmChpptTL4Atn
+ RfifwMAZXb9kZrUouliuZlJLDMMctgqMkLlaXO6LO7JugPX7bNwltQzg4VhmQ/wSBCkx
+ ZR7PR+ASqj4S2pg+q/5rDFAjvtgCQqlWRfFwj9cCaxpvVlnmfaMOdGgIlesEL/2jTuk/
+ d+VY/vvt3XHBdj16FahtEG2pw16UkGZdvQr4HWlMLcIRSzcwfOzRFijDBoTGROe2ULmg
+ IvdT6+TnAdZUXa6JoRdOTGCaVHDIfeVCz92lmiobq3flIjl3QdrEhoNoOQHvS3rZ7FAK
+ xJaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Vl9QaidoWVtEcPNE67uAvqi03P0zNBAeF8m4fhxfpKw=;
+ fh=ENdvZHR9MUZ2Vy5+c1PYyd/+74ufYm4ybD/rimHwrkA=;
+ b=Q+P6C6nsp1x8xNEvlabdCe84EoPY/y5ZlXizLPNikH4GKaSqVNNBcQQVSz2XF6LVfY
+ wWbzzuxxikW4h1FDaJ/MNRddaC9Tn5gHdRBbXPtVoOzmBwRJcFimWvqPLxEwymjvdG6l
+ SchxdIUhOjwae75fiKdbhNn3iDKUCbDx+tOBm84g079YO//rJ1qxxxO5exSjx/x/KMo+
+ Ko2O14c7f14dn/ostQsd78vFzwM+u+STWBd0yoOnCB5fgkE2eg3JjWrpyYlL2Or31/fI
+ u4xVtXsKoBNzYePoQOKTSq52o9t5s0yWatLKK85vATiZOt/3E0mI/LGx0p2BmAhW8S17
+ IrhA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782445825; x=1783050625; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Gb2Li+Hg8iHDuDJkSWbMWGqtq5K7gaXTxuR9XSeHpes=;
- b=FWC1cvVdsXnRGDvnBRnvKcnbJysLpHwBVb/B8vMFui3sdAgJOsolIheLq/uiPiDhaS
- CAMOYFglpkD1ASWugUG25lDeiW68X9+U6mxLb2bMS/Ns9jxQruqHXQFAIpE5YT0IOHhQ
- 4dE1tVa+LgHOVjwnYGYZZqsyxtBN/p6JrSbcSYVDzSMYtER4uzbM3lUib7CHwTqB6Cpd
- IpnKB+iQ/pEvmxNYisC1D8fgHxTBjjK7GscTCG835ZJ72wVWUo5tWOM6X4GyUxS55u4K
- +LjqKGR5Z577rzUZiTkDNi/JoxqyAeo4ZlbYqJN1LoyEf/U8nAtgKf2586Dv2CxW+H2v
- XApA==
+ d=linaro.org; s=google; t=1782452687; x=1783057487; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vl9QaidoWVtEcPNE67uAvqi03P0zNBAeF8m4fhxfpKw=;
+ b=FDTFe596eBMsfCP2yN2QddNcjBZN6PP0DLiuoLb3Y7RxvYF5KUaT0pp1AlyP0d8TD/
+ 9gYSI/SDfhuV/Qm37QY2yueXf4WoDzxdNfrPjQTycjKO/3nrHBXgFfAAAXAj8VsvkqGR
+ QAswPLLINbmQ/jGk7cJpM2ODVE12Egqruc2fUa1unWVgarwGGqGXKYp08E4F4V9BScrD
+ SZiglE58KQOrKiVFG9SLeYHD8AOlqb7L36+m1gprtaF8dcmkAvCe9WthDMT6oTczj1I8
+ 6D0QeRCyFaK3aqF1WA1TPa9MQn8bT8+xsQoJyIJRIpJ+2kAgaotis1VGqEoTGX9w40QM
+ lSaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782445825; x=1783050625;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Gb2Li+Hg8iHDuDJkSWbMWGqtq5K7gaXTxuR9XSeHpes=;
- b=ZQsb2Q1B8Ev9N4sTcbZnvnkUE1cVvZKQYJpdDulshlkf+RswkQWgmLjrokbVIFDoco
- zGbbLmAqF+4F40iRVrteSJ/OfEgTPOa1BXCeauMAd4aEHwcrF1gQl3SgEAmSykpgk4SE
- bMuV4dBUOz0sZQimIaCwQG3wIEGcvVQ3kvyK3RW2v/dVYfP7UhxCfoombBL6wFWomD0t
- GB0sElLQn+fRqlB6z4pmm+WCK0iz4ZSMuWMzsEpIEY0rFQd2OqzIIU1hBsUcbiTDl2nB
- HpKZi3e6rFhLF2Kco6+7JeEba80Od8e2z1s2z8f9y6BK3YyuBa/fGeMirvBxcOgdqUCX
- Ibug==
-X-Gm-Message-State: AOJu0YxdO3ULAucmxFDyvawhw5VoRn/SQIPKLdEKlPpobTAWCxo461R2
- T/bsfh7EBslUWa4PvHdPAF93AaeR+Y3wSoK4VRS+Cr85PUxRAhtK+YhI
-X-Gm-Gg: AfdE7cnSPgfkYHjP2DDOXlhSEZ/wm1OxnmdO4tnan7NRgEEjkb8OI7Kkod/uFbrhJWy
- 8LjL+9NOMRVhW+3uoIVQF253uODsXJmhbl7/bnTXMdANfqVn0dtyEVuscPOJjVkVTNyeUu3eHgP
- 043d3RXI7Q3OpWSv/eu7XXHhfNSWlE3Q+NKoCm0WY/+shXCW1utnzyxjJwrPHpzTjybj+RkEwS5
- XdaWe3zpP08cVclm5/H62wztL4w+xNMA0wgNY/gYzhzjpi8a6yUyK+KteXFfwqE9aGiEjVo2nmk
- zs8OggTvQcOP0RIX7yyeOYUcQM3m0bGyGqyGcz26EkR36Ddf+PV0JoHAJv+Y+r0KDvRvgz5ywmh
- YyDYnfTddeIBCTRX1pVL2NqanEXLG5X0jasnKr8ya8NCXLi6jorR5KQlgLaWTs7B6G++3+LhKFf
- pG0vr79pZQDyrDow==
-X-Received: by 2002:a05:7300:7647:b0:2ed:e12:3769 with SMTP id
- 5a478bee46e88-30c84d70176mr4992256eec.31.1782445824967; 
- Thu, 25 Jun 2026 20:50:24 -0700 (PDT)
-Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1a80sm13160955eec.18.2026.06.25.20.50.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 20:50:24 -0700 (PDT)
-Date: Fri, 26 Jun 2026 09:20:22 +0530
-From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-To: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: x86: zboot: remove duplicate zboot_setup() call in
- do_zboot_setup
-Message-ID: <yyd6c26qxgnlewo7jzibw4ryl6aycp46nfefwanxulmzs3y5k2@wlde6okhi43g>
+ d=1e100.net; s=20251104; t=1782452687; x=1783057487;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vl9QaidoWVtEcPNE67uAvqi03P0zNBAeF8m4fhxfpKw=;
+ b=HQ4af453AueFwaxCLSfLb7HDCvIzjIjWNLmQuNTfhxNabr4MyOvoOfYOV2M9F/s2t/
+ u+nI6m56Q6OKeF8Qm1SrwuE0/G9aDjUEvfi4ASmubLipVHh1cmUYgpFNjrM7x/s4YKlf
+ 5YVASAtB6VCvwBHn2QKJrfg7dG9I7bPBS7DnZ6Y16I3zV3Q5GSVluHMILknxrchzE2pL
+ 1/nrYGc8s/jKY9z1sigy0lXUC9KgradPINoFWDlNS9GnOlwal/+NRl0zR/XUzxwJbNEb
+ 9pqRpppn6rVE2wne1hlIGJAFoauJq5S8Hku7zxru5rTWfBMbhWPLF2yVMIi2ayzV0b6N
+ 4KCg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpTnoqJewO4AZ1hfSxFoXASpOlJCBvXbp6sVxHlE9Am/gUgmp8FRGaR+9Js2XtJXcq46ha4kCk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQJYR5F/pLI+f0/m+SdqWivtOg6AIM/vIocGbY9kG4+zG/lsQ6
+ b3fkhVvrf1xtK7VZrUINp/OQbXIaadcIrKBYXo80MzxUa+xThsCjuueDLQxmWakN5vYIomFidMH
+ qHD8Zqe670Cmnjwufc8lAqVMu1aWzpAJf8AvLYQraEw==
+X-Gm-Gg: AfdE7cnxPJb9nJIZmgEZsIopjFD/DYfN+5ZYcuGSLvGjkVBZiNSkM6hQNlp9S6uZpmx
+ 5Q922ACh+yRVbGh7lPiKrycMeObHBhs3oGSwd6QIx0dS45ib5mhAIqWtGqSUK188r89XkCe+qhM
+ Gm/vrSBZaqbPaAYr2aY7nHW/dwv/+B3lEDOqj67J8Xo4biXSHuQ50/Qx5yDYBe1lY6aREhSihGg
+ 30NZhqv1qDnYP/eSNAohMwaGQ6cNM06OvV37o1GUWfRvaDNqUqAURqkd15P8dmETT+d7Tb4X1WO
+ VLZpXkRPLFgig7ElSGOI8QubSgMZxWE0MQspxZWUAuLtRiQNHNdFtmsl6m5umYKFKVsBo2jp58X
+ fpj6kPGosRJBRTKy+J7dv0kwCBAHih73Jtzt65urKPAsW824vxHPAsIXRX93P2m2h6SwrH/hcMP
+ 5MLqTeiO8GLmdis2tjfrAizZTEyMHP+jlgYLyWcWR1EPkso3o5lJs/wXccYE4p47tIzemWEI0qk
+ tkEeLGR61gMP+O2XPSOpuAbF4dfUzZPeUFDxDQLNQojkwd4APNSOJtknX8Ymthetcon30sjqqHu
+ c14m066nG+cJ2IaYNXrUVvQRH99lRDxkjrkSS7Vg1jG91T0Sfa1ZO5SKPKhUGyCjhD34QX2wspx
+ 1tVGrjA==
+X-Received: by 2002:a05:690e:1487:b0:664:8e4e:66fe with SMTP id
+ 956f58d0204a3-6648e4e69b3mr3812017d50.12.1782452686620; Thu, 25 Jun 2026
+ 22:44:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20260617074846.84362-1-ilias.apalodimas@linaro.org>
+ <178240070996.3860609.12716856774955880596.b4-ty@konsulko.com>
+ <a4e4e3c3-0236-4764-abba-cb34e7fd0200@kwiboo.se>
+In-Reply-To: <a4e4e3c3-0236-4764-abba-cb34e7fd0200@kwiboo.se>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 26 Jun 2026 08:44:10 +0300
+X-Gm-Features: AVVi8Cdr9KamvrAC-LzPflmzT4LcullSV9rsoJorPZVeaTwpigmvioUIoOx8a6g
+Message-ID: <CAC_iWjKq0P5P2LkB+f1EmGQ71oWHJQYwL28=n1-2yivyTYdYng@mail.gmail.com>
+Subject: Re: [PATCH v7 0/7] Relocate U-Boot in the last bank
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, quentin.schulz@cherry.de, 
+ marek.vasut+renesas@mailbox.org, anshuld@ti.com, sjg@chromium.org, 
+ christophe.leroy@csgroup.eu, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +122,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-do_zboot_setup() invokes zboot_setup() twice: once with proper error
-reporting, and again immediately afterwards with no diagnostic. The
-second call re-runs the entire boot parameter setup on the
-already-populated zero page, which is at best wasted work and at
-worst leaves the structure in an unexpected state.
+Thanks Jonas
 
-Drop the stray second invocation; the first call already covers both
-success and failure handling.
+On Fri, 26 Jun 2026 at 03:32, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi,
+>
+> On 6/25/2026 5:18 PM, Tom Rini wrote:
+> > On Wed, 17 Jun 2026 10:48:18 +0300, Ilias Apalodimas wrote:
+> >
+> >> There was a discussion recently on the mailing lists regarding our
+> >> management of memory above ram_top [0]. The tl;dr is that we have two problems.
+> >>
+> >> The first one is that U-Boot always relocates to the top of the first available
+> >> bank unless there's special board code to sidestep that. The second is we don't
+> >> successfully deal with devices that can only do 32-bit DMA.
+> >>
+> >> [...]
+> >
+> > Applied to u-boot/next, thanks!
+> >
+> > [1/7] treewide: move bi_dram[] from bd to gd
+> >       commit: 1174c99ab421168221be372bd83a4143bf5f167d
+> > [2/7] common: move ram_base calculation to independent INITCALL()
+> >       commit: 15b35e4289e11f1ab201701dfb6dc0232b30be48
+> > [3/7] common: Clean up setup_dest_addr()
+> >       commit: 0943f107ce4adb47d4b01c06e046dce130a1de50
+> > [4/7] rpi: Add a local get_effective_memsize()
+> >       commit: d19d9e1c064b6c782959d1da7bddf1e9da1c55d4
+> > [5/7] common: Add an option to relocate on ram top
+> >       commit: 55a34217698491cc0bb8d53d630644dc8756629c
+>
+> Ilias pointed out on IRC that Rockchip boards may have been affected by
+> this series now being merged, and where correct.
 
-Fixes: cb19931ee56 ("x86: zboot: Drop intermediate zboot_setup() function")
-Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
----
- cmd/x86/zboot.c | 3 ---
- 1 file changed, 3 deletions(-)
+Yep, dunno how I missed it before. I checked dram_init_banksize(),
+get_effective_memsize() and board_get_usable_ram_top().
 
-diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
-index 3876d163236..cc7292e10b7 100644
---- a/cmd/x86/zboot.c
-+++ b/cmd/x86/zboot.c
-@@ -66,9 +66,6 @@ static int do_zboot_setup(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_FAILURE;
- 	}
- 
--	if (zboot_setup())
--		return CMD_RET_FAILURE;
--
- 	return 0;
- }
- 
--- 
-2.43.0
+The 'good' news is that rockchip is the only affected architecture.
+>
+> The move of dram_init_banksize() before setup_ram_config() currently
+> breaks Rockchip boards in next, due to gd->ram_top now being 0 when
+> Rockchip variant of dram_init_banksize() is called.
+>
+> DRAM banks on a RK3568 8 GiB board (RK ATAGS not used) using next:
+>
+>   DRAM bank   = 0x0000000000000000
+>   -> start    = 0x0000000000200000
+>   -> size     = 0xffffffffffe00000
+>   DRAM bank   = 0x0000000000000001
+>   -> start    = 0x0000000100000000
+>   -> size     = 0x0000000100000000
+>
+> expected banks prior to this merge:
+>
+>   DRAM bank   = 0x0000000000000000
+>   -> start    = 0x0000000000200000
+>   -> size     = 0x00000000efe00000
+>   DRAM bank   = 0x0000000000000001
+>   -> start    = 0x0000000100000000
+>   -> size     = 0x0000000100000000
+>
+> 'out of memory' errors are also reported because of the bad bank size:
+>
+>   Core:  632 devices, 33 uclasses, devicetree: separate
+>   out of memory
+>   ERROR: Out of memory
+>   MMC:   mmc@fe2b0000: 1, mmc@fe310000: 0
+>
+> I am also seeing following, not sure it is related or a different issue:
+>
+>   ERROR: reserving fdt memory region failed (addr=10f000 size=100 flags=2): -22
+>
+> Current logic in dram_init_banksize() require the final gd->ram_top to
+> fully function, hopefully we can find a workaround or try to rework the
+> affected code instead of having to do a partial revert.
 
+We could call dram_init_banksize() late, as we used to, if the Kconfig
+option for relocating to higher addresses is not selected. However,
+I'd like to find a better solution.
+
+Thanks
+/Ilias
+>
+> Regards,
+> Jonas
+>
+> > [6/7] configs: Enable RELOC_ADDR_TOP on arm64 QEMU
+> >       commit: aefd4a769bb6727978c408ff24b93ba9047d535d
+> > [7/7] doc: Add a warning about using RELOC_ADDR_TOP
+> >       commit: fb537c85bca0e3d29a62fe119181bf1744b8c91a
+>
