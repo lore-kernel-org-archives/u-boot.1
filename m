@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F194CD4F26
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DDB2CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 153438496E;
-	Fri, 26 Jun 2026 12:42:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A3A78460E;
+	Fri, 26 Jun 2026 12:44:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BJDIoRhv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OIskMIPS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F18A1849D2; Fri, 26 Jun 2026 12:42:05 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id C7EFA8496E; Fri, 26 Jun 2026 12:44:54 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 087E18460E
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:42:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 596D480398
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:44:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-695f6438518so1116180a12.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:42:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782470523; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-691c5776f95so1371537a12.3
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:44:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782470692; cv=none;
  d=google.com; s=arc-20260327;
- b=SjCpYGDOLg472A25B+3SjT6NuA9QLdrdxDs7TjAUGUZ8yyvw/C7GsDa7vwkx+EtXZY
- +jWnUaNgJ4QTsuKTJz+R5V6cG7t+IobKy7hx/5aNtEow3oERPWRARmS7c6VwcCgEBfmU
- zZVoaEXl0oORLdd8cpuR1thhYOTqpaAjjINs+OMPGjgxKIlycSUXbq/HXWaNNDFKKPlN
- 6lS7bdc8hfG1nGhftUdHEbskbYXItpI9i2RxyUuO5kqjPrgCBXeJT8CmW79nL2U8dcAJ
- NsBRseH3tn4ydq4kUzFVnMvuRbHeU86MHB2gUw1DpT7ZWo5PMRffHTj3ZN5SACdtkkwK
- RHdg==
+ b=ah/P3UUDrfkGSjEV9/DlhT1s8jvESAQ/q+QlpM6PBmegFwcIP1BZylSbS6j0w1Pzeo
+ 2uIbSd1F0kgIMXRBswtfgnVG3cHtTHB4xgB6VG5atj17prtiPPKO0DFode1DpZ5uYP/9
+ s4CUid9/vdmQ4HpzWU/SnFPnPgDjPpkxrT7kqAoJ2WaiYcxa4KPqcc76F25ts1CoEBOX
+ DrHD5NVgSwVsnfbFTdOEcle1KRVZjw+gAk0nj4xiGHfxHtQuUXUR4kBR+X4LKd0xcvb/
+ JU4Zinmb3sICqTeXgKKRaS2z2VwirevKJr/3nUcMVQA6/J5fjBzJTc5YxIs4UthKyMMP
+ fG3Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=WLlzMiBMzM+SIQnlLXFOP9Tfmr3mzlBKGLof3UkINq4=;
+ bh=ZyhyRGgDjW0R3UKBTa6oNjNP8L8mzK1svih2xZphHsM=;
  fh=nyKLZbC5pO9EO6FCB5YQSf7kr334RAPXhBSMuZ9b11E=;
- b=ECUtGLgVIWgOqoUAFJlK3WqOJZSsUDcekRCRkBD+KB7Ns0TMqKIKmvxU92OiLGrWdU
- dsPNUfDP0Pk6u5z7g8/+5VRRE4vlCnuQO8j6fngQgvEA/ySGOWRdAc9R7tBwi48quvWM
- 30Ee/o6+pSMx0aikU9Z3HRnpt8va14xNTUR6gWNvwCcCAls92riHT4nl5rE3dhaeQhtn
- T0Z5yQy4fhlIR2VCW6JRTVjwEkYx7mKVA9TECKDRZOLf18MJ5fE6CbzDdpgXpWzmRDKz
- nG03QLDr4FC0Ul/AV4uYUQ03uULoLmghArDlU5oZdmq6ZK6Z9t2o/NpAWZVORf2GkFVO
- ggbQ==; darn=lists.denx.de
+ b=hU+hfzVnBUjGMUzPJlvw9/qHPqct2LuVEhB2D4nWQBgw2EVdg1mpLPa5nDA9nLZehv
+ ojiGwgZ4KIqWpRelrR4eKnFbS6pd3aKqajGahk9FfjwMPqPUApWxBvbHEad4kgX9HQSU
+ ZAIEbsioHh5mYdD2sus0KmmL9VXp3y5iKCJLPVJ5LMvJSk6Thq3vVZEJvE8zJROlJTw0
+ qxLt4P6F8Aaq9LETBZuMWpjMpst4KXtNn9Szk3snfXEv8+oN6okCvG1OeTN4cfu7xiuB
+ N8vqODXILc6mQPUx2qgRsFgmdNLT7NNiMPk3Zyg/MZDDBhcq7APUsog4ghaqxlF8USnb
+ 4MPw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782470523; x=1783075323; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782470692; x=1783075492; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WLlzMiBMzM+SIQnlLXFOP9Tfmr3mzlBKGLof3UkINq4=;
- b=BJDIoRhvdrnCl84VBuzhggrh2UT1mjp9UEcKbzaG7gk+pyLBU7SQh5YPH8yFxfhnfw
- 7x+xB7QpfdXH8Zfh4ErV8wUWoqW8bTKjtjNR4nZwoSkVFAn2GTWK5bEc5PpicjrJ9gMn
- xl7vAZYoVOhUp7ACHzzAR/cMbv75lCRGuGqbQ=
+ bh=ZyhyRGgDjW0R3UKBTa6oNjNP8L8mzK1svih2xZphHsM=;
+ b=OIskMIPSE6JpLlalJFFCv/e+DBRqDH0etqwo4fr2X3GErgk5puTbuibkqBuarE8F62
+ DgCbSGkwknx4b8ZixTi4XW4Jt0GQeanwnfcIdd/tJrtUkAr+P6pzKdrBM3OFp13Oy+x5
+ NxgdlQkOV8fTp/PEFMGPoDwlZJWZUlIAWin9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782470523; x=1783075323;
+ d=1e100.net; s=20251104; t=1782470692; x=1783075492;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WLlzMiBMzM+SIQnlLXFOP9Tfmr3mzlBKGLof3UkINq4=;
- b=rP9YZmCKS9xlMAWa/nxsnlJ77VlOykUqH3TUTseUUtrUaZrkqoZCAvuuHNJsHB2S2Q
- 3pZExONhF1jSR/MkfXN5ZRgt2TKC5B2aTywabCgASzmr3dI4zSry1uRiRHdkzmcmwzlF
- A7eUWkuVLUq7ra4b9xjSStztw+SXTpKQRtXZQo4O/rxSrj2FzIRLjUS7Xm72RpT8B1Os
- jTsCZ10m20uXMkJi/LjZkPAr6Mb8T79NRFM6IcEh57uEgzBwVMwcDaTgMwBC6N6eX821
- LUK0UGlEB43FYbhyAR4oqqX/PGta+rF8tH9BtHYhmjMSKu57IDrPR6UjNOeF9aJu61m+
- CtLw==
-X-Gm-Message-State: AOJu0YysgiMIlcrSridtzBytRDa+RQrcjDKZCY0g9iMcXV2sWcfeJvVj
- ADU0++jZ95N2Gtg/ensCJSK01yCuXWD/BqONpCw+kC/LHLZlf6/wkio/WNSrsbLwISoSqn1Tqmh
- Hofrd7OEWo5ptZEgHkfJiJu8/c118mxn7wXtCRIlH
-X-Gm-Gg: AfdE7clet6DI/rZwodQc6jjOVRKhGRUL+oR/iV2zj1NWJvcjJg/gz4z6lNaK0iCKf6h
- 2tgPC5k95Z6ErmTqJfEcL5bsxDNwmcczhquZIBif95oZI3sFK5RI78TuyuRvGSPYsLR8mTXdKe6
- jPaMBjsD+awrD1HoSB86L1NWuM6CK3uAuaB/+/HvjDOc7LRrDFY1Bh8mjfCpfb+wLfdEcqW4dri
- xU1T60GUa4+Q3ZkNZxvjOhu+nH6BL9Oh43MYRVrZdpfHhS9o5cg3SpoF02urtrHec1Xs6NdLw==
-X-Received: by 2002:a05:6402:a295:10b0:698:1504:e3de with SMTP id
- 4fb4d7f45d1cf-6981504e4dcmr1196491a12.29.1782470523527; Fri, 26 Jun 2026
- 03:42:03 -0700 (PDT)
+ bh=ZyhyRGgDjW0R3UKBTa6oNjNP8L8mzK1svih2xZphHsM=;
+ b=QZ3nkIEaD47rL45BL6tb38Q3RtFeY7NTR79k5aEBFc9MInT2uNDq/FSRouhraWKpIQ
+ 0HNJKkfDQmu1iPzyDraYyxRYj1XdI8aliBu9mLQFkBgg7CxdymSJKTGVP7pz1ZXyS+/C
+ 009M6IJH3gzBN25ckl2j7IFKrN9Lb5dS3e6TdX2AZ8oeqPqubznfEqR//DJoddbAi3Ui
+ 6TDZp8n+bsfmKkZoorbSee8v3qlpMqse/+yiXO5Pz7xp1cirGgJP/i7mb00pvl67XGpm
+ 5C0PRpoDR7+3If6hL0tOrMh8QLKOP/0RJec9ncHaLO4TL3j6cCo4OHL7ZGEkpGzpvtnc
+ x/fw==
+X-Gm-Message-State: AOJu0YxSsalpzp86xSwZTW00NNObtU98fbM3gEWxaB6XwIpbmf2KOFBT
+ SGWIgGkZueCasD9l8uigH8Apt/DM0ySKEXg9/dspujokNUIT5p84N6/oEqS4VH5Zm8gS1LwLk3j
+ SDHNjkZK4zPxN/2PYSKpAfFabAQYOsWE/HYZx/ETy
+X-Gm-Gg: AfdE7ckZsnHDsS00gG/LDGi9p37BbhieO+qgNr7Sw90SlTXgiwPGywH29ycX0ePBZYR
+ JDhuoCaSBmrKXYoAUUr7ksEmRbWMahcsOx3SmUKSEzqjWPPXMdQ9J3iLWZwH7sKV2X1ZO3kztuS
+ qaorSxw5A5WbzwgVs+BxiNAGG8S+NUNwUnOEhqbEGea5XaYCrYbbwXYLsBY2sOitcnrTB08VSAK
+ 6VvVi3gipfklT3r1g6quQvqHdlVhJl/I4CWCVScFT7g7MApkokdPRZnlmII7PQoWGKeiG19tA==
+X-Received: by 2002:a05:6402:a299:10b0:698:1504:e3d9 with SMTP id
+ 4fb4d7f45d1cf-6981504e477mr1235552a12.29.1782470691817; Fri, 26 Jun 2026
+ 03:44:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-9-170c9cbe5099@samcday.com>
-In-Reply-To: <20260606-pm8916-pon-v1-9-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-10-170c9cbe5099@samcday.com>
+In-Reply-To: <20260606-pm8916-pon-v1-10-170c9cbe5099@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Jun 2026 11:41:51 +0100
-X-Gm-Features: AVVi8CfL_OTkqi_HtI-IkXfcLsrsm6HMK8a4NDjP9ZSgnPCNkypAhsHsaMCuE2I
-Message-ID: <CAFLszTgmmECLO=U_p1dThz2RmUraE7GUujrn1nXF-zZOHCKUjw@mail.gmail.com>
-Subject: Re: [PATCH 09/11] reboot-mode: reboot method activation support
+Date: Fri, 26 Jun 2026 11:44:37 +0100
+X-Gm-Features: AVVi8CfqM1nby0TfueABzgdpfCla6be8qERFZhySDYbWJ-EmcrVhW4-CLMRsGr4
+Message-ID: <CAFLszThbsvHJU0itxD_CwmFHF4o27-+hUEm4TsANVmi9CUo=Qg@mail.gmail.com>
+Subject: Re: [PATCH 10/11] fastboot: DM_REBOOT_MODE reset support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -134,54 +134,73 @@ Hi Sam,
 
 On 2026-06-06T08:47:32, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> reboot-mode: reboot method activation support
+> fastboot: DM_REBOOT_MODE reset support
 >
-> Until now, the reboot-mode uclass didn't wire up a producer path to
-> allow arbitrary changes to the reboot mode. The current impl only uses
-> reboot_mode_ops->set to clear the reboot mode once it has been read at
-> boot-time.
->
-> The public API is expanded with a dm_reboot_mode_activate method, which
-> will instruct the given device to activate a particular reboot mode.
->
-> The first producer, fastboot reboot, will be introduced in the next
-> commit.
+> The weak symbol currently implements `fastboot reboot` support using the
+> BCB. Nowadays, there's robust reboot-mode driver support which is ideal
+> for this use-case.
 >
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> drivers/reboot-mode/reboot-mode-uclass.c | 18 ++++++++++++++++++
->  include/reboot-mode/reboot-mode.h        | 12 ++++++++++++
->  2 files changed, 30 insertions(+)
+> drivers/fastboot/Kconfig          |  7 ++++
+>  drivers/fastboot/Makefile         |  1 +
+>  drivers/fastboot/fb_reboot_mode.c | 51 +++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 59 insertions(+)
 
-> diff --git a/include/reboot-mode/reboot-mode.h b/include/reboot-mode/reboot-mode.h
-> @@ -53,4 +53,16 @@ struct reboot_mode_ops {
-> + * dm_reboot_mode_activate() - activate a reboot mode by name
-> + *
-> + * This will read the given @dev plat_data for a named mode, and write the
-> + * magic value for that mode to the device.
-> + *
-> + * @dev Device to write reboot magic to
-> + * @mode name of the mode to lookup for magic value
-> + * Return: 0 on success, -ve on error
-> + */
-> +int dm_reboot_mode_activate(struct udevice *dev, const char *mode);
+Two things on the commit message: please use single quotes rather than
+backticks for 'fastboot reboot', and spell out that this provides a
+non-weak override of fastboot_set_reboot_flag() - i.e. a board which
+currently supplies its own override will hit a duplicate-symbol link
+error if it also enables FASTBOOT_REBOOT_MODE. Either call that out,
+or make the new definition __weak so existing boards keep working.
 
-Please follow the kernel-doc style used by dm_reboot_mode_update()
-just above - @dev: and @mode: with a colon and tab, sentence-cased
-descriptions, and 'Return: 0 if OK, -ve on error' to match the rest of
-the file.
-
-> diff --git a/drivers/reboot-mode/reboot-mode-uclass.c b/drivers/reboot-mode/reboot-mode-uclass.c
-> @@ -9,6 +9,24 @@
-> +int dm_reboot_mode_activate(struct udevice *dev, const char *mode)
+> diff --git a/drivers/fastboot/fb_reboot_mode.c b/drivers/fastboot/fb_reboot_mode.c
+> @@ -0,0 +1,51 @@
+> +static int fastboot_set_reboot_mode(const char *mode)
 > +{
-> +     struct reboot_mode_ops *ops = reboot_mode_get_ops(dev);
-> +     int i;
-> +     const struct reboot_mode_uclass_platdata *plat_data =
-> +             dev_get_uclass_plat(dev);
+> +     struct udevice *dev;
+> +     int ret = -ENOENT;
+> +
+> +     uclass_foreach_dev_probe(UCLASS_REBOOT_MODE, dev)
+> +     {
+> +             ret = dm_reboot_mode_activate(dev, mode);
+> +             if (!ret || (ret != -ENOENT && ret != -ENOSYS))
+> +                     return ret;
+> +     }
 
-Nit: please group the variable declarations - put plat_data next to
-ops, with int i at the end, matching dm_reboot_mode_update() style.
+The opening brace for the foreach loop should be on the same line as
+the macro invocation - kernel style treats this as a for statement.
+Please reformat.
+
+> diff --git a/drivers/fastboot/fb_reboot_mode.c b/drivers/fastboot/fb_reboot_mode.c
+> @@ -0,0 +1,51 @@
+> +int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+> +{
+> +     static const char *const
+> +             reboot_modes[FASTBOOT_REBOOT_REASONS_COUNT][2] = {
+> +                     [FASTBOOT_REBOOT_REASON_BOOTLOADER] = { 'bootloader',
+> +                                                             NULL },
+> +                     [FASTBOOT_REBOOT_REASON_FASTBOOTD] = { 'fastboot',
+> +                                                            'bootloader' },
+> +                     [FASTBOOT_REBOOT_REASON_RECOVERY] = { 'recovery',
+> +                                                           NULL },
+> +             };
+
+The hard-coded second dimension of [2] is brittle - if a future reason
+needs a third fallback the table silently truncates. A NULL-terminated
+list per reason (or a struct with a count) would scale better, lets
+you drop the explicit NULL entries plus the continue check, and moving
+the table to file scope would avoid the awkward type-on-its-own-line
+split. What do you think?
+
+> diff --git a/drivers/fastboot/fb_reboot_mode.c b/drivers/fastboot/fb_reboot_mode.c
+> @@ -0,0 +1,51 @@
+> +int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+
+A short kerneldoc here (and on fastboot_set_reboot_mode() above) would
+help - in particular, documenting the FASTBOOTD fallback to bootloader
+is non-obvious behaviour that a reader of include/fastboot.h would not
+expect.
 
 Regards,
 Simon
