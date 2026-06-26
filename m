@@ -4,121 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA54CDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C622CD4F26
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:32:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A31648460E;
-	Fri, 26 Jun 2026 12:23:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 7275F8460E;
+	Fri, 26 Jun 2026 12:32:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="VUFjW7Wg";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="TNDaPmPJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 586B18494B; Fri, 26 Jun 2026 12:23:55 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0D5DD84704; Fri, 26 Jun 2026 12:32:24 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 906D78404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:23:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C63A18404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:32:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wqu@suse.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4924f8db066so3910105e9.2
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:23:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1782469432; x=1783074232; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=Lzs37CHTk7DgicK6OAuLqr6L4003x8EvgSSRyy0ZdYI=;
- b=VUFjW7WgFGay7b4WD+yKYMuhwHfG1OywF1IyiznFlXa3EhevVAEylfbSKt816xiJE7
- jBCID6RoMMVpprfyok3X+4oSUhRH0O73TbLis40NSlIZHPqFQDnBWqjWCog+hJ98O0x+
- p9QKbv9xMABCb1jXRU6QZ2R1Jh7OR+DQs3DFC1lkDTDvQ6KWy56+PxJva4upqL2DZYvd
- 72D1utvGYIih4FMyGZIErRAM26OxqptFPDUtIx4aLhdmSNdFfrbSs4qSaRlmh+M93jPX
- eR0CIYegwQBfLhbB0g0yQYF5b0bNxCcHVTXV8+opVA0oUtwKChVFliUVqrTKgei99R3n
- 0qJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782469432; x=1783074232;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lzs37CHTk7DgicK6OAuLqr6L4003x8EvgSSRyy0ZdYI=;
- b=XuvYKCK6QEjYUeZsfhaDgYovCMhc3+4w34u62b7nygc9YrHbqk3/Ryf+isOZlJyJYL
- zh/SfxPNJzaJt5nM+3HvR2+J/VEKhXyG53mx4Z3wjN7nZyFcJQHm5AfaNwAvAI5wIoWf
- xbyuTG99aXZ1s6ck0K5oz9faOAas9fQKiHDSsb+TjL01wRElkkIuq/y4XtvhAUb9qzHK
- ECrqIT0INDESig4XuA4kAuVH5yxVZU4rlr7NW0FckX5OlK2I1b4zKWMEm+trPNUU31pO
- ZUtdc4/7vBXsKlFsOLqi7zTODPQQbHi0c3iznAG9UKOBUHTmfAZrvYY8SLFSjx+Uw4g9
- 9bmw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9nZYW/EzIteO2FoL2Dc7X5jjMWk3B4+WyqhS9XAFo6tR5HCPsGpOqEEKM9YG5Eos26++Tl09s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyrrx8O2J4coXJYWV5zZ9AMuUb89lTLDBzQcFWTMboslHxeyvDm
- iuzPt11HilZSxWlDfoQF6n06ATB/UpwW3bOFbyzpw+z7ISgDx/g9/0FphCGWApCDJLk=
-X-Gm-Gg: AfdE7cmMt2z+/ghk+i+4IeEJPu3AlBHYdKHQOvtZjbdPWhkLj6Oogjw34NE+b+jFpvR
- ZCgshuQHrRGzEOf61S9AD91xj9Wy3tgEkO6E6cchSrk747mTSr5qvFii0EGlqsOojlco5sE3f0S
- iRBNSYSbpIadp5Noij81NqcvwhqYV9crbt5XqmicRBkEbehuNzdVgMoIxEy4LPuHj0WvOg6b1Ax
- sM6MiIVitVrWgtZNfwpDCMf3YgQ3vmhBAf70GfgK1nCtRA7lgds0OApWvU9uvcU/qKdZRKPi3jc
- +iC/IOGrBDoH6Nd+TINz8TiGFC5fTDIFbpsKlBYbJMmOQ1dAEeAVfCreFBDItj7YqHPCXzTgyvO
- ZW75Kj2jiSFeJRJwewHdC5DbPEduNgzCBQSo1+va0TcbSCf2WEdoNgyRdSbJL8maCJIeXgNnrps
- puECgI3mM2EfaivgPd6ICz2i7RpdNtfdX8e06CtdQC
-X-Received: by 2002:a05:600c:1d04:b0:492:4714:2d7e with SMTP id
- 5b1f17b1804b1-492668b76f4mr94619375e9.36.1782469431884; 
- Fri, 26 Jun 2026 03:23:51 -0700 (PDT)
-Received: from ?IPV6:2403:580d:fda1::299?
- (2403-580d-fda1--299.ip6.aussiebb.net. [2403:580d:fda1::299])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1a80sm16265208eec.18.2026.06.26.03.23.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jun 2026 03:23:50 -0700 (PDT)
-Message-ID: <46cac806-1f84-4648-a725-6d239763ea0b@suse.com>
-Date: Fri, 26 Jun 2026 19:53:42 +0930
-MIME-Version: 1.0
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kD3rNl4Sdb9Xnw/O0i96bCXDTZu9BMWymzkRt8V0FFS9KBIiIJU51mfJIeFuXy/qg0JCFqFLKcD89vs/Q830ZSwVlNs13DqaJG6/6Q8tfpz2tY1/RvWw3awvvfAshUUZM0SRaobjCOIinl4HjMkNmEMKqeQX1GKew1rhKXUHU7usmfmLOgRVcnnpMa6XeWq9DnmZEJ2ycTbppJi8QlIvsCUSBgTAxhc5/BltPDnKXi6htjoMEPDzHCPeAtHCYt33NnCp/cc1ZpRCYpLV/p1A+vpapLy33OrxWeQdHZVCavVyzl5QliQUqwuBJqCa2YkLasEmXbrUsW4e98ckxttLUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oLcl40UG3SnlgWcOpyLj6Jcslv3Yxkhnh8fjm2M+uRo=;
+ b=RiUBoqhtAxektkJdYWzjs+HsPN5mp3t1OseIMlLW7Nvolu7kxot97gP7IGkGcvN4xC3K9dPadNCCRHMaLRemdwihZPCC17gdF11P35iYzwuUWxcxQLnACkb2pMk2m1B9SvJ6xv3+Jc1xn3OjgH8xyfBEXiJTCmCBDFPe3pnuc3UGKsp87X4oq/fk14VjO2S+T0PrMt2GOFGO4upiYUHBqWTCKwKkHkYgfPKWcGUa1JCQR8B0eekSOgubOVd2Rtt5eGFR5TNrqY1qLTeKeVLHn7/8/OZuOez3UWU4Xzcjq1b6SMbE9MssQODN2muMbbD0pJUF4n4OHzecgIFoHKQIzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oLcl40UG3SnlgWcOpyLj6Jcslv3Yxkhnh8fjm2M+uRo=;
+ b=TNDaPmPJhovSs2nIiSZUCWVM7FAGv/Ei171MU+rB55MbvO0qMAOiQZA12gwTQ4J3+xwWJIGlrUCtg//jXob4o+nKZ45gsfieO7Im2kgKE9rIrQiqwiEkCuFjYL8Mje6XpqhaTxHVaxZbKqQLle0uUZMadUAKCCWYumbLih9eZeE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AMDPR04MB11651.eurprd04.prod.outlook.com (2603:10a6:20b:71c::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.20; Fri, 26 Jun
+ 2026 10:32:19 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
+ 10:32:19 +0000
+Message-ID: <0ed97c95-dc99-4fd1-a0d8-5300085475d3@cherry.de>
+Date: Fri, 26 Jun 2026 12:32:18 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] fs: btrfs: implement opendir(), readdir() and
- closedir()
-To: Alexey Charkov <alchark@flipper.net>
-Cc: linux-btrfs@vger.kernel.org, u-boot@lists.denx.de,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>
-References: <20260625-btrfs-readdir-v1-0-dd781a2b3965@flipper.net>
- <20260625-btrfs-readdir-v1-1-dd781a2b3965@flipper.net>
- <bbeac2f6-685d-4ace-b689-10d64c4e3ce5@suse.com>
- <CAKTNdwGH2OCWJ1A=jQWiLYQmxG8UFTBGwGh0Qno7OkUfxs4dtw@mail.gmail.com>
+Subject: Re: [PATCH v7] tools: mkeficapsule: Rework pkcs11 support
+To: Wojciech Dubowik <wojciech.dubowik@mt.com>, u-boot@lists.denx.de
+Cc: Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com,
+ "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>,
+ Francesco Dolcini <francesco@dolcini.it>, Simon Glass <sjg@chromium.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20260609070105.525348-1-wojciech.dubowik@mt.com>
 Content-Language: en-US
-From: Qu Wenruo <wqu@suse.com>
-Autocrypt: addr=wqu@suse.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNGFF1IFdlbnJ1byA8d3F1QHN1c2UuY29tPsLAlAQTAQgAPgIbAwULCQgHAgYVCAkKCwIE
- FgIDAQIeAQIXgBYhBC3fcuWlpVuonapC4cI9kfOhJf6oBQJnEXVgBQkQ/lqxAAoJEMI9kfOh
- Jf6o+jIH/2KhFmyOw4XWAYbnnijuYqb/obGae8HhcJO2KIGcxbsinK+KQFTSZnkFxnbsQ+VY
- fvtWBHGt8WfHcNmfjdejmy9si2jyy8smQV2jiB60a8iqQXGmsrkuR+AM2V360oEbMF3gVvim
- 2VSX2IiW9KERuhifjseNV1HLk0SHw5NnXiWh1THTqtvFFY+CwnLN2GqiMaSLF6gATW05/sEd
- V17MdI1z4+WSk7D57FlLjp50F3ow2WJtXwG8yG8d6S40dytZpH9iFuk12Sbg7lrtQxPPOIEU
- rpmZLfCNJJoZj603613w/M8EiZw6MohzikTWcFc55RLYJPBWQ+9puZtx1DopW2jOwE0EWdWB
- rwEIAKpT62HgSzL9zwGe+WIUCMB+nOEjXAfvoUPUwk+YCEDcOdfkkM5FyBoJs8TCEuPXGXBO
- Cl5P5B8OYYnkHkGWutAVlUTV8KESOIm/KJIA7jJA+Ss9VhMjtePfgWexw+P8itFRSRrrwyUf
- E+0WcAevblUi45LjWWZgpg3A80tHP0iToOZ5MbdYk7YFBE29cDSleskfV80ZKxFv6koQocq0
- vXzTfHvXNDELAuH7Ms/WJcdUzmPyBf3Oq6mKBBH8J6XZc9LjjNZwNbyvsHSrV5bgmu/THX2n
- g/3be+iqf6OggCiy3I1NSMJ5KtR0q2H2Nx2Vqb1fYPOID8McMV9Ll6rh8S8AEQEAAcLAfAQY
- AQgAJgIbDBYhBC3fcuWlpVuonapC4cI9kfOhJf6oBQJnEXWBBQkQ/lrSAAoJEMI9kfOhJf6o
- cakH+QHwDszsoYvmrNq36MFGgvAHRjdlrHRBa4A1V1kzd4kOUokongcrOOgHY9yfglcvZqlJ
- qfa4l+1oxs1BvCi29psteQTtw+memmcGruKi+YHD7793zNCMtAtYidDmQ2pWaLfqSaryjlzR
- /3tBWMyvIeWZKURnZbBzWRREB7iWxEbZ014B3gICqZPDRwwitHpH8Om3eZr7ygZck6bBa4MU
- o1XgbZcspyCGqu1xF/bMAY2iCDcq6ULKQceuKkbeQ8qxvt9hVxJC2W3lHq8dlK1pkHPDg9wO
- JoAXek8MF37R8gpLoGWl41FIUb3hFiu3zhDDvslYM4BmzI18QgQTQnotJH8=
-In-Reply-To: <CAKTNdwGH2OCWJ1A=jQWiLYQmxG8UFTBGwGh0Qno7OkUfxs4dtw@mail.gmail.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260609070105.525348-1-wojciech.dubowik@mt.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0116.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::45) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AMDPR04MB11651:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30c686a9-b193-4442-9f11-08ded36e3347
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|376014|7416014|1800799024|366016|6133799003|18002099003|22082099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: MuJ88LURdlx9rhZo0skQUXKe+G5cXZuT/cITZSiwVOX+FLfL3QzfX3VGHaF84McLHigSe+iTAb3lMVeN+AJ9XMAyMxz4rvmX/V88a1eFEbU63MGDxyeZoinQOmds08rPqtMZuV4LbkBULp/W09dmvIDWNJG3LmfDZBapTbQa7Hdns/kn8gpCO2uAq8uIxEJR9OLMpcE7zT//pO8fxG/EZB/ZmJIZvhucjMiFxbhAN0FgOvUoSrBADwhoFtlb1f35x8Ncav6T8uNXr42LhufJ8iTHJkmW+DJTqKQFlmfnWh5KO+qmM80BN8XUOw2FbRgdIpzjjGq+U/knX9j8dFQYXRP9HWYRlanbypaJd0uKdkv05gVw+WdIY0Z1IwbnlnZ41gHiUAt9vClYY6nFpIO7F/1MLDkWhkA0ObiYw5olCsKULsM/6j0eDICm31yuwFrWfkcE4/A/r2N4ONUGw/fY/huR+DMrtM2O3pW7NVeejztNVLW2tsursnnU4Accc509BlKXu+Z8XmPVaatdc+DPWhnujjNCUF8kdFZL29V05cIoR5Fnhb7FJGaDAoKFv/q9moKricr47i37wPn55vC/JEw+QrnG14oRajgZW148zQypYK7dOtlwdphPpIGGvS2Id1GoBeDlAHksLIV06BQ+0jbHAvu1pmmyTMk6aZTxdeA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(366016)(6133799003)(18002099003)(22082099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3VXTGJYSUlBK2Uxa3EzM242ZFRPMG9KREtlcHd5VnV6eUJqMWhFOUhad2FP?=
+ =?utf-8?B?VHFIOFFFT1RiN0oyUFUwSVFSZGZKZzBsQlljbE5LSTBOMEhVZlNzUTd3QUli?=
+ =?utf-8?B?dVA2K2ZzZ0VMOGZEc004WWZocmFmVGZqeVdJSUtXODVGeWtoRmFFSGhzdFRR?=
+ =?utf-8?B?d3hFQ0tzR0k5K0xXc004TUVTRi9WTEZ4TENLRzZYS1QvRmMwK0drSmdOZzgz?=
+ =?utf-8?B?elFYTDJPajFjZllTTS8zM0VxY3k1ZkkrVmw4ODQ4SmVWUit5aVNFTkI0SVQy?=
+ =?utf-8?B?ZzlCNWFUV000RVpGcGhHZnJJS2ZiUWs0cEduNlZoVER5czQxZmc3ck9UdldH?=
+ =?utf-8?B?ZEo1eTBQTWtXbzJxODV6ekY3MXkrZXkwaWpuL3JXaWJGVnRwRWF0b3RKV2ZO?=
+ =?utf-8?B?dHhjRlpFb29saU1ML1BXMWRxRVFaa3Q2dVNQVndlRkI5UGxYZi9BbjhmRGRq?=
+ =?utf-8?B?MnlCOC95QmRuZ0NuTEpTSWxDSmJVN2NqeWJndmpiQnN0RmdxV01KcTRqQWFG?=
+ =?utf-8?B?ODAwY2lmaHNzek1ibnBBQWV5WXRncWJkQ01vQml0V01WM0pBY0V6SmFJMVgz?=
+ =?utf-8?B?U0dwdlhvREJuQ3k3Q3lJaG9YWGNSU2xLV2tLRk5acjhhMEUvYzdTdWEvQ2N3?=
+ =?utf-8?B?Y0pRdHRlZHRFL2laWXBXOFl5NjNkZFFsRTJwOEs4Zm04YTZUTTB1WU9GWUl3?=
+ =?utf-8?B?Tm95a0dLV1ZsNXJDQ1RBL1dPM1dNL2xKZzE3ODFDOW43MmE2QTlOejRKOEFy?=
+ =?utf-8?B?MDlKaHZsYjZSY1AycExQREtGdC81SDZEMXVPQ3pGaGVVT1VxTEMxZGM2cFB2?=
+ =?utf-8?B?emxKbkxjdEhJZUUvN3FnKzI2SFFqczRhMHY5QVlnWmpVU0tDM3pxLzI4Vk5Z?=
+ =?utf-8?B?bW1acFZLMm9RQVl1R2E1NzZrRDJMVHFCSWdvQi9VK2ZPbUN5UWhwamduNjhL?=
+ =?utf-8?B?VHRNZlpqcmlSWHpMWmVONWlNQVM0NTRWQ29DRFVYZ3Q0TU5MRkpLVjhMeHV3?=
+ =?utf-8?B?U2txOVd4bk5EaEl6cllKQmxTMlhaTXpWS2JkU3BpcnhrYVJLdlloT3djMk1J?=
+ =?utf-8?B?ZTdGMWh4b1FGcTFJN0RBaS9oRjMzZG5FUkNqYmZhcm1kbytOaUdxVE95YjhX?=
+ =?utf-8?B?RXg1anBweHhoKytXTVlHYTNrR1BJM2hXZjJQeWUzdEtrV0JJZXpYYlBxQ1Yw?=
+ =?utf-8?B?R1ViRFZWR3d3K1RjYUFvWDBkeFJuMk55TVE0Ym5uT1RsSlRuSmFvMm90Rk9y?=
+ =?utf-8?B?ZnExYkFFbFRUaDVoWDM4WDJBSFdFZTUyVjJxbVd1ZjdLdnJDWHViM0R5NlVY?=
+ =?utf-8?B?RTZCb2lEQnNMWTUvUWlGZlBiWnhhN1dYL1lTNFBXUUtFYlUwR2l6ZTM1UVMw?=
+ =?utf-8?B?NkgraUh3dWYxMldtbmVPZFdVaTVzcm1TRUkvVkNYZmtmQ1JvNEVMRlJXaGhS?=
+ =?utf-8?B?Z2JFdTJZRE1jNWFDU1ZPYjAzaUVBNytMVXlRWC9JTGdhU1FRcHQ4QVVRSHVa?=
+ =?utf-8?B?NTh5UzZEU0tLN2haemV2SWpyUkxzL0JoUVlwaEljZFBlWWdBREZjS0R6Rm1s?=
+ =?utf-8?B?QS9Td3hmeHc5cFRrZDN0SGdMNXhEblpYUzVFT2NRcjdrd1ppWHI1N3E0MCtn?=
+ =?utf-8?B?Z3B4Qi9VWU15S2N6V3MxaExmL2ZvdUtmZGJuSFBDS1pDaTRyQitBeWhjRStZ?=
+ =?utf-8?B?VUhYQUpLckJ4dEJoeVpWVGhsNndMSnJpOUtGQjg0eitaS0xhOHRiWHF1ckdQ?=
+ =?utf-8?B?MjlaZ050c0RKNXpKa3Axa01kbVNXSnFVbU1leEJQVi9qbHNid2NkVXZLSCtV?=
+ =?utf-8?B?VlZDbkhXVXV3Zlp1L0Ntbm5LaWQ5ODVUK3pRc2t6eVBZaXBaT2JCakozZ0F2?=
+ =?utf-8?B?eU94UDdLSDVTMlJJdHBKdXZjQWY4bFdLb0N0L2VtN0JWSHE0RG1YbzZPOU9j?=
+ =?utf-8?B?bHlVMGVCMUVxSmF4bnpIMmh5dGd4RXlxTDgwWUMxNVVCMHYyUzEvUmFWNUlk?=
+ =?utf-8?B?VXRFdk55RlpGYmN3aXJYUmRNay94dzRybUxsVGlJUEI1L1Z5VXB5UFMzM1JO?=
+ =?utf-8?B?WCtKU3lsVWhpa2NNMUxMWlcwUTNocmJZT0IzNzFzelhnTy8rRGJqSjh3Qjhl?=
+ =?utf-8?B?WC9UaGtxalBnb0wvSFByUGd1SVF5dmFwaDRYaFdqWHVJZzRuOG1OaUVISW0y?=
+ =?utf-8?B?U2xGdFhYYmR5MzFSTkNVV0oyR2VBckhnTWwxd3A4Rk5FbkhDWTFiVS80RHEz?=
+ =?utf-8?B?a2ozbG9ESlkvcDM4bW1qcHZwdXVkaUFaRHlHUWUyQ2dRRGdTNVNzMVZSV0Ur?=
+ =?utf-8?B?dEhxVXovVkVBSTdKZE0vNFZiWnF2TE9KbnVJWUtjQys0ajhZTlpPQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30c686a9-b193-4442-9f11-08ded36e3347
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 10:32:19.4718 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kBfs1rnz+XCRFk1bAy1zYzF6vHO6rDq/OZOC8OuaYHrnY8c2yBoYjeijK8jmk23ptiaybUqdhtaAAeNNdXP+skb7V2ugfXc0T2J0IHLS6kU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR04MB11651
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,81 +152,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
++Cc Heinrich and Ilias, maintainers of tools/mkeficapsule.c according to 
+./scripts/get_maintainer.pl
 
-
-在 2026/6/26 18:51, Alexey Charkov 写道:
-> On Fri, Jun 26, 2026 at 10:38 AM Qu Wenruo <wqu@suse.com> wrote:
-[...]
->>
->> So it looks like u-boot only supports the above 3 types, and unlike
->> linux kernel the values doesn't match the btrfs internal ones.
->>
->> In that case, I'd still prefer a proper convertor function.
+On 6/9/26 9:01 AM, Wojciech Dubowik wrote:
+> From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 > 
-> Hmm, but the convertor function would still be the same switch
-> statement, and it's only used in this single place. Would factoring it
-> out actually improve readability?
-
-This is mostly a cross-project tendency.
-
-Inside kernel, we do not need a conversion because all the BTRFS_FT* 
-flags matches the FT_* inside kernel.
-
-In progs we have btrfs_type_to_imode() to do the conversion to S_IF* flags.
-
-Thus I'd prefer a convertor, even if there is only a single user.
-
+> Some distros like OpenEmbedded are using gnutls library
+> without pkcs11 support and linking of mkeficapsule will fail.
+> It would make maintenance of default configs a hurdle.
+> Add detection of pkcs11 support in gnutls so it's enabled
+> when available and doesn't need to be set explicitly.
 > 
->> [...]
->>> +
->>> +             *offset = key.offset + 1;
->>> +             type = btrfs_dir_type(path.nodes[0], di);
->>> +
->>> +             /* XATTRs share the key space but are not directory entries. */
->>> +             if (type == BTRFS_FT_XATTR) {
->>
->> This doesn't looks correct again.
->>
->> XATTR has their own keys, they should not show up among DIR_INDEX keys.
-
-Firstly, xattr is per-inode, not per-dentry.
-Thus I doubt if you can hit an XATTR type inside a DIR_INDEX.
-
-The easily way to test the theory is just create a simple XATTR for 
-compression:
-
-  # mkfs.btrfs -f test.img
-  # mount test.img /mnt/btrfs
-  # touch /mnt/btrfs/foobar
-  # btrfs prop set /mnt/btrfs/foobar compression zstd
-  # sync
-  # btrfs ins dump-tree -t 5 test.img
-  [...]
-	item 6 key (257 XATTR_ITEM 550297449) itemoff 15812 itemsize 51
-		location key (0 UNKNOWN.0 0) type XATTR
-		transid 10 data_len 4 name_len 17
-		name: btrfs.compression
-		data zstd
-
-You can see that XATTR_ITEM key is for that inode 257, not for the 
-parent directory inode (256).
-
-
-Secondly, if you check the tree-checker.c from the kernel, 
-check_dir_item() will reject an XATTR dir type if the key is not 
-XATTR_ITEM_KEY.
-
-So even if you really find a btrfs with XATTR dir type but with 
-DIR_INDEX key, btrfs will refuse to reject that tree block.
-
-Thanks,
-Qu
-
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Cc: Franz Schnyder <fra.schnyder@gmail.com>
+> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> ---
+> Changes in v7:
+> - fixed return code in import_pkcs11_crt to restore the old
+>    behaviour, spotted by Simon
+> Changes in v6:
+> - removed return code check from gnutls_x509_crt_import_pkcs11
+>     sugessted by Quentin, to be sent in separate patch later
+> Changes in v5:
+> - removed more unrelated cleanup improvements spotted by
+>     Quentin, to be sent in another patch later
+> Changes in v4:
+> - abstract pkcs11 init function
+> - removed unrelated cleanup improvements, to be sent in
+>     another patch later
+> Changes in v3:
+> - remove config option for pkcs11 support and add auto
+>     detection in Makefile
+> - reduce amount of ifdefs by abstracting import pkcs11
+>     functions
+> - add missing free and deinit functions
+> Changes in v2:
+> - make use of stderr more consistent
+> - add missing ifndef around pkcs11 deinit functions
+> ---
+>   tools/Makefile       |  5 +++
+>   tools/mkeficapsule.c | 95 +++++++++++++++++++++++++++++++++-----------
+>   2 files changed, 77 insertions(+), 23 deletions(-)
 > 
-> Let me double check and adjust accordingly.
-> 
-> Thanks a lot for your review!
-> 
-> Best regards,
-> Alexey
+> diff --git a/tools/Makefile b/tools/Makefile
+> index 1a5f425ecdaa..e85f5a354b81 100644
+> --- a/tools/Makefile
+> +++ b/tools/Makefile
+> @@ -271,6 +271,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
+>   	$(LIBFDT_OBJS) \
+>   	mkeficapsule.o
+>   hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+> +GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
+> +			 2> /dev/null | grep p11-kit-1)
+> +ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
+> +HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
+> +endif
+>   
+>   include tools/fwumdata_src/fwumdata.mk
+>   
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index ec640c57e8a5..c3cf48f4cc1d 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -207,6 +207,71 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+>   	return 0;
+>   }
+>   
+> +#ifdef MKEFICAPSULE_PKCS11
+> +static int pkcs11_init(void)
+> +{
+> +	const char *lib;
+> +	int ret;
+> +
+> +	lib = getenv("PKCS11_MODULE_PATH");
+> +	if (!lib) {
+> +		fprintf(stdout,
+> +			"PKCS11_MODULE_PATH not set in the environment\n");
+> +		return -1;
+> +	}
+> +
+> +	gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
+> +	gnutls_global_init();
+> +
+> +	ret = gnutls_pkcs11_add_provider(lib, "trusted");
+> +	if (ret < 0) {
+> +		fprintf(stdout, "Failed to add pkcs11 provider\n");
+> +		return -1;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> +{
+> +	gnutls_pkcs11_obj_t *obj_list;
+> +	unsigned int obj_list_size = 0;
+> +	int ret;
+> +
+> +	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> +						 ctx->cert_file, 0);
+> +	if (ret < 0 || obj_list_size == 0)
+> +		return -1;
+> +
+> +	gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
+> +
+> +	return 0;
+> +}
+> +
+> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> +{
+> +	return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
+> +}
+> +#else
+> +static int pkcs11_init(void)
+> +{
+> +	fprintf(stderr, "Pkcs11 support is disabled\n");
+> +	return -1;
+> +}
+> +
+> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> +{
+> +	fprintf(stderr, "Pkcs11 support is disabled\n");
+> +	return -1;
+> +}
+> +
+> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> +{
+> +	fprintf(stderr, "Pkcs11 support is disabled\n");
+> +	return -1;
+> +}
+> +#endif
+> +
+>   /**
+>    * create_auth_data - compose authentication data in capsule
+>    * @auth_context:	Pointer to authentication context
+> @@ -229,9 +294,6 @@ static int create_auth_data(struct auth_context *ctx)
+>   	gnutls_pkcs7_t pkcs7;
+>   	gnutls_datum_t data;
+>   	gnutls_datum_t signature;
+> -	gnutls_pkcs11_obj_t *obj_list;
+> -	unsigned int obj_list_size = 0;
+> -	const char *lib;
+>   	int ret;
+>   	bool pkcs11_cert = false;
+>   	bool pkcs11_key = false;
+> @@ -243,19 +305,8 @@ static int create_auth_data(struct auth_context *ctx)
+>   		pkcs11_key = true;
+>   
+>   	if (pkcs11_cert || pkcs11_key) {
+> -		lib = getenv("PKCS11_MODULE_PATH");
+> -		if (!lib) {
+> -			fprintf(stdout,
+> -				"PKCS11_MODULE_PATH not set in the environment\n");
+> -			return -1;
+> -		}
+> -
+> -		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
+> -		gnutls_global_init();
+> -
+> -		ret = gnutls_pkcs11_add_provider(lib, "trusted");
+> +		ret = pkcs11_init();
+>   		if (ret < 0) {
+> -			fprintf(stdout, "Failed to add pkcs11 provider\n");
+>   			return -1;
+>   		}
+>   	}
+> @@ -301,14 +352,12 @@ static int create_auth_data(struct auth_context *ctx)
+>   
+>   	/* load x509 certificate */
+>   	if (pkcs11_cert) {
+> -		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> -							 ctx->cert_file, 0);
+> -		if (ret < 0 || obj_list_size == 0) {
+> -			fprintf(stdout, "Failed to import crt_file URI objects\n");
+> +		ret =  import_pkcs11_crt(&x509, ctx);
+> +		if (ret < 0) {
+> +			fprintf(stderr, "error in import_pkcs11_crt(): %s\n",
+> +				gnutls_strerror(ret));
+>   			return -1;
+>   		}
+> -
+> -		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
+>   	} else {
+>   		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
+>   		if (ret < 0) {
+> @@ -320,9 +369,9 @@ static int create_auth_data(struct auth_context *ctx)
+>   
+>   	/* load a private key */
+>   	if (pkcs11_key) {
+> -		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
+> +		ret = import_pkcs11_key(&pkey, ctx);
+>   		if (ret < 0) {
+> -			fprintf(stderr, "error in %d: %s\n", __LINE__,
+> +			fprintf(stderr,	"error in import_pkcs11_key(): %s\n",
+>   				gnutls_strerror(ret));
+>   			return -1;
+>   		}
 
