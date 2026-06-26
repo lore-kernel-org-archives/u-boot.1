@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A632AC43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 21:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443C1C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 21:58:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC72D84119;
-	Fri, 26 Jun 2026 23:54:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B997784119;
+	Fri, 26 Jun 2026 23:58:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s7kPTO61";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eNOrei3+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFE8B846DF; Fri, 26 Jun 2026 23:54:05 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id DC86184844; Fri, 26 Jun 2026 23:58:10 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7BD884105
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 23:54:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C511584105
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 23:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-6a14a4d42e3so402303eaf.3
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 14:54:03 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7e93f93ed01so954906a34.3
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 14:58:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782510842; x=1783115642; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1782511087; x=1783115887; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8ZSmz0n0nVBUA7dscOKvGrdg+3dMm6zQCJQN5rL3P6Y=;
- b=s7kPTO61OrxzclaDJdwO8U5yfZHOVz4L6pgZ7QMXuex5w1OS0PC/0ccmXQv0iUPuUV
- 4ApDt/n4szn0J+vDklE6StgA5J6Rij9wLPz+pSJZVUdvcEM1eeKGxGDzjbeUAzZ0kTxc
- 2NmvmLosBUCsii5TpC63T+4Zg141L0nMHUjvE=
+ bh=zZe6Cmm+tCEMFDlBBCjuXWZtCNArauXRSr/6Qyyl0nw=;
+ b=eNOrei3+z/V4uLafxr9vVQ6AvSEtJ8MykApoREhkA9D4AsawL8Rh823y5wUN5oo/Ep
+ 7WiPZ8UHji7ZWwzAonu8TX6bdvWvRXeGM+IyJCKsMt23z/NKg3ME3LogsENKSQcMGHnI
+ dtgor0ga+zmsf/YtMPKKnYopiJBfiZ+Vby5Co=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782510842; x=1783115642;
+ d=1e100.net; s=20251104; t=1782511087; x=1783115887;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8ZSmz0n0nVBUA7dscOKvGrdg+3dMm6zQCJQN5rL3P6Y=;
- b=EylHX7PieMX4cF1yoYR73O9bZD5QJSmk0TQzodYGjgU17w0CCeL8mCgSNLhDBZPW1/
- eoTg9WDHFMv4oAUKR/PXC40SWdvL+zFwWHtRDzJO91nRWSEQRaCI+XvlLYXkOFozG5WQ
- xwCkLuaoCys39RfEVXitSq6L+FnayFmEcBfsvMGpqivVlqdTvi+kLoq/e8h+OliRzjln
- Wz6tXKUfrdlAnlmFUwZJv0IRVyFITAfd3OcDLs3MXYsGCAc9oTQkP8zHWx8SOnZQDQfV
- Y0vbFDm8nF34hWUwA0ZzWfQJpD1eP+UeovshqprvyaTwK0aKOZIu/8KDqt9G2Xx/7PQH
- qPJQ==
-X-Gm-Message-State: AOJu0Ywwj37+JesWAAB8d37QhCi1Jqk0aqxTCTyFf8V0kXIXt/jkpxOC
- p1ZhEXVzHHl/7WaaEVDiTN2I7jHTcnUkSt+pGTMwiEZmxrWGISUJ/jmCbpLqvU5IBVz3p3gBmut
- cLvfeNuk=
-X-Gm-Gg: AfdE7ckjgzguH+cG4hqcgMBg1EYgf4tqFgmwWwxPnXm0jCGL5SbhmL06fmA2I91aryS
- aTIeqypJluTtdU8KZzTzNRQNNvY0m/sPpXPz37Oijq9naBWqOk0rNuqNT4bEqlcYXqdDufzaxoc
- 8sNF4Yu4DwKYRNKf8/eEsuC2NJf/oFhWON0eabnNZxz6psjJjnnhY5n8iJLucLVsRhoTNOKJ5cS
- XRC0bHmqbh0/PiP4bi5HaoiY7kX5mSBcMo3btJ0jwgJeTchIu9LrOC0MjhB3LDYvLLMfrkDZXF1
- HrAUq15QWtUqSGJilIUUF/yi0c87FphEnGHi1OeyEkPx+xtA4XWelQOgyG+XNycG63fVBOYBsLX
- 7yw091S3r57Nmj+M3/uu+XNX1dieqfBSAif6PQSMKDhGdnprqLPdvXKV7DmsNG+UXUBO4sSZWis
- BZF5jKxS8s72t/TnbO9PgyEeu72t75WTMAb7qDp4h0a4K2PiKLECGygzb/gH90yuNxTFif+QZ3x
- Wk2Jrddt8I/Mk39u0cGHGWNI0JJGd4FL0GP5Gdj
-X-Received: by 2002:a05:6820:221f:b0:6a1:50e7:5c16 with SMTP id
- 006d021491bc7-6a150e75d6fmr1272245eaf.65.1782510842412; 
- Fri, 26 Jun 2026 14:54:02 -0700 (PDT)
+ bh=zZe6Cmm+tCEMFDlBBCjuXWZtCNArauXRSr/6Qyyl0nw=;
+ b=JAzTHITz8wFeKWLY2tUimszveCvYX6J46Cen4gR6WXNSUbEmeWD2w47/JbrO9qHNXk
+ 2J/vzhCAZicyKtG87ESHfy2ApWUCIAoqex7g1GGwUssKPvP4R9nUUp9Xix1Zd+42NJHy
+ l9nCF9rI2vQn+rgpUJNz4YR0wBUcr2+WFVMp2CxZiDUoN9YfrTxjsBl3S5Z6WkLw/cfw
+ F6NTruNeMfaa1ClHb7M5HBShtl3X/+zWjaVKsCQ+Oft0QfqJBBRJciKjCEzBvcsbokgh
+ U+UnP1boF8srztbUeK47mZXyBNX/xGPNuj87vhEA9fvDO9Fue2lWEV77xKALrzD+AMk6
+ l8pA==
+X-Gm-Message-State: AOJu0YzqZsN7ADcfoVugaxRVEqUfVlB0k5ms3e215XMVVvStvOi5yxL6
+ 2qaESTh8wW7jWIF5N0AcJdQ/8ziAR+1RDwvYofzXYdS/hHK75F6IeAXzBy3pAXmfnVo=
+X-Gm-Gg: AfdE7ck5EJvJtPOro5TDBQnebTkXKkVSfMNgeSKNX6YJpfJbYWGoUn7uzq2XP1F+Ic6
+ rR8nzM66/QWz4bXjb/1gkyCGip6cMWaJiWSBk21eFra4siKUMBdMd3XV0VaHvLA3OOXqaIjHn3z
+ ssRrEa+1Vf+76wUFuRUaIaXbRQVuAOpVmQ1otrkQ32PH8vPUFIXcpEu89nMrWlD1Megcnmd1AC6
+ +nWmSwBsbwE3aH6hVhJ/5AxfrcjBQB0zja6y9jNaOWQ0roapVxF9hnAKeTSYW00kP8xdwhd7yjm
+ GOGM0p+craVHJ2bfCBM0Aa5ZGX2cQm2p+Ozn7RvE/wjMlqOqV81JqzMlEUoHNB7DRR7NAqqasi8
+ 8Fuve8ID3AjhAQrnJ9dRL6lDjGbz/RazaT2saRCunSvVbIoihht0hAK8kOJa90TvnN2Ytm/IJmb
+ 2+JtG0droteAxzeKO3QvFFbTyEMMnvoNEbNSdk9GwRHVhJ2DJNWa3aWpMIoyASmG17Dv7C25nlN
+ fnbzIdCit+PY9zS+P/FqPAiJI7rFm1WKQYhBioYNR50NWvYsFI=
+X-Received: by 2002:a05:6830:2e10:b0:7e6:ef2e:28a5 with SMTP id
+ 46e09a7af769-7e9b4f39da4mr1606816a34.15.1782511087472; 
+ Fri, 26 Jun 2026 14:58:07 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
  [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a1414aba15sm2464167eaf.11.2026.06.26.14.54.00
+ 46e09a7af769-7e9bd4be179sm167578a34.7.2026.06.26.14.58.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 14:54:01 -0700 (PDT)
-Date: Fri, 26 Jun 2026 15:53:59 -0600
+ Fri, 26 Jun 2026 14:58:06 -0700 (PDT)
+Date: Fri, 26 Jun 2026 15:58:04 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260626215359.GA382693@bill-the-cat>
-References: <20260622224344.GF382693@bill-the-cat>
- <6359ffb0-804d-4241-ba70-941ed36a4f20@cherry.de>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] test: cmd: part: fix integer handling in
+ setup_gpt_partitions()
+Message-ID: <20260626215804.GB382693@bill-the-cat>
+References: <20260626183353.1666667-1-dario.binacchi@amarulasolutions.com>
+ <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gisBdMda3yZkcpfi"
+ protocol="application/pgp-signature"; boundary="kEz8wzx9yRoVyfuc"
 Content-Disposition: inline
-In-Reply-To: <6359ffb0-804d-4241-ba70-941ed36a4f20@cherry.de>
+In-Reply-To: <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,94 +100,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gisBdMda3yZkcpfi
-Content-Type: text/plain; charset=utf-8
+--kEz8wzx9yRoVyfuc
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 26, 2026 at 08:28:34PM +0200, Quentin Schulz wrote:
-> Hi Tom,
+On Fri, Jun 26, 2026 at 08:40:36PM +0200, Quentin Schulz wrote:
+> Hi Dario,
 >=20
-> On 6/23/26 12:43 AM, Tom Rini wrote:
-> > Hey all,
+> On 6/26/26 8:33 PM, Dario Binacchi wrote:
+> > Coverity reports an INTEGER_OVERFLOW issue because ut_asserteq() compar=
+es
+> > an unsigned int (mmc_dev_num) with ret, which can hold a negative error
+> > code.
 > >=20
-> > Coverity is back up finally and so here's the result of changes for the
-> > last three RCs.
-> >=20
-> > ---------- Forwarded message ---------
-> > From: <scan-admin@coverity.com>
-> > Date: Mon, Jun 22, 2026 at 4:40=E2=80=AFPM
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > To: <tom.rini@gmail.com>
-> >=20
-> >=20
-> > Hi,
-> >=20
-> > Please find the latest report on new defect(s) introduced to *Das U-Boo=
-t*
-> > found with Coverity Scan.
-> >=20
-> >     - *New Defects Found:* 1
-> >     - 4 defect(s), reported by Coverity Scan earlier, were marked fixed=
- in
-> >     the recent build analyzed by Coverity Scan.
-> >     - *Defects Shown:* Showing 1 of 1 defect(s)
-> >=20
-> > Defect Details
-> >=20
-> > ** CID 646439:       Integer handling issues  (INTEGER_OVERFLOW)
-> > /test/cmd/part.c: 53           in setup_gpt_partitions()
-> >=20
-> >=20
-> > _______________________________________________________________________=
-______________________
-> > *** CID 646439:         Integer handling issues  (INTEGER_OVERFLOW)
-> > /test/cmd/part.c: 53             in setup_gpt_partitions()
-> > 47     	snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
-> > 48
-> > 49     	ret =3D blk_get_device_by_str("mmc", dev_str, &mmc_dev_desc);
-> > 50     	if (ret =3D=3D -ENODEV)
-> > 51     		return -EAGAIN;
-> > 52
-> > > > >      CID 646439:         Integer handling issues  (INTEGER_OVERFL=
-OW)
-> > > > >      Expression "_val2", where "ret" is known to be equal to -22,=
- overflows the type of "_val2", which is type "unsigned int".
-> > 53     	ut_asserteq(mmc_dev_num, ret);
-> > 54
 >=20
-> Does Coverity complain if we do:
+> The trick here is that ut_asserteq() takes two arguments and casts both as
+> unsigned int, hence why it complains.
 >=20
-> ut_assert(ret >=3D 0);
-> ut_asserteq(mmc_dev_num, ret);
+> If Coverity is happy, I'm happy :)
 >=20
-> ?
+> This looks fine to me, so:
+>=20
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-I wish it was easier to test questions like that.
-
-> We also use the same ut_asserteq() check in many oher places with the ret=
-urn
-> value of blk_get_device_by_str() so I'm surprised it doesn't complain abo=
-ut
-> those and why.
-
-Looking at open issues on test/lib/lmb.c, which has a "ut_assert(ret >=3D 0=
-)"
-in it, and is happy with it, yes, we should be able to make changes as
-you suggest I believe.
+Yes, were you able to push this through coverity on your own?
 
 --=20
 Tom
 
---gisBdMda3yZkcpfi
+--kEz8wzx9yRoVyfuc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj708wAKCRAr4qD1Cr/k
-CgwLAQDKT0N4i5yD4NBU4SgmH0CCJ8Ky8n//nRDoc3v8GrWGigEAv8PyRsEmrfXX
-K4lmJFG1laa8HquVXTGZqCrFx4etnA4=
-=KD51
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaj717AAKCRAr4qD1Cr/k
+CmdyAP9cq4Vi3NeK2M8B/X2iOSSo/siwinspOl5/t05kb36ZvAD8CQo8l7kmVPE+
+8CkBacAEvookMZJLBFiAC+w3dMI4DQA=
+=AMe/
 -----END PGP SIGNATURE-----
 
---gisBdMda3yZkcpfi--
+--kEz8wzx9yRoVyfuc--
