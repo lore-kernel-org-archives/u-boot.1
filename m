@@ -4,91 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF129C43458
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC75C43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 15:46:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CA288496E;
-	Fri, 26 Jun 2026 17:42:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7085584704;
+	Fri, 26 Jun 2026 17:46:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PIximi4i";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="i3JW9Iq/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6B5984979; Fri, 26 Jun 2026 17:42:52 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 14D438495B; Fri, 26 Jun 2026 17:46:38 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB13E8404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:42:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82DE28404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 17:46:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so8101375e9.0
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 08:42:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782488570; x=1783093370; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aj2TNHV7Z4SwaHbc26FN2IPXqmkxDPvwBynrMFWySwQ=;
- b=PIximi4iuHcvjWtF9UPup63ckx1GPp0jynO0luDHa+FOXqU4uwWDSkc2R3ek8SmGka
- Huh0Rpdgs6AuVnIYmJVZNW8xl2enBU9FaCIGbr841ZHgf6V5IJ1N1Paer4O7+UxcxG1n
- UjZY2pkPJHP7sVRZxVLH8fwqjJCC5WG/A3E35hnawV8yBnFCIDDQeYBOfp3cgoXjasgN
- oONr90kzcUDtODAUu+zCupLWA5qx3TKTHHxS7c5z0PdS3KlFjWpFl8OMZwylRqNrBGW8
- 3n1GqctZodC/SppRoa+yS179gUCE0gqTX1TPHt4GqaxDTO/Ehrq8HoCnzHG5mDyBqcZ2
- Jxmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782488570; x=1783093370;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aj2TNHV7Z4SwaHbc26FN2IPXqmkxDPvwBynrMFWySwQ=;
- b=dLgFM+SW2rcFePA5jyPlzmKmLBemiPkfWwCQtSPvujkR2ujGRt+q7q8VIEPECoFlFA
- 2PVNaRi2XUyBcd16NGz3y09T0bTeY8pV9AEtTc+jqJJrzz1qvYciX9tsb5H8Xe7UCLo9
- CxDT7/RbRcUHfrjKvOsSKr8AzWWBwfnihX5KeUxA7A4oDyilmJwS1iUoZbdOzeeHneFk
- rKxV3+KygJ6WoUKupRXA2rcXOkcy18lZyMrbkDvlY/iVRuroCGubR8YEu9y0+6Q/v3hi
- 7SYc34iV5jiFNMHWQIyz0/u9pI7x4a47IWGjRV9R+h+G2e9f0qwIUVcJ9WSTRvroFcnJ
- ySCw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ941UoUSLY+hAkkYH9hG+q82P50wQvX0m5UErVnJrCxGIo8NkxS/wcTA2tnbx1WGi764sAjDf4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfQWRl3SjsbvZdPkjhk6H3vdui+YEr9D5E5fxEb42A9Mvu2dGc
- /r1fDJCqxycKm4tY/O5MRxuQsalPIBBpjNPAu7NvSoWIdYTLJwoYbCR5jopbw3K0Tyk=
-X-Gm-Gg: AfdE7cl0+WlCCFXjudEZ5AR1qkNV8gRvRI6pklYlytc7UqTP9ynjxYlegFPHssejjix
- 3Vg7+QKrfDP+JQeAsEkytfSsOwwDpa1vIyMEmgmHhNDmsci5n8oizJOl0i0rm/sWfk/L3HbJSCm
- QAgIqxRkJBz9KzWbLm8aY6PDFcGUhglBAclP2xtCHa9QT8rlnhrULiN/Tnc6V0tXGtokX/n6cZ5
- KohSUkq51G2G3Xsd2+srzMqHZoIW7qFI5xVAjN3tNHvQGmFOXtzCBL687nmylMUoT7ItK2ZEdZt
- fZCyTpVs2lt27RNpKxszq/o8nEICekZHX30sALERrCMUQASMjWBAEYXM8qts6hBrnGapZzhZKMR
- tw2fZhJ7Y0n0noTjiM3fdL0o3U5Eo73gOVMv8NGcjmyBYXi21WDXgTD3bpxrJuR8jrKdwm7IZm+
- 6Oq8d6xeyt8n2epuNJMgR7V5/7TwXxVV6CTKGSUnFDhreq3J/j1GY2ewU1sEAV0AkaxftO
-X-Received: by 2002:a05:600c:c1d7:10b0:492:4667:8c40 with SMTP id
- 5b1f17b1804b1-492668638c1mr88075725e9.8.1782488570301; 
- Fri, 26 Jun 2026 08:42:50 -0700 (PDT)
-Received: from [192.168.1.39] (159.89.222.87.dynamic.jazztel.es.
- [87.222.89.159]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492692d5149sm87519555e9.9.2026.06.26.08.42.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jun 2026 08:42:49 -0700 (PDT)
-Message-ID: <fc60aac4-7af0-48fe-8aa8-1f7fb8815e06@linaro.org>
-Date: Fri, 26 Jun 2026 17:42:47 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Mt6CXpZkp7s6y7gzDvFCbRnmYQD7PxPnLzif69L9rXObYPCuraADHW+Zzy7GFySEDYcD8D+2Yq6oSXVld2PM7X1qKZwEyqpaB3QNWGRu0W8iQSWiXKW6HPTBeY5ob2isl9WuypjnXZGys6MuZ8kCDXai/1MrbYKWstzJu4ooQ/c0HKGBdQT6DE++DhCFt+GtuBFoJiPjjz01s/uttxXDVo1dDj/ZPe7nZkBhyVjfLasYvadsEMLSTXRzLgV4Zc6/EhQCyIMfIh6r303ZN/JmQ6JfKuOKuPwvy2t2UO0YUkEXxmSpx1vCt58U2zDZHjfwEIrTEHzOTYevr6Rpl2VjPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=htZ/VeOk/IOdEk6obXfmpIcTxehg920S+WjY6XK4JsA=;
+ b=E1H6WjtGDI4+OxAx17bd3uYlICx/R31BNKp8dNEZdGiMrTs95OaMeLfyKtmltMuWof/1YUCDDLi0cIolYdcclG3YS1bDhejCCXK4iDfAxU305LIcVD+BAodBSqeV1GikzSNc2BF6Xz9ke8j5jdOQJ9DrggBqMXfHqgcYZ+DaR2xbwx16xx1pqjRaCxTcyEJ49djnpV3SDhwKcI9yUIJtKTdi7kP8vBx79ovvlt0BdQTZrtuN7aSdsNY0OWbimPSgL6ATljYZDD3Osk2Kcuv5ipM9l/GG1M/N3vFXx9fTZs+08EwxWzpT0IyMq7p6ulzk1VH5UN5myrHIqCeYr957/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=htZ/VeOk/IOdEk6obXfmpIcTxehg920S+WjY6XK4JsA=;
+ b=i3JW9Iq/iXVPCLmNzkhaVml8HPz7jpzaUA9x3b0/FcfGdTY2ygO37OPZNFLzPkcsg/YX7uAYkv7H7YFivO93Fh/MnKrimO9ZZdGpjq9gThazZLVZjeIA8RTkVdFQN7hqlhejYiIee1/wiSCXpM8xwYT7Bb4wi9ITUw1yv7FAsbo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DUZPR04MB9869.eurprd04.prod.outlook.com (2603:10a6:10:4ad::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 26 Jun
+ 2026 15:46:30 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0159.016; Fri, 26 Jun 2026
+ 15:46:30 +0000
+Message-ID: <eacd2ffa-a1bd-484b-bf4e-af14fa6c7aba@cherry.de>
+Date: Fri, 26 Jun 2026 17:46:27 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] clk/qcom: milos: Add TCSRCC clocks
-To: Luca Weiss <luca.weiss@fairphone.com>, Sumit Garg
- <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20260625-milos-ufs-fix-v1-0-b0923dabc35f@fairphone.com>
- <20260625-milos-ufs-fix-v1-2-b0923dabc35f@fairphone.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260625-milos-ufs-fix-v1-2-b0923dabc35f@fairphone.com>
+Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
+To: Enric Balletbo i Serra <eballetb@redhat.com>
+Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
+ Tobias Olausson <tobias@eub.se>, Paul HENRYS
+ <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>,
+ Jan Stancek <jstancek@redhat.com>, a.fatoum@pengutronix.de,
+ mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ u-boot@lists.denx.de
+References: <20260429180247.83091-1-ekovsky@redhat.com>
+ <482dbc09-e78e-42e7-9915-bdc105652494@cherry.de> <ag-EpjuQlre9QmYN@daedalus>
+ <8d7ff3b6-abb9-4441-8491-99c538ea5f2d@cherry.de>
+ <CALE0LRtVVwJpmaLn6=95BihVZA3pWPAwM1t7zENSsKdaxzWk8g@mail.gmail.com>
+ <eca33072-97bf-49fc-890a-a51b7fdc4d62@cherry.de>
+ <CALE0LRvobvMnm=P4qqcNjzWPhRjtYLO4sbHP4UHOKLTdUoaryA@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CALE0LRvobvMnm=P4qqcNjzWPhRjtYLO4sbHP4UHOKLTdUoaryA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: WA2PEPF000008A6.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::64b) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DUZPR04MB9869:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3baadb3-be2c-4045-d422-08ded39a171c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|7416014|1800799024|23010399003|22082099003|18002099003|4143699003|56012099006|6133799003|11063799006;
+X-Microsoft-Antispam-Message-Info: xIYsIxkZMEkqtSBFTphkqu7xVGkSWincAwar6XBSKroL2+5Z+mWtZ0oibqAzfkVhd1go9gFbZG/BbmVgOiPs6oHVVXgUAO0lCUKXNElDLn6SEChQsogPx54I2pYqIOuUewTOB9kIstr+mbkPyEbVvd6alC4FRSJI38YE5BtnUlfd1K7bD8iZmCnnDSTxoHtKt4XU23GKvWW12zUX6p+8XxsOrGe4/Z3wUkWvmBpPrOpmf5/c+Hjhcu/5sDB4VM3QJOCAehLk3Fkik2YNq7+z+H+Tiu2m26LLAEwzteSRrM9oTVEL/MDbsTRVuA0HmoyI5sQxJa3DeVpeb56JRD+6ysvXKVHK+HytcxCImPyn86M+VzRUKvkOO5DDdiah1wjCudbKTrZaRNpjZr/ifcKOzj7a9y+3YvTou57kbpAFI0qmLMdx7byWL6W2a96sdHXm6/v5Cj2iz026adZ/mtzqm5je0SKNGcuesUjhA32vGxD5sROBD2hmg7aKp+NeSdofAz0/aEn/6uHm6y0/UJK9kiSPCXK/MqiRNGO06glzQCu/XE98I04D3kZ8P1sNoFMVFN7W3p4esdrD9kDhpAOiixBwkGBKr1cOAuc6XNw/eJejK9OJVX4zCfVykht0nW0/DECTapyy2CBGllNwCWYpRQyoKwPiZJMmtEpAb+IMf6g=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(7416014)(1800799024)(23010399003)(22082099003)(18002099003)(4143699003)(56012099006)(6133799003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?REtteE1NbEswMUVkOVRuK2FzOVpFQ0lVREVzM013eUlpTCtKOXFMVzhvRy9I?=
+ =?utf-8?B?cXZacHhJbWQvcy9sUkZSMGNpRklLME4yNzhEK3Y1Y25lekYvSVR4RWJqVlF6?=
+ =?utf-8?B?UFFKU1kvd1Vsb0s3MncvZWpNWS9oSEx5a0grbSt2OURkUGJJWjFYR3dzOHpF?=
+ =?utf-8?B?bWhqb1l4bk5MbjR5R2RLM2hJRWgyUERZcjB0WlUwR1dEcFI3T0I1NnBMVHpU?=
+ =?utf-8?B?ZnpiZGlxRmZTZjZRY1lGcUQ5ZkozWHF5dGdNWkoxTmwwVEc3QkRzS1pmc2pm?=
+ =?utf-8?B?RDBKSTNXNlZOWFF4MHQxWFZnUkthZkZEbDFjbjQ1WGpoOEpTR1FhU0hDYTBu?=
+ =?utf-8?B?SGpORlVPN2RKb1NIUmlFWWJPdXBBN3FjUDd1cEdiMDM3ajJlYmhNNXBQdUtD?=
+ =?utf-8?B?THhVQ1MrdEZjbGFFc01sNHE5T3hCVDNEVEtDbWVXMEplQStWZTVUUnpaaUlS?=
+ =?utf-8?B?M2IzN0IrUysrVXphUitMMWZZakFjYzY1TlIrZUVIb29hZ2I0NE00V3Vua3Ey?=
+ =?utf-8?B?REk4L1NjbmZjbkhpZ1dDNnhkU28wNGJZQ3UzOXFNMnFLbDM3MlhGSlRJa1o3?=
+ =?utf-8?B?VmNkeEgwbCtTS2w3ejFTRlVVTFAwWkc0eE8rbHI1S21IaGxaSjA4KzFnZVNv?=
+ =?utf-8?B?QjJOckZ5YlM5YXR6QmxnOG1lTnM5YmkvZVI1eG5iTTJmaXhHdDFzeWNpbmdl?=
+ =?utf-8?B?dmxnM3lBblhHYWFycks0bDZodmU3WlVRWWxyQzNFbnliUVRCVTJRMi9NbDB6?=
+ =?utf-8?B?YnJhajEvNE5wbTZRejZjamtySjdiNWZDUzI3RXBML2FmOWFURWRsU1dvZWpp?=
+ =?utf-8?B?NjEwanUyNDYvekZ1V0lLME0zK3RCbHByWThqRndENmdDMmU1UFZYZU1KVmZj?=
+ =?utf-8?B?cDRLKzk1TnBEYUZzVktOTmxyZldmZ3FEQm9LSEJqUDIxOGt3VEFNZzM4ZFcv?=
+ =?utf-8?B?TkF6dFY3aEhaQXU4MDZzL2Iyb1l6NjNENjJFaTVjREVGUm5kL2pNbDhsZ2p1?=
+ =?utf-8?B?Tks0a3ZQcWpvamkySEY1U0JZdjVIMzA3cUwyMXIyUUFDR3g1ek5seDZmYXJM?=
+ =?utf-8?B?V1F1WjdyRFlwaE9CWDVFZ2RmTGZyeE93QitUSHNxb09vbW8xUVRyR3lGeWdJ?=
+ =?utf-8?B?MFk3NitHd3dmcXVzbGErV2JkV2t3aU5DZ3NhZFFFM1QzOXF2UkZtazBlTHFu?=
+ =?utf-8?B?WnNMRVIzUXdTQW4ySHFnRnJvWlQrMXFkcy9JZytTbkdaRnVXSTJJOGxCdkc1?=
+ =?utf-8?B?S0ZlY3ZmWk0xZmJ3NUdwNlUzWHJZYXNhbXVpaFFNVFFZQTZBWWV1WWJ5YWJS?=
+ =?utf-8?B?eU5GQzh5NHZ5NlVKMGVhQ3RWOVF5SjBvMDdqU0p0Q0tBeklSL0psMElVSnBz?=
+ =?utf-8?B?TlVleE9MVXNsSDdKOWdoRHpSWkNEZmJrNFhOKzdDQS9wenJCZlE1eERtdXJU?=
+ =?utf-8?B?Yi9ZTEdMZytuMWxvZ2x1WDV0Z0MwS3krekN0MEl6VGtDVjQzYTQ3SW1zOVhh?=
+ =?utf-8?B?MkJmYnNMKy96aEMySHNERTkvQUhOV25kb3ZUTjZVbEJTZExxTTZsSkxud0FT?=
+ =?utf-8?B?MlZWTWgvRnR2YklRN3IzVERNN3Fmd0dHSXNoemYwNUpKenpMS0NtMUE1M05C?=
+ =?utf-8?B?T29IUjFMUUVZM0FvZVhMY2VSZFZ0R25Dam1qY1F3RjB4dTlYVmcrQ1FQQVVw?=
+ =?utf-8?B?MVJjZVBBd1QvcFVmODBzYTJOSXBlZmF1SkorVG45MnlaajU3N3haWVJla1Rl?=
+ =?utf-8?B?RS9nL1pYMVBTRGtNVkRQN1FmRlJtanJUZWlmZnhVQzJSWTRYNSsvQmM0QXFo?=
+ =?utf-8?B?QnVHWHAvWW53cmlrZk9xVmg4blN5Yk5weWtQVmJiUXF0N1pHbERGZUwrUWpB?=
+ =?utf-8?B?cWxpVFhxT3FxbW9DRXlidmhCK0E4aCtLMEhwSlN2Y1pKMHB1YUVNSDI5NVM1?=
+ =?utf-8?B?TkN2KzgydzRkbU9GQW9HbWZYemJRdVBKY2ZjT1VXTjJCWmZjejZkWWFDdk45?=
+ =?utf-8?B?RUtZSG5RLytDQTFISG9Sd3RTUDJRSmMwSVBZaUpHQk05Y2xvK0liNEZVQnpB?=
+ =?utf-8?B?L0hINUI0R1VMdGk0aW9yelVGQmxIK0NFWHBFTGxrN3RRekwyK0ZzOHhjZmdj?=
+ =?utf-8?B?Z1RZNnJmYVRUUUJvR0hrcHgzZVNYaGxmU0ZicFptOG5rMCtyZUpJRVZQTnY3?=
+ =?utf-8?B?WVoxeFIwOSs5dkR2Y2Jpb1kwTkkwMGZwK1VKdkU2R0t3OHUybmpVbkdRVTRt?=
+ =?utf-8?B?NnhsOERPVTIrSENFZFpuQjl1aXBmU2hXZUpqS1EvWEpBZS9CUW9tbGFMQVVz?=
+ =?utf-8?B?ZFo5RzZZUEwrVEQ4Z3NxY3UrK0ZoUFZiSERtR1RNKzRhV0VlOXR4QT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3baadb3-be2c-4045-d422-08ded39a171c
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 15:46:30.0958 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2Gyz6/xk8Wnimv410R3m63KOZbhQP4AeW9W4Golk8gsnev0RrVtvv7FZIHbyrvq6LJN3CkQjkAdv732QNqHtLd3MBpPiyizuglLszcEYYQw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB9869
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,100 +156,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Enric, Eddie,
 
-
-On 6/25/26 15:14, Luca Weiss wrote:
-> With a recent change to the UFS driver, now all clocks need to be
-> available. Add all the clocks from the TCSRCC block on Milos.
+On 6/17/26 10:19 AM, Enric Balletbo i Serra wrote:
+> Hi Quentin,
 > 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> ---
->   drivers/clk/qcom/clock-milos.c | 66 ++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 66 insertions(+)
+> On Tue, Jun 16, 2026 at 6:43 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>
+>> Hi Enric,
+>>
+>> Thanks for chiming in.
+>>
+>> On 6/4/26 8:22 AM, Enric Balletbo i Serra wrote:
+>>> Hi Quentin and Eddie,
+>>>
+>>> On Fri, May 22, 2026 at 4:38 PM Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>>>
+>>>> Hi Eddie,
+>>>>
+>>>> On 5/22/26 12:29 AM, Eddie Kovsky wrote:
+>>>>> On 05/12/26, Quentin Schulz wrote:
+>>>>>> Hi Eddie,
+>>>>>>
+>>>>>> On 4/29/26 8:02 PM, Eddie Kovsky wrote:
+[...]
+>>> Does it makes sense?
+>>>
+>>
+>> Somewhat. I still don't understand the obsession with the Provider API
+>> when the issue (as I understand it) is "I cannot compile OpenSSL engine
+>> support and I don't need it".
+>>
 > 
-> diff --git a/drivers/clk/qcom/clock-milos.c b/drivers/clk/qcom/clock-milos.c
-> index 571cd134f1c..54103adc114 100644
-> --- a/drivers/clk/qcom/clock-milos.c
-> +++ b/drivers/clk/qcom/clock-milos.c
-> @@ -15,6 +15,7 @@
->   #include <linux/bitops.h>
->   #include <dt-bindings/clock/qcom,milos-gcc.h>
->   #include <dt-bindings/clock/qcom,rpmh.h>
-> +#include <dt-bindings/clock/qcom,sm8650-tcsr.h>
->   
->   #include "clock-qcom.h"
->   
-> @@ -201,3 +202,68 @@ U_BOOT_DRIVER(milos_rpmh_clk) = {
->   	.ops		= &milos_rpmh_clk_ops,
->   	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
->   };
-> +
-> +/* TCSRCC */
-> +
-> +static const struct gate_clk milos_tcsr_clks[] = {
-> +	GATE_CLK(TCSR_PCIE_0_CLKREF_EN,		0x31100, BIT(0)),
-> +	GATE_CLK(TCSR_PCIE_1_CLKREF_EN,		0x31114, BIT(0)),
-> +	GATE_CLK(TCSR_UFS_CLKREF_EN,		0x31118, BIT(0)),
-> +	GATE_CLK(TCSR_UFS_PAD_CLKREF_EN,	0x31104, BIT(0)),
-> +};
-> +
-> +static struct msm_clk_data milos_tcsrcc_data = {
-> +	.clks = milos_tcsr_clks,
-> +	.num_clks = ARRAY_SIZE(milos_tcsr_clks),
-> +};
-> +
-> +static int tcsrcc_milos_clk_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	qcom_gate_clk_en(priv, clk->id);
-> +
-> +	return 0;
-> +}
-> +
-> +static ulong tcsrcc_milos_clk_get_rate(struct clk *clk)
-> +{
-> +	return TCXO_RATE;
-> +}
-> +
-> +static int tcsrcc_milos_clk_probe(struct udevice *dev)
-> +{
-> +	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
-> +	struct msm_clk_priv *priv = dev_get_priv(dev);
-> +
-> +	priv->base = dev_read_addr(dev);
-> +	if (priv->base == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	priv->data = data;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct clk_ops tcsrcc_milos_clk_ops = {
-> +	.enable = tcsrcc_milos_clk_enable,
-> +	.get_rate = tcsrcc_milos_clk_get_rate,
-> +};
-> +
-> +static const struct udevice_id tcsrcc_milos_of_match[] = {
-> +	{
-> +		.compatible = "qcom,milos-tcsr",
-> +		.data = (ulong)&milos_tcsrcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(tcsrcc_milos) = {
-> +	.name		= "tcsrcc_milos",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= tcsrcc_milos_of_match,
-> +	.ops		= &tcsrcc_milos_clk_ops,
-> +	.priv_auto	= sizeof(struct msm_clk_priv),
-> +	.probe		= tcsrcc_milos_clk_probe,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
+> To clarify the "obsession" point, which I think is an unfortunate
+> take, my impression was that this wasn't just about throwing a quick,
+> blind hack at a Fedora compiler error. The build failure was simply
+> the trigger.
 > 
 
+I think "no engine support anymore, so providers must be supported" was 
+a shortcut many could have taken. I understand (and really appreciate) 
+the intent of trying to improve the situation instead of "just" patching 
+a build failure and be done with it (after all, I myself just installed 
+openssl-devel-engine when I got the build error instead of putting in 
+the work Eddie did).
+
+> Eddie put significant effort into researching the modern OpenSSL 3.x
+> API, studying how to phase out legacy, deprecated components, looking
+> at the U-Boot's testing infrastructure, and trying to proactively
+> modernize U-Boot's backend based on established upstream kernel
+> patterns.
+> 
+> I agree, now, and this is the beauty of discussions, that the kernel
+> approach is not enough due to its narrow scope. U-Boot’s edge cases
+> make a full API migration heavier than expected. However, trying to
+> actively clean up technical debt is a valuable goal, and
+> characterizing it as a mere obsession with a build error can be quite
+> discouraging for new contributors putting in real work to improve the
+> codebase.
+> 
+
+I do realize that "obsession" was too strong of a word and I apologize 
+to Eddie and you. I appreciate the feedback and will try to do better.
+
+Cheers,
+Quentin
