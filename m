@@ -4,172 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5719C43327
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 22:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5455EC43458
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 23:27:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21FFE846DF;
-	Sat, 27 Jun 2026 00:27:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id 930AB8404D;
+	Sat, 27 Jun 2026 01:27:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="Z7qz1cms";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MhYrAjGx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0AC78484C; Sat, 27 Jun 2026 00:27:11 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 831D484105; Sat, 27 Jun 2026 01:27:27 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD0E084119
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 00:27:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5E3083FEE
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 01:27:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1782512820; x=1783117620; i=quwenruo.btrfs@gmx.com;
- bh=seTjAapK22//FxGj+kcDkRjwk+7HB27cqmznPk3azGk=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Z7qz1cmsmj4VWfqC+Iz95dQ9/Xrwr3u9QZnwLaB9Q2hu6IoQcaJe9lPYH949ez/E
- Vh6nWbj1VD3RJ1q0GDFTuDb63eMcRAULQAv0pCb72R0StjRLp8BWZc6s7CMXgf24z
- kw65oFDDkFW3W6tWabC6YixH8WZyRuEdny55hyfMlC60bTaE+zBZhpOtbMdw1c10q
- 2aVl2ia6j8S91Cq2u4nLExPjlOXdohuLe12yIqLz6TBYDUPkWwG+BoaiKk35mUgzU
- UnLTz0ryWWGwbF7ILjvI/kTNyAMrkM8AheCWKvfWxI7soBfQ7F/LWm0/0IkNEN4/k
- tuqiGxlcZXjmOse57g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1MD9XF-1wUgQH0bMv-00ADgN; Sat, 27
- Jun 2026 00:27:00 +0200
-Message-ID: <09eca73c-1f50-46b2-a307-76eef0408159@gmx.com>
-Date: Sat, 27 Jun 2026 07:56:51 +0930
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-6a1515a629dso325152eaf.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 16:27:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782516443; x=1783121243; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=I8CyHS8atj44lAZ2Ygia+F3Kqa3UGucn14AzJNwGcpU=;
+ b=MhYrAjGxyiVfsmiTt4aAN9K3GNSNFBJm4vzEFq/IuGnD+kxRzG43wgtKP/2w+yetRr
+ rWIfoVOBjXZ6qABFWNDgISfJ5I8AQ/z8eYIHngtO44vfi6JqYpvq3xPJ5qZVTPPcPCvv
+ Qo6YPyQgXJd4rACVKLdt4ljBkYFKP/PqDdfsAc4arUMXoKhQtNBdZWeD0juXiZibh5Mx
+ 1RkI4SVPrCcUgIwLCByMMqI0+wXaNyWqaqUHy+tHHtMzzDW0h9U7bDsDjjq3HwVvH7Sx
+ oOe/5vgy6Qv1HWeDezN4WUGTsE0LV2B0p6LpEwCMOIqW50bcycUA+xYxmlkiNeG0YSwa
+ yiNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782516443; x=1783121243;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I8CyHS8atj44lAZ2Ygia+F3Kqa3UGucn14AzJNwGcpU=;
+ b=Mjvqo3azfkfJo8lWoT+MaoFlXnNMadMAICyJAFvl14z/l8mJOTxBeahtcXh2vWmK4n
+ hF1WNqYDvyk1EFKDHDOYf3XmOdEbj4UZZ7p1/JvWdKy1j1YzpWBCL+QkcBR1b3jG0HPt
+ 1IFWuKvy4mGE64lEeeHlG9H3w8FUmbombVVhS6AnzxgLBn5Eqs7CiCNe0w0LvycmnMvv
+ qqkceFxUpR13U7GX8cHikBB5n0ICj/Y1RGVbHTFS36Jw9BiBWzQVFsrU6cUinYNmEpX/
+ 7ifcGt4MzFWf9Cvz3+V/gCxscO9ULWUEpreL2AgXUwdkGnCwqlg8PLbSPl0V8hI7maOz
+ F9ig==
+X-Gm-Message-State: AOJu0YzJoLx/JhojxNxqJhD74FoVfPkYbkbxrVbSZWkkTzPKNjyLhxdl
+ Oh/utCrE7zPa5fnOxdDmrt5h3AtiVSorkrWFYxBs/XSB+AI5LRAW4xboLJlQiJqn/k0gZg==
+X-Gm-Gg: AfdE7cnXYlw6hhLzg5F7Ue/cVmGMJhAvR6Y9P3b8iFvSNuaaC8VGPqbjSbwp2ru3arO
+ QtgUEDI1sa9VL1TOlHglwpwssrmqg4Hwlh/bnyoKfvIYqPs3sfpyMzCzVgOj2YQE/zy/E+EVKh/
+ MH2wDTgcdlD1lemI8HR9nh+ULRGZ6DO3GVq+wcCptCrcBaYdTcw5uA26aKu3ZIvB3LPKIwkI/U9
+ PJ6W39XPHgOSDzg7kNtB7+W/e/iDcmITKD94vXJyOY1hAP90m3sCdD2KHZ2hKiK52p+U5xvG3mZ
+ F9lxHjoQB6RHBsu7+8MxJF8BkTL3f3fePDrVT571BKQwx8pyGRh88szRtDWZ8wcSfv2IsDyv0X3
+ +k1hJA8KqsCsdFVe1vYWgLNL6bDrDVwHLwfQJ0lTqmb52Audo4ysbgbYZ3fC6iQRHyY68rUhtmB
+ vb/F3zWfrp7Wm/smTYP4tRDQRwSsTu0kDIUaO0JIQnBtFAunVGlbzOjj9ZGN0bREG2tnb1texG7
+ fdmithdufondUxy0MQPbh1iTo6xoClMznhXUxjgvWZQt4ulMobMum900pXVWcX5O5qOlUddl/RK
+ qO1HjnhOB+a+UmRT+1e5fS6INg==
+X-Received: by 2002:a05:6820:1c86:b0:6a1:1a19:3f8c with SMTP id
+ 006d021491bc7-6a13529dbc3mr6047228eaf.51.1782516443166; 
+ Fri, 26 Jun 2026 16:27:23 -0700 (PDT)
+Received: from james-x399.tailafd1a.ts.net (97-118-25-163.hlrn.qwest.net.
+ [97.118.25.163]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4472f0475e3sm16101759fac.16.2026.06.26.16.27.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Jun 2026 16:27:22 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Benjamin Hahn <B.Hahn@phytec.de>,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tim Harvey <tharvey@gateworks.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v2] net: lwip: add tftpsrv command
+Date: Fri, 26 Jun 2026 17:27:08 -0600
+Message-ID: <20260626232714.2975647-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] fs: btrfs: implement opendir(), readdir() and
- closedir()
-To: Alexey Charkov <alchark@flipper.net>, Qu Wenruo <wqu@suse.com>,
- linux-btrfs@vger.kernel.org, u-boot@lists.denx.de
-Cc: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>
-References: <20260626-btrfs-readdir-v2-0-7dd43f72d1b4@flipper.net>
- <20260626-btrfs-readdir-v2-1-7dd43f72d1b4@flipper.net>
-Content-Language: en-US
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCZxF1YAUJEP5a
- sQAKCRDCPZHzoSX+qF+mB/9gXu9C3BV0omDZBDWevJHxpWpOwQ8DxZEbk9b9LcrQlWdhFhyn
- xi+l5lRziV9ZGyYXp7N35a9t7GQJndMCFUWYoEa+1NCuxDs6bslfrCaGEGG/+wd6oIPb85xo
- naxnQ+SQtYLUFbU77WkUPaaIU8hH2BAfn9ZSDX9lIxheQE8ZYGGmo4wYpnN7/hSXALD7+oun
- tZljjGNT1o+/B8WVZtw/YZuCuHgZeaFdhcV2jsz7+iGb+LsqzHuznrXqbyUQgQT9kn8ZYFNW
- 7tf+LNxXuwedzRag4fxtR+5GVvJ41Oh/eygp8VqiMAtnFYaSlb9sjia1Mh+m+OBFeuXjgGlG
- VvQFzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCZxF1gQUJEP5a0gAK
- CRDCPZHzoSX+qHGpB/kB8A7M7KGL5qzat+jBRoLwB0Y3Zax0QWuANVdZM3eJDlKJKJ4HKzjo
- B2Pcn4JXL2apSan2uJftaMbNQbwotvabLXkE7cPpnppnBq7iovmBw++/d8zQjLQLWInQ5kNq
- Vmi36kmq8o5c0f97QVjMryHlmSlEZ2Wwc1kURAe4lsRG2dNeAd4CAqmTw0cMIrR6R/Dpt3ma
- +8oGXJOmwWuDFKNV4G2XLKcghqrtcRf2zAGNogg3KulCykHHripG3kPKsb7fYVcSQtlt5R6v
- HZStaZBzw4PcDiaAF3pPDBd+0fIKS6BlpeNRSFG94RYrt84Qw77JWDOAZsyNfEIEE0J6LSR/
-In-Reply-To: <20260626-btrfs-readdir-v2-1-7dd43f72d1b4@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:K0cXmjB643PnBCjXiz27RPlTNqfTXszpNyGuFITKi3F4524dWNE
- BADE4qxzcfWHLQEUwszgFRsl0BCFEj8l63TRXyKwwXPKM87XElgFaGQdtxoSTi2+FBRM3KO
- LcSb9VaCGzq2b5TOSHVLV2eTtpJGVgcNeXlmYd154yLqA+RNDrv9wo5rcOY+OYykDlWycbP
- MWoLY6qmxkjmZ0cHqf6zA==
-UI-OutboundReport: notjunk:1;M01:P0:Ktf+8jjcDzs=;bQZQLQ+l9EQ/6G7iUMpVbn+YEha
- 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
- k3s+Yg==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,314 +109,605 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The legacy network stack supports tftpsrv, which listens for an
+incoming TFTP write request and receives the first file into memory.
+Despite the old command help wording, the command returns after
+receiving the file and does not boot it automatically.
 
+The lwIP stack already builds the lwIP TFTP application, but only wires
+it up for client-side tftpboot. Add a lwIP tftpsrv command and
+implement the server path with tftp_init_server(). Reuse the existing
+lwIP TFTP write callback and memory copy path so LMB checks, progress
+output, filesize/fileaddr updates and EFI bootdev handling stay
+consistent with tftpboot.
 
-=E5=9C=A8 2026/6/27 00:48, Alexey Charkov =E5=86=99=E9=81=93:
-> Add support for generic directory iteration with opendir(), readdir() an=
-d
-> closedir() in the btrfs filesystem driver.
->=20
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
->   fs/btrfs/btrfs.c    | 98 +++++++++++++++++++++++++++++++++++++++++++++=
-++++++++
->   fs/btrfs/ctree.h    |  2 ++
->   fs/btrfs/dir-item.c | 73 +++++++++++++++++++++++++++++++++++++++
->   fs/fs.c             |  4 ++-
->   include/btrfs.h     |  5 +++
->   5 files changed, 181 insertions(+), 1 deletion(-)
->=20
-> diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
-> index f3087f690fa4..6f034861da90 100644
-> --- a/fs/btrfs/btrfs.c
-> +++ b/fs/btrfs/btrfs.c
-> @@ -8,7 +8,9 @@
->   #include <config.h>
->   #include <malloc.h>
->   #include <u-boot/uuid.h>
-> +#include <linux/kernel.h>
->   #include <linux/time.h>
-> +#include <fs.h>
->   #include "btrfs.h"
->   #include "crypto/hash.h"
->   #include "disk-io.h"
-> @@ -159,6 +161,102 @@ int btrfs_ls(const char *path)
->   	return 0;
->   }
->  =20
-> +/*
-> + * The fs layer closes and re-probes btrfs between readdir() calls (see
-> + * fs_readdir() in fs/fs.c), freeing and reallocating fs_info, so root =
-cannot
-> + * be stored directly. The subvolume id and inode number are stable tho=
-ugh, so
-> + * re-resolve the root from the current fs_info by subvolume id, which =
-avoids
-> + * a full path walk and is much faster.
-> + */
-> +struct btrfs_dir_stream {
-> +	struct fs_dir_stream parent;
-> +	struct fs_dirent dirent;
-> +	u64 subvolid;
-> +	u64 ino;
-> +	u64 offset;
-> +};
-> +
-> +int btrfs_opendir(const char *dirname, struct fs_dir_stream **dirsp)
-> +{
-> +	struct btrfs_fs_info *fs_info =3D current_fs_info;
-> +	struct btrfs_dir_stream *dirs;
-> +	struct btrfs_root *root;
-> +	u64 ino;
-> +	u8 type;
-> +	int ret;
-> +
-> +	*dirsp =3D NULL;
-> +	ASSERT(fs_info);
-> +
-> +	ret =3D btrfs_lookup_path(fs_info->fs_root, BTRFS_FIRST_FREE_OBJECTID,
-> +				dirname, &root, &ino, &type, 40);
-> +	if (ret < 0)
-> +		return ret;
-> +	if (type !=3D BTRFS_FT_DIR)
-> +		return -ENOTDIR;
-> +
-> +	dirs =3D calloc(1, sizeof(*dirs));
-> +	if (!dirs)
-> +		return -ENOMEM;
-> +	dirs->subvolid =3D root->root_key.objectid;
-> +	dirs->ino =3D ino;
-> +
-> +	*dirsp =3D &dirs->parent;
-> +	return 0;
-> +}
-> +
-> +static unsigned int btrfs_dirent_type_to_fs_type(u8 dirent_type)
-> +{
-> +	switch (dirent_type) {
-> +	case BTRFS_FT_DIR:
-> +		return FS_DT_DIR;
-> +	case BTRFS_FT_SYMLINK:
-> +		return FS_DT_LNK;
-> +	default:
-> +		return FS_DT_REG;
-> +	}
-> +}
-> +
-> +int btrfs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **den=
-tp)
-> +{
-> +	struct btrfs_dir_stream *dirs =3D container_of(fs_dirs, struct btrfs_d=
-ir_stream, parent);
-> +	struct btrfs_fs_info *fs_info =3D current_fs_info;
-> +	struct fs_dirent *dent =3D &dirs->dirent;
-> +	struct btrfs_root *root;
-> +	struct btrfs_key key;
-> +	u8 type;
-> +	int ret;
-> +
-> +	*dentp =3D NULL;
-> +	ASSERT(fs_info);
-> +
-> +	key.objectid =3D dirs->subvolid;
-> +	key.type =3D BTRFS_ROOT_ITEM_KEY;
-> +	key.offset =3D (u64)-1;
-> +	root =3D btrfs_read_fs_root(fs_info, &key);
+Track receive timeout and write-failure state around the lwIP callbacks
+so a stalled or rejected receive is not reported as a successful close.
 
-You can save the root pointer into btrfs_dir_stream, so we can avoid=20
-subvolume root lookup for each dentry.
+Move CMD_TFTPSRV out of the legacy-only Kconfig block so it can be
+enabled with either network stack. Update the command help text and add
+usage documentation for the receive-only behavior.
 
-You do not need to bother the lifespan of subvolume roots either, they=20
-are properly released during the close of the fs.
+Add pytest coverage for tftpsrv using a generated host file and curl's
+TFTP upload support. Enable the command in qemu_arm64_lwip_defconfig so
+the test can be run with the existing lwIP QEMU build when the boardenv
+provides env__net_tftpsrv_file.
 
-Otherwise looks good to me, except an unrelated question just lines below.
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - Add tftpsrv usage documentation  (suggested by Quentin Schulz)
+  - Add tftpsrv pytest coverage  (suggested by Quentin Schulz)
+  - Enable CMD_TFTPSRV in qemu_arm64_lwip_defconfig
+  - Allow tftpsrv pytest coverage to use an explicit upload URL
+  - Keep tftpsrv pytest coverage gated by env__net_tftpsrv_file
+  - Clarify that tftpsrv returns after receiving instead of booting
+  - Update legacy and lwIP command help text for receive-only behavior
+---
+ cmd/Kconfig                       |  14 ++-
+ cmd/lwip/Makefile                 |   1 +
+ cmd/lwip/tftpsrv.c                |  11 ++
+ cmd/net.c                         |   4 +-
+ configs/qemu_arm64_lwip_defconfig |   1 +
+ doc/usage/cmd/tftpsrv.rst         |  73 ++++++++++++
+ include/net-lwip.h                |   1 +
+ net/lwip/tftp.c                   | 181 +++++++++++++++++++++++++++++-
+ test/py/tests/test_net.py         |  94 ++++++++++++++++
+ 9 files changed, 367 insertions(+), 13 deletions(-)
+ create mode 100644 cmd/lwip/tftpsrv.c
+ create mode 100644 doc/usage/cmd/tftpsrv.rst
 
-> +	if (IS_ERR(root))
-> +		return PTR_ERR(root);
-> +
-> +	memset(dent, 0, sizeof(*dent));
-> +	ret =3D btrfs_next_dir_entry(root, dirs->ino, &dirs->offset, dent->nam=
-e,
-> +				   sizeof(dent->name), &type);
-> +	if (ret < 0)
-> +		return ret;
-> +	if (ret > 0)
-> +		return -ENOENT;
-
-I'm not sure what is the proper/preferred/sane handling of end of director=
-y.
-
-Ext4/fat returns -ENOENT, squashfs returned -1, erofs return 1, exfat=20
-returns 0 but without populating @dentp.
-
-Personally I found the exfat behavior more sane, but considering the=20
-caller fs_ls_generic() doesn't really bother the return value but only=20
-cares if @dent is populated, it should be fine either way.
-
-But still, returning -ENOENT will populate errno, which may be confusing=
-=20
-for debugging.
-
-Anyway it's an unrelated nitpick.
-
-Thanks,
-Qu
-
-> +
-> +	dent->type =3D btrfs_dirent_type_to_fs_type(type);
-> +	*dentp =3D dent;
-> +	return 0;
-> +}
-> +
-> +void btrfs_closedir(struct fs_dir_stream *fs_dirs)
-> +{
-> +	struct btrfs_dir_stream *dirs =3D container_of(fs_dirs, struct btrfs_d=
-ir_stream, parent);
-> +
-> +	free(dirs);
-> +}
-> +
->   int btrfs_exists(const char *file)
->   {
->   	struct btrfs_fs_info *fs_info =3D current_fs_info;
-> diff --git a/fs/btrfs/ctree.h b/fs/btrfs/ctree.h
-> index b7be09d5df83..7de35aa7efd5 100644
-> --- a/fs/btrfs/ctree.h
-> +++ b/fs/btrfs/ctree.h
-> @@ -1225,6 +1225,8 @@ typedef int (*btrfs_iter_dir_callback_t)(struct bt=
-rfs_root *root,
->   					 struct btrfs_dir_item *di);
->   int btrfs_iter_dir(struct btrfs_root *root, u64 ino,
->   		   btrfs_iter_dir_callback_t callback);
-> +int btrfs_next_dir_entry(struct btrfs_root *root, u64 ino, u64 *offset,
-> +			 char *namebuf, int namebuf_len, u8 *ftype);
->   /* inode.c */
->   int btrfs_lookup_path(struct btrfs_root *root, u64 ino, const char *fi=
-lename,
->   			struct btrfs_root **root_ret, u64 *ino_ret,
-> diff --git a/fs/btrfs/dir-item.c b/fs/btrfs/dir-item.c
-> index 5f81d6414f06..b12298e20c41 100644
-> --- a/fs/btrfs/dir-item.c
-> +++ b/fs/btrfs/dir-item.c
-> @@ -166,3 +166,76 @@ out:
->   	btrfs_release_path(&path);
->   	return ret;
->   }
-> +
-> +/*
-> + * btrfs_next_dir_entry() - read one directory entry at or after a curs=
-or
-> + *
-> + * Streaming counterpart to btrfs_iter_dir() for the fs-layer readdir, =
-which
-> + * is re-entered once per entry: returns the first real entry whose
-> + * BTRFS_DIR_INDEX_KEY offset is >=3D *offset and advances *offset past=
- it.
-> + *
-> + * @root, @ino:		directory to read
-> + * @offset:		in/out cursor; DIR_INDEX offset to resume from
-> + * @namebuf:		caller buffer that receives the NUL-terminated name
-> + * @namebuf_len:	size of @namebuf in bytes
-> + * @ftype:		receives the BTRFS_FT_* type of the entry
-> + *
-> + * Return: 0 if an entry was returned, 1 when the directory is exhauste=
-d,
-> + *	   -ve on error.
-> + */
-> +int btrfs_next_dir_entry(struct btrfs_root *root, u64 ino, u64 *offset,
-> +			 char *namebuf, int namebuf_len, u8 *ftype)
-> +{
-> +	struct btrfs_path path;
-> +	struct btrfs_key key;
-> +	struct btrfs_dir_item *di;
-> +	int name_len;
-> +	int ret;
-> +
-> +	btrfs_init_path(&path);
-> +	key.objectid =3D ino;
-> +	key.type =3D BTRFS_DIR_INDEX_KEY;
-> +	key.offset =3D *offset;
-> +
-> +	ret =3D btrfs_search_slot(NULL, root, &key, &path, 0, 0);
-> +	if (ret < 0)
-> +		goto out;
-> +
-> +	if (path.slots[0] >=3D btrfs_header_nritems(path.nodes[0])) {
-> +		ret =3D btrfs_next_leaf(root, &path);
-> +		if (ret < 0)
-> +			goto out;
-> +		if (ret > 0) {		/* end of tree */
-> +			ret =3D 1;
-> +			goto out;
-> +		}
-> +	}
-> +
-> +	btrfs_item_key_to_cpu(path.nodes[0], &key, path.slots[0]);
-> +	if (key.objectid !=3D ino || key.type !=3D BTRFS_DIR_INDEX_KEY) {
-> +		ret =3D 1;		/* no more entries for this dir */
-> +		goto out;
-> +	}
-> +
-> +	di =3D btrfs_item_ptr(path.nodes[0], path.slots[0],
-> +			    struct btrfs_dir_item);
-> +	if (verify_dir_item(root, path.nodes[0], di)) {
-> +		ret =3D -EUCLEAN;
-> +		goto out;
-> +	}
-> +
-> +	*offset =3D key.offset + 1;
-> +
-> +	name_len =3D btrfs_dir_name_len(path.nodes[0], di);
-> +	if (name_len > namebuf_len - 1)
-> +		name_len =3D namebuf_len - 1;
-> +	read_extent_buffer(path.nodes[0], namebuf,
-> +			   (unsigned long)(di + 1), name_len);
-> +	namebuf[name_len] =3D '\0';
-> +	*ftype =3D btrfs_dir_type(path.nodes[0], di);
-> +	ret =3D 0;
-> +
-> +out:
-> +	btrfs_release_path(&path);
-> +	return ret;
-> +}
-> diff --git a/fs/fs.c b/fs/fs.c
-> index 8ea50a6c13c4..4694a88f776b 100644
-> --- a/fs/fs.c
-> +++ b/fs/fs.c
-> @@ -326,7 +326,9 @@ static struct fstype_info fstypes[] =3D {
->   		.read =3D btrfs_read,
->   		.write =3D fs_write_unsupported,
->   		.uuid =3D btrfs_uuid,
-> -		.opendir =3D fs_opendir_unsupported,
-> +		.opendir =3D btrfs_opendir,
-> +		.readdir =3D btrfs_readdir,
-> +		.closedir =3D btrfs_closedir,
->   		.unlink =3D fs_unlink_unsupported,
->   		.mkdir =3D fs_mkdir_unsupported,
->   		.ln =3D fs_ln_unsupported,
-> diff --git a/include/btrfs.h b/include/btrfs.h
-> index 2d73add18e09..6fff45a497ee 100644
-> --- a/include/btrfs.h
-> +++ b/include/btrfs.h
-> @@ -10,6 +10,8 @@
->  =20
->   struct blk_desc;
->   struct disk_partition;
-> +struct fs_dir_stream;
-> +struct fs_dirent;
->  =20
->   int btrfs_probe(struct blk_desc *fs_dev_desc,
->   		struct disk_partition *fs_partition);
-> @@ -20,5 +22,8 @@ int btrfs_read(const char *, void *, loff_t, loff_t, l=
-off_t *);
->   void btrfs_close(void);
->   int btrfs_uuid(char *);
->   void btrfs_list_subvols(void);
-> +int btrfs_opendir(const char *filename, struct fs_dir_stream **dirsp);
-> +int btrfs_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)=
-;
-> +void btrfs_closedir(struct fs_dir_stream *dirs);
->  =20
->   #endif /* __U_BOOT_BTRFS_H__ */
->=20
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c71c6824a19..303acf8aa31 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2127,12 +2127,6 @@ config CMD_TFTPPUT
+ 	help
+ 	  TFTP put command, for uploading files to a server
+ 
+-config CMD_TFTPSRV
+-	bool "tftpsrv"
+-	depends on CMD_TFTPBOOT
+-	help
+-	  Act as a TFTP server and boot the first received file
+-
+ config NET_TFTP_VARS
+ 	bool "Control TFTP timeout and count through environment"
+ 	depends on CMD_TFTPBOOT
+@@ -2279,6 +2273,14 @@ config CMD_TFTPBOOT
+ 	help
+ 	  tftpboot - load file via network using TFTP protocol
+ 
++config CMD_TFTPSRV
++	bool "tftpsrv"
++	depends on CMD_TFTPBOOT
++	help
++	  Act as a TFTP server and receive the first incoming file into
++	  memory. The command returns successfully after the transfer so
++	  boot scripts can boot the received image from the load address.
++
+ config CMD_WGET
+ 	bool "wget"
+ 	default y if SANDBOX || ARCH_QEMU
+diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+index 90df1f5511c..245683a9672 100644
+--- a/cmd/lwip/Makefile
++++ b/cmd/lwip/Makefile
+@@ -4,4 +4,5 @@ obj-$(CONFIG_CMD_NFS) += nfs.o
+ obj-$(CONFIG_CMD_PING) += ping.o
+ obj-$(CONFIG_CMD_SNTP) += sntp.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
++obj-$(CONFIG_CMD_TFTPSRV) += tftpsrv.o
+ obj-$(CONFIG_CMD_WGET) += wget.o
+diff --git a/cmd/lwip/tftpsrv.c b/cmd/lwip/tftpsrv.c
+new file mode 100644
+index 00000000000..6370c900489
+--- /dev/null
++++ b/cmd/lwip/tftpsrv.c
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <command.h>
++#include <net.h>
++
++U_BOOT_CMD(tftpsrv, 2, 1, do_tftpsrv,
++	   "act as a TFTP server and receive the first file",
++	   "[loadAddress]\n"
++	   "Listen for an incoming TFTP transfer and receive a file into memory.\n"
++	   "The transfer is aborted if a transfer has not been started after\n"
++	   "about 50 seconds or if Ctrl-C is pressed.");
+diff --git a/cmd/net.c b/cmd/net.c
+index f6f556f36ae..0f0b2386d87 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -89,9 +89,9 @@ static int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ U_BOOT_CMD(
+ 	tftpsrv,	2,	1,	do_tftpsrv,
+-	"act as a TFTP server and boot the first received file",
++	"act as a TFTP server and receive the first file",
+ 	"[loadAddress]\n"
+-	"Listen for an incoming TFTP transfer, receive a file and boot it.\n"
++	"Listen for an incoming TFTP transfer and receive a file into memory.\n"
+ 	"The transfer is aborted if a transfer has not been started after\n"
+ 	"about 50 seconds or if Ctrl-C is pressed."
+ );
+diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+index a974970c3d3..06ed5a131db 100644
+--- a/configs/qemu_arm64_lwip_defconfig
++++ b/configs/qemu_arm64_lwip_defconfig
+@@ -7,6 +7,7 @@ CONFIG_NET_LWIP=y
+ CONFIG_CMD_DNS=y
+ CONFIG_CMD_NFS=y
+ CONFIG_CMD_SNTP=y
++CONFIG_CMD_TFTPSRV=y
+ CONFIG_CMD_WGET=y
+ CONFIG_EFI_HTTP_BOOT=y
+ CONFIG_WGET_HTTPS=y
+diff --git a/doc/usage/cmd/tftpsrv.rst b/doc/usage/cmd/tftpsrv.rst
+new file mode 100644
+index 00000000000..597a2f3a8bd
+--- /dev/null
++++ b/doc/usage/cmd/tftpsrv.rst
+@@ -0,0 +1,73 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++.. index::
++   single: tftpsrv (command)
++
++tftpsrv command
++===============
++
++Synopsis
++--------
++
++::
++
++    tftpsrv [loadAddress]
++
++Description
++-----------
++
++The tftpsrv command listens for an incoming TFTP write request and receives
++the first transferred file into memory.
++
++loadAddress
++    memory address where the received file is stored. If not provided, the
++    address is taken from the *loadaddr* environment variable or the default
++    image load address.
++
++After a successful transfer, the *fileaddr* and *filesize* environment
++variables describe the received file. The command returns successfully after
++the transfer has completed. It does not boot the file automatically; boot
++scripts can use commands such as bootm, booti or bootefi to boot from the
++load address.
++
++The transfer is aborted if no transfer has started after about 50 seconds or
++if Ctrl-C is pressed.
++
++Example
++-------
++
++In the example the following steps are executed:
++
++* setup the board network address
++* receive a FIT image from a host
++* boot the received FIT image
++
++::
++
++    => setenv autoload no
++    => dhcp
++    BOOTP broadcast 1
++    DHCP client bound to address 192.168.1.40 (7 ms)
++    => tftpsrv $loadaddr
++    Using ethernet@1c30000 device
++    Listening for TFTP transfer on 192.168.1.40
++    Load address: 0x42000000
++    Loading: #################################################################
++             6.5 MiB/s
++    done
++    Bytes transferred = 1048576 (100000 hex)
++    => bootm $fileaddr
++
++On the host, send the file to the board while U-Boot is listening:
++
++::
++
++    $ curl --upload-file image.fit tftp://192.168.1.40/image.fit
++
++Configuration
++-------------
++
++The command is only available if CONFIG_CMD_TFTPSRV=y.
++
++The command is supported by both the legacy network stack and the lwIP network
++stack.
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 20cb0992cce..571d8941ff0 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -52,6 +52,7 @@ bool wget_validate_uri(char *uri);
+ 
+ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ 
+ #endif /* __NET_LWIP_H__ */
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+index 7f3b28b8507..af25aabc973 100644
+--- a/net/lwip/tftp.c
++++ b/net/lwip/tftp.c
+@@ -11,6 +11,7 @@
+ #include <linux/delay.h>
+ #include <linux/kconfig.h>
+ #include <lwip/apps/tftp_client.h>
++#include <lwip/apps/tftp_server.h>
+ #include <lwip/timeouts.h>
+ #include <mapmem.h>
+ #include <net.h>
+@@ -19,6 +20,8 @@
+ #define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
+ /* Max time to wait for first data packet from server */
+ #define NO_RSP_TIMEOUT_MS 10000
++/* Max time to wait for an incoming TFTP write request */
++#define NO_WRQ_TIMEOUT_MS (TFTP_TIMEOUT_MSECS * TFTP_MAX_RETRIES)
+ 
+ enum done_state {
+ 	NOT_DONE = 0,
+@@ -34,8 +37,27 @@ struct tftp_ctx {
+ 	ulong hash_count;
+ 	ulong start_time;
+ 	enum done_state done;
++	bool is_server;
++	bool wrq_accepted;
++	char fname[TFTP_MAX_FILENAME_LEN + 1];
+ };
+ 
++static struct tftp_ctx *tftpsrv_active_ctx;
++
++static void transfer_timeout(void *arg)
++{
++	struct tftp_ctx *ctx = (struct tftp_ctx *)arg;
++
++	printf("Timeout!\n");
++	ctx->done = FAILURE;
++}
++
++static void restart_transfer_timeout(struct tftp_ctx *ctx)
++{
++	sys_untimeout(transfer_timeout, ctx);
++	sys_timeout(TFTP_TIMEOUT_MSECS, transfer_timeout, ctx);
++}
++
+ /**
+  * store_block() - copy received data
+  *
+@@ -71,7 +93,7 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ 	ctx->size += len;
+ 	ctx->block_count++;
+ 
+-	tftp_tsize = tftp_client_get_tsize();
++	tftp_tsize = ctx->is_server ? 0 : tftp_client_get_tsize();
+ 	if (tftp_tsize) {
+ 		pos = clamp(ctx->size, 0UL, tftp_tsize);
+ 
+@@ -92,7 +114,20 @@ static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
+ 
+ static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
+ {
+-	return NULL;
++	struct tftp_ctx *ctx = tftpsrv_active_ctx;
++
++	if (!IS_ENABLED(CONFIG_CMD_TFTPSRV) || !ctx || !is_write)
++		return NULL;
++
++	ctx->wrq_accepted = true;
++	ctx->start_time = get_timer(0);
++	snprintf(ctx->fname, sizeof(ctx->fname), "%s", fname);
++	restart_transfer_timeout(ctx);
++
++	printf("\nReceiving '%s' mode '%s'\n", fname, mode);
++	puts("Loading: ");
++
++	return ctx;
+ }
+ 
+ static void tftp_close(void *handle)
+@@ -101,13 +136,15 @@ static void tftp_close(void *handle)
+ 	ulong tftp_tsize;
+ 	ulong elapsed;
+ 
++	sys_untimeout(transfer_timeout, ctx);
++
+ 	if (ctx->done == FAILURE || ctx->done == ABORTED) {
+ 		/* Closing after an error or Ctrl-C */
+ 		return;
+ 	}
+ 	ctx->done = SUCCESS;
+ 
+-	tftp_tsize = tftp_client_get_tsize();
++	tftp_tsize = ctx->is_server ? 0 : tftp_client_get_tsize();
+ 	if (tftp_tsize) {
+ 		/* Print hash marks for the last packet received */
+ 		while (ctx->hash_count < 49) {
+@@ -142,9 +179,14 @@ static int tftp_write(void *handle, struct pbuf *p)
+ 	struct tftp_ctx *ctx = handle;
+ 	struct pbuf *q;
+ 
+-	for (q = p; q; q = q->next)
+-		if (store_block(ctx, q->payload, q->len) < 0)
++	for (q = p; q; q = q->next) {
++		if (store_block(ctx, q->payload, q->len) < 0) {
++			ctx->done = FAILURE;
+ 			return -1;
++		}
++	}
++
++	restart_transfer_timeout(ctx);
+ 
+ 	return 0;
+ }
+@@ -204,6 +246,9 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	ctx.block_count = 0;
+ 	ctx.hash_count = 0;
+ 	ctx.daddr = addr;
++	ctx.is_server = false;
++	ctx.wrq_accepted = false;
++	ctx.fname[0] = '\0';
+ 
+ 	printf("Using %s device\n", udev->name);
+ 	printf("TFTP from server %s; our IP address is %s\n",
+@@ -258,6 +303,132 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	return -1;
+ }
+ 
++static void no_request(void *arg)
++{
++	struct tftp_ctx *ctx = (struct tftp_ctx *)arg;
++
++	if (ctx->wrq_accepted)
++		return;
++
++	printf("Timeout!\n");
++	ctx->done = FAILURE;
++}
++
++static int tftpsrv_loop(struct udevice *udev, ulong addr)
++{
++	struct netif *netif;
++	struct tftp_ctx ctx;
++	const char *ipaddr;
++	err_t err;
++
++	if (addr == 0)
++		return -1;
++
++	ipaddr = env_get("ipaddr");
++	if (!ipaddr || !*ipaddr) {
++		log_err("error: ipaddr has to be set\n");
++		return -1;
++	}
++
++	netif = net_lwip_new_netif(udev);
++	if (!netif)
++		return -1;
++
++	memset(&ctx, 0, sizeof(ctx));
++	ctx.done = NOT_DONE;
++	ctx.daddr = addr;
++	ctx.is_server = true;
++
++	printf("Using %s device\n", udev->name);
++	printf("Listening for TFTP transfer on %s\n", ipaddr);
++	printf("Load address: 0x%lx\n", ctx.daddr);
++
++	tftpsrv_active_ctx = &ctx;
++	err = tftp_init_server(&tftp_context);
++	if (err != ERR_OK) {
++		log_err("tftp_init_server err: %d\n", err);
++		tftpsrv_active_ctx = NULL;
++		net_lwip_remove_netif(netif);
++		return -1;
++	}
++
++	ctx.start_time = get_timer(0);
++	sys_timeout(NO_WRQ_TIMEOUT_MS, no_request, &ctx);
++	while (!ctx.done) {
++		net_lwip_rx(udev, netif);
++		if (ctrlc()) {
++			printf("\nAbort\n");
++			ctx.done = ABORTED;
++			break;
++		}
++	}
++	sys_untimeout(no_request, (void *)&ctx);
++
++	tftp_cleanup();
++	tftpsrv_active_ctx = NULL;
++	net_lwip_remove_netif(netif);
++
++	if (ctx.done == SUCCESS) {
++		if (env_set_hex("fileaddr", addr)) {
++			log_err("fileaddr not updated\n");
++			return -1;
++		}
++		efi_set_bootdev("Net", "", ctx.fname, map_sysmem(addr, 0),
++				ctx.size);
++		return 0;
++	}
++
++	return -1;
++}
++
++int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	int ret = CMD_RET_SUCCESS;
++	char *end;
++	ulong laddr;
++	ulong addr;
++
++	if (!IS_ENABLED(CONFIG_CMD_TFTPSRV))
++		return CMD_RET_FAILURE;
++
++	laddr = env_get_ulong("loadaddr", 16, image_load_addr);
++
++	switch (argc) {
++	case 1:
++		break;
++	case 2:
++		addr = hextoul(argv[1], &end);
++		if (end == argv[1] || *end) {
++			ret = CMD_RET_USAGE;
++			goto out;
++		}
++		laddr = addr;
++		break;
++	default:
++		ret = CMD_RET_USAGE;
++		goto out;
++	}
++
++	if (!laddr) {
++		log_err("error: no load address\n");
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	if (net_lwip_eth_start() < 0) {
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	if (tftpsrv_loop(eth_get_dev(), laddr) < 0)
++		ret = CMD_RET_FAILURE;
++	else
++		image_load_addr = laddr;
++
++out:
++	return ret;
++}
++
+ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	int ret = CMD_RET_SUCCESS;
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index 27cdd73fd49..a2007c2fd3a 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -59,6 +59,19 @@ For example:
+         'fnu': 'ubtest-upload.bin',
+     }
+ 
++    # Details regarding a file that may be written to U-Boot using the tftpsrv
++    # command. This variable may be omitted or set to None if tftpsrv testing
++    # is not possible or desired. The test uses host-side curl TFTP support to
++    # upload a generated file to U-Boot. The optional tftpsrv_url entry may be
++    # used when the host must use a forwarded address instead of U-Boot's
++    # ipaddr value.
++    env__net_tftpsrv_file = {
++        'fn': 'ubtest-tftpsrv.bin',
++        'addr': 0x10000000,
++        'size': 4096,
++        'timeout': 50000,
++    }
++
+     # Details regarding a file that may be read from a NFS server. This variable
+     # may be omitted or set to None if NFS testing is not possible or desired.
+     env__net_nfs_readable_file = {
+@@ -89,6 +102,8 @@ import utils
+ import uuid
+ import datetime
+ import re
++import tempfile
++import zlib
+ 
+ net_set_up = False
+ net6_set_up = False
+@@ -460,3 +475,82 @@ def test_net_tftpput(ubman):
+ 
+     output = ubman.run_command("crc32 $fileaddr $filesize")
+     assert expected_tftpb_crc in output
++
++
++@pytest.mark.buildconfigspec("cmd_crc32")
++@pytest.mark.buildconfigspec("cmd_tftpsrv")
++@pytest.mark.requiredtool("curl")
++def test_net_tftpsrv(ubman):
++    """Test the tftpsrv command.
++
++    A file is generated on the host, uploaded to U-Boot using TFTP and then
++    validated in U-Boot using its size and CRC32.
++
++    The details of the file to upload are provided by the boardenv_* file;
++    see the comment at the beginning of this file.
++    """
++
++    if not net_set_up:
++        pytest.skip("Network not initialized")
++
++    f = ubman.config.env.get("env__net_tftpsrv_file", None)
++    if not f:
++        pytest.skip("No tftpsrv file to write")
++
++    curl_version = utils.run_and_log(ubman, ["curl", "--version"])
++    if "tftp" not in curl_version.split():
++        pytest.skip("curl does not support TFTP")
++
++    addr = f.get("addr", None)
++    if not addr:
++        addr = utils.find_ram_base(ubman)
++
++    timeout = f.get("timeout", ubman.p.timeout)
++    timeout_secs = max(1, (timeout + 999) // 1000)
++    size = f.get("size", 4096)
++    fn = f.get("fn", "ubtest-tftpsrv.bin")
++    url = f.get("tftpsrv_url", None)
++    data = bytes([i % 251 for i in range(size)])
++    crc = "%08x" % (zlib.crc32(data) & 0xffffffff)
++
++    ip = ubman.run_command("echo $ipaddr").strip()
++    if not ip:
++        pytest.skip("No U-Boot IP address")
++    if not url:
++        url = "tftp://%s/%s" % (ip, fn)
++
++    with tempfile.NamedTemporaryFile() as tmp:
++        tmp.write(data)
++        tmp.flush()
++
++        done = False
++        with ubman.temporary_timeout(timeout):
++            try:
++                ubman.run_command("tftpsrv %x" % addr,
++                                  wait_for_prompt=False)
++                ubman.wait_for("Listening for TFTP transfer")
++                utils.run_and_log(
++                    ubman,
++                    [
++                        "curl",
++                        "--fail",
++                        "--max-time",
++                        str(timeout_secs),
++                        "--upload-file",
++                        tmp.name,
++                        url,
++                    ],
++                )
++                ubman.wait_for("Bytes transferred = %d" % size)
++                ubman.wait_for(ubman.prompt)
++                done = True
++            finally:
++                if not done:
++                    ubman.ctrlc()
++                    ubman.drain_console()
++
++    output = ubman.run_command("echo $filesize")
++    assert "%x" % size in output
++
++    output = ubman.run_command("crc32 $fileaddr $filesize")
++    assert crc in output
+-- 
+2.53.0
 
