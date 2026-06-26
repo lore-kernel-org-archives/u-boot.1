@@ -4,121 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F288CDE008
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA54CDE008
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jun 2026 10:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 783518460E;
-	Fri, 26 Jun 2026 12:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id A31648460E;
+	Fri, 26 Jun 2026 12:23:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="bqZPB20d";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="VUFjW7Wg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AA9A84704; Fri, 26 Jun 2026 12:21:49 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 586B18494B; Fri, 26 Jun 2026 12:23:55 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 267A38404D
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:21:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=udVr3HTWnvYes3hRHiYs3GM+qod3x6LAvaM1b/qXZQtCZkWrheG/+Exz0HgC+6+jMDlHA4nvnHuJu9YziQ+yZSMBgHUC0hGD15VGPUeC4tfnNaE/boiJxLb7sUia1Cz3A/ybcaINA1hZG/ycWDz3OBl8ZreOBaFf9lOpkdsp57lr1XxphmxrKRuaXyCQVGy3Dp/iZ3xZ6AEV+QyOjsUp2zlZjR6okJT4jsYM1+Ut8Q6657n+MtWskNv5fQtCAOGEZhLoV+o1p7Lv+Pk0F+ESSEPH0VZ7ZYW3Ev2sDCuWz6S6JWQehTQPNg49qqVMX9hdKAo6cXp5SOoOfRb/6r74cw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+Vtdm/FqH0f/PABANvmQdBn4zHaeAmGtWVIgFIhB1vg=;
- b=sOFgGRRi8zGH/SbyQ8Bn0Q5AxcS8l60bIm8ulA+qtYFtfLDM8KCUFOe5dbcIchMQ4pMY884pXtYpNRpXkKlti00C/Lm+OfJiH/Khx0oVnif1X2+TM1M7D91+aSsOgkZ+lj0EK7VQaqobI/x9up5TyR7R5kPdXqEDrzSoZhPcV317JQy+5fhFKn9myhjJFOUK9xKGN5sKVCwhH4bSaAxanFlxQvhvgy7oEjcmuK9VMTx/WbFxSLSMVsqjMTflRCU7ISVupTNYaANZXM7HwbZDC0D3b0UCgl1HTzFzMQo4HcfQXLM7gjPoThyJkuXCnwKR+Yli848tdbo1KmrVRzzyEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+Vtdm/FqH0f/PABANvmQdBn4zHaeAmGtWVIgFIhB1vg=;
- b=bqZPB20dOMkImfoguaaDs7d8avEj97i+acgePqMochaTfI7BWPt9zFtqD7/VVTNvL1zqUK6ePN9cINewM3ATNB9IKtswzw9FITzMED7c7VfmeEzDPXTBHIKlqEmruyk2Uc3mkmtVE12B1vC09IOv6ibCE0kKqSGwWYzTyK9bAfuBovM6jzwVWBkNRb+PV2nbNdN5WWyziQzVWg/dul+pSJuUTWFyb8KAVmoqNCDPrJ2tsfpbeJO2QcnnavNPBVXD8kp5X/72rQz40B6PWYwUF6ROG2vjbhCmRZHEJ85VrJfdYoJ7YCQ+TNVjsVYUJeRImd7VyAL4QM81PzJdnKeuFA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM0PR04MB5121.eurprd04.prod.outlook.com (2603:10a6:208:c1::16)
- by GV2PR04MB11448.eurprd04.prod.outlook.com (2603:10a6:150:2a3::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Fri, 26 Jun
- 2026 10:21:45 +0000
-Received: from AM0PR04MB5121.eurprd04.prod.outlook.com
- ([fe80::da59:a278:1b1a:4592]) by AM0PR04MB5121.eurprd04.prod.outlook.com
- ([fe80::da59:a278:1b1a:4592%7]) with mapi id 15.21.0159.013; Fri, 26 Jun 2026
- 10:21:44 +0000
-From: ye.li@oss.nxp.com
-To: lukma@denx.de, festevam@gmail.com, u-boot@lists.denx.de, peng.fan@nxp.com
-Cc: uboot-imx@nxp.com
-Subject: [PATCH v2] clk: imx: imx8mq: Fix iMX8MQ PLL issue
-Date: Fri, 26 Jun 2026 18:25:00 +0800
-Message-Id: <20260626102500.2335099-1-ye.li@oss.nxp.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR04CA0011.apcprd04.prod.outlook.com
- (2603:1096:4:197::10) To AM0PR04MB5121.eurprd04.prod.outlook.com
- (2603:10a6:208:c1::16)
+ by phobos.denx.de (Postfix) with ESMTPS id 906D78404D
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 12:23:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wqu@suse.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4924f8db066so3910105e9.2
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 03:23:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1782469432; x=1783074232; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lzs37CHTk7DgicK6OAuLqr6L4003x8EvgSSRyy0ZdYI=;
+ b=VUFjW7WgFGay7b4WD+yKYMuhwHfG1OywF1IyiznFlXa3EhevVAEylfbSKt816xiJE7
+ jBCID6RoMMVpprfyok3X+4oSUhRH0O73TbLis40NSlIZHPqFQDnBWqjWCog+hJ98O0x+
+ p9QKbv9xMABCb1jXRU6QZ2R1Jh7OR+DQs3DFC1lkDTDvQ6KWy56+PxJva4upqL2DZYvd
+ 72D1utvGYIih4FMyGZIErRAM26OxqptFPDUtIx4aLhdmSNdFfrbSs4qSaRlmh+M93jPX
+ eR0CIYegwQBfLhbB0g0yQYF5b0bNxCcHVTXV8+opVA0oUtwKChVFliUVqrTKgei99R3n
+ 0qJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782469432; x=1783074232;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lzs37CHTk7DgicK6OAuLqr6L4003x8EvgSSRyy0ZdYI=;
+ b=XuvYKCK6QEjYUeZsfhaDgYovCMhc3+4w34u62b7nygc9YrHbqk3/Ryf+isOZlJyJYL
+ zh/SfxPNJzaJt5nM+3HvR2+J/VEKhXyG53mx4Z3wjN7nZyFcJQHm5AfaNwAvAI5wIoWf
+ xbyuTG99aXZ1s6ck0K5oz9faOAas9fQKiHDSsb+TjL01wRElkkIuq/y4XtvhAUb9qzHK
+ ECrqIT0INDESig4XuA4kAuVH5yxVZU4rlr7NW0FckX5OlK2I1b4zKWMEm+trPNUU31pO
+ ZUtdc4/7vBXsKlFsOLqi7zTODPQQbHi0c3iznAG9UKOBUHTmfAZrvYY8SLFSjx+Uw4g9
+ 9bmw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9nZYW/EzIteO2FoL2Dc7X5jjMWk3B4+WyqhS9XAFo6tR5HCPsGpOqEEKM9YG5Eos26++Tl09s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyrrx8O2J4coXJYWV5zZ9AMuUb89lTLDBzQcFWTMboslHxeyvDm
+ iuzPt11HilZSxWlDfoQF6n06ATB/UpwW3bOFbyzpw+z7ISgDx/g9/0FphCGWApCDJLk=
+X-Gm-Gg: AfdE7cmMt2z+/ghk+i+4IeEJPu3AlBHYdKHQOvtZjbdPWhkLj6Oogjw34NE+b+jFpvR
+ ZCgshuQHrRGzEOf61S9AD91xj9Wy3tgEkO6E6cchSrk747mTSr5qvFii0EGlqsOojlco5sE3f0S
+ iRBNSYSbpIadp5Noij81NqcvwhqYV9crbt5XqmicRBkEbehuNzdVgMoIxEy4LPuHj0WvOg6b1Ax
+ sM6MiIVitVrWgtZNfwpDCMf3YgQ3vmhBAf70GfgK1nCtRA7lgds0OApWvU9uvcU/qKdZRKPi3jc
+ +iC/IOGrBDoH6Nd+TINz8TiGFC5fTDIFbpsKlBYbJMmOQ1dAEeAVfCreFBDItj7YqHPCXzTgyvO
+ ZW75Kj2jiSFeJRJwewHdC5DbPEduNgzCBQSo1+va0TcbSCf2WEdoNgyRdSbJL8maCJIeXgNnrps
+ puECgI3mM2EfaivgPd6ICz2i7RpdNtfdX8e06CtdQC
+X-Received: by 2002:a05:600c:1d04:b0:492:4714:2d7e with SMTP id
+ 5b1f17b1804b1-492668b76f4mr94619375e9.36.1782469431884; 
+ Fri, 26 Jun 2026 03:23:51 -0700 (PDT)
+Received: from ?IPV6:2403:580d:fda1::299?
+ (2403-580d-fda1--299.ip6.aussiebb.net. [2403:580d:fda1::299])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c7c8b1a80sm16265208eec.18.2026.06.26.03.23.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Jun 2026 03:23:50 -0700 (PDT)
+Message-ID: <46cac806-1f84-4648-a725-6d239763ea0b@suse.com>
+Date: Fri, 26 Jun 2026 19:53:42 +0930
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB5121:EE_|GV2PR04MB11448:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5222f763-4956-4182-727a-08ded36cb81d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|19092799006|376014|366016|56012099006|11063799006|3023799007|18002099003;
-X-Microsoft-Antispam-Message-Info: Ql9bK7Zy6q7vxxgRoK31JLDI7Y/q/Mm1TiOD4UvM2ZqIokPz+w+Zo8Ji/EFrCjhdvi20u/DKfSnSAWUaNKArCE/mCpS12kRkKa92st5mA/jrLP3bBWyUgys9wHoj5+fAi8LWcpRhuXrbmj9AYssC0wTvo/BzAVSqR6mCjzc6fLYuU62+gmDYzQKOzd5/wmCaQFpflI+74zOdw5FWxBjYcxPLwUlan6YeVEWSOcSkxDTWo6bMb1F2gWrWTXV8ohMZtprRgMRnMgZBuF5ntDeakk7xeUwOdvm/ewlywgZW2Q1672ZJmye22EkXPMvS4gQDNsBLZ8Q31gpPo57dq/ITEzPvl3L71FAmkuyE516kHplSAFiWys8dIPW+m+Ag1MR6D1y9a3gxOez8iVKIYn0moY4K/84jKygz8rpORIDrPpeZZ/3gB47qwYbRCdUgaE+wkbjc9Wp9KLDh71ilKKDgkGF2OT6pnSuCOfZeMPhhXlaiAJ5k3CfUP8zbHcE4uE63OGOhYW+nJkVrIletnuuCksIbDYVQZLO3y0WjA2EiDvlfPmPIr/4n9K/CnoKlZdSRWBBj0tYfjunGgFSXlMz+aoHWOlt3URODU+zvW1YTQUtAzPZaSmsPpiP4RMFslLywSYlzdLq8koF9l4901hnTZ2zVo8Ay/7c2E+8/EzIbYcA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB5121.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(19092799006)(376014)(366016)(56012099006)(11063799006)(3023799007)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jEgWs86egQgp+WIlRGtUVONdjQgGxaKG72ekv/DunedujKqsxgwHSQACSEhf?=
- =?us-ascii?Q?+slAmvsJ1m9wp1E47C6R+bJwoXfA6+POUuOBUKzhWx7jqb8XHiDDxwQCl9QA?=
- =?us-ascii?Q?sAxWdeskqZLYCjAGyQJZAhoGmWa+BMav6i2X3qAO05RSo7h4KiUIFKmAKjOM?=
- =?us-ascii?Q?9EIFVHLh76M4Kuxc7cCJ4Hz+/IOf9oClrBecS53WR6q4JL+uCQy7mBZVlsWl?=
- =?us-ascii?Q?HkzX8YPgX6vSjWNhd1mxUbmgCu3Ng6jkjiICC7MsiQ85CG4AA2T9z1w+Aw5X?=
- =?us-ascii?Q?Zl78BMi03dge0oLMqY4dm5+sK4TLCVWffZVPdY9Xc3Ubz66KfyevNPxCgDk9?=
- =?us-ascii?Q?hxa8u9QfxDD/p2qhPPGB1NwGZn5LoLWafgACLT6qwHvCLm+pmusDZKW7iQJ/?=
- =?us-ascii?Q?C/+G6d0bcuKVY/n4wNgWm6rnRDFYKNwap/4XvxtLBJmvwCT2HwI/9uV9gXTT?=
- =?us-ascii?Q?iU2U1gvPkhy0wKY35SB+7DzjxeAjvOSLE7NynZmaMkQadC7PMG5vNO24R/Zg?=
- =?us-ascii?Q?FPrI7ImJWr+OHPOWQMeTmzzec7w5EIEbMb0+8LbNQXwmS+Eie2LX1jV9CDg0?=
- =?us-ascii?Q?nEmkA2vJ/D94PYTAm1DuYXjJFzQoZkIcicePK6+mftp4IogOO5yxcHZY0lM4?=
- =?us-ascii?Q?asPGUI0Zk+fq23YoVzj1AAOOg92aDXRSQC+eOgirr0ovxX8OdWPWZr8anmq1?=
- =?us-ascii?Q?QdFQ6h1ceONnq0UnWsLooeOPK0zYappvx9UWvzLB58FPlXH3Yn0fF6x1gYL2?=
- =?us-ascii?Q?rpZyHhEbuOTo0SvCmqlwRxjOFsdiaOY0mJ1MZ6sdFcSFiJL/Zf1NZ8Axd2WX?=
- =?us-ascii?Q?vu2zYR9rzxPmS4dYKpF/Y6g1UpfUuUKkWAaN625lmDNdaIZy2BeU1ZW7+23H?=
- =?us-ascii?Q?he3hZZFCWxNXMxzAE9UuXMOJBIjgsqJF7u9CbTyuM6R/EM8QWbeeVf3VUNX3?=
- =?us-ascii?Q?YC5OgjSkRYGclwhbGvcj87hG+Tu9uogwqiyYgZmxuNDmKSttZ0G8lGcZASGy?=
- =?us-ascii?Q?U98o0JqC8p0026Tyd//+GgVp3CT201nfrB2B3YUEwqNBoQD496Bdx/bhK3Rt?=
- =?us-ascii?Q?D9S75+UFn8eTOEYh24Fc4T9rEVVTI6W0dyaWTlTX4H2Jl65Ay2UrUX6JHDJn?=
- =?us-ascii?Q?Uqqn2o4WaUoO/3LyobgW7NVOeb3mH5lIhLwVvnJudaGYSK3raUc2lRNQKJ31?=
- =?us-ascii?Q?yE8AnjjyGxtbz7ctfMscie7qYpFlaijq9/YWVNPAiLhOPhK7iuXwGAITBfdQ?=
- =?us-ascii?Q?psLocXUVllgA10U7b+MUyEFkKIlNTGy3AFMo5pqBjjRs0GoKvlyvvQgzRJXA?=
- =?us-ascii?Q?MjfgIr4GgmPsR0p5CQeQ4w1+MWC1J7FH2A7hXvI7Q1azpc+T89UJ53pxK+zH?=
- =?us-ascii?Q?TpcgM9Y8LuZ4K/Sq6oz2VtNbi7XE6jMXse/HCV4iCWQxkppnsMW8cP8yPggl?=
- =?us-ascii?Q?O1ATJMol4UUzHInQwL2GiDuqMe59abzudm3AV3lpZUAyB08c9QXT6WntvIDd?=
- =?us-ascii?Q?ULfu4LD1fXpL0HKgGN0psjPuO+V79UNDdnurTeoiHHWB3tltCP9nsDostVMd?=
- =?us-ascii?Q?NQYVQb+T++sw57bocoBAD35M9ZNeLyQmrdLe/x+9B2lGpgSJyk0Dh5CQ7iRV?=
- =?us-ascii?Q?+3o8cI7JRQ2sBajyJDiecbApJJ8wFxJXb6nvVtrJ7Vjh7IjdVpuhLFypdWzg?=
- =?us-ascii?Q?GzUY+BfMHbZ9DIyUWzLfzEU2aH5vuSK+7ApPYIUebJalFEQHem2iuvpM1mC1?=
- =?us-ascii?Q?QelkdN4niWx+smWDr5ogkFbRzjUkBjo=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5222f763-4956-4182-727a-08ded36cb81d
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5121.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2026 10:21:44.3659 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oyDupVS+OsW3mqRDszxwXoYPq7cGj9JUCUcyvH7CYqALdZbk0KIMz2/G5em3x7TRXxHEtNb34flXuj3CAhNI6s4FDGYlpoTuLJWTC1VMdEE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11448
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] fs: btrfs: implement opendir(), readdir() and
+ closedir()
+To: Alexey Charkov <alchark@flipper.net>
+Cc: linux-btrfs@vger.kernel.org, u-boot@lists.denx.de,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
+ Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Yao Zi <me@ziyao.cc>
+References: <20260625-btrfs-readdir-v1-0-dd781a2b3965@flipper.net>
+ <20260625-btrfs-readdir-v1-1-dd781a2b3965@flipper.net>
+ <bbeac2f6-685d-4ace-b689-10d64c4e3ce5@suse.com>
+ <CAKTNdwGH2OCWJ1A=jQWiLYQmxG8UFTBGwGh0Qno7OkUfxs4dtw@mail.gmail.com>
+Content-Language: en-US
+From: Qu Wenruo <wqu@suse.com>
+Autocrypt: addr=wqu@suse.com; keydata=
+ xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
+ 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
+ 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
+ 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
+ gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
+ AAHNGFF1IFdlbnJ1byA8d3F1QHN1c2UuY29tPsLAlAQTAQgAPgIbAwULCQgHAgYVCAkKCwIE
+ FgIDAQIeAQIXgBYhBC3fcuWlpVuonapC4cI9kfOhJf6oBQJnEXVgBQkQ/lqxAAoJEMI9kfOh
+ Jf6o+jIH/2KhFmyOw4XWAYbnnijuYqb/obGae8HhcJO2KIGcxbsinK+KQFTSZnkFxnbsQ+VY
+ fvtWBHGt8WfHcNmfjdejmy9si2jyy8smQV2jiB60a8iqQXGmsrkuR+AM2V360oEbMF3gVvim
+ 2VSX2IiW9KERuhifjseNV1HLk0SHw5NnXiWh1THTqtvFFY+CwnLN2GqiMaSLF6gATW05/sEd
+ V17MdI1z4+WSk7D57FlLjp50F3ow2WJtXwG8yG8d6S40dytZpH9iFuk12Sbg7lrtQxPPOIEU
+ rpmZLfCNJJoZj603613w/M8EiZw6MohzikTWcFc55RLYJPBWQ+9puZtx1DopW2jOwE0EWdWB
+ rwEIAKpT62HgSzL9zwGe+WIUCMB+nOEjXAfvoUPUwk+YCEDcOdfkkM5FyBoJs8TCEuPXGXBO
+ Cl5P5B8OYYnkHkGWutAVlUTV8KESOIm/KJIA7jJA+Ss9VhMjtePfgWexw+P8itFRSRrrwyUf
+ E+0WcAevblUi45LjWWZgpg3A80tHP0iToOZ5MbdYk7YFBE29cDSleskfV80ZKxFv6koQocq0
+ vXzTfHvXNDELAuH7Ms/WJcdUzmPyBf3Oq6mKBBH8J6XZc9LjjNZwNbyvsHSrV5bgmu/THX2n
+ g/3be+iqf6OggCiy3I1NSMJ5KtR0q2H2Nx2Vqb1fYPOID8McMV9Ll6rh8S8AEQEAAcLAfAQY
+ AQgAJgIbDBYhBC3fcuWlpVuonapC4cI9kfOhJf6oBQJnEXWBBQkQ/lrSAAoJEMI9kfOhJf6o
+ cakH+QHwDszsoYvmrNq36MFGgvAHRjdlrHRBa4A1V1kzd4kOUokongcrOOgHY9yfglcvZqlJ
+ qfa4l+1oxs1BvCi29psteQTtw+memmcGruKi+YHD7793zNCMtAtYidDmQ2pWaLfqSaryjlzR
+ /3tBWMyvIeWZKURnZbBzWRREB7iWxEbZ014B3gICqZPDRwwitHpH8Om3eZr7ygZck6bBa4MU
+ o1XgbZcspyCGqu1xF/bMAY2iCDcq6ULKQceuKkbeQ8qxvt9hVxJC2W3lHq8dlK1pkHPDg9wO
+ JoAXek8MF37R8gpLoGWl41FIUb3hFiu3zhDDvslYM4BmzI18QgQTQnotJH8=
+In-Reply-To: <CAKTNdwGH2OCWJ1A=jQWiLYQmxG8UFTBGwGh0Qno7OkUfxs4dtw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,368 +135,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
 
-The fractional PLL used on iMX8MQ is not pll14xx, it is different
-PLL and not exist in u-boot. Add this fractional PLL driver and
-update iMX8MQ clock driver to adapt this fraction PLL.
 
-Fixes: 11c8ab01f3ed ("clk: imx8mq: Add a clock driver for the imx8mq")
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
----
-Changes in v2:
- - Update copyright
- - Add fixes tag in commit log 
+在 2026/6/26 18:51, Alexey Charkov 写道:
+> On Fri, Jun 26, 2026 at 10:38 AM Qu Wenruo <wqu@suse.com> wrote:
+[...]
+>>
+>> So it looks like u-boot only supports the above 3 types, and unlike
+>> linux kernel the values doesn't match the btrfs internal ones.
+>>
+>> In that case, I'd still prefer a proper convertor function.
+> 
+> Hmm, but the convertor function would still be the same switch
+> statement, and it's only used in this single place. Would factoring it
+> out actually improve readability?
 
- drivers/clk/imx/Makefile       |   2 +-
- drivers/clk/imx/clk-frac-pll.c | 199 +++++++++++++++++++++++++++++++++
- drivers/clk/imx/clk-imx8mq.c   |  55 +++++----
- drivers/clk/imx/clk.h          |   3 +
- 4 files changed, 237 insertions(+), 22 deletions(-)
- create mode 100644 drivers/clk/imx/clk-frac-pll.c
+This is mostly a cross-project tendency.
 
-diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
-index f2fd6ff8ca0..a825ed9988f 100644
---- a/drivers/clk/imx/Makefile
-+++ b/drivers/clk/imx/Makefile
-@@ -17,7 +17,7 @@ obj-$(CONFIG_$(PHASE_)CLK_IMX8MN) += clk-imx8mn.o clk-pll14xx.o \
- 				clk-composite-8m.o
- obj-$(CONFIG_$(PHASE_)CLK_IMX8MP) += clk-imx8mp.o clk-pll14xx.o \
- 				clk-composite-8m.o
--obj-$(CONFIG_$(PHASE_)CLK_IMX8MQ) += clk-imx8mq.o clk-pll14xx.o \
-+obj-$(CONFIG_$(PHASE_)CLK_IMX8MQ) += clk-imx8mq.o clk-frac-pll.o \
- 				clk-composite-8m.o
- obj-$(CONFIG_$(PHASE_)CLK_IMX93) += clk-imx93.o clk-fracn-gppll.o \
- 				clk-gate-93.o clk-composite-93.o
-diff --git a/drivers/clk/imx/clk-frac-pll.c b/drivers/clk/imx/clk-frac-pll.c
-new file mode 100644
-index 00000000000..e286ed56d33
---- /dev/null
-+++ b/drivers/clk/imx/clk-frac-pll.c
-@@ -0,0 +1,199 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright 2026 NXP.
-+ *
-+ */
-+
-+#include <asm/io.h>
-+#include <malloc.h>
-+#include <clk-uclass.h>
-+#include <dm/device.h>
-+#include <dm/devres.h>
-+#include <linux/bitops.h>
-+#include <linux/clk-provider.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/iopoll.h>
-+#include <clk.h>
-+#include <div64.h>
-+#include <linux/printk.h>
-+#include <linux/bitfield.h>
-+
-+#include "clk.h"
-+
-+#define PLL_CFG0		0x0
-+#define PLL_CFG1		0x4
-+
-+#define PLL_LOCK_STATUS		BIT(31)
-+#define PLL_PD_MASK		BIT(19)
-+#define PLL_BYPASS_MASK		BIT(14)
-+#define PLL_NEWDIV_VAL		BIT(12)
-+#define PLL_NEWDIV_ACK		BIT(11)
-+#define PLL_FRAC_DIV_MASK	GENMASK(30, 7)
-+#define PLL_INT_DIV_MASK	GENMASK(6, 0)
-+#define PLL_OUTPUT_DIV_MASK	GENMASK(4, 0)
-+#define PLL_FRAC_DENOM		0x1000000
-+
-+#define PLL_FRAC_LOCK_TIMEOUT	10000
-+#define PLL_FRAC_ACK_TIMEOUT	500000
-+
-+struct clk_frac_pll {
-+	struct clk			clk;
-+	void __iomem			*base;
-+};
-+
-+#define to_clk_frac_pll(_clk) container_of(_clk, struct clk_frac_pll, clk)
-+
-+static int clk_wait_lock(struct clk_frac_pll *pll)
-+{
-+	u32 val;
-+
-+	return readl_poll_timeout(pll->base, val, val & PLL_LOCK_STATUS,
-+					PLL_FRAC_LOCK_TIMEOUT);
-+}
-+
-+static int clk_wait_ack(struct clk_frac_pll *pll)
-+{
-+	u32 val;
-+
-+	/* return directly if the pll is in powerdown or in bypass */
-+	if (readl_relaxed(pll->base) & (PLL_PD_MASK | PLL_BYPASS_MASK))
-+		return 0;
-+
-+	/* Wait for the pll's divfi and divff to be reloaded */
-+	return readl_poll_timeout(pll->base, val, val & PLL_NEWDIV_ACK,
-+					PLL_FRAC_ACK_TIMEOUT);
-+}
-+
-+static int clk_pll_prepare(struct clk *clk)
-+{
-+	struct clk_frac_pll *pll = to_clk_frac_pll(clk);
-+	u32 val;
-+
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	val &= ~PLL_PD_MASK;
-+	writel_relaxed(val, pll->base + PLL_CFG0);
-+
-+	return clk_wait_lock(pll);
-+}
-+
-+static int clk_pll_unprepare(struct clk *clk)
-+{
-+	struct clk_frac_pll *pll = to_clk_frac_pll(clk);
-+	u32 val;
-+
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	val |= PLL_PD_MASK;
-+	writel_relaxed(val, pll->base + PLL_CFG0);
-+
-+	return 0;
-+}
-+
-+static unsigned long clk_pll_recalc_rate(struct clk *clk)
-+{
-+	struct clk_frac_pll *pll = to_clk_frac_pll(clk);
-+	u32 val, divff, divfi, divq;
-+	ulong parent_rate = clk_get_parent_rate(clk);
-+	u64 temp64 = parent_rate;
-+	u64 rate;
-+
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	divq = (FIELD_GET(PLL_OUTPUT_DIV_MASK, val) + 1) * 2;
-+	val = readl_relaxed(pll->base + PLL_CFG1);
-+	divff = FIELD_GET(PLL_FRAC_DIV_MASK, val);
-+	divfi = FIELD_GET(PLL_INT_DIV_MASK, val);
-+
-+	temp64 *= 8;
-+	temp64 *= divff;
-+	do_div(temp64, PLL_FRAC_DENOM);
-+	do_div(temp64, divq);
-+
-+	rate = parent_rate * 8 * (divfi + 1);
-+	do_div(rate, divq);
-+	rate += temp64;
-+
-+	return rate;
-+}
-+
-+static ulong clk_pll_set_rate(struct clk *clk, unsigned long rate)
-+{
-+	struct clk_frac_pll *pll = to_clk_frac_pll(clk);
-+	ulong parent_rate = clk_get_parent_rate(clk);
-+	u32 val, divfi, divff;
-+	u64 temp64;
-+	int ret;
-+
-+	parent_rate *= 8;
-+	rate *= 2;
-+	divfi = rate / parent_rate;
-+	temp64 = parent_rate * divfi;
-+	temp64 = rate - temp64;
-+	temp64 *= PLL_FRAC_DENOM;
-+	do_div(temp64, parent_rate);
-+	divff = temp64;
-+
-+	val = readl_relaxed(pll->base + PLL_CFG1);
-+	val &= ~(PLL_FRAC_DIV_MASK | PLL_INT_DIV_MASK);
-+	val |= (divff << 7) | (divfi - 1);
-+	writel_relaxed(val, pll->base + PLL_CFG1);
-+
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	val &= ~0x1f;
-+	writel_relaxed(val, pll->base + PLL_CFG0);
-+
-+	/* Set the NEV_DIV_VAL to reload the DIVFI and DIVFF */
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	val |= PLL_NEWDIV_VAL;
-+	writel_relaxed(val, pll->base + PLL_CFG0);
-+
-+	ret = clk_wait_ack(pll);
-+
-+	/* clear the NEV_DIV_VAL */
-+	val = readl_relaxed(pll->base + PLL_CFG0);
-+	val &= ~PLL_NEWDIV_VAL;
-+	writel_relaxed(val, pll->base + PLL_CFG0);
-+
-+	if (ret)
-+		return ret;
-+
-+	return clk_pll_recalc_rate(clk);
-+}
-+
-+static const struct clk_ops clk_frac_pll_ops = {
-+	.enable		= clk_pll_prepare,
-+	.disable	= clk_pll_unprepare,
-+	.set_rate	= clk_pll_set_rate,
-+	.get_rate	= clk_pll_recalc_rate,
-+};
-+
-+struct clk *imx_clk_frac_pll(const char *name, const char *parent_name,
-+			     void __iomem *base)
-+{
-+	struct clk_frac_pll *pll;
-+	struct clk *clk;
-+	int ret;
-+
-+	pll = kzalloc(sizeof(*pll), GFP_KERNEL);
-+	if (!pll)
-+		return ERR_PTR(-ENOMEM);
-+
-+	pll->base = base;
-+	clk = &pll->clk;
-+
-+	ret = clk_register(clk, "imx_clk_frac_pll", name, parent_name);
-+	if (ret) {
-+		pr_err("%s: failed to register pll %s %d\n",
-+		       __func__, name, ret);
-+		kfree(pll);
-+		return ERR_PTR(ret);
-+	}
-+
-+	return clk;
-+}
-+
-+U_BOOT_DRIVER(clk_frac_pll) = {
-+	.name	= "imx_clk_frac_pll",
-+	.id	= UCLASS_CLK,
-+	.ops	= &clk_frac_pll_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/clk/imx/clk-imx8mq.c b/drivers/clk/imx/clk-imx8mq.c
-index fe6cba19758..78156003ad9 100644
---- a/drivers/clk/imx/clk-imx8mq.c
-+++ b/drivers/clk/imx/clk-imx8mq.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * Copyright 2019 NXP
-+ * Copyright 2019, 2026 NXP
-  * Copyright 2022 Purism
-  * Peng Fan <peng.fan@nxp.com>
-  */
-@@ -155,39 +155,52 @@ static int imx8mq_clk_probe(struct udevice *dev)
- 	       imx_clk_mux(dev, "dram_pll_ref_sel", base + 0x60, 0, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_ARM_PLL_REF_SEL,
--	       imx_clk_mux(dev, "arm_pll_ref_sel", base + 0x28, 0, 2,
-+	       imx_clk_mux(dev, "arm_pll_ref_sel", base + 0x28, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_GPU_PLL_REF_SEL,
--	       imx_clk_mux(dev, "gpu_pll_ref_sel", base + 0x18, 0, 2,
-+	       imx_clk_mux(dev, "gpu_pll_ref_sel", base + 0x18, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_VPU_PLL_REF_SEL,
--	       imx_clk_mux(dev, "vpu_pll_ref_sel", base + 0x20, 0, 2,
-+	       imx_clk_mux(dev, "vpu_pll_ref_sel", base + 0x20, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_SYS3_PLL1_REF_SEL,
- 	       imx_clk_mux(dev, "sys3_pll_ref_sel", base + 0x48, 0, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_AUDIO_PLL1_REF_SEL,
--	       imx_clk_mux(dev, "audio_pll1_ref_sel", base + 0x0, 0, 2,
-+	       imx_clk_mux(dev, "audio_pll1_ref_sel", base + 0x0, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_AUDIO_PLL2_REF_SEL,
--	       imx_clk_mux(dev, "audio_pll2_ref_sel", base + 0x8, 0, 2,
-+	       imx_clk_mux(dev, "audio_pll2_ref_sel", base + 0x8, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_VIDEO_PLL1_REF_SEL,
--	       imx_clk_mux(dev, "video_pll1_ref_sel", base + 0x10, 0, 2,
-+	       imx_clk_mux(dev, "video_pll1_ref_sel", base + 0x10, 16, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MQ_VIDEO2_PLL1_REF_SEL,
- 	       imx_clk_mux(dev, "video_pll2_ref_sel", base + 0x54, 0, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 
-+	clk_dm(IMX8MQ_ARM_PLL_REF_DIV,
-+	       imx_clk_divider(dev, "arm_pll_ref_div", "arm_pll_ref_sel", base + 0x28, 5, 6));
-+	clk_dm(IMX8MQ_GPU_PLL_REF_DIV,
-+	       imx_clk_divider(dev, "gpu_pll_ref_div", "gpu_pll_ref_sel", base + 0x18, 5, 6));
-+	clk_dm(IMX8MQ_VPU_PLL_REF_DIV,
-+	       imx_clk_divider(dev, "vpu_pll_ref_div", "vpu_pll_ref_sel", base + 0x20, 5, 6));
-+	clk_dm(IMX8MQ_AUDIO_PLL1_REF_DIV,
-+	       imx_clk_divider(dev, "audio_pll1_ref_div", "audio_pll1_ref_sel", base + 0x0, 5, 6));
-+	clk_dm(IMX8MQ_AUDIO_PLL2_REF_DIV,
-+	       imx_clk_divider(dev, "audio_pll2_ref_div", "audio_pll2_ref_sel", base + 0x8, 5, 6));
-+	clk_dm(IMX8MQ_VIDEO_PLL1_REF_DIV,
-+	       imx_clk_divider(dev, "video_pll1_ref_div", "video_pll1_ref_sel", base + 0x10, 5, 6));
-+
- 	clk_dm(IMX8MQ_ARM_PLL,
--	       imx_clk_pll14xx("arm_pll", "arm_pll_ref_sel",
--			       base + 0x28, &imx_1416x_pll));
-+	       imx_clk_frac_pll("arm_pll", "arm_pll_ref_div",
-+				base + 0x28));
- 	clk_dm(IMX8MQ_GPU_PLL,
--	       imx_clk_pll14xx("gpu_pll", "gpu_pll_ref_sel",
--			       base + 0x18, &imx_1416x_pll));
-+	       imx_clk_frac_pll("gpu_pll", "gpu_pll_ref_div",
-+				base + 0x18));
- 	clk_dm(IMX8MQ_VPU_PLL,
--	       imx_clk_pll14xx("vpu_pll", "vpu_pll_ref_sel",
--			       base + 0x20, &imx_1416x_pll));
-+	       imx_clk_frac_pll("vpu_pll", "vpu_pll_ref_div",
-+				base + 0x20));
- 
- 	clk_dm(IMX8MQ_SYS1_PLL1,
- 	       clk_register_fixed_rate(NULL, "sys1_pll", 800000000));
-@@ -196,14 +209,14 @@ static int imx8mq_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MQ_SYS2_PLL1,
- 	       clk_register_fixed_rate(NULL, "sys3_pll", 1000000000));
- 	clk_dm(IMX8MQ_AUDIO_PLL1,
--	       imx_clk_pll14xx("audio_pll1", "audio_pll1_ref_sel",
--			       base + 0x0, &imx_1443x_pll));
-+	       imx_clk_frac_pll("audio_pll1", "audio_pll1_ref_div",
-+				base + 0x0));
- 	clk_dm(IMX8MQ_AUDIO_PLL2,
--	       imx_clk_pll14xx("audio_pll2", "audio_pll2_ref_sel",
--			       base + 0x8, &imx_1443x_pll));
-+	       imx_clk_frac_pll("audio_pll2", "audio_pll2_ref_div",
-+				base + 0x8));
- 	clk_dm(IMX8MQ_VIDEO_PLL1,
--	       imx_clk_pll14xx("video_pll1", "video_pll1_ref_sel",
--			       base + 0x10, &imx_1443x_pll));
-+	       imx_clk_frac_pll("video_pll1", "video_pll1_ref_div",
-+				base + 0x10));
- 
- 	/* PLL bypass out */
- 	clk_dm(IMX8MQ_ARM_PLL_BYPASS,
-@@ -356,8 +369,8 @@ static int imx8mq_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MQ_CLK_A53_DIV,
- 	       imx_clk_divider2(dev, "arm_a53_div", "arm_a53_cg",
- 				base + 0x8000, 0, 3));
--	clk_dm(IMX8MQ_CLK_A53_CORE,
--	       imx_clk_mux2(dev, "arm_a53_src", base + 0x9880, 24, 1,
-+	clk_dm(IMX8MQ_CLK_ARM,
-+	       imx_clk_mux2(dev, "arm_a53_core", base + 0x9880, 24, 1,
- 			    imx8mq_a53_core_sels, ARRAY_SIZE(imx8mq_a53_core_sels)));
- 
- 	clk_dm(IMX8MQ_CLK_AHB,
-diff --git a/drivers/clk/imx/clk.h b/drivers/clk/imx/clk.h
-index b53f35df84f..6aef72c0212 100644
---- a/drivers/clk/imx/clk.h
-+++ b/drivers/clk/imx/clk.h
-@@ -78,6 +78,9 @@ struct clk *imx_clk_pll14xx(const char *name, const char *parent_name,
- 			    void __iomem *base,
- 			    const struct imx_pll14xx_clk *pll_clk);
- 
-+struct clk *imx_clk_frac_pll(const char *name, const char *parent_name,
-+			     void __iomem *base);
-+
- struct clk *clk_register_gate2(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		void __iomem *reg, u8 bit_idx, u8 cgr_val,
--- 
-2.34.1
+Inside kernel, we do not need a conversion because all the BTRFS_FT* 
+flags matches the FT_* inside kernel.
+
+In progs we have btrfs_type_to_imode() to do the conversion to S_IF* flags.
+
+Thus I'd prefer a convertor, even if there is only a single user.
+
+> 
+>> [...]
+>>> +
+>>> +             *offset = key.offset + 1;
+>>> +             type = btrfs_dir_type(path.nodes[0], di);
+>>> +
+>>> +             /* XATTRs share the key space but are not directory entries. */
+>>> +             if (type == BTRFS_FT_XATTR) {
+>>
+>> This doesn't looks correct again.
+>>
+>> XATTR has their own keys, they should not show up among DIR_INDEX keys.
+
+Firstly, xattr is per-inode, not per-dentry.
+Thus I doubt if you can hit an XATTR type inside a DIR_INDEX.
+
+The easily way to test the theory is just create a simple XATTR for 
+compression:
+
+  # mkfs.btrfs -f test.img
+  # mount test.img /mnt/btrfs
+  # touch /mnt/btrfs/foobar
+  # btrfs prop set /mnt/btrfs/foobar compression zstd
+  # sync
+  # btrfs ins dump-tree -t 5 test.img
+  [...]
+	item 6 key (257 XATTR_ITEM 550297449) itemoff 15812 itemsize 51
+		location key (0 UNKNOWN.0 0) type XATTR
+		transid 10 data_len 4 name_len 17
+		name: btrfs.compression
+		data zstd
+
+You can see that XATTR_ITEM key is for that inode 257, not for the 
+parent directory inode (256).
+
+
+Secondly, if you check the tree-checker.c from the kernel, 
+check_dir_item() will reject an XATTR dir type if the key is not 
+XATTR_ITEM_KEY.
+
+So even if you really find a btrfs with XATTR dir type but with 
+DIR_INDEX key, btrfs will refuse to reject that tree block.
+
+Thanks,
+Qu
+
+> 
+> Let me double check and adjust accordingly.
+> 
+> Thanks a lot for your review!
+> 
+> Best regards,
+> Alexey
 
