@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97046C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 17:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC78DC43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 17:42:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D81D684A04;
-	Sat, 27 Jun 2026 19:41:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18D4084A0E;
+	Sat, 27 Jun 2026 19:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="S/ftxp+K";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="jAWZ5a1g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B9588484C; Sat, 27 Jun 2026 16:44:57 +0200 (CEST)
+ id 4063F841C2; Sat, 27 Jun 2026 16:44:59 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D9F4F8460E
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 16:44:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3CF59842FC
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 16:44:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A32221F60;
- Sat, 27 Jun 2026 07:44:49 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.95.169])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3F64A3F905;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 01B451F60;
  Sat, 27 Jun 2026 07:44:52 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.95.169])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A26943F905;
+ Sat, 27 Jun 2026 07:44:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1782571494; bh=l+pn6sm3nzzlDihYq8j+HCKF6nO1IhlQgB27kyuBu1o=;
+ t=1782571496; bh=DPaYO77GmWfUXJD/Y9BExqflCGi9dc3be56e0rggDMc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=S/ftxp+KcGN+regsK3M/3dahW5dBUyHP2j6v1ra+/1OnhN4rH8CPqR9jR/q0oAr67
- zjK0B7Vl9IXkq5u3VXnXvkeYk/JwKWD9EmG1qzD0XAMeK5ytRTQM5uGfWDhV/+VU99
- AQAwtrqI5gM5yUAV8xtgfhIW7NTngTrENeZHPv2A=
+ b=jAWZ5a1gn4cbcYA461kwTkflJYt384rnuJzjpX/a9sIVTYI1CQkoXJWi6wJy7lGDu
+ FEr/Lr9cLxG5BVaRqpRlGS9UkqIDkKgO3VPdjNixiuF5VXwYEOC9rzauCuCWY6k+uX
+ Y4jMMBd+Q86QHs8vSWBKy+lId/VX99cQSzHbeCrw=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -44,10 +44,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
  Simon Glass <sjg@chromium.org>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v3 09/10] doc: arm64: document FF-A runtime path for EFI
- variables
-Date: Sat, 27 Jun 2026 15:44:20 +0100
-Message-Id: <20260627144421.2067410-10-harsimransingh.tungal@arm.com>
+Subject: [PATCH v3 10/10] doc: bootefi: note two-phase runtime variables
+ selftest
+Date: Sat, 27 Jun 2026 15:44:21 +0100
+Message-Id: <20260627144421.2067410-11-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
 References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
@@ -70,174 +70,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The arm64 FF-A documentation still said EFI runtime support was a
-future development, so readers had no description of the current FF-A
-runtime transport or how EFI runtime variable services use it.
+The bootefi documentation did not describe how to run the
+runtime-variable selftest, so users had no guidance on its reboot
+requirements or on which flow applies to their configuration.
 
-Document the FF-A runtime transport, the shared MM communication path,
-and the EFI runtime variable flow on arm64. Also clarify that the
-armffa command is boot-time only and point readers to the architecture
-documentation for EFI runtime variable services over FF-A.
+Document the runtime-variable selftest flow in bootefi.rst. Describe
+the non-volatile path, note the single-run
+CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
+runtime-variable selftest with efi_selftest.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 ---
- doc/arch/arm64.ffa.rst   | 88 ++++++++++++++++++++++++++++++++++++----
- doc/usage/cmd/armffa.rst | 11 +++++
- 2 files changed, 92 insertions(+), 7 deletions(-)
+ doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-index f966f8ba6af..145bb70abce 100644
---- a/doc/arch/arm64.ffa.rst
-+++ b/doc/arch/arm64.ffa.rst
-@@ -15,10 +15,10 @@ application in S-EL0, or a Trusted OS in S-EL1.
- The U-Boot FF-A support (the bus) implements the interfaces to communicate
- with partitions in the Secure world aka Secure partitions (SPs).
+diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
+index 7c5448586b7..0a7800b93ce 100644
+--- a/doc/usage/cmd/bootefi.rst
++++ b/doc/usage/cmd/bootefi.rst
+@@ -160,6 +160,37 @@ environment variable to match one of the listed identifiers
+ Some of the tests execute the ExitBootServices() UEFI boot service and will not
+ return to the command line but require a board reset.
  
--The FF-A support specifically focuses on communicating with SPs that
--isolate portions of EFI runtime services that must run in a protected
--environment which is inaccessible by the Host OS or Hypervisor.
--Examples of such services are set/get variables.
-+U-Boot's FF-A bus support exposes an optional transport that EFI runtime
-+services can use to communicate with Secure partitions. Through this
-+interface, EFI services (such as variable access) can request or exchange
-+data with the Secure world using FF-A.
- 
- The FF-A support uses the SMC ABIs defined by the FF-A specification to:
- 
-@@ -26,13 +26,13 @@ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
- - Access an SP's service through communication protocols
-   e.g. EFI MM communication protocol
- 
--At this stage of development only EFI boot-time services are supported.
--Runtime support will be added in future developments.
--
- The U-Boot FF-A support provides the following parts:
- 
- - A Uclass driver providing generic FF-A methods.
- - An Arm FF-A device driver providing Arm-specific methods and reusing the Uclass methods.
-+- An optional runtime FF-A transport (toggled via CONFIG_ARM_FFA_RT_MODE) that is
-+  resident after ExitBootServices() and enables EFI runtime variable services
-+  via FF-A helpers and a shared MM communication buffer.
- - A sandbox emulator for Arm FF-A, emulates the FF-A side of the Secure World and provides
-   FF-A ABIs inspection methods.
- - An FF-A sandbox device driver for FF-A communication with the emulated Secure World.
-@@ -69,6 +69,12 @@ CONFIG_ARM_FFA_TRANSPORT
-     When using an Arm 64-bit platform, the Arm FF-A driver will be used.
-     When using sandbox, the sandbox FF-A emulator and FF-A sandbox driver will be used.
- 
-+CONFIG_ARM_FFA_RT_MODE
-+    Enables the FF-A runtime transport. This option depends on
-+    CONFIG_ARM_FFA_TRANSPORT and CONFIG_EFI_LOADER, and is enabled by default.
-+    When enabled, a minimal set of FF-A operations remains available after
-+    ExitBootServices().
++When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
++*variables at runtime* completes within one *bootefi selftest* run, so
++it does not depend on preserving state across multiple runs. It still
++executes ExitBootServices(), so a board reset is required afterwards
++before returning to the command line.
 +
- FF-A ABIs under the hood
- ------------------------
- 
-@@ -158,6 +164,73 @@ they want to use (32-bit vs 64-bit). Selecting the protocol means using
- the 32-bit or 64-bit version of FFA_MSG_SEND_DIRECT_{REQ, RESP}.
- The calling convention between U-Boot and the secure world stays the same: SMC32.
- 
-+FF-A runtime support for EFI variables
-+--------------------------------------
++::
 +
-+U-Boot provides an FF-A runtime transport to keep a minimal set of FF-A operations
-+available after ExitBootServices(). This runtime transport is enabled with
-+CONFIG_ARM_FFA_RT_MODE. The runtime helpers and data are marked with
-+``__efi_runtime`` / ``__efi_runtime_data`` through the
-+``__ffa_runtime`` / ``__ffa_runtime_data`` aliases in
-+``include/arm_ffa_runtime.h``.
++    => setenv efi_selftest 'variables at runtime'
++    => bootefi selftest
 +
-+Runtime context is enabled at ExitBootServices(), and the following prerequisites
-+are prepared during FF-A bus probe:
++When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
++flow is split into *variables at runtime setup* and
++*variables at runtime verify*. Run the setup test once to create the
++runtime-accessible variable in non-volatile storage, reboot, then run
++the verify test to validate, append, and delete that variable.
++Both phases are on-request tests, so they only run when selected by
++``efi_selftest``.
 +
-+- The U-Boot FF-A endpoint ID is discovered at boot time with FFA_ID_GET and
-+  stored in the runtime private data.
-+- An ExitBootServices() event is registered by the FF-A runtime transport so
-+  the resident runtime context is enabled when EFI transitions to runtime.
++::
 +
-+At runtime, the driver model is no longer available. Runtime users should
-+use the helpers exported by ``include/arm_ffa_runtime.h``. In particular,
-+``ffa_runtime_context_ready()`` verifies that the resident runtime context
-+is available and ``ffa_sync_send_receive_runtime()`` issues direct FF-A
-+messages after ExitBootServices().
++    => setenv efi_selftest 'variables at runtime setup'
++    => bootefi selftest
 +
-+EFI variable services over FF-A
-+-------------------------------
++After reboot:
 +
-+When CONFIG_EFI_MM_COMM_TEE and CONFIG_ARM_FFA_TRANSPORT are enabled, U-Boot
-+routes EFI variable services to an MM Secure Partition (SP) over FF-A.
-+The MM SP is discovered at boot time using FFA_PARTITION_INFO_GET and its
-+partition ID is cached in runtime data.
++::
 +
-+The data path uses a shared MM communication buffer and a door-bell style
-+direct message:
++    => setenv efi_selftest 'variables at runtime verify'
++    => bootefi selftest
 +
-+- The communication buffer is located at CONFIG_FFA_SHARED_MM_BUF_ADDR and
-+  sized by CONFIG_FFA_SHARED_MM_BUF_SIZE.
-+- CONFIG_FFA_SHARED_MM_BUF_OFFSET is sent in the FF-A direct message payload
-+  to indicate where the data begins.
-+
-+After ExitBootServices(), EFI SetVariable()/GetVariable() call paths use the
-+runtime MM communication path:
-+
-+- A pre-reserved shared buffer is used for the MM communication payload.
-+- The cached MM SP partition ID and FF-A runtime transport are used to
-+  dispatch direct FF-A messages to the Secure world after
-+  ExitBootServices().
-+
-+Configuration notes
-+-------------------
-+
-+Enable FF-A transport and MM communication:
-+
-+- CONFIG_ARM_FFA_TRANSPORT
-+- CONFIG_ARM_FFA_RT_MODE
-+- CONFIG_EFI_MM_COMM_TEE
-+
-+CONFIG_ARM_FFA_RT_MODE is enabled by default. It turns on MM communication for
-+EFI runtime and may be disabled when EFI services over FF-A are not required
-+after ExitBootServices().
-+
-+Configure the shared MM communication buffer:
-+
-+- CONFIG_FFA_SHARED_MM_BUF_ADDR
-+- CONFIG_FFA_SHARED_MM_BUF_SIZE
-+- CONFIG_FFA_SHARED_MM_BUF_OFFSET
-+
- Requirements for user drivers
- -----------------------------
- 
-@@ -256,6 +329,7 @@ For example, when using FF-A with Corstone-1000, debug logs enabled, the output
- Contributors
- ------------
-    * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+   * Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
- 
- .. _`FF-A v1.0 specification`: https://documentation-service.arm.com/static/5fb7e8a6ca04df4095c1d65e
- .. _`SMC Calling Convention v1.2 specification`: https://documentation-service.arm.com/static/5f8edaeff86e16515cdbe4c6
-diff --git a/doc/usage/cmd/armffa.rst b/doc/usage/cmd/armffa.rst
-index dbe4d5bc842..64571d615cb 100644
---- a/doc/usage/cmd/armffa.rst
-+++ b/doc/usage/cmd/armffa.rst
-@@ -39,6 +39,17 @@ The command also allows to gather secure partitions information and ping these
- 
- The command is also helpful in testing the communication with secure partitions.
- 
-+Notes
-+-----
-+
-+armffa is a boot-time test command. It relies on the FF-A driver model device
-+(UCLASS_FFA) and is not part of the resident FF-A runtime transport used after
-+ExitBootServices().
-+
-+armffa does not provide EFI variable operations. For more information about
-+the FF-A runtime transport and EFI runtime variable services over FF-A please see
-+:doc:`../../arch/arm64.ffa`.
-+
- Example
- -------
+ Configuration
+ -------------
  
 -- 
 2.34.1
