@@ -4,104 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E310C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 12:26:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDEE7C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 13:46:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C71C5841C2;
-	Sat, 27 Jun 2026 14:26:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1363A83FEE;
+	Sat, 27 Jun 2026 15:46:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ze0eK+px";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ktv/xHwX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2315842FC; Sat, 27 Jun 2026 14:26:39 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 1E9368484C; Sat, 27 Jun 2026 14:27:43 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFEC7805D7
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 14:26:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32051805D7
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 14:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-39ad400e762so10502131fa.1
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 05:26:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782563197; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0b2c79so1842677a12.2
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 05:27:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782563261; cv=none;
  d=google.com; s=arc-20260327;
- b=YYkvJbHaKzaujYdIEQBLK3DM2IJKOYjL86qU4yVTl2O2Cf+6OHOA5SRCa5cEqT8qb2
- NRHOXFs/5tpTIm7benBMVdmPBE16V43qsgU5D2SVjvGrSc498IEPuyRJFssyKcu78lyn
- MFVqJ+VJ6o7xLbZEMx/KiGtfJyuh+Qx0u7w0cm0BctYSRY7GFej3ZKFPCMB9b0gM5Add
- QBR+bjhXSglaCPuKSE9EgG3FYz4nj5Y6BKO6umkertFc4628ARP/KNOoYDuMIM8Th+tT
- GMuDL8peqw/UhB97KO6YQenvWEL3oYZyW6x6t6IFSQPFu2e1gu3GdcmSpo4t5Y17yyVF
- 85og==
+ b=TErXM5u0UibfAOI271UACt+am0G/wV9vUsOukk0TrGVg8LadZhV4VwUr7vM1UXJ5p3
+ aS7VeG+GvRzpZ/d72a+z2K0QtLnC2tG+vd1yrned7mfph+GQfTh42lho7x+TsCi18gIF
+ Kj9HRK+mHNu671/ctIJ5nzi1fg+T1g7sku940uCnVoSn/DfzII0037Mfw2+LY38eAMez
+ kkp7+ySU7HT4Fj0tKjCgTjcSchIGs4Kn4bZYu2GAZxR6V3XyFGssAZ74giScJySje/ZQ
+ ucGjk8ZO3h8Fl6imizeEBkSVRbZc+MCQIHcOd8a0uYtnkRuqlwY9qG3TK82DPJnLSbSU
+ 3D6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
- fh=x7e/pGv4TKP8EOTomru4TrANzH0f3Qjdg/hrZNHxSQg=;
- b=M9VaRdD2aMexxpt8OndwvOHir8qmeQjT1SAcG9Ukk72w5uq5WqGMP4s4THl/5hPFCC
- qAiPNXzuvkWHiHIzkMLFnwdcqfg/MQneTGbj8hrUXEAaCtx7GdDxGMBU4UzlRfpCzGEO
- F8bV93JIqraLATsLVZZKNTbrcMfMSdXvFEKZac4jlYQkIrYY+O3cGvG9WgHG7Ckp0aSZ
- Xo0zDhOAsWkuZG2vo6l/G6ltC3hDVybIwDdjiCCQ7G0f3vyM98+KDpZZZhi1GVwhdWkN
- mjbePu+l5See3+4hcpnPKoF1Ovm1ogOgmMYFv5YVnn35FPVPTqzgBaGw1JT6+iuPGmGt
- mcZg==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ShnY0+k3ALXsEWrfrVXMCRvwQqYnshw7E9WSiaSvZ1g=;
+ fh=Po3DImcceHqPaJLma+rOqACX/uP28oNuAFdBw/bIyUo=;
+ b=ilkCPGWBVZan2X7OHMuexWj6TN5YOAQJrJmKdk+O/11M6S31zS5FEmXNxxSsQGHivC
+ sCLqfo0+bq/r40rDf944nfsKUaCmjv7sjh/Rrih18mjdGLNsPaPze1HaDB+hexRDuohN
+ J30idJDvvvr+hsbFBc9OmJ/Yzq+NRSSp6n4FEwtr8CQ1Kzgb4q7kJGwX1ujDjGvmTJNz
+ 8eegUzyjZ/QkayF4SivsYxvXrWj6qpy/Rv7nqNyfFbwbHDVqGw2g90jNViGq0082GW+A
+ Picq84a9MzzZmlUOL616RCH0mWpK/tu6vJnM9WsUMztIyB6/x4+PqTKYbxyDGJBNmDsw
+ pz3w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782563197; x=1783167997; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
- b=Ze0eK+pxTuRjmt9OdzK/WrAPrKV335Ck+BYIN9JT2zkQHnYr1u4kHQY6VdUMPGgUGI
- wo6Rl9JPGte00g95VVVs2imJlHiU/ubP79DbmzzeizQZdHm6ec7Vvp5lSXW2AFRKlerR
- vUNYyPYovoiSB92PQQRLgwlrHDej9FoZtz8taxpav0aE4A6mX5/z9P0wWQIkkN/In2Su
- VQLSpmz5hFkgoVOiCtEOaa1vwffHkKZszq/oQPSBt/pyB9SOjtj4H9bP8w5JVML/hQLB
- VfLZQUiaj2NUrG6/qIKIDaWelumLzyTjE7SqhBR5qMagWyDg9U6qpR5UePp8BgjRX+80
- LgHA==
+ d=chromium.org; s=google; t=1782563261; x=1783168061; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ShnY0+k3ALXsEWrfrVXMCRvwQqYnshw7E9WSiaSvZ1g=;
+ b=ktv/xHwXcSFQyKfXzYxN7wo/1MqGu7vAHs/Q1Wks5ho0PNR5kBbIxEwaDcfasUkFW2
+ U2mAmf2vyfWRGtb2TY5RLSaUpJ1drqTOu7qcbD5rK/OXvbQx2SlTiEdILm7LiIn98O8F
+ WF/N9uVz3Fqg6Ee6+KK0QTuuZHQ4ik8kZUoMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782563197; x=1783167997;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
- b=CjEeFneyD7PhntPvbg4h2ZXgFSKdvbGndrcEln7p4+x8m0WrG5GW0BK+YFUBzVSs/b
- h8+FA4KqgbOKBKJF0izt2ZSjlU5AWuhJWj6+Ss2KDiIu61t33Hrj1My6HfmVYNJPS4EM
- EhTi6OhlRTTFIV0tEi2r+Xv1YHzgel3itN7+XUefuJn4qYiF4oJ4IbjOzVDHRF/FoL1C
- oSGZNg9h8+Er51YD1W08w/P1Ml1qhNgljUWGuYxF+dUITtt6nBrdPQguZWzwtxoAkqAz
- rkd/LhLHkO+pyAAN5uSz4XpIqO65QHZbeNqaiW/w3i/Lz1tSrvY3fd1S37h91tc5+pZ7
- 880Q==
+ d=1e100.net; s=20251104; t=1782563261; x=1783168061;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ShnY0+k3ALXsEWrfrVXMCRvwQqYnshw7E9WSiaSvZ1g=;
+ b=Ab7wzbq12igzcmOWqGRAOlMlFKBE63tU9dLRQGYkudGRZDYUw74+QuMlLI3IO2hUz9
+ T4s2O4evyE7cDKTYWAS3vlMLZ9I7bZ9uUwfCMln/dh7xPXw/tpaD+s8N/gP5AbJEkULZ
+ QM19MR6LGL7/cqOyb8sPcC4S96DWLiZLXuE+4Q5kCDPV6Y73xd6Y78BjgsyPnrHJZpcm
+ 8MYZ6Mc4vWoq316g3g6gu586JaXaRuzstPz9UdhRJr2XXHaNUHNMQyX8ENFWoEO8EcJY
+ l6m44vfqLAUezFRpAz8M1LS6b4lWn2W6kB8fn2ffai2p2+N18RZUlq/29NFKz1zirre9
+ ujvA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpK75jZuiMAyh21xF2PNjcIIJ4XBYptioU5mTf44E6eJmh5n4JF++GS1sCiQ/liD9ZPojX0UeA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyweEH+fPyw8Nny6dxnmci0uu3n8m2bk3XswFK6cJIKtYIHuLi4
- QtbBvBUP6/b+aNi0YUubamQ7EiXzcuESbKhEL5ZDezO9DMlSTFO66O908FUJiO8ewuyGCA5RM12
- yzXZTNM/xYHMXLeGAszPoZ8OfiftHcYRISQ==
-X-Gm-Gg: AfdE7cl4MLlHTmHAuAF/zjdaY0dBuKEosQ2ZRp389EozQyAzbAMOcpoOorPaZQDCVxr
- c1VH0zCdSO0z7zDomuVXlCPQSyozuOhttkzwq7FjarA4tAC9BTB2N8Im8hcPisUgz5Itdleh/zN
- iOsW84h/43J6oeH4iEJnvWcPfmnkN1ASOH6055qIdLdCSihlNaNWZp4HU0cjKraqL6J0mmzTUAT
- tU5keTuTKa2AC0wRVpeoUoN2zqZoWZnyEQovlDxw49DAxwQ+tz3EhyDiglT6ar3thhNo31JzTSE
- Pqp40o3VnAdopHRm4aZ8MrN6OHO2RvezEUSMJiT93jkxbBn/4MmdjUThiZPskw==
-X-Received: by 2002:a2e:8045:0:b0:393:e571:277a with SMTP id
- 38308e7fff4ca-39acb63c1b4mr20609351fa.9.1782563196710; Sat, 27 Jun 2026
- 05:26:36 -0700 (PDT)
+ AHgh+RoQINggMKZURsGqs9wfdtfnSxH9jApW70K4elvhp9fd+WkuaWdlXvHdNs+k1nMDmyu75nBnumM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJG15Een7WrolXOd/z6WpkxizL4mgggo4+7CAwO/13QI4FP6gu
+ /9EBZtRuO6nv+j3n3Y7KVYOWCzu/sExpg+Jrh7W8/ZMcDPGyF0hfz0H+SmG03ES6t3s9XQK9vDs
+ mNkBlDT5f58vCoeqAlj4OYNEIWPFjnvpLHpUW6x92
+X-Gm-Gg: AfdE7cnfEZJBol3Fugpm4vWLJdf9F4TMmYiW7I2XSMhOq1me827wsk+NAaTHi68u2gI
+ I65Qfit6yhakHdypnNZhtQPn3Kb/F3/8e2VkxoHzuN0J5hcU5mbsZO2WMfUkGR0aH2GWzCs8snk
+ +rlb8N3R6wS2cwhcG1rFOu1li9fOnB3LA7Yokfq82atAgZPuk6eLmaThh4yfshg6+vFKuTa5wB8
+ NHMn8o3k2kuj1AWeG4NGprFgN5LeTdHvVEW2CxmD9o3eqtMOdgzUvSISLIkko8JpaGZ0yUcCA==
+X-Received: by 2002:a05:6402:5207:b0:696:57f7:a129 with SMTP id
+ 4fb4d7f45d1cf-69810a18095mr3848472a12.2.1782563260688; Sat, 27 Jun 2026
+ 05:27:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260627013852.3002838-1-festevam@gmail.com>
- <20260627013852.3002838-2-festevam@gmail.com>
- <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
-In-Reply-To: <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 27 Jun 2026 09:26:24 -0300
-X-Gm-Features: AVVi8Cc9fXzRdJSkWijZE_Cj8LViomUy0-R3ufAuZZt4MTYZhZ5DW7bpgL0ez-g
-Message-ID: <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20260626
-To: Marek Vasut <marex@nabladev.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, alice.guo@nxp.com, 
- ye.li@oss.nxp.com, peng.fan@oss.nxp.com
+References: <20260623064804.3988799-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260623064804.3988799-3-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260623064804.3988799-3-varadarajan.narayanan@oss.qualcomm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 27 Jun 2026 13:27:27 +0100
+X-Gm-Features: AVVi8Ccj5daxHU0n5FK42ECX-0oofp5kgEQ04A0GP5RO8oHIH8di8By1EIJNYA0
+Message-ID: <CAFLszTjPf_zmu8oVb2g_ebgdO=joBvS2K5VY9T2gxxfmF+kg-w@mail.gmail.com>
+Subject: Re: [PATCH v6 02/11] clk/qcom: add initial clock driver for ipq5210
+To: varadarajan.narayanan@oss.qualcomm.com
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
+ casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, 
+ tien.fong.chee@altera.com, anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, 
+ tingting.meng@altera.com, alice.guo@nxp.com, marek.vasut+renesas@mailbox.org, 
+ quentin.schulz@cherry.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
+ andre.przywara@arm.com, afd@ti.com, h-salunke@ti.com, alchark@gmail.com, 
+ mkorpershoek@kernel.org, dinesh.maniyam@altera.com, luca.weiss@fairphone.com, 
+ balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com, 
+ aswin.murugan@oss.qualcomm.com, ycliang@andestech.com, n-francis@ti.com, 
+ mateuslima.ti@gmail.com, jamie.gibbons@microchip.com, 
+ david.wronek@mainlining.org, james.hilliard1@gmail.com, 
+ philip.molloy@analog.com, ravi@prevas.dk, sughosh.ganu@arm.com, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 27 Jun 2026 15:46:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,16 +123,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 27, 2026 at 9:18=E2=80=AFAM Marek Vasut <marex@nabladev.com> wr=
-ote:
+On 2026-06-23T06:47:53, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
+> clk/qcom: add initial clock driver for ipq5210
 >
-> On 6/27/26 3:38 AM, Fabio Estevam wrote:
+> Add initial set of clocks and resets for enabling U-Boot on ipq5210
+> based RDP platforms.
 >
-> Hello all,
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >
-> >        mx6: ddr: Subtract half a cycle instead of three quarters of a c=
-ycle after DQS gating calibration
-> I am not sure whether this one should be really in master, I would like
-> to give people time to really look at it.
+> drivers/clk/qcom/Kconfig         |  8 ++++
+>  drivers/clk/qcom/Makefile        |  1 +
+>  drivers/clk/qcom/clock-ipq5210.c | 98 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 107 insertions(+)
 
-Ok, I'll send another PR wth this one removed.
+Reviewed-by: Simon Glass <sjg@chromium.org>
