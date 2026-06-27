@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F853C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 13:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1913C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 14:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D335C84873;
-	Sat, 27 Jun 2026 15:46:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A70B83FEE;
+	Sat, 27 Jun 2026 16:20:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gADJOFi6";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GCsc39Bv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BDD8841C2; Sat, 27 Jun 2026 15:18:54 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 8D24E841C2; Sat, 27 Jun 2026 16:20:58 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E491805D7
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 15:18:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mani@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id B488B6001A;
- Sat, 27 Jun 2026 13:18:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 593461F000E9;
- Sat, 27 Jun 2026 13:18:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782566330;
- bh=xMUSbvpv6BQqEscOYH7NNANJ1j/nOS9Y9hQjghupvmY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=gADJOFi6pfzo1wWJFZh21GpUsL4l6UY/KI75eepRUOtx851bLD0+o0TpGplx3rESh
- 9c/neIhOk7WErCU5L17gszlUuWTXNWd+pkvxyQxedQssZDKyI+0cZS03dqTcV8Vfba
- tJSKt3L6LuurBpYrOjyXPuhBTJa8uzAbyWRZnoUI9gBjCFhCziVGf1KSa/QkrwXzjL
- eJzKrj1UjZKP7xPrdhGGYSnr7cFKJ4XIIkf6b9bUri+V+ba/qcGiXd1gbVY/WdYoOP
- VaL4wxTawaNdrn9AJN8LmXTsWiQedYNQR/7Ef+BM5+qWXFpOiF7K3QqiTuR7VFEHkN
- eMOc6oSaDPtsg==
-Date: Sat, 27 Jun 2026 18:48:38 +0530
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- trini@konsulko.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: qcm6490_defconfig: Enable SCSI as the Fastboot
- flash block interface
-Message-ID: <5og33vkh3n4zbvrx6xh55n7d2l7iwnrsmiwtdtsgygu7kvjffu@cp2nwteziy5s>
-References: <20260619073400.387171-1-manivannan.sadhasivam@oss.qualcomm.com>
- <95fb2056-aa96-47db-bd58-3faa870071e2@oss.qualcomm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B15CA805D7
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 16:20:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D3220107B35; Sat, 27 Jun 2026 16:20:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782570055;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=ueP2QgbNfvJSRL6eO8C+4yFIkDBBAbjKKpeGncBXWLc=;
+ b=GCsc39BvDcR5aYedEOigS1u06C4ZrniHGSWt0NI4K7H5+1LCQ5AvaDYL1zdX03PD56DCGP
+ KAAz9KFO6ZLtHyvqDd+WjRnGnmeR4PIP9GgvYYTbqbGn7MW7jEMFvfsmUk6Es6FYogFzVX
+ G+IPjCbht5xDHVKwjZ6ZBudlnJzGFi1g8XyZwGmgx4/Exe4mCL5hx4SNqKzaARnzgm5fIA
+ VuTlZldtGC2GF7JH55C/Am30iz2RZv0JWvQ6QIeBfsz6pJ3iFgNxlMRz8DCFvwEfjijTrZ
+ 3iuWc45QPu5TViszdELzra5P/3qWo4F2PKdwHANL9XC8l+I0B8lGMedhcnVu1Q==
+Message-ID: <df641e51-4141-4402-a57e-9b6ec5be2861@nabladev.com>
+Date: Sat, 27 Jun 2026 16:20:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20260626
+To: Fabio Estevam <festevam@gmail.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, alice.guo@nxp.com,
+ ye.li@oss.nxp.com, peng.fan@oss.nxp.com
+References: <20260627013852.3002838-1-festevam@gmail.com>
+ <20260627013852.3002838-2-festevam@gmail.com>
+ <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
+ <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <95fb2056-aa96-47db-bd58-3faa870071e2@oss.qualcomm.com>
-X-Mailman-Approved-At: Sat, 27 Jun 2026 15:46:26 +0200
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,43 +71,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 24, 2026 at 04:25:02PM +0530, Balaji Selvanathan wrote:
-> Hi Manivannan, Casey,
+On 6/27/26 2:26 PM, Fabio Estevam wrote:
+> On Sat, Jun 27, 2026 at 9:18 AM Marek Vasut <marex@nabladev.com> wrote:
+>>
+>> On 6/27/26 3:38 AM, Fabio Estevam wrote:
+>>
+>> Hello all,
+>>
+>>>         mx6: ddr: Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
+>> I am not sure whether this one should be really in master, I would like
+>> to give people time to really look at it.
 > 
-> On 6/19/2026 1:04 PM, Manivannan Sadhasivam wrote:
-> > qcom_defconfig uses EMMC as the flash interface for Fasboot, but QCS6490
-> > RB3Gen2 has no on-board eMMC. So override the config to use UFS as the
-> > flash medium by selecting 'scsi' interface.
-> > 
-> > This enables flashing the images over Fastboot on this board.
-> > 
-> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> > ---
-> >   configs/qcm6490_defconfig | 4 ++++
-> >   1 file changed, 4 insertions(+)
-> > 
-> > diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> > index b088367f86c..d599e7611c1 100644
-> > --- a/configs/qcm6490_defconfig
-> > +++ b/configs/qcm6490_defconfig
-> > @@ -16,3 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
-> >   CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
-> >   CONFIG_PHY_QCOM_QMP_COMBO=y
-> > +
-> > +CONFIG_FASTBOOT_FLASH_BLOCK=y
-> > +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
-> > +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=0
-> 
-> Similar patch is submitted and under review: https://lore.kernel.org/u-boot/20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com/ <https://lore.kernel.org/u-boot/20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com/>
-> 
-> Since most of the Dragonwing boards has UFS as default, we wanted to change
-> default to UFS in qcom_defconfig itself and then for eMMC boards, we can
-> modify in their board specific defconfigs.
-> 
+> Ok, I'll send another PR wth this one removed.
 
-I don't have any issues. It is upto Casey to decide.
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+Thank you !
