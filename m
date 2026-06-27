@@ -4,106 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5A9C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 18:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69EC2C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 20:10:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA195841C2;
-	Sat, 27 Jun 2026 20:51:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B6AA83FEE;
+	Sat, 27 Jun 2026 22:10:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y9d+Odms";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oTYCSApg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A790D842FC; Sat, 27 Jun 2026 20:51:21 +0200 (CEST)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B486D841C2; Sat, 27 Jun 2026 22:10:18 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A44B83FEE
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 20:51:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C57A80398
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 22:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-664a09bc459so1844487d50.1
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 11:51:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782586277; cv=none;
- d=google.com; s=arc-20260327;
- b=crVu7KFKm+VirW2r1YtgJ0Fw3+mKDWc9ofyaG+dh6HZLP4xgruKyCt/UR+ywyWDRtF
- 0iJe6hew1MifD35yFTDBQMBlJB2W34ZV3rojT3glpVOd+O3WkjEBKUYUujoNwwK6qQUb
- ilXkhtoNrDzaGUCGw2OtsMjl/cfE6h+AqUcgGkSay38ualbSGli0mROcHjSMapX8xhAH
- W2cdtKy4h4BTqbKb/CJgHA0zFsfUPriH9xSOVpY7grLSo8TZEfI1r1XPvez7opu8VPhY
- rONT7KXErY98VHhCIai0S008hPUWTMzcsGiGzTOdZnE9N5anczOcCuZKnBR49ZSuvCFk
- HU7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=u9XvXIhligjR/ahcRSMTGfUNeMOby87FzeVyBN4FK2k=;
- fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
- b=Vz0ro9gQ5B8U8c6uJscLOrljSnn/BQrBgeRLotXzeR8WbDohUnt0e40y4wvXKnenh9
- Yxiyz232AcPmg/kvD4WumXJDvI93ZwGkbbLf6DTTYso3N3nT4AKNkKDeA4yIo1XB1wWA
- nE0J21qhsilgIn9hgPmJtihJRkrEHD2OV5tP4DJV9t0VW8G85ZQe2I5ZJ0/oj6KIGF38
- ohGF4nqqcITnj+zEm3OUvLbWmMizq7ICj3bHEbFbpQSz1XPRBqHJsUf/eF6hBnlCYFZ4
- hlTsmmtK3vArv2NJaoE+rnFlXpnKXi88ZF9DrMev30flJEyJ6wkHHwgjvAdDKV4y7uhO
- py7A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782586277; x=1783191077; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u9XvXIhligjR/ahcRSMTGfUNeMOby87FzeVyBN4FK2k=;
- b=y9d+Odms9/Cd2K0CElwgIoWgOnvpOA40ZVn4ACbIOWABBtffOOIymUFZXxG1i14Arh
- CKqTR7suWwlihCeN1w0LcaVsFyY+eviSjJenUqAjzOhgAozVV1V43MZPdtvq++I7c4O/
- ib7SLCEPKPs4HbDgvPIDGJ+zZ9Ve4GBF17omfqRCRqb45OkBpKIhiFUtqF45kvtVhNu3
- 9Tfzjpr9bUym0yBQgXX2aPpLA2+AXanNPcRL/4tcx7B+DuxmqMS1HrpxhxzLpl3CWwvK
- 3d6SdXdpzwYA2PCWnL2We8R9W4ZRzchdq0+okNXZaWS2oAduPlnxngQJp/fA+vbXjcK9
- 7STg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782586277; x=1783191077;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u9XvXIhligjR/ahcRSMTGfUNeMOby87FzeVyBN4FK2k=;
- b=T45tvb1kqWrnA9qlvMMqrUVHGHyyOHPCGVWrR3QY+ZwdIA0c0qtqMHwExuM5OHXoYG
- Op1N3twPatd+DVI9UStdAOGQOo+YrkqtYHVJoyAoH0fRHT+jPyS9+Qyt2a3JlV+ALE+y
- edc+IV88WtIr+zm5MNYICSlYNdIn3GLXzyk87oNg1DFqnjRZQ3ge6oYR2nxhCLfm9/IJ
- CFUegwXalOl5KzRj9cPoUNwbrhr/rUhlVYrVZp11SyVaFHu3icqbAbevd3RGZ1kBelRg
- MD1KxBaD0Yw30WZ2JGPn3OxYQmWniRLyEc4R4GGxwLeJLpA609bPmf7mFeR4zlHkQvmm
- 3jAA==
-X-Gm-Message-State: AOJu0Yy9rg/mZrJ7jxb0j8VsapG7AR7eAAbq4A0y+djQ3HhGkMRowQpW
- gCC0C81t0qnJ7IAX+n66iqMyZ5hcBd3acNgzeIxP1d8qtUTPtUhrNH8QBvGXoxepJQ+61qksEnq
- tWkq05fR2LHTtHhI1WLVz3FV00s2u5w25g2EQzGW41g==
-X-Gm-Gg: AfdE7cmwzD9jhdZk2F/xKLz4XO3kzyd64yJUSkM631iBL592NE09L9J201H2Ceqj2RR
- XKof02o5a1j2uxjc86EzJHMQxrIVOAwCrlzP0wkIkWiQ1WabOjBvgfm4CFVhNW5gOZ3YKb6xs7I
- 1RJg8T2RzylIa/OfZQ7t2HNkSw0k4OMpPHY0ey+lEQgEPTODdKKDbE9EaofMVYgnGFNV3gh0isz
- p9G/yEhTwa1eO0FMBjsR19cF5FZY9wVyrD9CKoTDeR3tOzLgQwbdEGIjiPjbcvGqqXmPpoh1I4l
- 0WR/LTOVEwDnjdW+kXVS/NLb017j5NwNtgMcUyun+6W/9FKCaPg+CLbFPRqnKxbdcW8UMyosYvV
- jtPfnk8IQQHYkw6HCvn82+5xprwz4TDAGwuaCrGjNhkTz1aPCHcmXIXKkQ8DBrCPj9xE3HoaMbH
- DZCTRV+PmZOoGo3bfMEKaxL8UzXM9Rj5f6nkM3VA/y6p8Onjm6sMpWxQpHnO0gdgIW+u5AY5/eo
- bdUvvhrLpmF88/LXQ4crlYZoPuIdUl640+jZJWdnBTW8V31fWazGsiwKd3Ga0IyRnR4jGgUFlRa
- Cs9Kn/vue9acC2fJYYLOcL6nDKHJOKDesijoownrEvwEmMMmXRmWEmFbxsjnik0+OKlvtsEDxrh
- 4e9dpRgAEdC8L1YnvFnW7WUOKURc0
-X-Received: by 2002:a53:d9c4:0:b0:664:ae6b:b497 with SMTP id
- 956f58d0204a3-664ae6bb727mr3431534d50.76.1782586276993; Sat, 27 Jun 2026
- 11:51:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gnkDQ70QSz9tgl;
+ Sat, 27 Jun 2026 22:10:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1782591015;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iksm5UzNgZvyH3rsIyADMsDwxARwnBVmbhOwgU1GUkQ=;
+ b=oTYCSApgSdMUn75pSy50gtkjWEIxEIbobhiUpqkUvcYbYsdX7irjqVE9ylQ9XKRKv/sHkF
+ QnA9CrU5HwO5xhCBWXrahCEmOC0ZdolkLF7p4yRXYAxv1MrT6xTaJ19NYShQb7pnJMiOED
+ 5RfWLaqG1SnENmMm7nyoQHR3iUc+y2lrILlU1S1qs/tSDEdtGRCYvJe3D0v4crJNFcRV9E
+ fXSb/yMCSxJjZdM+NKJ/Q5/IJxJ+cwMMpqrH/ystRDj24MzlW2BSRYj6i+5Fgcp59lyinJ
+ x8aRqemzG0VeF+zx3SfIyF4E7nCkLfSMyvSQJM7yOiamKIrzAg7tOu/UT/j+Ow==
+Message-ID: <dc5ecf1c-ee61-4434-a19b-966f287f1533@mailbox.org>
+Date: Sat, 27 Jun 2026 22:10:13 +0200
 MIME-Version: 1.0
-References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
- <20260627144421.2067410-6-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260627144421.2067410-6-harsimransingh.tungal@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 27 Jun 2026 21:50:40 +0300
-X-Gm-Features: AVVi8CehRbAbPUxcAQCpBYlnYUNWenjeHPJfTDTCqL0wMVG9Rhjd-OFAXuF8gNA
-Message-ID: <CAC_iWjKL=Qe13qoHx49XPi6CC1BEonSgpGAgfqN9UzJS=GaibQ@mail.gmail.com>
-Subject: Re: [PATCH v3 05/10] charset: mark u16_strsize() as __efi_runtime
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+From: Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [PATCH] usb: xhci: Fix bNbrPorts overwritten by another controller
+To: Beibei Yang <13738176232@163.com>, u-boot@lists.denx.de
+Cc: bmeng.cn@gmail.com
+References: <1782563839-11379-1-git-send-email-13738176232@163.com>
+Content-Language: en-US
+In-Reply-To: <1782563839-11379-1-git-send-email-13738176232@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: b0017be307fcdfb8fa9
+X-MBO-RS-META: sutoiqz5u57diimwbjynmbsnbkk11f7f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,33 +74,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 27 Jun 2026 at 17:44, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> Mark u16_strsize() as __efi_runtime so it can be called from the EFI
-> runtime variable paths added for FF-A/MM communication after
-> ExitBootServices().
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> ---
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->  lib/charset.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/charset.c b/lib/charset.c
-> index 182c92a50c4..738ad1352de 100644
-> --- a/lib/charset.c
-> +++ b/lib/charset.c
-> @@ -407,7 +407,7 @@ size_t __efi_runtime u16_strnlen(const u16 *in, size_t count)
->         return i;
->  }
->
-> -size_t u16_strsize(const void *in)
-> +size_t __efi_runtime u16_strsize(const void *in)
->  {
->         return (u16_strlen(in) + 1) * sizeof(u16);
->  }
-> --
-> 2.34.1
->
+On 6/27/26 2:37 PM, Beibei Yang wrote:
+> In a system with multiple XHCI controllers, the global descriptor.hub
+> (bNbrPorts) can be overwritten by a later initialized controller,
+> causing the root hub of an earlier controller to report wrong port
+> numbers.
+> 
+> Fix this by dynamically setting bNbrPorts from the current controller's
+> hcsparams1 in the USB_DT_HUB request handler, instead of relying on
+> a stale global value.
+
+How about having one descriptor per controller ?
+
+This is probably easily doable in xhci_lowlevel_init() with some 
+ctrl->hub_desc = kmemdup(descriptor.hub,...); and related tweaks.
+
+What do you think ?
