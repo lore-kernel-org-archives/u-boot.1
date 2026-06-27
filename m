@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC78DC43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 17:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8770CC43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 18:03:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18D4084A0E;
-	Sat, 27 Jun 2026 19:41:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F4178460E;
+	Sat, 27 Jun 2026 20:03:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="jAWZ5a1g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nOVnwNf2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4063F841C2; Sat, 27 Jun 2026 16:44:59 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3CF59842FC
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 16:44:57 +0200 (CEST)
+ id A1A648467F; Sat, 27 Jun 2026 20:03:04 +0200 (CEST)
+Received: from mail-dl1-x1230.google.com (mail-dl1-x1230.google.com
+ [IPv6:2607:f8b0:4864:20::1230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D0D99842FC
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 20:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 01B451F60;
- Sat, 27 Jun 2026 07:44:52 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.95.169])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A26943F905;
- Sat, 27 Jun 2026 07:44:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1782571496; bh=DPaYO77GmWfUXJD/Y9BExqflCGi9dc3be56e0rggDMc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jAWZ5a1gn4cbcYA461kwTkflJYt384rnuJzjpX/a9sIVTYI1CQkoXJWi6wJy7lGDu
- FEr/Lr9cLxG5BVaRqpRlGS9UkqIDkKgO3VPdjNixiuF5VXwYEOC9rzauCuCWY6k+uX
- Y4jMMBd+Q86QHs8vSWBKy+lId/VX99cQSzHbeCrw=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.denx.de
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Simon Glass <sjg@chromium.org>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v3 10/10] doc: bootefi: note two-phase runtime variables
- selftest
-Date: Sat, 27 Jun 2026 15:44:21 +0100
-Message-Id: <20260627144421.2067410-11-harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
-References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-dl1-x1230.google.com with SMTP id
+ a92af1059eb24-139b914bab6so2837300c88.1
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 11:03:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782583379; x=1783188179; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=v2pEcIU8Gy+4g3deQXv6e1JfEjHuBwhEnSZc4c7nQic=;
+ b=nOVnwNf2yFma9oc9NaQhCwxHnDrZLhgq5tye0K2yXvjT7KEWVkK7NY5e3cW+ed7Rpf
+ v0z43545Lf1oYuGO8eIrCkhtKIp2e5u13De+tFBJfPE4EvIjeuNsKrxR1TeOR5GKu48o
+ 6KpCCHn4shcb+3dG/2m5XSMBdPSnYmxgImhAN82az30Ak1trwp5MAEbrFRMIJHp0zwTv
+ G4wgNaC9VljF0IRzKhG0QMg4VCsOscE6F0NMOF9mVnapV8LTtXBj56nSeanqP/dsG6zT
+ onJ4COUxZDd41zSHF1eTVdvqCh6U5hIMxYgLo5kQMhJoc7Bn8cAwCcmwuXGWB5D91jjW
+ y2yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782583379; x=1783188179;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v2pEcIU8Gy+4g3deQXv6e1JfEjHuBwhEnSZc4c7nQic=;
+ b=cat/1aJDd3SPIaDUj0iM2F91+sqi73Y8Irhpq03pof0WJBG/BySBm9ctCZbm4SsaJR
+ zsPXS5VCnC+XUyb9KLpoO00Q3Cly6jOk3lqsWX65R34QC2IC+42A7k/WyZbAMoNXnf6e
+ R7UI8/9N7TX35zTZnh3rDXnrWcDmgJ+WXXHRoqzxNv6dVuGFBJ3KD2tLmYSNcgky37TK
+ fA9QEYcxc/EBOzGe3cmhLjIsA8eJDsTcIn4aSZDd+lWCBbfFaoC17oR7SYv/fzgEK5e2
+ X83VaAbIZaU5ZASBMpzHXjIy5Qf/LnUI5grWc6pUg8jGaAye1piUYVZJYAbwDQeYkt5d
+ T26Q==
+X-Gm-Message-State: AOJu0YxWoj3V/+KWkKDxHrxPOqmItwT69sGEFhWRhvwbUNctjPsGe/dB
+ z9R5S5UuMRv+5TIfs8T3hzTPqiQlEw9AFo0ozNz8of4lwfu04MdwuGIF
+X-Gm-Gg: AfdE7cmdCeccLbm75dFWNXrSN9/RZFt71zVrG9nyF4joTlJC9Xn7wDZ/SSBNBWdJTKL
+ xCNmxWXaoqvvmuWWxUR1DX1BAF/jE2TQ6YoM60joXvxHHM/d2AD1KzA5gbegegtkqkkED5qFJsO
+ uV9bPMk8JnngwonhH5IqFF/uRYH6HrK/oWNSlL0HlqB34pcJ2rzjL7F8vCDIxOJxhZdMwfOYuW8
+ 9J0eBCxgoQ+Q+c9HcQPqVMnnA43H9w98POzLEsj8Jxjn70bV5z7UmNjvS4qYf0ckgY3XVMiydmz
+ nlkwbpm5QDBN6rDCeLNCVFyY05LICrzWS9E5a0HtQtJ4nnpuiIjtDWZYOahTjJhl9YHws8Cw1B1
+ nDedEQGNvei5n/bBNca/Mh4QB+rE+MjYxqL2VPEOsSKH/DqObeXGusnjuLcqP4lLAGKsAAJHVYq
+ gH9qDnVlQNRuRq4Kiu4vGe8xU/5gY99nS0JkX0AyaTjuE6oqP37V/7y+OicHl3ZCLPYrUSDg==
+X-Received: by 2002:a05:7022:60a8:b0:138:5049:cb7c with SMTP id
+ a92af1059eb24-139dbbc8305mr9404167c88.36.1782583378990; 
+ Sat, 27 Jun 2026 11:02:58 -0700 (PDT)
+Received: from fabio-Precision-3551..
+ ([2804:1b3:a800:24b8:55ea:47fd:ff91:9f95])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-139e78317f3sm15192167c88.9.2026.06.27.11.02.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 27 Jun 2026 11:02:58 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, alice.guo@nxp.com, ye.li@oss.nxp.com,
+ peng.fan@oss.nxp.com, marex@nabladev.com
+Subject: [GIT PULL] Please pull u-boot-imx-master-20260627
+Date: Sat, 27 Jun 2026 15:02:54 -0300
+Message-ID: <20260627180254.3067829-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 27 Jun 2026 19:41:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,63 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootefi documentation did not describe how to run the
-runtime-variable selftest, so users had no guidance on its reboot
-requirements or on which flow applies to their configuration.
+Hi Tom,
 
-Document the runtime-variable selftest flow in bootefi.rst. Describe
-the non-volatile path, note the single-run
-CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
-runtime-variable selftest with efi_selftest.
+Please pull from u-boot-imx/master, thanks.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
----
- doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+The following changes since commit 6902fb4c17faa375003124c451c2550deab5463d:
 
-diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-index 7c5448586b7..0a7800b93ce 100644
---- a/doc/usage/cmd/bootefi.rst
-+++ b/doc/usage/cmd/bootefi.rst
-@@ -160,6 +160,37 @@ environment variable to match one of the listed identifiers
- Some of the tests execute the ExitBootServices() UEFI boot service and will not
- return to the command line but require a board reset.
- 
-+When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
-+*variables at runtime* completes within one *bootefi selftest* run, so
-+it does not depend on preserving state across multiple runs. It still
-+executes ExitBootServices(), so a board reset is required afterwards
-+before returning to the command line.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime'
-+    => bootefi selftest
-+
-+When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
-+flow is split into *variables at runtime setup* and
-+*variables at runtime verify*. Run the setup test once to create the
-+runtime-accessible variable in non-volatile storage, reboot, then run
-+the verify test to validate, append, and delete that variable.
-+Both phases are on-request tests, so they only run when selected by
-+``efi_selftest``.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime setup'
-+    => bootefi selftest
-+
-+After reboot:
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime verify'
-+    => bootefi selftest
-+
- Configuration
- -------------
- 
--- 
-2.34.1
+  Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-25 12:32:18 -0600)
 
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20260627
+
+for you to fetch changes up to 9b41032699cf8f7c25c883f7c12edba350fed1d8:
+
+  clk: imx: imx8mq: Fix iMX8MQ PLL issue (2026-06-27 14:53:01 -0300)
+
+u-boot-imx-master-20260627
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/30543
+
+- Fix MAC address representation on i.MX9
+- Fix iMX8MQ PLL
+- Fix SPL trampoline buffer for 1GB DDR on i.MX9
+----------------------------------------------------------------
+Alice Guo (1):
+      imx9: scmi: use 48-bit MAC add instead of incrementing mac[5]
+
+Peng Fan (1):
+      imx9: scmi: Correct shutdown checking
+
+Ye Li (2):
+      imx9: scmi: Fix SPL trampoline buffer for 1GB DDR
+      clk: imx: imx8mq: Fix iMX8MQ PLL issue
+
+ arch/arm/mach-imx/imx9/scmi/soc.c |  75 ++++++++++----
+ drivers/clk/imx/Makefile          |   2 +-
+ drivers/clk/imx/clk-frac-pll.c    | 199 ++++++++++++++++++++++++++++++++++++++
+ drivers/clk/imx/clk-imx8mq.c      |  55 +++++++----
+ drivers/clk/imx/clk.h             |   3 +
+ 5 files changed, 292 insertions(+), 42 deletions(-)
+ create mode 100644 drivers/clk/imx/clk-frac-pll.c
