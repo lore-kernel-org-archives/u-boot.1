@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A115C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:30:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF11C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5CD18404D;
-	Sat, 27 Jun 2026 03:30:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id EF5BE846DF;
+	Sat, 27 Jun 2026 03:39:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="meCmnzj0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CT6kdh1L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B58CA84105; Sat, 27 Jun 2026 03:30:39 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0D49183FEE; Sat, 27 Jun 2026 03:39:02 +0200 (CEST)
+Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
+ [IPv6:2607:f8b0:4864:20::1335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 141C383FEE
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:30:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782523833; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=mtmEm6FBcRGmQXm126BKq4DpbAJOfWxwN1aoyPtHZXqCUvCHl1EQvHDU5ZsXUDe6RDmuakRvry/LByqRRMpemScHLJg7stMHCVZt3uoAciNK2e5fEuVXU5X0MiGHLYNHTK45WmFJ5TxfiZM618FBUm1Q9ukWSIcoJsMgViqp2O8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782523833;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=d3KAit1WuNTXBAaAfRPRh4KdkNSnPmbUkaivcGWDxzs=; 
- b=lAaV8n2vujyT2F0NX+OqBLQCL2iYnh46hhSzzR6FKGQhI8Dn16oDB5LXOEI8r08GhVGIAypakVDNTv+K8tsaSmywdMc5GNIWSO1EDEwlSQyHtId9Lf3mUHtKgiUM3eBDAQzhVqpp75Wbk00scozMfqiHcIJeSUpcquF7e961nw8=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782523833; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=d3KAit1WuNTXBAaAfRPRh4KdkNSnPmbUkaivcGWDxzs=;
- b=meCmnzj0vIbzi6NAdN8udpgzQ3yzpPd6SEwU9OZ20ZR7P+P5TYcpQHCPE0jqoi1x
- 5VaphHZHyPC+goqEbXf9lu+k+itjhHKl7/KBw9BleerA5CZNPm26rlRa4RSqG2Z5HMH
- R8h3py24IaNn6V3wgUfuClab4NXukTA6iy7nm2VQ=
-Received: by mx.zohomail.com with SMTPS id 1782523830693555.1271532198713;
- Fri, 26 Jun 2026 18:30:30 -0700 (PDT)
-Date: Sat, 27 Jun 2026 01:30:24 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>
-Cc: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH 2/7] firmware: rpmi: add support for the SBI MPXY transport
-Message-ID: <aj8nsG6JrIbBsGLM@pie>
-References: <20260626201613.1035208-1-charles.perry@microchip.com>
- <20260626201613.1035208-3-charles.perry@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6580683FEE
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:38:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-dy1-x1335.google.com with SMTP id
+ 5a478bee46e88-30c9c8c2697so1719614eec.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 18:38:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782524338; x=1783129138; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
+ b=CT6kdh1LQohWP7FofhZERS2H+xsk/VMtrN9u5tou4SzvjyKPKv1HeuoJj3MB0mKpc8
+ tHa/GacE8bwjLnmHIC9RPE3hoK7cDSuznBqoBBHkb9ybT+hlUqowgeAlv+bcvFea+cg+
+ pynZKATQqeaxU4OngcHpnJSnPpdl+FkTZiw5NcaijOgO7+DITxNOHb6pWdrOJUFzek6q
+ /Gz3W0VhqQ74pDRtuQBVjZc4DZOJFXdbTmfRYI1JtGsqS7Bv8j+zusvyyQqlKR7/Y+pF
+ jCvVtQXX7h8+7KixyLFw3JFJNkzqfKSjpnzzPwtRapCBYc76nIrv3xVKWl/gOTz4/Kyt
+ bwhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782524338; x=1783129138;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
+ b=WQFxbb8jPTxJB7VEmnkSvK4hnTzjXXp25hK3+RJ4ew17kpX54ixS9qitHJkKLO9SGg
+ AMlDA8VJVAtP9+Zt7YJgJz4d+s0zidKX+qwFUzvkRG8ueIWF2vnyEpPOi1bFo6/2Sne9
+ 6Z6i4a5PyC1nj2pPDN4ObjTIc0hXjP9v0hm3u856Bgr2MVk7erEKM9lFriaHxAdvfPYu
+ 1m1Z+NcDSFybJXDC9/O5nxdR1Q6BEsMNKGeEMvBU7iIn9E69CxWs22V08pLGZf3FWt+y
+ 8LpDJCQrNNEPuTdLh18TlMUEflLbEUM19vq8t/8dnbJ2MeChU2lYAHZdDINy6++btc4r
+ eDRA==
+X-Gm-Message-State: AOJu0Yzee69oZ1c0STMZ5K9Mly6ZboEo15SOmMeaj38cNTbOfrQ2s4/p
+ UMNlq25dWN6kg9pOR/FCU7tt3lW4/Prvn/L+pLJEYZ6rQdRD5V2KzR0k
+X-Gm-Gg: AfdE7cmAU3+hVsLoXqrdGUhPVuhRREtU83CJI26onH/1miKM1nSV3NNHmwjyvHOw4Ob
+ NxszVC2FbQ3EIES5DvabNisZiwcX3E31OYpERJABDTqznLIl22CzxtLxJSINBPnI5BX00MnFYuu
+ pP89Rt9XfarfgN1XQMC8hZKkVlM4Wc4WpWjcEnBNsCG+D8py419rgNZL+sFO66m75R6DP5hrHd/
+ OnYGlb1VKJi2uKkEzjiIrmUQP0/EamNpBY0glcJ1ZUXZP2D2r0tfQz5zS8cYvL04pZwHil8BO5M
+ P/kyGznQy7iiBCYEfH0vBQn4wTSDwHNk+PBFIGZHhI1Ng5o+c0JvARo375ZD2MdEPG+jvLjIboM
+ HuileVcazQmcToyFDtphVtMM6MVVH1fLvO6XiWgVAEF8XoFlmlcB4VnIuQQDE2nr83fjRZuuqkk
+ wIu8cHlCuYWFV/PZmvD9uZw4RFw/RxBg2KRp6vdzCnqAIm6/x1PcANOWDdNNnGVqQs5wah0A==
+X-Received: by 2002:a05:7300:7245:b0:304:d92a:e60a with SMTP id
+ 5a478bee46e88-30c84e0249emr9259154eec.31.1782524337412; 
+ Fri, 26 Jun 2026 18:38:57 -0700 (PDT)
+Received: from fabio-Precision-3551..
+ ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c7c8b1ab6sm35997678eec.15.2026.06.26.18.38.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Jun 2026 18:38:56 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, alice.guo@nxp.com, ye.li@oss.nxp.com,
+ peng.fan@oss.nxp.com, marex@nabladev.com
+Subject: [GIT PULL] Please pull u-boot-imx-master-20260626
+Date: Fri, 26 Jun 2026 22:38:51 -0300
+Message-ID: <20260627013852.3002838-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260626201613.1035208-3-charles.perry@microchip.com>
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,176 +96,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 26, 2026 at 01:15:43PM -0700, Charles Perry wrote:
-> This adds an RPMI transport driver for the Supervisor Binary Interface
-> (SBI) message proxy (MPXY) extension [1].
-> 
-> This is for S-Mode U-Boot where some supervisor software (such as
-> OpenSBI) runs in M-Mode and handles the low level communication with the
-> PuC.
-> 
-> [1]: https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
-> 
-> Signed-off-by: Charles Perry <charles.perry@microchip.com>
-> ---
->  arch/riscv/include/asm/sbi.h          |  57 ++++
->  drivers/firmware/rpmi/Kconfig         |   9 +
->  drivers/firmware/rpmi/Makefile        |   1 +
->  drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 449 ++++++++++++++++++++++++++
->  4 files changed, 516 insertions(+)
->  create mode 100644 drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+Hi Tom,
 
-...
+Please pull from u-boot-imx/master, thanks.
 
-> diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-> new file mode 100644
-> index 000000000000..84af4787187a
-> --- /dev/null
-> +++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+The following changes since commit 6902fb4c17faa375003124c451c2550deab5463d:
 
-...
+  Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-25 12:32:18 -0600)
 
-> +/* RPMI message protocol specific MPXY attributes */
-> +enum sbi_mpxy_rpmi_attribute_id {
-> +	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID = SBI_MPXY_ATTR_MSGPROTO_ATTR_START,
-> +	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
-> +	SBI_MPXY_RPMI_ATTR_IMPL_ID,
-> +	SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
-> +	SBI_MPXY_RPMI_ATTR_MAX_ID
-> +};
-> +
-> +/*
-> + * RPMI specific SBI MPXY channel attributes.
-> + */
-> +struct sbi_mpxy_rpmi_channel_attrs {
+are available in the Git repository at:
 
-Would it make sense to organize sbi_mpxy_rpmi_channel_attrs as an
-array indexed by sbi_mpxy_rpmi_attributed_id subtracted by
-SBI_MPXY_RPMI_ATTR_MSGPROTO_ATTR_START? With which we could simplify
-rpmi_sbi_mpxy_get_attr().
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20260626
 
-> +	/* RPMI service group ID */
-> +	u32 servicegroup_id;
-> +	/* RPMI service group version */
-> +	u32 servicegroup_version;
-> +	/* RPMI implementation ID */
-> +	u32 impl_id;
-> +	/* RPMI implementation version */
-> +	u32 impl_version;
-> +};
+for you to fetch changes up to 151e7c6e7c2c33b980030aba782e056d5719c998:
 
-...
+  clk: imx: imx8mq: Fix iMX8MQ PLL issue (2026-06-26 20:12:22 -0300)
 
-> +static int rpmi_sbi_mpxy_get_attr(struct rpmi_chan *chan,
-> +				  enum rpmi_attribute_id id, u32 *data)
-> +{
-> +	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(chan->dev);
-> +	struct sbi_mpxy_chan_desc *desc = &mpxy->channel_descs[chan->id];
-> +
-> +	switch (id) {
-> +	case RPMI_ATTR_SPEC_VERSION:
-> +		*data = desc->attrs.msg_proto_version;
-> +		break;
-> +	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-> +		*data = desc->max_xfer_len;
-> +		break;
-> +	case RPMI_ATTR_SERVICEGROUP_ID:
-> +		*data = desc->rpmi_attrs.servicegroup_id;
-> +		break;
-> +	case RPMI_ATTR_SERVICEGROUP_VERSION:
-> +		*data = desc->rpmi_attrs.servicegroup_version;
-> +		break;
-> +	case RPMI_ATTR_IMPL_ID:
-> +		*data = desc->rpmi_attrs.impl_id;
-> +		break;
-> +	case RPMI_ATTR_IMPL_VERSION:
-> +		*data = desc->rpmi_attrs.impl_version;
-> +		break;
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +
-> +	return 0;
-> +}
+u-boot-imx-master-20260626
+--------------------------
 
-...
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/30543
 
-> +static int rpmi_sbi_mpxy_probe(struct udevice *dev)
-> +{
-> +	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(dev);
-> +	struct sbi_mpxy_chan_desc *desc;
-> +	unsigned long flags;
-> +	struct sbiret sret;
-> +	int i, ret;
-> +
-> +	mpxy->dev = dev;
-> +
-> +	/* Probe for SBI MPXY extension */
-> +	if (sbi_get_spec_version() < sbi_mk_version(1, 0) ||
-> +	    sbi_probe_extension(SBI_EXT_MPXY) <= 0) {
-> +		dev_info(dev, "SBI MPXY extension not available\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	/* Find-out shared memory size */
-> +	ret = rpmi_sbi_mpxy_get_shmem_size(&mpxy->shmem_size);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get MPXY shared memory size\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	mpxy->shmem = memalign(PAGE_SIZE, mpxy->shmem_size);
-> +	if (!mpxy->shmem)
-> +		return -ENOMEM;
-> +
-> +	/* Setup shmem in OVERWRITE mode. (flags[1:0] = 00b) */
-> +	flags = 0;
-> +	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_SET_SHMEM,
-> +			 virt_to_phys(mpxy->shmem), 0, flags, 0, 0, 0);
-> +	if (sret.error) {
-> +		ret = sbi_to_linux_error(sret.error);
-> +		goto err;
-> +	}
-> +
-> +	ret = rpmi_sbi_mpxy_get_channel_ids(mpxy);
-> +	if (ret)
-> +		goto err;
-> +
-> +	for (i = 0; i < mpxy->channel_count; i++) {
-> +		desc = &mpxy->channel_descs[i];
-> +		desc->max_xfer_len =
-> +			min((u32)mpxy->shmem_size, desc->attrs.msg_max_len);
-> +	}
-> +
-> +	return 0;
-> +
-> +err:
-> +	if (mpxy->channel_descs)
-> +		free(mpxy->channel_descs);
-> +
-> +	if (mpxy->shmem)
-> +		free(mpxy->shmem);
+- Fix MAC address representation on i.MX9
+- Fix i.MX6 DDR initialization
+- Fix iMX8MQ PLL
+- Fix SPL trampoline buffer for 1GB DDR on i.MX9
+----------------------------------------------------------------
+Alice Guo (1):
+      imx9: scmi: use 48-bit MAC add instead of incrementing mac[5]
 
-free() is no-op when the argument is NULL, so the check is redundant.
-This applies to rpmi_sbi_mpxy_remove() and other similar cases in the
-series, too.
+Marek Vasut (1):
+      mx6: ddr: Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
 
-> +
-> +	return ret;
-> +}
-> +
-> +static int rpmi_sbi_mpxy_remove(struct udevice *dev)
-> +{
-> +	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(dev);
-> +
-> +	if (mpxy->channel_descs)
-> +		free(mpxy->channel_descs);
-> +
-> +	if (mpxy->shmem)
-> +		free(mpxy->shmem);
-> +
-> +	return 0;
-> +}
+Peng Fan (1):
+      imx9: scmi: Correct shutdown checking
 
-Regards,
-Yao Zi
+Ye Li (2):
+      imx9: scmi: Fix SPL trampoline buffer for 1GB DDR
+      clk: imx: imx8mq: Fix iMX8MQ PLL issue
+
+ arch/arm/mach-imx/imx9/scmi/soc.c |  75 ++++++++++----
+ arch/arm/mach-imx/mx6/ddr.c       |   4 +-
+ drivers/clk/imx/Makefile          |   2 +-
+ drivers/clk/imx/clk-frac-pll.c    | 199 ++++++++++++++++++++++++++++++++++++++
+ drivers/clk/imx/clk-imx8mq.c      |  55 +++++++----
+ drivers/clk/imx/clk.h             |   3 +
+ 6 files changed, 294 insertions(+), 44 deletions(-)
+ create mode 100644 drivers/clk/imx/clk-frac-pll.c
