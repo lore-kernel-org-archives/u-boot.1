@@ -4,110 +4,206 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FBD1C43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 06:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0BCC43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 07:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 536F584844;
-	Sun, 28 Jun 2026 08:06:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 77228843B6;
+	Sun, 28 Jun 2026 09:08:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qVhCQTME";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13F63846A4; Sun, 28 Jun 2026 08:06:33 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 2A40484409; Sun, 28 Jun 2026 09:08:12 +0200 (CEST)
+Received: from gapmx.vk4msl.com (eth2015.qld.adsl.internode.on.net
+ [150.101.176.226])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D9084844
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 08:06:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4474C3F282
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 06:06:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782626789;
- bh=TZWTziCX0vT9/iO41CDxMldGrBan38El78q4EZYEOJ8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=qVhCQTMEZFi2OQ5SSnkhUsTJfUAp3oH1srXDUbW5iXk6A+fR5r613gway0a+DFAvm
- 3RAfAWky4LOwRFm81I4Y1Ko5qa9gCWtGWhxpOjzt0SuDuRgFIlUyb9NIKEkUznxq2o
- z9tvX2jHOZDE5Cxf3mBXneAD5j3OzL10vPOJGjSD+uvAFyy0bWPzZQFZ/a87zSQKc0
- hJgVlg9zQAzUe++gY4vX4GPFlD6qY2n70C14qpjiXQJzX1Aj485epSySk0QeJyNm2n
- M+g+B0ZhD/QPtdc9+T6VWfhX2QOcEw9ZzvdxHn1scxlwPDfV/U0jO/1WBFpXVx+X6Q
- Ov339UI/m84wJbEGronIS01R4sYRwarTAqBK9UDtRNkwyQeXXMiGRH0X6pxjitcqt8
- UE9yC700dWPRE6EXEA88j5wziGpgIY1cy79n1QmDWLxAiO41/8D5OceHWPSpsor4js
- jK4M05Ux4Z8bXaiSg/E8pGhmihnGgNhGOuM70EFpB5x7vnKdPy4jxxIi/6SVwweWaK
- /lKsMp0kBKv6vrhqG9SW7N87fZ0tuDJlJrv8JOUaE8QQVBOzjfkNV4BydCJM3tZK44
- oUeASonOrhnxJgiv2BQLMBHLM3HxMZJLkCM0V+atF2xm/LZqbpaExru0gMiXR0Zfo8
- 3qAtCxidiQepVPb4+LzAm9mw=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4938c67308fso4629685e9.2
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 23:06:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782626789; x=1783231589;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TZWTziCX0vT9/iO41CDxMldGrBan38El78q4EZYEOJ8=;
- b=KrJ6fKDplt5rwDEyDgLrqQ2J03TekJCJ8Ja+7eMF+xPAyS9w0EJDCrifssVxeQ+Bi0
- epY5p7DKB64yEWGfxRSKgFB4QwWkrjMH0gsylY3V3yJpq7OCGfIaItwOK4eY8ZQyHFMT
- aLNYSxM8fmBBRoFbg77A7ZuT6FaAcbmBzUbowGBwcBS0hQBXcTiJLV3HbyWvtAxG5okj
- cnjB8YgNgm2u1CrrnnBLE2OTKmqQkvsW+cwt3PUTRMOZtJwnXS0HX+CLGQmunWTivPqc
- i9wyrjP7zlRRJQUeYFKC/80CQAJ9AraA34McVEXwsdrNeyBdDM1rZArokvrLpYeCS05y
- yO8g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8Hsd5zVqdGi+lqDTlMkhizQXpG+tyQW5O7KEZ+FU+RXp84dGblqMWZ37TAgmFQIu9ef6kI8gQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzM4GTYBZV9L238s2WMktGPsSae9R9jBqJRXb9i0FhCi4CYcfK8
- lXiJB/BCN+4eldefF6yslIT4EzaEdKo6K36nTlY6kq9gmtvZtTNVvBagQwqIrMzE2ipXI4sX1ci
- p93+ggaRbA5PXj96qxhOBRGgSEX8vLj2K48sluqvRjms9uzoSAd4h4/1Q4v6uB0Xf3GTAbgA=
-X-Gm-Gg: AfdE7ckfQccOGC0HZm8+yWY57bXhBWwanVS7iCefl58fUAz7adTwwviIhurppUqhz3M
- 3hgzvWvbCCpbVDRiYpEFa5hexr02IFa3CvvuoUPxSw80VQzNduUh2ogX7yNB55HV5qBJuUP/0fZ
- V+vcm6+i7d2JlTGwhqDzsvUnJpCU4NBlcoUbXXsPsAk/Hc5tJOholbbaUQubIVQbVMhkVYDtooA
- waE9CuOZ2UiGy7xPeCwh1+9LhvP21cesxDbqTBzOcNJJvpKBVP1+39M5xBAkf3/HWr8CH1qdfHb
- qLvmrEWdu5/UpH4UdNff+VRPyHZAEe2H37PJ3U9Qkc/xDyjed1L3qScJPkJM3pmWgmWG7I/8Owe
- +bBEsDlkJZQdQr/jLa2dgwRo8r6Jegg5pQoSWDL8KWvKs3p6htT/3XWZ6mqkZV0DOPHWKwfIUqK
- Di69WobVWtDLVH7Av/DXNT6zS12HL4Cg+dRh20yMng+aSW1LF9
-X-Received: by 2002:a05:600c:c8f:b0:490:4663:691b with SMTP id
- 5b1f17b1804b1-49266855407mr185482155e9.7.1782626788708; 
- Sat, 27 Jun 2026 23:06:28 -0700 (PDT)
-X-Received: by 2002:a05:600c:c8f:b0:490:4663:691b with SMTP id
- 5b1f17b1804b1-49266855407mr185481795e9.7.1782626788321; 
- Sat, 27 Jun 2026 23:06:28 -0700 (PDT)
-Received: from [192.168.123.154]
- (dynamic-046-114-110-002.46.114.pool.telefonica.de. [46.114.110.2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46fccca2781sm14155022f8f.6.2026.06.27.23.06.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 27 Jun 2026 23:06:27 -0700 (PDT)
-Message-ID: <b852fb2a-00d8-4e91-a82e-001b86a3e189@canonical.com>
-Date: Sun, 28 Jun 2026 08:06:25 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 6022E84105
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 09:08:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=mda@gapmx.vk4msl.com
+Received: by gapmx.vk4msl.com (Postfix, from userid 110)
+ id 9EB2C5E740; Sun, 28 Jun 2026 17:08:00 +1000 (AEST)
+Received: from localhost by gapmx.vk4msl.com with SpamAssassin (version 4.0.2);
+ Sun, 28 Jun 2026 17:08:00 +1000
+From: Fabio Estevam <festevam@gmail.com>
+To: Marek Vasut <marex@nabladev.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, alice.guo@nxp.com, 
+ ye.li@oss.nxp.com, peng.fan@oss.nxp.com
+Subject: ****SPAM**** Re: [GIT PULL] Please pull u-boot-imx-master-20260626
+Date: Sat, 27 Jun 2026 09:26:24 -0300
+Message-ID: <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/11] efi_loader: move efi_main and command loop to
- efi_app_common
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- u-boot@lists.denx.de, heinrich.schuchardt@canonical.com
-References: <20260621081915.19154-1-heinrich.schuchardt@canonical.com>
- <20260621081915.19154-10-heinrich.schuchardt@canonical.com>
- <CAFLszThopRDCMspX9yMC3f72fOj9mzqDcFmDVDO-UmucCBUMiw@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszThopRDCMspX9yMC3f72fOj9mzqDcFmDVDO-UmucCBUMiw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="----------=_6A40C850.EAE0FD04"
+X-BeenThere: u-boot@lists.denx.de
+X-Mailman-Version: 2.1.39
+Precedence: list
+List-Id: U-Boot discussion <u-boot.lists.denx.de>
+List-Unsubscribe: <https://lists.denx.de/options/u-boot>,
+ <mailto:u-boot-request@lists.denx.de?subject=unsubscribe>
+List-Archive: <https://lists.denx.de/pipermail/u-boot/>
+List-Post: <mailto:u-boot@lists.denx.de>
+List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
+List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
+ <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Errors-To: u-boot-bounces@lists.denx.de
+Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Message-ID: <20260627122624.6LcdE3LJoGE95Olemks0js0rzfiMJx6cjZn62c0B3tE@z>
+
+This is a multi-part message in MIME format.
+
+------------=_6A40C850.EAE0FD04
+Content-Type: text/plain; charset=UTF-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Spam detection software, running on the system "gapmx.vk4msl.com",
+has identified this incoming email as possible spam.  The original
+message has been attached to this so you can view it or label
+similar future email.  If you have any questions, see
+the administrator of that system for details.
+
+Content preview:  On Sat, Jun 27, 2026 at 9:18 AM Marek Vasut <marex@nabladev.com>
+   wrote: > > On 6/27/26 3:38 AM, Fabio Estevam wrote: > > Hello all, > > >
+  mx6: ddr: Subtract half a cycle instead of three quarters of a [...] 
+
+Content analysis details:   (9.2 points, 5.0 required)
+
+ pts rule name              description
+---- ---------------------- --------------------------------------------------
+-0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
+-0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
+                            domain
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+                            domains are different
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider
+                            [festevam(at)gmail.com]
+  10 FORGED_GMAIL_RCVD      'From' gmail.com does not match 'Received' headers
+ 0.0 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and EnvelopeFrom
+                             freemail headers are different
+-1.0 MAILING_LIST_MULTI     Multiple indicators imply a widely-seen list
+                            manager
+
+
+
+------------=_6A40C850.EAE0FD04
+Content-Type: message/rfc822; x-spam-type=original
+Content-Description: original message before SpamAssassin
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Return-Path: <u-boot-bounces@lists.denx.de>
+X-Intended-For: me@vk4msl.com
+Received: from phobos.denx.de (phobos.denx.de [2a01:238:438b:c500:173d:9f52:ddab:ee01])
+	by vk4msl-bne.dmz.longlandclan.id.au (OpenSMTPD) with ESMTPS id ce115851 (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO)
+	for <me@vk4msl.com>;
+	Sat, 27 Jun 2026 22:27:17 +1000 (AEST)
+Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
+	by phobos.denx.de (Postfix) with ESMTP id D211C842FC;
+	Sat, 27 Jun 2026 14:26:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ze0eK+px";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D2315842FC; Sat, 27 Jun 2026 14:26:39 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on phobos.denx.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+ DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,FREEMAIL_FROM,
+ RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=no
+ autolearn_force=no version=3.4.2
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DFEC7805D7
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 14:26:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-39ad400e762so10502131fa.1
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 05:26:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782563197; cv=none;
+ d=google.com; s=arc-20260327;
+ b=YYkvJbHaKzaujYdIEQBLK3DM2IJKOYjL86qU4yVTl2O2Cf+6OHOA5SRCa5cEqT8qb2
+ NRHOXFs/5tpTIm7benBMVdmPBE16V43qsgU5D2SVjvGrSc498IEPuyRJFssyKcu78lyn
+ MFVqJ+VJ6o7xLbZEMx/KiGtfJyuh+Qx0u7w0cm0BctYSRY7GFej3ZKFPCMB9b0gM5Add
+ QBR+bjhXSglaCPuKSE9EgG3FYz4nj5Y6BKO6umkertFc4628ARP/KNOoYDuMIM8Th+tT
+ GMuDL8peqw/UhB97KO6YQenvWEL3oYZyW6x6t6IFSQPFu2e1gu3GdcmSpo4t5Y17yyVF
+ 85og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
+ fh=x7e/pGv4TKP8EOTomru4TrANzH0f3Qjdg/hrZNHxSQg=;
+ b=M9VaRdD2aMexxpt8OndwvOHir8qmeQjT1SAcG9Ukk72w5uq5WqGMP4s4THl/5hPFCC
+ qAiPNXzuvkWHiHIzkMLFnwdcqfg/MQneTGbj8hrUXEAaCtx7GdDxGMBU4UzlRfpCzGEO
+ F8bV93JIqraLATsLVZZKNTbrcMfMSdXvFEKZac4jlYQkIrYY+O3cGvG9WgHG7Ckp0aSZ
+ Xo0zDhOAsWkuZG2vo6l/G6ltC3hDVybIwDdjiCCQ7G0f3vyM98+KDpZZZhi1GVwhdWkN
+ mjbePu+l5See3+4hcpnPKoF1Ovm1ogOgmMYFv5YVnn35FPVPTqzgBaGw1JT6+iuPGmGt
+ mcZg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782563197; x=1783167997; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
+ b=Ze0eK+pxTuRjmt9OdzK/WrAPrKV335Ck+BYIN9JT2zkQHnYr1u4kHQY6VdUMPGgUGI
+ wo6Rl9JPGte00g95VVVs2imJlHiU/ubP79DbmzzeizQZdHm6ec7Vvp5lSXW2AFRKlerR
+ vUNYyPYovoiSB92PQQRLgwlrHDej9FoZtz8taxpav0aE4A6mX5/z9P0wWQIkkN/In2Su
+ VQLSpmz5hFkgoVOiCtEOaa1vwffHkKZszq/oQPSBt/pyB9SOjtj4H9bP8w5JVML/hQLB
+ VfLZQUiaj2NUrG6/qIKIDaWelumLzyTjE7SqhBR5qMagWyDg9U6qpR5UePp8BgjRX+80
+ LgHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782563197; x=1783167997;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+FGTvugBr6HdKSUx8G2DNQ0tiPcZwJ/UaJVAbBLuoSY=;
+ b=CjEeFneyD7PhntPvbg4h2ZXgFSKdvbGndrcEln7p4+x8m0WrG5GW0BK+YFUBzVSs/b
+ h8+FA4KqgbOKBKJF0izt2ZSjlU5AWuhJWj6+Ss2KDiIu61t33Hrj1My6HfmVYNJPS4EM
+ EhTi6OhlRTTFIV0tEi2r+Xv1YHzgel3itN7+XUefuJn4qYiF4oJ4IbjOzVDHRF/FoL1C
+ oSGZNg9h8+Er51YD1W08w/P1Ml1qhNgljUWGuYxF+dUITtt6nBrdPQguZWzwtxoAkqAz
+ rkd/LhLHkO+pyAAN5uSz4XpIqO65QHZbeNqaiW/w3i/Lz1tSrvY3fd1S37h91tc5+pZ7
+ 880Q==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpK75jZuiMAyh21xF2PNjcIIJ4XBYptioU5mTf44E6eJmh5n4JF++GS1sCiQ/liD9ZPojX0UeA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyweEH+fPyw8Nny6dxnmci0uu3n8m2bk3XswFK6cJIKtYIHuLi4
+ QtbBvBUP6/b+aNi0YUubamQ7EiXzcuESbKhEL5ZDezO9DMlSTFO66O908FUJiO8ewuyGCA5RM12
+ yzXZTNM/xYHMXLeGAszPoZ8OfiftHcYRISQ==
+X-Gm-Gg: AfdE7cl4MLlHTmHAuAF/zjdaY0dBuKEosQ2ZRp389EozQyAzbAMOcpoOorPaZQDCVxr
+ c1VH0zCdSO0z7zDomuVXlCPQSyozuOhttkzwq7FjarA4tAC9BTB2N8Im8hcPisUgz5Itdleh/zN
+ iOsW84h/43J6oeH4iEJnvWcPfmnkN1ASOH6055qIdLdCSihlNaNWZp4HU0cjKraqL6J0mmzTUAT
+ tU5keTuTKa2AC0wRVpeoUoN2zqZoWZnyEQovlDxw49DAxwQ+tz3EhyDiglT6ar3thhNo31JzTSE
+ Pqp40o3VnAdopHRm4aZ8MrN6OHO2RvezEUSMJiT93jkxbBn/4MmdjUThiZPskw==
+X-Received: by 2002:a2e:8045:0:b0:393:e571:277a with SMTP id
+ 38308e7fff4ca-39acb63c1b4mr20609351fa.9.1782563196710; Sat, 27 Jun 2026
+ 05:26:36 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260627013852.3002838-1-festevam@gmail.com>
+ <20260627013852.3002838-2-festevam@gmail.com>
+ <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
+In-Reply-To: <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 27 Jun 2026 09:26:24 -0300
+X-Gm-Features: AVVi8Cc9fXzRdJSkWijZE_Cj8LViomUy0-R3ufAuZZt4MTYZhZ5DW7bpgL0ez-g
+Message-ID: <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20260626
+To: Marek Vasut <marex@nabladev.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, alice.guo@nxp.com, 
+ ye.li@oss.nxp.com, peng.fan@oss.nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,129 +220,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/25/26 10:54, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On 2026-06-21T08:19:04, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->> efi_loader: move efi_main and command loop to efi_app_common
->>
->> Add the remaining shared code to efi_app_common to complete the
->> refactoring:
->>
->> * efi_main() - common entry point; calls efi_app_init(), prints
->>    app_banner, calls command_loop(), then clears the screen on exit.
->> * struct efi_app_cmd - table entry holding the keyword, help text,
->>    and a handler of type void (*fn)(u16 *args).
->> * command_loop() - iterates app_cmds[], matches keywords with
->>    starts_with(), and falls back to efi_app_help() on no match.
->> * efi_app_help() - prints each table entry's help line plus the
->>    built-in 'exit' line.
->>
->> Each dump app is updated accordingly:
->> * efi_main is removed; command_loop becomes non-static.
->> * app_banner[] is defined at file scope with the application's
->>    title string.
->> * Per-app duplicate state (bs, handle, systable) is removed; apps
->>    now use the common module's state.
->> [...]
->>
->> lib/efi_loader/dbginfodump.c    |  95 +++++-------------------------
->>   lib/efi_loader/dtbdump.c        | 109 +++++++---------------------------
->>   lib/efi_loader/efi_app_common.c | 111 ++++++++++++++++++++++++++++++++++-
->>   lib/efi_loader/efi_app_common.h |  31 +++++-----
->>   lib/efi_loader/initrddump.c     |  91 +++++------------------------
->>   lib/efi_loader/smbiosdump.c     | 126 ++++++++--------------------------------
->>   6 files changed, 205 insertions(+), 358 deletions(-)
-> 
->> diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
->> @@ -304,3 +317,99 @@ efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
->> +extern u16 app_banner[];
->> +extern struct efi_app_cmd app_cmds[];
-> 
-> Please move these extern declarations into efi_app_common.h next to
-> struct efi_app_cmd - inline externs in the .c file hide the contract
-> that every consumer must define both symbols; putting them in the
-> header makes the interface explicit and lets the compiler catch type
-> mismatches.
-> 
->> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
->> @@ -118,20 +99,27 @@ static void print_info(struct efi_loaded_image *info)
->> -static efi_status_t do_dump(void)
->> +static void do_dump(u16 * __maybe_unused args)
->>   {
->>        struct dbg_info_header *dbg;
->> +
->> +     if (!device_path_to_text)
->> +             bs->locate_protocol(&guid_device_path_to_text_protocol, NULL,
->> +                                  (void **)&device_path_to_text);
->> +
->>        u32 count;
-> 
-> Declarations should be at the top of the block; u32 count lands after
-> the locate_protocol() call. Also, the locate_protocol() return value
-> is now ignored, so a permanent failure silently leaves
-> device_path_to_text NULL with no diagnostic; the previous code printed
-> 'No device path to text protocol' on error. Please restore that or at
-> least check the return.
-> 
->> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
->> @@ -164,60 +152,9 @@ static efi_status_t do_dump(void)
->>                print(u'\r\n');
->>        }
->>
->> -     return EFI_SUCCESS;
->>   }
-> 
-> Stray blank line before the closing brace.
-> 
->> diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
->> @@ -156,16 +143,13 @@ static efi_status_t do_save(u16 *filename)
->> -     ret = do_check();
->> -     if (ret != EFI_SUCCESS)
->> -             return ret;
->> -
->>        smbios3_anchor = get_config_table(&smbios3_guid);
-> 
-> Behaviour change not mentioned in the commit message: previously
-> 'save' refused to write a malformed table because it ran do_check()
-> first; now it happily writes whatever is there. If intentional, please
-> call it out; otherwise restore the check.
-> 
->> diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
->> @@ -304,3 +317,99 @@ efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
->> +                     for (cmd = app_cmds; cmd->fn; ++cmd) {
->> +                             if (starts_with(pos, (u16 *)cmd->cmd)) {
->> +                                     efi_uintn_t len;
->> +
->> +                                     for (len = 0; cmd->cmd[len]; ++len)
->> +                                             ;
-> 
-> Isn't there a u16 strlen-style helper that exists here? Also,
-> cmd->cmd[len - 1] below assumes len > 0; an empty keyword would
-> underflow. Worth an assertion or comment documenting the invariant.
+On Sat, Jun 27, 2026 at 9:18=E2=80=AFAM Marek Vasut <marex@nabladev.com> wr=
+ote:
+>
+> On 6/27/26 3:38 AM, Fabio Estevam wrote:
+>
+> Hello all,
+>
+> >        mx6: ddr: Subtract half a cycle instead of three quarters of a c=
+ycle after DQS gating calibration
+> I am not sure whether this one should be really in master, I would like
+> to give people time to really look at it.
 
-Neither efi_freestanding.c nor efi_app_common.c have one.
-Maybe in future we could add one.
+Ok, I'll send another PR wth this one removed.
 
-Let's check len below this line.
+------------=_6A40C850.EAE0FD04--
 
-> 
->> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
->> @@ -0,0 +0,0 @@
->> +struct efi_app_cmd app_cmds[] = {
->> +     { u'dump', u"dump - print debug info table\r\n", do_dump },
->> +     { }
->> +};
-> 
-> The original help text column-aligned the dash ('dump       - print
-> ...') across all apps. With the new table the dash sits right after
-> the keyword, so 'load' and 'save <initrd>' no longer line up in
-> initrddump, and likewise for dtbdump/smbiosdump. Easy to restore by
-> padding the help strings.
-
-Maintaining such an alignment in the app definition does not seem right.
-If we want to restore the alignment, we can do that in a future patch 
-for the help() function.
-
-Best Heinrich
