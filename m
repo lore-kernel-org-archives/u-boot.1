@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAB80C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48910C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:47:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C0CA8460E;
-	Sat, 27 Jun 2026 03:39:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 526698460E;
+	Sat, 27 Jun 2026 03:47:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GFNF2J3v";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="KYoPX+FM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4D4E84873; Sat, 27 Jun 2026 03:39:06 +0200 (CEST)
-Received: from mail-dl1-x1232.google.com (mail-dl1-x1232.google.com
- [IPv6:2607:f8b0:4864:20::1232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 53A32846DF; Sat, 27 Jun 2026 03:47:37 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2B548460E
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:39:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dl1-x1232.google.com with SMTP id
- a92af1059eb24-139edc6bfc0so1369634c88.1
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 18:39:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782524340; x=1783129140; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
- b=GFNF2J3vUA2B4YKumV3zY/PF9imkaFXz3KSpiBG4+OZyBMU3HprhLKc59m50wKFLlj
- TTt2xKzxmDoBZaMzrOEzBC5osBhpm8wPCahk2V8Vg8M0nHqSBXelRncMAke7REb4TO3M
- PstVKmxJ867WJtxwODYONYlWbthHPuPg6Koz6kH7bJrHpv8qd9/F8MROLlK+ABoIETZ6
- zS1DN09/X7bXLN8WAOGWS3m2uVorUunnMus8Q0BNv1yb7EBc6acppntL924Y5WVWnSJH
- wmEp0qm30+06WAahbqNh4vCce9M9hrcZN2EY3Ym9n5FGqiJ9q8x2F2UsvrNcEgXvhRyc
- 9fLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782524340; x=1783129140;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
- b=MTUe9VNFs/Bmq45NstS2lwuNDZ0X1xNjdzfFuq+RJvUHDTXKapd7m4LBbcceahd73m
- cZqSXkI3jtCt436LBWJfO0SM2FqY96CshPiEXS4NmksCaJCEEamIGepnRlzVGBQfoCre
- 1b346ziJqvOFzK3pZXInhbyN2NM/rJe8uowp6sJ3tpUaB7YpJmJ6M+M5MRXzZZbyxUdF
- Xg7qwcriFrQ8+zrMdUw2aM4cRhY4ZXx0ka8lyoRtBEYt4Qo/OH7MTjP6GK8wEFJeSlpj
- +TjhEuDpkNnE0C9svmDokZgCkwXb4UFGtO75CLtiSHjekT/yLSFQNdLy1b0ssW1QRtHz
- DE/Q==
-X-Gm-Message-State: AOJu0Yw7/mKpBemJ8c1M9xqpP+m+4067r0F15fseuiG8oW+cZDCtkfWg
- 3St8YqRUXqA1oJJzIES7XDbab2Y271OgChpJkm14sS5C2QhY/tZ+vJk2
-X-Gm-Gg: AfdE7cn3pNH06PTquOXQa2EtlPRSgg6Y87iSRT6Nx9wCs0WUKsIRb+DCA3rPGT7Ku0a
- jyZHKBWnO7lN6NA2iffPGs25YxZaRehpp2dmxxej26JcdF7Ch98UKhwb+BtHUh+YT6oSP7k+FJ0
- YS0ik79ax/Wd+yse/WBwbOGaKbbwWL2udSzFzIU1Dg/uzFRoq7P0W9BaVtkW9E7TtnY5+71E+Fg
- Q7IDRwBUwujRcdINLwo6nbNL57jJnn6ftBgCHjJAknJ4bPzYtLMLh6r/fYLLQkhdVXxOau8yH4s
- Bq1LbP6TVf9Ia98CR2FHu81TmOY87HTEXpnqOxT+KZyxS674L5/LvO74+OvHsODooQJ33I9SmCl
- MGWXImaJOcmyvY/Faru7xgkwagX+/2VU7FHRnUObAoHYeWnNzx0Ebc8zU35OprV4jndQUPxsTtg
- T+CAHi3E+rPkGVnc2JpDrpipQauSxroIrI7w9DKxTuahwe3hmObyWGoxaYO7YfsMpO43lJwQ==
-X-Received: by 2002:a05:7301:1930:b0:30c:25c4:70fb with SMTP id
- 5a478bee46e88-30c84ec7fe4mr10183479eec.34.1782524340036; 
- Fri, 26 Jun 2026 18:39:00 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1ab6sm35997678eec.15.2026.06.26.18.38.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 18:38:59 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, alice.guo@nxp.com, ye.li@oss.nxp.com,
- peng.fan@oss.nxp.com, marex@nabladev.com
-Subject: [GIT PULL] Please pull u-boot-imx-master-20260626
-Date: Fri, 26 Jun 2026 22:38:52 -0300
-Message-ID: <20260627013852.3002838-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260627013852.3002838-1-festevam@gmail.com>
-References: <20260627013852.3002838-1-festevam@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B4D9584105
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:47:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1782524849; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=PS2Gn+RaTMmlChGh24vdwhTHhAw5MKdEFUduhrhLNpCqM3joiVUGAu32SZrE9Nqhw4UyyAhxwnaupnAgsDBDtB4H3SHjw0H1sBMgCW9FcwUeL8MYXOA+KFHjWOeoZM/407JhEE1NhWQ8RUAtMGe7WCZM7UOtMv3JUA5KINhkLNA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1782524849;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=bpKQuTrPzYCZsIsL2CqfNIKH4SFeFcXQEmfcwtOAmBQ=; 
+ b=NEj73Akv1RQv3nqExq7gmxSqvXRHqw0UoTcOwwOG8t8z69cF4YSvtCWlzCJI/j9258OKGFBrENAfQ7PbGrVYm3E0BGuexxGb/ifnG3bfG5BvmTvO9YZvWgnbJpPlZ6nxW9s5b49wGuSYB5eMFIb/STee8bkumQ2AgIo/RDZ8qoQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782524849; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=bpKQuTrPzYCZsIsL2CqfNIKH4SFeFcXQEmfcwtOAmBQ=;
+ b=KYoPX+FMZE/AKX7aHIZa/f90tv5z0sabMT0M2126wQmCrCARZzUJr93gT0z0PWJL
+ 5BKFmgCgPn+/uCM5bl1+ePYcH1uRexgQphS+h9K4S0i5em+u1U9KKp/CemmFgYqXi2x
+ tuJjTiCKrkUKK3hAvnWi9y4iL2tHYifT81USwm8g=
+Received: by mx.zohomail.com with SMTPS id 1782524847644613.9085092702866;
+ Fri, 26 Jun 2026 18:47:27 -0700 (PDT)
+Date: Sat, 27 Jun 2026 01:47:17 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>
+Cc: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ "Raymond Mao" <raymond.mao@riscstar.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peter Korsgaard <peter@korsgaard.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH 4/7] drivers: clk: add support for RPMI clocks
+Message-ID: <aj8rpdOireFjteeA@pie>
+References: <20260626201613.1035208-1-charles.perry@microchip.com>
+ <20260626201613.1035208-5-charles.perry@microchip.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260626201613.1035208-5-charles.perry@microchip.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,50 +86,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, Jun 26, 2026 at 01:15:45PM -0700, Charles Perry wrote:
+> The RISC-V Platform Management Interface (RPMI) defines a service group
+> for control and monitoring of clocks [1]. This can be exposed as a
+> UCLASS_CLK driver.
+> 
+> [1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 4.8)
+> 
+> Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> ---
+>  MAINTAINERS            |   1 +
+>  drivers/clk/Kconfig    |   7 +
+>  drivers/clk/Makefile   |   1 +
+>  drivers/clk/clk_rpmi.c | 346 +++++++++++++++++++++++++++++++++++++++++
+>  include/rpmi_proto.h   |  39 +++++
+>  5 files changed, 394 insertions(+)
+>  create mode 100644 drivers/clk/clk_rpmi.c
 
-Please pull from u-boot-imx/master, thanks.
+...
 
-The following changes since commit 6902fb4c17faa375003124c451c2550deab5463d:
+> diff --git a/drivers/clk/clk_rpmi.c b/drivers/clk/clk_rpmi.c
+> new file mode 100644
+> index 000000000000..d2efb057600b
+> --- /dev/null
+> +++ b/drivers/clk/clk_rpmi.c
+> @@ -0,0 +1,346 @@
 
-  Merge branch 'master' of git://source.denx.de/u-boot-usb (2026-06-25 12:32:18 -0600)
+...
 
-are available in the Git repository at:
+> +struct rpmi_clk_def {
+> +	u32 num_rates;
+> +	u32 transition_latency;
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20260626
+rpmi_clk_def.transition_latency only gets assigned in
+rpmi_clk_get_attrs() and never used. Since U-Boot's clock infrastructure
+doesn't care about it at all, maybe we could drop the field?
 
-for you to fetch changes up to 151e7c6e7c2c33b980030aba782e056d5719c998:
+> +	enum rpmi_clock_type type;
+> +	char name[RPMI_CLK_NAME_LEN + 1];
+> +};
 
-  clk: imx: imx8mq: Fix iMX8MQ PLL issue (2026-06-26 20:12:22 -0300)
+...
 
-u-boot-imx-master-20260626
---------------------------
+> +static int _rpmi_clk_enable_disable(struct rpmi_clk_priv *priv, u32 clkid,
+> +				    bool ena)
+> +{
+> +	struct rpmi_set_config_tx tx = {
+> +		.clkid = cpu_to_le32(clkid),
+> +		.config = cpu_to_le32(ena ? RPMI_CLK_STATE_ENABLED :
+> +					    RPMI_CLK_STATE_DISABLED),
+> +	};
+> +	__le32 rx;
+> +	int ret, status;
+> +
+> +	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_SET_CONFIG, &tx,
+> +				  sizeof(tx), &rx, sizeof(rx), NULL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	status = le32_to_cpu(rx);
+> +	if (status)
+> +		return rpmi_to_linux_error(status);
+> +
+> +	return 0;
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/30543
+Please return rpmi_to_linux_error(status) and drop the if above.
 
-- Fix MAC address representation on i.MX9
-- Fix i.MX6 DDR initialization
-- Fix iMX8MQ PLL
-- Fix SPL trampoline buffer for 1GB DDR on i.MX9
-----------------------------------------------------------------
-Alice Guo (1):
-      imx9: scmi: use 48-bit MAC add instead of incrementing mac[5]
+> +}
+> +
+> +static ulong _rpmi_clk_get_rate(struct rpmi_clk_priv *priv, u32 clkid)
+> +{
+> +	__le32 tx = cpu_to_le32(clkid);
+> +	struct rpmi_get_rate_rx rx;
+> +	int ret, status;
+> +
+> +	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_GET_RATE, &tx,
+> +				  sizeof(tx), &rx, sizeof(rx), NULL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	status = le32_to_cpu(rx.status);
+> +	if (status)
+> +		return rpmi_to_linux_error(status);
+> +
+> +	return (((u64)(le32_to_cpu(rx.hi)) << 32) | (u32)(le32_to_cpu(rx.lo)));
+> +}
 
-Marek Vasut (1):
-      mx6: ddr: Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
+...
 
-Peng Fan (1):
-      imx9: scmi: Correct shutdown checking
+> +static int _rpmi_clk_set_rate(struct rpmi_clk_priv *priv, u32 clkid,
+> +			      unsigned long rate)
 
-Ye Li (2):
-      imx9: scmi: Fix SPL trampoline buffer for 1GB DDR
-      clk: imx: imx8mq: Fix iMX8MQ PLL issue
+This function is declared to return int, but...
 
- arch/arm/mach-imx/imx9/scmi/soc.c |  75 ++++++++++----
- arch/arm/mach-imx/mx6/ddr.c       |   4 +-
- drivers/clk/imx/Makefile          |   2 +-
- drivers/clk/imx/clk-frac-pll.c    | 199 ++++++++++++++++++++++++++++++++++++++
- drivers/clk/imx/clk-imx8mq.c      |  55 +++++++----
- drivers/clk/imx/clk.h             |   3 +
- 6 files changed, 294 insertions(+), 44 deletions(-)
- create mode 100644 drivers/clk/imx/clk-frac-pll.c
+> +{
+> +	struct rpmi_set_rate_tx tx = {
+> +		.clkid = cpu_to_le32(clkid),
+> +		.flags = 0,
+> +		.lo = cpu_to_le32(lower_32_bits(rate)),
+> +		.hi = cpu_to_le32(upper_32_bits(rate)),
+> +	};
+> +	__le32 rx;
+> +	int ret, status;
+> +
+> +	ret = rpmi_send_with_resp(&priv->chan, RPMI_CLK_SRV_SET_RATE, &tx,
+> +				  sizeof(tx), &rx, sizeof(rx), NULL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	status = le32_to_cpu(rx);
+> +	if (status)
+> +		return rpmi_to_linux_error(status);
+> +
+> +	return _rpmi_clk_get_rate(priv, clkid);
+
+_rpmi_clk_get_rate() returns ulong. This unnecessarily truncates the
+rate on 64bit platform when it's above approximately 2.1GHz.
+
+> +}
+
+Regards,
+Yao Zi
