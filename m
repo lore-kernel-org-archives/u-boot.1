@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF11C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAB80C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 01:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF5BE846DF;
-	Sat, 27 Jun 2026 03:39:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C0CA8460E;
+	Sat, 27 Jun 2026 03:39:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CT6kdh1L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GFNF2J3v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D49183FEE; Sat, 27 Jun 2026 03:39:02 +0200 (CEST)
-Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
- [IPv6:2607:f8b0:4864:20::1335])
+ id D4D4E84873; Sat, 27 Jun 2026 03:39:06 +0200 (CEST)
+Received: from mail-dl1-x1232.google.com (mail-dl1-x1232.google.com
+ [IPv6:2607:f8b0:4864:20::1232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6580683FEE
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:38:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2B548460E
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 03:39:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dy1-x1335.google.com with SMTP id
- 5a478bee46e88-30c9c8c2697so1719614eec.1
- for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 18:38:59 -0700 (PDT)
+Received: by mail-dl1-x1232.google.com with SMTP id
+ a92af1059eb24-139edc6bfc0so1369634c88.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jun 2026 18:39:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782524338; x=1783129138; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
- b=CT6kdh1LQohWP7FofhZERS2H+xsk/VMtrN9u5tou4SzvjyKPKv1HeuoJj3MB0mKpc8
- tHa/GacE8bwjLnmHIC9RPE3hoK7cDSuznBqoBBHkb9ybT+hlUqowgeAlv+bcvFea+cg+
- pynZKATQqeaxU4OngcHpnJSnPpdl+FkTZiw5NcaijOgO7+DITxNOHb6pWdrOJUFzek6q
- /Gz3W0VhqQ74pDRtuQBVjZc4DZOJFXdbTmfRYI1JtGsqS7Bv8j+zusvyyQqlKR7/Y+pF
- jCvVtQXX7h8+7KixyLFw3JFJNkzqfKSjpnzzPwtRapCBYc76nIrv3xVKWl/gOTz4/Kyt
- bwhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782524338; x=1783129138;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1782524340; x=1783129140; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
  bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
- b=WQFxbb8jPTxJB7VEmnkSvK4hnTzjXXp25hK3+RJ4ew17kpX54ixS9qitHJkKLO9SGg
- AMlDA8VJVAtP9+Zt7YJgJz4d+s0zidKX+qwFUzvkRG8ueIWF2vnyEpPOi1bFo6/2Sne9
- 6Z6i4a5PyC1nj2pPDN4ObjTIc0hXjP9v0hm3u856Bgr2MVk7erEKM9lFriaHxAdvfPYu
- 1m1Z+NcDSFybJXDC9/O5nxdR1Q6BEsMNKGeEMvBU7iIn9E69CxWs22V08pLGZf3FWt+y
- 8LpDJCQrNNEPuTdLh18TlMUEflLbEUM19vq8t/8dnbJ2MeChU2lYAHZdDINy6++btc4r
- eDRA==
-X-Gm-Message-State: AOJu0Yzee69oZ1c0STMZ5K9Mly6ZboEo15SOmMeaj38cNTbOfrQ2s4/p
- UMNlq25dWN6kg9pOR/FCU7tt3lW4/Prvn/L+pLJEYZ6rQdRD5V2KzR0k
-X-Gm-Gg: AfdE7cmAU3+hVsLoXqrdGUhPVuhRREtU83CJI26onH/1miKM1nSV3NNHmwjyvHOw4Ob
- NxszVC2FbQ3EIES5DvabNisZiwcX3E31OYpERJABDTqznLIl22CzxtLxJSINBPnI5BX00MnFYuu
- pP89Rt9XfarfgN1XQMC8hZKkVlM4Wc4WpWjcEnBNsCG+D8py419rgNZL+sFO66m75R6DP5hrHd/
- OnYGlb1VKJi2uKkEzjiIrmUQP0/EamNpBY0glcJ1ZUXZP2D2r0tfQz5zS8cYvL04pZwHil8BO5M
- P/kyGznQy7iiBCYEfH0vBQn4wTSDwHNk+PBFIGZHhI1Ng5o+c0JvARo375ZD2MdEPG+jvLjIboM
- HuileVcazQmcToyFDtphVtMM6MVVH1fLvO6XiWgVAEF8XoFlmlcB4VnIuQQDE2nr83fjRZuuqkk
- wIu8cHlCuYWFV/PZmvD9uZw4RFw/RxBg2KRp6vdzCnqAIm6/x1PcANOWDdNNnGVqQs5wah0A==
-X-Received: by 2002:a05:7300:7245:b0:304:d92a:e60a with SMTP id
- 5a478bee46e88-30c84e0249emr9259154eec.31.1782524337412; 
- Fri, 26 Jun 2026 18:38:57 -0700 (PDT)
+ b=GFNF2J3vUA2B4YKumV3zY/PF9imkaFXz3KSpiBG4+OZyBMU3HprhLKc59m50wKFLlj
+ TTt2xKzxmDoBZaMzrOEzBC5osBhpm8wPCahk2V8Vg8M0nHqSBXelRncMAke7REb4TO3M
+ PstVKmxJ867WJtxwODYONYlWbthHPuPg6Koz6kH7bJrHpv8qd9/F8MROLlK+ABoIETZ6
+ zS1DN09/X7bXLN8WAOGWS3m2uVorUunnMus8Q0BNv1yb7EBc6acppntL924Y5WVWnSJH
+ wmEp0qm30+06WAahbqNh4vCce9M9hrcZN2EY3Ym9n5FGqiJ9q8x2F2UsvrNcEgXvhRyc
+ 9fLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782524340; x=1783129140;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=jwAsJ+hMeq6SWObIHlPY3u8a4KD78J3298g1jdp9250=;
+ b=MTUe9VNFs/Bmq45NstS2lwuNDZ0X1xNjdzfFuq+RJvUHDTXKapd7m4LBbcceahd73m
+ cZqSXkI3jtCt436LBWJfO0SM2FqY96CshPiEXS4NmksCaJCEEamIGepnRlzVGBQfoCre
+ 1b346ziJqvOFzK3pZXInhbyN2NM/rJe8uowp6sJ3tpUaB7YpJmJ6M+M5MRXzZZbyxUdF
+ Xg7qwcriFrQ8+zrMdUw2aM4cRhY4ZXx0ka8lyoRtBEYt4Qo/OH7MTjP6GK8wEFJeSlpj
+ +TjhEuDpkNnE0C9svmDokZgCkwXb4UFGtO75CLtiSHjekT/yLSFQNdLy1b0ssW1QRtHz
+ DE/Q==
+X-Gm-Message-State: AOJu0Yw7/mKpBemJ8c1M9xqpP+m+4067r0F15fseuiG8oW+cZDCtkfWg
+ 3St8YqRUXqA1oJJzIES7XDbab2Y271OgChpJkm14sS5C2QhY/tZ+vJk2
+X-Gm-Gg: AfdE7cn3pNH06PTquOXQa2EtlPRSgg6Y87iSRT6Nx9wCs0WUKsIRb+DCA3rPGT7Ku0a
+ jyZHKBWnO7lN6NA2iffPGs25YxZaRehpp2dmxxej26JcdF7Ch98UKhwb+BtHUh+YT6oSP7k+FJ0
+ YS0ik79ax/Wd+yse/WBwbOGaKbbwWL2udSzFzIU1Dg/uzFRoq7P0W9BaVtkW9E7TtnY5+71E+Fg
+ Q7IDRwBUwujRcdINLwo6nbNL57jJnn6ftBgCHjJAknJ4bPzYtLMLh6r/fYLLQkhdVXxOau8yH4s
+ Bq1LbP6TVf9Ia98CR2FHu81TmOY87HTEXpnqOxT+KZyxS674L5/LvO74+OvHsODooQJ33I9SmCl
+ MGWXImaJOcmyvY/Faru7xgkwagX+/2VU7FHRnUObAoHYeWnNzx0Ebc8zU35OprV4jndQUPxsTtg
+ T+CAHi3E+rPkGVnc2JpDrpipQauSxroIrI7w9DKxTuahwe3hmObyWGoxaYO7YfsMpO43lJwQ==
+X-Received: by 2002:a05:7301:1930:b0:30c:25c4:70fb with SMTP id
+ 5a478bee46e88-30c84ec7fe4mr10183479eec.34.1782524340036; 
+ Fri, 26 Jun 2026 18:39:00 -0700 (PDT)
 Received: from fabio-Precision-3551..
  ([2804:1b3:a800:24b8:381f:62d1:5cfb:ac63])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1ab6sm35997678eec.15.2026.06.26.18.38.55
+ 5a478bee46e88-30c7c8b1ab6sm35997678eec.15.2026.06.26.18.38.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jun 2026 18:38:56 -0700 (PDT)
+ Fri, 26 Jun 2026 18:38:59 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de, alice.guo@nxp.com, ye.li@oss.nxp.com,
  peng.fan@oss.nxp.com, marex@nabladev.com
 Subject: [GIT PULL] Please pull u-boot-imx-master-20260626
-Date: Fri, 26 Jun 2026 22:38:51 -0300
-Message-ID: <20260627013852.3002838-1-festevam@gmail.com>
+Date: Fri, 26 Jun 2026 22:38:52 -0300
+Message-ID: <20260627013852.3002838-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260627013852.3002838-1-festevam@gmail.com>
+References: <20260627013852.3002838-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
