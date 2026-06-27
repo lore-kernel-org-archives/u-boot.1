@@ -4,57 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1913C43458
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 14:21:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C87C43458
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jun 2026 17:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A70B83FEE;
-	Sat, 27 Jun 2026 16:20:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id D2E9383FEE;
+	Sat, 27 Jun 2026 19:24:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GCsc39Bv";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="pUtCb07p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D24E841C2; Sat, 27 Jun 2026 16:20:58 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 871EA841F2; Sat, 27 Jun 2026 19:24:39 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15CA805D7
- for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 16:20:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D3220107B35; Sat, 27 Jun 2026 16:20:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1782570055;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=ueP2QgbNfvJSRL6eO8C+4yFIkDBBAbjKKpeGncBXWLc=;
- b=GCsc39BvDcR5aYedEOigS1u06C4ZrniHGSWt0NI4K7H5+1LCQ5AvaDYL1zdX03PD56DCGP
- KAAz9KFO6ZLtHyvqDd+WjRnGnmeR4PIP9GgvYYTbqbGn7MW7jEMFvfsmUk6Es6FYogFzVX
- G+IPjCbht5xDHVKwjZ6ZBudlnJzGFi1g8XyZwGmgx4/Exe4mCL5hx4SNqKzaARnzgm5fIA
- VuTlZldtGC2GF7JH55C/Am30iz2RZv0JWvQ6QIeBfsz6pJ3iFgNxlMRz8DCFvwEfjijTrZ
- 3iuWc45QPu5TViszdELzra5P/3qWo4F2PKdwHANL9XC8l+I0B8lGMedhcnVu1Q==
-Message-ID: <df641e51-4141-4402-a57e-9b6ec5be2861@nabladev.com>
-Date: Sat, 27 Jun 2026 16:20:53 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 70173805D7
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 19:24:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-7f69b71f7b2so23282327b3.1
+ for <u-boot@lists.denx.de>; Sat, 27 Jun 2026 10:24:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782581076; cv=none;
+ d=google.com; s=arc-20260327;
+ b=kDQRV7U20+jBDGVSwHDJzj8CqS0FV+/iwvZYD/rQuZ0nOW4T+KKkjoZHJ7tIHd4YZ0
+ gkKL65ZsWlm51R78OUOTfOz9tf8YSGYjJuzthBmSvp6sRKJUUeRqtEEcOhxCzk3k6brm
+ shhNRbvJKtflRLF8Zwr+0dxZRbfPr0hHLf/7/U1tiK85w+ZOl7xsYM69vl8n3nuwj60o
+ io/4ccs0LHu2oaqeU+YzZKjLVEVlCgEKB4uhzNRxWCCGg19d7EXojvu6T6rpEHe6eC8r
+ ihJcFoZ+gfNr+nzchaCjgGE6YTfz4zTwqA+AKZpIAW0fR6IDZUlzyhRbGs7tmlbLlFWY
+ BgmA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=6v/atP4j546DHqwZ6ualptlxPG/adLlcG8dv72yAbMg=;
+ fh=7w1nR8YNQ/Bvb2TNjZ+FLV9lvbtFWIuQNcdppRtGCVM=;
+ b=efFfM/1RPqSYML+N63pWN0MS64ynEhId+H2xyoHhA+GnC6raLXAZAQs8t5387KRNy/
+ GD+LQbj+63gb9V52CSRFtRxZyN+vBkpmLaOngVI1DhAFUP12dc6QdX+/W7yITV/BmlrZ
+ vB3V/zKl3gEGa8vFqC1Cg1nXn2qSvAC6KpPJLi8mkn6uKGVoUH3j/PZa6o4NPfyorKfk
+ KWLjDnLuOuWtwsy6wg/CaIWrdM2k3yg6xDD4GMIwI6xfK8rSEaN4VdL5YPPsfohhf2lQ
+ SMTv0BY1/s/7Nd4ujfA8dwtadh3Jx6k/w5ORdvKPtIkQ+GrgGXulDKvfry6EDJ/+LGNC
+ IqMA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1782581076; x=1783185876;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6v/atP4j546DHqwZ6ualptlxPG/adLlcG8dv72yAbMg=;
+ b=pUtCb07pdIXcuWwa92Xh52IpkbVSVzTI062Utd/GUMopWuj1o27nB5jyw+Kto4rLvq
+ xx6PX/JWoW3jKbJQGkUToa8fEDeHf2EVDz4n59nFMPl7oKHY92iucHzlIKnVP3bq/nX8
+ bWJPW25DKpv2dADIyCZfXp4HUHgEEYRWMyHl8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782581076; x=1783185876;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6v/atP4j546DHqwZ6ualptlxPG/adLlcG8dv72yAbMg=;
+ b=fzeQ+qhgW7dIsBZdk5BQlGbWLQeR8KYLAn6PYsT6Zv+QOjo0KN4kkPNHzQC36hJOMe
+ +A7ZTLH1xW0oXbyCB/fSsgYjV2wcatrS4Smxnd74eHSG7dSsyjTEdFM8KhUWyB+4A9YO
+ 9dWLu5W5lQ94Mzf0FswcXgfehWDVL5vhNkzZR29ViwNMMcwKQz8lfNt2XBN/3G3UVs4K
+ j+qd+JS2qzqgkSLnj0+kcCxQ+toNBy1yUkaqWkP1CbQ8snAeRUSK3xrRwDpKQUNvjiod
+ YpxaiID1FjKU8Lie+fg7lb/fe5RUnnKm484IA91e7LJHgiYvabMnvKsUo9R0RKhD6PkH
+ FDnQ==
+X-Gm-Message-State: AOJu0YyNkdZv7VBC2PfleP5kCAYagEc4+/UAe7/lSsf8xIq2CT2NBzxa
+ 2FruoGMUX3G8zt5gcjipF7o5q9h9drUql29XmDP7kye6g89u3eDopIhesLpt2tkYjEI+Nd/CvIv
+ Gbdp3m20jyETvYjQm/TIXucBA2cROxWa/n3duReRgcA==
+X-Gm-Gg: AfdE7cmMQwCaPJ4s3tmvya2fFxzoALhygbbTn8Zw72ul9TAmcu2L2CFlvAuJqPZri6a
+ fBQxE1gk0LCCV+DDFVAqqjjbN1cpwA1OkpAixfXeJGfeuS15FFAS9voH4YaKMtqEojNeXvjnysx
+ CXy8jUwoK59azpiizxrtIENRTWjd9nQsSIBxs/mFxjn6ycowqlEiYoWhCYpNomwkgSHLAd+G3Pm
+ HqXc5siwJhWEwRmfPus72YjBzUMLc/SwG0eslGY/suCqH+sXWWTnfmUEP+3tOigkOsGwdpHQ5jJ
+ 9T9OpR0mUeZcp6NBhmNiRzXjZHg=
+X-Received: by 2002:a05:690e:1443:b0:664:8e4e:6709 with SMTP id
+ 956f58d0204a3-6648e4e6a65mr8343253d50.7.1782581076273; Sat, 27 Jun 2026
+ 10:24:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20260626
-To: Fabio Estevam <festevam@gmail.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, alice.guo@nxp.com,
- ye.li@oss.nxp.com, peng.fan@oss.nxp.com
-References: <20260627013852.3002838-1-festevam@gmail.com>
- <20260627013852.3002838-2-festevam@gmail.com>
- <ddacbcce-17de-4ee3-a5d2-fdb5cb4ee777@nabladev.com>
- <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <CAOMZO5A2NpxMxUbq5M2npFWYbhDfviR0DHYip7ChnpFNyVDJfg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260626183353.1666667-1-dario.binacchi@amarulasolutions.com>
+ <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
+ <20260626215804.GB382693@bill-the-cat>
+In-Reply-To: <20260626215804.GB382693@bill-the-cat>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Sat, 27 Jun 2026 19:24:24 +0200
+X-Gm-Features: AVVi8CcPZhTHFAYp0TCzSht_8R3OwH4g9L9THg-yVevRy_RRwtIL6P7IsVTuoNM
+Message-ID: <CABGWkvrCJn_ABadB0AmTQ6dp=ufDi1GdSYgSP1fkwCQQM=OL9A@mail.gmail.com>
+Subject: Re: [PATCH] test: cmd: part: fix integer handling in
+ setup_gpt_partitions()
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,17 +115,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/27/26 2:26 PM, Fabio Estevam wrote:
-> On Sat, Jun 27, 2026 at 9:18 AM Marek Vasut <marex@nabladev.com> wrote:
->>
->> On 6/27/26 3:38 AM, Fabio Estevam wrote:
->>
->> Hello all,
->>
->>>         mx6: ddr: Subtract half a cycle instead of three quarters of a cycle after DQS gating calibration
->> I am not sure whether this one should be really in master, I would like
->> to give people time to really look at it.
-> 
-> Ok, I'll send another PR wth this one removed.
+On Fri, Jun 26, 2026 at 11:58=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Fri, Jun 26, 2026 at 08:40:36PM +0200, Quentin Schulz wrote:
+> > Hi Dario,
+> >
+> > On 6/26/26 8:33 PM, Dario Binacchi wrote:
+> > > Coverity reports an INTEGER_OVERFLOW issue because ut_asserteq() comp=
+ares
+> > > an unsigned int (mmc_dev_num) with ret, which can hold a negative err=
+or
+> > > code.
+> > >
+> >
+> > The trick here is that ut_asserteq() takes two arguments and casts both=
+ as
+> > unsigned int, hence why it complains.
+> >
+> > If Coverity is happy, I'm happy :)
+> >
+> > This looks fine to me, so:
+> >
+> > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> Yes, were you able to push this through coverity on your own?
 
-Thank you !
+No, I haven't.
+
+I couldn't find any documentation on how Coverity is run for U-Boot.
+Is there a recommended way to verify Coverity fixes?
+
+Thanks and regards,
+Dario
+>
+> --
+> Tom
+
+
+
+--=20
+Dario Binacchi
+Senior Embedded Software Engineer
+M. +39 328 0625246
+dario.binacchi@amarulasolutions.com
+=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
+=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
+Amarula Solutions SRL
+ Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
+info@amarulasolutions.com
+www.amarulasolutions.com
