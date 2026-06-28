@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27057C43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 10:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B17DEC43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 10:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AC25846A4;
-	Sun, 28 Jun 2026 12:25:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB4F584931;
+	Sun, 28 Jun 2026 12:25:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Zh/dFo9K";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ynrK8uqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DC9A84832; Sun, 28 Jun 2026 12:25:38 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 12C4984975; Sun, 28 Jun 2026 12:25:42 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99A8884105
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 12:25:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABE678484C
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 12:25:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=9abc=EY=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1782642334;
- bh=24W0iL5EaAVJRwZP/5fWTCk7I9sdKV8AkvkN9Wz+3T4=;
- b=Zh/dFo9KvrjIJES78XpQHEEMe77tQgvFoVm+AcP/2cUhtdyGO13FpfDrrKd8CrPzTK7XbRi/s
- zI5gioLo78AGmPqQsqY721zpKxm+LwXVNlMCrkDajivpAVmAoPeVgnPdMX3SX2NsDFYdQX7+RLy
- lFAw3IUA02LxWiI8HKSMVJ7eRjlrYfyFyZURn6FP6hPt33PgEFkym1m+JWl0zj2fqb26QXhjIFT
- yMeGIs1oZnXtD0FZdJfkJupJlHsDKaGBZDhgCpshbCpcoRLDP6DplZY9ia6J4cN4B6aLxmp7N1q
- rrzQ2cHHNhKF33w8CvkkiCj5JLb+6PSNPdHxXwVlDLOA==
-X-Forward-Email-ID: 6a40f69c7915ab77658c86a9
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1782642338; bh=AwSGeJrKF2yePhZOruAvbuNd4T3E3gsl2GOvCtRiiXc=;
+ b=ynrK8uqURkysaRUWLKEWEE2rzFvPcpg80eeLfeINj/xpGsp+TEf28nf79887Tmx/W4xnOoiho
+ CiEWr7xlxoV0Iftk4pibr3vyoX6RkZRS/wZDumFQUTgWYHqR1jy6yB1mKW+kUCpilk/Ir2FYWt0
+ 5KwcbQYqwcNmyl2Oy7Bdl4Li4fukplY/3DDZM7UdPwx7k6F9XPhRep8q8hR36uM3CWIW3WY4CrM
+ NalWOi7ue1+VQflU+fEUM0cV6LEPd9+QcmJso8Q+UsDmB2lmLQWgg8fD7q1QJLnq7hRoUrfa3zD
+ yZRor8RyRs0KDHePpVNPNU4keVootj2GCfixL/XiWkCw==
+X-Forward-Email-ID: 6a40f69e7915ab77658c86d5
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 2.9.1
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -48,11 +48,13 @@ To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
 Cc: Kaustabh Chakraborty <kauschluss@disroot.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 0/4] mmc: dw_mmc: Allow use of in-spec voltage range for
- vqmmc-supply
-Date: Sun, 28 Jun 2026 10:25:22 +0000
-Message-ID: <20260628102527.1247889-1-jonas@kwiboo.se>
+Subject: [PATCH 1/4] power: regulator: Add helper to set voltage within an
+ acceptable range
+Date: Sun, 28 Jun 2026 10:25:23 +0000
+Message-ID: <20260628102527.1247889-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260628102527.1247889-1-jonas@kwiboo.se>
+References: <20260628102527.1247889-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,41 +73,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Rockchip RK3399 SoC SDMMC IO domain supports 1.8V and 3.0V mode, so
-vqmmc-supply for SD-cards is typically limited to max 3.0V to avoid
-damage to the SoC.
+Add regulator_set_value_clamp() that clamps a requested target voltage
+to both caller-provided limits and the regulator constraints before
+setting the regulator voltage value.
 
-The SD Standards allow for an operating voltage range of 1.70V-1.95V and
-2.7V-3.6V, meaning the 3.0V mode follows spec.
+Return -EINVAL when the caller limits cannot be satisfied by the
+regulator constraints or when the requested range is invalid.
 
-The commit 0b75109b6aaf ("mmc: dw_mmc: return error for invalid voltage
-setting") help enforce strict 1.8V and 3.3V when setting vqmmc-supply
-making mmc_set_signal_voltage() possible fail for MMC_SIGNAL_VOLTAGE_330
-and can lead to an improper switch to MMC_SIGNAL_VOLTAGE_180.
+This helper will initially be used to set vqmmc-supply voltage within an
+acceptable range according to SD Standards, i.e. 1.70V-1.95V and
+2.7V-3.6V.
 
-This series adds a regulator_set_value_clamp() helper set voltage value
-within a requested voltage range instead of an exact value, and changes
-dw_mmc to use this helper to set a voltage within in-spec range to fix
-use of SD-cards with 3.3V signal voltage on Rockchip RK3399 boards using
-MMC_IO_VOLTAGE=y.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/power/regulator/regulator-uclass.c | 27 ++++++++++++++++++++++
+ include/power/regulator.h                  | 12 ++++++++++
+ 2 files changed, 39 insertions(+)
 
-Jonas Karlman (4):
-  power: regulator: Add helper to set voltage within an acceptable range
-  test: dm: regulator: Add regulator_set_value_clamp() tests
-  mmc: dw_mmc: Allow use of in-spec voltage range for vqmmc-supply
-  mmc: sdhci: Use CONFIG_IS_ENABLED for MMC_IO_VOLTAGE
-
- arch/sandbox/dts/sandbox_pmic.dtsi         |  6 ++++
- doc/usage/cmd/dm.rst                       |  3 +-
- drivers/mmc/dw_mmc.c                       |  6 ++--
- drivers/mmc/sdhci.c                        |  2 +-
- drivers/power/regulator/regulator-uclass.c | 27 +++++++++++++++
- drivers/power/regulator/sandbox.c          | 11 ++++---
- include/power/regulator.h                  | 12 +++++++
- include/power/sandbox_pmic.h               | 15 +++++++--
- test/dm/regulator.c                        | 38 ++++++++++++++++++++++
- 9 files changed, 109 insertions(+), 11 deletions(-)
-
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 1c7f75a9338c..0f5ba51ad6c2 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -111,6 +111,33 @@ int regulator_get_suspend_value(struct udevice *dev)
+ 	return ops->get_suspend_value(dev);
+ }
+ 
++int regulator_set_value_clamp(struct udevice *dev,
++			      int min_uV, int target_uV, int max_uV)
++{
++	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
++	struct dm_regulator_uclass_plat *uc_pdata;
++	int uV;
++
++	if (!ops || !ops->set_value)
++		return -ENOSYS;
++
++	uc_pdata = dev_get_uclass_plat(dev);
++	if (uc_pdata->min_uV != -ENODATA && max_uV < uc_pdata->min_uV)
++		return -EINVAL;
++	if (uc_pdata->max_uV != -ENODATA && min_uV > uc_pdata->max_uV)
++		return -EINVAL;
++	if (min_uV > max_uV)
++		return -EINVAL;
++
++	if (uc_pdata->min_uV != -ENODATA)
++		min_uV = max(min_uV, uc_pdata->min_uV);
++	if (uc_pdata->max_uV != -ENODATA)
++		max_uV = min(max_uV, uc_pdata->max_uV);
++	uV = clamp(target_uV, min_uV, max_uV);
++
++	return regulator_set_value(dev, uV);
++}
++
+ /*
+  * To be called with at most caution as there is no check
+  * before setting the actual voltage value.
+diff --git a/include/power/regulator.h b/include/power/regulator.h
+index 4011fb1d254b..a48bb3a5a1db 100644
+--- a/include/power/regulator.h
++++ b/include/power/regulator.h
+@@ -315,6 +315,18 @@ int regulator_set_suspend_value(struct udevice *dev, int uV);
+  */
+ int regulator_get_suspend_value(struct udevice *dev);
+ 
++/**
++ * regulator_set_value_clamp: set clamped microvoltage value of a given regulator
++ *
++ * @dev       - pointer to the regulator device
++ * @min_uV    - the minimum output value to set [micro Volts]
++ * @target_uV - the target output value to set [micro Volts]
++ * @max_uV    - the maximum output value to set [micro Volts]
++ * Return:    - 0 on success or -errno val if fails
++ */
++int regulator_set_value_clamp(struct udevice *dev,
++			      int min_uV, int target_uV, int max_uV);
++
+ /**
+  * regulator_set_value_force: set the microvoltage value of a given regulator
+  *			      without any min-,max condition check
 -- 
 2.54.0
 
