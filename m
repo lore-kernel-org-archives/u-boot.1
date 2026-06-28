@@ -4,155 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41B34C43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 13:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D396C43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 16:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAC13849EE;
-	Sun, 28 Jun 2026 15:25:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3984283FEE;
+	Sun, 28 Jun 2026 18:16:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Qj0JU/Bv";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eHTaUDun";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="tZxWMgPr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 286028056B; Sun, 28 Jun 2026 15:17:48 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CB9B8056B
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 15:17:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65S9xFq63661675
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:17:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 5GaJ2gIhXUpQlfGNndPn65U30CqybVLQbNq/PxZFaPQ=; b=Qj0JU/BvvxocMu6T
- nkkeH/U+tNqbzDHdtnuPPWC5jLjoFaaNX6GLqg4bb/oD34WPPpK/OkrbuFszMEru
- AVzbR3G6WIMA69jismkRigAOGvhLkpGxkESnf7jxFgwSG6D5keuXfA/OVwQM7Uvl
- exf9c8CQVQrO3fTu6iT5VLoTNZ8WOmAi0niLHj6yqFQgwiD2i+MqFnaJz83ZAkZ1
- Lx5TO7Pknb6ZbbqwRyYvjWRo/3AUz2TVFddtdK8ACluLT+vEG3bA2KQzuSbOP1tP
- C4FOTei5VZ5bJHuQbyUz1GL+AXRE0m9ApXk1Aj2jWi0WqPcFtZb5KTQxVP0WlM51
- JMrdWw==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f26w6jxkm-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:17:43 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id
- a92af1059eb24-139871a52c2so3567697c88.1
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 06:17:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782652663; x=1783257463; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5GaJ2gIhXUpQlfGNndPn65U30CqybVLQbNq/PxZFaPQ=;
- b=eHTaUDunDNav0EPFW728TWcTpLUOvlr83eSesHzw5Gsvym6FWEjoSWMbpJcrW3sqaN
- S1AtrDB/OyLDg8TKsj3C50Bj6Klk2WbRbYjwq/aZHzjNwi5M+knyh8gXWxLM1aOai/sU
- DUVCIWx2me/Iy/y0NE29zhbdW8cJkbHWn1M1uBpBSxG5FKwqvOu9eaKqSASheCZFe9RF
- r2GRNlC9sE8TI47FJ3psQm7F3n+I2m2OWUmzY7+crD5rO9ZiRFPihzMRQDrq5iYoqTIc
- 7k5rbqZfQNMjNDwMjt2zG+fSk9ijb+VVBkLdFKJoJPCUXyL3H436Mm3b5ZI4YJG/P6tx
- bSBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782652663; x=1783257463;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5GaJ2gIhXUpQlfGNndPn65U30CqybVLQbNq/PxZFaPQ=;
- b=Faln+gBIlvhRzIPujFIJnNWar/ElEjVcH6GVXPqfp1ehMJ8OLE3q0yuXFSvAV2/Gd3
- Hms+Rib6LTFkmnrI8s0wOKauUJwI54Rm/qdQhgiaIZgdAtDOlwAygUeSjrV04hi9fB8t
- tsa5Sxec5jZSsoWW+sOYrzOpi2qiSFdV6sTDsmzQ11Bolq1LfE2Td4fCY7IH5E3Lgaa8
- FD50YhMuoCMG0j84V9GyItSldCV+KpwW8G58uRwU4DtnrU4x0eH8sqrEZA6mHQPVqgXI
- OHQcHL/AAn3L21YqX47PojZNECAL3uByU+KRwy8fAjrmywEmOya4S0DhMek3S+Dj2Xan
- un8A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+W9X5I2g4YSTcDbvNxglprsV62OxPJ7rrJJFIYH3L3aqQwYtBtQLHxjpTyUtz5LSUKr3cUUJs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzzr6YAZLgvpR97FmTvF9O0RP9/gYQ5Oaq0AgCvrxNxI3n1vWYp
- iyBuGl6wkAsMFBA/JXPapu6mOpxbWLC+/9IBP3RLBwL3GOzUnKsvmuK+85wwbk505w1Nbasmx23
- j40vOH12ud+NsL36YC5aMClHwbKm9Mef2gIu2zxgTZEqZOfuyIrRqQe+a
-X-Gm-Gg: AfdE7cmWlzIBHgomRolwhaDxZqwALx73HXZXFeOR16Mx6Wl0gN33bWIzV90Oky6uNvN
- 6DOr2c0igQ2ODBXzWwH+CIoRT7m9R+XymXFDWv/00DfQgQ61Z3jTWfBAZsg/sbIaCPwy+V4Gcvf
- mvOVljE3/XU3mLgT+fjuSl1eEy+ogIu8KcfHRrEHngFa7b1/wK9m2NwqhwfNUhxcjkF715kPjKY
- eEhn4fDq7SR5jCPiKXsBwEWcujwgCYdGcOGGBIRfYBQcdLR7zB+bAW8Jm0eBBkSKYAkvTqGEcvX
- hib9zwOZIJqBYBtoBG4catf4WDOTSLZMa8EdAJ5aeyU5lgRkwDAogELcDqzhSvEIW8LXGxb++2r
- IyAbT3UUSlxZ284EEQ1zupgGBr7nkOkHC7HZK0+hyyXEf0kc=
-X-Received: by 2002:a05:7022:10c:b0:135:dc2b:57e1 with SMTP id
- a92af1059eb24-139db9e6408mr11633080c88.6.1782652662723; 
- Sun, 28 Jun 2026 06:17:42 -0700 (PDT)
-X-Received: by 2002:a05:7022:10c:b0:135:dc2b:57e1 with SMTP id
- a92af1059eb24-139db9e6408mr11633026c88.6.1782652662057; 
- Sun, 28 Jun 2026 06:17:42 -0700 (PDT)
-Received: from [192.168.0.5] ([49.206.99.179])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d91006afsm45559191c88.12.2026.06.28.06.17.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 28 Jun 2026 06:17:41 -0700 (PDT)
-Message-ID: <1605086a-876e-43e6-831c-6579bb2a6deb@oss.qualcomm.com>
-Date: Sun, 28 Jun 2026 18:47:29 +0530
+ id E5C4E84105; Sun, 28 Jun 2026 18:16:44 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 2396F805D7
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 18:16:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BD9AB1BF3;
+ Sun, 28 Jun 2026 09:16:36 -0700 (PDT)
+Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2D0123F905;
+ Sun, 28 Jun 2026 09:16:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1782663401; bh=NdB1CtJkTKfHDMM1kBUg1A+GaozgiwT3/fTb1WUS6mc=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=tZxWMgPrZSc6uPnxFNbFrRFF738DrCJbgyg1VY5mZrbvgZMUjzIzgPTmiKwuEGiPu
+ dHHxXc147F/42SBNMFoRFkTgkzbpk5d18adtESFVF6TxEhyWQg9XNfxnJJTXx7oYt4
+ gcLdsd8pTOR5KLztWmPLhSXeVnWnY+ZapYBs+BCQ=
+Date: Sun, 28 Jun 2026 17:17:16 +0200
+From: Andre Przywara <andre.przywara@arm.com>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Hans de Goede
+ <hdegoede@redhat.com>, Richard Genoud <richard.genoud@bootlin.com>, Michael
+ Trimarchi <michael@amarulasolutions.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Bohdan Chubuk <chbgdn@gmail.com>
+Subject: Re: [PATCH] mmc: sunxi: support DM MMC in SPL
+Message-ID: <20260628171716.4a9d7793@ryzen.lan>
+In-Reply-To: <20260626205153.2744981-1-james.hilliard1@gmail.com>
+References: <20260626205153.2744981-1-james.hilliard1@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 11/11] doc: board/qualcomm: Update RDP build
- instructions
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, tien.fong.chee@altera.com, anshuld@ti.com,
- alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
- alice.guo@nxp.com, marek.vasut+renesas@mailbox.org,
- quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
- sjg@chromium.org, andre.przywara@arm.com, afd@ti.com, h-salunke@ti.com,
- alchark@gmail.com, mkorpershoek@kernel.org, dinesh.maniyam@altera.com,
- luca.weiss@fairphone.com, danila@jiaxyga.com,
- aswin.murugan@oss.qualcomm.com, ycliang@andestech.com,
- n-francis@ti.com, mateuslima.ti@gmail.com, jamie.gibbons@microchip.com,
- david.wronek@mainlining.org, james.hilliard1@gmail.com,
- philip.molloy@analog.com, ravi@prevas.dk, sughosh.ganu@arm.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20260623064804.3988799-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260623064804.3988799-12-varadarajan.narayanan@oss.qualcomm.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260623064804.3988799-12-varadarajan.narayanan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: uukc8eO8l42ZZVrJYg-92mPTMOglBDzu
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfX3YnpOr9wn7Bo
- +Q57F17A5OAxZPnxXSRa3LkolXN4THktMqXwyjuqukbROLjgsaeAL9LF13B34YW0kAxJrs0drJ4
- Wygvb9D0XHqH9Ig/X5IumZIcvHahDjk=
-X-Proofpoint-GUID: uukc8eO8l42ZZVrJYg-92mPTMOglBDzu
-X-Authority-Analysis: v=2.4 cv=SuugLvO0 c=1 sm=1 tr=0 ts=6a411ef7 cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=8fNwSSZIJDewi4B+fYJmHw==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=1FHRc4FDAAAA:20 a=qC_FGOx9AAAA:8 a=NEAV23lmAAAA:8
- a=3avKqCElbSkC4DZG6s4A:9 a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22
- a=fsdK_YakeE02zTmptMdW:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfX2sVA7Cap2SfZ
- k4UvvF/++KU1LvrkZ3N08nXxoK+rmH/zz9zEho6QMIHq+bw/CIiP2VL8LSfAW3XexoCROjQaL0k
- lX7lTHxD8pgiisFHMPuaYrQcY9WdalVQO3teNbgdYVSfPVMP9zuqPcZJkubyXF6xYlqh5WR//ie
- JvxPujKWB5qnm84tmz0jJ+8jbJ/QBNPJtZ3lxZjE0qz3ZNW6cgNfBvitVAL5eFdg6z2RkfX/dPD
- IF0gBwIE2964+OQjUhNdB1XSe+e463cTm3sNQ+ea0MQyj5v+YPliE8JS6fy9JiMUg4K3mowpPuf
- TOJ7mslluMI14Ox2Ag5wBW4mJB9C6eRDyECpqK0MY1hE94H+Ov68Z/Yhdm35LcIi912JAMjvsL1
- J3bcfwgB124CiuhKCGXmvPlsXd4b0/o7LByCeknxE8O1SUZkxEcKBa1Whaf6M2wJqtmS5qyuaXi
- n0wKbN2rC/U1BTNPvvQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-28_03,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 adultscore=0 priorityscore=1501 clxscore=1015
- phishscore=0 bulkscore=0 impostorscore=0 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606280116
-X-Mailman-Approved-At: Sun, 28 Jun 2026 15:25:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,157 +68,515 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varada,
+On Fri, 26 Jun 2026 14:51:50 -0600
+James Hilliard <james.hilliard1@gmail.com> wrote:
 
-On 6/23/2026 12:18 PM, Varadarajan Narayanan wrote:
-> Add details about the SPL & U-Boot proper build steps, converting to
-> flashable images, source URLs for the needed binaries and scripts.
->
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Hi James,
 
-Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> sunxi SPL normally uses the legacy MMC interface while U-Boot
+> proper uses the DM driver. Boards which enable SPL_DM_MMC need
 
-Regards,
+I think I mentioned this before: enabling the device model in the SPL
+(or not) is not a *device* decision, but a platform one. And for
+technical reasons, mostly to support older devices, which have no other
+choice, but also to keep it simple and the SPL small, we do not use DM
+in the SPL on Allwinner boards. I see the SPL as the continuation of the
+BootROM, which is completely board agnostic. The SPL can mimic this
+behaviour, to follow the decisions that the BootROM made, for instance
+about the boot device. The only difference here is the DRAM
+initialisation, which requires some board specific data, but so far we
+got away with just hardcoding it. If that is not good anymore, I think
+we can find other solutions than pulling in the whole world of SPL_DM
+support.
 
-Balaji
+So what is the purpose of this exercise, why do you want DM_SPL
+supported? Keep in mind that there are 178 Allwinner boards supported in
+U-Boot, so there better would be good reasons to change something
+fundamental like this for all of them. It changing it for a number of
+them is not better, because this doubles the test matrix, so we have to
+test now that it works on both legacy and DM_SPL boards - which frankly
+nobody will do.
 
+And aside from that, please do NOT add any more #ifdef's to the U-Boot
+code. Also just posting single patches that do not do anything on their
+own is not a good idea.
+
+Cheers,
+Andre
+
+> the DM driver to perform the same early pinmux, resource and clock
+> setup as the legacy path.
+> 
+> For SPL without OF_CONTROL, create controllers from static platform
+> data matching the controllers selected by the legacy SPL board code.
+> Reuse the legacy host capability, resource and clock setup helpers for
+> that no-devicetree probe path.
+> 
+> For SPL with OF_CONTROL but without SPL_CLK or SPL_PINCTRL, keep
+> using the devicetree for the controller address and clock register
+> layout, then fall back to the legacy CCU base, clock init and pinmux
+> setup. This allows SPL to use DM_MMC without pulling the full clock
+> and pinctrl drivers into SRAM-constrained builds.
+> 
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 > ---
-> v5: Fix documentation related build errors
->
-> v4: Replace script based image creation with binman based command
->
-> v3: Use '-' for sub heading instead of '='
->      Add location for template.its and sort the list alphabetically
-> ---
->   doc/board/qualcomm/rdp.rst | 98 ++++++++++++++++++++++++++++++++++++--
->   1 file changed, 93 insertions(+), 5 deletions(-)
->
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> index 99cf8eba57c..5a0ce92e310 100644
-> --- a/doc/board/qualcomm/rdp.rst
-> +++ b/doc/board/qualcomm/rdp.rst
-> @@ -24,13 +24,17 @@ This will build ``u-boot.elf`` in the configured output directory.
->   The firmware expects the ELF images to be in MBN format. The `elftombn.py` tool
->   can be used to convert the ELF images to MBN format.
->   
-> -	IPQ9574: (MBN version 6)
-> +IPQ9574: (MBN version 6)
->   
-> -		$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v6
-> +.. code-block:: bash
->   
-> -	IPQ5424: (MBN version 7)
-> +    python elftombn.py -f u-boot.elf -o u-boot.mbn -v6
->   
-> -		$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
-> +IPQ5424: (MBN version 7)
+>  arch/arm/include/asm/arch-sunxi/mmc.h |   1 +
+>  board/sunxi/board.c                   |   6 +-
+>  drivers/mmc/sunxi_mmc.c               | 252 +++++++++++++++++---------
+>  3 files changed, 175 insertions(+), 84 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/mmc.h b/arch/arm/include/asm/arch-sunxi/mmc.h
+> index b8d91b5c64b..e6c19bf08fb 100644
+> --- a/arch/arm/include/asm/arch-sunxi/mmc.h
+> +++ b/arch/arm/include/asm/arch-sunxi/mmc.h
+> @@ -3,6 +3,7 @@
+>  #ifndef _ASM_ARCH_MMC_H_
+>  #define _ASM_ARCH_MMC_H_
+>  
+> +void sunxi_mmc_pinmux_setup(int sdc_no);
+>  struct mmc *sunxi_mmc_init(int sdc_no);
+>  
+>  #endif /* _ASM_ARCH_MMC_H_ */
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 3d1afec7c66..4311f38737c 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -334,7 +334,7 @@ void board_nand_init(void)
+>  #endif /* CONFIG_NAND_SUNXI */
+>  
+>  #ifdef CONFIG_MMC
+> -static void mmc_pinmux_setup(int sdc)
+> +void sunxi_mmc_pinmux_setup(int sdc)
+>  {
+>  	unsigned int pin;
+>  
+> @@ -515,13 +515,13 @@ int board_mmc_init(struct bd_info *bis)
+>  	 * any problem with unconditionally enabling this in the SPL.
+>  	 */
+>  	if (!IS_ENABLED(CONFIG_UART0_PORT_F)) {
+> -		mmc_pinmux_setup(0);
+> +		sunxi_mmc_pinmux_setup(0);
+>  		if (!sunxi_mmc_init(0))
+>  			return -1;
+>  	}
+>  
+>  	if (CONFIG_MMC_SUNXI_SLOT_EXTRA != -1) {
+> -		mmc_pinmux_setup(CONFIG_MMC_SUNXI_SLOT_EXTRA);
+> +		sunxi_mmc_pinmux_setup(CONFIG_MMC_SUNXI_SLOT_EXTRA);
+>  		if (!sunxi_mmc_init(CONFIG_MMC_SUNXI_SLOT_EXTRA))
+>  			return -1;
+>  	}
+> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+> index e28c81afffe..7816dac3423 100644
+> --- a/drivers/mmc/sunxi_mmc.c
+> +++ b/drivers/mmc/sunxi_mmc.c
+> @@ -6,11 +6,11 @@
+>   *
+>   * MMC driver for allwinner sunxi platform.
+>   *
+> - * This driver is used by the (ARM) SPL with the legacy MMC interface, and
+> - * by U-Boot proper using the full DM interface. The actual hardware access
+> - * code is common, and comes first in this file.
+> - * The legacy MMC interface implementation comes next, followed by the
+> - * proper DM_MMC implementation at the end.
+> + * This driver is used by the (ARM) SPL with the legacy MMC interface or the
+> + * full DM interface, and by U-Boot proper using the full DM interface. The
+> + * actual hardware access code is common, and comes first in this file.
+> + * The legacy MMC interface implementation comes next, followed by the DM_MMC
+> + * implementation at the end.
+>   */
+>  
+>  #include <dm.h>
+> @@ -24,9 +24,7 @@
+>  #include <asm/io.h>
+>  #include <asm/arch/clock.h>
+>  #include <asm/arch/cpu.h>
+> -#if !CONFIG_IS_ENABLED(DM_MMC)
+>  #include <asm/arch/mmc.h>
+> -#endif
+>  #include <linux/delay.h>
+>  #include <sunxi_gpio.h>
+>  
+> @@ -36,7 +34,12 @@
+>  #define CCM_MMC_CTRL_MODE_SEL_NEW	0
+>  #endif
+>  
+> +#define SUNXI_MMC_NAME			"SUNXI SD/MMC"
 > +
-> +.. code-block:: bash
+>  struct sunxi_mmc_plat {
+> +#if !CONFIG_IS_ENABLED(OF_REAL)
+> +	unsigned int mmc_no;
+> +#endif
+>  	struct mmc_config cfg;
+>  	struct mmc mmc;
+>  };
+> @@ -64,6 +67,83 @@ static bool sunxi_mmc_can_calibrate(void)
+>  	       IS_ENABLED(CONFIG_MACH_SUN8I_R40);
+>  }
+>  
+> +#if !CONFIG_IS_ENABLED(DM_MMC) || !CONFIG_IS_ENABLED(OF_REAL)
+> +static uint sunxi_mmc_get_host_caps(unsigned int mmc_no)
+> +{
+> +	uint host_caps = MMC_MODE_4BIT;
 > +
-> +    python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
->   
->   Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
->   on your device with::
-> @@ -42,17 +46,101 @@ on your device with::
->   
->   U-Boot should be running after a reboot (``reset``).
->   
-> +Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
-> +--------------------------------------------------------------------
+> +	if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
+> +	     IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> +	     IS_ENABLED(CONFIG_MACH_SUN55I_A523)) && mmc_no == 2)
+> +		host_caps = MMC_MODE_8BIT;
 > +
-> +Please refer to the following URLs for more details about the platforms.
+> +	return host_caps | MMC_MODE_HS_52MHz | MMC_MODE_HS;
+> +}
 > +
-> +	F8: https://www.qualcomm.com/networking-infrastructure/products/f-series/f8-platform
+> +static int mmc_resource_init(struct sunxi_mmc_priv *priv, int sdc_no)
+> +{
+> +	void *ccm = (void *)SUNXI_CCM_BASE;
 > +
-> +	N8: https://www.qualcomm.com/networking-infrastructure/products/n-series/n8-platform
+> +	debug("init mmc %d resource\n", sdc_no);
 > +
-> +1. Since U-Boot SPL is enabled on these platforms, the build command generates
-> +   both the U-Boot SPL and U-Boot proper images. Assuming ${uboot_dir} is the
-> +   top of the U-Boot sources and ${out_dir} as the output directory,
+> +	switch (sdc_no) {
+> +	case 0:
+> +		priv->reg = (struct sunxi_mmc *)SUNXI_MMC0_BASE;
+> +		priv->mclkreg = ccm + CCU_MMC0_CLK_CFG;
+> +		break;
+> +	case 1:
+> +		priv->reg = (struct sunxi_mmc *)SUNXI_MMC1_BASE;
+> +		priv->mclkreg = ccm + CCU_MMC1_CLK_CFG;
+> +		break;
+> +#ifdef SUNXI_MMC2_BASE
+> +	case 2:
+> +		priv->reg = (struct sunxi_mmc *)SUNXI_MMC2_BASE;
+> +		priv->mclkreg = ccm + CCU_MMC2_CLK_CFG;
+> +		break;
+> +#endif
+> +#ifdef SUNXI_MMC3_BASE
+> +	case 3:
+> +		priv->reg = (struct sunxi_mmc *)SUNXI_MMC3_BASE;
+> +		priv->mclkreg = ccm + CCU_MMC3_CLK_CFG;
+> +		break;
+> +#endif
+> +	default:
+> +		printf("Wrong mmc number %d\n", sdc_no);
+> +		return -1;
+> +	}
+> +	priv->mmc_no = sdc_no;
 > +
-> +.. code-block:: bash
+> +	return 0;
+> +}
+> +#endif
 > +
-> +    cd ${uboot_dir}
-> +    export CROSS_COMPILE=<aarch64 toolchain prefix>
-> +    make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
-> +    make -j8 O=${out_dir}
+> +#if !CONFIG_IS_ENABLED(DM_MMC) || !CONFIG_IS_ENABLED(OF_REAL) || \
+> +	!CONFIG_IS_ENABLED(CLK)
+> +static void sunxi_mmc_clock_init(int sdc_no)
+> +{
+> +	void *ccm = (void *)SUNXI_CCM_BASE;
 > +
-> +U-Boot SPL image:	${out_dir}/spl/u-boot-spl.wrap-elf
-> +U-Boot image:	${out_dir}/u-boot.elf
+> +	debug("init mmc %d clock and io\n", sdc_no);
+> +#if !defined(CONFIG_SUN50I_GEN_H6) && !defined(CONFIG_SUNXI_GEN_NCAT2)
+> +	setbits_le32(ccm + CCU_AHB_GATE0, 1 << AHB_GATE_OFFSET_MMC(sdc_no));
 > +
-> +2. Convert the SPL image to multi ELF
+> +#ifdef CONFIG_SUNXI_GEN_SUN6I
+> +	/* unassert reset */
+> +	setbits_le32(ccm + CCU_AHB_RESET0_CFG, 1 << AHB_RESET_OFFSET_MMC(sdc_no));
+> +#endif
+> +#if defined(CONFIG_MACH_SUN9I)
+> +	/* sun9i has a mmc-common module, also set the gate and reset there */
+> +	writel(SUNXI_MMC_COMMON_CLK_GATE | SUNXI_MMC_COMMON_RESET,
+> +	       SUNXI_MMC_COMMON_BASE + 4 * sdc_no);
+> +#endif
+> +#else /* CONFIG_SUN50I_GEN_H6 */
+> +	setbits_le32(ccm + CCU_H6_MMC_GATE_RESET, 1 << sdc_no);
+> +	/* unassert reset */
+> +	setbits_le32(ccm + CCU_H6_MMC_GATE_RESET, 1 << (RESET_SHIFT + sdc_no));
+> +#endif
+> +}
+> +#endif
 > +
-> +.. code-block:: bash
+>  static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
+>  {
+>  	unsigned int pll, pll_hz, div, n, oclk_dly, sclk_dly;
+> @@ -492,43 +572,6 @@ static void sunxi_mmc_reset(void *regs)
+>  /* support 4 mmc hosts */
+>  struct sunxi_mmc_priv mmc_host[4];
+>  
+> -static int mmc_resource_init(int sdc_no)
+> -{
+> -	struct sunxi_mmc_priv *priv = &mmc_host[sdc_no];
+> -	void *ccm = (void *)SUNXI_CCM_BASE;
+> -
+> -	debug("init mmc %d resource\n", sdc_no);
+> -
+> -	switch (sdc_no) {
+> -	case 0:
+> -		priv->reg = (struct sunxi_mmc *)SUNXI_MMC0_BASE;
+> -		priv->mclkreg = ccm + CCU_MMC0_CLK_CFG;
+> -		break;
+> -	case 1:
+> -		priv->reg = (struct sunxi_mmc *)SUNXI_MMC1_BASE;
+> -		priv->mclkreg = ccm + CCU_MMC1_CLK_CFG;
+> -		break;
+> -#ifdef SUNXI_MMC2_BASE
+> -	case 2:
+> -		priv->reg = (struct sunxi_mmc *)SUNXI_MMC2_BASE;
+> -		priv->mclkreg = ccm + CCU_MMC2_CLK_CFG;
+> -		break;
+> -#endif
+> -#ifdef SUNXI_MMC3_BASE
+> -	case 3:
+> -		priv->reg = (struct sunxi_mmc *)SUNXI_MMC3_BASE;
+> -		priv->mclkreg = ccm + CCU_MMC3_CLK_CFG;
+> -		break;
+> -#endif
+> -	default:
+> -		printf("Wrong mmc number %d\n", sdc_no);
+> -		return -1;
+> -	}
+> -	priv->mmc_no = sdc_no;
+> -
+> -	return 0;
+> -}
+> -
+>  static int sunxi_mmc_core_init(struct mmc *mmc)
+>  {
+>  	struct sunxi_mmc_priv *priv = mmc->priv;
+> @@ -562,52 +605,27 @@ static const struct mmc_ops sunxi_mmc_ops = {
+>  
+>  struct mmc *sunxi_mmc_init(int sdc_no)
+>  {
+> -	void *ccm = (void *)SUNXI_CCM_BASE;
+>  	struct sunxi_mmc_priv *priv = &mmc_host[sdc_no];
+>  	struct mmc_config *cfg = &priv->cfg;
+>  	int ret;
+>  
+>  	memset(priv, '\0', sizeof(struct sunxi_mmc_priv));
+>  
+> -	cfg->name = "SUNXI SD/MMC";
+> +	cfg->name = SUNXI_MMC_NAME;
+>  	cfg->ops  = &sunxi_mmc_ops;
+>  
+>  	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
+> -	cfg->host_caps = MMC_MODE_4BIT;
+> -
+> -	if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
+> -	    IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_MACH_SUN55I_A523)) &&
+> -	    (sdc_no == 2))
+> -		cfg->host_caps = MMC_MODE_8BIT;
+> -
+> -	cfg->host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
+> +	cfg->host_caps = sunxi_mmc_get_host_caps(sdc_no);
+>  	cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
+>  
+>  	cfg->f_min = 400000;
+>  	cfg->f_max = 52000000;
+>  
+> -	if (mmc_resource_init(sdc_no) != 0)
+> +	if (mmc_resource_init(priv, sdc_no) != 0)
+>  		return NULL;
+>  
+>  	/* config ahb clock */
+> -	debug("init mmc %d clock and io\n", sdc_no);
+> -#if !defined(CONFIG_SUN50I_GEN_H6) && !defined(CONFIG_SUNXI_GEN_NCAT2)
+> -	setbits_le32(ccm + CCU_AHB_GATE0, 1 << AHB_GATE_OFFSET_MMC(sdc_no));
+> -
+> -#ifdef CONFIG_SUNXI_GEN_SUN6I
+> -	/* unassert reset */
+> -	setbits_le32(ccm + CCU_AHB_RESET0_CFG, 1 << AHB_RESET_OFFSET_MMC(sdc_no));
+> -#endif
+> -#if defined(CONFIG_MACH_SUN9I)
+> -	/* sun9i has a mmc-common module, also set the gate and reset there */
+> -	writel(SUNXI_MMC_COMMON_CLK_GATE | SUNXI_MMC_COMMON_RESET,
+> -	       SUNXI_MMC_COMMON_BASE + 4 * sdc_no);
+> -#endif
+> -#else /* CONFIG_SUN50I_GEN_H6 */
+> -	setbits_le32(ccm + CCU_H6_MMC_GATE_RESET, 1 << sdc_no);
+> -	/* unassert reset */
+> -	setbits_le32(ccm + CCU_H6_MMC_GATE_RESET, 1 << (RESET_SHIFT + sdc_no));
+> -#endif
+> +	sunxi_mmc_clock_init(sdc_no);
+>  	ret = mmc_set_mod_clk(priv, 24000000);
+>  	if (ret)
+>  		return NULL;
+> @@ -644,7 +662,7 @@ static int sunxi_mmc_getcd(struct udevice *dev)
+>  	    (mmc->cfg->host_caps & MMC_CAP_NEEDS_POLL))
+>  		return 1;
+>  
+> -	if (dm_gpio_is_valid(&priv->cd_gpio)) {
+> +	if (CONFIG_IS_ENABLED(DM_GPIO) && dm_gpio_is_valid(&priv->cd_gpio)) {
+>  		int cd_state = dm_gpio_get_value(&priv->cd_gpio);
+>  
+>  		if (mmc->cfg->host_caps & MMC_CAP_CD_ACTIVE_HIGH)
+> @@ -652,6 +670,7 @@ static int sunxi_mmc_getcd(struct udevice *dev)
+>  		else
+>  			return cd_state;
+>  	}
 > +
-> +    cd ${out_dir}/spl
-> +    python elftombn.py -f u-boot-spl.wrap-elf -o u-boot-spl.mbn -v7
-> +    python `create_multielf.py` -f u-boot-spl.mbn,tmel-ipq52xx-patch.elf \
-> +					-o u-boot-spl.melf
+>  	return 1;
+>  }
+>  
+> @@ -661,6 +680,7 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
+>  	.get_cd		= sunxi_mmc_getcd,
+>  };
+>  
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+>  static unsigned get_mclk_offset(void)
+>  {
+>  	if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
+> @@ -671,20 +691,26 @@ static unsigned get_mclk_offset(void)
+>  
+>  	return 0x88;
+>  };
+> +#endif
+>  
+>  static int sunxi_mmc_probe(struct udevice *dev)
+>  {
+>  	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+>  	struct sunxi_mmc_plat *plat = dev_get_plat(dev);
+>  	struct sunxi_mmc_priv *priv = dev_get_priv(dev);
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+>  	struct reset_ctl_bulk reset_bulk;
+> +#if CONFIG_IS_ENABLED(CLK)
+>  	struct clk gate_clk;
+> -	struct mmc_config *cfg = &plat->cfg;
+> +#endif
+>  	struct ofnode_phandle_args args;
+>  	u32 *ccu_reg;
+> +#endif
+> +	struct mmc_config *cfg = &plat->cfg;
+>  	int ret;
+>  
+> -	cfg->name = dev->name;
+> +	if (!cfg->name)
+> +		cfg->name = dev->name;
+>  
+>  	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
+>  	cfg->host_caps = MMC_MODE_HS_52MHz | MMC_MODE_HS;
+> @@ -693,37 +719,58 @@ static int sunxi_mmc_probe(struct udevice *dev)
+>  	cfg->f_min = 400000;
+>  	cfg->f_max = 52000000;
+>  
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+>  	ret = mmc_of_parse(dev, cfg);
+>  	if (ret)
+>  		return ret;
+>  
+>  	priv->reg = dev_read_addr_ptr(dev);
+> +	priv->mmc_no = ((uintptr_t)priv->reg - SUNXI_MMC0_BASE) / 0x1000;
 > +
-> +This u-boot-spl.melf should be flashed into 0:SPL partition.
-> +Please see below for the location of `tmel-ipq52xx-patch.elf`
+> +#if !CONFIG_IS_ENABLED(PINCTRL)
+> +	sunxi_mmc_pinmux_setup(priv->mmc_no);
+> +#endif
+>  
+>  	/* We don't have a sunxi clock driver so find the clock address here */
+>  	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0,
+>  					  1, &args);
+> -	if (ret)
+> +	if (!ret)
+> +		ccu_reg = (u32 *)(uintptr_t)ofnode_get_addr(args.node);
+> +	else if (!CONFIG_IS_ENABLED(CLK))
+> +		ccu_reg = (u32 *)SUNXI_CCM_BASE;
+> +	else
+>  		return ret;
+> -	ccu_reg = (u32 *)(uintptr_t)ofnode_get_addr(args.node);
+>  
+> -	priv->mmc_no = ((uintptr_t)priv->reg - SUNXI_MMC0_BASE) / 0x1000;
+>  	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * 4;
+>  
+> +#if CONFIG_IS_ENABLED(CLK)
+>  	ret = clk_get_by_name(dev, "ahb", &gate_clk);
+>  	if (!ret)
+>  		clk_enable(&gate_clk);
+> +#else
+> +	sunxi_mmc_clock_init(priv->mmc_no);
+> +#endif
+>  
+>  	ret = reset_get_bulk(dev, &reset_bulk);
+>  	if (!ret)
+>  		reset_deassert_bulk(&reset_bulk);
+> +#else
+> +	cfg->host_caps = sunxi_mmc_get_host_caps(plat->mmc_no);
+> +	sunxi_mmc_pinmux_setup(plat->mmc_no);
+> +	ret = mmc_resource_init(priv, plat->mmc_no);
+> +	if (ret)
+> +		return ret;
+> +	sunxi_mmc_clock_init(plat->mmc_no);
+> +#endif
+>  
+>  	ret = mmc_set_mod_clk(priv, 24000000);
+>  	if (ret)
+>  		return ret;
+>  
+>  	/* This GPIO is optional */
+> -	gpio_request_by_name(dev, "cd-gpios", 0, &priv->cd_gpio,
+> -			     GPIOD_IS_IN | GPIOD_PULL_UP);
+> +	if (CONFIG_IS_ENABLED(DM_GPIO) && CONFIG_IS_ENABLED(OF_REAL))
+> +		gpio_request_by_name(dev, "cd-gpios", 0, &priv->cd_gpio,
+> +				     GPIOD_IS_IN | GPIOD_PULL_UP);
+>  
+>  	upriv->mmc = &plat->mmc;
+>  
+> @@ -739,6 +786,7 @@ static int sunxi_mmc_bind(struct udevice *dev)
+>  	return mmc_bind(dev, &plat->mmc, &plat->cfg);
+>  }
+>  
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+>  static const struct udevice_id sunxi_mmc_ids[] = {
+>  	{ .compatible = "allwinner,sun4i-a10-mmc" },
+>  	{ .compatible = "allwinner,sun5i-a13-mmc" },
+> @@ -754,15 +802,57 @@ static const struct udevice_id sunxi_mmc_ids[] = {
+>  	{ .compatible = "allwinner,sun50i-a100-emmc" },
+>  	{ /* sentinel */ }
+>  };
+> +#endif
+>  
+>  U_BOOT_DRIVER(sunxi_mmc_drv) = {
+>  	.name		= "sunxi_mmc",
+>  	.id		= UCLASS_MMC,
+> +#if CONFIG_IS_ENABLED(OF_REAL)
+>  	.of_match	= sunxi_mmc_ids,
+> +#endif
+>  	.bind		= sunxi_mmc_bind,
+>  	.probe		= sunxi_mmc_probe,
+>  	.ops		= &sunxi_mmc_ops,
+>  	.plat_auto	= sizeof(struct sunxi_mmc_plat),
+>  	.priv_auto	= sizeof(struct sunxi_mmc_priv),
+> +#if !CONFIG_IS_ENABLED(OF_CONTROL)
+> +	.flags		= DM_FLAG_PRE_RELOC,
+> +#endif
+>  };
 > +
-> +3. Convert the U-Boot image to bootloader image
+> +#if defined(CONFIG_XPL_BUILD) && CONFIG_IS_ENABLED(DM_MMC) && \
+> +	!CONFIG_IS_ENABLED(OF_CONTROL)
+> +/*
+> + * SPL runs DM binding before DRAM init, and sunxi SPL .bss is in DRAM.
+> + * Keep this static platform data non-zero so it stays in SRAM-backed .data.
+> + */
+> +#define SUNXI_MMC_PLAT(_mmc_no)	{ \
+> +		.mmc_no = _mmc_no, \
+> +		.cfg.name = SUNXI_MMC_NAME, \
+> +	}
 > +
-> +.. code-block:: bash
+> +#define SUNXI_MMC_DRVINFO(_mmc_no) \
+> +	static struct sunxi_mmc_plat sunxi_mmc##_mmc_no##_plat = \
+> +		SUNXI_MMC_PLAT(_mmc_no); \
+> +	U_BOOT_DRVINFO(sunxi_mmc##_mmc_no) = { \
+> +		.name = "sunxi_mmc", \
+> +		.plat = &sunxi_mmc##_mmc_no##_plat, \
+> +	}
 > +
-> +    cd ${out_dir}
-> +    python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
+> +#if !IS_ENABLED(CONFIG_UART0_PORT_F)
+> +SUNXI_MMC_DRVINFO(0);
+> +#endif
 > +
-> +The u-boot.mbn has to be combined with `qc_config.elf`, `QCLib.elf`, `TFA`
-> +and `OPTEE`. Please see below for the location for these ELFs. TFA and OPTEE
-> +can be built from the sources using the following commands
+> +#if CONFIG_MMC_SUNXI_SLOT_EXTRA == 1
+> +SUNXI_MMC_DRVINFO(1);
+> +#endif
 > +
-> +TFA:
+> +#if CONFIG_MMC_SUNXI_SLOT_EXTRA == 2 && defined(SUNXI_MMC2_BASE)
+> +SUNXI_MMC_DRVINFO(2);
+> +#endif
 > +
-> +.. code-block:: bash
-> +
-> +    make PLAT=ipq52xx QTISECLIB_PATH=path/to/`libqtisec_dbg.a` SPD=opteed
-> +
-> +OPTEE:
-> +
-> +.. code-block:: bash
-> +
-> +    make PLATFORM=qcom-ipq52xx -j16
-> +
-> +These binaries can be combined into a flashable image using `gen_its.py`.
-> +
-> +.. code-block:: bash
-> +
-> +	python gen_its.py --arch ipq5210		\
-> +		--qclib_path `QCLib.elf`		\
-> +		--qcconfig_path `qc_config.elf`		\
-> +		--tfa_bl31_path bl31.mbn		\
-> +		--uboot_path u-boot.mbn			\
-> +		--optee_path tee-raw.mbn		\
-> +		-p qcconfig qclib			\
-> +		-P tfa_bl31 uboot optee			\
-> +		-o output/hm_503_test_uboot.img		\
-> +		--template `template.its`
-> +
-> +This should be flashed into 0:BOOTLDR partition.
-> +
->   .. WARNING
->   	Boards with newer software versions would automatically go the emergency
->   	download (EDL) mode if U-Boot is not functioning as expected. If its a
->   	runtime failure at Uboot, the system will get reset (due to watchdog)
->   	and XBL will try to boot from next bank and if Bank B also doesn't have
->   	a functional image and is not booting fine, then the system will enter
-> -	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
-> +	EDL.  A tool like bkerler's `edl` can be used for flashing with the
->   	firehose loader binary appropriate for the board.
->   
->   	Note that the support added is very basic. Restoring the original U-Boot
->   	on boards with older version of the software requires a debugger.
->   
-> +.. _create_multielf.py: https://raw.githubusercontent.com/coreboot/coreboot/refs/heads/main/util/qualcomm/create_multielf.py
->   .. _elftombn.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/NHSS.QSDK.13.0.5.r2/scripts?ref_type=heads
->   .. _edl: https://github.com/bkerler/edl
-> +.. _gen_its.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/win.platform_tools.1.0.r34/scripts?ref_type=heads
-> +.. _libqtisec_dbg.a: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/WIN.TFA.1.0.R4/apss_proc/out/proprietary/qtiseclib/output/ipq52xx/release/libqtisec_dbg.a
-> +.. _OPTEE: https://git.codelinaro.org/clo/trusted-firmware/optee_os/optee_os/-/tree/win.optee.1.0?ref_type=heads
-> +.. _qc_config.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/qc_config.elf
-> +.. _QCLib.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/QCLib.elf
-> +.. _template.its: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/win.platform_tools.1.0.r34/scripts?ref_type=heads
-> +.. _TFA: https://git.codelinaro.org/clo/trusted-firmware/tf-a/trusted-firmware-a/-/tree/win.tfa.1.0.r4?ref_type=heads
-> +.. _tmel-ipq52xx-patch.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/TMEL.WNS.2.4/tmel-ipq52xx-patch.elf
+> +#if CONFIG_MMC_SUNXI_SLOT_EXTRA == 3 && defined(SUNXI_MMC3_BASE)
+> +SUNXI_MMC_DRVINFO(3);
+> +#endif
+> +#endif
+>  #endif
+
