@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9714AC43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 08:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDCEC43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 08:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE47F84869;
+	by phobos.denx.de (Postfix) with ESMTP id E75FC84832;
 	Sun, 28 Jun 2026 10:28:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RjRaDeiQ";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AERN9QTL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1550E849BA; Sun, 28 Jun 2026 10:28:17 +0200 (CEST)
+ id 1FC8C848F3; Sun, 28 Jun 2026 10:28:17 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69194848EB
+ by phobos.denx.de (Postfix) with ESMTPS id ECD4E8490A
  for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 10:28:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id AFC6E42099; 
- Sun, 28 Jun 2026 08:28:13 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 48E56420A6; 
+ Sun, 28 Jun 2026 08:28:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20251003; t=1782635294;
- bh=q3kBqJSbHLOLbbPxRqf5P5UXEqzQcsH2dWN5rprKOwQ=;
+ bh=Mkfxbnz0mTr4tB4BQpT7GWqRmG+HCnk4b3x/Zh28+xk=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=RjRaDeiQujHzOBtaiz/OHBlZgNKYZ0Pz8LSWSfSzLUzMhHA7McK/NSE170fWkLXQv
- 1jAwDkEGghv9Ap0DTR2sXR/dT5tuDN0SETx7gyl89+OROKWXVxBpYkbImmjivKst2B
- ghFurhaBxaQ+9XnkQv6h3cbHQ8+sHKV++Rrm4TlPw9pDC1vDCc0ZwknSlEOIfcVZXt
- xaJb5qbSQ6aJo3p87GYpTkcvFSTtFDIfpStR/rSKDwPToFWgkSDeiJPImkLlARLK1z
- 53BiSpxZFuvng7+GBPZiGSLzSaWftmTqleIv9H4yCakXZjf+vlBY9GZOKkMC5xuR8a
- n8kwxK8IXau2EdQyx+ShZHrFB+IKW6ZuidKOyusHMtaWndq/rbCmGlPJbARHCN0HMP
- 6VQ3OKLmlXbGo2dj39c/lU6f1wMpg1m7h7yGNdeA1uTSXjm5GIG0WLMnEFpDap1GJw
- GlmJuDxvZUKxmPZ2EDgl3zzf/Rt1OM4kxb1DK7Pj549F2y/nzSfTN8NnEJijNkX4pl
- AXAtph4vz/J4wVTbFUUQRiEjpCOLX1RVXnSfB8g0pEEcLyuQLoM5o2JgpGmZpMZ8fe
- 6KSHnUN2ZyJAOvjduufaN1zHE9u+1Kie0NedHQr4LyfP75h6IIqJOCbUbyZxv+MBE6
- Kd4ymvhBUXr99JbYI06Fdeos=
+ b=AERN9QTLefnkRbwNLQ5jWm/oUBUqMbhmmHPNKI1L5bLrS2DgPmbqzjfZidYuSxPBV
+ PfLVNCaM/j2oYwXfVz784R+KNQq5TZ9ICSU84umdhdgvxtU/rt0ZadV9U2S6YcQ/Yi
+ 0n6VgrhK7nBl9lR7ZHYndrIIuQtkLMTBtf3jIdHb7PDh+euxsx+ZnKmZroB35b9FEb
+ Hs4qDNEJ3k5a3DbycWirhRZQrU8ITzgrr85omxlX7PUXL6hB7TUDE9ipYvoNJKp8l3
+ YbW/+kqzsNM0+vc4/380uveXToxa3MlL2+qCjdK+GSQvxT71i50fLJyWoJB9iAwqoC
+ Gn/vXUH9spNN+3EcRUypCHeaeLfgDp64WEeX30oCpSAz8REZLxXYfz4ZG7dFo0+bBi
+ TUX3kO0znCNbPWFaSna9DTeXud1DDpJdfhxGf8Wg4VEdjOm7AwQiDabf/hnU8zewyZ
+ 4xcRwr511ad8KiwJsPOmwYWZDjPcSUwfHQo859mAjYiSkDKw3zNlXBMFv/cv4FGzaL
+ HbVL5bXzVFgFjvHNibMIiCo6aBDWLQbCtqQvFEhqT/ODbMXU9G6Klfshkjm0Mw1vya
+ QZR8QGlA3M3iVvyHJcFYcYi8eDImuoW1o3xfdkeNHmxGbHUusEqFzcxFKYAH5GFy63
+ vswGt7qlkWXxVtZ1sdHQn85o=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
@@ -56,10 +56,9 @@ Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 03/11] efi_loader: smbiosdump: fix starts_with() returning
- NULL
-Date: Sun, 28 Jun 2026 10:28:01 +0200
-Message-ID: <20260628082810.175862-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 04/11] efi_loader: fix void* check in open_file_system()
+Date: Sun, 28 Jun 2026 10:28:02 +0200
+Message-ID: <20260628082810.175862-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
 References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
@@ -81,36 +80,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-starts_with() is declared as returning bool, but the null-argument
-guard returned NULL (a pointer cast to bool) instead of false.
-While harmless on most platforms where NULL and false both have
-value zero, it is technically incorrect.
+The UEFI specification requires FreePool() to return EFI_INVALID_PARAMETER
+when the passed buffer is invalid. But it does not well define what
+checks are required. Therefore we try to avoid passing NULL to
+FreePool() in open_file_system() used by dtbdump.c and smbiosdump.c.
+But we check the wrong variable.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Check the pointer to the handle buffer, not the handle.
+
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v3:
-	no change
+	rephrase the subject line and the commit message
 v2:
 	new patch
 ---
+ lib/efi_loader/dtbdump.c    | 2 +-
  lib/efi_loader/smbiosdump.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
+index 1e72404ecc1..865edc33a97 100644
+--- a/lib/efi_loader/dtbdump.c
++++ b/lib/efi_loader/dtbdump.c
+@@ -350,7 +350,7 @@ open_file_system(struct efi_simple_file_system_protocol **file_system)
+ 					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+ 	if (ret != EFI_SUCCESS)
+ 		error(u"Failed to open simple file system protocol\r\n");
+-	if (handle)
++	if (handle_buffer)
+ 		bs->free_pool(handle_buffer);
+ 
+ 	return ret;
 diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index d7f2ba30a95..974728a43af 100644
+index 974728a43af..494c3d18945 100644
 --- a/lib/efi_loader/smbiosdump.c
 +++ b/lib/efi_loader/smbiosdump.c
-@@ -199,7 +199,7 @@ static u16 *skip_whitespace(u16 *pos)
- static bool starts_with(u16 *string, u16 *keyword)
- {
- 	if (!string || !keyword)
--		return NULL;
-+		return false;
+@@ -248,7 +248,7 @@ open_file_system(struct efi_simple_file_system_protocol **file_system)
+ 					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+ 	if (ret != EFI_SUCCESS)
+ 		error(u"Failed to open simple file system protocol\r\n");
+-	if (handle)
++	if (handle_buffer)
+ 		bs->free_pool(handle_buffer);
  
- 	for (; *keyword; ++string, ++keyword) {
- 		if (*string != *keyword)
+ 	return ret;
 -- 
 2.53.0
 
