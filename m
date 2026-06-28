@@ -4,103 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F071C43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 13:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 883BCC43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 13:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AFCF84866;
+	by phobos.denx.de (Postfix) with ESMTP id 57E7584931;
 	Sun, 28 Jun 2026 15:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="eFLp0iRP";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AgVzuuth";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="OrdFtcww";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cErV3vdq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D67C84105; Sun, 28 Jun 2026 15:09:06 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 2B55E84105; Sun, 28 Jun 2026 15:10:32 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE2088056B
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 15:09:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3339D8056B
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 15:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65S9PU7J3597391
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:09:02 GMT
+ 65S9Q5iw3592964
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:10:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 4tIkJm1J9lTQDuApxb36WOO6X4di1bjOaiL1z75a9xc=; b=eFLp0iRPcrN2ubq8
- t4TmG/HnK0u1qIj6AVdMltkZUmDGCybDl5KehIRt4oBGSfh7+8aGDKu6ouJ+O3C1
- bk2jPasIPQtrLxuXsz3DdeRkEA7EMXnoQBYMo6e2AcDDb43ME17nYewFZV4e64Z6
- 9AtcbIAr+hoO/07TbmKtHdrnO+uYaCuEcvCfDo3W5HzPgS6hFqADY9K88XkQ/5Ph
- Vh7Lm+QpAx0LiokThMH/TGpuv4Pma/xyGKTtDQLtgHtAEl2rQoTpj3jDjEOR6I7n
- 43Sm7f1EtzKqcEgkLaBRUBiusfZkGgF+h6GLeNyHJNqwLZYEqdauf8Av/PI+AkWN
- vbfisw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f27332wvc-1
+ Sw17wNwXQgdz2Iv9HYDYFdY0N8iMmmMMmpfYvozbigU=; b=OrdFtcwwC8oA+BP3
+ R+0BlvzXCW8JbpuWgqR0YHNYdhwN4eIRVoXHvrfWdogTItlYZkNl6KlEV4z8GcJ3
+ qTCR1+Ti1BN+Ho+ctlb1mypoe3n00fGw5ovCL2V0B4wA/mcWaAzxyqaBkoXdhUls
+ 5bFNARVriOWdDzdc4o6lJdJAypeYJ5yaO6o1CkxuGm/3rx2JwI985CKpuDkCP2ZA
+ FESlMiGv/wkGNyvVSl5mkH/VFOny3GKCgg52fIBu+/BE7Nj/3QqzBG+saZzJUxh0
+ aMUnkLmgwnJmMOPU7TGTNjPGyqVgHVN1wwA2TCa2B2kK4WBdA5sa1XI/EZcr9vwP
+ +PYj/g==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f27pf2tk0-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:09:02 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-30e85f5bc9eso3612383eec.1
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 06:09:02 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 13:10:26 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-30cb5001ed8so1846628eec.1
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 06:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782652141; x=1783256941; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1782652225; x=1783257025; darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:to:subject:user-agent:mime-version:date:message-id:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4tIkJm1J9lTQDuApxb36WOO6X4di1bjOaiL1z75a9xc=;
- b=AgVzuuthIAkp9aXTOIyD0PrYirfbJz3I4M8PNQERbq9Xy+bGBwTXFce+I4O2KI3+OK
- RiTSentE3y6aGZMaGZR4w4Q+7N7ZiGx9owDUDggSTJ42lkeqjYeyTQcTHnuEPfqnO1EH
- KLs+uctqQlZQzWhoLHXUCT0K18Fq6TfIvROSiNofnomPZDIN+b2HssRFCrIiyywZGD0O
- iZgimmA/si56ludVonPZqm+eCF9kyMARoIU9B4i3htT6GKgVbNLN4fKXQhDtfOfPj/LO
- NshVXNuA6mwZLHbQTUQ8/iM0bp6DYuWdv7TgEAemvKqYdKF5d3i2aI8vITSBW+g8hyYw
- Zz7w==
+ bh=Sw17wNwXQgdz2Iv9HYDYFdY0N8iMmmMMmpfYvozbigU=;
+ b=cErV3vdqC53wX1tYbcfzTqWmgEEA3F16d0ccN45xGFxXvb2O52cZnxHiS0HKd7jtOG
+ X+pRkQGWUmt8lofghnTIahFookUqhY1bj8PceRXHDEAW2bZBGJPK8J92lhU6XDMFhC1k
+ ieW5nAuAZL43bWkfOpozJLw1CyChggJsTnxjcGWGQa5lKF9tnMNFmhIoLu5QHjkdaiNT
+ Zk/lRDqqcJff0hH2BX6EDDYj+Kt4pSzDSclK9IVkBC+aTDuH3OZey41ev+JS3Jp4ScSC
+ zrNrmXq7seh41N0PIJiCYbdYrfckBnZGpeDW2QcMIVGaaeW6NNfM/lGd3PwvgCHxVw19
+ NvvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782652141; x=1783256941;
+ d=1e100.net; s=20251104; t=1782652225; x=1783257025;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4tIkJm1J9lTQDuApxb36WOO6X4di1bjOaiL1z75a9xc=;
- b=egvwNQCtXqHAcV4MYdatb5VB5KP9ElNIozMea9V9aKHnyVmrHBytI0sur4OzcoMFks
- 2xxCQQCroKcNVrcf9HZdNhWS8BBcPGMgKzQjwS9BK2IZsuVg+9SGNdSX+UPvkrL11/ND
- 5i3O7fxFNTIhdj3M32SDuYkdjiVPiInd9CNiLiYPXJxzYzeJn5NlZyqxqnZgyV/B4Prb
- QVDAzNrdtTn+HcrsdWurGFPXw7p/oaDaVv0YPgUZiRBSQZ0ZXUVRXOXQ6hWzEQFSaZP1
- M7Erj0ZzyiHgzhWB4TF3lo6C6MZJMtMJxVPpnsk8zKDeHHq3wPGzcaUBmg3t1ydEBNO8
- YKZg==
+ bh=Sw17wNwXQgdz2Iv9HYDYFdY0N8iMmmMMmpfYvozbigU=;
+ b=QygM86sKfR6kHGVHAz52HzZe1NImEwx+hBFmlRYp5/qrhtJuiYdinKuclhANT+6fHx
+ zGC+IL6SRYvS8vHhXagEnW3CgZDNo0uoLLMrZG9UBrBBQHujktnRGPGIsEh3YA6fApfh
+ IKHp0376KZyRtBnL1ohLHRIUWIghmGSDAnltiF0eWGeZ8WBU0bKTV7GN0T5OJmIVSPgu
+ XLCFjRKiOwd67e5Qa+2/GuBC4gPuG9oRSUgllgWO7IgNNH+TAOByTwZsSKGfvkPgi+I7
+ 6exzqVYKnm3/apfL91Lg9QhzIs3EpcAVOmdLYFJCf1h7+htblj8QQCcMVv30b9PYt6vh
+ nnmQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrlMZFKX/XgYtlaXhdONAIh72Y8w6NffM1Iva3tXa7y5xTy51DdJlBt+iSmAXibYUdfyQC9GUY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+kJybn84x24ZKrlABOLv5Pu7zfmeavVKg1AxUbLuNJfZBnN6+
- IyTzeB3ETeS8tew22v8hi766yq2w26vk25zN8MA4DUHtoNzI7OaU8mGA2D2KAM4w/icPIMWAxvh
- /odBr/vEZI2Js5JWuoQN7TRh6W2XAgXeZ0saDLCfhhkEQgQyO6caKrV0/
-X-Gm-Gg: AfdE7cl6EFTqz3DnyI5ErKpvpKP3SLZtCirvTCUwr88Rct1lk5XlduowLMFd+JssY9l
- 72LHXCUXtHyy+x25n3IixvaFlMhD2PxhJ/+OkKISmCxte9TfdLp+awQ8sJnbHVAZUGMPPKCDLIp
- /ep6nJ1ZRZ+tkEN+ZVrUUlJIKgjZxywge687Bb4VNwjDvUEccKSXa+1BfajReWJo/jAvVOCcSEx
- u7jCDTsMvzxil0iB4eaKfeDdZXJylaLsJasnvvxteeiNgwzLefYhTAz0muFNixRF2XC+kyHQHOb
- 2O8/oeS0aB7JahTnEAQ9cDmO90BB933GvQfV01+YsMLfqkEcfF8rtRn5FQmkRSW3pp6Jn3HVSbh
- blsWQf1b6BQ9RktqXnAIjlfGF2NN+7Bavo6c+yDw4Cbdki9Q=
-X-Received: by 2002:a05:693c:66d7:20b0:30c:ab97:d7b2 with SMTP id
- 5a478bee46e88-30cab97dc47mr4457340eec.44.1782652141076; 
- Sun, 28 Jun 2026 06:09:01 -0700 (PDT)
-X-Received: by 2002:a05:693c:66d7:20b0:30c:ab97:d7b2 with SMTP id
- 5a478bee46e88-30cab97dc47mr4457299eec.44.1782652140547; 
- Sun, 28 Jun 2026 06:09:00 -0700 (PDT)
+ AHgh+Rqhw1KEx2rOXIx1Y31MvFHBJXHi6mR0PIQ8TR0KfsS5/w+gg1Eg0L8ip1HoyiImVwdb3Bgzs+Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaZcyyjmxA+Af6S0fyTzHCTFLTkDaS/Vj1K/Co3wjsYDfls6A9
+ tUYhcyuvmNata1kH6ywrGAZPJvQxO1YWQMqR0BV4Bs+VgOg7Bd04r+D68xElp4WuHR7duUfNFCl
+ FZOAubBXj+9pP0RSBcgm0pKvUb/KzstoLg+i1KCJy78Yj4Xbb7zkXxDnK
+X-Gm-Gg: AfdE7ck1gWVna3aYbZ39+2M9MqtAjDuW55rF5xHibdLHlb7+2fzNT8eQEWGQcutdBAJ
+ AWrdO1BBE8IeKVf0OqoR3XdTgjt7CyEK4JCuNsOHu81C6IqzpHLwWvNtikzFYf1miZDK/1BXZ0Y
+ vpU+mDDTJxaqgQqCOny4t6TrKaOrxn/kxjG5/Nz6nVLyNJp4nE5BzrI0gg9Y54/XzuO6bu0Bgl8
+ R/9p1qqMa9h2xSiskQUFRoObAbqIDUICGo3OJpR6PJxEqX7oBqU8Yx4oJHhKaHoqW1npgr9gl1O
+ +Sf/+l4if9y+BJXZhIP+2CneuYGBVpEYPjEMNkwFtMp8b7a1Z5D6feD91Q0zTEE7xPRJDU1crfR
+ 1UnuX90jto4FaQ3G8+KkVRMDQW92UuJMPXzlYAHwspctmNmk=
+X-Received: by 2002:a05:7301:3807:b0:30b:ed93:5cdc with SMTP id
+ 5a478bee46e88-30c84df4aa2mr11874038eec.31.1782652224883; 
+ Sun, 28 Jun 2026 06:10:24 -0700 (PDT)
+X-Received: by 2002:a05:7301:3807:b0:30b:ed93:5cdc with SMTP id
+ 5a478bee46e88-30c84df4aa2mr11873986eec.31.1782652224121; 
+ Sun, 28 Jun 2026 06:10:24 -0700 (PDT)
 Received: from [192.168.0.5] ([49.206.99.179])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1ae5sm42585596eec.16.2026.06.28.06.08.49
+ 5a478bee46e88-30ec79d4746sm3507877eec.13.2026.06.28.06.10.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 28 Jun 2026 06:09:00 -0700 (PDT)
-Message-ID: <9e39ae70-4d57-4dfd-9785-141a54f2325f@oss.qualcomm.com>
-Date: Sun, 28 Jun 2026 18:38:47 +0530
+ Sun, 28 Jun 2026 06:10:23 -0700 (PDT)
+Message-ID: <bf120aae-64d1-430a-8080-e24b72998ea4@oss.qualcomm.com>
+Date: Sun, 28 Jun 2026 18:40:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 05/11] mach-snapdragon: Add PBL shared data defines
+Subject: Re: [PATCH v6 07/11] mach-snapdragon: Add initial support for IPQ5210
+ SPL
 To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
  rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -118,37 +119,37 @@ To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
  philip.molloy@analog.com, ravi@prevas.dk, sughosh.ganu@arm.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20260623064804.3988799-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260623064804.3988799-6-varadarajan.narayanan@oss.qualcomm.com>
+ <20260623064804.3988799-8-varadarajan.narayanan@oss.qualcomm.com>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260623064804.3988799-6-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260623064804.3988799-8-varadarajan.narayanan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=F+FnsKhN c=1 sm=1 tr=0 ts=6a411cee cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=8fNwSSZIJDewi4B+fYJmHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfXzGkYXTRDcXwy
+ EgNlh66U4DPOw88P79wGRkwJs9Jsbhm/BEJoh/Zl1klKmO0+ZgZpo49D9Peh7xvZ6IMkS631TKg
+ pv87bP0ZmG1gIBIpAzd3OHH/Wvh7Zew=
+X-Proofpoint-GUID: c1h_RrICQGb0LiOZnSQHmA_ajWG2rXZr
+X-Proofpoint-ORIG-GUID: c1h_RrICQGb0LiOZnSQHmA_ajWG2rXZr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfX7akGzbYh9RxJ
+ 8BWMkFSsdF0p9Sw6QTqVCAJUVQFesGIvkE+k2Vs3bsSO0KD6iaV9s3rD2CvFcmBus/Xo7YMTIEx
+ S/BINKpTFdXUsJafCRmn7ChCs+dyoPz5Ergrsmx120ygRZOUm+Olr4ueGxicNCBDvPZzmdiKgJN
+ 5hRtj95vTI638OI/Ib7AdeoL+XsAER0mor67kesLWZQdwnJURgUko1k2Mu3z9wLzzyFWTrVaime
+ jlZkmtMScVZQatoBavaJlmdK5kut/Oig1LjN+wzQr6TXJUIP18N3jCfoYPf7LWgcrtceuVrLD9G
+ HQGxGWKiAGHI54iQ0yQVCh2c7aXWEYeNorTOnA5GbISeauZYz5yP/EYjnQxYfSNlaGHd7A/uDuf
+ zDwdk69Zb07SIrWoykDN/9aRhfW/0xV24kJPaOrXP1h/3TTPHLc7DezLmtwBpMiZDcKaxGepfGD
+ koe8RavzhyFuz+CAR5g==
+X-Authority-Analysis: v=2.4 cv=R7Mz39RX c=1 sm=1 tr=0 ts=6a411d42 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=8fNwSSZIJDewi4B+fYJmHw==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=aPy4u0QKlrczO_6kgjkA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-GUID: Fi5Ra7BNZu81-7Qt3yabmpQtjeBRsSLS
-X-Proofpoint-ORIG-GUID: Fi5Ra7BNZu81-7Qt3yabmpQtjeBRsSLS
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfX7hjrfKE8PPJT
- kLyewxWA1MWauvpICYJ3pbgrOI1FrXk+04cSSwzsx8UpyarzWq8fEGIuPCIWuKyMus0hhCZY4W0
- jKwF7Mrj/5VsHj94SfiXV8s3ubqUcMhVxXKCxXBwHkGwPADVlExEDQFnPSbLEBaauOqcaWTVaGK
- 6rmt7bsGbFH69GN12bbJv104/X5LwZvjbAoMnplc5cGVkK73pzJuHNVBj7XqHIzUQwy/s02TfnO
- ikLSb3CC6cGojxF9djKY/ChCtWXuYboUX9+vtQeVUzMIXFakKEPph+xUOzCXsSxjFaDh+SB6qrh
- mihhzPKj0+i8eGjusAzDfPPWpCCXVxGuuohfarr+oZLPmB4Ng9CC7S9uR7uZpBs907V3MUZDidx
- Y1wknPVmqS/5MH9Mc4Un4pGB1c6qFKGpTBrP1AO7scpYvkzkpKet0DH3w3q284sgD0nEgQ06B0B
- sqUGBWCxlIVcynQQGoA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI4MDExNiBTYWx0ZWRfX8CMN2yqB+Hy8
- nVCjZkyVYjkHghpV+tpXj6DNvjFvzxheg+d19HxIJPGJaxxpgngHtIfTGxtsAPSsYyl585nuXc3
- zNUf90OzJHpFVLX+igts/nOAPvYLbUY=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=xzDZcDSAdx4hrDzw-GAA:9
+ a=O6QIt6trqjhO7B0W:21 a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-28_03,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 malwarescore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 suspectscore=0 impostorscore=0
+ phishscore=0 adultscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
+ malwarescore=0 lowpriorityscore=0 spamscore=0 bulkscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606280116
 X-Mailman-Approved-At: Sun, 28 Jun 2026 15:25:03 +0200
@@ -170,11 +171,14 @@ X-Virus-Status: Clean
 
 Hi Varada,
 
-On 6/23/2026 12:17 PM, Varadarajan Narayanan wrote:
-> Add structure and enum definitions to be able to parse the information
-> that is passed from PBL. This will be used to identify the boot medium.
+On 6/23/2026 12:18 PM, Varadarajan Narayanan wrote:
+> Add basic SPL infrastructure for IPQ5210 SoC. This handles basic serial
+> console init, identifying the boot media, loading the additional
+> firmware binaries to setup DDR, TFA and eventually jump to U-Boot.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+
+Looks good.
 
 Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
@@ -183,75 +187,826 @@ Regards,
 Balaji
 
 > ---
-> v5: Move PBL shared data related defines from qcom-priv.h to pbl.h
->      so that it can be shared in arch/arm/mach-snapdragon and board/qualcomm
->      directories
-> ---
->   arch/arm/mach-snapdragon/include/mach/pbl.h | 58 +++++++++++++++++++++
->   1 file changed, 58 insertions(+)
->   create mode 100644 arch/arm/mach-snapdragon/include/mach/pbl.h
+> v5: Reorganize the code in arch/arm/mach-snapdragon/spl.c into common and
+>      SoC specific code. This would help SoCs to customize their boot flow.
 >
-> diff --git a/arch/arm/mach-snapdragon/include/mach/pbl.h b/arch/arm/mach-snapdragon/include/mach/pbl.h
+> v4: Move MMU disable to save_boot_params()
+>      Get PBL shared info to U-Boot and identify boot medium
+>      Move maybe unused symbol inside #if IS_ENABLED(...)
+>
+> v3: Move SMEM updates to separate patch
+>      Loop upto if_tbl->num_entries instead of MAX_ENTRIES
+>      Remove invalid 'if (!fit)' check
+>      Return failure if qclib_post_process_from_spl fails
+>
+> v2: Remove couple of unused local variables
+> ---
+>   arch/arm/Kconfig                            |   5 +-
+>   arch/arm/mach-snapdragon/Makefile           |   3 +
+>   arch/arm/mach-snapdragon/include/mach/spl.h |  14 +
+>   arch/arm/mach-snapdragon/spl.c              | 544 ++++++++++++++++++++
+>   board/qualcomm/ipq5210/Makefile             |   3 +
+>   board/qualcomm/ipq5210/spl-ipq5210.c        | 159 ++++++
+>   include/configs/ipq5210.h                   |  11 +
+>   7 files changed, 737 insertions(+), 2 deletions(-)
+>   create mode 100644 arch/arm/mach-snapdragon/include/mach/spl.h
+>   create mode 100644 arch/arm/mach-snapdragon/spl.c
+>   create mode 100644 board/qualcomm/ipq5210/Makefile
+>   create mode 100644 board/qualcomm/ipq5210/spl-ipq5210.c
+>   create mode 100644 include/configs/ipq5210.h
+>
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 514bf2000b4..371916cf9b4 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1147,12 +1147,13 @@ config ARCH_SNAPDRAGON
+>   	select SPMI
+>   	select BOARD_LATE_INIT
+>   	select OF_BOARD
+> -	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+> -	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+> +	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK && !SPL
+> +	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK && !SPL
+>   	select SYSRESET
+>   	select SYSRESET_PSCI
+>   	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>   	select MMU_PGPROT
+> +	select SUPPORT_SPL
+>   	imply OF_UPSTREAM
+>   	imply CMD_DM
+>   	imply DM_USB_GADGET
+> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+> index 343e825c6fd..70a2ce585f2 100644
+> --- a/arch/arm/mach-snapdragon/Makefile
+> +++ b/arch/arm/mach-snapdragon/Makefile
+> @@ -2,6 +2,9 @@
+>   #
+>   # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+>   
+> +ifndef CONFIG_XPL_BUILD
+>   obj-y += board.o
+>   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+>   obj-$(CONFIG_OF_LIVE) += of_fixup.o
+> +endif
+> +obj-$(CONFIG_SPL_BUILD) += spl.o
+> diff --git a/arch/arm/mach-snapdragon/include/mach/spl.h b/arch/arm/mach-snapdragon/include/mach/spl.h
 > new file mode 100644
-> index 00000000000..94f845d070b
+> index 00000000000..ab7c371ed91
 > --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/include/mach/pbl.h
-> @@ -0,0 +1,58 @@
+> +++ b/arch/arm/mach-snapdragon/include/mach/spl.h
+> @@ -0,0 +1,14 @@
 > +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
 > +
-> +#ifndef __PBL_H__
-> +#define __PBL_H__
+> +#ifndef __SPL_H__
+> +#define __SPL_H__
 > +
-> +enum pbl_shared_data_param_id {
-> +	PSD_ID_PBL_FW_VERSION			= 0x0,	/* PBL firmware version */
-> +	PSD_ID_PBL_PATCH_VERSION		= 0x1,	/* Patch version */
-> +	PSD_ID_RMB_MBOX_BASE_ADDR		= 0x2,	/* Not used */
-> +	PSD_ID_CPU_BOOT_SPEED_HZ		= 0x3,	/* CPU boot speed (Hz) */
-> +	PSD_ID_BOOT_MEDIA_TYPE			= 0x4,	/* Boot media type */
-> +	PSD_ID_IS_EDL_MODE			= 0x5,	/* Emergency Download mode */
-> +	PSD_ID_DEV_PROG_ELF_ENTRY_ADDR		= 0x6,	/* Not used */
-> +	PSD_ID_XBL_CONFIG_ELF_ENTRY_ADDR	= 0x7,	/* Not used */
-> +	PSD_ID_XBL_SC_EXT_ELF_ENTRY_ADDR	= 0x8,	/* Not used */
-> +	PSD_ID_PBL_TIMESTAMPS_BUFFER_ADDR	= 0x9,	/* PBL logs address */
-> +	PSD_ID_PBL_TIMESTAMPS_BUFFER_SIZE	= 0xa,	/* PBL log size */
-> +	PSD_ID_PBL_DEBUG_SHARED_INFO_ADDR	= 0xb,	/* Debug info address */
-> +	PSD_ID_PBL_DEBUG_SHARED_INFO_SIZE	= 0xc,	/* Debug info size */
-> +	PSD_ID_TME_CPU_PBL_ROM_BYPASS_FUSE	= 0xd,	/* Secure boot status */
-> +	PSD_ID_XBL_SC_DEBUG_LOG_ADDR		= 0xe,	/* XBL SC debug log address */
-> +	PSD_ID_XBL_SC_DEBUG_LOG_SIZE		= 0xf,	/* XBL SC debug log size */
-> +	PSD_ID_CURRENT_IMAGE_SET		= 0x10,	/* Booted image set */
-> +	PSD_ID_MEDIA_DATA_INFO_ADDR		= 0x11,	/* Media info pointer */
-> +	PSD_ID_MEDIA_DATA_INFO_SIZE		= 0x12,	/* Media info size */
-> +	PBL_SHARED_DATA_PARAM_MAX,
-> +	PBL_SHARED_DATA_PARAM_SIZE	= 0xffffffffu, /* to force 32 bits */
+> +void qcom_spl_malloc_init_f(void);
+> +int qcom_spl_loader_pre_ddr(u8 boot_device);
+> +int qclib_post_process_from_spl(void);
+> +void qcom_spl_error_handler(void *arg);
+> +
+> +#endif /* __SPL_H__ */
+> diff --git a/arch/arm/mach-snapdragon/spl.c b/arch/arm/mach-snapdragon/spl.c
+> new file mode 100644
+> index 00000000000..9b8a640256a
+> --- /dev/null
+> +++ b/arch/arm/mach-snapdragon/spl.c
+> @@ -0,0 +1,544 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +#include <hang.h>
+> +#include <cpu_func.h>
+> +#include <init.h>
+> +#include <image.h>
+> +#include <spl.h>
+> +#include <spl_load.h>
+> +#include <asm/io.h>
+> +#include <asm/system.h>
+> +#include <asm/sections.h>
+> +#include <atf_common.h>
+> +#include <linux/err.h>
+> +#include <dm/device-internal.h>
+> +#include <part.h>
+> +#include <blk.h>
+> +#include <dm/uclass.h>
+> +#include "qcom-priv.h"
+> +#include <mach/spl.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +#define QCOM_SPL_TCSR_REG_ADDR		0x195c100
+> +#define QCOM_SPL_DLOAD_MASK		BIT(4)
+> +#define QCOM_SPL_DLOAD_SHFT		0x4
+> +
+> +#define QCOM_SPL_IS_DLOAD_BIT_SET	((readl(QCOM_SPL_TCSR_REG_ADDR) & \
+> +					QCOM_SPL_DLOAD_MASK) >> \
+> +					QCOM_SPL_DLOAD_SHFT)
+> +
+> +#define QCOM_SPL_FIT_IMG_PARTITION	"0:BOOTLDR"
+> +
+> +#define MAGIC_KEY			"QCLIB_CB"
+> +#define MAX_ENTRIES			0xF
+> +#define IF_TABLE_VERSION		0x1
+> +#define QCCONFIG			"qc_config"
+> +#define QCSDI				"qcsdi"
+> +
+> +/**
+> + * struct interface_table_entry - Meta data for blobs in QCLIB interface
+> + * @entry_name:	Name of the data blob (e.g., "dcb_settings").
+> + * @address:	Address of the data blob.
+> + * @size:	Size of the data blob.
+> + * @attributes:	Attributes for the blob (e.g., save to storage).
+> + */
+> +struct interface_table_entry {
+> +	char entry_name[24];
+> +	u64 address;
+> +	u32 size;
+> +	u32 attributes;
 > +};
 > +
-> +enum pbl_boot_flash_type {
-> +	PSD_NO_FLASH		= 0,
-> +	PSD_NOR_FLASH		= 1,
-> +	PSD_NAND_FLASH		= 2,
-> +	PSD_ONENAND_FLASH	= 3,
-> +	PSD_SDC_FLASH		= 4,
-> +	PSD_MMC_FLASH		= 5,
-> +	PSD_SPI_FLASH		= 6,
-> +	PSD_PCIE_FLASH		= 7,
-> +	PSD_UFS_FLASH		= 8,
-> +	PSD_RSVD_1_FLASH	= 9,
-> +	PSD_USB_FLASH		= 10,
-> +	PSD_SPI_NAND_FLASH	= 11,
-> +	PSD_SPI_FLASH_GPT	= 12,
-> +};
-> +
-> +struct pbl_shared_data_entry {
-> +	u32 param_id;
-> +	ulong value;
-> +	bool valid;
-> +};
-> +
-> +struct pbl_shared_data {
+> +/**
+> + * struct interface_table - QCLIB Interface table header
+> + * @magic_key:		Magic key for validation ("QCLIB_CB").
+> + * @version:		Interface table version.
+> + * @num_entries:	Number of valid entries.
+> + * @max_entries:	Maximum allowable entries.
+> + * @global_attributes:	Flags for global attributes (e.g., SDI path).
+> + * @reserved1:		Reserved for future use.
+> + * @reserved2:		Reserved for future use.
+> + * @if_table_entries:	Array of interface table entries.
+> + */
+> +struct interface_table {
+> +	char magic_key[8];
 > +	u32 version;
-> +	u32 num_of_entries;
-> +	struct pbl_shared_data_entry entry[PBL_SHARED_DATA_PARAM_MAX];
+> +	u32 num_entries;
+> +	u32 max_entries;
+> +	u32 global_attributes;
+> +	u32 reserved1;
+> +	u32 reserved2;
+> +	struct interface_table_entry if_table_entries[MAX_ENTRIES];
 > +};
 > +
-> +#endif /* __PBL_H__ */
+> +/**
+> + * qcom_spl_jump_img_entry_t - Type definition for image entry point functions.
+> + * @arg1:	First argument passed to the entry point.
+> + * @arg2:	Second argument passed to the entry point.
+> + */
+> +typedef void (*qcom_spl_jump_img_entry_t)(void *arg1, void *arg2);
+> +
+> +/*
+> + * Global QCSDI address populated by qclib_post_process_from_spl
+> + * Placed in .data section to ensure it persists
+> + */
+> +static u64 g_qcsdi_address __section(".data");
+> +
+> +/**
+> + * lowlevel_init() - Early low-level initialization.
+> + *
+> + * This function performs very early hardware initialization,
+> + * specifically disabling the MMU if enabled by PBL.
+> + */
+> +void __weak lowlevel_init(void)
+> +{
+> +}
+> +
+> +/**
+> + * qcom_spl_error_handler() - Centralized SPL error handler.
+> + * @arg:	Generic argument (unused).
+> + *
+> + * This function is invoked upon critical errors during the SPL boot process.
+> + */
+> +void qcom_spl_error_handler(void *arg)
+> +{
+> +	pr_err("Entered the SPL Error Handler\n");
+> +	hang();
+> +}
+> +
+> +/**
+> + * qcom_spl_malloc_init_f() - Initialize malloc for SPL.
+> + *
+> + * This function initializes the malloc subsystem using the memory region
+> + */
+> +void qcom_spl_malloc_init_f(void)
+> +{
+> +	if (!CONFIG_IS_ENABLED(SYS_MALLOC_F))
+> +		return;
+> +	/*
+> +	 * Set up by crt0.S
+> +	 */
+> +	assert(gd->malloc_base);
+> +	gd->malloc_limit = CONFIG_VAL(SYS_MALLOC_F_LEN);
+> +	gd->malloc_ptr = 0;
+> +
+> +	mem_malloc_init(gd->malloc_base, gd->malloc_limit);
+> +	gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+> +}
+> +
+> +/**
+> + * qcom_spl_get_fit_img_entry_point() - Get entry point from FIT image node.
+> + * @fit:	 Pointer to the FIT image blob.
+> + * @node:	 Node ID within the FIT image.
+> + * @entry_point: Pointer to store the retrieved entry point.
+> + *
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +static int qcom_spl_get_fit_img_entry_point(void *fit, int node,
+> +					    u64 *entry_point)
+> +{
+> +	int ret;
+> +
+> +	if (!fit) {
+> +		pr_err("FIT image blob is NULL\n");
+> +		return -EINVAL;
+> +	}
+> +	if (node <= 0) {
+> +		pr_err("Invalid FIT node ID %d\n", node);
+> +		return -EINVAL;
+> +	}
+> +	if (!entry_point) {
+> +		pr_err("Entry point pointer is NULL\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = fit_image_get_entry(fit, node, (ulong *)entry_point);
+> +	if (ret) {
+> +		pr_debug("No entry point for node %d, trying load address\n",
+> +			 node);
+> +		ret = fit_image_get_load(fit, node, (ulong *)entry_point);
+> +		if (ret)
+> +			pr_err("No load address for node %d (%d)\n", node, ret);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * qcom_spl_get_iftbl_entry_by_name() - Get an interface table entry by name.
+> + * @if_tbl:	Pointer to the QCLIB interface table.
+> + * @name:	Name of the entry to find.
+> + * @entry:	Pointer to a buffer where the found entry will be copied.
+> + *
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +static int qcom_spl_get_iftbl_entry_by_name(struct interface_table *if_tbl,
+> +					    char *name,
+> +					    struct interface_table_entry *entry)
+> +{
+> +	uint uc_index;
+> +
+> +	if (!if_tbl) {
+> +		pr_err("Invalid interface table\n");
+> +		return -EINVAL;
+> +	}
+> +	if (!name) {
+> +		pr_err("Invalid name\n");
+> +		return -EINVAL;
+> +	}
+> +	if (!entry) {
+> +		pr_err("Invalid entry pointer\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	for (uc_index = 0; uc_index < if_tbl->num_entries; uc_index++) {
+> +		if (!strcmp(if_tbl->if_table_entries[uc_index].entry_name, name)) {
+> +			memcpy(entry,
+> +			       &if_tbl->if_table_entries[uc_index],
+> +			       sizeof(struct interface_table_entry));
+> +			return 0;
+> +		}
+> +	}
+> +	pr_err("Interface table entry '%s' not found\n", name);
+> +
+> +	return -ENOENT;
+> +}
+> +
+> +/**
+> + * qclib_post_process_from_spl() - Post-process QCLIB image from SPL FIT address
+> + *
+> + * This function performs the same operations as qclib_post_process() but
+> + * takes no arguments. It gets the FIT image from CONFIG_SPL_LOAD_FIT_ADDRESS
+> + * and finds the qcom-lib-1 node automatically.
+> + *
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +int qclib_post_process_from_spl(void)
+> +{
+> +	int ret;
+> +	int entry_idx;
+> +	int images_node;
+> +	int qcconfig_node;
+> +	int qclib_node;
+> +	const void *fit;
+> +	struct interface_table if_tbl;
+> +	struct interface_table_entry qcsdi_entry;
+> +	qcom_spl_jump_img_entry_t qclib_entry;
+> +	u64 entry_point;
+> +
+> +	/* Get FIT image from SPL load address */
+> +	fit = (const void *)CONFIG_SPL_LOAD_FIT_ADDRESS;
+> +
+> +	pr_debug("QCLIB post-processing from SPL: fit=%p\n", fit);
+> +
+> +	/*
+> +	 * Find "images" node in FIT (get it once and reuse)
+> +	 */
+> +	images_node = fdt_subnode_offset(fit, 0, "images");
+> +	if (images_node < 0) {
+> +		pr_err("Failed to find images node in FIT\n");
+> +		return -ENOENT;
+> +	}
+> +
+> +	/*
+> +	 * Find "qcom-config-1" image node
+> +	 */
+> +	qcconfig_node = fdt_subnode_offset(fit, images_node, "qcom-config-1");
+> +	if (qcconfig_node < 0) {
+> +		pr_err("Failed to find qcom-config-1 node in FIT\n");
+> +		return -ENOENT;
+> +	}
+> +
+> +	/*
+> +	 * Find "qcom-lib-1" image node
+> +	 */
+> +	qclib_node = fdt_subnode_offset(fit, images_node, "qcom-lib-1");
+> +	if (qclib_node < 0) {
+> +		pr_err("Failed to find qcom-lib-1 node in FIT\n");
+> +		return -ENOENT;
+> +	}
+> +
+> +	/*
+> +	 * Initialize the local interface table
+> +	 */
+> +	memset(&if_tbl, 0, sizeof(struct interface_table));
+> +	memcpy(if_tbl.magic_key, MAGIC_KEY, strlen(MAGIC_KEY));
+> +
+> +	if_tbl.version = IF_TABLE_VERSION;
+> +	if_tbl.num_entries = 0;
+> +	if_tbl.max_entries = MAX_ENTRIES;
+> +
+> +	/*
+> +	 * Add QCCONFIG entry to the interface table
+> +	 */
+> +	entry_idx = 0;
+> +	memcpy(if_tbl.if_table_entries[entry_idx].entry_name,
+> +	       QCCONFIG, strlen(QCCONFIG));
+> +
+> +	ret = qcom_spl_get_fit_img_entry_point((void *)fit,
+> +					       qcconfig_node,
+> +					       &if_tbl.if_table_entries[entry_idx].address);
+> +	if (ret) {
+> +		pr_err("Failed to get qcom-config-1 entry point (%d)\n", ret);
+> +		return ret;
+> +	}
+> +	if_tbl.if_table_entries[entry_idx].attributes = 0;
+> +	if_tbl.num_entries = entry_idx + 1;
+> +
+> +	/*
+> +	 * Add QCSDI entry to the interface table
+> +	 */
+> +	entry_idx++;
+> +	memcpy(if_tbl.if_table_entries[entry_idx].entry_name,
+> +	       QCSDI, strlen(QCSDI));
+> +
+> +	if_tbl.if_table_entries[entry_idx].address = 0;
+> +	if_tbl.if_table_entries[entry_idx].attributes = 0;
+> +	if_tbl.num_entries = entry_idx + 1;
+> +
+> +	/*
+> +	 * Get qcom-lib-1 entry point
+> +	 */
+> +	ret = qcom_spl_get_fit_img_entry_point((void *)fit,
+> +					       qclib_node,
+> +					       &entry_point);
+> +	if (ret) {
+> +		pr_err("Failed to get qcom-lib-1 entry point (%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	qclib_entry = (qcom_spl_jump_img_entry_t)entry_point;
+> +
+> +	pr_info("Jumping to qcom-lib-1 at 0x%llx\n", entry_point);
+> +	qclib_entry(&if_tbl, NULL);
+> +
+> +	/* Parse the interface table to extract QCSDI address */
+> +	ret = qcom_spl_get_iftbl_entry_by_name(&if_tbl, QCSDI, &qcsdi_entry);
+> +	if (ret) {
+> +		pr_err("Failed to get QCSDI entry from interface table (%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	g_qcsdi_address = qcsdi_entry.address;
+> +	pr_info("QCSDI address: 0x%llx\n", g_qcsdi_address);
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * spl_get_load_buffer() - Allocate a cache-aligned buffer for image loading.
+> + * @offset:	Offset (unused, typically 0 for SPL).
+> + * @size:	Size of the buffer to allocate.
+> + *
+> + * Return: Pointer to the allocated buffer, or NULL on failure.
+> + */
+> +struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+> +{
+> +	return (void *)(CONFIG_SPL_LOAD_FIT_ADDRESS);
+> +}
+> +
+> +/**
+> + * board_spl_fit_buffer_addr() - Get the address of the FIT image buffer.
+> + * @fit_size:	Size of the FIT image.
+> + * @sectors:	Number of sectors.
+> + * @bl_len:	Block length.
+> + *
+> + * Return: Address of the FIT image buffer.
+> + */
+> +void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+> +{
+> +	return spl_get_load_buffer(0, sectors * bl_len);
+> +}
+> +
+> +/**
+> + * bl2_plat_get_bl31_params_v2() - Retrieve and fixup BL31 parameters.
+> + * @bl32_entry:	Entry point for BL32 (OP-TEE).
+> + * @bl33_entry:	Entry point for BL33 (U-Boot/kernel).
+> + * @fdt_addr:	Address of the Device Tree Blob (FDT).
+> + *
+> + * Return: Pointer to the populated BL31 parameters structure.
+> + */
+> +struct bl_params *bl2_plat_get_bl31_params_v2(uintptr_t bl32_entry,
+> +					      uintptr_t bl33_entry,
+> +					      uintptr_t fdt_addr)
+> +{
+> +	struct bl_params *bl_params;
+> +	struct bl_params_node *node;
+> +
+> +	/*
+> +	 * Populate the bl31 params with default values.
+> +	 */
+> +	bl_params = bl2_plat_get_bl31_params_v2_default(bl32_entry, bl33_entry,
+> +							fdt_addr);
+> +
+> +	/*
+> +	 * Fixup the bl31 params based on platform requirements.
+> +	 */
+> +	for_each_bl_params_node(bl_params, node) {
+> +		if (node->image_id == ATF_BL31_IMAGE_ID) {
+> +			/*
+> +			 * Pass QCSDI address to BL31 via arg0
+> +			 * This address was populated by qclib_post_process()
+> +			 */
+> +			if (g_qcsdi_address == 0)
+> +				pr_warn("QCSDI address not set, BL31 may not function correctly\n");
+> +
+> +			node->ep_info->args.arg0 = g_qcsdi_address;
+> +			pr_debug("Setting BL31 arg0 to QCSDI address: 0x%llx\n", g_qcsdi_address);
+> +		}
+> +	}
+> +
+> +	return bl_params;
+> +}
+> +
+> +/**
+> + * qcom_spl_loader_pre_ddr() - SPL loader for pre-DDR stage.
+> + * @boot_device:Type of boot device.
+> + *
+> + * Return: 0 on success, or a negative error code on failure.
+> + */
+> +int qcom_spl_loader_pre_ddr(u8 boot_device)
+> +{
+> +	struct spl_image_loader *loader, *drv;
+> +	struct spl_image_info spl_image = { 0 };
+> +	struct spl_boot_device boot_dev = { .boot_device = boot_device, };
+> +	int ret = -ENODEV, n_ents;
+> +
+> +	drv = ll_entry_start(struct spl_image_loader, spl_image_loader);
+> +	n_ents = ll_entry_count(struct spl_image_loader, spl_image_loader);
+> +
+> +	for (loader = drv; loader && (loader != drv + n_ents); loader++) {
+> +		if (boot_device != loader->boot_device)
+> +			continue;
+> +
+> +		ret = loader->load_image(&spl_image, &boot_dev);
+> +		if (!ret)
+> +			break;
+> +
+> +		printf("%s: Error: %d\n", __func__, ret);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +#if CONFIG_IS_ENABLED(MMC)
+> +/**
+> + * spl_find_partition_info() - Find partition information by name
+> + * @uclass_id: Device class ID (UCLASS_MMC)
+> + * @device_num: Device number within the class
+> + * @part_name: Name of the partition to find
+> + * @info: Pointer to store partition information
+> + *
+> + * This function provides partition lookup logic for MMC.
+> + * Return: Partition number on success, negative error code on failure
+> + */
+> +static int spl_find_partition_info(enum uclass_id uclass_id, int device_num,
+> +				   const char *part_name,
+> +				   struct disk_partition *info)
+> +{
+> +	int ret;
+> +	struct blk_desc *desc;
+> +
+> +	if (!part_name || !info) {
+> +		printf("Invalid parameters for partition lookup\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	/*
+> +	 * Get block device descriptor
+> +	 */
+> +	desc = blk_get_devnum_by_uclass_id(uclass_id, device_num);
+> +	if (!desc) {
+> +		printf("Block device not found for class %d, device %d\n",
+> +		       uclass_id, device_num);
+> +		return -ENODEV;
+> +	}
+> +
+> +	/*
+> +	 * Initialize partition table if needed
+> +	 */
+> +	if (desc->part_type == PART_TYPE_UNKNOWN) {
+> +		printf("Initializing partition table\n");
+> +		/*
+> +		 * Prefer EFI/GPT
+> +		 */
+> +		desc->part_type = PART_TYPE_EFI;
+> +	}
+> +
+> +	/*
+> +	 * Find partition by name
+> +	 */
+> +	ret = part_get_info_by_name(desc, part_name, info);
+> +	if (ret < 0) {
+> +		printf("Partition '%s' not found\n", part_name);
+> +		return -ENOENT;
+> +	}
+> +
+> +	printf("Found partition '%s' at partition number %d\n", part_name, ret);
+> +	return ret;
+> +}
+> +
+> +/**
+> + * spl_mmc_boot_mode() - Determine the boot mode for MMC
+> + * @mmc:	Pointer to the MMC device
+> + * @boot_device:	Boot device ID
+> + *
+> + * Return: MMCSD_MODE_RAW to use raw partition access
+> + */
+> +u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> +{
+> +	return MMCSD_MODE_RAW;
+> +}
+> +
+> +/**
+> + * spl_mmc_boot_partition() - Determine which partition to boot from
+> + * @boot_device:	Boot device ID
+> + *
+> + * Return: Partition number to boot from, or default partition on error
+> + */
+> +int spl_mmc_boot_partition(const u32 boot_device)
+> +{
+> +	int ret;
+> +	struct disk_partition info;
+> +
+> +	/*
+> +	 * Use common partition lookup function
+> +	 */
+> +	ret = spl_find_partition_info(UCLASS_MMC, 0, QCOM_SPL_FIT_IMG_PARTITION, &info);
+> +	if (ret < 0) {
+> +		printf("Using default MMC partition %d\n",
+> +		       CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION);
+> +		return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * spl_mmc_get_uboot_raw_sector() - Find the raw sector offset
+> + * @mmc:	Pointer to the MMC device
+> + * @raw_sect:	Sector
+> + *
+> + * Return: 0 if the image is at the starting of the partition without any offset.
+> + */
+> +unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, ulong raw_sect)
+> +{
+> +	return 0;
+> +}
+> +#endif /* CONFIG_IS_ENABLED(MMC) */
+> +
+> +int __weak board_fdt_blob_setup(void **fdtp)
+> +{
+> +	return 0;
+> +}
+> +
+> +void __weak reset_cpu(void)
+> +{
+> +	/*
+> +	 * Empty placeholder for arch/arm/lib/reset.c:do_reset(),
+> +	 * to avoid "undefined reference to `reset_cpu'"
+> +	 */
+> +}
+> diff --git a/board/qualcomm/ipq5210/Makefile b/board/qualcomm/ipq5210/Makefile
+> new file mode 100644
+> index 00000000000..d808c106524
+> --- /dev/null
+> +++ b/board/qualcomm/ipq5210/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +
+> +obj-$(CONFIG_SPL) := spl-ipq5210.o
+> diff --git a/board/qualcomm/ipq5210/spl-ipq5210.c b/board/qualcomm/ipq5210/spl-ipq5210.c
+> new file mode 100644
+> index 00000000000..bb7e5f5616b
+> --- /dev/null
+> +++ b/board/qualcomm/ipq5210/spl-ipq5210.c
+> @@ -0,0 +1,159 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +#include <hang.h>
+> +#include <cpu_func.h>
+> +#include <init.h>
+> +#include <image.h>
+> +#include <spl.h>
+> +#include <spl_load.h>
+> +#include <asm/io.h>
+> +#include <asm/system.h>
+> +#include <asm/sections.h>
+> +#include <smem.h>
+> +#include <atf_common.h>
+> +#include <linux/err.h>
+> +#include <dm/device-internal.h>
+> +#include <part.h>
+> +#include <blk.h>
+> +#include <dm/uclass.h>
+> +#include <mach/pbl.h>
+> +#include <mach/spl.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +static struct pbl_shared_data g_psd __section(".data");
+> +
+> +void save_boot_params(ulong r0, ulong r1, ulong r2, ulong r3)
+> +{
+> +	unsigned long sctlr;
+> +	struct pbl_shared_data *psd;
+> +
+> +	sctlr = get_sctlr();
+> +	set_sctlr(sctlr & ~(CR_M));	/* Disable MMU */
+> +
+> +	psd = (struct pbl_shared_data *)r0;
+> +
+> +	if (!psd || psd->num_of_entries < PBL_SHARED_DATA_PARAM_MAX)
+> +		goto out;
+> +
+> +	memcpy(&g_psd, psd, sizeof(g_psd));
+> +
+> +out:
+> +	save_boot_params_ret();
+> +}
+> +
+> +/**
+> + * spl_boot_device() - Determine the boot device.
+> + *
+> + * Return: The mapped boot device type,
+> + *	   or BOOT_DEVICE_NONE if the device is invalid.
+> + */
+> +u32 spl_boot_device(void)
+> +{
+> +	struct pbl_shared_data *psd = &g_psd;
+> +
+> +#ifdef DEBUG
+> +	for (int i  = 0; psd && i < psd->num_of_entries; i++) {
+> +		printf("entry[0x%x] = %d 0x%08x %d\n", i,
+> +		       psd->entry[i].param_id, psd->entry[i].value,
+> +		       psd->entry[i].valid);
+> +	}
+> +#endif
+> +
+> +	if (psd->entry[PSD_ID_IS_EDL_MODE].valid &&
+> +	    psd->entry[PSD_ID_IS_EDL_MODE].value) {
+> +		printf("Selected boot device: DFU\n");
+> +		return BOOT_DEVICE_DFU;
+> +	}
+> +
+> +	if (psd->entry[PSD_ID_BOOT_MEDIA_TYPE].valid) {
+> +		switch (psd->entry[PSD_ID_BOOT_MEDIA_TYPE].value) {
+> +		case PSD_MMC_FLASH:
+> +			printf("Selected boot device: MMC\n");
+> +			return BOOT_DEVICE_MMC1;
+> +		case PSD_NOR_FLASH:
+> +			printf("Selected boot device: NOR\n");
+> +			return BOOT_DEVICE_NOR;
+> +		case PSD_NAND_FLASH:
+> +			printf("Selected boot device: NAND\n");
+> +			return BOOT_DEVICE_NAND;
+> +		case PSD_UFS_FLASH:
+> +			printf("Selected boot device: UFS\n");
+> +			return BOOT_DEVICE_UFS;
+> +		}
+> +	}
+> +
+> +	pr_err("No boot device configured\n");
+> +	return BOOT_DEVICE_NONE;
+> +}
+> +
+> +#if defined(CONFIG_SPL_BUILD)
+> +/**
+> + * board_init_f() - Main entry point for SPL.
+> + * @dummy:	Dummy argument (unused).
+> + */
+> +void board_init_f(ulong dummy)
+> +{
+> +	int ret;
+> +
+> +	memset(__bss_start, 0, __bss_end - __bss_start); /* Clear BSS */
+> +
+> +	qcom_spl_malloc_init_f();
+> +
+> +	ret = spl_early_init();
+> +	if (ret) {
+> +		pr_debug("spl_early_init() failed (%d)\n", ret);
+> +		goto fail;
+> +	}
+> +
+> +	preloader_console_init();
+> +
+> +	ret = qcom_spl_loader_pre_ddr(spl_boot_device());
+> +	if (ret) {
+> +		pr_debug("qcom_spl_loader_pre_ddr() failed (%d)\n", ret);
+> +		goto fail;
+> +	}
+> +
+> +	ret = qclib_post_process_from_spl();
+> +	if (ret) {
+> +		pr_debug("qclib_post_process_from_spl() failed (%d)\n", ret);
+> +		goto fail;
+> +	}
+> +
+> +	board_init_r(NULL, 0);
+> +
+> +fail:
+> +	if (ret)
+> +		qcom_spl_error_handler(NULL);
+> +}
+> +#endif /* CONFIG_SPL_BUILD */
+> +
+> +int board_fit_config_name_match(const char *name)
+> +{
+> +	/*
+> +	 * SPL loads the pre-HLOS images from bootldr FIT image
+> +	 * as below
+> +	 *
+> +	 * In board_init_f() - Matches "pre-ddr" configuration node and
+> +	 * load the images mentioned in its <loadables>
+> +	 *
+> +	 * In board_init_r() - Matches "post-ddr" configuration node and
+> +	 * load the images mentioned in its <loadables>
+> +	 *
+> +	 */
+> +	if (!(gd->flags & GD_FLG_SPL_INIT)) {
+> +		if (!strcmp(name, "pre-ddr")) {
+> +			printf("Selected FIT Config: %s\n", name);
+> +			return 0;
+> +		}
+> +	} else {
+> +		if (!strcmp(name, "post-ddr")) {
+> +			printf("Selected FIT Config: %s\n", name);
+> +			return 0;
+> +		}
+> +	}
+> +
+> +	return -EINVAL;
+> +}
+> diff --git a/include/configs/ipq5210.h b/include/configs/ipq5210.h
+> new file mode 100644
+> index 00000000000..5cbf838af82
+> --- /dev/null
+> +++ b/include/configs/ipq5210.h
+> @@ -0,0 +1,11 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#ifndef __CONFIGS_IPQ5210_H
+> +#define __CONFIGS_IPQ5210_H
+> +
+> +#include <linux/sizes.h>
+> +
+> +#endif
