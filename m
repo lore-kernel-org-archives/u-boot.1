@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FFFC43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 08:29:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 481BFC43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 08:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0887849D1;
+	by phobos.denx.de (Postfix) with ESMTP id DA1BF849EF;
 	Sun, 28 Jun 2026 10:28:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LgGfmT5U";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hcY3hFA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6792784409; Sun, 28 Jun 2026 10:28:18 +0200 (CEST)
+ id 08A2D849BA; Sun, 28 Jun 2026 10:28:19 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B53984832
+ by phobos.denx.de (Postfix) with ESMTPS id 76C8284987
  for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 10:28:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5D74B420BA; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CDBF042099; 
  Sun, 28 Jun 2026 08:28:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782635295;
- bh=rDJvgHoIxE2tL17jXZ8ZhdV9AAa1gluhlHgJJvsy/aY=;
+ s=20251003; t=1782635296;
+ bh=PPy05QcERrwtub01rsRF780goGYwYySiLY7I7wD7d4w=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=LgGfmT5U6Vu3f8ng+/ki9qgZGH0haDTm+Q/C8YbSotafQ6oikA3NIeTtbGNzDmt4t
- xWTtseI4B1evAWcG7FoZmlSdvEaVoMze/P1NIvDPrB43XUAT6KRfbJ1yRQX7o/osaS
- RpcquaunavwUkTgVr/HKR1iz5K0YG4qKRWm4uXIC3T+9vMn1ttGrdve51n+Wgl2MZN
- rLiIp5DtQFdrafXs7sueVnXnVb645URYZATERp1PCx9Fa4qvvMLyR/VvaByAcYSIn7
- EzJefFZyGBatqfjnVLS4BoWy6euYBtM0DvvUj2c0V4FnV+RQfRfPzASMxnTaCxJZfJ
- dYSG9VyRs26DXI+YBu566O9m1T3J7ZIMbti962irs4HCCtk5yVcFKZDNpNFc4ktyPE
- Ng7DjdUVxzgLbQlIJZD2kZYjvHHgVEw+WDNu83m4WIcIxnAcV0w3PX/olJ8crykNhp
- kPpJGoNmP5gIdT6oHKa1AvtyEid1uZQ3YuDIWvaMgDyXNATWp9APYduMenJIX8BGR8
- ERSjL8QQ0CThB2UTry3bRwX20uxCm2xhZvJNBAcVl4nt9kaXzKv6Snu1BWC1G6YLVt
- GLYAWv5hF9Ksnmp8vEH2IFKqz2DqJXExjLzCaPWyz1oJQm+rF+/IbhdVx81s0cWwsj
- 1REmNkh61drtIcFADo+AAp6c=
+ b=hcY3hFA7LUDbgsrYnX3/DURIOUGDIAMRxPliBqcm9aA6qW6k2hsGngUddP8+iUEY6
+ uDx5CTnDZDaXfbB/+CL3lIavK4iJ9Q1rbkNn0wr0NGNTqy+EH4FWNFaxPbE7QYFJhT
+ esRE952TypOwor6+UeYXSze2KVNBSAN1RNr1PILWGcaJyUql6h3NsAdZSEFOIPE7fO
+ 5VTYVNRRfgD8z0t7UXUFiion64AQw9ywh0XSt2LM2Cp32YWBZVlDKan/fAKbM6hEJR
+ X/isfATfs/dwtUcz8u9HxM5CKYP+VdAux0HTlPqgKJUP7TqpUl71bz5GokWPN3N/jN
+ kMlnadssX1fGZvnkK/yP/lkALTG+Vgc1wfNEAwQ7J/W5AGt4a03W6rwzsY0HREuHH2
+ 8VIRI2HzWzjEnVrNYmTJwQaydmfiKceSxW3gmtHFgUDNskr2fap1i3SQiShidaKRyl
+ gg43F6m0x5bldcNp2Akjy4xls98L9oeftVjsSBNTEId70wkG/00OSCds0vWsfA1r/E
+ fP8FGzmN+o3r37IIvMj4ntjz4tsDM7n507piKaY20rviyaPOOR21zZd/tkghILBizC
+ RlixMHa7hGhQBoi7XPVHfcZBknASP03S/GO6A0A7Lfpggx8Bl4JnSnsCeVW7wY9DLh
+ GwALBXybGlIO8Fzy3AT86s/M=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
@@ -56,10 +56,9 @@ Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 06/11] efi_loader: move console-input helpers to
- efi_app_common
-Date: Sun, 28 Jun 2026 10:28:04 +0200
-Message-ID: <20260628082810.175862-7-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 07/11] efi_loader: move string helpers to efi_app_common
+Date: Sun, 28 Jun 2026 10:28:05 +0200
+Message-ID: <20260628082810.175862-8-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
 References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
@@ -81,703 +80,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the shared console-input helpers to efi_app_common:
+Move the shared string-processing helper to efi_app_common:
 
-* efi_drain_input() - drain the console input queue
-* efi_input_yn()    - read a y/n/ESC key from the user
-* efi_input()       - read a UTF-16 string from the console
+* skip_whitespace() - advance past leading whitespace
 
-The common efi_input_yn() calls efi_drain_input() once at entry,
-replacing the open-coded cin->reset() calls that each application
-previously duplicated.
-
-dbginfodump and smbiosdump had no efi_drain_input() call in their
-command loops; add the call so the console queue is drained before
-each prompt, fixing a latent input-echo artefact.
-
-The common state is extended with a cin pointer (initialized by
-efi_app_init from sys_table->con_in) so the helpers can access the
-console-input protocol without additional parameters.
-
-Remove the now-duplicate static definitions from dtbdump, initrddump,
+Remove the now-duplicate static definition from dtbdump, initrddump,
 smbiosdump and dbginfodump.
-
-smbiosdump: fix kernel-doc tag for command_loop() from "command_loop -"
-to "command_loop() -" to follow the kernel-doc convention.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v3:
-	actually add drain_input() to dbginfodump
+	no change
 v2:
 	new patch
 ---
- lib/efi_loader/dbginfodump.c    |  62 +-----------------
- lib/efi_loader/dtbdump.c        | 109 --------------------------------
- lib/efi_loader/efi_app_common.c |  88 ++++++++++++++++++++++++++
- lib/efi_loader/efi_app_common.h |  29 +++++++++
- lib/efi_loader/initrddump.c     | 109 --------------------------------
- lib/efi_loader/smbiosdump.c     | 108 +------------------------------
- 6 files changed, 120 insertions(+), 385 deletions(-)
+ lib/efi_loader/dbginfodump.c    | 13 -------------
+ lib/efi_loader/dtbdump.c        | 13 -------------
+ lib/efi_loader/efi_app_common.c |  7 +++++++
+ lib/efi_loader/efi_app_common.h |  8 ++++++++
+ lib/efi_loader/initrddump.c     | 13 -------------
+ lib/efi_loader/smbiosdump.c     | 13 -------------
+ 6 files changed, 15 insertions(+), 52 deletions(-)
 
 diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
-index 2dcff2a11fe..b39d47ff9bb 100644
+index b39d47ff9bb..39ffbb59d82 100644
 --- a/lib/efi_loader/dbginfodump.c
 +++ b/lib/efi_loader/dbginfodump.c
-@@ -14,7 +14,6 @@
- #define BUFFER_SIZE 64
- 
- static struct efi_simple_text_output_protocol *cout;
--static struct efi_simple_text_input_protocol *cin;
- static efi_handle_t handle;
- static struct efi_system_table *systable;
- static struct efi_boot_services *bs;
-@@ -83,65 +82,6 @@ static void printp(void *p)
+@@ -82,19 +82,6 @@ static void printp(void *p)
  	print(str);
  }
  
 -/**
-- * efi_input() - read string from console
+- * skip_whitespace() - skip over leading whitespace
 - *
-- * @buffer:		input buffer
-- * @buffer_size:	buffer size
-- * Return:		status code
+- * @pos:	UTF-16 string
+- * Return:	pointer to first non-whitespace
 - */
--static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+-static u16 *skip_whitespace(u16 *pos)
 -{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_uintn_t pos = 0;
--	u16 outbuf[2] = u" ";
--	efi_status_t ret;
--
--	/* Drain the console input */
--	ret = cin->reset(cin, true);
--	*buffer = 0;
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			print(u"\r\nAborted\r\n");
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		switch (key.unicode_char) {
--		case 0x08: /* Backspace */
--			if (pos) {
--				buffer[pos--] = 0;
--				print(u"\b \b");
--			}
--			break;
--		case 0x0a: /* Linefeed */
--		case 0x0d: /* Carriage return */
--			print(u"\r\n");
--			return EFI_SUCCESS;
--		default:
--			break;
--		}
--		/* Ignore surrogate codes */
--		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
--			continue;
--		if (key.unicode_char >= 0x20 &&
--		    pos < buffer_size - 1) {
--			*outbuf = key.unicode_char;
--			buffer[pos++] = key.unicode_char;
--			buffer[pos] = 0;
--			print(outbuf);
--		}
--	}
+-	for (; *pos && *pos <= 0x20; ++pos)
+-		;
+-	return pos;
 -}
 -
  /**
-  * skip_whitespace() - skip over leading whitespace
-  *
-@@ -277,7 +217,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 	handle = image_handle;
- 	systable = systab;
- 	cout = systable->con_out;
--	cin = systable->con_in;
- 	bs = systable->boottime;
- 
- 	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
-@@ -298,6 +237,7 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 		u16 *pos;
- 		efi_uintn_t ret;
- 
-+		efi_drain_input();
- 		print(u"=> ");
- 		ret = efi_input(command, sizeof(command));
- 		if (ret == EFI_ABORTED)
+  * do_help() - print help
+  */
 diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-index 1468955eb8c..716daf4a90f 100644
+index 716daf4a90f..559c64be7f7 100644
 --- a/lib/efi_loader/dtbdump.c
 +++ b/lib/efi_loader/dtbdump.c
-@@ -16,7 +16,6 @@
- 
- #define efi_size_in_pages(size) ((size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
- 
--static struct efi_simple_text_input_protocol *cin;
- static struct efi_boot_services *bs;
- static const efi_guid_t fdt_guid = EFI_FDT_GUID;
- static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-@@ -50,113 +49,6 @@ static void print_char(unsigned char c)
- 	print(out);
+@@ -87,19 +87,6 @@ static void *get_dtb(struct efi_system_table *systable)
+ 	return dtb;
  }
  
 -/**
-- * efi_drain_input() - drain console input
-- */
--static void efi_drain_input(void)
--{
--	cin->reset(cin, true);
--}
--
--/**
-- * efi_input_yn() - get answer to yes/no question
+- * skip_whitespace() - skip over leading whitespace
 - *
-- * Return:
-- * y or Y
-- *     EFI_SUCCESS
-- * n or N
-- *     EFI_ACCESS_DENIED
-- * ESC
-- *     EFI_ABORTED
+- * @pos:	UTF-16 string
+- * Return:	pointer to first non-whitespace
 - */
--static efi_status_t efi_input_yn(void)
+-static u16 *skip_whitespace(u16 *pos)
 -{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_status_t ret;
--
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		/* Convert to lower case */
--		switch (key.unicode_char | 0x20) {
--		case 'y':
--			return EFI_SUCCESS;
--		case 'n':
--			return EFI_ACCESS_DENIED;
--		default:
--			break;
--		}
--	}
+-	for (; *pos && *pos <= 0x20; ++pos)
+-		;
+-	return pos;
 -}
 -
--/**
-- * efi_input() - read string from console
-- *
-- * @buffer:		input buffer
-- * @buffer_size:	buffer size
-- * Return:		status code
-- */
--static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
--{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_uintn_t pos = 0;
--	u16 outbuf[2] = u" ";
--	efi_status_t ret;
--
--	*buffer = 0;
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			print(u"\r\nAborted\r\n");
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		switch (key.unicode_char) {
--		case 0x08: /* Backspace */
--			if (pos) {
--				buffer[pos--] = 0;
--				print(u"\b \b");
--			}
--			break;
--		case 0x0a: /* Linefeed */
--		case 0x0d: /* Carriage return */
--			print(u"\r\n");
--			return EFI_SUCCESS;
--		default:
--			break;
--		}
--		/* Ignore surrogate codes */
--		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
--			continue;
--		if (key.unicode_char >= 0x20 &&
--		    pos < buffer_size - 1) {
--			*outbuf = key.unicode_char;
--			buffer[pos++] = key.unicode_char;
--			buffer[pos] = 0;
--			print(outbuf);
--		}
--	}
--}
--
- /*
-  * Convert FDT value to host endianness.
-  *
-@@ -702,7 +594,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 
- 	handle = image_handle;
- 	systable = systab;
--	cin = systable->con_in;
- 	bs = systable->boottime;
- 
- 	color(EFI_LIGHTBLUE);
+ /**
+  * do_help() - print help
+  */
 diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
-index e9e9334acc7..406cd236f6f 100644
+index 406cd236f6f..6bd52e08d28 100644
 --- a/lib/efi_loader/efi_app_common.c
 +++ b/lib/efi_loader/efi_app_common.c
-@@ -9,6 +9,7 @@
- #include "efi_app_common.h"
- 
- static efi_handle_t app_handle;
-+static struct efi_simple_text_input_protocol *cin;
- static struct efi_simple_text_output_protocol *cout;
- struct efi_boot_services *bs;
- static bool nocolor;
-@@ -40,6 +41,7 @@ void efi_app_init(struct efi_system_table *sys_table, efi_handle_t image_handle)
- 
- 	app_handle = image_handle;
- 	systable = sys_table;
-+	cin = sys_table->con_in;
- 	cout = sys_table->con_out;
- 	bs = sys_table->boottime;
- 
-@@ -104,3 +106,89 @@ bool starts_with(u16 *string, u16 *keyword)
- 	}
- 	return true;
+@@ -96,6 +96,13 @@ void error(u16 *string)
+ 	color(EFI_LIGHTBLUE);
  }
-+
-+void efi_drain_input(void)
+ 
++u16 *skip_whitespace(u16 *pos)
 +{
-+	cin->reset(cin, true);
++	for (; *pos && *pos <= 0x20; ++pos)
++		;
++	return pos;
 +}
 +
-+efi_status_t efi_input_yn(void)
-+{
-+	struct efi_input_key key = { 0 };
-+	efi_uintn_t index;
-+	efi_status_t ret;
-+
-+	efi_drain_input();
-+	for (;;) {
-+		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		ret = cin->read_key_stroke(cin, &key);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		switch (key.scan_code) {
-+		case 0x17: /* Escape */
-+			return EFI_ABORTED;
-+		default:
-+			break;
-+		}
-+		/* Convert to lower case */
-+		switch (key.unicode_char | 0x20) {
-+		case 'y':
-+			return EFI_SUCCESS;
-+		case 'n':
-+			return EFI_ACCESS_DENIED;
-+		default:
-+			break;
-+		}
-+	}
-+}
-+
-+efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
-+{
-+	struct efi_input_key key = { 0 };
-+	efi_uintn_t index;
-+	efi_uintn_t pos = 0;
-+	u16 outbuf[2] = u" ";
-+	efi_status_t ret;
-+
-+	*buffer = 0;
-+	for (;;) {
-+		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		ret = cin->read_key_stroke(cin, &key);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		switch (key.scan_code) {
-+		case 0x17: /* Escape */
-+			print(u"\r\nAborted\r\n");
-+			return EFI_ABORTED;
-+		default:
-+			break;
-+		}
-+		switch (key.unicode_char) {
-+		case 0x08: /* Backspace */
-+			if (pos) {
-+				buffer[pos--] = 0;
-+				print(u"\b \b");
-+			}
-+			break;
-+		case 0x0a: /* Linefeed */
-+		case 0x0d: /* Carriage return */
-+			print(u"\r\n");
-+			return EFI_SUCCESS;
-+		default:
-+			break;
-+		}
-+		/* Ignore surrogate codes */
-+		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
-+			continue;
-+		if (key.unicode_char >= 0x20 && pos < buffer_size - 1) {
-+			*outbuf = key.unicode_char;
-+			buffer[pos++] = key.unicode_char;
-+			buffer[pos] = 0;
-+			print(outbuf);
-+		}
-+	}
-+}
+ bool starts_with(u16 *string, u16 *keyword)
+ {
+ 	if (!string)
 diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
-index 45c17a8ed99..4498607ef07 100644
+index 4498607ef07..ff37f3413eb 100644
 --- a/lib/efi_loader/efi_app_common.h
 +++ b/lib/efi_loader/efi_app_common.h
-@@ -64,4 +64,33 @@ void error(u16 *string);
+@@ -55,6 +55,14 @@ void cls(void);
   */
- bool starts_with(u16 *string, u16 *keyword);
+ void error(u16 *string);
  
 +/**
-+ * efi_drain_input() - drain console input
-+ */
-+void efi_drain_input(void);
-+
-+/**
-+ * efi_input_yn() - get answer to yes/no question
++ * skip_whitespace() - skip over leading whitespace
 + *
-+ * Drains the console input before reading.
-+ *
-+ * Return:
-+ * y or Y
-+ *     EFI_SUCCESS
-+ * n or N
-+ *     EFI_ACCESS_DENIED
-+ * ESC
-+ *     EFI_ABORTED
++ * @pos:	UTF-16 string
++ * Return:      pointer to first non-whitespace
 + */
-+efi_status_t efi_input_yn(void);
++u16 *skip_whitespace(u16 *pos);
 +
-+/**
-+ * efi_input() - read string from console
-+ *
-+ * @buffer:             input buffer
-+ * @buffer_size:        buffer size
-+ * Return:              status code
-+ */
-+efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
-+
- #endif /* _EFI_APP_COMMON_H */
+ /**
+  * starts_with() - check if string starts with keyword
+  *
 diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
-index 60f8a020e8c..52562be048d 100644
+index 52562be048d..0a025c1a841 100644
 --- a/lib/efi_loader/initrddump.c
 +++ b/lib/efi_loader/initrddump.c
-@@ -19,7 +19,6 @@
- 
- static struct efi_system_table *systable;
- static struct efi_boot_services *bs;
--static struct efi_simple_text_input_protocol *cin;
- static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
- static const efi_guid_t guid_simple_file_system_protocol =
- 					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
-@@ -46,113 +45,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
+@@ -45,19 +45,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
  	}
  };
  
 -/**
-- * efi_drain_input() - drain console input
-- */
--static void efi_drain_input(void)
--{
--	cin->reset(cin, true);
--}
--
--/**
-- * efi_input_yn() - get answer to yes/no question
+- * skip_whitespace() - skip over leading whitespace
 - *
-- * Return:
-- * y or Y
-- *     EFI_SUCCESS
-- * n or N
-- *     EFI_ACCESS_DENIED
-- * ESC
-- *     EFI_ABORTED
+- * @pos:	UTF-16 string
+- * Return:	pointer to first non-whitespace
 - */
--static efi_status_t efi_input_yn(void)
+-static u16 *skip_whitespace(u16 *pos)
 -{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_status_t ret;
--
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		/* Convert to lower case */
--		switch (key.unicode_char | 0x20) {
--		case 'y':
--			return EFI_SUCCESS;
--		case 'n':
--			return EFI_ACCESS_DENIED;
--		default:
--			break;
--		}
--	}
--}
--
--/**
-- * efi_input() - read string from console
-- *
-- * @buffer:		input buffer
-- * @buffer_size:	buffer size
-- * Return:		status code
-- */
--static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
--{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_uintn_t pos = 0;
--	u16 outbuf[2] = u" ";
--	efi_status_t ret;
--
--	*buffer = 0;
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			print(u"\r\nAborted\r\n");
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		switch (key.unicode_char) {
--		case 0x08: /* Backspace */
--			if (pos) {
--				buffer[pos--] = 0;
--				print(u"\b \b");
--			}
--			break;
--		case 0x0a: /* Linefeed */
--		case 0x0d: /* Carriage return */
--			print(u"\r\n");
--			return EFI_SUCCESS;
--		default:
--			break;
--		}
--		/* Ignore surrogate codes */
--		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
--			continue;
--		if (key.unicode_char >= 0x20 &&
--		    pos < buffer_size - 1) {
--			*outbuf = key.unicode_char;
--			buffer[pos++] = key.unicode_char;
--			buffer[pos] = 0;
--			print(outbuf);
--		}
--	}
+-	for (; *pos && *pos <= 0x20; ++pos)
+-		;
+-	return pos;
 -}
 -
  /**
-  * skip_whitespace() - skip over leading whitespace
-  *
-@@ -356,7 +248,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 
- 	handle = image_handle;
- 	systable = systab;
--	cin = systable->con_in;
- 	bs = systable->boottime;
- 
- 	color(EFI_WHITE);
+  * do_help() - print help
+  */
 diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index e19214d798f..100e03294e5 100644
+index 100e03294e5..351e103fb97 100644
 --- a/lib/efi_loader/smbiosdump.c
 +++ b/lib/efi_loader/smbiosdump.c
-@@ -15,7 +15,6 @@
- 
- #define BUFFER_SIZE 64
- 
--static struct efi_simple_text_input_protocol *cin;
- static struct efi_boot_services *bs;
- static efi_handle_t handle;
- static struct efi_system_table *systable;
-@@ -26,109 +25,6 @@ static const efi_guid_t guid_simple_file_system_protocol =
+@@ -25,19 +25,6 @@ static const efi_guid_t guid_simple_file_system_protocol =
  					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
  static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
  
 -/**
-- * efi_input_yn() - get answer to yes/no question
+- * skip_whitespace() - skip over leading whitespace
 - *
-- * Return:
-- * y or Y
-- *     EFI_SUCCESS
-- * n or N
-- *     EFI_ACCESS_DENIED
-- * ESC
-- *     EFI_ABORTED
+- * @pos:	UTF-16 string
+- * Return:	pointer to first non-whitespace
 - */
--static efi_status_t efi_input_yn(void)
+-static u16 *skip_whitespace(u16 *pos)
 -{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_status_t ret;
--
--	/* Drain the console input */
--	ret = cin->reset(cin, true);
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		/* Convert to lower case */
--		switch (key.unicode_char | 0x20) {
--		case 'y':
--			return EFI_SUCCESS;
--		case 'n':
--			return EFI_ACCESS_DENIED;
--		default:
--			break;
--		}
--	}
--}
--
--/**
-- * efi_input() - read string from console
-- *
-- * @buffer:		input buffer
-- * @buffer_size:	buffer size
-- * Return:		status code
-- */
--static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
--{
--	struct efi_input_key key = {0};
--	efi_uintn_t index;
--	efi_uintn_t pos = 0;
--	u16 outbuf[2] = u" ";
--	efi_status_t ret;
--
--	/* Drain the console input */
--	ret = cin->reset(cin, true);
--	*buffer = 0;
--	for (;;) {
--		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
--		if (ret != EFI_SUCCESS)
--			continue;
--		ret = cin->read_key_stroke(cin, &key);
--		if (ret != EFI_SUCCESS)
--			continue;
--		switch (key.scan_code) {
--		case 0x17: /* Escape */
--			print(u"\r\nAborted\r\n");
--			return EFI_ABORTED;
--		default:
--			break;
--		}
--		switch (key.unicode_char) {
--		case 0x08: /* Backspace */
--			if (pos) {
--				buffer[pos--] = 0;
--				print(u"\b \b");
--			}
--			break;
--		case 0x0a: /* Linefeed */
--		case 0x0d: /* Carriage return */
--			print(u"\r\n");
--			return EFI_SUCCESS;
--		default:
--			break;
--		}
--		/* Ignore surrogate codes */
--		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
--			continue;
--		if (key.unicode_char >= 0x20 &&
--		    pos < buffer_size - 1) {
--			*outbuf = key.unicode_char;
--			buffer[pos++] = key.unicode_char;
--			buffer[pos] = 0;
--			print(outbuf);
--		}
--	}
+-	for (; *pos && *pos <= 0x20; ++pos)
+-		;
+-	return pos;
 -}
 -
  /**
-  * skip_whitespace() - skip over leading whitespace
+  * open_file_system() - open simple file system protocol
   *
-@@ -467,7 +363,7 @@ static efi_status_t do_save(u16 *filename)
- }
- 
- /**
-- * command_loop - process user commands
-+ * command_loop() - process user commands
-  */
- static void command_loop(void)
- {
-@@ -476,6 +372,7 @@ static void command_loop(void)
- 		u16 *pos;
- 		efi_uintn_t ret;
- 
-+		efi_drain_input();
- 		print(u"=> ");
- 		ret = efi_input(command, sizeof(command));
- 		if (ret == EFI_ABORTED)
-@@ -509,7 +406,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 
- 	handle = image_handle;
- 	systable = systab;
--	cin = systable->con_in;
- 	bs = systable->boottime;
- 
- 	color(EFI_WHITE);
 -- 
 2.53.0
 
