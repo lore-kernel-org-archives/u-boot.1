@@ -4,70 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58662C43458
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 17:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5ED1C43458
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jun 2026 18:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82C9084931;
-	Sun, 28 Jun 2026 19:54:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id CE0B9848F3;
+	Sun, 28 Jun 2026 20:58:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="WcjCjpNw";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="AAhfikOx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D06C483FEE; Sun, 28 Jun 2026 19:54:27 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ id 5288C84869; Sun, 28 Jun 2026 20:58:09 +0200 (CEST)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 886E284105
- for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 19:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41055805D7
+ for <u-boot@lists.denx.de>; Sun, 28 Jun 2026 20:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 65fe4983-731a-11f1-8f53-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 65fe4983-731a-11f1-8f53-005056992ed3;
- Sun, 28 Jun 2026 19:54:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=VplsACYtvTJL5eMIH65DHY3YjZWyYEkdVL19CMYw2i8=;
- b=WcjCjpNwSwYn4AfQgsqQPodF4TNCYBrY89OTktm2qKtPrzkQCSOfCNCljDHX1ncTr0tRMueeQUeJF
- GzsNgzN3vWAownl7SlSRrflQvqvF0jqQ+nN3Y4+R0XNoBbwHAqZrHgcPHgv4dBkXj8ImFEqDSGAQiR
- IrUmFT2WXTS5gf3U9GVKHlZjAVnGl7v+OvcJk9Zb2A7VtzbO1Yq/snVw4PmsVWvlWuAyFsKDmbNF0v
- jeYqVGrL6b3El5/lyjQvdGUy86PkD0fCtOi0qCHmoTlP9PgJNNquDa6mpn+3mSjV2s8kQqJXt+9gUc
- eM2QF31ktOLbEYGJFK9l1VzQi68pixg==
-X-KPN-MID: 33|OYvfOUjAT0YlYk1ZsaYDhpCtsgNtcAhmMLTd919Vgv4Zw4oEt1ZdkPU0y5phtd4
- pwfS4R0QA7WV9dhs6JX8P/Ry/8/qx1PrpgNu1c2nRYzQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|cDgQEslzK/95UjSqitmtAugWKox+TawofJTsFy2b1x4v/ZV/50vT+Bad5EWw2XU
- YJWYV6xYZNSh0wxxYWV8hNA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 6569d88b-731a-11f1-8dc4-00505699d6e5;
- Sun, 28 Jun 2026 19:54:24 +0200 (CEST)
-Date: Sun, 28 Jun 2026 19:54:23 +0200
-Message-Id: <87ik72k0ts.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Yureka <yureka@cyberchaos.dev>
-Cc: j@jannau.net, u-boot@lists.denx.de, trini@konsulko.com,
- jh80.chung@samsung.com, peng.fan@nxp.com,
- kettenis@openbsd.org, neil.armstrong@linaro.org,
- sjg@chromium.org, kory.maincent@bootlin.com, me@ziyao.cc,
- visitorckw@gmail.com, alif.zakuan.yuslaimi@altera.com,
- jerome.forissier@arm.com, raymond.mao@riscstar.com,
- quentin.schulz@cherry.de, stefan.roese@mailbox.org,
- philip.molloy@analog.com, tien.fong.chee@altera.com,
- sumit.garg@oss.qualcomm.com, msp@baylibre.com,
- aswin.murugan@oss.qualcomm.com,
- balaji.selvanathan@oss.qualcomm.com, marek.vasut@mailbox.org,
- yureka@cyberchaos.dev
-In-Reply-To: <20260628-apple-pmp-report-v1-1-67b39539d879@cyberchaos.dev>
- (message from Yureka on Sun, 28 Jun 2026 18:11:13 +0200)
-Subject: Re: [PATCH] power: domain: Add Apple PMP reporting driver
-References: <20260628-apple-pmp-report-v1-1-67b39539d879@cyberchaos.dev>
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=s3iXCOOmouT+m8919aUjCHGnoIhQ1czC3chUI0eF9k4fTPcDWyTKdRR43igQDbrkvq0pyV1tNGrJdnj/oeDE6tWMRR2/Wftiz/d2YfKIZxI1m+1DrzZo27bk8a9LSvezgikM7Alx75D2ZE7QJer8Xjm2pZ0WM8E0jFwf5cX0idH9vAiuDNZOQ2wVi58kXn2Fb9DgXBwgtrSqm6wuBNYbTO13uSkqcTrGnZvy5IGNc1kP5qsu4yTF6LtuNO0fSU34eq6JwwX417aIFxA0QO+GTlfxGt0Yr2vxrA3wGB8gEniDFZm8BvzP5CKVrdAlfRu+9ZMvfNTW4HD7GJaGe3FfIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sy3Idfal0S+wZGiWP+/1cORuiLnY6vhGfhda2kG8Wys=;
+ b=qmi/k5cAl/DPgxQlEQuVAI+8u+94FxLYGjjQGRxJoF5g8/nerS30Zu4ToZKKV63zOPbbAsrQ3lmV1Td5K2z3aph7Sn1yFVsnIJgf8JAleS3TWkILZ6AlHTWoVhvZvWXQ0lYfM9lN6W9ZI5bia6Pn/Zz7a4ls6AWaqkdOdYqqabP4ASlmsd/iZD2sGtFyyjAH9c96QFaxohWxCqueV7zxdwUlzKLe03JFHbw3L19Pfssh7lpDAyqanIN78a282c6gEa0MaaJ4b+sNrc0Y1N9cIh9DxeUjLlaQGTPfkED48IjbYYL8oFWgkukprL9Wm6t4Kw2BqmvkEco9zMpEULAFtg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sy3Idfal0S+wZGiWP+/1cORuiLnY6vhGfhda2kG8Wys=;
+ b=AAhfikOxKnMwIfHn6wtUEIbw21LrAGys/5sSRnRRdEATi+F4ruectePcE8vCcScnCp+G7agNKr71W9dIYUfbuto0fSpIDMwhQwzU2CO+YmrMH3l/nNe0trWLEHzCW9phsPndxxhbm0XaOV1RfeNBN4v61ywuYjhV7i2GzXEeD2p0XgEEuBo+rzZyY3lM1vmp8OL7oqtHk6nBPgt+RRwzEm2vWBbIj1HUpUb1RJteRAA5i/thOZyKCdmfZVBGAnJ+a3XJmh81ADi9oDwuSI79899X9glSM36Qg4eBcJjxgErwmhf8gAftOnhTsiktcVG9+1oyyB7gYR/9DdDMGVKJbw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by PH7PR03MB7267.namprd03.prod.outlook.com (2603:10b6:510:24e::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Sun, 28 Jun
+ 2026 18:58:02 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0159.018; Sun, 28 Jun 2026
+ 18:57:58 +0000
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+To: u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>, trini@konsulko.com, marex@denx.de,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tze Yee Ng <tze.yee.ng@altera.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Subject: [PATCH] Revert "mmc: sdhci-cadence: trigger tuning for SD HS mode on
+ SD6HC (v6) PHY"
+Date: Sun, 28 Jun 2026 11:57:51 -0700
+Message-ID: <20260628185752.1504-1-tanmay.kathpalia@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SJ0PR13CA0030.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::35) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|PH7PR03MB7267:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45e416d9-6236-4a11-7d2f-08ded5472b81
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|376014|1800799024|55112099003|6133799003|10063799003|3023799007|11063799006|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: EgQ4f/rbJfUCK7ZzYLs77N+HlF251om5LBHd9afZpXqCwcJDqooiJOmgG3W0TbTm31gYVicUfUJ9S1ezW+697IQLgbTintPuWUrpHs3K84LPP30wgo44b7qJ/FAJhYlz1N3mg6FqSNSp4/6RFnvVYTygOUeAb2d0I/ZjL4qbgZAIQr1BxnZsg61qKENTVwicsEQXNvv4E48apgV6XH5a0yM/PufagdPBlwkzoGLQQ4OOXbviJvbc5KWMdfnHdKJDyL/taxHvG5OCIDP+qGVsfBPmWZS8tDNZbtUN8D1y4dvKxcc+8yLbMci8WMywnIEbGgL3na+AEazTjBXs69ds8RrTdmSd7xUBKypdo7wyTK3HjVvFUspv6rfNM/6vP29la8xF8DEHOH+EdD1H6K5wlZKDhFHcHpC+gO6kJYkSn/sYvM1g6sRKdFRx0iqg0e4uKuBtMgrUue7nx261xTqllHA87E7KdsdyyLwaJb3gxcuPS6TbuxGRwCPbaK1EXurviQI3OgkjnphsEanaLuIIM/WcZv4eMMXfDx8zUu+8TUZMZevhx5jn4xEjQK8zjdgncwQx59jGVsNTPFRPmExgxsADt+yTPk0GJKQjhtiUr14yWL0clwfsczGvvn6BxALvM5qyGFD+dH4+se0PkcMYZl389GU7Ahob2IUh8K4LWMs=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(55112099003)(6133799003)(10063799003)(3023799007)(11063799006)(56012099006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cmZwYnJxYkoxbDU0MC9FSnRIYUU0K0JqY2V4blhEb256TUNncmw0VHJjdkh6?=
+ =?utf-8?B?ci81aWJja0NheFMzR2poN3M4TkJjdWZXbEQzYlpsS2lWbi8xTjRPSTAwSGdn?=
+ =?utf-8?B?QlN1NWZRR1BEcm9OcDlWRFpzR2drdXUyMVBiVFRGT2xpYlpJeEUzSmo4ZEpS?=
+ =?utf-8?B?NVlTSUNaZWw0aEswK1lPSFJNZThoY1Fkc1pyNURXZERpMks4MVc4dWFRc0xI?=
+ =?utf-8?B?OXFab3FVRG5GZmJkUVZwNFJDMm10ZlNFcU5VVEdJZTliZmc1bFUrTllWRGJV?=
+ =?utf-8?B?allJTElPd0xkNkdKcFIzMFhsam1qRXNQcTFFMS82YzE1ZjR6blRiUmFlZFlv?=
+ =?utf-8?B?RThISXhMczQ5Z01ZZDRCMUV2Z1ZlWnpOOFZiTnRTbGp0VzVndnFpNWZrK2NF?=
+ =?utf-8?B?STJsaE5lUGc1YU80aHdJZzNxTWowbTg0TEJtNFBuNTVwZGd5b1NuNjhVRldk?=
+ =?utf-8?B?RVJmekNDODl0VWhJK2Nkc01JalhyS2RhcE9vUHo2QXVXQm5nRjh3QjlmREtK?=
+ =?utf-8?B?YWsvOEdJM1h4SzVweTRCTjkrYkRFZG9lVEpqSkhYQ1F1U29abmtrcnl4cStr?=
+ =?utf-8?B?ak80RFVlYjl0djJ5NklIYXhPbU55OHFZL0RmOVA2a085dDdYS25HN3FaaDd6?=
+ =?utf-8?B?ME93NFJ2RWpBdmxkWUt1WDhNNDZYNWF4S2FPLzdYSjVpR2NDMFhhRzE3K2ZB?=
+ =?utf-8?B?Vjdvdjl2eml4N3lCdWhSVC9rVWFVSGkzQmZyUG5oU3ZXbzBnSGJLY1UyNmR3?=
+ =?utf-8?B?K3lmeVJsSW5ubnJJblQrNi9CUUZyL3U1NWJSall5dDFyWk5aUnhRTFhoZk5y?=
+ =?utf-8?B?cXZKaG1xQ2lpOCtnNTduMWpFVkM3b0daUEtUbEd5eThtZnZzTkZZZFBhWlZZ?=
+ =?utf-8?B?ZzdYODVpOVQrdXNmWkIvdXZyditvKzNzaC92MGJybXNnbEJUMWNVNTk4OXJM?=
+ =?utf-8?B?MlNPKzNPOEdOeVpwK2M1QlF4UWgxT0lKVHRZT3FxM0tXbksrOFJzOWpJQVNR?=
+ =?utf-8?B?aGovdjlYMFNtSE85TW5zcnZWejNhblVVc1NWNG4zUlEyeHIydTZMZjJHNW9l?=
+ =?utf-8?B?dTBma1ZhQzBQcUZjbEFSTThBQ25lSE9SZ1ZwWHQwZXhnMXpFWXVEQkI5Wktl?=
+ =?utf-8?B?d2Y0REFUVHdvTzdyL01abHlVOGVSRzBqMWJNbHRoZ3lPOW9Hbi9JN0NoOUtG?=
+ =?utf-8?B?SnNReXQxU2hnV3VQS0hqWS8ya3o4OHRvUkhGS2VrTElJcU9oR1ROZjQ4bHBC?=
+ =?utf-8?B?YkZzeGpJcmN0QlU2SzZKR0s2cENobG9mczUrbXIwQXJiWGp0UHU0UnVjNlQr?=
+ =?utf-8?B?YXg2TzBkZ3pEUmNST2VBZGtRRWpxSUN3SCsyNU5VY2RQRE9jYkJqQVpmdHhv?=
+ =?utf-8?B?TmZadkd1bzBQV1VTM1FjZzVjMzV4ZDgraVpkTHd2QW03anJqc0ttTkFkKyt0?=
+ =?utf-8?B?S2liVXJpWGVVZlpZaUt3cWdvYXZQZ3A5ZGgzY1lJOWpId0ZnQUNxU0JHK3JT?=
+ =?utf-8?B?Mkp4REFNUGEzdXdTdUtMalZqUVpMREJKcHRxdlFCUTZiZHJ3ZkZwa1RSS25y?=
+ =?utf-8?B?Rk5SYTE1anRuNThETFpCaThQMWpmcmtwMjNWLy9BenJTYUZXNThlLzVwd3Vl?=
+ =?utf-8?B?bm1KQmlJdTJyU1ZJa3BIbTlqZWNKT0R5MFA0Wi9wanlEY3VGYmhZY0F5RXRP?=
+ =?utf-8?B?Sy83b0FJYU1oZU5YK0ZHdjZ3N21XWkpqbXk1U0xkZ0MvbWZvQ2tIMGNBaFJM?=
+ =?utf-8?B?R01VTFM1VUQ5eXhHSXFYZDNTTFkwZTFZdm9ZN1J2amFIekxkRTFjV1QrTHgz?=
+ =?utf-8?B?eU9UUTg5WklYMEUrd1BLTTV4NUs0dmcrNE5rN250c1RQejdNQ08xSk5vSmh3?=
+ =?utf-8?B?MHROU0c5MUN1YXJJYUdoZjB4T2g5OG1nS1Z2TS9vWFdDTldyUmNNMXRFTWl1?=
+ =?utf-8?B?Tk5VNURnRkVQdjdqSVBjcTRyM1ZPZ1E0TEF2bGk4aHZ5dDlHL0Z2UjJGYnI5?=
+ =?utf-8?B?cGM3RTN4ZVlLa1AvVEtrWndHRzhvQUFJQ3F6WFpzb2c5WmZZZnA3SmVYQUFK?=
+ =?utf-8?B?NWhWaHYrYkxWeDhoU0lEcVNQSURWVkxRbUgwdU9TcCtUS1JQZnZiWENQVkY4?=
+ =?utf-8?B?ZWJiWXovZ09RckdNTFlTaXVncU95VUVWZmdSZUtPYWdaUGp5a2s5MkErVDBB?=
+ =?utf-8?B?V0dlTXBpbnFLUU5MbzZURFJDL1BmZ20xNjVMTzVFTGZ1aFNNc0FEUVJTTHFP?=
+ =?utf-8?B?WElHWnJLeUxYN21FcGFFZ3dZeEFsWitHQzVxeHN1cUw0QVQ3UURsdnhNRjhm?=
+ =?utf-8?B?clBHR3o2UFlvdXdwcHZFcDFvd0JsQ2w0ZjVHSWt4V0VzUUZPS0YzVHI0aW1v?=
+ =?utf-8?Q?Dkr5CgcfmcMdnjzc=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45e416d9-6236-4a11-7d2f-08ded5472b81
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jun 2026 18:57:58.3935 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /VOQMC2O9IMi7Vo5gbnJ9GGqzXBvtbluRhDEX/PJk7WdzsVRNf0iI2sNrEOr+Jb+lhRu4FRFLcbs1/D9VeP/PJi/fahPUE2H077beeG157w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7267
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,136 +149,269 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Yureka <yureka@cyberchaos.dev>
-> Date: Sun, 28 Jun 2026 18:11:13 +0200
-> 
-> The Power Management Processor (PMP) is a coprocessor found on certain
-> Apple SoCs.
-> 
-> This is a dummy driver which allows for devices bound to a PMGR domain
-> through a PMP reporting domain to be powered on.
-> Powering on the PMP itself is not necessary during boot.
-> 
-> Tested on M3 Max (T6034) with the nvme device tree node using one of
-> the PMP reporting power domains.
+This reverts commit b42c67188c14 ("mmc: sdhci-cadence: trigger tuning
+for SD HS mode on SD6HC (v6) PHY").
 
-The device tree bindings for these PMP device have not yet been
-upstreamed.  Can we do that first?
+The reverted patch added runtime DLL delay calibration for SD High
+Speed mode on the Cadence SD6HC (v6) PHY, gated by the device tree
+property "cdns,sd-hs-tuning". Reviewer feedback identified issues with
+the implementation, but the patch was merged without those concerns
+being adequately addressed or justified.
 
-> Signed-off-by: Yureka <yureka@cyberchaos.dev>
-> ---
->  MAINTAINERS                             |  1 +
->  drivers/power/domain/Kconfig            | 13 ++++++++++
->  drivers/power/domain/Makefile           |  1 +
->  drivers/power/domain/apple-pmp-report.c | 45 +++++++++++++++++++++++++++++++++
->  4 files changed, 60 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 571af196465..ec0c2abd9c7 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -148,6 +148,7 @@ F:	drivers/pci/pcie_apple.c
->  F:	drivers/phy/phy-apple-atc.c
->  F:	drivers/pinctrl/pinctrl-apple.c
->  F:	drivers/power/domain/apple-pmgr.c
-> +F:	drivers/power/domain/apple-pmp-report.c
->  F:	drivers/spi/apple_spi.c
->  F:	drivers/watchdog/apple_wdt.c
->  F:	include/configs/apple.h
-> diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-> index 4112b777371..06112d33660 100644
-> --- a/drivers/power/domain/Kconfig
-> +++ b/drivers/power/domain/Kconfig
-> @@ -18,6 +18,19 @@ config APPLE_PMGR_POWER_DOMAIN
->  	  This driver is needed to power on parts of the SoC that have
->  	  not been powered on by previous boot stages.
->  
-> +config APPLE_PMP_REPORT_POWER_DOMAIN
-> +	bool "Enable the Apple PMP reporting power domain driver"
-> +	depends on POWER_DOMAIN
-> +	default y if ARCH_APPLE
-> +	help
-> +	  Enable support for reporting power states to the Apple Power
-> +	  Management Processor (PMP).
-> +
-> +	  This is a dummy driver since the PMP is entirely optional and
-> +	  enabling is not necessary during boot. However, it allows for
-> +	  devices bound to a PMGR domain through a PMP reporting domain to be
-> +	  powered on.
-> +
->  config AGILEX5_PMGR_POWER_DOMAIN
->  	bool "Enable the Agilex5 PMGR power domain driver"
->  	depends on SPL_POWER_DOMAIN && ARCH_SOCFPGA_SOC64
-> diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-> index 110153d5cf8..3e9711aa430 100644
-> --- a/drivers/power/domain/Makefile
-> +++ b/drivers/power/domain/Makefile
-> @@ -5,6 +5,7 @@
->  
->  obj-$(CONFIG_$(PHASE_)POWER_DOMAIN) += power-domain-uclass.o
->  obj-$(CONFIG_APPLE_PMGR_POWER_DOMAIN) += apple-pmgr.o
-> +obj-$(CONFIG_APPLE_PMP_REPORT_POWER_DOMAIN) += apple-pmp-report.o
->  obj-$(CONFIG_AGILEX5_PMGR_POWER_DOMAIN) += altr-pmgr-agilex5.o
->  obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
->  obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
-> diff --git a/drivers/power/domain/apple-pmp-report.c b/drivers/power/domain/apple-pmp-report.c
-> new file mode 100644
-> index 00000000000..89fd81a7bd8
-> --- /dev/null
-> +++ b/drivers/power/domain/apple-pmp-report.c
-> @@ -0,0 +1,45 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Yureka <yureka@cyberchaos.dev>
-> + */
-> +
-> +#include <dm.h>
-> +#include <power-domain-uclass.h>
-> +
-> +static const struct udevice_id apple_pmp_report_ids[] = {
-> +	{ .compatible = "apple,t6000-pmp-v2-report" },
-> +	{ .compatible = "apple,t6020-pmp-v2-report" },
-> +	{ .compatible = "apple,t6030-pmp-v2-report" },
-> +	{ .compatible = "apple,t8112-pmp-v2-report" },
-> +	{ /* sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(apple_pmp_report) = {
-> +	.name = "apple_pmp_report",
-> +	.id = UCLASS_NOP,
-> +	.of_match = apple_pmp_report_ids,
-> +	.bind = dm_scan_fdt_dev,
-> +};
-> +
-> +static int apple_pmp_report_entry_of_xlate(struct power_domain *power_domain,
-> +					   struct ofnode_phandle_args *args)
-> +{
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id apple_pmp_report_entry_ids[] = {
-> +	{ .compatible = "apple,t6000-pmp-v2-report-entry" },
-> +	{ .compatible = "apple-pmp-report-entry" },
-> +	{ /* sentinel */ }
-> +};
-> +
-> +struct power_domain_ops apple_pmp_report_entry_ops = {
-> +	.of_xlate = apple_pmp_report_entry_of_xlate,
-> +};
-> +
-> +U_BOOT_DRIVER(apple_pmp_report_entry) = {
-> +	.name = "apple_pmp_report_entry",
-> +	.id = UCLASS_POWER_DOMAIN,
-> +	.of_match = apple_pmp_report_entry_ids,
-> +	.ops = &apple_pmp_report_entry_ops,
-> +};
-> 
-> ---
-> base-commit: 6902fb4c17faa375003124c451c2550deab5463d
-> change-id: 20260628-apple-pmp-report-4d9dec73e3f2
-> 
-> Best regards,
-> --  
-> Yureka <yureka@cyberchaos.dev>
-> 
-> 
+Reverting to realign the driver with the IP documentation and the SD
+Physical Layer Specification, as the underlying issue requires a
+different solution approach.
+
+Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+---
+ drivers/mmc/sdhci-cadence.c  | 108 +----------------------------------
+ drivers/mmc/sdhci-cadence.h  |   5 --
+ drivers/mmc/sdhci-cadence6.c |  45 +--------------
+ 3 files changed, 2 insertions(+), 156 deletions(-)
+
+diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+index a76f9e8d6bd..5bbc18dfa51 100644
+--- a/drivers/mmc/sdhci-cadence.c
++++ b/drivers/mmc/sdhci-cadence.c
+@@ -39,9 +39,6 @@ static const struct sdhci_cdns_phy_cfg sdhci_cdns_phy_cfgs[] = {
+ 	{ "cdns,phy-dll-delay-strobe", SDHCI_CDNS_PHY_DLY_STROBE, },
+ };
+ 
+-static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
+-						    unsigned int opcode);
+-
+ static int sdhci_cdns_write_phy_reg(struct sdhci_cdns_plat *plat,
+ 				    u8 addr, u8 data)
+ {
+@@ -158,93 +155,8 @@ static void sdhci_cdns_set_control_reg(struct sdhci_host *host)
+ 		sdhci_cdns6_phy_adj(mmc->dev, plat, mmc->selected_mode);
+ }
+ 
+-static __maybe_unused bool sdhci_cdns_sd_needs_tuning(struct mmc *mmc)
+-{
+-	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
+-
+-	if (!IS_SD(mmc))
+-		return false;
+-
+-	if (!dev_read_bool(mmc->dev, "cdns,sd-hs-tuning"))
+-		return false;
+-
+-	/* Already tuned for this mode */
+-	if (plat->tuned_mode == mmc->selected_mode)
+-		return false;
+-
+-	switch (mmc->selected_mode) {
+-	case SD_HS:
+-		return mmc->bus_width == 4;
+-	/* Add future modes here, e.g.:
+-	 * case UHS_SDR50:
+-	 *	return true;
+-	 */
+-	default:
+-		return false;
+-	}
+-}
+-
+-static int sdhci_cdns_set_ios_post(struct sdhci_host *host)
+-{
+-	struct mmc *mmc = host->mmc;
+-	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
+-	int ret __maybe_unused;
+-	/*
+-	 * The SD6HC soft PHY requires runtime DLL delay calibration
+-	 * for SD High Speed mode. The default PHY_DLL_SLAVE_CTRL_REG
+-	 * values (READ_DQS_CMD_DELAY and READ_DQS_DELAY = 0) do not
+-	 * provide sufficient timing margin due to PVT and board trace
+-	 * variations.
+-	 *
+-	 * Tuning is performed once per entry into SD_HS mode
+-	 * (tracked by plat->tuned_mode state). The calibrated PHY delay
+-	 * values remain valid while the card stays in SD_HS mode, and
+-	 * leaving that tuned mode clears the state so re-entering SD_HS
+-	 * triggers tuning again.
+-	 *
+-	 * This must be done in set_ios_post (not set_control_reg)
+-	 * because the SDHCI controller must already be operating at
+-	 * the target bus width, clock, and speed mode before CMD19
+-	 * tuning commands can succeed.
+-	 */
+-
+-	if (IS_ENABLED(CONFIG_MMC_SUPPORTS_TUNING)) {
+-		if (SDHCI_GET_VERSION(host) >= SDHCI_SPEC_420 &&
+-		    sdhci_cdns_sd_needs_tuning(mmc)) {
+-			ret = sdhci_cdns_execute_tuning(mmc->dev,
+-							MMC_CMD_SEND_TUNING_BLOCK);
+-			if (ret) {
+-				dev_err(mmc->dev,
+-					"SD_HS tuning failed (ret=%d), using default PHY\n",
+-					ret);
+-				/* Restore default PHY settings and avoid retrying in this mode */
+-				sdhci_cdns6_phy_adj(mmc->dev, plat,
+-						    mmc->selected_mode);
+-				plat->tuned_mode = mmc->selected_mode;
+-				plat->tuned_dll_slave_ctrl = sdhci_cdns6_phy_get_dll_slave(plat);
+-				return 0;
+-			}
+-			/*
+-			 * Tuning succeeded. The tuned_mode is already set by
+-			 * execute_tuning(), so the tuned value will be preserved
+-			 * across subsequent PHY reconfigurations.
+-			 */
+-			dev_dbg(mmc->dev, "SD_HS tuning successful\n");
+-		}
+-
+-		/* Reset when mode changes away from a tuned mode */
+-		if (mmc->selected_mode != plat->tuned_mode) {
+-			plat->tuned_mode = MMC_MODES_END;
+-			plat->tuned_dll_slave_ctrl = 0;
+-		}
+-	}
+-
+-	return 0;
+-}
+-
+ static const struct sdhci_ops sdhci_cdns_ops = {
+ 	.set_control_reg = sdhci_cdns_set_control_reg,
+-	.set_ios_post = sdhci_cdns_set_ios_post,
+ };
+ 
+ static int sdhci_cdns_set_tune_val(struct sdhci_cdns_plat *plat,
+@@ -292,7 +204,6 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
+ 	int cur_streak = 0;
+ 	int max_streak = 0;
+ 	int end_of_streak = 0;
+-	int ret;
+ 	int i;
+ 
+ 	/*
+@@ -318,24 +229,7 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
+ 		return -EIO;
+ 	}
+ 
+-	ret = sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
+-	if (ret)
+-		return ret;
+-
+-	/*
+-	 * Mark this mode as tuned. This is critical for both driver tuning
+-	 * (SD_HS via set_ios_post) and framework tuning (UHS_SDR104, MMC_HS_200,
+-	 * MMC_HS_400) so that subsequent PHY reconfigurations restore the
+-	 * calibrated DLL value instead of overwriting with DT defaults.
+-	 *
+-	 * For HS400, tuning is performed while the controller is in HS200 mode
+-	 * (mmc->selected_mode == MMC_HS_200 and mmc->hs400_tuning == true).
+-	 * Record the tuned mode as MMC_HS_400 so the calibrated DLL value is
+-	 * preserved across the HS200→HS400 transition.
+-	 */
+-	plat->tuned_mode = mmc->hs400_tuning ? MMC_HS_400 : mmc->selected_mode;
+-
+-	return 0;
++	return sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
+ }
+ 
+ static struct dm_mmc_ops sdhci_cdns_mmc_ops;
+diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h
+index ea517491860..7101f00b75b 100644
+--- a/drivers/mmc/sdhci-cadence.h
++++ b/drivers/mmc/sdhci-cadence.h
+@@ -7,8 +7,6 @@
+ #ifndef SDHCI_CADENCE_H_
+ #define SDHCI_CADENCE_H_
+ 
+-#include <mmc.h>
+-
+ /* HRS - Host Register Set (specific to Cadence) */
+ /* PHY access port */
+ #define SDHCI_CDNS_HRS04		0x10
+@@ -62,13 +60,10 @@ struct sdhci_cdns_plat {
+ 	struct mmc_config cfg;
+ 	struct mmc mmc;
+ 	void __iomem *hrs_addr;
+-	enum bus_mode tuned_mode;
+-	u32 tuned_dll_slave_ctrl;
+ };
+ 
+ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 mode);
+ int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *plat);
+ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val);
+-u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat);
+ 
+ #endif
+diff --git a/drivers/mmc/sdhci-cadence6.c b/drivers/mmc/sdhci-cadence6.c
+index c8b42532e17..ca1086e2359 100644
+--- a/drivers/mmc/sdhci-cadence6.c
++++ b/drivers/mmc/sdhci-cadence6.c
+@@ -173,30 +173,6 @@ static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat, u32 addr, u3
+ 	writel(val, plat->hrs_addr + SDHCI_CDNS_HRS05);
+ }
+ 
+-static bool sdhci_cdns6_mode_is_tuned(struct sdhci_cdns_plat *plat, u32 mode)
+-{
+-	/*
+-	 * Check if the given mode has a valid tuned DLL value.
+-	 * Only modes that support tuning (driver or framework) can have
+-	 * valid tuned values. This prevents the initial state (tuned_mode=0)
+-	 * from falsely matching MMC_LEGACY.
+-	 */
+-	if (plat->tuned_mode != mode)
+-		return false;
+-
+-	switch (mode) {
+-	case SD_HS:		/* Driver tuning via set_ios_post */
+-	case UHS_SDR50:		/* Future driver tuning support */
+-	case UHS_SDR104:	/* Framework tuning */
+-	case MMC_HS_200:	/* Framework tuning */
+-	case MMC_HS_400:	/* Framework tuning */
+-	case MMC_HS_400_ES:	/* Framework tuning */
+-		return true;
+-	default:
+-		return false;
+-	}
+-}
+-
+ static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat, bool reset)
+ {
+ 	void __iomem *reg = plat->hrs_addr + SDHCI_CDNS_HRS09;
+@@ -283,18 +259,7 @@ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 m
+ 	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR, sdhci_cdns6_phy_cfgs[0].val);
+ 	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[1].val);
+ 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_MASTER_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[4].val);
+-	if (sdhci_cdns6_mode_is_tuned(plat, mode)) {
+-		/*
+-		 * Use previously saved tuned DLL slave control value.
+-		 * Note: 0 is a valid tuned value (e.g., optimal tap at position 0),
+-		 * so we check both mode match AND that it's a tunable mode.
+-		 */
+-		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
+-					  plat->tuned_dll_slave_ctrl);
+-	} else {
+-		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
+-					  sdhci_cdns6_phy_cfgs[2].val);
+-	}
++	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[2].val);
+ 
+ 	/* Switch Off the DLL Reset */
+ 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
+@@ -353,9 +318,6 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
+ 
+ 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, tmp);
+ 
+-	/* Store tuned DLL slave control value which will be reapplied via set_ios(). */
+-	plat->tuned_dll_slave_ctrl = tmp;
+-
+ 	/* Switch Off the DLL Reset */
+ 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
+ 	if (ret) {
+@@ -365,8 +327,3 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
+ 
+ 	return 0;
+ }
+-
+-u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat)
+-{
+-	return sdhci_cdns6_read_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR);
+-}
+-- 
+2.43.7
+
