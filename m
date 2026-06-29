@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0516BC43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 11:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E8BC43327
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 11:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47F68849E5;
-	Mon, 29 Jun 2026 13:06:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id F133D849E5;
+	Mon, 29 Jun 2026 13:11:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f0WYVYz6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6F40849EE; Mon, 29 Jun 2026 13:06:15 +0200 (CEST)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ id 5A111849EF; Mon, 29 Jun 2026 13:11:21 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96D6E849A3
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 13:06:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ by phobos.denx.de (Postfix) with ESMTPS id 0000E849A3
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 13:11:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1we9oa-0005Kb-6p; Mon, 29 Jun 2026 13:06:12 +0200
-Message-ID: <9dd01627-7a0b-4dbb-8215-7eddf424a6ea@pengutronix.de>
-Date: Mon, 29 Jun 2026 13:06:11 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 65DEB416F7;
+ Mon, 29 Jun 2026 11:11:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 998EF1F000E9;
+ Mon, 29 Jun 2026 11:11:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1782731477;
+ bh=LZPkfY1llJR1yqis7u2A6CN0E04s2nzZ6MXtuGbzgPg=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=f0WYVYz6u2It3Nfw3cLulJ24MlmOUaaRNb2/WuMZ5kkDawhafyKUIsOXzhO3pVfZQ
+ aFpcke106n9blnYCcwgUdvJcwgE8X45RUAKDVegCNz6zmOrvhbE4cMHoqhh9MomnuU
+ AdXmyB7dQ7OwVujd03oViwC1uyzFoKxGUwIgVM+YOZPNS9PjA3Au7ydDCjTPMAJxSw
+ gnyEDfGCqG/2p4aMEs1rzvTJEqjWWYojeyjgUp14UmwG/K5LcDN/3D0/SXzUfNHKBU
+ bcQUqdMXLHqi+o6Lf2HKWK4rjZOsoDmIYcSwsaGDev7BPKEJzq0IMlAs+t9zC5jC+z
+ 2BxXX7e5zCu4A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Marek Vasut <marex@nabladev.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] cmd: ums: Set Device Descriptor iSerial based on
+ serial# env variable
+In-Reply-To: <20260626142840.305478-1-marex@nabladev.com>
+References: <20260626142840.305478-1-marex@nabladev.com>
+Date: Mon, 29 Jun 2026 13:11:14 +0200
+Message-ID: <87h5mld2jx.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
- efi_disconnect_controller
-To: Simon Glass <sjg@chromium.org>
-Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20260618150913.314507-1-vincent.stehle@arm.com>
- <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
- <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
- <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Content-Language: en-US, de-DE, de-BE
-In-Reply-To: <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,114 +69,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+Hi Marek,
 
-On 6/25/26 5:12 PM, Simon Glass wrote:
-> Hi Ahmad,
-> 
-> On Thu, 18 Jun 2026 at 16:28, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->>
->> Hello,
->>
->> On 6/18/26 5:18 PM, Simon Glass wrote:
->>> Hi Vincent,
->>>
->>> On Thu, 18 Jun 2026 at 16:09, Vincent Stehlé <vincent.stehle@arm.com> wrote:
->>>>
->>>> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when returning
->>>> after having called EFI_ENTRY().
->>>>
->>>> This is inspired by a barebox fix. [1]
->>>
->>> Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
->>> projects back together :-)
->>
->> It's not as extensive as U-Boot's yet, but it's usable for the common
->> boot me a distro GRUB use case. The code originated from U-Boot with
->> some parts heavily rewritten to fit barebox, e.g. the EFI filesystem
->> protocol is implemented on top of dirfds, so it reuses VFS path handling
->> and other such things.
-> 
-> OK good. I did create a VFS in Concept but I have not tried to get it
-> into mainline yet.
+Thank you for the patch.
 
-Cool. I really look forward to `cp /dev/sd /dev/emmc` just working :-)
+On Fri, Jun 26, 2026 at 16:28, Marek Vasut <marex@nabladev.com> wrote:
 
+> The DFU code currently sets the content of "serial#" environment
+> variable into Device Descriptor iSerial field. This is useful when
+> there are multiple devices connected to the same host PC and they
+> have to be told apart. Replicate the same behavior in the UMS code.
+>
+> Example without serial# set, which is the original behavior:
+> "
+> u-boot=> ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
+>
+> $ dmesg -w
+> ...
+> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
+> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+> usb 5-2.3.7: Product: USB download gadget
+> usb 5-2.3.7: Manufacturer: Vendor
+>                             <------------------------------- NOT HERE
+> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
+> ...
+>
+> $ lsusb -vd 0525:a4a5
+>
+> Bus 005 Device 051: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
+> Negotiated speed: High Speed (480Mbps)
+> Device Descriptor:
+>   bLength                18
+>   bDescriptorType         1
+>   bcdUSB               2.00
+>   bDeviceClass            0 [unknown]
+>   bDeviceSubClass         0 [unknown]
+>   bDeviceProtocol         0
+>   bMaxPacketSize0        64
+>   idVendor           0x0525 Netchip Technology, Inc.
+>   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
+>   bcdDevice           7e.a7
+>   iManufacturer           1 Vendor
+>   iProduct                2 USB download gadget
+>   iSerial                 0 <------------------------------- NOT HERE
+> ...
+> "
+>
+> Example with serial# set to 1234abcd, which is the optional new behavior:
+> "
+> u-boot=> setenv serial# 1234abcd <------------------------------ HERE
+> u-boot=> ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
+>
+> $ dmesg -w
+> ...
+> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
+> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+> usb 5-2.3.7: Product: USB download gadget
+> usb 5-2.3.7: Manufacturer: Vendor
+> usb 5-2.3.7: SerialNumber: 1234abcd <--------------------------- HERE
+> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
+> ...
+>
+> $ lsusb -vd 0525:a4a5
+>
+> Bus 005 Device 052: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
+> Negotiated speed: High Speed (480Mbps)
+> Device Descriptor:
+>   bLength                18
+>   bDescriptorType         1
+>   bcdUSB               2.00
+>   bDeviceClass            0 [unknown]
+>   bDeviceSubClass         0 [unknown]
+>   bDeviceProtocol         0
+>   bMaxPacketSize0        64
+>   idVendor           0x0525 Netchip Technology, Inc.
+>   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
+>   bcdDevice           7e.a7
+>   iManufacturer           1 Vendor
+>   iProduct                2 USB download gadget
+>   iSerial                 3 1234abcd <-------------------------- HERE
+> ...
+> "
+>
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 
->> The imported files have Origin-URL comments pointing back at U-Boot
->> including the revision they originated from, but we are still in need of
->> better tooling to make use of these tags.
-> 
-> On another topic - where did we get to with the whole-FITsigning
-> thing? Should we set up a call to talk it through?
+I looked at the linux implementation and I could not find anything
+related to the serial number in
+drivers/usb/gadget/function/f_mass_storage.c.
+I think in linux it's handled by drivers/usb/gadget/configfs.c,
+therefore we can't just do a straight port from linux.
 
-This is still something I am interested in landing. I had started a
-review of your counterproposal, but got distracted before finishing it.
-I submitted it now.
+This looks good to me.
 
-Cheers,
-Ahmad
-
-> 
-> Regards,
-> Simon
-> 
->>
->> @Vincent, I suspect a number of fixes in [1] are also applicable to
->> U-Boot, but I haven't checked.
->>
->> [1]:
->> https://lore.kernel.org/barebox/20260216084758.3548990-1-a.fatoum@pengutronix.de/
->>
->> Cheers,
->> Ahmad
->>
->>
->>
->>>
->>>>
->>>> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=080db65e39a877b000baaf843c997a69821dfe69 [1]
->>>> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sole child")
->>>> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
->>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>> Cc: Tom Rini <trini@konsulko.com>
->>>> ---
->>>>  lib/efi_loader/efi_boottime.c | 2 +-
->>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
->>>> index de57823bd44..b6966652d97 100644
->>>> --- a/lib/efi_loader/efi_boottime.c
->>>> +++ b/lib/efi_loader/efi_boottime.c
->>>> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
->>>>                                       &number_of_children,
->>>>                                       &child_handle_buffer);
->>>>         if (r != EFI_SUCCESS)
->>>> -               return r;
->>>> +               return EFI_EXIT(r);
->>>>         sole_child = (number_of_children == 1);
->>>>
->>>>         if (child_handle) {
->>>> --
->>>> 2.53.0
->>>>
->>>
->>> Regards,
->>> Simon
->>>
->>
->> --
->> Pengutronix e.K.                  |                             |
->> Steuerwalder Str. 21              | http://www.pengutronix.de/  |
->> 31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
->> Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
->>
-> 
-
--- 
-Pengutronix e.K.                  |                             |
-Steuerwalder Str. 21              | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
