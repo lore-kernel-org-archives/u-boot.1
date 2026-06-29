@@ -4,61 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6033EC43327
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 17:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04D3C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 18:12:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF54484A4D;
-	Mon, 29 Jun 2026 19:34:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id ACA3484942;
+	Mon, 29 Jun 2026 20:12:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="bsLg3176";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="BRsP6AIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1536984A5A; Mon, 29 Jun 2026 19:34:09 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8784D84A29
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 19:34:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=d2b5=E2=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1782754444;
- bh=GLl5qJy52ECxGQXIFAhNbZ0rmkwFizPzzUB6Ht4rlM8=;
- b=bsLg3176VsMKuFLF3oj1i87W6DgqaCUuKy0FGyl+97TyvqHhcsfXV/783RA8nk/jBdbqH95pw
- XVaOV6gW/HiijtBTibmJrwq/FHUH60MJ42UUrneCqKzblSJ5uWqrCxCAOuRUEj61qn/6M3FALht
- 6xdpXWAuA1SR1OJ0LX5WqenBd7xok5X2xT/HB1k4txwlJIsUD0grcRHaGLc8hVQA7nWSt9VBdx5
- aMq6eRi+hxfn5+aPPjU3EGA+LYIwUnkKDw9iu1Cjw1vNgQ4xVuw6cn4FAO0fugGG7uNtU0tzURI
- Nu5ToHBqyaKgAIUxuoJp02ABFiCrPLnh8TiZnLzM28hg==
-X-Forward-Email-ID: 6a42ac8a5eb497aec47217a2
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.9.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d327c3a1-cce7-4737-9ace-afe8cb1afade@kwiboo.se>
-Date: Mon, 29 Jun 2026 19:34:00 +0200
+ id 2D0C384A27; Mon, 29 Jun 2026 20:12:51 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3CB5A8490A
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 20:12:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EBDAB27DC;
+ Mon, 29 Jun 2026 11:12:42 -0700 (PDT)
+Received: from e130802.arm.com (unknown [10.57.80.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A3A2C3F905;
+ Mon, 29 Jun 2026 11:12:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1782756767; bh=l9oakdauRcqR74vVDtGtVPIPWVQwC/bfF8XWob0pfCM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BRsP6AITUX3tkQWw/3hA6LTlOnTFdGt9b6+l6DEJq44/gWTEDPrsujH1DKl7+pIOp
+ lMYaw5gr6ulJyXS4spZDjitt1029QBlmPSCLPpblmcqDbi14IlLW+jGE1H5O5G1zjm
+ mOaR5wKvGw8tCyFLztjGhJfp8xZOMkAwPhH6Uk1Y=
+Date: Mon, 29 Jun 2026 19:12:32 +0100
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3 02/10] arm-ffa: add FF-A bus runtime support
+Message-ID: <akK1kDtpTkoKRgrE@e130802.arm.com>
+References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
+ <20260627144421.2067410-3-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk3568: make the TSADC trigger a first
- global reset
-To: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com, quentin.schulz@cherry.de
-References: <20260629170517.1436613-1-andreas.zdziarstek@gmail.com>
- <20260629170517.1436613-3-andreas.zdziarstek@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260629170517.1436613-3-andreas.zdziarstek@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260627144421.2067410-3-harsimransingh.tungal@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,44 +67,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andreas,
-
-On 6/29/2026 7:05 PM, Andreas Zdziarstek wrote:
-> Same rationale as the watchdog: the default second global reset leaves
-> the SoC hung. Set the TSADC to the first global reset as well, so a
-> thermal shutdown reliably resets the whole SoC.
+On Sat, Jun 27, 2026 at 03:44:13PM +0100, Harsimran Singh Tungal wrote:
+> Add the FF-A runtime infrastructure needed after ExitBootServices() so
+> EFI runtime services can continue to use the FF-A transport layer.
+> Introduce drivers/firmware/arm-ffa/arm-ffa-runtime.c and
+> include/arm_ffa_runtime.h with runtime-resident FF-A helpers for
+> direct messaging, SMC invocation, and error translation. Add the
+> sandbox runtime SMC wrapper, the ARM_FFA_RT_MODE Kconfig option, and
+> the ExitBootServices hook that copies the required FF-A runtime data
+> into resident storage before enabling the runtime context.
 > 
-> Signed-off-by: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-> ---
->  arch/arm/mach-rockchip/rk3568/rk3568.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Tag the runtime code and data with __efi_runtime and
+> __efi_runtime_data so they remain available after
+> ExitBootServices().
 > 
-> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> index 87bd443e9c4..50b61b7cd26 100644
-> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> @@ -40,6 +40,7 @@
->  
->  #define CRU_BASE		0xfdd20000
->  #define WDT_GLB_SRST_CTRL	BIT(1)
-> +#define TSADC_GLB_SRST_CTRL	BIT(0)
->  
->  /* PMU_GRF_GPIO0D_IOMUX_L */
->  enum {
-> @@ -156,6 +157,9 @@ int arch_cpu_init(void)
->  	/* Make WDT trigger a first global reset */
->  	setbits_le32(&cru->glb_rst_con, WDT_GLB_SRST_CTRL);
->  
-> +	/* Make TSADC trigger a first global reset */
-> +	setbits_le32(&cru->glb_rst_con, TSADC_GLB_SRST_CTRL);
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> 
+> ----
+> Changelog:
+> ===============
+> 
+> v3:
+> 
+> Simon:
+> 
+> - Move ExitBootServices event registration to the end of probe
+> - Use an early-return guard and log missing-context with log_warning()
+> - Rename the runtime-context helpers to the ffa_runtime_context_* form
+> - Drop the unrelated whitespace-only hunk
+> - Fix commit message styling
+> 
+> v2:
+> 
+> Simon:
+> 
+> - Leave runtime mode disabled if private data is missing
+>   and update the log message
+> - Remove unused global-data plumbing
+> - Switch to `IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)`
+> - Fix style issues
+> - Register the ExitBootServices event earlier in probe
+> - Keep the runtime-enabled flag separate from copied boot time data
+> 
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
-There is likely no need to read and write this reg twice, please combine.
-
-Regards,
-Jonas
-
-> +
->  	return 0;
->  }
->  
-
+Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
