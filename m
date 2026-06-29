@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 328BDC43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 485A0C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:03:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A5D284866;
+	by phobos.denx.de (Postfix) with ESMTP id ABB9684975;
 	Mon, 29 Jun 2026 10:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="j/86OehC";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="Ql2Z+ar0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 605F58496E; Mon, 29 Jun 2026 10:02:48 +0200 (CEST)
+ id 66B8E84866; Mon, 29 Jun 2026 10:02:48 +0200 (CEST)
 Received: from mta-65-225.siemens.flowmailer.net
  (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76EB684866
+ by phobos.denx.de (Postfix) with ESMTPS id 0B66B84832
  for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 10:02:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
 Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 2026062908024510fd5ccab9000207f9 for <u-boot@lists.denx.de>;
+ 20260629080244e2c3822d9800020739 for <u-boot@lists.denx.de>;
  Mon, 29 Jun 2026 10:02:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=IfbuuzHgYRhOA7tlC8d0i1M70zp5lXCQ4sdR9ng5eXc=;
- b=j/86OehCh2+B77a2y+rALLOcpgFfPBQDBectAYB9V6dAsYUFOEzuN8TTPVGHojxda/ACPq
- 87h/t+EGJ4WKZaPVcxrZf1WbjK2Qrg3VFXDNCzyeSH/0Or2XgeWzFC4pe1qSY0jtRSf/T5zv
- N5Z0n+TGwVlevOm4TnquuMwnmgdgHxpllz+yAkKjSkV9zC4ONoTvJEciUdPAOLY7xInFzlvT
- 2szmA9n0yARuvk1kQASG3ZVvZpbMaDlgMap9YJoX9CG8lL9WyQQ0V+r+JA7UwgtzDC8jZq3p
- 89vUfPXFgWdAaiu+C32+R5R9pIrdwSCRdzFCrupqh0fzeXDCsc801dWA==;
+ bh=YZpZgYhOLIRDCIVIX7kft926eOOPP2rVkymBNOIa1co=;
+ b=Ql2Z+ar0QyhmD4mV1MkQtnM3aTP3WZzTdCWYkiPbniyRtAOWF306c3n5ikxNRqN3WQlYoH
+ b6TuhdIUQ8hmSmbqutKcE+06gHqh+5AUm88AZim+vR/dSkYvktVzNCkXrKHkt7fAgnWIwgH2
+ YgTv+m20JiAKc24dy2zdoUoz5zhF5DdrMGkqLeFbks5RaAfjjtaxDEmWF7AWJz3Hb+pmGXjt
+ bxKgVcCDoBHVODrbWbViENRWpPdjgCMaX5WHWCl6Ffe9hE7eHrRf24shSpBdjUOat55wxQb+
+ iTHtl65Of4JJDLBoUiSZgZtC5dm+GS8GR62cdnyRCeIJ5zDlS3eymusA==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -46,9 +46,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v4 5/6] tpm: unify the eventlog initialization
-Date: Mon, 29 Jun 2026 10:01:04 +0200
-Message-ID: <20260629080241.36311-3-ludwig.nussel@siemens.com>
+Subject: [PATCH v4 4/6] tpm: unify the tcg2 eventlog structures
+Date: Mon, 29 Jun 2026 10:01:03 +0200
+Message-ID: <20260629080241.36311-2-ludwig.nussel@siemens.com>
 In-Reply-To: <20260629080241.36311-1-ludwig.nussel@siemens.com>
 References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -73,27 +73,22 @@ X-Virus-Status: Clean
 
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-When measured boot is enabled the EFI code is trying to initialize the
-eventlog using tcg2_log_prepare_buffer() and then adds an EV_S_CRTM_VERSION
-by calling efi_append_scrtm_version().
+We currently have two structures describing the internal TCG EventLog
+buffers we keep in memory.
+The first one is 'struct event_log_buffer' and it carries all the
+necessary members to keep track of the information needed to implement
+the EFI TCG protocol.
 
-Part of the EFI code was moved to the TPM core so bootm, booti etc can use
-it. A similar function called tcg2_measurement_init() function was added
-which is doing the same thing.
+The second one is 'struct tcg2_event_log' which was introduced later,
+when some functions from the TCG protocol moved to U-Boots core, and is
+is used to measure binaries when booting with bootm, booti etc.
 
-A previous patch is unifying the internal eventlog structure we use
-whether the measurements are done via EFI TCG spec, or the bootX commands.
+The split led to some duplication -- e.g tcg2_measure_data() and
+measure_event() functions are very similar with the exception of
+extending the EventLog.
 
-There's a minor difference between the EFI code and the TPM one.
-The EFI part is appending events to the log using tcg2_agile_log_append(),
-while the TPM core calls tcg2_log_append_check(). The reason for that is
-that the EFI spec expects certain error codes and actions when
-GetEventLog has been called or the log buffer is full. Since this is the
-first event we add, the functions above will behave identically. On top
-of that I plan to unify those as well.
-
-So for now get rid of the efi_append_scrtm_version() and call
-tcg2_measurement_init() from EFI as well.
+Since the latter is a subset of the former, let's move all the members
+to a single struct and use that instead.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
@@ -101,140 +96,206 @@ Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
 (no changes since v1)
 
- include/tpm_tcg2.h        | 20 --------------------
- lib/efi_loader/efi_tcg2.c | 36 ++----------------------------------
- lib/tpm_tcg2.c            | 21 +++++++++++++++++++--
- 3 files changed, 21 insertions(+), 56 deletions(-)
+ include/tpm_tcg2.h        | 15 ++++++++++
+ lib/efi_loader/efi_tcg2.c | 60 +++++++++++++--------------------------
+ 2 files changed, 34 insertions(+), 41 deletions(-)
 
 diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-index e954a276ecd..387073fd8a2 100644
+index db3f6f486e9..e954a276ecd 100644
 --- a/include/tpm_tcg2.h
 +++ b/include/tpm_tcg2.h
-@@ -279,26 +279,6 @@ int tcg2_measure_data(struct udevice *dev, struct tcg2_event_log *elog,
- 	tcg2_measure_data(dev, elog, pcr_index, 0, NULL, event_type, size, \
- 			  event)
+@@ -163,6 +163,15 @@ struct tcg_efi_spec_id_event {
+  * @log_size:		Log space available
+  * @found:		Boolean indicating if an existing log was discovered
+  * @allocated:		Boolean indicating that the log was allocated by u-boot
++ * @final_buffer:	finalevent config table buffer. Only used for EFI
++ * @final_position:	current position of 'final_buffer'. Only used for EFI
++ * @last_event_size: 	Size of the last event. Only used for EFI
++ * @get_event_called:	true if GetEventLog has been invoked at least once.
++ * 			Only used for EFI
++ * @ebs_called:		true if ExitBootServices has been invoked.
++ * 			Only used for EFI
++ * @truncated:		true if the 'buffer' is truncated.
++ * 			Only used for EFI
+  */
+ struct tcg2_event_log {
+ 	u8 *log;
+@@ -170,6 +179,12 @@ struct tcg2_event_log {
+ 	u32 log_size;
+ 	bool found;
+ 	bool allocated;
++	void *final_buffer;
++	u32 final_position;
++	u32 last_event_size;
++	bool get_event_called;
++	bool ebs_called;
++	bool truncated;
+ };
  
--/**
-- * Prepare the event log buffer. This function tries to discover an existing
-- * event log in memory from a previous bootloader stage. If such a log exists
-- * and the PCRs are not extended, the log is "replayed" to extend the PCRs.
-- * If no log is discovered, create the log header.
-- *
-- * @dev			TPM device
-- * @elog		Platform event log. The log pointer and log_size
-- *			members must be initialized to either 0 or to a valid
-- *			memory region, in which case any existing log
-- *			discovered will be copied to the specified memory
-- *			region.
-- * @ignore_existing_log	Boolean to indicate whether or not to ignore an
-- *			existing platform log in memory
-- *
-- * Return: zero on success, negative errno otherwise
-- */
--int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
--			    bool ignore_existing_log);
--
  /**
-  * Begin measurements.
-  *
 diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 85e7ecd0583..1da0bc37fa1 100644
+index 1860dc50238..85e7ecd0583 100644
 --- a/lib/efi_loader/efi_tcg2.c
 +++ b/lib/efi_loader/efi_tcg2.c
-@@ -859,24 +859,6 @@ out:
- 	return ret;
- }
+@@ -25,29 +25,7 @@
+ #include <linux/unaligned/generic.h>
+ #include <hexdump.h>
  
 -/**
-- * efi_append_scrtm_version - Append an S-CRTM EV_S_CRTM_VERSION event on the
-- *			      eventlog and extend the PCRs
+- * struct event_log_buffer - internal eventlog management structure
 - *
-- * @dev:	TPM device
-- *
-- * @Return:	status code
+- * @buffer:		eventlog buffer
+- * @final_buffer:	finalevent config table buffer
+- * @pos:		current position of 'buffer'
+- * @final_pos:		current position of 'final_buffer'
+- * @get_event_called:	true if GetEventLog has been invoked at least once
+- * @ebs_called:		true if ExitBootServices has been invoked
+- * @truncated:		true if the 'buffer' is truncated
 - */
--static efi_status_t efi_append_scrtm_version(struct udevice *dev)
--{
--	efi_status_t ret;
+-struct event_log_buffer {
+-	void *buffer;
+-	void *final_buffer;
+-	size_t pos; /* eventlog position */
+-	size_t final_pos; /* final events config table position */
+-	size_t last_event_size;
+-	bool get_event_called;
+-	bool ebs_called;
+-	bool truncated;
+-};
 -
--	ret = measure_event(dev, 0, EV_S_CRTM_VERSION,
--			    strlen(version_string) + 1, (u8 *)version_string);
--
--	return ret;
--}
--
- /**
-  * efi_init_event_log() - initialize an eventlog
-  *
-@@ -888,7 +870,6 @@ static efi_status_t efi_init_event_log(void)
- 	 * vendor_info_size is currently set to 0, we need to change the length
- 	 * and allocate the flexible array member if this changes
+-static struct event_log_buffer event_log;
++static struct tcg2_event_log event_log;
+ static bool tcg2_efi_app_invoked;
+ /*
+  * When requesting TPM2_CAP_TPM_PROPERTIES the value is on a standard offset.
+@@ -105,7 +83,7 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+ 					  struct tpml_digest_values *digest_list,
+ 					  u32 size, u8 event[])
+ {
+-	void *log = (void *)((uintptr_t)event_log.buffer + event_log.pos);
++	void *log = (void *)((uintptr_t)event_log.log + event_log.log_position);
+ 	u32 event_size = size + tcg2_event_get_size(digest_list);
+ 	struct efi_tcg2_final_events_table *final_event;
+ 	efi_status_t ret = EFI_SUCCESS;
+@@ -113,12 +91,12 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+ 	/* if ExitBootServices hasn't been called update the normal log */
+ 	if (!event_log.ebs_called) {
+ 		if (event_log.truncated ||
+-		    event_log.pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE) {
++		    event_log.log_position + event_size > CONFIG_TPM2_EVENT_LOG_SIZE) {
+ 			event_log.truncated = true;
+ 			return EFI_VOLUME_FULL;
+ 		}
+ 		tcg2_log_append(pcr_index, event_type, digest_list, size, event, log);
+-		event_log.pos += event_size;
++		event_log.log_position += event_size;
+ 		event_log.last_event_size = event_size;
+ 	}
+ 
+@@ -126,15 +104,15 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+ 		return ret;
+ 
+ 	/* if GetEventLog has been called update FinalEventLog as well */
+-	if (event_log.final_pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE)
++	if (event_log.final_position + event_size > CONFIG_TPM2_EVENT_LOG_SIZE)
+ 		return EFI_VOLUME_FULL;
+ 
+-	log = (void *)((uintptr_t)event_log.final_buffer + event_log.final_pos);
++	log = (void *)((uintptr_t)event_log.final_buffer + event_log.final_position);
+ 	tcg2_log_append(pcr_index, event_type, digest_list, size, event, log);
+ 
+ 	final_event = event_log.final_buffer;
+ 	final_event->number_of_events++;
+-	event_log.final_pos += event_size;
++	event_log.final_position += event_size;
+ 
+ 	return ret;
+ }
+@@ -358,8 +336,8 @@ efi_tcg2_get_eventlog(struct efi_tcg2_protocol *this,
+ 		ret = EFI_SUCCESS;
+ 		goto out;
+ 	}
+-	*event_log_location = (uintptr_t)event_log.buffer;
+-	*event_log_last_entry = (uintptr_t)(event_log.buffer + event_log.pos -
++	*event_log_location = (uintptr_t)event_log.log;
++	*event_log_last_entry = (uintptr_t)(event_log.log + event_log.log_position -
+ 					    event_log.last_event_size);
+ 	*event_log_truncated = event_log.truncated;
+ 	event_log.get_event_called = true;
+@@ -799,8 +777,8 @@ static void tcg2_uninit(void)
+ 	if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
+ 		log_err("Failed to delete final events config table\n");
+ 
+-	efi_free_pool(event_log.buffer);
+-	event_log.buffer = NULL;
++	efi_free_pool(event_log.log);
++	event_log.log = NULL;
+ 	efi_free_pool(event_log.final_buffer);
+ 	event_log.final_buffer = NULL;
+ 
+@@ -836,7 +814,7 @@ static efi_status_t create_final_event(void)
+ 	final_event = event_log.final_buffer;
+ 	final_event->number_of_events = 0;
+ 	final_event->version = EFI_TCG2_FINAL_EVENTS_TABLE_VERSION;
+-	event_log.final_pos = sizeof(*final_event);
++	event_log.final_position = sizeof(*final_event);
+ 	ret = efi_install_configuration_table(&efi_guid_final_events,
+ 					      final_event);
+ 	if (ret != EFI_SUCCESS) {
+@@ -920,7 +898,7 @@ static efi_status_t efi_init_event_log(void)
+ 
+ 	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
+ 				CONFIG_TPM2_EVENT_LOG_SIZE,
+-				(void **)&event_log.buffer);
++				(void **)&event_log.log);
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
+@@ -928,13 +906,13 @@ static efi_status_t efi_init_event_log(void)
+ 	 * initialize log area as 0xff so the OS can easily figure out the
+ 	 * last log entry
  	 */
--	struct tcg2_event_log elog;
- 	struct udevice *dev;
- 	efi_status_t ret;
- 	int rc;
-@@ -922,26 +903,13 @@ static efi_status_t efi_init_event_log(void)
+-	memset(event_log.buffer, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
++	memset(event_log.log, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
+ 
+ 	/*
+ 	 * The log header is defined to be in SHA1 event log entry format.
+ 	 * Setup event header
+ 	 */
+-	event_log.pos = 0;
++	event_log.log_position = 0;
+ 	event_log.last_event_size = 0;
+ 	event_log.get_event_called = false;
+ 	event_log.ebs_called = false;
+@@ -944,7 +922,7 @@ static efi_status_t efi_init_event_log(void)
  	 * Check if earlier firmware have passed any eventlog. Different
  	 * platforms can use different ways to do so.
  	 */
--	elog.log = event_log.log;
--	elog.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
--	rc = tcg2_log_prepare_buffer(dev, &elog, false);
-+	event_log.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
-+	rc = tcg2_measurement_init(dev, &event_log, false);
+-	elog.log = event_log.buffer;
++	elog.log = event_log.log;
+ 	elog.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+ 	rc = tcg2_log_prepare_buffer(dev, &elog, false);
  	if (rc) {
- 		ret = (rc == -ENOBUFS) ? EFI_BUFFER_TOO_SMALL : EFI_DEVICE_ERROR;
+@@ -952,7 +930,7 @@ static efi_status_t efi_init_event_log(void)
  		goto free_pool;
  	}
  
--	event_log.log_position = elog.log_position;
--
--	/*
--	 * Add SCRTM version to the log if previous firmmware
--	 * doesn't pass an eventlog.
--	 */
--	if (!elog.found) {
--		ret = efi_append_scrtm_version(dev);
--		if (ret != EFI_SUCCESS)
--			goto free_pool;
--	}
--
- 	ret = create_final_event();
- 	if (ret != EFI_SUCCESS)
- 		goto free_pool;
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 2270b038cf5..e8fa7db5b06 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -564,8 +564,25 @@ int tcg2_measure_data(struct udevice *dev, struct tcg2_event_log *elog,
- 				     event_size, event);
+-	event_log.pos = elog.log_position;
++	event_log.log_position = elog.log_position;
+ 
+ 	/*
+ 	 * Add SCRTM version to the log if previous firmmware
+@@ -971,8 +949,8 @@ static efi_status_t efi_init_event_log(void)
+ 	return ret;
+ 
+ free_pool:
+-	efi_free_pool(event_log.buffer);
+-	event_log.buffer = NULL;
++	efi_free_pool(event_log.log);
++	event_log.log = NULL;
+ 	return ret;
  }
  
--int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
--			    bool ignore_existing_log)
-+/**
-+ * Prepare the event log buffer. This function tries to discover an existing
-+ * event log in memory from a previous bootloader stage. If such a log exists
-+ * and the PCRs are not extended, the log is "replayed" to extend the PCRs.
-+ * If no log is discovered, create the log header.
-+ *
-+ * @dev			TPM device
-+ * @elog		Platform event log. The log pointer and log_size
-+ *			members must be initialized to either 0 or to a valid
-+ *			memory region, in which case any existing log
-+ *			discovered will be copied to the specified memory
-+ *			region.
-+ * @ignore_existing_log	Boolean to indicate whether or not to ignore an
-+ *			existing platform log in memory
-+ *
-+ * Return: zero on success, negative errno otherwise
-+ */
-+static int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
-+				   bool ignore_existing_log)
- {
- 	struct tcg2_event_log log = {};
- 	int rc;
 -- 
 2.43.0
 
