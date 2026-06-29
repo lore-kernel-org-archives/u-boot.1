@@ -4,118 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C261C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 07:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A2BC43602
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 07:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4254D84105;
-	Mon, 29 Jun 2026 09:29:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DC177841F2;
+	Mon, 29 Jun 2026 09:43:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QfpsaXpx";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="K31svP0W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5AB9841F2; Mon, 29 Jun 2026 09:29:48 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id C71F9843B6; Mon, 29 Jun 2026 09:43:03 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 197878056B
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 09:29:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBD3784105
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 09:43:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UlSW/KTB6fnMBKRjP6GJDIHmnuvy1KkalflQh0AMH0/1t15IuAbOwMedRcSKfU2fHLaj4Tt1/ChsdR8RjyQ74D61ZwAI8HzD08ip1wn3cN5xDCT1KT8MrqwtR2Z1u1ClqKSpNHQ3Hx2YcKLsbD8OeEmpR+NzEW7r9YUXsasy0mt75aFqVXvXqTnXomRyiQ3Jv/JsCgAEpaVhOeJN+Bk81GNYEWIJn5r/j0rAW4Ne9vFu0JD8a3CMXBE5/05CLMSGf1V+FmuJGb7NN39vRWQ9w+J+USayyMhJe5yi0MEiZ+TYeFrLylGqcJNkoVV6IIf4GTVzJlAN0/gQJseVNGyymA==
+ b=RFDPTklpDEL2FWGdkUw+TLNl40zRSKO8Wy4lBCqMgDpdM/IBU+WevUHn7eL3u7Yw6MWDw8DE90YGoyoiYRqaH+TkWM4ZXIRi4SJocE+dIF/2FqUosO/TMjEYuLrVrKlagiDBXRdymuU0LKerjJrcVpxJUdUbYc2tCIuX7fI4f4ug8uPk3Rf0aJtf+SdaX7DbadnEAy3ldS7FMMYczKyDu3VVQhOrEFeq7vSaOj378JIAsXmp8um+jpjl3ufKqiNo7csFyJ8zimO3aX1dAkOMvTmh4K+lwlUDmnvI9vLZOs40A7EcEwSKbEKLjaJPj3LyAnX9VcCy6I7er2ltY3ryWg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4C31v6xUjnq3EeGeGVf0cWSIdwJDCkvlo+/D0SQGphA=;
- b=K7Z9QY4pBuiEkmgYFWnNNd1vDvqOTV6ErnkOe5TFKQWmfO011obDj+bKEIETdgTjuyzASQVG1azJjHHJ73bxtW2npk6IkMgTSjwhRe0WxhOS56SzeGhM16xbmTbTDlvWBA08uM95YaPDim6ioYXEiuCFycEQeFTYd7xwzHPEhSENWyNyY3vg+en3D3xGvMx57h0lP64hNnSXFze7e5UzSO/20ZsutcuKCeDG07kPe8NKWoIAkm6tKbR9eTviEJLU4dDn1RuAb0HECpB92PiNoycH8epjWsooZIUvl6A14RKchrx6BR2dcKvy5xee5xCOlKhGPV/NFZPpdK16WWzNDg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=amarulasolutions.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ bh=GK6WJWQuVPoHqXQiSD/T7ptgksm4WPEBNanwGYVg2Xs=;
+ b=cnc3i8VrhjqPhdReXiXESSukuJJ/YTrflNc+57L0bPx6nrAZMbWqvntJEIclQ4wmjXZFNydyknpskL6++3wCHkLS8zp9+ZvF7TUQIsVfSzM1hBVUvt2AB6wAgQCFUHYt9NR7oIDQhaociNCGXRafyEwP3bggy3ACJ0VDQ7DvRMEoweLnuno+A6PuAu3/KXt278ROMIP5V8VBR3OFmzydl+QBE6FQEKT1BeIP4ckZEmtG7hwiF4MJFbpZIGo+SqMJ8P+o8NGk0cUVJTakbJhCy8rAi7wwYJ5OEryKmuP9iv42zkgohyykS0YT2pDFHRz/rll7l3PhTT4EPiZtPR7D3Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4C31v6xUjnq3EeGeGVf0cWSIdwJDCkvlo+/D0SQGphA=;
- b=QfpsaXpx0i+g+LQ/caS0nduum0J2AbUTPf5ET2XaQMUUEOxs92zPs65+RIxWOv98fB3AnLxiP/yKWt0B9/7cK+k5/W5+Nb+tfR5Aq9HJGrcUFAFzc4nr8MRyUgjAoFAznSEOGA/VHpMrYGMdOBycHd1kv9dU0Dzl76wFoH0SX91ZrRngLnzkJxfVJoThyi1HSmp39oZZFyCHLo0DccvyKOyUGf7ZAZTps2KWZJFZYOEHM1R2GlvSjFzdVaP+1DYm5qCfFtebhCuOrfL+Ap98d0lRLjFBiOq+eRE5/OErOZmLXIB4hf95FrOHtIDiyixI5VAGXegQBSM6BqhlVAhypQ==
-Received: from DB8PR04CA0016.eurprd04.prod.outlook.com (2603:10a6:10:110::26)
- by PAVPR10MB7306.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:31d::8)
+ bh=GK6WJWQuVPoHqXQiSD/T7ptgksm4WPEBNanwGYVg2Xs=;
+ b=K31svP0WD/xH5P9DySyH0TMCswMX4F68gXHHZ5N6jEjtrM/dbt0Qli6QI98m6mffiSXYgZk/Xzw82lWEqZDqy+Ng1NlXva878EvsTxX9+yjPbE6j3i6Xd7anzszsPcZxLgPLqtblA7NuD438FYS2sxbqzlTZ2IuAwzGoQ4koWiBrrXxKu8VqXJQEIX7Oyi8qVpWwKJMYc4xrPUQoFB4ezfGnnEJFK54NpDN5TY4sNguQ/ZVC1IyXDFj9rdIFii7ecrdacaJ4g+AkF1qCxXEw8yCgx3/gs2pnDqTTaR5R7EaMRSn8w8ZIVE+5QKd14bxQQUG+eM/cc3768N8TvCLo2A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2cc::12)
+ by DU4PR10MB8482.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:56d::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
- 2026 07:29:41 +0000
-Received: from DB1PEPF000509FC.eurprd03.prod.outlook.com
- (2603:10a6:10:110:cafe::61) by DB8PR04CA0016.outlook.office365.com
- (2603:10a6:10:110::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
- 29 Jun 2026 07:29:40 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB1PEPF000509FC.mail.protection.outlook.com (10.167.242.38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 07:29:40 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 29 Jun
- 2026 09:33:55 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 29 Jun
- 2026 09:29:39 +0200
-Message-ID: <8aab07b8-9a23-4c0d-a2f9-3943f6490a60@foss.st.com>
-Date: Mon, 29 Jun 2026 09:29:38 +0200
-MIME-Version: 1.0
+ 2026 07:42:58 +0000
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1]) by DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1%7]) with mapi id 15.21.0159.018; Mon, 29 Jun 2026
+ 07:42:57 +0000
+Message-ID: <dd133025-b660-4b2c-ac40-d00a078b6b7f@siemens.com>
+Date: Mon, 29 Jun 2026 09:42:56 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ARM: dts: stm32: add U-Boot specific dtsi for
- stm32mp157f-dk2
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, <michael@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260529153159.3944049-1-dario.binacchi@amarulasolutions.com>
+Subject: Re: [PATCH v2 3/3] tpm: allocate tpm event log if missing
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+References: <20260610105243.193355-1-ludwig.nussel@siemens.com>
+ <20260610125204.v2.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
+ <CAC_iWjKN4URBGikcEeTHp7dQPf7QasESmPOmys9piEnsVt-fWw@mail.gmail.com>
+ <c3cbd9b8-56b1-4884-bb8a-8a98498a6c09@siemens.com>
+ <CAC_iWjJPY9VK89fB5+isWb0v5+uBZnr05kQoGGOYu_X=7G8Wtw@mail.gmail.com>
+ <7a8ab625-448f-4a63-ac2b-7b071a9a9f1e@siemens.com>
+ <CAC_iWjL0z2+=94CfjZx1BV6bCSSN2PyVwPSgCJNhs6r3Z4F3BA@mail.gmail.com>
+ <CAC_iWjJP3aK5a+QNVuZrLo_jc_zC1mkHJr4JsgRSaD7=wQ5cmA@mail.gmail.com>
+ <7aaef892-d1bf-4117-bb9a-ac8163b517da@siemens.com>
+ <CAC_iWjL2f6oHSfGYtiDy2rPUzpDKRdwR7RvEJUQaNqxO0rc70Q@mail.gmail.com>
+ <35833068-3d06-4661-b98a-1633a6afbbb7@siemens.com>
+ <CAC_iWjJ-dMsT3W5fSZ8KUFZeUz8djPw4gs2WHZsfhOjZ6jktGw@mail.gmail.com>
+ <6e83756f-5ed4-4f89-85b2-1a65419e9ac4@siemens.com>
+ <CAC_iWjL9yrSycty6=+JGqpE1ed7oNb34txDmKsE9sMp4zZCOeg@mail.gmail.com>
+ <CAC_iWjLgqpk=mdz76JHD75s5t2F7R2kzAEomd0=E3=x+kcmZrQ@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260529153159.3944049-1-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
+In-Reply-To: <CAC_iWjLgqpk=mdz76JHD75s5t2F7R2kzAEomd0=E3=x+kcmZrQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: PA7P264CA0285.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:373::6) To DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:2cc::12)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FC:EE_|PAVPR10MB7306:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3a05a472-3fa0-4214-3832-08ded5b02ec2
+X-MS-TrafficTypeDiagnostic: DB9PR10MB5019:EE_|DU4PR10MB8482:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9baa635b-9f7c-4f42-90d8-08ded5b20989
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|23010399003|6133799003|11063799006|18002099003|22082099003|56012099006|13003099007;
-X-Microsoft-Antispam-Message-Info: KOm6+/EBUm2vFNl3jTJAD8NdfN/hkygUVDL2BxeSa8QikCJcbwgkpd95f9Z84zYxiUTz2t9S1yG4uSS3TDeetNQuuLY/EP7tIZx+VnG1tU9L8XRa25385hzu7yY/fBShhZbWxIajgfJY76mE/tjnOLyrk5QBOXAg5r/qZSi2c3VFUYEw417khMAX1SrSmys1CcX0uCLQQ+blOMPAZJ/Q26p8vULf3qilZnLRzeeZJsOmDM58gLrl7+xNQDPqRsmuX1VJ5fQTdPvbyD0/cqrOPba02VLibo5F7n69eEW+5qA4moOUfMMNEp4bIieP0CpOpfIbyGbn61dU7HfIC0pUwZFQ/GWz5NI8dvuoGj+y967OVNHTbDlw+VXppn6VC+NG8SlCpqqhpPfSV+KU6MQEDavxEIhJ+zqcLG0iAbsr6UR3yp4tNJDsmshdJgFrRv4wVILtk8A6zSdXvTBueYlM8+bxdmqzdS1PoAXtgwyQOA4jucZa2EqgpxtkrXWNJMDVC7fZfy/H4TLoDVcSrChxagA7CUSXS3fZ0o6zWKn3PgsXuYmOoKlM7WXi+2IdCavFPUmYOsLrLO/8ZZiO9vJvVSJZKFcM4g6+lAgiaErpaky+YSFSV2TwcAkFv0s1mlKNUBPONrclpJkipjWlLz7CWl6fz4uH6xUQmeH573IQg4o/JuccNxPlt65NJLDR2v+xAD3MIuGBBFi1SpMePtfgtw==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(23010399003)(6133799003)(11063799006)(18002099003)(22082099003)(56012099006)(13003099007);
+ ARA:13230040|23010399003|376014|7416014|1800799024|366016|18002099003|22082099003|55112099003|11063799006|56012099006|6133799003|3023799007|4143699003;
+X-Microsoft-Antispam-Message-Info: sT+jw308GWt0srxKRAVlhjVw34jjoW2zL2rWbYyXXu+wbfrR3wzoNcXmhIc1uIv1M98uE/mZuNyK+YspZ1jpR9bK7fi1IsDCuvuTgJ7WlgG9PMuhcAr9g/jHsUBkMdgtRK3Xe0d0tQKBslqyNrlvD3mr4CI6p/Td3hTvN3/jdvvY6ct5v91oDkiPmtOgqGyDfkeZsHvCITE2gUnBoqUA8I+8Zmj+1uiK7ZrNLVF7hGbBDr/0XP/bgFgMjjNF7FkuADwJ3wq59DlQN1NFOnl32JLC+sGo21lh1qWD2B6gJq8vHamS6J5XB8dfQ5q2WUzV52LkQtR7kwiiMVxGt/qO4ZGplWvrQR2fE6omTUZ78usf2PjD8kYlxa+x29E9kjIhN1SOteW8X78LTNMHRPA3yyGeOZeDLSOtqnp4kkBPp7m/0x0x5JMeSHP33oJHu+MKuN8ttiz79KOHhdskTC3U1Dco8HsitkY5q16sZk8M9lNHSmtHgi1hbrq2xBBaaAYVG95dmUyOXSiiaQ+w9EG2c0PeQkZT1x5ktqO2shVUB9acdrH5gVKKlGKVLyI14ARzHv4B183HOS3Fe3oEIh/EGsDoRy3z2+6Y0hQu1dQZ3OU=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(366016)(18002099003)(22082099003)(55112099003)(11063799006)(56012099006)(6133799003)(3023799007)(4143699003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: x+av0w7XlK7qJyDlUHpBgRg8olTRxmZfD+axTgZMiGCbIKxwaMIWO6vtADjLwSUyuVUzr8satGt9ots+rRYlfLXG4+qwt7Fc+LC5APny8BXXokJJ9XdPCBHz1ULTS5jm0++oCFbdtHjf7x/+Q5dIzQUzSFlaqeH5lMux/l53rXA5jsuHhqZdwgyxduvIxUCLQhGKUCfsp5rHj19O44LddqV0XU4KMj0c5XxfaX7dPvHa4aF6UxvIQ3iUmOs1oXG4ygt343qTL5vHRfoAcCpn67C43zjFEyMgs0KvxWEFT+T/qYJEO/zzG3MIeZrk1POkDVZry7Mi+WxYBLB+Ur8gaaNmDwqdIsR35zKdr2TAILouQxVgMV67DSkJjIbs8GBJjLe59lVTmm6CIQHalqPSag8Qw1RhLnlk71C0JSQ9xL5Hlgo6SUZkXJN8hSuOsach
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 07:29:40.7439 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a05a472-3fa0-4214-3832-08ded5b02ec2
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FC.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7306
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QkNrZm05bFZIcmhLeS9QQnNIY1hFcm5PM1JqRmZ1TVBFU1daOFlSRGxOZkVX?=
+ =?utf-8?B?cmdPeVZPWkh0VGJ1dkIxcHhzczd0YUN5dVRxMXZubE9sWTVudWQ4cDA3TlZT?=
+ =?utf-8?B?alBSMUcxNjVVU3lCMWtJenRwalY4NzlORTN2QWw3L29UQVlUQ3pyWndzSHdj?=
+ =?utf-8?B?cnhHTktPMVRXMUlvbTZkVHl1NEdTVHRTWFZTWGxlNEdqSS91RURuTGhIcXhr?=
+ =?utf-8?B?QytJYUV0MzBEL1FGUzR6OFovNGYzN1hXSWNIOUNqNUNFRGFxS2l6dE95MDVE?=
+ =?utf-8?B?SDE0TysyTkJHcS9JcUdXRXphaXEyVXFhSC9ZK0d1bG5wUk9qcWFQdERNUzg4?=
+ =?utf-8?B?YktrR2FHa2VNQXExZEFKeXNkbDFLeVlDM25CU0F3RnpWaG5oYXVQQmM0UDd5?=
+ =?utf-8?B?amFnbzFESGhlVVB0Wi9ibnhpZnZScmdnZkY1NktYVXV5WjAvSDE2eFZUSFEz?=
+ =?utf-8?B?SlRMV1dqbnBjcVNVU1ZjZm4xYjY3VEZFNHhnSzdUbUcycC82OStGaXVZTTIr?=
+ =?utf-8?B?Sm5uSFQ4eFkrWXRTeGhPWFlBZnlucHg0N0d4dUlzZ2VKZHNPV01YS0FVK3BO?=
+ =?utf-8?B?QjExUjBKRGZlbGFFNGVROHpYbFQ4VkhGRUp4YkQ2eEYyaGtVUGN6cVZLbW1K?=
+ =?utf-8?B?bTNyNE0zV0ZUaVVCVTd5dng2Y0tkYVZOL2daa3JMbjZqZUF1aGhpMHF6U2k2?=
+ =?utf-8?B?REQvSHdmL3JrRzNhTWdpWjkvSVVxdmZrS1ZyMm9LNWxZamMyeVFMWnpodUtx?=
+ =?utf-8?B?ZXl1MEdEbVJvVmEvU2QzM250a1VYd2hZSmJUWmlMMGRJTkFLRW93WmdIZXVB?=
+ =?utf-8?B?ekozc2xIM0dFRzFHdXBrYVBkQnZjRmhVQ0Ezd1ZkcksvOTcrYWhUanhoYlZj?=
+ =?utf-8?B?VjNCK2dBYUlNRm02WWdFMTgveXJjZ2ZzZ3FJa2xnTHRoRjk5ZzYwRGdLU0xJ?=
+ =?utf-8?B?V1NUZTNnSGFlK0JjUHZDWHc3ZkM5Z3lxSVMvUFIrK1NvN21FaUdNKzRrOEJi?=
+ =?utf-8?B?THVZeE85bmN4Qk02cWtDamYrV2xYNjhkWFY2dXd2aWNMdDVWK0czZG9rT09S?=
+ =?utf-8?B?OTh6c2FZQlZOWDdDMjBYd3RUK25ick1ZdVNUb0Z3ZUs2ZW5aZVNOQThQZmZi?=
+ =?utf-8?B?alpaNFpwdjlQZE5QMmFJWkFZdUx6Zk40Y0tYWDVhaC95SHZZSW9PWlF5MEsy?=
+ =?utf-8?B?L3hJc0ZJT05PckJlVWQwUittU0VtVWZvQzNVTHVYNnQzNjNmWnkvcmc3ZlY1?=
+ =?utf-8?B?U1NyOW5HYzVEdDdUVjhUUVZKMWN1M3RXVGJwVk1FS2xBUXl2dzlpR1JmVTgy?=
+ =?utf-8?B?NzNJU3lRK3F0YVFWNmczQW9VTkpOZkFhNG1yZGxXMVAyT29naFBTdWMyckNx?=
+ =?utf-8?B?U2RKNlVicGRuS0FMcnpXcWxUYXRoWWFTT3B3UjRIbkNwY2h6WThUczkxNVJ0?=
+ =?utf-8?B?VGdQVVlqK0ErdmtXcHpKTW1GY25INHVtSDlaKzF4SVRLMTY3cm5EaTNjdlBW?=
+ =?utf-8?B?UUNWdUM5KzVrbHJJREJSWktIQWVEcDRucU9pQUJaRm5ZSG1NVnNzeFVsQ21Y?=
+ =?utf-8?B?MGxUcXVPMXF1VWdRQWp4TXdPRVNPWFVFZGNnVTY0VmtTL2huanltQ2hoRFdK?=
+ =?utf-8?B?ZC83U2t5eXhpL2hLZXBnbG0yYkZrNFNLTFVnMTB0MTBlTUR2aVI4Q1ppbmdG?=
+ =?utf-8?B?SlZMWTdnU3ZGR3cybERKdUhyTVVBOXJITTNyZERwdjEzTDh3YXFDNzF6OENk?=
+ =?utf-8?B?SHl5K3h6MzcwTTJxeUl0TE1TSGFXNnVTbHdwSFlhMFFVY05aVklQK1ZZeG1T?=
+ =?utf-8?B?WVJ2TnBLY2JkUythbEZud3JmVVlFdVd3bThCMDVnTmtYbFBxN2tPbUZ4Vlh4?=
+ =?utf-8?B?ZjRLVVdnbHI4ZEpGRjNQVDh0R3NlaGxKdVZjZ3RheS83ai9aTFVTTGNyN1NI?=
+ =?utf-8?B?cWtqK1hxNHRLL1UrbWtBdnVRbW5OVW1sOWdIdTloMFpkclhNZWZOOCs0TGUw?=
+ =?utf-8?B?Z29kenpieWp1MHd4eUVHcUtXM1JvTEFKb1ErMWtUa09qckNLbjZ2UG1QUXUy?=
+ =?utf-8?B?YXpsSVZPZjJKcDdZUHkyS1hEb3AvblZwKytjTlM3UktQcEZTQXRpbzdBZEhk?=
+ =?utf-8?B?aTBPK3AycktDSjBzQ1hIYU5qamZGSDBHdVlCRDVjMXhJSDNURHlVY0NwSmQ0?=
+ =?utf-8?B?QzZsdHBuaXd6NjhCd2dXVnNWMjBQanRlN2lvU2hkdW93M1RvQ2dQNEsvT085?=
+ =?utf-8?B?Q0hqVmRqZFZaV3VnTjVSclhuU1BRVXlwTjNnaUJ2WTZmTTQ2eUhWelNKWUNP?=
+ =?utf-8?B?SGFLdEltd3VHQXh2NmJFZHdNVjZIRElhdmZ4bjRqQWphZHg5K3RWckxjRlVz?=
+ =?utf-8?Q?XgBBs5ZE1w5rqEcM=3D?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9baa635b-9f7c-4f42-90d8-08ded5b20989
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 07:42:57.6062 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /Ny31+CVMc+DR8CHrDMwa04Z4a0FmqLgexmRU/ysqaC+skAJxUVqg2OtKrOiwEuDv9Ia6zhI7aKGEFyaVlYCQmvBQauEyQ0Zr+Juc5B6I3s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8482
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,65 +169,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 6/23/26 10:50, Ilias Apalodimas wrote:
+> On Tue, 23 Jun 2026 at 11:38, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+>> On Thu, 18 Jun 2026 at 12:16, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>>>
+>>> On 6/16/26 13:46, Ilias Apalodimas wrote:
+>>>>> [...]
+>>>>> Anyway, do you want me to submit your two patches as part of the series
+>>>>> or you want to follow up yourself?
+>>>>
+>>>> Carry them over imho, they were rotting in my branches for 1+ years,
+>>>> but I never had the chance to send them. Your patches were a good
+>>>> reason to rebase and revive them and they fit right in as can only
+>>>> rely on tcg2_measurement_init now.  I'll test/check the v4. I haven't
+>>>> gone through your changes in depth but they seemed reasonable, so I
+>>>> think this is fairly close on getting in
+>>>
+>>> With the patches on top the testsuite weirdly fails in platforms
+>>> xilinx_versal_virt:
+>>> [...]
+>>> I can't figure out why though. While investigating I noticed that I need
+>>> to re-introduce the elog parameter to the measurement functions so the
+>>> integration actually has a chance for now, short of using dev->priv->log
+>>> always.
+>>
+>> Ok i'll have a look and see if I can figure out why
+> 
+> Ok I had a quick look. The reason is that
+> if (tcg2_platform_get_tpm2(&dev)) {
+> log_warning("Missing TPMv2 device for EFI_TCG_PROTOCOL\n");
+> return EFI_SUCCESS;
+> }
+> 
+> Has been removed from the EFI init of the subsystem, but the tests run
+> without a TPM. The init now fails and the entire EFI subsystem fails
+> to initalize.
 
+Ah, stupid mistake on my part. I've fixed it, the tests are passing now. 
+Will resubmit. Thanks!
 
-On 5/29/26 17:31, Dario Binacchi wrote:
-> The STM32MP157F-DK2 board is a direct derivative of the STM32MP157C-DK2.
-> As explained by ST [1], the "STM32MP157F-DK2 is assembled with latest
-> STM32MP15 RevZ cut which is the only one available for new product now.
-> The major differences in this 'F' variant SoC are the increased max
-> frequency of the Cortex-A7 cores and the correction of some HW bugs
-> (Device Rev.Z, see errata ES0438)".
-> 
-> On the software/architecture side, this variant utilizes SCMI (System
-> Control and Management Interface) for secure world resource management.
-> As a consequence, the underlying stm32mp15-scmi.dtsi explicitly deletes
-> several fixed clock nodes (such as clk_hse, clk_hsi, clk_lse, clk_lsi,
-> and clk_csi), making it impossible to include stm32mp157c-dk2-u-boot.dtsi
-> without triggering compilation errors due to these missing clock labels.
-> 
-> So let's introduce a dedicated stm32mp157f-dk2-u-boot.dtsi that directly
-> defines the fwu-mdata node. This provides the necessary FWU metadata
-> configuration required to allow automatic A/B bank selection, supported
-> for STM32MP15 boards by commit 560d8f32703f ("board: st: stm32mp15:
-> support dynamic A/B bank bootup").
-> 
-> [1] https://community.st.com/t5/stm32-mpus-products-and-hardware/i-m-wondering-what-s-the-difference-point-between-stm32mp157c/td-p/213460
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Drop the inclusion of stm32mp157c-dk2-u-boot.dtsi to avoid compilation
->   errors caused by deleted clock nodes in stm32mp15-scmi.dtsi.
-> - Directly define the fwu-mdata node in stm32mp157f-dk2-u-boot.dtsi to
->   properly support automatic A/B bank selection.
-> 
->  arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
-> 
-> diff --git a/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..77805417bfa9
-> --- /dev/null
-> +++ b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> + */
-> +
-> +/ {
-> +	fwu-mdata {
-> +		compatible = "u-boot,fwu-mdata-gpt";
-> +		fwu-mdata-store = <&sdmmc1>;
-> +	};
-> +};
+cu
+Ludwig
 
-Hi Dario
-
-What about including stm32mp157c-dk2-u-boot.dtsi instead of defining fwu-mdata node ?
-
-Thanks
-Patrice
+-- 
+Ludwig Nussel
+Siemens AG
+www.siemens.com
