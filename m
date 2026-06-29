@@ -4,82 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CA0C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 21:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F184C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 21:49:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2DA84AC1;
-	Mon, 29 Jun 2026 23:34:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A470984AA2;
+	Mon, 29 Jun 2026 23:49:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZcGNaJGX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BodUjZvL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 579DC84671; Mon, 29 Jun 2026 23:34:49 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD0F684A29; Mon, 29 Jun 2026 23:49:41 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44FA584AA2
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 23:34:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2DD4849C5
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 23:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4876d5335b2so2527560b6e.1
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 14:34:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782768886; x=1783373686; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oRBLUsNWOG6ta0GdDMLkMpursJB5tQJSWn2FzWxEJWw=;
- b=ZcGNaJGXow1kvcYSpA8MgIj4b1KOGrLPKcmIsgm96SVKyGzgHP4uz+7pkrsHip2bqt
- xwEl2Gd/rF2zadMAhty13j+Q6pcSkGP8b3c52Gc2f6a+wRTGKwOd2/PCLjiYioOZ5h4c
- K0jj0mW/FRIyOlN/RcE1AsSH4b5L4W0shugvI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782768886; x=1783373686;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=oRBLUsNWOG6ta0GdDMLkMpursJB5tQJSWn2FzWxEJWw=;
- b=kvrfpg/ianNCYFAhVpc+A2pYICYyVrPNng0n1ICNJ6eYsiO/ccL1EUr6ftpOX95qrA
- 4qpHPydmdQAl9UqVV5bH96FzCqmKdNAzXDSdH/q6Y6I1Rz8IDOwx5VFbIKGgqsgLt79R
- 6r7BUceN46SgdNe+cBigmX6NCDkboxRNPaWoTLDmq6UkAOcZgg5i0KYjisZ4uqs+J2R0
- 8txA3MHZ1XuF6BD+z93tgSOvzQ1W6qgsqYk8gL65NuEJeejA+x0EjwQRd79gidJDuMAh
- A21Y+owL5vwEaX0KfQ8+DfMgWzum60+DtaRNsMUjfdAVIB5bKqZRmnq7Np7aEfrjVdE1
- xCXA==
-X-Gm-Message-State: AOJu0Yx6vTYZ4HZvXdk+97J1UF+YxoAXIRjQbsPdD3HCCs6ZNsleNkxi
- I1ywYv9rVeJDPCCe72r1y8m9CSPQ1AbCgxP/4LX1aIzo+EUbpZw/MVVvUpnYp2vlfW8=
-X-Gm-Gg: AfdE7cniGBxv3/g/0y3uDBnzLeWZ0pnsrU/lRKURkJrkMV5TfDLldnZp5nilvqtrdit
- o9JVpYusibi34+um8wXnJxebp6ABRBMMFVpMIcWu0KUbZheMcAnfxdnVk/7W0op+FPkgh4kLOws
- Iutqrp4S1N/CuLmvh5a8tgyuWBYIO/rOnpMaRyFVBOR5hDuAmdPN8enHhxocPE7i3OrVtciz+Ay
- hm0Lvh5Z3E8VphH62MXHnmmtJpYp1vHnQTOTDNld/O/6QvwmrhxTDl/gx4W64xAIgjf7ROTHbkd
- TBQJoWy0mt2FZkdrDWVsEXucnJvItsIKXwuSPNF5VeDk9Zm/vOjvK4hlUVuSYBE0F7S2OcWSK1s
- 86h8oX6smeAjjP1U0qCz7kLDSCdLWwKkgvWDMDPWw94Gy1DLPYMIMpaX0EmN+Tmje5hPzyffom/
- R+w8urznSt4NQ+QiyoKTh8f2xHG7ndG7O4A60niDG1QiiSY3Jw7ZZmCUqHDeP0QPDhZbLhOtMzs
- g7U8tkPGipuzmhCNx/xarnnXHczE5XJPYvIuCc=
-X-Received: by 2002:a05:6808:150e:b0:48a:7577:3f37 with SMTP id
- 5614622812f47-495ead82e89mr1013259b6e.11.1782768885998; 
- Mon, 29 Jun 2026 14:34:45 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-494c3766f3esm5454697b6e.8.2026.06.29.14.34.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 14:34:45 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20260612020606.284001-1-marek.vasut+renesas@mailbox.org>
-References: <20260612020606.284001-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] treewide: Staticize and constify acpi ops
-Message-Id: <178276888543.793204.80491307804138299.b4-ty@konsulko.com>
-Date: Mon, 29 Jun 2026 15:34:45 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gq0LB1qz3z9vGk;
+ Mon, 29 Jun 2026 23:49:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1782769778;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZhCG+3DMXQH7YVdwoK8AvWQKKieNLNDcVYj23nfaeRY=;
+ b=BodUjZvLO0YN/LbB5ghAbrCHgQaBwp4mzw0TZDJOrBDFtZ0+QePbvLKMVzt5HfIWgL0VzS
+ 2NviO3oavMVHWWcygA6NUn8t8Z0PcjAg4WBvmEJxFKAiro3e1qEKcueeTR6nTLvycpcAt3
+ NrfjG//8a8Lv5O5N6DOjUNNTzGdmXj1UW5F4oPG7i3Bf+tHBrl7kiE2XJ/V7HZxxzUEEC+
+ jAAJ2psSj5/7iOGEARlw4jYVAbeHLTRUSWM3Hr11n8ZSpBm0ofE04IMJ83WyiB3YEsz3ne
+ NuiwB70uXxqD/Q6izVkeqKl+MUixTnfKLIfY6lxu6y/Dcv4TxBZPcotT7IJUJQ==
+Message-ID: <3e01c1fe-3e8f-402c-a823-8fca9f6c2a3a@mailbox.org>
+Date: Mon, 29 Jun 2026 09:56:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH] usb: xhci: Fix bNbrPorts overwritten by another controller
+To: m13738176232 <13738176232@163.com>
+Cc: u-boot <u-boot@lists.denx.de>, "bmeng.cn" <bmeng.cn@gmail.com>
+References: <1782563839-11379-1-git-send-email-13738176232@163.com>
+ <dc5ecf1c-ee61-4434-a19b-966f287f1533@mailbox.org>
+ <5165dbf8.4708d.19f120e171a.Coremail.13738176232@163.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <5165dbf8.4708d.19f120e171a.Coremail.13738176232@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MBO-RS-META: hf3jpjga84gmk8k91ss5upxym34rtzm5
+X-MBO-RS-ID: a692532520392544b2e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +76,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Jun 2026 04:05:38 +0200, Marek Vasut wrote:
-
-> Set the acpi_ops structure as static const where applicable. The
-> The structure is not accessible from outside of drivers and is not
-> going to be modified at runtime. The structure may be unused in a
-> couple of drivers depending on their configuration, mark those
-> sites with __maybe_unused .
+On 6/29/26 8:25 AM, m13738176232 wrote:
+> For the `struct descriptor`, only the `hub` part (`bNbrPorts` and `wHubCharacteristics`) is different for each controller; the other five members (device, config, interface, endpoint,ep_companion)are identical for all XHCI root hubs.
 > 
+> My previous patch only fixed the dynamic reading of `bNbrPorts`, but `wHubCharacteristics` is also different for each controller and will be overridden by the last controller.
 > 
-> [...]
-
-Applied to u-boot/next, thanks!
-
-[1/1] treewide: Staticize and constify acpi ops
-      commit: d5046398433e48e7b0b664c1ee3e4e2af6f861a8
--- 
-Tom
-
-
+> New patch as below for referrence.
+Please send this as a V2 properly. Thank you !
