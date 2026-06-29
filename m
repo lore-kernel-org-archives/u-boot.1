@@ -4,85 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3F0C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 18:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A12C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 18:22:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D42184A8D;
-	Mon, 29 Jun 2026 20:20:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E0FE784A5D;
+	Mon, 29 Jun 2026 20:22:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bZhFA9zC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="fXHW9OCR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA4384A7D; Mon, 29 Jun 2026 20:20:48 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5319584A6B
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 20:20:46 +0200 (CEST)
+ id 7A20284A63; Mon, 29 Jun 2026 20:22:14 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A350884942
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 20:22:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andreas.zdziarstek@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so27255755e9.0
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 11:20:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782757246; x=1783362046; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0/jWltThE5k4RgeXn0ijxKSCU6PUaYmjRempnw29Y4w=;
- b=bZhFA9zC4jRHDiE01F4gN7EK3rzKIgBMcTDRT4qdhsp7YpVxP1w//cVNjeiuU0CSY/
- 6ASxBMpEJaptSudF3hXMtBNgGdl2lxfYtjUt6qAZdLkcvVxn0oRDeBram4UaNlNkkmBg
- v5rVWW37SjU5LdxF8djFsveE5ESCAZSMP8vNmw4ADTFw0D8R3jU47F0ur7mbUqGYY3LH
- l654PxyNTJjnlZPKZ94oE9gdxa6B6P5bPKZ0Xv7uuC54QdQ5f86kW7ZaGuVwPPaUGRCa
- qRfMu9sQrgaSPq9xx4d5EFuiH0Hx4cCGZy2yQLrlxlx9u0j5wh2cVbidmD6xv0RhLwEO
- eQMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782757246; x=1783362046;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0/jWltThE5k4RgeXn0ijxKSCU6PUaYmjRempnw29Y4w=;
- b=fqKJlt2SvLq8L/pgm7dABfS1kisntu5miRaWHJTjgA+ZtQg2N+aKvtqMKbmg+logug
- WJXH53SWoFX3XGbArFhfIe7KjAAgMz0BbVXYOqI4KRUGDG/PbGCzsehRtVvKcjhb2Oha
- eK5DzyHfPD5rAgwxy1p68y7GMkqrdrmUJIWVyTsGC2rXjpukQZLX0l/r/eLtRj8CJJut
- hWyotYzGTbofNww0oy9Z2MezXqcHB0DH5dv4zTQK4pKl8vORCoeIetRgT9ScRI7JSKrP
- AijMB/bFWRlk3bXMAfrJ7iiuPzamw2XeYD1vJ31MTNCImLE5rxDKFtcv3aIIVHCqalaY
- nI2g==
-X-Gm-Message-State: AOJu0YwbEBYsCIw9hcbIN8kpFIjh4mzONaKc4rKyftU7BZGGdrbiqfe0
- cCR9FWo6sZVeLDmqKwJMAexGJawoNQR2K8Fw0oie/2XJQFOux4Nyr3nOCCmdJBU5
-X-Gm-Gg: AfdE7cnEyCXWE7Fby42FTOLLBMn06/e+GHYLnAej9yYvT1h7fDrnS1DoMXZkJWtbz56
- f85DdYZMkttCP+o6ell+9R8xs9EHJoFg2P01AU6OMtYKV4f0h+Ou9tsV2uICOBg2/LCIgHqnWPZ
- SAifjhAjMvyQ5Te0TYxxGPsggKr3SAXZVQc7323jNbmqp4SNajwIVK4vschlGkXpQp7VxTRo+TB
- Ph2NmRp+zveLNJOgxmljMw/R/OaLxk3Hb6kcxEeynppYecOPyqCGGO40bhnWuxa/a1ZG8M5yEfZ
- rL+/b/yLdFtcAF5EYv7SHj7EoW+QmxMj13n74Jk74rgd9AUIZy4KswfkyAUVcSUDZfAEBAOchPQ
- 2ZqbD8C9uFfzSrQInEx/h+kjEG35vsCmMSx7JZTlNd75NJN19OHuxfgF0lySpI4mFi1j1UyziZV
- CiAdsgEoz8PTQlP8idsNCZ97yWbdtIyUX/D9ldTcyX7Ugcrt3u7ux/0Xz/cavlcAE=
-X-Received: by 2002:a05:600c:4e08:b0:490:d32b:39d6 with SMTP id
- 5b1f17b1804b1-493b82ad241mr10797395e9.19.1782757245713; 
- Mon, 29 Jun 2026 11:20:45 -0700 (PDT)
-Received: from turbine.fritz.box (p5784ea85.dip0.t-ipconnect.de.
- [87.132.234.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4926c2954efsm219567015e9.2.2026.06.29.11.20.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 11:20:45 -0700 (PDT)
-From: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, jonas@kwiboo.se, quentin.schulz@cherry.de,
- Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Subject: [PATCH v3 3/3] rockchip: odroid-m1s: enable watchdog support
-Date: Mon, 29 Jun 2026 20:20:12 +0200
-Message-ID: <20260629182012.1508336-4-andreas.zdziarstek@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260629182012.1508336-1-andreas.zdziarstek@gmail.com>
-References: <20260629182012.1508336-1-andreas.zdziarstek@gmail.com>
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 774FD355A;
+ Mon, 29 Jun 2026 11:22:06 -0700 (PDT)
+Received: from e130802.arm.com (unknown [10.57.80.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B5BD3F905;
+ Mon, 29 Jun 2026 11:22:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1782757330; bh=VDHxY15vFnV/Q3/g5br8oJ3HrDb0yIkB64bLWV41sYc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fXHW9OCRLbuFOhZjU+dknNttfXR9ZxvVDcDYwaJEdb4Htq/5OHe/9aQH4/tfx7Y7+
+ e9t4ROsxBYTvkB8/W+6KtTpfcdeYBjYpyVJ01qlS4ncgjKR143nffdRKTfhyKTER95
+ BP2VZ6wRolvuXLlqcaY8+uuquZbs1wNQlcmxh52M=
+Date: Mon, 29 Jun 2026 19:21:59 +0100
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3 01/10] efi_loader: add runtime memset helper
+Message-ID: <akK3x3Ih9NH0Sjje@e130802.arm.com>
+References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
+ <20260627144421.2067410-2-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260627144421.2067410-2-harsimransingh.tungal@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,41 +67,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The rk3566 ODROID-M1S has a DesignWare watchdog. Enable CONFIG_WDT,
-CONFIG_DESIGNWARE_WATCHDOG and CONFIG_CMD_WDT so it can be driven via
-the wdt command.
+On Sat, Jun 27, 2026 at 03:44:12PM +0100, Harsimran Singh Tungal wrote:
+> Add efi_memset_runtime() for EFI runtime paths
+> 
+> This keeps buffer initialization in runtime-resident code after
+> ExitBootServices() and avoids relying on non-runtime helpers.
+> 
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> ---
+>  include/efi_loader.h         |  3 +++
+>  lib/efi_loader/efi_runtime.c | 20 ++++++++++++++++++++
+>  2 files changed, 23 insertions(+)
+> 
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 3a4d502631c..9dfea1fd7de 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -1151,6 +1151,9 @@ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
+>  /* runtime implementation of memcmp() */
+>  int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
+>  
+> +/* runtime implementation of memset() */
+> +void *efi_memset_runtime(void *dest, int c, size_t n);
+> +
+>  /* commonly used helper functions */
+>  u16 *efi_create_indexed_name(u16 *buffer, size_t buffer_size, const char *name,
+>  			     unsigned int index);
+> diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> index 73d4097464c..c0182931c42 100644
+> --- a/lib/efi_loader/efi_runtime.c
+> +++ b/lib/efi_loader/efi_runtime.c
+> @@ -233,6 +233,26 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
+>  	return 0;
+>  }
+>  
+> +/**
+> + * efi_memset_runtime() - fill memory area
+> + *
+> + * At runtime memset() is not available.
+> + *
+> + * @dest:	destination buffer
+> + * @c:		byte value used to fill destination buffer
+> + * @n:		number of bytes to set
+> + * Return:	pointer to destination buffer
+> + */
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
+> +{
+> +	u8 *d = dest;
+> +
+> +	for (; n; --n)
+> +		*d++ = (u8)c;
+> +
+> +	return dest;
+> +}
+> +
+>  /**
+>   * efi_update_table_header_crc32() - Update crc32 in table header
+>   *
+> -- 
+> 2.34.1
+> 
 
-CONFIG_WATCHDOG and CONFIG_WATCHDOG_AUTOSTART are left explicitly unset
-to not cause any breaking changes on existing systems.
-
-Signed-off-by: Andreas Zdziarstek <andreas.zdziarstek@gmail.com>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- configs/odroid-m1s-rk3566_defconfig | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/configs/odroid-m1s-rk3566_defconfig b/configs/odroid-m1s-rk3566_defconfig
-index d59882a2a59..943c0509e9e 100644
---- a/configs/odroid-m1s-rk3566_defconfig
-+++ b/configs/odroid-m1s-rk3566_defconfig
-@@ -30,6 +30,7 @@ CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_ROCKUSB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_INI=y
- CONFIG_CMD_PMIC=y
-@@ -87,5 +88,9 @@ CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
-+# CONFIG_WATCHDOG is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_DESIGNWARE_WATCHDOG=y
-+CONFIG_WDT=y
- CONFIG_FS_CRAMFS=y
- CONFIG_ERRNO_STR=y
--- 
-2.53.0
-
+Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
