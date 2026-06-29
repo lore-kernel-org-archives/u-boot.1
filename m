@@ -4,56 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9BD0C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E33C43327
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5ECD84994;
-	Mon, 29 Jun 2026 10:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 27456846A4;
+	Mon, 29 Jun 2026 10:17:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="s7qcISDl";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="VjsLaxO/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62A2284832; Mon, 29 Jun 2026 10:02:50 +0200 (CEST)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AC5B984844; Mon, 29 Jun 2026 08:25:50 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D96E8490A
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 10:02:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1490984105
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 08:25:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 20260629080243832e96fee1000207ac for <u-boot@lists.denx.de>;
- Mon, 29 Jun 2026 10:02:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=TXkASqtvPOGGnpXtfc+Lsk30ae8YIbqVG/kjKwdviPY=;
- b=s7qcISDlHfgd/d2Dx8a8y1j5lRmUwUitKKE7MP++dD31gn8yq5Mh94ctxdlmxhVjpCdlfQ
- ByRJ86GuD3zgY3LIGTNBNM3FTfR671A7TrYuAS+7+Q4+qwyaUT3piKunJdPQLgqyGphArKyD
- BhhA58vbcyhIRIzYWlihclO+h7FN8/E5M5yn2IvdSF34YbW1Bt0M0nsNezYG13px9yZzwJid
- YU/VYNcXt026x9oip39xFRoFt6cSW++WkCC8B36lX7FmJLeb9XmFqEEZFhfg9tNBqpak+QsH
- Tujig1iYvhYp01MEwM0XrRUNxtwFo+QkLQheyZPF5V3dER9ooWc9hwbQ==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 2/6] tpm: print all PCRs from pcr_read
-Date: Mon, 29 Jun 2026 10:01:01 +0200
-Message-ID: <20260629100104.v4.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
-In-Reply-To: <20260629080241.36311-1-ludwig.nussel@siemens.com>
-References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
+ spf=pass smtp.mailfrom=13738176232@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=y5X67G0nf1UNDJ9TUuLlP3w7QClJxDkfbgS/GeevQAw=; b=V
+ jsLaxO/nTv85T9HipSj7fucQRqfMa28qIobOrO0XDvrQ/vhOW4x2+7IKo+iSUWWJ
+ XAgPQZo71Kvk3OZA0MIt70LjrzgDBboO4Cu3DJ8sDMufTEnzu4hkPHwKfMXFNIIs
+ C2hfF9kl7czf6uj/b76V+DpXNl3r55tGsgaGVj5oog=
+Received: from 13738176232$163.com ( [240e:471:cb0:aede:f47d:49ff:fef5:d7d0]
+ ) by ajax-webmail-wzpm-k8s-gz (Coremail) ; Mon, 29 Jun 2026 14:25:41 +0800
+ (GMT+08:00)
+X-Originating-IP: [240e:471:cb0:aede:f47d:49ff:fef5:d7d0]
+Date: Mon, 29 Jun 2026 14:25:41 +0800 (GMT+08:00)
+From: m13738176232 <13738176232@163.com>
+To: "marek.vasut" <marek.vasut@mailbox.org>
+Cc: u-boot <u-boot@lists.denx.de>, "bmeng.cn" <bmeng.cn@gmail.com>
+Subject: Re: Re: [PATCH] usb: xhci: Fix bNbrPorts overwritten by another
+ controller
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260403(27802f6d) MailAndroid/7.25.10_(16) Copyright (c) 2002-2026
+ www.mailtech.cn 163com
+In-Reply-To: <dc5ecf1c-ee61-4434-a19b-966f287f1533@mailbox.org>
+References: <1782563839-11379-1-git-send-email-13738176232@163.com>
+ <dc5ecf1c-ee61-4434-a19b-966f287f1533@mailbox.org>
+X-CM-CTRLMSGS: Ye7/zXRyYWNlS2V5PWM0OGU4NmZlNzUwODQyYjJhYjIzZTE0OWI4YjJjYzA4
+X-NTES-MT-INF: c48e86fe750842b2ab23e149b8b2cc08
+X-NTES-SC: AL_Qu2TAPuau0sv5yGbY+kcnU0XguY9XMK4uvUl345Qc8cDvwPq+SEHcm1fDGfO2cmkJB+UujioVht29tZkcqxfGeRnXF6YqsWRm9fYOwcryQ==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+Message-ID: <5165dbf8.4708d.19f120e171a.Coremail.13738176232@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: _____wDn_+7lD0JqWNFFAA--.7811W
+X-CM-SenderInfo: zprtljayrxljits6il2tof0z/xtbC7wUok2pCD+VIlwAA3M
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Mon, 29 Jun 2026 10:17:36 +0200
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,171 +77,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Output is now more similar to the Linux userspace tool "tpm2_pcrread".
-
-The old semantics that require specifying one PCR number are
-retained. In addition with no arguments the command now prints
-contents of all PCR registers.
-
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
-
----
-
-(no changes since v3)
-
-Changes in v3:
-- fix test failure
-
-Changes in v2:
-- fix return value handling
-
- cmd/tpm-v2.c               | 69 +++++++++++++++++++++++++++-----------
- test/py/tests/test_tpm2.py |  9 ++---
- 2 files changed, 53 insertions(+), 25 deletions(-)
-
-diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-index 847b2691581..e9f4bc24e33 100644
---- a/cmd/tpm-v2.c
-+++ b/cmd/tpm-v2.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <log.h>
- #include <mapmem.h>
-+#include <malloc.h>
- #include <tpm-common.h>
- #include <tpm-v2.h>
- #include "tpm-user-utils.h"
-@@ -150,10 +151,11 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
- 	u32 index, rc;
- 	int algo_len;
- 	unsigned int updates;
--	void *data;
-+	u8 *data;
- 	int ret;
-+	u32 pcr_start, pcr_end;
- 
--	if (argc < 3 || argc > 4)
-+	if (argc > 4)
- 		return CMD_RET_USAGE;
- 	if (argc == 4) {
- 		algo = tpm2_name_to_algorithm(argv[3]);
-@@ -168,25 +170,51 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	priv = dev_get_uclass_priv(dev);
- 	if (!priv)
--		return -EINVAL;
--
--	index = simple_strtoul(argv[1], NULL, 0);
--	if (index >= priv->pcr_count)
--		return -EINVAL;
-+		return CMD_RET_FAILURE;
- 
--	data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-+	if (argc >= 2) {
-+		pcr_start = simple_strtoul(argv[1], NULL, 0);
-+		if (pcr_start >= priv->pcr_count) {
-+			log_err("Index %u out of range (max %u)\n", pcr_start, priv->pcr_count - 1);
-+			return CMD_RET_FAILURE;
-+		}
-+		pcr_end = pcr_start + 1;
-+	} else {
-+		pcr_start = 0;
-+		pcr_end = priv->pcr_count;
-+	}
- 
--	rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
--			   data, algo_len, &updates);
--	if (!rc) {
--		printf("PCR #%u %s %d byte content (%u known updates):\n", index,
--		       tpm2_algorithm_name(algo), algo_len, updates);
--		print_byte_string(data, algo_len);
-+	if (argc >= 3) {
-+		data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-+	} else {
-+		data = malloc(algo_len);
-+		if (!data) {
-+			log_err("Failed to allocate %u bytes for PCR data\n", algo_len);
-+			return CMD_RET_FAILURE;
-+		}
- 	}
- 
--	unmap_sysmem(data);
-+	printf("%8s:\n", tpm2_algorithm_name(algo));
-+	for (index = pcr_start; index < pcr_end; ++index) {
-+		printf("%6u: ", index);
-+		rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
-+				   data, algo_len, &updates);
-+		if (rc == 0) {
-+			printf("0x");
-+			for (int i = 0; i < algo_len; ++i)
-+				printf("%02X", data[i]);
-+			printf(" (%u known updates)\n", updates);
-+		} else {
-+			log_err("PCR #%u read failed: %d\n", index, rc);
-+			ret = report_return_code(rc);
-+		}
-+	}
-+	if (argc >= 3)
-+		unmap_sysmem(data);
-+	else
-+		free(data);
- 
--	return report_return_code(rc);
-+	return ret;
- }
- 
- static int do_tpm_get_capability(struct cmd_tbl *cmdtp, int flag, int argc,
-@@ -548,10 +576,13 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
- "    Extend PCR #<pcr> with digest at <digest_addr> with digest_algo.\n"
- "    <pcr>: index of the PCR\n"
- "    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
--"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
-+"pcr_read [<pcr> [<digest_addr> [<digest_algo>]]]\n"
- "    Read PCR #<pcr> to memory address <digest_addr> with <digest_algo>.\n"
--"    <pcr>: index of the PCR\n"
--"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
-+"    With no arguments, print all PCR registers.\n"
-+"    If only <pcr> is specified, a buffer is allocated internally.\n"
-+"    <pcr>: index of the PCR (optional, defaults to all PCRs)\n"
-+"    <digest_addr>: address of digest of digest_algo type (optional)\n"
-+"    <digest_algo>: digest algorithm type (defaults to SHA256)\n"
- "get_capability <capability> <property> <addr> <count>\n"
- "    Read and display <count> entries indexed by <capability>/<property>.\n"
- "    Values are 4 bytes long and are written at <addr>.\n"
-diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-index 9be85999d46..1baf86dd065 100644
---- a/test/py/tests/test_tpm2.py
-+++ b/test/py/tests/test_tpm2.py
-@@ -198,8 +198,7 @@ def test_tpm2_pcr_read(ubman):
-     updates = int(re.findall(r'\d+', str)[0])
- 
-     # Check the output value
--    assert 'PCR #10 sha256 32 byte content' in read_pcr
--    assert '00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00' in read_pcr
-+    assert 'sha256:\r\r\n    10: 0x0000000000000000000000000000000000000000000000000000000000000000' in read_pcr
- 
- @pytest.mark.buildconfigspec('cmd_tpm_v2')
- @pytest.mark.notbuildconfigspec('target_chromebook_coral')
-@@ -230,8 +229,7 @@ def test_tpm2_pcr_extend(ubman):
-     read_pcr = ubman.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = ubman.run_command('echo $?')
-     assert output.endswith('0')
--    assert 'f5 a5 fd 42 d1 6a 20 30 27 98 ef 6e d3 09 97 9b' in read_pcr
--    assert '43 00 3d 23 20 d9 f0 e8 ea 98 31 a9 27 59 fb 4b' in read_pcr
-+    assert 'sha256:\r\r\n    10: 0xF5A5FD42D16A20302798EF6ED309979B43003D2320D9F0E8EA9831A92759FB4B' in read_pcr
- 
-     str = re.findall(r'\d+ known updates', read_pcr)[0]
-     new_updates = int(re.findall(r'\d+', str)[0])
-@@ -244,8 +242,7 @@ def test_tpm2_pcr_extend(ubman):
-     read_pcr = ubman.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = ubman.run_command('echo $?')
-     assert output.endswith('0')
--    assert '7a 05 01 f5 95 7b df 9c b3 a8 ff 49 66 f0 22 65' in read_pcr
--    assert 'f9 68 65 8b 7a 9c 62 64 2c ba 11 65 e8 66 42 f5' in read_pcr
-+    assert '10: 0x7A0501F5957BDF9CB3A8FF4966F02265F968658B7A9C62642CBA1165E86642F5' in read_pcr
- 
-     str = re.findall(r'\d+ known updates', read_pcr)[0]
-     new_updates = int(re.findall(r'\d+', str)[0])
--- 
-2.43.0
-
+Rm9yIHRoZSBgc3RydWN0IGRlc2NyaXB0b3JgLCBvbmx5IHRoZSBgaHViYCBwYXJ0IChgYk5iclBv
+cnRzYCBhbmQgYHdIdWJDaGFyYWN0ZXJpc3RpY3NgKSBpcyBkaWZmZXJlbnQgZm9yIGVhY2ggY29u
+dHJvbGxlcjsgdGhlIG90aGVyIGZpdmUgbWVtYmVycyAoZGV2aWNlLCBjb25maWcsIGludGVyZmFj
+ZSwgZW5kcG9pbnQsZXBfY29tcGFuaW9uKWFyZSBpZGVudGljYWwgZm9yIGFsbCBYSENJIHJvb3Qg
+aHVicy4KCk15IHByZXZpb3VzIHBhdGNoIG9ubHkgZml4ZWQgdGhlIGR5bmFtaWMgcmVhZGluZyBv
+ZiBgYk5iclBvcnRzYCwgYnV0IGB3SHViQ2hhcmFjdGVyaXN0aWNzYCBpcyBhbHNvIGRpZmZlcmVu
+dCBmb3IgZWFjaCBjb250cm9sbGVyIGFuZCB3aWxsIGJlIG92ZXJyaWRkZW4gYnkgdGhlIGxhc3Qg
+Y29udHJvbGxlci4KCk5ldyBwYXRjaCBhcyBiZWxvdyBmb3IgcmVmZXJyZW5jZS4KClNpZ25lZC1v
+ZmYtYnk6IEJlaWJlaSBZYW5nIDwxMzczODE3NjIzMkAxNjMuY29tPgoKSW5kZXg6IGRyaXZlcnMv
+dXNiL2hvc3QveGhjaS5jCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIGRyaXZlcnMvdXNiL2hvc3QveGhjaS5jICAg
+ICAocmV2aXNpb24gMTA0NDYpCisrKyBkcml2ZXJzL3VzYi9ob3N0L3hoY2kuYyAgICAgKHdvcmtp
+bmcgY29weSkKQEAgLTk1NCwxMyArOTU0LDcgQEAKICAgICAgICAgICAgICAgY2FzZSBVU0JfRFRf
+SFVCOgogICAgICAgICAgICAgICBjYXNlIFVTQl9EVF9TU19IVUI6CiAgICAgICAgICAgICAgICAg
+ICAgICAgZGVidWcoIlVTQl9EVF9IVUIgY29uZmlnXG4iKTsKLSAgICAgICAgICAgICAgICAgICAg
+ICAgc3JjcHRyID0gJmRlc2NyaXB0b3IuaHViOworICAgICAgICAgICAgICAgICAgICAgICBzcmNw
+dHIgPSAmY3RybC0+aHViX2Rlc2M7CiAgICAgICAgICAgICAgICAgICAgICAgc3JjbGVuID0gMHg4
+OwogICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICAgICBkZWZhdWx0OgpA
+QCAtMTIyMSwyMCArMTIxNSwyMSBAQAogICAgICAgICAgICAgICByZXR1cm4gLUVOT01FTTsKCiAg
+ICAgICByZWcgPSB4aGNpX3JlYWRsKCZoY2NyLT5jcl9oY3NwYXJhbXMxKTsKLSAgICAgICBkZXNj
+cmlwdG9yLmh1Yi5iTmJyUG9ydHMgPSAoKHJlZyAmIEhDU19NQVhfUE9SVFNfTUFTSykgPj4KLSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSENTX01BWF9QT1JU
+U19TSElGVCk7Ci0gICAgICAgcHJpbnRmKCJSZWdpc3RlciAleCBOYnJQb3J0cyAlZFxuIiwgcmVn
+LCBkZXNjcmlwdG9yLmh1Yi5iTmJyUG9ydHMpOworICAgICAgIGN0cmwtPmh1Yl9kZXNjID0gZGVz
+Y3JpcHRvci5odWI7CisgICAgICAgY3RybC0+aHViX2Rlc2MuYk5iclBvcnRzID0gKChyZWcgJiBI
+Q1NfTUFYX1BPUlRTX01BU0spID4+CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBIQ1NfTUFYX1BPUlRTX1NISUZUKTsKKyAgICAgICBwcmludGYoIlJlZ2lzdGVyICV4IE5i
+clBvcnRzICVkXG4iLCByZWcsIGN0cmwtPmh1Yl9kZXNjLmJOYnJQb3J0cyk7CgogICAgICAgLyog
+UG9ydCBJbmRpY2F0b3JzICovCiAgICAgICByZWcgPSB4aGNpX3JlYWRsKCZoY2NyLT5jcl9oY2Nw
+YXJhbXMpOwogICAgICAgaWYgKEhDU19JTkRJQ0FUT1IocmVnKSkKLSAgICAgICAgICAgICAgIHB1
+dF91bmFsaWduZWQoZ2V0X3VuYWxpZ25lZCgmZGVzY3JpcHRvci5odWIud0h1YkNoYXJhY3Rlcmlz
+dGljcykKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8IDB4ODAsICZkZXNjcmlwdG9y
+Lmh1Yi53SHViQ2hhcmFjdGVyaXN0aWNzKTsKKyAgICAgICAgICAgICAgIHB1dF91bmFsaWduZWQo
+Z2V0X3VuYWxpZ25lZCgmY3RybC0+aHViX2Rlc2Mud0h1YkNoYXJhY3RlcmlzdGljcykKKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8IDB4ODAsICZjdHJsLT5odWJfZGVzYy53SHViQ2hh
+cmFjdGVyaXN0aWNzKTsKCiAgICAgICAvKiBQb3J0IFBvd2VyIENvbnRyb2wgKi8KICAgICAgIGlm
+IChIQ0NfUFBDKHJlZykpCi0gICAgICAgICAgICAgICBwdXRfdW5hbGlnbmVkKGdldF91bmFsaWdu
+ZWQoJmRlc2NyaXB0b3IuaHViLndIdWJDaGFyYWN0ZXJpc3RpY3MpCi0gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAweDAxLCAmZGVzY3JpcHRvci5odWIud0h1YkNoYXJhY3RlcmlzdGlj
+cyk7CisgICAgICAgICAgICAgICBwdXRfdW5hbGlnbmVkKGdldF91bmFsaWduZWQoJmN0cmwtPmh1
+Yl9kZXNjLndIdWJDaGFyYWN0ZXJpc3RpY3MpCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgfCAweDAxLCAmY3RybC0+aHViX2Rlc2Mud0h1YkNoYXJhY3RlcmlzdGljcyk7CgogICAgICAg
+aWYgKHhoY2lfc3RhcnQoaGNvcikpIHsKICAgICAgICAgICAgICAgeGhjaV9yZXNldChoY29yKTsK
+SW5kZXg6IGluY2x1ZGUvdXNiL3hoY2kuaAo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci0tLSBpbmNsdWRlL3VzYi94aGNp
+LmggIChyZXZpc2lvbiAxMDQ0NikKKysrIGluY2x1ZGUvdXNiL3hoY2kuaCAgKHdvcmtpbmcgY29w
+eSkKQEAgLTIxLDYgKzIxLDcgQEAKI2luY2x1ZGUgPGFzbS9pby5oPgojaW5jbHVkZSA8bGludXgv
+bGlzdC5oPgojaW5jbHVkZSA8bGludXgvY29tcGF0Lmg+CisjaW5jbHVkZSA8dXNiLmg+CgojZGVm
+aW5lIE1BWF9FUF9DVFhfTlVNICAgICAgICAgMzEKI2RlZmluZSBYSENJX0FMSUdOTUVOVCAgICAg
+ICAgIDY0CkBAIC0xMjI5LDYgKzEyMzAsNyBAQAogICAgICAgc3RydWN0IHhoY2lfZXJzdF9lbnRy
+eSBlbnRyeVtFUlNUX05VTV9TRUdTXTsKICAgICAgIHN0cnVjdCB4aGNpX3NjcmF0Y2hwYWQgKnNj
+cmF0Y2hwYWQ7CiAgICAgICBzdHJ1Y3QgeGhjaV92aXJ0X2RldmljZSAqZGV2c1tNQVhfSENfU0xP
+VFNdOworICAgICAgIHN0cnVjdCB1c2JfaHViX2Rlc2NyaXB0b3IgaHViX2Rlc2M7CiAgICAgICBp
+bnQgcm9vdGRldjsKfTsKCgoKCi0tLS0gUmVwbGllZCBNZXNzYWdlIC0tLS0KfCBGcm9tIHwgTWFy
+ZWsgVmFzdXQ8bWFyZWsudmFzdXRAbWFpbGJveC5vcmc+IHwKfCBEYXRlIHwgMDYvMjgvMjAyNiAw
+NDoxMCB8CnwgVG8gfCBCZWliZWkgWWFuZzwxMzczODE3NjIzMkAxNjMuY29tPuOAgXUtYm9vdEBs
+aXN0cy5kZW54LmRlIHwKfCBDYyB8IGJtZW5nLmNuQGdtYWlsLmNvbSB8CnwgU3ViamVjdCB8IFJl
+OiBbUEFUQ0hdIHVzYjogeGhjaTogRml4IGJOYnJQb3J0cyBvdmVyd3JpdHRlbiBieSBhbm90aGVy
+IGNvbnRyb2xsZXIgfApPbiA2LzI3LzI2IDI6MzcgUE0sIEJlaWJlaSBZYW5nIHdyb3RlOgo+IElu
+IGEgc3lzdGVtIHdpdGggbXVsdGlwbGUgWEhDSSBjb250cm9sbGVycywgdGhlIGdsb2JhbCBkZXNj
+cmlwdG9yLmh1Ygo+IChiTmJyUG9ydHMpIGNhbiBiZSBvdmVyd3JpdHRlbiBieSBhIGxhdGVyIGlu
+aXRpYWxpemVkIGNvbnRyb2xsZXIsCj4gY2F1c2luZyB0aGUgcm9vdCBodWIgb2YgYW4gZWFybGll
+ciBjb250cm9sbGVyIHRvIHJlcG9ydCB3cm9uZyBwb3J0Cj4gbnVtYmVycy4KPgo+IEZpeCB0aGlz
+IGJ5IGR5bmFtaWNhbGx5IHNldHRpbmcgYk5iclBvcnRzIGZyb20gdGhlIGN1cnJlbnQgY29udHJv
+bGxlcidzCj4gaGNzcGFyYW1zMSBpbiB0aGUgVVNCX0RUX0hVQiByZXF1ZXN0IGhhbmRsZXIsIGlu
+c3RlYWQgb2YgcmVseWluZyBvbgo+IGEgc3RhbGUgZ2xvYmFsIHZhbHVlLgoKSG93IGFib3V0IGhh
+dmluZyBvbmUgZGVzY3JpcHRvciBwZXIgY29udHJvbGxlciA/CgpUaGlzIGlzIHByb2JhYmx5IGVh
+c2lseSBkb2FibGUgaW4geGhjaV9sb3dsZXZlbF9pbml0KCkgd2l0aCBzb21lCmN0cmwtPmh1Yl9k
+ZXNjID0ga21lbWR1cChkZXNjcmlwdG9yLmh1YiwuLi4pOyBhbmQgcmVsYXRlZCB0d2Vha3MuCgpX
+aGF0IGRvIHlvdSB0aGluayA/Cg==
