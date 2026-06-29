@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2726C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 22:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC7FFC43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 22:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A17D84AAE;
+	by phobos.denx.de (Postfix) with ESMTP id D245284AC8;
 	Tue, 30 Jun 2026 00:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="j/g8d/oA";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lX0OBn4m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 995E784AC7; Tue, 30 Jun 2026 00:52:29 +0200 (CEST)
+ id C3FF184AB3; Tue, 30 Jun 2026 00:52:30 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B59D684AB3
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 00:52:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8929849FB
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 00:52:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 6176D3F174
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 22:52:27 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A1C103F2D4
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 22:52:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782773547;
- bh=2/gdpY+LGIYpLgamSCJOUppWNNia9s2x44dYgDB67fI=;
+ s=20251003; t=1782773548;
+ bh=SCt7G2hq2F9HLRZOpyVj5IVV31fNWlHztkgJIXkmwaM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=j/g8d/oABhLV9ERVsbRVjABKDndcw22hYpbV0Jdr30JDtwMZtWQzZhq74zmk51JPI
- F9s7TrO0CbIsq6QF+o1Wik2AL4QCmPpmgXG+11RVXfL5lwx7rL3lIUZJSnvXQTiX7t
- sFNPORLp+d9tKPuBSJ3qorSqrEKfNs8gHR/3hH63OdQeMVRQTOmAHeR3LJjbFMdXjP
- icWo8COZ63duazpDLZXcN9CYAP6v/EjTj2gY2cNGkMF1YtHwNhhZn1QaMnODnQ7/Dg
- I5fDJKCkfix9b1tOvSj7J8OukBsaj4aWB2bhCBg9844LPltwn7+cd4jkQADTWGXN9x
- Hl3T4wu6CdyAR2TjyWtAaSKAaluhl9XOFtwSVTNz0ReCqLwO6tZEShkS0lkL6WLA8c
- PuZ0k1QNAQF5nL3l5kl/bqtW/zKATrG1DrXy9spq43dBeat2VZeXfYNPBZPI4fjk1B
- rgt9R1qGLcEJMY1A3IHunR04Aga+5qM7bHXpHJPmqHP7j9t6NsSz294PzugnLk0en9
- eJkRc+KD3rLtQjQBGvrrO21e34pDLCCMatVLGI9kjj5wSyQf7pakGyM8i36oSNNINt
- 4LEMA+5Ov5OkN900kvSsFZMk/JokzLps4eWHlOTiSSKQujKs8GfoZzyX+6ELGo3wk+
- oOfhL/rojlBeggwwwsZver00=
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-473ac08a6a4so834235f8f.0
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 15:52:27 -0700 (PDT)
+ b=lX0OBn4mwY294E7WbeSIycyoLgz+whYjktStQ5R2xxjf7Q2eGFPt//o6k8pjGETrf
+ j4HfwN6NQG8O8Q3AKsfp8pbMXcjpWr/9dJUCLEv17yAogkv/xOpi454WgoFOxQqOZ1
+ C9H9HFYRvhYMEbjmzB3LXjPRarBWUDlEZnACTL9KfkHvin+bk3PTaqEbk8U3U0fPPp
+ Ydnsfqglb8H9h90n6RqqUArZXl99k/9MBQboLsGSnIpxMqnVOQj8WqG54w672q7NSX
+ +PhRacqivNVSMLO4xjiFZk1oyV896tonlhitWWsKIl0Zn7B5jO6ubyaBga84KgHjRV
+ xeYcqk0FxjLoFYlhNIzNdu0oMNjnuAomJyVjd6YGApguT6htovuLUrFB9kWAsgWSK6
+ K11G+HKz/7sKeDuQN6lbLLuUnxJRVomHarYizUv1xMiEk95ZNa49+a3kKnMz5XN49q
+ RopM4NeJsY4Va8ZTJS7QXPGx+ZqP7BDQSXOKrv75w+Pn+cX//iIFi1qwfjtvLq0cDT
+ C8cgVLbFzrgOxotDer3CUTS5CUPwIoGvnHo0o1gjIbA7lYd3/TC85+UOOxtgwQFRF9
+ 6eb6spt9kA7L9Jc3rlUokm82G1pHu6zLhOPjOMPiDpQgU8VXkg0CBBwCUQdDkcKXAx
+ Hzv9wIW+ecNSfdiIdpJhR+lI=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-493b8ed8e9cso2118745e9.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 15:52:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782773547; x=1783378347;
+ d=1e100.net; s=20251104; t=1782773548; x=1783378348;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2/gdpY+LGIYpLgamSCJOUppWNNia9s2x44dYgDB67fI=;
- b=lgcNKLIZEQunkMVYJc8zbrp07pn7niu8+4rqS4OMa2mYXG/Q5VxdFR86DFzYpG7iUE
- yzUvl5egGbHAPjTW/EMzzxEg87FNutNKa3KzNcAEGvfLmo9PIDb0BiunUOQpfQc5clDZ
- PMCGRg+OUeeDjg5imukQ1koqV1HipobZKnUJk3lh1deqLQspPs+Hqj9eSsIwcDDII6QL
- jHX4amhyl+t9A1UcrvwxToMJVOV23coULUXkaGFDa4HIFCxu264tXKN64sXPR6HIjn4t
- J6Wmpou6VHzmJeO8FU3/NmF2GuU/iG9t0ajuOhGi7xW0LyCqp/cDo8yLlvOEX5jUz3Bd
- hMVg==
-X-Gm-Message-State: AOJu0YzJ91eRbWJW63dnNMo5Boxb9nTMyaUq6IaXbl802gQI713zZbMD
- 6E/9jAA15JYkkiccCfhyWejtWF2gIQfJ0aB3ZocnkHeYQxL+KDjEr31HGjZLxvCsawEKDRCZJ6B
- odTQfOKBuGFAtZbhLPVF/3psT4xWfes2qYtXZcqp7MUT3/axAmgM4GWru8L5QvsaZuv8KqJQ=
-X-Gm-Gg: AfdE7clf/EnySlOSXJRMfmcQo65FxHcBiaaWasBNTOWHOP7GFIuCkCO4HP5wozbGEPh
- Naiib/u8bwNJ9QtmZPWm1ZhSJVPlNPkClirhCZsyI3al3iqKsox4Bdp97mKw7c6D0Zl1MyDOdlt
- oF0iYPQcgY4vKmFxqmZ18+OGbARUm9O+Wo1HXg+tGe/SvOZCpbj7U0aB2jBhGDdTopUWlNBIHmD
- BTWLJhj9/ryHx5Rvd210M6cae/12JmFhgy3UXiUki2op4sbnejEfbxrqpeOJ+rpo4/AXo6Cdlqh
- ciAW/Fy+jrrqCfMdM2S9R+N5tiGT7cUv6gcqOnHWkVkntwW2fAlIkuADKbu2PZblBgwasl5Ignq
- 3jtJ3Y2rlijGqz8QxIrb7zUh82SvRyZRt/RakeZp53e9zkxZjWeY1CcBhF0AAMmolfg==
-X-Received: by 2002:a05:6000:1acc:b0:474:6301:3e25 with SMTP id
- ffacd0b85a97d-4755259ebc0mr1573548f8f.28.1782773547044; 
+ bh=SCt7G2hq2F9HLRZOpyVj5IVV31fNWlHztkgJIXkmwaM=;
+ b=AYF/xf0i447TAfth+ogUFfdxUae+y+LoTwL7rRmvb8vIybdz1LRNG0w4rDkic1Y0z6
+ sJ6q5L/2Uwnma0Jl1LHbunpXKhXjzBkBOSwOKDgYXwSCPXYi9EjcpwmYW9IzN/DOKnhR
+ WJ58ukpO/8t52RHhHghSh+oVjTg7cotG13LziI4+231u3BKl3Wzrn1GrjDdDCvlXuAiS
+ iVIiWLQz5H6yscH7PdfzmfRFGoP0e86j+Vsud7xvNQPu0mE49q6dwo42zb12Tn+K4Arg
+ SGLxBVlwQblWIysrD28/+TERXEnbXo+co+2+oL8DYI7vsATrgbX5J3lKHrYlMT/m4cRD
+ lSVw==
+X-Gm-Message-State: AOJu0YzT4ehlNQnwjXxGJPJ9w+nCL9FDnP8TUrMOu8fcRPyLIOmrmdcn
+ 54SM+MhBZMz6Tu+o0eg5podqr6/WL6N4Oib8PjePGcpwR/36/eGK0/pOkLC8xjsduyVJ0j4wemf
+ Nr/WTL0gODjVL0LiMirLuwhIteMiAGV4RoRaFtdobF3bgiBmyAaewc6ha+vvuycudi6UawkwHwl
+ l6tvo=
+X-Gm-Gg: AfdE7ckXv9WVfHEh2oapKOnaz0Itne6v2+cPB7mdxlFf7xqVsdGb40RtHp+3I5QAiJm
+ CYAo+5gPDexSmt6lNNh0UTYx1qDh6YCemZoOGEJ96LPnVm55GXBPOHIuRYRQjhvSH3+DzzmsbBL
+ 8Iz1G747xNYdjmH9V7tYdYbxYPrsiAZMM1Cm6yQnp53XD7WA0l/uXe6hYtGoJjUV7Y6H4OYQ+Aq
+ k1Y+LeE3LTU2LAbbjWBD123txfA2wptJ4U9aIukAbjoUKJZum+RAe610ZQH7kqdPmMAcUD3biNP
+ bfnbh14kxo2x/XcnlN87vuXWYeKzchYtvJ23fBYEpt/e8OBlELmhPWUEuuxz44lMb3Gv0D3koo8
+ +rnZaEUF7J7w4IcVtwN2T8TxnSstAjGcvtdsA5TDYOGa2mvDTGVW3lSdOUakuwL6Epg==
+X-Received: by 2002:a05:6000:27cb:20b0:475:2171:add with SMTP id
+ ffacd0b85a97d-475523b35ccmr996945f8f.22.1782773548164; 
+ Mon, 29 Jun 2026 15:52:28 -0700 (PDT)
+X-Received: by 2002:a05:6000:27cb:20b0:475:2171:add with SMTP id
+ ffacd0b85a97d-475523b35ccmr996925f8f.22.1782773547846; 
  Mon, 29 Jun 2026 15:52:27 -0700 (PDT)
-X-Received: by 2002:a05:6000:1acc:b0:474:6301:3e25 with SMTP id
- ffacd0b85a97d-4755259ebc0mr1573527f8f.28.1782773546782; 
- Mon, 29 Jun 2026 15:52:26 -0700 (PDT)
 Received: from workstation5 ([2a02:3035:626:ba8f:5998:4d02:a4c4:fa47])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47563d194b0sm1965194f8f.1.2026.06.29.15.52.24
+ ffacd0b85a97d-47563d194b0sm1965194f8f.1.2026.06.29.15.52.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 15:52:25 -0700 (PDT)
+ Mon, 29 Jun 2026 15:52:27 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/2] efi_loader: fix buffer overrun in
- efi_sigstore_parse_siglist
-Date: Tue, 30 Jun 2026 00:52:17 +0200
-Message-ID: <20260629225218.209368-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/2] efi_loader: fix memory lead in efi_sigstore_parse_siglist
+Date: Tue, 30 Jun 2026 00:52:18 +0200
+Message-ID: <20260629225218.209368-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260629225218.209368-1-heinrich.schuchardt@canonical.com>
 References: <20260629225218.209368-1-heinrich.schuchardt@canonical.com>
@@ -113,33 +113,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In efi_sigstore_parse_siglist() sigdata is allocated. But instead of an
-allocation matching the size of sigdata, tainted external data was used
-to calculate the allocation size. This may lead to buffer overflows.
+When malloc() fails for sig_data->data, sig_data is leaked.
 
-* Correct the allocation size.
-* Follow the man-page. Use the structure size as second argument for
-  calloc.
+Free sig_data before jumping to the error path.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_loader/efi_signature.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ lib/efi_loader/efi_signature.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
-index 93a4f257016..6aff5c14a89 100644
+index 6aff5c14a89..1da656161bb 100644
 --- a/lib/efi_loader/efi_signature.c
 +++ b/lib/efi_loader/efi_signature.c
-@@ -703,8 +703,7 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+@@ -717,6 +717,7 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+ 		sig_data->data = malloc(sig_data->size);
+ 		if (!sig_data->data) {
+ 			EFI_PRINT("Out of memory\n");
++			free(sig_data);
  			goto err;
  		}
- 
--		sig_data = calloc(esl->signature_size
--					- sizeof(esd->signature_owner), 1);
-+		sig_data = calloc(1, sizeof(*sig_data));
- 		if (!sig_data) {
- 			EFI_PRINT("Out of memory\n");
- 			goto err;
+ 		memcpy(sig_data->data, esd->signature_data, sig_data->size);
 -- 
 2.53.0
 
