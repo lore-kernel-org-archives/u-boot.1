@@ -4,57 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DDCC43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:02:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 328BDC43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 08:03:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F556841F2;
+	by phobos.denx.de (Postfix) with ESMTP id 6A5D284866;
 	Mon, 29 Jun 2026 10:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="TnsK2QSl";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="j/86OehC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D50841F2; Mon, 29 Jun 2026 10:02:47 +0200 (CEST)
-Received: from mta-64-225.siemens.flowmailer.net
- (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ id 605F58496E; Mon, 29 Jun 2026 10:02:48 +0200 (CEST)
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 221D284105
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 10:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76EB684866
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 10:02:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
- 20260629080243ea73218f3700020714 for <u-boot@lists.denx.de>;
- Mon, 29 Jun 2026 10:02:43 +0200
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 2026062908024510fd5ccab9000207f9 for <u-boot@lists.denx.de>;
+ Mon, 29 Jun 2026 10:02:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=GX90VZNc8aXsvYWaySsDSH8P8RtDaRz8usiTNbbRbtg=;
- b=TnsK2QSlL0XuUeexuWbwyZEDpCnn8CERYKhOPZrxUnOVeo4hG8lUeDWE6satu4PjkaedOZ
- 9XG+F/73xAwmThgJ17kUJYaY5eZfE6asJ2CFroPov3aJfEOrYghXMrt/PGKg7OH0Sc+TZVZu
- nCeWZniXSi6gwscg9C+bfYZzDNM6ld6/qEYQO87+jprT52MxuH0+E7lTBgXoWT6R9Ls3IdmD
- UWMFvRZIbVTKl09VCJKejYtxCjh9PHuy1zU8CGQa6aZWlKSxt83tNGqM71H82rRxrJGgPhkr
- H5IJXDImJZ7c+b8WPn9dlJVUUDi7D+a3iua984nq8A+OiKQNmsjgMBpw==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=IfbuuzHgYRhOA7tlC8d0i1M70zp5lXCQ4sdR9ng5eXc=;
+ b=j/86OehCh2+B77a2y+rALLOcpgFfPBQDBectAYB9V6dAsYUFOEzuN8TTPVGHojxda/ACPq
+ 87h/t+EGJ4WKZaPVcxrZf1WbjK2Qrg3VFXDNCzyeSH/0Or2XgeWzFC4pe1qSY0jtRSf/T5zv
+ N5Z0n+TGwVlevOm4TnquuMwnmgdgHxpllz+yAkKjSkV9zC4ONoTvJEciUdPAOLY7xInFzlvT
+ 2szmA9n0yARuvk1kQASG3ZVvZpbMaDlgMap9YJoX9CG8lL9WyQQ0V+r+JA7UwgtzDC8jZq3p
+ 89vUfPXFgWdAaiu+C32+R5R9pIrdwSCRdzFCrupqh0fzeXDCsc801dWA==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v4 0/6] Improve U-Boot's TPM handling in the non-EFI case
-Date: Mon, 29 Jun 2026 10:00:59 +0200
-Message-ID: <20260629080241.36311-1-ludwig.nussel@siemens.com>
+Subject: [PATCH v4 5/6] tpm: unify the eventlog initialization
+Date: Mon, 29 Jun 2026 10:01:04 +0200
+Message-ID: <20260629080241.36311-3-ludwig.nussel@siemens.com>
+In-Reply-To: <20260629080241.36311-1-ludwig.nussel@siemens.com>
+References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -75,62 +71,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With EFI U-Boot always allocates a buffer for the TPM event log. If
-a previous bootloader stage started an event log, U-Boot would copy
-the entries to that allocated buffer.
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Without EFI U-Boot wants to reuse the event log memory from a
-previous bootloader stage instead. If U-Boot is first component to
-start the event log, e.g. when used in qemu there would be no memory
-allocated for the event log.
+When measured boot is enabled the EFI code is trying to initialize the
+eventlog using tcg2_log_prepare_buffer() and then adds an EV_S_CRTM_VERSION
+by calling efi_append_scrtm_version().
 
-So allocate memory in tcg2_log_prepare_buffer() if no event log was
-found and no buffer was allocated already.
-Also copy the address of the event log into the device tree for the
-kernel so the event log is accessible from Linux userspace too.
+Part of the EFI code was moved to the TPM core so bootm, booti etc can use
+it. A similar function called tcg2_measurement_init() function was added
+which is doing the same thing.
 
-Changes in v4:
-- reword commit message
-- include Ilias' patches for unifying event logs in the series
+A previous patch is unifying the internal eventlog structure we use
+whether the measurements are done via EFI TCG spec, or the bootX commands.
 
-Changes in v3:
-- fix test failure
-- sync description with cover letter
+There's a minor difference between the EFI code and the TPM one.
+The EFI part is appending events to the log using tcg2_agile_log_append(),
+while the TPM core calls tcg2_log_append_check(). The reason for that is
+that the EFI spec expects certain error codes and actions when
+GetEventLog has been called or the log buffer is full. Since this is the
+first event we add, the functions above will behave identically. On top
+of that I plan to unify those as well.
 
-Changes in v2:
-- fix return value handling
-- imply DEVRES in config TPM
-- use fdt_getprop for reading property
-- don't wrap #include in #if
-- fix memory leak in error case of tcg2_log_prepare_buffer
-- handle NULL elog parameter in tcg2_measurement_term
-- use CONFIG_TPM2_EVENT_LOG_SIZE
-- pass log_size instead of position in dt
+So for now get rid of the efi_append_scrtm_version() and call
+tcg2_measurement_init() from EFI as well.
 
-Ilias Apalodimas (2):
-  tpm: unify the tcg2 eventlog structures
-  tpm: unify the eventlog initialization
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+---
 
-Ludwig Nussel (4):
-  test: include mapmem.h explicitly
-  tpm: print all PCRs from pcr_read
-  tpm: allocate tpm event log if missing
-  Fix tcg2_measurement_init call
+(no changes since v1)
 
- boot/bootm.c               |  18 ++---
- boot/image-fdt.c           |  69 +++++++++++++++++
- cmd/tpm-v2.c               |  69 ++++++++++++-----
- include/tpm-common.h       |   2 +
- include/tpm_tcg2.h         |  44 +++++------
- lib/Kconfig                |   1 +
- lib/efi_loader/efi_tcg2.c  |  97 +++++-------------------
- lib/tpm_tcg2.c             | 151 ++++++++++++++++++++++++++++++-------
- test/boot/measurement.c    |   1 +
- test/py/tests/test_tpm2.py |   9 +--
- 10 files changed, 296 insertions(+), 165 deletions(-)
+ include/tpm_tcg2.h        | 20 --------------------
+ lib/efi_loader/efi_tcg2.c | 36 ++----------------------------------
+ lib/tpm_tcg2.c            | 21 +++++++++++++++++++--
+ 3 files changed, 21 insertions(+), 56 deletions(-)
 
+diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+index e954a276ecd..387073fd8a2 100644
+--- a/include/tpm_tcg2.h
++++ b/include/tpm_tcg2.h
+@@ -279,26 +279,6 @@ int tcg2_measure_data(struct udevice *dev, struct tcg2_event_log *elog,
+ 	tcg2_measure_data(dev, elog, pcr_index, 0, NULL, event_type, size, \
+ 			  event)
+ 
+-/**
+- * Prepare the event log buffer. This function tries to discover an existing
+- * event log in memory from a previous bootloader stage. If such a log exists
+- * and the PCRs are not extended, the log is "replayed" to extend the PCRs.
+- * If no log is discovered, create the log header.
+- *
+- * @dev			TPM device
+- * @elog		Platform event log. The log pointer and log_size
+- *			members must be initialized to either 0 or to a valid
+- *			memory region, in which case any existing log
+- *			discovered will be copied to the specified memory
+- *			region.
+- * @ignore_existing_log	Boolean to indicate whether or not to ignore an
+- *			existing platform log in memory
+- *
+- * Return: zero on success, negative errno otherwise
+- */
+-int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+-			    bool ignore_existing_log);
+-
+ /**
+  * Begin measurements.
+  *
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 85e7ecd0583..1da0bc37fa1 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -859,24 +859,6 @@ out:
+ 	return ret;
+ }
+ 
+-/**
+- * efi_append_scrtm_version - Append an S-CRTM EV_S_CRTM_VERSION event on the
+- *			      eventlog and extend the PCRs
+- *
+- * @dev:	TPM device
+- *
+- * @Return:	status code
+- */
+-static efi_status_t efi_append_scrtm_version(struct udevice *dev)
+-{
+-	efi_status_t ret;
+-
+-	ret = measure_event(dev, 0, EV_S_CRTM_VERSION,
+-			    strlen(version_string) + 1, (u8 *)version_string);
+-
+-	return ret;
+-}
+-
+ /**
+  * efi_init_event_log() - initialize an eventlog
+  *
+@@ -888,7 +870,6 @@ static efi_status_t efi_init_event_log(void)
+ 	 * vendor_info_size is currently set to 0, we need to change the length
+ 	 * and allocate the flexible array member if this changes
+ 	 */
+-	struct tcg2_event_log elog;
+ 	struct udevice *dev;
+ 	efi_status_t ret;
+ 	int rc;
+@@ -922,26 +903,13 @@ static efi_status_t efi_init_event_log(void)
+ 	 * Check if earlier firmware have passed any eventlog. Different
+ 	 * platforms can use different ways to do so.
+ 	 */
+-	elog.log = event_log.log;
+-	elog.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+-	rc = tcg2_log_prepare_buffer(dev, &elog, false);
++	event_log.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
++	rc = tcg2_measurement_init(dev, &event_log, false);
+ 	if (rc) {
+ 		ret = (rc == -ENOBUFS) ? EFI_BUFFER_TOO_SMALL : EFI_DEVICE_ERROR;
+ 		goto free_pool;
+ 	}
+ 
+-	event_log.log_position = elog.log_position;
+-
+-	/*
+-	 * Add SCRTM version to the log if previous firmmware
+-	 * doesn't pass an eventlog.
+-	 */
+-	if (!elog.found) {
+-		ret = efi_append_scrtm_version(dev);
+-		if (ret != EFI_SUCCESS)
+-			goto free_pool;
+-	}
+-
+ 	ret = create_final_event();
+ 	if (ret != EFI_SUCCESS)
+ 		goto free_pool;
+diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+index 2270b038cf5..e8fa7db5b06 100644
+--- a/lib/tpm_tcg2.c
++++ b/lib/tpm_tcg2.c
+@@ -564,8 +564,25 @@ int tcg2_measure_data(struct udevice *dev, struct tcg2_event_log *elog,
+ 				     event_size, event);
+ }
+ 
+-int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+-			    bool ignore_existing_log)
++/**
++ * Prepare the event log buffer. This function tries to discover an existing
++ * event log in memory from a previous bootloader stage. If such a log exists
++ * and the PCRs are not extended, the log is "replayed" to extend the PCRs.
++ * If no log is discovered, create the log header.
++ *
++ * @dev			TPM device
++ * @elog		Platform event log. The log pointer and log_size
++ *			members must be initialized to either 0 or to a valid
++ *			memory region, in which case any existing log
++ *			discovered will be copied to the specified memory
++ *			region.
++ * @ignore_existing_log	Boolean to indicate whether or not to ignore an
++ *			existing platform log in memory
++ *
++ * Return: zero on success, negative errno otherwise
++ */
++static int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
++				   bool ignore_existing_log)
+ {
+ 	struct tcg2_event_log log = {};
+ 	int rc;
 -- 
 2.43.0
 
-base-commit: 3cdce049f90d77c3f9221f1eb73922384c8972c3
-branch: us-tpm4
