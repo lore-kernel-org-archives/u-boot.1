@@ -4,125 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CDFC43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 15:44:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4A8C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 15:51:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F34D84942;
-	Mon, 29 Jun 2026 17:44:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AC7E849FB;
+	Mon, 29 Jun 2026 17:51:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zbhrBklU";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="iVdmeYe+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8EC8849A3; Mon, 29 Jun 2026 17:44:29 +0200 (CEST)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C5C3184A1F; Mon, 29 Jun 2026 17:51:51 +0200 (CEST)
+Received: from mail-dl1-x1229.google.com (mail-dl1-x1229.google.com
+ [IPv6:2607:f8b0:4864:20::1229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54E1984A36
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 17:44:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD21884942
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 17:51:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b7x5IK4Gptir+WvA8ZRtAuIE0+SjIvvdXQ7o5G6JQ7sN/hTbZp58cGzGUiXzeAFrVqm1C54uPQcRKX3rWZF1XYHyKgXVynbT3l3mKjtTpyZzoJWKqGvDRSTwyrH9e3cQwQcU/hCvA/BaxcTKSVuuqQHOENnV/lab71hkxQvah+oPOotWbUvXoRmQL6GEwhqKetfO6t0OrWIu126XxrrNsU0igGYSCdsUXvN0p/2HuLtSAQeQHrBl7hSkgCUZVi55z/C6/5wj9wCfMYAX3aX9E7HOoxP28ZUDKX9FxuHrI5epQoVXpgF4Ej+r+6OSTMkxtptjb0CmhKeb/y9AOCQhNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=82T+pFP1hpt7eDYUDBkuediLzDtdz6lWz7PRBrd3Lk8=;
- b=JzwQbzCmnJgaSsNkrSCq0xRXbHdyUZkB6INTmma+ZIqj1maqU2GzWKunokwMYuLpGZnAyUTgRQNiiykYhfAxklMFIgQbeV3J0ZoDlxD62B+NSr+HNLv6m/ZKA+XhMtv7pZCeTnQB4grDkUOZdoqvV1lYH4nwGmCuDJfcPQIbBJsBE1ktbMiLMQ2qdkNnNOaB6Yq0T9Rcp83KYUJC/0rYzKveWWptdyH8GrSzcOgqwO6cxl5rT3WvtBj0raN1vT1fISLV08okg7UDKMrTj2qudT/pwUNRu+MrzCTP8jI/UsZIx5ZV5ZDS95gHYTIDbgsBH6ZXE9MrHlyGy6GdzDKZGQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=82T+pFP1hpt7eDYUDBkuediLzDtdz6lWz7PRBrd3Lk8=;
- b=zbhrBklU2mSyqmagAYumY//KCEUHFL9g0yT6bE3hwsmRpLap34T7etyluyfnk4Y1Y0vL9o2meWmAkBYHfVzFcjdVK6bRaknZ+Fs6j19ICv8EmKsB9ABqkwkZTzjP0EyCM4k/Wa4GPS9KXmqnsWgDs4MuRMtgIVAx5wd85tGtPHk=
-Received: from SA0PR13CA0018.namprd13.prod.outlook.com (2603:10b6:806:130::23)
- by CY5PR12MB6408.namprd12.prod.outlook.com (2603:10b6:930:3b::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
- 2026 15:44:21 +0000
-Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
- (2603:10b6:806:130:cafe::a4) by SA0PR13CA0018.outlook.office365.com
- (2603:10b6:806:130::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Mon, 29
- Jun 2026 15:44:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 15:44:19 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 29 Jun
- 2026 10:44:18 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 29 Jun
- 2026 10:44:17 -0500
-Received: from localhost (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Mon, 29 Jun 2026 10:44:17 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Eugen Hristev <ehristev@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerome Forissier
- <jerome.forissier@arm.com>, Linus Walleij <linusw@kernel.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH 2/2] .mailmap: Run mailmapper and sync name locations
-Date: Mon, 29 Jun 2026 17:44:01 +0200
-Message-ID: <ca236aec5f56408fe30ceef1b56bea1be086fb91.1782747838.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <dc57b5048b5c64693b5347b811ffb8cd5107770a.1782747838.git.michal.simek@amd.com>
-References: <dc57b5048b5c64693b5347b811ffb8cd5107770a.1782747838.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=eric.chung@riscstar.com
+Received: by mail-dl1-x1229.google.com with SMTP id
+ a92af1059eb24-139b914bab6so4741366c88.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 08:51:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1782748307; x=1783353107;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=so1Pi36dt9Z0jb0lhUjdqTidKEhz5HwDanOFVctxBKQ=;
+ b=iVdmeYe+Ln1Z6x4ENjUuXoXu35UUhIu/4YCnaf5eYk/Npe6fQP0xW04UQirYpqkV1k
+ W6Ezr3Hb6ALqpRl8dppGNvFS8n8JNqc/eE6BBz5bH4kLqHT/GBfbnaCLnvCFqxQEuzNZ
+ tXcGYiD3FQM36hhHQR+t4k9WAVqxhZno1t1oDG5/VCv0Sd6EHW+HWzZuI70XvkE/Xe+J
+ aM8IFkmrJrh/HIeMu0fd0nZCeMKc599Tzq7JQKmD9plZpXImgJJp3/hqpSmr0VQsf4y0
+ 2P24ANMVNXgIfMlwqh6zIGr08TEtzWTzYErCowqkn5tvTPP4/7nwKmR/boA+9xipa4pX
+ Rw8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782748307; x=1783353107;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=so1Pi36dt9Z0jb0lhUjdqTidKEhz5HwDanOFVctxBKQ=;
+ b=V3hWVu4XOkVDpbhaQhawGaxjXAQFQngnCZznmuegkiLYnXQFVRBb0WhLKJOatHyw4e
+ ICJjjc5YgS0mWXFVJD0IIU23QAtJKRZQ2fwm62B6EeKZdsKUaRUhk5HnomhuJBH5UNj5
+ yEB1mdPVSiQedS3XtpIxESKrnLYq/5yYmY5F4liL4gjLgGpWfeHjxxjsKqa2/zo5u+CY
+ cDCeQ3BYbCU0cOjXHR37YN2hQfIF/jBZjlUsaalWv9kuzZuq18WBws3dUWac/jK5XcwZ
+ MrGeabVPVuD98cbJemBbtMommUdHoJph3rfyGQ/DxavbedErY0rfABOgr1mSR4634Id9
+ w7fw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+dDrI02KRsM+NRL8JH3br2AMns6liabmeUSH/HD8dFAyOI/+9Oe4r/JGVDXe+OBnv8KbcmdP8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxL2voibYWxOPe8OOY1HiLw7EbVSUqS72MIWMlGW1wT/l6MroAR
+ aHVUH2uYDfVRgXzdIv9XwNJfWR+s0U/QJTrVrexvQGsUn0nREOf882Z7o3p/eeFX+4s=
+X-Gm-Gg: AfdE7clKJ/fllWMX4XiPiQ25zXuFivMRVJi8FfVfSG7TB3kaB/HkS1DsvsSKv8M07nZ
+ 85p5KNbeA4vBiSVvBunQFj4bGxroiU+eJDrLGKzjdjO9ZaKyJ5RcvIv3eF/8MjcRP2LeFHj5+4i
+ M/9bvB+lS65EHMgLMlZEVhHA23Spf1iybACAomK9nne084GYwlKqNet+uli7SPdJOv3i3rznaJI
+ qCBESvwooQ1yioKvOO7sY2ETZeCpTlajn4fzgOgnEf7iHZswaUUr936nGcrVgy3/Lk0NHFRoeRj
+ N7I7cDjzQEx/RiGUiFrUD6GeRJonN9fSgX/1C2Zc1JRyyed+lzu6FbZZ8jqONcDWDrEmDVI3Gwh
+ 45hlBjDs4H6lVUGKE2EeuFTgs7cNfUI5tkacLSD1zUOh6ec6ORocPnQzYY8lIwmR2TcOkhQuCuc
+ 7uyqngw3ZTrGgt/L3qvND8aGxDjdL50HpUFtPJkaGlN2FnqZL8lRfPJDIkkWEUSMiQs+ywKx9S7
+ v8kMXNoDN8Jy4p8vuZ/4iclNmo+yp7BmL6Veh5e+uBKJfRsZz1Ukg==
+X-Received: by 2002:a05:7022:41a7:b0:139:ed5a:eeed with SMTP id
+ a92af1059eb24-139ed5b0594mr7430265c88.44.1782748306923; 
+ Mon, 29 Jun 2026 08:51:46 -0700 (PDT)
+Received: from [127.0.1.1] ([209.170.101.129])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-139d8f6d2e4sm46510090c88.7.2026.06.29.08.51.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jun 2026 08:51:46 -0700 (PDT)
+From: Eric Chung <eric.chung@riscstar.com>
+Subject: [PATCH v2 0/8] spacemit mmc driver
+Date: Mon, 29 Jun 2026 23:51:14 +0800
+Message-Id: <20260629-m4-v2-0-cbc91c6b83d8@riscstar.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6372; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=3RgY0UzSeJSoWxqmzG82yVzf5ZkDeYHmJiRc5PHWYD4=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ5TTpWdOGteE6rgPEfHY33c1OLV99fGKb79PZvVgXvr
- YIPJdlXdJSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEyrgYGS5xnAgwfBctyfzu
- luVS896jOxNXf5hzZ+k15swUe+cJGcsZ/tko5r5Vv3iX31jx5d44d4EJkuwbeCea13ocl1644F/
- vCxYA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|CY5PR12MB6408:EE_
-X-MS-Office365-Filtering-Correlation-Id: b30d8c3f-bf90-4686-20ba-08ded5f548a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|7416014|376014|82310400026|36860700016|1800799024|22082099003|18002099003|11063799006|3023799007|56012099006;
-X-Microsoft-Antispam-Message-Info: cYjObxfU0oWp/ccf6eUD2eobFJc8hcLaiEuat/f6o4Th0HyiEgdAB5m8TPoQEcnWbUD6+GW+C/ZYmEY6pQbUP7OttGfm4YKL+9N2ipg8VIy3Rc94kb4QYnylfmp7jkizq01zo654GrOHl5qijMxPfhZyocIjV+rTvVhqMHyJa2M17WDkMBdfV4VJye1/8mClz3RRUA4XWwF5AuZCHXouAIMOfhA17sm3cFDmMtf0HedhsMHuLZwff4DpasVIjjKqQ5ecSPr8j5aYCghefpnlWuWuDxjCRKeXQiOGJ2sn2TxrFSgoCscAzh2ur52o8z23po0ORXAZMtZclfZ7/7ZcNIA+1XnQTKoIhCwZUbSxhZqTggkyRJfSJ5uqIQ5SdXnSWOMIi7jareQnpeZ7DUUz7aLrjygdb4aZhaED4li80xIrPEf3yCI1T2WZaJ4YrsmQVamBDBOWyZf8h/AGcFWLnO0azk8it/di6sHdY35dVl8Lot1nt1xuieDZoFlUqci43g1iC24XHnRuWiVC+doVrLhbZoaxv3eA4Vdv8CP1JYLrCbT/XNS0MJgE7ZXAclReWXqUvHp3UkWWIFviatZ9QEt7GdAhYiSqQTDk1/Oh8HSkgSw9L9US5FGocowsVjrhXG7cFeV48R/cWXX4faHUnlMdwzdZUpHJt6VS5IVve7WCvDYnYCvFCEBJfxGk5oFFcehi0Mh6kTu7IeEIKLqB5w==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(7416014)(376014)(82310400026)(36860700016)(1800799024)(22082099003)(18002099003)(11063799006)(3023799007)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: DgU2zKAPxi5aF1tXlR+sQA+kU9OlUtLDA1vlktpwG0iiZ/9c7yb5tFXJIQB2rkjNrDvuLjAIB7RX1TKvu0q4GJUS/7OiRUTEDiTBKMO9NZ5LV97s+j7K0OrQhnEiXnMxIRdJx7YwThzAY8Ygg7ayng5EPQj9WAP7MWMCCrzFcHVBUjNqLLZNfIlAMHSuQOJvu+eyxg+VlxMKDd87kBHAhFSoo1jPdBMcVvVmyLxVO1cvMrFV2SFK7yHG7n/iJtnjBWLfQnED0Z++Tl/KezVMa+1HdAFPITv7gtjyb3RZb+jbEDKsalN5L6NVK6bEVy91ysZKAFI+Fn/1ZYKW9ueqOyYcqwsebapj9TVRMgDpbkiiE+tFW5fOhhoDXZVg411W5RkF49vEbIfyF0WMg0XjovTsdwxoVROkwOHdAttNz5M6loV8PldVFRNqoulZoigW
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 15:44:19.5074 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b30d8c3f-bf90-4686-20ba-08ded5f548a1
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6408
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHKUQmoC/02NwQ6CMBBEf4Xs2Zq2wYZ68j8IByhbWRPAdGujI
+ f13oV48zuTNmw0YAyHDtdogYCKmddmDPlXgpn65o6Bxz6ClNtJoK+Za2AalMhfr0Q+wg8+Ant5
+ F0kLS0P06fg0PdPFYH9REHNfwKU9JFfZfmpSQolfKN2NtDRp9C8SOYx/Obp2hyzl/AQMjrkCtA
+ AAA
+X-Change-ID: 20260629-m4-98e01659fefb
+To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
+ Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guodong Xu <guodong.xu@riscstar.com>, Eric Chung <eric.chung@riscstar.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,111 +118,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch is output from
-scripts/mailmapper > tmp; mv tmp .mailmap
-with moving <swarren@wwwdotorg.org> and <swarren@wwwdotorg.org> to the same
-block with "This contributor prefers not to receive mails" description.
+This series adds MMC support for the SpacemiT K1: an SDHCI platform
+driver, the SD card device-tree overlay, defconfig options, and SPL
+boot-device selection from the SoC strap/config registers. The SDHCI
+driver is usable in both SPL and U-Boot proper.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+write images to eMMC.
+
+This series sits on top of three series still under review, and must be
+applied after them, in this order:
+
+  1. K1 clock/reset/dts migration [1]    (8 patches)
+  2. K1 SPL bring-up v4 [2]              (14 patches)
+  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
+  Then this series                        (8 patches)
+
+For each series:
+
+  b4 am <cover-msgid>
+  git am ./*.mbx
+
+Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
+Link: https://lore.kernel.org/u-boot/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/ [2]
+Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
+
 ---
+Changes in v2:
+- EDITME: describe what is new in this series revision.
+- EDITME: use bulletpoints and terse descriptions.
+- Link to v1: https://patch.msgid.link/20260629-m4-v1-0-a11f8d496e62@riscstar.com
 
- .mailmap | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+Changes in v2:
+- cmd: drop patches on eminfo & tlv_eeprom.
+- configs: Enable ADMA and SYSCON support.
+- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
+- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
+  read/write, correct pinctrl state from "fast" to "uhs".
+- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
+  transfers.
+- pinctrl: k1: Add new IO power domain configuration support for
+  dual-voltage GPIO banks.
+- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
+- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
 
-diff --git a/.mailmap b/.mailmap
-index d9ba6638728b..81883490934b 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -15,6 +15,7 @@
- # Proper Name <proper@email.xx> <commit@email.xx>
- # Proper Name <proper@email.xx> Commit Name <commit@email.xx>
- 
-+<duje@dujemihanovic.xyz> <duje.mihanovic@skole.hr>
- AKASHI Takahiro <akashi.tkhro@gmail.com> <takahiro.akashi@linaro.org>
- Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com> Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
- Alexander Graf <agraf@csgraf.de> <agraf@suse.de>
-@@ -42,21 +43,20 @@ Chen-Yu Tsai <wens@kernel.org> <wens@csie.org>
- Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
- Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabora.com>
- Dirk Behme <dirk.behme@googlemail.com>
--<duje@dujemihanovic.xyz> <duje.mihanovic@skole.hr>
- Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
--Eugen Hristev <ehristev@kernel.org> <eugen.hristev@microchip.com>
--Eugen Hristev <ehristev@kernel.org> <eugen.hristev@linaro.org>
- Eugen Hristev <ehristev@kernel.org> <eugen.hristev@collabora.com>
-+Eugen Hristev <ehristev@kernel.org> <eugen.hristev@linaro.org>
-+Eugen Hristev <ehristev@kernel.org> <eugen.hristev@microchip.com>
- Fabio Estevam <fabio.estevam@nxp.com>
- Greg Malysa <malysagreg@gmail.com> <greg.malysa@timesys.com>
- Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
- Harsha <harsha.harsha@amd.com> <harsha.harsha@xilinx.com>
--Heiko Stuebner <heiko.stuebner@cherry.de> <heiko.stuebner@theobroma-systems.com>
--Heiko Schocher <hs@nabladev.com> <hs@denx.de>
--Heiko Schocher <hs@nabladev.com> <hs@pollux.denx.de>
--Heiko Schocher <hs@nabladev.com> <heiko.schocher@invitel.hu>
- Heiko Schocher <hs@nabladev.com> <[hs@denx.de]>
-+Heiko Schocher <hs@nabladev.com> <heiko.schocher@invitel.hu>
-+Heiko Schocher <hs@nabladev.com> <hs@denx.de>
- Heiko Schocher <hs@nabladev.com> <hs@pollux.(none)>
-+Heiko Schocher <hs@nabladev.com> <hs@pollux.denx.de>
-+Heiko Stuebner <heiko.stuebner@cherry.de> <heiko.stuebner@theobroma-systems.com>
- Heinrich Schuchardt <xypron.glpk@gmx.de> <heinrich.schuchardt@canonical.com>
- Heinrich Schuchardt <xypron.glpk@gmx.de> xypron.glpk@gmx.de <xypron.glpk@gmx.de>
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com> <ibai.erkiaga-elorza@xilinx.com>
-@@ -72,14 +72,13 @@ Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de> <jakob.unterwurzacher@theo
- Javier Tia <floss@jetm.me> <javier.tia@linaro.org>
- Jay Buddhabhatti <jay.buddhabhatti@amd.com> <jay.buddhabhatti@xilinx.com>
- Jernej Skrabec <jernej.skrabec@gmail.com> <jernej.skrabec@siol.net>
--Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
- Jerome Forissier <jerome.forissier@arm.com> <jerome.forissier@linaro.org>
-+Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
- John Linn <john.linn@amd.com> <john.linn@xilinx.com>
- Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyothee@xilinx.com>
- Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyotheeswar.reddy.mutthareddyvari@xilinx.com>
- Kalyani Akula <kalyani.akula@amd.com> <kalyani.akula@xilinx.com>
- Klaus Goger <klaus.goger@cherry.de> <klaus.goger@theobroma-systems.com>
--Masahisa Kojima <kojima.masahisa@socionext.com> <masahisa.kojima@linaro.org>
- Linus Walleij <linusw@kernel.org> <linus.walleij@linaro.org>
- Love Kumar <love.kumar@amd.com> <love.kumar@xilinx.com>
- Lukasz Majewski <lukma@denx.de>
-@@ -89,8 +88,9 @@ Marek Vasut <marex@denx.de> <marek.vasut+renesas@gmail.com>
- Marek Vasut <marex@denx.de> <marek.vasut@gmail.com>
- Marek Vasut <marex@denx.de> <marex at denx.de>
- Markus Klotzbuecher <mk@denx.de>
--Masahiro Yamada <masahiroy@kernel.org> <yamada.masahiro@socionext.com>
- Masahiro Yamada <masahiroy@kernel.org> <yamada.m@jp.panasonic.com>
-+Masahiro Yamada <masahiroy@kernel.org> <yamada.masahiro@socionext.com>
-+Masahisa Kojima <kojima.masahisa@socionext.com> <masahisa.kojima@linaro.org>
- Mattijs Korpershoek <mkorpershoek@kernel.org> <mkorpershoek@baylibre.com>
- Michal Simek <michal.simek@amd.com> <Monstr@seznam.cz>
- Michal Simek <michal.simek@amd.com> <michal.simek@xilinx.com>
-@@ -105,8 +105,6 @@ Nava kishore Manne <nava.kishore.manne@amd.com> <nava.manne@xilinx.com>
- Neal Frager <neal.frager@amd.com> <neal.frager@xilinx.com>
- Neil Armstrong <neil.armstrong@linaro.org> <narmstrong@baylibre.com>
- Nicolas Saenz Julienne <nsaenz@kernel.org> <nsaenzjulienne@suse.de>
--This contributor prefers not to receive mails <noreply@example.com> <pali@kernel.org>
--This contributor prefers not to receive mails <noreply@example.com> <pali.rohar@gmail.com>
- Padmarao Begari <padmarao.begari@amd.com> <padmarao.begari@microchip.com>
- Patrice Chotard <patrice.chotard@foss.st.com> <patrice.chotard@st.com>
- Patrick Delaunay <patrick.delaunay@foss.st.com> <patrick.delaunay@st.com>
-@@ -147,9 +145,11 @@ Stefan Roese <stefan.roese@mailbox.org> <stroese>
- Stefano Babic <sbabic@nabladev.com>
- Stefano Stabellini <stefano.stabellini@amd.com> <stefano.stabellini@xilinx.com>
- Sughosh Ganu <sughosh.ganu@arm.com> <sughosh.ganu@linaro.org>
--No generic patch CC mail please <noreply@example.com> <swarren@wwwdotorg.org>
--No generic patch CC mail please <noreply@example.com> <swarren@nvidia.com>
- Sumit Garg <sumit.garg@kernel.org> <sumit.garg@linaro.org>
-+This contributor prefers not to receive mails <noreply@example.com> <pali.rohar@gmail.com>
-+This contributor prefers not to receive mails <noreply@example.com> <pali@kernel.org>
-+This contributor prefers not to receive mails <noreply@example.com> <swarren@nvidia.com>
-+This contributor prefers not to receive mails <noreply@example.com> <swarren@wwwdotorg.org>
- Tom Rini <trini@konsulko.com> <trini@ti.com>
- Tomas Thoresen <tomas.thoresen@amd.com> <tomast@xilinx.com>
- TsiChung Liew <Tsi-Chung.Liew@freescale.com>
+To: u-boot-spacemit@groups.io
+To: u-boot@lists.denx.de
+Cc: Huan Zhou <pericycle.cc@gmail.com>
+Cc: Guodong Xu <guodong.xu@riscstar.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Han Xu <han.xu@nxp.com>
+Cc: Yanir Levin <yanir.levin@tandemg.com>
+Cc: Christoph Stoidner <c.stoidner@phytec.de>
+Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+Cc: Daniel Palmer <daniel@thingy.jp>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Rick Chen <rick@andestech.com>
+Cc: Leo <ycliang@andestech.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+
 ---
-base-commit: bdcadd64dd750f617943ee7088ea4724e19d1f8b
-branch: debian-sent3
+Eric Chung (8):
+      pinctrl: k1: add IO power domain configuration support
+      mmc: sdhci: add quirk to enable CMD23 for multi-block transfers
+      mmc: k1: add sdhci platform driver
+      dts: k1: add SD card support in u-boot overlay
+      configs: k1: enable SD and eMMC support
+      doc: spacemit: flash on K1 SoC based boards
+      config: k1: enable ENV support for eMMC
+      spacemit: k1: load product name from environment variable
 
--- 
-2.43.0
+ arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  87 +++-
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  82 +++-
+ board/spacemit/k1/MAINTAINERS             |   3 +-
+ board/spacemit/k1/spl.c                   |  50 +--
+ configs/spacemit_k1_defconfig             |  26 +-
+ doc/board/spacemit/index.rst              |   1 +
+ doc/board/spacemit/k1-flash.rst           | 157 +++++++
+ drivers/mmc/Kconfig                       |   7 +
+ drivers/mmc/Makefile                      |   1 +
+ drivers/mmc/mmc.c                         |  22 +-
+ drivers/mmc/sdhci.c                       |   3 +
+ drivers/mmc/spacemit_sdhci.c              | 681 ++++++++++++++++++++++++++++++
+ drivers/pinctrl/spacemit/pinctrl-k1.c     |  84 +++-
+ include/mmc.h                             |   5 +-
+ include/sdhci.h                           |   1 +
+ 15 files changed, 1157 insertions(+), 53 deletions(-)
+---
+base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
+change-id: 20260629-m4-98e01659fefb
+
+Best regards,
+--  
+Eric Chung <eric.chung@riscstar.com>
 
