@@ -4,201 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7EFCC43327
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 04:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A536EC43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 05:17:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBC12843B6;
-	Mon, 29 Jun 2026 06:41:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 85BFF843B6;
+	Mon, 29 Jun 2026 07:17:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jhFcKnbP";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ol8z8b6e";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="C48hnbgE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3746E846A4; Mon, 29 Jun 2026 06:14:49 +0200 (CEST)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
+ id 84757846A4; Mon, 29 Jun 2026 07:17:53 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F64C84105
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 06:14:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78E2E84105
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 07:17:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65T2d9hl892291; Sun, 28 Jun 2026 23:13:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=/UopRVJrv6qndBmaXE2sWNRMb+TzpDTkzh0g5/ZF4
- Zc=; b=jhFcKnbPzUNM5bSuSng6LCM1lTne7oTrZwoE+AM7wd62o/NMw+SagPBjR
- WRqYuityLxacaQWhXcFlu+NVUtiiVANe1uj4k9Z0ItR9cdaIj68PdrkQ5qeMcRiG
- DmZ8Uda1TM1wQ8JThhRHxg4E597JoH+fO9ODZhEwk0WsAJPrdBxGwwkhb/6bOcL1
- mpyZVU77Q9dlWWyOSd3hCnP4glzMM66iSCKYw/Pz5ZsUk5Bf4graHdq3TDGCVQpb
- QHxMInFsDnCFwedfHdWoJLnJWwTt3PGCLsV8zWfUkrq2/L1DLCSjTwdk9qzpN4VH
- FFntRJRk84gDSJ/deiPetKxfqV2MQ==
-Received: from ph8pr06cu001.outbound.protection.outlook.com
- (mail-westus3azon11012004.outbound.protection.outlook.com [40.107.209.4])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4f2wnpctsp-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Sun, 28 Jun 2026 23:13:47 -0500 (CDT)
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=svGZt15NudmqMxGNuL/obCQCqB+yfieH8Q8H2EaAh1E+OIZwux6M4dtwxtx08C41QEV3jY3zusUPAOiwt5L2KDMMBr27EmWKV+TpXzgHOXs1nXDOlWBNliCDD/3TS+AjM5VOPbgSueU1X4PvaYnOzv5QuG7nz8QHMd55kWKt5YItR30V2JSM9m4yoyLyt/aEXkYNk0w+3DT//M6sGro2/fUzKXSUk8cffwsJa0eCt3zNulFeducUq6HRJkPl2Hgs/ZasxcdKrvLGyI25c0d51d8aWaULDN+HrMmPt76yjOikx3Vp5dFlAnbnIfUY9YPp0rDyVmRdvr6zAeFDJPJJDQ==
+ b=BB+vq+uoX63rfBa7wq3t3p2F7sVLeJu9uunlfHjBEAEQxC2yVQwh47qCul+WDmzc3LDenOYOKJybmE4H3yW6gTvC9N+9le/lCM6/EOMZrk4ASar7qEedj7fv7GOWo8freDZ0ezlwW/mzlMKgweefO/Oh1R1gtfmMQs1gWGQgASwZ+XLZP/uRv3/9DpQ4X3MuBzeh+FVCmSicXJkLBsTep+okIlpmRkDxCSbjtVkM2PN6d2QwRKCVPXula7nv9B3uQCuBsUIgZkJtbRLu2uATXjEReUAW28LtcxJhfVynGICKMskHwK0JOYibOJP/TCB2WOZdysUXm0TzdCtO1qTjLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/UopRVJrv6qndBmaXE2sWNRMb+TzpDTkzh0g5/ZF4Zc=;
- b=zTuEBGMzvaxZ0NPZz3TncXjqzE2+RstJzNjZEq//59xQ9hFlwDGaCxIsoQhZyx/LSYjd7yVtVRik/XaDXs9ST/xRFSICwYGxypp63ncpYMafgi5twMkQsBwa8Ts9LrIDyKbg8aD2fVAlCi5gFZWKYPLjMWjS5v/gMSm6XbYSExirLCtXaJlh+YeirJ+V/bmmWDVzBsHpWR0TmJXTnHRf9hU5z4E68h0LqxF/i+cMRnrZe7ASlb93eEhvyG1cKD5ginOmM2zWDr7fVpcB8An2wk2KrgK7ieYl4lp6qzpdXYi9YQsQJp5bsmLlf4jsPpclWG66g2jIztUtnvEH97y3hA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=googlemail.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=e6sZPwZLMOpM0MNP/2/Og39kzuNbe9Z7Jp/DKeKN8UQ=;
+ b=qhS7qdfWY8BxAJnScBfLsX9URYOHY2zONKEcyndpbcqvdOC3Ia5o4ZOiTYipq6ZMdgnbRWo1U1WLveyN0yXy1Q3KrIS5bISZrPO11oMb9bGGrLowOd8C0F1Z+s2FTElwz3GFgocwRayd9jAY7xXbC9q7jncHsw390gOVpYgRKwBlEzJjXgKl0FWkrJkIcMrKumTWs3FDBh9xgSoAYWhItHpoD6tjcqRgfXy511J1M8PxHCkFYB1mGePzi5QvMG7fD/n7C3p9VzpDwymQ4kt5/NTrYB1QNOcQIoxsn52Ww4pDhIXEEMJvz5g6ARTXYDTBBW+jmjd0Z9k2YEnNGn8yQg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/UopRVJrv6qndBmaXE2sWNRMb+TzpDTkzh0g5/ZF4Zc=;
- b=Ol8z8b6eulHCICufP5mCUNROj1nYx58+3H0FbY1/3qBqw0IDPamXAQaUrgnK/ME117oDnI7fr/N82CeZBGPwG70spoaOskOZ+4xf243kgHn5uBieuGTr2GqXS3dn9jM1K4Jzn2WrggIgWtPsPqQCBsS4ZpAXgq0mg+KaFJTICks=
-Received: from SJ0PR13CA0037.namprd13.prod.outlook.com (2603:10b6:a03:2c2::12)
- by IA3PR10MB8514.namprd10.prod.outlook.com (2603:10b6:208:571::14)
+ bh=e6sZPwZLMOpM0MNP/2/Og39kzuNbe9Z7Jp/DKeKN8UQ=;
+ b=C48hnbgEeqD6yvCc/vQlvuK+H3F1TFtLroAVidIstJ5i1RZKyqbzFkmnEU+ZL+lNt2IySzid+syWm83Gij308wjJYlAQoSBcfsiVeG5YWJsqa/P48db1rhq0MP1pFjiF7Z+S05QTP5Y0dPvE2DrK7GoVfu0aHe6SUX/2w6DgoIr0Ok5IcusSl8zQHJ5IBEKTbCWHnkO3Vp5TOgmN3AYqAPlyQ2eMdL3mJXFCk/mbV3js9Jct37OXMiyJjZ3vSlZwKDIeZxlY73ukd4ThfieVUvQ2fbIqHQ4xyiBRxgsawUgroDZWwMQJhgJlAR554wsn4tjjHnwGwkHVISmSuEggQQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
+ by AS8PR04MB8466.eurprd04.prod.outlook.com (2603:10a6:20b:349::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
- 2026 04:13:43 +0000
-Received: from SJ1PEPF00002320.namprd03.prod.outlook.com
- (2603:10b6:a03:2c2:cafe::9) by SJ0PR13CA0037.outlook.office365.com
- (2603:10b6:a03:2c2::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Mon, 29
- Jun 2026 04:13:42 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF00002320.mail.protection.outlook.com (10.167.242.86) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 29 Jun 2026 04:13:42 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 28 Jun
- 2026 23:13:42 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 28 Jun
- 2026 23:13:41 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Sun, 28 Jun 2026 23:13:41 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65T4De0Y3166731;
- Sun, 28 Jun 2026 23:13:41 -0500
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.12; Mon, 29 Jun
+ 2026 05:17:49 +0000
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0139.009; Mon, 29 Jun 2026
+ 05:17:49 +0000
+Date: Mon, 29 Jun 2026 13:21:11 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/4] power: regulator: Add helper to set voltage within
+ an acceptable range
+Message-ID: <akIAx9umMKvjMTgs@shlinux89>
+References: <20260628102527.1247889-1-jonas@kwiboo.se>
+ <20260628102527.1247889-2-jonas@kwiboo.se>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260628102527.1247889-2-jonas@kwiboo.se>
+X-ClientProxiedBy: MA0PR01CA0090.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:ae::19) To AM8PR04MB7874.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24d::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 29 Jun 2026 09:43:40 +0530
-Message-ID: <DJL8ONJL18S7.3MUBPJW6U56QR@ti.com>
-To: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Heiko Schocher
- <hs@nabladev.com>, Dinesh <dinesh.maniyam@altera.com>, Peng Fan
- <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, "Jerome
- Forissier" <jerome.forissier@arm.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
- "Neha Malcom Francis" <n-francis@ti.com>, Marek Vasut <marex@denx.de>,
- "Sebastian Reichel" <sebastian.reichel@collabora.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, Nick Hu <nick.hu@sifive.com>, Jimmy Ho
- <jimmy.ho@sifive.com>, Michal Simek <michal.simek@amd.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peter Korsgaard <peter@korsgaard.com>, "Casey
- Connolly" <casey.connolly@linaro.org>, Justin Swartz
- <justin.swartz@risingedge.co.za>, Bastien Curutchet
- <bastien.curutchet@bootlin.com>, Jonathan Stroud <jonathan.stroud@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>, Mateus Lima Alves
- <mateuslima.ti@gmail.com>, Jamie Gibbons <jamie.gibbons@microchip.com>,
- Daniel Palmer <daniel@thingy.jp>, Angelo Dureghello
- <angelo@kernel-space.org>, Peter Robinson <pbrobinson@gmail.com>,
- Lucien.Jheng <lucienzx159@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Beiyan Yun <root@infi.wang>, Weijie Gao
- <weijie.gao@mediatek.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- "Romain Gantois" <romain.gantois@bootlin.com>,
- Alice Guo <alice.guo@nxp.com>, "Tien
- Fong Chee" <tien.fong.chee@altera.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Boon Khai Ng <boon.khai.ng@altera.com>,
- Shawn Lin <shawn.lin@rock-chips.com>, Igor Belwon
- <igor.belwon@mentallysanemainliners.org>,
- Alexey Charkov <alchark@gmail.com>, Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Yegor Yefremov <yegorslists@googlemail.com>
-Subject: Re: [PATCH] treewide: Kconfig: use bool instead of tristate
-From: Anshul Dalal <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260625-tristate_fix-v1-1-95e16153d752@ti.com>
- <CAFLszTiMJDrOhGcJtsr6JKQYu8NZTRWZF+3aQ0yO0CGMVZAfEA@mail.gmail.com>
-In-Reply-To: <CAFLszTiMJDrOhGcJtsr6JKQYu8NZTRWZF+3aQ0yO0CGMVZAfEA@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002320:EE_|IA3PR10MB8514:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ab316a9-15a2-4d20-01cf-08ded594ce58
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AS8PR04MB8466:EE_
+X-MS-Office365-Filtering-Correlation-Id: 359c53aa-0bd8-4b95-9ba9-08ded59dc310
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|23010399003|376014|7416014|4143699003|56012099006|18002099003|22082099003|13003099007;
-X-Microsoft-Antispam-Message-Info: Mo0NzAR2b2trzctDbA3b/3QGJaSdbNm00POO6UtwtiSwZqSnAlVlFgg+ZMogOq7f/Qf2N1EeaSfUUNoP8iG6HEpyBwvNDZa6/fw9SGFuE9McY/TzUW05vACVzW3QgUd1DnEazKlNYUtxPIOum3Gl677AMuUN7nW2bP2iX1Fox1acuoZ/xWclSORdYQv0ATl/Ax8jOlPSaC5U81EYGw3WoIIbJq+ifFYTIVK0XoIwy523cx1bqU2Je7S6hacY5WHSS2NZiOAvMm5qr8RTt8/N3JZ09QszaqA2ov5DtM1W+sN485m6OhycvK54hkCy9DusswN655F3rBawXVLQH/TNp2Gojr2LirYeQNZ6SE8z55NnpVwN7jMdEFfREeZvUJ98LdJN+467XfwkgdMUaFM3NQkGWGeIzN2OOf4ozSMmDJPHhm7TyXKwlzsnr0++77DPWP0ze5+Z39tlhk/GJ3Kv2igdF1v2M4Fc8JdnGhe8JLzMUjEPy5ncbLgVh/XU1z/+KXnL2QaMR3XYh7siqdwNjoxLSGOGjwiFTnBgU8jaD3GHX118TiJEaRBzsxUFU5t5l31VCt4/apzCJURDImIHQEwLwaG+8ED+rYa63tjizGdC4A/sUr5OWtQr5mbjV+cIlM821fUOWkMgV/m8WaMemLyJWsfpHPRdAK4FtZIE9lU5Uh8elQia690uJii4aUBzciT5WCdqxTb+R+pTVwnCfA==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(23010399003)(376014)(7416014)(4143699003)(56012099006)(18002099003)(22082099003)(13003099007);
+ ARA:13230040|19092799006|366016|23010399003|1800799024|376014|18002099003|22082099003|3023799007|56012099006|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info: EL+8hsg7N3HbSuOOJjYhB7Fry5P+ghnVHY62bxVbVup0yJldfqHVoS3iS+pp9q9NP7l0TVF7PfCtxQ/BVUNE/SJSZ1fDgHm98rrmFkCbNHpA1VjCnO6KYFJ0/s4y9dLlddBn7UAgHQTx2Lx2DyOfw9xRZNQ/JNtLoXbRffn+Sei2QyV2XSLcYs1XOEsTJD148BGXT1CI+UZgwu8+tULhfzXTvBlFVyyGzglXfcWOdmsudtIN2L4qX+ks2fS0/QLT8NSG2Xr3FWptEIr4nAqCA8KkL221DeyWqKh62whASPPV183AGhXgHvFRuapJRcOjtBu3upKd9ndzMPj1CC3gxEbHsjpmV34k2GF5gKojJ1DLM31otFFi+fXyLMveptWODSGyhYpi04ChbplcYrq2DnQazRD4CqnG4B1UbjwsNvJGfT860nkpaEJJTQ4jKGBtFTKX7BHLdA2tyBs1lDZEuFH+5I+WPzkgTJGoH6ieY/FMRqBYjncndbzFjJUyIiKAr2QKz8EBU7kmZBwruKUcBwb5DIoZZnvXrDsi3huXrpawlZj7RuDgnX+zqU2VnVcZjUbH2Rr3bYGhbcZGptfdaaYANAQnFW6a3XjZ6ybvjtFbrYIjzzEiPOf05noYfvL5C4A9HQwJ84WGg3IznC7V3XoJx8cyi/xK5b+1yHssirc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(366016)(23010399003)(1800799024)(376014)(18002099003)(22082099003)(3023799007)(56012099006)(4143699003)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: w0zReQ+VOX+Zp59qcTrsjakR9ustU/5AH2tl0R6mYbxMv4zPEQtuXqBzSr3eT4LhuZtsOAV+NtyVJf9ZxqnnbbJygEJ5LjnmMUc13/36PezhgsxTcRl7EFI8jpbxK44mxtSRMv8oUAhmUFqn2YGDnzW/l3dZN1WTfFliANrBMPQ8MOaEwmIneUtu6X0OsA4kSutntFaAMdN5R50zae/IbEABIjWk7xEPPCb4afoH7CSdmHY0dswGD9/5NmyZ/QLmMuzHqwY8CDThFXpOceh4e8GgQVkilPdprSGEEXsMkFJyxGjNWY2cTQZ8Bg8h+BuQ7szd3d7dB5/xOQEPoSzZZE1yrN595CoUq6CTIphK+FoeRb1gbNsApTBamv4VbmnkF9Wqe+YY/mzfBdD1I8Qn7n/qWb1JuogHUfAZmxBEANfRbKg/4q08j/5aIP/DMMWg
-X-Exchange-RoutingPolicyChecked: BUGCtmsjgoaeSRDqy3RMHPwg6LIbA/wsZAVDuEMUPqmnHHjMHRsa6I8ONW0rqoY/oEyN4I8XjHuDtDilfT20R2JrByg2xaq3+0+4Ho1umjJ0fx+5rYS+aSnnjNcTRofT4frRPdwurNyDNjfHdBUSb1qLXRnqYswXggMrWtG1lLdMHbQnNdVO/KzasGY0CuvH3LW4IPi2Q/I3gRXPrBXoYzU8Bb0NuWdBvjaz8H/JmFY82lq1FM7dzrMbZut8ROtJ9IE5Q1XFaZLeDrpyxzMFihQm+PQ2JPRCjUf4Y6uLjJBmVt26Ciip/2MyVa1uyun+zopCJqMeCEkX3bAoWBumFA==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 04:13:42.5998 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ab316a9-15a2-4d20-01cf-08ded594ce58
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002320.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8514
-X-Authority-Analysis: v=2.4 cv=QdxWeMbv c=1 sm=1 tr=0 ts=6a41f0fb cx=c_pps
- a=dAhe3p+MvHJ8ujFi5nYcpA==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22 a=NEAV23lmAAAA:8
- a=voM4FWlXAAAA:8 a=sozttTNsAAAA:8 a=naIhm6FsqYv1srbW5wEA:9 a=QEXdDO2ut3YA:10
- a=IC2XNlieTeVoXbcui8wp:22
-X-Proofpoint-ORIG-GUID: uuJmapIpu9xRxTFqdEy-2C1610VuzrCP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI5MDAzMiBTYWx0ZWRfX9IeemKivRWLK
- av1wE3VgIL8UFMBMx5WwhYII2M9rDJjhYyIQzc777MkYubsS89NHJDirvaicaSpTqvUUddFiUEH
- DR/6ZIgqS8b9O1J0YyLQMZUJAM+SMPtnqa3RtmdYcfXQQMwJNCPgohxPgfiDKZ/sexPb8jC/kDm
- fqjOjivXtNQaeg2/9Hq/6s7XZ/Eprode18aLyFN9u1kZ1i/8eg/UBl25qY4OsjmZ8nubPpWA3fy
- c8KF9KUz3wrrVbBqeYW7jlc01PokiuQ7n2UcisaLrHF686ccZvo/w+FWBTyjsKLSIJ6cV58VKYy
- Y2QrR2gHvYC7wYQ+stqbg2lDQiiEdIcFlrC3WuElXc8zSGaY9GjikI9RzstAoIq09xGu7e19hpr
- xK0k2j3yFcqH99KODv6tQpJY09r0IYt09GuytUsSCihwZ5MsjiBo5yR27IuaEjYqm0/PQX9f2Qx
- kLutAY/Sj1DcE8xSQrg==
-X-Proofpoint-GUID: uuJmapIpu9xRxTFqdEy-2C1610VuzrCP
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI5MDAzMiBTYWx0ZWRfXxQZdw2n2Ms8i
- 9xn8/XHA9T2HKU8dj45khkL+tvK3FTJWRKL81l+Nou9WTk1w/9UXD5SuyV3rjJyBQ/1/Yst5h21
- 9PHFwVQetuwUDA01NPvBhdhIpT76tT8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-29_01,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
- phishscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606290032
-X-Mailman-Approved-At: Mon, 29 Jun 2026 06:41:14 +0200
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TA6+aEZfyIqgnF2OaeB2Sij5ayjaj1GxLCMk1yEIPWte/V0ZoKtgjLvQuDRP?=
+ =?us-ascii?Q?9aVRh3PogRtNs0OYRE4GrY7HBXh2fyjEaRDAo+heFEd583Y1FtLKoWLHSYXn?=
+ =?us-ascii?Q?973fMjcVKIqbfqPpJOTX5ZzJN88KQAiV1lKVmqwxGA9ET8+xAUGnabae07wt?=
+ =?us-ascii?Q?HRkUgyorJ7XKXrLxG663+N/H7swxvpiSMTVJFtaQTteCrzJHJZ8qIsM6HHar?=
+ =?us-ascii?Q?F3bVXOI33I1tZvw69lQBCyD8QqVCXWVzU34K1gb7WivP+u14w4Pn1hmGkhsg?=
+ =?us-ascii?Q?oTh/E3m2LlSVamyPWgyk9jVQ2Y0p7Jfd8czHJ8KLHCn6Kz9EobV6nsjybqPQ?=
+ =?us-ascii?Q?tVQxgnQkbV9kArJCnEyFb/GjlUNXyj3hfN9l5yEORB1+vNn3MXt8PvPdVBgl?=
+ =?us-ascii?Q?rjjxeTq66fCX441J7dlM0osJkr9gXKTlX/Tp5m6UVT3pnRRW1b2x3VeCSSgU?=
+ =?us-ascii?Q?qOEsMhjjDcWz4+jlODEFha+ezHD9d1D59XvYbAparep4vfj4mkbn+aX/4dxo?=
+ =?us-ascii?Q?GJdyi+RCsL33dzYFEsRSOrC/xgjqVPxoOoo5htV8xovokC/dqxCsgIR1qEuo?=
+ =?us-ascii?Q?0LCUtWdianq3MrZlKcHyi55x7sLmNp3bIDNTl4D/KVEA1ZzH/6udp8mCPh+8?=
+ =?us-ascii?Q?VsNWibY2N3eRI/K50YsRuHy0+yKZDgt3MCgUWoybH/LrdvaBMpu2XYMm0lv0?=
+ =?us-ascii?Q?a5c8UguZ5AJuh9Lde0LYSjlfadz2JJV4BIZAajuvaQd0yuuPGcQEFVPK4087?=
+ =?us-ascii?Q?sw5gyIlvlzFeSGHhXi6YnF6p65Vu7D38j6rYZwpiwGGKynUCJwi8GuloQFWD?=
+ =?us-ascii?Q?XpAYWUBwPAQ84gm2jXk+5q/Ejkj+GcWDSumYxZRhPBXWAeTVEMeSkLS/NL7D?=
+ =?us-ascii?Q?NA+O3eajemrx1WtPnRAqEYagMh6yYz+yS+hkfYuvBf1++IO12p2yi/t7re21?=
+ =?us-ascii?Q?RD8vOwpF4ZS5RLz10zU8IAGNTwh7RSVe6omYNEB5jjh29IhnfszEj9Q/FZPd?=
+ =?us-ascii?Q?pgXQ3aUjB/HXafki1o1IJGThDC13NVjz3g3MKr/LAH1NvUqEyBFlnMYIhh9K?=
+ =?us-ascii?Q?OIVdHHofd0FExnWHFioJRlv6ZvvfpCDmAdhHjISYWF755wS/YcQaKY2JJ4SH?=
+ =?us-ascii?Q?8o1+x2YI/D2xwIWp4wCESHYjlQ24ZT7TBRLeihs6cCgQ6WsH9xXtrUQVyd5K?=
+ =?us-ascii?Q?reAefksXN4SR9q3/7pCshbf/m2fUTjqSbiP/H3nwSEPAu5HnBFV+BuZY4AXc?=
+ =?us-ascii?Q?gNhZm+MtMCjdAy6SShDSZDwueQ1IKT+bWQLUS/a709eS1W7lkrhKOfTodrrO?=
+ =?us-ascii?Q?ICCUR1MaaCw2ZRS9L0HbqsYF9T4hIVDDtEj/iysPSv0UUDmhnsMRN/xaM8Wt?=
+ =?us-ascii?Q?0d/YikVxH8IWtXl81dW86aeZYK3qYYJOWfcSpau6WjlBugpLI70VUScWOfFk?=
+ =?us-ascii?Q?KnZLv63EPeGRwfdVsr0lYK6LO/wCYlGta36q06Bn+Rk9iqNh4knSDejsUSxf?=
+ =?us-ascii?Q?wx16HnBKjrx5Lsup6SwJTPa5kvLgf28kMLsdzbBJmuYbKB2lfQUbTOJPyA58?=
+ =?us-ascii?Q?NTPYLSvdcPsBBa+FndDMpjGJ/7if0J+cb0qje4cfcXkwuixG7VeVYuJSVcv1?=
+ =?us-ascii?Q?TDIDEbVLGVr7rk5hoQOAOmXCtGPTZxZH+DEqjt24BnMnTl6lcmoXKmjIMMiB?=
+ =?us-ascii?Q?FFH3NvBPcP+0SzlKp0NquonVhtGpPEi82fFuIsRsGX2uujW18+jAmgw40kgz?=
+ =?us-ascii?Q?/wGfoDprjdwwfDXx8YIHSsJDvLz6rgrEpSmd+K3xfMwvujZlz124?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 359c53aa-0bd8-4b95-9ba9-08ded59dc310
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 05:17:49.4541 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TzqpEuNqr0XKWueXy9BXA3fdKMmfr18ifwCql3Uv3g5ba5QPjJZxt6N9AsW4biWPElOGLK120oihHerKSeUE95fHujdTghR3bWIrmywb0C7nGXjz+RpofIb/LQ223ACj
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8466
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -215,47 +141,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Jun 25, 2026 at 7:12 PM IST, Simon Glass wrote:
-> Hi Anshul,
+On Sun, Jun 28, 2026 at 10:25:23AM +0000, Jonas Karlman wrote:
+>Add regulator_set_value_clamp() that clamps a requested target voltage
+>to both caller-provided limits and the regulator constraints before
+>setting the regulator voltage value.
 >
-> On Thu, 25 Jun 2026 at 04:18, Anshul Dalal <anshuld@ti.com> wrote:
->>
->> U-Boot does not support modules, so having tristate options is useless.
->>
->> Therefore this patch does a blind replace of all tristate options to
->> bool tree-wide.
->>
->> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> ---
->> CI: https://github.com/u-boot/u-boot/pull/998
->> ---
->>  board/st/common/Kconfig      | 2 +-
->>  cmd/Kconfig                  | 4 ++--
->>  drivers/cache/Kconfig        | 2 +-
->>  drivers/clk/Kconfig          | 2 +-
->>  drivers/firmware/Kconfig     | 2 +-
->>  drivers/i2c/Kconfig          | 6 +++---
->>  drivers/i2c/muxes/Kconfig    | 6 +++---
->>  drivers/i3c/Kconfig          | 2 +-
->>  drivers/i3c/master/Kconfig   | 2 +-
->>  drivers/memory/Kconfig       | 2 +-
->>  drivers/misc/Kconfig         | 2 +-
->>  drivers/mmc/Kconfig          | 4 ++--
->>  drivers/mtd/nand/Kconfig     | 2 +-
->>  drivers/net/phy/Kconfig      | 4 ++--
->>  drivers/spi/Kconfig          | 2 +-
->>  drivers/ufs/Kconfig          | 2 +-
->>  drivers/usb/cdns3/Kconfig    | 6 +++---
->>  drivers/usb/musb-new/Kconfig | 2 +-
->>  drivers/usb/tcpm/Kconfig     | 4 ++--
->>  19 files changed, 29 insertions(+), 29 deletions(-)
+>Return -EINVAL when the caller limits cannot be satisfied by the
+>regulator constraints or when the requested range is invalid.
 >
-> I don't see this in patchwork but it looks like you sent it correctly.
+>This helper will initially be used to set vqmmc-supply voltage within an
+>acceptable range according to SD Standards, i.e. 1.70V-1.95V and
+>2.7V-3.6V.
+>
+>Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>---
+> drivers/power/regulator/regulator-uclass.c | 27 ++++++++++++++++++++++
+> include/power/regulator.h                  | 12 ++++++++++
+> 2 files changed, 39 insertions(+)
+>
+>diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+>index 1c7f75a9338c..0f5ba51ad6c2 100644
+>--- a/drivers/power/regulator/regulator-uclass.c
+>+++ b/drivers/power/regulator/regulator-uclass.c
+>@@ -111,6 +111,33 @@ int regulator_get_suspend_value(struct udevice *dev)
+> 	return ops->get_suspend_value(dev);
+> }
+> 
+>+int regulator_set_value_clamp(struct udevice *dev,
+>+			      int min_uV, int target_uV, int max_uV)
+>+{
+>+	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+>+	struct dm_regulator_uclass_plat *uc_pdata;
+>+	int uV;
+>+
+>+	if (!ops || !ops->set_value)
+>+		return -ENOSYS;
+>+
+>+	uc_pdata = dev_get_uclass_plat(dev);
+>+	if (uc_pdata->min_uV != -ENODATA && max_uV < uc_pdata->min_uV)
+>+		return -EINVAL;
+>+	if (uc_pdata->max_uV != -ENODATA && min_uV > uc_pdata->max_uV)
+>+		return -EINVAL;
+>+	if (min_uV > max_uV)
+>+		return -EINVAL;
+>+
+>+	if (uc_pdata->min_uV != -ENODATA)
+>+		min_uV = max(min_uV, uc_pdata->min_uV);
+>+	if (uc_pdata->max_uV != -ENODATA)
+>+		max_uV = min(max_uV, uc_pdata->max_uV);
+>+	uV = clamp(target_uV, min_uV, max_uV);
+>+
+>+	return regulator_set_value(dev, uV);
+>+}
+>+
+> /*
+>  * To be called with at most caution as there is no check
+>  * before setting the actual voltage value.
+>diff --git a/include/power/regulator.h b/include/power/regulator.h
+>index 4011fb1d254b..a48bb3a5a1db 100644
+>--- a/include/power/regulator.h
+>+++ b/include/power/regulator.h
+>@@ -315,6 +315,18 @@ int regulator_set_suspend_value(struct udevice *dev, int uV);
+>  */
+> int regulator_get_suspend_value(struct udevice *dev);
+> 
+>+/**
+>+ * regulator_set_value_clamp: set clamped microvoltage value of a given regulator
+>+ *
+>+ * @dev       - pointer to the regulator device
+>+ * @min_uV    - the minimum output value to set [micro Volts]
+>+ * @target_uV - the target output value to set [micro Volts]
+>+ * @max_uV    - the maximum output value to set [micro Volts]
+>+ * Return:    - 0 on success or -errno val if fails
+>+ */
+>+int regulator_set_value_clamp(struct udevice *dev,
+>+			      int min_uV, int target_uV, int max_uV);
 
-I seems to be up now:
-https://patchwork.ozlabs.org/project/uboot/patch/20260625-tristate_fix-v1-1=
--95e16153d752@ti.com/
+A static inline stub in regulator.h #else block is required.
 
-Regards,
-Anshul
-
+Thanks,
+Peng
