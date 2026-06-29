@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4A8C43458
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 15:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77359C43458
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jun 2026 15:52:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC7E849FB;
-	Mon, 29 Jun 2026 17:51:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBEAB84A30;
+	Mon, 29 Jun 2026 17:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="iVdmeYe+";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="US+lYHOu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C3184A1F; Mon, 29 Jun 2026 17:51:51 +0200 (CEST)
-Received: from mail-dl1-x1229.google.com (mail-dl1-x1229.google.com
- [IPv6:2607:f8b0:4864:20::1229])
+ id 39BC884942; Mon, 29 Jun 2026 17:51:57 +0200 (CEST)
+Received: from mail-dl1-x1232.google.com (mail-dl1-x1232.google.com
+ [IPv6:2607:f8b0:4864:20::1232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD21884942
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 17:51:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91A2384A30
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 17:51:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eric.chung@riscstar.com
-Received: by mail-dl1-x1229.google.com with SMTP id
- a92af1059eb24-139b914bab6so4741366c88.1
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 08:51:48 -0700 (PDT)
+Received: by mail-dl1-x1232.google.com with SMTP id
+ a92af1059eb24-1390f75d8bbso7353884c88.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 08:51:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1782748307; x=1783353107;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1782748313; x=1783353113;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=so1Pi36dt9Z0jb0lhUjdqTidKEhz5HwDanOFVctxBKQ=;
- b=iVdmeYe+Ln1Z6x4ENjUuXoXu35UUhIu/4YCnaf5eYk/Npe6fQP0xW04UQirYpqkV1k
- W6Ezr3Hb6ALqpRl8dppGNvFS8n8JNqc/eE6BBz5bH4kLqHT/GBfbnaCLnvCFqxQEuzNZ
- tXcGYiD3FQM36hhHQR+t4k9WAVqxhZno1t1oDG5/VCv0Sd6EHW+HWzZuI70XvkE/Xe+J
- aM8IFkmrJrh/HIeMu0fd0nZCeMKc599Tzq7JQKmD9plZpXImgJJp3/hqpSmr0VQsf4y0
- 2P24ANMVNXgIfMlwqh6zIGr08TEtzWTzYErCowqkn5tvTPP4/7nwKmR/boA+9xipa4pX
- Rw8Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Z6ieNH3nfWXGSwe5tVaHJIeGa72rJw/IQq5dCT0NKMI=;
+ b=US+lYHOuL8nMaq7AfQo4F5u+pETW7s6QBT9pf4Lw5K8nDyq3GwE4SxxmjEZSeGDmWl
+ ORtY+WixXdRdOmdBTFKAOCrhOz6diLkqhidEKZslK9Ctf2zJ4Fq6fesYHSzF5d5VnAbS
+ nc7EhKpVq/x8zvR3FeuIxOlWGejgouHxSwm9El4F7vQaCW5ajZqRKTe0JG8UlIfZw2Vz
+ SrO+Vj+N93GYVZ7+c76Ojbk7heopssXtpD54Z+EPo13tQNEZlm6KT78CzYDw2GhCP/kj
+ /S8pkA30huMWu+zxxY4mUWNol4MJmx4bohxFnw/4cjfXHQUlAo7V9vN4FHrw9TGHHdE6
+ btGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782748307; x=1783353107;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=so1Pi36dt9Z0jb0lhUjdqTidKEhz5HwDanOFVctxBKQ=;
- b=V3hWVu4XOkVDpbhaQhawGaxjXAQFQngnCZznmuegkiLYnXQFVRBb0WhLKJOatHyw4e
- ICJjjc5YgS0mWXFVJD0IIU23QAtJKRZQ2fwm62B6EeKZdsKUaRUhk5HnomhuJBH5UNj5
- yEB1mdPVSiQedS3XtpIxESKrnLYq/5yYmY5F4liL4gjLgGpWfeHjxxjsKqa2/zo5u+CY
- cDCeQ3BYbCU0cOjXHR37YN2hQfIF/jBZjlUsaalWv9kuzZuq18WBws3dUWac/jK5XcwZ
- MrGeabVPVuD98cbJemBbtMommUdHoJph3rfyGQ/DxavbedErY0rfABOgr1mSR4634Id9
- w7fw==
+ d=1e100.net; s=20251104; t=1782748313; x=1783353113;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Z6ieNH3nfWXGSwe5tVaHJIeGa72rJw/IQq5dCT0NKMI=;
+ b=CLSWGQD6js8OufxkzgjD4HXn2cykiBSXOhbnEMYtcHpJT7JVzmVs8mZKa7xBAct27Q
+ fM2ulQqzIJPBMAyH1OH/VVfQcwMp5IiV5QvW5k9+mBsAp/jUJRirs+/MdCSDEp5JEt9r
+ aXG53zVmxyyz/UVk01wlfF0OyH6mym1NSgAfRyYEDTkwJlXUYDjbs4YIy61+o7+iEWLw
+ 8mk84BSOqrMANbq0kZ1WgZsC6uLuJNlc6fzrrFwLLn9z0n4jHr61RSuVnCuHY42HsHRI
+ 01vO+4IwGGx6r92z7lC6rRLLPQh3KfgCoUMlZrzox6Km7ap0aa/k+565gD/LF7VLX8aN
+ yVCw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+dDrI02KRsM+NRL8JH3br2AMns6liabmeUSH/HD8dFAyOI/+9Oe4r/JGVDXe+OBnv8KbcmdP8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxL2voibYWxOPe8OOY1HiLw7EbVSUqS72MIWMlGW1wT/l6MroAR
- aHVUH2uYDfVRgXzdIv9XwNJfWR+s0U/QJTrVrexvQGsUn0nREOf882Z7o3p/eeFX+4s=
-X-Gm-Gg: AfdE7clKJ/fllWMX4XiPiQ25zXuFivMRVJi8FfVfSG7TB3kaB/HkS1DsvsSKv8M07nZ
- 85p5KNbeA4vBiSVvBunQFj4bGxroiU+eJDrLGKzjdjO9ZaKyJ5RcvIv3eF/8MjcRP2LeFHj5+4i
- M/9bvB+lS65EHMgLMlZEVhHA23Spf1iybACAomK9nne084GYwlKqNet+uli7SPdJOv3i3rznaJI
- qCBESvwooQ1yioKvOO7sY2ETZeCpTlajn4fzgOgnEf7iHZswaUUr936nGcrVgy3/Lk0NHFRoeRj
- N7I7cDjzQEx/RiGUiFrUD6GeRJonN9fSgX/1C2Zc1JRyyed+lzu6FbZZ8jqONcDWDrEmDVI3Gwh
- 45hlBjDs4H6lVUGKE2EeuFTgs7cNfUI5tkacLSD1zUOh6ec6ORocPnQzYY8lIwmR2TcOkhQuCuc
- 7uyqngw3ZTrGgt/L3qvND8aGxDjdL50HpUFtPJkaGlN2FnqZL8lRfPJDIkkWEUSMiQs+ywKx9S7
- v8kMXNoDN8Jy4p8vuZ/4iclNmo+yp7BmL6Veh5e+uBKJfRsZz1Ukg==
-X-Received: by 2002:a05:7022:41a7:b0:139:ed5a:eeed with SMTP id
- a92af1059eb24-139ed5b0594mr7430265c88.44.1782748306923; 
- Mon, 29 Jun 2026 08:51:46 -0700 (PDT)
+ AFNElJ/iC1ou3mfF7kZ8xjjKCA5/wV2lEtIzfVda+qcPWqT+x+QhRZj00bEaT3nMcfWAtLZhTIwN5wk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOn+WdpGBWkf2i9NtySS4oknFwymz/a7bXgzgyq8wKnjOT5haC
+ 2RYCasPB5m0whbIjWptRKtv9v1RRoVVvvv3JaTcSsR0PsJ9JWndlECVX1zkqaJjHlcY=
+X-Gm-Gg: AfdE7cnRVtJVoDAkR60T+B3ZelVvyeFFaxhS+uNDhkCHpAWfFlNFmCvtUbDyWjbw8uA
+ 0/EqjnOj/gzhrPETQ8KLEg7z57yrGUvfZt29a1px1yTf2UQ8vhWtPJ98MmTBeysDjnQYP8JvHoI
+ UqrayLy5EhaY5rHLsVU6H/xo3Nelk6KUuZpog3a72FlewvYyAUYyW189PYIhC2M5bH0/1h3G5Xg
+ PXVPcDhMZWz2yKCl8KgQu+K8thUUXic+/mHLGr/5rm098whm98Z9k7lL+vdiR9j7i91ZlabRG8j
+ oN26drACxPIcLCndQ+atLIhW+l5C7oO4TNGmDsswMOsrDO56ofCh3DEd0LYSh8SeLzJiEQ0bPUH
+ raN0fSukn37+tUBbCg5PFjmzIZXCRcrsOgUXOfV6TrKCpO+3Xy4vgVayIPVs/UPZiisnGsKC0PN
+ BU19Bc02EuGk5LdeXbjoB4jvdQ4XmT+K57qweJUs8gX9jLTvqfmykJgquAD7RO6IlRZTKzObTq1
+ AXaOpkXkaziQh5/wUEtxqur2jjZTohwDSs1By8bKnE03M60ECfRig==
+X-Received: by 2002:a05:7022:60a1:b0:13a:225:e191 with SMTP id
+ a92af1059eb24-13b2271d3a7mr746404c88.41.1782748312848; 
+ Mon, 29 Jun 2026 08:51:52 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d8f6d2e4sm46510090c88.7.2026.06.29.08.51.41
+ a92af1059eb24-139d8f6d2e4sm46510090c88.7.2026.06.29.08.51.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 08:51:46 -0700 (PDT)
+ Mon, 29 Jun 2026 08:51:52 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Subject: [PATCH v2 0/8] spacemit mmc driver
-Date: Mon, 29 Jun 2026 23:51:14 +0800
-Message-Id: <20260629-m4-v2-0-cbc91c6b83d8@riscstar.com>
+Date: Mon, 29 Jun 2026 23:51:15 +0800
+Subject: [PATCH v2 v2 1/8] pinctrl: k1: add IO power domain configuration
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHKUQmoC/02NwQ6CMBBEf4Xs2Zq2wYZ68j8IByhbWRPAdGujI
- f13oV48zuTNmw0YAyHDtdogYCKmddmDPlXgpn65o6Bxz6ClNtJoK+Za2AalMhfr0Q+wg8+Ant5
- F0kLS0P06fg0PdPFYH9REHNfwKU9JFfZfmpSQolfKN2NtDRp9C8SOYx/Obp2hyzl/AQMjrkCtA
- AAA
-X-Change-ID: 20260629-m4-98e01659fefb
+Message-Id: <20260629-m4-v2-1-cbc91c6b83d8@riscstar.com>
+References: <20260629-m4-v2-0-cbc91c6b83d8@riscstar.com>
+In-Reply-To: <20260629-m4-v2-0-cbc91c6b83d8@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
  Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
@@ -118,107 +116,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds MMC support for the SpacemiT K1: an SDHCI platform
-driver, the SD card device-tree overlay, defconfig options, and SPL
-boot-device selection from the SoC strap/config registers. The SDHCI
-driver is usable in both SPL and U-Boot proper.
+Dual-voltage GPIO banks default to 3.3V, but when externally supplied
+with 1.8V the internal logic must be explicitly reconfigured to match.
 
-A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
-write images to eMMC.
+Add the ability to program IO power domain control registers through the
+APBC block. These registers require unlocking the AIB Secure Access
+Register (ASAR) before every read/write, since configuring a 1.8V domain
+while 3.3V is externally supplied can cause back-powering and pin damage.
 
-This series sits on top of three series still under review, and must be
-applied after them, in this order:
-
-  1. K1 clock/reset/dts migration [1]    (8 patches)
-  2. K1 SPL bring-up v4 [2]              (14 patches)
-  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
-  Then this series                        (8 patches)
-
-For each series:
-
-  b4 am <cover-msgid>
-  git am ./*.mbx
-
-Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
-Link: https://lore.kernel.org/u-boot/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/ [2]
-Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
-
----
-Changes in v2:
-- EDITME: describe what is new in this series revision.
-- EDITME: use bulletpoints and terse descriptions.
-- Link to v1: https://patch.msgid.link/20260629-m4-v1-0-a11f8d496e62@riscstar.com
-
-Changes in v2:
-- cmd: drop patches on eminfo & tlv_eeprom.
-- configs: Enable ADMA and SYSCON support.
-- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
-- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
-  read/write, correct pinctrl state from "fast" to "uhs".
-- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
-  transfers.
-- pinctrl: k1: Add new IO power domain configuration support for
-  dual-voltage GPIO banks.
-- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
-- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
-
-To: u-boot-spacemit@groups.io
-To: u-boot@lists.denx.de
-Cc: Huan Zhou <pericycle.cc@gmail.com>
-Cc: Guodong Xu <guodong.xu@riscstar.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@riscstar.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Han Xu <han.xu@nxp.com>
-Cc: Yanir Levin <yanir.levin@tandemg.com>
-Cc: Christoph Stoidner <c.stoidner@phytec.de>
-Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
-Cc: Daniel Palmer <daniel@thingy.jp>
-Cc: Anshul Dalal <anshuld@ti.com>
-Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Cc: Angelo Dureghello <angelo@kernel-space.org>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Rick Chen <rick@andestech.com>
-Cc: Leo <ycliang@andestech.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-
 ---
-Eric Chung (8):
-      pinctrl: k1: add IO power domain configuration support
-      mmc: sdhci: add quirk to enable CMD23 for multi-block transfers
-      mmc: k1: add sdhci platform driver
-      dts: k1: add SD card support in u-boot overlay
-      configs: k1: enable SD and eMMC support
-      doc: spacemit: flash on K1 SoC based boards
-      config: k1: enable ENV support for eMMC
-      spacemit: k1: load product name from environment variable
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 84 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 82 insertions(+), 2 deletions(-)
 
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  87 +++-
- arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  82 +++-
- board/spacemit/k1/MAINTAINERS             |   3 +-
- board/spacemit/k1/spl.c                   |  50 +--
- configs/spacemit_k1_defconfig             |  26 +-
- doc/board/spacemit/index.rst              |   1 +
- doc/board/spacemit/k1-flash.rst           | 157 +++++++
- drivers/mmc/Kconfig                       |   7 +
- drivers/mmc/Makefile                      |   1 +
- drivers/mmc/mmc.c                         |  22 +-
- drivers/mmc/sdhci.c                       |   3 +
- drivers/mmc/spacemit_sdhci.c              | 681 ++++++++++++++++++++++++++++++
- drivers/pinctrl/spacemit/pinctrl-k1.c     |  84 +++-
- include/mmc.h                             |   5 +-
- include/sdhci.h                           |   1 +
- 15 files changed, 1157 insertions(+), 53 deletions(-)
----
-base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
-change-id: 20260629-m4-98e01659fefb
+diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+index 3ebc397213b..5d3236aac94 100644
+--- a/drivers/pinctrl/spacemit/pinctrl-k1.c
++++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+@@ -12,6 +12,8 @@
+ #include <linux/bitops.h>
+ #include <linux/errno.h>
+ #include <linux/io.h>
++#include <regmap.h>
++#include <syscon.h>
+ 
+ /*
+  * +---------+----------+-----------+--------+--------+----------+--------+
+@@ -34,8 +36,24 @@
+ #define PAD_PULLUP		BIT(14)
+ #define PAD_PULL_EN		BIT(15)
+ 
+-#define PIN_POWER_STATE_1V8		1800
+-#define PIN_POWER_STATE_3V3		3300
++#define IO_PWR_DOMAIN_OFFSET	0x800
++
++#define IO_PWR_DOMAIN_GPIO2_Kx  0x0c
++#define IO_PWR_DOMAIN_MMC_Kx    0x1c
++
++#define IO_PWR_DOMAIN_GPIO3_K1  0x10
++#define IO_PWR_DOMAIN_QSPI_K1   0x20
++
++#define IO_PWR_DOMAIN_V18EN	BIT(2)
++
++#define APBC_ASFAR		0x50
++#define APBC_ASSAR		0x54
++
++#define APBC_ASFAR_AKEY		0xbaba
++#define APBC_ASSAR_AKEY		0xeb10
++
++#define PIN_POWER_STATE_1V8	1800
++#define PIN_POWER_STATE_3V3	3300
+ 
+ enum spacemit_pin_io_type {
+ 	IO_TYPE_NONE = 0,
+@@ -60,12 +78,14 @@ struct spacemit_pinctrl_data {
+ 	int (*get_pins)(struct udevice *dev);
+ 	int (*get_functions)(struct udevice *dev);
+ 	int (*get_io_type)(struct udevice *dev, unsigned int pin);
++	unsigned int (*pin_to_io_pd_offset)(unsigned int pin);
+ };
+ 
+ struct spacemit_pinctrl_priv {
+ 	void __iomem		*regs;
+ 	struct spacemit_pin_io	*io_pins;
+ 	int			nr_io_pins;
++	struct regmap		*regmap;
+ };
+ 
+ struct spacemit_pin_mux_config {
+@@ -196,6 +216,28 @@ static int k1_get_io_type(struct udevice *dev, unsigned int selector)
+ 	return -EINVAL;
+ }
+ 
++static unsigned int spacemit_k1_pin_to_io_pd_offset(unsigned int pin)
++{
++	unsigned int offset = 0;
++
++	switch (pin) {
++	case 47 ... 52:
++		offset = IO_PWR_DOMAIN_GPIO3_K1;
++		break;
++	case 75 ... 80:
++		offset = IO_PWR_DOMAIN_GPIO2_Kx;
++		break;
++	case 98 ... 103:
++		offset = IO_PWR_DOMAIN_QSPI_K1;
++		break;
++	case 104 ... 109:
++		offset = IO_PWR_DOMAIN_MMC_Kx;
++		break;
++	}
++
++	return offset;
++}
++
+ /* use IO high level output current as the table */
+ static struct spacemit_pin_drv_strength spacemit_ds_1v8_tbl[4] = {
+ 	{ 0, 11 },
+@@ -400,6 +442,35 @@ static const struct pinconf_param spacemit_pinconf_params[] = {
+ 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	U32_MAX },
+ };
+ 
++static void spacemit_set_io_power_domain(struct udevice *dev,
++					 unsigned int pin,
++					 unsigned int io_type)
++{
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	struct spacemit_pinctrl_data *data;
++	unsigned int offset;
++	u32 val = 0;
++
++	if (!priv->regmap)
++		return;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_io_pd_offset)
++		return;
++
++	offset = data->pin_to_io_pd_offset(pin);
++	if (!offset)
++		return;
++
++	if (io_type == IO_TYPE_1V8)
++		val = IO_PWR_DOMAIN_V18EN;
++
++	regmap_write(priv->regmap, APBC_ASFAR, APBC_ASFAR_AKEY);
++	regmap_write(priv->regmap, APBC_ASSAR, APBC_ASSAR_AKEY);
++
++	writel(val, priv->regs + IO_PWR_DOMAIN_OFFSET + offset);
++}
++
+ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 				unsigned int param, unsigned int argument)
+ {
+@@ -456,6 +527,9 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			dev_err(dev, "Invalid power source (%d)\n", argument);
+ 			return -EINVAL;
+ 		}
++		if (found)
++			spacemit_set_io_power_domain(dev, pin_selector,
++						     priv->io_pins[i].io_type);
+ 		break;
+ 	default:
+ 		return -EOPNOTSUPP;
+@@ -485,6 +559,11 @@ static int spacemit_pinctrl_probe(struct udevice *dev)
+ 		dev_err(dev, "Fail to allocate memory\n");
+ 		return -ENOMEM;
+ 	}
++	priv->regmap = syscon_regmap_lookup_by_phandle(dev, "spacemit,apbc");
++	if (IS_ERR(priv->regmap)) {
++		dev_warn(dev, "no syscon found, disable IO power domain switching\n");
++		priv->regmap = NULL;
++	}
+ 
+ 	ret = clk_get_bulk(dev, &clks);
+ 	if (ret) {
+@@ -512,6 +591,7 @@ static const struct spacemit_pinctrl_data k1_pinctrl_data = {
+ 	.get_pins	= k1_get_pins,
+ 	.get_functions	= k1_get_functions,
+ 	.get_io_type	= k1_get_io_type,
++	.pin_to_io_pd_offset = spacemit_k1_pin_to_io_pd_offset,
+ };
+ 
+ static const struct udevice_id spacemit_pinctrl_ids[] = {
 
-Best regards,
---  
-Eric Chung <eric.chung@riscstar.com>
+-- 
+2.51.0
 
