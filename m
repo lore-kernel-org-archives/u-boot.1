@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457E0C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 08:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C77CC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 08:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAFF084844;
-	Tue, 30 Jun 2026 10:55:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id 112E484844;
+	Tue, 30 Jun 2026 10:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="F0cG5+8t";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="gwcy4A+J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDFBD848F3; Tue, 30 Jun 2026 10:55:26 +0200 (CEST)
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
+ id 6A415849E5; Tue, 30 Jun 2026 10:59:27 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03C2384105
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:55:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782809718; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=m6jLty2ZAGTG1egZ44zpkkbgk45074syxm4rPaY+NPAYPgWfYEGEdVo08FHZLgEiJrSesc/kZ0XSSRdhEfNNbmL9Zqbex1bjp+KamHa6LB4FY1bFCocs2MABoVpeFmxh4fmYn1qtVEGZfGSuvdEGn/w5JtH6TAUJ/W6kWytsZlg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782809718;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=5LnpkmnVD09PuPgALULYq6lcVB9bCEevrwuo08EwHNw=; 
- b=L6rLZ055T1L9HOPY7HJKAQYvju6rc6da3pU/8huI14cFA3U9CZlYDkxZbOzyNAvLm5so4UnEBYqiPD5drd7zOfeLiI1k4U0fww+0g74zBIUQhM2fN333pmcgktPrNsTwBYhi3c4ttuEblgVqDSrtVW+hiAFxkeev6ufzqTI11mc=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782809718; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=5LnpkmnVD09PuPgALULYq6lcVB9bCEevrwuo08EwHNw=;
- b=F0cG5+8t85R6KKgv+i/WmL3fIC5Qc9qJzSJTIlGH7W/h96HLuAv926OuPai+Ovtt
- 3LvnkUdVpMLcJvvjtKcUuZ2xAC52kIT74RrV18Zn5cTXWzRPDPN/GiYzUehXvtDDHpI
- y1Ln2J10+SLZVkc/GfnJCdhAzI/jZZvmYyMt7SoI=
-Received: by mx.zohomail.com with SMTPS id 1782809714893436.808916414283;
- Tue, 30 Jun 2026 01:55:14 -0700 (PDT)
-Date: Tue, 30 Jun 2026 08:55:03 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Eric Chung <eric.chung@riscstar.com>, u-boot-spacemit@groups.io,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Han Xu <han.xu@nxp.com>, Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Johan Jonker <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong.xu@riscstar.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH v2 v2 1/8] pinctrl: k1: add IO power domain configuration
- support
-Message-ID: <akOEZ6xEt-i5OysY@pie>
-References: <20260629-m4-v2-0-cbc91c6b83d8@riscstar.com>
- <20260629-m4-v2-1-cbc91c6b83d8@riscstar.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6714E84105
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:59:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id AF6C310ED7F; Tue, 30 Jun 2026 10:59:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782809964;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Ta7ZVwlFewQssPT5SjgfURPLYXaXPlFczlXIhnYB1EU=;
+ b=gwcy4A+JZcbiN0uYVxH6tEvp8U4ds8EVrtSND7/X/Ai4/aXs1nq8xhJOTK9Pjr3NAriAnt
+ Ffur+kP5B5b728EGYI9Nuo5c7rckXlS7eHkkThCwR//U+mO2lR2YtF4lzX7oYHbfkQrTab
+ hWrxtoavgHRrSDPhf/xyURwFLOlRNSTa+TX2Fi7RpCJ45USHXtJ7jKfTb0lLmY9wzfij2e
+ KXv72qx+Cufq13MU0H3svkI0+CSOZ1YSFwJugLaiKJUOm84ECC58G68icFvKwzwRTy4Kyp
+ NqBuhLqUh5Ni4p2HTi4RDh8vNExA8LsIMdtnO5fyR33O3cxUgu2na+gkdYo34Q==
+Message-ID: <58b13bf5-8075-4adf-a576-2fbd08229733@nabladev.com>
+Date: Tue, 30 Jun 2026 10:59:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260629-m4-v2-1-cbc91c6b83d8@riscstar.com>
-X-ZohoMailClient: External
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 14/64] usb: dwc3: import from kernel v4.11
+To: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes
+ <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Stephan Gerhold
+ <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Alexey Charkov <alchark@flipper.net>
+References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
+ <20260629084507.3254232-15-jens.wiklander@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <20260629084507.3254232-15-jens.wiklander@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,67 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 29, 2026 at 11:51:15PM +0800, Eric Chung wrote:
-> Dual-voltage GPIO banks default to 3.3V, but when externally supplied
-> with 1.8V the internal logic must be explicitly reconfigured to match.
+On 6/29/26 10:43 AM, Jens Wiklander wrote:
+> Sync Linux kernel dwc3 changes from v4.10 to v4.11.
 > 
-> Add the ability to program IO power domain control registers through the
-> APBC block. These registers require unlocking the AIB Secure Access
-> Register (ASAR) before every read/write, since configuring a 1.8V domain
-> while 3.3V is externally supplied can cause back-powering and pin damage.
+> The following files are preserved accross the import:
+> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+> dwc3-layerscape.c ti_usb_phy.c
 > 
-> Signed-off-by: Eric Chung <eric.chung@riscstar.com>
-> ---
->  drivers/pinctrl/spacemit/pinctrl-k1.c | 84 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 82 insertions(+), 2 deletions(-)
+> Skipping unused files:
+> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 > 
-> diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
-> index 3ebc397213b..5d3236aac94 100644
-> --- a/drivers/pinctrl/spacemit/pinctrl-k1.c
-> +++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+> Note that this is a raw import and doesn't build.
+> A fixup commit at the end of the series fixes that.
+> 
+> List of commits: git log --oneline v4.10..v4.11
+> Commits imported:
+> de288e36fe33 usb: dwc3: gadget: delay unmap of bounced requests
+> 35b2719e72d3 usb: dwc3: gadget: make to increment req->remaining in all cases
+> 0913750f9fb6 usb: dwc3-omap: Fix missing break in dwc3_omap_set_mailbox()
+> 1551e35ea418 usb: dwc3: gadget: Fix system suspend/resume on TI platforms
+> 73561128eb72 usb: dwc3: Fix incorrect type for utmi mode
+> cf3113d893d4 usb: dwc3: gadget: properly increment dequeue pointer on ep_dequeue
+> 7369090a9fb5 usb: dwc3: gadget: make Set Endpoint Configuration macros safe
+> bc46e23c3425 Merge tag 'usb-for-v4.11' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-next
+> e42a5dbb8a3d usb: dwc3: host: pass quirk-broken-port-ped property for known broken revisions
+> 28781789051e usb: dwc3: gadget: read IN ep FIFO size from HW
+> 692665c621bb Merge 4.10-rc5 into usb-next
+> ffb80fc672c3 usb: dwc3: gadget: skip Set/Clear Halt when invalid
+> 538967983b88 usb: dwc3: ep0: Fix the possible missed request for handling delay STATUS phase
+> c773bb0b9264 usb: dwc3: omap: Replace the extcon API
+> c6267a51639b usb: dwc3: gadget: align transfers to wMaxPacketSize
+> 905dc04ea796 usb: dwc3: gadget: allocate bounce buffer for unaligned xfers
+> e49d3cf4926a usb: dwc3: gadget: extract __dwc3_prepare_one_trb()
+> 843053093f47 usb: dwc3: gadget: simplify dwc3_prepare_one_trb()
+> 0e4018ff5d12 usb: dwc3: exynos: Remove MODULE_ALIAS()
+> 3e27b3f66a56 usb: dwc3: exynos remove suspend clock unspecified debug message
+> 
+> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Tested-by: Alexey Charkov <alchark@flipper.net>
 
-...
-
-> @@ -34,8 +36,24 @@
->  #define PAD_PULLUP		BIT(14)
->  #define PAD_PULL_EN		BIT(15)
->  
-> -#define PIN_POWER_STATE_1V8		1800
-> -#define PIN_POWER_STATE_3V3		3300
-> +#define IO_PWR_DOMAIN_OFFSET	0x800
-> +
-> +#define IO_PWR_DOMAIN_GPIO2_Kx  0x0c
-> +#define IO_PWR_DOMAIN_MMC_Kx    0x1c
-> +
-> +#define IO_PWR_DOMAIN_GPIO3_K1  0x10
-> +#define IO_PWR_DOMAIN_QSPI_K1   0x20
-
-Why these four offsets aren't sorted?
-
-> +#define IO_PWR_DOMAIN_V18EN	BIT(2)
-> +
-> +#define APBC_ASFAR		0x50
-> +#define APBC_ASSAR		0x54
-> +
-> +#define APBC_ASFAR_AKEY		0xbaba
-> +#define APBC_ASSAR_AKEY		0xeb10
-> +
-> +#define PIN_POWER_STATE_1V8	1800
-> +#define PIN_POWER_STATE_3V3	3300
->  
->  enum spacemit_pin_io_type {
->  	IO_TYPE_NONE = 0,
-
-...
-
-> @@ -485,6 +559,11 @@ static int spacemit_pinctrl_probe(struct udevice *dev)
->  		dev_err(dev, "Fail to allocate memory\n");
->  		return -ENOMEM;
->  	}
-> +	priv->regmap = syscon_regmap_lookup_by_phandle(dev, "spacemit,apbc");
-
-So with this patch, the driver depends on syscon symbols, and you should
-reflect this in Kconfig.
-
-Regards,
-Yao Zi
+Patch 13/64 seems to be missing ?
