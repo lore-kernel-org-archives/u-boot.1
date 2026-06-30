@@ -4,121 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA724C43602
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 05:57:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC86C43327
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 06:24:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B666F849BA;
-	Tue, 30 Jun 2026 07:57:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CEE25849BA;
+	Tue, 30 Jun 2026 08:24:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XZXIoRpd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vMFVIgf0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C50AC849C5; Tue, 30 Jun 2026 07:57:24 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 7C7B3849F3; Tue, 30 Jun 2026 08:24:28 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F6D484979
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 07:57:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA1AF84979
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:24:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-4486c5813afso119928fac.0
- for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 22:57:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782799041; cv=none;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-664cb440f9eso1788071d50.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jun 2026 23:24:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782800664; cv=none;
  d=google.com; s=arc-20260327;
- b=Hokdr5yT9GsQDUlkyjIcfTeDewXNCqCHscxHioLI1JJLqB64fsYnQwU5/YYAU99gKc
- 6A6p20rVgLMypaOk3MKRSX5vUhH/w2uAqLnSQs53TS2adu9X0rb3pcyql0IlEog0TUlY
- 7XB8FrYNNCBqlwhOGTw2sGTKaQ0FFzu2Z9EYxgIn1nv0Mr05/HyafptFgD6eH0s3WPQt
- idhmUd4ieU0OYGVj/WRyaf/BnGMzTVPq+1xnwqLTe3e9JDgse5jrIXRWpCUTiCqU3LSg
- IUUwCpI0B2Iltpk8fXDZKp6GVP9bXicqdckrIEJQxmyuOd12dXqqHFjLNwu2dT5giRNT
- 0ANg==
+ b=GwQrQXViFN8wTtGhgtc8fb38q+//kDbgF7ECOwKKLwIm88Orbs+MoGkvQEOML6d4oL
+ o0SqjiUjutWGQQq+0y1rdbvs0Q1ePnfSM6gaWRtav8w0olGyTIwVbl0yfw8pivtGDGLg
+ amw6CMS0qBvYBWl27aY3xQDZI0CLdl6bao553C4bsuYuZ4C5v/cZyyCI3Ts8g4W8NUqi
+ +RRqmqrePlp8fD5myeaTpe5fCriKHBcmvmqx4WHHxdPpD739dLlB5frjunn9L+S9jkI6
+ wnJ378ev+1pklO+u8QolFCtPLcRvmgTUJNXjV90pK7vsuxW/ueOMAOZYFmVDji9HOvD+
+ Ts7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ycc5BzP01bpM3ZMJBQme9BAhdQJuG2kxK0O8jUN+YLQ=;
- fh=HXlBjaFPKNl7/dGz3iKj1O0uqLhSeI1LiJaypVLYyI0=;
- b=FwChxewoCIxo1Vf0yxG5Aj92VUHUEgS+1j//82esaJog9YbLfIfuuZBVSOQogIvxQl
- VGS3S62tUGatsIlKjCSyUfK6XfY7rkjBG963a1LpDMPxmptLtmZU31eR0QI+Qyc3UXZc
- W/u23gRpJskAPwp+plUWeZZFXutle3LZUUpZbnS4cWyI8aFpE3Tx3YWoKYAIwH63YiC4
- fSt/KeXdcSBUXClKEl0P4JE14MCQjMb48V5zv7bY8t522jTK7w+emKoT3kf3c5d2v+5R
- D9ocJ3c+qdP/NZp1PxteWqC1v8E0Rw1mSRcguVizYQQhnQn+rdb4AI6lH0llD+1lKxeR
- 0Fww==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=cxWJU6JH6KDDKSk0nvE7ztLcdbT/Q/bZongvJKLTNPM=;
+ fh=zTVi6mshrUeJ9QpeCSAV/3JF/7JHMQRxX3ysVuWRZi0=;
+ b=NGtFOd4zM9z/aprXbWdceyIpvx1sxdm9pAoTLcT2qCPbeGMgQqsPt95K/8/PFsdWFF
+ iYxVoTI5ZJREy2nUfi/1cvstFOgi42poxkzU9WMaFK/v70yWlXWDWUnkN9odtZ0cMvaW
+ KJ+tO4N7YH3GJYStgJBA0tyZ4QaUr0XER+asVGmpKeARkzcaJKm1l+sZSLzNcYUzjh9M
+ wSkjWyeru0B1Mi32fJFG0CqPlDiwbHnuqd0FFsItpDykLTE7ZsANNwdSuy9GIizAHSf0
+ GDZbA3Em+osiGm0CkbX0s9xL444neo1N5QTwdttxWh70pIPVS4oLwyOsiDSIv+rKEjTh
+ MWlA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782799041; x=1783403841; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ycc5BzP01bpM3ZMJBQme9BAhdQJuG2kxK0O8jUN+YLQ=;
- b=XZXIoRpdEFaGLfnVSSzzc9Ui6QxyD31krXx8qAJyVw+Jm5KzPwZDC1UhuZUydCAguJ
- HEY40NicO/S28EE0BqR7dWm9+D9hzHYn6TrkFq6qPCPbbnOG08tei+DWzgWgu9lKIe2e
- wQIV+tYajBzKoAjU/dyAl4cn8JujPL0wIOSnXO2DH0Eu8sd3hpNCIMRyq8xBcPd1IZcc
- HA5FgPqWic1fsbsAQWD2qOpWbLpGnUvGSToClAxJCzkfLLBZB801eMhMhUaMFCKLhmMt
- 7mS/WdDIH5dlD1buejLkClgb5vm86kMlG1OjIWtpS5jdJnC4qksmn28enpcaf3FARlho
- RfbA==
+ d=linaro.org; s=google; t=1782800663; x=1783405463; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cxWJU6JH6KDDKSk0nvE7ztLcdbT/Q/bZongvJKLTNPM=;
+ b=vMFVIgf0itqq907I2TXc8b+jIjOccO7Zo4BjEbb9rMdMWWtgoDEH7UwzxM/GlTIA0H
+ t19ZrQeo1cPz/owL77Ton2OgCtEpaxCU5vw7VTfXc1RYBmgRtsPxW2OY2Bx995rwIbfi
+ Xi+jMjqpX+ORTFX7jmTCRHyfkNXrnVjhCPRxEY4l1iYow24V4s8XXOojjDiZrrtFBWe2
+ 8/qSu9dTPFAtzV1AzttJedogPsDlHGThM+yIBUoWpxzSQzMe8xnl0IiWidisdGC7Ylsg
+ Swguo5G/jvVqBA5SL3BSyu5g2Kvqf9KqptDNGysvRy8toO/DNUJPymoHyF3DHSoVlGpu
+ Vesw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782799041; x=1783403841;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ycc5BzP01bpM3ZMJBQme9BAhdQJuG2kxK0O8jUN+YLQ=;
- b=nx8prc+axirowEek8IOYzjN1EZLpMO8ODd+1tT1/WRzw7ZA8jbdr59ZFijvLC8KMfD
- Glg4DZ6vYoxOj2Frz9508b3qk8iv1fz3KBd+t4Vx9XaBKEepU66OvR2mRLsRM1FFr7jK
- JJLoD6jh0j8xZtEnjS3EuHiP3e1kPp1MzVEUg/PL8PnyS+kuhNwHFj1+UzYfDBaLGR6L
- h5Ix4gwddtegMnRCV3X7TmTa4RfXDzT+u87IXdaR7G2UyjURzeAx8lrGTNi4s0vKaMNb
- LiQCbkd1bHrFVSXhEViiFTAPhoyWbCAJb8TjfwNpqyqWJ8kxw0pwYvOmQIZZ3Pv/X/Yb
- jycQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpfkN9+9dTujQKchJ/kkEaUHxfRmbd/L/VTJlS7QMhCu7Z79Gsl7FC3TiJYEMpphKFfDQnE2Pw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywsh1RkJkxlDEI53lkd1xfyfJMv2GfyN/h1W6WXvh8Qq/CLiC50
- vS1XA3vzp7ySRpN2zGZgd0u5wr4v+36qD2zHMvBusFMPE/WJ1W4kpa+f9qj3XwgX50js8sDJYBG
- d1/xYOCXlC6r7q1waubvnjLErJVJ4efmmMS/Qny1hFg==
-X-Gm-Gg: AfdE7ck+b19ywHoHWhBcTpcMpaQBikHZgvilaznxrpsG6xXe4wIEuPch7T55xGeRFG6
- LACyD7NNeMqL5l0/M36SBxwODFAV/1gX9wKHZPjfgwXaF/9f4qor4Yznn92nMYRbDuyydeseWGw
- l/2fgPG2SK0S/EUUebxogVKmHwyhdwm0+bh5TzxjLjHLQaRzYSYThB2cy/DyqaY+PfZ+6U4uCw8
- aCQFhg1Asa85A22WvqbqPyxnfLAGs7VaaDzgtUiMtMS2U68k+tvByOjEu13+wVBRIhdHKZdD8C9
- jvUg+iRTsdp/idTKj4fHUDpM8sY=
-X-Received: by 2002:a05:6870:d185:b0:443:1de6:beb3 with SMTP id
- 586e51a60fabf-44ae2bbc415mr323687fac.5.1782799040724; Mon, 29 Jun 2026
- 22:57:20 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1782800663; x=1783405463;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cxWJU6JH6KDDKSk0nvE7ztLcdbT/Q/bZongvJKLTNPM=;
+ b=G3UI2nLAugktLNxeEEhRwYvozCgcJxkLlxrpHnQz9di8bM7436RMbWmcJkCGX+esvR
+ Cc3kWi0kFo6QYtcPGFTXCV+0bl67vbNQRJVW7LCJ9+GuUoDT1LGWmijjPIZAWIjmLqem
+ ekFBH3L2baqAqy4ikju1UQu5wxerMIn4t+dJnMjUUjREloi8wEHdrDlp/zmInX8q7h/K
+ EY2KOHV/mXm2Y8d9W44JjkQ7LqTanURzv/YhW09P3TYIgnFySSQt2l3aJI9SoSeMb6zp
+ p7hxZo4GeWSPQYiCxa5IKweunt63bVoVBpgmW4liFfC2qp7xIjKYYoKDB4Oz68+8IwMz
+ /S6w==
+X-Gm-Message-State: AOJu0YzQSRKIuuBGeD/+sJT2tSsvnbfb+/n+wQ0syquQg+r0n1SJMenQ
+ kjrgzbPIoQ7L+wZL5uUuLu+76WlDUyTsR48Gh4jw+7ZgQXsTdkKWgaEeSfkqJl8tWWU7rUT9T+o
+ 8Tau0NxG+jGGPaM0tW3cuHFBMoPoV5LJE7jMvyTNMUP+dJug0QPHf8vJQdw==
+X-Gm-Gg: AfdE7cm1SKPOpOBmmEn6Y9WdYgC6s5LiAhgQ5Ywj0G+kLX4mwASgO3TN+VR6dC99WWV
+ kPMF3a1FKsqlhdvU2wzjBwlu8OuKonlXfJL7hzVUE4lIH3NKqK/TPF/jG/0iyxiwjjlwH/lJ6Jf
+ mKPODUsCBVDWef4gEDNQwI8WzKXcTgk9IBX83jben46or384dLWUon9lfTSEGxUhL3HjCLBXHwe
+ FEdGKvh3C685tH0ECrdjbUahOE+BjlxQhhJgnm/Cy8rL7aQ//7sv6BUkfCV0TMxqBu4IGChiv7b
+ s5XnXXuOAgKVYkUXvHf9xjA4ijy1yftLYE8pZXK9QnTlgaTXGdiH3Myr9KorJAC/2k9LAHmnSW8
+ ps0SQ4LRO5B2K9G2VGh+56wBOs708e27+YHaF/6LAouXtPLLBaz5rk+NtTUhfQvEbvNAFK0PsvN
+ LsvQbZtWMka/iwnVKG/nS+P6iA73+aLOFPjnI4x4/P38NWS4mTt+vCq/QpsZjO3WsITxiiiIaSv
+ NOiZTYJh8mMUNr3TMVg0gexyapS/MfCFTwbrqoRIpzt1OpfFP5nVDvbLa0MbgUeRBElcYmYJUbD
+ QpsfbxGOrr1YHnEPCwLIhL3A1hDjYLfOfMPBjpzpCkP46mj0ZAD4h6f5+VCwuvPRT0Hp2Cw=
+X-Received: by 2002:a05:690e:158b:10b0:664:ae68:ca03 with SMTP id
+ 956f58d0204a3-664f9a64d6amr1930091d50.73.1782800663570; Mon, 29 Jun 2026
+ 23:24:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
- <88b37a74-6d98-4a6f-8f77-4ff5c47459c2@amd.com>
- <CAC_iWj+isM=utVFXdKY0RuQJZ9qJQe355PAd=TrCZ3YvLzVymw@mail.gmail.com>
- <bed15a62-5645-4ae2-a207-b65d74ecc11f@amd.com>
-In-Reply-To: <bed15a62-5645-4ae2-a207-b65d74ecc11f@amd.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Tue, 30 Jun 2026 07:57:08 +0200
-X-Gm-Features: AVVi8CcliAmU07AEYBT_pVK1BsosTPZb1nkekKd549aqLmQciEfEpHsyawJTY1w
-Message-ID: <CAHUa44GibYFZ8fWK0qTVN5gU9h6JV8yDuv1eZ9Q8bV5qV2LYaA@mail.gmail.com>
-Subject: Re: [PATCH v4 00/64] drivers: usb: dwc3: sync code with Linux v6.16
-To: Michal Simek <michal.simek@amd.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>, Andre Przywara <andre.przywara@arm.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>, 
- Jerome Forissier <jerome.forissier@arm.com>
+References: <20260629233514.211746-1-heinrich.schuchardt@canonical.com>
+ <20260629233514.211746-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260629233514.211746-2-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 30 Jun 2026 09:23:47 +0300
+X-Gm-Features: AVVi8CdkCvyWfDH0kzkV3FWDY5Yjlyd23PHUH9qICHwBg1MQ4_aFa9sGEVcTKhA
+Message-ID: <CAC_iWj+4jPsbgEJ=eAabzMO=xZSyNM0nQxb=UbXa=HykaKJASA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] efi_loader: fix buffer overrun in
+ efi_sigstore_parse_siglist
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,187 +117,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Heinirch,
 
 
-On Tue, Jun 30, 2026 at 6:37=E2=80=AFAM Michal Simek <michal.simek@amd.com>=
- wrote:
+On Tue, 30 Jun 2026 at 02:35, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
+> In efi_sigstore_parse_siglist() sigdata is allocated. But instead of an
+> allocation matching the size of sigdata, tainted external data was used
+> to calculate the allocation size. This may lead to buffer overflows.
 >
->
-> On 6/29/26 21:07, Ilias Apalodimas wrote:
-> > Michal
-> >
-> > On Mon, 29 Jun 2026 at 13:53, Michal Simek <michal.simek@amd.com> wrote=
-:
-> >>
-> >> Hi Jens,
-> >>
-> >> On 6/29/26 10:43, Jens Wiklander wrote:
-> >>> Hi,
-> >>>
-> >>> This is a follow up on my last two patchsets [1] [2], where the latte=
-r only
-> >>> with a small change in addition to posting all the patches.
-> >>>
-> >>> The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven=
- years
-> >>> ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux ke=
-rnel
-> >>> to u-boot"). Since then, not many kernel changes have been ported bac=
-k into
-> >>> U-Boot.
-> >>>
-> >>> This series synchronizes the DWC3 core with Linux v6.16. To provide
-> >>> a clear audit trail and maintain bisectability, I have structured the
-> >>> series as follows:
-> >>>
-> >>> 1. Restore to Baseline: The first commit reverts U-Boot-specific chan=
-ges
-> >>>      to drivers/usb/dwc3 to return the directory to a clean v3.19-rc1=
- state.
-> >>> 2. Milestone Imports: A sequence of 50+ commits follows, each perform=
-ing
-> >>>      a "snapshot" import of the drivers/usb/dwc3 directory for every =
-major
-> >>>      kernel version (v3.19 through v6.16).
-> >>> 3. U-Boot Adaptation: The final commits (based on Jerome's original w=
-ork [3])
-> >>>      re-introduce the necessary glue code, XHCI/UDC updates, and buil=
-d fixes
-> >>>      required for U-Boot integration.
-> >>>
-> >>> Note that this is compile-tested only. The CI pipeline on source.denx=
-.de
-> >>> was used as an OK/NOK indicator [4].
-> >>>
-> >>> These patches are also available at [5].
-> >>>
-> >>> Thanks,
-> >>> Jens
-> >>>
-> >>> [1] https://lore.kernel.org/u-boot/20260507092843.358908-1-jens.wikla=
-nder@linaro.org/
-> >>> [2] https://lore.kernel.org/u-boot/20260624123025.GA3245275@rayden/
-> >>> [3] https://lore.kernel.org/all/20251121153812.2076440-1-jerome.foris=
-sier@linaro.org/
-> >>> [4] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/3=
-0524
-> >>> [5] https://github.com/jenswikl/u-boot-1/tree/poc/usb_dwc3_sync_v4
-> >>>
-> >>> v3 -> v4:
-> >>> - Restored obj-$(CONFIG_$(PHASE_)USB_DWC3_AM62) for dwc3-am62.o
-> >>>
-> >>> RFC v2 -> v3:
-> >>> - Rebased on v2026.07-rc3
-> >>> - Configured out a few prints in drivers/usb/gadget/udc/udc-core.c
-> >>>     to make it build for am335x_evm_defconfig
-> >>> - Applied provided tags in [1]
-> >>> - Published as a branch
-> >>>
-> >>> RFC v1 -> RFC v2:
-> >>> - Split the v1 ("usb: dwc3: re-import from kernel v6.16-rc7") into ("=
-usb:
-> >>>     dwc3: restore to original v3.19-rc1 kernel import"),  ("usb: dwc3=
-: import
-> >>>     from kernel v3.19)..("usb: dwc3: import from kernel v6.16-rc7")
-> >>>
-> >>> Jens Wiklander (60):
-> >>>     usb: dwc3: restore to original v3.19-rc1 kernel import
-> >>>     usb: dwc3: import from kernel v3.19
-> >>>     usb: dwc3: import from kernel v4.0
-> >>>     usb: dwc3: import from kernel v4.1
-> >>>     usb: dwc3: import from kernel v4.2
-> >>>     usb: dwc3: import from kernel v4.3
-> >>>     usb: dwc3: import from kernel v4.4
-> >>>     usb: dwc3: import from kernel v4.5
-> >>>     usb: dwc3: import from kernel v4.6
-> >>>     usb: dwc3: import from kernel v4.7
-> >>>     usb: dwc3: import from kernel v4.8
-> >>>     usb: dwc3: import from kernel v4.9
-> >>>     usb: dwc3: import from kernel v4.10
-> >>>     usb: dwc3: import from kernel v4.11
-> >>>     usb: dwc3: import from kernel v4.12
-> >>>     usb: dwc3: import from kernel v4.13
-> >>>     usb: dwc3: import from kernel v4.14
-> >>>     usb: dwc3: import from kernel v4.15
-> >>>     usb: dwc3: import from kernel v4.16
-> >>>     usb: dwc3: import from kernel v4.17
-> >>>     usb: dwc3: import from kernel v4.18
-> >>>     usb: dwc3: import from kernel v4.19
-> >>>     usb: dwc3: import from kernel v4.20
-> >>>     usb: dwc3: import from kernel v5.0
-> >>>     usb: dwc3: import from kernel v5.1
-> >>>     usb: dwc3: import from kernel v5.2
-> >>>     usb: dwc3: import from kernel v5.3
-> >>>     usb: dwc3: import from kernel v5.4
-> >>>     usb: dwc3: import from kernel v5.5
-> >>>     usb: dwc3: import from kernel v5.6
-> >>>     usb: dwc3: import from kernel v5.7
-> >>>     usb: dwc3: import from kernel v5.8
-> >>>     usb: dwc3: import from kernel v5.9
-> >>>     usb: dwc3: import from kernel v5.10
-> >>>     usb: dwc3: import from kernel v5.11
-> >>>     usb: dwc3: import from kernel v5.12
-> >>>     usb: dwc3: import from kernel v5.13
-> >>>     usb: dwc3: import from kernel v5.14
-> >>>     usb: dwc3: import from kernel v5.15
-> >>>     usb: dwc3: import from kernel v5.16
-> >>>     usb: dwc3: import from kernel v5.17
-> >>>     usb: dwc3: import from kernel v5.18
-> >>>     usb: dwc3: import from kernel v5.19
-> >>>     usb: dwc3: import from kernel v6.0
-> >>>     usb: dwc3: import from kernel v6.1
-> >>>     usb: dwc3: import from kernel v6.2
-> >>>     usb: dwc3: import from kernel v6.3
-> >>>     usb: dwc3: import from kernel v6.4
-> >>>     usb: dwc3: import from kernel v6.5
-> >>>     usb: dwc3: import from kernel v6.6
-> >>>     usb: dwc3: import from kernel v6.7
-> >>>     usb: dwc3: import from kernel v6.8
-> >>>     usb: dwc3: import from kernel v6.9
-> >>>     usb: dwc3: import from kernel v6.10
-> >>>     usb: dwc3: import from kernel v6.11
-> >>>     usb: dwc3: import from kernel v6.12
-> >>>     usb: dwc3: import from kernel v6.13
-> >>>     usb: dwc3: import from kernel v6.14
-> >>>     usb: dwc3: import from kernel v6.15
-> >>>     usb: dwc3: import from kernel v6.16
-> >>>
-> >>> Jerome Forissier (4):
-> >>>     usb: host: re-import xhci-ext-caps.h from kernel v6.16
-> >>>     usb: gadget: re-import epautoconf.c from kernel v6.16
-> >>>     usb: udc: re-import udc-core.c from kernel v6.16
-> >>>     usb: fix build after resync of DWC3 with kernel v6.16
-> >>
-> >>
-> >> 4 patches are missing.
-> >>
-> >> b4 am -l 20260629084507.3254232-2-jens.wiklander@linaro.org
-> >> ...
-> >>     ERROR: missing [61/64]!
-> >>     ERROR: missing [62/64]!
-> >>     ERROR: missing [63/64]!
-> >>     ERROR: missing [64/64]!
-> >
-> > I do see all of them in my mailbox and u-boot list is cc'ed. Haven;t
-> > tried b4 though
->
-> They are available now.
+> * Correct the allocation size.
+> * Follow the man-page. Use the structure size as second argument for
+>   calloc.
 
-That's good. I got a bunch of:
-[PATCH v4 64/64] usb: fix build after resync of DWC3 with kernel
-v6.16
-
-Is being held until the list moderator can review it for approval.
-
-The reason it is being held:
-
-    Too many recipients to the message
-
-Cheers,
-Jens
+I think the fix is correct, but the commit message might be misleading.
+Looking at the values sizeof(*sig_data) is 40b, but the
+esl->signature_size - sizeof(esd->signature_owner)) is way bigger and
+depends on the actual signature size. So I dont think something bad
+really happens apart from wasting a few bytes of memory.
+The actual point of the signature size is correctly allocated a few lines below.
 
 >
-> Thanks,
-> Michal
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+With the commit message updated
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+> ---
+> v2:
+>         no change
+> ---
+>  lib/efi_loader/efi_signature.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
+> index 93a4f257016..6aff5c14a89 100644
+> --- a/lib/efi_loader/efi_signature.c
+> +++ b/lib/efi_loader/efi_signature.c
+> @@ -703,8 +703,7 @@ efi_sigstore_parse_siglist(struct efi_signature_list *esl)
+>                         goto err;
+>                 }
+>
+> -               sig_data = calloc(esl->signature_size
+> -                                       - sizeof(esd->signature_owner), 1);
+> +               sig_data = calloc(1, sizeof(*sig_data));
+>                 if (!sig_data) {
+>                         EFI_PRINT("Out of memory\n");
+>                         goto err;
+> --
+> 2.53.0
+>
