@@ -4,121 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D68C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 09:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C8DC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 09:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2106384A1F;
-	Tue, 30 Jun 2026 11:11:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1BA9384A1F;
+	Tue, 30 Jun 2026 11:37:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kunv/K5t";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G+Gb9xEN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 606FD84A27; Tue, 30 Jun 2026 11:11:46 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C31A84A20; Tue, 30 Jun 2026 11:37:08 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57CB384869
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 11:11:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A622384979
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 11:37:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7e9483cd614so399600a34.1
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 02:11:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782810702; cv=none;
- d=google.com; s=arc-20260327;
- b=kLgZ8W7yWma/ovhifLrP7SITvzLuBSimyPR7RWrvhxhbiK9CRDjkxwl1WTD/sKO/xp
- 94caogsTQ4eyqZR5y4YukF2m5oCJfWTyW2YeHEgasiPanjW4E/ceLVrEtq04mgz3VZFO
- 8OkECxZjobC3tgjZNHvwS682KdNAIR32B8jkQuIcx1CeWaWQFgthmNx+wK75mtW7fz7f
- N3Qi+DT/VmXCY/a1AVoovqIb59HYywKOihM1HDznNimIwio5F2rDxaGfrcSNNKOHHDUB
- nJ46HXH7cjcIHnt4Qe4gEuxFa2NSTYLLEtzqwDRBOcLStPN0szTQb1+v2svcMLNLihFe
- BDQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=nbPUALf7VGq0fR0vQUQB5kOl4vcIMWJNMG2zdo53JxU=;
- fh=/zObRmlwo2qijiiD9XDPQyCkwHyIo2emU0+TjLh7BCM=;
- b=hepA/213rusgFPun+F0n+XXhNpySlcOayuhN/ooHWQUSvemxvr490oDlD4MKispjZX
- 0nVsoaytgYilr6KKexwYNpVI7Q1XlOVoUylQtA7VmyyjjmnDXfgTKkZQ9DMje0Vblu8R
- n8UzvCDjP1HM3hqJchJHdhgJiWaDUVprJqrEYIhU+Z940k2L5Z1Iv/XAWN41eI1IZ1jI
- i1qneyqFiQw6o14DweZ2xzWl5v14lT+jRopvXLEZmOro4MLWrT7mOAwfwH9OBSdMdAhL
- cQKDsmS775MPOt6cDKrSdy9KueD2sDa7i3eV+RCe1AyVfB+Qee9gpmht8dcJRNgztA2D
- F45A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782810702; x=1783415502; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nbPUALf7VGq0fR0vQUQB5kOl4vcIMWJNMG2zdo53JxU=;
- b=Kunv/K5t5LsqtD9RO/RKD6WJSkyo9sP+tGD2os4Y1VjJREjfZ9pgR2B0aeRjzpjf1f
- 6hvR+FYui+Dvl4435uJN7sg+naKuMMw1Wga83cwmosq8dsJwxrcMU3uImjTHfW3TiYqV
- uGY+eBcx2aymuLIT6ExBg9ipMluyH8P18rG7r1LDrBQzhojzDAoK+5QyHcwof1L7Ym+2
- WE9O07qvhVBGf6yV4xv6yY8VyqOkMiu9owSaH9X92Bdrn0tY6Dn3c1qmiLcEHw/cCvCA
- 1zWZrLohX15lCWOnc/TjLw5y9WkfYZALIeXfFP3+tSuSNxln1SKQfKMvzT8Nm2oPkcrA
- ZtXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782810702; x=1783415502;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=nbPUALf7VGq0fR0vQUQB5kOl4vcIMWJNMG2zdo53JxU=;
- b=aVih/jwkqaUiiMw0JFe0CXg+cqDKhyUHmEEHzbinDTQZtXmUWuI2mvbZmNfcg7Q4Ei
- y9mDReGNLqNC06bJOR8IGAczJEWcKH6cP58zL05XrMc29l0/spLFBfIzLmnYAnf2Y7cx
- wIDEAEZff2JRHh0LdX257vD6BnMmwX2cdRPfJAAOAeY7lIXeu5g6/NTWBJsWhvxIT/aa
- 5zHXbXk5yRMkMhr/qxkP/z8USBNeOR0bqNFdGuqVhUj5x/NuoEEbYYMq8WF3RS1bZZZI
- DZ9kab0kafCVQj2oaUDNKRl/Vfdz4vYqrH9jhgoOEOMH7u4CxXITHm4Tso68DEgUqI3r
- L9oA==
-X-Gm-Message-State: AOJu0YxMeEY+441wZDWW5GcGA9Xdmv7UhhT+skh8gmTp2+KQJBBPx41W
- L7C25XootiC839lwT/eFz5q2oJjNczgXvYzW6wiQcuKTnxN32lQi0XuEt3DxZEF/85BBMEvkzJ0
- zeJrs5v9wMKbCcDuDYjzKkq27oYt4Z7YBBb3HohQIYg==
-X-Gm-Gg: AfdE7clG6lOAda6mEwX3TeX131/HR43yreSSrveNWgcDVmvqjqMH6eTuqEceJtsFgWG
- VSffF2c0d9+qZ6iUuBMKArLvNQ3HGznwgcHq/W4Xam5lobBUSBN4YxKCa+2iYjAa3gGskwmj0T8
- DLwHjtIF1XXakO7LZtmPKfr/ySh48W9yfBPaP8vaXOK4JSMZIGik5LFBFP2fr2lwQCu9fTtTFp+
- ZsLbCzwL3bJSDTlre29TkSW7zroEJu7jVnTQw3ITdCJa1vLRZujymbuoZy+pzgBc5+NLWl1YH6N
- mka6LnOumTKUUrXl7zMcjcklQR0=
-X-Received: by 2002:a05:6820:6ae2:b0:6a0:c657:1648 with SMTP id
- 006d021491bc7-6a19222c6fcmr472434eaf.26.1782810701891; Tue, 30 Jun 2026
- 02:11:41 -0700 (PDT)
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id CFBFA4161C;
+ Tue, 30 Jun 2026 09:37:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBDB51F00A3A;
+ Tue, 30 Jun 2026 09:37:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1782812222;
+ bh=Fby6VvbDMklpNhZqZ/NOcW7Fdme+ea2k6H9zCpH6AdM=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=G+Gb9xEN687OZfccES2rDjEcXY5WfYvrIXxExxK9qjDE0zsBLXZdVrMHOSNSLtx4z
+ 9XoucAhzfwSHYGf+YMbQv5gWuSt25QNuFua9D3AU9O4vgtaflfQ2Nr9x56rbo3bWAH
+ 6sAVN073ostQuSm/pkqr7zbyydIHvXgBgEmSi8UgFuZAkjp8H9XCYKRZ+zS80Pi1lO
+ 5c31r2cjPyspeED+HabtpZ0tBtWspEECdO1btmId7f5TMdIgKEgSZ2KHQfBFkWLO3w
+ nZIPdfFicZmQ37lPW1IBlvnlSB/v9W9LNjA/FnMuBMkLSzPl8i9xlnIrOu2m8AnpMr
+ J4Dpm+YhFy2GQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de, Marek
+ Vasut <marex@denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andre Przywara
+ <andre.przywara@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>, Casey
+ Connolly <casey.connolly@linaro.org>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Ion Agorria
+ <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>, Kongyang Liu
+ <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Stephan Gerhold
+ <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom
+ Rini <trini@konsulko.com>, Varadarajan Narayanan
+ <quic_varada@quicinc.com>, Weijie Gao <weijie.gao@mediatek.com>, Zixun LI
+ <admin@hifiphile.com>, Jerome Forissier <jerome.forissier@arm.com>, Jens
+ Wiklander <jens.wiklander@linaro.org>
+Subject: Re: [PATCH v4 00/64]  drivers: usb: dwc3: sync code with Linux v6.16
+In-Reply-To: <20260629084507.3254232-1-jens.wiklander@linaro.org>
 References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
- <20260629084507.3254232-20-jens.wiklander@linaro.org>
- <7dd650b5-2d08-45cc-8d7f-c9bee56de4a8@nabladev.com>
-In-Reply-To: <7dd650b5-2d08-45cc-8d7f-c9bee56de4a8@nabladev.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Tue, 30 Jun 2026 11:11:29 +0200
-X-Gm-Features: AVVi8CewnrpuCuYpjG4goEx8Rw3bhtC-zlb200jDjauaTE_BhRsWQ17O4tarL2c
-Message-ID: <CAHUa44FQ6b4siyBnOdEz2cBs9rrRNCgGC=-s0h2gkGG79dLADA@mail.gmail.com>
-Subject: Re: [PATCH v4 19/64] usb: dwc3: import from kernel v4.16
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Eddie Cai <eddie.cai.linux@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Alexey Charkov <alchark@flipper.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Tue, 30 Jun 2026 11:36:59 +0200
+Message-ID: <8733y48j44.fsf@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,103 +85,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 30, 2026 at 11:04=E2=80=AFAM Marek Vasut <marex@nabladev.com> w=
-rote:
->
-> On 6/29/26 10:43 AM, Jens Wiklander wrote:
-> > Sync Linux kernel dwc3 changes from v4.15 to v4.16.
-> >
-> > The following files are preserved accross the import:
-> > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-> > dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-> > dwc3-layerscape.c ti_usb_phy.c
-> >
-> > Skipping unused files:
-> > debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-> > dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.=
-c
-> > dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
-> >
-> > Note that this is a raw import and doesn't build.
-> > A fixup commit at the end of the series fixes that.
-> >
-> > List of commits: git log --oneline v4.15..v4.16
-> > Commits imported:
-> > 084a804e0120 usb: dwc3: Fix lock-up on ID change during system suspend/=
-resume
-> > 98112041bcca usb: dwc3: core: Fix ULPI PHYs and prevent phy_get/ulpi_in=
-it during suspend/resume
-> > b16ea8b9492e usb: dwc3: Fix GDBGFIFOSPACE_TYPE values
-> > c49f63055e25 usb: dwc3: omap: don't miss events during suspend/resume
-> > c4a5153e87fd usb: dwc3: core: Power-off core/PHYs on system_suspend in =
-host mode
-> > 00b42170c86f usb: dwc3: Undo PHY init if soft reset fails
-> > f035d139ffec usb: dwc3: ep0: Reset TRB counter for ep0 IN
-> > 6180026341e8 usb: dwc3: gadget: Set maxpacket size for ep0 IN
-> > bff52352e0cc usb: dwc3: of-simple: fix oops by unbalanced clk disable c=
-all
-> > f1faf88c137b Merge tag 'phy-for-4.16' of git://git.kernel.org/pub/scm/l=
-inux/kernel/git/kishon/linux-phy into usb-next
-> > 958e052c5448 Merge tag 'usb-for-v4.16' of git://git.kernel.org/pub/scm/=
-linux/kernel/git/balbi/usb into usb-next
-> > d8c80bb3b55b phy: exynos5-usbdrd: Calibrate LOS levels for exynos5420/5=
-800
-> > d9e3d899bc7a Merge 4.15-rc4 into usb-next
-> > 42bf02ec6e42 usb: dwc3: Allow disabling of metastability workaround
-> > 204ec1af6257 usb: dwc3: Make sparse a bit happier
-> > 19e0b203bfbd usb: dwc3: ep0: use gadget->isoch_delay for isoch_delay va=
-lue
-> > 0c5d2954f690 usb: dwc3: debug: decode a few more features
-> >
-> > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-> > Tested-by: Alexey Charkov <alchark@flipper.net>
-> > ---
-> >   drivers/usb/dwc3/core.c   | 93 ++++++++++++++++++++++++++++----------=
--
-> >   drivers/usb/dwc3/core.h   | 26 +++++++----
-> >   drivers/usb/dwc3/debug.h  |  9 ++++
-> >   drivers/usb/dwc3/ep0.c    | 13 +++---
-> >   drivers/usb/dwc3/gadget.c |  8 +++-
-> >   5 files changed, 106 insertions(+), 43 deletions(-)
-> >
-> > diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> > index 07832509584f..e94bf91cc58a 100644
-> > --- a/drivers/usb/dwc3/core.c
-> > +++ b/drivers/usb/dwc3/core.c
-> > @@ -100,6 +100,8 @@ static void dwc3_set_prtcap(struct dwc3 *dwc, u32 m=
-ode)
-> >       reg &=3D ~(DWC3_GCTL_PRTCAPDIR(DWC3_GCTL_PRTCAP_OTG));
-> >       reg |=3D DWC3_GCTL_PRTCAPDIR(mode);
-> >       dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-> > +
-> > +     dwc->current_dr_role =3D mode;
-> >   }
-> >
-> >   static void __dwc3_set_mode(struct work_struct *work)
-> > @@ -133,8 +135,6 @@ static void __dwc3_set_mode(struct work_struct *wor=
-k)
-> >
-> >       dwc3_set_prtcap(dwc, dwc->desired_dr_role);
-> >
-> > -     dwc->current_dr_role =3D dwc->desired_dr_role;
-> > -
-> >       spin_unlock_irqrestore(&dwc->lock, flags);
-> >
-> >       switch (dwc->desired_dr_role) {
-> > @@ -147,6 +147,7 @@ static void __dwc3_set_mode(struct work_struct *wor=
-k)
-> >                               otg_set_vbus(dwc->usb2_phy->otg, true);
-> >                       phy_set_mode(dwc->usb2_generic_phy, PHY_MODE_USB_=
-HOST);
-> >                       phy_set_mode(dwc->usb3_generic_phy, PHY_MODE_USB_=
-HOST);
-> > +                     phy_calibrate(dwc->usb2_generic_phy);
->
-> Does this actually compile ? I don't think U-Boot code base contains
-> phy_calibrate() function ?
+Hi Jens,
 
-No, I don't expect it does. By the way, it's mentioned in the commit messag=
-e.
+Thank you for the series.
+This is a lot of work.
 
-Cheers,
-Jens
+On Mon, Jun 29, 2026 at 10:43, Jens Wiklander <jens.wiklander@linaro.org> wrote:
+
+> Hi,
+>
+> This is a follow up on my last two patchsets [1] [2], where the latter only
+> with a small change in addition to posting all the patches.
+>
+> The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven years
+> ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel
+> to u-boot"). Since then, not many kernel changes have been ported back into
+> U-Boot.
+>
+> This series synchronizes the DWC3 core with Linux v6.16. To provide
+> a clear audit trail and maintain bisectability, I have structured the
+> series as follows:
+>
+> 1. Restore to Baseline: The first commit reverts U-Boot-specific changes
+>    to drivers/usb/dwc3 to return the directory to a clean v3.19-rc1 state.
+> 2. Milestone Imports: A sequence of 50+ commits follows, each performing
+>    a "snapshot" import of the drivers/usb/dwc3 directory for every major
+>    kernel version (v3.19 through v6.16).
+> 3. U-Boot Adaptation: The final commits (based on Jerome's original work [3])
+>    re-introduce the necessary glue code, XHCI/UDC updates, and build fixes
+>    required for U-Boot integration.
+>
+> Note that this is compile-tested only. The CI pipeline on source.denx.de
+> was used as an OK/NOK indicator [4].
+>
+> These patches are also available at [5].
+
+I've tried this out on the Khadas VIM3 board using
+khadas-vim3_android_defconfig and usb gadget (with fastboot) seems to
+misbehave.
+
+With the series applied, I see:
+"""
+U-Boot 2026.07-rc3-00064-g511db6941796 (Jun 30 2026 - 11:20:08 +0200) khadas-vim3
+
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  408 devices, 37 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... MMC Device -1 not found
+*** Warning - No MMC card found, using default environment
+
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
+
+Hit any key to stop autoboot: 0
+=> fastboot usb 0
+failed to start <NULL>: -12
+g_dnl_register: failed!, error: -12
+exit not allowed from main input shell.
+"""
+
+With v2026.07-rc3, I see:
+"""
+U-Boot 2026.07-rc3 (Jun 30 2026 - 11:24:04 +0200) khadas-vim3
+
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  408 devices, 37 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... MMC Device -1 not found
+*** Warning - No MMC card found, using default environment
+
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
+
+Hit any key to stop autoboot: 0
+=> fastboot usb 0
+crq->brequest:0x0
+"""
+
+The failure code path seems to go through:
+g_dnl_register("usb_dnl_fastboot");
+  usb_composite_register(&g_dnl_driver);
+    usb_gadget_register_driver(&composite_driver);
+      usb_gadget_probe_driver(driver);
+        udc_bind_to_driver(udc, driver);
+          driver->bind(udc->gadget);
+
+
+I don't know why it's happening but I wanted to give some feedback early
+on.
+I'll have a closer look.
+
+Thanks,
+Mattijs
+
+>
+> Thanks,
+> Jens
+>
+> [1] https://lore.kernel.org/u-boot/20260507092843.358908-1-jens.wiklander@linaro.org/
+> [2] https://lore.kernel.org/u-boot/20260624123025.GA3245275@rayden/
+> [3] https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
+> [4] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/30524
+> [5] https://github.com/jenswikl/u-boot-1/tree/poc/usb_dwc3_sync_v4
+>
+> v3 -> v4:
+> - Restored obj-$(CONFIG_$(PHASE_)USB_DWC3_AM62) for dwc3-am62.o
+>
+> RFC v2 -> v3:
+> - Rebased on v2026.07-rc3
+> - Configured out a few prints in drivers/usb/gadget/udc/udc-core.c
+>   to make it build for am335x_evm_defconfig
+> - Applied provided tags in [1]
+> - Published as a branch
+>
+> RFC v1 -> RFC v2:
+> - Split the v1 ("usb: dwc3: re-import from kernel v6.16-rc7") into ("usb:
+>   dwc3: restore to original v3.19-rc1 kernel import"),  ("usb: dwc3: import
+>   from kernel v3.19)..("usb: dwc3: import from kernel v6.16-rc7")
+>
+> Jens Wiklander (60):
+>   usb: dwc3: restore to original v3.19-rc1 kernel import
+>   usb: dwc3: import from kernel v3.19
+>   usb: dwc3: import from kernel v4.0
+>   usb: dwc3: import from kernel v4.1
+>   usb: dwc3: import from kernel v4.2
+>   usb: dwc3: import from kernel v4.3
+>   usb: dwc3: import from kernel v4.4
+>   usb: dwc3: import from kernel v4.5
+>   usb: dwc3: import from kernel v4.6
+>   usb: dwc3: import from kernel v4.7
+>   usb: dwc3: import from kernel v4.8
+>   usb: dwc3: import from kernel v4.9
+>   usb: dwc3: import from kernel v4.10
+>   usb: dwc3: import from kernel v4.11
+>   usb: dwc3: import from kernel v4.12
+>   usb: dwc3: import from kernel v4.13
+>   usb: dwc3: import from kernel v4.14
+>   usb: dwc3: import from kernel v4.15
+>   usb: dwc3: import from kernel v4.16
+>   usb: dwc3: import from kernel v4.17
+>   usb: dwc3: import from kernel v4.18
+>   usb: dwc3: import from kernel v4.19
+>   usb: dwc3: import from kernel v4.20
+>   usb: dwc3: import from kernel v5.0
+>   usb: dwc3: import from kernel v5.1
+>   usb: dwc3: import from kernel v5.2
+>   usb: dwc3: import from kernel v5.3
+>   usb: dwc3: import from kernel v5.4
+>   usb: dwc3: import from kernel v5.5
+>   usb: dwc3: import from kernel v5.6
+>   usb: dwc3: import from kernel v5.7
+>   usb: dwc3: import from kernel v5.8
+>   usb: dwc3: import from kernel v5.9
+>   usb: dwc3: import from kernel v5.10
+>   usb: dwc3: import from kernel v5.11
+>   usb: dwc3: import from kernel v5.12
+>   usb: dwc3: import from kernel v5.13
+>   usb: dwc3: import from kernel v5.14
+>   usb: dwc3: import from kernel v5.15
+>   usb: dwc3: import from kernel v5.16
+>   usb: dwc3: import from kernel v5.17
+>   usb: dwc3: import from kernel v5.18
+>   usb: dwc3: import from kernel v5.19
+>   usb: dwc3: import from kernel v6.0
+>   usb: dwc3: import from kernel v6.1
+>   usb: dwc3: import from kernel v6.2
+>   usb: dwc3: import from kernel v6.3
+>   usb: dwc3: import from kernel v6.4
+>   usb: dwc3: import from kernel v6.5
+>   usb: dwc3: import from kernel v6.6
+>   usb: dwc3: import from kernel v6.7
+>   usb: dwc3: import from kernel v6.8
+>   usb: dwc3: import from kernel v6.9
+>   usb: dwc3: import from kernel v6.10
+>   usb: dwc3: import from kernel v6.11
+>   usb: dwc3: import from kernel v6.12
+>   usb: dwc3: import from kernel v6.13
+>   usb: dwc3: import from kernel v6.14
+>   usb: dwc3: import from kernel v6.15
+>   usb: dwc3: import from kernel v6.16
+>
+> Jerome Forissier (4):
+>   usb: host: re-import xhci-ext-caps.h from kernel v6.16
+>   usb: gadget: re-import epautoconf.c from kernel v6.16
+>   usb: udc: re-import udc-core.c from kernel v6.16
+>   usb: fix build after resync of DWC3 with kernel v6.16
+>
+>  drivers/usb/cdns3/ep0.c                |    8 +-
+>  drivers/usb/common/common.c            |   23 +
+>  drivers/usb/dwc3/Makefile              |   57 +-
+>  drivers/usb/dwc3/core.c                | 1710 ++++++----
+>  drivers/usb/dwc3/core.h                | 1060 ++++--
+>  drivers/usb/dwc3/debug.h               |  432 +++
+>  drivers/usb/dwc3/dwc3-omap.c           |    2 -
+>  drivers/usb/dwc3/ep0.c                 |  737 ++--
+>  drivers/usb/dwc3/gadget.c              | 4256 ++++++++++++++++--------
+>  drivers/usb/dwc3/gadget.h              |  112 +-
+>  drivers/usb/dwc3/glue.h                |   36 +
+>  drivers/usb/dwc3/io.h                  |   29 +-
+>  drivers/usb/dwc3/linux-compat.h        |   16 -
+>  drivers/usb/dwc3/samsung_usb_phy.c     |   77 -
+>  drivers/usb/dwc3/ti_usb_phy.c          |    2 -
+>  drivers/usb/gadget/at91_udc.c          |   46 -
+>  drivers/usb/gadget/atmel_usba_udc.c    |  102 +-
+>  drivers/usb/gadget/ci_udc.c            |  470 ---
+>  drivers/usb/gadget/composite.c         |    2 +-
+>  drivers/usb/gadget/dwc2_udc_otg.c      |  174 +-
+>  drivers/usb/gadget/epautoconf.c        |  289 +-
+>  drivers/usb/gadget/ether.c             |   21 +-
+>  drivers/usb/gadget/f_acm.c             |   20 +-
+>  drivers/usb/gadget/f_fastboot.c        |   10 +-
+>  drivers/usb/gadget/f_mass_storage.c    |    5 +-
+>  drivers/usb/gadget/f_rockusb.c         |   11 +-
+>  drivers/usb/gadget/f_sdp.c             |   12 +-
+>  drivers/usb/gadget/f_thor.c            |   19 +-
+>  drivers/usb/gadget/udc/Makefile        |    1 +
+>  drivers/usb/gadget/udc/udc-core.c      | 1099 +++++-
+>  drivers/usb/host/xhci-dwc3.c           |    4 +-
+>  drivers/usb/host/xhci-ext-caps.h       |  158 +
+>  drivers/usb/host/xhci-exynos5.c        |    2 +-
+>  drivers/usb/mtu3/mtu3_gadget_ep0.c     |   16 +-
+>  drivers/usb/musb-new/musb_gadget_ep0.c |   24 +-
+>  drivers/usb/musb-new/musb_uboot.c      |   39 -
+>  include/dm/device_compat.h             |   13 +
+>  include/dm/read.h                      |   46 +
+>  include/linux/compat.h                 |   15 +
+>  include/linux/usb/ch9.h                |   25 +-
+>  include/linux/usb/gadget.h             |  520 +--
+>  include/linux/usb/otg.h                |   10 +
+>  include/linux/usb/phy.h                |   56 +
+>  43 files changed, 7591 insertions(+), 4175 deletions(-)
+>  create mode 100644 drivers/usb/dwc3/debug.h
+>  create mode 100644 drivers/usb/dwc3/glue.h
+>  delete mode 100644 drivers/usb/dwc3/linux-compat.h
+>  delete mode 100644 drivers/usb/dwc3/samsung_usb_phy.c
+>  create mode 100644 drivers/usb/host/xhci-ext-caps.h
+>
+>
+> base-commit: 76d62273bc8a5dc126ed79ed0fb65e5a97359577
+> -- 
+> 2.43.0
