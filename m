@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C8EC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 17:05:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CE3C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 17:05:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57FF984A52;
-	Tue, 30 Jun 2026 19:05:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 951FE84AE3;
+	Tue, 30 Jun 2026 19:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AcrND6Aq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MSwH+FpL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5422484ADB; Tue, 30 Jun 2026 19:05:37 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 7B24984AC0; Tue, 30 Jun 2026 19:05:38 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32FB484A3C
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 19:05:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63BB284AC0
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 19:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7e9483cd614so866410a34.1
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:05:35 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7e6b5737bb2so4963369a34.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:05:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782839134; x=1783443934; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1782839135; x=1783443935; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KCP8PhPdl22O4vwUm8SoC6gLK4Ma9DsxWdL6uqRXxeA=;
- b=AcrND6Aqgjnqgb+VJy2aaNwwTyDYTPYYv626TEbc5BnR/fz041SlvTlkeuXv73Jx0Z
- efm6fodZFaSGkZHiTS+3304khJj3PrLT6dZnbrY+/aD9dcR1inDzWf0OEfi0o4h0k6rP
- Wr4RbB+JsSkm2J6EnWDiyh4sXm8CRqhlEwN2Y=
+ bh=DN6RH4lnENpZRRB2iU4tPuS3kbGSxevq3Dsy6UcwFCs=;
+ b=MSwH+FpL5nr7ho+ESBZPwHtGUabULUNGj4dDuY6L6Cu9RMowKYUG1lIK8bBB/nRZcx
+ QCCtwWn1P/2dIUcTvt01k+MO8YR+kIwy+IzOYP8/L/G/Fl1FMeQcBKFy5onUgQXuwoGz
+ tKgFEF+CDm31f59K0eVQe6alY3fSvZQ6XSkJM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782839134; x=1783443934;
+ d=1e100.net; s=20251104; t=1782839135; x=1783443935;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=KCP8PhPdl22O4vwUm8SoC6gLK4Ma9DsxWdL6uqRXxeA=;
- b=JRRFaA4eurSI1KD9vIAGeT5LZnTACourMLek+D2Dtio4zWPsk6XKlSVH45wqvEC8kt
- DP19W1+wleehZSzg3lv2ioegK8xSCB/z0p0rzkIxDuQxO5iFKpqdf1FUwzmuwixygX6f
- X/+ep8W0nJ3p6cK9tGKPC20jb8YFpYcn3A4WPDlFSYObv+unGjceCtXciXkOwuwL/gL7
- cYxGsgVkGK39FNZk14AF6K4WKgC00uh43++Lxlc7rnmqARrnzjXjv4q0164vXI4Wcs12
- 4xQfhbBTBsH/1hMfuEfUrbKBH4cRpNdnJ0v0Q1z9PxNKxlA4RhFrOHcXN8G6JaiKPPhj
- j4AQ==
-X-Gm-Message-State: AOJu0YzSBAidnIAcIYd+06NLm1HJsOv14HgIRoesVZ5ynAal/+L9QJUg
- +deH14lXGhp47MgBdalbYwDBtxEcpA9BxGy9MvA4ktMZjfDr+OdVr9RgS/ZK5iTvFbQ=
-X-Gm-Gg: AfdE7clWm1BqlVf8+RMUrJRwsByOWdA1m6putD3TsfhJVDjMdnJeurfLIM1hfLmPaLZ
- qppG7w7voXycha46TuGS5WwV3nald6yLNqMFv6nDHM6BFU/KBIKkMbT4lyhwB567krBabWDLOIN
- 3AL9vt35JeIdj4VFc9tlfAGtbgLcTyn4+EJVIg/IUJ8L+J7/FWDTCLdh3YJdo9qdwzRpa/DmlYb
- afaxE3Uu4eHScFHhaPrFTs4VbhC5X7ARFBh90OCjq3d43hU3DOnOEAuG+8KKsFXofBDaEoxLhvc
- qVApInZCEvD+kRS1/v7Hwc9PDNeehteUTQHQq08kz16QhGnyCTutmjy6Zpsnqpn4U0tu+gSM4KF
- GkWGq9kzPyhOx0gv/VySt4HWvpCqYOT7XoErsgddZtkSKqwHvSpn+SQCZQiE++Pu2AUXpEf4Qc9
- ZbSgurvWVyd0gke15q171A86eZJYjWXN4aWewSEaJvmRaLkJN9aL9jIKEbi51td9tf0WUVmTr37
- qn3ejv7xsT2x+8zRaYI8sQgabh64GRKnHnToS29ayv7DiIE+w==
-X-Received: by 2002:a9d:550a:0:b0:7e9:df35:ff99 with SMTP id
- 46e09a7af769-7e9f5f7516fmr1123887a34.16.1782839133840; 
- Tue, 30 Jun 2026 10:05:33 -0700 (PDT)
+ bh=DN6RH4lnENpZRRB2iU4tPuS3kbGSxevq3Dsy6UcwFCs=;
+ b=iZ4im7KMpBwZk6xLKKVD0TGBFK3ESHPRvl7b5hRfUBKGmMvjEJECOKk6y6bl3DhPQm
+ kh+OeDQRLwDFHnhHDcp/EdRjidP9RkfhyBFjA7zjo5Q+GsngjLyft08MXSBsfWn+3sVw
+ oaesb5x9iFQdcSSgvVyvZzUUGWlOuTQVCkmss2hPYnImlCGiVRWlAMesNq2YzTylK29A
+ /VkhbkXb/VLZXKyDQAnrxMa7NVbJhFwKvIGXDAtntWaTEyYGhKGEffBOLf35l4VCHLGo
+ k52Btvx2sJTLwnFlLOU7BbBb3XAessnGoKK0B9X4qkv+MpPLQrop/holBLbN4NiiLhfO
+ FnXg==
+X-Gm-Message-State: AOJu0YwqUJCITphvfQGbROrGAsjujsY41X3TF8yh9EQdlaLNnmC2UKCc
+ OvVMr/a/GVkj0f2Teu60nx3LsRSNFMXu475LQKY3erdBobRPh7haoRqKNQpXVQEuDc8=
+X-Gm-Gg: AfdE7clA0kiFV8xueLFIw4AAQ/g9/NRYk3QMFJFMBH1qCKXBTfpzgmIYVwcQy8Bqjqv
+ H+JkN8Ok99/BqIdHOrQriAZzUgnuicbTUDrsuRx1ICUanNNqutBxcz8A1+h4IDA4xU/o13n6gLx
+ ysLe2b4+cWfNBCJnFLTNzmu76fqvWvuQ4IkcWmZS1jWre3bOKrpw2gNI3vHBoZW1gv3e3469v8v
+ r76BmMbwLxlyXvxN5XKNxblZBapJlblCipW4bmPf8QH4xajot8k+ypgnEhXhek3SwJaZ9LvDAYg
+ pC+5ZHp2kY/k6GIZPoqg4/hymvkuGVmX77G1NaZwIVv9jNfJxFkygfO8Ki4rB3zN+yHGPQ8h0F2
+ SfeH17QjBWvNAkBXQRjnEOq9TdzGw8/hMeNqa6syV+0TGI/gn2Mew32B+k3ZqkZ7Zj2FD4XNGt0
+ SvdbAYV/5SFL8mmUNhcFwJyQwp4hhInUomKJeI898sRZsVA60aJwQcAyPwji5G3lvFjXvWiNznl
+ mdSoWFLTZ/4Jgx+YjhYKmcS8UOMatnusF9MqxnhM9UTBkTdCw==
+X-Received: by 2002:a05:6830:660b:b0:7e5:f957:a61f with SMTP id
+ 46e09a7af769-7e9ec7251cbmr4263039a34.18.1782839135183; 
+ Tue, 30 Jun 2026 10:05:35 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-245.totalplay.net.
  [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e9ebf89825sm2786550a34.3.2026.06.30.10.05.32
+ 46e09a7af769-7e9ebf89825sm2786550a34.3.2026.06.30.10.05.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 10:05:33 -0700 (PDT)
+ Tue, 30 Jun 2026 10:05:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sam Day <me@samcday.com>, 
- Ye Li <ye.li@nxp.com>, Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <878q7w8nab.fsf@kernel.org>
-References: <878q7w8nab.fsf@kernel.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20260629 into next
-Message-Id: <178283913292.999303.8742394721833922749.b4-ty@konsulko.com>
-Date: Tue, 30 Jun 2026 11:05:32 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
+In-Reply-To: <20260617023819.152378-1-marek.vasut+renesas@mailbox.org>
+References: <20260617023819.152378-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] MAINTAINERS: Replace Cortina with N:
+Message-Id: <178283913457.999303.17507996199229428532.b4-ty@konsulko.com>
+Date: Tue, 30 Jun 2026 11:05:34 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,22 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Jun 2026 10:06:52 +0200, Mattijs Korpershoek wrote:
+On Wed, 17 Jun 2026 04:38:04 +0200, Marek Vasut wrote:
 
-> Here is a PR for next with the following:
+> Use N: to match on all cortina files, drop the large list of
+> entries which represent the same set of relevant files and miss a
+> few in the process.
 > 
-> Fastboot:
-> * Add support for CMD_FASTBOOT_ABORT_KEYED
-> * Enable CMD_FASTBOOT_ABORT_KEYED for qualcomm phones
 > 
-> Usb Gadget:
-> * f_mass_storage: Disable eps during disconnect
-> * f_sdp: Fix spl load failure error handling
-> 
-> [...]
 
-Merged into u-boot/next, thanks!
+Applied to u-boot/next, thanks!
 
+[1/1] MAINTAINERS: Replace Cortina with N:
+      commit: 85a35bcd635f3f2e7d226323c2bbfef09d8d9443
 -- 
 Tom
 
