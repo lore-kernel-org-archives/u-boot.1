@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C89C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F5CC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:54:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A2D384B43;
+	by phobos.denx.de (Postfix) with ESMTP id 961F684B49;
 	Tue, 30 Jun 2026 14:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bRKqzmxn";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ERVeR8hw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="GvjLxALE";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j1lhmAbk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAD68849FB; Tue, 30 Jun 2026 10:10:33 +0200 (CEST)
+ id 7BD09849FB; Tue, 30 Jun 2026 10:10:45 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADA5484857
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:10:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44BA984857
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:10:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65U6CgRL1074128
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:10:30 GMT
+ 65U6CadD1056728
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:10:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 8VML1wqnU8JOSHw+FXhTavsh50qcPoC3xEpB1aeeWmU=; b=bRKqzmxnXxCnkpNE
- AGegefoPO7Uh99P7GTeq44P88/ce87R8p/+IbUYxVSsksfJhBe82FsXUxAcCoCTY
- b/ciX53Y45ntTq/LPiDf6VDEOWf++VRXe0LcmxlihRkB13GPLyxa87QhDR9BSKFj
- LlPLGPaQOALUMi/e/k4J7+qiUjiSEmnP7WNvSUsGIy8pbzFMNkzfsKjt437D2/5h
- /fkv2DCIY37L+R3ajgBKSBZJLWuav5w84QDxWdoseOFeqFVXtzuf93Ifwm5w1ndh
- UytR35Gua0X5U1jAMAXhnW5prghqS8LuM75d9sWKgaivztYpBdjZgWhfmQV6JEHR
- cug4/A==
+ RljcQ2DJGs5xE7DPWuQaSkwJCoTVCB1S+Obcets6Qds=; b=GvjLxALE96h1sSiF
+ OBI7wGYBpP5jq8CzPd3h4jqheEZ0IlrweO55D81FAqBCKncbFP2xgLF1FOyxr2NO
+ 7NuNMwEX8+NXy5opjjKX5DVCAhAptz5hXxFunxSfR3RZgcUygBLi9yyVRkBP4mfj
+ 9CBV0SWhK/TZBehHrcq824gbWKpAV7S4BNMFRSsORCOdAoQkzIAjFU+9Q1K5CEOD
+ qIgcEH7jcbBK/u7kfiJ7A7uMXyJpkACH2W9Q9O/AITLo7n1LWeHTRmrEXXlfVXYQ
+ b7EqTFdb4IkRlxs20rmVk3dox7rlEynQ8itahl/uucFMuB/LNeYUkmiADAywYMnr
+ WypSvg==
 Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
  [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f3y9k2bah-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f46861146-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:10:30 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:10:41 +0000 (GMT)
 Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-30c9bd8b9c7so5200619eec.0
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 01:10:30 -0700 (PDT)
+ 5a478bee46e88-30bcb065bfdso4958121eec.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 01:10:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782807029; x=1783411829; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1782807041; x=1783411841; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8VML1wqnU8JOSHw+FXhTavsh50qcPoC3xEpB1aeeWmU=;
- b=ERVeR8hwq1f1WKI7guX9bTpSPsKi5y2JIpmRtuaO71EtzWgKx7PFu1Dtc/+aMocrVc
- aBz8B1nJPlh+hiV7HEiCoULURCzgZh8kts5uej9Rje3bNZHyU+nyBr9oqjDi2u8w+t8A
- fd+0If2qPVlW+pMcjjWkELAFHVvx3+++l2V4ayWgKXDfyKZubzvCYznQBjTvvevM1e1S
- kl8Vr24iucYBWOp9TYdd2DK9JQBZiq5SCOEwhLa+ZTapuIbttANIXJrqfFZDi0KrhIW2
- wx12G9AtAocnZ5ujj0dhN41nYHtKR+KfBDYMpwmbHCRXIDvG3K9CzgpLk/Twd7iesJ4g
- wOyw==
+ :reply-to; bh=RljcQ2DJGs5xE7DPWuQaSkwJCoTVCB1S+Obcets6Qds=;
+ b=j1lhmAbki1k3UfvEVhn90JQVhbkSOdT1Wcr+Wkv3P5o8yP6zDKTB+2BSqMEf5RDBAK
+ 7RotAGiTiaXyEk/qbQsB20nSos5bDegyOjnMDV5ZqQPBe4SbansaaRKgri4IdqQfXHgP
+ 3Q8LLHP53I610CjDpiibWu1KLV2f3c1AbPPTQnpSIhtn1TI1YI8FC0BihAQhhlgVVGJ4
+ +nbQngcD7lAEeYzETKJHOHwqBgDxBVogdysnocyDrbX/v+kfJEoTd5dQ2DtrONxgIuCp
+ v0dAZEV8tzR4BjXIZjl1zmNLge9Qine4U9+2ksSohX7FbNs9Kj7MWeplLoZwh+VvZnYf
+ HrIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782807029; x=1783411829;
+ d=1e100.net; s=20251104; t=1782807041; x=1783411841;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=8VML1wqnU8JOSHw+FXhTavsh50qcPoC3xEpB1aeeWmU=;
- b=PnvL6G8/1Fi67qmLkvSyNrn/Rm3hAdaHPOtQr+1O+VYVNvefwl0HhsK9P8S0rHLsRc
- 89atUIlMQs0vTJnDmW5ePbHNjVIzUgb+4QDatqHR07G1ehaWT/YYvk7PTVIfTKCR5JEy
- uz8GWvGyATbfuJZiA73EFlpft9gey1hVVrDyw3KkPEsZsmUbxnAT6ghZDRK8Il1xLXnc
- lk7j6cSBsfNWgmndJqM9ExMccxs4PSzWRdlE30uwOKznxTNYRBGGV4I6TH8Du3xGscJh
- c1w3J8uTb+wEUtwzRii16eARPrN16DJ+V8tFB2+MKCjoo20oKCEUEzIVYrpp1ALOcg3i
- 1rRw==
-X-Gm-Message-State: AOJu0YzrH9706sMRbkWyldwphmUC9nk/aM9qitx/JmLEi6XE40Xw2Zqs
- wjtK6CWhOKWC13wuOP3inDN2UmOvbZ+7Px5P1/Z8sew0Bqd3KgMvjjim0bE93dgyZCfOXQsN7Kq
- h2Spq/Ch1IwLat7RNVWoOWTttI4rJBKB3r7cfcQEfVRFtHG1YuQWKM08L
-X-Gm-Gg: AfdE7cmyxY6Te2KDqLp4A7tYMvZjxFYEXkHbgypR8w7jHtnwB6N361JEJMGlJROUpG/
- TUJgkLu6ybzZ/+vaiqeJeVa+4d07If0WXSE8vigcxI0/vvkBRYfPpbA88ucgh7D7pP/soF5Zu4V
- i8PDai6bf6cahoMiWvDf7HyUumKDYMp2RWT9AnOCwsAe3bG+ek2pqK53CUV0e2qCget9f+A8ZY1
- vzRxb0lFt+W9iFW0igIaIl8suKGVCHgQMKhcRuI3htx/5hSILgysXB6f3Vkaf/QAAkCql9LMXA3
- cY5oYwh0xG8lR8TEMnn6cgnHx/PB0XyNQbcVHx/ydEUDQyMpnzSb8LOT4wjMKUpexD7XZRNQmI5
- SXziEDfv+ZbxVulzL4Urre6sKO70cm1EBl9jzIr3AtN1mrIR9K2CNDgTyqMn0ESv2AFHhMvDrdx
- Q8Cgygqi8ojhHikxXweJPQdnMdlPh/OY9EuSdsWr5b
-X-Received: by 2002:a05:7301:9c88:b0:30c:a7da:7add with SMTP id
- 5a478bee46e88-30ee12fb78amr1618216eec.15.1782807029089; 
- Tue, 30 Jun 2026 01:10:29 -0700 (PDT)
-X-Received: by 2002:a05:7301:9c88:b0:30c:a7da:7add with SMTP id
- 5a478bee46e88-30ee12fb78amr1618185eec.15.1782807028520; 
- Tue, 30 Jun 2026 01:10:28 -0700 (PDT)
+ bh=RljcQ2DJGs5xE7DPWuQaSkwJCoTVCB1S+Obcets6Qds=;
+ b=kDAZQa1hQixGgianMA2zEF+7jtEaKxpHvk6TKtAa3NyEjrHz6cm6TtGTbH14nw8En+
+ 4um8TD8rLOntC4sK5hXgj0kA2Q1bnCAPlVFTw9mPYCs8h69kVAdnh7UrcETNMZRUNbvy
+ mlBNO3vUZMMVOcaVfJq8zg3eDo4cQo976f91QT5PO6qRUfEmveHnd6/x9qodWQZxXWo9
+ ah2+45gnE+8JU07WKLtznvC68XL4QxKoLNqh+L9aZxWAPXtKw/JRKrbIEdX9FRrt6GDO
+ CsO56twjwx74IsS3ZohnGFrhquWAGxpt9CsX18KcnxJKDlhwTt0dtaEArbNwiA3T5X5I
+ Vc6g==
+X-Gm-Message-State: AOJu0YzpQUtDC72zFJ/cWf81qePtgtieY4cu+PuDfhuCY7k+3nyJe4Pw
+ TU+HgffcP5W679ZW71zQdNINVIE2UYGCObnKqkKtwsCVVh9PXTcikhY0xjjF9ADEHL66pKQr0ZF
+ yLeYgxrmiYt0rc3KWnbvaTyr5L7/XgurLvvaKp4Q/gZMADaZ++U55EkU5
+X-Gm-Gg: AfdE7cm9OF6BDxCr3+2KS4n5JnBzAoOKjK+x5KBMtW+i6yYDO+wNVaVaIhGLpdhiPE8
+ 4d+Dfy7jbO7BlJoUZDgASgmL+eNV41ve09KFmb2hXtO7X0y/jxjmBJjBmXGMbRe0h+YD0RjsKpa
+ ad+knRoZCFXLxfjQmLpPsD4eanbEhonZW4BHiat/tYxSfhnNVvFYhetrtC6HrW/rHpsmq1jxtIy
+ hwwJo5bYa5siS+ioeZBaUNpKnJzroD9/5+fC93SGkIlnGaZCIINFuoJMlVXqNRcT5wExACFDiIx
+ SrNVD74/JGGcNYKpZ6++s0UI/P66S5yjJAU6LL0xoUSDODOC3b+ZQranj0T/kqe+gRUKcBtzw4G
+ IIhmLyxfISddBPwYa71pCJXvQJ1jsLI6skfqUPyJqrzP6lHKbkMzwu6fWwsYOejOHL5gt9hNAKB
+ 1VwQFo/j1ktjnm9+P4IbWNpCEB0rQ8BCGvp5YU+dTf
+X-Received: by 2002:a05:7300:6405:b0:30e:cef2:c3a5 with SMTP id
+ 5a478bee46e88-30ee11ad7dfmr1941685eec.2.1782807040501; 
+ Tue, 30 Jun 2026 01:10:40 -0700 (PDT)
+X-Received: by 2002:a05:7300:6405:b0:30e:cef2:c3a5 with SMTP id
+ 5a478bee46e88-30ee11ad7dfmr1941641eec.2.1782807040010; 
+ Tue, 30 Jun 2026 01:10:40 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30ee3264f52sm5415816eec.28.2026.06.30.01.10.17
+ 5a478bee46e88-30ee3264f52sm5415816eec.28.2026.06.30.01.10.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 01:10:28 -0700 (PDT)
+ Tue, 30 Jun 2026 01:10:39 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Tue, 30 Jun 2026 13:38:30 +0530
-Subject: [PATCH v7 08/11] mach-snapdragon: spl: Update SMEM with boot details
+Date: Tue, 30 Jun 2026 13:38:31 +0530
+Subject: [PATCH v7 09/11] mach-snapdragon: Add commands to create wrapper ELF
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260630-fix-edl-v7-8-1dcb0d2a347c@oss.qualcomm.com>
+Message-Id: <20260630-fix-edl-v7-9-1dcb0d2a347c@oss.qualcomm.com>
 References: <20260630-fix-edl-v7-0-1dcb0d2a347c@oss.qualcomm.com>
 In-Reply-To: <20260630-fix-edl-v7-0-1dcb0d2a347c@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -135,31 +135,31 @@ Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDA3MSBTYWx0ZWRfX03yL2DzvqGzl
- cJmiswtm+yQCPA6YcONPqdt3I6v1lLP0+8bNA+vTkLHJSa91CnjLhNmCS7PxkL/50oQtf2z8h8V
- HJOioumZrEE7r9QBjqte+WvAq+ap2sc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDA3MSBTYWx0ZWRfX1FWPfGWwmaWh
- zwy0MsgHumWOwm3/JTdI1zzpQrnphQaYvgOFiLilY5z1D2mzhQDzf3LxJM7wIlRCXLWX0Qw7wAA
- 6xaMzoRMtMBylJj8caPNzyblei/Vspwh8I7awk13h1xoDuW6avS8CUL3Ap3nBUoDM9Xg9+7y9JB
- 50jfrbC0eWs1ytu8N+9Jye1unzgraGDBDHCTdJ6vkAzInfxKEQOXiGOV9xTwnYEMDZwiEEgi0/W
- m5RdEFFBZQOFJGrIwKpeItpiSbisqtCqKUabhBM0q0LP4SbLx7udlbHgYH7Aff6H6HbuYo54aoe
- dMLDfUHt4h+FcQD/WUU/tGDtBGG3TxhG4rawjp8mK0OSYaQbcROBZwe0sqOjVdAEL5taeA+vUsu
- 4YHdDWwQg4Go5y25AJce0W3r2uA3gxPAStXAj7Rmofs56/4C+Rgzk4JodbKEeXRadGIJ0C+I8Jd
- dGV4qj8/OFUK1AIkDvQ==
-X-Proofpoint-ORIG-GUID: 0orTHg3XfjoqBR_3CsZ3WUm4JKGsD6tM
-X-Authority-Analysis: v=2.4 cv=TeqmcxQh c=1 sm=1 tr=0 ts=6a4379f6 cx=c_pps
+X-Proofpoint-ORIG-GUID: VObNL_QDmIOMIJNRUYod9-te-SnqNgpi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDA3MSBTYWx0ZWRfX5cTvEYdljxoK
+ HQ+/bITG3z2LbDMTOHt6PMFRGgZ8Drw8nk1v+yzAB5pwyGY5C3ioijK7o0S2J7GFZTAcE86y7dx
+ ZsPUmYvsz9SnRMbINsROhHcK7MjFpxxxWuwfvTRrAK+AMw2RL/7EvtWyAkoXUL0dSNaJrPcRlhe
+ sEG4K4fDWNAr4jbq7WsbHaHR86WOC4u8l3Cwe2GmiMUUk6OV+3jMLJt4AN9ttxBlZCe5bJy0fVG
+ CYf44xsLCACxcZP/SD6F2K2M3g4QjxhzwWsP1duhZgJMbpg3u5+ygB5XLpStAosL586DOOYkPDZ
+ 2nRNG5mfxNaCKh0Qgkg1SGMs9HMmkmDl4Q9fbUehAvZJ9hGJcVwA6a6KOKi62DhRhXBNSzINmuS
+ z4BxXJRlgv8gChWwGLiviqO+5i4moWYNGYv0FqifumdCJfSzVHBxYXFGkjXp52FfqUVjf3oQLQm
+ qNn0H5MJa+8LZM/e0fg==
+X-Proofpoint-GUID: VObNL_QDmIOMIJNRUYod9-te-SnqNgpi
+X-Authority-Analysis: v=2.4 cv=FbcHAp+6 c=1 sm=1 tr=0 ts=6a437a01 cx=c_pps
  a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=cu-XF-9Gu4gfq0MNXlkA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=cm27Pg_UAAAA:8 a=PX2gLaQeLxl2-ScWg4cA:9 a=QEXdDO2ut3YA:10
  a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: 0orTHg3XfjoqBR_3CsZ3WUm4JKGsD6tM
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDA3MSBTYWx0ZWRfXx2dJCQZu0xrs
+ m71C4D0oFqtAa+ooP67Fx4kaY+Ai6tZcQCWYABoTRdc2R2wUDp8UZ+k2WTmdPzcrjwNz79tXDMh
+ YspaVaqhezT9qka4yX9GYcWH0by+vqo=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-30_02,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 adultscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 adultscore=0 phishscore=0
+ malwarescore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606300071
 X-Mailman-Approved-At: Tue, 30 Jun 2026 14:50:53 +0200
@@ -179,132 +179,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update SMEM with the storage medium from which the system booted.
+The IPQ5210 boot ROM expects the SPL binary image to be embedded within
+an ELF along with additional binaries. Hence add the relevant commands
+and linker script needed to convert u-boot-spl.bin to the expected
+format.
 
 Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- arch/arm/mach-snapdragon/spl.c | 73 +++++++++++++++++++++++++++++++++++++++++-
- include/smem.h                 |  3 ++
- 2 files changed, 75 insertions(+), 1 deletion(-)
+ arch/arm/mach-snapdragon/Kconfig                  |  7 +++++++
+ arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds | 18 +++++++++++++++++
+ scripts/Makefile.xpl                              | 24 +++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/spl.c b/arch/arm/mach-snapdragon/spl.c
-index 9b8a640256a..aef9bf206c2 100644
---- a/arch/arm/mach-snapdragon/spl.c
-+++ b/arch/arm/mach-snapdragon/spl.c
-@@ -11,6 +11,7 @@
- #include <asm/io.h>
- #include <asm/system.h>
- #include <asm/sections.h>
-+#include <smem.h>
- #include <atf_common.h>
- #include <linux/err.h>
- #include <dm/device-internal.h>
-@@ -167,6 +168,52 @@ static int qcom_spl_get_fit_img_entry_point(void *fit, int node,
- 	return ret;
- }
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a..d94cb6206e8 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -42,4 +42,11 @@ config SYS_CONFIG_NAME
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
  
-+#if IS_ENABLED(CONFIG_SPL_SMEM)
-+/**
-+ * qcom_spl_populate_smem() - Populate shared memory (SMEM) information.
-+ * @ctx:	Pointer to the global SPL context.
-+ *
-+ * This function initializes and populates various SMEM items with boot-related
-+ * information, such as flash type, try-mode status, and ATF enable status.
-+ * Return: 0 on success, or a negative error code on failure.
++config SPL_WRAPPER_ELF
++	bool "Create wrapper ELF for applicable platforms"
++	depends on SPL
++	help
++	  Some platforms embed the U-Boot SPL binary within an ELF as a segment.
++	  Additional tools are used to convert this ELF into an image that is
++	  usable for the boot ROM.
+ endif
+diff --git a/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
+new file mode 100644
+index 00000000000..5a582e65ca0
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
+@@ -0,0 +1,18 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + */
-+static int qcom_spl_populate_smem(void *ctx)
-+{
-+	int ret;
-+	size_t size;
-+	struct udevice *smem;
-+	u32 *fltype;
-+
-+	ret = uclass_get_device(UCLASS_SMEM, 0, &smem);
-+	if (ret) {
-+		pr_err("Failed to find SMEM node (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	size = sizeof(u32);
-+	ret = smem_alloc(smem, -1, SMEM_BOOT_FLASH_TYPE, size);
-+	if (ret) {
-+		pr_err("Failed to alloc item: SMEM_BOOT_FLASH_TYPE (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	fltype = (u32 *)smem_get(smem, -1, SMEM_BOOT_FLASH_TYPE, &size);
-+	if (!fltype) {
-+		pr_err("Failed to get item: SMEM_BOOT_FLASH_TYPE\n");
-+		return -ENOENT;
-+	}
-+
-+	if (IS_ENABLED(CONFIG_SPL_MMC)) {
-+		*fltype = SMEM_BOOT_MMC_FLASH;
-+		return 0;
-+	}
-+
-+	pr_err("Boot medium not specified\n");
-+
-+	return -ENOENT;
++PHDRS {
++	ptype PT_LOAD FLAGS(0x7);
 +}
-+#endif /* IS_ENABLED(CONFIG_SPL_SMEM) */
 +
- /**
-  * qcom_spl_get_iftbl_entry_by_name() - Get an interface table entry by name.
-  * @if_tbl:	Pointer to the QCLIB interface table.
-@@ -328,6 +375,30 @@ int qclib_post_process_from_spl(void)
- 	return 0;
- }
- 
-+#if IS_ENABLED(CONFIG_SPL_SMEM)
-+/**
-+ * spl_board_prepare_for_boot() - Prepare board for boot
-+ *
-+ * This function is called by SPL before jumping to the next stage.
-+ * It populates SMEM during coldboot.
-+ */
-+void spl_board_prepare_for_boot(void)
-+{
-+	int ret;
++ENTRY(_entry)
 +
-+	/*
-+	 * Populate SMEM in coldboot (Dload bit not set)
-+	 */
-+	if (!QCOM_SPL_IS_DLOAD_BIT_SET) {
-+		ret = qcom_spl_populate_smem(NULL);
-+		if (ret) {
-+			pr_err("Failed to populate SMEM (%d)\n", ret);
-+			qcom_spl_error_handler(NULL);
-+		}
-+	}
++SECTIONS {
++	. = IMAGE_TEXT_BASE;
++	_entry = . ;
++	data : {
++		*(.data)
++		. = ALIGN(4);
++	} :ptype
 +}
-+#endif /* IS_ENABLED(CONFIG_SPL_SMEM) */
-+
- /**
-  * spl_get_load_buffer() - Allocate a cache-aligned buffer for image loading.
-  * @offset:	Offset (unused, typically 0 for SPL).
-@@ -396,7 +467,7 @@ struct bl_params *bl2_plat_get_bl31_params_v2(uintptr_t bl32_entry,
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index a3fd3e1375f..6e9f24b748a 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -256,6 +256,26 @@ MKIMAGEFLAGS_boot.bin = -T zynqmpimage -R $(srctree)/$(CONFIG_BOOT_INIT_FILE) \
+ 	-n "$(shell cd $(srctree); readlink -f $(CONFIG_PMUFW_INIT_FILE))"
+ endif
  
- /**
-  * qcom_spl_loader_pre_ddr() - SPL loader for pre-DDR stage.
-- * @boot_device:Type of boot device.
-+ * @boot_device: Type of boot device.
-  *
-  * Return: 0 on success, or a negative error code on failure.
-  */
-diff --git a/include/smem.h b/include/smem.h
-index b19c534ebc4..f16ba7d63dc 100644
---- a/include/smem.h
-+++ b/include/smem.h
-@@ -87,4 +87,7 @@ void *smem_get(struct udevice *dev, unsigned int host, unsigned int item, size_t
-  */
- int smem_get_free_space(struct udevice *dev, unsigned int host);
- 
-+#define SMEM_BOOT_FLASH_TYPE			498
-+#define SMEM_BOOT_MMC_FLASH			5
++ifeq ($(CONFIG_SPL_WRAPPER_ELF),y)
++# Convert ELF to object file
++OBJCOPYFLAGS_$(SPL_BIN).bin.o = -I binary -O elf64-littleaarch64
 +
- #endif /* _smem_h_ */
++# Wrap the object file inside a ELF
++QCOM_SPL_SOC = $(shell echo $(notdir "$(CONFIG_DEFAULT_DEVICE_TREE)") | cut -f1 -d-)
++QCOM_SPL_WRAP_LDS = $(srctree)/arch/arm/mach-snapdragon/$(QCOM_SPL_SOC)-spl-wrap-elf.lds
++LDFLAGS_$(SPL_BIN).wrap-elf = -T $(obj)/$(SPL_BIN).wrap-elf.lds
++
++$(obj)/$(SPL_BIN).wrap-elf.lds: $(QCOM_SPL_WRAP_LDS) FORCE
++	$(call if_changed_dep,cpp_lds)
++
++$(obj)/$(SPL_BIN).bin.o: $(obj)/$(SPL_BIN).bin $(obj)/$(SPL_BIN).wrap-elf.lds FORCE
++	$(call if_changed,objcopy)
++
++$(obj)/$(SPL_BIN).wrap-elf: $(obj)/$(SPL_BIN).bin.o FORCE
++	$(call if_changed,ld)
++
++endif
++
+ $(obj)/$(SPL_BIN)-align.bin: $(obj)/$(SPL_BIN).bin
+ 	@dd if=$< of=$@ conv=sync bs=4 2>/dev/null;
+ 
+@@ -302,6 +322,10 @@ INPUTS-$(CONFIG_ARCH_ZYNQMP)	+= $(obj)/boot.bin
+ 
+ INPUTS-$(CONFIG_ARCH_MEDIATEK)	+= $(obj)/u-boot-spl-mtk.bin
+ 
++ifeq ($(CONFIG_ARCH_SNAPDRAGON),y)
++INPUTS-$(CONFIG_SPL_WRAPPER_ELF) += $(obj)/u-boot-spl.wrap-elf
++endif
++
+ all:	$(INPUTS-y)
+ 
+ quiet_cmd_cat = CAT     $@
 
 -- 
 2.34.1
