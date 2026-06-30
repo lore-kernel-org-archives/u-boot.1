@@ -4,94 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FA2C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 15:44:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9ADC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 16:10:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C62A284119;
-	Tue, 30 Jun 2026 17:44:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9CFA48498C;
+	Tue, 30 Jun 2026 18:10:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fyGBfJ0X";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="dXw5FK5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D8268490A; Tue, 30 Jun 2026 17:44:44 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95280849AC; Tue, 30 Jun 2026 18:10:00 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3E1E84105
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 17:44:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CB188494B
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 18:09:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-4629051c946so632440f8f.1
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 08:44:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782834281; x=1783439081; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=E7yPN89FmMCs0FJHxLsLK6ePCa4fduPHd54v3rLIlh8=;
- b=fyGBfJ0X3yxhXgeVJVpHH3q9dgq8JwFgMz1rPnXUB8r3NGDqnOCd8tzoE92GuVypTa
- hoLk/hC5XI8Ap1m/f7YljmirUIASz0AYVpd8tpWxeXzV01nqbh+ZrObwk3ZfKRGRLUCX
- +9ZEOU9OY6fNqgFCUBXv3MrgolO9SjedBlpfauagfGwOHzXv/Apv+0HQBFI6AUaDuQYw
- Oli6WXe7wYmgQqOOZPKf196EIc8FGod4AVd3wN2UR58eAjR3/fipfhhCqx7q1kIJgl7R
- EYTKpq8trKr4QAHHk6t8M4CUrONL7hg3v6DQupKnnqYfHHqj+Hf5fZRQCaBZjA1Se6Yk
- GC0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782834281; x=1783439081;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E7yPN89FmMCs0FJHxLsLK6ePCa4fduPHd54v3rLIlh8=;
- b=EDcMU928u6JhZgtx/HTj94PlTTc+R2XM/8wyimK3FpNI7Jva/WBPmENNDeGmwIQDC3
- BLsgzLR6GPpkl1wVDWPuoYLuzkD4DEuQlK8GLYBmbmsbmtCr5iOx6nkGUKnqDNMzpsw2
- GSemOxcRdE8Ox2JJ0Hdrzq6DK3ij96I3UHjmsOzyOpXavThyMjp38E+5sWa74R99iNV4
- 8Byj64Ji0f/7wgJzQ/IVDfMrJZEbGgPQkOHc3fOfiSwGa87BYFp4YCFPT+IYHbT753qk
- 4iqOuHXEC/E5YqxUdlXHkUkU1VyttDBtWNR8HvtiBOmiYkf7tGqozqFqRE/C/79FOOr7
- SaCg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrMd0WzjbhudfLmC076hmXd0wGEiTECg0VxJru7Y6KTOrJ+Koehygk77c5cc4HsoKMpNLm1Les=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpFe7vUGc869l792luDCvqSkKupNqvSC9FtKsL3uzpN1klUOOW
- rqVkRoPoEhv7Di8JZaksT8P2KzbZ9rcgO15m3QbUyz+BXFRDFhxdgO5cAIGCCKyF1cc=
-X-Gm-Gg: AfdE7cluLMhjJUGcoxm7CTxMJbCJI4E9O0tBe7FLg8kaA882XaIE2zB+QlIcyWWLis/
- A7O2G3bWTIFBS+lUKIkuJxRZT4A7BM9CEsSuDErbMrekqhTWNU9m2bnc4ovGxTlbnu4dgSQ8tXj
- 2KA8IhEbWOi1Pl6r27kTqn7aiwq1uoYu4XEnwSO+nRt6ZUkluZPE+Sy6x4SAZ4fFVic4bLrZKJi
- 7gNYGW5fu8CAbh+93wggLg9X4CHh2uwr5PMDF0DKnwZCWBtu7qS2jGpZqZaNFbpDxNGnkiTD2zi
- 0tMJnI+S1xrDZskIJFrMAsr/A41bgpZNhXexI0Iu806GQktjMImy01nQ6wSCmDbpvzuKnGvU54J
- oYrIRsDBnX/GNmxH0wZaPt+mgwJ8r65asnpuHIl5rVFYTPvfKg1EzMY2k/XmtVBvQ1hs1sDDqub
- ltmOBkKpDNHB6MnA84DHdFjCDN9OQ=
-X-Received: by 2002:a05:6000:2386:b0:475:f0c2:75b0 with SMTP id
- ffacd0b85a97d-475f743ba52mr3257932f8f.27.1782834281287; 
- Tue, 30 Jun 2026 08:44:41 -0700 (PDT)
-Received: from [172.16.185.106] ([195.76.196.161])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4756636ce7esm9374897f8f.23.2026.06.30.08.44.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 08:44:40 -0700 (PDT)
-Message-ID: <c281dc48-a940-4d6f-a886-040a75d6a0b0@linaro.org>
-Date: Tue, 30 Jun 2026 17:44:22 +0200
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4CD5B11765F; Tue, 30 Jun 2026 18:09:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782835795; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=TRy6PIMfxPfBkhXnRTprmYZ5HMvrMKe5TF2vyyypOkI=;
+ b=dXw5FK5zKSqjd4zRnY3LWPLvI8PUmTpM0m4muXUnmo6erJpjio1hOXA+Hj5328g5DnbhhV
+ zNH6OYE4n3wzXsGssSGnlp/onYkrQL1+8Y5zpUiT7AsS7cThF7yC8XGENZSJGS/AwMKJSi
+ Moc4trq5sjBWJ8Uxr4tyuHgdeQX7/Wsf61oQFclQlznvz9o0D8Qy86MzvvChxa8pBjIBSA
+ j4S7Eg/JqMWc9gPwoWmP2wHVDD5m30VV53x5yi2oTBW6llU1svDPEM/g04aoXqOKsLAzkY
+ BJNQHqnrJtM7ykBXaJfeBrNI5J6AqtuM3gUGjuSVnesKFv9543zI5wMQENpBsw==
+From: Marek Vasut <marex@nabladev.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH] arm64: dts: imx8m: Reinstate TEE ifdeffery
+Date: Tue, 30 Jun 2026 18:08:56 +0200
+Message-ID: <20260630160951.122230-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] arm: dts: ipq9650: Add override dtsi
-To: Badhrinath S <badhrinath.s@oss.qualcomm.com>, trini@konsulko.com,
- peng.fan@nxp.com, jh80.chung@samsung.com, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, lukma@denx.de, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, quic_varada@quicinc.com, luca.weiss@fairphone.com,
- danila@jiaxyga.com, balaji.selvanathan@oss.qualcomm.com,
- aswin.murugan@oss.qualcomm.com, adrian@mainlining.org,
- david.wronek@mainlining.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20260610053655.2825589-1-badhrinath.s@oss.qualcomm.com>
- <20260610053655.2825589-4-badhrinath.s@oss.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260610053655.2825589-4-badhrinath.s@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,55 +67,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Since b57ed147939c ("dts: imx8m{m,n,p,q}: Make optee packaging optional")
+the TEE node is always present in U-Boot proper fitImage, even if the
+CONFIG_OPTEE is disabled because the u-boot.itb should not contain any
+tee.bin. This is wasteful, and produces the following warning which is
+also confusing to users:
 
+"
+Image 'image' is missing optional external blobs but is still functional: tee-os
 
-On 6/10/26 07:36, Badhrinath S wrote:
-> Add U-Boot specific device tree overrides for IPQ9650 RDP488 board.
-> This includes memory configuration and SDHCI reset configuration.
-> 
-> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Fix SPDX license identifier to GPL-2.0-only (reported by Ferass)
-> 
->   arch/arm/dts/ipq9650-rdp488-u-boot.dtsi | 29 +++++++++++++++++++++++++
->   1 file changed, 29 insertions(+)
->   create mode 100644 arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
-> 
-> diff --git a/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..4733fc7ccd08
-> --- /dev/null
-> +++ b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
-> @@ -0,0 +1,29 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * IPQ9650 RDP488 board device tree source
-> + *
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +/ {
-> +	/* Will be removed when SMEM parsing is updated */
-> +	memory@80000000 {
-> +		device_type = "memory";
-> +		reg = <0x0 0x80000000 0x0 0x20000000>;
-> +	};
-> +
-> +};
-> +
-> +&sdhc {
-> +	sdhci-caps-mask = <0x0 0x04000000>;
-> +	sdhci-caps = <0x0 0x04000000>;	/* SDHCI_CAN_VDD_180 */
-> +
-> +	/*
-> +	 * This reset is needed to clear out the settings done by
-> +	 * previous boot loader. Without this the SDHCI_RESET_ALL
-> +	 * reset done sdhci_init() times out.
-> +	 */
-> +	resets = <&gcc GCC_SDCC_BCR>;
+/binman/section/fit/images/tee/tee-os (tee.bin):
+   See the documentation for your board. You may need to build Open Portable
+   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+"
 
-Send these fixes upstream please.> +
-> +	status = "okay";
-> +};
+Reinstate the CONFIG_OPTEE ifdeffery to mitigate the problem, but retain the
+binman "optional" keyword at tee.bin .
+
+Before:
+"
+$ mkimage -l u-boot.itb
+FIT description: Configuration to load ATF before U-Boot
+Created:         Tue Jun 30 17:23:54 2026
+ Image 0 (uboot)
+...
+ Image 2 (tee) <------------------------------ bogus empty image entry
+  Description:  OP-TEE                                 |
+  Created:      Tue Jun 30 17:23:54 2026               |
+  Type:         Trusted Execution Environment Image    |
+  Compression:  uncompressed                           |
+  Data Size:    0 Bytes = 0.00 KiB = 0.00 MiB <--------'
+ Image 3 (fdt-1)
+...
+"
+
+After:
+"
+$ mkimage -l u-boot.itb
+FIT description: Configuration to load ATF before U-Boot
+Created:         Tue Jun 30 17:58:15 2026
+ Image 0 (uboot)
+...
+ Image 1 (atf)
+...
+ Image 2 (fdt-1)
+...
+"
+
+Fixes: b57ed147939c ("dts: imx8m{m,n,p,q}: Make optee packaging optional")
+Signed-off-by: Marek Vasut <marex@nabladev.com>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefano Babic <sbabic@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Yannic Moog <y.moog@phytec.de>
+Cc: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/dts/imx8mm-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mn-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mp-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mq-u-boot.dtsi | 6 ++++++
+ 4 files changed, 24 insertions(+)
+
+diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
+index ab135fc8a47..56ab70e54ea 100644
+--- a/arch/arm/dts/imx8mm-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-u-boot.dtsi
+@@ -165,6 +165,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -179,6 +180,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					binman_fip: fip {
+ 						arch = "arm64";
+@@ -208,7 +210,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
+index 8993605af3c..e4918bf5975 100644
+--- a/arch/arm/dts/imx8mn-u-boot.dtsi
++++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+@@ -241,6 +241,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -255,6 +256,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					binman_fip: fip {
+ 						arch = "arm64";
+@@ -284,7 +286,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+index d9d220c70db..58b6863f003 100644
+--- a/arch/arm/dts/imx8mp-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+@@ -189,6 +189,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -203,6 +204,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					@fdt-SEQ {
+ 						description = "NAME";
+@@ -223,7 +225,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
+index ed2c704f2e5..2f9b4a504c3 100644
+--- a/arch/arm/dts/imx8mq-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-u-boot.dtsi
+@@ -173,6 +173,7 @@
+ 				};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 				tee: tee {
+ 					description = "OP-TEE";
+ 					type = "tee";
+@@ -187,6 +188,7 @@
+ 						optional;
+ 					};
+ 				};
++#endif
+ 
+ 				fdt {
+ 					compression = "none";
+@@ -208,7 +210,11 @@
+ 					fdt = "fdt";
+ 					firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 					loadables = "atf", "tee";
++#else
++					loadables = "atf";
++#endif
+ #endif
+ 				};
+ 			};
+-- 
+2.53.0
 
