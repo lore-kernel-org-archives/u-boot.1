@@ -4,53 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9ADC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 16:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B6BC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 16:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CFA48498C;
-	Tue, 30 Jun 2026 18:10:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F9E384A26;
+	Tue, 30 Jun 2026 18:17:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="dXw5FK5z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dGqaEOY/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95280849AC; Tue, 30 Jun 2026 18:10:00 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7C1DA84A38; Tue, 30 Jun 2026 18:17:44 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CB188494B
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 18:09:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3D6558498C
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 18:17:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4CD5B11765F; Tue, 30 Jun 2026 18:09:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1782835795; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=TRy6PIMfxPfBkhXnRTprmYZ5HMvrMKe5TF2vyyypOkI=;
- b=dXw5FK5zKSqjd4zRnY3LWPLvI8PUmTpM0m4muXUnmo6erJpjio1hOXA+Hj5328g5DnbhhV
- zNH6OYE4n3wzXsGssSGnlp/onYkrQL1+8Y5zpUiT7AsS7cThF7yC8XGENZSJGS/AwMKJSi
- Moc4trq5sjBWJ8Uxr4tyuHgdeQX7/Wsf61oQFclQlznvz9o0D8Qy86MzvvChxa8pBjIBSA
- j4S7Eg/JqMWc9gPwoWmP2wHVDD5m30VV53x5yi2oTBW6llU1svDPEM/g04aoXqOKsLAzkY
- BJNQHqnrJtM7ykBXaJfeBrNI5J6AqtuM3gUGjuSVnesKFv9543zI5wMQENpBsw==
-From: Marek Vasut <marex@nabladev.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH] arm64: dts: imx8m: Reinstate TEE ifdeffery
-Date: Tue, 30 Jun 2026 18:08:56 +0200
-Message-ID: <20260630160951.122230-1-marex@nabladev.com>
-X-Mailer: git-send-email 2.53.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-493bc8fda98so7529925e9.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 09:17:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1782836262; x=1783441062; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Qk522ai+LkLjT3b3Xi4YtnqXwvHjFQS6pmaD8hiwlqo=;
+ b=dGqaEOY/zi/Xl5WHi65zH7pxJ5An3LQl0erlPxLehvgvX1vHoDNXqbtqrh9wdCzX5a
+ lCzkh29zU3PBw7wgHfk5A5R/D19iLbqy8kwJXEMRaXFMGo2SwItQEJilW76hBWnDevaP
+ 3qIMeSdnNG9n5cocvlYfUbEWuozftdnI1VqqmP/4LR8Hw4S408iYnY4uTK7PacmyyK5m
+ j5Ed0Yq00Pppf/kPzgnxZdTcSaRKONQluh9dh+Nj4+K5reqpyp7AWQDkuha3Of4e/h5n
+ LuHSVtDbvljNCzkDz5JoQ9qkUq354lnpasZ7LMmrwR5+9IcFvhcSxFIkBRYrZtRVd4TF
+ 5QTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782836262; x=1783441062;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qk522ai+LkLjT3b3Xi4YtnqXwvHjFQS6pmaD8hiwlqo=;
+ b=MYrYcdPVNhwCMfr8yB6usvKdDNverI+tSrc7HK3LWQdZNR6rWs0NDtiPClRlK59Blo
+ wIGtUFRYXt2nIe+F/3mIJ2oUz2GgYVd8qsq0czqHLk3Mi+ZLPo5hBdmjiJlp1cS+B8UL
+ Wc/4j7/GNUncmKHhvxOa55EwlfQw/JpJ9ABfgrWpX/LROsW9wVQHrDriurkadq0DlN9H
+ zXJJ4Fuv22fBHAiMzZJFuRqiSU2V/lJAxSIQGF2EWux02FF1/Lr0tpdYygDIPxIEwxZ1
+ Eq6F3GZisDI/ltQjn0EEvWnz7zX2t2kN+DU+1Mo4/PQJmxbJyxSBW5YI74R99TCIG0oK
+ PZMg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9kU8+LqRnn0BX/TGisQQ4ZOcbMTAlMSmG/nAaWuq3459b16tRMv+dTSbHOdyZU0W3x6rx0UJs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzreyuKtRyKnpOcJt+FtAD+ASOf1YEWVPDU08IlQKIIiB2hp5zx
+ w8RfaG74apwV/IRv+5DRsqqCp/yvXq+avxMG2RWfz6sJeQcxpMRx91xxSPQhdBQyl+s=
+X-Gm-Gg: AfdE7cn+/BxdZoSwEzB/JEjtpVA/+/ujaF1iJW9+QTmSckdJFuQc+XglHz1zElZa24g
+ q0kw8Op3CA8834F6SYsLp6I2prhv0G7psiVUFN2sVa4I8wPrsSApwf/5lgDg3jgs4Aa5SuFZzr5
+ 2sUrvoMxIzI8wyVgLYHsdOi6SCiJx4Hey4ixX/32Su3cp64vRATFDZKd0bl/DHZY+hIX5GVWPDW
+ 6IDSvjgsRV5JdJyQYOh/gZ71pbSIqeIyvfVgtrK/K0tRqxaWcK1GLrKps0zaTOQw/rKf2hfFaCH
+ SIC+WFv0Syhw/qdvAZ7dvqPCWQgGekdcYCcxsg+JSpRYl9b7cb0AFWH+zF+QlS5LSPh/8kG/ywY
+ NBuxz07gRkSFvh9SH8KzBUqdd2sJysAMKJleWvWove0occEDDVIw6NNY2zW99b/0umZqpkxdX1q
+ NftqFzL2cSoBvgkCVffLrVNRB4eYg=
+X-Received: by 2002:a05:600c:3485:b0:492:1e36:1fe9 with SMTP id
+ 5b1f17b1804b1-493b82c654emr58924015e9.37.1782836261489; 
+ Tue, 30 Jun 2026 09:17:41 -0700 (PDT)
+Received: from [172.16.185.106] ([195.76.196.161])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493be4c7f90sm6013575e9.2.2026.06.30.09.17.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jun 2026 09:17:40 -0700 (PDT)
+Message-ID: <1fc22177-b677-4b02-b527-48727dd0e75b@linaro.org>
+Date: Tue, 30 Jun 2026 18:17:20 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] dts: qcs6490-rubikpi3: Add U-Boot dtsi
+To: Hongyang Zhao <hongyang.zhao@thundersoft.com>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ David Lechner <dlechner@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, Roger Shimizu <rosh@debian.org>
+References: <20260624-qcs6490-rubikpi3-v2-0-829dad7e6dd6@thundersoft.com>
+ <20260624-qcs6490-rubikpi3-v2-1-829dad7e6dd6@thundersoft.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260624-qcs6490-rubikpi3-v2-1-829dad7e6dd6@thundersoft.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,200 +115,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since b57ed147939c ("dts: imx8m{m,n,p,q}: Make optee packaging optional")
-the TEE node is always present in U-Boot proper fitImage, even if the
-CONFIG_OPTEE is disabled because the u-boot.itb should not contain any
-tee.bin. This is wasteful, and produces the following warning which is
-also confusing to users:
+Hiya,
 
-"
-Image 'image' is missing optional external blobs but is still functional: tee-os
+Thanks for respinning this!
 
-/binman/section/fit/images/tee/tee-os (tee.bin):
-   See the documentation for your board. You may need to build Open Portable
-   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
-"
+On 6/24/26 14:45, Hongyang Zhao wrote:
+> Add the board-specific U-Boot device tree overrides for the
+> Thundercomm RUBIK Pi 3.
+> 
+> When U-Boot is loaded as the primary bootloader, no previous stage
+> provides the memory layout. Describe the 8 GiB LPDDR4x layout locally
+> so U-Boot can use the available DRAM.
 
-Reinstate the CONFIG_OPTEE ifdeffery to mitigate the problem, but retain the
-binman "optional" keyword at tee.bin .
+I'm hoping we can skip this patch, since we now support retrieving the 
+memory map dynamically from SMEM. I'd appreciate it if you could do a 
+clean build of the qcom-next branch here and see if it works without this.
 
-Before:
-"
-$ mkimage -l u-boot.itb
-FIT description: Configuration to load ATF before U-Boot
-Created:         Tue Jun 30 17:23:54 2026
- Image 0 (uboot)
-...
- Image 2 (tee) <------------------------------ bogus empty image entry
-  Description:  OP-TEE                                 |
-  Created:      Tue Jun 30 17:23:54 2026               |
-  Type:         Trusted Execution Environment Image    |
-  Compression:  uncompressed                           |
-  Data Size:    0 Bytes = 0.00 KiB = 0.00 MiB <--------'
- Image 3 (fdt-1)
-...
-"
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon
 
-After:
-"
-$ mkimage -l u-boot.itb
-FIT description: Configuration to load ATF before U-Boot
-Created:         Tue Jun 30 17:58:15 2026
- Image 0 (uboot)
-...
- Image 1 (atf)
-...
- Image 2 (fdt-1)
-...
-"
+You also shouldn't need to use qtestsign as MBN support was also just 
+picked so u-boot.mbn should be built directly.
 
-Fixes: b57ed147939c ("dts: imx8m{m,n,p,q}: Make optee packaging optional")
-Signed-off-by: Marek Vasut <marex@nabladev.com>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yannic Moog <y.moog@phytec.de>
-Cc: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/dts/imx8mm-u-boot.dtsi | 6 ++++++
- arch/arm/dts/imx8mn-u-boot.dtsi | 6 ++++++
- arch/arm/dts/imx8mp-u-boot.dtsi | 6 ++++++
- arch/arm/dts/imx8mq-u-boot.dtsi | 6 ++++++
- 4 files changed, 24 insertions(+)
+I used the Rubik Pi for testing both series locally so crossing my 
+fingers you don't run into any issues.
 
-diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
-index ab135fc8a47..56ab70e54ea 100644
---- a/arch/arm/dts/imx8mm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-@@ -165,6 +165,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -179,6 +180,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					binman_fip: fip {
- 						arch = "arm64";
-@@ -208,7 +210,11 @@
- 						fdt = "fdt-SEQ";
- 						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
-+#ifdef CONFIG_OPTEE
- 						loadables = "atf", "tee";
-+#else
-+						loadables = "atf";
-+#endif
- #endif
- 					};
- 				};
-diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
-index 8993605af3c..e4918bf5975 100644
---- a/arch/arm/dts/imx8mn-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-@@ -241,6 +241,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -255,6 +256,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					binman_fip: fip {
- 						arch = "arm64";
-@@ -284,7 +286,11 @@
- 						fdt = "fdt-SEQ";
- 						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
-+#ifdef CONFIG_OPTEE
- 						loadables = "atf", "tee";
-+#else
-+						loadables = "atf";
-+#endif
- #endif
- 					};
- 				};
-diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
-index d9d220c70db..58b6863f003 100644
---- a/arch/arm/dts/imx8mp-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-@@ -189,6 +189,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -203,6 +204,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					@fdt-SEQ {
- 						description = "NAME";
-@@ -223,7 +225,11 @@
- 						fdt = "fdt-SEQ";
- 						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
-+#ifdef CONFIG_OPTEE
- 						loadables = "atf", "tee";
-+#else
-+						loadables = "atf";
-+#endif
- #endif
- 					};
- 				};
-diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
-index ed2c704f2e5..2f9b4a504c3 100644
---- a/arch/arm/dts/imx8mq-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mq-u-boot.dtsi
-@@ -173,6 +173,7 @@
- 				};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 				tee: tee {
- 					description = "OP-TEE";
- 					type = "tee";
-@@ -187,6 +188,7 @@
- 						optional;
- 					};
- 				};
-+#endif
- 
- 				fdt {
- 					compression = "none";
-@@ -208,7 +210,11 @@
- 					fdt = "fdt";
- 					firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
-+#ifdef CONFIG_OPTEE
- 					loadables = "atf", "tee";
-+#else
-+					loadables = "atf";
-+#endif
- #endif
- 				};
- 			};
--- 
-2.53.0
+Thanks,
+// Casey
+
+
+> 
+> Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>   .../arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
+> 
+> diff --git a/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi b/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..8518cd402d0
+> --- /dev/null
+> +++ b/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi
+> @@ -0,0 +1,20 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/ {
+> +	/*
+> +	 * When running as the primary bootloader there is no prior stage to
+> +	 * populate the memory layout for us. We should have multiple nodes
+> +	 * here, but ABL does not like that.
+> +	 */
+> +	memory@80000000 {
+> +		device_type = "memory";
+> +		reg = <0 0x80000000 0 0x39700000>,
+> +		      <0 0xc0000000 0 0x01800000>,
+> +		      <0 0xc3400000 0 0xbcc00000>,
+> +		      <1 0x80000000 1 0x00000000>;
+> +	};
+> +};
+> +
+> +// RAM Entry 0 : Base 0x0080000000  Size 0x0039700000
+> +// RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
+> +// RAM Entry 2 : Base 0x00C3400000  Size 0x00BCC00000
+> +// RAM Entry 3 : Base 0x0180000000  Size 0x0100000000
+> 
 
