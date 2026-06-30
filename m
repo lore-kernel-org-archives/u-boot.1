@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BECDFC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 21:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C05C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 22:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAD2484A9E;
-	Tue, 30 Jun 2026 23:34:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A970484869;
+	Wed,  1 Jul 2026 00:25:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qCanZ3/M";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="iIgLGyVV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2E3D84B0C; Tue, 30 Jun 2026 23:34:04 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC19C84867; Wed,  1 Jul 2026 00:25:44 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20D7084A52
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 23:34:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5BF284671
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 00:25:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-69e1f777bcaso696376eaf.1
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 14:34:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782855241; x=1783460041; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2EajGS5a81cQdEsdzG4GdsLcJD6gdIK1GUxxUzOFJfI=;
- b=qCanZ3/MionQTzOmjnsR1C2OZYJpCLjpiHKUQb/ZhtoXV5KyWXDyyOIPhGMGZ2raTI
- WTtIsH60S+K+p97eUMiB2evXqcN/CmZ8WIqUTTwXalt+11y4ikWWdbvqB4agDbRaA51n
- fscTrFIyr5aNInKgKzI3FX5zctWZEyRSZKV3A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782855241; x=1783460041;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2EajGS5a81cQdEsdzG4GdsLcJD6gdIK1GUxxUzOFJfI=;
- b=Z6BqYEDgpdQFqySfH859vGIW55uGhYNNp3GRgYOb63BCzzswMMU+atKMRqezgS+8JG
- rVvHADtM/4p6NR6tuiOepxzuuLSqfjTe2SCi/HDeRsboWE+Bhht1PYld8p5IIu71jJC5
- /+Fl4H4S/m/3wWSSvQzrTEle1tttEgZ6kwf+pRSZt/mf3/dh4S18+wnMWQgo4hbIBk4i
- zF1+M4JLaAc3vqeip5IzhMC8y2JpByjjuO+mgdyx/ipGtyZ64r5ib4YgxJNkdnXpuhjU
- XHn8KX1mPgMSK5ad3NLILLUFbwWnC+EoTc2fGPFnqyAR5oksru94hdL9PZyfzLofpHgQ
- RjSg==
-X-Gm-Message-State: AOJu0Yy17hnPGAYPbABAy4EiyOlRCMcy26zuMngwtsERGBZpG703Kdco
- O8J+CPC7hxgPG4C8VsskGuihoab/nnJpuiCZeQBNVtj+QyhswDgc0RPiwiSmFxztnJ/w0GArTDX
- MAKX8MvY=
-X-Gm-Gg: AfdE7cnbmjhWZAzQ+x3Vl4SE0+CajtEIxSyzO2Yrk9sNUnTteLLYEu0U8N3MEECytJ4
- cjtgE2Tt9zb2IOxdtKv/D/8lzzrfzRFjzKcmzkE13HVwm1uPKxsokxxIg1m8m4CiSOC0KpQ/Ph+
- tHoJiA9MreWd3CYOSyrBqiR10EOrLEx+04nL1ivvWWNLqXmPEdbfEVoEQ9WpnQBhWjLgpK1DQh7
- SxpNbJ4v6XOHAFe1H4GG2lrWz5SBUzsV6euDbfJb8JRw8oCH52W3S7eEXwDwZ3h0lSnIzpLKvrl
- t3mcfTHA4nbgMOWnByWeaXvrpfhNYCdsEltsBB1NU8wpVaTmee+VVcVJR2eBKAC+7Ur6t618lih
- wMkb4yFlhgisG1Jt7o+Cu/urYOfJetv0e+tLifyAlBLr8yrNsN7o3DJ4ArCaNoA/VQb7XFsra2b
- R6ZnJEm9Fka85iXy0LAycyWmfD228UmRr0YB6FsMAEDR8euku2/ON/go0b7PFztaZkM1SmYysKt
- ZRRyrLb8ugdD6Y50f/JFhZ2S2gbvI+c2Pzbt3mT/sodeVHZG3M=
-X-Received: by 2002:a05:6820:168d:b0:6a1:7897:5b04 with SMTP id
- 006d021491bc7-6a192069f71mr1720298eaf.1.1782855240712; 
- Tue, 30 Jun 2026 14:34:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44c6182eb00sm56012fac.6.2026.06.30.14.33.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 14:33:59 -0700 (PDT)
-Date: Tue, 30 Jun 2026 15:33:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] get_maintainer: ignore Tingting Meng
-Message-ID: <20260630213357.GE749385@bill-the-cat>
-References: <20260616131133.2143136-1-casey.connolly@linaro.org>
- <20260616143649.GH382693@bill-the-cat>
- <151e43ad-d1d8-4c14-a541-0824abb7186c@linaro.org>
- <20260617172654.GR382693@bill-the-cat>
- <e3511960-44fe-4faa-8da5-aed28a677ca9@linaro.org>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 3230E118703; Wed,  1 Jul 2026 00:25:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782858341;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=HEmVlY5DeicpYe3BqE+Psstxv6y+EDmIvl6ykgm/Zhk=;
+ b=iIgLGyVVBACMt5wUF+7nr1O9hGDDSkcdgbDP4GFua1X+tQVPdpCWe2kh2SBB6fNmvzAY7N
+ wiBg7xim/mAwZuLmeEk8mPdYoLEY/JfnruZuuZLhUTpjcqOG/OAvoWCKGRFv7iSH0s/CMm
+ /NTjQk4Dbuv4LHwzMyTA0ylUiiWYeSLkyW0lqq3PJ6IJoVpsQiyzk7tCikg0q/K1VjzyZI
+ tnNTr4uHqcpVE121STiCCxqE0VfyExFRPkSRHqfZiYDr3t/RFqRr4a65Oo4GFzac6yY1kJ
+ s5t/JBGa5O7Sw0sD82GTGd9EesBnj12iI/xVYTJr2tXZrd8BQMMA8oEyVu0Crg==
+Message-ID: <3e092a75-856a-4f6f-925a-78f0eaaa492d@nabladev.com>
+Date: Tue, 30 Jun 2026 11:22:07 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2MVutSgor1NRVOJY"
-Content-Disposition: inline
-In-Reply-To: <e3511960-44fe-4faa-8da5-aed28a677ca9@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 10/64] usb: dwc3: import from kernel v4.7
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes
+ <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Stephan Gerhold
+ <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
+ Jerome Forissier <jerome.forissier@arm.com>
+References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
+ <20260629084507.3254232-11-jens.wiklander@linaro.org>
+ <1b7211dc-13bc-4cd0-8286-bc6fac941f74@nabladev.com>
+ <CAKTNdwFsvJZHzv-ycQOX1RDuVpYH4_umkvU1W=Dyp15YFZ29iw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <CAKTNdwFsvJZHzv-ycQOX1RDuVpYH4_umkvU1W=Dyp15YFZ29iw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,101 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---2MVutSgor1NRVOJY
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jun 30, 2026 at 09:18:35AM +0200, Casey Connolly wrote:
->=20
->=20
-> On 6/17/26 19:26, Tom Rini wrote:
-> > On Wed, Jun 17, 2026 at 05:03:52PM +0200, Casey Connolly wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 16/06/2026 16:36, Tom Rini wrote:
-> > > > On Tue, Jun 16, 2026 at 03:11:26PM +0200, Casey Connolly wrote:
-> > > >=20
-> > > > > Their email is no longer valid and bounces, ensure we don't inclu=
-de it
-> > > > > in get_maintainer.pl output.
-> > > > >=20
-> > > > > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> > > > > ---
-> > > > >   .get_maintainer.ignore | 1 +
-> > > > >   1 file changed, 1 insertion(+)
-> > > > >=20
-> > > > > diff --git a/.get_maintainer.ignore b/.get_maintainer.ignore
-> > > > > index 899a1469b2ae..5b7d84646f62 100644
-> > > > > --- a/.get_maintainer.ignore
-> > > > > +++ b/.get_maintainer.ignore
-> > > > > @@ -1 +1,2 @@
-> > > > >   "Pali Roh=E1r" <pali@kernel.org>
-> > > > > +Tingting Meng <tingting.meng@altera.com>
-> > > >=20
-> > > > The .get_maintainer.ignore file is a heavy-handed measure for things
-> > > > more serious than just bouncing email. It looks like Tingting Meng =
-just
-> > > > comes up via git history and so will roll out of emails in a few mo=
-nths
-> > > > now, so I don't want to go this path.
-> > >=20
-> > > Ok, that makes sense. I have found bouncing emails and excessively lo=
-ng
-> > > CC lists to be a bit of a recurring email when using b4 prep
-> > > --auto-to-cc, do you have any ideas on how we can improve this?
-> > >=20
-> > > Maybe we could tighten the timeline and/or contribution weight a bit?
-> >=20
-> > It's hard because we've had contributors at both ends of the spectrum
-> > speak up before. I think what Marek has been doing to use "N" to get
-> > more files covered by maintainers directly helps so that more things
-> > will always have someone else see them and in the future maybe we can
-> > try and lower the git range.
->=20
-> Hmm I see. I've been getting some feedback from folks who have contributed
-> to Qualcomm support that they are being CC'd in too many patches as well.
->=20
-> If we will keep --git for then perhaps we could try and tune things a bit=
- to
-> be less aggressive? Maybe something like:
->=20
-> --git-min-percent 15 --git-since 4-months-ago --git-max-maintainers 2
->=20
-> Still less than ideal for defconfigs and such but at least it would reduce
-> the huge CC lists that "b4" currently makes. I think 4 months is more
-> reasonable than 1 year so things will cycle through faster and folks will
-> still be notified about changes up to the next release.
->=20
-> That being said, if folks are speaking up about not being CC'd in patches
-> that touch code they care about they really ought to add themselves to
-> MAINTAINERS... We have board/qualcomm/MAINTAINERS for exactly this purpos=
-e.
->=20
-> The --git flags will never be perfect imho, but would you be ok with the
-> changes above? Or any subset of those flags?
-
-So, 4 months is only a bit more than one release cycle. Maybe 6, since
-we're currently at 12? And I don't disagree with saying we need more
-people to list themselves under MAINTAINERS if they're interested. The
-feedback has been less on board / platform code, and more on general
-code that just won't usually have a specific maintainer, and due to the
-slowness of testing cycles on a lot of platforms, it takes a while for
-corner cases to be found and reported on or a workaround / fix proposed.
-
---=20
-Tom
-
---2MVutSgor1NRVOJY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakQ2QQAKCRAr4qD1Cr/k
-CsDLAQC08K1PEv4dJ5x0aqXGNn7/h9z8kift3zoqyl9hVE6D1QD7BA+lsZnt+SfA
-x7qGWyaeevO7yPqqVfl3FPhqSihKOAU=
-=pfLd
------END PGP SIGNATURE-----
-
---2MVutSgor1NRVOJY--
+On 6/30/26 10:51 AM, Alexey Charkov wrote:
+> On Tue, Jun 30, 2026 at 12:48 PM Marek Vasut <marex@nabladev.com> wrote:
+>>
+>> On 6/29/26 10:43 AM, Jens Wiklander wrote:
+>>> Sync Linux kernel dwc3 changes from v4.6 to v4.7.
+>>>
+>>> The following files are preserved accross the import:
+>>> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
+>>> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
+>>> dwc3-layerscape.c ti_usb_phy.c
+>>>
+>>> Skipping unused files:
+>>> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
+>>> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
+>>> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+>>>
+>>> Note that this is a raw import and doesn't build.
+>>> A fixup commit at the end of the series fixes that.
+>>>
+>>> List of commits: git log --oneline v4.6..v4.7
+>>> Commits imported:
+>>> 0d064a7b9c43 Merge tag 'mfd-fixes-4.7.1' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd
+>>> 5baaf3b9efe1 usb: dwc3: st: Use explicit reset_control_get_exclusive() API
+>>> 4aa34ce3c1ee Merge tag 'mfd-fixes-4.7' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd
+>>> 002f17bc54ff usb: dwc3: st: Inform the reset framework that our reset line may be shared
+>>> 50c763f8c1ba usb: dwc3: Set the ClearPendIN bit on Clear Stall EP command
+>>> 27a0faafdca5 usb: dwc3: st: Fix USB_DR_MODE_PERIPHERAL configuration.
+>>> 4879efb34f7d usb: dwc3: exynos: Fix deferred probing storm.
+>>> 973986126a41 usb: dwc3: gadget: fix mask and shift order in DWC3_DCFG_NUMP()
+>>> ce15bda10121 Merge tag 'usb-for-v4.7' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-next
+>>> 2a58f9c12bb3 usb: dwc3: gadget: disable automatic calculation of ACK TP NUMP
+>>> 676e34974481 usb: dwc3: gadget: update DCFG.NumP to max burst size
+>>> 7b9cc7a2b101 usb: dwc3: gadget: give better command return code
+>>> ce046d323d74 usb: dwc3: pci: pass the platform device as a parameter to dwc3_pci_quirks()
+>>> 474799f07376 usb: dwc3: pci: make build-in device properties available
+>>> ae4114137607 usb: dwc3: ep0: sanity check test mode selector
+>>> 69b4269eff5f Merge 4.6-rc5 into usb-next
+>>> 818ec3aba883 usb: dwc3: debugfs: dump out endpoint details
+>>> b058f3e8a399 usb: dwc3: core: add helper to extract trb type
+>>> cf6d867d3b57 usb: dwc3: core: add fifo space helper
+>>> 4e9f311833a9 usb: dwc3: make dwc3_debugfs_init return value be void
+>>> af566a0be6e4 usb: dwc3: omap: get rid of dma_status
+>>> 8e7046b71dae usb: dwc3: gadget: don't interrupt when chained
+>>> 052ba52efa17 usb: dwc3: gadget: remove newline from trace
+>>> 36b68aae8e39 usb: dwc3: gadget: use link TRB for all endpoint types
+>>> 4faf75504a7d usb: dwc3: gadget: move % operation to increment helpers
+>>> ef966b9d3353 usb: dwc3: gadget: add trb enqueue/dequeue helpers
+>>> 70fdb273db37 usb: dwc3: get rid of DWC3_TRB_MASK
+>>> c28f82595dde usb: dwc3: switch trb enqueue/dequeue and first_trb_index to u8
+>>> 5ef68c56e169 usb: dwc3: core: document struct dwc3_request
+>>> 53fd88189e08 usb: dwc3: gadget: rename busy/free_slot to trb_enqueue/dequeue
+>>> 495dd5f78145 usb: dwc3: omap: drop dma_mask configuration
+>>> e58dd357741b usb: dwc3: add disable receiver detection in P3 quirk
+>>> c36d8e947a56 usb: dwc3: gadget: put link to U0 before Start Transfer
+>>> 218ef7b647e3 usb: dwc3: gadget: extract unlocked dwc3_gadget_wakeup()
+>>> 2b0f11df84bb usb: dwc3: gadget: clear SUSPHY bit before ep cmds
+>>> c0ca324d09a0 usb: dwc3: gadget: combine return points into a single one
+>>> dea520a4a283 usb: dwc3: gadget: pass ev_buff as cookie to irq handler
+>>> 696c8b128220 usb: dwc3: drop ev_buffs array
+>>> 660e9bde74d6 usb: dwc3: remove num_event_buffers
+>>> aa3342c8bb61 usb: dwc3: better name for our request management lists
+>>> 8495036e986b usb: dwc3: increase maximum number of TRBs per endpoint
+>>> ca4d44ea2a91 usb: dwc3: gadget: always enable CSP
+>>> bc5081617fae usb: dwc3: drop FIFO resizing logic
+>>>
+>>> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> Tested-by: Alexey Charkov <alchark@flipper.net>
+>> Was this really tested at this point, or is this TB for the entire series ?
+> 
+> Only the series as a whole (and it was on a pre-rebase version from
+> some time ago). I don't think individual commits here are bisectable /
+> testable stand-alone, given that all the U-boot specific glue is only
+> re-added at the end.
+Then they are not tested and the tag should not be attached to them.
