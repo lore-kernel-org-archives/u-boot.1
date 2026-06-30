@@ -4,97 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAED2C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 14:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524F3C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 14:29:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4146A84A51;
-	Tue, 30 Jun 2026 16:03:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C138C84A51;
+	Tue, 30 Jun 2026 16:29:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TjOl9gqB";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="ao/MJUMy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B52984AA0; Tue, 30 Jun 2026 16:03:53 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0C3EB84A67; Tue, 30 Jun 2026 16:29:47 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1739984A49
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 16:03:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8DB284A49
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 16:29:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-49190e20a0cso2046616b6e.1
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 07:03:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782828229; x=1783433029; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DRC1al6G1AfZ+0pUVZgWdpqsutpS8cdiUYsGbT/w0Zo=;
- b=TjOl9gqBF/bKC/640tBLmSW/zz9BuPwWZLqzkBfKFGoXFlfBK28Ad1mC0RWET5NxIO
- r0dO2qA1b3YZOeQPXYi+DbU28fiiRhzkwaSOZMNQItux61UMIYCIGpe+tDYUOXm8aM8O
- n1eP9vEjopmeypupTiHq9eSMNaYwZe7g7U/44=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782828229; x=1783433029;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DRC1al6G1AfZ+0pUVZgWdpqsutpS8cdiUYsGbT/w0Zo=;
- b=dYmdkib3nCSyscgTVCVOnZjs2+xg6nPR1nG3BAfLOKC4xSkPmA6R1KFx3PrkAHWJPc
- cH7inwXzwjbYQl3tbgSjyks5LeVx8rWNlt4DYevfayPxf47m8J2U/w+B7efnnrbAhVwM
- IaNZkpp9AjwBolUmsdHjp1jV/SO+Pxel+lSPpdHXyOagZubKcDrQBMPloOe2oIq1fGqI
- KbJJkhdAhdQKp7mvL90dv6iFK+jXGFr0QA7ZNPG0bEQFxDz3U/aXrSjMJoFIlDZoWiqT
- e3yKQME6fJLgvGdYsX65bO/gqydu+XzpmhhrIVUtZSEyDj65rwAw3EkXDsCfpp4FvmHA
- 6pbQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9ROsZgkTho7XeKrAvkvN7SLEPLA0InMnGBMDn5g9lBiUs/Mvy2Y01u2Y2pSNfHq7Qv1QKLV1I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxA1/ZA80nLVe65fTqpjRhypg4E8c5G3AHej+erIlsWqsXb1cuy
- fkBPayc3Rpp6sDnJFpyndiBTDmcunHaaOn/LfHL2qg3eFYUO1NKvvXDkkycgHCH2rmE=
-X-Gm-Gg: AfdE7cnX7vBgxr6yKKK0t281T9Lla0bLQbSb4ivFDc0yEfNvh1/szyEQ3As1afYevHO
- PweGnsUIdTjKkwbDbXCFfm+lLj7FMvchsaIYpKUl9zTqUhELkfFGhljcdL1iTrsfbze353GO8Xp
- ZpaZjAJ/djjheN4jYK1VsOCUZq2pDd+X0WcPzyVbxXTMvjvojnpqvadGD1l1ebL0plAve93hhtk
- iOSWpHx6SBvrtZNL2AxAo1wlb5YRps8BWqi+1QCD3Rz98jC0K4l76mLzu+DQ8jLL5HMXn4EN0tR
- I/fsmXXYuWTxiZJxRXVQwth4hQRx+8ERATjMhNaq8zpM4J1DKPEZKo6M8+3cQWyvG1+hLeqG6g8
- qy6+O0QK8680/uqPWv5SV+cu2RbqugWC3/2qVUixr8qzlxGdEjRFfqQ6kK2/J+nSUL6NJ8THnTS
- 8GaoZfFY2O/iR6QRPTkgyesPLaJ3K1HKB5BJq+KBkHcFERDNGQs9tPNMFs2QhUH0Qu89a7MJGyG
- 7BCYKYjJ62rTuQGlNQ+fo6G0GIIp01vETVts2Wx
-X-Received: by 2002:a05:6808:4fd2:b0:48a:a666:e735 with SMTP id
- 5614622812f47-495eae3b8dbmr3346092b6e.16.1782828229168; 
- Tue, 30 Jun 2026 07:03:49 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-49354e5256fsm8518612b6e.12.2026.06.30.07.03.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 07:03:48 -0700 (PDT)
-Date: Tue, 30 Jun 2026 08:03:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
- David Lechner <dlechner@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>, Crt Mori <cmo@melexis.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Benjamin Larsson <benjamin.larsson@genexis.eu>,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>
-Subject: Re: [PATCH v13 00/12] pinctrl: add support of Airoha SoCs
-Message-ID: <20260630140345.GA967385@bill-the-cat>
-References: <20260617052948.2815870-1-mikhail.kshevetskiy@iopsys.eu>
+ spf=pass smtp.mailfrom=ian.ray@gehealthcare.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o3UCsWrUyZ61ctcLN0Q5CTBTjQ7Yzvmg1yaNg4beTWVh8qpmR3GPyoXjGva8ZJ8SY4cuTKtk1U6aku5BFlmw5aM8QLUY+gIS4Mhv2y2U5xDIlfWSSmQAB+sZr03xT+6ahU9B6JWzcvrIu23wmtJzSSVj8HT7pLmUDjwPY4DHdJjAIHYya/VOCbT28v3N6TOQvTn0bzswqIgwl2fDs3C8T3Et/53LZ2WfO6pFdgXqU4NOwQeJPYuxnaVMSRMU6mWbVfR1BisUv3C1YJhjzqsm8efLe4Z8SRabJFoRL4wimPqNYtDZvxP8QCbbX5giKn+KUBmRFagwMIjvDKaRZXpFqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r6rWTTSttdqBseMraX74CE9bSxQjSHWID2QL8DZ1dKE=;
+ b=xceyBbTXpWqxa+95vw2VgDcT+/HMz5kT8ugWX+q3tJWUm33U0EcjlYr1c1O2mwWb99PFwLvOpFGwrSMRThphQv2ycXuEz5gh09EYvIOcbCGYV8DwhhH7WKbMVtSWc2iMyzkjmT2EYqYnpBH42sY5NRmW/EBS87ZCRhDl0GXgLdTQ2azLqCWEZEc3bhM947oecvA7YJPBsuhC46ZQYIgZxyfoKhWAVXZ+zurlmVjxkuDNOYU3xj5j2lyraTou+ZEr8JS87gqMGsym+oaxmGg+PQ/5ohZxM6keeHCrGbtjFIqi+ML9jpQhq2x6aa5ywRdUglrnUCn1qo0IydnhnF2o6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 165.85.157.49) smtp.rcpttodomain=lists.denx.de
+ smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
+ pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
+ not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r6rWTTSttdqBseMraX74CE9bSxQjSHWID2QL8DZ1dKE=;
+ b=ao/MJUMySq8XSxHDnl2cPWCEtU6KGMhbACwv3pGnV/Y2vVb4lIfs7r5GFiNUeiRXukSkBDWVYuVUpo4Byv68dkCJBoQUuGmFdRqGmnggxTo/nBiQ6IfX26S1spvnbpWecRWaBCD8XAI831tjBgWk2YUvNhTWp64z9HOQ2wqdc8Els+nT2A3XPEz/ftop0cmSmzB6LVTp/C1bqbEkqyN6eZMxXKuI9OLSfTkRW4ssRF9W518wM/3pRnJ9jqHEiQ2Sudb4ivjm8V1bKyvtqAI38+Ii9DwSATUfst0XrdkN09Soy0WYmTeeokxIJ/tBhrVU57EtvlddgFz5I4M+A1C3Hw==
+Received: from CH0PR03CA0346.namprd03.prod.outlook.com (2603:10b6:610:11a::32)
+ by MW4PR22MB2975.namprd22.prod.outlook.com (2603:10b6:303:183::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Tue, 30 Jun
+ 2026 14:29:37 +0000
+Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
+ (2603:10b6:610:11a:cafe::99) by CH0PR03CA0346.outlook.office365.com
+ (2603:10b6:610:11a::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Tue, 30
+ Jun 2026 14:29:37 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
+ smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
+Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
+ not designate 165.85.157.49 as permitted sender)
+ receiver=protection.outlook.com; client-ip=165.85.157.49;
+ helo=mkerelay2.compute.ge-healthcare.net;
+Received: from mkerelay2.compute.ge-healthcare.net (165.85.157.49) by
+ CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Tue, 30 Jun 2026 14:29:36 +0000
+Received: from zeus (zoo13.fihel.lab.ge-healthcare.net [10.168.174.111])
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with SMTP id E733A1290D;
+ Tue, 30 Jun 2026 17:29:34 +0300 (EEST)
+Date: Tue, 30 Jun 2026 17:29:34 +0300
+From: Ian Ray <ian.ray@gehealthcare.com>
+To: Md Shofiqul Islam <shofiqtest@gmail.com>
+Cc: u-boot@lists.denx.de, HuanWang@gehealthcare.com
+Subject: Re: [PATCH] ge: common: vpd_reader: fix errloc array size in
+ verify_bch()
+Message-ID: <akPSzixRRmLF22lx@zeus>
+References: <20260630133939.1472106-1-shofiqtest@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IV3EsMuwuJF2JmDN"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260617052948.2815870-1-mikhail.kshevetskiy@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20260630133939.1472106-1-shofiqtest@gmail.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|MW4PR22MB2975:EE_
+X-MS-Office365-Filtering-Correlation-Id: 49cde2d6-cb58-4161-6415-08ded6b40327
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|1800799024|23010399003|376014|18002099003|22082099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: OI+vjbIuswhLM+WKUsDKMbRANY7zNSZe4CPiEHEbAIoLuj0WBXsPDXugberp64Gj8zvPCg4945qMl7kGvgtkWQ/PhvVoKnevTvZzIhahUdf6Fl4vl6T8Q+cOWtbfOCYKFNCsvOmdVP69r9GOSZ6a++79SFEbc8raaWEMe22glI13Q1RpQGIz2HhlJ21LXVf0CPbtXskP9aZDxBahMiV/9JM5YwvaPe2G6GLO5dc5Un0tzSp4C57Jk1h1SOj5OWs3DBCtu5hFnTm0MxfMZaRy27oibDgn5rlyyJKLsbCmUxilkgzD5J/KOpN69QjM5+eWEV+A5Q9+w7hG73gjqAm6hgfjj/NcV7cpd/ZarOt/rq9pCWs+xUCuD9llNvILdAHojtQSxduJBbpwFnHCD7YOTlRxkUrCuXWDH6V8jL0SuNfaIAYobVh9OkoaifEUWNNnTVtlEsmRAifQZ6T44k8JkkeCz79nZ/6IN/VDFr7P9nuDMx1a8gac3cldPU/Ypdc6NuskcJNDDanU2BX+Yft0H2v/d4MCFtTS2ToGlYFLqog0Wngmx9vdLB8qzTJMJ7IXxdoHXG6IH0gZAD+0B+cQRMnfbidYghKfRBN1lnqqnGKBDAb0oZyMMV2GLMjg9JWp9Oea1QCwsq7820W0GA6KaN5xvCpN8rGHJ8JlvjzYURB4e2t/uXuPKrbnfcwD71S6Pi3sYSX7+LM6KhCLq0Ih7w==
+X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mkerelay2.compute.ge-healthcare.net;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(1800799024)(23010399003)(376014)(18002099003)(22082099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: +PVx/ixV7YQV3++Fohu47Rxr5ccW9XRAA+x2Sl2PizV6pkJqNg0H+bstKYB9kidS6GA30sKCzlN+Xdt5ggvLICaf7OSsx3FFiZvwZOZ8NUy/AGSTRnfWc27nRwfPJ+5Q5iJPiCGt+6Bkg/iHDSTq6o405xJR3z0pjE5Rce9YmyPatj+BNueNFZWcgMBUZ2iT4e42YSSzZyo+dSf+WKFGt4FCl832Jr85XwfzprFBCkeRI+iheFD7+lRjfKGOaNWVvj/wOD2xaAlcOzqbFaudhOEnpvkw7Qtbd71g8Vt7hLrgF2HgtocJ5XmYscoY0yD7h2umlpFuR5FO3bWIQl/A+psaT0TPNCYAtOoXWYoNKMfR/URCPFT/IOVHZVcp09m1AWviGjlglpJvLqyoHGRtD347SKgpd9sbGx2r/guj+5mNaed8woJZIBRfsgtNlhny
+X-OriginatorOrg: gehealthcare.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2026 14:29:36.7347 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49cde2d6-cb58-4161-6415-08ded6b40327
+X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
+ Helo=[mkerelay2.compute.ge-healthcare.net]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH1PEPF0000AD7C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR22MB2975
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,59 +122,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Jun 30, 2026 at 04:39:39PM +0300, Md Shofiqul Islam wrote:
+> errloc stores bit positions of errors returned by decode_bch().
+> The maximum number of correctable errors is ecc_bits, so errloc
+> must have ecc_bits entries.  The array was allocated with data_length
+> entries instead, which is the number of EEPROM data bytes -- orders
+> of magnitude larger than needed and incorrect.
 
---IV3EsMuwuJF2JmDN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Good catch, thanks for fixing this.
 
-On Wed, Jun 17, 2026 at 08:29:36AM +0300, Mikhail Kshevetskiy wrote:
+> 
+> Fixes: b418dfe16e62 ("board: ge: make VPD code common")
+> Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
 
-> This patch series add pin controller and gpio driver support for EN7523/
-> AN7581/AN7583 SoCs. The driver based on official linux airoha pinctrl and
-> gpio driver with Matheus Sampaio Queiroga changes.
->=20
-> The original Matheus Sampaio Queiroga driver can be taken from the repo:
->   https://sirherobrine23.com.br/airoha_en7523/kernel/src/branch/airoha_en=
-7523_pinctrl
->=20
-> Additionally in the EN7523 case the patches removes existing gpio dts nod=
-es
-> and replaces them with pinctrl node. It should not be very dangerous, bec=
-ause:
->  * No official EN7523 gpio support present in U-Boot
->  * Legacy Linux EN7523 GPIO driver is mostly abandoned
->  * The same driver is planned for upstream linux/openwrt
->=20
-> This patchset includes bitfield.h patches created for Linux kernel
-> by Geert Uytterhoeven. It suits U-Boot fine. I preserve original author
-> and original commit messages. It might be not a best strategy, because
-> these patches refers to other linux kernel commits not added to U-Boot.
-> Please note me, if there is a better way.
->=20
-> The patches were tested on EN7523/AN7581/AN7583 boards.
+Reviewed-by: Ian Ray <ian.ray@gehealthcare.com>
 
-Unfortunately this series break building on:
-zg2_beacon hihope_rzg2 r8a77980_condor r8a77995_draak r8a77970_eagle r8a779=
-90_ebisu r8a779
-a0_falcon r8a779md_geist r8a779h0_grayhawk r8a779f4_s4sk rcar3_salvator-x r=
-8a779g3_sparrowhaw
-k r8a779f0_spider rcar3_ulcb r8a77980_v3hsk r8a77970_v3msk r8a779g0_whiteha=
-wk silinux_ek874
-due to the bitops changes.
-
---=20
-Tom
-
---IV3EsMuwuJF2JmDN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakPMugAKCRAr4qD1Cr/k
-Cr/yAQCf5sOlXZUlUPizkO92LitOjx5+tZxLmSmVugsLL+u6yQD8CG3j/68yG2v0
-Q2P4phB9wTszQ8enHjG8GgMmYG32VwU=
-=rOfM
------END PGP SIGNATURE-----
-
---IV3EsMuwuJF2JmDN--
+> ---
+>  board/ge/common/vpd_reader.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/board/ge/common/vpd_reader.c b/board/ge/common/vpd_reader.c
+> index 2422db38013..b3f9e96615d 100644
+> --- a/board/ge/common/vpd_reader.c
+> +++ b/board/ge/common/vpd_reader.c
+> @@ -66,7 +66,7 @@ static int verify_bch(int ecc_bits, unsigned int prim_poly, u8 *data,
+>                 return -1;
+>         }
+> 
+> -       unsigned int *errloc = (unsigned int *)calloc(data_length,
+> +       unsigned int *errloc = (unsigned int *)calloc(ecc_bits,
+>                                                       sizeof(unsigned int));
+>         int errors = decode_bch(bch, data, data_length, ecc, NULL, NULL,
+>                                 errloc);
+> --
+> 2.51.1
+> 
