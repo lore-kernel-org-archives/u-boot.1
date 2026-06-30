@@ -4,90 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76BB5C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 13:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54222C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 13:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DC6684A67;
-	Tue, 30 Jun 2026 15:32:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A79DE84A81;
+	Tue, 30 Jun 2026 15:39:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g/qGLK8W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q6LEIGUQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFC9F84A77; Tue, 30 Jun 2026 15:32:50 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id CAAB584A72; Tue, 30 Jun 2026 15:10:53 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0472784A52
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 15:32:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54F6384A5F
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 15:10:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6986f5f9ff9so200942a12.0
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 06:32:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-49241dbf9c1so38646635e9.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 06:10:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782826368; x=1783431168; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:content-language:cc:to
- :subject:from:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=mbHx5gijNAQ1phsLKVHW/DRbhCIqiHFuO8ka5ZvgXtY=;
- b=g/qGLK8W7kOyvs68stsJRtX+EP4wiQTxA8pE3WXazq9KqyVCREEQXaEWic3H3+/MIh
- X+vrNlQYTcofOrMsVU1nAJFFuGL35U6EbUBFFFM4chwTnnrxYreiC9nKTIMDcKtjQkse
- KEfPav748owkTQKekRFUXE3txzUaDhUoC3DBu+fwSe0XI2/rrxTbyFmv/IyDfPqkkrp2
- +dcK0lT33DlUwkxAWnVnT2yR/O1V6P0S+rkbWW0XSxNcz+9Nl2BVXQ6DkbyKtORNbelc
- ymJGsNutSoz1ZYVspKXqGaM+o6FcYn03JaiRP1lrZ0dlfMoWeQiJtGCiDLwkuResYDFN
- Vc9w==
+ d=linaro.org; s=google; t=1782825051; x=1783429851; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lmGUBD546QwKwVTtQ0MFWX7l1NFkEGRHIPaT+GQ2XFQ=;
+ b=Q6LEIGUQX8tr6zOeyergYhYixR83tL0iR1UtTbe+EGKsAeL5IQbDS/nvh9p+0F0LHq
+ AENlu/JDPIQ0gLtsLlzqFig0yi2BsOvNc1xAhi4eKoMe36pDexK7vLiuoGfl0RwMjVxZ
+ ZYdgjtKsQBDGHRtj7fNM10Y92QC0DK7HYpgoIgCtsHvG3a57lRuGUarqyfhCUYAOSbez
+ UUx3kT8Y6qvpNMj97E61iiWwpByq/AydmjxgFpK7/MGZoMf7G03z2jbjaBURrtvYvXO7
+ wjnc1cdIvaoQ6f09/hlytdYOZUM0+hd5gY33TuTRWCh9023IT9ztYKC7VGX/0/WTKe+O
+ ZazA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782826368; x=1783431168;
- h=content-transfer-encoding:content-type:content-language:cc:to
- :subject:from:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=mbHx5gijNAQ1phsLKVHW/DRbhCIqiHFuO8ka5ZvgXtY=;
- b=jxxsQclUH341vqp7QdYhybeCOiuFiVJojh74q/PbfrS/mCQyjGPFB8YqA7eOf3axVt
- 9QabevqwwWhzOTummuOu/PuDhdJusb/ujBijwVE42HXKfCdGg/+PFMmXswAVs93bvFV9
- iepT2e/aEM7emEYjBkRgGQNFUIaMxQb5map+/NKpQ+3uhymf6xfDOyE7ZA8byZisGraP
- MJ6hmtG4kgZN4zJ76wvH+kJoF1APvO30V7b1elxjdlXAPl0Ive2lIZZpJdQEq6JnykCF
- 63Y42/Z181dYQLUtYK3Z9rn/bZ09hiwOVdDQnd6qz0maD57WWKLORvYRR2OyNBNmzxK/
- lLQQ==
+ d=1e100.net; s=20251104; t=1782825051; x=1783429851;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lmGUBD546QwKwVTtQ0MFWX7l1NFkEGRHIPaT+GQ2XFQ=;
+ b=RRRg4jMBrfUdECGOuqnCHhxlUSoc4R9trKTxwegYcmv6yK3v/zVRbaU9k3QhJbas2k
+ F4RAPQsFoV4ZfxLKU2Fz0J1VMZ8Up+PXVBvxyYHoXnvHFkboXLZxPk2N5n6mWm9tjwb9
+ rXh+e4hzoPz/e4Ja4Kr6Hxg00TX6wsb6r2Jc20+lx+sqZqC1OflO+lzpP8ztnBAMtJPq
+ 4G7sIz4nrZi/X0fw0rT11awhJBQ1yIPAjvEqWAFcDgeHMtyIrQnz0fmWOypns5moajvB
+ KAJ7kwhChFRU+AL2vdTS9B/m7gsMpB/24b5511xjjhrdD4tZ3gdXUimVOoP+55B3x+PV
+ Vfug==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro/juNKgJLPYbcOWWvYxF85rFLjrIpiKq25U+wcSbdqnajKHo+1Rd63gtE2oiD+Vf5icM5W//0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUzCB2OiqaA4XQgefo/yhvhJ5vQ5Tv9HVSrx3zT4qJojNKP4qE
- zu/ODdvOCHvNhBtzdxFB3aqjOqW/mpSFlG5fXCmv79AO8JtAT3s+89WA
-X-Gm-Gg: AfdE7cnB/nfDQTI8VX3yfzEnaeDMrtgkiounvVAMZ3BLbfjAuQ+YLmAzL4y46Fgepdu
- 7qpNS7PW5AkAfQqC/1DXjFW+qBF/F/b9Nc8s9Hn+rQUXzhaK14P8QgqaozPMEclYXekfx8JSaqn
- 4vmJJ41qew+uLEGGq/1OoRl4ARAa3gsf5awG5j2W3fNF29G6zaMdjurpGsVgaKSn3HzCMfzHy0i
- GD2vpXsg25CTF547sP2tQ1ucByj8WFTNmEAt6ZazZTA1y+SPNcnUAZfq0bzXRYutBuKsMM6NqKn
- HQX3+E1DwS+8+f4eiEVMFP7y8Bl8txcEMxvAmcXHuVkgDAysVrQGrhgfHUGNd7AXd1qWqpnebFR
- 8cQ4PuX2BSkiySRyUwkumIoqBUTWlG0sVF12DbGLl98EIuchJ3fkeD27BT6CMC07ThoEN0jCN7a
- jUt2mfwZ1GnQ2MCWZ9NntVpx7JELH7zK06w4iKBGEG6I4TdJYWu0Q=
-X-Received: by 2002:a05:6402:2746:b0:697:deb8:761a with SMTP id
- 4fb4d7f45d1cf-69879e40233mr1055161a12.6.1782826368110; 
- Tue, 30 Jun 2026 06:32:48 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
+ AFNElJ81t3AviD086SMGzlJBeHUu4dtm74n6u9MWK2+GZX1TL846nPy5Dr+D8zgmg3Xpa3WcUDdVw50=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1HCGfJiLSaV7yusdhjI4Iz4iZfvd/HUQxR5aiUYNIq1sAY5Me
+ h0Zb8vWjyngLj7XkQSqEppHVaKOdbO+HPA5epU1CXE757YNVR/+2UKZXPU+QjP4qIUg=
+X-Gm-Gg: AfdE7ckfjD02PaOTgHO41REsWs93+qFrvW/d7UWiMslKWOQjd2riFUqOZp20PaB897U
+ ym+1yp/Wwke7vBuuy4JDNt5AoayUDhIclut0xlO0WXP13FAYNl0mXT7HDEUFQMiSZy6FpVg6w2c
+ HERx9gAAHB/flxHRjitAjURQgK8RZap+uNnggzfEgXQS1jRGLT+JbwbJaM78CE+3c9mBn5bG97A
+ MpepW29qIhU1KnKKSq/QtCbfxfFrQwTVv4Ko2mmqMh9S04eqI1hPtQaqkgnnPlaguwWvAHLy/SZ
+ Xb7gnnr7IFu9FcZ3TQEhd7Ry8XUiR+SxuVTFb7M5HtYXTa146XPJTBaAWekbQ4WEEeDC66qWRVn
+ R24cztqeNxaybjPW21P8eSB6ypwH92uZFbnvj7ACvS+oqiYCQo6HZUw8cGdcmVWmpsee/oATPFy
+ 0BumcfWPa1HNRlgZWC1txSCsgLle4=
+X-Received: by 2002:a05:600c:c16f:b0:492:28be:6098 with SMTP id
+ 5b1f17b1804b1-493b828706fmr47649385e9.11.1782825050532; 
+ Tue, 30 Jun 2026 06:10:50 -0700 (PDT)
+Received: from [172.16.185.106] ([195.76.196.161])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1289176ee2sm128165566b.58.2026.06.30.06.32.46
+ 5b1f17b1804b1-493bc7c91d1sm23493865e9.0.2026.06.30.06.10.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 06:32:47 -0700 (PDT)
-Message-ID: <12b6e0d5-637e-446e-9e4b-82c82e6fad40@gmail.com>
-Date: Tue, 30 Jun 2026 15:32:46 +0200
+ Tue, 30 Jun 2026 06:10:48 -0700 (PDT)
+Message-ID: <a022e174-5542-4720-9978-9f76075a7782@linaro.org>
+Date: Tue, 30 Jun 2026 15:10:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1] mtd: nand: raw: rockchip_nfc: fix oobfree length
- calculation
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- trini@konsulko.com, u-boot@lists.denx.de
-Content-Language: en-US, ar-EG
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v3 00/14] spl: ufs: add UFS boot support for Qualcomm
+ Snapdragon in SPL
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Shawn Lin <shawn.lin@rock-chips.com>, Tuyen Dang
+ <tuyen.dang.xa@renesas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Alexey Charkov
+ <alchark@flipper.net>, Andrew Davis <afd@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>, Javier Tia <floss@jetm.me>,
+ Rasmus Villemoes <ravi@prevas.dk>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Dhruva Gole <d-gole@ti.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Lukasz Majewski <lukma@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@nabladev.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Danila Tikhonov <danila@jiaxyga.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Yao Zi <me@ziyao.cc>, Daniel Palmer <daniel@0x0f.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>, Julien Masson
+ <jmasson@baylibre.com>, David Lechner <dlechner@baylibre.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 30 Jun 2026 15:39:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,53 +148,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The oobfree[0].length calculation depends on the
-rknand->metadata_size value, but this is calculated
-after the function rk_nfc_ecc_init is called. Move this
-calculation to a location before it's value is required.
 
-Fixes: 1b3fcb3c0456 ("mtd: nand: raw: rockchip_nfc: add layout structure")
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
- drivers/mtd/nand/raw/rockchip_nfc.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+On 6/15/26 08:59, Balaji Selvanathan wrote:
+> This series adds UFS boot support in SPL for Qualcomm Snapdragon
+> platforms, along with the necessary driver and infrastructure
+> changes to support it.
+> 
+> Patch 1 renames SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
+> Patch 2 renames SPL_UFS_SUPPORT to SPL_UFS for defconfigs.
+> Patch 3 adds a Kconfig choice for U-Boot location: sector or partition.
+> Patch 4 refactors spl_ufs.c to add partition-based U-Boot loading.
+> Patch 5 enables part_get_info_ptr() in SPL for UFS partition boot.
+> Patch 6 adds UFS_MODE_RAW and UFS_MODE_FS defines to spl.h.
+> Patch 7 adds SPL_UFS_QCOM to enable the Qualcomm UFS HC driver in SPL.
+> Patch 8 adds SPL_PHY_QCOM_QMP_UFS to enable the QMP UFS PHY in SPL.
+> Patch 9 adds SPL_CLK_STUB Kconfig for the stub clock driver in SPL.
+> Patch 10 updates charset.o build rule to use SPL_UFS after the rename.
+> Patch 11 adds SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI.
+> Patch 12 adds SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
+> support for all Qualcomm pinctrl drivers.
+> Patch 13 adds SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig and
+> $(PHASE_) support for Qualcomm serial drivers.
+> Patch 14 updates Qualcomm PMIC and SPMI Makefiles to use $(PHASE_).
 
-diff --git a/drivers/mtd/nand/raw/rockchip_nfc.c b/drivers/mtd/nand/raw/rockchip_nfc.c
-index f730e15d0410..ea8e67d1a23e 100644
---- a/drivers/mtd/nand/raw/rockchip_nfc.c
-+++ b/drivers/mtd/nand/raw/rockchip_nfc.c
-@@ -861,6 +861,15 @@ static int rk_nfc_ecc_init(struct rk_nfc *nfc, struct nand_chip *chip)
- 	ecc->steps = mtd->writesize / ecc->size;
- 	ecc->bytes = DIV_ROUND_UP(ecc->strength * fls(8 * chip->ecc.size), 8);
- 
-+	rknand->metadata_size = NFC_SYS_DATA_SIZE * ecc->steps;
-+
-+	if (rknand->metadata_size < NFC_SYS_DATA_SIZE + 2) {
-+		dev_err(nfc->dev,
-+			"driver needs at least %d bytes of meta data\n",
-+			NFC_SYS_DATA_SIZE + 2);
-+		return -EIO;
-+	}
-+
- 	if (ecc->bytes * ecc->steps > mtd->oobsize - rknand->metadata_size)
- 		return -EINVAL;
- 
-@@ -974,15 +983,6 @@ static int rk_nfc_nand_chip_init(ofnode node, struct rk_nfc *nfc, int devnum)
- 	ret = ofnode_read_u32(node, "rockchip,boot-ecc-strength", &tmp);
- 	rknand->boot_ecc = ret ? ecc->strength : tmp;
- 
--	rknand->metadata_size = NFC_SYS_DATA_SIZE * ecc->steps;
--
--	if (rknand->metadata_size < NFC_SYS_DATA_SIZE + 2) {
--		dev_err(dev,
--			"driver needs at least %d bytes of meta data\n",
--			NFC_SYS_DATA_SIZE + 2);
--		return -EIO;
--	}
--
- 	if (!nfc->page_buf) {
- 		nfc->page_buf = kzalloc(NFC_MAX_PAGE_SIZE, GFP_KERNEL);
- 		if (!nfc->page_buf) {
--- 
-2.39.5
+We can read the list of patches below, you don't need to provide a 
+reworded summary. Your cover letter should provide context and justify 
+what this series is doing, etc etc... there is plenty of documentation 
+around for writing a good cover letter.
+
+What it should particularly include in this case is an explanation as to 
+how it fits into all the other SPL related series ya'll are sending. Can 
+they be picked without this? Do they depend on this series (none of them 
+seem to indicate that).
+
+There's also random stuff that isn't UFS related in this series. With 
+the volume of patches you guys are sending you need to put in at least a 
+bit of effort to offer some cohesion for how they are all meant to fit 
+together.
+
+Please clean this up and stop expecting maintainers to do all the work 
+to get your patches into shape. You have plenty of colleagues at 
+Qualcomm who know how to contribute to the kernel/U-Boot, ask them for help.
+
+Thanks,
+// Casey
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Simplified partition selection logic in ufs_load_image_raw_partition
+> - Removed spl: ufs: add SPL_UFS_FS Kconfig and filesystem boot stub
+> - Link to v2: https://lore.kernel.org/u-boot/20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com/
+> 
+> Changes in v2:
+> - Renamed SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
+> - Added SPL_UFS_RAW_U_BOOT_USE_SECTOR config to clearly choose between
+>    sector or partition
+> - Refactored the codes in common/spl/spl_ufs.c to use helper functions
+>    to make the codes readable and clear
+> - Add the filesystem support in SPL UFS as a seperate patch
+> - Correct SPL_UFS_SUPPORT config name in lib/Makefile
+> - Added SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI
+> - Added SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
+> - Added SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig
+> - Updated Qualcomm PMIC and SPMI Makefiles to use $(PHASE_)
+> - Link to v1: https://lore.kernel.org/u-boot/20260409-spl_ufs_only-v1-0-f7e0e243d805@oss.qualcomm.com/
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> 
+> ---
+> Balaji Selvanathan (14):
+>        spl: ufs: rename SPL_UFS_SUPPORT config to SPL_UFS
+>        configs: rename SPL_UFS_SUPPORT to SPL_UFS
+>        spl: ufs: add Kconfig choice for U-Boot location method
+>        spl: ufs: add partition-based U-Boot loading support
+>        part: enable part_get_info_ptr for SPL UFS partition boot
+>        spl: add UFS boot mode defines to spl.h
+>        ufs: qcom: add SPL_UFS_QCOM Kconfig and SPL build support
+>        phy: qcom: add SPL_PHY_QCOM_QMP_UFS for SPL UFS boot
+>        clk: stub: Add Kconfig option for SPL stub driver
+>        lib: update charset.o build rule to use SPL_UFS
+>        misc: qcom_geni: add SPL support for Qualcomm GENI driver
+>        pinctrl: qcom: add SPL support for Qualcomm pinctrl drivers
+>        serial: msm: add SPL support for Qualcomm serial drivers
+>        power: spmi: use $(PHASE_) macro for Qualcomm PMIC and SPMI
+> 
+>   common/spl/Kconfig                 |  51 ++++++++--
+>   common/spl/Makefile                |   2 +-
+>   common/spl/spl_ufs.c               | 151 ++++++++++++++++++++++++----
+>   configs/nanopi-m5-rk3576_defconfig |   2 +-
+>   configs/rock-4d-rk3576_defconfig   |   2 +-
+>   drivers/Makefile                   |   2 +-
+>   drivers/clk/Kconfig                |   7 ++
+>   drivers/misc/Kconfig               |  10 ++
+>   drivers/misc/Makefile              |   2 +-
+>   drivers/phy/qcom/Kconfig           |   7 ++
+>   drivers/phy/qcom/Makefile          |   2 +-
+>   drivers/pinctrl/qcom/Kconfig       | 201 ++++++++++++++++++++++++++++++++++++-
+>   drivers/pinctrl/qcom/Makefile      |  46 ++++-----
+>   drivers/power/pmic/Makefile        |   2 +-
+>   drivers/scsi/Makefile              |   2 +-
+>   drivers/serial/Kconfig             |  20 ++++
+>   drivers/serial/Makefile            |   4 +-
+>   drivers/spmi/Makefile              |   4 +-
+>   drivers/ufs/Kconfig                |  12 ++-
+>   drivers/ufs/Makefile               |   5 +-
+>   include/part.h                     |   3 +-
+>   include/spl.h                      |   4 +
+>   lib/Makefile                       |   2 +-
+>   23 files changed, 472 insertions(+), 71 deletions(-)
+> ---
+> base-commit: 1e80ee41441c612f05787a93bbef4e6e422e29d1
+> change-id: 20260615-spl_ufs-5c2c4eb327aa
+> 
+> Best regards,
 
