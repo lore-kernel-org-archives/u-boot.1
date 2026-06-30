@@ -4,99 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B6BC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 16:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D72EC43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 16:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F9E384A26;
-	Tue, 30 Jun 2026 18:17:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBF5184A26;
+	Tue, 30 Jun 2026 18:32:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dGqaEOY/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YxTqPChc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C1DA84A38; Tue, 30 Jun 2026 18:17:44 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 23B7D84A47; Tue, 30 Jun 2026 18:32:02 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D6558498C
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 18:17:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD55C8498C
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 18:31:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-493bc8fda98so7529925e9.0
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 09:17:42 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-493a7bd27c2so23302745e9.3
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 09:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782836262; x=1783441062; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782837119; x=1783441919; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Qk522ai+LkLjT3b3Xi4YtnqXwvHjFQS6pmaD8hiwlqo=;
- b=dGqaEOY/zi/Xl5WHi65zH7pxJ5An3LQl0erlPxLehvgvX1vHoDNXqbtqrh9wdCzX5a
- lCzkh29zU3PBw7wgHfk5A5R/D19iLbqy8kwJXEMRaXFMGo2SwItQEJilW76hBWnDevaP
- 3qIMeSdnNG9n5cocvlYfUbEWuozftdnI1VqqmP/4LR8Hw4S408iYnY4uTK7PacmyyK5m
- j5Ed0Yq00Pppf/kPzgnxZdTcSaRKONQluh9dh+Nj4+K5reqpyp7AWQDkuha3Of4e/h5n
- LuHSVtDbvljNCzkDz5JoQ9qkUq354lnpasZ7LMmrwR5+9IcFvhcSxFIkBRYrZtRVd4TF
- 5QTg==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=nuinsQUTFnaj88WpGTOH926nE6UeHmcHcCUupL7bVo4=;
+ b=YxTqPChcPpB2DopC+jAwqBO9ca2gst0267UjAVmA5AcqGLmKsfObJyZ1NMRT/VuUe2
+ 9tNfealOFnJI/4HnxAyZO8r3GyivMhZ20/iJh9MvkgUg+vggeiYKbLsTyvZDvANtF41X
+ 0Xo+86pNUHscS8v6+oT4o1J5RI/oEGTyL4lUklSBCxwaoy24m6ojTBtSzcD69quUyNUd
+ GwqPhGYrKqRqo6JKg/1h1oQDXLUogBRbCDrlBUHaHyanWX+hai37VYqmQAB/MJKkdA0o
+ mi3Eu3UjTUvAFizWFsrFLHXyVoL7U7k02vtA0KISwwq1V/Tx85UvKUVgof+VQJIGCg+q
+ Zxkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782836262; x=1783441062;
+ d=1e100.net; s=20251104; t=1782837119; x=1783441919;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qk522ai+LkLjT3b3Xi4YtnqXwvHjFQS6pmaD8hiwlqo=;
- b=MYrYcdPVNhwCMfr8yB6usvKdDNverI+tSrc7HK3LWQdZNR6rWs0NDtiPClRlK59Blo
- wIGtUFRYXt2nIe+F/3mIJ2oUz2GgYVd8qsq0czqHLk3Mi+ZLPo5hBdmjiJlp1cS+B8UL
- Wc/4j7/GNUncmKHhvxOa55EwlfQw/JpJ9ABfgrWpX/LROsW9wVQHrDriurkadq0DlN9H
- zXJJ4Fuv22fBHAiMzZJFuRqiSU2V/lJAxSIQGF2EWux02FF1/Lr0tpdYygDIPxIEwxZ1
- Eq6F3GZisDI/ltQjn0EEvWnz7zX2t2kN+DU+1Mo4/PQJmxbJyxSBW5YI74R99TCIG0oK
- PZMg==
+ bh=nuinsQUTFnaj88WpGTOH926nE6UeHmcHcCUupL7bVo4=;
+ b=beYQ6ZOg569X7nwLE5PVNtI6av9n+p9yHPHMZw16wimZiLvYf4roZ0djhTDrSnbXcU
+ VfT9SLVoiqUJKVf0GD9i8obo8ge4MmCimIFloXSawO8f6KQnQbGM48+I3TnGv5x0WDpW
+ UUkf1XnKkZMX3gYjuocEmq4jku3558by9LfqAF43Jk+QOxm6hhWEbtwk0Kumv2Jw3Qvy
+ JA6Yi5vBc5ZOguPZADP0TKvSZB7v8hv7CYxWUMX0tin9pwXk+MtZvQslEGaV+dWMfVkI
+ nRaWAYh/QmxcgXWc6be8PKFKgElDSDd/+NbVmjj95ObcK/284XdwLW10rbZmJTacEtrB
+ 8sKA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9kU8+LqRnn0BX/TGisQQ4ZOcbMTAlMSmG/nAaWuq3459b16tRMv+dTSbHOdyZU0W3x6rx0UJs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzreyuKtRyKnpOcJt+FtAD+ASOf1YEWVPDU08IlQKIIiB2hp5zx
- w8RfaG74apwV/IRv+5DRsqqCp/yvXq+avxMG2RWfz6sJeQcxpMRx91xxSPQhdBQyl+s=
-X-Gm-Gg: AfdE7cn+/BxdZoSwEzB/JEjtpVA/+/ujaF1iJW9+QTmSckdJFuQc+XglHz1zElZa24g
- q0kw8Op3CA8834F6SYsLp6I2prhv0G7psiVUFN2sVa4I8wPrsSApwf/5lgDg3jgs4Aa5SuFZzr5
- 2sUrvoMxIzI8wyVgLYHsdOi6SCiJx4Hey4ixX/32Su3cp64vRATFDZKd0bl/DHZY+hIX5GVWPDW
- 6IDSvjgsRV5JdJyQYOh/gZ71pbSIqeIyvfVgtrK/K0tRqxaWcK1GLrKps0zaTOQw/rKf2hfFaCH
- SIC+WFv0Syhw/qdvAZ7dvqPCWQgGekdcYCcxsg+JSpRYl9b7cb0AFWH+zF+QlS5LSPh/8kG/ywY
- NBuxz07gRkSFvh9SH8KzBUqdd2sJysAMKJleWvWove0occEDDVIw6NNY2zW99b/0umZqpkxdX1q
- NftqFzL2cSoBvgkCVffLrVNRB4eYg=
-X-Received: by 2002:a05:600c:3485:b0:492:1e36:1fe9 with SMTP id
- 5b1f17b1804b1-493b82c654emr58924015e9.37.1782836261489; 
- Tue, 30 Jun 2026 09:17:41 -0700 (PDT)
+ AFNElJ+N+Q2GuBV6kN7HlUPxahcQDWNr8uct0DMgM1g+EDWlH2DCqOUI0nhYjwhdJmwjdUVmbfDjdCo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMmKoA7YXJDW/abVyNqf24WEzUogGUVHPOQyUlGymEQf9w7sMl
+ 92BC5fJaQI+YTcooYlElvzypMCat6oPFdDCboGcveC7ybeVayy0k9Eae64b3SdU+6hE=
+X-Gm-Gg: AfdE7cldtroZahXlrKqPxuOzLAH7+c4w88aKRGFrEyE0SJdVwZ/YrouOkDHf+U1Tkgp
+ ccx6SWSs8548guDzbU9P9fziCS1/s6nQS65Jq9B70tsUAaCTBzT6r37fW+hG1FKy3PaPjqcEb+l
+ MThC0F9hmKI/HfZp4F5SZZ9LcmD+NWPtlz/71DaxF7WJ1oyXhU5kA7ZyuARZsNs7HLJNSss0Pc0
+ KZxOfySlL80/jyeS3NC25whvE6g5zy8N8I3C32vcJyQT8t3SpCdByb0MTCxCKdoihcyVBG31qN4
+ F0KQBvSEYTaUp6fR/U6aUbNPPtM4aCPJmYxrkBeNlj43i0tsBL5Nug4VBox5fr+TZncovPSvhaD
+ HzCprh1JqBE87K+cyPfmv6bRon8GQtT/tdC03b2fiRG3CpEtg/R/Y7Dug27CK7LVqa3Abgixc1p
+ tXYDeqCK1YWkzhcjlEnmVwEsIOTMg=
+X-Received: by 2002:a05:600c:698d:b0:493:b8d9:f28b with SMTP id
+ 5b1f17b1804b1-493b8d9f306mr58934655e9.23.1782837118816; 
+ Tue, 30 Jun 2026 09:31:58 -0700 (PDT)
 Received: from [172.16.185.106] ([195.76.196.161])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493be4c7f90sm6013575e9.2.2026.06.30.09.17.32
+ 5b1f17b1804b1-493be4e7f81sm7195315e9.11.2026.06.30.09.31.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 09:17:40 -0700 (PDT)
-Message-ID: <1fc22177-b677-4b02-b527-48727dd0e75b@linaro.org>
-Date: Tue, 30 Jun 2026 18:17:20 +0200
+ Tue, 30 Jun 2026 09:31:58 -0700 (PDT)
+Message-ID: <a8c66666-ca2a-4b0c-bb25-cc0fad03cd9f@linaro.org>
+Date: Tue, 30 Jun 2026 18:31:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dts: qcs6490-rubikpi3: Add U-Boot dtsi
-To: Hongyang Zhao <hongyang.zhao@thundersoft.com>, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- David Lechner <dlechner@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Roger Shimizu <rosh@debian.org>
-References: <20260624-qcs6490-rubikpi3-v2-0-829dad7e6dd6@thundersoft.com>
- <20260624-qcs6490-rubikpi3-v2-1-829dad7e6dd6@thundersoft.com>
+Subject: Re: [PATCH v2 4/4] configs: Add defconfig for ipq9650 RDP488
+To: Badhrinath S <badhrinath.s@oss.qualcomm.com>, trini@konsulko.com,
+ peng.fan@nxp.com, jh80.chung@samsung.com, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, quic_varada@quicinc.com, luca.weiss@fairphone.com,
+ danila@jiaxyga.com, balaji.selvanathan@oss.qualcomm.com,
+ aswin.murugan@oss.qualcomm.com, adrian@mainlining.org,
+ david.wronek@mainlining.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20260610053655.2825589-1-badhrinath.s@oss.qualcomm.com>
+ <20260610053655.2825589-5-badhrinath.s@oss.qualcomm.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260624-qcs6490-rubikpi3-v2-1-829dad7e6dd6@thundersoft.com>
+In-Reply-To: <20260610053655.2825589-5-badhrinath.s@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -115,66 +108,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hiya,
 
-Thanks for respinning this!
 
-On 6/24/26 14:45, Hongyang Zhao wrote:
-> Add the board-specific U-Boot device tree overrides for the
-> Thundercomm RUBIK Pi 3.
-> 
-> When U-Boot is loaded as the primary bootloader, no previous stage
-> provides the memory layout. Describe the 8 GiB LPDDR4x layout locally
-> so U-Boot can use the available DRAM.
+On 6/10/26 07:36, Badhrinath S wrote:
+> Add default configuration for the IPQ9650 RDP488 board with eMMC boot
+> support.
 
-I'm hoping we can skip this patch, since we now support retrieving the 
-memory map dynamically from SMEM. I'd appreciate it if you could do a 
-clean build of the qcom-next branch here and see if it works without this.
-
-https://source.denx.de/u-boot/custodians/u-boot-snapdragon
-
-You also shouldn't need to use qtestsign as MBN support was also just 
-picked so u-boot.mbn should be built directly.
-
-I used the Rubik Pi for testing both series locally so crossing my 
-fingers you don't run into any issues.
-
-Thanks,
-// Casey
-
+Do we need individual defconfigs for every single IPQ board really? One 
+or two sure but at this point I think we ought to have a common fragment 
+that they include with the base stuff so we can keep things in sync and 
+differentiate the platform specific options.
 
 > 
-> Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 > ---
->   .../arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
+> Changes in v2:
+> - No changes
 > 
-> diff --git a/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi b/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi
+>   configs/qcom_ipq9650_mmc_defconfig | 57 ++++++++++++++++++++++++++++++
+>   1 file changed, 57 insertions(+)
+>   create mode 100644 configs/qcom_ipq9650_mmc_defconfig
+> 
+> diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
 > new file mode 100644
-> index 00000000000..8518cd402d0
+> index 000000000000..ce2488d72eb1
 > --- /dev/null
-> +++ b/arch/arm/dts/qcs6490-thundercomm-rubikpi3-u-boot.dtsi
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/ {
-> +	/*
-> +	 * When running as the primary bootloader there is no prior stage to
-> +	 * populate the memory layout for us. We should have multiple nodes
-> +	 * here, but ABL does not like that.
-> +	 */
-> +	memory@80000000 {
-> +		device_type = "memory";
-> +		reg = <0 0x80000000 0 0x39700000>,
-> +		      <0 0xc0000000 0 0x01800000>,
-> +		      <0 0xc3400000 0 0xbcc00000>,
-> +		      <1 0x80000000 1 0x00000000>;
-> +	};
-> +};
-> +
-> +// RAM Entry 0 : Base 0x0080000000  Size 0x0039700000
-> +// RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
-> +// RAM Entry 2 : Base 0x00C3400000  Size 0x00BCC00000
-> +// RAM Entry 3 : Base 0x0180000000  Size 0x0100000000
-> 
+> +++ b/configs/qcom_ipq9650_mmc_defconfig
+> @@ -0,0 +1,57 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_POSITION_INDEPENDENT=y
+> +CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
+> +CONFIG_ARCH_SNAPDRAGON=y
+> +CONFIG_TEXT_BASE=0x8a280000
+> +CONFIG_NR_DRAM_BANKS=24
+> +CONFIG_ENV_SIZE=0x40000
+> +CONFIG_ENV_OFFSET=0
+> +CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
+> +CONFIG_SYS_LOAD_ADDR=0x90000000
+> +CONFIG_DEBUG_UART_BASE=0x1a98000
+> +CONFIG_DEBUG_UART_CLOCK=14745600
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_REMAKE_ELF=y
+> +# CONFIG_EFI_LOADER is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +# CONFIG_BOOTSTD is not set
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_SYS_PBSIZE=1024
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_HUSH_PARSER=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PART=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_IPQ9650=y
+> +CONFIG_MSM_GPIO=y
+> +# CONFIG_I2C is not set
+> +# CONFIG_INPUT is not set
+> +CONFIG_MISC=y
+> +CONFIG_QCOM_GENI=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_ADMA=y
+> +CONFIG_MMC_SDHCI_MSM=y
+> +CONFIG_MTD=y
+> +CONFIG_DM_MDIO=y
+> +CONFIG_DM_ETH_PHY=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_QCOM=y
+> +CONFIG_RGMII=y
+> +CONFIG_PHY=y
+> +CONFIG_PHY_QCOM_QMP_UFS=y
+> +CONFIG_PHY_QCOM_QUSB2=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCONF=y
+> +CONFIG_PINCTRL_QCOM_IPQ9650=y
+> +CONFIG_DEBUG_UART_MSM_GENI=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_MSM_SERIAL=y
+> +CONFIG_MSM_GENI_SERIAL=y
+> +CONFIG_SOC_QCOM=y
+> +CONFIG_SYS_MALLOC_LEN=0xC0000
 
