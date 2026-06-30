@@ -4,120 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 532F1C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 13:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A70C43602
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 13:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B535B84A67;
-	Tue, 30 Jun 2026 15:03:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E608F84A77;
+	Tue, 30 Jun 2026 15:18:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ENsvz0xQ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="G27Di4VC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D3784A6F; Tue, 30 Jun 2026 15:03:26 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::5])
+ id 79EDC84A72; Tue, 30 Jun 2026 15:18:07 +0200 (CEST)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0998C84A52
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 15:03:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4685084A5F
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 15:18:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rYmxnzSoXRnSauYoJfbVFkI4UuoIIJE36ZcJ1H3Ykchn8dIB3yVeLEjf/77cUHSiBr5PThphkfapSIoo6iuhW3ZmHqPQ3vIB/sw0Mi2UsU80A0+LPiDiHFXYN3/dV3NB+zaUTBNKcUyoAH3CQ3KJ6VpWXplsKbPJz6CRvLMLYfp6KTUtv5MtFxOddYKl6rp83xbo2BJ+NAhx/JlrchcUvEsNHNs+L/Pero57HapIoKdAuNzuFYYLfvM/lTtT0FIcPmjBuHkzGBUkJc80b74a/kY9/yn6TQMPkXksjn6z0WVFQSVSP7dO+TR6i1GahCp+DwNy+FsRDDpaC6Mb5wyr/w==
+ b=IqUlQNGdteimXZWijlo37njnKR3kZCkUhWo0b3CvIQlpL37h7KOqaJY5YVKCB2yZ7mi4mhYdfLaZmfBfCEjyi+3vIS+aK/EkI9NibEAmLwqZ1Pal0Vcb1gzuRv2a85UrcaZpBLA6Wf3HKTnPq9O05CWnnytpAgCEIEbf1cksdn6wIu+SKi8xzNgY6X0DIR5Wmdlr+ImTvCfHre2PhNIviQaMefF6Ox8mQNBEukFqlLYnR0HqtjKfmaB4lV8UdzpLuZM5CAwlYfd81ZnGqqmN85FROXAjk+6r+3bsuJuReHwdHKwsse5X62KGK0/HgOQ86WfrYhnxFjwD9LizhbjnfQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xJYFa6NxIOYZUGo19P2PHstehnMLz3DwH81dHZqbjV0=;
- b=RW3rvhFGfCGDpuvGqI19/bjdZzPeqeAwqraRB7DqE0/jIcUMBL1jSxbczZYEfRa7ZiPhBW3OSnQopMWvjv+Ej7MT67yej2z59DGTz13JpbYHxee4w4cMwvkz8he7WKW9UDCjEiJOs+4/5LLDzf5H+v4/KOap2LN2GD1VBmz1S56KDmWquQVJXdMeHv9SJMH7gxTf/dhZZLUEFRJxjG6k75AnG8Agk/LvSQbhiyndel0zqxXxOA+5w6AZYtiLgouyocXHVDK9FeDGvnkydfo4mOrnhgEUJFy1oFB72pCovM1l1/uvZmGD8kpqjdZlq3dGpii7H3nPN4G9vPpTRkr2rw==
+ bh=j7vUDozdwb/ATQHADoIg0TbX3dBiPXOXQ4rXRDRG+lk=;
+ b=EqqHG8UP+x5uA5NGP90KLbS9i2Q1+s6u7ghTp+iwCa/Q0E3NrbUTqZLoGqa+vcUPM8yQi5olDIqtLZXzoW/NkYZsYuuWY3A3e0YG7BxiIH0UwTJefLDIZZI9LzVGc29NJfkGCqusZMLt3C9su0ytN0vFD2aoRsheUyAJFwdh1YEgw1h11JkKOucqPLqpQqAX88kfmvcGBtSRh62uowq8D4zL/jPWsjJvgzqlXz+Kb7x/bPYikEyy6qmZIQbT4WK5uy9wLO6YKvW9/PkzaSP1/HhIBRfIBaiYP903nn+Ipz29ns20cCOZDbXODRkAx9D/umbrjDwpEPwSe32qE6bQ/A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xJYFa6NxIOYZUGo19P2PHstehnMLz3DwH81dHZqbjV0=;
- b=ENsvz0xQL3e8zMo80qaOtfThPDP35ms3KyW3tHHhjaA+h4biHdY6+iVRcZbLDrAk9eRbQchdbLXcX52WCt7WdZHQdLwGSVfDwl1bYfcoEkzrbFgmYITzNKjoHAxTn1gbf0UGasXOIRkpoMcsslHNy0Bq06Fv83avFMmQulwhJnw=
-Received: from SJ0PR13CA0146.namprd13.prod.outlook.com (2603:10b6:a03:2c6::31)
- by CYYPR12MB8870.namprd12.prod.outlook.com (2603:10b6:930:bb::18)
+ bh=j7vUDozdwb/ATQHADoIg0TbX3dBiPXOXQ4rXRDRG+lk=;
+ b=G27Di4VCxtJ8wekM+ruCksroWxEXiNUDXSqIpaRlhRvH3SOdHzfdf0HpzKYplQeEMaL6nQeA78bBHXAWIXSuif1Tf7Xu3cHXEwQDvz7P+2MbHNpVL9yRmlkciHzaYrNo9HKv0Y+S61XUBbdNkyHReOT8p/XAqNJSbR0PVm8Xj5k=
+Received: from MW4PR04CA0336.namprd04.prod.outlook.com (2603:10b6:303:8a::11)
+ by IA4PR12MB9834.namprd12.prod.outlook.com (2603:10b6:208:5d3::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Tue, 30 Jun
- 2026 13:03:13 +0000
-Received: from SJ5PEPF000001E8.namprd05.prod.outlook.com
- (2603:10b6:a03:2c6:cafe::39) by SJ0PR13CA0146.outlook.office365.com
- (2603:10b6:a03:2c6::31) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 13:18:00 +0000
+Received: from MW1PEPF0001615C.namprd21.prod.outlook.com
+ (2603:10b6:303:8a:cafe::44) by MW4PR04CA0336.outlook.office365.com
+ (2603:10b6:303:8a::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Tue, 30
- Jun 2026 13:03:13 +0000
+ Jun 2026 13:18:00 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ5PEPF000001E8.mail.protection.outlook.com (10.167.242.196) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MW1PEPF0001615C.mail.protection.outlook.com (10.167.249.87) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Tue, 30 Jun 2026 13:03:12 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.202.0 via Frontend Transport; Tue, 30 Jun 2026 13:17:59 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 30 Jun
- 2026 08:03:07 -0500
+ 2026 08:17:59 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 30 Jun
+ 2026 08:17:58 -0500
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 30 Jun 2026 08:03:07 -0500
+ Transport; Tue, 30 Jun 2026 08:17:57 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Francois Berder <fberder@outlook.fr>, Padmarao Begari
- <padmarao.begari@amd.com>, Pranav Sanwal <pranav.sanwal@amd.com>, "Pranav
- Tilak" <pranav.vinaytilak@amd.com>, Suraj Kakade
- <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] board: xilinx: Fold FWU dfu_alt_info into
- configure_capsule_updates()
-Date: Tue, 30 Jun 2026 15:02:48 +0200
-Message-ID: <ea62096437b39ff9038f7169e461bfe7863ee85a.1782824566.git.michal.simek@amd.com>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Kory Maincent <kory.maincent@bootlin.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] fwu: Gracefully handle missing FWU metadata device
+Date: Tue, 30 Jun 2026 15:17:50 +0200
+Message-ID: <5e5241d02a04871a06dd44d3f8638f5da10893ff.1782825467.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <0bd1a1b8bbe48fa3a9b89673c1e1357d50d0684a.1782825467.git.michal.simek@amd.com>
+References: <0bd1a1b8bbe48fa3a9b89673c1e1357d50d0684a.1782825467.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6297; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=4zwdr+FgdfJ6t6Z+kyn28NBzmY3bwbwiWvvNStQFjfw=;
- b=kA0DAAgWqwf+8E71EfUByyZiAGpDvnuj2muuDAKXtR5kOxRA+AlENTylDAo3HAJ+Ap/9QqmQZ
- Ih1BAAWCAAdFiEElwIsQKz21qUWp1lvqwf+8E71EfUFAmpDvnsACgkQqwf+8E71EfUITwD+M/+c
- s6MmOpAsFPrNAE4y8MpfwtRIj5jxrjLACE9Bsi0BAI/eDI8aIhkkeNVBYRvw2pb7oEWLt3nEQVf
- w265tgZEO
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1289; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=AubepPvSzdffzs2FFcAA1ls+Z0tOciewSA+gBqlYzA4=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ5H2JoitvhN83jOJPjbat01zKPtCRTRi8fqymmKdMjv
+ x3/9UWko5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACbCtp6R4c623rzQFVn7HllV
+ av0IXBD7Q7k0bNbsQ8bzXa40l2nOK2X4K2nz1nbnG3PPyZsFnm5I05mudZHpacwLtSNpvw+2/pp
+ czA0A
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001E8:EE_|CYYPR12MB8870:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1baa2f46-da7a-4c3b-fc2e-08ded6a7f162
+X-MS-TrafficTypeDiagnostic: MW1PEPF0001615C:EE_|IA4PR12MB9834:EE_
+X-MS-Office365-Filtering-Correlation-Id: fed95e70-b3cc-41c0-5b53-08ded6aa01f7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|23010399003|36860700016|32650700020|1800799024|18002099003|6133799003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: JMw1TzsgHB8R1X31fU9/nh1CHmTTCIU1cB1JBmOMIvzfp7dNDoqY34w1PcOWk/inJa1hYFxgag7XgIdriUr6jX5hnOD76THEJyZDt/mAuhvogXqNOYCNfuBVDQDktM2WBtOKCYf0yyI0vHrJtCbslHax3eBZD/GlwFyA9lU8/gf9KzFZoz8CmrFVjWfyjSeiZS6I3zPBqAvM43EYH4WtetTi4DpPUlPJ6Mo1KJZYnfvhPxaVFFzfUPf0RVAUJtQPvKGBXgSgHyn50LYfPwFwyv4zQqRkZ2jEqKJAYTxmQ+OogglfKR5DEKl5iDgTc89bE7sX3JFWrRIk/7g2b7mufEubcuT/HsgCMwgWzo3HZpSv6CJk8AkZ9NmmMEdu78cE4Wk66ieJ3FchBxMf08bIazhMv1p5eKQuK5jW8X3HpyCvZJ5ka0T0CEZj0dgpfVYTUaFlV1b0O+G0+tq7Xzm1RDwHhW8KwvUzqSfLu1xwrnhW749jnTQHmt1vgnNiYW2IAA2IXI+Je+ucwL6qZEjnSvTPhYepXSxqSXp99sH/4Fyyy7oARutbe6gmL5/HsWr97HT6kNCFsKAJqFXKkCON0ll4yrhnf43P/bEV19H75YMDEcFL+EEbo+X+uCm4XRzinSt0MRWSRZkNMVJ94tRuaU12sd0dXdlGdQ8yU0WVkdPpYPBBsdk8tyFBfGYiY1mzxbkZn+rNDZwpLO/psEh1qw==
+ ARA:13230040|376014|82310400026|36860700016|23010399003|1800799024|18002099003|22082099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: XuPWEiXi4EZ+GJfKpBNvnQgdx02xXvHpHuwe8hCxkrLnW8MWYZY239JeBwWzDImfrxY5QIt1NqkJpLLnf3w32I4rKyeM0pMeRd6TFC/UYUB7BTYRKmut+/ep/0gLLuae4cU87ruVr1l6trfwWG7X09nC158/4oaq/1myyChklds5Lu7ENrWuQ7tPrx86ORmJ+Yyaa/voYhRKpOiIahM1c6xz41qthsrMG6edSen+pHbDJ70u7wAl8fCk3Zp4BaA2A42hvnXVlsDqjHh90DSzntnaXLIHqIBw2++a3KKGDcOh3CZkMv7mfj+v8tQ82BnFfmcnr6tiA1Q581DfCIiNpdD3hJSzyhfnAIDQCKaJtvkGW4df0ThP6ztBXXCpfUcd24mCvAi31GRYjwCi15q2KrCF+/+FEJ9la9gRntLLCRgdNNlv3dPIug2sq62kqolO8Gd/68FKnDs5nALAn5D7ps5ftlJmbf/jZo+hdByc7JekX4Kb0Z9UhH+uUATdCKXDSpm/GAcIEC43Ya8gP1LSD2oP5003W9ihvV8HO0TODDTz9G35cH+c9NLIyAWtix+gDorDP6hSJ3IxpNKPm+ioyBnhrZ41Sts6FaBwsFbj6CwiCJ1hCqT7SR9KhvMve5z5ZgjtlUkfrfZtmNe7Ezn7OYRTiTeUKCBISItBSw1MOWkf17AY17t/ksMBmC/kQifJVYe0sk3EFluUtJPtuFXD8Q==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(23010399003)(36860700016)(32650700020)(1800799024)(18002099003)(6133799003)(11063799006)(56012099006);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(18002099003)(22082099003)(11063799006)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: X2WUWU+fQCzF3GEd/4CV/LVscH9ClwDBL3xUzAeqz9VU1rZaEFy1VxadIzqkr7EYKA+UpnwZgH+oobOKzZ6QHTpovWSAu8iej9GzH2esLUoc2fzyy/xIYQbC/+t+rmeG6l8B2iaJCUDTghgdVHPG/rgEY8988itqVXFn5+6Z5IaFO3q7VWaY+lZQK1e8tFTMnlmmFFi/UPCc0QFtQIu22nhShcH1aDrZNMHlSI6wqOx/NRA42OuOqFrIVi52W1w+MIpiZo8inzZwRpEzgGFegNm6r4gg3NoZeGZ4GZYW4z8lvWugCysf3WITNALdxdk+mjlYSHzMJYejtIBB5APN5eXFZSndlndgH4aFs4fvAz9CvFZHkL8cW+TPa1/gwc8mMWZB1ZUVGBUp0Vb+r+z+CweF2zINf3UmiAn/J8X/64R33sh5Pt1hd9AnNf2k+IJ2
+X-MS-Exchange-AntiSpam-MessageData-0: Mf2vZvRDjjVz7IdKFOriqsZykEfno92pWXe4peTQAwccW/SwMy0OcgIcI7BgwbWrD88x55GADWhrVZ23Ev5qGbqQWvM1MYWfX4ZTFZjm1SRh632Z5k6cf5yt+my1bbUa24pV2niFxot+J16xXsz97uUU4/gZnIzDMMRlvA4dK8g9W+AF0F/Tx6jW4dGYPWYHWvJvl7ktZrtsGZPpl0qMUx3AETYWmQ7rXVWSX3PdhUfz+80ycy5wYBc4eDbhGaIZsT0vzQQeKDynXY6DKhFMUt769dI2XwbQADZgzOuZrphz/598gJltu6dguVCzp/M7bKjvwkMKd7POAQ1j9bNNuE/igho2hb1TUDHd8KgmLeVcPbb70fsE3Fl9GoChvd2w/nNictUaJq0Xe9hGafFU8OzK2Fogs5ECXs7p+KXr/H6JL2aP4rS+R2SOLUxX0J4Q
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2026 13:03:12.9878 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1baa2f46-da7a-4c3b-fc2e-08ded6a7f162
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2026 13:17:59.7565 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fed95e70-b3cc-41c0-5b53-08ded6aa01f7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001E8.namprd05.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MW1PEPF0001615C.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8870
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR12MB9834
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,219 +138,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 371a6c1744f3 ("board: xilinx: Add capsule and FWU support") and
-commit 818c06faa119 ("board: amd: Add capsule and FWU support")
-introduced a separate set_dfu_alt_info() for the FWU multi-bank case
-(Versal and Versal Gen 2 respectively) which set the dfu_alt_info
-environment variable directly, while configure_capsule_updates() handled
-the non-FWU case by filling update_info.dfu_string. Having two functions
-generating the DFU description is redundant now that capsule update sets
-the dfu_alt_info variable on its own from update_info.dfu_string.
+On systems with FWU enabled but without the required DT changes the FWU
+metadata device is not found and fwu_boottime_checks() returns an error.
+Being an initcall, that non-zero return aborts the boot flow
 
-Fold the FWU multi-bank generation (fwu_gen_alt_info_from_mtd() over the
-nor0 MTD partitions) into configure_capsule_updates() and drop the
-standalone set_dfu_alt_info(). The function now selects the source of the
-DFU string at run time via IS_ENABLED(): the MTD partitions when FWU
-multi-bank update is enabled, otherwise the boot-mode based layout. Both
-paths end up filling update_info.dfu_string.
+Return 0 instead so the boot continues. The preceding log_err() still
+tells the user that the FWU device could not be found.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- board/amd/versal2/board.c   | 63 ++++++++++++++----------------------
- board/xilinx/versal/board.c | 64 ++++++++++++++-----------------------
- 2 files changed, 48 insertions(+), 79 deletions(-)
-
-diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-index 2afd283b8ddd..6e09e408875d 100644
---- a/board/amd/versal2/board.c
-+++ b/board/amd/versal2/board.c
-@@ -227,8 +227,7 @@ int board_late_init(void)
- 	int ret;
- 	u32 multiboot;
- 
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
--	    !IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		configure_capsule_updates();
- 
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
-@@ -362,8 +361,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
--#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && \
--	!defined(CONFIG_FWU_MULTI_BANK_UPDATE)
- static void mtd_found_part(u32 *base, u32 *size)
- {
- 	struct mtd_info *part, *mtd;
-@@ -399,6 +396,29 @@ void configure_capsule_updates(void)
- 
- 	memset(buf, 0, DFU_ALT_BUF_LEN);
- 
-+	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-+		struct mtd_info *mtd;
-+		int ret;
-+
-+		mtd_probe_devices();
-+
-+		mtd = get_mtd_device_nm("nor0");
-+		if (IS_ERR_OR_NULL(mtd))
-+			return;
-+
-+		ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
-+		if (ret < 0) {
-+			log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
-+			return;
-+		}
-+		log_debug("Make dfu_alt_info: '%s'\n", buf);
-+
-+		update_info.dfu_string = strdup(buf);
-+		debug("Capsule DFU: %s\n", update_info.dfu_string);
-+
-+		return;
-+	}
-+
- 	multiboot = env_get_hex("multiboot", multiboot);
- 
- 	switch (bootmode) {
-@@ -442,41 +462,6 @@ void configure_capsule_updates(void)
- }
- #endif
- 
--#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
--
--/* Generate dfu_alt_info from partitions */
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	int ret;
--	struct mtd_info *mtd;
--
--	/*
--	 * It is called multiple times for every image
--	 * per bank that's why enough to set it up once.
--	 */
--	if (env_get("dfu_alt_info"))
--		return;
--
--	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
--	memset(buf, 0, DFU_ALT_BUF_LEN);
--
--	mtd_probe_devices();
--
--	mtd = get_mtd_device_nm("nor0");
--	if (IS_ERR_OR_NULL(mtd))
--		return;
--
--	ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
--	if (ret < 0) {
--		log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
--		return;
--	}
--	log_debug("Make dfu_alt_info: '%s'\n", buf);
--
--	env_set("dfu_alt_info", buf);
--}
--#endif
--
- int spi_get_env_dev(void)
- {
- 	struct udevice *dev;
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index 0537517b1b2e..f06d3c59d055 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -232,8 +232,7 @@ int board_late_init(void)
- {
- 	int ret;
- 
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
--	    !IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		configure_capsule_updates();
- 
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
-@@ -314,8 +313,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
--#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && \
--	!defined(CONFIG_FWU_MULTI_BANK_UPDATE)
- static void mtd_found_part(u32 *base, u32 *size)
- {
- 	struct mtd_info *part, *mtd;
-@@ -351,6 +348,29 @@ void configure_capsule_updates(void)
- 
- 	memset(buf, 0, DFU_ALT_BUF_LEN);
- 
-+	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-+		struct mtd_info *mtd;
-+		int ret;
-+
-+		mtd_probe_devices();
-+
-+		mtd = get_mtd_device_nm("nor0");
-+		if (IS_ERR_OR_NULL(mtd))
-+			return;
-+
-+		ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
-+		if (ret < 0) {
-+			log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
-+			return;
-+		}
-+		log_debug("Make dfu_alt_info: '%s'\n", buf);
-+
-+		update_info.dfu_string = strdup(buf);
-+		debug("Capsule DFU: %s\n", update_info.dfu_string);
-+
-+		return;
-+	}
-+
- 	multiboot = env_get_hex("multiboot", multiboot);
- 
- 	switch (bootmode) {
-@@ -392,39 +412,3 @@ void configure_capsule_updates(void)
- 	update_info.dfu_string = strdup(buf);
- 	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
--#endif
--
--#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
--
--/* Generate dfu_alt_info from partitions */
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	int ret;
--	struct mtd_info *mtd;
--
--	/*
--	 * It is called multiple times for every image
--	 * per bank that's why enough to set it up once.
--	 */
--	if (env_get("dfu_alt_info"))
--		return;
--
--	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
--	memset(buf, 0, DFU_ALT_BUF_LEN);
--
--	mtd_probe_devices();
--
--	mtd = get_mtd_device_nm("nor0");
--	if (IS_ERR_OR_NULL(mtd))
--		return;
--
--	ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
--	if (ret < 0) {
--		log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
--		return;
--	}
--	log_debug("Make dfu_alt_info: '%s'\n", buf);
--
--	env_set("dfu_alt_info", buf);
--}
--#endif
+We have reached issue where testing team is using the same defconfig
+to test both scenarios and difference is in DT itself.
+I think it should be quite save to return 0 if any UCLASS_FWU_MDATA driver
+is not detected. If there is issue with fwu structure error is correctly
+propagated.
 ---
-base-commit: 8f4ec2a116ee7ff6d19e6baa60833586df985de7
+ lib/fwu_updates/fwu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index e9bb1b4fc656..25eb5af572f3 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -760,7 +760,7 @@ static int fwu_boottime_checks(void)
+ 	ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
+ 	if (ret) {
+ 		log_err("Cannot find fwu device\n");
+-		return ret;
++		return 0;
+ 	}
+ 
+ 	/* Don't have boot time checks on sandbox */
+---
+base-commit: ea62096437b39ff9038f7169e461bfe7863ee85a
+branch: debian-sent3
 
 -- 
 2.43.0
