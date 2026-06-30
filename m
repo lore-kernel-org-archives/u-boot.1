@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D749FC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF98C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DB0384B72;
-	Tue, 30 Jun 2026 14:51:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0AFDA84A4F;
+	Tue, 30 Jun 2026 14:51:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KjIAC6IK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QPiBTYpM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CD9E84A4F; Tue, 30 Jun 2026 14:40:00 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 5827784A5A; Tue, 30 Jun 2026 14:51:27 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD0BC8490A
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 14:39:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FE9084979
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 14:51:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=shofiqtest@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-39b22d0e488so5137441fa.3
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 05:39:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-47122683cf3so1783863f8f.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 05:51:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782823197; x=1783427997; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q5eH7z9hFnBQ5GMXEsNUwAQ7XcGtjIQNqeFWuDLoHas=;
- b=KjIAC6IK2PRWhlHGUALIgEprarbZLlRpWLSee7jr2shbWcl0aCE/QCRBCOaWHDHxAn
- lTV8H/fB7ka0xdVPbboOYM3bqOTPAdyptTrAC1D5HC+0Mkvs2sz2+qZMcQ4YkA4xVg5f
- bwJXMci/7raucULkAbSS164AhLTNp77SPsv8JLzDYa8SAt9ifYjALNmhjEHHI0yD5aUH
- ArkoKT6oGbgGG+p02p5n5GqPj1Nju/mkieAdUUn/n56TtpxERgmmOkx4IPI7ZASvPVcF
- 93JtKuTh6sC4lQBJbrBwlU4+Jb3g7uyQFlsFj0wDBpT3l4Yqk0T+zy/4aR3ds1gHuAGN
- 003Q==
+ d=linaro.org; s=google; t=1782823884; x=1783428684; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=T4FJD50kvPybgstDDX7AkfAoA21GWnAbo8l+EGc2Y/0=;
+ b=QPiBTYpMmBGCgl/Sqs/8LDhIQZYjmui05DL87a0PIPEs9Zhk7hdEjWVZyeovRxvRkF
+ e3juGmUAkovc/ijrvOzAlMq5W98kfu/ma4GMNITlaItdFD+0NYCdhkYLRgZgCxiDket0
+ qsAKeKn/9zt9SzWpqlVn/29d1x/b/LrFVTQ/m9HQI7sB6aZk2/CqeyJiy5zIy1s2bgI2
+ SHB8JkybZ7c63ejxsdW0QQEkPKEMcd/EDOKEfvxmtV0ZVHjNQTABUQfps7DJdhntF5Is
+ t9mwDMg4l/Vk1b9HYciPWml++rQ4IPCQ1XFSBEa0J0JzXUpZUYp9P+7ZNRHpKta2gqDG
+ n1+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782823197; x=1783427997;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Q5eH7z9hFnBQ5GMXEsNUwAQ7XcGtjIQNqeFWuDLoHas=;
- b=Lwdqeph+ML7zPI0dJap0b36gLtEvGnfALiScEMbjOYJkN3i3PGtZ2Mi4eyq7540qNe
- Oq3qlmjAeaUn7uVlr9xaFTmgSC73ZWL6k3gyTti0KJMzKhDEzCN6RT51kINrYEyyIBfo
- 0XL273Ts/M9gJGlHLSCiCSMYah88g26jhqlSv3QbV5iieQqt+IsKXxpVHwUsyUzWEGOT
- DKnfEZJ9CzmyDf3CpID465wvSWP9FNZNfgMMMzE6TZr1qehEekbCT/4rpIrc9jq0AwYj
- +v1rKc94eg7dkRAJoHDlcnwdrSa9wf3a+TvhrIdlC/ROSz7g+Xcsytpl73AvqzbkzQYI
- L5gg==
-X-Gm-Message-State: AOJu0YzymHqq1zEl5ZjhcEI6sgdsfwJerbG5YtQTn1jR7/3h1Ggl4A+n
- x8NbJMAt9JTkRimoRkSpcowGBcLax7Mw3TWB9/S53zDogIrINWEyO/KhBVLEuSxlT1vmrQ==
-X-Gm-Gg: AfdE7ckfAE6kG/VeJLFV1VSSI9prYZiV3G6saxDEy7bh0YN3QYzTTXksrnijSV4O+VQ
- Gqx7EDj3Q5e43zGinMb7/giiXHccFMPDJPZWfBYTlapmL9vkKimGAZfpr7yC1vPgq/ajo1/G3WQ
- xk5vXR/mVsd2TFfy7/Nfy3jQ0ir4K/uOrAIeIPG0V/tNp8niGJIONjGt35fxRPjhwX+7jY9lZ02
- EGWPyBRPQqQqDwfugDVTWePOKm+Hw/0Hum9E76eFiFytZIpxXgaYG1q4z1XFo7IXSBFq+FYthSW
- brQ00eOb9ytOvkuil72NfK2tzLCNHZc+75Dkdf+W15GmFjQguzdCMUQRHhcH8RDeyD26EAPqY0H
- 7HPcZ0urGlQT9VK583w87WRwYOwiGDHsJBl7sXvqqiBxBabjScT35mGbV7wkp1UfdzCRsNDVnmx
- 2JFDsUNVVQRA9IHO1uZLASjHnlpURmPiATrQegVL3yjuu8vQ==
-X-Received: by 2002:a2e:bcc1:0:b0:39b:d76:5cb8 with SMTP id
- 38308e7fff4ca-39b28d61b8amr1816031fa.12.1782823196629; 
- Tue, 30 Jun 2026 05:39:56 -0700 (PDT)
-Received: from Shofiq.home (87-92-251-137.rev.dnainternet.fi. [87.92.251.137])
+ d=1e100.net; s=20251104; t=1782823884; x=1783428684;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T4FJD50kvPybgstDDX7AkfAoA21GWnAbo8l+EGc2Y/0=;
+ b=Xk/HNtelf5F2vuVEEWHgs78d/LqyCIWv1WJx//VwMXvyE2LDQtHHxBSPDtmjpqBR2G
+ fAC1JziqrQ5/hGWjPpap2iDEX7j1FnJAv0B6YGva7FfLdVmdPaF9YtSqiWdgc88L3Fml
+ GkxVk41ms7ccMXalLKnBfiAyiz3wwxQn0qnGkdvTSjxlrKMabtnGenBpyUFgCJuky56f
+ V+u5RDluqqnyKn2Ih0lGXRU08QB2aImZ/eHS2n75DIxLVTB6g4lOtGr8R5awGTBAynoS
+ tKfBKK1UmUKtS2P4DKyayKsx3EXJmNk1VaXeTfMvXj1s7E0cEDS/qfeUGhkTCgy/c2D0
+ ZoCg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoTrNBdO4vVr3Ix9A88LCNfQQ/PH/Rx30ZmHaVwdhDEwdJEnWoVIFxPqofcEqvkvIq8q/FtI+w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwO/lqFcNBo4XUMvpqwd6UX7A7Gfm+gFbQJD9nQ8Df8CRD7qpQh
+ F6Bmi6lXyf0sSnBQL0/O/qwtrwK8FZP6xmcx6sEIHpMKey92bbzhWtKXJEVMv+EJM7M=
+X-Gm-Gg: AfdE7cnmk3EpXSW39wiUzxQaSe+3la6cpHnf57wcD6tN2b0t4g8+IJytrDnSkrdueZx
+ lo4BDG4YXXsUVRdf7IAqghDYwTWor1I3pL6LoZj8d2ckYFx9HvgrgJ2tnvexWVQHXUxNSSqVsiq
+ IuQsAuCbiRbN1Ai/j+yHvCKPQi1StPj5iCVe1uAw3RKerDjIhYLv/lSOubR+Eq5ya63yEm7R9xf
+ m3Rgroi7jX/EvB1R0v2EBZh1t4I9NPNST9drmZufdIRYegL87FShhK2/VeF40hps6Z3rbmgB9h2
+ mYSPhIMkxRGl+R4HFG3DqAWqtq/v4z+VEze5ERi2wnFMRZGSdn06GmDT1s/0t69pgKF+CxSiCsN
+ UrPvBSeYJ862jQc85fvR+iAAXFc50mxMQp9Vj8eo7n95gpr4KJhxvoAVq+5UyhqtLXMMnTYCJ5g
+ YTnUwcHqVyQyIPyjVoH4Fhr77ZK8nFZNkU7bdv4Q==
+X-Received: by 2002:a5d:5886:0:b0:475:f0f0:9eee with SMTP id
+ ffacd0b85a97d-475f0f0a144mr2718953f8f.51.1782823883732; 
+ Tue, 30 Jun 2026 05:51:23 -0700 (PDT)
+Received: from toyger.tail248178.ts.net ([195.76.196.161])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-39b1da4ca90sm4905721fa.31.2026.06.30.05.39.55
+ ffacd0b85a97d-475643ce016sm7676494f8f.16.2026.06.30.05.51.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 05:39:55 -0700 (PDT)
-From: Md Shofiqul Islam <shofiqtest@gmail.com>
-To: u-boot@lists.denx.de
-Cc: ian.ray@gehealthcare.com, HuanWang@gehealthcare.com,
- brian.ruley@gehealthcare.com, martyn.welch@collabora.com, hs@nabladev.com,
- lukma@denx.de, sbabic@nabladev.com, festevam@gmail.com,
- Md Shofiqul Islam <shofiqtest@gmail.com>
-Subject: [PATCH v2 2/2] imx6: clock: fix clk0/clk1 swap in
- select_ldb_di_clock_source()
-Date: Tue, 30 Jun 2026 15:39:51 +0300
-Message-ID: <20260630123951.13385-3-shofiqtest@gmail.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20260630123951.13385-1-shofiqtest@gmail.com>
-References: <20260630123951.13385-1-shofiqtest@gmail.com>
+ Tue, 30 Jun 2026 05:51:22 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Sumit Garg <sumit.garg@kernel.org>, neil.armstrong@linaro.org,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-fixes-2026.07
+Date: Tue, 30 Jun 2026 14:36:59 +0200
+Message-ID: <20260630125057.100816-2-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 30 Jun 2026 14:50:53 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,31 +98,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-clk0 was being written to LDB_DI1_CLK_SEL and clk1 to LDB_DI0_CLK_SEL.
-The arguments were silently effective before because all callers passed
-the same value for both, but the mapping was reversed.
+Hi Tom,
 
-Fixes: bd3e19dbd901 ("imx6: clock: allow different clock sources for ldb")
-Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
----
- arch/arm/mach-imx/mx6/clock.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+A last minute fix for the release, the UFS controller on the new Milos
+SoC (used in the Fairphone Gen. 6) needs a stub driver for it's ref
+clock (similar to SM8650 before) and a handful of other clocks to get
+the UFS controller probed.
 
-diff --git a/arch/arm/mach-imx/mx6/clock.c b/arch/arm/mach-imx/mx6/clock.c
-index 828a101ba05..646d1fff6d7 100644
---- a/arch/arm/mach-imx/mx6/clock.c
-+++ b/arch/arm/mach-imx/mx6/clock.c
-@@ -1525,8 +1525,8 @@ void select_ldb_di_clock_source(enum ldb_di_clock clk0, enum ldb_di_clock clk1)
- 	reg = readl(&mxc_ccm->cs2cdr);
- 	reg &= ~(MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_MASK
- 	      | MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_MASK);
--	reg |= ((clk0 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
--	      | (clk1 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
-+	reg |= ((clk1 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
-+	      | (clk0 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
- 	writel(reg, &mxc_ccm->cs2cdr);
- 
- 	/* Unbypass pll3_sw_clk */
--- 
-2.51.1
+This change shouldn't impact any other platforms.
 
+CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/30574
+
+The following changes since commit a3f393c02cf10f44310c6ddf3dedf354c2e877a0:
+
+  Merge tag 'u-boot-imx-master-20260627' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2026-06-27 14:09:17 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-fixes-2026.07
+
+for you to fetch changes up to e4f83e403ad4f7b6c08ee83378e4887aaa153b1a:
+
+  clk/qcom: milos: Add TCSRCC clocks (2026-06-30 13:04:59 +0200)
+
+----------------------------------------------------------------
+Luca Weiss (2):
+      clk/qcom: milos: Add remaining UFS clocks
+      clk/qcom: milos: Add TCSRCC clocks
+
+ drivers/clk/qcom/clock-milos.c | 73 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
