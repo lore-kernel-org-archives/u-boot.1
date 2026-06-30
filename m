@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A07FC43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 387C6C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 12:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE26584A52;
-	Tue, 30 Jun 2026 14:50:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 194B984A5F;
+	Tue, 30 Jun 2026 14:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AQa8Gghp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zpw+w1TV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0171484A4F; Tue, 30 Jun 2026 13:04:22 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id DCF5684A4F; Tue, 30 Jun 2026 13:36:37 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7D2B84A1F
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 13:04:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D501B84979
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 13:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-46ed4f66256so3471224f8f.3
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 04:04:19 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-4763b0c1dcdso203290f8f.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 04:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782817459; x=1783422259; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782819394; x=1783424194; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3WGBrPDOrQ6d6gNHVIsttmNWz8YwQ4uyrWCV/TfhQpU=;
- b=AQa8Gghp9XEpSUYwRwadnfyv77hHUKQaBGb0l/4+PTDGU7j1x4Dd0bI9XVCxnNADg+
- WEMwaZBfQWJueMBZWNWbxeI7erRgv4Llb7XiWmpShDui/Mogwq3O+/s/+RTxl/1HH/7I
- N79Wx6TO0FGoSl8xBuTMyVDCvjTdXE2HNH41/jdIuWH7OS3Yv1QH3UxcKM00jeEEG1fy
- UtbkmaLx1BH0ntoLaEHIj8kZj2gyIfOCKE69ZHO7KJ3OGSQtsDS+F7kGQkNRUc+4ew+t
- mMMK3Gp4BHbEDNQONLb214NN1U0rUZrg3wPCKC3kqvrRs5o+7K7c8+OYFme6TNcIK1/6
- R9CQ==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=iEZNZtjg5MQrBRzUQ3WFmlhobIa5A1I+7Pqzzdxia5Q=;
+ b=zpw+w1TVU4cmTkk9SPCcswj5AQQC9Il+s/95AX9Wj545BrXh+BqBt6hO0vXWn+dElN
+ U98UJyARwZTaQLTpl9ZwRVk+k3JtA/1OBnqUDPKXtLzY1ZJ58G0uB1sxyE3Vz55amURR
+ OwiQMinJeY1+l6HMOrCzLkn9sXvpcSIgIWsiUQZuYDciNvKyEIlPpl6e7C+VfXWLUMK1
+ 6H6qFHEsoBZoN25b/BDmJT3t0nBOGvBFq3p/UEX3KwVgc7aP5BV1xQTe4UsXBaV2Vv78
+ bbU3gMsCUcBlC1MQ1J0OSIeomdDq59rlctZomAhAjtkkb6ZdK4RVpu8dwtCksWkvP1FL
+ wJtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782817459; x=1783422259;
+ d=1e100.net; s=20251104; t=1782819394; x=1783424194;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3WGBrPDOrQ6d6gNHVIsttmNWz8YwQ4uyrWCV/TfhQpU=;
- b=OWdmLOtf6Kbgpc2G33UFWv87m9nDGi1LktYLyerUu4YVL9rGGZ/5Y1nGZMygUUBSa2
- sXejx+tR7ADOhFKKxL0mbZLi2O8QkMgfQ4rmgrFIKU2htL370u42xBhUHh/Plu8n9Z2P
- 1HdXcp/4b1YSr7m93nP2zXduZQ5VV6shq7RQJs9FK3Sx46921eHaLvcRRBjYnsOQ9VwL
- gBDsAB1WQWVMe7xrHjSU/QO2ZeOKDf5PNxAWYeOfmRbNOWCTaa+3uYA6C/luTNPkcZWP
- kRBN5kuwR76TCLwZYHWVrWYx6WhSIDssSvamvbZThnTVmwPjp9RtBZ2STpUolcZVud/R
- iDFA==
+ bh=iEZNZtjg5MQrBRzUQ3WFmlhobIa5A1I+7Pqzzdxia5Q=;
+ b=nKFsaJ+0DkE9h02CFAh160wvwmFIwUxBSGbvJDjAo6eVgmidOfcffOnSTZgKqwhpGl
+ I45n7+F628H+CCd1kI9nvcKnhEDSRCT1vqOgHdBxxdY2XxRN0tFRHVzjTKejKbVtXQxK
+ +Vks7NE/j2CTaOA3bO0eGid8tc7tCTVM6SzsWJhq/z+pGFJx6NpNG8edEnWvMI5/pqq4
+ OYHm5xa+3Hh11OyBxCXMClwEFejy3I3ecpnNKnPeoa5RJkyDsPdjP+uLkpr6Z3Z89UfO
+ PcKqLkiud3m2RtR0NzR2l3vNJngY8IUeXi57oISFHvx0NYwoL7he/dM6P6oiP9myywIT
+ IjhQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoToXwbCkG0vHWPCeowdOnkcfgjEl00EYloLY1kQ8Cv4nLLzBG5d5AQbtd8WyE6VNviyIW9Y70=@lists.denx.de
-X-Gm-Message-State: AOJu0YyaBusH0wfpsmX+GJ/z3iQlHZ2RCconQmCsY9BdajNomkjUyCZ7
- bPFt+2ZUoV2Gv10ThNUd/uOEXnTnxpUl3WNEKeNbWNWAV7Y7EpeLtnJX0sW4REruhVQ=
-X-Gm-Gg: AfdE7cm8T9Cj7X0lA/SAyy6gtSzUyZKc8wqK8RsBPGmvpdoSDLkiMc6yQmCQhaFeLcY
- xCZFpYl/hc9anftO3d1X3gn8lA3Ka6mdecWnaRP5wtW2hXjJNR3jJqZvE1P3rj2OiA7nMyFO1pY
- SOpgbBW43plYI2MaE+MIW7opyiN+Z6l1hnxN9OJBQxgEWRhMQXnlodeBWPGKE6BkobGt+auZbdu
- ga/YibAE9lG1MHpQbumsgcBzwpmNIur6S0+ZxNyd2qTX+M6OpNBjyOLZtNj7y34n6OOrm2rMH1z
- W+KKcub9130o3anvM2sUvzmHIiMQtZ1ZVC5V3RBJdGejsbZXZ9/2iF/idjex4AKRwSNju65/umv
- UBGltBkSmQP76XlK6Rpqi+jqmmkwaPELtyPl6ns3KvfJ++GjjiDJCpEAc0nhZDpQPZYmI9d905W
- h4fGrecSRMMTYZhKgkGKXV1hrzMqs=
-X-Received: by 2002:a05:6000:2211:b0:474:6a5b:8606 with SMTP id
- ffacd0b85a97d-47551c05dacmr4170344f8f.21.1782817459017; 
- Tue, 30 Jun 2026 04:04:19 -0700 (PDT)
+ AFNElJ/tLLUbmzvARasgSz6v1vPNl7WreUlpfHd6i9lnd1fhWI/sTptvzXBKXOhH4HLxLwnpFCogohM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZb94Hkie+rWWzQ2fcNIdF1jbWkMlTrwh+6Q9IqAtyA2KcP4D7
+ ljgzexu6pjnEjA3zhk+Q2+zR1ecpri5g2hfSluk1KdwFoAQzKTfjqnEbAEv1i03qzf0=
+X-Gm-Gg: AfdE7cm6YtUtm4XDfLrBNeJmaLLaj4r/9qTlE4Wymk+EcSKZHfH68gKviY8Uwj9OhI6
+ Eet7TWQeRxttK77LTr2awxWb05U0tStbYiwDiPWBR/1XB9Oud4zlFyvI1MEsml6axoQmNNePf93
+ QOK0NYwAp96dihHhmal7hB1Ox2MMTOurRgdP2oi5/nTD/cisSklnV+cSfR7dBH2KwXBVTmfDjkN
+ WL7VAbxsk5YpHr4E89wjr6z260Re/m6CS5WWZ9UFCnzzfCQ8ykgWob5+ZvR9Ac2Fz9UIaCVAAoM
+ R89KbUHKznr1gjXIB3y4Mf2Oa0mVYAIqvCbIEW9+fclgxFR43SEnWNqMW6gMHrcfZ/4P+c8lQGc
+ jyzyqdmLYScgOtWKjHM/jIgUIFI8FOuo0e6MDUtf5YMArcEwL4hTsV4TFfm2po9//FWhWaZUn3/
+ yUmGl28TVbKHpdzoMKD5qzXnD/gZI1BbSkqNoSIQ==
+X-Received: by 2002:a05:600c:8288:b0:492:465c:56f6 with SMTP id
+ 5b1f17b1804b1-493b8289c9bmr48835765e9.10.1782819394135; 
+ Tue, 30 Jun 2026 04:36:34 -0700 (PDT)
 Received: from [172.16.185.106] ([195.76.196.161])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4756636cf1asm7111758f8f.18.2026.06.30.04.04.10
+ 5b1f17b1804b1-493b8d0462asm63554665e9.11.2026.06.30.04.36.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 04:04:18 -0700 (PDT)
-Message-ID: <1e32d195-bd01-4c16-b04e-4634634c2158@linaro.org>
-Date: Tue, 30 Jun 2026 13:03:54 +0200
+ Tue, 30 Jun 2026 04:36:33 -0700 (PDT)
+Message-ID: <bff145c2-2b17-4d0b-8bad-8d615ebd65b1@linaro.org>
+Date: Tue, 30 Jun 2026 13:36:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 11/11] doc: board/qualcomm: Update RDP build
- instructions
+Subject: Re: [PATCH v6 06/11] spl: Include SMEM driver in SPL
 To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  neil.armstrong@linaro.org, sumit.garg@kernel.org, peng.fan@nxp.com,
  jh80.chung@samsung.com, lukma@denx.de, tien.fong.chee@altera.com,
  anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
  alice.guo@nxp.com, marek.vasut+renesas@mailbox.org,
- quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ quentin.schulz@cherry.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  andre.przywara@arm.com, afd@ti.com, h-salunke@ti.com, alchark@gmail.com,
  mkorpershoek@kernel.org, dinesh.maniyam@altera.com,
  luca.weiss@fairphone.com, balaji.selvanathan@oss.qualcomm.com,
@@ -96,12 +94,10 @@ Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  philip.molloy@analog.com, ravi@prevas.dk, sughosh.ganu@arm.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20260623064804.3988799-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260623064804.3988799-12-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszTi+TayLxOGq0K3G57VPcV3b_-Gc6-rrwODgOPfHDq70fA@mail.gmail.com>
- <akN5q6/GL9Vx3BkL@hu-varada-blr.qualcomm.com>
+ <20260623064804.3988799-7-varadarajan.narayanan@oss.qualcomm.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <akN5q6/GL9Vx3BkL@hu-varada-blr.qualcomm.com>
+In-Reply-To: <20260623064804.3988799-7-varadarajan.narayanan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 30 Jun 2026 14:50:13 +0200
@@ -121,39 +117,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-
-On 6/30/26 10:09, Varadarajan Narayanan wrote:
-> On Mon, Jun 29, 2026 at 10:16:24AM +0100, Simon Glass wrote:
->> Hi Varadarajan,
->>
->> On 2026-06-23T06:47:53, Varadarajan Narayanan
->> <varadarajan.narayanan@oss.qualcomm.com> wrote:
->>> doc: board/qualcomm: Update RDP build instructions
->>>
->>> Add details about the SPL & U-Boot proper build steps, converting to
->>> flashable images, source URLs for the needed binaries and scripts.
->>>
->>> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
->>>
->>> doc/board/qualcomm/rdp.rst | 98 +++++++++++++++++++++++++++++++++++++++++++---
->>>   1 file changed, 93 insertions(+), 5 deletions(-)
->>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->>> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
->>> @@ -42,17 +46,101 @@ on your device with::
->>> -     EDL.  A tool like bkerler's edl_ can be used for flashing with the
->>> +     EDL.  A tool like bkerler's edl can be used for flashing with the
->>
->> I just wondered why you drop the _ ?
+On 6/23/26 08:47, Varadarajan Narayanan wrote:
+> Add SPL_SMEM config to enable/disable SMEM driver in SPL.
 > 
-> Will fix and send v7.
-
-Please actually build the html docs and check that the formatting is 
-correct when you do. Sphinx warnings make CI fail
-
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> ---
+> v3: Pick R-b Simon
+> ---
+>   common/spl/Kconfig | 8 ++++++++
+>   drivers/Makefile   | 1 +
+>   2 files changed, 9 insertions(+)
 > 
-> Thanks
-> Varada
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 5fa94098e49..88db96807b0 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1387,6 +1387,14 @@ config SPL_RAM_DEVICE
+>   	  be already in memory when SPL takes over, e.g. loaded by the boot
+>   	  ROM.
+>   
+> +config SPL_SMEM
+> +	bool "Support SMEM (Shared Memory manager)"
+> +	depends on SMEM
+> +	help
+> +	  Enable support for the Shared Memory Manager. The driver provides an
+> +	  interface to items in a heap shared among all processors. This enables
+> +	  the drivers in drivers/smem as part of an SPL build.
+> +
+>   config SPL_PCI_DFU
+>   	bool "PCIe boot support"
+>   	depends on SPL_PCI_ENDPOINT
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index 43d0ba33281..ead082450ca 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -74,6 +74,7 @@ obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+>   obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+>   obj-$(CONFIG_SPL_THERMAL) += thermal/
+>   obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
+> +obj-$(CONFIG_SPL_SMEM) += smem/
+
+As I mentioned several times, SMEM support is being reworked. It 
+unfortunately took a bit longer than I hoped but I picked it for 
+qcom-next last week, I'm also picking up the sdm845 SPL patches so 
+please wait a day or so and then rebase this series on that.
+
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon
+
+Thanks,
+Casey
+
+>   
+>   endif
+>   endif
 
