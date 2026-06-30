@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFD4C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 08:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F78C43458
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 08:01:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5560184A60;
-	Tue, 30 Jun 2026 10:01:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id C998C84A60;
+	Tue, 30 Jun 2026 10:01:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lcrY8uuR";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="W5IMO7bB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CF7284A65; Tue, 30 Jun 2026 10:01:05 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 2A90D84A7C; Tue, 30 Jun 2026 10:01:50 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4F4884A35
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:01:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 47CA084A35
+ for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 10:01:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 8B6B4600DA;
- Tue, 30 Jun 2026 08:01:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83AFB1F00A3A;
- Tue, 30 Jun 2026 08:01:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782806461;
- bh=oTR6fMc5QHTDhTRmAOyuLwykEKa7xbPm6m1MWYiuO5A=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=lcrY8uuRtlPcp1arhh3CJ8qpLB6aWOokU1VIqhMR/eXfrPR6KoBkKvJH2HK6GzEZA
- QDw1ktdeJuf9OIEq/kt6voBexpIIEZ9ZDZps4lh7Cm3+Oteq9RUJckIrGCTumKNtvg
- QKUeJbP7MeS37UB93ECzq1orhOvRb1FLte9GwZaeBQMYI61IGhcmjGNbGeeAHwH9gr
- 9rPq8eawfeC+bJRn1sTSqgYFrhJJIARhr+2MOCY8PeIfb9keOcUqxB7l7m9i3OeGoK
- zcu5D1roifyIhaSJGGe6sDEPRSAhlnFxN1/myh7jWOvRGPdpZntcGbUoKt6c5keZ6i
- uFne+zlfN7MHw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Marek Vasut <marek.vasut@mailbox.org>, Romain Gantois
- <romain.gantois@bootlin.com>, u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Kever Yang
- <kever.yang@rock-chips.com>, Peter Robinson <pbrobinson@gmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>, Balaji
- Selvanathan <balaji.selvanathan@oss.qualcomm.com>, Herve Codina
- <herve.codina@bootlin.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, Kory Maincent
- <kory.maincent@bootlin.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese
- <stefan.roese@mailbox.org>, Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>, David Lechner
- <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>
-Subject: Re: [PATCH 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller support
-In-Reply-To: <267c7ac5-01f2-4cf1-b0e6-7aa5f5ee224e@mailbox.org>
-References: <20260625-rzn1-usbf-v1-0-0e1a38f7b82c@bootlin.com>
- <20260625-rzn1-usbf-v1-2-0e1a38f7b82c@bootlin.com>
- <267c7ac5-01f2-4cf1-b0e6-7aa5f5ee224e@mailbox.org>
-Date: Tue, 30 Jun 2026 10:00:58 +0200
-Message-ID: <87bjcs8nk5.fsf@kernel.org>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id ADC4611867C; Tue, 30 Jun 2026 10:01:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1782806502;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=RnwqiqAaYi/Ktf8j4pQj7tOxR3psOB6kysx5NirTV+I=;
+ b=W5IMO7bBi6OZ/7WOkqlrBbkGSFkgP9wMh7h77LrdGbhLHGQx78cabW+BbX2AOvWlEXj5Ei
+ uoRAmvesY5SmePNpeuwJFTIcv0qsUeJe3ot/AY9jadsT94OHTyzNbD6EXXO2kGjKLU/Ts5
+ 1+3ZRd6H+oVhu5qHYDNtpGcoq8fU67II0UIgPbeBtX0cmzMxZJ0YjsnwYGVoN/+LVC2Uxi
+ uOu1N2xrhhUMQk5QPR3megnG9GknP4rhtUBSdcVqigQzTvbpcd4uHVHoRI2Xj1Sj++0GTq
+ e8MtiIh7OSJVPFo7ODbSVrlslSeWbhaeSFnfBd454Mgh6dmj76ALBigrpVzTvg==
+Message-ID: <a6dec76b-ed70-49a0-b7bf-affe1aa2f6e7@nabladev.com>
+Date: Tue, 30 Jun 2026 08:58:10 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: Marek Vasut <marex@nabladev.com>
+Subject: Re: [PATCH v2 00/10] usb: Add TCPCI driver and DWC3 OTG dual-role
+ support
+To: Peng Fan <peng.fan@oss.nxp.com>, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Fabio Estevam <festevam@gmail.com>, Wang Jie <dave.wang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Casey Connolly <casey.connolly@linaro.org>, Ye Li <ye.li@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, Alice Guo <alice.guo@nxp.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20260621-tcpci-dwc3-v2-0-990ecacc111c@nxp.com>
+ <akMgh8AbN6BX9UlS@shlinux89>
+Content-Language: en-US
+In-Reply-To: <akMgh8AbN6BX9UlS@shlinux89>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,25 +82,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On 6/30/26 3:48 AM, Peng Fan wrote:
 
-On Thu, Jun 25, 2026 at 14:35, Marek Vasut <marek.vasut@mailbox.org> wrote:
+Hello Peng,
 
-> On 6/25/26 11:05 AM, Romain Gantois wrote:
->> From: Herve Codina <herve.codina@bootlin.com>
->>=20
->> Add support for the Renesas USBF controller. This is an USB2.0 UDC
->> controller available in the RZ/N1 SoC.
->>=20
->> This driver was originally written by Herv=C3=A9 Codina for the Linux ke=
-rnel.
->> Suspend/resume features have been removed in this U-Boot port.
-> If this was ported from Linux, please include in the commit message from=
-=20
-> which commit SHA in the Linux kernel this was ported from.
+> Do you have time to give a look at this series?
 
-I agree with Marek. Having a reference so that we can compare properly
-with linux is important. It helps when the linux driver evolves as well,
-to port future changes from there into U-Boot.
-
-Without the linux SHA it's very difficult to to review this patch.
+No, sorry, I am recently entirely overwhelmed by emails and my backlog 
+only grows. Did Sebastian/Jonas provide any feedback on the TCPM part?
