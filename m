@@ -4,98 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9354EC43327
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D03C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A35F84B9D;
+	by phobos.denx.de (Postfix) with ESMTP id 988B384BAA;
 	Wed,  1 Jul 2026 12:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lhaEmxau";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="UQsNBAUm";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C15MBpp5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAF2284A52; Wed,  1 Jul 2026 08:23:06 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id A8EAB84B88; Wed,  1 Jul 2026 11:54:20 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D32184A26
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 08:23:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C8AA03F8DD
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 06:23:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782886983;
- bh=CQfeNdw+tQ92B1QkbX76Kcp2J66KOs41+THgdCXWxR8=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=lhaEmxauV7VFjovkL8cEV0SERyvXm3dzqoo7VzGtz+b5rxXwiif/vJgKuXumXGUb/
- 4deph9OZgBiHSg0u9a87lMfK+f9XOdydCi6rZlzdRE2G+F/KmkTTJJcuxOuFc4Rc4t
- 6BZuIZ9Sp0fbzVvdvpQYriTIsSM+5ovomJxo0siaIwYd9gNxil1ofFtd7HGMLAIl43
- BGBMnCLmDFVKkyWHjRo6s6F2bhSc4EmQ9LWjqzQnd4dQDhxf40Kv+GtUNZXZG798dz
- 8nVPv1pYYOaiGkdmA5dSNygDgzjd/6C06y4/0TdbH0aZx5q/XwaSwdRor1Akoya8SZ
- lZa93tBMU1bqskB4rwmFr+k1iP53awBshl3KPPCaSvkyWYEIBhpDPRsqnkH4+SZgNK
- Zv8SDWgmcRMCwWFqrIaW4yINuTwGJgA7Qsb5fIG9hqBSdAES4uu1LZWpQ+PdpQBh7r
- XQN0A+QXOtc6vgk9ggNOGqo2lIFRuhhB7dX8ha/ShkpMCsqeOWmdobH2GkndUwxdD6
- wIdtqLMKYY4nZwdgUIgXumFOQRmXJMRqP36JiuiPxL6us6Yox7cJJwb/ZW12EwZmZj
- bYYlN01VoSN5CJPHsUiieQ/SZoclwmbrsxFH5YvlOjhq2EkyBz/9mXBDsxcT0Pb2d2
- TURdScm5NIkPDT+hz5gToXrE=
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2c354050c34so3855455ad.3
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 23:23:03 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BE0884B86
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 11:54:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6618G3ZE492841
+ for <u-boot@lists.denx.de>; Wed, 1 Jul 2026 09:54:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=LGtMM9RmWKs7CgXum1S1XEkc
+ EmKg2wPMAOWNYeHBGLQ=; b=UQsNBAUmOiHeHJvi1TNVGXdlzOX7cEc/x/IZVbq0
+ 1VA4pSAMSk0sYhhz7WvXuQm3VeuIiZbeJHu88T70pMRUcxYxbjTe6m1iITJbcXkb
+ ZE1r+RsnRbclvJRWppe2vzhcpqESlt8rJQDsgWoh2BJWWb4v1kDKdFfbxsBiD5AE
+ p4mnHmw+aizau0Oqoxzm73kIiAoCLCMtggsvFVA0ovL4HaGCvaTcRHPyicX/b4/v
+ lXRup3H7OWnl+GA3DcgoamA9GlpaaShevF0cvfFv9R+e+v4PBubw4xsjrHUyWArr
+ 6itYFqE71X5ZZ+ZIs8yd9DjSGbee3Jg473n1GHAwwZd1fw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4kgw3crr-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 09:54:15 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-30e85f5bc9eso1640747eec.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 02:54:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1782899655; x=1783504455; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LGtMM9RmWKs7CgXum1S1XEkcEmKg2wPMAOWNYeHBGLQ=;
+ b=C15MBpp5Kbt3LExe8zTUTmTopzru7AKkyzOmSXa+d7m2xjiYlQJclIzoDQA/ocWJLq
+ MkYqMHBbAzhCOWX2lxgchBltWgn5hpKfN4VVnGunve668kfsPXWdkeuYnzldsfiOo9m9
+ tf1T7jJoJ/mH+p5edVAH9zuiZgjwpGYC7RLTKiXyprEMlTIdBEF6XUblnlaIcEFPg7y3
+ CZU1BMFKyQ9tkiI6V88r+JUhNnXaPxQaATcHAT+w4MaZ5ncTXe0m9Ai4ZUXU892rZOyz
+ sf4jwsuKSKoJlZE85WGblwKNATlvtI6rvUXMuJnU073ZBXE2+TUbm99Ep0+8ka5PqG9E
+ P3BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782886982; x=1783491782;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CQfeNdw+tQ92B1QkbX76Kcp2J66KOs41+THgdCXWxR8=;
- b=Z8h0R+g6WtwlozxEct0ErvlO/X55dUmocMGbokhH4keMF73kdibVt2kOrY1URMrg0S
- dbYYgShP+iBgfKrLEP141TD+Oul7wzrq6z8jeZ2+ocsolrTTgt8cJbX8czTmki62Tue+
- E2j0iM1u6OMNk5BuTwKafylg+0jvXDQYfz/sI5wdUB86Zca4vQoMznFFeLwPHYiLOWnN
- Vshfi7TB1yG8yRRB/gW6ff/ZzR8pSMNa4exMKjlKFHmlUB6Q5iTwQjYol8DfOYtP+Orp
- fELdfr0s9X3LtQoGC9i+DZfzvrDvqAllfisDWeXlDSk4VCwy7pe94oLCU9zjbIWm9ySO
- KnQA==
-X-Gm-Message-State: AOJu0YxFvRHtxGcSrHzbE7k2HcMeF3WPOd0gnCEnei+E7B7eXGm8b54w
- bzIrH1SrglqvWsoQejPqtdhg90LPZzQidFapHB9gtpmTiClYOtnPxjdENVWh7lICeCZoIfRHUQ1
- 2K263zpzGZQJJj3Cdknx1zYKPqV7Qq6vWTe9xl0G5PMADDHIgwsZPvJWgJUPNlt++B4GJ+I+9Rz
- MGQghDFA==
-X-Gm-Gg: AfdE7cluj93f3rpVl0s9w37v+2gfGCFwnfIswCaN/IESftVyGieilaUojSHviDB3n18
- bWLuXRgiTvrTFkjFvvctXqlCRRzBtp0ToyMF4N6dCX9VprfMOTNEZZyMQYcuu0/gly8rzmB/kWl
- 1bqddSnPQdY/tTNmSwmezjZhQH7cpFT2sMhqvMp91msIdG/LUkXkLlZfB6bLlVXhxz41dwoeptV
- 0wQmMDbx8OB4OhjoMomTJrRgumj0OfglYRJRu5e+AAXL6Yk+wa1EVwmKxzLfokNmcZ4nROJBDQy
- WOibFq77xlQIR7A+G1Wok4syFk1Ij9t6SFW94fdvGz2GIcYYcb4TYM+U0vJtjXbRDnwLTXX7V8I
- LvbbmGs/PrO0M1oO8VZJB9k70CZgs79c69r6zfmrWvioGIMdu3hviXXGm+KLq6g==
-X-Received: by 2002:a17:902:e889:b0:2ca:6c8:abde with SMTP id
- d9443c01a7336-2ca7e73a009mr5047295ad.18.1782886981772; 
- Tue, 30 Jun 2026 23:23:01 -0700 (PDT)
-X-Received: by 2002:a17:902:e889:b0:2ca:6c8:abde with SMTP id
- d9443c01a7336-2ca7e73a009mr5047055ad.18.1782886981406; 
- Tue, 30 Jun 2026 23:23:01 -0700 (PDT)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ca37c90548sm26941255ad.36.2026.06.30.23.22.58
+ d=1e100.net; s=20251104; t=1782899655; x=1783504455;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LGtMM9RmWKs7CgXum1S1XEkcEmKg2wPMAOWNYeHBGLQ=;
+ b=rjRU72+UcUnu+gTEnorIoxwWN8qwe+Qvk2k45rP4JaCwz9d0U9VXKD8ezLPAYUaHPG
+ /U58FD10wu92zV6ULlI5nsaAJJkpFnJCST7MbWnelpUMiXcxkPRWIjGgLaYf0DxxzMJ5
+ q3sHMbtl9THTPQnNmKjYUBRV39zloMHBpsj+y3Gg30eXjnZJiYwLFdwh0zP2Ae8pWX71
+ hHwIcNWigGzxDtDzjNy9NExSlht1N5oOSEvoQnJl78MqFFVfCPKHGuLk9LNd3GxafOaF
+ ikAWv8lpnzpzDd6OP/hsTzGRhT6FyA0eNw+NUGt3bCv4AtQAcB06/jJ5hkPouinXZbsC
+ xizA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoiPTQP2KHheHIWjSnTCebQvM5FOLh/WVXc8X01qmao5bVvRlN7mqm3VwYvMhUA7xx/hVbDDW0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3XwkIcA1KnotB2gy96zrjOMWwYtmpEa5PzT0ZRm68I1u/szui
+ BDskF9n6JfNz6YLGsWsp4fFfstnkG+BmZewZf7KwqVRtT1LybOVXEDiIEN/aZ0uI8EqRdrd/Sg6
+ RnGzsN7Xp3H41HtZaPjbJCMFOzc+HGKgb60PEQPpbbi3wYAyGusODDUIZ
+X-Gm-Gg: AfdE7cnyVyRaZ5lja5pxN2ueiRocxe3ot8VvsBZkniX+/7yuugLJreghAx6EAxqMRWX
+ 5EWYkNwmerTfQt+MLGmPZ/uRW2rHe7GGvYNo8dpJNan32iWq1IJl5wlA/j0aBoIWVY0Kiy1kA+X
+ Lqz2r9aRukKa4cj3W8ADPI4ApsdnoLnsO5yuzniOnGU4felYJcVeDmMPFVNVLRFVWb63TJHPpL1
+ fYxZdz/DZ/+VZ+kzY28+kgss1P9iSpXD9fhmZqrJyBvdH+aWtu/5C1JK2kz+zCeTNLkEFdkhf/F
+ 04Puhj7VKxi5rkajkETz49XpRqNqVhK4WavR9V4CY0IGE1lOVOnEzIc5mQmo+mIhdHxD9uD5jCt
+ a2OnnTMF8ZhVDZXR9lznHlqy9edP20vfg3mdn0UdA8StxYjXn6l5PYjhAbyhb4/laugYRRvnFdN
+ O16CNlE1091ofIkGYXOTHqMv34xVaSMGMUVcR6PnT5
+X-Received: by 2002:a05:7301:3d0f:b0:30b:c502:23df with SMTP id
+ 5a478bee46e88-30eff07d600mr1143040eec.13.1782899654703; 
+ Wed, 01 Jul 2026 02:54:14 -0700 (PDT)
+X-Received: by 2002:a05:7301:3d0f:b0:30b:c502:23df with SMTP id
+ 5a478bee46e88-30eff07d600mr1143014eec.13.1782899654118; 
+ Wed, 01 Jul 2026 02:54:14 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30ee2fb6514sm15923374eec.7.2026.07.01.02.54.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 23:23:00 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Tang Yuantian <andy.tang@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Chunguang Li <chunguang.li_2@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v1 1/1] ls1028ardb: Move environment variables to .env file
-Date: Wed,  1 Jul 2026 06:21:25 +0000
-Message-ID: <20260701062237.5346-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ Wed, 01 Jul 2026 02:54:13 -0700 (PDT)
+Date: Wed, 1 Jul 2026 15:24:00 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, lukma@denx.de, tien.fong.chee@altera.com,
+ anshuld@ti.com, alif.zakuan.yuslaimi@altera.com,
+ tingting.meng@altera.com, alice.guo@nxp.com,
+ marek.vasut+renesas@mailbox.org, quentin.schulz@cherry.de,
+ ilias.apalodimas@linaro.org, sjg@chromium.org, andre.przywara@arm.com,
+ afd@ti.com, h-salunke@ti.com, alchark@gmail.com,
+ mkorpershoek@kernel.org, dinesh.maniyam@altera.com,
+ luca.weiss@fairphone.com, balaji.selvanathan@oss.qualcomm.com,
+ danila@jiaxyga.com, aswin.murugan@oss.qualcomm.com,
+ ycliang@andestech.com, n-francis@ti.com, mateuslima.ti@gmail.com,
+ jamie.gibbons@microchip.com, david.wronek@mainlining.org,
+ james.hilliard1@gmail.com, philip.molloy@analog.com, ravi@prevas.dk,
+ sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v6 05/11] mach-snapdragon: Add PBL shared data defines
+Message-ID: <akTjuGpnI5ibT4qz@hu-varada-blr.qualcomm.com>
+References: <20260623064804.3988799-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260623064804.3988799-6-varadarajan.narayanan@oss.qualcomm.com>
+ <0299e3ad-ae16-4e99-8b02-4c0ffc6ee14f@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0299e3ad-ae16-4e99-8b02-4c0ffc6ee14f@linaro.org>
+X-Authority-Analysis: v=2.4 cv=Co2PtH4D c=1 sm=1 tr=0 ts=6a44e3c7 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=3HNdf_qXCeo_3jbfwTMA:9 a=CjuIK1q_8ugA:10 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-ORIG-GUID: OJut7MI-FMN-chq4rLTymA9b4HkdG6_o
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDEwMiBTYWx0ZWRfXz1W1egVmrNqy
+ qxFJ5JnKdyINQImcXRoogiQEKUPpyIU5/LDKZNXKig/j4rMSXYCq12l3UP764SQyvRKC4dsz1en
+ 65DxdYE4oLC9Hk9UmmvPgayEityreLU=
+X-Proofpoint-GUID: OJut7MI-FMN-chq4rLTymA9b4HkdG6_o
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDEwMiBTYWx0ZWRfX7TObn29MMPm7
+ 4wKrulh1gZiW8cVLCT+S6WfXy/RGg5t3H0XzsUrdKTyl32+y/6kTQGsTB4H8/DMZCOAduY7dy1I
+ tdwVlKMyG2sXMIU92lYUl40yynyqHNJi9fJxYGig6XKS39SjbG5Qz9EQjntqc0uusbrNIwVTVFZ
+ Gy0tX4Jn8tDvpdKpNHxNAjUUiTThVlKuU/MpkJR1C58PdIIN2BTp02ywBE0fQmjzIQm7dBFRr6v
+ 4PKQ1P/OastaF4R8/d7xvost32MJhuzE7oIohI4+/RCf8f5dmJwguYlTp7R8ceohlq76Eq4xrV2
+ gUDOt8CNGdXaplgiprbPS5yQYvot/eodCKFb3YbwIUe2VULZZm//198WAKahadA6ZjKEm2ynZyW
+ 0OBqsOfHBRRzCY5kWH1XhM9REWxpGBSJbCjjy/WNXFHZu1UwHBf+L3DkBnONluddCRebaXjqBKc
+ ZUos49JjB4t52jCIkTw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-01_02,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 bulkscore=0 suspectscore=0 phishscore=0
+ spamscore=0 lowpriorityscore=0 adultscore=0 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010102
 X-Mailman-Approved-At: Wed, 01 Jul 2026 12:58:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,225 +165,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the bulk of the board environment from CFG_EXTRA_ENV_SETTINGS in
-ls1028ardb.h to board/nxp/ls1028a/ls1028ardb.env. Because the board
-directory is shared with ls1028aqds, the file is selected through
-CONFIG_ENV_SOURCE_FILE rather than the SYS_BOARD default.
+[ . . . ]
+> > +enum pbl_shared_data_param_id {
+> > +	PSD_ID_PBL_FW_VERSION			= 0x0,	/* PBL firmware version */
+> > +	PSD_ID_PBL_PATCH_VERSION		= 0x1,	/* Patch version */
+> > +	PSD_ID_RMB_MBOX_BASE_ADDR		= 0x2,	/* Not used */
+> > +	PSD_ID_CPU_BOOT_SPEED_HZ		= 0x3,	/* CPU boot speed (Hz) */
+> > +	PSD_ID_BOOT_MEDIA_TYPE			= 0x4,	/* Boot media type */
+> > +	PSD_ID_IS_EDL_MODE			= 0x5,	/* Emergency Download mode */
+> > +	PSD_ID_DEV_PROG_ELF_ENTRY_ADDR		= 0x6,	/* Not used */
+> > +	PSD_ID_XBL_CONFIG_ELF_ENTRY_ADDR	= 0x7,	/* Not used */
+> > +	PSD_ID_XBL_SC_EXT_ELF_ENTRY_ADDR	= 0x8,	/* Not used */
+> > +	PSD_ID_PBL_TIMESTAMPS_BUFFER_ADDR	= 0x9,	/* PBL logs address */
+> > +	PSD_ID_PBL_TIMESTAMPS_BUFFER_SIZE	= 0xa,	/* PBL log size */
+> > +	PSD_ID_PBL_DEBUG_SHARED_INFO_ADDR	= 0xb,	/* Debug info address */
+> > +	PSD_ID_PBL_DEBUG_SHARED_INFO_SIZE	= 0xc,	/* Debug info size */
+> > +	PSD_ID_TME_CPU_PBL_ROM_BYPASS_FUSE	= 0xd,	/* Secure boot status */
+> > +	PSD_ID_XBL_SC_DEBUG_LOG_ADDR		= 0xe,	/* XBL SC debug log address */
+> > +	PSD_ID_XBL_SC_DEBUG_LOG_SIZE		= 0xf,	/* XBL SC debug log size */
+> > +	PSD_ID_CURRENT_IMAGE_SET		= 0x10,	/* Booted image set */
+> > +	PSD_ID_MEDIA_DATA_INFO_ADDR		= 0x11,	/* Media info pointer */
+> > +	PSD_ID_MEDIA_DATA_INFO_SIZE		= 0x12,	/* Media info size */
+> > +	PBL_SHARED_DATA_PARAM_MAX,
+> > +	PBL_SHARED_DATA_PARAM_SIZE	= 0xffffffffu, /* to force 32 bits */
+>
+> Remove these old compiler hacks, you don't even use the enum type in the
+> pbl_shared_data_entry struct
 
-The distro_bootcmd machinery cannot be expressed in a .env file. The
-BOOTENV macro expands to environment text with embedded NUL separators,
-and the board overrides three distro variables (boot_scripts,
-boot_a_script and scan_dev_for_boot_part) that must follow BOOTENV to
-take effect. BOOTENV and those three overrides therefore remain in
-CFG_EXTRA_ENV_SETTINGS, which is concatenated after the .env text, while
-every other variable moves to the .env file.
+Ok.
 
-The resulting default environment is functionally unchanged for both the
-ls1028ardb_tfa and ls1028ardb_tfa_SECURE_BOOT defconfigs. This was
-verified with an order aware comparison of the default environment before
-and after the change. The only difference is that three accidental double
-spaces in xspi_bootcmd, sd_bootcmd and emmc_bootcmd collapse to single
-spaces, because the preprocessor normalises whitespace in the now
-unquoted text, which does not affect command parsing.
+Thanks
+Varada
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- board/nxp/ls1028a/ls1028ardb.env             | 49 ++++++++++
- configs/ls1028ardb_tfa_SECURE_BOOT_defconfig |  1 +
- configs/ls1028ardb_tfa_defconfig             |  1 +
- include/configs/ls1028ardb.h                 | 99 ++++----------------
- 4 files changed, 71 insertions(+), 79 deletions(-)
- create mode 100644 board/nxp/ls1028a/ls1028ardb.env
-
-diff --git a/board/nxp/ls1028a/ls1028ardb.env b/board/nxp/ls1028a/ls1028ardb.env
-new file mode 100644
-index 00000000000..dc1cb01e50a
---- /dev/null
-+++ b/board/nxp/ls1028a/ls1028ardb.env
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+board=ls1028ardb
-+hwconfig=fsl_ddr:bank_intlv=auto
-+fdtfile=fsl-ls1028a-rdb.dtb
-+image=Image
-+extra_bootargs=iommu.passthrough=1 arm-smmu.disable_bypass=0
-+othbootargs=video=1920x1080-32@60 cma=640M
-+ramdisk_addr=0x800000
-+ramdisk_size=0x2000000
-+bootm_size=0x10000000
-+kernel_addr=0x01000000
-+scriptaddr=0x80000000
-+scripthdraddr=0x80080000
-+fdtheader_addr_r=0x80100000
-+kernelheader_addr_r=0x80200000
-+load_addr=0xa0000000
-+kernel_addr_r=0x81000000
-+fdt_addr_r=0x90000000
-+ramdisk_addr_r=0xa0000000
-+kernel_start=0x1000000
-+kernelheader_start=0x600000
-+kernel_load=0xa0000000
-+kernel_size=0x2800000
-+kernelheader_size=0x40000
-+kernel_addr_sd=0x8000
-+kernel_size_sd=0x14000
-+kernelhdr_addr_sd=0x3000
-+kernelhdr_size_sd=0x20
-+console=ttyS0,115200
-+console_dbg=earlycon=uart8250,mmio,0x21c0500
-+boot_script_hdr=hdr_ls1028ardb_bs.out
-+xspi_bootcmd=echo Trying load from FlexSPI flash ...;sf probe 0:0 && sf read $load_addr
-+	$kernel_start $kernel_size ; env exists secureboot &&sf read $kernelheader_addr_r
-+	$kernelheader_start $kernelheader_size && esbc_validate ${kernelheader_addr_r}; bootm
-+	$load_addr#$board
-+xspi_hdploadcmd=echo Trying load HDP firmware from FlexSPI...;sf probe 0:0 && sf read
-+	$load_addr 0x940000 0x30000 && hdp load $load_addr 0x2000
-+sd_bootcmd=echo Trying load from SD ...;mmc dev 0;mmcinfo; mmc read $load_addr $kernel_addr_sd
-+	$kernel_size_sd && env exists secureboot && mmc read $kernelheader_addr_r $kernelhdr_addr_sd
-+	$kernelhdr_size_sd && esbc_validate ${kernelheader_addr_r};bootm $load_addr#$board
-+sd_hdploadcmd=echo Trying load HDP firmware from SD..;mmc dev 0;mmcinfo;mmc read $load_addr
-+	0x4a00 0x200 && hdp load $load_addr 0x2000
-+emmc_bootcmd=echo Trying load from EMMC ..;mmc dev 1;mmcinfo; mmc read $load_addr
-+	$kernel_addr_sd $kernel_size_sd && env exists secureboot && mmc read $kernelheader_addr_r
-+	$kernelhdr_addr_sd $kernelhdr_size_sd && esbc_validate ${kernelheader_addr_r};bootm
-+	$load_addr#$board
-+emmc_hdploadcmd=echo Trying load HDP firmware from EMMC..;mmc dev 1;mmcinfo;mmc read $load_addr
-+	0x4a00 0x200 && hdp load $load_addr 0x2000
-diff --git a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-index 6917fe7783b..a8c7c89c9d3 100644
---- a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-@@ -6,6 +6,7 @@ CONFIG_TARGET_LS1028ARDB=y
- CONFIG_TFABOOT=y
- CONFIG_SYS_MALLOC_LEN=0x202000
- CONFIG_SYS_MALLOC_F_LEN=0x6000
-+CONFIG_ENV_SOURCE_FILE="ls1028ardb"
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_DM_GPIO=y
-diff --git a/configs/ls1028ardb_tfa_defconfig b/configs/ls1028ardb_tfa_defconfig
-index f1c13afbb2e..ca19d6035ee 100644
---- a/configs/ls1028ardb_tfa_defconfig
-+++ b/configs/ls1028ardb_tfa_defconfig
-@@ -6,6 +6,7 @@ CONFIG_TARGET_LS1028ARDB=y
- CONFIG_TFABOOT=y
- CONFIG_SYS_MALLOC_LEN=0x202000
- CONFIG_SYS_MALLOC_F_LEN=0x6000
-+CONFIG_ENV_SOURCE_FILE="ls1028ardb"
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x500000
-diff --git a/include/configs/ls1028ardb.h b/include/configs/ls1028ardb.h
-index 613abc50567..1811825baeb 100644
---- a/include/configs/ls1028ardb.h
-+++ b/include/configs/ls1028ardb.h
-@@ -50,85 +50,26 @@
- /* Initial environment variables */
- #ifndef SPL_NO_ENV
- #undef CFG_EXTRA_ENV_SETTINGS
--#define CFG_EXTRA_ENV_SETTINGS		\
--	"board=ls1028ardb\0"			\
--	"hwconfig=fsl_ddr:bank_intlv=auto\0"	\
--	"fdtfile=fsl-ls1028a-rdb.dtb\0"         \
--	"image=Image\0"					\
--	"extra_bootargs=iommu.passthrough=1 arm-smmu.disable_bypass=0\0"	\
--	"othbootargs=video=1920x1080-32@60 cma=640M\0"    \
--	"ramdisk_addr=0x800000\0"		\
--	"ramdisk_size=0x2000000\0"		\
--	"bootm_size=0x10000000\0"		\
--	"kernel_addr=0x01000000\0"              \
--	"scriptaddr=0x80000000\0"               \
--	"scripthdraddr=0x80080000\0"		\
--	"fdtheader_addr_r=0x80100000\0"         \
--	"kernelheader_addr_r=0x80200000\0"      \
--	"load_addr=0xa0000000\0"            \
--	"kernel_addr_r=0x81000000\0"            \
--	"fdt_addr_r=0x90000000\0"               \
--	"ramdisk_addr_r=0xa0000000\0"           \
--	"kernel_start=0x1000000\0"		\
--	"kernelheader_start=0x600000\0"		\
--	"kernel_load=0xa0000000\0"		\
--	"kernel_size=0x2800000\0"		\
--	"kernelheader_size=0x40000\0"		\
--	"kernel_addr_sd=0x8000\0"		\
--	"kernel_size_sd=0x14000\0"		\
--	"kernelhdr_addr_sd=0x3000\0"		\
--	"kernelhdr_size_sd=0x20\0"		\
--	"console=ttyS0,115200\0"                \
--	"console_dbg=earlycon=uart8250,mmio,0x21c0500\0"		\
--	BOOTENV					\
--	"boot_scripts=ls1028ardb_boot.scr\0"    \
--	"boot_script_hdr=hdr_ls1028ardb_bs.out\0"	\
--	"scan_dev_for_boot_part="               \
--		"part list ${devtype} ${devnum} devplist; "   \
--		"env exists devplist || setenv devplist 1; "  \
--		"for distro_bootpart in ${devplist}; do "     \
--		  "if fstype ${devtype} "                  \
--			"${devnum}:${distro_bootpart} "      \
--			"bootfstype; then "                  \
--			"run scan_dev_for_boot; "            \
--		  "fi; "                                   \
--		"done\0"                                   \
--	"boot_a_script="				  \
--		"load ${devtype} ${devnum}:${distro_bootpart} "  \
--			"${scriptaddr} ${prefix}${script}; "    \
--		"env exists secureboot && load ${devtype} "     \
--			"${devnum}:${distro_bootpart} "		\
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	BOOTENV \
-+	"boot_scripts=ls1028ardb_boot.scr\0" \
-+	"scan_dev_for_boot_part=" \
-+		"part list ${devtype} ${devnum} devplist; " \
-+		"env exists devplist || setenv devplist 1; " \
-+		"for distro_bootpart in ${devplist}; do " \
-+		  "if fstype ${devtype} " \
-+			"${devnum}:${distro_bootpart} " \
-+			"bootfstype; then " \
-+			"run scan_dev_for_boot; " \
-+		  "fi; " \
-+		"done\0" \
-+	"boot_a_script=" \
-+		"load ${devtype} ${devnum}:${distro_bootpart} " \
-+			"${scriptaddr} ${prefix}${script}; " \
-+		"env exists secureboot && load ${devtype} " \
-+			"${devnum}:${distro_bootpart} " \
- 			"${scripthdraddr} ${prefix}${boot_script_hdr} " \
--			"&& esbc_validate ${scripthdraddr};"    \
--		"source ${scriptaddr}\0"	  \
--	"xspi_bootcmd=echo Trying load from FlexSPI flash ...;" \
--		"sf probe 0:0 && sf read $load_addr " \
--		"$kernel_start $kernel_size ; env exists secureboot &&" \
--		"sf read $kernelheader_addr_r $kernelheader_start " \
--		"$kernelheader_size && esbc_validate ${kernelheader_addr_r}; "\
--		" bootm $load_addr#$board\0" \
--	"xspi_hdploadcmd=echo Trying load HDP firmware from FlexSPI...;" \
--		"sf probe 0:0 && sf read $load_addr 0x940000 0x30000 " \
--		"&& hdp load $load_addr 0x2000\0"			\
--	"sd_bootcmd=echo Trying load from SD ...;" \
--		"mmc dev 0;mmcinfo; mmc read $load_addr "		\
--		"$kernel_addr_sd $kernel_size_sd && "	\
--		"env exists secureboot && mmc read $kernelheader_addr_r " \
--		"$kernelhdr_addr_sd $kernelhdr_size_sd "		\
--		" && esbc_validate ${kernelheader_addr_r};"	\
--		"bootm $load_addr#$board\0"		\
--	"sd_hdploadcmd=echo Trying load HDP firmware from SD..;"	\
--		"mmc dev 0;mmcinfo;mmc read $load_addr 0x4a00 0x200 "	\
--		"&& hdp load $load_addr 0x2000\0"	\
--	"emmc_bootcmd=echo Trying load from EMMC ..;"	\
--		"mmc dev 1;mmcinfo; mmc read $load_addr "		\
--		"$kernel_addr_sd $kernel_size_sd && "	\
--		"env exists secureboot && mmc read $kernelheader_addr_r " \
--		"$kernelhdr_addr_sd $kernelhdr_size_sd "		\
--		" && esbc_validate ${kernelheader_addr_r};"	\
--		"bootm $load_addr#$board\0"			\
--	"emmc_hdploadcmd=echo Trying load HDP firmware from EMMC..;"      \
--		"mmc dev 1;mmcinfo;mmc read $load_addr 0x4a00 0x200 "	\
--		"&& hdp load $load_addr 0x2000\0"
-+			"&& esbc_validate ${scripthdraddr};" \
-+		"source ${scriptaddr}\0"
- #endif
- #endif /* __LS1028A_RDB_H */
--- 
-2.43.0
-
+[ . . . ]
