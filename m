@@ -4,92 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E39C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4FDC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3651684867;
-	Wed,  1 Jul 2026 14:07:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1881D84B92;
+	Wed,  1 Jul 2026 14:17:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mqnoR6f0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4HCc6f2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE33684BC5; Wed,  1 Jul 2026 14:07:40 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id A47EE84BBD; Wed,  1 Jul 2026 14:17:25 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91F60841F2
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:07:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55C1D84B62
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:17:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-698823a9881so621723a12.2
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:07:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782907658; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6982e71dfb0so831216a12.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:17:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782908243; cv=none;
  d=google.com; s=arc-20260327;
- b=GYm4plp3nLELuIDBlHKD9VwYqsgEMgXT4ASeOoBZPZ9UOXeuzQetAZMkuLKkxqssRp
- 3kPOOa+d/nRVyVmSfZ2cO1NKkJFvAwem85NpZf5vORQks9I7bFSRZ9X8oxoLh7xCGc6/
- PIB/PukV3tRatvEwVbGc/qIM3ySLw7i+4fIC9M017a30+Vr5Meb9EUpWtcglXkUbnu73
- G+y3eAirb/ig25dGSsM22QMQoPJItoXvhGXeE4TvbmpN14qUvYyFtzuEp4ShLrjeBQL9
- QlJjuSOYOsV15ZAfeboM7PuJRviybrJQI95AnJfloYaAHSEhh8X/+AFveLd/JppMaZRR
- dwig==
+ b=cr+oqDxOomfNxHDRQ2/md6oNDisxCZ7Kzr5tdgepIQLuG1sCuLE76rAur69pdzw+wp
+ 5xw4EhASWR1iPiv44BEU/WIKDNLhJqye8BQSyER55jUYGa1vf0AI1/8E+py7lSwNIx+D
+ rIn/BXH/J/1ArIbgbERQwyKpZ02Dq6khIfToCGGQQ41FNXc3kDWl0wHrn+K7bUqDzI6/
+ 74V+rYQOPeEpBcBu02sbMyTX+qebnBG/Jy+R3m8V+ucZv7pfMWYYRVGe9DALyZe+degF
+ wW336ayYwjMJJmNLWDHiJtfIl1DXrokKGVPEP9ZzrJ9U8hCjbv/XR+7ZDyZl/OxHMr/X
+ ZVow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=U2itC+jbovZewhS3cMXEdswTO6lL3i9B0J0TXGmTsDs=;
- fh=zinS25VRE/Gw3ysJDNix/TPq0b+jh8vhEgV/+pLUoYg=;
- b=Jm9aGewM6Ah0gbKKMB48dCcz6RMvcE1WSfErW7yac+JlNo4b94OHVOZrqYsQ/37ZZx
- O+rDONbo/+IlhX3Nw4sCg8EOwFnbj5a2E2vOJlLHV/BeC9Z3elhJaVz4FA0lHwjQ4OVU
- SwgYWFlHKxauMYWy2lCauJBYMUBC/gMJZjF1RTRMxT/mlVzFlpMUZCY39H9/s8vbnpOl
- A+rRZE+WLtaLjOj17kDRohuB1TrikvHOApNKxKXNb/MIcAWsx9LY/KDMztTEFXOH3wuF
- r1+CcAl3Nc0Yx+LD5i5UXE6q/aHopkXwEFQnsSLDL3P7xotnzBquaKOEqcSvYVzW3btp
- aShw==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
+ fh=AfbpCGlXQJ+uqvM2sCk9+bHcgJgFXbd5chXxLi8vatQ=;
+ b=okMxp6a0eNKdpVBZwUtuhtaxO0J6vuosTHYtJ+O4H6CfnjgiViA3pEeeAFKShtayhc
+ OafPCuj+OhgTNbacopU6NBelev0PhxVdgORqHqfFaEZgNjwouyHgh1QtDw/cGrgH7bt0
+ C4q4+nWnJ87p0AT0SRCygGFkJcGK+ponbH7hgy/IHC5nFHh6IENXJ95iyHjgIfm5ix9o
+ t7z7wP9t5TqH13OafmNrB1eX7NDm8r3pGTsqZDOUEqhkE8bMwhf/F6TTtuiQA7pEzAN7
+ 1Tzuc1iY8oR2Rhmzc5ZPU001dzxI/r/+6Y0L7eXyjE4449Hu7WlyKGX2jBT65qui2uI7
+ NPpg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782907658; x=1783512458; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U2itC+jbovZewhS3cMXEdswTO6lL3i9B0J0TXGmTsDs=;
- b=mqnoR6f0yItvjK390bmTQAUhuBIYOQZ6AQ18HRVt+JPPisax//HqveeJeJjfGonAlG
- cc2RzX5PXs+KLar2W2HsDO5g52HZowsI+DErKji0Dzo/37ekuFrHV6Jj8l3l88QxVYXY
- x5inw2LEaVRn1MV4SfR8R8UvRFyWo9vlPKiX0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782907658; x=1783512458;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1782908243; x=1783513043; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U2itC+jbovZewhS3cMXEdswTO6lL3i9B0J0TXGmTsDs=;
- b=mZC/FeL0uQcQJ6hDSXoliyGQlVxyqkfoVX7eR59ePWD7TbrgDGwWyh9L+4HQ2gHZ6K
- +2nIW54lfCcoSlVJApCnrCiP61CWoEpTr3qSd9ZKJLvZvjRbKYQxjlErcsOuDDr8cZJp
- QOLY6iNP108fX4u2MJ9oi+JZEIxyWRY6IwplbBPC8gQ65crG3q1ukAizTRQucKmiXU6x
- 4MhAzxnZPGlttSaBz744ewU+yZExNeD6AgbZq/Cv6Stgh8DVBzNISq3FfCCQFya7T5HC
- N4LBKQhIJb8CdHlPoGsrFMLJGrHcKM/LjijeJOdLhIys0WMZk322l2T38jl4QEKdZLaQ
- MxYw==
-X-Gm-Message-State: AOJu0Yx67TMvrVE2znE3AMQtmZW2y4J/qW5ekXt/mwPKXXNBOSQ1qoFe
- qToYiw65VoU5gdmcZ8EKPoDQsS4SbwJvTmniTB+ZIz9xPhS8KbFANA7W2Nef8QK9yJmGulY25yS
- Zad7Dv4cGm8K5KgEOgDgiDYudujQ5/64KzbM1GSoy
-X-Gm-Gg: AfdE7cmGHamuzkil0orDLqRM3qJe2fIrUB47eQXnORZtSt+yq/C5sO7dDScQOZgnWk2
- S1nZkHbz08h50s19iQqclmndfoLu766XPsmAazNcrnVes4cgEyH8rcromK3GZ/rE4ckh6rq5SFh
- DInRN8c8KhWeYHm8y9g/eCLMvR5rQaxS5nF9NkZZEvlfLEoSK1xOvLsldBDcALT0nrVJn6Tnz34
- 5CjzdsKlVojV9hkSrkwv+kLJZkgaUi1whMXw/Tf1SorVMjdcJySLAfbjH50ChEymKRfSUfDZg==
-X-Received: by 2002:a05:6402:380a:b0:696:8f45:4ae7 with SMTP id
- 4fb4d7f45d1cf-6989f319c50mr639604a12.13.1782907657985; Wed, 01 Jul 2026
- 05:07:37 -0700 (PDT)
+ bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
+ b=L4HCc6f2PCdV3wapBBGszYhPQ3RESKd3UmKgF+eO4DTIdHKJNRv2PJam00aWzs6XRv
+ eqtliUs3QhIhj1d8XpwHhOZZHOIsnx/kf9uOBZsg2C5QDv8ibt72k6V50UEexZ8/bqYe
+ uHh2hN6Ctz2jtQKatZY+d4CwKo+4UE39/Pb94=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782908243; x=1783513043;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
+ b=Bo3ojS8mClivyRM8l5i53W/wssR1RhtjSy3XrieqFFM7cvQ+jZTDCxCcvLtIt1kllh
+ bBVnO2NfH0FMOokImfd41fuz3v3kL6khjZ5q3QAuSYUsAK0lTSMEyIvFRERV3ve+Ia99
+ pLgd+yR3UauZhF9x8A0yAqCpgchdycrem12EYcNI30HJ6tIiv7sizs5NpfLgWuIpB0WU
+ 2Q/9qTZQI6o9eshWLLQTHtRpG/mmae1KhXSBvX5MamKeOBY7l2D9eyFfg9U6fPGQO5cp
+ +t+qIqJwxLZxAkin8uj40H28PpUWE3OZKVkIJmHAuYgUZfhI4sjZWPRfFgfMSSh4IyuH
+ gwtQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq96zTEpjrzJmvZX8OnZ7Yl80sS/zAC1Z7orjUvcoo5PSw1WeKZDbq7CBPBizB5QhtqGAqPlF4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO/5ccVufEZAP2a4i5bYNEmdyVCjy4pV+SUiI5LxCdBtWubJNp
+ LhAOwCAjRhTMZLYgDnOKsH+LdRg9jFYnUg1ICYi5ILi4mJ9/5NCKjqQnF7e6KssiqIFIp9w6zqF
+ QRJPd70UBV5Eq/Z/HllEHmBFv/WAGSKdvTpcb97zMQSbO/flISuuFkw==
+X-Gm-Gg: AfdE7cn+nTnSmpjFLKatCxZVmmfihn8oKAH2RuJh/8UwuR1dKRQENH9Ju0IRqFLxwyY
+ 3Y/gbHr30/nPVTcVzj8cJDpTr3kR+oNq+HKM6W6YdeyAc5/Vl1t6n/xdfwfza+3CclNzaRgKtwG
+ OmlOP7OHJzi7jo1gVzNbklyaR5d6MW22v6SLOT+U8Zij47mE4BeA1Xtwon92O9WkzTdp3xWTjX2
+ iS3CWlIgim0i/ShqXjW12xWMYlZZgM2gyyhINXizzB9RqmUzzYh/UBMLnpuBliUXoPJHPDvtRpx
+ arxNuTLH
+X-Received: by 2002:a05:6402:5409:b0:698:9a31:3651 with SMTP id
+ 4fb4d7f45d1cf-6989f37687fmr678205a12.19.1782908242727; Wed, 01 Jul 2026
+ 05:17:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260629-binman_template_phandle_copy_fix-v1-1-196f95a13388@ti.com>
-In-Reply-To: <20260629-binman_template_phandle_copy_fix-v1-1-196f95a13388@ti.com>
+References: <20260618150913.314507-1-vincent.stehle@arm.com>
+ <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
+ <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
+ <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
+ <9dd01627-7a0b-4dbb-8215-7eddf424a6ea@pengutronix.de>
+In-Reply-To: <9dd01627-7a0b-4dbb-8215-7eddf424a6ea@pengutronix.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Jul 2026 13:07:26 +0100
-X-Gm-Features: AVVi8CdoLKCf-ykyO_cQN3RKGGWjrYmllXDIofx5fG-MdufYiRkjFV8mOCNDaeE
-Message-ID: <CAFLszTggZ57jZw2r10COgm42SgPZUpKXoe_1uEzaX48KtGVYig@mail.gmail.com>
-Subject: Re: [PATCH] fdt: fix phandles not copying when using templates
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Wed, 1 Jul 2026 13:17:11 +0100
+X-Gm-Features: AVVi8Cdz8e3CYf2hhAWv2oa4obXYOYXJQCnGC7TehNgSiETGWVJNJ5mMg06F2hU
+Message-ID: <CAFLszTgFOkFm3VSOo-yMyp-uRTPXHGv4P3J0srPmod5FnA0Z6A@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
+ efi_disconnect_controller
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,65 +118,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
+Hi Ahmad,
 
-On Mon, 29 Jun 2026 at 11:49, Anshul Dalal <anshuld@ti.com> wrote:
+On Mon, 29 Jun 2026 at 12:06, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
 >
-> The phandles used inside a template were not being copied to the node
-> inserting the template, leading to a missing phandle error.
+> Hello Simon,
 >
-> The following example can be used to reproduce the issue:
+> On 6/25/26 5:12 PM, Simon Glass wrote:
+> > Hi Ahmad,
+> >
+> > On Thu, 18 Jun 2026 at 16:28, Ahmad Fatoum <a.fatoum@pengutronix.de> wr=
+ote:
+> >>
+> >> Hello,
+> >>
+> >> On 6/18/26 5:18 PM, Simon Glass wrote:
+> >>> Hi Vincent,
+> >>>
+> >>> On Thu, 18 Jun 2026 at 16:09, Vincent Stehl=C3=A9 <vincent.stehle@arm=
+.com> wrote:
+> >>>>
+> >>>> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when re=
+turning
+> >>>> after having called EFI_ENTRY().
+> >>>>
+> >>>> This is inspired by a barebox fix. [1]
+> >>>
+> >>> Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
+> >>> projects back together :-)
+> >>
+> >> It's not as extensive as U-Boot's yet, but it's usable for the common
+> >> boot me a distro GRUB use case. The code originated from U-Boot with
+> >> some parts heavily rewritten to fit barebox, e.g. the EFI filesystem
+> >> protocol is implemented on top of dirfds, so it reuses VFS path handli=
+ng
+> >> and other such things.
+> >
+> > OK good. I did create a VFS in Concept but I have not tried to get it
+> > into mainline yet.
 >
-> &binman {
->   some_template: template-0 {
->     ti-secure-rom {
->       content = <&some_data>;
->       keyfile = "some_key";
->     };
->     some_data: blob-ext {
->       optional;
->     };
->   };
->   output-bin {
->     insert-template = <&some_template>;
->   };
-> };
->
-> With the error 'binman: Node '/binman/output-bin/ti-secure-rom': Cannot
-> find node for phandle 103' observed.
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  tools/dtoc/fdt.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/tools/dtoc/fdt.py b/tools/dtoc/fdt.py
-> index 991a36b98796..6c3449095194 100644
-> --- a/tools/dtoc/fdt.py
-> +++ b/tools/dtoc/fdt.py
-> @@ -780,7 +780,7 @@ class Node:
->              parent = self.GetFdt().LookupPhandle(phandle)
->              tout.debug(f'adding template {parent.path} to node {self.path}')
->              for node in parent.subnodes.__reversed__():
-> -                dst = self.copy_node(node)
-> +                dst = self.copy_node(node, True)
+> Cool. I really look forward to `cp /dev/sd /dev/emmc` just working :-)
 
-I believe this is the one you pinged about on irc?
+Well, you can copy:
 
-Please can you add a test for this new behaviour.
+=3D> mount hostfs . host
+=3D> fs cp host/README host/Kconfig
+81004 bytes copied
+=3D>
+
+but there is no device fs :-(
 
 >
->              tout.debug(f'merge props from {parent.path} to {self.path}')
->              self.merge_props(parent, False)
 >
-> ---
-> base-commit: 63f6cc8ba618396cb9c0161bb5c6d217604ae1d0
-> change-id: 20260629-binman_template_phandle_copy_fix-956bc3ce48d6
+> >> The imported files have Origin-URL comments pointing back at U-Boot
+> >> including the revision they originated from, but we are still in need =
+of
+> >> better tooling to make use of these tags.
+> >
+> > On another topic - where did we get to with the whole-FITsigning
+> > thing? Should we set up a call to talk it through?
 >
-> Best regards,
-> --
-> Anshul Dalal <anshuld@ti.com>
+> This is still something I am interested in landing. I had started a
+> review of your counterproposal, but got distracted before finishing it.
+> I submitted it now.
+
+OK great, thanks, will take a look.
+
 >
+> Cheers,
+> Ahmad
+>
+> >
+> > Regards,
+> > Simon
+> >
+> >>
+> >> @Vincent, I suspect a number of fixes in [1] are also applicable to
+> >> U-Boot, but I haven't checked.
+> >>
+> >> [1]:
+> >> https://lore.kernel.org/barebox/20260216084758.3548990-1-a.fatoum@peng=
+utronix.de/
+> >>
+> >> Cheers,
+> >> Ahmad
+> >>
+> >>
+> >>
+> >>>
+> >>>>
+> >>>> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=3D080db65e3=
+9a877b000baaf843c997a69821dfe69 [1]
+> >>>> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sol=
+e child")
+> >>>> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> >>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >>>> Cc: Tom Rini <trini@konsulko.com>
+> >>>> ---
+> >>>>  lib/efi_loader/efi_boottime.c | 2 +-
+> >>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boot=
+time.c
+> >>>> index de57823bd44..b6966652d97 100644
+> >>>> --- a/lib/efi_loader/efi_boottime.c
+> >>>> +++ b/lib/efi_loader/efi_boottime.c
+> >>>> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
+> >>>>                                       &number_of_children,
+> >>>>                                       &child_handle_buffer);
+> >>>>         if (r !=3D EFI_SUCCESS)
+> >>>> -               return r;
+> >>>> +               return EFI_EXIT(r);
+> >>>>         sole_child =3D (number_of_children =3D=3D 1);
+> >>>>
+> >>>>         if (child_handle) {
+> >>>> --
+> >>>> 2.53.0
 
 Regards,
 Simon
