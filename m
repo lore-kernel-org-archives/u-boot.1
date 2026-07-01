@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44115C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:48:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C287C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A19A84C17;
-	Wed,  1 Jul 2026 13:47:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C8EF084C01;
+	Wed,  1 Jul 2026 13:47:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XaYRR4ms";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hp6v5Mqs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6164484BBD; Wed,  1 Jul 2026 13:47:20 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id B162F84BAA; Wed,  1 Jul 2026 13:47:24 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BA4884C10
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:47:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C769184C02
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:47:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-494027f9299so1452680b6e.1
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 04:47:18 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-495b250b01cso432116b6e.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 04:47:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782906437; x=1783511237; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782906440; x=1783511240; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NbbU0cECWD7R6WwwJ5l7OJW/X9IV9fz+ixatD+k1P8c=;
- b=XaYRR4msFXMW9Ctqjrzadn4/9oIPmGeb63wbsGASqmBVeKwWp2CUjrvG8dNpUQXYbp
- OE8UMg9m4ggDmjCuj68gWcD8R7hxQDcn1yitBzz7IT+8BNSl3n9cGg9KqQll6gYDYz34
- 04/ZrvtFdNmPDJatjuRhEjUpg3rzZ0WXjQJ8I=
+ bh=SCbwED3yz+UPmqpBdVUeIo8zMTFgxFBqDmX3E5/8Hc4=;
+ b=Hp6v5Mqs+lJvszAdfKHkID1s9vj1u3dKOTLJGpfPVv0c/o9vBlDhrIBSquo2b9JXWt
+ X3/NzXWk5KPfC1yW7Ssy+fMROFa7A4ilAxS5YGLw/AR0GgCjWdkwmPcWt/BtgBeUfYj4
+ ha2gBQZxo1xI14jeYHbXduIqg8VPoASPh+Dew=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782906437; x=1783511237;
+ d=1e100.net; s=20251104; t=1782906440; x=1783511240;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NbbU0cECWD7R6WwwJ5l7OJW/X9IV9fz+ixatD+k1P8c=;
- b=jKxzoNACK8NQAGcF4pzrcYK4NXNQhi/r8CZ5QowlGAQJMF0HsbhxcSlav3kVnfwn38
- IPk1WgUzNYiC4FZEV3q45dQgFSyM8wwNYRm4YA8Qbnmn2xFvXF6CNtOm0prPXXYpT4ED
- 3Dfr8mkSwXA99Ye3KSoyA1i1DDvyKcgOUqHDwFnHaztVf0M/K42JJflz2PckEvQGZaIK
- unNeZG54bo0tDrAzFFE90c2wzxPyCi9nD+j9h46PQJVnCnsD33eJubQiiFdSAQY91/CG
- YG+ej+yO7sYJ34SFPs6W6dKtUWodHz1j7C4snsIKuiXlyqRp4uB3wjC4duatPaDFWPIc
- 4oyQ==
-X-Gm-Message-State: AOJu0YytDqvgqKtCAYgmYLVt0MWdALisvYF7KMih7B0p5uoqMossk4CC
- N8zyeDLzYP95bC7tmxhOiRcFtvEhdtf6BGKBAlqHa7BzIAQY6sGhRUi5WbXQQR1P0vDBclbbQXu
- L88Y=
-X-Gm-Gg: AfdE7cmqnjjNhJXBlTMqsmMtIQ383+m6YBSkYSQvcCfdG8qqeNzeeINGCLEr81Kn/tl
- A64hl0Qbcx0xnpdsVNPCuIOCpp2l74ja4N1KCykWqvXFMZQiuDG60PpmhxEPBEpye7OWB7gSW/0
- 4GPgsIZqKG5XKQWQsyjbYslDn3vxGwUa0IpD39iv1kTOKZ78vZyWldDBeoajooKIqcTbqdWe2Ft
- BJOgHPFwD5/C54wrVupza5X0zy/Z4fOr9ft3UyWm//XLOgT0CUPuXVJN2HLDZAPpdgVDb+Uo5Ir
- JXK02HfCRxR1xKbqOjdukBT6typ4n2LOU24AEm6fQjT9LTEqPjWvup4xYjyDK3NUIWjlJ1K5I+v
- PCEsuBkYJKo0esIcCjFBp3PanBJ7Hy3C7AMqNReqxXUCFu9FQ+1PbrTxqlbk0ZzXy5WwFjmg6J2
- B6hy7aoyA=
-X-Received: by 2002:a05:6808:6c96:b0:48f:1165:5172 with SMTP id
- 5614622812f47-4960db336afmr771040b6e.10.1782906436869; 
- Wed, 01 Jul 2026 04:47:16 -0700 (PDT)
+ bh=SCbwED3yz+UPmqpBdVUeIo8zMTFgxFBqDmX3E5/8Hc4=;
+ b=a0aY4mnx6e4WxdzbwWdb5AjyjnFGyk0N6fIcjPzaoYb2xTqffjwPj4NAZUox1nYj2s
+ HzUfSYiNV/d2La+fgC0JBgqPPkZU4q3uz00H/wIj4AjMzMPRjEpLcowjJZckklptnRUE
+ O0CWL13Zkf8PHX/St+PeJrznNzWgq/s9/2wd2eEYtf5MOGduGvjD3k+gdl7BIye67RdU
+ qMHAeoReSCvEISksmav+YW5EUunhkMukiokC+5pSe6o6nGAjyfLh6a4qD1MBkpyOuPoq
+ KKw32iFhRz5fguhtnaRVQ3SY/rcSa5bT9MrlghU06O2QVCdTSSnkJOd8RSUoiCpSrJeE
+ gC3g==
+X-Gm-Message-State: AOJu0Ywmbudp33RrQ763UeWNQ4XRRULpX5xXNlYcdRyc2E+vBUIA46O2
+ IdEwtvILjBAqgeFaRBY0K226R6vGBbkSNOoZt2gFxxoTNAUGs4CAwUDVCWwMArCnBOTHZk0MRca
+ wMcE=
+X-Gm-Gg: AfdE7ckJhmH8ZUfN9szO7h3B/JSb9LNMtP9C4AZdA2MmTxr3DB7kc5cAGIm5nKAk4Ew
+ TafUb8B+LG0vc8++nrRPJ5D/11/K7tlAESPr4pkdy+C7ixI9O7rc4Y8+1lQB/i9w79bob8JE8mC
+ Rjhvi2m70Pu5uKJ0Xo5mNDZ2HSSFf2Qn3Yo56MLQ/Mkgcf0jA/g7yK10XC3EKeS3GAmZBT/nD/4
+ e2z+GhhdnL6/o6u56EchIUGVxINqcEcjy7LPZcT9BvbCz1T60NA0lO3hwK+m3rpRtsZAy/QvvVT
+ NscI3aCW/ALDe7FynppHbmOxZ3WVa2Sf/iBfoGyChkiK7P/J30r6cgDF/YiYaF3Arws99aq+w1M
+ 3Nsn/ub2ekg/dhfSdWdfavy1t80HEhBowZJENyHQciFafyp+r5QO5c/cOFo1rAUgnTteQZrwChX
+ HDUuYywxJYWJIgOLStjw==
+X-Received: by 2002:a05:6808:190c:b0:495:fd9b:1808 with SMTP id
+ 5614622812f47-4962d73c506mr145888b6e.8.1782906440502; 
+ Wed, 01 Jul 2026 04:47:20 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4960655e3e2sm1199823b6e.0.2026.07.01.04.47.14
+ 5614622812f47-4960655e3e2sm1199823b6e.0.2026.07.01.04.47.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 04:47:15 -0700 (PDT)
+ Wed, 01 Jul 2026 04:47:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 08/14] lib: string: Add strlower()
-Date: Wed,  1 Jul 2026 05:42:28 -0600
-Message-ID: <20260701114248.1396125-9-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 09/14] cmd: hash: Use getopt() for option parsing
+Date: Wed,  1 Jul 2026 05:42:29 -0600
+Message-ID: <20260701114248.1396125-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260701114248.1396125-1-sjg@chromium.org>
 References: <20260701114248.1396125-1-sjg@chromium.org>
@@ -94,102 +101,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a helper that lower-cases an ASCII string in place. It returns
-the input pointer so calls can be chained:
+The open-coded check for -v only matches it as the first argument and
+duplicates the argument-shuffling logic that every option-parsing
+command repeats. Convert do_hash() to the getopt-state command
+signature and parse -v with getopt().
 
-    do_thing(strlower(name));
+Build the optstring from IS_ENABLED(CONFIG_HASH_VERIFY) so getopt() is
+always called, and prefix it with '+' so it works in POSIX mode and
+stops at the first non-option. -v therefore stays a leading option
+('hash -v algorithm address count'), matching the documented usage and
+the existing tests, and no argv permutation is needed. After parsing,
+require three positionals (algorithm address count), strlower() the
+algorithm and forward the tail to hash_command() unchanged.
 
-A new test in test/lib/string.c covers the basic cases.
+CMD_HASH selects only GETOPT. With this, no in-tree command selects
+GETOPT_PERMUTE, so the permute machinery (the writable argv copy and
+nonopts tracking) stays compiled out of a default image, which drops
+about 2 KB of text. GETOPT_PERMUTE remains available as an opt-in for
+commands that genuinely need options after positionals.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v4:
+- Make hash parse in POSIX mode so nothing selects GETOPT_PERMUTE
 
- include/linux/string.h | 12 ++++++++++++
- lib/string.c           | 10 ++++++++++
- test/lib/string.c      | 27 +++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
+ cmd/Kconfig |  1 +
+ cmd/hash.c  | 42 +++++++++++++++++++++++-------------------
+ 2 files changed, 24 insertions(+), 19 deletions(-)
 
-diff --git a/include/linux/string.h b/include/linux/string.h
-index 850356d7c3f..35bc747300f 100644
---- a/include/linux/string.h
-+++ b/include/linux/string.h
-@@ -49,6 +49,18 @@ int strcasecmp(const char *s1, const char *s2);
- #ifndef __HAVE_ARCH_STRNCASECMP
- extern int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index ca1039f6a03..3c5abddd31f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2804,6 +2804,7 @@ config CMD_BLOB
+ 
+ config CMD_HASH
+ 	bool "Support 'hash' command"
++	select GETOPT
+ 	select HASH
+ 	help
+ 	  This provides a way to hash data in memory using various supported
+diff --git a/cmd/hash.c b/cmd/hash.c
+index f4f1dcf02f9..929759ce45b 100644
+--- a/cmd/hash.c
++++ b/cmd/hash.c
+@@ -11,8 +11,9 @@
+ 
+ #include <command.h>
+ #include <env.h>
++#include <getopt.h>
+ #include <hash.h>
+-#include <linux/ctype.h>
++#include <linux/string.h>
+ 
+ #if IS_ENABLED(CONFIG_HASH_VERIFY)
+ #define HARGS 6
+@@ -20,31 +21,34 @@
+ #define HARGS 5
  #endif
+ 
+-static int do_hash(struct cmd_tbl *cmdtp, int flag, int argc,
+-		   char *const argv[])
++static int do_hash(struct getopt_state *gs)
+ {
+-	char *s;
++	const char *optstring = IS_ENABLED(CONFIG_HASH_VERIFY) ? "+v" : "+";
+ 	int flags = HASH_FLAG_ENV;
++	char *algo;
++	int opt;
+ 
+-	if (argc < 4)
++	while ((opt = getopt(gs, optstring)) > 0) {
++		switch (opt) {
++		case 'v':
++			flags |= HASH_FLAG_VERIFY;
++			break;
++		default:
++			return CMD_RET_USAGE;
++		}
++	}
 +
-+/**
-+ * strlower() - Lower-case an ASCII string in place
-+ * @s: The string to convert
-+ *
-+ * Walks @s and replaces each character with its lower-case equivalent.
-+ * Returns @s so the call can be chained, e.g. ``foo(strlower(buf))``.
-+ *
-+ * Return: @s.
-+ */
-+char *strlower(char *s);
++	/* Need at least: algorithm address count */
++	if (gs->argc - gs->index < 3)
+ 		return CMD_RET_USAGE;
+ 
+-#if IS_ENABLED(CONFIG_HASH_VERIFY)
+-	if (!strcmp(argv[1], "-v")) {
+-		flags |= HASH_FLAG_VERIFY;
+-		argc--;
+-		argv++;
+-	}
+-#endif
+-	/* Move forward to 'algorithm' parameter */
+-	argc--;
+-	argv++;
+-	for (s = *argv; *s; s++)
+-		*s = tolower(*s);
+-	return hash_command(*argv, flags, argc - 1, argv + 1);
++	algo = strlower(getopt_pop(gs));
 +
- #ifndef __HAVE_ARCH_STRCHR
- extern char * strchr(const char *,int);
- #endif
-diff --git a/lib/string.c b/lib/string.c
-index 37ea8c29561..7ef439f9f35 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -65,6 +65,16 @@ int strcasecmp(const char *s1, const char *s2)
- 	return strncasecmp(s1, s2, -1U);
++	return hash_command(algo, flags, gs->argc - gs->index,
++			    &gs->argv[gs->index]);
  }
  
-+char *strlower(char *s)
-+{
-+	char *p;
-+
-+	for (p = s; *p; p++)
-+		*p = tolower(*p);
-+
-+	return s;
-+}
-+
- char * ___strtok;
- 
- #ifndef __HAVE_ARCH_STRCPY
-diff --git a/test/lib/string.c b/test/lib/string.c
-index db6f28dbfdf..2e21ae5ccb8 100644
---- a/test/lib/string.c
-+++ b/test/lib/string.c
-@@ -332,3 +332,30 @@ static int lib_strim(struct unit_test_state *uts)
- 	return 0;
- }
- LIB_TEST(lib_strim, 0);
-+
-+static int lib_strlower(struct unit_test_state *uts)
-+{
-+	char buf[32];
-+	char *p;
-+
-+	/* Mixed case is fully lowered, returns @s */
-+	strcpy(buf, "SHA256");
-+	p = strlower(buf);
-+	ut_asserteq_ptr(p, buf);
-+	ut_asserteq_str("sha256", buf);
-+
-+	/* Already lower-case is unchanged */
-+	strcpy(buf, "abc");
-+	ut_asserteq_str("abc", strlower(buf));
-+
-+	/* Non-letters and digits pass through */
-+	strcpy(buf, "Hello, World! 1234");
-+	ut_asserteq_str("hello, world! 1234", strlower(buf));
-+
-+	/* Empty string */
-+	strcpy(buf, "");
-+	ut_asserteq_str("", strlower(buf));
-+
-+	return 0;
-+}
-+LIB_TEST(lib_strlower, 0);
+-U_BOOT_CMD(
++U_BOOT_CMD_GETOPT(
+ 	hash,	HARGS,	1,	do_hash,
+ 	"compute hash message digest",
+ 	"algorithm address count [[*]hash_dest]\n"
 -- 
 2.43.0
 
