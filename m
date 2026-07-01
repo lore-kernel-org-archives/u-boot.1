@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E02A3C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAF9C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:16:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0953184C33;
-	Wed,  1 Jul 2026 19:15:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7573B84C3D;
+	Wed,  1 Jul 2026 19:15:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="Eqy0KCHY";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="FYJ3AEXM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 234ED84C33; Wed,  1 Jul 2026 19:15:54 +0200 (CEST)
-Received: from mail-106111.protonmail.ch (mail-106111.protonmail.ch
- [79.135.106.111])
+ id 47E9484C39; Wed,  1 Jul 2026 19:15:56 +0200 (CEST)
+Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch
+ [79.135.106.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E10484BC8
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:15:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 614B484BC8
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:15:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1782926151; x=1783185351;
- bh=1NcOXsXXbKIJgs7TJ7X0Pmm1mHbhhR2a4/ksymOFFR0=;
+ s=protonmail; t=1782926153; x=1783185353;
+ bh=G2eayZZtVodjsRrb0fkv9d9npnwCdiQ6SV8SC439unc=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=Eqy0KCHYaoYyKQebULMQisdGcdNXiR/CsipqC8P/ceGDplMFvYde0w8CJ8V7UJSI6
- 3y72uBIFTdvHyIjgEKk7p5mO88t0Nqme06aXf/o5fYsQXZK57FEFe7QPpGTnhAGmTq
- hZuF3i4SwVONjZojMM/JBZrFqxR1Sk7mRnS6kB2HHyR1xu/ZZ75D4TG1XY6k9FxXNz
- T4AJHmuC5fybg5FM2TBMytsR20oE2LOSU86DKlYbWKu/vDGWNqg0X9niOjVi2TJsoW
- LgaVbsMh1L0SxgU0hem3msjT8qp2jpsCrJWc6y7OLcRcukNfEIa6XTmV4YeiGRgRyG
- K+K18+NcgA2Ag==
-X-Pm-Submission-Id: 4gr69K6s9kz1DDny
+ b=FYJ3AEXM/BDZBZ5MbodaNdueXmR7J/C024+rL5wp27mMTph8bu9y9sqwI9gqK2b+M
+ OBF/HJI6XE9gQqI2LW3s+42BLoBYYOwX/MDsr5qBA2qrUvp8I8c4CEjCIikK8krdCS
+ /Oh7xxU9p07T1f+83JpCa41p8LJyMtjtRxsnpUjS8USFdpiPmcMTnfg5pjzIditxbL
+ sSVuddSB7jyI5KreEjdPOiYlzm9eXM+aWkMurkyTr6Hp0v52Fe8zk+9Rt4RrBjQ1tK
+ C37ZP35oarSM9EoSQt5Aat9yO55W+cbf8UGdrasHvYw2t8qcAfpAZkhf+Ej+lUDPUY
+ gMBzWeCUSaDFA==
+X-Pm-Submission-Id: 4gr69M4Nyvz2Sd55
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH 4/8] string: remove unused strswab() function
-Date: Wed,  1 Jul 2026 19:15:31 +0200
-Message-ID: <20260701171535.906272-5-rv@rasmusvillemoes.dk>
+Subject: [PATCH 5/8] string: remove more pointless __HAVE_ARCH_STR*
+Date: Wed,  1 Jul 2026 19:15:32 +0200
+Message-ID: <20260701171535.906272-6-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
 References: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
@@ -66,76 +66,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The last use of this function with rather peculiar semantics[*] vanished
-in 2021 with 0a527fda782 ("Fix IDE commands issued, fix endian issues,
-fix non MMIO"). It has no tests, and should a need for something
-similar ever appear, it is better done with some proper
-utf16le/utf16be/utf16 abstractions rather than cluttering code with
-'#ifdef __LITTLE_ENDIAN'.
+None of these six macros are defined by any architecture. Moreover,
+the ifndef guard only exists in either string.h or string.c, making them
+completely pointless.
 
-[*] The byte-swapping itself is weird enough. But why is an input string
-of odd length ok, while the empty string is not allowed?
+I'm not sure whether we have an explicit coding style discouraging the
+"extern" qualifier on function declarations, and string.h has a random
+mix of everything, but I can't leave it on strncasecmp() now that it
+will be immediately after strcasecmp() which doesn't have it.
 
 Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- include/linux/string.h |  4 ----
- lib/string.c           | 28 ----------------------------
- 2 files changed, 32 deletions(-)
+ include/linux/string.h | 6 +-----
+ lib/string.c           | 8 --------
+ 2 files changed, 1 insertion(+), 13 deletions(-)
 
 diff --git a/include/linux/string.h b/include/linux/string.h
-index 488a459ed99..5bcbf72a89b 100644
+index 5bcbf72a89b..5e4594b19df 100644
 --- a/include/linux/string.h
 +++ b/include/linux/string.h
-@@ -107,10 +107,6 @@ extern char * strndup(const char *, size_t);
- extern const char *strdup_const(const char *s);
- extern void kfree_const(const void *x);
- 
--#ifndef __HAVE_ARCH_STRSWAB
--extern char * strswab(const char *);
+@@ -43,12 +43,8 @@ extern int strcmp(const char *,const char *);
+ #ifndef __HAVE_ARCH_STRNCMP
+ extern int strncmp(const char *,const char *,__kernel_size_t);
+ #endif
+-#ifndef __HAVE_ARCH_STRCASECMP
+ int strcasecmp(const char *s1, const char *s2);
 -#endif
--
- #ifndef __HAVE_ARCH_MEMSET
- extern void * memset(void *,int,__kernel_size_t);
+-#ifndef __HAVE_ARCH_STRNCASECMP
+-extern int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+-#endif
++int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+ #ifndef __HAVE_ARCH_STRCHR
+ extern char * strchr(const char *,int);
  #endif
 diff --git a/lib/string.c b/lib/string.c
-index 45f0f5f8d09..82d0b6a9caa 100644
+index 82d0b6a9caa..20c934c18c3 100644
 --- a/lib/string.c
 +++ b/lib/string.c
-@@ -503,34 +503,6 @@ char * strsep(char **s, const char *ct)
+@@ -399,7 +399,6 @@ void kfree_const(const void *x)
  }
- #endif
  
--#ifndef __HAVE_ARCH_STRSWAB
--/**
-- * strswab - swap adjacent even and odd bytes in %NUL-terminated string
-- * s: address of the string
-- *
-- * returns the address of the swapped string or NULL on error. If
-- * string length is odd, last byte is untouched.
-- */
--char *strswab(const char *s)
--{
--	char *p, *q;
--
--	if ((NULL == s) || ('\0' == *s)) {
--		return (NULL);
--	}
--
--	for (p=(char *)s, q=p+1; (*p != '\0') && (*q != '\0'); p+=2, q+=2) {
--		char  tmp;
--
--		tmp = *p;
--		*p  = *q;
--		*q  = tmp;
--	}
--
--	return (char *) s;
--}
+ 
+-#ifndef __HAVE_ARCH_STRSPN
+ /**
+  * strspn - Calculate the length of the initial substring of @s which only
+  *	contain letters in @accept
+@@ -424,9 +423,7 @@ size_t strspn(const char *s, const char *accept)
+ 
+ 	return count;
+ }
 -#endif
--
+ 
+-#ifndef __HAVE_ARCH_STRPBRK
+ /**
+  * strpbrk - Find the first occurrence of a set of characters
+  * @cs: The string to be searched
+@@ -444,9 +441,7 @@ char * strpbrk(const char * cs,const char * ct)
+ 	}
+ 	return NULL;
+ }
+-#endif
+ 
+-#ifndef __HAVE_ARCH_STRTOK
+ /**
+  * strtok - Split a string into tokens
+  * @s: The string to be searched
+@@ -473,9 +468,7 @@ char * strtok(char * s,const char * ct)
+ 	___strtok = send;
+ 	return (sbegin);
+ }
+-#endif
+ 
+-#ifndef __HAVE_ARCH_STRSEP
+ /**
+  * strsep - Split a string into tokens
+  * @s: The string to be searched
+@@ -501,7 +494,6 @@ char * strsep(char **s, const char *ct)
+ 
+ 	return sbegin;
+ }
+-#endif
+ 
  #ifndef __HAVE_ARCH_MEMSET
  /**
-  * memset - Fill a region of memory with the given value
 -- 
 2.54.0
 
