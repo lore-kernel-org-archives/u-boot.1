@@ -4,63 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE62C43602
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 09:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB85CC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 09:54:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4059284B53;
-	Wed,  1 Jul 2026 11:52:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D4E284B74;
+	Wed,  1 Jul 2026 11:54:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="owwU22YH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yI2ZJKzZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C0B584B65; Wed,  1 Jul 2026 11:52:11 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0A96884B7E; Wed,  1 Jul 2026 11:54:15 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33DB7847C3
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 11:52:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 84AEF4179D;
- Wed,  1 Jul 2026 09:52:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F063D1F000E9;
- Wed,  1 Jul 2026 09:52:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782899527;
- bh=E3+ClUdQYUfezDK9c+Djp4ztFgVjn3+mJRcxG4FMdW4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=owwU22YHLRdCvoTa6LNjhKaUAAOqZiMLcdXCG9P5cvwHjC7ykjOCk8DouDrIz88QT
- TmNTdRnMyiryOGtBKomBK1WmAGh+eZtT1JnE4LBJwNlIOJI5p1RU4vA739x9nY1PAo
- S/BVVUI4seBpbBD5nLmtD7Tk3Vdmz7sagydGir8dYgDqmstUhLAyjH4u34t6DsDgfK
- G/I4e8M6WmknVE98uhvrZ6HQ4ia8XSBpsxFuk0q6AB8A9D8GiJadGD2ZFdd0w3A4pg
- m1jpQZp3pH7h1D6/5+LgNMRdXtHs0rd5EeKE72i1yONi6IzWuSyZHKBNHPSd78umur
- dgLLVHj9w9s2Q==
-Date: Wed, 1 Jul 2026 10:52:02 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Jamie Gibbons <jamie.gibbons@microchip.com>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>,
- Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>,
- Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Martin Herren <sputnik@on-the-web.ch>, Michal Simek <michal.simek@amd.com>,
- Adriana Nicolae <adriana@arista.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH 3/8] misc: mpfs_syscontroller: bind RNG sub-device
-Message-ID: <20260701-bruising-gleeful-a1707dec5c1c@spud>
-References: <20260625122325.834568-1-jamie.gibbons@microchip.com>
- <20260625122325.834568-4-jamie.gibbons@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D443584B72
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 11:54:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-471eee9b7d5so99760f8f.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 02:54:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1782899652; x=1783504452; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nq+ae0pJ7MN9ahenFlWw3sWP6JtIgMgFpfGHb0Z5koA=;
+ b=yI2ZJKzZjjK9CCjF2SplklBddGAnNo+EM0BtDdR7qrmj1JFRN7YTNKdo5BCHjrN48B
+ v3XER3A2eKaLsKrSDGiTctPhKeA6sIhDnOKjD7zBp7dKpPq3fuuuZJGe93vGeZyw3VQV
+ R5do/KMiWFV6S5OlXE/W6Mv3zOgkxPGfnkiJz3czqMoir3WXeHU6Vh4EvbpS3WIwPNBY
+ dtoz8pRUFYO6IUcoSdoQaxr3tN4t0vBVwLHBQ5j+7QpetSD+p6FsLJ+ol12UaK2EBgbz
+ 8XANrir81U8KKQJ4zEYHgA9oO5TYv2dIL+CadBTe1vqa3keiAsyT2KUNWOP4Kj+8gOgE
+ n1dA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782899652; x=1783504452;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nq+ae0pJ7MN9ahenFlWw3sWP6JtIgMgFpfGHb0Z5koA=;
+ b=OKHVODzE1gYvmm06WZ8UhZwN71/gZ/tcqhN7gJff+vO8vwvAICJS1TzOSk5GTH/fNN
+ 62W7arcdTqTZ46Grgt6REaFhAqIR/AwGrMxcsTtvifx9qHR95nrwG4WNDIk7yhlRs8BL
+ K6RQfVcxRIapoKXkJOY3YcVBxr4cByO8Mh9kvDFlYbpMdAZhLuljGpZjgHkqGMl3UK+G
+ wVJcVDuuYBrefh66DRQa2v5eudv0Iwe8bAqPENyaoQT68wPdcxWWJoE1M8SEQTGN1a3+
+ c1y8JGaqQ9f92tiwjUz3ewvE6J/OO/bzvH1VXkordRY/r6PgNAoT9XzewpExcfIv9mGM
+ Rjvg==
+X-Gm-Message-State: AOJu0Yw6Go23uXOeIXkQ41YS08hFRVIVUx9y9DnFwSCr2gKMNKmosiCj
+ zXzDRWLRz+drDpiFAOoOQIKgV2YPMvpleDO60+6LiXUuI9HifKBmtg2ZuNJnyLnWBaoAQIwaWZw
+ Rhpvy
+X-Gm-Gg: AfdE7cnwYTgc+isR7ck3qtyP+82MsbdxPVoJkpPss9LYWWv5gKfMzW5AwB6lMz0snp4
+ puOkT8r0xjKDPrbj13Q0ANrZEpFaFYhZNCGfHyKol631PwdD0Vkoglu5WvIGRFUqL/MJYWLSFNa
+ xBagLi+XJiqeLyM5YJJp/+e/7lo+aMTsF9g5JdgKQBQ4Y7IV26fY8LYY0EwCH5GWwv2bQeojfHu
+ F/xQ7/ZWxnQV0Avwxu4LC0SFOTl212RHZnK63w0zCxtEJW5QY06u3Ov9lIbb6nqjHUqFDqjUNb5
+ EPBfDcQOw3LWZmXZ7RlEtAxuW1QOvnzDKXwn8ErtPLo1wyHWa5hlgN7B60orW0YKWNACsXO1rKc
+ MNka8ZLCm/RRKsJc6N86ryTgbO6lvYqvqpOXzzzM1PZQDDArnOfai740mMxYAmbGanrK7/Tv3qs
+ g0o9Zr/NADFMWEJx9LYNFCrIeZdBfWawxeCIB6h8RJ7TY0yKJj8/vbpUSouCBNR6a2+MZg
+X-Received: by 2002:a05:6000:220b:b0:473:975c:4fc7 with SMTP id
+ ffacd0b85a97d-4775928680emr1504807f8f.27.1782899652082; 
+ Wed, 01 Jul 2026 02:54:12 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:f765:66fd:83bc:9e66?
+ ([2a01:e0a:106d:1080:f765:66fd:83bc:9e66])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-475641e4542sm16599413f8f.10.2026.07.01.02.54.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jul 2026 02:54:11 -0700 (PDT)
+Message-ID: <ffd467e0-491a-458c-91c7-7d2a6403083b@linaro.org>
+Date: Wed, 1 Jul 2026 11:54:11 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3XPJQr2lbYurB7GE"
-Content-Disposition: inline
-In-Reply-To: <20260625122325.834568-4-jamie.gibbons@microchip.com>
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-pci-next-20260701
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,26 +120,52 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---3XPJQr2lbYurB7GE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Hi Tom,
 
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
+This my first PCI next PR, updating MAINTAINERS and switching to dev_read/dev_remap APIs.
 
---3XPJQr2lbYurB7GE
-Content-Type: application/pgp-signature; name=signature.asc
+Thanks,
+Neil
 
------BEGIN PGP SIGNATURE-----
+The following changes since commit 5602e89a834ccbedc686053b14206c062a144107:
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCakTjQgAKCRB4tDGHoIJi
-0uTFAQDPuZB+nQy54vaDDZUQKvwHxV9HNjApoMZjm1zu6hIeFwD9FczFeAufeLPr
-LyGeLrXy1BUCDbkAixMTRRVLu3C5Kgs=
-=LNVm
------END PGP SIGNATURE-----
+   rockchip: sdram: Fix initialization of DRAM banks (2026-06-30 13:38:12 -0600)
 
---3XPJQr2lbYurB7GE--
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-pci-next-20260701
+
+for you to fetch changes up to 57abbbcc945079404ba8e3d4a68c991e3cd92a65:
+
+   pci: layerscape: ep: Use dev APIs (2026-07-01 11:42:52 +0200)
+
+----------------------------------------------------------------
+- Add myself as PCI core maintainer
+- Use dev_read/dev_remap APIs
+
+----------------------------------------------------------------
+Neil Armstrong (1):
+       MAINTAINERS: Add myself as core PCI maintainer
+
+Peng Fan (5):
+       pci: rcar: Use dev_read_addr_index()
+       pci: mpc85xx: Simplfy code with dev_remap_addr()
+       pci: dw_mvebu: Use dev_read_addr_x APIs
+       pci: imx: Use dev_read_addr_index_ptr()
+       pci: layerscape: ep: Use dev APIs
+
+  MAINTAINERS                      | 10 ++++++++++
+  drivers/pci/pci-rcar-gen2.c      |  7 ++++---
+  drivers/pci/pci-rcar-gen3.c      |  5 +++--
+  drivers/pci/pci_mpc85xx.c        | 11 ++++++-----
+  drivers/pci/pcie_dw_mvebu.c      |  5 ++---
+  drivers/pci/pcie_imx.c           |  4 ++--
+  drivers/pci/pcie_layerscape.h    |  3 ++-
+  drivers/pci/pcie_layerscape_ep.c | 24 +++++++-----------------
+  8 files changed, 36 insertions(+), 33 deletions(-)
