@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6627EC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 19:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8A0C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 19:32:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DAE884C40;
-	Wed,  1 Jul 2026 21:32:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E4F0A84C5D;
+	Wed,  1 Jul 2026 21:32:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WPF6/IMO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M8pd0DhR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3368784BE5; Wed,  1 Jul 2026 21:32:14 +0200 (CEST)
+ id 987A184C54; Wed,  1 Jul 2026 21:32:14 +0200 (CEST)
 Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
  [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CA5F84BE5
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 21:32:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E8BB84C3A
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 21:32:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-4471b489240so336179fac.2
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:32:11 -0700 (PDT)
+ 586e51a60fabf-448b69cfc6dso585371fac.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782934330; x=1783539130; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1782934331; x=1783539131; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tSOvWc/zIG5cP6a6vNjPZ2Z5nA2lsYUX0SEs6zZTLqg=;
- b=WPF6/IMO2fAzQbcXn2FDlPC0fmSYV6zJ03wcGcwA3pIhM8KGa7xqjQOLkgT879TidH
- uwyEEtFMmp3qLJuxs5ex+b0FW4ZtCy4L9YFmeS+rlEpccymHLMY8DrYbLCgEHFX2xLb2
- YO1R9moq7PlzZFm+rpU4jCPpz2p7yeIqp8qow=
+ bh=o7T/wYkyaPr4xpIB0gv6d2SZUzhxmHRX4aaHaX2FOAA=;
+ b=M8pd0DhRKPSOOSMbxluErGR+x5M24TkF4doeft38B8MArI5iak06x8PLWMufouiicI
+ u1joj+O0Yu7Cv6HbZODnXpqofC5S0zfCEJXJgaDxqedoi6xwocOxVC6F75Dstd5eX1Uc
+ 6Ilnh6cJks+VP4ghfYStHjAi21HZQNAxPydjw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782934330; x=1783539130;
+ d=1e100.net; s=20251104; t=1782934331; x=1783539131;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=tSOvWc/zIG5cP6a6vNjPZ2Z5nA2lsYUX0SEs6zZTLqg=;
- b=SdmCEAi8oR2ciomf2E/2fUFSOdb4MgtmdNx0/2vybDxS46kJsgtadBmINk9czz0b2i
- AiZgKRMicVSqRBkYQ4sj78wMXv7JRwsXtTlCzR9paH1kkBMmcLw4ClAEK4TrbkXjyT8K
- oLe5fMsi4Q0js59MfjOqJkFN88k1h/fyIIMdi/0Jdl1achlrBFwrblizKl7mYiLoDKyV
- kmdSKlMXOvIBWTtiLKTGzT6hKgyHzL4dQjRDHLB+kJUTXq72613KVMgqhi7f5chucwif
- 6PRHgUu5zZZj4f8SleTQBQBTm6SWQg0DotklMZSTmItR1/IBkZGA07zP9ooNArqtVtUb
- e7dQ==
-X-Gm-Message-State: AOJu0Yz4kTxcMD8Cqp8BGt+RdWMHrFRoEbG04KV/QATMWCg5XkufI1tp
- 87aCVNqPP5H3AbCbZXl32oKJEr5vUZi4trNXdEld5FWX0qYBewFzvpnirAg+DaMCOOSt+FAe7V/
- iDMLewnsQAA==
-X-Gm-Gg: AfdE7cnw9o9QPD5tkOTwZwgfL0fPZ8l9IjEPzjT4UhbAxff5uizIBkFhy8NjMI/2USF
- 0GuEUc+vhhhfig+puhWIR485FQFHHYURPzQMYVtlEL8JecyFQ3N4I8r6mpeulveUaBv37QpFrWF
- Ew4s0GERj8hD06iNKH9iwNisC/9GILCvx3XNGMaEzX6YaaxVq0jRSZkH7X1qBF8alJqFMWQ0nJ/
- YwjvrvTCeIdyR+j1NfFVOdpVF2fXBtihoSdIkrlpRXeoln7Sp+dV2C/v7dljC+cDH0NmuAmUABj
- D5p6lgPcg5JkiqcXeLkx2VaS4T7LjNgZ4FfY4ccxK5/cpnDZ1zQRWtiYHayWHTwDcH5+Ohj754O
- 7MP4OiBi3a8v758lFyQj2DsoU+qLH3BQ0B2FkvhXN5prlGSwU7gwlm9V6KDByEggx9hXUGNuird
- 5cJBzt8NvUJN/tubgJ3sn+ntid0GKQ/qo0GNKLf3yI8giKlr+mERKrxdk8FiARyFwGpPlOjjgG4
- dAvj34FKunmat0bcp670VsGo9XtH9MlEbx8
-X-Received: by 2002:a05:6871:8306:b0:448:558c:d824 with SMTP id
- 586e51a60fabf-44cab9c5c52mr1824855fac.39.1782934329954; 
- Wed, 01 Jul 2026 12:32:09 -0700 (PDT)
+ bh=o7T/wYkyaPr4xpIB0gv6d2SZUzhxmHRX4aaHaX2FOAA=;
+ b=HYdjcKZbQDxzT0GQ9ATExt0KEq2ePfL1cf2B0tfqZ5+rGhxhANYgQMFIn9OZfngfZn
+ NpNFkADtgcRVq0DpxsdPPfZyCgtp4iCbRmgelJ+qOrEyAMNftFkc8mKccq1IooTJmEmF
+ 9/46kbH9sK+HXwH2XbfHfxrE1TXOXcu0/95r1xDgOvGPJPXHNvIGNZpiroowyVChXERo
+ UpBUeBhk2XBBwjrv+qy/7AgwOWmUi3Jx3nB3VXERz8XVQ8mlJy6uXiUPl/8mSSC0T5LY
+ x4o0HS7A+Ocg7w/XQT6MZGeZYmVWYczNUOBqYa1gttSjp8aoN4FMLA5UUTK90Sqg1HOw
+ +l/w==
+X-Gm-Message-State: AOJu0YxepJo+VkQY2HHs9yeSpdIjpWodPJipAHRRFFN5oqvPYpoxWOiU
+ KZyaHn1YPSPfbGNKGYdxAbuGaB8CZcme2AEztnYTWeIpKgp+9DfaN1UpqTXKiGjXuL0u1ISdPWG
+ 2jh+Eb39R2A==
+X-Gm-Gg: AfdE7cllSITtam4iE08aCop9EmVhQG6fL6hVmkEtBbWOw9ABKOE3eqW0UCDXE7dNdCk
+ c+3mJ7hnvBGSH0fgsQM7ddVnuLUEpMzsiHFQJxmPkBXoBNIUhnKhM7PuwrkIdcwGisLbVdWF8lq
+ xSG/Y8t+KKJlR3b/1L3rEMgZu1Y69sOcuU97Dxro2JE7+EhLGs6tzGNsX36t24SP0UQZqX39rCF
+ GB1NoH0rYG1DELSk+3iylo9Uq/8dZVSDQROkguJhR06+E9bwp6Y7Ad0HgpiTXiGJOUdYrJF3NxG
+ ZO7CUQX6jTMTnHRGTt079J7nFGnHitX6oi8EjPiNXD+DAf4kp+QyqBD8al0ZattFq/+nT0PcXrz
+ /igtZw/KfVifIYHtAz+9vurIs1q+owcDisB5LhILUfG06ZiQhVj6c3Pki8rUoqJOVDa2yPLk5k/
+ d/36koCEQwnfWwbdRo03a5hNVowYzhbHhhiISm2jbGCmJmVptplybJwcOw1taWim2vP23bueKFK
+ NwOrXn9p6JsrZxoOM1a4gzjOfrBOKKrwo1L6IghK9XPZbI=
+X-Received: by 2002:a05:6870:21e9:b0:43a:5cd0:db00 with SMTP id
+ 586e51a60fabf-44cb45c3c5bmr1309023fac.23.1782934331259; 
+ Wed, 01 Jul 2026 12:32:11 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cbe84f609sm712763fac.1.2026.07.01.12.32.09
+ 586e51a60fabf-44cbe84f609sm712763fac.1.2026.07.01.12.32.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 12:32:09 -0700 (PDT)
+ Wed, 01 Jul 2026 12:32:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <ffd467e0-491a-458c-91c7-7d2a6403083b@linaro.org>
-References: <ffd467e0-491a-458c-91c7-7d2a6403083b@linaro.org>
-Subject: Re: [GIT PULL] Please pull u-boot-pci-next-20260701
-Message-Id: <178293432921.2600701.5251130656918155416.b4-ty@konsulko.com>
-Date: Wed, 01 Jul 2026 13:32:09 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Yao Zi <me@ziyao.cc>
+In-Reply-To: <20260701171829.2576414-1-trini@konsulko.com>
+References: <20260701171829.2576414-1-trini@konsulko.com>
+Subject: Re: [PATCH] MAINTAINERS: Remove merge garbage
+Message-Id: <178293433059.2600701.11212188746387004575.b4-ty@konsulko.com>
+Date: Wed, 01 Jul 2026 13:32:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,21 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 1 Jul 2026 11:54:11 +0200, Neil Armstrong wrote:
+On Wed, 01 Jul 2026 11:18:29 -0600, Tom Rini wrote:
 
-> This my first PCI next PR, updating MAINTAINERS and switching to dev_read/dev_remap APIs.
+> When I merged the changes in commit 0d8e33717d7e ("Merge patch series
+> "arm: aspeed: add initial AST2700 SoC support"") I didn't fully remove
+> the before/after changes. Finish this merge now.
 > 
-> Thanks,
-> Neil
 > 
-> The following changes since commit 5602e89a834ccbedc686053b14206c062a144107:
-> 
->    rockchip: sdram: Fix initialization of DRAM banks (2026-06-30 13:38:12 -0600)
-> 
-> [...]
 
-Merged into u-boot/next, thanks!
+Applied to u-boot/next, thanks!
 
+[1/1] MAINTAINERS: Remove merge garbage
+      commit: 204eefab537f8f662abdbbce09eb6b5884ae699d
 -- 
 Tom
 
