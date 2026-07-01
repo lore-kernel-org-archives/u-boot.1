@@ -4,62 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C82BC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C67C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:46:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA00A84C00;
-	Wed,  1 Jul 2026 13:19:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id A40DC84BAA;
+	Wed,  1 Jul 2026 13:46:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="SZg+ZG0m";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EmR2x6RO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 662F184C05; Wed,  1 Jul 2026 13:19:17 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EE27984BB3; Wed,  1 Jul 2026 13:46:56 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96A3D84BC8
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:19:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782904751; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=nzlof/credy8qrdEmuU7dDAdzGFgCUog5Fliw/9GPPg0tNrzDiwSCX1Ld1bwYzYIW6axFo87rbVABTEb6SpTQzI0iBZp2+/Uz8fAeaqFKdYlS5sgTbVfetb6W8rWKA04zxl6GZ55/AmQfpvRBZ4MJB2d8yyggJSysaavt0g2fr0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782904751;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=70jOnHZvbNe9lpB5NLCu0rzRBnkRd1AcX54ZT721SXU=; 
- b=Ht17qE/I4Vr8ooNy40dJ9ex2cl0D721sEJ7Iw1j3JRju1Tr6uteOeHMaCeCvLO9XnA0Dr/beoR8BGOHKF+9iYqndYVNgcmy0DdLqzqFr3GT2OvWlkB/iYqJVWJEeNp3aHM+pCW7kJuX6j6sGM8USMFTozPvPpJUxE3Vvz7vr5KI=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782904751; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=70jOnHZvbNe9lpB5NLCu0rzRBnkRd1AcX54ZT721SXU=;
- b=SZg+ZG0mdHpLN2HP8X9gyuaOInXt29j5W+46IIUDcakfuj4OQqZMeRVD7T8BnCxZ
- KghBbku63ubeFEQze3fmvq1Xikf+KG150PdFBMQNrsdi/iLTA9kC6Yg80P6UMbXK6pn
- PGdzc+/ydjgFr2PW21XCg1CgaRlv6bSOS17vvASg=
-Received: by mx.zohomail.com with SMTPS id 1782904748636537.3483335918942;
- Wed, 1 Jul 2026 04:19:08 -0700 (PDT)
-From: Yao Zi <me@ziyao.cc>
-To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
-	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v2 16/16] efi: LoongArch: Implement everything
-Date: Wed,  1 Jul 2026 11:18:08 +0000
-Message-ID: <20260701111808.870705-17-me@ziyao.cc>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260701111808.870705-1-me@ziyao.cc>
-References: <20260701111808.870705-1-me@ziyao.cc>
+ by phobos.denx.de (Postfix) with ESMTPS id 3F1BA84B62
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:46:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7e9f69ee6f4so527559a34.2
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 04:46:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1782906413; x=1783511213; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TYBS6FVsSfUBWOT70EUCotqSTaWCbH09F9we+yBxuK0=;
+ b=EmR2x6ROhOwdYh8C95Sj2nCdkgWVgDwbpHBs4I1ndH85Ck4tbAr6DiBupIiZh+ErOj
+ ZgEHRxxbqLlG7kXWP85cp+99TpZ/rkw5AZNrtl8MMt7oAZ8Sx6JNaxkAj2WNNmCt13Bf
+ H5GqVMlza7m6ucFrb+pmWET4hSbeh69UWbQWs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782906413; x=1783511213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TYBS6FVsSfUBWOT70EUCotqSTaWCbH09F9we+yBxuK0=;
+ b=nifLOxLBnvtfMVdpnyHpfrUJPjAM3uHBfMCQxei3/NH8pJtUCdIDPWxZe5wFPCIw8V
+ DqfyTmRoYZIk6dEx1OBODI2fK1nlWANRegnDZzbzSS2y7y5+LXmo70eNQ9OP5YjVoTtf
+ 5xQjmMOwtvPYvlHA680Qa8Mmmjh5xkMeX75ykdSasuyyRkqEOmV56f5cY+6KdCsteeun
+ 1h/vSTPKPhkq0yjmzc3nFqnyLz/uQ2isi/xO0aDPmcpD2y6qK1iAU1TpQyYZfuF8CDvC
+ Cp+jNeRz97k55AfTRjWd/sN+kxUrONfabJDM1txqbDjrzF4XBJb0RkXBq6bRB04zpYip
+ /6QA==
+X-Gm-Message-State: AOJu0YymfnS42vIiXJvLm4Lw+GO1WgYSPWdRmYvSM52lO0Fd0GoReZ/H
+ GAn16ZZAs3lVxmzbPgvVbjlHj4eTcGDlJwJeDqv0dOVla9TPZ3vxsgB1y5OI/HyVYzNhtSKuMHE
+ iXys=
+X-Gm-Gg: AfdE7clwH3uxz7lYRzlRxbwxA4DMC+AZG+JHvsgu0fM7CJ301awZRRKLTpdZFIDFObF
+ BzCU/iKcojwXQ1Ca8ykaHp6lAVceUdZCOy5LSRD5nESDzgcUxNAdg2UhoHy/8Pq7/q631x5Mmp1
+ WxPywnik2kbDWrj+V+LEngf6XNdPSaTceSoVh3L8Reto/K0kpBTt9HGFGhs3gY3LPsUBE92K/0O
+ 22Vqjhp+O8CkGBoOQz75Eefx47MfMpMgQ/ugnnX61K3mX17OxM9tXRkfg39fyzei5+PLw0WJG8D
+ XCYlCEgfwM9sBKtRizyAKanWj9/FSA/K5lzzPvi3WRdR5Le/aHOeF3rFzm3bBlqCjH4xrfmniPo
+ xYfd7e1cjFJfvUCPvEdAbi+wxjCSiNz670+e53kHh6yRvl1++zjiWHWm9IR8h7nOtx2gmXHKMFX
+ oX8ADqPQI=
+X-Received: by 2002:a05:6808:1387:b0:495:effa:f06e with SMTP id
+ 5614622812f47-49636a563bcmr155604b6e.42.1782906412835; 
+ Wed, 01 Jul 2026 04:46:52 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4960655e3e2sm1199823b6e.0.2026.07.01.04.46.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jul 2026 04:46:52 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Adam Lackorzynski <adam@l4re.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
+ Heiko Stuebner <heiko@sntech.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Sam Day <me@samcday.com>,
+ Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH v4 00/14] cmd: Convert command option parsing to getopt()
+Date: Wed,  1 Jul 2026 05:42:20 -0600
+Message-ID: <20260701114248.1396125-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,526 +107,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Most U-Boot commands open-code their option parsing, scanning argv[] for
+"-x" strings by hand. That only recognises options in fixed positions
+(so e.g. 'echo foo -n' misbehaves) and duplicates the same code in
+every command.
 
-Implement crt, reloc, linker scripts, wire things up in
-Makefiles and Kconfig.
+This series introduces a getopt-based command signature: a command
+marked CMDF_GETOPT receives a single 'struct getopt_state *' and parses
+options with getopt(), while commands without the flag keep the classic
+(cmdtp, flag, argc, argv) signature, so commands move over one at a
+time.
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Signed-off-by: Yao Zi <me@ziyao.cc>
+It starts with the getopt groundwork - optional argv permutation, a
+getopt_pop() helper, dropping the printed error messages and the silent
+variant - then adds the U_BOOT_CMD_GETOPT() signature support and a
+strlower() helper, and converts the first commands: hash, env
+export/import/grep, fastboot and echo.
+
+The signature change itself is code-size-neutral; commands parse in
+POSIX mode (a '+' optstring prefix), so CONFIG_GETOPT_PERMUTE - which
+would make every getopt command carry a writable argv copy - stays off
+by default and is kept only as an opt-in.
+
+The earlier RFCs grew arm64 by about 1.1K, not ideal for a series that
+mainly benefits readability. To fix that, this series also restructures
+struct cmd_tbl so that adding getopt() support does not cost size: the
+rarely-useful ->cmd_rep function pointer is replaced by a
+CMDF_REPEATABLE flag, dropping a pointer from every command entry.
+
+Because that pointer is removed from every command on every board, the
+net result is now a size reduction. On qcom (arm64, ~120 commands) the
+whole series is about 6.9K smaller than mainline.
+
+Previous attempts:
+v3 just had a simple convert for env input/export
+   https://lore.kernel.org/u-boot/20260520201218.3752042-1-sjg@chromium.org/
+
+v2 included the full series
+   https://lore.kernel.org/u-boot/20260520000630.GJ1858239@bill-the-cat/
+
+v1 started the effort
+   https://lore.kernel.org/u-boot/CAFLszTiSxcKyD1MWP+2p2zBbDzLoC5Z=wnxVNHO31DGQHCrLcA@mail.gmail.com/
+
+Changes in v4:
+- Add a Kconfig to control permuting
+- Reword the commit message a little
+- Fix the getopt_silent() kernel-doc and the bdinfo help test
+- Add new patch to narrow maxargs to a short, freeing space in
+  struct cmd_tbl for the flags byte
+- Guard cmd_invoke() with CONFIG_IS_ENABLED(GETOPT) so boards without
+  GETOPT still link
+- Add new patch to replace the ->cmd_rep pointer with a
+  CMDF_REPEATABLE flag, dropping a pointer from every command entry
+- Make hash parse in POSIX mode so nothing selects GETOPT_PERMUTE
+- Update commit message to mention himport_r()
+- Add new patch to convert fastboot
+- Rebased on us/next
+
+Changes in v2:
+- Use "permute" terminology in docs and comments
+- Move the working argv array to the top of struct getopt_state and
+  rename it from @args to @argv (drops inter-field padding too)
+- Refine kerneldoc for @index
+- Restore the original worked example in getopt()'s kerneldoc
+- Add tests for permuted argv, a required argument missing after a
+  leading non-option, and the '+' prefix
+- Redo the sep_err logic to reduce code size
+
+Simon Glass (14):
+  lib: getopt: Add optional argv permutation with inline reorder
+  lib: getopt: Add getopt_pop() helper
+  lib: getopt: Drop printed error messages and the silent variant
+  command: Narrow cmd_tbl.maxargs to a short
+  command: Support a getopt-based command signature
+  command: Replace the cmd_rep pointer with a CMDF_REPEATABLE flag
+  hash: Drop unused cmdtp and flag args from hash_command()
+  lib: string: Add strlower()
+  cmd: hash: Use getopt() for option parsing
+  cmd: nvedit: Use getopt() in env export
+  cmd: nvedit: Use getopt() in env import
+  cmd: nvedit: Use getopt() in env grep
+  cmd: fastboot: Use getopt() for option parsing
+  cmd: echo: Use getopt() for option parsing
+
+ cmd/Kconfig            |   6 ++
+ cmd/bdinfo.c           |   4 +-
+ cmd/echo.c             |  26 ++---
+ cmd/fastboot.c         |  48 +++++-----
+ cmd/hash.c             |  42 +++++----
+ cmd/help.c             |   2 +-
+ cmd/log.c              |  12 +--
+ cmd/md5sum.c           |   2 +-
+ cmd/mem.c              |   2 +-
+ cmd/nvedit.c           | 210 ++++++++++++++++++++---------------------
+ cmd/sha1sum.c          |   2 +-
+ cmd/sm3sum.c           |   2 +-
+ cmd/sound.c            |   4 +-
+ cmd/test.c             |   2 +-
+ cmd/x86/zboot.c        |   2 +-
+ common/command.c       |  46 ++++-----
+ common/hash.c          |   4 +-
+ include/command.h      | 167 +++++++++++++++++++++++---------
+ include/getopt.h       | 116 ++++++++++++++++-------
+ include/hash.h         |   6 +-
+ include/linux/string.h |  12 +++
+ lib/Kconfig            |  17 ++++
+ lib/getopt.c           |  93 ++++++++++++++----
+ lib/string.c           |  10 ++
+ test/cmd/bdinfo.c      |   1 -
+ test/cmd/test_echo.c   |   7 ++
+ test/lib/getopt.c      |  54 ++++++++++-
+ test/lib/string.c      |  27 ++++++
+ 28 files changed, 614 insertions(+), 312 deletions(-)
+
 ---
+base-commit: 5602e89a834ccbedc686053b14206c062a144107
+branch: clid-us4
 
-Changed from v1
-- Replace obsolete macro __loongarch64 with __loongarch__ and
-  __loongarch_grlen
-- Support relocation of IMAGE_REL_BASED_LOONGARCH64_MARK_LA
-
- arch/loongarch/config.mk                 |   4 +
- arch/loongarch/lib/Makefile              |  12 ++
- arch/loongarch/lib/crt0_loongarch_efi.S  | 182 +++++++++++++++++++++++
- arch/loongarch/lib/elf_loongarch_efi.lds |  76 ++++++++++
- arch/loongarch/lib/reloc_loongarch_efi.c | 107 +++++++++++++
- lib/efi_loader/Kconfig                   |   2 +-
- lib/efi_loader/efi_helper.c              |   3 +
- lib/efi_loader/efi_image_loader.c        |  26 ++++
- 8 files changed, 411 insertions(+), 1 deletion(-)
- create mode 100644 arch/loongarch/lib/crt0_loongarch_efi.S
- create mode 100644 arch/loongarch/lib/elf_loongarch_efi.lds
- create mode 100644 arch/loongarch/lib/reloc_loongarch_efi.c
-
-diff --git a/arch/loongarch/config.mk b/arch/loongarch/config.mk
-index 7c247400e361..bae4566e9b62 100644
---- a/arch/loongarch/config.mk
-+++ b/arch/loongarch/config.mk
-@@ -21,3 +21,7 @@ endif
- PLATFORM_CPPFLAGS	+= -fpic
- PLATFORM_RELFLAGS	+= -fno-common -ffunction-sections -fdata-sections
- LDFLAGS_u-boot		+= --gc-sections -static -pie
-+
-+EFI_LDS				:= elf_loongarch_efi.lds
-+EFI_CRT0			:= crt0_loongarch_efi.o
-+EFI_RELOC			:= reloc_loongarch_efi.o
-diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
-index e65e66357a9b..17d2b1160b41 100644
---- a/arch/loongarch/lib/Makefile
-+++ b/arch/loongarch/lib/Makefile
-@@ -12,3 +12,15 @@ ifeq ($(CONFIG_$(SPL_)SYSRESET),)
- obj-y	+= reset.o
- endif
- obj-y	+= setjmp.o
-+
-+# For building EFI apps
-+CFLAGS_NON_EFI := -fstack-protector-strong
-+CFLAGS_$(EFI_CRT0) := $(CFLAGS_EFI)
-+CFLAGS_REMOVE_$(EFI_CRT0) := $(CFLAGS_NON_EFI)
-+
-+CFLAGS_$(EFI_RELOC) := $(CFLAGS_EFI)
-+CFLAGS_REMOVE_$(EFI_RELOC) := $(CFLAGS_NON_EFI)
-+
-+extra-$(CONFIG_CMD_BOOTEFI_HELLO_COMPILE) += $(EFI_CRT0) $(EFI_RELOC)
-+extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) += $(EFI_CRT0) $(EFI_RELOC)
-+extra-$(CONFIG_EFI) += $(EFI_CRT0) $(EFI_RELOC)
-diff --git a/arch/loongarch/lib/crt0_loongarch_efi.S b/arch/loongarch/lib/crt0_loongarch_efi.S
-new file mode 100644
-index 000000000000..2048d3b515c3
---- /dev/null
-+++ b/arch/loongarch/lib/crt0_loongarch_efi.S
-@@ -0,0 +1,182 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * crt0-efi-loongarch.S - PE/COFF header for LoongArch EFI applications
-+ *
-+ * Copright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <asm-generic/pe.h>
-+#include <asm/asm.h>
-+
-+#if __loongarch_grlen == 64
-+#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH64
-+#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR64_MAGIC
-+#define IMG_CHARACTERISTICS \
-+	(IMAGE_FILE_EXECUTABLE_IMAGE | \
-+	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
-+	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
-+	 IMAGE_FILE_LARGE_ADDRESS_AWARE | \
-+	 IMAGE_FILE_DEBUG_STRIPPED)
-+#else
-+#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH32
-+#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR32_MAGIC
-+#define IMG_CHARACTERISTICS \
-+	(IMAGE_FILE_EXECUTABLE_IMAGE | \
-+	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
-+	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
-+	 IMAGE_FILE_DEBUG_STRIPPED)
-+#endif
-+
-+	.section	.text.head
-+
-+	/*
-+	 * Magic "MZ" signature for PE/COFF
-+	 */
-+	.globl	ImageBase
-+ImageBase:
-+	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
-+	.skip	58
-+	.long	pe_header - ImageBase		/* Offset to the PE header */
-+pe_header:
-+	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
-+coff_header:
-+	.short	PE_MACHINE			/* LoongArch 64/32-bit */
-+	.short	3				/* nr_sections */
-+	.long	0				/* TimeDateStamp */
-+	.long	0				/* PointerToSymbolTable */
-+	.long	0				/* NumberOfSymbols */
-+	.short	section_table - optional_header	/* SizeOfOptionalHeader */
-+	.short	IMG_CHARACTERISTICS		/* Characteristics */
-+optional_header:
-+	.short	PE_MAGIC			/* PE32(+) format */
-+	.byte	0x02				/* MajorLinkerVersion */
-+	.byte	0x14				/* MinorLinkerVersion */
-+	.long	_edata - _start			/* SizeOfCode */
-+	.long	0				/* SizeOfInitializedData */
-+	.long	0				/* SizeOfUninitializedData */
-+	.long	_start - ImageBase		/* AddressOfEntryPoint */
-+	.long	_start - ImageBase		/* BaseOfCode */
-+#if __loongarch_grlen != 64
-+	.long	0				/* BaseOfData */
-+#endif
-+
-+extra_header_fields:
-+	LONG	0
-+	.long	0x200				/* SectionAlignment */
-+	.long	0x200				/* FileAlignment */
-+	.short	0				/* MajorOperatingSystemVersion */
-+	.short	0				/* MinorOperatingSystemVersion */
-+	.short	1				/* MajorImageVersion */
-+	.short	0				/* MinorImageVersion */
-+	.short	0				/* MajorSubsystemVersion */
-+	.short	0				/* MinorSubsystemVersion */
-+	.long	0				/* Win32VersionValue */
-+
-+	.long	_edata - ImageBase		/* SizeOfImage */
-+
-+	/*
-+	 * Everything before the kernel image is considered part of the header
-+	 */
-+	.long	_start - ImageBase		/* SizeOfHeaders */
-+	.long	0				/* CheckSum */
-+	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
-+#if CONFIG_VENDOR_EFI
-+	.short	0				/* DllCharacteristics */
-+#else
-+	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
-+#endif
-+	LONG	0				/* SizeOfStackReserve */
-+	LONG	0				/* SizeOfStackCommit */
-+	LONG	0				/* SizeOfHeapReserve */
-+	LONG	0				/* SizeOfHeapCommit */
-+
-+	.long	0				/* LoaderFlags */
-+	.long	0x6				/* NumberOfRvaAndSizes */
-+
-+	.quad	0				/* ExportTable */
-+	.quad	0				/* ImportTable */
-+	.quad	0				/* ResourceTable */
-+	.quad	0				/* ExceptionTable */
-+	.quad	0				/* CertificationTable */
-+	.quad	0				/* BaseRelocationTable */
-+
-+	/* Section table */
-+section_table:
-+
-+	/*
-+	 * The EFI application loader requires a relocation section
-+	 * because EFI applications must be relocatable.  This is a
-+	 * dummy section as far as we are concerned.
-+	 */
-+	.ascii	".reloc"
-+	.byte	0
-+	.byte	0			/* end of 0 padding of section name */
-+	.long	0
-+	.long	0
-+	.long	0			/* SizeOfRawData */
-+	.long	0			/* PointerToRawData */
-+	.long	0			/* PointerToRelocations */
-+	.long	0			/* PointerToLineNumbers */
-+	.short	0			/* NumberOfRelocations */
-+	.short	0			/* NumberOfLineNumbers */
-+	.long	0x42100040		/* Characteristics (section flags) */
-+
-+
-+	.ascii	".text"
-+	.byte	0
-+	.byte	0
-+	.byte	0			/* end of 0 padding of section name */
-+	.long	_etext - _start		/* VirtualSize */
-+	.long	_start - ImageBase	/* VirtualAddress */
-+	.long	_etext - _start		/* SizeOfRawData */
-+	.long	_start - ImageBase	/* PointerToRawData */
-+	.long	0			/* PointerToRelocations (0 for executables) */
-+	.long	0			/* PointerToLineNumbers (0 for executables) */
-+	.short	0			/* NumberOfRelocations  (0 for executables) */
-+	.short	0			/* NumberOfLineNumbers  (0 for executables) */
-+	/* Characteristics (section flags) */
-+	.long	(IMAGE_SCN_MEM_READ | \
-+		 IMAGE_SCN_MEM_EXECUTE | \
-+		 IMAGE_SCN_CNT_CODE)
-+
-+	.ascii	".data"
-+	.byte	0
-+	.byte	0
-+	.byte	0			/* end of 0 padding of section name */
-+	.long	_edata - _data		/* VirtualSize */
-+	.long	_data - ImageBase	/* VirtualAddress */
-+	.long	_edata - _data		/* SizeOfRawData */
-+	.long	_data - ImageBase	/* PointerToRawData */
-+	.long	0			/* PointerToRelocations */
-+	.long	0			/* PointerToLineNumbers */
-+	.short	0			/* NumberOfRelocations */
-+	.short	0			/* NumberOfLineNumbers */
-+	/* Characteristics (section flags) */
-+	.long	(IMAGE_SCN_MEM_WRITE | \
-+		 IMAGE_SCN_MEM_READ | \
-+		 IMAGE_SCN_CNT_INITIALIZED_DATA)
-+
-+	.align		12
-+	.globl	_start
-+	.type	_start, @function
-+_start:
-+	PTR_ADDI	sp, sp, -(3 * LONGSIZE)
-+	LONG_S		ra, sp, 0
-+	LONG_S		a0, sp, (1 * LONGSIZE)
-+	LONG_S		a1, sp, (2 * LONGSIZE)
-+
-+	move		a2, a0		/* a2: ImageHandle */
-+	move		a3, a1		/* a3: SystemTable */
-+	la.local	a0, ImageBase	/* a0: ImageBase */
-+	la.local	a1, _DYNAMIC	/* a1: DynamicSection */
-+	bl 	  	_relocate
-+	bnez		a0, 0f
-+
-+	LONG_L		a0, sp, (1 * LONGSIZE)
-+	LONG_L		a1, sp, (2 * LONGSIZE)
-+	bl		efi_main
-+
-+0:	LONG_L		ra, sp, 0
-+	PTR_ADDI	sp, sp, (3 * LONGSIZE)
-+	jr			ra
-+	.end	  _start
-diff --git a/arch/loongarch/lib/elf_loongarch_efi.lds b/arch/loongarch/lib/elf_loongarch_efi.lds
-new file mode 100644
-index 000000000000..050e5a52a0b3
---- /dev/null
-+++ b/arch/loongarch/lib/elf_loongarch_efi.lds
-@@ -0,0 +1,76 @@
-+/* SPDX-License-Identifier: BSD-2-Clause */
-+/*
-+ * U-Boot LoongArch
-+ *
-+ * Modified from arch/riscv/lib/elf_riscv64_efi.lds
-+ */
-+
-+OUTPUT_ARCH(loongarch)
-+
-+PHDRS
-+{
-+	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
-+}
-+
-+ENTRY(_start)
-+SECTIONS
-+{
-+	.text 0x0 : {
-+		_text = .;
-+		*(.text.head)
-+		*(.text)
-+		*(.text.*)
-+		*(.gnu.linkonce.t.*)
-+		*(.srodata)
-+		*(.rodata*)
-+		. = ALIGN(16);
-+		*(.dynamic);
-+		. = ALIGN(512);
-+	}
-+	.rela.dyn : { *(.rela.dyn) }
-+	.rela.plt : { *(.rela.plt) }
-+	.rela.got : { *(.rela.got) }
-+	.rela.data : { *(.rela.data) *(.rela.data*) }
-+	_etext = .;
-+	_text_size = . - _text;
-+	. = ALIGN(4096);
-+	.data : {
-+		_data = .;
-+		*(.sdata)
-+		*(.data)
-+		*(.data1)
-+		*(.data.*)
-+		*(.got.plt)
-+		*(.got)
-+
-+		/*
-+		 * The EFI loader doesn't seem to like a .bss section, so we
-+		 * stick it all into .data:
-+		 */
-+		. = ALIGN(16);
-+		_bss = .;
-+		*(.sbss)
-+		*(.scommon)
-+		*(.dynbss)
-+		*(.bss)
-+		*(.bss.*)
-+		*(COMMON)
-+		. = ALIGN(512);
-+		_bss_end = .;
-+		_edata = .;
-+	} :data
-+	_data_size = _edata - _data;
-+
-+	. = ALIGN(4096);
-+	.dynsym   : { *(.dynsym) }
-+	. = ALIGN(4096);
-+	.dynstr   : { *(.dynstr) }
-+	. = ALIGN(4096);
-+	.note.gnu.build-id : { *(.note.gnu.build-id) }
-+	/DISCARD/ : {
-+		*(.rel.reloc)
-+		*(.eh_frame)
-+		*(.note.GNU-stack)
-+	}
-+	.comment 0 : { *(.comment) }
-+}
-diff --git a/arch/loongarch/lib/reloc_loongarch_efi.c b/arch/loongarch/lib/reloc_loongarch_efi.c
-new file mode 100644
-index 000000000000..2985da268d80
---- /dev/null
-+++ b/arch/loongarch/lib/reloc_loongarch_efi.c
-@@ -0,0 +1,107 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* reloc_loongarch.c - position independent ELF shared object relocator
-+   Copyright (C) 2018 Alexander Graf <agraf@suse.de>
-+   Copyright (C) 2014 Linaro Ltd. <ard.biesheuvel@linaro.org>
-+   Copyright (C) 1999 Hewlett-Packard Co.
-+	Contributed by David Mosberger <davidm@hpl.hp.com>.
-+
-+    All rights reserved.
-+
-+    Redistribution and use in source and binary forms, with or without
-+    modification, are permitted provided that the following conditions
-+    are met:
-+
-+    * Redistributions of source code must retain the above copyright
-+      notice, this list of conditions and the following disclaimer.
-+    * Redistributions in binary form must reproduce the above
-+      copyright notice, this list of conditions and the following
-+      disclaimer in the documentation and/or other materials
-+      provided with the distribution.
-+    * Neither the name of Hewlett-Packard Co. nor the names of its
-+      contributors may be used to endorse or promote products derived
-+      from this software without specific prior written permission.
-+
-+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
-+    CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-+    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
-+    BE LIABLE FOR ANYDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
-+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-+    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
-+    TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-+    THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-+    SUCH DAMAGE.
-+*/
-+
-+#include <efi.h>
-+
-+#include <elf.h>
-+
-+#if __loongarch_grlen == 64
-+#define Elf_Dyn		Elf64_Dyn
-+#define Elf_Rela	Elf64_Rela
-+#define ELF_R_TYPE	ELF64_R_TYPE
-+#else
-+#define Elf_Dyn		Elf32_Dyn
-+#define Elf_Rela	Elf32_Rela
-+#define ELF_R_TYPE	ELF32_R_TYPE
-+#endif
-+
-+efi_status_t EFIAPI _relocate(long ldbase, Elf_Dyn *dyn)
-+{
-+	long relsz = 0, relent = 0;
-+	Elf_Rela *rel = 0;
-+	unsigned long *addr;
-+	int i;
-+
-+	for (i = 0; dyn[i].d_tag != DT_NULL; ++i) {
-+		switch (dyn[i].d_tag) {
-+		case DT_RELA:
-+			rel = (Elf_Rela *)
-+				((unsigned long)dyn[i].d_un.d_ptr
-+					+ ldbase);
-+			break;
-+		case DT_RELASZ:
-+			relsz = dyn[i].d_un.d_val;
-+			break;
-+		case DT_RELAENT:
-+			relent = dyn[i].d_un.d_val;
-+			break;
-+		case DT_PLTGOT:
-+			addr = (unsigned long *)
-+				((unsigned long)dyn[i].d_un.d_ptr
-+					+ ldbase);
-+			break;
-+		default:
-+			break;
-+		}
-+	}
-+
-+	if (!rel && relent == 0)
-+		return EFI_SUCCESS;
-+
-+	if (!rel || relent == 0)
-+		return EFI_LOAD_ERROR;
-+
-+	while (relsz > 0) {
-+		/* apply the relocs */
-+		switch (ELF_R_TYPE(rel->r_info)) {
-+		case R_LARCH_NONE:
-+			break;
-+		case R_LARCH_RELATIVE:
-+			addr = (unsigned long *)
-+				(ldbase + rel->r_offset);
-+			*addr += ldbase;
-+			break;
-+		default:
-+			break;
-+		}
-+		rel = (Elf_Rela *)((char *)rel + relent);
-+		relsz -= relent;
-+	}
-+	return EFI_SUCCESS;
-+}
-+
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 4cb13ae7c8a8..89988f199f7b 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -7,7 +7,7 @@ config EFI_LOADER
- 			SYS_CPU = arm1176 || \
- 			SYS_CPU = armv7   || \
- 			SYS_CPU = armv8)  || \
--		X86 || RISCV || SANDBOX)
-+		X86 || RISCV || LOONGARCH || SANDBOX)
- 	# We have not fully removed the requirement for some block device
- 	depends on BLK
- 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index bc48e265b901..641b001a9a16 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -44,6 +44,9 @@
- #elif HOST_ARCH == HOST_ARCH_RISCV64
- #define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
- #define HOST_PXE_ARCH 0x1b
-+#elif HOST_ARCH == HOST_ARCH_LOONGARCH64
-+#define HOST_BOOTEFI_NAME "BOOTLOONGARCH64.EFI"
-+#define HOST_PXE_ARCH 0x27
- #else
- #error Unsupported Host architecture
- #endif
-diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-index bed5f1817266..3c28923003dc 100644
---- a/lib/efi_loader/efi_image_loader.c
-+++ b/lib/efi_loader/efi_image_loader.c
-@@ -19,6 +19,7 @@
- #include <crypto/mscode.h>
- #include <crypto/pkcs7_parser.h>
- #include <linux/err.h>
-+#include <linux/bitfield.h>
- 
- const efi_guid_t efi_global_variable_guid = EFI_GLOBAL_VARIABLE_GUID;
- const efi_guid_t efi_guid_device_path = EFI_DEVICE_PATH_PROTOCOL_GUID;
-@@ -165,6 +166,7 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
- 			uint32_t entry_offset = *relocs & 0xfff;
- 			unsigned long offset;
- 			int type = *relocs >> EFI_PAGE_SHIFT;
-+			__maybe_unused uint64_t tmp;
- 			uint64_t *x64;
- 			uint32_t *x32;
- 			uint16_t *x16;
-@@ -230,6 +232,30 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
- 					log_err("Unsupported reloc offset\n");
- 					return EFI_LOAD_ERROR;
- 				}
-+				break;
-+#elif defined(__loongarch__) && __loongarch_grlen == 64
-+			case IMAGE_REL_BASED_LOONGARCH64_MARK_LA:
-+				if (virt_size - offset < 16) {
-+					log_debug("relocation address out of bounds\n");
-+					return EFI_LOAD_ERROR;
-+				}
-+
-+				tmp = FIELD_GET(GENMASK(24, 5), x32[0]) << 12;
-+				tmp |= FIELD_GET(GENMASK(21, 10), x32[1]);
-+				tmp |= FIELD_GET(GENMASK(24, 5), x32[2]) << 32;
-+				tmp |= FIELD_GET(GENMASK(21, 10), x32[3]) << 52;
-+				tmp += (uint64_t)delta;
-+
-+				x32[0] &= ~GENMASK(24, 5);
-+				x32[0] |= FIELD_PREP(GENMASK(24, 5), tmp >> 12);
-+				x32[1] &= ~GENMASK(21, 10);
-+				x32[1] |= FIELD_PREP(GENMASK(21, 10), tmp);
-+				x32[2] &= ~GENMASK(24, 5);
-+				x32[2] |= FIELD_PREP(GENMASK(24, 5), tmp >> 32);
-+				x32[3] &= ~GENMASK(21, 10);
-+				x32[3] |= FIELD_PREP(GENMASK(21, 10),
-+						     tmp >> 52);
-+
- 				break;
- #endif
- 			default:
 -- 
-2.54.0
+2.43.0
 
