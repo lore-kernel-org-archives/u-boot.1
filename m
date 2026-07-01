@@ -4,106 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26345C43327
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DBFC43327
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D3B84B92;
-	Wed,  1 Jul 2026 15:00:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C08B184BB2;
+	Wed,  1 Jul 2026 15:28:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fD6TxiMD";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eSHhNEmn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 557BB84BB2; Wed,  1 Jul 2026 15:00:10 +0200 (CEST)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8544B84BB9; Wed,  1 Jul 2026 15:28:56 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0277884B88
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:00:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-664cdeab266so753151d50.3
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:00:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782910806; cv=none;
- d=google.com; s=arc-20260327;
- b=aAbpjX91/Brtxvsv9NiFwEnXHwbw1dgwGagFGZuuwapJDL3cZ3r04c0APwu1+KZDTp
- pWeE9+JY91gV8sV+/hZxSxiLO3SDaUuiriaMUpMGEWpJpBQ4THhpDMrRopWU8uSmiktz
- wyhhImFDp9PoPKShIDTiihbhTVkqBkNtmj4/OL5DDucfUkRZOdRC5zGQUGHniKUGk1hf
- Vhx1fUPOmz3POZKO+xqj5jRx6cTn7TbJoBHV/wjRU4a9Nf9xgPRf0j/AQAxyptctydm2
- WLFr/1lTg+BZJiKZ0AFa1GuCO6s5Su52Ly7kdtCNjK3sDzzUbDfMNjpDdOfJjJJBMyRV
- f+2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tBugRhtSBRIA3aFbs6rSjlUL9acGGvtTQ3WDJPzWGMk=;
- fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
- b=FLDBUbvUhzNAGmCh1YOQdKT4IsmYt6GdTc9dwfg4H99tw6c5ckEniEv0hD7GUgV/QQ
- 78pvG4VZ28KuOWhEDTnzwss0gYp9BBbyqP2zoDw+nQy3oiygmnz2P2FGrUm71F8eWypG
- yqASgVn+b9Tsy1n4UEosgvkZzXd1DDyOPM5o3+47zTIuH3CKk3zihZVNV++h6XzhWdu/
- GZr2tzW8OV3+0N6TRKIuHF+w3MRIIY1kQKJscQaPpzQvyZguqjvRJAgDxulYyhnMLnXw
- pu2DqxeGLCRI9y+j1H1FaCCUI8tZfGV1/6pA1qIJse46bPwU6BeulF01F75pN9zKh6SA
- SjZA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782910806; x=1783515606; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tBugRhtSBRIA3aFbs6rSjlUL9acGGvtTQ3WDJPzWGMk=;
- b=fD6TxiMDBWDC+8riF6RzR8w0XH17MVQxBodZgJdkOpaTe1Md9pZnRQfzAA57Vearwc
- 6nAQqLqx/foJPcrTYzJ2sjmBNOiEdzPWaNWHqngKzT6k4qmrpa6PEFawnPAZptyIAZNi
- UpF5XIZzPZwCjvcUhTp2cfu6ml19ipNjc9tGm+k8fv7lUalpKs1CmbraQSuevmOMSJ/q
- 11quqgKBoEdaHCQ8GBMmL/FgDOgVGROTcyhEmbpWHEyH1D/fMzMS5T1fIY7bySqQnBpw
- EBQuD0IoprW0A3rn/2uzaUk8haN+ZWPcgn4K+3cLGwfcKQz/tSQGzJyGWFiO6JUQC9N1
- LS7w==
+ by phobos.denx.de (Postfix) with ESMTPS id 70D5884B92
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:28:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 046B83FA67
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:28:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1782912534;
+ bh=3QUc/eZgd0oA4lnu+EbUR9UXb36JKB+yvk3c+sR1qYo=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=eSHhNEmnxFoAZRs1eZVwT8miXqlEfJSmZPi1YCSmJYT7vpNmFP2urTuvUlCYLNWQA
+ jj+LUvO8Ki6vpFmQuXPRuF/uFgab75V7HvxRjOvgkfudVS2fdb4DDgOIK5lmoL317t
+ SWAj3Y1IDJ6nWCE7lVOtYc/heZEi2fXi3mOrrR/5DnbQdEgpc1Gflll7GCTvcUMHH3
+ M5NsWRoxMzi6kU0Fcsr/LSHZ+wooQiFlpyBm3udOOhhK8QoLRHzOyBvOYmHCM7fd/z
+ jP4uCJAUEcmGbFQKezn2raJBZUhrfT9bMjjMqTXdwIDD5C42X+wFMudlIUgIxYQ0yB
+ Gcl4mLCJbSDXVkBMwab/QMAj7vY87KmylhA/fwgV2ELUCklcbYJcc+QacXYmdWKPs4
+ /slGRNLFHZ+z/Y54j+0nh2ZdI0HKqYI+LefvlKG1H14Vver5ytawYOaWCya2oeufHS
+ ByNfZMGiHUgxsoLAqfIT/nWDAGsu+0Ez7mP9OlZKGydX45V1bDvj9846cqbk3IAnxn
+ ZERN8262/St8aw6bvfrF4hDe26zHvO8D/6v8sUXeXhnz5tPlvis5JDIXZdl5aKtPs3
+ T5uu6mW43py+R/xXOoSU+6lYFVjZ8TRUATywlgWLhEnKn9EZHYVneIgRtqa3gCvzpW
+ 45Xh37TS/AGt/2Sww4o2n38E=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-474170b59dfso523871f8f.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:28:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782910806; x=1783515606;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tBugRhtSBRIA3aFbs6rSjlUL9acGGvtTQ3WDJPzWGMk=;
- b=q9z05M7OjloW8lqPatHcXmJZGOkjFa7Vv1YMNftIEqfqC+/GmLiQEnb4bHDGRgf6Ef
- TPP2EQG4iZTTVTt5liA2JdmzBnRQaeAlKwDUVlyZrURN4EDcKCcYV4VYsItlxkE6i4L4
- ETOD3DsdZjIWHKu6pqlpWqm85uaQTiaSP0uQbBnYgIN3tnuHcymVsPK9WjdXepiMxjNH
- ptuE1kI7wVQIhRtU5RL7UenSJAwEPQyoytT4inCs+AYhft0Ic/XI6h1qbY5YU0p3JbCY
- gBgxqTvHaCBQlZsTX4d181CE8eYMpD+U1ny+YPzPWcRCLbCQpBXtMfwzDlz+O0PqaHr9
- dSBg==
-X-Gm-Message-State: AOJu0YxKNTt4JlDwLJf6oBBZ8AVvv3zOm1qm+GDJeScFpSErTUrkT2Sz
- mcxoOpb5bP7ihZb2ix5qVBlW+QnXVrzkXoNJ3npI8EL2bwg8Y9tRTs0Spbv2mtdBzsF74YvMRES
- 4UXHc5bDOVH98drprDLuwY1Va7UJJEqmrTHK+tBxv3w==
-X-Gm-Gg: AfdE7ckRdOgS5QhIbbzbljQLGxN/D6Fj25dUW5+xggqnAohfelK6D461g1cDOtN/Fk/
- ngNojzxXZ+zkKRSIsqMvhdbrQ3cr8DZQLbh0Yzk/b2hj+sq281ZJ0ENpgyNhA2rmaDnY6htM55r
- OFFVldOY8eM19LbPRag8WiEbdd0ECbHlp5IqbKm9W3Jqu2QvdzGmcyC97lrHtzo+idZjANLOS/O
- xKd4DZ5LzDcsno/GXomDS5aNTzjrBbgVrJ9g0dgzXc65Mug5h+STA0RFWM1A7mc7spvN4R91L6w
- iHzoG8OQtH8mDxUJb8Srn+Xs3HNhpBTdKMnEDpCduMMT9G/cdXtc/thsObFLROebV2iFGkef2Nn
- OsON3R3AeBD7ULcNGw3jDkANBTs6qsF6dYwC9PohBBLcGaH340CH73c19puloKQhkfqdULQSsP8
- +g5F31UdW+z2ABl84F59wOIdXviHABoNUdDk0YbBDaIcQcCkJHuV1w4gUOSmNHnsgLauMzjTV1L
- xJNO14usiGGWfR7QMQvRrMYvFxjPguTTW3jSBD8rSKqZl5j2/v+3RAiwu5bd67hA/6o7GaC/p3x
- F31yoY/8NMNgXCFAucqSDj7poNu5DHnqHmGjHTSrnfBLWekYobeVnrwoH2KeLIGqX12m3XbiULM
- bwV0nrA==
-X-Received: by 2002:a05:690e:c4f:b0:660:68ac:21d7 with SMTP id
- 956f58d0204a3-66521a780e3mr1713459d50.35.1782910806192; Wed, 01 Jul 2026
- 06:00:06 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1782912533; x=1783517333;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3QUc/eZgd0oA4lnu+EbUR9UXb36JKB+yvk3c+sR1qYo=;
+ b=S5DBOTwAUzIUe+11lhYDk3VOySBH43UYimPSb1TzqNM8ItZOPDl+rncsWY76/wYLeN
+ woAuwW3kGsKIM7/DF3KXMJtCed51r6hniwkuv2pTCgK6XuuCDMgC6Vx/ilE5l8Jv5E/Y
+ IcGEixvVoeTW+B8h4GeXHfoahvUotRng1yoQoPDcFABt437+7Ij3gwjRc19y2VqtEk6c
+ 6hPkv4X3oTk+P8jfNjDKlE/o9jjrzyfS7pn5/+/VyJZ64oElEp3SYhh9upPqjMIRi+z6
+ Qv0CMP2oBkKLZ9fQUcREFJuPGK6E2NvncbYZ/xWdqHdmh4GJ4uYguWuWzcF9dh2h8PCi
+ D2vg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rpj+1NIf4Gk3LjIevm8FAKg0MDynsYOj5TBi0jcFox8APheb7CZDzPgzlAUp2yO4VAlQvHX0Tw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCyOBbacYwJ3p8S1BOJHG26EO+/Bd9dx2MMY122U4BWv3ebCUo
+ /dT69GIdfXp7YTBlLM7ukCEWJATGUoVZtwaMAEq99IzKIakc3xyu2vwEdABpnlCAUJeV+PJ4RpR
+ y95wdS3hcvExsFy2xNlLCojwygauNwSPhdwdBELhcSjyea9Su3wMEV497veUEuFqtlZ5J4CmWAQ
+ 5D298=
+X-Gm-Gg: AfdE7cmQhBipuLxkbNXSfPlMrzjMBw7aB+6JbsK4MU29Zj5EJMzFmq/qd8MdzpRVj5H
+ 97o5xeyXEmfZS53bTeWmmC/3w4irf4tJpiVxjqATCwdJo0K/0JfrgYXvYM5EMT7s9odqSmZd0/b
+ 4rBeNZS9cwRU4mfk4hQlYjO6o9rZF+lBrhF4GZFrNu9oxQmdcn1RV+EO2zHYmCojpkHMMG+N3Rf
+ UNs0NOnxchg07wLEfui+0l/U8+CQtYMDkhwqtEFZRBiHQ5pRWWRwHrVH9Qg+7CIUBq1EZ3CqWiG
+ chz7iyexqILOVdbB9KkwthYYUe+oXexut27XDQ3Z9LY0YZiRFK9J60YeVK9iXN8F6fO35geU1UQ
+ ebdFlF84XelAGjQERzajHms5fjqXpm+jF68kQE1Zr+f2xBeYlbsI2Q3so3DMZDFC3Bqhq9Vp8Vx
+ /nVbqu1/nVrPgC7T8FsKGD7oMqbQBHNkZP/g==
+X-Received: by 2002:a05:6000:40c8:b0:475:f0f0:9f00 with SMTP id
+ ffacd0b85a97d-47759f0fccamr2878458f8f.55.1782912533524; 
+ Wed, 01 Jul 2026 06:28:53 -0700 (PDT)
+X-Received: by 2002:a05:6000:40c8:b0:475:f0f0:9f00 with SMTP id
+ ffacd0b85a97d-47759f0fccamr2878403f8f.55.1782912533135; 
+ Wed, 01 Jul 2026 06:28:53 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:62b:1f48:a6af:3a48:9d50:5eca?
+ ([2a02:3035:62b:1f48:a6af:3a48:9d50:5eca])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4756636ce7esm18487308f8f.23.2026.07.01.06.28.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jul 2026 06:28:52 -0700 (PDT)
+Message-ID: <9c41ab58-dc9c-4cff-9914-96e32db02351@canonical.com>
+Date: Wed, 1 Jul 2026 15:28:50 +0200
 MIME-Version: 1.0
-References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
- <20260627144421.2067410-3-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260627144421.2067410-3-harsimransingh.tungal@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 1 Jul 2026 15:59:29 +0300
-X-Gm-Features: AVVi8CfCimq8CBLB8WMDr4tia5OhY6gKNGTVyN6ZVaHL2Yliae5KJGKT-26-bw4
-Message-ID: <CAC_iWjK_qvhpQh0opx_Wzw_3BYxGWupF8w7OMQGyxCCcU-3p-A@mail.gmail.com>
-Subject: Re: [PATCH v3 02/10] arm-ffa: add FF-A bus runtime support
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 11/11] efi_loader: add ACPI table dump EFI app
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ u-boot@lists.denx.de
+References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
+ <20260628082810.175862-12-heinrich.schuchardt@canonical.com>
+ <CAFLszTjSeUs=iysEo5-ty+utMR4mJnW4BQjWPiTGB4QndnP_zQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTjSeUs=iysEo5-ty+utMR4mJnW4BQjWPiTGB4QndnP_zQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,33 +124,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harsimran,
+On 7/1/26 14:01, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On 2026-06-28T08:27:58, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>> efi_loader: add ACPI table dump EFI app
+>>
+>> Provide an EFI binary that can dump all ACPI tables to files
+>> <table_name>.dat. These can then be further analyzed by decompiling
+>> with iasl.
+>>
+>> The DSDT and FACS tables are identified via FADT.
+>>
+>> The following commands are provided:
+>>
+>> * check - parse ACPI table list\r\n", do_check
+>> * write - save one file per ACPI table\r\n", do_write
+>>
+>> The file names are constructed from:
+>>
+>> * 4 character ACPI table name
+>> * number if there are multiple ACPI tables of the same type
+>> * '.dat' extension
+>>
+>> This matches the output of the Linux acpidump -b command.
+>> [...]
+>>
+>> lib/efi_loader/Makefile   |   3 +-
+>>   lib/efi_loader/acpidump.c | 566 ++++++++++++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 568 insertions(+), 1 deletion(-)
+> 
+> Did you see my comments on v2?
+> 
+> Regards,
+> Simon
 
-On Sat, 27 Jun 2026 at 17:44, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> Add the FF-A runtime infrastructure needed after ExitBootServices() so
-> EFI runtime services can continue to use the FF-A transport layer.
-> Introduce drivers/firmware/arm-ffa/arm-ffa-runtime.c and
-> include/arm_ffa_runtime.h with runtime-resident FF-A helpers for
-> direct messaging, SMC invocation, and error translation. Add the
-> sandbox runtime SMC wrapper, the ARM_FFA_RT_MODE Kconfig option, and
-> the ExitBootServices hook that copies the required FF-A runtime data
-> into resident storage before enabling the runtime context.
->
-> Tag the runtime code and data with __efi_runtime and
-> __efi_runtime_data so they remain available after
-> ExitBootServices().
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+I thought the v3 change covered them all.
 
-Having the FFA driver in  drivers/firmware/arm-ffa/ in fine. I am not
-so sure about the parts that touch the efi_loader though. I would
-prefer having this there. Is there a reason you are defined this in
-the ffa driver?
+What did I miss?
 
-[...]
+Best regards
 
-Thanks
-/Ilias
+Heinrich
