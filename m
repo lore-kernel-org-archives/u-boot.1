@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC9CC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7636FC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92F2F84BEE;
-	Wed,  1 Jul 2026 13:19:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C8EE784BF9;
+	Wed,  1 Jul 2026 13:19:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="dBOendVm";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="J8j9fLbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3618A84B53; Wed,  1 Jul 2026 13:19:06 +0200 (CEST)
+ id EF8F584BFC; Wed,  1 Jul 2026 13:19:07 +0200 (CEST)
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2B4784BEF
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:19:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ABA784BF6
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782904739; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1782904741; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=H84JeKJ/hjyitnqsUPG5mcnxmx0w2bgmAaTle/Tp7MQ3Q8w+4qHXnSyF6GKco6+ZYhWIOSZMRgvFhFbquYyy3qCaekBycR3Icy1Wx3dQqWneVC55JMFB23GT6KNMGIBenyU21dHa5NUX/ZPykFnb5OTZ7ZnuZKRGBt8zIFMNErg=
+ b=BtuhGYaGgZ63hkqHvG28oxFR3VufFrmJDd1DmIPPUqR+UL7r+STRvAlvsi3vO3rRu+XLb8Fat2OJdBa3Wj21lYaXdczLjN1/mvN/IZfkAqaAWerrzqqOL5EDAZJ1FHP3ahrAs6bYuchYabeXB35481D5Z/Ez7OAd7JCW6S5sAXU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782904739;
+ s=zohoarc; t=1782904741;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=zdhbotaWVO14cnJ3fC0GeS4RiL1h4mW0fR66kDin5/E=; 
- b=c+JZplGYdF0/WhLyveh7br3UIrnld7LCV9nnGmwLCp//ibucmle8r1gcjmG8SMrbOZiMVaoF2Kidxke69hHK9SPjP5Ljg/IWf+xlodVLDIIL7MCbTnVei9ek1AlVdBW+CYOtrZqKT1ZpmrKAmjj9jpwWHl0voIl7DP8BFTPW33s=
+ bh=3zF1myixXW5ZsyPSQCfeq0dWUkCnBFIBIqA5lrTUtG8=; 
+ b=EsTtTyqcRotgpzkePBkpOiQtd/QATCeGXOOqY91nJpyr3kOcnhDPnC+nZX7y0NK0P58inuPMGVfzpkvQxuVbsrAeC+kViCTqXfpxAp0RHWcBVXQw7FB3kwYPoAv20GDKRPpdKgT7fMVgC/OEaT8l+edHABeYM4Eu9OqoUUraorQ=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782904739; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782904741; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=zdhbotaWVO14cnJ3fC0GeS4RiL1h4mW0fR66kDin5/E=;
- b=dBOendVm9ReIYMQiGL38r9/e80cDJAQjOOSCcXrxEoABVcnqD4iGVucOAsER57LW
- yf/4zAJ+G28pXg0IPnEVmH46nH79hmUXrZjR42wsflUd5/jGiBNrCPpJN5qWQ1Xd/Ps
- 2Iq2SPjDoNoxcMUwO1NygWJrRjbiviUaT3iFutOo=
-Received: by mx.zohomail.com with SMTPS id 1782904736842278.3895353403776;
- Wed, 1 Jul 2026 04:18:56 -0700 (PDT)
+ bh=3zF1myixXW5ZsyPSQCfeq0dWUkCnBFIBIqA5lrTUtG8=;
+ b=J8j9fLbnl9qtvmgJnBsM38LYpmkP8s09M/0HhSnhkZC/UTJKKuQq9YHliMRTNkWC
+ /AEtFNQJvG348VvfZKDpkMHApuZHHAzp28Hp/iCwTiQH+jtApHXyr1XVm5CL0jheGdr
+ /Qm2PStLVn2uaKE2FSH7wl1/xrEE8ECa6X60GYAw=
+Received: by mx.zohomail.com with SMTPS id 1782904738749494.85528595049664;
+ Wed, 1 Jul 2026 04:18:58 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v2 12/16] cpu: Add loongarch_cpu driver
-Date: Wed,  1 Jul 2026 11:18:04 +0000
-Message-ID: <20260701111808.870705-13-me@ziyao.cc>
+Subject: [PATCH v2 13/16] timer: Add loongarch_timer driver
+Date: Wed,  1 Jul 2026 11:18:05 +0000
+Message-ID: <20260701111808.870705-14-me@ziyao.cc>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260701111808.870705-1-me@ziyao.cc>
 References: <20260701111808.870705-1-me@ziyao.cc>
@@ -78,205 +78,169 @@ X-Virus-Status: Clean
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Implement a driver for LoongArch CPU solely for gathering
-some information bits from FDT and CPU level config registers.
+Implement a timer driver for LoongArch architecture driver.
+
+It's synced in hardware for every core in a system, and frequency
+information can be gathered from CPUCFG instruction.
+
+It is not described in fdt, thus I have to declare a DRVINFO
+for it.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
-Changed from v1
-- Drop unnecessary check against -ENOTSUPP clk_enable()'s return value
-  in loongarch_cpu_probe()
+(No changes from v1)
 
- drivers/cpu/Kconfig         |   6 ++
- drivers/cpu/Makefile        |   1 +
- drivers/cpu/loongarch_cpu.c | 148 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 155 insertions(+)
- create mode 100644 drivers/cpu/loongarch_cpu.c
+ drivers/timer/Kconfig           |   8 +++
+ drivers/timer/Makefile          |   1 +
+ drivers/timer/loongarch_timer.c | 112 ++++++++++++++++++++++++++++++++
+ 3 files changed, 121 insertions(+)
+ create mode 100644 drivers/timer/loongarch_timer.c
 
-diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-index c805c0bbfa19..9fd43ff88fde 100644
---- a/drivers/cpu/Kconfig
-+++ b/drivers/cpu/Kconfig
-@@ -13,6 +13,12 @@ config CPU_IMX
- 	help
- 	  Support CPU cores for SoCs of the i.MX series.
+diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+index 500a25638a96..6feb53328147 100644
+--- a/drivers/timer/Kconfig
++++ b/drivers/timer/Kconfig
+@@ -348,4 +348,12 @@ config GOLDFISH_TIMER
+ 	  It uses the Goldfish RTC hardware to provide a nanosecond-resolution
+ 	  timer, commonly found in QEMU virt machines.
  
-+config CPU_LOONGARCH
-+	bool "Enable LoongArch CPU driver"
-+	depends on CPU && LOONGARCH
++config LOONGARCH_TIMER
++	bool "LoongArch CPU timer support"
++	depends on TIMER
++	depends on LOONGARCH
 +	help
-+	  Support CPU cores for LoongArch processors.
++	  Select this to enable support for the timer found on
++	  LoongArch CPUs.
 +
- config CPU_MPC83XX
- 	bool "Enable MPC83xx CPU driver"
- 	depends on CPU && MPC83xx
-diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-index eaf494706e2c..d9c0db74dd5a 100644
---- a/drivers/cpu/Makefile
-+++ b/drivers/cpu/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
- obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
- obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
- obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
-+obj-$(CONFIG_CPU_LOONGARCH) += loongarch_cpu.o
- obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
- obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
- obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
-diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
+ endmenu
+diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
+index d8b3f2b65d4c..0b70b915bfeb 100644
+--- a/drivers/timer/Makefile
++++ b/drivers/timer/Makefile
+@@ -37,3 +37,4 @@ obj-$(CONFIG_IMX_GPT_TIMER)	+= imx-gpt-timer.o
+ obj-$(CONFIG_XILINX_TIMER)	+= xilinx-timer.o
+ obj-$(CONFIG_STARFIVE_TIMER)	+= starfive-timer.o
+ obj-$(CONFIG_GOLDFISH_TIMER)	+= goldfish_timer.o
++obj-$(CONFIG_LOONGARCH_TIMER)	+= loongarch_timer.o
+diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
 new file mode 100644
-index 000000000000..f168ae23cf67
+index 000000000000..4b9f9307511f
 --- /dev/null
-+++ b/drivers/cpu/loongarch_cpu.c
-@@ -0,0 +1,148 @@
++++ b/drivers/timer/loongarch_timer.c
+@@ -0,0 +1,112 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <clk.h>
-+#include <cpu.h>
 +#include <dm.h>
 +#include <errno.h>
-+#include <log.h>
++#include <timer.h>
 +#include <asm/loongarch.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <linux/bitops.h>
-+#include <linux/err.h>
 +
-+static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
++static u64 notrace loongarch_timer_get_count(struct udevice *dev)
 +{
-+	const char *cpu;
++	u32 hi, lo;
 +
-+	/* We try to get CPU name from IOCSR first */
-+	if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
-+		int i;
-+		char vendor_buf[9] = { 0 };
-+		char name_buf[9] = { 0 };
-+		u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
-+		u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
++	if (IS_ENABLED(CONFIG_64BIT))
++		return drdtime();
 +
-+		if (!vendor || !name)
-+			goto get_desc_dt;
++	do {
++		hi = rdtimeh();
++		lo = rdtimel();
++	} while (hi != rdtimeh());
 +
-+		for (i = 0; i < sizeof(u64); i++) {
-+			vendor_buf[i] = vendor & 0xff;
-+			name_buf[i] = name & 0xff;
-+			vendor >>= 8;
-+			name >>= 8;
-+		}
-+
-+		snprintf(buf, size, "%s-%s", vendor_buf, name_buf);
-+
-+		return 0;
-+	}
-+
-+get_desc_dt:
-+	cpu = dev_read_string(dev, "compatible");
-+	if (!cpu || size < (strlen(cpu) + 1))
-+		return -ENOSPC;
-+
-+	strcpy(buf, cpu);
-+
-+	return 0;
++	return ((u64)hi << 32) | lo;
 +}
 +
-+static int loongarch_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
++static unsigned int loongarch_timer_get_freq_cpucfg(void)
++{
++	unsigned int res;
++	unsigned int base_freq;
++	unsigned int cfm, cfd;
++
++	res = read_cpucfg(LOONGARCH_CPUCFG2);
++	if (!(res & CPUCFG2_LLFTP))
++		return 0;
++
++	base_freq = read_cpucfg(LOONGARCH_CPUCFG4);
++	res = read_cpucfg(LOONGARCH_CPUCFG5);
++	cfm = res & 0xffff;
++	cfd = (res >> 16) & 0xffff;
++
++	if (!base_freq || !cfm || !cfd)
++		return 0;
++
++	return (base_freq * cfm / cfd);
++}
++
++#if IS_ENABLED(CONFIG_TIMER_EARLY)
++/**
++ * timer_early_get_rate() - Get the timer rate before driver model
++ */
++unsigned long notrace timer_early_get_rate(void)
++{
++	return loongarch_timer_get_freq_cpucfg();
++}
++
++/**
++ * timer_early_get_count() - Get the timer count before driver model
++ *
++ */
++u64 notrace timer_early_get_count(void)
++{
++	return loongarch_timer_get_count(NULL);
++}
++#endif
++
++#if CONFIG_IS_ENABLED(BOOTSTAGE)
++ulong timer_get_boot_us(void)
 +{
 +	int ret;
-+	struct clk clk;
++	u64 ticks = 0;
++	u32 rate;
 +
-+	/* First try getting the frequency from the assigned clock */
-+	ret = clk_get_by_index((struct udevice *)dev, 0, &clk);
++	ret = dm_timer_init();
 +	if (!ret) {
-+		ret = clk_get_rate(&clk);
-+		if (!IS_ERR_VALUE(ret))
-+			info->cpu_freq = ret;
++		rate = timer_get_rate(gd->timer);
++		timer_get_count(gd->timer, &ticks);
++	} else {
++		rate = loongarch_timer_get_freq_cpucfg();
++		ticks = loongarch_timer_get_count(NULL);
 +	}
 +
-+	if (!info->cpu_freq)
-+		dev_read_u32(dev, "clock-frequency", (u32 *)&info->cpu_freq);
++	/* Below is converted from time(us) = (tick / rate) * 10000000 */
++	return lldiv(ticks * 1000, (rate / 1000));
++}
++#endif
 +
-+	if (read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_PAGING)
-+		info->features |= BIT(CPU_FEAT_MMU);
++static int loongarch_timer_bind(struct udevice *dev)
++{
++	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	u32 rate;
 +
-+	if (read_cpucfg(LOONGARCH_CPUCFG16) & CPUCFG16_L1_IUPRE)
-+		info->features |= BIT(CPU_FEAT_L1_CACHE);
++	rate = loongarch_timer_get_freq_cpucfg();
++	uc_priv->clock_rate = rate;
 +
 +	return 0;
 +}
 +
-+static int loongarch_cpu_get_count(const struct udevice *dev)
-+{
-+	ofnode node;
-+	int num = 0;
-+
-+	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
-+		const char *device_type;
-+
-+		/* skip if core is marked as not available in the device tree */
-+		if (!ofnode_is_enabled(node))
-+			continue;
-+
-+		device_type = ofnode_read_string(node, "device_type");
-+		if (!device_type)
-+			continue;
-+		if (strcmp(device_type, "cpu") == 0)
-+			num++;
-+	}
-+
-+	return num;
-+}
-+
-+static int loongarch_cpu_bind(struct udevice *dev)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	plat->cpu_id = dev_read_addr(dev);
-+
-+	return 0;
-+}
-+
-+static int loongarch_cpu_probe(struct udevice *dev)
-+{
-+	int ret = 0;
-+	struct clk clk;
-+
-+	/* Get a clock if it exists */
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return 0;
-+
-+	ret = clk_enable(&clk);
-+	if (ret == -ENOSYS)
-+		return 0;
-+	else
-+		return ret;
-+}
-+
-+static const struct cpu_ops loongarch_cpu_ops = {
-+	.get_desc	= loongarch_cpu_get_desc,
-+	.get_info	= loongarch_cpu_get_info,
-+	.get_count	= loongarch_cpu_get_count,
++static const struct timer_ops loongarch_timer_ops = {
++	.get_count = loongarch_timer_get_count,
 +};
 +
-+static const struct udevice_id loongarch_cpu_ids[] = {
-+	{ .compatible = "loongarch,Loongson-3A5000" }, /* From QEMU, undocumented */
-+	{ .compatible = "loongson,la264" },
-+	{ .compatible = "loongson,la364" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(loongarch_cpu) = {
-+	.name = "loongarch_cpu",
-+	.id = UCLASS_CPU,
-+	.of_match = loongarch_cpu_ids,
-+	.bind = loongarch_cpu_bind,
-+	.probe = loongarch_cpu_probe,
-+	.ops = &loongarch_cpu_ops,
++U_BOOT_DRIVER(loongarch_timer) = {
++	.name = "loongarch_timer",
++	.id = UCLASS_TIMER,
++	.probe = loongarch_timer_bind,
++	.ops = &loongarch_timer_ops,
 +	.flags = DM_FLAG_PRE_RELOC,
++};
++
++U_BOOT_DRVINFO(loongarch_timer) = {
++	.name = "loongarch_timer",
 +};
 -- 
 2.54.0
