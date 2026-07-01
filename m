@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA1EC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F21C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A358084B53;
-	Wed,  1 Jul 2026 19:58:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 27EEA84AE9;
+	Wed,  1 Jul 2026 19:59:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JeXGejpu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xe/o0RNZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9726784C63; Wed,  1 Jul 2026 19:58:29 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 1C8E783FEE; Wed,  1 Jul 2026 19:59:33 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C96F84AE9
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:58:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 813A684AE9
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:59:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-37fa53bc22dso628013a91.3
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:58:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-43fc82b52afso524314fac.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:59:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782928706; x=1783533506; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jFo7+RIPY2zE/P4AfbpVI25IKo0ipfRaBmOQTZw5LAU=;
- b=JeXGejpukQaSP0d3cFcmZPR2gqpAOHnxm0xHjbCAXNXEKZ2NUh6cByc6OLVxTGD1uj
- LRopsEIZMh9UnccHvHSBozaIQ/vNEdj+iyn0G9P0hA1s+4MfCqtjZhfeRlFN7wG9SELr
- 3/ee5T/yyDZ/w3rt/usJHKV3EA1TKziNgBcG/TaJEiGeYnuhqlgJ+KG/GTP/90lnhOza
- NUieYCr6kh3/4PyOUouE4cj/cTMnx8wH3vxG3hPs7uAFuCQV2AQ+7gwHhLNM8p9MSgOD
- BCi21pmDXVHtgmLtvpLV4XhCB03OJWCGp/GDAKVSbVehbSoB8GVgI1yWYazCd6ZyaJEv
- 6iig==
+ d=konsulko.com; s=google; t=1782928769; x=1783533569; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=AGTg7arGLJncU3x9uWKw6CNP+kCSDyUmpQewaRkz9g0=;
+ b=Xe/o0RNZyKaGlWTLQ3aQI4Y59MPSXygaPqieaXaOEmnE7hxnPz4qjttOxA54Kb424D
+ x1i1jTbijf4VN9mNfzRxxCaNpKaCVXdMeX1dME1arlGVPCj/ciqiwXjN0LUx0/vb948T
+ KQfIC6+GTPAskR1gTerS3E1gb6FB7MhcGRLHc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782928706; x=1783533506;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=jFo7+RIPY2zE/P4AfbpVI25IKo0ipfRaBmOQTZw5LAU=;
- b=O8oNCRjdqfMkOih9DpEX568wu7IT4zBZcANMMZItmfvbREFgzB2Z/klq9mUgQWQ2Kg
- ISVWQf7+9pUi03JcL1ExewfappH3XxdM9rFO2eWPNOVGieNN9NkhAumMY81PhZIg9dKJ
- dTyMsLccQ2CcOhk//ipuNlovitYbBA5DiDVv2VoYPfoco/p3AjKJESQXlH0dVWEKHxbM
- 9eXKyfAe7fNaH4m7cGGuMtTzKt6RxW/OYofHdEY+eR9QHDf2MuNfXR9jSLPflQ4CdjFM
- 9+U5U2U6omEsoKV0/lGH2Af+h3rrToJemnYvRHsq2jCVg8V3k152U6i2kYQVX14885MZ
- KaJA==
+ d=1e100.net; s=20251104; t=1782928769; x=1783533569;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AGTg7arGLJncU3x9uWKw6CNP+kCSDyUmpQewaRkz9g0=;
+ b=HLd6IRXTuc3xRVFElpP1rD6iKx6jT73ZnCHEOzqqFDCNKYVnJBo07hNgdJTSeWbcLX
+ GMxSBvsw93/LEDvgZbR+fsnotky/nwoWCYIS0MSDuQ7meRVC1SZJD5e0z+v/eZvAE65a
+ jf0UM8aIDdD9gmB5l3nmz6UNPs+VGl/4Hg3W64Is8jGwFUSAi75KLOIM4smF7Hs2adXz
+ ZCMJ1gSyr92GQ5ldmQjjYt9tYeWKk+urRkfNfD0V76Cze0Om6vkfacZq9EU3j5NfA9jW
+ xTY0wiSFCZRr5AMyJyQzYSQESslb3d1bGXg0Ax8Vft3sxmLN7gDzsgA9L8jiXNbd/if7
+ 153g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+XXEBi33sq98IcqAJDXKAmGYkLHKbdYSmRVAE8kYExquZh5m0Oekd6y/V+qAQSOAZfbn6/8G4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2sQhYp6HzzqYSkmM+5Z3q33OqCOFxpNS33P4WMPQDB25YCnLI
- 8S5W2kRT+XCVu2rjqui22gWHTX2AAIdUAKApNYr7/LZnx68J1kAt8olqkExaDw==
-X-Gm-Gg: AfdE7cmE/u3dNbbdJ0vEhBoR0J0z9yYEVlY6Q975jMK4OnMHh9ClVt4Bg0/LoHGNgc0
- XxQy/EC3ixuGmaQoBD3aqa/iMMkiAf/JaGVjnvqipucvlBjabEnfYGrccVO0GH36pxiGbppop4Z
- vhTuzpw0wffmIsVuG4z/TZMDnLMVtNCEe1rnSjtdh5NHphpQSNDEqJv7Ge0Ej25jAPVIxtky0mC
- 4fN4/EyLEEefKlnl4ECObUPdCXn5ZlXhDJyUXxfKCK6opp5i3uEJrY2uXYdaLeHmuzDeQd3GpOs
- aVPPcQQNpZjRCClBSCzNf/T9Mlh0Et9tVgl/FUmqRODQnfbqBQyiAo+dYag/IAbq+pIzu3xneX0
- QzacNiT+4GvV2jqp3nqI6Z5ND7R204Lh4gjuTFbJjbzq+si6K2fm4JRi1nTAbumDEK0xcAYuQ+F
- Zi8QN++iBFLWJtcIaSYzgwvYoMQCHIs78mCVYd9QYx2SIHzyDSTQGbjC+cdeF+in79Ozh/Bw==
-X-Received: by 2002:a05:6a21:e0a6:b0:3bf:7110:9949 with SMTP id
- adf61e73a8af0-3bfed1c58e3mr2970823637.6.1782928705877; 
- Wed, 01 Jul 2026 10:58:25 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a800:5116:3bae:12e8:a7c9:dab9])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f0bc27e0dsm63078eec.27.2026.07.01.10.58.23
+ AHgh+Rq8epdt7lrasUwqo74IMyZmGuoCvlnFXSgjWpJgD/lEPk2VhEceDAR8zM5nJnex8+P5NBswcQk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXVqeboSrOoZbx7iqJgnrEfCzs3VwuJwuj/L5gMt3vZ/Nu9Mke
+ Mw9e49hW7GyI2/gqhP95ljUcjTZCnkDZ45z52yKWhrabIhoFYISbjG+uEbRBCdUKEF9GAOLSakk
+ xQETrVJI6TQ==
+X-Gm-Gg: AfdE7cm6WCwZM3UE2Nr3FOP/cV4LYjye62BEjUImX8z2ZiWyUMYFSV7AhB+0xBfodJO
+ 7W4pbtbNPo6qNzAoXq0wNq9XP5RBes+EbgwYmlmtJRn5tFgtSF5U/7t5jnNBvKbBU7hziAGd7Op
+ mxeOz8d2stj61waKW+bevQxd/mt+PxEwk6pIvaC13Ov9Ed6qaA/Evfctfa07skMnziYwhZH+Ck+
+ taNCVEEAztDZYld6JQ4c6F2Y87U59Rf53EospWYh+9mVCxPZ8vg/HBhODzSFA3iqKrjRi9FMX7x
+ Dv705td33tgVlcJ9zWWRztXNzqYYJ36wBo1AaimiJvixtFzLqMa4dWtB6JsGl6DF5PFe5jwG7v2
+ xdYYC2s9fCgc88wFt+siYPx5Sb50F1Rql1qM7N19+GiCsedmzlypmd1a+qSdMbpcgIZWeARJVAq
+ jiH5QQv+2ewCWWHaHfQeMr4R6WWIK7rt81C0ASdbsjKRIyhdo9KiPmacOiIxRhIN/jHzLU0/yzz
+ r8C+wILAsTw0Vjj0NSxNZHnIsCvUw6dz1ak6NaFXPmxMWDb
+X-Received: by 2002:a05:6870:ac2a:b0:448:558c:d834 with SMTP id
+ 586e51a60fabf-44cabc26dcdmr1543476fac.35.1782928769233; 
+ Wed, 01 Jul 2026 10:59:29 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-44cbed29e7asm401407fac.13.2026.07.01.10.59.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 10:58:24 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: kever.yang@rock-chips.com
-Cc: djw@t-chip.com.cn, u-boot@lists.denx.de,
- Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH v2 5/5] roc-pc-plus-rk3399: Enable USB Mass Storage support
-Date: Wed,  1 Jul 2026 14:58:00 -0300
-Message-ID: <20260701175800.40141-5-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260701175800.40141-1-festevam@gmail.com>
-References: <20260701175800.40141-1-festevam@gmail.com>
+ Wed, 01 Jul 2026 10:59:28 -0700 (PDT)
+Date: Wed, 1 Jul 2026 11:59:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yao Zi <me@ziyao.cc>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 00/16] LoongArch initial support
+Message-ID: <20260701175926.GS749385@bill-the-cat>
+References: <20260701111808.870705-1-me@ziyao.cc>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bV1TlDrcmV9Z0h43"
+Content-Disposition: inline
+In-Reply-To: <20260701111808.870705-1-me@ziyao.cc>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,54 +101,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@nabladev.com>
 
-Configure the USB0 DWC3 controller for peripheral mode and enable the
-required USB gadget options to support the U-Boot 'ums' command on the
-ROC-RK3399-PC Plus.
+--bV1TlDrcmV9Z0h43
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The 'ums' command provides a convenient way to expose the on-board eMMC
-as a USB Mass Storage device to a host computer, simplifying development,
-image installation and recovery without requiring removable media or
-network access.
+On Wed, Jul 01, 2026 at 11:17:52AM +0000, Yao Zi wrote:
 
-Limit the controller to High-Speed operation by using the USB2 OTG PHY.
+> Hi all,
+>=20
+> After talking to Jiaxun privately, I decided to take over the series.
+>=20
+> So far this series has implemented general support for initializing CPU,
+> exceptions, kernel booting, CPU and timer drivers, QEMU LoongArch virt
+> machine support and UEFI standard compliant EFI booting support.
+>=20
+> LoongArch had defined 3 ISA variants, LA64, LA32 and LA32R (Reduced,
+> intended for MCUs and education purpose). This is a little-endian only
+> architecture. Only LA64 is implemented in this series since the hardware
+> is more widely available, and I'll work on 32bit support later.
+>=20
+> This series had passed checkpatch with exceptions on some false alarms
+> and headers imported elsewhere. I've tested virtio devices, direct
+> kernel booting, efistub kernel booting and grub. For loongarch64 CI, I
+> would continue to work on Jiaxun's another series[1] soon.
+>=20
+> Toolchain can be found at [2] or using upstream one, to build
+>=20
+> 	make qemu-loongarch64_defconfig
+> 	make
+>=20
+> To run in QEMU:
+>=20
+> 	qemu-system-loongarch64 -nographic -machine virt -bios u-boot.bin
 
-Signed-off-by: Fabio Estevam <festevam@nabladev.com>
----
-Changes since v1:
-- None.
+So on this note, we need to also have changes for:
+- buildman to fetch the toolchain, which is easy since it's part of the
+  normal kernel.org ones.
+- tools/docker/Dockerfile to fetch the toolchain, for CI
+- Changes to .gitlab-ci.yml and .azure-pipelines.yml to build loongarch
+- Changes to those files to also fire off QEMU for loonarch
+- Changes to https://source.denx.de/u-boot/u-boot-test-hooks to support
+  the previous requirement.
 
- arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 7 +++++++
- configs/roc-pc-plus-rk3399_defconfig        | 3 +++
- 2 files changed, 10 insertions(+)
+>=20
+> TODOs on the architecture & board:
+> - loongson,ls7a-rtc driver
+>  - The only device on QEMU board haven't been supported yet
+> - LoongArch sandbox host support
+> - TLB enablement
+>  - This is required for real CPU to utilize caches
+> - Possibly EFI-APP support for real machine
+>=20
+> I have one question regarding the process: I've decided to
+> coordinate with Jiaxun to maintain the loongarch port, and AFAIK we
+> would need a custodian tree on U-Boot's GitLab instance in order to run
+> CI. If this true, what's the process of creating a tree?
 
-diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-index 7d5af3e234da..f613d75646c3 100644
---- a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-@@ -7,3 +7,10 @@
- &dc_12v {
- 	/delete-property/ vin-supply;
- };
-+
-+&usbdrd_dwc3_0 {
-+	dr_mode = "peripheral";
-+	maximum-speed = "high-speed";
-+	phys = <&u2phy0_otg>;
-+	phy-names = "usb2-phy";
-+};
-diff --git a/configs/roc-pc-plus-rk3399_defconfig b/configs/roc-pc-plus-rk3399_defconfig
-index 4ec2f7d44b5f..f3d78c53e672 100644
---- a/configs/roc-pc-plus-rk3399_defconfig
-+++ b/configs/roc-pc-plus-rk3399_defconfig
-@@ -2,3 +2,6 @@
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-plus"
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-plus.dtb"
- CONFIG_SPI_FLASH_XMC=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_USB_GADGET_DOWNLOAD=y
--- 
-2.43.0
+I can work with you both off-list to get one created.
 
+--=20
+Tom
+
+--bV1TlDrcmV9Z0h43
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakVVfgAKCRAr4qD1Cr/k
+Cl60AQCyazNY4Y6HFH+eDf6VXpB/6Di+ZQNZvgrLXNl2KcCe8gD9G3eZpi+l2Dv1
+/IHDXHiqsEjDqeghRacMoP/OKQH+uQM=
+=nnft
+-----END PGP SIGNATURE-----
+
+--bV1TlDrcmV9Z0h43--
