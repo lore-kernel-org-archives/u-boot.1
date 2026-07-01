@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D212FC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 14:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ACEC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 14:20:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3705584BE0;
-	Wed,  1 Jul 2026 16:16:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5F0A84BE0;
+	Wed,  1 Jul 2026 16:20:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uIlH55YK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ihnzx6Uu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B028384BEC; Wed,  1 Jul 2026 16:16:54 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id BC20A84BEE; Wed,  1 Jul 2026 16:20:51 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB2984B92
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 16:16:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9718E84B92
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 16:20:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7eb4d532e65so171716a34.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 07:16:51 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-4472500e25fso291505fac.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 07:20:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782915410; x=1783520210; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1782915648; x=1783520448; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vg56B6xKZ5BILz4NFSYWzcrpSouIdVFLor1SBPhZzIs=;
- b=uIlH55YK2b083wT/fv4i1nU64gCc5e2eqNZfsCAVwn7GH/XQ8w0P+R1/FUVU+OK13b
- bac0arOArxQUAhBKHAXkamjs7tmandwrKU9gJUMRixnYFdD4eJCT3HR1bKfaM5KNqEIs
- w8rs5WIYxRWLV/Pdlq4y19OEXSqP4962am+CM=
+ bh=/jWRHOGfk5AXWolR4cqj9xziyxI43jcvfvdWiGFLn90=;
+ b=Ihnzx6Uu50jNLczRgN8q69/LkKf8DoGnC2xqt2zpLaICahSDyf0QKjsSDZwW9bT9de
+ VakTtie0EA7gX8bBtGdHdTZiBdtEPtM+93sZ3kqWXHGtkj6m5Z/1WioccXYRh8PuC4Zo
+ teekDH4lDHj0gqJ5nKytMYWlTlUNbAP/nn87g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782915410; x=1783520210;
+ d=1e100.net; s=20251104; t=1782915648; x=1783520448;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vg56B6xKZ5BILz4NFSYWzcrpSouIdVFLor1SBPhZzIs=;
- b=ru5TUPBPJeF2NtXTjNbB/mIyHkZgUNTwWqvPSpZLYw9lg7w3mjBNz4qniMu0F7V64T
- 3q4ckW2CAp68hx1Z5w0Csk5smp0MpJNSivq+SRzIGvqhu+fpv+3o579tjeUYQOiLWxBg
- xLCnbYQ0bVOwERamMeILXdQW6Iaw67Z+JPorl7MtZ/JdcnYlpc3JteaDJ/MS9zxP+Hmu
- Mctm7TSsnqf/dST8emn6Ie4YskHSidAlYyIC34KvLB2oiRWS5RCvQFsjon+EdqHo8XuC
- 6Ca71fG2Z5llgCdxwinbd9u0OV2qWY9dupVL3/E13rallMHUbh5uHMBe2oWN4Cnj5MxS
- FKJQ==
-X-Gm-Message-State: AOJu0YxgwC2SFA00hR8Ut2pBHn+fX1Tjm9odP/QT1l4PRej5I53VlsME
- iKEdDmcElJ5kgpmYqQA1WpvWisDYvTgE00VOx3z6jf453pQvO2ZiLLFruN5vsiK6TKl5ii28Ewj
- HhDy65es=
-X-Gm-Gg: AfdE7cmyZ4HJBL39myMr7ezg9ymbrUyvNl8XRmoe1XxURkIFPXzGeDzWg9HE2CZ/iWi
- VeWpbwlWoD51PExZpUpVgQCASaQ2GdbfbjA3w1Z0Lao2tOiQSdvOSBDIExbrViOfn8pFApTEOZt
- mBEMX4GQdUUc9s8NKGa4wPD5R0hK59YX0BhcVbjIXUSs/ezFBArUHSJAZIFg62hsY8s+8D6ukUs
- G+HYKPJSM/A3LQGpGGM/p2mqoW5aJ1PzKI6zjptwizqL3RSxeYdi0u+ReDQkyEHSjm5/wbGefpM
- VLfNmCACSKsfsIqhUtKsjsKUan5v07HBOO+oL/3HnExktJmww/cn3JGfkUMCtJMvBOIAyqtFVkh
- 11uTGBWTZdIK1JOWePyrN3Q0dUq/u3rncWj1T/gOXjJFtPLarZGeX4PlcJ/aAvO89ki2hu2jMnt
- YgkKcfZ3cmeMkshP/nfGoL5755skfZfRr7rR/NhgrYUu/1mMq0Vgpv4VfeM1aEByWrC2YikmOuj
- LvDAYc4++b+m1b1w0VCQF4CUzKHHHf4tdGITA==
-X-Received: by 2002:a05:6808:398c:b0:496:7a:213f with SMTP id
- 5614622812f47-4960efd4219mr1201748b6e.31.1782915408924; 
- Wed, 01 Jul 2026 07:16:48 -0700 (PDT)
+ bh=/jWRHOGfk5AXWolR4cqj9xziyxI43jcvfvdWiGFLn90=;
+ b=iQNm5aKOaN/7DoBD1ORO+eTEasH6r1lMnLs0LePX6jg83G0hCEy/COVI/mExyNHjZM
+ n/U74rzj6ajz1mM2cHLJ62K+YGmLCtD0ZmPoO68sCYn4bYckMFwju80UidfKVs2XUvzO
+ HdwHiAmlOzhNDSrqA+UtFp3FzHcDpxXh/Y7Hrx94ClPAeA84gght/S8+Ahiybp8g9+C2
+ X3PL+BESV08eeZpBeWl5JoKVC+fY0UGJ+vW2jj9iHZKNxIYQ/toxPJmQhX6niolPeZkG
+ hXgDozU+UuXHIGxnPBrdO92uW55uo2LkHavW9Uk8NyxD4IszQGjalPigKOPAq8PEXpAe
+ NEww==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoXyAA8YuHU7ffLhKva9RahnLcFXejFppTXz+SDbNxihAXggkZNmBXe9CzJYW2Njw1fhMrmeus=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJFlmCNkNurueIAVWEMeHuAI3MvizdW8Qepx7KGHIjPtF6a5Du
+ B/oB7w9mDs/D+AhVrEmoQaXcI6LY+Iw53BWy7jDE1Xq2M2jpome2IPPOsaJnDiaj0QIXQTyvnic
+ mFup3J1E=
+X-Gm-Gg: AfdE7cltFmAERda+9NvID0gakK8qh80EK4xlnVRU1jhNuiXqoqj7RdlAS+nDMZIQYB5
+ dO8mbiAROArP8e6MsgndlGn8WlJFYChcL2cxw3+5lalWJD9U9kTgrnisuih+sAPugZipV+bKL9f
+ lXt46N1KYI7XD0yYdieZOujTgNqM9urRXRVSYvdHo0Qak4RHNT8gnLts47d2YkXmZLfHskdr1xD
+ nHcw2yfWyFjtXTIxQBLP+FgOqIbxItBa1VSTEyIMzWrXJZZPfp82QIglT/8U8WRRxcgb8yY0mXR
+ dYSvt0gIFf1ict0Fm5PLiPoE16Ze9VFHnfamhvtKLUYJG7t+N04F+bVdW2Yo36UFWD+si4UHeoJ
+ rqJ+mXycmxZ1X9vmTGp2HSpp8mAKab5fQOtJtsBH7dWq3kFQI5MATChlNfyPsvAalxzcMfO9c3T
+ QxUWPWJimMoj05MysZ15RbbpbaYcjgVSwM5wZ/VP++V1Ol2fZtyOHcgalfe0tJX4cyDxRibeMVg
+ jm6m3xEpjY5hr39eNvnUJ3mtRX1CTILuxPCLQ==
+X-Received: by 2002:a05:6871:c8d3:b0:448:558c:d83d with SMTP id
+ 586e51a60fabf-44cabbf0e46mr905184fac.34.1782915648156; 
+ Wed, 01 Jul 2026 07:20:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-496068f17a1sm1533616b6e.8.2026.07.01.07.16.47
+ 586e51a60fabf-44c685ae7a3sm1653593fac.16.2026.07.01.07.20.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 07:16:48 -0700 (PDT)
-Date: Wed, 1 Jul 2026 08:16:46 -0600
+ Wed, 01 Jul 2026 07:20:47 -0700 (PDT)
+Date: Wed, 1 Jul 2026 08:20:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: u-boot@lists.denx.de
-Subject: Re: Unresolved conflicts after 0d8e33717d7e in MAINTAINERS
-Message-ID: <20260701141646.GH749385@bill-the-cat>
-References: <akT0Mqg2JpDoKVOB@pie>
- <akT1-Mwmc2022vTl@pie>
+To: Simon Glass <sjg@chromium.org>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] test: cmd: part: fix integer handling in
+ setup_gpt_partitions()
+Message-ID: <20260701142045.GI749385@bill-the-cat>
+References: <20260626183353.1666667-1-dario.binacchi@amarulasolutions.com>
+ <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
+ <20260626215804.GB382693@bill-the-cat>
+ <CABGWkvrCJn_ABadB0AmTQ6dp=ufDi1GdSYgSP1fkwCQQM=OL9A@mail.gmail.com>
+ <20260627173152.GC382693@bill-the-cat>
+ <CAFLszTj4gU-sOE5OFvqoaJ1juYVg92XBRSCwid+OiXjmOC2pAQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ySwRDCCgPeov2LRK"
+ protocol="application/pgp-signature"; boundary="wvhz3iWxdD2GMSLB"
 Content-Disposition: inline
-In-Reply-To: <akT1-Mwmc2022vTl@pie>
+In-Reply-To: <CAFLszTj4gU-sOE5OFvqoaJ1juYVg92XBRSCwid+OiXjmOC2pAQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,56 +107,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ySwRDCCgPeov2LRK
-Content-Type: text/plain; charset=us-ascii
+--wvhz3iWxdD2GMSLB
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 01, 2026 at 11:11:52AM +0000, Yao Zi wrote:
-> On Wed, Jul 01, 2026 at 11:04:18AM +0000, Yao Zi wrote:
-> > Hi list,
-> >=20
-> > I noticed merge commit 0d8e33717d7e ("Merge patch series "arm: aspeed:
-> > add initial AST2700 SoC support""), which has already landed in next,
-> > seems to leave a part of conflicted changes unresolved.
-> >=20
-> > ARM AXIADO AX3005 SCM3005
-> > M:      Siu Ming Tong <smtong@axiado.com>
-> > M:      Karthikeyan Mitran <kmitran@axiado.com>
-> > M:      Prasad Bolisetty <pbolisetty@axiado.com>
-> > S:      Maintained
-> > F:      arch/arm/dts/ax3005*
-> > F:      arch/arm/mach-axiado/
-> > F:      board/axiado/scm3005/
-> > F:      configs/ax3005_scm3005_defconfig
-> > F:      include/configs/ax3005-scm3005.h
-> > =3D=3D=3D=3D=3D=3D=3D
-> > F:      drivers/pinctrl/aspeed/
-> > F:      drivers/pwm/pwm-aspeed.c
-> > F:      drivers/ram/aspeed/
-> > F:      drivers/reset/reset-ast*.c
-> > F:      drivers/watchdog/ast_wdt.c
-> > N:      aspeed
-> > N:      ast2700
-> > >>>>>>> 4a72fd9fb09109857303ca64fd259009e1d4b554
+On Wed, Jul 01, 2026 at 12:57:49PM +0100, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Adding list to cc, sorry for the mistake.
+> On Sat, 27 Jun 2026 at 18:31, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Jun 27, 2026 at 07:24:24PM +0200, Dario Binacchi wrote:
+> > > On Fri, Jun 26, 2026 at 11:58=E2=80=AFPM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Fri, Jun 26, 2026 at 08:40:36PM +0200, Quentin Schulz wrote:
+> > > > > Hi Dario,
+> > > > >
+> > > > > On 6/26/26 8:33 PM, Dario Binacchi wrote:
+> > > > > > Coverity reports an INTEGER_OVERFLOW issue because ut_asserteq(=
+) compares
+> > > > > > an unsigned int (mmc_dev_num) with ret, which can hold a negati=
+ve error
+> > > > > > code.
+> > > > > >
+> > > > >
+> > > > > The trick here is that ut_asserteq() takes two arguments and cast=
+s both as
+> > > > > unsigned int, hence why it complains.
+> > > > >
+> > > > > If Coverity is happy, I'm happy :)
+> > > > >
+> > > > > This looks fine to me, so:
+> > > > >
+> > > > > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > > >
+> > > > Yes, were you able to push this through coverity on your own?
+> > >
+> > > No, I haven't.
+> > >
+> > > I couldn't find any documentation on how Coverity is run for U-Boot.
+> > > Is there a recommended way to verify Coverity fixes?
+> >
+> > There isn't, because AFAICT there's no way to do "test" builds to see if
+> > a change corrects the problem. And I don't have this running via CI
+> > because due to our codebase size, I think we'd be limited to 2 runs per
+> > day, at most.
+>=20
+> Is there a paid option for this? It is hard to tell from their
+> website. I would really like to be able to run coverity before sending
+> patches, since this business of fixing it up afterwards is quite
+> painful and I ended up giving up. It it doesn't cost too much I could
+> cover the cost.
 
-I thought this was resolved in the merge commit? I don't see that in the
-current file at the tip of the next branch.
+This would be another example of things that the project should decide
+where money is spent, and not individuals. You are quite welcome to make
+a monetary donation to either SFC or U-Boot as well. Thanks.
 
 --=20
 Tom
 
---ySwRDCCgPeov2LRK
+--wvhz3iWxdD2GMSLB
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakUhSgAKCRAr4qD1Cr/k
-CvwYAQDfl4uxobjNHU33bHFwMOmfqGY6kLgnfoqBb30Z8yFxUAEAmGL62g8YUepu
-BkIyXd7uoyJ/r+tj5IooedJoBBnV5w8=
-=xeh5
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakUiPQAKCRAr4qD1Cr/k
+Cl/5AQCgnAR5bldCP8CyCXKpRhA7/QU/dp4nDGp0EbeCJMqfvwD/VvfRytg9f+po
+KA/xKrKEAFQP9fNKOrkbwqrlcRIQyQ0=
+=7E5w
 -----END PGP SIGNATURE-----
 
---ySwRDCCgPeov2LRK--
+--wvhz3iWxdD2GMSLB--
