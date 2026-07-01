@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04339C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB93FC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:18:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9150584BE0;
-	Wed,  1 Jul 2026 19:16:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D04184C19;
+	Wed,  1 Jul 2026 19:18:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TmCjC0Di";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GVOu7Ek4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25E1884BC8; Wed,  1 Jul 2026 19:16:28 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id C58A784C23; Wed,  1 Jul 2026 19:18:34 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FB0C84C1D
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B405984BE0
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-6a166742b44so584306eaf.2
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:16:25 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-44caeb973b3so398978fac.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:18:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782926184; x=1783530984; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=G1t7aHuqGNkg/RfrsBFO47RKFvVnf8CGbY7WQhaVH2Y=;
- b=TmCjC0Di/8PKfJqqfCLgBFfZ+c6nPl20+vu9KhNCF+weWhUGKALLbxvq3jAmnREL5D
- IDyupctRk1r1MjVboYKliN9aKOmV5y8/f7dH7qnK9PqxgJco66fNqGhB2O5drqH20wIZ
- c3Hqhow5Kc3YfU3ZQv3mja3pbvwHvYmZ8Jz68=
+ d=konsulko.com; s=google; t=1782926311; x=1783531111; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k6KkE3bGV4bCS7iYn6ClZF+XZu7l/fRkz+KgFJc3coA=;
+ b=GVOu7Ek4lES7KlooeGMwEDVg6YXat+uacSB9Hbfzhm8ZHZ7mm1h8f3ZMPlm/8r0D8i
+ l7GSePzCmJlcT/h1TgtAthVSkUXwc+cgsBLHlW2un+T9RynQ5SN6G+l8AmNEOk8s60Uh
+ QkpJVVtIqf+DubkGjHVoEcrolCGiTafHYSi30=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782926184; x=1783530984;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G1t7aHuqGNkg/RfrsBFO47RKFvVnf8CGbY7WQhaVH2Y=;
- b=nPvS7hISsabtGI/Ye1iuE9j8ZVpF9U21t+b8dyHnRz6EXu5eh8yoTj/pDo18S8zooM
- dU+mNi3aOoynKwEc9mpiyIsrpeUDQhQ27SadYRSL4yDteYIK2JeUAJrOxnZW6Vm/5/n9
- NlYgv/ZKiVOsWZI+ZVH9fbX7D6p4ezZ6zBJ1EdE522tOniSF4c6qYxxUasvlFElZDSV3
- sLZbokP7c92V5I1eBZYftn5jsWMTey3AkMtJloZJeC10Q3KE7aMrVcIwxAdEXD+9HssD
- Fs/TM5sqhFrqDXHApRaEMIyqOcPZOb+9AbMaFaDtqrliHL9B6zjXo3qwzljGhkoWO2qW
- Dyuw==
-X-Gm-Message-State: AOJu0YweBcphiSF4WNDj9GM/XivQmnjRuzWVKk9C3IV+DGKLF7gKEh50
- eSNPwxse0yiLgisagHl5a8swEh0nIH28jVXLlE5Y4OCH/pJKfZpTFIBkvJRTX59avbAYm1UErdJ
- hpvlDMK1uVg==
-X-Gm-Gg: AfdE7clNmLXsc5ccJhvtqn6a3tXi2FhwqUyRaFEoQmPEnxsE4U8De7btppUzey6EQ6b
- t674I1bEdvn9PBr1kE0nyA4DWU0PG6JgRi8qUWelNrf6vY+f06Iz2xZv80HdlgoBX3mS5AKcQZm
- R/AQEpfYVPffi2N5pl6oKY6hJaev2i/yTPnWWE3EYAyENkYsZrrolSkDg+Mcec+LoEi09Acuid+
- 98FrSaFK9eFDoPBAXe+vgp7qK1wKL9RKM97B/4c0l3CbzOWk6KxJAdRd3FdhqgKRBsHyLqd718a
- PQPdkYhmKDibSul7LUIWFKfEb4CXq57MHbrvAlCI0lwqcKpd3w4qOF4HKKf0njkwp3zD9mwF1fj
- eHgjllliYTde7rdOWXPnnVCW7IIjfn5QflbckmANzQq0e1spoYZaG5IJx0qc0Sh5N6bmvZUsM05
- bSeqx8Vpn9yPZQEJ368OYUnFLIyW8pIXk3NNrkolzSLhRr8ZB+IHAzelPmiknrS9tasX0lHA7u3
- CTVVt5J90z0T48O1pf6PjlJaaajbhIYXXn14Q==
-X-Received: by 2002:a05:6820:f036:b0:6a1:61d4:79ab with SMTP id
- 006d021491bc7-6a30d75fc83mr874044eaf.8.1782926184034; 
- Wed, 01 Jul 2026 10:16:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cbedcc452sm240805fac.18.2026.07.01.10.16.23
+ d=1e100.net; s=20251104; t=1782926311; x=1783531111;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k6KkE3bGV4bCS7iYn6ClZF+XZu7l/fRkz+KgFJc3coA=;
+ b=LvmAuYH/+aaw0MIU5VHWTLI2QktPgO11lQU/2KC3UnPufvKeIhCcG9ZMJWtJKHFPir
+ UA80MZ0hNKHsenLU+P0HRHf+RzmEjoGeWb+8vrKXWiLPaF2ch7Lb7ISPPn0HoKZbpTEV
+ 8ljQzAW5ANIXwaVKFknP9y7ewfSvDbdGMxBuqGF576MGKT/9LPVk1e//7U5x85TOl/yD
+ SICjHsn4k3RjrWgrsOL3rdNbdemlibSirAKCuRz8E3FkuCxw6Mw/ppnqWiPheXojxmAN
+ JkpF10bDZS/rqjdZD76gP1ffCUgiO0ybPEoQp81oGoGEOqm+M1s+7xT1Ib67KT3LGkAp
+ 66dA==
+X-Gm-Message-State: AOJu0YxBmj41zWLPsH8JMbvRe6p8UDRqG/x/TbFf47U/sYCSfkKjt5EZ
+ C/qz4nGH+68PRzmkBet6TnGzknemkDEy3eUQtOcqPdEnjZQQqLCuzA0snQEg40b8sXyb8qiw9r9
+ 6BPkGMHdybg==
+X-Gm-Gg: AfdE7ckXLRG8dAYCKIrqeo6wifxQ4cTVWmQ2qlqL8Q/vEPKlQqsmlrMBpDq3BVBXXTW
+ PMlUwVytJpOKM7jmt3SxCYolcEv1C14VXhYvv8HzxjQGHHfI/D3utJUucKxJCJEzRpMxqHdZ9hf
+ oWr6ZkOHFbbBLn4vDuyOvrDEkX6ZBgYXDrz0QlJt80/gdxHNnV6kXqhlS19p5iE1CEqpjrzJ/Td
+ lL2H+kNXRznotZIZQcVeFvFyb/9ZgZZrtL/iYVbO1Di5VrtJJmvciGOynJnGTXyUIvoAJv1kWgs
+ hna0a/KBb96s6hTMkLw5GusHxxcts/6j53gPsBPzDuDL+wiQPto9cm2Ue5GU7NtpvWT4A3cInb0
+ tr3HOPvNIzqDwT2tj66qmhhrxqP+772Bz0b3ZLyouehGmAvab/cay6jBoGRcXxgvB9V5F6Xn4j4
+ +5Qvjdze3bCj8xljEe2R3J/0uF+2MKKSW4v0NxFOpWcIFVDVtrRR/9liwpK8vyyf8yvpnhfv2i0
+ Oiiasx9J/N0lFKxPurHr31ej8AViYjzjpVwsOUkR6Xwu8NMJqz+1oVioR2lUw==
+X-Received: by 2002:a05:6871:6c0d:b0:44b:3fef:5c77 with SMTP id
+ 586e51a60fabf-44cab55b411mr1484036fac.9.1782926311360; 
+ Wed, 01 Jul 2026 10:18:31 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-44cbe841750sm330161fac.3.2026.07.01.10.18.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 10:16:23 -0700 (PDT)
-Date: Wed, 1 Jul 2026 11:16:21 -0600
+ Wed, 01 Jul 2026 10:18:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: u-boot@lists.denx.de
-Subject: Re: Unresolved conflicts after 0d8e33717d7e in MAINTAINERS
-Message-ID: <20260701171621.GK749385@bill-the-cat>
-References: <akT0Mqg2JpDoKVOB@pie> <akT1-Mwmc2022vTl@pie>
- <20260701141646.GH749385@bill-the-cat> <akVKZT2DE88Eosm4@pie>
+To: u-boot@lists.denx.de
+Cc: Yao Zi <me@ziyao.cc>
+Subject: [PATCH] MAINTAINERS: Remove merge garbage
+Date: Wed,  1 Jul 2026 11:18:29 -0600
+Message-ID: <20260701171829.2576414-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bUMzW+3k01Ekw2IZ"
-Content-Disposition: inline
-In-Reply-To: <akVKZT2DE88Eosm4@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,78 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When I merged the changes in commit 0d8e33717d7e ("Merge patch series
+"arm: aspeed: add initial AST2700 SoC support"") I didn't fully remove
+the before/after changes. Finish this merge now.
 
---bUMzW+3k01Ekw2IZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reported-by: Yao Zi <me@ziyao.cc>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ MAINTAINERS | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-On Wed, Jul 01, 2026 at 05:12:05PM +0000, Yao Zi wrote:
-> On Wed, Jul 01, 2026 at 08:16:46AM -0600, Tom Rini wrote:
-> > On Wed, Jul 01, 2026 at 11:11:52AM +0000, Yao Zi wrote:
-> > > On Wed, Jul 01, 2026 at 11:04:18AM +0000, Yao Zi wrote:
-> > > > Hi list,
-> > > >=20
-> > > > I noticed merge commit 0d8e33717d7e ("Merge patch series "arm: aspe=
-ed:
-> > > > add initial AST2700 SoC support""), which has already landed in nex=
-t,
-> > > > seems to leave a part of conflicted changes unresolved.
-> > > >=20
-> > > > ARM AXIADO AX3005 SCM3005
-> > > > M:      Siu Ming Tong <smtong@axiado.com>
-> > > > M:      Karthikeyan Mitran <kmitran@axiado.com>
-> > > > M:      Prasad Bolisetty <pbolisetty@axiado.com>
-> > > > S:      Maintained
-> > > > F:      arch/arm/dts/ax3005*
-> > > > F:      arch/arm/mach-axiado/
-> > > > F:      board/axiado/scm3005/
-> > > > F:      configs/ax3005_scm3005_defconfig
-> > > > F:      include/configs/ax3005-scm3005.h
-> > > > =3D=3D=3D=3D=3D=3D=3D
-> > > > F:      drivers/pinctrl/aspeed/
-> > > > F:      drivers/pwm/pwm-aspeed.c
-> > > > F:      drivers/ram/aspeed/
-> > > > F:      drivers/reset/reset-ast*.c
-> > > > F:      drivers/watchdog/ast_wdt.c
-> > > > N:      aspeed
-> > > > N:      ast2700
-> > > > >>>>>>> 4a72fd9fb09109857303ca64fd259009e1d4b554
-> > >=20
-> > > Adding list to cc, sorry for the mistake.
-> >=20
-> > I thought this was resolved in the merge commit? I don't see that in the
-> > current file at the tip of the next branch.
->=20
-> It's strange. It's still there in the tip of next branch fetched in my
-> side, and I could find it on both U-Boot's GitLab instance[1] and
-> GitHub[2] as well.
->=20
-> > --=20
-> > Tom
->=20
-> Best regards,
-> Yao Zi
->=20
-> [1]: https://source.denx.de/u-boot/u-boot/-/blob/next/MAINTAINERS?ref_typ=
-e=3Dheads#L235
-> [2]: https://github.com/u-boot/u-boot/blob/5602e89a834ccbedc686053b14206c=
-062a144107/MAINTAINERS#L235
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9abc4bcbfd9b..f4eb2c13a43f 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -232,15 +232,6 @@ F:	arch/arm/mach-axiado/
+ F:	board/axiado/scm3005/
+ F:	configs/ax3005_scm3005_defconfig
+ F:	include/configs/ax3005-scm3005.h
+-=======
+-F:	drivers/pinctrl/aspeed/
+-F:	drivers/pwm/pwm-aspeed.c
+-F:	drivers/ram/aspeed/
+-F:	drivers/reset/reset-ast*.c
+-F:	drivers/watchdog/ast_wdt.c
+-N:	aspeed
+-N:	ast2700
+->>>>>>> 4a72fd9fb09109857303ca64fd259009e1d4b554
+ 
+ ARM BROADCOM BCM283X / BCM27XX
+ M:	Matthias Brugger <mbrugger@suse.com>
+-- 
+2.43.0
 
-Oh, sigh, I see it now, thank you.
-
---=20
-Tom
-
---bUMzW+3k01Ekw2IZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakVLYgAKCRAr4qD1Cr/k
-CktyAP4s0LCbOEVD9IiLdd/QXLTcPwAhfgQ7ZLWNZJ6ESxdkkAD/YWecpfCPXRXs
-0TDwBLk0mof2G6W1o+D9hOhBiNvD6wk=
-=WQT7
------END PGP SIGNATURE-----
-
---bUMzW+3k01Ekw2IZ--
