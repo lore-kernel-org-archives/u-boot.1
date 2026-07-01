@@ -4,92 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ACEC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 14:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0EBC43327
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 15:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5F0A84BE0;
-	Wed,  1 Jul 2026 16:20:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1793684BC9;
+	Wed,  1 Jul 2026 17:05:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ihnzx6Uu";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Yk53AYhh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC20A84BEE; Wed,  1 Jul 2026 16:20:51 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 66FC084BF9; Wed,  1 Jul 2026 17:05:09 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9718E84B92
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 16:20:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0DC484B53
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 17:05:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-4472500e25fso291505fac.1
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 07:20:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-472055b0efaso506405f8f.2
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 08:05:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782915648; x=1783520448; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/jWRHOGfk5AXWolR4cqj9xziyxI43jcvfvdWiGFLn90=;
- b=Ihnzx6Uu50jNLczRgN8q69/LkKf8DoGnC2xqt2zpLaICahSDyf0QKjsSDZwW9bT9de
- VakTtie0EA7gX8bBtGdHdTZiBdtEPtM+93sZ3kqWXHGtkj6m5Z/1WioccXYRh8PuC4Zo
- teekDH4lDHj0gqJ5nKytMYWlTlUNbAP/nn87g=
+ d=baylibre.com; s=google; t=1782918306; x=1783523106; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XSwfSJxnK9vyepECZ44MIUBpAplLbb9Bebm7U02+Mcs=;
+ b=Yk53AYhhqOIp+HcxzBYbEL3GUYFwVxzzyD7+Rz4bXhdAsR6MixricfSJw76uFO4Rnn
+ X3Qu3q/H4GA4OslfyOFe1ItczG60JRyRJ0UPqnedVyjfVuMwhMcVbKYWohMLQcGcL0pr
+ oVYRkMsaI11pA5Mlu/83la7a+XYNKC6UGdcJbfl9bOyAlMIE7HMKKbuXVuElKEC2lDxR
+ 0xHkVqgJCXQnu8sR2xSzMB/8VOgM5T+ioaQBHM4HTIunmFKJow+vQWc2ocKif90g+giI
+ W0H1I5ZXJnK2I7/St9nOBeJopxOLS0cqFWIS5RdzZHBNyCxeLJBrPLGZ/0a0AHT4KDDU
+ uuSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782915648; x=1783520448;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/jWRHOGfk5AXWolR4cqj9xziyxI43jcvfvdWiGFLn90=;
- b=iQNm5aKOaN/7DoBD1ORO+eTEasH6r1lMnLs0LePX6jg83G0hCEy/COVI/mExyNHjZM
- n/U74rzj6ajz1mM2cHLJ62K+YGmLCtD0ZmPoO68sCYn4bYckMFwju80UidfKVs2XUvzO
- HdwHiAmlOzhNDSrqA+UtFp3FzHcDpxXh/Y7Hrx94ClPAeA84gght/S8+Ahiybp8g9+C2
- X3PL+BESV08eeZpBeWl5JoKVC+fY0UGJ+vW2jj9iHZKNxIYQ/toxPJmQhX6niolPeZkG
- hXgDozU+UuXHIGxnPBrdO92uW55uo2LkHavW9Uk8NyxD4IszQGjalPigKOPAq8PEXpAe
- NEww==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoXyAA8YuHU7ffLhKva9RahnLcFXejFppTXz+SDbNxihAXggkZNmBXe9CzJYW2Njw1fhMrmeus=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJFlmCNkNurueIAVWEMeHuAI3MvizdW8Qepx7KGHIjPtF6a5Du
- B/oB7w9mDs/D+AhVrEmoQaXcI6LY+Iw53BWy7jDE1Xq2M2jpome2IPPOsaJnDiaj0QIXQTyvnic
- mFup3J1E=
-X-Gm-Gg: AfdE7cltFmAERda+9NvID0gakK8qh80EK4xlnVRU1jhNuiXqoqj7RdlAS+nDMZIQYB5
- dO8mbiAROArP8e6MsgndlGn8WlJFYChcL2cxw3+5lalWJD9U9kTgrnisuih+sAPugZipV+bKL9f
- lXt46N1KYI7XD0yYdieZOujTgNqM9urRXRVSYvdHo0Qak4RHNT8gnLts47d2YkXmZLfHskdr1xD
- nHcw2yfWyFjtXTIxQBLP+FgOqIbxItBa1VSTEyIMzWrXJZZPfp82QIglT/8U8WRRxcgb8yY0mXR
- dYSvt0gIFf1ict0Fm5PLiPoE16Ze9VFHnfamhvtKLUYJG7t+N04F+bVdW2Yo36UFWD+si4UHeoJ
- rqJ+mXycmxZ1X9vmTGp2HSpp8mAKab5fQOtJtsBH7dWq3kFQI5MATChlNfyPsvAalxzcMfO9c3T
- QxUWPWJimMoj05MysZ15RbbpbaYcjgVSwM5wZ/VP++V1Ol2fZtyOHcgalfe0tJX4cyDxRibeMVg
- jm6m3xEpjY5hr39eNvnUJ3mtRX1CTILuxPCLQ==
-X-Received: by 2002:a05:6871:c8d3:b0:448:558c:d83d with SMTP id
- 586e51a60fabf-44cabbf0e46mr905184fac.34.1782915648156; 
- Wed, 01 Jul 2026 07:20:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44c685ae7a3sm1653593fac.16.2026.07.01.07.20.46
+ d=1e100.net; s=20251104; t=1782918306; x=1783523106;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XSwfSJxnK9vyepECZ44MIUBpAplLbb9Bebm7U02+Mcs=;
+ b=EUztTMoTvDBPYQi4tNiCSRLBf2XRWDllarDuqnoO7QsrftKAZn+aiCmpIgdZzh03Wv
+ jFmnzEbngREOzp7HS6Z2RymsvkHwIvjAE8q4kUFvvrxKIDxQOoixP3LVwTju13F202gM
+ XHAHeRrqS4DVWMELNiDGPzvXHKFlqaZzKEe9T1D/1i91s4ybOGHby5DvjRA6vI+0Lzlr
+ vyYFv4p8PwKeok3NbQv+hJ53i+Kv2Fg3iNJx48Dmz9WsVj66ZOEKDH0tv07UBfAYrf5Y
+ 1qLtqa8US6UddtYgBoGgRFSYepQBzbDe201LXw9Jo6+x/2yaReVaiOfv+JIfQmu+GDoX
+ NEZg==
+X-Gm-Message-State: AOJu0YzUVohLAJuU5FxdEQwQI1wPH23OtvITld2RhKF+nGCikAewKFgH
+ 2x26B4mBk++zCd5XyDGepHWWL96vwx95AV0tZe8ogFAzkkD8Jnlb/0wus1UtLAeW9Ip/mtaG/vs
+ fLZ0KeYs=
+X-Gm-Gg: AfdE7cl0acta8Mx3yacGeo0BQvlS+jXRohTKiLUzlXK4FR7WdB2lHoI9cC4uYj9BeVV
+ KY++Qd0cXrhAzgbRFo30zlHLkNb18EKe/2wOgzga5pp+bKz52S0Y+rKGGDKyRT0znIwrhVbI4Vk
+ gIdSWJBwtX4PxP//dFE+XsQwxCvjWarAa7m/lq4MOw4hxXYyUCY+rCeQ3tiHe7dE78ohUttMdqm
+ +CbXVbZ1jfGRYOWKQ61P+ofgeV7oy3I6m1VzaLkLDdhde3tQ/DHD8aIr4wSrW1Uq+8gwgtu+5Yc
+ 2yPBFsqcjn6y+ti57aleI+fobqC4W1AaOFP+MnIy6UC7Jd50gd1nGm7H2JBgF+hbF+qBbZ65RyV
+ YAz+rf36fENT38nXToHzUxYe+joLeD8f4Jx7DaPm9L4fSqFKEdAjB1IiT31V1ZC2u53axC608ny
+ l63Or8tjn+sxa9CA2O8txFSwCzypGpJAJHaDApnCydAbFZRfexVqJsKNRkw3xwqRh6ObjKFyMs1
+ Xv7nKm1zNKZDtfRFtxwsewLt/lKzewP0kmco1y/xuYYCOVKB63hvSfUAYLYfh2k0FpWMvE=
+X-Received: by 2002:a5d:5d89:0:b0:46f:7d90:8114 with SMTP id
+ ffacd0b85a97d-47757896cedmr3744372f8f.14.1782918306122; 
+ Wed, 01 Jul 2026 08:05:06 -0700 (PDT)
+Received: from [192.168.1.65]
+ (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
+ [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-477ddf0fb15sm349531f8f.29.2026.07.01.08.05.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 07:20:47 -0700 (PDT)
-Date: Wed, 1 Jul 2026 08:20:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] test: cmd: part: fix integer handling in
- setup_gpt_partitions()
-Message-ID: <20260701142045.GI749385@bill-the-cat>
-References: <20260626183353.1666667-1-dario.binacchi@amarulasolutions.com>
- <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
- <20260626215804.GB382693@bill-the-cat>
- <CABGWkvrCJn_ABadB0AmTQ6dp=ufDi1GdSYgSP1fkwCQQM=OL9A@mail.gmail.com>
- <20260627173152.GC382693@bill-the-cat>
- <CAFLszTj4gU-sOE5OFvqoaJ1juYVg92XBRSCwid+OiXjmOC2pAQ@mail.gmail.com>
+ Wed, 01 Jul 2026 08:05:03 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Wed, 01 Jul 2026 17:05:12 +0200
+Subject: [PATCH] arm: dts: mediatek: add U-Boot dtsi overrides for Genio
+ 510 and Genio 700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wvhz3iWxdD2GMSLB"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTj4gU-sOE5OFvqoaJ1juYVg92XBRSCwid+OiXjmOC2pAQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260701-fix-genio-510-genio-700-dts-override-v1-1-cb571f8c9296@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2NSw6DMAwFr4K8riUnCBC9StUFJa/UXSRVDKgS4
+ u6kn92bxZvZyJAVRudqo4xVTVMs4E4VjY8hTmANhcmLb6UTx3d984SoiRsn/9WJcJiN04qcNYB
+ 92/eDwDU1AhXVK6P8vpnL9ce23J4Y54+b9v0AboyKsYgAAAA=
+X-Change-ID: 20260701-fix-genio-510-genio-700-dts-override-2699a0e153ed
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,76 +113,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot applies DTS overrides by searching for files in the following
+priority order [1]:
 
---wvhz3iWxdD2GMSLB
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+  <orig_filename>-u-boot.dtsi
+  <CONFIG_SYS_SOC>-u-boot.dtsi
+  <CONFIG_SYS_CPU>-u-boot.dtsi
+  <CONFIG_SYS_VENDOR>-u-boot.dtsi
+  u-boot.dtsi
 
-On Wed, Jul 01, 2026 at 12:57:49PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 27 Jun 2026 at 18:31, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, Jun 27, 2026 at 07:24:24PM +0200, Dario Binacchi wrote:
-> > > On Fri, Jun 26, 2026 at 11:58=E2=80=AFPM Tom Rini <trini@konsulko.com=
-> wrote:
-> > > >
-> > > > On Fri, Jun 26, 2026 at 08:40:36PM +0200, Quentin Schulz wrote:
-> > > > > Hi Dario,
-> > > > >
-> > > > > On 6/26/26 8:33 PM, Dario Binacchi wrote:
-> > > > > > Coverity reports an INTEGER_OVERFLOW issue because ut_asserteq(=
-) compares
-> > > > > > an unsigned int (mmc_dev_num) with ret, which can hold a negati=
-ve error
-> > > > > > code.
-> > > > > >
-> > > > >
-> > > > > The trick here is that ut_asserteq() takes two arguments and cast=
-s both as
-> > > > > unsigned int, hence why it complains.
-> > > > >
-> > > > > If Coverity is happy, I'm happy :)
-> > > > >
-> > > > > This looks fine to me, so:
-> > > > >
-> > > > > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> > > >
-> > > > Yes, were you able to push this through coverity on your own?
-> > >
-> > > No, I haven't.
-> > >
-> > > I couldn't find any documentation on how Coverity is run for U-Boot.
-> > > Is there a recommended way to verify Coverity fixes?
-> >
-> > There isn't, because AFAICT there's no way to do "test" builds to see if
-> > a change corrects the problem. And I don't have this running via CI
-> > because due to our codebase size, I think we'd be limited to 2 runs per
-> > day, at most.
->=20
-> Is there a paid option for this? It is hard to tell from their
-> website. I would really like to be able to run coverity before sending
-> patches, since this business of fixing it up afterwards is quite
-> painful and I ended up giving up. It it doesn't cost too much I could
-> cover the cost.
+For Genio 510 and Genio 700, the common mt8188-u-boot.dtsi override is
+never applied because none of the lookup paths resolve to it
+(CONFIG_SYS_SOC="mediatek", CONFIG_SYS_CPU="armv8",
+CONFIG_SYS_VENDOR="mediatek").
 
-This would be another example of things that the project should decide
-where money is spent, and not individuals. You are quite welcome to make
-a monetary donation to either SFC or U-Boot as well. Thanks.
+Add board-specific overrides for mt8370-genio-510-evk and
+mt8390-genio-700-evk that include mt8188-u-boot.dtsi.
 
---=20
-Tom
+While at it, also add mt8188-u-boot.dtsi into
+board/mediatek/MAINTAINERS.
 
---wvhz3iWxdD2GMSLB
-Content-Type: application/pgp-signature; name="signature.asc"
+[1]: https://docs.u-boot.org/en/stable/develop/devicetree/control.html#adding-tweaks-for-u-boot
 
------BEGIN PGP SIGNATURE-----
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+ arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi | 7 +++++++
+ arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi | 7 +++++++
+ board/mediatek/MAINTAINERS                    | 3 +++
+ 3 files changed, 17 insertions(+)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakUiPQAKCRAr4qD1Cr/k
-Cl/5AQCgnAR5bldCP8CyCXKpRhA7/QU/dp4nDGp0EbeCJMqfvwD/VvfRytg9f+po
-KA/xKrKEAFQP9fNKOrkbwqrlcRIQyQ0=
-=7E5w
------END PGP SIGNATURE-----
+diff --git a/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+new file mode 100644
+index 00000000000..586d15bf72e
+--- /dev/null
++++ b/arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ */
++
++#include "mt8188-u-boot.dtsi"
+diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+new file mode 100644
+index 00000000000..586d15bf72e
+--- /dev/null
++++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ */
++
++#include "mt8188-u-boot.dtsi"
+diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+index 37ca35b4dd4..d99c6d708b2 100644
+--- a/board/mediatek/MAINTAINERS
++++ b/board/mediatek/MAINTAINERS
+@@ -21,6 +21,9 @@ MT8188/MT8370/MT8390
+ M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+ M:	Julien Stephan <jstephan@baylibre.com>
+ S:	Maintained
++F:	arch/arm/dts/mt8188-u-boot.dtsi
++F:	arch/arm/dts/mt8370-genio-510-evk-u-boot.dtsi
++F:	arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+ F:	configs/mt8188.config
+ F:	configs/mt8370_genio_510_evk_defconfig
+ F:	configs/mt8390_genio_700_evk_defconfig
 
---wvhz3iWxdD2GMSLB--
+---
+base-commit: 23a4f1e22076855df9c8dd93992edd9bd42d7ea2
+change-id: 20260701-fix-genio-510-genio-700-dts-override-2699a0e153ed
+
+Best regards,
+--  
+Julien Stephan <jstephan@baylibre.com>
+
