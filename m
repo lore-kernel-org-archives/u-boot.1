@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9B0DC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECBCC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:47:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B8CA8494B;
-	Wed,  1 Jul 2026 19:39:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13EA1849FB;
+	Wed,  1 Jul 2026 19:47:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NDi2Zxto";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FSmp5mSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 399AD849B1; Wed,  1 Jul 2026 19:39:47 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 9F17884B0E; Wed,  1 Jul 2026 19:47:07 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B91C08469D
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:39:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6DDD8494B
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:47:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7eb3865ea6fso521708a34.2
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:39:44 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-6a0e525db1eso588126eaf.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:47:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782927583; x=1783532383; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1782928023; x=1783532823; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iICKavTbrke5rIxYG+fNXd+J12nTNUa6DI9kcIjTq4Y=;
- b=NDi2Zxtolt1lvH9cucbZs5od+FzluvprRj8XZqrAoJWPeyFO4v6OZhMrlh3qa+fpf0
- 1FLAUwx1CEPGr/aww1oYh2aZYMl0laT/RdCOz95KW/prQ04o9Dr4Nmkhg81jf+U2iEmb
- zFXRv/rP+agSzjX//btHfWvIvDqXQFEk/PHlk=
+ bh=r0A2asuCZ5LcTySpugnnfwbDAn1UbDv3fLvit7qTrDY=;
+ b=FSmp5mSDJnBH+UKYW3fafxOft6BJRKibJfPMUnPT2BiG0w2cJ9Pon7yMZxOs+AyBfg
+ phZNlhvMuWNc1ClrQuVRtWptQ8pC5apAGWqFYIllLnR/YbMXgp3Rl6b967csda9r+adK
+ XeFI6luP5Sw2oT5rk/lwBQ6JFVQDVazOdDlyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782927583; x=1783532383;
+ d=1e100.net; s=20251104; t=1782928023; x=1783532823;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iICKavTbrke5rIxYG+fNXd+J12nTNUa6DI9kcIjTq4Y=;
- b=DnDdR1vNPMKBYhfJ/2mMyfudBPyUovTtuAtBve4ESP45vouBLLWXAVUF5VdEvtLHiQ
- K94Kb6HHR3NlAcpOSsHP+7ae/Cd2yaygc81e8N+CXJgoltXCJWAXgED9kS4ZuI2FWzhX
- xsluol0mUjZq/kEYaR+bKY5FZCRKFCf6d6hq+LmDO86ox8gd5iUT4uqTEjkfwj1GHrw5
- jZryHDYgSmyYANuuknFp7GfEB0uwvex1TQOr2tJt9dclLLQ7/fCQ0H935FUim9EIk7fd
- Rs7yHRWSMLfNlONoN0weheNRnFu3R1YGWOlAa6Sh/n7EgVgpxk34VpH/nwDh8AjtHRUh
- e9Kw==
+ bh=r0A2asuCZ5LcTySpugnnfwbDAn1UbDv3fLvit7qTrDY=;
+ b=DLohCQNJlEWAmi/pHS8g3holbsc91k359aKtUT6k05ETJ3aDbCaJf1V2Pqx/Tq/zGl
+ KyU2RJ4Un76zRoLKTnW4Za8kP4tZkrrzD+XXhB62JcYAuCk7D3GdJtF4QCSL5ntsK5co
+ TzMDQkGeyf3dgd0PgI523erUQudbScTdSxO22bAsgWTYZ1pdAgRH0sW3tU35U8VmmPBe
+ zocziREGWSbp6+e4b0JY647Y1qqMIoZdZcFjQ0mvXIbXlVqklu3y9bS/i/rxaGS6e5Ev
+ hi0KaGQ/8HqDBveCZuSTxxnVJJggu8p/xGOZkbaudREalVKoPvFe5tk1rtI/numRsTUW
+ Enfg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/x8Z4mceuTIMRO25Fnl8K5qYZ+73zqupm+H1LNHZwEENk7JDSAUPHxmfIkA9q0N3LoUOJ12pw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVWCyY94smiA8vp/BrTcSBdx02PsiAUR0tbitzHpInogWPdpzZ
- jH1Gnp4BbeZDIykhWHl/B6u2D1aOozOGTEh17u9k9YNafNrniIp5m1EfTMzfgFg9g+w=
-X-Gm-Gg: AfdE7ckLkoWiA65Zr2WHcimtoBAAyVsE1tqJU0T5DsxzK/FQbvKKCoM7qs+0RbFB4DR
- BXgO1p9eyAun+Tw0WTH//uUHf0zpaC7Z3V70wsVwcOpJlkDlG1ko+qzArHVbRWZdld4yydjphnv
- OeuzVb8WJkIkzWONQBuC0C7pwQsGJP2bmq7OXxXJuZ1sQP8ZET1W3luX94IL0JWojyhgBh/FyBL
- iLtDq7KaDkr2LJDwvOEMDFQW0URCZSEiU4MvW/KRy1ge7m8qJkRz0FlT6H1imd8UmTOr+qda72+
- h7Ap63+bKfv7mqnfNAM0XnUdP4O9+iFFbpy0eouuCvcmB2PJ/p8NiH6Kyl0r/LdhHqVmIqYL5EN
- WnPkowRsZNpqKE56fnQXfu/xbhzc1ZD1RobHmfA5+QJI4+QIukLJHoWPjfSLk7AhC7XPDG1abvl
- tvzji1++027DLL7CVm7IVWRNpoi2boEOKnVL9+FGWVMh5PgsyLRha8Ue94ZzMdyvi/Z8IsTKi7P
- RUUGlfbNYFOip7G306f9q57Zyq6snZ2v6p2LA==
-X-Received: by 2002:a05:6830:710e:b0:7dc:d2ad:fb29 with SMTP id
- 46e09a7af769-7eb4cc4528bmr1701303a34.24.1782927583371; 
- Wed, 01 Jul 2026 10:39:43 -0700 (PDT)
+ AFNElJ+F2vSscg0mGsxreTgmgrswMmDQp2ZBtre8KXFhSfZinotSJRkn7EjeUK0LfXzNqiluKRzH4uM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyI2olPmseEchK4Xr4QAwF2nWc84FF5VGjH8ehVDoABK36KM6Me
+ uqsW11/aej3Z5DbKx5YsmsVE2oqO3LFdMp6s0OqV5YoKTjHB7/DQfcsibyB1bu2TgC0=
+X-Gm-Gg: AfdE7clPGo9sgxwEsZz6rfln5fq2Iwo+zbWbzYyPui8ESiZm0L8kMxzu9Rto7aQQgWU
+ cOuuJC+Qymb2Pcq6760rsgXrxgEpZbN0PDhKWJgJfKsalPQPhYkX++aQUAHwaDWJH3OwVVwb0S0
+ wORhXAyH7lfTdK1vWu0u5dKj1M8+wuP6+8dgSEt2xcJkgU7btOckFCqduETUl25ylbvt81mUxZd
+ dkL3hQzlTghAm6n8zcmixdRJtFMQE1X4P5nlR9I+FIL+B07LTGoQQjI5BQ6e4ozPRiGUHpcMQhN
+ Ih5tSQ269C60+LseA+vODsuCnwi+OtTuM3igN5iMrY5h3u4bcQK9HIXgQDsbdmdsh6y8Wj0Wqtw
+ bBYWLmcIC2OZhxwuXBgCrW5aBhjVgAwi7fnOKG1DTHPLT8IiN6J2tQPXXexhMAkZqLmSJ3Cuxff
+ UPoDnL/nKoMASu1nVJgDC4vqn7k/XKQr8uo1acfqGcsLVqd1hJW2Pi/YJZCw0yBsBW0O1IUOQ6J
+ v8z+0euQQyjDyKDSTFsCRrY0QSOsDE2PjvWrA==
+X-Received: by 2002:a4a:e909:0:b0:6a1:1fa7:eb49 with SMTP id
+ 006d021491bc7-6a309bb84afmr1515030eaf.50.1782928023455; 
+ Wed, 01 Jul 2026 10:47:03 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7eb544f3d24sm524807a34.21.2026.07.01.10.39.41
+ 586e51a60fabf-44cbed29e7asm362357fac.13.2026.07.01.10.47.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 10:39:42 -0700 (PDT)
-Date: Wed, 1 Jul 2026 11:39:40 -0600
+ Wed, 01 Jul 2026 10:47:02 -0700 (PDT)
+Date: Wed, 1 Jul 2026 11:47:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Yao Zi <me@ziyao.cc>
 Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 03/16] image: Take entry point as an output of
- setup_booti
-Message-ID: <20260701173940.GN749385@bill-the-cat>
+Subject: Re: [PATCH v2 06/16] LoongArch: skeleton and headers
+Message-ID: <20260701174700.GO749385@bill-the-cat>
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-4-me@ziyao.cc>
+ <20260701111808.870705-7-me@ziyao.cc>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TdOUo43RiMRSqjzn"
+ protocol="application/pgp-signature"; boundary="6g365v/3wY3C5KuK"
 Content-Disposition: inline
-In-Reply-To: <20260701111808.870705-4-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-7-me@ziyao.cc>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,44 +102,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TdOUo43RiMRSqjzn
+--6g365v/3wY3C5KuK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 01, 2026 at 11:17:55AM +0000, Yao Zi wrote:
+On Wed, Jul 01, 2026 at 11:17:58AM +0000, Yao Zi wrote:
 
 > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 >=20
-> For LoongArch the start of the image is not the entry
-> point to the image.
+> Commit for directories, Kconfig, Makefile and headers
 >=20
-> We refactor the code base to allow entry point to be
-> supplied by setup_booti.
+> Some of them are copied from linux, some of them are derived
+> from other architectures, the rest are wriiten on my own.
 >=20
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 > ---
 >=20
-> Changed from v1
-> - Correct type of "entry" argument for RISC-V and sandbox
+> Hi Heinrich,
+>=20
+> I kept the naming of CONFIG_ARCH_LA64 (instead of using the full name
+> ARCH_LOONGARCH64) since it's shorter, and we already have similar
+> CONFIG_ARCH_RV64I, and etc. in U-Boot. Is is okay for you?
 
-Can you please also provide a link to
-https://www.kernel.org/doc/html/latest/arch/loongarch/booting.html which
-probably should cover this, but I'm not entirely sure does?
+We should use CONFIG_LOONGARCH here, to mirror the kernel I think. The
+CONFIG_ARCH_ namespace in U-Boot maps more to the usage of CONFIG_ARCH_
+in the kernel, for ARM (and ARM64) platforms rather than describing a
+CPU level architectural feature.
 
 --=20
 Tom
 
---TdOUo43RiMRSqjzn
+--6g365v/3wY3C5KuK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakVQ2wAKCRAr4qD1Cr/k
-ClOMAQDsXbgDPVhVvRAudoJDGMkZwd1Kgmh8FZgr8ay1hvr92AD/UvWXsoW03L/a
-QkR+yrHYvC8K9keU0vdOdzq+WLv09Ak=
-=0zVF
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakVSkwAKCRAr4qD1Cr/k
+CjjfAQCMETmVqxh8tuNDcT2BQhqCuqSnJP2zhxClevXX4LWfSwD/boY5WEk2IFdu
+9PlJ3+vi5OW5t+SHDDrJkH1sdg1WpQc=
+=lV8q
 -----END PGP SIGNATURE-----
 
---TdOUo43RiMRSqjzn--
+--6g365v/3wY3C5KuK--
