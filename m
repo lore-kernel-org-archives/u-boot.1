@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D972FC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA1EC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 17:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67BF384C60;
-	Wed,  1 Jul 2026 19:58:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A358084B53;
+	Wed,  1 Jul 2026 19:58:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RLC9zOAl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JeXGejpu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E922E84C5E; Wed,  1 Jul 2026 19:58:26 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 9726784C63; Wed,  1 Jul 2026 19:58:29 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAA9D84AE9
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:58:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C96F84AE9
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 19:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-c8b49639fbaso509527a12.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:58:24 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-37fa53bc22dso628013a91.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 10:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782928703; x=1783533503; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782928706; x=1783533506; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NXwzn/WBDbPRKrYNMxo1K2MV2WIvaDHxyHU0vX4r9G0=;
- b=RLC9zOAlyXFc7u5PRjtXqNrvNFONGxfER/5E3RkuanliRZsmz9VjzDilLj7yQWJNOb
- GYD8//iIu+Og9DZ5fj39f8jGBU9JPfaU8Kl8N0R6iXrVpXhUDdfvoZU95k423JWDhUoL
- o3sAO0ct4PC3ueDzXt2nOwc+i0Pv1aef1ihl/mVYtdCexryGXFmHMF59cg/aH2jaODUA
- S7Ag8HvjV+IhXyg7R7jxXVbU6Lxu4RTOOGRZgZcLbyB+sDDpVjsoP86UwzLTuHieVrG1
- QI7Twsr2/tT3e/+LdwkPKgdJlU84JBX43I8PjogNxJa69mxDw9sm14o7wF+gPBO4uXP9
- 7PIA==
+ bh=jFo7+RIPY2zE/P4AfbpVI25IKo0ipfRaBmOQTZw5LAU=;
+ b=JeXGejpukQaSP0d3cFcmZPR2gqpAOHnxm0xHjbCAXNXEKZ2NUh6cByc6OLVxTGD1uj
+ LRopsEIZMh9UnccHvHSBozaIQ/vNEdj+iyn0G9P0hA1s+4MfCqtjZhfeRlFN7wG9SELr
+ 3/ee5T/yyDZ/w3rt/usJHKV3EA1TKziNgBcG/TaJEiGeYnuhqlgJ+KG/GTP/90lnhOza
+ NUieYCr6kh3/4PyOUouE4cj/cTMnx8wH3vxG3hPs7uAFuCQV2AQ+7gwHhLNM8p9MSgOD
+ BCi21pmDXVHtgmLtvpLV4XhCB03OJWCGp/GDAKVSbVehbSoB8GVgI1yWYazCd6ZyaJEv
+ 6iig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782928703; x=1783533503;
+ d=1e100.net; s=20251104; t=1782928706; x=1783533506;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NXwzn/WBDbPRKrYNMxo1K2MV2WIvaDHxyHU0vX4r9G0=;
- b=CB+WYzJyiqHop6EEfC+t+MuTRtfQXx5EJltjJm+GukT/5M5oRcy5zXwOmHpuX+RJtI
- oOtvQ/fW8IwEHUxvtx8ylkfsQ3peJxev4+3GMnA1DuORqBT0kq5EOpvYoRqkKX1uSErm
- 6tiP29PkWHBn2103eXbhCs752Qk5+ddV1+/wqEftivSAZ/4sOA5C7DAraVfRCwQteTzG
- WvGuXiEmqAw2FD4oBxrmhUYDDxGcxLVggZxaui7SMaEsPAEX6mN1Daxh8yO75h4PhEVe
- I66pJZ4pcohXjIQ0Nm1cVy8q3iuCBWZyFCQZ4NhZi/aWdrE/OMM/zbu3PBKhNKj1iapL
- MZGA==
+ bh=jFo7+RIPY2zE/P4AfbpVI25IKo0ipfRaBmOQTZw5LAU=;
+ b=O8oNCRjdqfMkOih9DpEX568wu7IT4zBZcANMMZItmfvbREFgzB2Z/klq9mUgQWQ2Kg
+ ISVWQf7+9pUi03JcL1ExewfappH3XxdM9rFO2eWPNOVGieNN9NkhAumMY81PhZIg9dKJ
+ dTyMsLccQ2CcOhk//ipuNlovitYbBA5DiDVv2VoYPfoco/p3AjKJESQXlH0dVWEKHxbM
+ 9eXKyfAe7fNaH4m7cGGuMtTzKt6RxW/OYofHdEY+eR9QHDf2MuNfXR9jSLPflQ4CdjFM
+ 9+U5U2U6omEsoKV0/lGH2Af+h3rrToJemnYvRHsq2jCVg8V3k152U6i2kYQVX14885MZ
+ KaJA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8qBPFMvEk5LNnFXbbT+lZFbLMHV7XQL1vb72nDDu0hXT3lblcAZS1Cf6KGZssxV93vz9UEBQo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz4N81ba1804Un0hhd2vQdnajVrS/NbiaHSOf/dePU83UtDDFVL
- 1RWJd6A25MjhsNl5n0j25rSsvXT+vUgn1CqCR2mMU4cU3EP7H4nRD74b
-X-Gm-Gg: AfdE7clXzRhKQ3joxhwKwLEmg7VzfLZxMfTuksbshcWBetU9AWegrx+0S8UUXxp5d1U
- 5NarrtbAm390RZGSMaBefITF6GGO+QWQdtVUpKlgGnTJnumlUWcrRJC+UG4n2CbhoLHI7TnUeKJ
- Gfbt2t01Y3DX+pk5F7eRArHtpU7Rcqp4zXIpMpi7Z/mOr4g1hnw590yWsED2wuB7+Ks39xL2xtW
- rebQCecs1W+oGWcyzYYj1RHpKDLPamkaDh7xiwFrHEfsJThErhNsuz7IDiRWiAlW+PL893y9OMY
- U/Wyc9S9LWD2WKt+KBfVcCLmJejZBHi7ZXqGf/LQGTv2yX6of+S6ZYMnGXi4M2EISi/v/P0+TpT
- acwoGkmG2KRDr4FxrSO/h8XBABHHlZip3xpBYUWlBI1kA5+wXFHhb31eRZx7hZ4OWLayd+Hupv2
- 3S3iufCzUBj1SeoqMKo6yph9Tpb0Ju1bBDfDdjP8xVkJImqGtWadP/L4rsVX8VMnucUXhouQ==
-X-Received: by 2002:a05:6a21:48d:b0:3bf:9aa9:b2a4 with SMTP id
- adf61e73a8af0-3bfed29d324mr2853898637.20.1782928703004; 
- Wed, 01 Jul 2026 10:58:23 -0700 (PDT)
+ AFNElJ+XXEBi33sq98IcqAJDXKAmGYkLHKbdYSmRVAE8kYExquZh5m0Oekd6y/V+qAQSOAZfbn6/8G4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2sQhYp6HzzqYSkmM+5Z3q33OqCOFxpNS33P4WMPQDB25YCnLI
+ 8S5W2kRT+XCVu2rjqui22gWHTX2AAIdUAKApNYr7/LZnx68J1kAt8olqkExaDw==
+X-Gm-Gg: AfdE7cmE/u3dNbbdJ0vEhBoR0J0z9yYEVlY6Q975jMK4OnMHh9ClVt4Bg0/LoHGNgc0
+ XxQy/EC3ixuGmaQoBD3aqa/iMMkiAf/JaGVjnvqipucvlBjabEnfYGrccVO0GH36pxiGbppop4Z
+ vhTuzpw0wffmIsVuG4z/TZMDnLMVtNCEe1rnSjtdh5NHphpQSNDEqJv7Ge0Ej25jAPVIxtky0mC
+ 4fN4/EyLEEefKlnl4ECObUPdCXn5ZlXhDJyUXxfKCK6opp5i3uEJrY2uXYdaLeHmuzDeQd3GpOs
+ aVPPcQQNpZjRCClBSCzNf/T9Mlh0Et9tVgl/FUmqRODQnfbqBQyiAo+dYag/IAbq+pIzu3xneX0
+ QzacNiT+4GvV2jqp3nqI6Z5ND7R204Lh4gjuTFbJjbzq+si6K2fm4JRi1nTAbumDEK0xcAYuQ+F
+ Zi8QN++iBFLWJtcIaSYzgwvYoMQCHIs78mCVYd9QYx2SIHzyDSTQGbjC+cdeF+in79Ozh/Bw==
+X-Received: by 2002:a05:6a21:e0a6:b0:3bf:7110:9949 with SMTP id
+ adf61e73a8af0-3bfed1c58e3mr2970823637.6.1782928705877; 
+ Wed, 01 Jul 2026 10:58:25 -0700 (PDT)
 Received: from fabio-Precision-3551..
  ([2804:1b3:a800:5116:3bae:12e8:a7c9:dab9])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f0bc27e0dsm63078eec.27.2026.07.01.10.58.20
+ 5a478bee46e88-30f0bc27e0dsm63078eec.27.2026.07.01.10.58.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 10:58:22 -0700 (PDT)
+ Wed, 01 Jul 2026 10:58:24 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: kever.yang@rock-chips.com
 Cc: djw@t-chip.com.cn, u-boot@lists.denx.de,
  Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH v2 4/5] roc-pc-plus-rk3399: Introduce new variant
-Date: Wed,  1 Jul 2026 14:57:59 -0300
-Message-ID: <20260701175800.40141-4-festevam@gmail.com>
+Subject: [PATCH v2 5/5] roc-pc-plus-rk3399: Enable USB Mass Storage support
+Date: Wed,  1 Jul 2026 14:58:00 -0300
+Message-ID: <20260701175800.40141-5-festevam@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260701175800.40141-1-festevam@gmail.com>
 References: <20260701175800.40141-1-festevam@gmail.com>
@@ -103,79 +103,52 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-The roc-pc-plus-rk3399 board shares a lot of features with the
-existing supported roc-pc-rk3399 board.
+Configure the USB0 DWC3 controller for peripheral mode and enable the
+required USB gadget options to support the U-Boot 'ums' command on the
+ROC-RK3399-PC Plus.
 
-Its devicetree is also supported in the upstream kernel.
+The 'ums' command provides a convenient way to expose the on-board eMMC
+as a USB Mass Storage device to a host computer, simplifying development,
+image installation and recovery without requiring removable media or
+network access.
 
-The plus variant has only a 12V supply. It contains a XMC XM25QH128C
-SPI NOR flash.
-
-Add support for the plus variant.
+Limit the controller to High-Speed operation by using the USB2 OTG PHY.
 
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 ---
 Changes since v1:
 - None.
 
- arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 9 +++++++++
- board/firefly/roc-pc-rk3399/MAINTAINERS     | 1 +
- configs/roc-pc-plus-rk3399_defconfig        | 4 ++++
- doc/board/rockchip/rockchip.rst             | 3 ++-
- 4 files changed, 16 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
- create mode 100644 configs/roc-pc-plus-rk3399_defconfig
+ arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi | 7 +++++++
+ configs/roc-pc-plus-rk3399_defconfig        | 3 +++
+ 2 files changed, 10 insertions(+)
 
 diff --git a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-new file mode 100644
-index 000000000000..7d5af3e234da
---- /dev/null
+index 7d5af3e234da..f613d75646c3 100644
+--- a/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
 +++ b/arch/arm/dts/rk3399-roc-pc-plus-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0+
+@@ -7,3 +7,10 @@
+ &dc_12v {
+ 	/delete-property/ vin-supply;
+ };
 +
-+#include "rk3399-roc-pc-u-boot.dtsi"
-+
-+/delete-node/ &vcc_hub_en;
-+
-+&dc_12v {
-+	/delete-property/ vin-supply;
++&usbdrd_dwc3_0 {
++	dr_mode = "peripheral";
++	maximum-speed = "high-speed";
++	phys = <&u2phy0_otg>;
++	phy-names = "usb2-phy";
 +};
-diff --git a/board/firefly/roc-pc-rk3399/MAINTAINERS b/board/firefly/roc-pc-rk3399/MAINTAINERS
-index 2c0de4432fa8..d32b078431ab 100644
---- a/board/firefly/roc-pc-rk3399/MAINTAINERS
-+++ b/board/firefly/roc-pc-rk3399/MAINTAINERS
-@@ -5,5 +5,6 @@ S:	Maintained
- F:	board/firefly/roc-pc-rk3399
- F:	include/configs/roc-pc-rk3399.h
- F:	configs/roc-pc-rk3399_defconfig
-+F:	configs/roc-pc-plus-rk3399_defconfig
- F:	configs/roc-pc-mezzanine-rk3399_defconfig
- F:	arch/arm/dts/rk3399-roc-pc*
 diff --git a/configs/roc-pc-plus-rk3399_defconfig b/configs/roc-pc-plus-rk3399_defconfig
-new file mode 100644
-index 000000000000..4ec2f7d44b5f
---- /dev/null
+index 4ec2f7d44b5f..f3d78c53e672 100644
+--- a/configs/roc-pc-plus-rk3399_defconfig
 +++ b/configs/roc-pc-plus-rk3399_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/roc-pc-rk3399_common.config>
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-plus"
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-plus.dtb"
-+CONFIG_SPI_FLASH_XMC=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index ae18b08031d2..b87d857a312e 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -81,7 +81,8 @@ List of mainline supported Rockchip boards:
-      - 96boards RK3399 Ficus (ficus-rk3399)
-      - 96boards Rock960 (rock960-rk3399)
-      - Firefly-RK3399 (firefly_rk3399)
--     - Firefly ROC-RK3399-PC
-+     - Firefly ROC-RK3399-PC (roc-pc-rk3399)
-+     - Firefly ROC-RK3399-PC Plus (roc-pc-plus-rk3399)
-      - FriendlyElec NanoPC-T4 (nanopc-t4-rk3399)
-      - FriendlyElec NanoPi M4 (nanopi-m4-rk3399)
-      - FriendlyElec NanoPi M4B (nanopi-m4b-rk3399)
+@@ -2,3 +2,6 @@
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-plus"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-plus.dtb"
+ CONFIG_SPI_FLASH_XMC=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_USB_GADGET_DOWNLOAD=y
 -- 
 2.43.0
 
