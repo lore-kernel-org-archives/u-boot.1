@@ -4,94 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D553C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:48:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6E6C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 701FC84A26;
-	Wed,  1 Jul 2026 15:48:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D805884B92;
+	Wed,  1 Jul 2026 15:50:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ESut5eVF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cUopCj3G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF76684B62; Wed,  1 Jul 2026 15:48:07 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 55EAF84BBF; Wed,  1 Jul 2026 15:50:13 +0200 (CEST)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A65DD8484C
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:48:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C8C984B53
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:50:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7e9bc8dd61fso588178a34.1
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:48:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-664ae993e4bso554707d50.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:50:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782913809; cv=none;
+ d=google.com; s=arc-20260327;
+ b=IgNBu2FEmN32OcQ4SDPwiVLRdVBD7bjTCvZvVtHeMNUO9ulTVI2B8ATRZDTG+K55g4
+ DMwsWD6EWX8B9StVsTwxAIWzZbXthojjHHJd7b134wg/DfnR8miX25WWKCgFciqWIEfA
+ 638DrJnjz0U7JgNmKA2CGoojMLVaL9MQ7zxApRhG5z438oVhxwj0o1RYon0i0WkULeYI
+ Fab4wTirUT+Z1BOhYv1hA9T50PuTh4qbD5q1TSUu7KqJpBQSDT0wAd/AxZPnDB854jpY
+ qVslNCaRv2pX6ciBXDLvX8CLbm68MADtOH3n+4Gtz8nqzXNXoqY0P1j5ruQa8d7k9UuU
+ djNw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=6cuViU/pxrIRVEqUhrVtugPMJoGNuxQrUenwwUwznP0=;
+ fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
+ b=dcFvwdX/v1QNU7MXVqpS78yFySwG5kkKzcAk84fz2QSuNsbxMAK0hTbFldwSuqlWPR
+ soViNgBu+ePM8lZA6ebhW8HojUf5a/CUDNu0hr7+wzUGHyE58bz2nw8pVZi3D8O6WbVT
+ rA0IFQXFHwWyoKrZSfoZmNwV1dATRwGxc5R7ZfEIbnTtrs3hLrKePreGjOzSkxSTjPRW
+ Xym3yRCCLG0bbVxRYpqSllOwgMQgLyRXisHB1b4ULttB3/Hc2nUqsOol1NF5LkNgsMHn
+ C0JgLqRj7VsAbaevuWWJHMGvmA468zlHuf9xh2VuCRWgTcCJZjSEJPdeZCmSEV8CdqSm
+ 8ogA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782913684; x=1783518484; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7mMIHvBL6MIgj5C0kAXMGOjgZktbjmJTiveK5Lc3LQw=;
- b=ESut5eVFHqNlADUnes7gWfXvKJsAamq3FYzk+2vRNfKwc+SE2P7ibuD9l9UPxXFxcJ
- hgJehdpme7nvn+LAqwfINVT+PJwN9DdzO6fMGAPETnhdHFQ9nIB8cMqo6nJ86a6P9y8W
- NRd7c2TNfLghao3uz3Heamvd9du2uJCF8YlQ0=
+ d=linaro.org; s=google; t=1782913809; x=1783518609; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6cuViU/pxrIRVEqUhrVtugPMJoGNuxQrUenwwUwznP0=;
+ b=cUopCj3G850YrotgCDjbCaGg63EstwVp3XAdyp4oi8y1BytfWKqK4KCX0YSq8I6aKQ
+ DAVM2SG0wm/bAhfuweJyWlxaCVBkFB48fYFZDIwJg64mA4n0QAVlyYOqFeI8uPf7iekD
+ Kn9RLAVLewgjQFqYBzHSjmzWq+WYTombIiGUICO67OWcfzeBI1ESp/jxNiUj2GNpSpNI
+ jlp9O3rXeD+JkgQRQtsn5xr9PFUfyFObiuF8hR+TmhjuwrlA23g1rq+kQmVCii3O3InL
+ qgVs3Cu/qF3PwP059rCKc9ylHkfAUuSXjSQbhPI8t9+kVSpFHtyAg41OyRTS9h2v8WbV
+ Y2HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782913684; x=1783518484;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7mMIHvBL6MIgj5C0kAXMGOjgZktbjmJTiveK5Lc3LQw=;
- b=Xe9q9yftLHfWxiC3bSEoDkoRaA1lNaKmq7YHCDytXedByz4sZOiItOXiXy+XKRHPM/
- Bv/lCEoj9GyJLQDT8EejgAh3DGn67kDW5jC7GrjjJxHKvFvWu1ETmrrhSocbTu+weGLk
- 9t8TuBS9U6T3dunKBtF4MQbp0bUxs9BTSEk3ftY9nhvK7k/T/LrLR5Mo5ihuVTOKAvqG
- QmrRZm/s/s0+oA73YDAV2frF4VtACibooyIIO4Xqb2D3bE6J53eBNvA1x5mpMc2wxGkb
- /+YNzYZUH8Uga4u4MsimDq+h8UpeM+mFtIdHCGabD9y23tse4xvR6JoaMPkdwarl4DqT
- dfLA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8uZJTokOKyG2Z3xiQsMw89a06BRmKgzJJr5v3MZvwv7DmGBLZEwbeK2fD3GgeYEURFo8POHk0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPt01LIxi5KwXTTf2eMSfdaRRvqKSE+jYCmqEB5MyW3Qc7EtgG
- tUrFUVdpHW5+VoxDnsI6DKjRW45BAf0VnkPLj5z6brUr9DmtgqnEypqRxO/Wx0eBdWg=
-X-Gm-Gg: AfdE7cnNIL+J+Y3uZ0Z2SzSKXvpOT27j5gvI68d910HmvnjxWZEY5EbNAMYNtaqduZp
- 2ysriRoQ3NXsJhJF2TfjMCoZ9iz4f1FWCYWrU6gWbBumEKVBYubNRoaNob3igV7zMwOE0FPEbot
- BZfEvBDU4M0Vpa0qM93cAPNaF7hu7Sv8m9e2nO3o2fbFMjtUv/w6utQmCR6YrcGbK3JGB4Ms+mB
- WXClEBixRu0GLVLwyK8Q0qOtdtw1ImihSmP//Fa4HKFDjF1nZ3BlYdCYgimS6zYB9hd7kIyrbVD
- JbR1hsLh+IsVGn20IrMTuveqoq9NktOnAfn1b63Rh4VaRVqKQq1reTLIXUXRY17TU7vlWmte/yL
- 2Dmlrw0v0qVCIOdQcan3XMms9MG8q8cD2EeFXHwaI/NElKw/h11zsdyEgO9FOxMuDTtOgDKlnYx
- h0vcI8U1P+7NFZ1TceDWNZWo0wTAGYxijfAPAvzyFO4OSUM3zWBE8+njt1FyNb44a8I8h2T9s6x
- ekilH8l5iHTTbaXWQ9IIEJRX6MQAJIGWEzHNA==
-X-Received: by 2002:a05:6830:2317:b0:7e9:cf5d:b7c3 with SMTP id
- 46e09a7af769-7eb5051c90emr630553a34.23.1782913684268; 
- Wed, 01 Jul 2026 06:48:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e9ec307edesm4873172a34.21.2026.07.01.06.48.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 06:48:03 -0700 (PDT)
-Date: Wed, 1 Jul 2026 07:48:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: U-Boot Concept Tree Proposal
-Message-ID: <20260701134801.GG749385@bill-the-cat>
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
- <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
- <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
- <CAFLszThAqVjZ0Jd5kdB5q=bhGTNpAeHw3WXpUHnFQ_OH_KmXLA@mail.gmail.com>
- <6d0f3078-2ba8-474c-9a1f-481eeb7f47bf@cherry.de>
- <20260629222142.GA749385@bill-the-cat>
- <12db3d24-12aa-4655-9889-7b6917b14b12@amd.com>
+ d=1e100.net; s=20251104; t=1782913809; x=1783518609;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6cuViU/pxrIRVEqUhrVtugPMJoGNuxQrUenwwUwznP0=;
+ b=DiM1YhBOdmhb5Ou1t9nbjjlJ+Y24J4/gzf30hENuFXh4JBzMIHR2cm50+F9y/34xfx
+ /f0/azssRl08sSaTrMdA63HtS8BQkAzZlYwymEODcboiPYIdQpz0PRm5D4pJQVS8Ipfp
+ NuFd0bdwYy6cWrY8rdY65IVlSDPpscxicxhS0utGqHyYqP8yfJncnp6oT615LhWsz3fb
+ 8ZGSD1X9qM4DkkKwSgYhiBIZxac68PHiYx7OEei1fR1JzoSBZsfGXEjQAdaQL2ckko66
+ 7FcBcbfAAZYBJqpzjS7msi9cnHNMhoN8cIwXrbH1VjLTaauPLGRBXajEseE4i2SWV4pX
+ ugNg==
+X-Gm-Message-State: AOJu0Yw8lybzXC2RZ5AzekPAknAopNZk2Id0TpZqX+2Q5E4giC8BgfxY
+ mPcEi5jS+QDiUvLiPiRYCFicO8VaXiXg7EsHH6ipg2+Qle+6qylyLpdZZOEjeuNxMGetf/w/RtY
+ f9Z9HyExJ2bRJKfDyH81u24/TGRQlGw0HMc9nishSng==
+X-Gm-Gg: AfdE7cl/ngzPUJggCBKs5gJVJkoWPCO/SBpzeVWN+8pWtO8XSsfJU3tCi1t3xrxJx0v
+ 6aiGDIH5RtXaD/lYNva+Q97u3REAf4jspMEDk5lpMSkv0Pwy7Q1SqF/phOydvR4/Mot1FGkMAIA
+ 0g1k3Pxw84nKr6ngyOibr4KjzGT8kQO/Mdtx9VJSEc5cv3rA9TKrvidI87IRN65GnCvT749NZ1b
+ JXIp05y8FYnxLQQSxqaVX66rHRidt8HuDG77eBjzTMvIwV04opAWdpGsKpK4j7QGh9Pd1sFy/Eq
+ 5E7WUTLC7IKogZSfJPzoVyyrUa1xAkAT9Ya71L5oxTV5FGHVRKgTmmtaIw2ZENSLpOArbPmZBgn
+ LOm4k3efCRLeFYc95byXBZW0eGes3mXURPDBPTY95KBasvGGCuioRLGooJURDnQY0bc3ClUFHuU
+ Qs4vnoy8lF0Tq+bEaGCGzpETZcviPJxsUALx8Sw7AmdQwumnr69vWM9XeZpAFPXoHhv3TUUMGD2
+ BYOVHSniLIkVVNgBQoa3sJV2eTJMKJyObN7XBtLH5B3K5aj3mJieIvuN+eY7xA8hdB378BBhWJT
+ 7Faugsl4fLZ60dsQmnxAQjU80epCZ4umu2HGaoJXEt45uTp6S9/2deevUEqrMSaK4l3lPus=
+X-Received: by 2002:a05:690e:d0b:b0:664:a4e6:3dde with SMTP id
+ 956f58d0204a3-66507991df2mr5567922d50.9.1782913808771; Wed, 01 Jul 2026
+ 06:50:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NW5poi9dU7iU/Bkg"
-Content-Disposition: inline
-In-Reply-To: <12db3d24-12aa-4655-9889-7b6917b14b12@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260627144421.2067410-1-harsimransingh.tungal@arm.com>
+ <20260627144421.2067410-5-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260627144421.2067410-5-harsimransingh.tungal@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 1 Jul 2026 16:49:31 +0300
+X-Gm-Features: AVVi8CdRaJd1GedO1OfndIM-rTginzlfQk-nfnrQXfq6JUD5WGCaKbHqsPdfD4Y
+Message-ID: <CAC_iWjLSnOmY2xUuGmzGZH5kipd_SZYssQKZMPZsq+UtZ67QRg@mail.gmail.com>
+Subject: Re: [PATCH v3 04/10] efi_loader: enable EFI runtime
+ SetVariable()/GetVariable() using FF-A transport
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,95 +120,462 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Harsimran,
 
---NW5poi9dU7iU/Bkg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for fixingthe callbacks. The logic is correct now but please
+split these into 4 different patches on the next revision, one for
+each runtime call that changes.
 
-On Wed, Jul 01, 2026 at 10:33:03AM +0200, Michal Simek wrote:
->=20
->=20
-> On 6/30/26 00:21, Tom Rini wrote:
-> > On Fri, Jun 26, 2026 at 08:07:16PM +0200, Quentin Schulz wrote:
-> >=20
-> > [snip]
-> > > I'll finish that my gut feeling (shared with some of my current and f=
-ormer
-> > > colleagues) is that U-Boot is disappointingly unstable. Unlike the Li=
-nux
-> > > kernel, U-Boot suffers from fewer eyes looking at code, fewer people
-> > > developing it, fewer people testing master or even any recent release=
- (the
-> > > number of reports we have for bugs on releases from years ago...), an=
-d lack
-> > > of proper and extensive CI test infrastructure (and if we have some, =
-it's
-> > > heavily centralized into a handful of people's offices). I loathe eve=
-ry time
-> > > I need to update U-Boot because I don't know what I'll have to debug =
-for
-> > > days or if I really do test everything there's to test (is it my faul=
-t for
-> > > not keeping up with master, yes, but I shouldn't feel this way).
-> > > So I really think we could have much more confidence in code being me=
-rged if
-> > > we had more testing, possibly on real hardware, possibly by companies
-> > > offering to do some proper CI (e.g. like Intel is doing with Yocto, s=
-pending
-> > > days testing release candidates before the project tags a release). M=
-aybe
-> > > with distros slowly adopting Aarch64 and U-Boot with it we'll have mo=
-re
-> > > coverage. I know you've worked on labgrid support for U-Boot and you =
-have
-> > > some merge request(s) still open there but it seems you're hitting th=
-e same
-> > > wall there you're hitting here.
-> >=20
-> > Thanks for the feedback here. I've been staying out of this general
-> > thread as I believe my thoughts are well known already.
-> >=20
-> > For the specific topic here, part of it comes down I believe to a very
-> > uneven level of testing. Both AMD/Xilinx and TI (and in turn, a number
-> > of their vendors) have labs and run tests with a good deal of frequency.
-> > I suspect NXP has some testing going on too, and this isn't an intended
-> > as an exhaustive list. But others really are very much volunteer lead
-> > and getting a reliable and remote lab setup really is a lot of work, so
-> > no one has done it. Rockchip is an unfortunate example here that I know
-> > you run in to. I have an rk3399 I've been trying to find time and space
-> > to get up in the sage lab, for example, but it's still just not there.
->=20
-> This is a topic which we should talk about more.
-> It is clear that we can't expect that internal labs will join our project
-> because it is very difficult to provide an access through infrastructure.
-> Also you can't wait for companies to finish their testing before release.
->=20
-> But on the other hand developers have enough HW on their desks which
-> shouldn't be that difficult to share. That's why I think we should provide
-> much easier
-> way how to share these HW and wire it up with u-boot CI. That could also
-> allow to connect custom qemu models instead of just upstream version.
+Thanks
+/Ilias
 
-I recently looked at how kernelci handles things currently, and since
-it's a "push" service, not a "pull" service, I think there's some
-lessons we can learn there, and build on. But that's its own whole
-separate topic. One of many that has been delayed by the PLC having to
-deal with a number of other issues related to the U-Boot name and
-u-boot.org domain.
 
---=20
-Tom
-
---NW5poi9dU7iU/Bkg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakUajQAKCRAr4qD1Cr/k
-Cr7gAP9y9a4aO7jgL0SVEG+kActVpKOe2kK4iOZmMi8FFFZpYQEAso7WBlvNYTdJ
-S81AL6vBgU+0qFVzRxcYyfg8bTQ55gc=
-=Iqol
------END PGP SIGNATURE-----
-
---NW5poi9dU7iU/Bkg--
+On Sat, 27 Jun 2026 at 17:44, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+>
+> Route EFI runtime variable APIs through FF-A MM communication
+>
+> Route EFI runtime variable services through the FF-A/MM backend in
+> lib/efi_loader/efi_variable_tee.c. After ExitBootServices(),
+> GetVariable(), SetVariable(), GetNextVariableName(), and
+> QueryVariableInfo() use the runtime entry points and continue to reach
+> the MM secure partition.
+>
+> Keep the existing boot-time helpers unchanged and add runtime service
+> wrappers for variable access and property handling. Reuse the
+> runtime-safe setup_mm_hdr() and common mm_communicate() path, which
+> selects the FF-A transport appropriate for the current phase, and use
+> the EFI runtime-safe memory helpers in the runtime-only code.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> ---
+>  lib/efi_loader/efi_variable_tee.c | 344 ++++++++++++++++++++++++++++--
+>  1 file changed, 326 insertions(+), 18 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> index fe205bdf966..474dd186a3e 100644
+> --- a/lib/efi_loader/efi_variable_tee.c
+> +++ b/lib/efi_loader/efi_variable_tee.c
+> @@ -716,6 +716,38 @@ out:
+>         return ret;
+>  }
+>
+> +static efi_status_t __efi_runtime set_property_int_runtime(const u16 *variable_name,
+> +                                                          efi_uintn_t name_size,
+> +                                                          const efi_guid_t *vendor,
+> +                                                          struct var_check_property *var_property)
+> +{
+> +       struct smm_variable_var_check_property *smm_property;
+> +       efi_uintn_t payload_size;
+> +       u8 *comm_buf = NULL;
+> +       efi_status_t ret;
+> +
+> +       payload_size = sizeof(*smm_property) + name_size;
+> +       if (payload_size > max_payload_size) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +       comm_buf = setup_mm_hdr((void **)&smm_property, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_SET,
+> +                               &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(*vendor));
+> +       smm_property->name_size = name_size;
+> +       efi_memcpy_runtime(&smm_property->property, var_property,
+> +                          sizeof(smm_property->property));
+> +       efi_memcpy_runtime(smm_property->name, variable_name, name_size);
+> +
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +
+> +       return ret;
+> +}
+> +
+>  static efi_status_t get_property_int(const u16 *variable_name,
+>                                      efi_uintn_t name_size,
+>                                      const efi_guid_t *vendor,
+> @@ -761,6 +793,49 @@ out:
+>         return ret;
+>  }
+>
+> +static efi_status_t __efi_runtime get_property_int_runtime(const u16 *variable_name,
+> +                                                          efi_uintn_t name_size,
+> +                                                          const efi_guid_t *vendor,
+> +                                                          struct var_check_property *var_property)
+> +{
+> +       struct smm_variable_var_check_property *smm_property;
+> +       efi_uintn_t payload_size;
+> +       u8 *comm_buf = NULL;
+> +       efi_status_t ret;
+> +
+> +       efi_memset_runtime(var_property, 0, sizeof(*var_property));
+> +       payload_size = sizeof(*smm_property) + name_size;
+> +       if (payload_size > max_payload_size) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +       comm_buf = setup_mm_hdr((void **)&smm_property, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_GET,
+> +                               &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(smm_property->guid));
+> +       smm_property->name_size = name_size;
+> +       efi_memcpy_runtime(smm_property->name, variable_name, name_size);
+> +
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +       /*
+> +        * Currently only R/O property is supported in StMM.
+> +        * Variables that are not set to R/O will not set the property in StMM
+> +        * and the call will return EFI_NOT_FOUND. We are setting the
+> +        * properties to 0x0 so checking against that is enough for the
+> +        * EFI_NOT_FOUND case.
+> +        */
+> +       if (ret == EFI_NOT_FOUND)
+> +               return EFI_SUCCESS;
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +       efi_memcpy_runtime(var_property, &smm_property->property, sizeof(*var_property));
+> +
+> +       return EFI_SUCCESS;
+> +}
+> +
+>  efi_status_t efi_get_variable_int(const u16 *variable_name,
+>                                   const efi_guid_t *vendor,
+>                                   u32 *attributes, efi_uintn_t *data_size,
+> @@ -848,6 +923,93 @@ out:
+>         return ret;
+>  }
+>
+> +efi_status_t __efi_runtime EFIAPI
+> +efi_get_variable_int_runtime(u16 *variable_name, const efi_guid_t *vendor,
+> +                            u32 *attributes, efi_uintn_t *data_size, void *data)
+> +{
+> +       struct var_check_property var_property;
+> +       struct smm_variable_access *var_acc;
+> +       efi_uintn_t payload_size;
+> +       efi_uintn_t name_size;
+> +       efi_uintn_t tmp_dsize;
+> +       u8 *comm_buf = NULL;
+> +       efi_status_t ret, tmp;
+> +       u32 var_attr = 0;
+> +
+> +       if (!variable_name || !vendor || !data_size) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +
+> +       /* Check payload size */
+> +       name_size = u16_strsize(variable_name);
+> +       if (name_size > max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +
+> +       /* Trim output buffer size */
+> +       tmp_dsize = *data_size;
+> +       if (name_size + tmp_dsize >
+> +                       max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE) {
+> +               tmp_dsize = max_payload_size -
+> +                               MM_VARIABLE_ACCESS_HEADER_SIZE -
+> +                               name_size;
+> +       }
+> +
+> +       /* Get communication buffer and initialize header */
+> +       payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + tmp_dsize;
+> +       comm_buf = setup_mm_hdr((void **)&var_acc, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_GET_VARIABLE, &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       /* Fill in contents */
+> +       efi_memcpy_runtime(&var_acc->guid, vendor, sizeof(var_acc->guid));
+> +       var_acc->data_size = tmp_dsize;
+> +       var_acc->name_size = name_size;
+> +       var_acc->attr = attributes ? *attributes : 0;
+> +       efi_memcpy_runtime(var_acc->name, variable_name, name_size);
+> +
+> +       /* Communicate */
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +       if (ret != EFI_SUCCESS && ret != EFI_BUFFER_TOO_SMALL)
+> +               return ret;
+> +
+> +       /* Update with reported data size for trimmed case */
+> +       *data_size = var_acc->data_size;
+> +       if (attributes)
+> +               var_attr = var_acc->attr;
+> +
+> +       /* Copy the data if ret is EFI_SUCCESS  */
+> +       if (ret == EFI_SUCCESS) {
+> +               if (data)
+> +                       efi_memcpy_runtime(data, (u8 *)var_acc->name + var_acc->name_size,
+> +                                          var_acc->data_size);
+> +               else
+> +                       ret = EFI_INVALID_PARAMETER;
+> +       }
+> +
+> +       /*
+> +        * UEFI > 2.7 needs the attributes set even if the buffer is
+> +        * smaller
+> +        */
+> +       if (attributes) {
+> +               tmp = get_property_int_runtime(variable_name, name_size, vendor,
+> +                                              &var_property);
+> +               if (tmp != EFI_SUCCESS) {
+> +                       ret = tmp;
+> +                       return ret;
+> +               }
+> +               *attributes = var_attr;
+> +               if (var_property.property &
+> +                   VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+> +                       *attributes |= EFI_VARIABLE_READ_ONLY;
+> +       }
+> +
+> +       return ret;
+> +}
+> +
+>  efi_status_t efi_get_next_variable_name_int(efi_uintn_t *variable_name_size,
+>                                             u16 *variable_name,
+>                                             efi_guid_t *guid)
+> @@ -912,6 +1074,68 @@ out:
+>         return ret;
+>  }
+>
+> +efi_status_t __efi_runtime EFIAPI
+> +efi_get_next_variable_name_int_runtime(efi_uintn_t *variable_name_size,
+> +                                      u16 *variable_name, efi_guid_t *guid)
+> +{
+> +       struct smm_variable_getnext *var_getnext;
+> +       efi_uintn_t payload_size;
+> +       efi_uintn_t out_name_size;
+> +       efi_uintn_t in_name_size;
+> +       u8 *comm_buf = NULL;
+> +       efi_status_t ret;
+> +
+> +       if (!variable_name_size || !variable_name || !guid) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +
+> +       out_name_size = *variable_name_size;
+> +       in_name_size = u16_strsize(variable_name);
+> +
+> +       if (out_name_size < in_name_size) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +
+> +       if (in_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               return ret;
+> +       }
+> +
+> +       /* Trim output buffer size */
+> +       if (out_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE)
+> +               out_name_size = max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE;
+> +
+> +       payload_size = MM_VARIABLE_GET_NEXT_HEADER_SIZE + out_name_size;
+> +       comm_buf = setup_mm_hdr((void **)&var_getnext, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_GET_NEXT_VARIABLE_NAME,
+> +                               &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       /* Fill in contents */
+> +       efi_memcpy_runtime(&var_getnext->guid, guid, sizeof(*guid));
+> +       var_getnext->name_size = out_name_size;
+> +       efi_memcpy_runtime(var_getnext->name, variable_name, in_name_size);
+> +       efi_memset_runtime((u8 *)var_getnext->name + in_name_size, 0x0,
+> +                          out_name_size - in_name_size);
+> +
+> +       /* Communicate */
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +       if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL) {
+> +               /* Update with reported data size for trimmed case */
+> +               *variable_name_size = var_getnext->name_size;
+> +       }
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +
+> +       efi_memcpy_runtime(guid, &var_getnext->guid, sizeof(*guid));
+> +       efi_memcpy_runtime(variable_name, var_getnext->name, var_getnext->name_size);
+> +
+> +       return ret;
+> +}
+> +
+>  efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                                   const efi_guid_t *vendor, u32 attributes,
+>                                   efi_uintn_t data_size, const void *data,
+> @@ -994,7 +1218,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                 var_property.property |= VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
+>                 var_property.attributes = attributes;
+>                 var_property.minsize = 1;
+> -               var_property.maxsize = var_acc->data_size;
+> +               var_property.maxsize = data_size;
+>                 ret = set_property_int(variable_name, name_size, vendor, &var_property);
+>         }
+>
+> @@ -1045,7 +1269,7 @@ out:
+>  }
+>
+>  /**
+> - * efi_query_variable_info() - get information about EFI variables
+> + * efi_query_variable_info_int_runtime() - get information about EFI variables
+>   *
+>   * This function implements the QueryVariableInfo() runtime service.
+>   *
+> @@ -1054,24 +1278,50 @@ out:
+>   *
+>   * @attributes:                                bitmask to select variables to be
+>   *                                     queried
+> - * @maximum_variable_storage_size:     maximum size of storage area for the
+> + * @max_variable_storage_size:         maximum size of storage area for the
+>   *                                     selected variable types
+> - * @remaining_variable_storage_size:   remaining size of storage are for the
+> + * @remain_variable_storage_size:      remaining size of storage are for the
+>   *                                     selected variable types
+> - * @maximum_variable_size:             maximum size of a variable of the
+> + * @max_variable_size:                 maximum size of a variable of the
+>   *                                     selected type
+>   * Return:                             status code
+>   */
+>  efi_status_t EFIAPI __efi_runtime
+> -efi_query_variable_info_runtime(u32 attributes, u64 *max_variable_storage_size,
+> -                               u64 *remain_variable_storage_size,
+> -                               u64 *max_variable_size)
+> +efi_query_variable_info_int_runtime(u32 attributes, u64 *max_variable_storage_size,
+> +                                   u64 *remain_variable_storage_size,
+> +                                   u64 *max_variable_size)
+>  {
+> -       return EFI_UNSUPPORTED;
+> +       struct smm_variable_query_info *mm_query_info;
+> +       efi_uintn_t payload_size;
+> +       efi_status_t ret;
+> +       u8 *comm_buf;
+> +
+> +       if (!max_variable_storage_size ||
+> +           !remain_variable_storage_size ||
+> +           !max_variable_size || !attributes)
+> +               return EFI_INVALID_PARAMETER;
+> +
+> +       payload_size = sizeof(*mm_query_info);
+> +       comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
+> +                               &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       mm_query_info->attr = attributes;
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +       *max_variable_storage_size = mm_query_info->max_variable_storage;
+> +       *remain_variable_storage_size =
+> +                       mm_query_info->remaining_variable_storage;
+> +       *max_variable_size = mm_query_info->max_variable_size;
+> +
+> +       return ret;
+>  }
+>
+>  /**
+> - * efi_set_variable_runtime() - runtime implementation of SetVariable()
+> + * efi_set_variable_int_runtime() - runtime implementation of SetVariable()
+>   *
+>   * @variable_name:     name of the variable
+>   * @guid:              vendor GUID
+> @@ -1081,11 +1331,69 @@ efi_query_variable_info_runtime(u32 attributes, u64 *max_variable_storage_size,
+>   * Return:             status code
+>   */
+>  static efi_status_t __efi_runtime EFIAPI
+> -efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> -                        u32 attributes, efi_uintn_t data_size,
+> -                        const void *data)
+> +efi_set_variable_int_runtime(u16 *variable_name, const efi_guid_t *guid,
+> +                            u32 attributes, efi_uintn_t data_size,
+> +                            const void *data)
+>  {
+> -       return EFI_UNSUPPORTED;
+> +       efi_status_t ret, mm_communicate_ret = EFI_SUCCESS;
+> +       struct var_check_property var_property;
+> +       struct smm_variable_access *var_acc;
+> +       efi_uintn_t payload_size;
+> +       efi_uintn_t name_size;
+> +       u8 *comm_buf = NULL;
+> +       bool ro;
+> +
+> +       if (!variable_name || variable_name[0] == 0 || !guid)
+> +               return EFI_INVALID_PARAMETER;
+> +
+> +       if (data_size > 0 && !data)
+> +               return EFI_INVALID_PARAMETER;
+> +
+> +       /* Check payload size */
+> +       name_size = u16_strsize(variable_name);
+> +       payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_size;
+> +       if (payload_size > max_payload_size)
+> +               return EFI_INVALID_PARAMETER;
+> +
+> +       ro = !!(attributes & EFI_VARIABLE_READ_ONLY);
+> +       attributes &= EFI_VARIABLE_MASK;
+> +
+> +       ret = get_property_int_runtime(variable_name, name_size, guid,
+> +                                      &var_property);
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +
+> +       if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+> +               return EFI_WRITE_PROTECTED;
+> +
+> +       comm_buf = setup_mm_hdr((void **)&var_acc, payload_size,
+> +                               SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
+> +       if (!comm_buf)
+> +               return ret;
+> +
+> +       /* Fill in contents */
+> +       efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
+> +       var_acc->data_size = data_size;
+> +       var_acc->name_size = name_size;
+> +       var_acc->attr = attributes;
+> +       efi_memcpy_runtime(var_acc->name, variable_name, name_size);
+> +       efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_size);
+> +
+> +       /* Communicate */
+> +       ret = mm_communicate(comm_buf, payload_size);
+> +       if (ret != EFI_SUCCESS)
+> +               mm_communicate_ret = ret;
+> +
+> +       if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)) {
+> +               var_property.revision = VAR_CHECK_VARIABLE_PROPERTY_REVISION;
+> +               var_property.property |= VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
+> +               var_property.attributes = attributes;
+> +               var_property.minsize = 1;
+> +               var_property.maxsize = data_size;
+> +               ret = set_property_int_runtime(variable_name, name_size, guid, &var_property);
+> +       }
+> +
+> +       return (mm_communicate_ret == EFI_SUCCESS) ? ret : mm_communicate_ret;
+>  }
+>
+>  /**
+> @@ -1118,11 +1426,11 @@ void efi_variables_boot_exit_notify(void)
+>
+>         /* Update runtime service table */
+>         efi_runtime_services.query_variable_info =
+> -                       efi_query_variable_info_runtime;
+> -       efi_runtime_services.get_variable = efi_get_variable_runtime;
+> +                       efi_query_variable_info_int_runtime;
+> +       efi_runtime_services.get_variable = efi_get_variable_int_runtime;
+>         efi_runtime_services.get_next_variable_name =
+> -                       efi_get_next_variable_name_runtime;
+> -       efi_runtime_services.set_variable = efi_set_variable_runtime;
+> +                       efi_get_next_variable_name_int_runtime;
+> +       efi_runtime_services.set_variable = efi_set_variable_int_runtime;
+>         efi_update_table_header_crc32(&efi_runtime_services.hdr);
+>
+>         /* Record that ExitBootServices() has been called */
+> --
+> 2.34.1
+>
