@@ -4,127 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83554C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 09:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 817E5C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 09:43:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAFCE84B20;
-	Wed,  1 Jul 2026 11:27:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B37FA84B20;
+	Wed,  1 Jul 2026 11:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dGxKJu2E";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gj6vrE/V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACA1984B45; Wed,  1 Jul 2026 11:27:32 +0200 (CEST)
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [IPv6:2607:f8b0:4864:20::b133])
+ id D1F2D84B42; Wed,  1 Jul 2026 11:43:17 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 108DE84AE9
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 11:27:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F27084AE9
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 11:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-66493875766so509450d50.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 02:27:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782898048; cv=none;
- d=google.com; s=arc-20260327;
- b=WOtMHd34mpee5mOPCBRG1PXDJDHS9H2SZBwnDHBgF8Rp9PpsqIy6VwPxxTfqnbJc4k
- SeTTyqZP3yLpViYYPoLxFyvDsnZSnaDQWeYzdCyEJU/E87rNuOuvzWUMNBQse7Im6B1c
- TcfNjZ4CKTj35+DdTlVq+174qOb46Z9PRZk+MjjKMFRASQpHdTSfnd6OTHSCfpZh3YmE
- n9voFCkKQA/pc9V/QGwSGdTjFNGueOiB0mfYfpSd2X4boZpnc/G+x1IVftqqidMP4cFC
- HU/Hk9K6x3pLnxEdjrSGToPeGGoShiuLVkyNgis7BXGqAoVoxypT6HAOxsytH+a5ii74
- MKwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=nrIAw9sqMlzsVRZnDO0Bm28DXg97x6dQyXk57hbn1sw=;
- fh=dHxJPKYvgjvlKXtN3bDQA/9b8rJO/Ei1WgGvvZVUVb8=;
- b=AnG2HrJVsARgfzT/6Aad4nY9tXl8VijcNbbMJC4tlFkWS1qnWjz41jxgwtGUNysJTj
- IqitzemoAcStDiCg+Ed3VsDe4Dcvw/zjLunT110a6eL6FkefLllnNoSQNODKA9qAYbzw
- r2a1fnoVVckQTLiQOHd9NVxuZSNHEkju7693Ufxj9AK8RrjLqgQylu0sJjPnSCpXYUuy
- 4M13UHnN/nlQm5qwQWt9EqISgYwWo6XH/hPrDztbb5oELizwKnB7/s3MtaIhlIzBUSQ2
- MU9fQstmx5/sn1utlA3DvSLhmuN4s5kWB1NJBq/k/H8Th8Aql6r4Z+oUiliVhBFLXoft
- bOzA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-4631679f204so941911f8f.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 02:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782898048; x=1783502848; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nrIAw9sqMlzsVRZnDO0Bm28DXg97x6dQyXk57hbn1sw=;
- b=dGxKJu2EXO7jMYkNYI9tLxA2bKBjrdd4ZmrDPW+tRoZUnx56pLtd1nHaJnbcoSRfk3
- zYYp8lrthLX3GXlKwYEgYik3+TyXSWZckLCH7TyYo7WyuM+0oL14LbRPk2w8wqBjQLUI
- Sc5Bt36eulsCto8cDUhkYOiSEoT4JyiboRosdfVebV7xgoYQ/ej9lxjqNihDFtJv6lhF
- R19RvwOTTDm/ssNWGaQe4Ma+xNCb7ZUY6dYWjltBdcXCcHnLmFPwZrnCWe1tdiyTlH5R
- AfMsHlHF2DheUYbUrFOKNMst0umHZf3Z+DVPp5cqjrhT5gHKFaSjp29RmoVQFdKe3PMd
- xMtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782898048; x=1783502848;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1782898994; x=1783503794; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nrIAw9sqMlzsVRZnDO0Bm28DXg97x6dQyXk57hbn1sw=;
- b=J7lXDkaj5qB8HtyLFe7ZQ9dqeQbi7AMSOxdrAPnC5/39nfWV4fm9yP52XdcZUf6RAK
- CwmklIusBlVrDPyEfCaiq1HSuMWX5skKiMw6iRNCwWx4wnsr5PzBbPECoWUyWv1w2q7o
- K+qFgoxJVKb5n1s/kiyEwuXes9ugFzvSjAxjMSrVMmExMIZBjdM86bAvYMKXmRdFRw7z
- DNCQaiJAMiV85qTogbp4Q0tqcVHhD9djfXUvV88ZIERD34TBzrud4WMQmDMFi6jhK4HR
- Ddd5ClSd/Z5D0xC2Ay3GX5vHGBw3qefXsosIlPdroknBVut/M1zsvBEb8oRNaSM9ZoeS
- e3/A==
-X-Forwarded-Encrypted: i=1;
- AHgh+Roemgj4qSqALfsDsfaIf1eckoBy6CFuhC3l6XFffZWX/+2tpPc6XzMfTFAYuMm+FIGQNrK4Y5g=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdmydwIPaVCLzke3RHxMhUKeiMjZxCnRChBd45cgIRpu9G9TXB
- RFBwmsvdnkEI/ei3iUa3jXVescfO6NaPmPUpLYuo8bRS8pSDWFej0NWjyf4QPW5HlqYrxp4MX/e
- GoiLm5/aYSA+fBkUWRP0dLwb7520JsxajFPsXgcaJ9A==
-X-Gm-Gg: AfdE7ckUPFGXhiBw1gfmwIXtMoEa31Oq4HUt6hkgE3BzrHh50YvSE5HDqbrNTk1s2kj
- DMSy2yonEVaNms/gdfUeKixf6y8T+sCKFovgmVTKOBLjZIE9jqdZZJtjQ9UPR3IWmRq3ZRCRYY0
- Ic0qCYf4EBCZjpdlViNTBBtu/raRLfxr0SVXfGft8qYAML3mAso0NBpALa/qgkIfFYYPWQb7v8B
- v24Ub0Kwm+nTOyZMQkKxpQo9yz5Yc9DjfiD3iRi5dl1nvbKaUVaS4S2U92Qk220+lmrFHJe0vDG
- qBbYwnlrj7WKm7hLh5RK5s4ste5XRmqArXUD+BsZtxe/kP5XVHfp9yvJe7I15NxNINrZ9f8aspK
- Iw0KESTPjkZQmZSC5bp9suwLnKTeQtGl4jXVMz5YJIHavj1GUKm+yopBKtsPKAIkopn2nh99Sm6
- 0iJXR6RtOrVbAdOrdRQ2CBbwmf+wBDF/jqz26v9O1DDpto7nIgrnHTo+1yHgR8WMwI+9udbz13/
- fU4p+sokY+7+XRKpFjJo71SFOkclEMXHT2XsV1Dh5B+gc2XPYb8Kgyz6p3QJNs04nBsh9hAaDBc
- 8e6ZQTVDtZaWQ2eBzjb+0f2kgnBZ8NVk1GeM6zBRrpi/IGi4iz+lN1xVpU74H5mwGLgd4I4=
-X-Received: by 2002:a05:690e:4805:b0:664:ae68:33a1 with SMTP id
- 956f58d0204a3-66521bca8c2mr617287d50.66.1782898047655; Wed, 01 Jul 2026
- 02:27:27 -0700 (PDT)
+ bh=PyozbdQNxz26RrdKV4xjchd/kkIzLheulWEgk4HWYTY=;
+ b=gj6vrE/VwjANNDKbxazpQNFjeALMym/pHvItA7rpIA85PAfsMHKh91qjzlV/bGjH2f
+ rDtMa1Mu0P+BjeURUJJE9NtgPGLhEr56bvpVDDIWZAT91mq7ZDHfJKXzBKFutkhzu9fb
+ NvEiwSaQ5Bh7y6wnPI48XN8T1jmi2W6knz5d/CSNpa3sL+chVbUQuhrmWr2R934r5vW9
+ vSn4StpYZsKZ+dh/DGRWkQbycaUUHuL0K4lr071IczrKb2ha23kDY1q66sLxycLJQoVe
+ H/cZ3Mcvhqqc+9tiCo1N+kBvoZmOoCUGWI20jCMQU7h0In28FTjQhdmGI7JsiULoIWtq
+ 8uEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782898994; x=1783503794;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PyozbdQNxz26RrdKV4xjchd/kkIzLheulWEgk4HWYTY=;
+ b=d07Ua7QCP76bpMpyGwahPYslTKLOjBPRTyCE5H4JG6T9WONmXF8yAgXmuwYZh22QEo
+ +KgykH5/bdZy7ih9QDCLSzeI/fO6FvqVzWvj7ziqLOZIMDX4zBqnfF2ePwGcq1jBpnzA
+ IU55ENyrvAwPZG9iH2vQzlt5eYJ1N7pb8LhTG9DZh8P0Z3IWtK/djIry+zereGWHsUH6
+ sb5jPNL2lrvq5HnR59bzNJqRz5nvA6vKAfzFOnjQZ5+g6B1Vk+OugG6Guf2R+k22dsww
+ u5OeXzhEfmE7uBe4nWdkm+/UFMeFa6/+XETDj4C+Z5H5658Ek+z7yAT3NYH81J7oB7V/
+ LcgQ==
+X-Gm-Message-State: AOJu0YwoHRMghYGYchKvyy/d+kcEOz/zuBLT4LcQ2Lp9wIrEEeG19zvB
+ py0sGOEYBouPNfCbBEGm7LwWLxmObh6iT8wrYpPoicsxR4qXaT/f9UW+8q9nZY+JYF0=
+X-Gm-Gg: AfdE7ckbHTdghBqQ/DayRONGgNQ2e/KQ8LHfjTwRX3K1ejxI7KGMn+4WqLabGPPmEIX
+ ySPKRvJVQ6Jf1X3DPdNVgDHW78/vA5NNiQYqyHPUN6scwHziGaP1EzwA6SWjq+2aGQ1zR6ddchr
+ DRkSAI5zPAUFYdhHZLBYzlqRrU1SzWitdyQyuW264TgmwpUkBN1CK6Jc8AwvGjhQa5akfKhyvgX
+ VjGyRK9P2iHCeWNWEBqY6l9h9v2fhFhaViMzM9vo1pV7TC8on7im6BxdTanQS1Fi0RKQi1p+bYp
+ OVIdq5GtCfYYwa9X8RjjaS9zQsKUbmszm0cuSHWNq7/UjhK024Vcip6WbpzHBryaB4UDcBwrPYI
+ SIqGgNuqT2NqepxEkfOSBELInMsXD7h2z3iu4zTQXIybZw5CJ0ihMphWVhwBgCkGtyBxrxJ+AXL
+ 8nuMOXv1Xn5SPPj8Pl84xzNuF+ZkJMbsPzZQ==
+X-Received: by 2002:a05:6000:428a:b0:473:f047:4f with SMTP id
+ ffacd0b85a97d-475de54e1eamr7914295f8f.8.1782898993747; 
+ Wed, 01 Jul 2026 02:43:13 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47563d195a7sm15303193f8f.7.2026.07.01.02.43.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jul 2026 02:43:13 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
+References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
+Subject: Re: [PATCH 0/5] pci: Use dev_read/dev_remap APIs
+Message-Id: <178289899286.231883.1738985232351249708.b4-ty@b4>
+Date: Wed, 01 Jul 2026 11:43:12 +0200
 MIME-Version: 1.0
-References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
- <20260629084507.3254232-20-jens.wiklander@linaro.org>
- <7dd650b5-2d08-45cc-8d7f-c9bee56de4a8@nabladev.com>
- <CAHUa44FQ6b4siyBnOdEz2cBs9rrRNCgGC=-s0h2gkGG79dLADA@mail.gmail.com>
- <df8a9508-b070-4e95-ae6f-23fdc17d0b4c@nabladev.com>
-In-Reply-To: <df8a9508-b070-4e95-ae6f-23fdc17d0b4c@nabladev.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 1 Jul 2026 12:26:51 +0300
-X-Gm-Features: AVVi8CcZbDkR-7SpQw3z1zUme44yC2x73kNZ32ZpLFiegEzv9_48VgplaoIE7Mk
-Message-ID: <CAC_iWjL54osePCfrqWCGUn2DF-1D7eabJjcZ+8Lq0Uco8zEskw@mail.gmail.com>
-Subject: Re: [PATCH v4 19/64] usb: dwc3: import from kernel v4.16
-To: Marek Vasut <marex@nabladev.com>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de, 
- Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Eddie Cai <eddie.cai.linux@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Alexey Charkov <alchark@flipper.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,60 +104,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi,
 
-[...]
+On Tue, 26 May 2026 16:09:08 +0800, Peng Fan (OSS) wrote:
+> Convert PCI drivers from legacy devfdt_* and fdtdec_* interfaces to
+> dev_read_* and dev_remap_* APIs, enabling support for both live device
+> tree and flat DT while removing dependency on global FDT access.
+> 
+> No functional changes.
+> 
+> 
+> [...]
 
-> >>> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> >>> index 07832509584f..e94bf91cc58a 100644
-> >>> --- a/drivers/usb/dwc3/core.c
-> >>> +++ b/drivers/usb/dwc3/core.c
-> >>> @@ -100,6 +100,8 @@ static void dwc3_set_prtcap(struct dwc3 *dwc, u32 mode)
-> >>>        reg &= ~(DWC3_GCTL_PRTCAPDIR(DWC3_GCTL_PRTCAP_OTG));
-> >>>        reg |= DWC3_GCTL_PRTCAPDIR(mode);
-> >>>        dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-> >>> +
-> >>> +     dwc->current_dr_role = mode;
-> >>>    }
-> >>>
-> >>>    static void __dwc3_set_mode(struct work_struct *work)
-> >>> @@ -133,8 +135,6 @@ static void __dwc3_set_mode(struct work_struct *work)
-> >>>
-> >>>        dwc3_set_prtcap(dwc, dwc->desired_dr_role);
-> >>>
-> >>> -     dwc->current_dr_role = dwc->desired_dr_role;
-> >>> -
-> >>>        spin_unlock_irqrestore(&dwc->lock, flags);
-> >>>
-> >>>        switch (dwc->desired_dr_role) {
-> >>> @@ -147,6 +147,7 @@ static void __dwc3_set_mode(struct work_struct *work)
-> >>>                                otg_set_vbus(dwc->usb2_phy->otg, true);
-> >>>                        phy_set_mode(dwc->usb2_generic_phy, PHY_MODE_USB_HOST);
-> >>>                        phy_set_mode(dwc->usb3_generic_phy, PHY_MODE_USB_HOST);
-> >>> +                     phy_calibrate(dwc->usb2_generic_phy);
-> >>
-> >> Does this actually compile ? I don't think U-Boot code base contains
-> >> phy_calibrate() function ?
-> >
-> > No, I don't expect it does. By the way, it's mentioned in the commit message.
-> Can this be made bisectable ?
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-pci-next)
 
-I personally don't think it's worth the effort even if it's doable. We
-had a similar discussion when we did the Makefile bumps from 4.x to
-6.x on a community call and we agreed that the period is way too long
-for cherry-picked bisectable commits (and the makefike gap started at
-~4.16). Besides, if we try and do this bisectable, we'll end up with
-patches that contain the cherry-pick + some fixups per patch.  We are
-not bumping the dwc3 support that wasn't updated for 6 months. This is
-literally 12 years of missing updates.
+[1/5] pci: rcar: Use dev_read_addr_index()
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/f657eab9bedb0b7ea32857345fffb8c3c68dd6b6
+[2/5] pci: mpc85xx: Simplfy code with dev_remap_addr()
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/9b6f2786aafd5247dd748e127ea6a01038b09b42
+[3/5] pci: dw_mvebu: Use dev_read_addr_x APIs
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/06fdccbcd8b3f5eba2788ce5cf4a5fe39e91783a
+[4/5] pci: imx: Use dev_read_addr_index_ptr()
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/fc1016d6838b9994083062a42a4ba530a85596cc
+[5/5] pci: layerscape: ep: Use dev APIs
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/57abbbcc945079404ba8e3d4a68c991e3cd92a65
 
-The first iteration of the patches had the fixes bundled in 5 patches.
-With this approach we can at least track the commits that got
-backported + a final patch to bring back the U-Boot code we had on top
-of 3.19-rc1 and any fixes that are required. So before we move this
-any further, do you have a preferred way to do this? I'm afraid that
-expecting 12 years of commits and ~1459 patches (with the u-boot
-changed on top) to be bisectable is not realistic.
+-- 
+Neil
 
-Thanks
-/Ilias
