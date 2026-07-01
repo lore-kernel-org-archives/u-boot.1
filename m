@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AD02C43327
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E53C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2940E84BC1;
-	Wed,  1 Jul 2026 13:59:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCA0584BC1;
+	Wed,  1 Jul 2026 14:00:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E+19SmQc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QMB/fJEB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84F1084BED; Wed,  1 Jul 2026 13:59:52 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id CA0FA84C22; Wed,  1 Jul 2026 14:00:14 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B186841F2
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:59:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBC92841F2
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:00:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c1268f71572so235386166b.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 04:59:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782907190; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-697564cb69eso1394671a12.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:00:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782907212; cv=none;
  d=google.com; s=arc-20260327;
- b=DlHJ+R9cxxyRnG++bR8TQUwFkjAVb1TWAxKzH3vwxrBouZhpfY3m9FMtnhaZZk+JuY
- qnnAOIMeaNN16itkF+Y74JIDrU92h8C2ddmduTNIryud8EcdiMg7TQr2N9ubpd9wPZtc
- QqB3h/uUNCzokxLnen+7d1xcl0P4P79wyfGPbSkQ7bnf833JEA7e8ib/5lN6CBmJk0s6
- HQPLbFgqUmOYofwuLzC67IRrX2B+HlH7o23CxryuEnIjKpltaKdEHoEivJo9lDxSJE/x
- HoOZnpwCILuxaXf2+9Li1JE+bJ35ZJgfcBMMrJES1d6ATc6x1Xt0XzhHwbjnx8HuNVhq
- y/mQ==
+ b=I4QjWuCG1hStfsT3tV87AjmwAD1TkWqy6VpFyMb8kihFVWnGXGK5xC2xqurRZsgrG0
+ LkBV4tY+MUskb0ZrScFzkZODyjxOww+zAoffnM/RpVV6qXRmfpdZ2U1797cQzws65zpx
+ Za7/yZB827hP54eEEo3owhhPxgmdhcu5IVOnacdVAuQoCsx/C8awpJybaYg9P0P2Jdr7
+ SMKRLJXsyEf1LZXLLy96Ss2CiKI6Mf9eInJqP5Z5JO9OSHt8CmjiXy7pNrvrQGcx/8mu
+ b2sv/FaeeR2COoF8sS4T4PA7RkDW85w/wzXllcThJ9toR4JOzxXywu0iN1e6qdSHXeLj
+ TBEw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=5zKBi5hPjDZUWWJBKXD2+rJ2k87M2Dd1RbheBHuW5UM=;
- fh=4o/sjNsMS2231QpXbZGbAxA2QULENnKU2WMW02OUdEk=;
- b=CJcZ+aLfpUHyArOuJEsrLmJbsqbzyBA/yOF/zxX3UfljmcKJRTx0TlVx7pjOA7WY7W
- vHbloH3ZaijF0JIQdj23XRMmNA8qGlRnIuZxbvUTVwUwukdqzL7RFVFC8IKAwEyZAA1v
- EQBOXwTCNX0dtj4lN2xt4jhsrEG1XQV9V7p93pIILun19ElR46HHc3e+JXvFxaLNLj3w
- g16BKNIcmZkzfoe7JkoA2/R/zV6kMmG1OKq1hPYO90Cr2mt28mGsODOOx2rUVl2Ea23F
- +/iS4XGdcCTvZ8MuTm6k1gN9d1V2/9FarvxsQi+bLkEt58N0rmEx3BF+bp1ZziwXdqSp
- xlrg==; darn=lists.denx.de
+ bh=h8JR2a3a6egLvPACY07QpNE8KVqFapNCAKCUpBvrHTM=;
+ fh=6aTww0k35WzsNQ9Nw6xJ4vg18Y7yucnNltbPB2b9AyE=;
+ b=D2+jiBRXxaoNMBTH2mV4N+hdIjzTLowY/YYaotx5Nq6eEf952TL6LouFh/KySIBne2
+ +uMbPYoFhg+1zuFlDGAOt6H+NycmJuTnhkZMX+8qFxtpI9vZHhurH6UdsAHoCsAwYgaz
+ AE8VogTvzfQZoCSCL2hA24pUS4PpnPGqccBUcOjGjqTl5bSmJX3/lzhigo1MMEASL3YV
+ 14gJkDhRygrUP42SIiAykdZEb1Ud/wvwLEKO9zz/wl2RSolv0Du8vd6qS1b5pn3Qr560
+ vUr4Yn0v3zgTRAaokK3sVgrOfpAm6BkjWpSDCRK1MydmhnKidR8Wi01nci9R81H/coJA
+ FGjQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782907190; x=1783511990; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782907212; x=1783512012; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5zKBi5hPjDZUWWJBKXD2+rJ2k87M2Dd1RbheBHuW5UM=;
- b=E+19SmQcrZQgZlCGjB1aj2qivlYFRPYM9RqvCD5GfZH6EHtT+0ZCxDfZ3I5wVj0dSh
- 68LmcNZgUnTeKtMpAjsGf5Jq3U6tiEWHtYZNm1NUmRYvoywjSHBrC85mLNCSym2u34L6
- ueAzG4gzOamR6kgGPRdCHzXz2thrxxFs+hNJs=
+ bh=h8JR2a3a6egLvPACY07QpNE8KVqFapNCAKCUpBvrHTM=;
+ b=QMB/fJEBfQkHaWqOJKD05926CV+91cfogFaaHiWbUj1KxtpswAqMbfOLnTxqCRpZPC
+ dakkEkTyyHn/vnezngxj1jELE8m/gUqNWeaOfsDTEyVofrOwcGPWywgGs6lAfyEfh54T
+ Ny62lMX18QLx/KC+wrog7mQqttEnvR+T+24s0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782907190; x=1783511990;
+ d=1e100.net; s=20251104; t=1782907212; x=1783512012;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5zKBi5hPjDZUWWJBKXD2+rJ2k87M2Dd1RbheBHuW5UM=;
- b=kMlcBaXcdU9e6S4sz8oltef9fcrX1U7/8m/6Ge54WreqjICgd3l9TX506mGf1XLQTo
- Eao2Vb0gTUNTScvgPvTD7vMJNimemYiE6hpKQEB2cTss6YbuqhqK4BQdHAyzmg04SToG
- 3zXNd4J1t4SLX4DCS5mN6Y+mhIcOE0KougNZJ+yb3zmhmJ/QiJ0mHo0pqi9y0w1BGtv/
- B0zRotpsj4uv1B7grV683KSs/02wa5Uva8Og0PzCj6lED20qBMblNOOSdmJkVqJ6+lOK
- ZB8MLltfOiVnjHPmseIj/98b1cw52WrTjqdJ5dftLEuMfBY0XYVcUPYSe/qOIKhm2V8H
- ocZg==
+ bh=h8JR2a3a6egLvPACY07QpNE8KVqFapNCAKCUpBvrHTM=;
+ b=qj0DQvZpherOech0UtsebJe6TW8LR4MTBauFVo/7yvc88JQPvkacfytymrxZOyKNcq
+ 5cYCKIfgC2zjJGdoJhbgOVuJAfXzj05ggf6YwpGLZ5+0r745KuuIc9iH7LRWWYypK9Dy
+ LtQ8zwYPAw3E9h5B/gnCc2FlpkT2GNHZGoExo8Ahal4H5ua3FAJp+kxIdlM8f0aVmMM3
+ vj7oYM+y+2Q62IClozND+dzaNRHQo77MG9iIN5UTfmtV5UgXuXbwSTR9Nyk8Myj80rbI
+ Rywd6BBO9dxXuJdkhgcCL24fMuvgZyL7Pi1XJVJgPsF1ZZCH4Mlgx5cvHh0XdAzB7Qh5
+ uXFA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrFajJGSGPZLBwSCuEcvbAfUELvPTExc6QdwG44noTvVzZmZODG7lBqL5r9ycllpOmSFvJsnho=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZcRQ4MrFXsgbu6JeXg86cH8c/FC6L/toI1DoTxvnZeEttLU0Z
- mHcUyKJVYi0hgWXzrlZ1d5M4Dexsk53iYG/Yr8M5/69u49G5IOiVp2PJHOdpGVl+7TgKZ5JMYSq
- e7AZjAQhebjFOkKufymATawcgu+zHJpZiFC18O0N1
-X-Gm-Gg: AfdE7ckCvM7xkBRAMaIHskCUeZ2WAVUseM5oHJ1HKGn5+8TnXDNwr5p2vu0fsI+zbP9
- YpQftWI4nTDQdWs6WC3XqRMot1gdDDjQ0kf6w1LfC3icB1MvoY+9h1XKLGCShMmaCyCXZjRUu+b
- 2FHy8Ea/S1Q9jSj1hPuHAkBYMUZ9fwT4WQsXRT1Ee0c8ZDlxbp8LYDBa7KGS8Dte1vApXP34inJ
- nuQCH+0q0t/GSwEXso/aqdj3dG/Y3Pd7AADO0jcG01hNGhpy6+mCPp2lrjEpqmFAl3C+qOJlQ==
-X-Received: by 2002:a17:907:c786:b0:c12:a4b0:3c6b with SMTP id
- a640c23a62f3a-c12a4b04f0emr67237466b.16.1782907190014; Wed, 01 Jul 2026
- 04:59:50 -0700 (PDT)
+ AHgh+Rq0V1kOu+j956C+T6DyxFoxArsgyBjNNyxXbsNMUbkL/3zPJKfw7ftvYO6o7PIi6RonqxISrso=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQsQN/D/TbuLmv96pqb3VmoXM8wpWlTP67LGoMNhqERN++sOv6
+ 4Xe9NC6+dZuP7SN2GNzqbMdkwa5krM9ID83lCUNZtu7iXT6ODkSahcErQap39tgwFux6PsIP2b2
+ SsKoUEI46ACHMZAbmJwIe/N+fBfm0ZdzNdTwpqL+O
+X-Gm-Gg: AfdE7ckRcIY7lMb8FZiOJaBSXdTQiG76barGLPKZ58uj/mX+6HW2/CrHc/r2Pp61nbR
+ ibICQ2G1a5CAo1TRrmWbHLQJzuVKMKB8FSc78+tbKzq1YS0XqBp7q6cn7dccxJXDzvxpX0xAGeT
+ rBV8TyenZbxf67pDo8JCjxNx/qFkSw8ltsSZxAaUFaRWMu8vJfn4b0+qftN/xiHApbBhOd7IgGf
+ ep+4FnDCXbOwOeGYJ0dEMiI65mXaINJTqNwoaBPBWSIb5EFTfFQ/z6e3YufK94ZeVMTPuEuJw4b
+ W9ITURB3
+X-Received: by 2002:a05:6402:2689:b0:698:3b7c:3b42 with SMTP id
+ 4fb4d7f45d1cf-698a2ce952amr148783a12.33.1782907212234; Wed, 01 Jul 2026
+ 05:00:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
- <20260628082810.175862-6-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260628082810.175862-6-heinrich.schuchardt@canonical.com>
+ <20260628082810.175862-9-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260628082810.175862-9-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Jul 2026 12:59:38 +0100
-X-Gm-Features: AVVi8CdhTB_P0sEBhH7E4lYJOa7zZ1vy6k_sO9ZGZwzaTyXIQPi_769_eP0njMk
-Message-ID: <CAFLszTgp2UBFdhGu8Gn8n_F0us_7FCSM-xzcTLebn8Hvo_WLxQ@mail.gmail.com>
-Subject: Re: [PATCH v3 05/11] efi_loader: add efi_app_common skeleton
+Date: Wed, 1 Jul 2026 13:00:00 +0100
+X-Gm-Features: AVVi8Cd8_DjOvdzOSUZPXKCjOoMgxr7ezctwsJeQfOXjafAoItG-Cpq2KC6eP6s
+Message-ID: <CAFLszTjRdODVL+r+Fwb1G0cupW7_jFK67gMN02XW5nGRO3YabA@mail.gmail.com>
+Subject: Re: [PATCH v3 08/11] efi_loader: move file-system helpers to
+ efi_app_common
 To: heinrich.schuchardt@canonical.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -115,35 +117,34 @@ X-Virus-Status: Clean
 
 On 2026-06-28T08:27:58, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: add efi_app_common skeleton
+> efi_loader: move file-system helpers to efi_app_common
 >
-> The EFI dump applications (acpidump, dbginfodump, dtbdump, initrddump,
-> smbiosdump) each contain duplicate copies of the same output and
-> input helpers, and each has its own command loop. This patch series
-> deduplicates that code by introducing a shared module.
+> Move the shared file-system utilities to efi_app_common:
 >
-> Create lib/efi_loader/efi_app_common.c and efi_app_common.h to hold
-> utilities shared across the EFI dump applications.
+> * open_file_system() - open the simple file system protocol, first
+>   trying the partition the image was loaded from, then the UEFI system
+>   partition.
+> * get_config_table()  - look up an EFI configuration table by GUID.
+> * save_file()         - write a buffer to a named file, prompting for
+>   confirmation if the file already exists.
 >
-> This first patch adds the module skeleton:
+> get_config_table() supersedes the private get_dtb() in dtbdump and
+> get_dbg_info() in dbginfodump; both call-sites are updated to use it.
 >
-> * State variables (app_handle, cout, bs, nocolor, systable) owned by
->   the common module. (Removing bs, handle, systable duplication in
->   the apps is left to a later patch.)
-> * efi_app_init() to initialize them from sys_table and image_handle,
->   including detecting the 'nocolor' load option via get_load_options()
->   and starts_with().
-> * Output helpers: print(), printx(), color(), cls(), error().
-> * starts_with() - test whether a UTF-16 string begins with a keyword.
+> dtbdump's do_save() and initrddump's do_save() are simplified to use
+> the common save_file(), eliminating duplicate file-open/write/close
+> sequences.
+>
+> smbiosdump's private get_config_table(), open_file_system() and
+> save_file() are removed; the common versions take their place.
 > [...]
 >
-> lib/efi_loader/Makefile         |  13 +++-
->  lib/efi_loader/dbginfodump.c    |  43 +------------
->  lib/efi_loader/dtbdump.c        | 133 ++--------------------------------------
->  lib/efi_loader/efi_app_common.c | 106 ++++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_app_common.h |  67 ++++++++++++++++++++
->  lib/efi_loader/initrddump.c     | 126 +------------------------------------
->  lib/efi_loader/smbiosdump.c     | 100 +-----------------------------
->  7 files changed, 196 insertions(+), 392 deletions(-)
+> lib/efi_loader/dbginfodump.c    |  22 +------
+>  lib/efi_loader/dtbdump.c        | 120 ++------------------------------------
+>  lib/efi_loader/efi_app_common.c | 106 ++++++++++++++++++++++++++++++++++
+>  lib/efi_loader/efi_app_common.h |  32 ++++++++++
+>  lib/efi_loader/initrddump.c     |  69 ++--------------------
+>  lib/efi_loader/smbiosdump.c     | 125 ----------------------------------------
+>  6 files changed, 147 insertions(+), 327 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
