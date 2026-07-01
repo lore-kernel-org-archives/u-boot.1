@@ -4,108 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DBFC43327
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B501EC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 13:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C08B184BB2;
-	Wed,  1 Jul 2026 15:28:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 169208056B;
+	Wed,  1 Jul 2026 15:29:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eSHhNEmn";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KeGugy3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8544B84BB9; Wed,  1 Jul 2026 15:28:56 +0200 (CEST)
+ id B283584BC8; Wed,  1 Jul 2026 15:29:29 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70D5884B92
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:28:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4AA484B92
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 15:29:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 046B83FA67
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:28:54 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 975863FA67
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:29:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1782912534;
- bh=3QUc/eZgd0oA4lnu+EbUR9UXb36JKB+yvk3c+sR1qYo=;
+ s=20251003; t=1782912567;
+ bh=kGHdKy5Dnge7ck0XlSBHQ75Zeg8T+HFtvoGMzRMyhLc=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=eSHhNEmnxFoAZRs1eZVwT8miXqlEfJSmZPi1YCSmJYT7vpNmFP2urTuvUlCYLNWQA
- jj+LUvO8Ki6vpFmQuXPRuF/uFgab75V7HvxRjOvgkfudVS2fdb4DDgOIK5lmoL317t
- SWAj3Y1IDJ6nWCE7lVOtYc/heZEi2fXi3mOrrR/5DnbQdEgpc1Gflll7GCTvcUMHH3
- M5NsWRoxMzi6kU0Fcsr/LSHZ+wooQiFlpyBm3udOOhhK8QoLRHzOyBvOYmHCM7fd/z
- jP4uCJAUEcmGbFQKezn2raJBZUhrfT9bMjjMqTXdwIDD5C42X+wFMudlIUgIxYQ0yB
- Gcl4mLCJbSDXVkBMwab/QMAj7vY87KmylhA/fwgV2ELUCklcbYJcc+QacXYmdWKPs4
- /slGRNLFHZ+z/Y54j+0nh2ZdI0HKqYI+LefvlKG1H14Vver5ytawYOaWCya2oeufHS
- ByNfZMGiHUgxsoLAqfIT/nWDAGsu+0Ez7mP9OlZKGydX45V1bDvj9846cqbk3IAnxn
- ZERN8262/St8aw6bvfrF4hDe26zHvO8D/6v8sUXeXhnz5tPlvis5JDIXZdl5aKtPs3
- T5uu6mW43py+R/xXOoSU+6lYFVjZ8TRUATywlgWLhEnKn9EZHYVneIgRtqa3gCvzpW
- 45Xh37TS/AGt/2Sww4o2n38E=
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-474170b59dfso523871f8f.3
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:28:54 -0700 (PDT)
+ b=KeGugy3NgGzQhhcVISiN34QXB5OJuEH8gOlC7tRsd7ETHVP/vFUKGn/E2dNyO+Aeb
+ ZmWRLLZgnVGQdKVuCUFiPi0swp1EDFuA2f/TMp+VxWKSf2qz4+QkINqge37vGriwQ0
+ jE4rWdqNXaQDQX1SM6uH+I1kOk1PIA24SEKNU9uF4jbclScJZrQbJLmYob/IBo8wzs
+ 9PI1huk+O1Ia6SfwVEgN4jKx4k1Bg6dBSBUN1tK3G4bj0suG04WQE9wrl8yPBrFYCz
+ TvGcDaqcWMblrfnTR+IYMkq727ECDuEhJerPh5qLEPux2l6V7fqHP+BQdgQp03pvVI
+ W/4Y08nTpd58Qn8JFoiYJLfYOycbpbxwu9ZON+XOu0KEqnL2HmVKWAvRqVeYn5eFEy
+ 8TZtKcp4nOtX2NyBddl44DmEJZeqvjXXAgU+pyao6PAbJRc05GIPjDZs5mzYSFbUIx
+ VYmvn9AJ+gnqVGWow9oyYotEnfpNA22EAMacNpIvJPfT2Zc+vuAGEMN+Cop67ZYoLG
+ OsvEfqm/fq4Sb/Gm7wQbq0R+mxE76+89m7CRrUiZBAV7FZ2Vwd/Ye/1z9Vjvz76GgI
+ Z9dTLBbeasJc6K07YAse4ckbzMNngjLp1est9gDUxse/N0ea0iOBgn6vdPWYQ2ZImi
+ 0yarzyzR+bL97h0AnVUIc9ZY=
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-472c330e555so355512f8f.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 06:29:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782912533; x=1783517333;
+ d=1e100.net; s=20251104; t=1782912567; x=1783517367;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3QUc/eZgd0oA4lnu+EbUR9UXb36JKB+yvk3c+sR1qYo=;
- b=S5DBOTwAUzIUe+11lhYDk3VOySBH43UYimPSb1TzqNM8ItZOPDl+rncsWY76/wYLeN
- woAuwW3kGsKIM7/DF3KXMJtCed51r6hniwkuv2pTCgK6XuuCDMgC6Vx/ilE5l8Jv5E/Y
- IcGEixvVoeTW+B8h4GeXHfoahvUotRng1yoQoPDcFABt437+7Ij3gwjRc19y2VqtEk6c
- 6hPkv4X3oTk+P8jfNjDKlE/o9jjrzyfS7pn5/+/VyJZ64oElEp3SYhh9upPqjMIRi+z6
- Qv0CMP2oBkKLZ9fQUcREFJuPGK6E2NvncbYZ/xWdqHdmh4GJ4uYguWuWzcF9dh2h8PCi
- D2vg==
+ bh=kGHdKy5Dnge7ck0XlSBHQ75Zeg8T+HFtvoGMzRMyhLc=;
+ b=PXcSGOpwIYqrL258x03yDFacRjFmfZcscSNafIbQJys0I7P9Ig1EkdFuRkE+cal6uB
+ QJm0TuHInnhaOvU46H6oct//vpTlbJ9QLhGo5GaIH/x4LZg93ZVNV5c8svKQLZ97FGet
+ k+ObXT2IKZSuel9zsdjVkGnTwwxpACmvzV9tj4UKtTKgJ5QAlCekh9gQK9kJCr6WSYjt
+ MijfwFTZd9lKVEi6aN9PbHJlwqrY2DpkBFsaoub2Oj2y03IafJMn9CqViHY5VAjARtf9
+ w0iftaGEg40hjlgiVSPltb0Cv5WOfSLqzAzxXKhyRAe0tVON6qVjJTYn3ieT7U9nk7NT
+ db4g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rpj+1NIf4Gk3LjIevm8FAKg0MDynsYOj5TBi0jcFox8APheb7CZDzPgzlAUp2yO4VAlQvHX0Tw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCyOBbacYwJ3p8S1BOJHG26EO+/Bd9dx2MMY122U4BWv3ebCUo
- /dT69GIdfXp7YTBlLM7ukCEWJATGUoVZtwaMAEq99IzKIakc3xyu2vwEdABpnlCAUJeV+PJ4RpR
- y95wdS3hcvExsFy2xNlLCojwygauNwSPhdwdBELhcSjyea9Su3wMEV497veUEuFqtlZ5J4CmWAQ
- 5D298=
-X-Gm-Gg: AfdE7cmQhBipuLxkbNXSfPlMrzjMBw7aB+6JbsK4MU29Zj5EJMzFmq/qd8MdzpRVj5H
- 97o5xeyXEmfZS53bTeWmmC/3w4irf4tJpiVxjqATCwdJo0K/0JfrgYXvYM5EMT7s9odqSmZd0/b
- 4rBeNZS9cwRU4mfk4hQlYjO6o9rZF+lBrhF4GZFrNu9oxQmdcn1RV+EO2zHYmCojpkHMMG+N3Rf
- UNs0NOnxchg07wLEfui+0l/U8+CQtYMDkhwqtEFZRBiHQ5pRWWRwHrVH9Qg+7CIUBq1EZ3CqWiG
- chz7iyexqILOVdbB9KkwthYYUe+oXexut27XDQ3Z9LY0YZiRFK9J60YeVK9iXN8F6fO35geU1UQ
- ebdFlF84XelAGjQERzajHms5fjqXpm+jF68kQE1Zr+f2xBeYlbsI2Q3so3DMZDFC3Bqhq9Vp8Vx
- /nVbqu1/nVrPgC7T8FsKGD7oMqbQBHNkZP/g==
-X-Received: by 2002:a05:6000:40c8:b0:475:f0f0:9f00 with SMTP id
- ffacd0b85a97d-47759f0fccamr2878458f8f.55.1782912533524; 
- Wed, 01 Jul 2026 06:28:53 -0700 (PDT)
-X-Received: by 2002:a05:6000:40c8:b0:475:f0f0:9f00 with SMTP id
- ffacd0b85a97d-47759f0fccamr2878403f8f.55.1782912533135; 
- Wed, 01 Jul 2026 06:28:53 -0700 (PDT)
+ AHgh+Ro+hapS/IkQWLRfS5TP83ZYmyedNxHwTj3DqfkdnSj3jF1BfgDfNYV1QCEswUnSzRHIWpqzTGw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWyJx9OMsqzgiGsLduPsYis6bX7HCwCZwqkazeH/8v7RyA2jyJ
+ JlfUWYxbmDQ7qWBVR7HDQsB6WTyzSIUdm3vDetXTbiukMOifvdUzpCpEUQM7MCdeoLrY1q/bHCp
+ drJqVjRdfdackTJoy9a4cjrB4vs6PJvJBuQ5PvvG7E4ZD3f+Q+N8xJXuo9qqgefqkPHjlUKQ=
+X-Gm-Gg: AfdE7ckQfTjbRyl1vrYyIZnVprw1J1AJXs+DwFuhAj3B/B4XiNigqBdcIs5YfmFTs7j
+ DCZVsr5un+YZJ1Vy6sMK3SlSD2C14Tx1N2WblWtwKGZuGtV/QqniJy5OqdOubZuFabfdS7lN2kl
+ 8CET7KwguFY7+GDr/wgO6Oy/P2DnxOr8MB3ubIXgd/ZuYAzJxrRYueW7OlMopRunUMyxyy8TujY
+ M3q/HqglDPmTuYahbBpcPCB9G+yuy7uvS1OG2g0xdo1C/xSoFnZs4ARo95Ov1gaVeHdUm9LRQGH
+ nKVwtB4Um0Lv0s6RfDHrlTwJqPPje6WHzelBFEQkfEZ07Hu7XIXseR6t4ZWSmsMU2QFUrrfU0/t
+ AXFIODo0KSmwSfWO/54TD+3GMbhlt2HVCdaZDUUHMm5Dvwb8A+pfPWln+kQ51ANkl0AXBeNpdmW
+ mI4Nfc8pNE4di8AGU3SUMqcYc4qNOJccFPEg==
+X-Received: by 2002:a05:6000:29d7:b0:472:8343:7f5f with SMTP id
+ ffacd0b85a97d-4775918fd72mr2062834f8f.34.1782912567254; 
+ Wed, 01 Jul 2026 06:29:27 -0700 (PDT)
+X-Received: by 2002:a05:6000:29d7:b0:472:8343:7f5f with SMTP id
+ ffacd0b85a97d-4775918fd72mr2062808f8f.34.1782912566850; 
+ Wed, 01 Jul 2026 06:29:26 -0700 (PDT)
 Received: from ?IPV6:2a02:3035:62b:1f48:a6af:3a48:9d50:5eca?
  ([2a02:3035:62b:1f48:a6af:3a48:9d50:5eca])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4756636ce7esm18487308f8f.23.2026.07.01.06.28.51
+ ffacd0b85a97d-4756636cf98sm13142773f8f.22.2026.07.01.06.29.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Jul 2026 06:28:52 -0700 (PDT)
-Message-ID: <9c41ab58-dc9c-4cff-9914-96e32db02351@canonical.com>
-Date: Wed, 1 Jul 2026 15:28:50 +0200
+ Wed, 01 Jul 2026 06:29:26 -0700 (PDT)
+Message-ID: <837c7f40-fa2e-4fd5-a889-4c07b6b779d7@canonical.com>
+Date: Wed, 1 Jul 2026 15:29:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/11] efi_loader: add ACPI table dump EFI app
+Subject: Re: [PATCH v3 01/11] efi_loader: use pointers in efi_acpi_register()
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
  u-boot@lists.denx.de
 References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
- <20260628082810.175862-12-heinrich.schuchardt@canonical.com>
- <CAFLszTjSeUs=iysEo5-ty+utMR4mJnW4BQjWPiTGB4QndnP_zQ@mail.gmail.com>
+ <20260628082810.175862-2-heinrich.schuchardt@canonical.com>
+ <CAFLszTg0C6cQDVWYbSPRJxjCwFhH3oa4yCPb8tJa4h7Akd=aXA@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTjSeUs=iysEo5-ty+utMR4mJnW4BQjWPiTGB4QndnP_zQ@mail.gmail.com>
+In-Reply-To: <CAFLszTg0C6cQDVWYbSPRJxjCwFhH3oa4yCPb8tJa4h7Akd=aXA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,45 +123,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/1/26 14:01, Simon Glass wrote:
+On 7/1/26 13:59, Simon Glass wrote:
 > Hi Heinrich,
 > 
 > On 2026-06-28T08:27:58, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
->> efi_loader: add ACPI table dump EFI app
+>> efi_loader: use pointers in efi_acpi_register()
 >>
->> Provide an EFI binary that can dump all ACPI tables to files
->> <table_name>.dat. These can then be further analyzed by decompiling
->> with iasl.
+>> Both efi_add_memory_map() and efi_install_configuration_table() expect
+>> pointers and not virtual sandbox addresses.
 >>
->> The DSDT and FACS tables are identified via FADT.
+>> We need to convert the virtual sandbox addresses in efi_acpi_register() to
+>> pointers in memory before using them.
 >>
->> The following commands are provided:
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >>
->> * check - parse ACPI table list\r\n", do_check
->> * write - save one file per ACPI table\r\n", do_write
->>
->> The file names are constructed from:
->>
->> * 4 character ACPI table name
->> * number if there are multiple ACPI tables of the same type
->> * '.dat' extension
->>
->> This matches the output of the Linux acpidump -b command.
->> [...]
->>
->> lib/efi_loader/Makefile   |   3 +-
->>   lib/efi_loader/acpidump.c | 566 ++++++++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 568 insertions(+), 1 deletion(-)
+>> lib/efi_loader/efi_acpi.c | 35 +++++++++++++++++++++--------------
+>>   1 file changed, 21 insertions(+), 14 deletions(-)
 > 
-> Did you see my comments on v2?
+> I think you missed a few things from the v2 review.
 > 
 > Regards,
 > Simon
 
-I thought the v3 change covered them all.
-
-What did I miss?
+Which ones?
 
 Best regards
 
