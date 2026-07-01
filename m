@@ -4,71 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC63C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B0BC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:54:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F48084AE9;
-	Wed,  1 Jul 2026 12:51:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0305A84B88;
+	Wed,  1 Jul 2026 12:54:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XZ4IzgSJ";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="bAU5xvyN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4962D84B76; Wed,  1 Jul 2026 12:51:32 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9819B84B9B; Wed,  1 Jul 2026 12:54:11 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0DB184A7C
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 12:51:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AE6884A7C
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 12:54:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id C324E429EA;
- Wed,  1 Jul 2026 10:51:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C46051F00A3D;
- Wed,  1 Jul 2026 10:51:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782903087;
- bh=w8p/5B8thyu9He/Pe1SzvMo98Bv8OYb1HIYc9js/Klc=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=XZ4IzgSJRF6QtFhEQI06pv0SBVvhInzJQpFe2/3O2a06IdL3o78x0DNcjulxTOBgQ
- 0ULxvuGd38DglIo8rkXMBVOivbdWwDIP+g3uUqnvY3Rlx9pv+KJtGezxbOg68nZsDy
- 77FYe6PlCczwbmWB9sdSo3WDSrRkBJ/x9IZVZIbfXauz4wrBbvuEmIvGk7igcyonEc
- PLspRey3Hm/mgfG9J50xzDRHmXGaFsIDCQUGyJc5uX5ENMdyKxujwLSU/pRj4WYwal
- +oYDE2cCVzEFJ/77uNC5Gqm+WxA1sD+AKFs3sInINEbGWrgvxVbISwaZp/8a1mGEgt
- 0En7XdwHPe+FQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de, Marek
- Vasut <marex@denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andre Przywara
- <andre.przywara@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>, Casey
- Connolly <casey.connolly@linaro.org>, Chunfeng Yun
- <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Ion Agorria
- <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>, Kongyang Liu
- <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Stephan Gerhold
- <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom
- Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Jens
- Wiklander <jens.wiklander@linaro.org>
-Subject: Re: [PATCH v4 00/64]  drivers: usb: dwc3: sync code with Linux v6.16
-In-Reply-To: <87zf0c6td8.fsf@kernel.org>
-References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
- <8733y48j44.fsf@kernel.org> <87zf0c6td8.fsf@kernel.org>
-Date: Wed, 01 Jul 2026 12:51:24 +0200
-Message-ID: <87v7az6l03.fsf@kernel.org>
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-691c5776f35so795323a12.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 03:54:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782903248; cv=none;
+ d=google.com; s=arc-20260327;
+ b=DMaBsBNmhFut93YLsZXLm9eHQguldqWWYVQlwWkPf4MEOy7hRDTt99t9k6RHbzYyaW
+ EAmBAZpng0CkgI59QqINKVezWT31HVXWVkfs+bRtB4S0v194alHb/do5JZk6Gd+5N2Eh
+ suK4bKg+MmtLw0YHLgrQIZr1vTr5UUuddYkjnpfAE8534xCpXwTso9xIZbr1EiWr9WCc
+ DcKaFy5rqrBH7Nf0PVO+edLwFTxAOpUYQILUslNcqiZrU3B1G+LC/YfqSi9na6zxPbbh
+ BNY1DEzyZdKq9lkIsRj6UolUz9g52wYKt4VpiDamrEApughQYflLJSai8V/6pl8/95Xg
+ Wxjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=HKgmOH1hOfFP0WDLvAzalS8zGANAUgY5PgFiC4mTX4M=;
+ fh=HuFBfcOMX53v0n2+Ml+57IXm/iN63RatRzldD0FI8uw=;
+ b=bL2ZUnJ+dtrJ93JGHxNIFo4SVqVuxXnwuZF3cfj7OPm9wozHoMl04qFlbH5Pdh20rx
+ of/aX2FetrEygHixfcXsk8eUIThDXRmz1Qe+SbBgCE71t9VSChVPRlCHiMw9TPtAV/pJ
+ gb8JQ1sHxcrMaDtuvuHLyGigkkK20EQhz4gB61UK0qTaoP1ljBLVTSCA5ZOG/GbKInHp
+ XzQvK1Kfw/OoevaxLOOURUehMUqPQq7R1FxPoLl4/GdqKgUUhLc6owceIM0C22IZXpqG
+ dg3bLY8K8uqU8+wwQS6SCOGxP5hncCM41SoICH/vcLGZYG/oWdQnFT0VR7tXSD0RRNZZ
+ 47pQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1782903248; x=1783508048; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HKgmOH1hOfFP0WDLvAzalS8zGANAUgY5PgFiC4mTX4M=;
+ b=bAU5xvyNFelVuB4GSSw5k+dzq5x+rfoar+WpmdKwkVzOa0waMW5EpgKxjzoSWiXCgT
+ 28z8G0dTtZTj0nxNkFEWmKQz4LYghsfjTuajr+LuHzEvL/1rEXlQ/D0R5ZHPKXHtVEfz
+ FfLALQpWRgdnLkqBKApQu7Cfpn+KkkaYL+iCfITiqhY3L9LZPh1diZ2lU8RzwKMu0dxz
+ fSqdZ8a1Zev9MoPpRiRLu9FW3uWbkWPEUYZqJjetowalpMxUrJK8qyDKlC3tMwsxV/VL
+ RPGwVY4dE/OzJlcfero2Hil8yMTnROGf3rTUA855C0qXnijWHYpdWcjFHP6wMZtbUOoq
+ DNmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782903248; x=1783508048;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=HKgmOH1hOfFP0WDLvAzalS8zGANAUgY5PgFiC4mTX4M=;
+ b=gKc050Be0dNVRAP6o9B9koWw6x9pZd3HqvRXT7VxEt6L812ZHbp3pWlUpW7Xpw0sBy
+ VD5LQx4aNw0fB71YLl1u46cPDoikqyMlc+Yz0jrFzcouh9x5nf8xl+jCrWHmYn88QMjT
+ AxGtbD5qbfi64MXU0FWw7VwPaglbx8DvZuoUFYS6dRScwMc31asCxXaY70Z6VKxCXQ+s
+ NPSn4YzFnFDcmK2zr1H2IT8d2DKEEjjTmplxEB/8NQaAoGpHnzYLMHH8QuUppuunx1lI
+ mSEjqtioztPDn8hozKRwobPEyZ2JMsFnntKmBPsRN3mJ+EJ6+QQcMP4y0VnMnXHSHpTu
+ q6qw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqNAgDCLgrdgOyQZ6O0tbpqtsvK2klOVys4q4UH+2Qr9D7E452YOkN/0jFNwGiACQW8SpqC8NA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLx7t09v/tMfOIyQEXcn2n/gAt/0XQaOiw6kmfnrPkcI+S0KT+
+ 1eiZ4q142ZyV6ttZUYTkU3k2F7IDSL9VPSBTNBtJjMgrjhS248U1lKzBcsspOi/7hrxQ4pfamWB
+ K6GhBC+BvgBN4aZjte+gpaByS8wYvf72VxJS6SqoGzw==
+X-Gm-Gg: AfdE7cnMG9ynNuUJEE1tcOLPID3GY0p8uT+DoAu4k5bw2A8P1Zf7ZDovrSA/rksAZOP
+ llticuBhs8dAgUgkIO3TT5PoyKS3754esGIbVCqi5shcIaOmtzK610BV2ZlLk+v78LOfpehlU7R
+ FfVQVuH8d6uSXTzmmwXC2dgCfwtq3puVpVZMBNy7ozOry3B+O8VCqQsu6WzeDJ+pvoEozpMowtE
+ 5VpbE+89TAGi4TIIOWvrqoCwEC78OOPw2fIJuVBPcO7LVzJxzOF/YC1u5TTNvEh81BM3gbJ+Js2
+ vKGKGnlMqPt4MY4pHbrvLmACKL0=
+X-Received: by 2002:a17:907:c244:b0:c12:34cd:8f57 with SMTP id
+ a640c23a62f3a-c12aa31e6fbmr45911466b.65.1782903248406; Wed, 01 Jul 2026
+ 03:54:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
+ <20260629084507.3254232-63-jens.wiklander@linaro.org>
+ <7c32155b-8dc8-4d9b-afff-b6539164956c@nabladev.com>
+In-Reply-To: <7c32155b-8dc8-4d9b-afff-b6539164956c@nabladev.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Wed, 1 Jul 2026 14:53:59 +0400
+X-Gm-Features: AVVi8Cf8CdgVMkjRC7XeHfnaQe4jCfbrZ1_7kNklqcdiS4bbZSI7T7OKZVfwB2E
+Message-ID: <CAKTNdwF4Wmfb=K00ZKKybPRZV8H-WtSnbcF9nnMjMPMbM64kGQ@mail.gmail.com>
+Subject: Re: [PATCH v4 62/64] usb: gadget: re-import epautoconf.c from kernel
+ v6.16
+To: Marek Vasut <marex@nabladev.com>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,214 +137,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jens,
-
-On Tue, Jun 30, 2026 at 15:38, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
-
-> On Tue, Jun 30, 2026 at 11:36, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+On Wed, Jul 1, 2026 at 2:26=E2=80=AFAM Marek Vasut <marex@nabladev.com> wro=
+te:
 >
->>
->> I've tried this out on the Khadas VIM3 board using
->> khadas-vim3_android_defconfig and usb gadget (with fastboot) seems to
->> misbehave.
->>
->> With the series applied, I see:
->> """
->> U-Boot 2026.07-rc3-00064-g511db6941796 (Jun 30 2026 - 11:20:08 +0200) khadas-vim3
->>
->> Model: Khadas VIM3
->> SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
->> DRAM:  2 GiB (total 3.8 GiB)
->> Core:  408 devices, 37 uclasses, devicetree: separate
->> MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
->> Loading Environment from MMC... MMC Device -1 not found
->> *** Warning - No MMC card found, using default environment
->>
->> In:    usbkbd,serial
->> Out:   vidconsole,serial
->> Err:   vidconsole,serial
->> Net:   eth0: ethernet@ff3f0000
->>
->> Hit any key to stop autoboot: 0
->> => fastboot usb 0
->> failed to start <NULL>: -12
->> g_dnl_register: failed!, error: -12
->> exit not allowed from main input shell.
->> """
->>
->> With v2026.07-rc3, I see:
->> """
->> U-Boot 2026.07-rc3 (Jun 30 2026 - 11:24:04 +0200) khadas-vim3
->>
->> Model: Khadas VIM3
->> SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
->> DRAM:  2 GiB (total 3.8 GiB)
->> Core:  408 devices, 37 uclasses, devicetree: separate
->> MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
->> Loading Environment from MMC... MMC Device -1 not found
->> *** Warning - No MMC card found, using default environment
->>
->> In:    usbkbd,serial
->> Out:   vidconsole,serial
->> Err:   vidconsole,serial
->> Net:   eth0: ethernet@ff3f0000
->>
->> Hit any key to stop autoboot: 0
->> => fastboot usb 0
->> crq->brequest:0x0
->> """
->>
->> The failure code path seems to go through:
->> g_dnl_register("usb_dnl_fastboot");
->>   usb_composite_register(&g_dnl_driver);
->>     usb_gadget_register_driver(&composite_driver);
->>       usb_gadget_probe_driver(driver);
->>         udc_bind_to_driver(udc, driver);
->>           driver->bind(udc->gadget);
->>
->>
->> I don't know why it's happening but I wanted to give some feedback early
->> on.
->> I'll have a closer look.
->
-> I spend a bit more time on this.
->
-> driver->bind() calls fastboot_bind() which fails to configure the input
-> endpoint with the following code:
->
-> 	f_fb->in_ep = usb_ep_autoconfig(gadget, &fs_ep_in);
->
-> Looking more closely at usb_ep_autoconfig():
-> * in v2026.07-rc3 we have an ep_matches() that finds the relevant
->   endpoint
-> * with this series, we now have usb_gadget_ep_match_desc() which does
->   not behave the same way.
->
-> If i put back the original ep_matches() implementation (from
-> v2026.07-rc3) and call that instead of usb_gadget_ep_match_desc() in
-> usb_ep_autoconfig_ss(), I can use fastboot again.
->
-> I have not studied how different ep_matches() and
-> usb_gadget_ep_match_desc() are.
+> On 6/29/26 10:44 AM, Jens Wiklander wrote:
+> > From: Jerome Forissier <jerome.forissier@linaro.org>
+> >
+> > Replace drivers/usb/gadget/epautoconf.c with the one from the Linux
+> > kernel. Fixes will come later.
+> >
+> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> > Tested-by: Alexey Charkov <alchark@flipper.net>
+> How was this tested ?
 
-usb_gadget_ep_match_desc() uses the endpoint's capabilities (the cap
-member of that struct) to find matching endpoints.
-This is significantly different from ep_matches(), which relied on
-endpoint names.
+Hi Marek,
 
-Because of this change, I had to add the following diff to
-drivers/usb/gadget/dwc2_udc_otg.c:
+This was tested using v1 of this series after applying all patches to
+the base commit referenced in that version's b4 metadata, see [1].
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 9f037d1e8016..01c9a938bd79 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -741,6 +741,7 @@ static const struct usb_gadget_ops dwc2_udc_ops = {
- #endif
- };
- 
- static struct dwc2_udc memory = {
-        .usb_address = 0,
-        .gadget = {
-@@ -755,6 +756,11 @@ static struct dwc2_udc memory = {
-                        .name = ep0name,
-                        .ops = &dwc2_ep_ops,
-                        .maxpacket = EP0_FIFO_SIZE,
-+                       .caps = {
-+                               .type_control = 1,
-+                               .dir_in = 1,
-+                               .dir_out = 1,
-+                       },
-                },
-                .dev = &memory,
- 
-@@ -770,6 +776,10 @@ static struct dwc2_udc memory = {
-                        .name = "ep1in-bulk",
-                        .ops = &dwc2_ep_ops,
-                        .maxpacket = EP_FIFO_SIZE,
-+                       .caps = {
-+                               .type_bulk = 1,
-+                               .dir_in = 1,
-+                       },
-                },
-                .dev = &memory,
- 
-@@ -785,6 +795,10 @@ static struct dwc2_udc memory = {
-                        .name = "ep2out-bulk",
-                        .ops = &dwc2_ep_ops,
-                        .maxpacket = EP_FIFO_SIZE,
-+                       .caps = {
-+                               .type_bulk = 1,
-+                               .dir_out = 1,
-+                       },
-                },
-                .dev = &memory,
- 
-@@ -800,6 +814,10 @@ static struct dwc2_udc memory = {
-                        .name = "ep3in-int",
-                        .ops = &dwc2_ep_ops,
-                        .maxpacket = EP_FIFO_SIZE,
-+                       .caps = {
-+                               .type_int = 1,
-+                               .dir_in = 1,
-+                       },
-                },
+Tested on a Rockchip RK3576 based board with two DWC3 controllers as follow=
+s:
+- Set one controller to gadget mode, the other to host mode via DT
+- Confirmed no crashes or warnings in U-Boot at boot
+- Initialized the host mode controller via console commands with a USB
+3.0 flash drive connected via a hub
+- Initialized the gadget mode controller via `ums`, pointing it at the
+flash drive connected to the other controller
+- Connected the gadget mode port to a Windows computer
+- Confirmed no crashes or warnings in U-boot
+- Confirmed the device is recognized as USB mass storage by the Windows com=
+puter
+- Mounted the USB mass storage device on Windows
+- Confirmed correct partitions and size
+- Confirmed correct data
+- Confirmed reading and writing works
+- No crashes or warnings in U-boot
+- Safely removed the device on Windows
+- Stopped `ums` in U-boot, confirmed no crashes or warnings while stopping
 
-This was not sufficient. I also had to update the .maxpacket fields to
-.maxpacket_limit as following:
+This worked better than the then-current U-boot master branch, which
+had trouble properly resetting the controller at boot, resulting in
+non-functional gadget mode.
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 01c9a938bd79..4a62cd60cb7d 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -755,7 +755,7 @@ static struct dwc2_udc memory = {
-                .ep = {
-                        .name = ep0name,
-                        .ops = &dwc2_ep_ops,
--                       .maxpacket = EP0_FIFO_SIZE,
-+                       .maxpacket_limit = EP0_FIFO_SIZE,
-                        .caps = {
-                                .type_control = 1,
-                                .dir_in = 1,
-@@ -775,7 +775,7 @@ static struct dwc2_udc memory = {
-                .ep = {
-                        .name = "ep1in-bulk",
-                        .ops = &dwc2_ep_ops,
--                       .maxpacket = EP_FIFO_SIZE,
-+                       .maxpacket_limit = EP_FIFO_SIZE,
-                        .caps = {
-                                .type_bulk = 1,
-                                .dir_in = 1,
-@@ -794,7 +794,7 @@ static struct dwc2_udc memory = {
-                .ep = {
-                        .name = "ep2out-bulk",
-                        .ops = &dwc2_ep_ops,
--                       .maxpacket = EP_FIFO_SIZE,
-+                       .maxpacket_limit = EP_FIFO_SIZE,
-                        .caps = {
-                                .type_bulk = 1,
-                                .dir_out = 1,
-@@ -813,7 +813,7 @@ static struct dwc2_udc memory = {
-                .ep = {
-                        .name = "ep3in-int",
-                        .ops = &dwc2_ep_ops,
--                       .maxpacket = EP_FIFO_SIZE,
-+                       .maxpacket_limit = EP_FIFO_SIZE,
-                        .caps = {
-                                .type_int = 1,
-                                .dir_in = 1,
+Best regards,
+Alexey
 
-Because this series introduces usb_gadget_ep_match_desc(), we should
-make sure that all the in-tree udc drivers have these capabilities set.
-
-In my opinion, we should do this as part of this series, otherwise we
-are breaking all the UDC drivers.
-
-Note that all drivers might not require this update, since drivers can
-also implement the usb_gadget_ops.match_ep() function instead.
-
->
->>
->> Thanks,
->> Mattijs
->>
+[1] https://lore.kernel.org/u-boot/CAKTNdwE4ydoUt6i=3DcrNnibZV_MQ+BcwfnRbMX=
+sEBtWGc8Myj9w@mail.gmail.com/
