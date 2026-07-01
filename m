@@ -4,86 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F26C43458
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jun 2026 22:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDBBC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 02:52:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 821BB8494B;
-	Wed,  1 Jul 2026 00:41:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9416B84A52;
+	Wed,  1 Jul 2026 04:52:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mlox8WkV";
+	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="WcwtH/va";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7DA58498C; Wed,  1 Jul 2026 00:41:45 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ECE7084B03; Wed,  1 Jul 2026 02:11:42 +0200 (CEST)
+Received: from SEYPR02CU001.outbound.protection.outlook.com
+ (mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c40f::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B6EB848EB
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 00:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24A8084AA2
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 02:11:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6a18eab71bfso19911eaf.0
- for <u-boot@lists.denx.de>; Tue, 30 Jun 2026 15:41:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782859302; x=1783464102; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=t2EArvHuxPN23bMjR2k+WutVVIFxP5RUIvzXWl3iNYI=;
- b=mlox8WkVGRtbAG3w+GJdlZ4xonAx3tWFRKbd8pjxYmAExRC3cB43DXOnjaoMIRFlJM
- XrFfxkoukOjGO07u9I9UHZ+ELfwtbJpzdEn9xsf8/xwn1hIRisJAKw4+++URqvobTH9v
- Ms0xO4SP8Ea86aYvQekYTLUA0AfNdBHeWXFGE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782859302; x=1783464102;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t2EArvHuxPN23bMjR2k+WutVVIFxP5RUIvzXWl3iNYI=;
- b=CMYWjkqSe7rhQqObqUjbjCXtAO0KrE6EBPSNzx9aQreYYKiWidBejn2vWIIAx2Xwu7
- /zdcRkd9SuwD/4XpgW6lFV5hNQY8BI9QXVRoqwYzpwopZAKIIOW1O6bL83qslX56k5rq
- DPfutVm15O8+H11MkWvvlVpNs8whaGwcpvA9vDpYzNnGEN/qQ2n8gcOyySSxbvNOtKxX
- 0AygQIXuCl/1s4dn+4fdnl9Zfob2Kw8xQz0sQTtQ1SzEGR169eiTnoTgadMIOhI80p7q
- R0GKpUv26b1heWZbVLphFpXSSLWFfoRwbpozjVW1lN5U+9yfpy8KWrasm0NHk/tOD+An
- pq2g==
-X-Gm-Message-State: AOJu0YwaFKgy0hUkG/rDY5VYQC8GGe2FmnyjZxoJLkiEFLtwe28KOS8R
- u/OyD7QS6VottOz+s87yh2Bz2A6czqQxze0qbe5rwi/mgX6l8xaAibpTrW9qFoshBiA=
-X-Gm-Gg: AfdE7cm3Z7bxsO/x+ef9KiSaLcy7ajJKjrSj3FKGH+Pu6cmCfl/fWBngRhPCHmLQSos
- v9UaeiUViTniBwR6lN2TL0Z0Ze3ztMp8osGB69ienD/+yHvcBtTGLfCDvZu9B+P2eJxto3kVXXH
- LYRnzoL13dhb2mm4SIYJel01xm08cXqWnWyv3i303x+Z//DjklnelPdHi/Qb/nT1ZbjtcfOllKb
- k31xD8kXOMVu5gtgULByuz5QgmKwtyW8UiiHNKVFFTRUC6eRKOdkAyfMZjpGBYuA6dLBtsJ8M95
- 1RoVqVQVWcse/dbzFEex/JiDav06Z17TXrz/kDM5IqBfBAF88sv2+c0DqK/yEtXmQJLqg6/UvCS
- k+qoMHaqXGZ3nJ1b51XtrrzGAWDSHZhy0mzsJ328UxqUbnWRsxyY2jeS9+fh7oWvKAfwuNOx87S
- KLTHV2bQR7M6qLfbNyeSBFEZ0yWtDK7mec5vISsFYlOZT7mb/nQem6/bBs3vr6tYDjPNT5f0KbA
- Tfpys79+Io0rKTXkWzw9HwmjEmWO8lggpZ1pTNTf4d6wO09DjM=
-X-Received: by 2002:a4a:ee0a:0:b0:694:9ea7:7aa1 with SMTP id
- 006d021491bc7-6a196b34303mr1701238eaf.5.1782859301880; 
- Tue, 30 Jun 2026 15:41:41 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-245.totalplay.net.
- [189.203.103.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44c62028b7bsm173136fac.10.2026.06.30.15.41.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 15:41:40 -0700 (PDT)
-Date: Tue, 30 Jun 2026 16:41:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Carlo Caione <ccaione@baylibre.com>,
-	Ahmad Fatoum <a.fatoum@barebox.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, dlechner@baylibre.com,
- jstephan@baylibre.com, baylibre-upstreaming@groups.io
-Subject: Re: [RFC] bootstd: firmware-owned OS devicetree for EBBR /
- SystemReady IR
-Message-ID: <20260630224137.GF749385@bill-the-cat>
-References: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
+ spf=pass smtp.mailfrom=ryan_chen@aspeedtech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hSJtelXg4wxsH4qxqQgGEnElOocqPFMDJKSpryW1UlfMa+19up+olFoyVT6CW5OGGLXwkkaT0xQXI6nMMsLViHf+c04uM8RBuBXVv7cQ088VGU/Xx8Xh9AScZf1ZwT/DH98xDDXI7iEaJj4h+WpgKeulW3hA3QYYT/w7b0Sg6xclpB4YYz0Ua0kc0HDv3IxNlIY4a3Qf/WjdJjDoZ9Q1jGDrSbXbYTD85UyiMbz4u5mFFvtNXkYcuHvop2FAFzcYWcDDaUQgG+AbZJ4TnT7dAwRD93wd+SealqiWhnJ71N7Zz/jQk9jCSuUK5EfK/MNA1O4sxOH05T2B80ypvQPFFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3p8m5Jh2FdmYzZl2+jgWYZO00byGWaa9HsbLrhpa2mY=;
+ b=w+iNQI4CpsrQh7QjRyINRVJnF7DXyMPQDrzW/p1oCKa7zeclxgTb0SKn+uSZBgMjgLrBAGZ1q10j35FUC9VcNUlXqnRdJTVo6FS3f2prE1GjYZbyo6ZJVoYcrJ2iIpjXYDf1139zWZVqzeOtthGhrAqPna7TD3YZQrqvCFrcAWefIgdBXO6g1UgDE6Pxf9Tyf3DhHcEc5qPafr28YXuuhJ0iC6SG8y3EpZz7tW9fKyi+6ZjD0rt3gIlM8ehcgNr8nkjIrBb1nHQ1URY531rpDhYtVXwOtSfBZwYGzD31f9xm9l3ZcIsV+w9O9OJZaqovWC+6nWCZhj4X/+IMajzjDw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
+ header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3p8m5Jh2FdmYzZl2+jgWYZO00byGWaa9HsbLrhpa2mY=;
+ b=WcwtH/vaENF0w826fufyHYY+e+GtLq03/f3G1GHZgqPAUATFIbU0DJt06bJ+bjp+I9J8xap1oFBR1Jbp04fzB6pyCuerx2DkjHa/O/0dd+dbB4ZM3AgoitkW7rDj2Sqxe8mHVGM3brAVRfvHuIcmCsGpM7c344b4zYg/MeuQckOXnhKSAMtTh3xvJ/gNxP2VcGs4CCqte0VejPmwN8mwsO5pzPAha+HEaqUS1abAt6SFITfJ9vy2FZL7ofwFoitNSibUpnmK7eHTjnoQyqTLSNmQDhKXrxFFLSPT2/IKwY2N0eUAliUhrrDsS8QHlEw2MNhJvBbtgfpkozFUAdOQTw==
+Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com (2603:1096:408::791)
+ by TYNPR06MB8597.apcprd06.prod.outlook.com (2603:1096:405:3d3::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 1 Jul 2026
+ 00:11:33 +0000
+Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+ ([fe80::43a0:9857:dd1e:76d2]) by TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+ ([fe80::43a0:9857:dd1e:76d2%4]) with mapi id 15.21.0159.016; Wed, 1 Jul 2026
+ 00:11:32 +0000
+From: Ryan Chen <ryan_chen@aspeedtech.com>
+To: Tom Rini <trini@konsulko.com>, BMC-SW <BMC-SW@aspeedtech.com>, Joel
+ Stanley <joel@jms.id.au>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Lukasz Majewski <lukma@denx.de>, ChiaWei Wang
+ <chiawei_wang@aspeedtech.com>, Sumit Garg <sumit.garg@kernel.org>, Anshul
+ Dalal <anshuld@ti.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Andre Przywara <andre.przywara@arm.com>, Frieder
+ Schrempf <frieder.schrempf@kontron.de>, Peng Fan <peng.fan@nxp.com>, Ernest
+ Van Hoecke <ernest.vanhoecke@toradex.com>, Brian Sune <briansune@gmail.com>,
+ Johan Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, David
+ Lechner <dlechner@baylibre.com>, Emanuele Ghidoli
+ <emanuele.ghidoli@toradex.com>, Parth Pancholi <parth.pancholi@toradex.com>,
+ Paresh Bhagat <p-bhagat@ti.com>, Janne Grunau <j@jannau.net>, Paul
+ Kocialkowski <contact@paulk.fr>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Finley Xiao <finley.xiao@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>, Kuan-Wei
+ Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Stefan Roese <stefan.roese@mailbox.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Philip Molloy
+ <philip.molloy@analog.com>
+Subject: RE: [PATCH v4 0/6] arm: aspeed: add initial AST2700 SoC support
+Thread-Topic: [PATCH v4 0/6] arm: aspeed: add initial AST2700 SoC support
+Thread-Index: AQHc+k/lqTfPUiDLnEiY9iw4Z/B5BbZWKZYAgAG90FA=
+Date: Wed, 1 Jul 2026 00:11:32 +0000
+Message-ID: <TY2PPF5CB9A1BE6963814348BB4A6887039F2F62@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
+References: <20260612-ast2700_clk-v4-0-9bea29cfdc39@aspeedtech.com>
+ <178276888626.793204.9603360436084101355.b4-ty@konsulko.com>
+In-Reply-To: <178276888626.793204.9603360436084101355.b4-ty@konsulko.com>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aspeedtech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY2PPF5CB9A1BE6:EE_|TYNPR06MB8597:EE_
+x-ms-office365-filtering-correlation-id: 118702e8-e04b-43e1-600c-08ded7054e7f
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|7416014|366016|376014|1800799024|23010399003|4143699003|56012099006|22082099003|18002099003|38070700021;
+x-microsoft-antispam-message-info: vTpRNzIRL8mR0X26stlrTsef5yNxENxgrBQJIzlvPrm0lJKc+AV39qzQrOP0vsuWmuzKo5JjsDG/cylL8erSXOlkmlf+g2GmbIge50AVXQtd5TFyBa3Kw4A+sN+LPgF2q6bR6RLM2bbhShs+a60MZfsrArg3TXslq0nOz3XIAxkgPLP92SBKqZc32xcCkw2e+rxvCxYDUExBTyis4M72/zuJ+IolU3vSTorhrql/K0ShQ+Oa05pWNUkX10YDF+mWIqdKmR2otygYmxy0vdnpo2WYjml+b1VQ+FQH9ckjkQoaWaS07Nw+mJeLU73vFyzs74Z05WSJSQaGtdkkvgSf4tQc76ES/rsCQlVfdPWhANMBYe4MG0p22x/KOaCsyINFnTv4Kw2flcWhpfI95q44jpKjmpng2+h6DOWtJpDvG1/3wNkzeQR3J/hapTcXTRKEN0xidM3bte42g5Eo65JrkFqiFKu95IqC0My52NRG6r1M+UlizygNhsbvLBm331Z2KjnBIbof0r06gIhGtt/p+6wCbXu2R6sPMt/vRGGTGAsWiHjNAknxMW8zCwGp3jWc55PlTVjK50AQbkHOnrAx2fz5giu/kzI1Vk9u+lQKXT/s8JKvfg6SOKbO5CfmnsPEl9UhUbqwAqGFxFtF7AC2kRTeFZYM+cAAG38jLw5ovCikEbTg/l+hQgMDQH6EzCapNa1avoFcZAFEVw9U3bPbMM8+FJIz7SJ/7EkY2VDhHfw=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(7416014)(366016)(376014)(1800799024)(23010399003)(4143699003)(56012099006)(22082099003)(18002099003)(38070700021);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Qk1iZmR2VElvaTBhVXZTdDYvejVjMVE4WWRabVNEQTdGaDR2NXhHLzAwU2tT?=
+ =?utf-8?B?dVNJTGdIWGgwNXAvMmR6VnlUc1hlQkNvSzM5dmkrM2xwcHd6ZEI3dU8vbWFE?=
+ =?utf-8?B?aytPZ25nWWlhMGtnajVUT1ZTRFFQVGIycmgrNC9RVGtsM1NoWVZoNjcyMEJK?=
+ =?utf-8?B?WFhwSWdVQ0xPTllKTGpmVm05ZHQvWm5qVVI1cjl3UkFrdXZBSzczNkZ4K09i?=
+ =?utf-8?B?MXhlVG9rM0VhWFZUcTFCTHNFQzlSbFZDUGYwclArTVg2elFWMnN2QzNuek92?=
+ =?utf-8?B?MkJtejhPaVFiTml3dDVTS21DRjdOVEVqVTUxOXRHZjcreXQ1SGxRVFJxRDRK?=
+ =?utf-8?B?ZDY5T3NaUDE4SHozdGpEaitQQlVGZG44NjA0UDYvQjZCWDV4TWFCOTVUZkwv?=
+ =?utf-8?B?SjRDM3N0aWF0SndmR1h1YXdJd3RuYlZFY0w3c0lBR0Y1bmFIY0ZUT1RwenY5?=
+ =?utf-8?B?TmNvU05lVjhuZVJlYjVKMDhTRlg0SE1UQVMzRURNOS9ZQWhQK1VGdW9GQXVu?=
+ =?utf-8?B?K0FiWCtFL0xDWjFRYkxOOE15UnVFalNyaXJ0NlR2bVV2NkRiaDBSckFkUkc1?=
+ =?utf-8?B?MkQ1YjM1aEVKbUlscDc3dGJ0bTJYSmsxeEdKVWlJYzJyTzlJbmlscWx0Rmly?=
+ =?utf-8?B?QVVENlBNOUp6ZmlVVFUzMkx2R0xhNWJxZ21xMTlwUi85R2RMcXlEbXdFVnly?=
+ =?utf-8?B?MThCZE0zU3RUTmZZTVNFSmV3Y2NvWGFocUY5WDZNb09JYzh4bFRBR1dhT3hF?=
+ =?utf-8?B?LzYwNHRGTFZkWk5tVmxsekh3STcwRzd3QitrZWwxTk4wT1dOSDZmdmpaZzRz?=
+ =?utf-8?B?VDY4anJrcXBSeUxiSEhheWt2WjFTZXpqTVF4dXNpcmROeTlhYlJSTUgvcE9O?=
+ =?utf-8?B?Tjh5M1BUWCtlSGdINXhha1h0MkhnWE8raWI5bXNwOWVhZDZHM3gwQlk4blln?=
+ =?utf-8?B?N3BPbmdVY25LQVljV1hTZzFSa1N2K1FCOFlTYnZWaVZ0Uk5UT1FuYmQ2NFBM?=
+ =?utf-8?B?dDVYRGsrNHZoL3ErbmdGYk16VUZmVURQNHJPNTc5ZUdlTEJJUzNraW05ZUsr?=
+ =?utf-8?B?RXNHZEswZ0ZUbkhEdlQ3S09DUXowUkttZUtMRS9JSk5yRm1ZYzBhdk14djZ2?=
+ =?utf-8?B?cTdnSVFraG82by9ZUDhFcElpRCs2Y1lGVnJxd1NNWGZlenRDTm1YbUR1OUNr?=
+ =?utf-8?B?UDI3aU13cUFDNGtwTjhWcEdiN0YxaktJREt0TGN6QTdPcVhXVlI0c2tmRWpn?=
+ =?utf-8?B?OUZhenBKcDdzdmNudzdxU0cxWnJPTXBwMFlMZ0hBWFJrdm1sK2xQNEM4VW5k?=
+ =?utf-8?B?a1hndjMrdk5mRlYveU1jdHR1U1BBWDV3cTdUV1ZoQmpjbHAvdDBYWW5DSUo2?=
+ =?utf-8?B?aksvQm83OXc0VFlIdXdCVjR0eTBYSHlnNmJNMk1ReERmM0pyQ3ZaendMR2tw?=
+ =?utf-8?B?K2RJR3REbitPSkRiSjVkNlZDQXoyZTJadmYxZzFvVmpnazc1TCtONkRYeDN4?=
+ =?utf-8?B?cGdPTVhYVjRhbjlvbmtoTDRnWUw5WTdXamdqYjRTQWxVaG5LdFVhOW40VVdU?=
+ =?utf-8?B?TktaSUlYSVhWQTRTc1diYno5cDd3NkViTGwydkdteGNoL2dsY0pJUVhHOFBP?=
+ =?utf-8?B?bTExamhPOU90eVhvWE51TC94eDJBLzB2WktHVEJ0RVM5cGNBa2VBaGF5bGFm?=
+ =?utf-8?B?aFc1blBkSUNGNlJtTW96bTZVZE0zSDJ2ZXd0S3VzUnkxQlF3UTJzV0VHQVRS?=
+ =?utf-8?B?ZXlwZlZTTk9ncnlzVFBqVzZhNG8vMlBlMGhVdC9GTlNVcnVyZmZvTmk3RURZ?=
+ =?utf-8?B?ZmJyN1hocE5hNG11eDRENGd6MmxodUdRUVNFZmtUcncxYk5HU2ZQZjMxU3hi?=
+ =?utf-8?B?SFZwUExhM2RMRVM2RkZpU1E2YnJ3RGE2RDhMOWwxc0RYM2ROeGo1UGJON25K?=
+ =?utf-8?B?OFl4SzVHYk9PRVZrZ3N0L0dFMnhXNFJGUHNZeFh5SGxEQjZ5b3BJMk9JRXNx?=
+ =?utf-8?B?N0Vtd2lGYmhqL3E4TFB5cjBKeU5vN1NXQklGRWNaeGt4YS9Lc1NlUjg3d1JP?=
+ =?utf-8?B?NW9OVEZOWWFXZXNsaFZnSHhHSFdLVjJhbHhLYUVIMjJkMmlzRldUNmVtZ0ti?=
+ =?utf-8?B?Z0Z0elNrc3FtTEVkNU1RcTVITHpxSzV5SVJyRy9vT094VklNdTNXQlNES1p2?=
+ =?utf-8?B?ZVVrbHFjclpieEJwR3lCZzh0cHBDNXFGeEpSMnNmRHgzZFRLYjV4U3U0THVw?=
+ =?utf-8?B?ZFVvWmNKdE1Dc0F1VU5uVDBPZ1JCQ0UzcVV4enlYeFJvQ3BieUxDNjdhK2hP?=
+ =?utf-8?B?QkV2KzQwN1dHQlZBRjg2Ymd1L05YWitmd0RBaklFWmtkbmZoREZOZz09?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HnaaZUSvfZYtdyXs"
-Content-Disposition: inline
-In-Reply-To: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Exchange-RoutingPolicyChecked: fqHTlPVfvSI0p1T9ZGKMIxPUx6kYXgKQ4OFkoBOnMXyS19q4BqZBcx4ORcoysvT4xduglfWSCzMCSg2VDTH+buK1GUsDBFALJ7ft7CaVpPkjJiRT8iciNS2M0psER6NJ+l3OaxvezVPZhhWh51BZVpH7AUU7jmfqQYTh01LpuuF/nDgc+0c8jw7XXgbJq0G86FEKyr2AUh9T+aswfQXR1fhNZ1mdFs4vBj3rwHBQqV6VVsfpl19jhJ2v9pgfDP1szHFT/HM8ptRTwFgcYgRt4tGI9jeT7yw2/37BoXhQ8wN3dy/L0aBdS58pC8KkHD56dGZoNmyKRW0vgG3mHTmSiQ==
+X-OriginatorOrg: aspeedtech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 118702e8-e04b-43e1-600c-08ded7054e7f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2026 00:11:32.4578 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tk2GMMi5rqM+X4CtBK+fBKPM3uozPJ38bj5JDNAoMTwo5dn8yIHBgoTQ2m+balS3LfKy/hDGY89U6O5byYSI7PDjDDMr5bdDsaWJGHrFhxs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYNPR06MB8597
+X-Mailman-Approved-At: Wed, 01 Jul 2026 04:52:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,287 +174,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---HnaaZUSvfZYtdyXs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jun 30, 2026 at 09:20:13PM +0200, Carlo Caione wrote:
-> Hi all,
->=20
-> This is a design RFC, not a patch series. I would like to agree the appro=
-ach
-> and the devicetree binding on the list before posting code, because the
-> mechanism touches both bootstd and the EFI loader and introduces a new bi=
-nding.
->=20
-> A working implementation exists and has been validated on hardware (detai=
-ls at
-> the end); I will post it as patches once the design here is acceptable.
->=20
->=20
-> 1. The problem
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> Platforms that follow EBBR / Arm SystemReady IR treat the OS devicetree a=
-s part
-> of the firmware rather than part of the OS: the base DTB and its overlays=
- live
-> on a firmware-owned partition and are updated independently of the operat=
-ing
-> system, instead of being shipped in the OS image or on the EFI System Par=
-tition
-> (ESP). The firmware is expected to load that devicetree and hand it to th=
-e OS
-> (via the EFI configuration table).
->=20
-> U-Boot today can source the OS devicetree from its own control DT, from t=
-he ESP,
-> or from an EFI Boot#### load option, but it has no generic way to assembl=
-e it
-> from a firmware-owned partition. As a result vendors carry out-of-tree ma=
-chinery
-> for exactly this. For example, MediaTek ships downstream `dtbprobe` (asse=
-mble the
-> DT from a partition) and `fdt authndtb` (authenticate it) commands. The g=
-oal of
-> this work is to provide one reusable, vendor-neutral mechanism in mainlin=
-e so
-> those downstream commands can be dropped.
->=20
->=20
-> 2. What a solution has to do
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
->=20
->   - Assemble the OS devicetree (a base DTB plus a list of overlays) from a
->     firmware-owned partition and install it for the OS.
->   - Install it on *every* EFI launch path, not just one. SystemReady IR b=
-oots
->     through the UEFI boot manager, which in U-Boot does not go through the
->     per-device EFI bootmeth, so a per-device-only hook is not enough.
->   - Support secure boot: when the firmware devicetree is signed, verify i=
-t, and
->     never silently fall back to an unverified devicetree.
->   - Support A/B firmware partitions.
->=20
->=20
-> 3. Proposed design
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> A new bootstd helper, `firmware_fdt_load()` (`CONFIG_BOOTSTD_FIRMWARE_FDT=
-`),
-> assembles the devicetree and returns it; the EFI launch paths install it =
-via
-> `efi_install_fdt()`, exactly like any other devicetree source.
->=20
-> 3.1 Where the source is described (new binding)
-> -----------------------------------------------
->=20
-> The *location* is described in the control devicetree. The bootstd node c=
-arries
-> a `firmware-fdt-source` phandle to a node that is a child of the media de=
-vice
-> that owns the partition, and identifies the partition by GPT type UUID an=
-d/or
-> name:
->=20
-> 	bootstd {
-> 		compatible =3D "u-boot,boot-std";
-> 		firmware-fdt-source =3D <&fw_fdt>;
-> 	};
->=20
-> 	&mmc0 {
-> 		fw_fdt: firmware-fdt {
-> 			compatible =3D "u-boot,firmware-fdt-block";
-> 			partition-type-uuid =3D "....";	/* GPT type UUID */
-> 			partition-name =3D "firmware";	/* optional */
-> 			extra-size =3D <0x3000>;		/* overlay headroom */
-> 		};
-> 	};
->=20
-> 3.2 The dynamic parameters (environment) and board defaults
-> -----------------------------------------------------------
->=20
-> The source and its partition policy stay in the control devicetree (secti=
-on
-> 3.1). The values that change with the OS image rather than with the hardw=
-are are
-> layered:
->=20
->   - the control DT describes the source and the partition policy;
->   - the board default environment carries factory defaults for the static=
- values
->     (`fdtfile` and `dtb_path` for the base DTB, and the `fdt_addr_r` /
->     `fdtoverlay_addr_r` working addresses), so a from-source build boots =
-and
->     `env default` restores a loadable configuration;
->   - the (firmware-owned) stored environment overrides those at runtime, a=
-nd
->     carries the genuinely dynamic values: the overlay list (`list_dtbo`) =
-and the
->     A/B partition pin (`boot_dtb`).
->=20
-> As an alternative, the stable defaults (`fdtfile` and the path) could ins=
-tead be
-> expressed as optional properties on the source node, keeping them in the =
-control
-> devicetree rather than in the board default environment. See the open que=
-stions.
->=20
-> 3.3 Where it is installed (both EFI paths)
-> ------------------------------------------
->=20
-> The helper is consumed by both:
->=20
->   - the per-device EFI bootmeth (`bootmeth_efi`), and
->   - the EFI boot manager (`efi_bootmgr_run()`),
->=20
-> each installing the result through `efi_install_fdt()`. That is the conve=
-rgence
-> point all EFI launches pass through, so the firmware devicetree is instal=
-led
-> regardless of how the EFI application was started, including the boot-man=
-ager
-> autoboot path that SystemReady IR uses.
->=20
-> 3.4 Fail-closed error semantics
-> -------------------------------
->=20
-> Once a source is configured (the node is present), the result must be
-> deterministic. `-ENOENT` means *only* that no source is configured, in wh=
-ich
-> case the caller falls back to its normal devicetree. Any other failure to
-> assemble a configured source (unresolvable device, no matching partition,=
- read
-> error, invalid blob, failed signature) is fatal for that EFI launch path:=
- a
-> missing or bad firmware devicetree is never silently replaced by another =
-source.
-> Missing environment metadata for a configured source is treated as a
-> configuration error (fail closed, or satisfied from the board default), n=
-ever as
-> "no source".
->=20
-> 3.5 Optional secure boot
-> ------------------------
->=20
-> With `CONFIG_BOOTSTD_FIRMWARE_FDT_FIT` the base DTB and overlays are sign=
-ed FIT
-> images. Each is verified by reusing U-Boot's existing verified-boot policy
-> (`fit_image_load()` with verification enabled and a required key in the c=
-ontrol
-> FDT), and the verified flat devicetree is extracted in place. A non-FIT f=
-ile is
-> rejected so an unsigned devicetree cannot be installed. This reuses the e=
-xisting
-> trust model rather than adding new crypto, and replaces the downstream
-> `fdt authndtb`.
->=20
->=20
-> 4. Why these choices
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
->   - Describing the source in the control DT, as a child of the media devi=
-ce,
->     follows the existing bootstd guidance ("if a bootdev needs configurat=
-ion,
->     add it to the DT as a child of the media device") and the VBE precede=
-nt. It
->     keeps the mechanism generic: no GPT UUID or board constant in the C c=
-ode.
->   - Splitting identity (control DT) from dynamic values (environment) and=
- static
->     defaults (board default env) keeps the firmware in control of what ch=
-anges
->     per OS image, while still letting a plain `make <board>_defconfig` bu=
-ild
->     boot.
->   - Installing at `efi_install_fdt()` rather than in one bootmeth is what=
- makes
->     this SystemReady-IR-grade: the boot-manager path carries the firmware
->     devicetree too. A per-device-only hook leaves the autoboot path on the
->     control DT.
->   - Fail-closed is required for secure boot: there must be no path where a
->     configured, signed devicetree silently degrades to an unverified one.
->   - Reusing `fit_image_load()` keeps a single, reviewed verified-boot pat=
-h.
->=20
->=20
-> 5. Alternatives considered
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D
->=20
->   - A global bootmeth ordered ahead of the EFI boot manager (a structure =
-used in
->     an earlier proof of concept). It works for autoboot but does not conv=
-erge
->     all launch paths; `efi_install_fdt()` is the real single point.
->   - A per-device bootmeth hook only. Simpler, but misses the boot-manager
->     autoboot path, which is the one SystemReady IR uses.
->   - Keeping the mechanism vendor-specific (the status quo). Does not help=
- anyone
->     else and keeps the command out of tree.
->=20
->=20
-> 6. Open questions for the list
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
->=20
->   1. Binding naming: are `firmware-fdt-source` and the `u-boot,firmware-f=
-dt-block`
->      compatible acceptable, and is the control-DT-described-source shape =
-the one
->      you want?
-
-It probably shouldn't be "u-boot," because it's a more generic thing.
-
->   2. The configuration boundary. The proposal keeps the source and partit=
-ion
->      policy in the control DT, puts factory defaults for the filenames an=
-d the
->      working addresses in the board default environment, and lets the
->      firmware-owned stored environment override at runtime (and hold the =
-dynamic
->      `list_dtbo` / `boot_dtb`). An alternative is to express the stable d=
-efaults
->      (`fdtfile`, a path) as optional properties on the source node, so th=
-ey live
->      in the control DT rather than the board environment. Which does the =
-project
->      prefer?
->   3. The `efi_bootmgr_run()` hook: is installing the firmware devicetree =
-on the
->      boot-manager path acceptable to the EFI maintainers, and is that the=
- right
->      place?
->   4. The fail-closed semantics: a configured source that cannot be assemb=
-led is
->      fatal; only an absent source falls back. Agree?
->   5. Should the signed-FIT verification be part of this series or a follo=
-w-up?
->=20
-> Thanks for any feedback. I will follow up with the patch series once the =
-binding
-> and approach are agreed.
-
-I've added in Ahmad Fatoum from the barebox side, as this is a problem
-that while the implementation will be bootloader specific, the details
-will be generic.
-
---=20
-Tom
-
---HnaaZUSvfZYtdyXs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakRGHQAKCRAr4qD1Cr/k
-ChnHAP0ZNgeRkiyqRMXrWj3BsCVCIxpJUxOysTU7mYDPEqRYzQD+KIGnr9ePQaZA
-hlnzPk43Hn6OTFPTyWXMzWg9iyjACAQ=
-=Z5HU
------END PGP SIGNATURE-----
-
---HnaaZUSvfZYtdyXs--
+PiBTdWJqZWN0OiBSZTogW1BBVENIIHY0IDAvNl0gYXJtOiBhc3BlZWQ6IGFkZCBpbml0aWFsIEFT
+VDI3MDAgU29DIHN1cHBvcnQNCj4gDQo+IE9uIEZyaSwgMTIgSnVuIDIwMjYgMTc6NDM6MDcgKzA4
+MDAsIFJ5YW4gQ2hlbiB3cm90ZToNCj4gDQo+ID4gQVNUMjcwMCBpcyB0aGUgOHRoIGdlbmVyYXRp
+b24gb2YgSW50ZWdyYXRlZCBSZW1vdGUgTWFuYWdlbWVudA0KPiA+IFByb2Nlc3NvciBpbnRyb2R1
+Y2VkIGJ5IEFTUEVFRCBUZWNobm9sb2d5IEluYy4gSXQgaXMgYSBCb2FyZA0KPiA+IE1hbmFnZW1l
+bnQgQ29udHJvbGxlciAoQk1DKSBTb0MgZmFtaWx5IHdpdGggYSBkdWFsLWRpZSBhcmNoaXRlY3R1
+cmU6DQo+ID4gU29DMCAoIkNQVSIgZGllIHdpdGggZm91ciBBUk0gQ29ydGV4LUEzNSBhcHBsaWNh
+dGlvbiBjb3JlcykgYW5kDQo+ID4gU29DMSAoIklPIiBkaWUgd2l0aCBwZXJpcGhlcmFscykgZWFj
+aCBTb0MgaGF2ZSBpdHMgb3duIFNDVSBQTExzLCBjbG9jaw0KPiA+IGRpdmlkZXJzIGFuZCByZXNl
+dCBkb21haW5zLg0KPiA+DQo+ID4gWy4uLl0NCj4gDQo+IEFwcGxpZWQgdG8gdS1ib290L25leHQs
+IHRoYW5rcyENCkhlbGxvIFRvbSwNCglBcHByZWNpYXRlIHlvdXIgaGVscC4NCj4gDQo+IFsxLzZd
+IHNwaTogYXNwZWVkOiBhZGQgQVNUMjcwMCBzdXBwb3J0DQo+ICAgICAgIGNvbW1pdDogM2ZhMWI0
+OWM5NDBmZmZhNTU2NjU2MGQ1MTM0Zjc0YjA2MzY0NWI3Yg0KPiBbMi82XSBhcm06IGFzcGVlZDog
+YWRkIEFTUEVFRCBBU1QyNzAwIFNvQyBmYW1pbHkgc3VwcG9ydA0KPiAgICAgICBjb21taXQ6IGI2
+MmI1NWJhNGIyZDFjYWJkNmJiMDk0MzY4NWMzMTE1ZjZlZThiZDMNCj4gWzMvNl0gYXJtOiBkdHM6
+IGFzcGVlZDogQWRkIGluaXRpYWwgQVNUMjd4eCBTb0MgZGV2aWNlIHRyZWUNCj4gICAgICAgY29t
+bWl0OiA0MGJmMTQxN2JhYjYzNjMxOTNjMDIxM2FmMDExZWZlYjEwNWFmMmMyDQo+IFs0LzZdIGNs
+azogYXN0MjcwMDogYWRkIGNsb2NrIGRyaXZlciBzdXBwb3J0DQo+ICAgICAgIGNvbW1pdDogMDc1
+OGZkZGIzNzI5YjhiNGUxMzBmMzU3Y2Y4NjA4YWIxZjRkZWY1Yg0KPiBbNS82XSByZXNldDogYXN0
+MjcwMDogYWRkIHJlc2V0IGRyaXZlciBzdXBwb3J0DQo+ICAgICAgIGNvbW1pdDogNmZiNDA4MTJk
+ZGI4NDZiMDJkNTg1YzU1ODk1MjQyOTU5Y2JiNjQ5NQ0KPiBbNi82XSByYW06IGFzcGVlZDogYWRk
+IFNEUkFNIGNvbnRyb2xsZXIgZHJpdmVyIGZvciBBU1QyNzAwDQo+ICAgICAgIGNvbW1pdDogNGE3
+MmZkOWZiMDkxMDk4NTczMDNjYTY0ZmQyNTkwMDllMWQ0YjU1NA0KPiAtLQ0KPiBUb20NCj4gDQoN
+Cg==
