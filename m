@@ -4,104 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4FDC43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EEFC44500
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1881D84B92;
-	Wed,  1 Jul 2026 14:17:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id ABE6B84B92;
+	Wed,  1 Jul 2026 14:22:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4HCc6f2";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z34Eiws8";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QqPCvpsY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A47EE84BBD; Wed,  1 Jul 2026 14:17:25 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAF3584BC1; Wed,  1 Jul 2026 14:22:41 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55C1D84B62
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:17:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 850DB84B62
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:22:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6982e71dfb0so831216a12.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:17:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782908243; cv=none;
- d=google.com; s=arc-20260327;
- b=cr+oqDxOomfNxHDRQ2/md6oNDisxCZ7Kzr5tdgepIQLuG1sCuLE76rAur69pdzw+wp
- 5xw4EhASWR1iPiv44BEU/WIKDNLhJqye8BQSyER55jUYGa1vf0AI1/8E+py7lSwNIx+D
- rIn/BXH/J/1ArIbgbERQwyKpZ02Dq6khIfToCGGQQ41FNXc3kDWl0wHrn+K7bUqDzI6/
- 74V+rYQOPeEpBcBu02sbMyTX+qebnBG/Jy+R3m8V+ucZv7pfMWYYRVGe9DALyZe+degF
- wW336ayYwjMJJmNLWDHiJtfIl1DXrokKGVPEP9ZzrJ9U8hCjbv/XR+7ZDyZl/OxHMr/X
- ZVow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
- fh=AfbpCGlXQJ+uqvM2sCk9+bHcgJgFXbd5chXxLi8vatQ=;
- b=okMxp6a0eNKdpVBZwUtuhtaxO0J6vuosTHYtJ+O4H6CfnjgiViA3pEeeAFKShtayhc
- OafPCuj+OhgTNbacopU6NBelev0PhxVdgORqHqfFaEZgNjwouyHgh1QtDw/cGrgH7bt0
- C4q4+nWnJ87p0AT0SRCygGFkJcGK+ponbH7hgy/IHC5nFHh6IENXJ95iyHjgIfm5ix9o
- t7z7wP9t5TqH13OafmNrB1eX7NDm8r3pGTsqZDOUEqhkE8bMwhf/F6TTtuiQA7pEzAN7
- 1Tzuc1iY8oR2Rhmzc5ZPU001dzxI/r/+6Y0L7eXyjE4449Hu7WlyKGX2jBT65qui2uI7
- NPpg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 661A8wsc753572
+ for <u-boot@lists.denx.de>; Wed, 1 Jul 2026 12:22:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek
+ 9s8KHjXw=; b=Z34Eiws8D8HfbecQtO7+xe69jALD2FOTAZ5kC5vbS/SjgUE3I1G
+ gaSegrDaCrWk3e44ff8k4W9nS9bRcKhHKsivrB6LGejKZx8MH7V+X5XWg5bmBgbK
+ WCum8LoFt3ycbd7nOsidutKKg395Jc8bL8UhJgVJBD9jtXGxkS9nl7XozIEahsWq
+ lRp2p6k7VtgExsKVfrOCKrRvdxfNjwOfYSkrq8LXK2kdQCPSOo5yjyc3ws67kAPu
+ DGnz1lM5WGSDrRmOEekCSaJpbX72/GLv+X8nNEnxuV4vNemCdAYU6AqAA5QuNl1+
+ edaOHkTiv2mud7kBQSDFgOFjna2ob2nfdyA==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4rsy2nxd-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:22:37 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-30c0a27ad86so2246809eec.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:22:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782908243; x=1783513043; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
- b=L4HCc6f2PCdV3wapBBGszYhPQ3RESKd3UmKgF+eO4DTIdHKJNRv2PJam00aWzs6XRv
- eqtliUs3QhIhj1d8XpwHhOZZHOIsnx/kf9uOBZsg2C5QDv8ibt72k6V50UEexZ8/bqYe
- uHh2hN6Ctz2jtQKatZY+d4CwKo+4UE39/Pb94=
+ d=oss.qualcomm.com; s=google; t=1782908557; x=1783513357; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek9s8KHjXw=;
+ b=QqPCvpsY99Dy+qP6KVaRyUMpN0170EiMLnI5xTq04Kohk1KS+FtUvuAvfkp8Kp7cLR
+ kKtCOL/xaX/d0Iz5zcPMVi8EQkrpWazpSBcEoNFgQC3691sLDWRzbM9ZqYl5+wwyHtM0
+ rNrV5Z7xLobUf/nabmLEwsUAY+Qm+ZZ06PkvTivDZuoHSPNhxjQQ1P6OK3isyiHDhiGB
+ YAwlltwF06CdWAplgnWsHS23njj9XGSFsgcCka+Qwwc0885NSC+tIactRDcqvsMfAnFc
+ bCVht5MVgnzrqACbw0dNmywUppYqzUPEj6p4gKLlk3HfMR3iX8wB+3wrI57nbsHyI/HL
+ QrJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782908243; x=1783513043;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=VmT0cIRtHfNNU5QbAbIu5ElmdHFglM2BRbaK9yu2iu4=;
- b=Bo3ojS8mClivyRM8l5i53W/wssR1RhtjSy3XrieqFFM7cvQ+jZTDCxCcvLtIt1kllh
- bBVnO2NfH0FMOokImfd41fuz3v3kL6khjZ5q3QAuSYUsAK0lTSMEyIvFRERV3ve+Ia99
- pLgd+yR3UauZhF9x8A0yAqCpgchdycrem12EYcNI30HJ6tIiv7sizs5NpfLgWuIpB0WU
- 2Q/9qTZQI6o9eshWLLQTHtRpG/mmae1KhXSBvX5MamKeOBY7l2D9eyFfg9U6fPGQO5cp
- +t+qIqJwxLZxAkin8uj40H28PpUWE3OZKVkIJmHAuYgUZfhI4sjZWPRfFgfMSSh4IyuH
- gwtQ==
+ d=1e100.net; s=20251104; t=1782908557; x=1783513357;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek9s8KHjXw=;
+ b=iLKNK8TSk+1haJDewIlG5FWCsFWdfd8mS2Cv/imGt5I5T9uIDLCGVVu61UsAXtDKy/
+ Xt+3isGvzO8HzNuUeV6LhlpSmIe4h9O9VZKRUiwidPegWoadj+vU/UkD0dPRempzbYRC
+ YkKYl3ccpwt20H75Jy3ZyZYuiCcDVHaQGFWVa56t/cXVgw6vzBK6vYaW96yRK3u423Pk
+ CFXkSl474x/hICJhTG/TUKz2A7n9rIN/aE8eWzrmbbhylZp7U7y2CRpwkJiyNEvKhWWC
+ f3yogpAjn823aRLWFsmRbGqyXcfpQP2ez7UW9e3C3dOPaz2l7d3wi6oV6DlfVBPIOVMx
+ OIGQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq96zTEpjrzJmvZX8OnZ7Yl80sS/zAC1Z7orjUvcoo5PSw1WeKZDbq7CBPBizB5QhtqGAqPlF4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO/5ccVufEZAP2a4i5bYNEmdyVCjy4pV+SUiI5LxCdBtWubJNp
- LhAOwCAjRhTMZLYgDnOKsH+LdRg9jFYnUg1ICYi5ILi4mJ9/5NCKjqQnF7e6KssiqIFIp9w6zqF
- QRJPd70UBV5Eq/Z/HllEHmBFv/WAGSKdvTpcb97zMQSbO/flISuuFkw==
-X-Gm-Gg: AfdE7cn+nTnSmpjFLKatCxZVmmfihn8oKAH2RuJh/8UwuR1dKRQENH9Ju0IRqFLxwyY
- 3Y/gbHr30/nPVTcVzj8cJDpTr3kR+oNq+HKM6W6YdeyAc5/Vl1t6n/xdfwfza+3CclNzaRgKtwG
- OmlOP7OHJzi7jo1gVzNbklyaR5d6MW22v6SLOT+U8Zij47mE4BeA1Xtwon92O9WkzTdp3xWTjX2
- iS3CWlIgim0i/ShqXjW12xWMYlZZgM2gyyhINXizzB9RqmUzzYh/UBMLnpuBliUXoPJHPDvtRpx
- arxNuTLH
-X-Received: by 2002:a05:6402:5409:b0:698:9a31:3651 with SMTP id
- 4fb4d7f45d1cf-6989f37687fmr678205a12.19.1782908242727; Wed, 01 Jul 2026
- 05:17:22 -0700 (PDT)
+ AHgh+RqsIjuOwBPXi5AemtkQ7Qp2DW2Kd4a43LSc6h98vMqoYOE5GqvJXVP/Lr0rvSjs4hFN9q3KK4s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHv0yG/XrazbGWIeGbB/oS5XVi8YwyWrayKxDmdgXsllZC6AGf
+ 0SQp5J4me7fJZBKxoaKXqbn/HfAqLny8Z9uHPlT53eYNjZUxCzdXRzhc5NSC6a7XdbjFHnEVlYb
+ 6r89ZEa3pj8vQsrMKlRhBbh6DUuPdlHdVALW+RC/smNnSeykCdWovAOct
+X-Gm-Gg: AfdE7clgU05u6QEFPi4H7v4EEgpbjPKDvFYfyoLcECWfWG0h3fsx2mrjLIUmOzB4H8w
+ k10YtwT/Yw79/KAOiN7B+Ohf/pBJG2BumtEtFMtcqN+w1oPb1hIZLO24UJkWuwA0Ff5wuJU0qbc
+ M3QHEdT9Zq5ufQCDH18LzW0xnXPRvJ9IbYDq8q9EZ4b4c+SGwaZpw2GwpawCypEN12DNDY2bZ6P
+ I5sSoJF+AORVUiuQQb277HtYsOiHdUcBkpi6qTL4VyocFGmvuIJicWa9OigIxh7rbmUWDrJ3YSz
+ JVP4/fMaY+LOxc2BGeD06NQgTcG60cgcx/XdAOP9ELcQ6hi2qY5Cikfh6w6dneYqAHtaaFZ7R7J
+ mzqYAkaoiJOcXUQoDqULL4yCihX19HPmiw8Hfzy8GUsa5fUGlgaa/3BYJpiHcZ1oDmPKwBNJC+4
+ kKIRvUM9jC0JlOVaIioSRopJtydubWsg==
+X-Received: by 2002:a05:7300:2d2c:b0:30c:52c5:6e52 with SMTP id
+ 5a478bee46e88-30f053f3850mr565992eec.22.1782908556973; 
+ Wed, 01 Jul 2026 05:22:36 -0700 (PDT)
+X-Received: by 2002:a05:7300:2d2c:b0:30c:52c5:6e52 with SMTP id
+ 5a478bee46e88-30f053f3850mr565942eec.22.1782908556293; 
+ Wed, 01 Jul 2026 05:22:36 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30ee3170ef9sm33074376eec.16.2026.07.01.05.22.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jul 2026 05:22:35 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v1] configs: qualcomm: Add secure boot config fragment
+Date: Wed,  1 Jul 2026 17:52:25 +0530
+Message-Id: <20260701122225.1628456-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260618150913.314507-1-vincent.stehle@arm.com>
- <CAFLszTh1p01CC8-1Or7AQhziLkNqzN4NKADJ+hKYSEVjM15t3A@mail.gmail.com>
- <b3e09fac-0328-4aba-a59f-4d876b9a7475@pengutronix.de>
- <CAFLszTj21Z__n=r-tcVwp_9doqzOn10TmrfM=D7HppxawBFADw@mail.gmail.com>
- <9dd01627-7a0b-4dbb-8215-7eddf424a6ea@pengutronix.de>
-In-Reply-To: <9dd01627-7a0b-4dbb-8215-7eddf424a6ea@pengutronix.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Jul 2026 13:17:11 +0100
-X-Gm-Features: AVVi8Cdz8e3CYf2hhAWv2oa4obXYOYXJQCnGC7TehNgSiETGWVJNJ5mMg06F2hU
-Message-ID: <CAFLszTgFOkFm3VSOo-yMyp-uRTPXHGv4P3J0srPmod5FnA0Z6A@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: add missing EFI_EXIT in
- efi_disconnect_controller
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: AvO7JzLAcNQ2tL9GLHImonJ1Cn-F80ZJ
+X-Authority-Analysis: v=2.4 cv=fLgJG5ae c=1 sm=1 tr=0 ts=6a45068d cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=xTSDdHutD4yRob8Hd9AA:9 a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDEzMSBTYWx0ZWRfXznk7OlesQTmn
+ URFSkf0IzvpF+HbvSmEx10gWmackbnraOmVUfns1UtmYWx9lvQ/9xVvAjgSp5q9TPLOUOs3uOWr
+ jBRctjb063PkhRlh7333XNz885+hqlyDEL7yRcuU4vOkMWKlcvxAey/AjEZc6HTVpP3wEfb67Qj
+ fGCwH0VI1G9/Cam81pObWQrF9QTEjFqtrAvuQ800DJDCkvGoQetfPjqtoRKk4rjEuOeNzsEjPH3
+ BHYdtPKGe15dAEuDRjxrANC4Y3rmjx2uCXak404AJSdxDg4r+d3RZaTP/bqZqe9dtw8NlrlnNyI
+ OeFbMjDc32r3xcTQ9EmMWdLxi+03wozM9L8XwFMl6xSPkFzQlOYzwlYkxRAV38eGqxpv2lKdLmq
+ PoCJ1tRvXMzfKHZ22KMJFJf09YmypCQyDZ7DIZo2NSD9geEhs2qL7nAzYLakWKY6phEleRHfYPu
+ GsdE+pjTJ2lRT8+995w==
+X-Proofpoint-ORIG-GUID: AvO7JzLAcNQ2tL9GLHImonJ1Cn-F80ZJ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDEzMSBTYWx0ZWRfX/nHTyPpTRvQK
+ REpbQmPUhrKlLzd7Iveov+TiFXJrmHt/ylTLnVDzZJLNd/RMeRqq/OxsLUd8UXa3IDq5dIFwdH5
+ 5LMNjJg9kXG6Rf/n8Hs9E3dfnVVCbcw=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-01_03,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
+ bulkscore=0 spamscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010131
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,123 +147,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+Add a common configuration fragment for EFI Secure Boot and the
+required hash algorithm configs to reuse across Qualcomm boards.
 
-On Mon, 29 Jun 2026 at 12:06, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->
-> Hello Simon,
->
-> On 6/25/26 5:12 PM, Simon Glass wrote:
-> > Hi Ahmad,
-> >
-> > On Thu, 18 Jun 2026 at 16:28, Ahmad Fatoum <a.fatoum@pengutronix.de> wr=
-ote:
-> >>
-> >> Hello,
-> >>
-> >> On 6/18/26 5:18 PM, Simon Glass wrote:
-> >>> Hi Vincent,
-> >>>
-> >>> On Thu, 18 Jun 2026 at 16:09, Vincent Stehl=C3=A9 <vincent.stehle@arm=
-.com> wrote:
-> >>>>
-> >>>> Make sure to call EFI_EXIT() in efi_disconnect_controller(), when re=
-turning
-> >>>> after having called EFI_ENTRY().
-> >>>>
-> >>>> This is inspired by a barebox fix. [1]
-> >>>
-> >>> Hmm, does Barebox support EFI_LOADER now? I wish we could bring these
-> >>> projects back together :-)
-> >>
-> >> It's not as extensive as U-Boot's yet, but it's usable for the common
-> >> boot me a distro GRUB use case. The code originated from U-Boot with
-> >> some parts heavily rewritten to fit barebox, e.g. the EFI filesystem
-> >> protocol is implemented on top of dirfds, so it reuses VFS path handli=
-ng
-> >> and other such things.
-> >
-> > OK good. I did create a VFS in Concept but I have not tried to get it
-> > into mainline yet.
->
-> Cool. I really look forward to `cp /dev/sd /dev/emmc` just working :-)
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+ board/qualcomm/secure-boot.config | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 board/qualcomm/secure-boot.config
 
-Well, you can copy:
+diff --git a/board/qualcomm/secure-boot.config b/board/qualcomm/secure-boot.config
+new file mode 100644
+index 00000000000..21f567e1a45
+--- /dev/null
++++ b/board/qualcomm/secure-boot.config
+@@ -0,0 +1,6 @@
++# Enables EFI Secure Boot support
++CONFIG_EFI_VARIABLES_PRESEED=y
++CONFIG_EFI_SECURE_BOOT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_SHA512=y
++CONFIG_SHA384=y
+-- 
+2.34.1
 
-=3D> mount hostfs . host
-=3D> fs cp host/README host/Kconfig
-81004 bytes copied
-=3D>
-
-but there is no device fs :-(
-
->
->
-> >> The imported files have Origin-URL comments pointing back at U-Boot
-> >> including the revision they originated from, but we are still in need =
-of
-> >> better tooling to make use of these tags.
-> >
-> > On another topic - where did we get to with the whole-FITsigning
-> > thing? Should we set up a call to talk it through?
->
-> This is still something I am interested in landing. I had started a
-> review of your counterproposal, but got distracted before finishing it.
-> I submitted it now.
-
-OK great, thanks, will take a look.
-
->
-> Cheers,
-> Ahmad
->
-> >
-> > Regards,
-> > Simon
-> >
-> >>
-> >> @Vincent, I suspect a number of fixes in [1] are also applicable to
-> >> U-Boot, but I haven't checked.
-> >>
-> >> [1]:
-> >> https://lore.kernel.org/barebox/20260216084758.3548990-1-a.fatoum@peng=
-utronix.de/
-> >>
-> >> Cheers,
-> >> Ahmad
-> >>
-> >>
-> >>
-> >>>
-> >>>>
-> >>>> Link: https://git.pengutronix.de/cgit/barebox/commit/?id=3D080db65e3=
-9a877b000baaf843c997a69821dfe69 [1]
-> >>>> Fixes: 314bed6c854e ("efi_loader: fix DisconnectController() for sol=
-e child")
-> >>>> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> >>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >>>> Cc: Tom Rini <trini@konsulko.com>
-> >>>> ---
-> >>>>  lib/efi_loader/efi_boottime.c | 2 +-
-> >>>>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>>
-> >>>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boot=
-time.c
-> >>>> index de57823bd44..b6966652d97 100644
-> >>>> --- a/lib/efi_loader/efi_boottime.c
-> >>>> +++ b/lib/efi_loader/efi_boottime.c
-> >>>> @@ -3895,7 +3895,7 @@ efi_status_t EFIAPI efi_disconnect_controller(
-> >>>>                                       &number_of_children,
-> >>>>                                       &child_handle_buffer);
-> >>>>         if (r !=3D EFI_SUCCESS)
-> >>>> -               return r;
-> >>>> +               return EFI_EXIT(r);
-> >>>>         sole_child =3D (number_of_children =3D=3D 1);
-> >>>>
-> >>>>         if (child_handle) {
-> >>>> --
-> >>>> 2.53.0
-
-Regards,
-Simon
