@@ -4,75 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD82C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72D3C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:05:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D958784BB4;
-	Wed,  1 Jul 2026 12:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 05F3A84B96;
+	Wed,  1 Jul 2026 13:05:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gQ4UxGbC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cOjsZsVK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF34D84B9B; Wed,  1 Jul 2026 12:52:28 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F055184B9D; Wed,  1 Jul 2026 13:05:30 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6BB684A7C
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 12:52:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id CE82884AE9
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:05:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 845BE60138;
- Wed,  1 Jul 2026 10:52:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2A521F000E9;
- Wed,  1 Jul 2026 10:52:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782903145;
- bh=vruXHb7w+Sm8g9KDBu51YHdnoSrMDSPnHf7tLiPv9uM=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=gQ4UxGbCT8X5ldQPKsYQ5zUXMV6SJuF2bmnl1AwJH4pyv4AjfjyLxFRAkzAR1HZL7
- xWX6U40KK8T9b/hy3QjOOpA7HT8/F91OyeKSm4OTiS1GkWDw45oCJUUk+2U8gNi68h
- oLSv/vbpx2cLWLm+RY0I//KEEEBR06vVsFjDS9hNPQxlxRUX4KssNV5pMIoF9BoYiC
- Nif6iRKOmIDopPTcu1lVoG54Lz5Vu/n7Yx6S5dEGQVjVUmjYpKfpMphsLpDPeMtBEK
- ECGIAOE6TJmLnA+1hohoVJC47gITM8V0B0ltk1BbSQOBgnU3qEli4Ms2cd2EJfLpBU
- 0pnb/yOi9nuSQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Marek Vasut <marex@nabladev.com>, Jens Wiklander
- <jens.wiklander@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andre Przywara
- <andre.przywara@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>, Casey
- Connolly <casey.connolly@linaro.org>, Chunfeng Yun
- <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Ion Agorria
- <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>, Kongyang Liu
- <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Stephan Gerhold
- <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom
- Rini <trini@konsulko.com>, Varadarajan Narayanan
- <quic_varada@quicinc.com>, Weijie Gao <weijie.gao@mediatek.com>, Zixun LI
- <admin@hifiphile.com>, Jerome Forissier <jerome.forissier@arm.com>, Jerome
- Forissier <jerome.forissier@linaro.org>, Alexey Charkov
- <alchark@flipper.net>
-Subject: Re: [PATCH v4 64/64] usb: fix build after resync of DWC3 with
- kernel v6.16
-In-Reply-To: <81d73d59-c56f-45a2-8db6-8741ea6ab1a5@nabladev.com>
-References: <20260629084507.3254232-1-jens.wiklander@linaro.org>
- <20260629084507.3254232-65-jens.wiklander@linaro.org>
- <81d73d59-c56f-45a2-8db6-8741ea6ab1a5@nabladev.com>
-Date: Wed, 01 Jul 2026 12:52:23 +0200
-Message-ID: <87se636kyg.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-664a09bc459so628593d50.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 04:05:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782903927; cv=none;
+ d=google.com; s=arc-20260327;
+ b=mGj4GZi/GVFnsK2lO95bnFmiPnoGaf4K4FlguTu+VHml+Cka2IU5TBD4g7wDgfDDMa
+ NF42eY4LFMmcUgcOiX5ifp0VVi5RGYJg5unVeOrTuLPfayjU26oNkBLbOgF1tDYAVfRO
+ 3FK6gLEcJJ49nko+uCKzyAvwbz1wuwRZSUK2fISpI70MHXrr8teTggFC3qVfiDin1Hlk
+ GIjVNh5hZSyU7lGA1IA1S57iOS9bcJDz/uVJSXffEQ8eViaEl4aFnMkOZxxo9NcuyQXo
+ rOhleluy4opLXYjhcr5t5B4QYe23G0tvXIF8eL7pXuwn9kySILxKliiwiqyxK7S39Tu+
+ 5+nA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=axUw56n8TmL929HY32G8f1/MpX0JaxtmYVGqfjcg9IA=;
+ fh=dNvPoW+6meLzYkXuqNxSiOVew3EdCu7K9bk/KboZGnc=;
+ b=nKLcEzptbc6mZHsNCr41Rq559I4jTKNTf7+KAKRxiNhiiF70XLKJbnmpuX2soszEFX
+ IBhNbVs47cuWK2d2oI88VqkECNZ53LVh6vf6QbKl9VXVVHt1Iguk27T7QrUoQDptNgMn
+ EhwUG9FKh8zrLhDad8az7+xrL/TlxHz0D2f6PFv38YTd4p7pxD7ybnGiZM3GX/7teFUJ
+ zRmV343tymMSO30g/MaIHlVlgS3zL6PIS+ZtOKK9SZW+i1aIoHLR8wOLu2EEUTBxDJe9
+ HkUkZa+6t71jv39Q8eUr6z/5Zxeu04mtDDKkmqVnS9YjWCAqUcU/7UaGUKJKZvZBgI5p
+ roIQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1782903927; x=1783508727; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=axUw56n8TmL929HY32G8f1/MpX0JaxtmYVGqfjcg9IA=;
+ b=cOjsZsVKeaHJVoab90kj/n9jNE/v7zF/UZQNER3rfqNR+SbCXFOun9VgpQO9TU6N8I
+ veN7MymqJmN0313HqoofFvs7NGcgIjudDujk+kBRHK2gudUSoL9bsEVxrJmaOav3zlqP
+ p66fD0wHYKlzbHfxMKKm0ZzOb2URSWXOugOdS8iarVQ+BIZdLYNt86HKTC2GJdEONfau
+ zDmqOJOdFaafdBxLBe0aheIBgm/r1N2dbmHZrU1J4uJlJ+9ajgE20gQLLqnrMl65fno3
+ zaQ0FEW1LPMkofx66Kmvov3LJReokRA+tBV3PqQ/Ui9mQp3VPS4Wi76s4LWtD3iA58dC
+ 4+pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782903927; x=1783508727;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=axUw56n8TmL929HY32G8f1/MpX0JaxtmYVGqfjcg9IA=;
+ b=WONEMJm762Edy7Uv8wRbO2T+M8ZDwmX21EnlqNrPbAssinXj4JNIs/N7Q5SGWG6SIP
+ av4F4a5dWN6oARvJxwgsOUM91H2OYrESvDnlXhgIvFGuihXSvIAGsPYUm1w40fsbGRX8
+ ek025WtYZIjK6d8oeJsZXEnS6q4tucIxXiXkEgLyz5zZ2YeasVRcsvzjUUfHNYgdUS0e
+ 1ug9iUb3NlDBz6iXNJ3lOjw9n3YEqY7at6BJAXB0YWf4tyhcC2hk2BQ3Ek7O6Qg05RNs
+ Fn0fi4/k9cX03WZsyrcYIKbpmkWMpcZkKtEIhMV3i0gGDZQf/t/iCiFJPE4r6tRYbtRA
+ uwLw==
+X-Gm-Message-State: AOJu0Yxe4q0TC78+mzXbPySWbmBUrOkA6kfVJLS+t7B87QAbhDh5msBJ
+ 31lb3UkVaJ6ntg6hBc//IsNKy1JGwiVJRW6hFINk3EJt6fkM+lnKjBcEIv0JwEJwkdydK7yC/1+
+ /n5Pqn73adb6vKVJzme8DxEGiyWwG0/Ms87XE9Ti3CD4BOHNHQS4W1t4=
+X-Gm-Gg: AfdE7clFk3VTW+A0sMJSb81LmUpsR+iz2t1cF4zgepCPxDEmSE/gW4FuL4vZG4p1/VG
+ TyedQdyciElXxv4zdU30ciNSFM1LBxSH5PI6R27FUaTAbcuC7cWJHE/wFn71iIGOgTumV8WDkdb
+ OFqK/ntJYeTZS3AznLVialsJkztVw7szGDimLyIIF86pDx05zWt2mO4XRpObqIVDHZY+CnsZW27
+ LqlH4bt9rMK0MWRaGz3uvyD3+WyS9vbC+fv+/pua2vTrwp6lkbroBimRgOpNceAvdQ6tmOLZu6h
+ z3tTY//fYncSxnHIqVvEEm/g2unnztmu8dD/bWfIX2mEtTxjB0QEsegJHKQC4XZVxJqBMy/8W3+
+ 16WHO3D5GKXOP5j92wam66uGF5CjSCnn4H8i3RMT0wzpdY0jbLwVkMH4gPIh29++kOzLXolb1Aq
+ 9Q+MxFz07AaqzXwIobEcN91S4bt2WaG8QD6uWP6Kl+j1EqI1zP1MbAo/e51zGtILErrbo6SJCa9
+ 0cwajzifP7pBr1pJ/f4AC62ZR//9VssmoDY1KuqrQ78TPNinuN++ANptQGr/Fot71atAWTDRjfh
+ wbKU067mWMNyuUQaTCDSNl8/a04TRByQg3jOmmS7kfPBoGcKLB6RN7AJu5PUVefVi8ZgejQ=
+X-Received: by 2002:a05:690e:1206:b0:664:ae6b:b496 with SMTP id
+ 956f58d0204a3-66521dc4ebemr1077637d50.75.1782903927570; Wed, 01 Jul 2026
+ 04:05:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 01 Jul 2026 12:58:07 +0200
+References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
+ <20260629080241.36311-4-ludwig.nussel@siemens.com>
+In-Reply-To: <20260629080241.36311-4-ludwig.nussel@siemens.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 1 Jul 2026 14:04:51 +0300
+X-Gm-Features: AVVi8Cch48XkcyHMdKWkODmuY18FrnzLSPT5gaTjLn-jqguJrGm74ebtWZIRKSY
+Message-ID: <CAC_iWj+e-MMWR3=O9i1ML3bjezPvbrwTr180WqGVeeZD+XsPfQ@mail.gmail.com>
+Subject: Re: [PATCH v4 6/6] Fix tcg2_measurement_init call
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,64 +120,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 30, 2026 at 12:38, Marek Vasut <marex@nabladev.com> wrote:
+Hi Ludwig,
 
-> On 6/29/26 10:44 AM, Jens Wiklander wrote:
->> From: Jerome Forissier <jerome.forissier@linaro.org>
->> 
->> Fix build errors after the re-sync of the DWC3 driver with the kernel.
->> U-Boot has different needs than the kernel: buses, interrupts, internal
->> APIs (DMA, traces, DT...) so many adaptations are required. This commit
->> re-introduces many of the changes that were done locally after the
->> initial import of the DWC3 code from kernel 3.19-rc1 11 years ago, as
->> well as other fixes. This is compile-tested only.
->> 
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
->> Tested-by: Alexey Charkov <alchark@flipper.net>
->> ---
->>   drivers/usb/cdns3/ep0.c                |    8 +-
->>   drivers/usb/common/common.c            |   23 +
->>   drivers/usb/dwc3/Makefile              |   57 +-
->>   drivers/usb/dwc3/core.c                | 1761 ++++++------------------
->>   drivers/usb/dwc3/core.h                |   39 +-
->>   drivers/usb/dwc3/dwc3-am62.c           |  424 +-----
->>   drivers/usb/dwc3/dwc3-omap.c           |    2 -
->>   drivers/usb/dwc3/ep0.c                 |  110 +-
->>   drivers/usb/dwc3/gadget.c              |  786 +++--------
->>   drivers/usb/dwc3/gadget.h              |    4 +-
->>   drivers/usb/dwc3/io.h                  |   28 +-
->>   drivers/usb/dwc3/ti_usb_phy.c          |    2 -
->>   drivers/usb/gadget/at91_udc.c          |   46 -
->>   drivers/usb/gadget/atmel_usba_udc.c    |  102 +-
->>   drivers/usb/gadget/ci_udc.c            |  470 -------
->>   drivers/usb/gadget/composite.c         |    2 +-
->>   drivers/usb/gadget/dwc2_udc_otg.c      |  174 +--
->>   drivers/usb/gadget/epautoconf.c        |    2 -
->>   drivers/usb/gadget/ether.c             |   21 +-
->>   drivers/usb/gadget/f_acm.c             |   20 +-
->>   drivers/usb/gadget/f_fastboot.c        |   10 +-
->>   drivers/usb/gadget/f_mass_storage.c    |    5 +-
->>   drivers/usb/gadget/f_rockusb.c         |   11 +-
->>   drivers/usb/gadget/f_sdp.c             |   12 +-
->>   drivers/usb/gadget/f_thor.c            |   19 +-
->>   drivers/usb/gadget/udc/Makefile        |    1 +
->>   drivers/usb/gadget/udc/udc-core.c      | 1026 +++-----------
->>   drivers/usb/host/xhci-dwc3.c           |    4 +-
->>   drivers/usb/host/xhci-exynos5.c        |    2 +-
->>   drivers/usb/mtu3/mtu3_gadget_ep0.c     |   16 +-
->>   drivers/usb/musb-new/musb_gadget_ep0.c |   24 +-
->>   drivers/usb/musb-new/musb_uboot.c      |   39 -
->>   include/dm/device_compat.h             |   13 +
->>   include/dm/read.h                      |   46 +
->>   include/linux/compat.h                 |   15 +
->>   include/linux/usb/ch9.h                |   25 +-
->>   include/linux/usb/gadget.h             |  520 ++-----
->>   include/linux/usb/otg.h                |   10 +
->>   include/linux/usb/phy.h                |   56 +
->>   39 files changed, 1351 insertions(+), 4584 deletions(-)
-> This patch needs to be split up, this is unreviewable, sorry.
+On Mon, 29 Jun 2026 at 11:02, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> Needed to fix the previous, forward ported patch
 
-I agree with Marek, this is quite difficult to review. Can we split it,
-please?
+So we can't run u-boot properly with EFI before this gets in? This
+needs to be folded with the appropriate changes. Each commit must be
+bisectable and working if possible.
 
+Thanks
+/Ilias
+>
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> ---
+>
+> (no changes since v1)
+>
+>  lib/efi_loader/efi_tcg2.c | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> index 1da0bc37fa1..5935cb2ac8c 100644
+> --- a/lib/efi_loader/efi_tcg2.c
+> +++ b/lib/efi_loader/efi_tcg2.c
+> @@ -870,13 +870,10 @@ static efi_status_t efi_init_event_log(void)
+>          * vendor_info_size is currently set to 0, we need to change the length
+>          * and allocate the flexible array member if this changes
+>          */
+> -       struct udevice *dev;
+> +       struct udevice *dev = NULL;
+>         efi_status_t ret;
+>         int rc;
+>
+> -       if (tcg2_platform_get_tpm2(&dev))
+> -               return EFI_DEVICE_ERROR;
+> -
+>         ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
+>                                 CONFIG_TPM2_EVENT_LOG_SIZE,
+>                                 (void **)&event_log.log);
+> @@ -904,7 +901,7 @@ static efi_status_t efi_init_event_log(void)
+>          * platforms can use different ways to do so.
+>          */
+>         event_log.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+> -       rc = tcg2_measurement_init(dev, &event_log, false);
+> +       rc = tcg2_measurement_init(&dev, &event_log);
+>         if (rc) {
+>                 ret = (rc == -ENOBUFS) ? EFI_BUFFER_TOO_SMALL : EFI_DEVICE_ERROR;
+>                 goto free_pool;
+> --
+> 2.43.0
+>
