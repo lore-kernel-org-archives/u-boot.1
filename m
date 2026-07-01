@@ -4,133 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64EEFC44500
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB20C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 12:52:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABE6B84B92;
-	Wed,  1 Jul 2026 14:22:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D012784B92;
+	Wed,  1 Jul 2026 14:52:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z34Eiws8";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QqPCvpsY";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OOIDvtvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAF3584BC1; Wed,  1 Jul 2026 14:22:41 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id A21C684B92; Wed,  1 Jul 2026 14:52:12 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 850DB84B62
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:22:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 91C2284BDB
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 14:52:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 661A8wsc753572
- for <u-boot@lists.denx.de>; Wed, 1 Jul 2026 12:22:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek
- 9s8KHjXw=; b=Z34Eiws8D8HfbecQtO7+xe69jALD2FOTAZ5kC5vbS/SjgUE3I1G
- gaSegrDaCrWk3e44ff8k4W9nS9bRcKhHKsivrB6LGejKZx8MH7V+X5XWg5bmBgbK
- WCum8LoFt3ycbd7nOsidutKKg395Jc8bL8UhJgVJBD9jtXGxkS9nl7XozIEahsWq
- lRp2p6k7VtgExsKVfrOCKrRvdxfNjwOfYSkrq8LXK2kdQCPSOo5yjyc3ws67kAPu
- DGnz1lM5WGSDrRmOEekCSaJpbX72/GLv+X8nNEnxuV4vNemCdAYU6AqAA5QuNl1+
- edaOHkTiv2mud7kBQSDFgOFjna2ob2nfdyA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4rsy2nxd-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:22:37 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-30c0a27ad86so2246809eec.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 05:22:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782908557; x=1783513357; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek9s8KHjXw=;
- b=QqPCvpsY99Dy+qP6KVaRyUMpN0170EiMLnI5xTq04Kohk1KS+FtUvuAvfkp8Kp7cLR
- kKtCOL/xaX/d0Iz5zcPMVi8EQkrpWazpSBcEoNFgQC3691sLDWRzbM9ZqYl5+wwyHtM0
- rNrV5Z7xLobUf/nabmLEwsUAY+Qm+ZZ06PkvTivDZuoHSPNhxjQQ1P6OK3isyiHDhiGB
- YAwlltwF06CdWAplgnWsHS23njj9XGSFsgcCka+Qwwc0885NSC+tIactRDcqvsMfAnFc
- bCVht5MVgnzrqACbw0dNmywUppYqzUPEj6p4gKLlk3HfMR3iX8wB+3wrI57nbsHyI/HL
- QrJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782908557; x=1783513357;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1SJQRLE3+r8JV4j54OJBiGJTBgfx/sGkPek9s8KHjXw=;
- b=iLKNK8TSk+1haJDewIlG5FWCsFWdfd8mS2Cv/imGt5I5T9uIDLCGVVu61UsAXtDKy/
- Xt+3isGvzO8HzNuUeV6LhlpSmIe4h9O9VZKRUiwidPegWoadj+vU/UkD0dPRempzbYRC
- YkKYl3ccpwt20H75Jy3ZyZYuiCcDVHaQGFWVa56t/cXVgw6vzBK6vYaW96yRK3u423Pk
- CFXkSl474x/hICJhTG/TUKz2A7n9rIN/aE8eWzrmbbhylZp7U7y2CRpwkJiyNEvKhWWC
- f3yogpAjn823aRLWFsmRbGqyXcfpQP2ez7UW9e3C3dOPaz2l7d3wi6oV6DlfVBPIOVMx
- OIGQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqsIjuOwBPXi5AemtkQ7Qp2DW2Kd4a43LSc6h98vMqoYOE5GqvJXVP/Lr0rvSjs4hFN9q3KK4s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHv0yG/XrazbGWIeGbB/oS5XVi8YwyWrayKxDmdgXsllZC6AGf
- 0SQp5J4me7fJZBKxoaKXqbn/HfAqLny8Z9uHPlT53eYNjZUxCzdXRzhc5NSC6a7XdbjFHnEVlYb
- 6r89ZEa3pj8vQsrMKlRhBbh6DUuPdlHdVALW+RC/smNnSeykCdWovAOct
-X-Gm-Gg: AfdE7clgU05u6QEFPi4H7v4EEgpbjPKDvFYfyoLcECWfWG0h3fsx2mrjLIUmOzB4H8w
- k10YtwT/Yw79/KAOiN7B+Ohf/pBJG2BumtEtFMtcqN+w1oPb1hIZLO24UJkWuwA0Ff5wuJU0qbc
- M3QHEdT9Zq5ufQCDH18LzW0xnXPRvJ9IbYDq8q9EZ4b4c+SGwaZpw2GwpawCypEN12DNDY2bZ6P
- I5sSoJF+AORVUiuQQb277HtYsOiHdUcBkpi6qTL4VyocFGmvuIJicWa9OigIxh7rbmUWDrJ3YSz
- JVP4/fMaY+LOxc2BGeD06NQgTcG60cgcx/XdAOP9ELcQ6hi2qY5Cikfh6w6dneYqAHtaaFZ7R7J
- mzqYAkaoiJOcXUQoDqULL4yCihX19HPmiw8Hfzy8GUsa5fUGlgaa/3BYJpiHcZ1oDmPKwBNJC+4
- kKIRvUM9jC0JlOVaIioSRopJtydubWsg==
-X-Received: by 2002:a05:7300:2d2c:b0:30c:52c5:6e52 with SMTP id
- 5a478bee46e88-30f053f3850mr565992eec.22.1782908556973; 
- Wed, 01 Jul 2026 05:22:36 -0700 (PDT)
-X-Received: by 2002:a05:7300:2d2c:b0:30c:52c5:6e52 with SMTP id
- 5a478bee46e88-30f053f3850mr565942eec.22.1782908556293; 
- Wed, 01 Jul 2026 05:22:36 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30ee3170ef9sm33074376eec.16.2026.07.01.05.22.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 05:22:35 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1] configs: qualcomm: Add secure boot config fragment
-Date: Wed,  1 Jul 2026 17:52:25 +0530
-Message-Id: <20260701122225.1628456-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AjwtpWn3VrPJ8lTK1Rmn6oOxJEIZyWzSZNeoWg0XrE3+rSuJkjJ+EmdXwquCqNLGxWULGU5/9/a45nfuXPFu71jePNg+tbJm6ES/0uj1pIPrch1fcW3fyjp1Se0oR55vhYHXYY9Dmbzbzw+RsFMZDuRq6b9Sp/E3UOI04+oR7V31N5gdC7qOKj86+KEtuHgu7+2Xur0ifBohvr8k43d16RQS8LJkAurG13qZJZfsHn9w9DX0Inke/0udtEt5xetgDFgpT92OcfRDqxXZZ15XhqxeEv61I/sPxCj9eOGXRwErbDti3IJPTh0iKeWhs8XUwnPnb5uetZ4jeBGlXroB4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=52ATPN/uwCQbEZdNAm4bVoEvGgCbh0rFxSrzA/6OzNA=;
+ b=hciVtt3U/H6MRdBNAS0JQVUq+VG2yo3EPO1r/fU6FQnPXQSYdtvIUbaQaqTBEKWSet+fh08ErvXpqaq2/iGTui6R/ar/MwSiAKOKJmHO4i8Bld1N90vI4OA3n0BTse5gx8VSz7aeVyVIvmEypDuNBNTMSv0mzoatGhkABfOILzzqV68PHpLimZeN2mEKxHiIpLKcqPcZiAI56eek6+DLcJYgzd35LT/r+J6jOqrw+B5qkhBPQigtMyD9sHHxhDdkxdgzZqg2RAa6tjJ3JsWnQJv3YPYuhN0NYyCYT2/tKuLq4AKk5WowMlNTlXa0no+ImS5TcILr8U0peK6/XnbqwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=52ATPN/uwCQbEZdNAm4bVoEvGgCbh0rFxSrzA/6OzNA=;
+ b=OOIDvtvoMw5jJ7JXXwpnreHs87q/93hH1p9se8GxjN37bCB6UaGBP3J/8bCnnn1vuD1+Gnxg1jHtHkPGyMlnUWzKNIfM4CdPMIXTPhph+Spla4MBKm5Clb+JVAntt+Oe2CLc7F6hW/9x6OvBzybJFFcrTh708O2Wf4mlR9mMVdc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DBBPR04MB7547.eurprd04.prod.outlook.com (2603:10a6:10:208::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 1 Jul 2026
+ 12:52:06 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.008; Wed, 1 Jul 2026
+ 12:52:06 +0000
+Message-ID: <e3e81b3e-02ec-4438-a834-4cadf1ed4bb6@cherry.de>
+Date: Wed, 1 Jul 2026 14:52:05 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] test: cmd: part: fix integer handling in
+ setup_gpt_partitions()
+To: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20260626183353.1666667-1-dario.binacchi@amarulasolutions.com>
+ <3dfd02eb-fcc1-49d1-aea2-6bd20f052692@cherry.de>
+ <20260626215804.GB382693@bill-the-cat>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260626215804.GB382693@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1PEPF00005B96.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::633) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: AvO7JzLAcNQ2tL9GLHImonJ1Cn-F80ZJ
-X-Authority-Analysis: v=2.4 cv=fLgJG5ae c=1 sm=1 tr=0 ts=6a45068d cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=xTSDdHutD4yRob8Hd9AA:9 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAxMDEzMSBTYWx0ZWRfXznk7OlesQTmn
- URFSkf0IzvpF+HbvSmEx10gWmackbnraOmVUfns1UtmYWx9lvQ/9xVvAjgSp5q9TPLOUOs3uOWr
- jBRctjb063PkhRlh7333XNz885+hqlyDEL7yRcuU4vOkMWKlcvxAey/AjEZc6HTVpP3wEfb67Qj
- fGCwH0VI1G9/Cam81pObWQrF9QTEjFqtrAvuQ800DJDCkvGoQetfPjqtoRKk4rjEuOeNzsEjPH3
- BHYdtPKGe15dAEuDRjxrANC4Y3rmjx2uCXak404AJSdxDg4r+d3RZaTP/bqZqe9dtw8NlrlnNyI
- OeFbMjDc32r3xcTQ9EmMWdLxi+03wozM9L8XwFMl6xSPkFzQlOYzwlYkxRAV38eGqxpv2lKdLmq
- PoCJ1tRvXMzfKHZ22KMJFJf09YmypCQyDZ7DIZo2NSD9geEhs2qL7nAzYLakWKY6phEleRHfYPu
- GsdE+pjTJ2lRT8+995w==
-X-Proofpoint-ORIG-GUID: AvO7JzLAcNQ2tL9GLHImonJ1Cn-F80ZJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAxMDEzMSBTYWx0ZWRfX/nHTyPpTRvQK
- REpbQmPUhrKlLzd7Iveov+TiFXJrmHt/ylTLnVDzZJLNd/RMeRqq/OxsLUd8UXa3IDq5dIFwdH5
- 5LMNjJg9kXG6Rf/n8Hs9E3dfnVVCbcw=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-01_03,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
- bulkscore=0 spamscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607010131
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DBBPR04MB7547:EE_
+X-MS-Office365-Filtering-Correlation-Id: f59ee401-1c12-4061-c4f7-08ded76f8e8c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|23010399003|376014|1800799024|11063799006|18002099003|22082099003|56012099006|4143699003;
+X-Microsoft-Antispam-Message-Info: /c8R1335QAmrGRjA/76jbkUPyGMMDAtDet67EibK7Qwww4IEDCGkmnHc8EDZGZpELYSQwr0Xcbfr05ImnwVlqoOJlF+J2DZUzCkJAWg6NYZo83uI+F9W/SPeWMqUjBHz3gn1R66aybKA8QLSKT5sRWFI8OveA3ItuCtVJCPiLTeRhgtQVaE+JQLN8Jp0n8I7MUN8/uWMir9uE680be8FfWbWZZmPQz+yHLtvg0oYuLCkq/tRJDowMvqfSCiS9ZTk54I6d+cik7HCMCGH3Wj3FVD3ggBdXtl/aR71q2EyH6EtvvUh+ggGqBnjhEarCDUD/6CUmDlK+nGYC9Rzh4HyZm7vbmsbhTZCHGVyv4qCPlCkqsVVcw7VcbAV1uguKn10U5rP/eMgIIlZujIP6at6ldX+j+Ljh/0gM5SuTt2HuaJVR8jxluQodF3qyMSVTVmNA7kp6FxnsivbHr8Yi6fIe9RW4SOvMq7urbVnSGS1NkfFhNDarRlaxL9qo3ZgI3JNqV2ffzmBettqGYRIQqq9yZPu7ZtI6Gqg16gaCGNeAwYAX/CuLH6ymMO6PjMrpov3PKykyu0YPZHTGV5UsPIgUxtzTQ0v1XUY0Tx1InLclNC2jDNZSW7/GgmhbHFxBBKeTI4dpjDWKs5wVT7K6bMZiZEG6Qv4d+AbEkBmR4LSx2Q=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(11063799006)(18002099003)(22082099003)(56012099006)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S1U5TmtjQ0lpOWJjZnpFemtoQmoza1lBK045b01tMkxDTVhMMXJzU3NzRmIx?=
+ =?utf-8?B?c0hQTVR4eG5kME45SmEwSVNmc281VlEvRXU3YnJsSE1VVjRNWStYbzNSWXd3?=
+ =?utf-8?B?aHVXaDdLZ1JIbmFaQmJNNHkxeDRFQ1RkNjNpRWZWMTVCSmQvcnRKWlJmZTBO?=
+ =?utf-8?B?MFUreUpVRzAvS2luQzNEdWtvWGNyem1sWVVIQ25BaU9wL0pQZEZXOUNDa0hx?=
+ =?utf-8?B?R2RwUzRPbElKaFdiQnVyZ3crakZmSlZobkpIblMwRXdpTkxKMjljK2FCSTBl?=
+ =?utf-8?B?b0RKYlAxMUhzbWxVbHpmUUdRdnNxeGExTkZYQUo4akl4bkhsekEwamlLd1pE?=
+ =?utf-8?B?YitsbDFVUmZaNDhJUzFDd0NoeEw0eGhMQW9iQWwzR3cvRWttQzhGZjJlSVBJ?=
+ =?utf-8?B?L2VsbURqNjVnam1vYTFGeC9qeGFWRGVYVUpmQUE5cnJpQzBVbjMyQkhDYTMz?=
+ =?utf-8?B?cHJINmJoTDNiVDVsZnlWbCs3ZWI1VThQSCtXM2lqeTZaaC9HaFFycGN5VXkz?=
+ =?utf-8?B?cmhYdFJCOS9nSVRrWEx2VDRKQXJEMklLSVpXNEc2YVc2Q3lGL3RxMVVVQWUw?=
+ =?utf-8?B?UGlJZWducmkvOXVuQmlmNUtteDFibXVsYS9pSGFDYTlpVXRVaURxMDcvT2pR?=
+ =?utf-8?B?dlNhMndJOVFuUXJhK2tBamMzOUE2K2NhZHZuKytqcUMrdWpINEtmdEhvZ2lq?=
+ =?utf-8?B?WHNiSHZCVnNISXpJN3JkcVRzZVB2MFNaelRqVDhMTU50bDVTWUZGUHRPTkVa?=
+ =?utf-8?B?aFQ4MFBGL3dOZld3VktKelZ6VHJ1U1FCamdUY3g2VENqQmxwSmorZ1VVWEYr?=
+ =?utf-8?B?UVFnT0svMDRHNU9UcEhaZUMvOVF4dFR3ZVJRRnhJRGJkZGJxVituOFh3Y09D?=
+ =?utf-8?B?Zm11dmVDbG1mbUlBYjEyN0hzbW9NQWd4YktucGd4SXlPZ2hWd3B0SWFqaE9n?=
+ =?utf-8?B?YTllRmdEMFZHNGdLQzBsVFNpUjBpdGE5UEtkdmJ5WU9oQjc5aTE3SHhLYmd3?=
+ =?utf-8?B?aFoxMFYxOUpzU0ViWm1IOG9wUWlZYjhQR3B5ZDYwMk1Na1A5YU1CcjNSaUZH?=
+ =?utf-8?B?dFdMTGg4SjZBRFZ5cE9PenBLdk9SeWpSd2FqMjQ3cHNhUEExVjZpcnE3enEr?=
+ =?utf-8?B?bTJqUWdsdUZFQkNxYkFoT2FRTTN2cVBWbXNrTWFJV2tUWk12dFVicmRwNGxm?=
+ =?utf-8?B?UE9UR1Z3UFIzRmJ2UG93UmxlcmNBbHN1ekJxNmxtaFVOU2kvdlcreEVQMGpy?=
+ =?utf-8?B?cTRZVTNaZDFKbEZpTUk0QmtzTTZZOU5EOTVxTkJnbnlabW4yOVEwc010Q2hP?=
+ =?utf-8?B?dUhGallFZVhScDhHMG05NlNWazQraDVPR1hzcmFOVlFKQnptbDYrZG9BYW5U?=
+ =?utf-8?B?VHJVZ245aHpuMmtZNVhKaTFLdEpCV05hQ3ZpRWpicHpaTGtaaGxTanJmUkli?=
+ =?utf-8?B?WGc0ei9LbllMeFpYWFRXdmNKdFJzdEhONTMzZU1BYnJJdVZFSTMzelJlcVJ1?=
+ =?utf-8?B?blJYcTJZNmlFL0VOMklkZVlqaGJZbDkvbU5tOUtVd0J4ck9CSFhRSWdvWCta?=
+ =?utf-8?B?OVEzZmRVVTIvNWQ3a2dXUithYjJDT0FWQWp3Q0t1M1E5all2eW1zSFJBQUQ5?=
+ =?utf-8?B?M2FHWVVQa0ZPQkFzSmIrRXV6RjZKc1hWTlBWN0VCS21DM0pxWTU2RW1sMHBU?=
+ =?utf-8?B?MkU0YUE0NDVFMzRMYi9iTVlxR1g2dWV3QVVtN3M3SDkxWExGMTNiRGc3WUU4?=
+ =?utf-8?B?VlphbEZsRi83VmZmVWJNZzhlcWpodVdNbUp4TzBMdTltUU5FV2JzWU1abWNr?=
+ =?utf-8?B?L2tTSlBPOFFiOHdXRkg2UFlLVWkvR2ZmZS9GQjVQclliTXJTanNzZVp4YXpN?=
+ =?utf-8?B?ZVZrb0tzblNGZTB2bjcxcFY2WEZyT1J6aVBTc1p0cXVZbE9mU2VpQ0FPSjJy?=
+ =?utf-8?B?U3drZ2lwRTQzM1J5eVlKbnlKQVVRNEdiTFBLKzJRVUUvTTVtdjZOMHFxNTA4?=
+ =?utf-8?B?Nkhwa3Y2UUVEaVh3V2ZYT0doMHdjSUdzZE0xQ25ZRU9ZcGhFVXFTN2ZSS1Fp?=
+ =?utf-8?B?YUI0dUwyMEk4NG1rYU5tTWMxL0krL1QvbEVlcHRKaGRhWkdaWHNNb2FnRWpZ?=
+ =?utf-8?B?TW1xSEZyNyttZUhZMmtTRWxKUVNCOGpUNXg5eWFVelNwcDJyQjZLMGs0bmdz?=
+ =?utf-8?B?TmlvVjVJdHBXNlZXZzZKbU1CaXdoa0xnMXdGN0JvMHRIN3JaQzJWa1FUUUhI?=
+ =?utf-8?B?VkdNdVBTcUhkOHZGWVhzNmE2TFNqOEVBZE9xaWJHL3J6RTcycFp0ZGtEVjA5?=
+ =?utf-8?B?OFFQQytVYlBybDRJanJLcU5KQ3daRmRaU2tsU3BJNlM1eUVyMlRPZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: f59ee401-1c12-4061-c4f7-08ded76f8e8c
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 12:52:06.7743 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2Ffd3pV/eCNMdXiMV09QqhmANr9Z44xzMXHFe7Z80VloLRyUHFCnoOroZttbSbTwc+j+qK7x+TCbsmTsNp4MaOxbhOgSLC4IfmwGPDeN5L8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7547
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,27 +150,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a common configuration fragment for EFI Secure Boot and the
-required hash algorithm configs to reuse across Qualcomm boards.
+Hi Tom,
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- board/qualcomm/secure-boot.config | 6 ++++++
- 1 file changed, 6 insertions(+)
- create mode 100644 board/qualcomm/secure-boot.config
+On 6/26/26 11:58 PM, Tom Rini wrote:
+> On Fri, Jun 26, 2026 at 08:40:36PM +0200, Quentin Schulz wrote:
+>> Hi Dario,
+>>
+>> On 6/26/26 8:33 PM, Dario Binacchi wrote:
+>>> Coverity reports an INTEGER_OVERFLOW issue because ut_asserteq() compares
+>>> an unsigned int (mmc_dev_num) with ret, which can hold a negative error
+>>> code.
+>>>
+>>
+>> The trick here is that ut_asserteq() takes two arguments and casts both as
+>> unsigned int, hence why it complains.
+>>
+>> If Coverity is happy, I'm happy :)
+>>
+>> This looks fine to me, so:
+>>
+>> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> Yes, were you able to push this through coverity on your own?
+> 
 
-diff --git a/board/qualcomm/secure-boot.config b/board/qualcomm/secure-boot.config
-new file mode 100644
-index 00000000000..21f567e1a45
---- /dev/null
-+++ b/board/qualcomm/secure-boot.config
-@@ -0,0 +1,6 @@
-+# Enables EFI Secure Boot support
-+CONFIG_EFI_VARIABLES_PRESEED=y
-+CONFIG_EFI_SECURE_BOOT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_SHA512=y
-+CONFIG_SHA384=y
--- 
-2.34.1
+I understand this could be misunderstood as I ran Coverity on it, but no 
+I didn't. Read as "If this makes Coverity happy, then I'm happy".
 
+Sorry for the confusion.
+
+Cheers,
+Quentin
