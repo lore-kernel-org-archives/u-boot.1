@@ -4,90 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD39C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 19:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC19C43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 19:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6593484C60;
-	Wed,  1 Jul 2026 21:32:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 80E5784C3A;
+	Wed,  1 Jul 2026 21:54:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sSnmvGk2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gs6rUiIS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492B384C63; Wed,  1 Jul 2026 21:32:18 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 0132984C40; Wed,  1 Jul 2026 21:54:16 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C4E384C4F
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 21:32:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA81D84C39
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 21:54:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-69d8f70cb0cso788586eaf.0
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:32:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-6651bc57458so850930d50.2
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 12:54:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782935652; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Npb/pvZ+QOYAKwfPJpA0j1i8O4CWUpB5mkMm/gWHevDa+P41PePyqXPc1YW5vkW4ox
+ raVWUZIjAC5YjTK/8Yq3Hg9qkPY1NE1oVGEaw8aW5MRHzc8BTIBe2sWfD07J2lXfaW9D
+ l14WJggd7ry7eTp6dFMw7qHMo0sopd+i0SAjvC3czRBprPV6FXz8qppJPF2fKB8FVRjM
+ T6m2mN7kgkQQAOsXD0U3PMtcvADeEEIkt+si3GhEXkcOun2tB05I5El3YwJtK7oFo8L1
+ BVGnp/vLKVw4+NTdt6W6J4LZNltiINjewqK91oSxAzOCb5FzkHpBX99cjfOOMg8eW2tC
+ Z3rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=0dQO2eUxAqP2JAoHZCuVFhn2eHFe0e6/ZXUXNJj19Jg=;
+ fh=w4tsVMWxQhqwa1MnJ0ILkJc4ZA42nwAMaUvPco+oz3s=;
+ b=ntoDiAFutWZ8WNo3BvvA3FagktYq/gPvndTe43UFUA6q2XJNPqo5DurmiPVfdl3uQq
+ 8HGab27Nls+1h/ieDecafeO1GmynWtBpLPlQoDI+uQXs/XckcYqCGJRXWPXiqgQOPK9E
+ TgrMJ9yRhJ01saG8yN/tySmRPRO6NmTirlwZ9mvuM9pyPm4ZPP3AaroZXLTlz8qIC6Q1
+ jvMfnU0UttGKj7h/F34rG8LHJGk3vLWKmQsy7bPDhsAiI833fjvYwcX/DThccNafJdCb
+ USm+Cp7+Ws/TkORppeHr+Bn8ujAw595MdGIY8ZdVYXajRAG5YZg9iGvwHW0CcGLtYJdp
+ Z45w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1782934334; x=1783539134; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=vyqqXKLSNXNrHHFzdLEiLKFjgLj8a8V8MLdn+bgmCvg=;
- b=sSnmvGk2dCkw0PiGopMi6WIVG8tXG7JixyliNkbiWPrSMt2aTaeos31f5JM/mFeBoP
- xoYNuqxrl4kc17b3FpJYLhEaXarW6Px53famlALY3ZGdiuvp2B7jXVs4cbF22hY6ZbqI
- qzzEzUJM/LNv1Fm66d9L8Sbg9IoYH8PICImcw=
+ d=linaro.org; s=google; t=1782935652; x=1783540452; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0dQO2eUxAqP2JAoHZCuVFhn2eHFe0e6/ZXUXNJj19Jg=;
+ b=Gs6rUiISVfBOYhkr39Dlyg0FG+4LFiakv7v9JBZD42K31Dvs090Ad0fTEyltCb6YAW
+ x5gTanAUS+VNopLPvXTVXEjEW+i3ZSpqOC+XDo2evE7lwch8SwPA/BaQhyDG78agdDnZ
+ 9yF76v25YzvtWrw+xvRFudY8BXZKZQmElkDW+M3b/BpIRVl6y6VNcz0p17h7WrXWSL/u
+ x3Pn9x9N1HRGMM3V+aZuCZseSJzFBp7xgUFArCsVpefIEHmfmUaY4IfByeePiLjiqhKj
+ R3049cUrivTkJYwXQJeAAknco9q4R4+hgJ5u4QMifWoL62O3LUy7CTVoMvW8cQ44AKHm
+ +swA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782934334; x=1783539134;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=vyqqXKLSNXNrHHFzdLEiLKFjgLj8a8V8MLdn+bgmCvg=;
- b=dGsYjbEdQBqrgoc3cSAIb6gIx3ex9bzrm8bjGl1GcqJ0j2DNDrdG2HVN2bIDN8XYff
- i38KW3FKaLV1EhDEx5wcpIu4QGpAR4AnRgxt0GmwKGDZ+p6FvKwnzPVaXbvVf2OITEpc
- 4aEX/J+/a/E8/cI20H+nh5GXCFBKX8+PYBENOQMzL8iuSbRVgqZ2h+I2SNTIMxO94A75
- +HcLnWktvjDu8xiczIH/J1rgP2aD+HfXBChlP2QRDiiOkh6HtxtcplCZVuHVlC6Cmden
- bEqPKJZz7Z8vLCOOkj5dRJKLbLXR8Bkl8vzEEcNWceo/A9OXmCZKx/41v6wX1xBzUkeE
- FwLg==
-X-Gm-Message-State: AOJu0Yy21JxFnRkxjJH8omMAC1zcQZrNVe7Nid3pYyY/zEz3VEsYoPIX
- OB+u2K+QrXlKZAcNcldkPUMSiD9BvXMccmgaYQe+h8/r+oWAnXnkFYnvAdbFQLmb4jg=
-X-Gm-Gg: AfdE7cmRojsJ3qoEFNTSe7pdyBv2cRIU5ZDsyXyuxd7+E45ZdLxJ3MCcW108IxcenaV
- cm96MXXtC77s2v9RCsvM+r6VIRbQnxn1/FDUaYFW0sa/cUp7JWdixmEPNPajrP4ZLCe/ZrZeRWL
- 9l255c0Bk0G3/qtiWoh9+3R7XdRkEATJdCMEFcbwV9/i7oXWstcD5JdPJjvvcYXeO6whdme7a+6
- EyTZyU8o82l93KxnmnjOvug6bpo5aJVkiXyHZ8X6OcXH+yPe5k6e/Ujtt3fBY+ttzwtIJdsSTQ7
- /opvgZgav0AzCEvcTiBb9H80h5f5WrwguXnE+7eSka4v22b7e2MTUtgzVSkg2qlIthfFjpaG7kF
- lG3fr+fx9kblQlTcGHvyv4/1vrIX0HMK1cugIHQ9QcRnZ7q0DAY5wBKIyZ4iHP3yr61z1YUsN99
- T0rs2xjbyXpOzzmawxXqfwKEY29flFaiVxnILndxXvpKHEQDqybKQRLA57YuAkMjAos/Q5VOCya
- M7Ex2LWVOoteZnSl+YSJ8wAQifapvQiq+OJmOJrIBITnAQ=
-X-Received: by 2002:a05:6820:1897:b0:6a1:5b63:2ae2 with SMTP id
- 006d021491bc7-6a30d7a3d0dmr1241941eaf.29.1782934334204; 
- Wed, 01 Jul 2026 12:32:14 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cbe84f609sm712763fac.1.2026.07.01.12.32.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 12:32:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Vincent Jardin <vjardin@free.fr>
-Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
- Christoph Reiter <christoph.reiter@evk.biz>, 
- David Lechner <dlechner@baylibre.com>, 
- Flaviu Nistor <flaviu.nistor@gmail.com>, Jeffrey Yu <jeyu@issi.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Ssunk <ssunkkan@gmail.com>, 
- Takahiro Kuwano <takahiro.kuwano@infineon.com>, Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20260520150032.1904130-1-vjardin@free.fr>
-References: <"<20260510222140.603755-1-vjardin@free.fr>">
- <20260520150032.1904130-1-vjardin@free.fr>
-Subject: Re: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
-Message-Id: <178293433277.2600701.12103819306441913833.b4-ty@konsulko.com>
-Date: Wed, 01 Jul 2026 13:32:12 -0600
+ d=1e100.net; s=20251104; t=1782935652; x=1783540452;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0dQO2eUxAqP2JAoHZCuVFhn2eHFe0e6/ZXUXNJj19Jg=;
+ b=jRM2X1YjDZNWkPBeO9RLgIUB30CR0hyclf1/A97B+L1orw9u85uyCBom7TyJqNH+8v
+ qfVLTHkf2eLQ01DqinlxeQKaPlWwfcX4hE4zgp1roxAb48XQqz8QzIH+zPsEHzJYxW4L
+ 1k94V40OoTGXFeY3G/qHhjHXwCaRiuwvWBWHEKET1HkzzOoLKMLCkEOTGTTxRhduvfMq
+ lGs2+etyqnjWras9BGj0WrJ51PcZC19uVCmevHOg1YBKOdCdORkW3WPeo3UCPP/EWpKd
+ n2RB4pWP2TrYhNjF1MMw6yI8DjcRjaqOsiZb7HyMUwgXUxMLaDOBNp/oytApDZRfR+pM
+ apcA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rqem5J/UcQHiZreFjQGyRGIhoRK9I9LbODFUQ1EnEf0e7B5+3y7YL5uEjrUoGbFhplVWscjAMs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyy7Zr5rNCBQmWo5XweLCocsF9w2PA1Mj6Vwwnxf6c3/B0zCCth
+ zJKU7JKmtnA06kY0S56hFpoHq7NobMjKOmArl30IwJbj3pJ09qiACTiEwfxpMW8CDlej2dAVVJB
+ kxoEmXD+hf0j2DRBytVSr28b0+fTmwdVTjuDJb3ABjxSpT7YdQAT5v/CKfg==
+X-Gm-Gg: AfdE7cm/nOWAtNDrwjKqjr5hPUddLfREFAJYPVL2jcWh0/0CeHK/svjb1OGBDNGbEXw
+ C6Tiy/OrgERYdwduh8gnqUq4hcoRZHBNjZa2VGMjg9bo2nP2jkkx3B4wqQr5urgagjpYWDHGwAK
+ 0ksHSxIehQMMw4GG9cVppxR+oK/GWC6daIJkBXxQSumyOHH8xlNKEfNrjmMdQTNdgkSaCcncsW9
+ EH7lBX5Kd9f7HqNbiH905FD20/5mPqrLsAjHU74JPe32BTlPRqWt2Egor8xYi962SqdUQ0ITZHJ
+ HKtDRpRV6qQF8nAnXNAQTSFbp8aAurh9LzNND7I8xpwgWBDjsaU9EPULg9pYfymgwrkikZprI89
+ 9UcsfVe84sqZqNZbZPRlI5+4xFEpjSH+4L0VEBhY+4hFz5JWyg4g/gJIaQEQRTVfzK8DYpLVOAq
+ l2IQ/bSMqVX62fXu0uBGv+DPIF2TDunf29YRvPCKn+tvGr0ChqYQ78fsAsSNX8Y9xSHMruDQizT
+ OBRhThqU7MUCBYVtJb3xemq2iLBweiv18kGPXOppvbV7neGXrmTHh6YLH6o0qCmbyACcRQEOPej
+ 0l4MGxZ/vC9aUdmfWD5peU6U69lAICij4x/d64yahh3JG36nG+TcjzyM+RXSue2YrJVkrOlS
+X-Received: by 2002:a05:690e:169d:b0:664:ae6a:ef3 with SMTP id
+ 956f58d0204a3-66596697bacmr2401823d50.81.1782935651968; Wed, 01 Jul 2026
+ 12:54:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
+ <20260628082810.175862-11-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260628082810.175862-11-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 1 Jul 2026 22:53:36 +0300
+X-Gm-Features: AVVi8CfZP-MQ3MTCN7sE4kusVJ0qaToJ-Gq_Bpe-UOLRvChjDndXFg5yr8FpmSo
+Message-ID: <CAC_iWjK+DY+JYgWJ7k2HsBKBQX4YZhNxL1dAEVgZzAhDiY1_uQ@mail.gmail.com>
+Subject: Re: [PATCH v3 10/11] qfw: fix RSDP ext_checksum recomputation
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,23 +121,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 May 2026 17:00:21 +0200, Vincent Jardin wrote:
+On Sun, 28 Jun 2026 at 11:28, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> table_compute_checksum() returns the value that makes the byte sum of
+> the buffer zero. If the ext_checksum field already contains a non-zero
+> value (as QEMU's firmware-provided RSDP does), adding that existing
+> value into the sum produces an incorrect complement. Zero the field
+> before calling table_compute_checksum() so the calculation starts from
+> a clean state, matching the pattern used in acpi_write_rsdp().
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-> Add the GigaDevice GD55LB02GF (256 Mo) similar to gd55lb02ge with
-> the same read path flags.
-> 
-> SPI_NOR_HAS_LOCK and SPI_NOR_HAS_TB do not match this chip's
-> status register layout: the GD55LB02GF uses a 5-bit block protect
-> field BP0..BP4 plus a CMP bit in SR2 for direction (see datasheet
-> "Status Register Block Protection").
-> 
-> [...]
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Applied to u-boot/next, thanks!
-
-[1/1] mtd: spi-nor: Add gd55lb02gf chips
-      commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
--- 
-Tom
-
-
+> ---
+> v3:
+>         no change
+> v2
+>         new patch
+> ---
+>  drivers/misc/qfw_acpi.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
+> index 721f42ecbc3..afa3b820395 100644
+> --- a/drivers/misc/qfw_acpi.c
+> +++ b/drivers/misc/qfw_acpi.c
+> @@ -265,6 +265,7 @@ out:
+>         struct acpi_rsdp *rsdp = ctx->rsdp;
+>
+>         rsdp->length = sizeof(*rsdp);
+> +       rsdp->ext_checksum = 0;
+>         rsdp->ext_checksum = table_compute_checksum((u8 *)rsdp, sizeof(*rsdp));
+>
+>         gd_set_acpi_start(acpi_get_rsdp_addr());
+> --
+> 2.53.0
+>
