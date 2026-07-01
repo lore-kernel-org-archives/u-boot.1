@@ -4,115 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADAC6C43327
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC68C43327
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 10:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A0E984B9E;
-	Wed,  1 Jul 2026 12:29:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9097284AE9;
+	Wed,  1 Jul 2026 12:29:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eOUkta7n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JE+Hkcjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47AAF84AE9; Wed,  1 Jul 2026 12:29:22 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F1E384BA3; Wed,  1 Jul 2026 12:29:36 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EFDE84B9E
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 12:29:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F042684A7C
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 12:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hYLT2sPODq/RP6h/DjEepO6Rrr0gOirkj0QBQNboNU1DE7E6PENLQNxXKH4s53K9coo9PZzoKfC5rYJXaRrbmvUwIzWpOB1D/B2VXf5M+UwBUOL8D+UeipLZIVwGS42eifhw8CmJteilged/03qcnIaJgiINuUDffnybm9DFigZYloE57GB2D2+QWb12TBE7PJMGYkW0MyiAwhxZy6eGpaR+aPV+4DKqPRTQJG35XuHiUnZdEJgOqEOBuz8ubve+DTVE4zWxTXPBEFcI7VSiLvF1aig7hAubC/b9pJoy8JfrRd88E9y8fNANrLM8KUj28fhI0ng5qq5vkNzaCUXcFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fyzacH0Yxk/KZlRNKfqWOFQqPHH3CWI/T1Q5Ew8H4Tw=;
- b=M2SI8UO8QCprQEM5uQDbRqDa88Gva/PoKz2gh6snaR2ebpB/rP6fjM81eb4tR5MyzCZH9K0e7xfEDc6MgZV4/LAGfEtNiSQ5cs2ljmg3aINI/L/xRX9/MGVJILjS3ZvrAXwNZWkTM0rp2td+1l/qfAUdSbJew8iFv5lPGco28aVYi20yLRelsoOysMfOzLCpFxgM2BieKY1enMNbG/PPO400RrsRWWmY1uKHT3YgH/4koa6LHbMAEoLaFwjjvgdlxUf2n+jgg1Z9TLSP9+jwfMNg1KyWdC6r1ZkmYGelaDmBS3euG99MMyFOcZ0m8j4P49kTlshFWrrWzRJ37eijmg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fyzacH0Yxk/KZlRNKfqWOFQqPHH3CWI/T1Q5Ew8H4Tw=;
- b=eOUkta7ng7uaTtaC5Ntjh6eU1VPWUw5wiXgcU23DTKQdnV/F+ejSaiiRCMluvFTxy7mrb5ZoolxSPuFe/FYBAMdtEkI7ryY70zgmf4mAkBFmvJFpXq3r+bNpxkYkFiUJMGRiDI3GlujzS9IAOjsbMtNVFpafNlRauBQgbe04QeE=
-Received: from SA1P222CA0154.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c3::27)
- by DS5PPFBABE93B01.namprd12.prod.outlook.com (2603:10b6:f:fc00::65f)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Wed, 1 Jul
- 2026 10:29:12 +0000
-Received: from SN1PEPF0002BA4B.namprd03.prod.outlook.com
- (2603:10b6:806:3c3:cafe::95) by SA1P222CA0154.outlook.office365.com
- (2603:10b6:806:3c3::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.9 via Frontend Transport; Wed, 1
- Jul 2026 10:29:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SN1PEPF0002BA4B.mail.protection.outlook.com (10.167.242.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Wed, 1 Jul 2026 10:29:12 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 1 Jul
- 2026 05:29:05 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 1 Jul
- 2026 05:29:01 -0500
-Received: from xhdpvinayti50x.xilinx.com (10.180.168.240) by
- satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.41 via Frontend Transport; Wed, 1 Jul 2026 05:29:00 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Dinesh <dinesh.maniyam@altera.com>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH 4/4] i3c: dw: fix slave device setup after DAA
-Date: Wed, 1 Jul 2026 15:57:20 +0530
-Message-ID: <20260701102754.345049-5-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260701102754.345049-1-pranav.vinaytilak@amd.com>
-References: <20260701102754.345049-1-pranav.vinaytilak@amd.com>
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-493a7bd27c2so4161655e9.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 03:29:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1782901773; x=1783506573; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R2mZ5VzLeR//uWFEBLiRWNl7PqxKleqxZWS1sTfQjB0=;
+ b=JE+HkcjjFgAP7Yle3NuUtAiuKA7JKJ7ul3ByMlEZg6wb21suSadJFPh+Bk7sl/2rNm
+ N4C66Fs7GLZj1KoZ7BOoFMu5o0TiBDvZm0tWyb5Is9rDz0DUdp7GVofafvxlcYQ0TMcS
+ Zm0GrdFnkuTSUFvkNc4LvC6oPEVATjBBOcO6xKfVjmwd/oAQbE2eq7kWUG3lCANoemKm
+ 0AzG2lZ0vZWSaeNTvfIJ1JjqjdnFtTJ8Px/3PVSAOyDh/F5Xd6TM0K90E7fg6DlX9mC6
+ Y2RwycIZ/QAj4Ds0MfDrP1XUxL/5Cqymq7cv3exNuJInqqQdhyAcAgLA4MDeWZmpWGUz
+ U0tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782901773; x=1783506573;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R2mZ5VzLeR//uWFEBLiRWNl7PqxKleqxZWS1sTfQjB0=;
+ b=ZuYqAsFk3WRfnUDgDc7E+/2c/HdxxEeIwuUJYbxBeGeHY1R3az2EYsFJ4DiOBHymgX
+ E2HdQr76yWQEF4+U0JSJxf89vyhRHPfqcLzzgQAf5cA5ALQZAsrCh62h1XT5W4/UkR8U
+ kbXL5BWB2cVWW5b+9ry4+v8QeYJ0wqkQiqwRMXvLdL5dFRFaRyGe5iUVgiU00oW2RT7+
+ NcB9uzuoYtGyurcgNlLr7hcHW90j4Kh+CE7JI6SmCQgX3+4IO15jMAut9/iYZ0YEoFl9
+ osS23m3sVjEc8Sy+5xDjxo/qyr2XHQQ89A2UQwPqfo68cEEVUR56IsE6WAmLNzTXHjZG
+ svLQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8VggAwbB7TJsZJ6w5heVfgFIH7oH3Ue6FGT/3O/1yoGXNf3NlNuuOxCWJh3ewAj8XrqhBfOb0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYpnb/HAckWDWLJopT0vnt8OF5s6+Q1v+dtM9MIZ7yftytX5Hd
+ rgY3RwafVTwM1moCoGWZJsBS2a+hpdaCc7JmH7v+K4Ir+oDq3+bWYCg13+hGcBKKkGs=
+X-Gm-Gg: AfdE7cnc4L6DV45/ayauVwD21+wXsYHZBY0QscLpjM7fTQeqmi7i6D/F9x0iVDrP9Fa
+ 3Y73RoBWvcJ7ryTh6Hsxp721RKHfx8l6yrey+uMFRlUhf+NDjetBGbBCqTlOK02FAKPa3BBJZxC
+ jPhhySoLx5fehIE0te/zyMlRLWerDSYGKSCXVuYGSuBw47ru5AgWRpEc75a0IKQAnLWIfMZ98wn
+ 13H/BcX7Eo0TWc2sONEmEX/yB7LHzeb4AI8Fll69E8UM/LCpIcjA6gyAgYp9KUVyLY7GSep5KuU
+ BuRLbamGjrojyytv+SNP+SUHhOhR7cPfZRp0f1r6hMITiKO+AJmFjj3/30vDK7YvuITgQKbJApQ
+ C5vFTWpFZ/Vtxtn3ArH9Ge3buzzyMBRf131qxbf8UNwCSZ02Xn4rjc7ky9NPrCwodnISY5T4pKu
+ dDALokdigUJPX0Z0FfDC2mI+s/0ulT1W3bMpaw
+X-Received: by 2002:a05:600c:8214:b0:493:9cb3:53fc with SMTP id
+ 5b1f17b1804b1-493c2b253abmr17995175e9.11.1782901773376; 
+ Wed, 01 Jul 2026 03:29:33 -0700 (PDT)
+Received: from toyger.tail248178.ts.net ([212.133.41.27])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493bef1807asm41352975e9.1.2026.07.01.03.29.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jul 2026 03:29:31 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] dts: qcom: remove hardcoded memory maps
+Date: Wed,  1 Jul 2026 12:19:33 +0200
+Message-ID: <20260701101937.234609-5-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4B:EE_|DS5PPFBABE93B01:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06382144-5bc9-445e-e3f9-08ded75b9813
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|36860700016|376014|82310400026|22082099003|11063799006|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 7F3thXFjo47E9/Loi/HOUAY4z454OG05ZJ2oZ65lIQ7wxXqzZCMqq6VRqHuRid2fUo7I8n9VDlOFE2+WhG5V+/h9URwUx6ECdK1vYzlALTwLlu01asGQGt2cYTpMk0ezCtl2bkTt2vsUpS7sBokWdHaF2ZJSqU+xWM9uhMpydgtaKxM8sIRowZqWVF794nUKuTrWfUtVsFdUW4wBooskQtWoegxv+a58iBx22TFooVp1oO1657U7g34aPnaaNarKowUBasn1pbQDimglo0mq5suRbvmDgRamiTlIABgQ/Y2zhPBHdvMYZIDXzuZsNHfIyP2Xczd90X3XCs/69QYKAxQ/QIJLMoF6Cxp6yTby8TJQsxwMAWoAGRjd2iWPg93dLCBW9EMhpR3fzHYkXNjowmVBDPH+CkAHuA6eogJfKdPce/SAhDCT1CmbjVzmJIatjBqvguTWvbBFw3qHdLvEYXLzadEXOhqiXiLrY/le41g/ddyqGTVQkLIUSbI0sesDxPe5djDw6swA40hzxfm16U2vSLPn2ndlFUMto1aFiIlRHo5Yi2WqVY/9tNi6OK1CUkeDY02UzDP9U8/BSKBg2Lm7rOKa44ueuWba4WCgdO0QTZzdaV0uVSarb42eOI6eQR/Zr5ek4JumhjqNUUi5BG2gQ7WVCfBrYEHP9+h1b6CxNVzsePh630f95fe6YvvqXyr2tcAZJfwG+B7fzfU41A==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(36860700016)(376014)(82310400026)(22082099003)(11063799006)(18002099003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: mNwsCpBduvs5K7jit98r0v5xOGtsCe4kbn33WSNMyf3nlhZKUwERdpxrtaxShZzEu8KL7jKTddL0gkT5kzez3rY7uGfsQ45iMe8fx5z0IsJhmcS56W5s1gcOYeopw4rgc+/8vFy3PwESYlkWUiZe9Ki2JBsck9gvx4XX3Gff4wti5M0nTPuTS5UYZu6gGO4EsjGhJtSmkrsqlgxQiKR0VmT++dBD8EoFymjOChDXSd4LiDvEFWXFfR7/T7egkOCk6hOPIuvW/imcV3w/NZMZjUi/6Xt2EcHd6fsjkCtAeMGy4qjZkyhyVSVn4ye0QC9nXN6VHOxdSjvgodiLuYlw/5u6HM/DaeVBh6h+ej0pv85GNf2J8iJxQReDULlUpD/2Gj8IOXCq/WH541CqR95oOfMHbFHMqxrCpm7ioKclbzoWp/LqHFCmHWfpRSGKnQVV
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 10:29:12.5985 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06382144-5bc9-445e-e3f9-08ded75b9813
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4B.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPFBABE93B01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,61 +103,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-i3c_master_add_i3c_dev_locked() incorrectly set master->this to the
-newly discovered slave device, causing i3c_master_attach_i3c_dev()
-to skip the attach_i3c_dev() callback. As a result the slave device
-never got its master_priv (DAT slot index) allocated, free_pos was
-never updated, and the DAT entry was never written.
+Qualcomm boards have traditionally relied on a prior bootloader stage
+to populate the memory map in devicetree, and when that wasn't available
+the memory map would instead be hardcoded.
 
-Fix by removing the incorrect master->this assignment. Store the
-slave descriptor directly in master->i3cdev[pos] inside
-dw_i3c_master_attach_i3c_dev() where the DAT slot index is already
-known. Also check the return value of i3c_master_add_i3c_dev_locked()
-and skip num_i3cdevs increment on failure, fixing dummy devices shown
-when no slaves are present on the bus.
+With proper support for SMEM in U-Boot the memory map can now
+dynamically be read out of the SMEM database which is populated on boot
+by the preloader (sbl1).
 
-Fixes: 1009c96f1590 ("drivers: i3c: Add driver for MIPI DWI3C")
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+Switch over all the boards that previously relied on hardcoded memory
+maps to use SMEM instead. This has been tested on the Rubik Pi 3 and
+db410c however other platforms still need testing (see below).
+
+This affects the following boards:
+
+* IPQ5424 RDP466
+* IPQ9574 RDP433
+* QCS615 Ride
+* QCS6490 RB3 Gen 2
+* QCS8300 Ride
+* QCS9100 Ride
+
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/i3c/master.c               | 1 -
- drivers/i3c/master/dw-i3c-master.c | 5 +++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+This patch is based on the qcom-next branch found on the Qualcomm U-Boot
+Custodian repository [1]. For testing please check out that branch,
+apply this patch and then build/boot U-Boot. Ensure that you have
+CONFIG_LOGLEVEL set to >=6 and look for the "Memory map loaded from"
+message during boot, it should say SMEM.
 
-diff --git a/drivers/i3c/master.c b/drivers/i3c/master.c
-index 019167a2dc5..1cf1ffd99cc 100644
---- a/drivers/i3c/master.c
-+++ b/drivers/i3c/master.c
-@@ -1443,7 +1443,6 @@ int i3c_master_add_i3c_dev_locked(struct i3c_master_controller *master,
- 	if (IS_ERR(newdev))
- 		return PTR_ERR(newdev);
+If nothing is broken in U-Boot and Linux then please send your Tested-by
+indicating which board(s) you tried as a "#" comment after your email.
+
+[1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon
+
+Cc: u-boot-qcom@groups.io
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/dts/ipq5424-rdp466-u-boot.dtsi  |  6 ------
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi  |  9 ---------
+ arch/arm/dts/qcs615-ride-u-boot.dtsi     | 14 --------------
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 23 -----------------------
+ arch/arm/dts/qcs8300-ride-u-boot.dtsi    | 19 -------------------
+ arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi | 20 --------------------
+ 6 files changed, 91 deletions(-)
+ delete mode 100644 arch/arm/dts/qcs615-ride-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs8300-ride-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi
+
+diff --git a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+index 36640f31d616..3b7897b909c7 100644
+--- a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
++++ b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+@@ -5,14 +5,8 @@
+  * Copyright (c) 2025 The Linux Foundation. All rights reserved.
+  */
  
--	master->this = newdev;
- 	ret = i3c_master_attach_i3c_dev(master, newdev);
- 	if (ret)
- 		goto err_free_dev;
-diff --git a/drivers/i3c/master/dw-i3c-master.c b/drivers/i3c/master/dw-i3c-master.c
-index 384fd27b750..84a499c210f 100644
---- a/drivers/i3c/master/dw-i3c-master.c
-+++ b/drivers/i3c/master/dw-i3c-master.c
-@@ -671,8 +671,8 @@ static int dw_i3c_master_daa(struct i3c_master_controller *m)
+ / {
+-	/* Will be removed when SMEM parsing is updated */
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x80000000 0x0 0x20000000>;
+-	};
+-
+ 	chosen {
+ 		stdout-path = "serial0:115200n8";
+ 	};
+ };
+diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+index 390e2338d659..f50d75d59852 100644
+--- a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
++++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+@@ -2,17 +2,8 @@
+ /*
+  * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+  */
  
- 	for (pos = 0; pos < master->maxdevs; pos++) {
- 		if (newdevs & BIT(pos)) {
--			i3c_master_add_i3c_dev_locked(m, master->addrs[pos]);
--			master->i3cdev[pos] = m->this;
-+			if (i3c_master_add_i3c_dev_locked(m, master->addrs[pos]))
-+				continue;
- 			master->num_i3cdevs++;
- 		}
- 	}
-@@ -806,6 +806,7 @@ static int dw_i3c_master_attach_i3c_dev(struct i3c_dev_desc *dev)
- 	master->addrs[pos] = dev->info.dyn_addr ? : dev->info.static_addr;
- 	master->free_pos &= ~BIT(pos);
- 	i3c_dev_set_master_data(dev, data);
-+	master->i3cdev[pos] = dev;
+-/ {
+-	/* Will be removed when SMEM parsing is updated */
+-	memory@40000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x40000000 0x0 0x40000000>,
+-		      <0x0 0x4a500000 0x0 0x00100000>;
+-	};
+-};
+-
+ &sdhc_1 {
+ 	sdhci-caps-mask = <0x0 0x04000000>;
+ 	sdhci-caps = <0x0 0x04000000>;	/* SDHCI_CAN_VDD_180 */
  
- 	writel(DEV_ADDR_TABLE_DYNAMIC_ADDR(master->addrs[pos]),
- 	       master->regs +
+diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
+deleted file mode 100644
+index 68fffc70fcb4..000000000000
+--- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
++++ /dev/null
+@@ -1,14 +0,0 @@
+-// SPDX-License-Identifier: BSD-3-Clause
+-/*
+- * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+- */
+-
+-/ {
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x80000000 0x0 0x7a00000>,
+-		      <0x0 0x89600000 0x0 0x30100000>,
+-		      <0x0 0xc0000000 0x0 0xc0000000>,
+-		      <0x1 0x80000000 0x1 0x00000000>;
+-	};
+-};
+diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+deleted file mode 100644
+index c3ec4a317f7c..000000000000
+--- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
++++ /dev/null
+@@ -1,23 +0,0 @@
+-// SPDX-License-Identifier: BSD-3-Clause
+-/*
+- * Copyright (c) 2024 Linaro Ltd.
+- */
+-/ {
+-	/* When running as the primary bootloader there is no prior
+-	 * stage to populate the memory layout for us. We *should*
+-	 * have two nodes here, but ABL does NOT like that.
+-	 * sooo we're stuck with this.
+-	 */
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0 0x80000000 0 0x3A800000>,
+-		      <0 0xC0000000 0 0x01800000>,
+-		      <0 0xC3400000 0 0x3CC00000>,
+-		      <1 0x00000000 1 0x00000000>;
+-	};
+-};
+-
+-// RAM Entry 0 : Base 0x0080000000  Size 0x003A800000
+-// RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
+-// RAM Entry 2 : Base 0x00C3400000  Size 0x003CC00000
+-// RAM Entry 3 : Base 0x0100000000  Size 0x0100000000
+diff --git a/arch/arm/dts/qcs8300-ride-u-boot.dtsi b/arch/arm/dts/qcs8300-ride-u-boot.dtsi
+deleted file mode 100644
+index 8c353ace71e1..000000000000
+--- a/arch/arm/dts/qcs8300-ride-u-boot.dtsi
++++ /dev/null
+@@ -1,19 +0,0 @@
+-// SPDX-License-Identifier: BSD-3-Clause
+-/*
+- * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+- */
+-
+-/ {
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x80000000 0x0 0x11a80000>,
+-		      <0x0 0xc0000000 0x0 0x10000000>,
+-		      <0x0 0xd3100000 0x0 0x26b00000>,
+-		      <0xe 0x80000000 0x1 0x00000000>,
+-		      <0xa 0x80000000 0x1 0x80000000>,
+-		      <0x0 0xb0800000 0x0 0x0f200000>,
+-		      <0x0 0xd0100000 0x0 0x01800000>,
+-		      <0x0 0x91b00000 0x0 0x1e500000>;
+-	};
+-};
+-
+diff --git a/arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi b/arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi
+deleted file mode 100644
+index 5905dfad18f1..000000000000
+--- a/arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi
++++ /dev/null
+@@ -1,20 +0,0 @@
+-// SPDX-License-Identifier: BSD-3-Clause
+-/*
+- * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+- */
+-
+-/ {
+-	/* Will be removed when bootloader updates later */
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x0 0x80000000 0x0 0x3ee00000>,
+-		      <0x0 0xc0000000 0x0 0x04d00000>,
+-		      <0xd 0x00000000 0x2 0x54100000>,
+-		      <0xa 0x80000000 0x1 0x52d00000>,
+-		      <0x9 0x00000000 0x1 0x80000000>,
+-		      <0x1 0x00000000 0x2 0xf7500000>,
+-		      <0x0 0xd0000000 0x0 0x00100000>,
+-		      <0x0 0xd3500000 0x0 0x07c00000>,
+-		      <0x0 0xdb300000 0x0 0x24d00000>;
+-	};
+-};
 -- 
-2.43.0
+2.54.0
 
