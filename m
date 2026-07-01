@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8634C43458
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC9CC43458
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jul 2026 11:20:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53E6084BDB;
+	by phobos.denx.de (Postfix) with ESMTP id 92F2F84BEE;
 	Wed,  1 Jul 2026 13:19:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="H+Euwgr5";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="dBOendVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1091E84BDB; Wed,  1 Jul 2026 13:19:06 +0200 (CEST)
+ id 3618A84B53; Wed,  1 Jul 2026 13:19:06 +0200 (CEST)
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12FED84BE3
- for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:19:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2B4784BEF
+ for <u-boot@lists.denx.de>; Wed,  1 Jul 2026 13:19:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1782904737; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1782904739; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=CRKiowewEaRJKWzh/uoeOtFDtpZoBDROaxLsHbj2cqn8l/tcn4M5jy2z+fHHZ+tciHr5DAvUO3KnL8GyAY8dDqQ6Zr5LiUvdPQiQDj5wIIoOq/5D61eM8eiStTVQbsiVc52iAm0F1Pq6xYwp1v6DbkP/semX30XeEQBrL4hYOBI=
+ b=H84JeKJ/hjyitnqsUPG5mcnxmx0w2bgmAaTle/Tp7MQ3Q8w+4qHXnSyF6GKco6+ZYhWIOSZMRgvFhFbquYyy3qCaekBycR3Icy1Wx3dQqWneVC55JMFB23GT6KNMGIBenyU21dHa5NUX/ZPykFnb5OTZ7ZnuZKRGBt8zIFMNErg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1782904737;
+ s=zohoarc; t=1782904739;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=6tBcLmusEuH7Plcjn2YYsWJYwnDjBqlyhm96NvMVo6g=; 
- b=gvk/Qf86v3gZ0teVlvBpcFPATX19HN1/7xcx4CIFGQ6iAetGYKLbX0YC4Sb5IYJVpFRy0mJKmv0q2I3Y9Y7tqweoA98PBJhPQkXOIjbu2vnZAqQoc7Ng77iAH6yTKZmM7OilF15+dCGFOq4O4ETUVuG9dq//Xmo8slsIJA3EeZs=
+ bh=zdhbotaWVO14cnJ3fC0GeS4RiL1h4mW0fR66kDin5/E=; 
+ b=c+JZplGYdF0/WhLyveh7br3UIrnld7LCV9nnGmwLCp//ibucmle8r1gcjmG8SMrbOZiMVaoF2Kidxke69hHK9SPjP5Ljg/IWf+xlodVLDIIL7MCbTnVei9ek1AlVdBW+CYOtrZqKT1ZpmrKAmjj9jpwWHl0voIl7DP8BFTPW33s=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782904737; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1782904739; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=6tBcLmusEuH7Plcjn2YYsWJYwnDjBqlyhm96NvMVo6g=;
- b=H+Euwgr5fU3EyqhuBPW0ZfTfCYMLElhOclgJ3PYCnWp/ZB3gprEmHFExrkbcFPQi
- 9wuVaIJqK666b1Oijm4vKcxMu/8gF96wkw+9+/jocfz8IhAtYJsxYRBpkexMznO0JL2
- GdtfifVZLdV8tKXIMWCBZWJvUO2F9NRnNP6vPors=
-Received: by mx.zohomail.com with SMTPS id 1782904734933286.54254638064515;
- Wed, 1 Jul 2026 04:18:54 -0700 (PDT)
+ bh=zdhbotaWVO14cnJ3fC0GeS4RiL1h4mW0fR66kDin5/E=;
+ b=dBOendVm9ReIYMQiGL38r9/e80cDJAQjOOSCcXrxEoABVcnqD4iGVucOAsER57LW
+ yf/4zAJ+G28pXg0IPnEVmH46nH79hmUXrZjR42wsflUd5/jGiBNrCPpJN5qWQ1Xd/Ps
+ 2Iq2SPjDoNoxcMUwO1NygWJrRjbiviUaT3iFutOo=
+Received: by mx.zohomail.com with SMTPS id 1782904736842278.3895353403776;
+ Wed, 1 Jul 2026 04:18:56 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v2 11/16] LoongArch: Generic CPU type
-Date: Wed,  1 Jul 2026 11:18:03 +0000
-Message-ID: <20260701111808.870705-12-me@ziyao.cc>
+Subject: [PATCH v2 12/16] cpu: Add loongarch_cpu driver
+Date: Wed,  1 Jul 2026 11:18:04 +0000
+Message-ID: <20260701111808.870705-13-me@ziyao.cc>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260701111808.870705-1-me@ziyao.cc>
 References: <20260701111808.870705-1-me@ziyao.cc>
@@ -78,125 +78,206 @@ X-Virus-Status: Clean
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Provide a generic CPU type with some common routines
-that expected to be implemented at CPU level.
+Implement a driver for LoongArch CPU solely for gathering
+some information bits from FDT and CPU level config registers.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
-(No changes from v1)
+Changed from v1
+- Drop unnecessary check against -ENOTSUPP clk_enable()'s return value
+  in loongarch_cpu_probe()
 
- arch/loongarch/Kconfig              |  1 +
- arch/loongarch/cpu/generic/Kconfig  | 13 +++++++++++++
- arch/loongarch/cpu/generic/Makefile |  7 +++++++
- arch/loongarch/cpu/generic/cpu.c    | 22 ++++++++++++++++++++++
- arch/loongarch/cpu/generic/dram.c   | 21 +++++++++++++++++++++
- 5 files changed, 64 insertions(+)
- create mode 100644 arch/loongarch/cpu/generic/Kconfig
- create mode 100644 arch/loongarch/cpu/generic/Makefile
- create mode 100644 arch/loongarch/cpu/generic/cpu.c
- create mode 100644 arch/loongarch/cpu/generic/dram.c
+ drivers/cpu/Kconfig         |   6 ++
+ drivers/cpu/Makefile        |   1 +
+ drivers/cpu/loongarch_cpu.c | 148 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 155 insertions(+)
+ create mode 100644 drivers/cpu/loongarch_cpu.c
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index 109d37d8e2c7..5254afb2cd05 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -12,6 +12,7 @@ endchoice
- # board-specific options below
+diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
+index c805c0bbfa19..9fd43ff88fde 100644
+--- a/drivers/cpu/Kconfig
++++ b/drivers/cpu/Kconfig
+@@ -13,6 +13,12 @@ config CPU_IMX
+ 	help
+ 	  Support CPU cores for SoCs of the i.MX series.
  
- # platform-specific options below
-+source "arch/loongarch/cpu/generic/Kconfig"
- 
- # architecture-specific options below
- choice
-diff --git a/arch/loongarch/cpu/generic/Kconfig b/arch/loongarch/cpu/generic/Kconfig
-new file mode 100644
-index 000000000000..ac7556d6d4d0
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/Kconfig
-@@ -0,0 +1,13 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
++config CPU_LOONGARCH
++	bool "Enable LoongArch CPU driver"
++	depends on CPU && LOONGARCH
++	help
++	  Support CPU cores for LoongArch processors.
 +
-+config GENERIC_LOONGARCH
-+	bool
-+	select SYS_CACHE_SHIFT_6
-+	imply CPU
-+	imply CPU_LOONGARCH
-+	imply LOONGARCH_TIMER
-+	imply CMD_CPU
-+
-diff --git a/arch/loongarch/cpu/generic/Makefile b/arch/loongarch/cpu/generic/Makefile
+ config CPU_MPC83XX
+ 	bool "Enable MPC83xx CPU driver"
+ 	depends on CPU && MPC83xx
+diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+index eaf494706e2c..d9c0db74dd5a 100644
+--- a/drivers/cpu/Makefile
++++ b/drivers/cpu/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
+ obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
+ obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
+ obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
++obj-$(CONFIG_CPU_LOONGARCH) += loongarch_cpu.o
+ obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
+ obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
+ obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
+diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
 new file mode 100644
-index 000000000000..c98d63b4f831
+index 000000000000..f168ae23cf67
 --- /dev/null
-+++ b/arch/loongarch/cpu/generic/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
-+
-+obj-y += dram.o
-+obj-y += cpu.o
-diff --git a/arch/loongarch/cpu/generic/cpu.c b/arch/loongarch/cpu/generic/cpu.c
-new file mode 100644
-index 000000000000..5c849faf2bac
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/cpu.c
-@@ -0,0 +1,22 @@
++++ b/drivers/cpu/loongarch_cpu.c
+@@ -0,0 +1,148 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <irq_func.h>
-+#include <asm/cache.h>
++#include <clk.h>
++#include <cpu.h>
++#include <dm.h>
++#include <errno.h>
++#include <log.h>
++#include <asm/loongarch.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
 +
-+/*
-+ * cleanup_before_linux() is called just before we call linux
-+ * it prepares the processor for linux
-+ *
-+ * we disable interrupt and caches.
-+ */
-+int cleanup_before_linux(void)
++static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
 +{
-+	disable_interrupts();
++	const char *cpu;
 +
-+	cache_flush();
++	/* We try to get CPU name from IOCSR first */
++	if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
++		int i;
++		char vendor_buf[9] = { 0 };
++		char name_buf[9] = { 0 };
++		u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
++		u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
++
++		if (!vendor || !name)
++			goto get_desc_dt;
++
++		for (i = 0; i < sizeof(u64); i++) {
++			vendor_buf[i] = vendor & 0xff;
++			name_buf[i] = name & 0xff;
++			vendor >>= 8;
++			name >>= 8;
++		}
++
++		snprintf(buf, size, "%s-%s", vendor_buf, name_buf);
++
++		return 0;
++	}
++
++get_desc_dt:
++	cpu = dev_read_string(dev, "compatible");
++	if (!cpu || size < (strlen(cpu) + 1))
++		return -ENOSPC;
++
++	strcpy(buf, cpu);
 +
 +	return 0;
 +}
-diff --git a/arch/loongarch/cpu/generic/dram.c b/arch/loongarch/cpu/generic/dram.c
-new file mode 100644
-index 000000000000..101b45786194
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/dram.c
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
 +
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <asm/global_data.h>
-+#include <linux/sizes.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
++static int loongarch_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
 +{
-+	return fdtdec_setup_mem_size_base_lowest();
++	int ret;
++	struct clk clk;
++
++	/* First try getting the frequency from the assigned clock */
++	ret = clk_get_by_index((struct udevice *)dev, 0, &clk);
++	if (!ret) {
++		ret = clk_get_rate(&clk);
++		if (!IS_ERR_VALUE(ret))
++			info->cpu_freq = ret;
++	}
++
++	if (!info->cpu_freq)
++		dev_read_u32(dev, "clock-frequency", (u32 *)&info->cpu_freq);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_PAGING)
++		info->features |= BIT(CPU_FEAT_MMU);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG16) & CPUCFG16_L1_IUPRE)
++		info->features |= BIT(CPU_FEAT_L1_CACHE);
++
++	return 0;
 +}
 +
-+int dram_init_banksize(void)
++static int loongarch_cpu_get_count(const struct udevice *dev)
 +{
-+	return fdtdec_setup_memory_banksize();
++	ofnode node;
++	int num = 0;
++
++	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
++		const char *device_type;
++
++		/* skip if core is marked as not available in the device tree */
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		device_type = ofnode_read_string(node, "device_type");
++		if (!device_type)
++			continue;
++		if (strcmp(device_type, "cpu") == 0)
++			num++;
++	}
++
++	return num;
 +}
++
++static int loongarch_cpu_bind(struct udevice *dev)
++{
++	struct cpu_plat *plat = dev_get_parent_plat(dev);
++
++	plat->cpu_id = dev_read_addr(dev);
++
++	return 0;
++}
++
++static int loongarch_cpu_probe(struct udevice *dev)
++{
++	int ret = 0;
++	struct clk clk;
++
++	/* Get a clock if it exists */
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return 0;
++
++	ret = clk_enable(&clk);
++	if (ret == -ENOSYS)
++		return 0;
++	else
++		return ret;
++}
++
++static const struct cpu_ops loongarch_cpu_ops = {
++	.get_desc	= loongarch_cpu_get_desc,
++	.get_info	= loongarch_cpu_get_info,
++	.get_count	= loongarch_cpu_get_count,
++};
++
++static const struct udevice_id loongarch_cpu_ids[] = {
++	{ .compatible = "loongarch,Loongson-3A5000" }, /* From QEMU, undocumented */
++	{ .compatible = "loongson,la264" },
++	{ .compatible = "loongson,la364" },
++	{ }
++};
++
++U_BOOT_DRIVER(loongarch_cpu) = {
++	.name = "loongarch_cpu",
++	.id = UCLASS_CPU,
++	.of_match = loongarch_cpu_ids,
++	.bind = loongarch_cpu_bind,
++	.probe = loongarch_cpu_probe,
++	.ops = &loongarch_cpu_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.54.0
 
