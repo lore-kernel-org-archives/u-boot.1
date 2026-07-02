@@ -4,107 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E35C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:56:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07BD5C43602
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:57:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD70984CB3;
-	Thu,  2 Jul 2026 10:56:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F13E84CB3;
+	Thu,  2 Jul 2026 10:57:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TU/KQZWO";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KQb92qNd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27BC684CC1; Thu,  2 Jul 2026 10:56:04 +0200 (CEST)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D315584CC5; Thu,  2 Jul 2026 10:57:43 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B14B184CA3
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:56:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-66493875766so2115837d50.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:56:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782982560; cv=none;
- d=google.com; s=arc-20260327;
- b=s++dbYcAYWq4XKfptujWwu2utWdHKpouWkHu5LWbvbhnk/8zEn8CyNK/tEgEQOIM0d
- hd2ipdW6EQycnwvc4e/daGKKKC8nHO5XBMfKRFJ1rLlsLT2dSKEFcgeuZv27g7sNugx2
- Jd6wmvS+f1bUiM/xL8PEJ8GnxhIl9cG6xoYhBBsMXk0YPirSYqMaWQCHSIBX2VfHv8Lj
- +seaxXZ9ovLPryWhyWwJc73iTpIfYDertFWtsYVQFU0avII401cANRPi2DJ1JyNbLCJX
- gbv0aRM/8dP/Jj3sEHA9WeU6Fs0wXFISaLipQ8DmalEPbLyfDBWkgPA7iH0hMUBD0QFu
- 1J/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=YAtajG793ShkqaLXBEpZjRM8//AWh/xmHWjxP95LKZk=;
- fh=uRbiZDD8/GzX63fpgcBB3BzGdX9DSS2G8/9/Hya3HWM=;
- b=Mp9MxvKvzNxj2OfH6Kk1EbGCy/+CCz7KPysv4O6RAWnWLZREKXgg6AVMYozG7GCVjm
- MDJxWgiBbRldZOq71zOWuSlM6ve39qHDoRJ4ztlytsarx6nKtUQMtknMEe2o0GfLne0s
- M/Q+mdJ9Lekkt9bl+DfgQVwvdmJKfLYMOzgO2mxLFZNncjPAngtNn1daTkJ27G/jvBEc
- 7w6IzK3HhjFey123HjkJTKQnagXyl1vGtG4yTbX3nDZjRazP6WYlOZWEmg7OQuIhFenf
- H9iFsNZAnzJ0c62VLFsA9QgNmfHcTHxRegTDSknyiPg2c2f8xhphHy4a2dxWPg+VCBzG
- 1/jA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782982560; x=1783587360; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YAtajG793ShkqaLXBEpZjRM8//AWh/xmHWjxP95LKZk=;
- b=TU/KQZWO3tI5AUGNlkDRGWEYqI2ntDw4odw8OpOc9FWaZcF0eZHQrPKvL4a4IvZiJ5
- SM1fvDd0MCbHTeLAYnbaw1CHKcOZAvkdCk6Efvodqm1jlHqaCjgtdF343HIybPoTUzW1
- d9LoBtRPx47Pv7tAbAXAL6WP/jKTSfMR7wZ/clImeCPHz0J8tgg/1ceI3cZL1TGk10pZ
- aNVgbklpADPcSDAy2Ln8FtHdCmc2cv/JnW2eytbXylFJU/+0pQflPuZw1Krmqr/hrXPI
- F17dUUH58TO3XELPl186A8PW6Czf35kiGQaEdPk8aJbZRTotNrEl83m8x+hSbnuOSlUS
- k0bw==
+ by phobos.denx.de (Postfix) with ESMTPS id D533C84CA3
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:57:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 245B03F979
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 08:57:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1782982661;
+ bh=ZZxkewHLNGm5w5ObRacgcdK1BLEXMPoYOwToJkUUDF8=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=KQb92qNdL5LDkmYEDwIIfxRCVYtYKv1yBrZ1v9SBw0ZCXBwEPDw4FGxMyrOYsBTd7
+ X38v8T1BXaaQpOcWMO+KhB1KvJop/fiCqeI/07zuTd5CFXrEsSzCygkBIIqAxt3jMy
+ 4dY+FMaaE2S8V3pzwAoV+OJb0UxwTzSG9Agvu/rdYfo4sQMY/dX8b3iaMxTDlJft0V
+ iEK9QLeuVyQKcgX0D56AMHVY0QRoUpPvCaU108Zw/O1GIFQlvKXv2nYcQiJ9vYZ4Dc
+ DJaCCdZ1UoCCb42Rs46CQW6h8jYjzhIZGnEHC68LsHpbTxE2v2JDRNcLo8y9H8r8a4
+ 2dDxXBk4gSbtAlDL3PTv0XOS2/CXxNihj5034LNJpX6DatGQzw+GoJD6L2eQr6vRRs
+ kvx6nBUz/ed6IM6wDqhV7o1cQ3ULlW+Qr29Zcvus4kYM5k59DmiYfcKmhTWp6WXrrN
+ L5f0K4lsb4ZRq28X+VJIcKovOk22yQzC5jdVWvT7tKKo41jNoR6LeRuq18E1RZXYmF
+ PVs1Amy2iyUZkR30Sjmct2C/mvfAtercvUc/3i22i93t9ofFOIQLJrV3g252q20Sf0
+ SiQ4AUb2mcypRWXXt89y/VqnYacwZfsevCFSvAQjm0JUzUbeTOGZEVZPHt7bXzXmbY
+ jJ1UCCrEcVtEaVkVSUZ7BXoE=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-493bb6a4336so14699365e9.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:57:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782982560; x=1783587360;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YAtajG793ShkqaLXBEpZjRM8//AWh/xmHWjxP95LKZk=;
- b=At0K3VIdPGMcPxngRYVdanhul4lrcQhYU9gzwR/QCE+xi7oYaKexdKYwLq2lb5wMHQ
- +6buoY0DBwLSosMfKWFRqb7DVnYtRTRJH3OGBpcPW5XcqUoSg8ovagwKAl7f2BDNblEy
- p0f3dWT+DgbeTbo4+MlbZu7AmvE57r42jUusUz+2p6ZR2CoDyWoEICQxSCU6ZzflN7JQ
- Tndsfg9wrWBviQfDy84GlQcmrsFc4/QnXbijwkefKB13uOvWIyI7RSTFqDUMoyCPQfqp
- xYrsJh7URLJ+JoxG/P2uLFEv4VsmChV4cNUSRUs9h3bneTz3Qt2uQ1HuwDN+t9J6/z7m
- 1ENw==
+ d=1e100.net; s=20251104; t=1782982660; x=1783587460;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZZxkewHLNGm5w5ObRacgcdK1BLEXMPoYOwToJkUUDF8=;
+ b=ACsbOllJoJbW/WvIQVDoB1DA/L5Lo5A5KJZHZfvSANBHj8AtQdWHmi82zQchUbZ/bX
+ DBFp7toBmniQjjf0FQWZUVejYj4TRudVNYme5KzJ5Zlz97ya4kOwdFptIWuIK3CBR2yP
+ Ifud/iZAm0dFlZ0pUXajeLV6YpWGknAsowYQs1bEPIm50CK5RgSOCU+hPWj4Is0y1kvB
+ tmV5xlwgEqRR1qlhRKDcSuxDCJ9TavBKoBUKBIEyWBUUkqN33GiPxBxNNoFDgi31KpXg
+ z7n3B0LH6b8Ap17SzmSn3WYNirOok9E7SCOhx9RBjWt5smb9qgz/nMDQzig7sa0yJkJr
+ bWRw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrzAehF44MDCGFn1E1BJ+XyHs349QcdrHs/ANDw4JRajF3Ce4NUXHLCIg9qLIzjYZJLEauqFZE=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywzb+BoRNfxqsRlYPSh/0/rUkYhU27AeKACL3gPeqJp2zDu14Oy
- DRJrdP6BQKFXjPbOzUT7uEFbvFTobuhIzx9F5s4GFBO083QtTlZAyRr5l/R89y2LpHjQpMyPCCB
- Oxo39hdTlU1OopFzzWg82/i0Mcj0twbzgiHpbOZCOOQ==
-X-Gm-Gg: AfdE7clLh36BYgW+8w8D0ZpfazdU4hjR8TvRnOG7KiTbXI4POQWdEFmCnz5zfEuyQOL
- BxL6vELnAghC5BSK3vOJUmZ8u2SdJRMdQRBZnTnHWcW1AbFZdH71VR+B6LEV6ov9O3xRPo/cvMA
- 2HC0957lDUrqUC+oD8a+WC2YPuKL9n1avtwUNgul8xTcbJP7m9XNvMl7xykQ4tdThbS6jwVkLfT
- MUhzcPd8fHAJ2S/weRr9n4cim7jbbLwGxW/uOrzKKDjAMgtc5OxeYsETZFxm8hZkQ+QaMBkZeBY
- tU5Iep+jZVUyU84X6baEHfU0yWz4tgw8LG3GtbCqO+zHO0VIu1N0cLYW2kGlcnsdwAnDtxqF8ns
- DgNy227E+YnYg83iMzazBX5cwow0vVGSL8hYcwmGa3g6XpXqPG1gi/cO2bjOg0vsXCzb9kAKi97
- VyZL4KqBMm74gojwTYtcxPAy371RMTivlkSFIPrYupHMSSE9CA+1WVnlVFI5yVWFCjjjmbda0g5
- lA2+/jvc7D8S79lRr4hoSUvTsAs9ax99ISngFpfFxj4Ed0N+LuVPZVW9ufI8cQ3OBs5O1agAGfb
- G/HN1iywF64sSwiqMMrp95/QO3MqLpbqiyMQO2yrjjv1bSjipEXWDKc9JVLYnTlCF9sIRik=
-X-Received: by 2002:a05:690e:128b:b0:664:ef34:4b with SMTP id
- 956f58d0204a3-66521d4b4femr4785556d50.76.1782982560253; Thu, 02 Jul 2026
- 01:56:00 -0700 (PDT)
+ AFNElJ8iIAMeM/cF1PhJNA1duIYNCG1++2Rm/GmUvelKzKlfmfM0UDGvf3pJNoSFCV1iqRCUuWypiKw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhWBCo7bPMtZY03u+JRnSkaN9yMVch4tLN39VSertgk31Z2IBH
+ e96k80v4lZbS9DzveTHMBKQuYFitwCDreqxh6J2EQwSYRWhuM/H/TESBYklHfTyf+8ANE398N9X
+ SS7GjefX2OLAmlSJz6mFkpj31B00+zzcAwz8ddtv0gx/GGaMj+4ObL4NIlQxiu3VzW3/oMgY=
+X-Gm-Gg: AfdE7cm/4dOrKGuLfl9vl4QLdpfLFagIfZ93SXaWTO9EYOvdSIBYy8FVOUnhVw3vkLu
+ wDht109vELhQ5WyN5WKTJd9koyYqUwVebqNd4pUO20u/lApVtLnxRlyqTZbYb+4khf3lgttV9UE
+ QBj57ykLjEp+gnuoR91mnakBsgTBI129H14QogpF+GaACsw34Vgwx7kx1PL+OeEYEv9IqlVVwML
+ Phsi/ygBiiH/kRRv8nmPt+V6/DPXHnAboJfCoUrH8drVeSMFdaoO1Bp06slDjPn1pJWhuRnJJ6h
+ 2naxlsQwrjqmbTavHrfkhqZJrAAoqP1FxljyCW8SVCloevrNBhl4bumx7evbJ7QO1E++TVAT8Ez
+ yvnrYRNkUj0LxabT5X7RofdhLgqiPXLb/hEpvx3xt6OZCV6rFtRE0Kz3OaiZ3a2SOIx9j0PZ0Uv
+ xPhA9ABGKhrpG8YcBRnkmFQuIFHUykalI=
+X-Received: by 2002:a05:600d:c:b0:493:aa28:38ad with SMTP id
+ 5b1f17b1804b1-493c2b4442emr53887195e9.10.1782982660699; 
+ Thu, 02 Jul 2026 01:57:40 -0700 (PDT)
+X-Received: by 2002:a05:600d:c:b0:493:aa28:38ad with SMTP id
+ 5b1f17b1804b1-493c2b4442emr53886865e9.10.1782982660253; 
+ Thu, 02 Jul 2026 01:57:40 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:601:211c:b85b:1021:c955:d2d?
+ ([2a02:3035:601:211c:b85b:1021:c955:d2d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493c6381e4fsm36077915e9.8.2026.07.02.01.57.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Jul 2026 01:57:39 -0700 (PDT)
+Message-ID: <406c87e1-7f0a-47da-a3c6-6fae80c63a31@canonical.com>
+Date: Thu, 2 Jul 2026 10:57:38 +0200
 MIME-Version: 1.0
-References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
- <20260628082810.175862-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260628082810.175862-3-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 2 Jul 2026 11:55:24 +0300
-X-Gm-Features: AVVi8CcIhIpI8YLC0vVparGbRth7MiR32Uc4iqFNNaOWfOF_dESPsLdOM6fZCd4
-Message-ID: <CAC_iWjLkwoqwv2Q77b3hi+dPpiv7aBKhWRSn7EX7KrpSDt6rbQ@mail.gmail.com>
-Subject: Re: [PATCH v3 02/11] efi_selftest: add ACPI configuration table test
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 11/11] efi_loader: add ACPI table dump EFI app
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
+ <vincent.stehle@arm.com>, u-boot@lists.denx.de
+References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
+ <20260628082810.175862-12-heinrich.schuchardt@canonical.com>
+ <CAC_iWjJkZ7zegZCbhgZB0VLCf6CF=mtP7PzYmx6rF3+tetoM5Q@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC_iWjJkZ7zegZCbhgZB0VLCf6CF=mtP7PzYmx6rF3+tetoM5Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,91 +122,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+On 7/2/26 10:48, Ilias Apalodimas wrote:
+> Heinrich,
+> 
+> Didn't I have a tested-by and acked-by tag on this?
 
-[...]
+I did not keep such tags as there is a change to what you tested and 
+acknowledged. See log below.
 
-> +               }
-> +               if (!checksum_ok(rsdp, rsdp_len)) {
-> +                       efi_st_error("Invalid RSDP extended checksum\n");
-> +                       return EFI_ST_FAILURE;
-> +               }
-> +       }
-> +
-> +       memcpy(&rsdt_addr32, &rsdp->rsdt_address, sizeof(rsdt_addr32));
-> +       rsdt_addr = rsdt_addr32;
-> +
-> +       xsdt_addr64 = 0;
-> +       if (rsdp->revision >= ACPI_RSDP_REV_ACPI_2_0)
-> +               memcpy(&xsdt_addr64, &rsdp->xsdt_address, sizeof(xsdt_addr64));
-> +       xsdt_addr = xsdt_addr64;
-> +
-> +       if (!rsdt_addr && !xsdt_addr) {
-> +               efi_st_error("Neither RSDT nor XSDT address is set\n");
-> +               return EFI_ST_FAILURE;
-> +       }
-> +
-> +       if (xsdt_addr) {
-> +               table = (struct acpi_table_header *)xsdt_addr;
-> +               if (!memcmp(table->signature, "XSDT", 4))
-> +                       return EFI_ST_SUCCESS;
+Best regards
 
-We should check for both the RSDT and XSDT.
-Just invert the memcmp I guess?
+Heinrich
 
-Thanks
-/Ilias
-> +               efi_st_error("XSDT address does not point to XSDT\n");
-> +       }
-> +
-> +       if (rsdt_addr) {
-> +               table = (struct acpi_table_header *)rsdt_addr;
-> +               if (!memcmp(table->signature, "RSDT", 4))
-> +                       return EFI_ST_SUCCESS;
-> +               efi_st_error("RSDT address does not point to RSDT\n");
-> +       }
-> +
-> +       return EFI_ST_FAILURE;
-> +}
-> +
-> +/**
-> + * efi_st_acpi_execute() - execute ACPI selftest
-> + *
-> + * Return: status code
-> + */
-> +static int efi_st_acpi_execute(void)
-> +{
-> +       struct acpi_rsdp *rsdp2, *rsdp1;
-> +       int ret;
-> +
-> +       rsdp2 = efi_st_get_config_table(&acpi2_guid);
-> +       rsdp1 = efi_st_get_config_table(&acpi1_guid);
-> +
-> +       if (!rsdp2 && !rsdp1) {
-> +               efi_st_printf("No ACPI configuration table, test skipped\n");
-> +               return EFI_ST_SUCCESS;
-> +       }
-> +
-> +       if (rsdp2) {
-> +               ret = check_rsdp(rsdp2);
-> +               if (ret != EFI_ST_SUCCESS)
-> +                       return ret;
-> +       }
-> +
-> +       if (rsdp1) {
-> +               ret = check_rsdp(rsdp1);
-> +               if (ret != EFI_ST_SUCCESS)
-> +                       return ret;
-> +       }
-> +
-> +       return EFI_ST_SUCCESS;
-> +}
-> +
-> +EFI_UNIT_TEST(acpi) = {
-> +       .name = "acpi",
-> +       .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-> +       .execute = efi_st_acpi_execute,
-> +};
-> --
-> 2.53.0
->
+> 
+> Cheers
+> /Ilias
+> 
+> On Sun, 28 Jun 2026 at 11:28, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>> Provide an EFI binary that can dump all ACPI tables to files
+>> <table_name>.dat. These can then be further analyzed by decompiling
+>> with iasl.
+>>
+>> The DSDT and FACS tables are identified via FADT.
+>>
+>> The following commands are provided:
+>>
+>> * check - parse ACPI table list\r\n", do_check
+>> * write - save one file per ACPI table\r\n", do_write
+>>
+>> The file names are constructed from:
+>>
+>> * 4 character ACPI table name
+>> * number if there are multiple ACPI tables of the same type
+>> * '.dat' extension
+>>
+>> This matches the output of the Linux `acpidump -b` command.
+>>
+>> Signed-off-by: Heinrich Schuchardt<heinrich.schuchardt@canonical.com>
+>> ---
+>> v3:
+>>          extend the commit message
+>>          reformat with clang-format
+>>          roll in u32_to_utf16_dec()
+>>          in add_tables() check against max_tables
+>> v2:
+>>          Check checksums.
+>>          Check both RSDT and XSDT if both exist.
+
