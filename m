@@ -4,97 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25EABC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:28:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C0AC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:29:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF43784A72;
-	Thu,  2 Jul 2026 12:28:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E75284A7A;
+	Thu,  2 Jul 2026 12:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aXGQl5XP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="APKw2nCM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D2B84A76; Thu,  2 Jul 2026 12:28:38 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id C506884A47; Thu,  2 Jul 2026 12:29:17 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE53784A47
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:28:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9942B84A7B
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-693c69b97e7so2841160a12.2
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:28:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988116; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-c128cc012b4so65862966b.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:29:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782988155; cv=none;
  d=google.com; s=arc-20260327;
- b=IF4AUA1WNq5b3bxhEiKz5cMrEoHWigiG45FyPfvFKIoCFpxaVfcESObOK8Szn5h6x4
- Y9vAlZPL5PRF1K/LBojSI8ISBSNZYxRmrvbgFXb6I8qE267Nx6ikbyXPRmI3bRqHM3g7
- NkB7cpImvpdUQtg0JpsA08wWDie83G0hSndFOTzLIt0kCZ3l3QzRZ2UoLY076N+jD1Gq
- zFxGENGnoGuARMAq1DNOy5oRNJdhD9SNjXuZ3hiJvo0rwfAEX7KKpOnaNyA6QFgchSl2
- wtqD/mHA0XPEvkonDt9+UOBgdzhSofkJbvowujSFsPkJu0+KHdc3VF50jVIjCElisgVV
- xXaA==
+ b=coUI1AscVUUJ0nQfGQGlE2jO4cx+w+vPAvc3uYWCpvJJuRSQcRLER8ihAxec2Xts2d
+ +E/mgKQh8gQCAg85NJJQDBzrLC82b2E9ArlPxLWOjfFjG4L3Yrbe7tA9OCpfSpVJYDQX
+ gVI0a/mnSX17XHC/15JbaAjGJ6dE/V4U9NnsjlX5W4LUHlZgEzpJwSt1Xgb7AJ4ktGC2
+ /uOLtMK5Z8uGrh5s2hAfKhZU2eY47pkTW+znXgRtMdOFuMLNmm23tGiBApYWyMavhta9
+ xJ38JIREHz4SjdJRIR6ib69MF3sTUkL9P7S63F4HmVwyeyyH71dWvjwr5QjtWaHrhVEp
+ LSfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
- fh=hDNHvCnVSJ97ty9EY4ihD2gxuR4KRRZarrBRrYHjWKA=;
- b=OTjVOld5Ur9hOfJxtu4pWryTY++3QhyF40xxa6r17PkHv8r8/SvW6N/G6DXKhYcYj3
- HVJWAgw+C6yfjOZkKHQDQbTurWYDdwUNWf3th1V6Cj8ojIa65F9P3kDPpWjGkBuu9bnZ
- uTCvJfuyklLl3vhAO1KEktRCCUbx0tedkPXvLeEbtf0lHUnCv1RBwZm+cYRILlYHl36y
- EMM5E7OUKpZvS+LM/oza7CDxxjJkT0A50LNNjSm3Al6wq2GPnZC9UvlQ0Nkk7fqW8xqX
- 3lvoOxLIy0AeQ8IZ8qrDAgXxbr4Y/1/8a2WPePtQOzBrHWLJ4yV3U6vQFZrHQQzUnkfg
- k4QQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=A3jc0fkpnwTGbIE26eFpaKLc3ji4QnyugVRcGnGeOw8=;
+ fh=eFunv4SBTTv+W1b+Uu6EOoqR9yjB/cukjjxT64U3E1A=;
+ b=ApbWZJ5nUnHBUf1DRbQ6AlTCuEEHb5e5kBBJKLst5zD5FRCP438x1ZK12H+Fq/eH2t
+ Kef8RwsNXQ3SUtbtjdYD2Na4NFnPFj7aIv7ywdJgXY6TjGUFSU7qakh+tCEOlphTeFFC
+ AF33h1bAkvoLlks4V9ThBED62UpVo5XBkK07yL5a6n09E1IozLowiDtbaNyS2bVrcbRu
+ DTyT3T+zRoDN3cm6b0LtIQ6EfL/qinAhp8bssvBMu2nWbZsXRCiyXZeYTS14zjr/7ymL
+ +HvAEbJcL7vhBdivndnbYPl2TV3cMk8jM2OcduyJhVjC07luYZ8XIGkb2sYG16C7Xi+u
+ h4wg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988116; x=1783592916; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
- b=aXGQl5XPLxxHwi1i9ipyKXbA4xcsoMibsXDKobg0b5iGKxnoQ1WyCxZQIChrarfzt1
- XxBiDtCW1PE+Bj/lguOfhW++JP0Rxz+iA3k2er7zj8UEgIQjMIBgIc7iXllWvoaMyMie
- sfzG5LzylEotuhodCR8gzn7hgSwEDvdcIrqdg=
+ d=chromium.org; s=google; t=1782988155; x=1783592955; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=A3jc0fkpnwTGbIE26eFpaKLc3ji4QnyugVRcGnGeOw8=;
+ b=APKw2nCMRpnoEPJfPbPFLWNFM1BDtgqK0O3QwLpYWzuuuYWfxBCp8rsw5d3w5Q3Ybm
+ EPNUkSgOpvQKDoJTWHQGtDHcuNB37HjZgXWBc/3HlDbuu8plKCu/CWsqcYJL3bqmGAm6
+ OemBqYkcCB8QaBtyMDwQOjNiS/D8kH1un7vQs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988116; x=1783592916;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
- b=sQf6O13ww/sAvzOpazsisL+zORThm+AeVJqRNlJSOGpm1iZO6GUb/M+qN3zC03N7rs
- 9HVm5Rlty8E0l5nmJpNrwu+TtaWBc14hMIpTA/kw2AkULqnf05FpJfKVXmuC03TAl+j8
- ESCHrBgHtBEv9ISQip2e2s/GJxpDI/371yUlXovIETKLJm22rLXkpoRV9P+e5JGl4Pvn
- /+zLQi9FL2gf3M/cYhp9e2Jw3+ac4Mgnqlk43JjrkJu3MApXSaFq9z/flneYrNqyov6o
- PjFxwAhIQOLOC3V7lmwOSL+WnvHyNvb4O0Jiv4ypOpn/cmtqGkvcHvZ9Fr0TAz9913CX
- 8mMA==
+ d=1e100.net; s=20251104; t=1782988155; x=1783592955;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=A3jc0fkpnwTGbIE26eFpaKLc3ji4QnyugVRcGnGeOw8=;
+ b=spgUwLeNNO4QbkiIqH4H126xww1msuYY6nkOtYeE5maRvO2mcZl4zW3pFuqFusDvJG
+ 3YqPGd9pTclnwzrcfzeMa/Ox52tkT1vGl482iRRs5W60Td+TfEdIZk09jj+u4aL3vlxy
+ 6gL75mcvidf8lb8ohDd5GeSQVieBxTX0IcIiJHHq+/mVv87ygpe/ZrkBUlhlo5nZDW6u
+ xCa6gQcT2dwEiEn/gi5EhLLNmngjYrnzmMSsPiPWclG4zTF3sPa3gATHaO5YKRvWnZ8N
+ gVo9060ZhZ0Xn8uticS6XDkkkWKZAaAAfFQuZXZ5IJtc+DyDqLY+ZvBbSL6iIzkh/ERP
+ /woQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqRGTWEJyIeaqXWdv7tfnLqs/TXZ5I3o3DNgLhUS6cTno4jovlQuTduliCSuCeHtsl2FkFIlXQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxbnk+dU9PlvbR6mszvCmgouPkdzuUoHRJnJotHYxDKckKj5aq8
- ugDNMizg4l2Em3Nt4ClpghMdS/tVbv8pWuzE0l9Yy5EsIGEdLkwkpATGNIYQm+ehEJiBFkvx+xR
- 4wDDp4I7KzXjoH7yBSt7LYuzvHvm14pXMT4ePCwBj
-X-Gm-Gg: AfdE7cmJd4TqQCJX+CjnceifRWz3BhJdcDoaky2f0F/ry7ff5/QEalo76Um6WKcsScC
- MOrPgFn4Kf5Tf+spFggx4gNCet9rOlkgPCY7Vz2V0dmfljyvJ3m2G/HorVFZuqJAWfTdgEbvAEx
- mFcq1P/WGKY6nAEYNxDpyTOLkcgHyaSQ4x8I1jEhze0YSBaH1O86SUAWp+i+ZhP/0iTOc+bSd5C
- HD4EbAS6zCK6haer30ifPqPkxMWZtnUXl1KMFyTZD0Vzm3A6F7K4O8oRvCjWjcBwTaAsEYMyQ==
-X-Received: by 2002:a05:6402:26d3:b0:698:870b:ac8c with SMTP id
- 4fb4d7f45d1cf-698a2cf920amr2134393a12.36.1782988116121; Thu, 02 Jul 2026
- 03:28:36 -0700 (PDT)
+ AHgh+RpxVvF6r1NqNvfZoifKvB1DlP1Vs9wQzxN/osS00pf0rtI0CaPNF7CLMbn8mxa6eqvBLJ9wGbE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdRNm2DkxNsXsMOKHCkrf4Ry+A2zcxHkNIzSwGR8WC9H9pCULC
+ dDpgky+PEAcpZuNqvnMhsb83I+N+dQ+CYwJTODbCN9t1NRwL4RdEvQ9qpQqqYHYGBYzCsP2Wwm+
+ 9oSqx5rtPa2kCO64vW/CPhd0P0sWefrlLwnj2g3ww
+X-Gm-Gg: AfdE7ckjKipGZdLXpUhsGzvEap3+BgJZ/sbDy/mdZqgGmRa1m4pz2ktOhpGUcYD/+H3
+ MKwbvxpoYP1Af2+tWyfbsaf7KdiNX4Ebqd4XJBw5XIlWFTGuCay/6nS+pxQ0hK9O4W5wIOnbcWl
+ /Qf6xxhi9vc6g65IFu9EpogqYPIVZeYHEQf2SgT0biOaMmhMLjrbWGW1d06I21ZEojLSdfxKXCk
+ bp8FhS9QbbDzXYtqve3VelHaSV5qkYVmQDHZaKozMMzcSxkBtqCghjaPamJtKAncBs3zdkobg==
+X-Received: by 2002:a17:906:bf49:b0:c12:a169:989e with SMTP id
+ a640c23a62f3a-c12a169994dmr259564266b.19.1782988154941; Thu, 02 Jul 2026
+ 03:29:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-7-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-7-me@ziyao.cc>
+ <20260701111808.870705-17-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-17-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:28:23 +0100
-X-Gm-Features: AVVi8CdpSC12L79vQuKhWb9JGGCBAPlxNqpJDY7X2ScbYhckWmPlOdKowGJQrw8
-Message-ID: <CAFLszTitRPvZe3Z5aCXwLogJVjjWJEV-5HmhZeG2rfudOJLOMA@mail.gmail.com>
-Subject: Re: [PATCH v2 06/16] LoongArch: skeleton and headers
+Date: Thu, 2 Jul 2026 11:29:02 +0100
+X-Gm-Features: AVVi8CdQVFapbgVM2idJVhDtUJX4GBLA4ZXXKhv8pCpPLD8TfK6_RoXy__BPiE4
+Message-ID: <CAFLszTghOmstTTDUaNBd1RaYj9snof1TqyHgDrGGRo+ot8GQPg@mail.gmail.com>
+Subject: Re: [PATCH v2 16/16] efi: LoongArch: Implement everything
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,72 +113,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jiaxun,
+Hi Yao,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> LoongArch: skeleton and headers
+> efi: LoongArch: Implement everything
 >
-> Commit for directories, Kconfig, Makefile and headers
->
-> Some of them are copied from linux, some of them are derived
-> from other architectures, the rest are wriiten on my own.
+> Implement crt, reloc, linker scripts, wire things up in
+> Makefiles and Kconfig.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
+>
+> arch/loongarch/config.mk                 |   4 +
+>  arch/loongarch/lib/Makefile              |  12 ++
+>  arch/loongarch/lib/crt0_loongarch_efi.S  | 182 +++++++++++++++++++++++++=
+++++
+>  arch/loongarch/lib/elf_loongarch_efi.lds |  76 +++++++++++++
+>  arch/loongarch/lib/reloc_loongarch_efi.c | 107 ++++++++++++++++++
+>  lib/efi_loader/Kconfig                   |   2 +-
+>  lib/efi_loader/efi_helper.c              |   3 +
+>  lib/efi_loader/efi_image_loader.c        |  26 +++++
+>  8 files changed, 411 insertions(+), 1 deletion(-)
 
-> Some of them are copied from linux, some of them are derived
-> from other architectures, the rest are wriiten on my own.
+>     efi: LoongArch: Implement everything
+>
+>     Implement crt, reloc, linker scripts, wire things up in
+>     Makefiles and Kconfig.
 
-Typo: wriiten -> written. Please also expand this into a proper
-motivation paragraph - what LoongArch is, which ISA variant this
-covers, and where the imported headers came from.
+The subject and body do not really say what this patch does. It
+also silently adds handling for a new PE relocation type
+(IMAGE_REL_BASED_LOONGARCH64_MARK_LA) in the shared EFI loader,
+which is not mentioned. Please expand to describe the LoongArch EFI
+application entry sequence, the .reloc stub, the MARK_LA relocation
+format being decoded, and why it is needed.
 
-> diff --git a/arch/loongarch/include/asm/asm.h b/arch/loongarch/include/asm/asm.h
-> @@ -0,0 +1,186 @@
-> +/*
-> + * Size of a register
-> + */
-> +#if defined(__loongarch__) && __loongarch_grlen == 64
-> +#define SZREG        4
-> +#else
-> +#define SZREG        8
-> +#endif
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image=
+_loader.c
+> @@ -230,6 +232,30 @@ static efi_status_t efi_loader_relocate(const IMAGE_=
+BASE_RELOCATION *rel,
+> +#elif defined(__loongarch__) && __loongarch_grlen =3D=3D 64
+> +                     case IMAGE_REL_BASED_LOONGARCH64_MARK_LA:
 
-This is inverted - on 64-bit LoongArch a register is 8 bytes, not
-4. The result is that REG_L/REG_S resolve to ld.w/st.w on the only
-ISA this series supports. Linux seems to use __loongarch64, BTW.
+This is a non-trivial change to shared code and would be much
+easier to review as its own patch, with a commit message explaining
+the four-instruction pcalau12i/addi/lu32i/lu52i sequence being
+patched and citing the PE-COFF spec. Please split it out.
 
-> diff --git a/arch/loongarch/include/asm/system.h b/arch/loongarch/include/asm/system.h
-> @@ -0,0 +1,74 @@
-> +#define local_irq_save(__flags)                                 \
-> +     do {                                                        \
-> +             __flags = arch_local_irq_save(CSR_SSTATUS, SR_SIE) & SR_SIE; \
-> +     } while (0)
+> diff --git a/arch/loongarch/lib/crt0_loongarch_efi.S b/arch/loongarch/lib=
+/crt0_loongarch_efi.S
+> @@ -0,0 +1,182 @@
+> + * Copright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-This is leftover RISC-V code - arch_local_irq_save() above takes
-no arguments, and CSR_SSTATUS/SR_SIE are not defined for LoongArch.
-It compiles today because nothing invokes local_irq_save(), but
-will break the moment anyone does. Please rewrite to call the
-LoongArch save/restore helpers, matching the enable/disable pattern
-above.
+Typo - Copright -> Copyright (the RISC-V file this was cloned from
+has the same typo, but please don't propagate it).
 
-> diff --git a/arch/loongarch/include/asm/types.h b/arch/loongarch/include/asm/types.h
-> @@ -0,0 +1,37 @@
-> +#ifdef __KERNEL__
-> +
-> +#define BITS_PER_LONG _LOONGARCH_SZLONG
+> diff --git a/arch/loongarch/lib/crt0_loongarch_efi.S b/arch/loongarch/lib=
+/crt0_loongarch_efi.S
+> @@ -0,0 +1,182 @@
+> +     bl              _relocate
 
-_LOONGARCH_SZLONG is never defined anywhere in the tree, so this
-expands to an empty token. Please either define it (e.g. 64 for LA64)
-or drop this and rely on asm-generic/bitsperlong.h like other arches.
+...
+> +     jr                      ra
+> +     .end      _start
 
-> diff --git a/arch/loongarch/Makefile b/arch/loongarch/Makefile
-> @@ -0,0 +1,19 @@
-> +ARCH_FLAGS = -march=loongarch64 -mabi=lp64s -msoft-float
+The whitespace here (mixed tabs and multiple spaces after the
+mnemonic) is inconsistent with the rest of the file - please tidy.
 
-Since LA32 is on the TODO list, please gate this on CONFIG_ARCH_LA64
-(or whatever the final symbol is) rather than hard-coding
-loongarch64/lp64s.
+> diff --git a/arch/loongarch/lib/reloc_loongarch_efi.c b/arch/loongarch/li=
+b/reloc_loongarch_efi.c
+> @@ -0,0 +1,107 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* reloc_loongarch.c - position independent ELF shared object relocator
+> +   Copyright (C) 2018 Alexander Graf <agraf@suse.de>
+
+...
+> +    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+
+The SPDX tag says GPL-2.0+ but the pasted licence block is
+BSD-2-Clause from the RISC-V/ARM copies. Please either drop the BSD
+text (relying on SPDX) or reconcile the two =E2=80=94 as-is the file is
+self-contradictory. Also the filename in the first line still reads
+reloc_loongarch.c.
+
+> diff --git a/arch/loongarch/lib/reloc_loongarch_efi.c b/arch/loongarch/li=
+b/reloc_loongarch_efi.c
+> @@ -0,0 +1,107 @@
+> +             case DT_PLTGOT:
+> +                     addr =3D (unsigned long *)
+> +                             ((unsigned long)dyn[i].d_un.d_ptr
+> +                                     + ldbase);
+> +                     break;
+
+The value written to addr here is never read before being
+overwritten in the loop below. Dead code inherited from the RISC-V
+copy - please drop the DT_PLTGOT case.
+
+> diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
+> @@ -12,3 +12,15 @@ ifeq ($(CONFIG_$(SPL_)SYSRESET),)
+> +extra-$(CONFIG_CMD_BOOTEFI_HELLO_COMPILE) +=3D $(EFI_CRT0) $(EFI_RELOC)
+> +extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) +=3D $(EFI_CRT0) $(EFI_RELOC)
+> +extra-$(CONFIG_EFI) +=3D $(EFI_CRT0) $(EFI_RELOC)
+
+Have you built and run the EFI selftest and the hello app on
+qemu-loongarch64? The cover letter mentions efistub kernel and grub
+but not these. If not, please drop the two lines that pull them in
+until they have been exercised, or note in the commit message that
+they build but are untested.
 
 Regards,
 Simon
