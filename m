@@ -4,95 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CF4C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202F6C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4F4984A6F;
-	Thu,  2 Jul 2026 15:09:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 49CEF84A04;
+	Thu,  2 Jul 2026 15:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ip7Vx+Z/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mnXCrx7b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0C5684A60; Thu,  2 Jul 2026 15:09:32 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 3071D84A06; Thu,  2 Jul 2026 15:59:27 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18CDE84A1C
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:09:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A87418469D
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-698a9f11776so1479112a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 06:09:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782997769; cv=none;
- d=google.com; s=arc-20260327;
- b=gP/XLSL0F+C63FYy0INswRc6Nzk6uM0QCXU/Gotj3FJgfdh5A6NXk45yEsC0qfqIEi
- 5ZbPhsbeoZK3HIjWOE6xh8dLyGz48LgRly0dRXFHegHPfwwVd3cOxe3u12T9A+6gmNMp
- h0rzC/Iog9Rs2qVEIozF9IOI0HmV9Dr/+IbNjw3wlRGQWdFu6QHQFi8/x/PAK1zENiSv
- gQnW42JZLu9B/Y9ckMIFuEAS+KmUrp3h+O4DDWhhiWLTvGvEX1APSqqo4XQJj9Cnbnk5
- 6PXmVcK6lal68YA/ZyXsg6WK1S2xVQbutRNUvUZCzk+GsfDtiyWO61RSB1dNrxmgQ7Bg
- BrjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=PCYs7oWKcLoxFJtl7I7QKG2VOxXWCPlk2FnV96QT8sU=;
- fh=6hUQ+cBDEhdswFVdh7jsmENQZaH9K2EJzvSA9UTasck=;
- b=gnLegEDlK/Wx5oBT7dnwAuJ+ECogB3kDmv1oMCoyTM7Si83NCaR1dpR1h03HQBCAzp
- sbNS0qrlwlom+Ib/hNU7BOSY9V/rH01xpzCziYyN8/Adkn5ZZdtfseiEFAKjg4/PhQkC
- 3m2j7WI1xsLtdzy69PtzxncKuzlj4RPIgoo1zTfP7p3qIlUGMDTKwka+3jWGq55A3Saq
- CwlDJ3cfyQPqVSlVrbJy8XV9XC0OYtmMw2RHcAwAHenwmPDKGcObDDyAKqeJ1Wh9gk0F
- Kb/lxCcJBvm84bDag4BDkwZLANQStmnbjdRz/Q88nEh/PgqQCfLU+/snFvtaQ7UTH42x
- gRUA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7eb5a9f02e8so315513a34.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 06:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782997769; x=1783602569; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=PCYs7oWKcLoxFJtl7I7QKG2VOxXWCPlk2FnV96QT8sU=;
- b=Ip7Vx+Z/5b0zM6VM6Y/zKfvPUSZWTt323ue9sl2gdhwZ6Cn2xufJ7NDzb5YsPhai24
- ahNROC77PL8cI7Tya+ATwlCxmLbd8Hxu0mxodDQYg5F3XuF/oGueY7wpJgJsPKDd+cRx
- sMCOUip6PEsDgWNZ4uj3FBSWfy9P0CDdd7gls=
+ d=konsulko.com; s=google; t=1783000763; x=1783605563; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wr0OwQamgfDeSU+4bfbOL+EEVR47oFSwEL4eJ7Gc2Is=;
+ b=mnXCrx7bLfdg50t8WfQYDwLHogQqTkg0EK/jZqepPrkmdql6Gj/tIt6teOj9qAWpFg
+ V8RpRUGPWlt1GyVX5FPnt5othSY7iQzbLKVsjeYyzeWqFsJBj4s2MPTYDTu0o7vI0AAa
+ s6zD1lhmkX+i3M0HT4kGeFhdQo9d8V/Eym914=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782997769; x=1783602569;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=PCYs7oWKcLoxFJtl7I7QKG2VOxXWCPlk2FnV96QT8sU=;
- b=EUoPHOfGhBcXo4VvcaMTQ5b0CEU0PjF2h6qePzH5RSbgAhdqgJtbJn4vP1cBc/prJD
- sGQy4NoCspRvO9JI1i9skXO1I2OlR4a9bZzZUnCzJkE5DSqORg9d9W25HocnMLmIMTao
- I90WNQYGURMML4WUAIEAsmXSkQQi1YfdXvYCgrrFdyjhohaQS5aIWecFqy3GEDtRwitl
- PrxoU74MEWa19YuDRdLUY1M1850N8ShsHf359teGejA0ShbaEC/uMx1RSL0U25xyWHOr
- 8AOdMsHIO762VOOZQWK5WC2x/o6eqm3Xak+awRqgnsxEg19/IXTWCBJYsiWfPCNTTneZ
- 2XUA==
-X-Gm-Message-State: AOJu0Yyb0yPuJ/IGHg0JySlPN4ReXyMveyr76sQjMnW9ETQ+zVPpQzeN
- agGMOP73wELV+Q4d4wwcki8vRt7N8uQ35SV5ENe84Bm5ugmNJtfeJEaja82wQvLSSIcPowsFAPJ
- VxhhcueabhkLq6Gd2MiYedxJBqkrQyU1b74IP08FH
-X-Gm-Gg: AfdE7cmP31KU+0CoH6vgFevRvTUQnvZd+l6cHUY8bUzVZWnMcw7ywldE7RrYXbVgQf2
- DCv6TYl34mu/CCEVP8MQjCc/s3RQ511WOvUbSmpdKaUKu4G3KkbQpLMRNxS8+t1xc39gVT+rZAO
- W3lNyI/1WtVPfQp1n5tXr8nkd5cp/R3U4Qs0xJTiDz6xCZJDoXWTTfcDhHiqy5vzCUhJYZr8bvs
- qnLzygt0gCRbIOkiIiZUMFHf0OkbF0xSAmgW2u+uqFUpqUxYrRirlGBO5BFWCSRGjoLGj92AA==
-X-Received: by 2002:a05:6402:a503:10b0:698:f7d:4e11 with SMTP id
- 4fb4d7f45d1cf-698a2c60221mr1568737a12.1.1782997769422; Thu, 02 Jul 2026
- 06:09:29 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783000763; x=1783605563;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Wr0OwQamgfDeSU+4bfbOL+EEVR47oFSwEL4eJ7Gc2Is=;
+ b=U06RnBUFuZHHdsJIokb77vYrxDxxW6xoEILo84y/2iqfCy3ATrDPquZj8QDsF79zVF
+ 7WfHNP/BSjKR4nxC3TOyqU8R5vVm0iSBO9HWMyPLS6y0OJI42/t4MUOxyUGKbTov5TrZ
+ pyVolErxePt38r16pIVnkRA22FoSujmACgZ2oTMmhriLxspyGo2ds5JSAkLXpSUywm1C
+ +xNWKIKY8Qh+54oHiuPK1hyo2dpvDeRQIILqDT1MMS6xUfKCzswZcGB+9IMKPTCnA6b5
+ 4E/l4wgt9V7zlbHABfula/BHeIbzo6rIlvS7P6ntRSbN8qs9IQY+aCaNnvvZW1SjDsrF
+ YWTA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9PSNs1y/yOOALGBTy78Q20KBK8wTHvrFFDeb2dN/UutDqKRnJ+ctBrNmzGym7ckdKvGGqT7+c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxqv+7KPaJqAYXMDg4nzjWoVtz3BSdR8C2Df2BllFymGMuabc7R
+ i4jz8lWXY24nhPAPJbFMEk88lOBqNKvVXmcb4QUulkPdn8HPZk9GSC5gWD4cwYFJ7Eg=
+X-Gm-Gg: AfdE7cmr9JrqGJtC6S+PRe8YLXyGr4pU8L+fpL08F9whJnznzdKbeokwVYQhAFIkutk
+ tyb1X4OQt2AqjXvblbgf7zNKTg94culvAQf05NEeU87W0hGCzycxveNWKAfPsm0sa2T49vU1V2U
+ ecD0o2jDZapVPVhFeFDNuc7aOHFd52hNNiqtFzpsaTAtgKbDEvYzdEkMLfh9TY9qzoDIFLbFRAg
+ YqDh6MoBBGo+fmwrq5wHKUZlUp387Ef6YXcc8zbM7FJ7aYUTOva9jQZSkU9hbDA4e8VITniscag
+ yK4AwKNbG4GvBHwLNnUtqQ3aqvHg9DFYNU5TCDtpcYoGKx2BJgG5//KRuzus6i/j+7LZRwWF/rd
+ ZS0DpOocjs0Ntyhac0oLeea9XzjAJdhbi0sc5mJBVha84X3BsgCPb93QvYSqNAphIMIweDZkI9d
+ P+VJ6q7REdvPTvCzF/lFm/kE5sIM6G/bizxjwX4B2LFUxSf0VSNhbDY3ulN2d8ShjUl4Ca0g0rc
+ hZ2LL7AP3P58i9uX5t5o6qzd99TBAg9CKWFPg==
+X-Received: by 2002:a05:6830:258b:b0:7e9:ea18:d1e3 with SMTP id
+ 46e09a7af769-7eb4ccbff6emr3379658a34.29.1783000763325; 
+ Thu, 02 Jul 2026 06:59:23 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7eb545515casm2438539a34.27.2026.07.02.06.59.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jul 2026 06:59:22 -0700 (PDT)
+Date: Thu, 2 Jul 2026 07:59:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: mikhail.kshevetskiy@iopsys.eu,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andriy.shevchenko@intel.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Subject: Re: [PATCH v14 02/18] bitfield: Add less-checking __FIELD_{GET,PREP}()
+Message-ID: <20260702135918.GW749385@bill-the-cat>
+References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260702055744.2164975-3-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszTg4ZuiEdQkfTZcomtcWxSN+f1CKvE+Hikk+EHWghPaKYg@mail.gmail.com>
 MIME-Version: 1.0
-References: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
-In-Reply-To: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 14:09:17 +0100
-X-Gm-Features: AVVi8Cfq2PLM4O33SLF9VM_qvsTMwCirG2ypx4d7iH9_nZPOcoU_WSBurQX7Wyc
-Message-ID: <CAFLszTgP05iS-4dyaLbzmPGppdMmFxUQvh=JJJGnSjKJ0MnL7Q@mail.gmail.com>
-Subject: Re: [RFC] bootstd: firmware-owned OS devicetree for EBBR /
- SystemReady IR
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com, 
- baylibre-upstreaming@groups.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yGnqVlow7h2atNF7"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTg4ZuiEdQkfTZcomtcWxSN+f1CKvE+Hikk+EHWghPaKYg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,245 +123,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Carlo,
 
-On Tue, 30 Jun 2026 at 20:20, Carlo Caione <ccaione@baylibre.com> wrote:
->
-> Hi all,
->
-> This is a design RFC, not a patch series. I would like to agree the approach
-> and the devicetree binding on the list before posting code, because the
-> mechanism touches both bootstd and the EFI loader and introduces a new binding.
->
-> A working implementation exists and has been validated on hardware (details at
-> the end); I will post it as patches once the design here is acceptable.
->
->
-> 1. The problem
-> ==============
->
-> Platforms that follow EBBR / Arm SystemReady IR treat the OS devicetree as part
-> of the firmware rather than part of the OS: the base DTB and its overlays live
-> on a firmware-owned partition and are updated independently of the operating
-> system, instead of being shipped in the OS image or on the EFI System Partition
-> (ESP). The firmware is expected to load that devicetree and hand it to the OS
-> (via the EFI configuration table).
->
-> U-Boot today can source the OS devicetree from its own control DT, from the ESP,
-> or from an EFI Boot#### load option, but it has no generic way to assemble it
-> from a firmware-owned partition. As a result vendors carry out-of-tree machinery
-> for exactly this. For example, MediaTek ships downstream `dtbprobe` (assemble the
-> DT from a partition) and `fdt authndtb` (authenticate it) commands. The goal of
-> this work is to provide one reusable, vendor-neutral mechanism in mainline so
-> those downstream commands can be dropped.
->
+--yGnqVlow7h2atNF7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For Mediatek specifically, I am hoping to eventually upstream support
-for a load-only FIT (the spec supports it) so that you can load the DT
-from a firmware partition, then still boot the OS (without a DT). This
-works with FIT, but would need adjustment if the OS is actually an EFI
-app.
+On Thu, Jul 02, 2026 at 11:53:05AM +0100, Simon Glass wrote:
+> Hi Mikhail,
+>=20
+> On 2026-07-02T05:57:27, Mikhail Kshevetskiy
+> <mikhail.kshevetskiy@iopsys.eu> wrote:
+> > bitfield: Add less-checking __FIELD_{GET,PREP}()
+> >
+> > The BUILD_BUG_ON_MSG() check against '~0ull' works only with "unsigned
+> > (long) long" _mask types.  For constant masks, that condition is usually
+> > met, as GENMASK() yields an UL value.  The few places where the
+> > constant mask is stored in an intermediate variable were fixed by
+> > changing the variable type to u64 (see e.g. [1] and [2]).
+> >
+> > However, for non-constant masks, smaller unsigned types should be valid,
+> > too, but currently lead to "result of comparison of constant
+> > 18446744073709551615 with expression of type ... is always
+> > false"-warnings with clang and W=3D1.
+> >
+> > Hence refactor the __BF_FIELD_CHECK() helper, and factor out
+> > __FIELD_{GET,PREP}().  The later lack the single problematic check, but
+> > are otherwise identical to FIELD_{GET,PREP}(), and are intended to be
+> > used in the fully non-const variants later.
+> >
+> > [1] commit 5c667d5a5a3ec166 ("clk: sp7021: Adjust width of _m in
+> >     HWM_FIELD_PREP()")
+> > [...]
+> >
+> > include/linux/bitfield.h | 36 ++++++++++++++++++++++++++++--------
+> >  1 file changed, 28 insertions(+), 8 deletions(-)
+>=20
+> > Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+> > Link: https://git.kernel.org/torvalds/c/5c667d5a5a3ec166 [1]
+> > Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
+> > Reviewed-by: David Lechner <dlechner@baylibre.com>
+>=20
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> Please can you add your own Signed-off-by at the end of the chain?
+>=20
+> It's a bit confusing that you seem to refer to Linux commit hashes in
+> the commit. So maybe this should have a Cherry-picked-from: line
+> indicating it came from Linux?
 
-I wrote a post about this challenge:
+We don't use Cherry-picked-from (does anything?), we just mention what
+the upstream commit was.
 
-https://www-concept.deinde.dev/blog/devicetree-in-firmware-or-packaged-with-the-os/
+--=20
+Tom
 
->
-> 2. What a solution has to do
-> ============================
->
->   - Assemble the OS devicetree (a base DTB plus a list of overlays) from a
->     firmware-owned partition and install it for the OS.
->   - Install it on *every* EFI launch path, not just one. SystemReady IR boots
->     through the UEFI boot manager, which in U-Boot does not go through the
->     per-device EFI bootmeth, so a per-device-only hook is not enough.
->   - Support secure boot: when the firmware devicetree is signed, verify it, and
->     never silently fall back to an unverified devicetree.
->   - Support A/B firmware partitions.
->
->
-> 3. Proposed design
-> ===================
->
-> A new bootstd helper, `firmware_fdt_load()` (`CONFIG_BOOTSTD_FIRMWARE_FDT`),
-> assembles the devicetree and returns it; the EFI launch paths install it via
-> `efi_install_fdt()`, exactly like any other devicetree source.
+--yGnqVlow7h2atNF7
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This sounds reasonable to me.
+-----BEGIN PGP SIGNATURE-----
 
->
-> 3.1 Where the source is described (new binding)
-> -----------------------------------------------
->
-> The *location* is described in the control devicetree. The bootstd node carries
-> a `firmware-fdt-source` phandle to a node that is a child of the media device
-> that owns the partition, and identifies the partition by GPT type UUID and/or
-> name:
->
->         bootstd {
->                 compatible = "u-boot,boot-std";
->                 firmware-fdt-source = <&fw_fdt>;
->         };
->
->         &mmc0 {
->                 fw_fdt: firmware-fdt {
->                         compatible = "u-boot,firmware-fdt-block";
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakZusgAKCRAr4qD1Cr/k
+Co2HAQClRdURvxJcSwvi8Mqd5Rwnpk50JuyabRNNq+KJzATUEwEAqLZEqGcuD7gS
+N9StW7b1sQW+CnD3gw7ZLl0XwznQqwg=
+=W3Na
+-----END PGP SIGNATURE-----
 
-Does the -block suffix indicate that it is a block device, rather than
-a filesystem? How does this cope with the fast where multiple DTs are
-provided for different models?
-
->                         partition-type-uuid = "....";   /* GPT type UUID */
->                         partition-name = "firmware";    /* optional */
->                         extra-size = <0x3000>;          /* overlay headroom */
-
-This seems like a parameter which would be better handled by U-Boot itself?
-
->                 };
->         };
->
-> 3.2 The dynamic parameters (environment) and board defaults
-> -----------------------------------------------------------
->
-> The source and its partition policy stay in the control devicetree (section
-> 3.1). The values that change with the OS image rather than with the hardware are
-> layered:
->
->   - the control DT describes the source and the partition policy;
->   - the board default environment carries factory defaults for the static values
->     (`fdtfile` and `dtb_path` for the base DTB, and the `fdt_addr_r` /
->     `fdtoverlay_addr_r` working addresses), so a from-source build boots and
->     `env default` restores a loadable configuration;
-
-I wish we could move away from filenames and use compatible strings
-instead, as FIT does - this is how the FDT spec is written.
-
->   - the (firmware-owned) stored environment overrides those at runtime, and
->     carries the genuinely dynamic values: the overlay list (`list_dtbo`) and the
->     A/B partition pin (`boot_dtb`).
->
-> As an alternative, the stable defaults (`fdtfile` and the path) could instead be
-> expressed as optional properties on the source node, keeping them in the control
-> devicetree rather than in the board default environment. See the open questions.
->
-> 3.3 Where it is installed (both EFI paths)
-> ------------------------------------------
->
-> The helper is consumed by both:
->
->   - the per-device EFI bootmeth (`bootmeth_efi`), and
->   - the EFI boot manager (`efi_bootmgr_run()`),
->
-> each installing the result through `efi_install_fdt()`. That is the convergence
-> point all EFI launches pass through, so the firmware devicetree is installed
-> regardless of how the EFI application was started, including the boot-manager
-> autoboot path that SystemReady IR uses.
-
-What if you run GRUB?
-
->
-> 3.4 Fail-closed error semantics
-> -------------------------------
->
-> Once a source is configured (the node is present), the result must be
-> deterministic.
-
-Yes, this is very important.
-
- `-ENOENT` means *only* that no source is configured, in which
-> case the caller falls back to its normal devicetree. Any other failure to
-> assemble a configured source (unresolvable device, no matching partition, read
-> error, invalid blob, failed signature) is fatal for that EFI launch path: a
-> missing or bad firmware devicetree is never silently replaced by another source.
-> Missing environment metadata for a configured source is treated as a
-> configuration error (fail closed, or satisfied from the board default), never as
-> "no source".
->
-> 3.5 Optional secure boot
-> ------------------------
->
-> With `CONFIG_BOOTSTD_FIRMWARE_FDT_FIT` the base DTB and overlays are signed FIT
-> images. Each is verified by reusing U-Boot's existing verified-boot policy
-> (`fit_image_load()` with verification enabled and a required key in the control
-> FDT), and the verified flat devicetree is extracted in place. A non-FIT file is
-> rejected so an unsigned devicetree cannot be installed. This reuses the existing
-> trust model rather than adding new crypto, and replaces the downstream
-> `fdt authndtb`.
-
-OK.
-
->
->
-> 4. Why these choices
-> ====================
->
->   - Describing the source in the control DT, as a child of the media device,
->     follows the existing bootstd guidance ("if a bootdev needs configuration,
->     add it to the DT as a child of the media device") and the VBE precedent. It
->     keeps the mechanism generic: no GPT UUID or board constant in the C code.
->   - Splitting identity (control DT) from dynamic values (environment) and static
->     defaults (board default env) keeps the firmware in control of what changes
->     per OS image, while still letting a plain `make <board>_defconfig` build
->     boot.
->   - Installing at `efi_install_fdt()` rather than in one bootmeth is what makes
->     this SystemReady-IR-grade: the boot-manager path carries the firmware
->     devicetree too. A per-device-only hook leaves the autoboot path on the
->     control DT.
->   - Fail-closed is required for secure boot: there must be no path where a
->     configured, signed devicetree silently degrades to an unverified one.
->   - Reusing `fit_image_load()` keeps a single, reviewed verified-boot path.
-
-Agreed on all of these.
-
->
->
-> 5. Alternatives considered
-> ==========================
->
->   - A global bootmeth ordered ahead of the EFI boot manager (a structure used in
->     an earlier proof of concept). It works for autoboot but does not converge
->     all launch paths; `efi_install_fdt()` is the real single point.
->   - A per-device bootmeth hook only. Simpler, but misses the boot-manager
->     autoboot path, which is the one SystemReady IR uses.
->   - Keeping the mechanism vendor-specific (the status quo). Does not help anyone
->     else and keeps the command out of tree.
->
->
-> 6. Open questions for the list
-> ==============================
->
->   1. Binding naming: are `firmware-fdt-source` and the `u-boot,firmware-fdt-block`
->      compatible acceptable, and is the control-DT-described-source shape the one
->      you want?
-
-Seems OK.
-
->   2. The configuration boundary. The proposal keeps the source and partition
->      policy in the control DT, puts factory defaults for the filenames and the
->      working addresses in the board default environment, and lets the
->      firmware-owned stored environment override at runtime (and hold the dynamic
->      `list_dtbo` / `boot_dtb`). An alternative is to express the stable defaults
->      (`fdtfile`, a path) as optional properties on the source node, so they live
->      in the control DT rather than the board environment. Which does the project
->      prefer?
-
-See above...better to store a compatible string than a filename.
-
->   3. The `efi_bootmgr_run()` hook: is installing the firmware devicetree on the
->      boot-manager path acceptable to the EFI maintainers, and is that the right
->      place?
->   4. The fail-closed semantics: a configured source that cannot be assembled is
->      fatal; only an absent source falls back. Agree?
-
-Yes
-
->   5. Should the signed-FIT verification be part of this series or a follow-up?
-
-You likely get this for free, so I suggest including it.
-
->
-> Thanks for any feedback. I will follow up with the patch series once the binding
-> and approach are agreed.
-
-Regards,
-Simon
+--yGnqVlow7h2atNF7--
