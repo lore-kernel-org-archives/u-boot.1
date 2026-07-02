@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E34B3C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F25C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:25:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FCD383FEE;
-	Thu,  2 Jul 2026 12:25:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D1ED8849AC;
+	Thu,  2 Jul 2026 12:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZArjS1s+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UKcHkmSh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92A56847C3; Thu,  2 Jul 2026 12:25:11 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 9600A849B1; Thu,  2 Jul 2026 12:25:54 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F87A80398
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:25:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 933CB84987
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-697763eeafcso2725243a12.3
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:25:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782987906; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-698ab9aae16so1306561a12.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:25:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782987952; cv=none;
  d=google.com; s=arc-20260327;
- b=LLYvKvrOSGK7DaGlJi9Fv3ToQJVL2Zfl//8ADvQUgEyDxJBOXAKU4dNrFwPAbvJrg8
- Hyzxmgstq3+0D5IUCqaVdbR56BHvu6v/ssjIAnAMfe3h88xoESqpemfu8gTQD4pKgIkW
- N8rWgKn53WITs6h1MrQyICOyCILKUuA6IE4zXgCR4Oxno13TVdeMU4CtERuE+Cxbqbn7
- yZm7zDIk8IZOCa4rIn0mP52N/s6Roh/ppG0YSWE49UCFu77RxtxKyQMYhVxdaNA5F2RL
- SkR7RGGwaKyjBEAnqO3gnFcc+pjzirZmcwcTpR7NnzsjIyg1E1p6YVcnk6TRjbKp3roN
- ZyjA==
+ b=K/FMER4G01IBcdjinBBfpHeu1v/8VS6qrPg2YFBRmNgHLct+1bURppjlwPqFzU5k3p
+ vW3ZkbS7Nm8OUCHYGs79zWfIUw1XCZQzNw3nrb7w3RV7Lj3k+0+kVPOV6JuNUatEfZqo
+ GoC6UjYs479UkGYU8AZ4SvqmF8Fr/wKhJ8kjeQxy0B8omZmL4SJEa0e/0NtLoIPijtXY
+ RawvFguFXgm2LZuEODRaSIS2/96DImcM5/JuZEEPUC2XbcrPIAQGViZfteBdPDY+hUam
+ rkDdXa+VxEAQx/pzSxUr9wayuuRgrn4XzEwsKBBlTzLQO4Qy6GiWA3JSqAGJvPZpbYqE
+ VJPg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
- fh=cN3TE29YQ0/F2+YOokb06UaWuBsAd+9btxPUPe+29Jw=;
- b=k2IAPTXIYOMcdk+Q3GdMZx5WMi/XNo75JLe+jMMu4+5Wxi+yVsbe3qMt/VSp9DYMFa
- EW/3d93HMElu2T9fhK+MatWIEMqqxCkyY346OoJWE64WWmptcIXcaGcoe72Qp6/xjsqD
- DdW1VTLPNjecm8pwbwRbj2C5saYho+tBrVu9/PI1UMdVsFryOGQuqCpXxU+ZC0QzUYbH
- OEaAvPsyHxxewY9NsLYZLOrhS7ePVc3Syatx6QTUMzbn9L9yXcQkSBBKtVmTbif5qw7k
- axasbI5RgfJiNyTYe8spLMcHFJfrloq3gyc9K5vhC/ZP1YepoarPsbqOqNY3308WT92I
- zOGQ==; darn=lists.denx.de
+ bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
+ fh=0QEfosCPx3otTY3mplChiH+h0mnPXmsrtfAPHD8uy/M=;
+ b=sRTLjJJMB0Y2TqHRSOw0ZByoKYEaGss3shM7pa9ADlS8j6nkQayXdIHi6bUbl/rlzk
+ vYHN5WJZDITRMyWCZUk/YPBtkQDS4dqnc2sThfCf2g2LAAggtr1zT7CSL3o4Xz+T0dzD
+ J5RVUbR/ecUNv8N8IN5/y4oNt6ZDCCJf+m3NdP8iqGy2yAZYgMthIsmpU1nDisuKZiVb
+ byZMYMyIO5H+0ne2YHmgkBCPP+qP6Z33dY3dFy+Vwe4hhozxcIVO45Dm+z5BqugXTT+X
+ Z2yu7SaJDmvcKnkxobcFqbdU347eACQ6Qvm8GuRlUURSQgnlOjlcxbawTNMFmWusGRh7
+ pP7w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782987906; x=1783592706; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782987952; x=1783592752; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
- b=ZArjS1s+MqMRc4UbwBo3aTvEDCOgYnBOt4nqWsUK4zpdY6DE8slCDGx3Ykx7eqzBSB
- 9MY62XCILMjIdTjfw+vPl2TaK53x0UeccwxAsBdRCkBnjK/JmEqzdwx/OkBtvyVKr2bW
- CjzyIVqg/2dZaZDSgm8e1pTBn7cfL5Af6o7z0=
+ bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
+ b=UKcHkmShlX5AETCFrjyzS2R7m98iHw/n1Bmtfj+zCmBSv5hlT3ZiguZ1sbz1x5YiJP
+ Y5pK90Jydd7IH8DmixVlimyZO5oBKMPcOufdP+nPZGMqjyGTDRR6zDjMLqtZmYTlDvoX
+ zL/ntjpAENcqvzY58Sjglm20gQyPXNMUfoWAg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782987906; x=1783592706;
+ d=1e100.net; s=20251104; t=1782987952; x=1783592752;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
- b=Yi6+mrisppCuFBxN9Zwt7D0baI6Ej2gKcWYzG4MT/s2wBf9pe0bo6tfsI6hhNtp/sk
- tcbUokM3Ni/i/8E1ADMSXCvBqTUpjDC6Pwshz0T7fQsbvTsodsOK0qRF+SCbgvZmOb3Y
- 3Sz5fo6eWJAJSIAgJwr8Y13w39iMlhivbqBU/xqxf/RY2p4ja8D4BWP+ncZpA5rEU7OI
- oRiHQ6B/rUUDDTfvpwiDZCGys/qEUGZn/TtSfcPgo3ELdGPJ6e++ZsQDkLrT21i0tR52
- YGmHQUYM/eNvlToXi+YENBkGfoPzmYgF+8tOZYztkCh0tW5x5aQ5q+mjoqDTD3L/PJAO
- 4h8g==
+ bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
+ b=SDlYZmIQYPt8Dr8n3oQgf8/cfzDFv72gwF8TMIKEJOTirRBqhNmeyfxDRUCN6zMBT7
+ u9gNaCwlc6bgXuW3zBpoZwMm2nSc/Knj7WdD0PrOmdr531UclETf9iMYkVGUXUNslqZL
+ UgaYUiksYrL/yC6kpBFEVvsoGQvFmfs0J1aQQdG7GgfWh0lrJSWiHxzfvwTUmkF9CWkG
+ E8lVd1yLXgbSomdnOR7qjm5/csgy0Fqp26ZHkVfjBFHTW4XFC59Sh7u1HQA2wEcbmdWc
+ DNH6P8W/e/9+LOGZe8rOFb9QX3WoHT8bRbQWhkfRAHQBpsIU6eOy9E1Z5v3ATIlMkVgc
+ zYFA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro/NXtFVvpXNcjzdCu998WPB8OWMrHN+B3pPfWJsxP+VvzmuPU8ku4lDK4dKo1MvoptHPfZI/8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz34+qlZjgFIq4/0mZUhIad7WzUkqCzL191wzIC/dCZsgFcd2MB
- qIX3TEUUOwyhRghguss3AV2Hz7tgKnE7i2n1WYDvl3FuQbUbQC1XGXs5fS1P4I/xNT5x3K0wugp
- h0UKUNRmdjHQe8TsKVEBsBQJIPXP/clHxZHhjm/4gye9Cjmd2zey1XGgraRE=
-X-Gm-Gg: AfdE7cngXEqZroZgUFOJ5TIaXm+SIezi4VqW3iEvwCV75bi1e9sP+n4kzOOY/gbAxyc
- BS8fJrWdd9JlAFVX2E2elDdbcVnEaX9pUcITD7QJTBxikupcGkriB86aJkLAfV5N8/kRywF+tWH
- Uk74dWxABgwguidK6G3IqERL3OZLHfjQHAsJ2+Pc3QHIanEncJiL3/yqzoywTnjw8egU+EFINKK
- 1DEgjy8mG/MUhICUNG0C27RJz/5N1RcTdgcCFQw0W18/cQYOjkeHxUFOxmG4HTlc/kbeQ9orA==
-X-Received: by 2002:a05:6402:1143:b0:695:572a:7abb with SMTP id
- 4fb4d7f45d1cf-698a2cd163dmr1507999a12.22.1782987906635; Thu, 02 Jul 2026
- 03:25:06 -0700 (PDT)
+ AHgh+Rq5/3uwy4vJh52xVs7TJZOcok50UVX5vD3NdYewiARBI7qLbczfGI5N0aPg+u6YzNOqliqBaao=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwjOyZQrpUJem9j6jVCVlUDktrS3nDdD/0ipqqpfrk+yzfhrS4
+ FpQweAF74vF+wHnMHQo7xPnjhLD7FBfDFzDnYobSIDDCrOaYp2Fjo8wgpKwJ7xqrcOK5tRypQGo
+ zYmmdra5NRYO+8rauBkoFKbu+ttEWRObCRA7I/MMn
+X-Gm-Gg: AfdE7cnF7sZPuIdUCHaCDRsmCPeBxqVxCsLYa2tkDWM+kG6IYtUZJWxBxvcf0bTOL8e
+ qZmg8e/R8TRF28Fh3KGZf7mmT5g0KOUB6c409gq7/ozC2WS3v78oZK2eB2OeJlMl3XMsQ8iMyxE
+ INRyb8E8rlwFOGQ71V94xfL4WCd7eF4UZuV9Hp75LHm35VT3W9hxGK9SL3p6O9FIOgzFFbcwdJN
+ Ux324U0+vJVd1NWZ/K1QetUcYNc2VUEjz8rwyrAZH1tC8ujIJtWT77bTyQI0cPSN9oZ95vLxg==
+X-Received: by 2002:a05:6402:a292:10b0:698:99bd:8b1 with SMTP id
+ 4fb4d7f45d1cf-698a2c6d606mr1419292a12.10.1782987951976; Thu, 02 Jul 2026
+ 03:25:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-5-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-5-me@ziyao.cc>
+ <20260701111808.870705-9-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-9-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:24:53 +0100
-X-Gm-Features: AVVi8Cedc3Y9zgmm8amNGuNTE4UNsiHmpxaw_qhv5CHQ-3sLDJV-kNSaVPK3K5E
-Message-ID: <CAFLszThFEdHOZf6O=X7r8x9ZDCqNAuSuB5GEHX4a6NdLYgiF9w@mail.gmail.com>
-Subject: Re: [PATCH v2 04/16] elf: Define LoongArch bits
+Date: Thu, 2 Jul 2026 11:25:39 +0100
+X-Gm-Features: AVVi8CdIwm48_8LdUUDaicDhjCocYnsh4flJrGpG-Ro3MM9D1J3aEERUnW26b7U
+Message-ID: <CAFLszTh8G5hxAOUocaaXffKA=7PM5sp90M3+JBsieG908nFBBw@mail.gmail.com>
+Subject: Re: [PATCH v2 08/16] LoongArch: CPU assembly routines
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -114,29 +114,111 @@ X-Virus-Status: Clean
 Hi Yao,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> elf: Define LoongArch bits
+> LoongArch: CPU assembly routines
 >
-> They all come from glibc's elf.h
+> start.S for initialisation, smp_secondary routine for
+> a spin-table like interface for secondary cpus.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> include/elf.h | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+> arch/loongarch/cpu/Makefile        |   4 +
+>  arch/loongarch/cpu/cpu.c           |  27 ++++++
+>  arch/loongarch/cpu/smp_secondary.S |  55 ++++++++++++
+>  arch/loongarch/cpu/start.S         | 170 +++++++++++++++++++++++++++++++++++++
+>  4 files changed, 256 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
+> + */
 
-> diff --git a/include/elf.h b/include/elf.h
-> @@ -225,7 +225,8 @@ typedef struct {
-> -#define EM_NUM               92              /* number of machine types */
-> +#define EM_LOONGARCH 258     /* LoongArch */
+Good to keep that copyright (if that is where the code was derived)
+but you could add your own too.
+
+> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
+> @@ -0,0 +1,27 @@
+> +#include <command.h>
+> +#include <cpu.h>
+> +#include <cpu_func.h>
+> +#include <dm.h>
+> +#include <dm/lists.h>
+> +#include <event.h>
+> +#include <hang.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <asm/system.h>
+> +#include <dm/uclass-internal.h>
+> +#include <linux/bitops.h>
+
+Most of these are unused - only printf() and hang() are referenced.
+Please prune to the minimum required.
+
+> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
+> @@ -0,0 +1,27 @@
+> +#if !CONFIG_IS_ENABLED(SYSRESET)
+> +void reset_cpu(void)
+> +{
+> +     printf("resetting ...\n");
 > +
->
->  /* Version */
+> +     printf("reset not supported yet\n");
+> +     hang();
+> +}
+> +#endif
 
-Two blank lines are left between the new define and the /* Version */
-comment. Please drop one.
+Printing 'resetting ...' immediately followed by 'reset not supported
+yet' is confusing. Please drop the first message.
+
+> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
+> @@ -0,0 +1,170 @@
+> +call_board_init_f_0:
+> +     /* find top of reserve space */
+> +     PTR_LI          t1, 1
+> +     PTR_SLL         t1, t1, CONFIG_STACK_SIZE_SHIFT
+> +     PTR_SUB         a0, t0, t1              /* t1 -> size of all CPU stacks */
+
+The comment is misleading - t1 holds a single stack's size, not the
+combined size of all CPU stacks. Please match arch/riscv/cpu/start.S
+('top of stack of first CPU').
+
+> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
+> @@ -0,0 +1,170 @@
+> +     move            a0, zero                /* a0 <-- boot_flags = 0 */
+> +     la.pcrel        t5, board_init_f
+> +     jirl            ra, t5, 0               /* jump to board_init_f() */
+> +
+> +     move            sp, s0
+
+s0 is never assigned before this point, so if board_init_f() ever
+returned here sp would be zero. Today this is dead code because
+jump_to_copy() reaches relocate_code() via a normal C call, but the
+instruction is misleading. Please remove it, or if you intend to
+mirror the RISC-V flow, add the missing 'move s0, a0' after
+board_init_f_alloc_reserve() and a comment explaining what s0 holds.
+
+> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
+> @@ -0,0 +1,170 @@
+> +     csrrd           t0, LOONGARCH_CSR_CPUID
+> +     andi            t0, t0, CSR_CPUID_COREID
+> +     LONG_LI         t1, BOOTCORE_ID
+> +     bne                     t1, t0, secondary_core_loop
+
+Stray extra tab after bne
+
+> diff --git a/arch/loongarch/cpu/smp_secondary.S b/arch/loongarch/cpu/smp_secondary.S
+> @@ -0,0 +1,55 @@
+> +1:
+> +     /* Query spin table */
+> +     idle 0
+> +     nop
+> +     iocsrrd.w       t0, t1
+> +     beqz            t0, 1b
+
+Is the nop after idle 0 required by the ISA (to guarantee the
+wake-up completes before the load) or just padding? A
+one-line comment would help.
 
 Regards,
 Simon
