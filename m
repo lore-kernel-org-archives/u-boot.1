@@ -4,103 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F954C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 19:22:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C32AC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 19:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79E5F848BF;
-	Thu,  2 Jul 2026 21:22:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B4AB84857;
+	Thu,  2 Jul 2026 21:58:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hFJ8p+Fx";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="BVU4MhTA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47A1E848F3; Thu,  2 Jul 2026 21:22:37 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EF854848BF; Thu,  2 Jul 2026 21:57:22 +0200 (CEST)
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84A684857
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 21:22:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E607484409
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 21:57:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6989c0ec3c5so3927856a12.2
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 12:22:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783020154; cv=none;
- d=google.com; s=arc-20260327;
- b=HKxR1k9+Byc5OeQ47FpKo1wASkJPwgkBeUpVh3b98kCbR7c/oaUWpBSW5s5rivmZO2
- zgJYQW4UPU5shn6qXzL0w+PFtCk6By8J607RiPsVldrRWRYVO53bqO7xqXEmDyhHG895
- vtn9nelGDovpepEAVlGtTGpOUevtViozxsndRUVgpy1ZVqbUBC1ZM8050eK0iVm3bUjG
- Dzxlqib7/EmNL2NQRenmOK9eUF+PF8kMMpBpMbm657xk3pkQMhcRcrJeBRPwrNbPtLDk
- hUY64WVQ8YdONJGRIFRD/iJUAqz/02v8HXDKTDxnXxYBSx2illXaqXTC7na2k7+seFPm
- 6l5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Gfyq95RY59kCfZq/FSzBsc7iVUiZEa3AG28zmV6amcQ=;
- fh=Eevq1XmMZbnSOBE3e9BDfyHvcewPP/nMCv3AnLu6PoM=;
- b=okA6CQsNsaZdikdHFGH84WnkFwdW0YymX684IV+ABFDXdX/zp7N8nUVnd1ehUm61kV
- ucqp0tjbaH2JoKOekLB0wd4YfVW4CMFHGwqgvEc3jbMHTa6pmiviM0ReC8EAUAR/dOan
- 4gqJb6pCCharEp1d3oJUQuucRC3HYQ7YirLWmffVCF6VWDzHOUETOkphhH/b2DNzP8xg
- Mgl8UG3X0DCzquejttXVvtivOW1vHvV/vVAgAT8MPNadA4pxhd6/QX65NuH3qrHipJIQ
- R0D0/f5jzoXyDHi4jjDfOTxYUb9B01ij73Uz6iIXlOJoAAyy/3oH7PVab7unow0VAav/
- +1Dw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783020154; x=1783624954; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Gfyq95RY59kCfZq/FSzBsc7iVUiZEa3AG28zmV6amcQ=;
- b=hFJ8p+FxB2Hlq4iz6V9v2JDw2zdu8xd26rcokXDnf/TohYvGtGdFY7qGxgScmnT0UL
- 6ZUA09G5UzyGM7SblsX3Sx/qhbv9f6On6BwwCsnFrMefjz7P2CWS/rhyLlD3iX7WgYbk
- JqEeC4xcTH2oFdFwhGTQo8KiDj3oegfN/CORg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783020154; x=1783624954;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Gfyq95RY59kCfZq/FSzBsc7iVUiZEa3AG28zmV6amcQ=;
- b=ooG1gbTkzlHaSak9gqwdbzJ+GVFjVmRD0Sh9ZBOwZScCKN72nlgKEvuTrckOK+Oq8h
- IOVhKtwKzp+NIB8IdBIWwaLrEXdAriyflrn/3/U3tZw+I26vSs4XTQ9ZBDtAts1Uovjj
- Yn+/a4+XC3KeE9JjIC/QXQqEMeNNtV0Hr7lkrus7vo334HaJJM+r08NhQJmMyzmWuEWy
- 6CbFanFoyGLOF08uYrElGCOI3f6j3BjkAtbaYfWMaCXQ1hXdf8Jw3ZFnGdC0oGtR9dlv
- nI4E6q7ll1Zt4lzodFqmQPUpM3HHraO4e/pPdSL1MA0W4z+y2kR/Tl1pP0/McfHygwb6
- /b6Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rof0vo8Mz1iQ9zIQbijFWYW09X6K70yYZPfI79sKtw/MMyA7pN7tI2npzK5zF3oVcmDmhWcVHM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyreYMas5m8pjUHT7TrbfbI4+JMESK1UascOusVquctcORXkalm
- uXisGwCIaXp5GiS3BsrtC9phHdJitaWfBP7aIPafiJ6oUlsnIcTkvAXEYGx5KMFE2xn0CK8Ts4B
- bQo/WdSuGe/NqfiU2yX7wCcj1G7Vmij6uefV4ouyw
-X-Gm-Gg: AfdE7cnJNLJ9GQI/kidV422ZIpVE8zuf8R1nQXCQX6m2tMT15n1KM8773uCIeEhviPd
- /fppuuD5xwCI1Mx6AOuZb7MVtf7UHnxi1XxXuEypefNRe4q5UUNVJh9cbxL06nmvlBt+hooGW5E
- x1hwLyBdkjXU6VvbJDzd8reZb3dLhyZ9Cwd6RFEwRkUWZzBwQ7NMJ3S2800XyFhejoP1VFbmSrn
- xHeJ1xRa/0I0Wp79q1EL7IM3yzmoTgCmdjdhLWpOneXdNGjl9fBdvU60KKR1unsVQ7Zp+afMQ==
-X-Received: by 2002:a05:6402:13cc:b0:698:b8a0:d413 with SMTP id
- 4fb4d7f45d1cf-698b8a0d565mr1360879a12.12.1783020154215; Thu, 02 Jul 2026
- 12:22:34 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from localhost.localdomain (unknown [78.242.171.172])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id 4983C19F74D;
+ Thu,  2 Jul 2026 21:56:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1783022240;
+ bh=I8CBnbRaxGzX9yN8BdwBgcNxo4e86hZYnz5wBLx01X0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=BVU4MhTAFSMGYx1+7tq6Rn/uUZ6sh8uJe3fiHObEqfkYcRO73MTmF3Xc15Hb5obIf
+ NHUR3GKoXjLW5IZaArVgc2CKtMczt3AoANHbsqa2SmWsF42PZd0iyWfVYG4IbRsNRM
+ IGXrcfYUEP+o7xTqIPjo9Dnd0vG6H2E6ZYNmxlxBH9rJZmHUmmbakP3C3Bxq/+2lfJ
+ Pq1aS+gMC2+rWjD6g8MxM/b5Vi+/1IrijmU0gTXn4ikernf6FSUh9EC+p/eZmnhfJP
+ IMfJjtWarb94VkAhuubf/ZbszJOEp8zZEqdABMJor7LPVGBvEMaj4XaQ5nQPYu+n32
+ JHwhp4s9TtJwA==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.denx.de
+Cc: Vincent Jardin <vjardin@free.fr>, Alexey Charkov <alchark@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Bo-Chen Chen <rex-bc.chen@mediatek.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Fabio Estevam <festevam@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Heiko Stuebner <heiko@sntech.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mateusz Furdyna <mateusz.furdyna@nokia.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymond.mao@riscstar.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/7] pmbus: PMBus 1.x framework, CLI,
+ regulator and thermal support
+Date: Thu,  2 Jul 2026 21:56:02 +0200
+Message-ID: <20260702195619.1857591-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <"<20260702171618.1773206-1-vjardin@free.fr>">
+References: <"<20260702171618.1773206-1-vjardin@free.fr>">
 MIME-Version: 1.0
-References: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-In-Reply-To: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 20:22:22 +0100
-X-Gm-Features: AVVi8CcNPEIi195gEa0aEnc86ct6kJnqgseOsnPyadZkt71dm32mqmjrnQ2rJhk
-Message-ID: <CAFLszTjZZMpu=2qEUgPSfnYBuj3uSvvcSf3NTvy_6keuYh42hQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] drivers: sysreset: revert support for args
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 02 Jul 2026 21:58:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,92 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On Thu, 2 Jul 2026 at 19:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
->
-> The args support for the sysreset uclass contains a logic bug. The first
-> sysreset device implementing the request_arg callback will consume the
-> args, not support the specified arg and thus return -EPROTONOSUPPORT
-> which will stop the iteration over all sysreset devices.
->
-> This is an issue if one has multiple sysreset devices and each with
-> support for different (valid) args. If a sysreset device implements a
-> -dummy argument and another -foo and one calls reset -dummy on the
-> U-Boot CLI, it'll depend on which sysreset device will be attempted
-> first. If it is the one implementing -foo, it'll return it doesn't
-> support the argument with -EPROTONOSUPPORT in which case the device
-> implementing -dummy will never be attempted and instead we'll do a cold
-> reset which is very likely not what's expected.
->
-> I suggest to either add an additional return code for the case where the
-> sysreset device knows it isn't supposed to handle this argument because
-> it isn't among the ones it supports, and thus we try other sysreset
-> devices until we find one that says it tried and either is in progress
-> or couldn't realize the request, or no sysreset device supports this
-> argument and we end up doing a cold reset (but should we even try to do
-> a cold reset if the type of reset requested by the user isn't
-> supported?). Or just don't try piggy-backing on the reset command and
-> have a new command instead?
->
-> Maybe I misunderstood something or misread the code, so please correct
-> me if I'm wrong.
->
-> We've tried bringing up this issue multiple times over the last
-> month[1][2][3] but it seems like we're left on read. This is the last
-> resort to get attention on this patches, hopefully we don't have to get
-> through a revert a few days before the release though there is only two
-> working days left before the release. Sending a revert as requested by
-> Tom[4].
->
-> I've not even build tested this, only had a cursory look at what to
-> revert so maybe I'm missing some patches or breaking stuff up. It's late
-> here and I wanted to give a chance to people in Americas to have a look
-> at this today, or people in Asia tomorrow morning before I come to the
-> office. I don't have time to wait for the CI to complete, but it's
-> running here: https://source.denx.de/u-boot/contributors/qschulz/u-boot/-/pipelines/30604
-> Yes the commit hash is different, I rewrote this cover letter to include
-> the link to the CI pipeline.
->
-> [1] https://lore.kernel.org/all/667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de/
-> [2] https://lore.kernel.org/all/4fc15188-3de9-4345-85e9-d594efe9bdd5@cherry.de/
-> [3] https://lore.kernel.org/all/20260623165021.GJ382693@bill-the-cat/
-> [4] https://lore.kernel.org/all/20260702174613.GC749385@bill-the-cat/
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Quentin Schulz (6):
->       Revert "qcom_defconfig: enable psci based sysreset"
->       Revert "cmd: boot: fix edl being shown when not supported"
->       Revert "doc: usage: cmd: reset: specify when the -edl option is available"
->       Revert "cmd: boot: Add '-edl' option to reset command documentation"
->       Revert "sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs"
->       Revert "drivers: sysreset: Add sysreset op that can take arguments"
->
->  cmd/boot.c                            |  6 -----
->  configs/qcom_defconfig                |  2 --
->  doc/usage/cmd/reset.rst               | 10 +-------
->  drivers/firmware/psci.c               |  4 ----
->  drivers/sysreset/Kconfig              | 15 ------------
->  drivers/sysreset/Makefile             |  1 -
->  drivers/sysreset/sysreset-uclass.c    | 37 ----------------------------
->  drivers/sysreset/sysreset_qcom-psci.c | 45 -----------------------------------
->  include/sysreset.h                    | 18 --------------
->  9 files changed, 1 insertion(+), 137 deletions(-)
-> ---
-> base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
-> change-id: 20260702-revert-sysreset-4579ae458f2e
+This series adds U-Boot's PMBus 1.x support as a small boot-time
+layer (not a hwmon clone):
 
-Given the timing, I suppose a revert. Apart from what is mentioned
-here, passing argc/argv directly from a command to a driver seems
-wrong to me, so I think the new series should use a new reset type
-instead.
+  - a decoder + transport library and the pmbus CLI command
+  - a shared UCLASS_REGULATOR adapter plus a catch-all driver for
+    compliant chips, add the MPS MPQ8785 per-chip driver
+  - a generic PMBus die-temperature UCLASS_THERMAL bridge
+  - migration of the shared NXP VID rail-trim code to this framework
+  - a sandbox PMBus chip emulator and "ut dm pmbus" unit tests that
+    exercise most subcommand of the CLI.
 
-Regards,
-SImon
+The goal is to identify PMBus regulators at boot, print telemetry and
+decode chip alerts before the kernel takes over - no polling, no
+sysfs, no fan loops. Linux owns the runtime side.
 
->
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
->
+Changes in v2:
+- Apply Tom Rini's v1 review: drop the local DT binding YAML files
+
+Vincent Jardin (7):
+  pmbus: add PMBus 1.x framework, CLI, and binding
+  power: regulator: add generic PMBus UCLASS_REGULATOR adapter
+  power: regulator: add MPS MPQ8785 PMBus regulator driver
+  board: nxp: vid: introduce PMBus framework support
+  thermal: pmbus: add PMBus die-temp driver
+  test: dm: pmbus: add a sandbox PMBus chip emulator
+  test: dm: pmbus: test pmbus command and framework
+
+ MAINTAINERS                             |  15 +
+ arch/Kconfig.nxp                        |   4 +
+ arch/sandbox/dts/test.dts               |  10 +
+ board/nxp/common/vid.c                  | 104 +--
+ board/nxp/common/vid.h                  |  15 +-
+ cmd/Kconfig                             |  14 +
+ cmd/Makefile                            |   1 +
+ cmd/pmbus.c                             | 816 ++++++++++++++++++++++
+ configs/sandbox_defconfig               |   6 +
+ doc/develop/index.rst                   |   1 +
+ doc/develop/pmbus.rst                   | 633 +++++++++++++++++
+ drivers/power/regulator/Kconfig         |  43 ++
+ drivers/power/regulator/Makefile        |   4 +
+ drivers/power/regulator/mpq8785.c       | 494 +++++++++++++
+ drivers/power/regulator/pmbus_generic.c |  90 +++
+ drivers/power/regulator/pmbus_helper.c  | 315 +++++++++
+ drivers/power/regulator/pmbus_helper.h  |  90 +++
+ drivers/power/regulator/sandbox_pmbus.c | 160 +++++
+ drivers/thermal/Kconfig                 |   8 +
+ drivers/thermal/Makefile                |   1 +
+ drivers/thermal/pmbus_thermal.c         |  33 +
+ include/pmbus.h                         | 666 ++++++++++++++++++
+ lib/Kconfig                             |  16 +
+ lib/Makefile                            |   1 +
+ lib/pmbus.c                             | 876 ++++++++++++++++++++++++
+ test/dm/Makefile                        |   1 +
+ test/dm/pmbus.c                         | 247 +++++++
+ 27 files changed, 4609 insertions(+), 55 deletions(-)
+ create mode 100644 cmd/pmbus.c
+ create mode 100644 doc/develop/pmbus.rst
+ create mode 100644 drivers/power/regulator/mpq8785.c
+ create mode 100644 drivers/power/regulator/pmbus_generic.c
+ create mode 100644 drivers/power/regulator/pmbus_helper.c
+ create mode 100644 drivers/power/regulator/pmbus_helper.h
+ create mode 100644 drivers/power/regulator/sandbox_pmbus.c
+ create mode 100644 drivers/thermal/pmbus_thermal.c
+ create mode 100644 include/pmbus.h
+ create mode 100644 lib/pmbus.c
+ create mode 100644 test/dm/pmbus.c
+
+-- 
+2.43.0
+
+base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
+branch: for-upstream/pmbus-v5
