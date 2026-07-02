@@ -4,118 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D16C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EDBC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4370B849C8;
-	Thu,  2 Jul 2026 12:53:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 481D884942;
+	Thu,  2 Jul 2026 12:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KsQwny3P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YBLPgep7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6020849FB; Thu,  2 Jul 2026 12:53:47 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 992A784994; Thu,  2 Jul 2026 12:55:07 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB224846FD
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:53:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF42C847C3
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:55:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c125c082ee2so183576666b.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:53:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782989625; cv=none;
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-69531108f25so3215199a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:55:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782989705; cv=none;
  d=google.com; s=arc-20260327;
- b=YZUXxbNko6yH598gN2Ydr9r1iFhk8s89QF4FC73/uhhUZTX56Sf4n9aXf1WdKO4x6d
- bOYpNZfXLrsD2RNg4OwFJpd9C7uuJCVM3FKKkUDYmxO44qbDeIWDLOXONoDbObC7lOEd
- JDEUeCtJtWUI3Sq8/ZWS7Bno76ImQ4+TPB68XJRnpNvOnV24jKWXnc1/hqcC5Cn+1bCZ
- NhuGtkYvXSvw2ZcUAk0nBVpgwderO1A93uArzRfncoNhPnIwOOmBYA+XQ8W3fMuMdaiD
- UanNyz8sOgbdVePi7gqubo4hyLJDSgRRX4nSEgicrPjeLtyDj+lppc84XRCcsLziZtK0
- PvKg==
+ b=qrRfwzABSS3pq7M/wL+aByFWXKn1cGjOmQHNXIvi34L8pNkvYdXMWmt0MHbWYPu9do
+ 5qECATiEM9aH4LuzyZ5k/AOYtlP+jCM+R7FOlq+AtvzCASNG423BqzqD7iBlHFtsaSOq
+ pBqAuG42PHxl7lOFqC33FZViWg5DhZ+wfepx9ZoumNwjav06ivhhzLFjFSq/DhscBB0o
+ UeHNBO9J7tTbc1mpDr5POmKJqcuM/AgGeBbttftr0qhhcI9qAFOCJmDLq+Oj0u5KWLll
+ PRfojfCqrKaaNCRpZzSsMOQts9yg7ftpY8Rjbf/l8Z86zBxMayXqZUMSro5soTcrc53S
+ AD2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IkBvN1QRcau0TtEhaNtb6Cjo6Z9IG++85RfRgKSiX5M=;
- fh=h4ICnm4HBU3ysJ/05cwSBEf2H/taeJ/EYqSu43/1Q48=;
- b=owpuQJ8tfNlFb/e+Rz79RPEkPaLQDwmt0dI7yua17WBg6aNMCXo+29XipWGLMsSzAc
- ajfa7KnJkziU0lsNc6JoAcMVHt/BouA4H5aabIjjd4oOSH1WsF/dzhUew1trliKmsHCX
- 7EHYmBawC7RXqRMG7/La1JXELMmUwr7mQxsxk+LBEYIWoYaf2aFLMHgAyx+l+gnyjhW7
- A0xVqBePAAhHohdGS01/SYJf/iUTBs1/8PVA31CTDATMevMOD2hQKQkZCwuF1JXRDPg6
- qKw837rtWqCCakWS6y13+zL3vAtr9qtpJeKGEZLrUf4nUFbeTfnEYtUK3wag7I/inKJE
- j7cA==; darn=lists.denx.de
+ bh=6wgvGDtv5MnNRe1X+aYTdnEQFFKIlkOV3EQ/l/2ZoKM=;
+ fh=HQTfuPblmOkXa5cHcQbeseZ/97zAN5mfkrsqcBd9jYc=;
+ b=k5ut2nsAl5uXTFLPSxtvAxzheA5cTxsi63sTcCB01cUKxyT4MW3W+Kq10TSW+Rwjv6
+ Q3dKQPrMJ+H7lgrBsMN8ZgYmdk8BaSFAii+nrncY8bKD+DO9Z3S2pfBQmfe9tSEVXZJg
+ gMgJ7fOQOSFSTWHspvXFlf1LLXaBXtkNxasKuCxrxNNpHKsYSa9CWSybIQda9k16gvSH
+ XN9c90OLtQFX0s/Y4YqabnZlsxOLaaM8rjFaMeXDXwm4pqXgNf7/8QHLJ7mf821E/yt8
+ CGq5P58CBglD+y8i7Ijlj2gdBRhashza6kULMEhGblQ4H3/p6hFttBuLNp7ka+oBhLsr
+ 4uMQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782989625; x=1783594425; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782989705; x=1783594505; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IkBvN1QRcau0TtEhaNtb6Cjo6Z9IG++85RfRgKSiX5M=;
- b=KsQwny3P7024hh2kzMVi9z9g/4Dv2C+hw+faNZvzCi/O2Df9e24Z1Aoby5KPaI7k3w
- 0Xqo5UUSXN8npeCrbCQ/OIHmK7D4yKrMbBuZnlJk9YyJk9ldznVgdNAnjOndod6QPHKo
- CJaS2aYrwlczIw0i8xHmHzeeIdNSp9e9c3Tgk=
+ bh=6wgvGDtv5MnNRe1X+aYTdnEQFFKIlkOV3EQ/l/2ZoKM=;
+ b=YBLPgep7GkhDemdojAWqZpSUpJcaLuyGMF563TB7vTO9tDlVy3nehmnTi8LP7Px56t
+ LasErsx9Lt63auWb1yDuegsL4jnCqwI/zFVQst1p8LbakvLiP5aERPSMLjSlJ8LVl/18
+ 5rWDoT/fm/s6WcOs9BNAtRq/ByQntW5sw/NeA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782989625; x=1783594425;
+ d=1e100.net; s=20251104; t=1782989705; x=1783594505;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IkBvN1QRcau0TtEhaNtb6Cjo6Z9IG++85RfRgKSiX5M=;
- b=L9lP4KhzZO6+Y7G1M3Jszn4+wxxwt4vPQgxpfGDVYSHQaycUhZXB5V03/u4WBj3L7V
- BhpOjYxTeKVDkcRFh3v+C4F53ziUeb3hTnxe49wPf7zkG3ERTGr6tD+csnajxcIUgqRK
- IN2r+r4O4WmbflOyJwuk4ClGxPFuO26fqsyu37MnAFYRE6QTe2i/kpv7UsB56wkIr4HS
- pPBFKPV6q8Dz1DIv1ZfV8ug7Wp2S9d0LVDIAEduZkMjI0fwaRHAoFtX9COy0LN2Kkd14
- cfQw6WV6eCwdYOoIh6mqpyipjJxGxOQuYsL6nlJaWSAnhpWec9kOhlOEhymjfM+fqUYO
- 7fcA==
+ bh=6wgvGDtv5MnNRe1X+aYTdnEQFFKIlkOV3EQ/l/2ZoKM=;
+ b=s8nfA2nBQuoZkL5umUPedHQV6R8XRImiPVE7zywm5atNe+gO+JWZXsGGs/geqB/59v
+ Dk5H9n7ZjLkAYUAp7LYpbo/ZJHUa7QpL0A+9rEbmPUZ9FwgXDaAdxr/eHZy+lyG9AdEs
+ Qpu7Rr7QZma35ifo4lJas5OrHSakFZW6+9xAQJ93Xb2w4bwX+tAGUwPObw4DEmOXeqpF
+ niFe9hQnFzyBqYQlRrhrfgQQLBjeucyr7hwbihOUH7tx1N/FWUFcbVnuMO10/rKsbAGJ
+ ljKX/iCd51GjoNEvzCucKopP8z21dNg0KkQPbEnKS6tDLvjVKJSItA4khZY2tQZhxaNW
+ iRWA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro43PaYyo+xx9pdReuHqChoeTNtqcjeT5MGTM0ASh1nMSnA5N+qOTCgIK6x2JKUJaQLK5/8LIM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwpO9exf2RJ51rF6JinAH5Ktd+aNxGXtMm8RiX82zwyn7AUP7v4
- qXDuRgARspgiIDW3f6N3oTJ8WpaDfZHiM8EkxKq1WSoVJFPt5Q36R/tCNuliQcXaG6elFo+g9FU
- 3SjSbqhDucrqzgOpuXbXie+YFM66a+gEHYgr8DuGx
-X-Gm-Gg: AfdE7cl2K42fyWXRsQmeGRlWpYczyzElwh/Dd63lUufR9DSseDv5GysDp5KAn+lNz69
- haMd2V/UBJWxv5aYPpsanpAFbVffSDimrSP6frB9A39XsNY8OaOO4CF4GZBZ+scvrUO7VtyYKWT
- 0iJrFKZpl6o3rO53jeMJRX3NfNdZfboELPq09etHesG8XpW3JN2wtaz1wKaUQCFOApUPsNXL70x
- KsaNSdBIloBz0RpfZzOm4VbHHzLpqV3xLjqnzrTy4q0xIpiZ3AQ99vb1UN93/eVrWp21+TbBA==
-X-Received: by 2002:a17:907:86a4:b0:c07:c935:7a43 with SMTP id
- a640c23a62f3a-c12a9d6b398mr243559566b.6.1782989625202; Thu, 02 Jul 2026
- 03:53:45 -0700 (PDT)
+ AHgh+RpQEjgFndmd2Wj5OceXRo8FE7V+r3C48EEcdLXH/8XmqLUzcy96X+YNKoysDTY/yWBX9/zeE/w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4lk3bhcBizYUVtPIA1uTXbED+x1S42Pb5/eX2L+Bl9Y9t8Zup
+ 5+6vpHorqdU95JUPY+dz57xv0c9eUJLQk/ckjEM2T9ttcMcGbUv/EsO/VcAYlo+9nhwiExXWHJl
+ j6EKGXY/QT/AN4I9ZEtI2S3hUIXLjFxIcBUAQFxFC
+X-Gm-Gg: AfdE7ckybN9XzX7yvgRL9Hkn9zTeJOZ4f5w6OXC5JRoT44ET669lsL4qb2JLbmuvAwn
+ AYbn2Pdrl6RSMwsJGWLWY0OZFU7pJiuJOi3zJucpIlFK06E6xAk/bN5UsH2vANCIxoAslGd1TRC
+ FaroBAcg0NtD0HRBZ1U7IKpN6duyLxWaFDYQw/tNYCTyfBqRq5afoF1dQS2TioidO7fTXKhn2f7
+ K65mnWYvqMZmT5D7l7iTtMyk5ZJsaEZLnKhwBaBU2I+ETozv8qfzoVQl5lHMJNAEENiPDF6UQ==
+X-Received: by 2002:a05:6402:a6d3:10b0:698:adfe:fc09 with SMTP id
+ 4fb4d7f45d1cf-698adff07e2mr580296a12.33.1782989705120; Thu, 02 Jul 2026
+ 03:55:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
- <20260702055744.2164975-5-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260702055744.2164975-5-mikhail.kshevetskiy@iopsys.eu>
+References: <20260701111808.870705-1-me@ziyao.cc>
+ <20260701111808.870705-8-me@ziyao.cc>
+ <20260701174940.GP749385@bill-the-cat>
+ <1c9f6db6-4307-4860-851e-be46ce2382d6@app.fastmail.com>
+In-Reply-To: <1c9f6db6-4307-4860-851e-be46ce2382d6@app.fastmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:53:09 +0100
-X-Gm-Features: AVVi8CfiOUdTUoxsvqFjrzqTRkTE_dnMVSfrciM9lY5-uN2Br59kz3YUfZgROTE
-Message-ID: <CAFLszTje54iDV7TEQ0yy_XoxWHZyAcGcXphjazzjxk2H1vgKAw@mail.gmail.com>
-Subject: Re: [PATCH v14 04/18] watchdog: renesas_wwdt: Convert to common
- field_{get, prep}() helpers
-To: mikhail.kshevetskiy@iopsys.eu
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- David Lechner <dlechner@baylibre.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>, 
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
- Andy Shevchenko <andriy.shevchenko@intel.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de, 
- Markus Gothe <markus.gothe@genexis.eu>, 
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>
+Date: Thu, 2 Jul 2026 11:54:49 +0100
+X-Gm-Features: AVVi8Ce4toF4BIMvbyE_atzRzNj8erviiCqjp5Uuar5rBBI8HWih0hxQcC1nmSY
+Message-ID: <CAFLszTiKvhiUJ+nckx7yMm8pzKCY3hQypX23r2xwmphCmX13BA@mail.gmail.com>
+Subject: Re: [PATCH v2 07/16] LoongArch: lib: General routines
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -133,16 +114,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-02T05:57:27, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
-> watchdog: renesas_wwdt: Convert to common field_{get, prep}() helpers
->
-> Drop the driver-specific field_get() and field_prep() macros, in favor
-> of the globally available variants from <linux/bitfield.h>.
->
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
->
-> drivers/watchdog/renesas_wwdt.c | 2 --
->  1 file changed, 2 deletions(-)
+Hi Jiaxun,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 2 Jul 2026, 10:24 Jiaxun Yang, <jiaxun.yang@flygoat.com> wrote:
+>
+>
+>
+> On Wed, 1 Jul 2026, at 6:49 PM, Tom Rini wrote:
+> > On Wed, Jul 01, 2026 at 11:17:59AM +0000, Yao Zi wrote:
+> >
+> >> From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> >>
+> >> Add some common library routines for the architecture.
+> >>
+> >> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> >> Signed-off-by: Yao Zi <me@ziyao.cc>
+> > [snip]
+> >> +#define CACHE_MAX_LEVEL             3
+> >> +#define CACHE_MAX_INDEX             6
+> >> +#define CACHE_OP            GENMASK(4, 3)
+> >> +#define  CACHE_INDEX_INVWB  0x1
+> >> +#define  CACHE_HIT_INVWB    0x2
+> >> +#define CACHE_INDEX         GENMASK(2, 0)
+> >
+> > I was expecting checkpatch.pl to catch the double space here, but it
+> > didn't. It did warn about a few other things in macros, which should be
+> > checked out at least. And that comment applies for the whole series,
+> > along with a manual check for other spacing issues, thanks!
+>
+> Those style issues are mostly copied over Linux kernel counterparts, should
+> we leave them as is to ease kernel rebasing effort, or fix them for consistency
+> with rest of the U-Boot?
+
+Oh I missed this - if it is easier for you to maintain by matching the
+checkpatch problems then it seems OK to me. You could mention that in
+the commit msg so people know to ignore the problems.
+
+Regards,
+Simon
