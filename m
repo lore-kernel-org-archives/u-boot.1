@@ -4,61 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9B4BC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0C8C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 277DA84A85;
-	Thu,  2 Jul 2026 22:08:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA9FA84A04;
+	Thu,  2 Jul 2026 22:14:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="pmtvmDOH";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="U4lGQSFx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A01E84A72; Thu,  2 Jul 2026 22:08:22 +0200 (CEST)
+ id BFA9A84A0B; Thu,  2 Jul 2026 22:14:44 +0200 (CEST)
 Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B714684A7A
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:08:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CAAC849F0
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:14:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [78.242.171.172])
  (Authenticated sender: vjardin@free.fr)
- by smtp4-g21.free.fr (Postfix) with ESMTPSA id D7F9519F73C;
- Thu,  2 Jul 2026 22:07:54 +0200 (CEST)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id 6A42719F57B;
+ Thu,  2 Jul 2026 22:14:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1783022898;
- bh=82TPylw47jSIMeSGvqAWvbu02UUOxBFleJ96MLWgzFo=;
+ s=smtp-20201208; t=1783023282;
+ bh=BcHlGnAHqQ8qZ+Hi+V+MFh1LG1+DxXkmv7qp7OOuQPc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pmtvmDOHAVrZcQe5ltVD0FMXGro+f03i7cp0r6qc7B2Ngs9am+/bHWtmwBuRPdZK/
- YuUQ7NjgmQFsGAtMn76ln4pGslPMfL2wSUigrcZ/CwpEIjTh49Q6X91MuP75rG6jsG
- nEcb/l+zQnJ4wKFGT9SE+r+U5I8yUyYDwsjrAVHUY2mR2/+R3BcNJXAQZxZz8BnjhT
- TExmNVVbHx4AKwSQD6PwHMzHlwWYsq75SmYIYIkgTVONKWZOyEvNpVAnPfI77OpVYb
- PSvUkZtFOqKFZ4TsLFVk61Y2qlLaouXYd/dw9yQA8YXJEpDTSaCmubuI03vDijKj0c
- vF+GmMyZ6lb/w==
+ b=U4lGQSFxRVraVfrAor+5amgNyEsiI4plU5+x/yBRCMhLIYtKNo1l/v6Ft603u3E84
+ 3dM/Wj53m2lBdUXj4rX4p31ol28vaX9gEn1IBNW7L2gjsRvX6R8rG9Il1TNyFqdnNH
+ t6sqeD/Q+cCHbYU27GvWBHfgzOmuWsG7/EnxxU0HsUshTumkzTu57KZiCv4FDOiIeP
+ nh6G0LVZHmp3TzKEVtJFJC5H04SMO31a0a0WMS+uCx1cqQq0NsOFBAm8+xGyGAqfIC
+ EwwfbCHEtDEH47CW1rl6n71HVJRn45vsdEaiNvxJGcvHMIFbLdSSy7kSmmZYnEnsiu
+ gYnjQE0JQOoWg==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
- Bo-Chen Chen <rex-bc.chen@mediatek.com>,
- David Lechner <dlechner@baylibre.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>
-Subject: [PATCH v2 2/7] power: regulator: add generic PMBus UCLASS_REGULATOR
- adapter
-Date: Thu,  2 Jul 2026 22:07:49 +0200
-Message-ID: <20260702200754.1859999-1-vjardin@free.fr>
+Cc: sjg@chromium.org,
+	trini@konsulko.com
+Subject: [PATCH v2 3/7] power: regulator: add MPS MPQ8785 PMBus regulator
+ driver
+Date: Thu,  2 Jul 2026 22:14:38 +0200
+Message-ID: <20260702201438.1861442-1-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260702195619.1857591-1-vjardin@free.fr>
 References: <20260702195619.1857591-1-vjardin@free.fr>
@@ -80,678 +67,570 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PMBus regulators differ in numeric formats and quirks, not in how they
-are driven. Share that common behaviour as a regulator-uclass adapter
-so chip drivers and the pmbus CLI do not each reimplement the decode
-and transport, and add a catch-all driver on compatible = "pmbus" for
-compliant chips that have no dedicated driver yet.
+Per-chip UCLASS_REGULATOR driver for the MPS MPQ8785 / MPM3695 /
+MPM3695-25 / MPM82504 family, layered on the shared pmbus_helper
+adapter. Runs Linux's mpq8785_identify() VOUT_MODE switch
+(LINEAR16 vs DIRECT m=64 R=1) at probe time, applies the optional
+mps,vout-fb-divider-ratio-permille DT property, and walks the
+documented MPS ADDR_VBOOT windows on MFR_ID failure so a
+die-revision address shift just works.
 
-Gated by CONFIG_DM_REGULATOR_PMBUS_HELPER and
-CONFIG_DM_REGULATOR_PMBUS_GENERIC.
+Publishes the pmbus mps last|clear last|clear force vendor
+extension subcommands (NVM PROTECTION_LAST read and clear) when
+CMD_PMBUS is enabled.
+
+Adaapted from Linux code.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
 (no changes since v1)
 
- MAINTAINERS                             |   3 +
- drivers/power/regulator/Kconfig         |  24 ++
- drivers/power/regulator/Makefile        |   2 +
- drivers/power/regulator/pmbus_generic.c |  90 +++++++
- drivers/power/regulator/pmbus_helper.c  | 315 ++++++++++++++++++++++++
- drivers/power/regulator/pmbus_helper.h  |  90 +++++++
- include/pmbus.h                         |  37 +++
- lib/pmbus.c                             |  17 ++
- 8 files changed, 578 insertions(+)
- create mode 100644 drivers/power/regulator/pmbus_generic.c
- create mode 100644 drivers/power/regulator/pmbus_helper.c
- create mode 100644 drivers/power/regulator/pmbus_helper.h
+ MAINTAINERS                       |   1 +
+ drivers/power/regulator/Kconfig   |   9 +
+ drivers/power/regulator/Makefile  |   1 +
+ drivers/power/regulator/mpq8785.c | 494 ++++++++++++++++++++++++++++++
+ 4 files changed, 505 insertions(+)
+ create mode 100644 drivers/power/regulator/mpq8785.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 39e333f8f70..123ea9ed3ed 100644
+index 123ea9ed3ed..5ba9b195c0b 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1585,6 +1585,9 @@ M:	Vincent Jardin <vjardin@free.fr>
+@@ -1585,6 +1585,7 @@ M:	Vincent Jardin <vjardin@free.fr>
  S:	Maintained
  F:	cmd/pmbus.c
  F:	doc/develop/pmbus.rst
-+F:	drivers/power/regulator/pmbus_generic.c
-+F:	drivers/power/regulator/pmbus_helper.c
-+F:	drivers/power/regulator/pmbus_helper.h
- F:	include/pmbus.h
- F:	lib/pmbus.c
- 
++F:	drivers/power/regulator/mpq8785.c
+ F:	drivers/power/regulator/pmbus_generic.c
+ F:	drivers/power/regulator/pmbus_helper.c
+ F:	drivers/power/regulator/pmbus_helper.h
 diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index ca5de5b8726..5b1a9c3f991 100644
+index 5b1a9c3f991..67c9e1fb377 100644
 --- a/drivers/power/regulator/Kconfig
 +++ b/drivers/power/regulator/Kconfig
-@@ -557,3 +557,27 @@ config DM_REGULATOR_MT6359
- 	  MediaTek MT6359 PMIC.
- 	  This driver supports the control of different power rails of device
- 	  through regulator interface.
+@@ -581,3 +581,12 @@ config DM_REGULATOR_PMBUS_GENERIC
+ 	  per chip driver only when chip specific quirks (vendor
+ 	  registers, VID coercion, ADDR pin auto promotion, non standard
+ 	  m / b / R coefficients) need handling.
 +
-+config DM_REGULATOR_PMBUS_HELPER
-+	bool "Shared regulator helpers for PMBus chip drivers"
-+	depends on DM_REGULATOR && PMBUS && DM_I2C
-+	help
-+	  Provide shared get_value / set_value / get_enable / set_enable
-+	  operations for UCLASS_REGULATOR drivers that bind PMBus 1.x
-+	  compliant voltage regulators. Per chip drivers
-+	  (mps,mpq8785, lltc,ltc3882, ...) consume this helper to avoid
-+	  duplicating the LINEAR16 / DIRECT decoder dispatch and the
-+	  VOUT_MODE / VOUT_COMMAND / OPERATION transport sequences.
-+
-+config DM_REGULATOR_PMBUS_GENERIC
-+	bool "Generic PMBus 1.x regulator driver (compatible=\"pmbus\")"
++config DM_REGULATOR_MPQ8785
++	bool "MPS MPQ8785 / MPM3695 / MPM82504 PMBus voltage regulator"
 +	depends on DM_REGULATOR_PMBUS_HELPER
 +	help
-+	  Catch all UCLASS_REGULATOR driver bound to compatible = "pmbus".
-+	  Auto detects the VOUT numeric format from the chip's VOUT_MODE
-+	  register and exposes telemetry plus voltage set / get against
-+	  the standard PMBus 1.x command codes. Use this for PMBus
-+	  compliant chips that have no per chip driver yet; promote to a
-+	  per chip driver only when chip specific quirks (vendor
-+	  registers, VID coercion, ADDR pin auto promotion, non standard
-+	  m / b / R coefficients) need handling.
++	  Driver for the Monolithic Power Systems MPQ8785 family of
++	  digital multiphase voltage regulators with PMBus. Supports
++	  MPM3695, MPM3695-25, MPM82504, and MPQ8785. Adapted from the
++	  Linux drivers/hwmon/pmbus/mpq8785.c reference.
 diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index 36a84e7cd71..b084e9ac4bc 100644
+index b084e9ac4bc..aa3faf2f34f 100644
 --- a/drivers/power/regulator/Makefile
 +++ b/drivers/power/regulator/Makefile
-@@ -49,3 +49,5 @@ obj-$(CONFIG_REGULATOR_RZG2L_USBPHY) += rzg2l-usbphy-regulator.o
- obj-$(CONFIG_$(PHASE_)DM_REGULATOR_CPCAP) += cpcap_regulator.o
- obj-$(CONFIG_DM_REGULATOR_MT6357) += mt6357_regulator.o
+@@ -51,3 +51,4 @@ obj-$(CONFIG_DM_REGULATOR_MT6357) += mt6357_regulator.o
  obj-$(CONFIG_DM_REGULATOR_MT6359) += mt6359_regulator.o
-+obj-$(CONFIG_DM_REGULATOR_PMBUS_HELPER)  += pmbus_helper.o
-+obj-$(CONFIG_DM_REGULATOR_PMBUS_GENERIC) += pmbus_generic.o
-diff --git a/drivers/power/regulator/pmbus_generic.c b/drivers/power/regulator/pmbus_generic.c
+ obj-$(CONFIG_DM_REGULATOR_PMBUS_HELPER)  += pmbus_helper.o
+ obj-$(CONFIG_DM_REGULATOR_PMBUS_GENERIC) += pmbus_generic.o
++obj-$(CONFIG_DM_REGULATOR_MPQ8785)       += mpq8785.o
+diff --git a/drivers/power/regulator/mpq8785.c b/drivers/power/regulator/mpq8785.c
 new file mode 100644
-index 00000000000..6ba50ce08f8
+index 00000000000..dc321f0e410
 --- /dev/null
-+++ b/drivers/power/regulator/pmbus_generic.c
-@@ -0,0 +1,90 @@
++++ b/drivers/power/regulator/mpq8785.c
+@@ -0,0 +1,494 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2026 Free Mobile, Vincent Jardin
 + *
-+ * Generic PMBus 1.x compatible voltage regulator driver.
++ * MPS MPQ8785 / MPM3695 / MPM3695-25 / MPM82504 PMBus voltage
++ * regulator driver. Adapted from
++ *   linux/drivers/hwmon/pmbus/mpq8785.c
++ * (Charles Hsu, GPL-2.0-or-later) with the kernel hwmon publication
++ * and caching layers stripped.
 + *
-+ * Catch all driver bound to compatible = "pmbus" for chips that have
-+ * no per chip driver under drivers/power/regulator/. The probe path
-+ * detects the VOUT numeric format from VOUT_MODE bits[7:5]:
-+ *
-+ *   - 0  LINEAR16 with the exponent supplied via VOUT_MODE bits[4:0]
-+ *   - 1  VID; mapped to pmbus_fmt_vid (decoder returns 0 today; per
-+ *        chip driver still required to plug a VID table)
-+ *   - 2  DIRECT; default coefficients m=1, b=0, R=0 (per chip
-+ *        coefficients arrive via PMBUS_QUERY / PMBUS_COEFFICIENTS,
-+ *        not yet consumed by U-Boot; values may need a per chip
-+ *        driver if telemetry numbers are wrong)
-+ *   - 3  IEEE754; mapped to pmbus_fmt_ieee754 (decoder returns 0
-+ *        today; per chip driver required)
-+ *
-+ * Other sensor classes (VIN, IIN, IOUT, TEMPERATURE) default to
-+ * LINEAR which is the spec baseline for compliant chips. If an
-+ * operator sees wrong telemetry numbers on this driver, the answer
-+ * is to write a per chip driver with the correct format[] / m / b / R.
-+ *
-+ * Adapted in spirit from linux/drivers/hwmon/pmbus/pmbus.c (the
-+ * kernel's generic probe driver). The U-Boot version drops the
-+ * page count auto detection (most generic compliant parts are
-+ * single rail; multi rail chips are quirky enough to need a per
-+ * chip driver) and the kernel hwmon publication layers.
++ * Hooks the shared pmbus_helper UCLASS_REGULATOR ops + adds the MPS
++ * specific identify (VOUT_MODE switch between LINEAR16 and DIRECT
++ * m=64 R=1 for the chip's "VID" mode), the MPS vendor extension
++ * (pmbus mps last|clear last|clear force), and ADDR_VBOOT auto
++ * promotion when the DT declared address fails the MFR_ID probe.
 + */
 +
++#include <command.h>
 +#include <dm.h>
 +#include <i2c.h>
 +#include <log.h>
 +#include <pmbus.h>
++#include <vsprintf.h>
++#include <linux/bitops.h>
 +#include <power/regulator.h>
 +
 +#include "pmbus_helper.h"
 +
-+struct pmbus_generic_priv {
-+	struct pmbus_regulator_priv base;	/* must be first */
-+	struct pmbus_driver_info info;
++/* Chip family identifiers (driver_data). */
++enum mpq_chip_id {
++	MPQ_MPM3695     = 0,
++	MPQ_MPM3695_25  = 1,
++	MPQ_MPM82504    = 2,
++	MPQ_MPQ8785     = 3,
 +};
 +
-+static int pmbus_generic_probe(struct udevice *dev)
++/*
++ * MPS vendor extended command codes (NOT in PMBus 1.3 Part II).
++ *
++ *   CLEAR_LAST_FAULT (08h) clears the NVM backed PROTECTION_LAST
++ *                          register. Gated by MFR_CFG_EXT (F5h)
++ *                          bit[6] = 1; chip silently no ops if the
++ *                          gate is cleared.
++ *   PROTECTION_LAST  (FBh) single event, NVM backed log of the last
++ *                          protection event. Survives the chip's own
++ *                          power cycle. The boot time post mortem the
++ *                          SoC has no other way to obtain.
++ *
++ * NEVER issue CLEAR_LAST_FAULT (08h) implicitly; it would erase the
++ * post mortem trail. Only the explicit pmbus mps clear last and
++ * pmbus mps clear force subcommands write it.
++ */
++#define PMBUS_CLEAR_LAST_FAULT		0x08
++#define MPS_PROTECTION_LAST		0xfb
++
++/*
++ * MFR_CFG_EXT (F5h) is an MPS extended config WORD (16 bits, not a
++ * byte). Bit[6] (MFR_CLR_FAULT_CFG) gates CLEAR_LAST_FAULT (08h)
++ * clearing PROTECTION_LAST. Several other bits are fixed and MUST be
++ * preserved on writeback; always read modify write the full 16 bits,
++ * only flip bit[6], restore on the way out.
++ */
++#define MPS_MFR_CFG_EXT			0xf5
++#define MPS_MFR_CFG_EXT_CLR_LAST_EN	BIT(6)
++
++/*
++ * MPQ8785 driver_info (transcribed from Linux's
++ * drivers/hwmon/pmbus/mpq8785.c::mpq8785_info). DIRECT format with
++ * chip specific m / b / R coefficients on VIN, IOUT, TEMPERATURE.
++ * VOUT format is selected at probe time from VOUT_MODE: bits[7:5] == 0
++ * selects LINEAR16, bits[7:5] == 1 or 2 selects DIRECT m=64 R=1.
++ */
++
++/*
++ * MPS-extended STATUS_* bit names. The MPQ8785 family reuses several
++ * bit positions documented as RESERVED / UNKNOWN / NONE_ABOVE /
++ * MFR_SPECIFIC by PMBus 1.3 for chip specific signals. The override
++ * table below substitutes the chip name for the standard one when
++ * the bit is set, leaving every other PMBus 1.3 standard bit
++ * (VOUT_OV, IOUT_OC, TEMP, CML, ...) unchanged.
++ *
++ *   STATUS_WORD bit[12]  spec MFR_SPECIFIC   chip NVM_SUMMARY (NVM
++ *                                            backed PROTECTION_LAST
++ *                                            register is non zero)
++ *   STATUS_WORD bit[8]   spec UNKNOWN        chip WATCH_DOG (internal
++ *                                            calculation FSM watchdog
++ *                                            overflow)
++ *   STATUS_WORD bit[0]   spec NONE_ABOVE     chip DRMOS_FAULT (DrMOS
++ *                                            stage fault)
++ *   STATUS_CML  bit[4]   spec MEMORY         chip MTP_CRC_FAULT (NVM
++ *                                            CRC mismatch on restore)
++ *   STATUS_CML  bit[0]   spec OTHER_MEM_LOGIC chip MTP_FAULT (NVM
++ *                                            signature fault)
++ *   STATUS_TEMPERATURE bit[0] (PMBus leaves bits[3:0] reserved on
++ *                                            this register) chip
++ *                                            OT_SELF (controller die
++ *                                            OT condition)
++ */
++static const struct pmbus_status_override mpq8785_status_overrides[] = {
++	{ PMBUS_STATUS_WORD,        BIT(12), "NVM_SUMMARY" },
++	{ PMBUS_STATUS_WORD,        BIT(8),  "WATCH_DOG" },
++	{ PMBUS_STATUS_WORD,        BIT(0),  "DRMOS_FAULT" },
++	{ PMBUS_STATUS_CML,         BIT(4),  "MTP_CRC_FAULT" },
++	{ PMBUS_STATUS_CML,         BIT(0),  "MTP_FAULT" },
++	{ PMBUS_STATUS_TEMPERATURE, BIT(0),  "OT_SELF" },
++	{ /* sentinel */ }
++};
++
++static struct pmbus_driver_info mpq8785_info = {
++	.pages = 1,
++	.format[PSC_VOLTAGE_IN]  = pmbus_fmt_direct,
++	.format[PSC_VOLTAGE_OUT] = pmbus_fmt_linear,	/* refined per VOUT_MODE */
++	.format[PSC_CURRENT_OUT] = pmbus_fmt_direct,
++	.format[PSC_TEMPERATURE] = pmbus_fmt_direct,
++	.m[PSC_VOLTAGE_IN]  = 4,  .b[PSC_VOLTAGE_IN]  = 0, .R[PSC_VOLTAGE_IN]  = 1,
++	.m[PSC_CURRENT_OUT] = 16, .b[PSC_CURRENT_OUT] = 0, .R[PSC_CURRENT_OUT] = 0,
++	.m[PSC_TEMPERATURE] = 1,  .b[PSC_TEMPERATURE] = 0, .R[PSC_TEMPERATURE] = 0,
++	/*
++	 * Sensor set this family actually implements with calibrated
++	 * coefficients: VIN, VOUT, IOUT, TEMP. READ_IIN / READ_POUT are
++	 * ACKed by the silicon but uncalibrated here (the kernel's mpq8646
++	 * / mpq8785 drivers expose neither), so declaring the set keeps
++	 * pmbus_print_telemetry from printing a bogus POUT / IIN -- matching
++	 * the kernel's per-chip sensor list.
++	 */
++	.classes_present    = BIT(PSC_VOLTAGE_IN) | BIT(PSC_VOLTAGE_OUT) |
++			      BIT(PSC_CURRENT_OUT) | BIT(PSC_TEMPERATURE),
++	.status_overrides   = mpq8785_status_overrides,
++};
++
++/*
++ * MPM3695 / MPM3695-25 / MPM82504 driver_info: VOUT in DIRECT format
++ * with chip family default m=8 R=2. Other sensor classes default to
++ * LINEAR (the chip family does not document non standard formats for
++ * VIN / IOUT / TEMPERATURE; the helper falls back to LINEAR11 when
++ * the active info is non NULL but format[c] is linear).
++ */
++static struct pmbus_driver_info mpm82504_info = {
++	.pages = 1,
++	.format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct,
++	.m[PSC_VOLTAGE_OUT] = 8,  .b[PSC_VOLTAGE_OUT] = 0, .R[PSC_VOLTAGE_OUT] = 2,
++	.format[PSC_VOLTAGE_IN]  = pmbus_fmt_linear,
++	.format[PSC_CURRENT_OUT] = pmbus_fmt_linear,
++	.format[PSC_TEMPERATURE] = pmbus_fmt_linear,
++};
++
++/*
++ * Chip match for the framework's pmbus dev <bus>:<addr> raw I2C
++ * path. Used when the operator selects the chip directly by address
++ * instead of by regulator-name; the framework probes MFR_ID, sees
++ * "MPS" (after the byte reverse helper), and caches mpq8785_info.
++ */
++static const struct pmbus_chip_match mpq8785_match = {
++	.mfr_id          = "MPS",
++	.mfr_id_reverse  = true,
++	.vendor          = "mps",
++	.info            = &mpq8785_info,
++};
++
++static const struct pmbus_bit mpq_protection_last_bits[] = {
++	{ 1u << 15, "INIT_FAULT" },
++	{ 1u << 14, "NVM_CRC_ERROR" },
++	{ 1u << 13, "NVM_FAULT" },
++	{ 1u << 12, "OC_PHASE_FAULT" },
++	{ 1u << 11, "OTP_SELF_FAULT" },
++	{ 1u <<  9, "SWITCH_PRD_FAULT" },
++	{ 1u <<  8, "VIN_OV_FAULT" },
++	{ 1u <<  7, "VOUT_OV_FAULT" },
++	{ 1u <<  6, "VOUT_UV_FAULT" },
++	{ 1u <<  5, "OC_TOT_FAULT" },
++	{ 1u <<  4, "VIN_UVLO_FAULT" },
++	{ 1u <<  3, "DRMOS_OTP" },
++	{ /* sentinel */ }
++};
++
++static int mps_require_active(struct udevice **chip)
 +{
-+	struct pmbus_generic_priv *gpriv = dev_get_priv(dev);
-+	struct pmbus_driver_info *info = &gpriv->info;
-+	enum pmbus_sensor_classes c;
++	const struct pmbus_active_dev *act = pmbus_active();
++
++	if (!act) {
++		printf("pmbus mps: no active device. Use 'pmbus dev <bus>:<addr>' first.\n");
++		return CMD_RET_FAILURE;
++	}
++	if (strcmp(act->vendor, "mps") != 0) {
++		printf("pmbus mps: active device is not from vendor 'mps' (got '%s')\n",
++		       act->vendor[0] ? act->vendor : "(generic)");
++		return CMD_RET_FAILURE;
++	}
++	if (pmbus_active_get_i2c(chip)) {
++		printf("pmbus mps: cannot reach i2c%d:0x%02x\n",
++		       act->bus_seq, act->addr);
++		return CMD_RET_FAILURE;
++	}
++	return CMD_RET_SUCCESS;
++}
++
++static int mps_do_last(struct udevice *chip)
++{
++	u16 prot_last = 0;
++
++	if (pmbus_read_word(chip, MPS_PROTECTION_LAST, &prot_last)) {
++		printf("pmbus mps: PROTECTION_LAST (FBh) read failed\n");
++		return CMD_RET_FAILURE;
++	}
++	printf("PROTECTION_LAST (FBh) = 0x%04x  [", prot_last);
++	pmbus_print_bits(prot_last, mpq_protection_last_bits);
++	printf("]  (NVM, survives MPQ power cycle)\n");
++	return CMD_RET_SUCCESS;
++}
++
++static int mps_do_clear_last(struct udevice *chip)
++{
 +	int ret;
 +
-+	info->pages = 1;
-+	for (c = 0; c < PSC_NUM_CLASSES; c++) {
-+		info->format[c] = pmbus_fmt_linear;
-+		info->m[c] = 0;
-+		info->b[c] = 0;
-+		info->R[c] = 0;
++	printf("pmbus mps: WARNING, erasing NVM PROTECTION_LAST (FBh) post mortem\n");
++	ret = dm_i2c_write(chip, PMBUS_CLEAR_LAST_FAULT, NULL, 0);
++	if (ret) {
++		printf("pmbus mps: CLEAR_LAST_FAULT (08h) write failed (%d)\n", ret);
++		return CMD_RET_FAILURE;
 +	}
++	printf("pmbus mps: CLEAR_LAST_FAULT (08h) issued; gated by MFR_CFG_EXT bit[6]\n");
++	printf("           (chip silently no ops if F5h bit[6] = 0; verify by re reading FBh)\n");
++	return CMD_RET_SUCCESS;
++}
++
++static int mps_do_clear_force(struct udevice *chip)
++{
++	u8 wp_orig = 0;
++	u16 cfg_orig = 0, cfg_unlocked;
++	int ret, last_rc = 0, rc;
++
++	printf("pmbus mps: FORCE; temporarily lowering WRITE_PROTECT and MFR_CFG_EXT.CLEAR_LAST_EN\n");
++	printf("pmbus mps: WARNING, erasing NVM PROTECTION_LAST (FBh) post mortem\n");
++
++	ret = pmbus_read_byte(chip, PMBUS_WRITE_PROTECT, &wp_orig);
++	if (ret) {
++		printf("pmbus mps: WRITE_PROTECT (10h) read failed (%d), aborting force\n", ret);
++		return CMD_RET_FAILURE;
++	}
++	ret = pmbus_read_word(chip, MPS_MFR_CFG_EXT, &cfg_orig);
++	if (ret) {
++		printf("pmbus mps: MFR_CFG_EXT (F5h) read failed (%d), aborting force\n", ret);
++		return CMD_RET_FAILURE;
++	}
++	printf("pmbus mps: saved WRITE_PROTECT=0x%02x MFR_CFG_EXT=0x%04x\n",
++	       wp_orig, cfg_orig);
++
++	if (wp_orig != 0) {
++		u8 wp_open = 0x00;
++
++		ret = dm_i2c_write(chip, PMBUS_WRITE_PROTECT, &wp_open, 1);
++		if (ret) {
++			printf("pmbus mps: WRITE_PROTECT clear failed (%d), chip refuses unlock\n",
++			       ret);
++			return CMD_RET_FAILURE;
++		}
++	}
++
++	cfg_unlocked = cfg_orig | MPS_MFR_CFG_EXT_CLR_LAST_EN;
++	ret = pmbus_write_word(chip, MPS_MFR_CFG_EXT, cfg_unlocked);
++	if (ret) {
++		printf("pmbus mps: MFR_CFG_EXT <- 0x%04x failed (%d)\n",
++		       cfg_unlocked, ret);
++		goto restore_wp;
++	}
++
++	last_rc = dm_i2c_write(chip, PMBUS_CLEAR_LAST_FAULT, NULL, 0);
++	if (last_rc)
++		printf("pmbus mps: CLEAR_LAST_FAULT (08h) write failed (%d) even with gate open\n",
++		       last_rc);
++	else
++		printf("pmbus mps: CLEAR_LAST_FAULT (08h) issued with MFR_CFG_EXT bit[6]=1, PROTECTION_LAST should now read 0x0000\n");
++
++	rc = pmbus_write_word(chip, MPS_MFR_CFG_EXT, cfg_orig);
++	if (rc)
++		printf("pmbus mps: MFR_CFG_EXT restore failed (%d), gate may stay open until POR\n",
++		       rc);
++
++restore_wp:
++	if (wp_orig != 0) {
++		rc = dm_i2c_write(chip, PMBUS_WRITE_PROTECT, &wp_orig, 1);
++		if (rc)
++			printf("pmbus mps: WRITE_PROTECT restore failed (%d), chip stays unlocked until POR\n",
++			       rc);
++	}
++
++	return (ret || last_rc) ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
++}
++
++static int mps_vendor_handler(struct cmd_tbl *cmdtp, int flag, int argc,
++			      char *const argv[])
++{
++	struct udevice *chip;
++	int rc;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	rc = mps_require_active(&chip);
++	if (rc)
++		return rc;
++
++	if (!strcmp(argv[1], "last") && argc == 2)
++		return mps_do_last(chip);
++	if (!strcmp(argv[1], "clear") && argc >= 3) {
++		if (!strcmp(argv[2], "last"))
++			return mps_do_clear_last(chip);
++		if (!strcmp(argv[2], "force"))
++			return mps_do_clear_force(chip);
++	}
++	return CMD_RET_USAGE;
++}
++
++static const struct pmbus_vendor_op mps_vendor_op = {
++	.vendor  = "mps",
++	.handler = mps_vendor_handler,
++	.help    = "pmbus mps last         : read MPS PROTECTION_LAST (FBh)\n"
++		   "pmbus mps clear last   : issue MPS CLEAR_LAST_FAULT (08h) (DESTRUCTIVE)\n"
++		   "pmbus mps clear force  : force clear via MFR_CFG_EXT bit[6] (DESTRUCTIVE)\n",
++};
++
++static void mpq8785_identify_vout(struct udevice *i2c_dev)
++{
++	enum pmbus_data_format fmt;
++
++	/*
++	 * Let the shared helper read VOUT_MODE and pick the base format
++	 * (the single source of truth for the bit layout). The MPS quirk:
++	 * this family encodes VOUT in DIRECT with m=64 R=1 whenever
++	 * VOUT_MODE reports VID *or* DIRECT -- override the helper's
++	 * generic DIRECT m=1 / VID-unwired result in those two modes.
++	 * LINEAR and IEEE754 keep the helper's selection unchanged.
++	 */
++	fmt = pmbus_regulator_identify_vout(i2c_dev, &mpq8785_info);
++	if (fmt == pmbus_fmt_vid || fmt == pmbus_fmt_direct) {
++		mpq8785_info.format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct;
++		mpq8785_info.m[PSC_VOLTAGE_OUT] = 64;
++		mpq8785_info.b[PSC_VOLTAGE_OUT] = 0;
++		mpq8785_info.R[PSC_VOLTAGE_OUT] = 1;
++	}
++}
++
++/*
++ * The MPQ8785 datasheet revision letter changes which window the
++ * analog ADDR_VBOOT level resolves to. Boards have been observed at
++ * 0x10 (later die rev) versus the 0x20 the original driver assumed.
++ * If the DT declared address fails the MFR_ID probe at probe time,
++ * walk the three documented windows looking for an MPS responder.
++ *
++ * Each window covers 16 consecutive 7 bit I2C addresses; the low
++ * nibble selects the chip's MFR_ADDR_PMBUS slot within the window.
++ */
++#define MPS_ADDR_VBOOT_WINDOW_SIZE	16
++static const u8 mps_addr_window_starts[] = { 0x10, 0x20, 0x60 };
++
++static int mpq8785_probe_addr(struct udevice *bus, u8 addr,
++			      struct udevice **chip_out)
++{
++	char id[PMBUS_MFR_STRING_MAX] = "";
++	struct udevice *chip;
++	int ret;
++
++	ret = i2c_get_chip(bus, addr, 1, &chip);
++	if (ret)
++		return ret;
++	ret = pmbus_read_string(chip, PMBUS_MFR_ID, id, sizeof(id), true);
++	if (ret < 0)
++		return ret;
++	if (strncmp(id, "MPS", 3) != 0)
++		return -ENODEV;
++	*chip_out = chip;
++	return 0;
++}
++
++static int mpq8785_scan_windows(struct udevice *bus, u8 *found_addr,
++				struct udevice **chip_out)
++{
++	unsigned int i, j;
++
++	for (i = 0; i < ARRAY_SIZE(mps_addr_window_starts); i++) {
++		for (j = 0; j < MPS_ADDR_VBOOT_WINDOW_SIZE; j++) {
++			u8 addr = mps_addr_window_starts[i] + j;
++
++			if (mpq8785_probe_addr(bus, addr, chip_out) == 0) {
++				*found_addr = addr;
++				return 0;
++			}
++		}
++	}
++	return -ENODEV;
++}
++
++static struct pmbus_driver_info *mpq8785_pick_info(enum mpq_chip_id chip_id)
++{
++	switch (chip_id) {
++	case MPQ_MPM3695:
++	case MPQ_MPM3695_25:
++	case MPQ_MPM82504:
++		return &mpm82504_info;
++	case MPQ_MPQ8785:
++	default:
++		return &mpq8785_info;
++	}
++}
++
++static int mpq8785_probe(struct udevice *dev)
++{
++	enum mpq_chip_id chip_id = (enum mpq_chip_id)dev_get_driver_data(dev);
++	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
++	struct pmbus_driver_info *info = mpq8785_pick_info(chip_id);
++	static bool match_registered;
++	static bool vendor_registered;
++	u32 fb_div;
++	int ret;
 +
 +	ret = pmbus_regulator_probe_common(dev, info, 0);
 +	if (ret)
 +		return ret;
 +
 +	/*
-+	 * Avoid reading non supported pages to avoid device's sticky
-+	 * status.
++	 * Verify the chip answers MFR_ID="MPS" at the DT declared
++	 * address. If it doesn't, walk the documented ADDR_VBOOT windows
++	 * looking for it (a die rev address shift). On a hit, replace
++	 * priv->i2c_dev with the discovered chip handle and continue.
 +	 */
-+	info->pages = dev_read_u32_default(dev, "pmbus,num-pages", 1);
-+	if (info->pages < 1)
-+		info->pages = 1;
++	{
++		char id[PMBUS_MFR_STRING_MAX] = "";
 +
-+	pmbus_regulator_identify_vout(gpriv->base.i2c_dev, info);
++		ret = pmbus_read_string(priv->i2c_dev, PMBUS_MFR_ID, id,
++					sizeof(id), true);
++		if (ret < 0 || strncmp(id, "MPS", 3) != 0) {
++			struct udevice *bus = dev_get_parent(dev);
++			struct udevice *promoted;
++			u8 found = 0;
 +
++			if (mpq8785_scan_windows(bus, &found, &promoted) == 0) {
++				printf("MPQ8785: DT addr 0x%02x silent, auto promoted to 0x%02x\n",
++				       (unsigned int)dev_read_addr(dev), found);
++				priv->i2c_dev = promoted;
++			} else {
++				printf("MPQ8785: no MPS responder found in 0x10..0x1f / 0x20..0x2f / 0x60..0x6f\n");
++				return -ENODEV;
++			}
++		}
++	}
++
++	/* MPQ8785 specific: refine VOUT format from VOUT_MODE. */
++	if (chip_id == MPQ_MPQ8785)
++		mpq8785_identify_vout(priv->i2c_dev);
++
++	/* Apply mps,vout-fb-divider-ratio-permille if present in DT. */
++	fb_div = dev_read_u32_default(dev, "mps,vout-fb-divider-ratio-permille", 0);
++	if (fb_div) {
++		ret = pmbus_regulator_apply_voltage_scale(dev, fb_div);
++		if (ret) {
++			printf("MPQ8785: VOUT_SCALE_LOOP write failed (%d)\n", ret);
++			return ret;
++		}
++	}
++
++	/*
++	 * Register the chip match and the MPS vendor handler exactly
++	 * once across all bound MPS regulators (a board could legally
++	 * carry several). Both registries are global and idempotent
++	 * matches return -ENOSPC, so the static guards keep things
++	 * tidy.
++	 */
++	if (!match_registered) {
++		if (pmbus_register_chip(&mpq8785_match) == 0)
++			match_registered = true;
++	}
++	if (!vendor_registered) {
++		if (pmbus_register_vendor_handler(&mps_vendor_op) == 0)
++			vendor_registered = true;
++	}
 +	return 0;
 +}
 +
-+static const struct udevice_id pmbus_generic_ids[] = {
-+	{ .compatible = "pmbus" },
++static const struct udevice_id mpq8785_ids[] = {
++	{ .compatible = "mps,mpm3695",    .data = MPQ_MPM3695 },
++	{ .compatible = "mps,mpm3695-25", .data = MPQ_MPM3695_25 },
++	{ .compatible = "mps,mpm82504",   .data = MPQ_MPM82504 },
++	{ .compatible = "mps,mpq8785",    .data = MPQ_MPQ8785 },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(pmbus_generic_regulator) = {
-+	.name      = "pmbus_generic_regulator",
++U_BOOT_DRIVER(mpq8785_regulator) = {
++	.name      = "mpq8785_regulator",
 +	.id        = UCLASS_REGULATOR,
-+	.of_match  = pmbus_generic_ids,
-+	.probe     = pmbus_generic_probe,
++	.of_match  = mpq8785_ids,
++	.probe     = mpq8785_probe,
 +	.ops       = &pmbus_regulator_ops,
-+	.priv_auto = sizeof(struct pmbus_generic_priv),
++	.priv_auto = sizeof(struct pmbus_regulator_priv),
 +};
-diff --git a/drivers/power/regulator/pmbus_helper.c b/drivers/power/regulator/pmbus_helper.c
-new file mode 100644
-index 00000000000..4763470442d
---- /dev/null
-+++ b/drivers/power/regulator/pmbus_helper.c
-@@ -0,0 +1,315 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 Free Mobile, Vincent Jardin
-+ *
-+ * Shared UCLASS_REGULATOR operations over the PMBus 1.x framework.
-+ * See pmbus_helper.h for the API surface and doc/develop/pmbus.rst
-+ * for the porting guide.
-+ *
-+ * No code in this file may reference a specific chip family or
-+ * board. Chip specific quirks (vendor registers, VID coercion,
-+ * ADDR pin auto promotion, byte reversed MFR strings, etc.) belong
-+ * in the per chip driver under drivers/power/regulator/<chip>.c.
-+ */
-+
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <i2c.h>
-+#include <log.h>
-+#include <pmbus.h>
-+#include <vsprintf.h>
-+#include <linux/types.h>
-+#include <power/regulator.h>
-+
-+#include "pmbus_helper.h"
-+
-+static int pmbus_regulator_select_page(struct pmbus_regulator_priv *priv)
-+{
-+	u8 p;
-+
-+	if (priv->page <= 0)
-+		return 0;
-+	p = (u8)priv->page;
-+	return dm_i2c_write(priv->i2c_dev, PMBUS_PAGE, &p, 1);
-+}
-+
-+static int pmbus_regulator_get_value(struct udevice *dev)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	u8 vout_mode = 0;
-+	u16 raw = 0;
-+	s64 uv;
-+	int ret;
-+
-+	ret = pmbus_regulator_select_page(priv);
-+	if (ret)
-+		return ret;
-+	pmbus_read_byte(priv->i2c_dev, PMBUS_VOUT_MODE, &vout_mode);
-+	if (pmbus_read_word(priv->i2c_dev, PMBUS_READ_VOUT, &raw))
-+		return -EIO;
-+
-+	if (priv->info)
-+		uv = pmbus_reg2data(priv->info, PSC_VOLTAGE_OUT, raw, vout_mode);
-+	else
-+		uv = pmbus_reg2data_linear16(raw, vout_mode);
-+
-+	if (uv > INT_MAX)
-+		uv = INT_MAX;
-+	if (uv < INT_MIN)
-+		uv = INT_MIN;
-+	return (int)uv;
-+}
-+
-+static int pmbus_regulator_set_value(struct udevice *dev, int uV)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	u8 vout_mode = 0;
-+	u8 buf[2];
-+	u16 raw;
-+	int ret;
-+
-+	ret = pmbus_regulator_select_page(priv);
-+	if (ret)
-+		return ret;
-+	if (pmbus_read_byte(priv->i2c_dev, PMBUS_VOUT_MODE, &vout_mode))
-+		return -EIO;
-+
-+	/*
-+	 * Dispatch on the chip's VOUT_MODE selector. LINEAR16 and DIRECT
-+	 * are wired today; VID and IEEE754 return -ENOSYS until their
-+	 * encoders land. For DIRECT, the m / b / R triple comes from the
-+	 * chip's pmbus_driver_info[PSC_VOLTAGE_OUT]; if the per chip
-+	 * driver did not populate them, the encoder cannot run.
-+	 */
-+	switch (vout_mode & PB_VOUT_MODE_MODE_MASK) {
-+	case PB_VOUT_MODE_LINEAR:
-+		raw = pmbus_data2reg_linear16((s64)uV, vout_mode);
-+		break;
-+	case PB_VOUT_MODE_DIRECT:
-+		if (!priv->info ||
-+		    priv->info->format[PSC_VOLTAGE_OUT] != pmbus_fmt_direct)
-+			return -ENODATA;
-+		raw = pmbus_data2reg_direct((s64)uV,
-+					    priv->info->m[PSC_VOLTAGE_OUT],
-+					    priv->info->b[PSC_VOLTAGE_OUT],
-+					    priv->info->R[PSC_VOLTAGE_OUT]);
-+		break;
-+	default:
-+		return -ENOSYS;
-+	}
-+
-+	buf[0] = (u8)(raw & 0xff);
-+	buf[1] = (u8)((raw >> 8) & 0xff);
-+	return dm_i2c_write(priv->i2c_dev, PMBUS_VOUT_COMMAND, buf, 2);
-+}
-+
-+static int pmbus_regulator_get_enable(struct udevice *dev)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	u8 op = 0;
-+	int ret;
-+
-+	ret = pmbus_regulator_select_page(priv);
-+	if (ret)
-+		return ret;
-+	if (pmbus_read_byte(priv->i2c_dev, PMBUS_OPERATION, &op))
-+		return -EIO;
-+	return (op & PB_OPERATION_ON) ? 1 : 0;
-+}
-+
-+static int pmbus_regulator_set_enable(struct udevice *dev, bool enable)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	u8 op = 0;
-+	int ret;
-+
-+	ret = pmbus_regulator_select_page(priv);
-+	if (ret)
-+		return ret;
-+	if (pmbus_read_byte(priv->i2c_dev, PMBUS_OPERATION, &op))
-+		return -EIO;
-+
-+	if (enable)
-+		op |= PB_OPERATION_ON;
-+	else
-+		op &= (u8)~PB_OPERATION_ON;
-+	return dm_i2c_write(priv->i2c_dev, PMBUS_OPERATION, &op, 1);
-+}
-+
-+const struct dm_regulator_ops pmbus_regulator_ops = {
-+	.get_value  = pmbus_regulator_get_value,
-+	.set_value  = pmbus_regulator_set_value,
-+	.get_enable = pmbus_regulator_get_enable,
-+	.set_enable = pmbus_regulator_set_enable,
-+};
-+
-+int pmbus_regulator_read_temp(struct udevice *reg_dev, int *temp_mc)
-+{
-+	struct pmbus_regulator_priv *priv;
-+	u16 raw = 0;
-+	s64 udeg;
-+	int ret;
-+
-+	if (!reg_dev || !temp_mc)
-+		return -EINVAL;
-+	priv = dev_get_priv(reg_dev);
-+	if (!priv || !priv->i2c_dev)
-+		return -ENODEV;
-+
-+	ret = pmbus_regulator_select_page(priv);
-+	if (ret)
-+		return ret;
-+	if (pmbus_read_word(priv->i2c_dev, PMBUS_READ_TEMPERATURE_1, &raw))
-+		return -EIO;
-+
-+	/*
-+	 * vout_mode is meaningless for the temperature class. With a
-+	 * chip info record the dispatcher honours its per-class format
-+	 * (DIRECT m/b/R for MPS, LINEAR11 for spec-compliant parts);
-+	 * without one, fall back to the PMBus 1.x standard LINEAR11.
-+	 */
-+	if (priv->info)
-+		udeg = pmbus_reg2data(priv->info, PSC_TEMPERATURE, raw, 0);
-+	else
-+		udeg = pmbus_reg2data_linear11(raw);
-+
-+	*temp_mc = (int)(udeg / 1000);
-+	return 0;
-+}
-+
-+enum pmbus_data_format
-+pmbus_regulator_identify_vout(struct udevice *i2c_dev,
-+			      struct pmbus_driver_info *info)
-+{
-+	u8 vout_mode = 0;
-+
-+	if (pmbus_read_byte(i2c_dev, PMBUS_VOUT_MODE, &vout_mode))
-+		return info->format[PSC_VOLTAGE_OUT];
-+
-+	switch (vout_mode & PB_VOUT_MODE_MODE_MASK) {
-+	case PB_VOUT_MODE_LINEAR:
-+		info->format[PSC_VOLTAGE_OUT] = pmbus_fmt_linear;
-+		break;
-+	case PB_VOUT_MODE_VID:
-+		info->format[PSC_VOLTAGE_OUT] = pmbus_fmt_vid;
-+		break;
-+	case PB_VOUT_MODE_DIRECT:
-+		info->format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct;
-+		info->m[PSC_VOLTAGE_OUT] = 1;
-+		info->b[PSC_VOLTAGE_OUT] = 0;
-+		info->R[PSC_VOLTAGE_OUT] = 0;
-+		break;
-+	case PB_VOUT_MODE_IEEE754:
-+		info->format[PSC_VOLTAGE_OUT] = pmbus_fmt_ieee754;
-+		break;
-+	default:
-+		break;
-+	}
-+	return info->format[PSC_VOLTAGE_OUT];
-+}
-+
-+const struct pmbus_driver_info *pmbus_regulator_info_by_addr(int bus_seq,
-+							     u8 addr)
-+{
-+	struct uclass *uc;
-+	struct udevice *r;
-+
-+	if (uclass_get(UCLASS_REGULATOR, &uc))
-+		return NULL;
-+
-+	uclass_foreach_dev(r, uc) {
-+		struct udevice *parent = dev_get_parent(r);
-+		struct pmbus_regulator_priv *priv;
-+		int ra;
-+
-+		if (!parent || device_get_uclass_id(parent) != UCLASS_I2C)
-+			continue;
-+		if (dev_seq(parent) != bus_seq)
-+			continue;
-+		ra = dev_read_addr(r);
-+		if (ra < 0 || (u8)ra != addr)
-+			continue;
-+
-+		/*
-+		 * Address matches. Only chips driven through this helper
-+		 * carry a pmbus_regulator_priv at the head of their priv;
-+		 * identify them by their shared ops vector so we never
-+		 * misread a foreign regulator's private layout.
-+		 */
-+		if (!r->driver || r->driver->ops != &pmbus_regulator_ops)
-+			return NULL;
-+		if (device_probe(r))
-+			return NULL;
-+		priv = dev_get_priv(r);
-+		return priv ? priv->info : NULL;
-+	}
-+	return NULL;
-+}
-+
-+/*
-+ * Spawn the generic UCLASS_THERMAL companion (drivers/thermal/
-+ * pmbus_thermal.c) as a child of this regulator so READ_TEMPERATURE_1
-+ * is reachable through the standard `temperature list` / `temperature
-+ * get` interface. Named "<regulator-name>-temp" so several PMBus rails
-+ * on one board produce distinct, descriptive device names. Failure is
-+ * non-fatal: the chip still works as a UCLASS_REGULATOR.
-+ */
-+static void pmbus_regulator_bind_thermal(struct udevice *dev)
-+{
-+	struct udevice *therm;
-+	const char *rname;
-+	char name[48];
-+
-+	if (!IS_ENABLED(CONFIG_PMBUS_THERMAL))
-+		return;
-+	if (device_bind_driver(dev, "pmbus_thermal", "pmbus-temp", &therm))
-+		return;
-+	rname = dev_read_string(dev, "regulator-name");
-+	snprintf(name, sizeof(name), "%s-temp", rname ? rname : dev->name);
-+	device_set_name(therm, name);
-+}
-+
-+int pmbus_regulator_probe_common(struct udevice *dev,
-+				 const struct pmbus_driver_info *info,
-+				 int page)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	int chip_addr;
-+	int ret;
-+
-+	chip_addr = dev_read_addr(dev);
-+	if (chip_addr < 0)
-+		return -EINVAL;
-+
-+	ret = i2c_get_chip(dev_get_parent(dev), (u32)chip_addr, 1, &priv->i2c_dev);
-+	if (ret)
-+		return ret;
-+
-+	priv->info = info;
-+	priv->page = page;
-+
-+	if (page > 0) {
-+		u8 p = (u8)page;
-+
-+		ret = dm_i2c_write(priv->i2c_dev, PMBUS_PAGE, &p, 1);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	pmbus_regulator_bind_thermal(dev);
-+	return 0;
-+}
-+
-+int pmbus_regulator_apply_voltage_scale(struct udevice *dev,
-+					u32 fb_divider_permille)
-+{
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	u8 buf[2];
-+
-+	if (fb_divider_permille == 0)
-+		return 0;
-+	buf[0] = (u8)(fb_divider_permille & 0xff);
-+	buf[1] = (u8)((fb_divider_permille >> 8) & 0xff);
-+	return dm_i2c_write(priv->i2c_dev, PMBUS_VOUT_SCALE_LOOP, buf, 2);
-+}
-diff --git a/drivers/power/regulator/pmbus_helper.h b/drivers/power/regulator/pmbus_helper.h
-new file mode 100644
-index 00000000000..82f263cd513
---- /dev/null
-+++ b/drivers/power/regulator/pmbus_helper.h
-@@ -0,0 +1,90 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2026 Free Mobile, Vincent Jardin
-+ *
-+ * Shared UCLASS_REGULATOR ops for PMBus 1.x voltage regulator chips.
-+ *
-+ * Per chip drivers under drivers/power/regulator/<chip>.c bind a
-+ * vendor,chip compatible from DT and call pmbus_regulator_probe_common()
-+ * in their .probe. They install pmbus_regulator_ops as the .ops vector;
-+ * the helper handles VOUT_MODE / READ_VOUT / VOUT_COMMAND / OPERATION
-+ * via the tree level <pmbus.h> framework.
-+ *
-+ * Per chip drivers retain control of identify hooks (VOUT_MODE based
-+ * format selection), chip specific quirks (vendor registers, ADDR pin
-+ * auto promotion), and DT property handling (e.g. MPS
-+ * mps,vout-fb-divider-ratio-permille).
-+ */
-+
-+#ifndef _DRIVERS_POWER_REGULATOR_PMBUS_HELPER_H_
-+#define _DRIVERS_POWER_REGULATOR_PMBUS_HELPER_H_
-+
-+#include <linux/types.h>
-+#include <pmbus.h>
-+
-+struct udevice;
-+struct dm_regulator_ops;
-+
-+/*
-+ * Per chip private state. The first field of every per chip driver's
-+ * priv_auto must be (or contain at offset 0) a struct
-+ * pmbus_regulator_priv so the shared ops vector can recover it via
-+ * dev_get_priv(dev).
-+ *
-+ *   i2c_dev   chip handle obtained from dev->parent at probe time
-+ *             (the parent must be a UCLASS_I2C bus).
-+ *   page      PMBUS_PAGE selector for multi rail chips. Single rail
-+ *             chips set page = 0; the helper writes PMBUS_PAGE only
-+ *             when page > 0 to avoid wasted bus traffic on single
-+ *             rail parts.
-+ *   info      pointer to the chip's pmbus_driver_info; consumed by
-+ *             pmbus_reg2data() / pmbus_data2reg_linear16() to pick
-+ *             the right format[] / m / b / R coefficients.
-+ */
-+struct pmbus_regulator_priv {
-+	struct udevice *i2c_dev;
-+	int page;
-+	const struct pmbus_driver_info *info;
-+};
-+
-+extern const struct dm_regulator_ops pmbus_regulator_ops;
-+
-+/*
-+ * Per chip probe glue. Reads `reg` from DT, gets the I2C chip handle
-+ * from dev->parent, populates priv->i2c_dev / page / info, and writes
-+ * PMBUS_PAGE if page > 0. Per chip drivers call this in their .probe
-+ * before any chip specific identification.
-+ */
-+int pmbus_regulator_probe_common(struct udevice *dev,
-+				 const struct pmbus_driver_info *info,
-+				 int page);
-+
-+/*
-+ * Optional helper for per chip drivers that honour an external
-+ * feedback divider DT property (e.g. MPS mps,vout-fb-divider-ratio-
-+ * permille). Writes the supplied ratio to PMBUS_VOUT_SCALE_LOOP at
-+ * probe time. fb_divider_permille == 0 leaves the chip default.
-+ */
-+int pmbus_regulator_apply_voltage_scale(struct udevice *dev,
-+					u32 fb_divider_permille);
-+
-+/*
-+ * Read PMBUS_VOUT_MODE and set info->format[PSC_VOLTAGE_OUT] from its
-+ * mode selector bits[7:5] per PMBus 1.3 Part II sec 8.3:
-+ *   LINEAR  -> pmbus_fmt_linear
-+ *   VID     -> pmbus_fmt_vid
-+ *   DIRECT  -> pmbus_fmt_direct (default coefficients m=1, b=0, R=0)
-+ *   IEEE754 -> pmbus_fmt_ieee754
-+ *
-+ * The single place that knows the VOUT_MODE bit layout; both the
-+ * generic regulator and per chip drivers call it so they never
-+ * re-implement the switch. Returns the selected format so a chip
-+ * driver can post-adjust a quirk (e.g. MPS encodes VOUT in DIRECT
-+ * with m=64 R=1 even when VOUT_MODE reports VID). On a VOUT_MODE read
-+ * failure the format is left unchanged and the prior value is returned.
-+ */
-+enum pmbus_data_format
-+pmbus_regulator_identify_vout(struct udevice *i2c_dev,
-+			      struct pmbus_driver_info *info);
-+
-+#endif /* _DRIVERS_POWER_REGULATOR_PMBUS_HELPER_H_ */
-diff --git a/include/pmbus.h b/include/pmbus.h
-index 969108e5b53..3ac82465190 100644
---- a/include/pmbus.h
-+++ b/include/pmbus.h
-@@ -464,6 +464,43 @@ bool pmbus_word_command_supported(struct udevice *dev, u8 reg);
- void pmbus_print_telemetry(struct udevice *chip);
- void pmbus_print_status_word(struct udevice *chip);
- 
-+/*
-+ * Regulator -> thermal bridge.
-+ *
-+ * Read READ_TEMPERATURE_1 (8Dh) from a UCLASS_REGULATOR device that
-+ * was bound by a pmbus_helper based chip driver, decode it through
-+ * the chip's pmbus_driver_info (so the MPS DIRECT 1 degC/LSB quirk
-+ * and the standard LINEAR11 encoding are both handled), select the
-+ * regulator's PAGE first on multi rail parts, and return the result
-+ * in millidegrees Celsius.
-+ *
-+ * This is what the generic drivers/thermal/pmbus_thermal.c companion
-+ * calls on its parent; keeping the decode here avoids exposing the
-+ * regulator-private pmbus_regulator_priv layout to other subsystems.
-+ *
-+ * Returns 0 on success, or a negative errno (-ENODEV if reg is not a
-+ * probed pmbus regulator, -EIO on bus error).
-+ */
-+int pmbus_regulator_read_temp(struct udevice *reg_dev, int *temp_mc);
-+
-+/*
-+ * Look up the pmbus_driver_info of a probed UCLASS_REGULATOR device at
-+ * (bus_seq, addr) that is driven by a pmbus_helper based chip driver
-+ * (mpq8785, pmbus_generic, ...). Probes the device so its identify
-+ * hook has run and format[] is populated, then returns its
-+ * driver_info. Returns NULL if no such regulator is bound at that
-+ * address, if the device is not a pmbus regulator, or if
-+ * CONFIG_DM_REGULATOR_PMBUS_HELPER is disabled.
-+ *
-+ * Lets pmbus_set_active() -- and thus the pmbus CLI and the board
-+ * boot snapshots -- reuse the rich, VOUT_MODE detected driver_info of
-+ * a DT bound generic / chip regulator when the device is selected by
-+ * raw <bus>:<addr> (which has no chip-match registry entry and would
-+ * otherwise fall back to blanket LINEAR16 / LINEAR11 decoding).
-+ */
-+const struct pmbus_driver_info *pmbus_regulator_info_by_addr(int bus_seq,
-+							     u8 addr);
-+
- /*
-  * Status bit name decoding.
-  *
-diff --git a/lib/pmbus.c b/lib/pmbus.c
-index d49576ad3bd..920f7b09a4b 100644
---- a/lib/pmbus.c
-+++ b/lib/pmbus.c
-@@ -761,6 +761,23 @@ int pmbus_set_active(int bus_seq, u8 addr)
- 				sizeof(pmbus_active_state.vendor));
- 	}
- 
-+	/*
-+	 * No MFR_ID chip-match (a spec compliant part with no per chip
-+	 * driver, e.g. a Flex / Delta PSU): if a generic / chip
-+	 * UCLASS_REGULATOR is bound at this address, reuse its
-+	 * VOUT_MODE detected driver_info so telemetry decodes through
-+	 * the right per class formats instead of the blanket
-+	 * LINEAR16 / LINEAR11 fallback.
-+	 */
-+	if (CONFIG_IS_ENABLED(DM_REGULATOR_PMBUS_HELPER) &&
-+	    !pmbus_active_state.info) {
-+		const struct pmbus_driver_info *di =
-+			pmbus_regulator_info_by_addr(bus_seq, addr);
-+
-+		if (di)
-+			pmbus_active_state.info = di;
-+	}
-+
- 	/*
- 	 * MFR_MODEL / MFR_REVISION are best effort. Use the same byte
- 	 * order the matched chip declared; if nothing matched, use the
 -- 
 2.43.0
 
