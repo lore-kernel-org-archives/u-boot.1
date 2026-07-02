@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AB8C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E25C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:31:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27ABF84832;
-	Thu,  2 Jul 2026 10:30:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6FABB84832;
+	Thu,  2 Jul 2026 10:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c5vCc475";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HBua82ra";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E463D84CCA; Thu,  2 Jul 2026 10:30:31 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 11CA784CBB; Thu,  2 Jul 2026 10:31:04 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BFC846A4
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:30:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEC67846A4
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:31:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-847a483e344so349573b3a.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:30:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782981027; cv=none;
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-37fdee9276fso1612842a91.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:31:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782981060; cv=none;
  d=google.com; s=arc-20260327;
- b=YiyTLjs5xeSYfOwM4ZTyGdYj2+hUohdUC/Ob1iudx2hJjsChy0MvzdymJnLbeWJhWV
- sywxbtSs6LdHGj35H3DpKL1HhP8bU5WId8lKMOmvz2FDpgrKulJ/CS4tEwidUcCBtOkk
- f5bY/uN2oddUswSoZgJ4EDfqbrPMxddzfzp4wiN/xzZ5lBUlCdGKbKiiWMavr+sm1FoQ
- r9snnJ6nuVelQpWSZpiMt8Q5iX7UXz+RoSUVau3kDjjLoYKclLbbrlFmH3irIjzfxaei
- RB1aT1WdNPA6hsAmjalQotDOWw62ApUGjNvF9OBLuh6z1MiKdpU+AYh2qWjHjseqSBOB
- B/Ng==
+ b=aZE73YZlGQxBShKD1bZkc/XI7fAwx6suYcqRkV2J5/1Nlku8VLFd8oP2m8T/xJsoi6
+ N+87AQM7fFFW1uXaVIoDnPPvsvPjUy+pcpx0Y/Ji/Lr+6AdLyK3KHvA0QNfNU8vwwBBE
+ gS/wy27mZWfOPMILS5Q/LHVdtva3N0k8h8N6vO5zVbBgFoQqPRPZLKm5niVZ3oUxw7/1
+ X1bq+rAD02GQgjSiGcdRVmRGG9Fy2hUglcw7jkQkvtgDbGDZHaXWHvm1G7Yl9Lhn2mt8
+ 2dHKg0zndotlEhTGt2IbpK6O2ScTuqggeVNcsRmZ9aYsXSMvRVYDwLFOhU6CE449uA49
+ H1zA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=yJggQ85DM678AeQx+hLa8A+ftwuK5okLSbZuyeJsCFg=;
+ bh=uDY1oHvlMkPW0r3k4y6o1l/2jmQ1FQzVYilwGpqZBng=;
  fh=MhAo4QPuXEC/Rh971JORz4rq3nvFSJ8p5JStjvc7R4U=;
- b=bI7T9GaMScuHsdrO8b7YPYfazKgdNBvmcU9dL6+8NCLb7s12/iO8OUbUoEJ6mBYh5Z
- rOUGq6ZV6pn8q2G8QyiDktC6Huw4FeKaJ9a+S8W/Nae8+ocYGJFRd8zx/uUmwKPKE1KA
- yskxtz+Z3uVvTx2xWWCOuE8YeQ2YaB3m3qw0xMRqKEbIr8IGHU0S48+MQwzvYiOffa/1
- uMjTydv3Zd9ejfRO0uUwfganoTwwkfJZFqVbRzlE/WKX9Hr1O/CIqXrJjt0CZllVYcrN
- XPZwCZumR8yUojDIgpddtVMXYLUjqGJGQ9nwbkcTehHFONIp+smPx+wbdqujgB/JGS0Q
- 5s7A==; darn=lists.denx.de
+ b=SSAirgh2JYhnCMx9dvI9T2xMHHnnEGxcHS3A4XeVpJ4+cX+J6U0KC4T3CIA9gMHEwb
+ C6KIosgTY/dHAt3hVSbbrf7LkzOrwInUd8PAL0uZKlMBwxmR6keIuoNgjc1eHfGv6ldU
+ o3xTt78Dx+hxUVP6DU8y+ibFai1QW9dUdTPwtti9bAOpR0MxQ/lOb1uo+Fyra/FR7fDT
+ yzVaUTDu0wlU2gZrmTMhY8/AasGT+RUlt85PPvLTax11po1yuLf4G+dvGEaI5z9PGulU
+ nbVzq2dh2zvw4XZPkjo8e30jbCl7RmQ/C6LpGVvY3jsE0FeFOMmeQxBY0hV1xhwtlbH6
+ 1nfA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782981027; x=1783585827; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782981060; x=1783585860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yJggQ85DM678AeQx+hLa8A+ftwuK5okLSbZuyeJsCFg=;
- b=c5vCc475QAEp7bmq1zYUSnsefw1cwakNtXexbjdoXaX+1r3Grrvy/FrFtfitMz2rCm
- /JJPjDfD3KZSA8Yo9SUuwLcsrI4+uXgii9J9rQeDivyksyg2K8mExGaaOFfw7kG36q73
- p8rLOEZWlvBuQcIti5lUqx9Hhl/0hkRaKlkIQ=
+ bh=uDY1oHvlMkPW0r3k4y6o1l/2jmQ1FQzVYilwGpqZBng=;
+ b=HBua82rad2WtAavDY3BTUl4ttLs9bUxQ0I+TzI3ubtcba6fOhW+LDM+JfdXCKR2VZI
+ w33BMWIP/XpRy3vil7VNm4OUpEN9hS8FYf78StirOqkTNqrLYl6TtJcyXQkZfGURHXsX
+ j1mWFidRnmQCcmgY4hwlsXi+4+cpjGPWKxNcg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782981027; x=1783585827;
+ d=1e100.net; s=20251104; t=1782981060; x=1783585860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yJggQ85DM678AeQx+hLa8A+ftwuK5okLSbZuyeJsCFg=;
- b=JUXnaixVTnLrC7dLSnEFGOlC/77K/EzgUAX9JhIb99EO0LJGdGM0v5oat5THuWCXAW
- Hv76iiWVe85m//wH2JipGvSLYXbptCRXBD9wS1QMbGrodH3mConBsGfKWRNst7nnF2dx
- +ABl3JIXH/Knk3DUqoEo9XdytjWQHW6GhNzPtN2LvQyGk1qfSe8lBeMLyEDKrSxGoA8Y
- SXUpsXFLlcJhEPMLUz5JAQFyvTjJI1vCH4nqjzQ0JHGkFMdKDM+t8saAO8A6T3mHwMlM
- POma+/ATUZVdIw4tNELkdXDFnafEbqcVNJhUpFEg0BU03a8xHXhfkXfZMydmYkUVx2J6
- 3mVA==
-X-Gm-Message-State: AOJu0YyzUaRsRhbFz4nJ55b2n6aPT7emCQ5lLZbwi57ZsjNgXA+keNmO
- HSDNY7xeNNjzD6BCK/J0xh+ElT8BOyh1B14lJS8bwGO8M9+Q60yAhFg3183Vo4GL1AeVXrvkoVY
- qS6wLE7HX+cbsbkmI4w75x+k2714tFiGcG3B+RHQi
-X-Gm-Gg: AfdE7cn/lqjn3wJbJDkLZrQJ6l5kZH4D+UtEJQmI8mPJEZzi6U9Xhy0AmX34NsTfVtU
- KYIBqeWug4h/ZSRveS8EnD/2hzllIfhWruIylDzTRpY9rPyoz8o0Xwv+ZyroDZttvcug0TDxxyq
- hJDAB6WbPU0ptc8pgncbGnvEGotVwyMkTn3+xsDZ05kosXdr9G4ZddB39HBorea2NozYk0Ka2PR
- VLHKqfO1R1Skv4HR/rtRMFbLCWhokqp5/v4vQTWL4mzfqTgs6zXeRtY7ZnAI9V5CLz7mLbLqtnj
- Tv6iCVV3
-X-Received: by 2002:a05:6a00:4c0c:b0:845:ec3c:548e with SMTP id
- d2e1a72fcca58-847a831f70bmr7561272b3a.25.1782981027317; Thu, 02 Jul 2026
- 01:30:27 -0700 (PDT)
+ bh=uDY1oHvlMkPW0r3k4y6o1l/2jmQ1FQzVYilwGpqZBng=;
+ b=dBatNzHkCbW0JvnD/Q4M57NQhVVU6bPBw5IZbW0Jw7UuQhKegeuxXI09tzZEu24ZAW
+ gyoVwJLZuGvvndSmpQ3EkWr9IambGaFHGvaXEkSIPb0J8YFAEo11PNNG6GBGCM7LNSNI
+ UCRhvk9RDCNhz/n0cRR6NJeYOBjHwaapli/NXhVJmqnZKDEh/fFgt2HRteGFzKs/nsnz
+ yaXA59xDQLV5hIzH+mcCN1mh/vN1qDgJf/JnkeN8OiwqNMBWdRF9NSDHVSSS5IkiBbk1
+ mnA7n8/m0imoEnuvWdJ6ubQvekJG2dT+sHuYPLCBGvawFhnMm6S0A/ULZt9yKf+N2Jsg
+ vupg==
+X-Gm-Message-State: AOJu0YwD/VzNL91MNz11SVFYpZGuPul9ORGcJYnE2IULv365NfDsMiXW
+ rQ1kueQNbCG5fOdlYj6T2qYSi7k/5i5rz4B9GnjNV8ecY066eFGzml5RP+BwIfWYj7HrxBC7DF+
+ e1uJJKjr38+13+wsytcJoJ4sUrV8FzOFe/CCKVj8PVeOvaIaPwEpQQCCh
+X-Gm-Gg: AfdE7ck41U6P8Z3WUXbGvgFCfAA3jxS0/eBLdY2Vp+7ImRwazQiBrgxS6hd7ENt3PGs
+ 4yO1z4ml6/8kwfWZzaojGkmBf+lx4JuhNGJFahZq9rU7C3NGI61DEbghK1+7Kb4MQJ7lkOBt2Ib
+ zYT1Qxlew4tLigsZFurvU+vc5BjaFnPfZd+J1kVksHGDcfBtFfUNBVAP2zVf/Tpa3tC78JYrr/N
+ ltOPoYsGEesj14xr4dHpMHnUAnrejW5S2Q2eMZe4u0b8cgNdNEwmFwITfGcIYFe+JZiUVnApg==
+X-Received: by 2002:a17:90b:4b09:b0:37f:9ce1:cda9 with SMTP id
+ 98e67ed59e1d1-380baa8a214mr4454003a91.31.1782981060147; Thu, 02 Jul 2026
+ 01:31:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
- <20260701171535.906272-3-rv@rasmusvillemoes.dk>
-In-Reply-To: <20260701171535.906272-3-rv@rasmusvillemoes.dk>
+ <20260701171535.906272-4-rv@rasmusvillemoes.dk>
+In-Reply-To: <20260701171535.906272-4-rv@rasmusvillemoes.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 09:30:00 +0100
-X-Gm-Features: AVVi8CeKEjSppC3wDUgJPwix0udqy095-0N7maUsL3XUSZc0xXBq_ODdL5W575I
-Message-ID: <CAFLszTgSJCxscS+ODRg=fMXMKLKnK_d6G+PbSoEfeWQwoYfO2Q@mail.gmail.com>
-Subject: Re: [PATCH 2/8] string: correct prototype of strchrnul()
+Date: Thu, 2 Jul 2026 09:30:02 +0100
+X-Gm-Features: AVVi8CehMJsrZvRnVpxJaXIpPREP2wJekBX1gmqbImQ5NWT4bidDiVRdmvr2R1Y
+Message-ID: <CAFLszTgmifnB2jvddUq5SY__MWJvTsS7EsSvfETwUKXNZV7dAQ@mail.gmail.com>
+Subject: Re: [PATCH 3/8] string: correct documentation for strstr and strnstr
 To: rv@rasmusvillemoes.dk
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Casey Connolly <casey.connolly@linaro.org>
@@ -110,17 +109,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-07-01T17:15:27, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
-> string: correct prototype of strchrnul()
+> string: correct documentation for strstr and strnstr
 >
-> Both glibc's (where this originated as a GNU extension) and the
-> kernel's versions of strchrnul() return "char *", not "const
-> char *". That also makes it consistent with the standard strchr()
-> function.
+> The len parameter for strnstr() concerns the maximum size of the
+> haystack to consider, not the length of the needle being searched for.
+>
+> strstr() obviously has no len parameter, so remove the copy-pasta.
 >
 > Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 >
-> include/linux/string.h | 2 +-
->  lib/string.c           | 4 ++--
->  2 files changed, 3 insertions(+), 3 deletions(-)
+> lib/string.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
