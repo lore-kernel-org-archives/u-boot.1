@@ -4,101 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C14C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED7DC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23CD5849C5;
-	Thu,  2 Jul 2026 15:00:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 76F18849F6;
+	Thu,  2 Jul 2026 15:07:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="EpDPy8lQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m6urxaDW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 770C6849D2; Thu,  2 Jul 2026 15:00:51 +0200 (CEST)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
+ id 4444A849FB; Thu,  2 Jul 2026 15:07:42 +0200 (CEST)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD1E849B1
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:00:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-666275a685eso871178d50.2
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 06:00:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782997248; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id B236F849B1
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:07:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-664d78637f8so2457869d50.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 06:07:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782997658; cv=none;
  d=google.com; s=arc-20260327;
- b=oHuS2L6mwGjl1MoK1+H6CciEBOsCucPNBf8vm674vfxNLpjjBd9EzNCSWn3W7HUYTz
- 7azWdoDCjQnih25FCLZR0QJ/ZnRX9dR3SE5u9dWcHnTuoP9v59noq4YUI3/HNUtC+eFs
- LqLI5Tg+CNT9f42K0JRoTMXRUyv710VjoGKvEviMcMICT1gNfuEvSVBJl0Kuy/Lx6ynk
- 5aAjGqt83JJ/NtplJjpA7gKL1iOdbtDYSUFx7JQYvVWp5ZdcP3VaDGacdB+aJng2SnZS
- Z4gDX3R8iolezvvyQ5xBMYDvdqEyk1tbDRvlS1w55fBL4cPCFyxKNlYETErU3syLd3a+
- Y/Kw==
+ b=Iip2/v9Disl8ES0UlsNfpuM1erL9PnT7WRENroVpm1WeR3lJkPba9Q9wQJQNgDwtHN
+ U+U/IRuQDPZeoaG/T8+tYoNbJTpnFlbibdtaqR7FJkn4G0I4AAU4ZfFrrnmb4Sfdj/l2
+ zBafottCep/r6OzY0efHPtkW8zE41Mjwzjg9/okBEIRFACWR2EpRsU6N5S5goRMMzkWw
+ dCoPfGcSX/CNWB0lHcKAlSKrqTFv7zaErY/6YL1Ca4eM/ElfO35TRf/1L+1wcCoaxJzT
+ 0jQE0zgEtAUgd8ui4Z1Z3Z1hbEOKxnsJ5HVqVSY2fa3+BNB01IMCiTu+5OCUiGY/BKCy
+ DAlw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
- fh=4vP3ydd4CVMqQpaOvbgZs4XckJACucA7raSo/oIm1r4=;
- b=bPPf8ktQuZ094hzjdQm7zG6R/e1I2ZETGljQ1SDB+QX7kOgbphGgWONQqty7oUhbhF
- fVcmuW14wcRD7NnREYmAsrERELZG/uJ6lpT1r+Cx2Yeqfmf1MhBVZPwLRMRigrodxyzp
- XrWwpkccrBVDUUdtCcbjk3wtUwrkFbx9ZyTMH0IW4/vw7PP5Su91DPQE+9hmTMZLCwSV
- t0hsBRl1hCTpRvO+E8Mxpo5eKuMURx7pih/L8jrsDQEzz06Fy0Y4mFpkfggJPcY3Yt3j
- 9HKzeJIO011m3yeZeHGr634fdqcKBesrbtTvwyf6wo7asRMjWs87gFWNb/753WFl4acp
- 20wA==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=lKOODBng/jE3azaokX7YGAadiTLn506rlC8zLQ3gdjo=;
+ fh=/Nsu4KeIY/BckAkrFd38YurCorn6dwrZh11nSZtiKSE=;
+ b=eYpIW6/CcuvLtX1QLZoP8/6NIbq1oIcvXdOeDEAjVlbqhghbAXuPUr/g2dQW/YuOXI
+ D5MaumtnmtUfkxPJh3dwB6KGhtHqwBLlwcgWIHIvTW1ai4+3RFWyg0CACPaeFN+54zSZ
+ 2Wsp66f3TCnlwDT8tb8Fk0gY2u+L8E9BFxwb82p56GZ7OKIq0O/F2BAmdw8gHZ76JMH1
+ 91hkQYDgjbxo1hEdxoWuX8uTWb4095UG63yvpBGortQP1Lw7EEK5gZC2M5Tp5KMgaNPB
+ PWzfIJXYyliTa3W6ijGu88NHfSyVBBoPcQr3yfM7TJ7/ut27Ek4gecHYLtTiFhvOkQYX
+ f5Ag==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1782997248; x=1783602048;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
- b=EpDPy8lQi29HBqRLOu/Uy0ODkcd4Z9dTDgT3yHdb49zDVo3imdptYnrh+/4aSQAXAr
- Meq4ONwE2cgohoxjtUD3CRGTrm3v4IMGAuniVXZ47zH1IgYTquIYGgsPOE470X0X3xF+
- J5DusN05EeiC093XAazZPYDKfNhp1GDNtJVyo=
+ d=linaro.org; s=google; t=1782997658; x=1783602458; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lKOODBng/jE3azaokX7YGAadiTLn506rlC8zLQ3gdjo=;
+ b=m6urxaDW/iQgSl1MLT1Q5yxQ/lNx29v30rExcuLN8/roxoKOxf6DxBqLoi5hcmYklj
+ 1NxOZW/P3jlAz2nmagzfdfkjaUUGffZEVFxCkpazHGg0LDwL8iQEObkPOZ6QJkNByXYg
+ wKjyTk5UOd8UTVhPsdLC9rcDOTlySlI6hz0th69qXyfB2otg+QXgaglmAl59jl75hfVO
+ OxnTRE9lnxDJp2KV13JgGNlnPrSIJ9LFC7AzrKXfqssF2P/pKnOl2IvG0Kv3zC+uNmX+
+ AboCNjLiNPSe7FuobiU1JgjRj5yyk27wxWxDi8SNLwC3jGupxdBuS4M3udco3STi1hs5
+ dl1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782997248; x=1783602048;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
- b=d8948g1yIBZhWKVs+BI3vPZiymGPDhdkYUR8Ex+K8936tQijTplwjzLMyD6TjNZlID
- VJSX0XxsJaKB5dtQARJ4kRel6Kb6/KW6MA2NFlXpZpk0Nb+Vzp55wJC6tqf7yb8NYfeb
- mcrQaKQBQUipDMR1xJaGa4GoXL5E9m1PRrEStNSgZYhn0no53zcEQqRRT+WocO+VpT9g
- ZSw/uF5GYp5K2uAHIrJoKwwq4stu9dcZ7aXa3aJhagV+xXeQ+EWq5YJOqOlrEXtTvPBS
- 9KPEJTb18YYhqOLkUORMzPfvX9vW9XknTbP0cIi7cVGRUtVeYSj8W65TSMPZhO2cYJB/
- xX7Q==
-X-Gm-Message-State: AOJu0YzI4CGKgE5qaI4MTdmDrV1yn4bE4KjWbbipDxyZbPgGvjoZTPA3
- 8GfGEW9qp6MF2Qg5sqxDrkhjlx8lNTO6ETQ0aw/D1HM/+yQpbE/bAn1iCRUPh5etFS/KwxlMhmv
- W1oNUkNOE/IiEeWoe8/hyqNTgM5nI63YeFNIoLJmArw==
-X-Gm-Gg: AfdE7cmmqRBpke2RpvPewhBvAOpUtXW1OPmAggwrpMjxxA0JIOUCoOUTtHx0Wlm+fSN
- JO3QqaS8rbyln1sypxPJnFSeUqIDGCAZS1RcExxMCPHGgLxzcaluXCdcBaOLbcnIGWrJ65cMZLw
- R1zV5vYJLqko62H2z3rgygcYi1VSj9BbfuiBjob6ZIjOsjQ6WP9h9bhokFtVST2k/+MbciuFN38
- 1aCBGgVYT6gvoM9rz55vQEQ5Q9PbybjrWU/5sxq7w6Z0PqLF+cTh12UPn7Y9zR7kOsGqC27F9mV
- lQE6C1s4HZoy93z0Lr8/iU5UNitPtV9wHWm6
-X-Received: by 2002:a05:690e:484b:b0:664:b4b6:b09c with SMTP id
- 956f58d0204a3-66521a2987dmr4247564d50.6.1782997247466; Thu, 02 Jul 2026
- 06:00:47 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1782997658; x=1783602458;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lKOODBng/jE3azaokX7YGAadiTLn506rlC8zLQ3gdjo=;
+ b=MaBy8zLq00mf7R6724kGgmtNUVhvRII4SuRyBu/pnfLRLBJgHFGM19mHj49WXx+O5b
+ 7305tp+mllO50zbZQ2tgcQOyZncMH+FdEG1MimgRAKLguR0/6SZlIBbcKGFKjHg+Ix1p
+ NmGCi+daRkD8kVGZ0Qm5ao7k3eztTmTvYzb+Ltq+uDgF2JFklZqJj3LQEBMSLLeZEm95
+ YyQGtgoldv0wVLTg8gIR5JGdUJYkDXCciN7cmvpsO8inUVVfMT/pxZKlPEeKl6NBgi4w
+ uxwUysupvOKOhwTHYBdtWxZNlUEkFBP/1DeMCTA5v5Vf7TkXvgr/yPPw6460eS3HEDKr
+ IXdg==
+X-Gm-Message-State: AOJu0Yyr+zqJEh25qbgNTrLiORGBruAHxtdSoq89OgO9Fj4ubkj1n0aE
+ 3zLYyCe4IjaCKvEVWq3yhnmwGbB9bMkHMMsJ8kN9obVTBfYOfyq3gHKOUPpHtQ+KpXBj0zTO+Tv
+ 3tCqkJa5PrWGOZ4iRbP7xFuksQipzI5Kb8PXvEDjDTw==
+X-Gm-Gg: AfdE7ck/YueJYGWzScHj5dsYnVX54S3hIo19oYXbsD/hfBtMu/kNrzGTTkjxdoxO6bv
+ RWfmnWHDOnpWw1b2OmWP7X1as4ZcmQYCOxrYoClsSmBknoxOf8GrHviyGIgseGxosKg3LiJMSbp
+ wvw4RHi7toFaG2W72RDfmscZ90y5m+ex503nk3GeW0NmYqfFTrK44GOI4pYms34SWgywGbItPAW
+ XHmd1moIHrPOH7afbKobHtg1ExtF2hsqWaBeDVi2PzKKv8+wGXSgb5kJjrSD204ExXV9E2eKiCm
+ 2cscY4CmEm6h/ecSlh8RNNOlaWKsLKpv/19uY4qEYeZ253dqfmLDCNTQUcnqk/5BrVI7MoWT7O7
+ nhzBdeip+EwQKIekpQHb0xz5yUSli+aWOh4n07+iC6ZWIe0AUMlN0AnqaecDQb5u0zGfflzBq7b
+ z48fGZjMcZ/LEGAHDHdXkrHDeoVqdA6CjoKeuVL1KM7/HSzqoBU7j8RqhbG826AvntzAql4xKaK
+ JaVvTdKLWHpiW9VicZTggsq7bgSobKB8Bc8ytzWmWDHw97IvcSJd1BeRvUfiBJI6O8XBMJHYPQN
+ XEKD+d/6051O06RSP6CVuY3X0vzXFujTY/8TaDRCbPGd27RPvbeLsuF/tvepbybufDQSWfI=
+X-Received: by 2002:a05:690e:4193:b0:666:1ff5:fc26 with SMTP id
+ 956f58d0204a3-6661ff6053emr4170047d50.76.1782997658408; Thu, 02 Jul 2026
+ 06:07:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260529153159.3944049-1-dario.binacchi@amarulasolutions.com>
- <8aab07b8-9a23-4c0d-a2f9-3943f6490a60@foss.st.com>
-In-Reply-To: <8aab07b8-9a23-4c0d-a2f9-3943f6490a60@foss.st.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 2 Jul 2026 15:00:36 +0200
-X-Gm-Features: AVVi8Cd1TORiw-1IRZ7FaxiJrZvkRi6T2wgDRC04ImYM4sEn8PS_fnARYqwuiG0
-Message-ID: <CABGWkvoUa0AHPFmqD-AKfik8oMdBh=JD-1JUcb3cMFDovmdwmg@mail.gmail.com>
-Subject: Re: [PATCH v2] ARM: dts: stm32: add U-Boot specific dtsi for
- stm32mp157f-dk2
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- michael@amarulasolutions.com, Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+References: <0bd1a1b8bbe48fa3a9b89673c1e1357d50d0684a.1782825467.git.michal.simek@amd.com>
+ <5e5241d02a04871a06dd44d3f8638f5da10893ff.1782825467.git.michal.simek@amd.com>
+ <CAC_iWjKeFMqXqo9tcf27Yuofyvbvr34Hqf5hFpK4zB8crtw8Yg@mail.gmail.com>
+ <f63906f9-29a6-422f-a111-855cdc8d1f2b@amd.com>
+ <CAC_iWjLfC_U=q+iPCy-BXLXwLiwjXBe3UHqH5XuvU1gkyVxKkA@mail.gmail.com>
+ <08e98c15-80a0-40d8-bc7c-8d8edfbf3f99@amd.com>
+ <CAC_iWjKH89ibj3KNvJW9HHXbQ4MhDLb2qWaYytU0S9Q_3xqkgw@mail.gmail.com>
+ <fa17c2ff-866b-40ec-ae10-847f2ff84572@amd.com>
+ <CAC_iWj+VqjpWPDRVGvCYpWMg4hmjeS1YzPBZiMvvQqvRRLe+Vg@mail.gmail.com>
+ <a9285398-9e71-4767-a34e-2dc767c11538@amd.com>
+ <CAC_iWjJiqU8KavYyHEavj+pszLxN-oq9EoucBi=bsjRuVqNMmw@mail.gmail.com>
+ <207fe44d-e18e-4983-b152-be820d720275@amd.com>
+In-Reply-To: <207fe44d-e18e-4983-b152-be820d720275@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 2 Jul 2026 16:07:02 +0300
+X-Gm-Features: AVVi8Cfslkk2Q_5-3BNrgl1T3_6KZ8QMrCGmyTSG5nwrb4hqSF6TwEA26KSOUeg
+Message-ID: <CAC_iWjJ2z2TCZT63U5ve53LL80GnZ6PsuR1hOG4EMtizq3+LwA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] fwu: Gracefully handle missing FWU metadata device
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,111 +131,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice
-
-On Mon, Jun 29, 2026 at 9:29=E2=80=AFAM Patrice CHOTARD
-<patrice.chotard@foss.st.com> wrote:
+On Thu, 2 Jul 2026 at 15:40, Michal Simek <michal.simek@amd.com> wrote:
 >
 >
 >
-> On 5/29/26 17:31, Dario Binacchi wrote:
-> > The STM32MP157F-DK2 board is a direct derivative of the STM32MP157C-DK2=
-.
-> > As explained by ST [1], the "STM32MP157F-DK2 is assembled with latest
-> > STM32MP15 RevZ cut which is the only one available for new product now.
-> > The major differences in this 'F' variant SoC are the increased max
-> > frequency of the Cortex-A7 cores and the correction of some HW bugs
-> > (Device Rev.Z, see errata ES0438)".
+> On 7/2/26 14:24, Ilias Apalodimas wrote:
+> > Hi Michal,
 > >
-> > On the software/architecture side, this variant utilizes SCMI (System
-> > Control and Management Interface) for secure world resource management.
-> > As a consequence, the underlying stm32mp15-scmi.dtsi explicitly deletes
-> > several fixed clock nodes (such as clk_hse, clk_hsi, clk_lse, clk_lsi,
-> > and clk_csi), making it impossible to include stm32mp157c-dk2-u-boot.dt=
-si
-> > without triggering compilation errors due to these missing clock labels=
-.
+> > [...]
 > >
-> > So let's introduce a dedicated stm32mp157f-dk2-u-boot.dtsi that directl=
-y
-> > defines the fwu-mdata node. This provides the necessary FWU metadata
-> > configuration required to allow automatic A/B bank selection, supported
-> > for STM32MP15 boards by commit 560d8f32703f ("board: st: stm32mp15:
-> > support dynamic A/B bank bootup").
+> >>>>>
+> >>>>> The prints below are just from fwu and efidebug for the ESRT table.
+> >>>>> Those will work.
+> >>>>> But what happens if you try to run a capsule update?
+> >>>>> Eg. efi_capsule_update_firmware() will call
+> >>>>> fwu_plat_get_update_index() which will fail,. no ?
+> >>>>
+> >>>> it fails on fwu_update_checks_pass() before fwu_plat_get_update_index().
+> >>>>
+> >>>> versal2> efidebug capsule update -v 0x40000000
+> >>>> Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
+> >>>> Capsule flags: 0x18000
+> >>>> Capsule header size: 0x1c
+> >>>> Capsule image size: 0x41434
+> >>>> FWU checks failed. Cannot start update
+> >>>> Cannot handle a capsule at 0000000040000000
+> >>>
+> >>> Ah yes, that ret 0; will never update boottime_check properly.
+> >>
+> >> I think the question is if this is acceptable or not.
+> >> Because none checked error code before
+> >> 583efb504058 ("event: Check return value from event_notify_null()")
+> >> and then
+> >> 353166279c32 ("fwu: Move boottime checks to EVT_POST_PREBOOT")
+> >> it checks it too.
+> >> It means in past fwu code error out but u-boot continue to work with above
+> >> behavior.
 > >
-> > [1] https://community.st.com/t5/stm32-mpus-products-and-hardware/i-m-wo=
-ndering-what-s-the-difference-point-between-stm32mp157c/td-p/213460
-> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > That's also a bug imho then.
 > >
-> > ---
+> >>
+> >> Pretty much this patch is bringing back old behavior before these two patches
+> >> have been applied to the repo.
 > >
-> > Changes in v2:
-> > - Drop the inclusion of stm32mp157c-dk2-u-boot.dtsi to avoid compilatio=
-n
-> >   errors caused by deleted clock nodes in stm32mp15-scmi.dtsi.
-> > - Directly define the fwu-mdata node in stm32mp157f-dk2-u-boot.dtsi to
-> >   properly support automatic A/B bank selection.
-> >
-> >  arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi | 11 +++++++++++
-> >  1 file changed, 11 insertions(+)
-> >  create mode 100644 arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
-> >
-> > diff --git a/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi b/arch/arm/dts/st=
-m32mp157f-dk2-u-boot.dtsi
-> > new file mode 100644
-> > index 000000000000..77805417bfa9
-> > --- /dev/null
-> > +++ b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
-> > @@ -0,0 +1,11 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacch=
-i@amarulasolutions.com>
-> > + */
-> > +
-> > +/ {
-> > +     fwu-mdata {
-> > +             compatible =3D "u-boot,fwu-mdata-gpt";
-> > +             fwu-mdata-store =3D <&sdmmc1>;
-> > +     };
-> > +};
+> > It doesn't make sense to update to or run a firmware that won't be
+> > able to use capsule updates ever again.
 >
-> Hi Dario
+> It means that can be consider as misconfiguration. Which ends up today in
+> forever loop (1/2 will at least tell now what it is happening).
 >
-> What about including stm32mp157c-dk2-u-boot.dtsi instead of defining fwu-=
-mdata node ?
-
-This was actually the approach used in v1. However, as you pointed out in t=
-he
-v1 thread [1], it does not build because stm32mp15-scmi.dtsi removes the
-clk_hse, clk_hsi, clk_lse, clk_lsi and clk_csi labels referenced by
-stm32mp157c-dk2-u-boot.dtsi.
-
-That's why I dropped the include in v2 and defined only the fwu-mdata node
-locally.
-
-Or am I perhaps missing something?
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20260512071157.564081-=
-1-dario.binacchi@amarulasolutions.com/
-
-Thanks and regards,
-Dario
-
+> , eth1: ethernet@ed920000
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
+> Cannot find fwu device
 >
-> Thanks
-> Patrice
+> But shouldn't be there different action? Go back to second image or reset for
+> example?
 
+At this point, either your metadata is gone, in which case you can
+either try to recreate them and hope for the best or an update broke
+the fwu mechanism indeed.
+In theory the board will automatically revert to the secondary
+partition after X reboots since no one is providing an acceptance
+capsule (or variable) so reseting should be fine.
 
-
---=20
-Dario Binacchi
-Senior Embedded Software Engineer
-M. +39 328 0625246
-dario.binacchi@amarulasolutions.com
-=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
-=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
-Amarula Solutions SRL
- Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
-info@amarulasolutions.com
-www.amarulasolutions.com
+Cheers
+/Ilias
+>
+> Thanks,
+> Michal
