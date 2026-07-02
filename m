@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6465C43327
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 17:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF314C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 17:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37BFC8490A;
-	Thu,  2 Jul 2026 19:18:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BBE584975;
+	Thu,  2 Jul 2026 19:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Rm2tX24L";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Lsn4T/wG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BF2E84942; Thu,  2 Jul 2026 19:18:36 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
+ id 7EE2A84979; Thu,  2 Jul 2026 19:18:58 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB07084409
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 19:18:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC96784409
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 19:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 186C1B0056A;
- Thu,  2 Jul 2026 19:18:10 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id AEA5FB00563;
+ Thu,  2 Jul 2026 19:18:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1783012713;
- bh=3yQaMqYZuwxUxFhp6ngizg6hK9DPMBEgCjWehi9qV9M=;
+ s=smtp-20201208; t=1783012735;
+ bh=HRO99CFf41szt42w+gTp7rBUu4TNPznRjY7iRuI5M3o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Rm2tX24Lb/iEzlHwg7aA4uBhAcy0TEofFmw8qqMS85rZaqOylqWG49d3QRvyaG/wi
- 3BPY96IrokCIwY8JIy0c+fF/PsRO5+oeCK0L6cqmmZNOUsMp4FTgZQcQqjhs/Ii2CE
- JfA2AAf507IEzh2jVyYYf/oqngXNT0ERGklS9UD6F9mq/nMz48skKz2pgob/TqWrHE
- ZRQ36SrFEorFJjX6FuS1OlobE1L/h09+lrPedmYsMWAbRdlz/fJNLuPz9QoAhWfS8F
- f9HbQHXqVZq7Fe0ukLs9ICTzF5zXe5FcaCjIZ3FhIRIuqzh2FOB9gkgDoFPv+/Hyl+
- bV28QM8+lPbYQ==
+ b=Lsn4T/wGldCFKOUjch/J1FFhXA5p/QaQPXNP2jFYv+P7Xnpq0lfMah2YGEkgNQ7k4
+ bKu0x9wIXGu3gLFVP2Pa/hCEpSGNLJHwmGnZQe3wVeG6Fpk+idDSJrAnX+fgjkjWx0
+ 0XyRPKIZCk1iK9QwavZ8tY3mNbG9w+lVAsx5JxiRpo8AgoA7Caje3TX5FhGuWSJp4V
+ s15XYBt3tQphp5danlBaYDsmXdv2hB/r7LXz0/TPWpzZ1YntUYeow2eoDHztgAqx3C
+ 68wRC3lxwmXmPYg+is7V9dHrMUY29R6gBZUxmM2WBW2XKT9XfHOAm4izMXu5Q6v/Lf
+ brysjuTOfCENQ==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Bo-Chen Chen <rex-bc.chen@mediatek.com>,
- David Lechner <dlechner@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
+Cc: Vincent Jardin <vjardin@free.fr>, Alice Guo <alice.guo@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
- Julien Masson <jmasson@baylibre.com>,
  Kory Maincent <kory.maincent@bootlin.com>,
  Kuan-Wei Chiu <visitorckw@gmail.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
  Philip Molloy <philip.molloy@analog.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 3/7] power: regulator: add MPS MPQ8785 PMBus regulator
- driver
-Date: Thu,  2 Jul 2026 19:15:47 +0200
-Message-ID: <20260702171618.1773206-4-vjardin@free.fr>
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 4/7] board: nxp: vid: introduce PMBus framework support
+Date: Thu,  2 Jul 2026 19:15:48 +0200
+Message-ID: <20260702171618.1773206-5-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260702171618.1773206-1-vjardin@free.fr>
 References: <20260702171618.1773206-1-vjardin@free.fr>
@@ -79,139 +78,388 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Per-chip UCLASS_REGULATOR driver for the MPS MPQ8785 / MPM3695 /
-MPM3695-25 / MPM82504 family, layered on the shared pmbus_helper
-adapter. Runs Linux's mpq8785_identify() VOUT_MODE switch
-(LINEAR16 vs DIRECT m=64 R=1) at probe time, applies the optional
-mps,vout-fb-divider-ratio-permille DT property, and walks the
-documented MPS ADDR_VBOOT windows on MFR_ID failure so a
-die-revision address shift just works.
+Wire board/nxp/common/vid.c into the <pmbus.h> framework so the legacy
+NXP AVS path stops carrying its own duplicate copy of the PMBus
+protocol and instead consumes the shared constants, decoders, and
+transport helpers.
 
-Publishes the pmbus mps last|clear last|clear force vendor
-extension subcommands (NVM PROTECTION_LAST read and clear) when
-CMD_PMBUS is enabled.
+vid.c is the legacy NXP AVS/pre-kernel voltage-trim path for lx2160 CPUs.
+It does PMBus to whichever core-rail voltage monitor the board carries:
+LTC3882 or ISL68233 are selected with
+CONFIG_VOL_MONITOR_LTC3882_*/CONFIG_VOL_MONITOR_ISL68233_*.
 
-Adaapted from Linux code.
+Before this change the file kept its own local PMBUS_CMD_* command-code
+defines, its own inline LINEAR16 mantissa/exponent math, and called
+into I2C through the I2C_READ/I2C_WRITE NXP wrappers in
+board/nxp/common/i2c_common.{c,h} which is a parallel implementation of
+exactly what <pmbus.h> + lib/pmbus.c provides.
+
+The intent is to make vid.c an consumer of the new PMBus.
+
+Compatibility with the former support:
+
+  - CLI unchanged: vdd_override and vdd_read keep their existing
+    semantics, return codes, and diagnostic output.
+
+  - I2C transport unchanged on the wire: the framework's pmbus_*
+    helpers call dm_i2c_read/dm_i2c_write: the same DM I2C
+    backing that vid.c's former I2C_READ/I2C_WRITE macros already
+    routed through on DM_I2C.
+
+  - Numeric decode is bit-equivalent: pmbus_reg2data_linear16() and
+    pmbus_data2reg_linear16() implement the PMBus 1.3 Part II
+    mantissa/exponent.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
  MAINTAINERS                                   |   2 +
- .../regulator/mps,mpq8785.yaml                | 105 ++++
- drivers/power/regulator/Kconfig               |   9 +
- drivers/power/regulator/Makefile              |   1 +
- drivers/power/regulator/mpq8785.c             | 494 ++++++++++++++++++
- 5 files changed, 611 insertions(+)
- create mode 100644 doc/device-tree-bindings/regulator/mps,mpq8785.yaml
- create mode 100644 drivers/power/regulator/mpq8785.c
+ arch/Kconfig.nxp                              |   4 +
+ board/nxp/common/vid.c                        | 104 +++++++++--------
+ board/nxp/common/vid.h                        |  15 ++-
+ .../regulator/lltc,ltc3882.yaml               |  91 +++++++++++++++
+ .../regulator/renesas,isl68233.yaml           | 105 ++++++++++++++++++
+ 6 files changed, 266 insertions(+), 55 deletions(-)
+ create mode 100644 doc/device-tree-bindings/regulator/lltc,ltc3882.yaml
+ create mode 100644 doc/device-tree-bindings/regulator/renesas,isl68233.yaml
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 4cea3a82852..e22f1ff6641 100644
+index e22f1ff6641..94c342036d9 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1585,7 +1585,9 @@ M:	Vincent Jardin <vjardin@free.fr>
+@@ -1585,8 +1585,10 @@ M:	Vincent Jardin <vjardin@free.fr>
  S:	Maintained
  F:	cmd/pmbus.c
  F:	doc/develop/pmbus.rst
-+F:	doc/device-tree-bindings/regulator/mps,mpq8785.yaml
++F:	doc/device-tree-bindings/regulator/lltc,ltc3882.yaml
+ F:	doc/device-tree-bindings/regulator/mps,mpq8785.yaml
  F:	doc/device-tree-bindings/regulator/pmbus.yaml
-+F:	drivers/power/regulator/mpq8785.c
++F:	doc/device-tree-bindings/regulator/renesas,isl68233.yaml
+ F:	drivers/power/regulator/mpq8785.c
  F:	drivers/power/regulator/pmbus_generic.c
  F:	drivers/power/regulator/pmbus_helper.c
- F:	drivers/power/regulator/pmbus_helper.h
-diff --git a/doc/device-tree-bindings/regulator/mps,mpq8785.yaml b/doc/device-tree-bindings/regulator/mps,mpq8785.yaml
+diff --git a/arch/Kconfig.nxp b/arch/Kconfig.nxp
+index ef9087d0197..152692e3230 100644
+--- a/arch/Kconfig.nxp
++++ b/arch/Kconfig.nxp
+@@ -242,24 +242,28 @@ config VOL_MONITOR_IR36021_SET
+ 
+ config VOL_MONITOR_LTC3882_READ
+ 	bool "Enable the LTC3882 voltage monitor read"
++	select PMBUS
+ 	help
+ 	 This option enables LTC3882 voltage monitor read
+ 	 functionality. It is used by the common VID driver.
+ 
+ config VOL_MONITOR_LTC3882_SET
+ 	bool "Enable the LTC3882 voltage monitor set"
++	select PMBUS
+ 	help
+ 	 This option enables LTC3882 voltage monitor set
+ 	 functionality. It is used by the common VID driver.
+ 
+ config VOL_MONITOR_ISL68233_READ
+ 	bool "Enable the ISL68233 voltage monitor read"
++	select PMBUS
+ 	help
+ 	 This option enables ISL68233 voltage monitor read
+ 	 functionality. It is used by the common VID driver.
+ 
+ config VOL_MONITOR_ISL68233_SET
+ 	bool "Enable the ISL68233 voltage monitor set"
++	select PMBUS
+ 	help
+ 	 This option enables ISL68233 voltage monitor set
+ 	 functionality. It is used by the common VID driver.
+diff --git a/board/nxp/common/vid.c b/board/nxp/common/vid.c
+index 84cb43fad56..a91d6c9381a 100644
+--- a/board/nxp/common/vid.c
++++ b/board/nxp/common/vid.c
+@@ -11,6 +11,7 @@
+ #include <i2c.h>
+ #include <irq_func.h>
+ #include <log.h>
++#include <pmbus.h>
+ #include <vsprintf.h>
+ #include <asm/io.h>
+ #ifdef CONFIG_FSL_LSCH2
+@@ -260,45 +261,38 @@ static int read_voltage_from_IR(int i2caddress)
+  */
+ #define VOUT_WARNING "VID: VOUT_MODE exponent has resolution worse than 1 V!\n"
+ 
+-/* Checks the PMBus voltage monitor for the format used for voltage values */
+-static int get_pmbus_multiplier(DEVICE_HANDLE_T dev)
++/*
++ * Read VOUT_MODE for downstream LINEAR16 decode/encode through the
++ * tree level <pmbus.h> helpers (pmbus_reg2data_linear16,
++ * pmbus_data2reg_linear16). Returns the raw VOUT_MODE byte on
++ * success, or 0 on bus error. Emits VOUT_WARNING on Linear mode
++ * chips with a non negative exponent (resolution >= 1 V is unusable
++ * for sub volt SoC rails) and an informational note on the
++ * unsupported VID format.
++ */
++static u8 vid_read_vout_mode(DEVICE_HANDLE_T dev)
+ {
+-	u8 mode;
+-	int exponent, multiplier, ret;
++	u8 mode = 0;
++	int ret;
+ 
+-	ret = I2C_READ(dev, PMBUS_CMD_VOUT_MODE, &mode, sizeof(mode));
++	ret = pmbus_read_byte(dev, PMBUS_VOUT_MODE, &mode);
+ 	if (ret) {
+ 		printf("VID: unable to determine voltage multiplier\n");
+-		return 1;
++		return 0;
+ 	}
+ 
+-	/* Upper 3 bits is mode, lower 5 bits is exponent */
+-	exponent = (int)mode & 0x1F;
+-	mode >>= 5;
+-	switch (mode) {
+-	case 0:
+-		/* Linear, 5 bit twos component exponent */
+-		if (exponent & 0x10) {
+-			multiplier = 1 << (16 - (exponent & 0xF));
+-		} else {
+-			/* If exponent is >= 0, then resolution is 1 V! */
++	switch (mode & PB_VOUT_MODE_MODE_MASK) {
++	case PB_VOUT_MODE_LINEAR:
++		if (!(mode & 0x10))
+ 			printf(VOUT_WARNING);
+-			multiplier = 1;
+-		}
+ 		break;
+-	case 1:
+-		/* VID code identifier */
++	case PB_VOUT_MODE_VID:
+ 		printf("VID: custom VID codes are not supported\n");
+-		multiplier = MV_PER_V;
+ 		break;
+ 	default:
+-		/* Direct, in mV */
+-		multiplier = MV_PER_V;
+ 		break;
+ 	}
+-
+-	debug("VID: calculated multiplier is %d\n", multiplier);
+-	return multiplier;
++	return mode;
+ }
+ #endif
+ 
+@@ -306,8 +300,8 @@ static int get_pmbus_multiplier(DEVICE_HANDLE_T dev)
+ 	defined(CONFIG_VOL_MONITOR_LTC3882_READ)
+ static int read_voltage_from_pmbus(int i2caddress)
+ {
+-	int ret, multiplier, vout;
+-	u8 channel = PWM_CHANNEL0;
++	int ret, vout;
++	u8 channel = PWM_CHANNEL0, vout_mode;
+ 	u16 vcode;
+ 	DEVICE_HANDLE_T dev;
+ 
+@@ -317,25 +311,31 @@ static int read_voltage_from_pmbus(int i2caddress)
+ 		return ret;
+ 
+ 	/* Select the right page */
+-	ret = I2C_WRITE(dev, PMBUS_CMD_PAGE, &channel, sizeof(channel));
++	ret = pmbus_write_byte(dev, PMBUS_PAGE, channel);
+ 	if (ret) {
+ 		printf("VID: failed to select VDD page %d\n", channel);
+ 		return ret;
+ 	}
+ 
+-	/* VOUT is little endian */
+-	ret = I2C_READ(dev, PMBUS_CMD_READ_VOUT, (void *)&vcode, sizeof(vcode));
++	ret = pmbus_read_word(dev, PMBUS_READ_VOUT, &vcode);
+ 	if (ret) {
+ 		printf("VID: failed to read core voltage\n");
+ 		return ret;
+ 	}
+ 
+-	/* Scale down to the real mV */
+-	multiplier = get_pmbus_multiplier(dev);
+-	vout = (int)vcode;
+-	/* Multiplier 1000 (direct mode) requires no change to convert */
+-	if (multiplier != MV_PER_V)
+-		vout = DIV_ROUND_UP(vout * MV_PER_V, multiplier);
++	/*
++	 * Decode LINEAR16 via the tree level helper from <pmbus.h>. For
++	 * non Linear VOUT_MODE settings the helper returns 0; fall back
++	 * to the historic mV pass through so existing LSCH boards keep.
++	 */
++	vout_mode = vid_read_vout_mode(dev);
++	if ((vout_mode & PB_VOUT_MODE_MODE_MASK) == PB_VOUT_MODE_LINEAR) {
++		s64 uv = pmbus_reg2data_linear16(vcode, vout_mode);
++
++		vout = (int)((uv + 500) / 1000);	/* round to mV */
++	} else {
++		vout = (int)vcode;
++	}
+ 	return vout - board_vdd_drop_compensation();
+ }
+ #endif
+@@ -463,11 +463,13 @@ static int set_voltage_to_IR(int i2caddress, int vdd)
+ static int set_voltage_to_pmbus(int i2caddress, int vdd)
+ {
+ 	int ret, vdd_last, vdd_target = vdd;
+-	int count = MAX_LOOP_WAIT_NEW_VOL, temp = 0, multiplier;
++	int count = MAX_LOOP_WAIT_NEW_VOL, temp = 0;
++	u8 vout_mode;
++	u16 raw;
+ 	unsigned char value;
+ 
+ 	/* The data to be sent with the PMBus command PAGE_PLUS_WRITE */
+-	u8 buffer[5] = { 0x04, PWM_CHANNEL0, PMBUS_CMD_VOUT_COMMAND, 0, 0 };
++	u8 buffer[5] = { 0x04, PWM_CHANNEL0, PMBUS_VOUT_COMMAND, 0, 0 };
+ 	DEVICE_HANDLE_T dev;
+ 
+ 	/* Open device handle */
+@@ -475,24 +477,28 @@ static int set_voltage_to_pmbus(int i2caddress, int vdd)
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Scale up to the proper value for the VOUT command, little endian */
+-	multiplier = get_pmbus_multiplier(dev);
++	/*
++	 * Encode target mV as LINEAR16 raw via the tree level helper
++	 * from <pmbus.h>. For non Linear VOUT_MODE settings the helper
++	 * returns 0; fall back to the historic mV pass through.
++	 */
+ 	vdd += board_vdd_drop_compensation();
+-	if (multiplier != MV_PER_V)
+-		vdd = DIV_ROUND_UP(vdd * multiplier, MV_PER_V);
+-	buffer[3] = vdd & 0xFF;
+-	buffer[4] = (vdd & 0xFF00) >> 8;
++	vout_mode = vid_read_vout_mode(dev);
++	if ((vout_mode & PB_VOUT_MODE_MODE_MASK) == PB_VOUT_MODE_LINEAR)
++		raw = pmbus_data2reg_linear16((s64)vdd * 1000LL, vout_mode);
++	else
++		raw = (u16)vdd;
++	buffer[3] = raw & 0xFF;
++	buffer[4] = (raw & 0xFF00) >> 8;
+ 
+ 	/* Check write protect state */
+-	ret = I2C_READ(dev, PMBUS_CMD_WRITE_PROTECT, (void *)&value,
+-		       sizeof(value));
++	ret = pmbus_read_byte(dev, PMBUS_WRITE_PROTECT, &value);
+ 	if (ret)
+ 		goto exit;
+ 
+ 	if (value != EN_WRITE_ALL_CMD) {
+ 		value = EN_WRITE_ALL_CMD;
+-		ret = I2C_WRITE(dev, PMBUS_CMD_WRITE_PROTECT,
+-				(void *)&value, sizeof(value));
++		ret = pmbus_write_byte(dev, PMBUS_WRITE_PROTECT, value);
+ 		if (ret)
+ 			goto exit;
+ 	}
+diff --git a/board/nxp/common/vid.h b/board/nxp/common/vid.h
+index b34c080b4ba..72c1c089aa1 100644
+--- a/board/nxp/common/vid.h
++++ b/board/nxp/common/vid.h
+@@ -22,8 +22,9 @@
+ #define IR_VDD_STEP_UP			5
+ 
+ /* LTC3882 */
+-#define PMBUS_CMD_WRITE_PROTECT         0x10
+ /*
++ * PMBUS_WRITE_PROTECT (10h) provided by <pmbus.h>
++ *
+  * WRITE_PROTECT command supported values
+  * 0x80: Disable all writes except WRITE_PROTECT, PAGE,
+  *       STORE_USER_ALL and MFR_EE_UNLOCK commands.
+@@ -51,12 +52,14 @@
+ #define VDD_MV_MAX			925
+ #endif
+ 
+-/* PM Bus commands code for LTC3882*/
++/*
++ * PM Bus commands code for LTC3882. PMBUS_PAGE / PMBUS_READ_VOUT /
++ * PMBUS_VOUT_MODE / PMBUS_VOUT_COMMAND are provided by <pmbus.h>.
++ * PMBUS_CMD_PAGE_PLUS_WRITE (05h) is the LTC3882 SMBus block write
++ * transaction not in <pmbus.h>'s standard subset, so keep its
++ * definition here.
++ */
+ #define PWM_CHANNEL0                    0x0
+-#define PMBUS_CMD_PAGE                  0x0
+-#define PMBUS_CMD_READ_VOUT             0x8B
+-#define PMBUS_CMD_VOUT_MODE			0x20
+-#define PMBUS_CMD_VOUT_COMMAND          0x21
+ #define PMBUS_CMD_PAGE_PLUS_WRITE       0x05
+ 
+ #if defined(CONFIG_TARGET_LX2160AQDS) || defined(CONFIG_TARGET_LX2162AQDS) || \
+diff --git a/doc/device-tree-bindings/regulator/lltc,ltc3882.yaml b/doc/device-tree-bindings/regulator/lltc,ltc3882.yaml
 new file mode 100644
-index 00000000000..8d7465d77fa
+index 00000000000..7ed49d04a87
 --- /dev/null
-+++ b/doc/device-tree-bindings/regulator/mps,mpq8785.yaml
-@@ -0,0 +1,105 @@
++++ b/doc/device-tree-bindings/regulator/lltc,ltc3882.yaml
+@@ -0,0 +1,91 @@
 +# SPDX-License-Identifier: (GPL-2.0+ OR BSD-2-Clause)
 +%YAML 1.2
 +---
-+$id: http://devicetree.org/schemas/regulator/mps,mpq8785.yaml#
++$id: http://devicetree.org/schemas/regulator/lltc,ltc3882.yaml#
 +$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+title: Monolithic Power Systems multiphase voltage regulators with PMBus (U-Boot subset)
++title: Linear Technology LTC3882 dual output PMBus DC/DC controller (U-Boot subset)
 +
 +maintainers:
 +  - Vincent Jardin <vjardin@free.fr>
 +
 +description: |
-+  Monolithic Power Systems digital multiphase voltage regulators with
-+  PMBus.
++  Dual output PolyPhase synchronous step down DC/DC controller with
++  digital power system management over PMBus.
 +
 +  This U-Boot subset mirrors the upstream Linux kernel binding at
-+  linux/Documentation/devicetree/bindings/hwmon/pmbus/mps,mpq8785.yaml.
-+  Compatible strings, property names, and semantics are identical so
-+  the same .dts file works under both U-Boot (BL33) and Linux post
-+  handoff. Properties that only drive the kernel hwmon publication
-+  are accepted and ignored by the U-Boot driver.
++  linux/Documentation/devicetree/bindings/hwmon/lltc,ltc2978.yaml
++  (which covers the whole Linear / ADI pmbus family including the
++  LTC3882). Compatible strings, property names, and semantics are
++  identical so the same .dts file works under both U-Boot (BL33) and
++  Linux post handoff. Properties that only drive the kernel hwmon
++  publication are accepted and ignored by the U-Boot driver.
 +
-+  The MPS family (MPQ8785 silicon, plus the MPM3695 / MPM3695-25 /
-+  MPM82504 derivatives) reports VIN, IOUT, and TEMPERATURE in DIRECT
-+  numeric format with chip specific m / b / R coefficients (see
-+  drivers/hwmon/pmbus/mpq8785.c::mpq8785_info in Linux). VOUT format
-+  is selected at probe time from VOUT_MODE: bits[7:5] == 0 selects
-+  LINEAR16, bits[7:5] == 1 or 2 selects DIRECT m=64 R=1 (the chip's
-+  VID mode is coerced to DIRECT by the driver).
++  VOUT is reported in PMBus LINEAR16 format with the exponent
++  supplied by VOUT_MODE bits[4:0]. VIN, IIN, IOUT, and TEMPERATURE
++  use LINEAR11 (signed 5 bit exponent, signed 11 bit mantissa).
 +
-+  PMBus 7 bit address resolution: the chip's ADDR_VBOOT analog level
-+  combined with the MFR_ADDR_PMBUS LSB selects one of three address
-+  windows depending on die revision (0x10..0x1F, 0x20..0x2F, or
-+  0x60..0x6F). The board file may carry a runtime scan that auto
-+  promotes the first responder if the silicon revision strap drifts
-+  away from the DT default.
++  On NXP Layerscape boards (LX2160A class), the legacy AVS code in
++  board/nxp/common/vid.c speaks PMBus to the LTC3882 to read VOUT
++  and to write VOUT_COMMAND for pre kernel core voltage trim. That
++  path uses the legacy non DM I2C transport (fsl_i2c) and so does
++  not bind through this DT node today; the binding is published for
++  schema validation, for future U-Boot driver model migration, and
++  for matching the upstream Linux .dts.
 +
 +properties:
 +  compatible:
 +    enum:
-+      - mps,mpm3695
-+      - mps,mpm3695-25
-+      - mps,mpm82504
-+      - mps,mpq8785
++      - lltc,ltc3882
 +
 +  reg:
 +    maxItems: 1
 +
-+  mps,vout-fb-divider-ratio-permille:
-+    description:
-+      External feedback resistor divider ratio Vfb / Vout, expressed
-+      in permille. Written to PMBUS_VOUT_SCALE_LOOP at probe time so
-+      VOUT_COMMAND writes drive the rail to the requested voltage when
-+      the PCB has an external divider on the VOUT sense path.
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 1
-+    maximum: 4095
-+    default: 706
++  regulators:
++    type: object
++    description: |
++      Container for the two output rails the LTC3882 exposes
++      (vout0 and vout1). Each child node is a regulator described
++      by the standard regulator binding; child names indicate which
++      PMBus PAGE the rail maps to (vout0 = page 0, vout1 = page 1).
 +
-+allOf:
-+  - $ref: regulator.yaml#
++    patternProperties:
++      "^vout[01]$":
++        $ref: /schemas/regulator/regulator.yaml#
++        type: object
++        unevaluatedProperties: false
 +
-+  - if:
-+      properties:
-+        compatible:
-+          enum:
-+            - mps,mpm3695
-+            - mps,mpm82504
-+    then:
-+      properties:
-+        mps,vout-fb-divider-ratio-permille:
-+          maximum: 1023
-+
-+  - if:
-+      properties:
-+        compatible:
-+          const: mps,mpq8785
-+    then:
-+      properties:
-+        mps,vout-fb-divider-ratio-permille:
-+          maximum: 2047
++    additionalProperties: false
 +
 +required:
 +  - compatible
 +  - reg
 +
-+unevaluatedProperties: false
++additionalProperties: false
 +
 +examples:
 +  - |
@@ -219,543 +467,137 @@ index 00000000000..8d7465d77fa
 +        #address-cells = <1>;
 +        #size-cells = <0>;
 +
-+        regulator@10 {
-+            compatible = "mps,mpq8785";
-+            reg = <0x10>;
-+            regulator-name = "VDD_CORE";
-+            regulator-min-microvolt = < 600000>;
-+            regulator-max-microvolt = <1100000>;
-+            regulator-boot-on;
-+            regulator-always-on;
++        regulator@5e {
++            compatible = "lltc,ltc3882";
++            reg = <0x5e>;
++
++            regulators {
++                vout0 {
++                    regulator-name = "VDD_CORE";
++                    regulator-min-microvolt = < 775000>;
++                    regulator-max-microvolt = < 925000>;
++                    regulator-boot-on;
++                };
++                vout1 {
++                    regulator-name = "VDD_PLAT";
++                    regulator-min-microvolt = < 850000>;
++                    regulator-max-microvolt = <1000000>;
++                };
++            };
 +        };
 +    };
 +...
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 5b1a9c3f991..67c9e1fb377 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -581,3 +581,12 @@ config DM_REGULATOR_PMBUS_GENERIC
- 	  per chip driver only when chip specific quirks (vendor
- 	  registers, VID coercion, ADDR pin auto promotion, non standard
- 	  m / b / R coefficients) need handling.
-+
-+config DM_REGULATOR_MPQ8785
-+	bool "MPS MPQ8785 / MPM3695 / MPM82504 PMBus voltage regulator"
-+	depends on DM_REGULATOR_PMBUS_HELPER
-+	help
-+	  Driver for the Monolithic Power Systems MPQ8785 family of
-+	  digital multiphase voltage regulators with PMBus. Supports
-+	  MPM3695, MPM3695-25, MPM82504, and MPQ8785. Adapted from the
-+	  Linux drivers/hwmon/pmbus/mpq8785.c reference.
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index b084e9ac4bc..aa3faf2f34f 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -51,3 +51,4 @@ obj-$(CONFIG_DM_REGULATOR_MT6357) += mt6357_regulator.o
- obj-$(CONFIG_DM_REGULATOR_MT6359) += mt6359_regulator.o
- obj-$(CONFIG_DM_REGULATOR_PMBUS_HELPER)  += pmbus_helper.o
- obj-$(CONFIG_DM_REGULATOR_PMBUS_GENERIC) += pmbus_generic.o
-+obj-$(CONFIG_DM_REGULATOR_MPQ8785)       += mpq8785.o
-diff --git a/drivers/power/regulator/mpq8785.c b/drivers/power/regulator/mpq8785.c
+diff --git a/doc/device-tree-bindings/regulator/renesas,isl68233.yaml b/doc/device-tree-bindings/regulator/renesas,isl68233.yaml
 new file mode 100644
-index 00000000000..dc321f0e410
+index 00000000000..41f18381942
 --- /dev/null
-+++ b/drivers/power/regulator/mpq8785.c
-@@ -0,0 +1,494 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 Free Mobile, Vincent Jardin
-+ *
-+ * MPS MPQ8785 / MPM3695 / MPM3695-25 / MPM82504 PMBus voltage
-+ * regulator driver. Adapted from
-+ *   linux/drivers/hwmon/pmbus/mpq8785.c
-+ * (Charles Hsu, GPL-2.0-or-later) with the kernel hwmon publication
-+ * and caching layers stripped.
-+ *
-+ * Hooks the shared pmbus_helper UCLASS_REGULATOR ops + adds the MPS
-+ * specific identify (VOUT_MODE switch between LINEAR16 and DIRECT
-+ * m=64 R=1 for the chip's "VID" mode), the MPS vendor extension
-+ * (pmbus mps last|clear last|clear force), and ADDR_VBOOT auto
-+ * promotion when the DT declared address fails the MFR_ID probe.
-+ */
++++ b/doc/device-tree-bindings/regulator/renesas,isl68233.yaml
+@@ -0,0 +1,105 @@
++# SPDX-License-Identifier: (GPL-2.0+ OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/regulator/renesas,isl68233.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+#include <command.h>
-+#include <dm.h>
-+#include <i2c.h>
-+#include <log.h>
-+#include <pmbus.h>
-+#include <vsprintf.h>
-+#include <linux/bitops.h>
-+#include <power/regulator.h>
++title: Renesas ISL68233 digital multiphase voltage regulator with PMBus (U-Boot subset)
 +
-+#include "pmbus_helper.h"
++maintainers:
++  - Vincent Jardin <vjardin@free.fr>
 +
-+/* Chip family identifiers (driver_data). */
-+enum mpq_chip_id {
-+	MPQ_MPM3695     = 0,
-+	MPQ_MPM3695_25  = 1,
-+	MPQ_MPM82504    = 2,
-+	MPQ_MPQ8785     = 3,
-+};
++description: |
++  Renesas (formerly Intersil) digital multiphase voltage regulator
++  with PMBus.
 +
-+/*
-+ * MPS vendor extended command codes (NOT in PMBus 1.3 Part II).
-+ *
-+ *   CLEAR_LAST_FAULT (08h) clears the NVM backed PROTECTION_LAST
-+ *                          register. Gated by MFR_CFG_EXT (F5h)
-+ *                          bit[6] = 1; chip silently no ops if the
-+ *                          gate is cleared.
-+ *   PROTECTION_LAST  (FBh) single event, NVM backed log of the last
-+ *                          protection event. Survives the chip's own
-+ *                          power cycle. The boot time post mortem the
-+ *                          SoC has no other way to obtain.
-+ *
-+ * NEVER issue CLEAR_LAST_FAULT (08h) implicitly; it would erase the
-+ * post mortem trail. Only the explicit pmbus mps clear last and
-+ * pmbus mps clear force subcommands write it.
-+ */
-+#define PMBUS_CLEAR_LAST_FAULT		0x08
-+#define MPS_PROTECTION_LAST		0xfb
++  This U-Boot subset mirrors the upstream Linux kernel binding at
++  linux/Documentation/devicetree/bindings/hwmon/pmbus/isil,isl68137.yaml,
++  which covers the whole Intersil / Renesas ISL family including the
++  ISL68233. Compatible strings, property names, and semantics are
++  identical so the same .dts file works under both U-Boot (BL33) and
++  Linux post handoff. Properties that only drive the kernel hwmon
++  publication are accepted and ignored by the U-Boot driver.
 +
-+/*
-+ * MFR_CFG_EXT (F5h) is an MPS extended config WORD (16 bits, not a
-+ * byte). Bit[6] (MFR_CLR_FAULT_CFG) gates CLEAR_LAST_FAULT (08h)
-+ * clearing PROTECTION_LAST. Several other bits are fixed and MUST be
-+ * preserved on writeback; always read modify write the full 16 bits,
-+ * only flip bit[6], restore on the way out.
-+ */
-+#define MPS_MFR_CFG_EXT			0xf5
-+#define MPS_MFR_CFG_EXT_CLR_LAST_EN	BIT(6)
++  VOUT is reported in PMBus LINEAR16 format with the exponent
++  supplied by VOUT_MODE bits[4:0]. VIN, IIN, IOUT, and TEMPERATURE
++  use LINEAR11 (signed 5 bit exponent, signed 11 bit mantissa). The
++  ISL68233 exposes multiple output rails through PMBus PAGE
++  switching; per channel sub nodes follow the upstream pattern.
 +
-+/*
-+ * MPQ8785 driver_info (transcribed from Linux's
-+ * drivers/hwmon/pmbus/mpq8785.c::mpq8785_info). DIRECT format with
-+ * chip specific m / b / R coefficients on VIN, IOUT, TEMPERATURE.
-+ * VOUT format is selected at probe time from VOUT_MODE: bits[7:5] == 0
-+ * selects LINEAR16, bits[7:5] == 1 or 2 selects DIRECT m=64 R=1.
-+ */
++  On NXP Layerscape boards, the legacy AVS code in
++  board/nxp/common/vid.c speaks PMBus to the ISL68233 to read VOUT
++  and to write VOUT_COMMAND for pre kernel core voltage trim. That
++  path uses the legacy non DM I2C transport (fsl_i2c) and so does
++  not bind through this DT node today; the binding is published for
++  schema validation, for future U-Boot driver model migration, and
++  for matching the upstream Linux .dts.
 +
-+/*
-+ * MPS-extended STATUS_* bit names. The MPQ8785 family reuses several
-+ * bit positions documented as RESERVED / UNKNOWN / NONE_ABOVE /
-+ * MFR_SPECIFIC by PMBus 1.3 for chip specific signals. The override
-+ * table below substitutes the chip name for the standard one when
-+ * the bit is set, leaving every other PMBus 1.3 standard bit
-+ * (VOUT_OV, IOUT_OC, TEMP, CML, ...) unchanged.
-+ *
-+ *   STATUS_WORD bit[12]  spec MFR_SPECIFIC   chip NVM_SUMMARY (NVM
-+ *                                            backed PROTECTION_LAST
-+ *                                            register is non zero)
-+ *   STATUS_WORD bit[8]   spec UNKNOWN        chip WATCH_DOG (internal
-+ *                                            calculation FSM watchdog
-+ *                                            overflow)
-+ *   STATUS_WORD bit[0]   spec NONE_ABOVE     chip DRMOS_FAULT (DrMOS
-+ *                                            stage fault)
-+ *   STATUS_CML  bit[4]   spec MEMORY         chip MTP_CRC_FAULT (NVM
-+ *                                            CRC mismatch on restore)
-+ *   STATUS_CML  bit[0]   spec OTHER_MEM_LOGIC chip MTP_FAULT (NVM
-+ *                                            signature fault)
-+ *   STATUS_TEMPERATURE bit[0] (PMBus leaves bits[3:0] reserved on
-+ *                                            this register) chip
-+ *                                            OT_SELF (controller die
-+ *                                            OT condition)
-+ */
-+static const struct pmbus_status_override mpq8785_status_overrides[] = {
-+	{ PMBUS_STATUS_WORD,        BIT(12), "NVM_SUMMARY" },
-+	{ PMBUS_STATUS_WORD,        BIT(8),  "WATCH_DOG" },
-+	{ PMBUS_STATUS_WORD,        BIT(0),  "DRMOS_FAULT" },
-+	{ PMBUS_STATUS_CML,         BIT(4),  "MTP_CRC_FAULT" },
-+	{ PMBUS_STATUS_CML,         BIT(0),  "MTP_FAULT" },
-+	{ PMBUS_STATUS_TEMPERATURE, BIT(0),  "OT_SELF" },
-+	{ /* sentinel */ }
-+};
++properties:
++  compatible:
++    enum:
++      - renesas,isl68233
 +
-+static struct pmbus_driver_info mpq8785_info = {
-+	.pages = 1,
-+	.format[PSC_VOLTAGE_IN]  = pmbus_fmt_direct,
-+	.format[PSC_VOLTAGE_OUT] = pmbus_fmt_linear,	/* refined per VOUT_MODE */
-+	.format[PSC_CURRENT_OUT] = pmbus_fmt_direct,
-+	.format[PSC_TEMPERATURE] = pmbus_fmt_direct,
-+	.m[PSC_VOLTAGE_IN]  = 4,  .b[PSC_VOLTAGE_IN]  = 0, .R[PSC_VOLTAGE_IN]  = 1,
-+	.m[PSC_CURRENT_OUT] = 16, .b[PSC_CURRENT_OUT] = 0, .R[PSC_CURRENT_OUT] = 0,
-+	.m[PSC_TEMPERATURE] = 1,  .b[PSC_TEMPERATURE] = 0, .R[PSC_TEMPERATURE] = 0,
-+	/*
-+	 * Sensor set this family actually implements with calibrated
-+	 * coefficients: VIN, VOUT, IOUT, TEMP. READ_IIN / READ_POUT are
-+	 * ACKed by the silicon but uncalibrated here (the kernel's mpq8646
-+	 * / mpq8785 drivers expose neither), so declaring the set keeps
-+	 * pmbus_print_telemetry from printing a bogus POUT / IIN -- matching
-+	 * the kernel's per-chip sensor list.
-+	 */
-+	.classes_present    = BIT(PSC_VOLTAGE_IN) | BIT(PSC_VOLTAGE_OUT) |
-+			      BIT(PSC_CURRENT_OUT) | BIT(PSC_TEMPERATURE),
-+	.status_overrides   = mpq8785_status_overrides,
-+};
++  reg:
++    maxItems: 1
 +
-+/*
-+ * MPM3695 / MPM3695-25 / MPM82504 driver_info: VOUT in DIRECT format
-+ * with chip family default m=8 R=2. Other sensor classes default to
-+ * LINEAR (the chip family does not document non standard formats for
-+ * VIN / IOUT / TEMPERATURE; the helper falls back to LINEAR11 when
-+ * the active info is non NULL but format[c] is linear).
-+ */
-+static struct pmbus_driver_info mpm82504_info = {
-+	.pages = 1,
-+	.format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct,
-+	.m[PSC_VOLTAGE_OUT] = 8,  .b[PSC_VOLTAGE_OUT] = 0, .R[PSC_VOLTAGE_OUT] = 2,
-+	.format[PSC_VOLTAGE_IN]  = pmbus_fmt_linear,
-+	.format[PSC_CURRENT_OUT] = pmbus_fmt_linear,
-+	.format[PSC_TEMPERATURE] = pmbus_fmt_linear,
-+};
++  '#address-cells':
++    const: 1
 +
-+/*
-+ * Chip match for the framework's pmbus dev <bus>:<addr> raw I2C
-+ * path. Used when the operator selects the chip directly by address
-+ * instead of by regulator-name; the framework probes MFR_ID, sees
-+ * "MPS" (after the byte reverse helper), and caches mpq8785_info.
-+ */
-+static const struct pmbus_chip_match mpq8785_match = {
-+	.mfr_id          = "MPS",
-+	.mfr_id_reverse  = true,
-+	.vendor          = "mps",
-+	.info            = &mpq8785_info,
-+};
++  '#size-cells':
++    const: 0
 +
-+static const struct pmbus_bit mpq_protection_last_bits[] = {
-+	{ 1u << 15, "INIT_FAULT" },
-+	{ 1u << 14, "NVM_CRC_ERROR" },
-+	{ 1u << 13, "NVM_FAULT" },
-+	{ 1u << 12, "OC_PHASE_FAULT" },
-+	{ 1u << 11, "OTP_SELF_FAULT" },
-+	{ 1u <<  9, "SWITCH_PRD_FAULT" },
-+	{ 1u <<  8, "VIN_OV_FAULT" },
-+	{ 1u <<  7, "VOUT_OV_FAULT" },
-+	{ 1u <<  6, "VOUT_UV_FAULT" },
-+	{ 1u <<  5, "OC_TOT_FAULT" },
-+	{ 1u <<  4, "VIN_UVLO_FAULT" },
-+	{ 1u <<  3, "DRMOS_OTP" },
-+	{ /* sentinel */ }
-+};
++patternProperties:
++  "^channel@([0-3])$":
++    type: object
++    description:
++      Container for properties specific to a particular channel (rail).
 +
-+static int mps_require_active(struct udevice **chip)
-+{
-+	const struct pmbus_active_dev *act = pmbus_active();
++    properties:
++      reg:
++        description: The channel (rail) index.
++        items:
++          minimum: 0
++          maximum: 3
 +
-+	if (!act) {
-+		printf("pmbus mps: no active device. Use 'pmbus dev <bus>:<addr>' first.\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	if (strcmp(act->vendor, "mps") != 0) {
-+		printf("pmbus mps: active device is not from vendor 'mps' (got '%s')\n",
-+		       act->vendor[0] ? act->vendor : "(generic)");
-+		return CMD_RET_FAILURE;
-+	}
-+	if (pmbus_active_get_i2c(chip)) {
-+		printf("pmbus mps: cannot reach i2c%d:0x%02x\n",
-+		       act->bus_seq, act->addr);
-+		return CMD_RET_FAILURE;
-+	}
-+	return CMD_RET_SUCCESS;
-+}
++      vout-voltage-divider:
++        description: |
++          Resistances of a voltage divider placed between Vout and
++          the voltage sense (Vsense) pin for the given channel. Two
++          numbers <Rout Rtotal> which yields an adjusted Vout as
++          Vout_adj = Vout * Rtotal / Rout, given the original Vout
++          as reported by the Vsense pin.
++        $ref: /schemas/types.yaml#/definitions/uint32-array
++        minItems: 2
++        maxItems: 2
 +
-+static int mps_do_last(struct udevice *chip)
-+{
-+	u16 prot_last = 0;
++    required:
++      - reg
 +
-+	if (pmbus_read_word(chip, MPS_PROTECTION_LAST, &prot_last)) {
-+		printf("pmbus mps: PROTECTION_LAST (FBh) read failed\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	printf("PROTECTION_LAST (FBh) = 0x%04x  [", prot_last);
-+	pmbus_print_bits(prot_last, mpq_protection_last_bits);
-+	printf("]  (NVM, survives MPQ power cycle)\n");
-+	return CMD_RET_SUCCESS;
-+}
++    additionalProperties: false
 +
-+static int mps_do_clear_last(struct udevice *chip)
-+{
-+	int ret;
++required:
++  - compatible
++  - reg
 +
-+	printf("pmbus mps: WARNING, erasing NVM PROTECTION_LAST (FBh) post mortem\n");
-+	ret = dm_i2c_write(chip, PMBUS_CLEAR_LAST_FAULT, NULL, 0);
-+	if (ret) {
-+		printf("pmbus mps: CLEAR_LAST_FAULT (08h) write failed (%d)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+	printf("pmbus mps: CLEAR_LAST_FAULT (08h) issued; gated by MFR_CFG_EXT bit[6]\n");
-+	printf("           (chip silently no ops if F5h bit[6] = 0; verify by re reading FBh)\n");
-+	return CMD_RET_SUCCESS;
-+}
++additionalProperties: false
 +
-+static int mps_do_clear_force(struct udevice *chip)
-+{
-+	u8 wp_orig = 0;
-+	u16 cfg_orig = 0, cfg_unlocked;
-+	int ret, last_rc = 0, rc;
++examples:
++  - |
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
 +
-+	printf("pmbus mps: FORCE; temporarily lowering WRITE_PROTECT and MFR_CFG_EXT.CLEAR_LAST_EN\n");
-+	printf("pmbus mps: WARNING, erasing NVM PROTECTION_LAST (FBh) post mortem\n");
++        regulator@60 {
++            compatible = "renesas,isl68233";
++            reg = <0x60>;
++            #address-cells = <1>;
++            #size-cells = <0>;
 +
-+	ret = pmbus_read_byte(chip, PMBUS_WRITE_PROTECT, &wp_orig);
-+	if (ret) {
-+		printf("pmbus mps: WRITE_PROTECT (10h) read failed (%d), aborting force\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+	ret = pmbus_read_word(chip, MPS_MFR_CFG_EXT, &cfg_orig);
-+	if (ret) {
-+		printf("pmbus mps: MFR_CFG_EXT (F5h) read failed (%d), aborting force\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+	printf("pmbus mps: saved WRITE_PROTECT=0x%02x MFR_CFG_EXT=0x%04x\n",
-+	       wp_orig, cfg_orig);
-+
-+	if (wp_orig != 0) {
-+		u8 wp_open = 0x00;
-+
-+		ret = dm_i2c_write(chip, PMBUS_WRITE_PROTECT, &wp_open, 1);
-+		if (ret) {
-+			printf("pmbus mps: WRITE_PROTECT clear failed (%d), chip refuses unlock\n",
-+			       ret);
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+
-+	cfg_unlocked = cfg_orig | MPS_MFR_CFG_EXT_CLR_LAST_EN;
-+	ret = pmbus_write_word(chip, MPS_MFR_CFG_EXT, cfg_unlocked);
-+	if (ret) {
-+		printf("pmbus mps: MFR_CFG_EXT <- 0x%04x failed (%d)\n",
-+		       cfg_unlocked, ret);
-+		goto restore_wp;
-+	}
-+
-+	last_rc = dm_i2c_write(chip, PMBUS_CLEAR_LAST_FAULT, NULL, 0);
-+	if (last_rc)
-+		printf("pmbus mps: CLEAR_LAST_FAULT (08h) write failed (%d) even with gate open\n",
-+		       last_rc);
-+	else
-+		printf("pmbus mps: CLEAR_LAST_FAULT (08h) issued with MFR_CFG_EXT bit[6]=1, PROTECTION_LAST should now read 0x0000\n");
-+
-+	rc = pmbus_write_word(chip, MPS_MFR_CFG_EXT, cfg_orig);
-+	if (rc)
-+		printf("pmbus mps: MFR_CFG_EXT restore failed (%d), gate may stay open until POR\n",
-+		       rc);
-+
-+restore_wp:
-+	if (wp_orig != 0) {
-+		rc = dm_i2c_write(chip, PMBUS_WRITE_PROTECT, &wp_orig, 1);
-+		if (rc)
-+			printf("pmbus mps: WRITE_PROTECT restore failed (%d), chip stays unlocked until POR\n",
-+			       rc);
-+	}
-+
-+	return (ret || last_rc) ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-+}
-+
-+static int mps_vendor_handler(struct cmd_tbl *cmdtp, int flag, int argc,
-+			      char *const argv[])
-+{
-+	struct udevice *chip;
-+	int rc;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	rc = mps_require_active(&chip);
-+	if (rc)
-+		return rc;
-+
-+	if (!strcmp(argv[1], "last") && argc == 2)
-+		return mps_do_last(chip);
-+	if (!strcmp(argv[1], "clear") && argc >= 3) {
-+		if (!strcmp(argv[2], "last"))
-+			return mps_do_clear_last(chip);
-+		if (!strcmp(argv[2], "force"))
-+			return mps_do_clear_force(chip);
-+	}
-+	return CMD_RET_USAGE;
-+}
-+
-+static const struct pmbus_vendor_op mps_vendor_op = {
-+	.vendor  = "mps",
-+	.handler = mps_vendor_handler,
-+	.help    = "pmbus mps last         : read MPS PROTECTION_LAST (FBh)\n"
-+		   "pmbus mps clear last   : issue MPS CLEAR_LAST_FAULT (08h) (DESTRUCTIVE)\n"
-+		   "pmbus mps clear force  : force clear via MFR_CFG_EXT bit[6] (DESTRUCTIVE)\n",
-+};
-+
-+static void mpq8785_identify_vout(struct udevice *i2c_dev)
-+{
-+	enum pmbus_data_format fmt;
-+
-+	/*
-+	 * Let the shared helper read VOUT_MODE and pick the base format
-+	 * (the single source of truth for the bit layout). The MPS quirk:
-+	 * this family encodes VOUT in DIRECT with m=64 R=1 whenever
-+	 * VOUT_MODE reports VID *or* DIRECT -- override the helper's
-+	 * generic DIRECT m=1 / VID-unwired result in those two modes.
-+	 * LINEAR and IEEE754 keep the helper's selection unchanged.
-+	 */
-+	fmt = pmbus_regulator_identify_vout(i2c_dev, &mpq8785_info);
-+	if (fmt == pmbus_fmt_vid || fmt == pmbus_fmt_direct) {
-+		mpq8785_info.format[PSC_VOLTAGE_OUT] = pmbus_fmt_direct;
-+		mpq8785_info.m[PSC_VOLTAGE_OUT] = 64;
-+		mpq8785_info.b[PSC_VOLTAGE_OUT] = 0;
-+		mpq8785_info.R[PSC_VOLTAGE_OUT] = 1;
-+	}
-+}
-+
-+/*
-+ * The MPQ8785 datasheet revision letter changes which window the
-+ * analog ADDR_VBOOT level resolves to. Boards have been observed at
-+ * 0x10 (later die rev) versus the 0x20 the original driver assumed.
-+ * If the DT declared address fails the MFR_ID probe at probe time,
-+ * walk the three documented windows looking for an MPS responder.
-+ *
-+ * Each window covers 16 consecutive 7 bit I2C addresses; the low
-+ * nibble selects the chip's MFR_ADDR_PMBUS slot within the window.
-+ */
-+#define MPS_ADDR_VBOOT_WINDOW_SIZE	16
-+static const u8 mps_addr_window_starts[] = { 0x10, 0x20, 0x60 };
-+
-+static int mpq8785_probe_addr(struct udevice *bus, u8 addr,
-+			      struct udevice **chip_out)
-+{
-+	char id[PMBUS_MFR_STRING_MAX] = "";
-+	struct udevice *chip;
-+	int ret;
-+
-+	ret = i2c_get_chip(bus, addr, 1, &chip);
-+	if (ret)
-+		return ret;
-+	ret = pmbus_read_string(chip, PMBUS_MFR_ID, id, sizeof(id), true);
-+	if (ret < 0)
-+		return ret;
-+	if (strncmp(id, "MPS", 3) != 0)
-+		return -ENODEV;
-+	*chip_out = chip;
-+	return 0;
-+}
-+
-+static int mpq8785_scan_windows(struct udevice *bus, u8 *found_addr,
-+				struct udevice **chip_out)
-+{
-+	unsigned int i, j;
-+
-+	for (i = 0; i < ARRAY_SIZE(mps_addr_window_starts); i++) {
-+		for (j = 0; j < MPS_ADDR_VBOOT_WINDOW_SIZE; j++) {
-+			u8 addr = mps_addr_window_starts[i] + j;
-+
-+			if (mpq8785_probe_addr(bus, addr, chip_out) == 0) {
-+				*found_addr = addr;
-+				return 0;
-+			}
-+		}
-+	}
-+	return -ENODEV;
-+}
-+
-+static struct pmbus_driver_info *mpq8785_pick_info(enum mpq_chip_id chip_id)
-+{
-+	switch (chip_id) {
-+	case MPQ_MPM3695:
-+	case MPQ_MPM3695_25:
-+	case MPQ_MPM82504:
-+		return &mpm82504_info;
-+	case MPQ_MPQ8785:
-+	default:
-+		return &mpq8785_info;
-+	}
-+}
-+
-+static int mpq8785_probe(struct udevice *dev)
-+{
-+	enum mpq_chip_id chip_id = (enum mpq_chip_id)dev_get_driver_data(dev);
-+	struct pmbus_regulator_priv *priv = dev_get_priv(dev);
-+	struct pmbus_driver_info *info = mpq8785_pick_info(chip_id);
-+	static bool match_registered;
-+	static bool vendor_registered;
-+	u32 fb_div;
-+	int ret;
-+
-+	ret = pmbus_regulator_probe_common(dev, info, 0);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Verify the chip answers MFR_ID="MPS" at the DT declared
-+	 * address. If it doesn't, walk the documented ADDR_VBOOT windows
-+	 * looking for it (a die rev address shift). On a hit, replace
-+	 * priv->i2c_dev with the discovered chip handle and continue.
-+	 */
-+	{
-+		char id[PMBUS_MFR_STRING_MAX] = "";
-+
-+		ret = pmbus_read_string(priv->i2c_dev, PMBUS_MFR_ID, id,
-+					sizeof(id), true);
-+		if (ret < 0 || strncmp(id, "MPS", 3) != 0) {
-+			struct udevice *bus = dev_get_parent(dev);
-+			struct udevice *promoted;
-+			u8 found = 0;
-+
-+			if (mpq8785_scan_windows(bus, &found, &promoted) == 0) {
-+				printf("MPQ8785: DT addr 0x%02x silent, auto promoted to 0x%02x\n",
-+				       (unsigned int)dev_read_addr(dev), found);
-+				priv->i2c_dev = promoted;
-+			} else {
-+				printf("MPQ8785: no MPS responder found in 0x10..0x1f / 0x20..0x2f / 0x60..0x6f\n");
-+				return -ENODEV;
-+			}
-+		}
-+	}
-+
-+	/* MPQ8785 specific: refine VOUT format from VOUT_MODE. */
-+	if (chip_id == MPQ_MPQ8785)
-+		mpq8785_identify_vout(priv->i2c_dev);
-+
-+	/* Apply mps,vout-fb-divider-ratio-permille if present in DT. */
-+	fb_div = dev_read_u32_default(dev, "mps,vout-fb-divider-ratio-permille", 0);
-+	if (fb_div) {
-+		ret = pmbus_regulator_apply_voltage_scale(dev, fb_div);
-+		if (ret) {
-+			printf("MPQ8785: VOUT_SCALE_LOOP write failed (%d)\n", ret);
-+			return ret;
-+		}
-+	}
-+
-+	/*
-+	 * Register the chip match and the MPS vendor handler exactly
-+	 * once across all bound MPS regulators (a board could legally
-+	 * carry several). Both registries are global and idempotent
-+	 * matches return -ENOSPC, so the static guards keep things
-+	 * tidy.
-+	 */
-+	if (!match_registered) {
-+		if (pmbus_register_chip(&mpq8785_match) == 0)
-+			match_registered = true;
-+	}
-+	if (!vendor_registered) {
-+		if (pmbus_register_vendor_handler(&mps_vendor_op) == 0)
-+			vendor_registered = true;
-+	}
-+	return 0;
-+}
-+
-+static const struct udevice_id mpq8785_ids[] = {
-+	{ .compatible = "mps,mpm3695",    .data = MPQ_MPM3695 },
-+	{ .compatible = "mps,mpm3695-25", .data = MPQ_MPM3695_25 },
-+	{ .compatible = "mps,mpm82504",   .data = MPQ_MPM82504 },
-+	{ .compatible = "mps,mpq8785",    .data = MPQ_MPQ8785 },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(mpq8785_regulator) = {
-+	.name      = "mpq8785_regulator",
-+	.id        = UCLASS_REGULATOR,
-+	.of_match  = mpq8785_ids,
-+	.probe     = mpq8785_probe,
-+	.ops       = &pmbus_regulator_ops,
-+	.priv_auto = sizeof(struct pmbus_regulator_priv),
-+};
++            channel@0 {
++                reg = <0>;
++                vout-voltage-divider = <1000 2000>;
++            };
++        };
++    };
++...
 -- 
 2.43.0
 
