@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CCCC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B03C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:40:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D55A848BF;
-	Thu,  2 Jul 2026 22:39:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A44284A04;
+	Thu,  2 Jul 2026 22:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Hj0LmVGB";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="hIg4NBtQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B394C847C8; Thu,  2 Jul 2026 22:39:28 +0200 (CEST)
+ id DF64884A20; Thu,  2 Jul 2026 22:40:01 +0200 (CEST)
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 312D3847C8
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:39:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26499847C8
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:39:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1783024760; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1783024794; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=LYaUjKL4hmGYIc1dKIyZtwG/tUcnq+8t7y5LchGoppTpNvyUwn4plMaa8e4nmn5V3ol6RZQnVlio9seXq4TRQZ2s3axBQDFiuzfNXxuXtnyMGMRYAr0/RsPc60ggjdUl5fvMrjZlpW1USMZEGpJAcwEfWLPbxLv3nAfbdFOBs8I=
+ b=dGTo7OOL0XYNlllr+aXK+aU0KySzeH5ZMEmorwE1VwEmKXcg2Kd7XnqXO1dyvyvJpHpWRVEBDY3lr/MNc8MDi1BW+pVAn9i6EaZw4sts8FnCb65oIbt+A7u6WiuXvEcNWlcWkyh4N45QeLlVdhU/iOok828L2Z4S4bKnNqZbfNU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1783024760;
+ s=zohoarc; t=1783024794;
  h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=w6ZhqU+WPFTDDVCazxefJl20thYn7mPG6knmiCl3wPU=; 
- b=hTnMIF1fzApC3GxgKAwWu+Il+yWTDeiwFcrE+9ePiIJfNhKcgmegNwAc0nHOOmiDPhLTK/fPSYkjM1IT2qY6d1RrrzPI4ZytuIr+/yUb1D1F1UhFt4Z0CTHm+sbNTYMkT7WTm9315QGjKg4fXP6EGJ65cqnnjwABCkdwAkRkiUE=
+ bh=jY2a04y2UOewO/7e/UjOQuKRO+h7v/rRoViwoTIU2/A=; 
+ b=MaxjE/kIihsUmQLIj5MXvhGRttKwMMvt1qudd27Ua4fBBv+NtZ1wgFCz18OKXKq8dYxTTcqDfx14q2Azrcarq1UaxvL6mA3og8jH2toEkNSZfEX5hQhQex+PbxxdU7RjBnL3tj997lIULoZGC6yzl1GjWdrd8as6mQ8/V3tvCTo=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783024760; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783024794; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=w6ZhqU+WPFTDDVCazxefJl20thYn7mPG6knmiCl3wPU=;
- b=Hj0LmVGB0K4QJjc/BUA1zMDOYwl4EG4PpBAjs2w1H1AUYlJ3UoDsQZkPcEtg/Zhz
- ew6E9RSNPYL7lzg219xcToiu7ME96nagb5Dgucts8gLrLCzgnMjTh9WRFV59SI6hJ6F
- CNeUvJ2h5P+t+6KU3cms9H4ysM80h9FBUUjjX43U=
-Received: by mx.zohomail.com with SMTPS id 1783024757161537.4642761918177;
- Thu, 2 Jul 2026 13:39:17 -0700 (PDT)
-Date: Thu, 2 Jul 2026 20:39:07 +0000
+ bh=jY2a04y2UOewO/7e/UjOQuKRO+h7v/rRoViwoTIU2/A=;
+ b=hIg4NBtQM2g+B1Zes+Cw5y9NNKm6h2sDBD/QrmV97JnEu350T/9ryyVX/dkY/hCv
+ i8lpMkQtBAHwDdDJLnAPvfzGYH6coTUNZpjTlsKctu+HwHgfohCl/4q4Nh5vQ0/kXT0
+ QPAFAR+xu11ef5ghRgH4Ol2HL+pMMj9HWCb8lcS4=
+Received: by mx.zohomail.com with SMTPS id 1783024790749157.75821507135333;
+ Thu, 2 Jul 2026 13:39:50 -0700 (PDT)
+Date: Thu, 2 Jul 2026 20:39:44 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Simon Glass <sjg@chromium.org>, me@ziyao.cc
-Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+To: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 01/16] lib: fdtdec: Handle multiple memory nodes
-Message-ID: <akbGWWq3kQZERfOD@pie>
+Subject: Re: [PATCH v2 03/16] image: Take entry point as an output of
+ setup_booti
+Message-ID: <akbMkCvTJtLlse6C@pie>
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-2-me@ziyao.cc>
- <CAFLszThfvoqgsTwZcmmR7+feYM80wUhH0n6=RdBPW47+Nv=YAw@mail.gmail.com>
+ <20260701111808.870705-4-me@ziyao.cc>
+ <20260701173940.GN749385@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFLszThfvoqgsTwZcmmR7+feYM80wUhH0n6=RdBPW47+Nv=YAw@mail.gmail.com>
+In-Reply-To: <20260701173940.GN749385@bill-the-cat>
 X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,77 +78,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 02, 2026 at 11:22:14AM +0100, Simon Glass wrote:
-> Hi Jiaxun,
+On Wed, Jul 01, 2026 at 11:39:40AM -0600, Tom Rini wrote:
+> On Wed, Jul 01, 2026 at 11:17:55AM +0000, Yao Zi wrote:
 > 
-> On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> > lib: fdtdec: Handle multiple memory nodes
-> >
-> > Current code only tries to fetch the first memory node found in
-> > fdt tree and determine memory banks from multiple reg properties.
-> >
-> > Specification allows multiple memory nodes in devicetree, rework
-> > fdtdec_setup_mem_size_base_lowest and fdtdec_setup_memory_banksize
-> > to iterate over all memory nodes.
-> >
+> > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > 
+> > For LoongArch the start of the image is not the entry
+> > point to the image.
+> > 
+> > We refactor the code base to allow entry point to be
+> > supplied by setup_booti.
+> > 
 > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> >
-> > include/asm-generic/global_data.h |   2 +-
-> >  lib/fdtdec.c                      | 129 ++++++++++++++++++++++----------------
-> >  2 files changed, 76 insertions(+), 55 deletions(-)
+> > ---
+> > 
+> > Changed from v1
+> > - Correct type of "entry" argument for RISC-V and sandbox
 > 
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> > +too_may_memory_banks:
-> > +     log_warning("%s: Too many memory banks\n", __func__);
-> > +     return -EINVAL;
-> > +}
-> 
-> Typo - too_may_memory_banks should be too_many_memory_banks. While
-> you are here, please drop the goto... bank is bounded, so a single
-> check after the loops (or bank < CONFIG_NR_DRAM_BANKS in the inner
-> while) gives a single return path.
+> Can you please also provide a link to
+> https://www.kernel.org/doc/html/latest/arch/loongarch/booting.html which
+> probably should cover this, but I'm not entirely sure does?
 
-Thanks for the advice. I don't think it's okay to have only a check
-after the loops, in which case we might iterate over the boundary of
-gd->dram[]; and if we use bank < CONFIG_NR_DRAM_BANKS for the condition
-of the inner loop, another additional check is still necessary after
-the loops because we want to give out the message and a correct return
-value indicating the error, right?
+It does in a non-obvious way, quoting part of the image header,
 
-Alternatively, I think we could drop the goto statement and instead
-return immediately in the inner loop if CONFIG_NR_DRAM_BANKS is not
-sufficient, is it okay for you?
+	u32     MZ_MAGIC                /* "MZ", MS-DOS header */
+	u32     res0 = 0                /* Reserved */
+	u64     kernel_entry            /* Kernel entry point */
 
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> > +                     log_debug("%s: DRAM Bank #%d %s.%d: start = 0x%llx, size = 0x%llx\n",
-> > +                               __func__, bank, ofnode_get_name(mem), reg,
-> > +                              (unsigned long long)gd->dram[bank].start,
-> > +                              (unsigned long long)gd->dram[bank].size);
-> 
-> The current code uses %pap with &gd->dram[bank].start, which is the
-> idiomatic way to print phys_addr_t/phys_size_t iand should avoid
-> needing casts. Can you keep %pap here (and in the message below)?
+comparing it to the RISC-V version[1],
 
-Sure, this makes sense. When rebasing, I noted the change in current
-master, but had only remembered to update the log_debug() message in
-fdtdec_setup_mem_size_base_lowest() to use %pap.
+	u32 code0;                /* Executable code */
+	u32 code1;                /* Executable code */
+	u64 text_offset;          /* Image load offset, little endian */
+	u64 image_size;           /* Effective Image size, little endian */
 
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> > +     while (true) {
-> > +             struct resource res;
-> > +             phys_size_t base, size;
-> > +             int reg = 0;
-> 
-> You should really use phys_addr_t for base
+The start of LoongArch image isn't marked as executable.
 
-Ok.
+Additionally, should I include the URL of "latest" kernel documentation,
+or using a link with explicit kernel version (e.g. [2]) to ensure the
+content doesn't change or become 404 over time?
 
-> Regards,
-> Simon
+> -- 
+> Tom
 
-Best regards,
+Regards,
 Yao Zi
+
+[1]: https://www.kernel.org/doc/html/v6.6/riscv/boot-image-header.html
+[2]: https://www.kernel.org/doc/html/v7.1/arch/loongarch/booting.html
