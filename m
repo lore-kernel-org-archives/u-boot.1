@@ -4,67 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4899C43327
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 18:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A9AC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 19:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D8F84A5F;
-	Thu,  2 Jul 2026 20:27:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id D1D40848BF;
+	Thu,  2 Jul 2026 21:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Le2fTMuB";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="pq3pQMrL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 949AA847C8; Thu,  2 Jul 2026 20:27:50 +0200 (CEST)
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [84.16.66.173])
+ id 361898496E; Thu,  2 Jul 2026 21:08:19 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE07D84A27
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D598384857
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 21:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4grljt46ntzyFg;
- Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783016866;
- bh=BTux+gd5ZvqdNnc3Xi3rsSqfUcLOa7Zo/ey/F6ULpGU=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Le2fTMuBw1OXOtSIab+n5oTa2fx16HA7LnPhNqZ/+e4+h6hT+QMF2GqX4qkQ6J446
- w9mh3dxIehu/A7GjRkzekqLoZr+IhvogsOlho1vKmJJEml1b6nX+2UyVb8o+G/xP/0
- WG2XyiQtY1js50RT7G0iW5TFDVDihvvbwEPqKCQnCA7vrVOE2k1fdGZte4276NIAoj
- rggrMqa20DZRUXwN4in7AvKmUay98pbvdx7nRjKaMDDBQs6zDOJ5/WZBHqVbo8KNJo
- ehyBpTbB3Rx2wg8npBThdcMdJ1+1h0mBvd8btOffJSO/+lyeSBRrY6t1Pta8Uf89M+
- qDw+o0BCYNEKA==
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4grljs4FcBzxwk; Thu,  2 Jul 2026 20:27:45 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 02 Jul 2026 20:27:36 +0200
-Subject: [PATCH 6/6] Revert "drivers: sysreset: Add sysreset op that can
- take arguments"
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 98BF31FD17;
+ Thu,  2 Jul 2026 21:08:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1783019296;
+ bh=fmOSBYvNUGJQAmnNnqKw5nTmJmAkKD4fJJBXPo4ykcg=; h=From:To:Subject;
+ b=pq3pQMrLThtLtAW9QVkjZJFKstIz0O0W2b+cwmiyKxMzaJGdQ8/d4D5owy/nQrdDg
+ IMyGdMZfLTQ+YXiwKnQuRGViOQSUvDgyOZqN327vF3PBROnwm6bR2kpJ0blWW/5etY
+ /HqH+X0niNiCrNpbZV/LFXsIf6xUBTx835To5kVkYiyLBCyy4p+IMzgwnEGyoo/edQ
+ /pBZ1uvgDl2fgCVz4xjDm83snSC6m3PjHsUviOriRL4nbl0DCE9Xa5gzuvbcIPNhV2
+ 48DUKkTTu//QuYZIimaDB9PuwmG+IMSavCaXpNp+uiyf7UPWwBipIJID2m14lt3JVF
+ Tu+ydiMX8wYuA==
+Date: Thu, 2 Jul 2026 21:08:11 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Andrew Davis <afd@ti.com>
+Cc: Paresh Bhagat <p-bhagat@ti.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, praneeth@ti.com, vigneshr@ti.com,
+ u-kumar1@ti.com, msp@baylibre.com, v-singh1@ti.com, anshuld@ti.com,
+ m-chawdhry@ti.com, joao.goncalves@toradex.com, bb@ti.com,
+ n-francis@ti.com, sebin.francis@ti.com
+Subject: Re: [PATCH v2 3/4] arm: mack-k3: Kconfig: Add DM firmware reserved
+ memory configs
+Message-ID: <20260702190811.GA255841@francesco-nb>
+References: <20260701075021.3626094-1-p-bhagat@ti.com>
+ <20260701075021.3626094-4-p-bhagat@ti.com>
+ <7794bc90-b69c-48bc-a2a8-2ecdf8ae1459@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-revert-sysreset-v1-6-7920c16a1f3a@cherry.de>
-References: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-In-Reply-To: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.15-dev-47773
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7794bc90-b69c-48bc-a2a8-2ecdf8ae1459@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,142 +71,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+On Thu, Jul 02, 2026 at 01:12:08PM -0500, Andrew Davis wrote:
+> On 7/1/26 2:50 AM, Paresh Bhagat wrote:
+> > Add Kconfig options for DM firmware reserved memory for K3 SOCs that
+> > support DM firmware (K3_DM_FW enabled)
+> > - K3_DM_FW_RESERVED_ADDR: DM firmware address
+> > - K3_DM_FW_RESERVED_SIZE: DM firmware reserved size
+> > 
+> > These configs will be used to fixup the kernel device tree's reserved
+> > memory node for DM. Currently the fixup is only done for AM62A7 SoC, as
+> > K3_DM_FW_RESERVED_SIZE is being used to update DM reserved memory from
+> > 0xf0000 to 0x1f0000 as the current reserved carveout is insufficient to
+> > accommodate the binary.
+> > 
+> > For other platforms, the addresses and sizes are based on the existing
+> > device tree reserved memory. If needed for other SoCs, address and size
+> > could be modified in Kconfig.
+> > 
+> > Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+> > ---
+> >   arch/arm/mach-k3/Kconfig | 21 +++++++++++++++++++++
+> >   1 file changed, 21 insertions(+)
+> > 
+> > diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> > index a32ed3a9683..1b6678e72b7 100644
+> > --- a/arch/arm/mach-k3/Kconfig
+> > +++ b/arch/arm/mach-k3/Kconfig
+> > @@ -165,6 +165,27 @@ config K3_DM_FW
+> >   	  bootloader, it makes RM and PM services not being available
+> >   	  during R5 SPL execution time.
+> > +config K3_DM_FW_RESERVED_ADDR
+> > +	hex "Start address of DM firmware reserved memory region"
+> > +	depends on !SOC_K3_AM642 && !SOC_K3_AM654
+> > +	default 0x9c900000 if SOC_K3_AM62A7 || SOC_K3_AM62P5
+> > +	default 0x9db00000 if SOC_K3_AM625
+> > +	default 0xa0100000 if SOC_K3_J721E || SOC_K3_J7200 || SOC_K3_J721S2 || SOC_K3_J722S || SOC_K3_J784S4
+> > +	help
+> > +	  Start address of the DDR region reserved for DM firmware at runtime.
+> > +	  Used only to fixup the kernel device-tree reserved-memory node.
+> > +
+> > +config K3_DM_FW_RESERVED_SIZE
+> > +	hex "Reserved memory size for DM firmware"
+> > +	depends on !SOC_K3_AM642 && !SOC_K3_AM654
+> > +	default 0x1f00000 if SOC_K3_AM62A7
+> > +	default 0xc00000 if SOC_K3_AM625
+> > +	default 0x1e00000 if TARGET_VERDIN_AM62P_A53 || TARGET_VERDIN_AM62P_R5
+> 
+> Why is this one board different from the rest of the AM62P boards? I doubt
+> the folks at Toradex have make a custom DM firmware, guessing they are just
+> the first to notice our default DM firmware goes outside the current reserved
+> memory size. This size likely needs to be made common for all AM62P.
 
-This reverts commit fcb48b89813b14f38b31b86b4a6ace376bd86d8b.
+You are right, we are not customizing anything on this regard.
 
-The args support for the sysreset uclass contains a logic bug. The first
-sysreset device implementing the request_arg callback will consume the
-args, not support the specified arg and thus return -EPROTONOSUPPORT
-which will stop the iteration over all sysreset devices.
-
-This is an issue if one has multiple sysreset devices and each with
-support for different (valid) args. If a sysreset device implements a
--dummy argument and another -foo and one calls reset -dummy on the
-U-Boot CLI, it'll depend on which sysreset device will be attempted
-first. If it is the one implementing -foo, it'll return it doesn't
-support the argument with -EPROTONOSUPPORT in which case the device
-implementing -dummy will never be attempted and instead we'll do a cold
-reset which is very likely not what's expected.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- drivers/sysreset/Kconfig           |  8 --------
- drivers/sysreset/sysreset-uclass.c | 37 -------------------------------------
- include/sysreset.h                 | 18 ------------------
- 3 files changed, 63 deletions(-)
-
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index f589ad154186..16ef434a8d9c 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -49,14 +49,6 @@ config SYSRESET_CMD_RESET
- 	help
- 	  Enable sysreset implementation of the reset command.
- 
--config SYSRESET_CMD_RESET_ARGS
--	bool "Enable reset command to take arguments"
--	help
--	  Pass on the arguments received by the 'reset' command to the
--	  sysreset driver(s). The sysreset driver(s) may make use of the
--	  additional arguments for implementing arch/board specific
--	  functionality.
--
- if CMD_POWEROFF
- 
- config SYSRESET_CMD_POWEROFF
-diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-index f25e09e9cd06..536ac7271427 100644
---- a/drivers/sysreset/sysreset-uclass.c
-+++ b/drivers/sysreset/sysreset-uclass.c
-@@ -32,18 +32,6 @@ int sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return ops->request(dev, type);
- }
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--int sysreset_request_arg(struct udevice *dev, int argc, char * const argv[])
--{
--	struct sysreset_ops *ops = sysreset_get_ops(dev);
--
--	if (!ops->request_arg)
--		return -ENOSYS;
--
--	return ops->request_arg(dev, argc, argv);
--}
--#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
--
- int sysreset_get_status(struct udevice *dev, char *buf, int size)
- {
- 	struct sysreset_ops *ops = sysreset_get_ops(dev);
-@@ -83,26 +71,6 @@ int sysreset_walk(enum sysreset_t type)
- 	return ret;
- }
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--int sysreset_walk_arg(int argc, char * const argv[])
--{
--	struct udevice *dev;
--	int ret = -ENOSYS;
--
--	while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
--		for (uclass_first_device(UCLASS_SYSRESET, &dev);
--		     dev;
--		     uclass_next_device(&dev)) {
--			ret = sysreset_request_arg(dev, argc, argv);
--			if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
--				break;
--		}
--	}
--
--	return ret;
--}
--#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
--
- int sysreset_get_last_walk(void)
- {
- 	struct udevice *dev;
-@@ -164,11 +132,6 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	printf("resetting ...\n");
- 	mdelay(100);
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--	if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
--		return 0;
--#endif
--
- 	sysreset_walk_halt(reset_type);
- 
- 	return 0;
-diff --git a/include/sysreset.h b/include/sysreset.h
-index d1cc9ebc542a..ff20abdeed3c 100644
---- a/include/sysreset.h
-+++ b/include/sysreset.h
-@@ -43,24 +43,6 @@ struct sysreset_ops {
- 	 * (in which case this method will not actually return)
- 	 */
- 	int (*request)(struct udevice *dev, enum sysreset_t type);
--
--	/**
--	 * @request_arg: Reset handler implementations that might need to process
--	 *		 arguments given to the 'reset' command.
--	 *
--	 * Note that this function may return before the reset takes effect.
--	 *
--	 * @dev:	Device to be used for system reset
--	 * @argc:	No. of items in @argv
--	 * @argv:	Arguments given to 'reset' command
--	 * Return:
--	 * -EINPROGRESS		if the reset has started and will complete soon
--	 * -EPROTONOSUPPORT	if not supported by this device
--	 * 0			if the reset has already happened
--	 * (in which case this method will not actually return)
--	 */
--	int (*request_arg)(struct udevice *dev, int argc, char * const argv[]);
--
- 	/**
- 	 * @get_status:	get printable reset status information
- 	 *
-
--- 
-2.55.0
+Francesco
 
