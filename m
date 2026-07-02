@@ -4,101 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B1C6C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 07:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B454FC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 07:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CC4984C85;
-	Thu,  2 Jul 2026 09:43:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30D9084C85;
+	Thu,  2 Jul 2026 09:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lJMx/VP7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gx/cr/zh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A043E84C9D; Thu,  2 Jul 2026 09:43:27 +0200 (CEST)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
+ id 529A284CA4; Thu,  2 Jul 2026 09:44:14 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FA77849FB
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 09:43:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9314C849FB
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 09:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-664c535f1a0so2059703d50.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 00:43:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782978204; cv=none;
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-664d78637f8so2048646d50.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 00:44:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782978250; cv=none;
  d=google.com; s=arc-20260327;
- b=lv6mL2EXk1thaMuaGQyTmWSnE2D6WAPxsoUcDUMYg2wR39IeNiL/IRXtNFLxOp1ujZ
- divFZJB0GDWHwZGIXIYnkAi6esbDhOHlzZS2h/45ygsinlEqwFiDHvr3kRsdvr/cnrX7
- abnrvMw4jbM+fOsc38V+8WQk2KJdmri7X+go2WZxVLP51scApp2zncaj1sKq+ZJMa4nT
- tpQ3CedN5JjpnqfiWjb60iJDfudtXraacRd378L5UWSFpxPSkYVJJ5Ta2OLEjSO0kErp
- vib3TE0w1HmD8g1Mnf1/2xYkLu7QyZx18tvcKzs0ee59fhxu7eZlw7UMNAb+X8KwGfS7
- CvBw==
+ b=OXmIwuG6RjMdC4oG99njupV006UkGW7tcGOVnZ0YtYLKt67SdSaEJqf67h4kFqN0u6
+ h7GhU8hZB8eh6dKtwsrTmt60+AJtaFb2QY7PPi/PtIrBhnejgZAIehmNKxfN4IuQHPU8
+ Jgfn8B6MCEZHHknDpulFmZaMUAiSeMSHqb5gayq7VaYasZomm4wtx7fdwX0yAkiIg3U+
+ xs5SkBMprwhfefKGp6yeo//TP0HxJs6o6WkNl/veY/xAyOk+mbXItNHhPPsRJ9hvH718
+ LAeo5u+qOVNhKIN2TVATvS9m1Uk0RJPj/qJiZm9s9fCeKceioUbFPmhXTA8vLLk44KLf
+ c2QQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9OOeAK5XA6L1lwvE3qlJEaYUXl5XPOKutyEb/MUL3KY=;
- fh=/BZaRa1uluko6x8jjnvEWzL1SOD+PN2GFswiW+QeU1s=;
- b=AvGKBY63xeQg0oGMOMna1OQBzFTzu2ovqcYh0X9hkyB3Kyln05SlqQIAkIkcJ8zGcB
- at3fAF2CJ80jrRMP5/0vmG0wqHgQZfSzYkqvAeAzRdsIADV2ZIyWTqXvQhqjzgUmyMPV
- fNHM4XF99ZTPbZlDt8ZHn6GKKVrtBZ6lerIvpYtBljWt7rkzevlTRBsJ1L2ufoJAtAnU
- nTPCrN84VGtLzaar5RZQGicnL0HA5N08atJHBl2NQeeHE3BqW5WW9btcHhbzvLuYZaLd
- GzRMciAa8JUU2HDWYTwPD0TjwmVm5UtF5Jhc2BSdPO0HC02oqNvaKIENIVzkdvMC9Eou
- 9NeA==; darn=lists.denx.de
+ bh=Q5DCRZrF2Pz0cFzKwCFjGiRsP6CvC4heKPnihiP+XIo=;
+ fh=j1bZrBR5QLqIR0LOXMFIh5EDSPj1fVHWJGzki1fNPc0=;
+ b=KKg7bvvtIwEeVUArWKAerQPrw/pBcKhynPpAtOdmjgVqRXxWnFsh5lsjOodorDnbnr
+ ZE2W972JnAtakby0VW1J0MgXsVM1hvbcoxdQwmB+UNoOpU7rfFKcHy9TF16BMDw3V99T
+ dfa1H1QNtBSFwLRRihVZ3yfV1C9k6BytAwX1de5yjz0V4Ze+TjIccd+WjW7ml71jix99
+ ZsxnfueOAeWvWdTEjdeRAZT5vicoJ3aYfiqTo354udT7ys/iuVco4pnZrtMIuEhjHPRQ
+ 0X2a/K7L6Y53Sc8pPcJjymVneBaZgISLBeCr99cPfIK8u0ue46gO4gQyxC8KvyTMHCMn
+ QbDA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782978204; x=1783583004; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1782978250; x=1783583050; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9OOeAK5XA6L1lwvE3qlJEaYUXl5XPOKutyEb/MUL3KY=;
- b=lJMx/VP7ulNO2ZCJETi1ol66Tp7XXviSf1krHnLz5pEqXQk6h0lG0mFQV353YzeO1p
- +kp/c4vVkyJ6Lx8tEQusEEex4g6D47FJKMrkWSV5FAcHSB3tztfGNX0qu+2VMVzxDFAd
- BgfK6UGFL40C1rMiKn0y8UiQ+rQMrAmDlHYANGj/bSAvBF1RCpfAIoqXu9RTv4nRguDv
- 3DJeyhDJMvm+VlV5IHNmZCNOtPBewnqUkdwmeE4SPxYTv92FBPMn15agYzgqNp4EWkK/
- SdMUx6CXZtn3H8zZ7UmVnGIGy89G2pXutiShfrqlBd+Q40/ouSv/eBJ3YKT7c4xknvk+
- NcVA==
+ bh=Q5DCRZrF2Pz0cFzKwCFjGiRsP6CvC4heKPnihiP+XIo=;
+ b=gx/cr/zhvtq9xMwhZ2x859jSgC38nZwxKKuOSfx0+3H3TsqbpTtHy4lrGe6/IFAhTp
+ cOQfEuqZsQTMy6DCI2lgNBia+jq0a/ri1vBNSpJKSi+ahAtTsQm7iMt6lAmBq6bAbwXd
+ YOpMlJhs6ah0F9PUSiWcfY7KBj64JhtvzeIeH9tDZRDrALv9v5tcrfA2n82OI0Fx9Vdh
+ DatYoZbCDAL4+QaUbnhaIKtETjsJZDwoXIsF7lxnBckoTesdceRMvSJj/PMmbBk2bCOD
+ B3Hs7Px45nmkZ9xVGAZOHenXNrzu0Y32aFY2Zs+hHJ2EVBqcXnYmE6SU28CD1NNPa1PZ
+ 4JTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782978204; x=1783583004;
+ d=1e100.net; s=20251104; t=1782978250; x=1783583050;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9OOeAK5XA6L1lwvE3qlJEaYUXl5XPOKutyEb/MUL3KY=;
- b=bNiYmuGuz2Y75ITHf8d+gZ176tgmLo4l2tgfYlz8p8mTu9+qWlMcN9slq/HHWDqBdO
- b5nO5d6VLnIO9jxpqpWFEHRKJML2dNRI1JsMhrTrERzS+fLSqVkr5vtRXqYJ4m0TCk6N
- 0qaAm/Y4oqvjHnk3MJqwgAY8kiEmxPUgg1GAZ258mOLUvOVxQjYK6/n2olyDXfoaqpT7
- JHhVuAwMwvn0t7ZfiRoAvhZfeVN9C+qCealy94lUWD/j4F1E09GAIhX6oRbapNKVwWGw
- ZMkl+r9mGqL7dWrZzCZ1kR1Palz98h3bz0b0tYye4WMBh0uFKuXMgiKDLw3CHPins/dx
- k0FA==
+ bh=Q5DCRZrF2Pz0cFzKwCFjGiRsP6CvC4heKPnihiP+XIo=;
+ b=qQQVL19PiH6UXoDOIZ5P7MLZrdwzbRf2U4mGE5C7G09tTtBxqC0ivy5ArqbjVLRV/f
+ n0pO4tiOyQwavLQH+pYpDWeF7FNdkz0IeBsQjdDmS24nivygD+8J08Zrq9RQDLaxf6Xe
+ q8k3q9hFGwxkkyKiIqlLwR4WZRqB8nJZke6DMp7xthGRIRUGY0BWkdMknjUKthafCN7h
+ qI3OzDdBXDvc+pOASlxsUmUK21u5BuCKl4h+516ihEbVpWOGsaJhfhc5L0mkh1UhvKI6
+ EcS9uMacTBJ8ZDqp1xAD9l/Qs9mhqDXZSN7j3pbOm2BsEvAMfOeKs/7az6L7WmVslAt7
+ wBQw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Roj7zXXtRancpAh+eUSShfVBVfW6qA/DzpDnuszqOi1RTUko7jEuwcR1RBXIYWpBe6Gkk07Dag=@lists.denx.de
-X-Gm-Message-State: AOJu0YwXUarbINBR7aUhg1NRhHLDKMp5clW6lJd7eTXlYR+HalPlM8R5
- +q4QJgsO2Q+zq+Fp6tC/1B/nfaKlrw28wOlnTMCFrA0He20TPobDlod8SkWqls+3RIueMKdENja
- Bc0BMbcDnM2ZTN/4ldmNuULXFLtHzA1lbsWh+ofefSg==
-X-Gm-Gg: AfdE7ckcWNJ0u/BU+XBkiAqOo0QF5WFSrGi7RYvdAUIkIIF2RYt262ySkOAvUWuvfH2
- Vx/ovtxc+oXw2M378lzgdiTRxQTNDh7IKlyhyXrB7xLcSsNOJHIbdc2Jt09ZU5e3N4n1U8qyE76
- vrcKhCsRISQfbLvY+nR/D/8A6tQRv/2h/W93bUzaLJKkaSQ3P25yBT8ZJuSQQUqeZgxMlCqCi8G
- wt0bTZbyjoXfA8W+/Y/fsjYr/sqmwwLJ11+KmIdRSHkZzH+Hvvqm7D+8QpXrf8Jyii3aWpmnyXg
- EcAR8XUQ7Vm4MJII77tHhR+rxbC9wsD/AHUx0nE0PdeIcZO5haGyFYncgFhpNyn1DynkATwPtpO
- P9AQ8pKQTf28IuNmMMWPVc4dHOmESE/mzb4INPQqvuJdU+DLImZQJTdAGT7qdGkwD6LyjKbtaN7
- wOxyG56STDEJ4hLOx5V14b7RfNXtHKylE7U83ni/kh4yY+dxDrrez1HFcZXA28L13YmFx3lmRNL
- N9IAF8GrnaCxi1j2XJaJoToOKI6xOA/BsVaIm/BfQjNaQYzOGsfuSKQarzMxMZlhgymf6v70b14
- gCIi6K4IcoqCu8trYpRqvnAxBYd1+fXaSHXivUNpGrSV9q5Kp7ITtrM/uGhhSLdIBHxIaEE=
-X-Received: by 2002:a05:690e:dcd:b0:664:ae6a:e9a4 with SMTP id
- 956f58d0204a3-66521d39dacmr4935030d50.74.1782978203682; Thu, 02 Jul 2026
- 00:43:23 -0700 (PDT)
+ AHgh+RoVhVDHXGRm2W2Y9vWW3uT5owtGxJHFcv2H2ruY1vyDNzELnxTbvmXRNGpLVVRr2Cn43T/buPk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVyYnRNrxwTdSDMsSN/3rI3oF4vOaIF/eUyVwVoTAcFYmDr0y4
+ XPxY9Jqh13Pm74VbO5UY5DTvE/swoJcpwazPHypgjO60qn+rnzBlMCT3Wn3Is+Zzkkn5YCAZXT4
+ EzQOvNxni6IZMCc01HDUQjqUxuG8EM+dzsxth9cwkNg==
+X-Gm-Gg: AfdE7ckZnVU5bDyeHtuywcwRoo+oJtxorJN3/gWnWCN8f608BcIhurqNw8SVw2UY4Ag
+ mICwZcGqp2PfsaEQgxdRvfKRApMgLne47sWuLMQcZDGLqZM3vORdDCAiaIzXEfN0ju2ZHSN6S1s
+ DeMW40z1nqCSHJ1ZQVx7RpOoMmGNJJPWuU23b1LEqnHWlNzS9uSrHSvY98INqQPlnyeog3V+V/p
+ 8k55TOLJvcI6W12//Qzn+6yCb01OrrSgcSdr0Mu86bhpJB3mU8jJfuEIKctNkZXTsP39GGVEG7v
+ WT5aSu35GH57Ihkq8X0WHU9LHg5r/uzTocg+8UD2evVHqh8BtzSNEz7ypN3sOfCjyzoc/oJ4l6Z
+ M/Y4C+MjK2yJnQFQtmuN6Qzrr02DfuK9cCJY1WqXghoNvF+FhcxParbAReARsP2e9izao23Uu70
+ HgbsmLKB/wtL8NZs2tNiF+9fJ8KMth//ssR6ADupY/e4Gp4U2nuv2qH43ygloHOU4RGxH7vgQ1r
+ 59sBuyZraRAPUGmqLz/QRo5LbVuiMGjWDGbaBBxBYzBazCJbcG/LG1wLBCZLUMtMdep/q9HKYzF
+ RhMASdPln+rsn+DeNo4IE0ixhJ/s29O2Do1vG8u30kcfYBnvG96YRzYHyUdIKRROLIE2EVM=
+X-Received: by 2002:a53:b648:0:b0:664:f3f9:c41d with SMTP id
+ 956f58d0204a3-66521d62cbamr3766574d50.65.1782978249989; Thu, 02 Jul 2026
+ 00:44:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
- <20260628082810.175862-8-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260628082810.175862-8-heinrich.schuchardt@canonical.com>
+ <20260628082810.175862-7-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260628082810.175862-7-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 2 Jul 2026 10:42:46 +0300
-X-Gm-Features: AVVi8CdR2vPcv1tQGMJmP4OxJm3fsIajeChuvj1srWSXtCTbUfogReBlGMhyla8
-Message-ID: <CAC_iWjKN2S5Xu5+YeWB6uo_yydqAxE=gZjR1zzfzFrepXx7W+w@mail.gmail.com>
-Subject: Re: [PATCH v3 07/11] efi_loader: move string helpers to efi_app_common
+Date: Thu, 2 Jul 2026 10:43:33 +0300
+X-Gm-Features: AVVi8CfgVvZkhI3uyrwD1EpfGVRnGuhVPngZnCXR5jGkmXH3WscsvJ99xmNY4Ak
+Message-ID: <CAC_iWjKZ6MYMvOZZ560odevd3_L99jhiXHe1Chh+uX8rSPOZwQ@mail.gmail.com>
+Subject: Re: [PATCH v3 06/11] efi_loader: move console-input helpers to
+ efi_app_common
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>, 
@@ -124,165 +125,706 @@ X-Virus-Status: Clean
 On Sun, 28 Jun 2026 at 11:28, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Move the shared string-processing helper to efi_app_common:
+> Move the shared console-input helpers to efi_app_common:
 >
-> * skip_whitespace() - advance past leading whitespace
+> * efi_drain_input() - drain the console input queue
+> * efi_input_yn()    - read a y/n/ESC key from the user
+> * efi_input()       - read a UTF-16 string from the console
 >
-> Remove the now-duplicate static definition from dtbdump, initrddump,
+> The common efi_input_yn() calls efi_drain_input() once at entry,
+> replacing the open-coded cin->reset() calls that each application
+> previously duplicated.
+>
+> dbginfodump and smbiosdump had no efi_drain_input() call in their
+> command loops; add the call so the console queue is drained before
+> each prompt, fixing a latent input-echo artefact.
+>
+> The common state is extended with a cin pointer (initialized by
+> efi_app_init from sys_table->con_in) so the helpers can access the
+> console-input protocol without additional parameters.
+>
+> Remove the now-duplicate static definitions from dtbdump, initrddump,
 > smbiosdump and dbginfodump.
+>
+> smbiosdump: fix kernel-doc tag for command_loop() from "command_loop -"
+> to "command_loop() -" to follow the kernel-doc convention.
 >
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
 > v3:
->         no change
+>         actually add drain_input() to dbginfodump
 > v2:
 >         new patch
 > ---
->  lib/efi_loader/dbginfodump.c    | 13 -------------
->  lib/efi_loader/dtbdump.c        | 13 -------------
->  lib/efi_loader/efi_app_common.c |  7 +++++++
->  lib/efi_loader/efi_app_common.h |  8 ++++++++
->  lib/efi_loader/initrddump.c     | 13 -------------
->  lib/efi_loader/smbiosdump.c     | 13 -------------
->  6 files changed, 15 insertions(+), 52 deletions(-)
+>  lib/efi_loader/dbginfodump.c    |  62 +-----------------
+>  lib/efi_loader/dtbdump.c        | 109 --------------------------------
+>  lib/efi_loader/efi_app_common.c |  88 ++++++++++++++++++++++++++
+>  lib/efi_loader/efi_app_common.h |  29 +++++++++
+>  lib/efi_loader/initrddump.c     | 109 --------------------------------
+>  lib/efi_loader/smbiosdump.c     | 108 +------------------------------
+>  6 files changed, 120 insertions(+), 385 deletions(-)
 >
 > diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
-> index b39d47ff9bb..39ffbb59d82 100644
+> index 2dcff2a11fe..b39d47ff9bb 100644
 > --- a/lib/efi_loader/dbginfodump.c
 > +++ b/lib/efi_loader/dbginfodump.c
-> @@ -82,19 +82,6 @@ static void printp(void *p)
+> @@ -14,7 +14,6 @@
+>  #define BUFFER_SIZE 64
+>
+>  static struct efi_simple_text_output_protocol *cout;
+> -static struct efi_simple_text_input_protocol *cin;
+>  static efi_handle_t handle;
+>  static struct efi_system_table *systable;
+>  static struct efi_boot_services *bs;
+> @@ -83,65 +82,6 @@ static void printp(void *p)
 >         print(str);
 >  }
 >
 > -/**
-> - * skip_whitespace() - skip over leading whitespace
+> - * efi_input() - read string from console
 > - *
-> - * @pos:       UTF-16 string
-> - * Return:     pointer to first non-whitespace
+> - * @buffer:            input buffer
+> - * @buffer_size:       buffer size
+> - * Return:             status code
 > - */
-> -static u16 *skip_whitespace(u16 *pos)
+> -static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
 > -{
-> -       for (; *pos && *pos <= 0x20; ++pos)
-> -               ;
-> -       return pos;
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_uintn_t pos = 0;
+> -       u16 outbuf[2] = u" ";
+> -       efi_status_t ret;
+> -
+> -       /* Drain the console input */
+> -       ret = cin->reset(cin, true);
+> -       *buffer = 0;
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       print(u"\r\nAborted\r\n");
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               switch (key.unicode_char) {
+> -               case 0x08: /* Backspace */
+> -                       if (pos) {
+> -                               buffer[pos--] = 0;
+> -                               print(u"\b \b");
+> -                       }
+> -                       break;
+> -               case 0x0a: /* Linefeed */
+> -               case 0x0d: /* Carriage return */
+> -                       print(u"\r\n");
+> -                       return EFI_SUCCESS;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Ignore surrogate codes */
+> -               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> -                       continue;
+> -               if (key.unicode_char >= 0x20 &&
+> -                   pos < buffer_size - 1) {
+> -                       *outbuf = key.unicode_char;
+> -                       buffer[pos++] = key.unicode_char;
+> -                       buffer[pos] = 0;
+> -                       print(outbuf);
+> -               }
+> -       }
 > -}
 > -
 >  /**
->   * do_help() - print help
->   */
+>   * skip_whitespace() - skip over leading whitespace
+>   *
+> @@ -277,7 +217,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+>         handle = image_handle;
+>         systable = systab;
+>         cout = systable->con_out;
+> -       cin = systable->con_in;
+>         bs = systable->boottime;
+>
+>         cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
+> @@ -298,6 +237,7 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+>                 u16 *pos;
+>                 efi_uintn_t ret;
+>
+> +               efi_drain_input();
+>                 print(u"=> ");
+>                 ret = efi_input(command, sizeof(command));
+>                 if (ret == EFI_ABORTED)
 > diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-> index 716daf4a90f..559c64be7f7 100644
+> index 1468955eb8c..716daf4a90f 100644
 > --- a/lib/efi_loader/dtbdump.c
 > +++ b/lib/efi_loader/dtbdump.c
-> @@ -87,19 +87,6 @@ static void *get_dtb(struct efi_system_table *systable)
->         return dtb;
+> @@ -16,7 +16,6 @@
+>
+>  #define efi_size_in_pages(size) ((size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+>
+> -static struct efi_simple_text_input_protocol *cin;
+>  static struct efi_boot_services *bs;
+>  static const efi_guid_t fdt_guid = EFI_FDT_GUID;
+>  static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> @@ -50,113 +49,6 @@ static void print_char(unsigned char c)
+>         print(out);
 >  }
 >
 > -/**
-> - * skip_whitespace() - skip over leading whitespace
-> - *
-> - * @pos:       UTF-16 string
-> - * Return:     pointer to first non-whitespace
+> - * efi_drain_input() - drain console input
 > - */
-> -static u16 *skip_whitespace(u16 *pos)
+> -static void efi_drain_input(void)
 > -{
-> -       for (; *pos && *pos <= 0x20; ++pos)
-> -               ;
-> -       return pos;
+> -       cin->reset(cin, true);
 > -}
 > -
->  /**
->   * do_help() - print help
->   */
+> -/**
+> - * efi_input_yn() - get answer to yes/no question
+> - *
+> - * Return:
+> - * y or Y
+> - *     EFI_SUCCESS
+> - * n or N
+> - *     EFI_ACCESS_DENIED
+> - * ESC
+> - *     EFI_ABORTED
+> - */
+> -static efi_status_t efi_input_yn(void)
+> -{
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_status_t ret;
+> -
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Convert to lower case */
+> -               switch (key.unicode_char | 0x20) {
+> -               case 'y':
+> -                       return EFI_SUCCESS;
+> -               case 'n':
+> -                       return EFI_ACCESS_DENIED;
+> -               default:
+> -                       break;
+> -               }
+> -       }
+> -}
+> -
+> -/**
+> - * efi_input() - read string from console
+> - *
+> - * @buffer:            input buffer
+> - * @buffer_size:       buffer size
+> - * Return:             status code
+> - */
+> -static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+> -{
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_uintn_t pos = 0;
+> -       u16 outbuf[2] = u" ";
+> -       efi_status_t ret;
+> -
+> -       *buffer = 0;
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       print(u"\r\nAborted\r\n");
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               switch (key.unicode_char) {
+> -               case 0x08: /* Backspace */
+> -                       if (pos) {
+> -                               buffer[pos--] = 0;
+> -                               print(u"\b \b");
+> -                       }
+> -                       break;
+> -               case 0x0a: /* Linefeed */
+> -               case 0x0d: /* Carriage return */
+> -                       print(u"\r\n");
+> -                       return EFI_SUCCESS;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Ignore surrogate codes */
+> -               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> -                       continue;
+> -               if (key.unicode_char >= 0x20 &&
+> -                   pos < buffer_size - 1) {
+> -                       *outbuf = key.unicode_char;
+> -                       buffer[pos++] = key.unicode_char;
+> -                       buffer[pos] = 0;
+> -                       print(outbuf);
+> -               }
+> -       }
+> -}
+> -
+>  /*
+>   * Convert FDT value to host endianness.
+>   *
+> @@ -702,7 +594,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+>
+>         handle = image_handle;
+>         systable = systab;
+> -       cin = systable->con_in;
+>         bs = systable->boottime;
+>
+>         color(EFI_LIGHTBLUE);
 > diff --git a/lib/efi_loader/efi_app_common.c b/lib/efi_loader/efi_app_common.c
-> index 406cd236f6f..6bd52e08d28 100644
+> index e9e9334acc7..406cd236f6f 100644
 > --- a/lib/efi_loader/efi_app_common.c
 > +++ b/lib/efi_loader/efi_app_common.c
-> @@ -96,6 +96,13 @@ void error(u16 *string)
->         color(EFI_LIGHTBLUE);
->  }
+> @@ -9,6 +9,7 @@
+>  #include "efi_app_common.h"
 >
-> +u16 *skip_whitespace(u16 *pos)
+>  static efi_handle_t app_handle;
+> +static struct efi_simple_text_input_protocol *cin;
+>  static struct efi_simple_text_output_protocol *cout;
+>  struct efi_boot_services *bs;
+>  static bool nocolor;
+> @@ -40,6 +41,7 @@ void efi_app_init(struct efi_system_table *sys_table, efi_handle_t image_handle)
+>
+>         app_handle = image_handle;
+>         systable = sys_table;
+> +       cin = sys_table->con_in;
+>         cout = sys_table->con_out;
+>         bs = sys_table->boottime;
+>
+> @@ -104,3 +106,89 @@ bool starts_with(u16 *string, u16 *keyword)
+>         }
+>         return true;
+>  }
+> +
+> +void efi_drain_input(void)
 > +{
-> +       for (; *pos && *pos <= 0x20; ++pos)
-> +               ;
-> +       return pos;
+> +       cin->reset(cin, true);
 > +}
 > +
->  bool starts_with(u16 *string, u16 *keyword)
->  {
->         if (!string)
+> +efi_status_t efi_input_yn(void)
+> +{
+> +       struct efi_input_key key = { 0 };
+> +       efi_uintn_t index;
+> +       efi_status_t ret;
+> +
+> +       efi_drain_input();
+> +       for (;;) {
+> +               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               ret = cin->read_key_stroke(cin, &key);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               switch (key.scan_code) {
+> +               case 0x17: /* Escape */
+> +                       return EFI_ABORTED;
+> +               default:
+> +                       break;
+> +               }
+> +               /* Convert to lower case */
+> +               switch (key.unicode_char | 0x20) {
+> +               case 'y':
+> +                       return EFI_SUCCESS;
+> +               case 'n':
+> +                       return EFI_ACCESS_DENIED;
+> +               default:
+> +                       break;
+> +               }
+> +       }
+> +}
+> +
+> +efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+> +{
+> +       struct efi_input_key key = { 0 };
+> +       efi_uintn_t index;
+> +       efi_uintn_t pos = 0;
+> +       u16 outbuf[2] = u" ";
+> +       efi_status_t ret;
+> +
+> +       *buffer = 0;
+> +       for (;;) {
+> +               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               ret = cin->read_key_stroke(cin, &key);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               switch (key.scan_code) {
+> +               case 0x17: /* Escape */
+> +                       print(u"\r\nAborted\r\n");
+> +                       return EFI_ABORTED;
+> +               default:
+> +                       break;
+> +               }
+> +               switch (key.unicode_char) {
+> +               case 0x08: /* Backspace */
+> +                       if (pos) {
+> +                               buffer[pos--] = 0;
+> +                               print(u"\b \b");
+> +                       }
+> +                       break;
+> +               case 0x0a: /* Linefeed */
+> +               case 0x0d: /* Carriage return */
+> +                       print(u"\r\n");
+> +                       return EFI_SUCCESS;
+> +               default:
+> +                       break;
+> +               }
+> +               /* Ignore surrogate codes */
+> +               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> +                       continue;
+> +               if (key.unicode_char >= 0x20 && pos < buffer_size - 1) {
+> +                       *outbuf = key.unicode_char;
+> +                       buffer[pos++] = key.unicode_char;
+> +                       buffer[pos] = 0;
+> +                       print(outbuf);
+> +               }
+> +       }
+> +}
 > diff --git a/lib/efi_loader/efi_app_common.h b/lib/efi_loader/efi_app_common.h
-> index 4498607ef07..ff37f3413eb 100644
+> index 45c17a8ed99..4498607ef07 100644
 > --- a/lib/efi_loader/efi_app_common.h
 > +++ b/lib/efi_loader/efi_app_common.h
-> @@ -55,6 +55,14 @@ void cls(void);
+> @@ -64,4 +64,33 @@ void error(u16 *string);
 >   */
->  void error(u16 *string);
+>  bool starts_with(u16 *string, u16 *keyword);
 >
 > +/**
-> + * skip_whitespace() - skip over leading whitespace
-> + *
-> + * @pos:       UTF-16 string
-> + * Return:      pointer to first non-whitespace
+> + * efi_drain_input() - drain console input
 > + */
-> +u16 *skip_whitespace(u16 *pos);
+> +void efi_drain_input(void);
 > +
->  /**
->   * starts_with() - check if string starts with keyword
->   *
+> +/**
+> + * efi_input_yn() - get answer to yes/no question
+> + *
+> + * Drains the console input before reading.
+> + *
+> + * Return:
+> + * y or Y
+> + *     EFI_SUCCESS
+> + * n or N
+> + *     EFI_ACCESS_DENIED
+> + * ESC
+> + *     EFI_ABORTED
+> + */
+> +efi_status_t efi_input_yn(void);
+> +
+> +/**
+> + * efi_input() - read string from console
+> + *
+> + * @buffer:             input buffer
+> + * @buffer_size:        buffer size
+> + * Return:              status code
+> + */
+> +efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size);
+> +
+>  #endif /* _EFI_APP_COMMON_H */
 > diff --git a/lib/efi_loader/initrddump.c b/lib/efi_loader/initrddump.c
-> index 52562be048d..0a025c1a841 100644
+> index 60f8a020e8c..52562be048d 100644
 > --- a/lib/efi_loader/initrddump.c
 > +++ b/lib/efi_loader/initrddump.c
-> @@ -45,19 +45,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
+> @@ -19,7 +19,6 @@
+>
+>  static struct efi_system_table *systable;
+>  static struct efi_boot_services *bs;
+> -static struct efi_simple_text_input_protocol *cin;
+>  static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+>  static const efi_guid_t guid_simple_file_system_protocol =
+>                                         EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
+> @@ -46,113 +45,6 @@ static const struct efi_lo_dp_prefix initrd_dp = {
 >         }
 >  };
 >
 > -/**
-> - * skip_whitespace() - skip over leading whitespace
-> - *
-> - * @pos:       UTF-16 string
-> - * Return:     pointer to first non-whitespace
+> - * efi_drain_input() - drain console input
 > - */
-> -static u16 *skip_whitespace(u16 *pos)
+> -static void efi_drain_input(void)
 > -{
-> -       for (; *pos && *pos <= 0x20; ++pos)
-> -               ;
-> -       return pos;
+> -       cin->reset(cin, true);
+> -}
+> -
+> -/**
+> - * efi_input_yn() - get answer to yes/no question
+> - *
+> - * Return:
+> - * y or Y
+> - *     EFI_SUCCESS
+> - * n or N
+> - *     EFI_ACCESS_DENIED
+> - * ESC
+> - *     EFI_ABORTED
+> - */
+> -static efi_status_t efi_input_yn(void)
+> -{
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_status_t ret;
+> -
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Convert to lower case */
+> -               switch (key.unicode_char | 0x20) {
+> -               case 'y':
+> -                       return EFI_SUCCESS;
+> -               case 'n':
+> -                       return EFI_ACCESS_DENIED;
+> -               default:
+> -                       break;
+> -               }
+> -       }
+> -}
+> -
+> -/**
+> - * efi_input() - read string from console
+> - *
+> - * @buffer:            input buffer
+> - * @buffer_size:       buffer size
+> - * Return:             status code
+> - */
+> -static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+> -{
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_uintn_t pos = 0;
+> -       u16 outbuf[2] = u" ";
+> -       efi_status_t ret;
+> -
+> -       *buffer = 0;
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       print(u"\r\nAborted\r\n");
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               switch (key.unicode_char) {
+> -               case 0x08: /* Backspace */
+> -                       if (pos) {
+> -                               buffer[pos--] = 0;
+> -                               print(u"\b \b");
+> -                       }
+> -                       break;
+> -               case 0x0a: /* Linefeed */
+> -               case 0x0d: /* Carriage return */
+> -                       print(u"\r\n");
+> -                       return EFI_SUCCESS;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Ignore surrogate codes */
+> -               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> -                       continue;
+> -               if (key.unicode_char >= 0x20 &&
+> -                   pos < buffer_size - 1) {
+> -                       *outbuf = key.unicode_char;
+> -                       buffer[pos++] = key.unicode_char;
+> -                       buffer[pos] = 0;
+> -                       print(outbuf);
+> -               }
+> -       }
 > -}
 > -
 >  /**
->   * do_help() - print help
->   */
+>   * skip_whitespace() - skip over leading whitespace
+>   *
+> @@ -356,7 +248,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+>
+>         handle = image_handle;
+>         systable = systab;
+> -       cin = systable->con_in;
+>         bs = systable->boottime;
+>
+>         color(EFI_WHITE);
 > diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-> index 100e03294e5..351e103fb97 100644
+> index e19214d798f..100e03294e5 100644
 > --- a/lib/efi_loader/smbiosdump.c
 > +++ b/lib/efi_loader/smbiosdump.c
-> @@ -25,19 +25,6 @@ static const efi_guid_t guid_simple_file_system_protocol =
+> @@ -15,7 +15,6 @@
+>
+>  #define BUFFER_SIZE 64
+>
+> -static struct efi_simple_text_input_protocol *cin;
+>  static struct efi_boot_services *bs;
+>  static efi_handle_t handle;
+>  static struct efi_system_table *systable;
+> @@ -26,109 +25,6 @@ static const efi_guid_t guid_simple_file_system_protocol =
 >                                         EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
 >  static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
 >
 > -/**
-> - * skip_whitespace() - skip over leading whitespace
+> - * efi_input_yn() - get answer to yes/no question
 > - *
-> - * @pos:       UTF-16 string
-> - * Return:     pointer to first non-whitespace
+> - * Return:
+> - * y or Y
+> - *     EFI_SUCCESS
+> - * n or N
+> - *     EFI_ACCESS_DENIED
+> - * ESC
+> - *     EFI_ABORTED
 > - */
-> -static u16 *skip_whitespace(u16 *pos)
+> -static efi_status_t efi_input_yn(void)
 > -{
-> -       for (; *pos && *pos <= 0x20; ++pos)
-> -               ;
-> -       return pos;
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_status_t ret;
+> -
+> -       /* Drain the console input */
+> -       ret = cin->reset(cin, true);
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Convert to lower case */
+> -               switch (key.unicode_char | 0x20) {
+> -               case 'y':
+> -                       return EFI_SUCCESS;
+> -               case 'n':
+> -                       return EFI_ACCESS_DENIED;
+> -               default:
+> -                       break;
+> -               }
+> -       }
+> -}
+> -
+> -/**
+> - * efi_input() - read string from console
+> - *
+> - * @buffer:            input buffer
+> - * @buffer_size:       buffer size
+> - * Return:             status code
+> - */
+> -static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+> -{
+> -       struct efi_input_key key = {0};
+> -       efi_uintn_t index;
+> -       efi_uintn_t pos = 0;
+> -       u16 outbuf[2] = u" ";
+> -       efi_status_t ret;
+> -
+> -       /* Drain the console input */
+> -       ret = cin->reset(cin, true);
+> -       *buffer = 0;
+> -       for (;;) {
+> -               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               ret = cin->read_key_stroke(cin, &key);
+> -               if (ret != EFI_SUCCESS)
+> -                       continue;
+> -               switch (key.scan_code) {
+> -               case 0x17: /* Escape */
+> -                       print(u"\r\nAborted\r\n");
+> -                       return EFI_ABORTED;
+> -               default:
+> -                       break;
+> -               }
+> -               switch (key.unicode_char) {
+> -               case 0x08: /* Backspace */
+> -                       if (pos) {
+> -                               buffer[pos--] = 0;
+> -                               print(u"\b \b");
+> -                       }
+> -                       break;
+> -               case 0x0a: /* Linefeed */
+> -               case 0x0d: /* Carriage return */
+> -                       print(u"\r\n");
+> -                       return EFI_SUCCESS;
+> -               default:
+> -                       break;
+> -               }
+> -               /* Ignore surrogate codes */
+> -               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> -                       continue;
+> -               if (key.unicode_char >= 0x20 &&
+> -                   pos < buffer_size - 1) {
+> -                       *outbuf = key.unicode_char;
+> -                       buffer[pos++] = key.unicode_char;
+> -                       buffer[pos] = 0;
+> -                       print(outbuf);
+> -               }
+> -       }
 > -}
 > -
 >  /**
->   * open_file_system() - open simple file system protocol
+>   * skip_whitespace() - skip over leading whitespace
 >   *
+> @@ -467,7 +363,7 @@ static efi_status_t do_save(u16 *filename)
+>  }
+>
+>  /**
+> - * command_loop - process user commands
+> + * command_loop() - process user commands
+>   */
+>  static void command_loop(void)
+>  {
+> @@ -476,6 +372,7 @@ static void command_loop(void)
+>                 u16 *pos;
+>                 efi_uintn_t ret;
+>
+> +               efi_drain_input();
+>                 print(u"=> ");
+>                 ret = efi_input(command, sizeof(command));
+>                 if (ret == EFI_ABORTED)
+> @@ -509,7 +406,6 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+>
+>         handle = image_handle;
+>         systable = systab;
+> -       cin = systable->con_in;
+>         bs = systable->boottime;
+>
+>         color(EFI_WHITE);
 > --
 > 2.53.0
 >
