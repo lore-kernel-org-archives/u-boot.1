@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DA6C43602
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21041C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A65984A3A;
-	Thu,  2 Jul 2026 15:08:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4E6484A20;
+	Thu,  2 Jul 2026 15:08:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="D+W8NLE0";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="L0YuqgVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA4F584A51; Thu,  2 Jul 2026 15:08:50 +0200 (CEST)
+ id 0635884A57; Thu,  2 Jul 2026 15:08:52 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6DEC84A20
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:08:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2760784A0A
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:08:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 7402E4E40C31;
- Thu,  2 Jul 2026 13:08:48 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id D48684E40C2E;
+ Thu,  2 Jul 2026 13:08:49 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 498D95FF03;
- Thu,  2 Jul 2026 13:08:48 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id AA45D5FF03;
+ Thu,  2 Jul 2026 13:08:49 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id AE9D6104C953E; 
- Thu,  2 Jul 2026 15:08:46 +0200 (CEST)
+ with ESMTPSA id EBA37104C952F; 
+ Thu,  2 Jul 2026 15:08:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1782997727; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1782997729; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=wK/T6dieYLfbzBdQYR9gFYCyQvVv3B/1LOV+Db90iKM=;
- b=D+W8NLE0XFrTW6YbMsNgL4XqTOy3/3trTmAoJA9BC/BmjcHZU5GtHmNJpGO+j/cuDOu/Y4
- EfSS0rt/IP4N+3nfxs5J8o4YYRmahHkUgOXr2F3Gjxanf0MaH77gleX1f5JLIdMGZbcbZV
- tBwAL5mob8JPsCf3OwHTb3SeuIWK/01nf+y0rI8WJCZT0fu7hnrzf1oyR9oGQA4PMVVZvu
- N94XbJzrPUZpTLGGJOzCusgxEII979Irvuyj8OoD+U+zWH588x3uTCW2pqkx2+EgaClQnY
- dPeq9rHwJyPVi5C2qDErdcRQaQvTKtK7N+N7fU6nV7mbusVreJ75ofDgxsQuKg==
+ bh=2rNKPUL0ZqixtQgV0b/KWN64btCM4oV5ivhZLg6v5aY=;
+ b=L0YuqgVfi0GPSlGVJzXprVHDITE3T3EUUNHdFQA5Ht5qySoj6dy8tkgC2J6JOETu6/gsa2
+ ids5ns0ek6ozFBEvZyRYhU3N1STZOb4SwWSCXnu1/JbOt20PvE6D45H6out6Anb8ToXx+b
+ j+9G+9SkHRwdK/mS199Hp5beAwsotSZFf51893A6oYK6tbNl6UIlYpZ5n0V/oA0mtrL2zm
+ VvPiIa3NxqFCHhYFAiUCnRtkVhVPQ31Oc4ahPvzHIeMAkYLR2WRLhbuF4LuN7xApefBqVp
+ hI3Omm5YWQQXjxLbjbsncQYdj5jEJFqTF7PhVHA/70uPpekiLznL3oxTZCrzfQ==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Date: Thu, 02 Jul 2026 15:08:43 +0200
-Subject: [PATCH v3 3/6] mtd: rawnand: zynq: Make sure an of node is
- attached
+Date: Thu, 02 Jul 2026 15:08:44 +0200
+Subject: [PATCH v3 4/6] mtd: rawnand: zynq: Do not fail the probe for no reason
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-dave-upstream-nand-fixes-v3-3-3814352982ad@bootlin.com>
+Message-Id: <20260702-dave-upstream-nand-fixes-v3-4-3814352982ad@bootlin.com>
 References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
 In-Reply-To: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
 To: u-boot@lists.denx.de
@@ -82,31 +81,32 @@ X-Virus-Status: Clean
 
 From: "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
 
-If no ofnode is attached by the controller driver, DT parsing does not
-happen.
+If there is no indication about 16b buswidth, no need to fail the probe,
+just assume it is the (very standard) 8b case.
 
 Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
 Signed-off-by: Bastien Curutchet (DAVE.eu) <bastien.curutchet@bootlin.com>
 ---
- drivers/mtd/nand/raw/zynq_nand.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/mtd/nand/raw/zynq_nand.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/zynq_nand.c b/drivers/mtd/nand/raw/zynq_nand.c
-index 2d07b29ecab..54c25563072 100644
+index 54c25563072..be080cbb074 100644
 --- a/drivers/mtd/nand/raw/zynq_nand.c
 +++ b/drivers/mtd/nand/raw/zynq_nand.c
-@@ -1103,6 +1103,11 @@ static int zynq_nand_probe(struct udevice *dev)
- 		return dm_scan_fdt_dev(dev);
- 	}
+@@ -1134,12 +1134,6 @@ static int zynq_nand_probe(struct udevice *dev)
+ 	nand_chip->write_buf = zynq_nand_write_buf;
  
-+	if (!ofnode_get_child_count(of_nand))
-+		nand_set_flash_node(nand_chip, of_nand);
-+	else
-+		nand_set_flash_node(nand_chip, ofnode_first_subnode(of_nand));
-+
- 	if (ofnode_read_resource(of_nand, 0, &res)) {
- 		printf("Failed to get nand resource\n");
- 		return -ENODEV;
+ 	is_16bit_bw = zynq_nand_check_is_16bit_bw_flash();
+-	if (is_16bit_bw == NAND_BW_UNKNOWN) {
+-		printf("%s: Unable detect NAND based on MIO settings\n",
+-		       __func__);
+-		return -EINVAL;
+-	}
+-
+ 	if (is_16bit_bw == NAND_BW_16BIT)
+ 		nand_chip->options = NAND_BUSWIDTH_16;
+ 
 
 -- 
 2.54.0
