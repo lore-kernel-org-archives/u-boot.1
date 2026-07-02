@@ -4,100 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E14C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA5FC43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C6B84832;
-	Thu,  2 Jul 2026 10:29:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2EF584CC1;
+	Thu,  2 Jul 2026 10:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mDazQGtb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g8dFNEd7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D277B84B8D; Thu,  2 Jul 2026 10:29:38 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 1AD4C84CC3; Thu,  2 Jul 2026 10:30:19 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEDC2846A4
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:29:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D39F846A4
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-697e96dd8d2so540199a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:29:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782980976; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6986578d8c0so2640921a12.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:30:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782981017; cv=none;
  d=google.com; s=arc-20260327;
- b=TIIBm6bYgdNn3ry/O1o5zS+C52z16m+L3hJfH1XKLUtnf0w+POhSMZuMNhR+flhs03
- mlPBmaTWv0/s8NmcF4OWPdf3eztxhFKRpHT03v9wGytCEcSokSMGFSeJNQOjwOCE7KbN
- CJSi44QrRnu0nAX4/yRhiwwjHf4kjnK2qhCjGYHTRlekks8EWNDlI3Q2IztqZHPXtrgo
- I27bQzrMd0B9dKFVx4IveOc61K8UwYVKs4sb4EeqFFZLczkyiKD8azy5Wt/gWVvvL/2g
- dBJHrbhpp4jb+ZESSoXigw4el3STQtM3sB4oFB4P5eHcM0i1or1Eubi54GCgSR1I4aD7
- eniQ==
+ b=KSZZFSNLn/PxvOhnk0qZzknpkthmumqPbmez2SCqZcDcc6E1A4jaoBU5MRFe1qARTI
+ q9JoHdm1YCmDm2tG7qIqftGqbVaL1l1kz5EzgzRHC2bxUp+hsW4l2D9dCSnkhlCld1LO
+ V8o1B/7l+BJuuq5vITbTqSLR94SPtgF+P+fCbAbvfaXmUIckgBR86M6jnVVtRRyZljij
+ +hg+P+zkyM+MNzgHAiluH3T3GZc0zgRCBCZiQ/bGZXGM02bwI9+fTtKg2+GpTnzOGyAG
+ I03ER0rikEYYv1BKIDlfn2SjZnoz3BAAC4dgFSoFWcpUb32Gx6xz6JDTIpoaYO4b6XXO
+ r6cA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=/wH0PtWLgDN63mx0Z89GDhpx1wX8m2XZkjDG1EI5lWs=;
- fh=bw+B8yMH0j5/Xib141B9M28QPxTPqJCdmhUtRtZTZTo=;
- b=ckNIlYuQhXL7to/X4DHlyEtmRPHbs/W3DIsMJHELGuUlOzznbYkwEppiDVOEZXbOTn
- XEOoKbYvNKl/Hnu6GXXTVyPAbBnYIw8Ko65D6oVdx5ysu01nEUyO7dIpuILsIX7PnVtf
- /9bU0mUxk5DXr+w4lYG00aCYgKQA45+xKuOHXTN0QuY7lDfrRu0JyM7T6npv2eVw8Yx5
- hBrk8mgdGTp2V2Wy6WTaVtlIfmcdW9BSHl3JKonKiX1xDHrbS7lxkWQaV72VVX+weRs9
- wYoH/yc+gPhNfXeNhVcY5oDrn9TGcZ8yVtJ5uCiSrWK0pK3A6GsJgjIEQ8E8mlZZuCl8
- 2QRg==; darn=lists.denx.de
+ bh=aN160ae7WBQ1Ni44gd/zQw1tvqqi8a34/XUta7WCANU=;
+ fh=MhAo4QPuXEC/Rh971JORz4rq3nvFSJ8p5JStjvc7R4U=;
+ b=NZBI/wkxEZLI8UuXno0J1rOzq+Je6IqDRoI5ssV77WNLyzLd7rtrY5bKpYn33APCy0
+ h5TrYnit+iI41GrQw5f1adju4aOcjdKaimrx87f0mCOpwcu4wPu/auoFg9RxQhR+uzV8
+ 8ATmeVerPHTM0ipV5NzTA9hTTNC2LDSx8BABqozXrhWxDpqD5ww+urQLxY4kvb0OBKQn
+ /CM0S4F5yMktPuWrUHfXHSVvwsph76U2rHSoEt8cNzVYNRstzU9nRVO3N3VLYrg7qMA2
+ pdMFhlMLe9Y44p3CudGM8t3fQYyNMKq2cggZP58Gf6dloNqG3Zq4dAHBdL+bLQi3ccIe
+ ncCw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782980976; x=1783585776; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782981017; x=1783585817; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/wH0PtWLgDN63mx0Z89GDhpx1wX8m2XZkjDG1EI5lWs=;
- b=mDazQGtbzS9Sbketz+z4XOqFYkqvN8r43dbXOMsSDQtePzrCyPmohY716LxI7Qlh7v
- gU4l14+XH7TZN4AqsgEPBKvvVSrMkHLQ7GkF2FJiW1z4InttCiF7mIoJZwAu1SqMQX6O
- iJryyovk+wWCvH0aPw6zqQAT4VtigI7Ku7TBk=
+ bh=aN160ae7WBQ1Ni44gd/zQw1tvqqi8a34/XUta7WCANU=;
+ b=g8dFNEd7hbFr0XJWtIWbO7L9ylBS+2I/w1uf6v6f8d+mSXtKEijC/cqwkXpf5TqUSv
+ pWNUt1277LUaixj6k7sYuxl7U3DhZ4RSM1J34GZbpogJ/GtM2BzDSNl7MXI04vn6RAo/
+ +MCz4bHm6tg1GRaAfrGzR6CPyj8Ris3qlu4d8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782980976; x=1783585776;
+ d=1e100.net; s=20251104; t=1782981017; x=1783585817;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/wH0PtWLgDN63mx0Z89GDhpx1wX8m2XZkjDG1EI5lWs=;
- b=mXNCg7SnGzDqQ+mczR4WYZUJK6s41KqhPsFlaaxeBdwRmg2qFkcNTVAXrGVgfbo3JF
- fZUjvK4MfLCsVbeCK8+XUQtkMIm2hvgUyPNQ2sSwPqWKoA37hrBuA/O4Ja2EgizsqgpL
- NaQ/Rh5Dr7Me3TL0zLZxJW0U8yXXiJi64DxeI8/5HP3C/dpC8yBexVYNKRRp1MS5xqzN
- p9KPoJoAR/nKvLc0G8y4ihlVVb2H5YA5NZ4UQ2XgnNp4AMVj0MLj6pnIZOr276SGef8Y
- gpKKqNJtKKdtUJ2lKPXR8Va48RqcDkj/HMvh6A/jqQldeqt2cuJVlxzoYgvCHhYDvhfm
- 3anA==
-X-Forwarded-Encrypted: i=1;
- AHgh+Royvet0YYpEktVje/PRc/CA3vvRq4aycd2OOOfIjB67f+IIhKFPBQVd9zzOGltfAalyA1PBFBM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy40cr/8B3PklGGqrjBfQqboSY0DGQNBzieca2L7N3GsVUoHz5W
- VLflwNKW7cBW0G41a1xUDzQNralgDGg4VxH5zHgEC/lbZieiyt+3124WTg226qUWyiBBoV2Wumf
- XOcSN3DHcXvUQL0VGCrAQozLya+3tqUDF0BpP63Bv
-X-Gm-Gg: AfdE7ckwHlSCcHMHaaCSuybdp6gHrsNAV4pWu/hFfcV8t7FuzBNriZj7tkrHQIxPReO
- dlhbVzqPwhRjUw2Vi484EEeT0Gh9QeJOGEeAJR6tXIYS56LsHtmGCEPOANyxOnw7FOxCDrginMX
- nM97wNB5c6T9ripxr5vEqXUa1GQ4ydmsak8OjuzSWELviS3/Plsr0KFnSqgVcC/AjLTucPfsdDe
- 1HeGFk7om9s/Zb7Ns03bwh4jFFf1j7Hb+osX5ZjEYzU6mFwI65U7J9EsGDuhFOAc8XrT3sKh8KY
- WA4z1IVa
-X-Received: by 2002:a17:907:c30e:b0:c12:3bce:c3c4 with SMTP id
- a640c23a62f3a-c12903b38e5mr453002466b.3.1782980976292; Thu, 02 Jul 2026
- 01:29:36 -0700 (PDT)
+ bh=aN160ae7WBQ1Ni44gd/zQw1tvqqi8a34/XUta7WCANU=;
+ b=l1c80lK1cLzurD/hRf9bAyrxXZ2Zkq3p4Tyq23kaFG0O7fznFMlS5g4WofbP10vREc
+ 9JSH1ejidAum3Jai4sxQoGg9gEf20sPWnDjjsdYs3qszqGE36XhMCjjx+/cp0nmpPXe8
+ Tvvv/l3IblYWq2v+z51i48mCYNLRJKPhFHoMVFjmHZ909Gym2/59aCQSuAw80rBXVT1I
+ erLBuAELG6uN+ZIwUr4Ohf5i4PgCLMep3SKwvyK+rYxJcoBw9d4HJTBriYqJmPx/LWrp
+ mvpBvMEHZZtAm5VcqNXeToMo5exOtYo8NMw+c+bL/c9qTt2/PMJpNAt01FqwunSJlbNs
+ Magw==
+X-Gm-Message-State: AOJu0YzNMX2UwIQZ+7GFOZUVY0+UTwrFcLmGiO0d0GUqDWnWn/0JhPmG
+ 6kbAF9+2bsk+qpIvB72NZ6Z6s2B3yXwkEaewNvZJbAmDB97/nAj6GE8h/SLGlmBpU3LepCWrdNR
+ anpsbgMMOR0yZLw/rMapM6AOg4Re9MXl0fBen8AtN
+X-Gm-Gg: AfdE7cmHgzSGDVbQTREpdFqbx8odgpAQ/BuoU1tF/UGOi1fun5lVklz4ZduVQUL4EUo
+ 1KziTG1XAq/QHfSqOTPddOs7X/RpDemOF1Ou41BlJ4ILA0UWemXOSafeZkXdVRtrJ8BH6YujPGL
+ sdKtDzaPmAvPNRJEm5imv74z2IV/Lf/8zgqQUl/cEG57yf1FZWg9lw5yEST6ynzTyvCol+gWQ6x
+ my6pGWj2RSpjgkSQ7dYV2R8XYIjXnn4xuChZwhHbjpBKXtBjaE+bDzRm2LgaBFQSzq7pUg+dw==
+X-Received: by 2002:a05:6402:5484:b0:698:52b4:c2c9 with SMTP id
+ 4fb4d7f45d1cf-6989f35a418mr2298550a12.31.1782981016562; Thu, 02 Jul 2026
+ 01:30:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260628082810.175862-1-heinrich.schuchardt@canonical.com>
- <20260628082810.175862-2-heinrich.schuchardt@canonical.com>
- <CAFLszTg0C6cQDVWYbSPRJxjCwFhH3oa4yCPb8tJa4h7Akd=aXA@mail.gmail.com>
- <837c7f40-fa2e-4fd5-a889-4c07b6b779d7@canonical.com>
-In-Reply-To: <837c7f40-fa2e-4fd5-a889-4c07b6b779d7@canonical.com>
+References: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
+ <20260701171535.906272-2-rv@rasmusvillemoes.dk>
+In-Reply-To: <20260701171535.906272-2-rv@rasmusvillemoes.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 09:29:22 +0100
-X-Gm-Features: AVVi8Cch7IvV8KPJNp6VE5jvT89tp3YRIRWVFJgp3rSQajIuipFRUfOTRxP8oPo
-Message-ID: <CAFLszTgK6RTUqpjoFNT9jVVCR-YHLwF+4QmuRS4vJ74mGBwSjA@mail.gmail.com>
-Subject: Re: [PATCH v3 01/11] efi_loader: use pointers in efi_acpi_register()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- u-boot@lists.denx.de
+Date: Thu, 2 Jul 2026 09:29:58 +0100
+X-Gm-Features: AVVi8CcUrj9pmhlFYAHMiNXZZZvOLgBT92JfE8QI7hwmHeglCHf3KnFuNII7nUg
+Message-ID: <CAFLszTh6N34zAf8_UvnJz47L6cugQcb9bdvUj6P+1NtMVHtdWw@mail.gmail.com>
+Subject: Re: [PATCH 1/8] sh: clean up asm/string.h
+To: rv@rasmusvillemoes.dk
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,41 +108,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Wed, 1 Jul 2026 at 14:29, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On 2026-07-01T17:15:27, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
+> sh: clean up asm/string.h
 >
-> On 7/1/26 13:59, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On 2026-06-28T08:27:58, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >> efi_loader: use pointers in efi_acpi_register()
-> >>
-> >> Both efi_add_memory_map() and efi_install_configuration_table() expect
-> >> pointers and not virtual sandbox addresses.
-> >>
-> >> We need to convert the virtual sandbox addresses in efi_acpi_register() to
-> >> pointers in memory before using them.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>
-> >> lib/efi_loader/efi_acpi.c | 35 +++++++++++++++++++++--------------
-> >>   1 file changed, 21 insertions(+), 14 deletions(-)
-> >
-> > I think you missed a few things from the v2 review.
-> >
-> > Regards,
-> > Simon
+> First, remove the !__KERNEL__ block, since U-Boot is always compiled
+> with -D__KERNEL__.
 >
-> Which ones?
+> Second, remove the mention of the non-existing file
+> arch/sh/lib/strcasecmp.c and the redundant declaration of strcasecmp()
+> If sh did have a strcasecmp.c file, presumably the header would have
+> had to #define __HAVE_ARCH_STRCASECMP.
+>
+> Third, remove the explicit #undefs of various __HAVE_ARCH_* and
+> redundant declarations of standard functions, which are anyway
+> declared in linux/string.h. In the linux source tree, those are all
+> #defines, and indeed linux does have asm implementations of those functions.
+>
+> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+>
+> arch/sh/include/asm/string.h | 51 --------------------------------------------
+>  1 file changed, 51 deletions(-)
 
-The EFI_PAGE_MASK -> EFI_PAGE_SIZE change should really have a mention
-in the commit message, if it isn't its own patch.
-
-The main one was my comment about the confusing pointer code - see my
-suggestion for how to avoid casts, etc.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
