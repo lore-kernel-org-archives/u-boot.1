@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322BFC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 18:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3F3C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 18:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 740DC84A4B;
+	by phobos.denx.de (Postfix) with ESMTP id B1A6784A5B;
 	Thu,  2 Jul 2026 20:27:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="H7Ll5wh0";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="FYrtZ9Ap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8700849F3; Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [185.125.25.12])
+ id C1F8B849C5; Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
+Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
+ [185.125.25.14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AE46849C5
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 20:27:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C935884119
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 20:27:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:7:10::a6c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4grljp66sRzLFn;
- Thu,  2 Jul 2026 20:27:42 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4grljr2F0XzKDL;
+ Thu,  2 Jul 2026 20:27:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783016862;
- bh=T8YU8+bRoqFvTOqS3Z1MklzMCidm5KFZPuQJ2jlz1lA=;
+ s=20231125; t=1783016864;
+ bh=N9WT+xV5Qz4rZBMxqLl/mtnuIF6otxiAVSHC1rRHkDk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=H7Ll5wh0Ml9m/ulhpw8nBOemDDV5sGHT6WHfGPA0X2BDcZNMInXDAnvZ475M7HHCE
- OdEmv8fOGS+ICXvYOAoG2B+5HX1AwaGoCyFHnPuJzQ3CKt0KLZDDBqcpJnUb75Aepo
- 19ynEW4O85RzrJhDkZfEV3eEuzxktASOhKzrVG3FVB9P5ten/XkRHV6OgZHq6cDptw
- 2/Juwwfz8A3HqZ0W6hZU3C5419BLnznOOYwkEAop6JhvomBHBX0JGikN4KWEo3qfsL
- yKVPP6kVOyMPlUS5PRf8JKe2BKd2OvpewZ+TsLJTX6RyPh6lam/2Q9bYD/f/r+Kc3I
- CfyftQ6h/f7yQ==
+ b=FYrtZ9ApIYd632TteB/DmXsvHybJBJvy3ZmSh4DtwnYsCGR6w+QVkAR3zAcbPXhjn
+ 7sjrOco41sEc+c2c5LmJVZbQg30uWv9QszoSa/xeJpNgNpGLP/rtz82rY4MJ0D9e5o
+ Dx/kfQJQ1sOr7/w/gIDLkd//X9GPEITqfpcZWJg5iW8plPEThtphtJ5IcaT3PFiQou
+ zqojNjA4VoXhf8Drd3yzIJGBK/xefoOBRVrMyGmK19jvyoWtaJ6GmUjQbA3UUHDzVi
+ /4bCDDbPdE88QVlPs46FzwNA42R6KFLpbDsCi2GwesxcZljbGs/swNX2cK+ODlYnnQ
+ s1NknuWmpAy/Q==
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4grljn5swJztZT; Thu,  2 Jul 2026 20:27:41 +0200 (CEST)
+ id 4grljq2cPjzxnC; Thu,  2 Jul 2026 20:27:43 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 02 Jul 2026 20:27:31 +0200
-Subject: [PATCH 1/6] Revert "qcom_defconfig: enable psci based sysreset"
+Date: Thu, 02 Jul 2026 20:27:33 +0200
+Subject: [PATCH 3/6] Revert "doc: usage: cmd: reset: specify when the -edl
+ option is available"
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-revert-sysreset-v1-1-7920c16a1f3a@cherry.de>
+Message-Id: <20260702-revert-sysreset-v1-3-7920c16a1f3a@cherry.de>
 References: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
 In-Reply-To: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -82,7 +83,7 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This reverts commit 63c806ba0e1236fea500f5d8b5486196d7c20806.
+This reverts commit e49c84f7bb7b69a9736e8243665b30b46075ab55.
 
 The args support for the sysreset uclass contains a logic bug. The first
 sysreset device implementing the request_arg callback will consume the
@@ -100,22 +101,38 @@ reset which is very likely not what's expected.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/qcom_defconfig | 2 --
- 1 file changed, 2 deletions(-)
+ doc/usage/cmd/reset.rst | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index d0d54ec5a70b..b0d0f51b1c02 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -133,8 +133,6 @@ CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
- CONFIG_SYSINFO_SMBIOS=y
--CONFIG_SYSRESET_CMD_RESET_ARGS=y
--CONFIG_SYSRESET_QCOM_PSCI=y
- CONFIG_SYSRESET_QCOM_PSHOLD=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
+diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
+index 79bc8b9deca5..88261293924f 100644
+--- a/doc/usage/cmd/reset.rst
++++ b/doc/usage/cmd/reset.rst
+@@ -11,9 +11,7 @@ Synopsis
+ 
+ ::
+ 
+-    reset
+-    reset -w
+-    reset -edl
++    reset [-w]
+ 
+ Description
+ -----------
+@@ -24,12 +22,8 @@ DDR and peripherals, on some boards also resets external PMIC.
+ -w
+     Do WARM reset: reset CPU but keep peripheral/DDR/PMIC active.
+ 
+-All other options require CONFIG_SYSRESET_CMD_RESET_ARGS=y.
+-
+ -edl
+-    Boot to Emergency DownLoad mode on supported Qualcomm platforms. Unsupported
+-    platforms will print an error message but the command will successfully
+-    return (having done nothing). Requires CONFIG_SYSRESET_QCOM_PSCI=y.
++    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
+ 
+ Return value
+ ------------
 
 -- 
 2.55.0
