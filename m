@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F25C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2687C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1ED8849AC;
-	Thu,  2 Jul 2026 12:25:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 34158849E5;
+	Thu,  2 Jul 2026 12:26:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UKcHkmSh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZsFU0P2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9600A849B1; Thu,  2 Jul 2026 12:25:54 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id A24BC84A0A; Thu,  2 Jul 2026 12:26:06 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933CB84987
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:25:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B373684987
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-698ab9aae16so1306561a12.3
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:25:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782987952; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-697edb1bf6eso2386071a12.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:26:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782987964; cv=none;
  d=google.com; s=arc-20260327;
- b=K/FMER4G01IBcdjinBBfpHeu1v/8VS6qrPg2YFBRmNgHLct+1bURppjlwPqFzU5k3p
- vW3ZkbS7Nm8OUCHYGs79zWfIUw1XCZQzNw3nrb7w3RV7Lj3k+0+kVPOV6JuNUatEfZqo
- GoC6UjYs479UkGYU8AZ4SvqmF8Fr/wKhJ8kjeQxy0B8omZmL4SJEa0e/0NtLoIPijtXY
- RawvFguFXgm2LZuEODRaSIS2/96DImcM5/JuZEEPUC2XbcrPIAQGViZfteBdPDY+hUam
- rkDdXa+VxEAQx/pzSxUr9wayuuRgrn4XzEwsKBBlTzLQO4Qy6GiWA3JSqAGJvPZpbYqE
- VJPg==
+ b=CSBe1+YW27OTCfI8BiZafCYF1kL+0Cw9GX3zI81Bxx3rM6MAXNx/b3F9dQgr47j/b/
+ 3xF1Fex6p6FEcigCugfr7TDW2w7GwUF2RF7c2LO4uNVK7CD4SuzNT5Jtpi+8t+9qdd8u
+ VUllWFMbKXFBGLjHFBS36NGef5RAoLbxyQH4jNzl3woZUGjZyHSVzSRGphnH2AhOpsM8
+ 9q2Q/tKvozfdROj8H1aFtnLBgb5d1SKCRFWaaaTDwKdmj+N2V4kNNU09/Q1xoX7MrB12
+ aSsYCFXDyM8BszMMGDxKUftShW1HWkkRP7DoKsTEjV6EDTz3vmqIQADPnGOjYKBprhhP
+ uVLQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
- fh=0QEfosCPx3otTY3mplChiH+h0mnPXmsrtfAPHD8uy/M=;
- b=sRTLjJJMB0Y2TqHRSOw0ZByoKYEaGss3shM7pa9ADlS8j6nkQayXdIHi6bUbl/rlzk
- vYHN5WJZDITRMyWCZUk/YPBtkQDS4dqnc2sThfCf2g2LAAggtr1zT7CSL3o4Xz+T0dzD
- J5RVUbR/ecUNv8N8IN5/y4oNt6ZDCCJf+m3NdP8iqGy2yAZYgMthIsmpU1nDisuKZiVb
- byZMYMyIO5H+0ne2YHmgkBCPP+qP6Z33dY3dFy+Vwe4hhozxcIVO45Dm+z5BqugXTT+X
- Z2yu7SaJDmvcKnkxobcFqbdU347eACQ6Qvm8GuRlUURSQgnlOjlcxbawTNMFmWusGRh7
- pP7w==; darn=lists.denx.de
+ bh=7aMvO5Svxa+YUrwzw/TvgLbam8QxoUX7DqsusiBlXsg=;
+ fh=Fs/yyZYTc5Q14i8w3xRC+KkXRdN8vLyIaSM/gOobswo=;
+ b=pIFRoeWFYkExYYinuvlYkBronDm6a9dYTr+qEuX9GChYOx31PC60FSD/7jUkpGHwaS
+ hPwo8IMJLcjymBxeXQm3CgqBrLOSMu8iWX/cgjFyOYCv+mpRxquFBVyldJtkG3e19NtB
+ qG9pavWzikkFoCsfMu388iGLwS5BntX9XnqAsFGgT4HCTuos/M4ztcovJWyMaPsIhZei
+ V8mfHRoRzoz61dVU7J9j14HzxKPI46Ec10363Bt0nvE8dDLA0oSKNARHYHvyI1eAwQh4
+ ZDexO8teSsmrRTaicztxXPsQlOcWT7GU1hKpm+l5ofa+SDtkFKsqNbLBvbFX7b/FhsfZ
+ CDFw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782987952; x=1783592752; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782987964; x=1783592764; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
- b=UKcHkmShlX5AETCFrjyzS2R7m98iHw/n1Bmtfj+zCmBSv5hlT3ZiguZ1sbz1x5YiJP
- Y5pK90Jydd7IH8DmixVlimyZO5oBKMPcOufdP+nPZGMqjyGTDRR6zDjMLqtZmYTlDvoX
- zL/ntjpAENcqvzY58Sjglm20gQyPXNMUfoWAg=
+ bh=7aMvO5Svxa+YUrwzw/TvgLbam8QxoUX7DqsusiBlXsg=;
+ b=ZsFU0P2XikPAT06tEKWO3DiNRxQIuHepjvL+HJV1quL9PfKTQw52iMI93sm5RTldKo
+ 4TYu6iMQbKJQVt3x2COriwM6m7b02HENVuLnFfH6CvHuteMXYRasOEvFqdVd3ni9C3yL
+ 18au1tC65WUBPw/NgipDL87SkXyLTR1u1gR4w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782987952; x=1783592752;
+ d=1e100.net; s=20251104; t=1782987964; x=1783592764;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P6NmeaqQC7GcpyQrhGDPBwvgdqHryPw7YXG74uotkhY=;
- b=SDlYZmIQYPt8Dr8n3oQgf8/cfzDFv72gwF8TMIKEJOTirRBqhNmeyfxDRUCN6zMBT7
- u9gNaCwlc6bgXuW3zBpoZwMm2nSc/Knj7WdD0PrOmdr531UclETf9iMYkVGUXUNslqZL
- UgaYUiksYrL/yC6kpBFEVvsoGQvFmfs0J1aQQdG7GgfWh0lrJSWiHxzfvwTUmkF9CWkG
- E8lVd1yLXgbSomdnOR7qjm5/csgy0Fqp26ZHkVfjBFHTW4XFC59Sh7u1HQA2wEcbmdWc
- DNH6P8W/e/9+LOGZe8rOFb9QX3WoHT8bRbQWhkfRAHQBpsIU6eOy9E1Z5v3ATIlMkVgc
- zYFA==
+ bh=7aMvO5Svxa+YUrwzw/TvgLbam8QxoUX7DqsusiBlXsg=;
+ b=XSlO7JoXGEhI4h58zgeYMIKCoF4LsEyAep1XEosBr8vHU7KemQZDRIEaB9hdhLuYW0
+ fylw4NWktE37ltVO9sWIKmovmc6Alf2tkZ+tr89fj5lBxfHNPd5s/XD6BFcfzTGpaq9/
+ s6Nlt0WMoIff4X6fisIMbm2tiXXyWBdhLukr9H9lYfIinu2PcAR1GONhccpLOYhoRkN+
+ pdIWGOVwGyFezo481JMwJdrWQpaRq0pmsA88gw0frn+ZTfpLOr8eDWR9Sj3H6U0f1Uq6
+ kMVv1CDdwXbTgHCMdQzetPoUpo/DU7lIGu6eTi2Qs/gzm5P0KingpVKFk1wiCW+DyNAd
+ U+fQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq5/3uwy4vJh52xVs7TJZOcok50UVX5vD3NdYewiARBI7qLbczfGI5N0aPg+u6YzNOqliqBaao=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwjOyZQrpUJem9j6jVCVlUDktrS3nDdD/0ipqqpfrk+yzfhrS4
- FpQweAF74vF+wHnMHQo7xPnjhLD7FBfDFzDnYobSIDDCrOaYp2Fjo8wgpKwJ7xqrcOK5tRypQGo
- zYmmdra5NRYO+8rauBkoFKbu+ttEWRObCRA7I/MMn
-X-Gm-Gg: AfdE7cnF7sZPuIdUCHaCDRsmCPeBxqVxCsLYa2tkDWM+kG6IYtUZJWxBxvcf0bTOL8e
- qZmg8e/R8TRF28Fh3KGZf7mmT5g0KOUB6c409gq7/ozC2WS3v78oZK2eB2OeJlMl3XMsQ8iMyxE
- INRyb8E8rlwFOGQ71V94xfL4WCd7eF4UZuV9Hp75LHm35VT3W9hxGK9SL3p6O9FIOgzFFbcwdJN
- Ux324U0+vJVd1NWZ/K1QetUcYNc2VUEjz8rwyrAZH1tC8ujIJtWT77bTyQI0cPSN9oZ95vLxg==
-X-Received: by 2002:a05:6402:a292:10b0:698:99bd:8b1 with SMTP id
- 4fb4d7f45d1cf-698a2c6d606mr1419292a12.10.1782987951976; Thu, 02 Jul 2026
- 03:25:51 -0700 (PDT)
+ AHgh+Rojw9UxVgk2EWGzCi/ptStktYYwAInlIPhk85Bw08NlfAXwWsk3VGAd+8xbaiAwrod4WUJrnZg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPXoSfPbUXA4oN/RFZYFoTt86geW86V0b4Sgkbrwvtrx/ZjkTA
+ zwcWQMaRrIsRgF/+IU4asfJlPKrY7xCdn8U0umIyKe5/Rv1eWRkT+NSX33WBinbBbWU6z7HNn5O
+ +kuG+rcmsYtY4qIVLfJzdSYSKTkD9LVuq1McHAiqJ
+X-Gm-Gg: AfdE7cncJSRmbKybyfPS5VL0OssLzxd4V7x+NDh5M2OmxzXD4bsd3760C82oMBUGo7P
+ TVo7AFRBZiytbAyccFgQwaqvHhemqhFB0lb8JewUOxit1V43WXnPyBWlXyAzVCvBUn8Pm1KvrlE
+ KYRuWoT9cu9K9xoQgsVOHDafP22N9yDjoUq16MHnnWbCvYluX/YNTm7MRm0AEu1onN66UBbfEfv
+ UgUZqImYhdljXi32xjhl8oSwKxvqIFVbR+Qy7UR//Xq2CHJA7hhUlAaF4yjfgZwtb5xRG4EIA==
+X-Received: by 2002:a05:6402:530c:b0:697:f686:80c7 with SMTP id
+ 4fb4d7f45d1cf-6989f3664e9mr2147117a12.26.1782987964198; Thu, 02 Jul 2026
+ 03:26:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-9-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-9-me@ziyao.cc>
+ <20260701111808.870705-10-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-10-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:25:39 +0100
-X-Gm-Features: AVVi8CdIwm48_8LdUUDaicDhjCocYnsh4flJrGpG-Ro3MM9D1J3aEERUnW26b7U
-Message-ID: <CAFLszTh8G5hxAOUocaaXffKA=7PM5sp90M3+JBsieG908nFBBw@mail.gmail.com>
-Subject: Re: [PATCH v2 08/16] LoongArch: CPU assembly routines
+Date: Thu, 2 Jul 2026 11:25:51 +0100
+X-Gm-Features: AVVi8CdYt69yVt5VWJrJvcwqHPfjqEWjPuZDVwYBAr_pgm1mjYnBpsSocgCMBBY
+Message-ID: <CAFLszTjqWtXVTixyX6hqrzsyqy6A0VzDH6fGCKB_APQ0ODoRqQ@mail.gmail.com>
+Subject: Re: [PATCH v2 09/16] LoongArch: Exception handling
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -111,114 +111,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao,
+Hi Jiaxun,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> LoongArch: CPU assembly routines
+> LoongArch: Exception handling
 >
-> start.S for initialisation, smp_secondary routine for
-> a spin-table like interface for secondary cpus.
+> Add exception entry assembly code, import stackframe.h
+> from Linux, provide debug prints when exception happens.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> arch/loongarch/cpu/Makefile        |   4 +
->  arch/loongarch/cpu/cpu.c           |  27 ++++++
->  arch/loongarch/cpu/smp_secondary.S |  55 ++++++++++++
->  arch/loongarch/cpu/start.S         | 170 +++++++++++++++++++++++++++++++++++++
->  4 files changed, 256 insertions(+)
+> arch/loongarch/Kconfig                  |   3 +
+>  arch/loongarch/cpu/Makefile             |   2 +-
+>  arch/loongarch/cpu/genex.S              |  21 ++++
+>  arch/loongarch/include/asm/stackframe.h | 175 +++++++++++++++++++++++++++++
+>  arch/loongarch/lib/interrupts.c         | 189 ++++++++++++++++++++++++++++++++
+>  5 files changed, 389 insertions(+), 1 deletion(-)
 
-> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
-> @@ -0,0 +1,27 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-> + */
-
-Good to keep that copyright (if that is where the code was derived)
-but you could add your own too.
-
-> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
-> @@ -0,0 +1,27 @@
-> +#include <command.h>
-> +#include <cpu.h>
-> +#include <cpu_func.h>
-> +#include <dm.h>
-> +#include <dm/lists.h>
-> +#include <event.h>
-> +#include <hang.h>
-> +#include <init.h>
-> +#include <log.h>
-> +#include <asm/system.h>
-> +#include <dm/uclass-internal.h>
-> +#include <linux/bitops.h>
-
-Most of these are unused - only printf() and hang() are referenced.
-Please prune to the minimum required.
-
-> diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
-> @@ -0,0 +1,27 @@
-> +#if !CONFIG_IS_ENABLED(SYSRESET)
-> +void reset_cpu(void)
+> diff --git a/arch/loongarch/lib/interrupts.c b/arch/loongarch/lib/interrupts.c
+> @@ -0,0 +1,189 @@
+> +static void show_regs(struct pt_regs *regs)
 > +{
-> +     printf("resetting ...\n");
-> +
-> +     printf("reset not supported yet\n");
-> +     hang();
-> +}
-> +#endif
+> +#if IS_ENABLED(CONFIG_SHOW_REGS)
+> +     const int field = 2 * sizeof(unsigned long);
 
-Printing 'resetting ...' immediately followed by 'reset not supported
-yet' is confusing. Please drop the first message.
+Please use 'if (CONFIG_IS_ENABLED(SHOW_REGS))' at the call site (as
+you do for FRAMEPOINTER below) rather than wrapping the function
+body in #if - that also lets you honour SPL_SHOW_REGS.
 
-> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
-> @@ -0,0 +1,170 @@
-> +call_board_init_f_0:
-> +     /* find top of reserve space */
-> +     PTR_LI          t1, 1
-> +     PTR_SLL         t1, t1, CONFIG_STACK_SIZE_SHIFT
-> +     PTR_SUB         a0, t0, t1              /* t1 -> size of all CPU stacks */
+> diff --git a/arch/loongarch/lib/interrupts.c b/arch/loongarch/lib/interrupts.c
+> @@ -0,0 +1,189 @@
+> +static void __maybe_unused show_backtrace(struct pt_regs *regs)
+> +{
+> +     uintptr_t *fp = (uintptr_t *)regs->regs[0x16];
 
-The comment is misleading - t1 holds a single stack's size, not the
-combined size of all CPU stacks. Please match arch/riscv/cpu/start.S
-('top of stack of first CPU').
+Magic 0x16 (= 22 = fp) is hard to read. Please use a named constant,
+or add an fp accessor / use the regdef indices.
 
-> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
-> @@ -0,0 +1,170 @@
-> +     move            a0, zero                /* a0 <-- boot_flags = 0 */
-> +     la.pcrel        t5, board_init_f
-> +     jirl            ra, t5, 0               /* jump to board_init_f() */
-> +
-> +     move            sp, s0
+> diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+> @@ -30,6 +30,9 @@ config DMA_ADDR_T_64BIT
+> +config SHOW_REGS
+> +     bool "Show registers on unhandled exception"
 
-s0 is never assigned before this point, so if board_init_f() ever
-returned here sp would be zero. Today this is dead code because
-jump_to_copy() reaches relocate_code() via a normal C call, but the
-instruction is misleading. Please remove it, or if you intend to
-mirror the RISC-V flow, add the missing 'move s0, a0' after
-board_init_f_alloc_reserve() and a comment explaining what s0 holds.
-
-> diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
-> @@ -0,0 +1,170 @@
-> +     csrrd           t0, LOONGARCH_CSR_CPUID
-> +     andi            t0, t0, CSR_CPUID_COREID
-> +     LONG_LI         t1, BOOTCORE_ID
-> +     bne                     t1, t0, secondary_core_loop
-
-Stray extra tab after bne
-
-> diff --git a/arch/loongarch/cpu/smp_secondary.S b/arch/loongarch/cpu/smp_secondary.S
-> @@ -0,0 +1,55 @@
-> +1:
-> +     /* Query spin table */
-> +     idle 0
-> +     nop
-> +     iocsrrd.w       t0, t1
-> +     beqz            t0, 1b
-
-Is the nop after idle 0 required by the ISA (to guarantee the
-wake-up completes before the load) or just padding? A
-one-line comment would help.
+Missing help text, and please follow the RISC-V pattern: default y
+plus a matching SPL_SHOW_REGS entry. Otherwise the default on
+LoongArch is to hide all GPRs on a crash, making triage harder.
 
 Regards,
 Simon
