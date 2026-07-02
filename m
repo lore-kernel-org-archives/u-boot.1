@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 513B2C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C86C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C40CD84A26;
-	Thu,  2 Jul 2026 12:26:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12B8A84A35;
+	Thu,  2 Jul 2026 12:27:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bpQ14CXf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NKLQqW6j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5511684A26; Thu,  2 Jul 2026 12:26:53 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 4D43C84A38; Thu,  2 Jul 2026 12:27:04 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6270D84987
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:26:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6144784987
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:27:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-697564cb69eso3515442a12.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:26:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988011; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-698acd36d67so1085761a12.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:27:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782988022; cv=none;
  d=google.com; s=arc-20260327;
- b=KdS+XWAFop814RiStUZrdjmq2WQcoyDx7VUAvpL0lr92EzEsu3iBawTdBVZ1T9OUqZ
- kzdcvetx3cmicZ0SZZTRYWj5oOTCp0U1XQydAlw7jYmJj8eQ+UdRiJJkBZ5UPyEd0u9b
- P0IRsjSf+nx4nEzhlbhIyzu9kCqUI8NNhnFfy6ccffULrLfeP33qSH8PoXkdkNikpyWT
- rI/nky14lbI9PcT0ulMgBFbH3g5xgzCVG2R4DKyd1NVlNXB4zF0UTgb4Blx2VS4K8EuY
- h/ghaDgTUbzqaSOH/JJecG29ZPR6On90rCeOzq24NBxuinbsVUC4rh6GtZeh0Zi0+Xtu
- zsUg==
+ b=C5For1ieMq/kK34HE/CdW8+HXzN8BV3HNinxfVkokZuVpnysUxb2C5/XB5V+q+yDp3
+ N63s/5gp3BmdlHAuS6GZ7MtOeP3TtuPhYRLyC59Mo/teHBJEfnXPL0vTpPdHndN58pmD
+ ICT6MOrXHxXmQ42inFqpAywGBoOfk6Lp1UPvjhsAakyueumVOqfCXQ9OpSc+YQ+i7pU7
+ bBj6mOptZLkm/I9ScfOyOzviL/4Ccg2hDqIJ7bB9bBN2K+5U4vqabgfQXWnOh4oOAeMb
+ gbA8dHZp9L0WFkSDPEijcKBFpn/NXtroQs/JENB7eAeYNEC5j1Ys3KB77lEXZTXgVLzT
+ d6Pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=QndjOw7xc/dgwV7e4kEqXp8WssUhv38I5+RfTqQuCTo=;
- fh=9NfA68LAqcpGcYrROkz0wENxuTnZESnd9c79gwXm0do=;
- b=FrcaU1KwQR7bTuV/W6k03l/h9rmwe1KQuu7AD/lZwjqm3u5mgcGe5goCIEw7QZ8/nH
- ekjSHarwyMluSlemcwSwdmD1n3Fl2Q/de3PhZ4Jo6grzHdMWjArKC+TXhekWJN0lid9D
- ZQ5teSv8TNM1dTvXyucqS0W5BEBuBG/KVPO9YIu0XYR8IQWRKEMYegMoMOAEtZSHR9os
- XMI5Yp0q8q0DPv1OtjBO5CGsoOktEbvoKgFkgWMqj5FYF4N8Ig7ITkcshZIiotAQFbq9
- olMAuJQxMCl3xLhxjfEG0jN/wgnW/B/6eZpTfy1W8fTf6IGTkrMl+MQcsUiYkBqwhv91
- zqgA==; darn=lists.denx.de
+ bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
+ fh=OqCZD9h/X9iz1FEoGOApxQwRgv4sUc4gLfnTdEpK8FQ=;
+ b=hinjpo9iadSMeY7dcTw638p7/Gq5H7qaEWnwYIK6zxK4bkwCJTb9tZVeDmWJ9ZeW8b
+ ulIgBXSEZfCGp8QYzgFWRvCrlzfaV8BQqUnSX69uzGjuxzjqPMNaOW4L/6g6mVE1raIF
+ NHer2qHqUbYQWBupQSI9JpNvG+Q9kE/beJXlfZ3+t6ye4KJM4gKszIrc2BJjRnFwJExX
+ ewOak+FQkR8Nm4goET4ZduL54il0dH/7tyGcJFUmdXe++4PIU7j3AZIRpvuDeCD+2qXd
+ h/K/6Vw2dnuMlOSKridQ4ua208RfLwGtunmU1FuXhEOOpSGeGpblgs0eznkokEjX6XcI
+ v/WA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988011; x=1783592811; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782988022; x=1783592822; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QndjOw7xc/dgwV7e4kEqXp8WssUhv38I5+RfTqQuCTo=;
- b=bpQ14CXfq4VuEPNRd8hRIrHvoeAqItTEUpERGFmjuAH0lwCOS2CFOSTHuRMMNq/Ia5
- E/ld9Zrh6n39vJN2QQh6e5XhjbMf5Iy7dn5qXAwdbAANXyszjaXF+CLlahySlFFW+tVy
- TIBkBq57KJofSYk2L+AkYVCA9xNNSRt6qJ0L8=
+ bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
+ b=NKLQqW6js4k2ABk99QE0jeXngLbCKHP/2+5QRZ7f3vq1rJzH4/xkqZS6t476f7JFys
+ lrfLxpzBdFCBAMpaWHv5iJN6BuK9zZZne/tPiBZxMk05RSh8UaDaxM5HrT6MNBzTT/Rf
+ g/O91qQ62KRMR2/ioP7Fip5W8/cNfQ9u+Rm40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988011; x=1783592811;
+ d=1e100.net; s=20251104; t=1782988022; x=1783592822;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QndjOw7xc/dgwV7e4kEqXp8WssUhv38I5+RfTqQuCTo=;
- b=XR1ahU6q7hj94GobM5JCOph0YtZu04BFoJ2c3SBR+TTY4bR/KI8j/CKrxZvpWMfC88
- JYPT8cVsw1UiVP1e2xD9dAcMlqjpQKk6tMmVkNa7r+RMMJ6C6pfYp/Z3imr/J6183lox
- fhbOJ2hH2uapCYApxpCS87vgd6Mf2uannqk7cZYa00ZGuo/5hhMx4OTCHmJ2M/H55lIA
- aHhiYXW1kHdO1hJs1MtLYVwCE+vzui3abRlnohhJGzRcEirmHTtIIWSyfz77czquMjTF
- qKzWCe3uAf6NvwtVimjtAw4w5Ts0iSB6d+/Zn93BQGEPjP/fs/0StJxf4KCf/cfUsoUL
- mjbQ==
+ bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
+ b=gIwGURSC42a3XHrUrfL9Z433flVgXc2IbZ1u98mVW9k7yZN3cebvfzENRXN1SGHGld
+ ioxe9ck4FUkhkNU9gXZE9fPPh/pVV1FeNIgbo1IQN1TqG/0UHuVpzXYmLaD+WxIeTDPa
+ znf9iv1aqSAgF34fQt1EUZzlxtQL+AOXcPppL8dVyPmli9IB+YdNgOMtd42Wiq0Jhiu6
+ VT1RKMYGvvKxkn/UfX7YoK7MO/F60z4rf4K6OONfwSYdirdF/eSpNOuJ6mrFbRc96Hnp
+ K1bBkBEAMIYEe0XAlGCQLi9QunJSo4zubJKsSJxw3S4a7XIxhk4Y4xRm/3AuE/fb5cgr
+ JizQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpKFyS4BPzz5gt13PHhj5RCJjXgLUBzEYsp75wmil79L3eNTxSGe0Uir9rrOecWy4h3KJ8Rl1g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2fkA4b23W2sxzFYEQu4ShL0KjRYn8Ay18MEq2eahd3ADv9O6v
- Tb451ZJ4T36uWW9Xo7qHdKrhSiI/nQZZOnIgz3EM3TcCbqYJlDPJFokHQMVntf5jaPYgAzCf5nY
- 2NHuqKq0kVt/XXIy3tL8hMrNqhI2c+luBheaIa7qN
-X-Gm-Gg: AfdE7ckyXXyihIGr8wa/VDXf8QtAtsYBNIJgiAH7e6AKI/c8mDr8V9SYbCh6VEzDhm9
- oMMYbt12NQFwdlpDxnObkfhZ4Q9qkQLA9rxIDGynVDR71uo3dKAv1e1itzWjNA4gvEvtvLRhIxP
- wFly9vr1SzzGDEBbcOSZg7yDAq1U/QY80HQpOUwsf7WaZP9ylJLfhoHiYHotre0U9ocvp6pXDrC
- b7nRtTpIcmLEIkHGrV72jarrmAdxYguQd7Yt9I0R78grLdoWPeZ5GdPQ2FPdNVIt/RX1UTaWZmp
- Jbl9K42N
-X-Received: by 2002:a05:6402:4316:b0:698:81ab:c936 with SMTP id
- 4fb4d7f45d1cf-698a2cd827bmr2333792a12.23.1782988010232; Thu, 02 Jul 2026
- 03:26:50 -0700 (PDT)
+ AHgh+Rr4C9u8KDEHrt4vNA8pOVz8PXKmh3hA5Y1TcI27lo3rjurptD1srRjyNKey9Z6i5xJra0FgJro=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJ3o3bor0NCpKkIHqeQDP8RDAkP4B8vczjP+K5IHci1930WNc1
+ rkUFlpHUV3K81TsHKi26qPNP1yU8ShBj2IPRB/uwBkNpQncGwmeOP+3q7EaAAgfcQtisv9+LFe+
+ WQMvuer4DpiYoer4cnz9gt8NQ0X/TN2AgfMREz5Ft
+X-Gm-Gg: AfdE7cmC0MFpsvo/e9MtnsbhKQ9SQcxh97/80VujjBKPRQZxI1EPDyXqDdiIvEki3Er
+ hYvBVxz1gIeuLtT3plNqObjx7VkRhbFvb63MJBek/xc7nAGYB6Q2TNZVxPiwHkiSjgFUVscimNU
+ kVDl2oNQQpr3d8ukYcvhSsqlAL93aUSQm06aFXMcGOSYSq9JFdIst/XHpj34mRT2aG2ihqJxDbK
+ R+0Uo4jUEH1rZk+W3nwWJGHTwN1Bs0ckH9wrIuSHYhMgOQXZaYYm1cuOtnK50uPQtQFPHBG1Q==
+X-Received: by 2002:a05:6402:2747:b0:697:cec5:d056 with SMTP id
+ 4fb4d7f45d1cf-6989f25f646mr2260663a12.0.1782988021882; Thu, 02 Jul 2026
+ 03:27:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-12-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-12-me@ziyao.cc>
+ <20260701111808.870705-13-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-13-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:26:35 +0100
-X-Gm-Features: AVVi8CfmWxF3lktSk8P5kYphhwcnjRr1NeTPtf-EwGvEvhMO_O93LxUJpiBQczs
-Message-ID: <CAFLszTibBNFc91tGMv3xQzLTCBOXRxBfA+aLzUuhgPLN6rTb5g@mail.gmail.com>
-Subject: Re: [PATCH v2 11/16] LoongArch: Generic CPU type
+Date: Thu, 2 Jul 2026 11:26:42 +0100
+X-Gm-Features: AVVi8CdL2cKSOiK25WGl01TdAeP2Cj6Uj2pDYkRLPWCq3iSVHB23Ko9hsTD3m8g
+Message-ID: <CAFLszTh5vei426TaqWxa0X6Sh0YhGdtb6sVN-duKAOcg7wib-w@mail.gmail.com>
+Subject: Re: [PATCH v2 12/16] cpu: Add loongarch_cpu driver
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -112,68 +111,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao,
+Hi Jiaxun,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> LoongArch: Generic CPU type
+> cpu: Add loongarch_cpu driver
 >
-> Provide a generic CPU type with some common routines
-> that expected to be implemented at CPU level.
+> Implement a driver for LoongArch CPU solely for gathering
+> some information bits from FDT and CPU level config registers.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> arch/loongarch/Kconfig              |  1 +
->  arch/loongarch/cpu/generic/Kconfig  | 13 +++++++++++++
->  arch/loongarch/cpu/generic/Makefile |  7 +++++++
->  arch/loongarch/cpu/generic/cpu.c    | 22 ++++++++++++++++++++++
->  arch/loongarch/cpu/generic/dram.c   | 21 +++++++++++++++++++++
->  5 files changed, 64 insertions(+)
+> drivers/cpu/Kconfig         |   6 ++
+>  drivers/cpu/Makefile        |   1 +
+>  drivers/cpu/loongarch_cpu.c | 148 ++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 155 insertions(+)
 
-> LoongArch: Generic CPU type
-
-'generic CPU type' isn't quite right - this adds the 'generic'
-platform (common cleanup/DRAM code) rather than a CPU type. Please
-reword and fix the grammar of the second sentence ('some common
-routines that are expected to be implemented at the CPU level'). A
-short note on what falls under this bucket vs. the actual CPU driver
-(patch 12) would help.
-
-> diff --git a/arch/loongarch/cpu/generic/cpu.c b/arch/loongarch/cpu/generic/cpu.c
-> @@ -0,0 +1,22 @@
-> +/*
-> + * cleanup_before_linux() is called just before we call linux
-> + * it prepares the processor for linux
-> + *
-> + * we disable interrupt and caches.
-> + */
-> +int cleanup_before_linux(void)
+> diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
+> @@ -0,0 +1,148 @@
+> +static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
 > +{
-> +     disable_interrupts();
+> +     const char *cpu;
 > +
-> +     cache_flush();
+> +     /* We try to get CPU name from IOCSR first */
+> +     if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
+> +             int i;
+> +             char vendor_buf[9] = { 0 };
+> +             char name_buf[9] = { 0 };
+> +             u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
+> +             u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
 > +
-> +     return 0;
-> +}
-
-The comment says 'we disable interrupt and caches' but the code
-only disables interrupts and flushes the caches. Please fix the
-comment to match (or, if disabling the caches was intended, add
-that). Also, 'Linux' should be capitalised.
-
-> diff --git a/arch/loongarch/cpu/generic/dram.c b/arch/loongarch/cpu/generic/dram.c
-> @@ -0,0 +1,21 @@
-> +#include <fdtdec.h>
-> +#include <init.h>
-> +#include <asm/global_data.h>
-> +#include <linux/sizes.h>
+> +             if (!vendor || !name)
+> +                     goto get_desc_dt;
 > +
-> +DECLARE_GLOBAL_DATA_PTR;
+> +             for (i = 0; i < sizeof(u64); i++) {
+> +                     vendor_buf[i] = vendor & 0xff;
+> +                     name_buf[i] = name & 0xff;
+> +                     vendor >>= 8;
+> +                     name >>= 8;
+> +             }
+> +
+> +             snprintf(buf, size, '%s-%s', vendor_buf, name_buf);
+> +
+> +             return 0;
+> +     }
+> +
+> +get_desc_dt:
+> +     cpu = dev_read_string(dev, 'compatible');
 
-Neither gd nor anything from linux/sizes.h or asm/global_data.h is
-used here. Please drop the unused includes and DECLARE_GLOBAL_DATA_PTR.
-Compare arch/riscv/cpu/generic/dram.c which keeps this to just
-fdtdec.h and init.h.
+Please drop the goto - it jumps out of an if-body to a label at the
+same scope. Close the if-body when the IOCSR read is valid and let
+the DT path fall through.
+
+Also, snprintf() can silently truncate if size is smaller than the
+composed string; please return -ENOSPC in that case, similar to the
+DT branch below.
 
 Regards,
 Simon
