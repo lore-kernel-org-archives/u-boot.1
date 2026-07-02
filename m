@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10CC7C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:22:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E34B3C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C4C848D2;
-	Thu,  2 Jul 2026 12:22:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FCD383FEE;
+	Thu,  2 Jul 2026 12:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TXjtU3h/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZArjS1s+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BDC484942; Thu,  2 Jul 2026 12:22:30 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 92A56847C3; Thu,  2 Jul 2026 12:25:11 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3135383FEE
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:22:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F87A80398
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:25:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-c12c22d0f86so35128266b.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:22:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782987748; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-697763eeafcso2725243a12.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:25:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782987906; cv=none;
  d=google.com; s=arc-20260327;
- b=AFJYnXT+sr2ht5rSo2yVOnd8NtphTnpiry4S45vNfqK/8uBLHzz/BP76rpQtyNiRB9
- IyXCh1PE5qGJ+c5a9nyaRqqPfTTZww1jF14mOZl79eqAjutq1s6Mbi5QMnQK25ozEX/J
- E1L82gkz+06t0l+Cm7DsWVLLRlAUTQPnGqq8uiFhR1D1A3+kLFfudLNftrXJc7bkmOEC
- nAXjiAbiFJBvVgxiwTInvbTG9wlCjEgFI3qh6PKp6KEHEDTewKAeetqgCMa3crOO468T
- EubLA3bNUqAg9MKOcQbZpbehrX700b4MDXvNHZlvrQ/uar/SzYhPZU+FY27fp15utnTy
- xl+A==
+ b=LLYvKvrOSGK7DaGlJi9Fv3ToQJVL2Zfl//8ADvQUgEyDxJBOXAKU4dNrFwPAbvJrg8
+ Hyzxmgstq3+0D5IUCqaVdbR56BHvu6v/ssjIAnAMfe3h88xoESqpemfu8gTQD4pKgIkW
+ N8rWgKn53WITs6h1MrQyICOyCILKUuA6IE4zXgCR4Oxno13TVdeMU4CtERuE+Cxbqbn7
+ yZm7zDIk8IZOCa4rIn0mP52N/s6Roh/ppG0YSWE49UCFu77RxtxKyQMYhVxdaNA5F2RL
+ SkR7RGGwaKyjBEAnqO3gnFcc+pjzirZmcwcTpR7NnzsjIyg1E1p6YVcnk6TRjbKp3roN
+ ZyjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=EuEb0S6ryySn+q5U4TDP7QQKBfZElL621I52H0HyMqE=;
- fh=6NPSEP/ZcVtIT8cNrC+wEkij7IXDFsfkZA+Qdl0X290=;
- b=UQ3fodmGhvpE5fDp9SF7R6/dbqSB5xNIeLGjXbAUyCXvOCA47JJg00wWewADpJvsbe
- vp38xTdzjZNWttzd7QuzK8eItFzTX2JfaKiavehtLFs4W5lMMQY5ArE471geEMT7OuJW
- RKSuo+fZF46lK+q3HKhqX3CMYF3sAiz0La2/yDneQ79dUAvfdA/wUXcPz00sGqxcJhez
- TiQmmMb4n4LCfZ290DSArOhVaYpnqxU2d4BFBPEWEUqIqQWtj3fC14rV8LCwHl7tgGO8
- qHdU8kg1sIq+W4lmOMXaSf7TKuX3WKi1dxO2n5O/2nhwJ79H+61KT9U3fQtGXzWdhTu3
- Mosw==; darn=lists.denx.de
+ bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
+ fh=cN3TE29YQ0/F2+YOokb06UaWuBsAd+9btxPUPe+29Jw=;
+ b=k2IAPTXIYOMcdk+Q3GdMZx5WMi/XNo75JLe+jMMu4+5Wxi+yVsbe3qMt/VSp9DYMFa
+ EW/3d93HMElu2T9fhK+MatWIEMqqxCkyY346OoJWE64WWmptcIXcaGcoe72Qp6/xjsqD
+ DdW1VTLPNjecm8pwbwRbj2C5saYho+tBrVu9/PI1UMdVsFryOGQuqCpXxU+ZC0QzUYbH
+ OEaAvPsyHxxewY9NsLYZLOrhS7ePVc3Syatx6QTUMzbn9L9yXcQkSBBKtVmTbif5qw7k
+ axasbI5RgfJiNyTYe8spLMcHFJfrloq3gyc9K5vhC/ZP1YepoarPsbqOqNY3308WT92I
+ zOGQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782987748; x=1783592548; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782987906; x=1783592706; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EuEb0S6ryySn+q5U4TDP7QQKBfZElL621I52H0HyMqE=;
- b=TXjtU3h/dec8ijj3InRUJipP6tQV/uLlWwCxDu/e45VgTTmhEgH289Q2mOQFPmOh8Y
- qD8U7rBR3GrTzgTYK4lhjKn5c4DdXhZcS9UdWfB9PwlnP56bB+aq2Akg+g3L7FcZS8YN
- p+BDpDdZYTX/3KMfKQnZixPS4uPyYkgyiuSnA=
+ bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
+ b=ZArjS1s+MqMRc4UbwBo3aTvEDCOgYnBOt4nqWsUK4zpdY6DE8slCDGx3Ykx7eqzBSB
+ 9MY62XCILMjIdTjfw+vPl2TaK53x0UeccwxAsBdRCkBnjK/JmEqzdwx/OkBtvyVKr2bW
+ CjzyIVqg/2dZaZDSgm8e1pTBn7cfL5Af6o7z0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782987748; x=1783592548;
+ d=1e100.net; s=20251104; t=1782987906; x=1783592706;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EuEb0S6ryySn+q5U4TDP7QQKBfZElL621I52H0HyMqE=;
- b=EOl5w/+YHwK630EsX7/F+4Tnqx3hmnmhkxyJYHw/qPOxUwhiJqBwjGfb28G7jXwk3z
- Twyy3z0j9WsDsti1T7GVq3NupBbRYB4HRNR2mJRHz8ZAquo63NMEQN4yRvjZobLNGp9+
- z0qC8CY6Bc6EdOcvGpgRNH4EMyUVnSehwThyVOPCwOcm4WW3B+4jEbELv7sLKeUMojro
- 6ERHudTScgLVgJ4fMVf+IUEoI158wUa5/tJPpNgDpFttNEJq6YMavIdWUM2/G574tbPJ
- h5Be/hevgjMCgjo5ryPGKXSljgyI94DQJ6jiR5oseqbGH+m3ePlhsd01ljFhyFW/40ig
- X6tQ==
+ bh=Q/E6KWYj4vRnuQGuP079tGWAATZ16pf6AZwh9r1AdcI=;
+ b=Yi6+mrisppCuFBxN9Zwt7D0baI6Ej2gKcWYzG4MT/s2wBf9pe0bo6tfsI6hhNtp/sk
+ tcbUokM3Ni/i/8E1ADMSXCvBqTUpjDC6Pwshz0T7fQsbvTsodsOK0qRF+SCbgvZmOb3Y
+ 3Sz5fo6eWJAJSIAgJwr8Y13w39iMlhivbqBU/xqxf/RY2p4ja8D4BWP+ncZpA5rEU7OI
+ oRiHQ6B/rUUDDTfvpwiDZCGys/qEUGZn/TtSfcPgo3ELdGPJ6e++ZsQDkLrT21i0tR52
+ YGmHQUYM/eNvlToXi+YENBkGfoPzmYgF+8tOZYztkCh0tW5x5aQ5q+mjoqDTD3L/PJAO
+ 4h8g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rpz+mymn8yq7c9j4XHuvli15U9CgqMXB97OcBGp4TxSrOCmLaS04v+o6eLoCfgt0zc8Kzmc85M=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywej1KvYHEJfsB3DmKvYGWoM/51NAbZ+/4NV5DYjBTCql6EGHld
- zYLMqM7V+4uxv4BDV0/zpkOGWY0XElMPhmK+BFb+ZNdSSMqT0KoYScATCA0FzAra6IpJisbX5OP
- +pp6YDOFAbe5/pi3tmE5pgI4/9wKEAdq6AIV6x5h5
-X-Gm-Gg: AfdE7clp0pzlj+IHOwV/1p91aQ64fRhvi1If/H513l25B2v9Cs2C56cp+SPqVKBTndF
- SoFSTrz2EZrOFe2m5lfO55oWOhZepJ6aezuS0mAcY9vrd3NzA7bTHl7awXLB9lxV687y7zDWgdM
- uXUcRwTaZOLUcvIMdiBxZuc78M1mitgOqUKR2f4qdVs5YgMK29M5gk8blrLZFWZJK8NQqZ+umlJ
- EcpqWD/wheezkhnpoPevpQo1i6zAyUQwia6AIhbLT6sSkyCeQiFCKaNXAVm26iWV0Otdj/96Q==
-X-Received: by 2002:a17:907:a807:b0:c12:5f4e:4b17 with SMTP id
- a640c23a62f3a-c12904182cdmr488388866b.11.1782987747598; Thu, 02 Jul 2026
- 03:22:27 -0700 (PDT)
+ AHgh+Ro/NXtFVvpXNcjzdCu998WPB8OWMrHN+B3pPfWJsxP+VvzmuPU8ku4lDK4dKo1MvoptHPfZI/8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz34+qlZjgFIq4/0mZUhIad7WzUkqCzL191wzIC/dCZsgFcd2MB
+ qIX3TEUUOwyhRghguss3AV2Hz7tgKnE7i2n1WYDvl3FuQbUbQC1XGXs5fS1P4I/xNT5x3K0wugp
+ h0UKUNRmdjHQe8TsKVEBsBQJIPXP/clHxZHhjm/4gye9Cjmd2zey1XGgraRE=
+X-Gm-Gg: AfdE7cngXEqZroZgUFOJ5TIaXm+SIezi4VqW3iEvwCV75bi1e9sP+n4kzOOY/gbAxyc
+ BS8fJrWdd9JlAFVX2E2elDdbcVnEaX9pUcITD7QJTBxikupcGkriB86aJkLAfV5N8/kRywF+tWH
+ Uk74dWxABgwguidK6G3IqERL3OZLHfjQHAsJ2+Pc3QHIanEncJiL3/yqzoywTnjw8egU+EFINKK
+ 1DEgjy8mG/MUhICUNG0C27RJz/5N1RcTdgcCFQw0W18/cQYOjkeHxUFOxmG4HTlc/kbeQ9orA==
+X-Received: by 2002:a05:6402:1143:b0:695:572a:7abb with SMTP id
+ 4fb4d7f45d1cf-698a2cd163dmr1507999a12.22.1782987906635; Thu, 02 Jul 2026
+ 03:25:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-2-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-2-me@ziyao.cc>
+ <20260701111808.870705-5-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-5-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:22:14 +0100
-X-Gm-Features: AVVi8CdYfHhO3hR_E9vV0wtRNO_L1xNpaepA66IEym_PVKbKQjMJXZtA6dFYioo
-Message-ID: <CAFLszThfvoqgsTwZcmmR7+feYM80wUhH0n6=RdBPW47+Nv=YAw@mail.gmail.com>
-Subject: Re: [PATCH v2 01/16] lib: fdtdec: Handle multiple memory nodes
+Date: Thu, 2 Jul 2026 11:24:53 +0100
+X-Gm-Features: AVVi8Cedc3Y9zgmm8amNGuNTE4UNsiHmpxaw_qhv5CHQ-3sLDJV-kNSaVPK3K5E
+Message-ID: <CAFLszThFEdHOZf6O=X7r8x9ZDCqNAuSuB5GEHX4a6NdLYgiF9w@mail.gmail.com>
+Subject: Re: [PATCH v2 04/16] elf: Define LoongArch bits
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -111,56 +111,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jiaxun,
+Hi Yao,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> lib: fdtdec: Handle multiple memory nodes
+> elf: Define LoongArch bits
 >
-> Current code only tries to fetch the first memory node found in
-> fdt tree and determine memory banks from multiple reg properties.
->
-> Specification allows multiple memory nodes in devicetree, rework
-> fdtdec_setup_mem_size_base_lowest and fdtdec_setup_memory_banksize
-> to iterate over all memory nodes.
+> They all come from glibc's elf.h
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> include/asm-generic/global_data.h |   2 +-
->  lib/fdtdec.c                      | 129 ++++++++++++++++++++++----------------
->  2 files changed, 76 insertions(+), 55 deletions(-)
+> include/elf.h | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
 
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> +too_may_memory_banks:
-> +     log_warning("%s: Too many memory banks\n", __func__);
-> +     return -EINVAL;
-> +}
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Typo - too_may_memory_banks should be too_many_memory_banks. While
-you are here, please drop the goto... bank is bounded, so a single
-check after the loops (or bank < CONFIG_NR_DRAM_BANKS in the inner
-while) gives a single return path.
+> diff --git a/include/elf.h b/include/elf.h
+> @@ -225,7 +225,8 @@ typedef struct {
+> -#define EM_NUM               92              /* number of machine types */
+> +#define EM_LOONGARCH 258     /* LoongArch */
+> +
+>
+>  /* Version */
 
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> +                     log_debug("%s: DRAM Bank #%d %s.%d: start = 0x%llx, size = 0x%llx\n",
-> +                               __func__, bank, ofnode_get_name(mem), reg,
-> +                              (unsigned long long)gd->dram[bank].start,
-> +                              (unsigned long long)gd->dram[bank].size);
-
-The current code uses %pap with &gd->dram[bank].start, which is the
-idiomatic way to print phys_addr_t/phys_size_t iand should avoid
-needing casts. Can you keep %pap here (and in the message below)?
-
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> @@ -1115,90 +1116,110 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
-> +     while (true) {
-> +             struct resource res;
-> +             phys_size_t base, size;
-> +             int reg = 0;
-
-You should really use phys_addr_t for base
+Two blank lines are left between the new define and the /* Version */
+comment. Please drop one.
 
 Regards,
 Simon
