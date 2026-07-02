@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE943C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 14:04:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 211E6C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 14:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0B9384A4F;
-	Thu,  2 Jul 2026 16:04:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9172684A1C;
+	Thu,  2 Jul 2026 16:07:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="VlUa4f2N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EPXZ59XT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D79F684A47; Thu,  2 Jul 2026 16:04:37 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 887A284A1C; Thu,  2 Jul 2026 16:07:15 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F175A849D2
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 16:04:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36AA1849D2
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 16:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-493c52cde9eso10577535e9.3
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 07:04:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6a1888969ddso971413eaf.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 07:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783001075; x=1783605875; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xD6jMagOrOIwb+vMqyB5qt5dRmgs9QqpP7XiSYb+5Es=;
- b=VlUa4f2NNHm/ihyOMIJdmOZYIgnM1muQtJgjGxmKnhrVUd+mj9AwkS//xSA3cNmZIa
- Fli8CcNei3DvuoU7gySREYytOOrqz1pWJuvvM2CIKcEvtCsUBnkzqsbtOhI9dLe6uzY/
- VoDV3yTKT2nQ/xRnUsccP7ccQzhlHFNg07h7cVi0O+xt3Zckj0EDlJFLA6W2ME64ROfJ
- tvRr6qiqiV9tT91c2X0gCPfl8t+Uy7BmiidpPs6DZCax3WQbuaG7OxvugU09w4VSDQJF
- TT3MQIDbCusp5RQ5AacgSDSJf3+7RNZAD1B5TbODEUN2fdYHHJVDL9yMpwYXbHH44iu4
- Hw3A==
+ d=konsulko.com; s=google; t=1783001232; x=1783606032; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JBL7yztnt1fjSfoMvVN9zgtpe67iC2imGtPtKFVrBkw=;
+ b=EPXZ59XTvudzTcn/UZQ4OzV2m5qr48lvNIY4QEZAab969c86rT7pQB79r87JNQlJIy
+ l3fDRDSRGf5WImqwNCS2I6WSMy/rTiM44DI8ezaDcxp+iVhCzIvWr7J4iS3UM9D1nDn8
+ E26pKej0Uk1yM/twYVSRHWqRVVfjOyzpBQQ2A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783001075; x=1783605875;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=xD6jMagOrOIwb+vMqyB5qt5dRmgs9QqpP7XiSYb+5Es=;
- b=jzwIO23Cm+2+eYPnsSBrAkXvlez+AQ8g08TObqWLhKdirmZx5zBikIL3kDvBb+w+px
- kpz8grVciWOvChTVVMbS2Upt2lFNvDKITcPf/BQvMm6DLKHfwd6GN2LWdDJAID5yhQQV
- j7RJxd0E1me6AbikNIG/4KMF50Q1JNot7jLwWcUnp3+Qt0Xgqu+sJNzCWVrpnDw+egGo
- 2+vMUvohqE/OxuxWQrEpDET46mkbxpO1N9gDpOb7TpqSwZYkDweS5DGRJIcMYyV1wliz
- 9c/HgQpDebiEaxErwl/JFKfCrxYZHvesXRlL8DgTljximx4s8HdoHiUp1QBlzYHCm88A
- oIWA==
-X-Gm-Message-State: AOJu0YzrOaNi1+QLI8/wH0TaGDv6RONb2ipsKSgqvGKihfHu6G7px2GR
- OMCYlj7py/JsK/fysrH5nra5GyZtns6/iJvDhHpaYvUGc4bbdG0wkD9VK4ownXi6eJs=
-X-Gm-Gg: AfdE7cl99HCz3Pi3k3P5A6tkipv5+Py613u3dlsl89ghAInD0qpYrpd4Qduu7TV6E5o
- P2A8PSl6ov6EXP+vH64+XorCp0/79F25yMm1Jc454KFj9glSKCIIIEUBFpHOiY/rCU0WZmeWnrU
- /+TNvmvCwEL8gsGPAzqmpCyy0aLkCHKI7KZWL7byq4uko22UfO3wV9glXF5QiD0YFkytHicf7uG
- CaHN0jI7hCc4sz2GszJuJEQbwi7Pt0JNSnWUUxSzDCUmC3BvfmCZsbK313M7S3/EgxJEFXHcLjo
- RyNQw5vqPYb2BlioXaEf5N/C8PzDOiA9DBVavxqXiCwH9ewpKbQjOCz7aOb3nUUNI7wL29kxa4p
- OCg/XS2vGI6lYhupJkEqVwYKSHqEC+Sf5LjXwa1bc32JSHliz5oy/BtQV16V9DmBZ1vYvP2w2JL
- ZbZxUuDwm9p3AJOWv4lk1aQtaSxsngyAY8gIH3yjSLbLh6jDheRpsqh16tjb/s5ahG1fWpO9MzV
- jENGdgtUfvU7aMw2dlWNg/fIz7iTSx9GiqCYoKyO7drH4WJqtUscTKKvAQxrwqF51F2YQE=
-X-Received: by 2002:a05:600c:3f0f:b0:493:c35c:b4d1 with SMTP id
- 5b1f17b1804b1-493c35cb512mr86173525e9.7.1783001075386; 
- Thu, 02 Jul 2026 07:04:35 -0700 (PDT)
-Received: from [192.168.1.65]
- (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
- [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-477dde19fd3sm9577619f8f.25.2026.07.02.07.04.34
+ d=1e100.net; s=20251104; t=1783001232; x=1783606032;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JBL7yztnt1fjSfoMvVN9zgtpe67iC2imGtPtKFVrBkw=;
+ b=Y0dr15aF2R1GXXG90k05/TmKrib6of6ILsquc3XcxEJAcF3w2Ilxiu2m24FYIBZBPG
+ X/BNhhTfkooT55GOxXGY3DC11zeo9W7aO/8O6qmky5KskCWFKf8VKZb+/+bHENPplS49
+ l/KHpiA3RqZkrhic/3GWUBpdS+2aTyvQsUg99LxQgrkhTH/cOa5iiehVzlA3Tv8nBMJu
+ MHZDgJHU2MN9N3vHiH5ZTxlfBzasCrT4DfcFhfOrigBz/CyWOAv9TpKibI1+dj3nPFZW
+ IOogWZ6fDsUAuD5vVOm9dCbVm4tpweGbZVqPagVg19Ptu8PKU9XidP0IY+/WXNRi08Um
+ vlSw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/vm0h+Ox7KN6pzJmTnyyla5OsX6m7KqalP+iOiGbRPFz9Y/UUcSZl5MKG1k9IsbLN1q10/TlU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yygqo8XO4rRR49OpvBofIOwPXl85l1xHz5QehKYsvshfgFwJr3L
+ g8ncIXx/aI/rrAxlVyNn+Nz4wKc+X1n0CYyokIckTVi/eR7TZOPeofJ4oCt/Vjs8avE=
+X-Gm-Gg: AfdE7cluhjzPLhfnQ5AoKkDOsmY/CPYCZN9dGPlZVu822dnfQIVvl3HgzpHu8pvfSK1
+ 4lgujjrifpZ9/t7gklEWLBHh0Pwe9M/3FNz9c3Rk80fiyEq/OC/ee0zY3ihgwI8tETeUOKVKgi8
+ MzbBP9F8lYl7z+RnemahYlII4HwFU40rndTQdB8BWu5WCtwl4zWu5/IyKLWTSgQUs2COsk7TNG4
+ /egtILJl7VjErJ4pPaVITYM9iAu6z3TrnmdqYMe9syqoMTLycoPhHndWGJBNkbG5+ExzNUttA73
+ cHSQwftSvQfBGR1qO2SKlUYgUj75LquNvPx0K6qRRw4E1kaNAsW2zULFT4YdjW17tFzz/nghB+m
+ DE0D8OytF3+Eice2Y55v4Ia/f/0LxNYvZxYMJWR0CtJEhleE2Ux8qv8RTC+ItKrqJnd3IDNELE1
+ GCo1uFebUA7NkryOfBVzILLCDFQcOhj94lx+Sb0HsEP7pb9YvZPS4zUiiWHziYN2hgbZzlYhlbb
+ LSdsOyWseNhv+9bqIKLx+hUpEaxwj1tYR4gKg==
+X-Received: by 2002:a4a:e917:0:b0:6a1:1fde:c853 with SMTP id
+ 006d021491bc7-6a3099a2fd0mr3736679eaf.4.1783001231814; 
+ Thu, 02 Jul 2026 07:07:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a30ffce324sm2243788eaf.5.2026.07.02.07.07.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 07:04:34 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 02 Jul 2026 16:04:42 +0200
-Subject: [PATCH 2/2] qconfig: Rename the doc link in help text
+ Thu, 02 Jul 2026 07:07:10 -0700 (PDT)
+Date: Thu, 2 Jul 2026 08:07:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Yao Zi <me@ziyao.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 07/16] LoongArch: lib: General routines
+Message-ID: <20260702140708.GX749385@bill-the-cat>
+References: <20260701111808.870705-1-me@ziyao.cc>
+ <20260701111808.870705-8-me@ziyao.cc>
+ <20260701174940.GP749385@bill-the-cat>
+ <1c9f6db6-4307-4860-851e-be46ce2382d6@app.fastmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-qconfig-check-for-db-v1-2-f0b96bf8fa44@baylibre.com>
-References: <20260702-qconfig-check-for-db-v1-0-f0b96bf8fa44@baylibre.com>
-In-Reply-To: <20260702-qconfig-check-for-db-v1-0-f0b96bf8fa44@baylibre.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.15.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cnB1PoJ3qBUwxLGi"
+Content-Disposition: inline
+In-Reply-To: <1c9f6db6-4307-4860-851e-be46ce2382d6@app.fastmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,28 +102,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This was missed during the renaming of the tool. Fix it.
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-Fixes: ea4d6dead372 ("moveconfig: Rename the tool to qconfig")
----
- tools/qconfig.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--cnB1PoJ3qBUwxLGi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 9b151566e03..930eb0e203d 100755
---- a/tools/qconfig.py
-+++ b/tools/qconfig.py
-@@ -1514,7 +1514,7 @@ def parse_args():
-         cpu_count = 1
- 
-     epilog = '''Move config options from headers to defconfig files. See
--doc/develop/moveconfig.rst for documentation.'''
-+doc/develop/qconfig.rst for documentation.'''
- 
-     parser = ArgumentParser(epilog=epilog)
-     # Add arguments here
+On Thu, Jul 02, 2026 at 10:24:28AM +0100, Jiaxun Yang wrote:
+>=20
+>=20
+> On Wed, 1 Jul 2026, at 6:49 PM, Tom Rini wrote:
+> > On Wed, Jul 01, 2026 at 11:17:59AM +0000, Yao Zi wrote:
+> >
+> >> From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> >>=20
+> >> Add some common library routines for the architecture.
+> >>=20
+> >> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> >> Signed-off-by: Yao Zi <me@ziyao.cc>
+> > [snip]
+> >> +#define CACHE_MAX_LEVEL		3
+> >> +#define CACHE_MAX_INDEX		6
+> >> +#define CACHE_OP		GENMASK(4, 3)
+> >> +#define  CACHE_INDEX_INVWB	0x1
+> >> +#define  CACHE_HIT_INVWB	0x2
+> >> +#define CACHE_INDEX		GENMASK(2, 0)
+> >
+> > I was expecting checkpatch.pl to catch the double space here, but it
+> > didn't. It did warn about a few other things in macros, which should be
+> > checked out at least. And that comment applies for the whole series,
+> > along with a manual check for other spacing issues, thanks!
+>=20
+> Those style issues are mostly copied over Linux kernel counterparts, shou=
+ld
+> we leave them as is to ease kernel rebasing effort, or fix them for consi=
+stency
+> with rest of the U-Boot?
 
--- 
-2.54.0
+Ah, OK then yes, we can leave those if it's a match-up with the kernel,
+but should make note of that in the commit message when applicable, not
+just the cover letter. It will make finding that reasoning easier in the
+future.
 
+--=20
+Tom
+
+--cnB1PoJ3qBUwxLGi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakZwjAAKCRAr4qD1Cr/k
+CiJ8AQDumTVeWGiNoAMDNRDtr2MkwWEN/OnZhASpXyxJos29OwEAlvsSNJAAw3GM
+PDyBdY6nFqD8zinwkaYN+J0ExFHc5QM=
+=6QPB
+-----END PGP SIGNATURE-----
+
+--cnB1PoJ3qBUwxLGi--
