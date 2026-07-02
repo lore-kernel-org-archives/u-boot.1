@@ -4,92 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0051CC43602
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 16:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E08C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 16:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E6B3846F4;
-	Thu,  2 Jul 2026 18:43:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0394484409;
+	Thu,  2 Jul 2026 18:47:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X4zEi3vO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="CLPtmIDA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A41D846FD; Thu,  2 Jul 2026 18:43:10 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id E681F84671; Thu,  2 Jul 2026 18:47:06 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E229084671
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 18:43:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C9FB83FEE
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 18:47:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-37dedd62b90so987491a91.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 09:43:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783010586; cv=none;
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-37f7a5a217fso1766371a91.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 09:47:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783010823; cv=none;
  d=google.com; s=arc-20260327;
- b=AVAdjKFIC/IN54sWqHkYgEzQ/KQiMZDo1fg19nQJDbpfaj9IV7xXovnTdKzm6FP4uK
- cwfiOUKykIiZ2g4IuboiHGy6AVustTjd4FAvK8eXZ7pqR7Xu8/v7oXmJzk6uDeaSAqgy
- o1GpctR4JF5LfyCBGKj56nu4LsV2RIqA6c+7qK6HRv53Q74BCpTJi0aOwvASVbmDnOIp
- e8e84t4QzKDtzjsEKqH15G/dsFT3avxz6P2TNjf4g2HsVwIq5KkG648yg78j74bdvp+7
- bbQ5vL47Za5IBwNRiJPWuSIHZ/LkER743fPaZe7L3JSyhg2DPegbkYwRCkiN027gDD2/
- w52g==
+ b=R43ewEMHT6g1x9aoo2mkJpGbsIczLUVLUMkMydFeuxD0ji9LWdDht/tO+dIM0vuiIE
+ j4/GxkoZdXZSaI6BCZgcHnFvs9RpiDbQuc3bTeTatXtq3YrxhPhMaFNA5m/0qUpcT3PD
+ M50O2n0Y0a5NG9z7NPYtuwt5064ENnws/NKtxIA26xxmOcfXdSC9wsYiKH4zVeiit+oQ
+ 9G2G7dPesxgpQ8wThaklZdHC0CuK2Qa0HMffXYcmLOZWoumGyVUVXX1tmeWN+Le+SC4S
+ l1LOwvjvjrccUs8q63EY6b6qG8pmDwPdfgUOtLOgRw9/59yKup5fxydtdgdNgo8OBywI
+ Uypw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=M+lllCimOILrr2Hz9VVM5+Gk00aVxAX6iFRgXnZGTQM=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=HToWXmkB3qQfVJrCCcuT7czXlQl68uGEKTwnY5H6sFYyoM3hjD0ZKSr+sPb6DDJ9Sf
- kELsPeoovor5g2mGKN4AhwCrT1Pcb3z9tU2HrzOsFMyawPoLv/reml+IKM0f/nTk8xtV
- ZJivZXS5u5tZ/O0mzp3YgW8j1rbjR36p0yIZg7S+GT1EE3uSyuLo8xP0JbZulWC3u/pv
- Y0Xc0KpYRvK1/evzB7dtE/ZNOWYvS3Dm2IwPI0Zjd9H3MeUuWAagNPpDgn3NQbkz6wnc
- 9PX2G6bvR0gRqVWvEhAR8boH+m5FXKklevjtXFkBitl6RkMLEKUn1+2CXts3yaRyMY7F
- +RBQ==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=vo9a9SNovMaWAefi2vM8TrH0PGKMzYLUJ3Gz4hOY/Z8=;
+ fh=Clcr5shMxu0DXwHz9Up5uSrOFHc+ci/jwuRw35EL6Vw=;
+ b=raqywpex7AGA/3C0ZAn0DEQ7faKX89nVniPn1zbOq5mJzetdh+F7K5BDsLQeTYvCwa
+ Jb0HnvyqQjD0YvH/oo7W0OaEyvaBLCnHfiw9JT9CU+YJiwevvDvrddhtcVQtYjH7Wmjw
+ JdKiqdjJGqDE9ynPOdwQHNogopZzKPXFKTOVZfR8yvjWMPNnPHZ3EVIjvBIrThqKle+y
+ JArIedLHPvBlb0aoUguSIhspemGKqrWeH6RSiqWOL34MS4yF6WDBj2M6tcufUjtWliuz
+ K1XB4vL3vhOsEptPJvqIX8Q3g71FR7oloqREx7Q7Iep5mGdQ0OSPs8VlTroTfFl2yXcR
+ 2MxA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783010586; x=1783615386; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=M+lllCimOILrr2Hz9VVM5+Gk00aVxAX6iFRgXnZGTQM=;
- b=X4zEi3vOGTTmkf9PB9PpTFYPhBzADBVNloBUZt7sspmH+Ueb8sf+25b4gOmkjH98Dc
- L8xt/G0X5+q9OeRLACNCDJzC3pkRk3aYtCptjRgSGuL9Opv6GWpFiifEGXJToB6+lgHu
- m9kS+qsC4T0tPtR/opu8wqG63QH43ISxhFjjdkWB6AhskOBE80UTtHApPCsQFIp1ft/W
- 5R3aVNlUrT/Vc+WI6gEyUcC5TdwSGVgP9EGv7H27pnugd/JEeOoXXmascngnUYgqqMCX
- EZhpWyZ1dhbA6ZCwKi3UQnRwWinMLJDZbk3NBsU+i5f+QGleObe+8F2V6aizZF7bplwC
- qbWw==
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1783010823; x=1783615623;
+ darn=lists.denx.de; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=vo9a9SNovMaWAefi2vM8TrH0PGKMzYLUJ3Gz4hOY/Z8=;
+ b=CLPtmIDA+xP353VTgby+FUlRg/8NTF7t9KBLC2uj4uqLlK9XZ/K0l5GJrnYrl6eBgg
+ wLqZIRebh7s4FYEIEzS88ARsqFT7Nd8SIAar3pr7DUjuCx1z/IxP39wC6p5MlV0pb90/
+ 91igymvf4quQdAME3tDEIoddfahEFXlZtp2mnLFbPuXWTYgp7MNzNPptmzg6yoYlrR+w
+ zC93yot9z/Ky+gRn2tpXusRzR5viCfdHOstJA7tFnbY+x7ySq55RFmHqDm+xzNMMwNZD
+ 4GAuKqUGy9a3ZPtdc4re7UINvND9uGyKMI6pL0wedf/1otfnGHXK0RLZh51dOUn05Dm8
+ 5rqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783010586; x=1783615386;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M+lllCimOILrr2Hz9VVM5+Gk00aVxAX6iFRgXnZGTQM=;
- b=JkyrDUY0T8ex0O0n9Fl8Hbpe66mvso3O4+l2my1kVDxSMw+vpigd44XcZfj4h/GqFv
- PtDUCGukrcmEERQ0jiPiuLinNcjgbONj4fIk4/FwMPC/9go4QPKedcSs0fde+p+YZcC8
- UsnNXaQ1Ythh23JKXjRgCct2yRfQGiJam1odrtokCelTQ+RK1qwNdGN5P4Vq/OJ0ydig
- h5gyCgItxjO5wTndA2F6/zVdftSlYL6UdjzGoz9VJIwbNhqOQLj53H/gTUzuZXea+miI
- KXtBTQ480+RO35t0+vTSCxGCbOklpDvX1u8F5UATm5B56ZlXRaiMTGPjRIEsM35t5f3j
- 150w==
-X-Gm-Message-State: AOJu0Yx+i+vWWv8ioByb1gfL8F+o8dYHuSP4wDVbV4pJv37qvzQBLqPA
- mtY+JJf9B9yGhAy2/iXu2fMx9RmXQ1RJiM9S+P17WMhjvqB4gVPyfuOv+8TQ3Y2NCZbf3qQi+Mi
- H1TKsStUBvuYjcCGWrP5RtISPvoMrn5msjaSYDRc=
-X-Gm-Gg: AfdE7cmMWllZCvYdIj12oz2+0q8jbzvyCmqvkG29ihYxbw1Pzzkw9d6IfC1WPNMHIRd
- NHOrofiAqVMzZ4PBYOsJvKUmtoCi6+5Zmg8iGWHqASX3xl0HYUCjFMIucQKQZcOZwjwkng/ZWgI
- FRCuz39BPM2bibIWtwg/YfCg/NpcW9DtQR8LXnEWH0/ACRozFD6vaI8XlOXeuO94d4BAfPrSIec
- EaD6nPePFgGU6FNx+d6u6eLKXYVyy+6u4YXUIBE+uZHdkv98xo6oJ2LkFVsh3HEbGrdKFKCLA96
- 8DZNa9HofZaNKflm76D4aZVUhC1X4WnY3uOIv8EZuSOnDy38wPBm9fuQgGMbrkQai6T3GpjNmLT
- usVl5oBvC4HWr
-X-Received: by 2002:a17:90a:e70c:b0:380:ce69:2669 with SMTP id
- 98e67ed59e1d1-381122ebda9mr642117a91.9.1783010586154; Thu, 02 Jul 2026
- 09:43:06 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783010823; x=1783615623;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=vo9a9SNovMaWAefi2vM8TrH0PGKMzYLUJ3Gz4hOY/Z8=;
+ b=DMmBLlGNTCpzvps+8/rkrXjRluwqJyDsP1dd/CKC6aslPFuBMViOE+O+AjB5pzGlzf
+ V5yeNfQZxanTFdvt7yQk3JZc7UILAxJL2NYXYMsAeIJ+AbLYGAadl6KJu805Q0pAve76
+ YY2jeo01JvskOd2Fc9nbJ7Sox7v3kfPIvLzgXagbCuHcXL4mGUT2QwP0igwkz/0CEgCx
+ uoYV4JfK4rLlu3xeCQS/K8VQPpnDwtyEecTq9+tWCsHxZtC+qvHxiT39XJBKSBSz0cLk
+ 1lw+G/sd26VA2rxWEPEqIpMDbJ1z5OvD0O6TOjX6/2ha7Fvxf4u16CnWrFQ34q9LI//a
+ H9og==
+X-Gm-Message-State: AOJu0YzQ9sJKK3jZlpAwR00C5D/ZIG/KelvM2xCidEgOG+qcilWH2hKn
+ GhClkX0YAN9Su4lDz9ObaAdua0dHeTsV8Ku1K9Wd+k0LG1zarsqXOkj6SqB95fqiMYvZcISae5W
+ /SAJ9Os0W0TSW8pIQOQdz6GLD26Zg0xQ3I1HkM/ifMQ==
+X-Gm-Gg: AfdE7cnNyVKkil8bTqqhs7jLzWgtB88G6ZEDkrxIyzg3tLxsrD7XXfgSyv3nxCyn3u3
+ Dhztw6UXnL8MbaDajy9XG8THZIPCmsIiysNrMwAtgtvpZRFb3B9ZXgDSAc/+XYBSogltVTkU1fs
+ MTxWJDJ5htSQPl6x5/VpfaaAWS6xORtqcktYX3NCqxK9ykLNNbU/HalYaeyJSIUcdEu7NXPRNmd
+ TRTmYmDKlt/E0xvtOv7QO4ti1bQkYuR+0ObhC/lZfEsFfCAvi/TO3nT63yg29+MKScHRK0M2DpD
+ VnQQqA2MbLFuAX2RGfFATUI+/EE=
+X-Received: by 2002:a17:90b:570e:b0:380:f389:447b with SMTP id
+ 98e67ed59e1d1-380f38945eamr2483278a91.11.1783010822994; Thu, 02 Jul 2026
+ 09:47:02 -0700 (PDT)
 MIME-Version: 1.0
-From: Patryk <pbiel7@gmail.com>
-Date: Thu, 2 Jul 2026 18:42:52 +0200
-X-Gm-Features: AVVi8CeCJAUwYCiOr5EozszIopgw5joZ5f1_IvdXqMjDZlCx-bVn7ZT58OIN9SI
-Message-ID: <CA+DkFDb-nAaiECtYX-QcX4-iW6hQPxRtYt_EeKOhDzznqR2ofQ@mail.gmail.com>
-Subject: DRA821 Firmware Update: A/B boot and dynamic SPL payload selection
-To: u-boot@lists.denx.de
+References: <20260525132828.3348679-1-sergio.prado@e-labworks.com>
+ <20260525132828.3348679-3-sergio.prado@e-labworks.com>
+ <CAFLszTiWwxiP3BOrAQ61QHr8X6WYbxWsQp5KqFKSBvLxzsoq6w@mail.gmail.com>
+In-Reply-To: <CAFLszTiWwxiP3BOrAQ61QHr8X6WYbxWsQp5KqFKSBvLxzsoq6w@mail.gmail.com>
+From: Sergio Prado <sergio.prado@e-labworks.com>
+Date: Thu, 2 Jul 2026 13:46:46 -0300
+X-Gm-Features: AVVi8CdZialb7eeVrqr-OseM7ng7jWlMXR8-YJKOjfvxNdXcoKgNgRdQlAU8CHU
+Message-ID: <CANu7NGuJOOoquPjVfZ6B249AkSHD1NVBuqpDoVinvFYz9f=3Wg@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] binman: x509_cert: support PKCS#11 URI in keyfile
+ for HSM signing
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org, 
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com, 
+ xypron.glpk@gmx.de, y.moog@phytec.de, afd@ti.com, quentin.schulz@cherry.de, 
+ Wojciech.Dubowik@mt.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,71 +121,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
-I've been exploring the possibility of firmware update on the DRA821
-platform and have a few questions regarding the solution that came to
-my mind.
-I target both SD and eMMC storage but SD is rather for development
-purposes although extensively used so it should work as similar as
-possible to prod solution. I need to update as much as possible with
-possible rollback in case of boot failures.
+Hi Simon,
 
-For those not familiar with this SoC the boot flow is roughly (let's
-skip details) something like this:
-- bootROM loads tiboot3 (that contains spl) on R5 core
-- spl loads tispl.bin (that contains BL31, BL32, A72 SPL) on A72 core
-- A72 SPL loads u-boot.img with u-boot proper
-- u-boot proper loads kernel
+Em dom., 14 de jun. de 2026 =C3=A0s 13:01, Simon Glass <sjg@chromium.org>
+escreveu:
+[...]
+> nit: the 'pkcs11:' substring test is loose - a filesystem path
+> containing that token would be treated as a URI. Please use
+> key_fname.startswith(('pkcs11:', 'org.openssl.engine:')) instead.
 
-So my initial idea is to
-- store tiboot3.bin on boot0/boot1 eMMC boot hw partition
-- store tispl.bin, uboot.img, fitImage (with kernel) on boot-a /
-boot-b UDA partitions
-- put all the logic of slot selection in R5 SPL
+Will fix it in v6. I'll make it slightly stricter than suggested,
+startswith(('pkcs11:',
+'org.openssl.engine:pkcs11:')), so that a non-pkcs11 engine key (e.g.
+org.openssl.engine:tpm2tss:...) doesn't get a pin-value attribute appended
+to it.
 
-So R5 SPL once loaded by bootROM, would use some sort of metadata
-(let's assume some env variables for now, btw any better idea?), to
-decide what slot to boot, then based on this information would load
-tispl.bin. In the next phase A72 SPL would basically do the same for
-the u-boot.img, and finally u-boot proper would load appropriate
-fitImage. In general the selected slot index would be propagated to
-each stage so each stage knows what slot to boot.
+> Also, the commit message says the URI is forwarded as-is to openssl
+> -key, which isn't quite true once PKCS11_PIN is appended. Please
+> reword to match the code.
 
-R5 SPL would also handle possible rollback by using some sort of boot
-counter (e.g. stored in backup registers of SoC).
+Will reword in v6.
 
-tiboot3.bin would also be updatable but I would update it only for
-some special reasons - in this case I would just switch boot0 ->
-boot1, or boot1 -> boot0. This case would require special care because
-if an update failed, there would be no automatic rollback and users
-would be forced to use backup boot mode.
+> The test only exercises the provider form; the engine prefix is
+> documented as supported but not covered. A small extra case in
+> testX509CertBuildPkcs11Key for an engine-prefixed URI would catch
+> regressions in the combiner without needing libengine-pkcs11-openssl
+> installed.
 
-In theory and from my perspective it looks good, however I've stumbled
-upon some problems.
-First - there is no possibility to use a board specific function to
-select the boot partition. Currently SPL iterates over a list of
-partitions and selects first bootable - more about this in
-spl_mmc.c/spl_mmc_do_fs_boot() - would it be sensible to add here a
-board specific weak function that would select the appropriate
-partition to boot? If so - would it be welcome also in the mainline or
-rather not?  CONFIG_SYS_MMCSD_FS_BOOT_PARTITION is obviously not the
-case because the partition has to be selected dynamically.
+Good idea, will add it in v6.
 
-Second - some SoCs do not support GPT partitioning schemes, and when
-more partitions are required for various reasons there is no simple
-way to provide separate partitions for boot slots (e.g. boot-a,
-boot-b, root-a, root-b, data). In this case one could potentially use
-single boot partition and use e.g. boot/tispl-a.bin / tispl-b.bin for
-"slot" selection, but this is the same story as in case of partition
-selection - the name of payload is hardcoded in config - would it make
-sense to also support dynamic payload selection?
+Thanks for the review!
 
-I would be grateful for any suggestion, especially if the solution I
-outlined above does not completely make sense.
-Just for the record - I come from another SoC where the first external
-bootloader was implemented in TF-A (BL2) which has a well-defined boot
-slot selection through PSA firmware update - that's why I try to
-figure out something similar on DRA821 SoC.
-
-Best regards.
-Patryk
+Sergio Prado
