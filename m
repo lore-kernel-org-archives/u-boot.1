@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41ADC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 01:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A8B1C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 01:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B614D84C7D;
-	Thu,  2 Jul 2026 03:48:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6F3AD84C85;
+	Thu,  2 Jul 2026 03:48:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="px73UHOP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="n1Xcl1qk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7631084C83; Thu,  2 Jul 2026 03:48:00 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 8BD8684C85; Thu,  2 Jul 2026 03:48:08 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA30984C79
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 03:47:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C7C984C15
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 03:48:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-6a0e55e82d0so792247eaf.1
- for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 18:47:57 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6a15ca0d761so902371eaf.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jul 2026 18:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782956876; x=1783561676; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1782956883; x=1783561683; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AwCnww1WvNx8tDJueBqYxKQXXHECyDKspwhbMFFGCUw=;
- b=px73UHOPmDlH2s3xPajyVDF7CnCMYJ/WgjNrpod4RcvYuIHFBbKywqX0LXJnJuMDef
- pNriQcqTPklyCsBN3gvdrLs5GPxPeeVBOz237lVl1z9lV5xtgPw9DIoAG01fWMhYwL3j
- nLDFPV7tGs21u8D5VOv27ddg1z7DXXU5gtvq8vpv14kJRIh4JTBCzCOO6C2uy8D48ELL
- 1dDHGVSbkDb6aZFfvoL6tfYfSyV+6BNzcAu4LnCDWPfT0L/2dvdUSpmAKaPdQLFjE9ur
- BHc6W1LSNQETL2GF/tZMf3qFw0fGwI/u6LpM+K1oXYcKrBdPrDLCAqFnOe5tSijmKpZS
- 4adQ==
+ bh=rGgYlOJLJyDKHujgL2XeEf32q4cs/hbjsskNjfUlHLY=;
+ b=n1Xcl1qklne8eeajNfWP/LgMMltQIk/9fQfWqiUDA0daDsqbDj7uNKfp1653rBp3mD
+ Qiln6PNWdPDRtunWongl76eh5t7IUzKq23sMoKLshMBYqSrf8EyUjYwyvA6Q1pVeG0rn
+ /gnxDH3rWlXeaf6tvlkxNwzrXCuC0XxvXWz1ouRV8I9tWaiNSIAa31SP4+Z7m9LDnzGl
+ 7NuYdeLIuvkMobVk755FEvoSP+CC2zy964ydkMLrnnw/0mSzPh49ILtjrQEe9rbIfo/a
+ 9WatW7CYpkrClX3SZCfZDcFUDGncUIt6bKnXyP3AGjK24QzoaguuRaXq2gO3lghbCXoX
+ Zy+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782956876; x=1783561676;
+ d=1e100.net; s=20251104; t=1782956883; x=1783561683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=AwCnww1WvNx8tDJueBqYxKQXXHECyDKspwhbMFFGCUw=;
- b=OuCqt/N0x+sBXFfW8tt3Hv9Mfmi90MrYADvN301PwaqdE2ZE/HpjCIWdPKQeQfn/N3
- U49UXn0QuF6SM+MZXft4Q+BaEMYoy7d+EFw1sJF4Ox/FiU9/LfyiIdCQrxBaOSDyz7nF
- XXpdBQ+VZi7XdVqFtg8agxmYUPQwf5E+UaLXvYatXJDu4Lp3OracaX+6gLKR0BTzJtO8
- ZMo4xnLgqFp1pvxD9RRcKzG1v1RK2Maz0tbR+RAuurKAnsViIKxY89F+O/ETUr5QSYQS
- xlt47Maj2OiLmsv6Rzwk59HtMrFgo6DQVwgjI68M7l63qh1mzhRZy36A4+tRe+KSpqx9
- akzw==
-X-Gm-Message-State: AOJu0YwyqxDoTSPG5/iNfCYqp7i06nmM5abGYY/MozGLIzOLS1CYEpMh
- jIACZ9bGUrRt14V9FWtCiMg9WP3qrbOiDDAkcwVtIOzP7YjyadS88Z6vG252Ggg0cMM53A==
-X-Gm-Gg: AfdE7cm3WjPkW3duA9W0h+RZ2wa8zcxCo3clevIVNDIRShjrWgk6o5xLNzBPugaldPm
- 8oOYM/Sy/XFsAY/FDlDR5i9cQycXjWhGEcuYx4O4sTWAyLIixz+BJa2VCZZyXmts7qqADTy8FjH
- 85sdJusYtLUAMXbpJ30opVjZnJMdeJMl604iktj3iUaZK12B9nFrq8+U4eod/ooOK3fb4GTsuzV
- 3l0lpXGtwQKq/+OpRnYMYOLk+0aehTE5vDdD2XRXQGvRtL4RcMqV+bAsYYzu52cYnoelwNyl66G
- /96gF8F5BN1BMFOpwbFbs9i0DV/R196xPTP5j+wbGOuww0512eetsY1UN9MxwudycjV/iYD4ioA
- e8hMshV7eUK4qAR8HdAV5nCdNIj0wfB1OyZZFCptWch1PjxFPHo/njPp8R5NLgunMARDOhpfMVs
- h0mha1/bnsVSzkIZH/a3AM8ALsVvWEKj2nnbd8eUmbK60Eqp+D4Eq7ILYFzF3NNlpx2Lu08v8AK
- 8H7F+d4co/orjr2TrUlgVUSAbctUmlZZCohnpk5CLuQ7Ru6KQZMtuyuIi/II5LNlDIkVjDuEURX
- pHT+EOgryVKRhv2VEuq+GoovXw==
-X-Received: by 2002:a05:6820:f028:b0:6a1:50eb:211e with SMTP id
- 006d021491bc7-6a30d918c60mr2022322eaf.66.1782956876165; 
- Wed, 01 Jul 2026 18:47:56 -0700 (PDT)
+ bh=rGgYlOJLJyDKHujgL2XeEf32q4cs/hbjsskNjfUlHLY=;
+ b=BMCXXju+swiui4LxuyKLR2tvCltLWDOT+2SOAQdRy+yQDjdIWoRzsFvp/hoXhz8pAF
+ KmSn4hKpUZDyFw3R2W4J6tuYAexU2AFXbhNjRluqAebqZ/tVYdAzNmDhHEFE6emyOfZF
+ 7HoXct1Wv9IPn1flaBJSGD+VGaMGaxVMHtuWOQ3pjq30ZHg8h6jf565l2sHO65qUVk5a
+ U9EMylhdbiXdAJTa0f/EgiWwJg/VIOQeypCx7OTukdj+/cxNBc3tKZhpYk3AynSQ3eCw
+ rIwvjFp/0TKY/78tf4SCewu18ACcBH63N2rucVtiaH8FpeqVAjexsk7wUYl+i9O9IGtz
+ uruA==
+X-Gm-Message-State: AOJu0YwJcSTNAIZYSxeL8QwpRCfPTel8JwNJ4OBaFPeLe8OOibHMFwtW
+ cIJd7J/V6hQopZByKFnpxtWfKCRvvVGtveMKvpjgOWyE8TiTXET3vJ9RhmO1df1fYL0SFQ==
+X-Gm-Gg: AfdE7cmXZiUp2kEhRJGW/PeyahASnx2CaBFToYGNZNFnWTVv2m53RmPvdq69fQfgCO5
+ qH/ZIgf3IlE5kNtjKmKQPyBe5dWJrIwfck7a7QwpvYHw9dGkKfyiNP9+45crSGI75oc0PP/bJOl
+ edfPz8K+AYj93tCO1DRUK2v2Yckzk8gs2K+UTcMcbeNGEmFbwWucvh0yPA94pq1XTX06t4yRnEN
+ EjO6nOE2FcQg8/FBhg1INagCg/Vweoia7unnbJWn8d2ACLpouINuEkDXgBwyySICTqGXit4dxv0
+ /pWXofFL1gLB/oi4h/oDOP3d5TKxYSHBBlf9Ayq+5tVwglbev1m0ZgA1ts3omuL5CLkiy+vw8Jy
+ 3NmjeisHLHl6V0/j4Q/R1PSDUpvYjgsvZQdu2trPNhGoOmJvd89kxVsuIQFg3DdWXKi3xXTm2vX
+ DTxcf1mShhNrjbWRywXu+PlY3f7erVHGbQ+P1tXJlDvZnPDZOlYP9Fn9WQko73CP02aHCZBHPQp
+ OncVvDZOL+rKeko263bp2zXIqMgw+CDauCLJ9CSxRq9Bq1nr4Yoi/sd2nbuGSv2KFr+ch54Jgal
+ x4INNanhcPg89cI=
+X-Received: by 2002:a05:6820:4dc7:b0:6a1:78ec:c6fd with SMTP id
+ 006d021491bc7-6a30d87c37dmr1923303eaf.33.1782956883442; 
+ Wed, 01 Jul 2026 18:48:03 -0700 (PDT)
 Received: from james-x399.tailafd1a.ts.net (97-118-25-163.hlrn.qwest.net.
  [97.118.25.163]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a310051cfcsm1284511eaf.8.2026.07.01.18.47.54
+ 006d021491bc7-6a310051cfcsm1284511eaf.8.2026.07.01.18.48.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 18:47:55 -0700 (PDT)
+ Wed, 01 Jul 2026 18:48:02 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>,
  Samuel Holland <samuel@sholland.org>,
  James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut@mailbox.org>, E Shattow <e@freeshell.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ David Lechner <dlechner@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Daniel Golle <daniel@makrotopia.org>, Lucas Dietrich <ld.adecy@gmail.com>
-Subject: [PATCH 6/9] lib: ecdsa: support additional curve sizes
-Date: Wed,  1 Jul 2026 19:46:56 -0600
-Message-ID: <20260702014724.1534351-6-james.hilliard1@gmail.com>
+ Stefan Roese <stefan.roese@mailbox.org>, Ion Agorria <ion@agorria.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH 7/9] crypto: allwinner: add sun8i-ce AES driver
+Date: Wed,  1 Jul 2026 19:46:57 -0600
+Message-ID: <20260702014724.1534351-7-james.hilliard1@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260702014724.1534351-1-james.hilliard1@gmail.com>
 References: <20260702014724.1534351-1-james.hilliard1@gmail.com>
@@ -108,649 +111,1016 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot's ECDSA FIT code is tied closely to prime256v1 and secp384r1.
-Hardware verifiers may support a wider set of curves, and FIT public key
-properties need to preserve the fixed coordinate width of those curves.
+Add an Allwinner sun8i Crypto Engine driver using the same directory and
+driver naming style as the Linux sun8i-ce driver. The parent device owns
+the shared CE registers, clocks, resets and task submission path, while an
+AES child exposes the standard UCLASS_AES interface.
 
-Add common curve-size handling for secp224r1, prime256v1, secp384r1 and
-secp521r1. Use fixed-width big-endian byte arrays when writing libcrypto
-BIGNUM values into the control FDT so non-32-bit-aligned coordinates such
-as secp521r1 are encoded correctly.
+Support AES-128, AES-192 and AES-256 in ECB and CBC modes with
+software-provided keys. Process direct DMA-capable buffers in 128 KiB
+chunks and use cache-aligned bounce buffers for unaligned heads, tails and
+overlapping cases. CBC keeps the IV chain in software between chunks so
+each CE task can run on a larger contiguous range without losing chaining
+state.
 
-Register the corresponding host and target ECDSA algorithm names and clean
-up the libcrypto signing context so raw signatures are owned and freed
-consistently on error paths.
+Model the H6 and H616 compatibles after the Linux sun8i-ce variant data.
+Both variants use byte-sized cipher task lengths; H616 additionally needs
+word-addressed descriptors. In SPL, enable the shared H6-family CE clock,
+bus gate, reset and MBUS gate directly because the full clock/reset
+uclasses are not always available there.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- doc/mkimage.1                  |   3 +
- doc/usage/fit/signature.rst    |   3 +-
- include/u-boot/ecdsa.h         |  16 ++++
- include/u-boot/fdt-libcrypto.h |   6 +-
- lib/ecdsa/Kconfig              |   2 +-
- lib/ecdsa/ecdsa-libcrypto.c    | 141 +++++++++++++++++++++------------
- lib/ecdsa/ecdsa-verify.c       |  39 +++++----
- lib/fdt-libcrypto.c            |  59 +++-----------
- tools/image-sig-host.c         |   7 ++
- 9 files changed, 152 insertions(+), 124 deletions(-)
+ MAINTAINERS                                   |   1 +
+ drivers/crypto/Kconfig                        |   2 +
+ drivers/crypto/Makefile                       |   1 +
+ drivers/crypto/allwinner/Kconfig              |   3 +
+ drivers/crypto/allwinner/Makefile             |   3 +
+ drivers/crypto/allwinner/sun8i-ce/Kconfig     |  39 ++
+ drivers/crypto/allwinner/sun8i-ce/Makefile    |   4 +
+ .../crypto/allwinner/sun8i-ce/sun8i-ce-aes.c  | 407 ++++++++++++++++++
+ .../crypto/allwinner/sun8i-ce/sun8i-ce-core.c | 375 ++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h  |  61 +++
+ 10 files changed, 896 insertions(+)
+ create mode 100644 drivers/crypto/allwinner/Kconfig
+ create mode 100644 drivers/crypto/allwinner/Makefile
+ create mode 100644 drivers/crypto/allwinner/sun8i-ce/Kconfig
+ create mode 100644 drivers/crypto/allwinner/sun8i-ce/Makefile
+ create mode 100644 drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c
+ create mode 100644 drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
+ create mode 100644 drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
 
-diff --git a/doc/mkimage.1 b/doc/mkimage.1
-index 9a2d07cee75..b6ba88dd314 100644
---- a/doc/mkimage.1
-+++ b/doc/mkimage.1
-@@ -459,7 +459,10 @@ lb.
- rsa2048
- rsa3072
- rsa4096
-+ecdsa224
- ecdsa256
-+ecdsa384
-+secp521r1
- .TE
- .RE
- .
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index da08cc75c3a..4f35f44bc8a 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -132,7 +132,8 @@ rsa,n0-inverse
- For ECDSA the following are mandatory:
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f4eb2c13a43..b43014db002 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -761,6 +761,7 @@ F:	arch/arm/include/asm/arch-sunxi/
+ F:	arch/arm/mach-sunxi/
+ F:	board/sunxi/
+ F:	drivers/clk/sunxi/
++F:	drivers/crypto/allwinner/
+ F:	drivers/phy/allwinner/
+ F:	drivers/pinctrl/sunxi/
+ F:	drivers/video/sunxi/
+diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
+index 0d58e3910fe..d15a59f87ee 100644
+--- a/drivers/crypto/Kconfig
++++ b/drivers/crypto/Kconfig
+@@ -6,6 +6,8 @@ source "drivers/crypto/aes/Kconfig"
  
- ecdsa,curve
--    Name of ECDSA curve (e.g. "prime256v1")
-+    Name of ECDSA curve, such as "secp224r1", "prime256v1",
-+    "secp384r1", or "secp521r1"
+ source "drivers/crypto/fsl/Kconfig"
  
- ecdsa,x-point
-     Public key X coordinate as a big-endian multi-word integer
-diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
-index f0ac0f327e9..e8b01cd0258 100644
---- a/include/u-boot/ecdsa.h
-+++ b/include/u-boot/ecdsa.h
-@@ -8,6 +8,7 @@
- 
- #include <errno.h>
- #include <image.h>
-+#include <string.h>
- 
- /**
-  * crypto_algo API impementation for ECDSA;
-@@ -64,8 +65,23 @@ int ecdsa_verify(struct image_sign_info *info,
- 		 uint8_t *sig, uint sig_len);
- /** @} */
- 
-+#define ECDSA224_BYTES	(224 / 8)
- #define ECDSA256_BYTES	(256 / 8)
- #define ECDSA384_BYTES	(384 / 8)
- #define ECDSA521_BYTES	((521 + 7) / 8)
- 
-+static inline unsigned int ecdsa_curve_size(const char *curve_name)
-+{
-+	if (!strcmp(curve_name, "secp224r1"))
-+		return 224;
-+	else if (!strcmp(curve_name, "prime256v1"))
-+		return 256;
-+	else if (!strcmp(curve_name, "secp384r1"))
-+		return 384;
-+	else if (!strcmp(curve_name, "secp521r1"))
-+		return 521;
++source "drivers/crypto/allwinner/Kconfig"
 +
-+	return 0;
+ source "drivers/crypto/aspeed/Kconfig"
+ 
+ source "drivers/crypto/nuvoton/Kconfig"
+diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
+index e4a4482b7f3..cbbd5dc1dbe 100644
+--- a/drivers/crypto/Makefile
++++ b/drivers/crypto/Makefile
+@@ -8,6 +8,7 @@ obj-y += aes/
+ obj-y += rsa_mod_exp/
+ obj-y += fsl/
+ obj-y += hash/
++obj-y += allwinner/
+ obj-y += aspeed/
+ obj-y += nuvoton/
+ obj-y += tegra/
+diff --git a/drivers/crypto/allwinner/Kconfig b/drivers/crypto/allwinner/Kconfig
+new file mode 100644
+index 00000000000..9765b089e25
+--- /dev/null
++++ b/drivers/crypto/allwinner/Kconfig
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++source "drivers/crypto/allwinner/sun8i-ce/Kconfig"
+diff --git a/drivers/crypto/allwinner/Makefile b/drivers/crypto/allwinner/Makefile
+new file mode 100644
+index 00000000000..2dcae98bac9
+--- /dev/null
++++ b/drivers/crypto/allwinner/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-y += sun8i-ce/
+diff --git a/drivers/crypto/allwinner/sun8i-ce/Kconfig b/drivers/crypto/allwinner/sun8i-ce/Kconfig
+new file mode 100644
+index 00000000000..f72cf3498fe
+--- /dev/null
++++ b/drivers/crypto/allwinner/sun8i-ce/Kconfig
+@@ -0,0 +1,39 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++config SUNXI_CE
++	bool
++	depends on ARCH_SUNXI
++	depends on CLK && DM_RESET
++
++config SPL_SUNXI_CE
++	bool
++	depends on ARCH_SUNXI
++	depends on MACH_SUN50I_H6 || MACH_SUN50I_H616
++	depends on SPL_DM
++	depends on SPL_OF_CONTROL
++	select SPL_CRYPTO
++
++config SUNXI_CE_AES
++	bool "Allwinner sunxi CE AES"
++	depends on ARCH_SUNXI
++	depends on DM_AES
++	depends on CLK && DM_RESET
++	select AES
++	select SUNXI_CE
++	help
++	  Select this option to enable AES encryption and decryption using
++	  the Crypto Engine found in Allwinner sunxi SoCs. The driver
++	  supports software-provided AES-128, AES-192 and AES-256 keys.
++
++config SPL_SUNXI_CE_AES
++	bool "Allwinner sunxi CE AES in SPL"
++	depends on ARCH_SUNXI
++	depends on MACH_SUN50I_H6 || MACH_SUN50I_H616
++	depends on SPL_DM_AES
++	depends on SPL_OF_CONTROL
++	select SPL_CRYPTO
++	select SPL_SUNXI_CE
++	help
++	  Select this option to enable AES decryption in SPL using the Crypto
++	  Engine found in Allwinner H6 and H616 compatible SoCs. This can be
++	  used to decrypt FIT images before loading U-Boot proper.
+diff --git a/drivers/crypto/allwinner/sun8i-ce/Makefile b/drivers/crypto/allwinner/sun8i-ce/Makefile
+new file mode 100644
+index 00000000000..2a8778065b1
+--- /dev/null
++++ b/drivers/crypto/allwinner/sun8i-ce/Makefile
+@@ -0,0 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-$(CONFIG_$(PHASE_)SUNXI_CE) += sun8i-ce-core.o
++obj-$(CONFIG_$(PHASE_)SUNXI_CE_AES) += sun8i-ce-aes.o
+diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c
+new file mode 100644
+index 00000000000..9148cfefc8a
+--- /dev/null
++++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c
+@@ -0,0 +1,407 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 James Hilliard
++ */
++
++#define LOG_CATEGORY UCLASS_AES
++
++#include <dm.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <uboot_aes.h>
++#include <linux/dma-mapping.h>
++#include <linux/kernel.h>
++#include <linux/string.h>
++#include "sun8i-ce.h"
++
++#define SUNXI_CE_ENCRYPTION		0
++#define SUNXI_CE_DECRYPTION		BIT(8)
++
++#define SUNXI_CE_OP_ECB			0
++#define SUNXI_CE_OP_CBC			BIT(8)
++
++#define SUNXI_CE_AES_KEY_128BIT		0
++#define SUNXI_CE_AES_KEY_192BIT		1
++#define SUNXI_CE_AES_KEY_256BIT		2
++
++#define SUNXI_CE_KEY_SELECT_INPUT	0
++#define SUNXI_CE_KEY_SELECT_SHIFT	20
++#define SUNXI_CE_AES_DIRECT_CHUNK_SIZE	(128 * 1024)
++#define SUNXI_CE_AES_BOUNCE_CHUNK_SIZE	(64 * 1024)
++#define SUNXI_CE_AES_BOUNCE_CHUNK_BLOCKS \
++	(SUNXI_CE_AES_BOUNCE_CHUNK_SIZE / AES_BLOCK_LENGTH)
++
++struct sunxi_aes_priv {
++	u8 key[AES256_KEY_LENGTH];
++	u32 key_bits;
++	u32 ce_key_size;
++};
++
++static int sunxi_ce_key_size(u32 key_bits, u32 *ce_key_size)
++{
++	switch (key_bits) {
++	case AES128_KEY_LENGTH * 8:
++		*ce_key_size = SUNXI_CE_AES_KEY_128BIT;
++		return 0;
++	case AES192_KEY_LENGTH * 8:
++		*ce_key_size = SUNXI_CE_AES_KEY_192BIT;
++		return 0;
++	case AES256_KEY_LENGTH * 8:
++		*ce_key_size = SUNXI_CE_AES_KEY_256BIT;
++		return 0;
++	default:
++		return -EINVAL;
++	}
 +}
 +
- #endif
-diff --git a/include/u-boot/fdt-libcrypto.h b/include/u-boot/fdt-libcrypto.h
-index b15d8a1eaf4..d2d539f9997 100644
---- a/include/u-boot/fdt-libcrypto.h
-+++ b/include/u-boot/fdt-libcrypto.h
-@@ -12,16 +12,16 @@
- /**
-  * fdt_add_bignum() - Write a libcrypto BIGNUM as an FDT property
-  *
-- * Convert a libcrypto BIGNUM * into a big endian array of integers.
-+ * Convert a libcrypto BIGNUM * into a fixed-width big endian byte array.
-  *
-  * @blob:	FDT blob to modify
-  * @noffset:	Offset of the FDT node
-  * @prop_name:	What to call the property in the FDT
-  * @num:	pointer to a libcrypto big number
-  * @num_bits:	How big is 'num' in bits?
-- * Return: 0 if all good all working, -ve on horror
-+ * Return: 0 on success, negative libfdt or errno-style error on failure
-  */
- int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
--		   BIGNUM *num, int num_bits);
-+		   const BIGNUM *num, int num_bits);
- 
- #endif /* _FDT_LIBCRYPTO_H */
-diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
-index ca13b6bfa1f..f0c56278fb6 100644
---- a/lib/ecdsa/Kconfig
-+++ b/lib/ecdsa/Kconfig
-@@ -17,7 +17,7 @@ config ECDSA_VERIFY
- 
- config SPL_ECDSA_VERIFY
- 	bool "Enable ECDSA verification support in SPL"
--	depends on SPL
-+	depends on SPL && SPL_DM
- 	help
- 	  Allow ECDSA signatures to be recognized and verified in SPL.
- 
-diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-index c4bfb2cec61..378d53ea242 100644
---- a/lib/ecdsa/ecdsa-libcrypto.c
-+++ b/lib/ecdsa/ecdsa-libcrypto.c
-@@ -31,7 +31,7 @@ struct signer {
- 	EVP_PKEY *evp_key;	/* Pointer to EVP_PKEY object */
- 	EC_KEY *ecdsa_key;	/* Pointer to EC_KEY object */
- 	void *hash;		/* Pointer to hash used for verification */
--	void *signature;	/* Pointer to output signature. Do not free()!*/
-+	void *signature;	/* Pointer to raw signature buffer */
- };
- 
- struct ecdsa_public_key {
-@@ -50,11 +50,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
- 	if (!key->curve_name)
- 		return -ENOMSG;
- 
--	if (!strcmp(key->curve_name, "prime256v1"))
--		key->size_bits = 256;
--	else if (!strcmp(key->curve_name, "secp384r1"))
--		key->size_bits = 384;
--	else
-+	key->size_bits = ecdsa_curve_size(key->curve_name);
-+	if (!key->size_bits)
- 		return -EINVAL;
- 
- 	key->x = fdt_getprop(fdt, node, "ecdsa,x-point", &x_len);
-@@ -63,7 +60,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
- 	if (!key->x || !key->y)
- 		return -EINVAL;
- 
--	if (x_len != key->size_bits / 8 || y_len != key->size_bits / 8)
-+	if (x_len != (key->size_bits + 7) / 8 ||
-+	    y_len != (key->size_bits + 7) / 8)
- 		return -EINVAL;
- 
- 	return 0;
-@@ -85,18 +83,12 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
- 		return ret;
- 	}
- 
--	if (!strcmp(pubkey.curve_name, "prime256v1")) {
--		nid = NID_X9_62_prime256v1;
--	} else if (!strcmp(pubkey.curve_name, "secp384r1")) {
--		nid = NID_secp384r1;
--	} else {
-+	nid = OBJ_sn2nid(pubkey.curve_name);
-+	if (nid == NID_undef) {
- 		fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.curve_name);
- 		return -EINVAL;
- 	}
- 
--	fprintf(stderr, "Loading ECDSA key: curve=%s, bits=%d\n", pubkey.curve_name,
--		pubkey.size_bits);
--
- 	ec_key = EC_KEY_new_by_curve_name(nid);
- 	if (!ec_key) {
- 		fprintf(stderr, "Failed to allocate EC_KEY for curve %s\n", pubkey.curve_name);
-@@ -111,7 +103,7 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
- 		return -ENOMEM;
- 	}
- 
--	len = pubkey.size_bits / 8;
-+	len = (pubkey.size_bits + 7) / 8;
- 
- 	uint8_t buf[1 + len * 2];
- 
-@@ -133,14 +125,13 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
- 		return -EINVAL;
- 	}
- 
--	fprintf(stderr, "Successfully loaded ECDSA key from FDT node %d\n", node);
- 	EC_POINT_free(point);
- 	ctx->ecdsa_key = ec_key;
- 
- 	return 0;
- }
- 
--static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
-+static int init_ctx(struct signer *ctx)
- {
- 	memset(ctx, 0, sizeof(*ctx));
- 
-@@ -149,11 +140,21 @@ static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
- 		return -1;
- 	}
- 
-+	return 0;
++static bool sunxi_aes_ranges_overlap(const u8 *src, const u8 *dst, size_t len)
++{
++	uintptr_t src_start = (uintptr_t)src;
++	uintptr_t dst_start = (uintptr_t)dst;
++	uintptr_t src_end = src_start + len;
++	uintptr_t dst_end = dst_start + len;
++
++	return src_start < dst_end && dst_start < src_end;
 +}
 +
-+static int alloc_sig_ctx(struct signer *ctx, const struct image_sign_info *info)
++static u32 sunxi_aes_direct_blocks(const u8 *src, const u8 *dst,
++				   u32 num_blocks)
 +{
- 	ctx->hash = malloc(info->checksum->checksum_len);
- 	ctx->signature = malloc(info->crypto->key_len * 2);
- 
--	if (!ctx->hash || !ctx->signature)
-+	if (!ctx->hash || !ctx->signature) {
-+		free(ctx->hash);
-+		free(ctx->signature);
-+		ctx->hash = NULL;
-+		ctx->signature = NULL;
- 		return -ENOMEM;
-+	}
- 
- 	return 0;
- }
-@@ -166,8 +167,8 @@ static void free_ctx(struct signer *ctx)
- 	if (ctx->evp_key)
- 		EVP_PKEY_free(ctx->evp_key);
- 
--	if (ctx->hash)
--		free(ctx->hash);
-+	free(ctx->hash);
-+	free(ctx->signature);
- }
- 
- /*
-@@ -203,7 +204,12 @@ static ECDSA_SIG *ecdsa_sig_from_raw(void *buf, size_t order)
- 	s_buf = (uintptr_t)buf + point_bytes;
- 	r = BN_bin2bn(buf, point_bytes, NULL);
- 	s = BN_bin2bn((void *)s_buf, point_bytes, NULL);
--	ECDSA_SIG_set0(sig, r, s);
-+	if (!r || !s || !ECDSA_SIG_set0(sig, r, s)) {
-+		BN_free(r);
-+		BN_free(s);
-+		ECDSA_SIG_free(sig);
-+		return NULL;
-+	}
- 
- 	return sig;
- }
-@@ -271,10 +277,6 @@ static int load_key_from_fdt(struct signer *ctx, const struct image_sign_info *i
- 	if (!fdt)
- 		return -EINVAL;
- 
--	ret = alloc_ctx(ctx, info);
--	if (ret)
--		return ret;
--
- 	sig_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
- 	if (sig_node < 0) {
- 		fprintf(stderr, "No /signature node found\n");
-@@ -331,7 +333,9 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
- 	int key_len_bytes, ret;
- 	char kname[1024];
- 
--	memset(ctx, 0, sizeof(*ctx));
-+	ret = init_ctx(ctx);
-+	if (ret)
-+		return ret;
- 
- 	if (info->fdt_blob) {
- 		return load_key_from_fdt(ctx, info);
-@@ -345,10 +349,6 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
- 		return -EINVAL;
- 	}
- 
--	ret = alloc_ctx(ctx, info);
--	if (ret)
--		return ret;
--
- 	ret = read_key(ctx, kname);
- 	if (ret)
- 		return ret;
-@@ -368,11 +368,18 @@ static int do_sign(struct signer *ctx, struct image_sign_info *info,
- {
- 	const struct checksum_algo *algo = info->checksum;
- 	ECDSA_SIG *sig;
-+	int ret;
++	u32 len = min_t(u32, num_blocks * AES_BLOCK_LENGTH,
++			SUNXI_CE_AES_DIRECT_CHUNK_SIZE);
 +
-+	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
-+	if (ret)
-+		return ret;
- 
--	algo->calculate(algo->name, region, region_count, ctx->hash);
- 	sig = ECDSA_do_sign(ctx->hash, algo->checksum_len, ctx->ecdsa_key);
-+	if (!sig)
-+		return -EIO;
- 
- 	ecdsa_sig_encode_raw(ctx->signature, sig, info->crypto->key_len);
-+	ECDSA_SIG_free(sig);
- 
- 	return 0;
- }
-@@ -389,10 +396,16 @@ static int ecdsa_check_signature(struct signer *ctx, struct image_sign_info *inf
- 	okay = ECDSA_do_verify(ctx->hash, info->checksum->checksum_len,
- 			       sig, ctx->ecdsa_key);
- 	if (!okay)
--		fprintf(stderr, "WARNING: Signature is fake news!\n");
-+		fprintf(stderr, "WARNING: ECDSA signature verification failed\n");
-+	else if (okay < 0)
-+		fprintf(stderr, "ERROR: ECDSA signature verification failed\n");
- 
- 	ECDSA_SIG_free(sig);
--	return !okay;
-+
-+	if (okay == 1)
++	if (!IS_ALIGNED((uintptr_t)src, ARCH_DMA_MINALIGN) ||
++	    !IS_ALIGNED((uintptr_t)dst, ARCH_DMA_MINALIGN))
 +		return 0;
 +
-+	return okay < 0 ? -EIO : -EPERM;
- }
- 
- static int do_verify(struct signer *ctx, struct image_sign_info *info,
-@@ -400,6 +413,7 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
- 		     uint8_t *raw_sig, uint sig_len)
- {
- 	const struct checksum_algo *algo = info->checksum;
++	return ALIGN_DOWN(len, ARCH_DMA_MINALIGN) / AES_BLOCK_LENGTH;
++}
++
++static u32 sunxi_aes_bounce_blocks(const u8 *dst, u32 num_blocks)
++{
++	uintptr_t dst_addr = (uintptr_t)dst;
++	u32 blocks = min_t(u32, num_blocks, SUNXI_CE_AES_BOUNCE_CHUNK_BLOCKS);
++	u32 head;
++
++	if (!IS_ALIGNED(dst_addr, AES_BLOCK_LENGTH))
++		return blocks;
++
++	head = ALIGN(dst_addr, ARCH_DMA_MINALIGN) - dst_addr;
++	if (head)
++		blocks = min_t(u32, blocks, head / AES_BLOCK_LENGTH);
++
++	return blocks;
++}
++
++static void sunxi_aes_fill_task(struct sunxi_ce_priv *ce,
++				struct sunxi_ce_task *task,
++				dma_addr_t key, dma_addr_t iv,
++				dma_addr_t src, dma_addr_t dst,
++				u32 len, u32 comm_ctl, u32 sym_ctl)
++{
++	u32 task_len = len / sizeof(u32);
++
++	memset(task, 0, sizeof(*task));
++
++	task->t_id = SUNXI_CE_CHAN;
++	task->t_common_ctl = comm_ctl | SUNXI_CE_COMM_INT;
++	task->t_sym_ctl = sym_ctl;
++	task->t_key = sunxi_ce_desc_dma_addr(ce, key);
++	if (iv)
++		task->t_iv = sunxi_ce_desc_dma_addr(ce, iv);
++	task->t_dlen = ce->variant->cipher_t_dlen_in_bytes ? len : task_len;
++	task->t_src[0].addr = sunxi_ce_desc_dma_addr(ce, src);
++	task->t_src[0].len = task_len;
++	task->t_dst[0].addr = sunxi_ce_desc_dma_addr(ce, dst);
++	task->t_dst[0].len = task_len;
++}
++
++static void sunxi_aes_update_iv(u8 *iv_work, u8 *src, u8 *dst, u32 len,
++				bool decrypt)
++{
++	if (decrypt)
++		memcpy(iv_work, src + len - AES_BLOCK_LENGTH,
++		       AES_BLOCK_LENGTH);
++	else
++		memcpy(iv_work, dst + len - AES_BLOCK_LENGTH,
++		       AES_BLOCK_LENGTH);
++}
++
++static int sunxi_aes_run_hw(struct sunxi_ce_priv *ce,
++			    struct sunxi_ce_task *task, void *key,
++			    u8 *iv, u8 *src, u8 *dst, u32 num_blocks,
++			    u32 comm_ctl, u32 sym_ctl)
++{
++	u8 iv_work[AES_BLOCK_LENGTH];
++	u8 iv_next[AES_BLOCK_LENGTH];
++	u8 *iv_buf = NULL, *src_buf = NULL, *dst_buf = NULL;
++	dma_addr_t key_dma;
++	bool cbc = iv;
++	bool decrypt = comm_ctl & SUNXI_CE_DECRYPTION;
 +	int ret;
- 
- 	if (sig_len != info->crypto->key_len * 2) {
- 		fprintf(stderr, "Signature has wrong length\n");
-@@ -407,7 +421,9 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
- 	}
- 
- 	memcpy(ctx->signature, raw_sig, sig_len);
--	algo->calculate(algo->name, region, region_count, ctx->hash);
-+	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
-+	if (ret)
-+		return ret;
- 
- 	return ecdsa_check_signature(ctx, info);
- }
-@@ -420,11 +436,16 @@ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
- 
- 	ret = prepare_ctx(&ctx, info);
- 	if (ret >= 0) {
--		do_sign(&ctx, info, region, region_count);
--		*sigp = ctx.signature;
--		*sig_len = info->crypto->key_len * 2;
--
--		ret = ecdsa_check_signature(&ctx, info);
-+		ret = alloc_sig_ctx(&ctx, info);
-+		if (!ret)
-+			ret = do_sign(&ctx, info, region, region_count);
-+		if (!ret)
-+			ret = ecdsa_check_signature(&ctx, info);
-+		if (!ret) {
-+			*sigp = ctx.signature;
-+			*sig_len = info->crypto->key_len * 2;
-+			ctx.signature = NULL;
++
++	if (cbc) {
++		iv_buf = memalign(ARCH_DMA_MINALIGN, ARCH_DMA_MINALIGN);
++		if (!iv_buf) {
++			ret = -ENOMEM;
++			goto out_free;
 +		}
- 	}
- 
- 	free_ctx(&ctx);
-@@ -439,8 +460,12 @@ int ecdsa_verify(struct image_sign_info *info,
- 	int ret;
- 
- 	ret = prepare_ctx(&ctx, info);
--	if (ret >= 0)
--		ret = do_verify(&ctx, info, region, region_count, sig, sig_len);
-+	if (ret >= 0) {
-+		ret = alloc_sig_ctx(&ctx, info);
-+		if (!ret)
-+			ret = do_verify(&ctx, info, region, region_count,
-+					sig, sig_len);
 +	}
- 
- 	free_ctx(&ctx);
- 	return ret;
-@@ -453,7 +478,7 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
- 	const char *curve_name;
- 	const EC_GROUP *group;
- 	const EC_POINT *point;
--	BIGNUM *x, *y;
-+	BIGNUM *x = NULL, *y = NULL;
- 
- 	signature_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
- 	if (signature_node == -FDT_ERR_NOTFOUND) {
-@@ -491,42 +516,54 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
- 	group = EC_KEY_get0_group(ctx->ecdsa_key);
- 	key_bits = EC_GROUP_order_bits(group);
- 	curve_name = OBJ_nid2sn(EC_GROUP_get_curve_name(group));
--	/* Let 'x' and 'y' memory leak by not BN_free()'ing them. */
- 	x = BN_new();
- 	y = BN_new();
-+	if (!x || !y) {
++
++	if (cbc)
++		memcpy(iv_work, iv, AES_BLOCK_LENGTH);
++
++	key_dma = dma_map_single(key, ARCH_DMA_MINALIGN, DMA_TO_DEVICE);
++	if (dma_mapping_error(NULL, key_dma)) {
++		ret = -EIO;
++		goto out_free;
++	}
++
++	while (num_blocks) {
++		u32 blocks = sunxi_aes_direct_blocks(src, dst, num_blocks);
++		bool direct = blocks > 0;
++		bool in_place = direct && src == dst;
++		enum dma_data_direction src_dir = in_place ? DMA_BIDIRECTIONAL :
++							  DMA_TO_DEVICE;
++		u32 len = blocks * AES_BLOCK_LENGTH;
++		u8 *src_dma_buf = direct ? src : src_buf;
++		u8 *dst_dma_buf = direct ? dst : dst_buf;
++		dma_addr_t iv_dma = 0, src_dma, dst_dma;
++
++		if (!direct) {
++			if (!src_buf) {
++				src_buf = memalign(ARCH_DMA_MINALIGN,
++						   SUNXI_CE_AES_BOUNCE_CHUNK_SIZE);
++				dst_buf = memalign(ARCH_DMA_MINALIGN,
++						   SUNXI_CE_AES_BOUNCE_CHUNK_SIZE);
++				if (!src_buf || !dst_buf) {
++					ret = -ENOMEM;
++					goto out_unmap_key;
++				}
++			}
++			blocks = sunxi_aes_bounce_blocks(dst, num_blocks);
++			len = blocks * AES_BLOCK_LENGTH;
++			src_dma_buf = src_buf;
++			dst_dma_buf = dst_buf;
++			memcpy(src_buf, src, len);
++		}
++		if (cbc && decrypt && in_place)
++			memcpy(iv_next, src_dma_buf + len - AES_BLOCK_LENGTH,
++			       AES_BLOCK_LENGTH);
++		if (cbc) {
++			memset(iv_buf, 0, ARCH_DMA_MINALIGN);
++			memcpy(iv_buf, iv_work, AES_BLOCK_LENGTH);
++			iv_dma = dma_map_single(iv_buf, ARCH_DMA_MINALIGN,
++						DMA_TO_DEVICE);
++			if (dma_mapping_error(NULL, iv_dma)) {
++				ret = -EIO;
++				goto out_unmap_key;
++			}
++		}
++
++		src_dma = dma_map_single(src_dma_buf, len, src_dir);
++		if (dma_mapping_error(NULL, src_dma)) {
++			ret = -EIO;
++			goto out_unmap_iv;
++		}
++
++		if (in_place) {
++			dst_dma = src_dma;
++		} else {
++			dst_dma = dma_map_single(dst_dma_buf, len,
++						 DMA_FROM_DEVICE);
++			if (dma_mapping_error(NULL, dst_dma)) {
++				ret = -EIO;
++				goto out_unmap_src;
++			}
++		}
++
++		sunxi_aes_fill_task(ce, task, key_dma, iv_dma, src_dma,
++				    dst_dma, len, comm_ctl, sym_ctl);
++		sunxi_ce_flush(task, sizeof(*task));
++
++		ret = sunxi_ce_run_task(ce, task);
++
++		if (!in_place)
++			dma_unmap_single(dst_dma, len, DMA_FROM_DEVICE);
++out_unmap_src:
++		dma_unmap_single(src_dma, len, src_dir);
++out_unmap_iv:
++		if (cbc)
++			dma_unmap_single(iv_dma, ARCH_DMA_MINALIGN,
++					 DMA_TO_DEVICE);
++		if (ret)
++			goto out_unmap_key;
++
++		if (cbc) {
++			if (decrypt && in_place)
++				memcpy(iv_work, iv_next, AES_BLOCK_LENGTH);
++			else
++				sunxi_aes_update_iv(iv_work, src_dma_buf,
++						    dst_dma_buf, len, decrypt);
++		}
++		if (!direct)
++			memcpy(dst, dst_buf, len);
++		num_blocks -= blocks;
++		src += len;
++		dst += len;
++	}
++
++	ret = 0;
++
++out_unmap_key:
++	dma_unmap_single(key_dma, ARCH_DMA_MINALIGN, DMA_TO_DEVICE);
++out_free:
++	free(iv_buf);
++	free(dst_buf);
++	free(src_buf);
++
++	return ret;
++}
++
++static int sunxi_aes_run(struct udevice *dev, u8 *iv, u8 *src, u8 *dst,
++			 u32 num_blocks, u32 aes_mode, bool decrypt)
++{
++	struct sunxi_aes_priv *priv = dev_get_priv(dev);
++	struct sunxi_ce_priv *ce = dev_get_priv(dev_get_parent(dev));
++	struct sunxi_ce_task *tasks;
++	u8 *key_buf;
++	u32 comm_ctl, sym_ctl;
++	bool cbc = aes_mode == SUNXI_CE_OP_CBC;
++	size_t total_len;
++	int ret;
++
++	if (!priv->key_bits)
++		return -EINVAL;
++	if (!num_blocks)
++		return 0;
++	if (!src || !dst)
++		return -EINVAL;
++	if (cbc && !iv)
++		return -EINVAL;
++	total_len = (size_t)num_blocks * AES_BLOCK_LENGTH;
++
++	/*
++	 * Exact in-place operation is supported, but chunked bounce processing
++	 * does not provide memmove-style semantics for partial overlaps.
++	 */
++	if (src != dst && sunxi_aes_ranges_overlap(src, dst, total_len))
++		return -EINVAL;
++
++	tasks = memalign(ARCH_DMA_MINALIGN,
++			 ALIGN(sizeof(*tasks), ARCH_DMA_MINALIGN));
++	key_buf = memalign(ARCH_DMA_MINALIGN, ARCH_DMA_MINALIGN);
++	if (!tasks || !key_buf) {
 +		ret = -ENOMEM;
 +		goto out;
 +	}
 +
- 	point = EC_KEY_get0_public_key(ctx->ecdsa_key);
--	EC_POINT_get_affine_coordinates(group, point, x, y, NULL);
-+	if (!EC_POINT_get_affine_coordinates(group, point, x, y, NULL)) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
- 
- 	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_HINT,
- 				 info->keyname);
- 	if (ret < 0)
--		return ret;
-+		goto out;
- 
- 	ret = fdt_setprop_string(fdt, key_node, "ecdsa,curve", curve_name);
- 	if (ret < 0)
--		return ret;
-+		goto out;
- 
- 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,x-point", x, key_bits);
- 	if (ret < 0)
--		return ret;
-+		goto out;
- 
- 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,y-point", y, key_bits);
- 	if (ret < 0)
--		return ret;
-+		goto out;
- 
- 	ret = fdt_setprop_string(fdt, key_node, FIT_ALGO_PROP,
- 				 info->name);
- 	if (ret < 0)
--		return ret;
-+		goto out;
- 
- 	if (info->require_keys) {
- 		ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
- 					 info->require_keys);
- 		if (ret < 0)
--			return ret;
-+			goto out;
- 	}
- 
--	return key_node;
-+	ret = key_node;
++	memset(key_buf, 0, ARCH_DMA_MINALIGN);
++	memcpy(key_buf, priv->key, priv->key_bits / 8);
++
++	comm_ctl = decrypt ? SUNXI_CE_DECRYPTION : SUNXI_CE_ENCRYPTION;
++	sym_ctl = priv->ce_key_size |
++		  aes_mode |
++		  (SUNXI_CE_KEY_SELECT_INPUT << SUNXI_CE_KEY_SELECT_SHIFT);
++
++	ret = sunxi_aes_run_hw(ce, tasks, key_buf, iv, src, dst, num_blocks,
++			       comm_ctl, sym_ctl);
 +
 +out:
-+	BN_free(x);
-+	BN_free(y);
++	free(key_buf);
++	free(tasks);
++
 +	return ret;
- }
- 
- int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
-diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
-index 629b662cf6c..8570d35028f 100644
---- a/lib/ecdsa/ecdsa-verify.c
-+++ b/lib/ecdsa/ecdsa-verify.c
-@@ -12,22 +12,6 @@
- #include <dm/uclass.h>
- #include <u-boot/ecdsa.h>
- 
--/*
-- * Derive size of an ECDSA key from the curve name
-- *
-- * While it's possible to extract the key size by using string manipulation,
-- * use a list of known curves for the time being.
-- */
--static int ecdsa_key_size(const char *curve_name)
--{
--	if (!strcmp(curve_name, "prime256v1"))
--		return 256;
--	else if (!strcmp(curve_name, "secp384r1"))
--		return 384;
--
--	return 0;
--}
--
- static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
- {
- 	int x_len, y_len;
-@@ -38,9 +22,9 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
- 		return -ENOMSG;
- 	}
- 
--	key->size_bits = ecdsa_key_size(key->curve_name);
-+	key->size_bits = ecdsa_curve_size(key->curve_name);
- 	if (key->size_bits == 0) {
--		debug("Unknown ECDSA curve '%s'", key->curve_name);
-+		debug("Unknown ECDSA curve '%s'\n", key->curve_name);
- 		return -EINVAL;
- 	}
- 
-@@ -50,9 +34,10 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
- 	if (!key->x || !key->y)
- 		return -EINVAL;
- 
--	if (x_len != (key->size_bits / 8) || y_len != (key->size_bits / 8)) {
--		printf("%s: node=%d, curve@%p x@%p+%i y@%p+%i\n", __func__,
--		       node, key->curve_name, key->x, x_len, key->y, y_len);
-+	if (x_len != (key->size_bits + 7) / 8 ||
-+	    y_len != (key->size_bits + 7) / 8) {
-+		debug("%s: node=%d, curve@%p x@%p+%i y@%p+%i\n", __func__,
-+		      node, key->curve_name, key->x, x_len, key->y, y_len);
- 		return -EINVAL;
- 	}
- 
-@@ -123,6 +108,12 @@ int ecdsa_verify(struct image_sign_info *info,
- 	return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
- }
- 
-+U_BOOT_CRYPTO_ALGO(ecdsa224) = {
-+	.name = "ecdsa224",
-+	.key_len = ECDSA224_BYTES,
-+	.verify = ecdsa_verify,
++}
++
++static int sunxi_aes_available_key_slots(struct udevice *dev)
++{
++	return 1;
++}
++
++static int sunxi_aes_select_key_slot(struct udevice *dev, u32 key_size,
++				     u8 slot)
++{
++	struct sunxi_aes_priv *priv = dev_get_priv(dev);
++	u32 ce_key_size;
++	int ret;
++
++	if (slot)
++		return -EINVAL;
++
++	ret = sunxi_ce_key_size(key_size, &ce_key_size);
++	if (ret)
++		return ret;
++
++	priv->key_bits = key_size;
++	priv->ce_key_size = ce_key_size;
++
++	return 0;
++}
++
++static int sunxi_aes_set_key_for_key_slot(struct udevice *dev, u32 key_size,
++					  u8 *key, u8 slot)
++{
++	struct sunxi_aes_priv *priv = dev_get_priv(dev);
++	u32 ce_key_size;
++	int ret;
++
++	if (slot || !key)
++		return -EINVAL;
++
++	ret = sunxi_ce_key_size(key_size, &ce_key_size);
++	if (ret)
++		return ret;
++
++	memcpy(priv->key, key, key_size / 8);
++	priv->key_bits = key_size;
++	priv->ce_key_size = ce_key_size;
++
++	return 0;
++}
++
++static int sunxi_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst,
++				 u32 num_blocks)
++{
++	return sunxi_aes_run(dev, NULL, src, dst, num_blocks,
++			     SUNXI_CE_OP_ECB, false);
++}
++
++static int sunxi_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst,
++				 u32 num_blocks)
++{
++	return sunxi_aes_run(dev, NULL, src, dst, num_blocks,
++			     SUNXI_CE_OP_ECB, true);
++}
++
++static int sunxi_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src,
++				 u8 *dst, u32 num_blocks)
++{
++	return sunxi_aes_run(dev, iv, src, dst, num_blocks,
++			     SUNXI_CE_OP_CBC, false);
++}
++
++static int sunxi_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
++				 u8 *dst, u32 num_blocks)
++{
++	return sunxi_aes_run(dev, iv, src, dst, num_blocks,
++			     SUNXI_CE_OP_CBC, true);
++}
++
++static const struct aes_ops sunxi_aes_ops = {
++	.available_key_slots = sunxi_aes_available_key_slots,
++	.select_key_slot = sunxi_aes_select_key_slot,
++	.set_key_for_key_slot = sunxi_aes_set_key_for_key_slot,
++	.aes_ecb_encrypt = sunxi_aes_ecb_encrypt,
++	.aes_ecb_decrypt = sunxi_aes_ecb_decrypt,
++	.aes_cbc_encrypt = sunxi_aes_cbc_encrypt,
++	.aes_cbc_decrypt = sunxi_aes_cbc_decrypt,
 +};
 +
- U_BOOT_CRYPTO_ALGO(ecdsa256) = {
- 	.name = "ecdsa256",
- 	.key_len = ECDSA256_BYTES,
-@@ -135,6 +126,12 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) = {
- 	.verify = ecdsa_verify,
- };
- 
-+U_BOOT_CRYPTO_ALGO(secp521r1) = {
-+	.name = "secp521r1",
-+	.key_len = ECDSA521_BYTES,
-+	.verify = ecdsa_verify,
++U_BOOT_DRIVER(sun8i_ce_aes) = {
++	.name = "sun8i-ce-aes",
++	.id = UCLASS_AES,
++	.ops = &sunxi_aes_ops,
++	.priv_auto = sizeof(struct sunxi_aes_priv),
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
+new file mode 100644
+index 00000000000..3674e54ec12
+--- /dev/null
++++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
+@@ -0,0 +1,375 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 James Hilliard
++ */
++
++#include <cpu_func.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/lists.h>
++#include <asm/arch/cpu.h>
++#include <asm/cache.h>
++#include <asm/io.h>
++#include <linux/delay.h>
++#include <linux/iopoll.h>
++#include "sun8i-ce.h"
++
++#define SUNXI_CE_TDQ			0x00
++#define SUNXI_CE_ICR			0x08
++#define SUNXI_CE_ISR			0x0c
++#define SUNXI_CE_TLR			0x10
++#define SUNXI_CE_ESR			0x18
++#define SUNXI_CE_SCSA			0x24
++#define SUNXI_CE_SCDA			0x28
++
++#define SUNXI_CE_CHAN_ERR_MASK		(0xff << (SUNXI_CE_CHAN * 8))
++#define SUNXI_CE_ERR_ALGO_NOTSUP	BIT(0)
++#define SUNXI_CE_ERR_DATALEN		BIT(1)
++#define SUNXI_CE_ERR_KEYSRAM		BIT(2)
++#define SUNXI_CE_ERR_ADDR_INVALID	BIT(5)
++#define SUNXI_CE_ERR_KEYLADDER		BIT(6)
++#define SUNXI_CE_TASK_START		BIT(0)
++#define SUNXI_CE_METHOD_MASK		GENMASK(6, 0)
++#define SUNXI_CE_TLR_METHOD_SHIFT	8
++#define SUNXI_CE_WORD_SHIFT		2
++#define SUNXI_CE_TIMEOUT_US		3000000
++
++#define SUN50I_H6_CCU_CE_CLK		0x680
++#define SUN50I_H6_CCU_CE_BGR		0x68c
++#define SUN50I_H6_CCU_MBUS_GATE		0x804
++#define SUN50I_H6_CCU_CE_CLK_SRC_MASK	BIT(24)
++#define SUN50I_H6_CCU_CE_CLK_N_MASK	GENMASK(9, 8)
++#define SUN50I_H6_CCU_CE_CLK_M_MASK	GENMASK(3, 0)
++#define SUN50I_H6_CCU_CE_CLK_GATE	BIT(31)
++#define SUN50I_H6_CCU_CE_BUS_GATE	BIT(0)
++#define SUN50I_H6_CCU_CE_BUS_RST	BIT(16)
++#define SUN50I_H6_CCU_MBUS_GATE_CE	BIT(2)
++#define SUN50I_H616_CCU_CE_CLK_M	7
++
++u32 sunxi_ce_desc_dma_addr(struct sunxi_ce_priv *priv, dma_addr_t addr)
++{
++	if (priv->variant->needs_word_addresses)
++		addr >>= SUNXI_CE_WORD_SHIFT;
++
++	return (u32)addr;
++}
++
++void sunxi_ce_flush(void *buf, size_t len)
++{
++	ulong start = ALIGN_DOWN((ulong)buf, ARCH_DMA_MINALIGN);
++	ulong end = ALIGN((ulong)buf + len, ARCH_DMA_MINALIGN);
++
++	flush_dcache_range(start, end);
++}
++
++static void sunxi_ce_print_error(u32 err)
++{
++	printf("CE ERROR: %#x\n", err);
++	if (err & SUNXI_CE_ERR_ALGO_NOTSUP)
++		printf("CE ERROR: algorithm not supported\n");
++	if (err & SUNXI_CE_ERR_DATALEN)
++		printf("CE ERROR: data length error\n");
++	if (err & SUNXI_CE_ERR_KEYSRAM)
++		printf("CE ERROR: keysram access error for AES\n");
++	if (err & SUNXI_CE_ERR_ADDR_INVALID)
++		printf("CE ERROR: address invalid\n");
++	if (err & SUNXI_CE_ERR_KEYLADDER)
++		printf("CE ERROR: key ladder configuration error\n");
++}
++
++int sunxi_ce_run_task(struct sunxi_ce_priv *priv, struct sunxi_ce_task *task)
++{
++	u32 method = task->t_common_ctl & SUNXI_CE_METHOD_MASK;
++	u32 val, err;
++	int ret;
++
++	val = readl(priv->base + SUNXI_CE_ICR);
++	writel(val | SUNXI_CE_CHAN_INT, priv->base + SUNXI_CE_ICR);
++	writel(SUNXI_CE_CHAN_INT, priv->base + SUNXI_CE_ISR);
++	writel(SUNXI_CE_CHAN_ERR_MASK, priv->base + SUNXI_CE_ESR);
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_ISR, val,
++				 !(val & SUNXI_CE_CHAN_INT),
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: timeout waiting for stale interrupt\n", __func__);
++		return ret;
++	}
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_TLR, val, !val,
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: timeout waiting for task launcher\n", __func__);
++		return ret;
++	}
++
++	writel(sunxi_ce_desc_dma_addr(priv, virt_to_phys(task)),
++	       priv->base + SUNXI_CE_TDQ);
++	/* Be sure all data is written before enabling the task. */
++	wmb();
++	writel((method << SUNXI_CE_TLR_METHOD_SHIFT) | SUNXI_CE_TASK_START,
++	       priv->base + SUNXI_CE_TLR);
++
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_ISR, val,
++				 val & SUNXI_CE_CHAN_INT,
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: DMA timeout\n", __func__);
++		writel(SUNXI_CE_CHAN_INT, priv->base + SUNXI_CE_ISR);
++		writel(SUNXI_CE_CHAN_ERR_MASK, priv->base + SUNXI_CE_ESR);
++		return ret;
++	}
++
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_SCSA, val, !val,
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: timeout waiting for source DMA idle\n", __func__);
++		return ret;
++	}
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_SCDA, val, !val,
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: timeout waiting for destination DMA idle\n",
++		       __func__);
++		return ret;
++	}
++
++	writel(0, priv->base + SUNXI_CE_TLR);
++	clrbits_le32(priv->base + SUNXI_CE_ICR, SUNXI_CE_CHAN_INT);
++	writel(0, priv->base + SUNXI_CE_TDQ);
++	ret = readl_poll_timeout(priv->base + SUNXI_CE_TLR, val, !val,
++				 SUNXI_CE_TIMEOUT_US);
++	if (ret) {
++		printf("%s: timeout clearing task launcher\n", __func__);
++		return ret;
++	}
++	readl(priv->base + SUNXI_CE_TDQ);
++
++	err = readl(priv->base + SUNXI_CE_ESR) & SUNXI_CE_CHAN_ERR_MASK;
++	writel(SUNXI_CE_CHAN_ERR_MASK, priv->base + SUNXI_CE_ESR);
++
++	if (err) {
++		sunxi_ce_print_error(err >> (SUNXI_CE_CHAN * 8));
++		return -EIO;
++	}
++
++	return 0;
++}
++
++int sunxi_ce_reset(struct sunxi_ce_priv *priv)
++{
++	int ret;
++
++	if (IS_ENABLED(CONFIG_XPL_BUILD)) {
++		if (!priv->variant->spl_reset)
++			return -EOPNOTSUPP;
++
++		priv->variant->spl_reset();
++		return 0;
++	}
++
++	ret = reset_assert_bulk(&priv->resets);
++	if (ret)
++		return ret;
++
++	udelay(1);
++
++	ret = reset_deassert_bulk(&priv->resets);
++	if (ret)
++		return ret;
++
++	udelay(10);
++
++	return 0;
++}
++
++static void sun50i_h6_ce_spl_reset(void)
++{
++	void __iomem *ccu = (void __iomem *)SUNXI_CCM_BASE;
++
++	clrbits_le32(ccu + SUN50I_H6_CCU_CE_BGR,
++		     SUN50I_H6_CCU_CE_BUS_RST);
++	udelay(1);
++	setbits_le32(ccu + SUN50I_H6_CCU_CE_BGR,
++		     SUN50I_H6_CCU_CE_BUS_RST);
++	udelay(10);
++}
++
++static void sun50i_h6_ce_spl_enable_clocks(void)
++{
++	void __iomem *ccu = (void __iomem *)SUNXI_CCM_BASE;
++
++	clrsetbits_le32(ccu + SUN50I_H6_CCU_CE_CLK,
++			SUN50I_H6_CCU_CE_CLK_SRC_MASK |
++			SUN50I_H6_CCU_CE_CLK_N_MASK |
++			SUN50I_H6_CCU_CE_CLK_M_MASK,
++			SUN50I_H6_CCU_CE_CLK_GATE);
++	setbits_le32(ccu + SUN50I_H6_CCU_CE_BGR,
++		     SUN50I_H6_CCU_CE_BUS_GATE |
++		     SUN50I_H6_CCU_CE_BUS_RST);
++	setbits_le32(ccu + SUN50I_H6_CCU_MBUS_GATE,
++		     SUN50I_H6_CCU_MBUS_GATE_CE);
++	sun50i_h6_ce_spl_reset();
++}
++
++static void sun50i_h616_ce_setup_mod_clock(void)
++{
++	void __iomem *ccu = (void __iomem *)SUNXI_CCM_BASE;
++
++	clrsetbits_le32(ccu + SUN50I_H6_CCU_CE_CLK,
++			SUN50I_H6_CCU_CE_CLK_GATE |
++			SUN50I_H6_CCU_CE_CLK_SRC_MASK |
++			SUN50I_H6_CCU_CE_CLK_N_MASK |
++			SUN50I_H6_CCU_CE_CLK_M_MASK,
++			SUN50I_H6_CCU_CE_CLK_SRC_MASK |
++			SUN50I_H616_CCU_CE_CLK_M);
++}
++
++static void sun50i_h616_ce_spl_enable_clocks(void)
++{
++	void __iomem *ccu = (void __iomem *)SUNXI_CCM_BASE;
++
++	sun50i_h616_ce_setup_mod_clock();
++	setbits_le32(ccu + SUN50I_H6_CCU_CE_BGR,
++		     SUN50I_H6_CCU_CE_BUS_RST);
++	setbits_le32(ccu + SUN50I_H6_CCU_CE_BGR,
++		     SUN50I_H6_CCU_CE_BUS_GATE);
++	setbits_le32(ccu + SUN50I_H6_CCU_CE_CLK,
++		     SUN50I_H6_CCU_CE_CLK_GATE);
++	setbits_le32(ccu + SUN50I_H6_CCU_MBUS_GATE,
++		     SUN50I_H6_CCU_MBUS_GATE_CE);
++	sun50i_h6_ce_spl_reset();
++}
++
++static int sunxi_ce_bind(struct udevice *dev)
++{
++	const struct sunxi_ce_variant *variant =
++		(const struct sunxi_ce_variant *)dev_get_driver_data(dev);
++	int ret;
++
++	if (CONFIG_IS_ENABLED(SUNXI_CE_AES) && variant->has_aes) {
++		ret = device_bind_driver(dev, "sun8i-ce-aes",
++					 "sun8i-ce-aes", NULL);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int sunxi_ce_probe(struct udevice *dev)
++{
++	struct sunxi_ce_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->variant = (const struct sunxi_ce_variant *)
++			dev_get_driver_data(dev);
++	priv->base = dev_read_addr_ptr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	if (IS_ENABLED(CONFIG_XPL_BUILD)) {
++		if (!priv->variant->spl_enable_clocks)
++			return -ENOSYS;
++
++		priv->variant->spl_enable_clocks();
++		return 0;
++	}
++
++	ret = reset_get_bulk(dev, &priv->resets);
++	if (ret) {
++		dev_err(dev, "failed to get resets: %d\n", ret);
++		return ret;
++	}
++
++	ret = clk_get_bulk(dev, &priv->clks);
++	if (ret) {
++		dev_err(dev, "failed to get clocks: %d\n", ret);
++		goto err_release_resets;
++	}
++
++	if (priv->variant->setup_mod_clock)
++		priv->variant->setup_mod_clock();
++
++	ret = reset_deassert_bulk(&priv->resets);
++	if (ret) {
++		dev_err(dev, "failed to deassert resets: %d\n", ret);
++		goto err_release_clks;
++	}
++
++	ret = clk_enable_bulk(&priv->clks);
++	if (ret) {
++		dev_err(dev, "failed to enable clocks: %d\n", ret);
++		goto err_assert_resets;
++	}
++
++	ret = sunxi_ce_reset(priv);
++	if (ret) {
++		dev_err(dev, "failed to reset CE: %d\n", ret);
++		goto err_disable_clks;
++	}
++
++	return 0;
++
++err_disable_clks:
++	clk_disable_bulk(&priv->clks);
++err_assert_resets:
++	reset_assert_bulk(&priv->resets);
++err_release_clks:
++	clk_release_bulk(&priv->clks);
++err_release_resets:
++	reset_release_bulk(&priv->resets);
++
++	return ret;
++}
++
++static int sunxi_ce_remove(struct udevice *dev)
++{
++	struct sunxi_ce_priv *priv = dev_get_priv(dev);
++
++	if (IS_ENABLED(CONFIG_XPL_BUILD))
++		return 0;
++
++	clk_disable_bulk(&priv->clks);
++	clk_release_bulk(&priv->clks);
++	reset_assert_bulk(&priv->resets);
++	reset_release_bulk(&priv->resets);
++
++	return 0;
++}
++
++static const struct sunxi_ce_variant sun50i_h6_variant = {
++	.has_aes = true,
++	.cipher_t_dlen_in_bytes = true,
++	.spl_enable_clocks = sun50i_h6_ce_spl_enable_clocks,
++	.spl_reset = sun50i_h6_ce_spl_reset,
 +};
 +
- /*
-  * uclass definition for ECDSA API
-  *
-diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
-index ecb0344c8f6..aec516cf15b 100644
---- a/lib/fdt-libcrypto.c
-+++ b/lib/fdt-libcrypto.c
-@@ -5,68 +5,35 @@
-  */
- 
- #include <libfdt.h>
-+#include <errno.h>
-+#include <stdio.h>
-+#include <stdlib.h>
- #include <u-boot/fdt-libcrypto.h>
- 
- int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
--		   BIGNUM *num, int num_bits)
-+		   const BIGNUM *num, int num_bits)
- {
--	int nwords = num_bits / 32;
--	int size;
--	uint32_t *buf, *ptr;
--	BIGNUM *tmp, *big2, *big32, *big2_32;
--	BN_CTX *ctx;
-+	int size = (num_bits + 7) / 8;
-+	unsigned char *buf;
- 	int ret;
- 
--	tmp = BN_new();
--	big2 = BN_new();
--	big32 = BN_new();
--	big2_32 = BN_new();
-+	if (size <= 0)
-+		return -EINVAL;
- 
--	/*
--	 * Note: This code assumes that all of the above succeed, or all fail.
--	 * In practice memory allocations generally do not fail (unless the
--	 * process is killed), so it does not seem worth handling each of these
--	 * as a separate case. Technicaly this could leak memory on failure,
--	 * but a) it won't happen in practice, and b) it doesn't matter as we
--	 * will immediately exit with a failure code.
--	 */
--	if (!tmp || !big2 || !big32 || !big2_32) {
--		fprintf(stderr, "Out of memory (bignum)\n");
--		return -ENOMEM;
--	}
--	ctx = BN_CTX_new();
--	if (!ctx) {
--		fprintf(stderr, "Out of memory (bignum context)\n");
--		return -ENOMEM;
--	}
--	BN_set_word(big2, 2L);
--	BN_set_word(big32, 32L);
--	BN_exp(big2_32, big2, big32, ctx); /* B = 2^32 */
--
--	size = nwords * sizeof(uint32_t);
- 	buf = malloc(size);
- 	if (!buf) {
- 		fprintf(stderr, "Out of memory (%d bytes)\n", size);
- 		return -ENOMEM;
- 	}
- 
--	/* Write out modulus as big endian array of integers */
--	for (ptr = buf + nwords - 1; ptr >= buf; ptr--) {
--		BN_mod(tmp, num, big2_32, ctx); /* n = N mod B */
--		*ptr = cpu_to_fdt32(BN_get_word(tmp));
--		BN_rshift(num, num, 32); /*  N = N/B */
-+	if (BN_bn2binpad(num, buf, size) != size) {
-+		free(buf);
-+		return -EINVAL;
- 	}
- 
--	/*
--	 * We try signing with successively increasing size values, so this
--	 * might fail several times
--	 */
-+	/* Callers may retry with a larger FDT if the property does not fit. */
- 	ret = fdt_setprop(blob, noffset, prop_name, buf, size);
- 	free(buf);
--	BN_free(tmp);
--	BN_free(big2);
--	BN_free(big32);
--	BN_free(big2_32);
- 
--	return ret ? -FDT_ERR_NOSPACE : 0;
-+	return ret;
- }
-diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-index 5285263c616..aeca83bd440 100644
---- a/tools/image-sig-host.c
-+++ b/tools/image-sig-host.c
-@@ -69,6 +69,13 @@ struct crypto_algo crypto_algos[] = {
- 		.add_verify_data = rsa_add_verify_data,
- 		.verify = rsa_verify,
- 	},
++static const struct sunxi_ce_variant sun50i_h616_variant = {
++	.has_aes = true,
++	.cipher_t_dlen_in_bytes = true,
++	.needs_word_addresses = true,
++	.setup_mod_clock = sun50i_h616_ce_setup_mod_clock,
++	.spl_enable_clocks = sun50i_h616_ce_spl_enable_clocks,
++	.spl_reset = sun50i_h6_ce_spl_reset,
++};
++
++static const struct udevice_id sunxi_ce_ids[] = {
 +	{
-+		.name = "ecdsa224",
-+		.key_len = ECDSA224_BYTES,
-+		.sign = ecdsa_sign,
-+		.add_verify_data = ecdsa_add_verify_data,
-+		.verify = ecdsa_verify,
++		.compatible = "allwinner,sun50i-h6-crypto",
++		.data = (ulong)&sun50i_h6_variant,
++	}, {
++		.compatible = "allwinner,sun50i-h616-crypto",
++		.data = (ulong)&sun50i_h616_variant,
 +	},
- 	{
- 		.name = "ecdsa256",
- 		.key_len = ECDSA256_BYTES,
++	{ }
++};
++
++U_BOOT_DRIVER(sun8i_ce) = {
++	.name = "sun8i-ce",
++	.id = UCLASS_NOP,
++	.of_match = sunxi_ce_ids,
++	.bind = sunxi_ce_bind,
++	.probe = sunxi_ce_probe,
++	.remove = sunxi_ce_remove,
++	.priv_auto = sizeof(struct sunxi_ce_priv),
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
+new file mode 100644
+index 00000000000..1580fff35fe
+--- /dev/null
++++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
+@@ -0,0 +1,61 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2026 James Hilliard
++ */
++
++#ifndef __SUN8I_CE_H
++#define __SUN8I_CE_H
++
++#include <clk.h>
++#include <reset.h>
++#include <linux/bitops.h>
++#include <linux/types.h>
++
++#define SUNXI_CE_CHAN			0
++#define SUNXI_CE_CHAN_INT		BIT(SUNXI_CE_CHAN)
++#define SUNXI_CE_COMM_INT		BIT(31)
++#define SUNXI_CE_METHOD_AES		0
++#define SUNXI_CE_MAX_SG			8
++
++struct sunxi_ce_sginfo {
++	u32 addr;
++	u32 len;
++};
++
++struct sunxi_ce_task {
++	u32 t_id;
++	u32 t_common_ctl;
++	u32 t_sym_ctl;
++	u32 t_asym_ctl;
++	u32 t_key;
++	u32 t_iv;
++	u32 t_ctr;
++	u32 t_dlen;
++	struct sunxi_ce_sginfo t_src[SUNXI_CE_MAX_SG];
++	struct sunxi_ce_sginfo t_dst[SUNXI_CE_MAX_SG];
++	u32 next;
++	u32 reserved[3];
++};
++
++struct sunxi_ce_variant {
++	bool has_aes;
++	bool cipher_t_dlen_in_bytes;
++	bool needs_word_addresses;
++	void (*setup_mod_clock)(void);
++	void (*spl_enable_clocks)(void);
++	void (*spl_reset)(void);
++};
++
++struct sunxi_ce_priv {
++	void __iomem *base;
++	const struct sunxi_ce_variant *variant;
++	struct clk_bulk clks;
++	struct reset_ctl_bulk resets;
++};
++
++u32 sunxi_ce_desc_dma_addr(struct sunxi_ce_priv *priv, dma_addr_t addr);
++void sunxi_ce_flush(void *buf, size_t len);
++int sunxi_ce_run_task(struct sunxi_ce_priv *priv, struct sunxi_ce_task *task);
++int sunxi_ce_reset(struct sunxi_ce_priv *priv);
++
++#endif
 -- 
 2.53.0
 
