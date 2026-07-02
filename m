@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EB4C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 18:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4899C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 18:28:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E6684A27;
+	by phobos.denx.de (Postfix) with ESMTP id 74D8F84A5F;
 	Thu,  2 Jul 2026 20:27:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="EJ/Xf506";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Le2fTMuB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBCE184A57; Thu,  2 Jul 2026 20:27:48 +0200 (CEST)
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [IPv6:2001:1600:19:5550::bc0c])
+ id 949AA847C8; Thu,  2 Jul 2026 20:27:50 +0200 (CEST)
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [84.16.66.173])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47F3584A0E
+ by phobos.denx.de (Postfix) with ESMTPS id EE07D84A27
  for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
@@ -28,28 +28,28 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4grljs6KXSzHfk;
- Thu,  2 Jul 2026 20:27:45 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4grljt46ntzyFg;
+ Thu,  2 Jul 2026 20:27:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783016865;
- bh=AKoNETyTA2Kw1xzVRYphRoDxefgIF6MCnqdOai50Pl4=;
+ s=20231125; t=1783016866;
+ bh=BTux+gd5ZvqdNnc3Xi3rsSqfUcLOa7Zo/ey/F6ULpGU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=EJ/Xf506bGXiSIEyTS3m1uGru4MwL4xiIb8H72I7WroOZC+Y/rMLfTPV3fyW1/cL7
- D7n0DA3Ch8BzPDHA5FJlDYtjYUF11TRCyuC8JbUFNLmUA/VT2e6dct/fTaQEI1WYQE
- V98lj4Y7vM1OB1zZrEbo5SxJQjIUTSf6bI0jGObm777GGIyB/T451y/3r/NZxcD0oG
- KeGJ9VqWPX+ZwQqfdItM5JOxS04kPkWBA1H/L6P6MH6OTbXTq4xYoxt4eth98B7wDA
- 0zWmAKdRBPezGzcMObvq//yhe+feNLXWU1L5AKgkAyUuh7yOx9wp9eELlwci3c8T1z
- YcoruAstSGFBw==
+ b=Le2fTMuBw1OXOtSIab+n5oTa2fx16HA7LnPhNqZ/+e4+h6hT+QMF2GqX4qkQ6J446
+ w9mh3dxIehu/A7GjRkzekqLoZr+IhvogsOlho1vKmJJEml1b6nX+2UyVb8o+G/xP/0
+ WG2XyiQtY1js50RT7G0iW5TFDVDihvvbwEPqKCQnCA7vrVOE2k1fdGZte4276NIAoj
+ rggrMqa20DZRUXwN4in7AvKmUay98pbvdx7nRjKaMDDBQs6zDOJ5/WZBHqVbo8KNJo
+ ehyBpTbB3Rx2wg8npBThdcMdJ1+1h0mBvd8btOffJSO/+lyeSBRrY6t1Pta8Uf89M+
+ qDw+o0BCYNEKA==
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4grljr5zvdztTS; Thu,  2 Jul 2026 20:27:44 +0200 (CEST)
+ id 4grljs4FcBzxwk; Thu,  2 Jul 2026 20:27:45 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 02 Jul 2026 20:27:35 +0200
-Subject: [PATCH 5/6] Revert "sysreset: Implement PSCI based reset to EDL
- mode for QCOM SoCs"
+Date: Thu, 02 Jul 2026 20:27:36 +0200
+Subject: [PATCH 6/6] Revert "drivers: sysreset: Add sysreset op that can
+ take arguments"
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-revert-sysreset-v1-5-7920c16a1f3a@cherry.de>
+Message-Id: <20260702-revert-sysreset-v1-6-7920c16a1f3a@cherry.de>
 References: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
 In-Reply-To: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -83,7 +83,7 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This reverts commit 32825eaddc37670bb87f98b338aef8238e259e72.
+This reverts commit fcb48b89813b14f38b31b86b4a6ace376bd86d8b.
 
 The args support for the sysreset uclass contains a logic bug. The first
 sysreset device implementing the request_arg callback will consume the
@@ -101,108 +101,121 @@ reset which is very likely not what's expected.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/firmware/psci.c               |  4 ----
- drivers/sysreset/Kconfig              |  7 ------
- drivers/sysreset/Makefile             |  1 -
- drivers/sysreset/sysreset_qcom-psci.c | 45 -----------------------------------
- 4 files changed, 57 deletions(-)
+ drivers/sysreset/Kconfig           |  8 --------
+ drivers/sysreset/sysreset-uclass.c | 37 -------------------------------------
+ include/sysreset.h                 | 18 ------------------
+ 3 files changed, 63 deletions(-)
 
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index b6838a244d2b..2e3223e1c32a 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -186,10 +186,6 @@ static int psci_bind(struct udevice *dev)
- 					 NULL);
- 		if (ret)
- 			pr_debug("PSCI System Reset was not bound.\n");
--		if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
--		    device_bind_driver(dev, "qcom_psci-sysreset",
--				       "qcom_psci-sysreset", NULL))
--			pr_debug("QCOM PSCI System Reset was not bound.\n");
- 	}
- 
- 	/* From PSCI v1.0 onward we can discover services through ARM_SMCCC_FEATURE */
 diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 90f740f51d42..f589ad154186 100644
+index f589ad154186..16ef434a8d9c 100644
 --- a/drivers/sysreset/Kconfig
 +++ b/drivers/sysreset/Kconfig
-@@ -301,13 +301,6 @@ config SYSRESET_RAA215300
+@@ -49,14 +49,6 @@ config SYSRESET_CMD_RESET
  	help
- 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
+ 	  Enable sysreset implementation of the reset command.
  
--config SYSRESET_QCOM_PSCI
--	bool "Support reset to EDL for Qualcomm SoCs via PSCI"
--	depends on ARM_SMCCC
+-config SYSRESET_CMD_RESET_ARGS
+-	bool "Enable reset command to take arguments"
 -	help
--	  Add support for the reset to EDL (Emergency Download) on Qualcomm
--	  SoCs via PSCI.
+-	  Pass on the arguments received by the 'reset' command to the
+-	  sysreset driver(s). The sysreset driver(s) may make use of the
+-	  additional arguments for implementing arch/board specific
+-	  functionality.
 -
- config SYSRESET_QCOM_PSHOLD
- 	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
- 	help
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index b5b99235b6ef..d18a5d523605 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -30,7 +30,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
- obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
--obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
- obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
- obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
- obj-$(CONFIG_SYSRESET_QEMU_VIRT_CTRL) += sysreset_qemu_virt_ctrl.o
-diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/sysreset_qcom-psci.c
-deleted file mode 100644
-index 3627bbf5c820..000000000000
---- a/drivers/sysreset/sysreset_qcom-psci.c
-+++ /dev/null
-@@ -1,45 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
-- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-- */
--
--#include <dm.h>
--#include <sysreset.h>
--#include <asm/system.h>
--#include <linux/errno.h>
--#include <linux/psci.h>
--#include <asm/psci.h>
--
--static int qcom_psci_sysreset_get_status(struct udevice *dev, char *buf, int size)
+ if CMD_POWEROFF
+ 
+ config SYSRESET_CMD_POWEROFF
+diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+index f25e09e9cd06..536ac7271427 100644
+--- a/drivers/sysreset/sysreset-uclass.c
++++ b/drivers/sysreset/sysreset-uclass.c
+@@ -32,18 +32,6 @@ int sysreset_request(struct udevice *dev, enum sysreset_t type)
+ 	return ops->request(dev, type);
+ }
+ 
+-#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+-int sysreset_request_arg(struct udevice *dev, int argc, char * const argv[])
 -{
--	return -EOPNOTSUPP;
+-	struct sysreset_ops *ops = sysreset_get_ops(dev);
+-
+-	if (!ops->request_arg)
+-		return -ENOSYS;
+-
+-	return ops->request_arg(dev, argc, argv);
 -}
+-#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
 -
--static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
--					  char * const argv[])
+ int sysreset_get_status(struct udevice *dev, char *buf, int size)
+ {
+ 	struct sysreset_ops *ops = sysreset_get_ops(dev);
+@@ -83,26 +71,6 @@ int sysreset_walk(enum sysreset_t type)
+ 	return ret;
+ }
+ 
+-#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+-int sysreset_walk_arg(int argc, char * const argv[])
 -{
--	if (!strncasecmp(argv[1], "-edl", 4)) {
--		/* Supported in qcs9100, qcs8300, sc7280, qcs615 */
--		if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
--							ARM_PSCI_RET_SUCCESS) {
--			psci_system_reset2(0, 1);
--			return -EINPROGRESS;
+-	struct udevice *dev;
+-	int ret = -ENOSYS;
+-
+-	while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
+-		for (uclass_first_device(UCLASS_SYSRESET, &dev);
+-		     dev;
+-		     uclass_next_device(&dev)) {
+-			ret = sysreset_request_arg(dev, argc, argv);
+-			if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
+-				break;
 -		}
--		printf("PSCI SYSTEM_RESET2 not supported\n");
 -	}
 -
--	return -EPROTONOSUPPORT;
+-	return ret;
 -}
+-#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
 -
--static struct sysreset_ops qcom_psci_sysreset_ops = {
--	.request_arg = qcom_psci_sysreset_request_arg,
--	.get_status = qcom_psci_sysreset_get_status,
--};
+ int sysreset_get_last_walk(void)
+ {
+ 	struct udevice *dev;
+@@ -164,11 +132,6 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	printf("resetting ...\n");
+ 	mdelay(100);
+ 
+-#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+-	if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
+-		return 0;
+-#endif
 -
--U_BOOT_DRIVER(qcom_psci_sysreset) = {
--	.name = "qcom_psci-sysreset",
--	.id = UCLASS_SYSRESET,
--	.ops = &qcom_psci_sysreset_ops,
--	.flags = DM_FLAG_PRE_RELOC,
--};
+ 	sysreset_walk_halt(reset_type);
+ 
+ 	return 0;
+diff --git a/include/sysreset.h b/include/sysreset.h
+index d1cc9ebc542a..ff20abdeed3c 100644
+--- a/include/sysreset.h
++++ b/include/sysreset.h
+@@ -43,24 +43,6 @@ struct sysreset_ops {
+ 	 * (in which case this method will not actually return)
+ 	 */
+ 	int (*request)(struct udevice *dev, enum sysreset_t type);
+-
+-	/**
+-	 * @request_arg: Reset handler implementations that might need to process
+-	 *		 arguments given to the 'reset' command.
+-	 *
+-	 * Note that this function may return before the reset takes effect.
+-	 *
+-	 * @dev:	Device to be used for system reset
+-	 * @argc:	No. of items in @argv
+-	 * @argv:	Arguments given to 'reset' command
+-	 * Return:
+-	 * -EINPROGRESS		if the reset has started and will complete soon
+-	 * -EPROTONOSUPPORT	if not supported by this device
+-	 * 0			if the reset has already happened
+-	 * (in which case this method will not actually return)
+-	 */
+-	int (*request_arg)(struct udevice *dev, int argc, char * const argv[]);
+-
+ 	/**
+ 	 * @get_status:	get printable reset status information
+ 	 *
 
 -- 
 2.55.0
