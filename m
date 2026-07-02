@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C51C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25EABC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4911F84A67;
-	Thu,  2 Jul 2026 12:28:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF43784A72;
+	Thu,  2 Jul 2026 12:28:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FJVTgGXD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aXGQl5XP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DDC584A6B; Thu,  2 Jul 2026 12:28:22 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id C9D2B84A76; Thu,  2 Jul 2026 12:28:38 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E4E484A47
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:28:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE53784A47
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:28:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-695f6438518so2445459a12.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:28:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988100; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-693c69b97e7so2841160a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:28:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782988116; cv=none;
  d=google.com; s=arc-20260327;
- b=mj1NgIvJgGgxTvljafGWUCAaRCRMVaSh6YFXksrsEkfdWL3yAZjFhrZbIBc4EyFzFc
- z2nepQ/j+lLGhr4zaipd9bvAhNN3/VK6jfjvl1e3B0Ea73q9x5m+PLOsrymDXT0KYxHT
- 1HQJT8YInRX66S59WaECYDQHfXctK72RfIbDUKo/k9rxDCaowGP1r3hyI7C4QsG8o8Gr
- mOl4cdYrK9zn9VlwT17dt94Td80y4Z5sJ0KMDHCJXHLvWoLFDNKQQMXzIjMFEaYffFua
- buuY+GQpoMaaHnITo6ig5/YOX79hQ73ASXSyToDpkplkYnIzXzH+72swOqfCVMH6HNnq
- gzcw==
+ b=IF4AUA1WNq5b3bxhEiKz5cMrEoHWigiG45FyPfvFKIoCFpxaVfcESObOK8Szn5h6x4
+ Y9vAlZPL5PRF1K/LBojSI8ISBSNZYxRmrvbgFXb6I8qE267Nx6ikbyXPRmI3bRqHM3g7
+ NkB7cpImvpdUQtg0JpsA08wWDie83G0hSndFOTzLIt0kCZ3l3QzRZ2UoLY076N+jD1Gq
+ zFxGENGnoGuARMAq1DNOy5oRNJdhD9SNjXuZ3hiJvo0rwfAEX7KKpOnaNyA6QFgchSl2
+ wtqD/mHA0XPEvkonDt9+UOBgdzhSofkJbvowujSFsPkJu0+KHdc3VF50jVIjCElisgVV
+ xXaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6wozH4AhDioYhafsi8z1EcB7QXn63u9eKczT9uB5o3Q=;
- fh=pDtjfAaf7vbJaF9C5cMkYP5kjK5SrMXIYajLtk/LYQk=;
- b=S47i7YyVvGdI3PfrrjFr1hRR50KqCztqs/E2KU3QpOYdGaeJltxyLaXkadvHobedhv
- NOLa7SdKT3M/Ong/4bF43+qm5Ps0Wd72sgdFds38rGMSScLUYcuO+cGT/ik9KXEmnEVN
- EUvCQ1HqMd/wfQOF8xWfh6580uV3OxWn0VGpIoFT8sQ4AMmjed5n+8kvYnV46ydiNkds
- zSLFrY3Hgz/SHj3ZQ7l1lP+IWfhBg6gkG0wxvOLO1dLr5Q5PJCOOYtyD7VkEupHXUktK
- tR7nk8uY2ye9vPoinKAsEjpL6+Z0yeVn3NQ9bsD4GopvW/+9OfNy2n95Ybdiqocb/4dX
- Om2A==; darn=lists.denx.de
+ bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
+ fh=hDNHvCnVSJ97ty9EY4ihD2gxuR4KRRZarrBRrYHjWKA=;
+ b=OTjVOld5Ur9hOfJxtu4pWryTY++3QhyF40xxa6r17PkHv8r8/SvW6N/G6DXKhYcYj3
+ HVJWAgw+C6yfjOZkKHQDQbTurWYDdwUNWf3th1V6Cj8ojIa65F9P3kDPpWjGkBuu9bnZ
+ uTCvJfuyklLl3vhAO1KEktRCCUbx0tedkPXvLeEbtf0lHUnCv1RBwZm+cYRILlYHl36y
+ EMM5E7OUKpZvS+LM/oza7CDxxjJkT0A50LNNjSm3Al6wq2GPnZC9UvlQ0Nkk7fqW8xqX
+ 3lvoOxLIy0AeQ8IZ8qrDAgXxbr4Y/1/8a2WPePtQOzBrHWLJ4yV3U6vQFZrHQQzUnkfg
+ k4QQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988100; x=1783592900; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6wozH4AhDioYhafsi8z1EcB7QXn63u9eKczT9uB5o3Q=;
- b=FJVTgGXDOQz9eo+DLU0yLUQ+Uy45XPzQdyBAn9jbdTHolnUff/P4HviqOEcrFMmlkY
- 84eUPvpWQBvk9u1MlnVNfLg9VnAl0ijJpoA2wA6rNqqW5jqJlbIy/Y9cHI8WRL7Vnia+
- Zo4ksVJ2ieWFXKidQbbFqRfNx0hvkcuaVIPTs=
+ d=chromium.org; s=google; t=1782988116; x=1783592916; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
+ b=aXGQl5XPLxxHwi1i9ipyKXbA4xcsoMibsXDKobg0b5iGKxnoQ1WyCxZQIChrarfzt1
+ XxBiDtCW1PE+Bj/lguOfhW++JP0Rxz+iA3k2er7zj8UEgIQjMIBgIc7iXllWvoaMyMie
+ sfzG5LzylEotuhodCR8gzn7hgSwEDvdcIrqdg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988100; x=1783592900;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6wozH4AhDioYhafsi8z1EcB7QXn63u9eKczT9uB5o3Q=;
- b=quG+Y7Z/s6941TRLWU1agdTeB/dSatDh3MchVOjG3wT/A77PLnSEXuyg0RM4GCWKxh
- KRD9odLZd6ip6kVRMyX61MhBujPpsvgazWSSEyUtwYZ6J/X19SyJzOcxQOmDA0zUE93Z
- FyPJldcyLogCXyueD4WfN/rsFR4mQirQDKKk4WeFtLix9pGs1s0S+KDKqkO5cGeN0Pkl
- fuajMP9DpFsIXEchZ9HA9ygup/Ib/6lA4235vGBpFckqBOYycZX+MqFrvALpxWVn+mXg
- Uiqj/D2im2IF3i8sBs5UzQ3r2Y63Jko8Dxr68bz5Jp2egfXU7uBsH/qI0CYyQHpuMO1A
- d2eQ==
+ d=1e100.net; s=20251104; t=1782988116; x=1783592916;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=fn0UxZSMdIjUHPGPTJCO/jFjimdqQ3pyX3Uy0PM125A=;
+ b=sQf6O13ww/sAvzOpazsisL+zORThm+AeVJqRNlJSOGpm1iZO6GUb/M+qN3zC03N7rs
+ 9HVm5Rlty8E0l5nmJpNrwu+TtaWBc14hMIpTA/kw2AkULqnf05FpJfKVXmuC03TAl+j8
+ ESCHrBgHtBEv9ISQip2e2s/GJxpDI/371yUlXovIETKLJm22rLXkpoRV9P+e5JGl4Pvn
+ /+zLQi9FL2gf3M/cYhp9e2Jw3+ac4Mgnqlk43JjrkJu3MApXSaFq9z/flneYrNqyov6o
+ PjFxwAhIQOLOC3V7lmwOSL+WnvHyNvb4O0Jiv4ypOpn/cmtqGkvcHvZ9Fr0TAz9913CX
+ 8mMA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrRZ9ZjiA7fSRyF7JqdiIoSPISkJWZOGWi9udyhE0Knp6n5HcWo0fYYIc97+WskcOXMnszJbTU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8jC7hCT0YcLHdwy4V9TeyF2TjDp/Fx+vgLTv8KmU/LuV+3g7x
- O/im8htFGTuwJ14aw2rjXZsgzzLZuCjI78frdxM7jsm+s6E+qlR1Q+F7eL2qy+lPDWo0zsZEY2q
- XrUsp5iCXaKyTVDeORBZecdBKfPL6y0Gzj3s1lwsN
-X-Gm-Gg: AfdE7clVATFaLSGX6jt6qKeW26yh5kQquho1Heh+jqEqCMvEhn+ZVaOc46QbJw9s70l
- UaVnejh2QVwCPkbFzN4byK2fyzTkgncKf+B4vr+Cz7/veyO3D5ABL2idyxA1IhrwTbiu9mQi0H5
- H5Nnk7wMGrNcXXj+eEDg3OdnnXadT+zdS/xNRnRqnmhf4n5ch65YEzwVlpPuRl+aiSkPy4g8qgW
- zQBzMKeaRszptH1ocAWPajkTjKFpnEF5zPWsiM58Q9lle7nO3n6X19SbOpyJhva0XolNEFhGw==
-X-Received: by 2002:a05:6402:2483:b0:687:7fa4:faa0 with SMTP id
- 4fb4d7f45d1cf-698a2cd157cmr2284434a12.23.1782988099827; Thu, 02 Jul 2026
- 03:28:19 -0700 (PDT)
+ AHgh+RqRGTWEJyIeaqXWdv7tfnLqs/TXZ5I3o3DNgLhUS6cTno4jovlQuTduliCSuCeHtsl2FkFIlXQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxbnk+dU9PlvbR6mszvCmgouPkdzuUoHRJnJotHYxDKckKj5aq8
+ ugDNMizg4l2Em3Nt4ClpghMdS/tVbv8pWuzE0l9Yy5EsIGEdLkwkpATGNIYQm+ehEJiBFkvx+xR
+ 4wDDp4I7KzXjoH7yBSt7LYuzvHvm14pXMT4ePCwBj
+X-Gm-Gg: AfdE7cmJd4TqQCJX+CjnceifRWz3BhJdcDoaky2f0F/ry7ff5/QEalo76Um6WKcsScC
+ MOrPgFn4Kf5Tf+spFggx4gNCet9rOlkgPCY7Vz2V0dmfljyvJ3m2G/HorVFZuqJAWfTdgEbvAEx
+ mFcq1P/WGKY6nAEYNxDpyTOLkcgHyaSQ4x8I1jEhze0YSBaH1O86SUAWp+i+ZhP/0iTOc+bSd5C
+ HD4EbAS6zCK6haer30ifPqPkxMWZtnUXl1KMFyTZD0Vzm3A6F7K4O8oRvCjWjcBwTaAsEYMyQ==
+X-Received: by 2002:a05:6402:26d3:b0:698:870b:ac8c with SMTP id
+ 4fb4d7f45d1cf-698a2cf920amr2134393a12.36.1782988116121; Thu, 02 Jul 2026
+ 03:28:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-8-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-8-me@ziyao.cc>
+ <20260701111808.870705-7-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-7-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:28:08 +0100
-X-Gm-Features: AVVi8CehN5dvG6Xk0P-diAvq5vZcnth1LfzFy1oyjwNRfKS7iu3ZvaHq_H-a_E4
-Message-ID: <CAFLszThSQPzj4NpjM+AUbovZv4oZBZR3yfjhk0rfLanTsXe8fw@mail.gmail.com>
-Subject: Re: [PATCH v2 07/16] LoongArch: lib: General routines
+Date: Thu, 2 Jul 2026 11:28:23 +0100
+X-Gm-Features: AVVi8CdpSC12L79vQuKhWb9JGGCBAPlxNqpJDY7X2ScbYhckWmPlOdKowGJQrw8
+Message-ID: <CAFLszTitRPvZe3Z5aCXwLogJVjjWJEV-5HmhZeG2rfudOJLOMA@mail.gmail.com>
+Subject: Re: [PATCH v2 06/16] LoongArch: skeleton and headers
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -111,114 +111,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao,
+Hi Jiaxun,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> LoongArch: lib: General routines
+> LoongArch: skeleton and headers
 >
-> Add some common library routines for the architecture.
+> Commit for directories, Kconfig, Makefile and headers
+>
+> Some of them are copied from linux, some of them are derived
+> from other architectures, the rest are wriiten on my own.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
->
-> arch/loongarch/include/asm/cache.h       |  10 ++
->  arch/loongarch/include/asm/global_data.h |   7 +
->  arch/loongarch/lib/Makefile              |   7 +
->  arch/loongarch/lib/asm-offsets.c         |  66 ++++++++++
->  arch/loongarch/lib/boot.c                |  14 ++
->  arch/loongarch/lib/cache.c               | 213 +++++++++++++++++++++++++++++++
->  arch/loongarch/lib/reset.c               |  14 ++
->  arch/loongarch/lib/setjmp.S              |  52 ++++++++
->  8 files changed, 383 insertions(+)
 
-> Add some common library routines for the architecture.
+> Some of them are copied from linux, some of them are derived
+> from other architectures, the rest are wriiten on my own.
 
-Please expand the commit message: list what the routines are
-(cache maintenance, setjmp/longjmp, asm-offsets, do_go_exec,
-do_reset) and note that cache handling probes the hierarchy via
-CPUCFG.
+Typo: wriiten -> written. Please also expand this into a proper
+motivation paragraph - what LoongArch is, which ISA variant this
+covers, and where the imported headers came from.
 
-> diff --git a/arch/loongarch/lib/cache.c b/arch/loongarch/lib/cache.c
-> @@ -0,0 +1,213 @@
-> +static inline void flush_cache_line_index(unsigned int index,
-> +                                       unsigned long addr)
-> +{
-> +#define do_flush(index)                                                      \
-> +     case index:                                                     \
-> +             cache_op(FIELD_PREP(CACHE_OP, CACHE_INDEX_INVWB) |      \
-> +                      FIELD_PREP(CACHE_INDEX, index),                \
-> +                      index);                                        \
-> +             break;
+> diff --git a/arch/loongarch/include/asm/asm.h b/arch/loongarch/include/asm/asm.h
+> @@ -0,0 +1,186 @@
+> +/*
+> + * Size of a register
+> + */
+> +#if defined(__loongarch__) && __loongarch_grlen == 64
+> +#define SZREG        4
+> +#else
+> +#define SZREG        8
+> +#endif
+
+This is inverted - on 64-bit LoongArch a register is 8 bytes, not
+4. The result is that REG_L/REG_S resolve to ld.w/st.w on the only
+ISA this series supports. Linux seems to use __loongarch64, BTW.
+
+> diff --git a/arch/loongarch/include/asm/system.h b/arch/loongarch/include/asm/system.h
+> @@ -0,0 +1,74 @@
+> +#define local_irq_save(__flags)                                 \
+> +     do {                                                        \
+> +             __flags = arch_local_irq_save(CSR_SSTATUS, SR_SIE) & SR_SIE; \
+> +     } while (0)
+
+This is leftover RISC-V code - arch_local_irq_save() above takes
+no arguments, and CSR_SSTATUS/SR_SIE are not defined for LoongArch.
+It compiles today because nothing invokes local_irq_save(), but
+will break the moment anyone does. Please rewrite to call the
+LoongArch save/restore helpers, matching the enable/disable pattern
+above.
+
+> diff --git a/arch/loongarch/include/asm/types.h b/arch/loongarch/include/asm/types.h
+> @@ -0,0 +1,37 @@
+> +#ifdef __KERNEL__
 > +
-> +     switch (index) {
-> +             do_flush(0);
-> +             do_flush(1);
-> +             do_flush(2);
-> +             do_flush(3);
-> +             do_flush(4);
-> +             do_flush(5);
-> +     }
-> +
-> +#undef do_flush
-> +}
+> +#define BITS_PER_LONG _LOONGARCH_SZLONG
 
-addr is silently dropped. Inside do_flush() the token index
-resolves to the macro parameter (0..5, the cache identifier), so
-cache_op() always gets the small constant as its address operand.
-The way/set offset that flush_dcache_level_all() computes never
-reaches the CACOP instruction, so this hammers way 0 / set 0 of
-the selected cache repeatedly instead of walking it. Please pass
-addr through (rename the macro parameter to avoid the shadow), and
-confirm with a real by-index flush test.
+_LOONGARCH_SZLONG is never defined anywhere in the tree, so this
+expands to an empty token. Please either define it (e.g. 64 for LA64)
+or drop this and rely on asm-generic/bitsperlong.h like other arches.
 
-> diff --git a/arch/loongarch/lib/cache.c b/arch/loongarch/lib/cache.c
-> @@ -0,0 +1,213 @@
-> +void probe_caches(void)
-> +{
-> +     unsigned int level = 0, index = 0;
-> +     u32 cfg = read_cpucfg(LOONGARCH_CPUCFG16);
-> +
-> +     if (cfg & CPUCFG16_L1_IUPRE) {
-> +             if (cfg & CPUCFG16_L1_IUUNIFY) {
-> +                     gd->arch.dcache_index[level] = index;
-> +                     populate_dcache_properties(cfg, level++,
-> +                                                LOONGARCH_CPUCFG17);
-> +             }
-> +
-> +             index++;
-> +     }
-> +
-> +     if (cfg & CPUCFG16_L1_DPRE) {
-> +             gd->arch.dcache_index[level] = index++;
-> +             populate_dcache_properties(cfg, level++, LOONGARCH_CPUCFG18);
-> +     }
-> +
-> +     cfg >>= 3;
-> +
-> +     for (; level < 3; level++) {
+> diff --git a/arch/loongarch/Makefile b/arch/loongarch/Makefile
+> @@ -0,0 +1,19 @@
+> +ARCH_FLAGS = -march=loongarch64 -mabi=lp64s -msoft-float
 
-Please use CACHE_MAX_LEVEL rather than the bare 3.
-populate_dcache_properties() also sets dcache_inclusive from cfg
-whenever level != 0, but on the L1D path cfg is still CPUCFG16 -
-the L1 inclusive bit describes L1I vs L1D, not L1D vs L2, so this
-looks incorrect. Please double-check.
-
-> diff --git a/arch/loongarch/include/asm/cache.h b/arch/loongarch/include/asm/cache.h
-> @@ -15,6 +18,13 @@ void cache_flush(void);
-> +#define CACHE_MAX_LEVEL              3
-> +#define CACHE_MAX_INDEX              6
-
-A short comment on what these two bounds represent (max dcache
-levels tracked vs. max hardware cache-id encoded in CACOP) would
-help - they are easy to confuse.
-
-> diff --git a/arch/loongarch/lib/setjmp.S b/arch/loongarch/lib/setjmp.S
-> @@ -0,0 +1,52 @@
-> +ENTRY(setjmp)
-> +     LONG_S          s0, a0, 0
-> +     LONG_S          s1, a0, (1 * LONGSIZE)
-
-Stray space after LONG_S here (and in longjmp). Please clean up.
+Since LA32 is on the TODO list, please gate this on CONFIG_ARCH_LA64
+(or whatever the final symbol is) rather than hard-coding
+loongarch64/lp64s.
 
 Regards,
 Simon
