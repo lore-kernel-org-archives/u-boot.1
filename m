@@ -4,123 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024F4C43327
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 15:26:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B6BFC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 15:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DD21846A4;
-	Thu,  2 Jul 2026 17:26:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B42AD84A0A;
+	Thu,  2 Jul 2026 17:26:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="f5W50MSg";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="JqC72si8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C720F849AC; Thu,  2 Jul 2026 17:26:09 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E5F284A0A; Thu,  2 Jul 2026 17:26:51 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 881F4841F2
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 17:26:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D0A8841F2
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 17:26:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=maAywIfwmKGbbxAipgj4c6/IgKGpW9EVDUucgaugWTzTefi40t8UXxXnMaFwSJqdO7cOWBV15x9bJ3+6KBQ1U8T1qHggSAZJOu/j1sLbmuwitFhZtJxLivTHu/tyjXrulir4BDRihsuPDwCN0r3G41kjtH14J6wxMVv7E/8+dRkcY2HFLY2SAEVPZ/ymVwa2RHcpYWWedb+hFv4oxFKrFFbctAQ1pawwxHV4VR7fEkucY0/oE9TqEHylHt41drdyrhRDAnhThYj0bwZQ2GIeIirb7imrvKZVuIPuinDje6+xz2bwvGDrDFxEVa62NOEGa50xctAT2V7XIOjnvxhUtg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=riEb5iD/qwNqa5W6OMhbCf3LC1jcaw43yZYEjLTbofI=;
- b=aUT51fYzIJK5QOyd4VbeUu0raguBF7Pk+tiEG4caLKPyv+TYT/qYvUYA7t+9sOfrVFVnqYrZAr4o3SL1BwS9YLMF5ErPB3SbeHom9RmnBS4+ZcTU0OOHpeHq5l5G9nlXO61J/oy0I0Y2Kemd6ofPwno5Z18C2o3SZinmLlT1OviDl4PdkFJOt5izUPSr/OjIehR7DmE+J1jlCz3lukaXkKSk8btSAhDBzig8WZMASu1tx4jr9l0KsKHRa4jE4haVU6FLfqlm2idocYcRYetuHFt2BuUgfYuwGcrlH87APNNStWLeh52oZAiuVe13q6mfRxP9Htb+KqR3fW2UKxUARA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=riEb5iD/qwNqa5W6OMhbCf3LC1jcaw43yZYEjLTbofI=;
- b=f5W50MSg0H+EfadYYzHkyJRsx9BDE7Wr05dR42rt59O/J//2QUunNQDZHh39pCQnmq+IGcbzM+BRSfxuRV523XB2wVKNLKguiXm32q61qkiL1GDpXvqi20XmkDimn+xMyOkwQn6LMipohgpJpoGYdMMcRke8Z5MVoRf7AbmlfKZiSTqIZXBOYIVHqUkEq7qqEMdu3N95jbM1zpgOFrZlNpuZ3Q2NM04GzUpJpO9HKQO6V5g077wxRRpDxQHZhy1GYAQl598eq+2dpUg18itJzITKRyMwf2HJpB5AJgmp2OnURd5j5CXE8LWMCpJwmdD+4ln2W4A+3v2j5TCNgQTBkg==
-Received: from AM9P250CA0010.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:21c::15)
- by PRAPR10MB5251.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:291::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Thu, 2 Jul 2026
- 15:26:03 +0000
-Received: from AM3PEPF00009BA1.eurprd04.prod.outlook.com
- (2603:10a6:20b:21c:cafe::49) by AM9P250CA0010.outlook.office365.com
- (2603:10a6:20b:21c::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Thu, 2
- Jul 2026 15:26:03 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM3PEPF00009BA1.mail.protection.outlook.com (10.167.16.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Thu, 2 Jul 2026 15:26:03 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 2 Jul
- 2026 17:30:49 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 2 Jul
- 2026 17:26:03 +0200
-Message-ID: <b1625c53-4780-4b67-94f1-9f0d61c0ab8b@foss.st.com>
-Date: Thu, 2 Jul 2026 17:26:01 +0200
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-493c1950518so4039205e9.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 08:26:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1783006009; x=1783610809; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=X5r6zeXnWvdvsxAGT59JbGld0s7nkgm1yXkQ5Nahpho=;
+ b=JqC72si8x+zSFso/v5nG74ymAZoWLanpILQhzWCopf6EzCEdG4kgadOIZK3ZwzWGjb
+ k9/XLmssMK2xHc1HY5txxRdNfjB/sApTdvXNBpVxajVYc1xs9v04A6q90zAOZY86J+fi
+ GHdMuEoIxG9E7TFjY4Rm0KTqs8Fx+pCpztEqak+Fore1iyupOLajSCorlcc5JOQeK0sY
+ O60TRzc76QlmLZvdPLbJUt4+58zRw8I2P7nJouduIBpZy85WV996ezlIyW5qHCLYoS5D
+ tIn9V3FVjFifPsWs1AJOOi6yd/zAi+JjtmJ8qkBGTiuDrYm3KohD/XMov8gMd3BIG8Fb
+ jnyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783006009; x=1783610809;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X5r6zeXnWvdvsxAGT59JbGld0s7nkgm1yXkQ5Nahpho=;
+ b=rcCfxoEylrIhVzsvKCvzIxMGF4cisI5zQuKn9PIbG82IIPegSVKd5craBpd01APcp4
+ UBgrct1BEvpGJ5uNjxt54xRSv0mn2M4eFPOxuwEd9VIugUbHmVWpcUs7XQUcOGP2sE0E
+ 8JAyRSjoECHJk4ZeZ22Nd1MglvDU2TQ5cJXBHhlcOwgnmrd8iAk4LAnPVH4MwrTiJ7L3
+ SvfcwXwXoTsrmzM7bsFVHEwwRQ7oOgwv5rGNC3nv31ln3s3kVh+mp4Me+SFChKT5sFqO
+ rVwYL2MR+2W9kf5kVmLBFbmtS+5xSLIPOFuY5ndUwL7MaQmr3RTCYVcNABjOboScdt9w
+ bkHg==
+X-Gm-Message-State: AOJu0YyQC+mPhHgMY3xJyrbfzW0T2VTYfi3wCxcPmhZRhgCkkX6Mvp85
+ nEr5YFl2nmDU6pmHp3uAqAPvB1yMgGnQH3jj4ksIuMVvJSU1N3jwEWr1ATE7pz4YziI=
+X-Gm-Gg: AfdE7ckrerP6ls7oJOJBeKo+OExIYBPjAS2VvHATM+him762GD0qm/nm2DW+WsoHr5N
+ RT7kJB8Ifil67+OpUT0VE99ubNUr511aOUVRj5uNTiYc4egYeTo/rfyopsRUDOxhdEhksrTBteu
+ h8EVe0SkWnbitlNB+HeNKnthFVac/BvIWWDHt3nWjqPFtnLiOPfGA+mHddVwol6zKPn49f5K7gS
+ YKzwkAmvhy+pHwclh6tWU7bWatF2710KvsemygA2WFV/is0cNrXac9mUngLmwi/KfWuDu9scype
+ HtMP6TuTWKqAnTopj2kpYkIPZ8wj74GNnvlPv0LrBsKJhQvPN3atc4K1x3lT+RDpsVtZurga4Eq
+ tfQ+PoNy6Kz/67T7bggTcRL/ycCigMNck+nUadc7NhcUodzylABIpC+WFGykQ3BQRUrroc3bioc
+ B6CQiznfWzge2YFlmbBN8zLY853rfF9u7uRmWxMY9bUGqbHcFm2u6ECn8vqZAeq0Qo7hOcEdu0H
+ jJLn8cc/xN8zg3rAdNpvgfRBPwjwr8Tb3F517b7frx9FV7HGf9K2haLl+s024sJAQAK3/rdD0et
+ me7AbQ==
+X-Received: by 2002:a05:600c:c047:b0:490:5000:917 with SMTP id
+ 5b1f17b1804b1-493c9b448dfmr3844425e9.1.1783006008634; 
+ Thu, 02 Jul 2026 08:26:48 -0700 (PDT)
+Received: from [192.168.1.65]
+ (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
+ [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493c635c41dsm107761515e9.5.2026.07.02.08.26.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jul 2026 08:26:48 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 02 Jul 2026 17:26:57 +0200
+Subject: [PATCH v2] cmd: kconfig: i2c: add missing I2C API dependency
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: gadget: f_mass_storage: Move schedule() in
- sleep_thread()
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>
-References: <20260625-move_schedule-v2-1-2e4abf0c5425@foss.st.com>
- <750d6e53-d48b-4791-8544-6d5edf7a895d@mailbox.org>
- <d239690c-4503-4c60-90ce-478394aed4c0@foss.st.com>
- <2051a113-6091-4ece-bf1d-affb2797374a@mailbox.org>
- <4db136c5-aa08-4506-99ac-bbfe0c7963d8@foss.st.com>
- <1d7dec66-5da1-4555-8514-ef89de5491e0@mailbox.org>
- <26a24fc7-98f3-4126-b565-aab28f722463@foss.st.com>
-Content-Language: en-US
-In-Reply-To: <26a24fc7-98f3-4126-b565-aab28f722463@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA1:EE_|PRAPR10MB5251:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29478e64-ebb7-4002-8b48-08ded84e3ad0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|23010399003|82310400026|13003099007|5023799004|18002099003|4143699003|22082099003|11063799006|56012099006|3023799007|6133799003;
-X-Microsoft-Antispam-Message-Info: 6ijc88dZ7YJDJebEEW6RDLSfxHjXRxDn4AxOLqLCo9EuTFjSjBGIFLpKlGmUQ/mYL/hstY06Qb//4Evs5z5MUYlhp4ZxjP50iqiD2kAKE20HDOFDexEl6V3duX1ALNkjYouMstNzAtUvAP8guN53oVtH8fmMGy6e1rUtOOBZPhjPgzGlDVLy2sOe6XJgPwyebKlya6Qvt8ZMushw10eVkpEXIUJUnh1uVFtLIaQFGz/6fgKojBTl+xtxzGTLtXpI5FXyqa97F0KoShkliP5hOysET2nyd29rjgdsJz33fkHW+30l3/ZzDXYNPo16hb8lXy5j7k0nMN/2978iEbt361uDFRAEp5hGYkKrsQw1ZQeQs9+m80H7P2x9U4tkhJCoCzLc3In0uF0iZNn+XS2vDgShNG86d96OjtwNXbZddTBL6czOV85VxItb1Z+HKFHtKakhiFexOle1i9oes25nDHnV/yuPNgX+jLWZxt7m8REJ0ORvYZcKyy2EvyND47JtZ0C0fAJw0VNQOv+dTBz6OQB3Is2uoyEiz0bohY28CmkGVli4Ot8K7qlsHr9aLWzhxMHzMxrzJSAFAmFwTHH+CCP2U08Tj/P6EL4VYutBPXB8LtufuORiroNNWGvwJIqBL/d/COGoeKjpDemg53eUNzJ3xLTR7pCX3dc4rvx3VgSi8/A/FQm9nwNMbhd5lHHtINqizbGg1ztTEsrjKDCnzQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(23010399003)(82310400026)(13003099007)(5023799004)(18002099003)(4143699003)(22082099003)(11063799006)(56012099006)(3023799007)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: qfMx+PSRZnCFljb410roMiC1hrz2FKa39p67a5XqVvnBcjs0UxcKbwYvBLJ6j0sn9CRmt9LpgmyvUGucqb9YKX+pRVDMcx1mUN1M28DfeqptAInPSoYyE7gB6qZUeFlrUqe7rg/FQRxLmiYz2phhvc6g0bQ4knfp3i1SGZxgy7C/fHDk3K/aF6OiQk97BcSUyud3kjgkUTUDokkhMeuBMjDiQG5T63hKbAABzNZr6tJAR2ruPF2JunJps6mqbUdkTz2t+zgv+Nt6aVc+FPnKBISaM0B0LaqTAlDubDnIGl9zeUah61kBH0sOoCON8koplRsMidZFVw1J0dJV0mKkLP3tOaCxw/Ac7IQWx1tdlqkyLzjl1xcxQRBME6EDQHo/gN6VPPqNN/6uB6PbrFGkckSGg8qGkDSO3neubLoRADKAABqa7IsOFmyi4W1qMumS
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2026 15:26:03.8084 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29478e64-ebb7-4002-8b48-08ded84e3ad0
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA1.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PRAPR10MB5251
+Message-Id: <20260702-cmd-i2-add-dm-i2c-dependency-v2-1-e048ab426191@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQ6CMBBFr0Jm7ZhSjIIr72FYtJ1BxkghLRIJ4
+ e4WvID5m/+Sn/cXiByEI1yzBQJPEqX3CfQhA9ca/2AUSgxa6bO6qBxdRygaDRFSl5pD4oE9sXc
+ zUmmLU2WrRlkNSTEEbuSz6+/1j+PbPtmNm3NbtBLHPsz7/5Rvuz+vphxTKrZkClOqprxZM7/EB
+ j66voN6XdcvxJyhI90AAAA=
+X-Change-ID: 20260701-cmd-i2-add-dm-i2c-dependency-d8b349b9f0b2
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,42 +112,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+CMD_I2C relies on either the Driver Model I2C API or the legacy I2C
+API, but its Kconfig currently does not enforce either dependency.
 
+As a result, enabling CMD_I2C without DM_I2C or SYS_I2C_LEGACY can lead
+to link errors due to unresolved i2c_* symbols.
 
-On 7/2/26 16:32, Patrice CHOTARD wrote:
-> 
-> 
-> On 7/1/26 09:24, Marek Vasut wrote:
->> On 7/1/26 8:27 AM, Patrice CHOTARD wrote:
->>
->> Hello Patrice,
->>
->>>> What takes 700ms in sleep_thread() , surely not schedule() ?
->>>
->>> Hi Marek
->>>
->>> On STM32MP157C-dk2, each schedule() execution takes between 2 and 4us depending of the cyclics function to execute.
->>
->> That is about 1100 instructions on 650 MHz CA7 which is way too much , I think that is the problem we need to solve first.
->>
->> Look ta common/cyclic.c schedule() , I think it is the list iteration in cyclic_run() that takes forever. And I think the fix is simple, let the list iteration surely run through once on the first run of cyclic_run(), and while it is running, for each entry, figure out when the entry should be run NEXT, and note the NEXT run timestamp down. At the end of cyclic_run(), figure out when the nearest NEXT timestamp is (you can do that as part of the list iteration of course), and store that information in some global variable. Finally, add at the beginning of cyclic_run() a test whether this timestamp was reached. If not, do nothing, because you already know that nothing has to be executed yet, and you will avoid the expensive list traversal this way.
->>
->> That should make the execution time of cyclic_run() negligible for the majority case.
->>
->> What do you think ?
-> 
-> 
-> Hi Marek 
-> 
-> Agree with your analysis, i will send a fix to exit from cyclic_run() in case the next cyclic timestamp is not reached.
-> But, in parallel, to gain more reactivity, schedule() can also be moved at the same level of ctrcl() as this patch is proposing.
-> 
-> Thanks
-> Patrice
-> 
+Require either DM_I2C or SYS_I2C_LEGACY to prevent unsupported
+configurations while preserving support for legacy platforms.
 
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+CMD_I2C relies on either the Driver Model I2C API or the legacy I2C
+API, but its Kconfig currently does not enforce either dependency.
 
-For information, the cyclic_run() update series is available here : https://patchwork.ozlabs.org/project/uboot/list/?series=511795
+In order to not break some legacy I2C board, we need to keep
+SYS_I2C_LEGACY in the depends on logic
 
-Thanks
-Patrice
+$ ./tools/qconfig.py -f CMD_I2C ~DM_I2C
+15 matches
+MPC837XERDB cl-som-imx7 d2net_v2 db-88f6720 db-88f6820-gp inetspace_v2 ls2080aqds_nand ls2080aqds_qspi ls2080ardb_nand net2big_v2 netspace_lite_v2 netspace_max_v2 netspace_mini_v2 netspace_v2 work_92105
+---
+Changes in v2:
+- Add SYS_I2C_LEGACY in the depends on logic
+- Link to v1: https://patch.msgid.link/20260701-cmd-i2-add-dm-i2c-dependency-v1-1-19ebda3a80f8@baylibre.com
+
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ cmd/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 032e55e8127..8303884084f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1392,6 +1392,7 @@ config CMD_IOTRACE
+ 
+ config CMD_I2C
+ 	bool "i2c"
++	depends on DM_I2C || SYS_I2C_LEGACY
+ 	help
+ 	  I2C support.
+ 
+
+---
+base-commit: 1a3a5c30a253031257b4738e7b1dba635d93b241
+change-id: 20260701-cmd-i2-add-dm-i2c-dependency-d8b349b9f0b2
+
+Best regards,
+--  
+Julien Stephan <jstephan@baylibre.com>
+
