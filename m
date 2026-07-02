@@ -4,124 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C12AC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 12:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C14C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 13:00:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FE7084994;
-	Thu,  2 Jul 2026 14:48:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 23CD5849C5;
+	Thu,  2 Jul 2026 15:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZHAs20P0";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="EpDPy8lQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 820D5849D2; Thu,  2 Jul 2026 12:53:44 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 770C6849D2; Thu,  2 Jul 2026 15:00:51 +0200 (CEST)
+Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
+ [IPv6:2607:f8b0:4864:20::b131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C28B846FD
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:53:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba320so945373a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:53:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782989622; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id EDD1E849B1
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 15:00:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-666275a685eso871178d50.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 06:00:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782997248; cv=none;
  d=google.com; s=arc-20260327;
- b=eszILJA2YcIgPCMSyDdXHUsqpeQS9gu7vIIut8jiBbWkNdCzESYbETMByEvgbadg8r
- xf6s2QJjIn51EZce4VryYRmYNiAff4xG7fBUuilvjJkLfMREZS1nd9O/LNfuT1DgDywj
- poNAZ4fm1vRac4FabUl6/jnG2r7Y+Y2uE8zLjvyQnbIRTo06Tu2UO1nh67Arp0K5j/XJ
- gE0gu+XX90nTDfxbi58ZrcMfpEokcAJeobU5pC4PIdFqor6nOxW5lRdP0o6ugg4KalkC
- 1KbJsATx48vw3Ljnp2N1lYTfL3AaU6Qkh2MIwCyR+/X0Bn6jcgNI1itusOLTl+ohXMF9
- 6heQ==
+ b=oHuS2L6mwGjl1MoK1+H6CciEBOsCucPNBf8vm674vfxNLpjjBd9EzNCSWn3W7HUYTz
+ 7azWdoDCjQnih25FCLZR0QJ/ZnRX9dR3SE5u9dWcHnTuoP9v59noq4YUI3/HNUtC+eFs
+ LqLI5Tg+CNT9f42K0JRoTMXRUyv710VjoGKvEviMcMICT1gNfuEvSVBJl0Kuy/Lx6ynk
+ 5aAjGqt83JJ/NtplJjpA7gKL1iOdbtDYSUFx7JQYvVWp5ZdcP3VaDGacdB+aJng2SnZS
+ Z4gDX3R8iolezvvyQ5xBMYDvdqEyk1tbDRvlS1w55fBL4cPCFyxKNlYETErU3syLd3a+
+ Y/Kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=0p5Xq4G20MyhfG+CAHgIpVno9tmHR9FDrhd28Kyolzg=;
- fh=uQ4N0EtOwQT/crSdNA1rWW3AFRz9SsynUfKgDyZlACA=;
- b=HJwDIXPNYAkCVviBLpHz1lhrFZkBhXkbhomY85dA8a3QNhjEW3vMCEMA7r73Qj3S5i
- gRV9PY3BcO+/Es30dWTAJxYDsKg4rCn4L4ACDNCvLaBhL/HrDuT8OXPD0HTqT0k+8DTy
- Leq0QUpNXrW25NAlIlQO5r6tpkm0iMoQRDTN+KEZFAtj0XkT+ViSKmm/nM5KMJsX8vX0
- xb5iHf9W1v0ZqmWIdFYeXLxy9FUpIH2gifeQCxwPcdL69J308zqVGNVp9K8HKXXDuAdW
- KafX6LlYFv9vONF1he3Cwyqr3h+GWwNbgXfQimxdloB5PQGC1YR1r5yb7cIHNvwVz5za
- v71Q==; darn=lists.denx.de
+ bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
+ fh=4vP3ydd4CVMqQpaOvbgZs4XckJACucA7raSo/oIm1r4=;
+ b=bPPf8ktQuZ094hzjdQm7zG6R/e1I2ZETGljQ1SDB+QX7kOgbphGgWONQqty7oUhbhF
+ fVcmuW14wcRD7NnREYmAsrERELZG/uJ6lpT1r+Cx2Yeqfmf1MhBVZPwLRMRigrodxyzp
+ XrWwpkccrBVDUUdtCcbjk3wtUwrkFbx9ZyTMH0IW4/vw7PP5Su91DPQE+9hmTMZLCwSV
+ t0hsBRl1hCTpRvO+E8Mxpo5eKuMURx7pih/L8jrsDQEzz06Fy0Y4mFpkfggJPcY3Yt3j
+ 9HKzeJIO011m3yeZeHGr634fdqcKBesrbtTvwyf6wo7asRMjWs87gFWNb/753WFl4acp
+ 20wA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782989622; x=1783594422; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1782997248; x=1783602048;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0p5Xq4G20MyhfG+CAHgIpVno9tmHR9FDrhd28Kyolzg=;
- b=ZHAs20P0rdLbw5etUe2arAtu65AV5rbQ/ACNq2/WJcVstXm7+Z/PTbFKGupgVuD8/3
- TBE7pxLML0y1/aR6QxpLht+2HrmSJxngmQ8dFt9bmzTtv5WKgvAZraJt02MCEFaQGInG
- zxL1v2bNluj89nZNub1kJW0/TSl3uk6iv2Voc=
+ bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
+ b=EpDPy8lQi29HBqRLOu/Uy0ODkcd4Z9dTDgT3yHdb49zDVo3imdptYnrh+/4aSQAXAr
+ Meq4ONwE2cgohoxjtUD3CRGTrm3v4IMGAuniVXZ47zH1IgYTquIYGgsPOE470X0X3xF+
+ J5DusN05EeiC093XAazZPYDKfNhp1GDNtJVyo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782989622; x=1783594422;
+ d=1e100.net; s=20251104; t=1782997248; x=1783602048;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=0p5Xq4G20MyhfG+CAHgIpVno9tmHR9FDrhd28Kyolzg=;
- b=QtdPn5uFPwe0DYrE5F4xtFK2NHym+6IoVcf9r7Hi79bX9qcItH1xvJ5bk5fA0R5RpI
- qJKw74Qr6aHS70jwXu6pfpwBb8NPTrjM8R7HSe3Z2X0i88u6JHgK7jnPitVkNxvnKa+e
- M+R7N8IF56yyk6wVhOMk2pzqKwaSl5BUbPwt682EdD0OaFa42EkF0CVhHZvFDKy5Oath
- qjCTVp5wEvF6rOFu8D9zxi7TOECN1IbMQLTOgzTbEU53oQJ2ueqYdOcbx7UToVFhsD8T
- CWu268kpRY5QnF946ckFSp8AEh7b2GSJz2AQD54eFmFCDG7+Ke3QB7VIOQTjod//y9U9
- AC1g==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrVv14gjgN03mKtG49/fw5ncLX0Re7vn2IonP63kU9s1NnETs/+gKgJvRFUyMkSxbf+b6koCwY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+eqnR7Gjvt8qc0ayO/us6iuGHhVPg+iULRpHIHawJMiOtqLWR
- YQW4ihq+YJH2Z53HQn5NQIw75yd6JtPy5jeGzuERtLpLt0ACGDNXh4yNNkRtt/vtvcJgsYOBvKW
- NHM4gBinyEwcxltQxqAGDMLngJEefPr15AsJeQGdr
-X-Gm-Gg: AfdE7clqrcb/NkaXAu2XB6//FGcZVo+yVzzdyLxDw0e4vbYWUHq8rtpd2Hp7Mob+zSh
- exiayH8zJADneBIUxE4As1SABomhEqWqZMzqTQuMuJ7NDg1tqE8Fh3kXSVdBapCiNeExCEe/nXt
- hi22FXHBuQIVGZBkDfzDF3/xgXIUxJK9cTi3YW0qSq1KTT+qSkrEia9n+NBfzkvEwnVQKN9t5bf
- Upp5yEYMlAjt9mWTBb+4HkydJh6mm9hZqSPhiRqxHnYSfMrALH4WNxJIHS2nkY69vV8MURg7Q==
-X-Received: by 2002:a05:6402:3709:b0:697:fbe7:2028 with SMTP id
- 4fb4d7f45d1cf-6989f16a5f4mr2461086a12.13.1782989622007; Thu, 02 Jul 2026
- 03:53:42 -0700 (PDT)
+ bh=C8xaCAhDL7OJuwlHuqRu2g86ZH3thOHsRN0taq/pk04=;
+ b=d8948g1yIBZhWKVs+BI3vPZiymGPDhdkYUR8Ex+K8936tQijTplwjzLMyD6TjNZlID
+ VJSX0XxsJaKB5dtQARJ4kRel6Kb6/KW6MA2NFlXpZpk0Nb+Vzp55wJC6tqf7yb8NYfeb
+ mcrQaKQBQUipDMR1xJaGa4GoXL5E9m1PRrEStNSgZYhn0no53zcEQqRRT+WocO+VpT9g
+ ZSw/uF5GYp5K2uAHIrJoKwwq4stu9dcZ7aXa3aJhagV+xXeQ+EWq5YJOqOlrEXtTvPBS
+ 9KPEJTb18YYhqOLkUORMzPfvX9vW9XknTbP0cIi7cVGRUtVeYSj8W65TSMPZhO2cYJB/
+ xX7Q==
+X-Gm-Message-State: AOJu0YzI4CGKgE5qaI4MTdmDrV1yn4bE4KjWbbipDxyZbPgGvjoZTPA3
+ 8GfGEW9qp6MF2Qg5sqxDrkhjlx8lNTO6ETQ0aw/D1HM/+yQpbE/bAn1iCRUPh5etFS/KwxlMhmv
+ W1oNUkNOE/IiEeWoe8/hyqNTgM5nI63YeFNIoLJmArw==
+X-Gm-Gg: AfdE7cmmqRBpke2RpvPewhBvAOpUtXW1OPmAggwrpMjxxA0JIOUCoOUTtHx0Wlm+fSN
+ JO3QqaS8rbyln1sypxPJnFSeUqIDGCAZS1RcExxMCPHGgLxzcaluXCdcBaOLbcnIGWrJ65cMZLw
+ R1zV5vYJLqko62H2z3rgygcYi1VSj9BbfuiBjob6ZIjOsjQ6WP9h9bhokFtVST2k/+MbciuFN38
+ 1aCBGgVYT6gvoM9rz55vQEQ5Q9PbybjrWU/5sxq7w6Z0PqLF+cTh12UPn7Y9zR7kOsGqC27F9mV
+ lQE6C1s4HZoy93z0Lr8/iU5UNitPtV9wHWm6
+X-Received: by 2002:a05:690e:484b:b0:664:b4b6:b09c with SMTP id
+ 956f58d0204a3-66521a2987dmr4247564d50.6.1782997247466; Thu, 02 Jul 2026
+ 06:00:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
- <20260702055744.2164975-4-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260702055744.2164975-4-mikhail.kshevetskiy@iopsys.eu>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:53:15 +0100
-X-Gm-Features: AVVi8CeLBAKWKQx1A4wngDw4RAh8iF4qczQd_Cdu1m-M6hqPS9Hl0TzlmdK7WS8
-Message-ID: <CAFLszTjiKwQnMUZTExsZyD65vOqYcrvVCihexPmLEEAo+N-Ndw@mail.gmail.com>
-Subject: Re: [PATCH v14 03/18] bitfield: Add non-constant field_{prep,
- get}() helpers
-To: mikhail.kshevetskiy@iopsys.eu
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- David Lechner <dlechner@baylibre.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>, 
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
- Andy Shevchenko <andriy.shevchenko@intel.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de, 
- Markus Gothe <markus.gothe@genexis.eu>, 
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>, 
- Alexandre Belloni <alexandre.belloni@bootlin.com>, 
- Jonathan Cameron <Jonathan.Cameron@huawei.com>, Crt Mori <cmo@melexis.com>
+References: <20260529153159.3944049-1-dario.binacchi@amarulasolutions.com>
+ <8aab07b8-9a23-4c0d-a2f9-3943f6490a60@foss.st.com>
+In-Reply-To: <8aab07b8-9a23-4c0d-a2f9-3943f6490a60@foss.st.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Thu, 2 Jul 2026 15:00:36 +0200
+X-Gm-Features: AVVi8Cd1TORiw-1IRZ7FaxiJrZvkRi6T2wgDRC04ImYM4sEn8PS_fnARYqwuiG0
+Message-ID: <CABGWkvoUa0AHPFmqD-AKfik8oMdBh=JD-1JUcb3cMFDovmdwmg@mail.gmail.com>
+Subject: Re: [PATCH v2] ARM: dts: stm32: add U-Boot specific dtsi for
+ stm32mp157f-dk2
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ michael@amarulasolutions.com, Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 02 Jul 2026 14:48:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,43 +115,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-02T05:57:27, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
-> bitfield: Add non-constant field_{prep, get}() helpers
->
-> The existing FIELD_{GET,PREP}() macros are limited to compile-time
-> constants.  However, it is very common to prepare or extract bitfield
-> elements where the bitfield mask is not a compile-time constant.
->
-> To avoid this limitation, the AT91 clock driver and several other
-> drivers already have their own non-const field_{prep,get}() macros.
-> Make them available for general use by adding them to
-> <linux/bitfield.h>, and improve them slightly:
->   1. Avoid evaluating macro parameters more than once,
->   2. Replace "ffs() - 1" by __ffs(),
->   3. Support 64-bit use on 32-bit architectures,
->   4. Wire field_{get,prep}() to FIELD_{GET,PREP}() when mask is
->      actually constant.
->
-> This is deliberately not merged into the existing FIELD_{GET,PREP}()
-> macros, as people expressed the desire to keep stricter variants for
-> increased safety, or for performance critical paths.
->
-> Yury: use __mask within new macros.
->
-> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-> Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-> Acked-by: Crt Mori <cmo@melexis.com>
-> Acked-by: Nuno S=C3=A1 <nuno.sa@analog.com>
-> Acked-by: Richard Genoud <richard.genoud@bootlin.com>
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-> Reviewed-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
-> Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
-> Reviewed-by: David Lechner <dlechner@baylibre.com>
->
-> include/linux/bitfield.h | 59 +++++++++++++++++++++++++++++++++++++++++++=
-+++++
->  1 file changed, 59 insertions(+)
+Hi Patrice
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, Jun 29, 2026 at 9:29=E2=80=AFAM Patrice CHOTARD
+<patrice.chotard@foss.st.com> wrote:
+>
+>
+>
+> On 5/29/26 17:31, Dario Binacchi wrote:
+> > The STM32MP157F-DK2 board is a direct derivative of the STM32MP157C-DK2=
+.
+> > As explained by ST [1], the "STM32MP157F-DK2 is assembled with latest
+> > STM32MP15 RevZ cut which is the only one available for new product now.
+> > The major differences in this 'F' variant SoC are the increased max
+> > frequency of the Cortex-A7 cores and the correction of some HW bugs
+> > (Device Rev.Z, see errata ES0438)".
+> >
+> > On the software/architecture side, this variant utilizes SCMI (System
+> > Control and Management Interface) for secure world resource management.
+> > As a consequence, the underlying stm32mp15-scmi.dtsi explicitly deletes
+> > several fixed clock nodes (such as clk_hse, clk_hsi, clk_lse, clk_lsi,
+> > and clk_csi), making it impossible to include stm32mp157c-dk2-u-boot.dt=
+si
+> > without triggering compilation errors due to these missing clock labels=
+.
+> >
+> > So let's introduce a dedicated stm32mp157f-dk2-u-boot.dtsi that directl=
+y
+> > defines the fwu-mdata node. This provides the necessary FWU metadata
+> > configuration required to allow automatic A/B bank selection, supported
+> > for STM32MP15 boards by commit 560d8f32703f ("board: st: stm32mp15:
+> > support dynamic A/B bank bootup").
+> >
+> > [1] https://community.st.com/t5/stm32-mpus-products-and-hardware/i-m-wo=
+ndering-what-s-the-difference-point-between-stm32mp157c/td-p/213460
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> >
+> > ---
+> >
+> > Changes in v2:
+> > - Drop the inclusion of stm32mp157c-dk2-u-boot.dtsi to avoid compilatio=
+n
+> >   errors caused by deleted clock nodes in stm32mp15-scmi.dtsi.
+> > - Directly define the fwu-mdata node in stm32mp157f-dk2-u-boot.dtsi to
+> >   properly support automatic A/B bank selection.
+> >
+> >  arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi | 11 +++++++++++
+> >  1 file changed, 11 insertions(+)
+> >  create mode 100644 arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
+> >
+> > diff --git a/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi b/arch/arm/dts/st=
+m32mp157f-dk2-u-boot.dtsi
+> > new file mode 100644
+> > index 000000000000..77805417bfa9
+> > --- /dev/null
+> > +++ b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
+> > @@ -0,0 +1,11 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacch=
+i@amarulasolutions.com>
+> > + */
+> > +
+> > +/ {
+> > +     fwu-mdata {
+> > +             compatible =3D "u-boot,fwu-mdata-gpt";
+> > +             fwu-mdata-store =3D <&sdmmc1>;
+> > +     };
+> > +};
+>
+> Hi Dario
+>
+> What about including stm32mp157c-dk2-u-boot.dtsi instead of defining fwu-=
+mdata node ?
+
+This was actually the approach used in v1. However, as you pointed out in t=
+he
+v1 thread [1], it does not build because stm32mp15-scmi.dtsi removes the
+clk_hse, clk_hsi, clk_lse, clk_lsi and clk_csi labels referenced by
+stm32mp157c-dk2-u-boot.dtsi.
+
+That's why I dropped the include in v2 and defined only the fwu-mdata node
+locally.
+
+Or am I perhaps missing something?
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20260512071157.564081-=
+1-dario.binacchi@amarulasolutions.com/
+
+Thanks and regards,
+Dario
+
+>
+> Thanks
+> Patrice
+
+
+
+--=20
+Dario Binacchi
+Senior Embedded Software Engineer
+M. +39 328 0625246
+dario.binacchi@amarulasolutions.com
+=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
+=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
+Amarula Solutions SRL
+ Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
+info@amarulasolutions.com
+www.amarulasolutions.com
