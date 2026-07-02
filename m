@@ -4,169 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253AFC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 15:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F15C3C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 15:24:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A36E6841F2;
-	Thu,  2 Jul 2026 17:13:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 71CB5841F2;
+	Thu,  2 Jul 2026 17:24:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jYyqaWN8";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="T8XbODOh";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="jcGWH8jK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44E2C84867; Thu,  2 Jul 2026 17:13:34 +0200 (CEST)
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
+ id 07C27847C3; Thu,  2 Jul 2026 17:24:43 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D85848407E
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 17:13:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7B838407E
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 17:24:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 662E1Q2B2612341;
- Thu, 2 Jul 2026 10:13:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=8j9s8ILqDhrCAkBywwdsTVDHpXzIn53ql2E/5WLgA
- as=; b=jYyqaWN8nKRPZlru1ah8lV4kYDr861Agq/GEcZmXBfY/YDUfitH45GhKI
- HPQdUQhkRPqK1IDkiiHIQOZBuEbfiHrUIsY3RiVviJ/XcVmFfY4/NLpthK2U8i5w
- yn3hGczHyd7Us3yG8neobC9G0PYeRvYvx0XeyXYxkWqbsGW3kT/EbI0QkdO4G6IN
- FL56o5qiOO+os3Z+pU3UN1P173v2ogxHCwUVaBKWJByWzynlpf+BgaStp3Q/qNpJ
- zL66T+ORf9enUbfnhgT41wHOSYOjPw4/XcDtyZ6EVvWjbAy2KNXUnlR9qHPNDlHq
- tHC7o1MXFsbJ0xEC9bTapyVhcFb3A==
-Received: from ch1pr05cu001.outbound.protection.outlook.com
- (mail-northcentralusazon11010023.outbound.protection.outlook.com
- [52.101.193.23])
- by m0380145.ppops.net (PPS) with ESMTPS id 4f5mn5a4db-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 02 Jul 2026 10:13:27 -0500 (CDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fvOJkki3R4bgXxAnPcCqgj3My866yl18aCFOmM1RVn+9RAPRA2oZlnizAtwRirEdBJat7dAM6kvpOIPfnn0IY3vfOeUTpa2sxZdO8ntlMDa6jRDUfED27ktcB2PfzXmec2VbfGwnSYumPOS3HawEVPTJzXK584BlTR6sPlfa3EmKKUdy1Oj1F7JpabUt6KyBNQxMBD0MjV78MvCM56rcGTSwmkQcrVjsyXQZK5MPCTZYgIJNDDos3patzumIMyEeYMWW8pC0Y08kfOgAxAJMAWA6rsEE6jFkbHBUW1jBqkvf8dRBIACVmt8HFVSZybgiQWDXYuNmt8KsambLdxmfCg==
+ b=b2904qopeIrW8TtzUOtV2Bc5EO7/tNcKxshRef7WziwkRTo3yJ0GyPkB9YxSAUtRJ1OdEInOvarXeb5e+VdEIW1pfDNati22vt1EoTE0ZAD+/hqxLYCUPyahjbC7ytKpi2Lf3V+RWzbjACBj2wUmHqea126W5Gg38xotm5ny3zJ6HS51su6E/3G+5hRBfQ95ZSWyNDlmXw4+Rf9ILvZoIbep/JBkGdMLvYuQ1TtPuWiZ9BIQ8Gs3VlF6xwGuEEpeuRm+sWQjyiRVmLkkNrt7cWWpjcT6Pjdte3HV00f46WCnCu2QFUa05b+LntjcaDSDdpfPPN1LSU3EG+rgNLFFtA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8j9s8ILqDhrCAkBywwdsTVDHpXzIn53ql2E/5WLgAas=;
- b=AmXoiQMspWj+ITnGV5QF6Vg2NLpX0mi15KeiLR1CcQUmmqTI1aSKdeUnUajNv1l+MPY1+9A729LDwpc2xQ025XoJ1JxjmL91ushu18vIEIL738Jn6kbRA2gvA47jFuLeqQ5gdsp7zfyMsXJ2dak7sYLheg4HvhBbiiZhjCQsh3DN6k4AeMxfILJp6DhRbtaYnDfigoX8C+OJd8flmUmW+TlDgnwM81B1hqC/iH43SyyO/1K7ampkCqjqJqu9Rx0cMCjZNTKetmpOs/vUVXulBYwJnztmtT2NxkBjzVcmFcAk6l2gqRFfFB1WEJ6HXCzKrnTNMvf0a30gjEd/JEXuVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=UkXF80j+PxeLC5pk0z5uVe3dLvT2spR6xPeGINBV2r4=;
+ b=g47JuQ30/me09aPc1yYPbAvGumZFIKy8MBG/30kcgniH5rTWlPlnm8+hRdnzeVp193sSw9k+u/n7IkG/BG5KCiT8bOQ6r497r5yF2bqvGGt8pG77EUItM3+qPmIMtWxPGhgKbK1av3xvxr94PXiXPFZj6TUHQIZMS72J8oLPCdfSeYxwLDCI/OmWcqHXHd3QBFROtRVE6T1HGMjk1eVh+HzmaZJ6FyH5i4ts0TxWcIPyLabgFOOz+S83UKCm5RvbN7XVPIMvApZNAjthfhjtwvKFPnl8TMprd2u1c2zImrpFd7440IhLA2JxyOiax7JkONFvAF5yMW4jf7m4YZq8hw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8j9s8ILqDhrCAkBywwdsTVDHpXzIn53ql2E/5WLgAas=;
- b=T8XbODOhfJ12n63XcoXvRRvuC9tEZf0jBBWHSuBwVAW1RL4gcCKfh//qi/ulkko+BkSQdTVR/bSYRXEoij4nBRV4SuCWySRiJiSEcFRxLGFd/ZYxAlk5coR4EBAzTt93IU/Zjn8MqntrU685PJA2LQ5hPmN9HoaZFxGZUoJijSk=
-Received: from SJ0PR05CA0205.namprd05.prod.outlook.com (2603:10b6:a03:330::30)
- by IA1PR10MB7336.namprd10.prod.outlook.com (2603:10b6:208:3ff::15)
+ bh=UkXF80j+PxeLC5pk0z5uVe3dLvT2spR6xPeGINBV2r4=;
+ b=jcGWH8jKZHjYuhH3aMeE2jmrgABa6xbJ65ud9T+qhDN4BJUwyulNPcdi5FEsE7FKP02BMfcGFg4MmNxUUKc9BROP0flZdD5JEaBmm1ceXs0zM6KmTRlAYxQDDaJfWZ/M21vV6mRUwqwJQik2tlovdmTnlA9YdtUchFAfctAeV9PtXptf0X8hIVV4D/ZCDJuAkkCYIXAwhhtEWjKuD15DV9ogKvG3n0OuQIcedI/htCKxdp18Wcz5ibJePH+wLPzGLA+Ln1QAntxudyt1AB9x8yKvy8tlmFvgfJ0VDUq+8rktwPlON6klEKtx+wG6wpok7wZmSHRWGNliXqee+k+PZQ==
+Received: from DU2PR04CA0065.eurprd04.prod.outlook.com (2603:10a6:10:232::10)
+ by GV2PR10MB9908.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:342::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Thu, 2 Jul
- 2026 15:13:23 +0000
-Received: from SJ1PEPF000023CF.namprd02.prod.outlook.com
- (2603:10b6:a03:330:cafe::1b) by SJ0PR05CA0205.outlook.office365.com
- (2603:10b6:a03:330::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.8 via Frontend Transport; Thu, 2
- Jul 2026 15:13:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ1PEPF000023CF.mail.protection.outlook.com (10.167.244.11) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.17; Thu, 2 Jul
+ 2026 15:24:38 +0000
+Received: from DB1PEPF000509F7.eurprd02.prod.outlook.com
+ (2603:10a6:10:232:cafe::5b) by DU2PR04CA0065.outlook.office365.com
+ (2603:10a6:10:232::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.10 via Frontend Transport; Thu, 2
+ Jul 2026 15:24:38 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509F7.mail.protection.outlook.com (10.167.242.153) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Thu, 2 Jul 2026 15:13:22 +0000
-Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 2 Jul
- 2026 10:13:19 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 2 Jul
- 2026 10:13:19 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 2 Jul 2026 10:13:19 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 662FDIKp3663234;
- Thu, 2 Jul 2026 10:13:18 -0500
-Message-ID: <8c45ccd2-f32b-45cc-951c-edf1a7827d0a@ti.com>
-Date: Thu, 2 Jul 2026 10:13:18 -0500
+ 15.21.181.6 via Frontend Transport; Thu, 2 Jul 2026 15:24:38 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 2 Jul
+ 2026 17:29:24 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 2 Jul
+ 2026 17:24:37 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 0/2] cyclic: update and optimization
+Date: Thu, 2 Jul 2026 17:24:35 +0200
+Message-ID: <20260702-optimize_cyclic_run-v1-0-92c5a7011f54@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] arm: mach-k3: Fix phandle corruption in fdt fixup
-To: Paresh Bhagat <p-bhagat@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-CC: <praneeth@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <msp@baylibre.com>, <v-singh1@ti.com>, <anshuld@ti.com>,
- <m-chawdhry@ti.com>, <joao.goncalves@toradex.com>, <bb@ti.com>,
- <n-francis@ti.com>, <sebin.francis@ti.com>
-References: <20260701075021.3626094-1-p-bhagat@ti.com>
- <20260701075021.3626094-2-p-bhagat@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20260701075021.3626094-2-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-B4-Tracking: v=1; b=H4sIALOCRmoC/yXMQQ5EQBBA0atIraeTVhGDq8hEKIUSmnQjZsTdp
+ 7F8i/8PcGyFHWTBAZY3cTIZj/AVAHWlaVlJ7Q2oMdZvjWqaFxnlxwV9aRAq7GoUU01R3ISYYAq
+ +nC03st/X/PPYrVXPtFwrOM8/XPc0L3cAAAA=
+X-Change-ID: 20260702-optimize_cyclic_run-ecdc46f12829
+To: <u-boot@lists.denx.de>
+CC: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.15.2
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CF:EE_|IA1PR10MB7336:EE_
-X-MS-Office365-Filtering-Correlation-Id: cec91505-7855-4ab6-39f3-08ded84c752c
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509F7:EE_|GV2PR10MB9908:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1fee00bd-ea3c-4d27-be9e-08ded84e0806
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|23010399003|1800799024|36860700016|6133799003|56012099006|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: CiTw8hAI5tj0Fzd/+DF2bo2xTanzBi6YfAcidytypucRU/UKBTdzzMLqZrVt3ZkD4KZkUC6X8E1fi6eOU4bChu10p4pTwPdRPrOPQmm1TQX++tEAow6NolEj3t+laBuuTeFXdDFV4TDmKaAQ3X3q6uev4WZHMje1QqWQygdSZ4ft4F8PCtQpQbJ2XA13Idnwk45vgUlCAT8zgyRm08mjmcVu4uL1vEhdNcO2nRewZcQ0/wDo65RUBnf+OM12JrHeu7Kn2mTmKWoe7GTbd0YrFVuRE/0tvEA3OZPM7AnIyL3GNb9T+Xv4pHAxHTLYgErzndX/tT+dfZfJxS1TqoVDmQgHyS2XXXVhcLWwFD62l/OP7hNitIlEsAs7JlrTdag9zrNbG/M9EMZQEQmofF/yEok7CI/x2bbS3Ihx/1JtTLvLozN3J6jrFCOPhov9OhyrjpYfZVYNjzByhFsOLeO6hmtaXP6t48THKQXfDU6d5yeWlj2/xkomx8miokVCg5QNwzPr5m7yAEG6RhF6uzTaZ780HE7jEeDC2AK1QM9UZf7QMCW2B1OcBjebNHgLyEhPERVUn1ybAOVvMFL91NxHmGwExwXJDbEh3dKeeE450+RC5tbsh4eb8R791aSucphPVVWr/lDy251dSmQTPWeqRnjU3/gQMaKo5NuuTSN4EguhFuJgfL8vkL/9fHTbkoEja29rI89cK5zUudJcD/DhPg==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(23010399003)(1800799024)(36860700016)(6133799003)(56012099006)(4143699003)(22082099003)(18002099003);
+ ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|11063799006|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: IaDNkkSXAnUeBFQhe5glUjbIoTsHcuvi5JL9Ynvw6dTS8xGDQ30dCsAo5JA36ubAWQ5faDiriKsEbfYw6c0li/QjsdAUTnQHArYZxR2/8NJyvihe6GZxrj27cXnD2fdG/OMBc52AQ6kdrFWDd2VTnWTjr8Q2lw6OzyAIFWWfcKR9vIJUk2U/WKfsL/x4SZ9Zz1hTaTmJyUMFyJrKyM23+0peiZaHZ9r1DP2EeqE0YVrU0YJ/kbve+H+L4Lsu7P27ZftxOwqZn572AtH4wTBLXY89qr7rZ4xwJAJFT8Pz76a3R1vX/imAAjRWLOhn+ducDUhOem0BQxilnmkvqeNykYuIeKpZSN8izS9BHfOnZ/J9xeB6VFir20dZ6w/z9Ee1tE4E3YrGxnRC9fhOU+qRtmcKVQIBITMyfmeEQABrj67KCMdC+d84/l0449dpYIUdv/i9QC1fgieoyAfhy8SxjyRjxAmh1dKm8WXPXF345GZHL8AnztgHOc81JsiDyomUJxJzQIb3pIOuubZsjT65yCxzK140adq4mYGvjPy2XLkzWICpy/vqL8ZNOuwE6QNb22mEYU3tm4KgLkPwmKCCf9OJX5jB+MkWDnELuPlUXwvWF1NbGO03qWAaHFHNYfaNG4mNnzAZkbr6+3obJ/WB52qXb93BKDBmHblyQ5znSzqF1YokVzAMDhm2+KRhc+EAXKK5EfX7kbi2ljPZ+Ne1RA==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(11063799006)(56012099006)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: dvAA8YRovwKQ8hXA1T8zdqoKGqRjIFfrKI4aR4hVs7uYdCBiKAi7uQBZdY4TXazGSLPZgn5DInmQ+GAuQxPqrvn1m7uoGp0m5WKAafMRiqN/ImHQwRUVq9fI3QWz3hFpIQhAq+mfdYUtDBWktiO9OZXFid/vUSuQJg0Up9ciN11ap3e0ZIlpIAb8447elpmvm4t0QkNbFvOfxHKh4bpboD8FO4PvVl2pyweYC5fd/p1n66oYnHI9Er8t1JiZgKs4cnM2TvrQaNGToDQ6BeiVmxmfIXaQQgw5M2vFWlrdq4YmWexkh2bjAauiV/4e5xJbh0TRnSB57oln4IbrTPyO0ouJ0+3pQBgvoZ0I6AtypUzJfVV81Fb/INMTYWNadRRmPtPsL5mUzasxbHgsfE+OW3a9qiBCORLqxqHzKXue+fKeMCfV5OzwEvLNBEXAQIgs
-X-Exchange-RoutingPolicyChecked: Bzy3YYmZQ86eEhmNqwBHRkG0RePB6pTuGzmLN7/4nWzuYJOHMdXlbbh82SgBFodvnPT+QUI8auOxyvPDoSGidts/zbUXsgEq07vk2nTVOqeNQPp/E6y3hP+FZyoD2rvnO39HajssOwn1GMsdutllxtUeHC73HDlgKrb7quUX8QL9+NKeXqjTQeUSiI41/ZqAuPjmrdYTkSMqel+aa+UDgnGKuW2+fwz3frlFesa3FMF27HmDbYjhnOS54bjMLOb3OsESusQHMdVzgn+NchtkMcZBaiIxrwZ35AHCSlFGhstNVinILmkX0zntjRbSHF7VIUngSYFIeinCN/uRlbskTg==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2026 15:13:22.7471 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cec91505-7855-4ab6-39f3-08ded84c752c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CF.namprd02.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: WKCkX/yCxn93xl4HnAcnDaQ1IrRhB5VBo+k68LC0exUHyyED+l70jXA68NuiTjYq6banl/LY9NqfJxet8gCpbL+JQvhbj5roRyuityFt6ZAqjNEcL1tZDC6qZz7QLBUXmpSPVQ7L8+pTW4mQyyOcM+N1RYFhuCHYe4z5+GASVLA4/yF4r5mDt0dVa2MTcfXw/BsLlU+CooCUZOh3DMMaerRsZznfQnYz6UYPWSjqa80iyMMiDQ6LX1sQRqf7uFoR/9KJ/kY730miPYllAI+lTrW7Wg9tQ5fwNYuyZLP2PU7N4GgH1lkVsUcXifLy4veb8FNuHX82tdTPMFDDekZ2/NcxIs4F+wmfTMc0KMyc8CP0eYS/5qh0vDGo9mTgzzwswc7N0sOlVic1TkwQnfqywuJ7vJ1j6Qjv8GEDytWbChgYvkLLpHnZZdgCI7NBd+sr
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2026 15:24:38.5680 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1fee00bd-ea3c-4d27-be9e-08ded84e0806
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F7.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7336
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAyMDE1OSBTYWx0ZWRfX45F29K3ol44+
- csen/QLXA9usDTxWgAbZmf592tWplVdvLlIyOkTYNvwsKd7PMlHYYYURkL5FD+Xb+5L98HhBLFl
- ZdEqtMNCPu+vxg4hsxI6YM1U9MH6Y/rBDZ516v7SbJfryxyg9c5ZradbtbpBCRf2uSLCEYs0R9P
- /+/7N2jgPj3egXVNRsnIhQiS/jWkJPiaLheml4PofxckkZzHVz/j6f9cqwa773iFteQPeI1JP8U
- RvkeH5nat6HbaDB84JlFJFROZYtQZntA5IWknBrnhdHYXz5H5wk7dpeoen498+FZixIOeY65qDE
- Oozkv/R2V3i5V9Bd2QpiYH2is9b7Z2Jz0KL5IKG/QgfxLKlAouhmgfvBeKJedKqGQFeJWQp4fpM
- by1y9F2uhbjN62MEBSz9byVscgGP+yWq588d5xna0uu/Q2o2D/hh+1Lzvq1d/2v1DCstOFP0QMh
- gmLHBTUUGFC6vSL6fSw==
-X-Authority-Analysis: v=2.4 cv=EMA2FVZC c=1 sm=1 tr=0 ts=6a468017 cx=c_pps
- a=ubRrNrA1i3DLWGMHTGxaeQ==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=tl4KMOLoBlq8R2gxGJYA:9
- a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAyMDE1OSBTYWx0ZWRfX65fNS7z6mKcA
- ZMqZTSd1FJxpCFJ1Frd45/7UNCgDo0zjjYz9i/1ftONUMbNvKd269up7eh38Tj+5yDq4/qNyp0Y
- zvbB+bppz9isQ7wIavbzp4Nmyr2oRXQ=
-X-Proofpoint-GUID: dqvC0VdLGj_iNFfUfdXsNNjc1WctXnUn
-X-Proofpoint-ORIG-GUID: dqvC0VdLGj_iNFfUfdXsNNjc1WctXnUn
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-02_02,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 priorityscore=1501 clxscore=1011 spamscore=0
- adultscore=0 suspectscore=0 malwarescore=0 phishscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607020159
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB9908
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,104 +131,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/1/26 2:50 AM, Paresh Bhagat wrote:
-> Fix phandle corruption in fdt_fixup_reserved_memory()
-> 
-> The original implementation used a delete/recreate approach:
-> - Find existing reserved memory node (e.g. tfa@80000000)
-> - Delete the entire node with fdt_del_node()
-> - Create new node with fdtdec_add_reserved_memory()
-> 
-> This worked fine for ATF and OPTEE nodes because no other device tree
-> nodes reference them via phandles but other nodes example DM are
-> referenced by R5 nodes.
-> 
-> If these nodes are deleted and recreated, it will not have any phandle
-> property but the nodes referencing it will still contain the old
-> phandle, causing initialization to fail.
-> 
-> Update nodes in-place instead of delete/recreate to update only the
-> "reg" property using fdt_setprop().
-> 
-> Fixes: 8b0fc29de0e3 ("arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory node in FDT")
-> 
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-> ---
->   arch/arm/mach-k3/common_fdt.c | 31 +++++++------------------------
->   1 file changed, 7 insertions(+), 24 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-> index 39cb00c3f43..4b833f5fabe 100644
-> --- a/arch/arm/mach-k3/common_fdt.c
-> +++ b/arch/arm/mach-k3/common_fdt.c
-> @@ -119,7 +119,6 @@ static int fdt_fixup_reserved_memory(void *blob, const char *name,
->   				     unsigned int new_size)
->   {
->   	int nodeoffset, subnode;
-> -	int ret;
->   	struct fdt_memory carveout = {
->   		.start = new_address,
->   	};
-> @@ -129,43 +128,27 @@ static int fdt_fixup_reserved_memory(void *blob, const char *name,
->   	if (nodeoffset < 0)
->   		goto add_carveout;
->   
-> -	/* Find existing matching subnode and remove it */
-> +	/* Find existing matching subnode and update it in place */
->   	fdt_for_each_subnode(subnode, blob, nodeoffset) {
->   		const char *node_name;
-> -		fdt_addr_t addr;
-> -		fdt_size_t size;
-> +		u64 reg[2];
->   
->   		/* Name matching */
->   		node_name = fdt_get_name(blob, subnode, NULL);
->   		if (!name)
->   			return -EINVAL;
->   		if (!strncmp(node_name, name, strlen(name))) {
-> -			/* Read out old size first */
-> -			addr = fdtdec_get_addr_size_auto_parent(
-> -				blob, nodeoffset, subnode, "reg", 0, &size,
-> -				false);
-> -			if (addr == FDT_ADDR_T_NONE)
-> -				return -EINVAL;
-> -			new_size = size;
-> -
-> -			/* Delete node */
-> -			ret = fdt_del_node(blob, subnode);
-> -			if (ret < 0)
-> -				return ret;
-> -
-> -			/* Only one matching node */
-> -			break;
-> +			/* Update the reg property in place */
-> +			reg[0] = cpu_to_fdt64(new_address);
-> +			reg[1] = cpu_to_fdt64(new_size);
-> +			return fdt_setprop(blob, subnode, "reg", reg, sizeof(reg));
+First patch is replacing uint64_t by u64 as suggested by b4
+Second patch optimizes cyclic_run() to parse cyclic list only 
+if a cyclic function's timestamp is elapsed.
 
-Note that this only updates the `reg` property, not the node name itself
-which will still include the old @address. Not that it really matters though,
-I'm just trying to remember why I used a delete/recreate approach here in
-the first place.
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
 
-This also assumes address and size cells are always 64bit (which should
-always be the case, but might be good to check).
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+Patrice Chotard (2):
+      cyclic: replace uint64_t by u64 suggested by b4
+      cyclic: parse cyclic list only if next cyclic timestamp is reached
 
-Acked-by: Andrew Davis <afd@ti.com>
+ common/cyclic.c                   | 16 ++++++++++++++--
+ include/asm-generic/global_data.h |  4 ++++
+ 2 files changed, 18 insertions(+), 2 deletions(-)
+---
+base-commit: 1296a428c67cf103eca482d4a63349661c1b799f
+change-id: 20260702-optimize_cyclic_run-ecdc46f12829
 
->   		}
->   	}
->   
->   add_carveout:
->   	carveout.end = new_address + new_size - 1;
-> -	ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
-> +	return fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
->   					 FDTDEC_RESERVED_MEMORY_NO_MAP);
-> -	if (ret < 0)
-> -		return ret;
-> -
-> -	return 0;
->   }
->   
->   int fdt_fixup_reserved(void *blob)
+Best regards,
+--  
+Patrice Chotard <patrice.chotard@foss.st.com>
 
