@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23BA7C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 21:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133E1C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 21:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49156848BF;
-	Thu,  2 Jul 2026 23:11:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50187848BF;
+	Thu,  2 Jul 2026 23:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="dBQCwwoY";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="HdcDbEO4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA7F7843B6; Thu,  2 Jul 2026 23:11:07 +0200 (CEST)
+ id AD2BB84A5F; Thu,  2 Jul 2026 23:22:52 +0200 (CEST)
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A49684A5F
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 23:11:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1112B84409
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 23:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1783026655; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1783027362; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=Hils4ltCcDRNHqlcSyn1XZVVSfyq/iAWhAJvgczP6Xt4VMRZhUqbp6REadTgLN+52VF9D820PuaNBYO0VEargePKG3F6HNSvU251mE9dle6rrQ+avcBglLYn+6+gUp65R7DYGsXRC7XMzXQsVHW4pdc+sD+wzxbXdvLJYGfKYso=
+ b=XY7nAMOynBp8RRP7L/rsl4fRaJ5DMzOMGlz0V8iMVa8CMKPLYctptzOR7CA/sE2Etb5Qq6zFEFr8jugdxRCrhmU0xdxXp1PxrbRSP4XTilU7yGPgKgOCqDNCNpz7bRoIpgdwc9fQnemhAdzJ34CxvsPQNC1VCLN1pFZ9dUKSzf4=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1783026655;
+ s=zohoarc; t=1783027362;
  h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=yq6lx0GA1IBjK9ST1hAnF+NTeP4VZUryf+jVntESbGc=; 
- b=d3CMlL/FdNFkF/M5zuZtTWlTvfiHBg5IkYjr6qngDg+4so3lbJNx/lGWEbzUxNx5xb0xkx7MHeULDHJ/HJ+1gpCAmdEAXc3ypIltHdGg73l61Zf93YBhM+VyC3uryEIHfxMQGEEYUVe+9bvL0hCdAnGasKBXyVYNkq6epEvT9hc=
+ bh=xPXM80zdI1hFuT0Hi4lp0A0bmQaGctL96Qj4cInyDFA=; 
+ b=OOkIos/iNYoP9aSrBYwEoX3DbSnPBj/ME89qv+/kCblUdQ+ljF9G5+FStjUGizdTQBP36wZ7+sEvr3O+CNPWHYOSvteIb2gP3sZlYmESVcNmRmrZU85+5SjsFFR0wfACW9xroKLL47+xppq2y4MbeiAcELvXszMReZmiVWde2G8=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783026655; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783027362; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=yq6lx0GA1IBjK9ST1hAnF+NTeP4VZUryf+jVntESbGc=;
- b=dBQCwwoY28MoRorFpzlysT7N1MV/RdJacu/31U9tJV292+8T4hg/7XgNJ1TbRXzk
- HTZuBEtTyi55Eet6AGnfzUMnXQF7i8TkbWiWm8JB2xaSiHvrA+Hg8RjEjMgOmLWFTgO
- Njh1YZCKQevHjarXxB9Spyrq3viT29HD1CAg+6v0=
-Received: by mx.zohomail.com with SMTPS id 1783026653044238.29621597020025;
- Thu, 2 Jul 2026 14:10:53 -0700 (PDT)
-Date: Thu, 2 Jul 2026 21:10:47 +0000
+ bh=xPXM80zdI1hFuT0Hi4lp0A0bmQaGctL96Qj4cInyDFA=;
+ b=HdcDbEO4zoQq2You1pfYmJ10LxryMkdxhLFbTutebuPfPCALXm/xLzew8ahfM9hq
+ tx7n5GNhhSj+sAD8iGh+CDWdVnVqD3XXsfSeq9/ivTbcT/FKM2dr5X16N5qTo9wJfPj
+ d8j7lo5/cZmcwmLYSM0vOZlMIgHKVpT0OZWjFrz0=
+Received: by mx.zohomail.com with SMTPS id 1783027360206746.6396857957118;
+ Thu, 2 Jul 2026 14:22:40 -0700 (PDT)
+Date: Thu, 2 Jul 2026 21:22:34 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
+To: Simon Glass <sjg@chromium.org>, me@ziyao.cc
+Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 03/16] image: Take entry point as an output of
- setup_booti
-Message-ID: <akbT18QKNzWz0Fhp@pie>
+Subject: Re: [PATCH v2 06/16] LoongArch: skeleton and headers
+Message-ID: <akbWml4l4v5Kz64s@pie>
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-4-me@ziyao.cc>
- <20260701173940.GN749385@bill-the-cat> <akbMkCvTJtLlse6C@pie>
- <20260702205522.GE749385@bill-the-cat>
+ <20260701111808.870705-7-me@ziyao.cc>
+ <CAFLszTitRPvZe3Z5aCXwLogJVjjWJEV-5HmhZeG2rfudOJLOMA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260702205522.GE749385@bill-the-cat>
+In-Reply-To: <CAFLszTitRPvZe3Z5aCXwLogJVjjWJEV-5HmhZeG2rfudOJLOMA@mail.gmail.com>
 X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,64 +77,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 02, 2026 at 02:55:22PM -0600, Tom Rini wrote:
-> On Thu, Jul 02, 2026 at 08:39:44PM +0000, Yao Zi wrote:
-> > On Wed, Jul 01, 2026 at 11:39:40AM -0600, Tom Rini wrote:
-> > > On Wed, Jul 01, 2026 at 11:17:55AM +0000, Yao Zi wrote:
-> > > 
-> > > > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > > 
-> > > > For LoongArch the start of the image is not the entry
-> > > > point to the image.
-> > > > 
-> > > > We refactor the code base to allow entry point to be
-> > > > supplied by setup_booti.
-> > > > 
-> > > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > > > ---
-> > > > 
-> > > > Changed from v1
-> > > > - Correct type of "entry" argument for RISC-V and sandbox
-> > > 
-> > > Can you please also provide a link to
-> > > https://www.kernel.org/doc/html/latest/arch/loongarch/booting.html which
-> > > probably should cover this, but I'm not entirely sure does?
-> > 
-> > It does in a non-obvious way, quoting part of the image header,
-> > 
-> > 	u32     MZ_MAGIC                /* "MZ", MS-DOS header */
-> > 	u32     res0 = 0                /* Reserved */
-> > 	u64     kernel_entry            /* Kernel entry point */
-> > 
-> > comparing it to the RISC-V version[1],
-> > 
-> > 	u32 code0;                /* Executable code */
-> > 	u32 code1;                /* Executable code */
-> > 	u64 text_offset;          /* Image load offset, little endian */
-> > 	u64 image_size;           /* Effective Image size, little endian */
+On Thu, Jul 02, 2026 at 11:28:23AM +0100, Simon Glass wrote:
+> Hi Jiaxun,
+> 
+> On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
+> > LoongArch: skeleton and headers
 > >
-> > The start of LoongArch image isn't marked as executable.
+> > Commit for directories, Kconfig, Makefile and headers
+> >
+> > Some of them are copied from linux, some of them are derived
+> > from other architectures, the rest are wriiten on my own.
+> >
+> > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > Signed-off-by: Yao Zi <me@ziyao.cc>
 > 
-> Perhaps it's worth clarifying in the kernel documentation then? Thanks.
-
-Sure, Jiaxun and I plan to improve the kernel side documentation, and
-additionally improve LoongArch image header to make the image executable
-from its start, aligning with aarch64 and riscv64.
-
-However, there isn't a promise when it would land, and even with the
-improvement to image header, we still have to parse the text_offset
-field to keep compatibility with older images.
-
-> > Additionally, should I include the URL of "latest" kernel documentation,
-> > or using a link with explicit kernel version (e.g. [2]) to ensure the
-> > content doesn't change or become 404 over time?
+> > Some of them are copied from linux, some of them are derived
+> > from other architectures, the rest are wriiten on my own.
 > 
-> Ah, true, yes, lets point at the v7.1 tag, or whatever you're testing
-> this against, to cover future changes if any.
-> 
-> -- 
-> Tom
 
-Best regards,
+...
+
+> > diff --git a/arch/loongarch/include/asm/asm.h b/arch/loongarch/include/asm/asm.h
+> > @@ -0,0 +1,186 @@
+> > +/*
+> > + * Size of a register
+> > + */
+> > +#if defined(__loongarch__) && __loongarch_grlen == 64
+> > +#define SZREG        4
+> > +#else
+> > +#define SZREG        8
+> > +#endif
+> 
+> This is inverted - on 64-bit LoongArch a register is 8 bytes, not
+> 4. The result is that REG_L/REG_S resolve to ld.w/st.w on the only
+> ISA this series supports. Linux seems to use __loongarch64, BTW.
+
+__loongarch64 is a deprecated macro, provided for only compatibility
+reasons[1]. For v1 of the series Heinrich has raised this[2], so I
+tried to migrate to the new ones but obviously messed it up here :(
+
+...
+
+> > diff --git a/arch/loongarch/include/asm/types.h b/arch/loongarch/include/asm/types.h
+> > @@ -0,0 +1,37 @@
+> > +#ifdef __KERNEL__
+> > +
+> > +#define BITS_PER_LONG _LOONGARCH_SZLONG
+> 
+> _LOONGARCH_SZLONG is never defined anywhere in the tree, so this
+> expands to an empty token. Please either define it (e.g. 64 for LA64)
+> or drop this and rely on asm-generic/bitsperlong.h like other arches.
+
+_LOONGARCH_SZLONG is a pre-defined macro provided by toolchain[3], so
+it wouldn't be expanded to an empty token. But after examining the
+toolchain convention documentation, I did find it's also deprecated.
+Will drop it in the next version.
+
+> Regards,
+> Simon
+
+Thanks,
 Yao Zi
+
+[1]: https://github.com/loongson/la-toolchain-conventions/blob/36d207cd76301618624d10e67daf7b7f1c060411/LoongArch-toolchain-conventions-EN.adoc?plain=1#L791
+[2]: https://lore.kernel.org/u-boot/304f9e83-45eb-4f8e-98f3-2658aac5c20b@gmx.de/
+[3]: https://github.com/loongson/la-toolchain-conventions/blob/36d207cd76301618624d10e67daf7b7f1c060411/LoongArch-toolchain-conventions-EN.adoc?plain=1#L811
