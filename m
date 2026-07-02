@@ -4,89 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B151C43602
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:55:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91FBC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 20:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C72848BF;
-	Thu,  2 Jul 2026 22:55:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DC61848BF;
+	Thu,  2 Jul 2026 22:57:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NI7qRkkb";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="aXGKBjX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AE84849F0; Thu,  2 Jul 2026 22:55:29 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D05AF84A04; Thu,  2 Jul 2026 22:57:11 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 214AB843B6
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6a183eb9689so1459162eaf.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 13:55:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783025726; x=1783630526; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v2KvB3tiRVx+lEIQdyGHk98WMgGMO1wAcVy89PchE50=;
- b=NI7qRkkbIn1VvLHjynfyWYOXylLb14yknWSmA1uaFnxuyCT2lOnzjC4/ObeMWLKXtf
- B7jiqoCG5G2NupYiirhhbQKdxGVSZ37vBC4IhqKGKZF4QfBM/n6bmQ+s9uRNDn6N2Xvu
- IW8ZxS9TtALmYJnyqDlgraP8OEreQp7Zh7Ef0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783025726; x=1783630526;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=v2KvB3tiRVx+lEIQdyGHk98WMgGMO1wAcVy89PchE50=;
- b=bqdT1BSndp7ziKbsHIOPSNTV4pPACrPCLnp1RUxssKJv2Oh3XjCTooAm0Ykd+LVWm1
- DIZG25MxgjuW2vwMOuLyysH+cP0/pNHYyGoY5GMVl4JxmKfaP1WyS2wHJzD16riMEmqM
- R1fGPhdPpB2FBKnMqL+HKCT28qe62p9W70tchTX2hNOqjAy4+gtF/1Wu+VKFxZ8Y4pPi
- q6aLhrbFxDVkngNJac6xnC0WYxjJxF+IEQvebNrWvSmeEZfcclMdhkPyiPBuJQhu+Clu
- jlyaQd701MstQFTagkHB6KOMqTwg20VtCe3JAgCOoMkZxRI7ITqihJMbeGMy7dm2mhDQ
- FR4A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+2P5AwFDE9xxL/FpUIGI1Rg5C/gDy5nYkeJGs3YaRAokWaErWXbvWJsgsTTlMedFyNt3k27so=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdBgxYV/WWym5rIrDd6i43fHnkJDpYUFnd8GrGUqIKN682iAAo
- 9SXVeUuhG1V6Y3sF5JdYkBx09JThBSP7Mbfl3qd1gyAmNdX0R2vMjlQF385HNstHpkE=
-X-Gm-Gg: AfdE7cnko6vnKNgxvwpLzuFMFZonDIDu7Rr508nfcUHtNyIuPhYHdbYHb1Q0vxxOC1D
- dbjgzERWGaM94AMETfQGp+25q0wrhdRt3XqbaOAI5Wh4PiCjjMIfDHmVQxXT+kXa7y9/epEgO98
- vQfQ7m2asQyYdh9hkdwL3otAWxZHbPd31D131I7IJ0wTjYekuTIVzFVn7W0YQ9O8MDF5QqM8a7z
- lLYwbP36qvp/JL0CPC77uD3JUs9KtqfymyqJ26WteF3yc6fBhFBF0LIbmsfXr4wKyYjZixiSB4a
- RGWtZYzst6vq4RCv7RE56A6mpCKMTsXarI5Nggx5ZnaHBdxb70j8BOoRSTdA0MlYPblSwZLvzNG
- qM+sSp3ZO+qDa9uGtgxdKYyDR3BzzR2eMs5hfHIwaZOBGQNlH/7xCcy7kcqWGZWBgyrHqvl4Nn0
- aoVUIQVhBwq2HjVbDI27bFsDn2/nAqrvq/cwVSjSNNEa4ohvXaWSVh8G0sQuoE+vjuaRRbslokG
- 2+t3snRdui8cwE8eDsyzuLyCfwsZLZbaawjSb/3lJKEmonS
-X-Received: by 2002:a05:6820:2019:b0:69e:aea3:333e with SMTP id
- 006d021491bc7-6a30d8f84e8mr4155853eaf.54.1783025725649; 
- Thu, 02 Jul 2026 13:55:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7eb544a1725sm3394584a34.16.2026.07.02.13.55.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 13:55:24 -0700 (PDT)
-Date: Thu, 2 Jul 2026 14:55:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ by phobos.denx.de (Postfix) with ESMTPS id 5EEF8843B6
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 22:57:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1783025824; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=ZPSMiO8Jay++6F+sL1q3ZZT8hs3uXNLwXMgG0j4YHwlgrGWhazpxMhZyDGw32ql0DZ3vtUrGKTtnLD4p8Du6cb+2tRN3TQU4ebOtoYyT7p6PDS6pB7D+OXvfPFCZe8Is7JHFQHX3LB33pXtOILyFP+enUx6brkFliD3cdZegxy0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1783025824;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=WIVXnRtv/zx7JK5sFaRn2diOd3nrcZS1NA2Wg0XV9Cw=; 
+ b=YhaWYYukPSSsh0ZmycuCptF9RQciJKKD+gbOluAVXeiW7zq3ls7p1MC7WiKVWipmKmU2nDTCrUqvYUz8kdc4F8yDcSGLdyzjACSvwxAvnBhCmOREa9BVR51AJ5B1BNdcJIL+PU0q5YLrceYwQ0I3H2vwRwazyGIc32nsGk9KhMw=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783025824; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=WIVXnRtv/zx7JK5sFaRn2diOd3nrcZS1NA2Wg0XV9Cw=;
+ b=aXGKBjX4ZpXztu5ipcWWv1rdL8lfOjtfVLoTA/YHXYm+rxd6rwUKfV7X9Ta0+KSi
+ CikfujMzSkyXxu7pVvJjvlrwTTSoLHGN0vOF9zMdhX+4I7hKDqu16nSj2IyOyuWBd/Y
+ oDTr7m33ld27Rlb9r6SIWhgc1GfAN9IsH2+6qXPA=
+Received: by mx.zohomail.com with SMTPS id 1783025821532690.3938542362309;
+ Thu, 2 Jul 2026 13:57:01 -0700 (PDT)
+Date: Thu, 2 Jul 2026 20:56:46 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Yao Zi <me@ziyao.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 03/16] image: Take entry point as an output of
- setup_booti
-Message-ID: <20260702205522.GE749385@bill-the-cat>
+Subject: Re: [PATCH v2 07/16] LoongArch: lib: General routines
+Message-ID: <akbQjpFwVPkwTE4p@pie>
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-4-me@ziyao.cc>
- <20260701173940.GN749385@bill-the-cat> <akbMkCvTJtLlse6C@pie>
+ <20260701111808.870705-8-me@ziyao.cc>
+ <20260701174940.GP749385@bill-the-cat>
+ <1c9f6db6-4307-4860-851e-be46ce2382d6@app.fastmail.com>
+ <20260702140708.GX749385@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cD7LU6LngheoTkiU"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <akbMkCvTJtLlse6C@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20260702140708.GX749385@bill-the-cat>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,71 +78,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jul 02, 2026 at 08:07:08AM -0600, Tom Rini wrote:
+> On Thu, Jul 02, 2026 at 10:24:28AM +0100, Jiaxun Yang wrote:
+> > 
+> > 
+> > On Wed, 1 Jul 2026, at 6:49 PM, Tom Rini wrote:
+> > > On Wed, Jul 01, 2026 at 11:17:59AM +0000, Yao Zi wrote:
+> > >
+> > >> From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > >> 
+> > >> Add some common library routines for the architecture.
+> > >> 
+> > >> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > >> Signed-off-by: Yao Zi <me@ziyao.cc>
+> > > [snip]
+> > >> +#define CACHE_MAX_LEVEL		3
+> > >> +#define CACHE_MAX_INDEX		6
+> > >> +#define CACHE_OP		GENMASK(4, 3)
+> > >> +#define  CACHE_INDEX_INVWB	0x1
+> > >> +#define  CACHE_HIT_INVWB	0x2
+> > >> +#define CACHE_INDEX		GENMASK(2, 0)
+> > >
+> > > I was expecting checkpatch.pl to catch the double space here, but it
+> > > didn't. It did warn about a few other things in macros, which should be
+> > > checked out at least. And that comment applies for the whole series,
+> > > along with a manual check for other spacing issues, thanks!
+> > 
+> > Those style issues are mostly copied over Linux kernel counterparts, should
+> > we leave them as is to ease kernel rebasing effort, or fix them for consistency
+> > with rest of the U-Boot?
+> 
+> Ah, OK then yes, we can leave those if it's a match-up with the kernel,
+> but should make note of that in the commit message when applicable, not
+> just the cover letter. It will make finding that reasoning easier in the
+> future.
 
---cD7LU6LngheoTkiU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, most style issues are in files copied from the kernel side, before
+sending v2, I do have a brief look and fix some of them (for example,
+mixed TAB/space and multiple empty lines).
 
-On Thu, Jul 02, 2026 at 08:39:44PM +0000, Yao Zi wrote:
-> On Wed, Jul 01, 2026 at 11:39:40AM -0600, Tom Rini wrote:
-> > On Wed, Jul 01, 2026 at 11:17:55AM +0000, Yao Zi wrote:
-> >=20
-> > > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > >=20
-> > > For LoongArch the start of the image is not the entry
-> > > point to the image.
-> > >=20
-> > > We refactor the code base to allow entry point to be
-> > > supplied by setup_booti.
-> > >=20
-> > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > > ---
-> > >=20
-> > > Changed from v1
-> > > - Correct type of "entry" argument for RISC-V and sandbox
-> >=20
-> > Can you please also provide a link to
-> > https://www.kernel.org/doc/html/latest/arch/loongarch/booting.html which
-> > probably should cover this, but I'm not entirely sure does?
->=20
-> It does in a non-obvious way, quoting part of the image header,
->=20
-> 	u32     MZ_MAGIC                /* "MZ", MS-DOS header */
-> 	u32     res0 =3D 0                /* Reserved */
-> 	u64     kernel_entry            /* Kernel entry point */
->=20
-> comparing it to the RISC-V version[1],
->=20
-> 	u32 code0;                /* Executable code */
-> 	u32 code1;                /* Executable code */
-> 	u64 text_offset;          /* Image load offset, little endian */
-> 	u64 image_size;           /* Effective Image size, little endian */
->
-> The start of LoongArch image isn't marked as executable.
+But the diff quoted here isn't copied from kernel side, it's written by
+myself. I consider the double space meaningful since these two macros
+are two possible values of CACHE_OP, and found similar styles in
+tools/zynqmqimage.h (PART_ATTR_*) and kernel side, do you think it's
+acceptable?
 
-Perhaps it's worth clarifying in the kernel documentation then? Thanks.
-=20
-> Additionally, should I include the URL of "latest" kernel documentation,
-> or using a link with explicit kernel version (e.g. [2]) to ensure the
-> content doesn't change or become 404 over time?
+> -- 
+> Tom
 
-Ah, true, yes, lets point at the v7.1 tag, or whatever you're testing
-this against, to cover future changes if any.
-
---=20
-Tom
-
---cD7LU6LngheoTkiU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakbQNgAKCRAr4qD1Cr/k
-CttcAQDmb4eObhmZakbzxV81Oapuc5hCP+CqscoucFJfgrr6aAEA9hZaG8GU9BrJ
-L2DpiqJ0kDp3ghATlnqfPcGgh9fvwgI=
-=JbV2
------END PGP SIGNATURE-----
-
---cD7LU6LngheoTkiU--
+Regards,
+Yao Zi
