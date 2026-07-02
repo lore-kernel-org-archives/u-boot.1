@@ -4,95 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4880C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE59C43327
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:53:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8388584A3E;
-	Thu,  2 Jul 2026 12:31:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 84045848BF;
+	Thu,  2 Jul 2026 12:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KKzcfsTA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S763FXz7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0155E84A47; Thu,  2 Jul 2026 12:31:59 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 8CD3A848EB; Thu,  2 Jul 2026 12:53:09 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 110F484994
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93FD4846FD
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-698b899b4c8so230431a12.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:31:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988316; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6986578d8c0so2830804a12.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:53:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782989587; cv=none;
  d=google.com; s=arc-20260327;
- b=a95pHiyGNpot3qUtyvR68Pvaae8Gizb2z7lX25Lg76/6SyeaHz7td+LCRq27tGWY5b
- tah0NQ9SbpW9Rygn6rHNcJtZIUaaO9NP8Eh0sIR4Msefq+iwjUty8Wqpbvmb+7+NiShF
- Gc19YQKzkz0io/nSBllEwhkYo+o1TDAzKAuFDAADKTlrnW+zpgg5UKuLfqrHU9r9zeb/
- +jDu3eynrDAUpWB5RIjqrRW/tGF/XirBM4tTS5y/njxyggRIqxK7oZ1s99d01PsvBK3J
- 3soNSV9gyaRDTy7EGNKE+aYHec4SIQXNecju8V88KuwlYm76E3CEdrTYaFLHK7NGXFqO
- VLlQ==
+ b=hePSvoqOpu31ODI3dZ09xVP0oV32xpuqF5yq2wdE9GpkzZKZa+KrSvK2+tMxBopP50
+ A4be5GAzmtgAXEvRF4XRDFZoIpnWVQT3OBsFx0BXS5B0sAITPH8Az/v1pdpFwUVmMSj/
+ bEeG2unZxe54KHOg8MkQKUy6KmhLx7+Ida06PbdgoOLP8hbDCR7ukrh1FLKdxbAy+KPS
+ D256V0H7MZXERDXbBIB3sDu+rt7v4zrsn5Rg60P5rm5Tm+pIj+Xms8MaG82ckGCCE8vn
+ S+0DICPrmBEB7wTg60WfEDnOmwT913NfL+W4tCe+jFKrJmaWjxpsqFGJXsylp3KpkaSL
+ OdLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=AGuNUYHqRuBqXu9aqIeKYWO5y5CDETu+Zc04BbMhUN4=;
- fh=pt2uM+ZKWrD3EHxOE2AfD00c+eqnHO3zOVp2+lroPqU=;
- b=fEO/nuxjcoJSg7kDRNxdITT1IqX8FeCzC/EaYUkIQTyFRC9F+lPauHQcj2UBvsajwm
- bilxX91nt19QH1+WWbBXae4TO1rwgk+K+VQ6Nr8JoTVMJgotkq8psAuZRVa5AC60kZL3
- WJdqZpYHrp9AxTzDLbhoRyh9oT9gZ9nTqGYhZKQoDac6CCAdNXIth8dqir9nXGKv3XlN
- bow7diNuKtiPHD+M3jTFsW7083KEUBlhy/XThFOPx+ECBdXCW8f2rtAC77LF3C4bYW6d
- 0CCaQeIskFocau3xeEGR9yHonJWfo/AKPOrUpSbVvakWjKpTwG0mBEU52LzrX1C3zZ/f
- 1Bsw==; darn=lists.denx.de
+ bh=5t6tscPU2TVrnyj/SX8HjYX5/NwvPo5QWAptpke7AtY=;
+ fh=fDRPFfo8wg+H7JA8tulyVp5A5WsiHidgebHesXw8vT8=;
+ b=lCTdu14k5AM9UgJ9EwLxNTEGsSFe89cuk/zM58PcgqdMK3V7rE3grIa2HV8sC060oQ
+ JGjaAvobynFL5bjFZUk0gx/gJOBy0RttxltOEcm7Mgwy8Bn7DjbiMnjXUcYbWweDSA5o
+ P+wE4tIUatvi5ZzHxd5wlqCZcJw6MTLI66mEo4mqnOg3aGcPd4lFxiL3108lK26BMeqw
+ T+rL6OybJhRTqfDwE3MYUM6/j0mchfb9d5vxkWqPzqNmM3XKqhCMBBzZCmZ71JcrO/6M
+ Py/QaBSatj3oXl2A8TstJfyP7RDt2t8Sgis8Um4GFFhLSKNlyC9zmhWr/Bp0LYAZnugh
+ hKaA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988316; x=1783593116; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782989587; x=1783594387; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AGuNUYHqRuBqXu9aqIeKYWO5y5CDETu+Zc04BbMhUN4=;
- b=KKzcfsTACK3ddMKO+/OCVlgBTOYZIsMHLk8O6qOgqvJwagYyVWgrTbyWs4/bAM+X7N
- DQIe8BEJr3Y2sId+n9W5+Eib5eiEYhM3Mt8mHlQoXD8+PKnt69D9RpHpgllIxSsp5bNj
- kh6hWggLQGZBBm8dPh/0iB1nDAZ14MT+qZn+o=
+ bh=5t6tscPU2TVrnyj/SX8HjYX5/NwvPo5QWAptpke7AtY=;
+ b=S763FXz7YASxGJDpmHSqF29dzx9DXn6ATRkXfAMHJ/ITR1M9p/tyUowbn+5Y06NNB6
+ ExQAZET4PvxSwse+fs8jIBXRhh6IZzM+iegdAqLMgZVqsRs7YRr/zPIo//VwclSP+9dm
+ DXvOswDD3MpaK9prAhcn7/VRlZ719Y1DMO0D4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988316; x=1783593116;
+ d=1e100.net; s=20251104; t=1782989587; x=1783594387;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AGuNUYHqRuBqXu9aqIeKYWO5y5CDETu+Zc04BbMhUN4=;
- b=SsZDp+VfVvI6ex3qpI3eHzKV3vTVSVjtqbobq+af0YV8KWg6hSBeIHM26lueJOCB3h
- AkpRyf526nHR7PZJOqyyX4gyTQrkBSLSaPtcmaBn/z+VB0Rc1M5Fp5477BrhxynCHg0I
- aeh41wHVKzyHw/1FSxsmK4Z4DZBrufox0VOnxJuxJhpo7aEfMGuyaf6odt+/IQ9exsyq
- fIA1JG37+/A5DRoe4Vh99AkHOqGqiiz5U7DnqvSPX4M54C5J+h0uTTFmnwjCCp8S3zQB
- FvbkQEJJumzxakJ5ZWlQ0zc6hkzGYS4tVHrQW8Tq/R4alozs001kMSaN+DlMz4guZgqa
- PdJQ==
-X-Gm-Message-State: AOJu0YwNRYKVBxy1AFPq9E8ccm9QAoD3WbQXmqLEVhImz4/XhLYj0CdY
- QNAnB+HA6OTniSCkTd9OItT1XuIHL9O3Djgt+QGtZZbr93bfZ9ubZYU+oooSqGkz5ZYuSpcO7/H
- sjFZMynC9xgf5sZSYgpA2TsHwwrP6FRdHReoAOxfo
-X-Gm-Gg: AfdE7cl6V8uq6f5T8u4IMa5Mds+DGSasnx4DrekqupFO0LnYZgD+X9pJN1j+O/Tb+BP
- iYHJrRqfreTha+RvtPn6FmT9ok/msezVxgaGNrWqNtuVcR9SpO7iU7N+IE7HAFxkalIEh+3Vpbe
- KSva9ZmXl39ooAiuIryfmtPWGh3+LVIyX/4xcRwQfDCXD2Kq1mzm1fy4FKQlHeM4BVlOmdrwFM1
- sYqYrs66yIIRPaqINMw9mLvXh8YK7+hBgV3QBVUv+XarFr0Jh6rp2smCU5VLAcoE0vlpnweJA==
-X-Received: by 2002:a05:6402:518d:b0:698:b8ad:2349 with SMTP id
- 4fb4d7f45d1cf-698b8ad24ecmr342655a12.30.1782988316512; Thu, 02 Jul 2026
- 03:31:56 -0700 (PDT)
+ bh=5t6tscPU2TVrnyj/SX8HjYX5/NwvPo5QWAptpke7AtY=;
+ b=fXOfVLT3tLlrGXYMzBAR7+yZuGSeZTWNTj51Sjgv09Y5XelQsuT2Hc19daHYW9TCpc
+ HoOkTBlG0tmAwWTAIF8kZ9+bb3Lid0mcfkt1+Th2YR3LS5K2CWhd/PeB0FjVtf8c/f7j
+ L4g5V5NjGMw8WyuEmw2ASmGCSB5JoMFQ0XBy5FgMrVW+uO1w+4sXI3WltJE5/YMVoCCI
+ J8GzY+v59mbWIpmHC/JbJ/LLWvUCQUm3eCFCcmoA8kJQQ+T0ycYPd8aQf/TsTlF6jLvs
+ TODeeg39vFiCa2jCJA6g11lXBuQEqdlfAap+245lozeqVhoMtGX4xHyP+BMCFeHKPBX9
+ JwaQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoRpCoANOOJKi1iB6Mb7CtKNcoQirJsivn5UUhwhhcgksRj1NqDsLHgCiysG4jh/tlGEt7YBXY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYppIgOf3VblgJpANLoC3C0SqFCWrH0TUp5FM/1bH2WiCz/nAj
+ WbTmB+V0G/ImEoXa5b/+V65I/ReHlFfBo5gcHg+0Xm7EDL3iiTSw5digyXB91NXqHi5LNWrB2ii
+ +Ypb/lQAjZtYvNIkk2yAvYw+T71OCF73ETyfOcTvB
+X-Gm-Gg: AfdE7ckI7Wh3hpiHXZgw3Ilnck7YDyNF9voZHgjUnv+Xu4rnOXetAB6rq81y+7uWzQp
+ OB/2rkRIaL1hHso8W2vWyZYfjoXoeyP2keA/KwXSnof8x29Ti5XEOhZzQ74x5ezfKbllVosUllJ
+ K8ysEAAW6FnVFq/H7DFE4w1Iyo6Djpmpqi1uNfX/hg10A8wDJRlNh9DVM4kczcDud0egk9AEu0v
+ 9wJiRKFhZoyaGC4954ApzgxlieZEUk20GVmagVXhIP97QViUBtVr3Tfbb7T4XmluwaZ/EUlvQ==
+X-Received: by 2002:a05:6402:42c4:b0:698:becd:8712 with SMTP id
+ 4fb4d7f45d1cf-698becd8b5dmr52645a12.8.1782989586717; Thu, 02 Jul 2026
+ 03:53:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260621143938.2863-1-aristo.chen@canonical.com>
- <20260702071425.9204-1-aristo.chen@canonical.com>
- <20260702071425.9204-4-aristo.chen@canonical.com>
-In-Reply-To: <20260702071425.9204-4-aristo.chen@canonical.com>
+References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260702055744.2164975-2-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20260702055744.2164975-2-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:31:40 +0100
-X-Gm-Features: AVVi8CcSPMSZatKa_5tUQJ_7K7mM9YnNA3EbLh1B71jCGZWnSLa-H2QGAHZUoyY
-Message-ID: <CAFLszTj_AfQtNSTB5fOgp99MDLRfQHNn8pfLSZ65DVuK7G1CrQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] test: vbe: cover vbe_read_fit() external-data
- bounds checks
-To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>
+Date: Thu, 2 Jul 2026 11:52:53 +0100
+X-Gm-Features: AVVi8CfXq0tAn91TbUdLZgQzbuQ6gdCpdwvSacXXWL3pLVq4hnPldGwACdv7Iuc
+Message-ID: <CAFLszThh=UUzNbR5LakdQvWY1iq-QPQ=8MxPcK7F4jx1gEPGSA@mail.gmail.com>
+Subject: Re: [PATCH v14 01/18] bitops: import BITS_PER_TYPE() macro from linux
+To: mikhail.kshevetskiy@iopsys.eu
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>, 
+ David Lechner <dlechner@baylibre.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>, 
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>, 
+ =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andriy.shevchenko@intel.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de, 
+ Markus Gothe <markus.gothe@genexis.eu>, 
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,63 +132,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
-
-On 2026-07-02T07:13:56, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: vbe: cover vbe_read_fit() external-data bounds checks
+On 2026-07-02T05:57:27, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@iopsys.eu> wrote:
+> bitops: import BITS_PER_TYPE() macro from linux
 >
-> vbe_read_fit() rejects FITs whose external-data window extends past the
-> trusted firmware area on disk by returning -E2BIG. Add two sandbox unit
-> tests that construct synthetic FITs with attacker-controlled
-> data-position and data-size values, write them to mmc1, and assert
-> vbe_read_fit() catches each one before issuing the follow-up
-> blk_read().
+> This macro will be used by include/linux/bitfield.h header.
 >
-> vbe_read_fit_oob_position uses a data-position past area_size, which
-> trips the load_addr - addr > area_size clause. vbe_read_fit_oversize_data
-> keeps data-position inside the area but picks a data-size that overruns
-> area_size - (load_addr - addr), tripping the third clause.
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Reviewed-by: David Lechner <dlechner@baylibre.com>
 >
-> The new file follows the existing bootstd VBE test layout and writes
-> the FIT at block 16, past the version and nvdata blocks already used by
-> bootstd_setup_for_tests().
->
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> test/boot/Makefile       |   2 +-
->  test/boot/vbe_read_fit.c | 225 +++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 226 insertions(+), 1 deletion(-)
-
-Thanks for doing the test!
-
-> diff --git a/test/boot/vbe_read_fit.c b/test/boot/vbe_read_fit.c
-> @@ -0,0 +1,225 @@
-> +#include <blk.h>
-> +#include <dm.h>
-> +#include <image.h>
-> +#include <mapmem.h>
-> +#include <memalign.h>
-> +#include <mmc.h>
-
-Nothing here uses map_sysmem() or friends, so <mapmem.h> can go.
-
-> diff --git a/test/boot/vbe_read_fit.c b/test/boot/vbe_read_fit.c
-> @@ -0,0 +1,225 @@
-> +/*
-> + * The synthetic FIT is written to mmc1 starting at block TEST_FIT_BLK.
-> + * bootstd_setup_for_tests() uses blocks 4 and 6 (see bootstd_common.h);
-> + * block 16 leaves a comfortable gap.
-> + */
-> +#define TEST_FIT_BLK 16
-
-Just to check, the two clauses that stay unreachable in sandbox
-(load_addr < addr while TEXT_BASE is 0, and the FDT bound behind
-!CONFIG_SANDBOX in vbe_read_fit()) - is that why only data-position
-and data-size are exercised? A one-line note in the commit message
-would help future readers.
+> include/linux/bitops.h | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
