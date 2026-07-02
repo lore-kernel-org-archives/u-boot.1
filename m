@@ -4,53 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB2AC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 14:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB2EC43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 14:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 961B884AA8;
-	Thu,  2 Jul 2026 16:44:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id DF64284A77;
+	Thu,  2 Jul 2026 16:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="L/am4ILv";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="NRGasGt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 312B484A91; Thu,  2 Jul 2026 16:44:49 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DBEFB84A7C; Thu,  2 Jul 2026 16:52:27 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B3FA84AA8
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 16:44:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDF8884A57
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 16:52:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 13130B0054C;
- Thu,  2 Jul 2026 16:44:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1783003483;
- bh=rBKmMKwUSULB78Z/1XtF3YJwhICAqWECASAtacVVzBY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=L/am4ILvXadVD0mtaPbUGXLG9vyMfn90TMtl0frKc4SeS/i7I3yqvNHb9vLabDPZH
- DNWtGvzdb1xyOu6ze4jdU2qmS+DFtKf8nOO5xckCUq3hqsLFwuib29t6FzjF0de2NI
- bgRqJXAfGRjxREvrbF/ol5DPCMq7VkpnASHRm3GhQYsPE7fjGGIlIqWe62rYtMQPyk
- c+mM4X2//wKkJ19Z6o4MscdejvtzDYdxz5xIOp1+T1L+CIebJvSzwpKBuuYb4WRQlK
- aSxQvt6ufVi4o3VKkHyF7DTdbeDLrfy62yiS87IS55/hA6vshpEJ2bNdHcTyT+QbuH
- LmCLETWdLbeBg==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <sean.anderson@linux.dev>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 3/3] test: py: load: check null_dev_desc_ok dispatch
-Date: Thu,  2 Jul 2026 16:42:14 +0200
-Message-ID: <20260702144359.1583239-4-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260702144359.1583239-1-vjardin@free.fr>
-References: <"<20260601131311.1163914-1-vjardin@free.fr>">
- <20260702144359.1583239-1-vjardin@free.fr>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c0c15bd6b8fso203390866b.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 07:52:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783003945; cv=none;
+ d=google.com; s=arc-20260327;
+ b=V+EIQIcqi7pFu33wsLqBQGHxMcPV6Gi6wJwX5mGPQ3KqOJ1qTQUCjbkkFgc43bFUzQ
+ 0k0Heh5y14jDMQ574FYXGK7hz/S4zBiRB9gzoXllk7dcg0I7K3bjBXqUf9wLE0T6VTrS
+ Jr3M7dt2O0CBaFL6svn0pkl98q0xqJ96xjAJsOZjLuF1DuZfZHSywiv3Rc3BUaZsSJ20
+ 4C/czPxTG0b5V+oZyytQzLGTY/L+TiNKX7CxXucHA4qSCsodNWALmWtcWOBvqe8mIMdV
+ ekoqjGkWMhsDSOqSPlARPLgeodu0OQPteP8xa2XMAec7CXAnOKs9g9M8pJWsCtjtDkxa
+ 0Kyg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=kFiB3lkrVxgXpThKLPZVA4fzP9mekKhZS6QsZ3hMClY=;
+ fh=+9MuPjcdJl1knjw7aGMcquPTQey62pyvZqux3VuF8Gk=;
+ b=afrQYFGMmgakGyJYo8i///alIM0jv4nvG+fsGplgo3Vr/J11SeXeS8p5KnOztw/KRj
+ rWUe6iRUCBks6InQt1qev+3Ee37fWaSm3H9T/YgpJLQXo4inTBLQKIEJ39diHQTUMJ2j
+ TNbHRJqRMDIgOf/k+2nUlJJTHh8RftYKX0TSMCHA1Lgom4D+hBr8szgzRZ0/d3PQMyfi
+ OkDtv+gZ0V7pxwHDQhT5ETe8kgMH72ZuI4Ieev4prq4BqyHnuF/XkN7Jsuq/TtcTQaiP
+ zb5GZUDIxQAMeOMw/8LiKURL0rZsipxiciME/5mvdRuKYjbQieo7rK5SdeRcjVdVRMOh
+ f42w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1783003945; x=1783608745; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kFiB3lkrVxgXpThKLPZVA4fzP9mekKhZS6QsZ3hMClY=;
+ b=NRGasGt6toW6wfx+EGPdthPZMSAfiJ8ECuZOcGCGF2mJ8O0WF6P+B1Xt4/AYoCZtra
+ g7Sqp5r+Q/VE3Olxni82wQbH4Ak6eicfmYfONjDQslRKiGAZkaXgVZQuNOCX5KSk7FJ7
+ Hf1zdIcdFftLq0kJs+gRFkzgjxbx2xb1t1mMglu4NGXzwwP56lOVkvJZYaaFD1PXJDJN
+ bvwRgccBaNmZjR7PJPtk1p5gmW8IaS6lKtESPp+EsK8pU5PLCO6AovTtRm7Nsnkz6Lp+
+ Ohfj9auwwq5FNQCsY6ITAz7BuYlryXWH9pKyLnftq0+1+6EXyZRYk6EYht/T5tFjWhBK
+ PoEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783003945; x=1783608745;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=kFiB3lkrVxgXpThKLPZVA4fzP9mekKhZS6QsZ3hMClY=;
+ b=OpgO7Mf+JibR0ockB7IPyghff8UAJItMAh5hU9oOSCvLLjnBd2w+Vdp2cfe4VT2mhS
+ 6haUYzFMybz+/5+upuIXKNoDTtkZON7DxE2F9F55R62Z8aYOQc2VQFCR9EOiIfTlsBli
+ FpYyLDJTvF1VObQvqzodotxTvA/i5z7aEkY/iejZXUlpwcrczZd3m6pY1qOhOqqdtNZ1
+ uu906rgh/PBL6FxGzFx6YjQPyeeCtKSoFGyfPnNSO7PXpmRQVEF3VEZomHz7nHK3lVdx
+ SzYJNsZkLzueqEnVHzvH38DXiTx2am2actHKAufjrt1SiIEyxkIzAut6WyXn6r8EB5At
+ hUkQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoqxxkElBvArkpnSjWQym3mBqfegpKlMPfWq7rjj9yaha+SmB5g3WZxhEKWP6SjJvcB3RiMPTg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5UyOlM5lX2Fm8Drz5uxrA7+7jgQDcHWRdayvzKcV6ZGkjCQTE
+ 7fBQ5Plab+0svJ4rC0OfR2iMU9jPc+BG569zK0zYet37Nyz7pu6an2sdpXGCqdANmK9Kz8ibyJI
+ SIFWVr+dlbdV63pzJ8OzUC99dz4YdTy1EpDYhPCJTp8BVAipvrcHLWFElcw==
+X-Gm-Gg: AfdE7cm1sjaw8MJ0+A1aQXJ3OsgX5keDfZiBYjskEivFF/q/svE2+iJJ9PU1AtQfJWO
+ Bpb88HUrtMOCAkLFK9pPiL/NcPmTSDQv9scgmP9znuJwtyo1JonoEPowyvamUc2Vae7Xj2M0yAF
+ RHpR9EBhxODefYNfOC6AatI2W0APhdVTvAi64xR5R4F0oAoRocilzfvsLFc4ZRkxchBvDEQF32q
+ MRvIu+D71dUjHjTu9Ma0uQcyqlOZKSh3CmIbymOV9kQ2J6m8c5UBszomUfheSJHKdLMkHFfUQR0
+ K3CSXA9R6LQVg1cA5S5esKQ+VYllwOb+1TUqgFvYqrOW7Fmrb2XzOLHNmFPFw1J8g2hSgMuUtbg
+ 064G530nruisdoF4=
+X-Received: by 2002:a17:907:170c:b0:c12:1e33:8590 with SMTP id
+ a640c23a62f3a-c12ae48da5emr219921366b.14.1783003945187; Thu, 02 Jul 2026
+ 07:52:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260701-cmd-i2-add-dm-i2c-dependency-v1-1-19ebda3a80f8@baylibre.com>
+ <20260701161838.GJ749385@bill-the-cat>
+ <534ff837-08ca-9d95-c53b-64466fcc8aa0@nabladev.com>
+In-Reply-To: <534ff837-08ca-9d95-c53b-64466fcc8aa0@nabladev.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 2 Jul 2026 16:52:24 +0200
+X-Gm-Features: AVVi8Cf_1hzFGNpInpJgsbarpxLI_1x9qEQOtrG_Zsw7bIB8Q20UhultvIjcrvo
+Message-ID: <CAEHHSvZQTE2y2HyzpB2YTXYgWTE4W4CP5Dh6j8SkSCHt=pP2Ag@mail.gmail.com>
+Subject: Re: [PATCH] cmd: kconfig: i2c: add DM_I2C dependency
+To: Heiko Schocher <hs@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,140 +125,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some pytest modules exercising the dispatch added by
-  fs: dispatch null_dev_desc_ok filesystems before lookup
+Le jeu. 2 juil. 2026 =C3=A0 06:30, Heiko Schocher <hs@nabladev.com> a =C3=
+=A9crit :
+>
+> Hello Tom,
+>
+> On 01.07.26 18:18, Tom Rini wrote:
+> > On Wed, Jul 01, 2026 at 05:55:14PM +0200, Julien Stephan wrote:
+> >
+> >> CMD_I2C depends on the DM I2C API but currently does not enforce
+> >> DM_I2C in Kconfig.
+> >>
+> >> This can lead to link errors caused by unresolved i2c_* symbols when
+> >> CMD_I2C is enabled without DM_I2C.
+> >>
+> >> Add the missing dependency to prevent unsupported configurations.
+> >>
+> >> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> >> ---
+> >>   cmd/Kconfig | 1 +
+> >>   1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> >> index 032e55e8127..636891ed493 100644
+> >> --- a/cmd/Kconfig
+> >> +++ b/cmd/Kconfig
+> >> @@ -1392,6 +1392,7 @@ config CMD_IOTRACE
+> >>
+> >>   config CMD_I2C
+> >>      bool "i2c"
+> >> +    depends on DM_I2C
+> >>      help
+> >>        I2C support.
+> >>
+> >
+> > This removes the command from the handful of still legacy I2C boards:
+> > $ ./tools/qconfig.py -f CMD_I2C ~DM_I2C
+> > 15 matches
+> > MPC837XERDB cl-som-imx7 d2net_v2 db-88f6720 db-88f6820-gp inetspace_v2 =
+ls2080aqds_nand ls2080aqds_qspi ls2080ardb_nand net2big_v2 netspace_lite_v2=
+ netspace_max_v2 netspace_mini_v2 netspace_v2 work_92105
+> >
+> > So the depends on needs an "|| ..." in there, for the I2C but not DM_I2=
+C
+> > case. Thanks.
 
-test_load_semihosting.py:
-  "load semihosting - <addr> <file>" and the optional
-  [bytes] [pos] variant. Runs on qemu_arm64 with
-  CONFIG_SEMIHOSTING=y; reuses test_hostfs.py's host-staged
-  fixture.
+Hi Tom,
 
-test_load_sandbox.py:
-  "load sandbox - <addr> <file>" and the optional [bytes] [pos]
-  variant. Runs on sandbox (boardspec('sandbox')); the sandbox
-  fstype is registered with name="sandbox" and
-    null_dev_desc_ok=true,
-  so the same fs_lookup_null_dev_info() helper that
-  routes semihosting also routes the "sandbox".
+Thank you for catching that. I was wondering if I should handle the
+legacy devices..
 
-A "load ubifs - <addr> <file>" test is intentionally not provided.
-UBIFS is built on UBI on MTD, which requires some additional works
-that are not available with qemu/sandbox-ing.
+./tools/qconfig.py -f CMD_I2C SYS_I2C_MV ~DM_I2C ~SYS_I2C_LEGACY
+0 matches
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+So I guess  depends on DM_I2C || SYS_I2C_LEGACY should work?
 
-(no changes since v1)
-
- test/py/tests/test_load_sandbox.py            | 51 +++++++++++++++++++
- .../test_semihosting/test_load_semihosting.py | 38 ++++++++++++++
- 2 files changed, 89 insertions(+)
- create mode 100644 test/py/tests/test_load_sandbox.py
- create mode 100644 test/py/tests/test_semihosting/test_load_semihosting.py
-
-diff --git a/test/py/tests/test_load_sandbox.py b/test/py/tests/test_load_sandbox.py
-new file mode 100644
-index 00000000000..8d28a630e76
---- /dev/null
-+++ b/test/py/tests/test_load_sandbox.py
-@@ -0,0 +1,51 @@
-+# SPDX-License-Identifier:      GPL-2.0+
-+# Copyright 2026 Free Mobile - Vincent Jardin
-+
-+"""Regression test for `load sandbox - <addr> <file>`.
-+
-+Exercises the null_dev_desc_ok dispatch added in
-+"fs: dispatch null_dev_desc_ok filesystems before block lookup".
-+
-+It is the counterpart of test_load_semihosting.py
-+"""
-+
-+import os
-+import pytest
-+
-+
-+@pytest.fixture(scope='session')
-+def sandbox_fixture(u_boot_config):
-+    """Host-staged fixture file read by `load sandbox`."""
-+    path = os.path.join(u_boot_config.persistent_data_dir,
-+                        'sandbox-fstype.txt')
-+    with open(path, 'w', encoding='utf-8') as f:
-+        f.write('Das U-Boot\n')   # 11 bytes, same as test_hostfs.py / semihosting
-+    yield path
-+    os.remove(path)
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+def test_sandbox_load(ubman, sandbox_fixture):
-+    """Run `load sandbox - <addr> <file>` and check the bytes."""
-+    response = ubman.run_command(
-+        f'load sandbox - $loadaddr {sandbox_fixture}')
-+
-+    # Fixture is "Das U-Boot\n" (11 bytes).
-+    assert '11 bytes read' in response
-+
-+    # crc32("Das U-Boot\n") -- identical to the semihosting / hostfs checks.
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> 60cfccfc' in response
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+def test_sandbox_load_offset(ubman, sandbox_fixture):
-+    """Run the [bytes] [pos] variant through the same dispatch."""
-+    response = ubman.run_command(
-+        f'load sandbox - $loadaddr {sandbox_fixture} 4 6')
-+    # bytes=4 pos=6 over "Das U-Boot\n" -> "Boot".
-+    assert '4 bytes read' in response
-+
-+    # crc32("Boot")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> e6df01fa' in response
-diff --git a/test/py/tests/test_semihosting/test_load_semihosting.py b/test/py/tests/test_semihosting/test_load_semihosting.py
-new file mode 100644
-index 00000000000..7c2eb72c69a
---- /dev/null
-+++ b/test/py/tests/test_semihosting/test_load_semihosting.py
-@@ -0,0 +1,38 @@
-+# SPDX-License-Identifier:      GPL-2.0+
-+# Copyright 2026 Free Mobile - Vincent Jardin
-+
-+"""Regression test for `load semihosting - <addr> <file>`.
-+
-+Companion to test_hostfs.py: same fixture, same crc32, different
-+fstype routing:
-+see the doc/usage/cmd/load.rst "Null-block-device interfaces" section.
-+"""
-+
-+import pytest
-+
-+
-+@pytest.mark.buildconfigspec('semihosting')
-+def test_semihosting_load(ubman, semihosting_data):
-+    """Run `load semihosting - <addr> <file>` and check the bytes."""
-+    response = ubman.run_command(
-+        f'load semihosting - $loadaddr {semihosting_data}')
-+
-+    # Fixture is "Das U-Boot\n" (11 bytes).
-+    assert '11 bytes read' in response
-+
-+    # crc32("Das U-Boot\n")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> 60cfccfc' in response
-+
-+
-+@pytest.mark.buildconfigspec('semihosting')
-+def test_semihosting_load_offset(ubman, semihosting_data):
-+    """Run the [bytes] [pos] variant through the same dispatch."""
-+    response = ubman.run_command(
-+        f'load semihosting - $loadaddr {semihosting_data} 4 6')
-+    # bytes=4 pos=6 over "Das U-Boot\n" -> "Boot".
-+    assert '4 bytes read' in response
-+
-+    # crc32("Boot")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> e6df01fa' in response
--- 
-2.43.0
-
+Thanks
+Julien
+>
+> Thanks for checking this!
+>
+> bye,
+> Heiko
+> --
+> Nabla Software Engineering
+> HRB 40522 Augsburg
+> Phone: +49 821 45592596
+> E-Mail: office@nabladev.com
+> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
