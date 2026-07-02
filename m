@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BADC43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A096C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:27:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49A384A4B;
-	Thu,  2 Jul 2026 12:27:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F320884A5D;
+	Thu,  2 Jul 2026 12:27:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kcQceMfH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kbgjtO36";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BEDA84A4C; Thu,  2 Jul 2026 12:27:36 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 8424084A5F; Thu,  2 Jul 2026 12:27:55 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 205FB84A47
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:27:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E65984A47
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:27:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba320so898903a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:27:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988053; cv=none;
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-697edb1bf6eso2387969a12.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:27:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782988073; cv=none;
  d=google.com; s=arc-20260327;
- b=dXF1PIUa8utBKh0b9FnH48iSpwZOjmYTFkJOkZvqMEWGUnRhrjZK/v+iBA8jtgrZAn
- w3acCvKxKpZlfpcqilo3y5L2KR6C0GW0cgsdxW4YsIegMZR6/vbbCWtlC0yT2S48IvaD
- j5g2YHj/82fMhkNP1ypolkrfbdC0AULObGm2O2nDVZGFIUa0ZXuCaWZg9utwZh7sRxjV
- YwNmG0LaDdhs3SGTETvD7Tr2M7HKWhuw8pYUnxaRf/m0O8dVd7BFiCnsAxvz9N20Dk7M
- wHs0RFvsklWm2CTWPHgYT7syUfmtwBkZRRBhSUdA+Da9H3lxQadyroZu2ghFraN5PuBF
- sY+A==
+ b=EmaqA/u5ogM+FSo04tutpc8UisI/TkBUhJD/kEoSXJojXvf12Zcgyvnmzgv2L9s1uG
+ WLe+ebFK5Tg3rtJmnpj3QwFmxY+vy+JuzgktsL7wjrfw5RfYcTYNXaMTmIknD1ViVMCq
+ YfDFNj9etcSTRGzwPcDSLmFyoVBNr7BKzH/dcCquzY1MlLdoxglO4LfkO3iudODcgBE2
+ ACmQTMAUCJM/PSH7PQoHEcXraAn5pwGng44ib3SnYhMRNiN5k6eF6gvaFEDIwZMI2mfr
+ oLkQQk2TBvZ7rniarrsCGbJiKDI0XAGAEPA7dHZ1+xBv9A0QYk69PNAG8Sx4nnB8anNY
+ 3JGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=1vkRGsqaDF3KxwH6oLEWu7WtU7swUJLuHf/eZ2QApbs=;
- fh=TXcWTNrRiLA3aF6p1Vh3HkcUBugLvZyWomkARLt6aQQ=;
- b=MWYT0YCII/PzKdUUQ7vXSkW3/H5qAX8q9IzlF2C3478D96bssQ8OaLNY1hy0Bcs/50
- lf6ORgvd9tLxTmIkkQZY60NJp6sfNuJZs0KnSPRRnCt5+PzmJBF9x3CkRAMUBG07rFpb
- 9aA8Pz5ioKdmBnGz/UWJe314jloreuQmXcr/k8RoSQKIu9zrdkACXq26KZQn9hYxi7ym
- ikaqqU/AJkBxmxWB1hMa0ak570hUAl78QI73LVUQuZK00sYJrpHbEkFnb7pCILwf12WJ
- AgZ6FFA2Xfc5AqdKbRaIiJRd6renjWlJB02VO9P9lCfJU2todANooxrERSqES9WHdTG4
- ivOQ==; darn=lists.denx.de
+ bh=Gr042asEbwZSaltYg3/gkRiuSMBdSJm87DHMNC8fLnc=;
+ fh=Im1E0P9sJHZaAZL4XXnPU4JDGJewawe01R1mHC4sK/Y=;
+ b=RBVhuWHa4YoBxRhbKArp274mtZNw+anoAP/7IY9QCdrMOOlExOXMISTwrvrUqogxly
+ AhO6utnnBLaZIjOmSJknvowsLP4KmYdtiN/zKLdM1NVOhYgvuBoWLnr/a959aRX0TSbP
+ sKsOn5LRY/UkRANQKIQaCWuuxDTbSHS3TvzrxzDX6t/PrprnoQccd1QVb81NViIt7Clb
+ ZswJCUqsuc9gshJhTpcrlZOrJiataNtMvC6nGGEVORxifaGHoiBWQF6USFysvFi4fMQm
+ 3rVe1H6WowCQuM1owlDiFEQskMYxxxzORthmDWUI2tmo8nUlxfO1R86iMlFiJTkiqhcl
+ /EQw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988053; x=1783592853; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782988073; x=1783592873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1vkRGsqaDF3KxwH6oLEWu7WtU7swUJLuHf/eZ2QApbs=;
- b=kcQceMfHOVb86V51GzYEP8/btW/TT9M/KhWU2wdOtx4EOOAeC3qL0kMGO0JsjJIKeN
- CsmYgUjaDNKpZlMSE7B8DeGzcwunFMyNzygom2sUVXSyEGwLfH2eFJBsmropLk0ApabV
- kNzOsXu8HfHR8G+7e8QrHFjNp+naCIpQIHSrY=
+ bh=Gr042asEbwZSaltYg3/gkRiuSMBdSJm87DHMNC8fLnc=;
+ b=kbgjtO36zb5reHi+/9WRdKOFPyjGNC1t5/9l8gdR/fFNkm1lXUChy4tcGwi+r379Il
+ 7PSFNW5izD0369ICEiZoDu5GAR7lzHHAs0XvbGje4pg0tUtVN3EzBatcVN7OokA+xMwk
+ 39uOya516P5cyUC2EdEwr3Iu1CVQTx2irvfZs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988053; x=1783592853;
+ d=1e100.net; s=20251104; t=1782988073; x=1783592873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1vkRGsqaDF3KxwH6oLEWu7WtU7swUJLuHf/eZ2QApbs=;
- b=OooAwrHg6p4tigJrzgF2vs8zQwV2tSWCaO9oHzmvLhrqh6ypZt8aKqZLPLLFobAXXS
- emjLaT9LIlWMJDfqPxFB1cOZ235a2CoJr470u7Vo7WMirNW03WDWZq6uwuusC3w9FGuv
- 1R4YOcanbEStrZDXUanBCYtOVzC00IB/jvfxtMWkcEGNMAbh050W2JfLxUkOT+jrPXmW
- pbqHCnVSlTS680cFl/JiCDa6JO9HVQimUG/ARU1rrpCIguyuStTZIRb+/xt9HNjfKYZH
- rS6J3byjNQeoYWa/at6bTcIZqUK4H8giT28gj1eISr13af3Z+L4ARVjEd0KE7gpxP9Zv
- aPbQ==
+ bh=Gr042asEbwZSaltYg3/gkRiuSMBdSJm87DHMNC8fLnc=;
+ b=GY73Qd7n/ORA/VyooTtuvqHLMNIYuf+UJTo+kgkbqM81x4xFYMHUBvAP+f1T2IVfej
+ mv9kYDEDZc/1ZnqGwcnqrRd0DGn/GCWAu/PLK3UMTrXHj/2a3MlUlSxPy4R2s2BvVnaM
+ kAt825AvGSQBSt9gR8vmixI2rczZJNmapYp+VXel0ofadKwP3/We5LF4k8qMKRDBMnuL
+ 2YrafZYVxskcE4h0V7Q05QfXK+DU3dUb5EYplc2JObJToeOyQ5Dy3ojFeMlRGwlFZ3zz
+ FVF0w3KZ6S/S67NziXaHXZREC0lDP3r66qM45EK56FM+pHkNl9O/vTtcQzUqpXpaDPi5
+ DhQg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrr+rFE845w+Q+1Qkbjswau5ZVceQ/a06nii5TiyLyLaT0HsklIkEkrWEkx1Sj+K43CC0lGpq0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuIkpW2GxOkfF27F8f2wHvJwihHs2lcefTULMkI1C/cEKUoVV9
- RvRcj9FacBEQ/7jY7g7hGbDdl7WAgLfJxfR6NyAjXrJDDyFUSUr4z6L7Os5lyICJzLLR048e5gX
- gZhi7Iky4a2FDApcoJV89X9RR7dkJtjchbAs9+Ysm
-X-Gm-Gg: AfdE7cnCuUwBQsb3lZ6kOtlMbdB9TXcrAZrqRNDjSAYv6L3SCzJ/04FGlQU3bkSkIjA
- Y8LgquP928Ytma2P42p87DQpvJSYg45gU0M+KLv5wFnYFdoM36UTg9dn01r+sYbOPoZPGFl1vvR
- YCjkAxYBRjlJdwb6Oclek4n3G9+/pOL/WBRSEN+NTCSuHlGD/7X1q6bt+q1TaSAKhINqnP/OyaL
- WOscW3mbcn94ilc5NPCB5STlHgpVXPt4nPtVHhRKZKloa1RPmzur0aBGOHaToJKYMYiDI7zcg==
-X-Received: by 2002:a05:6402:1cc7:b0:697:eb97:a4ed with SMTP id
- 4fb4d7f45d1cf-6989f115f13mr2406756a12.7.1782988053620; Thu, 02 Jul 2026
- 03:27:33 -0700 (PDT)
+ AHgh+RpmeyPixCg02BQKIiq8+r6WM3h23nmwglxFVrAFM+fmAwLQ4NUQ06SujPxeIYknoRRTpb3rtU0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMjy3J7v3tdnjWnEhA3qeSv+nH+TBjXdwcx1FH0RV3F2BqjyCw
+ /6GQx5TVrBmMLkcL7IwbVDNhh8WpzemJ4giMGkbIerZMFdakMs+87H16AlipR8Ws7+fQX5fAJ8f
+ qe7GCVZZyzTv7Jby8ogrltA4nPJJY0v/JF3WzVXjm
+X-Gm-Gg: AfdE7cmUaHm9lTEA1Zb8GAcaw73TwNMMoyVk7pzTIfe1nC277tWcJs3uPKngiTMrLDc
+ yl1yk+WTAGekmXrEKzWaa3Cn46XImQ5x6aTlSO+wSmIFrXtkJ2ECFsRoM8+I7pcD6NJvX7d3iel
+ LaAjIk4AY/VCFy3LVEhTGke93I+l8IzG5nrnQhSqDt9Cg2wXAzbCDeE1iFjYbZ5q8su/lOSxBBz
+ RpJq1C2ibx8pL7At5Q6EUAARBT3nQ4F2MtaNz20wnGlsa0kroaerf01rBr23+rDwypsGoCg6Q==
+X-Received: by 2002:a05:6402:1ed3:b0:698:48c4:361c with SMTP id
+ 4fb4d7f45d1cf-6989f37103fmr2772950a12.28.1782988072993; Thu, 02 Jul 2026
+ 03:27:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-15-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-15-me@ziyao.cc>
+ <20260701111808.870705-16-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-16-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:27:21 +0100
-X-Gm-Features: AVVi8CfPhZtSC6I9IYnaMOHJhHy9YBVkpAwdmEGU-HcwaUBS0Sc8cI6xWI58dIM
-Message-ID: <CAFLszTg37_PF--k_jE0A6RecyAj1pEc+Kpj2TSOgjiGSX7vRnw@mail.gmail.com>
-Subject: Re: [PATCH v2 14/16] board: emulation: Add qemu-loongarch
+Date: Thu, 2 Jul 2026 11:27:36 +0100
+X-Gm-Features: AVVi8Ce_5L9KlwbjE712tEoz4IOKCGQ9RQHWiNHgKSCvltLUOhAPvhJp8mZyUl0
+Message-ID: <CAFLszTihFKatBwxu6YeQDJZvXcbp6_s07Xtgb5STPREGU8K8LA@mail.gmail.com>
+Subject: Re: [PATCH v2 15/16] efi: LoongArch: Define LoongArch bits everywhere
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -114,108 +114,57 @@ X-Virus-Status: Clean
 Hi Yao,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> board: emulation: Add qemu-loongarch
+> efi: LoongArch: Define LoongArch bits everywhere
 >
-> Yet another generic QEMU VIRT machine.
-> QEMU placed FDT in memory before launching U-Boot, so we
-> can just obtian FDT here.
+> They are all coming from UEFI specification, PE-COFF specification,
+> or IANA websites.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> arch/loongarch/Kconfig                            |  5 ++
->  arch/loongarch/dts/qemu-loongarch64.dts           |  9 +++
->  board/emulation/qemu-loongarch/Kconfig            | 68 +++++++++++++++++++++++
->  board/emulation/qemu-loongarch/MAINTAINERS        |  7 +++
->  board/emulation/qemu-loongarch/Makefile           |  6 ++
->  board/emulation/qemu-loongarch/qemu-loongarch.c   | 67 ++++++++++++++++++++++
->  board/emulation/qemu-loongarch/qemu-loongarch.env |  6 ++
->  configs/qemu-loongarch64_defconfig                | 36 ++++++++++++
->  include/configs/qemu-loongarch.h                  | 13 +++++
->  9 files changed, 217 insertions(+)
+> include/asm-generic/pe.h                          | 2 ++
+>  include/config_distro_bootcmd.h                   | 5 +++++
+>  include/pe.h                                      | 1 +
+>  lib/efi_loader/efi_helper.c                       | 4 ++++
+>  lib/efi_loader/efi_image_loader.c                 | 7 +++++++
+>  lib/efi_loader/efi_runtime.c                      | 4 ++++
+>  lib/efi_selftest/efi_selftest_miniapp_exception.c | 3 +++
+>  7 files changed, 26 insertions(+)
 
-> Yet another generic QEMU VIRT machine.
-> QEMU placed FDT in memory before launching U-Boot, so we
-> can just obtian FDT here.
+> They are all coming from UEFI specification, PE-COFF specification,
+> or IANA websites.
 
-Please flesh this out a bit more - how the board is booted,
-memory-layout assumptions, the FDT source. Also 'obtian' -> 'obtain'
-and use present tense ('QEMU places the FDT ...').
+Please expand this to say what is actually added (PE machine types,
+relocation type, PXE arch number, BOOTEFI filename, R_LARCH_RELATIVE
+runtime reloc, selftest trap instruction) - 'bits everywhere' is
+hard to grep for later.
 
-> diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-> @@ -7,9 +7,14 @@ config SYS_ARCH
->  choice
->       prompt "Target select"
->
-> +config TARGET_QEMU_LOONGARCH_VIRT
-> +     bool "Support QEMU Virt Board"
-> +     select BOARD_LATE_INIT
-> +
->  endchoice
+> diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+> @@ -371,6 +373,9 @@
+> +#elif defined(CONFIG_ARCH_LA64) || (defined(__loongarch__) && __loongarch_grlen == 64))
 
-Please move this symbol into board/emulation/qemu-loongarch/Kconfig
-alongside the other options, so the arch Kconfig only lists the
-choice. Also BOARD_LATE_INIT is duplicated as an 'imply' inside
-BOARD_SPECIFIC_OPTIONS - pick one.
+Unbalanced parentheses - one extra ')' at the end.
 
-> diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
-> @@ -0,0 +1,67 @@
-> +phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-> +{
-> +     /* Limit RAM used by U-Boot to the DDR low region */
-> +     if (gd->ram_top > 0x10000000)
-> +             return 0x10000000;
-> +
-> +     return gd->ram_top;
-> +}
+> diff --git a/lib/efi_selftest/efi_selftest_miniapp_exception.c b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+> @@ -35,6 +35,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> +#elif defined(CONFIG_LOONGARCH)
+> +     /* ud 31 */
+> +     asm volatile (".word 0x386007ff\n");
 
-Please introduce a named constant for 0x10000000 (something like
-SYS_LOWMEM_TOP), and explain in the comment why the low region
-matters - TLB/direct-map restriction, or a QEMU quirk?
+The rest of the series keys off CONFIG_ARCH_LA64. Please pick one
+and use it consistently - otherwise a future LA32 build will
+trigger this ud but be missing all the other bits. Given Tom's
+suggestion on patch 6 to move to CONFIG_LOONGARCH, that is probably
+the way to unify it.
 
-> diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
-> @@ -0,0 +1,67 @@
-> +int board_init(void)
-> +{
-> +     return 0;
-> +}
+> diff --git a/include/pe.h b/include/pe.h
+> @@ -194,6 +194,7 @@ typedef struct _IMAGE_RELOCATION
+> +#define IMAGE_REL_BASED_LOONGARCH64_MARK_LA  8 /* yes, 8 too */
 
-If there is nothing to do, please drop in favour of the weak default.
-
-> diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
-> @@ -0,0 +1,67 @@
-> +int board_fdt_blob_setup(void **fdtp)
-> +{
-> +     /* Stored the DTB address there during our init */
-> +     *fdtp = (void *)(ulong)0x100000;
-> +     return 0;
-> +}
-
-The comment is misleading - U-Boot does not store the DTB anywhere;
-QEMU (LoongArchQemuPkg) places it at this address. Please rework
-the comment, and use a named constant rather than 0x100000. It
-would also be worth an fdt_check_header() before returning success,
-so a mis-launch fails cleanly.
-
-> diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.env b/board/emulation/qemu-loongarch/qemu-loongarch.env
-> @@ -0,0 +1,6 @@
-> +
-> +stdin=serial,usbkbd
-> +stdout=serial,vidconsole
-> +stderr=serial,vidconsole
-
-Drop the leading blank line.
-
-> diff --git a/include/configs/qemu-loongarch.h b/include/configs/qemu-loongarch.h
-> @@ -0,0 +1,13 @@
-> +/* Those values are chosen by LoongArchQemuPkg */
-> +#define CFG_SYS_INIT_RAM_ADDR        0x10000
-> +#define CFG_SYS_INIT_RAM_SIZE        0x10000
-
-'These values', not 'Those'. Also, since both the DTB address
-(0x100000) and the low-RAM cap (0x10000000) are baked into the C
-file, please pull those into this header so the QEMU/edk2 ABI lives
-in one place.
+The PE-COFF spec also defines IMAGE_REL_BASED_LOONGARCH32_MARK_LA
+(=8). Since __loongarch_grlen == 32 is handled in efi_image_loader.c
+below, it would be tidier to add both here even if only the 64-bit
+one is wired up today.
 
 Regards,
 Simon
