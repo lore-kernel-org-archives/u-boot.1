@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 111B0C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F7BC43602
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 08:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0885384832;
-	Thu,  2 Jul 2026 10:31:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DACAA84CD1;
+	Thu,  2 Jul 2026 10:32:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TSCLRigp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VzHTIfbK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD1684CD6; Thu,  2 Jul 2026 10:31:35 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 295C484CE5; Thu,  2 Jul 2026 10:32:08 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5906846A4
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:31:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41B38846A4
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 10:32:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-845f2909cd4so961183b3a.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:31:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782981092; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-69531108f25so2954749a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 01:32:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782981126; cv=none;
  d=google.com; s=arc-20260327;
- b=DBYqxdOcAraNXf8//6cwHFOig78UZHHO5Yog2W0NTNTu8aPiLflOEeA7WTZMbXECIR
- rAMXNBVR+2dwhNw9d+2cG+6maJ3Lg48JNSYNC6O2azCq9ZCmdk6UqAf2ArEUjfS5Gobu
- eTOEp9d9a1PDD0YyFWv+mOihpgkY39KdbYH5Z2F2DWGkCfeWNAx83F90+HHdCeTG63W2
- SfrunNARSudn/p9jDn8/03MiUiCEgDuOVmr/NWNPu9Hngjn17KZPMaC8+QwX0Uy7MDF5
- fFkCGjfEkhNZPdHQlrcV+XASH7WV1bBpqeCvAuvOtYdk5GkyJLJOtdXNcUfrMSHYBopl
- XL4A==
+ b=Dvr/uE1qurVrFtz7LSa8O9WmfZsL7oWxS/rD3fpLzymIlaWNXOmHywI1t0GECDlE3l
+ ImvU/llj25uTxA4AchOxlLIxtC/2Wb9/xRtn3y2iJ9AbaKpIRJo5ll4BwHFVMPKGt3WN
+ HVUhANvFzmIXSqp/fourddJnEUh41Q0sDL3CCMUKNIckkkoJGEzLQEQlRJLI9XX/+cHj
+ DGi4UFaH8kl/ZLdP/f00cWwZVqjy3BkVs/+yT8dR5pcZy3EXlpyB0nhas6FhQv8VBJl1
+ MIG40xvdvUa62uSWTE2UHQyH9+Ys49SoI7uNya3iE4EoPV8cg0UOKbxXYMdHKCn5PA9O
+ ltug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FN5oIEHKWwQBfMI5Z5vy06bofJdTt5TBqgRXHos3U44=;
+ bh=LhzOUmJSLQtvoZ4I4oWUP761Kn/mDBz0UWSNebdo8jE=;
  fh=MhAo4QPuXEC/Rh971JORz4rq3nvFSJ8p5JStjvc7R4U=;
- b=eXxfUM0OxtqXPDGiduj/2cm97QjeYDudyBs9ANFbl6IgjjA3T/a/+JO13qXQY+eMOZ
- BC976Kh48ggVaac8QWiD9igbusfPXgTvn212BuvSZxSag9cxV9ljKiHyNzT9enV1Y+EW
- ngcaHYbwuEsU8xjRPM/utPKOB9OlE7U3uLPv2xH9aZWChbBrGchbqQOZyb0NoFXqVxEV
- qJAsyGKmg116opQ82hRlQCW/aSsOH6X7AzKBh/YDRxn4oIk0qxfIVxgR/rKVwl0Ujkl+
- RrDWgwKhCxiVoPrE6/k6bNTjyQQXnFBmw0xQv+V17m8bUu65clTr8b9n0Z+PpSb4EdpX
- B60w==; darn=lists.denx.de
+ b=K/8Avk30Hrjsibdvt9+dtsdbCSyXGodjbvMlGB1TzOM/78huuCJY+no45yBcxzaaLx
+ CuygeLm5n1zD9jDDE4rtX28KuvN8RgfbRotrL4xJBXs7bE8ktueGOp44rUF42oZPcDio
+ rT365jTuh3LRLUxlaEd/JVMG+1fAPqPmNURknW6YcVK3PdsJrVNOtkb1zOtFmPmbu0Fo
+ MwL3ooSueKygXtaFoFnysUSzdAsF9GOVqdJ1vpuNvLao1Gis2lqeIxlpGhQrPY/Sg0MC
+ Vpedfow4W8FLMREI7yuIVK/wR3ZaIkUCapk0jPnR5rCHh6d+WCybKPopIshxUkk0gzdh
+ Zm5w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782981092; x=1783585892; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782981126; x=1783585926; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FN5oIEHKWwQBfMI5Z5vy06bofJdTt5TBqgRXHos3U44=;
- b=TSCLRigp6Mvh64Cf7MaxBhaxKgYFkytcwDhd5sAHxYXcqj2kj3Q/QkE9620e9G58Fg
- 5jW2hmBm0XCQWoRgxA4GGv7x7XH83XGkXvwipgTN7sbZ+6jOuV11dZqtFyUg5c1U0Fra
- qBbs1SKtiImPXmUWuOLFJu/NrDa5BemU90Lk8=
+ bh=LhzOUmJSLQtvoZ4I4oWUP761Kn/mDBz0UWSNebdo8jE=;
+ b=VzHTIfbKFPTYTl5Is663ZydeH3XM9vTvvOXDjwvaL1oEi0kpv47F85uvi62UFCV5ht
+ vlrclstcIGBrUsUT6iqa1zOjTApHYtBhyepkPRwk3sL/7clYfN+s2uu5ONTdom7Z/8eR
+ fx3kUxsbn84Z4UxIk6rhqPiT1NDIiWfHkBsnU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782981092; x=1783585892;
+ d=1e100.net; s=20251104; t=1782981126; x=1783585926;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FN5oIEHKWwQBfMI5Z5vy06bofJdTt5TBqgRXHos3U44=;
- b=Amm5E2hIHgIv1N+Q1wACGIEq8D7f1GFQ3Eg5GFwao0cUSMlu7vvCgb6O02ZIMa0ja2
- LkxB5N5ghtgyrdWd6ytxmIyoDKA3XsST1Meii2t5JtSoNzdwMZ0zP6MFJoN56jQyjKsv
- IN2ip3mh/OLooXKbX2qV4EJUVPx4tMkD/qYAsd1SBYtL61M41RKGGmfjZ9T5qfBqYNDF
- 7pg/LFN2EDBnO5mdfzQIUX27qUCoz8pmeFjz+2nehbrb3fgqcw2892qKXUHXR4xnW55L
- rmdSCNNhEfpQUL4Su8AXnLKihHt1iD0q1MgY/jRk/ui9tcKff2H8riCEEzMa69Ha+CIi
- s1Ug==
-X-Gm-Message-State: AOJu0YwSGAnwMmaQ8hWl90Ne3hJp7Tz4h0rmrzSx/l7qlCjh/pXhk87A
- 36pdpVT4Ic73pLxVIOCjknTr9Vo6PDGdURI7k7K2ANsmFd+mSLx9orut0BW4I+KA5gyN63724OK
- MQNNXS+tPoWzadqLlT0trirzSvuv47CJYdEUpmBj1
-X-Gm-Gg: AfdE7cn4UWnHnjpyTXcddE66KEL2F4HcuX7oFzEVPoK5PhtlKzwNSjxgsu+Ek3uNN6e
- W8mO4MuxVLQvoWq0dHWoqUUNCq+16K7QCVprbuzIbITJplMZam7oetR7fUFotDEBif5MIcuaijO
- j3N/0x+yYWAGQ7CnGvI1scZJjMzZnFIzmrm0wLchSNVp6Ba5bD4Z25CMo7T9VeXDZUwkKuEcVNW
- 5VPN/BtAOIus3HSjSjiyDgfQz1smxV6v3o6exEZLAjnqusyIE3fwTxUc3It76ydNZNG+m0Z9g==
-X-Received: by 2002:a05:6a00:9299:b0:846:a26:8e0b with SMTP id
- d2e1a72fcca58-847c0730cc9mr4865135b3a.18.1782981092221; Thu, 02 Jul 2026
- 01:31:32 -0700 (PDT)
+ bh=LhzOUmJSLQtvoZ4I4oWUP761Kn/mDBz0UWSNebdo8jE=;
+ b=EOUQH914fMpkHj4tHoNuACoaR1vgvJN/vaRBO7pDllxGTNxy55/8f3xm2r69A6mDDO
+ e3kdsBnvH+Cr1uZ55GxxyZDQSAUBZC7KZVqu30+p/Y0iOpMcwV+pGCKFpL7BPSBwLsLt
+ LMwzGmVFSGL7CjGJrLRXDy09a0IfB5N7JLtYdA+Sn9QwHGluSS4DOKdzYxWWS9fsrfyh
+ 9W7HTXjo1HvZaUgTw5aznyvAVoPJfuMHqLdn9Sky0Qsxwpfo+3haL24VneJFsQ+dn+d6
+ A3+oHiv3TEbFfbZKwTBQH/yna8MZtgCOvyMwtBr3aHtC7z86tZ/gvqtORDGQUwbIiH0/
+ UAOg==
+X-Gm-Message-State: AOJu0YyfmsXyU05YS5CtBzn9EyQDwgMnS+7TRuEZ/959o3X7D3ifWsTN
+ xWl6e3pb4lDmXpbYMu6zMlxnKkpiS2k5vJz3it/aMWrtU3w8hXc43la+szkv8c9+RrUNBrqxhPf
+ ayOHYQnFvSLE4qDWqFYlEOcmuyhOuJq0ZBcfwEPkLNmFluMXy3n2Iu7uL
+X-Gm-Gg: AfdE7ckchxbDy006YThAwm5sXYm/7eZVI+tM2APh/GLlZfdO+8ywqxHCX+m5tcQwam/
+ CHdN46BmxTcBtlmMwWkywV7C560zroJlReq+3yNg8aHC/vRGC8a0hIN6gezvsMGL/dJmVBc4wyp
+ ia54+QGkm6iYiweUNRmZsWUJgqjS7OEz0ktezk3PLYWT1kzii/Ge1wxI1MoKL0hEIjJieiJzJHN
+ yjccZi0cqoJeY6cuIx7DqyiZn5y+e1WnQmwMIAtlh/E1+isGhzALQKd2XaBp9B02gxmib9YWA==
+X-Received: by 2002:a05:6402:1cc2:b0:698:3c4c:5fc6 with SMTP id
+ 4fb4d7f45d1cf-6989f3530aemr2238086a12.22.1782981125720; Thu, 02 Jul 2026
+ 01:32:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
- <20260701171535.906272-6-rv@rasmusvillemoes.dk>
-In-Reply-To: <20260701171535.906272-6-rv@rasmusvillemoes.dk>
+ <20260701171535.906272-9-rv@rasmusvillemoes.dk>
+In-Reply-To: <20260701171535.906272-9-rv@rasmusvillemoes.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 09:30:06 +0100
-X-Gm-Features: AVVi8CdwOPEa8PHZ7ZrPs2HhNMfSX1suFKo0lG4yxnJWvkPx5pU-Z26ezl3sRHo
-Message-ID: <CAFLszTj21D_qhsaZFAaGDg5RW7+jAPjvJhwSHrK5L7bzj0=cPw@mail.gmail.com>
-Subject: Re: [PATCH 5/8] string: remove more pointless __HAVE_ARCH_STR*
+Date: Thu, 2 Jul 2026 09:30:24 +0100
+X-Gm-Features: AVVi8CeyJJyyqgWxkXqd2JhxQ9G9TgHwImYR6l14iTL03Tb2wI_DNzpW5wQaO60
+Message-ID: <CAFLszTgNgDUY-sKspO9O5JaSg7ERv7g-qO-UV8apunFs4w6ZWA@mail.gmail.com>
+Subject: Re: [PATCH 8/8] cmd: config: allow simple filtering of output
 To: rv@rasmusvillemoes.dk
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Casey Connolly <casey.connolly@linaro.org>
@@ -108,22 +108,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rasmus,
+
 On 2026-07-01T17:15:27, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
-> string: remove more pointless __HAVE_ARCH_STR*
+> cmd: config: allow simple filtering of output
 >
-> None of these six macros are defined by any architecture. Moreover,
-> the ifndef guard only exists in either string.h or string.c, making them
-> completely pointless.
+> When doing development, it can be quite useful to enable
+> CONFIG_CMD_CONFIG, so that one can always check whether a config knob
+> one has just enabled has actually made it to target.
 >
-> I'm not sure whether we have an explicit coding style discouraging the
-> 'extern' qualifier on function declarations, and string.h has a random
-> mix of everything, but I can't leave it on strncasecmp() now that it
-> will be immediately after strcasecmp() which doesn't have it.
+> Because sometimes, one doesn't flash the right binary, or maybe one
+> has just done CONFIG_FOO=y in some config fragment, but that had no
+> effect because one would also have to do CONFIG_BAR=y.
 >
-> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+> However, 2400+ lines of text are rather hard to read through. One
+> probably uses a terminal emulator with capturing enabled, but
+> searching back through the capture file is a little tedious, and one
+> easily ends up finding something that doesn't pertain to the most
+> recent 'config' command invocation.
 >
-> include/linux/string.h | 6 +-----
->  lib/string.c           | 8 --------
->  2 files changed, 1 insertion(+), 13 deletions(-)
+> So make it possible to limit the output to those lines containing a
+> given string. Like the search functionality in menuconfig, make it
+> case insensitive, because it is much more convenient to type "config
+> pinctrl" than "config PINCTRL".
+> [...]
+>
+> cmd/config.c | 25 ++++++++++++++++++++++---
+>  1 file changed, 22 insertions(+), 3 deletions(-)
+
+> diff --git a/cmd/config.c b/cmd/config.c
+> @@ -29,7 +29,23 @@ static int do_config(struct cmd_tbl *cmdtp, int flag, int argc,
+> +             while (b < e) {
+> +                     n = strchrnul(b, '\n');
+> +                     *n = '\0';
+> +
+> +                     if (strcasestr(b, s)) {
+> +                             puts(b);
+> +                             puts('\n');
+> +                     }
+> +                     b = n + 1;
+> +             }
+
+The two puts() could be a single printf("%s\n", b). Also please add an
+explicit #include <linux/string.h> now that we rely on strchrnul() and
+strcasestr() here.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+In addition to Tom's comment, how about a simple sandbox test?
+
+Regards,
+Simon
