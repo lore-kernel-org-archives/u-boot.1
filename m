@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E59C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C51C43458
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:09:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BF25848DC;
-	Thu,  2 Jul 2026 12:09:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4021A849F0;
+	Thu,  2 Jul 2026 12:09:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A6DE849F6; Thu,  2 Jul 2026 12:09:00 +0200 (CEST)
+ id 784F1848DC; Thu,  2 Jul 2026 12:09:00 +0200 (CEST)
 Received: from twmbx01.aspeedtech.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A91C38498C
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:08:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1A0A84975
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
@@ -30,12 +30,12 @@ Received: from [127.0.1.1] (192.168.10.13) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server id 15.2.1748.10 via Frontend
  Transport; Thu, 2 Jul 2026 18:08:37 +0800
 From: Billy Tsai <billy_tsai@aspeedtech.com>
-Date: Thu, 2 Jul 2026 18:08:34 +0800
-Subject: [PATCH 1/4] pinctrl: aspeed: Add AST2700 SoC0 pinctrl driver
+Date: Thu, 2 Jul 2026 18:08:36 +0800
+Subject: [PATCH 3/4] pinctrl: aspeed: Add AST2700 SoC1 pinctrl driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260702-pinctrl-v1-1-4d2bd89fc213@aspeedtech.com>
+Message-ID: <20260702-pinctrl-v1-3-4d2bd89fc213@aspeedtech.com>
 References: <20260702-pinctrl-v1-0-4d2bd89fc213@aspeedtech.com>
 In-Reply-To: <20260702-pinctrl-v1-0-4d2bd89fc213@aspeedtech.com>
 To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
@@ -47,11 +47,11 @@ CC: Tom Rini <trini@konsulko.com>, Ryan Chen <ryan_chen@aspeedtech.com>,
  <sean.anderson@linux.dev>, Michal Simek <michal.simek@amd.com>, "Leo Yu-Chi
  Liang" <ycliang@andestech.com>, Billy Tsai <billy_tsai@aspeedtech.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1782986917; l=17678;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782986917; l=35892;
  i=billy_tsai@aspeedtech.com; s=20251118; h=from:subject:message-id;
- bh=xOXecqXYVfgG0c0xw5oYyEqGD3D2ETRcL53zRoHujLo=;
- b=obKGAO2CLSOB5MZypsUPFT/FR1wxNOAIt5ESvAn1A/oTYI4DyqUegGKjklDkVijdPVLE0cFKj
- hZGs6NplEAKCWw+t5majPuq12lpT36bBH8ehv7saphA6CVOJdrjspi7
+ bh=BZ3zZ8kUsBqKNs2vWCC9GdEZVMLgLH6sfjhkgs4Nmuo=;
+ b=2dSk6+LQ3CTwBW1OjnnTn0Mez44WY3ofFIS6TT01nLdEcdJH4e+cKkaljK8SWkbE2WcgvqKxf
+ uwECnNzfUgmDNGwLrXPNmXMNto6s+5pKT9yQqxcgdmtXPoh1RFHzchG
 X-Developer-Key: i=billy_tsai@aspeedtech.com; a=ed25519;
  pk=/A8qvgZ6CPfnwKgT6/+k+nvXOkN477MshEGJvVdzeeQ=
 X-BeenThere: u-boot@lists.denx.de
@@ -70,47 +70,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AST2700 is a dual-die BMC SoC: SoC0 (CPU die) and SoC1 (I/O die)
-each have their own SCU with independent multi-function pin controls.
+Add the pinctrl driver for the AST2700 SoC1 (I/O) die.
 
-Add the pinctrl driver for the SoC0 die. The driver uses the generic
-pinctrl framework and is compatible with the Linux kernel device tree
-bindings, i.e. pin states are described with the same "function" and
-"groups" properties and the same names as the Linux
-aspeed,ast2700-soc0-pinctrl driver.
+Unlike previous Aspeed generations, the SoC1 SCU assigns every pin a
+4-bit multi-function selector field in a contiguous register range
+starting at SCU 0x400, eight pins per register. Only bits [2:0] of
+each field select the function; bit 3 is reserved read-only and must
+not be written. The driver therefore keeps per-pin group tables and
+per-function mux values, mirroring the Linux
+aspeed,ast2700-soc1-pinctrl driver, and shares the same device tree
+bindings: 220 pins, 238 groups and 217 functions with identical names,
+so pin states written for the Linux driver work unmodified.
 
-Unlike the older AST2500/AST2600 SCUs where each signal is enabled by
-independent bits, the SoC0 mux selections mix single-bit enables
-(eMMC, VGA DDC, VB strap), multi-bit selector fields (JTAG master port
-select, USB2/USB3 port routing) and reset-control bits (PCIe RC
-PERST). Model each (function, group) pair as one register
-mask/value write so all of them fit a single flat table.
+A few controls live outside the pin-indexed range and are handled as
+virtual pins: PCIERC2_PERST (SCU 0x908), the USB2 port C/D mode fields
+(SCU 0x3B0) and SGMII0 (SCU 0x47C).
 
-The gpio_request_enable hook releases the GPIO18A/GPIO18B pins to GPIO
-mode by clearing every signal enable bit that claims the pin, matching
-the Linux driver behaviour.
+The gpio_request_enable hook restores a pin to GPIO by writing mux
+value 0, except for the ADC-capable balls W17..AB19 where function 1
+selects GPIO and 0 selects the ADC input.
 
 Signed-off-by: Billy Tsai <billy_tsai@aspeedtech.com>
 ---
- drivers/pinctrl/Kconfig                       |   9 +
- drivers/pinctrl/aspeed/Makefile               |   1 +
- drivers/pinctrl/aspeed/pinctrl_ast2700_soc0.c | 486 ++++++++++++++++++++++++++
- 3 files changed, 496 insertions(+)
+ drivers/pinctrl/Kconfig                       |    9 +
+ drivers/pinctrl/aspeed/Makefile               |    1 +
+ drivers/pinctrl/aspeed/pinctrl_ast2700_soc1.c | 1495 +++++++++++++++++++++++++
+ 3 files changed, 1505 insertions(+)
 
 diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index 578edbf8168..35b3f3afa66 100644
+index 254da75d144..c371d94ee6a 100644
 --- a/drivers/pinctrl/Kconfig
 +++ b/drivers/pinctrl/Kconfig
-@@ -378,6 +378,15 @@ config ASPEED_AST2600_PINCTRL
+@@ -388,6 +388,15 @@ config ASPEED_AST2700_SOC0_PINCTRL
  	  uses Generic Pinctrl framework and is compatible with the Linux
  	  driver, i.e. it uses the same device tree configuration.
  
-+config ASPEED_AST2700_SOC0_PINCTRL
-+	bool "Aspeed AST2700 SoC0 pin control driver"
++config ASPEED_AST2700_SOC1_PINCTRL
++	bool "Aspeed AST2700 SoC1 pin control driver"
 +	depends on DM && PINCTRL_GENERIC && ASPEED_AST2700
 +	default y
 +	help
-+	  Support pin multiplexing control on Aspeed ast2700 SoC0. The driver
++	  Support pin multiplexing control on Aspeed ast2700 SoC1. The driver
 +	  uses Generic Pinctrl framework and is compatible with the Linux
 +	  driver, i.e. it uses the same device tree configuration.
 +
@@ -118,19 +118,20 @@ index 578edbf8168..35b3f3afa66 100644
  	bool "Kendryte K210 Fully-Programmable Input/Output Array driver"
  	depends on DM && PINCTRL_GENERIC
 diff --git a/drivers/pinctrl/aspeed/Makefile b/drivers/pinctrl/aspeed/Makefile
-index a3e01ed1ca9..a0da1d7403d 100644
+index a0da1d7403d..33b23fce629 100644
 --- a/drivers/pinctrl/aspeed/Makefile
 +++ b/drivers/pinctrl/aspeed/Makefile
-@@ -1,2 +1,3 @@
+@@ -1,3 +1,4 @@
  obj-$(CONFIG_ASPEED_AST2500_PINCTRL) += pinctrl_ast2500.o
  obj-$(CONFIG_ASPEED_AST2600_PINCTRL) += pinctrl_ast2600.o
-+obj-$(CONFIG_ASPEED_AST2700_SOC0_PINCTRL) += pinctrl_ast2700_soc0.o
-diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2700_soc0.c b/drivers/pinctrl/aspeed/pinctrl_ast2700_soc0.c
+ obj-$(CONFIG_ASPEED_AST2700_SOC0_PINCTRL) += pinctrl_ast2700_soc0.o
++obj-$(CONFIG_ASPEED_AST2700_SOC1_PINCTRL) += pinctrl_ast2700_soc1.o
+diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2700_soc1.c b/drivers/pinctrl/aspeed/pinctrl_ast2700_soc1.c
 new file mode 100644
-index 00000000000..9a973285b0b
+index 00000000000..9d65064d44c
 --- /dev/null
-+++ b/drivers/pinctrl/aspeed/pinctrl_ast2700_soc0.c
-@@ -0,0 +1,486 @@
++++ b/drivers/pinctrl/aspeed/pinctrl_ast2700_soc1.c
+@@ -0,0 +1,1495 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 ASPEED Technology Inc.
@@ -141,481 +142,1490 @@ index 00000000000..9a973285b0b
 +#include <dm/pinctrl.h>
 +#include <errno.h>
 +#include <vsprintf.h>
-+#include <linux/bitops.h>
 +#include <linux/kernel.h>
 +#include <linux/string.h>
++#include <linux/types.h>
 +
-+#define SCU010			0x010
-+#define SCU200			0x200
-+#define SCU400			0x400
-+#define SCU404			0x404
-+#define SCU408			0x408
-+#define SCU410			0x410
++#define AST2700_SOC1_MUX_BASE		0x400
++#define AST2700_SOC1_PCIE_REG		0x908
++#define AST2700_SOC1_USB_MODE_REG	0x3b0
++#define AST2700_SOC1_SGMII_REG		0x47c
++#define AST2700_SOC1_MUX_MASK		0x7
++#define AST2700_SOC1_MUX_BITS_PER_PIN	4
++#define AST2700_SOC1_MUX_PINS_PER_REG	8
 +
-+#define USB_PORTA_ROUTE	BIT(9)
-+#define USB_PORTB_ROUTE	BIT(10)
++enum {
++	C16,
++	C14,
++	C11,
++	D9,
++	F14,
++	D10,
++	C12,
++	C13,
++	AC26,
++	AA25,
++	AB23,
++	U22,
++	V21,
++	N26,
++	P25,
++	N25,
++	V23,
++	W22,
++	AB26,
++	AD26,
++	P26,
++	AE26,
++	AF26,
++	AF25,
++	AE25,
++	AD25,
++	AF23,
++	AF20,
++	AF21,
++	AE21,
++	AE23,
++	AD22,
++	AF17,
++	AA16,
++	Y16,
++	V17,
++	J13,
++	AB16,
++	AC16,
++	AF16,
++	AA15,
++	AB15,
++	AC15,
++	AD15,
++	Y15,
++	AA14,
++	W16,
++	V16,
++	AB18,
++	AC18,
++	K13,
++	AA17,
++	AB17,
++	AD16,
++	AC17,
++	AD17,
++	AE16,
++	AE17,
++	AB24,
++	W26,
++	HOLE0,
++	HOLE1,
++	HOLE2,
++	HOLE3,
++	W25,
++	Y23,
++	Y24,
++	W21,
++	AA23,
++	AC22,
++	AB22,
++	Y21,
++	AE20,
++	AF19,
++	Y22,
++	AA20,
++	AA22,
++	AB20,
++	AF18,
++	AE19,
++	AD20,
++	AC20,
++	AA21,
++	AB21,
++	AC19,
++	AE18,
++	AD19,
++	AD18,
++	U25,
++	U26,
++	Y26,
++	AA24,
++	R25,
++	AA26,
++	R26,
++	Y25,
++	B16,
++	D14,
++	B15,
++	B14,
++	C17,
++	B13,
++	E14,
++	C15,
++	D24,
++	B23,
++	B22,
++	C23,
++	B18,
++	B21,
++	M15,
++	B19,
++	B26,
++	A25,
++	A24,
++	B24,
++	E26,
++	A21,
++	A19,
++	A18,
++	D26,
++	C26,
++	A23,
++	A22,
++	B25,
++	F26,
++	A26,
++	A14,
++	E10,
++	E13,
++	D12,
++	F10,
++	E11,
++	F11,
++	F13,
++	N15,
++	C20,
++	C19,
++	A8,
++	R14,
++	A7,
++	P14,
++	D20,
++	A6,
++	B6,
++	N14,
++	B7,
++	B8,
++	B9,
++	M14,
++	J11,
++	E7,
++	D19,
++	B11,
++	D15,
++	B12,
++	B10,
++	P13,
++	C18,
++	C6,
++	C7,
++	D7,
++	N13,
++	C8,
++	C9,
++	C10,
++	M16,
++	A15,
++	G11,
++	H7,
++	H8,
++	H9,
++	H10,
++	H11,
++	J9,
++	J10,
++	E9,
++	F9,
++	F8,
++	M13,
++	F7,
++	D8,
++	E8,
++	L12,
++	F12,
++	E12,
++	J12,
++	G7,
++	G8,
++	G9,
++	G10,
++	K12,
++	W17,
++	V18,
++	W18,
++	Y17,
++	AA18,
++	AA13,
++	Y18,
++	AA12,
++	W20,
++	V20,
++	Y11,
++	V14,
++	V19,
++	W14,
++	Y20,
++	AB19,
++	U21,
++	T24,
++	V24,
++	V22,
++	T23,
++	AC25,
++	AB25,
++	AC24,
++	PCIERC2_PERST,
++	PORTC_MODE,
++	PORTD_MODE,
++	SGMII0,
++};
 +
-+#define PORTA_U3_MODE		GENMASK(1, 0)
-+#define PORTA_U2_MODE		GENMASK(3, 2)
-+#define PORTB_U3_MODE		GENMASK(5, 4)
-+#define PORTB_U2_MODE		GENMASK(7, 6)
-+#define PORTA_MODE		GENMASK(25, 24)
-+#define PORTB_MODE		GENMASK(29, 28)
++struct ast2700_soc1_field {
++	u32 reg;
++	u32 shift;
++	u32 mask;
++};
 +
-+#define PINMUX(_function, _group, _offset, _mask, _val)	\
-+	{							\
-+		.function = _function,				\
-+		.group = _group,				\
-+		.offset = _offset,				\
-+		.mask = _mask,					\
-+		.val = _val,					\
++struct ast2700_soc1_group {
++	const char *name;
++	const unsigned int *pins;
++	unsigned int npins;
++};
++
++struct ast2700_soc1_function {
++	const char *name;
++	const char *const *groups;
++	const u8 *muxvals;
++	unsigned int ngroups;
++};
++
++struct ast2700_soc1_pinctrl_priv {
++	void __iomem *scu;
++};
++
++#define PIN(n) \
++	[n] = #n
++
++static const char *const ast2700_soc1_pin_names[] = {
++	PIN(C16),
++	PIN(C14),
++	PIN(C11),
++	PIN(D9),
++	PIN(F14),
++	PIN(D10),
++	PIN(C12),
++	PIN(C13),
++	PIN(AC26),
++	PIN(AA25),
++	PIN(AB23),
++	PIN(U22),
++	PIN(V21),
++	PIN(N26),
++	PIN(P25),
++	PIN(N25),
++	PIN(V23),
++	PIN(W22),
++	PIN(AB26),
++	PIN(AD26),
++	PIN(P26),
++	PIN(AE26),
++	PIN(AF26),
++	PIN(AF25),
++	PIN(AE25),
++	PIN(AD25),
++	PIN(AF23),
++	PIN(AF20),
++	PIN(AF21),
++	PIN(AE21),
++	PIN(AE23),
++	PIN(AD22),
++	PIN(AF17),
++	PIN(AA16),
++	PIN(Y16),
++	PIN(V17),
++	PIN(J13),
++	PIN(AB16),
++	PIN(AC16),
++	PIN(AF16),
++	PIN(AA15),
++	PIN(AB15),
++	PIN(AC15),
++	PIN(AD15),
++	PIN(Y15),
++	PIN(AA14),
++	PIN(W16),
++	PIN(V16),
++	PIN(AB18),
++	PIN(AC18),
++	PIN(K13),
++	PIN(AA17),
++	PIN(AB17),
++	PIN(AD16),
++	PIN(AC17),
++	PIN(AD17),
++	PIN(AE16),
++	PIN(AE17),
++	PIN(AB24),
++	PIN(W26),
++	PIN(HOLE0),
++	PIN(HOLE1),
++	PIN(HOLE2),
++	PIN(HOLE3),
++	PIN(W25),
++	PIN(Y23),
++	PIN(Y24),
++	PIN(W21),
++	PIN(AA23),
++	PIN(AC22),
++	PIN(AB22),
++	PIN(Y21),
++	PIN(AE20),
++	PIN(AF19),
++	PIN(Y22),
++	PIN(AA20),
++	PIN(AA22),
++	PIN(AB20),
++	PIN(AF18),
++	PIN(AE19),
++	PIN(AD20),
++	PIN(AC20),
++	PIN(AA21),
++	PIN(AB21),
++	PIN(AC19),
++	PIN(AE18),
++	PIN(AD19),
++	PIN(AD18),
++	PIN(U25),
++	PIN(U26),
++	PIN(Y26),
++	PIN(AA24),
++	PIN(R25),
++	PIN(AA26),
++	PIN(R26),
++	PIN(Y25),
++	PIN(B16),
++	PIN(D14),
++	PIN(B15),
++	PIN(B14),
++	PIN(C17),
++	PIN(B13),
++	PIN(E14),
++	PIN(C15),
++	PIN(D24),
++	PIN(B23),
++	PIN(B22),
++	PIN(C23),
++	PIN(B18),
++	PIN(B21),
++	PIN(M15),
++	PIN(B19),
++	PIN(B26),
++	PIN(A25),
++	PIN(A24),
++	PIN(B24),
++	PIN(E26),
++	PIN(A21),
++	PIN(A19),
++	PIN(A18),
++	PIN(D26),
++	PIN(C26),
++	PIN(A23),
++	PIN(A22),
++	PIN(B25),
++	PIN(F26),
++	PIN(A26),
++	PIN(A14),
++	PIN(E10),
++	PIN(E13),
++	PIN(D12),
++	PIN(F10),
++	PIN(E11),
++	PIN(F11),
++	PIN(F13),
++	PIN(N15),
++	PIN(C20),
++	PIN(C19),
++	PIN(A8),
++	PIN(R14),
++	PIN(A7),
++	PIN(P14),
++	PIN(D20),
++	PIN(A6),
++	PIN(B6),
++	PIN(N14),
++	PIN(B7),
++	PIN(B8),
++	PIN(B9),
++	PIN(M14),
++	PIN(J11),
++	PIN(E7),
++	PIN(D19),
++	PIN(B11),
++	PIN(D15),
++	PIN(B12),
++	PIN(B10),
++	PIN(P13),
++	PIN(C18),
++	PIN(C6),
++	PIN(C7),
++	PIN(D7),
++	PIN(N13),
++	PIN(C8),
++	PIN(C9),
++	PIN(C10),
++	PIN(M16),
++	PIN(A15),
++	PIN(G11),
++	PIN(H7),
++	PIN(H8),
++	PIN(H9),
++	PIN(H10),
++	PIN(H11),
++	PIN(J9),
++	PIN(J10),
++	PIN(E9),
++	PIN(F9),
++	PIN(F8),
++	PIN(M13),
++	PIN(F7),
++	PIN(D8),
++	PIN(E8),
++	PIN(L12),
++	PIN(F12),
++	PIN(E12),
++	PIN(J12),
++	PIN(G7),
++	PIN(G8),
++	PIN(G9),
++	PIN(G10),
++	PIN(K12),
++	PIN(W17),
++	PIN(V18),
++	PIN(W18),
++	PIN(Y17),
++	PIN(AA18),
++	PIN(AA13),
++	PIN(Y18),
++	PIN(AA12),
++	PIN(W20),
++	PIN(V20),
++	PIN(Y11),
++	PIN(V14),
++	PIN(V19),
++	PIN(W14),
++	PIN(Y20),
++	PIN(AB19),
++	PIN(U21),
++	PIN(T24),
++	PIN(V24),
++	PIN(V22),
++	PIN(T23),
++	PIN(AC25),
++	PIN(AB25),
++	PIN(AC24),
++	PIN(PCIERC2_PERST),
++	PIN(PORTC_MODE),
++	PIN(PORTD_MODE),
++	PIN(SGMII0),
++};
++
++#define PIN_GROUP(name, ...) \
++	static const unsigned int name##_pins[] = { __VA_ARGS__ }
++
++/* Pin groups and functions */
++PIN_GROUP(ADC0, W17);
++PIN_GROUP(ADC1, V18);
++PIN_GROUP(ADC10, Y11);
++PIN_GROUP(ADC11, V14);
++PIN_GROUP(ADC12, V19);
++PIN_GROUP(ADC13, W14);
++PIN_GROUP(ADC14, Y20);
++PIN_GROUP(ADC15, AB19);
++PIN_GROUP(ADC2, W18);
++PIN_GROUP(ADC3, Y17);
++PIN_GROUP(ADC4, AA18);
++PIN_GROUP(ADC5, AA13);
++PIN_GROUP(ADC6, Y18);
++PIN_GROUP(ADC7, AA12);
++PIN_GROUP(ADC8, W20);
++PIN_GROUP(ADC9, V20);
++PIN_GROUP(AUXPWRGOOD0, W14);
++PIN_GROUP(AUXPWRGOOD1, Y20);
++PIN_GROUP(CANBUS, G7, G8, G9);
++PIN_GROUP(DI2C0, C16, D9);
++PIN_GROUP(DI2C1, C14, F14);
++PIN_GROUP(DI2C10, R25, AA26);
++PIN_GROUP(DI2C11, R26, Y25);
++PIN_GROUP(DI2C12, W25, Y23);
++PIN_GROUP(DI2C13, Y24, W21);
++PIN_GROUP(DI2C14, AA23, AC22);
++PIN_GROUP(DI2C15, AB22, Y21);
++PIN_GROUP(DI2C2, D10, C12);
++PIN_GROUP(DI2C3, C11, C13);
++PIN_GROUP(DI2C8, U25, U26);
++PIN_GROUP(DI2C9, Y26, AA24);
++PIN_GROUP(DSGPM0, D19, B10, C7, D7);
++PIN_GROUP(ESPI0, B16, D14, B15, B14, C17, B13, E14, C15);
++PIN_GROUP(ESPI1, C16, C14, C11, D9, F14, D10, C12, C13);
++PIN_GROUP(FSI0, AD20, AC20);
++PIN_GROUP(FSI1, AA21, AB21);
++PIN_GROUP(FSI2, AC19, AE18);
++PIN_GROUP(FSI3, AD19, AD18);
++PIN_GROUP(FWQSPI, M16, A15);
++PIN_GROUP(FWSPIABR, A14);
++PIN_GROUP(FWWPN, N15);
++PIN_GROUP(HBLED, V24);
++PIN_GROUP(HVI3C0, U25, U26);
++PIN_GROUP(HVI3C1, Y26, AA24);
++PIN_GROUP(HVI3C12, W25, Y23);
++PIN_GROUP(HVI3C13, Y24, W21);
++PIN_GROUP(HVI3C14, AA23, AC22);
++PIN_GROUP(HVI3C15, AB22, Y21);
++PIN_GROUP(HVI3C2, R25, AA26);
++PIN_GROUP(HVI3C3, R26, Y25);
++PIN_GROUP(I2C0, G11, H7);
++PIN_GROUP(I2C1, H8, H9);
++PIN_GROUP(I2C10, G8, G9);
++PIN_GROUP(I2C11, G10, K12);
++PIN_GROUP(I2C12, AC18, AA17);
++PIN_GROUP(I2C13, AB17, AD16);
++PIN_GROUP(I2C14, AC17, AD17);
++PIN_GROUP(I2C15, AE16, AE17);
++PIN_GROUP(I2C2, H10, H11);
++PIN_GROUP(I2C3, J9, J10);
++PIN_GROUP(I2C4, E9, F9);
++PIN_GROUP(I2C5, F8, M13);
++PIN_GROUP(I2C6, F7, D8);
++PIN_GROUP(I2C7, E8, L12);
++PIN_GROUP(I2C8, F12, E12);
++PIN_GROUP(I2C9, J12, G7);
++PIN_GROUP(I2CF0, F12, E12, J12, G7);
++PIN_GROUP(I2CF1, E9, F9, F8, M13);
++PIN_GROUP(I2CF2, F7, D8, E8, L12);
++PIN_GROUP(I3C10, AC19, AE18);
++PIN_GROUP(I3C11, AD19, AD18);
++PIN_GROUP(I3C4, AE20, AF19);
++PIN_GROUP(I3C5, Y22, AA20);
++PIN_GROUP(I3C6, AA22, AB20);
++PIN_GROUP(I3C7, AF18, AE19);
++PIN_GROUP(I3C8, AD20, AC20);
++PIN_GROUP(I3C9, AA21, AB21);
++PIN_GROUP(JTAGM1, D12, F10, E11, F11, F13);
++PIN_GROUP(LPC0, AF26, AF25, B16, D14, B15, B14, C17, B13, E14, C15);
++PIN_GROUP(LPC1, C16, C14, C11, D9, F14, D10, C12, C13, AE16, AE17);
++PIN_GROUP(LTPI, U25, U26, Y26, AA24);
++PIN_GROUP(LTPI_PS_I2C0, G11, H7);
++PIN_GROUP(LTPI_PS_I2C1, H8, H9);
++PIN_GROUP(LTPI_PS_I2C2, H10, H11);
++PIN_GROUP(LTPI_PS_I2C3, J9, J10);
++PIN_GROUP(MACLINK0, U21);
++PIN_GROUP(MACLINK1, AC24);
++PIN_GROUP(MACLINK2, T24);
++PIN_GROUP(MDIO0, B9, M14);
++PIN_GROUP(MDIO1, C9, C10);
++PIN_GROUP(MDIO2, E10, E13);
++PIN_GROUP(NCTS0, AF17);
++PIN_GROUP(NCTS1, AA15);
++PIN_GROUP(NCTS5, V21);
++PIN_GROUP(NCTS6, AB26);
++PIN_GROUP(NDCD0, AA16);
++PIN_GROUP(NDCD1, AB15);
++PIN_GROUP(NDCD5, N26);
++PIN_GROUP(NDCD6, AD26);
++PIN_GROUP(NDSR0, Y16);
++PIN_GROUP(NDSR1, AC15);
++PIN_GROUP(NDSR5, P25);
++PIN_GROUP(NDSR6, P26);
++PIN_GROUP(NDTR0, J13);
++PIN_GROUP(NDTR1, Y15);
++PIN_GROUP(NDTR5, V23);
++PIN_GROUP(NDTR6, AF26);
++PIN_GROUP(NRI0, V17);
++PIN_GROUP(NRI1, AD15);
++PIN_GROUP(NRI5, N25);
++PIN_GROUP(NRI6, AE26);
++PIN_GROUP(NRTS0, AB16);
++PIN_GROUP(NRTS1, AA14);
++PIN_GROUP(NRTS5, W22);
++PIN_GROUP(NRTS6, AF25);
++PIN_GROUP(OSCCLK, C17);
++PIN_GROUP(PE2SGRSTN, E10, PCIERC2_PERST);
++PIN_GROUP(PWM0, AE25);
++PIN_GROUP(PWM1, AD25);
++PIN_GROUP(PWM10, AB17);
++PIN_GROUP(PWM11, AD16);
++PIN_GROUP(PWM12, AC17);
++PIN_GROUP(PWM13, AD17);
++PIN_GROUP(PWM14, AE16);
++PIN_GROUP(PWM15, AE17);
++PIN_GROUP(PWM2, AF23);
++PIN_GROUP(PWM3, AF20);
++PIN_GROUP(PWM4, AF21);
++PIN_GROUP(PWM5, AE21);
++PIN_GROUP(PWM6, AE23);
++PIN_GROUP(PWM7, AD22);
++PIN_GROUP(PWM8, K13);
++PIN_GROUP(PWM9, AA17);
++PIN_GROUP(QSPI0, C23, B18);
++PIN_GROUP(QSPI1, B24, E26);
++PIN_GROUP(QSPI2, B25, F26);
++PIN_GROUP(RGMII0, C20, C19, A8, R14, A7, P14, D20, A6, B6, N14, B7, B8);
++PIN_GROUP(RGMII1, D19, B11, D15, B12, B10, P13, C18, C6, C7, D7, N13, C8);
++PIN_GROUP(RMII0, C20, A8, R14, A7, P14, A6, B6, N14);
++PIN_GROUP(RMII0RCLKO, D20);
++PIN_GROUP(RMII1, D19, D15, B12, B10, P13, C6, C7, D7);
++PIN_GROUP(RMII1RCLKO, C18);
++PIN_GROUP(SALT0, AC17);
++PIN_GROUP(SALT1, AD17);
++PIN_GROUP(SALT10, Y18);
++PIN_GROUP(SALT11, AA12);
++PIN_GROUP(SALT12, AB26);
++PIN_GROUP(SALT13, AD26);
++PIN_GROUP(SALT14, P26);
++PIN_GROUP(SALT15, AE26);
++PIN_GROUP(SALT2, AC15);
++PIN_GROUP(SALT3, AD15);
++PIN_GROUP(SALT4, W17);
++PIN_GROUP(SALT5, V18);
++PIN_GROUP(SALT6, W18);
++PIN_GROUP(SALT7, Y17);
++PIN_GROUP(SALT8, AA18);
++PIN_GROUP(SALT9, AA13);
++PIN_GROUP(SD, C16, C14, C11, D9, F14, D10, C12, C13);
++PIN_GROUP(SGMII, SGMII0);
++PIN_GROUP(SGPM0, U21, T24, V22, T23);
++PIN_GROUP(SGPM1, AC25, AB25, AB24, W26);
++PIN_GROUP(SGPS, B11, C18, N13, C8);
++PIN_GROUP(SIOONCTRLN0, AE23);
++PIN_GROUP(SIOONCTRLN1, AA15);
++PIN_GROUP(SIOPBIN0, AD25);
++PIN_GROUP(SIOPBIN1, AA16);
++PIN_GROUP(SIOPBON0, AE25);
++PIN_GROUP(SIOPBON1, AF17);
++PIN_GROUP(SIOPWREQN0, AE21);
++PIN_GROUP(SIOPWREQN1, AB16);
++PIN_GROUP(SIOPWRGD1, AB15);
++PIN_GROUP(SIOS3N0, AF20);
++PIN_GROUP(SIOS3N1, V17);
++PIN_GROUP(SIOS5N0, AF21);
++PIN_GROUP(SIOS5N1, J13);
++PIN_GROUP(SIOSCIN0, AF23);
++PIN_GROUP(SIOSCIN1, Y16);
++PIN_GROUP(SMON0, U21, T24, V22, T23);
++PIN_GROUP(SMON1, W26, AC25, AB25);
++PIN_GROUP(SPI0, D24, B23, B22);
++PIN_GROUP(SPI0ABR, M15);
++PIN_GROUP(SPI0CS1, B21);
++PIN_GROUP(SPI0WPN, B19);
++PIN_GROUP(SPI1, B26, A25, A24);
++PIN_GROUP(SPI1ABR, A19);
++PIN_GROUP(SPI1CS1, A21);
++PIN_GROUP(SPI1WPN, A18);
++PIN_GROUP(SPI2, D26, C26, A23, A22);
++PIN_GROUP(SPI2CS1, A26);
++PIN_GROUP(TACH0, AC26);
++PIN_GROUP(TACH1, AA25);
++PIN_GROUP(TACH10, AB26);
++PIN_GROUP(TACH11, AD26);
++PIN_GROUP(TACH12, P26);
++PIN_GROUP(TACH13, AE26);
++PIN_GROUP(TACH14, AF26);
++PIN_GROUP(TACH15, AF25);
++PIN_GROUP(TACH2, AB23);
++PIN_GROUP(TACH3, U22);
++PIN_GROUP(TACH4, V21);
++PIN_GROUP(TACH5, N26);
++PIN_GROUP(TACH6, P25);
++PIN_GROUP(TACH7, N25);
++PIN_GROUP(TACH8, V23);
++PIN_GROUP(TACH9, W22);
++PIN_GROUP(THRU0, AC26, AA25);
++PIN_GROUP(THRU1, AB23, U22);
++PIN_GROUP(THRU2, A19, A18);
++PIN_GROUP(THRU3, B25, F26);
++PIN_GROUP(UART0, AC16, AF16);
++PIN_GROUP(UART1, W16, V16);
++PIN_GROUP(UART2, AB18, AC18);
++PIN_GROUP(UART3, K13, AA17);
++PIN_GROUP(UART5, AB17, AD16);
++PIN_GROUP(UART6, AC17, AD17);
++PIN_GROUP(UART7, AE16, AE17);
++PIN_GROUP(UART8, M15, B19);
++PIN_GROUP(UART9, B26, A25);
++PIN_GROUP(UART10, A24, B24);
++PIN_GROUP(UART11, E26, A21);
++PIN_GROUP(USB2CD, PORTC_MODE);
++PIN_GROUP(USB2CH, PORTC_MODE);
++PIN_GROUP(USB2CU, PORTC_MODE);
++PIN_GROUP(USB2CUD, PORTC_MODE);
++PIN_GROUP(USB2DD, PORTD_MODE);
++PIN_GROUP(USB2DH, PORTD_MODE);
++PIN_GROUP(USBUART, G10, K12);
++PIN_GROUP(VGA, J11, E7);
++PIN_GROUP(VPI, C16, C14, C11, D9, F14, D10, AC26, AA25, AB23, U22, V21, N26,
++	  P25, N25, V23, W22, AB26, AD26, P26, AE26, AF26, AF25, AE25, AD25,
++	  AF23, AF20, AF21, AE21);
++PIN_GROUP(WDTRST0N, K13);
++PIN_GROUP(WDTRST1N, AA17);
++PIN_GROUP(WDTRST2N, AB17);
++PIN_GROUP(WDTRST3N, AD16);
++PIN_GROUP(WDTRST4N, AC25);
++PIN_GROUP(WDTRST5N, AB25);
++PIN_GROUP(WDTRST6N, AC24);
++PIN_GROUP(WDTRST7N, AB24);
++
++#define GROUP(n) \
++	{ .name = #n, .pins = n##_pins, .npins = ARRAY_SIZE(n##_pins) }
++
++static const struct ast2700_soc1_group ast2700_soc1_groups[] = {
++	GROUP(ADC0),
++	GROUP(ADC1),
++	GROUP(ADC10),
++	GROUP(ADC11),
++	GROUP(ADC12),
++	GROUP(ADC13),
++	GROUP(ADC14),
++	GROUP(ADC15),
++	GROUP(ADC2),
++	GROUP(ADC3),
++	GROUP(ADC4),
++	GROUP(ADC5),
++	GROUP(ADC6),
++	GROUP(ADC7),
++	GROUP(ADC8),
++	GROUP(ADC9),
++	GROUP(AUXPWRGOOD0),
++	GROUP(AUXPWRGOOD1),
++	GROUP(CANBUS),
++	GROUP(DI2C0),
++	GROUP(DI2C1),
++	GROUP(DI2C10),
++	GROUP(DI2C11),
++	GROUP(DI2C12),
++	GROUP(DI2C13),
++	GROUP(DI2C14),
++	GROUP(DI2C15),
++	GROUP(DI2C2),
++	GROUP(DI2C3),
++	GROUP(DI2C8),
++	GROUP(DI2C9),
++	GROUP(DSGPM0),
++	GROUP(ESPI0),
++	GROUP(ESPI1),
++	GROUP(FSI0),
++	GROUP(FSI1),
++	GROUP(FSI2),
++	GROUP(FSI3),
++	GROUP(FWQSPI),
++	GROUP(FWSPIABR),
++	GROUP(FWWPN),
++	GROUP(HBLED),
++	GROUP(HVI3C0),
++	GROUP(HVI3C1),
++	GROUP(HVI3C12),
++	GROUP(HVI3C13),
++	GROUP(HVI3C14),
++	GROUP(HVI3C15),
++	GROUP(HVI3C2),
++	GROUP(HVI3C3),
++	GROUP(I2C0),
++	GROUP(I2C1),
++	GROUP(I2C10),
++	GROUP(I2C11),
++	GROUP(I2C12),
++	GROUP(I2C13),
++	GROUP(I2C14),
++	GROUP(I2C15),
++	GROUP(I2C2),
++	GROUP(I2C3),
++	GROUP(I2C4),
++	GROUP(I2C5),
++	GROUP(I2C6),
++	GROUP(I2C7),
++	GROUP(I2C8),
++	GROUP(I2C9),
++	GROUP(I2CF0),
++	GROUP(I2CF1),
++	GROUP(I2CF2),
++	GROUP(I3C10),
++	GROUP(I3C11),
++	GROUP(I3C4),
++	GROUP(I3C5),
++	GROUP(I3C6),
++	GROUP(I3C7),
++	GROUP(I3C8),
++	GROUP(I3C9),
++	GROUP(JTAGM1),
++	GROUP(LPC0),
++	GROUP(LPC1),
++	GROUP(LTPI),
++	GROUP(LTPI_PS_I2C0),
++	GROUP(LTPI_PS_I2C1),
++	GROUP(LTPI_PS_I2C2),
++	GROUP(LTPI_PS_I2C3),
++	GROUP(MACLINK0),
++	GROUP(MACLINK1),
++	GROUP(MACLINK2),
++	GROUP(MDIO0),
++	GROUP(MDIO1),
++	GROUP(MDIO2),
++	GROUP(NCTS0),
++	GROUP(NCTS1),
++	GROUP(NCTS5),
++	GROUP(NCTS6),
++	GROUP(NDCD0),
++	GROUP(NDCD1),
++	GROUP(NDCD5),
++	GROUP(NDCD6),
++	GROUP(NDSR0),
++	GROUP(NDSR1),
++	GROUP(NDSR5),
++	GROUP(NDSR6),
++	GROUP(NDTR0),
++	GROUP(NDTR1),
++	GROUP(NDTR5),
++	GROUP(NDTR6),
++	GROUP(NRI0),
++	GROUP(NRI1),
++	GROUP(NRI5),
++	GROUP(NRI6),
++	GROUP(NRTS0),
++	GROUP(NRTS1),
++	GROUP(NRTS5),
++	GROUP(NRTS6),
++	GROUP(OSCCLK),
++	GROUP(PE2SGRSTN),
++	GROUP(PWM0),
++	GROUP(PWM1),
++	GROUP(PWM10),
++	GROUP(PWM11),
++	GROUP(PWM12),
++	GROUP(PWM13),
++	GROUP(PWM14),
++	GROUP(PWM15),
++	GROUP(PWM2),
++	GROUP(PWM3),
++	GROUP(PWM4),
++	GROUP(PWM5),
++	GROUP(PWM6),
++	GROUP(PWM7),
++	GROUP(PWM8),
++	GROUP(PWM9),
++	GROUP(QSPI0),
++	GROUP(QSPI1),
++	GROUP(QSPI2),
++	GROUP(RGMII0),
++	GROUP(RGMII1),
++	GROUP(RMII0),
++	GROUP(RMII0RCLKO),
++	GROUP(RMII1),
++	GROUP(RMII1RCLKO),
++	GROUP(SALT0),
++	GROUP(SALT1),
++	GROUP(SALT10),
++	GROUP(SALT11),
++	GROUP(SALT12),
++	GROUP(SALT13),
++	GROUP(SALT14),
++	GROUP(SALT15),
++	GROUP(SALT2),
++	GROUP(SALT3),
++	GROUP(SALT4),
++	GROUP(SALT5),
++	GROUP(SALT6),
++	GROUP(SALT7),
++	GROUP(SALT8),
++	GROUP(SALT9),
++	GROUP(SD),
++	GROUP(SGMII),
++	GROUP(SGPM0),
++	GROUP(SGPM1),
++	GROUP(SGPS),
++	GROUP(SIOONCTRLN0),
++	GROUP(SIOONCTRLN1),
++	GROUP(SIOPBIN0),
++	GROUP(SIOPBIN1),
++	GROUP(SIOPBON0),
++	GROUP(SIOPBON1),
++	GROUP(SIOPWREQN0),
++	GROUP(SIOPWREQN1),
++	GROUP(SIOPWRGD1),
++	GROUP(SIOS3N0),
++	GROUP(SIOS3N1),
++	GROUP(SIOS5N0),
++	GROUP(SIOS5N1),
++	GROUP(SIOSCIN0),
++	GROUP(SIOSCIN1),
++	GROUP(SMON0),
++	GROUP(SMON1),
++	GROUP(SPI0),
++	GROUP(SPI0ABR),
++	GROUP(SPI0CS1),
++	GROUP(SPI0WPN),
++	GROUP(SPI1),
++	GROUP(SPI1ABR),
++	GROUP(SPI1CS1),
++	GROUP(SPI1WPN),
++	GROUP(SPI2),
++	GROUP(SPI2CS1),
++	GROUP(TACH0),
++	GROUP(TACH1),
++	GROUP(TACH10),
++	GROUP(TACH11),
++	GROUP(TACH12),
++	GROUP(TACH13),
++	GROUP(TACH14),
++	GROUP(TACH15),
++	GROUP(TACH2),
++	GROUP(TACH3),
++	GROUP(TACH4),
++	GROUP(TACH5),
++	GROUP(TACH6),
++	GROUP(TACH7),
++	GROUP(TACH8),
++	GROUP(TACH9),
++	GROUP(THRU0),
++	GROUP(THRU1),
++	GROUP(THRU2),
++	GROUP(THRU3),
++	GROUP(UART0),
++	GROUP(UART1),
++	GROUP(UART10),
++	GROUP(UART11),
++	GROUP(UART2),
++	GROUP(UART3),
++	GROUP(UART5),
++	GROUP(UART6),
++	GROUP(UART7),
++	GROUP(UART8),
++	GROUP(UART9),
++	GROUP(USB2CD),
++	GROUP(USB2CH),
++	GROUP(USB2CU),
++	GROUP(USB2CUD),
++	GROUP(USB2DD),
++	GROUP(USB2DH),
++	GROUP(USBUART),
++	GROUP(VGA),
++	GROUP(VPI),
++	GROUP(WDTRST0N),
++	GROUP(WDTRST1N),
++	GROUP(WDTRST2N),
++	GROUP(WDTRST3N),
++	GROUP(WDTRST4N),
++	GROUP(WDTRST5N),
++	GROUP(WDTRST6N),
++	GROUP(WDTRST7N),
++};
++
++/**
++ * VM() - Helper macro to unwrap a parenthesized list of arguments.
++ * @...: The parenthesized list to be unwrapped.
++ *
++ * Since the C preprocessor treats commas inside braces {} as argument
++ * separators for macros, wrap mux value lists in parentheses and strip
++ * them here when initializing the compound literal.
++ */
++#define VM(...) __VA_ARGS__
++
++/**
++ * FUNC() - Initialize an ast2700_soc1_function entry.
++ * @n: Name of the pin function.
++ * @m: Parenthesized list of mux values mapped 1:1 to the groups list.
++ * @...: Variable list of pin group names associated with this function.
++ */
++#define FUNC(n, m, ...) \
++	{ \
++		.name = #n, \
++		.groups = (const char *const[]){ __VA_ARGS__ }, \
++		.muxvals = (const u8[]){ VM m }, \
++		.ngroups = sizeof((const char *const[]){ __VA_ARGS__ }) / \
++			   sizeof(char *), \
 +	}
 +
-+struct ast2700_soc0_pinmux {
-+	const char *function;
-+	const char *group;
-+	u32 offset;
-+	u32 mask;
-+	u32 val;
++static const struct ast2700_soc1_function ast2700_soc1_functions[] = {
++	FUNC(ADC0, (0), "ADC0"),
++	FUNC(ADC1, (0), "ADC1"),
++	FUNC(ADC10, (0), "ADC10"),
++	FUNC(ADC11, (0), "ADC11"),
++	FUNC(ADC12, (0), "ADC12"),
++	FUNC(ADC13, (0), "ADC13"),
++	FUNC(ADC14, (0), "ADC14"),
++	FUNC(ADC15, (0), "ADC15"),
++	FUNC(ADC2, (0), "ADC2"),
++	FUNC(ADC3, (0), "ADC3"),
++	FUNC(ADC4, (0), "ADC4"),
++	FUNC(ADC5, (0), "ADC5"),
++	FUNC(ADC6, (0), "ADC6"),
++	FUNC(ADC7, (0), "ADC7"),
++	FUNC(ADC8, (0), "ADC8"),
++	FUNC(ADC9, (0), "ADC9"),
++	FUNC(AUXPWRGOOD0, (2), "AUXPWRGOOD0"),
++	FUNC(AUXPWRGOOD1, (2), "AUXPWRGOOD1"),
++	FUNC(CANBUS, (2), "CANBUS"),
++	FUNC(ESPI0, (1), "ESPI0"),
++	FUNC(ESPI1, (1), "ESPI1"),
++	FUNC(FSI0, (2), "FSI0"),
++	FUNC(FSI1, (2), "FSI1"),
++	FUNC(FSI2, (2), "FSI2"),
++	FUNC(FSI3, (2), "FSI3"),
++	FUNC(FWQSPI, (1), "FWQSPI"),
++	FUNC(FWSPIABR, (1), "FWSPIABR"),
++	FUNC(FWWPN, (1), "FWWPN"),
++	FUNC(HBLED, (2), "HBLED"),
++	FUNC(I2C0, (1, 2, 4), "I2C0", "LTPI_PS_I2C0", "DI2C0"),
++	FUNC(I2C1, (1, 2, 4), "I2C1", "LTPI_PS_I2C1", "DI2C1"),
++	FUNC(I2C10, (1, 2), "I2C10", "DI2C10"),
++	FUNC(I2C11, (1, 2), "I2C11", "DI2C11"),
++	FUNC(I2C12, (4, 2), "I2C12", "DI2C12"),
++	FUNC(I2C13, (4, 2), "I2C13", "DI2C13"),
++	FUNC(I2C14, (4, 2), "I2C14", "DI2C14"),
++	FUNC(I2C15, (2, 2), "I2C15", "DI2C15"),
++	FUNC(I2C2, (1, 2, 4), "I2C2", "LTPI_PS_I2C2", "DI2C2"),
++	FUNC(I2C3, (1, 2, 4), "I2C3", "LTPI_PS_I2C3", "DI2C3"),
++	FUNC(I2C4, (1), "I2C4"),
++	FUNC(I2C5, (1), "I2C5"),
++	FUNC(I2C6, (1), "I2C6"),
++	FUNC(I2C7, (1), "I2C7"),
++	FUNC(I2C8, (1, 2), "I2C8", "DI2C8"),
++	FUNC(I2C9, (1, 2), "I2C9", "DI2C9"),
++	FUNC(I2CF0, (5), "I2CF0"),
++	FUNC(I2CF1, (5), "I2CF1"),
++	FUNC(I2CF2, (5), "I2CF2"),
++	FUNC(I3C0, (1), "HVI3C0"),
++	FUNC(I3C1, (1), "HVI3C1"),
++	FUNC(I3C10, (1), "I3C10"),
++	FUNC(I3C11, (1), "I3C11"),
++	FUNC(I3C12, (1), "HVI3C12"),
++	FUNC(I3C13, (1), "HVI3C13"),
++	FUNC(I3C14, (1), "HVI3C14"),
++	FUNC(I3C15, (1), "HVI3C15"),
++	FUNC(I3C2, (1), "HVI3C2"),
++	FUNC(I3C3, (1), "HVI3C3"),
++	FUNC(I3C4, (1), "I3C4"),
++	FUNC(I3C5, (1), "I3C5"),
++	FUNC(I3C6, (1), "I3C6"),
++	FUNC(I3C7, (1), "I3C7"),
++	FUNC(I3C8, (1), "I3C8"),
++	FUNC(I3C9, (1), "I3C9"),
++	FUNC(JTAGM1, (1), "JTAGM1"),
++	FUNC(LPC0, (2), "LPC0"),
++	FUNC(LPC1, (2), "LPC1"),
++	FUNC(LTPI, (2), "LTPI"),
++	FUNC(MACLINK0, (4), "MACLINK0"),
++	FUNC(MACLINK1, (3), "MACLINK1"),
++	FUNC(MACLINK2, (4), "MACLINK2"),
++	FUNC(MDIO0, (1), "MDIO0"),
++	FUNC(MDIO1, (1), "MDIO1"),
++	FUNC(MDIO2, (1), "MDIO2"),
++	FUNC(NCTS0, (1), "NCTS0"),
++	FUNC(NCTS1, (1), "NCTS1"),
++	FUNC(NCTS5, (4), "NCTS5"),
++	FUNC(NCTS6, (4), "NCTS6"),
++	FUNC(NDCD0, (1), "NDCD0"),
++	FUNC(NDCD1, (1), "NDCD1"),
++	FUNC(NDCD5, (4), "NDCD5"),
++	FUNC(NDCD6, (4), "NDCD6"),
++	FUNC(NDSR0, (1), "NDSR0"),
++	FUNC(NDSR1, (1), "NDSR1"),
++	FUNC(NDSR5, (4), "NDSR5"),
++	FUNC(NDSR6, (4), "NDSR6"),
++	FUNC(NDTR0, (1), "NDTR0"),
++	FUNC(NDTR1, (1), "NDTR1"),
++	FUNC(NDTR5, (4), "NDTR5"),
++	FUNC(NDTR6, (4), "NDTR6"),
++	FUNC(NRI0, (1), "NRI0"),
++	FUNC(NRI1, (1), "NRI1"),
++	FUNC(NRI5, (4), "NRI5"),
++	FUNC(NRI6, (4), "NRI6"),
++	FUNC(NRTS0, (1), "NRTS0"),
++	FUNC(NRTS1, (1), "NRTS1"),
++	FUNC(NRTS5, (4), "NRTS5"),
++	FUNC(NRTS6, (4), "NRTS6"),
++	FUNC(OSCCLK, (3), "OSCCLK"),
++	FUNC(PCIERC, (2), "PE2SGRSTN"),
++	FUNC(PWM0, (1), "PWM0"),
++	FUNC(PWM1, (1), "PWM1"),
++	FUNC(PWM10, (3), "PWM10"),
++	FUNC(PWM11, (3), "PWM11"),
++	FUNC(PWM12, (3), "PWM12"),
++	FUNC(PWM13, (3), "PWM13"),
++	FUNC(PWM14, (3), "PWM14"),
++	FUNC(PWM15, (3), "PWM15"),
++	FUNC(PWM2, (1), "PWM2"),
++	FUNC(PWM3, (1), "PWM3"),
++	FUNC(PWM4, (1), "PWM4"),
++	FUNC(PWM5, (1), "PWM5"),
++	FUNC(PWM6, (1), "PWM6"),
++	FUNC(PWM7, (1), "PWM7"),
++	FUNC(PWM8, (3), "PWM8"),
++	FUNC(PWM9, (3), "PWM9"),
++	FUNC(QSPI0, (1), "QSPI0"),
++	FUNC(QSPI1, (1), "QSPI1"),
++	FUNC(QSPI2, (1), "QSPI2"),
++	FUNC(RGMII0, (1), "RGMII0"),
++	FUNC(RGMII1, (1), "RGMII1"),
++	FUNC(RMII0, (2), "RMII0"),
++	FUNC(RMII0RCLKO, (2), "RMII0RCLKO"),
++	FUNC(RMII1, (2), "RMII1"),
++	FUNC(RMII1RCLKO, (2), "RMII1RCLKO"),
++	FUNC(SALT0, (2), "SALT0"),
++	FUNC(SALT1, (2), "SALT1"),
++	FUNC(SALT10, (2), "SALT10"),
++	FUNC(SALT11, (2), "SALT11"),
++	FUNC(SALT12, (2), "SALT12"),
++	FUNC(SALT13, (2), "SALT13"),
++	FUNC(SALT14, (2), "SALT14"),
++	FUNC(SALT15, (2), "SALT15"),
++	FUNC(SALT2, (2), "SALT2"),
++	FUNC(SALT3, (2), "SALT3"),
++	FUNC(SALT4, (2), "SALT4"),
++	FUNC(SALT5, (2), "SALT5"),
++	FUNC(SALT6, (2), "SALT6"),
++	FUNC(SALT7, (2), "SALT7"),
++	FUNC(SALT8, (2), "SALT8"),
++	FUNC(SALT9, (2), "SALT9"),
++	FUNC(SD, (3), "SD"),
++	FUNC(SGMII, (1), "SGMII"),
++	FUNC(SGPM0, (1, 4), "SGPM0", "DSGPM0"),
++	FUNC(SGPM1, (1), "SGPM1"),
++	FUNC(SGPS, (5), "SGPS"),
++	FUNC(SIOONCTRLN0, (2), "SIOONCTRLN0"),
++	FUNC(SIOONCTRLN1, (2), "SIOONCTRLN1"),
++	FUNC(SIOPBIN0, (2), "SIOPBIN0"),
++	FUNC(SIOPBIN1, (2), "SIOPBIN1"),
++	FUNC(SIOPBON0, (2), "SIOPBON0"),
++	FUNC(SIOPBON1, (2), "SIOPBON1"),
++	FUNC(SIOPWREQN0, (2), "SIOPWREQN0"),
++	FUNC(SIOPWREQN1, (2), "SIOPWREQN1"),
++	FUNC(SIOPWRGD1, (2), "SIOPWRGD1"),
++	FUNC(SIOS3N0, (2), "SIOS3N0"),
++	FUNC(SIOS3N1, (2), "SIOS3N1"),
++	FUNC(SIOS5N0, (2), "SIOS5N0"),
++	FUNC(SIOS5N1, (2), "SIOS5N1"),
++	FUNC(SIOSCIN0, (2), "SIOSCIN0"),
++	FUNC(SIOSCIN1, (2), "SIOSCIN1"),
++	FUNC(SMON0, (2), "SMON0"),
++	FUNC(SMON1, (4), "SMON1"),
++	FUNC(SPI0, (1), "SPI0"),
++	FUNC(SPI0ABR, (1), "SPI0ABR"),
++	FUNC(SPI0CS1, (1), "SPI0CS1"),
++	FUNC(SPI0WPN, (1), "SPI0WPN"),
++	FUNC(SPI1, (1), "SPI1"),
++	FUNC(SPI1ABR, (1), "SPI1ABR"),
++	FUNC(SPI1CS1, (1), "SPI1CS1"),
++	FUNC(SPI1WPN, (1), "SPI1WPN"),
++	FUNC(SPI2, (1), "SPI2"),
++	FUNC(SPI2CS1, (1), "SPI2CS1"),
++	FUNC(TACH0, (1), "TACH0"),
++	FUNC(TACH1, (1), "TACH1"),
++	FUNC(TACH10, (1), "TACH10"),
++	FUNC(TACH11, (1), "TACH11"),
++	FUNC(TACH12, (1), "TACH12"),
++	FUNC(TACH13, (1), "TACH13"),
++	FUNC(TACH14, (1), "TACH14"),
++	FUNC(TACH15, (1), "TACH15"),
++	FUNC(TACH2, (1), "TACH2"),
++	FUNC(TACH3, (1), "TACH3"),
++	FUNC(TACH4, (1), "TACH4"),
++	FUNC(TACH5, (1), "TACH5"),
++	FUNC(TACH6, (1), "TACH6"),
++	FUNC(TACH7, (1), "TACH7"),
++	FUNC(TACH8, (1), "TACH8"),
++	FUNC(TACH9, (1), "TACH9"),
++	FUNC(THRU0, (2), "THRU0"),
++	FUNC(THRU1, (2), "THRU1"),
++	FUNC(THRU2, (4), "THRU2"),
++	FUNC(THRU3, (4), "THRU3"),
++	FUNC(UART0, (1), "UART0"),
++	FUNC(UART1, (1), "UART1"),
++	FUNC(UART10, (3), "UART10"),
++	FUNC(UART11, (3), "UART11"),
++	FUNC(UART2, (1), "UART2"),
++	FUNC(UART3, (1), "UART3"),
++	FUNC(UART5, (1), "UART5"),
++	FUNC(UART6, (1), "UART6"),
++	FUNC(UART7, (1), "UART7"),
++	FUNC(UART8, (3), "UART8"),
++	FUNC(UART9, (3), "UART9"),
++	FUNC(USB2C, (0, 1, 2, 3), "USB2CUD", "USB2CD", "USB2CH", "USB2CU"),
++	FUNC(USB2D, (1, 2), "USB2DD", "USB2DH"),
++	FUNC(USBUART, (2), "USBUART"),
++	FUNC(VGA, (1), "VGA"),
++	FUNC(VPI, (5), "VPI"),
++	FUNC(WDTRST0N, (2), "WDTRST0N"),
++	FUNC(WDTRST1N, (2), "WDTRST1N"),
++	FUNC(WDTRST2N, (2), "WDTRST2N"),
++	FUNC(WDTRST3N, (2), "WDTRST3N"),
++	FUNC(WDTRST4N, (2), "WDTRST4N"),
++	FUNC(WDTRST5N, (2), "WDTRST5N"),
++	FUNC(WDTRST6N, (2), "WDTRST6N"),
++	FUNC(WDTRST7N, (2), "WDTRST7N"),
 +};
 +
-+struct ast2700_soc0_sig {
-+	u32 offset;
-+	u32 mask;
-+	const char *name;
-+};
++static struct ast2700_soc1_field
++ast2700_soc1_pinmux_field_from_pin(unsigned int pin)
++{
++	return (struct ast2700_soc1_field){
++		.reg = AST2700_SOC1_MUX_BASE +
++		       (pin / AST2700_SOC1_MUX_PINS_PER_REG) * sizeof(u32),
++		.shift = (pin % AST2700_SOC1_MUX_PINS_PER_REG) *
++			 AST2700_SOC1_MUX_BITS_PER_PIN,
++		.mask = AST2700_SOC1_MUX_MASK,
++	};
++}
 +
-+struct ast2700_soc0_pin {
-+	const char *name;
-+	const struct ast2700_soc0_sig *sigs;
-+	unsigned int nsigs;
-+};
++static void __iomem *ast2700_soc1_reg(struct ast2700_soc1_pinctrl_priv *priv,
++				      unsigned int offset)
++{
++	return (u8 __iomem *)priv->scu + offset;
++}
 +
-+struct ast2700_soc0_pinctrl_priv {
-+	void __iomem *base;
-+};
++static struct ast2700_soc1_field
++ast2700_soc1_field_from_pin(unsigned int pin)
++{
++	switch (pin) {
++	case PCIERC2_PERST:
++		return (struct ast2700_soc1_field){
++			.reg = AST2700_SOC1_PCIE_REG,
++			.shift = 0,
++			.mask = 0x1,
++		};
++	case PORTC_MODE:
++		return (struct ast2700_soc1_field){
++			.reg = AST2700_SOC1_USB_MODE_REG,
++			.shift = 0,
++			.mask = 0x3,
++		};
++	case PORTD_MODE:
++		return (struct ast2700_soc1_field){
++			.reg = AST2700_SOC1_USB_MODE_REG,
++			.shift = 2,
++			.mask = 0x3,
++		};
++	case SGMII0:
++		return (struct ast2700_soc1_field){
++			.reg = AST2700_SOC1_SGMII_REG,
++			.shift = 0,
++			.mask = 0x1,
++		};
++	default:
++		return ast2700_soc1_pinmux_field_from_pin(pin);
++	}
++}
 +
-+static const char * const ast2700_soc0_groups[] = {
-+	"EMMCG1",
-+	"EMMCG4",
-+	"EMMCG8",
-+	"EMMCWPN",
-+	"EMMCCDN",
-+	"VGADDC",
-+	"VB1",
-+	"VB0",
-+	"TSPRSTN",
-+	"UFSCLKI",
-+	"USB3A",
-+	"USB3AAP",
-+	"USB3ABP",
-+	"USB3B",
-+	"USB3BAP",
-+	"USB3BBP",
-+	"USB2A",
-+	"USB2AAP",
-+	"USB2ABP",
-+	"USB2ADAP",
-+	"USB2AH",
-+	"USB2AHAP",
-+	"USB2B",
-+	"USB2BBP",
-+	"USB2BAP",
-+	"USB2BDBP",
-+	"USB2BH",
-+	"USB2BHBP",
-+	"JTAG0",
-+	"PCIERC0PERST",
-+	"PCIERC1PERST",
-+};
-+
-+static const char * const ast2700_soc0_functions[] = {
-+	"EMMC",
-+	"VB",
-+	"TSPRSTN",
-+	"UFSCLKI",
-+	"VGADDC",
-+	"USB3AXHD",
-+	"USB3AXHPD",
-+	"USB3AXH",
-+	"USB3AXHP",
-+	"USB3AXH2B",
-+	"USB3AXHP2B",
-+	"USB3BXHD",
-+	"USB3BXHPD",
-+	"USB3BXH",
-+	"USB3BXHP",
-+	"USB3BXH2A",
-+	"USB3BXHP2A",
-+	"USB2AXHD1",
-+	"USB2AXHPD1",
-+	"USB2AXH",
-+	"USB2AXHP",
-+	"USB2AXH2B",
-+	"USB2AXHP2B",
-+	"USB2AD1",
-+	"USB2AHPD0",
-+	"USB2AH",
-+	"USB2AHP",
-+	"USB2AD0",
-+	"USB2BXHD1",
-+	"USB2BXHPD1",
-+	"USB2BXH",
-+	"USB2BXHP",
-+	"USB2BXH2A",
-+	"USB2BXHP2A",
-+	"USB2BD1",
-+	"USB2BHPD0",
-+	"USB2BH",
-+	"USB2BHP",
-+	"USB2BD0",
-+	"JTAGPSP",
-+	"JTAGSSP",
-+	"JTAGTSP",
-+	"JTAGDDR",
-+	"JTAGUSB3A",
-+	"JTAGUSB3B",
-+	"JTAGPCIEA",
-+	"JTAGPCIEB",
-+	"JTAGM0",
-+	"PCIERC0PERST",
-+	"PCIERC1PERST",
-+};
-+
-+static const struct ast2700_soc0_pinmux ast2700_soc0_pinmuxes[] = {
-+	PINMUX("EMMC", "EMMCG1", SCU400, GENMASK(2, 0), GENMASK(2, 0)),
-+	PINMUX("EMMC", "EMMCG4", SCU400, GENMASK(5, 0), GENMASK(5, 0)),
-+	PINMUX("EMMC", "EMMCG8", SCU400,
-+	       GENMASK(5, 0) | GENMASK(11, 8),
-+	       GENMASK(5, 0) | GENMASK(11, 8)),
-+	PINMUX("EMMC", "EMMCWPN", SCU400, BIT(7), BIT(7)),
-+	PINMUX("EMMC", "EMMCCDN", SCU400, BIT(6), BIT(6)),
-+	PINMUX("VB", "VB1", SCU404, GENMASK(3, 0), GENMASK(3, 0)),
-+	PINMUX("VB", "VB0", SCU010, BIT(17), BIT(17)),
-+	PINMUX("TSPRSTN", "TSPRSTN", SCU010, BIT(9), BIT(9)),
-+	PINMUX("UFSCLKI", "UFSCLKI", SCU010, BIT(19), BIT(19)),
-+	PINMUX("VGADDC", "VGADDC", SCU404, GENMASK(11, 10),
-+	       GENMASK(11, 10)),
++static void
++ast2700_soc1_set_muxval(struct ast2700_soc1_pinctrl_priv *priv,
++			unsigned int pin, unsigned int muxval)
++{
++	struct ast2700_soc1_field field = ast2700_soc1_field_from_pin(pin);
 +
 +	/*
-+	 * The Linux driver models the USB2/USB3 routing with additional
-+	 * virtual PHY pins (PORTA/PORTB_U2_PHY, PORTA/PORTB_U3_PHY) purely
-+	 * to reject conflicting cross-coupled selections; they carry no
-+	 * register writes. U-Boot applies the states given by the device
-+	 * tree without strict conflict checking, so only the real selector
-+	 * fields are programmed here while the group names stay identical.
++	 * PCIERC2_PERST is controlled by a 1-bit enable instead of the
++	 * function mux value.
 +	 */
-+	PINMUX("USB3AXHD", "USB3A", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, USB_PORTA_ROUTE),
-+	PINMUX("USB3AXHPD", "USB3A", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, 0),
-+	PINMUX("USB3AXH", "USB3AAP", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, (2 << 0) | USB_PORTA_ROUTE),
-+	PINMUX("USB3AXHP", "USB3AAP", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, 2 << 0),
-+	PINMUX("USB3AXH2B", "USB3ABP", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, (3 << 0) | USB_PORTA_ROUTE),
-+	PINMUX("USB3AXHP2B", "USB3ABP", SCU410,
-+	       PORTA_U3_MODE | USB_PORTA_ROUTE, 3 << 0),
++	if (pin == PCIERC2_PERST)
++		muxval = 1;
 +
-+	PINMUX("USB3BXHD", "USB3B", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, USB_PORTB_ROUTE),
-+	PINMUX("USB3BXHPD", "USB3B", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, 0),
-+	PINMUX("USB3BXH", "USB3BBP", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, (2 << 4) | USB_PORTB_ROUTE),
-+	PINMUX("USB3BXHP", "USB3BBP", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, 2 << 4),
-+	PINMUX("USB3BXH2A", "USB3BAP", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, (3 << 4) | USB_PORTB_ROUTE),
-+	PINMUX("USB3BXHP2A", "USB3BAP", SCU410,
-+	       PORTB_U3_MODE | USB_PORTB_ROUTE, 3 << 4),
++	clrsetbits_le32(ast2700_soc1_reg(priv, field.reg),
++			field.mask << field.shift,
++			(muxval & field.mask) << field.shift);
++}
 +
-+	PINMUX("USB2AXHD1", "USB2A", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, USB_PORTA_ROUTE),
-+	PINMUX("USB2AXHPD1", "USB2A", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, 0),
-+	PINMUX("USB2AXH", "USB2AAP", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, (2 << 2) | USB_PORTA_ROUTE),
-+	PINMUX("USB2AXHP", "USB2AAP", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, 2 << 2),
-+	PINMUX("USB2AXH2B", "USB2ABP", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, (3 << 2) | USB_PORTA_ROUTE),
-+	PINMUX("USB2AXHP2B", "USB2ABP", SCU410,
-+	       PORTA_U2_MODE | USB_PORTA_ROUTE, 3 << 2),
-+	PINMUX("USB2AD1", "USB2ADAP", SCU410, PORTA_U2_MODE, 1 << 2),
-+	PINMUX("USB2AHPD0", "USB2AH", SCU410, PORTA_MODE, 0),
-+	PINMUX("USB2AH", "USB2AHAP", SCU410, PORTA_MODE, 2 << 24),
-+	PINMUX("USB2AHP", "USB2AHAP", SCU410, PORTA_MODE, 3 << 24),
-+	PINMUX("USB2AD0", "USB2AHAP", SCU410, PORTA_MODE, 1 << 24),
++static int ast2700_soc1_pinctrl_get_pins_count(struct udevice *dev)
++{
++	return ARRAY_SIZE(ast2700_soc1_pin_names);
++}
 +
-+	PINMUX("USB2BXHD1", "USB2B", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, USB_PORTB_ROUTE),
-+	PINMUX("USB2BXHPD1", "USB2B", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, 0),
-+	PINMUX("USB2BXH", "USB2BBP", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, (2 << 6) | USB_PORTB_ROUTE),
-+	PINMUX("USB2BXHP", "USB2BBP", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, 2 << 6),
-+	PINMUX("USB2BXH2A", "USB2BAP", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, (3 << 6) | USB_PORTB_ROUTE),
-+	PINMUX("USB2BXHP2A", "USB2BAP", SCU410,
-+	       PORTB_U2_MODE | USB_PORTB_ROUTE, 3 << 6),
-+	PINMUX("USB2BD1", "USB2BDBP", SCU410, PORTB_U2_MODE, 1 << 6),
-+	PINMUX("USB2BHPD0", "USB2BH", SCU410, PORTB_MODE, 0),
-+	PINMUX("USB2BH", "USB2BHBP", SCU410, PORTB_MODE, 2 << 28),
-+	PINMUX("USB2BHP", "USB2BHBP", SCU410, PORTB_MODE, 3 << 28),
-+	PINMUX("USB2BD0", "USB2BHBP", SCU410, PORTB_MODE, 1 << 28),
++static const char *
++ast2700_soc1_pinctrl_get_pin_name(struct udevice *dev, unsigned int selector)
++{
++	if (selector >= ARRAY_SIZE(ast2700_soc1_pin_names))
++		return NULL;
 +
-+	PINMUX("JTAGPSP", "JTAG0", SCU408, GENMASK(12, 5), 0x00 << 5),
-+	PINMUX("JTAGSSP", "JTAG0", SCU408, GENMASK(12, 5), 0x41 << 5),
-+	PINMUX("JTAGTSP", "JTAG0", SCU408, GENMASK(12, 5), 0x42 << 5),
-+	PINMUX("JTAGDDR", "JTAG0", SCU408, GENMASK(12, 5), 0x43 << 5),
-+	PINMUX("JTAGUSB3A", "JTAG0", SCU408, GENMASK(12, 5), 0x44 << 5),
-+	PINMUX("JTAGUSB3B", "JTAG0", SCU408, GENMASK(12, 5), 0x45 << 5),
-+	PINMUX("JTAGPCIEA", "JTAG0", SCU408, GENMASK(12, 5), 0x46 << 5),
-+	PINMUX("JTAGPCIEB", "JTAG0", SCU408, GENMASK(12, 5), 0x47 << 5),
-+	PINMUX("JTAGM0", "JTAG0", SCU408, GENMASK(12, 5), 0x08 << 5),
-+	PINMUX("PCIERC0PERST", "PCIERC0PERST", SCU200, BIT(21), BIT(21)),
-+	PINMUX("PCIERC1PERST", "PCIERC1PERST", SCU200, BIT(19), BIT(19)),
-+};
++	return ast2700_soc1_pin_names[selector];
++}
 +
-+/*
-+ * Signals muxable on each package ball, strongest first. A pin acts as
-+ * GPIO when none of its signal enable bits are set; gpio_request_enable
-+ * clears them all. The pin order follows the GPIO18A0..GPIO18B3 numbering
-+ * used by the gpio-ranges of the SoC0 GPIO controller.
-+ */
-+static const struct ast2700_soc0_sig ast2700_soc0_ac14_sigs[] = {
-+	{ SCU400, BIT(0), "EMMCCLK" },
-+	{ SCU404, BIT(0), "VB1CS" },
-+};
++static const struct ast2700_soc1_group *
++ast2700_soc1_find_group(const char *name)
++{
++	unsigned int i;
 +
-+static const struct ast2700_soc0_sig ast2700_soc0_ae15_sigs[] = {
-+	{ SCU400, BIT(1), "EMMCCMD" },
-+	{ SCU404, BIT(1), "VB1CK" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ad14_sigs[] = {
-+	{ SCU400, BIT(2), "EMMCDAT0" },
-+	{ SCU404, BIT(2), "VB1MOSI" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ae14_sigs[] = {
-+	{ SCU400, BIT(3), "EMMCDAT1" },
-+	{ SCU404, BIT(3), "VB1MISO" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_af14_sigs[] = {
-+	{ SCU400, BIT(4), "EMMCDAT2" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ab13_sigs[] = {
-+	{ SCU400, BIT(5), "EMMCDAT3" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ab14_sigs[] = {
-+	{ SCU400, BIT(6), "EMMCCDN" },
-+	{ SCU010, BIT(17), "VB0CS" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_af15_sigs[] = {
-+	{ SCU400, BIT(7), "EMMCWPN" },
-+	{ SCU010, BIT(17), "VB0CK" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_af13_sigs[] = {
-+	{ SCU010, BIT(9), "TSPRSTN" },
-+	{ SCU400, BIT(8), "EMMCDAT4" },
-+	{ SCU010, BIT(17), "VB0MOSI" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ac13_sigs[] = {
-+	{ SCU010, BIT(19), "UFSCLKI" },
-+	{ SCU400, BIT(9), "EMMCDAT5" },
-+	{ SCU010, BIT(17), "VB0MISO" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ad13_sigs[] = {
-+	{ SCU400, BIT(10), "EMMCDAT6" },
-+	{ SCU404, BIT(10), "DDCCLK" },
-+};
-+
-+static const struct ast2700_soc0_sig ast2700_soc0_ae13_sigs[] = {
-+	{ SCU400, BIT(11), "EMMCDAT7" },
-+	{ SCU404, BIT(11), "DDCDAT" },
-+};
-+
-+#define AST2700_SOC0_PIN(_name, _sigs)					\
-+	{								\
-+		.name = _name,						\
-+		.sigs = _sigs,						\
-+		.nsigs = ARRAY_SIZE(_sigs),				\
++	for (i = 0; i < ARRAY_SIZE(ast2700_soc1_groups); i++) {
++		if (!strcmp(ast2700_soc1_groups[i].name, name))
++			return &ast2700_soc1_groups[i];
 +	}
 +
-+static const struct ast2700_soc0_pin ast2700_soc0_pins[] = {
-+	AST2700_SOC0_PIN("AC14", ast2700_soc0_ac14_sigs),
-+	AST2700_SOC0_PIN("AE15", ast2700_soc0_ae15_sigs),
-+	AST2700_SOC0_PIN("AD14", ast2700_soc0_ad14_sigs),
-+	AST2700_SOC0_PIN("AE14", ast2700_soc0_ae14_sigs),
-+	AST2700_SOC0_PIN("AF14", ast2700_soc0_af14_sigs),
-+	AST2700_SOC0_PIN("AB13", ast2700_soc0_ab13_sigs),
-+	AST2700_SOC0_PIN("AB14", ast2700_soc0_ab14_sigs),
-+	AST2700_SOC0_PIN("AF15", ast2700_soc0_af15_sigs),
-+	AST2700_SOC0_PIN("AF13", ast2700_soc0_af13_sigs),
-+	AST2700_SOC0_PIN("AC13", ast2700_soc0_ac13_sigs),
-+	AST2700_SOC0_PIN("AD13", ast2700_soc0_ad13_sigs),
-+	AST2700_SOC0_PIN("AE13", ast2700_soc0_ae13_sigs),
-+};
++	return NULL;
++}
 +
-+static int ast2700_soc0_pinctrl_probe(struct udevice *dev)
++static int ast2700_soc1_pinctrl_get_pin_muxing(struct udevice *dev,
++					       unsigned int selector,
++					       char *buf, int size)
 +{
-+	struct ast2700_soc0_pinctrl_priv *priv = dev_get_priv(dev);
++	struct ast2700_soc1_pinctrl_priv *priv = dev_get_priv(dev);
++	const struct ast2700_soc1_function *func;
++	const struct ast2700_soc1_group *group;
++	struct ast2700_soc1_field field;
++	unsigned int muxval, want, f, g, i;
++	bool adc_pin;
 +
-+	priv->base = dev_remap_addr(dev->parent);
-+	if (!priv->base)
++	if (selector >= ARRAY_SIZE(ast2700_soc1_pin_names))
++		return -EINVAL;
++
++	field = ast2700_soc1_field_from_pin(selector);
++	muxval = (readl(ast2700_soc1_reg(priv, field.reg)) >> field.shift) &
++		 field.mask;
++
++	/* Mux value 0 selects GPIO, except on the ADC balls where it is 1 */
++	adc_pin = selector >= W17 && selector <= AB19;
++	if (selector <= AC24 && muxval == (adc_pin ? 1 : 0)) {
++		snprintf(buf, size, "GPIO");
++		return 0;
++	}
++
++	for (f = 0; f < ARRAY_SIZE(ast2700_soc1_functions); f++) {
++		func = &ast2700_soc1_functions[f];
++		for (g = 0; g < func->ngroups; g++) {
++			want = func->muxvals[g];
++			/* PCIERC2_PERST is a 1-bit enable, not a mux value */
++			if (selector == PCIERC2_PERST)
++				want = 1;
++			if (want != muxval)
++				continue;
++			group = ast2700_soc1_find_group(func->groups[g]);
++			if (!group)
++				continue;
++			for (i = 0; i < group->npins; i++) {
++				if (group->pins[i] != selector)
++					continue;
++				snprintf(buf, size, "%s (%s)", func->name,
++					 group->name);
++				return 0;
++			}
++		}
++	}
++
++	snprintf(buf, size, "unknown (mux 0x%x)", muxval);
++
++	return 0;
++}
++
++static int ast2700_soc1_pinctrl_get_groups_count(struct udevice *dev)
++{
++	return ARRAY_SIZE(ast2700_soc1_groups);
++}
++
++static const char *
++ast2700_soc1_pinctrl_get_group_name(struct udevice *dev,
++				    unsigned int selector)
++{
++	if (selector >= ARRAY_SIZE(ast2700_soc1_groups))
++		return NULL;
++
++	return ast2700_soc1_groups[selector].name;
++}
++
++static int ast2700_soc1_pinctrl_get_functions_count(struct udevice *dev)
++{
++	return ARRAY_SIZE(ast2700_soc1_functions);
++}
++
++static const char *
++ast2700_soc1_pinctrl_get_function_name(struct udevice *dev,
++				       unsigned int selector)
++{
++	if (selector >= ARRAY_SIZE(ast2700_soc1_functions))
++		return NULL;
++
++	return ast2700_soc1_functions[selector].name;
++}
++
++static int
++ast2700_soc1_pinctrl_group_set(struct udevice *dev,
++			       unsigned int group_selector,
++			       unsigned int func_selector)
++{
++	struct ast2700_soc1_pinctrl_priv *priv = dev_get_priv(dev);
++	const struct ast2700_soc1_function *func;
++	const struct ast2700_soc1_group *group;
++	unsigned int muxval = 0;
++	unsigned int i;
++
++	if (group_selector >= ARRAY_SIZE(ast2700_soc1_groups) ||
++	    func_selector >= ARRAY_SIZE(ast2700_soc1_functions))
++		return -EINVAL;
++
++	group = &ast2700_soc1_groups[group_selector];
++	func = &ast2700_soc1_functions[func_selector];
++
++	for (i = 0; i < func->ngroups; i++) {
++		if (!strcmp(group->name, func->groups[i])) {
++			muxval = func->muxvals[i];
++			break;
++		}
++	}
++
++	if (i == func->ngroups)
++		return -EINVAL;
++
++	for (i = 0; i < group->npins; i++)
++		ast2700_soc1_set_muxval(priv, group->pins[i], muxval);
++
++	return 0;
++}
++
++static int
++ast2700_soc1_pinctrl_gpio_request_enable(struct udevice *dev,
++					 unsigned int selector)
++{
++	struct ast2700_soc1_pinctrl_priv *priv = dev_get_priv(dev);
++	unsigned int muxval = 0;
++
++	if (selector > AC24)
++		return -ENOTSUPP;
++
++	if (selector >= W17 && selector <= AB19)
++		muxval = 1;
++
++	ast2700_soc1_set_muxval(priv, selector, muxval);
++
++	return 0;
++}
++
++static int ast2700_soc1_pinctrl_probe(struct udevice *dev)
++{
++	struct ast2700_soc1_pinctrl_priv *priv = dev_get_priv(dev);
++
++	priv->scu = dev_remap_addr(dev->parent);
++	if (!priv->scu)
 +		return -ENOMEM;
 +
 +	return 0;
 +}
 +
-+static int ast2700_soc0_pinctrl_get_groups_count(struct udevice *dev)
-+{
-+	return ARRAY_SIZE(ast2700_soc0_groups);
-+}
-+
-+static const char *ast2700_soc0_pinctrl_get_group_name(struct udevice *dev,
-+						       unsigned int selector)
-+{
-+	return ast2700_soc0_groups[selector];
-+}
-+
-+static int ast2700_soc0_pinctrl_get_functions_count(struct udevice *dev)
-+{
-+	return ARRAY_SIZE(ast2700_soc0_functions);
-+}
-+
-+static const char *ast2700_soc0_pinctrl_get_function_name(struct udevice *dev,
-+							  unsigned int selector)
-+{
-+	return ast2700_soc0_functions[selector];
-+}
-+
-+static int ast2700_soc0_pinctrl_group_set(struct udevice *dev,
-+					  unsigned int group_selector,
-+					  unsigned int func_selector)
-+{
-+	struct ast2700_soc0_pinctrl_priv *priv = dev_get_priv(dev);
-+	const struct ast2700_soc0_pinmux *pinmux;
-+	const char *function;
-+	const char *group;
-+	u32 i;
-+
-+	if (group_selector >= ARRAY_SIZE(ast2700_soc0_groups) ||
-+	    func_selector >= ARRAY_SIZE(ast2700_soc0_functions))
-+		return -EINVAL;
-+
-+	function = ast2700_soc0_functions[func_selector];
-+	group = ast2700_soc0_groups[group_selector];
-+
-+	for (i = 0; i < ARRAY_SIZE(ast2700_soc0_pinmuxes); i++) {
-+		pinmux = &ast2700_soc0_pinmuxes[i];
-+		if (strcmp(pinmux->function, function) ||
-+		    strcmp(pinmux->group, group))
-+			continue;
-+
-+		clrsetbits_le32(priv->base + pinmux->offset, pinmux->mask,
-+				pinmux->val);
-+		return 0;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int ast2700_soc0_pinctrl_gpio_request_enable(struct udevice *dev,
-+						    unsigned int selector)
-+{
-+	struct ast2700_soc0_pinctrl_priv *priv = dev_get_priv(dev);
-+	const struct ast2700_soc0_pin *pin;
-+	u32 i;
-+
-+	if (selector >= ARRAY_SIZE(ast2700_soc0_pins))
-+		return -EINVAL;
-+
-+	pin = &ast2700_soc0_pins[selector];
-+	for (i = 0; i < pin->nsigs; i++)
-+		clrbits_le32(priv->base + pin->sigs[i].offset,
-+			     pin->sigs[i].mask);
-+
-+	return 0;
-+}
-+
-+static int ast2700_soc0_pinctrl_get_pins_count(struct udevice *dev)
-+{
-+	return ARRAY_SIZE(ast2700_soc0_pins);
-+}
-+
-+static const char *ast2700_soc0_pinctrl_get_pin_name(struct udevice *dev,
-+						     unsigned int selector)
-+{
-+	if (selector >= ARRAY_SIZE(ast2700_soc0_pins))
-+		return NULL;
-+
-+	return ast2700_soc0_pins[selector].name;
-+}
-+
-+static int ast2700_soc0_pinctrl_get_pin_muxing(struct udevice *dev,
-+					       unsigned int selector,
-+					       char *buf, int size)
-+{
-+	struct ast2700_soc0_pinctrl_priv *priv = dev_get_priv(dev);
-+	const struct ast2700_soc0_pin *pin;
-+	const struct ast2700_soc0_sig *sig;
-+	u32 i;
-+
-+	if (selector >= ARRAY_SIZE(ast2700_soc0_pins))
-+		return -EINVAL;
-+
-+	pin = &ast2700_soc0_pins[selector];
-+	for (i = 0; i < pin->nsigs; i++) {
-+		sig = &pin->sigs[i];
-+		if ((readl(priv->base + sig->offset) & sig->mask) ==
-+		    sig->mask) {
-+			snprintf(buf, size, "%s", sig->name);
-+			return 0;
-+		}
-+	}
-+
-+	snprintf(buf, size, "GPIO");
-+
-+	return 0;
-+}
-+
-+static const struct pinctrl_ops ast2700_soc0_pinctrl_ops = {
++static const struct pinctrl_ops ast2700_soc1_pinctrl_ops = {
 +	.set_state = pinctrl_generic_set_state,
-+	.get_pins_count = ast2700_soc0_pinctrl_get_pins_count,
-+	.get_pin_name = ast2700_soc0_pinctrl_get_pin_name,
-+	.get_pin_muxing = ast2700_soc0_pinctrl_get_pin_muxing,
-+	.get_groups_count = ast2700_soc0_pinctrl_get_groups_count,
-+	.get_group_name = ast2700_soc0_pinctrl_get_group_name,
-+	.get_functions_count = ast2700_soc0_pinctrl_get_functions_count,
-+	.get_function_name = ast2700_soc0_pinctrl_get_function_name,
-+	.pinmux_group_set = ast2700_soc0_pinctrl_group_set,
-+	.gpio_request_enable = ast2700_soc0_pinctrl_gpio_request_enable,
++	.get_pins_count = ast2700_soc1_pinctrl_get_pins_count,
++	.get_pin_name = ast2700_soc1_pinctrl_get_pin_name,
++	.get_pin_muxing = ast2700_soc1_pinctrl_get_pin_muxing,
++	.get_groups_count = ast2700_soc1_pinctrl_get_groups_count,
++	.get_group_name = ast2700_soc1_pinctrl_get_group_name,
++	.get_functions_count = ast2700_soc1_pinctrl_get_functions_count,
++	.get_function_name = ast2700_soc1_pinctrl_get_function_name,
++	.pinmux_group_set = ast2700_soc1_pinctrl_group_set,
++	.gpio_request_enable = ast2700_soc1_pinctrl_gpio_request_enable,
 +};
 +
-+static const struct udevice_id ast2700_soc0_pinctrl_ids[] = {
-+	{ .compatible = "aspeed,ast2700-soc0-pinctrl" },
++static const struct udevice_id ast2700_soc1_pinctrl_ids[] = {
++	{ .compatible = "aspeed,ast2700-soc1-pinctrl" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(pinctrl_ast2700_soc0) = {
-+	.name = "aspeed_ast2700_soc0_pinctrl",
++U_BOOT_DRIVER(pinctrl_ast2700_soc1) = {
++	.name = "aspeed_ast2700_soc1_pinctrl",
 +	.id = UCLASS_PINCTRL,
-+	.of_match = ast2700_soc0_pinctrl_ids,
-+	.priv_auto = sizeof(struct ast2700_soc0_pinctrl_priv),
-+	.ops = &ast2700_soc0_pinctrl_ops,
-+	.probe = ast2700_soc0_pinctrl_probe,
++	.of_match = ast2700_soc1_pinctrl_ids,
++	.priv_auto = sizeof(struct ast2700_soc1_pinctrl_priv),
++	.ops = &ast2700_soc1_pinctrl_ops,
++	.probe = ast2700_soc1_pinctrl_probe,
 +};
 
 -- 
