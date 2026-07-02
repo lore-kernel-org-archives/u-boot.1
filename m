@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C86C43458
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B037FC43602
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jul 2026 10:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12B8A84A35;
-	Thu,  2 Jul 2026 12:27:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 594D584A48;
+	Thu,  2 Jul 2026 12:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NKLQqW6j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IRm5vQxf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D43C84A38; Thu,  2 Jul 2026 12:27:04 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 0DD2184A49; Thu,  2 Jul 2026 12:27:21 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6144784987
- for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12AC984A47
+ for <u-boot@lists.denx.de>; Thu,  2 Jul 2026 12:27:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-698acd36d67so1085761a12.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:27:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782988022; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa75d15dso1133933a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 03:27:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782988038; cv=none;
  d=google.com; s=arc-20260327;
- b=C5For1ieMq/kK34HE/CdW8+HXzN8BV3HNinxfVkokZuVpnysUxb2C5/XB5V+q+yDp3
- N63s/5gp3BmdlHAuS6GZ7MtOeP3TtuPhYRLyC59Mo/teHBJEfnXPL0vTpPdHndN58pmD
- ICT6MOrXHxXmQ42inFqpAywGBoOfk6Lp1UPvjhsAakyueumVOqfCXQ9OpSc+YQ+i7pU7
- bBj6mOptZLkm/I9ScfOyOzviL/4Ccg2hDqIJ7bB9bBN2K+5U4vqabgfQXWnOh4oOAeMb
- gbA8dHZp9L0WFkSDPEijcKBFpn/NXtroQs/JENB7eAeYNEC5j1Ys3KB77lEXZTXgVLzT
- d6Pg==
+ b=Iq9n1JGmnPcVjW+NrH/BYqZef4562Y5Hm3FVaU5DO2H+3/F6EaZMUNaheA2rIsEb6l
+ /psW9i+SL9GGXd2aDOxKqqOSW82PiEveYene86Jq3RoIysfcGFawUsuwtX29HhuIqVUj
+ LmfSV3eAs3vm1pTlMdhZcpPIeY2xhM0I2ktDbEuTASXwhM99Tn1z3NEXLXI/whA5hl1L
+ bsuKabi2La0K2K8L2wbSXyU6sXb7Z0ccvpKNfxpLHzcUJC537FBTmbx6ZsDgYxfwDyQQ
+ CklMiBZ4O8J4jLbigNCR63KTHsT5ri/59H66lohrvMTqp70vr9Ohc6J+XbwMPHRlq1RJ
+ 6ZWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
- fh=OqCZD9h/X9iz1FEoGOApxQwRgv4sUc4gLfnTdEpK8FQ=;
- b=hinjpo9iadSMeY7dcTw638p7/Gq5H7qaEWnwYIK6zxK4bkwCJTb9tZVeDmWJ9ZeW8b
- ulIgBXSEZfCGp8QYzgFWRvCrlzfaV8BQqUnSX69uzGjuxzjqPMNaOW4L/6g6mVE1raIF
- NHer2qHqUbYQWBupQSI9JpNvG+Q9kE/beJXlfZ3+t6ye4KJM4gKszIrc2BJjRnFwJExX
- ewOak+FQkR8Nm4goET4ZduL54il0dH/7tyGcJFUmdXe++4PIU7j3AZIRpvuDeCD+2qXd
- h/K/6Vw2dnuMlOSKridQ4ua208RfLwGtunmU1FuXhEOOpSGeGpblgs0eznkokEjX6XcI
- v/WA==; darn=lists.denx.de
+ bh=QIdHzXVak+F2TsdyyaiZ+Zc6AKTzdbzXoTXQS0s0f2w=;
+ fh=qH82zY4jYGbtq/sqaj0IKRYOiMNkPSgJiyBhAIUj2bQ=;
+ b=Z2yaUjD661YrhxK69eNHXi0AxHLJULx5xU+Q7HBPRq3L7+t6lz6q9jPaBEtXpv0OfK
+ 32HkNyp288l0tpvCH4x1nx3pfqr+5ZUx1BvlrNG+zIKHuxHBIAyK9+nQFKpoASlY1Jyb
+ G9ulCMweJJye5uC0Nf4E4QG1H/ersdD4qqOalXlHWtLOO4I5x4jq9fO4zLRrMacjuEzG
+ yBlYrZobpbO9kUG0nPIv324+RpQc2OzklOaPOR/bapgFY1LcydSFjq2rPRz1OszAfv+G
+ h/OWoaIPKpDcNc8eUKMZv4soRW7Fr8MUXw9zMWSo943sAhfvqieE1VkyuCNwl48vrs8W
+ 21Yw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1782988022; x=1783592822; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1782988038; x=1783592838; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
- b=NKLQqW6js4k2ABk99QE0jeXngLbCKHP/2+5QRZ7f3vq1rJzH4/xkqZS6t476f7JFys
- lrfLxpzBdFCBAMpaWHv5iJN6BuK9zZZne/tPiBZxMk05RSh8UaDaxM5HrT6MNBzTT/Rf
- g/O91qQ62KRMR2/ioP7Fip5W8/cNfQ9u+Rm40=
+ bh=QIdHzXVak+F2TsdyyaiZ+Zc6AKTzdbzXoTXQS0s0f2w=;
+ b=IRm5vQxfq38SHpkHJBPrcg5Dek3iO8n290p9QXeLTsBvmX12yre88IyCy6Y6KR4ucr
+ 2uxAtOSW+zoeBpvW+MFu6Lc8ntX7oTGAIDf17xWX6ZUW8Jy4P0O+OzZbsQllOLZfTn9k
+ nx6Z/gwm9I1mDDw1QjmTm/S0hCsiBcoyM/qUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782988022; x=1783592822;
+ d=1e100.net; s=20251104; t=1782988038; x=1783592838;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XOTw3k4DAHeefBH9zYhhQ05wHtZJcRESxlCICfW6F+c=;
- b=gIwGURSC42a3XHrUrfL9Z433flVgXc2IbZ1u98mVW9k7yZN3cebvfzENRXN1SGHGld
- ioxe9ck4FUkhkNU9gXZE9fPPh/pVV1FeNIgbo1IQN1TqG/0UHuVpzXYmLaD+WxIeTDPa
- znf9iv1aqSAgF34fQt1EUZzlxtQL+AOXcPppL8dVyPmli9IB+YdNgOMtd42Wiq0Jhiu6
- VT1RKMYGvvKxkn/UfX7YoK7MO/F60z4rf4K6OONfwSYdirdF/eSpNOuJ6mrFbRc96Hnp
- K1bBkBEAMIYEe0XAlGCQLi9QunJSo4zubJKsSJxw3S4a7XIxhk4Y4xRm/3AuE/fb5cgr
- JizQ==
+ bh=QIdHzXVak+F2TsdyyaiZ+Zc6AKTzdbzXoTXQS0s0f2w=;
+ b=ALEa/gFVjV3SVioukTQ3dKsCo4dY1MEzF8RomYoHdtqA5i9a2infJrcCFwRzYtW/QX
+ RcJuT1Slnrk1X22SJNxf1grBStUvF3jGJxyu3MqaHO7WL5ggyIdgmYeWZki+/mxiefqz
+ bDcsJraPO5RkaffvkM7ERXOw/QcbAmE0e8y66Du/qzPADJ3M99lift7vVJXCBCjGxMRE
+ fjIVnWvkdCkUpaiKMPQjT4sUMArsx/zKeVG+oME+QuiLur58EmItRDz8fpShzKPQMYgK
+ +ofUlqKdwEPUkYM2zcAAfEQXQ1SYCJ7xn5z8RAHmefZBNgQvFsTK04OZfPqorDJAsQF5
+ wv/Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr4C9u8KDEHrt4vNA8pOVz8PXKmh3hA5Y1TcI27lo3rjurptD1srRjyNKey9Z6i5xJra0FgJro=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJ3o3bor0NCpKkIHqeQDP8RDAkP4B8vczjP+K5IHci1930WNc1
- rkUFlpHUV3K81TsHKi26qPNP1yU8ShBj2IPRB/uwBkNpQncGwmeOP+3q7EaAAgfcQtisv9+LFe+
- WQMvuer4DpiYoer4cnz9gt8NQ0X/TN2AgfMREz5Ft
-X-Gm-Gg: AfdE7cmC0MFpsvo/e9MtnsbhKQ9SQcxh97/80VujjBKPRQZxI1EPDyXqDdiIvEki3Er
- hYvBVxz1gIeuLtT3plNqObjx7VkRhbFvb63MJBek/xc7nAGYB6Q2TNZVxPiwHkiSjgFUVscimNU
- kVDl2oNQQpr3d8ukYcvhSsqlAL93aUSQm06aFXMcGOSYSq9JFdIst/XHpj34mRT2aG2ihqJxDbK
- R+0Uo4jUEH1rZk+W3nwWJGHTwN1Bs0ckH9wrIuSHYhMgOQXZaYYm1cuOtnK50uPQtQFPHBG1Q==
-X-Received: by 2002:a05:6402:2747:b0:697:cec5:d056 with SMTP id
- 4fb4d7f45d1cf-6989f25f646mr2260663a12.0.1782988021882; Thu, 02 Jul 2026
- 03:27:01 -0700 (PDT)
+ AHgh+RoooW2VbnZ3f+miO9zaVB8cx5lkvFnLXhCT8TDHa2hOnGtjuMe0/sB9+sFoD2M5Y7lnLwM0uv8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZWIRc5U+AWHaVU6Njo0xb9XVPxUF7+sc1WMJ/DJTYZ7sIUzMU
+ Y6uiGOfHQxMvfv7Eg9H5yWx+TUQUM2ml7SJ1BB4UR3ldTxwdXxs4CFGQJS8AtKBQ/b9vrFl1TvH
+ yVZa1BwivCp6DMH/skvb7wqbxm2mPi2MrGDLkE7Zt
+X-Gm-Gg: AfdE7cl0ZsDWHRHKG9dSuxDneCPkl9KpdQdadOzEV1yry7Tso8mIS9kV/bG3UvVXzFc
+ jQgDS0LiDSw703Qa0DgscijRK+lF8qC5HGuLDq0NxX85nVF7cvyBePxwrTe0+bfOudbdxgoPSdv
+ vj5LcTYeCgJzq6DpxN/0+8W6fIUO1FrqafTJLuD1q05nKroGr3zMcWu5ojCp1qGaIWvhoNW9d3U
+ uU9GjNyHbks3mltF/a157WoTwHMEurKW7Mj0VWvSG8dRJ4JsHD6ZoK0lPK2M9X8ETU2A6EprQ==
+X-Received: by 2002:a05:6402:a6d3:20b0:698:b25b:8de with SMTP id
+ 4fb4d7f45d1cf-698b25b09f2mr411553a12.27.1782988038496; Thu, 02 Jul 2026
+ 03:27:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-13-me@ziyao.cc>
-In-Reply-To: <20260701111808.870705-13-me@ziyao.cc>
+ <20260701111808.870705-14-me@ziyao.cc>
+In-Reply-To: <20260701111808.870705-14-me@ziyao.cc>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Jul 2026 11:26:42 +0100
-X-Gm-Features: AVVi8CdL2cKSOiK25WGl01TdAeP2Cj6Uj2pDYkRLPWCq3iSVHB23Ko9hsTD3m8g
-Message-ID: <CAFLszTh5vei426TaqWxa0X6Sh0YhGdtb6sVN-duKAOcg7wib-w@mail.gmail.com>
-Subject: Re: [PATCH v2 12/16] cpu: Add loongarch_cpu driver
+Date: Thu, 2 Jul 2026 11:27:04 +0100
+X-Gm-Features: AVVi8CdmckaZZLrQ9YeFc1jfpAhWbQ_jpaGoDlQ4UlDyrdzh5u7LWZVjnqNgRSM
+Message-ID: <CAFLszTjRDnny3uqxHHbcg_h4pgF80c6_cy-8N_itADwNfEHLcQ@mail.gmail.com>
+Subject: Re: [PATCH v2 13/16] timer: Add loongarch_timer driver
 To: me@ziyao.cc
 Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -111,61 +111,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jiaxun,
+Hi Yao,
 
 On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
-> cpu: Add loongarch_cpu driver
+> timer: Add loongarch_timer driver
 >
-> Implement a driver for LoongArch CPU solely for gathering
-> some information bits from FDT and CPU level config registers.
+> Implement a timer driver for LoongArch architecture driver.
+>
+> It's synced in hardware for every core in a system, and frequency
+> information can be gathered from CPUCFG instruction.
+>
+> It is not described in fdt, thus I have to declare a DRVINFO
+> for it.
 >
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > Signed-off-by: Yao Zi <me@ziyao.cc>
 >
-> drivers/cpu/Kconfig         |   6 ++
->  drivers/cpu/Makefile        |   1 +
->  drivers/cpu/loongarch_cpu.c | 148 ++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 155 insertions(+)
+> drivers/timer/Kconfig           |   8 +++
+>  drivers/timer/Makefile          |   1 +
+>  drivers/timer/loongarch_timer.c | 112 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 121 insertions(+)
 
-> diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
-> @@ -0,0 +1,148 @@
-> +static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
+> diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
+> @@ -0,0 +1,112 @@
+> +#include <dm.h>
+> +#include <errno.h>
+> +#include <timer.h>
+> +#include <asm/loongarch.h>
+
+lldiv() is used below but div64.h is not included. Please add it
+(see riscv_timer.c).
+
+> diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
+> @@ -0,0 +1,112 @@
+> +static int loongarch_timer_bind(struct udevice *dev)
 > +{
-> +     const char *cpu;
+> +     struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+> +     u32 rate;
 > +
-> +     /* We try to get CPU name from IOCSR first */
-> +     if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
-> +             int i;
-> +             char vendor_buf[9] = { 0 };
-> +             char name_buf[9] = { 0 };
-> +             u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
-> +             u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
+> +     rate = loongarch_timer_get_freq_cpucfg();
+> +     uc_priv->clock_rate = rate;
 > +
-> +             if (!vendor || !name)
-> +                     goto get_desc_dt;
-> +
-> +             for (i = 0; i < sizeof(u64); i++) {
-> +                     vendor_buf[i] = vendor & 0xff;
-> +                     name_buf[i] = name & 0xff;
-> +                     vendor >>= 8;
-> +                     name >>= 8;
-> +             }
-> +
-> +             snprintf(buf, size, '%s-%s', vendor_buf, name_buf);
-> +
-> +             return 0;
-> +     }
-> +
-> +get_desc_dt:
-> +     cpu = dev_read_string(dev, 'compatible');
+> +     return 0;
+> +}
 
-Please drop the goto - it jumps out of an if-body to a label at the
-same scope. Close the if-body when the IOCSR read is valid and let
-the DT path fall through.
+This is wired up as .probe below, so please rename to
+loongarch_timer_probe(). Also, if loongarch_timer_get_freq_cpucfg()
+returns 0 (LLFTP not present, or CPUCFG5 reads back zero) the driver
+still probes with clock_rate=0, which then trips a divide-by-zero
+in timer_get_boot_us(). Perhaps return -EINVAL in that case?
 
-Also, snprintf() can silently truncate if size is smaller than the
-composed string; please return -ENOSPC in that case, similar to the
-DT branch below.
+> diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
+> @@ -0,0 +1,112 @@
+> +     /* Below is converted from time(us) = (tick / rate) * 10000000 */
+> +     return lldiv(ticks * 1000, (rate / 1000));
+
+This comment is copied from riscv_timer.c and has the same typo -
+us is 10^6, not 10^7. Worth fixing here (or factoring the helper
+out so both architectures share it).
 
 Regards,
 Simon
