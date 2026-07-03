@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE28C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E3E1C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 683DB841F2;
+	by phobos.denx.de (Postfix) with ESMTP id A502E846F8;
 	Fri,  3 Jul 2026 09:59:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OLBCXxbW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nPxlDao8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9532849F3; Fri,  3 Jul 2026 03:49:56 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 688A5849F3; Fri,  3 Jul 2026 03:49:57 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4FB84857
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48BF484994
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:49:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-497d294e0e5so33168b6e.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:49:53 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-495d310b587so15045b6e.3
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:49:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783043392; x=1783648192; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=kJj1q3k3NrH2/6P6Qrt35a8d5b978GzZ9ceYPN5RhkA=;
- b=OLBCXxbWzrFMMcqnz1X7h4BPRL/E6AhjryuWfnuHSDpupYiHmhPLzthU1QfhsUbWBa
- JZrRlnSi8JtdQoh3vwaYyix8WcxvV+8IhjWiQvnwWI98nt485tTCuFU5EeGq6/m2I2TG
- ue24Zvp5YrycHtKbwv9Opu7WrTNS5ieInNTHNu8/FMNtgKl1y2Q+EIySQZG4rccKjucJ
- bYGvng8b19rZ5K1530eEZw9vvnpPd107vWx0ANxxaslAHD5ol1N0uc/1iFa25SVhzudK
- JGDSWF5oR0dLeWfbCILX693yM5m0OzUegZEm/HfZU1WRSDvj00r4Gckp8vQFwa0K71Sz
- M4mA==
+ d=gmail.com; s=20251104; t=1783043394; x=1783648194; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=cMeqdJrmOPrfdcTctqvPUnrfJV9lJE0GuAQm4rDEYq0=;
+ b=nPxlDao8/J98MvMtn7MZfkrt44saoq5Psx2QH7BqQZlcBE8PuB4JcGiG3K+j7TjfDG
+ I/5hDETk5EZgx/aW8vN31VJPYjIVLnootLFUzMlS0W4OrMwLsiq39SW2tcyzW5gpDB8n
+ KlU2G1Oha7Fr/jXQG1uIJ651u6bovyA4fyVgNaxJvGrioVdNwzqGtHTERgXp0uDl8Tad
+ Do9ThNOBSy/dzo0Qpc9WpD6HDnhqWqjraNqJMLrlnMN1j0Pu0DOoH7iYrwLE980Gq5y7
+ rl3ZHDJmwTW9xVex5ZGDxVlYlTGyk6eMELsHgHku4Oqxzvl6KuhiBbSCu2brRZhdXIkb
+ 1O9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783043392; x=1783648192;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=kJj1q3k3NrH2/6P6Qrt35a8d5b978GzZ9ceYPN5RhkA=;
- b=c+lRbYfmc5yCWzc5pRoZIgvDgqmtslidAXb8XeOoTm3dIgH9CAlPuao1lOSZOpLSFu
- 2YLVvzB4lXB5wORSV8O+VPZs+VgCFqz7rDsEEnlJlW/J/601zdtrI5dL1KK1hsJDbHEl
- otXFYrIwLHI1ac1yGxfWAW7A0WvuvPCNB+YV+NsB4J92KJ6DvckHZ37Gk0DBDv46lsgS
- yfSeuOOk7BR7XhGSbOSUFSNNFA4e0lbAj4xfgcE7XqqCpZIi+I5cfvp6GS0INY1ZJ1tY
- RBjhrzxanQAy7SB8aw5uMmlCFTi6SmRdCqwPpY/u0J1sRE/jqK+hPOTP82qOR14/BeIj
- ZA2w==
-X-Gm-Message-State: AOJu0YxskgzYTo/8kimA80ZiMFVbzeWSTMnX/v3iSBqhHLimPxYaKe67
- 4hObGyYRsE06V9hjE1pdbcs1TspAr2v9LG1fhkQRQgKNXTLuNAqkN78g
-X-Gm-Gg: AfdE7ckTquUXSNptthdyOEpKq5kYP8oL8y9bf+HYpCwxZxWGeuu2p2T60QSycAVfoyq
- PJRBYSaET0b/l+chwjHoEcuc7eCW+DUu9f19AMI3L2z313NY97DmGujj3+ncyAWwX12yrlnzXXe
- 0zQCsS0Dnm58wDtF0Cqz75mXMcJqJRzy27EcJJGCSAc93MxpbqnhdV4c8wxp4OB0+8s13PQuS/C
- pSw8LQmhFxYZG3P+1P0emezucqhsSgcbdy8acRRj66kTML086Z3PkY9aNqi5SKeArvx6ZUcFDKo
- +Xdnt95hnKyoU9bJR7Gj8VF08G4WJQtn52CBpSzM9LvOYRR07D9xdQk5XP4bRG19DVR4H0Mme7F
- pgZS7ljdPxxNxkic8ge8cmbYxzWXZaKEF6/v6z5nYZhoq3KYUMREWvwTyVwaydZgDUGkMKeHvQX
- gzPKehM/0uWKeMT18PePPkR3oBgLsgm26LjbC11McgdQcw1e7BSJS05SgsZGbw9aVFQermbzwqT
- 9L8UE14Xg+y2GrvfkHtVtDKZ5OJh+FI2xSTGYyXGD3+ZYrOUqGZH1izW/t9n0ErgWW9bg==
-X-Received: by 2002:a05:6808:87d1:b0:495:faa4:a742 with SMTP id
- 5614622812f47-4962d90f383mr5455317b6e.41.1783043392170; 
- Thu, 02 Jul 2026 18:49:52 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783043394; x=1783648194;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=cMeqdJrmOPrfdcTctqvPUnrfJV9lJE0GuAQm4rDEYq0=;
+ b=prfr155bHKKpUfz2JVQjFjsAqexlTwxeeuwna0Byk+id0qR+MKULwCfaoEBIzIoMai
+ t0VLJQaJp3juKAIFcsKYGiQeNz9Ep0dzx8szLV8dXCaCx1xNpL9sWh/nHUik2A4j3Rco
+ FAtcHxMn/kYrnzJIcZ/KS0g4F3RxAUjdaKMGcKwcdrjTwT6GwO7QOuybTnbv3ACNXy4q
+ wnpSOtFn6JBxZop38/OCyzHLpotDaM3v0duRfmN7KSrJjoum/Lv6Xz5B8sEyq70pvjNM
+ XVftlgRQfzJOcb1AcPKv9R+p1SEJePLgnvry3YiY5dI+kXF5nNi+/wQy+aKlGKCXLLCC
+ HQtw==
+X-Gm-Message-State: AOJu0YyMXRrKmHq8ybpBrnh79fnDrlqZqMxxCfyTyM5jzqM2SI467zEA
+ cihScJvBAzgQo+tY1KQy1jlRbWn8Qas+qyTVNAhyr3Q2n/uLgh86QobL
+X-Gm-Gg: AfdE7cky1EOQlewlVbqkLYlNQ3D41YyV8T7EcUXjml73oWq/lv++nIMf1Xct6wrBxu5
+ yRwvN6yIWVkjQ7aEWb9yCfs7aMAyIwpe3oC1WeD+2Vx4/f1Rwj0we7MzWlhHcVSkQad+N4q+duB
+ 7ouIgzUGq7V7gw1b9Plic6BF1ucB9nSqGwxWcu24b2IoBov0FZcrzaukqF8A08FwM+7Qo4egDI6
+ b13o2EXepcIF+76G/qbObM0Pg5nkKSAR4aAnM+jGRAWRozU5JIAsxlDSxINenTrX85nqiLsskvX
+ +nCDrxfewd+/YaU+fPX2yS4dti3SP9W7J0+hiQPUQmWmo7qdsPb6Q5H9L7wkT9iraJNOJyoEiou
+ qyMRrpnLkd0N8jnfTLcqFEr8C9p/nXx174ceRVv5hbAS7W7Hol+fNeDW8YPbmSDsbp6tJFBjs3M
+ zvhr77FnTdA7//CNNVh266V7t63QwI5nPlDX5AhwYa+Xgqb7YpBDgQ5izVCw6FjU9mUIdyNfsVS
+ aF0ktUrVJ3cqNLsDCz35lWy5/kmacqnQh9Pn1FttbECwGi/yMRFBmUpCVWjgccBTsxmog==
+X-Received: by 2002:a05:6808:1305:b0:496:67:d8a8 with SMTP id
+ 5614622812f47-4962d972eb5mr5780841b6e.26.1783043394041; 
+ Thu, 02 Jul 2026 18:49:54 -0700 (PDT)
 Received: from [127.0.1.1] (97-118-25-163.hlrn.qwest.net. [97.118.25.163])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.49
+ 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 18:49:51 -0700 (PDT)
+ Thu, 02 Jul 2026 18:49:53 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Subject: [PATCH v2 00/10] crypto: allwinner: enable sun8i-ce FIT crypto
-Date: Thu, 02 Jul 2026 19:49:45 -0600
-Message-Id: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
+Date: Thu, 02 Jul 2026 19:49:46 -0600
+Subject: [PATCH v2 01/10] cmd: aes: fix DM operation handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM3QpAQBBA4VfRXJtak6y8ilwwBqP8tIuUvLvF5
- bn4zgVenIqHIrrAyaFelzkExRHwUM+9oLahgQxlxhpCvzeTbsiCv8SDMK2tbRJrOMsZglyddHp
- +17L6O7BReHtXcN8PsUnQuXcAAAA=
-X-Change-ID: 20260702-submit-ce-series-v2-4a77b170c68c
+Message-Id: <20260702-submit-ce-series-v2-v2-1-ffda5bed58af@gmail.com>
+References: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
+In-Reply-To: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
  Ion Agorria <ion@agorria.com>
 Cc: James Hilliard <james.hilliard1@gmail.com>, 
@@ -130,174 +129,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables Allwinner Crypto Engine backed FIT decryption and
-FIT signature/hash validation for secure-boot flows on H6/H616-class
-boards, covering both SPL and U-Boot proper.
+The DM AES command path takes operation-specific arguments after the
+common arguments. argv[1] holds the mode, "ecb" or "cbc", while argv[2]
+holds the requested operation, "enc" or "dec".
 
-The purpose is to use CE-backed AES for encrypted FIT payloads on H6/H616
-and CE-backed ECDSA validation where the CE ECC engine is available,
-currently H616, instead of relying only on software crypto paths.
+The DM path checked argv[1] for the operation, so the ecb and cbc
+commands always returned CMD_RET_USAGE before running. Parse argv[2]
+instead.
 
-At a high level this adds:
-
-  - SPL driver-model crypto plumbing for AES and hash providers.
-  - FIT decrypt-to-buffer support and SPL FIT cipher support, so SPL can
-    decrypt an encrypted U-Boot proper FIT without allocating another full
-    payload buffer.
-  - A shared sun8i-ce parent driver with AES and hash children for H6/H616.
-  - An H616 ECDSA child for CE-backed FIT signature validation, plus common
-    ECDSA curve-size and key-encoding fixes for secp224r1, prime256v1,
-    secp384r1 and secp521r1.
-
-The AES child supports software-provided AES-128/192/256 keys in ECB and
-CBC modes. The hash child supports the CE one-shot MD5/SHA1/SHA256/SHA384/
-SHA512 methods used by FIT verification. The ECDSA child exposes the H616
-CE ECC verifier through UCLASS_ECDSA.
-
-Tested flows include:
-
-  - SPL loading an encrypted and signed U-Boot proper FIT with CE-backed
-    AES decryption, hash verification and ECDSA signature verification.
-  - U-Boot proper loading an encrypted and signed FIT with CE-backed AES
-    decryption, hash verification and ECDSA signature verification.
-  - U-Boot proper AES command paths using the DM AES provider.
-  - CE ECDSA verification with secp224r1, prime256v1, secp384r1 and
-    secp521r1 FIT signatures.
-
+Fixes: b01444aa14cf ("cmd: aes: Add support for DM AES drivers")
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v1 -> v2:
-  - Add a cover letter for the series  (suggested by Peter Robinson)
-  - Describe the purpose and supported devices  (suggested by Peter Robinson)
-  - Limit AES command patch to argv fix  (suggested by Simon Glass)
-  - Add Fixes tag for the AES command bug  (suggested by Simon Glass)
-  - Select SPL_CRYPTO from SPL_DM_AES  (suggested by Simon Glass)
-  - Add SPL_DM_HASH for SPL FIT verification through UCLASS_HASH
-  - Let AES providers choose the software-provided key slot
-  - Return -ENOSYS without an SPL decrypt provider  (suggested by Simon Glass)
-  - Explain FIT cipher validation  (suggested by Simon Glass)
-  - Explain host-tool decrypt handling  (suggested by Simon Glass)
-  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
-  - Decrypt external SPL FIT payloads in place  (suggested by Simon Glass)
-  - Skip self-memmove after direct decrypt  (suggested by Simon Glass)
-  - Add Simon's Reviewed-by tag to the sunxi CE clock/reset patch
-  - Explain the RSA impact of fdt_add_bignum()  (suggested by Simon Glass)
-  - Document ECDSA public key byte-array widths  (suggested by Simon Glass)
-  - Document ecdsa_curve_size()  (suggested by Simon Glass)
-  - Keep fdt_add_bignum() errors in libfdt space  (suggested by Simon Glass)
-  - Explain the SPL_DM dependency for SPL_ECDSA_VERIFY
-  - Document the ECDSA input-buffer layout  (suggested by Simon Glass)
-  - Document ECC byte-sized task length  (suggested by Simon Glass)
-  - Make CE ECDSA curves individually selectable  (suggested by Simon Glass)
-  - Use neutral wording for the CE ECDSA buffer-layout comments
-  - Reject oversized bit-length hash tasks  (suggested by Simon Glass)
-  - Feed the watchdog while polling CE completion  (suggested by Simon Glass)
-  - Drop the post-operation schedule() call  (suggested by Simon Glass)
-  - Bounce only word-unaligned hash input
-
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Ion Agorria <ion@agorria.com>
-To: u-boot@lists.denx.de
-Cc: Chen-Yu Tsai <wens@kernel.org>
-Cc: Samuel Holland <samuel@sholland.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: James Hilliard <james.hilliard1@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Aristo Chen <aristo.chen@canonical.com>
-Cc: Anton Ivanov <anton@binarly.io>
-Cc: Daniel Golle <daniel@makrotopia.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Cc: Randolph Sapp <rs@ti.com>
-Cc: Heiko Schocher <hs@nabladev.com>
-Cc: Alexey Charkov <alchark@gmail.com>
-Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Anshul Dalal <anshuld@ti.com>
-Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Francesco Valla <francesco@valla.it>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Richard Genoud <richard.genoud@bootlin.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>
-Cc: E Shattow <e@freeshell.de>
-Cc: Enric Balletbo i Serra <eballetbo@kernel.org>
-Cc: Lucas Dietrich <ld.adecy@gmail.com>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Raymond Mao <raymond.mao@riscstar.com>
-Cc: Stefan Roese <stefan.roese@mailbox.org>
-Cc: Thierry Reding <treding@nvidia.com>
-Cc: Francois Berder <fberder@outlook.fr>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-
+  - Limit the patch to the argv parsing fix  (suggested by Simon Glass)
+  - State that the commands always returned usage  (suggested by Simon Glass)
+  - Add a Fixes tag  (suggested by Simon Glass)
 ---
-James Hilliard (10):
-      cmd: aes: fix DM operation handling
-      crypto: aes: allow DM AES in SPL
-      boot: image: add FIT decrypt-to-buffer helper
-      spl: fit: support encrypted payloads
-      clk: sunxi: add H6/H616 CE gates and reset
-      lib: ecdsa: support additional curve sizes
-      crypto: allwinner: add sun8i-ce AES driver
-      crypto: allwinner: add sun8i-ce ECDSA verifier
-      crypto: hash: allow DM hash in SPL
-      crypto: allwinner: add sun8i-ce hash driver
+ cmd/aes.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
- MAINTAINERS                                        |   1 +
- boot/Kconfig                                       |   8 +
- boot/image-cipher.c                                |  38 +-
- boot/image-fit.c                                   |  97 +++--
- cmd/aes.c                                          |   8 +-
- common/spl/spl_fit.c                               |  68 +++-
- doc/mkimage.1                                      |   3 +
- doc/usage/fit/signature.rst                        |   9 +-
- drivers/clk/sunxi/clk_h6.c                         |   5 +
- drivers/clk/sunxi/clk_h616.c                       |   5 +
- drivers/crypto/Kconfig                             |   2 +
- drivers/crypto/Makefile                            |   1 +
- drivers/crypto/aes/Kconfig                         |   8 +
- drivers/crypto/aes/aes-sw.c                        |   6 +
- drivers/crypto/aes/aes-uclass.c                    |  15 +
- drivers/crypto/allwinner/Kconfig                   |   3 +
- drivers/crypto/allwinner/Makefile                  |   3 +
- drivers/crypto/allwinner/sun8i-ce/Kconfig          | 158 ++++++++
- drivers/crypto/allwinner/sun8i-ce/Makefile         |   6 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c   | 413 ++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  | 408 +++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 434 +++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c  | 298 ++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |  72 ++++
- drivers/crypto/hash/Kconfig                        |  10 +
- drivers/crypto/hash/Makefile                       |   2 +-
- drivers/crypto/tegra/tegra_aes.c                   |   7 +
- include/image.h                                    |  39 +-
- include/u-boot/aes.h                               |  10 +
- include/u-boot/ecdsa.h                             |  22 ++
- include/u-boot/fdt-libcrypto.h                     |   6 +-
- include/uboot_aes.h                                |  38 +-
- lib/Makefile                                       |   2 +-
- lib/aes/aes-decrypt.c                              | 108 ++++-
- lib/ecdsa/Kconfig                                  |   2 +-
- lib/ecdsa/ecdsa-libcrypto.c                        | 141 ++++---
- lib/ecdsa/ecdsa-verify.c                           |  39 +-
- lib/fdt-libcrypto.c                                |  60 +--
- tools/image-sig-host.c                             |   7 +
- 39 files changed, 2363 insertions(+), 199 deletions(-)
----
-base-commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
-change-id: 20260702-submit-ce-series-v2-4a77b170c68c
+diff --git a/cmd/aes.c b/cmd/aes.c
+index 3fd83013ffe..edcd87cf11b 100644
+--- a/cmd/aes.c
++++ b/cmd/aes.c
+@@ -175,9 +175,9 @@ int cmd_aes_ecb(int argc, char *const argv[], u32 key_len)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (!strncmp(argv[1], "enc", 3))
++	if (!strncmp(argv[2], "enc", 3))
+ 		enc = 1;
+-	else if (!strncmp(argv[1], "dec", 3))
++	else if (!strncmp(argv[2], "dec", 3))
+ 		enc = 0;
+ 	else
+ 		return CMD_RET_USAGE;
+@@ -223,9 +223,9 @@ int cmd_aes_cbc(int argc, char *const argv[], u32 key_len)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (!strncmp(argv[1], "enc", 3))
++	if (!strncmp(argv[2], "enc", 3))
+ 		enc = 1;
+-	else if (!strncmp(argv[1], "dec", 3))
++	else if (!strncmp(argv[2], "dec", 3))
+ 		enc = 0;
+ 	else
+ 		return CMD_RET_USAGE;
 
-Best regards,
---  
-James Hilliard <james.hilliard1@gmail.com>
+-- 
+2.53.0
 
