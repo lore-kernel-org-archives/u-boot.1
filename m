@@ -4,152 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 370D4C43602
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FFD6C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:51:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 848F1841F2;
-	Fri,  3 Jul 2026 09:28:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D2053841F2;
+	Fri,  3 Jul 2026 09:51:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="fUxzi+kl";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="byIRaL0K";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QLX2iyJp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 503B784671; Fri,  3 Jul 2026 09:28:51 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id BC86C843B6; Fri,  3 Jul 2026 09:51:34 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC8698407E
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 09:28:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6635rlO43108960
- for <u-boot@lists.denx.de>; Fri, 3 Jul 2026 07:28:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- n1MvlhlWT8nSV1vQcC6VK+CZn/1I9MaujjJO4vaYmeA=; b=fUxzi+klaJOCvsYx
- uBRdr8FKUMoob4gGsB+dpkBuu7rqMPn3OCCtLH8GeJoXlq16rKLJl7Epj65MNvU+
- nH1oXP8aP3yiuT5o925nFemrhvbgqbmQFJcxg2JR7dpPTahazxxVeLYUbl34zZbO
- x/1SyOiWempGGgeqaNveYJu7bQJRqu/j4mk9m2l7RgwgzAP3kSZ2nXU31TMt/G5Y
- AQ8zyXUm6wESmY3V2M98rxQxprEj3BPkhPMIXmNraU7bOuk2PYFJdTaxhvvJgJJX
- MHEl9eKXHlWIOlLTjVw4KxtPjbiU0PGi6BHjsioLhR0dkkRRZrtm1pPRwaMf0Emw
- UKZnfQ==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f60ey9vvk-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 07:28:47 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c88da04b719so271730a12.2
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 00:28:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783063726; x=1783668526; darn=lists.denx.de; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=n1MvlhlWT8nSV1vQcC6VK+CZn/1I9MaujjJO4vaYmeA=;
- b=byIRaL0KcxObL2jHB2TGRaKTAtoIofLzjsifCXt9i+zUHGtOZei5w+Er5O1eM99vYm
- 0jJ2QF5Sh+tARWDj7mrE+Jjz0mrNRxl1b/LZDenLl1SJDjJYjYroAvUXs0Y+0IdRtYcn
- BJT0EWyOsJ5eHy5G9QHUjR1Arnm20k6Te5uFort9YfZUcuIAEqzMs5/zNePFwKxxxiN/
- G6vNSIay1XOqkp7Hyf4sHkbixvPLJtBvBiMuwWtH98rPhgsmAQ4kxxDtddl+7SRgE0Qz
- TdORzNr1FYM4md9uJSgQT9/RhIjc3q/Sxoltxd2guRSsHLnd42muFtKfBkP8S3bauBhz
- 3SSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783063726; x=1783668526;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=n1MvlhlWT8nSV1vQcC6VK+CZn/1I9MaujjJO4vaYmeA=;
- b=iCo7jVubQA06ODsdUNlT14JpBrPn2HNcgcy55bi/iv7xmbBzHG19ZYEYbVBA8OMsmT
- 3O7zJ8lsHe/EubIW8QUk84Wk2hv5nQPUoQFHIFcMtvWBgVwRwut5jCu0n/98xFB10TMS
- nAkVGyK/3JXt0XBTdWiNRLfxEuHPqK7KSnadxXrhN6SxVg4BOBSej4MfqRixE3/Lsr4+
- dpim+7vgBylTTWTLoI5hdg9iYcuAAvodkGA4+hcbwlaKUZcUCfKWb/SiZSsUVOkLyw1U
- c1AIC4JCBfRNa715f80tMkzlpCIL7bdVJr+diP5XdkMspMhFf1YKjH3qh7a6oja3LWu8
- 6zow==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8OW6cTTZwELOhsCjuMxj6xv+0BXvzZF5TdYjZ+1BqdjktR3oZNJMzpnus2ufDg6eiIYKr2Jz8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNhJuJH0hizzdTE053ZzPFxWkgf1/UcN5CQGa3tr57iiczB8hl
- 4+NOxwHuAFdaf5UGhC4lrz/TJoUaGP4b880ZBubbgK/xwc29Sd+RQYCRRMm6Xm7CyPQbTX45Sh+
- o09TkWZYGP2Hc+QQ3twIS4p635njTu4hGlqtaVH6Z01mYaCgplU5LZ3bF
-X-Gm-Gg: AfdE7cllOSMumFhTvcpNUlGS/fgEk9qqf+5dUzUiKn+7XDf2WQIqtcV7vYDgheGnSk3
- YYnE+TKObW4+0MrT/PvPQa7xZe8gFzMtcYoJTpK2UIFZwlUwQ5jDzavBeVl7d2S+hpa0rBAFDNs
- zO9Qzb9McV8ASxY8Yv3RMWdW/A2yOA9I6zOpVt2PVXW7X1SIljsjEEzHXX1XwaHl3faNeVaamzz
- NxhuKF/60E3tzMQMlLc1AeiaVcP1NWrK5EfQQR0NXMNNyCrV8cG9yHJPCg30jjMIPkYzAXnL1tT
- UzVxijlgXTCh1VhrdTQLQTMbMKsC9oC0ZXC1xMlBtfjGv+5bd2KynrGD0mZZvYjnaJqZb0l56MC
- HtGNcqqN46QoRfOotc96H77TrgRfmQCDUwgC/7UdgBuGyU3ZAZx6Cvf1hrI6xBOjq14+As9hnix
- DoNmEFiw3cjZceLXz2+dPqNy8vs0TwxyLSFf9U4jRa
-X-Received: by 2002:a05:6a20:4310:b0:3bf:c12c:2ecf with SMTP id
- adf61e73a8af0-3bff430fae9mr9600684637.59.1783063726187; 
- Fri, 03 Jul 2026 00:28:46 -0700 (PDT)
-X-Received: by 2002:a05:6a20:4310:b0:3bf:c12c:2ecf with SMTP id
- adf61e73a8af0-3bff430fae9mr9600644637.59.1783063725727; 
- Fri, 03 Jul 2026 00:28:45 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13b3c85d4fesm15580890c88.11.2026.07.03.00.28.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jul 2026 00:28:45 -0700 (PDT)
-Date: Fri, 3 Jul 2026 12:58:37 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, me@samcday.com,
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, jerome@forissier.org,
- marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
- clamor95@gmail.com, michal.simek@amd.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v6 3/5] sysreset: Implement PSCI based reset to EDL mode
- for QCOM SoCs
-Message-ID: <akdkpczZxCWRvBm+@hu-varada-blr.qualcomm.com>
-References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260121063920.1500293-4-varadarajan.narayanan@oss.qualcomm.com>
- <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
- <4fc15188-3de9-4345-85e9-d594efe9bdd5@cherry.de>
- <20260623165021.GJ382693@bill-the-cat>
- <0a0af22c-ce8f-4c41-84bb-32d1b949c1f0@cherry.de>
- <20260702174613.GC749385@bill-the-cat>
- <akdG1STYeiKYRjZo@hu-varada-blr.qualcomm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id AD08D8407E
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 09:51:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e3/moktllexBi7cYlOZOrQ5UFY9Pu4aLyUeYJz9yYl0iVw7nnOgfKIgbAIzz6koE/LB1y97kPw2J2rRUausn9qGNQfH9ePv8b4gew32l641B3W50BI+I1DephPzTvoteF3PynAi9q1qGzcnN7yy1Q1xZM1wDT8cAkc8Y9lRnuexZcQjLLkdgC+5rzQPn5yfbgQPlKGHe7yxZog8WYopaU3J77oP36LdJ4UgjjEGWxoHg9LiviopGwMS706SO6Bwlf5G37/CuIJW+AveS6+y4W0d7MpCDPe3qSn4WYT/k3ALutW69yrr6QxNSRg68hl7cgEjhJhRFguBYjFFBLJyfKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GR3/YFZY5lAUWzSUgZfX6QroLJZkJTRBam+G0d5aJxk=;
+ b=m+u7LEiPKn5KMUf/Ki0SnI2QedcnTj4HzNNiMW51ewWcC5agxlOZOswPnB84dAJLDKWTmlOSfUVDwyLPrdM9+zjMg9TnIyAM3iztSi5iHMlSeCKkZV1g5L/03PDFo7XAgF2ZMVn++nzMJCHtTdjEqPj817vMJmehUcaEc/UKDCwvJnxlNjcl5NwCqY6I58z0nXLNXKeILSAvUItb5HYNQi2ZgjdrLFfR3X/4UgNcGK71QgoZp1jaJGUyvMcUgAFUjh2Kx45gnMbOfQK53vpR2m96OVoeTtTpVKZuYu9U4gucYEiJhKrGWXSBwbJje9IMSvUpSBcLtKzZJPBHt0qmLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GR3/YFZY5lAUWzSUgZfX6QroLJZkJTRBam+G0d5aJxk=;
+ b=QLX2iyJphvgCJFmHlhf48dKNT3126y27YBr90VnX4EI2SAwQAC8z8jaRr4jmif/T3aqnEeuvRmwmb2jrXhp4tsVSKK92C7vkh/PAUxepCj/SwD8PbyZ/CMnejEr0R/cT0mirJ6LQ/QIOuk37JszepbkwjncubyxDTZFlmKDFi6nTpxM50cmPxcanMaqLvcMjzPUzCfyc4ByINiRBDF1egog6/5hr+WAh41Ou4ZIl6PxgLd7usfi2s3us1HE9AMzX2jlXxfSQNF4Zn56x/vTsjzD+FfIPZXCAx5CJfzoQL08OIuvjg9oXbT2PEZsBEOW/229atQ5YAgK6gCPVIwHMyQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
+ by PAXPR04MB8687.eurprd04.prod.outlook.com (2603:10a6:102:21e::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Fri, 3 Jul
+ 2026 07:51:29 +0000
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.008; Fri, 3 Jul 2026
+ 07:51:29 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Date: Fri, 03 Jul 2026 15:50:19 +0800
+Subject: [PATCH] net: Drop unnecessary device_set_name
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260703-net-v1-1-3c2c7d6323c1@nxp.com>
+X-B4-Tracking: v=1; b=H4sIALppR2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcwNj3bzUEt1ES0uTNKPkJGMTizQloMqCotS0zAqwKdGxEH5xaVJWanI
+ JSKtSbS0A0essLmcAAAA=
+X-Change-ID: 20260703-net-a994f2cb348f
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: MA5PR01CA0184.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1ac::10) To AM8PR04MB7874.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24d::9)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <akdG1STYeiKYRjZo@hu-varada-blr.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDA2OSBTYWx0ZWRfXy6VO62eWmdeE
- 2gecdZuse/mCW38TonhmK2hDGJRPADtqbmarZhl9SUaCEN7aJ4Vq5fVteFNSC4cBNXm8Ia3R403
- +wW9FaycEeyj61OeIn/4wqIb+BcDtiXX7SeW9gv/HYuZmw26Y6EYhsEke01sbhI1mZ48y+OCyTD
- ZeM0i8PSk088Gw9cq1GGiz95VYgNjcQ6ejWsrylbgROJ7qqyVVFTrCWavzGIdTnoEk4S4WCv7OF
- 13KfHt4qfyswS4TmpNCs0HlidVIIwTVcHdbKQfJs06tIOltADTlMkjyI9b3P8EhejC7eB37Ww1f
- Ujp/DH41D7GVpvSmEHvNnVBQYqk4RD16O8tlR89iCny+LIvBEmK3X5Ovn4W/GejgW/s3uYUr2rM
- E5EqQ3Hri8jIfBrZ8yoS4Iu/8ElP8tLXgbNZJJft0bb+nbtyIR+DJ4w+6+nUt3IJ1651tl6gir2
- 29y7m2L7Q0zjoCCuU5g==
-X-Proofpoint-GUID: 9DP8maNUesI57eHiwYHf0dD1fx8nGQSS
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDA2OSBTYWx0ZWRfXzf8JlpQpqVQf
- 0zHwqQdsX+CEMydocadXKQdZH6Ca8Y3426Fr8C/2ZyVxhoA8vVjvb5X0UDt5CAoKaYu4yS9hLQ0
- RYsL/ZcP4fGSRBgBr2kIaIrFwt13BB8=
-X-Authority-Analysis: v=2.4 cv=SPRykuvH c=1 sm=1 tr=0 ts=6a4764af cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=8nJEP1OIZ-IA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Jbssjx0sovcfAvcieLQA:9 a=3ZKOabzyN94A:10
- a=wPNLvfGTeEIA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-ORIG-GUID: 9DP8maNUesI57eHiwYHf0dD1fx8nGQSS
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 malwarescore=0 bulkscore=0 priorityscore=1501
- lowpriorityscore=0 phishscore=0 spamscore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030069
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|PAXPR04MB8687:EE_
+X-MS-Office365-Filtering-Correlation-Id: a3f16aee-e8d2-4da6-67c3-08ded8d7e3ce
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|19092799006|376014|1800799024|366016|56012099006|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info: XMFqdLkyl8EYEThWTsOtH1q5gYn9bkANAR8kaI+4JGEh/dy4xeNHKWma+epenpEJwJu03mmN10Tu/pioODGD/eWPVbIHLG0pHuTOOD1NDNhf/egbU+7zYhcwjkV/O/Z3XgdRiLuCpPMU6/XJAmz1AkM8+kcvC39MHqKqIQowQJNcDAYB9pbzRMwxlFP7AAiVmrNwW6FMlC6dEvvOf6HuQRzGrqGiRp4GY9Ugtv/d5N1mQx/MTh4RRk4S2HAo3W4a5VaSRLI9eF/dQXOX9rotTsebazon5maovTC9PbXq1zStMM7mAiJV2EWgxzEuZgEcJZsja9M16MHv+xTlms5e9X91Zwdv1AS0dfdHMB2F+9D/2YsCX2CipZQhNpIq0c1N0AbukQ1xd4WV04I9YcTXLlp5x40XTlqKpsHM8R+nKZym8ImtQnsbDIhblNco96JqFXfEsz9XA/ZZdxBxhtqJlbOk7svSNCjLgE4fTCUQnedd3Gkht9LEB0+JbMOHZlxbCnz3LBDkaStnZy5addBiFL/NyNh0rxsqCdoUp1k6JV2gNdM23CxO05Y4HvnckpC89wxGCxClgyHopOcEAuHzn/BHw9RBGRV764HLKGW9bvnEnNAMrO7mO6qC+2PXNookXC7lo7gyEbXDzVuZJcUs3PHBb3TcIWd61L48Yap+DSo=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(19092799006)(376014)(1800799024)(366016)(56012099006)(11063799006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UFh4N1ovUWpWaHQxcVlSb0cxVklCSjFwYTRwQjhRdWlVRTh0UGZNNVRNNkI1?=
+ =?utf-8?B?VHp1VTc3TTJoTUlSanlPTGUvSFhjeUpXYWpkWDVmYlRqWE9KUzdGcjg4WG1n?=
+ =?utf-8?B?WGU5WUVacEp2UURoNDVRS2J4OGczZ3lnTkFERW1ON1Y1d2lJZ0VmMDQ4ZEtT?=
+ =?utf-8?B?UHByRkdDeXBTYnYrL2pBRkpjKytzaVpqUnhSb2dPUEdpQzNuOHQwL29xZWRD?=
+ =?utf-8?B?M3YxOU8wRURVc1pjNkFBK1VqazE2Z1BsZkYvVW1xOTNCYmpNSERyZ3JhcnYy?=
+ =?utf-8?B?K1EwbExUTGs5Yy85SHoyYXFBOUhrMWUrc01kSlpEdGUzY21kY01jTVYwQ2FQ?=
+ =?utf-8?B?WStHck4yU0VITjErYjBhQ0dObkk2cFhzcHFjd05GdGlQcW4yWVlsOHRQdjVU?=
+ =?utf-8?B?TTMwMi9Id2twS3RraVFWZkdPZCtrNXVOZDdSUTRIcXpHQ3FsZ1NVZm0zWmtJ?=
+ =?utf-8?B?UmFJaUZzcFMzYzNNRUc1ZjRoaDZoUEJ5aTJQcXNVMEZ3YjJTQzB2dDJ6eDhP?=
+ =?utf-8?B?bC9NUmlia0cvdm5lc3U5bllNOEVjeWwxb00xVk5mZ0M1RTVTdzAvSm51cWJl?=
+ =?utf-8?B?V2hOYTJILytTaG4weS9DRmRuVFJCZEZTTXVDbGZyTEx5K09oZkVUcERucDBn?=
+ =?utf-8?B?bTBhVkxvU1NvUTJ3VndMbWpqU2s1b3o2cDc0TlB3dGVVTXR4cHU3Q0xVMTF3?=
+ =?utf-8?B?RGhwSzZ4Sk9xTW5kZU1XcDdrTUdhZjBlVkttV3FSeENBQ0tGY291MDZkdkZa?=
+ =?utf-8?B?RDY4OGFSVWVlOWZWQUZVQ0YvbEtRRnZma1BOSzlPM2ttaUhCbzBzZHRnbEY1?=
+ =?utf-8?B?T1BseHdrL3ZNVFA5ODN1NVFhMDZXaWZSM0xmOXpHQ2tUdlBXdGMrRmdEcDFY?=
+ =?utf-8?B?Q21xRUREYUhSMHVpYmRFdXJlMTZxbVZiWDhPWitDN1pQQndHZkxYNVA4ZG43?=
+ =?utf-8?B?bmVWVStwV2hneXpUa3JFU1JuYTFYb1ltYU1tdCtZcWhGY3Bxbjc2Y1dGd0ZT?=
+ =?utf-8?B?ODk4T1VZUllJdG1GbDN6QW13TlI3L0oyR2pnTVZYaERZYXJINzVHL1lQNjZL?=
+ =?utf-8?B?c292ME9HUXdLT3AvT09YeGJnTVJpY3ZrR0g4M3Zod0hsd3d0a0gxNmFvK29a?=
+ =?utf-8?B?M0t5RUcxeUx5UWloNEk0dlgzMzVpdGMzT0ZzM1hHdlNIN3BSUTRYaEs1cXE4?=
+ =?utf-8?B?bWFjWXQyZ080Vks4ODNUY0lhWVN1Mmo4cklUMmNYZ3VGRkpWYU4rNDlLdzRm?=
+ =?utf-8?B?OVA1YWlFRkJBSDdoMmkwVEROME04bERYNmZXdlN4SWtsa1pYeFFTbUZIUk5k?=
+ =?utf-8?B?Um41bU04dHdTS2ZlZWcyVXliOTg3TGVxK2lob0FGaVYxV0VMM0FGaTNRSVZS?=
+ =?utf-8?B?Mm5EYVFIQmRkMGdUS09uQkV6b281cmhvc1FsM1BPaVBxWHM3N1NZVGVaVjVT?=
+ =?utf-8?B?dkJYVUJ5aDNCSFppdUhiMVN2bFdoZGlwdzhidUpTYUdmT1pOR2N1cWJiM1Ni?=
+ =?utf-8?B?YmtDcFVqWVBNdzZMMWNpOEF4ZVJRSktUTVZ6RFJuSGJHeXdGVnl3ek5GajRr?=
+ =?utf-8?B?NHMralUwRGxvS1N1eGNZeDQxNE1QelBRbnlYNFNLMkhNaTRxQ3ZCVHJsRk55?=
+ =?utf-8?B?QUlQeVcrNFByODE0QUNSWWwycjBXWWZWb0dzWW53dXZiNitORGpYRzNiUElO?=
+ =?utf-8?B?QlhYS3BIRGQxNkNhUzdNbCsyeUs4Wlh1dDZDWXZiNnNGY1pyaTBqSm5mWXlO?=
+ =?utf-8?B?QjhDcVNIcGppcmU2Y1JtWU05SWRjc1dsSHlTL3M3a21lV1hRYXNJRlJpcXZF?=
+ =?utf-8?B?b0JwaUxSczBjQWRZM2wreGFjY0p2dGR1aUVMaVZvRm9NSTBmZ3pTMEFxcXhB?=
+ =?utf-8?B?MFpWeUtqUjE3RS8zV3BwRWpseUhRdU5XWFFqcVpKZXRsMmpncHYydXJTMzNN?=
+ =?utf-8?B?d056dHBpSmowd05INEZnQkpMNTZJOE51aHJZK2V3ZmVabS8ra0ljZE9lTkNM?=
+ =?utf-8?B?RVRXbU5ZTVV1dXhHUmxuRW5iSDg0eFgxUExlMkxOcVh2TlFVSXJtaWlRK0c4?=
+ =?utf-8?B?VGExUVBtdGxSbUpHZGptSlpkVlhzLyt1YXdRQnQra0g2dkw5TFZWZnNVVXlD?=
+ =?utf-8?B?VExsbjBSaDUwYUViVGluQllCSmc1bDF5TCt6NWxDRHlGSkplakRYRkVIMG5O?=
+ =?utf-8?B?WjA2ck1PMm82YVA3L0RsdTBvUStHWUtENkRwdlJ1bDFUUmFteXNXb21ObWlZ?=
+ =?utf-8?B?dm9VNTRDVTg5d0FDNFJuaVo5MVQ4NFhHR2YwWVdmekJYK016RmNObjlPQ1B1?=
+ =?utf-8?B?L1M3c2xuaEdRTjRYRVFIaFdnbk9NREl4VzYxYlhueDYzL3F0NE01WXNuL25i?=
+ =?utf-8?Q?JbU2lzzaPGcg7daWI9htlkSmnaZMp3/pJVnmr?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a3f16aee-e8d2-4da6-67c3-08ded8d7e3ce
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 07:51:28.9188 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: anEYg3TQNg4SFIlklDbEZ1r5jKCUYhL3KQsIE9JBVtAyiXzColTQEfd9wmiM7rDhft+1NaAXU29bxJ0lgCxbymfcGmEDUbFjiMHeIwn5FUHqHwxJEzi7zgwGSvCbELEL
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8687
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,41 +150,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 03, 2026 at 10:51:37AM +0530, Varadarajan Narayanan wrote:
-> Quentin Schulz/Tom Rini,
->
-> [ . . . ]
->
-> > > > > > The issue is that the first sysreset device implementing the request_arg
-> > > > > > callback will consume the args and return EPROTONOSUPPORT which will
-> > > > > > stop the loop.
-> > > > > >
-> > > > > > Think about multiple sysreset devices, and let's say we have a new '-
-> > > > > > dummy' argument to the reset CLI command, then it'll depend on the
-> > > > > > registration order of the sysreset driver whether the dummy argument
-> > > > > > will be handled by the qcom driver which will return -
-> > > > > > EPROTONOSUPPORT since it isn't '-edl', or by the dummy sysreset driver.
-> > > > > >
-> > > > > > I think we should have a fourth possible return code which is "I don't
-> > > > > > know how to handle this argument", e.g. à-la IRQ_NONE in Linux kernel
-> > > > > > for interrupts that aren't for the device this IRQ handler was triggered
-> > > > > > for. Or maybe we should really be using -EPROTONOSUPPORT for that
-> > > > > > meaning and not exit the loop if that's the return code?
-> > > > > >
-> > > > > > Or maybe I misread or misunderstood the code?
-> > > >
-> > > > Following up here.
-> > > >
-> > >
-> > > Do we end up reverting just before the release then?
-> >
-> > Please send it out, cc everyone, and see if that gets some response?
->
-> Sorry about the delay. Will post a change shortly.
+From: Peng Fan <peng.fan@nxp.com>
 
-Please review [1]
+When device was created, it already has a name assigned. There is
+no need to alloc space for name and set it with same device name.
 
-Thanks
-Varada
+Cleanup the code to avoid unnecessary device_set_name.
 
-1 - https://lore.kernel.org/u-boot/20260703-walk-arg-fix-v1-1-64beca00d7e2@oss.qualcomm.com/
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+ drivers/net/dm9000x.c    | 6 ------
+ drivers/net/ftmac100.c   | 6 ------
+ drivers/net/ks8851_mll.c | 6 ------
+ drivers/net/smc911x.c    | 6 ------
+ 4 files changed, 24 deletions(-)
+
+diff --git a/drivers/net/dm9000x.c b/drivers/net/dm9000x.c
+index 9e17f0b9c28..53225979b66 100644
+--- a/drivers/net/dm9000x.c
++++ b/drivers/net/dm9000x.c
+@@ -638,11 +638,6 @@ static int dm9000_read_rom_hwaddr(struct udevice *dev)
+ 	return !is_valid_ethaddr(pdata->enetaddr);
+ }
+ 
+-static int dm9000_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static int dm9000_of_to_plat(struct udevice *dev)
+ {
+ 	struct dm9000_priv *db = dev_get_priv(dev);
+@@ -673,7 +668,6 @@ U_BOOT_DRIVER(dm9000) = {
+ 	.name		= "eth_dm9000",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= dm9000_ids,
+-	.bind		= dm9000_bind,
+ 	.of_to_plat = dm9000_of_to_plat,
+ 	.ops		= &dm9000_ops,
+ 	.priv_auto	= sizeof(struct dm9000_priv),
+diff --git a/drivers/net/ftmac100.c b/drivers/net/ftmac100.c
+index fa0b3dbb6d1..d9826178e82 100644
+--- a/drivers/net/ftmac100.c
++++ b/drivers/net/ftmac100.c
+@@ -429,11 +429,6 @@ static int ftmac100_remove(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int ftmac100_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static const struct eth_ops ftmac100_ops = {
+ 	.start	= ftmac100_start,
+ 	.send	= ftmac100_send,
+@@ -451,7 +446,6 @@ U_BOOT_DRIVER(ftmac100) = {
+ 	.name	= "ftmac100",
+ 	.id	= UCLASS_ETH,
+ 	.of_match = ftmac100_ids,
+-	.bind	= ftmac100_bind,
+ 	.of_to_plat = ftmac100_of_to_plat,
+ 	.probe	= ftmac100_probe,
+ 	.remove = ftmac100_remove,
+diff --git a/drivers/net/ks8851_mll.c b/drivers/net/ks8851_mll.c
+index 2c956154d09..c2f87d4222b 100644
+--- a/drivers/net/ks8851_mll.c
++++ b/drivers/net/ks8851_mll.c
+@@ -571,11 +571,6 @@ static int ks8851_read_rom_hwaddr(struct udevice *dev)
+ 	return !is_valid_ethaddr(pdata->enetaddr);
+ }
+ 
+-static int ks8851_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static int ks8851_probe(struct udevice *dev)
+ {
+ 	struct ks_net *ks = dev_get_priv(dev);
+@@ -615,7 +610,6 @@ U_BOOT_DRIVER(ks8851) = {
+ 	.name		= "eth_ks8851",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= ks8851_ids,
+-	.bind		= ks8851_bind,
+ 	.of_to_plat = ks8851_of_to_plat,
+ 	.probe		= ks8851_probe,
+ 	.ops		= &ks8851_ops,
+diff --git a/drivers/net/smc911x.c b/drivers/net/smc911x.c
+index f39ba40944f..2835eb45856 100644
+--- a/drivers/net/smc911x.c
++++ b/drivers/net/smc911x.c
+@@ -431,11 +431,6 @@ static int smc911x_read_rom_hwaddr(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int smc911x_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static int smc911x_probe(struct udevice *dev)
+ {
+ 	struct smc911x_priv *priv = dev_get_priv(dev);
+@@ -487,7 +482,6 @@ U_BOOT_DRIVER(smc911x) = {
+ 	.name		= "eth_smc911x",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= smc911x_ids,
+-	.bind		= smc911x_bind,
+ 	.of_to_plat = smc911x_of_to_plat,
+ 	.probe		= smc911x_probe,
+ 	.ops		= &smc911x_ops,
+
+---
+base-commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
+change-id: 20260703-net-a994f2cb348f
+
+Best regards,
+--  
+Peng Fan <peng.fan@nxp.com>
+
