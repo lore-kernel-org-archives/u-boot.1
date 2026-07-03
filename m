@@ -4,66 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 877B9C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 14:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA3B4C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 15:17:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD35384942;
-	Fri,  3 Jul 2026 16:49:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 26E64849BA;
+	Fri,  3 Jul 2026 17:17:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="ciUd421f";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lKsBEViu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AFC1849D2; Fri,  3 Jul 2026 16:49:51 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57F2D84A35; Fri,  3 Jul 2026 17:17:06 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6A6584857
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 16:49:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5F165849AC
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 17:17:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1783090156;
- bh=X2xYWOrsIOMI3h4JilU7W5XudHP0TwaFqQzdDiuwwjU=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=ciUd421fqeXEL3DvRQfhMTByzeYcsTjVz7G+1JqISMlrrUb/DbL/SoYhONxBp2z79
- 0liYpf5a6FRGeBTXV+QuuQP5z20qyr+7hy6jslUiAX7FAmZoDH1o2O7cVRjPhfyDTR
- FDQg1GWH0IWGZ2wbXjhpQR2kZq16ASvEotJf3IO9m5yc+so5/fHEI0JF/7xZw2+N2i
- jUN7RQD8qG1JBDtv2roFJCovrpGV1bSgFebWIjO9k5ljfRvQmAlNpq0YnslJcXLg+a
- FlX3noyw49jQWEY6HnHDweApZVnTaX44XO3Pl8/00DH0zKsjJPhmZsJ7/ANv2bBleO
- +J8Q+fRnPP1Bg==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@nabladev.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Alice Guo <alice.guo@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- "Francesco Dolcini" <francesco.dolcini@toradex.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Heiko Schocher <hs@nabladev.com>, "Markus
- Niebel" <Markus.Niebel@ew.tq-group.com>, Michael Walle <mwalle@kernel.org>,
- Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>, Tim Harvey
- <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, u-boot
- <u-boot@dh-electronics.com>
-Subject: RE: [PATCH] mx6: ddr: Subtract half a cycle instead of three quarters
- of a cycle after DQS gating calibration
-Thread-Topic: [PATCH] mx6: ddr: Subtract half a cycle instead of three
- quarters of a cycle after DQS gating calibration
-Thread-Index: AQHdBK1tNR+uvYx+wUWvuDZJ/GW3hLZaTCeg
-Date: Fri, 3 Jul 2026 14:49:13 +0000
-Message-ID: <cb2b7b7f20a1456c85cc99791b302305@dh-electronics.com>
-References: <20260625141755.16568-1-marex@nabladev.com>
-In-Reply-To: <20260625141755.16568-1-marex@nabladev.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7e9f829d75aso344725a34.0
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 08:17:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1783091822; x=1783696622; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=1VjC1i1YVEBF0/+zewxPVOjTa1HAa2BWLiwfgY6GNSc=;
+ b=lKsBEViuvdGbOF51yuOyEPrOKHVVIJqyVFqL9ELA8lvE7I9ygdxyRs0O66L0IwygHq
+ 44eyKq4LZLBQV88WtFPJjpTLczncXp9piMJv/QFw9fED8jQ3z7ngLUSEKCGMke+0sa8h
+ TUD4TbaPhoVigVnHko/IyzdZQFR+LDzyRJzUk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783091822; x=1783696622;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=1VjC1i1YVEBF0/+zewxPVOjTa1HAa2BWLiwfgY6GNSc=;
+ b=fzVEUwz5wY5ugYs8iuRmhIjbcEtVh1PDRZF+w0AQgI7R/FTwcleaGqHb1Jd783xMC9
+ jn+SOAuA8k8JWDE1H8Oai98a3HhNHTkLyH8Sr8qsH9aDNCP3fotULk65cURXzEMaJNRf
+ 6au5VPwQxI/N1tZ8JSPJ94j04dNcAo0vtYVrsj6ij98cX/qaIg+8WrZ1kjpAPQUuQ/e9
+ SMOyUzfzyE7VjjQHkhtHVuO8rsppw3J00FavQMTRE1zk/Ne0vd3csSJuMTxuyKnC2Jcq
+ DRbeLlTV7RDsWyei1BR1xhTnhuNWdauiGi+ZgDvu9NClcxgL7IOtI6XyEQQB8F64hM8W
+ WoSw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9WC5yDAYGA7hJHBKVEy/XYKgtUFC+zlyrvpxHGjEQo5ryb5aKIuhQw1YWN29yHGMJKlB0IAn8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfrGb0J/9fu61jbUoV8mOPjwdCzufB7PPOnJ10At225hySpKDF
+ v2GlZvE7DAbKLYKSuCmem0ps4WsgU5eCi/i6oCCgpBmum+3DMyLdt446rWgIqmIn3a0=
+X-Gm-Gg: AfdE7ckc3PQ8IQZhdG2IJhaQ1wyMAS5NPD7D0fubHOSbdABlzKSVtyfPUl3P2jk5RYl
+ 57CZe/FJLVohO+hiEyPzxie054logKsUhXvR7VTnKXQ1FQsJbJgM2/RZu3hYfHIm3wo6MsQeTw6
+ uubApl+93L5Wbq+FZy9sZ8QOi0MqPJcCpaPmBtMcVGXkkOKAKDUxb+GUK5BxVQYD4uaIk83mV8b
+ ckcJ11BbvTDJ0xxsk0aNdYBYtK2jDM6TlWbqfxFsnXXJSe/NV3aZTBo45V7jOyeC53p3E13HyzA
+ LQUReH9HhuryeXJvKiF2+opo6kVB0Qt8aMSyPpFEWksG3ZB9EJXCljdKtMZO0uIZCNRaakJgJUQ
+ nRqRGW7P9GY6ifx3zaQgPIhi/54XnH3QS8YIboqn6vaH6H7Le5Py4uaHr6tFEesqqqdUBpZZbck
+ CA5H0r2f99G98pWcr25k95D9+E+I3t9Eul6+ebr6mbHhOkdPzU/p7F91gtxDH47SdQ+/WO3+Eoe
+ Y4+TnFkBROW8A9DJIMGbQGemzS/co5A1u1kkjCgrcYibgLW
+X-Received: by 2002:a05:6820:81f:b0:69d:d87c:177 with SMTP id
+ 006d021491bc7-6a32dac3d39mr202539eaf.12.1783091821957; 
+ Fri, 03 Jul 2026 08:17:01 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a310375f67sm4220370eaf.9.2026.07.03.08.16.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Jul 2026 08:17:01 -0700 (PDT)
+Date: Fri, 3 Jul 2026 09:16:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andriy.shevchenko@intel.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Subject: Re: [PATCH v14 02/18] bitfield: Add less-checking __FIELD_{GET,PREP}()
+Message-ID: <20260703151657.GJ749385@bill-the-cat>
+References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260702055744.2164975-3-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszTg4ZuiEdQkfTZcomtcWxSN+f1CKvE+Hikk+EHWghPaKYg@mail.gmail.com>
+ <20260702135918.GW749385@bill-the-cat>
+ <0c01810a-8a14-4c9a-9599-38b135c7b7e1@iopsys.eu>
+ <028d33d7-ba0f-4c6f-9c7c-a1757d5edb39@iopsys.eu>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QwkzL5XcVeDa6Od3"
+Content-Disposition: inline
+In-Reply-To: <028d33d7-ba0f-4c6f-9c7c-a1757d5edb39@iopsys.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,80 +128,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2LmNvbT4NClNlbnQ6IFRodXJzZGF5LCBK
-dW5lIDI1LCAyMDI2IDQ6MTcgUE0NCj4gVGhlIGN1cnJlbnQgRFJBTSBjYWxpYnJhdGlvbiBzZXF1
-ZW5jZSBpcyBpbXBsZW1lbnRlZCBiYXNlZCBvbiBOWFANCj4gQU40NDY3IFJldi4yIDAzLzIwMTUs
-IHdoaWNoIGluIGNoYXB0ZXIgIjEyLjMuMiBDYWxpYnJhdGlvbiBTZXF1ZW5jZQ0KPiBTZXR1cCB3
-aXRoIFByZWRlZmluZWQgRGF0YSBDb250ZW50IiBzdGF0ZXM6DQo+IA0KPiAiDQo+IDkuIEZvciBl
-YWNoIG9mIHRoZSBEUVN4Og0KPiAtIFJlYWQgdGhlIEhXX0RHX1VQeCB2YWx1ZSBmcm9tIHRoZSBN
-TURDMC8xX01QREdIV1NUeCwgc3VidHJhY3QgdGhlDQo+ICAgdmFsdWUgb2YgMHhjMCAoMy80IGN5
-Y2xlKS4NCj4gIg0KPiANCj4gSG93ZXZlciwgdGhlIGkuTVggNlNvbG8vNkR1YWxMaXRlIEFwcGxp
-Y2F0aW9ucyBQcm9jZXNzb3IgUmVmZXJlbmNlDQo+IE1hbnVhbCwgUmV2LiA1LCAwNS8yMDIwLCBj
-aGFwdGVyICI0NS4xMS4zLjEuMiBIYXJkd2FyZSBEUVMgQ2FsaWJyYXRpb24NCj4gd2l0aCBwcmUt
-ZGVmaW5lZCB2YWx1ZSIgc3RhdGVzOg0KPiANCj4gIg0KPiAzNS4gU2V0IChNUERHSFdTVG5bSFdf
-REdfVVBuXVsxMDo3XSAtIDEpIHRvIE1QREdDVFJMbltER19IQ19ERUxuXS4NCj4gICAgIChXZSBz
-ZXQgdGhlIERRUyBnYXRpbmcgdmFsdWUgdG8gYmUgdGhlIHVwcGVyIGxpbWl0IHZhbHVlIG1pbnVz
-DQo+ICAgICAgMSBoYWxmIGN5Y2xlKQ0KPiAiDQo+IA0KPiBUaGUgaS5NWCA2RHVhbC82UXVhZCBB
-cHBsaWNhdGlvbnMgUHJvY2Vzc29yIFJlZmVyZW5jZSBNYW51YWwsIFJldi4gNiwNCj4gMDUvMjAy
-MCwgY2hhcHRlciA0NC4xMS4zLjEuMiBIYXJkd2FyZSBEUVMgQ2FsaWJyYXRpb24gd2l0aCBwcmUt
-ZGVmaW5lZA0KPiB2YWx1ZSBsaXN0cyB0aGUgc2FtZSBpbmZvcm1hdGlvbi4gU28gZG8gdGhlIGZv
-bGxvd2luZyBtYW51YWxzOg0KPiANCj4gLSBpLk1YIDZEdWFsUGx1cy82UXVhZFBsdXMgQXBwbGlj
-YXRpb25zIFByb2Nlc3NvciBSZWZlcmVuY2UgTWFudWFsLCBSZXYuIDMsIDA1LzIwMjANCj4gICBj
-aGFwdGVyIDQ2LjExLjMuMS4yIEhhcmR3YXJlIERRUyBDYWxpYnJhdGlvbiB3aXRoIHByZS1kZWZp
-bmVkIHZhbHVlDQo+IC0gaS5NWCA2U29sb1ggQXBwbGljYXRpb25zIFByb2Nlc3NvciBSZWZlcmVu
-Y2UgTWFudWFsLCBSZXYuIDQsIDA1LzIwMjANCj4gICBjaGFwdGVyIDQwLjExLjMuMS4yIEhhcmR3
-YXJlIERRUyBDYWxpYnJhdGlvbiB3aXRoIHByZS1kZWZpbmVkIHZhbHVlDQo+IC0gaS5NWCA2VWx0
-cmFMaXRlIEFwcGxpY2F0aW9ucyBQcm9jZXNzb3IgUmVmZXJlbmNlIE1hbnVhbCwgUmV2LiAyLCAw
-My8yMDE3DQo+ICAgY2hhcHRlciAzMy4xMS4zLjEuMiBIYXJkd2FyZSBEUVMgQ2FsaWJyYXRpb24g
-d2l0aCBwcmUtZGVmaW5lZCB2YWx1ZQ0KPiAtIGkuTVggNlVMTCBBcHBsaWNhdGlvbnMgUHJvY2Vz
-c29yIFJlZmVyZW5jZSBNYW51YWwsIFJldi4gMSwgMTEvMjAxNw0KPiAgIGNoYXB0ZXIgMzUuMTEu
-My4xLjIgSGFyZHdhcmUgRFFTIENhbGlicmF0aW9uIHdpdGggcHJlLWRlZmluZWQgdmFsdWUNCj4g
-LSBpLk1YIDZVTFogQXBwbGljYXRpb25zIFByb2Nlc3NvciBSZWZlcmVuY2UgTWFudWFsLCBSZXYu
-IDAsIDEwLzIwMTgNCj4gICBjaGFwdGVyIDI5LjExLjMuMS4yIEhhcmR3YXJlIERRUyBDYWxpYnJh
-dGlvbiB3aXRoIHByZS1kZWZpbmVkIHZhbHVlDQo+IA0KPiBUaGUgTlhQIE1NREMgRERSIFN0cmVz
-cyBUZXN0ICgzLjAuMCkgdG9vbCBzZWVtcyB0byBiZSBoYXZlIHRoZSBzYW1lDQo+IHdheSBhcyB0
-aGUgbGF0ZXIgZG9jdW1lbnQgcmF0aGVyIHRoYW4gdGhlIEFONDQ2NyBhcHBsaWNhdGlvbiBub3Rl
-LA0KPiBhbmQgcHJvZHVjZXMgdmFsdWVzIHNpbWlsYXIgdG8gdGhlIHZhbHVlcyB3aXRoIHN1YnRy
-YWN0ZWQgMS8yIGN5Y2xlLg0KPiANCj4gQWRqdXN0IHRoZSBiZWhhdmlvciB0byBtYXRjaCB0aGUg
-bW9yZSByZWNlbnQgUmVmZXJlbmNlIE1hbnVhbCBhbmQNCj4gdGhlIE1NREMgY2FsaWJyYXRpb24g
-dG9vbC4NCj4gDQo+IFdpbmJvbmQgVzYzNEdVNlJCIGRvZXMgc2hvdyBzcG9yYWRpYyBzaWducyBv
-ZiBpbnN0YWJpbGl0eSB3aXRob3V0DQo+IHRoaXMgY29ycmVjdGlvbi4NCj4gDQo+IFNpZ25lZC1v
-ZmYtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBuYWJsYWRldi5jb20+DQo+IC0tLQ0KPiBDYzogIk5Y
-UCBpLk1YIFUtQm9vdCBUZWFtIiA8dWJvb3QtaW14QG54cC5jb20+DQo+IENjOiBBZGFtIEZvcmQg
-PGFmb3JkMTczQGdtYWlsLmNvbT4NCj4gQ2M6IEFsaWNlIEd1byA8YWxpY2UuZ3VvQG54cC5jb20+
-DQo+IENjOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5jb20+DQo+IENjOiBGcmFuY2Vz
-Y28gRG9sY2luaSA8ZnJhbmNlc2NvLmRvbGNpbmlAdG9yYWRleC5jb20+DQo+IENjOiBGcmllZGVy
-IFNjaHJlbXBmIDxmcmllZGVyLnNjaHJlbXBmQGtvbnRyb24uZGU+DQo+IENjOiBIZWlrbyBTY2hv
-Y2hlciA8aHNAbmFibGFkZXYuY29tPg0KPiBDYzogTWFya3VzIE5pZWJlbCA8TWFya3VzLk5pZWJl
-bEBldy50cS1ncm91cC5jb20+DQo+IENjOiBNaWNoYWVsIFdhbGxlIDxtd2FsbGVAa2VybmVsLm9y
-Zz4NCj4gQ2M6IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPg0KPiBDYzogU3RlZmFubyBCYWJp
-YyA8c2JhYmljQG5hYmxhZGV2LmNvbT4NCj4gQ2M6IFRpbSBIYXJ2ZXkgPHRoYXJ2ZXlAZ2F0ZXdv
-cmtzLmNvbT4NCj4gQ2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQo+IENjOiB1LWJv
-b3RAZGgtZWxlY3Ryb25pY3MuY29tDQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiAtLS0N
-Cj4gIGFyY2gvYXJtL21hY2gtaW14L214Ni9kZHIuYyB8IDQgKystLQ0KPiAgMSBmaWxlIGNoYW5n
-ZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9h
-cmNoL2FybS9tYWNoLWlteC9teDYvZGRyLmMgYi9hcmNoL2FybS9tYWNoLWlteC9teDYvZGRyLmMN
-Cj4gaW5kZXggNWExMjU4ZTAwMmQuLjI0NDc2OThjZmU0IDEwMDY0NA0KPiAtLS0gYS9hcmNoL2Fy
-bS9tYWNoLWlteC9teDYvZGRyLmMNCj4gKysrIGIvYXJjaC9hcm0vbWFjaC1pbXgvbXg2L2Rkci5j
-DQo+IEBAIC03MSwxMyArNzEsMTMgQEAgc3RhdGljIHZvaWQgbW9kaWZ5X2RnX3Jlc3VsdCh1MzIg
-KnJlZ19zdDAsIHUzMiAqcmVnX3N0MSwgdTMyDQo+ICpyZWdfY3RybCkNCj4gICAgICAgICB2YWxf
-Y3RybCA9IHJlYWRsKHJlZ19jdHJsKTsNCj4gICAgICAgICB2YWxfY3RybCAmPSAweGYwMDAwMDAw
-Ow0KPiANCj4gLSAgICAgICBkZ190bXBfdmFsID0gKChyZWFkbChyZWdfc3QwKSAmIDB4MDdmZjAw
-MDApID4+IDE2KSAtIDB4YzA7DQo+ICsgICAgICAgZGdfdG1wX3ZhbCA9ICgocmVhZGwocmVnX3N0
-MCkgJiAweDA3ZmYwMDAwKSA+PiAxNikgLSAweDgwOw0KPiAgICAgICAgIGRnX2RsX2Fic19vZmZz
-ZXQgPSBkZ190bXBfdmFsICYgMHg3ZjsNCj4gICAgICAgICBkZ19oY19kZWwgPSAoZGdfdG1wX3Zh
-bCAmIDB4NzgwKSA8PCAxOw0KPiANCj4gICAgICAgICB2YWxfY3RybCB8PSBkZ19kbF9hYnNfb2Zm
-c2V0ICsgZGdfaGNfZGVsOw0KPiANCj4gLSAgICAgICBkZ190bXBfdmFsID0gKChyZWFkbChyZWdf
-c3QxKSAmIDB4MDdmZjAwMDApID4+IDE2KSAtIDB4YzA7DQo+ICsgICAgICAgZGdfdG1wX3ZhbCA9
-ICgocmVhZGwocmVnX3N0MSkgJiAweDA3ZmYwMDAwKSA+PiAxNikgLSAweDgwOw0KPiAgICAgICAg
-IGRnX2RsX2Fic19vZmZzZXQgPSBkZ190bXBfdmFsICYgMHg3ZjsNCj4gICAgICAgICBkZ19oY19k
-ZWwgPSAoZGdfdG1wX3ZhbCAmIDB4NzgwKSA8PCAxOw0KDQpXZSB0ZXN0ZWQgaXQgd2l0aCBhIERI
-IGVsZWN0cm9uaWNzIGkuTVg2U29sbyBTb00gaW4gdGhlIGNsaW1hdGUgY2hhbWJlci4NCldpdGgg
-V2luYm9uZCBXNjM0R1U2UkIgYW5kIHRoaXMgcGF0Y2ggaW5zdGFiaWxpdHkgaXNzdWVzIHdpdGgg
-c29tZSBTb01zDQp3ZXJlIGdvbmUuDQoNCkluIGFkZGl0aW9uLCB3ZSB0ZXN0ZWQgdGhlIGZvbGxv
-d2luZyBtZW1vcnkgdHlwZXMgKGFsc28gd2l0aCBhIERIIGVsZWN0cm9uaWNzDQppLk1YNlNvbG8g
-U29NKSBpbiB0aGUgY2xpbWF0ZSBjaGFtYmVyIHdpdGggdGhpcyBwYXRjaCB0byBydWxlIG91dCBh
-bnkNCmZ1bmRhbWVudGFsIGlzc3VlcyB3aXRoIGl0Og0KLSBJbnRlbGxpZ2VudCBNZW1vcnkgSU00
-RzE2RDNGQUJHLTEyNUkNCi0gU2Ftc3VuZyBLNEI0RzE2NDZFLUJNTUENCi0gRXRyb24gRU02SEUx
-NkVXQUtHLTEwSUgNCg0KVGVzdGVkLWJ5OiBDaHJpc3RvcGggTmllZGVybWFpZXIgPGNuaWVkZXJt
-YWllckBkaC1lbGVjdHJvbmljcy5jb20+DQoNClJlZ2FyZHMNCkNocmlzdG9waA0K
+
+--QwkzL5XcVeDa6Od3
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Jul 03, 2026 at 02:18:08PM +0300, Mikhail Kshevetskiy wrote:
+>=20
+> On 7/3/26 14:07, Mikhail Kshevetskiy wrote:
+> > On 7/2/26 16:59, Tom Rini wrote:
+> >> On Thu, Jul 02, 2026 at 11:53:05AM +0100, Simon Glass wrote:
+> >>> Hi Mikhail,
+> >>>
+> >>> On 2026-07-02T05:57:27, Mikhail Kshevetskiy
+> >>> <mikhail.kshevetskiy@iopsys.eu> wrote:
+> >>>> bitfield: Add less-checking __FIELD_{GET,PREP}()
+> >>>>
+> >>>> The BUILD_BUG_ON_MSG() check against '~0ull' works only with "unsign=
+ed
+> >>>> (long) long" _mask types.  For constant masks, that condition is usu=
+ally
+> >>>> met, as GENMASK() yields an UL value.  The few places where the
+> >>>> constant mask is stored in an intermediate variable were fixed by
+> >>>> changing the variable type to u64 (see e.g. [1] and [2]).
+> >>>>
+> >>>> However, for non-constant masks, smaller unsigned types should be va=
+lid,
+> >>>> too, but currently lead to "result of comparison of constant
+> >>>> 18446744073709551615 with expression of type ... is always
+> >>>> false"-warnings with clang and W=3D1.
+> >>>>
+> >>>> Hence refactor the __BF_FIELD_CHECK() helper, and factor out
+> >>>> __FIELD_{GET,PREP}().  The later lack the single problematic check, =
+but
+> >>>> are otherwise identical to FIELD_{GET,PREP}(), and are intended to be
+> >>>> used in the fully non-const variants later.
+> >>>>
+> >>>> [1] commit 5c667d5a5a3ec166 ("clk: sp7021: Adjust width of _m in
+> >>>>     HWM_FIELD_PREP()")
+> >>>> [...]
+> >>>>
+> >>>> include/linux/bitfield.h | 36 ++++++++++++++++++++++++++++--------
+> >>>>  1 file changed, 28 insertions(+), 8 deletions(-)
+> >>>> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+> >>>> Link: https://git.kernel.org/torvalds/c/5c667d5a5a3ec166 [1]
+> >>>> Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
+> >>>> Reviewed-by: David Lechner <dlechner@baylibre.com>
+> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>>
+> >>> Please can you add your own Signed-off-by at the end of the chain?
+> >>>
+> >>> It's a bit confusing that you seem to refer to Linux commit hashes in
+> >>> the commit. So maybe this should have a Cherry-picked-from: line
+> >>> indicating it came from Linux?
+> >> We don't use Cherry-picked-from (does anything?), we just mention what
+> >> the upstream commit was.
+> > There are several commits where something similar were used:
+> >
+> > 86a720aafce5b2 ("mtd: Introduce mtd_block_isreserved()")
+> > [scottwood: Cherry-picked from Linux 8471bb73ba10ed67]
+> > Signed-off-by: Scott Wood <scottwood@freescale.com>
+> >
+> > 88f95bbadda89b ("libfdt: Add fdt_next_subnode() to permit easy subnode
+> > iteration")
+> > (Cherry-picked from dtc commit 4e76ec79)
+> > Acked-by: Gerald Van Baren <vanbaren@cideas.com>
+> >
+> > c9fbe861a2fc1c ("arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes")
+> > (cherry-picked from commit 1665557aa57c2140d014d68dfe1a1f92f9baac82)
+> > Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+> >
+> > 13f3b04f61aa6a ("mtd: add mtd_ooblayout_xxx() helper functions")
+> > [Linux commit: 75eb2cec251fda33c9bb716ecc372819abb9278a]
+> > [masahiro: cherry-pick more code from
+> > adbbc3bc827eb1f43a932d783f09ba55c8ec8379]
+> > Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+> >
+> > 1fb87de83dd6e7 ("mtd: nand: Support controllers with custom page")
+> > [Linux commit: 3371d663bb4579f1b2003a92162edd6d90edd089]
+> > Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+> >
+> > and so on
+
+Yes, and to try and be clearer, none of these are using the literal tag
+"Cherry-picked-from", which is what I was noting. Tags are not "free
+form".
+
+> I think we need some policy about cherry-picked commits. It should includ=
+e:
+> * who should be an author of cherry-picked commits
+> * should or should not be original=A0=A0Signed-off-by/Reviewed-by/Acked-by
+> be kept * how original commit should be referred
+
+Yes, this has been done at:
+https://docs.u-boot-project.org/en/latest/develop/sending_patches.html#attr=
+ibuting-code-copyrights-signing
+
+--=20
+Tom
+
+--QwkzL5XcVeDa6Od3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakfSZQAKCRAr4qD1Cr/k
+CnRTAP4qr0GJka8vI0ddgyilAJBz51ZE9V0hSo81Zgqn0EbaxgD+M8njUCBFuUt8
+DoV1dqLSP/oh+W8BPsL9C2AM7Of5qAk=
+=UiaN
+-----END PGP SIGNATURE-----
+
+--QwkzL5XcVeDa6Od3--
