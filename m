@@ -4,158 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983B7C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 11:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9744CC43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 11:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 869B884832;
-	Fri,  3 Jul 2026 13:18:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id CAF2384832;
+	Fri,  3 Jul 2026 13:49:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="FDTQIndU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lyhwAxs2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87E6D84979; Fri,  3 Jul 2026 13:18:17 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 245F384979; Fri,  3 Jul 2026 13:49:37 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2976F8469D
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 13:18:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26CCC8469D
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 13:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MAb5STHxeIdxVZdmIk++xQMnvfBiNXpl7EQKKwUlgHn6kc9C6peeik0aus9tqG3MSYL2FflOTNSDkWpYCWtWuuqPNBiUDsf0PPsDl8TwHpVx9ycIuuKNuqozXv33klgiHioTefBqYA1ThtzbS4kU40hRrTAIHj1L2ommGNkBUuedt4uufuyWMG7V8zdOLihAgeZsyER1kKw97KGvI5u0I8OSp9TEZsaMPHQLCBYq3djSXUBpS9Pon3/mU52OwXJp4/8aeOqTXPHJcpQU3Y95+VAV9jUQIEd4KZ1sz0UNGbIBsSgqanviW2IBcjaeHJVkqzfC75iCxPEGujkpI8H5RA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G8cyzyDL857BL30+gJuUY3M2vBSaozrBdSysMB7cvKY=;
- b=LO+OgGnq5e+0p//lNJ/6SSlvYSZ323HAg0kK84eW+sofGuUegLXaW5FKmAgteA28ndTVKqGx5u1WR2Hf1ob5blIgUcf6YeMQiQDSrveQolhmZGzTDQY9wxd1p+4XRbymxVp6LpH7207FSx/QmD+XZ+gug+QQ/nz044WZXFrQv9tNFiCSsEcXxtK4lVf6NgTeBY3+eGzN0rYs4GHS95LLf8qzrWDYg0XLK1GREodoJzC+D9IrHJOhrdJnZaZ1EKPYBOBYxxDxvanzUxNEpemhzx95VzlQokYsGGH9C7kqWMvxSIbZg8pCx6JBis8Oc8Y5PwgV47b4Pf6GBabTXGgEJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G8cyzyDL857BL30+gJuUY3M2vBSaozrBdSysMB7cvKY=;
- b=FDTQIndUC4m3mWbXBn/6fA88LKQR5bf1gAcEx8HyxfmLy0/1RXK40pDffNfp+Uh1RohacA3eymVnFYmNUVQfiIdLLnuDldyQ60iU42/NOGlem/oD+2w422xmKzvRNalbw3jOdBRrt7PHeQhA2N1scT9M2Ez9r0iCgy05MOzKr1D8NSpefRPy+a8O4SpgVXtIsRHl+na4FK4SadZkKbO1bXoRsU/gfS0yuYcPOJIDumwBEU18ecCynQxacdatnZQN96oEVs3KDDWQGiX5ZVyah/TRPfTvFzhJr3QuLBK32NMCXz0AWG2MdVxFBfvROrfVvDYnou+attzvVic8wKze4g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
- by PAWPR08MB10257.eurprd08.prod.outlook.com (2603:10a6:102:367::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.9; Fri, 3 Jul 2026
- 11:18:12 +0000
-Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
- ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
- ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0159.018; Fri, 3 Jul 2026
- 11:18:11 +0000
-Message-ID: <028d33d7-ba0f-4c6f-9c7c-a1757d5edb39@iopsys.eu>
-Date: Fri, 3 Jul 2026 14:18:08 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v14 02/18] bitfield: Add less-checking __FIELD_{GET,PREP}()
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- David Lechner <dlechner@baylibre.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, Andy Shevchenko <andriy.shevchenko@intel.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>
-References: <20260702055744.2164975-1-mikhail.kshevetskiy@iopsys.eu>
- <20260702055744.2164975-3-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszTg4ZuiEdQkfTZcomtcWxSN+f1CKvE+Hikk+EHWghPaKYg@mail.gmail.com>
- <20260702135918.GW749385@bill-the-cat>
- <0c01810a-8a14-4c9a-9599-38b135c7b7e1@iopsys.eu>
-Content-Language: en-US, ru-RU
-In-Reply-To: <0c01810a-8a14-4c9a-9599-38b135c7b7e1@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MM0P280CA0063.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::27) To DU2PR08MB10037.eurprd08.prod.outlook.com
- (2603:10a6:10:49a::20)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-664cb440f9eso557513d50.1
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 04:49:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783079372; cv=none;
+ d=google.com; s=arc-20260327;
+ b=EEI3GUNJdQ3Ak8j9b/aU8dqwvJOmgF42VqBXtdTSpZr35Fuua8PBzcBzA9GtQDHeCs
+ MiVg9zscGA5dNYR8zApFoZE3XofgGXWefdqhR+09U6d5zfvNhqhQxRGcnnKhoIJoRVcs
+ hzmWobCYUcyYWbl8U/qpDImkhuerBHc+Oid8SVtkxOnTV39nkQWUfFXLwOev23hMBQAB
+ qZWU4F/pM7qgPD9RLUWOEIrNrfEYLPySLs2OjM3P9D4Kjt+Bnw/ebNs+jJ2/ZT4Eh7Ye
+ l+BMR8V8qYCJaaLPJ6e/S52LrCgHwwTHfzEWg9iQL7s5JpbTGX/STp+J+Jwws+pSDx+Y
+ 9wvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=WCeCRCScrD6bTuqbmRfM/Whux5fZ/G//QTmNtXjlINk=;
+ fh=i7Ykna/Zx96hum3n0GRaGqwDM1KjKP8vo5bjptFJDKI=;
+ b=GQYyFKjfb7PLKKh3f3o0WyhgfAGbxsUjLlczrnVTADLKcNKG1sDAhWVi2+Twn5nefI
+ XAEwhn+FEN4ghRTdFcB/6tMvN433fa8bY7GrCN9mABfrQSkOYue/awbSAWDsIq9UMzdv
+ 2WdN3/LvlSpsL9oVUZ2klS1IBUwTGS1n6lnb2rNzNFEPnF3u1mVNxRz8nkp9vW8aDmgf
+ RdC3Bqt6q48m1cwEjlPuq50zXfg3GW1pFqQfE5goSX6yU0SAfawUcROOqUyYlKIdAF/L
+ /coGhaai84eGxgPT1ImsHjYF3b6AGFy20/fzj0C6CgiSu0JRFhPdfnIhxDQTKkK4WjLk
+ MnKQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1783079372; x=1783684172; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WCeCRCScrD6bTuqbmRfM/Whux5fZ/G//QTmNtXjlINk=;
+ b=lyhwAxs21BbDuJ3FSrZQ1mmu7GsvDv1ACurv9Okk8HetfJXamQOml+wJ38KMvI8IuH
+ b9gCMDc11RhyzsoAquq385bwBds1WgJjtgmDbJ8BNE7YZwsfWB0wiUOhrN6stvpUYIEk
+ mjkqCmI/F5OCF+jjcdF29K1hiqiVzxArfKL+XqtOK8+jnevieqaVlXyKghJMsyVRPnRf
+ Ra+MT6aOl7NXkmBH+bekQffG6Lx+GU5SPxXp5huYhQu7hMwje8njVfl2yx2H2isxs8cY
+ 5ePXI3arhJvDtx2+eU05jXz3/u3Mc8ZwxCsoqthr13e0IpoQ0IEAMLmRqI6oTWolGKDf
+ 1YIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783079372; x=1783684172;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=WCeCRCScrD6bTuqbmRfM/Whux5fZ/G//QTmNtXjlINk=;
+ b=XJXXdcC7/d4YboTIlm+ZgVeNalCn6HS8RQWZlgrBYxUsnxmLsrTVxaAN/Z91LaD1Rf
+ 5f6u4QLmlZf6na5Rc8Nn0QDt0LaDtrt2ODyr7BPVfQke2UHnGJlxYMLm5NnoblbrAstE
+ hScZv3hOuTp4y31NOalTYCuCgNEJJbLbnAXvScrvESt9dawNtzTYeIhEuhwEjCBz/sdo
+ yFYQbbm+SI0YbMNOcWMH9nbOvSYIkzTRDIP8r+NMHg4ugFQehgy0NU0c17mAvOXvE3qC
+ yIeGGvl8UTj/8EeS1pxOlzNXda6ucy30XMJqAeAWGaRyvAdNAZ71xhC9Bw9uoiFjZm7x
+ W5XQ==
+X-Gm-Message-State: AOJu0YyzmHUFrl27f2GHB6L0MHvGvEzvNLUakep6LUX+GCkoQXzbHl30
+ kt2fJauWznSDwKr3vUveyfHy28NZgIxTOjH0737w9uYUBQsG33OX5eYoeJfCKjlJ2Bhid+EBnYw
+ RA3RfVNyfwWrDK5+TY9tz1hkxyPCG3KLczdSMqY3Zaw==
+X-Gm-Gg: AfdE7cnzypesVQ14jAjK4oYT23grGUNMD2/F7wHBg0hmk/lxkxY8ceylFfEy2pGMiek
+ ZVUBnkS+F97W2W7FJrDxh4MJrMypE114gypk/AHpyq3xcks3N/dRgTt157dd536eWenmgjrWZ2O
+ TRwiQLfV1SrTPOWrQlRNf5BaU8VQs9ff/8JnX2H2EAqMklaqwm+qd9UQU25HFyXGzfyfJE/zFtr
+ yVkcIql1IfX8rAzVclHuc4dhEXdZ/2gzKebSCzYRVNrNO4Yu7Yn7PkoVX9XnwffPhVQMvUBK0Fd
+ e1bCzBGER/XOZG92QuCOHqlIrI/r4k0FPFxBWEyPXs0t6p+ggp54dM42EKYFEYmjG3Esm3sP/8c
+ hP/1GZBs8pwe+iYlYdTqCc3YPXFYyzprYHwV0eTqioIOCHLn0cw/dYRcTS+VzBm0Q5dElQuR1sr
+ 2TzbmNVNhVFzhOT3aBv9jdgA3ea6Qw8Blm1gMUPOPviy/rTjbiMdJ+/cjQWTve1T99OppHOjXvz
+ 7rbvI1RdYwl34ZBTFm7pVSOlyYOTFXZVTBKGzHzB384kZyt51svEhObMI4VMAIwHvMWXZNgCacT
+ q8L0XLAvhr/eTIqTxsPRjbrAQkleKW8nLsbPfAnNKMQUjTOnERjHWmuyw3JIFY6welbkA1Q=
+X-Received: by 2002:a05:690e:1441:b0:664:cb17:ec7b with SMTP id
+ 956f58d0204a3-665219bc871mr9188509d50.27.1783079371540; Fri, 03 Jul 2026
+ 04:49:31 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PAWPR08MB10257:EE_
-X-MS-Office365-Filtering-Correlation-Id: 56a7c318-04b8-4045-b64e-08ded8f4c4ac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|366016|1800799024|7416014|4143699003|11063799006|56012099006|6133799003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: wPOK7zKfAtJ0//U/7Z/LueccJDjCvfg4op/O36aATbOO53c+yiphp/s9MTBe3FuBazKv/mAPJLjzdFHiBzoBiwxNFm43RICyljmeFZGZdZY41TS5rA03/X/PELLczBQ8RIOj/CW7fWyM+69rg9AwEcXGa/sqK3PGRrZ2bZRGR2x+HTKtzdVWMmVLSRDoL6q4x8X1CRdgM7qeEZG28xeqga1Lox/ERwyce6Is6x/epBGpaT6cd8E7ssMo5OIZ4FzhMpmjt4EAYu5HC4pXkKTioPhTT4TkVCRM2S73OldO1LjQPsgkLKv3X+gHUJf2HlWd4x/16ixl3T2KA8s+S+3FIaQpZHGjYEyWHLYS4EofjIJPkBQBs7AngPqBRNcMi+sS74ruLIyU41nPWu+E2Vno0DlJuZHaQ0FEDVJfxxTzQRoY71lLw6huGrvil69QSiIzWZ6wqXHlvzuNgvZ6pswfTdHgDCSjW5el2ZHJQLdKYnL8DXODVeFWNWF59icgfpPnkMqPwxKNR0B9WP3n+zYyegoHk132JTjvre5I2jQ7JC1k/3LE/95l4zLEvRCbsMXt5RYwZFz7Y7V3+Mpr1py9pcqQhfMKZ4QxBSF8TOoVzYh+knp4WgKJuxuLWPluWu9vIYopynKV31QkmhokaBexprdrrbIEqd+geltwK86Y3U4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(7416014)(4143699003)(11063799006)(56012099006)(6133799003)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0ZiQmxTbGl4MXdMblg1YlhEdnZVeVhlOE5EVVAwbU5ycTFURi9OdExWZlB5?=
- =?utf-8?B?UU1RLzh4ajluNmxMYktyTVZpVmU2aVRYbHpiV3NHTjRrSUE3S3M0MkQ5ci9Z?=
- =?utf-8?B?OWthSzdheHpCU1kyQ3B1OTlNNzFPeTJtQTIvN0FaNlBDRm9jM3NuVEV3S1RY?=
- =?utf-8?B?WXV0SXdoNTVYMmdCaU5zL245RWNvK0haVG0wMDFlT3lBOVdaUTBIQ252Ykly?=
- =?utf-8?B?ZHFFeEw2M1JhWFpHK0w0ajZTeTBXMUl4Q2U0N3dkTWxqLzl3TTFNTVVycmFY?=
- =?utf-8?B?dDdCOUNQOEZleFhPL2tSb2dTOWFZbk5LUFZkVzlHZVRqVkJYMG1Fa3VMa2ZD?=
- =?utf-8?B?N09mSTFMTWtETVAybUdkUzFBOExTMzByZnB4WmYvRnE1UnhFZ1E4MGI3QlFS?=
- =?utf-8?B?ZGxFbnh3bTg4aTBQVW45T1p1aWtRRGRwVmNydnplY256SUNieEw1THcrVHE0?=
- =?utf-8?B?alFLODhxM3dPbCtwQWVub1IrS1FvYUMzRUx1MEVjckJvelVFWVAvR2J2TzRH?=
- =?utf-8?B?dW5uNGpTMWx3NHJHdmJqdFh2azZpbllmbWpZMllkRXJqZGhrQWp2U1kyZm9K?=
- =?utf-8?B?Q1pMTnBtMWtOb0ZRK01VQUI4RXFYdXB1bGxiVCt4aHlUUDhwekNKOWtKQzJZ?=
- =?utf-8?B?cDRkakZtTitEOHRBdVg4N0V2cTVOdWE2ajloN3dhSnZSWE83OHhhYTJ0dEcy?=
- =?utf-8?B?MXVxRDhnVzFxUzZTdktXSmV1S1piZGdkZThHdWVwb25MZWdnbVJ0K1ZOSzhw?=
- =?utf-8?B?T3RXL3g3QjQ5enlLWjA5UjZUS25heW9wb0Uxc3RRbG52K25CN2VYUVJzc1FX?=
- =?utf-8?B?RGRUL2J4ZWpHVkNqd3N0eHhJYVY4SDFOd2treFczY0wwNzJSNGtzWFd2Z3I3?=
- =?utf-8?B?eFhRdG5nSUNzUXk1V0tRM29oN3kyK2hwenFjQUhqV1B0c3FSd1pCeEdIdmRY?=
- =?utf-8?B?QkI1aDZ5VTlvejNFUGNzTSs2cnZMYjlqVW5lQktSc0Z4Qm1yY0RvL0oyUVFO?=
- =?utf-8?B?ZmdSTFk4WS9QM0p2aDZsOXBYYnhZSDN6b2M5K3A1VnlNWGcvTzZPWmd5T3Iv?=
- =?utf-8?B?ais4Z0FNYjZJRmpzM05HNldYamdubytSc2NzbVVRYUtZQjJBM1hicGF4T0JK?=
- =?utf-8?B?SjRqNkk1cHBZejd4WGNyL2cveHlwbTJ6SkpiLzdtMFc1UjEvT25SOC9RZUdG?=
- =?utf-8?B?eEsvU3REaEkxMGorOHlzcjdqNWh3RXJqVEYyYTdKVHloWW1wT2hBSlYxbmNx?=
- =?utf-8?B?THlnMXhidjhMSTZGRCtuN0Y2M0lMcnBESis3c2VVM3RNTmY3ZUVLWllBWE84?=
- =?utf-8?B?a0J1MVl4alBrME0wczl6WTNuM2JyM3hCTFV1ZG04Y3NlTDNuWjJieWZ1cUsz?=
- =?utf-8?B?YUhSMVI5UTJycDN2ZXF4UWQyVW02Z2lIZ2c0cHB5TVlRUnpuSGZ5c2NhMnZ6?=
- =?utf-8?B?WXRSSUhQVjUwY0wvd2xVZUd6RjhXd0t3c3NLRnh2aC9rYU10STBqYXpOby9H?=
- =?utf-8?B?YW5VejlOdSsyZWV1aWZWbHRnbVpNMy9yMS9FNU40MDJrTE4weXZSbnhQTHNs?=
- =?utf-8?B?Wk1Kdm12T0duZzBDTDNTQUdlcEJyNVYwZUtXOVNpNUZnejJCcnF4clloVkVq?=
- =?utf-8?B?SGZ3WWFMSmtrdVhXUDJPUHZpalh2WHprQ1pMMzdOSUR0MVdySHF4R21YRkRE?=
- =?utf-8?B?d1JCbzBBV3k4V3VrRit3a3N3eC9NV0lhRk9DRzN5RUxqUXRQWVlxY2VmaFhm?=
- =?utf-8?B?dUduVTUzSmxtTnUraHlocEFiK00vY2wzeGIzODE0Z3V0MUE3Q0lvZFlHMTVI?=
- =?utf-8?B?MExORUZGUjdpRUZUdHVHYXNTa3BKdmlDdzZERGI3c2JTSEttTHoybjZtb0Vi?=
- =?utf-8?B?bjFwVGp5V0JqWndyNGdXUkw5QzFFUTJ1UVJTRjU5WC9xQU9KL2NzVDBTMGhu?=
- =?utf-8?B?RXdNQmpxOFNCb0tJMVRvbzllSzRQVnFrcHZtOXluakpEbndxc3hBWnFNaG5Y?=
- =?utf-8?B?RW0xNXJrKzgzWGFwUU5TV0trcjBEL0szbXdIaXh4MEx6QnY2ckJQNGt2dnVR?=
- =?utf-8?B?R1BCOTNaellsZEJVT0tNaXcwYW5CUTcxSjlydmZDeCs1RXdyNVNmRGZRQWJD?=
- =?utf-8?B?Sllqb3c2ZFVzWjZnU1ZEUFpPUDBxaElXS2pONUtTSVAwRFVkdXhQWUdTYXBH?=
- =?utf-8?B?UkxCeTJDNXVSbFZXazFENXBlMmlRSFhsc25BS3N2Y3BnYTVaMHZ2WE9ERmIz?=
- =?utf-8?B?OWxSN2lPMGZWalBqUGhNVDhVQVQ5WS9xa3IzWXlvUmFCazZaY0xPdERuK1pz?=
- =?utf-8?B?RU82N2E0NlY5VnFDK2VacGl0VlNsTTJCQmtiWVcvU2IxNTlaUDhzczk2ZWto?=
- =?utf-8?Q?QMp9hczYYQ/O3KcA=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56a7c318-04b8-4045-b64e-08ded8f4c4ac
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 11:18:11.8252 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: B2L7hY82If/43f0sE+PXJfPE1GSmWTy2t9aRSCjod6Dz22oF9FvuEWtidK0FqwdR/+Fu45a+9FAqPFOqLw7oOdutYlMy8HUQt81WSnJcC3Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB10257
+References: <140504E6-5BCB-4566-A03F-2A94B0F5BA01@baylibre.com>
+In-Reply-To: <140504E6-5BCB-4566-A03F-2A94B0F5BA01@baylibre.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 3 Jul 2026 14:48:55 +0300
+X-Gm-Features: AVVi8CemhNKmUUDPQWgqEih3Qu71rwROET8Onrywcn0kgzQpRqFpNo33PTW0w2Q
+Message-ID: <CAC_iWjKUghtMYU_g4JUJbXF12sGL=zW8W8bcCfNWRsN7xx11Yg@mail.gmail.com>
+Subject: Re: [RFC v2] bootstd: firmware-owned OS devicetree for EBBR /
+ SystemReady IR
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de, 
+ trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com, 
+ baylibre-upstreaming@groups.io, a.fatoum@barebox.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,78 +120,313 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Carlo,
 
-On 7/3/26 14:07, Mikhail Kshevetskiy wrote:
-> On 7/2/26 16:59, Tom Rini wrote:
->> On Thu, Jul 02, 2026 at 11:53:05AM +0100, Simon Glass wrote:
->>> Hi Mikhail,
->>>
->>> On 2026-07-02T05:57:27, Mikhail Kshevetskiy
->>> <mikhail.kshevetskiy@iopsys.eu> wrote:
->>>> bitfield: Add less-checking __FIELD_{GET,PREP}()
->>>>
->>>> The BUILD_BUG_ON_MSG() check against '~0ull' works only with "unsigned
->>>> (long) long" _mask types.  For constant masks, that condition is usually
->>>> met, as GENMASK() yields an UL value.  The few places where the
->>>> constant mask is stored in an intermediate variable were fixed by
->>>> changing the variable type to u64 (see e.g. [1] and [2]).
->>>>
->>>> However, for non-constant masks, smaller unsigned types should be valid,
->>>> too, but currently lead to "result of comparison of constant
->>>> 18446744073709551615 with expression of type ... is always
->>>> false"-warnings with clang and W=1.
->>>>
->>>> Hence refactor the __BF_FIELD_CHECK() helper, and factor out
->>>> __FIELD_{GET,PREP}().  The later lack the single problematic check, but
->>>> are otherwise identical to FIELD_{GET,PREP}(), and are intended to be
->>>> used in the fully non-const variants later.
->>>>
->>>> [1] commit 5c667d5a5a3ec166 ("clk: sp7021: Adjust width of _m in
->>>>     HWM_FIELD_PREP()")
->>>> [...]
->>>>
->>>> include/linux/bitfield.h | 36 ++++++++++++++++++++++++++++--------
->>>>  1 file changed, 28 insertions(+), 8 deletions(-)
->>>> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
->>>> Link: https://git.kernel.org/torvalds/c/5c667d5a5a3ec166 [1]
->>>> Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
->>>> Reviewed-by: David Lechner <dlechner@baylibre.com>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>>
->>> Please can you add your own Signed-off-by at the end of the chain?
->>>
->>> It's a bit confusing that you seem to refer to Linux commit hashes in
->>> the commit. So maybe this should have a Cherry-picked-from: line
->>> indicating it came from Linux?
->> We don't use Cherry-picked-from (does anything?), we just mention what
->> the upstream commit was.
-> There are several commits where something similar were used:
+On Fri, 3 Jul 2026 at 12:40, Carlo Caione <ccaione@baylibre.com> wrote:
 >
-> 86a720aafce5b2 ("mtd: Introduce mtd_block_isreserved()")
-> [scottwood: Cherry-picked from Linux 8471bb73ba10ed67]
-> Signed-off-by: Scott Wood <scottwood@freescale.com>
+> Hi all,
 >
-> 88f95bbadda89b ("libfdt: Add fdt_next_subnode() to permit easy subnode
-> iteration")
-> (Cherry-picked from dtc commit 4e76ec79)
-> Acked-by: Gerald Van Baren <vanbaren@cideas.com>
+> This is v2 of a design RFC, not a patch series. v1 [1] proposed a mechani=
+sm
+> for sourcing the OS devicetree from a firmware-owned partition; v2 refine=
+s the
+> same design. The main change is that the devicetree set is now described =
+by a
+> firmware-owned FIT manifest carried on that partition, instead of by envi=
+ronment
+> variables.
 >
-> c9fbe861a2fc1c ("arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes")
-> (cherry-picked from commit 1665557aa57c2140d014d68dfe1a1f92f9baac82)
-> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+> This text is self-contained; you do not need to have read v1.
 >
-> 13f3b04f61aa6a ("mtd: add mtd_ooblayout_xxx() helper functions")
-> [Linux commit: 75eb2cec251fda33c9bb716ecc372819abb9278a]
-> [masahiro: cherry-pick more code from
-> adbbc3bc827eb1f43a932d783f09ba55c8ec8379]
-> Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+> A working implementation exists, with sandbox tests, and has been validat=
+ed end
+> to end on hardware in both the plain and the secure (signed) setup.
 >
-> 1fb87de83dd6e7 ("mtd: nand: Support controllers with custom page")
-> [Linux commit: 3371d663bb4579f1b2003a92162edd6d90edd089]
-> Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+> 1. The problem
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 >
-> and so on
-I think we need some policy about cherry-picked commits. It should include:
-* who should be an author of cherry-picked commits
-* should or should not be original  Signed-off-by/Reviewed-by/Acked-by
-be kept * how original commit should be referred
+> Platforms that follow EBBR / Arm SystemReady IR treat the OS devicetree a=
+s part
+
+Not the OS devicetree. The devicetree. It should be a single entity
+consumed by the firmware, os etc.
+
+> of the firmware rather than part of the OS: the base DTB and its overlays=
+ live
+> on a firmware-owned partition and are updated independently of the operat=
+ing
+> system, instead of being shipped in the OS image or on the EFI System Par=
+tition
+> (ESP). The firmware is expected to load that devicetree and hand it to th=
+e OS
+> (via the EFI configuration table).
+>
+> U-Boot today can source the OS devicetree from its own control DT, from t=
+he ESP,
+> or from an EFI Boot#### load option, but it has no generic way to assembl=
+e it
+> from a firmware-owned partition. As a result vendors carry out-of-tree ma=
+chinery
+> for exactly this.
+>
+> For example, MediaTek ships downstream 'dtbprobe' (assemble the DT from a
+> partition) and 'fdt authndtb' (authenticate it) commands. The goal of thi=
+s
+> work is to provide one reusable, vendor-neutral mechanism in mainline so =
+those
+> downstream commands can be dropped.
+>
+>
+> 2. What a solution has to do
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+>
+>   - Assemble the OS devicetree (a base DTB plus a list of overlays) from =
+a
+>     firmware-owned partition and install it for the OS.
+>   - Install it on *every* EFI launch path, not just one. SystemReady IR b=
+oots
+>     through the UEFI boot manager, which in U-Boot does not go through th=
+e
+>     per-device EFI bootmeth, so a per-device-only hook is not enough.
+
+This should be happening already
+commit 7e624377e99 has some info
+
+>   - Support secure boot: when the firmware devicetree is signed, verify i=
+t, and
+>     never silently fall back to an unverified devicetree.
+>   - Support A/B firmware partitions and per-SKU devicetree variants.
+>
+>
+> 3. Proposed design
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> A bootstd helper, firmware_fdt_load() (CONFIG_BOOTSTD_FIRMWARE_FDT), asse=
+mbles
+> the devicetree from a FIT manifest on the firmware partition and returns =
+it;
+> the EFI launch paths install the result via efi_install_fdt(), exactly li=
+ke any
+> other devicetree source.
+>
+> 3.1 The manifest: describe and carry in one artefact
+> ----------------------------------------------------
+>
+> The partition carries one FIT image (by default 'fdt.itb'). Its images ho=
+ld
+> the base DTB and the overlays; each of its configurations names one boota=
+ble
+> combination through the standard 'fdt' property:
+>
+>         /dts-v1/;
+>         / {
+>                 description =3D "Firmware-owned OS devicetree";
+>                 #address-cells =3D <1>;
+>
+>                 images {
+>                         fdt-base {
+>                                 data =3D /incbin/("board.dtb");
+>                                 type =3D "flat_dt";
+>                                 arch =3D "arm64";
+>                                 compression =3D "none";
+>                                 hash-1 { algo =3D "sha256"; };
+>                         };
+>                         fdt-panel {
+>                                 data =3D /incbin/("panel.dtbo");
+>                                 type =3D "flat_dt";
+>                                 arch =3D "arm64";
+>                                 compression =3D "none";
+>                                 hash-1 { algo =3D "sha256"; };
+>                         };
+>                 };
+>
+>                 configurations {
+>                         default =3D "conf-panel";
+>                         conf-panel {
+>                                 fdt =3D "fdt-base", "fdt-panel";
+>                         };
+>                         conf-base {
+>                                 fdt =3D "fdt-base";
+>                         };
+>                 };
+>         };
+>
+> The helper selects a configuration, verifies it, and assembles the device=
+tree
+> by reusing boot_get_fdt_fit(), the same code path bootm already uses for
+> FIT-carried devicetrees: multi-configuration selection, per-image verific=
+ation,
+> overlay application in the listed order, and packing of the result. No ne=
+w
+> format, parser, or crypto is introduced.
+>
+> The manifest must be self-contained: images must be 'flat_dt' with embedd=
+ed
+> data (external-data FITs are rejected) and must not carry a 'load' proper=
+ty
+> (rejected, so a misbuilt manifest cannot overwrite arbitrary memory).
+>
+> 3.2 Where the partition is described (new binding)
+> --------------------------------------------------
+>
+> The *location* is described in the control devicetree. The bootstd node c=
+arries
+> a 'firmware-fdt-source' phandle to a node that is a child of the media de=
+vice
+> that owns the partition:
+
+A lot of boards are building with  CONFIG_OF_UPSTREAM. Is this
+something that wil be injected in the DT during build?
+
+>
+>         bootstd {
+>                 compatible =3D "u-boot,boot-std";
+>                 firmware-fdt-source =3D <&fw_fdt>;
+>         };
+>
+>         &mmc0 {
+>                 fw_fdt: firmware-fdt {
+>                         compatible =3D "u-boot,firmware-fdt-block";
+>                         partition-type-uuid =3D "....";   /* GPT type UUI=
+D */
+>                         partition-name =3D "firmware";    /* optional */
+>                         filename =3D "fdt.itb";           /* optional, th=
+e default */
+>                 };
+>         };
+>
+> The '-block' suffix names the backend: a block device with a GPT partitio=
+n
+> holding a filesystem. It leaves room for sibling backends later, e.g. an =
+UBI/MTD
+> variant for NOR-based boards.
+>
+> The partition is matched by GPT type UUID and/or name; when both are conf=
+igured,
+> both must match, so a misprovisioned disk fails instead of silently selec=
+ting
+> whichever same-type (A/B) partition comes first.
+>
+> 3.3 Configuration selection: by compatible, not by filename
+> -----------------------------------------------------------
+>
+> The primary selection mechanism is the compatible string, the way the
+> FDT spec intends: with FIT_BEST_MATCH, the configuration whose devicetree
+> best matches the compatible of U-Boot's control devicetree is chosen
+> (fit_conf_find_compat()), falling back to the manifest's 'default'
+> configuration. No filename names a devicetree anywhere; the only filename=
+ in
+> the design is the manifest container itself, a fixed convention in the sa=
+me way
+> EFI/BOOT/BOOTAA64.EFI is.
+>
+> On top of that, two optional environment variables can override the choic=
+e:
+>
+>   - 'fw_fdt_config' names a specific FIT configuration (SKU selection);
+>   - 'boot_dtb' pins a partition number, for A/B firmware partitions.
+>
+> All selection paths only choose among combinations the firmware author
+> shipped; with signed configurations, a tampered value cannot select an un=
+signed
+> combination. There is no other environment dependency: the description li=
+ves
+> in the manifest and is updated atomically with the devicetrees it describ=
+es, so
+> 'env default -a' cannot break the boot.
+>
+> 3.4 Where it is installed (every EFI launch path)
+> -------------------------------------------------
+>
+> The helper is consumed by:
+>
+>   - the per-device EFI bootmeth (bootmeth_efi), on both its disk and its
+>     network (PXE/DHCP) bootflow paths, so a TFTP server cannot substitute=
+ the OS
+>     devicetree either; and
+>   - the EFI boot manager (efi_bootmgr_run()), where the firmware devicetr=
+ee is
+>     tried first and outranks a Boot#### load-option FDT, so a stale or br=
+oken
+>     load option can neither replace nor block it. An FDT explicitly passe=
+d on
+>     the command line still wins.
+>
+> Each path installs the result through efi_install_fdt(), the convergence
+> point all EFI launches pass through, so the firmware devicetree is instal=
+led
+> regardless of how the EFI application is started, including the boot-mana=
+ger
+> autoboot path that SystemReady IR uses.
+
+That path should be fine since it applies the local fixups before installin=
+g it.
+
+> This is transparent to the EFI application: the devicetree sits in the EF=
+I
+> configuration table before the application starts. In particular, booting=
+ GRUB
+> works unchanged: GRUB does not touch the table entry and the kernel's EFI=
+ stub
+> consumes it.
+>
+> The assembled firmware devicetree is complete and authoritative: no other
+> devicetree source is layered on top of it. In particular, extension-board
+> (extension_scan()) overlays are intentionally not applied, since modifyin=
+g
+> the assembled (and, in secure mode, signed) devicetree would defeat the
+> authenticated-combination model; such combinations should be shipped as m=
+anifest
+> configurations instead.
+>
+> 3.5 Fail-closed error semantics
+> -------------------------------
+>
+> Once a source is configured (the node is present), the result is determin=
+istic.
+> -ENOENT means *only* that no source is configured, in which case the call=
+er
+> falls back to its normal devicetree. Any other failure to assemble a conf=
+igured
+> source (unresolvable device, no matching partition, read error, invalid
+> manifest, missing configuration, failed signature) is fatal for that EFI =
+launch
+> path: a missing or bad firmware devicetree is never silently replaced by =
+another
+> source. Error codes from inner layers that happen to be -ENOENT (for exam=
+ple
+> a missing FIT configuration) are remapped before returning, so the fallba=
+ck
+> sentinel stays unambiguous.
+>
+> 3.6 Secure boot
+> ---------------
+>
+> Signing a FIT configuration authenticates the whole combination: the base=
+, the
+> overlay set and its ordering are the signed unit. With FIT_SIGNATURE enab=
+led
+> and a required key in U-Boot's control devicetree, verification is enforc=
+ed
+> by the existing FIT policy code: an unsigned or tampered manifest is reje=
+cted,
+> and because a configured source never falls back, the boot fails closed. =
+There
+> is no separate Kconfig option for this: FIT is the mechanism, and the usu=
+al
+> verified-boot configuration turns enforcement on.
+>
+> Thanks for any feedback. I will follow up with the patch series once the
+> binding and approach are agreed (or in a few days anyway :)
+>
+> Cheers,
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2026-June/623429.html
+>
+> =E2=80=94
+> Carlo Caione
+>
+
+Thanks
+/Ilias
