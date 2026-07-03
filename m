@@ -4,69 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 152C8C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 16:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC54C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 17:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2202184A0F;
-	Fri,  3 Jul 2026 18:43:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 7C0EB849F0;
+	Fri,  3 Jul 2026 19:11:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="YBZsf5pi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jhqHCZn2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D11849F0; Fri,  3 Jul 2026 18:43:54 +0200 (CEST)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:19:fff0::42af])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 21462849F3; Fri,  3 Jul 2026 19:11:33 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81B4984A35
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 18:43:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 625AB849BA
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 19:11:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gsKMV0HjJzd70;
- Fri,  3 Jul 2026 18:43:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783097029;
- bh=mjQ6mgk44D/R5w5piMk7XASxEDLQt3Nkp2KOgHM4+UI=;
- h=From:Date:Subject:To:Cc:From;
- b=YBZsf5pi1M0XwCavJW084At2jVC0lWaFHo9WagARhzbi7NqSKWlobVGVo7GwBCEZ4
- R1wVSM/94UK4rMVR76CgtPlnP0fijGQnRTzGjMFgIhYFXe5XKZ3QgnEKirET4XumZd
- axKAFSK1Gz9F2M8IJHQ/ePPy+K7/YD3EVKtyJ94o6qcw+0mZ7w9LJRsvoIcDR2aWgU
- OX1smHLXiVSKhqmc7EqQ5JEC4rNDekqlKjrMfsKRnmK/gwaa4QKkMLtDFMna8H7jh0
- Tp4ADrY5UqSSxF541jMGXsERqXv1n2CIObtqeagCqSTfe+fos8Tj7Tesf8Yg7N4H4p
- w8mKmYB+4v0dw==
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gsKMS2n4Rz1hl; Fri,  3 Jul 2026 18:43:48 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 03 Jul 2026 18:43:32 +0200
-Subject: [PATCH v2] drivers: sysreset: revert support for args in request
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-8eff5ce3b95so5505956d6.3
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 10:11:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783098689; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ffXX5E9Oc09aEuPG4H8m2n5IoiibcI89TBRqPzyp6xyzFihqw1cV/P5jib8yPrChYt
+ 6nmDQ7XFEXLLnKf2Chzd+FdnEanrQZlbjVJ6Fy7G9WmRr4JNv5Usb+99B8R03qTZ0oiN
+ ILqj+gKn0vu/zsVDUpAkI32gyztdYsfvuBumrlF/lADoN/gR6MZkiQzOjICAwdyODj39
+ 3bKdTxpw79lTDCcXT61FqUjCHZzNd7LOCOSr735va5ewA0dQ2YwC1Q3ainy4Nw2o+e4p
+ AehKqZnSF28ESvDFf2/ONCaVxH7+ZbwJzE2BtgzVusRuHZOP4OF7gJBp3sTaJjV9VDly
+ 7SHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=+V/ofNMZDhMQJTZF0v5ivUUQb16GLkabrPY7JUpJZT4=;
+ fh=/IgWAMTJ1di/aV68NONbYoez3saguAb8kE5OH6EuAFs=;
+ b=ZDcjEzXjpvaLjqWq1gUhNAS/CQgjnnzjdlVEZXi7Vr/7xZYr4UGMQ7Yr90tFN5qNpW
+ S5Q8qBbIq2LkHtzvM+BC/ywOtfubK3T7oousyb45tzaqei3M5YFXrnKzsXR0TlrgiWy/
+ EGpCQ4GR3pWb8uqH9AhJBE62gewbu7XESqEhGryOMx3OaA2zthHR/PHEzn8XM6hD5N63
+ OgYhk2y553nQlq6/a7TXlJr5fK2v6pT6ZSI6XtHSRTZUABseeu8/6MVmQzqX9NnCYGrK
+ Q5xPbR68TjTfVSvqb6otUm2f2CqEy3lcaaxOo6igI3bghOVYLbkNa5vMfvMD1ZSK1jwR
+ 8yhg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783098689; x=1783703489; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=+V/ofNMZDhMQJTZF0v5ivUUQb16GLkabrPY7JUpJZT4=;
+ b=jhqHCZn2JZj3uWS/0eagj1IyWwQ7A/RbzbHhKTcS8APpDlyGQWOjGEN5LtdV1Yp+YQ
+ pA9wN8xVTt10XEKzte+VHXUIW6QryCrSnJQXXGbDspYRpKdL1QWIo9mKrbrj5QsDbhJM
+ e24ciA2z0UB05J2P1VGOwHVCH7FMNrW4MWvPyGdnK3ekd89TkieZwlZPNtwOcMyatFt9
+ L9k9Tef9GwpT8WIRFYO/ESUe+JZPxLgf5dFLElkZeePVqvUoqBjgMFbaPXLsOh3DTjkZ
+ bEdc9p0Ak9O5b2HAkwWRJTq+nJ35gA2zc6UqogmiygeJpGIrJW33Z3a9maPAaaCpz68r
+ kijw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783098689; x=1783703489;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+V/ofNMZDhMQJTZF0v5ivUUQb16GLkabrPY7JUpJZT4=;
+ b=jsyzRkaV9yIEGQ4K7Nl6YAEZkJ68kmprAi+HHRBAB7hZj9NgXUuEdeIYKchyzanLaJ
+ 67z3KTnpEospBmjlTzNAKSVDElGBotTPmE42stnYs/KxZO2pS9Z/JRVn6TbuR7CC09gW
+ IaobvmWcgilhMVoF6JlumCwEGiSjNmd0sIMZRfS9w3xihmTfH8pu9lzWRyRoTR9gAlbU
+ KedbIe0Rl+YusGVi/9FE6E83cScWkWnebdQiAXVejGiKvo0exmVF17hIwfW7XgxPDwTd
+ DvB6wIf3SXhePRbuhQIkPHU9OAFdFBPyde9wCXznOkbkFk9k6+DKSeFdKDVyocCr5kde
+ kUpg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rpm6dNOFLDIz0IfGrKDAcGmEwSgZEGB/zpqgesQrUXQK8L6SfYky8CyeQd903t5gHH7qR+BNh0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw55uY8hvPFEm5xIajoO0FtSGZAuP7itzrHc5lYVmZXyfUDNKkz
+ 2nDVBjTrb3LawH3i6LoGKw65q+BUuiug2nQUJv/bMbXldp2orV84o8GFRrHffStIOJ/2lTOdWe1
+ DG4W04gugxgmIj1Gf9FynQJpLoyzJmzM=
+X-Gm-Gg: AfdE7cn34NFXxrEteJ+XUFiGb/g3Z7Gf8Tvf/dl30KxE8ZmMhRTZPhmthmVxg1wf5NB
+ eTqqS57t5hu4JJ/o4xkog7qRcrPtl/KaecptieFnU2SBvjlU69zGw8vmQ8+GMM2UDxemvARnpSg
+ kDV2EKDzxvG1XY7slq63xJ/bXEtVuALPAwq3re4iR+PlBrvyngcCTJZNBS5Oc91XwQrMO0zIURN
+ w7UqnPJfW06rs26dNtJI1bM+nRfMynOrJ6Sh9yTnUPsVolvMKd1h9mjKEbCcTiLRmIG89TFsjAx
+ 1yMunWvVLhENQQIN/Nd7k5qzhGFCCFXidj2C7yGY3IA6RHWCr5Tc9jaIhqVLEwC3ezkXOr9Txcv
+ ETiCmqDhmjpFhbZPFVm/dfgsmWHLa4MN0bLJfmaor6GeYFv8pMPNCoUtazqD/Hw8suF7gFWOc1W
+ OxHA==
+X-Received: by 2002:a05:6214:d62:b0:8ef:33aa:94d7 with SMTP id
+ 6a1803df08f44-8f74c3a8fc4mr1168816d6.40.1783098688828; Fri, 03 Jul 2026
+ 10:11:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-revert-sysreset-v2-1-ac999d2ff82f@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNyw6CMBBFf4XM2pq28hBX/odhUctF6gLMTCUSw
- r9bcO3yJOeeu5CAA4Qu2UKMKUgYhwT2kJHv3fCACm1istqWutJWJQkclczCEESVF1XtkBfnzoL
- S6sXowmcv3pofy/v+hI9bZjP6IHHkeb+czOb9r09GaVXVVntTOtOd3NX3YJ6PLahZ1/ULd2/fv
- sAAAAA=
-X-Change-ID: 20260702-revert-sysreset-4579ae458f2e
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Luca Weiss <luca.weiss@fairphone.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.15-dev-47773
-X-Infomaniak-Routing: alpha
+References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
+ <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
+ <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
+ <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
+ <CAFLszThAqVjZ0Jd5kdB5q=bhGTNpAeHw3WXpUHnFQ_OH_KmXLA@mail.gmail.com>
+ <6d0f3078-2ba8-474c-9a1f-481eeb7f47bf@cherry.de>
+ <CAFLszTi+4s51HtaQrgBLEsOzoCjtZ+CGdvqBm4B9_fj-rpKqwg@mail.gmail.com>
+In-Reply-To: <CAFLszTi+4s51HtaQrgBLEsOzoCjtZ+CGdvqBm4B9_fj-rpKqwg@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 3 Jul 2026 18:11:15 +0100
+X-Gm-Features: AVVi8CcqUKAvq736gNMjSfQ_CTS1wX-PwB5_5mD2ya3l-lw-Jzey9O4OHDaOBWI
+Message-ID: <CALeDE9OWeMs3peX8+4+i6iTmZn-EO2e+7s7q6S1yFaRUa0dksQ@mail.gmail.com>
+Subject: Re: U-Boot Concept Tree Proposal
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,331 +123,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Simon,
 
-This reverts:
-- commit e49c84f7bb7b ("doc: usage: cmd: reset: specify when the -edl
-  option is available")
-- commit 1076feb8a3f9 ("cmd: boot: fix edl being shown when not
-  supported")
-- commit 63c806ba0e12 ("qcom_defconfig: enable psci based sysreset")
-- commit ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command
-  documentation")
-- commit 32825eaddc37 ("sysreset: Implement PSCI based reset to EDL mode
-  for QCOM SoCs")
-- commit fcb48b89813b ("drivers: sysreset: Add sysreset op that can take
-  arguments")
+> > >>>>> Another difference is AI. I believe that AI is the next step on from
+> > >>>>> compilers, which also took a long time to produce good code and find
+> > >>>>> acceptance. The Concept tree welcomes (and encourages) high-quality AI
+> > >>>>> contributions and reviews. It accepts PRs and allows reviews on PRs or the
+> > >>>>> mailing list. It relies 99% on automated tests (sandbox, QEMU and labs) so
+> > >>>>> sets a high bar for testing. It uses a separate Gitlab instance for now and
+> > >>>>> of course uses a separate mailing list and Patchwork project to avoid
+> > >>>>> cluttering the main list. Concept runs an AI-powered cherry-picker so that
+> > >>>>> it keeps up with mainline. In no sense is it operated as a fork.
+> > >>>>
+> > >>>> I'm clearly against using AI for any of development or review work as it
+> > >>>> can't be fully trusted and will monopolize precious reviewers time reviewing
+> > >>>> AI code instead of reviewing legitimate contributions from individual and companies.
+> > >>>>
+> > >>>> Using AI for CI testing and regression testing could help if it doesn't add
+> > >>>> a burden for maintainers by reporting false positives.
+> > >>>
+> > >>> RIght, Tom has been very clear about this too, even suggesting that AI
+> > >>> is actually unethical. This is indeed one of my motivations for the
+> > >>> Concept tree.
+> > >>
+> > >> To avoid the scrutiny of using AI? If that's the case and you're
+> > >> intention I have further concerns.
+> > >
+> > > Not really the scrutiny...the more scrutiny the better, I think. But
+> > > if mainline is anti-AI then Concept can provide a place where people
+> > > can make use of it.
+> > >
+>
+> Thanks for taking the time to reply to this - it is a very important
+> but very quiet thread.
+>
+> >
+> > Tom has clearly communicated multiple times that AI is generally not
+> > welcome in U-Boot. So how is accepting AI contributions into Concept
+> > compatible with "Once features are landed and functional in Concept I
+> > hope that many will find their way to mainline"? Who's going to do the
+> > work? Who's going to take the legal liability of reworking AI-written
+> > code for submission to mainline? How is this going to address the main
+> > issue you're having of "code is not landing"? It's still not in mainline.
+>
+> U-Boot tends to follow Linux, so we'll see what U-Boot's policy turns
+> out to be in .rst format. I am hopeful that eventually more people
+> will see the cost/benefit ratio of AI in a different light. My
+> understanding is the policy will be addressed once the infra move is
+> finished. Linux requires disclosure, something I have worked hard to
+> do in Concept. The legal question is covered by Linux's policy too
+> [1]. I do understand that any new technology creates fans and
+> opponents, problems and opportunities. Some thoughts at [3]
+>
+> My approach has generally been to embrace change (and deal with the
+> fallout) rather than to resist it.
+>
+> >
+> > What I think will happen is "I cannot get this merged into mainline so
+> > I'm going to get it merged into Concept and then direct my users at
+> > that". And eventually, over time, everything from this Concept
+> > contributor and their users will only land in Concept and we won't even
+> > have it on mainline ML.
+>
+> I don't want to speak for Tom, but yes I can trace the genesis of
+> Concept to the increasing difficultly of getting things accepted,
+> particularly large things like bootstd and VBE. What do you suggest
+> instead of Concept?
+>
+> >
+> > You keep repeating Concept is not a fork, but I don't understand how it
+> > can NOT be one.
+>
+> Concept cherry-picks from mainline so that it stays up-to-date. So it
+> should be possible to grab a feature from Concept and apply it to
+> mainline without too many conflicts. A fork does not care about
+> mainline at all. This is a big and complex topic though, since
+> features build on each other (e.g. see the BLS thread [2] where the
+> Concept version builds on pxe_utils refactoring, making it hard to get
+> into mainline without several precursor series).
 
-There was a conflict reverting commit 63c806ba0e12 ("qcom_defconfig:
-enable psci based sysreset") due to commit 02ef1859b44f ("configs:
-Resync with savedefconfig"), but the conflict resolution was trivial.
+A fork of a project is where it diverges which a number of different
+features, there's lots of projects with forks where the forks cherry
+pick between each other and try and remain largely compatible. One
+example that comes to mind is Linux Foundation forked the Ubuntu LXD
+project to a project called Incus.
 
-The args support for the sysreset uclass contains a logic bug. The first
-sysreset device implementing the request_arg callback will consume the
-args, not support the specified arg and thus return -EPROTONOSUPPORT
-which will stop the iteration over all sysreset devices.
+> > Considering Concept is apparently going to be hosted on the same GitLab
+> > instance as mainline, I see this as potentially confusing people as to
+> > what it actually is.
+>
+> Yes it could be confusing...I'm open to ideas on how to handle that.
+>
+> > I still am pretty upset at the various articles you
+> > or AI in your behalf posted on the u-boot.org website claiming support
+> > for various features in U-Boot either "submitted" (nowhere to be seen on
+> > the ML) or not explicitly stating they are merged in a fork of U-Boot
+> > (Concept, that is).
+>
+> See above re fork. I am responsible for the articles, although Claude
+> and Gemini helped write most of them. I thought I was being quite
+> careful to label things as 'Concept', but I've just gone back through
+> and found a good number unfortunately did not. I've fixed those and
+> also updated the titles in about 20 cases too. Please let me know if
+> you see other problems.
+>
+> > That with the fact our official documentation used
+> > to be on docs.u-boot.org really made it look like (to me) we were behind
+> > this effort. We made the mistake of hosting the docs on a domain name we
+> > didn't (still don't?) control, I would like to avoid repeating the same
+> > mistake a different way by hosting a fork on the same instance as mainline.
+>
+> OK. Would a URL link to Concept be acceptable?
 
-This is an issue if one has multiple sysreset devices and each with
-support for different (valid) args. If a sysreset device implements a
--dummy argument and another -foo and a user calls reset -dummy from the
-U-Boot CLI, it'll depend on which sysreset device will be attempted
-first. If it is the one implementing -foo, it'll return it doesn't
-support the argument with -EPROTONOSUPPORT in which case the device
-implementing -dummy will never be attempted and instead we'll do a cold
-reset which is very likely not what's expected from the user.
+I don't think we have buy in from the community into the whole concept
+fork as it is to be actually discussing links as yet.
 
-Casey suggested[1] we revert this and start from scratch again with a
-different implementation instead.
+I think you need to answer the questions to the community about concept:
+1) Why are you holding the u-boot.org domain hostage over this
+2) Maybe you need to read back through the input from the community
+and revist what you think concept should be
 
-[1] https://lore.kernel.org/u-boot/77ff0f56-5c3b-42e7-bdd1-bf90296da900@linaro.org/
+I feel I was very clear, both on the community call when it was bought
+up, which lead to you starting this thread so I had assumed you
+understood that you had to get the community buy in.
 
-Acked-by: Casey Connolly <casey.connolly@linaro.org>
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Changes in v2:
-- squashed all reverts into one big patch, as suggested by Marek and Tom
-  on IRC,
-- added information about conflict during one revert in commit log,
-- added Acked-by from Casey,
-- Link to v1: https://patch.msgid.link/20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de
----
- cmd/boot.c                            |  6 -----
- configs/qcom_defconfig                |  2 --
- doc/usage/cmd/reset.rst               | 10 +-------
- drivers/firmware/psci.c               |  4 ----
- drivers/sysreset/Kconfig              | 15 ------------
- drivers/sysreset/Makefile             |  1 -
- drivers/sysreset/sysreset-uclass.c    | 37 ----------------------------
- drivers/sysreset/sysreset_qcom-psci.c | 45 -----------------------------------
- include/sysreset.h                    | 18 --------------
- 9 files changed, 1 insertion(+), 137 deletions(-)
+In the follow up private discussions about it after it was clear as a
+whole that the PLC was uncomfortable with a specific websiite (we
+don't plan on supporting forks, would we provide that feature for all
+forks?) for concept. I offered the idea of a custodians tree to allow
+you to develop and maintain the features that you were preparing for
+upstream in your concept tree to enable easier collaboration for those
+that wished to work with you on those specific features. Maybe I
+wasn't clear enough in my communications but it was never intended to
+be the location to host a fork.
 
-diff --git a/cmd/boot.c b/cmd/boot.c
-index 29cdf4a9a81a..23496cafdf5c 100644
---- a/cmd/boot.c
-+++ b/cmd/boot.c
-@@ -60,12 +60,6 @@ U_BOOT_CMD(
- 	reset, 2, 0,	do_reset,
- 	"Perform RESET of the CPU",
- 	"- cold boot without level specifier\n"
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--// All options handled by sysreset drivers via their sysreset_ops.request_arg callback
--#ifdef CONFIG_SYSRESET_QCOM_PSCI
--	"reset -edl - Boot to Emergency DownLoad mode\n"
--#endif
--#endif
- 	"reset -w - warm reset if implemented"
- );
- 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index d0d54ec5a70b..b0d0f51b1c02 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -133,8 +133,6 @@ CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
- CONFIG_SYSINFO_SMBIOS=y
--CONFIG_SYSRESET_CMD_RESET_ARGS=y
--CONFIG_SYSRESET_QCOM_PSCI=y
- CONFIG_SYSRESET_QCOM_PSHOLD=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
-index 79bc8b9deca5..78c9c8873bc9 100644
---- a/doc/usage/cmd/reset.rst
-+++ b/doc/usage/cmd/reset.rst
-@@ -11,9 +11,7 @@ Synopsis
- 
- ::
- 
--    reset
--    reset -w
--    reset -edl
-+    reset [-w]
- 
- Description
- -----------
-@@ -24,12 +22,6 @@ DDR and peripherals, on some boards also resets external PMIC.
- -w
-     Do WARM reset: reset CPU but keep peripheral/DDR/PMIC active.
- 
--All other options require CONFIG_SYSRESET_CMD_RESET_ARGS=y.
--
---edl
--    Boot to Emergency DownLoad mode on supported Qualcomm platforms. Unsupported
--    platforms will print an error message but the command will successfully
--    return (having done nothing). Requires CONFIG_SYSRESET_QCOM_PSCI=y.
- 
- Return value
- ------------
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index b6838a244d2b..2e3223e1c32a 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -186,10 +186,6 @@ static int psci_bind(struct udevice *dev)
- 					 NULL);
- 		if (ret)
- 			pr_debug("PSCI System Reset was not bound.\n");
--		if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
--		    device_bind_driver(dev, "qcom_psci-sysreset",
--				       "qcom_psci-sysreset", NULL))
--			pr_debug("QCOM PSCI System Reset was not bound.\n");
- 	}
- 
- 	/* From PSCI v1.0 onward we can discover services through ARM_SMCCC_FEATURE */
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 90f740f51d42..16ef434a8d9c 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -49,14 +49,6 @@ config SYSRESET_CMD_RESET
- 	help
- 	  Enable sysreset implementation of the reset command.
- 
--config SYSRESET_CMD_RESET_ARGS
--	bool "Enable reset command to take arguments"
--	help
--	  Pass on the arguments received by the 'reset' command to the
--	  sysreset driver(s). The sysreset driver(s) may make use of the
--	  additional arguments for implementing arch/board specific
--	  functionality.
--
- if CMD_POWEROFF
- 
- config SYSRESET_CMD_POWEROFF
-@@ -301,13 +293,6 @@ config SYSRESET_RAA215300
- 	help
- 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
- 
--config SYSRESET_QCOM_PSCI
--	bool "Support reset to EDL for Qualcomm SoCs via PSCI"
--	depends on ARM_SMCCC
--	help
--	  Add support for the reset to EDL (Emergency Download) on Qualcomm
--	  SoCs via PSCI.
--
- config SYSRESET_QCOM_PSHOLD
- 	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
- 	help
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index b5b99235b6ef..d18a5d523605 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -30,7 +30,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
- obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
--obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
- obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
- obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
- obj-$(CONFIG_SYSRESET_QEMU_VIRT_CTRL) += sysreset_qemu_virt_ctrl.o
-diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-index f25e09e9cd06..536ac7271427 100644
---- a/drivers/sysreset/sysreset-uclass.c
-+++ b/drivers/sysreset/sysreset-uclass.c
-@@ -32,18 +32,6 @@ int sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return ops->request(dev, type);
- }
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--int sysreset_request_arg(struct udevice *dev, int argc, char * const argv[])
--{
--	struct sysreset_ops *ops = sysreset_get_ops(dev);
--
--	if (!ops->request_arg)
--		return -ENOSYS;
--
--	return ops->request_arg(dev, argc, argv);
--}
--#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
--
- int sysreset_get_status(struct udevice *dev, char *buf, int size)
- {
- 	struct sysreset_ops *ops = sysreset_get_ops(dev);
-@@ -83,26 +71,6 @@ int sysreset_walk(enum sysreset_t type)
- 	return ret;
- }
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--int sysreset_walk_arg(int argc, char * const argv[])
--{
--	struct udevice *dev;
--	int ret = -ENOSYS;
--
--	while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
--		for (uclass_first_device(UCLASS_SYSRESET, &dev);
--		     dev;
--		     uclass_next_device(&dev)) {
--			ret = sysreset_request_arg(dev, argc, argv);
--			if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
--				break;
--		}
--	}
--
--	return ret;
--}
--#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
--
- int sysreset_get_last_walk(void)
- {
- 	struct udevice *dev;
-@@ -164,11 +132,6 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	printf("resetting ...\n");
- 	mdelay(100);
- 
--#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
--	if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
--		return 0;
--#endif
--
- 	sysreset_walk_halt(reset_type);
- 
- 	return 0;
-diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/sysreset_qcom-psci.c
-deleted file mode 100644
-index 3627bbf5c820..000000000000
---- a/drivers/sysreset/sysreset_qcom-psci.c
-+++ /dev/null
-@@ -1,45 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
-- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-- */
--
--#include <dm.h>
--#include <sysreset.h>
--#include <asm/system.h>
--#include <linux/errno.h>
--#include <linux/psci.h>
--#include <asm/psci.h>
--
--static int qcom_psci_sysreset_get_status(struct udevice *dev, char *buf, int size)
--{
--	return -EOPNOTSUPP;
--}
--
--static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
--					  char * const argv[])
--{
--	if (!strncasecmp(argv[1], "-edl", 4)) {
--		/* Supported in qcs9100, qcs8300, sc7280, qcs615 */
--		if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
--							ARM_PSCI_RET_SUCCESS) {
--			psci_system_reset2(0, 1);
--			return -EINPROGRESS;
--		}
--		printf("PSCI SYSTEM_RESET2 not supported\n");
--	}
--
--	return -EPROTONOSUPPORT;
--}
--
--static struct sysreset_ops qcom_psci_sysreset_ops = {
--	.request_arg = qcom_psci_sysreset_request_arg,
--	.get_status = qcom_psci_sysreset_get_status,
--};
--
--U_BOOT_DRIVER(qcom_psci_sysreset) = {
--	.name = "qcom_psci-sysreset",
--	.id = UCLASS_SYSRESET,
--	.ops = &qcom_psci_sysreset_ops,
--	.flags = DM_FLAG_PRE_RELOC,
--};
-diff --git a/include/sysreset.h b/include/sysreset.h
-index d1cc9ebc542a..ff20abdeed3c 100644
---- a/include/sysreset.h
-+++ b/include/sysreset.h
-@@ -43,24 +43,6 @@ struct sysreset_ops {
- 	 * (in which case this method will not actually return)
- 	 */
- 	int (*request)(struct udevice *dev, enum sysreset_t type);
--
--	/**
--	 * @request_arg: Reset handler implementations that might need to process
--	 *		 arguments given to the 'reset' command.
--	 *
--	 * Note that this function may return before the reset takes effect.
--	 *
--	 * @dev:	Device to be used for system reset
--	 * @argc:	No. of items in @argv
--	 * @argv:	Arguments given to 'reset' command
--	 * Return:
--	 * -EINPROGRESS		if the reset has started and will complete soon
--	 * -EPROTONOSUPPORT	if not supported by this device
--	 * 0			if the reset has already happened
--	 * (in which case this method will not actually return)
--	 */
--	int (*request_arg)(struct udevice *dev, int argc, char * const argv[]);
--
- 	/**
- 	 * @get_status:	get printable reset status information
- 	 *
+So I think you need to revist what the idea of concept actually is and
+come back to the community with an adjusted proposal.
 
----
-base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
-change-id: 20260702-revert-sysreset-4579ae458f2e
+First though, I repeat again, would you please explain to the
+community why you are holding the u-boot.oirg domain hostage to try
+and force the PLC to accept an idea that we have been explicit about
+the need to get the community to buy into this "concept". I think the
+community deserves an answer.
 
-Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+> > U-Boot has friction also because we don't have enough reviewers or
+> > maintainers compared to the number of contributors. I don't see how you
+> > plan on addressing that by maintaining Concept by yourself (with an AI
+> > I'm assuming).
+> > I appreciate you're possibly one of the most if not the most active
+> > reviewer on the ML and that there's not much more you can do to improve
+> > the situation aside from recruiting more people to review.
+>
+> Yes I have generally been the most active reviewer over the last 10
+> years or so, although sometimes I have burnout and stop.
+>
+> Here's how people become reviewers, IMO:
+>
+> Step 1: Punter has a problem, debugs it and conceives a fix / feature
+> to resolve it
+> Step 2: Punter sends a patch or short series
 
+I'm not sure it's appropriate to call our developers and contributors
+"Punters" [1] please be respectful of people.
+
+> Step 3a: People review the code and Tom accepts some version of it
+> Step 3b: Patch is rejected, or people are mean or dismissive, or don't
+> understand the problem, or the effort gets too great (punter exits
+> here and goes to write his own firmware in Rust :-)
+> Step 5: Punter sees a related patch from someone else and decides to
+> reply with some thoughts
+> Step 6: Punter starts getting interested in more areas of U-Boot,
+> sending patches and reviewing, etc.
+
+I think going from a single patch to a firmware written in rust is a
+bit of a fanciful stretch.
+
+From experience people involved in the project review things when:
+1) They know the topic or the hardware
+2) Are interested in the features or functionality provided
+3) Are a maintainer of a device or subsystem
+4) Wish to assist
+5) they have hardware they can test on
+6) they wish to scratch an iitch.
+
+Regards,
+Peter
+
+[1] https://www.urbandictionary.com/define.php?term=punter
