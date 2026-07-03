@@ -4,136 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FFD6C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE28C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2053841F2;
-	Fri,  3 Jul 2026 09:51:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 683DB841F2;
+	Fri,  3 Jul 2026 09:59:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QLX2iyJp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OLBCXxbW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC86C843B6; Fri,  3 Jul 2026 09:51:34 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E9532849F3; Fri,  3 Jul 2026 03:49:56 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD08D8407E
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 09:51:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E4FB84857
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e3/moktllexBi7cYlOZOrQ5UFY9Pu4aLyUeYJz9yYl0iVw7nnOgfKIgbAIzz6koE/LB1y97kPw2J2rRUausn9qGNQfH9ePv8b4gew32l641B3W50BI+I1DephPzTvoteF3PynAi9q1qGzcnN7yy1Q1xZM1wDT8cAkc8Y9lRnuexZcQjLLkdgC+5rzQPn5yfbgQPlKGHe7yxZog8WYopaU3J77oP36LdJ4UgjjEGWxoHg9LiviopGwMS706SO6Bwlf5G37/CuIJW+AveS6+y4W0d7MpCDPe3qSn4WYT/k3ALutW69yrr6QxNSRg68hl7cgEjhJhRFguBYjFFBLJyfKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GR3/YFZY5lAUWzSUgZfX6QroLJZkJTRBam+G0d5aJxk=;
- b=m+u7LEiPKn5KMUf/Ki0SnI2QedcnTj4HzNNiMW51ewWcC5agxlOZOswPnB84dAJLDKWTmlOSfUVDwyLPrdM9+zjMg9TnIyAM3iztSi5iHMlSeCKkZV1g5L/03PDFo7XAgF2ZMVn++nzMJCHtTdjEqPj817vMJmehUcaEc/UKDCwvJnxlNjcl5NwCqY6I58z0nXLNXKeILSAvUItb5HYNQi2ZgjdrLFfR3X/4UgNcGK71QgoZp1jaJGUyvMcUgAFUjh2Kx45gnMbOfQK53vpR2m96OVoeTtTpVKZuYu9U4gucYEiJhKrGWXSBwbJje9IMSvUpSBcLtKzZJPBHt0qmLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GR3/YFZY5lAUWzSUgZfX6QroLJZkJTRBam+G0d5aJxk=;
- b=QLX2iyJphvgCJFmHlhf48dKNT3126y27YBr90VnX4EI2SAwQAC8z8jaRr4jmif/T3aqnEeuvRmwmb2jrXhp4tsVSKK92C7vkh/PAUxepCj/SwD8PbyZ/CMnejEr0R/cT0mirJ6LQ/QIOuk37JszepbkwjncubyxDTZFlmKDFi6nTpxM50cmPxcanMaqLvcMjzPUzCfyc4ByINiRBDF1egog6/5hr+WAh41Ou4ZIl6PxgLd7usfi2s3us1HE9AMzX2jlXxfSQNF4Zn56x/vTsjzD+FfIPZXCAx5CJfzoQL08OIuvjg9oXbT2PEZsBEOW/229atQ5YAgK6gCPVIwHMyQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by PAXPR04MB8687.eurprd04.prod.outlook.com (2603:10a6:102:21e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Fri, 3 Jul
- 2026 07:51:29 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.008; Fri, 3 Jul 2026
- 07:51:29 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Fri, 03 Jul 2026 15:50:19 +0800
-Subject: [PATCH] net: Drop unnecessary device_set_name
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-497d294e0e5so33168b6e.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:49:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783043392; x=1783648192; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=kJj1q3k3NrH2/6P6Qrt35a8d5b978GzZ9ceYPN5RhkA=;
+ b=OLBCXxbWzrFMMcqnz1X7h4BPRL/E6AhjryuWfnuHSDpupYiHmhPLzthU1QfhsUbWBa
+ JZrRlnSi8JtdQoh3vwaYyix8WcxvV+8IhjWiQvnwWI98nt485tTCuFU5EeGq6/m2I2TG
+ ue24Zvp5YrycHtKbwv9Opu7WrTNS5ieInNTHNu8/FMNtgKl1y2Q+EIySQZG4rccKjucJ
+ bYGvng8b19rZ5K1530eEZw9vvnpPd107vWx0ANxxaslAHD5ol1N0uc/1iFa25SVhzudK
+ JGDSWF5oR0dLeWfbCILX693yM5m0OzUegZEm/HfZU1WRSDvj00r4Gckp8vQFwa0K71Sz
+ M4mA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783043392; x=1783648192;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=kJj1q3k3NrH2/6P6Qrt35a8d5b978GzZ9ceYPN5RhkA=;
+ b=c+lRbYfmc5yCWzc5pRoZIgvDgqmtslidAXb8XeOoTm3dIgH9CAlPuao1lOSZOpLSFu
+ 2YLVvzB4lXB5wORSV8O+VPZs+VgCFqz7rDsEEnlJlW/J/601zdtrI5dL1KK1hsJDbHEl
+ otXFYrIwLHI1ac1yGxfWAW7A0WvuvPCNB+YV+NsB4J92KJ6DvckHZ37Gk0DBDv46lsgS
+ yfSeuOOk7BR7XhGSbOSUFSNNFA4e0lbAj4xfgcE7XqqCpZIi+I5cfvp6GS0INY1ZJ1tY
+ RBjhrzxanQAy7SB8aw5uMmlCFTi6SmRdCqwPpY/u0J1sRE/jqK+hPOTP82qOR14/BeIj
+ ZA2w==
+X-Gm-Message-State: AOJu0YxskgzYTo/8kimA80ZiMFVbzeWSTMnX/v3iSBqhHLimPxYaKe67
+ 4hObGyYRsE06V9hjE1pdbcs1TspAr2v9LG1fhkQRQgKNXTLuNAqkN78g
+X-Gm-Gg: AfdE7ckTquUXSNptthdyOEpKq5kYP8oL8y9bf+HYpCwxZxWGeuu2p2T60QSycAVfoyq
+ PJRBYSaET0b/l+chwjHoEcuc7eCW+DUu9f19AMI3L2z313NY97DmGujj3+ncyAWwX12yrlnzXXe
+ 0zQCsS0Dnm58wDtF0Cqz75mXMcJqJRzy27EcJJGCSAc93MxpbqnhdV4c8wxp4OB0+8s13PQuS/C
+ pSw8LQmhFxYZG3P+1P0emezucqhsSgcbdy8acRRj66kTML086Z3PkY9aNqi5SKeArvx6ZUcFDKo
+ +Xdnt95hnKyoU9bJR7Gj8VF08G4WJQtn52CBpSzM9LvOYRR07D9xdQk5XP4bRG19DVR4H0Mme7F
+ pgZS7ljdPxxNxkic8ge8cmbYxzWXZaKEF6/v6z5nYZhoq3KYUMREWvwTyVwaydZgDUGkMKeHvQX
+ gzPKehM/0uWKeMT18PePPkR3oBgLsgm26LjbC11McgdQcw1e7BSJS05SgsZGbw9aVFQermbzwqT
+ 9L8UE14Xg+y2GrvfkHtVtDKZ5OJh+FI2xSTGYyXGD3+ZYrOUqGZH1izW/t9n0ErgWW9bg==
+X-Received: by 2002:a05:6808:87d1:b0:495:faa4:a742 with SMTP id
+ 5614622812f47-4962d90f383mr5455317b6e.41.1783043392170; 
+ Thu, 02 Jul 2026 18:49:52 -0700 (PDT)
+Received: from [127.0.1.1] (97-118-25-163.hlrn.qwest.net. [97.118.25.163])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jul 2026 18:49:51 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v2 00/10] crypto: allwinner: enable sun8i-ce FIT crypto
+Date: Thu, 02 Jul 2026 19:49:45 -0600
+Message-Id: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-net-v1-1-3c2c7d6323c1@nxp.com>
-X-B4-Tracking: v=1; b=H4sIALppR2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcwNj3bzUEt1ES0uTNKPkJGMTizQloMqCotS0zAqwKdGxEH5xaVJWanI
- JSKtSbS0A0essLmcAAAA=
-X-Change-ID: 20260703-net-a994f2cb348f
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
-Cc: Peng Fan <peng.fan@nxp.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM3QpAQBBA4VfRXJtak6y8ilwwBqP8tIuUvLvF5
+ bn4zgVenIqHIrrAyaFelzkExRHwUM+9oLahgQxlxhpCvzeTbsiCv8SDMK2tbRJrOMsZglyddHp
+ +17L6O7BReHtXcN8PsUnQuXcAAAA=
+X-Change-ID: 20260702-submit-ce-series-v2-4a77b170c68c
+To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Ion Agorria <ion@agorria.com>
+Cc: James Hilliard <james.hilliard1@gmail.com>, 
+ Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Randolph Sapp <rs@ti.com>, 
+ Heiko Schocher <hs@nabladev.com>, Alexey Charkov <alchark@gmail.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Anshul Dalal <anshuld@ti.com>, Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
+ Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>, 
+ Michael Walle <mwalle@kernel.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, E Shattow <e@freeshell.de>, 
+ Enric Balletbo i Serra <eballetbo@kernel.org>, 
+ Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Thierry Reding <treding@nvidia.com>, Francois Berder <fberder@outlook.fr>, 
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Jerome Forissier <jerome.forissier@arm.com>
 X-Mailer: b4 0.15.2
-X-ClientProxiedBy: MA5PR01CA0184.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1ac::10) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|PAXPR04MB8687:EE_
-X-MS-Office365-Filtering-Correlation-Id: a3f16aee-e8d2-4da6-67c3-08ded8d7e3ce
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|19092799006|376014|1800799024|366016|56012099006|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info: XMFqdLkyl8EYEThWTsOtH1q5gYn9bkANAR8kaI+4JGEh/dy4xeNHKWma+epenpEJwJu03mmN10Tu/pioODGD/eWPVbIHLG0pHuTOOD1NDNhf/egbU+7zYhcwjkV/O/Z3XgdRiLuCpPMU6/XJAmz1AkM8+kcvC39MHqKqIQowQJNcDAYB9pbzRMwxlFP7AAiVmrNwW6FMlC6dEvvOf6HuQRzGrqGiRp4GY9Ugtv/d5N1mQx/MTh4RRk4S2HAo3W4a5VaSRLI9eF/dQXOX9rotTsebazon5maovTC9PbXq1zStMM7mAiJV2EWgxzEuZgEcJZsja9M16MHv+xTlms5e9X91Zwdv1AS0dfdHMB2F+9D/2YsCX2CipZQhNpIq0c1N0AbukQ1xd4WV04I9YcTXLlp5x40XTlqKpsHM8R+nKZym8ImtQnsbDIhblNco96JqFXfEsz9XA/ZZdxBxhtqJlbOk7svSNCjLgE4fTCUQnedd3Gkht9LEB0+JbMOHZlxbCnz3LBDkaStnZy5addBiFL/NyNh0rxsqCdoUp1k6JV2gNdM23CxO05Y4HvnckpC89wxGCxClgyHopOcEAuHzn/BHw9RBGRV764HLKGW9bvnEnNAMrO7mO6qC+2PXNookXC7lo7gyEbXDzVuZJcUs3PHBb3TcIWd61L48Yap+DSo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(19092799006)(376014)(1800799024)(366016)(56012099006)(11063799006)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UFh4N1ovUWpWaHQxcVlSb0cxVklCSjFwYTRwQjhRdWlVRTh0UGZNNVRNNkI1?=
- =?utf-8?B?VHp1VTc3TTJoTUlSanlPTGUvSFhjeUpXYWpkWDVmYlRqWE9KUzdGcjg4WG1n?=
- =?utf-8?B?WGU5WUVacEp2UURoNDVRS2J4OGczZ3lnTkFERW1ON1Y1d2lJZ0VmMDQ4ZEtT?=
- =?utf-8?B?UHByRkdDeXBTYnYrL2pBRkpjKytzaVpqUnhSb2dPUEdpQzNuOHQwL29xZWRD?=
- =?utf-8?B?M3YxOU8wRURVc1pjNkFBK1VqazE2Z1BsZkYvVW1xOTNCYmpNSERyZ3JhcnYy?=
- =?utf-8?B?K1EwbExUTGs5Yy85SHoyYXFBOUhrMWUrc01kSlpEdGUzY21kY01jTVYwQ2FQ?=
- =?utf-8?B?WStHck4yU0VITjErYjBhQ0dObkk2cFhzcHFjd05GdGlQcW4yWVlsOHRQdjVU?=
- =?utf-8?B?TTMwMi9Id2twS3RraVFWZkdPZCtrNXVOZDdSUTRIcXpHQ3FsZ1NVZm0zWmtJ?=
- =?utf-8?B?UmFJaUZzcFMzYzNNRUc1ZjRoaDZoUEJ5aTJQcXNVMEZ3YjJTQzB2dDJ6eDhP?=
- =?utf-8?B?bC9NUmlia0cvdm5lc3U5bllNOEVjeWwxb00xVk5mZ0M1RTVTdzAvSm51cWJl?=
- =?utf-8?B?V2hOYTJILytTaG4weS9DRmRuVFJCZEZTTXVDbGZyTEx5K09oZkVUcERucDBn?=
- =?utf-8?B?bTBhVkxvU1NvUTJ3VndMbWpqU2s1b3o2cDc0TlB3dGVVTXR4cHU3Q0xVMTF3?=
- =?utf-8?B?RGhwSzZ4Sk9xTW5kZU1XcDdrTUdhZjBlVkttV3FSeENBQ0tGY291MDZkdkZa?=
- =?utf-8?B?RDY4OGFSVWVlOWZWQUZVQ0YvbEtRRnZma1BOSzlPM2ttaUhCbzBzZHRnbEY1?=
- =?utf-8?B?T1BseHdrL3ZNVFA5ODN1NVFhMDZXaWZSM0xmOXpHQ2tUdlBXdGMrRmdEcDFY?=
- =?utf-8?B?Q21xRUREYUhSMHVpYmRFdXJlMTZxbVZiWDhPWitDN1pQQndHZkxYNVA4ZG43?=
- =?utf-8?B?bmVWVStwV2hneXpUa3JFU1JuYTFYb1ltYU1tdCtZcWhGY3Bxbjc2Y1dGd0ZT?=
- =?utf-8?B?ODk4T1VZUllJdG1GbDN6QW13TlI3L0oyR2pnTVZYaERZYXJINzVHL1lQNjZL?=
- =?utf-8?B?c292ME9HUXdLT3AvT09YeGJnTVJpY3ZrR0g4M3Zod0hsd3d0a0gxNmFvK29a?=
- =?utf-8?B?M0t5RUcxeUx5UWloNEk0dlgzMzVpdGMzT0ZzM1hHdlNIN3BSUTRYaEs1cXE4?=
- =?utf-8?B?bWFjWXQyZ080Vks4ODNUY0lhWVN1Mmo4cklUMmNYZ3VGRkpWYU4rNDlLdzRm?=
- =?utf-8?B?OVA1YWlFRkJBSDdoMmkwVEROME04bERYNmZXdlN4SWtsa1pYeFFTbUZIUk5k?=
- =?utf-8?B?Um41bU04dHdTS2ZlZWcyVXliOTg3TGVxK2lob0FGaVYxV0VMM0FGaTNRSVZS?=
- =?utf-8?B?Mm5EYVFIQmRkMGdUS09uQkV6b281cmhvc1FsM1BPaVBxWHM3N1NZVGVaVjVT?=
- =?utf-8?B?dkJYVUJ5aDNCSFppdUhiMVN2bFdoZGlwdzhidUpTYUdmT1pOR2N1cWJiM1Ni?=
- =?utf-8?B?YmtDcFVqWVBNdzZMMWNpOEF4ZVJRSktUTVZ6RFJuSGJHeXdGVnl3ek5GajRr?=
- =?utf-8?B?NHMralUwRGxvS1N1eGNZeDQxNE1QelBRbnlYNFNLMkhNaTRxQ3ZCVHJsRk55?=
- =?utf-8?B?QUlQeVcrNFByODE0QUNSWWwycjBXWWZWb0dzWW53dXZiNitORGpYRzNiUElO?=
- =?utf-8?B?QlhYS3BIRGQxNkNhUzdNbCsyeUs4Wlh1dDZDWXZiNnNGY1pyaTBqSm5mWXlO?=
- =?utf-8?B?QjhDcVNIcGppcmU2Y1JtWU05SWRjc1dsSHlTL3M3a21lV1hRYXNJRlJpcXZF?=
- =?utf-8?B?b0JwaUxSczBjQWRZM2wreGFjY0p2dGR1aUVMaVZvRm9NSTBmZ3pTMEFxcXhB?=
- =?utf-8?B?MFpWeUtqUjE3RS8zV3BwRWpseUhRdU5XWFFqcVpKZXRsMmpncHYydXJTMzNN?=
- =?utf-8?B?d056dHBpSmowd05INEZnQkpMNTZJOE51aHJZK2V3ZmVabS8ra0ljZE9lTkNM?=
- =?utf-8?B?RVRXbU5ZTVV1dXhHUmxuRW5iSDg0eFgxUExlMkxOcVh2TlFVSXJtaWlRK0c4?=
- =?utf-8?B?VGExUVBtdGxSbUpHZGptSlpkVlhzLyt1YXdRQnQra0g2dkw5TFZWZnNVVXlD?=
- =?utf-8?B?VExsbjBSaDUwYUViVGluQllCSmc1bDF5TCt6NWxDRHlGSkplakRYRkVIMG5O?=
- =?utf-8?B?WjA2ck1PMm82YVA3L0RsdTBvUStHWUtENkRwdlJ1bDFUUmFteXNXb21ObWlZ?=
- =?utf-8?B?dm9VNTRDVTg5d0FDNFJuaVo5MVQ4NFhHR2YwWVdmekJYK016RmNObjlPQ1B1?=
- =?utf-8?B?L1M3c2xuaEdRTjRYRVFIaFdnbk9NREl4VzYxYlhueDYzL3F0NE01WXNuL25i?=
- =?utf-8?Q?JbU2lzzaPGcg7daWI9htlkSmnaZMp3/pJVnmr?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3f16aee-e8d2-4da6-67c3-08ded8d7e3ce
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 07:51:28.9188 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: anEYg3TQNg4SFIlklDbEZ1r5jKCUYhL3KQsIE9JBVtAyiXzColTQEfd9wmiM7rDhft+1NaAXU29bxJ0lgCxbymfcGmEDUbFjiMHeIwn5FUHqHwxJEzi7zgwGSvCbELEL
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8687
+X-Mailman-Approved-At: Fri, 03 Jul 2026 09:59:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,123 +130,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+This series enables Allwinner Crypto Engine backed FIT decryption and
+FIT signature/hash validation for secure-boot flows on H6/H616-class
+boards, covering both SPL and U-Boot proper.
 
-When device was created, it already has a name assigned. There is
-no need to alloc space for name and set it with same device name.
+The purpose is to use CE-backed AES for encrypted FIT payloads on H6/H616
+and CE-backed ECDSA validation where the CE ECC engine is available,
+currently H616, instead of relying only on software crypto paths.
 
-Cleanup the code to avoid unnecessary device_set_name.
+At a high level this adds:
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
+  - SPL driver-model crypto plumbing for AES and hash providers.
+  - FIT decrypt-to-buffer support and SPL FIT cipher support, so SPL can
+    decrypt an encrypted U-Boot proper FIT without allocating another full
+    payload buffer.
+  - A shared sun8i-ce parent driver with AES and hash children for H6/H616.
+  - An H616 ECDSA child for CE-backed FIT signature validation, plus common
+    ECDSA curve-size and key-encoding fixes for secp224r1, prime256v1,
+    secp384r1 and secp521r1.
+
+The AES child supports software-provided AES-128/192/256 keys in ECB and
+CBC modes. The hash child supports the CE one-shot MD5/SHA1/SHA256/SHA384/
+SHA512 methods used by FIT verification. The ECDSA child exposes the H616
+CE ECC verifier through UCLASS_ECDSA.
+
+Tested flows include:
+
+  - SPL loading an encrypted and signed U-Boot proper FIT with CE-backed
+    AES decryption, hash verification and ECDSA signature verification.
+  - U-Boot proper loading an encrypted and signed FIT with CE-backed AES
+    decryption, hash verification and ECDSA signature verification.
+  - U-Boot proper AES command paths using the DM AES provider.
+  - CE ECDSA verification with secp224r1, prime256v1, secp384r1 and
+    secp521r1 FIT signatures.
+
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/net/dm9000x.c    | 6 ------
- drivers/net/ftmac100.c   | 6 ------
- drivers/net/ks8851_mll.c | 6 ------
- drivers/net/smc911x.c    | 6 ------
- 4 files changed, 24 deletions(-)
+Changes v1 -> v2:
+  - Add a cover letter for the series  (suggested by Peter Robinson)
+  - Describe the purpose and supported devices  (suggested by Peter Robinson)
+  - Limit AES command patch to argv fix  (suggested by Simon Glass)
+  - Add Fixes tag for the AES command bug  (suggested by Simon Glass)
+  - Select SPL_CRYPTO from SPL_DM_AES  (suggested by Simon Glass)
+  - Add SPL_DM_HASH for SPL FIT verification through UCLASS_HASH
+  - Let AES providers choose the software-provided key slot
+  - Return -ENOSYS without an SPL decrypt provider  (suggested by Simon Glass)
+  - Explain FIT cipher validation  (suggested by Simon Glass)
+  - Explain host-tool decrypt handling  (suggested by Simon Glass)
+  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
+  - Decrypt external SPL FIT payloads in place  (suggested by Simon Glass)
+  - Skip self-memmove after direct decrypt  (suggested by Simon Glass)
+  - Add Simon's Reviewed-by tag to the sunxi CE clock/reset patch
+  - Explain the RSA impact of fdt_add_bignum()  (suggested by Simon Glass)
+  - Document ECDSA public key byte-array widths  (suggested by Simon Glass)
+  - Document ecdsa_curve_size()  (suggested by Simon Glass)
+  - Keep fdt_add_bignum() errors in libfdt space  (suggested by Simon Glass)
+  - Explain the SPL_DM dependency for SPL_ECDSA_VERIFY
+  - Document the ECDSA input-buffer layout  (suggested by Simon Glass)
+  - Document ECC byte-sized task length  (suggested by Simon Glass)
+  - Make CE ECDSA curves individually selectable  (suggested by Simon Glass)
+  - Use neutral wording for the CE ECDSA buffer-layout comments
+  - Reject oversized bit-length hash tasks  (suggested by Simon Glass)
+  - Feed the watchdog while polling CE completion  (suggested by Simon Glass)
+  - Drop the post-operation schedule() call  (suggested by Simon Glass)
+  - Bounce only word-unaligned hash input
 
-diff --git a/drivers/net/dm9000x.c b/drivers/net/dm9000x.c
-index 9e17f0b9c28..53225979b66 100644
---- a/drivers/net/dm9000x.c
-+++ b/drivers/net/dm9000x.c
-@@ -638,11 +638,6 @@ static int dm9000_read_rom_hwaddr(struct udevice *dev)
- 	return !is_valid_ethaddr(pdata->enetaddr);
- }
- 
--static int dm9000_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int dm9000_of_to_plat(struct udevice *dev)
- {
- 	struct dm9000_priv *db = dev_get_priv(dev);
-@@ -673,7 +668,6 @@ U_BOOT_DRIVER(dm9000) = {
- 	.name		= "eth_dm9000",
- 	.id		= UCLASS_ETH,
- 	.of_match	= dm9000_ids,
--	.bind		= dm9000_bind,
- 	.of_to_plat = dm9000_of_to_plat,
- 	.ops		= &dm9000_ops,
- 	.priv_auto	= sizeof(struct dm9000_priv),
-diff --git a/drivers/net/ftmac100.c b/drivers/net/ftmac100.c
-index fa0b3dbb6d1..d9826178e82 100644
---- a/drivers/net/ftmac100.c
-+++ b/drivers/net/ftmac100.c
-@@ -429,11 +429,6 @@ static int ftmac100_remove(struct udevice *dev)
- 	return 0;
- }
- 
--static int ftmac100_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static const struct eth_ops ftmac100_ops = {
- 	.start	= ftmac100_start,
- 	.send	= ftmac100_send,
-@@ -451,7 +446,6 @@ U_BOOT_DRIVER(ftmac100) = {
- 	.name	= "ftmac100",
- 	.id	= UCLASS_ETH,
- 	.of_match = ftmac100_ids,
--	.bind	= ftmac100_bind,
- 	.of_to_plat = ftmac100_of_to_plat,
- 	.probe	= ftmac100_probe,
- 	.remove = ftmac100_remove,
-diff --git a/drivers/net/ks8851_mll.c b/drivers/net/ks8851_mll.c
-index 2c956154d09..c2f87d4222b 100644
---- a/drivers/net/ks8851_mll.c
-+++ b/drivers/net/ks8851_mll.c
-@@ -571,11 +571,6 @@ static int ks8851_read_rom_hwaddr(struct udevice *dev)
- 	return !is_valid_ethaddr(pdata->enetaddr);
- }
- 
--static int ks8851_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int ks8851_probe(struct udevice *dev)
- {
- 	struct ks_net *ks = dev_get_priv(dev);
-@@ -615,7 +610,6 @@ U_BOOT_DRIVER(ks8851) = {
- 	.name		= "eth_ks8851",
- 	.id		= UCLASS_ETH,
- 	.of_match	= ks8851_ids,
--	.bind		= ks8851_bind,
- 	.of_to_plat = ks8851_of_to_plat,
- 	.probe		= ks8851_probe,
- 	.ops		= &ks8851_ops,
-diff --git a/drivers/net/smc911x.c b/drivers/net/smc911x.c
-index f39ba40944f..2835eb45856 100644
---- a/drivers/net/smc911x.c
-+++ b/drivers/net/smc911x.c
-@@ -431,11 +431,6 @@ static int smc911x_read_rom_hwaddr(struct udevice *dev)
- 	return 0;
- }
- 
--static int smc911x_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int smc911x_probe(struct udevice *dev)
- {
- 	struct smc911x_priv *priv = dev_get_priv(dev);
-@@ -487,7 +482,6 @@ U_BOOT_DRIVER(smc911x) = {
- 	.name		= "eth_smc911x",
- 	.id		= UCLASS_ETH,
- 	.of_match	= smc911x_ids,
--	.bind		= smc911x_bind,
- 	.of_to_plat = smc911x_of_to_plat,
- 	.probe		= smc911x_probe,
- 	.ops		= &smc911x_ops,
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Ion Agorria <ion@agorria.com>
+To: u-boot@lists.denx.de
+Cc: Chen-Yu Tsai <wens@kernel.org>
+Cc: Samuel Holland <samuel@sholland.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: James Hilliard <james.hilliard1@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Aristo Chen <aristo.chen@canonical.com>
+Cc: Anton Ivanov <anton@binarly.io>
+Cc: Daniel Golle <daniel@makrotopia.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Cc: Randolph Sapp <rs@ti.com>
+Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Alexey Charkov <alchark@gmail.com>
+Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Francesco Valla <francesco@valla.it>
+Cc: Michael Walle <mwalle@kernel.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Richard Genoud <richard.genoud@bootlin.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Cc: E Shattow <e@freeshell.de>
+Cc: Enric Balletbo i Serra <eballetbo@kernel.org>
+Cc: Lucas Dietrich <ld.adecy@gmail.com>
+Cc: David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>
+Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Francois Berder <fberder@outlook.fr>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Jerome Forissier <jerome.forissier@arm.com>
 
+---
+James Hilliard (10):
+      cmd: aes: fix DM operation handling
+      crypto: aes: allow DM AES in SPL
+      boot: image: add FIT decrypt-to-buffer helper
+      spl: fit: support encrypted payloads
+      clk: sunxi: add H6/H616 CE gates and reset
+      lib: ecdsa: support additional curve sizes
+      crypto: allwinner: add sun8i-ce AES driver
+      crypto: allwinner: add sun8i-ce ECDSA verifier
+      crypto: hash: allow DM hash in SPL
+      crypto: allwinner: add sun8i-ce hash driver
+
+ MAINTAINERS                                        |   1 +
+ boot/Kconfig                                       |   8 +
+ boot/image-cipher.c                                |  38 +-
+ boot/image-fit.c                                   |  97 +++--
+ cmd/aes.c                                          |   8 +-
+ common/spl/spl_fit.c                               |  68 +++-
+ doc/mkimage.1                                      |   3 +
+ doc/usage/fit/signature.rst                        |   9 +-
+ drivers/clk/sunxi/clk_h6.c                         |   5 +
+ drivers/clk/sunxi/clk_h616.c                       |   5 +
+ drivers/crypto/Kconfig                             |   2 +
+ drivers/crypto/Makefile                            |   1 +
+ drivers/crypto/aes/Kconfig                         |   8 +
+ drivers/crypto/aes/aes-sw.c                        |   6 +
+ drivers/crypto/aes/aes-uclass.c                    |  15 +
+ drivers/crypto/allwinner/Kconfig                   |   3 +
+ drivers/crypto/allwinner/Makefile                  |   3 +
+ drivers/crypto/allwinner/sun8i-ce/Kconfig          | 158 ++++++++
+ drivers/crypto/allwinner/sun8i-ce/Makefile         |   6 +
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c   | 413 ++++++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  | 408 +++++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 434 +++++++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c  | 298 ++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |  72 ++++
+ drivers/crypto/hash/Kconfig                        |  10 +
+ drivers/crypto/hash/Makefile                       |   2 +-
+ drivers/crypto/tegra/tegra_aes.c                   |   7 +
+ include/image.h                                    |  39 +-
+ include/u-boot/aes.h                               |  10 +
+ include/u-boot/ecdsa.h                             |  22 ++
+ include/u-boot/fdt-libcrypto.h                     |   6 +-
+ include/uboot_aes.h                                |  38 +-
+ lib/Makefile                                       |   2 +-
+ lib/aes/aes-decrypt.c                              | 108 ++++-
+ lib/ecdsa/Kconfig                                  |   2 +-
+ lib/ecdsa/ecdsa-libcrypto.c                        | 141 ++++---
+ lib/ecdsa/ecdsa-verify.c                           |  39 +-
+ lib/fdt-libcrypto.c                                |  60 +--
+ tools/image-sig-host.c                             |   7 +
+ 39 files changed, 2363 insertions(+), 199 deletions(-)
 ---
 base-commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
-change-id: 20260703-net-a994f2cb348f
+change-id: 20260702-submit-ce-series-v2-4a77b170c68c
 
 Best regards,
 --  
-Peng Fan <peng.fan@nxp.com>
+James Hilliard <james.hilliard1@gmail.com>
 
