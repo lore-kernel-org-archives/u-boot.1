@@ -4,66 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A87C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 13:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C0AC43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 13:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 182BB84AA1;
+	by phobos.denx.de (Postfix) with ESMTP id A6B2084AA6;
 	Fri,  3 Jul 2026 14:59:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tdznb4wd";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="jx9QsKhe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41372846A4; Fri,  3 Jul 2026 12:19:27 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id AC64F84979; Fri,  3 Jul 2026 13:42:54 +0200 (CEST)
+Received: from mail-4325.protonmail.ch (mail-4325.protonmail.ch [185.70.43.25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39AF7841F2
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 12:19:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 532858469D
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 13:42:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 7AA20C79ABE;
- Fri,  3 Jul 2026 10:19:36 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 9EBC660300;
- Fri,  3 Jul 2026 10:19:24 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4BDC8104C83DB; 
- Fri,  3 Jul 2026 12:19:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1783073964; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=eXFm1dhydNimOIaCa8dzKEa76edAEPMgHsZQjRr7R7M=;
- b=tdznb4wdHqH2FFfgsPk04SscmQpRwbcpZSKphBqZ8xAbrRk5G2TN1YhfK4d7gv6aO7RbOX
- +8Mr9tXwa3nGS2qg/q6IKDG0coxfgsk3y7z9p6asW09pyZHeEE2cyBZ46/5vDNUVDxVhzS
- Uv5rZF1Sq2f41kfgtt62oMByS/4jn3Q4N07FT0Jf0xziXFSf2VnueMYtYv0YDGjWAThFiC
- fW7wXb9jMDuEmSNUdLpUDj0a051zLENiuGGKRZ/rpqp6YX+SZlX7TK4WNwWr9ntWQqlhpu
- UiORm1acj7nWhdfsalaTd+duQynaTVYeTX+1x5LuEWPCYBmMB3XHDm8j/xTONQ==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: "Bastien Curutchet (DAVE.eu)" <bastien.curutchet@bootlin.com>
-Cc: u-boot@lists.denx.de,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Michal Simek <michal.simek@amd.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Michael Trimarchi
- <michael@amarulasolutions.com>,  Andrea Scian <andrea.scian@dave.eu>,  Tom
- Rini <trini@konsulko.com>,  Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: Re: [PATCH v3 6/6] mtd: rawnand: nand_base: Don't overwrite
- read/write_page_raw() for soft ECC
-In-Reply-To: <20260702-dave-upstream-nand-fixes-v3-6-3814352982ad@bootlin.com>
- (Bastien Curutchet's message of "Thu, 02 Jul 2026 15:08:46 +0200")
-References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
- <20260702-dave-upstream-nand-fixes-v3-6-3814352982ad@bootlin.com>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Fri, 03 Jul 2026 12:19:21 +0200
-Message-ID: <87qzlknzo6.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=r00tnomade@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1783078971; x=1783338171;
+ bh=UtfisIaAd0/Ms9W2AxEJyETtT2wVtYn6FEsu/OhuiDU=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=jx9QsKheg/OoCm1A9lCac95G54/OwFJB50pb5hl3sICyZFzZOqYMppcj6hMu+PJiH
+ fpBaTUwU90m9iCDWFRHXOM7JmSz74bGUtu13MSB8FH4iW9LxqU1mTYf6VWPMhwByk6
+ vdA7lhgT3uYfagHF96hO5GgT2AUVGDBLjdewyA1mgj3+OTyidMiCmDD8bVBf9Ruvy0
+ D3Je4gLnYNieBEjDwMA57Irg2D/Q2PXZE5H1cyGWeuLNHwRF+L9F9FUKTNvELhf6sy
+ EPigRucooUE7eJ2lR0CX3XCNJAEPWJStt2uq7SO2zT/mMhft0E73p9Juu0LYKbFksx
+ T6pAsi6oshrMQ==
+Date: Fri, 03 Jul 2026 11:42:47 +0000
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: r00tnomade <r00tnomade@proton.me>
+Cc: "trini@konsulko.com" <trini@konsulko.com>,
+ "alchark@flipper.net" <alchark@flipper.net>
+Subject: [PATCH] spi: handle spi-rx/tx-bus-width = 0 (no RX/TX line)
+Message-ID: <mwb-8utqeprHrcyYlJKRzVpdMfI457MmWgwqLdkvc5fFiSE43Y9wiz594Nzt2CRn4jUIZmc6F-KzD2pQuixCwkT2KPkZ_NajlkW8vEsCOrQ=@proton.me>
+Feedback-ID: 197191651:user:proton
+X-Pm-Message-ID: 25baf18822511a036ecc3c08561561a87a768d79
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Fri, 03 Jul 2026 14:59:42 +0200
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,26 +66,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 02/07/2026 at 15:08:46 +02, "Bastien Curutchet (DAVE.eu)" <bastien.curut=
-chet@bootlin.com> wrote:
-
-> On writes, the Zynq NAND controller needs a bit to be set in the address
-> register for the last 4 bytes sent. This is correctly handled by the
-> zynq_nand_write_page_raw() operation but the callback is overwritten
-> by the core when soft ECC is on. It leads to write failures.
->
-> Don't overwrite the write_page_raw callback if it already has a specific
-> implementation in the NAND driver.
-> Do the same for the read_page_raw callback to keep symetry between reads
-> and writes.
->
-> Signed-off-by: Bastien Curutchet (DAVE.eu)
-> <bastien.curutchet@bootlin.com>
-
-This solution is aligned with what we have done in Linux as well, thanks
-for the fix which seems rather straightforward this way.
-
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
-
-Thanks,
-Miqu=C3=A8l
+SGV5IHRlYW0sCgpJIGp1c3QgcHV0IHRvZ2V0aGVyIGEgcGF0Y2ggdG8gZml4IHRoYXQgYW5ub3lp
+bmcgInNwaS1yeC1idXMtd2lkdGggMCBub3Qgc3VwcG9ydGVkIiB3YXJuaW5nIHdlIGtlZXAgc2Vl
+aW5nIG9uIGV2ZXJ5IGJvb3QgZm9yIHRoZSBGbGlwcGVyIE9uZS4KClR1cm5zIG91dCB0aGUgRGV2
+aWNlIFRyZWUgYmluZGluZyBleHBsaWNpdGx5IHNheXMgYSB2YWx1ZSBvZiAwIG1lYW5zIHRoZSBs
+aW5lIGlzbid0IHdpcmVkIHVwIChsaWtlIGEgd3JpdGUtb25seSBkaXNwbGF5IHdpdGggTUlTTyBs
+ZWZ0IGRpc2Nvbm5lY3RlZCkuIEhvd2V2ZXIsIHNwaV9jaGlsZF9wb3N0X2JpbmQoKSB3YXMgb25s
+eSBsb29raW5nIGZvciAxLCAyLCA0LCBvciA4LCBzbyBpdCB0aHJldyBhIHdhcm5pbmcgZXZlbiB0
+aG91Z2ggb3VyIERUIGlzIGNvbXBsZXRlbHkgY29ycmVjdC4KCldoYXQgSSBjaGFuZ2VkOgoKLQoK
+QWRkZWQgdGhlIFNQSV9OT19SWCBhbmQgU1BJX05PX1RYIGZsYWdzIHRvIGluY2x1ZGUvc3BpLmgg
+KG1hdGNoaW5nIExpbnV4J3MgbmFtaW5nIGNvbnZlbnRpb24pLgoKLQoKSGFuZGxlZCB0aGUgMCBj
+YXNlIGV4cGxpY2l0bHkgaW4gZHJpdmVycy9zcGkvc3BpLXVjbGFzcy5jIHNvIGl0IGFwcGxpZXMg
+dGhvc2UgZmxhZ3MgaW5zdGVhZCBvZiB0cmlnZ2VyaW5nIHRoZSB3YXJuaW5nLgoKVGhpcyBzaG91
+bGQgZmluYWxseSBjbGVhciB1cCB0aGUgYm9vdCBsb2dzIGFuZCBjbG9zZSBvdXQgaXNzdWUgIzMz
+LiBMZXQgbWUga25vdyBpZiBpdCBsb29rcyBnb29kIHRvIG1lcmdlIQoKQmVzdCwKClNhbWk=
