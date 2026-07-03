@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19A0C44500
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE397C44500
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA43984AC8;
-	Fri,  3 Jul 2026 22:50:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 139CF84ACE;
+	Fri,  3 Jul 2026 22:50:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nqcp7Ysq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ag/B+l3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B6EB849F0; Fri,  3 Jul 2026 22:50:54 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 7C6C184A95; Fri,  3 Jul 2026 22:50:56 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 788F884A0F
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 22:50:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F089584A5B
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 22:50:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-6a145935764so358261eaf.3
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 13:50:52 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-43bf9548df4so549814fac.0
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 13:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783111851; x=1783716651; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783111853; x=1783716653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cDySDSicC4FXngzHf0bypyvQmZsjOeYfQOYaDBSn9Vs=;
- b=Nqcp7YsqqSnT8GzrPstaywcxn2DKcUav+Lm76MZelQvWh4JCRiebP9GM2y3WKMeHwo
- y/HOMMLp3uuUvA86hqJ0QvYLS0nMLiK/BWypXOz/oqjz4nfvfhb4QNIZBGjpptPFjnA6
- 9SQvYeH4k2kBCTuLyKtQRKRh10ZDuotiX3+4E=
+ bh=9h9F+Gy4dslRSypJ6jiZ1lzu93wQJIE3XTnAynv/p/Q=;
+ b=Ag/B+l3z0RKOczG7vL9opV4y/qzt5VJIg+2Opetj1ktn3y9wMBvmo7H3Vjm9bw52ld
+ b1mPhBEKrIoOm+I5UUbGPFcqtywFzbKXTk9+ooC31bW2iSiCgwkl+mRGEQcNWXeRavuL
+ DLYb0ZXtwqwYRaaEA1oq80dNMGQZTG2FkP4B8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783111851; x=1783716651;
+ d=1e100.net; s=20251104; t=1783111853; x=1783716653;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=cDySDSicC4FXngzHf0bypyvQmZsjOeYfQOYaDBSn9Vs=;
- b=kN5gMQ3PV8bVF7JeKXQ2tfYMcZWOQHDW080zViW2dLjbx3Z/Cd/yRlYH56bsOi6mFl
- H6PN2mnbgwu40QMblG65HfMAFj9mZ5VkFs6JuVVTdeAf4+LnZJiDXypQZ/sMsFykCBEn
- dsti664/AAjY/qNxYoqAviA8ygqFhAbjTVBWZVV1OM8PwmtHGKJEDS7vMArHX2Ly4KA3
- rKw6Pi8j1njeHuWjUr9o6FrpZ9KSZB5US/kK1ecJclBbv7Ss4NkdVCP8HAJgGaPiTeBU
- Yw7D8wpot5qGpKAOW3OHVdDaI1PyTH1N1J2q2K4BI7iygwlKPByLygcA/+iD80ELFsSZ
- Y28w==
-X-Gm-Message-State: AOJu0YzznC1Sa1BxjeMK1pJoEynzW+TgxBgdcgbT2mPb3bHRUSBmgj3t
- j2ojSM0VKN00dz+4ThPy7nSBm7yRYk1poycw2MU69arACvz5Nol9mxuQ6X6+/ar5YIC7TptL59n
- NzwmmyJM=
-X-Gm-Gg: AfdE7cml1bn+8ztMTwDIfGyEDAcVbUWn2LL2GYKM9vyYEUu28+/EVJsCY4506ky3yHC
- m049QCTcXfaecJI47JwysIqvqW8J7Judh3yTelBZUwWF2Bu67T71uErSYMXp/jBUAw47eXUwMJm
- j1Cxiinp+60Ivjis8DJm0ZvliMlDb/1OVIemm1b01uafhtEzhNDvU1HeS2l/CKcA6eZp/wz3Cwy
- 2JIPynRRGYtMOIkoMLXZMrSA61Ku8BCG5ehbLSzdLUK5MgJvBapsYnfR8bZsSycfeXlUm/azhrI
- 55r9Z9wnE2QkCGrzybd2lUJGGR3KYplpLrxzP95u1G9TagTaSP5bmbzfWvdWf6Jjj7aJAflzYLl
- 8pYvQ/s4zP8tmumqb2z9OCr4LkHInd5iSZBQhM99hO/6/Qn30Uz4rTONvjPeeWmnPr+OzTtyOOU
- JEB7CU62Kg1wde9F1lW28Oyh2FOM6/kz3SVcQm+8JWfkv0XPpwYrSrUDcAkg0BdtfoOhtt6hd/J
- FIoXwRMYYlIyrprNhD/dLJKs8f4ZgIQ4xcu
-X-Received: by 2002:a05:6820:3089:b0:6a1:50f0:cccd with SMTP id
- 006d021491bc7-6a32f626693mr357470eaf.66.1783111851157; 
- Fri, 03 Jul 2026 13:50:51 -0700 (PDT)
+ bh=9h9F+Gy4dslRSypJ6jiZ1lzu93wQJIE3XTnAynv/p/Q=;
+ b=MaWGpkOuRQsNwFmToE9+F8HH/BX+Cdla9njN9gCa7H8EnFKGHxyr/JSC8Er93BsuwA
+ /w6a4KdNx0id+vJhzuVtKrSyWHwZQBkBDSdG9mcYXIS+HVR6bWor3dXbco4upnIT/F2A
+ ryS+5Re7nRyQGNYT++e15tthcI6GWOzrEmOWC41R1sh2nL05G3IeMS/bNTqKy89Ljcb0
+ 2FHP1s2k+7rjugPxfFtI1DpZlZ4eCYiDEMfvFeGYu3nyC3Ah41ce8ggAZBpVi2EVpgp+
+ sOWvlJLeQLLv6l04CsiaXvFxe164h+NrNlAxE3srHABUhzm5reUxm/ZY2QTEm8EJWPTu
+ DMJg==
+X-Gm-Message-State: AOJu0YxgWKwhgQab6iwyqMLUUSpCbZmC6Uk9PJCqwR1CgjlxlyS7211D
+ 8uJ/uatvdN4OOs8vMf9C3UJt12XR9KtejBuohZfGvNEf1ANbr4ctURE2GMYFENboEHAfnDg772D
+ E6Kftwu8=
+X-Gm-Gg: AfdE7cnr6CaZdioBwHFCiDFWDjit5/HOhdWt5k6IwBqp6WRRcEDWhO9ZM+GQV3hxAQK
+ 8DOC7qyPKRW3YmgC/WuRlyZYfGcZQjwYs05Gl8+E8k2eXZSX9ICD4981qo8zSMdhR5ebt/ffRTi
+ 3v65ZOSDvqv+daoNo35Tke/qdIxql/BpCy0WKe4gjr5RqKQfPg0/4O9jwRA4E+YfVv1iwBKVeaJ
+ Au5ZBvGMZVPBvFJA6FNfYtzJeJhIoGrGj2ZCXC4U6/ZMpjI1j10fneD6VIMt192B+Tg0JyM+xnp
+ YSSjTsVj26CojcKNtL7N4k4CRCLxZV7lP3Y6yTe0V4HzqpHhA6ycqikaGwgtbsLgNOoZ55PsqZ7
+ dspXaTg+VL/qO9x8zLio2kqG/VSNJ8I9EpBbwqjZdMoTVS4WAZ0O6GX4MkbyLwOjxfBl1Ee2Kg9
+ dHbeqWbmwosqM4duEoFYNg6ez4tluMVRdWb4b14hMjcn3Nn/k8kN1ZlGLYZI4ZNA9LR2wlBHR8D
+ StZ1YkRpb7UhGPSjbKa7ehv98GQVFo/DlBwEMUOXtFvS8U=
+X-Received: by 2002:a05:6870:826d:b0:441:39e1:246d with SMTP id
+ 586e51a60fabf-44d17fe2cbdmr692378fac.11.1783111852522; 
+ Fri, 03 Jul 2026 13:50:52 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb6691d1sm3088491fac.17.2026.07.03.13.50.50
+ 586e51a60fabf-44cfb6691d1sm3088491fac.17.2026.07.03.13.50.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jul 2026 13:50:50 -0700 (PDT)
+ Fri, 03 Jul 2026 13:50:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>
-Cc: thomas.petazzoni@bootlin.com
-In-Reply-To: <20260625120344.274592-1-joaomarcos.costa@bootlin.com>
-References: <20260625120344.274592-1-joaomarcos.costa@bootlin.com>
-Subject: Re: [PATCH] .mailmap: map old addresses to their up-to-date
- counterparts
-Message-Id: <178311185053.3143424.18084578529416398779.b4-ty@konsulko.com>
-Date: Fri, 03 Jul 2026 14:50:50 -0600
+To: u-boot@lists.denx.de, git@amd.com, Michal Simek <michal.simek@amd.com>
+Cc: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>, 
+ Chen-Yu Tsai <wens@kernel.org>, Eugen Hristev <ehristev@kernel.org>, 
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+In-Reply-To: <dc57b5048b5c64693b5347b811ffb8cd5107770a.1782747838.git.michal.simek@amd.com>
+References: <dc57b5048b5c64693b5347b811ffb8cd5107770a.1782747838.git.michal.simek@amd.com>
+Subject: Re: [PATCH 1/2] .mailmap: update e-mail address for Abbarapu
+ Venkatesh Yadav
+Message-Id: <178311185136.3143424.9800428890990532623.b4-ty@konsulko.com>
+Date: Fri, 03 Jul 2026 14:50:51 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,16 +103,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jun 2026 14:03:44 +0200, João Marcos Costa wrote:
+On Mon, 29 Jun 2026 17:44:00 +0200, Michal Simek wrote:
 
-> This essentially maps @free-electrons.com to @bootlin.com addresses.
+> Name and email address has changed but format wasn't correct. Keep origin
+> line which is doing conversion from xilinx.com to amd.com and then have
+> conversion from AMD to Qualcomm. Also move name to proper location.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] .mailmap: map old addresses to their up-to-date counterparts
-      commit: a66b6e6b6414cf019fecce5a2ac6010a49341fa0
+[1/2] .mailmap: update e-mail address for Abbarapu Venkatesh Yadav
+      commit: 6da1278ee9c9054074950eb352a5bd5b11f2ff7f
+[2/2] .mailmap: Run mailmapper and sync name locations
+      commit: 2e184a1f24cb363ea2a4388e8c3e76d65c8bd12b
 -- 
 Tom
 
