@@ -4,117 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC964C44500
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F71DC43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:46:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E50984A35;
-	Fri,  3 Jul 2026 14:46:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B3CA184A4D;
+	Fri,  3 Jul 2026 14:46:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="k4fVuNih";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CpBfYGSo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77FF484A3A; Fri,  3 Jul 2026 14:46:22 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C5EF84A4F; Fri,  3 Jul 2026 14:46:49 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5065B849F6
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 14:46:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CBC584A35
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 14:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OkPP3VAmSwT2HvnnEpe2ufY5i2TVwkHph7cZJ6aYXKUmLwGc3hSRLDxSf37NNRkHbXY9+h1d69ElfBfhIXU+W7zhWE7L7kYp6rJGX7pn0wOKAzTTfRWbHJdM6/8769ZhKBrtKtvA8PgtJ+HDwSlYpM7jLZX+XjDecrNMOMTTzghzfk+0wLhNJ54mpKgMcRWl7QXxNp9/Th57ytGD+5ZZGqZkJxdqixKOV1SJWucExEHMY4h/dXS4VoOS/HhzKjeS0TB2jmXkpICGhKRg6kT0l4LmgELeSh39Z0gyTbjU+F42sAu6+lKjjjBV2sjvwvJ8JRbjPGLKygdiTtxMnHNAfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5AWeIoTpCNL8dEnD28JjLzK5eqamvUS059TDACb33bM=;
- b=WVK3MYSx4tf/zUelu/H/BwOsHYqzK7pvU4E34lqfcbUBuXXs1ITbMo1HyZ7rfAcPZNWnP3tjw6QH6uoSJ3nWYZJjkP2nEY4eR/AHshNcRYSD/lEw0lhbHHhl0/6yiSjmcWJ2cwEiJx+XHuq8zdLa0moNGAeBw7+Re4K9BuoCDqYDj4/LxX5A8NsqiTaGQTEI9jG/tChI0/vW+a3AM5d9ArNsgSTSOSJi5vx4hHmQ+ATfJ40OOqHNwXZVJOVN2G529U3OOd3Xb/pP5n8udYWmK3Y0U8QJgUWrpm2bggF5oCNFLE1ud23GXIXIfKPY1Qwt1Yu+vnLjZGhvMmmhSDusKg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=nabladev.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5AWeIoTpCNL8dEnD28JjLzK5eqamvUS059TDACb33bM=;
- b=k4fVuNihrjgCc5Q54nQkwGAzB5FE1NaA40MYdVIB+FQO87QZiu/ChLNW6Oj7TETyHCmMQTUrTQtEj6Q0nAMBGLUjgFRq5iXv7mvaxw7+WGveItqphh4KE3Cvsy39jtzZqLfeP/BuoWLgXnEya2XbTrIOe7zZb/uBKOEMEKY1vcQivjujezOrQkZ7DQFgWTyOY/t3GRauGIPBLUy+z0A0p49+RZh2ZCAqGjiU78HR+JtWBpFtflEgIBH7sGjp1Ld6kpKCCCRXyZHK0Yw2Srt+ZadnrUKRN82OgpS3cSBRIvu1otZ2l2FYq7mqX5q1l1ieMPRRd3JQLiBCRzHKTOS9OA==
-Received: from DU6P191CA0015.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::16)
- by DB8PR10MB3814.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:16c::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Fri, 3 Jul
- 2026 12:46:18 +0000
-Received: from DB1PEPF000509F9.eurprd02.prod.outlook.com
- (2603:10a6:10:540:cafe::5b) by DU6P191CA0015.outlook.office365.com
- (2603:10a6:10:540::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.11 via Frontend Transport; Fri, 3
- Jul 2026 12:46:18 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB1PEPF000509F9.mail.protection.outlook.com (10.167.242.155) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Fri, 3 Jul 2026 12:46:17 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Fri, 3 Jul
- 2026 14:50:35 +0200
-Received: from [10.252.26.28] (10.252.26.28) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Fri, 3 Jul
- 2026 14:46:16 +0200
-Message-ID: <9a7a6227-228b-4528-96df-4d80946230ec@foss.st.com>
-Date: Fri, 3 Jul 2026 14:46:14 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-493bb510ce4so3936545e9.1
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 05:46:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1783082807; x=1783687607; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zHsNiRo+/JZR4ddE054xPxdiy8rWZRXdyc5bT+YHAeM=;
+ b=CpBfYGSoxUI9RbkYOdiIZNvWnUROuic/SWXizPNVuMO9PY0Fl4wy16P/fl6Dm2fcAD
+ hI2jPB3DNK9W6o7y23wUjg6mXVJyF/TWnV9r/1IniFV/vC/yUQRVOmgtruBR6yhp75Oo
+ F2UMUxZZYS92kP9wDOzilk4QhD0VSUEDa0W4k1I3mM45h4418kSSEvUAzfRrDWhidqMo
+ ZJQ68qMKXhkcbuI7I3Pa3UpgVSE3wG1AvOI+RSXbuIrbwQ/7rOAoQkyhrmqj4+7J0qoP
+ 8dGCeGt9cRIPZYsM516SuWK9aKWQ/2hbkHVTMR/FKwYC3GQL9KLsFymS/kEuz1F177nE
+ 02/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783082807; x=1783687607;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zHsNiRo+/JZR4ddE054xPxdiy8rWZRXdyc5bT+YHAeM=;
+ b=KJIykKgte0pfvVgKZEkVg2eZSaBYGiF7lL0O7LBtbC3551cddNpnEVNykx4as6D8yT
+ HHGTeCEKB+IkdQgZF/5CVXze4L6Uv1V8/MhQWcCyh9uZVMwfMSLmZPz+CuRa1fDs6tQu
+ /bnQFuzbmbVjZSRdiIOcIC9KjyeR4xqfCgApcQmj85a0KcYblil/R16PRvIroy/ueMBf
+ UoVgPzqUBqq4sWVg+YaQej77W11OHyetE6gI4Un0D8NaAm+MnGvEtrSFPYBxKEsSKi6m
+ HYv2Qbc4v4Qv1JHIozPKSyCWBMBp9s4xOkT30UaYrcXDCZtKnoacKsG3P+cGMNo2bkMk
+ RVCg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+QdpHHSDCKIQe5AhOlSt+FBaOE2LgxOPaf9lfREvqLDzjQDau2vTinITiM/zGDhl4GsFM0g9w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yynilw9GmGr/DWYKoQJzUhuhZecgx59VOs6KAoRBPTYXBCEyJ28
+ +IIlNQzg8I7UPdLJas+71YRLC1pdItPAaJsyA7nEHTu6sfg44ruUvba1SC3UIOlLsdeQhGnyBuZ
+ zqzhbjxM=
+X-Gm-Gg: AfdE7ckHNqiy4xAByAGUDgS5aYe48K2i46ZhkFqybupZlE34GzxQ3Y+b2viAUyL1oCc
+ 1LXIPyl0M4UxkhV9z89SE4U3QWeacljQMRiMVUXNA+OuwYKlIU26naBd2L+H0YXO90U7sCkCg6A
+ KN/NyXzxRuywdE+xYd1NqqTM085p8dL/NyH7VujRyXbBfFTLlI4DiiM93Ok1RtnTcsf7QOl9Bjm
+ bqsS71v85gUEn9IkmY4Jm1NAf2Tl5VuOlxR19JihMx85VIy10Sl9GuXUYChI0p8PRNpNPrgkpKs
+ 0CGsfrXeuDdQLFWmkyyZRlJRtQsd5fcMlf8ZEX0Mj/OqlUs6kuATIoDXPLmYUZy0Oge9y/yjGDT
+ ZAVIhpQYw4kUXrWcQfY0HGjxSC2KrqzVWB0N5C9qw6F8GVgWHDSYnZe87pAn256zDIw8MNh+glX
+ tv/Swy4pXHP68oZfJCmBZAJKEeeZM0R+nd7daf/qGXpyLZLReoaujW/ffGGmheEkITIpXhesMiQ
+ FrTCsYRxc4y4DnJbVc+OMqXC3qMrLB0IKM4n0tpQ2u7UmxCitfJEz//v2S7xCC2/GKNFIiFiC+f
+ paIiwMhMJsIgkaps9gm4bUkJVpM41kchp6347b2XZ4u4o9gji0aJY4qonsRBmwxjdBU8YqOM8gW
+ 3aF284AawRxlFDlb/mVxju6WEnJTpD46Tmo4BkaLv3TmkalqzpY4Iugg/R0oLzKqxUGA3T/k8nn
+ PQuu1jhFpxkiMj+uEXCMvDqoOH1BGl0PSy0zJimm+C31SzJuTjmM35fhfmfnetNUF1y4xhTWAFq
+ quso3XTqubH4tucJd99Ic130A==
+X-Received: by 2002:a05:600c:560d:b0:492:4714:2d7e with SMTP id
+ 5b1f17b1804b1-493c2ba8359mr101398145e9.36.1783082806989; 
+ Fri, 03 Jul 2026 05:46:46 -0700 (PDT)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493c636ec8asm110442445e9.1.2026.07.03.05.46.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Jul 2026 05:46:46 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Change the return values if a TPM is missing
+ during GetEventLog
+Date: Fri,  3 Jul 2026 15:46:35 +0300
+Message-ID: <20260703124636.93709-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] stm32mp1: use debug() for image entry point message
-To: Marek Vasut <marex@nabladev.com>, Sean Nyekjaer <sean@geanix.com>, "Tom
- Rini" <trini@konsulko.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-References: <20260618092921.3702970-1-sean@geanix.com>
- <4e7b14fd-da00-42d5-9221-719313eecfab@foss.st.com>
- <bf804b49-55fd-4bfc-9898-2265dfad95d7@nabladev.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <bf804b49-55fd-4bfc-9898-2265dfad95d7@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.26.28]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509F9:EE_|DB8PR10MB3814:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93a52243-8437-46d1-4b31-08ded90113ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|23010399003|376014|4143699003|22082099003|56012099006|18002099003|11063799006;
-X-Microsoft-Antispam-Message-Info: V0giFxQhI6N6MAcsW1BYuchvQxdY41cJVjGV8fOf1qwqtF7vTevwrBk5V+rclYk5/qfIn7+AZG8qwGQbRDxF0Qd8bN1Ceu/sb3/17zD3TNLspHiyZ9VfRtvchOdGv/cBZ8H0z+aBIlR574Kdz9+2hUWOSMynXHyleUFrS6Z7N9udQfh5bSqTUBkVLkF7HeXnJBsMeEIkbmZPdcBTFDiYr0npOJFUO+/9QwQvvo4AVGTvOtKdSWlgxpY95OVYOSYQ2MVlM7kieYUgd6bav0wUCOaYmi8JSR+73b+FRG2Kk+NgmKYvcSJA/o1H0f7euj/mfWl8/Br5Nki5++rdC0FLjZYk1e3IktmDW/T5CSE7vyceyJItYa4Cmiqr+2rvMoYAEIVW/s/gVVUtvHy5so1475elg2Ie/xkcu/z6zpndyNSR1ilishUQoGqxuZZDRxPubFoAcu0g6m9lgYukRK8XjXi9b+91dH69HQR5q2Sqq6znOybo4RytGqj6rqsL/MinFKO0aPPXPekicZg0D0OEYtuwpNKAGNqrt2KBA5B+zs/Ys/OCjVcp2WF1Ap1dHhmArWX291GAsbf32xUvhe2p9u8yGplbTCBShH91qaMfSLA9dzW7B/QZG3EHxk1edcW0nbnoq8Cb3DqkADESz5NJ0wKkDGlVetWNhnt0ErsnuZHN0zYFgYf+yUNk2JJZTqRZdFIzfSo/ed7WOSJMCAOvsA==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(23010399003)(376014)(4143699003)(22082099003)(56012099006)(18002099003)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: +X6Pq0NJcr1HKmgSFkGnrUdYrkmuKh9NVEC3kdifCHKty844iLOV9G40xNA40m7bSRJ5gAuwkhhaRgh1b4l578aWDvX/YZNlRJI8710h+4ANqPNnu9lbseqDYhrnQcc8ukMFFkQ6Nqcg/l9oBuiwIqkCTxvils7UjB0XdU6nQjfwadIE4CYJ2dEOE/KjUP8uLtS86aj/inLNQOmScYcg28UQryO4nUWdIusx1T26hLfFuMcOaevbZ7QfdzzgehdnBFvvW1rzn4/a+00M9PWIija+WBhUAhzVmEvukLhbflAcGivRSx7gzT7mycj1VFdNF84JocGidh2sHgNcd0oJ6vNGUC4uKzhFa35byG0wsmvAjkYuuCheoe1gBAtSr6UrO2Pe8EU1ulhb9ipFB/MX1MqmwtN45YzN+eDBfZYJOtdwdvglVCbUTL2vXULDfTxT
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 12:46:17.9549 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93a52243-8437-46d1-4b31-08ded90113ad
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F9.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3814
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,42 +103,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The function defined by the TCG spec looks like:
 
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TCG2_GET_EVENT_LOG) (
+ IN EFI_TCG2_PROTOCOL *This,
+ IN EFI_TCG2_EVENT_LOG_FORMAT EventLogFormat,
+ OUT EFI_PHYSICAL_ADDRESS *EventLogLocation,
+ OUT EFI_PHYSICAL_ADDRESS *EventLogLastEntry,
+ OUT BOOLEAN *EventLogTruncated
+);
+and the spec mandates that
+"If no TPM is present, the function SHALL set the following values and return
+	EFI_SUCCESS:
+	EventLogLocation = NULL
+	EventLogLastEntry = NULL
+	EventLogTruncated = FALSE"
 
-On 6/25/26 14:33, Marek Vasut wrote:
-> On 6/25/26 8:31 AM, Patrice CHOTARD wrote:
->>
->>
->> On 6/18/26 11:29, Sean Nyekjaer wrote:
->>> The stm32mp1 specific code prints the image entry point unconditionally
->>> before jumping to the next-stage image, unlike the generic SPL
->>> implementation in common/spl/spl.c.
->>>
->>> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
->>> ---
->>>   arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
->>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->>> index 252aef1852e..ea5d8a648df 100644
->>> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->>> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->>> @@ -361,7 +361,7 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
->>>       image_entry_stm32_t image_entry =
->>>           (image_entry_stm32_t)spl_image->entry_point;
->>>   -    printf("image entry point: 0x%lx\n", spl_image->entry_point);
->>> +    debug("image entry point: 0x%lx\n", spl_image->entry_point);
->>>       image_entry(romapi);
->>>   }
->>>   #endif
->>
->> + Marek, as he is the author of the path which brang jump_to_image()
->>
->> Personally i don't mind of usage either printk() or debug().
->> Marek, what do you prefer ?
-> debug() is fine, thanks !
+However, if we set it to NULL the local assignment is discarded when the
+function returns. Set it to 0, although on some platforms that's a valid
+address.
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_tcg2.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks
-Patrice
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 1d52a04ca48f..07637df7660b 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -352,8 +352,8 @@ efi_tcg2_get_eventlog(struct efi_tcg2_protocol *this,
+ 	}
+ 
+ 	if (tcg2_platform_get_tpm2(&dev)) {
+-		event_log_location = NULL;
+-		event_log_last_entry = NULL;
++		*event_log_location = 0;
++		*event_log_last_entry = 0;
+ 		*event_log_truncated = false;
+ 		ret = EFI_SUCCESS;
+ 		goto out;
+-- 
+2.53.0
+
