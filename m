@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAF8C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F831C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 08:00:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77ADB8490A;
+	by phobos.denx.de (Postfix) with ESMTP id BE0FE84979;
 	Fri,  3 Jul 2026 09:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GG09wgeG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Crc4ss1I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A165684994; Fri,  3 Jul 2026 03:50:05 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id B0E71849F0; Fri,  3 Jul 2026 03:50:06 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 728FD84A5D
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:50:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94B6A84A90
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:50:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-44ce674ed17so21065fac.0
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:50:01 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-44ae14b4fd6so5248fac.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:50:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783043400; x=1783648200; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783043402; x=1783648202; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=x/Ly28iFzeK1QD2nlT5lt2lVajOfQeKG+PDF3jdEHCo=;
- b=GG09wgeGulNMoQMoOVqcu8eZOQV02XGypmbL8oNeYGRmNRKx24bbFFl1f7dS/yO27u
- oVwMsBpLwvDzUFoVTRV9Zo8JfanfGcNaPJtXTo14XT4I5CIgQiCj56S40ce9FYSo1GMK
- viAxZuhM0E+sK7TmjK4pc6nbs9JZ44tOhmWuCpjjHB0lZ1LaF0zZ5MDVn1Zl9CIZ7Tbe
- 0pqjDzcfj9cB4ynjCHyHBJSSx0X3ijfqFQBKvnnYBRMFowXh3LLd+yVTERZHOnaBFqAx
- aOo85QHXCRHjtu/Binrm4cAtY13fM4kIJ+dvq/0E6Fw/E/66W1X4s0IVJWjmiHcuur0M
- KVQw==
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=vtPXZ1AGk7IYRJmDHvSWzcnnbR6bNamkgZ2UhNAFekY=;
+ b=Crc4ss1IabqtL8qKTxSIzaVHZrqoOZ7gscmC0L1e8m2fnzzEKXfKjz15Ps+yzpoMhk
+ eWZoN7m3DJQ/luwr5kwAiiPBKTx560qal6P/JHjLLJOl9clmTcxcUIvsQddGbue8D+r4
+ 7pEcI9dudwSpkgPb5of/BPiBHBolOm87ZZ+76yRmCWP2w/GWh3NfDoonIlQalLrYtFiG
+ 13VXliEjDFfQYfs5Et+kDy9glZKxORdbjvPr8nWsMd7wymt+gJHMnB5l1n1UpNPTxG4V
+ nUORW6xUcUqhWQfbm7Dpo3FBPhiRvQXHeEJLTFu/noc0Gh4rShCT1laa3QeDH64SLW3U
+ xyYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783043400; x=1783648200;
+ d=1e100.net; s=20251104; t=1783043402; x=1783648202;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=x/Ly28iFzeK1QD2nlT5lt2lVajOfQeKG+PDF3jdEHCo=;
- b=THVe/0rLuY5YjYqUtF9BYmV7vF/pngSjpSodJr2mwiF3saA+LsB5rcFxVBrJUa5s4n
- Yq87SZ3w6Eujjc5IWTsh4cbwlXvQJWgOlEcd/tK11noFytXcxmtQXo7sX3oUE/jmkolk
- bMQ0AtkM6uSZH4Vo976r/Vv6pcQYy29QpPAzvDOmJLVQ4nR6eKcJCgM7Tpu5t08Egqcq
- /yiHUYthtimfdj8cWyNBmsofXAushQUoI9E58K6f+SA8aUDt3LYwSTJz7k6QUIv1Xf9P
- wPixcSQP5l22mNBcNcVOitKgBLio1qMwBSiF05tAA6njtGKScK0V7qbdH8cLpHdCgGlw
- pTow==
-X-Gm-Message-State: AOJu0YzC2SBvXrLGL3RR05j0iXogVxxLmX0/uqrs80YHm+arZESvi4dW
- sIG5qKkyDJHRTXbZ1c/xCRWru9vAGZc7YCMs4gkai9c8PJtWfVRWZ7UY
-X-Gm-Gg: AfdE7cmXXElAfQUgjaSyP3RypddxprXx0lYvWJYGTfKd7T/LYGaephhovZW39PG23dv
- wQEFp5mNrwawtJek5O8yf6YECLBuOpXKG/b20jkxOavV4je7Cg905Lltg3N0ZH0FHJQLDzl8F5/
- XTpAxh7XcFbR1iUzMmYNkJeg5jRZ4DARvqDMgbcIm3JgN4PkR48V7jo8iTpFxaveZemS4/Gf3vP
- a3Zf+/Sd4RMS/cQyERrku8IZb1dyflhcHrnKDfPydpKsZXarehnJ+rmw7UPznpsO00ky3I1Mpkz
- t1BoV9EwZGOQd9Uy0L9urGKXn6vcCQui4CBkfZEe3rFstXgkJNlqOGNmGA91NRaO2ZxZ/3HwR3c
- +4udM3Ty435UgBAxye7Bln8TQnOfumiIyWGuj3dRlwBuwnPRiRrsmrFL3S3vd0jpBSlwotEf6WS
- BEFzgsKRvJpxfnstex/AfnEYmt9XHWZS08LV2/0yYgikB3P55cIMFpJGAVNZKZqXuQGdKYsBIme
- 6gFzvL/fREes/sLtL3WRJq9MDVE0FsNhVjHpVkWSjHS6exzD4WhSCBK2hX3bZfqUZhaGg==
-X-Received: by 2002:a05:6808:1b26:b0:492:7ecb:94e6 with SMTP id
- 5614622812f47-497e00ce19bmr1774042b6e.33.1783043400126; 
- Thu, 02 Jul 2026 18:50:00 -0700 (PDT)
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=vtPXZ1AGk7IYRJmDHvSWzcnnbR6bNamkgZ2UhNAFekY=;
+ b=Qc7JfuJeM7sebwWQvLc2FsBr8nBrhoNpuAHfTIbCKrE/4dGjL3qzpx3ocpVJUHe068
+ PtFRQ2ZrdiAPZ1LOruTrg/rgpQ8nesW+P1tDT0xv9161B3xj3wHOpLFS7tkVJ83Y4WBY
+ DXa68B9ouRgvVBIRIgX6aTXOE7pYv5i3konxiOmiGXimFVxFY8Mghx+rKaKKFug4T7FN
+ ad+R6OHyxocSCUkzbRhUCHy7mVladEbahpFpZ/6/NA6jpVbXhxff7HuM4lpYqtezEBR3
+ /Gu07KhXWA9JagYnk/iXb0qeZvAOGUPx8Bt0ujfy/vZt0EnSl5uVkyB8uI9N+eYPVV+d
+ Ql0w==
+X-Gm-Message-State: AOJu0Yx6bwjic4uAJtY7FphZph97AKhI1TUzMY8OF1sdh8kIse6dyMUN
+ XNOGjlyyx9go/rj74ZVJU8eiSdJVHC2Zg7eikmd4t184fmT+bRaWDXvq
+X-Gm-Gg: AfdE7clr1ZIC72L5DaCsydm0tspwe0ZDdCOl/RDUwmoofxzxlpWCx0g7RODuiKQ4lK8
+ I43ESWE0EfMYTleeu5XeUeYlvwIc1PQZi8HFQNnUo19t2h3gwNWSmKqmGVoyYpFBIBUVSyCr3RT
+ 49HFq9gPP4wnQZ9yWFEUfdyqrZCeW4KoVipgJ5yNVvlO3i5roZzHFwkvTQ9Qexk3Uw/XmKXsRYp
+ WBLmFcFpZFcvhFjwqlDdFPdZy9i/Vy2sxI3mgwQOPU6738a3TQg71eC74I0N4Zezk/pXxv+dCw3
+ CfFiVLXUIX3Aw3fHyWTydyS4LHnJqJOnzHagscHqY5rOdqMPt9TDgulbOQFn2LtvXADh794HvR/
+ tKSsQ4gufCLpjE+nzzsEXjCrqUjJDtNt21S+UdkRMVFIdpJz0rbPyQpnT2unbOUi1ohINoHuhK2
+ cACcZ6PJkKSvRQrFaNK+gzloTV3PaUEmKvej00EW4zf89JrK74v2ZRI5hvFUurmw46uL3WdDZhZ
+ X+HEuA6+AmNQh7Jy7soNWKb3v0lMNgtVC4XY9QXtJWx1t5Sjwe+9mikjH8K8PguQ/qZyg==
+X-Received: by 2002:a05:6808:640b:b0:479:ac7d:6d8a with SMTP id
+ 5614622812f47-4960ef4c140mr6459337b6e.24.1783043402254; 
+ Thu, 02 Jul 2026 18:50:02 -0700 (PDT)
 Received: from [127.0.1.1] (97-118-25-163.hlrn.qwest.net. [97.118.25.163])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.58
+ 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.50.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 18:49:59 -0700 (PDT)
+ Thu, 02 Jul 2026 18:50:01 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 02 Jul 2026 19:49:49 -0600
-Subject: [PATCH v2 04/10] spl: fit: support encrypted payloads
+Date: Thu, 02 Jul 2026 19:49:50 -0600
+Subject: [PATCH v2 05/10] clk: sunxi: add H6/H616 CE gates and reset
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-submit-ce-series-v2-v2-4-ffda5bed58af@gmail.com>
+Message-Id: <20260702-submit-ce-series-v2-v2-5-ffda5bed58af@gmail.com>
 References: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
 In-Reply-To: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
@@ -129,197 +127,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
-decompression or moving it to the final load address.
-
-SPL cannot always allocate a new output buffer while loading FIT images,
-so use the caller-provided decrypt-to-buffer helper. External encrypted
-images are read into scratch memory first, then decrypted in place before
-the existing copy or decompression path consumes them. Embedded encrypted
-images decrypt into the final load buffer, or into scratch memory when
-decompression is still required.
-
-Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
-support is selected by phase. Keep that path disabled for host tools,
-since the target-side decrypt helper depends on the U-Boot control FDT
-and runtime crypto providers.
+The H6 and H616 devicetrees describe the Crypto Engine with module, bus
+and MBUS clocks plus a bus reset. Add the corresponding gate and reset
+entries so drivers can enable the CE through the normal clock and reset
+uclasses in U-Boot proper.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes v1 -> v2:
-  - Drop redundant SPL_FIT select  (suggested by Simon Glass)
-  - Explain the IMAGE_ENABLE_DECRYPT change  (suggested by Simon Glass)
-  - Explain the host tools decrypt behavior  (suggested by Simon Glass)
-  - Decrypt external encrypted payloads in place  (suggested by Simon Glass)
-  - Skip self-memmove after direct decrypt  (suggested by Simon Glass)
+  - Add Simon's Reviewed-by tag
 ---
- boot/Kconfig         |  8 +++++++
- boot/image-fit.c     |  2 +-
- common/spl/spl_fit.c | 68 ++++++++++++++++++++++++++++++++++++++++++++++------
- 3 files changed, 70 insertions(+), 8 deletions(-)
+ drivers/clk/sunxi/clk_h6.c   | 5 +++++
+ drivers/clk/sunxi/clk_h616.c | 5 +++++
+ 2 files changed, 10 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8e468c56176..73fc570d0c8 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -155,6 +155,14 @@ config FIT_CIPHER
- 	  Enable the feature of data ciphering/unciphering in the tool mkimage
- 	  and in the u-boot support of the FIT image.
+diff --git a/drivers/clk/sunxi/clk_h6.c b/drivers/clk/sunxi/clk_h6.c
+index 81deb5728e5..27ed5705a14 100644
+--- a/drivers/clk/sunxi/clk_h6.c
++++ b/drivers/clk/sunxi/clk_h6.c
+@@ -20,6 +20,10 @@ static struct ccu_clk_gate h6_gates[] = {
+ 	[CLK_DE]		= GATE(0x600, BIT(31)),
+ 	[CLK_BUS_DE]		= GATE(0x60c, BIT(0)),
  
-+config SPL_FIT_CIPHER
-+	bool "Enable ciphering data in SPL FIT images"
-+	depends on SPL_LOAD_FIT
-+	depends on SPL_DM_AES
-+	help
-+	  Enable unciphering of FIT image data in SPL. This allows SPL to
-+	  decrypt an encrypted U-Boot proper FIT image through an AES driver.
++	[CLK_CE]		= GATE(0x680, BIT(31)),
++	[CLK_BUS_CE]		= GATE(0x68c, BIT(0)),
 +
- config FIT_VERITY
- 	bool "dm-verity boot parameter generation from FIT metadata"
- 	depends on FIT && OF_LIBFDT
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index a4192db5eb5..c84cbfaf4a8 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2312,7 +2312,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	}
++	[CLK_MBUS_CE]		= GATE(0x804, BIT(2)),
+ 	[CLK_MBUS_NAND]		= GATE(0x804, BIT(5)),
  
- 	/* Decrypt data before uncompress/move */
--	if (IS_ENABLED(CONFIG_FIT_CIPHER) && IMAGE_ENABLE_DECRYPT) {
-+	if (!tools_build() && IMAGE_ENABLE_DECRYPT) {
- 		puts("   Decrypting Data ... ");
- 		if (fit_image_uncipher(fit, noffset, &buf, &size)) {
- 			puts("Error\n");
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index d89384449b3..e5a525f6dce 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -193,6 +193,28 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
- 	return ALIGN(data_size, spl_get_bl_len(info));
- }
+ 	[CLK_NAND0]		= GATE(0x810, BIT(31)),
+@@ -77,6 +81,7 @@ static struct ccu_clk_gate h6_gates[] = {
  
-+static int spl_fit_image_decrypt(const void *fit, int node, int cipher_node,
-+				 void **data, size_t *size, void *dst)
-+{
-+	size_t dst_size;
-+	int ret;
+ static struct ccu_reset h6_resets[] = {
+ 	[RST_BUS_DE]		= RESET(0x60c, BIT(16)),
++	[RST_BUS_CE]		= RESET(0x68c, BIT(16)),
+ 	[RST_BUS_NAND]		= RESET(0x82c, BIT(16)),
+ 
+ 	[RST_BUS_MMC0]		= RESET(0x84c, BIT(16)),
+diff --git a/drivers/clk/sunxi/clk_h616.c b/drivers/clk/sunxi/clk_h616.c
+index 3e7eea25bfe..d5b659d0bb2 100644
+--- a/drivers/clk/sunxi/clk_h616.c
++++ b/drivers/clk/sunxi/clk_h616.c
+@@ -19,6 +19,10 @@ static struct ccu_clk_gate h616_gates[] = {
+ 	[CLK_DE]		= GATE(0x600, BIT(31)),
+ 	[CLK_BUS_DE]		= GATE(0x60c, BIT(0)),
+ 
++	[CLK_CE]		= GATE(0x680, BIT(31)),
++	[CLK_BUS_CE]		= GATE(0x68c, BIT(0)),
 +
-+	puts("   Decrypting Data ... ");
-+	ret = fit_image_decrypt_data_to(fit, node, cipher_node, *data, *size,
-+					dst, &dst_size);
-+	if (ret) {
-+		puts("Error\n");
-+		return ret;
-+	}
-+
-+	*data = dst;
-+	*size = dst_size;
-+
-+	puts("OK\n");
-+
-+	return 0;
-+}
-+
- /**
-  * load_simple_fit(): load the image described in a certain FIT node
-  * @info:	points to information about the device to load data from
-@@ -225,12 +247,15 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 	const void *data;
- 	const void *fit = ctx->fit;
- 	bool external_data = false;
-+	bool encrypted;
-+	bool needs_decomp = false;
-+	int cipher_node = -ENOENT;
-+	int ret;
++	[CLK_MBUS_CE]		= GATE(0x804, BIT(2)),
+ 	[CLK_MBUS_NAND]		= GATE(0x804, BIT(5)),
  
- 	log_debug("starting\n");
- 	if (CONFIG_IS_ENABLED(BOOTMETH_VBE) &&
- 	    xpl_get_phase(info) != IH_PHASE_NONE) {
- 		enum image_phase_t phase;
--		int ret;
+ 	[CLK_NAND0]		= GATE(0x810, BIT(31)),
+@@ -86,6 +90,7 @@ static struct ccu_clk_gate h616_gates[] = {
  
- 		ret = fit_image_get_phase(fit, node, &phase);
- 		/* if the image is for any phase, let's use it */
-@@ -256,6 +281,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 	if (spl_decompression_enabled()) {
- 		fit_image_get_comp(fit, node, &image_comp);
- 		debug("%s ", genimg_get_comp_name(image_comp));
-+		needs_decomp = image_comp == IH_COMP_GZIP ||
-+			       image_comp == IH_COMP_LZMA;
- 	}
+ static struct ccu_reset h616_resets[] = {
+ 	[RST_BUS_DE]		= RESET(0x60c, BIT(16)),
++	[RST_BUS_CE]		= RESET(0x68c, BIT(16)),
+ 	[RST_BUS_NAND]		= RESET(0x82c, BIT(16)),
  
- 	if (fit_image_get_load(fit, node, &load_addr)) {
-@@ -267,6 +294,10 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		load_addr = image_info->load_addr;
- 	}
- 
-+	if (CONFIG_IS_ENABLED(FIT_CIPHER))
-+		cipher_node = fdt_subnode_offset(fit, node, FIT_CIPHER_NODENAME);
-+	encrypted = cipher_node >= 0;
-+
- 	if (!fit_image_get_data_position(fit, node, &offset)) {
- 		external_data = true;
- 	} else if (!fit_image_get_data_offset(fit, node, &offset)) {
-@@ -291,11 +322,12 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 			return 0;
- 		}
- 
--		if (spl_decompression_enabled() &&
--		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
--			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
-+		if (needs_decomp || encrypted)
-+			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
-+						   ARCH_DMA_MINALIGN), len);
- 		else
--			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
-+			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN),
-+					     len);
- 		length = len;
- 
- 		overhead = get_aligned_image_overhead(info, offset);
-@@ -331,10 +363,32 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		puts("OK\n");
- 	}
- 
-+	load_ptr = map_sysmem(load_addr, length);
-+	if (encrypted) {
-+		void *decrypt_ptr;
-+
-+		if (needs_decomp) {
-+			if (external_data)
-+				decrypt_ptr = src;
-+			else
-+				decrypt_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
-+							       ARCH_DMA_MINALIGN),
-+							 length);
-+		} else if (external_data) {
-+			decrypt_ptr = src;
-+		} else {
-+			decrypt_ptr = load_ptr;
-+		}
-+
-+		ret = spl_fit_image_decrypt(fit, node, cipher_node, &src, &length,
-+					    decrypt_ptr);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	if (CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
- 		board_fit_image_post_process(fit, node, &src, &length);
- 
--	load_ptr = map_sysmem(load_addr, length);
- 	if (IS_ENABLED(CONFIG_SPL_GZIP) && image_comp == IH_COMP_GZIP) {
- 		size = length;
- 		if (gunzip(load_ptr, CONFIG_SYS_BOOTM_LEN, src, &size)) {
-@@ -352,7 +406,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 			return -EIO;
- 		}
- 		length = loadEnd - CONFIG_SYS_LOAD_ADDR;
--	} else {
-+	} else if (src != load_ptr) {
- 		memmove(load_ptr, src, length);
- 	}
- 
+ 	[RST_BUS_MMC0]		= RESET(0x84c, BIT(16)),
 
 -- 
 2.53.0
