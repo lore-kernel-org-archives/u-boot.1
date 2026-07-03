@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C297DC43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70412C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:32:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4CB5849F0;
-	Fri,  3 Jul 2026 22:32:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 269E684A67;
+	Fri,  3 Jul 2026 22:32:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NxbirMmw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RRL0rYZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A12084A5B; Fri,  3 Jul 2026 22:32:06 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 1DF3E849E5; Fri,  3 Jul 2026 22:32:07 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF31849E5
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 22:32:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ABB384A0F
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 22:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-448479e0eb6so586527fac.2
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e6b554044fso680426a34.0
  for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 13:32:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783110723; x=1783715523; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=RGVZQkZAOZwZJq4tD9vv2rwC0aT0lQPKtecJoXuksQU=;
- b=NxbirMmwSQ+TVPNREUiejUho+5BVuJ0r7WiLbz/0SVuYGBDSCQdRqMkZdUVX+Nw/LI
- CZvMmg0lZ5Fht0cGlbdJcNtYCXEP6uPe9sozAQ5ysSjwy4badIk+yVZcL0sBwjV/s6E0
- lcD3J4OOkLYNZ3GllQwgl3KsACjKSGkloomHk=
+ d=konsulko.com; s=google; t=1783110724; x=1783715524; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=snCdKJDyRJqfcRKlS59Z/mgFez1M/oubfV12pHp6WBE=;
+ b=RRL0rYZ4OZkU/Vl+7Zwzwk3DoEM2U0ikx0Ka5Wv+8JildvoBRFK0P3X97A264bJIUN
+ 78YrFHBVu/5WLJOhMEthcazyVDviPS3YUCmJuBdgRccXJbZC2Ee5vqytrDd09KXYBR4/
+ 7SD6bMspkJBIbxdem2jOtdGnUy16SOtSNK7Tc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783110723; x=1783715523;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=RGVZQkZAOZwZJq4tD9vv2rwC0aT0lQPKtecJoXuksQU=;
- b=MlKwFzYkeKKEmJD6f0/gk/fBK2MpECamXvkHSGPeG26c5byrVMEsMNYMQIVTuSItcb
- ptYl5W4rfKVTj+IRRk0rVYq2JWFMrsLJnT7RZPTNTGE1zsszzyQmVzxKiDiU0insPfeb
- XgIW0c+zrd8li4qQ7AAytx2OM9rUukgMaQ3VpGk4QyQKXjxWcuGurPOK+wXnGL5r92ov
- 3kU+vNgwN5eXAt8UH8xmLZYuam11x0EdyO0mnfQ5uwSiKC1RcJMLLGX0UKd/WX+xysb6
- db6GJ2fHkE6+ZHmwrkhoSB/i0UUUcJy2F6bAUVzxEhnrS0HV711IlVZKfcHW0dIOkvcH
- iM5A==
-X-Gm-Message-State: AOJu0YzYbm13FFXhfJTO7lAZEk8JNn6FGayRyG1QgAkyMsBBlgqXbeuP
- XCIJ5lHxUVsPY6BdsmGS/T74jhxX4du95ze/Wp/q/5cTUtnhFXqwCz7CfkDhENWXfAzRkA/1zTG
- hXb69JlM=
-X-Gm-Gg: AfdE7cmYslLnk3QUhJ0oO3loctqCipTyFT7kaH1n/dsXdzkcBNig3NAsWhzKKWa3xg6
- fu79OFZpeR1XSokGR84oCAJCRzq7W5/naomFg1Xpgh7++G1FrGjWhUccLrcJlwprcm47QE7RPPe
- 1c82GPjXcBljJ4RZdFeAnX/6PzVnO5SteUEiT2ih5+Kei8uvtCbrMBY0cZwHGewp/zLLY5aMA5D
- 1/PAvYTzX/nS0+gEaIRgzCpkXf24fegrJ+x5LmHfH+n7aDRFTFnlmsuRkpGzE0SXTwQBRcRZlDy
- w1Bb6+teNSBP94fSRrJhx0lzBud6NH0BKZP8nVvdHQyyPjtHXj9fpz8jYWRjX4y0/1jJ04mGpoz
- XG2JPHF9P8XA4iYBe4LFKf+4HQyIHgj8MbHdvtslO8EL6vtWOgt5EOj/RHexhvGV9V4PFEllwum
- Pg7EJ5toMoEhE+slcOdrpfT6I+m29/4T4gUNoaygxKsMvEL39tZusmZ7wtrwtdQCcLek7rhedU4
- xLuiiJ8xJixMJvHLyDU5PlwD6EzCXoocTW1
-X-Received: by 2002:a05:6870:b2cf:b0:448:558e:84ec with SMTP id
- 586e51a60fabf-44d184dddf7mr549319fac.38.1783110722866; 
- Fri, 03 Jul 2026 13:32:02 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783110724; x=1783715524;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=snCdKJDyRJqfcRKlS59Z/mgFez1M/oubfV12pHp6WBE=;
+ b=GFDQScyn7EbhcccvOl4qKzp2644lagfZBEW5lzatOB87Z/tg+gTvMobMEB0sXRMDwX
+ BhJJdzrj3wNNOFMZTJyZrpaFkPrqPLUQ6dxpRyMGzqunQyXs0wwVU1F6nVbR5nAJeAmY
+ Tl1bzC40H7qSb0mX55d2y35oL5awuvUS2mnQqNxZdyBtxVhza/jdqyqdJlFk/uaKaM/F
+ tLwHrMpuNHql4nN5Bo7NxSYlnDr0fSCloQV5HSzA1jG/dMvhMApCTqtaxP2dFMQAffnz
+ i+6P+aVCN6T5Efgo+ObqzGRM2ig3q1hYFbbLPC2DTaPEH3za289S1vP8TzC23DKWBMja
+ OcBw==
+X-Gm-Message-State: AOJu0YxLohYMCZyxkUtgO7zWC3bEsfo0nf5iS5Mvvzu9O0Awwo3X3F/S
+ RlOX88xP9k1GWlD53peaCNRecyy5kdyItQE7SqIEVgFzilPHEODdlnGrbvLpB+1+UVs=
+X-Gm-Gg: AfdE7ck87c9xfuCHqDk1dA08BKp8CMF7uSNb2pCADRzBYyqlTKwZO5u8J9LMZ5JWM/b
+ u8RJgKWkDfAw6V4JCKKe4yEp86nI4kre2+koR5+Bsr4W2MlRL/hRc0lVOlFzPeyjwj0kd/FR31p
+ 2ulSJ3mONCQOhEw9HK7glj/XhBr/L+2e5VyCqPnBv2C7QURn4ygNrFu+BPFzcJTcgPhgXaEt/mO
+ 2MlQCVfVLAktnz4jf/EFJ/10WAvjVcFRbBYkGKWUS1Z+IrxIqMcUTl9wjLaEI2+6zGCpt3sZiV4
+ sHgYIgN7b5p6Q5ObtBigQ7I82hKjTKbNDdMZPfCC8tGiAyT1tTviBinogY1hHLSxd/VgNlc0yCt
+ m1ynsvQPceqVkWxv7TRFsnDjmj3TA/r/lBAh8D71FPJapaClyzv9gdJBcBSOJcrf4oBxFUxApbm
+ rJOKWBgpDgM4J2A7L8FR6mQeYj0mE4hnFhz2JLBNPYwBt1nqQveijZZ9z6tP8R5UHq3nBvxUc/N
+ c2E5gZt9QMF7H4iNZ0nL64kWdlKTabHpW8K
+X-Received: by 2002:a05:6820:6ac5:b0:6a1:50eb:d4fb with SMTP id
+ 006d021491bc7-6a32f57ca48mr390734eaf.60.1783110723771; 
+ Fri, 03 Jul 2026 13:32:03 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb1bb17fsm2917874fac.5.2026.07.03.13.32.02
+ 586e51a60fabf-44cfb1bb17fsm2917874fac.5.2026.07.03.13.32.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jul 2026 13:32:02 -0700 (PDT)
+ Fri, 03 Jul 2026 13:32:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>, 
- Vishal Mahaveer <vishalm@ti.com>
-Cc: Anshul Dalal <anshuld@ti.com>
-In-Reply-To: <20260605193829.395161-1-vishalm@ti.com>
-References: <20260605193829.395161-1-vishalm@ti.com>
-Subject: Re: [PATCH 0/2] TI: AM64-EVM/SK: Enable MAIN UART1 for SYSFW tracing
-Message-Id: <178311072202.3138827.15538957876162646310.b4-ty@konsulko.com>
-Date: Fri, 03 Jul 2026 14:32:02 -0600
+To: u-boot@lists.denx.de, Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Cc: u-boot@ew.tq-group.com, Simon Glass <sjg@chromium.org>, 
+ Aristo Chen <aristo.chen@canonical.com>
+In-Reply-To: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
+References: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
+Subject: Re: [PATCH v2 1/3] bootm: fix flush_cache() with IH_TYPE_KERNEL_NOLOAD
+Message-Id: <178311072300.3138827.15419616193590905354.b4-ty@konsulko.com>
+Date: Fri, 03 Jul 2026 14:32:03 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,24 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 05 Jun 2026 14:38:27 -0500, Vishal Mahaveer wrote:
+On Mon, 22 Jun 2026 13:19:31 +0200, Nora Schiffer wrote:
 
-> Collecting SYSFW traces from DMSC firmware is broken on the current
-> codebase. These changes enables MAIN_UART1 for collecting SYSFW traces
-> when the trace option is enabled in the boardcfg.
+> `flush_start` must be set after `load` has been assigned.
 > 
-> Vishal Mahaveer (2):
->   arm: mach-k3: am642: Update MAIN UART1 serial alias from 3 to 1
->   arm: dts: k3-am642-evm/sk: enable MAIN UART1 for SYSFW logs
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] arm: mach-k3: am642: Update MAIN UART1 serial alias from 3 to 1
-      commit: c8a3552f7d9e6bd4554730e3dec10ff6c661f07c
-[2/2] arm: dts: k3-am642-evm/sk: enable MAIN UART1 for SYSFW logs
-      commit: 48b7c05d272747ec4d8f8f7eb53119ef149dcc7a
+[1/3] bootm: fix flush_cache() with IH_TYPE_KERNEL_NOLOAD
+      commit: 0f890963da2d463dd47ec77ef75b1324cc8064f9
+[2/3] bootm: warn about load address for IH_TYPE_KERNEL_NOLOAD in FIT
+      commit: c2abc606653e7eb1e8dbdbaaf1eac392689875ea
+[3/3] bootm: allow omitting entry point for IH_TYPE_KERNEL_NOLOAD
+      commit: c63051237f2bc79838a27473709948408acdf38b
 -- 
 Tom
 
