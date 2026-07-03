@@ -4,126 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F77C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 247D8C43602
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 13:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 425D684A6F;
+	by phobos.denx.de (Postfix) with ESMTP id 850C684A7A;
 	Fri,  3 Jul 2026 14:59:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PL+vUxjn";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="BOsHeeIG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C8B2846A4; Fri,  3 Jul 2026 10:39:32 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 81FBD846F8; Fri,  3 Jul 2026 10:52:14 +0200 (CEST)
+Received: from smtp9.infineon.com (smtp9.infineon.com [217.10.52.204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51331843B6
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 10:39:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16EC28469D
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 10:52:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-37dedd62b90so346086a91.1
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 01:39:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783067969; cv=none;
- d=google.com; s=arc-20260327;
- b=Ew0kJfTNt1kuDDF07WCFKiiEORVdkScu396HGmAiidrYZ4r1ejLabPQ4O/y/3yvyE7
- moXGf3QifhM26Y1pnoYIslHfIro+jnDgI6dQIOZlVtiUSmT9+/Z0wMTJagDNZnynVEUn
- amgep7/wRag8GZNOKCkYKvhWo/eH8P+DifQiDtqWuf6v3XOw88UFass5VtQ0arTGywAr
- iQ9rMbe1ShHD9oyUFYdoTctlAu3PPcZpJtWSnFqmh3skAEoUOzFLPF6tv5nqzdfRPPha
- Tw/RqxLqe+9fob+uiBUffmfjfHApEYobM7xhQ6LV4kA7BPSxhLV/1JjB62WS3TVVvzZH
- oqCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=AwOYeNvE4xaiJeVXUjRGlQ++erBgzXf4kIVf+fFXmr8=;
- fh=S18x7IG71hAHdEr7O6mO7gI3Em3dQ/vjpvhEHvLFdBQ=;
- b=cthSaWcxBFxJRQo4+Q/BHJT7MhAgrQI9OTWGBpEc4lAEW647GSwUU92SFrdd7MUj5f
- YWi+cifSjdy9DO4w3yWqPmmVGH51sBMYuP3PcUSgUO3K99AUK3FVEHSno6AGtPhsxl0K
- HqM5owARzsJbzsIRT2jhzYcPw+3PQtGN53zrx32egxWKtyeE9NHJzPY++UMLTZj3S/NR
- 9zMlGpN14i3nH3X2WlDNx6Eru1ekDSEMW68/4me6clsZlYqBLWK/qT0/qG6J+5AVhNkj
- mty2DsOpIg5ZCaS/frjG/Qxt5n9Gtt3u1GnXbtNR2BHAFhj1vmL7GFMU4i22R9aIBtB6
- XsRw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783067969; x=1783672769; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AwOYeNvE4xaiJeVXUjRGlQ++erBgzXf4kIVf+fFXmr8=;
- b=PL+vUxjnE7CzynWOGu4uMbCV3BRaCNNFeDgUOn7eICl1EDnqNfrqpEzO3nVFkbh//i
- yNQB11ha/ydAo4mWwvS86YQX/5UEFJ2/NlYGEDSju3VrycVs2cHhY+AHyX2eXIZamKfM
- CDuazoUA1tKSDOY7lRgk7PjQHlhOVbhFQu830ffr3s3geh+W+lUyFZnMQZkGoWu/iMQc
- VAGtiOJt6qC/QMxh4F26JE4FPimEEDWwl7fBzTVlmyp4ly1FeHq7uihFJuj4Uvw4m1pn
- jr4dlttWnjg4Z9x4U9oPjLViRo7SPVsEvWFCei++ZIgERdSiCOlKO1ecuzrwWj4rbyWu
- T2DA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783067969; x=1783672769;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=AwOYeNvE4xaiJeVXUjRGlQ++erBgzXf4kIVf+fFXmr8=;
- b=Zh71mgPTCjz3rL1bqgXWOTFjKlNeH/l0aAMao62ACBHhPNpwEDM8a6tYLWKGevwX37
- mgq7mwnVt/saXhGcFh3wlD2p1+sptm2dmYXrNEGdiNV1Oqsme0/fqy2RFrIlPTuTigzA
- wBhKFOjTLkjs9hbY9ULNItQCm1+NdrULFDt1KKydPNAI8PkP1u/TeFtHuR7xR9Fstwf/
- 6w6c+vVJeDdz74smIpnclymmir51DryCs7JU12MM/RXeeW8/QjRjOarLtESC3yWhGWle
- LqWCBXBr/1P2Ax2Og55HBDS4Q9jzW7zd4AmFDLVHRfjFul2hsS1g7ABIbD7B3ytgHqDV
- E2LA==
-X-Gm-Message-State: AOJu0Yw7M4uH7nULatzgw9fxhP7F3JYJRAEFK2rEb4kqw/hg8pTwFJtb
- A9rdu37kH7uRJrudVgfRFl4ZV8QT4thaTUIroAGMwGfj87sJQTbds4tsk4l9LJG2gfnjv41CAH6
- jd39r7/0T36FBIbhw+Ok28nCRxgejPPw=
-X-Gm-Gg: AfdE7ck8PFMsXhs5ig64Id9vZhB3QnIJ+q7GyJMVu1HmzsPOFLYo+8kcU/jhVFakLnp
- 7koGiaBqXS9U6N9MSEo8hdQvzotB29kvydKsAAenIgG2G3j5J9Nf2nGI698Za0Ct4LtUpxTCNo9
- 1Q0fnjQNx96ndedMGCpPaoJEP/GEJ30DKDSE8xd2qa6Fif5sRfuPT59wszFulWv8Xb2dMggEZfA
- lJ7Wwf/OTn2cO2cDhzI4wd9tzTcP6TW2Vc5GJf2woqWxvqm3VjDE6yYHG76jDWBR7xACxXoD6kB
- PXw7dYOXczfkc15PI0ZyT/q8Ba8WoA==
-X-Received: by 2002:a17:90a:fc50:b0:37e:cb9:fd7d with SMTP id
- 98e67ed59e1d1-38112382d3cmr3678969a91.17.1783067968492; Fri, 03 Jul 2026
- 01:39:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
- <20260702-submit-ce-series-v2-v2-1-ffda5bed58af@gmail.com>
-In-Reply-To: <20260702-submit-ce-series-v2-v2-1-ffda5bed58af@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 3 Jul 2026 11:39:16 +0300
-X-Gm-Features: AVVi8CdRHd2g6wFqrvHq0-ghjluCKDCIrWqXoweJWGmnC2pyNw8ntKPZYsbG-0U
-Message-ID: <CAPVz0n0+BuzFyvmx+OH4yo-UT6HeKOwQ5pDGOqV3x0qVq1=qCw@mail.gmail.com>
-Subject: Re: [PATCH v2 01/10] cmd: aes: fix DM operation handling
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: u-boot@lists.denx.de, Ion Agorria <ion@agorria.com>,
- Chen-Yu Tsai <wens@kernel.org>, 
- Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
- Daniel Golle <daniel@makrotopia.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Randolph Sapp <rs@ti.com>, 
- Heiko Schocher <hs@nabladev.com>, Alexey Charkov <alchark@gmail.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, Johan Jonker <jbx6244@gmail.com>, 
- Francesco Valla <francesco@valla.it>, Michael Walle <mwalle@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Thierry Reding <treding@nvidia.com>, Francois Berder <fberder@outlook.fr>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Jerome Forissier <jerome.forissier@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1783068732; x=1814604732;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=hV3OoQIP4JxTZV9ArazwcD+okGKQ8H3F/75eiYjwEMI=;
+ b=BOsHeeIGDSRI2+F2ZieV6c/Onbu3MS07h1GosdSFfhg7ovzCIWgdJkNt
+ VRuuFHTGfYTz8mpc/QiadB6OQRYC7TxRfsCiboapIDbf0sDvwHsCeosNF
+ x3SvZpX+LfqcOxoEtAvfod6KthD3Rpg3WxyyBV1MkZr4lGcBs+wh86U6l Q=;
+X-CSE-ConnectionGUID: dtqK5DzMRReiHVDNh3F6Hg==
+X-CSE-MsgGUID: bL7dMsMgQZSwpAOjtj0lCA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11835"; a="99595088"
+X-IronPort-AV: E=Sophos;i="6.25,145,1779141600"; d="scan'208";a="99595088"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE803.infineon.com) ([172.23.29.29])
+ by smtp9.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Jul 2026 10:51:12 +0200
+Received: from MUCSE816.infineon.com (172.23.29.42) by MUCSE803.infineon.com
+ (172.23.29.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
+ 2026 10:51:11 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE816.infineon.com
+ (172.23.29.42) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
+ 2026 10:51:10 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.043; Fri, 3 Jul 2026 10:51:10 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v6 4/7] mtd: spi-nor-ids: Add 4K page support for Macronix
+ MX25L25635E
+Thread-Topic: [PATCH v6 4/7] mtd: spi-nor-ids: Add 4K page support for
+ Macronix MX25L25635E
+Thread-Index: AQHc/JlhmrwCxIewZEiWGKOfwEa/Y7Zbjk2A
+Date: Fri, 3 Jul 2026 08:51:10 +0000
+Message-ID: <d29fbb24a43b4593b7916bc50037d306@infineon.com>
+References: <cover.1781508530.git.weijie.gao@mediatek.com>
+ <ab4739209544e1f55f623d17db1183547adce79b.1781508530.git.weijie.gao@mediatek.com>
+In-Reply-To: <ab4739209544e1f55f623d17db1183547adce79b.1781508530.git.weijie.gao@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 03 Jul 2026 14:59:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -141,30 +96,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D1=82, 3 =D0=BB=D0=B8=D0=BF. 2026=E2=80=AF=D1=80. =D0=BE 04:49 James=
- Hilliard <james.hilliard1@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> The DM AES command path takes operation-specific arguments after the
-> common arguments. argv[1] holds the mode, "ecb" or "cbc", while argv[2]
-> holds the requested operation, "enc" or "dec".
->
-> The DM path checked argv[1] for the operation, so the ecb and cbc
-> commands always returned CMD_RET_USAGE before running. Parse argv[2]
-> instead.
->
-> Fixes: b01444aa14cf ("cmd: aes: Add support for DM AES drivers")
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> ---
-> Changes v1 -> v2:
->   - Limit the patch to the argv parsing fix  (suggested by Simon Glass)
->   - State that the commands always returned usage  (suggested by Simon Gl=
-ass)
->   - Add a Fixes tag  (suggested by Simon Glass)
-> ---
->  cmd/aes.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
+Hi,
 
-Good catch!
+In Subject,
+s/4K page/4K sector/
 
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> MX25L25635E supports 4KB/32KB/64KB uniform erase sector/blocks.
+>=20
+> Link: https://www.mxic.com.tw/Lists/Datasheet/Attachments/8592/MX25L25635=
+E,%203V,%20256Mb,%20v1.3.pdf
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+> v5-v6: not changed
+> v3-v4: updated commit message
+> v2: not changed
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index 4d07221ae65..018a8341553 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -323,7 +323,7 @@ const struct flash_info spi_nor_ids[] =3D {
+>         { INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
+>                SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES=
+) },
+>         { INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
+> -       { INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512, SPI_NOR_DUAL_R=
+EAD | SPI_NOR_QUAD_READ) },
+> +       { INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+
+Like as some chips in this series, this chip doesn't support PP_1_1_4 (32h)=
+.
+Maybe using SFDP can correct the chip capability.
+If you tested this chip, it would be good to describe test conditions, such
+as SFDP used (or not), read/program protocols, and so forth.=20
+
+This is a pre-existing issue in core that adds PP_1_1_4 capability along wi=
+th
+READ_1_1_4.
+
+>         { INFO("mx25u25635f", 0xc22539, 0, 64 * 1024, 512, SECT_4K | SPI_=
+NOR_4B_OPCODES) },
+>         { INFO("mx25v8035f",  0xc22314, 0, 64 * 1024,  16, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>         { INFO("mx25r1635f",  0xc22815, 0, 64 * 1024,  32, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> --
+> 2.45.2
+
+Thanks,
+Takahiro
+
