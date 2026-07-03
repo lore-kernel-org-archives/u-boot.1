@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70412C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E01C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 20:32:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 269E684A67;
-	Fri,  3 Jul 2026 22:32:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 654A684A76;
+	Fri,  3 Jul 2026 22:32:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RRL0rYZ4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T+NWM3Xd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF3E849E5; Fri,  3 Jul 2026 22:32:07 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 2C5E384A48; Fri,  3 Jul 2026 22:32:08 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0ABB384A0F
+ by phobos.denx.de (Postfix) with ESMTPS id F3BB384A48
  for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 22:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e6b554044fso680426a34.0
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 13:32:04 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-44865cf3010so597552fac.2
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 13:32:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783110724; x=1783715524; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783110725; x=1783715525; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=snCdKJDyRJqfcRKlS59Z/mgFez1M/oubfV12pHp6WBE=;
- b=RRL0rYZ4OZkU/Vl+7Zwzwk3DoEM2U0ikx0Ka5Wv+8JildvoBRFK0P3X97A264bJIUN
- 78YrFHBVu/5WLJOhMEthcazyVDviPS3YUCmJuBdgRccXJbZC2Ee5vqytrDd09KXYBR4/
- 7SD6bMspkJBIbxdem2jOtdGnUy16SOtSNK7Tc=
+ bh=+yW2dyH2vgXyc7g8drDf9Fw4QRNFXThWB/eM13znzvw=;
+ b=T+NWM3Xdhwe+ZnQYDsGv7mzRxRoREh1QaRZv8Zyx2jfj1LgEuhr+fNNsBhQnbcvJR6
+ bYRfpAjPxOQM91uAQ2Qs6o22eRXvlUb7JGF7C9x0DeDS4X34Vk8jJowRWfvQ595HBg2T
+ c86eCcoZE7OxDZ7zpcPQ5rjInt9wnqwJlyxQI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783110724; x=1783715524;
+ d=1e100.net; s=20251104; t=1783110725; x=1783715525;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=snCdKJDyRJqfcRKlS59Z/mgFez1M/oubfV12pHp6WBE=;
- b=GFDQScyn7EbhcccvOl4qKzp2644lagfZBEW5lzatOB87Z/tg+gTvMobMEB0sXRMDwX
- BhJJdzrj3wNNOFMZTJyZrpaFkPrqPLUQ6dxpRyMGzqunQyXs0wwVU1F6nVbR5nAJeAmY
- Tl1bzC40H7qSb0mX55d2y35oL5awuvUS2mnQqNxZdyBtxVhza/jdqyqdJlFk/uaKaM/F
- tLwHrMpuNHql4nN5Bo7NxSYlnDr0fSCloQV5HSzA1jG/dMvhMApCTqtaxP2dFMQAffnz
- i+6P+aVCN6T5Efgo+ObqzGRM2ig3q1hYFbbLPC2DTaPEH3za289S1vP8TzC23DKWBMja
- OcBw==
-X-Gm-Message-State: AOJu0YxLohYMCZyxkUtgO7zWC3bEsfo0nf5iS5Mvvzu9O0Awwo3X3F/S
- RlOX88xP9k1GWlD53peaCNRecyy5kdyItQE7SqIEVgFzilPHEODdlnGrbvLpB+1+UVs=
-X-Gm-Gg: AfdE7ck87c9xfuCHqDk1dA08BKp8CMF7uSNb2pCADRzBYyqlTKwZO5u8J9LMZ5JWM/b
- u8RJgKWkDfAw6V4JCKKe4yEp86nI4kre2+koR5+Bsr4W2MlRL/hRc0lVOlFzPeyjwj0kd/FR31p
- 2ulSJ3mONCQOhEw9HK7glj/XhBr/L+2e5VyCqPnBv2C7QURn4ygNrFu+BPFzcJTcgPhgXaEt/mO
- 2MlQCVfVLAktnz4jf/EFJ/10WAvjVcFRbBYkGKWUS1Z+IrxIqMcUTl9wjLaEI2+6zGCpt3sZiV4
- sHgYIgN7b5p6Q5ObtBigQ7I82hKjTKbNDdMZPfCC8tGiAyT1tTviBinogY1hHLSxd/VgNlc0yCt
- m1ynsvQPceqVkWxv7TRFsnDjmj3TA/r/lBAh8D71FPJapaClyzv9gdJBcBSOJcrf4oBxFUxApbm
- rJOKWBgpDgM4J2A7L8FR6mQeYj0mE4hnFhz2JLBNPYwBt1nqQveijZZ9z6tP8R5UHq3nBvxUc/N
- c2E5gZt9QMF7H4iNZ0nL64kWdlKTabHpW8K
-X-Received: by 2002:a05:6820:6ac5:b0:6a1:50eb:d4fb with SMTP id
- 006d021491bc7-6a32f57ca48mr390734eaf.60.1783110723771; 
- Fri, 03 Jul 2026 13:32:03 -0700 (PDT)
+ bh=+yW2dyH2vgXyc7g8drDf9Fw4QRNFXThWB/eM13znzvw=;
+ b=JHk6BYS7KyJ9zUG2E6hLnxtFhTQhLSszLE/W4s+Ga3Ls8SHpvHVaUGgDOgvSecs4kj
+ +ziH74PEK7WtPdkJlk+/84czBE4n57v0jR+/cHPX6c+7Oq3TsjVhs61ZA2I2Jt3qt/Id
+ Cen9QFocnUDr6COYPqyv2VmQ3upZHVgM28PVLV1JMSONS+NlpXGO4zVt7pSbULf0uApG
+ 9j13/UlPwCg2AfG3dcWOH73gqvi1z70SAg1pjfof1ug7ZncGqODdGzFl0QJcmYv13oPZ
+ o0vz13boG2uAOcKAlzwCmHGtb9LxN+ZCtEeAl/ioh8T0qBzfZ5ggg/E2evLautWpLFJ5
+ i2dA==
+X-Gm-Message-State: AOJu0YzwKKuf3ZQfnF1uZnGQ33hij8aNFameL0wryKzAoMYvYPSsqoHj
+ +Ifg5L95waRGE6MdDJE0cy+0iMJ7VSCxcUOLxveFFZRdh2Bbe8WazJnni5xewt3Y61qbvqgxX8z
+ 5toekLdQ=
+X-Gm-Gg: AfdE7cmVAttC69XB976twxk6nLjOCvM+X9anFjYCpnFM1lFkOtpGfyPNr08Ph/+CbdM
+ MdoyB76UeQGZFMF4K9k6wJv2aZ/eaKMkHTaifVdv9xcJaw7Rb6CWeoPPa5RcVE5Qc4swKz5uESj
+ gbRTcKEqDO3woxIemdBWtZpyrKWHMDVuSL5Iea2D+HNpcGR9FRGIICd3+9sZjCHYoDu3AXcLr70
+ egY32OHtDu4uBJVB7dzYT4X+4WCo6pTziH61ucUCEH4EGxFRAkrgfKzy5jtwIbPqHvqtyxW3SUE
+ didLeV8cZx9vUY+mErF0XsK8F5qkLq7i5zUfGw3wLOP6t4qRuvxIeANuNrJJiZCTL3brnlpS1P3
+ fsSFBBcgyUc4gT/RQimatqv3Q6zL/pP1lK1vP2icXBlaUrpnap5noVqCnlYPAVT+tQK6GcRLYvX
+ jTcAhAJuTKw4sXZ0JcMB59z7i/LopoAE10wbGyWTnhEuSATBnFh4fQKHCNugD2Yynv7SVmflasU
+ 7Q3ph10PSN8LMtDbgDVWxQC7v5xCA099NPP
+X-Received: by 2002:a05:6870:d8d3:b0:43d:1ba2:4335 with SMTP id
+ 586e51a60fabf-44d18347631mr548570fac.26.1783110724722; 
+ Fri, 03 Jul 2026 13:32:04 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-44cfb1bb17fsm2917874fac.5.2026.07.03.13.32.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jul 2026 13:32:03 -0700 (PDT)
+ Fri, 03 Jul 2026 13:32:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Cc: u-boot@ew.tq-group.com, Simon Glass <sjg@chromium.org>, 
- Aristo Chen <aristo.chen@canonical.com>
-In-Reply-To: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
-References: <20260622111933.1488593-1-nora.schiffer@ew.tq-group.com>
-Subject: Re: [PATCH v2 1/3] bootm: fix flush_cache() with IH_TYPE_KERNEL_NOLOAD
-Message-Id: <178311072300.3138827.15419616193590905354.b4-ty@konsulko.com>
+To: u-boot@lists.denx.de, dmukhin@ford.com
+Cc: sjg@chromium.org
+In-Reply-To: <20260623220630.2828767-1-dmukhin@ford.com>
+References: <20260623220630.2828767-1-dmukhin@ford.com>
+Subject: Re: [PATCH v5 0/2] bootdev: few fixes for automatic boot
+Message-Id: <178311072388.3138827.1069070795509510122.b4-ty@konsulko.com>
 Date: Fri, 03 Jul 2026 14:32:03 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -97,20 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Jun 2026 13:19:31 +0200, Nora Schiffer wrote:
+On Tue, 23 Jun 2026 15:06:28 -0700, dmukhin@ford.com wrote:
 
-> `flush_start` must be set after `load` has been assigned.
+> This series addresses few findings in bootdev code.
 > 
+> Patch 1 fix for automatic boots in case higher-priority bootdevs fail
+>         to be hunted.
 > 
+> Patch 2 adds unit test for patch 1.
+> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/3] bootm: fix flush_cache() with IH_TYPE_KERNEL_NOLOAD
-      commit: 0f890963da2d463dd47ec77ef75b1324cc8064f9
-[2/3] bootm: warn about load address for IH_TYPE_KERNEL_NOLOAD in FIT
-      commit: c2abc606653e7eb1e8dbdbaaf1eac392689875ea
-[3/3] bootm: allow omitting entry point for IH_TYPE_KERNEL_NOLOAD
-      commit: c63051237f2bc79838a27473709948408acdf38b
+[1/2] bootdev: scan boot devices at each priority level
+      commit: 264ba13f14767fbe7a881d25167d305fa5d7f6b6
+[2/2] test: bootdev: scan with a broken high-priority device
+      commit: 93e9af685fefc454580dcf567b03c139a2fe8ebc
 -- 
 Tom
 
