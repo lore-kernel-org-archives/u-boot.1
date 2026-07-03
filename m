@@ -4,164 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0243DC44500
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 09:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0E5C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 09:40:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6554D847C8;
-	Fri,  3 Jul 2026 11:19:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C0C65846A4;
+	Fri,  3 Jul 2026 11:40:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pwFmJae/";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Srpl/IDf";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cudccNz5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D61D28484C; Fri,  3 Jul 2026 11:19:49 +0200 (CEST)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
- [148.163.154.28])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 31834847C8; Fri,  3 Jul 2026 11:40:40 +0200 (CEST)
+Received: from mail-qk2-x02.google.com (mail-qk2-x02.google.com
+ [IPv6:2607:f8b0:4864:34::2])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 572D0846A4
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 11:19:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 737CF84119
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 11:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
- by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6635tljt292829; Fri, 3 Jul 2026 04:19:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=ik3lSx5w6+A7mfzjeYtGiolYwr7dW7w6QRlvJmJSc
- b4=; b=pwFmJae/Nk6FlXTGf2GyHbIuSTtlCD5u5DfUS2tzLT8rB21mpdR8GXT9A
- mGYEqBGCZmJJt33YBL4CQW0qRSA4qKANsiu/MpGr766Z0Bt+U3P9X9aZm9kybjSf
- EpQ8bD/VS1Pz9hYrl6alkxfKyR8ApZ1C7xFXqEK/c8Iczd4E52kHiBTCU+vSqTgL
- +VDT+rmtUIZXvU8QcZ3bTjseQw4JiQVK61dfOc8R1JIqGylGc2kCOOB1gp6L0s+4
- eZzuHaSzStQzUcBRr0xCxsmj/TNQDQvn53lR2/cO1af2ezF37W7kJZvv4qhMNbht
- 8z6lDwauN3RoF7vTr00vRMGiBCVyQ==
-Received: from mw6pr02cu001.outbound.protection.outlook.com
- (mail-westus2azon11012070.outbound.protection.outlook.com [52.101.48.70])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4f63a72ajs-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 03 Jul 2026 04:19:34 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SSA3nDtI9mMWOlk3Wx/CQZnbQdalVWRgaE/fvAos4yEq7/BaBKN/0ujnxB45kKz1KBYhEuAzEPpj/gB10x7ugs/SX0sZQCnd+CEQs6mc49X6Xnf2uNAyX8pipKaMslj9/nA/XaT0JLk36wryna3cHT/4VfCgt2iVOz9ZIyheCRz8+7mn7VsiM/QpYGK0jmIMA8hEN7II9xuvjgYtehaBpYnFsprYu7lvDigYBn9hHeKnAjtaO237ZX2mLP3mBc54BJb9Wx+PAqh/3k3u1pDAXtKCdY60ZTToXYBIbx1EWpNgqOc8BtEkCd6+F42kIYIGuciLGMacIJfrgiYoaJA7iw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ik3lSx5w6+A7mfzjeYtGiolYwr7dW7w6QRlvJmJScb4=;
- b=yJxsVWJ2Mp2M6hBZ33tqRT71wVI0t2VCtz9ionLgPFfGsnVAi3SMa3wsEkHPi3SehrLRgiYiZPVpOchpozSSuBrtKbWmhNatJPzPYo9iFrbXjGUQpzrRpGSxLVesnSKg4byGLDX/3V0n4/O6T5eD0PR0lHoH0zLy58S32kBJcPRy9/vpFkrR/0laArLZjRlhf0M+gGw5QUpvyGY1sYIB5YPmMA3jPYGu5ym/Y7byP5X1TvxSfMDRbfQoz9Q5Rpvtudv3UBYfYUxDFmW3vqR6kePHf8zmbRvUsRjFJE4rsUW8WU/AJMvk+F0SN5ujrbb70SspXjs0KrwpKmZfaVukRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ik3lSx5w6+A7mfzjeYtGiolYwr7dW7w6QRlvJmJScb4=;
- b=Srpl/IDfymvPbQOkxepSHJ4gN22cxR0QNq9qb9cSgIjts2Q6wMfMg0/QZYRxaDWunsD4reT+Iwyjbap8dMKxO0ncPR1++AcgxOmwBAnzwp960dmzOSZIgpghFEGeYuohqKdmUbot8VnWE1NQ/2SLx3QiO38IDw5GR7TMnkb0Oqc=
-Received: from DS7PR03CA0249.namprd03.prod.outlook.com (2603:10b6:5:3b3::14)
- by IA1PR10MB7240.namprd10.prod.outlook.com (2603:10b6:208:3f5::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Fri, 3 Jul 2026
- 09:19:28 +0000
-Received: from DS1PEPF00017090.namprd03.prod.outlook.com
- (2603:10b6:5:3b3:cafe::59) by DS7PR03CA0249.outlook.office365.com
- (2603:10b6:5:3b3::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.9 via Frontend Transport; Fri, 3
- Jul 2026 09:19:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DS1PEPF00017090.mail.protection.outlook.com (10.167.17.132) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Fri, 3 Jul 2026 09:19:27 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 3 Jul
- 2026 04:19:27 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 3 Jul
- 2026 04:19:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 3 Jul 2026 04:19:27 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6639JP4E1758656;
- Fri, 3 Jul 2026 04:19:26 -0500
-MIME-Version: 1.0
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-qk2-x02.google.com with SMTP id
+ af79cd13be357-91d44b471d8so12094085a.1
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 02:40:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1783071636; x=1783676436; darn=lists.denx.de;
+ h=to:cc:date:message-id:subject:mime-version
+ :content-transfer-encoding:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=2NiKhOhhsk1F+L9klIZVQ3CkBT3W1rBvapd+Fujw/IA=;
+ b=cudccNz5WL9gFZ8lH2eDgG2+HgA0NxNPY/q8NLSpNTFQAOFOFoJndF4rXdgseAnN4R
+ C8HcFiC4xQxFauti6qjoM19f8IW2G4T8t/2qP3ATUtu46XG4mc2RZu+Tp87eDGFbLm3c
+ wW0yVayEWQyRc/MnRN5WpJsQ920RBIeh2/xJTaRWFTf0QgS1YakZaKGG0vbQShc1GLs6
+ b9Oj6oTG48cI56iLlOE0mbANPjS4nKiox58y4mNzistcICgLA1bJ1o1UdWp11iqqOpwL
+ p7CG+Drln/7ENmlhwC2GaLNG0aKJOjDrFa4P76g9PPY1BcDaPMtXWvn+E5xDQfxz4Leo
+ G68A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783071636; x=1783676436;
+ h=to:cc:date:message-id:subject:mime-version
+ :content-transfer-encoding:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=2NiKhOhhsk1F+L9klIZVQ3CkBT3W1rBvapd+Fujw/IA=;
+ b=jHdX9tpRcHibWdnYNINXHq820hUlooEdyGuXyRCGTNxvL9mTtnaY4sUXxq7aJzJvPL
+ xy+lVEkLWldardKSrhGemoWXOJtWqM5TLYeEmIxsdvWHRzJC4DHak1P75VXvuAhPTsRC
+ SRbhse3o+LYxtcf04l5gPfv5mtNMJDYdxr95ZhHceyRi7IMrb1ho1RvbPv04u8d/i4RU
+ OXehvzkOXXkXbSjSpiAelTN9zWTr024DtqZUZwWg1/WH+JyO0jFhE6dK5KKUXbWxZSPf
+ J6or1UME0mIoJAnpYoN3Yz/S1XVW+cBeZtyf8fgWkEH0rahp1Gz5sghbJC/pRsr0uTfH
+ 2RzA==
+X-Gm-Message-State: AOJu0YzH0RAPcmqOtdaEb5STk/dCD3c6P28p9PMb85iBPRY7nNs8HFN5
+ dtHVq8DI6KaSbILvK8EE1zsXljNbWOEAyVk4I7NN6YV++qdDezuSaC8gB2sbdQSKj2OTsDFLd6f
+ hVnknX5jEj1HZ8Do=
+X-Gm-Gg: AfdE7clqPo7+qLxDUKDULmezNoUyN+oOed3IBLOlMedZPu6d3OytzLEOBrlhgCX7m1R
+ X6EKZfHInstp7sx7ffolOy2IOg1SxIeEdtPOb206+UO3n3ZG0VWdoLzLBY0uPjcuKV48qRQ0JdZ
+ TNuxcaekie4XaMWFIiDBtsX1O19cxWiaSXf/qrAJ/tU7ZUET93dIwYxHSV2yYDphWL32O+hoZIW
+ 1gT1NmELp4AfkEK6aY3GSMhgIadsQ9jd9ag5oQbS0QSINdiwH874dY3v/USbWGU0nEbyQ1ybhpl
+ J6gFF0xha6VmBis7H1YiEWIzaS7sIU37CV/dydAxcW4Hk5F93O8IcbcaJIAeRmnB+stdk12u87V
+ 8DPX3XGbEz7aE0X8TVL0ykcXGN7f9QU+7NH+QxHAK1K7VSGUrCzA2n6rzllflKK+PJVM3Btpg1R
+ 4iYGcvdoXtsX6TKWi4iB4u/qRsoe0UgOzlBaE=
+X-Received: by 2002:a05:620a:2945:b0:92b:1233:9a2 with SMTP id
+ af79cd13be357-92e782055c4mr1230666585a.17.1783071636012; 
+ Fri, 03 Jul 2026 02:40:36 -0700 (PDT)
+Received: from smtpclient.apple ([194.124.76.118])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-92e90b804dasm125363085a.1.2026.07.03.02.40.34
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 03 Jul 2026 02:40:35 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 3 Jul 2026 14:49:25 +0530
-Message-ID: <DJOTOXMP2MQO.3SCAPYA6XBRBJ@ti.com>
-Subject: Re: [PATCH] fdt: fix phandles not copying when using templates
-From: Anshul Dalal <anshuld@ti.com>
-To: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260629-binman_template_phandle_copy_fix-v1-1-196f95a13388@ti.com>
- <CAFLszTggZ57jZw2r10COgm42SgPZUpKXoe_1uEzaX48KtGVYig@mail.gmail.com>
-In-Reply-To: <CAFLszTggZ57jZw2r10COgm42SgPZUpKXoe_1uEzaX48KtGVYig@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017090:EE_|IA1PR10MB7240:EE_
-X-MS-Office365-Filtering-Correlation-Id: d42c9f32-6923-4775-d0e0-08ded8e42e7b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|4143699003|3023799007|6133799003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: n9xWZgNIJZo52craiGStF8R5oKBDbpe8EjZvtq9PEo6m2cpk/diG1zJQvssWD/HWKUwrHiP2Bgy0f0uMz/Kqp3KXuU6jnU06SdRldmV2AMlbHGuqQNRxVvgOHNeqg/t7Vinzht8LDrj96siIMuBhRA8PiU8B7/ko26ZlOJh+fc9M0L0eEKjomoBj3L09ARE/T9v5NCN2u9Dyka0rVX+36TbL1qJnmsiJIbNOYN9kvjf3TwhNaUTZfv2yk0kB/GduiVJeOIvaLGB5itpj1ppcKJW9SoL77wLg+oQ5iv/irHvZgA3oiEoUE7I2tuAeaEKQnLTT54TCP/q9303fkbzIg77ko7C1mwUR/Ai0BAuHNt6XpvCEb8EyiI9AsdOcNMWjcxa9dogDQ1Ba6eON/0nEfPOjF8ZszkIBFWfYahnrYGMN2OVe572i/Bm5ybJX6EIbCf17VkSrUf7TfspHegPHQEAcraMqvFRSyKGxuq7Pmv0lFY1XUmwtJGp+A67EUI7eKJ5vwPJQ4h5+rbW7HyixLg/RSeodi1wUGYQQvm5jsETx2qCi9eJRKcLtmAcSW8vE5cfIJRApMWhdxZLtWDj6WWm1BJUBaP6h4F/Q9ZVjl0RF0FbmD4w6xPwDrHQPtutbx8MrVVS3g1vqMbinL4pX4QAb0OVb+ulzmlA+w7vuhPe3PtpMubKFxA1h+bSVvH+gM9nIm6uV3YNLZS91ivxgEA==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(4143699003)(3023799007)(6133799003)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ZI2gEZD6zGmMyd4TM9ZocVwueGSAp7Z7PWrQ0kTB/VM3+3r3XWGktAX0KJrUdTVL1jZGuzSoKNPkCH97MgdI/yGYMJvV6VBKdWIy/OXZpC9A5et9Cd1jCSowI8wlhUnNBoFDOaGRCf+TMBxiXGC0qNk9hBDJXtXS7lcoUWX3TLD1hZ8l48imax0ewQYCv7yvihY8DqDU8hi26R4pJ8Y5Eh7lwZHCuYBL69jZ3DsH1Jg+LrG2dLZ8jLRhCOdPxtX/PSwTIrYYbZ7Mg0HBjbWqtIIhMaWdUOfku5SEomzz/cobh/jjx6bB0sax+aMutum0TgAAbygTK4qbGxj4Hq3b/FoYE+yAGPJY9VwTzx+zWjgWodRvEVoldCjWlqC2C16FlqwdSNDHgrZqdfT3B+baCHFfwAEJXbm6hu0sQLxYCCP7gci5JraMcm0kSlsss5Ng
-X-Exchange-RoutingPolicyChecked: ky0QHuyOodscuak5tGE2FL8iacQ7CEU7qHGWlQLOIdCiMv1COBt9JO3BYLrLMMPReD7VhKz+DG8ssukzkTr+CnyerkgRBPqkHqweWky9d+3+QIkuOu2nuxQB4DrUc5ftW16l/DXIoyi7M++OntOEVl/bYWjR2WmbeNcqkDX2/UYdVUTFswNB/h+lo57YjhhMzXHpAiLgII5gAHc5b+NGjb2/uEvp2R2Y4XGCNscWp36qrLRWGqKAO7WbPemPixcL0tQGdsgtbwc8LHR2lOtcdGPS/Djk69VXonHExz+5pqKzv5NCf2eTz4gYXZjvI8ApNMMDpxOjizC8kwIBmAM5aQ==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2026 09:19:27.6247 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d42c9f32-6923-4775-d0e0-08ded8e42e7b
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017090.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7240
-X-Authority-Analysis: v=2.4 cv=BMGDalQG c=1 sm=1 tr=0 ts=6a477ea6 cx=c_pps
- a=037dmpTZGv+Xy+TtntRLUg==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8
- a=_d-bOhb-nCkKrFof05MA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: yWxXy0ZY2NUJm44AH3BS1d3WLiYcTVbN
-X-Proofpoint-ORIG-GUID: yWxXy0ZY2NUJm44AH3BS1d3WLiYcTVbN
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDA4OCBTYWx0ZWRfX9ZiuF+w4H4GL
- CGEUGVu6gmKHgLyzaVDQPlFhrWKF7HZnAVhTF38roSCdAToeGCwuk5lT4CAFoHD1dxqXW6Pgxwy
- jm+N8sbAIEEqFSENECo4CXb1qaq6Qyc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDA4OCBTYWx0ZWRfX96tdNWxUtJgJ
- i/8Em0/1Eqn6sykduWZPgcmo39tzg8WO9XWkfRuDRy7s6fo1oAeym5uEC+x9g8JVKL+g25/6GXV
- 46+2dRiLelgpKZjZtuAyVZcEzyTKWhS52esIqyKwb44VujUVeRVrRMaX7bbwFyAvou2tcYIS+K7
- PxCQEN1IotCTkWMKci7oLUYd5G3J7jks+1QRSPACtiU5X4LkafXLYgdcvNC96JNeANke8LbLHpa
- EPSYT+/qv4iseWmOn4eYjLPwn6FoPse7SCPXoR5gs9kXS99gPXRGqmEhYv8l6pY/FmQXVyDtRGG
- QW02GuAK5ifUwstW6KHtdnHNW9hKLAl5Kh7YuZwUpnGXXI/q8Eluv9XvvqlAR5FGUCj4Jv8qia/
- qyQaeDaHFRJmVSNFFb82oM1Ct33W9t5/DP8ZIdu/XLqVpbOY+PTZnV2ztUXzlKDXuvfWK48FtnT
- G/kkrW6bKIbka3FL9UA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 priorityscore=1501 suspectscore=0 phishscore=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030088
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
+Subject: [RFC v2] bootstd: firmware-owned OS devicetree for EBBR / SystemReady
+ IR
+Message-Id: <140504E6-5BCB-4566-A03F-2A94B0F5BA01@baylibre.com>
+Date: Fri, 3 Jul 2026 11:40:22 +0200
+Cc: sjg@chromium.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com,
+ baylibre-upstreaming@groups.io, a.fatoum@barebox.org
+To: u-boot@lists.denx.de
+X-Mailer: Apple Mail (2.3864.600.51.1.1)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,61 +100,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed Jul 1, 2026 at 5:37 PM IST, Simon Glass wrote:
-> Hi Anshul,
->
-> On Mon, 29 Jun 2026 at 11:49, Anshul Dalal <anshuld@ti.com> wrote:
->>
->> The phandles used inside a template were not being copied to the node
->> inserting the template, leading to a missing phandle error.
->>
->> The following example can be used to reproduce the issue:
->>
->> &binman {
->>   some_template: template-0 {
->>     ti-secure-rom {
->>       content =3D <&some_data>;
->>       keyfile =3D "some_key";
->>     };
->>     some_data: blob-ext {
->>       optional;
->>     };
->>   };
->>   output-bin {
->>     insert-template =3D <&some_template>;
->>   };
->> };
->>
->> With the error 'binman: Node '/binman/output-bin/ti-secure-rom': Cannot
->> find node for phandle 103' observed.
->>
->> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> ---
->>  tools/dtoc/fdt.py | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/tools/dtoc/fdt.py b/tools/dtoc/fdt.py
->> index 991a36b98796..6c3449095194 100644
->> --- a/tools/dtoc/fdt.py
->> +++ b/tools/dtoc/fdt.py
->> @@ -780,7 +780,7 @@ class Node:
->>              parent =3D self.GetFdt().LookupPhandle(phandle)
->>              tout.debug(f'adding template {parent.path} to node {self.pa=
-th}')
->>              for node in parent.subnodes.__reversed__():
->> -                dst =3D self.copy_node(node)
->> +                dst =3D self.copy_node(node, True)
->
-> I believe this is the one you pinged about on irc?
->
+Hi all,
 
-No, the issue of bootph property only being propagated to the parent
-nodes in u-boot.dtb.out and not in u-boot.dtb is a different one.
+This is v2 of a design RFC, not a patch series. v1 [1] proposed a =
+mechanism
+for sourcing the OS devicetree from a firmware-owned partition; v2 =
+refines the
+same design. The main change is that the devicetree set is now described =
+by a
+firmware-owned FIT manifest carried on that partition, instead of by =
+environment
+variables.
 
-I'm still working through that issue, will CC you on a fix once ready.
+This text is self-contained; you do not need to have read v1.
 
-> Please can you add a test for this new behaviour.
+A working implementation exists, with sandbox tests, and has been =
+validated end
+to end on hardware in both the plain and the secure (signed) setup.
 
-Sure, will send a v2 with a test.
+1. The problem
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Anshul
+Platforms that follow EBBR / Arm SystemReady IR treat the OS devicetree =
+as part
+of the firmware rather than part of the OS: the base DTB and its =
+overlays live
+on a firmware-owned partition and are updated independently of the =
+operating
+system, instead of being shipped in the OS image or on the EFI System =
+Partition
+(ESP). The firmware is expected to load that devicetree and hand it to =
+the OS
+(via the EFI configuration table).
+
+U-Boot today can source the OS devicetree from its own control DT, from =
+the ESP,
+or from an EFI Boot#### load option, but it has no generic way to =
+assemble it
+from a firmware-owned partition. As a result vendors carry out-of-tree =
+machinery
+for exactly this.
+
+For example, MediaTek ships downstream 'dtbprobe' (assemble the DT from =
+a
+partition) and 'fdt authndtb' (authenticate it) commands. The goal of =
+this
+work is to provide one reusable, vendor-neutral mechanism in mainline so =
+those
+downstream commands can be dropped.
+
+
+2. What a solution has to do
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+
+  - Assemble the OS devicetree (a base DTB plus a list of overlays) from =
+a
+    firmware-owned partition and install it for the OS.
+  - Install it on *every* EFI launch path, not just one. SystemReady IR =
+boots
+    through the UEFI boot manager, which in U-Boot does not go through =
+the
+    per-device EFI bootmeth, so a per-device-only hook is not enough.
+  - Support secure boot: when the firmware devicetree is signed, verify =
+it, and
+    never silently fall back to an unverified devicetree.
+  - Support A/B firmware partitions and per-SKU devicetree variants.
+
+
+3. Proposed design
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+A bootstd helper, firmware_fdt_load() (CONFIG_BOOTSTD_FIRMWARE_FDT), =
+assembles
+the devicetree from a FIT manifest on the firmware partition and returns =
+it;
+the EFI launch paths install the result via efi_install_fdt(), exactly =
+like any
+other devicetree source.
+
+3.1 The manifest: describe and carry in one artefact
+----------------------------------------------------
+
+The partition carries one FIT image (by default 'fdt.itb'). Its images =
+hold
+the base DTB and the overlays; each of its configurations names one =
+bootable
+combination through the standard 'fdt' property:
+
+	/dts-v1/;
+	/ {
+		description =3D "Firmware-owned OS devicetree";
+		#address-cells =3D <1>;
+
+		images {
+			fdt-base {
+				data =3D /incbin/("board.dtb");
+				type =3D "flat_dt";
+				arch =3D "arm64";
+				compression =3D "none";
+				hash-1 { algo =3D "sha256"; };
+			};
+			fdt-panel {
+				data =3D /incbin/("panel.dtbo");
+				type =3D "flat_dt";
+				arch =3D "arm64";
+				compression =3D "none";
+				hash-1 { algo =3D "sha256"; };
+			};
+		};
+
+		configurations {
+			default =3D "conf-panel";
+			conf-panel {
+				fdt =3D "fdt-base", "fdt-panel";
+			};
+			conf-base {
+				fdt =3D "fdt-base";
+			};
+		};
+	};
+
+The helper selects a configuration, verifies it, and assembles the =
+devicetree
+by reusing boot_get_fdt_fit(), the same code path bootm already uses for
+FIT-carried devicetrees: multi-configuration selection, per-image =
+verification,
+overlay application in the listed order, and packing of the result. No =
+new
+format, parser, or crypto is introduced.
+
+The manifest must be self-contained: images must be 'flat_dt' with =
+embedded
+data (external-data FITs are rejected) and must not carry a 'load' =
+property
+(rejected, so a misbuilt manifest cannot overwrite arbitrary memory).
+
+3.2 Where the partition is described (new binding)
+--------------------------------------------------
+
+The *location* is described in the control devicetree. The bootstd node =
+carries
+a 'firmware-fdt-source' phandle to a node that is a child of the media =
+device
+that owns the partition:
+
+	bootstd {
+		compatible =3D "u-boot,boot-std";
+		firmware-fdt-source =3D <&fw_fdt>;
+	};
+
+	&mmc0 {
+		fw_fdt: firmware-fdt {
+			compatible =3D "u-boot,firmware-fdt-block";
+			partition-type-uuid =3D "....";	/* GPT type UUID =
+*/
+			partition-name =3D "firmware";	/* optional */
+			filename =3D "fdt.itb";		/* optional, the =
+default */
+		};
+	};
+
+The '-block' suffix names the backend: a block device with a GPT =
+partition
+holding a filesystem. It leaves room for sibling backends later, e.g. an =
+UBI/MTD
+variant for NOR-based boards.
+
+The partition is matched by GPT type UUID and/or name; when both are =
+configured,
+both must match, so a misprovisioned disk fails instead of silently =
+selecting
+whichever same-type (A/B) partition comes first.
+
+3.3 Configuration selection: by compatible, not by filename
+-----------------------------------------------------------
+
+The primary selection mechanism is the compatible string, the way the
+FDT spec intends: with FIT_BEST_MATCH, the configuration whose =
+devicetree
+best matches the compatible of U-Boot's control devicetree is chosen
+(fit_conf_find_compat()), falling back to the manifest's 'default'
+configuration. No filename names a devicetree anywhere; the only =
+filename in
+the design is the manifest container itself, a fixed convention in the =
+same way
+EFI/BOOT/BOOTAA64.EFI is.
+
+On top of that, two optional environment variables can override the =
+choice:
+
+  - 'fw_fdt_config' names a specific FIT configuration (SKU selection);
+  - 'boot_dtb' pins a partition number, for A/B firmware partitions.
+
+All selection paths only choose among combinations the firmware author
+shipped; with signed configurations, a tampered value cannot select an =
+unsigned
+combination. There is no other environment dependency: the description =
+lives
+in the manifest and is updated atomically with the devicetrees it =
+describes, so
+'env default -a' cannot break the boot.
+
+3.4 Where it is installed (every EFI launch path)
+-------------------------------------------------
+
+The helper is consumed by:
+
+  - the per-device EFI bootmeth (bootmeth_efi), on both its disk and its
+    network (PXE/DHCP) bootflow paths, so a TFTP server cannot =
+substitute the OS
+    devicetree either; and
+  - the EFI boot manager (efi_bootmgr_run()), where the firmware =
+devicetree is
+    tried first and outranks a Boot#### load-option FDT, so a stale or =
+broken
+    load option can neither replace nor block it. An FDT explicitly =
+passed on
+    the command line still wins.
+
+Each path installs the result through efi_install_fdt(), the convergence
+point all EFI launches pass through, so the firmware devicetree is =
+installed
+regardless of how the EFI application is started, including the =
+boot-manager
+autoboot path that SystemReady IR uses.
+
+This is transparent to the EFI application: the devicetree sits in the =
+EFI
+configuration table before the application starts. In particular, =
+booting GRUB
+works unchanged: GRUB does not touch the table entry and the kernel's =
+EFI stub
+consumes it.
+
+The assembled firmware devicetree is complete and authoritative: no =
+other
+devicetree source is layered on top of it. In particular, =
+extension-board
+(extension_scan()) overlays are intentionally not applied, since =
+modifying
+the assembled (and, in secure mode, signed) devicetree would defeat the
+authenticated-combination model; such combinations should be shipped as =
+manifest
+configurations instead.
+
+3.5 Fail-closed error semantics
+-------------------------------
+
+Once a source is configured (the node is present), the result is =
+deterministic.
+-ENOENT means *only* that no source is configured, in which case the =
+caller
+falls back to its normal devicetree. Any other failure to assemble a =
+configured
+source (unresolvable device, no matching partition, read error, invalid
+manifest, missing configuration, failed signature) is fatal for that EFI =
+launch
+path: a missing or bad firmware devicetree is never silently replaced by =
+another
+source. Error codes from inner layers that happen to be -ENOENT (for =
+example
+a missing FIT configuration) are remapped before returning, so the =
+fallback
+sentinel stays unambiguous.
+
+3.6 Secure boot
+---------------
+
+Signing a FIT configuration authenticates the whole combination: the =
+base, the
+overlay set and its ordering are the signed unit. With FIT_SIGNATURE =
+enabled
+and a required key in U-Boot's control devicetree, verification is =
+enforced
+by the existing FIT policy code: an unsigned or tampered manifest is =
+rejected,
+and because a configured source never falls back, the boot fails closed. =
+There
+is no separate Kconfig option for this: FIT is the mechanism, and the =
+usual
+verified-boot configuration turns enforcement on.
+
+Thanks for any feedback. I will follow up with the patch series once the
+binding and approach are agreed (or in a few days anyway :)
+
+Cheers,
+
+[1] https://lists.denx.de/pipermail/u-boot/2026-June/623429.html
+
+=E2=80=94
+Carlo Caione
+
