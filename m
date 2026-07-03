@@ -4,82 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D3CC43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 13:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A87C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 13:00:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C23D884A90;
-	Fri,  3 Jul 2026 14:59:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
+	by phobos.denx.de (Postfix) with ESMTP id 182BB84AA1;
+	Fri,  3 Jul 2026 14:59:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="TfTqCiHq";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tdznb4wd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A6C1846F8; Fri,  3 Jul 2026 11:03:36 +0200 (CEST)
-Received: from smtp14.infineon.com (smtp14.infineon.com
- [IPv6:2a00:18f0:1e00:4::6])
+ id 41372846A4; Fri,  3 Jul 2026 12:19:27 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26F988469D
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 11:03:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
+ by phobos.denx.de (Postfix) with ESMTPS id 39AF7841F2
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 12:19:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1783069413; x=1814605413;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=AHCVGumrzr6hG5eq+VugOjuTLaiUutcUfOIcBwaybek=;
- b=TfTqCiHqraeo/aD/GqhqUJ0wZALFXoN91tDsAc7cxS45T5GKxSh9ppKb
- 67XXY0QpH18LoXVAg+IPzZ3eO04vfw+IFOkP6dN8TT3PKOOKuESCGjVtz
- x+EnvdTvuUL5i2l2Iw/04x6lAKktTbG78yTdOubBTzzBIJEmnmRMltOzh 4=;
-X-CSE-ConnectionGUID: o48dloVMRWqnshROzm0c/g==
-X-CSE-MsgGUID: 6lSvP+NQQ8musrgiY1MFdg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11835"; a="136528067"
-X-IronPort-AV: E=Sophos;i="6.25,145,1779141600"; d="scan'208";a="136528067"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE822.infineon.com) ([172.23.29.53])
- by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Jul 2026 11:03:32 +0200
-Received: from MUCSE817.infineon.com (172.23.29.43) by MUCSE822.infineon.com
- (172.23.29.53) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
- 2026 11:03:32 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE817.infineon.com
- (172.23.29.43) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
- 2026 11:03:32 +0200
-Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
- MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
- 15.02.2562.043; Fri, 3 Jul 2026 11:03:32 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
-CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
- <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
- <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
- <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
- <prasad.kummari@amd.com>
-Subject: RE: [PATCH v6 1/7] mtd: spi-nor-ids: Correct flash flags for ESMT/EON
- flashes
-Thread-Topic: [PATCH v6 1/7] mtd: spi-nor-ids: Correct flash flags for
- ESMT/EON flashes
-Thread-Index: AQHc/Jlf2JBwehz5N06ixsn9vXvgT7ZbmczQ
-Date: Fri, 3 Jul 2026 09:03:31 +0000
-Message-ID: <d8dfad96296b4654b206e08dc2156600@infineon.com>
-References: <cover.1781508530.git.weijie.gao@mediatek.com>
- <3facbb0d047ffeab20aacee385ce137bb8894716.1781508530.git.weijie.gao@mediatek.com>
-In-Reply-To: <3facbb0d047ffeab20aacee385ce137bb8894716.1781508530.git.weijie.gao@mediatek.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 7AA20C79ABE;
+ Fri,  3 Jul 2026 10:19:36 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9EBC660300;
+ Fri,  3 Jul 2026 10:19:24 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4BDC8104C83DB; 
+ Fri,  3 Jul 2026 12:19:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1783073964; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=eXFm1dhydNimOIaCa8dzKEa76edAEPMgHsZQjRr7R7M=;
+ b=tdznb4wdHqH2FFfgsPk04SscmQpRwbcpZSKphBqZ8xAbrRk5G2TN1YhfK4d7gv6aO7RbOX
+ +8Mr9tXwa3nGS2qg/q6IKDG0coxfgsk3y7z9p6asW09pyZHeEE2cyBZ46/5vDNUVDxVhzS
+ Uv5rZF1Sq2f41kfgtt62oMByS/4jn3Q4N07FT0Jf0xziXFSf2VnueMYtYv0YDGjWAThFiC
+ fW7wXb9jMDuEmSNUdLpUDj0a051zLENiuGGKRZ/rpqp6YX+SZlX7TK4WNwWr9ntWQqlhpu
+ UiORm1acj7nWhdfsalaTd+duQynaTVYeTX+1x5LuEWPCYBmMB3XHDm8j/xTONQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: "Bastien Curutchet (DAVE.eu)" <bastien.curutchet@bootlin.com>
+Cc: u-boot@lists.denx.de,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Michal Simek <michal.simek@amd.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Michael Trimarchi
+ <michael@amarulasolutions.com>,  Andrea Scian <andrea.scian@dave.eu>,  Tom
+ Rini <trini@konsulko.com>,  Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Re: [PATCH v3 6/6] mtd: rawnand: nand_base: Don't overwrite
+ read/write_page_raw() for soft ECC
+In-Reply-To: <20260702-dave-upstream-nand-fixes-v3-6-3814352982ad@bootlin.com>
+ (Bastien Curutchet's message of "Thu, 02 Jul 2026 15:08:46 +0200")
+References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
+ <20260702-dave-upstream-nand-fixes-v3-6-3814352982ad@bootlin.com>
+User-Agent: mu4e 1.12.7; emacs 30.2
+Date: Fri, 03 Jul 2026 12:19:21 +0200
+Message-ID: <87qzlknzo6.fsf@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Fri, 03 Jul 2026 14:59:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,63 +80,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 02/07/2026 at 15:08:46 +02, "Bastien Curutchet (DAVE.eu)" <bastien.curut=
+chet@bootlin.com> wrote:
 
-> All currently supported ESMT/EON flashes supports 4KB sector and dual rea=
-d.
-> EN25Q80B also supports 1-1-4 quad read.
->=20
-> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B.pdf
-> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH128A%20(2T=
-C).pdf
-> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25S64A(2SC).pd=
-f
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
-> v6: removed SPI_NOR_QUAD_READ from incompatible flashes
-> v5: not changed
-> v3-v4: updated commit message
-> v2: not changed
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index c0fa98424aa..0dacb4abdbc 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -90,12 +90,12 @@ const struct flash_info spi_nor_ids[] =3D {
->  #endif
->  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
->         /* EON -- en25xxx */
-> -       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
-> -       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
-> -       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
-> -       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
-> -       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
-> -       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
-> +       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K | SPI_=
-NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-> +       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, SECT_4K | SPI_=
-NOR_DUAL_READ) },
-> +       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K | SPI_=
-NOR_DUAL_READ) },
-> +       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K | SPI_=
-NOR_DUAL_READ) },
-> +       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K | SPI_=
-NOR_DUAL_READ) },
-> +       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K | SPI_=
-NOR_DUAL_READ) },
+> On writes, the Zynq NAND controller needs a bit to be set in the address
+> register for the last 4 bytes sent. This is correctly handled by the
+> zynq_nand_write_page_raw() operation but the callback is overwritten
+> by the core when soft ECC is on. It leads to write failures.
+>
+> Don't overwrite the write_page_raw callback if it already has a specific
+> implementation in the NAND driver.
+> Do the same for the read_page_raw callback to keep symetry between reads
+> and writes.
+>
+> Signed-off-by: Bastien Curutchet (DAVE.eu)
+> <bastien.curutchet@bootlin.com>
 
-In our discussion in previous revision [1], only en25qh128 supports 1-1-4
-read and program, but you set QUAD_READ flag in en25q80b instead. Please fi=
-x.
+This solution is aligned with what we have done in Linux as well, thanks
+for the fix which seems rather straightforward this way.
+
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Thanks,
-Takahiro
-
-[1]
-https://patchwork.ozlabs.org/project/uboot/patch/64ce1a920dc067717de2b39d2e=
-7a5098e6853aab.1781164951.git.weijie.gao@mediatek.com/
-
+Miqu=C3=A8l
