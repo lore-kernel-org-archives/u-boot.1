@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E6FC43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAF8C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 07:59:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3334F848BF;
+	by phobos.denx.de (Postfix) with ESMTP id 77ADB8490A;
 	Fri,  3 Jul 2026 09:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LRGyKK9Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GG09wgeG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F86084A85; Fri,  3 Jul 2026 03:50:02 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id A165684994; Fri,  3 Jul 2026 03:50:05 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69F07849F0
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:49:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 728FD84A5D
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 03:50:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-440df1c768bso12377fac.1
- for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:49:59 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-44ce674ed17so21065fac.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jul 2026 18:50:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783043398; x=1783648198; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783043400; x=1783648200; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ukob3PwEQrSXxhnR4tfZBbyEaiQvb50Cr9ZML+jwjNA=;
- b=LRGyKK9QGQQKJ8UILaRgWRQz1m1uxl8Czpkjyjz75ko2M35z5ewDsZhjLYJOw7uDQ6
- pZso4oNC8isKVY5dIX2V/LJ9VldcuM+xASgv0/nUGUyXIKfbT6Tg0+tqwRFDT6TuQyv7
- AKR446DPHVWYsNHqZAsxZU3G3MjXPE0WEquCMrQ0q+h7ZRKnhmRPDWIvnKaXqf5S5aBy
- IAc5qucbdJ4P5DiyysIYCG31kFObxoaauMM1OBHBoTkwgUzQ9oO+mmMOEgx78720kLNY
- lRyjg1rZ4qKbJYoRxJyP8xVGlpLmvoA0O2ohJtPUUCF19dUG+aihLflA0G+Eeb9wBeZN
- /ECg==
+ bh=x/Ly28iFzeK1QD2nlT5lt2lVajOfQeKG+PDF3jdEHCo=;
+ b=GG09wgeGulNMoQMoOVqcu8eZOQV02XGypmbL8oNeYGRmNRKx24bbFFl1f7dS/yO27u
+ oVwMsBpLwvDzUFoVTRV9Zo8JfanfGcNaPJtXTo14XT4I5CIgQiCj56S40ce9FYSo1GMK
+ viAxZuhM0E+sK7TmjK4pc6nbs9JZ44tOhmWuCpjjHB0lZ1LaF0zZ5MDVn1Zl9CIZ7Tbe
+ 0pqjDzcfj9cB4ynjCHyHBJSSx0X3ijfqFQBKvnnYBRMFowXh3LLd+yVTERZHOnaBFqAx
+ aOo85QHXCRHjtu/Binrm4cAtY13fM4kIJ+dvq/0E6Fw/E/66W1X4s0IVJWjmiHcuur0M
+ KVQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783043398; x=1783648198;
+ d=1e100.net; s=20251104; t=1783043400; x=1783648200;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ukob3PwEQrSXxhnR4tfZBbyEaiQvb50Cr9ZML+jwjNA=;
- b=ZyUc1Kz6ALAutFzP5EWmzToHoAe8qcmJngagEFqFMBR7jgrXl4NEs+tcO0AGEDY0nJ
- 1OmDbDKAkX6wUiEBvxbBMyiggOcBC+APa9rRzhLK2kLbucPzJut6jxy5U0CNs65uA8T7
- VyL+nkOG6PiwOjUYYVFDFanKOqU/wpCJl0DU8WiD+Kwz1ephrr0nmNko9q835Hyrj4El
- nTDR2/Pmb0OrzaXMnnrPPR+KH0ESBuJClja9t7SZCLQo95kaqE3Aj23Z5McPGBDmjK1w
- yslHg12uVy3guVqnlbZ+xcHxP1pn4BD0ZbEaoP36hvi2VJLej5bE9xtTehouI0SR+Ded
- pnQA==
-X-Gm-Message-State: AOJu0YzJVGZqXzdrrB867Y38b2/Wx4o2XwsfpN0qxg4NEPqUvCR/h8rR
- eYzEHzXlg1fNBOwfYjF7lOlvRDxY0xkczC1UIXdVWEwQPs683HZGuAc/KKdijCsNObw=
-X-Gm-Gg: AfdE7cmylBoL/hdQ3y9TSvF33tNPbVT1ptFH4XgaQh9y9YEXVOYjqDazgW7bzBUjRR7
- 2GTooRCmRwMq8/A2bozJuFCSU+WvqYmdtZZcSbCNyEIoI6fAaXLehct/+4kY4HpH67lUPnbPWC7
- YTx6deiPV0kEzaeBk0U3IMl5qO0RvkguvV8Bp96BhYWSDolK3O6orPs+lYz0CUAANyoUyMkIZf+
- jjtuJ434BP9PKj457SHwuMzeJlyTUbtRmpwYMG7w8ARgzUU7pCzzUql2ZhPQeKnqgZI/iD90Il4
- 92CUqielj2eWXhqDCXIAAmUJJEMG1KqFoTH5YHFgEAo2AOu9zRn9KqktMwgXW1z1c/5WeamH/Ww
- ur2UJbxlX7jIFHedTdfQWpaF48ebNzcM0/qhpYr991fAfGAzsZZMODeFeVyli+pBOmiN0V5qt/N
- VHjhqVA9kL1nOd2YoH4jha3I8xnlBoF6Jdb71WIzS06YL7Y4uTBCs64BtSwAproGF+6t+aUT9dy
- IC7I2v599O8OzTEvfThCemqO+fmUyItWpwpKfggo98XVhS3UQEAmzhoGGbRBUCFOYZROw==
-X-Received: by 2002:a05:6808:144f:b0:491:3ade:8b9e with SMTP id
- 5614622812f47-496369f932emr4770994b6e.36.1783043397980; 
- Thu, 02 Jul 2026 18:49:57 -0700 (PDT)
+ bh=x/Ly28iFzeK1QD2nlT5lt2lVajOfQeKG+PDF3jdEHCo=;
+ b=THVe/0rLuY5YjYqUtF9BYmV7vF/pngSjpSodJr2mwiF3saA+LsB5rcFxVBrJUa5s4n
+ Yq87SZ3w6Eujjc5IWTsh4cbwlXvQJWgOlEcd/tK11noFytXcxmtQXo7sX3oUE/jmkolk
+ bMQ0AtkM6uSZH4Vo976r/Vv6pcQYy29QpPAzvDOmJLVQ4nR6eKcJCgM7Tpu5t08Egqcq
+ /yiHUYthtimfdj8cWyNBmsofXAushQUoI9E58K6f+SA8aUDt3LYwSTJz7k6QUIv1Xf9P
+ wPixcSQP5l22mNBcNcVOitKgBLio1qMwBSiF05tAA6njtGKScK0V7qbdH8cLpHdCgGlw
+ pTow==
+X-Gm-Message-State: AOJu0YzC2SBvXrLGL3RR05j0iXogVxxLmX0/uqrs80YHm+arZESvi4dW
+ sIG5qKkyDJHRTXbZ1c/xCRWru9vAGZc7YCMs4gkai9c8PJtWfVRWZ7UY
+X-Gm-Gg: AfdE7cmXXElAfQUgjaSyP3RypddxprXx0lYvWJYGTfKd7T/LYGaephhovZW39PG23dv
+ wQEFp5mNrwawtJek5O8yf6YECLBuOpXKG/b20jkxOavV4je7Cg905Lltg3N0ZH0FHJQLDzl8F5/
+ XTpAxh7XcFbR1iUzMmYNkJeg5jRZ4DARvqDMgbcIm3JgN4PkR48V7jo8iTpFxaveZemS4/Gf3vP
+ a3Zf+/Sd4RMS/cQyERrku8IZb1dyflhcHrnKDfPydpKsZXarehnJ+rmw7UPznpsO00ky3I1Mpkz
+ t1BoV9EwZGOQd9Uy0L9urGKXn6vcCQui4CBkfZEe3rFstXgkJNlqOGNmGA91NRaO2ZxZ/3HwR3c
+ +4udM3Ty435UgBAxye7Bln8TQnOfumiIyWGuj3dRlwBuwnPRiRrsmrFL3S3vd0jpBSlwotEf6WS
+ BEFzgsKRvJpxfnstex/AfnEYmt9XHWZS08LV2/0yYgikB3P55cIMFpJGAVNZKZqXuQGdKYsBIme
+ 6gFzvL/fREes/sLtL3WRJq9MDVE0FsNhVjHpVkWSjHS6exzD4WhSCBK2hX3bZfqUZhaGg==
+X-Received: by 2002:a05:6808:1b26:b0:492:7ecb:94e6 with SMTP id
+ 5614622812f47-497e00ce19bmr1774042b6e.33.1783043400126; 
+ Thu, 02 Jul 2026 18:50:00 -0700 (PDT)
 Received: from [127.0.1.1] (97-118-25-163.hlrn.qwest.net. [97.118.25.163])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.55
+ 5614622812f47-497d1b43cfcsm2974888b6e.14.2026.07.02.18.49.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 18:49:57 -0700 (PDT)
+ Thu, 02 Jul 2026 18:49:59 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 02 Jul 2026 19:49:48 -0600
-Subject: [PATCH v2 03/10] boot: image: add FIT decrypt-to-buffer helper
+Date: Thu, 02 Jul 2026 19:49:49 -0600
+Subject: [PATCH v2 04/10] spl: fit: support encrypted payloads
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260702-submit-ce-series-v2-v2-3-ffda5bed58af@gmail.com>
+Message-Id: <20260702-submit-ce-series-v2-v2-4-ffda5bed58af@gmail.com>
 References: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
 In-Reply-To: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
@@ -129,609 +129,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-FIT cipher support currently allocates the output buffer inside the AES
-helper. SPL often needs to decrypt directly into a caller-selected
-buffer, for example a load buffer or a scratch buffer used before
-decompression.
+Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
+decompression or moving it to the final load address.
 
-Add a decrypt_to callback to the FIT cipher algorithm and wire it up for
-AES. The existing allocating decrypt path becomes a wrapper around the
-new helper.
+SPL cannot always allocate a new output buffer while loading FIT images,
+so use the caller-provided decrypt-to-buffer helper. External encrypted
+images are read into scratch memory first, then decrypted in place before
+the existing copy or decompression path consumes them. Embedded encrypted
+images decrypt into the final load buffer, or into scratch memory when
+decompression is still required.
 
-Validate the FIT cipher key length, IV length and unciphered-size
-property while preparing decryption, and build lib/aes/ by phase when
-FIT_CIPHER is enabled so the target-side decrypt helper is available to
-SPL builds.
-
-When DM_AES is enabled, try the first UCLASS_AES provider before using
-the software AES fallback in U-Boot proper. If a provider is present,
-ask the provider for the software-provided key slot before loading the
-FIT key, so hardware-specific reserved or preloaded slot policy stays in
-the provider. Return AES device errors to the caller instead of hiding
-them with a software fallback after the device has accepted the operation.
-
-For U-Boot proper, use decrypt_to for in-place decryption when the FIT
-payload is already in writable RAM. The encrypted data is no longer
-needed after hash verification, and this avoids a full-size allocation
-for encrypted payloads loaded into DRAM.
+Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
+support is selected by phase. Keep that path disabled for host tools,
+since the target-side decrypt helper depends on the U-Boot control FDT
+and runtime crypto providers.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v1 -> v2:
-  - Explain FIT cipher validation  (suggested by Simon Glass)
-  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
-  - Return -ENOSYS without decrypt support  (suggested by Simon Glass)
-  - Let AES providers choose the software-provided key slot
-  - Use decrypt_to for U-Boot proper in-place decrypt
+  - Drop redundant SPL_FIT select  (suggested by Simon Glass)
+  - Explain the IMAGE_ENABLE_DECRYPT change  (suggested by Simon Glass)
+  - Explain the host tools decrypt behavior  (suggested by Simon Glass)
+  - Decrypt external encrypted payloads in place  (suggested by Simon Glass)
+  - Skip self-memmove after direct decrypt  (suggested by Simon Glass)
 ---
- boot/image-cipher.c              |  38 ++++++++++++--
- boot/image-fit.c                 |  33 ++++++++++--
- drivers/crypto/aes/aes-sw.c      |   6 +++
- drivers/crypto/aes/aes-uclass.c  |  15 ++++++
- drivers/crypto/tegra/tegra_aes.c |   7 +++
- include/image.h                  |  39 ++++++++++++--
- include/u-boot/aes.h             |  10 ++++
- include/uboot_aes.h              |  38 ++++++++++++--
- lib/Makefile                     |   2 +-
- lib/aes/aes-decrypt.c            | 108 +++++++++++++++++++++++++++++++++------
- 10 files changed, 266 insertions(+), 30 deletions(-)
+ boot/Kconfig         |  8 +++++++
+ boot/image-fit.c     |  2 +-
+ common/spl/spl_fit.c | 68 ++++++++++++++++++++++++++++++++++++++++++++++------
+ 3 files changed, 70 insertions(+), 8 deletions(-)
 
-diff --git a/boot/image-cipher.c b/boot/image-cipher.c
-index 9d389f26cea..93b3dd3c637 100644
---- a/boot/image-cipher.c
-+++ b/boot/image-cipher.c
-@@ -25,6 +25,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -36,6 +37,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -47,6 +49,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	}
- };
-@@ -70,6 +73,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 				   int cipher_noffset)
- {
- 	const void *fdt = gd_fdt_blob();
-+	int key_len, iv_len;
- 	const char *node_name;
- 	char node_path[128];
- 	int noffset;
-@@ -94,7 +98,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 		return -1;
- 	}
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8e468c56176..73fc570d0c8 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -155,6 +155,14 @@ config FIT_CIPHER
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+ 	  and in the u-boot support of the FIT image.
  
--	info->iv = fdt_getprop(fit, cipher_noffset, "iv", NULL);
-+	info->iv = fdt_getprop(fit, cipher_noffset, "iv", &iv_len);
- 	info->ivname = fdt_getprop(fit, cipher_noffset, "iv-name-hint", NULL);
- 
- 	if (!info->iv && !info->ivname) {
-@@ -136,20 +140,28 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 	}
- 
- 	/* read key */
--	info->key = fdt_getprop(fdt, noffset, "key", NULL);
-+	info->key = fdt_getprop(fdt, noffset, "key", &key_len);
- 	if (!info->key) {
- 		printf("Can't get key in cipher node '%s'\n", node_path);
- 		return -1;
- 	}
-+	if (key_len != info->cipher->key_len) {
-+		printf("Bad key length in cipher node '%s'\n", node_path);
-+		return -1;
-+	}
- 
- 	/* read iv */
- 	if (!info->iv) {
--		info->iv = fdt_getprop(fdt, noffset, "iv", NULL);
-+		info->iv = fdt_getprop(fdt, noffset, "iv", &iv_len);
- 		if (!info->iv) {
- 			printf("Can't get IV in cipher node '%s'\n", node_path);
- 			return -1;
- 		}
- 	}
-+	if (iv_len != info->cipher->iv_len) {
-+		printf("Bad IV length for cipher in image '%s'\n", node_name);
-+		return -1;
-+	}
- 
- 	return 0;
- }
-@@ -173,3 +185,23 @@ int fit_image_decrypt_data(const void *fit,
-  out:
- 	return ret;
- }
++config SPL_FIT_CIPHER
++	bool "Enable ciphering data in SPL FIT images"
++	depends on SPL_LOAD_FIT
++	depends on SPL_DM_AES
++	help
++	  Enable unciphering of FIT image data in SPL. This allows SPL to
++	  decrypt an encrypted U-Boot proper FIT image through an AES driver.
 +
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data_ciphered, size_t size_ciphered,
-+			      void *data_unciphered, size_t *size_unciphered)
-+{
-+	struct image_cipher_info info;
-+	int ret;
-+
-+	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
-+				      cipher_noffset);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (!info.cipher->decrypt_to)
-+		return -ENOSYS;
-+
-+	return info.cipher->decrypt_to(&info, data_ciphered, size_ciphered,
-+				       data_unciphered, size_unciphered);
-+}
+ config FIT_VERITY
+ 	bool "dm-verity boot parameter generation from FIT metadata"
+ 	depends on FIT && OF_LIBFDT
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 044a40e1910..a4192db5eb5 100644
+index a4192db5eb5..c84cbfaf4a8 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -1030,7 +1030,7 @@ int fit_image_get_data_size(const void *fit, int noffset, int *data_size)
-  *
-  * @fit: pointer to the FIT image header
-  * @noffset: component image node offset
-- * @data_size: holds the data-size property
-+ * @data_size: holds the data-size-unciphered property
-  *
-  * returns:
-  *     0, on success
-@@ -1040,10 +1040,13 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
- 				       size_t *data_size)
- {
- 	const fdt32_t *val;
-+	int len;
- 
--	val = fdt_getprop(fit, noffset, "data-size-unciphered", NULL);
-+	val = fdt_getprop(fit, noffset, "data-size-unciphered", &len);
- 	if (!val)
- 		return -ENOENT;
-+	if (len != sizeof(*val))
-+		return -EINVAL;
- 
- 	*data_size = (size_t)fdt32_to_cpu(*val);
- 
-@@ -1568,15 +1571,37 @@ static int fit_image_uncipher(const void *fit, int image_noffset,
- 	if (cipher_noffset < 0)
- 		return 0;
- 
-+#ifndef USE_HOSTCC
-+	if (!tools_build()) {
-+		ulong start = map_to_sysmem(*data);
-+		ulong end = start + *size;
-+
-+		/*
-+		 * Avoid a full-size allocation when the FIT payload is already
-+		 * in writable DRAM. The encrypted bytes are no longer needed
-+		 * after hash verification has completed.
-+		 */
-+		if (end >= start && start >= gd->ram_base && end <= gd->ram_top) {
-+			ret = fit_image_decrypt_data_to(fit, image_noffset,
-+							cipher_noffset,
-+							*data, *size, *data,
-+							&size_dst);
-+			if (ret != -ENOSYS)
-+				goto out;
-+		}
-+	}
-+#endif
-+
- 	ret = fit_image_decrypt_data(fit, image_noffset, cipher_noffset,
- 				     *data, *size, &dst, &size_dst);
- 	if (ret)
- 		goto out;
- 
- 	*data = dst;
--	*size = size_dst;
-+out:
-+	if (!ret)
-+		*size = size_dst;
- 
-- out:
- 	return ret;
- }
- 
-diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-index a65200fb79b..3ce8999663b 100644
---- a/drivers/crypto/aes/aes-sw.c
-+++ b/drivers/crypto/aes/aes-sw.c
-@@ -39,6 +39,11 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
- 	return SW_KEY_SLOTS;
- }
- 
-+static int sw_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
- static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct sw_aes_priv *priv = dev_get_priv(dev);
-@@ -145,6 +150,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 
- static const struct aes_ops aes_ops_sw = {
- 	.available_key_slots = sw_aes_ops_available_key_slots,
-+	.get_software_key_slot = sw_aes_ops_get_software_key_slot,
- 	.select_key_slot = sw_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = sw_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = sw_aes_ops_aes_ecb_encrypt,
-diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
-index 5bdd3d736c4..2bfe3dc3fcc 100644
---- a/drivers/crypto/aes/aes-uclass.c
-+++ b/drivers/crypto/aes/aes-uclass.c
-@@ -23,6 +23,21 @@ int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return ops->available_key_slots(dev);
- }
- 
-+int dm_aes_get_software_key_slot(struct udevice *dev)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->get_software_key_slot)
-+		return -ENOSYS;
-+
-+	return ops->get_software_key_slot(dev);
-+}
-+
- int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	const struct aes_ops *ops;
-diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegra_aes.c
-index 55a4cec525b..348115ac5a7 100644
---- a/drivers/crypto/tegra/tegra_aes.c
-+++ b/drivers/crypto/tegra/tegra_aes.c
-@@ -321,6 +321,12 @@ static int tegra_aes_ops_available_key_slots(struct udevice *dev)
- 	return 4; /* 4 slots in Tegra20 and Tegra30 */
- }
- 
-+static int tegra_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	/* Avoid SBK slot 0, which may hold a preloaded key. */
-+	return TEGRA_AES_SLOT_SBK + 1;
-+}
-+
- static int tegra_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct tegra_aes_priv *priv = dev_get_priv(dev);
-@@ -565,6 +571,7 @@ static int tegra_aes_probe(struct udevice *dev)
- 
- static const struct aes_ops tegra_aes_ops = {
- 	.available_key_slots = tegra_aes_ops_available_key_slots,
-+	.get_software_key_slot = tegra_aes_ops_get_software_key_slot,
- 	.select_key_slot = tegra_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = tegra_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = tegra_aes_ops_aes_ecb_encrypt,
-diff --git a/include/image.h b/include/image.h
-index 9c8a746d576..5edbf8fdc33 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1862,11 +1862,40 @@ int fit_image_check_sig(const void *fit, int noffset, const void *data,
- 			size_t size, const void *key_blob, int required_keynode,
- 			char **err_msgp);
- 
--int fit_image_decrypt_data(const void *fit,
--			   int image_noffset, int cipher_noffset,
--			   const void *data, size_t size,
-+/**
-+ * fit_image_decrypt_data() - Decrypt a FIT image payload
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Returns allocated decrypted payload
-+ * @size_unciphered:	Returns size of decrypted payload
-+ * Return: 0 on success, <0 on error
-+ */
-+int fit_image_decrypt_data(const void *fit, int image_noffset,
-+			   int cipher_noffset, const void *data, size_t size,
- 			   void **data_unciphered, size_t *size_unciphered);
- 
-+/**
-+ * fit_image_decrypt_data_to() - Decrypt a FIT image payload to a buffer
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Destination buffer for decrypted payload. The caller
-+ *			must provide at least @size bytes.
-+ * @size_unciphered:	Returns size of decrypted payload
-+ * Return: 0 on success, <0 on error
-+ */
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data, size_t size,
-+			      void *data_unciphered, size_t *size_unciphered);
-+
- /**
-  * fit_region_make_list() - Make a list of regions to hash
-  *
-@@ -1960,6 +1989,10 @@ struct cipher_algo {
- 	int (*decrypt)(struct image_cipher_info *info,
- 		       const void *cipher, size_t cipher_len,
- 		       void **data, size_t *data_len);
-+
-+	int (*decrypt_to)(struct image_cipher_info *info,
-+			  const void *cipher, size_t cipher_len,
-+			  void *data, size_t *data_len);
- };
- 
- int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
-diff --git a/include/u-boot/aes.h b/include/u-boot/aes.h
-index acbc50b9e6f..6d81af3780d 100644
---- a/include/u-boot/aes.h
-+++ b/include/u-boot/aes.h
-@@ -34,6 +34,9 @@ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
- 		      void **data, size_t *size);
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size);
- #else
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
-@@ -41,6 +44,13 @@ int image_aes_decrypt(struct image_cipher_info *info,
- {
- 	return -ENXIO;
- }
-+
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size)
-+{
-+	return -ENXIO;
-+}
- #endif /* IMAGE_ENABLE_DECRYPT */
- 
- #endif
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index 592b7dbee43..73acca93ab9 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -128,11 +128,17 @@ struct udevice;
-  * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
-  * thus in those cases the set_key_for_key_slot() may be skipped.
-  *
-- * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
-- * with 128bits key at slot 0 would be as follow:
-+ * Generic callers which load a software-provided key should first ask the
-+ * driver for a suitable software key slot. This lets hardware drivers avoid
-+ * reserved or preloaded slots while keeping the slot policy local to the
-+ * provider.
-  *
-- * set_key_for_key_slot(DEV, 128, KEY, 0);
-- * select_key_slot(DEV, 128, 0);
-+ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash
-+ * example with a 128-bit software-provided key would be as follows:
-+ *
-+ * slot = get_software_key_slot(DEV);
-+ * set_key_for_key_slot(DEV, 128, KEY, slot);
-+ * select_key_slot(DEV, 128, slot);
-  * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
-  * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
-  * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
-@@ -146,6 +152,16 @@ struct aes_ops {
- 	 */
- 	int (*available_key_slots)(struct udevice *dev);
- 
-+	/**
-+	 * get_software_key_slot() - Get a slot for software-provided keys
-+	 *
-+	 * @dev			The AES udevice
-+	 * @return		Key slot to use for a software-provided key,
-+	 *			0 or positive on success, negative value on
-+	 *			failure
-+	 */
-+	int (*get_software_key_slot)(struct udevice *dev);
-+
- 	/**
- 	 * select_key_slot() - Selects the AES key slot to use for following operations
- 	 *
-@@ -229,6 +245,15 @@ struct aes_ops {
-  */
- int dm_aes_get_available_key_slots(struct udevice *dev);
- 
-+/**
-+ * dm_aes_get_software_key_slot - Get a slot for software-provided keys
-+ *
-+ * @dev			The AES udevice
-+ * Return:		Key slot to use for a software-provided key,
-+ *			0 or positive on success, -ve on failure
-+ */
-+int dm_aes_get_software_key_slot(struct udevice *dev);
-+
- /**
-  * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
-  *
-@@ -316,6 +341,11 @@ static inline int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return -ENOSYS;
- }
- 
-+static inline int dm_aes_get_software_key_slot(struct udevice *dev)
-+{
-+	return -ENOSYS;
-+}
-+
- static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	return -ENOSYS;
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..c69a928e6d8 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -19,7 +19,6 @@ obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
- 
- obj-$(CONFIG_AES) += aes.o
--obj-$(CONFIG_AES) += aes/
- obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
- 
- obj-$(CONFIG_FW_LOADER) += fw_loader.o
-@@ -88,6 +87,7 @@ obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) += asn1_decoder.o
- 
- obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
- obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
-+obj-$(CONFIG_$(PHASE_)FIT_CIPHER) += aes/
- obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
- obj-$(CONFIG_$(PHASE_)LZO) += lzo/
- obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
-diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
-index 741102a4723..b694474c029 100644
---- a/lib/aes/aes-decrypt.c
-+++ b/lib/aes/aes-decrypt.c
-@@ -4,37 +4,115 @@
-  */
- 
- #ifndef USE_HOSTCC
-+#include <dm.h>
- #include <malloc.h>
- #endif
- #include <image.h>
- #include <uboot_aes.h>
- 
-+#ifndef USE_HOSTCC
-+static int image_aes_validate_lengths(struct image_cipher_info *info,
-+				      size_t cipher_len)
-+{
-+	if (!cipher_len || cipher_len % AES_BLOCK_LENGTH ||
-+	    info->size_unciphered > cipher_len)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+#endif
-+
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size)
-+{
-+#ifndef USE_HOSTCC
-+	unsigned int aes_blocks, key_len = info->cipher->key_len;
-+	int ret;
-+
-+	ret = image_aes_validate_lengths(info, cipher_len);
-+	if (ret)
-+		return ret;
-+
-+	*size = info->size_unciphered;
-+
-+	if (CONFIG_IS_ENABLED(DM_AES)) {
-+		struct udevice *dev;
-+
-+		ret = uclass_first_device_err(UCLASS_AES, &dev);
-+		if (!ret) {
-+			u8 slot;
-+
-+			ret = dm_aes_get_software_key_slot(dev);
-+			if (ret < 0)
-+				return ret;
-+			if (ret > 0xff)
-+				return -ERANGE;
-+			slot = ret;
-+
-+			ret = dm_aes_set_key_for_key_slot(dev, key_len * 8,
-+							  (u8 *)info->key,
-+							  slot);
-+			if (ret)
-+				return ret;
-+
-+			ret = dm_aes_select_key_slot(dev, key_len * 8, slot);
-+			if (ret)
-+				return ret;
-+
-+			aes_blocks = cipher_len / AES_BLOCK_LENGTH;
-+
-+			return dm_aes_cbc_decrypt(dev, (u8 *)info->iv,
-+						  (u8 *)cipher, data,
-+						  aes_blocks);
-+		}
-+	}
-+
-+	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
-+		unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
-+
-+		/* First we expand the key. */
-+		aes_expand_key((u8 *)info->key, key_len, key_exp);
-+
-+		/* Calculate the number of AES blocks to decrypt. */
-+		aes_blocks = cipher_len / AES_BLOCK_LENGTH;
-+
-+		aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
-+				       (u8 *)cipher, data, aes_blocks);
-+		return 0;
-+	}
-+
-+	return -ENOSYS;
-+#endif
-+
-+	return -ENOSYS;
-+}
-+
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
- 		      void **data, size_t *size)
- {
--#ifndef USE_HOSTCC
--	unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
--	unsigned int aes_blocks, key_len = info->cipher->key_len;
-+#ifdef USE_HOSTCC
-+	return 0;
-+#else
-+	int ret;
-+
-+	ret = image_aes_validate_lengths(info, cipher_len);
-+	if (ret)
-+		return ret;
- 
- 	*data = malloc(cipher_len);
- 	if (!*data) {
- 		printf("Can't allocate memory to decrypt\n");
- 		return -ENOMEM;
+@@ -2312,7 +2312,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
  	}
--	*size = info->size_unciphered;
  
--	memcpy(&key_exp[0], info->key, key_len);
--
--	/* First we expand the key. */
--	aes_expand_key((u8 *)info->key, key_len, key_exp);
--
--	/* Calculate the number of AES blocks to encrypt. */
--	aes_blocks = DIV_ROUND_UP(cipher_len, AES_BLOCK_LENGTH);
-+	ret = image_aes_decrypt_to(info, cipher, cipher_len, *data, size);
-+	if (ret) {
-+		free(*data);
-+		*data = NULL;
-+	}
- 
--	aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
--			       (u8 *)cipher, *data, aes_blocks);
-+	return ret;
- #endif
--
--	return 0;
+ 	/* Decrypt data before uncompress/move */
+-	if (IS_ENABLED(CONFIG_FIT_CIPHER) && IMAGE_ENABLE_DECRYPT) {
++	if (!tools_build() && IMAGE_ENABLE_DECRYPT) {
+ 		puts("   Decrypting Data ... ");
+ 		if (fit_image_uncipher(fit, noffset, &buf, &size)) {
+ 			puts("Error\n");
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index d89384449b3..e5a525f6dce 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -193,6 +193,28 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+ 	return ALIGN(data_size, spl_get_bl_len(info));
  }
+ 
++static int spl_fit_image_decrypt(const void *fit, int node, int cipher_node,
++				 void **data, size_t *size, void *dst)
++{
++	size_t dst_size;
++	int ret;
++
++	puts("   Decrypting Data ... ");
++	ret = fit_image_decrypt_data_to(fit, node, cipher_node, *data, *size,
++					dst, &dst_size);
++	if (ret) {
++		puts("Error\n");
++		return ret;
++	}
++
++	*data = dst;
++	*size = dst_size;
++
++	puts("OK\n");
++
++	return 0;
++}
++
+ /**
+  * load_simple_fit(): load the image described in a certain FIT node
+  * @info:	points to information about the device to load data from
+@@ -225,12 +247,15 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 	const void *data;
+ 	const void *fit = ctx->fit;
+ 	bool external_data = false;
++	bool encrypted;
++	bool needs_decomp = false;
++	int cipher_node = -ENOENT;
++	int ret;
+ 
+ 	log_debug("starting\n");
+ 	if (CONFIG_IS_ENABLED(BOOTMETH_VBE) &&
+ 	    xpl_get_phase(info) != IH_PHASE_NONE) {
+ 		enum image_phase_t phase;
+-		int ret;
+ 
+ 		ret = fit_image_get_phase(fit, node, &phase);
+ 		/* if the image is for any phase, let's use it */
+@@ -256,6 +281,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 	if (spl_decompression_enabled()) {
+ 		fit_image_get_comp(fit, node, &image_comp);
+ 		debug("%s ", genimg_get_comp_name(image_comp));
++		needs_decomp = image_comp == IH_COMP_GZIP ||
++			       image_comp == IH_COMP_LZMA;
+ 	}
+ 
+ 	if (fit_image_get_load(fit, node, &load_addr)) {
+@@ -267,6 +294,10 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		load_addr = image_info->load_addr;
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(FIT_CIPHER))
++		cipher_node = fdt_subnode_offset(fit, node, FIT_CIPHER_NODENAME);
++	encrypted = cipher_node >= 0;
++
+ 	if (!fit_image_get_data_position(fit, node, &offset)) {
+ 		external_data = true;
+ 	} else if (!fit_image_get_data_offset(fit, node, &offset)) {
+@@ -291,11 +322,12 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 			return 0;
+ 		}
+ 
+-		if (spl_decompression_enabled() &&
+-		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
+-			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
++		if (needs_decomp || encrypted)
++			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
++						   ARCH_DMA_MINALIGN), len);
+ 		else
+-			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
++			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN),
++					     len);
+ 		length = len;
+ 
+ 		overhead = get_aligned_image_overhead(info, offset);
+@@ -331,10 +363,32 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		puts("OK\n");
+ 	}
+ 
++	load_ptr = map_sysmem(load_addr, length);
++	if (encrypted) {
++		void *decrypt_ptr;
++
++		if (needs_decomp) {
++			if (external_data)
++				decrypt_ptr = src;
++			else
++				decrypt_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
++							       ARCH_DMA_MINALIGN),
++							 length);
++		} else if (external_data) {
++			decrypt_ptr = src;
++		} else {
++			decrypt_ptr = load_ptr;
++		}
++
++		ret = spl_fit_image_decrypt(fit, node, cipher_node, &src, &length,
++					    decrypt_ptr);
++		if (ret)
++			return ret;
++	}
++
+ 	if (CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
+ 		board_fit_image_post_process(fit, node, &src, &length);
+ 
+-	load_ptr = map_sysmem(load_addr, length);
+ 	if (IS_ENABLED(CONFIG_SPL_GZIP) && image_comp == IH_COMP_GZIP) {
+ 		size = length;
+ 		if (gunzip(load_ptr, CONFIG_SYS_BOOTM_LEN, src, &size)) {
+@@ -352,7 +406,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 			return -EIO;
+ 		}
+ 		length = loadEnd - CONFIG_SYS_LOAD_ADDR;
+-	} else {
++	} else if (src != load_ptr) {
+ 		memmove(load_ptr, src, length);
+ 	}
+ 
 
 -- 
 2.53.0
