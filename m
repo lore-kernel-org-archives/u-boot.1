@@ -4,95 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27942C43458
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55779C43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5E6984A4D;
-	Fri,  3 Jul 2026 14:59:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 02CF184A63;
+	Fri,  3 Jul 2026 14:59:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nn0TGfkF";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="QyaV219f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96357846A4; Fri,  3 Jul 2026 10:06:46 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 61796846A4; Fri,  3 Jul 2026 10:11:52 +0200 (CEST)
+Received: from smtp14.infineon.com (smtp14.infineon.com
+ [IPv6:2a00:18f0:1e00:4::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3244F841F2
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 10:06:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5446843B6
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 10:11:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jeremy.bezairie@gmail.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-8f032b47e3cso1407506d6.0
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 01:06:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783066003; cv=none;
- d=google.com; s=arc-20260327;
- b=It5hANDT9lFv2aBKLftte8GqublXn4FcS5gAeTP/tGGGqgd5Im2VkUV4OHBDIA3/rx
- AK6UwXtowCVojLCVpH3r14FdfXMNNKKEiBk0rkTXibRSB8+rdRBtssFq0urgu9ihl46h
- LoINXsrfEUkWCh8U+OhDgiS3XjQXs/F7G9E+HUs8yQwOoGXtHwMHUptnZU6+3H85MeVV
- 8TZrW5QksFj/KzHuAKDD7KZ8JakJ/lLFWevsj/9oMlXxzKHG3QjT6G8SNbqJWDsFPfc4
- HgnEkQRTAOGo9xHzmT9LOZb9TQADF3N2MxACPTS10aU6BcC0o0ITVz1CLCijsseSrlgn
- OJEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=RhOhWNWtyvKfHPwhDodIu5qi0R6T426wFIxZcj4+HR0=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=RKrVEDY6gaoKY5csRZIDR0G+UziLj2qgR4WsUO/oCYgO6Zd9jAh6n7VsLyKYK7c/nI
- 9p8TTlqeRaMOZFAuF0bPDBsjdyEK11Um0z4EI4TCuF41Z9wwghKm5iHhvM4q4ttOcrZE
- cgMIPXmvqxpfQx2MNv08qTedsDFul8hOqjKURH7m6l4d7/a01JcZ4mC/t5xFatUmdBIL
- uHB1RrzsZ0R5E821fbZEuGCwfsxSTUEnc4MhhQW9GhMZIc6C1arzafEYw8/F8c+cYh7G
- C1lQPjzOi5Mmtk00L6vsdA/359v5difwHH5Oxz6kTKqRjMRkbgRJNX62Nau0yZwxh6Do
- YJOw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783066003; x=1783670803; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=RhOhWNWtyvKfHPwhDodIu5qi0R6T426wFIxZcj4+HR0=;
- b=nn0TGfkFp+z5jqERo+e8bxny+7ve246+2Dk2fsNsIKH4OfyRknQJc8Gy4Rwhnap37i
- PHHfzTidNhmu7NB/WrUOYUJkPU2hUyHrQeAec9Ed5DcL/6Eu+bc61WjNYm7MWzCvBwSK
- 9GLneO7/r5YoVhJEThRVjoC80gdvWb9cSmy5V55gLbwmrRrOuQhitGeReqSG9aTYIC4Q
- S1pmQi7eJk/tcivXxcMEERFIc9dFFA++mZCb0qh+BnUp848k2ppxhtAM9wDCxp97/bH5
- 4TSnKf6Ispxdw1axhW7IHXL5fXRua1OGul9T9gjfGUd2YsGa6iQUnHzgxsCD+XVwxaaQ
- FdjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783066003; x=1783670803;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RhOhWNWtyvKfHPwhDodIu5qi0R6T426wFIxZcj4+HR0=;
- b=bToa4jhCKmRf74B/t5rmKPczu4Kbj7hYw3mQJzNoD2qCybnShUDRkAmMRQTKqO94wJ
- wHUkmBaTYIizTcjACCPzVzzi/GJPtz2LCz9yKx9R+2myHTXT1WHA2ukZmrxFbpTD2mbf
- gHqxze8L1+VLG/sSDYWvAqWBFuuQ/5Drgxj+rGSblM83IX7/UgOA8xKqtN/+3GHrGoLi
- ZSIKX1Ip1wszwYlWOrbAhNLgVeBIW/PkJ+vCzm0oJHLJjVDTyBhUI3wWsSjh8vFD2Har
- XHOSJg71+F4U1mJEkmzrbnZlh2Hahydz7hpoCNG+HNW+DBTI/m5n90QfRe7E8cyEHx/2
- IOlA==
-X-Gm-Message-State: AOJu0YzfgZrcmIalN534IfkZW+7xA857DjKVoSeRT0UrFSFX1OpCRfj9
- fll/9piE29EXa2sTq4adeXIaTQP6b2CxWhgQwW0KRl0zpBR8Y32yzG/3qYkhWdrVFHtnranr8k5
- d7evYLcmUoLuUX9L0vR8nENKeTkhFjjvtgP/gSAY=
-X-Gm-Gg: AfdE7cln/xYDCY7wGdmERHkmDv2eDFcrelT4BsKU7E+q2GD2ets3sHYqoqSI85X4qQH
- 5Wt4CtFnMaBVWgssbsG5FeAj461NYNgvq7rTwdwj7ICMVvJWiSupx13+YlaTds5EYZ2m2qx/KZ/
- 7HI85Z5K9VVR64s/bXOl/hWU3gYKZKyVBrMjmyyjg1aJ9kAjMy7Jy4mk+SY1u4loycxSZmXWiIJ
- bIdwJXF1pcosvB8N6dQyCLgXT8uMQ/1N5U+jrvd29vFUOZvJXf6tedNguAfVwI4E+iXMyJ2KRHm
- CdVwbx98yqcUcSgjVm6nmFJBqHdli8eHyAE0KqWOfqqw/EwCdlRJVEZJKe9YSxeuRgnQF04Qwk0
- =
-X-Received: by 2002:a05:622a:4892:b0:50f:ba62:c328 with SMTP id
- d75a77b69052e-51c26a62d43mr126599121cf.22.1783066002850; Fri, 03 Jul 2026
- 01:06:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1783066310; x=1814602310;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=U8/wFXNndzHfe0h/MatgLEdu/7L4PmkNcR8tQCmxSnE=;
+ b=QyaV219fWElma9Xfz7yplzbMb1/up1Z+8WDX6Ibz7jb6QBR3xTyAfzvv
+ ikC0u4votO1qdZ7LoxQcPbu/bvk6+2Y+qT0PmBiOsmodyFkR6a3JOHXRV
+ zZL/d54KrKdT0Nm+EwvKhHhdyOEbQjSKJDDr2P9P5B2Ep7pWZNLn0V7na Q=;
+X-CSE-ConnectionGUID: 8aI3WBjySYiJrtoJpNTBNw==
+X-CSE-MsgGUID: hKLohnK6QEaiIYpohMVlJA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11835"; a="136520802"
+X-IronPort-AV: E=Sophos;i="6.25,145,1779141600"; d="scan'208";a="136520802"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE814.infineon.com) ([172.23.29.40])
+ by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Jul 2026 10:11:49 +0200
+Received: from MUCSE811.infineon.com (172.23.29.37) by MUCSE814.infineon.com
+ (172.23.29.40) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
+ 2026 10:11:49 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE811.infineon.com
+ (172.23.29.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 3 Jul
+ 2026 10:11:48 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.043; Fri, 3 Jul 2026 10:11:48 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <ssunkkan@gmail.com>, <vigneshr@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: RE: [PATCH] mtd: spi-nor: Add Dosilicon DS25Q4BB support
+Thread-Topic: [PATCH] mtd: spi-nor: Add Dosilicon DS25Q4BB support
+Thread-Index: AQHc/APmUW/o4KdHWESmEKE4zUuI/rZbiSfQ
+Date: Fri, 3 Jul 2026 08:11:48 +0000
+Message-ID: <5787d9d649b34f74b66a56a067da9760@infineon.com>
+References: <20260614134406.542-1-ssunkkan@gmail.com>
+In-Reply-To: <20260614134406.542-1-ssunkkan@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-From: =?UTF-8?B?SsOpcsOpbXkgQsOpemFpcmll?= <jeremy.bezairie@gmail.com>
-Date: Fri, 3 Jul 2026 08:06:32 +0000
-X-Gm-Features: AVVi8CfGOVMCYI7hDJgbDp2UYLQxAcedGVXoW1ld92COZrDqmzl-v0NEf7W0BUo
-Message-ID: <CAMdxF8BDNszU-UY9V+_dQq68pZSFu3Z+vUsgkWe8G4rDZMGoZQ@mail.gmail.com>
-Subject: Fairphone 5, microSD card support?
-To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Fri, 03 Jul 2026 14:59:42 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,30 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi,
 
-https://catacombing.org/builder , selecting Fairphone 5 then Build Image
-brings to
-https://gitlab.postmarketos.org/tauchgang/u-boot/-/jobs/1548118/artifacts/raw/binaries/u-boot-fairphone-fp5.img
-(it's
-not the latest...).
+> Add support for dosilicon ds25q4bb (256M-bit) SPI NOR flash.
+>=20
+> Datasheet:
+> https://drive.google.com/file/d/17UFJa5_3imH0YmWlRGTQYhO2JBXf4Klk/view
 
-The latest
-https://gitlab.postmarketos.org/tauchgang/u-boot/-/jobs/1607429/artifacts/raw/binaries/u-boot-fairphone-fp5.img
-,
-according to what is displayed on my Fairphone 5, seems not to support the
-microSD card, no USB mass storage it, no boot it.
+Do you have a link to vendor's site? If you have, use Link: tag just above
+your Signed-off-by: tag. If not, please write this after the '---' separato=
+r.
+I don't think it's good to add a link to share drive in commit description.
 
-So is it possible to add microSD card support for the Fairphone 5, &/or USB
-drive?
+>=20
+> Signed-off-by: Ssunk <ssunkkan@gmail.com>
 
-I already sent an email at aelin@postmarketos.org (the creator of the link
-above, see
-https://gitlab.postmarketos.org/tauchgang/u-boot/-/jobs?kind=BUILD ) at
-26/6/2026, still no reply...
+Could you sign with full name?
 
-Also see https://lemmy.world/post/48540597 , since still no reply I tried
-also
-https://app.element.io/#/room/#main:postmarketos.org/$OicLO7RRqJmGbkqTUUmACaFrH-f8RWHCb47UpEpvsXA
-without
-success...
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index c0fa98424aa..b370e782627 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -87,6 +87,8 @@ const struct flash_info spi_nor_ids[] =3D {
+>                     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI=
+_NOR_4B_OPCODES) },
+>         { INFO("ds25q4dn", 0xe5301b, 0, 64 * 1024, 2048,
+>                     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI=
+_NOR_4B_OPCODES) },
+> +       { INFO("ds25q4bb", 0xe53019, 0, 64 * 1024, 512,
+> +                   SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI=
+_NOR_4B_OPCODES) },
+>  #endif
+>  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
+>         /* EON -- en25xxx */
+> --
+> 2.43.0
+
+Thanks,
+Takahiro
+
