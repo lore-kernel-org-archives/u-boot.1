@@ -4,97 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA17C44500
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5176EC43458
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jul 2026 12:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1CB0849F6;
-	Fri,  3 Jul 2026 14:27:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AFE28849F6;
+	Fri,  3 Jul 2026 14:29:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jFOvHCby";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="JPuqZBdB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 257C484A0A; Fri,  3 Jul 2026 14:27:45 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id A6EB584A1D; Fri,  3 Jul 2026 14:29:07 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A94EF849F3
- for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 14:27:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56207849F3
+ for <u-boot@lists.denx.de>; Fri,  3 Jul 2026 14:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-47863f723ccso99510f8f.2
- for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 05:27:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7eb64085c45so282612a34.2
+ for <u-boot@lists.denx.de>; Fri, 03 Jul 2026 05:29:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783081743; cv=none;
+ d=google.com; s=arc-20260327;
+ b=cBH5WRnG4gQeaL8FUjxWMJU5VO8b5AMtoL3G8k9bNjcyBxWw3II7jkGmeAbVmGnd/e
+ kC+/aMzlv07dJlYXiFH72USdFgBO0jvgSXwuR1alWAz6tQSlsWTSGupynPHPHY2KUekS
+ q8B2rtgaOvtTbcTUh4zg1hdaMkCKrH0niFomOeLbSpcGD8q77dqVaBq0fhkx6KNJETYk
+ LwCmpTu1g6RsyyjBkCXcPXH88f6wEyYE+/3jEDRLveNK+3B3al5+kTSjB3/Uj0i9H1aw
+ XWm1NiX7Q7HVNvhpNAqXC2zHc1RadrWFyaNDh87aUKemZ0FiEGpSyR7XOwMnE6TRM4g5
+ jjyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=EnV5vhjl3Qi300CnD7SEkg1kSb+s++RvNHd/JUl7iWM=;
+ fh=2SkbafkFXBsBlRgoeCVRn33kXqbV8Bq674lZ/xUryH8=;
+ b=QhszoCb+wWcAaXnOMkwk5UdiGNu43t9OeLiRIyETw0mCCvgfDlVYlXjfpWhay2wQK4
+ ZKifzVWbYlqnkCORwUCrxckDk7ZG4MqXdo/yRcHF37AqFmFnAxHQRlnxXJKFBZq97EM9
+ rlaQFi5U04oVfz8MRejUAUEfrlpSUhZDxI6WlFG/i+wDvlNlD3BcxGJSpoBfl+ElDY7E
+ HYwFpYEoNl7BI/t4swFbg1n2idcQx6124mGFkOMYBTIkGuk/2S8f8Z/NUnxn6qgMg1kN
+ XQLmlQa6glqCQlMctBBWNFxuN/PKYYiwzsMBYqM8KXO2rdKoGPwUJ2B7qd+vQAv4Nbqq
+ Nnvg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783081662; x=1783686462; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=hhYKAg2aDxEsHuK3/lp4hNgiZn1rIimqqDR80o4ZWac=;
- b=jFOvHCbyVnzz01ENA2n2aj/C3t3hlCkT8XWI0qNdwUrtlOjrlU4xLqk4YYfb1ZON7n
- SvaG0m9A5zdS5Jze1rE/xdmP8FUyed4hBB1dWvk3El9EIDMvhWwbebaWAVQ9ElNaiV3J
- BMU4h5hge07nxTo5Z8wJSj5pw5+EUI+QGvscaFNIiLI45XqtFQeH1EWI6WG980j9/646
- PG6sXgGHZXbp2/HGbalbAO7WFpC/wtpqCjnEiwBuyZXby1QPVegg+DGey1T2ierBhOUv
- qwI7Goy/D/oEPKVQ+WbbnvS26sZ/O/OGq8R95Ryz8sVcfGIeXjrk+cxjUF3Lwllip397
- Wpow==
+ d=baylibre.com; s=google; t=1783081743; x=1783686543; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=EnV5vhjl3Qi300CnD7SEkg1kSb+s++RvNHd/JUl7iWM=;
+ b=JPuqZBdBOI1Bvn2zZrHbamfywNJP/AnP8HMdDkjX6uaI1YwdAGQtI/e8h0ZG0j0WFv
+ ZiBgN9hDQFZ+I+CGKj1dhWo2TcRQu81+gZQ9FfF8Bn5SPzP46YejMOCL/LYfOIHQH9w5
+ 0gLu1Vw48hEXFhNSpaMPOaaY/MUY4HGH9RPbWz44b82AZICKIXTWOk+zRagwxoF1mdJ7
+ 82aBJPGAstP+jaVKujfSYzLA61rQMaz3EePZ667Yqes5hvCCUP4wnNMnkwKlZjYe57bn
+ X6YtY6xHSxXnf3YNgyyb6tqPttf5/XBkDSCbRex5hcANPDIilwb19tLl8J0eE50SqqGY
+ WuZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783081662; x=1783686462;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=hhYKAg2aDxEsHuK3/lp4hNgiZn1rIimqqDR80o4ZWac=;
- b=hMToNVtDApjtTcBsuI2zCDXeyods1Dc8TC/h8BZ48zV4UMuHugLdSbVqUJCFVl0TnL
- y8ZdQ8vGGxEx4WZgfhfHCcOprww8cCpYGIQgy+lb/pLVXzYhKwsMPu2vBCkDvngOpykq
- Fm1nN6ljLlUJc5BRPCndBxxUZOwUfga1jxGcsRfEaVXPkNUvGRLO0PbqirxAErnjfTdM
- XodOoiO7SI75yBrL36BQv+jCyHlmNleir8dOGI2Rt2cS4Bk6OF7Ko/RcclZc7E0dqH3W
- fDlNC00UE+QGWivlzw7mg3xKPrlXpuFbVFyMIzS+eG7qpVfP2rR9PBcFkDHVBNWJdnme
- R/Fw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rryqu/c4h8GpslTmSzsZsISLTDB8n+BolrIecKRYSG5MdvkCo21595SOInx7DdWrlnh/foB2JA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzyLpR1S17YiWzqTaAr29ijEKYnPdYojgxgoeNRE99I4vHuKQJ/
- dTosgKKfeC6Hg8ivYH7RDIyvI24pCnCOyyq6ey4O6dvJRhdjQaEot39tPdMSgz0Fi0g=
-X-Gm-Gg: AfdE7cm2pCBrPJ2h8u1+5H7GiT9b8woPBuz14IPNt5mepePDclATwShXQnEyyvVP/p9
- r8YWylpwln7pZ7W968HJXxDd0a+G4I873kiX2rcMtUDgVFH5J9y08ZGlkmvsPjNiGXdVAthRJw4
- mY1fr4Zfrb9Bv3LAT7BInDXPl9Pbop+wMMbYZg0pppYu6B4lKFaFJE4iLd9rYEHN89Np3f9OWKJ
- PkuogQjMzI07h1I9rxojnquID8QXb5ExrUHzeJx6wJmHlBYuv99oxiWQWIBAElT+xj6SnRVc6vQ
- 2J9i4ZRcoddLsZhhikYw1sSOE/CQU6guUZY5ckfrSf2SSf172gdd3PoFRKIlbfXi+TTAEUrQGEU
- HCesGkfVrL7tCBgPoKuFh+ANu6IlxtAjYYn35X7yPnr0GVKyxJEEnDzEmE1b9I+Ac4UlEEErJAN
- PG7V6/jvttq2SBK6uc+FLp+bhsZEKjBH0DxNSceeEEDow2WeSuMEU9pcU5A8EoUcFTKQ==
-X-Received: by 2002:a05:6000:2385:b0:478:4de8:9b91 with SMTP id
- ffacd0b85a97d-4784de89c96mr10264299f8f.41.1783081661874; 
- Fri, 03 Jul 2026 05:27:41 -0700 (PDT)
-Received: from [192.168.1.245] (p509936c9.dip0.t-ipconnect.de. [80.153.54.201])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-477dd94c8ccsm18602986f8f.21.2026.07.03.05.27.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Jul 2026 05:27:40 -0700 (PDT)
-Message-ID: <2ccadd61-59e3-4f97-950a-47928c83c7c9@linaro.org>
-Date: Fri, 3 Jul 2026 14:27:39 +0200
+ d=1e100.net; s=20251104; t=1783081743; x=1783686543;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=EnV5vhjl3Qi300CnD7SEkg1kSb+s++RvNHd/JUl7iWM=;
+ b=iJ1BOetZYkyxyVVxWHxV2tlWWK14IP1Zg9Igcnx68iVJDrbjVUQe27pqT34PIgMYCw
+ kzZC2/9d259rXS1L+VZze3bGxfVDInWQ+LqPeLiHkKgm/EpFBcyiRsaVwLLKwg9VEqD4
+ l+rRCNqBwSqYOE+h+X7up6uy51OOS9OwhkN3IcBwTUtwujNL5t3bMyU3bOptKn3krw8q
+ yOBMYCooyJZMiMhy8o2KEDbilCeYeZpV+vF0Da5u0Z9ZjkHslzSFk/hHdLox/rqymyy+
+ 0ft2Ync68JaMq+fob8cSlSp0GaTKAp9Ua7n9Dqh3ZqD/m4dNXtNvEJoIunwSUy3NxIE0
+ 4pUQ==
+X-Gm-Message-State: AOJu0YzYUhMDaGC4EZ9UasgQ3cbSSWlG+AazUch8gYyLW+cT7u7T7Kqf
+ /ixxNXr/mznmvk6VEzqktEnI904qNm5fe6EfAzdgD7CMNRRS1JOkc8XiZkLl0Y4BJ/hQrIuYXCw
+ owxVFHXxBbynVHiIiTYV8o7TTdH2SNWwAa+KZFrsY8g==
+X-Gm-Gg: AfdE7ckpJvdTOp5hXwbgLD5g8eHXS1sV4fhVpktjp/CJkVkZAsRIBLvHp/xb6cfCB+E
+ 6Oxv29bpLLq9cQhg1Di6AzfbnopBut749QHXiCAKfWIG6x3zBHURCwLnIQR92hsfNocMnhuQDwe
+ lb5kR7Hi2IQmA3SDm1uleECKeDKo0iAUfSgf2KF48GWH4r9a5Snt1o76V76BSTuLtyq+EL8XQKQ
+ fwpJ5yGoAVQtt7lKa2ks3MUT9aKbdHTTzjCjIgJq74VGnDtDXE1WvJdH+1wHkO4WpWedPovgQ==
+X-Received: by 2002:a05:6830:82e3:b0:7e6:cfd0:42de with SMTP id
+ 46e09a7af769-7eb4cc18ef7mr6029151a34.15.1783081742914; Fri, 03 Jul 2026
+ 05:29:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] drivers: sysreset: revert support for args
-To: Quentin Schulz <foss+uboot@0leil.net>, Sumit Garg
- <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260702-revert-sysreset-v1-0-7920c16a1f3a@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <140504E6-5BCB-4566-A03F-2A94B0F5BA01@baylibre.com>
+ <CAC_iWjKUghtMYU_g4JUJbXF12sGL=zW8W8bcCfNWRsN7xx11Yg@mail.gmail.com>
+In-Reply-To: <CAC_iWjKUghtMYU_g4JUJbXF12sGL=zW8W8bcCfNWRsN7xx11Yg@mail.gmail.com>
+From: Carlo Caione <ccaione@baylibre.com>
+Date: Fri, 3 Jul 2026 14:28:51 +0200
+X-Gm-Features: AVVi8CdscELUxLvGCIol7uRcD-r4xTRIOBUNhkM3DiBOtPjMT8KossZqftQyNQw
+Message-ID: <CADh8LschPxP73+=mfoudKkB-CF94O458wwta3jpHHzOf_V0bwQ@mail.gmail.com>
+Subject: Re: [RFC v2] bootstd: firmware-owned OS devicetree for EBBR /
+ SystemReady IR
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de, 
+ trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com, 
+ baylibre-upstreaming@groups.io, a.fatoum@barebox.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,106 +117,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Fri, Jul 3, 2026 at 1:49=E2=80=AFPM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> > Platforms that follow EBBR / Arm SystemReady IR treat the OS devicetree=
+ as part
+>
+> Not the OS devicetree. The devicetree. It should be a single entity
+> consumed by the firmware, os etc.
 
-On 7/2/26 20:27, Quentin Schulz wrote:
-> The args support for the sysreset uclass contains a logic bug. The first
-> sysreset device implementing the request_arg callback will consume the
-> args, not support the specified arg and thus return -EPROTONOSUPPORT
-> which will stop the iteration over all sysreset devices.
-> 
-> This is an issue if one has multiple sysreset devices and each with
-> support for different (valid) args. If a sysreset device implements a
-> -dummy argument and another -foo and one calls reset -dummy on the
-> U-Boot CLI, it'll depend on which sysreset device will be attempted
-> first. If it is the one implementing -foo, it'll return it doesn't
-> support the argument with -EPROTONOSUPPORT in which case the device
-> implementing -dummy will never be attempted and instead we'll do a cold
-> reset which is very likely not what's expected.
-> 
-> I suggest to either add an additional return code for the case where the
-> sysreset device knows it isn't supposed to handle this argument because
-> it isn't among the ones it supports, and thus we try other sysreset
-> devices until we find one that says it tried and either is in progress
-> or couldn't realize the request, or no sysreset device supports this
-> argument and we end up doing a cold reset (but should we even try to do
-> a cold reset if the type of reset requested by the user isn't
-> supported?). Or just don't try piggy-backing on the reset command and
-> have a new command instead?
-> 
-> Maybe I misunderstood something or misread the code, so please correct
-> me if I'm wrong.
-> 
-> We've tried bringing up this issue multiple times over the last
-> month[1][2][3] but it seems like we're left on read. This is the last
-> resort to get attention on this patches, hopefully we don't have to get
-> through a revert a few days before the release though there is only two
-> working days left before the release. Sending a revert as requested by
-> Tom[4].
+Yes, indeed.
 
-I'm so sorry I missed this feedback. That really isn't great.
+> >   - Install it on *every* EFI launch path, not just one. SystemReady IR=
+ boots
+> >     through the UEFI boot manager, which in U-Boot does not go through =
+the
+> >     per-device EFI bootmeth, so a per-device-only hook is not enough.
+>
+> This should be happening already
+> commit 7e624377e99 has some info
 
-I'm with you that this is a pretty fundamental issue with the 
-implementation here and I think the best course of action is to revert 
-it and come up with a more suitable approach that isn't so open to 
-trivial logic bugs like this, likely with some deeper refactoring of 
-sysreset/reboot-mode code in U-Boot.
+Right, and in fact the series relies on that: efi_install_fdt() runs
+on every launch. What this bullet is about is the source rather than
+the installation: each launch path chooses the devicetree from its own
+list (a Boot#### load option, a file on the ESP, the control
+devicetree) and currently the firmware partition is not among them.
+Basically the (future) series adds it as a source on each path.
 
-In hindsight I think I should have pushed back harder on this 
-implementation, this is something I'll be more cautious of in the future.
+> > The *location* is described in the control devicetree. The bootstd node=
+ carries
+> > a 'firmware-fdt-source' phandle to a node that is a child of the media =
+device
+> > that owns the partition:
+>
+> A lot of boards are building with  CONFIG_OF_UPSTREAM. Is this
+> something that wil be injected in the DT during build?
 
-Acked-by: Casey Connolly <casey.connolly@linaro.org>
+Exactly that: the binding is U-Boot-specific, so it lives in the
+board's arch/arm/dts/<board>-u-boot.dtsi, which the build system
+merges into the OF_UPSTREAM devicetree automatically (the upstream dts
+is never modified).
 
-I don't have a chance today to test this today as I'm OOO but if it 
-doesn't break other platforms then it ought to be fine on Qualcomm too, 
-maybe Neil can give it a spin on 8650.
+> > Each path installs the result through efi_install_fdt(), the convergenc=
+e
+> > point all EFI launches pass through, so the firmware devicetree is inst=
+alled
+> > regardless of how the EFI application is started, including the boot-ma=
+nager
+> > autoboot path that SystemReady IR uses.
+>
+> That path should be fine since it applies the local fixups before install=
+ing it.
 
-Tom: feel free to pick this up if you're happy with it.
+yeah, that's the idea.
 
-Thanks,
-// Casey
+Thanks for the pointers, cheers.
 
-> 
-> I've not even build tested this, only had a cursory look at what to
-> revert so maybe I'm missing some patches or breaking stuff up. It's late
-> here and I wanted to give a chance to people in Americas to have a look
-> at this today, or people in Asia tomorrow morning before I come to the
-> office. I don't have time to wait for the CI to complete, but it's
-> running here: https://source.denx.de/u-boot/contributors/qschulz/u-boot/-/pipelines/30604
-> Yes the commit hash is different, I rewrote this cover letter to include
-> the link to the CI pipeline.
-> 
-> [1] https://lore.kernel.org/all/667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de/
-> [2] https://lore.kernel.org/all/4fc15188-3de9-4345-85e9-d594efe9bdd5@cherry.de/
-> [3] https://lore.kernel.org/all/20260623165021.GJ382693@bill-the-cat/
-> [4] https://lore.kernel.org/all/20260702174613.GC749385@bill-the-cat/
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Quentin Schulz (6):
->        Revert "qcom_defconfig: enable psci based sysreset"
->        Revert "cmd: boot: fix edl being shown when not supported"
->        Revert "doc: usage: cmd: reset: specify when the -edl option is available"
->        Revert "cmd: boot: Add '-edl' option to reset command documentation"
->        Revert "sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs"
->        Revert "drivers: sysreset: Add sysreset op that can take arguments"
-> 
->   cmd/boot.c                            |  6 -----
->   configs/qcom_defconfig                |  2 --
->   doc/usage/cmd/reset.rst               | 10 +-------
->   drivers/firmware/psci.c               |  4 ----
->   drivers/sysreset/Kconfig              | 15 ------------
->   drivers/sysreset/Makefile             |  1 -
->   drivers/sysreset/sysreset-uclass.c    | 37 ----------------------------
->   drivers/sysreset/sysreset_qcom-psci.c | 45 -----------------------------------
->   include/sysreset.h                    | 18 --------------
->   9 files changed, 1 insertion(+), 137 deletions(-)
-> ---
-> base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
-> change-id: 20260702-revert-sysreset-4579ae458f2e
-> 
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
-> 
-
+--
+Carlo Caione
