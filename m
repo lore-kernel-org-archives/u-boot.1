@@ -4,90 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 921ACC43602
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 17:16:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B05C44500
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 19:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A88483FEE;
-	Sat,  4 Jul 2026 19:15:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 15EAC83FEE;
+	Sat,  4 Jul 2026 21:40:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UhFbaUb/";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="EpZK/ofU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 640A18341A; Sat,  4 Jul 2026 19:15:58 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ACC8584119; Sat,  4 Jul 2026 21:40:27 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 297A484671
- for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 19:15:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A94EB8341A
+ for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 21:40:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-48d6c621a67so712201b6e.3
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 10:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783185355; x=1783790155; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/zK8oyb/+lALcp6nSJwBhWl0uOnxmhLRP0wsPDChe4A=;
- b=UhFbaUb/ontwwZQ4ARkBiRzyohvsmlsrqHoYNv4D8tzcwYQfRck/xX9vEwVo9YMOJL
- zYXfpM1SHQtIaYMWcW27QcO08EDzjS3EiYbVyv6Smx2Fm7Oko+8R/WZY5TIDbEP1hz5C
- tdsAT6/o7tX9ICmVo820DsrbgIbjI7TczmCjY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783185355; x=1783790155;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/zK8oyb/+lALcp6nSJwBhWl0uOnxmhLRP0wsPDChe4A=;
- b=QHYWsDoBYpFXBNHC/gfa0Z7y6gL3QWKyuYBT/5JLjqtcQ9qZbJf1yQ2icMHAKduFmZ
- EvN+i+rLRcsh9aZb7YeSM8batwIJRbpkV0obh3fcSrM2Y2ope6q7UiwEjKtnBFfV6BeT
- SrZM+1ZyrZun3ULqins7NvGqkmn7HTlfYdQhbNzWFVmkfQlrA9AUdZxQCEwZE16rQa6K
- ZPV/sBHj/TdVkrKSA6Rs27tT4hwy/hsjeeDhuFTLfT7pWlJ9l99ctYwlWXaPx7U+CVjr
- LmbX0vm0/3weDlGdjRQ2yFd7Q15kl8Q7Bc4+rvT8JyuS6azY9NjXKLTTXoSOavWLiX9/
- 50vg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9GH6wrJ8jCEye3bmcnqUa5Z4ytDzgB44lMygUnZkaMbdio5fyVzoBWjMMfMKILmOtDm9laKt0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFNTjiPjDBnGLNgJCLPWXxqjhlT4OdC2bXl/hmkItsk/n+CsOR
- iHeH0TABoj49HtEJlAL3/jtmnmXPPUhn+xPaL4dStd62j49TLrmBV+yj/Ei6hS32Pw4=
-X-Gm-Gg: AfdE7ck3B1M1cTzJ/OEBP34DX1FQwTgwSp2SOK2O2DgNXD8KqNrWN8DsHUTFGG28nUG
- VK9hfeuiAdbSlzX5IM5mN+CsXQkpUZeQFcYHTLP2FRLoejG5GLmnq+BtTULCtfLkHGm5jiJsMd4
- 2dXnIxojnI9iz9saTA2NGdE5szzNO/tCDIXqiDlWY8dsClWzTEJ1iPGHuYg8EHrqTrrrBTVyLTi
- CHu6f0v5+NOOcd4RRhHXqcBA9ZVWbzP/Gl3ngumPA8gC7ybErC7BMA2lKqTWW57rxI1DbV2Uhe3
- anG9fh7z96edRcJyrSLY5sIDZHSrNMRQpxDUMyg2vRvXboo7XAZuuMoRymm+siTvoT7ObvJ/xyP
- FKiMubV0TpWhWv2tU/E/OzM8F3uKmnMp2OSLSxzlLsCuURCCU8ohn/VNFF9U25jKGrKUYsSlR8C
- neVjmfWDnCpqNSkNz4IlJSObX5jVX9B0dkguxbH0lKxCZ6UP66SY0+5VI/W80drJjM0VDn6wty0
- f8E99/e8ja9dPF6DiUyrBVj/275pNFu3hOydA==
-X-Received: by 2002:a05:6808:1208:b0:489:f088:5f70 with SMTP id
- 5614622812f47-499b6b48c6emr1929448b6e.12.1783185354799; 
- Sat, 04 Jul 2026 10:15:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d17d328bsm6568047b6e.4.2026.07.04.10.15.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 10:15:53 -0700 (PDT)
-Date: Sat, 4 Jul 2026 11:15:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Carlo Caione <ccaione@baylibre.com>, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH] efi_loader: stop watchdog devices in ExitBootServices()
-Message-ID: <20260704171551.GO749385@bill-the-cat>
-References: <20260704135258.68543-1-ccaione@baylibre.com>
- <20260704143251.GK749385@bill-the-cat>
- <590BC3A7-BA5D-4346-8757-5379EFFFEFBE@baylibre.com>
- <20260704161707.GL749385@bill-the-cat>
- <B60962BD-B25D-40CA-B06D-43A09EF076CC@gmx.de>
- <20260704171513.GN749385@bill-the-cat>
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qWHFm7hzlat/x5J1Y8HykKvyiM9iOjekaLXYFX29e0QJt/FaUxmuxvkzkIlgK2xiH7P4d4igH7jkNBPdYSn60bFCIXRAI5cD3dtZxNXV1bwNtdITGXwYZikepLAvWZfFVWUu8gzYXM8gP56qAJtg8M0tt2YMYSzAUcclH7CbqBd+fzTWChepRjEzuUoeqZbmPdsjr1VGLlU4AMRgez8azSz8XfAImYYen70DJD/CJetr0tklyNaVIxHmhtJ8KPFdBwfuo2zD+R585rF+mb8tCnYsRm/ToRgZDkNCLZOjcpMS+vyMZHRZwcKtbLt4A0l6u5ALQmOFdzk8QrkA4JiDXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+lDB4juUTcvXZYWpCQkhFknb0AEJMNj8bnbzCHuxQI0=;
+ b=cQT62t1x5W+9JFosmMqRpFQQKtpTiuwgPymv2yTIqEJqMeR5rUlSoMF5TqDvGVk0VXTdcHjF0jvxoMRxvKVkPWAXmZji/fCajv+u5Lu7+hPTCFZhQ3ZpoaRFrCJI/P9b79FegGmLaAZM1rq6RQAdY6PwoQ80K7xCYv0rmFOx8W81al7LkxS9KYvHCwT/X1ZjvNlAW3bq3JNyqnHcapxBeLM53g9qP4JunU+dnJJhoS6+e1dG+pcfi7UfYBE/nWOCXexR96wANEYH/E/oCC4gfv6aW/ZyhYYF6BU67s2cx74Gdif0aOILRLvqs5ylvY9JiSuS0BXQ7k9g+q5C8xkakg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+lDB4juUTcvXZYWpCQkhFknb0AEJMNj8bnbzCHuxQI0=;
+ b=EpZK/ofU/kv3zGczpkNj+KJuYi8wqB80Q9f1YxsPj9cXWntY4AZA/gKIESsm6Ylcrj9W3Lx3o6FZXVc/GI3A+SfrzzBr9bGDPI8r85xyHZ0ORlLYGE1gK47OmxKWlh6VoRJkyF/w5VuxjDm4gJrYb0J2X+KSmf8Xjtv8PTAkfH4KZuMEVEdy4Nmsmg7igzhDBKj0kirQoIGhTvPOCtqttd67tafAMFHIHZyItxrhVZ79oTzTPEOQ2rV+0fSNZ3V7Xxa8mEkhnWG2BhR/RzSoQUCfjLllzLLJdBoGxjBSIMXG/trSemNcH8WcnEFOQynbhEAzsUG1XK8vkrisXpmSrQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by BLAPR03MB5443.namprd03.prod.outlook.com (2603:10b6:208:297::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.12; Sat, 4 Jul
+ 2026 19:40:17 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0181.011; Sat, 4 Jul 2026
+ 19:40:17 +0000
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Subject: [PATCH] MAINTAINERS: add entry for SDHCI Cadence driver
+Date: Sat,  4 Jul 2026 12:39:26 -0700
+Message-ID: <20260704193926.19245-1-tanmay.kathpalia@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0173.namprd03.prod.outlook.com
+ (2603:10b6:a03:338::28) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4NzM1I62iTm/tEwr"
-Content-Disposition: inline
-In-Reply-To: <20260704171513.GN749385@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|BLAPR03MB5443:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ff151f7-f467-45e5-f7cc-08deda04131f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|366016|376014|7416014|18002099003|55112099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: i6JV3d8vKvYCqVPf53LQaPYTrPbijvb3RH0nmipFL3y6EZq7xuh8E/qdlrwgO3WVCPwXG/Iikomzf8cfx2Ye8ekE56T89Ebrf5YS5XXb9LM3///nnteHXRZrU4wi3v0pvo9FRDnjKJBYZXs9WyfbyK1rIvtqVwUoe5MroQCJvoUb0ouJ/Iq8rvPYYrVr3KV4Ik/Zr5Bmh5zeSYQXgBSlFceEriX4ZcJHSiOlNW9AXEz4576lXBRRfY6Gj9m6HYb6+FsHEF0rE3ZQXNJtnBkSa/QvzGKRIvoqRSuqlrQgq7Noi4+zKsjk4qj9B/8OjWCllwjQY0HUueTnPMIBj7MXb8fz/uJVT+Bk9+zKrOAoBxTxrfMsSKi0Zs2lkOJMRfzhIteSDzKU4dJak8NW6AjbT33wj9xqK2NgnmA0ajElSnd8Q1/gD6BOcr2kWwtqGO078SiNBYMtITP/XxXE7JUjFin2Nx64rSJ8B17PJ7f0Vt5R1df/C+N6NrkhfRHRV/t6wmgkoFf3ZYm+4DxQVUNXa3Pbakd8trdenfwwJuiVXH80rQagwODhNjq8qGJPraxsmgt3VmHYwfy/xEE1c0xFxhWsTFiTJt6YtCtH+m3jyhrnfZtKg/plWxR0LBI4tJ52hnFkj6telPwo1isHLLmKQ5Ql2eFHeQbtQjqs/XQfNYM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(7416014)(18002099003)(55112099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XOO/+nuFhnazPvNoiqbDicUGScMolyIhDu+v0GMabOwStsR4qWe5g0UBNT5e?=
+ =?us-ascii?Q?g0viLIp/rLuddg1dj9Y711ANz0Py/SaTRCxY6qUoohTTseU0S6Mk561T1DnL?=
+ =?us-ascii?Q?tIQpNNQhFxGT5iKev9xcs1qP4jgeQeS+20TPHGwvU/f32dZRKIJycF/J10cv?=
+ =?us-ascii?Q?i2D7OhYpXbjglOSaPyewfPzd3bansfeHLq+858JUdj2cAGS6oIfeVMNJCo7F?=
+ =?us-ascii?Q?77Jf1EMqbwkwWbJgh/UeXapfpkRLsUymRzOGINfsZN8u1DOiyLbbE+1wFs9F?=
+ =?us-ascii?Q?0BOW8NowwirPSO0OjdnmjhPxpz5saV2VJqDBM/Gh5ALgTiW4N11HrXLCM4I3?=
+ =?us-ascii?Q?qdvu/rkk9InPAZzB0zWz4MUPaJKzkeACsSS4XK6qCleVxEimNuivO9A16bR2?=
+ =?us-ascii?Q?+73YYGyJw/YhphE011kDr2tfrc52UCX+UKibwX8sSpKYYSsKBgUshKNWqghl?=
+ =?us-ascii?Q?MQbfLZ1jQ9RhZTyyrR5AaN89VmKuEmBLRkPTlJqqZRVyv506y66cLCQw37rI?=
+ =?us-ascii?Q?a1F+zAnQrtXt/+p5auUjwx/d6kgg82bHri6/sJ0KWN2NtYaqeQYzhW06YhyU?=
+ =?us-ascii?Q?ZTzXU4We207kdI8iQ27Y+RH2VMCyn3OFKnu1cmOhmdRCs/E/uHF/PHTmiTES?=
+ =?us-ascii?Q?frRDzP2Sl2xhAK6OjkYhP/uZrDr8pGsJkIOVLo9lq4dz0MduK09x4rxEVfNb?=
+ =?us-ascii?Q?MRuadZpQ4W5Burd7WSOddD7382Gx6GpgH43U3YbQF9inwakZCDu0ELG/JKK+?=
+ =?us-ascii?Q?gPdL9/j5en4sZbz9lB01Ad0Z24xXLhQvAIYgrk/1w6nvEZFP6hLIzsr7i/zs?=
+ =?us-ascii?Q?V5v4aJHj9YD1IKmgT76aKxpzS8dDAPH04TMQhaciA/7JEeo0ITTBWfntDxLz?=
+ =?us-ascii?Q?JEIhynDV+1xpo0zIMgAR1L8IjBlJZsR1jy9IRp4PNqPfpE9z77Yo2RLoxBlq?=
+ =?us-ascii?Q?epb0duKhQNYaLGRJSld34yM8SbWg4P7Q4JtSrctpNfjCTQm/x0kWHqncPnGX?=
+ =?us-ascii?Q?NqQuF9ZDcpURbfsmkl5RX4KRaEPnJvzBMT3YisZqD836K0k1muGmJgu/tiRr?=
+ =?us-ascii?Q?WZz7NlZw/fuLZtjNHSeR1Y84s1oNoiKYhoN0E4q1bMBovzNt2Y0DoB0WOweX?=
+ =?us-ascii?Q?iBo80Qzale3w3h/PWVjJjOwbPKAd1miM7cCDvP12yaUoLea+wt2M6nUlmcny?=
+ =?us-ascii?Q?21pscr3UEiuvbTUlhD2Ijt9T1L68xPZvcTpK/KHZF7H0bQseoda6yOYXN3Wy?=
+ =?us-ascii?Q?HB4rHn4B4CCnjw3x+R6kxuLwHU64dNQVEiZ1/trfXSyveXp8crhIHItdGKpX?=
+ =?us-ascii?Q?v5A5tRqKgiwnssk6BNjzFNGOzsmDsIuBU3muj1SvUQ2iOYLqVQ6Csqk0w+A6?=
+ =?us-ascii?Q?KqIal1gOYLh3DzQEU521QR3JDBchAkngdUiWNw7kzFyRITR9qEFLnDZ8OO3z?=
+ =?us-ascii?Q?uqLXaIxBBK8lEqLQnw6lUXBECM4jHbv3UEAvdtuHHYcc69fpmQUG7OLYkIug?=
+ =?us-ascii?Q?YV/gKUQBFGOz6PjbvSL5DGY1/bEFyL2Xumw7j8pHmvuhm2UpLTMEEJSCClai?=
+ =?us-ascii?Q?TAVDqwn8pM1omN6e9eagWJFI/EC9LzOsEIGem3mPVWxQS3dLp45AF7mFyuZ5?=
+ =?us-ascii?Q?FuPuAF4KO4U+nsHn9+Q8RvoQHX3oCcyqlMFSAZUZDEP522HKTkDISJ5lmshs?=
+ =?us-ascii?Q?kJ37vhWUKtQbSr+gPpn9DLZrz/+9evNmO/+8oJqf9HQYwsgY3ppVQSg4k4b4?=
+ =?us-ascii?Q?f8Vsq9zshZ0RO9slkuxJdZX6QrUyqlc=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ff151f7-f467-45e5-f7cc-08deda04131f
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2026 19:40:17.0999 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jqMOFhMenHE8o67tuYsnt9TbPT48tP0F9/DXkTsuPMHZqww4/UHbUVuFtFmQ/O7oHDtPFvgyxTk0BTH4G6P9OIIUv76GREXinrFH5CYMogU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5443
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,110 +147,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add a MAINTAINERS entry for the Cadence SDHCI driver files
+(drivers/mmc/sdhci-cadence*). The original authors
+(Masahiro Yamada <yamada.masahiro@socionext.com> and
+Kuan Lim Lee <kuanlim.lee@starfivetech.com>) email addresses are no
+longer reachable. Add myself as maintainer since I am actively
+maintaining and developing these files.
 
---4NzM1I62iTm/tEwr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+---
+ MAINTAINERS | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-On Sat, Jul 04, 2026 at 11:15:13AM -0600, Tom Rini wrote:
-> On Sat, Jul 04, 2026 at 06:59:08PM +0200, Heinrich Schuchardt wrote:
-> > Am 4. Juli 2026 18:17:07 MESZ schrieb Tom Rini <trini@konsulko.com>:
-> > >On Sat, Jul 04, 2026 at 05:21:25PM +0200, Carlo Caione wrote:
-> > >>=20
-> > >>=20
-> > >> > On 4 Jul 2026, at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > >> >=20
-> > >> > On Sat, Jul 04, 2026 at 03:52:29PM +0200, Carlo Caione wrote:
-> > >> >=20
-> > >> >> U-Boot can autonomously start a hardware watchdog
-> > >> >> (CONFIG_WATCHDOG_AUTOSTART, default y) and service it from its ma=
-in
-> > >> >> loop, but the EFI boot path never stops it: efi_exit_boot_service=
-s()
-> > >> >> tears the devices down without calling wdt_stop_all(), and a watc=
-hdog
-> > >> >> driver without a .remove hook leaves the hardware ticking across =
-the
-> > >> >> firmware-to-OS handoff.
-> > >> >>=20
-> > >> >> An EFI-booted OS that does not take over the SoC watchdog within =
-the
-> > >> >> remaining timeout is reset mid-boot at a wall-clock-dependent poi=
-nt.
-> > >> >>=20
-> > >> >> The UEFI specification (v2.11, section 7.5 "Miscellaneous Boot
-> > >> >> Services", EFI_BOOT_SERVICES.SetWatchdogTimer()) is explicit abou=
-t the
-> > >> >> one watchdog it allows across the handoff:
-> > >> >>=20
-> > >> >>  "The watchdog timer is only used during boot services. On
-> > >> >>   successful completion of EFI_BOOT_SERVICES.ExitBootServices() t=
-he
-> > >> >>   watchdog timer is disabled."
-> > >> >>=20
-> > >> >> U-Boot's UEFI watchdog (an EFI timer event) complies by construct=
-ion. A
-> > >> >> platform watchdog silently surviving the handoff defeats the purp=
-ose of
-> > >> >> that rule: the OS has no generic way to know it is running, let a=
-lone to
-> > >> >> service it.
-> > >> >>=20
-> > >> >> Stop all watchdog devices in efi_exit_boot_services(), before the=
- device
-> > >> >> teardown.
-> > >> >>=20
-> > >> >> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> > >> >=20
-> > >> > NAK. We have had this come up before, and in short, the UEFI
-> > >> > specification needs to be fixed here, as generally speaking a watc=
-hdog
-> > >> > should never be stopped, as that leaves a gap where the system can=
- hang
-> > >> > and thus defeat the point of having enabled a watchdog.
-> > >>=20
-> > >>=20
-> > >> Fair enough.
-> > >>=20
-> > >> For the record, the failure that motivated this: a pristine Ubuntu 2=
-6.04 arm64 image on a MediaTek Genio 700 EVK dies silently about 60 seconds=
- after ExitBootServices(), 100% reproducible, at a wall-clock dependent poi=
-nt. The generic kernel ships the watchdog driver as a module, so nothing se=
-rvices the watchdog in time, and nothing tells the OS that it is running. F=
-rom the user's side this is indistinguishable from broken firmware.
-> > >>=20
-> > >> In the meantime, is the accepted pattern hooking up a wdt_stop_all()=
- in the EFI path via board_quiesce_devices()? That keeps the watchdog armed=
- for the whole firmware lifetime and makes the handoff behaviour the board =
-maintainer's call.
-> > >
-> > >No, Ubuntu needs to fix their kernel image to have the watchdog
-> > >available early. I hate to be difficult on this, but it's been a known
-> > >issue for years at this point that the spec needs to be updated. The
-> > >workaround here is for the watchdog to not be started until the OS is
-> > >ready to maintain it.
-> > >
-> >=20
-> > Best open a Launchpad bug explaining why this watchdog driver needs to =
-be built in and not a module.
->=20
-> I'll leave that to Carlos, and I would suggest digging out the mailing
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 45e9076de67..cc31934ece5 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1707,6 +1707,11 @@ F:	drivers/firmware/scmi/
+ F:	include/scmi*
+ N:	scmi
+ 
++SDHCI CADENCE
++M:	Tanmay Kathpalia <tanmay.kathpalia@altera.com>
++S:	Maintained
++F:	drivers/mmc/sdhci-cadence*
++
+ SEAMA
+ M:	Linus Walleij <linusw@kernel.org>
+ S:	Maintained
+-- 
+2.43.7
 
-=2E.. to Carlo, my apologies.
-
---=20
-Tom
-
---4NzM1I62iTm/tEwr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakk/xwAKCRAr4qD1Cr/k
-CpxEAQCV6JqqQCjWSup5EM6m+e5pwz6qYi2PVIEqSI+494vXSgEArYx9C4JmBVvZ
-U3vM70HjR4WUrfS+DGw92HWJcdgtnQY=
-=GcgD
------END PGP SIGNATURE-----
-
---4NzM1I62iTm/tEwr--
