@@ -4,103 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99E8C43458
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 16:30:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50ABAC43458
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 16:46:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D0DF84119;
-	Sat,  4 Jul 2026 18:30:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BBF4683FEE;
+	Sat,  4 Jul 2026 18:46:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jEaEvBnK";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HMKvJhBh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C074B841F2; Sat,  4 Jul 2026 18:30:24 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76B9E84119; Sat,  4 Jul 2026 18:46:56 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14AA68341A
- for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 18:30:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5505A8341A
+ for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 18:46:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c124c3c876aso214806166b.1
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 09:30:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783182621; cv=none;
- d=google.com; s=arc-20260327;
- b=SS3TF5dZJFw8DNdQrm5WYTyvBF4VnzoY0+386aYtbPulMs9v8dKKBc/3ZilS8mdQXy
- PXwKXSA8NLZfzbHzPUMJM+wrU6wHGkVBgQZJdOetXjLykmqKnQl/zSVbBuPobohkms9Z
- cw5dSG/x84g1Ii1yd46qpaquv1gBfPg0bJgqrC6gwyCsoU9Jm9KSNbYCKRTzsYSkkyD2
- ZtWEH7JQ5VuHUUQl7Yj9sdgkhSQJkpjZv6XlfVk7X9RwFJPAAUpsd6aChPmGL36fTDpT
- /Agwml6bYOwK4XqL4zyuqXDdNDysc/HwE6hkIi7HwGt93TY9l/SK1GlObBE7EREClRXt
- svzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=oFkUDM4cmccLtN749lOeQaKUZBp95Y1Mo/Y+PMBp1TE=;
- fh=TyjeA5pzKfachOVOXKCyIEPRoBDY7jD1AxgLRVVcr5g=;
- b=MfOYpWkMwuXUq3SMMYiy+rh/5Q2nIednUSpF5M3tS9A55nXv2cr+KoAEknW507yMTk
- 3tC0Xo2vjYQEzBkQG3TgOOrvIdc5+Ep/7Q7x1IXhT7nQGY9OS8eMP5ycfKj3+er3wCmQ
- k14CUuIYgq8GWGzNw8nUS/NkcNYfeAdVZSayrO8Yg18UZ80IE00SWNWXPMQqlxffgts4
- z1xPqTlM45AcMN/ZZMS6MnWPAfPF9EgzRap0gTDh8IAwoSuMyzoKOBNlB1HxMjKUjnR8
- B4d5jOGkFkZhVRRX8KAIsb5iDq/jI/tj79qjEhvVKt8SpE7SckeZcyx8wlTevIAXYMYz
- Ie1Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783182621; x=1783787421; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oFkUDM4cmccLtN749lOeQaKUZBp95Y1Mo/Y+PMBp1TE=;
- b=jEaEvBnK4+n0eR3rAjN4p7ddSDJjNzq7Y7mtAXug9t384E0sSyUTvia2/qdTdHVGJ+
- JK63bv+skbzo9hdezOmBSSA8rJahBt3yE38UYGPdvzjZgnTq37b09uc7Hr1oMAYQhK+l
- mKaGwSwA2EsVUjDlg1Y45bfurNqt4DSpR0NMY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783182621; x=1783787421;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oFkUDM4cmccLtN749lOeQaKUZBp95Y1Mo/Y+PMBp1TE=;
- b=X1TKbIIC5s+Wlsa10Mr3tjscF3kbYVHw3NF+kEvwxg/cJf2LUaNYogpZDNjOdONe2z
- gOKASX6lxg+dMUZTWqRF90EhL5x1BvdlfanrKebuHTlF2yH4Yj2ualC0gDHatawXhHAW
- ThFVZ72KWba8nESoyIfzdIwrX90GObeaK/hAxego3UC0RBGDJK4cauqSW18qTc4jEwa5
- jyaNM2vEcJKnwdSNJd4I1YJmaIq5aD7nhH2pTpvyMI5Cw9b9NgrPuVZR3U+li+Wz7Vm6
- bkGSet9Fhc0BRej3c/+9Lb03+rx0FhjdS/wgeMJfztmeni/RFJQwjfIy1fgjtrHFim+u
- YILw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Ro6B0qyIEWxH6tQakuyaztE0DxzK5XC89Ii/EL2W9Cgj/0MeHxC7uxDKdyapOJsDqJgNDlUBrc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+uC8EjrRfYY1xiVQq8rwcrq6NNQ9tCssFueZ1bIJfbkL0riK7
- 1ZlAIQUZk8ezocaE/OClk7l9Rk7/Or2UwW68WDU560FcP8d23aEmiaFCfXjd3gNqPONfiJr1/YR
- X6XjbtNzseTJcasYLGsqdOkRg1G3Nil3s1ltSnpjcI4JlJZRtd48+v63r
-X-Gm-Gg: AfdE7cnJE8b0HC9EY8nIKKKyxO0Ff1dGqmyqsbHQO27Lm9vPTxRLHR3MlJbLZYKtAth
- 2Nf4Khx+9/hFwP6oeo1611KhzKar/YhfUxzsB+sAhFmTz/ED31gqJZtQcaXqr966qdPPPlc8Ny6
- GpMWe6xe3iA30ZInPfZJ1FkMRMzx+bX8EHh5nfioDgIZBEdLDYF2FHLeCOj/+6hjeUW66rHK3E1
- vr486xcUKUBXG0Mfwf3gGmExjD7yzBqEn83rGz65ysvLC8HMi8Xo2Dql6tYzNk+lCIf9tc=
-X-Received: by 2002:a17:907:97ca:b0:c12:40c2:9d09 with SMTP id
- a640c23a62f3a-c12e6963b89mr131737766b.12.1783182621383; Sat, 04 Jul 2026
- 09:30:21 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1783183613; x=1783788413; i=xypron.glpk@gmx.de;
+ bh=Gff8mbL5TH0MjPpK1p00BIF6QXxvBZVfpYgootclnOw=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=HMKvJhBhnlEadD3Enxs7uh+pS0h0CBLIsdUPYd0PEKueA+03flzLb3rRdpZK0pya
+ SS2xJ2OnqiNDmWkug0HnqeZM4GNAtKHlrF8+YxYfjpsJDWYvBzd1r1n8lQUqjvC55
+ eZK4vCItFW4IljOIRMXreSokQ8Qp4T1bzeNp/K0za0ydENWTa8TGKiWbR+yAQv9z8
+ 5FDnwFi8vTCJ9fmVmCvusUl+KauY0PM66OZiNm9kKGGu+YVoGmlWz1kDmd2+jNFpT
+ NrQc/b68IlqxkPu7vSdvAnD0efwMU6wLeczJaBSH4Tq/xKVf4e7O3DP69h3NgZ11T
+ ynflM8ACw8nZRLeWnw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mg6dy-1xJDkI3MYY-00emSt; Sat, 04
+ Jul 2026 18:46:53 +0200
+Date: Sat, 04 Jul 2026 18:46:50 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, Carlo Caione <ccaione@baylibre.com>
+CC: u-boot@lists.denx.de, ilias.apalodimas@linaro.org
+Subject: Re: [PATCH] efi_loader: stop watchdog devices in ExitBootServices()
+User-Agent: Thunderbird for Android
+In-Reply-To: <20260704161707.GL749385@bill-the-cat>
+References: <20260704135258.68543-1-ccaione@baylibre.com>
+ <20260704143251.GK749385@bill-the-cat>
+ <590BC3A7-BA5D-4346-8757-5379EFFFEFBE@baylibre.com>
+ <20260704161707.GL749385@bill-the-cat>
+Message-ID: <3167C65C-B0F5-42F1-BB51-3CD64F3CFE83@gmx.de>
 MIME-Version: 1.0
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
- <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
- <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
- <CAFLszThAqVjZ0Jd5kdB5q=bhGTNpAeHw3WXpUHnFQ_OH_KmXLA@mail.gmail.com>
- <6d0f3078-2ba8-474c-9a1f-481eeb7f47bf@cherry.de>
- <CAFLszTi+4s51HtaQrgBLEsOzoCjtZ+CGdvqBm4B9_fj-rpKqwg@mail.gmail.com>
- <CALeDE9OWeMs3peX8+4+i6iTmZn-EO2e+7s7q6S1yFaRUa0dksQ@mail.gmail.com>
-In-Reply-To: <CALeDE9OWeMs3peX8+4+i6iTmZn-EO2e+7s7q6S1yFaRUa0dksQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 4 Jul 2026 10:30:07 -0600
-X-Gm-Features: AVVi8CdWEu6v-52vrSsGyE1VpJxZsUeGFdwtIka2NNIzPbilqt6jcX_vmqYkvAE
-Message-ID: <CAFLszTg24RTHi0A0vWfv62FfZhm1Uz4iw=4m7NZ6_4W3R3kwyQ@mail.gmail.com>
-Subject: Re: U-Boot Concept Tree Proposal
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:clFJl7avgcEcgWIGePnEenIAckMRt+vDSBrhlz+2/HGXDuKyojG
+ s/gKWsxuU75nB1cs9g6ScWpY+1Z1TJLd/gYbmc/AZ5y3LdPhOkkZtKaUeGTjnF7te7MTwYG
+ Yjb5OzZEVbZnWIVdWachH0mioLxGuXtIIsYdIHRH3wgNsOl4Ka4opMY5J+9V6oLlMryKVKs
+ bYbcGCGtcWU6JErz6LIcA==
+UI-OutboundReport: notjunk:1;M01:P0:2Q+x75RGDIc=;flk9f0/YYmXdB7y9KAFtAE3609a
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,237 +157,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Am 4=2E Juli 2026 18:17:07 MESZ schrieb Tom Rini <trini@konsulko=2Ecom>:
+>On Sat, Jul 04, 2026 at 05:21:25PM +0200, Carlo Caione wrote:
+>>=20
+>>=20
+>> > On 4 Jul 2026, at 16:32, Tom Rini <trini@konsulko=2Ecom> wrote:
+>> >=20
+>> > On Sat, Jul 04, 2026 at 03:52:29PM +0200, Carlo Caione wrote:
+>> >=20
+>> >> U-Boot can autonomously start a hardware watchdog
+>> >> (CONFIG_WATCHDOG_AUTOSTART, default y) and service it from its main
+>> >> loop, but the EFI boot path never stops it: efi_exit_boot_services()
+>> >> tears the devices down without calling wdt_stop_all(), and a watchdo=
+g
+>> >> driver without a =2Eremove hook leaves the hardware ticking across t=
+he
+>> >> firmware-to-OS handoff=2E
+>> >>=20
+>> >> An EFI-booted OS that does not take over the SoC watchdog within the
+>> >> remaining timeout is reset mid-boot at a wall-clock-dependent point=
+=2E
+>> >>=20
+>> >> The UEFI specification (v2=2E11, section 7=2E5 "Miscellaneous Boot
+>> >> Services", EFI_BOOT_SERVICES=2ESetWatchdogTimer()) is explicit about=
+ the
+>> >> one watchdog it allows across the handoff:
+>> >>=20
+>> >>  "The watchdog timer is only used during boot services=2E On
+>> >>   successful completion of EFI_BOOT_SERVICES=2EExitBootServices() th=
+e
+>> >>   watchdog timer is disabled=2E"
+>> >>=20
+>> >> U-Boot's UEFI watchdog (an EFI timer event) complies by construction=
+=2E A
+>> >> platform watchdog silently surviving the handoff defeats the purpose=
+ of
+>> >> that rule: the OS has no generic way to know it is running, let alon=
+e to
+>> >> service it=2E
+>> >>=20
+>> >> Stop all watchdog devices in efi_exit_boot_services(), before the de=
+vice
+>> >> teardown=2E
+>> >>=20
+>> >> Signed-off-by: Carlo Caione <ccaione@baylibre=2Ecom>
+>> >=20
+>> > NAK=2E We have had this come up before, and in short, the UEFI
+>> > specification needs to be fixed here, as generally speaking a watchdo=
+g
+>> > should never be stopped, as that leaves a gap where the system can ha=
+ng
+>> > and thus defeat the point of having enabled a watchdog=2E
+>>=20
+>>=20
+>> Fair enough=2E
+>>=20
+>> For the record, the failure that motivated this: a pristine Ubuntu 26=
+=2E04 arm64 image on a MediaTek Genio 700 EVK dies silently about 60 second=
+s after ExitBootServices(), 100% reproducible, at a wall-clock dependent po=
+int=2E The generic kernel ships the watchdog driver as a module, so nothing=
+ services the watchdog in time, and nothing tells the OS that it is running=
+=2E From the user's side this is indistinguishable from broken firmware=2E
+>>=20
+>> In the meantime, is the accepted pattern hooking up a wdt_stop_all() in=
+ the EFI path via board_quiesce_devices()? That keeps the watchdog armed fo=
+r the whole firmware lifetime and makes the handoff behaviour the board mai=
+ntainer's call=2E
+>
+>No, Ubuntu needs to fix their kernel image to have the watchdog
+>available early=2E I hate to be difficult on this, but it's been a known
+>issue for years at this point that the spec needs to be updated=2E The
+>workaround here is for the watchdog to not be started until the OS is
+>ready to maintain it=2E
+>
 
-On Fri, 3 Jul 2026 at 11:11, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hi Simon,
->
-> > > >>>>> Another difference is AI. I believe that AI is the next step on from
-> > > >>>>> compilers, which also took a long time to produce good code and find
-> > > >>>>> acceptance. The Concept tree welcomes (and encourages) high-quality AI
-> > > >>>>> contributions and reviews. It accepts PRs and allows reviews on PRs or the
-> > > >>>>> mailing list. It relies 99% on automated tests (sandbox, QEMU and labs) so
-> > > >>>>> sets a high bar for testing. It uses a separate Gitlab instance for now and
-> > > >>>>> of course uses a separate mailing list and Patchwork project to avoid
-> > > >>>>> cluttering the main list. Concept runs an AI-powered cherry-picker so that
-> > > >>>>> it keeps up with mainline. In no sense is it operated as a fork.
-> > > >>>>
-> > > >>>> I'm clearly against using AI for any of development or review work as it
-> > > >>>> can't be fully trusted and will monopolize precious reviewers time reviewing
-> > > >>>> AI code instead of reviewing legitimate contributions from individual and companies.
-> > > >>>>
-> > > >>>> Using AI for CI testing and regression testing could help if it doesn't add
-> > > >>>> a burden for maintainers by reporting false positives.
-> > > >>>
-> > > >>> RIght, Tom has been very clear about this too, even suggesting that AI
-> > > >>> is actually unethical. This is indeed one of my motivations for the
-> > > >>> Concept tree.
-> > > >>
-> > > >> To avoid the scrutiny of using AI? If that's the case and you're
-> > > >> intention I have further concerns.
-> > > >
-> > > > Not really the scrutiny...the more scrutiny the better, I think. But
-> > > > if mainline is anti-AI then Concept can provide a place where people
-> > > > can make use of it.
-> > > >
-> >
-> > Thanks for taking the time to reply to this - it is a very important
-> > but very quiet thread.
-> >
-> > >
-> > > Tom has clearly communicated multiple times that AI is generally not
-> > > welcome in U-Boot. So how is accepting AI contributions into Concept
-> > > compatible with "Once features are landed and functional in Concept I
-> > > hope that many will find their way to mainline"? Who's going to do the
-> > > work? Who's going to take the legal liability of reworking AI-written
-> > > code for submission to mainline? How is this going to address the main
-> > > issue you're having of "code is not landing"? It's still not in mainline.
-> >
-> > U-Boot tends to follow Linux, so we'll see what U-Boot's policy turns
-> > out to be in .rst format. I am hopeful that eventually more people
-> > will see the cost/benefit ratio of AI in a different light. My
-> > understanding is the policy will be addressed once the infra move is
-> > finished. Linux requires disclosure, something I have worked hard to
-> > do in Concept. The legal question is covered by Linux's policy too
-> > [1]. I do understand that any new technology creates fans and
-> > opponents, problems and opportunities. Some thoughts at [3]
-> >
-> > My approach has generally been to embrace change (and deal with the
-> > fallout) rather than to resist it.
-> >
-> > >
-> > > What I think will happen is "I cannot get this merged into mainline so
-> > > I'm going to get it merged into Concept and then direct my users at
-> > > that". And eventually, over time, everything from this Concept
-> > > contributor and their users will only land in Concept and we won't even
-> > > have it on mainline ML.
-> >
-> > I don't want to speak for Tom, but yes I can trace the genesis of
-> > Concept to the increasing difficultly of getting things accepted,
-> > particularly large things like bootstd and VBE. What do you suggest
-> > instead of Concept?
-> >
-> > >
-> > > You keep repeating Concept is not a fork, but I don't understand how it
-> > > can NOT be one.
-> >
-> > Concept cherry-picks from mainline so that it stays up-to-date. So it
-> > should be possible to grab a feature from Concept and apply it to
-> > mainline without too many conflicts. A fork does not care about
-> > mainline at all. This is a big and complex topic though, since
-> > features build on each other (e.g. see the BLS thread [2] where the
-> > Concept version builds on pxe_utils refactoring, making it hard to get
-> > into mainline without several precursor series).
->
-> A fork of a project is where it diverges which a number of different
-> features, there's lots of projects with forks where the forks cherry
-> pick between each other and try and remain largely compatible. One
-> example that comes to mind is Linux Foundation forked the Ubuntu LXD
-> project to a project called Incus.
->
-> > > Considering Concept is apparently going to be hosted on the same GitLab
-> > > instance as mainline, I see this as potentially confusing people as to
-> > > what it actually is.
-> >
-> > Yes it could be confusing...I'm open to ideas on how to handle that.
-> >
-> > > I still am pretty upset at the various articles you
-> > > or AI in your behalf posted on the u-boot.org website claiming support
-> > > for various features in U-Boot either "submitted" (nowhere to be seen on
-> > > the ML) or not explicitly stating they are merged in a fork of U-Boot
-> > > (Concept, that is).
-> >
-> > See above re fork. I am responsible for the articles, although Claude
-> > and Gemini helped write most of them. I thought I was being quite
-> > careful to label things as 'Concept', but I've just gone back through
-> > and found a good number unfortunately did not. I've fixed those and
-> > also updated the titles in about 20 cases too. Please let me know if
-> > you see other problems.
-> >
-> > > That with the fact our official documentation used
-> > > to be on docs.u-boot.org really made it look like (to me) we were behind
-> > > this effort. We made the mistake of hosting the docs on a domain name we
-> > > didn't (still don't?) control, I would like to avoid repeating the same
-> > > mistake a different way by hosting a fork on the same instance as mainline.
-> >
-> > OK. Would a URL link to Concept be acceptable?
->
-> I don't think we have buy in from the community into the whole concept
-> fork as it is to be actually discussing links as yet.
->
-> I think you need to answer the questions to the community about concept:
-> 1) Why are you holding the u-boot.org domain hostage over this
-> 2) Maybe you need to read back through the input from the community
-> and revist what you think concept should be
->
-> I feel I was very clear, both on the community call when it was bought
-> up, which lead to you starting this thread so I had assumed you
-> understood that you had to get the community buy in.
->
-> In the follow up private discussions about it after it was clear as a
-> whole that the PLC was uncomfortable with a specific websiite (we
-> don't plan on supporting forks, would we provide that feature for all
-> forks?) for concept. I offered the idea of a custodians tree to allow
-> you to develop and maintain the features that you were preparing for
-> upstream in your concept tree to enable easier collaboration for those
-> that wished to work with you on those specific features. Maybe I
-> wasn't clear enough in my communications but it was never intended to
-> be the location to host a fork.
+Nothing wrong with the spec=2E Some hardware engineers simply don't read i=
+t and create watchdog timers that cannot be set to a 5 min timeout=2E
 
-A fork would be something which forks off mainline and goes its
-separate way. Concept is not a fork. Perhaps a constantly merged,
-multi-feature branch would be a better term. Please read my original
-email again on this point and I'm happy to explain it further. Quite a
-few series have already found their way to mainline.
+Best regards
 
-> So I think you need to revist what the idea of concept actually is and
-> come back to the community with an adjusted proposal.
+Heinrich
 
-It seems that you are rejecting the whole idea of a Concept tree (my
-original post on this thread). Can you please confirm that? But if you
-have ideas on how it could work with modifications, please share them.
-There must be some common ground somewhere.
-
->
-> First though, I repeat again, would you please explain to the
-> community why you are holding the u-boot.oirg domain hostage to try
-> and force the PLC to accept an idea that we have been explicit about
-> the need to get the community to buy into this "concept". I think the
-> community deserves an answer.
-
-This is a bit of a one-sided view. The real situation is that for many
-years to implement major features and improvements in U-Boot, but that
-became progressively more difficult as Tom started refusing to accept
-series and I have no ability to get PRs applied. Perhaps I was naive
-to expect our good working relationship would continue forever, but I
-have contributed a huge amount to U-Boot and having the rug pulled out
-felt very unfair, not to say bad for the project. Regarding the
-domain, I have offered to point subdomains to anywhere you wish, which
-would resolve this. In the meantime I have mirrored the website and
-moved various things away from the domain. But I cannot support the
-sort of split that happened with Barebox, if that is your goal.
-
-I don't mind hosting a separate tree somewhere else, if that is your
-preference, but it needs to have some relationship with U-Boot and a
-clear understanding of what that relationship is. If that is not
-possible / acceptable, then I suppose we should close this thread. I'm
-skeptical of our ability to resolve complex things on mailing lists in
-cany case, although I started this thread at your request.
-
->
-> > > U-Boot has friction also because we don't have enough reviewers or
-> > > maintainers compared to the number of contributors. I don't see how you
-> > > plan on addressing that by maintaining Concept by yourself (with an AI
-> > > I'm assuming).
-> > > I appreciate you're possibly one of the most if not the most active
-> > > reviewer on the ML and that there's not much more you can do to improve
-> > > the situation aside from recruiting more people to review.
-> >
-> > Yes I have generally been the most active reviewer over the last 10
-> > years or so, although sometimes I have burnout and stop.
-> >
-> > Here's how people become reviewers, IMO:
-> >
-> > Step 1: Punter has a problem, debugs it and conceives a fix / feature
-> > to resolve it
-> > Step 2: Punter sends a patch or short series
->
-> I'm not sure it's appropriate to call our developers and contributors
-> "Punters" [1] please be respectful of people.
-
-It's a pretty common term in the UK, at least, certainly not
-disrespectful from my understanding or intention, using it to mean a
-customer willing to buy or try out the product. I wasn't aware of the
-urban definitions and now I wish I hadn't just read them!
-
->
-> > Step 3a: People review the code and Tom accepts some version of it
-> > Step 3b: Patch is rejected, or people are mean or dismissive, or don't
-> > understand the problem, or the effort gets too great (punter exits
-> > here and goes to write his own firmware in Rust :-)
-> > Step 5: Punter sees a related patch from someone else and decides to
-> > reply with some thoughts
-> > Step 6: Punter starts getting interested in more areas of U-Boot,
-> > sending patches and reviewing, etc.
->
-> I think going from a single patch to a firmware written in rust is a
-> bit of a fanciful stretch.
->
-> From experience people involved in the project review things when:
-> 1) They know the topic or the hardware
-> 2) Are interested in the features or functionality provided
-> 3) Are a maintainer of a device or subsystem
-> 4) Wish to assist
-> 5) they have hardware they can test on
-> 6) they wish to scratch an iitch.
-
-That's fine, we have a somewhat different experience. From my years of
-watching this, it mostly starts with people seeing their code accepted
-(motivated by your #6).
-
-Regards,
-Simon
-
->
-> [1] https://www.urbandictionary.com/define.php?term=punter
