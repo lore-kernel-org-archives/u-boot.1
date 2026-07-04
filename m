@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07778C43458
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 14:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377F3C43458
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 14:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 294FD83FEE;
-	Sat,  4 Jul 2026 16:32:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 908FA83FEE;
+	Sat,  4 Jul 2026 16:35:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sxq4uUKM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yk8MelQB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2EB0841F2; Sat,  4 Jul 2026 16:32:57 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 9DEB48341A; Sat,  4 Jul 2026 16:35:07 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6C1F8341A
- for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 16:32:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8510F846F8
+ for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 16:35:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7eb29ed2bbdso380287a34.2
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 07:32:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-493c733f15aso14729415e9.0
+ for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 07:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783175574; x=1783780374; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=i9Ucu9fE9HjWhyusrjtxZccP5+EdOcAcd6pilCOC5ys=;
- b=Sxq4uUKMU9BbakWVx5uEhTmDmuDsvKCkBHSXuFdrNAycbEUHTprpxnnU+QcAOK8oXf
- uT4KMqQ8tjM/JxQAbHfy25sZU2Hv+TlVXQCAfXQFkNNdOGb0c+SNJn/d8Se9UY7yUbL2
- PwPI6517atR0eZB8DGQfM8f/mmoEVV8mFQaJ8=
+ d=linaro.org; s=google; t=1783175702; x=1783780502; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=JlYbksk89+YGWTqppj9ijMTYClwOqIhwgOcQaR36jQI=;
+ b=yk8MelQBs6SaFb0L46eMSq2QUBTfzGZy1/NCPGCNL0FiEJstMrOZH86gAjQOt6HcYM
+ aCaL3ScuwPBNCWlIy7F1w2zyGIzPcC7uDb6hCycDHpoIQL1HWTizZXSS+6vj68FSJegC
+ cDSD1IuyC+AUmiKvOhdhiHgR8walixck15CURLW6OXlEk/rlhC4DtjwpViVde/eB4uSf
+ mHN2JSsQqSSbZCkWRD9t9BLImaI8S/Vx8qL+VnkKvzXnsij+1ZKPp5fGCPGsMi4UljvT
+ DeWNFUPoQOCeHIMcC8VR/7LaGGsXAI7T9eRP4E4Mi0UZsFW1/O3WTbeveYGG9G1wcgYK
+ fWgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783175574; x=1783780374;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=i9Ucu9fE9HjWhyusrjtxZccP5+EdOcAcd6pilCOC5ys=;
- b=HKP2nfejBF/VoZD3bzvcFBfwFRGnhyEKAv/oSerxdZE5/ylIFRmS3fp19/sn25KNKR
- UQfPLzPFjNHZBjdTT4J/c7rViuWSI9nkLwnU4wqmBY4xHHaNHhsy6MHApE7jiByTTAy4
- Z1xumm+yoyye7bTr0jgoNVib5V5Y6nFVMYij+iytZgGOKI1u7MdmHWnP1LWSxVzhcMO5
- 5ofbnfZLNMM4J5TtoVaybucPsE1fLrprs1W4M1T3J588NSb/9oOXDwOhN4YdMtBeEY/y
- bhm0lz/DfMt6zg3le+jMcaJtpZnoq2sW/bty4zae4r0yX9ebHJpJbtiSuqYbMDOxf2Qf
- alDw==
-X-Gm-Message-State: AOJu0Ywldu05O1Vef3WANep/GG/dIi2S+2kV6mXl+f2WOETNnZOPUMvk
- PIUXjwglCsxIEC3sbCNdeOmLLfSXE4SORO7exlknZqocBUYXQF3iDybfCQU0LAOLytA=
-X-Gm-Gg: AfdE7cnJLfBvKGpBDoMx3KKqmunh1ASyJPqyYo/QUdrVJrJ80TEwypXtQNWTSwp0AnI
- PQk21huQQ6jpgwnLMJvPEvfgCUTHIgVlDGcf0/sRx6fbxPmkc+gYsu2U4KyXKgrPqMofW95e1E6
- uyVDNNec921vd6RzHhlXRVEpADHMyf/WJisEWvoaE6a2czbwFazYdVnehBFet0St5I8JuD+EUcx
- DsvdLfosjck/EDEGcS+gyv6zB+dU+u3xUaGc4macjWwk0Yvujuww7/cceS7Zn7ozRowwBsql2wb
- vDN9QTUS8tPLGSwWVVN6+pI7jSdiiINY3CRVu3NKzGlCHNo6uDtwU2ETsrK+lfTcBHys1Y5hBt9
- +ZoVzMAAnrKZA9mFmmmMBoVY2lOGlnh5VA8i4RCymlukSNIlpIFF9qFIp+66jUp9CHNdx8aXESC
- YKnq5BI1b7Wv1I612hG94ekdg/23bwoteADaARdAXSzhsoMiB7kn+rnQ1jxuOvbqPO8cz7QU6Ey
- kLA0o42K+AxXavzP9ojrawjdCf1owH2lLJLMQ==
-X-Received: by 2002:a05:6830:2907:b0:7e9:c556:7bec with SMTP id
- 46e09a7af769-7eb7fd8daf6mr1853296a34.10.1783175574407; 
- Sat, 04 Jul 2026 07:32:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7eb54500193sm7335079a34.24.2026.07.04.07.32.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 07:32:53 -0700 (PDT)
-Date: Sat, 4 Jul 2026 08:32:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org
-Subject: Re: [PATCH] efi_loader: stop watchdog devices in ExitBootServices()
-Message-ID: <20260704143251.GK749385@bill-the-cat>
-References: <20260704135258.68543-1-ccaione@baylibre.com>
+ d=1e100.net; s=20251104; t=1783175702; x=1783780502;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JlYbksk89+YGWTqppj9ijMTYClwOqIhwgOcQaR36jQI=;
+ b=gT28P9oMB7gRo1VIr9q9Zp5GyQEZVa/Jtr8EhgdeGGX3SbbrToqhSwPeNiH1cpSpG7
+ Swg0pTb9fPLLwq09kyVRDBJsPuFkxkNHUlnopVODBbtWvXewViKnvsAsd+VnTwLBUqBi
+ i62tML4QB7hHXw5pCWbpfOhvj7/HMmATmX133Z9Dds0ZNQBhWaKgKYVHckr39XlznBQP
+ mOD0HTsksxcMcN71JpQojO2QJ1s7sXJa9lcFiXVJdovxzzzlUzZECtfW2oTcGhSNtAtV
+ +9UECpUsaR/oAT/s0X4Elxdw12kSJcIRbha42LTC5C66SP2s+pZuCX6fqkv+nnm5bldH
+ 3Jyw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8ztn82VgOurRIwKDZ5qqtE+3cUG+KwtQY4z3GLwk4NTOmX24u16yWg/6YL9pX3jig05jDBvAw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3beNvJVSpoWpzDE4S+9Nj1hJ7gziNqAfhE53zPy3yqfgaJT2R
+ hPYZKYQkXpXikZfekIH2QQKwPkREkdCTwi6wS2VEwAi1AyzO5yt2yn/pioD7sdjXhrA=
+X-Gm-Gg: AfdE7cmJLq/O/DPKaCy6/PLEZmVwIAaZnGRXF6lvGAvEaM2QksSheZZwobVxUmwhgVV
+ b21X+V6q7fv7yKFIFq2QUeGOVEVU07IK2WgYdbhIqVG3jYh9QCt6s004CwjHztSyLiifPea9w2j
+ MKRtwIRP+kzgEwHGXrZ/9u5DoyktHRasC/SJ1ZNeHpRXPAXVuJ/IpoBaU3XmhJdGAjIxT4CwahY
+ 9TlBehbSa8q/RXZbaN1E54akfTL9KQ6JZeAggNO09Ri6IyoZ+EyZNgOIdps/tk5sgDHQCkTT6NY
+ Y3urW6hbMCzgoGtnhnVOudrhwxuKthK1lDaJcCo3S/UFmFeAHxwM83Eb4YJQVpQMluwLtqHWpTT
+ 6OeWhf+/5E3Su2qYZL7+7IUpyelJl79xFLZ57ZNTDi39qwlItuZd8D1euzNHJCqfaEpLUB8tU51
+ PBcvLtRscVdtx6i9uZUbeKdekWRjBN2UHNVlSAsoIOdpURzut9zwEO
+X-Received: by 2002:a05:600c:5309:b0:493:c0c1:3930 with SMTP id
+ 5b1f17b1804b1-493d11cef15mr42976845e9.1.1783175701622; 
+ Sat, 04 Jul 2026 07:35:01 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e120.dip0.t-ipconnect.de. [91.41.225.32])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493ccdab27dsm125880025e9.4.2026.07.04.07.34.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 04 Jul 2026 07:34:58 -0700 (PDT)
+Message-ID: <7273c6f7-0108-4ed2-a79f-855073609362@linaro.org>
+Date: Sat, 4 Jul 2026 16:34:55 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mtvHuH55AWCBClM5"
-Content-Disposition: inline
-In-Reply-To: <20260704135258.68543-1-ccaione@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] qcom: Enable CONFIG_SKIP_EARLY_DM for Faster Boot
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ varadarajan.narayanan@oss.qualcomm.com, luca.weiss@fairphone.com,
+ andrew.goodbody@linaro.org, swboyd@chromium.org, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20260704053452.761684-1-aswin.murugan@oss.qualcomm.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260704053452.761684-1-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,59 +105,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Aswin,
 
---mtvHuH55AWCBClM5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 04/07/2026 07:34, Aswin Murugan wrote:
+> Enable CONFIG_SKIP_EARLY_DM on Qualcomm platforms to improve
+> boot time by approximately 50%. Address a serial driver
+> crash seen with CONFIG_SKIP_EARLY_DM enabled by properly
+> handling error pointers returned from clock operations
+> during early boot.
 
-On Sat, Jul 04, 2026 at 03:52:29PM +0200, Carlo Caione wrote:
+Thanks, I've been meaning to enable this for a while now.
 
-> U-Boot can autonomously start a hardware watchdog
-> (CONFIG_WATCHDOG_AUTOSTART, default y) and service it from its main
-> loop, but the EFI boot path never stops it: efi_exit_boot_services()
-> tears the devices down without calling wdt_stop_all(), and a watchdog
-> driver without a .remove hook leaves the hardware ticking across the
-> firmware-to-OS handoff.
->=20
-> An EFI-booted OS that does not take over the SoC watchdog within the
-> remaining timeout is reset mid-boot at a wall-clock-dependent point.
->=20
-> The UEFI specification (v2.11, section 7.5 "Miscellaneous Boot
-> Services", EFI_BOOT_SERVICES.SetWatchdogTimer()) is explicit about the
-> one watchdog it allows across the handoff:
->=20
->   "The watchdog timer is only used during boot services. On
->    successful completion of EFI_BOOT_SERVICES.ExitBootServices() the
->    watchdog timer is disabled."
->=20
-> U-Boot's UEFI watchdog (an EFI timer event) complies by construction. A
-> platform watchdog silently surviving the handoff defeats the purpose of
-> that rule: the OS has no generic way to know it is running, let alone to
-> service it.
->=20
-> Stop all watchdog devices in efi_exit_boot_services(), before the device
-> teardown.
->=20
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
-NAK. We have had this come up before, and in short, the UEFI
-specification needs to be fixed here, as generally speaking a watchdog
-should never be stopped, as that leaves a gap where the system can hang
-and thus defeat the point of having enabled a watchdog.
+> 
+> Aswin Murugan (2):
+>   configs: qcom_defconfig: Enable CONFIG_SKIP_EARLY_DM
+>   serial: msm_geni: Fix clock enable on error pointer
+> 
+>  configs/qcom_defconfig           | 1 +
+>  drivers/serial/serial_msm_geni.c | 3 ++-
+>  2 files changed, 3 insertions(+), 1 deletion(-)
+> 
 
---=20
-Tom
+-- 
+// Casey (she/her)
 
---mtvHuH55AWCBClM5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakkZjwAKCRAr4qD1Cr/k
-Cl40AQD0NG7kPP1mCZ9eGOX2JmRzvteZeVBZYBCc8wvSQU20kQEA1N/fJlWrV2v3
-mqe4eWx9BJbhPoM1y+Sf1YQywq+ubQI=
-=YkHR
------END PGP SIGNATURE-----
-
---mtvHuH55AWCBClM5--
