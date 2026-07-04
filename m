@@ -4,97 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E052EC43458
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 11:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F79C43458
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jul 2026 13:54:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 066B88341A;
-	Sat,  4 Jul 2026 13:22:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 622F083FEE;
+	Sat,  4 Jul 2026 15:54:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="bUoNDNK8";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="mASlJZcy";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cXOOAO0K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F7D684119; Sat,  4 Jul 2026 13:22:35 +0200 (CEST)
-Received: from fhigh-a3-smtp.messagingengine.com
- (fhigh-a3-smtp.messagingengine.com [103.168.172.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8FFAB84119; Sat,  4 Jul 2026 15:54:13 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B010483314
- for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 13:22:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AA7F8341A
+ for <u-boot@lists.denx.de>; Sat,  4 Jul 2026 15:54:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 922391400054;
- Sat,  4 Jul 2026 07:22:31 -0400 (EDT)
-Received: from phl-imap-03 ([10.202.2.93])
- by phl-compute-03.internal (MEProxy); Sat, 04 Jul 2026 07:22:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1783164151;
- x=1783250551; bh=eR4fbHUigcYe3whCtOMndykBeTXX1Ef2A4bCAUs8q/A=; b=
- bUoNDNK82WaMpyP025W/amKQnajm5w7PF5dzeXZ+Acw24fkE7iXavB8sMkIA0/8J
- 353Kv7PHdOOYYRrCTLZtZbq3laKFYZ27WDbVuab77KwDHkHl0+CNsAeOqjCnz9kK
- suPJxCbAFlzzVIXnpe7DfWIUztiC0WFxuf4Rd7M99dqmt2UqTEjF49hrMDpo6k04
- aclLLurFlP+3rTFeFhsM4PtF79py9Be4WahmLKoPl2CpwB7yw4WRJx9mmNOBYPQv
- lW+488fQtCwJamjJobQZzSPtNdBRk75AYiE3OAFnjImj455K/0yAr6Y6+5l3MLwF
- VcNpXe6h78Z/m6uxVl70XA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1783164151; x=
- 1783250551; bh=eR4fbHUigcYe3whCtOMndykBeTXX1Ef2A4bCAUs8q/A=; b=m
- ASlJZcybPEeescnSPbPKkJ5w6PaxmmgGmrjLHJIRRqb83/cipfTdpiqPGOqwaMrd
- hq47ZO/KMKehzZCPYCeixQ1KsyixCOOdVUDg7iZn+jWMvDz4HLrLNlILOyBnNG8O
- 8REH1Pk69KHkyKkNaAoJwjKh+dD4gyp2f1urAMcgYEIi0nf8eIQ70f77UIhVRy6u
- aHzbT6yyLC3rAuEIEPKawgvYgsMSnen2IKIDcOJ0NfQm7voOHmTBUHazSUGU1GxT
- 5c1FazTRCDWXKo7sKfVd3QnUWtUMa2rzR+/H5lMBp7gY6EWGUErImvyoIyH8OKaQ
- ebcwieGUlWBXByacEZBPg==
-X-ME-Sender: <xms:9-xIatnrOBKhycgLfB9BXltBX4sRmdR6evWQQt034LMxHEXtjqFAYg>
- <xme:9-xIajo1vFsnwSmIp7gzx7r_rJODYvQYxRhS6KMXfElONEQQUKIy5d72vNOksgiv5
- PG52bTxRIw0uWDNg4aM2xKMCm05kpUjM4qpJmSXW0SbjqkkYSp0Uec>
-X-ME-Proxy-Cause: dmFkZTGWhhl9DPnVBEmqd+SYKx/F6dHncl6NmnVA1Lv2UcbN4Isspyp9QZrH15M6FVnEzy
- zbpCzWZLRvBV/1sWBsia254+kqIgnnLZlF5V2Lxszl0VhEmPCHLL287eHuds4IeN1vtTXI
- 2xKRzkkQ9/1flm6d6x8z3fPXaRh94SHmAgmStjBPSKKZW7GErfl9ciwDcn5TDuc2PRqPZk
- TyLuvYkC/XaUu8lV1lUqBsYv6d0TCa1XBqGK+fAGvuzQ9WxOwv4I9K3ggxyppD6LEw/pQ6
- VaufFTa60q0std+ZU0KWKKUuCDFKY6vxtpZvtWQuthjdPf16/rCQ4PYQ6ktUh7CVN2CxB9
- vreW1ZRsouxE+Pg6DfGW2aM4aRzvzpoQOaWdVNjMSTIxNPFx0gtxr0MVa0VdNEGMplPsuG
- YYlcOchqvnZ+vCfIPEogjDfUnhpOlcAH4XtLttBiKB97q3gMjiNUuYtIC1E4uLr6m/TJJI
- axn40jrx7EXLMRnV/MS0nZUB8rWPQJZ+8MZOj0Jn7rgtSg8RpJMUH5qoFa3v8buRBAWneH
- lYCT8SNPdpih2plbkyzIL0M8qSGtS3R/hBBO745A51AXgM3XVg+0obn9nzvEp3m/Wn/kM/
- iSJ+unP+FOe+LoWGqH1xeNs+v8CShB86vZxo9ahL2pQ4LGEdlvIXcyJo+uxA
-X-ME-Proxy: <xmx:9-xIajRD_hGoPRzO3oZibfGE-Y9ud_gkJ4CEbFbZnMlj1zx3QdyZhw>
- <xmx:9-xIauHEgAm3pVxN8YhGBhMF-n1mzLMZQAirDlFJDcbrsi8UWLl0kA>
- <xmx:9-xIagHJl8Arit9Dp2XoGNhv_Ktf9AzwGA-rNEfHzVj4btJTUkS5hw>
- <xmx:9-xIakSaUxnQPZMa5wPw1dyoSXMAlUFc3pGqqe5vTl5ZqAIMoVsDXg>
- <xmx:9-xIaqHcTNLgc5kq4mzfKmLLwl-sPRhnaba_y9DQmKyQMBcuPRQm4aJf>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 0CFEC18E006C; Sat,  4 Jul 2026 07:22:31 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-92e52c9fddfso62506685a.3
+ for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 06:54:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1783173250; x=1783778050; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5T9giRr+7Gh7z3OgL5oVe8bhtG3uB6TgHE5PsbvZKW8=;
+ b=cXOOAO0KxyET6AiGaKNvSmB3fTDp9kJQX3JN4BKc4XhH2DQudVRPeU1Ddhd1GXvooH
+ 1nXYRdXQ5hSRk3VMLHqXd2EpuSrJjNYxCliMEDc7eTFPmUI9/ohaCaVrN1f2+d1r4Rc6
+ hi/etzRtr3UREX55uZNECMDBJBcpntIjZXT+9b6cJv9tjg+gsZZHUPH3J5Bpg/EEONIA
+ zLVB1lSc3s2Iv8UeurlDnk+jdKYm1oyXf/209iWN34jkIxLWJPi4Nhdt8aoBuI7XmnO6
+ aqjiFrg9rta3sxqVuwDBGF3Pcdc+WaXEbbTvTj8FiUYtT/QGISnxWIEJLeAzEgTqwSXy
+ kY0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783173250; x=1783778050;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5T9giRr+7Gh7z3OgL5oVe8bhtG3uB6TgHE5PsbvZKW8=;
+ b=TUFGrv3s56V3Z4Zb3yNDFfeAF17obADexQy+M4y6w737iYbMe4Q3I1kRyDOkOTBsU8
+ 0YZRf5s4UJwQfDKqOEcZDCimHMkjenA8iSllujrxrA+st42BQqVUj0xueKsEmZeGBoC2
+ //RkSAlk1gQfjRQMd5Q4jH65W7KjNB1DPqnEYUOelo/DP85BtUL4oFG9TzAok/M/A50v
+ hfmK5Wp2d4vUteisrMgm7InpZ9fR8NrpZdckR24T3bLvMYRR5Cp+8f63tC28A3wTMryu
+ AS5q4kfQn+WaK7TYTikB2BXHsDVwJExvNnk17dU5qkpYm85oN6x+ypFzFgaijVeT/bsu
+ 8Ogw==
+X-Gm-Message-State: AOJu0Yy9kfmizY2ikvaLfIzH0ouAwG0ZCYjz5Rhk+Rwioj3H1IE4+0lj
+ vlRRP9xqcmD0yfiYLFjM8z3HNQmbBFkxR69IqC8I55MEDBCNJhF3ZefAtvDRMCfEmo3jXoRFHoE
+ z2Ftp6Tg1A/kv
+X-Gm-Gg: AfdE7ckd27+osihbPXuAUgr/ZCid7gi4OTB8/QljOje9niPXAzdxGfuYX7igQlUek9v
+ hJmV2evnt2iuvYfHWoEK4B17kJ6AxJcoqkID/1ZZ8MDvCTKmAKdRpVQS/4WKUQTc2m77huz0D+w
+ vzZthWjcZwwUX5KLUXfTaYPA3ppC6/P0+tCOEFUFvLnFsK/W2Knai653lGCKPJZF4vrYMoGgkKZ
+ Ns7bo42rPZxDrDgjP68eB3EVIsJTJvwuEIb7wQ+FBKZLQ4D+ySnJsSahVEy5pkh0rW3KXCuS5wd
+ gLzE3rT6XQ9UcFUdbAD4QvBjkbFoLieUohLa1J596psH4+XoGxyz93Tv4lGfVGA2dBvyY1lkONQ
+ 9x8V/1qmWb95mioZnfrk0cg6rw8G7yrvD/RfUfXpj76ytfBhXnrnuc6KNFSw8mbLHnJ76IDmVmJ
+ 24JWaYSstrhRom4TDa0chaYWE=
+X-Received: by 2002:a05:622a:e19c:20b0:51c:1d67:379 with SMTP id
+ d75a77b69052e-51c4c21bc49mr35054071cf.23.1783173249947; 
+ Sat, 04 Jul 2026 06:54:09 -0700 (PDT)
+Received: from macbook ([45.144.113.217]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-51c41abe73csm44657011cf.5.2026.07.04.06.54.08
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sat, 04 Jul 2026 06:54:09 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+To: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ trini@konsulko.com
+Cc: Carlo Caione <ccaione@baylibre.com>
+Subject: [PATCH] efi_loader: stop watchdog devices in ExitBootServices()
+Date: Sat,  4 Jul 2026 15:52:29 +0200
+Message-ID: <20260704135258.68543-1-ccaione@baylibre.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-X-ThreadId: A533ldWDlXLR
-Date: Sat, 04 Jul 2026 12:22:09 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Yao Zi" <me@ziyao.cc>, "Simon Glass" <sjg@chromium.org>
-Cc: "Tom Rini" <trini@konsulko.com>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Message-Id: <d82a1bca-cb31-46a2-a44a-4397dbb26575@app.fastmail.com>
-In-Reply-To: <akgXnCSJC3splAlp@pie>
-References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-9-me@ziyao.cc>
- <CAFLszTh8G5hxAOUocaaXffKA=7PM5sp90M3+JBsieG908nFBBw@mail.gmail.com>
- <akgXnCSJC3splAlp@pie>
-Subject: Re: [PATCH v2 08/16] LoongArch: CPU assembly routines
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,31 +95,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot can autonomously start a hardware watchdog
+(CONFIG_WATCHDOG_AUTOSTART, default y) and service it from its main
+loop, but the EFI boot path never stops it: efi_exit_boot_services()
+tears the devices down without calling wdt_stop_all(), and a watchdog
+driver without a .remove hook leaves the hardware ticking across the
+firmware-to-OS handoff.
 
+An EFI-booted OS that does not take over the SoC watchdog within the
+remaining timeout is reset mid-boot at a wall-clock-dependent point.
 
-On Fri, 3 Jul 2026, at 9:12 PM, Yao Zi wrote:
-[...]
->> 
->> Is the nop after idle 0 required by the ISA (to guarantee the
->> wake-up completes before the load) or just padding? A
->> one-line comment would help.
->
-> I don't think such requirements exist, and LoongArch instructions are
-> always 4-byte so there's nothing to pad, too. This is likely
-> unintentionally left when re-writing the assembly, and I'll remove it
-> in the next version.
+The UEFI specification (v2.11, section 7.5 "Miscellaneous Boot
+Services", EFI_BOOT_SERVICES.SetWatchdogTimer()) is explicit about the
+one watchdog it allows across the handoff:
 
-This is carried over from Loongson's UEFI assembly. I'd rather not to
-touch it.
+  "The watchdog timer is only used during boot services. On
+   successful completion of EFI_BOOT_SERVICES.ExitBootServices() the
+   watchdog timer is disabled."
 
-Thanks
+U-Boot's UEFI watchdog (an EFI timer event) complies by construction. A
+platform watchdog silently surviving the handoff defeats the purpose of
+that rule: the OS has no generic way to know it is running, let alone to
+service it.
 
->
->> Regards,
->> Simon
->
-> Best regards,
-> Yao Zi
+Stop all watchdog devices in efi_exit_boot_services(), before the device
+teardown.
 
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+---
+ lib/efi_loader/efi_boottime.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index de57823bd44..9588d9b9739 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -22,6 +22,7 @@
+ #include <u-boot/crc.h>
+ #include <usb.h>
+ #include <watchdog.h>
++#include <wdt.h>
+ #include <asm/global_data.h>
+ #include <linux/libfdt_env.h>
+ 
+@@ -2245,6 +2246,8 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+ 		if (IS_ENABLED(CONFIG_DM_ETH))
+ 			eth_halt();
+ 		board_quiesce_devices();
++		if (IS_ENABLED(CONFIG_WDT))
++			wdt_stop_all();
+ 		dm_remove_devices_active();
+ 	}
+ 
 -- 
-- Jiaxun
+2.55.0
+
