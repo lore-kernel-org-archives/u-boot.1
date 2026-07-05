@@ -4,153 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A08C43602
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 18:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C6A5C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 19:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4765841F2;
-	Sun,  5 Jul 2026 20:28:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id ACF36841F2;
+	Sun,  5 Jul 2026 21:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="L+N4v5Bn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gvwyEo0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67104846F8; Sun,  5 Jul 2026 20:28:42 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BBFD5846F8; Sun,  5 Jul 2026 21:33:05 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 364C084105
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 20:28:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7E2084105
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 21:33:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZyN53cMhNlZzFW4lpGhGfuLpajyRNRFNl9PJcrHSovp3swWlUPh4lDmOk1JZOCzgSUEXzGCr357rdEw6JvbkkiKdNu1tldG3BilJYgYMmlISMQejPLREk+Skundt+86aCCQAWGJmTzZobV8XODMq+8ahUgi5lQXkhvu52WMQU+PhQHinEVGuaI5Y3yTJluhMjPnRt/QkmJB2jyfqIjdy2KuabvJy7H9DMTHA06dRuNw8x8U7P3L38iuo6kHRkXWZ6JDAx1q9ZWqxZQSXO6jJx5SE03OkVQH6UGntw8OQLw0tBEpyY7/vWBIAMx2MbavUdSYIajhLR8gfPGTh+z5ebg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YvZnJlDWR/j3Eh8AT6q7uZR8k5v4n4ogsTTxNzgCo+k=;
- b=PRIwOeRmUcsb8H8/JyNTU/WYq1FtmBy7TbDkkTbxF6on1l7TWMo2F5OirRYaEeHeoDyWcM4h51bk1xMG2MXe0lRu3JTcqlappARiU9CRILGVDyiQ37qgBxhe5PAakHdLJEn/UwUz6mfVmpngw75N1BstBMr+gMZDKKViTep6azFqtqVTNrFxb0KEKp1clv2TK1flCcnlLGnzM9vmXlmKGGsrWYSBhiM49mCGt6ooL3B1n2AUxC1YfJBluuyR6tAZaWslDGVUVzk4t6R/vOVYvVFRVlx9dtMlACMUE6kvpSKedkeKHkrH0ZnU29tdzrqdZ4rmikox3gfj6GG/i6OmnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YvZnJlDWR/j3Eh8AT6q7uZR8k5v4n4ogsTTxNzgCo+k=;
- b=L+N4v5Bn82YetjSNdGzkCGoFDunGlCngvbPFM1vJrPzammGj2Pof7sWvm5VJSCfP4Yv5kxk/SsHS8U8a3AevQxny9gOKs06WmVGU8r2T1/1FsD9sY98HyXAN88nAQnyAu9UPdk7rXNPAyKifn6c+Obd7eXEDY0bnkUKh6uhSJWfszzNIAx4Ib0eAc+N6gQ4hSri3FEz5yagSmTJgz//bQ82lYzVkkLDiwrUE759K/+KvJu1vZ9+C4ocNSW6RH3FxgNAfGVCwzredor54EM3E5MX8UoqM6HbmpuoHursiFsWQFCeu8W2Feq1M4nCc6tznNMGamKKr4iBO6cyfCZtUNQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by BN8PR03MB5105.namprd03.prod.outlook.com (2603:10b6:408:d7::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.13; Sun, 5 Jul
- 2026 18:28:35 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0181.012; Sun, 5 Jul 2026
- 18:28:35 +0000
-Message-ID: <e4b36ebd-d605-4e27-b3d4-8be6ffa39faa@altera.com>
-Date: Sun, 5 Jul 2026 23:58:22 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/9] mmc: sdhci: enable CMD23 for multi-block transfers
-To: Eric Chung <eric.chung@riscstar.com>
-Cc: u-boot-spacemit@groups.io, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>,
- Yanir Levin <yanir.levin@tandemg.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Angelo Dureghello <angelo@kernel-space.org>, Johan Jonker
- <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Guodong Xu <guodong.xu@riscstar.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>
-References: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
- <20260705-m4-v3-3-5a9bc7f25fc5@riscstar.com>
- <52987597-bb11-4193-a28e-223eeab093eb@altera.com>
- <CAH22mJwTcvbvoR=Bp2VLm3tgVpVx+wNF9+y-ua37Vw50Qw2O0w@mail.gmail.com>
-Content-Language: en-US
-From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
-In-Reply-To: <CAH22mJwTcvbvoR=Bp2VLm3tgVpVx+wNF9+y-ua37Vw50Qw2O0w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA5P287CA0216.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1ab::12) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7eb5bdb50fcso1131083a34.1
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 12:33:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1783279981; x=1783884781; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=J1PewyB9A7qyRbddfOUlWIj1D4NyfokG4z5XNCMFYW8=;
+ b=gvwyEo0h5X4INvjlrc1H4FTlwzgeLBoiXJyfTlF1oAkZWpVBImEAExbEZ4RYh6+FMn
+ 7iiZWkAuJ/CCKXUDdvv+YnBqEuc3OhMX+c/4mnBkika3vanYj6/YVdoan+Xl0Dou8G5c
+ rn8BUVnlyVEt7hzDHbsLcMcx3Xen+qr2m9Cow=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783279981; x=1783884781;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=J1PewyB9A7qyRbddfOUlWIj1D4NyfokG4z5XNCMFYW8=;
+ b=FvNQbRmPQ122uMhMpJiNmglhbatrDrY89E+k68gZeeF7UGyGfHk002TsYCe2S1X+Eh
+ 7F2WU9byUhdMGUQK3Z2bnTRIaFEJXyb2iPoSyFZl7F0YxUfFrILNarwoE1SYWcmtOnNs
+ PrMNeJrYXjPM/HDcMA/Ak9VjIIH8kLs3ax0jURDlz0aZKJ/uS95V7GQ0i9yxxfw2rx+d
+ RsvhxfbpdWKZ+SrjJQM8412Q/o8+rZ/XFXMIktlilllXSMfSN2bGJEsIVPnWfDCTcy7k
+ xNEXJlwKgDvyrNxSkqOwNNIPruxNVLftngzxBMmpiQd3nRAiLa+LmqrjV2jGNAFLTdb/
+ PdPA==
+X-Gm-Message-State: AOJu0Yx9QM1PUlOmKMcJyXkmRKDFMdn04HeXuF2REtX0/qWYhp7a963k
+ zRDvnZ4v+GKKa8SWgACcTixfevoL4VNorSUZ4QH1zCuGMNUDQTvVUkMlBVq6eN30ejCqjm2EixV
+ o/aWUPQ==
+X-Gm-Gg: AfdE7clW9ubEFh9kzUqyCO6LXjqt9aZL0JwLVbOiPqIT262WB0nd9VS2mAPb/EALqPn
+ fa5SyZEIe9SXdNFxTpVuIe9TWMxueEk1zxb8lCgQfcR+7/qrIvp3C/Jd1K2ejhMBD9oEdzkj0Jq
+ sZOdK41X1Bv6kzDx+qrZJmptDsnFp4FEp6k3Rb9pdLZInu+WEBNdNKFbY0CnqvGXIcSw0QpyCbq
+ VAS9715yvMFg1SYZDio4Yk4BJ3PkYJSNxz1ck1BZKt/C/dEhefZuaqVnHJLT1gDJ7LfaE24P4NT
+ JWKCpf4K+d0zjuvyTPNVssVo0iZkqSiu+Ye0zVbSey9aN5Y87sSU60C3fLo69DLin88RWHKMGQO
+ vN0g6mlp5+1LFFHEhQ5SbBnMwwdkPUI6MxQgKevxUxrPJYa5vZhEQ+paqaxJSFRhskYEX
+X-Received: by 2002:a05:6820:c97:b0:6a1:50eb:2122 with SMTP id
+ 006d021491bc7-6a32f5f529cmr3824037eaf.70.1783279981389; 
+ Sun, 05 Jul 2026 12:33:01 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a3103e064esm7513448eaf.14.2026.07.05.12.32.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jul 2026 12:32:59 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, E Shattow <e@freeshell.de>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Javier Tia <floss@jetm.me>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymondmaoca@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: [PATCH v2 00/11] Remove patman from the U-Boot tree
+Date: Sun,  5 Jul 2026 13:32:11 -0600
+Message-ID: <20260705193251.2190705-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|BN8PR03MB5105:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1e7222d-2282-4342-c9a9-08dedac33996
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|23010399003|366016|1800799024|55112099003|18002099003|22082099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info: Ktan0bsM/GYvzODzYCVuXUFhKWQkwvcIm/GfEeTN2uxQyRu6Dl+yLcXdw02jAqEkPwMJkrjGBr9p8/4DYqJy2QrN3SMsSYc/zLDbDKV2WuOQplnQMyVcUzkIVdatiUwnhU87cTVlraeYlJ+qEBA5sdfSg+itWDBKMTz8pjjhTxLisiiTK8s3m60Ig9AhflEsBa8s7NDAC4BIJUPfppRxDYoHd6F9ukQy/V6Usr2rSxo08KydARkY1Wp53ffh8wC4qKrPPTfGOdeOHxYDVEYZyiDrHcZ5QTsYXfYusHE9SpKRy1bQ8pnDGUuB2HnS9kYarmBw47jI48mcnPaP/vmW+/X1BYcwNiRx7SRzjzUtKA1P9HZY8Uy6qTcgQ51gS6GzlIPozqFsyKks00Gl2bfNjrecII1pt4x3Jm8pDt+Ln3iHh3/YxK2AtyPTrQbf7SCBk+VZjMYrlR3mFSOUxnNFC0a2AJmwwDQM9x15EzMMK9Pv2vWy3Q4+efBpMdP2iT2YpuFRSmIZzbGX01j0YEMOrlkXiNbX2V0MjFELK4z8ps+GFf2SeT2TenvbT1bUXR+moQCEtGfK5tO5P35j3DZY/O2bi3CDZaT/1qIkgI17hDKBDxNIjIL1ih4pWPICHDJCZl0T9T32M8lqSUJYqIH64svo9qW/YpVAhKOM97yVayc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(23010399003)(366016)(1800799024)(55112099003)(18002099003)(22082099003)(11063799006)(4143699003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZElMeVRsbVpoVVNnSWIzWlVCZ3VoZ0ZTK1gvU015QjFrbUVCa1o3WGt6cjBz?=
- =?utf-8?B?TGtESTVUU3M2ZWpCYmxhWGxnZjBIT3pIOVBpWDczalk0VDdnNGhTbFFUWWdj?=
- =?utf-8?B?N0NFUERzWHZDYmVzbmw5UjNYTFIrWVNJSmhsbTgxcmVMOHFJcnhFdlYxMlQx?=
- =?utf-8?B?bmNBL0VOTkw4WFZ0MDJHYXRjZ2tWYlV4dXEwdE4wRWM4MEFjVmo0Sm9meTEz?=
- =?utf-8?B?Tm4wL0VaZlJXUmxPMEpSU3BJYWM5ZkpCclV6RlFUOC9rSDlWVkZPV0IzQzJW?=
- =?utf-8?B?dDRra3IxeSt5dkI0MVlrMTAwNnhPejdmZG1nbXFYTkdndTh0c2J6ZFpnL01o?=
- =?utf-8?B?UEl0b1cxTEM1WTVsYUk4bkVONXlwd2g1ZGlqSG04YkJRdEQySmQwZGdGQzZl?=
- =?utf-8?B?a3hGVlRZeVB4VVdRdmZYNW1uYnBES3Q1cFk3Ty84cStGS1RTM1NlMitML2xq?=
- =?utf-8?B?c2dScGprUDZqaGpnUitkWTlmYVJZSURzcm1qeVVFbWozWlFZWTlwMkdUTm9z?=
- =?utf-8?B?aHQvVWN4ZWF2RkJQdFhwUnBJQUM3N3JUVmNxUDJFTVc4M1B5QW1LUTgxcmZl?=
- =?utf-8?B?a05SVzVnSFZzZWxiNlFwQlkzbmx2SjR6QTRYVnAvU2hJWGNNWXNUYVdYWlkv?=
- =?utf-8?B?aktXN0JtQlczR3hjR2dLbklRSWFDSGFialZwaFVaRHRtMDBqYlRxSDJRbmV5?=
- =?utf-8?B?SHhwMGF2WlFoNzIyaXM1bkVoL1h1TWhodzdEL2V5bHZhckozcFZwbGdVQWFP?=
- =?utf-8?B?bWZpRXZQUTNwSTN2WGxLekh5M2d1dTdVUC83NUx4VzNXbDRZSkhTbXJqbmhy?=
- =?utf-8?B?SzFCN0tGbFZpdi9BVE5VWGFSU01ueVZ2ZmFWNjZ2V1RoODFKbVRvUktCeUxo?=
- =?utf-8?B?ZVV2SEhkb0VZOXp2Qi9Gd1Z3dm5JRGJMTXk4Rnh3YmdJQ1k2aHFmbit0SEZa?=
- =?utf-8?B?TUNnZTBXVmVCenhYV3o5d2UxdmtDUWxmcmdPUnh3NnAxZm1ZbjAyN1VFRlF1?=
- =?utf-8?B?YVJ5U3Z2OHdvdFhHZCtxbVFiZU0rQzFsMUxQMk9HWk1laFlMK0JJWFIvSmU1?=
- =?utf-8?B?QndLb0pEZ1poUWp6WFhIZFZRNzJHWWx1VlR3aWVSUmJUamVXZjVyMUVOV2VZ?=
- =?utf-8?B?SElVby9rNEJscXFmUm1pem94RnErRnpJYmNSTE8wSzRaODNCNjAwL1FZN002?=
- =?utf-8?B?UEwwczVVTTlnVTZ1ZEc5K0hrbnN2bnhWb091ZjNCK3lnUHZyYzBEUXVlSXBG?=
- =?utf-8?B?VW9QV0djRGVzRWdaTTVUeEtYTkdrMHZxWW5nenA5czFXMG11V2ZwRCt1Rzhp?=
- =?utf-8?B?VWh2bXRmMEZDR04wcTdZVFN3eFRHNlg3YUxjS3hheE5XU0lOWXpCZDFYVmF1?=
- =?utf-8?B?QUJycVhYRkU3RzhvQVRXQnlGLzRFN2xzdHFUb08yelRpM2pCNE95MExiY0ts?=
- =?utf-8?B?SWtDV3FYakhJMlV2N2RPdXNINEI2QUd2VjZLQ1lNeFVsbEMxN2hSK2lpZUpZ?=
- =?utf-8?B?K050VDAxL21abTVkd2QyRi9hdVdXNWs3T0xnN0FZNGJ2a2dBQW5tRUVEWkdY?=
- =?utf-8?B?Mk00UThVZUttdEl3Wlo0NFBOVjRJNjJScFVFUWFERWNsTlRIUmVuNTROcFZT?=
- =?utf-8?B?Ym9vTHNqamRDaTB6YkFsNGxOZXZyMFpodVIvdklsdmF3ZmNBUDB2TEs4S3F4?=
- =?utf-8?B?anJTblFjNUg0MGxiVzhiYkpYQnNUQm5tYlZENFhuN3puaUE3V1l4NC9tcEVC?=
- =?utf-8?B?anVOSTRUT3JiTjlPU2dhTnN1WE0xZUhqK2hGQ3BXSWRnQ3M1ZExVUmFIbVln?=
- =?utf-8?B?ZzBndHdpL2tBem5ud0l6WENYWlZZN1M2bzlwRkI5dzdEVGZNVTFqdi9vb1lk?=
- =?utf-8?B?bm5TaDhxWjhVdURKKzF0YXRTRzF6dENwUXFyZHVGN01RU0tIVXptK2pVMkdL?=
- =?utf-8?B?bW1QMHRPdDBsazAxUEJ0MnBaaUZJckFMSFQ5UHU5cXFsdUM1R28waHg0alpK?=
- =?utf-8?B?K3g3c0xYVzJWdXNUVlJTcUhZZHBkclhQU1FFVmpFNzAvOU5KT1RURVBlUUFP?=
- =?utf-8?B?b0FVZERMNGczaHhzaElSN05heUpsNFRwblVNaGlvdjk1c0h0YVpuUXcvT2tN?=
- =?utf-8?B?cjZ6aGMwV0pBbkZuVGtFUU5DWVZCVVg5M0lwSHNuQ01CZ0cyVTZTOTI2OE4r?=
- =?utf-8?B?STkyWTMzSTVZeFZrWWJTYVdWQ0hlT3h5RXVseThEY3VFalJpL2tBOE5tNHFt?=
- =?utf-8?B?TExDY2tKMXNFd0I0ZGU4c21JajNVVGlPRUhVWHl1NDRZOHlleWpoMFp0d21u?=
- =?utf-8?B?QlZmZFNkejBrZndNUjBkTXp4TzFPaWJ5VU5GZXpBTVRzYlVIRmt2SlJWN1ZM?=
- =?utf-8?Q?PJsXfyYo7v+6P+wY=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1e7222d-2282-4342-c9a9-08dedac33996
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2026 18:28:35.6563 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fjMaNjwkCfmWCjk9ZpAF/sMtD+Sgz/uXbI0Hw4lOtJPykE3C0CjfoYJGd+hxHUkGhc7hGVvHqwXND5t8uH7V0PQm+Re4Lsr8Xinn8tZL5WM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5105
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,34 +103,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eric,
+patman is now maintained as a standalone 'patch-manager' package, so
+remove it from the tree. The command becomes a stub that tells people to
+run 'pip install patch-manager'.
 
-Glad the review feedback was useful.
+buildman still imports the shared modules commit and patchstream (along
+with their dependencies), so this series leaves those in place. It drops
+the tool's code, tests, CI hooks and packaging, and removes the in-tree
+documentation, moving the b4 contributor guide alongside the patman note
+in the patch-sending docs. It also adds a .patman-defaults file so the external
+tool is set up for U-Boot, next to the existing .b4-config. Where the CI
+jobs relied on patman's requirements for the setuptools that pylibfdt
+needs, they now install scripts/dtc/pylibfdt/requirements.txt instead.
 
-I have some SD/eMMC spec background that could help make
-the CMD23 implementation more complete. If you're
-interested, I'd be happy to collaborate on the implementation
-before you post v4.
+More could be done here: commit and patchstream (and their dependencies
+series, get_maintainer and settings) only remain because buildman still
+imports them. A follow-up could move those into u_boot_pylib (or
+buildman itself) and drop the rest, leaving tools/patman as just the
+stub.
 
-Let me know.
+Note: I was unable to run this through CI as it is not working at
+present. I will check it in a few days.
 
-Regards,
-Tanmay Kathpalia
+Changes in v2:
+- New patch: move the b4 guide into sending_patches.rst
+- Remove the patman manual outright instead of leaving a stub
+- Add a couple of lines on how patman works to the sending guide
+- Point the SPI howto at the sending guide instead of the patman package
+- New patch: add a .patman-defaults file for the external patman tool
+- New patch, split from 'CI: Stop building and testing patman', to add
+  scripts/dtc/pylibfdt/requirements.txt for setuptools
+- Drop the 'u_boot_pylib: Require setuptools' patch
+- Put the documentation and .patman-defaults patches at the front of the series
 
+Simon Glass (11):
+  doc: Move the b4 guide into sending_patches
+  doc: Remove the patman documentation
+  patman: Add a .patman-defaults file for U-Boot
+  patman: Replace the tool with a stub for patch-manager
+  patman: Remove the test suite
+  patman: Remove the patch-management code
+  CI: Install pylibfdt's requirements in the tool jobs
+  CI: Stop building and testing patman
+  tools: docker: Drop patman from the CI image
+  tools: Stop packaging patman as a pip module
+  test: Stop running the patman tests
 
-On 7/5/2026 8:51 PM, Eric Chung wrote:
-> On Sun, Jul 5, 2026 at 5:52 PM Kathpalia, Tanmay
-> <tanmay.kathpalia@altera.com> wrote:
->>
->> On 7/5/2026 11:37 AM, Eric Chung wrote:
->>> Enable the host controller's support for the CMD23 (SET_BLOCK_COUNT)
->>> command to manage multi-block read/write operations. This allows the
->>> MMC core to use CMD23 in preference to the legacy CMD18/CMD25 plus
->>> CMD12 sequence, reducing command overhead and improving I/O
->>> performance on multi-block transfers.
->> The commit message claims this enables "host controller" support, but the
->> changes are entirely in the MMC core (mmc.c) and header. No SDHCI host
->> driver sets MMC_CAP_CMD23 in this patch. mmc_write_blocks() in
->> mmc_write.c is not touched. CMD25 still always follows with CMD12.
->>
-> Thanks. I'll apply all fixes.
+ .azure-pipelines.yml                          |    9 +-
+ .gitlab-ci.yml                                |   13 +-
+ .patman-defaults                              |   32 +
+ Makefile                                      |    1 -
+ doc/develop/codingstyle.rst                   |   48 -
+ doc/develop/driver-model/spi-howto.rst        |    4 +-
+ doc/develop/index.rst                         |    1 -
+ doc/develop/patman.rst                        |    1 -
+ doc/develop/sending_patches.rst               |   63 +-
+ doc/develop/testing.rst                       |    2 +-
+ scripts/make_pip.sh                           |   10 +-
+ test/run                                      |    1 -
+ tools/binman/pyproject.toml                   |    2 +-
+ tools/docker/Dockerfile                       |    2 -
+ tools/patman/README.rst                       |    1 -
+ tools/patman/__init__.py                      |    5 +-
+ tools/patman/__main__.py                      |   68 +-
+ tools/patman/checkpatch.py                    |  287 --
+ tools/patman/cmdline.py                       |  516 ---
+ tools/patman/control.py                       |  333 --
+ tools/patman/cser_helper.py                   | 1524 -------
+ tools/patman/cseries.py                       | 1165 ------
+ tools/patman/database.py                      |  823 ----
+ tools/patman/func_test.py                     | 1342 ------
+ tools/patman/patchwork.py                     |  852 ----
+ tools/patman/patman.rst                       | 1023 -----
+ tools/patman/project.py                       |   27 -
+ tools/patman/pyproject.toml                   |   29 -
+ tools/patman/pytest.ini                       |    2 -
+ tools/patman/requirements.txt                 |    6 -
+ tools/patman/send.py                          |  197 -
+ tools/patman/setup.py                         |   11 -
+ tools/patman/status.py                        |  405 --
+ tools/patman/test/0000-cover-letter.patch     |   23 -
+ .../0001-pci-Correct-cast-for-sandbox.patch   |   51 -
+ ...-for-sandbox-in-fdtdec_setup_mem_siz.patch |   85 -
+ tools/patman/test/test01.txt                  |   72 -
+ tools/patman/test_checkpatch.py               |  526 ---
+ tools/patman/test_common.py                   |  254 --
+ tools/patman/test_cseries.py                  | 3684 -----------------
+ tools/patman/test_settings.py                 |   67 -
+ 41 files changed, 134 insertions(+), 13433 deletions(-)
+ create mode 100644 .patman-defaults
+ delete mode 120000 doc/develop/patman.rst
+ delete mode 120000 tools/patman/README.rst
+ delete mode 100644 tools/patman/checkpatch.py
+ delete mode 100644 tools/patman/cmdline.py
+ delete mode 100644 tools/patman/control.py
+ delete mode 100644 tools/patman/cser_helper.py
+ delete mode 100644 tools/patman/cseries.py
+ delete mode 100644 tools/patman/database.py
+ delete mode 100644 tools/patman/func_test.py
+ delete mode 100644 tools/patman/patchwork.py
+ delete mode 100644 tools/patman/patman.rst
+ delete mode 100644 tools/patman/project.py
+ delete mode 100644 tools/patman/pyproject.toml
+ delete mode 100644 tools/patman/pytest.ini
+ delete mode 100644 tools/patman/requirements.txt
+ delete mode 100644 tools/patman/send.py
+ delete mode 100644 tools/patman/setup.py
+ delete mode 100644 tools/patman/status.py
+ delete mode 100644 tools/patman/test/0000-cover-letter.patch
+ delete mode 100644 tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch
+ delete mode 100644 tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
+ delete mode 100644 tools/patman/test/test01.txt
+ delete mode 100644 tools/patman/test_checkpatch.py
+ delete mode 100644 tools/patman/test_common.py
+ delete mode 100644 tools/patman/test_cseries.py
+ delete mode 100644 tools/patman/test_settings.py
+
+---
+base-commit: 2569e25ddd5aa323cd87c7a3819c3a4f4b32302f
+branch: patm2
+
+-- 
+2.43.0
+
