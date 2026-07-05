@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB992C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 19:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2039FC43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 19:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0161084832;
-	Sun,  5 Jul 2026 21:33:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 464F7848D2;
+	Sun,  5 Jul 2026 21:33:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mDD3teWy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RMhqar89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AAA184105; Sun,  5 Jul 2026 21:33:11 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id AC9DB847C8; Sun,  5 Jul 2026 21:33:17 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B063847C8
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 21:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81854848D2
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 21:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6a1160a2c42so1545523eaf.0
- for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 12:33:08 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7eb3865ea6fso1785816a34.2
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 12:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783279987; x=1783884787; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783279992; x=1783884792; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TTlF6gWP4COFHRdoEA99Jdwl64JzGr2z680Dj+ekn4w=;
- b=mDD3teWy3/nWkPwVUqyH4nIz0l8OnUheZdI57OvzwPbMTqSh9vzd/QW4UMI7GUaY0C
- /VbKe+5Gu1oS6YiH7EAhF9a3o659Diw2fyJxYpFpi3NDdNsvyeP6n8V/iileQBuSGn0J
- jvo3Z0TkduA5C/lCBB+eL0EjC10xFNdnuaQ5Y=
+ bh=HZyQ1qH1o3PJfvJACZ4kOaUzcqL/LwZdYkT6Ycp/k04=;
+ b=RMhqar89ZCFwy8GIjiqTxjynYKd9cIrv5ZnmBVANW9fI75m5JB7mHE6RNtHwn61xyy
+ +zr930gTGX4F7w5hkTQF55tzeKo7etMo5RFvX/HuVs+jk4CZGbYVup2w5fkaIfsB0WbF
+ QIS2JNz0w9qRYo83MfFzHgAV+QzMy/IaRdPeE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783279987; x=1783884787;
+ d=1e100.net; s=20251104; t=1783279992; x=1783884792;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TTlF6gWP4COFHRdoEA99Jdwl64JzGr2z680Dj+ekn4w=;
- b=tIx3kRJKHXmDDDWT63aE9IMvcPYhOajG9fz/S/teLK59FwJq8H5GdpxSNBC4xe9wGk
- sRW/bNH8gsG4W8Y6m5NXHeZrn+1c6zjffDA32WB3TPHlcp3m1anCmXX5pUG1FSc23Uub
- BnEt+ox0omoTIv+ZuyBzNDuDRDKEICtSOw+B5eYWvcXLr96e4x/sEKb7MqpLrSfITAJ5
- mH2/y6OKtyOKayZMWqSNIYpg56cvBBej3Y8qJRJRl1IG8EgjVgGR1OdIAlqI09c2bxtz
- tjnQ4rQukCjjfUFItqAjH2Dhsf2T9bMIbzbOYisM6M0rODNZld7bVnJLyIuiuedYJLfK
- 71BQ==
-X-Gm-Message-State: AOJu0YxVzOu8AotcL82wPhPBeFG7nJeY8gl5Lcy8R2wAWTOkX1lCVXsQ
- WHuj8PYJYxRkyIxniMpbXQfn+77frXJ6oHhrd9O/oT3ob2X0d9vEnQECTpvMGH0+atkZj25/mq6
- cLpDo4Q==
-X-Gm-Gg: AfdE7cmmfLT7vgVxQuHJU+XMci94TuKxJ6LWvP6mcNWcVN4pQriqw/zjPuAMEL9Cd6h
- KfmY3L3fB/zfEHi5O2UYjdqQtMAS6PJObiFAw/s3zDTggAnGCxNPNiavjT4k66zX6xxaSM0PeP+
- xH0qVAEcZMFa+yfTkIUFe8tVWFbdQk0P9KJ6c87fL7vrw++TvOX+wLRaYW0ukrTQ205e4HFG/8L
- /0OEMaCyZihRCylhL2dxZA4CHvdqW187uLgPTouWwukLf+TXR7ojlImxBi6VK+HjqG3SnWRXfIA
- 2wXmVNNlT+cmqXOYL99cEDR98Z+sC3MIwr96Rftj+cv1v+N5mgeUvJOecZxK6MVI+YwL7hLIIf3
- 8VYz3mDUaD9BIme/fpF8kLU8OwbjGfyIIVVb1zNu3UQL3zqct8rXb9aHHKzgr04eCmV9WiTF9GL
- /QLws=
-X-Received: by 2002:a4a:e913:0:b0:6a1:8d78:79bd with SMTP id
- 006d021491bc7-6a32f44863cmr4150138eaf.8.1783279987122; 
- Sun, 05 Jul 2026 12:33:07 -0700 (PDT)
+ bh=HZyQ1qH1o3PJfvJACZ4kOaUzcqL/LwZdYkT6Ycp/k04=;
+ b=VlxZIN2G+9gRnvNIg5LLlh7W+9bRLpKYr98xlPTU05EWgb4yQVjIqT4Zvo66ycldBn
+ pzXcD69S66suSZ6CvTNsY+/zOziRfuA2D3uek344Xo1Ybg0HtLPCoqBPYBQiBY5TUd7S
+ E23D4BoENoVjd0sQe06UoiIIhNCSxmS9ENAdd/1zJ6XwrcECbdVwcPRjYSZ9+9kOr04E
+ 7zcMZ0WkMgvZqvZK8NQQXhq4rgn2XIl27aQNN87W5YTzMr/jm0pzXoMyOyyy6Bp2k2sw
+ /k/PajLcMIQ+Tu7d93IHhP4zPAmGPBwEknN+4md4/6KTmMwUztDtzcxSdjV7iwp3Rsc5
+ QlMg==
+X-Gm-Message-State: AOJu0Yyi1UfBvadHa1Uh/qHfDeVHL7uxxOeQHNnh8Kxo3KfXQ2AyHnRx
+ UOBjd/giEs2k3Bq0exswPcJfYYjcJ1hnK/muJuNTZrApVT+2ZBgDZzZNk7hvYEExnVU/a51cTrP
+ wGK8fgQ==
+X-Gm-Gg: AfdE7ckbYtBMUQxUxkE9j1nSvShtWVIFkG2IjFK6VbKPIFHovuMiTSLw1+/pU3sySiZ
+ N/iJJdpz7GxiD2yi+/JQhGMyDA+rSc1ZLGzq+TFTEC3yrRfKYyGDXdBwcEgHrLg/zGzZsxBJcaJ
+ HDhJtnAzWn8S2Jm+2RIzxdzVf04OEhF3wUVCoqvVV7lUJmXcwr7/+E8PiOSDSvCOVzXkwXLRdgD
+ 6dvBgJEUkYaTLyea9pd6JYnsL5bHZWXBJor5cKKdBlXXzKz6eS/J6zeTR408DNoO5VToZZSCrw8
+ sIbjrWF+culx3ztN4XtaynVIY2Z2NaSzGOz1tmw4pGm+bkWyVjZIa9G6du8KDkticNrRtA+9rK5
+ P9J/fI2MBp6B4WEbwYY9Ld4xgA09kMkwnCztH7pp/Jxs0rbkm4LsT22BkOCjOz+sNef19
+X-Received: by 2002:a05:6820:1788:b0:6a1:50e9:d589 with SMTP id
+ 006d021491bc7-6a32f5d9906mr4346592eaf.70.1783279991478; 
+ Sun, 05 Jul 2026 12:33:11 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a3103e064esm7513448eaf.14.2026.07.05.12.33.04
+ 006d021491bc7-6a3103e064esm7513448eaf.14.2026.07.05.12.33.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 12:33:05 -0700 (PDT)
+ Sun, 05 Jul 2026 12:33:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Javier Tia <floss@jetm.me>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 01/11] doc: Move the b4 guide into sending_patches
-Date: Sun,  5 Jul 2026 13:32:12 -0600
-Message-ID: <20260705193251.2190705-2-sjg@chromium.org>
+Subject: [PATCH v2 02/11] doc: Remove the patman documentation
+Date: Sun,  5 Jul 2026 13:32:13 -0600
+Message-ID: <20260705193251.2190705-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260705193251.2190705-1-sjg@chromium.org>
 References: <20260705193251.2190705-1-sjg@chromium.org>
@@ -96,144 +94,1132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The b4 contributor guide sits in the coding-style document, which is an
-odd place for it. Move it into sending_patches.rst, next to the patman
-note, so both patch-sending tools are described together.
+The full patman manual now lives with the standalone patch-manager
+package, making the 1000-line copy in the tree redundant.
 
-The b4_contrib label moves with it, so the reference from process.rst
-still resolves.
+Remove the in-tree manual, its README and the doc/develop/patman.rst
+toctree page.
+
+The sending-patches guide already introduces patman, so point it at the
+patch-manager package instead of the now-dead ':doc:' cross-reference
+and, with the manual gone, add a couple of lines on how the tool works.
+Point the SPI howto at that guide too, rather than repeating the install
+details.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- New patch: move the b4 guide into sending_patches.rst
+- Remove the patman manual outright instead of leaving a stub
+- Add a couple of lines on how patman works to the sending guide
+- Point the SPI howto at the sending guide instead of the patman package
 
- doc/develop/codingstyle.rst     | 48 -------------------------------
- doc/develop/sending_patches.rst | 51 +++++++++++++++++++++++++++++++++
- 2 files changed, 51 insertions(+), 48 deletions(-)
+ doc/develop/driver-model/spi-howto.rst |    4 +-
+ doc/develop/index.rst                  |    1 -
+ doc/develop/patman.rst                 |    1 -
+ doc/develop/sending_patches.rst        |   12 +-
+ tools/patman/README.rst                |    1 -
+ tools/patman/patman.rst                | 1023 ------------------------
+ 6 files changed, 11 insertions(+), 1031 deletions(-)
+ delete mode 120000 doc/develop/patman.rst
+ delete mode 120000 tools/patman/README.rst
+ delete mode 100644 tools/patman/patman.rst
 
-diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-index 26881cf3900..b8d2bf23a54 100644
---- a/doc/develop/codingstyle.rst
-+++ b/doc/develop/codingstyle.rst
-@@ -24,54 +24,6 @@ The following rules apply:
-   <https://peps.python.org/pep-0008/>`_. Use `pylint
-   <https://github.com/pylint-dev/pylint>`_ for checking the code.
+diff --git a/doc/develop/driver-model/spi-howto.rst b/doc/develop/driver-model/spi-howto.rst
+index 9dc3b9b4aac..65dd50e7d55 100644
+--- a/doc/develop/driver-model/spi-howto.rst
++++ b/doc/develop/driver-model/spi-howto.rst
+@@ -649,8 +649,8 @@ board.
+ Prepare patches and send them to the mailing lists
+ --------------------------------------------------
  
--.. _b4_contrib:
--
--* Use the `b4 <https://b4.docs.kernel.org/en/latest/>`__ tool to prepare and
--  send your patches. b4 has become the preferred tool to sending patches for many
--  Linux kernel contributors, and U-Boot ships with a ready-to-use ``.b4-config`` that
--  targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get_maintainer.pl`` for
--  recipient discovery.
--
--  Start a topical series with ``b4 prep`` and keep the commits organised with
--  ``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for the cover
--  letter, while ``b4 prep --auto-to-cc`` collects reviewers and maintainers from
--  both the configuration file and ``scripts/get_maintainer.pl``.
--
--  .. code-block:: bash
--
--     b4 prep -n mmc-fixes
--     git rebase -i origin/master
--     b4 prep --edit-cover
--     b4 prep --auto-to-cc
--
--  Run the style checks before sending. ``b4 prep --check`` wraps the existing
--  tooling so you see the output from ``scripts/checkpatch.pl`` alongside b4's
--  own validation. You can always invoke ``scripts/checkpatch.pl`` directly for
--  additional runs.
--
--  .. code-block:: bash
--
--     b4 prep --check
--
--  When the series is ready, use ``b4 send``. Begin with ``--dry-run`` to review
--  the generated emails and ``--reflect`` to copy yourself for records before
--  dispatching to ``u-boot@lists.denx.de``.
--
--  .. code-block:: bash
--
--     b4 send --dry-run
--     b4 send --reflect
--     b4 send
--
--  After reviews arrive, collect Acked-by/Tested-by tags with ``b4 trailers -u``
--  and fold them into your commits before resending the updated series.
--
--  .. code-block:: bash
--
--     b4 trailers -u
--     git rebase -i origin/master
--     b4 send
--
- * Run ``scripts/checkpatch.pl`` directly or via ``b4 prep --check`` so that all
-   issues are resolved *before* posting on the mailing list. For more information,
-   read :doc:`checkpatch`.
+-You can use 'tools/patman/patman' to prepare, check and send patches for
+-your work. See tools/patman/README for details.
++You can prepare, check and send patches for your work using the tools described
++in :doc:`/develop/sending_patches`.
+ 
+ A little note about SPI uclass features
+ ---------------------------------------
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 3c044e67927..51fd68fa04b 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -16,7 +16,6 @@ General
+    docstyle
+    kconfig
+    memory
+-   patman
+    process
+    release_cycle
+    security
+diff --git a/doc/develop/patman.rst b/doc/develop/patman.rst
+deleted file mode 120000
+index 0fcb7d61d40..00000000000
+--- a/doc/develop/patman.rst
++++ /dev/null
+@@ -1 +0,0 @@
+-../../tools/patman/patman.rst
+\ No newline at end of file
 diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-index e29fa175727..85f3003074f 100644
+index 85f3003074f..c3e0ef27824 100644
 --- a/doc/develop/sending_patches.rst
 +++ b/doc/develop/sending_patches.rst
-@@ -17,6 +17,57 @@ A good introduction how to prepare for submitting patches can be found in the
- LWN article `How to Get Your Change Into the Linux Kernel
- <http://lwn.net/Articles/139918/>`_ as the same rules apply to U-Boot, too.
+@@ -73,9 +73,15 @@ Using patman
  
-+.. _b4_contrib:
+ You can use a tool called patman to prepare, check and send patches. It creates
+ change logs, cover letters and patch notes. It also simplifies the process of
+-sending multiple versions of a series.
+-
+-See more details at :doc:`patman`.
++sending multiple versions of a series. patman is driven by tags in your commit
++messages, and can collect Reviewed-by and other tags from patchwork when you
++send a new version. It can optionally keep a local database of all your series,
++tracking each version and their review / applied status over time, so you can
++easily track upstreaming progress.
 +
-+Using b4
-+--------
-+
-+Use the `b4 <https://b4.docs.kernel.org/en/latest/>`__ tool to prepare and send
-+your patches. b4 has become the preferred tool to sending patches for many Linux
-+kernel contributors, and U-Boot ships with a ready-to-use ``.b4-config`` that
-+targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get_maintainer.pl``
-+for recipient discovery.
-+
-+Start a topical series with ``b4 prep`` and keep the commits organised with
-+``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for the cover letter,
-+while ``b4 prep --auto-to-cc`` collects reviewers and maintainers from both the
-+configuration file and ``scripts/get_maintainer.pl``.
-+
-+.. code-block:: bash
-+
-+   b4 prep -n mmc-fixes
-+   git rebase -i origin/master
-+   b4 prep --edit-cover
-+   b4 prep --auto-to-cc
-+
-+Run the style checks before sending. ``b4 prep --check`` wraps the existing
-+tooling so you see the output from ``scripts/checkpatch.pl`` alongside b4's own
-+validation. You can always invoke ``scripts/checkpatch.pl`` directly for
-+additional runs.
-+
-+.. code-block:: bash
-+
-+   b4 prep --check
-+
-+When the series is ready, use ``b4 send``. Begin with ``--dry-run`` to review the
-+generated emails and ``--reflect`` to copy yourself for records before
-+dispatching to ``u-boot@lists.denx.de``.
-+
-+.. code-block:: bash
-+
-+   b4 send --dry-run
-+   b4 send --reflect
-+   b4 send
-+
-+After reviews arrive, collect Acked-by/Tested-by tags with ``b4 trailers -u`` and
-+fold them into your commits before resending the updated series.
-+
-+.. code-block:: bash
-+
-+   b4 trailers -u
-+   git rebase -i origin/master
-+   b4 send
-+
- Using patman
- ------------
++patman now lives outside the U-Boot tree; install it with
++``pip install patch-manager``. See the
++`patman documentation <https://deinde.dev/patman>`_ for details.
  
+ General Patch Submission Rules
+ ------------------------------
+diff --git a/tools/patman/README.rst b/tools/patman/README.rst
+deleted file mode 120000
+index 76368b95980..00000000000
+--- a/tools/patman/README.rst
++++ /dev/null
+@@ -1 +0,0 @@
+-patman.rst
+\ No newline at end of file
+diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
+deleted file mode 100644
+index 549e203c254..00000000000
+--- a/tools/patman/patman.rst
++++ /dev/null
+@@ -1,1023 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0+
+-.. Copyright (c) 2011 The Chromium OS Authors
+-.. Simon Glass <sjg@chromium.org>
+-.. Maxim Cournoyer <maxim.cournoyer@savoirfairelinux.com>
+-.. v1, v2, 19-Oct-11
+-.. revised v3 24-Nov-11
+-.. revised v4 Independence Day 2020, with Patchwork integration
+-
+-Patman patch manager
+-====================
+-
+-This tool is a Python script which:
+-
+-- Creates patch directly from your branch
+-- Cleans them up by removing unwanted tags
+-- Inserts a cover letter with change lists
+-- Runs the patches through checkpatch.pl and its own checks
+-- Optionally emails them out to selected people
+-- Links the series automatically to Patchwork once sent
+-
+-It also has some Patchwork features:
+-
+-- Manage local series and their status on patchwork
+-- Show review tags from Patchwork and allows them to be gathered into commits
+-- List comments received on a series
+-
+-It is intended to automate patch creation and make it a less
+-error-prone process. It is useful for U-Boot and Linux work so far,
+-since they use the checkpatch.pl script.
+-
+-It is configured almost entirely by tags it finds in your commits.
+-This means that you can work on a number of different branches at
+-once, and keep the settings with each branch rather than having to
+-git format-patch, git send-email, etc. with the correct parameters
+-each time. So for example if you put::
+-
+-    Series-to: fred.blogs@napier.co.nz
+-
+-in one of your commits, the series will be sent there.
+-
+-In Linux and U-Boot this will also call get_maintainer.pl on each of your
+-patches automatically (unless you use -m to disable this).
+-
+-
+-Installation
+-------------
+-
+-You can install patman using::
+-
+-   pip install patch-manager
+-
+-The name is chosen since patman conflicts with an existing package.
+-
+-If you are using patman within the U-Boot tree, it may be easiest to add a
+-symlink from your local `~/.bin` directory to `/path/to/tools/patman/patman`.
+-
+-How to use this tool
+---------------------
+-
+-This tool requires a certain way of working:
+-
+-- Maintain a number of branches, one for each patch series you are
+-  working on
+-- Add tags into the commits within each branch to indicate where the
+-  series should be sent, cover letter, version, etc. Most of these are
+-  normally in the top commit so it is easy to change them with 'git
+-  commit --amend'
+-- Each branch tracks the upstream branch, so that this script can
+-  automatically determine the number of commits in it (optional)
+-- Check out a branch, and run this script to create and send out your
+-  patches. Weeks later, change the patches and repeat, knowing that you
+-  will get a consistent result each time.
+-
+-
+-How to configure it
+--------------------
+-
+-For most cases of using patman for U-Boot development, patman can use the
+-file 'doc/git-mailrc' in your U-Boot directory to supply the email aliases
+-you need. To make this work, tell git where to find the file by typing
+-this once::
+-
+-    git config sendemail.aliasesfile doc/git-mailrc
+-
+-For both Linux and U-Boot the 'scripts/get_maintainer.pl' handles
+-figuring out where to send patches pretty well. For other projects,
+-you may want to specify a different script to be run, for example via
+-a project-specific `.patman` file::
+-
+-    # .patman configuration file at the root of some project
+-
+-    [settings]
+-    get_maintainer_script: etc/teams.scm get-maintainer
+-
+-The `get_maintainer_script` option corresponds to the
+-`--get-maintainer-script` argument of the `send` command.  It is
+-looked relatively to the root of the current git repository, as well
+-as on PATH.  It can also be provided arguments, as shown above.  The
+-contract is that the script should accept a patch file name and return
+-a list of email addresses, one per line, like `get_maintainer.pl`
+-does.
+-
+-During the first run patman creates a config file for you by taking the default
+-user name and email address from the global .gitconfig file.
+-
+-To add your own, create a file `~/.patman` like this::
+-
+-    # patman alias file
+-
+-    [alias]
+-    me: Simon Glass <sjg@chromium.org>
+-
+-    u-boot: U-Boot Mailing List <u-boot@lists.denx.de>
+-    wolfgang: Wolfgang Denk <wd@denx.de>
+-    others: Mike Frysinger <vapier@gentoo.org>, Fred Bloggs <f.bloggs@napier.net>
+-
+-As hinted above, Patman will also look for a `.patman` configuration
+-file at the root of the current project git repository, which makes it
+-possible to override the `project` settings variable or anything else
+-in a project-specific way. The values of this "local" configuration
+-file take precedence over those of the "global" one.
+-
+-Aliases are recursive.
+-
+-The checkpatch.pl in the U-Boot tools/ subdirectory will be located and
+-used. Failing that you can put it into your path or ~/bin/checkpatch.pl
+-
+-If you want to avoid sending patches to email addresses that are picked up
+-by patman but are known to bounce you can add a [bounces] section to your
+-.patman file. Unlike the [alias] section these are simple key: value pairs
+-that are not recursive::
+-
+-    [bounces]
+-    gonefishing: Fred Bloggs <f.bloggs@napier.net>
+-
+-
+-If you want to change the defaults for patman's command-line arguments,
+-you can add a [settings] section to your .patman file.  This can be used
+-for any command line option by referring to the "dest" for the option in
+-patman.py.  For reference, the useful ones (at the moment) shown below
+-(all with the non-default setting)::
+-
+-    [settings]
+-    ignore_errors: True
+-    process_tags: False
+-    verbose: True
+-    smtp_server: /path/to/sendmail
+-    patchwork_url: https://patchwork.ozlabs.org
+-
+-If you want to adjust settings (or aliases) that affect just a single
+-project you can add a section that looks like [project_settings] or
+-[project_alias].  If you want to use tags for your linux work, you could do::
+-
+-    [linux_settings]
+-    process_tags: True
+-
+-
+-How to run it
+--------------
+-
+-First do a dry run:
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman send -n
+-
+-If it can't detect the upstream branch, try telling it how many patches
+-there are in your series
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman -c5 send -n
+-
+-This will create patch files in your current directory and tell you who
+-it is thinking of sending them to. Take a look at the patch files:
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman -c5 -s1 send -n
+-
+-Similar to the above, but skip the first commit and take the next 5. This
+-is useful if your top commit is for setting up testing.
+-
+-
+-How to install it
+------------------
+-
+-The most up to date version of patman can be found in the U-Boot sources.
+-However to use it on other projects it may be more convenient to install it as
+-a standalone application. A distutils installer is included, this can be used
+-to install patman:
+-
+-.. code-block:: bash
+-
+-    cd tools/patman && python setup.py install
+-
+-
+-How to add tags
+----------------
+-
+-To make this script useful you must add tags like the following into any
+-commit. Most can only appear once in the whole series.
+-
+-Series-to: email / alias
+-    Email address / alias to send patch series to (you can add this
+-    multiple times)
+-
+-Series-cc: email / alias, ...
+-    Email address / alias to Cc patch series to (you can add this
+-    multiple times)
+-
+-Series-version: n
+-    Sets the version number of this patch series
+-
+-Series-prefix: prefix
+-    Sets the subject prefix. Normally empty but it can be RFC for
+-    RFC patches, or RESEND if you are being ignored. The patch subject
+-    is like [RFC PATCH] or [RESEND PATCH].
+-    In the meantime, git format.subjectprefix option will be added as
+-    well. If your format.subjectprefix is set to InternalProject, then
+-    the patch shows like: [InternalProject][RFC/RESEND PATCH]
+-
+-Series-postfix: postfix
+-    Sets the subject "postfix". Normally empty, but can be the name of a
+-    tree such as net or net-next if that needs to be specified. The patch
+-    subject is like [PATCH net] or [PATCH net-next].
+-
+-Series-name: name
+-    Sets the name of the series. You don't need to have a name, and
+-    patman does not yet use it, but it is convenient to put the branch
+-    name here to help you keep track of multiple upstreaming efforts.
+-
+-Series-links: [id | version:id]...
+-    Set the ID of the series in patchwork. You can set this after you send
+-    out the series and look in patchwork for the resulting series. The
+-    URL you want is the one for the series itself, not any particular patch.
+-    E.g. for http://patchwork.ozlabs.org/project/uboot/list/?series=187331
+-    the series ID is 187331. This property can have a list of series IDs,
+-    one for each version of the series, e.g.
+-
+-    ::
+-
+-       Series-links: 1:187331 2:188434 189372
+-
+-    Patman always uses the one without a version, since it assumes this is
+-    the latest one. When this tag is provided, patman can compare your local
+-    branch against patchwork to see what new reviews your series has
+-    collected ('patman status').
+-
+-Series-patchwork-url: url
+-    This allows specifying the Patchwork URL for a branch. This overrides
+-    both the setting files ("patchwork_url") and the command-line argument.
+-    The URL should include the protocol and web site, with no trailing slash,
+-    for example 'https://patchwork.ozlabs.org/project'
+-
+-Cover-letter:
+-    Sets the cover letter contents for the series. The first line
+-    will become the subject of the cover letter::
+-
+-        Cover-letter:
+-        This is the patch set title
+-        blah blah
+-        more blah blah
+-        END
+-
+-Cover-letter-cc: email / alias
+-    Additional email addresses / aliases to send cover letter to (you
+-    can add this multiple times)
+-
+-Series-notes:
+-    Sets some notes for the patch series, which you don't want in
+-    the commit messages, but do want to send, The notes are joined
+-    together and put after the cover letter. Can appear multiple
+-    times::
+-
+-        Series-notes:
+-        blah blah
+-        blah blah
+-        more blah blah
+-        END
+-
+-Commit-notes:
+-    Similar, but for a single commit (patch). These notes will appear
+-    immediately below the ``---`` cut in the patch file::
+-
+-        Commit-notes:
+-        blah blah
+-        blah blah
+-        more blah blah
+-
+-Signed-off-by: Their Name <email>
+-    A sign-off is added automatically to your patches (this is
+-    probably a bug). If you put this tag in your patches, it will
+-    override the default signoff that patman automatically adds.
+-    Multiple duplicate signoffs will be removed.
+-
+-Tested-by / Reviewed-by / Acked-by
+-    These indicate that someone has tested/reviewed/acked your patch.
+-    When you get this reply on the mailing list, you can add this
+-    tag to the relevant commit and the script will include it when
+-    you send out the next version. If 'Tested-by:' is set to
+-    yourself, it will be removed. No one will believe you.
+-
+-    Example::
+-
+-        Tested-by: Their Name <fred@bloggs.com>
+-        Reviewed-by: Their Name <email>
+-        Acked-by: Their Name <email>
+-
+-Series-changes: n
+-    This can appear in any commit. It lists the changes for a
+-    particular version n of that commit. The change list is
+-    created based on this information. Each commit gets its own
+-    change list and also the whole thing is repeated in the cover
+-    letter (where duplicate change lines are merged).
+-
+-    By adding your change lists into your commits it is easier to
+-    keep track of what happened. When you amend a commit, remember
+-    to update the log there and then, knowing that the script will
+-    do the rest.
+-
+-    Example::
+-
+-        Series-changes: n
+-        - Guinea pig moved into its cage
+-        - Other changes ending with a blank line
+-        <blank line>
+-
+-Commit-changes: n
+-    This tag is like Series-changes, except changes in this changelog will
+-    only appear in the changelog of the commit this tag is in. This is
+-    useful when you want to add notes which may not make sense in the cover
+-    letter. For example, you can have short changes such as "New" or
+-    "Lint".
+-
+-    Example::
+-
+-        Commit-changes: n
+-        - This line will not appear in the cover-letter changelog
+-        <blank line>
+-
+-Cover-changes: n
+-    This tag is like Series-changes, except changes in this changelog will
+-    only appear in the cover-letter changelog. This is useful to summarize
+-    changes made with Commit-changes, or to add additional context to
+-    changes.
+-
+-    Example::
+-
+-        Cover-changes: n
+-        - This line will only appear in the cover letter
+-        <blank line>
+-
+-Commit-added-in: n
+-    Add a change noting the version this commit was added in. This is
+-    equivalent to::
+-
+-        Commit-changes: n
+-        - New
+-
+-        Cover-changes: n
+-        - <commit subject>
+-
+-    It is a convenient shorthand for suppressing the '(no changes in vN)'
+-    message.
+-
+-Patch-cc / Commit-cc: Their Name <email>
+-    This copies a single patch to another email address. Note that the
+-    Cc: used by git send-email is ignored by patman, but will be
+-    interpreted by git send-email if you use it.
+-
+-Series-process-log: sort, uniq
+-    This tells patman to sort and/or uniq the change logs. Changes may be
+-    multiple lines long, as long as each subsequent line of a change begins
+-    with a whitespace character. For example,
+-
+-    Example::
+-
+-        - This change
+-          continues onto the next line
+-        - But this change is separate
+-
+-    Use 'sort' to sort the entries, and 'uniq' to include only
+-    unique entries. If omitted, no change log processing is done.
+-    Separate each tag with a comma.
+-
+-Change-Id:
+-    This tag is used to generate the Message-Id of the emails that
+-    will be sent. When you keep the Change-Id the same you are
+-    asserting that this is a slightly different version (but logically
+-    the same patch) as other patches that have been sent out with the
+-    same Change-Id. The Change-Id tag line is removed from outgoing
+-    patches, unless the `keep_change_id` settings is set to `True`.
+-
+-Various other tags are silently removed, like these Chrome OS and
+-Gerrit tags::
+-
+-    BUG=...
+-    TEST=...
+-    Review URL:
+-    Reviewed-on:
+-    Commit-xxxx: (except Commit-notes)
+-
+-Exercise for the reader: Try adding some tags to one of your current
+-patch series and see how the patches turn out.
+-
+-
+-Where Patches Are Sent
+-----------------------
+-
+-Once the patches are created, patman sends them using git send-email. The
+-whole series is sent to the recipients in Series-to: and Series-cc.
+-You can Cc individual patches to other people with the Patch-cc: tag. Tags
+-in the subject are also picked up to Cc patches. For example, a commit like
+-this::
+-
+-    commit 10212537b85ff9b6e09c82045127522c0f0db981
+-    Author: Mike Frysinger <vapier@gentoo.org>
+-    Date:    Mon Nov 7 23:18:44 2011 -0500
+-
+-    x86: arm: add a git mailrc file for maintainers
+-
+-    This should make sending out e-mails to the right people easier.
+-
+-    Patch-cc: sandbox, mikef, ag
+-    Patch-cc: afleming
+-
+-will create a patch which is copied to x86, arm, sandbox, mikef, ag and
+-afleming.
+-
+-If you have a cover letter it will get sent to the union of the Patch-cc
+-lists of all of the other patches. If you want to sent it to additional
+-people you can add a tag::
+-
+-    Cover-letter-cc: <list of addresses>
+-
+-These people will get the cover letter even if they are not on the To/Cc
+-list for any of the patches.
+-
+-
+-Patchwork Integration
+----------------------
+-
+-Patman has a very basic integration with Patchwork. If you point patman to
+-your series on patchwork it can show you what new reviews have appeared since
+-you sent your series.
+-
+-To set this up, add a Series-link tag to one of the commits in your series
+-(see above).
+-
+-Then you can type:
+-
+-.. code-block:: bash
+-
+-    patman status
+-
+-and patman will show you each patch and what review tags have been collected,
+-for example::
+-
+-    ...
+-     21 x86: mtrr: Update the command to use the new mtrr
+-        Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+-      + Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+-     22 x86: mtrr: Restructure so command execution is in
+-        Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+-      + Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+-    ...
+-
+-This shows that patch 21 and 22 were sent out with one review but have since
+-attracted another review each. If the series needs changes, you can update
+-these commits with the new review tag before sending the next version of the
+-series.
+-
+-To automatically pull into these tags into a new branch, use the -d option:
+-
+-.. code-block:: bash
+-
+-    patman status -d mtrr4
+-
+-This will create a new 'mtrr4' branch which is the same as your current branch
+-but has the new review tags in it. The tags are added in alphabetic order and
+-are placed immediately after any existing ack/review/test/fixes tags, or at the
+-end. You can check that this worked with:
+-
+-.. code-block:: bash
+-
+-    patman -b mtrr4 status
+-
+-which should show that there are no new responses compared to this new branch.
+-
+-There is also a -C option to list the comments received for each patch.
+-
+-
+-Example Work Flow
+------------------
+-
+-The basic workflow is to create your commits, add some tags to the top
+-commit, and type 'patman' to check and send them.
+-
+-Here is an example workflow for a series of 4 patches. Let's say you have
+-these rather contrived patches in the following order in branch us-cmd in
+-your tree where 'us' means your upstreaming activity (newest to oldest as
+-output by git log --oneline)::
+-
+-    7c7909c wip
+-    89234f5 Don't include standard parser if hush is used
+-    8d640a7 mmc: sparc: Stop using builtin_run_command()
+-    0c859a9 Rename run_command2() to run_command()
+-    a74443f sandbox: Rename run_command() to builtin_run_command()
+-
+-The first patch is some test things that enable your code to be compiled,
+-but that you don't want to submit because there is an existing patch for it
+-on the list. So you can tell patman to create and check some patches
+-(skipping the first patch) with:
+-
+-.. code-block:: bash
+-
+-    patman -s1 send -n
+-
+-If you want to do all of them including the work-in-progress one, then
+-(if you are tracking an upstream branch):
+-
+-.. code-block:: bash
+-
+-    patman send -n
+-
+-Let's say that patman reports an error in the second patch. Then:
+-
+-.. code-block:: bash
+-
+-    git rebase -i HEAD~6
+-    # change 'pick' to 'edit' in 89234f5
+-    # use editor to make code changes
+-    git add -u
+-    git rebase --continue
+-
+-Now you have an updated patch series. To check it:
+-
+-.. code-block:: bash
+-
+-    patman -s1 send -n
+-
+-Let's say it is now clean and you want to send it. Now you need to set up
+-the destination. So amend the top commit with:
+-
+-.. code-block:: bash
+-
+-    git commit --amend
+-
+-Use your editor to add some tags, so that the whole commit message is::
+-
+-    The current run_command() is really only one of the options, with
+-    hush providing the other. It really shouldn't be called directly
+-    in case the hush parser is bring used, so rename this function to
+-    better explain its purpose::
+-
+-    Series-to: u-boot
+-    Series-cc: bfin, marex
+-    Series-prefix: RFC
+-    Cover-letter:
+-    Unified command execution in one place
+-
+-    At present two parsers have similar code to execute commands. Also
+-    cmd_usage() is called all over the place. This series adds a single
+-    function which processes commands called cmd_process().
+-    END
+-
+-    Change-Id: Ica71a14c1f0ecb5650f771a32fecb8d2eb9d8a17
+-
+-
+-You want this to be an RFC and Cc the whole series to the bfin alias and
+-to Marek. Two of the patches have tags (those are the bits at the front of
+-the subject that say mmc: sparc: and sandbox:), so 8d640a7 will be Cc'd to
+-mmc and sparc, and the last one to sandbox.
+-
+-Now to send the patches, take off the -n flag:
+-
+-.. code-block:: bash
+-
+-   patman -s1 send
+-
+-The patches will be created, shown in your editor, and then sent along with
+-the cover letter. Note that patman's tags are automatically removed so that
+-people on the list don't see your secret info.
+-
+-Of course patches often attract comments and you need to make some updates.
+-Let's say one person sent comments and you get an Acked-by: on one patch.
+-Also, the patch on the list that you were waiting for has been merged,
+-so you can drop your wip commit.
+-
+-Take a look on patchwork and find out the URL of the series. This will be
+-something like `http://patchwork.ozlabs.org/project/uboot/list/?series=187331`
+-Add this to a tag in your top commit::
+-
+-   Series-links: 187331
+-
+-You can use then patman to collect the Acked-by tag to the correct commit,
+-creating a new 'version 2' branch for us-cmd:
+-
+-.. code-block:: bash
+-
+-    patman status -d us-cmd2
+-    git checkout us-cmd2
+-
+-You can look at the comments in Patchwork or with:
+-
+-.. code-block:: bash
+-
+-    patman status -C
+-
+-Then you can resync with upstream:
+-
+-.. code-block:: bash
+-
+-    git fetch origin        # or whatever upstream is called
+-    git rebase origin/master
+-
+-and use git rebase -i to edit the commits, dropping the wip one.
+-
+-Then update the `Series-cc:` in the top commit to add the person who reviewed
+-the v1 series::
+-
+-    Series-cc: bfin, marex, Heiko Schocher <hs@denx.de>
+-
+-and remove the Series-prefix: tag since it it isn't an RFC any more. The
+-series is now version two, so the series info in the top commit looks like
+-this::
+-
+-    Series-to: u-boot
+-    Series-cc: bfin, marex, Heiko Schocher <hs@denx.de>
+-    Series-version: 2
+-    Cover-letter:
+-    ...
+-
+-Finally, you need to add a change log to the two commits you changed. You
+-add change logs to each individual commit where the changes happened, like
+-this::
+-
+-    Series-changes: 2
+-    - Updated the command decoder to reduce code size
+-    - Wound the torque propounder up a little more
+-
+-(note the blank line at the end of the list)
+-
+-When you run patman it will collect all the change logs from the different
+-commits and combine them into the cover letter, if you have one. So finally
+-you have a new series of commits::
+-
+-    faeb973 Don't include standard parser if hush is used
+-    1b2f2fe mmc: sparc: Stop using builtin_run_command()
+-    cfbe330 Rename run_command2() to run_command()
+-    0682677 sandbox: Rename run_command() to builtin_run_command()
+-
+-so to send them:
+-
+-.. code-block:: bash
+-
+-    patman
+-
+-and it will create and send the version 2 series.
+-
+-
+-Series Management
+------------------
+-
+-Sometimes you might have several series in flight at the same time. Each of
+-these receives comments and you want to create a new version of each series with
+-those comments addressed.
+-
+-Patman provides a few subcommands which are helpful for managing series.
+-
+-Series and branches
+-~~~~~~~~~~~~~~~~~~~
+-
+-'patman series' works with the concept of a series. It maintains a local
+-database (.patman.db in your top-level git tree) and uses that to keep track of
+-series and patches.
+-
+-Each series goes through muliple versions. Patman requires that the first
+-version of your series is in a branch without a numeric suffix. Branch names
+-like 'serial' and 'video' are OK, but 'part3' is not. This is because Patman
+-uses the number at the end of the branch name to indicate the version.
+-
+-If your series name is 'video', then you can have a 'video' branch for version
+-1 of the series, 'video2' for version 2 and 'video3' for version 3. All three
+-branches are for the same series. Patman keeps track of these different
+-versions. It handles the branch naming automatically, but you need to be aware
+-of what it is doing.
+-
+-You will have an easier time if the branch names you use with 'patman series'
+-are short, no more than 15 characters. This is the amount of columnar space in
+-listings. You can add a longer description as the series description. If you
+-are used to having very descriptive branch names, remember that patman lets you
+-add metadata into commit which is automatically removed before sending.
+-
+-This documentation uses the term 'series' to mean all the versions of a series
+-and 'series/version' to mean a particular version of a series.
+-
+-Updating commits
+-~~~~~~~~~~~~~~~~
+-
+-Since Patman provides quite a bit of automation, it updates your commits in
+-some cases, effectively doing a rebase of a branch in order to change the tags
+-in the commits. It never makes code changes.
+-
+-In extremis you can use 'git reflog' to revert something that Patman did.
+-
+-
+-Series subcommands
+-~~~~~~~~~~~~~~~~~~
+-
+-Note that 'patman series ...' can be abbreviated as 'patman s' or 'patman ser'.
+-
+-Here is a short overview of the available subcommands:
+-
+-    add
+-        Add a new series. Use this on an existing branch to tell Patman about it.
+-
+-    archive (ar)
+-        Archive a series when you have finished upstreaming it. Archived series
+-        are not shown by most commands. This creates a dated tag for each
+-        version of the series, pointing to the series branch, then deletes the
+-        branches. It puts the tag names in the database so that it can
+-        'unarchive' to restore things how they were.
+-
+-    unarchive (unar)
+-        Unarchive a series when you decide you need to do something more with
+-        it. The branches are restored and tags deleted.
+-
+-    autolink (au)
+-        Search patchwork for the series link for your series, so Patman can
+-        track the status
+-
+-    autolink-all
+-        Same but for all series
+-
+-    inc
+-        Increase the series number, effectively creating a new branch with the
+-        next highest version number. The new branch is created based on the
+-        existing branch. So if you use 'patman series inc' on branch 'video2'
+-        it will create branch 'video3' and add v3 into its database
+-
+-    dec
+-        Decrease the series number, thus deleting the current branch and
+-        removing that version from the data. If you use this comment on branch
+-        'video3' Patman will delete version 3 and branch 'video3'.
+-
+-    get-link
+-        Shows the Patchwork link for a series/version
+-
+-    ls
+-        Lists the series in the database
+-
+-    mark
+-        Mark a series with 'Change-Id' tags so that Patman can track patches
+-        even when the subject changes. Unmarked patches just use the subject to
+-        decided which is which.
+-
+-    unmark
+-        Remove 'Change-Id' tags from a series.
+-
+-    open (o)
+-        Open a series in Patchwork using your web browser
+-
+-    patches
+-        Show the patches in a particular series/version
+-
+-    progress (p)
+-        Show upstream progress for your series, or for all series
+-
+-    rm
+-        Remove a series entirely, including all versions
+-
+-    rm-version (rmv)
+-        Remove a particular version of a series. This is similar to 'dec'
+-        except that any version can be removed, not just the latest one.
+-
+-    scan
+-        Scan the local branch and update the database with the set of patches
+-        in that branch. This throws away the old patches.
+-
+-    send
+-        Send a series out as patches. This is similar to 'patman send' except
+-        that it can send any series, not just the current branch. It also
+-        waits a little for patchwork to see the cover letter, so it can find
+-        out the patchwork link for the series.
+-
+-    set-link
+-        Sets the Patchwork link for a series-version manually.
+-
+-    status (st)
+-        Run 'patman status' on a series. This is similar to 'patman status'
+-        except that it can get status on any series, not just the current
+-        branch
+-
+-    summary
+-        Shows a quick summary of series with their status and description.
+-
+-    sync
+-        Sync the status of a series with Pathwork, so that
+-        'patman series progress' can show the right information.
+-
+-    sync-all
+-        Sync the status of all series.
+-
+-
+-Patman series workflow
+-~~~~~~~~~~~~~~~~~~~~~~
+-
+-Here is a run-through of how to incorporate 'patman series' into your workflow.
+-
+-Firstly, set up your project::
+-
+-    patman patchwork set-project U-Boot
+-
+-This just tells Patman to look on the Patchwork server for a project of that
+-name. Internally Patman stores the ID and URL 'link-name' for the project, so it
+-can access it.
+-
+-If you need to use a different patchwork server, use the `--patchwork-url`
+-option or put the URL in your Patman-settings file.
+-
+-Now create a branch. For our example we are going to send out a series related
+-to video so the branch will be called 'video'. The upstream remove is called
+-'us'::
+-
+-    git checkout -b video us/master
+-
+-We now have a branch and so we can do some commits::
+-
+-    <edit files>
+-    git add ...
+-    <edit files>
+-    git add -u
+-    git commit ...
+-    git commit ...
+-
+-We now have a few commits in our 'video' branch. Let's tell patman about it::
+-
+-    patman series add
+-
+-Like most commands, if no series is given (`patman series -s video add`) then
+-the current branch is assumed. Since the branch is called 'video' patman knows
+-that it is version one of the video series.
+-
+-You'll likely get a warning that there is no cover letter. Let's add some tags
+-to the top commit::
+-
+-    Series-to: u-boot
+-    Series-cc: ...
+-    Cover-letter:
+-    video: Improve syncing performance with cyclic
+-
+-Trying again::
+-
+-    patman series add
+-
+-You'll likely get a warning that the commits are unmarked. You can either let
+-patman add Change-Id values itself with the `-m` flag, or tell it not to worry
+-about it with `-M`. You must choose one or the other. Let's leave the commits
+-unmarked::
+-
+-    patman series add -M
+-
+-Congratulations, you've now got a patman database!
+-
+-Now let's send out the series. We will add tags to the top commit.
+-
+-To send it::
+-
+-    patman series send
+-
+-You should send 'git send-email' start up and you can confirm the sending of
+-each email.
+-
+-After that, patman waits a bit to see if it can find your new series appearing
+-on Patchwork. With a bit of luck this will only take 20 seconds or so. Then your
+-series is linked.
+-
+-To gather tags (Reviewed-by ...) for your series from patchwork::
+-
+-    patman series gather
+-
+-Now you can check your progress::
+-
+-    patman series progress
+-
+-Later on you get some comments, or perhaps you just decide to make a change on
+-your own. You have several options.
+-
+-The first option is that you can just create a new branch::
+-
+-    git checkout -b video2 video
+-
+-then you can add this 'v2' series to Patman with::
+-
+-    patman series add
+-
+-The second option is to get patman to create the new 'video2' branch in one
+-step::
+-
+-    patman inc
+-
+-The third option is to collect some tags using the 'patman status' command and
+-put them in a new branch::
+-
+-    patman status -d video2
+-
+-One day the fourth option will be to ask patman to collect tags as part of the
+-'patman inc' command.
+-
+-Again, you do your edits, perhaps adding/removing patches, rebasing on -master
+-and so on. Then, send your v2::
+-
+-    patman series send
+-
+-Let's say the patches are accepted. You can use::
+-
+-    patch series gather
+-    patch series progress
+-
+-to check, or::
+-
+-    patman series status -cC
+-
+-to see comments. You can now archive the series::
+-
+-    patman series archive
+-
+-At this point you have the basics. Some of the subcommands useful options, so
+-be sure to check out the help.
+-
+-Here is a sample 'progress' view:
+-
+-.. image:: pics/patman.jpg
+-  :width: 800
+-  :alt: Patman showing the progress view
+-
+-General points
+---------------
+-
+-#. When you change back to the us-cmd branch days or weeks later all your
+-   information is still there, safely stored in the commits. You don't need
+-   to remember what version you are up to, who you sent the last lot of patches
+-   to, or anything about the change logs.
+-#. If you put tags in the subject, patman will Cc the maintainers
+-   automatically in many cases.
+-#. If you want to keep the commits from each series you sent so that you can
+-   compare change and see what you did, you can either create a new branch for
+-   each version, or just tag the branch before you start changing it:
+-
+-   .. code-block:: bash
+-
+-        git tag sent/us-cmd-rfc
+-        # ...later...
+-        git tag sent/us-cmd-v2
+-
+-#. If you want to modify the patches a little before sending, you can do
+-   this in your editor, but be careful!
+-#. If you want to run git send-email yourself, use the -n flag which will
+-   print out the command line patman would have used.
+-#. It is a good idea to add the change log info as you change the commit,
+-   not later when you can't remember which patch you changed. You can always
+-   go back and change or remove logs from commits.
+-#. Some mailing lists have size limits and when we add binary contents to
+-   our patches it's easy to exceed the size limits. Use "--no-binary" to
+-   generate patches without any binary contents. You are supposed to include
+-   a link to a git repository in your "Commit-notes", "Series-notes" or
+-   "Cover-letter" for maintainers to fetch the original commit.
+-#. Patches will have no changelog entries for revisions where they did not
+-   change. For clarity, if there are no changes for this patch in the most
+-   recent revision of the series, a note will be added. For example, a patch
+-   with the following tags in the commit::
+-
+-        Series-version: 5
+-        Series-changes: 2
+-        - Some change
+-
+-        Series-changes: 4
+-        - Another change
+-
+-   would have a changelog of:::
+-
+-        (no changes since v4)
+-
+-        Changes in v4:
+-        - Another change
+-
+-        Changes in v2:
+-        - Some change
+-
+-
+-Other thoughts
+---------------
+-
+-This script has been split into sensible files but still needs work.
+-Most of these are indicated by a TODO in the code.
+-
+-It would be nice if this could handle the In-reply-to side of things.
+-
+-The tests are incomplete, as is customary. Use the 'test' subcommand to run
+-them:
+-
+-.. code-block:: bash
+-
+-    $ tools/patman/patman test
+-
+-Note that since the test suite depends on data files only available in
+-the git checkout, the `test` command is hidden unless `patman` is
+-invoked from the U-Boot git repository.
+-
+-Alternatively, you can run the test suite via Pytest:
+-
+-.. code-block:: bash
+-
+-    $ cd tools/patman && pytest
+-
+-Error handling doesn't always produce friendly error messages - e.g.
+-putting an incorrect tag in a commit may provide a confusing message.
+-
+-There might be a few other features not mentioned in this README. They
+-might be bugs. In particular, tags are case sensitive which is probably
+-a bad thing.
 -- 
 2.43.0
 
