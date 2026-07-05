@@ -4,95 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B0F8C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 10:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04AE3C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 10:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 456C7846F8;
-	Sun,  5 Jul 2026 12:42:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87BFA84832;
+	Sun,  5 Jul 2026 12:42:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZcmW9T4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BMcYcgan";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEB92846FD; Sun,  5 Jul 2026 12:42:16 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 6D8528484C; Sun,  5 Jul 2026 12:42:43 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBF0D846A4
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 12:42:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 380EB846A4
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 12:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6986287534eso3433174a12.3
- for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 03:42:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783248134; cv=none;
- d=google.com; s=arc-20260327;
- b=Wa0tz2vjLdE4sYPJtIABB+ngsTv+e5Fc2hIO3Wn6mnHnKThI8qCJRjFpjhAPM2g0iZ
- 3taMsLAaa/fM2a/Xs8UyTVsIHwNOLB84vGClwFKpsTv+W+0ppJEg0icTH9Nwwp/kEKS3
- 93AkJ+UXzQHjPqsz4xtuEgGae6ctS1OPpKSG52heOAXAg5Hb44Ie17cVudcIy6y9fJQs
- jdmfFxWkRfD6qhhmgpwCc4AMoxTiQcY2oR5gB5UGr7/K7MnvR6NrrEWYWm27hRI9QxGI
- Rhd/uKZSNdwut4eTDNEnCbMxQSyD37BBEJwASyBlNbOtwcIQQJn1hh4eOoVV8D/3hsXF
- +uYQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Fn7XRx8RxB7vnICgPVTrXrAYlXvn81oGFSMmKmmX51c=;
- fh=yDxf5wgWmD6WtWAfkwUUamAI6LJSpO6ikX6p6/IOEfI=;
- b=VVqomRk/ZDjN6L2AwBpjJrydrgkwbV3JNhXahugp6jx92sPqCIjYE8MWVK/eUNhrlM
- tNTG2VPgOKBKrKF1fcfDwISrqfV42sCw2AKaDQKrj4lVNCP4iUDCqfCBMhzYU6ox07dy
- rO+ffKHhxH+LSUBd8hthOziZvaVf0WDcznR2rrauvS1TAwiolZqDR2B1Yq9xkVPv9H0n
- jIu64xR21In8lcHwjFoSZTmXwBsSqqEkaZodjDZGgrR7qvA8OfLMKVOoogB8SuxdIeJ0
- u9mmHW8cK8ez0F4yBypUt2b7DVd0U7ULLveajNKfR/kwXatJa0XBFtDvy6tHwhmo/bFY
- 1RjA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e9f69ee6f4so1850634a34.2
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 03:42:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783248134; x=1783852934; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Fn7XRx8RxB7vnICgPVTrXrAYlXvn81oGFSMmKmmX51c=;
- b=gZcmW9T4fhECMZ72Sr67aZhW4i/fwwWIdzDcSRhJzikQg7+gFiM55y7y9bYhU1rT/r
- tXvQnYVm+YL+Baoq/qeB+c1IDUQLxMdelf4WEqWybKCdM2G0LY57qSRcJ1gaIxQUiwH7
- jNdES4OtDl9X8k2slG1PH2xa4+zTGIcslsYAI=
+ d=chromium.org; s=google; t=1783248160; x=1783852960; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ameHD0QeNWUEkmX1ldjFBXdLMfLPwRfal8heNYF3vqk=;
+ b=BMcYcganJPqsPsO0JbA7jQvvwMKhB47DdIyOn20gNvxx/wLZtMAdsairkkoFheH2Yb
+ YIKT7IqE/BG87ovATPwCHQKIvqTZNG8azXj2aVcCbM6h+DEl6vJjF9F3guN4ASl9ly4x
+ Waqn9f04qjJCQ8DcdiyFdusDsoDv099iWvBkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783248134; x=1783852934;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1783248160; x=1783852960;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fn7XRx8RxB7vnICgPVTrXrAYlXvn81oGFSMmKmmX51c=;
- b=E4xNiA/5e3GU9/Hm8iZ9YTOoht6T5Kv3E1/7yGjIdRUynoc6RcwCa3x7C7+Ic2Nkqd
- Nr2dIw+e4q+yrocF2FyY0z51fgf5fOPbXrBorjGPBFaMNk6x4kl9VvkKnhoIRpOH3dYU
- 93bzpl/cSAdozR6e5s7i8Ge6/lzrxWq2D2hqakQuuH3EjYwvzyKJilHdPLQpBaPo8AYk
- hWdHYhx+/Qu+VYOILsY2Osv684vRFIJqZ0DpzgZhPPee+UFrvHpVghP8nGoZ4f3Ww/Jx
- kli6EFr3u+BfjhVR/91oGiv8jjTrupXkVytKpDggag970Ud8dYy7Au/i6GO8hDJjXuny
- rXTg==
-X-Gm-Message-State: AOJu0YxJEn6rTGkO3qoSOPLeWpHXI5t5PEKGBViBtfqrC/xU749RFK5w
- ypgI6gxtELMch3vUc+r7TW3j9cZ5fHZsOW2w2d0ONQdxKH+RV2h9H1jdcJSkPF7LvdZonitXejb
- djkScUQh7RJniex+Rvp3FtP2qq70zZjHV/AhpydBugr1mMgY0IHf+BQ==
-X-Gm-Gg: AfdE7ckgbPgWKKvSBOB+dR+5lYNOWUgzBGNyKhyS1jnyA6WcQ4ZfM/c/JiQWjgJAkK5
- m0M8JJW2AROPI5fsM8+tnkWBSN3aeuJ9d0Tfjx+gyq55S3ic270ph1tRjHv9RszMX/x6REeDEbl
- bxCrmDPusaICJf5ciuF4EvbYK9GqpaH9Mqi19WSzDMCPA41kbf2WvkLIin7DIdcOhmXqPQ8TBXx
- AYnVRn6oAL4RBzKDt8aoTU2TqTP+qJLCR5vbhpuoQ1vMfHUjHGVQSm/52CfpRGE2R2YYHz9hcIC
- Kfj93w==
-X-Received: by 2002:a05:6402:3509:b0:699:f957:d367 with SMTP id
- 4fb4d7f45d1cf-69a1a26b3c8mr1817587a12.17.1783248134288; Sun, 05 Jul 2026
- 03:42:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260616142444.48193-1-sjg@chromium.org>
- <20260616142444.48193-6-sjg@chromium.org>
- <ajJBmmhl1Gk9n4GP@black.igk.intel.com> <ajJCSRepiixmmgO0@black.igk.intel.com>
-In-Reply-To: <ajJCSRepiixmmgO0@black.igk.intel.com>
+ bh=ameHD0QeNWUEkmX1ldjFBXdLMfLPwRfal8heNYF3vqk=;
+ b=a/hZUL2hS1zq00u031iw9a4ppS+mLWmp8z1sZ8Ijsr46EP4sxIW/yNnmHhs9S/zWEc
+ PuT4imu/X3CFajao5HoTqAoxPNg0IjRbW0QSdHOtkUeV/trkoFpz7sq/gH5PPFPdv9LO
+ 5IWZ6o0uoAtkPJf9LqTHhZ+Ur3h5q2ccEjebqkedIvx+vmuDmKH/165jGpvNhlZSwtuP
+ YNiCKouedd44eghIa46RVhvcYBDJMczq6hs5iRlOQnHi4f4fHCY7dB6ETFL12jyZddw9
+ JVM7+L6LsJavonjPwrRypjh4fOtigxWYU4sV8tmEDTGkJz3cbDgLFJbbOQs/X+B6E7kd
+ g3Og==
+X-Gm-Message-State: AOJu0Yz68IazxV9kr3mg0i1fqwMg3BFZy70R9QwT4qywjLMxhVI7+CMb
+ mdJBiK35kMSMZWUn0cVvDMxFA/9bCChQG7PT82rtSBR/mVAYWPYgEX/iNZ3M9rGdUXD5fAdwIck
+ NrgjdSw==
+X-Gm-Gg: AfdE7cmVocCYmU3oxpcG0JeZIwIVdoQPbXXAl4i+pjerjfh7+blKHOoaXKakBZZAObE
+ izWvaXTYjgydJE/RfbDLu3uvTVco/uALV2VbrsEG5AG+jQD70nf9VdbsJAkeZOk+t5vZ2mndp4B
+ vc8vr3kj8KIF6j6YQ8HhbGL6BHu6n+tgm38OrVIX1rNGXF7TTpm20UH6MlESYQXCGXHL+q1YaU5
+ js1ZnrW4sK+twjQ0VNW7QqqJW3O4Q/goxI2eaosmvAHQwerRvWRsDmPN7P7FuiCvBqJbLVWbTvb
+ 0GihFQ4peCoVoEmSSXXMMd9MOB+Ujpf6DaEA7WoiHHxaqHs0H5OYfcJ4Ps40acKAi3uttVoexBy
+ GgKU4mBrPwclj2mKZIB4FSALPcOjZc611oz6/jaTaJJUxt9k8GZ0VcQp5ONZjx0WBVREdMfPRZt
+ 1OWKjEjFs=
+X-Received: by 2002:a05:6830:6ae8:b0:7e9:dc88:f10a with SMTP id
+ 46e09a7af769-7eb7ff1bdc6mr3930195a34.18.1783248159918; 
+ Sun, 05 Jul 2026 03:42:39 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7eb54291227sm9136961a34.3.2026.07.05.03.42.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jul 2026 03:42:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Jul 2026 04:42:01 -0600
-X-Gm-Features: AVVi8CfkHg1fgQ0rnVVYaUO-qz0NxwtgB5Mt0ZLmsyfxqjU7qUnFitDIDcOTrdc
-Message-ID: <CAFLszThV=iy_4yObmUv2GqPAL4g-urVjKX=9Md7_v7yxLNnm2g@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] doc: edison: Rewrite the update instructions
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@nabladev.com>, Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Subject: [PATCH v3 0/5] edison: Convert the image build to binman
+Date: Sun,  5 Jul 2026 04:42:11 -0600
+Message-ID: <20260705104231.3846672-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,44 +103,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andy,
+The Intel Edison image is assembled by a board config.mk hack that
+prepends a 4KB alignment gap to u-boot.bin, plus a static OSIP-header
+blob checked into the tree. This series is a cleanup of that, not a boot
+fix: the mainline boot regression from the Kbuild-6.1 bump is fixed
+directly by the 'Repair boards broken by the 6.1 kbuild bump' series,
+which this one applies on top of.
 
-On Wed, 17 Jun 2026 at 00:44, Andy Shevchenko
-<andriy.shevchenko@intel.com> wrote:
->
-> On Wed, Jun 17, 2026 at 08:41:30AM +0200, Andy Shevchenko wrote:
-> > On Tue, Jun 16, 2026 at 08:24:20AM -0600, Simon Glass wrote:
-> > > Split the two ways of getting U-Boot onto the board: a plain DFU
-> > > transfer into u-boot0 when a working U-Boot is already present, and the
-> > > xFSTK mask ROM recovery when it is not. Drop the steps that only applied
-> > > to replacing the original 2014 U-Boot, document the 4KB alignment gap
-> > > the mask ROM needs and which binman output to flash (rather than the
-> > > bare u-boot.bin), note that a bricked board enters DnX without any
-> > > straps, and add udev rules for running the tools without sudo.
->
-> ...
->
-> > > -1. Prepare u-boot.bin as described in chapter above. You still need one
-> > > -   more step (if and only if you have original U-Boot), i.e. run the
-> > > -   following command::
-> > >
-> > > -     $ truncate -s %4096 u-boot.bin
-> >
-> > Still missing this important detail. The DFU on v2014.04 is broken in a way
-> > that it requires also the whole binary to be aligned by 4k. The above pads
-> > the tail to full 4k (last block).
-> >
-> > Btw, now I realised that I haven't checked if this is inherited in your binman
-> > case. Note, I haven't put that into the Makefile hack as I expected users to
-> > do this once, but perhaps if somebody wants to start over (by flashing the last
-> > official image), the file size needs to be aligned.
->
-> TL;DR: Either we leave this in documentation, or we always have a bigger blob.
-> However I don't remember how (current) upstream U-Boot DFU will react on the
-> trailing garbage (nulls).
+Assemble the whole image with binman instead. A new intel-osip entry
+generates the OSIP header (with the GPT-protective MBR the mask ROM
+needs) and a fill provides the 4KB gap that the mask ROM's load/entry
+offset requires. The gap and U-Boot are emitted together as
+u-boot-edison-dfu.bin, the ready-to-flash payload for the u-boot0
+partition, so a DFU update no longer needs a hand-rolled prepend. The
+OSIP load address and entry point come from CONFIG_TEXT_BASE rather than
+hard-coded magic numbers.
 
-Sorry, a little tardy on this as I have been travelling. But it seems
-to work OK for me. I'll send v3.
+It also widens the DFU auto-probe window so an automated flash has time
+to start, adds the board to the sjg-lab CI and rewrites the
+documentation to separate a normal DFU update from xFSTK recovery.
 
-Regards,
-Simon
+Tested on real hardware: a bricked board recovers via xFSTK, takes a
+fresh U-Boot over DFU and boots the result.
+
+Changes in v3:
+- Update the copyright line
+- Drop trailing space in ftest.py
+- Round U-Boot's size up to a 4KB boundary
+- Drop the manual 'truncate -s %4096' step which is no longer needed
+
+Changes in v2:
+- Drop Bay Trail from the SoC list and add Moorefield (it is not an
+  Intel MID part)
+- Refer to the board as the Intel Edison in the MBR sector comment
+- Write the 0x55aa boot signature as a single 16-bit value
+- Derive the Edison OSIP load address and entry point from
+  CONFIG_TEXT_BASE instead of hard-coding them
+- Require intel,load-address and intel,entry-point rather than
+  defaulting to Edison's addresses
+- Reframe as a binman conversion (the boot fix is now a precursor) and
+  drop the duplicate 'Fixes' tag
+- Wrap the gap and U-Boot in a section emitted as u-boot-edison-dfu.bin,
+  the ready-to-flash DFU payload
+- Keep a reference to the stock U-Boot v2014.04 the board ships with
+- Flash the binman-built u-boot-edison-dfu.bin over DFU instead of
+  prepending the 4KB gap to u-boot.bin by hand
+- Restore the xFSTK progress output and the note that the reconnection
+  attempts are normal
+- Refer to the board as the Intel Edison
+
+Simon Glass (5):
+  binman: Add an entry type for the Intel OSIP header
+  edison: Widen the DFU auto-probe window for flashing U-Boot
+  x86: edison: Move U-Boot alignment into binman
+  CI: Add an sjg-lab job for the Intel Edison
+  doc: edison: Rewrite the update instructions
+
+ .gitlab-ci.yml                            |   6 +
+ arch/x86/dts/edison.dts                   |  35 ++++-
+ board/intel/edison/config.mk              |  10 --
+ board/intel/edison/edison-environment.txt |   2 +-
+ board/intel/edison/edison-osip.dat        |   0
+ doc/board/intel/edison.rst                | 182 ++++++++++------------
+ tools/binman/etype/intel_osip.py          | 120 ++++++++++++++
+ tools/binman/ftest.py                     |  25 +++
+ tools/binman/test/entry/intel_osip.dts    |  17 ++
+ 9 files changed, 277 insertions(+), 120 deletions(-)
+ delete mode 100644 board/intel/edison/edison-osip.dat
+ create mode 100644 tools/binman/etype/intel_osip.py
+ create mode 100644 tools/binman/test/entry/intel_osip.dts
+
+---
+base-commit: 2569e25ddd5aa323cd87c7a3819c3a4f4b32302f
+branch: edison-us3
+
+-- 
+2.43.0
+
