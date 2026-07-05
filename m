@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26660C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 20:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE56C43602
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 20:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62ADC846FD;
-	Sun,  5 Jul 2026 22:26:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0BD38486A;
+	Sun,  5 Jul 2026 22:26:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UAnlvRxP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GX7GJ7GF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93BAC84832; Sun,  5 Jul 2026 22:26:38 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 75A51848BF; Sun,  5 Jul 2026 22:26:45 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FC1B846F8
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 22:26:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5865D846F8
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 22:26:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7e9ecb1e13cso2035357a34.3
- for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 13:26:36 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-6a18e363d52so1916287eaf.0
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 13:26:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783283195; x=1783887995; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783283202; x=1783888002; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SsiRJw2w2PEObiWbQBb5kBFhTIILv0boIvFsENuRrGk=;
- b=UAnlvRxPm4QXpzeO9f2BmPFbkEN+4OBmXtf3ggqK5UBuuYYnAsBu1uJRD1pPWzEXng
- MxuhPE3zOTTI2yiqv1PNRx8bUDUIlSNrN/oUHyS+j8EoH/h6LL0IQ9K501l8NEg8rIZe
- X4EnBwKZVbJNQDKvXKHH8gbhxIDfzXIM2a3uM=
+ bh=klE2x2XzaIhKmWEONFuHSoM/1+52qVuo/TNIOwbF0DQ=;
+ b=GX7GJ7GFuwkIzjMOAUaiqAwoCvveQAIkqStnULZR7BjGivH32JWrTkmDw0y/4l9Bpt
+ 62Q6In0rU5EnTDZpBW02h304C6BMoNp/KWFgYBGi3KjlDUvgi9SmJfpCdb+xHZaG/uyp
+ Oi5dc1jsecMwPP5k3UkhUkGUkKn0gxLERRtFE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783283195; x=1783887995;
+ d=1e100.net; s=20251104; t=1783283202; x=1783888002;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SsiRJw2w2PEObiWbQBb5kBFhTIILv0boIvFsENuRrGk=;
- b=K8Xo+sfkZsApwy03C4w6EogBtQQhqQts2aTi52Gd5aUYyeIp3JpKvtEx8OcQbPUo7u
- 8I4NDlM9RtqPodxsug0UoeyduQ1e0DLFv0ARPJSjIkhwK+8P0r7Odyn7e3og9v5/3hq1
- lUU44HSc+l5/E0dYiaPD379jPT/FQpz2utX/+7oYJ5W2nHocCi+KZ5ZwpCWvz4ksBkc4
- 25tY7oLH9eYTXakHEGRt/OBFWt78QAmYUA4mFzE3tqiidGb7k1e6yPsFiS04LOaAh2T4
- QkLW94TBkj7t4BtDeguZfo/ZqNqUltEmhREfp0snamszIIwNbhnn8H2zW/D7fMaPGU66
- oPdA==
-X-Gm-Message-State: AOJu0Yw1AwRGANeIUn7/OdAVFmYJfTcc3cdtPlvqx8Frczx8eio3/8su
- eVjdeUwyz3e3lPeMBAJrKdSajETLHHSjC8QwfR/EXGt9h7f6nusvac6sxMtaMunLS5U=
-X-Gm-Gg: AfdE7ck+27m2vOEOlyzL0lixXX4UcOwLKssQEyUIuRfoCvTHjrngfmr02C7XtyFfOYz
- L8lW3bSGe6+/JlgRcogDCXuS5icMPjhmd3hOQBF8fUGxe5XwedXCyt6CR9ksZx5904KtGPdHkkn
- cvUlLMNGWTwrXrX0XlEVPntxQLKAbKbF8WeTKsrVStvcZpc5vte/H8w0cBRlbhjWV+3Tm97PjGJ
- MpGfDWLZv9EjRnif86aXW8LHmfbkJggktZ3F1Lk8VVAh3axR4OeGaFZVsiw19WA20XIb24qnD1Q
- QShmRdpjeBaekb3kPfyyNHUpeWMNhRqdCppVs9o4KzXqnXRqq1pDks9aEHiNQetGzQ29PCLUj24
- Qk0w0iVuf5BiWAMAdTNkNRi9K95231xAvy222EMb5q3lnyRKUBMW1gzlrE64lSjHc4Ky5P4VKd7
- Jyq2LOrIZe+NdnSpQXWA+nEn66rRv1GBLarJxe7mcV2scd3GY/4kZRnBEtV3DfKioh+DtTX8oaQ
- NBv1gjeYZEB2uKlP6zW0VN0S7lcFugiS+RkXw==
-X-Received: by 2002:a05:6830:82b9:b0:7e9:5de:cb93 with SMTP id
- 46e09a7af769-7eb7fe84cbfmr5548081a34.18.1783283194715; 
- Sun, 05 Jul 2026 13:26:34 -0700 (PDT)
+ bh=klE2x2XzaIhKmWEONFuHSoM/1+52qVuo/TNIOwbF0DQ=;
+ b=eopFl9A/iPRA6aHOrdtyFvMNx+j3sU6I9Nb/NuZBHYCMDyhBhzrGz9CC3ncQWOnnZ3
+ qkL8PaSpaZeFdCpfIrr02B0cA5fhefU3uKobUBQlDP2mtxmTbLelUdTK8ZgzwiihV8h0
+ hNbrbBZuiM15JxImV0yX9xCPDjniyzveJh2rJ9jTkZeMGruBI/Z90hlRXA7c3qr1PXSA
+ ropX0PVNL0cGSvJhkdBvf2EX9c757E7C2u3pSJO+/RcPxxXjrBPCCRkJ15x8xLOI3Q6A
+ xz8n7O5RsjTVYfkqCvgajSU1sAJVBtRDRJULOB9Gm4cX2kK8a5OM5MymUb3tAI6B5mTz
+ Mcuw==
+X-Gm-Message-State: AOJu0YyoDJUeyT4W9vVDq/7wD48ccpwako/yRXkheYcil0GjQY9kKb9N
+ 3yqAjIwDa+JPwfOuzOLPZf4o9NJ7LsD6D/QqJ7KxWK4XhLTwHoTbaAr+I1EQJGZrLrc=
+X-Gm-Gg: AfdE7cmZLuoq9BOcAvh/zIz5mXFntuVexa2wTPRo/YK2oixk0Z+cneKgxMCDDZjFBgU
+ SZL7QwwS5A26invGYLEWay/M+PuSdMeIezdoA9zp5K4y8BFsR5LtHI72N7p7QsAsuIy6FtrL09I
+ WdgkYvw+tHNBdWXg7DGM/it2Ut8imrHr+k6M/H/QSgG6Ch/OP5rBP63r6u8fukzE3wRrIukDFR5
+ rwGNen1/dXn5cUdFk2yL/FTe2PiQani3KrjYzfNKGqM6p48MDNzKbZh2aPHWyWt5geHJtS1imh8
+ CF3nUEgQwFnn93ZkpNYuBPXBfYltP8uw09MuqS+w5VvcgSAKAyM4EVLJ1J06uSEkKYbMatEEnT5
+ qlAjig75rNV9/xGS724XDHpaFV4/LpgGnomq/DK2lVR4qV9XC0NPPv1lRZF0eiPaJ+COe4n2fj4
+ kbuKn4wFBTmLHPyO3VBfKcWSwxTygF4PJHVxNrJ/+EXGEgVC0BlVcP495hXIocnDjhiPx0ULcFx
+ Z/vWveG36+mDUhS+nCHa3qhQGNhnYU5OekeKw==
+X-Received: by 2002:a05:6820:4ded:b0:69e:89f8:9640 with SMTP id
+ 006d021491bc7-6a32f65d920mr3458912eaf.18.1783283202116; 
+ Sun, 05 Jul 2026 13:26:42 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7eb8a1fe31bsm3490931a34.2.2026.07.05.13.26.33
+ 006d021491bc7-6a30ff8e0a0sm7817628eaf.3.2026.07.05.13.26.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 13:26:33 -0700 (PDT)
-Date: Sun, 5 Jul 2026 14:26:31 -0600
+ Sun, 05 Jul 2026 13:26:41 -0700 (PDT)
+Date: Sun, 5 Jul 2026 14:26:39 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Javier Tia <floss@jetm.me>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2 01/11] doc: Move the b4 guide into sending_patches
-Message-ID: <20260705202631.GP749385@bill-the-cat>
+Subject: Re: [PATCH v2 02/11] doc: Remove the patman documentation
+Message-ID: <20260705202639.GQ749385@bill-the-cat>
 References: <20260705193251.2190705-1-sjg@chromium.org>
- <20260705193251.2190705-2-sjg@chromium.org>
+ <20260705193251.2190705-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2q7wMoZ/wsWdXwEZ"
+ protocol="application/pgp-signature"; boundary="4UHT2aB9tRq4qnqA"
 Content-Disposition: inline
-In-Reply-To: <20260705193251.2190705-2-sjg@chromium.org>
+In-Reply-To: <20260705193251.2190705-3-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,19 +99,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2q7wMoZ/wsWdXwEZ
+--4UHT2aB9tRq4qnqA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 05, 2026 at 01:32:12PM -0600, Simon Glass wrote:
+On Sun, Jul 05, 2026 at 01:32:13PM -0600, Simon Glass wrote:
 
-> The b4 contributor guide sits in the coding-style document, which is an
-> odd place for it. Move it into sending_patches.rst, next to the patman
-> note, so both patch-sending tools are described together.
+> The full patman manual now lives with the standalone patch-manager
+> package, making the 1000-line copy in the tree redundant.
 >=20
-> The b4_contrib label moves with it, so the reference from process.rst
-> still resolves.
+> Remove the in-tree manual, its README and the doc/develop/patman.rst
+> toctree page.
+>=20
+> The sending-patches guide already introduces patman, so point it at the
+> patch-manager package instead of the now-dead ':doc:' cross-reference
+> and, with the manual gone, add a couple of lines on how the tool works.
+> Point the SPI howto at that guide too, rather than repeating the install
+> details.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 
@@ -122,15 +125,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---2q7wMoZ/wsWdXwEZ
+--4UHT2aB9tRq4qnqA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakq99AAKCRAr4qD1Cr/k
-ChBsAPsGNkNXeJzjix+BytJKSyKOxxFEBn7B9FWJDf82wwh5VQEAgZEFrIauCizI
-ZWquueFinUH33xwZ0xtTAUpFHdiESgo=
-=Rmsx
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakq9/gAKCRAr4qD1Cr/k
+CmTNAP91JLZ4JTvk85x9RFZD1i6dakJZiKXvbQYlP6wcPDaB8QD+PJIJqCsmp4Kh
+UM0JLfqe8kdwMKyC4yOnGVhFgj/BWA4=
+=02Xd
 -----END PGP SIGNATURE-----
 
---2q7wMoZ/wsWdXwEZ--
+--4UHT2aB9tRq4qnqA--
