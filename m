@@ -4,101 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50514C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 13:07:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A03CC43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 15:21:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D84C98490A;
-	Sun,  5 Jul 2026 15:07:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A088F841F2;
+	Sun,  5 Jul 2026 17:21:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="TL87gnAA";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="fu9RESIK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6729484942; Sun,  5 Jul 2026 15:07:42 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id E2A87846F8; Sun,  5 Jul 2026 17:21:22 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9708846F8
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 15:07:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF4CF83314
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 17:21:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eric.chung@riscstar.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2ca70925c25so25446805ad.1
- for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 06:07:39 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5aeb8870485so2465316e87.2
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 08:21:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783264880; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Wy332WX+JeBy8z7Fjhge9rz+s/GXD4272z8iQYAyoDyvejfTMgzfcXCCkwzHLH7GlF
+ Fbm3Xi4uHmHdipUTEShuNbf4KCSZMdRWlhE8gxpAXPBVkqITIklKzCdaD4GQ3kjeeifa
+ MtdmndwnytnL+Q61AMTfEKCZwr2NJ/CeurlyImZSEP+20gVtz8HfcP9Sthq9mkfv5aHZ
+ tCJjGuljvLnWFFTd9HzZh7ob0zB2AdjZPpZbPp3ziANojFeJ77gKwtZYSmBrGdqfQaUk
+ gRG7t7Uuy7QWFILxHuBwJXMPzZo7pNwmbsaOnrL59grCE/hlZiOvzsI1IZpEg3l16b5E
+ 6vkw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=KQ04O+NVoASu7NvGx4dVkzL1yACET+kJR0JgxnYA5SM=;
+ fh=j8WP9ikAYecthPDilNISmELVe1A7jNJ2Ezu9jYnxyBs=;
+ b=lkyXNWSj2imCjpyjydAFUqHMXWPybakmH5GH7WXIECLyIWsGdn/hoodQswzklSave3
+ jmw8qtOsZ9JgQi3Omel1Jw0qvsC8Jo0tTrRMOCQ0QCGjAPHMiwSxezxKXNmBkRHaiEyI
+ Cn3ow4AD+2ZhWUG1GEUDdhhWrqzHWDbDRuppJujQg4QPaqSlrThx8MjE/JlR+mADMq+D
+ tAerKUQ6NCuUIB1Pd196IY6K5dD0tzD4uIqJVIoUqLGecJfEli0Gw6kSudh0ebJecFD/
+ sDxMSuEfmo+lF2bezoxSATIiH3E/xPfGOTFs5m3dkNOhPMptNYzQ/0Tb4lcS7n3UAqef
+ 74Zg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783256858; x=1783861658;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783264880; x=1783869680;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=WxyWaTtemX3Tr2w4JycOOHGI3BlxkU0pxeZFlkvJWNU=;
- b=TL87gnAA3QEDm5Jhh3iLkvR01Uxoe8vWzsKZh2x5zSG/qhaFAXKN5ZmhTuwnkcIXTH
- FJWXqBzdsKmrYv4SOmk64lAhmIESOsAurVxn+cKNuSPdykn99HJuUM5z2HmgbndIYGZb
- QRnAjfEGmHOTJRi7jwPfPUGfr2sFIH1KD+ssyyoXFY+JmgnoCsLZmdGESLNHfPx+fYw1
- EcfSvpaRjnn0DhV+hKPNXgdTWB/LOHc21quwl+BEQW0fGuVzXPutJmvIsNhUX5iaVbrb
- v0x9Ug6ZSRKEu9OuK04fh8hal5ZZaHtar0wgdkFHXV6KqUaRm8DRD1k7HGiWt2n3djeD
- /9DQ==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KQ04O+NVoASu7NvGx4dVkzL1yACET+kJR0JgxnYA5SM=;
+ b=fu9RESIKfXrT6erVybTU/2cfAZ4fsEg1XunvN6Hd+nqMYkQfISbBGXbfnpB5/SvqIw
+ p+2By35WADED75/q5ptbhTxnnS0muPiA39kV58lLD1KN03N2X9gVO7TtoFJycWaTpYVY
+ yG4Ydjbf7rOW4Hu+NEPv5sB+6KZRwgNTXlG3gmfs9UBlWn8B7rgzBOr9srQkhyeXtv22
+ 9uQZDWjrUJwvMKoVYMzHLGJ/iBEZMkX7s/psLjoWCzb/dC3NxpQaK12eDDJFWUjT0IMn
+ G3XyohqnmLJPpmYynzik/gaZnLpY6sEWQMUJX4ZLdQdzxWEcAv5XmTJVaK1Mi0doTP3z
+ lW6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783256858; x=1783861658;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WxyWaTtemX3Tr2w4JycOOHGI3BlxkU0pxeZFlkvJWNU=;
- b=hHBr6Yo2i0Ttd8JRO2wa+pL+yUU/+l3Gmy7B0zUMq0Fv2sq1xaBBPJJXdQ/2oyK9FE
- 36ORzIxhaK8ZqIf2UHJuPTM0l67pkz/QxXCxkBq2lwWo5ZfKQVO4YGkdEtGWrzdZ7gUB
- BWY5bzKSpYNu+Yehfbtuxwe0ePvfx3DO0hs6bxTcuoXD1INRpYJo5EutYnVUYkdpTMRI
- LLXWhMhLL7lW1P0gm1ogjnsHuJlt5mb3Qip4I7nYbb/peycDcucRWtD0SyD50stJeK24
- 29P+p35vlc2i92NSq4UX0alfnG5FOKvGaaCZDtmWvJuXY26sBohFaJ2lRb6yjC7yP0AC
- oMig==
-X-Gm-Message-State: AOJu0Yw2br4Ybze3dw/so8DV0CzrSQ/ynLbxgA4AkVGFoSBGlzHF+d28
- GkUfbW80WmX22d5Bg291zXza+8W8l9WPCjkhEYXTt9e5KIxjdHd46CM/xpqSVHyd+sY=
-X-Gm-Gg: AfdE7cm1eYWvu/DiFahf0Eumu8wo9xXCCAl5CdJ2A4EDPuSq8f5OgBO96dJfuEHwx4m
- sU3ybN6MJvkFCadi6u4h42gMptdJXPnxpXAYfFO9o8YJoH+PgGKCOW99Q4kTfvMWV8xnQlHZMCK
- kTxSl+qajvK+FOsJu8vLV3vWnhrkcQhTcqtaBaS8MXuFpGu3WVklISn0r/3fCF1an/GOr+W5tx9
- kPrSdyKvH+0iBsSU7LFaLhGAkYqqX69UlGucTuuhUpHfG5bXpT1UrnaOba6WrFFJqzRQaCXp12j
- 3XBN1COAQwjevp5APKBon96ZfvH1iXJmjRl8WYHRSXxXD4xY+ln/XZsOdX2XPiR43LfLZ9nu7fb
- kT87PJn9b5dtSsysM1Qo8dCqKFr2tq+zT6WX+JbG+Jy6lQsZgqaPJyCp6QA3TfDvcHkMoPm+A3/
- 72arMOWDmR1o/lhZvDAJqCfdDj7MNHIN9A9Tis9rKkV4bH1EHjmRVVJxbxrpk4BpphdUmSN+4GV
- oP5+8RbWFH6cI5uVlcDzJxr6OGF0JoH7WWAf84NpzMaUkmg5cZW
-X-Received: by 2002:a17:903:1b25:b0:2c9:c54a:7915 with SMTP id
- d9443c01a7336-2cbb75020a0mr57299815ad.14.1783256858372; 
- Sun, 05 Jul 2026 06:07:38 -0700 (PDT)
-Received: from [127.0.1.1] ([120.204.57.249]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cad71458f6sm34272305ad.32.2026.07.05.06.07.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 06:07:37 -0700 (PDT)
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Sun, 05 Jul 2026 21:06:29 +0800
-Subject: [PATCH 3/3] dts: spacemit: add PCIe nodes and enable in defconfig
+ d=1e100.net; s=20251104; t=1783264880; x=1783869680;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KQ04O+NVoASu7NvGx4dVkzL1yACET+kJR0JgxnYA5SM=;
+ b=phf+tHXIre/UF82frU1wVA3FqcJ9eU9rTw3Ev5wuJxeJW6rIHQ/P/qHdadZQ5yr3q4
+ kIjcaxWNTYjSkXFkqIizTA3HucWX/UuJoId4HF1mqA7VzDOAnbIyZTWdS6GxPIEGgvN3
+ ns+hq6sdeZXYUZtnyjmK1J4cEMaxNgw9tfn7x/gTBjseOl8Xuhk1kA7cDwrutQ3KBloH
+ 8p1NsVCleMgWJEFQ15f7ZExIwwdpEKOvmp0ijQL0QOpKm+m0zvbVG+0FzGj1zQIDviWn
+ Uq+BB1hvB3fkVDjJhcYbe7Y0Q3PzWSIF1OnlubDt//Rd+iMPtG+Lvqg6env1S2KoIZEu
+ 5oug==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq59KuPTvzoDIOxYMMPJpwNU2oinb4rJEmZPswCczt3/v0MvbFCxt8gAjE+9fPQs1hlA+HZGTY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxy2yJo1tK0O3OLNlE6RYIFum+k8YfPuQksTgdYQ7jz5wvN3Vzo
+ jVIO2CuJrEpfv8VRof8h83rT4wUHBUDBs8uguKLOO35vlPqb3OrEJRfcW2OPiUlRc8eLq8rsaew
+ FZ9qmSj92ZUSVdhgWQVsVG4/Zc93dWcpKzquf5xKKMA==
+X-Gm-Gg: AfdE7cmUfT7v1jRbjsD5oqRQeMMoNK/WEO/CTWj6ebs97bJRdukBOaoZW4pD3ElpPVT
+ GHOn/YlFukbGupjHy/B59P7pPBooFiY+HFEDjj6Ki0KnVTU98fTwwnWnopr0QqakEIND7m8aQIC
+ fRwigxEBHfyHnYFyuhwgPkmfGlyeKhIwl1/iTTQcCplJkivTqTloJI5tKHvOapmJUTHldyARLuz
+ BabjP5oHL6ee9DC4Yh8GlONFPmy9Vwsvy/qm9+fbLll/eXTjehvU11Z9hDW9yVVmLWlEpk8RuBU
+ lXFoWOP6w4RCIYLAcX22vIdfywdkoNXFZkL6c2G2JgRJ/bCUC4CaipAjXGLBOjL4EEizBTSoEW8
+ iNp/g5bJgJtLcSI8wK7H0IBvJzUwKjRfrwhj8M4yg
+X-Received: by 2002:ac2:5bc4:0:b0:5ae:c7a2:69a2 with SMTP id
+ 2adb3069b0e04-5aed50b6703mr1042985e87.39.1783264878075; Sun, 05 Jul 2026
+ 08:21:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260705-pci-v1-3-beca83440a27@riscstar.com>
-References: <20260705-pci-v1-0-beca83440a27@riscstar.com>
-In-Reply-To: <20260705-pci-v1-0-beca83440a27@riscstar.com>
-To: u-boot@lists.denx.de, u-boot-spacemit@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- David Lechner <dlechner@baylibre.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Alice Guo <alice.guo@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Johan Jonker <jbx6244@gmail.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tim Harvey <tharvey@gateworks.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Pranav Sanwal <pranav.sanwal@amd.com>, Ye Li <ye.li@nxp.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, Guodong Xu <guodong.xu@riscstar.com>, 
+References: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
+ <20260705-m4-v3-3-5a9bc7f25fc5@riscstar.com>
+ <52987597-bb11-4193-a28e-223eeab093eb@altera.com>
+In-Reply-To: <52987597-bb11-4193-a28e-223eeab093eb@altera.com>
+From: Eric Chung <eric.chung@riscstar.com>
+Date: Sun, 5 Jul 2026 23:21:05 +0800
+X-Gm-Features: AVVi8CeTLoEEmborECQPN0i-LW5n-LDei_GmHw2wPiDGW9Xt0u7ZyImN03cnRMc
+Message-ID: <CAH22mJwTcvbvoR=Bp2VLm3tgVpVx+wNF9+y-ua37Vw50Qw2O0w@mail.gmail.com>
+Subject: Re: [PATCH v3 3/9] mmc: sdhci: enable CMD23 for multi-block transfers
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+Cc: u-boot-spacemit@groups.io, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
+ Yanir Levin <yanir.levin@tandemg.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>,
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, Johan Jonker <jbx6244@gmail.com>, 
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>, 
- Eric Chung <eric.chung@riscstar.com>
-X-Mailer: b4 0.15.2
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Guodong Xu <guodong.xu@riscstar.com>, 
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,391 +134,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add PCIe controller, PHY and root port device tree nodes for
-K1 SoC on Banana Pi F3 and MusePi Pro boards. Enable the
-PCIe driver and NVMe support in spacemit_k1_defconfig.
+On Sun, Jul 5, 2026 at 5:52=E2=80=AFPM Kathpalia, Tanmay
+<tanmay.kathpalia@altera.com> wrote:
+>
+>
+> On 7/5/2026 11:37 AM, Eric Chung wrote:
+> > Enable the host controller's support for the CMD23 (SET_BLOCK_COUNT)
+> > command to manage multi-block read/write operations. This allows the
+> > MMC core to use CMD23 in preference to the legacy CMD18/CMD25 plus
+> > CMD12 sequence, reducing command overhead and improving I/O
+> > performance on multi-block transfers.
+> The commit message claims this enables "host controller" support, but the
+> changes are entirely in the MMC core (mmc.c) and header. No SDHCI host
+> driver sets MMC_CAP_CMD23 in this patch. mmc_write_blocks() in
+> mmc_write.c is not touched. CMD25 still always follows with CMD12.
+>
 
-Signed-off-by: Eric Chung <eric.chung@riscstar.com>
----
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 151 +++++++++++++++++++++++++++++
- arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  | 153 ++++++++++++++++++++++++++++++
- configs/spacemit_k1_defconfig             |   8 ++
- 3 files changed, 312 insertions(+)
-
-diff --git a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-index 582bd61d27c..d9370c58650 100644
---- a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-+++ b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-@@ -3,6 +3,7 @@
-  * Copyright (C) 2026 RISCstar Ltd.
-  */
- 
-+#include <dt-bindings/phy/phy.h>
- #include "binman.dtsi"
- 
- / {
-@@ -98,6 +99,123 @@
- 
- / {
- 	soc {
-+		pcie-bus {
-+			pcie0: pcie@ca000000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca000000 0x0 0x00001000>,
-+				      <0x0 0xca300000 0x0 0x0001ff24>,
-+				      <0x0 0x8f000000 0x0 0x00002000>,
-+				      <0x0 0xc0b20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <0>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0x8f002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0x80000000 0x0 0x80000000 0x0 0x0f000000>;
-+				interrupts = <141>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE0_DBI>,
-+					 <&syscon_apmu CLK_PCIE0_MASTER>,
-+					 <&syscon_apmu CLK_PCIE0_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE0_DBI>,
-+					 <&syscon_apmu RESET_PCIE0_MASTER>,
-+					 <&syscon_apmu RESET_PCIE0_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03cc>;
-+				phys = <&combo_phy PHY_TYPE_PCIE>;
-+				phy-names = "pcie-phy";
-+				status = "disabled";
-+
-+				pcie0_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+
-+			pcie1: pcie@ca400000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca400000 0x0 0x00001000>,
-+				      <0x0 0xca700000 0x0 0x0001ff24>,
-+				      <0x0 0x9f000000 0x0 0x00002000>,
-+				      <0x0 0xc0c20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <1>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0x9f002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0x90000000 0x0 0x90000000 0x0 0x0f000000>;
-+				interrupts = <142>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE1_DBI>,
-+					 <&syscon_apmu CLK_PCIE1_MASTER>,
-+					 <&syscon_apmu CLK_PCIE1_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE1_DBI>,
-+					 <&syscon_apmu RESET_PCIE1_MASTER>,
-+					 <&syscon_apmu RESET_PCIE1_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03d4>;
-+				phys = <&pcie1_phy>;
-+				phy-names = "pcie-phy";
-+
-+				pcie1_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+
-+			pcie2: pcie@ca800000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca800000 0x0 0x00001000>,
-+				      <0x0 0xcab00000 0x0 0x0001ff24>,
-+				      <0x0 0xb7000000 0x0 0x00002000>,
-+				      <0x0 0xc0d20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <2>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0xb7002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x17000000>;
-+				interrupts = <143>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE2_DBI>,
-+					 <&syscon_apmu CLK_PCIE2_MASTER>,
-+					 <&syscon_apmu CLK_PCIE2_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE2_DBI>,
-+					 <&syscon_apmu RESET_PCIE2_MASTER>,
-+					 <&syscon_apmu RESET_PCIE2_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03dc>;
-+				phys = <&pcie2_phy>;
-+				phy-names = "pcie-phy";
-+
-+				pcie2_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+		};
-+
- 		storage-bus {
- 			sdhci0: mmc@d4280000 {
- 				bootph-pre-ram;
-@@ -172,6 +290,39 @@
- 	vmmc-supply = <&buck4_3v3>;
- };
- 
-+&combo_phy {
-+	status = "okay";
-+};
-+
-+&pcie1_phy {
-+	/*
-+	 * pinctrl must stay disabled on PHY nodes: the default pcie1_3_cfg
-+	 * removes the pull-up on CLKREQ# (open-drain), leaving it floating
-+	 * when the endpoint does not actively drive it low.  Without a valid
-+	 * CLKREQ# the controller will not complete link training.
-+	 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie1_3_cfg>;
-+	status = "okay";
-+};
-+
-+&pcie2_phy {
-+	/*
-+	 * pinctrl must stay disabled on PHY nodes (see pcie1_phy above).
-+	 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie2_4_cfg>;
-+	status = "okay";
-+};
-+
-+&pcie1_port {
-+	phys = <&pcie1_phy>;
-+};
-+
-+&pcie2_port {
-+	phys = <&pcie2_phy>;
-+};
-+
- &binman {
- 	u-boot-spl-ddr {
- 		type = "section";
-diff --git a/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi b/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-index ac67db13d7b..20fe71cdc40 100644
---- a/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-+++ b/arch/riscv/dts/k1-musepi-pro-u-boot.dtsi
-@@ -4,6 +4,7 @@
-  */
- 
- #include <dt-bindings/clock/spacemit,k1-syscon.h>
-+#include <dt-bindings/phy/phy.h>
- #include "binman.dtsi"
- 
- / {
-@@ -253,6 +254,125 @@
- 
- / {
- 	soc {
-+		pcie-bus {
-+			pcie0: pcie@ca000000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca000000 0x0 0x00001000>,
-+				      <0x0 0xca300000 0x0 0x0001ff24>,
-+				      <0x0 0x8f000000 0x0 0x00002000>,
-+				      <0x0 0xc0b20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <0>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0x8f002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0x80000000 0x0 0x80000000 0x0 0x0f000000>;
-+				interrupts = <141>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE0_DBI>,
-+					 <&syscon_apmu CLK_PCIE0_MASTER>,
-+					 <&syscon_apmu CLK_PCIE0_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE0_DBI>,
-+					 <&syscon_apmu RESET_PCIE0_MASTER>,
-+					 <&syscon_apmu RESET_PCIE0_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03cc>;
-+				phys = <&combo_phy PHY_TYPE_PCIE>;
-+				phy-names = "pcie-phy";
-+				status = "disabled";
-+
-+				pcie0_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+
-+			pcie1: pcie@ca400000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca400000 0x0 0x00001000>,
-+				      <0x0 0xca700000 0x0 0x0001ff24>,
-+				      <0x0 0x9f000000 0x0 0x00002000>,
-+				      <0x0 0xc0c20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <1>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0x9f002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0x90000000 0x0 0x90000000 0x0 0x0f000000>;
-+				interrupts = <142>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE1_DBI>,
-+					 <&syscon_apmu CLK_PCIE1_MASTER>,
-+					 <&syscon_apmu CLK_PCIE1_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE1_DBI>,
-+					 <&syscon_apmu RESET_PCIE1_MASTER>,
-+					 <&syscon_apmu RESET_PCIE1_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03d4>;
-+				phys = <&pcie1_phy>;
-+				phy-names = "pcie-phy";
-+				status = "okay";
-+
-+				pcie1_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+
-+			pcie2: pcie@ca800000 {
-+				device_type = "pci";
-+				compatible = "spacemit,k1-pcie";
-+				reg = <0x0 0xca800000 0x0 0x00001000>,
-+				      <0x0 0xcab00000 0x0 0x0001ff24>,
-+				      <0x0 0xb7000000 0x0 0x00002000>,
-+				      <0x0 0xc0d20000 0x0 0x00001000>;
-+				reg-names = "dbi", "atu", "config", "link";
-+				linux,pci-domain = <2>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges = <0x01000000 0x0 0x00000000 0x0 0xb7002000 0x0 0x00100000>,
-+					 <0x02000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x17000000>;
-+				interrupts = <143>;
-+				interrupt-names = "msi";
-+				clocks = <&syscon_apmu CLK_PCIE2_DBI>,
-+					 <&syscon_apmu CLK_PCIE2_MASTER>,
-+					 <&syscon_apmu CLK_PCIE2_SLAVE>;
-+				clock-names = "dbi", "mstr", "slv";
-+				resets = <&syscon_apmu RESET_PCIE2_DBI>,
-+					 <&syscon_apmu RESET_PCIE2_MASTER>,
-+					 <&syscon_apmu RESET_PCIE2_SLAVE>;
-+				reset-names = "dbi", "mstr", "slv";
-+				spacemit,apmu = <&syscon_apmu 0x03dc>;
-+				phys = <&pcie2_phy>;
-+				phy-names = "pcie-phy";
-+				status = "okay";
-+
-+				pcie2_port: pcie@0 {
-+					device_type = "pci";
-+					compatible = "pciclass,0604";
-+					reg = <0x0 0x0 0x0 0x0 0x0>;
-+					bus-range = <0x01 0xff>;
-+					#address-cells = <3>;
-+					#size-cells = <2>;
-+					ranges;
-+				};
-+			};
-+		};
-+
- 		storage-bus {
- 			sdhci0: mmc@d4280000 {
- 				bootph-pre-ram;
-@@ -327,6 +447,39 @@
- 	vmmc-supply = <&buck4_3v3>;
- };
- 
-+&combo_phy {
-+	status = "okay";
-+};
-+
-+&pcie1_phy {
-+	/*
-+	 * pinctrl must stay disabled on PHY nodes: the default pcie1_3_cfg
-+	 * removes the pull-up on CLKREQ# (open-drain), leaving it floating
-+	 * when the endpoint does not actively drive it low.  Without a valid
-+	 * CLKREQ# the controller will not complete link training.
-+	 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie1_3_cfg>;
-+	status = "okay";
-+};
-+
-+&pcie2_phy {
-+	/*
-+	 * pinctrl must stay disabled on PHY nodes (see pcie1_phy above).
-+	 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie2_4_cfg>;
-+	status = "okay";
-+};
-+
-+&pcie1_port {
-+	phys = <&pcie1_phy>;
-+};
-+
-+&pcie2_port {
-+	phys = <&pcie2_phy>;
-+};
-+
- &binman {
- 	u-boot-spl-ddr {
- 		type = "section";
-diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
-index 1c92c4082a7..08f207c09bc 100644
---- a/configs/spacemit_k1_defconfig
-+++ b/configs/spacemit_k1_defconfig
-@@ -108,6 +108,14 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_MEMINFO=y
- CONFIG_CMD_MEMINFO_MAP=y
- CONFIG_EFI_PARTITION=y
-+CONFIG_PCI=y
-+CONFIG_CMD_PCI=y
-+CONFIG_NVME=y
-+CONFIG_NVME_PCI=y
-+CONFIG_CMD_NVME=y
-+CONFIG_PCIE_DW_SPACEMIT=y
-+CONFIG_PHY=y
-+CONFIG_PHY_SPACEMIT_K1_PCIE=y
- CONFIG_SPL_SPI=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_SPL_DM_SPI_FLASH=y
-
--- 
-2.51.0
-
+Thanks. I'll apply all fixes.
