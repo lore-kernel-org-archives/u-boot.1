@@ -4,81 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0E4C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 19:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B444CC43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 19:42:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19D5884A06;
-	Sun,  5 Jul 2026 21:33:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 40F3D846F8;
+	Sun,  5 Jul 2026 21:42:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EjdWncsm";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="INB77Gfs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8503F84832; Sun,  5 Jul 2026 21:33:54 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 176A4846F8; Sun,  5 Jul 2026 16:56:01 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69ED184A06
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 21:33:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE84B83314
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 16:55:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-4472500e25fso917078fac.1
- for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 12:33:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783280031; x=1783884831; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gOccMyhIGwhtKNxipFUd2BiSYd/WP+w6RweOier42o8=;
- b=EjdWncsmkFMw2b4QidQFDKAJAH0JOc1n+x1IlUhDR6XSWPhJX+sE3BB0vnwx3eqRAo
- Pbo0Loy2r4lGEstnzJenP+/8HTn6P9FXuDhjRgkxR/C4Q3bTAsD9fOa722IWAftvnU4D
- bjwid850xJWCQb58lNkB8DUlpDzut1JcuQQrg=
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 75D1B3F1F4
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 14:55:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1783263358;
+ bh=O2pzYYWiHcShaqwLIbGpBClWrBJ5BZCcPxARsOq9X3Y=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=INB77Gfs7mhS+kGhvHJ2cMZbG08RN5xryqwkKxByYFzq8FukKid7PbXkxL+CT3xnF
+ LLg7gPB+EaE9dAVEZFFEl9PgzivMvvhJYiSJbCypMkfvn7AZRTiKqfpo/Vv7lj0l5Y
+ 65T8PT8npPdxYQ0PLRd25jp4IMu9tQY+HI6aBzTBae6Ew3AoQjDnDT5LPOjxoueKrC
+ wub05jNTD62vfblRjYrHfdB+SCbStIZCXTF6bBkb/Am0wkQLVjf7/HcbdZf5is40/f
+ UmgPRgAYnoE+084fPV2AB7aQz3TRWvmhwxfwDQprYhSTztcQRoHmkuy5P7+5VwEcfF
+ opEGKFCLiXMRKeXJXDoYtHXyriWnP5Q5dQKBuunbFQrDurWn/1piACWkSpW8xQe/DU
+ 1ojFftRLfLkLHy1Ti/LxO7ncbifEngBNN7+AEHNwTm4cGI6rAzmwQfLDIMsDeUTvm1
+ x0k1aca8WrB1+vMdBvbVK6oR+DhmlpG/2ddIovsdKZ1pRTDR4P5Ql0hnpejQvTF/PR
+ HjDZ3vGvOzuKmwKJfzz2KxeHo6KNBq7Gc4H0LPvdLTZrjow1gO57QLKklI86ZF/iY+
+ iJcVglCDe02vIBB9l9u0OPbr639liNXx/PQESIFomxp+p7oUDk3IvSM6ouiA3RPW0H
+ +onixWmec/nsvk2EldlCA+7g=
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-8479cc04d8fso3692392b3a.2
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 07:55:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783280031; x=1783884831;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gOccMyhIGwhtKNxipFUd2BiSYd/WP+w6RweOier42o8=;
- b=E2QNitrsujrQYIeCqMTqD9Z/FfG6MgoTxTK/DLTlnQgCd4kvHJknRW7kpUsWmx0s5h
- dwNvFzRxCSbPFTMh9aGbJngwFFkbs7+yD/KE0OHNadQXwqPZ7WUjg8phe9H71sinulY8
- 9AYmYzVXvB2hvdUA8i0kfphSX4FNtn7P9YrEghBvq26nVD7++Ki60CBSjF7/qrLbRtRO
- ESsQBztq2IHEvlHX4lCJEBnfgIevv+tgTQRJnB+6VFR22YZlVpYzCQWppd5FeDdDU80F
- bXad3HYn1l5ixWdIhggCqWw2QsWDHH4i3LIEH1DeGNScQ+qqkmp0jBXyjUxAy2NCDqMR
- pw5A==
-X-Gm-Message-State: AOJu0YyWa0CG+yjcVqah7U4OnZAY5bk7Io1Tm3X00j/rddjFhNy8Ysic
- 2N2vy0peDjlT5BvFX4QJTEaeiOsDnhrHHlYRvjU94UP5uYcRzKYz1P6PWctM457qfgMPiTOGdEe
- zYQMvjQ==
-X-Gm-Gg: AfdE7cll5hb21sTSmHgFN2GDLr9MRd+RYJR/epuy9Xrxybd+2D9K8mcpAjbJF1yACy3
- VN+lwLnpbP3QBH7Skr9wVbaaPoJW5y4MANMhkPhUoB/YpGjKxUJ7bB0V+kn/RGKi8uPwgwcPCwt
- Io238tKm/yd3LSwJmQvdOg8GaQ7ooafp7uCHgFUsAKr9lXaYa3Klpdpzy9lX96UybhwvOSnEMQI
- vPfsm0qfxwAGqcKZC5MUkvb0nca2JifJo5fUhfgDFYI5pQyo3nkSk3Gmx8wTNCAzX6C30KrsOTp
- 6dMH1q6s7NEsRXNtZ2VY5vBbpRL2kfzoyAPKNBo0ie/TUICFmdwGWqjaJNvmcSrFfVCdfTLqYqF
- upAZzn6AfYj4yS53egU8eXX9x0fhTOQgQ4fWDiC/L//3jvy72cw5EsZwlHzqrRAnMwt+pTpIX1Z
- jZIdm8t18=
-X-Received: by 2002:a05:6820:206:b0:6a0:db91:ad3f with SMTP id
- 006d021491bc7-6a32f5412b2mr5223730eaf.37.1783280031142; 
- Sun, 05 Jul 2026 12:33:51 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a3103e064esm7513448eaf.14.2026.07.05.12.33.48
+ d=1e100.net; s=20251104; t=1783263357; x=1783868157;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=O2pzYYWiHcShaqwLIbGpBClWrBJ5BZCcPxARsOq9X3Y=;
+ b=MWhmEFOAR7NZovgy/Jgx3Qfg2gZrSBz3nfiprjq3O0MHCfnr+IkF6Hz/xLT92UirBP
+ Gp3+iBcshIiBmdXoo4nT3068/7paPHqfyglhBpxdirYffHMzwtegZ6tzCR5WbFHEJU91
+ TAVYfOv/I7o/weasCD4gZSp8TPeABVpHTay78q76cD71iJpBEuOr5X/OOOlWrJE7cur9
+ QH4o6KNJweZiVFguIyNdcV+uW7GhSo45XFtHK0BGthpx+SorOEEXqbxqk3l8Y9PmjaqI
+ FZLyvLBu6Hhiq64SVF1qsDwieliWaQNdvJSIaAPzOqtAU2N23CxMoJmRQ4FBToo5lCsa
+ p58Q==
+X-Gm-Message-State: AOJu0YzFpvX8g7W5EA76Yd7NhQok78yHiygK3t+gMAPl8J6dzHVN/P2I
+ r4BBOFDGIN0aMYXZBQfadV3d9bPFWqSzyxxW76ctkOJcKADMioaVo29kdmQdZif8arYg61DYjbZ
+ /oOy7K15CVGvVDrbmC5AQ7hHc1SHVTRvjwMO2HOM5ha/VfZim3mwvbhiSYhbED775YyjrUBkOdM
+ gZAOQ6hg==
+X-Gm-Gg: AfdE7clbf3BFW4Tq6x9yde1JmhJhT6F7FDKNJPaF5YHRvOGpBJyaX3aLFtbxTl3IZHl
+ UEyE2PATxKS8D+NA1DYBjPlJsi2kKtd6HtfZlrkVYgwqSvShIYhXuQhjjAqcN5S4trVsqx46mNN
+ zO7jeGIyAG9gAmtqIc25K7oPLWFqOlsBkvEHMUjqz2ZVPbUz5vDysgJin14EioeuCwAEPfE0lWc
+ Ml+Ms5L3l1qkeO1GELfU4o42EzQgQ4JnTl/F88CirRwm/or5P6pvALvDVC3TIdtnr+GgQNISYJd
+ +5VpCkljfdqnzlIGCo2QMKOwL4JPSmm1775JIBhK5nw9qfpMBKdmv6uHplacMPrNxUZAZUet0TD
+ I4N2mikZjs4AXaBhIg+0EhDpT9kRZJiuP8JGvns8Syx7NVgZtDFfLKjq9+Vx/xCvuGB+/HShiWW
+ TbpvIU
+X-Received: by 2002:a05:6a00:893:b0:842:3a3b:d6e7 with SMTP id
+ d2e1a72fcca58-847f6dd586emr5929981b3a.23.1783263356867; 
+ Sun, 05 Jul 2026 07:55:56 -0700 (PDT)
+X-Received: by 2002:a05:6a00:893:b0:842:3a3b:d6e7 with SMTP id
+ d2e1a72fcca58-847f6dd586emr5929966b3a.23.1783263356399; 
+ Sun, 05 Jul 2026 07:55:56 -0700 (PDT)
+Received: from noble-uboot.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c9e91b06f0esm4657856a12.15.2026.07.05.07.55.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 12:33:49 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
+ Sun, 05 Jul 2026 07:55:55 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, E Shattow <e@freeshell.de>,
+Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH v2 11/11] test: Stop running the patman tests
-Date: Sun,  5 Jul 2026 13:32:22 -0600
-Message-ID: <20260705193251.2190705-12-sjg@chromium.org>
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: [PATCH v1] bootm: teach handle_decomp_error() about the noload
+ decompression buffer
+Date: Sun,  5 Jul 2026 14:51:22 +0000
+Message-ID: <20260705145445.2339-1-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260705193251.2190705-1-sjg@chromium.org>
-References: <20260705193251.2190705-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 05 Jul 2026 21:42:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,44 +117,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patman tests no longer exist in the tree, so drop them from the
-test/run script (used by 'make tcheck' and friends) and from the
-tools-testing example in the documentation.
+For a compressed kernel_noload image, bootm_load_os() allocates a
+per-image decompression buffer of ALIGN(image_len * 8, SZ_1M) rather
+than the global CONFIG_SYS_BOOTM_LEN. When decompression fails on that
+path, handle_decomp_error() still prints
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+    Image too large: increase CONFIG_SYS_BOOTM_LEN
+
+which is misleading: increasing CONFIG_SYS_BOOTM_LEN does not help
+because the smaller per-image buffer is the actual bound. Commit
+2ff26c1e378d ("bootm: fix overflow of the noload kernel decompression
+buffer") worked around this by printing a follow-up note right after
+handle_decomp_error() returned, but the boot log then reads as two
+contradictory sentences.
+
+Introduce enum bootm_decomp_limit and pass it into
+handle_decomp_error() so the helper picks the right message in one
+place. For the noload path it now prints
+
+    Image too large for the kernel_noload buffer (0x100000 bytes)
+
+quoting the actual buffer size; the global path is unchanged. Drop the
+trailing note in bootm_load_os() so only one line is printed.
+
+Suggested-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
+ boot/bootm.c | 39 ++++++++++++++++++++++++++++++---------
+ 1 file changed, 30 insertions(+), 9 deletions(-)
 
-(no changes since v1)
-
- doc/develop/testing.rst | 2 +-
- test/run                | 1 -
- 2 files changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/doc/develop/testing.rst b/doc/develop/testing.rst
-index 3a2b496fa00..1d19b49e82c 100644
---- a/doc/develop/testing.rst
-+++ b/doc/develop/testing.rst
-@@ -22,7 +22,7 @@ the quick ones, type this::
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 803d6406be4..a727bfea079 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -575,6 +575,19 @@ static int bootm_find_other(ulong img_addr, const char *conf_ramdisk,
+ #endif /* USE_HOSTC */
  
-     make qcheck
+ #if !defined(USE_HOSTCC) || defined(CONFIG_FIT_SIGNATURE)
++/**
++ * enum bootm_decomp_limit - What bounded the decompression buffer.
++ * @BOOTM_DECOMP_LIMIT_GLOBAL:    Global CONFIG_SYS_BOOTM_LEN limit.
++ * @BOOTM_DECOMP_LIMIT_PER_IMAGE: Per-image buffer sized from the
++ *                                compressed image (e.g. the
++ *                                kernel_noload noload decompression
++ *                                buffer).
++ */
++enum bootm_decomp_limit {
++	BOOTM_DECOMP_LIMIT_GLOBAL,
++	BOOTM_DECOMP_LIMIT_PER_IMAGE,
++};
++
+ /**
+  * handle_decomp_error() - display a decompression error
+  *
+@@ -585,11 +598,14 @@ static int bootm_find_other(ulong img_addr, const char *conf_ramdisk,
+  * @comp_type:		Compression type being used (IH_COMP_...)
+  * @uncomp_size:	Number of bytes uncompressed
+  * @buf_size:		Number of bytes the decompresion buffer was
++ * @limit:		Which allocation actually bounded the buffer, so the
++ *			hint points at the knob the reader can act on
+  * @ret:		errno error code received from compression library
+  * Return: Appropriate BOOTM_ERR_ error code
+  */
+ static int handle_decomp_error(int comp_type, size_t uncomp_size,
+-			       size_t buf_size, int ret)
++			       size_t buf_size,
++			       enum bootm_decomp_limit limit, int ret)
+ {
+ 	const char *name = genimg_get_comp_name(comp_type);
  
--It is also possible to run just the tests for tools (patman, binman, etc.).
-+It is also possible to run just the tests for tools (binman, buildman, etc.).
- Such tests are included with those tools, i.e. no actual U-Boot unit tests are
- run. Type this::
+@@ -598,10 +614,15 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
+ 		return BOOTM_ERR_UNIMPLEMENTED;
  
-diff --git a/test/run b/test/run
-index 768b22577c4..7c0263713c6 100755
---- a/test/run
-+++ b/test/run
-@@ -80,7 +80,6 @@ export DTC=${DTC_DIR}/dtc
- TOOLS_DIR=build-sandbox_spl/tools
+ 	if ((comp_type == IH_COMP_GZIP && ret == Z_BUF_ERROR) ||
+-	    uncomp_size >= buf_size)
+-		printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+-	else
++	    uncomp_size >= buf_size) {
++		if (limit == BOOTM_DECOMP_LIMIT_PER_IMAGE)
++			printf("Image too large for the kernel_noload buffer (%#lx bytes)\n",
++			       (ulong)buf_size);
++		else
++			printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
++	} else {
+ 		printf("%s: uncompress error %d\n", name, ret);
++	}
  
- run_test "binman" ./tools/binman/binman --toolpath ${TOOLS_DIR} test
--run_test "patman" ./tools/patman/patman test
- run_test "u_boot_pylib" ./tools/u_boot_pylib/u_boot_pylib
+ 	/*
+ 	 * The decompression routines are now safe, so will not write beyond
+@@ -628,6 +649,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	ulong image_start = os.image_start;
+ 	ulong image_len = os.image_len;
+ 	ulong decomp_len = CONFIG_SYS_BOOTM_LEN;
++	enum bootm_decomp_limit decomp_limit = BOOTM_DECOMP_LIMIT_GLOBAL;
+ 	ulong flush_start;
+ 	bool no_overlap;
+ 	void *load_buf, *image_buf;
+@@ -644,6 +666,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 		phys_addr_t addr;
  
- run_test "buildman" ./tools/buildman/buildman -t ${skip}
+ 		decomp_len = ALIGN(image_len * 8, SZ_1M);
++		decomp_limit = BOOTM_DECOMP_LIMIT_PER_IMAGE;
+ 		err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr,
+ 				    decomp_len, LMB_NONE);
+ 		if (err)
+@@ -663,10 +686,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 			   decomp_len, &load_end);
+ 	if (err) {
+ 		err = handle_decomp_error(os.comp, load_end - load,
+-					  decomp_len, err);
+-		if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE)
+-			printf("Note: noload decompression buffer is %#lx bytes (not CONFIG_SYS_BOOTM_LEN)\n",
+-			       decomp_len);
++					  decomp_len, decomp_limit, err);
+ 		bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
+ 		return err;
+ 	}
+@@ -1288,7 +1308,8 @@ static int bootm_host_load_image(const void *fit, int req_image_type,
+ 	free(load_buf);
+ 
+ 	if (ret) {
+-		ret = handle_decomp_error(image_comp, load_end - 0, buf_size, ret);
++		ret = handle_decomp_error(image_comp, load_end - 0, buf_size,
++					  BOOTM_DECOMP_LIMIT_GLOBAL, ret);
+ 		if (ret != BOOTM_ERR_UNIMPLEMENTED)
+ 			return ret;
+ 	}
 -- 
 2.43.0
 
