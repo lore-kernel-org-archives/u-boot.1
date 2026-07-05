@@ -4,104 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64834C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 04:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1F1C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 06:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 928A2848D2;
-	Sun,  5 Jul 2026 06:05:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 655D484119;
+	Sun,  5 Jul 2026 08:08:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jZC0GSXe";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="0k+ikIkq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C28784119; Sun,  5 Jul 2026 05:44:46 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A2B8E84659; Sun,  5 Jul 2026 08:08:20 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33712846FD
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 05:44:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8FF8C83314
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 08:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DAC6E3F2A0
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 03:44:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1783223082;
- bh=lf+v+ygamAIUt/QGfkSRBGqENmqHasB3Z2Ja+xXflBM=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=jZC0GSXew3rXc1fjyAt3vbtkS1dAw2PSfK4Gl3QFCfuSb6kXBsK2sthh9r2jSEiEw
- YgXZ3uyxMHn/bZnBVuGztwZaqX9Gv8ITrwozZM0CoSRPh6LQ1K6cRCfVTIYFChU+2e
- pIwEHWuK5sxA0p5PqKp/U8T2XLcjnzq/ctcqv0oSSB3jCA8ic+JGC13u3xbm4OEgXq
- 81mr12eYJ8ZoDFMPKeGEsUDZ6JzpuV0kTqWSsB7TsoDYNcSYxaDhXS5XXVzOfWuk5b
- 6jqw8O/pL9VeEIdfAGnOyDTNlwXkI7rUK1ZsEHejY5mfpiUzr1SQgzOqcq8YtJdZAW
- 9bVjYBfrR0fY8vHTtA9bHYN92VPkORcLt13rHizmPDJR+RRAfp86hu99S9qkIfX/p2
- U2Ly7tm665/Ci8uaEcIb0gPITLbXZf6kDfqdGjf+g6rDFMsl8k5k8yAn/ANtDK36jm
- No3DcbwN85S/HEQM78UbYLWgjLtLrU5LvExB20oMVezfx0RNtkC16//mQRxDnbdxnS
- bw0uR33Z6cxkHxgm2hNRoPZqrwOTm8KuF0zYyOH6tLvvZqXqdSbPcCO0asgWumug+0
- 6R/5qyoZ3OuO/dNqXNSGqbNyfSM5qrdOG1N81+eBxC9ZyyoXP3jrxJzihLiTtLTWOO
- fFhFaNJ2diCBxaurctgn+r7g=
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c9151bf6ce7so2060293a12.3
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 20:44:42 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eric.chung@riscstar.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-3811074a8c5so1285845a91.1
+ for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 23:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783231696; x=1783836496;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Wt15mkgFfLXH7XHzbrjhZS0yp32053Y1/WzrrmTEAY8=;
+ b=0k+ikIkq3tetiwbMhXz2Ovk9Mvy67VoitUwt75knPWtoirjRYcgy/lZZ9sn3/wxyxz
+ WJrsJhBd8Q14q3VVPd309GJuMrM3OOIWPkZCFUdM8yRqCyn0z+Q32lf5idyrGxHL/3zs
+ fWbXbWi1/k0appXWnc8fip1mSVrNM+z2a2j94qctMO/TK7MM1/grus1LkSOY+yMI8HLn
+ XepFqPOg/i0S+NA2wDb9HEqgDk+9mnlM23YLbYEghnjl3b+T7lIMfIh0xdQW/i5Ui0NY
+ FT9n9TvekXv6xSsrqRbRox9m8Lv6g39hzl8mN7f05DbJ/wIkyycUcQ5UgMn7LyOv5cs1
+ yLlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783223081; x=1783827881;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=lf+v+ygamAIUt/QGfkSRBGqENmqHasB3Z2Ja+xXflBM=;
- b=VcP3vHCyAPhMtB62r1cgltUkgciOKbR77/lLxn0btjn1/2QX53gWNI58R9EtKBSJEy
- 8iVVA6jVKOSRnzjSw4UcyuIo7C9xrjrIK3tXEnxJ6wZfY7oe7lSv5L3ue4v+1ph6R9Pr
- kmkXO/DfKsP5kQPzxnaUQuvEB/RZw/3ErNTzJig9J3smO8Lcco7cLhtTuChtxVOSdYMz
- V0c3AxOgWYaKjZg/0DgNCm7ax+GElWWxTp6NfjRWRQkgvXw+QIbZWxkeLyHbcQfm42Vj
- mfBwvGhSizgmlxv1CQhj/VakiIARVPoqdCIBhy0pAJTZ/ZyhfRuJqQqK3v+gbYKpdpGk
- 9wCw==
-X-Gm-Message-State: AOJu0YzM2gAAiqNIS/+kqY2YS85ZTEInfyjEDylljClLfprnI4esHjxM
- bS9TtmMkCKQl7ToHDGzcXF5+ru8X/gltrC/MI74VD4yywK68Giy2u7bEGuf1fT1UsPfcSb+IRFf
- K/llxoP21yJ1emEDquIBCKq+SAvXO69GowqnqPa+T7I4meMWNAN9xLcClKVBA3aMAHkQCeCSQF9
- ppFYiMVQ==
-X-Gm-Gg: AfdE7cnPGHUr6Ap3r5SJzUEpM2IA0SO6U8+qMdYM3EXRTRhO4wH/kXdTLZ8iSrnmBcx
- 49M6fZugm/tytTIPC8aHsqSw6g7wavcNF3x8FXPjnNigMvheHLtYnrTP9E2EUlKbZYaUaFRJ5Jw
- ttukQa1Nyhns9wgAtXS0lr4lDql3eIXi/MLgbEqFOAb/kT0tEjwQQQIoRo3jyBmv3oGoO5CcvWB
- GTeGzS9cVoSWBIAuiegBM41jQR4Klm+k0RWC9w6znW0rJk4j3/yMhmDnEMSIs0o2qaTOT1EZ5pk
- 5BkY2wxoYYyYrJI84TGDS7wdEFjVVDQSlRiuD7J4RNrNNFdbjzleer4POO0v4gQi2jDvCOwJoj8
- 76ZFOqMRJSUll+REJia7hUtz2yg7hd2bFiMGdaTegbItuspgQUpFiy6c2YC7lGg6QrFVxj9guEu
- DxIDzF
-X-Received: by 2002:a05:6300:2287:b0:3bf:b3d5:ce1b with SMTP id
- adf61e73a8af0-3c03e20875emr5760591637.12.1783223081251; 
- Sat, 04 Jul 2026 20:44:41 -0700 (PDT)
-X-Received: by 2002:a05:6300:2287:b0:3bf:b3d5:ce1b with SMTP id
- adf61e73a8af0-3c03e20875emr5760571637.12.1783223080870; 
- Sat, 04 Jul 2026 20:44:40 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ d=1e100.net; s=20251104; t=1783231696; x=1783836496;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Wt15mkgFfLXH7XHzbrjhZS0yp32053Y1/WzrrmTEAY8=;
+ b=IFPIkfMQXexc4lqfuJabn0hqDAumEX0ynFZ3uoya20RoHawGO8Iwf8acNJeCgyEcY7
+ QdChzAQArXb5HeSmy9XH4JE3vy+kAvJLEQV+3JW+YldNzGU1A6P2CNn8Iv2HzyvLet9L
+ 8GK9EtzFzNydI6o3XeBHhNW7Cjb1kGuqeaUFj+E/r7wxDswqM2GI9rEu5IE6EyiJO40O
+ BzVxubDAOBV1btusLFVlDrwsS48IW/HaR8n/Q5K55rSshgkDJ/S25vdrfvkE8EOhvMKe
+ OzndLkWfdQrMOONf0FRpbT6oCxcOhCuKbRrt1QAxRhbDGOqMYYCWpjfwEu7HEh8Zw3vS
+ oQgQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqGPl6dnoUJE2NZ0Orrqjn/Aeci+JbBr+i30Mn5SgSyPhW6iXeP7JoaA69zxsK7EnAqNIlIgAI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyiZbVNVd9qsmTX93kRyMZsIeIIH1KxKgXmhqB2RVpFy51BSFbi
+ G9RWry4KBL6kcWgIhNIHtVUy7W1mDOO3JFEU6dLXVYLxW581YOLP1qdhWqaAx1I/eVU=
+X-Gm-Gg: AfdE7ck60q3n1IzfRAxuAK3w1FD5FSYzPcTBXN4fWL4No6FL0jEdX0m+kTXWQZ+9dyQ
+ /EtLyundDnUeMfU2gFn1GSEk4tJ8aUbbR+Us4YOnjg1OqnKD+EpqaJp3YI6JIXi1D9THflKwmAC
+ vMLp5r59utYk3kNpaECfqeU2e/NAKCNtQN/ZJGbX/fjcVaHQHjoCPLX01XAOsOpEBijOxU9Jubm
+ rcyMMljcGvLu0bf4oJZKN7x0AtFBzaCjzZ5Eg3n17eNpSXwzlqs4p71qyhGhoaRL8F+UjrpDaFq
+ niuEsJfvIozoODMUjPlVm1WA4zMxpCDF1KBhvc5lDVaYdkHeNSh1qENkZ9ZF33YSKq+RmEmmajG
+ dKiGVcbx6XdRp4mXBoYKDr1ZBToJiMELgUAdP4KRveDxq/Q7MO573atGhH7cwIRvJWFDsHHosN6
+ qo9CuDqWfHYelHUem05CqWKMM/xklkJNGif/EkXzl+qxyUorLMIhqedGFALF8rAyXH/e6MECEIr
+ U5yoPKiH7c/PTf/mvyoiQMM2tJHrT/Jn2rPAKKZXyQRe/kN4pI0gw==
+X-Received: by 2002:a17:90a:d44f:b0:37d:f7fe:4bbc with SMTP id
+ 98e67ed59e1d1-3829eb1e30cmr5207163a91.21.1783231695933; 
+ Sat, 04 Jul 2026 23:08:15 -0700 (PDT)
+Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c9e926a4294sm4424735a12.26.2026.07.04.20.44.39
+ 5a478bee46e88-30f38ee1333sm22291719eec.24.2026.07.04.23.08.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 20:44:40 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>
-Subject: [PATCH v3 3/3] test: vbe: cover vbe_read_fit() external-data bounds
- checks
-Date: Sun,  5 Jul 2026 03:44:11 +0000
-Message-ID: <20260705034414.2247-4-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260705034414.2247-1-aristo.chen@canonical.com>
-References: <20260702071425.9204-1-aristo.chen@canonical.com>
- <20260705034414.2247-1-aristo.chen@canonical.com>
+ Sat, 04 Jul 2026 23:08:15 -0700 (PDT)
+From: Eric Chung <eric.chung@riscstar.com>
+Subject: [PATCH v3 0/9] spacemit mmc driver
+Date: Sun, 05 Jul 2026 14:07:51 +0800
+Message-Id: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 05 Jul 2026 06:05:54 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALf0SWoC/2WNwQ7CIBAFf6XhLAZoJeDJ/zAeynaxmLQ1bCWap
+ v8u1JN6nOTNvIURxoDEjtXCIqZAYRoz1LuKQd+OV+Shy8yUUFpoZfnQcGtQSH2wHr1jeXiP6MN
+ zi5wvH6aHuyHMxSyLPtA8xdf2kmTZfQWT5IK3UnrTNVajVqcYCGhu4x6mgZVmUv+WyhY4sBK0M
+ 3Vnfqx1Xd9wVzq73wAAAA==
+X-Change-ID: 20260629-m4-98e01659fefb
+To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
+ Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guodong Xu <guodong.xu@riscstar.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Eric Chung <eric.chung@riscstar.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,280 +120,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-vbe_read_fit() rejects FITs whose external-data window extends past the
-trusted firmware area on disk by returning -E2BIG. Add two sandbox unit
-tests that construct synthetic FITs with attacker-controlled
-data-position and data-size values, write them to mmc1, and assert
-vbe_read_fit() catches each one before issuing the follow-up
-blk_read().
+This series adds MMC support for the SpacemiT K1: an SDHCI platform
+driver, the SD card device-tree overlay, defconfig options, and SPL
+boot-device selection from the SoC strap/config registers. The SDHCI
+driver is usable in both SPL and U-Boot proper.
 
-vbe_read_fit_oob_position uses a data-position past area_size, which
-trips the load_addr - addr > area_size clause. vbe_read_fit_oversize_data
-keeps data-position inside the area but picks a data-size that overruns
-area_size - (load_addr - addr), tripping the third clause.
+A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+write images to eMMC.
 
-The two remaining bound clauses stay unreachable from a sandbox test.
-The load_addr < addr guard trivially holds when addr comes from
-CONFIG_VAL(TEXT_BASE), which is 0 on sandbox, and the FDT-region bound
-sits behind a !CONFIG_SANDBOX guard in vbe_read_fit(), so fdt_size stays
-0 and that block is skipped in this test environment.
+This series sits on top of three series still under review, and must be
+applied after them, in this order:
 
-The new file follows the existing bootstd VBE test layout and writes
-the FIT at block 16, past the version and nvdata blocks already used by
-bootstd_setup_for_tests().
+  1. K1 clock/reset/dts migration [1]    (8 patches)
+  2. K1 SPL bring-up v4 [2]              (14 patches)
+  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
+  Then this series                        (9 patches)
 
-Suggested-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+For each series:
+
+  b4 am <cover-msgid>
+  git am ./*.mbx
+
+Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
+Link: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc [2]
+Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
+
 ---
- test/boot/Makefile       |   2 +-
- test/boot/vbe_read_fit.c | 224 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 225 insertions(+), 1 deletion(-)
- create mode 100644 test/boot/vbe_read_fit.c
+Changes in v3:
+- pinctrl: Fix "fast" by "uhs".
+- pinctrl: Add syscon dependency.
+- mmc: Fix quick by capability.
+- doc: Add SD boot support.
+- Link to v2: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc
 
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 89538d4f0a6..b8e5f64ac82 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -18,7 +18,7 @@ endif
- obj-$(CONFIG_MEASURED_BOOT) += measurement.o
- 
- ifdef CONFIG_OF_LIVE
--obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o
-+obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o vbe_read_fit.o
- endif
- obj-$(CONFIG_BOOTMETH_VBE) += vbe_fixup.o
- 
-diff --git a/test/boot/vbe_read_fit.c b/test/boot/vbe_read_fit.c
-new file mode 100644
-index 00000000000..f67de0e7165
---- /dev/null
-+++ b/test/boot/vbe_read_fit.c
-@@ -0,0 +1,224 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bounds-check tests for vbe_read_fit()
-+ *
-+ * vbe_read_fit() pulls a firmware-phase FIT from a trusted firmware area
-+ * on a block device. The external-data location and size carried in the
-+ * FIT image node are attacker-controllable when the firmware area is on
-+ * mutable boot media, so vbe_read_fit() must reject FITs whose external
-+ * data extends past @area_size before issuing the follow-up blk_read().
-+ *
-+ * These tests build small synthetic FITs with deliberately out-of-range
-+ * values and confirm vbe_read_fit() returns -E2BIG for each.
-+ *
-+ * Copyright 2026 Canonical Ltd.
-+ * Written by Aristo Chen <aristo.chen@canonical.com>
-+ */
-+
-+#include <blk.h>
-+#include <dm.h>
-+#include <image.h>
-+#include <memalign.h>
-+#include <mmc.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <linux/libfdt.h>
-+#include "bootstd_common.h"
-+#include "../../boot/vbe_common.h"
-+
-+/*
-+ * The synthetic FIT is written to mmc1 starting at block TEST_FIT_BLK.
-+ * bootstd_setup_for_tests() uses blocks 4 and 6 (see bootstd_common.h);
-+ * block 16 leaves a comfortable gap.
-+ */
-+#define TEST_FIT_BLK	16
-+#define TEST_FIT_OFF	((ulong)TEST_FIT_BLK * MMC_MAX_BLOCK_LEN)
-+#define TEST_AREA_SIZE	0x1000
-+
-+/**
-+ * build_fit() - Build a minimal external-data FIT for vbe_read_fit()
-+ *
-+ * The FIT advertises a single firmware image whose @data-position and
-+ * @data-size are passed in directly. Both values are attacker-controlled
-+ * in the real threat model.
-+ *
-+ * @buf:		Destination buffer (must be at least 512 bytes)
-+ * @buf_size:		Size of @buf
-+ * @data_position:	Value written to the image's data-position property
-+ * @data_size:		Value written to the image's data-size property
-+ * Returns: 0 on success, libfdt error otherwise
-+ */
-+static int build_fit(void *buf, size_t buf_size, u32 data_position,
-+		     u32 data_size)
-+{
-+	int ret;
-+
-+	ret = fdt_create(buf, buf_size);
-+	if (ret)
-+		return ret;
-+	ret = fdt_finish_reservemap(buf);
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_begin_node(buf, "");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_DESC_PROP, "vbe-read-fit test");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_u32(buf, FIT_TIMESTAMP_PROP, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_begin_node(buf, "images");
-+	if (ret)
-+		return ret;
-+	ret = fdt_begin_node(buf, "u-boot");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_DESC_PROP, "U-Boot");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_TYPE_PROP, "firmware");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_ARCH_PROP, "sandbox");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_OS_PROP, "u-boot");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_PHASE_PROP, "u-boot");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_COMP_PROP, "none");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_u32(buf, FIT_DATA_POSITION_PROP, data_position);
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_u32(buf, FIT_DATA_SIZE_PROP, data_size);
-+	if (ret)
-+		return ret;
-+	ret = fdt_end_node(buf);	/* u-boot */
-+	if (ret)
-+		return ret;
-+	ret = fdt_end_node(buf);	/* images */
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_begin_node(buf, "configurations");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_DEFAULT_PROP, "conf-1");
-+	if (ret)
-+		return ret;
-+	ret = fdt_begin_node(buf, "conf-1");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, "compatible", "sandbox");
-+	if (ret)
-+		return ret;
-+	ret = fdt_property_string(buf, FIT_FIRMWARE_PROP, "u-boot");
-+	if (ret)
-+		return ret;
-+	ret = fdt_end_node(buf);	/* conf-1 */
-+	if (ret)
-+		return ret;
-+	ret = fdt_end_node(buf);	/* configurations */
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_end_node(buf);	/* root */
-+	if (ret)
-+		return ret;
-+
-+	return fdt_finish(buf);
-+}
-+
-+/**
-+ * place_fit_on_mmc() - Write a synthetic FIT to mmc1 and return its blk dev
-+ *
-+ * @uts: Unit test state
-+ * @fit: FIT image to write
-+ * @blkp: On success, receives the block udevice for mmc1
-+ * Returns: 0 on success, -ve on error
-+ */
-+static int place_fit_on_mmc(struct unit_test_state *uts, const void *fit,
-+			    struct udevice **blkp)
-+{
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, blkbuf, MMC_MAX_BLOCK_LEN);
-+	struct udevice *mmc;
-+	struct blk_desc *desc;
-+	size_t fit_size = fdt_totalsize(fit);
-+	size_t pos;
-+	int blknum = TEST_FIT_BLK;
-+
-+	ut_assertok(uclass_get_device(UCLASS_MMC, 1, &mmc));
-+	desc = blk_get_by_device(mmc);
-+	if (!desc)
-+		return log_msg_ret("desc", -ENODEV);
-+
-+	for (pos = 0; pos < fit_size; pos += MMC_MAX_BLOCK_LEN, blknum++) {
-+		size_t this_blk = min(fit_size - pos,
-+				      (size_t)MMC_MAX_BLOCK_LEN);
-+
-+		memset(blkbuf, '\0', MMC_MAX_BLOCK_LEN);
-+		memcpy(blkbuf, (const u8 *)fit + pos, this_blk);
-+		if (blk_dwrite(desc, blknum, 1, blkbuf) != 1)
-+			return log_msg_ret("wr", -EIO);
-+	}
-+	*blkp = desc->bdev;
-+
-+	return 0;
-+}
-+
-+/*
-+ * data-position points past area_size: vbe_read_fit() must reject the
-+ * FIT with -E2BIG before issuing the external-data blk_read().
-+ */
-+static int vbe_read_fit_oob_position(struct unit_test_state *uts)
-+{
-+	u8 fit[1024] __aligned(8);
-+	struct udevice *blk;
-+	ulong load_addr = 0, len = 0;
-+	char *name = NULL;
-+	int ret;
-+
-+	ut_assertok(build_fit(fit, sizeof(fit),
-+			      TEST_AREA_SIZE + 0x10, 0x40));
-+	ut_assertok(place_fit_on_mmc(uts, fit, &blk));
-+
-+	ret = vbe_read_fit(blk, TEST_FIT_OFF, TEST_AREA_SIZE,
-+			   NULL, &load_addr, &len, &name);
-+	ut_asserteq(-E2BIG, ret);
-+
-+	return 0;
-+}
-+
-+BOOTSTD_TEST(vbe_read_fit_oob_position, UTF_DM | UTF_SCAN_FDT);
-+
-+/*
-+ * data-position is inside the area but data-size pushes the end past
-+ * area_size: vbe_read_fit() must reject the FIT with -E2BIG.
-+ */
-+static int vbe_read_fit_oversize_data(struct unit_test_state *uts)
-+{
-+	u8 fit[1024] __aligned(8);
-+	struct udevice *blk;
-+	ulong load_addr = 0, len = 0;
-+	char *name = NULL;
-+	int ret;
-+
-+	ut_assertok(build_fit(fit, sizeof(fit),
-+			      0x400, TEST_AREA_SIZE));
-+	ut_assertok(place_fit_on_mmc(uts, fit, &blk));
-+
-+	ret = vbe_read_fit(blk, TEST_FIT_OFF, TEST_AREA_SIZE,
-+			   NULL, &load_addr, &len, &name);
-+	ut_asserteq(-E2BIG, ret);
-+
-+	return 0;
-+}
-+
-+BOOTSTD_TEST(vbe_read_fit_oversize_data, UTF_DM | UTF_SCAN_FDT);
--- 
-2.43.0
+Changes in v2:
+- cmd: drop patches on eminfo & tlv_eeprom.
+- configs: Enable ADMA and SYSCON support.
+- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
+- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
+  read/write, correct pinctrl state from "fast" to "uhs".
+- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
+  transfers.
+- pinctrl: k1: Add new IO power domain configuration support for
+  dual-voltage GPIO banks.
+- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
+- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
+
+To: u-boot-spacemit@groups.io
+To: u-boot@lists.denx.de
+Cc: Huan Zhou <pericycle.cc@gmail.com>
+Cc: Guodong Xu <guodong.xu@riscstar.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tim Ouyang <tim609@andestech.com>
+Cc: Leo Liang <leo.liang@sifive.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Han Xu <han.xu@nxp.com>
+Cc: Yanir Levin <yanir.levin@tandemg.com>
+Cc: Christoph Stoidner <c.stoidner@phytec.de>
+Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+Cc: Daniel Palmer <daniel@thingy.jp>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+
+---
+Eric Chung (9):
+      spacemit: k1: select boot device via config registers
+      pinctrl: k1: add IO power domain configuration support
+      mmc: sdhci: enable CMD23 for multi-block transfers
+      mmc: k1: add sdhci platform driver
+      dts: k1: add SD card support in u-boot overlay
+      configs: k1: enable SD and eMMC support
+      doc: spacemit: flash on K1 SoC based boards
+      config: k1: enable ENV support for eMMC
+      spacemit: k1: load product name from environment variable
+
+ arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  87 +++-
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  82 +++-
+ board/spacemit/k1/MAINTAINERS             |   3 +-
+ board/spacemit/k1/spl.c                   | 120 ++++--
+ configs/spacemit_k1_defconfig             |  26 +-
+ doc/board/spacemit/index.rst              |   1 +
+ doc/board/spacemit/k1-mmc.rst             | 320 ++++++++++++++
+ drivers/mmc/Kconfig                       |   7 +
+ drivers/mmc/Makefile                      |   1 +
+ drivers/mmc/mmc.c                         |  18 +-
+ drivers/mmc/spacemit_sdhci.c              | 680 ++++++++++++++++++++++++++++++
+ drivers/pinctrl/spacemit/Kconfig          |   2 +-
+ drivers/pinctrl/spacemit/pinctrl-k1.c     |  83 +++-
+ include/mmc.h                             |   6 +-
+ 14 files changed, 1381 insertions(+), 55 deletions(-)
+---
+base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
+change-id: 20260629-m4-98e01659fefb
+
+Best regards,
+--  
+Eric Chung <eric.chung@riscstar.com>
 
