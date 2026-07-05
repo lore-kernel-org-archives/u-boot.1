@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE82FC43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 20:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26660C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 20:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CE9F846FD;
-	Sun,  5 Jul 2026 22:06:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 62ADC846FD;
+	Sun,  5 Jul 2026 22:26:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EDbpnoFQ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yngTZtHc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UAnlvRxP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EC5184832; Sun,  5 Jul 2026 22:06:55 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 93BAC84832; Sun,  5 Jul 2026 22:26:38 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87673846F8
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 22:06:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FC1B846F8
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 22:26:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gtdmr6Z4bz9tdq;
- Sun,  5 Jul 2026 22:06:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783282013;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aE+w6BSH+ruOrmyduj6vdwFcaLOW2HR9h2UGwqAX9iE=;
- b=EDbpnoFQ6MKFrNAOYro04eJA3cJtFy3tpOyEpV2Py8+etkAz40o3myqb4a03N0DHMlumCP
- 2XdHzqC9Cn0VQ1IXZ4SdlmScAeXMr5U4UtedMyZaa2QqAgZAOlYDG6x3RsMeuw5SUmoGhe
- R8BA9MOfvDdXhDiyrsAHhSjiYrS6imuJkG1Z9eAGM9U3eaVv9HLH5SmgXz1lJBvyiKNqL1
- vK85ElnP4Ifak5+uLWijHKe1LskaqAxSVX4E2S6gB/i+Pg+Af1BET0uLEBbXDWfqA4ZwJO
- mD+Van8Z+oVuMU0KQjrrKptD2ppYlVg0pDHllzNO+bUSdQsWkaf9CY/ZqzGXOA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=yngTZtHc;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <57d54ca6-78d1-4fbf-b77b-27b02a90c998@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783282011;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aE+w6BSH+ruOrmyduj6vdwFcaLOW2HR9h2UGwqAX9iE=;
- b=yngTZtHcuKeFEKlkbc9d6MQGAARdVjZVcUSQAJpzETB273Yk3CQh16Tx92+h3ReGYVAGnC
- 2YTpV9anmsM0A3Q1SQGwD4N8dXfYBecBL46Qhl5UGdHLpiXogkgq4omMQWzNMT6DIBRmia
- fqWlYJD2Xm6hKKzi05LQZY+O3RmTY2dKoSQbeH1LYglnhvxKkpmNrqWvaRDtjmuzrdF2LW
- IEMs2F2p/nle8/83sMSUDsD7nPgFRBDGgH0JfPjk0sCHrdhvPbHue+z3TZg3q534eJ67oN
- qF5S6+jtL30rV2mppan7BV2T+Bf1RZU8HjI6regGOrzq0Vrz4ksfwVuPaxt2RQ==
-Date: Sun, 5 Jul 2026 18:00:12 +0200
-MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
- support
-To: Romain Gantois <romain.gantois@bootlin.com>, u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>, Peter Robinson
- <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Herve Codina <herve.codina@bootlin.com>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7e9ecb1e13cso2035357a34.3
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 13:26:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1783283195; x=1783887995; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SsiRJw2w2PEObiWbQBb5kBFhTIILv0boIvFsENuRrGk=;
+ b=UAnlvRxPm4QXpzeO9f2BmPFbkEN+4OBmXtf3ggqK5UBuuYYnAsBu1uJRD1pPWzEXng
+ MxuhPE3zOTTI2yiqv1PNRx8bUDUIlSNrN/oUHyS+j8EoH/h6LL0IQ9K501l8NEg8rIZe
+ X4EnBwKZVbJNQDKvXKHH8gbhxIDfzXIM2a3uM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783283195; x=1783887995;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SsiRJw2w2PEObiWbQBb5kBFhTIILv0boIvFsENuRrGk=;
+ b=K8Xo+sfkZsApwy03C4w6EogBtQQhqQts2aTi52Gd5aUYyeIp3JpKvtEx8OcQbPUo7u
+ 8I4NDlM9RtqPodxsug0UoeyduQ1e0DLFv0ARPJSjIkhwK+8P0r7Odyn7e3og9v5/3hq1
+ lUU44HSc+l5/E0dYiaPD379jPT/FQpz2utX/+7oYJ5W2nHocCi+KZ5ZwpCWvz4ksBkc4
+ 25tY7oLH9eYTXakHEGRt/OBFWt78QAmYUA4mFzE3tqiidGb7k1e6yPsFiS04LOaAh2T4
+ QkLW94TBkj7t4BtDeguZfo/ZqNqUltEmhREfp0snamszIIwNbhnn8H2zW/D7fMaPGU66
+ oPdA==
+X-Gm-Message-State: AOJu0Yw1AwRGANeIUn7/OdAVFmYJfTcc3cdtPlvqx8Frczx8eio3/8su
+ eVjdeUwyz3e3lPeMBAJrKdSajETLHHSjC8QwfR/EXGt9h7f6nusvac6sxMtaMunLS5U=
+X-Gm-Gg: AfdE7ck+27m2vOEOlyzL0lixXX4UcOwLKssQEyUIuRfoCvTHjrngfmr02C7XtyFfOYz
+ L8lW3bSGe6+/JlgRcogDCXuS5icMPjhmd3hOQBF8fUGxe5XwedXCyt6CR9ksZx5904KtGPdHkkn
+ cvUlLMNGWTwrXrX0XlEVPntxQLKAbKbF8WeTKsrVStvcZpc5vte/H8w0cBRlbhjWV+3Tm97PjGJ
+ MpGfDWLZv9EjRnif86aXW8LHmfbkJggktZ3F1Lk8VVAh3axR4OeGaFZVsiw19WA20XIb24qnD1Q
+ QShmRdpjeBaekb3kPfyyNHUpeWMNhRqdCppVs9o4KzXqnXRqq1pDks9aEHiNQetGzQ29PCLUj24
+ Qk0w0iVuf5BiWAMAdTNkNRi9K95231xAvy222EMb5q3lnyRKUBMW1gzlrE64lSjHc4Ky5P4VKd7
+ Jyq2LOrIZe+NdnSpQXWA+nEn66rRv1GBLarJxe7mcV2scd3GY/4kZRnBEtV3DfKioh+DtTX8oaQ
+ NBv1gjeYZEB2uKlP6zW0VN0S7lcFugiS+RkXw==
+X-Received: by 2002:a05:6830:82b9:b0:7e9:5de:cb93 with SMTP id
+ 46e09a7af769-7eb7fe84cbfmr5548081a34.18.1783283194715; 
+ Sun, 05 Jul 2026 13:26:34 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7eb8a1fe31bsm3490931a34.2.2026.07.05.13.26.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jul 2026 13:26:33 -0700 (PDT)
+Date: Sun, 5 Jul 2026 14:26:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Javier Tia <floss@jetm.me>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
-References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
- <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: p1jbk6rto9eqyp9gs1moqnzmkztrr4k8
-X-MBO-RS-ID: 53d66704e7c42b7211b
-X-Rspamd-Queue-Id: 4gtdmr6Z4bz9tdq
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v2 01/11] doc: Move the b4 guide into sending_patches
+Message-ID: <20260705202631.GP749385@bill-the-cat>
+References: <20260705193251.2190705-1-sjg@chromium.org>
+ <20260705193251.2190705-2-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2q7wMoZ/wsWdXwEZ"
+Content-Disposition: inline
+In-Reply-To: <20260705193251.2190705-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,47 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/2/26 10:11 AM, Romain Gantois wrote:
-> From: Herve Codina <herve.codina@bootlin.com>
-> 
-> Add support for the Renesas USBF controller. This is an USB2.0 UDC
-> controller available in the RZ/N1 SoC.
-> 
-> This driver was originally written by Hervé Codina for the Linux kernel.
-> Suspend/resume features have been removed in this U-Boot port.
-> 
-> Linux revision this was ported from:
-> 
-> 74851fbb6d64 usb: gadget: renesas_usbf: Handle devm_pm_runtime_...
 
-Please use the canonical short format:
+--2q7wMoZ/wsWdXwEZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-74851fbb6d64 ("usb: gadget: renesas_usbf: Handle 
-devm_pm_runtime_enable() errors")
+On Sun, Jul 05, 2026 at 01:32:12PM -0600, Simon Glass wrote:
 
-But diff between the Linux kernel driver file and this driver shows 
-changes in indent and removed spin lock invocations, can you retain 
-those and possibly stub them with noop functions instead ? At least the 
-spinlocks and indent should be doable.
+> The b4 contributor guide sits in the coding-style document, which is an
+> odd place for it. Move it into sending_patches.rst, next to the patman
+> note, so both patch-sending tools are described together.
+>=20
+> The b4_contrib label moves with it, so the reference from process.rst
+> still resolves.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-[...]
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> +static const struct udevice_id usbf_match[] = {
-> +	{ .compatible = "renesas,rzn1-usbf" },
-> +	{} /* sentinel */
-> +};
-> +
-> +U_BOOT_DRIVER(usbf_renesas_udc) = {
-> +	.name	= "usbf_renesas",
-> +	.id = UCLASS_USB_GADGET_GENERIC,
-> +	.of_match = usbf_match,
-> +	.ops = &usbf_gadget_generic_ops,
-> +	.probe = usbf_probe,
-> +	.remove = usbf_remove,
-> +	.priv_auto	= sizeof(struct usbf_udc),
-> +};
+--=20
+Tom
 
-Nitpick, please use either space or tab before = , but use only one and 
-use it consistently.
+--2q7wMoZ/wsWdXwEZ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thank you !
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakq99AAKCRAr4qD1Cr/k
+ChBsAPsGNkNXeJzjix+BytJKSyKOxxFEBn7B9FWJDf82wwh5VQEAgZEFrIauCizI
+ZWquueFinUH33xwZ0xtTAUpFHdiESgo=
+=Rmsx
+-----END PGP SIGNATURE-----
+
+--2q7wMoZ/wsWdXwEZ--
