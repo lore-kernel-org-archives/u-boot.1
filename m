@@ -4,103 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386F9C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 06:09:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5F0C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 07:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80AEE849F6;
-	Sun,  5 Jul 2026 08:09:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
+	by phobos.denx.de (Postfix) with ESMTP id A9244846F8;
+	Sun,  5 Jul 2026 09:47:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="a4xDxsfQ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pfXAi9HC";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U4dPyWMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20027849F6; Sun,  5 Jul 2026 08:09:21 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 05820846FD; Sun,  5 Jul 2026 09:47:53 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D67D7849D2
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 08:09:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=riscstar.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eric.chung@riscstar.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-38125cebfdaso2536267a91.1
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 23:09:18 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ECEC846A4
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 09:47:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 664LqcDn4143295
+ for <u-boot@lists.denx.de>; Sun, 5 Jul 2026 07:47:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=EJHNh3AAVyjEzAPJy6h1u2XA
+ w8mT6AvltmZ+TltSNl4=; b=pfXAi9HCzOx646wtYBagKRNu4ygWiZFAE+quKw+i
+ ygxhyLuQIvT+S9sctrK7fgND2QKLHMNG+HIZ3KWRxYJ2eSV3XGlwwQlr5Q787dfh
+ MywLjnI2KAe1n/BLP4H6rcEXNgx1BWsUCe7MhtQBckxTjJC2LQVlGNqZ8Wk6YLyK
+ cTFZ7ynMPWC0zJzqO91+d0AoouUSXl3a3KnrkmMqsAX2znleCiz7wJg88z+OBuFX
+ NfUffYGhy3q0yh6BuFovgP5by6zAbRLTp0OJG9o5qKXFcICNn4BYNpldFVYhIm9E
+ 15HJsTTjAIetyBJCyCTMIv95WeUIbF2nowuaJXjiSSnMvg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f6s4stdhp-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 07:47:48 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-c88fc985a65so3177374a12.2
+ for <u-boot@lists.denx.de>; Sun, 05 Jul 2026 00:47:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783231757; x=1783836557;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=QYx5slSjGDzOuqlW2pxq73xV7d58n7Lf9UNUClClsFM=;
- b=a4xDxsfQo78Pe2bRseuCrSt+VFdqrcSCXyjRymce/JlMdWHMHhu/9UznUka0BGirAs
- TmQA1Yod8hWAfFcLdW1XXIKWJJJwED5Mf5IbDQrx7QazsAubFEEdN41y1XxlCYxasDVl
- BEnAeI1+G+FQ+4qrqq/MZWh6OtUimLDWNi3jS0z8mkWUd2s1dlSkRUC0S9s7mnXz0uWr
- 8GM3Kf5sdxv4Uf9OZVm2OJDH5U/4kXWi5Z6cV4LO+YZmaf8+hGuz18VEJqRCjsFJIoM4
- +9mBr99PdBfjfRk89U/GExG+HhmZADxyZqXklt5L+acMyxXWtO1OIaQLHiE9bPVLXNGp
- TGoQ==
+ d=oss.qualcomm.com; s=google; t=1783237667; x=1783842467; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EJHNh3AAVyjEzAPJy6h1u2XAw8mT6AvltmZ+TltSNl4=;
+ b=U4dPyWMg8U7U7TYZzgGF6/Un/iVxDo3JAzMuDs3EuxTxrtNuttVOoaW0T78EJG70wr
+ flyJaUU0x2GsU3ogb0TNXlfw6bYnuPs22FMYThDMvWQyrGGx7ebV5J1dfsxsUQYerpVX
+ b9Dogtm5AqqGJbd34cp4+3lq2Xz2eyAeMSNeNp88Mh9J2GD72d4MXyv2jZsyxIIlQmtj
+ WH4E1tcELuCbjtWq+8F+YGGQxC0jFdFt0HBCnHp4Xs2vZbidhbVvNaEnVIh551xCSPhv
+ OmqecQKBRbzfHlLdGElFayfW33xrsgiwvm8/bmo8osiDYfh8lGwWxYYEopmpTU4y2t5Y
+ 2AKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783231757; x=1783836557;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=QYx5slSjGDzOuqlW2pxq73xV7d58n7Lf9UNUClClsFM=;
- b=esoAFjAuMcKXcvJv7eLn3LeA1AvRUQXnK10P4kj6pOnGvHBXkQpl7mjcfuwvE16sum
- umefrm+GRE3r+5ra/BoW1QUFbMUsvKlbGgdcUPWc8b0Y7omI+DjcIP5M6cBhDDdNLsHo
- iZ22oT0pgUnNeXVqlvN4FB7xrwTUtmGrtY4kBTU+gOq53mUDreuofsJntMce79TRaZPc
- UVuBgKfXl0Ua26cIZLtJ9pgtojb7mE+DHyu9vh37APjHdNQFtyBuL+S4d6yMqIlzq6cS
- UH/hdqHSAHAFgu5ngu5YPR0ubRw8Rm/CGBTsVQ21DTojYzvX1KzGK09G1EAgVizbN6pg
- 1Pvg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RopUalzyRwHXYuFYEVywxLOF6elvz/51KDYCqfUSUEtZQp2nL91TLJrqPX3lQZMWOTOvcTGumg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+TMSxPkLYMPJyJzdp8Ql+Ye63LyXxf7jDm0m2byppS+5AJscb
- XKEvIuJL9BXF/VKXRcXZ4BEs6TC7XEJPY4HyEAKrUeQb3zVkDWc6FYLMq1UVh5SH9B0=
-X-Gm-Gg: AfdE7clW1Zb7tq6FD2fEo6NYOVotbez8++6hUG4tTLN4rGlVMgA7Q2wdLHElPClIZ/K
- uMq+H5xACeCthqJN1XrbDVt1E5xTcfwO++YY2Pzy2tsxlb6YvKPJTWZyvKbDIN2/cAGMmC+mUYz
- Y4MKtzMnoFoI/TRCCMYATG5IZ6FAPqgwMx/C1rrOPquCWZPixwZA17BaWe6c00yboWPAV85D2YK
- BM+chNVv7T1mqrmHo0V577+RFLzh0G/+pZA31xn2T9WgILKxqj2i+lQjMAj0QFABYtqBHD3IRyd
- DGnL3tOfOtHG/FzmWiEeqU5NJT4F2ty6YtnnJAi+Awc5jnJtqGBefYwZ7tFMHFdbRFILOvP/HtO
- KYJS8xP9pVpUJ/JEhw9wtY8mSLoUm8vWS60Nq1l5r1dJZLw/VxgojSbxY0jM/h3IPLqlMJzlw63
- HwMuEtYBSmTASd2Ee3NxJ+639QxOLdVL/pUePIM+opvGrAT0oLaZum7tQchWCDfPaOMwcOBPJW4
- wrWzDF2D+Ds4m4hGYN9hy+RpijZJvjwIhEjRPF6zDQlsFyD3ahj+w==
-X-Received: by 2002:a17:90b:224d:b0:381:e74f:8a6a with SMTP id
- 98e67ed59e1d1-3829eb1d7a8mr5579862a91.16.1783231757247; 
- Sat, 04 Jul 2026 23:09:17 -0700 (PDT)
-Received: from [127.0.1.1] ([209.170.101.129])
+ d=1e100.net; s=20251104; t=1783237667; x=1783842467;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EJHNh3AAVyjEzAPJy6h1u2XAw8mT6AvltmZ+TltSNl4=;
+ b=ETjpKu9ELHILPbZ1fydwkcjd908+zeJgd2t6sTZXEutHBo7NxnX6cRJS8TKc8JI2cq
+ 7ydnxmmLGFv4bcuKD1S0dqSgRa5UBMjMbihcBepu9dNLz6/RLgqR3METvYTPmeZ24tRK
+ fNXjK+faLMNgX1HHVGSP6WWauLTKUo8LW5luL4U+7y7NzxbPP2ACRdWUBUBhlqY4P42i
+ XMwYxOc/kaNqAes94GL7uy5PaYx50aIo0yed6i0tL6qnsmWmXWw7M0goOWhLwb56bJDz
+ KB8kZeFatlo+1WiPVkK7+zdSpxuwNN0X4zURvBpLUPoqsKNb8J2y3UxBL/U4Lpz99AoJ
+ JOuQ==
+X-Gm-Message-State: AOJu0YwIFrr8G6RewrUgLC+J9g2UTxNVQThDIiyZXY7mnJcgSUFz1sHO
+ aakOp5qUy6So3sfhqMyz9KEVmBl9kWXsULeaKkbHcw2Y6VLYR7z8diLU9A4modcBadIDG2gQXAE
+ TpJVuaiQdHJL8C3CNvAq0uaJkgYW8Hu4xLM/El2v/9JYJUfSxiRdrCixl
+X-Gm-Gg: AfdE7ck/1bZ8Fbw1N2Ih419yAslPbBNHlyPOSAmxbzAwlqYZL+uQTY1GWc1I6GOhSoB
+ yQpi1TLlZl8ZVqZ6DwgRD8QrTtQOJ3HJGLYh2IAlWzvwWzbdeEV47Xif3/9+GcJjqyji+f+XEQ7
+ m+0Sle3mzMSTvEEGWcNptbE9x5FsWBWVvHnrpHcRTIXoDa6nUdgmVLhk1YPD79PmernugaHakPP
+ ngcaerETbaup0xoARPgx1Ox2ATi2kgBpMqPDbUFSPwNZeaMReOVJkyB/A5gymkyb0Q5A8iz+OPC
+ DBK1oD9RxgGY0u2+cFNF04X7zpm6o8V6Z6IZLU13e+g1jDVJPEHkZwIgJYnKoYmsapfx4Pif8b2
+ 8xjhmVIvgenqGXly/IgRG1MAHFi1o3RAkiTzyuyrzwrHylAUSu0tAPj7kzf5AncOHvdeD1HsUfb
+ vqMXYM0dNJJZjDMzKFJsPhriEKEw9e6CNvRhSJ/4AT
+X-Received: by 2002:a05:6a20:72a0:b0:3bf:c126:baf7 with SMTP id
+ adf61e73a8af0-3c03e4b4006mr5973126637.47.1783237667430; 
+ Sun, 05 Jul 2026 00:47:47 -0700 (PDT)
+X-Received: by 2002:a05:6a20:72a0:b0:3bf:c126:baf7 with SMTP id
+ adf61e73a8af0-3c03e4b4006mr5973110637.47.1783237666907; 
+ Sun, 05 Jul 2026 00:47:46 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f38ee1333sm22291719eec.24.2026.07.04.23.09.10
+ a92af1059eb24-13b3c7fa566sm35364819c88.4.2026.07.05.00.47.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 23:09:16 -0700 (PDT)
-From: Eric Chung <eric.chung@riscstar.com>
-Date: Sun, 05 Jul 2026 14:08:00 +0800
-Subject: [PATCH v3 9/9] spacemit: k1: load product name from environment
- variable
+ Sun, 05 Jul 2026 00:47:46 -0700 (PDT)
+Date: Sun, 5 Jul 2026 13:17:41 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH] drivers: sysreset: Do not end sysreset_walk_arg on
+ -EPROTONOSUPPORT
+Message-ID: <akoMHeQ2V5zfpU73@hu-varada-blr.qualcomm.com>
+References: <20260703-walk-arg-fix-v1-1-64beca00d7e2@oss.qualcomm.com>
+ <af5d617d-4963-44cb-81b2-c0b0b0dc4c6f@cherry.de>
+ <akeOqlGa/bRWA3B7@hu-varada-blr.qualcomm.com>
+ <d7e003b3-e693-4579-8e3a-b09ce9f78d10@cherry.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260705-m4-v3-9-5a9bc7f25fc5@riscstar.com>
-References: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
-In-Reply-To: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
-To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
- Yanir Levin <yanir.levin@tandemg.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
- Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, 
- Johan Jonker <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Guodong Xu <guodong.xu@riscstar.com>, Tim Ouyang <tim609@andestech.com>, 
- Leo Liang <leo.liang@sifive.com>, Eric Chung <eric.chung@riscstar.com>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d7e003b3-e693-4579-8e3a-b09ce9f78d10@cherry.de>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA1MDA3OCBTYWx0ZWRfX44lAmzSZoIoR
+ Up7RKbdQXVT4ETrMIT4frqXhPQ6Xyg+95r5AYF4CO/b5djIReQFLekr4VtNiDnNr9MeHAGiQuIW
+ +yrPolDXP4dH/O6pRV0qCZ6b/r6tsk0=
+X-Proofpoint-ORIG-GUID: UJ89gs6bC28QQfUThb-GGwcfsnadC5bZ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA1MDA3OCBTYWx0ZWRfX8c5xLEeqQh8R
+ 3vvMt9cGO4sq7StRa4PXJvTejqqNkWNBjEQFoHUU/3pDB/re0vgdo6/ehmwERGEpyTD6bNfO984
+ gd2sL1874o+5JsiDTzvpWfSr8bic+ip5BkwXh3mWGsOUGW+ZPDo6oJYp9fdKSzZGmr3MotkxCIM
+ BNe5YVWP9YOYtKWUlefb4dVOoW3AvCFss8kRlRCmfub/aeptwNLpXPYBnu+jBBUhE96ELU/X/BC
+ LE4QNKZVil/GUmQb2HHvl9pRewS255kZjcmoyO+E6V+gR+hU6MNXJMPdDtn8xpboeawekDvRFcu
+ Y8E47H7hmfLqlNZkQSJSWVKD1XU0D2AakCcH18YKTgKkNHl6kEFaFnJ7tbLU4agy89HRxvjJP4B
+ ZoAOXhASHPXR3S/6HTbq0Lv2j5kU3Y2fTkyki45z2mrWvVOTPHCgUdLG5mXc2/HSFGsGLXkNZjK
+ eGzQPVqIPWn+PG6IlRw==
+X-Proofpoint-GUID: UJ89gs6bC28QQfUThb-GGwcfsnadC5bZ
+X-Authority-Analysis: v=2.4 cv=ZfQt8MVA c=1 sm=1 tr=0 ts=6a4a0c24 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=iAvd1xM0ckeScaDkMOcA:9 a=CjuIK1q_8ugA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-04_03,2026-07-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 bulkscore=0 impostorscore=0 adultscore=0 phishscore=0
+ priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607050078
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,102 +153,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Read the product name from the environment instead of EEPROM,
-as the EEPROM may not be programmed and the environment always
-contains this information.
+On Fri, Jul 03, 2026 at 12:37:04PM +0200, Quentin Schulz wrote:
+> Hi Varada,
+>
+> On 7/3/26 12:27 PM, Varadarajan Narayanan wrote:
+> > On Fri, Jul 03, 2026 at 12:11:30PM +0200, Quentin Schulz wrote:
+> > > Hi Varada,
+> > >
+> > > Thanks for the patch!
+> > >
+> > > On 7/3/26 9:24 AM, Varadarajan Narayanan wrote:
+> > > > If there are multiple sysreset devices implementing request_arg callback,
+> > > > the first sysreset device will consume the args and may return
+> > > > EPROTONOSUPPORT if it doesn't implement the given argument. This will stop
+> > > > the loop.
+> > > >
+> > > > Since -EPROTONOSUPPORT is used to indicate absence of support for that
+> > > > argument, subsequent drivers should be given a chance to see if they handle
+> > > > it. Hence do not terminate the loop on -EPROTONOSUPPORT return code.
+> > > >
+> > > > Fixes: fcb48b89813b ("drivers: sysreset: Add sysreset op that can take arguments")
+> > > >
+> > > > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> > > > ---
+> > > >    drivers/sysreset/sysreset-uclass.c | 23 +++++++++++++----------
+> > > >    1 file changed, 13 insertions(+), 10 deletions(-)
+> > > >
+> > > > diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+> > > > index f25e09e9cd0..0fc096e7f0f 100644
+> > > > --- a/drivers/sysreset/sysreset-uclass.c
+> > > > +++ b/drivers/sysreset/sysreset-uclass.c
+> > > > @@ -89,14 +89,12 @@ int sysreset_walk_arg(int argc, char * const argv[])
+> > > >    	struct udevice *dev;
+> > > >    	int ret = -ENOSYS;
+> > > > -	while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
+> > > > -		for (uclass_first_device(UCLASS_SYSRESET, &dev);
+> > > > -		     dev;
+> > > > -		     uclass_next_device(&dev)) {
+> > > > -			ret = sysreset_request_arg(dev, argc, argv);
+> > > > -			if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
+> > > > -				break;
+> > > > -		}
+> > > > +	for (uclass_first_device(UCLASS_SYSRESET, &dev);
+> > > > +	     dev;
+> > > > +	     uclass_next_device(&dev)) {
+> > > > +		ret = sysreset_request_arg(dev, argc, argv);
+> > > > +		if (ret == -EINPROGRESS)
+> > > > +			break;
+> > > >    	}
+> > > >    	return ret;
+> > > > @@ -153,6 +151,7 @@ void reset_cpu(void)
+> > > >    int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> > > >    {
+> > > >    	enum sysreset_t reset_type = SYSRESET_COLD;
+> > > > +	int ret;
+> > > >    	if (argc > 2)
+> > > >    		return CMD_RET_USAGE;
+> > > > @@ -165,8 +164,12 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> > > >    	mdelay(100);
+> > > >    #if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> > > > -	if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
+> > > > -		return 0;
+> > > > +	if (argc > 1) {
+> > > > +		ret = sysreset_walk_arg(argc, argv);
+> > > > +		if (ret == -EINPROGRESS)
+> > > > +			return 0;
+> > > > +		log_err("No handler for reset command arguments (%d)\n", ret);
+> > >
+> > > Just use printf to be consistent with the rest of the function.
+> > >
+> > > But here's possibly another logic bug I think. If we pass -w to reset, this
+> > > will try all available sysreset devices if any can handle the -w argument
+> > > and then print that there's no handler for the reset command argument, which
+> > > is to be expected.
+> > >
+> > > So I'm wondering if we shouldn't bypass sysreset_walk_arg() entirely when -w
+> > > is given as argument to the reset command.
+> > >
+> > > Also, *any* argument starting with -w should do the warm reset, e.g. reset
+> > > -warm should do it too as that's the current logic we have (we only check
+> > > the first two characters of the argument).
+> >
+> > Would this be ok?
+> >
+> > int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> > {
+> > 	enum sysreset_t reset_type = SYSRESET_COLD;
+> > 	int ret;
+> >
+> > 	if (argc > 2)
+> > 		return CMD_RET_USAGE;
+> >
+> > 	if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'w') {
+> > 		reset_type = SYSRESET_WARM;
+> > 	}
+> > #if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> > 	else if (argc > 1) {
+> > 		ret = sysreset_walk_arg(argc, argv);
+> > 		if (ret == -EINPROGRESS)
+> > 			return 0;
+> > 		printf("No handler for reset command arguments (%d)\n", ret);
+>
+> I don't think printing ret is interesting here as it'll be the return code
+> of the last attempted sysreset device (so either ENOSYS if there is no
+> sysreset device at all, or if the last one doesn't support request_arg
+> callback, or -EPROTONOSUPPORT if it supports args but not the arg we pass
+> it).
+>
+> We should also tell the user what we're doing in this case: a cold reset.
+>
+> > 	}
+> > #endif
+> > 	printf("resetting ...\n");
+> > 	mdelay(100);
+> >
+> > 	sysreset_walk_halt(reset_type);
+> >
+> > 	return 0;
+> > }
+> >
+> > If this seems ok, will post v2 with this change.
+> >
+>
+> No, because it'll do the reset before printing it's doing a reset (and will
+> also not do the delay).
+>
+> But if you move the whole if block after the mdelay() then I think it's
+> fine.
 
-Signed-off-by: Eric Chung <eric.chung@riscstar.com>
----
- board/spacemit/k1/spl.c | 51 +++++++++++--------------------------------------
- 1 file changed, 11 insertions(+), 40 deletions(-)
+Not posting the next version since this is getting reverted per [1].
+Please let me know if I have missed something.
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index 70579637b5e..1387c2ef9b3 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -12,6 +12,7 @@
- #include <configs/k1.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
-+#include <env.h>
- #include <i2c.h>
- #include <linux/bitfield.h>
- #include <linux/delay.h>
-@@ -96,39 +97,6 @@ static void i2c_early_init(void)
- 	}
- }
- 
--int read_product_name(char *name, int size)
--{
--	u8 eeprom_data[TLV_TOTAL_LEN_MAX], *p;
--	struct tlvinfo_header *tlv_hdr;
--	struct tlvinfo_tlv *tlv_entry;
--	int ret, i = 0;
--	u32 entry_size;
--
--	if (!name || size <= 0)
--		return -EINVAL;
--	ret = read_tlvinfo_tlv_eeprom(eeprom_data, &tlv_hdr,
--				      &tlv_entry, i);
--	if (ret)
--		return ret;
--	p = (u8 *)tlv_entry;
--	for (i = 0; i < tlv_hdr->totallen; ) {
--		if (tlv_entry->type == TLV_CODE_PRODUCT_NAME) {
--			if (tlv_entry->length < size)
--				size = tlv_entry->length;
--			memset(name, 0, size);
--			memcpy(name, &tlv_entry->value[0], size);
--			return 0;
--		}
--		if (tlv_entry->type == TLV_CODE_CRC_32)
--			return -ENOENT;
--		entry_size = tlv_entry->length + sizeof(struct tlvinfo_tlv);
--		i += entry_size;
--		p += entry_size;
--		tlv_entry = (struct tlvinfo_tlv *)p;
--	}
--	return -ENOENT;
--}
--
- static const struct {
- 	const char *eeprom_name;
- 	const char *fit_name;
-@@ -140,9 +108,15 @@ static const struct {
- 
- static void fixup_product_name(void)
- {
--	char fdt_name[I2C_BUF_SIZE];
-+	char fdt_name[I2C_BUF_SIZE], *name;
- 	int i;
- 
-+	memset(product_name, 0, I2C_BUF_SIZE);
-+	env_init();
-+	env_load();
-+	name = env_get("product_name");
-+	if (name)
-+		snprintf(product_name, I2C_BUF_SIZE, "%s", name);
- 	memset(fdt_name, 0, I2C_BUF_SIZE);
- 	for (i = 0; i < ARRAY_SIZE(k1_board_map); i++) {
- 		if (!strncmp(product_name, k1_board_map[i].eeprom_name,
-@@ -451,13 +425,10 @@ u32 spl_boot_device(void)
- 
- void spl_board_init(void)
- {
--	int ret;
-+}
- 
--	ret = read_product_name(product_name, I2C_BUF_SIZE);
--	if (ret)
--		log_info("Fail to detect board:%d\n", ret);
--	else
--		log_info("Get board name:%s\n", product_name);
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
-+{
- 	fixup_product_name();
- }
- 
+Thanks
+Varada
 
--- 
-2.51.0
-
+1 - https://lore.kernel.org/u-boot/20260703-revert-sysreset-v2-1-ac999d2ff82f@cherry.de/
