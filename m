@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 561B0C43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 06:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90C2C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 06:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A57AA847C8;
-	Sun,  5 Jul 2026 08:08:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3ADD2846FD;
+	Sun,  5 Jul 2026 08:08:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Ph4j5Yiq";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="UhHrraQy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E52EB83314; Sun,  5 Jul 2026 08:08:26 +0200 (CEST)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
+ id B094D846FD; Sun,  5 Jul 2026 08:08:33 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97D2F846FD
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 08:08:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F14A83314
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 08:08:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eric.chung@riscstar.com
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-c96d2bebca3so982476a12.3
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 23:08:24 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-c966b9ee9cbso823395a12.1
+ for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 23:08:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783231703; x=1783836503;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783231709; x=1783836509;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=opZdumh25smgHzQg8wjKjzwsUDxkfRieWmqzB6WE9B4=;
- b=Ph4j5Yiq3yPqe63aJm2Z6BXA56dG/5j2cga6urfDv1I1Z7F8vQ13So3uN0GdBiiME+
- OJHnEGSSwlVKczHg0obA8OWH4/Dw4u62htFsIujWW3TYA2aaxk/3KLk8+P+H83zRf2Qj
- nV7wYQ+3ywhH592svnHPYQUk7g8EVRz1+gSrvjBnCD85Rzz562d5gBUkDQ/a43KGzhmw
- J/ys9JJFF7Hn7h0u4US1Z8+izEY1WMAQHQtV45rXeuYuE+4v6FNyaoXxoeYwSF90e8B4
- SQrKWomWPp3bYakiEeaIGmlb4U9PGDKtjMBx7KyV50O4rhET7s1ShJxoXc5u8OJg17G6
- n9cQ==
+ :reply-to; bh=AZBEebU/y5DKJN+5b+EqTSOLyAELftxAHJY7IyswGKI=;
+ b=UhHrraQy99yWyRgl+eN7giWhwb8iLKABQua4t0M4WVSyTDQtUNyD9fOoKIyNGwbCY5
+ F2Pl2ht5v2sdGeMzj0il6syP4uYKGf/LgSRHefhYtm1/dAvF20ePu6ee6eH1fxrjwaZG
+ Q+sq7B+dwYagoS29yiNBzw6KXnBuydefdAfsq/Yic3FjIk5jbOXVc7V7uu+9JpUgvZIi
+ 0+tH1F8icDv9C2PXWNiY2gUZyFS9yjrATC70FAe/ywJAFOWLYBGrLIR44ktadrEXzAAQ
+ pB+i+TvPdNO1i/p3UGaoQ5wwSeaiUmdFs/T9jtk6FRzc0W/3aUxu0caJ4TCq1VImPiZL
+ FFdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783231703; x=1783836503;
+ d=1e100.net; s=20251104; t=1783231709; x=1783836509;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=opZdumh25smgHzQg8wjKjzwsUDxkfRieWmqzB6WE9B4=;
- b=cgefuY/ohcxQ2LmyZ328DEUS2WHDq0maZ+8ITYISU7fcHplu8XxYSTZE9kQ50Md79J
- 0emSbi+1Cikc2O4lnYsSedA3ljSNFhn4c0FtnvqO6UeMLvl72aeKDbLv7yW8cJG9AQfy
- +bz2vAyOI+RM9jxVRjxo7jvtFG6mINLu76PNfHzLgTEH5WSXBX3mNg0Arm7Gbog8QzBz
- elbvo/5s/JxRdZWFhTEif8IAqosV3thuQjLVURTfTETnWg0JYYTpxObYmZ/putkIZwvV
- jIajbuklMDniV+SMfLf/6HEcNgE8XiuRE4eSmNL9dX/UmxJbkyfmjK0sdAqKOW6RrGBE
- Z3VA==
+ bh=AZBEebU/y5DKJN+5b+EqTSOLyAELftxAHJY7IyswGKI=;
+ b=AQdCy9zfbnMLLCT63A1/CtbnF3bWstlUSm2mRRRJcqQrIhiHEeCJgWj3Npyy6EG1Eh
+ PQSxCphKNGYySSfHzm/5OpmF1wg2xfkfYghEALptKxPvFz8WekQarlncWPoxn1LMd6Wt
+ vUP9Vszwmk7LL2yHezx/vbnfDcZIOKZueFE1WgIx0uVOQbvd4gHJ7MC+1rUO4R5l6uRZ
+ tZRQ668qCQ/lFkjuuGr1WJLdgkwS7qHx1a9xjFGnRaghuMOED6aMzJhIBx8al59DSQqo
+ xAfjmiUYHfn9AwB38CtlaxqzThmdsGzr44twWx7KvZbxsNzX/ObbyNDHFDhpNEIS6ngG
+ CBrg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+3/dgXJWV/T7WCQ7BoF96K5lWXtQbM9WDg7fexOuwQlLC1F7FzyTWHbbm7lDq0BwmnkZJDFBY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDQLD2yoBT+yqvvCIpAQYApPLww6PZygzE4yWC8vr50AkpnDF0
- KihcU4RUdXgPIPwC1bBCOgSazB0epv5FwGaCA4Xm7iEIUtB92qhLhII9KQfLlZJ3EwM=
-X-Gm-Gg: AfdE7ckOeywC4kgVzx61qyTCE+NRtnRcLmkCMFCgoNg/VJXfA+bVoRHraKDGQxDmBr9
- XwP/ISgzAhJXKKKQF/Nhco0pwQ/jgcDWAlfn3QR8t7fr/kenTa3YZIQRr0CZ5MijHw1I4AUd6fK
- 82ENtP7N2lvXSkyWmGRTggeKaxPbKQkA9GfhLfW6x6tyFU8sEx5LSujSdwgMzkDHI8onaHYwOvS
- xbWL4ba5kUUDFbQCKVp+K5O/pRfBjl27Dny85hwtsyGx6ia9FN95rkjLr9eYeNGt/LmhFoJvR34
- wTCE5wziy2OgTJl3P5HLQBtjFwC3FmYa3W0dLbXnoVTBR2WIgHM2u1ZQOVMLg9ZxWPy4JxxM4pt
- 3yPSb3iDKBG7pC+tv31sOzLPJGCmVVpqdc5zWdtNk1QqLT12AQizljsUEQdDFBoCKVMLweIQASj
- RhIKqcUzzluv7m9iABEgqpZcys7lDOX/tA8qf/FYJfUneGEJC4ICBfNmxo1Y+uruGqnbK8Q+njX
- V28Q99VjrLIH10CCRjmfLXCrreMXd8ScECDvG57y9wxrkPyLzoZHg==
-X-Received: by 2002:a05:6a20:3c8d:b0:3b4:6a23:6ba with SMTP id
- adf61e73a8af0-3c03e312e24mr6968920637.26.1783231702698; 
- Sat, 04 Jul 2026 23:08:22 -0700 (PDT)
+ AFNElJ/zJAjHKmlJ1IRGWadoBNueTfaAaq3rzY3UWhCrdxB08FyGuLCXk+fDtmbxdcXIM5bYDo4kf2M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzw6ZoyffEmOH0sFfvIjGycQcOIJ92uXw0CuRI8JujHM2nOWf52
+ ZngqHZWLCFtpRM6raSmLRh1PStaW0CGgwoTPMMgjmFQJ1GAnsNphQ9RXGOw4ZZpqumA=
+X-Gm-Gg: AfdE7cnvS9FleU8KasSVfOvUl0gJYpaHe1bymgYnxLFhOw5bWWCP+slCaWVB7i5XhG2
+ 23aq2Vu+hBpvy18Vzud4oInM+Tm/NYvz3JtWfcu3S3cvYX4KUAVNwANeP0hrtY6TfhUqBB1SuYD
+ b2O7/LMVHqcreWSF+EcB1la0THQEEfi16c5u8t+IdtU1/VzrUQIEz0WFqk8LNEDBhF1GIF1GtaY
+ SgiUpiTHE60RIdrmbSZ9FhIJP86cNzLcuMiyL3NJZtBohaid8Sk8+ausdFuugMbTm/GrMJSyYjG
+ tXieDjitZ7eczho2rA9sdZkKXvjHYIkT36qlnfcQLd0vbwZnxblox0GNL/ZksFmRP8LvVNXWfy8
+ 7dsANM0p9HsE/IeQh0jI9+4YsLMg72QImNsnNi1jty8v+x+2G5PXCSLMuFoJnV7yR/Ye2dYhqG6
+ YfQrpHD65Rhhs742pieDtFXZ+esF26hcNmqiDvTSYlSc1Gi+4VzaQDDpENja3aRP/9anFdYlCJE
+ QWMx3zcu3rwg4r5VDlSMRMN/ZrmD6/rQLWZ3pvzzGam9NSeVk/uOA==
+X-Received: by 2002:a05:6a21:6e8f:b0:3bf:6c04:a813 with SMTP id
+ adf61e73a8af0-3c03e4cef93mr5811790637.52.1783231709601; 
+ Sat, 04 Jul 2026 23:08:29 -0700 (PDT)
 Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f38ee1333sm22291719eec.24.2026.07.04.23.08.16
+ 5a478bee46e88-30f38ee1333sm22291719eec.24.2026.07.04.23.08.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 23:08:22 -0700 (PDT)
+ Sat, 04 Jul 2026 23:08:29 -0700 (PDT)
 From: Eric Chung <eric.chung@riscstar.com>
-Date: Sun, 05 Jul 2026 14:07:52 +0800
-Subject: [PATCH v3 1/9] spacemit: k1: select boot device via config registers
+Date: Sun, 05 Jul 2026 14:07:53 +0800
+Subject: [PATCH v3 2/9] pinctrl: k1: add IO power domain configuration support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260705-m4-v3-1-5a9bc7f25fc5@riscstar.com>
+Message-Id: <20260705-m4-v3-2-5a9bc7f25fc5@riscstar.com>
 References: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
 In-Reply-To: <20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com>
 To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
@@ -116,123 +116,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add logic to determine the current boot device by reading the
-SoC's configuration registers, rather than using a hardcoded
-default.
+Dual-voltage GPIO banks default to 3.3V, but when externally supplied
+with 1.8V the internal logic must be explicitly reconfigured to match.
+
+Add the ability to program IO power domain control registers through the
+APBC block. These registers require unlocking the AIB Secure Access
+Register (ASAR) before every read/write, since configuring a 1.8V domain
+while 3.3V is externally supplied can cause back-powering and pin damage.
 
 Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 
 ---
-v2:
-- Use FIELD_GET() to parse boot strap mode.
-- Remove comments on hacking. Since the sequence between eMMC
-  and SD device is exchanged in the upstream DTS. So it isn't
-  a hacking any more.
+v3:
+- Add SYSCON dependency in Kconfig.
+- Fix not sorted issue in the driver.
 ---
- board/spacemit/k1/spl.c | 69 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 68 insertions(+), 1 deletion(-)
+ drivers/pinctrl/spacemit/Kconfig      |  2 +-
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 83 ++++++++++++++++++++++++++++++++++-
+ 2 files changed, 82 insertions(+), 3 deletions(-)
 
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index 0db362130e4..70579637b5e 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -13,6 +13,7 @@
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <i2c.h>
-+#include <linux/bitfield.h>
- #include <linux/delay.h>
- #include <log.h>
- #include <power/regulator.h>
-@@ -21,6 +22,17 @@
- #include <tlv_eeprom.h>
- #include "tlv_codes.h"
+diff --git a/drivers/pinctrl/spacemit/Kconfig b/drivers/pinctrl/spacemit/Kconfig
+index 6aab89e160c..ff754f5839c 100644
+--- a/drivers/pinctrl/spacemit/Kconfig
++++ b/drivers/pinctrl/spacemit/Kconfig
+@@ -1,6 +1,6 @@
+ config PINCTRL_SPACEMIT_K1
+ 	bool "Spacemit K1 SoC pinctrl driver"
+-	depends on PINCTRL_GENERIC && DM
++	depends on PINCTRL_GENERIC && DM && SYSCON
+ 	help
+ 	  Supports pin multiplexing control on Spacemit K1 SoCs.
  
-+/* boot mode configs */
-+#define BOOT_DEV_FLAG_REG	0xd4282d10
-+#define BOOT_PIN_SEL_REG	0xd4282c20
-+
-+#define BOOT_STRAP_MODE_OFFSET	9
-+#define BOOT_STRAP_MODE_MASK	3
-+#define BOOT_STRAP_MODE_EMMC	0
-+#define BOOT_STRAP_MODE_SPI	1
-+#define BOOT_STRAP_MODE_NAND	2
-+#define BOOT_STRAP_MODE_SD	3
-+
- #define MUX_MODE4		4
- #define EDGE_NONE		BIT(6)
- #define PULL_UP			(6 << 13)       /* bit[15:13] 110 */
-@@ -45,6 +57,17 @@ typedef void (*puts_func_t)(const char *s);
- typedef int (*ddr_init_func_t)(u64 ddr_base, u32 cs_num, u32 data_rate,
- 			       puts_func_t puts);
+diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+index 3ebc397213b..95344f4ec72 100644
+--- a/drivers/pinctrl/spacemit/pinctrl-k1.c
++++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+@@ -12,6 +12,8 @@
+ #include <linux/bitops.h>
+ #include <linux/errno.h>
+ #include <linux/io.h>
++#include <regmap.h>
++#include <syscon.h>
  
-+enum board_boot_mode {
-+	BOOT_MODE_NONE = 0,
-+	BOOT_MODE_USB = 0x55a,
-+	BOOT_MODE_EMMC,
-+	BOOT_MODE_NAND,
-+	BOOT_MODE_SPI,
-+	BOOT_MODE_SD,
-+	BOOT_MODE_SHELL = 0x55f,
-+	BOOT_MODE_BOOTSTRAP,
-+};
-+
- struct ddr_cfg {
- 	u32     data_rate;
- 	u32     cs_num;
-@@ -379,7 +402,51 @@ void board_init_f(ulong dummy)
+ /*
+  * +---------+----------+-----------+--------+--------+----------+--------+
+@@ -34,8 +36,23 @@
+ #define PAD_PULLUP		BIT(14)
+ #define PAD_PULL_EN		BIT(15)
  
- u32 spl_boot_device(void)
- {
--	return BOOT_DEVICE_SPI;
-+	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
-+	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
-+	u32 mode, sel, ret = 0;
+-#define PIN_POWER_STATE_1V8		1800
+-#define PIN_POWER_STATE_3V3		3300
++#define IO_PWR_DOMAIN_OFFSET	0x800
 +
-+	mode = readl(boot_dev);
-+	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
-+		sel = FIELD_GET(BOOT_STRAP_MODE_MASK << BOOT_STRAP_MODE_OFFSET,
-+				readl(boot_strap));
-+		switch (sel) {
-+		case BOOT_STRAP_MODE_EMMC:
-+			mode = BOOT_MODE_EMMC;
-+			break;
-+		case BOOT_STRAP_MODE_NAND:
-+			mode = BOOT_MODE_NAND;
-+			break;
-+		case BOOT_STRAP_MODE_SPI:
-+			mode = BOOT_MODE_SPI;
-+			break;
-+		case BOOT_STRAP_MODE_SD:
-+		default:
-+			mode = BOOT_MODE_SD;
-+			break;
-+		}
-+	}
-+	switch (mode) {
-+	case BOOT_MODE_EMMC:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
-+	case BOOT_MODE_NAND:
-+		ret = BOOT_DEVICE_NAND;
-+		break;
-+	case BOOT_MODE_SPI:
-+		ret = BOOT_DEVICE_SPI;
-+		break;
-+	case BOOT_MODE_USB:
-+		ret = BOOT_DEVICE_USB;
-+		break;
-+	case BOOT_MODE_SD:
-+		ret = BOOT_DEVICE_MMC2;
-+		break;
-+	default:
-+		ret = BOOT_DEVICE_MMC1;
-+		break;
-+	}
-+	return ret;
++#define IO_PWR_DOMAIN_GPIO2_Kx  0x0c
++#define IO_PWR_DOMAIN_GPIO3_K1  0x10
++#define IO_PWR_DOMAIN_MMC_Kx    0x1c
++#define IO_PWR_DOMAIN_QSPI_K1   0x20
++
++#define IO_PWR_DOMAIN_V18EN	BIT(2)
++
++#define APBC_ASFAR		0x50
++#define APBC_ASSAR		0x54
++
++#define APBC_ASFAR_AKEY		0xbaba
++#define APBC_ASSAR_AKEY		0xeb10
++
++#define PIN_POWER_STATE_1V8	1800
++#define PIN_POWER_STATE_3V3	3300
+ 
+ enum spacemit_pin_io_type {
+ 	IO_TYPE_NONE = 0,
+@@ -60,12 +77,14 @@ struct spacemit_pinctrl_data {
+ 	int (*get_pins)(struct udevice *dev);
+ 	int (*get_functions)(struct udevice *dev);
+ 	int (*get_io_type)(struct udevice *dev, unsigned int pin);
++	unsigned int (*pin_to_io_pd_offset)(unsigned int pin);
+ };
+ 
+ struct spacemit_pinctrl_priv {
+ 	void __iomem		*regs;
+ 	struct spacemit_pin_io	*io_pins;
+ 	int			nr_io_pins;
++	struct regmap		*regmap;
+ };
+ 
+ struct spacemit_pin_mux_config {
+@@ -196,6 +215,28 @@ static int k1_get_io_type(struct udevice *dev, unsigned int selector)
+ 	return -EINVAL;
  }
  
- void spl_board_init(void)
++static unsigned int spacemit_k1_pin_to_io_pd_offset(unsigned int pin)
++{
++	unsigned int offset = 0;
++
++	switch (pin) {
++	case 47 ... 52:
++		offset = IO_PWR_DOMAIN_GPIO3_K1;
++		break;
++	case 75 ... 80:
++		offset = IO_PWR_DOMAIN_GPIO2_Kx;
++		break;
++	case 98 ... 103:
++		offset = IO_PWR_DOMAIN_QSPI_K1;
++		break;
++	case 104 ... 109:
++		offset = IO_PWR_DOMAIN_MMC_Kx;
++		break;
++	}
++
++	return offset;
++}
++
+ /* use IO high level output current as the table */
+ static struct spacemit_pin_drv_strength spacemit_ds_1v8_tbl[4] = {
+ 	{ 0, 11 },
+@@ -400,6 +441,35 @@ static const struct pinconf_param spacemit_pinconf_params[] = {
+ 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	U32_MAX },
+ };
+ 
++static void spacemit_set_io_power_domain(struct udevice *dev,
++					 unsigned int pin,
++					 unsigned int io_type)
++{
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	struct spacemit_pinctrl_data *data;
++	unsigned int offset;
++	u32 val = 0;
++
++	if (!priv->regmap)
++		return;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_io_pd_offset)
++		return;
++
++	offset = data->pin_to_io_pd_offset(pin);
++	if (!offset)
++		return;
++
++	if (io_type == IO_TYPE_1V8)
++		val = IO_PWR_DOMAIN_V18EN;
++
++	regmap_write(priv->regmap, APBC_ASFAR, APBC_ASFAR_AKEY);
++	regmap_write(priv->regmap, APBC_ASSAR, APBC_ASSAR_AKEY);
++
++	writel(val, priv->regs + IO_PWR_DOMAIN_OFFSET + offset);
++}
++
+ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 				unsigned int param, unsigned int argument)
+ {
+@@ -456,6 +526,9 @@ static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			dev_err(dev, "Invalid power source (%d)\n", argument);
+ 			return -EINVAL;
+ 		}
++		if (found)
++			spacemit_set_io_power_domain(dev, pin_selector,
++						     priv->io_pins[i].io_type);
+ 		break;
+ 	default:
+ 		return -EOPNOTSUPP;
+@@ -485,6 +558,11 @@ static int spacemit_pinctrl_probe(struct udevice *dev)
+ 		dev_err(dev, "Fail to allocate memory\n");
+ 		return -ENOMEM;
+ 	}
++	priv->regmap = syscon_regmap_lookup_by_phandle(dev, "spacemit,apbc");
++	if (IS_ERR(priv->regmap)) {
++		dev_warn(dev, "no syscon found, disable IO power domain switching\n");
++		priv->regmap = NULL;
++	}
+ 
+ 	ret = clk_get_bulk(dev, &clks);
+ 	if (ret) {
+@@ -512,6 +590,7 @@ static const struct spacemit_pinctrl_data k1_pinctrl_data = {
+ 	.get_pins	= k1_get_pins,
+ 	.get_functions	= k1_get_functions,
+ 	.get_io_type	= k1_get_io_type,
++	.pin_to_io_pd_offset = spacemit_k1_pin_to_io_pd_offset,
+ };
+ 
+ static const struct udevice_id spacemit_pinctrl_ids[] = {
 
 -- 
 2.51.0
