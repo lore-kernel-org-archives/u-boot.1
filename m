@@ -4,99 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79DCC43458
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 04:05:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 823C5C43458
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jul 2026 04:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C726284119;
-	Sun,  5 Jul 2026 06:05:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15FD0847C8;
+	Sun,  5 Jul 2026 06:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ULs2N3Ey";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bBFXFXzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CAA484119; Sun,  5 Jul 2026 05:44:37 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id F26158484C; Sun,  5 Jul 2026 05:44:43 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78E8E801A9
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 05:44:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F401D801A9
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 05:44:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 01AED3F11B
- for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 03:44:34 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A68713F1F4
+ for <u-boot@lists.denx.de>; Sun,  5 Jul 2026 03:44:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1783223075;
- bh=wbjWkTqLKUoktg4BSeIOYrKoGgNFGci2qXOEj5kCsUs=;
+ s=20251003; t=1783223081;
+ bh=mICyDnm4S7Mdrcj9EzQFWtKnO+i02noZJJkVCPJf+lI=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=ULs2N3EycjeOK9LzEuMS4pzpETqpUvpbrCJBJ2vKUEFshD4z8ZiZ2Le9l3aaHxKm/
- IzQ1G0ZVD2oHGWi7FXRq2D404nsrGRoiUk8vhVcC17oFkqRn+q0geuBs+NtrW0ZF8M
- ykmx8Aj5vYkf/Zn5Mh9oEKGQqL59wKRRUL6Aa1uhVuoJKSpW+7n3mgMN27IL43x6JO
- YwINyfxb5egLv46dp92eJWueG8U6aotjSVi11ri6e0Vkt4aXX2wxjncPo9/kU2t0CJ
- WwyM1YuG/gzO374mWlROcJSxNj7rOu++9d61NgdrupCdbo4zqTP/folVMqOx/bQfdt
- ay4VczQYd4rtReP4S6zeAjd0kLCGcv8RVsLCCr7PWUCGAYd7Azf51xraYQhP8t0w9x
- zwzFM8YZ6NQU7QsjLIOh/JZz4Y1dxkuREX11nZis/Ay1xRKM32yZPR0PmT0XejURRe
- Yqc964nB+STIVrPhL/qNAmsUzA69LXEoY6rAcdTeJOsOzpfUEFN0ZyNODuhtCggU6P
- wZcli9BOcgR65uDZVS/61N52wS+evf+thPiqDE85JWFyk43Zq1BStKMLDQfU07rA+2
- EgMAKvCwvbGV390rs/kFYDW6pgCW59yD5ZtvC7U+EllR0Es7b5B3zFQXbn8m56PMb1
- gg1Ixo4YIxW3JfppiO6J1S6E=
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-c9d5a5b63c5so2793978a12.1
- for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 20:44:34 -0700 (PDT)
+ b=bBFXFXznDa446ierG3OKCmBzKj04aMR6chaqys0Of2jOzMr4Ruht+pzNLS6Q2BX+B
+ pzO6BTq00U7DNhMy5ESgEKoctZSYyH56kQdoXjrSSDDZGMLl8fGH/9pGVLbuAunYJM
+ LawOwtpezkDkraI8uOP/ILqOQf7cbirvPAdp/vmp9nSHImq97OmPOve6lppJsYNohO
+ he0/jSmCW/m0CeCmNfaMiMlx8/dDDy/ieQOmf97aDtYoGfMJHi0UncwT8GOmQjq8bT
+ u1TUJFRUI3lO4c3KdlpxWooLz9XfTOl0TqmXhOEcgim4iSNbdvxq8Ny/y/dIyBlMFx
+ N1x4S94q5WguUXWEAz0UUXu912g75h2ECoTV+YysM6I7dVl9fqubHhrC7Cxhsw7P4B
+ ZFU8yBLqIsMoXn2zMHjWmEZRsOUqoIKNN3rbb2gG5GNQL+mW6578umbivEvnYZ+bzC
+ oL3J6PyAXWYNJe1QdXqkiA8UeNr1ZhZgC8P70E2CiA0103v2oA29SdBfnsm3cqW/es
+ f6n2G+meEAHMgHeisVJZKt6wA2GOOxmeV2cOd0Fk9GgYsaDrEU9l/JVIh2yyWjMX2k
+ 8ivSFNRyvDMI8G+PjhWHbey7H2OTkEaLWmVWnESCiC3YKt5ue0J2C6xej3GRJg1W6u
+ UXh0z6WmaCkAdBfrDbyiZnzs=
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-847c3a12ce8so1862358b3a.1
+ for <u-boot@lists.denx.de>; Sat, 04 Jul 2026 20:44:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783223073; x=1783827873;
+ d=1e100.net; s=20251104; t=1783223080; x=1783827880;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=wbjWkTqLKUoktg4BSeIOYrKoGgNFGci2qXOEj5kCsUs=;
- b=V35+Rb9k6tfkoYga8EMBm252whJsRajnYxNCGJj/JcJWKEz/6H/hzpphy17cDTe4a9
- 5dqVy4oBQpVcsaaBWLfydT0CBX1URA1ZpVT0Y+I1t6JuVGCbZIMwyT/rHezG4A57zebc
- nTo3R3MsvXEe2AinPGcqTMqCq7Lw+dOF/fZiAWTZM1AotZr4/BJeNQhS6/QoM/XUaPRt
- LqxAlNxjf8pjGimw07KsR1ZT5lBPVfIfFeoHlHQFAdWBTMaUdVD0skz19lDtcxccxUWo
- r5JFqY9HfAsUNwKXTvdxRmBubpn0B7FUKR5EbACOb5IhkM3Gi4fTdTni+1CYPJFWhxk8
- F0BA==
-X-Gm-Message-State: AOJu0YxYeidqZnHHHy7mrrsvFxTj6BbbEBmMDTrF96L5gCtXFMZ1ERk1
- VstQ0w2xSP2IqZAu6itBlADsCswasH8h2t9JZfZERRDCHeEVjh0ESYLRregpSXdsFBL6Ckzw6fY
- jaBtiprL94p1ld2qmU960lAIrPJ23akHUOSsDiXLTQLqKaCsyKLycgP5510RdneDHiMsM/f+mYO
- zvjv8=
-X-Gm-Gg: AfdE7ckNieIXa/uEnMDvWkOALtkWkq4KQQ5ukPWGpANk9d6+Pludom+6zyhfCIq2xSP
- lFVTE6hzUkOsY+aliEFExaZ02hwOrCqan+a/0dfUxuqNL5M/gC/uvzztD4vWvxj94cvPEScKbnJ
- fgiuBa56u9L0QTrHekYyhBQfyk8DJ8aXcSxZyLjDXICk/ADRVEA5DgFHMrt8aQZ5aEwAlZ6aDr/
- GAjCYphpWRe4lmTAhAUfMO3wK6daK15RDV/4a6yRJYnu7x4P1r9uyP8Hh7o/9sUQZRGZALTVUn1
- LWZr+KDFKQ4JsFLQHN4xuKfYPDts5HjHPRgeRm9GX4UPOvMwMdreNLWQYbwt+2o+W70zDYaZCqp
- AHiaRCf2Y1Dsw0CJP2ZTa+CLEi29ImSMnQ7Li+PoAwC/XXmmRk0S67Fxcw04lXl6kGGEe/Q8Eaj
- 66cJ/u
-X-Received: by 2002:a05:6a21:62cc:b0:3bf:a4c9:b054 with SMTP id
- adf61e73a8af0-3c03e4c46dcmr5736156637.46.1783223072989; 
- Sat, 04 Jul 2026 20:44:32 -0700 (PDT)
-X-Received: by 2002:a05:6a21:62cc:b0:3bf:a4c9:b054 with SMTP id
- adf61e73a8af0-3c03e4c46dcmr5736123637.46.1783223072379; 
- Sat, 04 Jul 2026 20:44:32 -0700 (PDT)
+ bh=mICyDnm4S7Mdrcj9EzQFWtKnO+i02noZJJkVCPJf+lI=;
+ b=VwOIKtgeFVY1vun2Lm1szmpaunW6ebKy2RWQh9zNYrwNimm2VfpJWUNFkr4kuUEgCB
+ bcMyjoPt4p9OD9Ul6XDJXAYA20DTeoKdBaDbzFU/EUIHhiHTaHbQ5beUJMU/JO4WE1qD
+ uHF7pWC2yZt443EsVnZM4TN/YMy/QuZ/b40MKNpii4qbtgWgK414zZNikKEPnhiOocWo
+ RYjgH8cge38kNMeCExKjeFKV/NJq0bsLBxs7Esv+gx77fMG7BMyMr2KYEoCAjyitzbaj
+ gvp/z9Eejqoo4OPZFl2BuV4SxD6P1xSbxfVhwNLJLaQ3o0MviZ5mc9kVP/YkHQ59/f+O
+ IV4w==
+X-Gm-Message-State: AOJu0Yw3xBjXNxR5iN7vISGGv9VtL1gmlryyvsNlJ2aWxtmBTfsshgg8
+ Q3sYDtFm9l5OJ90gsWgz/hpXYnVC2KlrUNUWzkQMLCkL/Aijj17rBDbU7qUixbfBDgWwn3bTNCW
+ AtqcekV9gstdj6SQERxeyft6bf1OYXbvIQZ3jUzQCatw7gFMVBcXNEcwSTeO49aJ/rFP+5MWES/
+ f2RsM=
+X-Gm-Gg: AfdE7cmA7NL14PZY+cXyziOXg+4rhrbrYjl8y7xz0dCj0lJG+uungULtRYgv/T7lsL8
+ DlgnVK86suXYyVselFX5ULg5tPQ5frSQxHpP8JauNVagFbeL7TDoq234aGHE6Xnl5ClfkMm1Ket
+ 48b5LAZY5K7rG2E3/RjRDjIGo6I4MkI0NkxWQAEI+gYY2x3hN11uqprUa//r94lHKcFN24cqUYB
+ 0CDp3kNgGthZr51KrQlLq79OgBGs6y2cJTXlsrYx2kJ+wS23bvbH0C4gqa1lTlGvN51UoNHbquO
+ beYJXQuTiAWVLZ+FZtDvCdI0NtKAHMJjm9bFE6CuSLy3P7+d52McgdaJxrEcIj8oaFysSCCUgaC
+ s2L68O5N6zHiggDj6AT1elF5h9ogJRVgjrPYGWYin83RLBO8bwhunawCilK0OHbpXqWKWLrAe0+
+ y7k1hm
+X-Received: by 2002:a05:6a21:32a2:b0:3ba:f5c7:6bc3 with SMTP id
+ adf61e73a8af0-3c03e15d9b5mr5405540637.10.1783223080102; 
+ Sat, 04 Jul 2026 20:44:40 -0700 (PDT)
+X-Received: by 2002:a05:6a21:32a2:b0:3ba:f5c7:6bc3 with SMTP id
+ adf61e73a8af0-3c03e15d9b5mr5405480637.10.1783223077997; 
+ Sat, 04 Jul 2026 20:44:37 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c9e926a4294sm4424735a12.26.2026.07.04.20.44.31
+ 41be03b00d2f7-c9e926a4294sm4424735a12.26.2026.07.04.20.44.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 20:44:31 -0700 (PDT)
+ Sat, 04 Jul 2026 20:44:37 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v3 0/3] vbe: bound FIT external-data reads against the
- firmware area
-Date: Sun,  5 Jul 2026 03:44:08 +0000
-Message-ID: <20260705034414.2247-1-aristo.chen@canonical.com>
+Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 2/3] vbe: bound FIT external-data offset and size before
+ blk_read
+Date: Sun,  5 Jul 2026 03:44:10 +0000
+Message-ID: <20260705034414.2247-3-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260702071425.9204-1-aristo.chen@canonical.com>
+In-Reply-To: <20260705034414.2247-1-aristo.chen@canonical.com>
 References: <20260702071425.9204-1-aristo.chen@canonical.com>
+ <20260705034414.2247-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 05 Jul 2026 06:05:54 +0200
@@ -116,69 +118,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-vbe_read_fit() loads a firmware-phase FIT from a fixed firmware area on
-a block device and then issues a follow-up blk_read() to pull in the
-image, and optionally an FDT, referenced by the FIT's image node. The
-source offset on the device and the read length both come from the FIT
-itself, via data-position or data-offset and data-size. Those properties
-live on mutable boot media and can be controlled by an attacker with
-write access to the firmware area. On the TPL or VPL path, and on the
-bootmeth bootflow path reached via abrec_read_bootflow_fw() and
-vbe_simple_read_bootflow_fw(), the follow-up blk_read() runs before any
-signature or hash check on the loaded phase.
+vbe_read_fit() loads a firmware-phase FIT from the trusted firmware area
+and then issues a blk_read() to pull in the image, and optionally an
+FDT, referenced by the FIT image node. The source offset on the device
+and the read length both come from the FIT's data-position or data-offset
+property and its data-size property, which live on mutable boot media
+and can be controlled by an attacker with prior write access to the
+firmware area.
 
-Patch 1 is a sandbox test-tree preparation. The firmware1 node in
-arch/sandbox/dts/test.dts declared area-size = 0xe00000 (14 MiB), but
-the binman fw-update section in sandbox_vpl.dtsi is 32 MiB and the FIT
-inside it carries ~16 MiB of external data, so the FIT already extended
-past the declared area. The mismatch was tolerated because no caller
-bounded the external-data load against area_size. Patch 1 raises
-area-size to match the binman section size so test_vbe_vpl keeps passing
-once the bound is enforced. The patches are ordered so the test is never
-broken in the middle of the series.
+Without a range check the resulting blk_read() can read past the
+firmware area on the device and, on the non-SPL path, write an
+attacker-chosen number of blocks past the malloc(aligned_size) FIT
+buffer into adjacent memory. Only the SPL branch routes through
+spl_load_simple_fit(), which hashes the data. The external-data block
+reached from TPL or VPL, and from the bootflow path via
+abrec_read_bootflow_fw() and vbe_simple_read_bootflow_fw(), runs before
+any signature or hash check on the loaded phase.
 
-Patch 2 adds the missing range check, confining the FIT-supplied
-[load_addr, load_addr + len) window to [addr, addr + area_size] before
-block numbers and lengths are computed, and applying the same constraint
-to fdt_load_addr and fdt_size. The check is written in subtraction-only
-form against the trusted area_size so the comparison cannot itself
-overflow.
+Confine the FIT-supplied [load_addr, load_addr + len) window to
+[addr, addr + area_size] before computing block numbers and lengths,
+and apply the same constraint to fdt_load_addr and fdt_size. The checks
+are written in subtraction-only form against the trusted area_size so
+the comparison itself cannot overflow.
 
-Patch 3 adds two sandbox unit tests under test/boot/ that construct
-synthetic FITs with out-of-range data-position and oversized data-size,
-write them to mmc1, and confirm vbe_read_fit() returns -E2BIG for each
-before issuing the follow-up blk_read().
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/vbe_common.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-Deferring the external-data blk_read() until after the phase has been
-signature-verified would be a stronger structural fix and was discussed
-on the v1 thread. Simon confirmed the bounded read is the right first
-step and that the verify-then-load change should be a separate series,
-so this v3 stays scoped to the bound.
-
-Changes since v2:
- - Patch 3: dropped an unused <mapmem.h> include and added a note in
-   the commit body explaining why the load_addr < addr and FDT-region
-   clauses are not exercised by the new tests (both are unreachable
-   from a sandbox test). Both nits from Simon's v2 review.
- - Carried forward Simon Glass's Reviewed-by on all three patches.
-
-Changes since v1:
- - Collected Simon Glass's Reviewed-by on patches 1 and 2.
- - Added patch 3: sandbox bounds-check tests for vbe_read_fit()
-   (Suggested-by Simon Glass).
-
-Aristo Chen (3):
-  sandbox: vbe: size firmware1 area to fit the binman fw-update section
-  vbe: bound FIT external-data offset and size before blk_read
-  test: vbe: cover vbe_read_fit() external-data bounds checks
-
- arch/sandbox/dts/test.dts |   2 +-
- boot/vbe_common.c         |  16 +++
- test/boot/Makefile        |   2 +-
- test/boot/vbe_read_fit.c  | 224 ++++++++++++++++++++++++++++++++++++++
- 4 files changed, 242 insertions(+), 2 deletions(-)
- create mode 100644 test/boot/vbe_read_fit.c
-
+diff --git a/boot/vbe_common.c b/boot/vbe_common.c
+index a86986d86e9..844100b7ee6 100644
+--- a/boot/vbe_common.c
++++ b/boot/vbe_common.c
+@@ -278,6 +278,17 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
+ 		ulong fdt_offset;
+ 		void *base_buf, *fdt_base_buf;
+ 
++		/*
++		 * load_addr and len describe the external data location in
++		 * the FIT, which lives on mutable boot media. Bound them
++		 * against the trusted area_size so the blk_read() below
++		 * cannot read past the firmware area or write an
++		 * attacker-chosen number of blocks past the FIT allocation.
++		 */
++		if (load_addr < addr || load_addr - addr > area_size ||
++		    len > area_size - (load_addr - addr))
++			return log_msg_ret("rng", -E2BIG);
++
+ 		/* Find the start address to load from */
+ 		base = ALIGN_DOWN(load_addr, desc->blksz);
+ 
+@@ -321,6 +332,11 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
+ 
+ 		/* now the FDT */
+ 		if (fdt_size) {
++			/* Same constraint as above for the FDT region */
++			if (fdt_load_addr < addr ||
++			    fdt_load_addr - addr > area_size ||
++			    fdt_size > area_size - (fdt_load_addr - addr))
++				return log_msg_ret("rng", -E2BIG);
+ 			fdt_offset = area_offset + fdt_load_addr - addr;
+ 			blknum = fdt_offset / desc->blksz;
+ 			extra = fdt_offset % desc->blksz;
 -- 
 2.43.0
 
