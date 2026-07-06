@@ -4,79 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B687C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 19:44:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86274C43602
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 21:00:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D3B5846FD;
-	Mon,  6 Jul 2026 21:44:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DB36846FD;
+	Mon,  6 Jul 2026 23:00:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FzHAi5Cq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="q6GBeOJ8";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="mKf0boNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7CD68490A; Mon,  6 Jul 2026 21:44:37 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4DAC984852; Mon,  6 Jul 2026 23:00:02 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5751B846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 21:44:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC392846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 22:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gvFDg1BPTzKn6v;
- Mon, 06 Jul 2026 21:44:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783367075;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=C6h1GadI8xjTUI9OX/cEzLvgufLERp1wN2I2+gUJasE=;
- b=FzHAi5CqtPm1LBx1oFLOuxULYprcBbyufn3u+M+1G8B/GbQTMdydKfuYv00Jrjw+jg1bJp
- srNT9Cjrb5leF4R1DRi8UYTFYElK32gKJ3p1tVt6BvDfDdV5h7DPJSm3D/DVLhGTd6WLE8
- QAEWeH1vrlfrXL/jAIq+RYHRyAwzKeKT/jUtuEbhPSmPSnOkUHzeTwMA3TIrKeXSvQ9av8
- a515/bG8mB0sK3I4WYUE7CI6NZU41+T4GYx3YTn/CS2znfx1fCPsr90hH7LvZQyH246YUi
- RWuFBhRO/332jV9b7+3kTIYdhDH+fBwGjqGXv1qUR58F4SGaf/qnlUKG4vKiqQ==
-Message-ID: <ec6ed9f4-b302-4336-af02-1645aff668d1@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783367073;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=C6h1GadI8xjTUI9OX/cEzLvgufLERp1wN2I2+gUJasE=;
- b=q6GBeOJ88tWe64RQf/4g5ZhrzlZtQOhbIprpGxgMBFMNN1my6qLxJtWTFAMfjLB85LAr52
- Caf/GDy2SR1rjMPQEViYzT4KH7cVkWFFOFSq1QiGhMW7mUi7nOWMjgPkAJ9VRkn+EGZ3Nf
- CKNE16PP0QmzLU4kpHgUD9BjtLY8jJYTwzFqCD8/a6UWL/q5fTZhoWOxAEeHpov0H1WSfW
- tnhxqgsykk15Ikpy+SDKoYrWMid4AHLa2ceCxgCoMMId7uHDjR+mh7xFphdMAwPM3PLSHT
- APcbCOw39kIoxc5tSOLOJdMEwcJNTehpWYyYbs5wPB1qo8KueiyDYU0VaM6NmQ==
-Date: Mon, 6 Jul 2026 18:00:36 +0200
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7ea9c6ea7deso2596019a34.3
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 13:59:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783371598; cv=none;
+ d=google.com; s=arc-20260327;
+ b=dBSCpWtmDvrQMeXCi5AghqI6Q+X1U7cNPNcE0hE0HKxhjNnfLhOpN01MVarU/BH+zi
+ P40qyfYjijjUdMqR8OcEDnnMon2OPS7wsBGgKZm2tOIWm9g8qaQl03hoZ/LIGNCqHi3I
+ caa2ZNxEGahXVqszES3Lz/zbN2UgSryLF0KV33wWYGTR/hHBzBG3KxkPtJV8K3ttP2Nj
+ 62KN3nrgcKuNL9mdboii1XpTvAvtkYnept7XdPGoLjDxGyX5Cp6YqJ3lKa7TPFiZz+L6
+ cAJJZPQe8wbSGpw9KiozLu9qhW0jfBmdQ0yvOLDbmAxbO//S41P0EIUQMHBOJrhK9anh
+ rZbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
+ fh=6L+AusHYlUewn8EoK/1Mbo2rg5NefWhURBdyQ+djJto=;
+ b=QAbVUqUjut09uRsO1WJrMV/sG+vJU2jEdBCM/AD3wDK/15bWmfCd5oEn11n2k+fH2w
+ 1LdLWvMStZtjA+7C6jDa3u3PAop+G1XvDbCCRiSFCv2KCGFWCPlT+MHVKq53u/QX4hQ2
+ wM1tfvl7C2BoHV5eAhiNTqkE6VsYup/nYHvQAS1JHtFIca0Ax54iQy3TPwFvG4SFYUcc
+ u3VBJddtz3Bltqaj1PwXMOvXOjT8wle5J5efLUegFawM1SvkyXABNPwYMK2769O/tXnR
+ wnzpuFuhT9lRCk7xeUO7SnoIVFNXel5MU3NRGRssPBP18IcRS8QkROPTbSKg1CzNMZtk
+ f9Ng==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1783371598; x=1783976398; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
+ b=mKf0boNeOp3muGwIgix+KfK4O7p2ImTE9Y6nTkM8KcMZBvB+pdbKpF1J4RZEvLUPcg
+ crfURLgmnxR4Bk0K3ATOFNRyqLBo/xPgrYPKoV3LM9ola/FkmQPvdTfymmROxsTk+AZV
+ ucYD4KyG7g1O2nSs/GuuqIZkwDLNS0OsXHVy1z+EKwRGIjt00UFOYbFu7RngrEm+pvKs
+ qrl/0Vg/WLLFVhbRP0wCwSz/dUbEJ+r5JmStuFlfEAAWQrRqSv3EGprZiymhV+SHm83d
+ kkTob7xjpk03tuZkM4bmU0uz+gKPH7qEScMklo5SroXFngOsMwIudjVbKIp6rArJ7yoT
+ FYDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783371598; x=1783976398;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
+ b=Oyip13grDgbecRkPT+2Q8RnHb0GYIxPwuhtUjFJWtz1lfaKIodwaIfHVhn8AQxOBy+
+ 8os0amIcYk3JcxqDGAtsuGNDW/mMXsoVJdNJOnjotb9safyg7HSSg0a3F9p9gvkCW/hL
+ y2FhwukXebEib9/R3vecfcA0GS/1jRZtwg+8rysr5/s5rmGblE7oP+FL6LWqfq4WwFFq
+ /k4l33PtwXnuW1YHRnZmqT8e+cpr07MKobzgpBRFW3lRRLwDHseBWKQamYz04csnZaDP
+ FO4bKopBDyF+Q5bZDobP/0CjJvuDsPk4ezjwrdqRPpVKLdkqvEjyhms0GYxkH/PYPJs4
+ zGyQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ98pl015c98KkdBhKNNG20fwvyimu99t1INrc+yERUSZtLrW1AJZfG27XDzEQw+KjZKY1X/fwk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzD3yJFe5eUM6TUFXmws8yNF5DtteWQe7El7vqugygzRTSWYhtF
+ ALhQCp3X+Xwsk4EFd1hQAZrSKYQjmBOf1wYO3211RTN7RZl6pAGGW8p9wBuM3Ez9WI3p8jGaMD6
+ Oeeul7Vu2dvS8+TGNTkMS4JAdrG0rtCTT6NkBcMybpA==
+X-Gm-Gg: AfdE7cmTfMtiR/+Isn7o5qNPLPcoQWc1pqyzx7AOa+MwLR8XqbCVJEnHEyZwSXd1qyi
+ Wqzl59EZsmUGNt2MOpvnN0RdjMGLu0MGXUXflE0DN2aDt29mHs8Qi4CvKzIP1cYNuHO/NTztxfT
+ qe2nlRAuhnCIsVJhn8oByB1x94S+sa995jkVRvrTob8Kq6pW5odv1beXZFzOlVepczPeZQxiUID
+ 7mp3EraTk9TTgIcbcn18T1XzawM4hQjf1LNONpWnbo+Li1kiKQnJcxvtid+bsLrzMer1tzuvw==
+X-Received: by 2002:a05:6830:6a94:b0:7e9:e891:fb56 with SMTP id
+ 46e09a7af769-7ebb246a3bamr1452524a34.32.1783371598605; Mon, 06 Jul 2026
+ 13:59:58 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] cyclic: parse cyclic list only if next cyclic
- timestamp is reached
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-References: <20260702-optimize_cyclic_run-v1-0-92c5a7011f54@foss.st.com>
- <20260702-optimize_cyclic_run-v1-2-92c5a7011f54@foss.st.com>
- <b9c4b762-6abd-4025-bde5-ab911fd5f683@mailbox.org>
- <0d9f5186-8342-4a11-adf3-2ffc2e5267f6@foss.st.com>
- <5ce8de52-2fec-4d08-a9e6-cfc69edbaa0a@mailbox.org>
- <13f510d9-6b08-499f-a6c0-f76484488899@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <13f510d9-6b08-499f-a6c0-f76484488899@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: aa2f399c83557d2972e
-X-MBO-RS-META: rjhfq3p98i7qeodjggrd5y5z1ziowjdc
+References: <20260706133322.68010-1-ccaione@baylibre.com>
+ <6014ec62-5c2e-48db-ad45-64716acad733@baylibre.com>
+In-Reply-To: <6014ec62-5c2e-48db-ad45-64716acad733@baylibre.com>
+From: Carlo Caione <ccaione@baylibre.com>
+Date: Mon, 6 Jul 2026 22:59:47 +0200
+X-Gm-Features: AVVi8CeiGMGgmjXeL3CF1xYmNhBL-tBWAryHvJkBojQJnzEiQQZUh4W9LerrEM0
+Message-ID: <CADh8Lse4sXWg4Fx3mDg8_HuEH_7uVmKMxWeGa82rGe7Dz9eE4g@mail.gmail.com>
+Subject: Re: [PATCH] configs: mediatek: do not autostart the watchdog on the
+ Genio EVKs
+To: David Lechner <dlechner@baylibre.com>
+Cc: Macpaul.Lin@mediatek.com, jstephan@baylibre.com, trini@konsulko.com, 
+ jmasson@baylibre.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,26 +117,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/6/26 5:16 PM, Patrice CHOTARD wrote:
+On Mon, Jul 6, 2026 at 9:10=E2=80=AFPM David Lechner <dlechner@baylibre.com=
+> wrote:
+>
+> On 7/6/26 8:24 AM, Carlo Caione wrote:
+> > U-Boot autostarts the SoC watchdog (CONFIG_WATCHDOG_AUTOSTART default
+> > y) and services it from its main loop, but nothing services it after
+> > ExitBootServices()/bootm: an EFI-booted OS that does not take over the
+> > watchdog in time is reset mid-boot at a wall-clock-dependent point.
+> >
+> > The MediaTek toprgu can count at most ~16 seconds, once firmware stops
+> > servicing it at the handoff, the OS has whatever is left of those 16
+> > seconds.
+> >
+> > On the Genio 700 EVK the generic Ubuntu 26.04 arm64 image is hard-reset
+> > before its first boot reaches the login prompt: the mtk-wdt driver is
+> > a module loaded from the rootfs and cannot win that race. Nothing tells
+> > a generic OS that the watchdog is armed, so the failure is silent and,
+> > from the user's side, indistinguishable from broken firmware.
+> >
+> > Disable WATCHDOG_AUTOSTART for the Genio EVK boards (mt8365_evk
+> > directly, mt8188.config for the Genio 510/700).
+> >
+> > Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+> > ---
+> >  configs/mt8188.config        | 1 +
+> >  configs/mt8365_evk_defconfig | 1 +
+> >  2 files changed, 2 insertions(+)
+> >
+>
+> What about Genio 520/720 (mt8189.config) and Genio 1200 (mt8195.config)?
+> Seems like the same reasoning would apply to those.
 
-Hello Patrice,
+Yes, but this is a preliminary patch for a much larger effort focused
+only on the G700 for now. Since this change essentially disables the
+watchdog in U-Boot I prefer to limit it, for now, only to the
+platforms where this is actually needed. The same will be done also
+for the other platforms in due time.
 
->>> I did a test, it doesn't bring any noticeable improvements, but nevertheless i will submit a v3 with this update.
->>
->> Does the list iteration exit when it finds the first entry that is not going to be executed at this time ? If it does not, then there will be no improvement. But for this to work, the list would have to be surely fully ordered in incrementing timestamp order, is it ?
-> 
-> No, the list iteration parse all entries.
-> 
-> I see your point, on original implementation, entries are not sort by incrementing timestamp order.
-> I did some implementation test, by sorting cyclic entries in cyclic_list when :
->    _ registering a new cyclic callback, put it directly in the right position in cyclic_list.
->    _ in cyclic_run(), after running a cyclic, compute its next call and insrt it in the right position in cyclic_list.
-> 
-> There is no noticeable gain.
+Cheers,
 
-Did you also break from the iteration when you reached the first entry 
-with future timestamp ? That might actually help.
-
--- 
-Best regards,
-Marek Vasut
+--
+Carlo Caione
