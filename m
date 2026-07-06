@@ -4,119 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7372FC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 16:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B58C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 16:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 044E7846FD;
-	Mon,  6 Jul 2026 18:06:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D330846FD;
+	Mon,  6 Jul 2026 18:15:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XDeQWqdN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nTliemv9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 519B88498B; Mon,  6 Jul 2026 18:06:56 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1A7F584852; Mon,  6 Jul 2026 18:15:20 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 276D8846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 18:06:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE705846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 18:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X2bjRJ8K5+grQHcKBjnedSP0G3Dyp2QNP7mCvkmhVfTFDOlPbJRiN0tc78sykKt1jbKkn76Iuddil6nbhJkQFuZaCBlXMQcZ3LXRArZSK8nI1wLBo0EFGjqZaVpxKCVCxJI/n00DHiAFcBrplnkknzVEVmeR+LoZZpXeKSjG77vtAL1+7Ti7RvmJhqDIJ2/uopsmtDpB7xxGJdQTxzIJaZQUPcNSjUMZr1Pws2/a8RP84Hsiz7l7Eiz9MmrnVP8TG3yU5oghp16IxpMkLEwhIEReQhFGXm83agpL1pgZp5dIuelAZYt67ZyHlcaYNyYRYnIg2SzcGpm/VwHdRBalCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pbNq5WwiVn/QuKq4lw8qw4zMzZ2IwEMzJgsB97S6UQA=;
- b=pdOHtfXtrY6bXWzaZF+aypzzOFQsK+n2ABiwzlsvfeXQaHwMUuM1TzrDfCFXH9SIqPHZbzWWELPAs7z9tFjDCBeJVQmw6rUNcsTGcz7+9qTyMhQXd8jpCe+N8Zuk1Kw2U/Y5wo3K0qOg8vWSBSpEuRV9zonztOxcY+WCxjC6Y2ihJq2H8Z6uNLpXcyM5ZwsXz6GFrWH01MgNCfkMUxfpVETV/dihCJWs77/6iGqgzXBQrgNfDm4aRhRhoyDpSXVUcjznnIZCExY5zLyIJOimedbsghCqcyVP8JC9Q+I++D7Q8mA1MvlpG1RDpNB8ljWbX3GO/rWnWIsQrFj7Ncz4Aw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=rasmusvillemoes.dk smtp.mailfrom=foss.st.com; 
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pbNq5WwiVn/QuKq4lw8qw4zMzZ2IwEMzJgsB97S6UQA=;
- b=XDeQWqdNGZgOX+I21MLOvyRFImWD1vODLwI+vUmpmlkfDCQpft+SEy6mjR7a5hHgR6BMS6PLQFJ3vlaJlMA8Af5VACNWMbyRnPoI6ZfDmkTvSt0Jc872oZ2Fv7LRoDPgIoghlS5DYTb5/bW5SQ3SL8/DCHfGIweB6tprM+bP8+zlvoGNhCaNP/BQYaKio9PNueNMCCb8fX82jT+qXaop9kt8rcH2sVSDHIps3iD66+bkYBVoHtyp6xPNcAmWnYn8S41O+fcH5UnIwA8EnWR+Cgd9sH5HoHkOv/8czvl6kgoO57dM5YcBZD/vNKSbTei5At3n1r4ZbIbXFNEFAbyRcg==
-Received: from AM8P191CA0002.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:21a::7)
- by PA1PR10MB8871.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:451::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Mon, 6 Jul
- 2026 16:06:51 +0000
-Received: from AM3PEPF00009B9E.eurprd04.prod.outlook.com
- (2603:10a6:20b:21a:cafe::71) by AM8P191CA0002.outlook.office365.com
- (2603:10a6:20b:21a::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.13 via Frontend Transport; Mon, 6
- Jul 2026 16:06:51 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AM3PEPF00009B9E.mail.protection.outlook.com (10.167.16.23) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Mon, 6 Jul 2026 16:06:51 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 6 Jul
- 2026 18:11:10 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 6 Jul
- 2026 18:06:50 +0200
-Message-ID: <ffb0c593-c829-4da5-bdbb-f9d1096358be@foss.st.com>
-Date: Mon, 6 Jul 2026 18:06:49 +0200
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-8f24f290af5so27352956d6.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 09:15:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783354516; cv=none;
+ d=google.com; s=arc-20260327;
+ b=VMxNXUJp+6aeyT6abITtflxx7+hof3lvp5KL43RosmvVQkO/dVLWm+BXsEyDItOLoL
+ ffjbw/VUy8RBkAf3vCFGGx0dCohJZGBVFvvKkO3iyUCKToxFMMEAvQPU7s2I/pUAJ+rm
+ zQW3uz60F7yc7o/xhvIOGRMS4ExoHHDTmKYZZZoGUax06Pp1I9ThPRDs3hpK8BjgyRaj
+ f0+iEys5gFQvjEUle+jPcRpL/0dYKROSVWXkpiDW+3NIMX9kbweaM1BQ+0uZBkcho7e3
+ niaNXaE8oV0fbUPCfREYUSYQcHYsEYkvcdVAlBYKs+ayEc81We/JcsphOXRBnwssJRAe
+ PS9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=lmEfPYACKAOGUScLdrTsTGpYHUscTU5JrLd5fWjFmoU=;
+ fh=PSdG6r/FQEKksTnT+Exp5fIw872iVho500iLrPvgJhM=;
+ b=a8JqZxIuLKk10qLgnQPDbKjpBr8tIk5cZQ3w97g3lVG+CPASHlyCdcZ3+WD9+fKDiL
+ rQVlyc0kh5W6QJcV61bRP6/TubfojXL3WUZCxQhCJ5qYzwlWYNDlntLuOHwWJOvgH4Ke
+ GZh/KkswDuwrqMkFMCBbjz/YAMoaxlCut+137hl7YnhmT1cgJLerFaQYZvaaFcobEuWD
+ yzao/YvG/jilEJENUKTUsHwkfIk6vmBh/k823w3Egy+sZgw4NMNDfcG0Wrw5iIj6fJlk
+ c7vV4dHJgC8nlnI13f5M/oIkg6Ll19ivyLu1bUtpz5sfM1hWIWdJTXRTGHTzjAj2xsUe
+ PWqg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783354516; x=1783959316; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=lmEfPYACKAOGUScLdrTsTGpYHUscTU5JrLd5fWjFmoU=;
+ b=nTliemv9QLmWuy7PLHVMppInwY7mROpDyrrbE+aZKlK5TP1tXiH+h6wlnrU++OXYdV
+ m3Wz450JUCrbXbloq+Y4euTNTUt1YI/ifr6bkFIDumM7k+KWPKFejbKr2PoudYzZw7+a
+ Z21rhbjR9TKRjLDmmNVk8SdmGvU0B9QXh+ALTB5r2maX6Z1IEYp6eHPdRdL+LkzVHSYb
+ ozx9BbiCjQZJsslf2nLwEfkm/GwSbRtetesqTRhlIIpO7T34vpup4eZgC0PT7MeH6KuD
+ lHUvwbzfXKPRLmsKxrO54YUcEmL3ZIL9O74n2zsCFTf4dQ7KwDpXxgU0uoQ1YRc/Nl6w
+ fdVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783354516; x=1783959316;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=lmEfPYACKAOGUScLdrTsTGpYHUscTU5JrLd5fWjFmoU=;
+ b=o7hMAsKpi7fDg4m0olzSIQJIxyzubLAU4doGnKS6ph2KD4BefvTyiy6XFprbC+y4C2
+ hNezbk8luU9T6J1phHG6bnqr4QePhLiSufO8wRlKiF3mKB0ya9KrQvQWF/1P41L1XDgb
+ Lwl9q1rq+OJoP4HhQDywZpsQpPkrrPSFQ5Vm34c2jqoPJsiDdq2DbrlUW98CNT62bSpU
+ wdINhiYqNBzil7wZdQ/bAS3nu42uk1kxNJ6P++Fv6OYQ9+mfO2On8SLQeQtyvRRnBlpx
+ RwCjxsRKy/PWAaNdL1UT8VVllk23E7bIrQtUgJjc/Z6rdk6MKQC2bc2hg/QHzt54oaDs
+ ThTA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrMesaco961oTQSnAXek+/2LzjV4d7bcISw1YG0O3pBjmgnzVBeg+/KevvpGOayrdaMYeH29/k=@lists.denx.de
+X-Gm-Message-State: AOJu0YygcXW2Dz3EwqhCp/Xrbf98yEBq7nARPfXAryGVJ1FHWNRZz7gV
+ 3ho7wcmr+sjDMoDS3h1d8pchvLym5HcS2+A4YSUSamVjozPa1ReRLd0i//j2hULVw1eqo0eZzMQ
+ +4860HHucBBEWKiBdLgmwjTwmUb2Ko/B7Sg==
+X-Gm-Gg: AfdE7cnjp39NhmuFEDLqeRFroarh3xdsRCFaicqEi7k7QF1M3zM5RSerg5G3mr2/+NT
+ rfHGTu0ATR/2gXFCt1KCCaBuGw3KJL/vm/326n2q60y73irGZm5juGDk8w25Mtmv9MQg9qRekte
+ VafGCyZVzKT9E13HGrBtn8mCjP9LfLV1Pm8Fpk4ja6HzWZlR0UipcGVrnVXGVrw0hFnP4MT/r02
+ K46U0TLcOVltQra6wpkN/bM24thecUE7M8O5d4a4w4PxNlekRvqCLmkCe2zv4wFAkI4EBiFhwLf
+ bs0SrGbETu81+skcaCkA+0b65yY/ycZ1fKYwm1kRz+esEC+5vF2YzTGHH8hqGFcRWC4OyHpxI1Q
+ a1iRfXLtMKEMpBJeb4GIfoeNSxtGitec2az2CfseH6cclALiQEFhMijx/BsJteEc/6vA=
+X-Received: by 2002:a05:6214:2461:b0:8f3:e97:59c6 with SMTP id
+ 6a1803df08f44-8fcb25aa0dcmr14564286d6.20.1783354516098; Mon, 06 Jul 2026
+ 09:15:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] cyclic: parse cyclic list only if next cyclic
- timestamp is reached
-To: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-CC: <u-boot@lists.denx.de>, Stefan Roese <stefan.roese@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>
-References: <20260703-optimize_cyclic_run-v2-0-81762cff0b17@foss.st.com>
- <si6XBH4Bxhdlhio2J4oJEDmHBeZYLa-W8YwddESQB-JgOw43EpfwAPNbrY_dFeXyeUQtW-xV6Bi8nSRc9IDAzA==@protonmail.internalid>
- <20260703-optimize_cyclic_run-v2-2-81762cff0b17@foss.st.com>
- <87qzlgwktz.fsf@rasmusvillemoes.dk>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <87qzlgwktz.fsf@rasmusvillemoes.dk>
+References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
+ <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
+ <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
+ <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
+ <CAFLszThAqVjZ0Jd5kdB5q=bhGTNpAeHw3WXpUHnFQ_OH_KmXLA@mail.gmail.com>
+ <6d0f3078-2ba8-474c-9a1f-481eeb7f47bf@cherry.de>
+ <CAFLszTi+4s51HtaQrgBLEsOzoCjtZ+CGdvqBm4B9_fj-rpKqwg@mail.gmail.com>
+ <CALeDE9OWeMs3peX8+4+i6iTmZn-EO2e+7s7q6S1yFaRUa0dksQ@mail.gmail.com>
+ <CAFLszTg24RTHi0A0vWfv62FfZhm1Uz4iw=4m7NZ6_4W3R3kwyQ@mail.gmail.com>
+ <CALeDE9Mcg2TUcnv3LD4k2pmCnogV97KqjUn-dQiDfAZt+hPN4Q@mail.gmail.com>
+In-Reply-To: <CALeDE9Mcg2TUcnv3LD4k2pmCnogV97KqjUn-dQiDfAZt+hPN4Q@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 6 Jul 2026 17:15:03 +0100
+X-Gm-Features: AVVi8CeH4Cfq-ffcoThq8wA4yKvMvnzRDEp0ukQdQ9SwiIqqu8QstGp3NKGK-dU
+Message-ID: <CALeDE9O4cPp7aWsiHreqOt_sE4t=y5MzvnyuCCGpwzD6hFjuAg@mail.gmail.com>
+Subject: Re: U-Boot Concept Tree Proposal
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, tom.rini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9E:EE_|PA1PR10MB8871:EE_
-X-MS-Office365-Filtering-Correlation-Id: 111c3b95-f181-4453-e420-08dedb789741
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|23010399003|82310400026|56012099006|18002099003|22082099003|4143699003|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info: rHFaOiCXqyNA2P6/RG3cdCFqkQBTBYaYBq8tqJQ/S7ILHTRkcABLtlTakph1EKve4ZcynjVNd10NG6ALwn+PpY4zUzevRPQ3u8oVkD0no/XSFimSrI4qN4XA4za16ciQI+QsPabNbgieDkBTi78nBrtcPcV7NL6O1oX7Q6pycHfQbQ4KnqHhX24W6iorR+latXmvoWGC4ZPnK90cpaSvr00dLTzEopwIXisoYRRBzH/Vcr4hPz91ARIpyl7ZQ7OPJRkKsPjT1y+skRZI3SULNFciXpJmABSp0ad7G8/GwI7xl4WYSk2q41DO4C5qb5uspC9nRvS2In0Q+ItkMJH44n6Vn8uwmtep/ckEBanko48bd7MtunnWgqNhtLnvbvmOEoX4AHs+fs/+XjJoLjKHzQu8ij+kWd7AHAvLG0jAg5DwzhKxVlLO5WDu1wJm2hUvTu/HjimUTIkRTrFwpfRYLrIp1nk7Usbm5779un4IAES/An7UIu0AMjTep+0pPhDeDegfMttWT0NB1lVPf0fEvMDTKaH8wZwO0nLgDxDrDBXykPGYsX8ny1wTb0gf6rwYnKn2S4shqcDGSe7bmbP5k3Zrq1Ny70sV6YG5PfiNZalwKBzgYQw+lnXzc8ptvZAGGgUHI1htfYih7goj2tbA3fByJHL6MPrTZpg2JgF6Zte1QhJUYHDzexdupJs+Rc3w6xMM7p+SFrSOBPtCChN2lA==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(23010399003)(82310400026)(56012099006)(18002099003)(22082099003)(4143699003)(11063799006)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: d4QGrUJKiW88+7B/uq3NJH+cAt5UtjuqUR1kksh/Npqw/xzhNRTOFnN7fjEh1CxoAQi5kgYXS+6kk1dXFKAQ2wQg0BisGafezudwz6FldTJi3g/8gAAfR2xSYkaUlafjdbw3W4uSI6ws0qPK/fZWWq4jUuISoOr5d7w9i9pCt409viA/wIbYGbeAZiZ4KB5x+QTd3q6IBH8WWhhGUELCg0Cb/jCRaOJ5n5SOUn5MNB5J11KVFzXXPbshbP8mVbGQuqLF/xOR2YxehXrUL6MOetReksKe/Z7jbmIjgj5A4AtEFLd1xE3IsvHMJbikeT+OnMsR7rfWYxsYXsn+6m1eSon6zWh+JtvtQVzVUJzHyMXr0+d0SIrbNgR8jo1uI6zzXdmx0tuhZJlcklwc9rN5UQIsFqRuDq0R7R0C7ekr2lHJSMvF6foXhDUPfBAB7d2N
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 16:06:51.2537 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 111c3b95-f181-4453-e420-08dedb789741
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9E.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8871
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,165 +125,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Didm't mean to leave the list off my reply.
 
-
-On 7/6/26 11:04, Rasmus Villemoes wrote:
-> On Fri, Jul 03 2026, "Patrice Chotard" <patrice.chotard@foss.st.com> wrote:
-> 
->> On STM32MP157C-DK2, when using the "ums" command, in sleep_thread(),
->> ctrlc() is called every ~640ms which doesn't allows high reactivity when
->> user press CTRL+C in U-Boot console.
->>
->> In sleep_thread() loop, ctrlc() is called every 200000 iterations.
->> But schedule is called on each loop iteration.
->>
->> Optimize cyclic_run() in order to parse the cyclic list only is the
->> next cyclic to run is due.
->> During cyclic list parsing, save the nearest cyclic timestamp, which
->> allows to exit from next cyclic_run() call if no cyclic will be executed.
->>
->> This allow to save computation time :
->>   _ before : ctrlc() is called every ~640ms
->>   _ after  : ctrlc() is called every ~230ms
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Marek Vasut <marek.vasut@mailbox.org>
->> ---
->>  common/cyclic.c                   | 16 ++++++++++++++++
->>  include/asm-generic/global_data.h |  4 ++++
->>  2 files changed, 20 insertions(+)
->>
->> diff --git a/common/cyclic.c b/common/cyclic.c
->> index b37cd6d8ff0..10ea0711ba1 100644
->> --- a/common/cyclic.c
->> +++ b/common/cyclic.c
->> @@ -68,11 +68,17 @@ static void cyclic_run(void)
->>  	struct cyclic_info *cyclic;
->>  	struct hlist_node *tmp;
->>  	u64 now, cpu_time;
->> +	u64 next_call = UINT64_MAX;
->>
->>  	/* Prevent recursion */
->>  	if (gd->flags & GD_FLG_CYCLIC_RUNNING)
->>  		return;
->>
->> +	/* check if the next cyclic function's timestamp is reached */
->> +	now = get_timer_us(0);
->> +	if (time_after_eq64(gd->next_cyclic_call, now))
->> +		return;
->> +
->>  	gd->flags |= GD_FLG_CYCLIC_RUNNING;
->>  	hlist_for_each_entry_safe(cyclic, tmp, cyclic_get_list(), list) {
->>  		/*
->> @@ -102,7 +108,17 @@ static void cyclic_run(void)
->>  				cyclic->already_warned = true;
->>  			}
->>  		}
->> +		if (next_call > cyclic->next_call) {
->> +			next_call = cyclic->next_call;
->> +			/* move this cyclic to list's head */
->> +			hlist_del(&cyclic->list);
->> +			hlist_add_head(&cyclic->list, cyclic_get_list());
->> +		}
->>  	}
->> +
->> +	if (next_call != UINT64_MAX)
->> +		gd->next_cyclic_call = next_call;
-> 
-> Are you sure this is correct? There are at least two things I can think
-> of that might be wrong:
-> 
-> (1) Doing > or < comparison (as done in the next_call > cyclic_next_call
-> line), that should never be done, because the logic around timestamps is
-> that we do allow wrapping, assuming the two timestamps being compared
-> never represent absolute times that differ by more than what can be
-> represented in the signed version of the timestamp type - that's why the
-> time_after*/time_before* family do a subtraction and a signed compare
-> to 0.
-
-Ah yes, agree
-
-> 
-> (2) What happens if we have a single cyclic consumer registered, with a
-> rather long period (say 1s), hence a long time till its next_call, then another
-> cyclic consumer is registered which should be called every 50ms. Since I
-> don't see anything added to cyclic_register(), it seems that the new
-> consumer would be ignored for almost a second?
-
-You are right, i forgot this case
-
-> 
-> I'm also not really sure what the "move the first expiring timer to the
-> head" logic is supposed to achieve. Either way, if any timer has
-> expired, we'll run through the whole list, so while the first expiring
-> timer would then be handled first on the next cyclic_run(), that doesn't
-> mean we'll save any runtime. And this exercise seems to be about doing as
-> little as possible in cyclic_run(), so can you explain what the pointer
-> juggling does?
-
-As suggested by Marek in v1, by putting the cyclic's callback with the nearest timestamp
-in head of list, we don't need to parse all the cyclic_list entries to find the next cyclic to run.
-
-> 
-> I assume that what makes cyclic_run() somewhat expensive isn't actually
-> running through the cyclic_list(), but the get_timer_us() calls done for
-> each entry. Could you try to see what something like this (entirely
-> untested, but you get the idea) would do:
-> 
-> diff --git a/common/cyclic.c b/common/cyclic.c
-> index ec952a01ee1..2616c4d5bc6 100644
-> --- a/common/cyclic.c
-> +++ b/common/cyclic.c
-> @@ -67,26 +67,28 @@ static void cyclic_run(void)
->  {
->         struct cyclic_info *cyclic;
->         struct hlist_node *tmp;
-> -       uint64_t now, cpu_time;
-> +       uint64_t now, after, cpu_time;
->  
->         /* Prevent recursion */
->         if (gd->flags & GD_FLG_CYCLIC_RUNNING)
->                 return;
->  
->         gd->flags |= GD_FLG_CYCLIC_RUNNING;
-> +       now = get_timer_us(0);
->         hlist_for_each_entry_safe(cyclic, tmp, cyclic_get_list(), list) {
->                 /*
->                  * Check if this cyclic function needs to get called, e.g.
->                  * do not call the cyclic func too often
->                  */
-> -               now = get_timer_us(0);
->                 if (time_after_eq64(now, cyclic->next_call)) {
->                         /* Call cyclic function and account it's cpu-time */
->                         cyclic->next_call = now + cyclic->delay_us;
->                         cyclic->func(cyclic);
-> +                       after = get_timer_us(0);
->                         cyclic->run_cnt++;
-> -                       cpu_time = get_timer_us(0) - now;
-> +                       cpu_time = after - now;
->                         cyclic->cpu_time_us += cpu_time;
-> +                       now = after;
->  
->                         /* Check if cpu-time exceeds max allowed time */
->                         if ((cpu_time > CONFIG_CYCLIC_MAX_CPU_TIME_US) &&
-> 
-> Because the time_after_eq64() test really doesn't take anywhere near a
-> micro-second, nor does fetching the next element from the linked list,
-> so using the same value for "now" until we actually do hit an expired
-> timer should be ok.
-
-I tested your patch proposal, and yes, what cost the most is get_timer_us() calls.
-I obtain the same gain using your patch proposal than with my buggy implementation ;-)
-which doesn't, moreover, cover all cases.
-
-I will submit a v3 with you proposal.
-
-Thanks
-Patrice> 
-> [I also want to move the computation of the new cyclic->next_call to
-> after the callback, so that the callback can update its ->delay_us value
-> if it needs to be called at another frequency, but that's a separate
-> topic.]
-> 
-> Rasmus
-
+On Mon, 6 Jul 2026 at 16:18, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> > > In the follow up private discussions about it after it was clear as a
+> > > whole that the PLC was uncomfortable with a specific websiite (we
+> > > don't plan on supporting forks, would we provide that feature for all
+> > > forks?) for concept. I offered the idea of a custodians tree to allow
+> > > you to develop and maintain the features that you were preparing for
+> > > upstream in your concept tree to enable easier collaboration for those
+> > > that wished to work with you on those specific features. Maybe I
+> > > wasn't clear enough in my communications but it was never intended to
+> > > be the location to host a fork.
+> >
+> > A fork would be something which forks off mainline and goes its
+> > separate way. Concept is not a fork. Perhaps a constantly merged,
+> > multi-feature branch would be a better term. Please read my original
+> > email again on this point and I'm happy to explain it further. Quite a
+> > few series have already found their way to mainline.
+> >
+> > > So I think you need to revist what the idea of concept actually is and
+> > > come back to the community with an adjusted proposal.
+> >
+> > It seems that you are rejecting the whole idea of a Concept tree (my
+> > original post on this thread). Can you please confirm that? But if you
+> > have ideas on how it could work with modifications, please share them.
+> > There must be some common ground somewhere.
+>
+> Nope, not at all rejecting it, what I was saying is that I don't
+> believe you have got the community to buy into your idea. I don't see
+> it as the PLC's job to reject/accept it, as I've always stated it's a
+> community decision, of which I am but one voice.
+>
+> On ideas I believe I have already shared the idea of working branches
+> for features you believe should be in mainline U-Boot. Outside of that
+> I don't have other ideas, but it's also not my concept.
+>
+> > > First though, I repeat again, would you please explain to the
+> > > community why you are holding the u-boot.oirg domain hostage to try
+> > > and force the PLC to accept an idea that we have been explicit about
+> > > the need to get the community to buy into this "concept". I think the
+> > > community deserves an answer.
+> >
+> > This is a bit of a one-sided view. The real situation is that for many
+> > years to implement major features and improvements in U-Boot, but that
+> > became progressively more difficult as Tom started refusing to accept
+> > series and I have no ability to get PRs applied. Perhaps I was naive
+> > to expect our good working relationship would continue forever, but I
+> > have contributed a huge amount to U-Boot and having the rug pulled out
+> > felt very unfair, not to say bad for the project. Regarding the
+>
+> So that gives you a right to hold the domain hostage why?
+>
+> Also your past contributions doesn't give you a free pass to force the
+> landing of patch series that you think should be in there. That's not
+> how open source works, it's certainly not how this project works.
+>
+> I think you need to step back and ask yourself why you're finding it
+> hard to get patches reviewed and accepted.
+>
+> To give you an idea I have had numerous community members complain to
+> me about you, I am sure Tom has similar, some are to the point where
+> the only way they will deal with your code is if it's part of the
+> subsystems they maintain and hence it ends up in their patchwork queue
+> and otherwise they actively filter mails out from you so they don't
+> see them. I don't keep a count or details but it's well over 5 and I
+> may even have to start using something other than fingers.
+>
+> To put in straight forward terms, a lot of people are fed up with your
+> behaviour, then when you get called out for it, or Tom has to have a
+> conversation with you about it rather than addressing the actual issue
+> you "take some time out" and come back a few months later without
+> actually addressing your behaviour.
+>
+> Now you're holding the domain hostage which is similar bad behaviour.
+> Not to even mention that you registered a US U-Boot charity and
+> attempted to register the trademark all without telling *ANYONE* in
+> the community what you were doing. Did you think you could just walk
+> away and keep the project "Because of all your contributions"? Again,
+> while you have contributed a lot I think the wider community of
+> contributors as a whole have contributed more, and by contribute I
+> don't just mean purely on the lines of code, but reviews,
+> architectural discussions and all sorts of other things that actually
+> make a community and it gives you no right of ownership over the
+> project.
+>
+> I'm sorry Simon but the way to get your patches reviewed is to rebuild
+> your standing with the community not by trying to force an official
+> recognition of a fork by holding the domain hostage.
+>
+> > domain, I have offered to point subdomains to anywhere you wish, which
+> > would resolve this. In the meantime I have mirrored the website and
+> > moved various things away from the domain. But I cannot support the
+> > sort of split that happened with Barebox, if that is your goal.
+>
+> And as I've stated we can't use it that way, the SFC has requirements
+> around the project's assets (which include things like domains) as
+> Neal has explained and I am fairly certain as has the SFC. Also
+> there's dynamic infrastructure where we need to be able to move things
+> with little notice so it would cause outages without the control of
+> the domain.
+>
+> > I don't mind hosting a separate tree somewhere else, if that is your
+> > preference, but it needs to have some relationship with U-Boot and a
+> > clear understanding of what that relationship is. If that is not
+> > possible / acceptable, then I suppose we should close this thread. I'm
+> > skeptical of our ability to resolve complex things on mailing lists in
+> > cany case, although I started this thread at your request.
+>
+> As I've stated numerous times before you need to get the community to
+> buy into this.
+>
+> You have kept this "secret" from the community for a very long time,
+> and by secret you've not been open about your intentions, until we
+> explicitly asked you to go and explain it to the community.
+>
+> > > > > U-Boot has friction also because we don't have enough reviewers or
+> > > > > maintainers compared to the number of contributors. I don't see how you
+> > > > > plan on addressing that by maintaining Concept by yourself (with an AI
+> > > > > I'm assuming).
+> > > > > I appreciate you're possibly one of the most if not the most active
+> > > > > reviewer on the ML and that there's not much more you can do to improve
+> > > > > the situation aside from recruiting more people to review.
+> > > >
+> > > > Yes I have generally been the most active reviewer over the last 10
+> > > > years or so, although sometimes I have burnout and stop.
+> > > >
+> > > > Here's how people become reviewers, IMO:
+> > > >
+> > > > Step 1: Punter has a problem, debugs it and conceives a fix / feature
+> > > > to resolve it
+> > > > Step 2: Punter sends a patch or short series
+> > >
+> > > I'm not sure it's appropriate to call our developers and contributors
+> > > "Punters" [1] please be respectful of people.
+> >
+> > It's a pretty common term in the UK, at least, certainly not
+> > disrespectful from my understanding or intention, using it to mean a
+> > customer willing to buy or try out the product. I wasn't aware of the
+> > urban definitions and now I wish I hadn't just read them!
+>
+> As a person that has lived in the UK for over 20 years, and an
+> antipodean, I am well aware of why you used the term, but even in the
+> UK it can be considered derogatory, but we are a community that is a
+> lot wider than that, it after all the project evolved out of Germany,
+> and we have contributors from a wide community that isn't associated
+> with the nuances of the UK and related cultures so I suggest the use
+> of terms like newbies and contributors that aren't open to
+> interpretations because not everyone is aware of UK/antipodean
+> specific nomenclature.
+>
+> Just like your behaviour as a supposed leader in this community you
+> also need to be aware of the nuances of your language.
+>
+> > > > Step 3a: People review the code and Tom accepts some version of it
+> > > > Step 3b: Patch is rejected, or people are mean or dismissive, or don't
+> > > > understand the problem, or the effort gets too great (punter exits
+> > > > here and goes to write his own firmware in Rust :-)
+> > > > Step 5: Punter sees a related patch from someone else and decides to
+> > > > reply with some thoughts
+> > > > Step 6: Punter starts getting interested in more areas of U-Boot,
+> > > > sending patches and reviewing, etc.
+> > >
+> > > I think going from a single patch to a firmware written in rust is a
+> > > bit of a fanciful stretch.
+> > >
+> > > From experience people involved in the project review things when:
+> > > 1) They know the topic or the hardware
+> > > 2) Are interested in the features or functionality provided
+> > > 3) Are a maintainer of a device or subsystem
+> > > 4) Wish to assist
+> > > 5) they have hardware they can test on
+> > > 6) they wish to scratch an iitch.
+> >
+> > That's fine, we have a somewhat different experience. From my years of
+> > watching this, it mostly starts with people seeing their code accepted
+> > (motivated by your #6).
+>
+> I've been involved in U-Boot, whether that was on this list I don't
+> remember, since I started to make Fedora run on arm around 2010 with
+> the purchase of a Beagle-XM. It has been a wild ride. Experiences are
+> always different, I was involved in the original distro-boot
+> implementation and trying to get that upstream. Ultimately my
+> experience and your experience doesn't devalue either person's
+> contributions or the rest of the communities.
+>
+> Regards,
+> Peter
