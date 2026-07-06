@@ -4,26 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD16CC43602
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 17:20:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75FDC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 17:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C6C846FD;
-	Mon,  6 Jul 2026 19:20:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 179C084942;
+	Mon,  6 Jul 2026 19:21:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B65DE84852; Mon,  6 Jul 2026 19:20:33 +0200 (CEST)
+ id 82ADE8490A; Mon,  6 Jul 2026 19:21:51 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0850846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 19:20:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F24C846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 19:21:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id C148E68BEB; Mon,  6 Jul 2026 19:20:28 +0200 (CEST)
-Subject: [PATCH v2 0/4] Fix NVMe, not only on Raspberry Pi 5
+ id C934268B05; Mon,  6 Jul 2026 19:21:47 +0200 (CEST)
+In-Reply-To: <20260706172028.C148E68BEB@verein.lst.de>
+References: <20260706172028.C148E68BEB@verein.lst.de>
+Subject: [PATCH v2 1/4] core: Skip parent device nodes without a DT reference
+ when looking for dma-ranges
 To: Neil Armstrong <neil.armstrong@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
@@ -37,9 +40,9 @@ Cc: Tom Rini <trini@konsulko.com>, Matthias Brugger <mbrugger@suse.com>,
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
  Prashant Kamble <prashant.kamble223@gmail.com>,
  Denis Mukhin <dmukhin@ford.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- u-boot@lists.denx.de, duwe@lst.de
-Message-Id: <20260706172028.C148E68BEB@verein.lst.de>
-Date: Mon,  6 Jul 2026 19:20:28 +0200 (CEST)
+ u-boot@lists.denx.de
+Message-Id: <20260706172147.C934268B05@verein.lst.de>
+Date: Mon,  6 Jul 2026 19:21:47 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -57,43 +60,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Torsten Duwe <duwe@suse.de>
 
-Here's the rework of the central fix as requested by Neil, the DMA
-addresses as required by the NVMe device are no longer calculated
-"last minute" before going into the registers or into the memory
-locations, but early, as they occur.  Hopefully talking variable names
-and member names are used to store the values when they are needed at
-a later point.
+If a device node got created dynamically, there is no guarantee that the
+parent node has an associated device tree node which could specify dma
+constraints. Especially PCI(e) enumeration adds intermediate "bus nodes",
+also dynamically.
 
-Changes from v1:
-  - rework address translation towards the source,
-    storing the calculated dma (bus) values where applicable
-  - add a unit test for phys_to_bus
-  - automatically scan for any NVMes to maybe boot the Pi from
-  - remove some dead code
-  - add Peter's review and test tags
+Try harder to find the correct configuration by walking up the tree until
+a DT association is found.
 
-Changes from the single patch:
-  - the ternary in the macro is gone, explanation updated accordingly
-  - instead, device_get_dma_constraints is enhanced to try harder
-  - Raspberry Pi NVMe config added
+Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Torsten Duwe <duwe@suse.de>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ drivers/core/device.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-Torsten Duwe (4):
-  core: Skip parent device nodes without a DT reference when looking for
-    dma-ranges
-  test: Add a unit test in phys_to_bus for dynamically created device nodes
-  nvme: Fix missing address translation for PCIe inbound access
-  configs: enable NVMe
-
- arch/sandbox/dts/test.dts   |  9 +++++
- configs/rpi_arm64_defconfig |  3 +-
- drivers/core/device.c       | 14 +++++++-
- drivers/nvme/nvme.c         | 71 ++++++++++++++-----------------------
- drivers/nvme/nvme.h         |  3 ++
- test/dm/phys2bus.c          | 25 ++++++++++++-
- 6 files changed, 77 insertions(+), 48 deletions(-)
-
+diff --git a/drivers/core/device.c b/drivers/core/device.c
+index d365204ba11..b6d00cf4714 100644
+--- a/drivers/core/device.c
++++ b/drivers/core/device.c
+@@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice *dev)
+ 	u64 size = 0;
+ 	int ret;
+ 
+-	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
++	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
++		return 0;
++
++	/* Look for the first node in the parent chain */
++	while (parent) {
++		if (dev_has_ofnode(parent))
++			break;
++
++		parent = dev_get_parent(parent);
++	}
++
++	/* No parents have a node, bail out */
++	if (!parent)
+ 		return 0;
+ 
+ 	/*
 -- 
 2.54.0
 
