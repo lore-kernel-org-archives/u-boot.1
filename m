@@ -4,101 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86274C43602
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 21:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 060C4C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 21:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DB36846FD;
-	Mon,  6 Jul 2026 23:00:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B3A7846B4;
+	Mon,  6 Jul 2026 23:50:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="mKf0boNe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i6rs7fxr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DAC984852; Mon,  6 Jul 2026 23:00:02 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 8E488846FD; Mon,  6 Jul 2026 23:50:08 +0200 (CEST)
+Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
+ [IPv6:2607:f8b0:4864:20::a32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC392846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 22:59:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6216E801A9
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 23:50:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7ea9c6ea7deso2596019a34.3
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 13:59:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783371598; cv=none;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-5bd95de6865so1433663e0c.0
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 14:50:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783374605; cv=none;
  d=google.com; s=arc-20260327;
- b=dBSCpWtmDvrQMeXCi5AghqI6Q+X1U7cNPNcE0hE0HKxhjNnfLhOpN01MVarU/BH+zi
- P40qyfYjijjUdMqR8OcEDnnMon2OPS7wsBGgKZm2tOIWm9g8qaQl03hoZ/LIGNCqHi3I
- caa2ZNxEGahXVqszES3Lz/zbN2UgSryLF0KV33wWYGTR/hHBzBG3KxkPtJV8K3ttP2Nj
- 62KN3nrgcKuNL9mdboii1XpTvAvtkYnept7XdPGoLjDxGyX5Cp6YqJ3lKa7TPFiZz+L6
- cAJJZPQe8wbSGpw9KiozLu9qhW0jfBmdQ0yvOLDbmAxbO//S41P0EIUQMHBOJrhK9anh
- rZbA==
+ b=Euex4PdnC1zUmylGz6nI0QPAE/jWb12RdzVtgivNv8X3l1ZEdcZadY8wFKbZfegVzZ
+ I6VKKSPHcmqpgLS0IFNid1ZgQm3hzhct6Mf/KXJpvCKEP8NcuJgYyBVFMO7IWT719vmE
+ IMqtlpe6cGH6325PLPP/BQPj2x7TdBU4cDH+nEHh9w5OzKky1FqyNgrz0fvRmKG1Tva0
+ tZAYKGGRaghMkLGV5btqUn3xEbSFXhgmawlMorSaDrdv4zH5SwckbUCG3v0F3vgdVvMl
+ /H4VApJBJ9GHh5H5ImFzotUtyMkXHW9k2LJUhh2XV6Dttoo6Bcia/V0wV8CjMXBNpc7o
+ YEkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
- fh=6L+AusHYlUewn8EoK/1Mbo2rg5NefWhURBdyQ+djJto=;
- b=QAbVUqUjut09uRsO1WJrMV/sG+vJU2jEdBCM/AD3wDK/15bWmfCd5oEn11n2k+fH2w
- 1LdLWvMStZtjA+7C6jDa3u3PAop+G1XvDbCCRiSFCv2KCGFWCPlT+MHVKq53u/QX4hQ2
- wM1tfvl7C2BoHV5eAhiNTqkE6VsYup/nYHvQAS1JHtFIca0Ax54iQy3TPwFvG4SFYUcc
- u3VBJddtz3Bltqaj1PwXMOvXOjT8wle5J5efLUegFawM1SvkyXABNPwYMK2769O/tXnR
- wnzpuFuhT9lRCk7xeUO7SnoIVFNXel5MU3NRGRssPBP18IcRS8QkROPTbSKg1CzNMZtk
- f9Ng==; darn=lists.denx.de
+ bh=+v+lcXNgUDuFgvyQUuPTPcldHQ/WdfYwr9b1mHXuWok=;
+ fh=w18+2UwFX0pJMxDj9ivxUi9zztY050LytBkDNSRnQ2g=;
+ b=cEu9Ugg1vhKLsDdThxXKEt3A7B+fS0SrO0ErFmz8qvm3BUNcmftB5qroTvVC3B63UM
+ Eij3zkojNbKcpMuVMPZeHOWUDXz0O5awqozRYoK/yePjwQP4kTCJHsTjdgWAUE0CUKYq
+ /K3EpBWQRlV+GOYNgWa4HoQ12oi7NWK59RCT/Ge9/fg7nFcQckwULKmnc5dxHINltQjp
+ zZGVfzZikdeoi/YL/c7gWp2vv1MgmQO0zPJdwjFqBEtMTu6htRVoJDmcJYEDq6GT6tuk
+ 0e/fyySIjLBsmHaS8FJrhJsp0J1OVa3vko9xAPXEIY6wluJPpE3dNkInlsRWSWGN7Iax
+ 0/eA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783371598; x=1783976398; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783374605; x=1783979405; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
- b=mKf0boNeOp3muGwIgix+KfK4O7p2ImTE9Y6nTkM8KcMZBvB+pdbKpF1J4RZEvLUPcg
- crfURLgmnxR4Bk0K3ATOFNRyqLBo/xPgrYPKoV3LM9ola/FkmQPvdTfymmROxsTk+AZV
- ucYD4KyG7g1O2nSs/GuuqIZkwDLNS0OsXHVy1z+EKwRGIjt00UFOYbFu7RngrEm+pvKs
- qrl/0Vg/WLLFVhbRP0wCwSz/dUbEJ+r5JmStuFlfEAAWQrRqSv3EGprZiymhV+SHm83d
- kkTob7xjpk03tuZkM4bmU0uz+gKPH7qEScMklo5SroXFngOsMwIudjVbKIp6rArJ7yoT
- FYDw==
+ bh=+v+lcXNgUDuFgvyQUuPTPcldHQ/WdfYwr9b1mHXuWok=;
+ b=i6rs7fxrOf34T1MxZ41tSQLeevY+U6ySOy8u0POrJ1y0DJd2G2epK+FDwo+UJhtE1/
+ rlPNUy3qcICsP1QMjbNT12Y08T98NpiXblJl6uZKCJyawiAi8NwT23mCZoVh3D+MjpVg
+ /SzZ4zYgOc6XZRDEkVBhQo5D0UmUJQwUlZTwyUcl9ghaEUep7AWz3E06wXQ0HwkaInqj
+ MX++S3Ymw19HJJSP7bW8v5kinZwaJ18eQfQK30NJ2+i1K8Dr5zOUxARPuzIG/ZknLDZL
+ kANvmOgolMeBFeEuvt1vmVitMDIa9bnYbpsh55b/u0xDTj1A2PooPU5APUZkUBzQQSrQ
+ XZYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783371598; x=1783976398;
+ d=1e100.net; s=20251104; t=1783374605; x=1783979405;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=6rDLIBFle9SSfw2Oz77alpUSSX+KLSWQX9P8Kd1SSAo=;
- b=Oyip13grDgbecRkPT+2Q8RnHb0GYIxPwuhtUjFJWtz1lfaKIodwaIfHVhn8AQxOBy+
- 8os0amIcYk3JcxqDGAtsuGNDW/mMXsoVJdNJOnjotb9safyg7HSSg0a3F9p9gvkCW/hL
- y2FhwukXebEib9/R3vecfcA0GS/1jRZtwg+8rysr5/s5rmGblE7oP+FL6LWqfq4WwFFq
- /k4l33PtwXnuW1YHRnZmqT8e+cpr07MKobzgpBRFW3lRRLwDHseBWKQamYz04csnZaDP
- FO4bKopBDyF+Q5bZDobP/0CjJvuDsPk4ezjwrdqRPpVKLdkqvEjyhms0GYxkH/PYPJs4
- zGyQ==
+ bh=+v+lcXNgUDuFgvyQUuPTPcldHQ/WdfYwr9b1mHXuWok=;
+ b=E9oX8KrmNPKCaliIl0MRdEfUd/wSxWPY6P6BjNq9FER1bRm7yH1AWodZOKo6WYrcGN
+ NyCjPY6GnvtOaQ8G5O3xlYlamnAJ4mwJya8aNE4PC8LXzYZkb4NNv1r+aSbHyGPdfc6+
+ WMN9zu4Q+uTI/T5ufnXAHUC7gC8NJUxD+yehLLj90BEL6CEsENBGexx+SVz87SphQkTr
+ IN0EUnKhMlW086/kDTtCxi+Dk3F5AqLqQqMXhRHE3CaWhPgs3n0+OsqAcAFxeubP4Acs
+ OlptKfCo5lJGJW+5AS4ZM4eF3c1AndH27JRQ5BDa7Hyi0Kbeu14p7HG3G+8ebCk3bOuo
+ nvhw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ98pl015c98KkdBhKNNG20fwvyimu99t1INrc+yERUSZtLrW1AJZfG27XDzEQw+KjZKY1X/fwk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzD3yJFe5eUM6TUFXmws8yNF5DtteWQe7El7vqugygzRTSWYhtF
- ALhQCp3X+Xwsk4EFd1hQAZrSKYQjmBOf1wYO3211RTN7RZl6pAGGW8p9wBuM3Ez9WI3p8jGaMD6
- Oeeul7Vu2dvS8+TGNTkMS4JAdrG0rtCTT6NkBcMybpA==
-X-Gm-Gg: AfdE7cmTfMtiR/+Isn7o5qNPLPcoQWc1pqyzx7AOa+MwLR8XqbCVJEnHEyZwSXd1qyi
- Wqzl59EZsmUGNt2MOpvnN0RdjMGLu0MGXUXflE0DN2aDt29mHs8Qi4CvKzIP1cYNuHO/NTztxfT
- qe2nlRAuhnCIsVJhn8oByB1x94S+sa995jkVRvrTob8Kq6pW5odv1beXZFzOlVepczPeZQxiUID
- 7mp3EraTk9TTgIcbcn18T1XzawM4hQjf1LNONpWnbo+Li1kiKQnJcxvtid+bsLrzMer1tzuvw==
-X-Received: by 2002:a05:6830:6a94:b0:7e9:e891:fb56 with SMTP id
- 46e09a7af769-7ebb246a3bamr1452524a34.32.1783371598605; Mon, 06 Jul 2026
- 13:59:58 -0700 (PDT)
+ AHgh+RrvfE4GsujXHHYMn7hpQd+gzTJUyQDnllL/8Mt6U40xE1pnYsVICKD67oElmWsLD6cp13VniEE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4oJnXu+ABjjbZDH6Ysg46PEbXkhJnNr3NL0y66rz9hcMBwQr5
+ QGTG5VRcJwKfJcnl/kXOox96+bmJ3e0Z0fodhlOj0p2u30C4K9KqzkVZb6P/9f1gHLy5unBdtgu
+ MuT/aGhTiBPxWHZRcrsPSfWYJGlEEoiQ=
+X-Gm-Gg: AfdE7cnYZYJ2uTUqKwkKGd6twXLe3s+8PsMVfPzUqxMrr4cDRlgKqtTg9us1btntRrT
+ E1UZ9e0LUKkMBww5umsFP+RrQxH2j5kKAeoVi2XhlgcALza9aAQaf+m95BxwA4tnDQLrG8Grxj3
+ RjE+ladgkO1hUfT6seYnTwhkNUf/THNb83Aofo3HB1zfT1rGCLo37yhhchcTcazf0+Oi55jVwuR
+ AnLWhsd1aWNC29JPIzckWJ9H1CgN1kODxiShb3SqR9cRI8GcxoYuy4sLgJTLm1mNNxnVz7o
+X-Received: by 2002:a05:6122:4d07:b0:5bd:aba5:3830 with SMTP id
+ 71dfb90a1353d-5be89537d9emr1230731e0c.0.1783374605065; Mon, 06 Jul 2026
+ 14:50:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260706133322.68010-1-ccaione@baylibre.com>
- <6014ec62-5c2e-48db-ad45-64716acad733@baylibre.com>
-In-Reply-To: <6014ec62-5c2e-48db-ad45-64716acad733@baylibre.com>
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 6 Jul 2026 22:59:47 +0200
-X-Gm-Features: AVVi8CeiGMGgmjXeL3CF1xYmNhBL-tBWAryHvJkBojQJnzEiQQZUh4W9LerrEM0
-Message-ID: <CADh8Lse4sXWg4Fx3mDg8_HuEH_7uVmKMxWeGa82rGe7Dz9eE4g@mail.gmail.com>
-Subject: Re: [PATCH] configs: mediatek: do not autostart the watchdog on the
- Genio EVKs
-To: David Lechner <dlechner@baylibre.com>
-Cc: Macpaul.Lin@mediatek.com, jstephan@baylibre.com, trini@konsulko.com, 
- jmasson@baylibre.com, u-boot@lists.denx.de
+References: <akn9xLl9CGrLtvYb@Vsevolods-MacBook-Pro.local>
+ <CAMDkj5wwc=mU=EA_duycozt374gFq=tapuO0u3QoejTpUYwezw@mail.gmail.com>
+ <akvjpkbY-69iK7jF@Vsevolods-MacBook-Pro.local>
+In-Reply-To: <akvjpkbY-69iK7jF@Vsevolods-MacBook-Pro.local>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Mon, 6 Jul 2026 17:49:53 -0400
+X-Gm-Features: AVVi8CeMdmIk7_-kCcjvezVyRL751WiLP3BIbU_ZOHmUOwAX5FhyezkQYUY_IvQ
+Message-ID: <CAMDkj5zm3MA9q9DfVpSFVh_N7rObFaSxX3yKEMT7b+PDxQAgxg@mail.gmail.com>
+Subject: Re: [PATCH] lib/mbedtls: Do not use ERR_PTR with mbedTLS error codes
+To: Vsevolod Kozlov <zaba@mm.st>
+Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -117,45 +116,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jul 6, 2026 at 9:10=E2=80=AFPM David Lechner <dlechner@baylibre.com=
-> wrote:
+Hi Vsevolod,
+
+On Mon, Jul 6, 2026 at 1:19=E2=80=AFPM Vsevolod Kozlov <zaba@mm.st> wrote:
 >
-> On 7/6/26 8:24 AM, Carlo Caione wrote:
-> > U-Boot autostarts the SoC watchdog (CONFIG_WATCHDOG_AUTOSTART default
-> > y) and services it from its main loop, but nothing services it after
-> > ExitBootServices()/bootm: an EFI-booted OS that does not take over the
-> > watchdog in time is reset mid-boot at a wall-clock-dependent point.
-> >
-> > The MediaTek toprgu can count at most ~16 seconds, once firmware stops
-> > servicing it at the handoff, the OS has whatever is left of those 16
-> > seconds.
-> >
-> > On the Genio 700 EVK the generic Ubuntu 26.04 arm64 image is hard-reset
-> > before its first boot reaches the login prompt: the mtk-wdt driver is
-> > a module loaded from the rootfs and cannot win that race. Nothing tells
-> > a generic OS that the watchdog is armed, so the failure is silent and,
-> > from the user's side, indistinguishable from broken firmware.
-> >
-> > Disable WATCHDOG_AUTOSTART for the Genio EVK boards (mt8365_evk
-> > directly, mt8188.config for the Genio 510/700).
-> >
-> > Signed-off-by: Carlo Caione <ccaione@baylibre.com>
-> > ---
-> >  configs/mt8188.config        | 1 +
-> >  configs/mt8365_evk_defconfig | 1 +
-> >  2 files changed, 2 insertions(+)
-> >
+> Hi Raymond,
 >
-> What about Genio 520/720 (mt8189.config) and Genio 1200 (mt8195.config)?
-> Seems like the same reasoning would apply to those.
+> On Mon, Jul 06, 2026 at 11:38:43AM -0400, Raymond Mao wrote:
+> > The direction is good, but the fixes do not match the commit message st=
+atement.
+> > In the commit message, only the MbedTLS native error code will be
+> > substituted, but the fixes below arbitrarily overridden all error
+> > codes including the standard U-Boot errnos.
+>
+> Thank you for the review.
+>
+> I have re-read the code better and I think it would be feasible to
+> convert return values of mbedtls functions to negative errnos right at
+> their respective call sites, because there are not too many of them.
+> The only exception is the mbedtls_asn1_get_tag function that gets
+> called quite many times in pkcs7_parser.c, but a wrapper function
+> could be added for it.
+>
+> Do you think that is the right approach, or should perhaps these code
+> paths be converted away from ERR_PTR/IS_ERR entirely and just return
+> NULL on error, given that none of the callers do anything with the
+> error codes anyway?
+>
 
-Yes, but this is a preliminary patch for a much larger effort focused
-only on the G700 for now. Since this change essentially disables the
-watchdog in U-Boot I prefer to limit it, for now, only to the
-platforms where this is actually needed. The same will be done also
-for the other platforms in due time.
+Yes. I prefer to update ERR_PTR/IS_ERR. Or at least, to have a wrapper
+on top of ERR_PTR/IS_ERR for MbedTLS use only. But I think the former
+is better.
 
-Cheers,
+Raymond
 
---
-Carlo Caione
+
+> Thank you and best wishes
+>
+> > Please see my below inline comments.
+> >
+> > > Signed-off-by: Vsevolod Kozlov <zaba@mm.st>
+> > > ---
+> > >  lib/mbedtls/pkcs7_parser.c     | 5 +++++
+> > >  lib/mbedtls/x509_cert_parser.c | 6 +++++-
+> > >  2 files changed, 10 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
+> > > index bf8ee17b5b8..2c85dcc9699 100644
+> > > --- a/lib/mbedtls/pkcs7_parser.c
+> > > +++ b/lib/mbedtls/pkcs7_parser.c
+> > > @@ -495,6 +495,11 @@ struct pkcs7_message *pkcs7_parse_message(const =
+void *data, size_t datalen)
+> > >  parse_fail:
+> > >         mbedtls_pkcs7_free(&pkcs7_ctx);
+> > >         pkcs7_free_message(msg);
+> > > +
+> > > +       /* MbedTLS error codes lie beyond MAX_ERRNO and are not suita=
+ble
+> > > +        * for ERR_PTR, but can be useful for debugging. */
+> > > +       debug("mbedtls returned error: %x\n", ret);
+> > > +       ret =3D -EINVAL;
+> >
+> > This collapses all non-zero failures to -EINVAL, including valid
+> > U-Boot errnos such as -ENOMEM.
+> >
+> > >  out_no_msg:
+> > >         msg =3D ERR_PTR(ret);
+> > >         return msg;
+> > > diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_p=
+arser.c
+> > > index e163e16b9bc..1c70a8fcdcb 100644
+> > > --- a/lib/mbedtls/x509_cert_parser.c
+> > > +++ b/lib/mbedtls/x509_cert_parser.c
+> > > @@ -425,7 +425,7 @@ struct x509_certificate *x509_cert_parse(const vo=
+id *data, size_t datalen)
+> > >  {
+> > >         mbedtls_x509_crt mbedtls_cert;
+> > >         struct x509_certificate *cert =3D NULL;
+> > > -       long ret;
+> > > +       int ret;
+> > >
+> > >         /* Parse DER encoded certificate */
+> > >         mbedtls_x509_crt_init(&mbedtls_cert);
+> > > @@ -443,5 +443,9 @@ clean_up_ctx:
+> > >         if (!ret)
+> > >                 return cert;
+> > >
+> > > +       /* MbedTLS error codes lie beyond MAX_ERRNO and are not suita=
+ble
+> > > +        * for ERR_PTR, but can be useful for debugging. */
+> > > +       debug("mbedtls returned error: %x\n", ret);
+> > > +       ret =3D -EINVAL;
+> >
+> > This collapses all non-zero failures to -EINVAL, including valid
+> > U-Boot errnos such as -ENOMEM.
+> >
+> > Regards,
+> > Raymond
+> >
+> > >         return ERR_PTR(ret);
+> > >  }
+> > > --
+> > > 2.47.3
