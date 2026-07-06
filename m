@@ -4,94 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1978CC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 15:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7126C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 16:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57A87846FD;
-	Mon,  6 Jul 2026 17:54:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 16F99846FD;
+	Mon,  6 Jul 2026 18:06:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KsaqAgbE";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="gxKetjpt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D586984852; Mon,  6 Jul 2026 17:54:37 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 049308494B; Mon,  6 Jul 2026 18:06:17 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F845846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 17:54:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B0D2846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 18:06:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7eb64085c45so1970949a34.2
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 08:54:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783353274; x=1783958074; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=tdV+S1neWoS8CK/KtQxfv/lMsjV+Fmgm9nzB8WdWdrY=;
- b=KsaqAgbEYG8VTj3kttJ2lfbSloM5Im2a6v0eBA+ty1JfnHsJ0ABfp9ssIYe7xT4qwO
- MiiGze4/PKr55GuwUqX62q8oof0Uq6vN/ACHQ9edbHoNCXnmvmUmKxi/eIWrKftneV5H
- qOD2UyPviTC3cypByXkdHvGUN6+8Eb90pcyu0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783353274; x=1783958074;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=tdV+S1neWoS8CK/KtQxfv/lMsjV+Fmgm9nzB8WdWdrY=;
- b=MMTtFwkugmKCcreHBO99Bneqp1T02bmF/GrytWW2Ycawo6wvoYkXgojEL0l9aNKsRL
- 0cO7SQn1Zn5kyUaR1S66S6UCJkKBcqiIwCJqXon94uG2SZbPaB/TJ6NYL4XrFQKjmV9K
- JVTlTF2weGEE+YoMpRhorr3Ncyeh3174pAEULfr5ghBoT7SUa3rhCCx//vGqPYuwOGld
- 9WkwdklVj+Lc35794F0vEJQviWH34bmH6LlgBi9J0kfe+JskOwseMT+Z/bAexYoNHqKz
- nkTG9BL3gG2eLeXFSsXnzZcmf66dEX4VVsh0Nj/zwFU0tNUNoCvx6JGJiOoFNxg3LDqv
- U5ow==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9+JPvYTX2QwQBacFCdFgeJqwbV0a8TmA3WCaF4hTSPJS4bboea253w3BeodsvFpKMLKGzPDW8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKkMbaj5mDl/CpmJRxZe+7KgwMryOMhgS43sdcz6pwyFmV2/OL
- fVsDXqKlhpVJSxpE40f2+vi3FCIad918DaGyeeWOynZpNyNblsOjGZi4HL96N122JO0=
-X-Gm-Gg: AfdE7cn6mXqcpGB9F0nECVWw3mSAWjY5vsm6hCmuaaX6D27crfo1okdOlEDSAUh584e
- ZcNUTuid+iagajOHIG3FEfzYnH9vH3/pgQFBf/pT8fSifR7ug+4AqpbcLG9w/P2HZ9ayWLTfAi3
- ZLHVzqPLYF0PURVxECMVkypqRq9sf5KdcGhUxBCdLLiJ6qMDJ0BGdrpa7lVD9YZa6sHh7QaF9Io
- wlPO+3YMYHvP1xfsrnBHxdWK56r/Ym4gKcBEGMEllBXhnxXHmRGUYSMLSORW9FUmeKmjEzenhud
- aevUxgAkzyn21zIw9wfEAIKgxJMpJ6HlI6+IMmToAujRpuWweDnZ7n2mlOuxc2tf3svh1cQYN6K
- mXkeueKzi3iUELkvsPSiwF/W0yJ+429UYVG0qs1NF3pq55fFLRWP2j30/HaRidtNu5DHNVJZRG1
- Cpf3w51MiceSdlRY3drGisqqwVsEz33WIpSx7LbqCvoORHKFTdzTA8IPWCeY7+J9nINbiOr/h4w
- RnyoUP4nF5e5w02Ut/p443iwZSUH8Fwd+13CQ==
-X-Received: by 2002:a05:6830:3810:b0:7e5:6c74:b295 with SMTP id
- 46e09a7af769-7ebb2286f13mr620663a34.14.1783353274330; 
- Mon, 06 Jul 2026 08:54:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7eb8998850fsm5336716a34.11.2026.07.06.08.54.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 08:54:33 -0700 (PDT)
-Date: Mon, 6 Jul 2026 09:54:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] imx93_frdm: Add OP-TEE device tree node
-Message-ID: <20260706155431.GX749385@bill-the-cat>
-References: <20260706-master-v1-1-25bae88d130a@bootlin.com>
- <CALeDE9P-5NG_a0T=dXB2KQcPCGJoSVeRXk6yQPXLesws=ypK6A@mail.gmail.com>
- <DJRKOYKA0DDQ.PI5Q86TGLP22@bootlin.com>
- <20260706145906.GW749385@bill-the-cat>
- <DJRLM6VVKL2V.3F398IK0CLQRC@bootlin.com>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sjM4DXc7g8qf9Fm/yY0iR/xaqBIArxHlpY22M0HDhIK0Txlf+5OPD8dF8dZ+3VhdlxI1neMbPEpO6AV02w0CFr0PAAxomqf3bym/KzVmgvxce6qrEWF4+bHvFKR5BHZudkxdnSdkI/lxT4hrg2RLuoeMFWf8IJMC0X44cpKty3VRejIa5DpqmYMFr0hZ3OpJwr0BWgOLgILhanfzmdHo1ys2M9VRZkajlZ00rO7sFfYbxwGm7/zfuk8NmyKTJsSnn/u4rYLWyVPOAlc9lWLllvx9nhD0fztfFWSEADozWhVQ90XYrNjdKIyXoy4dAitYujUBVlHza/hMbaibbX3Gtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kthnY2Ev6t1lxIe+18g4mhQrVE/Q2ya2Iz9uoFOzPs8=;
+ b=qw065SeGdZYVlGAQ067YC1HAjZbK1NLRe4J98HhYQIEM5zS3gQvPhL3ICK2JrZjbni60vTvz4IK/IWUOlC3ROU6YW7yDROXHuJJPwtd0YfPcAtZXNDDylQIU2Lx5vVXy3M8ezw+Dwc0Z0avmXjGWWzzhEpuvkT1Aqu2wqRFsP2j3u6tvYUFXxpKWnnVB2CNPXjsWkfWNStWuzJSTiXENlBBgaDwDUSkzUVwZudY0gUKJlpXQ5IpGwAu7EwMykINoKZmfEC+IxMdfSWTKK2oHxUilJ9wQBnI7jXSvW23hGVTHIkWnpshnrO9j89ZT5jCKu9CbU9PihJwmSHEjP1xqzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kthnY2Ev6t1lxIe+18g4mhQrVE/Q2ya2Iz9uoFOzPs8=;
+ b=gxKetjptYUSZwEQzicPkFv1OSnkiZC78/lWsgc7k+P93JyyKJ2uevNV60JVsogvY87bPqEWR815AjP9BVkBCePXqF5/txMEQr+OKkEJRPjKcIlHM6zgKJx6n3rMcStI0OlmErBUqMiuaNc07xkEpJdy9m6WtGAGQaOtrfCZe9iTqXzkY5cwMgRGNg/Ru7udB1xb+EL/X5vFoPEnc1EN/hekxp8alIL6XZR2xAzBgSHcXigvh3nnPZT8eNDMwNdS0eNlkgM9OqbhyX8PtCX+NTckqs+1UvEJGDphuDW5gphKxmvtg61QPZEEwKuGbMIE+wkvdbauA8pXaHpxA4UwBiQ==
+Received: from AS4P195CA0017.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::8)
+ by GVUPR10MB9680.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:35b::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 6 Jul
+ 2026 16:06:11 +0000
+Received: from AM3PEPF00009B9C.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5d6:cafe::74) by AS4P195CA0017.outlook.office365.com
+ (2603:10a6:20b:5d6::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.13 via Frontend Transport; Mon, 6
+ Jul 2026 16:06:11 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF00009B9C.mail.protection.outlook.com (10.167.16.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Mon, 6 Jul 2026 16:06:11 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 6 Jul
+ 2026 18:10:31 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 6 Jul
+ 2026 18:06:10 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH v3 0/2] cyclic: update and optimization
+Date: Mon, 6 Jul 2026 18:06:07 +0200
+Message-ID: <20260706-optimize_cyclic_run-v3-0-06ecbd74ef7c@foss.st.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5RyxmJIteSTEFHq4"
-Content-Disposition: inline
-In-Reply-To: <DJRLM6VVKL2V.3F398IK0CLQRC@bootlin.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAG/SS2oC/32Nyw6CMBBFf4V0bUk7vF35H8YQGFoZI5S0QETCv
+ wu40cS4PMm958zMKUvKsaM3M6tGcmTaFYKDx7Au2qviVK3MQEAsEgHcdD019FQ5TngnzO3QcoU
+ VhrGWkELG1mdnlabHbj1f3uyG8qaw31TboibXGzvt2VFuu/+FUXLBM8CoSISUOgpP2jjnu95H0
+ 7CtMcKnJfhtgdWSyiQG1FqUMvm2LMvyAi6ndWMQAQAA
+X-Change-ID: 20260702-optimize_cyclic_run-ecdc46f12829
+To: <u-boot@lists.denx.de>
+CC: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Rasmus Villemoes <rv@rasmusvillemoes.dk>
+X-Mailer: b4 0.15.2
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|GVUPR10MB9680:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b120b1a-1fea-4bbb-e6df-08dedb787fa4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|23010399003|36860700016|13003099007|11063799006|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info: sRMcBlgG2FwzCu1Z3k3JniGXK03f142QH9rcZJxEhto4jHGKkOHkR9B+Gd9P0kZZKyb464W+94X4PbMztL512LTdWWcKlaRnJJeMvtGichWslsKd59W44nHkwXzy67lYODxceRNTm1ScfauakCT7qs6Eu8Lus8siEO+CubKeTQdJmcWHjQYrNLTsYIQlaaW7coH7fWMXF1xoL0X8fhIll3guK9ypRGaY7VmUUaf4GvkedQuDzhMA1sMFi52UePfsRNK0iiXOrrD18IWInw75A7ahYvcvnmyxNLR2thR/08918tsW01RanYq6Ht6ha+XSjB8qsnzqrDseX9ZHmzbEisZi3BOJO0fTo85uHZ3uwn6uYDpDoFgA0KbG16bRdf9iv3My2+FjiuEtpeyM7EgEqqGGQi/iqk0+xe/J+7zPXArWRkmoElKlOSe2nTwUdg2+uG4WD/QuDQzRRJygbxyxk0GxvUuGcS2VTww+WFdXQcEUVnj/m8HGpIasUwv6rwb+ZMSZZez24MZuUia0+D72wp4TEVPR77D9eUdquJ+gPdesscl+Up98Xqr6CT9LZ2l+wGnzMK7Jsj8MG0bDBXI1bBaXTFZsmooUl1MaDCG5hL+eeKIv4n7l/QEnC0kS0jCZYCgvRYlFIKWFFGnHcEnZvyCl7M7yx4o1Gd5HUbj4INs=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(23010399003)(36860700016)(13003099007)(11063799006)(56012099006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: XgMqH8ujPdQtTVmSu882DfqMiImMhIkZNvixEDeIXPYo3jQ0JBnElEIPL4aXOAPfJ9fDQK8qiA1qeCfywpfOalqrGNq3oQNk0DAd1FpBNMnvEgh/Ggsk3+blsdXG6G+Vg36mG7OgCOPOoylzQxvZQfRYJKK91zqg29jFhuzNyXEBJKnFzmFIwQGbZ0dsFqOhzIrGASis8esc/Q04jODCcDMZhZUSPbgeNRfpqGqET2u4yLGd0XMC7XSA740h6MG9tM6tStkyVKAJqrwyRbRzGQiHqAFqKfkXqcm17LLCPLa04lSbIPbtPU2VI6lbmQOIhhLzcGJrHohYBECK/z37ZVwo9ZFPy1CS3QU37uvHuh8oLzPrAybvCcej2YUnQmaRKO0AeW3rmgoqKTG7WcsO60FYy1KHHQ3ug0PFDUG/s6bONQsbt1I+/fSpb3gJJh8f
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 16:06:11.6344 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b120b1a-1fea-4bbb-e6df-08dedb787fa4
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9C.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVUPR10MB9680
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,93 +132,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+First patch is replacing uint64_t by u64 as suggested by b4
+Second patch optimizes cyclic_run() to parse cyclic list only 
+if a cyclic function's timestamp is elapsed.
 
---5RyxmJIteSTEFHq4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
 
-On Mon, Jul 06, 2026 at 05:37:41PM +0200, Mathieu Dubois-Briand wrote:
-> On Mon Jul 6, 2026 at 4:59 PM CEST, Tom Rini wrote:
-> > On Mon, Jul 06, 2026 at 04:54:17PM +0200, Mathieu Dubois-Briand wrote:
-> >> Hi,
-> >>=20
-> >> On Mon Jul 6, 2026 at 4:14 PM CEST, Peter Robinson wrote:
-> >> > On Mon, 6 Jul 2026 at 13:34, Mathieu Dubois-Briand
-> >> > <mathieu.dubois-briand@bootlin.com> wrote:
-> >> >>
-> >> >> Add missing firmware/optee node, so is can be both used and copied =
-into
-> >> >> Linux device tree by optee_copy_firmware_node(). This is consistent=
- with
-> >> >> other i.MX93 boards.
-> >> >
-> >> > Shouldn't this be going to the upstream Linux DT at which point get =
-it
-> >> > when we resync?
-> >>=20
-> >> I don't think it should. Or maybe it should, but then we are doing wro=
-ng
-> >> things for other boards, particularly for the i.MX family.
-> >>=20
-> >> We have this node in the -u-boot.dtsi file for various other boards:
-> >>=20
-> >> git grep "linaro,optee-tz" -- '*-u-boot.dtsi'
-> >> arch/arm/dts/imx8mm-u-boot.dtsi:                        compatible =3D=
- "linaro,optee-tz";
-> >> arch/arm/dts/imx8mn-u-boot.dtsi:                        compatible =3D=
- "linaro,optee-tz";
-> >> arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi:                  compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx8mp-navqp-u-boot.dtsi:                  compatible =3D=
- "linaro,optee-tz";
-> >> arch/arm/dts/imx8mp-u-boot.dtsi:                        compatible =3D=
- "linaro,optee-tz";
-> >> arch/arm/dts/imx91-11x11-evk-u-boot.dtsi:                       compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi:                      compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx91-93-phyboard-segin-common-u-boot.dtsi:              =
-          compatible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx93-11x11-evk-u-boot.dtsi:                       compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi:                      compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx93-9x9-qsb-u-boot.dtsi:                 compatible =3D=
- "linaro,optee-tz";
-> >> arch/arm/dts/imx93-kontron-bl-osm-s-u-boot.dtsi:                      =
-  compatible =3D "linaro,optee-tz";
-> >> arch/arm/dts/imx93-var-som-symphony-u-boot.dtsi:                      =
-  compatible =3D "linaro,optee-tz";
-> >> arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi:                       compat=
-ible =3D "linaro,optee-tz";
-> >> arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi:                       compat=
-ible =3D "linaro,optee-tz";
-> >
-> > Since I assume this would still pass validation in the Linux kernel,
-> > yes, it looks like a lot of platforms are doing it wrong here and should
-> > be pushing this upstream. Thanks.
->=20
-> Ok, so I suspect I should instead submit a similar patch against the
-> Kernel.
->=20
-> Should I try to add something similar for other i.MX boards and stm32
-> boards at the same time? So they could later be removed from u-boot.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+Changes in v3:
+- Rework cyclic_run() to not call get_timer_us() on each entry.
+- Link to v2: https://patch.msgid.link/20260703-optimize_cyclic_run-v2-0-81762cff0b17@foss.st.com
 
-That would be much appreciated, thanks again!
+Changes in v2:
+- move cyclic with nearest deadline on list's head.
+- Link to v1: https://patch.msgid.link/20260702-optimize_cyclic_run-v1-0-92c5a7011f54@foss.st.com
 
---=20
-Tom
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 
---5RyxmJIteSTEFHq4
-Content-Type: application/pgp-signature; name="signature.asc"
+---
+Patrice Chotard (2):
+      cyclic: replace uint64_t by u64 suggested by b4
+      cyclic: reduce get_timer_us() calls inside hlist_for_each_entry_safe()
 
------BEGIN PGP SIGNATURE-----
+ common/cyclic.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+---
+base-commit: 1296a428c67cf103eca482d4a63349661c1b799f
+change-id: 20260702-optimize_cyclic_run-ecdc46f12829
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakvPrwAKCRAr4qD1Cr/k
-CqYiAQDIAcAYCa35KqyPQ8Pxl1SiSHrkBQAz/YKI/GtQpiYUZQD+Lju+RY5gYzOE
-z4kt6jzKy2071U5EazUWmGqZDMmwZg8=
-=qUsu
------END PGP SIGNATURE-----
+Best regards,
+--  
+Patrice Chotard <patrice.chotard@foss.st.com>
 
---5RyxmJIteSTEFHq4--
