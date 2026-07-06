@@ -4,105 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 030B0C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:37:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9668AC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 13:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69A8584979;
-	Mon,  6 Jul 2026 14:37:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CE913846FD;
+	Mon,  6 Jul 2026 15:04:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=etu.esisar.grenoble-inp.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tm8iQdA9";
+	dkim=pass (1024-bit key; unprotected) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="ExQ3N7Kn";
+	dkim=pass (1024-bit key) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="ExQ3N7Kn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB74A8497A; Mon,  6 Jul 2026 14:37:18 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D5948490A; Mon,  6 Jul 2026 10:35:36 +0200 (CEST)
+Received: from mx1.esisar.grenoble-inp.fr (mx1.esisar.grenoble-inp.fr
+ [195.220.36.33])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77E96846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:37:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-3995e22ef81so32738981fa.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:37:15 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A503807C4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 10:35:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=etu.esisar.grenoble-inp.fr
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=theodore.oviguian@etu.esisar.grenoble-inp.fr
+Received: from mx1.esisar.grenoble-inp.fr (localhost [127.0.0.1])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id EBDC62240F5;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTP id D5BC52240F7;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mx1.esisar.grenoble-inp.fr D5BC52240F7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783341435; x=1783946235; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7MpCxnG9/Cc2VoqXXZNogHuiXYhX/FCit55ucXTNkPw=;
- b=tm8iQdA9lN4aw+0wQRnNcCGdqaP0uvBw0UxW5UADlmRLDOPYxMchOcCM03Hi6GMgoK
- VXUpdBUP/PciL6c9LdbTEPxu0RDiv/iQ/keb3I7UQnTrgYGojdWHSElEIME69GcDs4IR
- DSLMv+8ulz1WRmLyl1MA/R/Chl8BEexH/fbOfIb1DHfeP0bf6btf47mPQTqrg59AKW62
- 5HxwqsVPgzWNKGtEhL0zP3hLE6sUCYilO+Zphts2bn8+jpc3fY7lnNahhnHPJt0zmxYA
- TXXdc8bsmBOmkmhRjktbtSOqyKVOl7LtuyJR9vTFHrxh4kRZ1wCpW524HMLtZ91iC7me
- MZCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783341435; x=1783946235;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7MpCxnG9/Cc2VoqXXZNogHuiXYhX/FCit55ucXTNkPw=;
- b=VVFw58JjRhqGP+YEIbdiFjs1M424XDZ6VgM3LxfHBfljsDGN0nDc1VTqEdp0beiwHY
- EOYugFuAcr6SDd0dHeaCWBDLiQJVwIBdvt38iBRKaxVaV6HzTjMzK88ExqlhLO21aDy5
- XEFYFpV2Pvt51uJ/C6mmGJ1449WYVOu5nypKsmqmZU8v4SoVTpGvCZuRj6sXleiaMPo5
- GFF0q61vd9rGiWuIWBoNWL8CCsMVqwEKvdWXuglKxGq6uXcWYvW36skTfMjdgFbrXEpT
- EcuqOkN9/cRTmecVIOgEH9HcoS7G+wvW+ASjH8WUnXwkjlj4vG1fqulXma/7drpu+33z
- TmaA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrW7ZrOByrDu8nv9Aqdt8CqZW64LcCZmBAagCJFclUaM0Tunj2bbNNoqjnHpa/Jb4F3KGX2j7k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3vf4zDotMECc1D9/UBJTuMSVb7EcBtz1xkkcOvFuJrwlXNaxI
- 8fTi8WrXarPX8sNBQZpjZy1A5tIWwUqwT52vKXQChglTcSVMopQe7gXwxuMFnLe2zxs=
-X-Gm-Gg: AfdE7ckZplVJmrT7oppJLZu5+bTzOrGfVG5hwlgeSWZujuG4esSnnc5wH98UkPscIgF
- +FmzXK8gAwM220zsYJ7byz0g7tt7hNPZ7xSfqLBybwzRpA+zSO8n8f+hpySva+YVjxwylmTXVmy
- 1UCC/U5wn6GMI7meizt5lpmaEywjFlg29z3apT2y9RAg+eKuq363vvzxcD3aAV8fUh+s6rfrz2Z
- XUoq5VxU7TpAizZaVzlkDiJdUBLGQKEvp7coK52LpWrXrc4ZGyVAXavugOQKDl7e4EAGyLjLoqI
- yPexQRq9J5IgTLJRkNk28/JikzPc8f+fnvWmu3d19x6iP9Ox1O0SHV806qSrLQ/9AqoOW4b+Zum
- IXsOyl5I19Y7TDya+dNno5JPep7YmVxgTFUVyupJU/Szdw/0sN52s8m6whwC9IrhYtpIxxc//w3
- tw4z/GXsmPFeNuz51JuQHHyCjJ7kkd2TeEd4D1zmEJYn34uyMd7nmRXCWrmBENCDU=
-X-Received: by 2002:ac2:4bc1:0:b0:5ae:bb1d:ce35 with SMTP id
- 2adb3069b0e04-5aecf4a5352mr3470224e87.3.1783341434689; 
- Mon, 06 Jul 2026 05:37:14 -0700 (PDT)
-Received: from [172.18.183.38] (ip-185-104-138-126.ptr.icomera.net.
- [185.104.138.126]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5aed13c3a15sm2817394e87.68.2026.07.06.05.36.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Jul 2026 05:37:14 -0700 (PDT)
-Message-ID: <ac9f896e-1264-4052-a300-b0b95f7e79ae@linaro.org>
-Date: Mon, 6 Jul 2026 14:36:20 +0200
+ d=etu.esisar.grenoble-inp.fr;
+ s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1783326932;
+ bh=NMruiWIgwXOrDPAINcrFBmeiH6vuRpcSOdet+8vQ8kQ=;
+ h=From:To:Date:Message-ID:MIME-Version;
+ b=ExQ3N7KnDNE9YDapp847DbJJO4Ly9CcPcYoAw+J0i7X7WiiPydGJNJ7ch3gvdf4kb
+ ClvLNNd2YKxZiibspI+Lxp3WIZK8muTRFkfcsh0bnQsrmJ/MtrHD0ciSIdYVdYamY1
+ ZWcQv2Ozu6TI9O7Pz2vGQaiYxlyNliUJZuqBXI9A=
+Received: from mx1.esisar.grenoble-inp.fr ([127.0.0.1])
+ by localhost (mx1.esisar.grenoble-inp.fr [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id xOJMPlEUT9Nf; Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+Received: from srv-zimbra.esisar.grenoble-inp.fr (unknown [172.21.100.139])
+ by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id ABA982240F5;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+Received: from srv-zimbra.esisar.grenoble-inp.fr (localhost [127.0.0.1])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPS id 9D5436E159E;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTP id 8C3136E1029;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 srv-zimbra.esisar.grenoble-inp.fr
+ 8C3136E1029
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=etu.esisar.grenoble-inp.fr;
+ s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1783326932;
+ bh=NMruiWIgwXOrDPAINcrFBmeiH6vuRpcSOdet+8vQ8kQ=;
+ h=From:To:Date:Message-ID:MIME-Version;
+ b=ExQ3N7KnDNE9YDapp847DbJJO4Ly9CcPcYoAw+J0i7X7WiiPydGJNJ7ch3gvdf4kb
+ ClvLNNd2YKxZiibspI+Lxp3WIZK8muTRFkfcsh0bnQsrmJ/MtrHD0ciSIdYVdYamY1
+ ZWcQv2Ozu6TI9O7Pz2vGQaiYxlyNliUJZuqBXI9A=
+Received: from srv-zimbra.esisar.grenoble-inp.fr ([127.0.0.1])
+ by localhost (srv-zimbra.esisar.grenoble-inp.fr [127.0.0.1]) (amavis,
+ port 10026)
+ with ESMTP id EvMFGG4S4zyQ; Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+Received: from Ubuntu.eur.gad.schneider-electric.com
+ (96.169.185.81.rev.sfr.net [81.185.169.96])
+ by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPSA id 34AD16E0B25;
+ Mon,  6 Jul 2026 10:35:32 +0200 (CEST)
+From: theodore.oviguian@etu.esisar.grenoble-inp.fr
+To: u-boot@lists.denx.de
+Cc: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>,
+ Theodore Oviguian <theodore.oviguian@se.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>
+Subject: [PATCH v2 0/3] Fix TI AM64X ERHPWM 
+Date: Mon,  6 Jul 2026 08:34:59 +0000
+Message-ID: <20260706083507.18386-1-theodore.oviguian@etu.esisar.grenoble-inp.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/8] soc: qcom: cmd-db: Allow boot without CMD DB data
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Michael Srba <Michael.Srba@seznam.cz>,
- Simon Glass <sjg@chromium.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20260619-snagboot-v4-0-385497442db2@oss.qualcomm.com>
- <20260619-snagboot-v4-5-385497442db2@oss.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260619-snagboot-v4-5-385497442db2@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 06 Jul 2026 15:04:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,17 +101,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>
 
-> Changes in v4:
-> - Removed QCOM_COMMAND_DB_OPTIONAL as now we use
+This patch serie fix the TI AM64X eHRPWM.=20
 
-...
+Hello to everyone thank you for your implication in a great software,
+The goal of this patch serie is the to fix "failed to get tbclk
+clock" error who appair when you probe (patch 1) ti pwm driver=20
+and to fix a following error who sometime froze pwm (patch 2)
+The code was build and tested on a TI AM64X board with U-Boot next
 
+Signed-off-by: Theodore Oviguian <theodore.oviguian@se.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Neha Malcom Francis <n-francis@ti.com>
 
-diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-index cdd9e30f43e..987719bb925 100644
---- a/drivers/soc/qcom/Kconfig
-+++ b/drivers/soc/qcom/Kconfig
+Theodore Oviguian (3):
+  ti_pwm: Add EHRPWM TBCLK clock driver
+  ti_pwm: Fix EHRPWM issue
+  ti_pwm: Add support for arch k3
 
-> +config QCOM_COMMAND_DB_OPTIONAL
-> +	bool "Allow operation without Command DB data"
+ drivers/clk/ti/Kconfig        |  7 ++++
+ drivers/clk/ti/Makefile       |  1 +
+ drivers/clk/ti/ehrpwm-tbclk.c | 66 +++++++++++++++++++++++++++++++++++
+ drivers/pwm/Kconfig           |  2 +-
+ drivers/pwm/pwm-ti-ehrpwm.c   | 17 +++++++--
+ 5 files changed, 90 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/clk/ti/ehrpwm-tbclk.c
+
+--=20
+2.43.0
+
