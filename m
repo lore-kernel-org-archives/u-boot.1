@@ -4,104 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07F31C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 14:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7109DC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 14:20:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64BAE846FD;
-	Mon,  6 Jul 2026 16:14:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C65FD846FD;
+	Mon,  6 Jul 2026 16:20:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U8cAY1hp";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="13YOELvm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99779848BF; Mon,  6 Jul 2026 16:14:16 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D693784852; Mon,  6 Jul 2026 16:20:11 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FF0F846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 16:14:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-8ee88fce536so16903886d6.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 07:14:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783347253; cv=none;
- d=google.com; s=arc-20260327;
- b=M6MVGqeZvZng2pOc3pK79wmXQOZoPxHRIyWPP54ow2J/BfPPwpObhX04jSwoRvpN2a
- 1Hs6ByFkTSWLTQvMEgN/M1a5q9w9/lPntxbizeDwFm8Na/0YuZfvjmfwGq5keGee/8gg
- I1dAyxxyLnoQCsKPp/tdv5CmxtRRTJ0Wu0w+AcElyiluLpjLK7Mdv5lOB6edRBOcdkmN
- rEQ+Wmk5Hc2LjYiWXJ2tYCJtczyZ1o47dp9DTYkldHqVUNoP5pWSCJDXdWDC5Kv4jfYH
- f/HsQmSjDgbmyqSOZUspVrvQS4Mh/NeMQCLugPf/qmToaM0hx+zyo5GTBExQLsno8TRm
- N5aA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=WZJW7NtaFQQmTn4CN/diWUQmvqEfn+WhK5uUgylPhQA=;
- fh=+vNif0XVR7mrRqwMPeJT11S8ZzumVtcYADprkMHe6/8=;
- b=VAE6qNMz6OpGmGahOjSjboyc5Zzvva5TLRcWvb3oXbS75/T2RXM9YaWmlI494VVxwI
- XW+TSrhj6PPfFCgJuBY+8hEc2LYaZ4n4rJZZVZDU9J8fgJgGSd9VYkSl0wWCTuP9+j7k
- fUcc5/R+tJwAQPrIQpQgZgcu/avj/mN6i/A9M5pg1+XUqfilhljZtIRKcf+z9/3ex63t
- ZSAGCy4rZFAOrVQeg+I7Z7YvdfGvA9HHmq+J35A244c6sThHiZpY/bH1dejaWH6ljn39
- kvEiT0VFPUGStQkRSni+0CAN0Q6Om94qTIh64/afw4gla/51KOlY4p1NgiNh9l0DMXQi
- 48AQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783347253; x=1783952053; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WZJW7NtaFQQmTn4CN/diWUQmvqEfn+WhK5uUgylPhQA=;
- b=U8cAY1hpdStGR5iP3JZBdaK9zo3d1J8qsYwZkC3HyJjKSwze447dN+/ijp9x2mbb4d
- 0QopMJjpNwdYEHKnOFu3aaxDZDdSe2ZRe5hb2rqAmAXinCN3I8jlMRXPUC0HX141/BGS
- MigG7JISnJp+K8mldO36R81CKmRrlFIQkbVOntRLzxSG2BM5XopHL0OBnVttAruEtQRZ
- OHX88ijesg/C3zYXytsOwt5WrIJO3CbEjYETCtIffkM9rpLC8ErjY0y+hOKL7/My81ln
- MnOz6FBy2s6A7uOdkCT5mhZoD4I27O3HCtVXClueyPWVvAsMeZ6BP4B5W7dhIHKpKT6I
- xBoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783347253; x=1783952053;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WZJW7NtaFQQmTn4CN/diWUQmvqEfn+WhK5uUgylPhQA=;
- b=OtHzFCiBuqRMWePAIxZI0VydiAhyIVCHz4RPm/VNHgwCsAws/8EWwbKPwoDpQYNCZV
- WtzNfBFeKqg+MD7gz2/kMVqRBIWpHqsJ2HGw1a5gZFIXMTCmgeEAAUN02fWKR/hnzVP3
- R69ZW6C7zyGPhm+mtRZ+Gtq+tlXhUCGbfAKBahdr2Zipx43lgOeiM6OxT8QJ8OyTVDQx
- xU0+kv5pBZWuXMpwY+z3jmZVhC8Zo4TD6Pgw9+MCPBnFMarRVTzD+id3MPTMfUhP40si
- SnXKzRb1BWws54lqSSvaBFiEphULZJkdGHJXpz3BRuq0sNiVyixJdoi4jj/WgsuCZ2Ie
- AMuQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rqc7biB/TntFyTkxDNmwyYxI63GAz7I+JnHVS4tt3UbWeWIrdoYHQKcpet9Cj+gix5BQxJCWpY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOsPDAiopjyLvM5a0ZlDPXC0XJi9C31tdOtSI7gOxH8FJu6MDH
- dpfZXpAKjmHsLi224H6zMrJBT25J4kOrHZ3K+BDWdTYw0E5bykDmizN5FtsKN0ivQgSZdqFBVx9
- ar7YvdvRbCXBj6OzTeHxc1ZykhZCNPsQ=
-X-Gm-Gg: AfdE7cmiTLXnzrG8RWnwifF/OzaJl00XQD1xVEPNCh7hUpuqe5BUOCM+uF4+W7cyiyU
- zfDOwNEVH0S90i8ul9WrPUwxZXOChyDsvqsteoZl79oc65ZmS/3bSVBeDfN/ZyIUeRrRw0zBC5P
- 5x0W2tX6qF5BMTdcdEUk7ZAVnYdy1Dgt5Jb8ffVxFkflyXsKqMppKDLWmvzRl6whBcsoLzuL2mf
- AtwCde0PYpiGVYN6ORVSRxa1G3NPfacTSHwnfwmFNwKn2eK3DoVUi7oGb7VdvOc+0xHhSLMpWIE
- PfqWq3BdiW3BqEvpigFmAn/EoFMhdHWPaB2bKRXg8MeM9coMbo2IfVLxkQw8dVYwOTpfHkgQ2Q/
- +ehSYXjic7+p3dyvn/bHG8AE0EiZSkEtvjneWzwheDiQfjo3+V7TSrhC/ivEet/t2Ve0=
-X-Received: by 2002:a05:6214:27eb:b0:8e9:f5b0:f61c with SMTP id
- 6a1803df08f44-8fcb4b01a2emr7436356d6.44.1783347253014; Mon, 06 Jul 2026
- 07:14:13 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 17A53846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 16:20:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6401f59d0=Charles.Perry@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1783347609; x=1814883609;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=wJ1RQ92x3XA+4q29xz6wUz5pSyV1GLA36EU2JlHhfTA=;
+ b=13YOELvmkUtIBXsxS7y9hRpM+zn/JbdJ3NBdwWQadS8zZGvYJ+F8ip2O
+ 3MXuJRklPmylri3/2DXQv+ukw9BApOgMgzA5FHc5ElyOwGcWv84lUCps+
+ Ja0Qp1N6jcqY1afdSvZ7zGRuiN6RPF1nYkpGLblaKAxekbwrXa4TCzGEp
+ vA1faAPhtrC4SwyDdiRQZFpEY3Ze0SEZQA+JrJIpaX2HMiFMRIW3HEhtc
+ S8SL4Vp+VLklsPKTff64g3CCnoy11RfoNgCt2qmH6kPG1U95MPUwb0Y4y
+ LUznhZod60P18JLrq2tOqEWQtiMEZA4maJkIHVb+8jN3tFvdC1eAycM+j A==;
+X-CSE-ConnectionGUID: c7e1O96PShuw1EP5PW0OHw==
+X-CSE-MsgGUID: 9F1mbTNSQ0ijJDQR/LvDGg==
+X-IronPort-AV: E=Sophos;i="6.25,149,1779174000"; d="scan'208";a="60153746"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 06 Jul 2026 07:20:07 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Mon, 6 Jul 2026 07:20:06 -0700
+Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Mon, 6 Jul 2026 07:20:04 -0700
+Date: Mon, 6 Jul 2026 07:20:03 -0700
+From: Charles Perry <charles.perry@microchip.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+CC: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>,
+ "Rahul Pathak" <rahul@summations.net>, Anup Patel <anup@brainfault.org>, Tom
+ Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan
+ <peng.fan@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass
+ <sjg@chromium.org>, Kory Maincent <kory.maincent@bootlin.com>, Kuan-Wei Chiu
+ <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, "Quentin
+ Schulz" <quentin.schulz@cherry.de>, Stefan Roese <stefan.roese@mailbox.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Philip Molloy
+ <philip.molloy@analog.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ "Casey Connolly" <casey.connolly@linaro.org>, Balaji Selvanathan
+ <balaji.selvanathan@oss.qualcomm.com>, Alif Zakuan Yuslaimi
+ <alif.zakuan.yuslaimi@altera.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Marek Vasut
+ <marek.vasut@mailbox.org>, Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH 5/7] drivers: power: add support for RPMI power domains
+Message-ID: <aku5kzlWKcMYDYzE@bby-cbu-swbuild03.eng.microchip.com>
+References: <20260626201613.1035208-1-charles.perry@microchip.com>
+ <20260626201613.1035208-6-charles.perry@microchip.com>
+ <akIQggjnR/8JfkWQ@shlinux89>
 MIME-Version: 1.0
-References: <20260706-master-v1-1-25bae88d130a@bootlin.com>
-In-Reply-To: <20260706-master-v1-1-25bae88d130a@bootlin.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 6 Jul 2026 15:14:00 +0100
-X-Gm-Features: AVVi8CcKB1u4vudiVvPF3j6q2xRHg4VZM93IfLE5vF_qaJKgs4OvUdnFAfGXSUE
-Message-ID: <CALeDE9P-5NG_a0T=dXB2KQcPCGJoSVeRXk6yQPXLesws=ypK6A@mail.gmail.com>
-Subject: Re: [PATCH] imx93_frdm: Add OP-TEE device tree node
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <akIQggjnR/8JfkWQ@shlinux89>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,45 +95,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 6 Jul 2026 at 13:34, Mathieu Dubois-Briand
-<mathieu.dubois-briand@bootlin.com> wrote:
->
-> Add missing firmware/optee node, so is can be both used and copied into
-> Linux device tree by optee_copy_firmware_node(). This is consistent with
-> other i.MX93 boards.
+On Mon, Jun 29, 2026 at 02:28:18PM +0800, Peng Fan wrote:
+> On Fri, Jun 26, 2026 at 01:15:46PM -0700, Charles Perry wrote:
+> >The RISC-V Platform Management Interface (RPMI) defines the device power
+> >service group [1] that is used to control power domains. This is used to
+> >implement a UCLASS_POWER_DOMAIN driver.
+> >
+> >[1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 4.9)
+> >
+> >Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> >---
+> ...
+> >+};
+> >+
+> >+static const struct udevice_id rpmi_pd_ids[] = {
+> >+	{ .compatible = "riscv,rpmi-device-power" },
+> 
+> Not find this binding in Linux kernel or dt-schema.
+> 
+> Regards
+> Peng.
 
-Shouldn't this be going to the upstream Linux DT at which point get it
-when we resync?
+Right.
 
-> Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-> ---
->  arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
-> index 41111b1a95a2..2ce9f46b2ad8 100644
-> --- a/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
-> +++ b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
-> @@ -12,6 +12,13 @@
->                 bootph-pre-ram;
->                 bootph-some-ram;
->         };
-> +
-> +       firmware {
-> +               optee {
-> +                       compatible = "linaro,optee-tz";
-> +                       method = "smc";
-> +               };
-> +       };
->  };
->
->  &A55_0 {
->
-> ---
-> base-commit: 780084d7c07f511da4a39b43277c573156ed42e0
-> change-id: 20260706-master-c71a02f504f0
->
-> Best regards,
-> --
-> Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
->
+I'll remove the device power service group in the next version. This is not
+strictly needed for the initial introduction of RPMI and can be added
+latter.
+
+Thanks,
+Charles
+
+
