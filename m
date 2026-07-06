@@ -4,121 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E901FC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 08:20:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC2CDC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 08:51:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF905807C4;
-	Mon,  6 Jul 2026 10:20:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id EC922807C4;
+	Mon,  6 Jul 2026 10:51:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="WtuyBIO6";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FzLZCZx6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCC1B84105; Mon,  6 Jul 2026 10:20:02 +0200 (CEST)
+ id 9C435846F8; Mon,  6 Jul 2026 10:51:15 +0200 (CEST)
 Received: from GVXPR05CU001.outbound.protection.outlook.com
  (mail-swedencentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AC6B80398
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 10:20:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3691A80398
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 10:51:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B1zlly6+wKiDyROOuRh8e9dDGQlvwvYFJq9woZBjFIz7D38W4725d1c1eq/6qvKaoJl/enEi/jXjCJH0oRzMkhRB22Z9tMelR+ThfBzoO624MzDFmTLX2Y6ywwOUHvGH725RxrQ26b2t3F6RlVkT1ckHRe74KP1Vs9h8jLGyRBXby1hNrX0Ye2vZEzCcJGAb59TnyOxwjj4AcEsWRjyxpxci+ZmYE7gP0VKpKLFDWN90gsGu/vDSLsziwICZMVmOxIUI2i7Ln2VMhLsFqwQdRwKaJ/4XW45FQg5z3tWp4QbAOcyktEiBu6HIYeHVrZFQc4lZp3hQkjKtNONSC/oSug==
+ b=kaeSyre8Ks+sGgepmCkmqxlkfU33gPUpHV/Ai6/CYBYgR8DDL/Th6KfGajHIS/3UzYLr1xQcFJ1poclVhHuHg4TsB2C9mfrFUWSY9TUFNeAaWyIamdffwpNvB+Di5z0Xl3OcV71Bg7JUy0HN+1+3SynYroAGKcpm7UCw1fOMKkfTVOi9EFnla7W2EDokHrgLw5Nf+LjHN9O4woAQfKSTgb3gbQAeMqyMtMUDMdECl8wuERwL+miAzxTuJP+4LBfxhz6735U6N3QASH3I2lEr6dtkLN5+p8/bs+P6wCpv9og7mZuttmL3UvOP44B0+QSaYztyP0njZ0zvq1kXN7BjYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vjRHBmgd0WRNhNJ2sUFnTPSKe3om0m0Rv4h7a9wRFVU=;
- b=GpE6U6Zdu3i68Og0d7VKCuGJR9roGdvws4+5GNQWCM++5O2IyxOYKYl4M0pSQ3Ak0goYH/9j9lk2MYHYbq9TFYzgblZ05MrnBETGa7ngx2uCgiQ2Nm9f71PrRThWgEdH3R2GREOOorh02Wom8gU4/rBNVIno+w1nWjyuHNp/1nIwx3Ixy/D1NCApFd/299Yp6h7Reh7an6XLtiXWozFwDbpwJWTUfsL22XnE1iN0T0szF+x9u3Vl67N9HlAuPgJlJ/NJS9xCQC29zYj9wtquhLoWLjPux9oAOJkl+p+fXUkFp0LV8hyv7AsqFyasBapz+y6PyJfTdXz+u467Hr3itw==
+ bh=iK5gRbjZz/aLGTx8Gb9DXX2JvojFPaB46lQbrJmH6Ko=;
+ b=BWy40qSbmKbYmqQKEVnRWMKK7oKjnaaJAFSe0+u2iyvSxeZLj6XWWWie3MP4XW2RZBeGxJ2Kgl+a+ArRaUiJZeUTwU7LpvU1GO5d+lLj1ton1J5zryQUuk/+Lh0ohBNlHEUmMy87qo3AGkBZ/t4z1dQhjoT1Folnmd2h0LUxCD4TykiBTGDQO+8/YmUOp1i5G3ypIA7krhS1SehMwttKhDv8HYDaQUvYZsAqCbISUmqxaou7dtB+u6/QgTl0JCfrnpjiVcXUiHgFs0HgkzA/9DKSn/WoU41jJMtJJTlNRZmuebiJY6f+nDbXc3w+IivTFNwTsP+lxxhzK93Xq3+0aw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vjRHBmgd0WRNhNJ2sUFnTPSKe3om0m0Rv4h7a9wRFVU=;
- b=WtuyBIO6JjDlaxIPYUlGyggakF0rb0FLSAIKuD2Hkahx/sfkRFkAkASPwQf0Kc86jKJ3tNIcsZis88I1jjFT9R4n/fPFIHO+s0TtdEtKQ9n+7c+SMYTDKGdph3ILzJwy/u+MGGLN7tPm2cMvwiW3+akXB0ONmqwYAIlxHQ3mFAL9efJAn1a0Zz8hMWi5/Qk/FKhg5emroCobyUbusFlQKrXw8EpNTKcj4wgxapLUvfiqUD7O1AwgG2kpPwEnlxlvF/1uTrsea6AZEIEGJ8bPVSZSis2nnkjlgqM/UOA0ZyZ1nrkQsktf7ysyWqd7HXYmyLSqgpvmsjh5/xn8sSx+AA==
+ bh=iK5gRbjZz/aLGTx8Gb9DXX2JvojFPaB46lQbrJmH6Ko=;
+ b=FzLZCZx6+ylfvHZIT/aIctxJ2l8PAQ3Ceh1HpHyTC/Z6RbZ7LhNII3kk3spV5nbZDZaaTpog7bOg/yCUByJgnwHds21o39ADPvSjkwJ8JwUiLpvcP7iQ7w3IC3rEk/rWPQ+AkfiOLI2sXzZVpXHhfTw2uPBTQRGrV58f+AZNeeI=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by PA2PR04MB10333.eurprd04.prod.outlook.com (2603:10a6:102:41a::11)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DB8PR04MB7100.eurprd04.prod.outlook.com (2603:10a6:10:127::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Mon, 6 Jul 2026
- 08:19:57 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.012; Mon, 6 Jul 2026
- 08:19:55 +0000
-Date: Mon, 6 Jul 2026 16:18:39 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, ye.li@nxp.com, marek.vasut+renesas@mailbox.org,
- vjardin@free.fr, aristo.chen@canonical.com
-Subject: [GIT PULL] please fsl-qoriq-next-2026-07-06 for next
-Message-ID: <aktk340Ug5-TVQY-@nxa18884-linux-1.ap.freescale.net>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-ClientProxiedBy: MA5P287CA0263.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1f1::11) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.12; Mon, 6 Jul
+ 2026 08:51:11 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.012; Mon, 6 Jul 2026
+ 08:51:10 +0000
+Message-ID: <f9a77b79-d47c-4853-93f4-4e346a489d72@cherry.de>
+Date: Mon, 6 Jul 2026 10:51:08 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tools: binman: add build key directory option
+To: James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
+ Chukun Pan <amadeus@jmu.edu.cn>, Yannic Moog <y.moog@phytec.de>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+References: <20260703213308.3804461-1-james.hilliard1@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260703213308.3804461-1-james.hilliard1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIXP296CA0024.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:36c::12) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|PA2PR04MB10333:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3f6c22bd-d8f4-4f38-59fc-08dedb375c69
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DB8PR04MB7100:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4886428d-6507-4f00-0551-08dedb3bba20
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|23010399003|19092799006|18002099003|56012099006|11063799006|41080700001;
-X-Microsoft-Antispam-Message-Info: +NHcg/J7x0NU8dv4YXeFvsouharXqtOl828sYi1E6OY5LXjOJDoTbPlmpJS+/2j5+CoNUpaBVOK5JGOgyxEgQ5IKONfhZeP0r4WsLEQu55Gr6ffSKKGXtiWziS2nvdrr1CoODn2dpptMVsxMjIUpq0LItcDxLjYM9s/Sqpo4O5I6+iRTAF5LWjxKyHLiMqdCLR56nVl58pTHFS02GYDphvauLSXzPUTFm1yypz43D47CU9x5l8hfXWe3Xa6QCwoKweTWAjxA/ap1IdrResZJjqGv/1KyZUCAxpyH9oxW6phxRA67CubZ+5SoK287VNWbjeY3NOf2JUB/e+RRzrJ9td4CBU4xLgpi9GDkHjPuTCl20Da6GGLh7PWFWc+WJYVLyRWqQtQXOrhfr2w/mVgrSrFMbKR5dlkkLQ+OZXF1uB7s+NFN8hJGGmgYOqvj+ZJnm+WMInlZCH/exIfYUygEJiGZnAqcaIPSs3YqQLCbwcq83Ab1nS3bvGXeEwlyN7jyx2anuaLPDnoroLBjNJS2Qarbx385Pd7WKpdAn8cNzwI02klMC9dcDOI7dDgpwCkMunc2/ToneylPrpFcuZOayJOgia94Il6jGPUrR17BOm6iIadJjmvtfv2zAeGWcib6H1qlxDZFNP+kXP8vz0TEC0C+2ALN20XuZECUDQ4TapQ=
+ ARA:13230040|7416014|376014|23010399003|1800799024|366016|3023799007|17092099009|6133799003|18002099003|22082099003|8142099006|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: GQCKvngiBLrBV6WySrL0zUAn7TC4LlcHNd46Dtm1ekwhnHVHszaWAfW9y56aWBjTw4waGlDoc80/PMmiib4GdeJmFZzXiugiXH/zuM9PtnvUWyy9teHS3NyzadkWyLD9i9ikWKbDxaDe5c9dToqS8+7YwIVJ+ZQdlEtN7LuEF69En/PbgC/ACgo7VCw0HdoZwoTfel1MMp4iIf8inpD7W56hLafBwhROzZmY0fWHirCFsE+nfoJdLo+VOJi9+W4LDrnufL4Bon7/Fuz9lPcwObY6NXN8S9HVO1OlP8sVqfJTvlhPqOkSAz8kpk79LDUxjt71dizuBfGZ0TfddmBvfEVFvYGBbmB1hnidfnBFCuapWfzrQD7cADM3QOvypQfDcF4MFkWkaWrdcBQG7eEOtW4ToeQq3LZV098+zyrQ3+mr1xtjE9PpU0Ot9mNZI8bDNUSyV/MQGK3gSwTFL8b7TFhqUYfZOBdjZ75Cxa8GLCQmSuX0XDbq/77bhz2KJBBVwJ4QmI92YoWOCpVNUACtDm7afHjl7YFLb93HATiUCCovIJLNA35vl9MslrTyBSBXNw5wsPpOpcPUxWCfP7SgomhJ+fbfPjeZWfVwezlI0Wxdz1flingBs46BBtLuyI0RfEM38Ci08yrLAfcDBED7Agyxa0i7xUuNZUv2N1mIi0w=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(19092799006)(18002099003)(56012099006)(11063799006)(41080700001);
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(23010399003)(1800799024)(366016)(3023799007)(17092099009)(6133799003)(18002099003)(22082099003)(8142099006)(11063799006)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1ynUmP2LVpNqMLeixvLeelOyYEU+okvplkWwN4rC+Twq8ogDnA4ktyNpJRSF?=
- =?us-ascii?Q?6fX55BVyoJw9+ATi7Rf2Jm6S6EHydhcV02A223Vt8bd/Uz8OPRBjhMvKA2ri?=
- =?us-ascii?Q?zj2da0uBMy4tS3RDA9QESsk5Dgfnsr9PCD0fFaov8O/Vk/fINwNQJhY9eYVu?=
- =?us-ascii?Q?kjA0lgerrJ7BRrCB3RdCYUMLVm/GsoZqMCAn7MSCpMQmlx51l0naqBbxmiiA?=
- =?us-ascii?Q?MI5vquxZSTbsve9kLh8tfPP/OvE9FGBHkziIGpbLIL9CPgNnZMUudnVECQKE?=
- =?us-ascii?Q?Wxl7RMnzCpeV4HOsWhN0ID3WYccxUSORdWnw9AcDZ5sLwSKHIhksVLRfSyXg?=
- =?us-ascii?Q?8yjSeE63ONHH+dyYpPs7vpLvdLP/piNqxUPwrIVghfDAMeLF3/n5o+S7M1UD?=
- =?us-ascii?Q?dO/I8oMQWxf9VHbe1eawZTyWbl+yN6pp2AeR45OXCeUl0JOij5rTdElZOl6T?=
- =?us-ascii?Q?0gF/iQilZVYcS8CVfaYnrMyeSMyj9ksdCZ/TlmVUOMfRC1zGKuY1HsAh3jQW?=
- =?us-ascii?Q?e219fH9wwkS5SGAUvJ5YmQmah+gvdFcI5SP8+w/hk10ZyP2d5hRHBaLnhvsk?=
- =?us-ascii?Q?0QHvwrkeGC07Emmw66fU+uSjCwJmiug2NQeooxEHQz8APRf/LwCo01Guk/bB?=
- =?us-ascii?Q?ASN5WLyA9olKqFItK3+ccZ1uqe3PREIY+AW+KPE1NlXYLPfR1k8eACT/8E4d?=
- =?us-ascii?Q?wyCOmm1u1fLMKj6iS5fJ65V+wzdrWFpP4Xkl7GmFOfokaYKM7/2PD1lajaQo?=
- =?us-ascii?Q?Sc0bEv96XMCd0pbR+PqSG8+SIWxLunK+OtW0OxkmXyufUGKWZ45JtnewoR7/?=
- =?us-ascii?Q?0DMzz9GK5sKAcETtP6FTMO3rkONiXUnlEe7p5gYX3kC6VJdOIZVBMbykyyh7?=
- =?us-ascii?Q?tngRXBAcrTV/4Rn6mEjQ6UnuauGecT+cXjzwjTIZAsBEQN5uJmSUnrnmfvRa?=
- =?us-ascii?Q?ivhqm746MCYgPBnDLyxrj3rhwku4fzLJ4dCry0dh67rvsjugBf6bUGeuAdbT?=
- =?us-ascii?Q?+gllnwX4bT9vXRxyThhx3DEBFnRXscWGNaHPQJc4boQCYDaYVtrLBfZvI0c4?=
- =?us-ascii?Q?RklH3JB5ofETNfwnYVvTjllxn4X2FgXjR0B+19oiBgLbokAxOJltEJTfQ2Hb?=
- =?us-ascii?Q?OrNYlaB6Or/qDOXWY2eNVMNq/JsrMdL0ZSwfuLJFVRkPl+JcS9dEyhhk2AoB?=
- =?us-ascii?Q?uaiIqNTscUKnFWE3gs41R2WvEhGu88u0DyFjyUqpLxJpG4XJYeM6MozyTBj3?=
- =?us-ascii?Q?VWznfVdwfL0erD2t0U4bEWSUInpRT6vBoEMSj2FrGScciu/QEDycpM6oi8Vc?=
- =?us-ascii?Q?XPIqyluSKCYgCm1+53EOPLSQGT9sQLtyYhDlnVVfSZ8ESaOeKSnAEeu5B5mp?=
- =?us-ascii?Q?2ot8RnexYRD74bdgyogwgwQE43z4Xgmg+AFYSp/eAYCN0rlSH6Dy8ZnSowCV?=
- =?us-ascii?Q?TIneFf6fOJfZo9uIx6QTr5xat8CoVWPCXDebVfU9q0WUygowTXnHEA2cQycz?=
- =?us-ascii?Q?sQZLJI2Zj2/F+OAvN9wJKerJUQ/S0+P6oxD+7hiky7a+xLaugJcdkOEwrWJ6?=
- =?us-ascii?Q?zbwmTx7IEDCO9yaOLxHmkTNfkHBslkJZNQKso54ql/0qc/9yTowH5U8HhKjs?=
- =?us-ascii?Q?mfFezIvz3yjqGL4c4nfRe7KeTXWNy/QUyaAn7zKK4Oyv7m7YCWwnYaumzq+l?=
- =?us-ascii?Q?s83TsJTptN+Y9tsxYPVr8nvRZN3M8nWnu5HDseIGGmKNl5e8TWYUAkjVvBc+?=
- =?us-ascii?Q?2pAyD7DbEdHWAg8qXH5NM6COVADjoMFQeqypGFHNAZMbZmrAmmPn?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3f6c22bd-d8f4-4f38-59fc-08dedb375c69
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y2F5ZXR4M2dJREFMY0ZxNDdkUldLMUxWRmVYVFF0cmFpWXpnWFE2RVNkeGht?=
+ =?utf-8?B?dWJsaVFjNGx2RGJaUG1vZjJ3YlRkNXFieXl3KzRVT2ZBZ3l3NVVSL0xtOCt5?=
+ =?utf-8?B?bE90WVllcGNIaHhsNTVqOUV0UnljSkkrK2h0STk5YXRCMWpSWDEvQjdnL3Iv?=
+ =?utf-8?B?MHBLcVBoRnNTejB1VkJScUZ5NFJTcmtFcGhETE13WXg0cjZZRGlYTG1mQmFy?=
+ =?utf-8?B?Z1Y2ZDB3MXB4SlhncmxrMVpkTkRzdnhEN3o1cW5SV2toLzV3bStvWFZPK1hz?=
+ =?utf-8?B?cVI3YW5VWi9tWEpZUU5wZWxjSVBSVzhqOEhaWk5XR3NXUXY0TjhBUUFDN28v?=
+ =?utf-8?B?Mmltclg2Z0RDYlNqcG5BcEdsVWZoMFRwVVhOeTlieTdYa3JpcXRvTDBVTXZs?=
+ =?utf-8?B?dU1pVG51dk1NRTlObjEwc2syVGNEMzQ1dkdIaGthei94MGUzdHRTenkwT3Qw?=
+ =?utf-8?B?WXhhVGdNQk9ualRnSUd3elRyenNQYlU5Qy9PU0Y1SWVSQnF1d3hHajZyMytr?=
+ =?utf-8?B?VDFOdTRkaVljUXRtZzZ3L1g5WkpEUzJmdEI5NEdwbjBuQlZXTVJWMXp6Q1l6?=
+ =?utf-8?B?NVdCSDVDRU5ob0tKL2o4N0NmV0RHanNKTTY0ZnRnaDFpUG5tZjNMK0YrN3ZG?=
+ =?utf-8?B?KzkzYmRsOTF5ZEhiNGw5UUxZRmxrQlRSNkhzM21neVU0bitjOHdlYzlnWWc2?=
+ =?utf-8?B?RUVxODFLN0RvbXZSanpMbjBsRE11QXRnUC9FaHNmOGlhbW84ZEpScyt1b1I1?=
+ =?utf-8?B?MUZicGtieVhvMEsxRFB0SFpwbFNxalJHZVZCaWJPbVhoTTBvOVFIeFJxdHBN?=
+ =?utf-8?B?SlQySkk1SnA5KzZEV2dRa3FjUk02ODE0ZFFJSU83clovSW9Bcmk2ZHNaYlpp?=
+ =?utf-8?B?MDl3UHBQeTFwcnYyN0dvNHM5Rjl1VTVkNFRjRTg2S05MRXNNempGbENza1BH?=
+ =?utf-8?B?UDhlUEN6enQxTkhGSFh6ZTUxaEtPNUlGZG9VTEcwcElHaXlESU5DQUFlc2tJ?=
+ =?utf-8?B?UWFIQ2VuNjJ4dFFMYUZaOFFUTnMvWnRyd0VaUHN4REtlMmpJRDByWDB4Q0Iw?=
+ =?utf-8?B?MnpZYWVSUzJXTTlESTFURGY4b2ovU0x1M3BWV2tlVzZaMms3Z0ZicVBEQWNr?=
+ =?utf-8?B?NGlvQjI2R3hvKys4UDBFVi9qSnphbFgxRTk2dThoaGtocFlON0xyRkZQMTlo?=
+ =?utf-8?B?VTVFR01acGI3Y1JZdU5PVW43bkZtL1hDajRiKzV6a2Y5UUk2ZG5iMmg3dXl5?=
+ =?utf-8?B?ZFhFMFVvRnlBb0tacHBTSEZLNjhZUVZPK1hSbFIyRktwVlArVG9NWU9uOEds?=
+ =?utf-8?B?VTJRSW9DaWpFMWdmWlBmNFhMVjdtRVFZMGprZVA1MHcvM2ZCamF1cE16aGZz?=
+ =?utf-8?B?UHEzOXB0WCtnMmwxUWNUMlA4Wk1tYmE3OE9yNDhkSjYrdDBpOE9VSnFFYzdP?=
+ =?utf-8?B?QUl1My9KaTBrQmJuN0JFWS9hV3ZlQW1yK1QrLzhvWFlBZ1VtZlBZSUF5MGJo?=
+ =?utf-8?B?YVk2dXlkVmlOMm9lQ2d1K3IyYlZXbzU3MGkvdHNhaVRYaEpVSmVjcnlYYUY4?=
+ =?utf-8?B?SzNJZ2x6SlZ1dEtqdUI3SGdBQjUzZmhlNlhtNXdwR1hFMW1YZG5paFc3Nkc3?=
+ =?utf-8?B?ZGN0bGk5OGxodk5za0VycC96L3VIRnRBME5tc2Jkd1ZWZThDODR3NHBMUEs0?=
+ =?utf-8?B?WDFmVnJBUVVweDRTTDlldkwzNTRzclA5S2ZSYWlKdTBlYlNCc2llTXR2YjFB?=
+ =?utf-8?B?YXp3OEZlWkZTa3R1VEJEc2gwUCtmOVBWQ2t2UXBHL1Rxb3FRTWYxUytuRHZL?=
+ =?utf-8?B?MEFoWThNZUNJbWQ2V01kZmRWOEJXcnFDbGhlUjhwRzdqZHl0Y0lzWGhrVVRC?=
+ =?utf-8?B?Vm1ENk0wd2F4Mm5lSTAxWStsMGc2QzNnZlV4NWhKdGFORm1sbUl3UDIyWHpT?=
+ =?utf-8?B?WEx6aUZvYWFtVkhJN2NQQ3FJdk9MekdzT04zZ3dFeXpHOVVFT3hxblpkMlk5?=
+ =?utf-8?B?eEhodjNxOWZkVlBhL2ZtYlJIWmtDbldlMTFJK2lySmR5V1pMb2hQczFMWkk1?=
+ =?utf-8?B?b0ZsRDkxQ2lwQ2V3NThwdllkdWQxYmV1WERnekoySlEraUtNSXYvZm84cWE1?=
+ =?utf-8?B?UGdPR0w0TG5KVVhCdVJJc1oxNFRjTFh4ZGZ5cmYrYUE5bFdyS2dCOEtYZEF3?=
+ =?utf-8?B?MkpPYXJyVERtL2QxaDV2OWdIWURZZUY1NFduakkrQjR5Z3VETjVyM09kcVo5?=
+ =?utf-8?B?NUZhaG5lR2ZKSXEwblg0UHg2aTlwWXJRY3ppNC8xMTNxSjc3bGlLQ0tHSkQ4?=
+ =?utf-8?B?SE9iVlhjN3F4emxwSnZTTlk5S1lyY0srMDFXNE9Uc0NDSjlZWXZkQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4886428d-6507-4f00-0551-08dedb3bba20
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 08:19:55.5759 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 08:51:10.8263 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: B3GiGLpJAfO9bBpv56RLGOovBWt6I9cKqaVsmKsIoNp9tJQ5oGL9kfeh9SGyIF5/6ED6EIYDKAyVm+lUeQPG6jKPjwu1tbKJ07bufjJLKIMB4L9rpSa1WOnUrswllooZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10333
+X-MS-Exchange-CrossTenant-UserPrincipalName: afdXag/Mo1yGo/Md4m4I6Q5madSwjLraqqH63j4vT5pe4utnBShLF8AZjpAivtkYtXvwGGSkdbmhcPILTbusBrPKtnzeZ5ajlf8vSG0iSGE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,53 +155,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi James,
 
-Please pull fsl-qoriq-next-2026-07-06
+On 7/3/26 11:33 PM, James Hilliard wrote:
+> U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
+> internal binman builds only received the generic BINMAN_INDIRS search
+> path. FIT entries with fit,sign or fit,encrypt therefore had to infer
+> the key directory from include directories before invoking mkimage -k.
+> 
 
---------------------------------------------------------------------
-ls1028ardb: Move environment variables from header to .env file
-crypto: fsl: Hide CAAM_64BIT symbol behind FSL_CAAM dependency
-gpio: mpc8xxx: Add set_flags/get_flags ops
-power: domain: scmi: Allow failure in getting power domain attribute
---------------------------------------------------------------------
+You don't explain why that is an issue? Simply add KEYDIR to BINMAN_INDIRS?
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/30622
+> Add a binman build -k/--keydir option and pass KEYDIR through with
+> that option from the top-level Makefile. FIT entries prefer this key
+> directory over include-dir discovery and then pass it to mkimage -k.
+> 
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> ---
+>   Makefile                  |  1 +
+>   tools/binman/binman.rst   | 10 +++++++-
+>   tools/binman/cmdline.py   |  2 ++
+>   tools/binman/control.py   |  1 +
+>   tools/binman/etype/fit.py | 24 +++++++++++-------
+>   tools/binman/ftest.py     | 51 ++++++++++++++++++++++++++++++++++++---
+>   tools/binman/state.py     | 21 ++++++++++++++++
+>   7 files changed, 97 insertions(+), 13 deletions(-)
+> 
+> diff --git a/Makefile b/Makefile
+> index d8287323c43..27be2a81e83 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1689,6 +1689,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+>   		-I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
+>   		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+>   		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+> +		$(if $(KEYDIR),-k $(KEYDIR)) \
+>   		-a atf-bl1-path=${BL1} \
+>   		-a atf-bl31-path=${BL31} \
+>   		-a tee-os-path=${TEE} \
+> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+> index 366491089ad..8770b279ff8 100644
+> --- a/tools/binman/binman.rst
+> +++ b/tools/binman/binman.rst
+> @@ -1711,7 +1711,7 @@ Usage::
+>   
+>       binman build [-h] [-a ENTRY_ARG] [-b BOARD] [-d DT] [--fake-dtb]
+>           [--fake-ext-blobs] [--force-missing-bintools FORCE_MISSING_BINTOOLS]
+> -        [-i IMAGE] [-I INDIR] [-m] [-M] [-n] [-O OUTDIR] [-p] [-u]
+> +        [-i IMAGE] [-I INDIR] [-k KEYDIR] [-m] [-M] [-n] [-O OUTDIR] [-p] [-u]
+>           [--update-fdt-in-elf UPDATE_FDT_IN_ELF] [-W]
+>   
+>   Options:
+> @@ -1738,6 +1738,9 @@ Options:
+>       Add a path to the list of directories to use for input files. This can be
+>       specified multiple times to add more than one path.
+>   
+> +-k KEYDIR, --keydir KEYDIR
+> +    Directory containing keys for signing/encryption.
+> +
+>   -m, --map
+>       Output a map file for each image. See `Map files`_.
+>   
+> @@ -2161,6 +2164,11 @@ BINMAN_INDIRS
+>       Sets the search path for input files used by binman by adding one or more
+>       `-I` arguments. See :ref:`External blobs`.
+>   
+> +KEYDIR
+> +    Sets the key directory passed to FIT entries by adding a `-k` argument.
+> +    FIT entries use this directory for mkimage's `-k` argument when `fit,sign`
+> +    or `fit,encrypt` is enabled.
+> +
+>   BINMAN_TOOLPATHS
+>       Sets the search path for external tool used by binman by adding one or more
+>       `--toolpath` arguments. See :ref:`External tools`.
+> diff --git a/tools/binman/cmdline.py b/tools/binman/cmdline.py
+> index 9632ec115e5..cd4d05dfb69 100644
+> --- a/tools/binman/cmdline.py
+> +++ b/tools/binman/cmdline.py
+> @@ -128,6 +128,8 @@ controlled by a description in the board device tree.'''
+>               help='Image filename to build (if not specified, build all)')
+>       build_parser.add_argument('-I', '--indir', action='append',
+>               help='Add a path to the list of directories to use for input files')
+> +    build_parser.add_argument('-k', '--keydir', type=str,
+> +            help='Directory containing keys for signing/encryption')
+>       build_parser.add_argument('-m', '--map', action='store_true',
+>           default=False, help='Output a map file for each image')
+>       build_parser.add_argument('-M', '--allow-missing', action='store_true',
+> diff --git a/tools/binman/control.py b/tools/binman/control.py
+> index 816f7c1eba2..84586d1baf1 100644
+> --- a/tools/binman/control.py
+> +++ b/tools/binman/control.py
+> @@ -923,6 +923,7 @@ def Binman(args):
+>               tools.set_input_dirs(args.indir)
+>               tools.prepare_output_dir(args.outdir, args.preserve)
+>               state.SetEntryArgs(args.entry_arg)
+> +            state.SetKeydir(args.keydir)
+>               state.SetThreads(args.threads)
+>   
+>               images = PrepareImagesAndDtbs(dtb_fname, args.image,
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> index f28b1e6b4cb..404e33d3022 100644
+> --- a/tools/binman/etype/fit.py
+> +++ b/tools/binman/etype/fit.py
+> @@ -14,6 +14,7 @@ import os
+>   from binman.entry import Entry, EntryArg
+>   from binman.etype.section import Entry_section
+>   from binman import elf
+> +from binman import state
+>   from dtoc import fdt_util
+>   from dtoc.fdt import Fdt
+>   from u_boot_pylib import tools
+> @@ -105,18 +106,20 @@ class Entry_fit(Entry_section):
+>           fit,sign
+>               Enable signing FIT images via mkimage as described in
+>               verified-boot.rst.
+> -            If the property is found and fit,engine is not set, the private
+> -            keys path is detected among binman include directories and passed to
+> -            mkimage via -k flag. All the keys required for signing FIT must be
+> -            available at time of signing and must be located in single include
+> -            directory.
+> +            If the property is found and fit,engine is not set, the key
+> +            directory passed with binman build -k is passed to mkimage via the
+> +            -k flag. If no key directory is provided, the private keys path is
+> +            detected among binman include directories. All the keys required for
+> +            signing FIT must be available at time of signing and must be
+> +            located in a single directory.
+>   
+>           fit,encrypt
+>               Enable data encryption in FIT images via mkimage. If the property
+> -            is found, the keys path is detected among binman include
+> -            directories and passed to mkimage via  -k flag. All the keys
+> +            is found, the key directory passed with binman build -k is passed
+> +            to mkimage via the -k flag. If no key directory is provided, the
+> +            keys path is detected among binman include directories. All the keys
+>               required for encrypting the FIT must be available at the time of
+> -            encrypting and must be located in a single include directory.
+> +            encrypting and must be located in a single directory.
+>   
+>               Incompatible with fit,engine.
+>   
+> @@ -485,6 +488,8 @@ class Entry_fit(Entry_section):
+>                   includes 'generator' entries which are used to create the FIT,
+>                   but should not be processed as real entries. This is set up once
+>                   we have the entries
+> +            _keydir (str): Key directory from the binman build -k option, if
+> +                provided
+>               _loadables (list of str): List of generated split-elf nodes, each
+>                   a node name
+>               _remove_props (list of str): Value of of-spl-remove-props EntryArg,
+> @@ -500,6 +505,7 @@ class Entry_fit(Entry_section):
+>           self._fit_list_prop = None
+>           self._fit_default_dt = None
+>           self._priv_entries = {}
+> +        self._keydir = state.GetKeydir()
+>           self._loadables = []
+>           self._remove_props = []
+>           props = self.GetEntryArgsOrProps(
+> @@ -701,7 +707,7 @@ class Entry_fit(Entry_section):
+>               args.update({'engine': engine})
+>               # If no engine, keys must exist locally, find them
+>               if engine is None:
+> -                keydir = self._get_keys_dir(data)
+> +                keydir = self._keydir or self._get_keys_dir(data)
 
-Thanks
-Peng.
+Then we don't even check if the keys exist in _keydir anymore.
 
-The following changes since commit 2569e25ddd5aa323cd87c7a3819c3a4f4b32302f:
-
-  Merge patch series "bootdev: few fixes for automatic boot" (2026-07-03 10:14:32 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-next-2026-07-06
-
-for you to fetch changes up to c9beb84a376853078e62f385447672fc7e8cd819:
-
-  power: domain: scmi: Allow failure in getting power domain attribute (2026-07-06 10:24:46 +0800)
-
-----------------------------------------------------------------
-Aristo Chen (1):
-      ls1028ardb: Move environment variables to .env file
-
-Marek Vasut (1):
-      crypto: fsl: Hide CAAM_64BIT symbol behind FSL_CAAM
-
-Vincent Jardin (1):
-      gpio: mpc8xxx: add set_flags/get_flags ops
-
-Ye Li (1):
-      power: domain: scmi: Allow failure in getting power domain attribute
-
- board/nxp/ls1028a/ls1028ardb.env             | 49 ++++++++++++++
- configs/ls1028ardb_tfa_SECURE_BOOT_defconfig |  1 +
- configs/ls1028ardb_tfa_defconfig             |  1 +
- drivers/crypto/fsl/Kconfig                   |  1 +
- drivers/gpio/mpc8xxx_gpio.c                  | 54 +++++++++++++++
- drivers/power/domain/scmi-power-domain.c     |  8 +--
- include/configs/ls1028ardb.h                 | 99 ++++++----------------------
- 7 files changed, 127 insertions(+), 86 deletions(-)
- create mode 100644 board/nxp/ls1028a/ls1028ardb.env
+Cheers,
+Quentin
