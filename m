@@ -4,92 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8750EC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 14:59:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08384C44501
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 15:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D899D846FD;
-	Mon,  6 Jul 2026 16:59:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D4D34846FD;
+	Mon,  6 Jul 2026 17:04:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AYr+SSp1";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ddg5/3pn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D260848BF; Mon,  6 Jul 2026 16:59:13 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D66C8846FD; Mon,  6 Jul 2026 17:04:39 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AF9A846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 16:59:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-69ed219d3ecso2564451eaf.2
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 07:59:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783349950; x=1783954750; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zSqHyr9E7eG0TZN4HjU2zoixa7tYU1Ui3+wq5xDwAok=;
- b=AYr+SSp1cOE6CIy+Jfp0ktJLGZ//4Oe+0aRPklC2RmiO6LvAjBjvIGfWelVjBLNS+h
- ZEWBH7jYvzBE18jP/wzqdjWyzwcJHArfn7TzeEysbet3XOGj2u6g9KkutBKSelyvwfvL
- 6DQCSwM4NXLVpqc98ch/Acw16mGwQ8bU8c/e0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783349950; x=1783954750;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zSqHyr9E7eG0TZN4HjU2zoixa7tYU1Ui3+wq5xDwAok=;
- b=R5JEOq1xHKqfNnWCcS5KpvBhOenkTyDIpmvTMqzLm00vlhMLReDm/veBgfVxtNdTOR
- oQt0ekIOPJnAL8Q3Z12Q2AHYeo/WiLqFtOwUCL6ysLAFqMWC9DF7ebp179P7yrAQ/bAP
- 3N+wWFz9Ee7LKJLmEsKZi3GNQ3DFEaZtZviSchkx5Lq4Jzrlkj1/QMK5/KOunltDGSEy
- mglkXd58vP9T9sUDUBsE/dQ8DYKT5VB425VZi6yl+Aaf+UCI69ig+ww5ps0rPWh8Nrze
- +vHRvqADDerWOFbE9xJYleHAGuTYmicBQ1Fz5PSzh0kH8ZnsIcLF5COkZu/IfjrOTtbT
- II/Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8NIdVSMmeRxUNG92HiLr88v5a0/ThJWICU7oQsPSlI833qFEIzPGEuHVqiPJxzzbN3RsQTNcQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxmQSDrJcvZEQD+S0cLL5EgKiyzWYM9d9Sjjo1Grq2QLmrr51lT
- +RR9cTS6ixX/wCVOZuggi5v6D6fjctRsUox2n5rZNO0PDPNOMrI4+jZtOXN2aFyr3Ac=
-X-Gm-Gg: AfdE7cl+PIIB0DnEwXyKyi+Mp3729gwzg2PsAPO1oDyps/gZ9q0KG4+QJuIDGQ40ixt
- uOfiNs5wFLph73w8oIbLnVavnZaV/vv8h2vN/cESRwt6YfRENgNrev2lOi5zy+2KLSLUg2EvVHj
- dsUA67LHh9gNtabI4v7eHSCsZZbE5AVejulihOf9cuYpsw1f6AQiahqibtWOetgt9TJWgeIhMud
- BNPLjKt0DlqmmBI7xbLlkL2D5hyO/Ymt4HaTjAQ8D5QRQ1LnXKh9eEApOcmuihHwsk6TlplkBd8
- Ek7yM1A1wqVZgP+/nbnDPWKoyjsedgJKjaN50IMYY818iv1x1LWbhKlC54kviT3hoUHPLLbdjHC
- ok/C8b6wJXmIExgocCHfWuJx0zYPTq/k2BAHRAVCsR+6NnLhYxoKy2A7abL3j1+gVaYC4BBkJO9
- Ascjz7H6k8PEEXzW2y4/k0vu8M5YIoApTLvpjod3fFVb78fCNEq/wDiMt+kAcz28RT2GO7OWKL3
- wBhudy13TsQAIeiFjAhqXHU8wis7fydOK8hpQ==
-X-Received: by 2002:a05:6820:2205:b0:6a1:50eb:2121 with SMTP id
- 006d021491bc7-6a3556c8b12mr502519eaf.69.1783349949874; 
- Mon, 06 Jul 2026 07:59:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb6691d1sm10669780fac.17.2026.07.06.07.59.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 07:59:09 -0700 (PDT)
-Date: Mon, 6 Jul 2026 08:59:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] imx93_frdm: Add OP-TEE device tree node
-Message-ID: <20260706145906.GW749385@bill-the-cat>
-References: <20260706-master-v1-1-25bae88d130a@bootlin.com>
- <CALeDE9P-5NG_a0T=dXB2KQcPCGJoSVeRXk6yQPXLesws=ypK6A@mail.gmail.com>
- <DJRKOYKA0DDQ.PI5Q86TGLP22@bootlin.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 14FAF846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 17:04:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6401f59d0=Charles.Perry@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1783350279; x=1814886279;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=NpGfVAfpX6JZuytFQxiP0CjGX8W50AfTeJLahiKLZnI=;
+ b=ddg5/3pnrtI8p9gI+0Eq+eSVxZ1Rb3aa+uSdpOEPZWSlhFQdCBbCqJOp
+ joYFMHsk2eBctrliy6mXN0Kv9jacESlwAtFChIqD79y2qGFyj935/BOAo
+ RSkXP+ea2ip4iOfHE9aSQH/Ig5zj4bAC+/PtPJwYnAB8apk6aTmsLTrjK
+ XGjBLKQH/zMCQ/DFaYqGTlhCF77iU7NeKkbg186skdC+8TJTnZLvgJfXO
+ nHHwtXOHjledFmgZ0W1AFMEZAY+cocp73O6+hVYvc+sEESZFlCIQEtEyy
+ Ms4glYYJZmsuArwSFfS547N/gSiaAQoGju8jf1+hWuKQBMRTjAbKmVpLU g==;
+X-CSE-ConnectionGUID: faTA9OAGQxWOddtGMYFcxQ==
+X-CSE-MsgGUID: w1SXb5LJQ/iuLYMLvL/cLQ==
+X-IronPort-AV: E=Sophos;i="6.25,149,1779174000"; d="scan'208";a="59298598"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Jul 2026 08:04:37 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
+ chn-vm-ex3.mchp-main.com (10.10.87.32) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.2562.43; Mon, 6 Jul 2026 08:04:35 -0700
+Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Mon, 6 Jul 2026 08:04:34 -0700
+Date: Mon, 6 Jul 2026 08:04:33 -0700
+From: Charles Perry <charles.perry@microchip.com>
+To: Yao Zi <me@ziyao.cc>
+CC: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>,
+ "Rahul Pathak" <rahul@summations.net>, Anup Patel <anup@brainfault.org>, Rick
+ Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 2/7] firmware: rpmi: add support for the SBI MPXY transport
+Message-ID: <akvEAWwYbEG23DWV@bby-cbu-swbuild03.eng.microchip.com>
+References: <20260626201613.1035208-1-charles.perry@microchip.com>
+ <20260626201613.1035208-3-charles.perry@microchip.com>
+ <aj8nsG6JrIbBsGLM@pie>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uptbWlynIhR7I8Fp"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <DJRKOYKA0DDQ.PI5Q86TGLP22@bootlin.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <aj8nsG6JrIbBsGLM@pie>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,80 +85,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, Jun 27, 2026 at 01:30:24AM +0000, Yao Zi wrote:
+> On Fri, Jun 26, 2026 at 01:15:43PM -0700, Charles Perry wrote:
+> > This adds an RPMI transport driver for the Supervisor Binary Interface
+> > (SBI) message proxy (MPXY) extension [1].
+> > 
+> > This is for S-Mode U-Boot where some supervisor software (such as
+> > OpenSBI) runs in M-Mode and handles the low level communication with the
+> > PuC.
+> > 
+> > [1]: https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
+> > 
+> > Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> > ---
+> >  arch/riscv/include/asm/sbi.h          |  57 ++++
+> >  drivers/firmware/rpmi/Kconfig         |   9 +
+> >  drivers/firmware/rpmi/Makefile        |   1 +
+> >  drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 449 ++++++++++++++++++++++++++
+> >  4 files changed, 516 insertions(+)
+> >  create mode 100644 drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+> 
+> ...
+> 
+> > diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+> > new file mode 100644
+> > index 000000000000..84af4787187a
+> > --- /dev/null
+> > +++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+> 
+> ...
+> 
+> > +/* RPMI message protocol specific MPXY attributes */
+> > +enum sbi_mpxy_rpmi_attribute_id {
+> > +	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID = SBI_MPXY_ATTR_MSGPROTO_ATTR_START,
+> > +	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
+> > +	SBI_MPXY_RPMI_ATTR_IMPL_ID,
+> > +	SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
+> > +	SBI_MPXY_RPMI_ATTR_MAX_ID
+> > +};
+> > +
+> > +/*
+> > + * RPMI specific SBI MPXY channel attributes.
+> > + */
+> > +struct sbi_mpxy_rpmi_channel_attrs {
+> 
+> Would it make sense to organize sbi_mpxy_rpmi_channel_attrs as an
+> array indexed by sbi_mpxy_rpmi_attributed_id subtracted by
+> SBI_MPXY_RPMI_ATTR_MSGPROTO_ATTR_START? With which we could simplify
+> rpmi_sbi_mpxy_get_attr().
 
---uptbWlynIhR7I8Fp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes I'll give this a try. I also find this a bit repetitive that the
+attributes have an id and a struct where each members are sorted by
+attribute id. Thanks!
 
-On Mon, Jul 06, 2026 at 04:54:17PM +0200, Mathieu Dubois-Briand wrote:
-> Hi,
->=20
-> On Mon Jul 6, 2026 at 4:14 PM CEST, Peter Robinson wrote:
-> > On Mon, 6 Jul 2026 at 13:34, Mathieu Dubois-Briand
-> > <mathieu.dubois-briand@bootlin.com> wrote:
-> >>
-> >> Add missing firmware/optee node, so is can be both used and copied into
-> >> Linux device tree by optee_copy_firmware_node(). This is consistent wi=
-th
-> >> other i.MX93 boards.
-> >
-> > Shouldn't this be going to the upstream Linux DT at which point get it
-> > when we resync?
->=20
-> I don't think it should. Or maybe it should, but then we are doing wrong
-> things for other boards, particularly for the i.MX family.
->=20
-> We have this node in the -u-boot.dtsi file for various other boards:
->=20
-> git grep "linaro,optee-tz" -- '*-u-boot.dtsi'
-> arch/arm/dts/imx8mm-u-boot.dtsi:                        compatible =3D "l=
-inaro,optee-tz";
-> arch/arm/dts/imx8mn-u-boot.dtsi:                        compatible =3D "l=
-inaro,optee-tz";
-> arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi:                  compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/imx8mp-navqp-u-boot.dtsi:                  compatible =3D "l=
-inaro,optee-tz";
-> arch/arm/dts/imx8mp-u-boot.dtsi:                        compatible =3D "l=
-inaro,optee-tz";
-> arch/arm/dts/imx91-11x11-evk-u-boot.dtsi:                       compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi:                      compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/imx91-93-phyboard-segin-common-u-boot.dtsi:                 =
-       compatible =3D "linaro,optee-tz";
-> arch/arm/dts/imx93-11x11-evk-u-boot.dtsi:                       compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi:                      compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/imx93-9x9-qsb-u-boot.dtsi:                 compatible =3D "l=
-inaro,optee-tz";
-> arch/arm/dts/imx93-kontron-bl-osm-s-u-boot.dtsi:                        c=
-ompatible =3D "linaro,optee-tz";
-> arch/arm/dts/imx93-var-som-symphony-u-boot.dtsi:                        c=
-ompatible =3D "linaro,optee-tz";
-> arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi:                       compatibl=
-e =3D "linaro,optee-tz";
-> arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi:                       compatibl=
-e =3D "linaro,optee-tz";
+> 
+> > +	/* RPMI service group ID */
+> > +	u32 servicegroup_id;
+> > +	/* RPMI service group version */
+> > +	u32 servicegroup_version;
+> > +	/* RPMI implementation ID */
+> > +	u32 impl_id;
+> > +	/* RPMI implementation version */
+> > +	u32 impl_version;
+> > +};
+> 
+> ...
+> 
+> > +static int rpmi_sbi_mpxy_get_attr(struct rpmi_chan *chan,
+> > +				  enum rpmi_attribute_id id, u32 *data)
+> > +{
+> > +	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(chan->dev);
+> > +	struct sbi_mpxy_chan_desc *desc = &mpxy->channel_descs[chan->id];
+> > +
+> > +	switch (id) {
+> > +	case RPMI_ATTR_SPEC_VERSION:
+> > +		*data = desc->attrs.msg_proto_version;
+> > +		break;
+> > +	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
+> > +		*data = desc->max_xfer_len;
+> > +		break;
+> > +	case RPMI_ATTR_SERVICEGROUP_ID:
+> > +		*data = desc->rpmi_attrs.servicegroup_id;
+> > +		break;
+> > +	case RPMI_ATTR_SERVICEGROUP_VERSION:
+> > +		*data = desc->rpmi_attrs.servicegroup_version;
+> > +		break;
+> > +	case RPMI_ATTR_IMPL_ID:
+> > +		*data = desc->rpmi_attrs.impl_id;
+> > +		break;
+> > +	case RPMI_ATTR_IMPL_VERSION:
+> > +		*data = desc->rpmi_attrs.impl_version;
+> > +		break;
+> > +	default:
+> > +		return -EOPNOTSUPP;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> 
+> ...
+> 
+> > +static int rpmi_sbi_mpxy_probe(struct udevice *dev)
+> > +{
+> > +	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(dev);
+> > +	struct sbi_mpxy_chan_desc *desc;
+> > +	unsigned long flags;
+> > +	struct sbiret sret;
+> > +	int i, ret;
+> > +
+> > +	mpxy->dev = dev;
+> > +
+> > +	/* Probe for SBI MPXY extension */
+> > +	if (sbi_get_spec_version() < sbi_mk_version(1, 0) ||
+> > +	    sbi_probe_extension(SBI_EXT_MPXY) <= 0) {
+> > +		dev_info(dev, "SBI MPXY extension not available\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	/* Find-out shared memory size */
+> > +	ret = rpmi_sbi_mpxy_get_shmem_size(&mpxy->shmem_size);
+> > +	if (ret) {
+> > +		dev_err(dev, "failed to get MPXY shared memory size\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	mpxy->shmem = memalign(PAGE_SIZE, mpxy->shmem_size);
+> > +	if (!mpxy->shmem)
+> > +		return -ENOMEM;
+> > +
+> > +	/* Setup shmem in OVERWRITE mode. (flags[1:0] = 00b) */
+> > +	flags = 0;
+> > +	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_SET_SHMEM,
+> > +			 virt_to_phys(mpxy->shmem), 0, flags, 0, 0, 0);
+> > +	if (sret.error) {
+> > +		ret = sbi_to_linux_error(sret.error);
+> > +		goto err;
+> > +	}
+> > +
+> > +	ret = rpmi_sbi_mpxy_get_channel_ids(mpxy);
+> > +	if (ret)
+> > +		goto err;
+> > +
+> > +	for (i = 0; i < mpxy->channel_count; i++) {
+> > +		desc = &mpxy->channel_descs[i];
+> > +		desc->max_xfer_len =
+> > +			min((u32)mpxy->shmem_size, desc->attrs.msg_max_len);
+> > +	}
+> > +
+> > +	return 0;
+> > +
+> > +err:
+> > +	if (mpxy->channel_descs)
+> > +		free(mpxy->channel_descs);
+> > +
+> > +	if (mpxy->shmem)
+> > +		free(mpxy->shmem);
+> 
+> free() is no-op when the argument is NULL, so the check is redundant.
+> This applies to rpmi_sbi_mpxy_remove() and other similar cases in the
+> series, too.
 
-Since I assume this would still pass validation in the Linux kernel,
-yes, it looks like a lot of platforms are doing it wrong here and should
-be pushing this upstream. Thanks.
+Ack.
 
---=20
-Tom
-
---uptbWlynIhR7I8Fp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakvCtAAKCRAr4qD1Cr/k
-CkfNAQC7N4epJ/fE0PopyCM21HdPHcqqUuEtnPVbyuuEzQppswEA6e+Bv+sGYq76
-xZljAz4gHvv7YZ5ot4opiMQVzru68ww=
-=E3j7
------END PGP SIGNATURE-----
-
---uptbWlynIhR7I8Fp--
+Thanks,
+Charles
