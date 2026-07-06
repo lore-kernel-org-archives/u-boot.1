@@ -4,98 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81ACDC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C83C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D286D8490A;
-	Mon,  6 Jul 2026 14:27:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AA5ED8488D;
+	Mon,  6 Jul 2026 14:30:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSlKFN8j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rVL/aJiB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B741846B4; Mon,  6 Jul 2026 14:27:19 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id B29C8848D2; Mon,  6 Jul 2026 14:30:41 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 689E08490A
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:27:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65412846FD
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:30:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-6986578d8c0so3938100a12.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:27:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783340836; cv=none;
- d=google.com; s=arc-20260327;
- b=QlQOao4nC0SZTmLpfVJHu5cwp05QI49eCEyg3RUSAoFep1kLJ9v8PFMHKgdDpMVHDZ
- P28u1xMdUoR8W+WmNbmFCwKcPATfwtb0e51jZeDnriiuhcPEThgPVxUurweLEwkSlS7W
- Q197rFEMY3lCAoTZLBkbN8/bJXEb6cgkhA8DgtP7IICHEqepnsCDPLqxA01W64BrxGAk
- WAWbGiHuiO0kqavVGxhCYmHRjZ9ItnpiVBOY2XsRWhZnlM++clMBxLhUoQ4Soh7CcWjU
- l1s5G2RFRfBKPODQKrqv52ODnbNC0IeBhwI71pu90RVZjFAO96NLUvjBB5TzpDVvy7j/
- xvJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=2R1zUIyc2xAMcUJIFRM3YMSmuu1Xg6ukCxY75fKlj1o=;
- fh=BBkPPhS6yNVujfuYcdwFmqALKmgMIFNvtiHTib2aCyY=;
- b=RMB/+yaGloT7wffEYuDqXZnAhuN4YHg3uJTBMOaPMi2tBslMOUMXaFyZ2VGEBESwiD
- cTAyUI61o6pIGgMzoqIhXpzl8N0pysT5p/vc1WB1GZPCiLhA4/2/9fTbT4u6W4YG0Wzy
- okCtDQH1Y+xTHO7tXLWXWV8dsWytF9a5XkivAe2LRozsmNIiUs4GG9EqDMztU/j6Y8Ig
- kZehmD1EhdFUD7x+Q/7BxLYXa17JfyEsI6OEbWYYxbw+4nv8nJ5OZprVxtxZf//77ZBg
- I4jnjZL53yamTiLeyQjOqv4as5BDkrE6eYQIbzwUj3e12lFoJre2vBfMBc9sT80DKeU7
- NB5g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c125fbfbae0so283944966b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:30:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783340836; x=1783945636; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2R1zUIyc2xAMcUJIFRM3YMSmuu1Xg6ukCxY75fKlj1o=;
- b=KSlKFN8jko9XKqa/wEJQSGLQjw/bmsNrn+mvyeZegTsOct2c839PX/2sozXDyn3mYN
- 90PteRS4WR8pHhgvjvK5+6MlHTmmwfPJtFYl2MRMXykPVOeYLTdd3etbtmAK7abyphSf
- ii58PH+eDimXqbTGaMianVu+pzKde7bfHYK9E=
+ d=linaro.org; s=google; t=1783341039; x=1783945839; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dYIB5mxtWam9RaJo92bvyID3LFZEEksYkhZiam2+PIY=;
+ b=rVL/aJiB5QtXEKcVis63gR/GI7r95wkv13ScLFNSBW/E8CSqOlyRVJw1hssCBX7gVv
+ UPnVO+/ST8k36lZIlkLHpfoanNyzdvKwaKxigrgLhqE7DBYk6MzJ+f5fE6u448r8YTBT
+ B4yQ/89gZ3qnPaz2lhhRDwpkgLe1053SSRFAubDvxRwZf5kexsmjJY9oA39cLltnEVNt
+ E5EdRMLZ5xIFZHgdAMRLF4CJ4yPQ+EFc7ThPvPVWndf54l5/DTelTm5x8R2eBAjnzLKA
+ Md6hvujyssBOA1GVOTbm8k7K6E2ssh9HqBAA+OPgHJoLqTUSxYxHklV8FPMBg7EvP6cf
+ MP8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783340836; x=1783945636;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2R1zUIyc2xAMcUJIFRM3YMSmuu1Xg6ukCxY75fKlj1o=;
- b=EC93UeNg/x3+w2/7YL1mXKc1z3DK7KT+WZTN5HjGVR57Y6SuLCD1qroCX7pq9RCqZZ
- VGv3gNF8BQrjPTGzQaNDjMCDVFD2el/Ldkm1nejj9Xq1i+d9Xu1oACjWr6b0MLhWDCOI
- h92uXiFaGcHgmhvQ+Z0mpEJAuO9YOkTQs+lpT9u8B2xwNP3tvB8IMm99afK9aNS6efyN
- G8brND9JNshwRgIEHxsihx3u/SC3UL9jLDWPmjD9C5DJ6n1FhdZwsckD66waJ3cCRKkC
- RRYlWayR021wMGbYfrTKWBSWlXiRA1jZeTgEW6HCXfN3YVdeQhfAsWjuoGK/B3OKw1wJ
- agBA==
-X-Gm-Message-State: AOJu0YxZ679EvWfCPQOPtUZDEmv/2WhvHIYW/Q71ykToaE7dFzBOlGMQ
- pdB5LUoEbt8CRnUWDzZoQfrTFiUA8ynuAr8nBSShQHDmkNNvo+0s4RWjEpj+TCzwW4tI7+wF2z1
- w44rqtuNyD3R4b4JU3NmaJgEfZx+DncDv6NSbfKTY
-X-Gm-Gg: AfdE7cnIa0GA0ouFaeYiyiYV5q8FkdGYg7RnbSndNBwUXEgJXCzvz0nzZbfaQn0unDr
- qEt7oTrS/UZot9OJZdclvDVozaz1aqLbISoIKMGuuFlpNqTP0oSLRcjz202MRVOqWs/775I/bOr
- +DZs1Gqr107AC6DVQvicl9ArNcBgJfAur7veeNAzXgmSdQwQydeMqBpNf9ypV7hpf13AMVVa7wb
- VT/VhvzY2ufdlQD++cgm/ECBTYzmNBfj4SvAK3P1/FOy2t2Ez1yzTDch5tNmLFkRNZzPsc=
-X-Received: by 2002:a05:6402:202b:b0:691:b5aa:5a66 with SMTP id
- 4fb4d7f45d1cf-69a85b9b462mr192546a12.16.1783340835769; Mon, 06 Jul 2026
- 05:27:15 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783341039; x=1783945839;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dYIB5mxtWam9RaJo92bvyID3LFZEEksYkhZiam2+PIY=;
+ b=cI/IN/JONAHusKtOZlA9G8R34D1sqOwzbR2UwiDdX5ru2P+xBiI4/4IoSR2GJWM41V
+ Nf8OFuH441b6cjR461/m6JsXfe2f3irf9sVKQpIN2Q89LomkIev9FuP01E48v2bkxr9T
+ BL0AUSjXDWTIrpqevOo0N/uE3myM0m/gSPcINyDwIg48kX9fFDvrLV5rIfG+bKd3x0uV
+ 3QlJNGVXEA38HH1a2dsVXSPrXGYnbztvn7jKQtXZ3uZf/ZIaPSqshZxWJGmucHF2R4rj
+ YElpuPpn2VKaZwmmuX4r7FqVe36WiZZ5BQ66br+jgMFvc7qPzP1ZEoqEmdjkmIv5NNQw
+ tTIA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqVJfYru5zRvTmxCq3NfqmKnMD6JESZZrPjeslg4wUnUp35N2n105XBAP1AACIAFQEyy1JPt2c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzlspdMu/XEfzE9YgQE8KhkHLwGse0ob05UXEWoe5HF5YwGMEa
+ 9zX83B/AlqahXBkyLPMhIsbnl7+KPu0kfXCnJG1fj+FbBHaLLnWw+xX5tkLCXElczMQna/zOXuA
+ S9kec
+X-Gm-Gg: AfdE7cnhAQaR6HP/Uqb20YpxJ1ZiXNhhw0S6GB294Y9MMwoi3zOQ/N4Sw88vTkrFuTh
+ HC+7EXc1ASvId4McTEcX4eWYE/NBWmkCPGEtkpQv3ZT0QkzVAmXB/B28km7lS+zdDMPEyxZPOSO
+ XUT3mykKzKiUCNC8/PkHEux/y9mHHfI7heZetguYGmVpOduPEvqgVBMefk4l2xWlS8TqB6AIEk/
+ qPU5VYJVrLJl3BbjIrPzkAWov4kC88REgzla8Rr58yJUsFebxrCBh7maPdHA3OeXJVJPsT21Z50
+ 61HYRDLpOhWZdVtxp13EnwxnEaPITXDk4nnYc4+rsSkpYi61I94xdUUij1BPSEAFf9RBYWTD5O3
+ oIYWaGXss88GWQrI9aJPMK5FhK0zViWymGMUjW5nE1cyrwIVMmM9GstpbIPcAdDy6Vp9wNidn9q
+ UWSX86n1mvnTnVlTHX2wM92xAo0r251mpoYM65LUWsB34IXW4jO2lbSrSZ/54IUpo=
+X-Received: by 2002:a17:906:e20a:b0:bf0:550:d9f with SMTP id
+ a640c23a62f3a-c15a67bc8ffmr15749266b.31.1783341038769; 
+ Mon, 06 Jul 2026 05:30:38 -0700 (PDT)
+Received: from [172.18.183.38] (ip-185-104-138-126.ptr.icomera.net.
+ [185.104.138.126]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c12b62c552esm739470066b.49.2026.07.06.05.30.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Jul 2026 05:30:37 -0700 (PDT)
+Message-ID: <232ce0c8-fec2-4cb3-9b3c-732e35a1525d@linaro.org>
+Date: Mon, 6 Jul 2026 14:30:22 +0200
 MIME-Version: 1.0
-References: <20260630084112.13259-1-marex@nabladev.com>
- <CAFLszTgCOOOxhgP3n7EXGK4eMWNmmiFyCtc6mKNGmCinRYZdDA@mail.gmail.com>
- <b087280e-ae59-4852-8212-72866fa46584@nabladev.com>
-In-Reply-To: <b087280e-ae59-4852-8212-72866fa46584@nabladev.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Jul 2026 06:27:03 -0600
-X-Gm-Features: AVVi8CeWBVyvB4pZDnr7qxaThwaHTxXM-3FaGfy-wORrDLYLJOwm8d202JQQ05M
-Message-ID: <CAFLszTg569u5Kj5Bnrs4Xce8DQNiR+TMhgUnN2RmZgyPm4ETLQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] binman: imx8mimage: Generate FSPI header in binman
- instead of mkimage
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>, 
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>, Yannic Moog <y.moog@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/8] arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_MODE
+ option
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Michael Srba <Michael.Srba@seznam.cz>,
+ Simon Glass <sjg@chromium.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20260619-snagboot-v4-0-385497442db2@oss.qualcomm.com>
+ <20260619-snagboot-v4-1-385497442db2@oss.qualcomm.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260619-snagboot-v4-1-385497442db2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,71 +121,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Balaji,
 
-On Sun, 5 Jul 2026 at 15:26, Marek Vasut <marex@nabladev.com> wrote:
->
-> On 7/2/26 1:13 PM, Simon Glass wrote:
->
-> [...]
->
-> >> diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
-> >> @@ -59,10 +98,52 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
-> >> +                # 0x80 ... lookupTable
-> >> +                spidata += struct.pack('<I', 0x0818040b)
-> >> +                spidata += struct.pack('<I', 0x24043008)
-> >
-> > Just to check, this LUT is a single-pad fast-read sequence, so should
-> > we mention the fixed read command? E.g. if a board uses quad pads,
-> > what will happen.
->
-> Can you please rephrase this question ? I cannot make any sense of it.
+On 6/19/26 13:10, Balaji Selvanathan wrote:
+> Add CONFIG_QCOM_SNAGBOOT_MODE to enable snagboot mode on Qualcomm
+> platforms. This config automatically selects the required dependencies.
+> 
+> Add QCOM_BOOT0_SNAGBOOT_MODE as boot0.h config for automatic selection
+> by QCOM_SNAGBOOT_MODE. Document the platform-specific requirements and
+> configs that must be disabled in snagboot mode.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v4:
+> - Renamed QCOM_SNAGBOOT_SUPPORT to QCOM_SNAGBOOT_MODE
+> - Added QCOM_BOOT0_SNAGBOOT_MODE for boot0.h which gets selected by
+>    QCOM_SNAGBOOT_MODE
+> - Document the platform-specific requirements and configs that must be
+>    disabled in snagboot mode.
+> 
+> Changes in v3:
+> - Newly introduced in v3
+> ---
+>   arch/arm/mach-snapdragon/Kconfig | 28 ++++++++++++++++++++++++++++
+>   1 file changed, 28 insertions(+)
+> 
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index 931d25c1023..5c7dbe0dcc4 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -65,4 +65,32 @@ config QCOM_EL2_GUNYAH_EXIT_SUPPORT
+>   	  run properly at EL2.
+>   endchoice
+>   
+> +config QCOM_BOOT0_SNAGBOOT_MODE
+> +	bool "boot0.h initialization for Snagboot mode"
 
-I was trying to figure out what the magic numbers meant.
+I don't think this should be visible in menuconfig, it should be internal.
 
-https://community.nxp.com/t5/i-MX-RT-Crossover-MCUs/How-do-I-properly-define-a-flexspi-LUT-entry/m-p/1016543
+The config should be inside the choice block though I think? not sure if 
+that's possible if it's not selectable> +	help
+> +	  Enable boot0.h early initialization required when U-Boot
+> +	  is loaded in Snagboot mode by XBL.> +
+> +config QCOM_SNAGBOOT_MODE
+> +	bool "Build U-Boot for Snagboot mode loading"
+> +	select QCOM_BOOT0_SNAGBOOT_MODE
+> +	select ENABLE_ARM_SOC_BOOT0_HOOK
 
-So I think you have:
+> +	select SKIP_RELOCATE
+> +	help
+> +	  Build U-Boot to be loaded in Snagboot mode on Qualcomm platforms
+> +	  for device/factory provisioning using fastboot.
+> +
+> +	  Snagboot mode requires disabling several configs in your defconfig:
+> +	  - PSCI_RESET: Not available in Snagboot mode
+> +	  - IOMMU: Not initialized by XBL in Snagboot mode
+> +	  - SAVE_PREV_BL_INITRAMFS_START_ADDR: Previous bootloader context
+> +	    is not preserved in snagboot mode
+> +	  - REBOOT_MODE_ENV_UPDATE: Not applicable in device/factory provisioning mode
 
-FLEXSPI_LUT_SEQ(CMD_SDR,   FLEXSPI_1PAD, 0x0B, RADDR_SDR, FLEXSPI_1PAD, 0x18),
-FLEXSPI_LUT_SEQ(DUMMY_SDR, FLEXSPI_1PAD, 0x08, READ_SDR,  FLEXSPI_1PAD, 0x04),
+this isn't how kconfig works, use depends> +
+> +	  Additionally, use CONFIG_ENV_IS_NOWHERE to ensure recovery works
+> +	  even with corrupted environment storage.
 
-so always using a single pad. But you have the nxp,fspi-flashpadtype
-property which sems to allow you to select that value, or at least
-that is my reading of it. So my point was that people might think they
-can change the pad setting using nxp,fspi-flashpadtype but it won't
-actually work. Perhaps just a comment would help?
+select ENV_IS_NOWHERE
+depends on !ENV_IS_IN_SCSI
 
->
-> [...]
->
-> >> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> >> @@ -8101,17 +8101,18 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> >> +        self._DoTestFile('vendor/nxp_imx8m_fspi.dts')
-> >> +        self._DoTestFile('vendor/nxp_imx8m_fspi_pass.dts')
-> >
-> > Since binman now generates the header itself, please can you check the
-> > output data in the test, e.g. verify the tag at offset 0 and that the
-> > mkimage data starts at 0x1000? That would have caught the padding
-> > problem above. Also please use assertIn() on str(e.exception) for each
-> > failure case, so the test confirms the expected error rather than any
-> > ValueError.
-> Sure, if you can provide actual comprehensible example, I can add that.
->
-> In the meantime, I skipped this and sent a V4.
+> +
+> +	  Platform-specific requirements:
+> +	  - Set CONFIG_COUNTER_FREQUENCY to match your platform's timer
+> +	  - Configure CONFIG_TEXT_BASE for U-Boot load address
 
-For checking the error, see testNxpImx8mCSTFastAuth():
+you can probably depend on these being non-zero too
 
-        with terminal.capture() as (_, stderr):
-            self._DoTestFile('vendor/nxp_imx8_csf_fast_auth.dts',
-                             force_missing_bintools='cst')
-        err = stderr.getvalue()
-        self.assertRegex(err, "Image 'image'.*missing bintools.*: cst")
+Thanks,
+// Casey
 
-For reading the file, if you call _DoReadFile() instead of
-_DoTestFile() it returns the output image, so you can then disect it
-as you wish. As it is your test checks that the code is exercised, but
-not as much about what output is produced.
+>   endif
+> 
 
-Regards,
-Simon
