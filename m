@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A208C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 21:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE958C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 21:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AC7D84979;
-	Mon,  6 Jul 2026 23:55:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DDDCF8498C;
+	Mon,  6 Jul 2026 23:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cxLGCe3M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QwrViyBl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A113D8496E; Mon,  6 Jul 2026 23:55:05 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 62AB784942; Mon,  6 Jul 2026 23:55:09 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F275284942
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 23:55:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CDE58494B
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 23:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2c9bd2f8bf7so249785ad.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 14:55:01 -0700 (PDT)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-c99eaa1f020so3620286a12.2
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 14:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783374900; x=1783979700; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783374905; x=1783979705; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xsEsE6GyZBckolXQ5ahH2DVlXs9OABMzezlrcaJvuR8=;
- b=cxLGCe3MYpJ/Jwx7ZRrYMOb0I/fVhXZ7SEQi94VARiZCiKp7Zr7rXj6SJOWGY9bgu4
- IfccDvPt27JMp4LwuZNj6+P03be32tO4zvTa+jlDvAMhgvhYLbeqmeBoJO/uunYfcguZ
- 72y9bwhZc/jCC8buE+Dj9b4JN/aEOpUzILXDJmvoaVlpEShnygCWY9xexHu3OegMtBBM
- 9SZ9pzqGy8C9uL9uWZcQRyJnoyMfF0SQMIbfXXWtFwmkdQ3YdYKqlJvYTMUR7Vvi8bb0
- AVKmvFnMTv9W9iY68WLSGUOgDOQOHR3ZKalEQkyvKscND+nVIUO/GXfkj2bACaRP9MBg
- mMrQ==
+ :message-id:reply-to:content-type;
+ bh=DhbkHKf1DFyEOgH7SOCgHV5fToqMoLikH+QUyivMids=;
+ b=QwrViyBlkmJZjjOzivgujD+Ti2/imDdkJXs4yyZ7WPJuIeLNVW6gHssg802yJ3/Yhh
+ pXA+5WviXtXpCG71kqOQxPP3s4rVfQANSLUI0g7jnOHONf2wzRScQ1ckM7w7m+egLK7w
+ Qjcdb6cGEATaXmDKqz9dfOejPS3VbK2gs9ZDGRE85VrhRPuXYi71tCG3U2+YC48cwShm
+ vqf7qIpq57gNw2j6OlIU6hqCAszMd3nbBePpnszvG+M0NHr9xGrs4awoi4CxwQuuSz2v
+ g6bSxhP7/OnefwL7cQXTynj/oZXMVgaM44Dvp3KtxHzjUpqpavVITBH3I9tVcbB2XXh0
+ VFAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783374900; x=1783979700;
+ d=1e100.net; s=20251104; t=1783374905; x=1783979705;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xsEsE6GyZBckolXQ5ahH2DVlXs9OABMzezlrcaJvuR8=;
- b=LFu6VA1jXfh0a4sWA4izm2hL0dvG5qLPua6GgwRVFndO0QNPXf/77/GxASlB/5SPqU
- hGi3HTykzTYPOgUHY565Nva9+ss773RU0kqk1hDbexWJkPJroarR5AFRBeMlS7nEjBWq
- IwPdZDnyXGITRFHT/3s1Nvp7PA4xpupI69fa+bKEBc79UQUHsGY16u3oNT5oRz6INZBe
- 696Ia1Dao4lW0D2yVicYHMD9cEVHSpO0HTTwHb4GDBvBcKtTdkh43cmtWXcdbnY59G+j
- YGaFFNq9BG3BeBijdpARZYva1A4TynNH3uOVPJxJfzcpux5LJGanzMh9fdLbSTLLDEYS
- XEFg==
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=DhbkHKf1DFyEOgH7SOCgHV5fToqMoLikH+QUyivMids=;
+ b=dAMrZV/5I7OqTa9lSA+mVY/CsEPK0/1gK6e49NcrTDXejtviEN1AWC76wKV9V1tScz
+ TFBg95h8aqob7AW27cBUrJEnkDSpvTMwh5QdumUtBiWPByTiJ2Hlo2BBkfnba+0RS4SO
+ ztfW0zmKPkuSWqFFrqFOSNMkG1F4j7AyJ8tkn6ZHJTlTSSL72Lu7Va50+ZqLjLOtWiP8
+ 1ochJ4SB2bCrCsC+J41+muEimuvNVEqeWQCAHPzvtvaa5A5I3jFg5YJjFrKgLgNxLOik
+ aKh90s5aoohIT8mLsGVuz4m1SM/1SICf8YrvbhiomzcjeKgC0XfJQzrm9cO6sLE7o0lR
+ sgJg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpwisPpKeHfKSp09FbZa2kOWaCK3sN7QhSKBVj6PO534d8Z42i1xx7Ou0Bw381CdSwwLssNzuw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrVuv0mpXvCoGoIJRFeBuGor1EXkwpcwW65iOCDe9/3LXUbAbn
- 67vLDwTDwI1xdN7N4ey4ZmFd1K7EzIv7KUtNlGwu3iJqjH4aq8I5x/F+
-X-Gm-Gg: AfdE7cmMN89DY+6xNwapC7EdClT89kQRHzSGq93BcCyqabQsPxQlDmjAUNPVvuv2Czw
- QP1T7Yr0IwQ/cSpEKnwVrtaRNVi0KLyvTkWpW8Z0fgzkdnQmb3E5vhzQpSvlj7GANICGfnKJXpe
- 0XLTZck5+AG3zG3doEopy9Mok/Ns7dyqB4ZeFMBwBtzYBlhHxSUSB6Uoi0zALFqo7V7cS+QXpqW
- rHGP+LN+OYtvgjP9uE94DnP+IPrFlbYdkVRHy+AU+ddxrKcjXHG0L1d6UtkduWhyqaieFDz9Og3
- whjjAJl53OvoVXNMWXruMVi93JaAC76o42JjP0Smp6CyYcycJEg5oXwHBQq5/qzcRVN1oArXlan
- YUD5bM9qDPXi9QZ0NQp8DAMqscKE9GQhSmwXWd27kuu5+mXY+bSjpuCzsy5GhA3Oj/7FxdUwVHD
- 1nk0xijmJxj42kW+55zHYo0UQPs/uCcCoA5ZY21iUnADvxXnJ3JBl/nBoBA/H/9O7z6LqDNYAOK
- W4QWghADH7c
-X-Received: by 2002:a05:6a21:2989:b0:3bf:9bd9:cf54 with SMTP id
- adf61e73a8af0-3c09af93d49mr137610637.8.1783374899890; 
- Mon, 06 Jul 2026 14:54:59 -0700 (PDT)
+ AHgh+RpqbeQrCBvphz68+2nUt0DFQa50XDD6K4CDZ4/r7fVm5XXWwraRT9DlNjoTbn15POOZu7G3GEo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLDr6fCyeUfi/nVl8HNSI34k4qqqJTnzZfGyGCsW7Ah6udbTVU
+ j0B3pLRKFqjpPFazt43pzrj5FgVitJduUiUqKvsyPFBari6KcKJKpQeIveMSbw==
+X-Gm-Gg: AfdE7cliSHQ5GvWb86eSoeHKSxfsMZxplHjXNvknwGXwgxpRMZ+YmIepZHKaqGIV1My
+ rWBRQEi/ruM9Bs2GILEfHfHr1ykv6/U2HshXXG5t8AlgkUEpNneC5DTFfGePw0X81aBH5Hob7J+
+ p2BwurDZDSn6Xm1ZZyj47mAjer2Of+BF2qlM/hJmeRsWohBXnHrN+rBS655H08gzVAm2qBtaFmi
+ qhjxoGJOt8utIvO9ar7yqb2ECw4gUs5UGacwH5omwMwk7yhgYBYicnryKNZ9Q3INNCjW8zIXoIR
+ CL8gKBpl4Pai1k7x61vs9jK3LVqaFDhDuyiYY09T4ie8Q3kHz7ooMEQHKBBwSlFFeVt5v0AluLH
+ qWWw1WYzGVs8cTX6mWf6XfMft/54Krp6P4flsaHPERYKvg/ELrylTCs5qkxQ/+/2EJWRCD9wTiI
+ /gEu9dCCzcVYdpDt7xv4cJwt3Oq0ygCVZ9d/SwTKbUTfovaBlG2kAAQLkrHmDt43icTyXKU5UbP
+ gsazzQ2Bi8t
+X-Received: by 2002:a05:6300:2206:b0:3b7:aefe:4367 with SMTP id
+ adf61e73a8af0-3c08ee3949fmr2872632637.33.1783374905446; 
+ Mon, 06 Jul 2026 14:55:05 -0700 (PDT)
 Received: from visitorckw-work01.c.googlers.com.com
  (32.237.80.34.bc.googleusercontent.com. [34.80.237.32])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31174a56d64sm650864eec.17.2026.07.06.14.54.56
+ 5a478bee46e88-31174a56d64sm650864eec.17.2026.07.06.14.55.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 14:54:59 -0700 (PDT)
+ Mon, 06 Jul 2026 14:55:05 -0700 (PDT)
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: trini@konsulko.com, bmeng.cn@gmail.com, joe.hershberger@ni.com,
  rfried.dev@gmail.com, jerome.forissier@arm.com
 Cc: jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com,
  u-boot@lists.denx.de, Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH 1/4] net: 9p: Add 9P2000 protocol support
-Date: Mon,  6 Jul 2026 21:54:43 +0000
-Message-ID: <20260706215446.4068820-2-visitorckw@gmail.com>
+Subject: [PATCH 2/4] fs: 9p: Add 9P filesystem support
+Date: Mon,  6 Jul 2026 21:54:44 +0000
+Message-ID: <20260706215446.4068820-3-visitorckw@gmail.com>
 X-Mailer: git-send-email 2.55.0.rc2.803.g1fd1e6609c-goog
 In-Reply-To: <20260706215446.4068820-1-visitorckw@gmail.com>
 References: <20260706215446.4068820-1-visitorckw@gmail.com>
@@ -103,143 +103,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the core 9P network protocol client implementation.
+Implement the VFS interface for the 9P filesystem.
 
-9P is a network filesystem protocol originally developed for the
-Plan 9 operating system. Add the baseline 9P2000.L protocol handling,
-including message serialization, client registration, and basic
-transport operations.
+Map the U-Boot filesystem operations to the underlying 9P protocol
+client. It also registers the 9P filesystem type within the U-Boot
+generic fs framework, allowing it to bypass standard block device
+partition checks since 9P is a network/host-backed filesystem.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
- include/9p.h    |  82 +++++++++++++++
- net/9p/Kconfig  |   5 +
- net/9p/Makefile |   5 +
- net/9p/client.c | 272 ++++++++++++++++++++++++++++++++++++++++++++++++
- net/Kconfig     |   2 +
- net/Makefile    |   1 +
- 6 files changed, 367 insertions(+)
- create mode 100644 include/9p.h
- create mode 100644 net/9p/Kconfig
- create mode 100644 net/9p/Makefile
- create mode 100644 net/9p/client.c
+ fs/9p/9p.c     | 137 +++++++++++++++++++++++++++++++++++++++++++++++++
+ fs/9p/Kconfig  |   8 +++
+ fs/9p/Makefile |   5 ++
+ fs/Kconfig     |   2 +
+ fs/Makefile    |   1 +
+ fs/fs.c        |  35 +++++++++++++
+ include/fs.h   |   1 +
+ 7 files changed, 189 insertions(+)
+ create mode 100644 fs/9p/9p.c
+ create mode 100644 fs/9p/Kconfig
+ create mode 100644 fs/9p/Makefile
 
-diff --git a/include/9p.h b/include/9p.h
+diff --git a/fs/9p/9p.c b/fs/9p/9p.c
 new file mode 100644
-index 00000000000..5e46daa3414
+index 00000000000..37d60c03891
 --- /dev/null
-+++ b/include/9p.h
-@@ -0,0 +1,82 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (C) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
-+ */
-+
-+#ifndef __9P_H__
-+#define __9P_H__
-+
-+#include <linux/types.h>
-+
-+#define P9_MSIZE            65536
-+#define P9_NOFID            (~0U)
-+#define P9_NOTAG            0xFFFF
-+#define P9_REQ_TAG          1
-+
-+#define P9_RLERROR          7
-+#define P9_TLOPEN           12
-+#define P9_RLOPEN           13
-+#define P9_TGETATTR         24
-+#define P9_RGETATTR         25
-+#define P9_TREADDIR         40
-+#define P9_RREADDIR         41
-+#define P9_TVERSION         100
-+#define P9_RVERSION         101
-+#define P9_TATTACH          104
-+#define P9_RATTACH          105
-+#define P9_TWALK            110
-+#define P9_RWALK            111
-+#define P9_TREAD            116
-+#define P9_RREAD            117
-+#define P9_TCLUNK           120
-+#define P9_RCLUNK           121
-+
-+#define P9_O_RDONLY         00000000
-+#define P9_GETATTR_SIZE     0x00000010ULL
-+#define P9_GETATTR_SIZE_OFFSET  41
-+#define P9_DIRENT_OFFSET    21
-+#define P9_DT_DIR           4
-+
-+struct p9_header {
-+	u32 size;
-+	u8  id;
-+	u16 tag;
-+} __packed;
-+
-+struct p9_client;
-+
-+struct p9_trans_ops {
-+	int (*request)(struct p9_client *c, void *tx, int tx_len, void *rx, int rx_len);
-+};
-+
-+struct p9_client {
-+	const struct p9_trans_ops *ops;
-+	void *priv;
-+	u8 *tx;
-+	u8 *rx;
-+	u32 next_fid;
-+};
-+
-+void p9_register_client(struct p9_client *c);
-+struct p9_client *p9_get_client(void);
-+
-+u32 p9_client_alloc_fid(struct p9_client *c);
-+int p9_client_version(struct p9_client *c);
-+int p9_client_attach(struct p9_client *c, u32 fid, const char *uname, const char *aname);
-+int p9_client_walk(struct p9_client *c, u32 base_fid, u32 new_fid, const char *path);
-+int p9_client_lopen(struct p9_client *c, u32 fid, u32 flags);
-+int p9_client_clunk(struct p9_client *c, u32 fid);
-+int p9_client_stat(struct p9_client *c, u32 fid, loff_t *size);
-+int p9_client_read(struct p9_client *c, u32 fid, u64 offset, u32 count, void *buf, u32 *actread);
-+int p9_client_readdir(struct p9_client *c, u32 fid, u64 offset, u32 count, void *buf, u32 *actread);
-+
-+struct blk_desc;
-+struct disk_partition;
-+
-+int p9_fs_probe(struct blk_desc *fs_dev_desc, struct disk_partition *fs_partition);
-+int p9_fs_ls(const char *dirname);
-+int p9_fs_exists(const char *filename);
-+int p9_fs_size(const char *filename, loff_t *size);
-+int p9_fs_read(const char *filename, void *buf, loff_t offset, loff_t len, loff_t *actread);
-+
-+#endif /* __9P_H__ */
-diff --git a/net/9p/Kconfig b/net/9p/Kconfig
-new file mode 100644
-index 00000000000..3681e0b6d6d
---- /dev/null
-+++ b/net/9p/Kconfig
-@@ -0,0 +1,5 @@
-+config NET_9P
-+	bool "9P protocol support"
-+	help
-+	  This enables support for the 9P network protocol (9P2000).
-+	  It implements the core 9P client and protocol handling.
-diff --git a/net/9p/Makefile b/net/9p/Makefile
-new file mode 100644
-index 00000000000..e9220b0826e
---- /dev/null
-+++ b/net/9p/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (C) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
-+
-+obj-y += client.o
-diff --git a/net/9p/client.c b/net/9p/client.c
-new file mode 100644
-index 00000000000..038cb7a78c0
---- /dev/null
-+++ b/net/9p/client.c
-@@ -0,0 +1,272 @@
++++ b/fs/9p/9p.c
+@@ -0,0 +1,137 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * Copyright (C) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
@@ -248,292 +138,254 @@ index 00000000000..038cb7a78c0
 +#include <9p.h>
 +#include <config.h>
 +#include <log.h>
-+#include <malloc.h>
-+#include <asm/cache.h>
 +#include <asm/unaligned.h>
 +#include <linux/errno.h>
 +#include <linux/string.h>
 +#include <linux/types.h>
 +
-+static struct p9_client *current_client;
++static u32 p9_root_fid = 1;
 +
-+void p9_register_client(struct p9_client *c)
++int p9_fs_probe(struct blk_desc *fs_dev_desc, struct disk_partition *fs_partition)
 +{
-+	current_client = c;
-+}
++	struct p9_client *c = p9_get_client();
 +
-+struct p9_client *p9_get_client(void)
-+{
-+	return current_client;
-+}
-+
-+u32 p9_client_alloc_fid(struct p9_client *c)
-+{
-+	if (c->next_fid >= 0xFFFF0000 || c->next_fid == 0)
-+		c->next_fid = 2; /* fid 1 is reserved for root */
-+	return c->next_fid++;
-+}
-+
-+static void p9_put_u16(u8 **p, u16 v)
-+{
-+	put_unaligned_le16(v, *p);
-+	*p += 2;
-+}
-+
-+static void p9_put_u32(u8 **p, u32 v)
-+{
-+	put_unaligned_le32(v, *p);
-+	*p += 4;
-+}
-+
-+static void p9_put_u64(u8 **p, u64 v)
-+{
-+	put_unaligned_le64(v, *p); *p += 8;
-+}
-+
-+static void p9_put_str(u8 **p, const char *s)
-+{
-+	u16 len = strlen(s);
-+
-+	put_unaligned_le16(len, *p);
-+	*p += 2;
-+	memcpy(*p, s, len);
-+	*p += len;
-+}
-+
-+static int p9_check_error(struct p9_client *c, int expected_id, const char *step)
-+{
-+	struct p9_header *rx_hdr = (struct p9_header *)c->rx;
-+	u32 ecode;
-+
-+	if (rx_hdr->id == P9_RLERROR) {
-+		ecode = get_unaligned_le32(c->rx + 7);
-+		log_err("9P Error: %s failed (ecode=%u)\n", step, ecode);
-+		return -EIO;
-+	} else if (rx_hdr->id != expected_id) {
-+		log_err("9P Error: %s got id %d (expected %d)\n", step, rx_hdr->id, expected_id);
-+		return -EIO;
++	if (!c) {
++		log_err("9P Error: No transport client registered\n");
++		return -ENODEV;
 +	}
++
++	if (p9_client_version(c))
++		return -EIO;
++	if (p9_client_attach(c, p9_root_fid, "root", ""))
++		return -EIO;
++
 +	return 0;
 +}
 +
-+int p9_client_version(struct p9_client *c)
++int p9_fs_ls(const char *dirname)
 +{
-+	struct p9_header *hdr;
-+	u8 *ptr;
++	struct p9_client *c = p9_get_client();
++	u32 fid = p9_client_alloc_fid(c);
++	u8 buf[4096];
++	u32 actread;
++	u8 *ptr, *end;
++	u16 name_len;
++	u8 d_type;
 +
-+	if (!c->tx)
-+		c->tx = memalign(ARCH_DMA_MINALIGN, P9_MSIZE);
-+	if (!c->rx)
-+		c->rx = memalign(ARCH_DMA_MINALIGN, P9_MSIZE);
-+
-+	hdr = (struct p9_header *)c->tx;
-+	ptr = c->tx + sizeof(*hdr);
-+	p9_put_u32(&ptr, P9_MSIZE);
-+	p9_put_str(&ptr, "9P2000.L");
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TVERSION;
-+	hdr->tag = P9_NOTAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
++	if (p9_client_walk(c, p9_root_fid, fid, dirname))
++		return -ENOENT;
++	if (p9_client_lopen(c, fid, P9_O_RDONLY))
 +		return -EIO;
 +
-+	return p9_check_error(c, P9_RVERSION, "Tversion");
-+}
-+
-+int p9_client_attach(struct p9_client *c, u32 fid, const char *uname, const char *aname)
-+{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+
-+	p9_put_u32(&ptr, fid);
-+	p9_put_u32(&ptr, P9_NOFID);
-+	p9_put_str(&ptr, uname);
-+	p9_put_str(&ptr, aname);
-+	p9_put_u32(&ptr, 0);
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TATTACH;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
++	if (p9_client_readdir(c, fid, 0, sizeof(buf), buf, &actread)) {
++		p9_client_clunk(c, fid);
 +		return -EIO;
-+
-+	return p9_check_error(c, P9_RATTACH, "Tattach");
-+}
-+
-+int p9_client_walk(struct p9_client *c, u32 base_fid, u32 new_fid, const char *path)
-+{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+	char path_buf[128];
-+	char *wnames[16];
-+	char *token, *p = path_buf;
-+	int nwname = 0, i;
-+
-+	strlcpy(path_buf, path, sizeof(path_buf));
-+	while ((token = strsep(&p, "/")) != NULL) {
-+		if (*token == '\0' || strcmp(token, ".") == 0)
-+			continue;
-+		if (nwname >= 16) {
-+			log_err("9P: Path too deep (max 16 levels)\n");
-+			return -EINVAL;
-+		}
-+		wnames[nwname++] = token;
 +	}
 +
-+	p9_put_u32(&ptr, base_fid);
-+	p9_put_u32(&ptr, new_fid);
-+	p9_put_u16(&ptr, nwname);
-+	for (i = 0; i < nwname; i++)
-+		p9_put_str(&ptr, wnames[i]);
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TWALK;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
-+		return -EIO;
-+
-+	return p9_check_error(c, P9_RWALK, "Twalk");
-+}
-+
-+int p9_client_lopen(struct p9_client *c, u32 fid, u32 flags)
-+{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+
-+	p9_put_u32(&ptr, fid);
-+	p9_put_u32(&ptr, flags);
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TLOPEN;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
-+		return -EIO;
-+
-+	return p9_check_error(c, P9_RLOPEN, "Tlopen");
-+}
-+
-+int p9_client_clunk(struct p9_client *c, u32 fid)
-+{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+
-+	p9_put_u32(&ptr, fid);
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TCLUNK;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	return c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE);
-+}
-+
-+int p9_client_stat(struct p9_client *c, u32 fid, loff_t *size)
-+{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+	u64 valid;
-+
-+	p9_put_u32(&ptr, fid);
-+	p9_put_u64(&ptr, P9_GETATTR_SIZE);
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TGETATTR;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
-+		return -EIO;
-+
-+	if (p9_check_error(c, P9_RGETATTR, "Tgetattr") == 0) {
-+		ptr = c->rx + sizeof(*hdr);
-+		valid = get_unaligned_le64(ptr);
-+		ptr += sizeof(valid);
-+		ptr += P9_GETATTR_SIZE_OFFSET;
-+		if (valid & P9_GETATTR_SIZE) {
-+			*size = get_unaligned_le64(ptr);
-+			return 0;
++	if (actread == 0) {
++		printf("  (empty directory)\n");
++	} else {
++		ptr = buf;
++		end = buf + actread;
++		while (ptr < end) {
++			ptr += P9_DIRENT_OFFSET;
++			d_type = *ptr++;
++			name_len = get_unaligned_le16(ptr);
++			ptr += 2;
++			printf("  %s %.*s\n", (d_type == P9_DT_DIR) ? "<DIR> " : "      ",
++			       name_len, ptr);
++			ptr += name_len;
 +		}
 +	}
-+	return -EIO;
++
++	p9_client_clunk(c, fid);
++	return 0;
 +}
 +
-+int p9_client_read(struct p9_client *c, u32 fid, u64 offset, u32 count, void *buf, u32 *actread)
++int p9_fs_size(const char *filename, loff_t *size)
 +{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
-+	u32 max_read = P9_MSIZE - 24;
-+	u32 read_len = (count == 0 || count > max_read) ? max_read : count;
++	struct p9_client *c = p9_get_client();
++	u32 fid = p9_client_alloc_fid(c);
++	int ret;
 +
-+	p9_put_u32(&ptr, fid);
-+	p9_put_u64(&ptr, offset);
-+	p9_put_u32(&ptr, read_len);
++	if (p9_client_walk(c, p9_root_fid, fid, filename))
++		return -ENOENT;
++	ret = p9_client_stat(c, fid, size);
++	p9_client_clunk(c, fid);
 +
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TREAD;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
-+		return -EIO;
-+
-+	if (p9_check_error(c, P9_RREAD, "Tread") == 0) {
-+		ptr = c->rx + sizeof(*hdr);
-+		*actread = get_unaligned_le32(ptr);
-+		ptr += 4;
-+		memcpy(buf, ptr, *actread);
-+		return 0;
-+	}
-+	return -EIO;
++	return ret;
 +}
 +
-+int p9_client_readdir(struct p9_client *c, u32 fid, u64 offset, u32 count, void *buf, u32 *actread)
++int p9_fs_exists(const char *filename)
 +{
-+	struct p9_header *hdr = (struct p9_header *)c->tx;
-+	u8 *ptr = c->tx + sizeof(*hdr);
++	loff_t size;
 +
-+	p9_put_u32(&ptr, fid);
-+	p9_put_u64(&ptr, offset);
-+	p9_put_u32(&ptr, count);
-+
-+	hdr->size = ptr - c->tx;
-+	hdr->id = P9_TREADDIR;
-+	hdr->tag = P9_REQ_TAG;
-+
-+	if (c->ops->request(c, c->tx, hdr->size, c->rx, P9_MSIZE) < 0)
-+		return -EIO;
-+
-+	if (p9_check_error(c, P9_RREADDIR, "Treaddir") == 0) {
-+		ptr = c->rx + sizeof(*hdr);
-+		*actread = get_unaligned_le32(ptr);
-+		ptr += 4;
-+		memcpy(buf, ptr, *actread);
-+		return 0;
-+	}
-+	return -EIO;
++	return (p9_fs_size(filename, &size) == 0) ? 1 : 0;
 +}
-diff --git a/net/Kconfig b/net/Kconfig
-index 386376ce884..00448ab4cc6 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -236,6 +236,8 @@ endif   # if NET_LEGACY
- 
- source "net/lwip/Kconfig"
- 
-+source "net/9p/Kconfig"
 +
- config BOOTDEV_ETH
- 	bool "Enable bootdev for ethernet"
- 	depends on BOOTSTD
-diff --git a/net/Makefile b/net/Makefile
-index ceac6de6377..7745607248b 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -49,3 +49,4 @@ obj-y += net-common.o
++int p9_fs_read(const char *filename, void *buf, loff_t offset, loff_t len, loff_t *actread)
++{
++	struct p9_client *c = p9_get_client();
++	u32 fid = p9_client_alloc_fid(c);
++	u32 read_bytes = 0;
++	loff_t total_read = 0;
++	loff_t remaining;
++	u32 req_len;
++	u8 *dst = (u8 *)buf;
++	int ret = 0;
++
++	if (p9_client_walk(c, p9_root_fid, fid, filename))
++		return -ENOENT;
++	if (p9_client_lopen(c, fid, P9_O_RDONLY)) {
++		p9_client_clunk(c, fid);
++		return -EIO;
++	}
++
++	while (1) {
++		if (len == 0) {
++			req_len = 0;
++		} else {
++			remaining = len - total_read;
++			if (remaining == 0)
++				break;
++
++			req_len = (remaining > 0xFFFFFFFF) ? 0xFFFFFFFF : (u32)remaining;
++		}
++
++		ret = p9_client_read(c, fid, offset, req_len, dst, &read_bytes);
++
++		if (ret != 0 || read_bytes == 0)
++			break;
++
++		total_read += read_bytes;
++		offset += read_bytes;
++		dst += read_bytes;
++	}
++
++	*actread = total_read;
++	p9_client_clunk(c, fid);
++
++	return (total_read > 0 || ret == 0) ? 0 : ret;
++}
+diff --git a/fs/9p/Kconfig b/fs/9p/Kconfig
+new file mode 100644
+index 00000000000..bc6d4962288
+--- /dev/null
++++ b/fs/9p/Kconfig
+@@ -0,0 +1,8 @@
++config FS_9P
++	bool "9P filesystem support"
++	depends on NET_9P
++	help
++	  This provides support for the 9P2000.L filesystem.
++
++	  To use this filesystem, you also need to enable a 9P
++	  transport driver.
+diff --git a/fs/9p/Makefile b/fs/9p/Makefile
+new file mode 100644
+index 00000000000..c7f7553e8f4
+--- /dev/null
++++ b/fs/9p/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2026, Kuan-Wei Chiu <visitorckw@gmail.com>
++
++obj-y += 9p.o
+diff --git a/fs/Kconfig b/fs/Kconfig
+index e0b0b901e1d..e4aa726ea35 100644
+--- a/fs/Kconfig
++++ b/fs/Kconfig
+@@ -26,4 +26,6 @@ source "fs/squashfs/Kconfig"
+ 
+ source "fs/erofs/Kconfig"
+ 
++source "fs/9p/Kconfig"
++
+ endmenu
+diff --git a/fs/Makefile b/fs/Makefile
+index ce5e74257a0..5aa34b39172 100644
+--- a/fs/Makefile
++++ b/fs/Makefile
+@@ -26,5 +26,6 @@ obj-$(CONFIG_CMD_UBIFS) += ubifs/
+ obj-$(CONFIG_CMD_ZFS) += zfs/
+ obj-$(CONFIG_FS_SQUASHFS) += squashfs/
+ obj-$(CONFIG_FS_EROFS) += erofs/
++obj-$(CONFIG_FS_9P) += 9p/
  endif
+ obj-y += fs_internal.o
+diff --git a/fs/fs.c b/fs/fs.c
+index 8ea50a6c13c..0bb996dede5 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -32,6 +32,7 @@
+ #include <squashfs.h>
+ #include <erofs.h>
+ #include <exfat.h>
++#include <9p.h>
  
- obj-$(CONFIG_NET_LWIP) += lwip/
-+obj-$(CONFIG_NET_9P) += 9p/
+ static struct blk_desc *fs_dev_desc;
+ static int fs_dev_part;
+@@ -398,6 +399,26 @@ static struct fstype_info fstypes[] = {
+ 		.mkdir = exfat_fs_mkdir,
+ 		.rename = exfat_fs_rename,
+ 	},
++#endif
++#if CONFIG_IS_ENABLED(FS_9P)
++	{
++		.fstype = FS_TYPE_9P,
++		.name = "9p",
++		.null_dev_desc_ok = true,
++		.probe = p9_fs_probe,
++		.close = fs_close_unsupported,
++		.ls = p9_fs_ls,
++		.exists = p9_fs_exists,
++		.size = p9_fs_size,
++		.read = p9_fs_read,
++		.write = fs_write_unsupported,
++		.uuid = fs_uuid_unsupported,
++		.opendir = fs_opendir_unsupported,
++		.unlink = fs_unlink_unsupported,
++		.mkdir = fs_mkdir_unsupported,
++		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
++	},
+ #endif
+ 	{
+ 		.fstype = FS_TYPE_ANY,
+@@ -464,6 +485,20 @@ int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
+ 	struct fstype_info *info;
+ 	int part, i;
+ 
++	/* Intercept 9p to bypass block device partition checks */
++	if (CONFIG_IS_ENABLED(FS_9P) && !strncmp(ifname, "9p", 2)) {
++		for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes); i++, info++) {
++			if (info->fstype == FS_TYPE_9P) {
++				fs_dev_desc = NULL;
++				fs_type = FS_TYPE_9P;
++				if (info->probe(fs_dev_desc, NULL))
++					return -1;
++				return 0;
++			}
++		}
++		return -1;
++	}
++
+ 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
+ 						    &fs_partition, 1);
+ 	if (part < 0)
+diff --git a/include/fs.h b/include/fs.h
+index bec02117737..8afc81c0017 100644
+--- a/include/fs.h
++++ b/include/fs.h
+@@ -19,6 +19,7 @@ struct cmd_tbl;
+ #define FS_TYPE_EROFS   7
+ #define FS_TYPE_SEMIHOSTING 8
+ #define FS_TYPE_EXFAT   9
++#define FS_TYPE_9P      10
+ 
+ struct blk_desc;
+ 
 -- 
 2.55.0.rc2.803.g1fd1e6609c-goog
 
