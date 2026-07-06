@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C89AEC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 05:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA00DC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 05:07:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1ECB8496E;
-	Mon,  6 Jul 2026 07:06:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A86E8498B;
+	Mon,  6 Jul 2026 07:06:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=zohomail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com header.b="MWBch85Y";
+	dkim=pass (1024-bit key; unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com header.b="V5YB0Zo9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88269846B4; Mon,  6 Jul 2026 03:45:44 +0200 (CEST)
-Received: from sender4-pp-o98.zoho.com (sender4-pp-o98.zoho.com
- [136.143.188.98])
+ id E6306846B4; Mon,  6 Jul 2026 03:46:07 +0200 (CEST)
+Received: from sender4-pp-o94.zoho.com (sender4-pp-o94.zoho.com
+ [136.143.188.94])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3566E84105
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 03:45:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1C5C84105
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 03:46:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=zohomail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=zhuxu_ran@zohomail.com
-ARC-Seal: i=1; a=rsa-sha256; t=1783302302; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1783302303; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=LzpTxBpwq/+ZVsrDwXlGNZxxGrHx5VCDvac62lylI6DnHAO1pkLtCz2GJs/B008KUSZvs3EU8IQsrmeOL8ZZRJ6k26W3JqM9hcgCMo577EGfwBjpch0piQZdY8/aRVyBnhq/3qILNDIgX5/sEso80PYKaVHf4KpMTWDZUqhNKmk=
+ b=GNOuHms/JSskOFqh8PSHcx7gdWAgE/vKG011lON/A2f8t2C6nLc0Ss/W4xBUaHFRVTcWE+5gwhFgU3y6pmBRXS1i14Cwf0dYVRVZ88gD6hZJz1wQKqjWf0n58GaUlMm8cp8K0MpWJbEpcwljovBX3xeeybSttbW7eXV4K0XFsH4=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1783302302;
+ s=zohoarc; t=1783302303;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=4O6QUAainEBvwtTmp13dHpzsnY0WzeK0lzykjMP5v1E=; 
- b=L7JCxHh8L+cApqQjqHSBM52jzce5vRb3MgaHNTLazSoYtB62Ssk7z831ya8liBzpE7houlCwY8TtclQRtdNs8L0K4fajVNXEyifSUkiZrLTBsJisyW2lZNFPWBpSe7wfjOcVamM0vofDvaoul8Qi5yAUIQo5fkN7gshlRlBUHy0=
+ bh=rTekK4ciIrLXube0MIcCp1TlYXsdpymNzp+FmKfF1Ps=; 
+ b=QlgIaU/rCEZvYbtEkGUOmBnQr8N2oQfbMZEOIZeahC0fCDGJ0P3azZqDz4Gz/wwnlii3hM+tKVeQuRa6DyQudvYWb4qtpixKmH+LqokgCyKF+L/5+an+JhsFEaIo30r6ahyGamUXiXsbMP7hpYklzqWe4+bToxTZY3tsmmm5IRg=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=zohomail.com;
  spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
  dmarc=pass header.from=<zhuxu_ran@zohomail.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783302302; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783302303; 
  s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
- bh=4O6QUAainEBvwtTmp13dHpzsnY0WzeK0lzykjMP5v1E=;
- b=MWBch85YhW5osTSrwwPpJ8ZSMFmxbj550F1ropAvWLTu46GSU693pZFZTdnOoRhn
- OvF0FwnNCig9XRM1Mx0H7yvwmXnSR1YmZQePuAjc6X1Z62rZPRLDz13IlY0pOF/bxGc
- GKadGbehG9rc5vYzCU1VfAa1O/5GEMJ0X+i9Ihk4=
-Received: by mx.zohomail.com with SMTPS id 1783302290405219.57088047795435;
- Sun, 5 Jul 2026 18:44:50 -0700 (PDT)
+ bh=rTekK4ciIrLXube0MIcCp1TlYXsdpymNzp+FmKfF1Ps=;
+ b=V5YB0Zo9KnuABkNxXmGFFcasmEvWuTF4MiVL47vEVSxyPFVbHVNiA5hTUEZcxRSj
+ U8CgGi8SXhfylO6EGUj1M0udfcUr/ZYlYDG/j+0FjuElAZbYv7mn16AINuQ97NZHiBQ
+ nUtxJZl2M34o7pVAmjsxw56EJMPWQ86TXPIYtZh4=
+Received: by mx.zohomail.com with SMTPS id 1783302295384509.12898213614847;
+ Sun, 5 Jul 2026 18:44:55 -0700 (PDT)
 From: Zhuxu Ran <zhuxu_ran@zohomail.com>
-Date: Mon, 06 Jul 2026 09:43:42 +0800
-Subject: [PATCH 2/3] riscv: milkv_duo: Use upstream devicetree
+Date: Mon, 06 Jul 2026 09:43:43 +0800
+Subject: [PATCH 3/3] riscv: dts: milkv_duo: Drop local devicetree files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-milkv-duo-upstream-dts-v1-2-8d010ddda7ca@zohomail.com>
+Message-Id: <20260706-milkv-duo-upstream-dts-v1-3-8d010ddda7ca@zohomail.com>
 References: <20260706-milkv-duo-upstream-dts-v1-0-8d010ddda7ca@zohomail.com>
 In-Reply-To: <20260706-milkv-duo-upstream-dts-v1-0-8d010ddda7ca@zohomail.com>
 To: u-boot@lists.denx.de
@@ -64,7 +64,7 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Randolph Sheng-Kai Lin <randolph@andestech.com>, Yao Zi <me@ziyao.cc>, 
  Andreas Schwab <schwab@suse.de>, Zhuxu Ran <zhuxu_ran@zohomail.com>
 X-Mailer: b4 0.15.2
-Feedback-ID: zu080112272c0abec4d2f5bf244191af380000f32856d5c965d80f15b97fe909e9d0a8f2d507bc27ee63ba67:ZohoMail
+Feedback-ID: zu08011227561bb23ca48fba93dfa0ca400000a84e2843b6f08d1dbf87c720e997690c9a204f8ad89df2631c:ZohoMail
 X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
 X-ZohoMailClient: External
 X-Mailman-Approved-At: Mon, 06 Jul 2026 07:06:30 +0200
@@ -84,51 +84,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch Milk-V Duo to the upstream CV1800B devicetree by enabling
-CONFIG_OF_UPSTREAM and selecting sophgo/cv1800b-milkv-duo.
+Milk-V Duo now uses the upstream devicetree, so the local board
+dts and CV1800B dtsi are no longer used. Remove them and drop
+the local dtb target from arch/riscv/dts/Makefile.
 
-The upstream devicetree keeps the Ethernet MAC disabled. Add a
-small U-Boot override to keep the existing U-Boot networking
-support enabled.
+Keep cv18xx.dtsi since it is still used by the SG2002 local
+devicetree.
 
 Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 ---
- arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi | 12 ++++++++++++
- configs/milkv_duo_defconfig                  |  3 ++-
- 2 files changed, 14 insertions(+), 1 deletion(-)
+ arch/riscv/dts/Makefile              |  1 -
+ arch/riscv/dts/cv1800b-milkv-duo.dts | 64 ------------------------------------
+ arch/riscv/dts/cv1800b.dtsi          | 22 -------------
+ 3 files changed, 87 deletions(-)
 
-diff --git a/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi b/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi
-new file mode 100644
-index 00000000000..158b02a543a
---- /dev/null
-+++ b/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi
-@@ -0,0 +1,12 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+/*
-+ * U-Boot overrides for Milk-V Duo.
-+ *
-+ * The upstream Linux device tree describes the CV1800B Ethernet MAC, but
-+ * keeps it disabled. Enable it here to preserve the existing U-Boot
-+ * networking support when using the upstream device tree.
-+ */
-+
-+&gmac0 {
-+	status = "okay";
-+};
-diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
-index f1f3930564b..9d6b80362d5 100644
---- a/configs/milkv_duo_defconfig
-+++ b/configs/milkv_duo_defconfig
-@@ -4,7 +4,8 @@ CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
--CONFIG_DEFAULT_DEVICE_TREE="cv1800b-milkv-duo"
-+CONFIG_DEFAULT_DEVICE_TREE="sophgo/cv1800b-milkv-duo"
-+CONFIG_OF_UPSTREAM=y
- CONFIG_SYS_LOAD_ADDR=0x80080000
- CONFIG_IDENT_STRING="milkv_duo"
- CONFIG_TARGET_MILKV_DUO=y
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index 8e591cb7aa9..498aa6c7f5d 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -5,7 +5,6 @@ dtb-$(CONFIG_TARGET_ANDES_VOYAGER) += qilai-voyager.dtb
+ dtb-$(CONFIG_TARGET_BANANAPI_F3) += k1-bananapi-f3.dtb
+ dtb-$(CONFIG_TARGET_K230_CANMV) += k230-canmv.dtb
+ dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
+-dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
+ dtb-$(CONFIG_TARGET_LICHEERV_NANO) += sg2002-licheerv-nano-b.dtb
+ dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
+ dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
+diff --git a/arch/riscv/dts/cv1800b-milkv-duo.dts b/arch/riscv/dts/cv1800b-milkv-duo.dts
+deleted file mode 100644
+index e7cc0e8bd14..00000000000
+--- a/arch/riscv/dts/cv1800b-milkv-duo.dts
++++ /dev/null
+@@ -1,64 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+-/*
+- * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
+- */
+-
+-/dts-v1/;
+-
+-#include "cv1800b.dtsi"
+-
+-/ {
+-	model = "Milk-V Duo";
+-	compatible = "milkv,duo", "sophgo,cv1800b";
+-
+-	aliases {
+-		serial0 = &uart0;
+-		serial1 = &uart1;
+-		serial2 = &uart2;
+-		serial3 = &uart3;
+-		serial4 = &uart4;
+-	};
+-
+-	chosen {
+-		stdout-path = "serial0:115200n8";
+-	};
+-
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x80000000 0x3f40000>;
+-	};
+-};
+-
+-&ethernet0 {
+-	status = "okay";
+-	phy-mode = "rmii";
+-};
+-
+-&osc {
+-	clock-frequency = <25000000>;
+-};
+-
+-&sdhci0 {
+-	status = "okay";
+-	bus-width = <4>;
+-	no-1-8-v;
+-	no-mmc;
+-	no-sdio;
+-};
+-
+-&spif {
+-	status = "okay";
+-
+-	spiflash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0>;
+-		spi-max-frequency = <75000000>;
+-		spi-tx-bus-width = <4>;
+-		spi-rx-bus-width = <4>;
+-		m25p,fast-read;
+-	};
+-};
+-
+-&uart0 {
+-	status = "okay";
+-};
+diff --git a/arch/riscv/dts/cv1800b.dtsi b/arch/riscv/dts/cv1800b.dtsi
+deleted file mode 100644
+index baf641829e7..00000000000
+--- a/arch/riscv/dts/cv1800b.dtsi
++++ /dev/null
+@@ -1,22 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+-/*
+- * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
+- */
+-
+-#include "cv18xx.dtsi"
+-
+-/ {
+-	compatible = "sophgo,cv1800b";
+-};
+-
+-&plic {
+-	compatible = "sophgo,cv1800b-plic", "thead,c900-plic";
+-};
+-
+-&clint {
+-	compatible = "sophgo,cv1800b-clint", "thead,c900-clint";
+-};
+-
+-&clk {
+-	compatible = "sophgo,cv1800-clk";
+-};
 
 -- 
 2.55.0
