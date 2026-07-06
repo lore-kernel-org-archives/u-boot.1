@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75FDC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 17:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6BD7C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 17:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 179C084942;
-	Mon,  6 Jul 2026 19:21:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A59684994;
+	Mon,  6 Jul 2026 19:21:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82ADE8490A; Mon,  6 Jul 2026 19:21:51 +0200 (CEST)
+ id EB7D384979; Mon,  6 Jul 2026 19:21:53 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F24C846B4
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 19:21:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE61C846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 19:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id C934268B05; Mon,  6 Jul 2026 19:21:47 +0200 (CEST)
+ id 464E868BEB; Mon,  6 Jul 2026 19:21:50 +0200 (CEST)
 In-Reply-To: <20260706172028.C148E68BEB@verein.lst.de>
 References: <20260706172028.C148E68BEB@verein.lst.de>
-Subject: [PATCH v2 1/4] core: Skip parent device nodes without a DT reference
- when looking for dma-ranges
+Subject: [PATCH v2 2/4] test: Add a unit test in phys_to_bus for dynamically
+ created device nodes
 To: Neil Armstrong <neil.armstrong@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
@@ -41,8 +41,8 @@ Cc: Tom Rini <trini@konsulko.com>, Matthias Brugger <mbrugger@suse.com>,
  Prashant Kamble <prashant.kamble223@gmail.com>,
  Denis Mukhin <dmukhin@ford.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
  u-boot@lists.denx.de
-Message-Id: <20260706172147.C934268B05@verein.lst.de>
-Date: Mon,  6 Jul 2026 19:21:47 +0200 (CEST)
+Message-Id: <20260706172150.464E868BEB@verein.lst.de>
+Date: Mon,  6 Jul 2026 19:21:50 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -62,47 +62,92 @@ X-Virus-Status: Clean
 
 From: Torsten Duwe <duwe@suse.de>
 
-If a device node got created dynamically, there is no guarantee that the
-parent node has an associated device tree node which could specify dma
-constraints. Especially PCI(e) enumeration adds intermediate "bus nodes",
-also dynamically.
+In order to test whether device_get_dma_constraints() is now able to skip
+device nodes without a DT association, temporarily remove those on 2 newly-
+created nodes.
 
-Try harder to find the correct configuration by walking up the tree until
-a DT association is found.
-
-Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Torsten Duwe <duwe@suse.de>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
----
- drivers/core/device.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index d365204ba11..b6d00cf4714 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice *dev)
- 	u64 size = 0;
- 	int ret;
+---
+
+This test indeed makes a different whether the previous change is
+applied or not, but *only* reliably for the non-flat-tree case (!?).
+On the flat tree, it always fails after (reverse) applying it.
+
+Either the previous patch is incomplete, or, more likely, the test
+assumptions here are not all valid. Suggestions welcome (especially
+how to create device nodes from a device tree without a reference to
+their origin ;-)
+
+---
+ arch/sandbox/dts/test.dts |  9 +++++++++
+ test/dm/phys2bus.c        | 25 ++++++++++++++++++++++++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 0887de4333b..1d92e85c739 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -656,6 +656,15 @@
+ 		subnode@0 {
+ 			compatible = "denx,u-boot-fdt-test";
+ 		};
++		bus@7 {
++			#address-cells = <1>;
++			#size-cells = <1>;
++			compatible = "denx,u-boot-test-bus";
++
++			subnode@8 {
++				  compatible = "denx,u-boot-fdt-test";
++			};
++		};
+ 	};
  
--	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
-+	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
-+		return 0;
-+
-+	/* Look for the first node in the parent chain */
-+	while (parent) {
-+		if (dev_has_ofnode(parent))
-+			break;
-+
-+		parent = dev_get_parent(parent);
-+	}
-+
-+	/* No parents have a node, bail out */
-+	if (!parent)
- 		return 0;
+ 	mmio-bus@1 {
+diff --git a/test/dm/phys2bus.c b/test/dm/phys2bus.c
+index 67f33904943..858ed5410e2 100644
+--- a/test/dm/phys2bus.c
++++ b/test/dm/phys2bus.c
+@@ -15,7 +15,8 @@
  
- 	/*
+ static int dm_test_phys_to_bus(struct unit_test_state *uts)
+ {
+-	struct udevice *dev;
++	struct udevice *dev, *pdev;
++	ofnode psave, nsave;
+ 	ofnode node;
+ 
+ 	node = ofnode_path("/mmio-bus@0");
+@@ -31,6 +32,29 @@ static int dm_test_phys_to_bus(struct unit_test_state *uts)
+ 	ut_asserteq_addr((void*)0x1003ffffULL, (void*)dev_phys_to_bus(dev, 0x3ffff));
+ 	ut_asserteq_addr((void*)0x3ffffULL, (void*)(ulong)dev_bus_to_phys(dev, 0x1003ffff));
+ 
++#if CONFIG_IS_ENABLED(OF_REAL)
++	/* dma-ranges are on the grandparent bus node,
++	 *  OF nodes neither here nor at parent
++	 */
++	node = ofnode_path("/mmio-bus@0/bus@7");
++	ut_assert(ofnode_valid(node));
++	ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_BUS, node, &pdev));
++
++	/* pretend the devices were discovered dynamically and have no OF node */
++	psave = pdev->node_;
++	pdev->node_.np = NULL;
++	node = ofnode_path("/mmio-bus@0/bus@7/subnode@8");
++	ut_assert(ofnode_valid(node));
++	nsave = dev->node_;
++	dev->node_.np = NULL;
++	ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_FDT, node, &dev));
++
++	ut_asserteq_addr((void *)0x1003ffffULL, (void *)dev_phys_to_bus(dev, 0x3ffff));
++	ut_asserteq_addr((void *)0x3ffffULL, (void *)(ulong)dev_bus_to_phys(dev, 0x1003ffff));
++
++	pdev->node_ = psave;
++	dev->node_ = nsave;
++#endif
+ 	return 0;
+ }
+ DM_TEST(dm_test_phys_to_bus, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 -- 
 2.54.0
 
