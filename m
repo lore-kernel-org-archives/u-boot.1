@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA00DC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 05:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCB2C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 05:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A86E8498B;
+	by phobos.denx.de (Postfix) with ESMTP id 6BF8C849A4;
 	Mon,  6 Jul 2026 07:06:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=zohomail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=zohomail.com header.i=zhuxu_ran@zohomail.com header.b="V5YB0Zo9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="KtCaoUJy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6306846B4; Mon,  6 Jul 2026 03:46:07 +0200 (CEST)
-Received: from sender4-pp-o94.zoho.com (sender4-pp-o94.zoho.com
- [136.143.188.94])
+ id D7408846B4; Mon,  6 Jul 2026 03:51:39 +0200 (CEST)
+Received: from smtp14.infineon.com (smtp14.infineon.com
+ [IPv6:2a00:18f0:1e00:4::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1C5C84105
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 03:46:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=zohomail.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2B23184105
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 03:51:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhuxu_ran@zohomail.com
-ARC-Seal: i=1; a=rsa-sha256; t=1783302303; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=GNOuHms/JSskOFqh8PSHcx7gdWAgE/vKG011lON/A2f8t2C6nLc0Ss/W4xBUaHFRVTcWE+5gwhFgU3y6pmBRXS1i14Cwf0dYVRVZ88gD6hZJz1wQKqjWf0n58GaUlMm8cp8K0MpWJbEpcwljovBX3xeeybSttbW7eXV4K0XFsH4=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1783302303;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=rTekK4ciIrLXube0MIcCp1TlYXsdpymNzp+FmKfF1Ps=; 
- b=QlgIaU/rCEZvYbtEkGUOmBnQr8N2oQfbMZEOIZeahC0fCDGJ0P3azZqDz4Gz/wwnlii3hM+tKVeQuRa6DyQudvYWb4qtpixKmH+LqokgCyKF+L/5+an+JhsFEaIo30r6ahyGamUXiXsbMP7hpYklzqWe4+bToxTZY3tsmmm5IRg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=zohomail.com;
- spf=pass  smtp.mailfrom=zhuxu_ran@zohomail.com;
- dmarc=pass header.from=<zhuxu_ran@zohomail.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783302303; 
- s=zm2022; d=zohomail.com; i=zhuxu_ran@zohomail.com;
- h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Feedback-ID:Reply-To;
- bh=rTekK4ciIrLXube0MIcCp1TlYXsdpymNzp+FmKfF1Ps=;
- b=V5YB0Zo9KnuABkNxXmGFFcasmEvWuTF4MiVL47vEVSxyPFVbHVNiA5hTUEZcxRSj
- U8CgGi8SXhfylO6EGUj1M0udfcUr/ZYlYDG/j+0FjuElAZbYv7mn16AINuQ97NZHiBQ
- nUtxJZl2M34o7pVAmjsxw56EJMPWQ86TXPIYtZh4=
-Received: by mx.zohomail.com with SMTPS id 1783302295384509.12898213614847;
- Sun, 5 Jul 2026 18:44:55 -0700 (PDT)
-From: Zhuxu Ran <zhuxu_ran@zohomail.com>
-Date: Mon, 06 Jul 2026 09:43:43 +0800
-Subject: [PATCH 3/3] riscv: dts: milkv_duo: Drop local devicetree files
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1783302697; x=1814838697;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=eMbJPChMDi6Dxp8kvPc1Ymx0cH55DNuB7IgW99kU1MM=;
+ b=KtCaoUJy0LnqxH15gJdbc0oHennrhrjss4lshFAuUFG8UW5X1uace/SP
+ Ku/jXTILyCILv3o7qUV0ADiXiUOfETBkv3dYo7d4rmSxCb0a6WdWV3Vrv
+ LZKI6m8emfPZZPyw75MUly/3wnVMcEKoPt5RGbj0ju3goBD92Q6HrO6Ig I=;
+X-CSE-ConnectionGUID: 0uZhPeBVTtCvMNVQuXoOYQ==
+X-CSE-MsgGUID: CLpLaFOTQWCc6gfgGNYtnw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11838"; a="136774802"
+X-IronPort-AV: E=Sophos;i="6.25,149,1779141600"; d="scan'208";a="136774802"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE814.infineon.com) ([172.23.29.40])
+ by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Jul 2026 03:51:36 +0200
+Received: from MUCSE813.infineon.com (172.23.29.39) by MUCSE814.infineon.com
+ (172.23.29.40) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 6 Jul
+ 2026 03:51:36 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE813.infineon.com
+ (172.23.29.39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 6 Jul
+ 2026 03:51:36 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.043; Mon, 6 Jul 2026 03:51:36 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <trini@konsulko.com>
+CC: <ssunkkan@gmail.com>, <vigneshr@ti.com>, <u-boot@lists.denx.de>
+Subject: RE: [PATCH] mtd: spi-nor: Add Dosilicon DS25Q4BB support
+Thread-Topic: [PATCH] mtd: spi-nor: Add Dosilicon DS25Q4BB support
+Thread-Index: AQHc/APmUW/o4KdHWESmEKE4zUuI/rZbiSfQgABJBgCABAjSsA==
+Date: Mon, 6 Jul 2026 01:51:36 +0000
+Message-ID: <46c1d75fd52e4eefa971608af8ff6ead@infineon.com>
+References: <20260614134406.542-1-ssunkkan@gmail.com>
+ <5787d9d649b34f74b66a56a067da9760@infineon.com>
+ <20260703141140.GI749385@bill-the-cat>
+In-Reply-To: <20260703141140.GI749385@bill-the-cat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-milkv-duo-upstream-dts-v1-3-8d010ddda7ca@zohomail.com>
-References: <20260706-milkv-duo-upstream-dts-v1-0-8d010ddda7ca@zohomail.com>
-In-Reply-To: <20260706-milkv-duo-upstream-dts-v1-0-8d010ddda7ca@zohomail.com>
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Kongyang Liu <seashell11234455@gmail.com>, 
- Martin Herren <sputnik@on-the-web.ch>, Michal Simek <michal.simek@amd.com>, 
- Randolph Sheng-Kai Lin <randolph@andestech.com>, Yao Zi <me@ziyao.cc>, 
- Andreas Schwab <schwab@suse.de>, Zhuxu Ran <zhuxu_ran@zohomail.com>
-X-Mailer: b4 0.15.2
-Feedback-ID: zu08011227561bb23ca48fba93dfa0ca400000a84e2843b6f08d1dbf87c720e997690c9a204f8ad89df2631c:ZohoMail
-X-Zoho-CM-AccountID: 475a6e82b6074d1cdb8624e432e1257a5f0812bb6089f487c4846d9f660201e2
-X-ZohoMailClient: External
 X-Mailman-Approved-At: Mon, 06 Jul 2026 07:06:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,131 +91,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Milk-V Duo now uses the upstream devicetree, so the local board
-dts and CV1800B dtsi are no longer used. Remove them and drop
-the local dtb target from arch/riscv/dts/Makefile.
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Friday, July 3, 2026 11:12 PM
+> To: Kuwano Takahiro (ATV MS MPL PAE - MS) <Takahiro.Kuwano@infineon.com>
+> Cc: ssunkkan@gmail.com; vigneshr@ti.com; u-boot@lists.denx.de
+> Subject: Re: [PATCH] mtd: spi-nor: Add Dosilicon DS25Q4BB support
+>=20
+> On Fri, Jul 03, 2026 at 08:11:48AM +0000, Takahiro.Kuwano@infineon.com wr=
+ote:
+> > Hi,
+> >
+> > > Add support for dosilicon ds25q4bb (256M-bit) SPI NOR flash.
+> > >
+> > > Datasheet:
+> > > https://drive.google.com/file/d/17UFJa5_3imH0YmWlRGTQYhO2JBXf4Klk/vie=
+w
+> >
+> > Do you have a link to vendor's site? If you have, use Link: tag just ab=
+ove
+> > your Signed-off-by: tag. If not, please write this after the '---' sepa=
+rator.
+> > I don't think it's good to add a link to share drive in commit descript=
+ion.
+>=20
+> Yes, this is not a good idea, we need a link to the vendor, somewhere.
+>=20
+> > > Signed-off-by: Ssunk <ssunkkan@gmail.com>
+> >
+> > Could you sign with full name?
+>=20
+> Just like the linux kernel, we don't have a "full name" policy anymore,
+> so this part is fine.
 
-Keep cv18xx.dtsi since it is still used by the SG2002 local
-devicetree.
+Well noted with thanks.
 
-Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
----
- arch/riscv/dts/Makefile              |  1 -
- arch/riscv/dts/cv1800b-milkv-duo.dts | 64 ------------------------------------
- arch/riscv/dts/cv1800b.dtsi          | 22 -------------
- 3 files changed, 87 deletions(-)
-
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index 8e591cb7aa9..498aa6c7f5d 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -5,7 +5,6 @@ dtb-$(CONFIG_TARGET_ANDES_VOYAGER) += qilai-voyager.dtb
- dtb-$(CONFIG_TARGET_BANANAPI_F3) += k1-bananapi-f3.dtb
- dtb-$(CONFIG_TARGET_K230_CANMV) += k230-canmv.dtb
- dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
--dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
- dtb-$(CONFIG_TARGET_LICHEERV_NANO) += sg2002-licheerv-nano-b.dtb
- dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
- dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
-diff --git a/arch/riscv/dts/cv1800b-milkv-duo.dts b/arch/riscv/dts/cv1800b-milkv-duo.dts
-deleted file mode 100644
-index e7cc0e8bd14..00000000000
---- a/arch/riscv/dts/cv1800b-milkv-duo.dts
-+++ /dev/null
-@@ -1,64 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0 OR MIT)
--/*
-- * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
-- */
--
--/dts-v1/;
--
--#include "cv1800b.dtsi"
--
--/ {
--	model = "Milk-V Duo";
--	compatible = "milkv,duo", "sophgo,cv1800b";
--
--	aliases {
--		serial0 = &uart0;
--		serial1 = &uart1;
--		serial2 = &uart2;
--		serial3 = &uart3;
--		serial4 = &uart4;
--	};
--
--	chosen {
--		stdout-path = "serial0:115200n8";
--	};
--
--	memory@80000000 {
--		device_type = "memory";
--		reg = <0x80000000 0x3f40000>;
--	};
--};
--
--&ethernet0 {
--	status = "okay";
--	phy-mode = "rmii";
--};
--
--&osc {
--	clock-frequency = <25000000>;
--};
--
--&sdhci0 {
--	status = "okay";
--	bus-width = <4>;
--	no-1-8-v;
--	no-mmc;
--	no-sdio;
--};
--
--&spif {
--	status = "okay";
--
--	spiflash@0 {
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		spi-max-frequency = <75000000>;
--		spi-tx-bus-width = <4>;
--		spi-rx-bus-width = <4>;
--		m25p,fast-read;
--	};
--};
--
--&uart0 {
--	status = "okay";
--};
-diff --git a/arch/riscv/dts/cv1800b.dtsi b/arch/riscv/dts/cv1800b.dtsi
-deleted file mode 100644
-index baf641829e7..00000000000
---- a/arch/riscv/dts/cv1800b.dtsi
-+++ /dev/null
-@@ -1,22 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0 OR MIT)
--/*
-- * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
-- */
--
--#include "cv18xx.dtsi"
--
--/ {
--	compatible = "sophgo,cv1800b";
--};
--
--&plic {
--	compatible = "sophgo,cv1800b-plic", "thead,c900-plic";
--};
--
--&clint {
--	compatible = "sophgo,cv1800b-clint", "thead,c900-clint";
--};
--
--&clk {
--	compatible = "sophgo,cv1800-clk";
--};
-
--- 
-2.55.0
+Takahiro
 
