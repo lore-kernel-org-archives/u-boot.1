@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BF0C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 15:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594D6C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 15:07:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 127C5846FD;
-	Mon,  6 Jul 2026 17:07:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DCAC849D2;
+	Mon,  6 Jul 2026 17:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="UEWideT3";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Skt9gtRf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 653648490A; Mon,  6 Jul 2026 17:07:10 +0200 (CEST)
-Received: from mail-wr2-x00.google.com (mail-wr2-x00.google.com
- [IPv6:2a00:1450:4864:30::])
+ id C97A2849A4; Mon,  6 Jul 2026 17:07:11 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6112984979
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 17:07:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2451846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 17:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wr2-x00.google.com with SMTP id
- ffacd0b85a97d-4700bd8aed1so37974f8f.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 08:07:08 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-493bb510ce4so24028625e9.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 08:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783350428; x=1783955228; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783350429; x=1783955229; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jYmPeUlcjeJ/ViugGbVojoSf1xPti95cVvK2dgaLRb8=;
- b=UEWideT3lMNFInfQ+rwotDhz8Pb/DgWTIYEl84C6RTH76p+wC/me4IYL9tpctHq4mY
- r43c0F1XOZTUua2wozZ8gLGVl3aiO+d63J7b3asFocFxRlBUfplNfCQin88MIGy4npmm
- zNyAdN0gP4aaPUPOOQRt/S3BvsJFOmZlSboYrmWpGnG88EDPHCGhpgRAWqADUKvOVyr9
- HmB3kO2JirO3l2gOC2+OzIbq+BswdyusaF+Llff8egIVkTzGGrS5q3LxYYIX2EoxFQ3M
- bWFmONTeuhn6MCr15Sfc8YiODEsRPUkG9OtrINjsiCbanrI1tGFRcIRYgMUyBW3Cp/6p
- Fz0g==
+ :reply-to; bh=UZhPwm4+icuKyWinp7e8oijVTBG3PYcCD2BPoperoU0=;
+ b=Skt9gtRfXV2cV86rpRCZEFLJqKOkObOmY0qcpyPBlNM5aL9oix1NRIAwcIa8C9bif6
+ nBrG8Th5dJAKsJZmVmgbae9dR3TlaclrlS8nwUknkCspPVc9hOaI1Xx+E7Iehh/Y/hJF
+ 65/hyAUJs2Sy+epsSwO4oMK1f9PtQVT9rR1rPTRrcNGKl/bmuptuwYgIlYoTIk8+lL8f
+ Zv99Eos9aYiHmmF3hDKSdHgoHdInqKHEUg+pHIbqWN1OiYyp2cEgEEGxdGyJb0P24GCS
+ AuYRsWWgPBrBMTh1XxJQ/zv9X1N6iJDn6+HZHV0nKOEQRddXvktBQ8nosn1cG+mPlJaE
+ XaCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783350428; x=1783955228;
+ d=1e100.net; s=20251104; t=1783350429; x=1783955229;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=jYmPeUlcjeJ/ViugGbVojoSf1xPti95cVvK2dgaLRb8=;
- b=rbinN5sKYwTjYzIN4B/R1O4zm/KMhGSFo5mQHLFvWGQyAKqGjdFXgAz2/as0iwWqsh
- YZ03Qdum7vTnce+rqDNWsvx5eQu4J3mDARSR4N63rgujrNWX4KEmLp5DeE2aOeB3ESy9
- Qseslrl4cFWeEM0dcpJsNu+GIwKHkt3W5uLdl3z7pRF+GempWqgUrxv3hHn7v7/k3u8g
- ToNqt7dauhRuSybeOoSbWyAcntFZxisWKE8OBBR3K+tnDbJvzHgX9e3xAoQ0ErSLvL1N
- uy0aRLmaNGS2bkWKlUUizbBozQzl5qraiMaF1r30sFY12vuf0PKtwZvx8brYgNYoJA0Z
- hEwA==
-X-Gm-Message-State: AOJu0YxXuk0JanBcPdPxQlfpBtIRJ2tCq2zYJObJW1z8lca8BqrNHoqT
- eRcttnwnGbFSyBhFhvHI2cg2Yhpxsq6nYSEijrv1BdImKzclihwiLJ4eeeqk8ouGfT8=
-X-Gm-Gg: AfdE7clZWL9lILSbKQnvfj3fYQIjpgJkSL7jFepVdF02RUgAuiUj2VLtHBsRJzDqS6A
- zRfXsuJNxOCMDwDtA0W5GFKWtqLLEB3ktshljHigvgEMJgodEk4TOldpH7ueC8Gb8qljCyaFDXG
- Q/nYvgbpPK3gEpJ4s5f0x4UaEs6X20++nLFSy3xFlE+dFs9r95LoGNQencc6jjwbYuCxVAoN9nb
- YWjczoHnOSn3F2S/FilJjoTynm18226LgkG7wfb5oMeQ1z6G46AeR2ui8i6vfOnbQdY8q+Hgva4
- xAQrcd4P3srcIxkihuPXFcxi8D0zCYlyqF1axTpinr2WCkv066r38LGDlaCZs7UgD1Trx+dNAsl
- iob+zZ+J7e+zTlrivr3ke+ThcScgybH5uIT/m8ndXHiHYKWsskSw4hOjM/5GafFIENt7jhzlZQQ
- ke5djxGRUaFEcAHdlMXe87+YCXVZzBfSfJ0Yj0z30KgGM6HQydARXCbg6Z
-X-Received: by 2002:a05:600c:628d:b0:493:c2ac:58f with SMTP id
- 5b1f17b1804b1-493decbf152mr13034285e9.8.1783350427651; 
- Mon, 06 Jul 2026 08:07:07 -0700 (PDT)
+ bh=UZhPwm4+icuKyWinp7e8oijVTBG3PYcCD2BPoperoU0=;
+ b=iyC9uAGboa0sLdWgxbOKGCfJznnEUAUXOY4GfFIGC2ikbdQXax4wzZfA/5zRGRITH1
+ 8J5KMtFzaQ4CvrbpdA1tey3lsRFmWTP77FtPn68lS1fhzEsY5eRJvpH3R0GDF63R0QKt
+ H9wwrEVrSFtYBKr4F5AN+jZ54DOyN5LQZsQt4Z54StgQFbfDUmAYEHEXM05b9LkroK6y
+ 0G2KrkKwwhnloy4OOKWq5btnF8NkNwPWCuO/6B43AinBVzBikaXivIse51IKQLdOZK7q
+ nQKLpGZSzep0iIfaCUVLt0/WF/WPQs3ZaqauT6bFjhbgM0W6mlWu5qirsijxiv8IllNW
+ m23Q==
+X-Gm-Message-State: AOJu0YzQhl0MBcSai8Pt5vdQTAH0eV9hBBe100H0o5/HUM7rDRjy3fLb
+ QsA/E6GBktfNPki2L5Yrw9Vtg2Y1w4n3cZxSSvNT0NUc/+iE6zzJllfBi7V585+/MOM=
+X-Gm-Gg: AfdE7ckkZBsDIP79SpQRsDmApULVxcGC/+MQsiBIQ4uuj6rOW+VHGb3XoIKgmSQt1hV
+ o9zxN55/2gG5caPvrTDbH3c7yNcgvrLrXzpheAg95CE2pPT8g63IAB7SsHE0uoQfQrkTaVq98Nt
+ NM4E+XpaKK8kG9EL39nHvrcnAXqFgVK8Pcg1DImwySTx3s06qtjQ0yD7dk9RzNCUL/sSyryLKoq
+ hbGLIoD/opgxv4h9YMm6dci/epqITEGoAVHEKQhJqPcMAXd/5LyKtC9pQItCprXSgxqroKtM/TJ
+ TX6lhiIOZQS+zM/KqChJc2IHauYLtfx4NaPEUVRuZdt2gdQqKKOycbJPI6/KlpVSLK4j8Gjzfbp
+ PCZSofNbijDdC8jpE2adtjfST4s4vSmBhZpHrPlDvpe386uQv9OZ4N/9dDp1gjHSsgZSoT+4FuO
+ /Sa6Hh/ZAE//Jr+vBIhqGfxOWDVcHIhzZ25vdczizDxOUEwsNEJtiU/zEZ3pJuFWvrx3Y=
+X-Received: by 2002:a05:600c:5297:b0:493:d1e0:a4f1 with SMTP id
+ 5b1f17b1804b1-493deffbf21mr12090415e9.0.1783350429157; 
+ Mon, 06 Jul 2026 08:07:09 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it ([95.236.170.123])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493cce03fa1sm281421265e9.11.2026.07.06.08.07.05
+ 5b1f17b1804b1-493cce03fa1sm281421265e9.11.2026.07.06.08.07.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 08:07:06 -0700 (PDT)
+ Mon, 06 Jul 2026 08:07:08 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 06 Jul 2026 17:06:43 +0200
-Subject: [PATCH 2/4] bootmeth: efi: source the devicetree from a firmware
- partition
+Date: Mon, 06 Jul 2026 17:06:44 +0200
+Subject: [PATCH 3/4] efi_loader: bootmgr: install the firmware-owned devicetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-ccaione-upstream-ebbr-v1-2-e742cdd6abe5@baylibre.com>
+Message-Id: <20260706-ccaione-upstream-ebbr-v1-3-e742cdd6abe5@baylibre.com>
 References: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
 In-Reply-To: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
 To: u-boot@lists.denx.de
@@ -119,130 +118,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a firmware-owned devicetree source is configured (EBBR / Arm
-SystemReady IR), assemble the devicetree from the FIT manifest on
-the firmware partition instead of reading a DTB from the EFI System
-Partition, and hand it to the EFI application through the normal
-bflow->fdt_addr path (efi_install_fdt()).
+SystemReady IR boots through the UEFI boot manager, which does not go
+through the per-device EFI bootmeth, so hooking the bootmeth alone
+would leave the boot-manager path (including autoboot) on the control
+devicetree.
+
+Consume the firmware-FDT source in efi_bootmgr_run() too, so the
+firmware-owned devicetree is installed via efi_install_fdt() regardless
+of which EFI launch path is taken.
+
+The firmware-owned devicetree is tried before the Boot#### load-option
+FDT, so a stale or broken load option can neither override nor block a
+configured (and possibly signed) firmware devicetree. As a side effect,
+a devicetree passed directly to efi_bootmgr_run() now also outranks the
+load-option FDT, which previously overrode it: an explicitly supplied
+devicetree is the operator's immediate intent, and stored boot options
+must not replace it.
 
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- boot/bootmeth_efi.c | 81 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 81 insertions(+)
+ lib/efi_loader/efi_bootmgr.c | 50 +++++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 43 insertions(+), 7 deletions(-)
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index e187dc39912..ae3f1c9b91e 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -17,6 +17,7 @@
- #include <efi_loader.h>
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 8c9a9b5eb56..8835891c003 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -14,6 +14,7 @@
+ #include <efi.h>
+ #include <efi_device_path.h>
  #include <env.h>
- #include <extension_board.h>
 +#include <firmware_fdt.h>
- #include <fs.h>
+ #include <log.h>
  #include <malloc.h>
- #include <mapmem.h>
-@@ -73,6 +74,61 @@ static int efiload_read_file(struct bootflow *bflow, ulong addr)
- 	return 0;
- }
+ #include <net.h>
+@@ -1296,7 +1297,9 @@ out:
+  *
+  * Invoke EFI boot manager and execute a binary depending on
+  * boot options. If @fdt is not NULL, it will be passed to
+- * the executed binary.
++ * the executed binary. Otherwise a configured firmware-owned
++ * devicetree source takes precedence over both a Boot#### load
++ * option FDT and the distro one.
+  *
+  * Return:	status code
+  */
+@@ -1305,7 +1308,8 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 	efi_handle_t handle;
+ 	void *load_options;
+ 	efi_status_t ret;
+-	void *fdt_lo, *fdt_distro = NULL;
++	struct firmware_fdt fw = { 0 };
++	void *fdt_lo = NULL, *fdt_distro = NULL;
+ 	efi_uintn_t fdt_size;
  
-+/**
-+ * distro_efi_firmware_fdt() - try to stage the firmware-owned devicetree
-+ *
-+ * Prefer a firmware-owned devicetree if one is configured: assemble it
-+ * from the FIT manifest on the firmware partition, stage it at 'fdt_addr_r'
-+ * and fill the bootflow, so it reaches the EFI app through the normal
-+ * bflow->fdt_addr path (efi_install_fdt()).
-+ *
-+ * The semantics are fail closed: only -ENOENT (no firmware-FDT source
-+ * configured) lets the caller fall back to its normal devicetree source, so
-+ * a missing or broken firmware devicetree is never silently replaced.
-+ *
-+ * @bflow: bootflow to update
-+ * Return: 0 if the firmware devicetree was staged (the bootflow devicetree
-+ * fields are set), -ENOENT if no source is configured, other -ve error if a
-+ * configured source failed to assemble (the bootflow must fail)
-+ */
-+static int distro_efi_firmware_fdt(struct bootflow *bflow)
-+{
-+	struct firmware_fdt fw;
-+	ulong fdt_addr;
-+	int ret;
+ 	/* Initialize EFI drivers */
+@@ -1320,11 +1324,40 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 	}
+ 
+ 	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
+-		ret = load_fdt_from_load_option(&fdt_lo);
+-		if (ret != EFI_SUCCESS)
+-			return ret;
+-		if (fdt_lo)
+-			fdt = fdt_lo;
++		/*
++		 * Prefer a firmware-owned devicetree (EBBR) over both the
++		 * Boot#### load-option FDT and the distro/ESP one, and try it
++		 * first, so a configured (and, in secure mode, signed)
++		 * firmware DT can neither be overridden nor blocked by a
++		 * stale or broken load-option FDT. An FDT explicitly passed
++		 * to efi_bootmgr_run() (e.g. "bootefi bootmgr <addr>") still
++		 * wins. Fail closed: a configured source that cannot be
++		 * assembled ends the boot rather than falling back to an
++		 * unverified devicetree.
++		 */
++		if (!fdt && CONFIG_IS_ENABLED(BOOTSTD_FIRMWARE_FDT)) {
++			int err;
 +
-+	if (!CONFIG_IS_ENABLED(BOOTSTD_FIRMWARE_FDT))
-+		return -ENOENT;
++			err = firmware_fdt_load(&fw);
++			if (!err) {
++				fdt = fw.fdt;
++				log_debug("Using firmware-owned devicetree\n");
++			} else if (err != -ENOENT) {
++				log_err("Failed to assemble the firmware devicetree (err %d)\n",
++					err);
++				ret = EFI_LOAD_ERROR;
++				goto out;
++			}
++		}
 +
-+	ret = firmware_fdt_load(&fw);
-+	if (ret) {
-+		if (ret != -ENOENT)
-+			log_err("Failed to assemble the firmware devicetree (err %d)\n",
-+				ret);
-+		return ret;
-+	}
++		if (!fdt) {
++			ret = load_fdt_from_load_option(&fdt_lo);
++			if (ret != EFI_SUCCESS)
++				return ret;
++			if (fdt_lo)
++				fdt = fdt_lo;
++		}
 +
-+	/* stage it at fdt_addr_r, like any other devicetree */
-+	fdt_addr = env_get_hex("fdt_addr_r", 0);
-+	if (!fdt_addr || fw.size > SZ_4M) {
+ 		if (!fdt) {
+ 			efi_load_distro_fdt(handle, &fdt_distro, &fdt_size);
+ 			fdt = fdt_distro;
+@@ -1337,7 +1370,10 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 	 */
+ 	ret = efi_install_fdt(fdt);
+ 
++out:
+ 	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
++		/* efi_install_fdt() has copied the devicetree */
 +		firmware_fdt_free(&fw);
-+		return log_msg_ret("fwa", -EINVAL);
-+	}
-+
-+	memcpy(map_sysmem(fdt_addr, fw.size), fw.fdt, fw.size);
-+
-+	bflow->fdt_fname = strdup(fw.name);
-+	bflow->fdt_size = fw.size;
-+	bflow->fdt_addr = fdt_addr;
-+	firmware_fdt_free(&fw);
-+	if (!bflow->fdt_fname)
-+		return log_msg_ret("fwn", -ENOMEM);
-+
-+	log_debug("Using firmware-owned devicetree\n");
-+
-+	return 0;
-+}
-+
- static int distro_efi_check(struct udevice *dev, struct bootflow_iter *iter)
- {
- 	/* This only works on block and network devices */
-@@ -130,6 +186,18 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 
- 	fdt_addr = env_get_hex("fdt_addr_r", 0);
- 
-+	/*
-+	 * A staged firmware-owned devicetree is complete and authoritative,
-+	 * so return without considering any other devicetree source. The
-+	 * extension overlays below are deliberately not applied on top:
-+	 * such combinations belong in the manifest as configurations.
-+	 */
-+	ret = distro_efi_firmware_fdt(bflow);
-+	if (!ret)
-+		return 0;
-+	if (ret != -ENOENT)
-+		return log_msg_ret("fwf", ret);
-+
- 	/* try the various available names */
- 	ret = -ENOENT;
- 	*fname = '\0';
-@@ -268,6 +336,19 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fname)
- 		return log_msg_ret("fi0", -ENOMEM);
- 
-+	/*
-+	 * A configured firmware-owned devicetree outranks the network-provided
-+	 * one (and the prior-stage / built-in devicetree below): a DHCP/TFTP
-+	 * server must not be able to replace it.
-+	 */
-+	ret = distro_efi_firmware_fdt(bflow);
-+	if (!ret) {
-+		bflow->state = BOOTFLOWST_READY;
-+		return 0;
-+	}
-+	if (ret != -ENOENT)
-+		return log_msg_ret("fwf", ret);
-+
- 	/* read the DT file also */
- 	ret = efi_get_distro_fdt_name(fname, sizeof(fname), 0);
- 	if (ret == -EALREADY) {
+ 		free(fdt_lo);
+ 		if (fdt_distro)
+ 			efi_free_pages((uintptr_t)fdt_distro,
 
 -- 
 2.55.0
