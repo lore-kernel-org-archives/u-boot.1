@@ -4,138 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDD2C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 03:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47210C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 04:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3647C849F3;
-	Tue,  7 Jul 2026 05:57:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 40334846B4;
+	Tue,  7 Jul 2026 06:50:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=mm.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="bk3KOfFQ";
+	dkim=pass (2048-bit key; unprotected) header.d=mm.st header.i=@mm.st header.b="l4uwYsNa";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IGARrAuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCA728496E; Tue,  7 Jul 2026 05:57:24 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id A3DCC84852; Mon,  6 Jul 2026 19:19:42 +0200 (CEST)
+Received: from fout-b4-smtp.messagingengine.com
+ (fout-b4-smtp.messagingengine.com [202.12.124.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3A6B801A9
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 05:57:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C9B0846B4
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 19:19:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mUrOLqFnRsaSEp3FS13Oy+Aayq35FSlwcgbGS5bOgYRqRq54tAU/lNflvBXKKb+fUIldazPoxGqZSb7ehYl2/2pdvwvNTWX/4ds5rvqLPqwSl4UinoL0IBPQVsIfrn0QzazO8hX4bdw7pRj1LNPpsUTtbyserwxTxu9dwNaHnxPamr816gr/88sDLlWc5d1EUp2SRs1RUQh7ttDaKjp49b1nBTTifT5gjvXeFaE2mQzz6FI0aVKirKzJdvVvh4jvVWYBZlBx8UslzC9jGLrAVVhXcJMIMMLbkV4rqrxfe2ZWscb4Jz45PoVAGxDVVATBxaxdurwMRh/xqjIw53fDAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GUhsgaLF7gAV6aRkf1mM49abABs31VJKOGtkDmPzXAY=;
- b=o7OjsoPDrzlxHuETmWbpLld/wjNx12xj9nc47lQz65G3MTupHkyRIvDsX+Bto1ujANn9ESbKy1hp82nn8EvPFIfQcOPeyXZALmV/nUl4680ayxe8Q3RC5A1DhoeQk+fLvcPonMmcKWunYezwpHP127OBj8F57VyEZX9wvtCp55fKJmgvTZA5JcGksP6jQ/rA8vc1a1LRq7vy7x0orvSzNWABMobOJXBGnWE2i+IqoRzwVNDVGtu6kqxaPWDk0CWY8A8LEzUUacqdf/nbH7xR62pRD5C/FegLXSMtWyyNrCgrb+uYondTXm+/FRvqv/sx6TNZYB1A8dWGEoO1ZOK0BQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GUhsgaLF7gAV6aRkf1mM49abABs31VJKOGtkDmPzXAY=;
- b=bk3KOfFQvC0hxEUowCNETbHoxMzj7v07z+nEfZC0LOPcqQFVGzDwFX9cqFTMotuW2efAcifJEPETjjouOPpJdZu6SDZryMPWKLjwoLWS9df5SH+J8yoIziWqPw0LMkW72FNenbSxy/HUF8KHUFKb1gFWrrv4X/dpcSadZz0+tA1z3DsTMqKI+a2nSJGXWLL0Dc1OxJEpCX6fDPNRnGVeaNTM6lPmYxXQwdCNLuFcSjsziFtG/7jAye+uqmmcQXFvvb/zr3UMSvXDSt1KijJrnq25HQERaMTXaRW3picVnLgjRyxOflMXdpHnb8ugAQ9ME+uEDgs4Ha3MNxBeCqn/Zw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM9PR04MB8114.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::22)
- by DU7PR04MB11235.eurprd04.prod.outlook.com (2603:10a6:10:5b2::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Tue, 7 Jul
- 2026 03:57:21 +0000
-Received: from AM9PR04MB8114.eurprd04.prod.outlook.com
- ([fe80::cab0:e4b0:6be:b1d1]) by AM9PR04MB8114.eurprd04.prod.outlook.com
- ([fe80::cab0:e4b0:6be:b1d1%4]) with mapi id 15.21.0181.012; Tue, 7 Jul 2026
- 03:57:20 +0000
-From: alice.guo@oss.nxp.com
-Date: Tue, 07 Jul 2026 12:00:27 +0800
-Subject: [PATCH v1 3/3] net: fsl_enetc: Add SGMII mode support for i.MX952
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-imx952-v1-3-1262c7c6f7e9@nxp.com>
-References: <20260707-imx952-v1-0-1262c7c6f7e9@nxp.com>
-In-Reply-To: <20260707-imx952-v1-0-1262c7c6f7e9@nxp.com>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, 
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Peng Fan <peng.fan@nxp.com>, 
- Clark Wang <xiaoning.wang@nxp.com>, Fabio Estevam <festevam@gmail.com>, 
- Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SI1PR02CA0031.apcprd02.prod.outlook.com
- (2603:1096:4:1f6::11) To AM9PR04MB8114.eurprd04.prod.outlook.com
- (2603:10a6:20b:3b7::22)
+ dmarc=pass (p=none dis=none) header.from=mm.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zaba@mm.st
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfout.stl.internal (Postfix) with ESMTP id EDAB81D0005A;
+ Mon,  6 Jul 2026 13:19:37 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-05.internal (MEProxy); Mon, 06 Jul 2026 13:19:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mm.st; h=cc:cc
+ :content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm2; t=1783358377; x=1783444777; bh=u1xnk2kRGT
+ pKvWO+4+hyFXyn6DICHHeOXs/8EZ4Q4Pw=; b=l4uwYsNaNo8IJVnrrFy0TKQiwi
+ qnOopcd1ATLBjMmfI1s+Zezz7a6xdujwTjEGM/dx8v6dhoO4nHCj65k1ODmpkEVY
+ 2wcJnMyAylqM7JS8tx1QnPk/Gi3FrYc2XzJS4e44gy3N+TxWL2A/f8ZWp2S4tjZe
+ 3XIxk+GzkSGth2O1CDHRrPDhXT30aAv0v4x8w4XdIfyLYGE774O6F5Dz7Z3X6XTv
+ +U5jCMhXTLXxqxhsK+2utzE9pk9Yts5ef2cmapUB2Pq9U8v2Cnc4wvlcCfqiyUfC
+ /mRlxYuZWh+fHDzxF3fpXtV6wMtiFTiWbr/fLCUkYWmKWxEm1qgpklC2iW+g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+ 1783358377; x=1783444777; bh=u1xnk2kRGTpKvWO+4+hyFXyn6DICHHeOXs/
+ 8EZ4Q4Pw=; b=IGARrAuFjQUcRv9TuPhjcdy/i18W53wjRkR24FhlH7Rw3FXGw5g
+ NsNDYJag6EGUuxqJCN7SupN6oseMnyxZgY58iJTzJ/PRVyxf6QqwhN8WA8VMuUP2
+ lMXiTDVEC9mu0crUu3pXzJcExOthajui/Cm++oO/ba8MidDTXBah88+/yY2SpSBL
+ d2AmkyetjzFiFK/UzbYXoJVPxjRhDhD+4zGaTNKU0cB8ouvevAJDw1PdnpI9wAKu
+ Qxar4fbSluTl3GNu/wv1edTHTa9+g+2IOX9g7fFB2xfUD5dH7VnJd+MFjoB0PoCg
+ yIZqY1fFbgKOYjuigxZi688roX7yCBkDPYg==
+X-ME-Sender: <xms:qeNLamQmFe6Y5XM5JNZkDAh5-J1HDfP92UebIaR1PMlZ6_aAohJPzA>
+ <xme:qeNLajMogS2_y8B-8gqQvrhPInkCLsnvysRDW8RsjcuQRftkt4nyBCllO9-sKn3sL
+ pVz4bWJimFv8SOBItNHr-nIis4fP7gdIlwJebT34w-6HldW_5anUA>
+X-ME-Received: <xmr:qeNLahP4nefWxaCXJ-_Q0D7UAiIDaG4UDW3WMXZsRaHayGhHZU8kl4Aq1hDTGAn1AoyXAtto1Jyd3Uhd7Q>
+X-ME-Proxy-Cause: dmFkZTF3bhW5h5/GJZNsxLn8vfWOBeST7Mi1279bYerQ+O+XZ625VdpPvxaM2bA5xxLLWq
+ MLt6HvebnmOpampqOc09QXSCNRDZkSrBHVFT1DKqdttDk+XdsvM8nB5WPL50EG8dsphVVl
+ RuBY22DUFryelWZXVHqkMCt4IHPirsgo2H800BrWzujySjqzXu743CY8rqb9PNQ1OkMZxq
+ lo7gKiZQMQiTezecS2IqLfd9YX6khANqtTbJDIqviiHlYPosTHCYAsagUdwXl5eKY3bRo/
+ H98BcU5LvkB+9mStMUkT4tsNy64QP9WiuiQgCWAI7K/nQcwBEgKkDxbyl1viY8Sa8eAqgO
+ eF+e9aaPvJcaxXePoiVZ5B4FpyLpuFMpYB6T5ezSPTNLxZAxP+z0FvGNM7ISOS1re7mTxH
+ tSI5L6JaGovYYmW7rM5+6it0Uqwu8FlE2seMnB9crQ/7xa7dgjg4AErfJLPJhWtaMGgpSq
+ b4GvKRwLs4gtFqR/cS72MrVXKRrjOH8wL4pPCD6xt31k2sIHbGdSnAfeRqyNOWtHim6UFn
+ 1k1rVtuO5t+1D6BjRfqDtU5u8TibU5Ai/+qy9foIQd+MvAwWRxJZsv1xyHO+uil6OKm9hY
+ 1wQdj+ryFpeKbQTImgBXOgFlNNGkz+qmXXTQfbRgiolidf2KChPVoCytSo+Q
+X-ME-Proxy: <xmx:qeNLars1cp9A_cujTdBrQsdGhYkvljoV30hI_NMUmIzs_3Cohu7I3Q>
+ <xmx:qeNLajVerJxT1NVDsenzevnFCwndVOyDszir0eGd609UFgWMTnMGew>
+ <xmx:qeNLars7dWthnb07UdeQsXMkBaHNDIsU4ZSEoVt560qNrLL0kUZDIg>
+ <xmx:qeNLanV6y7ycb9LC9_K-FkoYbNvBHjDXcMoPdDcTikpSrYqnhfy2fA>
+ <xmx:qeNLapXNach3kHvzAmK427Wt20TZxUyO-KJXGr3MrX3_yvqvLJJT1K-v>
+Feedback-ID: i4e034308:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 6 Jul 2026 13:19:36 -0400 (EDT)
+Date: Mon, 6 Jul 2026 20:19:34 +0300
+From: Vsevolod Kozlov <zaba@mm.st>
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de
+Subject: Re: [PATCH] lib/mbedtls: Do not use ERR_PTR with mbedTLS error codes
+Message-ID: <akvjpkbY-69iK7jF@Vsevolods-MacBook-Pro.local>
+References: <akn9xLl9CGrLtvYb@Vsevolods-MacBook-Pro.local>
+ <CAMDkj5wwc=mU=EA_duycozt374gFq=tapuO0u3QoejTpUYwezw@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8114:EE_|DU7PR04MB11235:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5daff0f-b1d1-4b2e-79ed-08dedbdbd7cf
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|19092799006|23010399003|11063799006|56012099006|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: YtStuI4HWvv5BlbibzKas3vjAJNXTWYrwrOz1yyuLqwA4HWNUz2A4IKNL7PXhLVJgbHaASnlXNuyckiufDcDYy2EdOt8VLgMPIETMMaIFgTArCg1Jug3x6xSxn3A5V+U8PqqGfqBX2Pcvx9LvAWBN9R158b7xBGN8V/E6xaX3h02LNzmhqvpk1cG4lD8jWdWMl6YequtDPCgeKBiIzGINvHXQb8K6fMXQ9bI9wKnJQwGYBSZFeMGaiNAluMMAdkO2TCyFswkQ+zqR3UbSyTDeNFQzaUo7lldKBYXtQRZTtetmy5z27rXLZkG4u9I37Wsysu6ye319ibAYLG8Ljd7m8wbrrPUWcCHi9IiOCgPJF+h9Qc1IbGcxZlCQxXNZnrMOTmk7Vg2xjClAwEJKUVEawMWpeOwRddzzjvGxmb2H7M9POqhjkfHzDSxTtDI2bAJWUUapZBRJyUZFECgbPdn6l1gleZLLZ6tBgKR1NPqILs364+uNyxyzS01RuGMN0hXYiQFa//kebZqFppGz5Cov6vZFEGMhLIrLIMpkVxQ1PucmOZx0fLywUaK6h8SxNBLzu8sLeact50vIpBCVGPZpiTOH1yRAPwHwCM7YPafYh/6l3XgMAzUi3XREFdPPeyyB7tUDMjKrsq18fysqFpKXnBBM/X7BXOVAiQUDYxp6Ck=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8114.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(23010399003)(11063799006)(56012099006)(22082099003)(18002099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTk4UkxZckUycmFHOHpYTmhXMTMvT0FyMFZ1Nkt2RndBcFRlcThPWnExa3hx?=
- =?utf-8?B?N25ZSS9QaHB2eGxmZ2VRYklSVUdWbUtiQU9KVDN5eGlSaTl0RlFjWVlVZXdI?=
- =?utf-8?B?NVJUV1VFcndhN0o3RzJ5amsvSDc1NGlqbS9YZytwcm5sL20xZ3lBaFhJTWZh?=
- =?utf-8?B?TU5TRm51MHRsVjg0OHI5Q3lXYzJPTkZJRWVWNFRoTzZkY3dGWkZIcktXb2c5?=
- =?utf-8?B?bjhJWXhCL0FhNVI4Tk5jTWI1dHgyQ0szTyt3bGFzNjlwN09OaGo5Um43aDEv?=
- =?utf-8?B?d0oySDJQN0RHQllMT1phTHZGeFNGSG03RjQzRTg1emZTOG9URkNXU2ljRWUr?=
- =?utf-8?B?Nlo5OEs3eG5tSTYyMUlYcENpa1lQWit2U1JTNXA3L2RGQ3Y4TE5CdDJFQ3dX?=
- =?utf-8?B?eHVRTWFXYWZZL2tzK0VsODFiVmJ3anVwSkt2cXpvcWZIdERiNFFPVU84OEVC?=
- =?utf-8?B?MWs0ZnJqTkhGdXlPZFlCYjQ2QmUwKzNYQjI3eFJBWG9aODJ5bzFMN2thNDB6?=
- =?utf-8?B?WElGSnc4a2xmblFGNUY0NUFXdVMvZHRIT3MzUGxTVVJrQUR6d01XMCswazl0?=
- =?utf-8?B?MmFoaTVqUzd1Y0ZrN2MxSGdaTjgzTUdQdjZRcW4xMjZZd0U4bm9qSmltMzRK?=
- =?utf-8?B?Z1hDajFBanZNRjV2MmZMbG1ZdWx3aEZrL2EyQXRRbzVsY1orY2FKRENsenFz?=
- =?utf-8?B?Q29HbUowVlY2NmdnbXE0ZG9pK1ROM1IvcCsxdWdCY0wvYVk1RU8zZDZkRmYx?=
- =?utf-8?B?d1dnUWlqektVeWZZcUJJb1MzNXZIb1hSYmpSRFpaZ3Z1OENmVzBNTUU4azJm?=
- =?utf-8?B?Y0pxVVl0akJjUGFxVHBMaVdaLzdKamEyTnpDcmJJV0k1ZmVWd2xDM09LQ3Zw?=
- =?utf-8?B?Y013K1BTVmJwMWZVZ3JHYzkvZktiVkR0UCtnUmxPdG9uRm43VlVHWU12TTV3?=
- =?utf-8?B?dGdtVU9pVjRuKy9pNUZjakl4OTlSN00yRVBmbHRFUHJTMDlRRGdxOFYwWG5M?=
- =?utf-8?B?Z2FtbDhzWGkraTl2STRVRGxmUGxiWWkzVUtJNlE3YXN1YWdrQlZwS1BHQTVE?=
- =?utf-8?B?Z1dHdm9RRUFXcHk2eXhBUWdMdE9iclpmUkpqNWZIUE9YODlRR1NjWlgvdVBP?=
- =?utf-8?B?SEFHdU1sdmVsOXVrQjlVYWlVTEIzQlJoRlZTZE1YczRvUkYrK01xL1o4UWFX?=
- =?utf-8?B?elluOFZQM3V5em43NTVkZGEySlEwOTVjKzg1aFVpNWsxUVlQOW1rSzNhY3Qx?=
- =?utf-8?B?b20rYWF6WFdKN1draEh6aG1sMkZhczZPMnVxemVPcnAvbXdGNWg3c2JidkRC?=
- =?utf-8?B?WGJXdkhnRTRVOTJNNVRCeGV2UzdaZk0rMmEvZ2pCVEVVMllTaU1ETXl0dGw2?=
- =?utf-8?B?ekJmQ3VMcDI4bHdHQ1VuYVZqWkRscHVQdWxPM1BtRHNkN3RWVDVsMExMRUdB?=
- =?utf-8?B?Zkx2MzZ4YlVFYjMyUTltWDN0SUVMbDZCMktOYWhTNm1PRkE1eU5jN3pQbHRq?=
- =?utf-8?B?Zy9ZV0RCWWVUT05QRUdTemhXaE9waGltVFlITjZkOEpSUE9Vd0hkQ2E0RWFM?=
- =?utf-8?B?WHFvTkR2U3d6MER2amJLVjhaT00xUFNRL3UvOGlYckdieThTQW55NHBYSzZ2?=
- =?utf-8?B?TkRobnlma1k3VlcrSVRyeXFYY0xSQ1VXUGVkNERCWDhqSG4xUksxYnR4T3NE?=
- =?utf-8?B?SWRzcFZrdjZ2T05INzNqYTdCYytNeS9CTGF2djA3M2wxZm9SRk1DZEplUEtU?=
- =?utf-8?B?YkNJbGRXTmJtZkl0OGk2RjAyWVorZEFuekZJWXBpdWlZdnk3ZnJLblNMSkM0?=
- =?utf-8?B?MXhBYmt3bCtobEpoL3VSdlNMNkNiSksrZnlvcWxZTDVQeDJHM0ZNY2gzNHlz?=
- =?utf-8?B?UDlzNENpK3VzenBqMjgyQWRtNk9JK1pMcEhnaCs1Nml6Nmt4Ny92dGcxaGFR?=
- =?utf-8?B?ZlNRcFpBbEo5ZHFGM0lGMFdQUWlFS2xkaEpwa2EzTVRNSU1Yc2Q3Qm1pZUZC?=
- =?utf-8?B?OWhpbENPenhiYVY0OVZhR2s1UmR4ZDl2WnZ6NEJsR3JQR1hpUkNHSUpXcWdU?=
- =?utf-8?B?Vzd5N0pjV3pUMEpUS29wU1gvZTlSZFVrYzlZc3c4a1RLang0MTBIb0ZBUjhh?=
- =?utf-8?B?aTNYNi9MOCtnM010Q0Rab0RhY0dLb05CL0tYMHFGUnlSOGFjT3pCdE1NQTl2?=
- =?utf-8?B?dzRnaHA3VDg4TlNZcUEvUkMwcmJTeWlmRGpmZnlSenlBL1Q0NzYzVXVHTDFN?=
- =?utf-8?B?UHVmdVNLOHhCOXZjbkFaK0ZBZ2dTMGlucHFRWVZ4aDROQTA0U0wxcUg1NGNW?=
- =?utf-8?B?RHMzaE01U0pXTlE5elBIK3AxblF2dTJ1cXNvZTFxRnV1WThISkUvU29TREp4?=
- =?utf-8?Q?XVj+TEi2BHJrA5PyrEqzUUBnpYLSu1r8HSdvE?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5daff0f-b1d1-4b2e-79ed-08dedbdbd7cf
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8114.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 03:57:19.9610 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2YmkTkJMXq3PfYefZ2DH99HsqDhywIjbAWm368EFwUPNMjFeQQONlL+5I1YJPdRjILT48ELIrTcuzXavx590fiHHwloxG69qSN0NwREcsxBT+G1UBjQk+t0xrZgogaR4
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU7PR04MB11235
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CAMDkj5wwc=mU=EA_duycozt374gFq=tapuO0u3QoejTpUYwezw@mail.gmail.com>
+X-Mailman-Approved-At: Tue, 07 Jul 2026 06:50:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,31 +104,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+Hi Raymond,
 
-Add SGMII mode configuration for i.MX952 platform in ENETC driver.
+On Mon, Jul 06, 2026 at 11:38:43AM -0400, Raymond Mao wrote:
+> The direction is good, but the fixes do not match the commit message statement.
+> In the commit message, only the MbedTLS native error code will be
+> substituted, but the fixes below arbitrarily overridden all error
+> codes including the standard U-Boot errnos.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- drivers/net/fsl_enetc.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Thank you for the review.
 
-diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index cce1c5ef2a7..98376bcd3cf 100644
---- a/drivers/net/fsl_enetc.c
-+++ b/drivers/net/fsl_enetc.c
-@@ -392,6 +392,10 @@ static int enetc_init_sgmii(struct udevice *dev)
- #if IS_ENABLED(CONFIG_ARCH_IMX9)
- 	else if (priv->uclass_id == PHY_INTERFACE_MODE_SGMII && is_imx95())
- 		return imx95_xpcs_phy_sgmii_1g_config(dev);
-+	else if (priv->uclass_id == PHY_INTERFACE_MODE_SGMII && is_imx952()) {
-+		priv->without_pcs_pma = true;
-+		return imx952_xpcs_phy_sgmii_config(dev);
-+	}
- #endif
- 
- 	/*
+I have re-read the code better and I think it would be feasible to
+convert return values of mbedtls functions to negative errnos right at
+their respective call sites, because there are not too many of them.
+The only exception is the mbedtls_asn1_get_tag function that gets
+called quite many times in pkcs7_parser.c, but a wrapper function
+could be added for it.
 
--- 
-2.34.1
+Do you think that is the right approach, or should perhaps these code
+paths be converted away from ERR_PTR/IS_ERR entirely and just return
+NULL on error, given that none of the callers do anything with the
+error codes anyway?
 
+Thank you and best wishes
+
+> Please see my below inline comments.
+> 
+> > Signed-off-by: Vsevolod Kozlov <zaba@mm.st>
+> > ---
+> >  lib/mbedtls/pkcs7_parser.c     | 5 +++++
+> >  lib/mbedtls/x509_cert_parser.c | 6 +++++-
+> >  2 files changed, 10 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
+> > index bf8ee17b5b8..2c85dcc9699 100644
+> > --- a/lib/mbedtls/pkcs7_parser.c
+> > +++ b/lib/mbedtls/pkcs7_parser.c
+> > @@ -495,6 +495,11 @@ struct pkcs7_message *pkcs7_parse_message(const void *data, size_t datalen)
+> >  parse_fail:
+> >         mbedtls_pkcs7_free(&pkcs7_ctx);
+> >         pkcs7_free_message(msg);
+> > +
+> > +       /* MbedTLS error codes lie beyond MAX_ERRNO and are not suitable
+> > +        * for ERR_PTR, but can be useful for debugging. */
+> > +       debug("mbedtls returned error: %x\n", ret);
+> > +       ret = -EINVAL;
+> 
+> This collapses all non-zero failures to -EINVAL, including valid
+> U-Boot errnos such as -ENOMEM.
+> 
+> >  out_no_msg:
+> >         msg = ERR_PTR(ret);
+> >         return msg;
+> > diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parser.c
+> > index e163e16b9bc..1c70a8fcdcb 100644
+> > --- a/lib/mbedtls/x509_cert_parser.c
+> > +++ b/lib/mbedtls/x509_cert_parser.c
+> > @@ -425,7 +425,7 @@ struct x509_certificate *x509_cert_parse(const void *data, size_t datalen)
+> >  {
+> >         mbedtls_x509_crt mbedtls_cert;
+> >         struct x509_certificate *cert = NULL;
+> > -       long ret;
+> > +       int ret;
+> >
+> >         /* Parse DER encoded certificate */
+> >         mbedtls_x509_crt_init(&mbedtls_cert);
+> > @@ -443,5 +443,9 @@ clean_up_ctx:
+> >         if (!ret)
+> >                 return cert;
+> >
+> > +       /* MbedTLS error codes lie beyond MAX_ERRNO and are not suitable
+> > +        * for ERR_PTR, but can be useful for debugging. */
+> > +       debug("mbedtls returned error: %x\n", ret);
+> > +       ret = -EINVAL;
+> 
+> This collapses all non-zero failures to -EINVAL, including valid
+> U-Boot errnos such as -ENOMEM.
+> 
+> Regards,
+> Raymond
+> 
+> >         return ERR_PTR(ret);
+> >  }
+> > --
+> > 2.47.3
