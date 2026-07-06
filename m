@@ -4,125 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 511A2C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 06:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9990AC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 06:41:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C917B8490A;
-	Mon,  6 Jul 2026 08:34:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id C9289807C4;
+	Mon,  6 Jul 2026 08:41:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="qijwVzF0";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oLn5cTO3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mx8dINF6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BA918490A; Mon,  6 Jul 2026 08:34:33 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id B341684105; Mon,  6 Jul 2026 08:41:19 +0200 (CEST)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90A9A846FD
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 08:34:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09E4780398
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 08:41:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 6663wEZY3181752;
+ Mon, 6 Jul 2026 01:41:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=aMl2RzwHutvXowvk1V2qN21QT4qPEw3t+0uhEa4oT
+ Gg=; b=oLn5cTO39R/VIagxkXTyPMx+uI7h/unENg7sRlwdIGUHXpTangesvDLC5
+ DhSyGbEDoomAPusOSg81QqhnQDGoBYjCvvQPzMI7MrWpbGac5prqyV+2r17FBLBE
+ p3O5P4RCIzVRcuKhEiZS+K0tK2t48M8nDbr1Iln3PbsnO0cY/KiNn05FJdqI+aUn
+ GfWcXvYOZN2U2q2rt6ypogrkMcqnnijx9mjsIU1M+k93TTTZUxBab7HJ792jXUQc
+ PvykGQUpZAsVq+aCkZTPXx9Dj0YRtxXe9xgQarG+DSfZSz0qdD2NzCuWiTaf7i+/
+ Iq4wECk3c1ZjZcMRv8NFGS0SSn4fg==
+Received: from dm1pr04cu001.outbound.protection.outlook.com
+ (mail-centralusazon11010024.outbound.protection.outlook.com [52.101.61.24])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4f7p70kyde-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Mon, 06 Jul 2026 01:41:11 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GNh6hq7/Yqkc8DKjYY5GXa30oNQ2rK/+ilS/CROXRBnyqjPxchmyzMqCBvlc9IQznbHr0lQnKjUwFQuZ+hF9xSomYy+yzAbjv0jUj5Xgfw8PR3KFQvz59HwX/WdBzfkCeXQv4qB5+9Rr3Va5WcA0aWiLza9MOvYAkT3PrdsL89SUK1ouuoP4NZoHjgNDauliJnXi6ItxhhOKYRE1BEG8Gk5mFQaOLQ31nh8Z8vp4Vg7etNExSLLXUk7NnMeNViWbSNN1aIaQUtV5yQVm0yfDeKTBHywhQuGSKOaeiP9512fNKmpADgtoCdv4RisF+/rKoKh/QVfR0f7wVIG52jMlcg==
+ b=XIHx8txNPlj8xkzM4nKttT6B1TaAvkTE1UmJQAmh+gDcQJ3jDBp+raRzR4ca3OOynZYn2Edncvn9otE1YaJwwYO6XDH2+M9gksdcuacJWmanrMVAWQAMgbKw8cGRv1csfFCDbv4sDrkRjuj6vWl9HEMlLiSma6pKH1ZsS3oH8YOYyT5Ni0FkA+hwxI2EpcV9Pz9MqyzwReD7QPBw4lrfhTaapnUTHyNWRuXJCQWOfWdnyO+wCNOkZb11XLDPwX5Tlf9h28uOsEE+Q/bugrGTq6X/zGadQ3NbK7bNEYwVwvasugqlqtI/av3/IdAZEZjcDi5EglzKMPQ9TD7wC3ggtw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LqrD42i/y2ekYykX9t82H4g+xhlSvS8+KTm8T9cHeb4=;
- b=cBDx1vGS9KDJ1vSaS8bqv6KGG57yCjkwNSVOF7x8C17zSn3mXBlbf6jRkK38MVZnBwHJ4PvrVkdnk8IaBMlMDfxwmsreiPwUHG6mXSOp1xNyP4bfrZwXX1l83r2yFUPZL8UbXFuony4x2sxiw2j7AIZdebxwRcfyjmilbNq6AcrfH2GabwtqREIOwkNCJbXUy8RvFZFT7qvey1V7nfoep+2p5rTwPrEHC2Z4z4ZP0pRWX48nnmHiw0D7Dm6QKCOlgWgcs5METSw/7bdtsqTO1r62/48oVItAd5ud9C0/mySBlCjXAA+cXuBl+0gNX+iwqUPMSNe15xKj7xFBgBlN9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=aMl2RzwHutvXowvk1V2qN21QT4qPEw3t+0uhEa4oTGg=;
+ b=GitiwB0JWnK+kgxBAO+wVKBzX9fZUY1OaKa3DnYLQ4CTVpavBFubUQNrfgMpSGMsIYaIb9lCZLyi0u8YIjAUIw1PKT5Ylv+wiX1KuDn8SgD1O9I0ohwgriq99NwuyRBT1eS2zIHsfBXfRJPBMHXxPveu8efoFlrD6o0OyWBYtez9IX31lKd4mPFGQTktGuzdpgCsTH+T15OkpcrPTAZkJFm24OTvx3QAU/I1uAy8lMZMtos++M7EsPmUC+uhCXhR/FWcyFfTqIWs154LBPQH3da2fOiAPX8AM2brEN3RlhCyV61uLfsT4iilyWgI0JHdSPQ876epzDJOW/DmwDvm4Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=baylibre.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LqrD42i/y2ekYykX9t82H4g+xhlSvS8+KTm8T9cHeb4=;
- b=qijwVzF0qLk25MaziMcGT39icv1Ha40S6mnRmWD+TxVN6utZJkXWFP879iquO1inAWgMDvSUHi74XrxqcDUje3CZFdCXcv5BgWN/oHxnxH3RdJUGQ3wPqWlXyvQ+JbqxueVzK74x5bMFXmrASTE5+WNtJxoQx/OP/RdQ8m9mn0IvPowUNqZlMKh60X+hG6hMHCERdMCe7RmpB+diEZArrvKrlEMa6Y5cBCska3ltCJDy6tS+yKNTpUNxGnmITrZ7TVkhmwRqfjoTXa5PcJNEjT+jBWUGHhv1/U5iZJByCYhic8/NqPUeEhnkIX7Ij0wjdi2rDEagTQOzrpdDmptGxA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by AS8PR04MB8835.eurprd04.prod.outlook.com (2603:10a6:20b:42e::21)
+ bh=aMl2RzwHutvXowvk1V2qN21QT4qPEw3t+0uhEa4oTGg=;
+ b=mx8dINF61BUEfMIzQ8zNqOwEdo2d3nh++hYwevm/jMhxoWHm7y6T4NgamU1xL+PXrmzKcHeQ0hMDQ7dEdN6JbaRs9nhgxceu+NxjPalvSAWATaodiADyxDr+MMIHw68CBl2girqbZZOoAOpIg2ETqZxTf6DviRAtChrbs/J9iRc=
+Received: from BN1PR14CA0017.namprd14.prod.outlook.com (2603:10b6:408:e3::22)
+ by MW5PR10MB5716.namprd10.prod.outlook.com (2603:10b6:303:1a3::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.13; Mon, 6 Jul
- 2026 06:34:29 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.012; Mon, 6 Jul 2026
- 06:34:29 +0000
-Date: Mon, 6 Jul 2026 14:33:15 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, trini@konsulko.com,
- marex@denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
- Tze Yee Ng <tze.yee.ng@altera.com>
-Subject: Re: [PATCH v2] Revert "mmc: sdhci-cadence: trigger tuning for SD HS
- mode on SD6HC (v6) PHY"
-Message-ID: <aktMK89WkwERXq9r@nxa18884-linux-1.ap.freescale.net>
-References: <20260629061619.4268-1-tanmay.kathpalia@altera.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260629061619.4268-1-tanmay.kathpalia@altera.com>
-X-ClientProxiedBy: MA0P287CA0009.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:d9::9) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Mon, 6 Jul
+ 2026 06:41:07 +0000
+Received: from BN2PEPF000044AA.namprd04.prod.outlook.com
+ (2603:10b6:408:e3:cafe::2e) by BN1PR14CA0017.outlook.office365.com
+ (2603:10b6:408:e3::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.13 via Frontend Transport; Mon, 6
+ Jul 2026 06:41:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN2PEPF000044AA.mail.protection.outlook.com (10.167.243.105) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Mon, 6 Jul 2026 06:41:07 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 6 Jul
+ 2026 01:41:06 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 6 Jul
+ 2026 01:41:06 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 6 Jul 2026 01:41:06 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [10.24.52.241])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6666f5WF1239001;
+ Mon, 6 Jul 2026 01:41:05 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <p-bhagat@ti.com>, <afd@ti.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <joao.goncalves@toradex.com>, <m-chawdhry@ti.com>, <msp@baylibre.com>,
+ <n-francis@ti.com>, <praneeth@ti.com>, <sebin.francis@ti.com>,
+ <u-kumar1@ti.com>, <v-singh1@ti.com>, <vigneshr@ti.com>
+Subject: [PATCH v2 0/4] Add DM firmware reserved memory support
+Date: Mon, 6 Jul 2026 12:11:04 +0530
+Message-ID: <20260706064104.138000-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260701075021.3626094-1-p-bhagat@ti.com>
+References: <20260701075021.3626094-1-p-bhagat@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AS8PR04MB8835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 582bec31-2c98-41e7-2130-08dedb28a1f9
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044AA:EE_|MW5PR10MB5716:EE_
+X-MS-Office365-Filtering-Correlation-Id: d97b5f01-2d2b-4485-67a2-08dedb298ef9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|19092799006|376014|18002099003|22082099003|11063799006|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: aaqFeQjyy6iADt/cPwTlAz71QWHClKL06aeOLF2/qRpcs0juWIKqn8BsOIQd9+A9A5Wqu9Yi5220jd4BM5bopbcRR4uOFs5EaRC/VcwBSO8ErQzTqkbioLF1sjetLFMttHWtFXj0UsMFxCv5K9ySkJd6vojzgKdOuxa/3M5XA1fA4ExNY5d773ZAa6UlDpjbMGhvH/VEXjNM1n/vbUi2lwE73ffcGa3eRl6wxomiYZiS7JIeN3+Ct3by8ZiruFku99uvhk9SHPGy3nK9GfNOCC/WZut3VpLp+bMKzBEEF/Sye5WCsh0fcwqL4SH+eyU8t960PUart4yZjxCPFaJMhKovKRXd6reP3GKfFIsTMlkippiU+XgGKy9nNaUeg1l/fXu3KK8rUB3/5s/JMk4bqkJb1+O5n2kw9KgPGSjUSSFZq/gbb/bJVuvAGJYKFlimAlEZJpijHEiIBVC+K/K2x6Cyk9Pg5y3eW9h2ioKRUWljlCqPNieZrbfYkCuQSXEzz39Zxme+RkwwUsx/9fX3K1psBw0J8rb7H0pOd5KayfgxELWu2mMbW8tYGyHuGZvwS/HGrHXlWZ4Y8ZLwAiyEobED3bN882+ib718XzeKyGsdvpwAm7zb8itWo8EpMhf6yQac4xbWOiwZizURLvLD3M+4HgMyjBdvpzwueDZ2S0w=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(19092799006)(376014)(18002099003)(22082099003)(11063799006)(56012099006)(6133799003);
+ ARA:13230040|1800799024|376014|82310400026|36860700016|23010399003|13003099007|56012099006|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: FHXBqfGYTKaYxufa7nugAoF0CAAM+tTaHBv1VSZiyWht7MiooAzXJ4w2gxOZeVW/Ba9W+bHiMyszKX+B2mxKsrFXdP6bdVeer41KosX9zLtwW4j0c//Fu1hQCuEup8yfwZLU7CRfqdJKzf4eKhYouDmklctZFBi0NouPuBA48eOHd9EUAhxT3Hr/fcWJHLtJUTXZITdLP32OrmFYPcy4GtAfASn/ByYkWGsXRmDYCfq/4CCpIJnHpSxqERr04OM+RKDyjqeREEDD80sSUo0b04YX/GKvnYxEpGozPUIQ9nQ1inOwcxGmIKIs5lmW8of+bKAFww+sff2qoAEhmEYp/Rr4YIkRHFTcxJzourfLEcExWxogE/mnQtxle2FXYakjKOY0AlOOBvMcDtLz8igm8iJ8rZ53ws89ocBHLfuUKil9/gy1wCUUw9NUZIMtDfVTxiGHJm6nOFxfP0UfRJvU6gFFLqtWispT27RKp4MXQR2zrfUZVZ2a503pKYIVINUV0RDRxZcAYMbMPCqbAWSE96Ml5YlvG0ickg3+G5tnwzRjSZYx7Z/h5KMlCdc8ptZ2tQ0fmq2uI2xwwcf9//L24/2pb7Qn/GFYbJv7WaRLBVrdF0ojwOZQQB6G50Zm8OESnsZeAB9d4n814jfBlcbA99wL8XBrYD/H/6U1ghs6bTUUfsWzmz7FnjTuX7DPI1RSM8ZUwdk8xp8Ie/E/Pc/bYA==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(23010399003)(13003099007)(56012099006)(6133799003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hP+sVnh+LcjovW50j75SoXLzG1usT9BcwBB+P06CVURBIQuzvwi2FvVKJgYt?=
- =?us-ascii?Q?abA317bvWG6U7CF62Lj51hvMa62hidO2sJyGwwBZNcZPH86AHz8kxF53P0Hj?=
- =?us-ascii?Q?NJj0F4deWfljDEgH2njLRRO+2Tsm8Y4ss+WfPhLcwyElGO2BZeKvRGA56MIA?=
- =?us-ascii?Q?juoP9gpYgMNaTI/foQZzRfjj0flne5O5le1zcXxmO5l63zmj0HCrsTbaSg3t?=
- =?us-ascii?Q?0MSDnZBp0SjyRD3cpr1VucWTxKajP2v/itd/Zod1+dWyLXeBLkb33icKbzL5?=
- =?us-ascii?Q?mPLMqNydQLxrvlOSu90SYP1a0/cbEaIkrjJGbmtnEAR9JwqPVIHDFRwgH6LQ?=
- =?us-ascii?Q?zU64Xr2wTNdp55vzHGsLCdBMYk6xxk2TONKa8jpKXcFBLviM9DmJL9Q4527W?=
- =?us-ascii?Q?CXKGMGTlI3rZnkQMADE90k9nYqwiaGyhyfleSuVVJRxhMoMMBubF2OScMcML?=
- =?us-ascii?Q?DJXqCyoe/ITMhxLT01B/UtRu0E9TaiveOKPbavJ3X1IOhZY80GN0nGk9kvah?=
- =?us-ascii?Q?9qwe7aPlzVJ2qXIUw3fLrYzZtWRtwOtNw2oHl4RRvrvn9t6rWcRZ0GSGxA8w?=
- =?us-ascii?Q?MokpNEnfZ6xHnyBzATeONTkHs+rPg22rekLXcZLFAhLuOtpd9Qwu1akGwD+H?=
- =?us-ascii?Q?1wS6TvDGPAuHC/eDu32nczrEk8hz19n6F6IMLyt9xD/g1CUhvZjQYu5nWPxf?=
- =?us-ascii?Q?hETXwy+ieg/1ZskF9Q2VMSzxjkZJozKuwJd+69K+J96FVQSZHaDIOvUpBbQF?=
- =?us-ascii?Q?yLlyMqSDxG8IXVEm4ocvYEk5+XD+SP4DuAkSBpBgsVmKYDZG7mV3mQA5BG01?=
- =?us-ascii?Q?aiUKZjjCUOC2xzwkiXl8OmNOPPXlFvKkYbp691PMaI22xGUMp1+FWpV1vrzE?=
- =?us-ascii?Q?5lCq63gCE3wc2U59TT8AaMJB79keMEH2p+m1fAdr/ZYHLnvyFCq+Q/fSP9VR?=
- =?us-ascii?Q?d9/Ya0XrgdWB570hbyi/h9ZrFc/wZF972wLECrYHhjl5B4UEjXbttUUH0odr?=
- =?us-ascii?Q?sDcPeUkHgdX3O6U4ZlCtDItHyugG5tqhIqnLGC9nR2TJHTTXI50CNpLnqy3Y?=
- =?us-ascii?Q?1PKDaR9y0/C0+Ng97/WUqm4fAJfZ/IrAKdWKwQ38LABH/jBJrpJXWdjyD7BE?=
- =?us-ascii?Q?WsZWvpmnoMOui2d4iRLe5oWDrmqQ7rT4gnuQDhrJlcR86eHTtjIujipp8x+L?=
- =?us-ascii?Q?9JE2xdvvOgu23Nll1wJ7Hf9yaWsnkSiv1/JDXnT+nDtuu/puaSdOx+Esicub?=
- =?us-ascii?Q?g+Xz6TaKzemJfBjWLVVdqJu7FizlDXxS5foX0aYDZK9uPX13sXYfafQgQq1Z?=
- =?us-ascii?Q?y0TrSXpQA0OFNrx2m43/TBsVuv+3dQRkCu4wcDSDBGOhB0yjuT91FCwmvq+G?=
- =?us-ascii?Q?153wqY+ArC1bgTgsoagCSd3GfMsSsJdFJ0vEzQDhNI1bnYmlm/7P/4I4ehNz?=
- =?us-ascii?Q?X3WxGYs8hdeJQUCobnYQW+Yler6IEW/ecXObfuBQ/vbUTAtqgtn7pHx5TSkV?=
- =?us-ascii?Q?YlxyCQwcqa+XxwvhG306nRkOM8OQMCFuPIDzeEvGxXvsB6LAvawQP0QEEf9r?=
- =?us-ascii?Q?hhr3+9gfBqggBEa6d+f4RDhZm0Aif1CHfM9WzyE2/4O/90UhlqEuqkEMuE/n?=
- =?us-ascii?Q?e8N3frMorCwrGQ5jJSvPQiW1d/BsISNC/jcZiMSFt7Tl8+fxeYpjdSfe+bqy?=
- =?us-ascii?Q?UI4J4x55EGxGLA3PR/JTjpJ+X2vQYg5tVZEzpMBXU3+id+fzC+NwZdj4CPbB?=
- =?us-ascii?Q?R2xJirp2f2pVqLEuHNYV4kwUZuhHWdavUHnATxzTmoImLeRIM64T?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 582bec31-2c98-41e7-2130-08dedb28a1f9
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 06:34:29.8409 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ehfdzu9hLSisOYnkBcgUfTp5hx5JAU61u0hz8q5MXyofMH93P6IIRIoOUdwFCSKX6uiD6UUtC173cIljj9S0IMgY1SF+sdt4/ejy1BRk9uiW0uGwfxdqAWorGvbItQmG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8835
+X-MS-Exchange-AntiSpam-MessageData-0: iDtr5JF88I5vKxnD6M3PE0MKUhCiydcchJBIv1klgX4Ll92bY+gqDHNkWRYmMTdE0xggleScroIv0YeEjg9dmQINRpwoA3kvnPwPgajaLK/RZDl+WGCGS9tusPnVVPS+SQqI/eh0NsYY4s94yWbAasNHDIhR0Pi7JnLBWM2q360PTIcFue9bTax8SSZf8aiVPZRlKEodBy/tYoJAc+uvBM6Hr4SKfxuycBubAZ0lExUGeWaUrXVl8eXroQkeeDjCRIRGw2PFxP64ZYCFxe98f1f89YM771cRC5IhYJGgjnFeY5KmmTQu3KI3EOYip05z80gOR8ey6A04cELsIgkbjPpfx3kLdoQTvaXsc7rRbOP6slkSSOk3JOBuFt7MD11WgcxdNttW3Hlbvckoty2xtggHc6ILPlK42GhTIOFGMManJ1Azc+4JRCwZ1WbdMNvx
+X-Exchange-RoutingPolicyChecked: ozLRLFbCnwmGfy4rtWhuh7JCnYGI7Q6tUZu7HadtO1fXKVx2zWFP70jRXsNaBQ69kBVFaKEpQJBCfORDuJpFgr4q+jjGhazDbnXAo8FThM1fSJpkmu6/+rDcY6IYhtMr1t9kvAo+g3CaAybnh87t1bVD1p7S62kfIQOBKC5zaCX8geIYJ/Z0bYIdGdy5/AR2LzAv4vKtDyAn/BmIJkePyNCB9Vuci0kZMemCViHJptiQjvep6/pTIQ4hRatsFpcQ9jBqKS68kBrpkOCnSyAUm1u3TiPlKyHUjMn3iKUT6XK1474g4/VTORte92L2q49NAKK66aAt/h2BTstrbhy4pw==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 06:41:07.0877 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d97b5f01-2d2b-4485-67a2-08dedb298ef9
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044AA.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR10MB5716
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA2MDA2NSBTYWx0ZWRfX3yWh/W1AsyuD
+ NrFZHffgjbatNHojokl/K9xRkWRoSijaNYKVuh+4iVU44ypx7PALfJjvXP508hfjCDD3OuPJDZo
+ chwgB3WNrGmeuIwozO2eIYCrozAK4dVolrcl0u++2DbmZ1bUeAr48f/w0hqDYVX416Ny5Q7PSsK
+ A8Ih7VLWdvlK2IJrJU54yalTEchxTZv2ja2pKpvq4Ilx+MTJlNujSUlKhL5Rxjkvv/OGoTwxP8V
+ PU12mXWaXDZ1QuwjWjSbvHN/8iwOqb8cQ0GmffM/DIlBG/TPJBtORYhBH6URqpVw1//+GPeVDos
+ vsqe3Gy0T6d/NTqbyuFEMchu+WGkKWqnhsH+xhM+jAEGRldjfa+iKasT5E5SraHO14J7Eaoch8z
+ 8MurQVLkJAd/2onslfMhnp1f5fIummyPGVTL5PvYcl1+46u0/CKYK2kywoW9x0BgJUjAb0A/VXh
+ EXLiAOdOlhK8SSIjjDw==
+X-Proofpoint-GUID: gbQcV3ZXVqoMDtNf9F1xRG4YWu02e2zo
+X-Authority-Analysis: v=2.4 cv=Ksh9H2WN c=1 sm=1 tr=0 ts=6a4b4e07 cx=c_pps
+ a=FzHw5hv2FvkecWl+Aalm1A==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=gO1vWkAQAl3rybz1DQOp:22 a=VwQbUJbxAAAA:8 a=IpJZQVW2AAAA:8 a=sozttTNsAAAA:8
+ a=mHYEv6QFmMjDamXG3QIA:9 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-ORIG-GUID: gbQcV3ZXVqoMDtNf9F1xRG4YWu02e2zo
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA2MDA2NSBTYWx0ZWRfX9+5eNIXF7IOS
+ gm+NWDlT3MoMUY2ITYHn7LZiYLjhgyaeT1ZAU+jXUPbxmDxaVO4IBEdenY1oArKELcsRUHcCpQS
+ T/6jsOL2BwrkpvkU7VHgMjJYitvR14w=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-05_02,2026-07-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 lowpriorityscore=0
+ suspectscore=0 phishscore=0 clxscore=1015 spamscore=0 adultscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607060065
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,46 +181,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jun 28, 2026 at 11:16:15PM -0700, Tanmay Kathpalia wrote:
->This reverts commit b42c67188c14 ("mmc: sdhci-cadence: trigger tuning
->for SD HS mode on SD6HC (v6) PHY").
->
->The reverted patch introduced several issues:
->
->1. Non-standard tuning trigger: The SD Physical Layer Specification
->   only mandates execute_tuning for SDR50 and SDR104 UHS-I modes.
->   Triggering tuning for SD High Speed mode is outside the spec and
->   is handled via a non-standard set_ios_post callback rather than
->   through the established SDHCI framework tuning path.
->
->2. Non-standard device tree property: The patch introduced a new
->   "cdns,sd-hs-tuning" DT property to opt into SD HS tuning. This
->   is not aligned with existing DT bindings and bypasses the standard
->   MMC capability negotiation mechanism.
->
->3. Incorrect tunable mode allowlist: The sdhci_cdns6_mode_is_tuned()
->   function includes SD_HS, UHS_SDR50, and MMC_HS_400_ES as tunable
->   modes. According to the Cadence SD6HC IP User Guide (section 7.5.2,
->   Figure 18), tuning is only required for UHS-I SDR104 (SD) and
->   HS200 (eMMC). SD High Speed, UHS-I SDR50, and DDR50 only require
->   a PHY settings update from the pre-calculation script, not the
->   tuning procedure. HS400 transitions through HS200 and reuses its
->   tuned DLL value with a partial settings update. HS400ES only
->   requires a plain settings update from the calculation script with
->   no dependency on HS200 tuning.
->
->4. Tuned state management outside the framework: The patch manually
->   tracks tuned DLL state (tuned_mode, tuned_dll_slave_ctrl) and
->   restores it across PHY reconfigurations. This duplicates
->   responsibility that belongs in the core MMC tuning framework and
->   adds unnecessary complexity to the driver.
->
->Reverting to realign the driver with the IP documentation and the SD
->Physical Layer Specification.
->
->Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Hi,
 
-Applied.
+On 7/1/26 , Paresh Bhagat wrote:
+> This series adds support for DM firmware reserved memory fixup in device
+> tree for K3 SoCs that use separate DM firmware (K3_DM_FW enabled).
+> 
+> The series includes:
+> 1. Fix for phandle corruption in FDT reserved memory fixup
+> 2. Enable OF_SYSTEM_SETUP for AM62D2 to allow device tree fixups
+> 3. Add Kconfig options for DM firmware reserved memory for other K3 SoCs
+> 4. Add DM reserved memory fixup implementation
+> 
+> The main issue being addressed is that the current reserved DDR carveout
+> for DM firmware in device tree is insufficient to accommodate the DM
+> firmware binary on AM62A7, and potentially other K3 SoCs in the future.
+> 
+> Currently, the size is only modified for AM62A7 SoC. For rest of SocS
+> existing values from device tree is taken.
+> 
+> For vendor boards, please verify boot and check for errors if any.
+> 
+> This series depends on dts update for effected devices. If "dm" node is
+> not found then the existing mechanism creates a new node with same
+> address, which cause memory overlap issue.
+> 
 
-Thanks
-Peng
+This patch series conflicts with
+https://lore.kernel.org/all/20260701-topic-am62a-ioddr-dt-v6-19-v7-0-e9db8b16821a@baylibre.com/
+Above also includes fixes for incorrect reserved memory and new layout.
+So do not merge this series. I will send a new version if required when above is merged.
+
+Thanks,
+Paresh
+
+> https://lore.kernel.org/all/20260630150919.457160-1-p-bhagat@ti.com/
+> 
+> Change log v1->v2:
+> - Extended DM firmware reserved memory Kconfig support from AM62A7 only
+>   to other K3 SoCs.
+> - Added memory configuration for all K3 SoCs
+> - Update fdt_fixup_reserved_memory() to remove redundant code.
+> 
+> v1
+> https://lore.kernel.org/all/178219072988.1099376.16053199642199625548.b4-review@b4/
+> 
+> Paresh Bhagat (4):
+>   arm: mach-k3: Fix phandle corruption in fdt fixup
+>   arm: mach-k3: am62ax: Enable OF_SYSTEM_SETUP for AM62D2
+>   arm: mack-k3: Kconfig: Add DM firmware reserved memory configs
+>   arm: mach-k3: Add DM reserved memory fixup
+> 
+>  arch/arm/mach-k3/Kconfig        | 21 ++++++++++++++
+>  arch/arm/mach-k3/am62ax/Kconfig |  1 +
+>  arch/arm/mach-k3/common_fdt.c   | 51 ++++++++++++++++-----------------
+>  3 files changed, 46 insertions(+), 27 deletions(-)
+> 
+> -- 
+> 2.34.1
+> 
+> 
