@@ -4,144 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F1FC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 03:38:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2973FC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 03:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E57F84686;
-	Mon,  6 Jul 2026 05:38:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1424484686;
+	Mon,  6 Jul 2026 05:42:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KoCRQYk8";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="fV9bYmNb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC1A9846B4; Mon,  6 Jul 2026 05:38:18 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 4E5D6846F8; Mon,  6 Jul 2026 05:42:32 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F076284105
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 05:38:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D33B284105
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 05:42:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kUE97qLRxewc9jVdiW+WdrhzqZOE8uIw0AOex9YVpYqPQmjdmSZKgVvEFAEqifOd31qWNiX8cQEYXJCi61aB4UnaRoFeSw+kx4EFsegKCcI2FmhSA9FjrSb9Ug3yJfd1VvmE9a3p6T/H7ECpUzYw24OZ5CQdOw0fAQN4L4anDFutkL841N17jMalY1gBrCokGtG3uQ0DtFR3Dfj3ZmWRR2MfJ1xKvVgEgkqvKVZetWctEdCuTJ73InZBHedROHuTcm1mhuIZzB15/dvyEojWuWTYFV/EslzDbAu1TqaOLr0YK27sibJ+8e63tdn7SX/1W2jHLIYgGoghnQKg0c1tbQ==
+ b=ywYU4dQOyxaBfBH7Y40cexWha6ELOkpNI52nKr4Y/Dwwev64gTMcSspFahlBgn+1yU0HnquEnTUSmYfgjHps8NLgXpQwPCY/SMWDn6zpzvQOqXDTIQ2zYHUT/hoeZNzz0cN3od9aUQcPSKBpJE/gKPu3TszakzFxFFfGaFiSL6ogT2sUx3BgesGgeYhen1Ti5nirH2K04mFsRe/ODqlUsgvzoSxIzlVffZST5uRTq1/KH1QFJDYFWo1x+8OO7mjfWXMYqV6Szne6jdU5q5Wk6rylJfgfCOJsZdKCTWD9Q0+mPl7kL0wF6e9z+olfSonk0+n0HmCEWKLjRpI7p3xlrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cKZM9AK7250VjIVoqNEsmpWYluhdBG1Vd6kOFGX2Uqw=;
- b=UDe4J+/aZjy8qLa6qvrQA8C5A8QNfZ0Jzh0Gr4YYfvVNZEcOujJQvbTn5WT15zcvQSLDc3mwdVrujG08s+z7VcDD9PvxDkj9bpzUd4GJqWeaeb01Lm/iKF2HdQGia+QiMQzcgCtaI7dH66I3PRbFbLUNKl7xG9QEYJ3TsDk72oPXn6Xlz21tegbsvLhNI5Aa3N2EFCMExbMWCwzAuDmHiQTPUTwk5KMPz22ow+fPJWC3afq4t07TIEN1Hyvs/bfvBUORgWJ4YEV8TfB3lJ/zAq0I3Eq6daksmhtM1l8BGN/rMurVn8UkB/Q6nR/JQ6EDDfJnCfs5TZ22fClokLr0xw==
+ bh=V+qDnIXGB9Lj6UtM46J1fhb3MoQRc5wxL616CgpIjQs=;
+ b=FEonrIb1iP76OJ/w6lfFgjcr8vaFoVWN5Ge6nJNQPXP8HoKtFarSvPdOYOzGxH+rYtq2HfirnHJ91x+TSGvAvCsq7a7sEW2PVuaAI8zz2PCz0CLFDsw1aWdYjII54zK8gU2JzDnOAww7L0/E17Kbh6Gt/gGoA1ZrJH6p0Rsvtb4sfhlFwvxdWCYRSJHwvJvGfEoAJKYz6Da5a26agK1hdUhBcBpoR1qsfvB3rYma3CoybuIg1/3XqLs2JFKMUy/2cbReU+p1pmkg+j4Gd/Pq3QPJMamvz09B8SR9/4rDVFK67KhwCShq5SEgAAj03A2osbr9aAj4n8BA48mEZTnWpA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cKZM9AK7250VjIVoqNEsmpWYluhdBG1Vd6kOFGX2Uqw=;
- b=KoCRQYk8QAx1C9P4mTV4g8q0v3ICMzXcMtXafjQGR9b+749TUKslmX6t1Rb6FSwA9jwp7dEXu35Xz3m0mFMbUXhNm2NSux08c9aE1d6qdyyYYCkQ4GVBz/7PQV7MYducWBYIzkHWBP4qsS3p/we/7t08sbn+fPrV3g9HfyIFO/rvBh4+JjfoWdwMjzj5TUuMKa+tyqtJSwktY9vRWzg+UjFhr6K9m5KNL3dZHHaj8gV8g2HfMR4hZjoD8ur8J4+f61kRf2vG76LZARSbslbiatFqTm92zu/BA3K3M0gvvnUytjRuFaU03GYsvxdEAH6LeAmuwwbLWKw2AKseNUH0ew==
+ bh=V+qDnIXGB9Lj6UtM46J1fhb3MoQRc5wxL616CgpIjQs=;
+ b=fV9bYmNbP3dMQDEL/c9HiU/iHOX/vJhHTiCGs1AMp78dXAMKDky5MFSXVW4RC9Q/1shjbgHIAVXopX2OXNJe7eq/12Tl0a1OisUQOWRYocFkedkFjTnb5Hj0G0JlVcVHKSov4+pdLrhlVjOtmXie99y3oXEVq6g2R12TNe0jQSVqQwIgxiU7gXej0qgdBUokP0hvaQuCsHfLG6HPKK1hQ12WqSVtnu5Cj832KcsdQUr97k8TwThm+yiJaFXSefbcRyBoMl/sNy5rTcBDm0GwdGDGfTqhYv1hv5dOTK7XlVzq0V4FehEEgLw6u6NKXKKK5g51z8CAWEOcqUrOkQs4NA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by AS8PR04MB8945.eurprd04.prod.outlook.com (2603:10a6:20b:42c::12)
+ by PAXPR04MB8623.eurprd04.prod.outlook.com (2603:10a6:102:21a::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.13; Mon, 6 Jul
- 2026 03:38:15 +0000
+ 2026 03:42:27 +0000
 Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
  ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
  ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.012; Mon, 6 Jul 2026
- 03:38:15 +0000
-Date: Mon, 6 Jul 2026 11:37:02 +0800
+ 03:42:27 +0000
+Date: Mon, 6 Jul 2026 11:41:12 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
 To: Vincent Jardin <vjardin@free.fr>
-Cc: u-boot@lists.denx.de, Alexey Charkov <alchark@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- David Lechner <dlechner@baylibre.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heiko Schocher <hs@nabladev.com>, Heiko Stuebner <heiko@sntech.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 1/7] pmbus: add PMBus 1.x framework, CLI, and binding
-Message-ID: <aksi3r4myOt-Meqh@nxa18884-linux-1.ap.freescale.net>
-References: <20260702171618.1773206-1-vjardin@free.fr>
- <20260702195619.1857591-1-vjardin@free.fr>
- <20260702195619.1857591-2-vjardin@free.fr>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Subject: Re: [PATCH v2 4/7] board: nxp: vid: introduce PMBus framework support
+Message-ID: <aksj2G-G0onkMunB@nxa18884-linux-1.ap.freescale.net>
+References: <20260702195619.1857591-1-vjardin@free.fr>
+ <20260702201542.1861631-1-vjardin@free.fr>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260702195619.1857591-2-vjardin@free.fr>
-X-ClientProxiedBy: SI2PR01CA0018.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::7) To AM8PR04MB7874.eurprd04.prod.outlook.com
+In-Reply-To: <20260702201542.1861631-1-vjardin@free.fr>
+X-ClientProxiedBy: MA5P287CA0203.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:1aa::13) To AM8PR04MB7874.eurprd04.prod.outlook.com
  (2603:10a6:20b:24d::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|AS8PR04MB8945:EE_
-X-MS-Office365-Filtering-Correlation-Id: 070deabf-e311-4622-c991-08dedb1002e1
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|PAXPR04MB8623:EE_
+X-MS-Office365-Filtering-Correlation-Id: bff37e17-c45c-4cfb-1c0f-08dedb109938
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|19092799006|376014|23010399003|7416014|56012099006|18002099003|11063799006|4143699003|22082099003|41080700001;
-X-Microsoft-Antispam-Message-Info: k23z5SV7z5uIPGlAMEPrZhKWrSDWCNHnvdq+1T5vvuLXo8tBei2BkmBd/2fPlJKWJUcPSJzm25WCpGLwERVIF3LEMt5/i7pfYwfoX9QuNYXC4kkdxObjxTOpabVqAdmmpjgxl/C3PSf6d3KLx/rMbGS64PK0rHXQ51uMvfRQ+N4ONUlixCldrW5zP2KmB4GytW8taos3yBgkq2cwMt+vRy1A0yEuYxGU61XVQsizmm9zaWED4KCfWOS6f3mp5frYfxOeSLiCvChbLshTyc1XVgxvS4x4gTCDOWUUjzCc1qsK78Tx9hPDH956KeGXOf/o7YLXwqq7cPj9yxKo3jbkZ4xSgvm0HZS8z6ynpG1e9i+2ajsd44HeahVDeD+cZswgvqHU3oOxPvBeWnAj5JZrin+Bk3FKil5zca2RokqPCu/ftR3b6e0lSKwFDXhRhmLY9jprDm99b8jJSGxVRavvykgvnfuVZyJyfkQpawtQfMmy142cJ5IEuSxzgWqM7p9Uz/Kf/lBxOzSN1zy0nRMeA/ZbjgLivjNs1HQ83+TufPFbHGl3VTE18AR746k0T/6Hckqj2Q975Yup4VY3RNcaijW1cLWwgQTpZFXR36ScJoxCo+AOl4W7TwOmOhHuzzex2e0LQv1d2du7apvQChPDlpHTcz8DmlSdZsy1x0jMgIEMgU6VVQ+KPCtsBMaz1q0aU3AyBOCWmwfuQeAtunGU3TiKEkrr/dL8wQagPsBK2uM=
+ ARA:13230040|19092799006|1800799024|366016|23010399003|376014|18002099003|22082099003|3023799007|6133799003|4143699003|56012099006|11063799006|15866825006|41080700001;
+X-Microsoft-Antispam-Message-Info: G3Et03+LwmhClfH+klNimOHobt5ZgUFakaI1bTMleBn4byJhuOigdAWf+2tdXywbTXriFNJ+29jgfSQcBceX/t0UK/liHXxJuPqwOz7r0SnoLR8TN/zbRmkt/FrgUtQh257pAoXDOtWPtNUSS/HPtns9lEgm8EKxwHx3Jv6HpWP4XtGw+pfLNJslQjyCsVKFIxXXMywTrjQsBVrQLLZ9aaZlJkaG2O2H0Kwx1N4Q3TNhEP7pyw30k9RknERG6dHjz7/tofdDYMWA9KuQKrp+qpCkkTrcLkRAeEvm1yOwBNa8PKCJTmdnhHp9pk6oX5InR+b8RbJgOWJy7jNQowEelddv1nAsfi2xZVU4QReb0Tcs2ITz+ZjiG6qQYV+T63reW61Zns8VfP39G0htt1ut0DDt80bsz1WJ42Lq+jQuWKTZJJbvWigvwDByiB1Fwv7TWVzhLcJyNp9x49qoNitwawfETxW2vXoTpIKVU37y7Y+vdkxXLUD6qEYl3QKKBQPLONyCVV6/K71z72dhUt5bGBg2juUFbIEvIrixSjQ90AvVtFKjnFtL/jWkLrwxWAmhS/jdM4/Ku9vMvfqI5ZgYQfQKeb5xHTxq1BYJMjmyUXX79qRI4EnVsnFV7/+zN5GjGfCTJOEZMpK8LycMtRXMwgtIdMmFcD4h1bCx9y3hu4pTg5tCxnY7OXqt/1jOOwRE1Ggj+giC2lNgr1c7GvZVqJZvsWI3WihaI7emSlPGAgaMEoo9G3zH8kIpqd3bLoUd
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(23010399003)(7416014)(56012099006)(18002099003)(11063799006)(4143699003)(22082099003)(41080700001);
+ SFS:(13230040)(19092799006)(1800799024)(366016)(23010399003)(376014)(18002099003)(22082099003)(3023799007)(6133799003)(4143699003)(56012099006)(11063799006)(15866825006)(41080700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MNDLp7rccMsPzZoN8i65OraHtDNABP/voRCkffxaFFTsetT2h0IfE+OC6aiE?=
- =?us-ascii?Q?EoNx9z+OQq+lIbexwhMNCbfftPFVo3O0HPEt3BVcgK6hFo+bsrKGBI2pDxDb?=
- =?us-ascii?Q?vPr0QLwb2lN8Tasn3tpbW2Re5kw/Bi84Ulgr/NRJ6oGrNsTJz4DJjbAzqcm0?=
- =?us-ascii?Q?W4mYufOS2T7DJ3P9eGz2NBQ+0gMNA1pra+kQNX3V/1+LEjG3+2qGUEXMEVNq?=
- =?us-ascii?Q?WdgWIcTsmhGVJkHgSwMoz5xNrdnvwpN3SYglnGdv4XQ9yo+L4fofV+UZyjzP?=
- =?us-ascii?Q?7dODSI4Puef9jEuO3Pyd3mwG0rrPuXVYiFW49pbR6h6z+VF6S0sFOQqh5sx4?=
- =?us-ascii?Q?5SYMYKv7p+Z1Tyw414X1RQn0CJQlvcvQWO7PA1tl55MDXQJ4N/nZ1QxKlELV?=
- =?us-ascii?Q?xZmEZGOgLTxQMicDJDPT2Cfd0UaO+Nv3En91xRB3qca1ije01TUUpvHJqziI?=
- =?us-ascii?Q?K7qkmfTD6dvLJchT41dDG8xOo6JDNN/Hf9iOiF7PAhKs5RE/BQ7zWhYWnKxe?=
- =?us-ascii?Q?yJVx+A79XWT/c1AFS0ybCEcVwHhJj2B1I8i7p81PufCm81YSPHuLaW4XrDxf?=
- =?us-ascii?Q?8bi6t5ma0WSA1qWJn7W/mF4NAHoxMd3QaPtwYpK6UztforfWGCniA8W0mXtb?=
- =?us-ascii?Q?h/kP0I8pSOpJO64cNC5Se2LZu3Rjala2imPVBzy/MZU8m+fhWBPQdP+L9zsj?=
- =?us-ascii?Q?PvN2GZby1/XUZe5zDvBgCe9VG802gdYsphYyQpkzw2kNpPL+CtXOPSNIF/fv?=
- =?us-ascii?Q?yYM/9ln5lleNGJEQ8Ue7jIZu2O89PNaQgFM95XF+z8C/3boXaA3kVgNaij+6?=
- =?us-ascii?Q?SmDYqliXWVKg1xFL3nDG6Ab6qGIQqFkAtFpr84BvyoTWoKW5yOOf1NpJaikb?=
- =?us-ascii?Q?tHf+dW6eanwqwR+1Dpmbq4CcbSgy/Kj2XqVtKjqX84rzrBbWikYMumemoc2J?=
- =?us-ascii?Q?jGtX509Oc4Trie/8qJPaithpUN5U+yQMaJ8JQGABiFsi735EJctb5E+wnDCE?=
- =?us-ascii?Q?SN5qcrQZYHuKPKGE/lJX/TNg0Knnb8BUz0cLuH0D5GISCaCHO8oD7Ff45gc9?=
- =?us-ascii?Q?hcEdmOmiXYFW2eUrcXlewnhTxPusALsaYpCgkSGCCM2Sbh5uKGqNQ5Hq32jk?=
- =?us-ascii?Q?eFif50qeqBzleQXtMXV7NCRlAworuwPGuLpCjYaNpgEqHgRnHfGzwDuUJoZK?=
- =?us-ascii?Q?EwjG3cdH3WCZ4aKXLhvKdAtJdTqAkK9/d/uUlaXCGeNREbGRrhE/0L/XxvcW?=
- =?us-ascii?Q?0ReefhxytEiOC7uDhN5UqqpEBQpJ2dJkOy7nfZS13x92xff2/GMR43Mr+B6G?=
- =?us-ascii?Q?jY5D2sQlcn9kb5iAeaVLkihEn6jhNIewb9Mf8T7WODczzQ0JlY6arpfvcnoJ?=
- =?us-ascii?Q?NI6UuNUCbMsfn2oiHDPCqV3mbCNqawOLehf18s9LHahEw+3YKeBnj61mPB24?=
- =?us-ascii?Q?6VGo97BhrauMPrWjX3whIx+bu2dMA2D6qQHKel+eNDDAcOyFhjWgDjg1Wort?=
- =?us-ascii?Q?qjIIZEYkPKpGhOx9IfwPEn6nb9RNYg2ZiPKq5DqQghF68jQF7MhaPqfddUpd?=
- =?us-ascii?Q?LRHp84THtexOBTe95LKEydfqSwJpXEhY58AotIGEfPw6uNLDbKQyyN//GKIr?=
- =?us-ascii?Q?0nXWRC5XOZwfpAuzwzTax6wYtuM3z0UmwuJQEwF86D6GSOhG7MvW3pPmxTQV?=
- =?us-ascii?Q?tEW9X8rnMEXPGxbRpYOYjtd3XL9RTkHvn8zr0MamC1OeVoc1hq1cdwoUfWb+?=
- =?us-ascii?Q?Xrb3I9SYDYDB7TxxhONIXpA17GYJpdO9mYnUzEbUKVN7MB9EAxij?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o+G6nlQJX6zLIJT2emfbATyMyvYRaSc4s2MmsOUIABjZXL+S+ntYdTQD0VSd?=
+ =?us-ascii?Q?EdzD5IZXrSpDbZzhcKqk9DUFqKo4KmH3G70oa5JSxosNNnPZvUUU/+pxUy8z?=
+ =?us-ascii?Q?kTPF3FFfmFPyw94QmePrUwW0m64FcUscPiNdb2HgHiTx0oWmkKDKDhCIQ0Vg?=
+ =?us-ascii?Q?FzzwFP+6evS24gPkwijeufxjrAu96ZTl30e04A3qAMGCfajslTqmq0i+0bbM?=
+ =?us-ascii?Q?6aurfawRk/ef7S7ou1u7XttbRCN9r5Z0vHbnZlCVxXOhtNaLgJugvfYkJOnY?=
+ =?us-ascii?Q?UYCKBA/i6DCWT8SWClO4F4fybvw8l3D2jsY4plimnMKSFqEujARyEOZBmDpo?=
+ =?us-ascii?Q?4GVyNmE2TIJAzaqsD3rtAlE//mxlkd1j9nGEaCpcVMBbpOfuKuf7Tyj6HsMR?=
+ =?us-ascii?Q?8L83NsEqQGf2rwxsbjmx9jDLp6VFo/S/BpFmn1eXTU8P+5cgJiGtd9ZMivak?=
+ =?us-ascii?Q?ULG1mjoJ8LArKLIWgpFXPjaTuBw/lTbWJTxJIDGR3KqXgSsmHzMzltvTs+G/?=
+ =?us-ascii?Q?MNlS7zQQlua//HJvLWkIIU9q8rVSfQX8IKKkPVs96KQKOS8echZ/1TUmYIbQ?=
+ =?us-ascii?Q?AaHXAonqjMdesUQ67/cztHYZroRFz4KfEWXxip6q8Rqk91g6QuY7pGiYg015?=
+ =?us-ascii?Q?NUGeWitkCopzSQTrk4lrIK0ckuhqs+aXFUiBFWEmH+d0rkwtKgFztk9t+Oqc?=
+ =?us-ascii?Q?V57VVj+zwt/wj66DMgQV7APfx4+GDTUbADd0ef42JUy/bBA/N6n0hUKlpS/5?=
+ =?us-ascii?Q?nSfQLWKvDVEwo+Sov5lSpJ2S/uUKC/lRhF1g7eWffYmrE7VyJhX2oBHBsTGl?=
+ =?us-ascii?Q?18Y5A0ejLzruQuC4yf6APEUnOp7798PEriMEfrpZYTMC+/aEOyWupACR5kDI?=
+ =?us-ascii?Q?lw5grKt/gwcRHA6JKFofzeg+6mmfB4vVr9LIf0QmHZ9R62hcJSK8ODDoXDAz?=
+ =?us-ascii?Q?OL9p9vUyevMlujvmotjgT+vqs2ar0LounyjyaV6D2MUkmgakzNeel6q7QZpL?=
+ =?us-ascii?Q?T4uVfZ9w9GcirL1kwI42nlcotPZ8Lrz05pjKm8/35EVPfYiTabfBovmWSYFt?=
+ =?us-ascii?Q?NN0CB+EiM+OZozXb6N3LopKFt5ETDxMYi3LaKcPapqyANIeyyX/WvvuOmDzX?=
+ =?us-ascii?Q?ZRLINURU1m1uEostfXFmVzDYPjU87p4U84yqs2v3HJDGVfMidH9iPGlL73O4?=
+ =?us-ascii?Q?8nnZEIJiA0aCHx1Q8fJiqljQiZZ0rgN8d1SJqsrVdaj5ub5TgH/GkLn7L44k?=
+ =?us-ascii?Q?p5D0FQo4Phq/kGpZjctnV6idskqm1U/TwhKzL+Grf7lIxvaWhhwYcNS4abSY?=
+ =?us-ascii?Q?0D1jJp3wXrhgdGicYb7sCBC+X4BZq5utq3/WB6sv7j84ajGMnFdGI5M9qaY2?=
+ =?us-ascii?Q?mDomHgAaHsabdXyyvV4IjsUvMLZXlhiaL05Q/hAbiMDQDTKWwW8se76E23YI?=
+ =?us-ascii?Q?PY8CVzE5mc9X6KfBia+rY7LLOQhvss32oU9rqdx2hjYj/ZEhZjkVOI8NUm7P?=
+ =?us-ascii?Q?VWtQ5Ng98oWqVnnTWQZ88HjrShRsr2ZhnvVyiq2X+VeMcoMVdBLJv+SgvM/g?=
+ =?us-ascii?Q?LhjeRE66VE8fhGiv2HHMo/0iK31K39oaHFhuz8u7Xbwcrs8Y/8kZbY7oKzeU?=
+ =?us-ascii?Q?UskVZ3xw7M1XpWnwb6r7JHoLTBe81M+Czq9cBOIlBVbxHpFMeBfwJf4XeKU9?=
+ =?us-ascii?Q?9+WEbcL13QFgeqD9GmK23FlbYEHGl0lwTf3c+QDEF7p9wLqTp+CfUtQyDfnr?=
+ =?us-ascii?Q?yQq9RQnL/Lno3k6HqUHurq+o4w9TazNAhcmffr+GFcqRjMTzYi9j?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 070deabf-e311-4622-c991-08dedb1002e1
+X-MS-Exchange-CrossTenant-Network-Message-Id: bff37e17-c45c-4cfb-1c0f-08dedb109938
 X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 03:38:15.0352 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2026 03:42:27.3863 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kmOGClZk1J6PN/yf6eZde5Cz2lfQOwfDS/eI/rKaTanvykfnj7JKjlYhQqpnb3UVT85jo5wYaWQbYTMQ3sO48A8tPrsWvz4Tfm2Ae+qTkg40GJG3nqwuJhrRuPL32J8D
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8945
+X-MS-Exchange-CrossTenant-UserPrincipalName: YrAFknmWKDGj6buXUPWR8vjP4wkXqhu9SHRGYbNTZw7hfeRWrtG2PrISQavOU1a6OeFy0CUZ/99uIt2p09QYo/KzSAzFzg1S57GeiQfHlI2CpK/nV8z07u4UeM7qCXgZ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8623
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,54 +137,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 02, 2026 at 09:56:03PM +0200, Vincent Jardin wrote:
->Add U-Boot's PMBus 1.x layer: the decoder/transport library, the
->pmbus CLI command and a generic DT binding.
+On Thu, Jul 02, 2026 at 10:15:42PM +0200, Vincent Jardin wrote:
+>Wire board/nxp/common/vid.c into the <pmbus.h> framework so the legacy
+>NXP AVS path stops carrying its own duplicate copy of the PMBus
+>protocol and instead consumes the shared constants, decoders, and
+>transport helpers.
 >
->The subsequent commits provide the UCLASS_REGULATOR adapter and per-chip
->drivers.
+>vid.c is the legacy NXP AVS/pre-kernel voltage-trim path for lx2160 CPUs.
+>It does PMBus to whichever core-rail voltage monitor the board carries:
+>LTC3882 or ISL68233 are selected with
+>CONFIG_VOL_MONITOR_LTC3882_*/CONFIG_VOL_MONITOR_ISL68233_*.
 >
+>Before this change the file kept its own local PMBUS_CMD_* command-code
+>defines, its own inline LINEAR16 mantissa/exponent math, and called
+>into I2C through the I2C_READ/I2C_WRITE NXP wrappers in
+>board/nxp/common/i2c_common.{c,h} which is a parallel implementation of
+>exactly what <pmbus.h> + lib/pmbus.c provides.
+>
+>The intent is to make vid.c an consumer of the new PMBus.
+>
+>Compatibility with the former support:
+>
+>  - CLI unchanged: vdd_override and vdd_read keep their existing
+>    semantics, return codes, and diagnostic output.
+>
+>  - I2C transport unchanged on the wire: the framework's pmbus_*
+>    helpers call dm_i2c_read/dm_i2c_write: the same DM I2C
+>    backing that vid.c's former I2C_READ/I2C_WRITE macros already
+>    routed through on DM_I2C.
+>
+>  - Numeric decode is bit-equivalent: pmbus_reg2data_linear16() and
+>    pmbus_data2reg_linear16() implement the PMBus 1.3 Part II
+>    mantissa/exponent.
+>
+>Signed-off-by: Vincent Jardin <vjardin@free.fr>
+>---
+>
+>(no changes since v1)
+>
+> arch/Kconfig.nxp       |   4 ++
+> board/nxp/common/vid.c | 104 ++++++++++++++++++++++-------------------
+> board/nxp/common/vid.h |  15 +++---
+> 3 files changed, 68 insertions(+), 55 deletions(-)
+>
+>diff --git a/arch/Kconfig.nxp b/arch/Kconfig.nxp
+>index ef9087d0197..152692e3230 100644
+>--- a/arch/Kconfig.nxp
+>+++ b/arch/Kconfig.nxp
+>@@ -242,24 +242,28 @@ config VOL_MONITOR_IR36021_SET
+> 
+> config VOL_MONITOR_LTC3882_READ
+> 	bool "Enable the LTC3882 voltage monitor read"
+>+	select PMBUS
+> 	help
+> 	 This option enables LTC3882 voltage monitor read
+> 	 functionality. It is used by the common VID driver.
+> 
+> config VOL_MONITOR_LTC3882_SET
+> 	bool "Enable the LTC3882 voltage monitor set"
+>+	select PMBUS
+> 	help
+> 	 This option enables LTC3882 voltage monitor set
+> 	 functionality. It is used by the common VID driver.
+> 
+> config VOL_MONITOR_ISL68233_READ
+> 	bool "Enable the ISL68233 voltage monitor read"
+>+	select PMBUS
+> 	help
+> 	 This option enables ISL68233 voltage monitor read
+> 	 functionality. It is used by the common VID driver.
+> 
+> config VOL_MONITOR_ISL68233_SET
+> 	bool "Enable the ISL68233 voltage monitor set"
+>+	select PMBUS
+> 	help
+> 	 This option enables ISL68233 voltage monitor set
+> 	 functionality. It is used by the common VID driver.
+>diff --git a/board/nxp/common/vid.c b/board/nxp/common/vid.c
+>index 84cb43fad56..a91d6c9381a 100644
+>--- a/board/nxp/common/vid.c
+>+++ b/board/nxp/common/vid.c
+>@@ -11,6 +11,7 @@
+> #include <i2c.h>
+> #include <irq_func.h>
+> #include <log.h>
+>+#include <pmbus.h>
+> #include <vsprintf.h>
+> #include <asm/io.h>
+> #ifdef CONFIG_FSL_LSCH2
+>@@ -260,45 +261,38 @@ static int read_voltage_from_IR(int i2caddress)
+>  */
+> #define VOUT_WARNING "VID: VOUT_MODE exponent has resolution worse than 1 V!\n"
+> 
+>-/* Checks the PMBus voltage monitor for the format used for voltage values */
+>-static int get_pmbus_multiplier(DEVICE_HANDLE_T dev)
+>+/*
+>+ * Read VOUT_MODE for downstream LINEAR16 decode/encode through the
+>+ * tree level <pmbus.h> helpers (pmbus_reg2data_linear16,
+>+ * pmbus_data2reg_linear16). Returns the raw VOUT_MODE byte on
+>+ * success, or 0 on bus error. Emits VOUT_WARNING on Linear mode
+>+ * chips with a non negative exponent (resolution >= 1 V is unusable
+>+ * for sub volt SoC rails) and an informational note on the
+>+ * unsupported VID format.
+>+ */
+>+static u8 vid_read_vout_mode(DEVICE_HANDLE_T dev)
+> {
+>-	u8 mode;
+>-	int exponent, multiplier, ret;
+>+	u8 mode = 0;
+>+	int ret;
+> 
+>-	ret = I2C_READ(dev, PMBUS_CMD_VOUT_MODE, &mode, sizeof(mode));
+>+	ret = pmbus_read_byte(dev, PMBUS_VOUT_MODE, &mode);
+> 	if (ret) {
+> 		printf("VID: unable to determine voltage multiplier\n");
+>-		return 1;
+>+		return 0;
+> 	}
+> 
 ...
->+		case PMBUS_MFR_REVISION: {
->+			char s[PMBUS_MFR_STRING_MAX];
+>+	/*
+>+	 * Decode LINEAR16 via the tree level helper from <pmbus.h>. For
+>+	 * non Linear VOUT_MODE settings the helper returns 0; fall back
+>+	 * to the historic mV pass through so existing LSCH boards keep.
+>+	 */
+>+	vout_mode = vid_read_vout_mode(dev);
+>+	if ((vout_mode & PB_VOUT_MODE_MODE_MASK) == PB_VOUT_MODE_LINEAR) {
+>+		s64 uv = pmbus_reg2data_linear16(vcode, vout_mode);
 >+
->+			if (pmbus_read_string(chip, reg, s, sizeof(s),
->+					      act->info ? false : false) >= 0)
+>+		vout = (int)((uv + 500) / 1000);	/* round to mV */
+>+	} else {
+>+		vout = (int)vcode;
+>+	}
+> 	return vout - board_vdd_drop_compensation();
 
-Should be true : false or false: true?
+When vid_read_vout_mode() returns 0, the return value here seems
+not correct.
 
->+				printf("  %02xh  %-15s s=\"%s\"\n",
->+				       reg, pmbus_reg_syms[i].name, s);
->+
-...
->+int pmbus_read_string(struct udevice *dev, u8 cmd, char *out, int outsz,
->+		      bool reverse_bytes)
->+{
->+	u8 raw[PMBUS_MFR_STRING_MAX];
->+	int ret, len, i;
->+
->+	if (outsz < 2)
->+		return -EINVAL;
->+
->+	/* Stage 1: read the length byte. */
->+	ret = dm_i2c_read(dev, cmd, raw, 1);
->+	if (ret)
->+		return ret;
->+
->+	len = raw[0];
->+	if (len <= 0 || len > (int)sizeof(raw))
->+		return -EBADMSG;
->+	if (len > outsz - 1)
->+		len = outsz - 1;
->+
->+	/* Stage 2: reread length + payload (some controllers mandate this). */
->+	ret = dm_i2c_read(dev, cmd, raw, len + 1);
+> }
 
-When len is 16, len + 1 bytes are read, so corrupt u8 raw[].
-
->+	if (ret)
->+		return ret;
->+
-
-Regards
+Regards,
 Peng
