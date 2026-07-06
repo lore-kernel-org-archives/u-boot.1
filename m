@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5390DC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 10:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF207C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 10:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D728B8490A;
-	Mon,  6 Jul 2026 12:58:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7311A8490A;
+	Mon,  6 Jul 2026 12:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Cx5GeNTR";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="SMPwW5LU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6185F8494B; Mon,  6 Jul 2026 12:58:13 +0200 (CEST)
+ id E8FBC84979; Mon,  6 Jul 2026 12:59:20 +0200 (CEST)
 Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50ABE846F8
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 12:58:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C837B846F8
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 12:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [213.36.7.12])
  (Authenticated sender: vjardin@free.fr)
- by smtp6-g21.free.fr (Postfix) with ESMTPSA id EDB6C780389;
- Mon,  6 Jul 2026 12:58:03 +0200 (CEST)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id 6C8297803A2;
+ Mon,  6 Jul 2026 12:59:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1783335491;
- bh=mkAwzDdONwt+wb5y0d9J6zHd1Lowf0KXj2Gz23/Pc6k=;
+ s=smtp-20201208; t=1783335558;
+ bh=w3elxLisjAvhveHYMJ/P9akcIeyXgleYoiyM00mJXXc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Cx5GeNTR52rQ4IrTBXB8XXo7rGLDEYuORZWdqGbG95syKY58xE8hnNP+ZPWXBGl0U
- ZB0htUQBAOFXO9tNvNnpgHzcxVEgG+cX48U4TNg92rNnaP0DNkmmkpNTF/Pst3mQ03
- 5M21bu4vVObl9TxhTiDrhSl5dgdyCMklvHBGPd8yHWz8upRbjw8KnQvcB+VOTA67m7
- FJcexjSu/YRG6BI86rXTZJnQEyDzgJ/GAohHjO7TTvP1PVYAyn5rKL3078tMExwj+I
- xyfutt/ooyplO4rnRrONcAQNDdH6dcYXeKuU99c6+KgzWXA4RnUy1b1E8sHn9APGyi
- 7DYoof+xCNmow==
+ b=SMPwW5LU72K/77FC+fXCVfsxjWm+hQWc4mYzYW4/kS4FYNx4hmhxg99CEwSdC/S5b
+ FgCwhfrwV/ClXDpync6R0SyrhZvB0LfCVzjadpkJQq5HNBiVLreo3CnRl/pw6ANZa/
+ 7THzgicybY1J8LAN8VABaQKNTdZqHTvpJEGcgb8tKlYir83gIG/b68rPA0kePxTkAH
+ Cqc0CJRSefUMa7doXmdB0s+lZ1xpBBx6ykcb2aieVtClvUxUyy1moH/J+JKtOPFXBm
+ PoQs6Vz/MV1uHm6YA25TVrzuX1MDfUvXiLUc1rfJd6rUWdqyojdT+ia7XsPcDIuH03
+ TD5oiwIkTnIng==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Simon Glass <sjg@chromium.org>,
  Jerome Forissier <jerome.forissier@arm.com>, Peng Fan <peng.fan@nxp.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v3 6/7] test: dm: pmbus: add a sandbox PMBus chip emulator
-Date: Mon,  6 Jul 2026 12:50:57 +0200
-Message-ID: <20260706105111.2018334-7-vjardin@free.fr>
+Subject: [PATCH v3 7/7] test: dm: pmbus: test pmbus command and framework
+Date: Mon,  6 Jul 2026 12:50:58 +0200
+Message-ID: <20260706105111.2018334-8-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260706105111.2018334-1-vjardin@free.fr>
 References: <20260706105111.2018334-1-vjardin@free.fr>
@@ -68,281 +68,303 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a UCLASS_I2C_EMUL driver that emulates a PMBus 1.x compliant chip
-behind the sandbox I2C bus, plus the test.dts wiring and sandbox
-defconfig that bind it to the generic PMBus regulator
-(compatible = "pmbus"). This design is a stub only: it lets the
-follow-up dm unit test drive lib/pmbus.c, the generic regulator and
-the pmbus CLI command with no real hardware.
+Add dm unit tests that drive every pmbus subcommand handler against
+the sandbox PMBus chip emulator:
+  dev (select by bus:addr and by regulator-name), list, info,
+  telemetry, status, dump, read, write, clear, vout, scan and help.
 
-The emulator models a flat per-command 16-bit register file and the
-three identification block strings (MFR_ID / MFR_MODEL /
-MFR_REVISION). READ_IIN and READ_POUT are deliberately left
-unimplemented (the chip NAKs them) so the telemetry printer's
-"(not supported)" path is exercised, mirroring a real buck that only
-calibrates a subset of the sensor classes.
+Tested using:
+
+  ./u-boot -T -c "ut dm pmbus*"
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
 
 (no changes since v1)
 
- MAINTAINERS                             |   1 +
- arch/sandbox/dts/test.dts               |  10 ++
- configs/sandbox_defconfig               |   6 +
- drivers/power/regulator/Kconfig         |  10 ++
- drivers/power/regulator/Makefile        |   1 +
- drivers/power/regulator/sandbox_pmbus.c | 160 ++++++++++++++++++++++++
- 6 files changed, 188 insertions(+)
- create mode 100644 drivers/power/regulator/sandbox_pmbus.c
+ MAINTAINERS      |   1 +
+ test/dm/Makefile |   1 +
+ test/dm/pmbus.c  | 247 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 249 insertions(+)
+ create mode 100644 test/dm/pmbus.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 9efc137eb1d..edfa23b7bf9 100644
+index edfa23b7bf9..410fef2bb1a 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1589,6 +1589,7 @@ F:	drivers/power/regulator/mpq8785.c
- F:	drivers/power/regulator/pmbus_generic.c
- F:	drivers/power/regulator/pmbus_helper.c
- F:	drivers/power/regulator/pmbus_helper.h
-+F:	drivers/power/regulator/sandbox_pmbus.c
+@@ -1593,6 +1593,7 @@ F:	drivers/power/regulator/sandbox_pmbus.c
  F:	drivers/thermal/pmbus_thermal.c
  F:	include/pmbus.h
  F:	lib/pmbus.c
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 0887de4333b..5032eecceea 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1027,6 +1027,9 @@
- 			emul1: emull {
- 				compatible = "sandbox,i2c-rtc-emul";
- 			};
-+			emul_pmbus: emul-pmbus {
-+				compatible = "sandbox,i2c-pmbus";
-+			};
- 		};
++F:	test/dm/pmbus.c
  
- 		sandbox_pmic: sandbox_pmic@40 {
-@@ -1038,6 +1041,13 @@
- 			reg = <0x41>;
- 			sandbox,emul = <&emul_pmic1>;
- 		};
-+
-+		pmbus@70 {
-+			reg = <0x70>;
-+			compatible = "pmbus";
-+			regulator-name = "sandbox-pmbus-vout";
-+			sandbox,emul = <&emul_pmbus>;
-+		};
- 	};
- 
- 	i3c0 {
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index ba800f7d19d..de90a2b39e5 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -392,3 +392,9 @@ CONFIG_UTHREAD=y
- CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
-+CONFIG_PMBUS=y
-+CONFIG_CMD_PMBUS=y
-+CONFIG_DM_REGULATOR_PMBUS_HELPER=y
-+CONFIG_DM_REGULATOR_PMBUS_GENERIC=y
-+CONFIG_SANDBOX_PMBUS=y
-+CONFIG_PMBUS_THERMAL=y
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 67c9e1fb377..143911eeb17 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -590,3 +590,13 @@ config DM_REGULATOR_MPQ8785
- 	  digital multiphase voltage regulators with PMBus. Supports
- 	  MPM3695, MPM3695-25, MPM82504, and MPQ8785. Adapted from the
- 	  Linux drivers/hwmon/pmbus/mpq8785.c reference.
-+
-+config SANDBOX_PMBUS
-+	bool "Sandbox PMBus 1.x chip emulator"
-+	depends on SANDBOX && PMBUS && DM_I2C
-+	help
-+	  Emulate a PMBus 1.x compliant chip behind a sandbox I2C bus so
-+	  the PMBus framework (lib/pmbus.c), the generic regulator
-+	  (DM_REGULATOR_PMBUS_GENERIC) and the pmbus CLI command can be
-+	  exercised by the dm unit tests with no real hardware. Only
-+	  useful for testing; say N on real boards.
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index aa3faf2f34f..b8599ea7fd9 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -52,3 +52,4 @@ obj-$(CONFIG_DM_REGULATOR_MT6359) += mt6359_regulator.o
- obj-$(CONFIG_DM_REGULATOR_PMBUS_HELPER)  += pmbus_helper.o
- obj-$(CONFIG_DM_REGULATOR_PMBUS_GENERIC) += pmbus_generic.o
- obj-$(CONFIG_DM_REGULATOR_MPQ8785)       += mpq8785.o
-+obj-$(CONFIG_SANDBOX_PMBUS)              += sandbox_pmbus.o
-diff --git a/drivers/power/regulator/sandbox_pmbus.c b/drivers/power/regulator/sandbox_pmbus.c
+ POWER
+ M:	Jaehoon Chung <jh80.chung@samsung.com>
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 0e3c63568dd..76aa1fff9ba 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -95,6 +95,7 @@ obj-$(CONFIG_PINCONF) += pinmux.o
+ endif
+ obj-$(CONFIG_POWER_DOMAIN) += power-domain.o
+ obj-$(CONFIG_ACPI_PMC) += pmc.o
++obj-$(CONFIG_CMD_PMBUS) += pmbus.o
+ obj-$(CONFIG_DM_PMIC) += pmic.o
+ obj-$(CONFIG_DM_PWM) += pwm.o
+ obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa.o
+diff --git a/test/dm/pmbus.c b/test/dm/pmbus.c
 new file mode 100644
-index 00000000000..2900d0a6d83
+index 00000000000..48c8ee11c30
 --- /dev/null
-+++ b/drivers/power/regulator/sandbox_pmbus.c
-@@ -0,0 +1,160 @@
++++ b/test/dm/pmbus.c
+@@ -0,0 +1,247 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2026 Free Mobile - Vincent Jardin
 + *
-+ * Sandbox PMBus 1.x chip stub (UCLASS_I2C_EMUL).
-+ *
-+ * Stub a DT i2c node so the PMBus framework, the generic pmbus
-+ * regulator and the pmbus CLI command can be tested.
-+ * The model is a flat per-command 16 bit
-+ * register file combined with some fixed identification strings.
++ * Unit tests for the PMBus 1.x framework, the generic
++ * PMBus regulator and the pmbus CLI command.
 + */
 +
++#include <console.h>
 +#include <dm.h>
 +#include <i2c.h>
 +#include <pmbus.h>
-+#include <linux/ctype.h>
++#include <dm/test.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+#define PMBUS_EMUL_NREG		256
++/* The line pmbus dev prints when a chip is selected */
++#define PMBUS_ACTIVE_LINE \
++	"pmbus: active i2c0:0x70  rail=\"sandbox-pmbus-vout\"  " \
++	"MFR_ID=\"SANDBOX\"  MODEL=\"PMBUS-EMUL\"  vendor=(generic)"
 +
-+struct sandbox_pmbus_priv {
-+	u16 reg[PMBUS_EMUL_NREG];
-+	bool supported[PMBUS_EMUL_NREG];
-+};
++/* The line pmbus list prints for the bound chip */
++#define PMBUS_LIST_LINE \
++	"  i2c0:0x70  rail=\"sandbox-pmbus-vout\"  node=pmbus@70  " \
++	"driver=pmbus_generic_regulator"
 +
-+/* Identification strings reported in the natural (forward) byte order. */
-+static const char *pmbus_emul_string(u8 cmd)
++/* Select the emulated chip and check the resulting banner line */
++static int pmbus_select(struct unit_test_state *uts)
 +{
-+	switch (cmd) {
-+	case PMBUS_MFR_ID:
-+		return "SANDBOX";
-+	case PMBUS_MFR_MODEL:
-+		return "PMBUS-EMUL";
-+	case PMBUS_MFR_REVISION:
-+		return "1.0";
-+	default:
-+		return NULL;
-+	}
-+}
-+
-+static int sandbox_pmbus_read(struct sandbox_pmbus_priv *priv, u8 cmd,
-+			      u8 *buf, int len)
-+{
-+	const char *str = pmbus_emul_string(cmd);
-+	int i;
-+
-+	if (str) {
-+		int slen = strlen(str);
-+
-+		/* Block payload: [length][bytes...]. */
-+		buf[0] = (u8)slen;
-+		for (i = 1; i < len; i++)
-+			buf[i] = (i - 1 < slen) ? (u8)str[i - 1] : 0;
-+		return 0;
-+	}
-+
-+	if (!priv->supported[cmd])
-+		return -EREMOTEIO; /* chip NAKs an unimplemented command */
-+
-+	for (i = 0; i < len; i++)
-+		buf[i] = (u8)(priv->reg[cmd] >> (8 * i));
++	ut_assertok(run_command("pmbus dev 0:0x70", 0));
++	ut_assert_nextline(PMBUS_ACTIVE_LINE);
 +	return 0;
 +}
 +
-+static int sandbox_pmbus_write(struct sandbox_pmbus_priv *priv, u8 cmd,
-+			       const u8 *buf, int len)
++/* The chip is reachable via UCLASS_REGULATOR (compatible = "pmbus") */
++static int dm_test_pmbus_bind(struct unit_test_state *uts)
 +{
-+	if (len == 0)
-+		return 0; /* send-byte (eg CLEAR_FAULTS): just ACK */
-+	if (!priv->supported[cmd])
-+		return -EREMOTEIO;
-+	if (len == 1)
-+		priv->reg[cmd] = buf[0];
-+	else
-+		priv->reg[cmd] = (u16)buf[0] | ((u16)buf[1] << 8);
-+	return 0;
-+}
++	struct udevice *dev;
 +
-+static int sandbox_pmbus_xfer(struct udevice *emul, struct i2c_msg *msg,
-+			      int nmsgs)
-+{
-+	struct sandbox_pmbus_priv *priv = dev_get_priv(emul);
-+	u8 cmd;
-+
-+	if (nmsgs == 0)
-+		return 0;
-+	/* A PMBus transaction always opens with the command-code write. */
-+	if (msg[0].flags & I2C_M_RD)
-+		return -EIO;
-+	if (msg[0].len == 0)
-+		return 0; /* address-only probe */
-+	cmd = msg[0].buf[0];
-+
-+	if (nmsgs >= 2 && (msg[1].flags & I2C_M_RD))
-+		return sandbox_pmbus_read(priv, cmd, msg[1].buf, msg[1].len);
-+
-+	return sandbox_pmbus_write(priv, cmd, msg[0].buf + 1, msg[0].len - 1);
-+}
-+
-+static void sandbox_pmbus_support(struct sandbox_pmbus_priv *priv, u8 cmd,
-+				  u16 val)
-+{
-+	priv->supported[cmd] = true;
-+	priv->reg[cmd] = val;
-+}
-+
-+static int sandbox_pmbus_probe(struct udevice *emul)
-+{
-+	struct sandbox_pmbus_priv *priv = dev_get_priv(emul);
-+
-+	/* Configuration / identification. */
-+	sandbox_pmbus_support(priv, PMBUS_PAGE, 0);
-+	sandbox_pmbus_support(priv, PMBUS_OPERATION, PB_OPERATION_ON);
-+	sandbox_pmbus_support(priv, PMBUS_ON_OFF_CONFIG, 0);
-+	sandbox_pmbus_support(priv, PMBUS_WRITE_PROTECT, 0);
-+	sandbox_pmbus_support(priv, PMBUS_CAPABILITY, 0xb0);
-+	sandbox_pmbus_support(priv, PMBUS_VOUT_MODE, 0x18); /* LINEAR 2^-8 */
-+	sandbox_pmbus_support(priv, PMBUS_VOUT_COMMAND, 0x0200);
-+	sandbox_pmbus_support(priv, PMBUS_VOUT_TRIM, 0);
-+	sandbox_pmbus_support(priv, PMBUS_VOUT_MAX, 0x0400);
-+	sandbox_pmbus_support(priv, PMBUS_VOUT_SCALE_LOOP, 0);
-+	sandbox_pmbus_support(priv, PMBUS_REVISION, PMBUS_REV_13);
-+
-+	/* Status registers, all clean. */
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_BYTE, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_WORD, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_VOUT, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_IOUT, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_INPUT, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_TEMPERATURE, 0);
-+	sandbox_pmbus_support(priv, PMBUS_STATUS_CML, 0);
-+
-+	/*
-+	 * Telemetry the emulated chip implements. READ_IIN and READ_POUT
-+	 * are intentionally absent so callers see the unsupported path.
-+	 */
-+	sandbox_pmbus_support(priv, PMBUS_READ_VIN, 0x0abc);
-+	sandbox_pmbus_support(priv, PMBUS_READ_VOUT, 0x0200);
-+	sandbox_pmbus_support(priv, PMBUS_READ_IOUT, 0x0123);
-+	sandbox_pmbus_support(priv, PMBUS_READ_TEMPERATURE_1, 0x0019);
++	ut_assertok(uclass_get_device_by_name(UCLASS_REGULATOR, "pmbus@70",
++					      &dev));
++	ut_asserteq_str("pmbus_generic_regulator", dev->driver->name);
++	ut_asserteq(UCLASS_I2C, device_get_uclass_id(dev_get_parent(dev)));
 +
 +	return 0;
 +}
 +
-+static struct dm_i2c_ops sandbox_pmbus_emul_ops = {
-+	.xfer = sandbox_pmbus_xfer,
-+};
++DM_TEST(dm_test_pmbus_bind, UTF_SCAN_FDT);
 +
-+static const struct udevice_id sandbox_pmbus_ids[] = {
-+	{ .compatible = "sandbox,i2c-pmbus" },
-+	{ }
-+};
++/* pmbus dev by <bus>:<addr> and by regulator-name select the chip */
++static int dm_test_pmbus_dev(struct unit_test_state *uts)
++{
++	ut_assertok(run_command("pmbus dev 0:0x70", 0));
++	ut_assert_nextline(PMBUS_ACTIVE_LINE);
++	ut_assert_console_end();
 +
-+U_BOOT_DRIVER(sandbox_pmbus_emul) = {
-+	.name		= "sandbox_pmbus_emul",
-+	.id		= UCLASS_I2C_EMUL,
-+	.of_match	= sandbox_pmbus_ids,
-+	.probe		= sandbox_pmbus_probe,
-+	.priv_auto	= sizeof(struct sandbox_pmbus_priv),
-+	.ops		= &sandbox_pmbus_emul_ops,
-+};
++	/* Selecting by DT regulator-name resolves to the same chip */
++	ut_assertok(run_command("pmbus dev sandbox-pmbus-vout", 0));
++	ut_assert_nextline(PMBUS_ACTIVE_LINE);
++	ut_assert_console_end();
++
++	/* pmbus dev with no argument reprints the active chip */
++	ut_assertok(run_command("pmbus dev", 0));
++	ut_assert_nextline(PMBUS_ACTIVE_LINE);
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_dev, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus list enumerates the bound chip among the UCLASS_REGULATOR devices */
++static int dm_test_pmbus_list(struct unit_test_state *uts)
++{
++	ut_assertok(run_command("pmbus list", 0));
++	ut_assert_skip_to_line(PMBUS_LIST_LINE);
++	console_record_reset();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_list, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus info decodes identification + the detected driver_info */
++static int dm_test_pmbus_info(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus info", 0));
++	ut_assert_nextline("pmbus device i2c0:0x70");
++	ut_assert_nextline("  regulator-name: \"sandbox-pmbus-vout\"");
++	ut_assert_nextline("  MFR_ID        : \"SANDBOX\"");
++	ut_assert_nextline("  MFR_MODEL     : \"PMBUS-EMUL\"");
++	ut_assert_nextline("  MFR_REVISION  : \"1.0\"  raw=0x312e30");
++	ut_assert_nextline("  PMBUS_REVISION: 0x33 (PMBus 1.3)");
++	ut_assert_nextline("  vendor        : (none)");
++	ut_assert_nextline("  driver_info   : pages=1");
++	ut_assert_nextline("    [VOLTAGE_IN  ] format=LINEAR");
++	ut_assert_nextline("    [VOLTAGE_OUT ] format=LINEAR");
++	ut_assert_nextline("    [CURRENT_IN  ] format=LINEAR");
++	ut_assert_nextline("    [CURRENT_OUT ] format=LINEAR");
++	ut_assert_nextline("    [POWER       ] format=LINEAR");
++	ut_assert_nextline("    [TEMPERATURE ] format=LINEAR");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_info, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/*
++ * pmbus telemetry decodes the implemented sensors and prints
++ * "(not supported)" for the commands the emulator NAKs (READ_IIN,
++ * READ_POUT). LINEAR11 is used for VIN/IOUT/TEMP, LINEAR16 (with the
++ * VOUT_MODE 2^-8 exponent) for VOUT.
++ */
++static int dm_test_pmbus_telemetry(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus telemetry", 0));
++	ut_assert_nextline("pmbus telemetry @ i2c0:0x70");
++	ut_assert_nextline("  VIN  : raw=0x0abc  1400.000V");
++	ut_assert_nextline("  VOUT : raw=0x0200  2.000V");
++	ut_assert_nextline("  IIN  : (not supported)");
++	ut_assert_nextline("  IOUT : raw=0x0123  291.000A");
++	ut_assert_nextline("  POUT : (not supported)");
++	ut_assert_nextline("  TEMP : raw=0x0019  25.000C");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_telemetry, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus status decodes every STATUS_* register; the emulator is clean */
++static int dm_test_pmbus_status(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus status", 0));
++	ut_assert_nextline("pmbus status @ i2c0:0x70");
++	ut_assert_nextline("  STATUS_WORD    (79h) = 0x0000  [clean]");
++	ut_assert_nextline("  STATUS_VOUT    (7Ah) = 0x00  [clean]");
++	ut_assert_nextline("  STATUS_IOUT    (7Bh) = 0x00  [clean]");
++	ut_assert_nextline("  STATUS_INPUT   (7Ch) = 0x00  [clean]");
++	ut_assert_nextline("  STATUS_TEMP    (7Dh) = 0x00  [clean]");
++	ut_assert_nextline("  STATUS_CML     (7Eh) = 0x00  [clean]");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_status, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus read/pmbus write raw register access (byte, word, string) */
++static int dm_test_pmbus_read_write(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	/* Symbolic and numeric register names both resolve */
++	ut_assertok(run_command("pmbus read VOUT_MODE", 0));
++	ut_assert_nextline("  20h  VOUT_MODE       b=0x18");
++	ut_assertok(run_command("pmbus read 0x8b w", 0));
++	ut_assert_nextline("  8bh  READ_VOUT       w=0x0200");
++	ut_assertok(run_command("pmbus read MFR_ID s", 0));
++	ut_assert_nextline("  99h  MFR_ID          s=\"SANDBOX\"");
++
++	/* A word write is observable on the next read-back */
++	ut_assertok(run_command("pmbus write VOUT_COMMAND 0x0123 w", 0));
++	ut_assert_nextline("pmbus: wrote 0x123 to 21h (VOUT_COMMAND)");
++	ut_assertok(run_command("pmbus read VOUT_COMMAND w", 0));
++	ut_assert_nextline("  21h  VOUT_COMMAND    w=0x0123");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_read_write, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus vout reads back VOUT via the active driver_info decoder */
++static int dm_test_pmbus_vout(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus vout", 0));
++	ut_assert_nextline("pmbus VOUT @ i2c0:0x70  raw=0x0200  2.000V");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_vout, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus dump walks every standard register; spot-check one line */
++static int dm_test_pmbus_dump(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus dump", 0));
++	ut_assert_nextline("pmbus dump @ i2c0:0x70 (registers known to <pmbus.h>)");
++	ut_assert_skip_to_line("  20h  VOUT_MODE       b=0x18");
++	console_record_reset();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_dump, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus clear [faults] issues CLEAR_FAULTS (03h) */
++static int dm_test_pmbus_clear(struct unit_test_state *uts)
++{
++	ut_assertok(pmbus_select(uts));
++
++	ut_assertok(run_command("pmbus clear faults", 0));
++	ut_assert_nextline("pmbus: CLEAR_FAULTS (03h) issued (RAM sticky STATUS_* cleared)");
++	ut_assert_console_end();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_clear, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus scan finds the emulated chip by its MFR_ID block read */
++static int dm_test_pmbus_scan(struct unit_test_state *uts)
++{
++	ut_assertok(run_command("pmbus scan 0", 0));
++	ut_assert_skip_to_line("  i2c0:0x70  MFR_ID=\"SANDBOX\"");
++	console_record_reset();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_scan, UTF_SCAN_FDT | UTF_CONSOLE);
++
++/* pmbus help lists vendor extensions; none are registered here */
++static int dm_test_pmbus_help(struct unit_test_state *uts)
++{
++	ut_assertok(run_command("pmbus help", 0));
++	ut_assert_nextline("pmbus: no vendor extensions registered.");
++	ut_assert_skip_to_line("       board hook (boot snapshot) and re run 'pmbus help'.");
++	console_record_reset();
++
++	return 0;
++}
++
++DM_TEST(dm_test_pmbus_help, UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.43.0
 
