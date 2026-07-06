@@ -4,107 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C83C43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886CCC43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:31:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA5ED8488D;
-	Mon,  6 Jul 2026 14:30:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B7D08488D;
+	Mon,  6 Jul 2026 14:31:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rVL/aJiB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E3sECGqO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B29C8848D2; Mon,  6 Jul 2026 14:30:41 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 63D9F8494B; Mon,  6 Jul 2026 14:31:26 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65412846FD
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:30:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B8A6846FD
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c125fbfbae0so283944966b.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:30:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-39b1f588471so26240031fa.0
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:31:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783341084; cv=none;
+ d=google.com; s=arc-20260327;
+ b=KIORkgCoN+To5RFw+bd2AUnj5o7UmvFkylNh/y4AZzK+CXsDFdDk+zHPmIOf6w81MB
+ zLKG2iHAjdruW5eKfQ/IV8+QUgo1AaqwTitz8AFaf31S6RbaxJSHBI98DVLmyzdy7sF+
+ 6eig1mAIJIiZeEIvqEfNe6gn+YPaQASNcsFVEZhHc4glFjC8PShOuYB6gopRzGwhE6DM
+ xXCDwjAq+pf96jKC1UgRn3XHZap78v/7ODaQ0VArDxWbaZ8CbDkQDdPZkkaL2uRsmSsU
+ Z/3dHeNWGDyrv+4FRvEmLQka4I52nIdY2rVFTifJ+If8Y4He5VW+Pt+JXXaSetGRLDyz
+ 4lNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
+ fh=EXHy3Y9gzmSvK3vukrW2cXL2aNbi+7j4/fkXx9x+rv8=;
+ b=Q7kjZUC9cvyIBFe9DPLdxNLqcoFAUVb7N6A6Z0Hrf8UKegtgC76Z37Cz0Zb+OqoXdw
+ yPKgEOhu54l8HbRZszj6JQo581bBW+4UNSCjd53IGkfUlFecQTCjekyJ6Ea1lbrc/hqt
+ UXAe/RdvWBkiCN2gcDwXla96J5C1hkA/IX2o9EhBNn+aEPXlIqZgTTyQ57D5GhMPKW9p
+ DBsaCQBVYe+xaMnaukg8PEJlC9z/iZlYMUUqSN1bxujoBRSz1PfOQ4c/UQvMOqQTq+c5
+ NYGr2Skl3EGbw6YKnR3fVcFwnCObhPqpNZVj8bvWUJLS8owI/gtM2sFpStHATZb8vT58
+ DR3w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783341039; x=1783945839; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dYIB5mxtWam9RaJo92bvyID3LFZEEksYkhZiam2+PIY=;
- b=rVL/aJiB5QtXEKcVis63gR/GI7r95wkv13ScLFNSBW/E8CSqOlyRVJw1hssCBX7gVv
- UPnVO+/ST8k36lZIlkLHpfoanNyzdvKwaKxigrgLhqE7DBYk6MzJ+f5fE6u448r8YTBT
- B4yQ/89gZ3qnPaz2lhhRDwpkgLe1053SSRFAubDvxRwZf5kexsmjJY9oA39cLltnEVNt
- E5EdRMLZ5xIFZHgdAMRLF4CJ4yPQ+EFc7ThPvPVWndf54l5/DTelTm5x8R2eBAjnzLKA
- Md6hvujyssBOA1GVOTbm8k7K6E2ssh9HqBAA+OPgHJoLqTUSxYxHklV8FPMBg7EvP6cf
- MP8A==
+ d=gmail.com; s=20251104; t=1783341084; x=1783945884; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
+ b=E3sECGqOLShVIQdAoWVaXnDH2wswpGLUsOd/jYHpo/mBXPKCV9NPQhNNGcbfnz1fJM
+ GpBWFuyTqnyVfL4cShc3plJAxBr8a7EKXmWPZiAunWBGTRZZ11CkSjJl/NrfJxVC3VTy
+ n5y3bEjnDpSiFE1yju2wvqVYBbf7xIjJBtlvToLKxlzpuciIC3WFvEQkyogmSy2KK5jA
+ sdiicDKGR7bBvINnVR5zBv0zgO66TNytmO+FN89/TK5cwkNhIiSJx+I0pEKtinsV1VF6
+ BlyROtSQKWDN/1B2nR3AmkqpBhk8J4IURslJtGY2C7fmEzcAT1pPdFmSwgGmlW1zdTdO
+ wuNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783341039; x=1783945839;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dYIB5mxtWam9RaJo92bvyID3LFZEEksYkhZiam2+PIY=;
- b=cI/IN/JONAHusKtOZlA9G8R34D1sqOwzbR2UwiDdX5ru2P+xBiI4/4IoSR2GJWM41V
- Nf8OFuH441b6cjR461/m6JsXfe2f3irf9sVKQpIN2Q89LomkIev9FuP01E48v2bkxr9T
- BL0AUSjXDWTIrpqevOo0N/uE3myM0m/gSPcINyDwIg48kX9fFDvrLV5rIfG+bKd3x0uV
- 3QlJNGVXEA38HH1a2dsVXSPrXGYnbztvn7jKQtXZ3uZf/ZIaPSqshZxWJGmucHF2R4rj
- YElpuPpn2VKaZwmmuX4r7FqVe36WiZZ5BQ66br+jgMFvc7qPzP1ZEoqEmdjkmIv5NNQw
- tTIA==
+ d=1e100.net; s=20251104; t=1783341084; x=1783945884;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
+ b=qqEVBcR/Q6Js9my93qN0PceEOQVwXrd2hJTdmMZ49wXg80xdurrfOkk+sb4WyC1EiT
+ AZvC+0JVFEwMVpK5UcpVMf5OICueGiZ96PzyiTmRtsJfZdsb4ohXNvixJWjXDYKc1WX/
+ Ft6mOS14uS8pwZzJsGfMtGgOdAI9f+o+fTNMWZvHLOqO6b8povJDmSvZJUQJUdDh8Weo
+ mVctEfI21+ea8xJ8CzaCW/Xz2jbnaTPfU0aDlLk0u7dWaBatt2bvA0wjA+Qvi6OTgk09
+ ybIWH8BTQltx8jnDRQwraPh/3xEKslxyJ8akolir2UIDRDC5ULbkmyS7EaviETExxr2v
+ vnEg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqVJfYru5zRvTmxCq3NfqmKnMD6JESZZrPjeslg4wUnUp35N2n105XBAP1AACIAFQEyy1JPt2c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzlspdMu/XEfzE9YgQE8KhkHLwGse0ob05UXEWoe5HF5YwGMEa
- 9zX83B/AlqahXBkyLPMhIsbnl7+KPu0kfXCnJG1fj+FbBHaLLnWw+xX5tkLCXElczMQna/zOXuA
- S9kec
-X-Gm-Gg: AfdE7cnhAQaR6HP/Uqb20YpxJ1ZiXNhhw0S6GB294Y9MMwoi3zOQ/N4Sw88vTkrFuTh
- HC+7EXc1ASvId4McTEcX4eWYE/NBWmkCPGEtkpQv3ZT0QkzVAmXB/B28km7lS+zdDMPEyxZPOSO
- XUT3mykKzKiUCNC8/PkHEux/y9mHHfI7heZetguYGmVpOduPEvqgVBMefk4l2xWlS8TqB6AIEk/
- qPU5VYJVrLJl3BbjIrPzkAWov4kC88REgzla8Rr58yJUsFebxrCBh7maPdHA3OeXJVJPsT21Z50
- 61HYRDLpOhWZdVtxp13EnwxnEaPITXDk4nnYc4+rsSkpYi61I94xdUUij1BPSEAFf9RBYWTD5O3
- oIYWaGXss88GWQrI9aJPMK5FhK0zViWymGMUjW5nE1cyrwIVMmM9GstpbIPcAdDy6Vp9wNidn9q
- UWSX86n1mvnTnVlTHX2wM92xAo0r251mpoYM65LUWsB34IXW4jO2lbSrSZ/54IUpo=
-X-Received: by 2002:a17:906:e20a:b0:bf0:550:d9f with SMTP id
- a640c23a62f3a-c15a67bc8ffmr15749266b.31.1783341038769; 
- Mon, 06 Jul 2026 05:30:38 -0700 (PDT)
-Received: from [172.18.183.38] (ip-185-104-138-126.ptr.icomera.net.
- [185.104.138.126]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c12b62c552esm739470066b.49.2026.07.06.05.30.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Jul 2026 05:30:37 -0700 (PDT)
-Message-ID: <232ce0c8-fec2-4cb3-9b3c-732e35a1525d@linaro.org>
-Date: Mon, 6 Jul 2026 14:30:22 +0200
+ AHgh+RoUxqhIdZD5SxIWX4a2SNMBxXQ0ivc4EGCT+X9tMdPBkeI/U4wCakhuw0sdM8B8zMP0LiG6Tj0=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywu/Pxcaas9Gt1F9c1F6ty3WDxCB/wxgcrudsC1sOC9fqCfFKdo
+ X2QK4Mw1iOn7WNg0YGYSqM7oaUzX888DEMMui/dEi39u6rTTm0fqUjXkqkKXd+BQpSwr8KSc98O
+ 2ywKqPtrCSmqkHBHFaJMGRmrHXCkfEm0=
+X-Gm-Gg: AfdE7ckLSU9qrSIe15ThKHGANG9emHhLRQyvKH8xDlyrYrFvGML0tLsZbxFFHCaliEI
+ byBdvqdPhUVedzev0gV/wKsi9ToKLTW7UsSSxUsydMlezpqvYdH20zPRWhpxKDdijN6CkwtG5/2
+ qK1dsqY9cBloXjZvJ+LhINtKFJGs5qKHEFDE/545Nc9OVxQOgxLYc8wYHHH064L07/4nB1CHTGB
+ 3xX0U8NJNJTAVOq2woEL52Ku6tor3wtoO0tDgGBXeeaVe64wK7CC7hPbZlgqJ70tYFxeEQhFOwv
+ zaYftpCx2Gp0+KyD9s+lbSHqsEL4oh8GIZOr2hqDXK4mCNJOa4QUD6b6AMvj4A==
+X-Received: by 2002:a05:651c:198b:b0:39a:cfea:f17 with SMTP id
+ 38308e7fff4ca-39c5ffe1ed6mr1304101fa.30.1783341083297; Mon, 06 Jul 2026
+ 05:31:23 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/8] arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_MODE
- option
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Michael Srba <Michael.Srba@seznam.cz>,
- Simon Glass <sjg@chromium.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20260619-snagboot-v4-0-385497442db2@oss.qualcomm.com>
- <20260619-snagboot-v4-1-385497442db2@oss.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260619-snagboot-v4-1-385497442db2@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260208212624.3413494-1-festevam@gmail.com>
+ <CAFLszTgP0wCfQOZ=DJhbdPWC4k8e66XmNtF9cO8z97oqPetdRw@mail.gmail.com>
+In-Reply-To: <CAFLszTgP0wCfQOZ=DJhbdPWC4k8e66XmNtF9cO8z97oqPetdRw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 6 Jul 2026 09:31:11 -0300
+X-Gm-Features: AVVi8CcidOeJYjDyPn-gDReixhEUFr5u1fZil-APa9LFzAt1N1lbXT1cvHZNCHg
+Message-ID: <CAOMZO5D9NuWVkJ3PH1-wmTmvzq76=zrEKEekYozoPRY8ZjcrpQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] ARM: Add RV1103B Omega4 board support
+To: Simon Glass <sjg@chromium.org>
+Cc: kever.yang@rock-chips.com, trini@konsulko.com, jonas@kwiboo.se, 
+ u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,82 +118,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi Simon,
 
-On 6/19/26 13:10, Balaji Selvanathan wrote:
-> Add CONFIG_QCOM_SNAGBOOT_MODE to enable snagboot mode on Qualcomm
-> platforms. This config automatically selects the required dependencies.
-> 
-> Add QCOM_BOOT0_SNAGBOOT_MODE as boot0.h config for automatic selection
-> by QCOM_SNAGBOOT_MODE. Document the platform-specific requirements and
-> configs that must be disabled in snagboot mode.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v4:
-> - Renamed QCOM_SNAGBOOT_SUPPORT to QCOM_SNAGBOOT_MODE
-> - Added QCOM_BOOT0_SNAGBOOT_MODE for boot0.h which gets selected by
->    QCOM_SNAGBOOT_MODE
-> - Document the platform-specific requirements and configs that must be
->    disabled in snagboot mode.
-> 
-> Changes in v3:
-> - Newly introduced in v3
-> ---
->   arch/arm/mach-snapdragon/Kconfig | 28 ++++++++++++++++++++++++++++
->   1 file changed, 28 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index 931d25c1023..5c7dbe0dcc4 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -65,4 +65,32 @@ config QCOM_EL2_GUNYAH_EXIT_SUPPORT
->   	  run properly at EL2.
->   endchoice
->   
-> +config QCOM_BOOT0_SNAGBOOT_MODE
-> +	bool "boot0.h initialization for Snagboot mode"
+On Mon, Jul 6, 2026 at 9:27=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
+:
 
-I don't think this should be visible in menuconfig, it should be internal.
+> I recently got one of these boards and have it running in my lab at a
+> basic level (boot to prompt, SPI-NAND and MMC).
+>
+> Are you still planning to send a v3? If not I could handle Jonas's
+> feedback and send out a v3?
 
-The config should be inside the choice block though I think? not sure if 
-that's possible if it's not selectable> +	help
-> +	  Enable boot0.h early initialization required when U-Boot
-> +	  is loaded in Snagboot mode by XBL.> +
-> +config QCOM_SNAGBOOT_MODE
-> +	bool "Build U-Boot for Snagboot mode loading"
-> +	select QCOM_BOOT0_SNAGBOOT_MODE
-> +	select ENABLE_ARM_SOC_BOOT0_HOOK
-
-> +	select SKIP_RELOCATE
-> +	help
-> +	  Build U-Boot to be loaded in Snagboot mode on Qualcomm platforms
-> +	  for device/factory provisioning using fastboot.
-> +
-> +	  Snagboot mode requires disabling several configs in your defconfig:
-> +	  - PSCI_RESET: Not available in Snagboot mode
-> +	  - IOMMU: Not initialized by XBL in Snagboot mode
-> +	  - SAVE_PREV_BL_INITRAMFS_START_ADDR: Previous bootloader context
-> +	    is not preserved in snagboot mode
-> +	  - REBOOT_MODE_ENV_UPDATE: Not applicable in device/factory provisioning mode
-
-this isn't how kconfig works, use depends> +
-> +	  Additionally, use CONFIG_ENV_IS_NOWHERE to ensure recovery works
-> +	  even with corrupted environment storage.
-
-select ENV_IS_NOWHERE
-depends on !ENV_IS_IN_SCSI
-
-> +
-> +	  Platform-specific requirements:
-> +	  - Set CONFIG_COUNTER_FREQUENCY to match your platform's timer
-> +	  - Configure CONFIG_TEXT_BASE for U-Boot load address
-
-you can probably depend on these being non-zero too
+Please go ahead and submit a v3.
 
 Thanks,
-// Casey
 
->   endif
-> 
-
+Fabio Estevam
