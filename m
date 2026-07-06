@@ -4,104 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886CCC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA65C43458
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 12:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B7D08488D;
-	Mon,  6 Jul 2026 14:31:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 891218488D;
+	Mon,  6 Jul 2026 14:34:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E3sECGqO";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pP24vyu4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63D9F8494B; Mon,  6 Jul 2026 14:31:26 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 157768490A; Mon,  6 Jul 2026 14:34:20 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B8A6846FD
- for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:31:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AAE2846FD
+ for <u-boot@lists.denx.de>; Mon,  6 Jul 2026 14:34:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-39b1f588471so26240031fa.0
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 05:31:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783341084; cv=none;
- d=google.com; s=arc-20260327;
- b=KIORkgCoN+To5RFw+bd2AUnj5o7UmvFkylNh/y4AZzK+CXsDFdDk+zHPmIOf6w81MB
- zLKG2iHAjdruW5eKfQ/IV8+QUgo1AaqwTitz8AFaf31S6RbaxJSHBI98DVLmyzdy7sF+
- 6eig1mAIJIiZeEIvqEfNe6gn+YPaQASNcsFVEZhHc4glFjC8PShOuYB6gopRzGwhE6DM
- xXCDwjAq+pf96jKC1UgRn3XHZap78v/7ODaQ0VArDxWbaZ8CbDkQDdPZkkaL2uRsmSsU
- Z/3dHeNWGDyrv+4FRvEmLQka4I52nIdY2rVFTifJ+If8Y4He5VW+Pt+JXXaSetGRLDyz
- 4lNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
- fh=EXHy3Y9gzmSvK3vukrW2cXL2aNbi+7j4/fkXx9x+rv8=;
- b=Q7kjZUC9cvyIBFe9DPLdxNLqcoFAUVb7N6A6Z0Hrf8UKegtgC76Z37Cz0Zb+OqoXdw
- yPKgEOhu54l8HbRZszj6JQo581bBW+4UNSCjd53IGkfUlFecQTCjekyJ6Ea1lbrc/hqt
- UXAe/RdvWBkiCN2gcDwXla96J5C1hkA/IX2o9EhBNn+aEPXlIqZgTTyQ57D5GhMPKW9p
- DBsaCQBVYe+xaMnaukg8PEJlC9z/iZlYMUUqSN1bxujoBRSz1PfOQ4c/UQvMOqQTq+c5
- NYGr2Skl3EGbw6YKnR3fVcFwnCObhPqpNZVj8bvWUJLS8owI/gtM2sFpStHATZb8vT58
- DR3w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783341084; x=1783945884; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
- b=E3sECGqOLShVIQdAoWVaXnDH2wswpGLUsOd/jYHpo/mBXPKCV9NPQhNNGcbfnz1fJM
- GpBWFuyTqnyVfL4cShc3plJAxBr8a7EKXmWPZiAunWBGTRZZ11CkSjJl/NrfJxVC3VTy
- n5y3bEjnDpSiFE1yju2wvqVYBbf7xIjJBtlvToLKxlzpuciIC3WFvEQkyogmSy2KK5jA
- sdiicDKGR7bBvINnVR5zBv0zgO66TNytmO+FN89/TK5cwkNhIiSJx+I0pEKtinsV1VF6
- BlyROtSQKWDN/1B2nR3AmkqpBhk8J4IURslJtGY2C7fmEzcAT1pPdFmSwgGmlW1zdTdO
- wuNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783341084; x=1783945884;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=yWpnVLkfpcCUbs1B0CRZc3c5RgeLEbRhh9YNi79vKag=;
- b=qqEVBcR/Q6Js9my93qN0PceEOQVwXrd2hJTdmMZ49wXg80xdurrfOkk+sb4WyC1EiT
- AZvC+0JVFEwMVpK5UcpVMf5OICueGiZ96PzyiTmRtsJfZdsb4ohXNvixJWjXDYKc1WX/
- Ft6mOS14uS8pwZzJsGfMtGgOdAI9f+o+fTNMWZvHLOqO6b8povJDmSvZJUQJUdDh8Weo
- mVctEfI21+ea8xJ8CzaCW/Xz2jbnaTPfU0aDlLk0u7dWaBatt2bvA0wjA+Qvi6OTgk09
- ybIWH8BTQltx8jnDRQwraPh/3xEKslxyJ8akolir2UIDRDC5ULbkmyS7EaviETExxr2v
- vnEg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoUxqhIdZD5SxIWX4a2SNMBxXQ0ivc4EGCT+X9tMdPBkeI/U4wCakhuw0sdM8B8zMP0LiG6Tj0=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywu/Pxcaas9Gt1F9c1F6ty3WDxCB/wxgcrudsC1sOC9fqCfFKdo
- X2QK4Mw1iOn7WNg0YGYSqM7oaUzX888DEMMui/dEi39u6rTTm0fqUjXkqkKXd+BQpSwr8KSc98O
- 2ywKqPtrCSmqkHBHFaJMGRmrHXCkfEm0=
-X-Gm-Gg: AfdE7ckLSU9qrSIe15ThKHGANG9emHhLRQyvKH8xDlyrYrFvGML0tLsZbxFFHCaliEI
- byBdvqdPhUVedzev0gV/wKsi9ToKLTW7UsSSxUsydMlezpqvYdH20zPRWhpxKDdijN6CkwtG5/2
- qK1dsqY9cBloXjZvJ+LhINtKFJGs5qKHEFDE/545Nc9OVxQOgxLYc8wYHHH064L07/4nB1CHTGB
- 3xX0U8NJNJTAVOq2woEL52Ku6tor3wtoO0tDgGBXeeaVe64wK7CC7hPbZlgqJ70tYFxeEQhFOwv
- zaYftpCx2Gp0+KyD9s+lbSHqsEL4oh8GIZOr2hqDXK4mCNJOa4QUD6b6AMvj4A==
-X-Received: by 2002:a05:651c:198b:b0:39a:cfea:f17 with SMTP id
- 38308e7fff4ca-39c5ffe1ed6mr1304101fa.30.1783341083297; Mon, 06 Jul 2026
- 05:31:23 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mathieu.dubois-briand@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 96AD9C8EC79;
+ Mon,  6 Jul 2026 12:34:30 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7E7B5601A2;
+ Mon,  6 Jul 2026 12:34:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8858B11BB98E0; 
+ Mon,  6 Jul 2026 14:34:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1783341256; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=bcBhDPsgCXtLxJIXOoLciRsOKWPufiZs6DNQTYB9Id0=;
+ b=pP24vyu4S8G4WU4o/w75tY1GkkOPTn5iI5kVH+sEvHrjbo7BzDiUDAo25hor+e0q9uMzJK
+ iSdajTek65/GVp2li0fySGzG6MB1c8uujskatrt8M0FUapT7xlG3dwe4FuTZHlBOJGS8wp
+ F1k6NnIoW/7tYcDOFEpdf/d9Xd+HV4FGWQhbKqYjioBs9YOp+qmhJN/9oAFska0Q321/1K
+ spCaHuIlcy9FRg0KPfqdkn588aaXTeyVz3AmDu2gb8ufUaXyyrzfZjJ8H9M6/MaJJSWfJn
+ xlnR6u8IQWBWJqp0b41Nh4UdQ8gHWva9PT3tcinLo5xra0Z1i0sp4Ubg3Zqeig==
+From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Date: Mon, 06 Jul 2026 14:34:01 +0200
+Subject: [PATCH] imx93_frdm: Add OP-TEE device tree node
 MIME-Version: 1.0
-References: <20260208212624.3413494-1-festevam@gmail.com>
- <CAFLszTgP0wCfQOZ=DJhbdPWC4k8e66XmNtF9cO8z97oqPetdRw@mail.gmail.com>
-In-Reply-To: <CAFLszTgP0wCfQOZ=DJhbdPWC4k8e66XmNtF9cO8z97oqPetdRw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 6 Jul 2026 09:31:11 -0300
-X-Gm-Features: AVVi8CcidOeJYjDyPn-gDReixhEUFr5u1fZil-APa9LFzAt1N1lbXT1cvHZNCHg
-Message-ID: <CAOMZO5D9NuWVkJ3PH1-wmTmvzq76=zrEKEekYozoPRY8ZjcrpQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] ARM: Add RV1103B Omega4 board support
-To: Simon Glass <sjg@chromium.org>
-Cc: kever.yang@rock-chips.com, trini@konsulko.com, jonas@kwiboo.se, 
- u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260706-master-v1-1-25bae88d130a@bootlin.com>
+X-B4-Tracking: v=1; b=H4sIALigS2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcwMz3dzE4pLUIt1kc8NEA6M0UwOTNAMloOKCotS0zAqwQdGxtbUA17B
+ 1/FgAAAA=
+X-Change-ID: 20260706-master-c71a02f504f0
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783341255; l=951;
+ i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
+ bh=kTRvRs/oPe+/o3iqgdeKPzMpKmrcd0/Ffeyv01pjR08=;
+ b=rgUUjizAO1KvgIjTY+P61/rcGlK7K+yxpDY9HzljyEd2f4SC/7PHQ3e/jH2rWT7JdcyWlLgAp
+ ZJNreyRLHxSBIoIWPPc1aSy3UkUMPxDRSrZduoW65Bhi9gpTAzaUh2s
+X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
+ pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,19 +84,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Add missing firmware/optee node, so is can be both used and copied into
+Linux device tree by optee_copy_firmware_node(). This is consistent with
+other i.MX93 boards.
 
-On Mon, Jul 6, 2026 at 9:27=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
+Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+---
+ arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-> I recently got one of these boards and have it running in my lab at a
-> basic level (boot to prompt, SPI-NAND and MMC).
->
-> Are you still planning to send a v3? If not I could handle Jonas's
-> feedback and send out a v3?
+diff --git a/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
+index 41111b1a95a2..2ce9f46b2ad8 100644
+--- a/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
++++ b/arch/arm/dts/imx93-11x11-frdm-u-boot.dtsi
+@@ -12,6 +12,13 @@
+ 		bootph-pre-ram;
+ 		bootph-some-ram;
+ 	};
++
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
+ };
+ 
+ &A55_0 {
 
-Please go ahead and submit a v3.
+---
+base-commit: 780084d7c07f511da4a39b43277c573156ed42e0
+change-id: 20260706-master-c71a02f504f0
 
-Thanks,
+Best regards,
+-- 
+Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 
-Fabio Estevam
