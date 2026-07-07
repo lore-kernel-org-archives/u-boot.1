@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BCD3C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6A0C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:34:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36D0E84AFA;
-	Tue,  7 Jul 2026 17:33:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0AAB84B01;
+	Tue,  7 Jul 2026 17:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mm0fzEvl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DlS4fKDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8EDF84AFF; Tue,  7 Jul 2026 17:33:03 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 294D184B02; Tue,  7 Jul 2026 17:33:06 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 978C284A4A
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CB80849F6
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:33:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-495f312b086so1435859b6e.3
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:59 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-49190e20a0cso1999718b6e.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783438378; x=1784043178; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783438381; x=1784043181; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=qVCX3BxKIeF3zCu1Gk41lQsIsbkVDJneU2eDW7jfJVg=;
- b=mm0fzEvl2x0lbSbj2NxJepT2wH+pSrgIHpGyWSxLC676KoxmNjGdtBP8pj4zJlHhPf
- +yuPovHLl8Rg/hQYHGVTjHBU9fH7W9aqbi6WWK+kHSrX6Y5aHfG7eFZaWnY03VuLRmqE
- UGIPAcKfEg8Bs3P1+3EVHST685TQxxzMkqDbA=
+ bh=R0MhzD38+aQp+oSldm143aquwraCSOVTlPTHZJLvY8w=;
+ b=DlS4fKDSRl1irw57kBSBFwVBnEDjklXMtSWUOfKX55QhwBMjeEcjtdPjEpXjrM8EYN
+ SLTqBLC7NlLVuO9F96dqhcRN08Jb3+mpbv2P48txI0bzs4vI0hslopsaQM6gAO8cGJnC
+ l/dWaxxWurTKf5tnCo7pvI6p0iSKkIh5cSa4w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438378; x=1784043178;
+ d=1e100.net; s=20251104; t=1783438381; x=1784043181;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=qVCX3BxKIeF3zCu1Gk41lQsIsbkVDJneU2eDW7jfJVg=;
- b=pRYSFkmp6FJvcqxKfsf/4wNhwNZN+4dr7ks/H9biS2i+XH4AvRtY0h9JlWQbZNYNTL
- vZaG7l5ygTEmImwXBFskK5UqaQ/Ei+nFqBssvtJiIc1M1NTVwmDdvJP/NUKH/bDLSNiX
- /QqmDspSlj2VAyriwMcDzCReOurFMW55CG6dIpJVtFokE5tf81N7UFCSQN9qTDZdlPgb
- qpkn5r6ZCP32bEJm0+rQtvLnsvSYXM2MB7yT1g3Xs9Gz/v1N/rEvbfkwBUZdPw9TYBXZ
- 9M+RI46DSumi8kzAvcJcWPemAdQR4ibOlQ3Z35MxWVTwRgU6W5oy2oED8XYbNT0Z1Ao5
- zR7w==
-X-Gm-Message-State: AOJu0YzfZGo3hndishUOedlnRQZuUfgfr6vFxZUZXgk5Cy6sJZ+/cJYR
- znM+olTp7HqpnZaMbCaKtGpYjIMVYtRvhmiKh0Gq2xGMoLmWaaKHxRQ1oaaXbBlgHwTrKDlsNEd
- 5EcR9uQ==
-X-Gm-Gg: AfdE7cmXjS9VTvZSbntk/MiBYiqdHc+oVpIrWLwojZocfloXxYTkAUF7+NXK+2jj9Lx
- ryPcdkHrqLAU6xAOXHO4XcQu8kQ/9eNDk/HvXjA5D1+Nv2HZk7E+oQe5ojqpNYQuj5Gj3uWOVZl
- iAeIQ37NVZyOxt38/TmPE/QlXTFgy6CgCuRRQC8bPGYiLsi9VmBktyDCj6fEzqUn1ovFBPBtBnI
- tUHdbhjpbBoOPAc/d0n6zGEmu7RWtZqhdTQC5oL+jkkcsNFIKjkUJFAR2y9w531uEzAsCb8m8Oo
- vTSI/eebVjlqNRRrhejFJxsQBuY/bHWVPue4ZCtYEKxzNYA/RAhUcgxBYY/ep/9ej6V8G9+J/Iw
- Znk31yCoqvIacQlTvHF1YNPHzruYR5LHOxcM6mnHcbk9gfDpuJNTWAqL/aVtTXtsBWW04wTbGOB
- RT1cCo5vc=
-X-Received: by 2002:a05:6808:d4a:b0:497:da47:df4d with SMTP id
- 5614622812f47-49fdc14f40amr3834972b6e.16.1783438377693; 
- Tue, 07 Jul 2026 08:32:57 -0700 (PDT)
+ bh=R0MhzD38+aQp+oSldm143aquwraCSOVTlPTHZJLvY8w=;
+ b=DjxiAfqo/KpBUlDTwUOPnK/oN9uIeSqMmbd5ldbYu7tAAVBZO+lZnE6FLtemoJddZF
+ I3eNe06HUQixydzpkdeffClqGlVIU1GjPWlRT9jdDa0cwh+xpNTZzbvjufLqpq+DrSN0
+ KiYlgGKwMqj62+ARx9EGokjgGioPAzbv8Rk+TtOfHm7ZK2GnkHiobG0OjTuljIAHgkGt
+ ZhYsTMd1EQC5UgmhqcwMxekSSOSy3jsQAQCUCpFRH++hRkiLgmeBd1AOBfdX4EimNQu1
+ XS6/rpOI6Gfo6yqDBc7EwPJDNj5B2CqWRu1ZnGVVPgwNXbhreqV7F1NXkcXXIOUG/g2v
+ ogLA==
+X-Gm-Message-State: AOJu0Yytj6NeAfLwrmuK32hKEOK9SnkChbtvDu73JYcvN/zuUvwQXP9+
+ UNnoPaIrR3uTgSW3bO3b1J9Ic0R4VUGIyH8nVWCvdX4qK/KsGyJ1yotXyJNMSTE77+W0B3Ha+I6
+ ZUgmSOw==
+X-Gm-Gg: AfdE7ckv4SdxftqgiNL5mYh9Imb1ripfbb1YkOsvAPE4SaI+8l6/gske91vPVvgXkOl
+ Dfz30kTCTant8ph4Tx3Ktim70dflBaGMwExuMYPAXXKYwjx7hBmHaSh2NdR1lzZ3kXNjeS7N/wz
+ QGSUFRNU1Z1m51/3DtkLFejrRM6o3+9qZhbdNbPzqH3K2ez8GcgpH04XHkBBhTL3TnN0fmRocHd
+ kSlLlc+EH9xulQ8ZvtqGHjURa2PQ8XvD/D7Ol/56BeSTMtjooDHKivcp9b3/BZADq8BDZIWwCH9
+ RD4qoAla3GDW/yw4gDQh0hx9GuvVizu1+ErLZYj7BV7pS4gpfI4hFMEQ6hYIOX3gFFT+IJyTy8Q
+ bYYqfp74vbrqBU611rzyUJjqf/CCejRAW6LlF9dwsHh2wKpKjm07ov0HXUflFQkn7F4Z4jxwgi/
+ hOGrq2V/w=
+X-Received: by 2002:a05:6808:4703:b0:496:e0:a46b with SMTP id
+ 5614622812f47-49fdba3c2e1mr4178694b6e.3.1783438380574; 
+ Tue, 07 Jul 2026 08:33:00 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.55
+ 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:32:56 -0700 (PDT)
+ Tue, 07 Jul 2026 08:32:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Simon Glass <sjg@chromium.org>, Elaine Zhang <zhangqing@rock-chips.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 11/15] ARM: dts: Add the RV1103/RV1106 devicetree files
-Date: Tue,  7 Jul 2026 09:31:09 -0600
-Message-ID: <20260707153135.2048115-12-sjg@chromium.org>
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH v3 12/15] clk: rockchip: Add RV1106 clock driver
+Date: Tue,  7 Jul 2026 09:31:10 -0600
+Message-ID: <20260707153135.2048115-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
 References: <20260707153135.2048115-1-sjg@chromium.org>
@@ -97,2082 +100,1672 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the SoC devicetree files for the Rockchip RV1106 and its RV1103
-package variant, based on the devicetrees in the Rockchip vendor tree,
-trimmed to the devices that U-Boot supports.
+Add the clock driver for the RV1106, based on the driver in the
+Rockchip vendor tree, with the vendor-specific clk-dump and MMC
+phase-tuning code removed and the driver-model API usage brought up to
+date.
 
-The files come from the Luckfox Pico SDK [1] at commit 824b817f8:
-rv1106-pinctrl.dtsi and the rv1106-cru.h binding header are verbatim
-copies from its U-Boot tree (2017.09-based, with only the pinconf
-include path adjusted), rv1106.dtsi is a trimmed version of the same
-tree's file with the camera, codec and other vendor-only nodes
-removed, and rv1103.dtsi follows the pattern of the corresponding
-file in its kernel tree (Linux 5.10.160).
-
-Neither SoC is supported in mainline Linux and no support is in
-review, so there are no upstream devicetrees to inherit. Once Linux
-gains RV1106 devicetrees, the OF_UPSTREAM mechanism can be enabled and
-these files dropped.
-
-[1] https://github.com/LuckfoxTECH/luckfox-pico
+The RV1103 is a package variant of the RV1106 and shares this driver
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/arm/dts/rv1103.dtsi               |   16 +
- arch/arm/dts/rv1106-pinctrl.dtsi       | 1102 ++++++++++++++++++++++++
- arch/arm/dts/rv1106.dtsi               |  328 +++++++
- include/dt-bindings/clock/rv1106-cru.h |  572 ++++++++++++
- 4 files changed, 2018 insertions(+)
- create mode 100644 arch/arm/dts/rv1103.dtsi
- create mode 100644 arch/arm/dts/rv1106-pinctrl.dtsi
- create mode 100644 arch/arm/dts/rv1106.dtsi
- create mode 100644 include/dt-bindings/clock/rv1106-cru.h
+ .../include/asm/arch-rockchip/cru_rv1106.h    |  305 ++++
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rv1106.c             | 1319 +++++++++++++++++
+ 3 files changed, 1625 insertions(+)
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rv1106.h
+ create mode 100644 drivers/clk/rockchip/clk_rv1106.c
 
-diff --git a/arch/arm/dts/rv1103.dtsi b/arch/arm/dts/rv1103.dtsi
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rv1106.h b/arch/arm/include/asm/arch-rockchip/cru_rv1106.h
 new file mode 100644
-index 00000000000..025fde5bf09
+index 00000000000..8e3ac228c2b
 --- /dev/null
-+++ b/arch/arm/dts/rv1103.dtsi
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2022 Rockchip Electronics Co., Ltd.
-+ */
-+
-+#include "rv1106.dtsi"
-+
-+/ {
-+	compatible = "rockchip,rv1103";
-+
-+	aliases {
-+		/delete-property/ gpio2;
-+	};
-+};
-+
-+/delete-node/ &gpio2;
-diff --git a/arch/arm/dts/rv1106-pinctrl.dtsi b/arch/arm/dts/rv1106-pinctrl.dtsi
-new file mode 100644
-index 00000000000..8338556dafd
---- /dev/null
-+++ b/arch/arm/dts/rv1106-pinctrl.dtsi
-@@ -0,0 +1,1102 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2022 Rockchip Electronics Co., Ltd.
-+ */
-+
-+#include <dt-bindings/pinctrl/rockchip.h>
-+#include <arm64/rockchip/rockchip-pinconf.dtsi>
-+
-+/*
-+ * This file is auto generated by pin2dts tool, please keep these code
-+ * by adding changes at end of this file.
-+ */
-+&pinctrl {
-+	adc {
-+		adc_pins: adc-pins {
-+			rockchip,pins =
-+				/* adc_in0 */
-+				<4 RK_PC0 1 &pcfg_pull_none>,
-+				/* adc_in1 */
-+				<4 RK_PC1 1 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	avs {
-+		avs_pins: avs-pins {
-+			rockchip,pins =
-+				/* avs_arm */
-+				<1 RK_PA2 2 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	clk {
-+		clk_32k: clk-32k {
-+			rockchip,pins =
-+				/* clk_32k */
-+				<0 RK_PA0 2 &pcfg_pull_none>;
-+		};
-+		clk_refout: clk-refout {
-+			rockchip,pins =
-+				/* clk_refout */
-+				<0 RK_PA0 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	dsmaudio {
-+		dsmaudio_pins: dsmaudio-pins {
-+			rockchip,pins =
-+				/* dsmaudio_n */
-+				<1 RK_PD3 7 &pcfg_pull_none>,
-+				/* dsmaudio_p */
-+				<1 RK_PD2 7 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	emmc {
-+		emmc_bus8: emmc-bus8 {
-+			rockchip,pins =
-+				/* emmc_d0 */
-+				<4 RK_PA4 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d1 */
-+				<4 RK_PA3 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d2 */
-+				<4 RK_PA2 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d3 */
-+				<4 RK_PA6 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d4 */
-+				<4 RK_PA5 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d5 */
-+				<4 RK_PA7 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d6 */
-+				<4 RK_PA1 1 &pcfg_pull_up_drv_level_2>,
-+				/* emmc_d7 */
-+				<4 RK_PA0 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		emmc_clk: emmc-clk {
-+			rockchip,pins =
-+				/* emmc_clk */
-+				<4 RK_PB1 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		emmc_cmd: emmc-cmd {
-+			rockchip,pins =
-+				/* emmc_cmd */
-+				<4 RK_PB0 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+	};
-+
-+	flash {
-+		flash_pins: flash-pins {
-+			rockchip,pins =
-+				/* flash_trig_out */
-+				<2 RK_PA6 6 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	fspi {
-+		fspi_pins: fspi-pins {
-+			rockchip,pins =
-+				/* fspi_clk */
-+				<4 RK_PB1 2 &pcfg_pull_up_drv_level_2>,
-+				/* fspi_d0 */
-+				<4 RK_PA4 2 &pcfg_pull_none>,
-+				/* fspi_d1 */
-+				<4 RK_PA3 2 &pcfg_pull_none>,
-+				/* fspi_d2 */
-+				<4 RK_PA2 2 &pcfg_pull_none>,
-+				/* fspi_d3 */
-+				<4 RK_PA6 2 &pcfg_pull_none>;
-+		};
-+
-+		fspi_cs0: fspi-cs0 {
-+			rockchip,pins =
-+				/* fspi_cs0n */
-+				<4 RK_PB0 2 &pcfg_pull_up>;
-+		};
-+	};
-+
-+	hpmcu {
-+		hpmcum0_pins: hpmcum0-pins {
-+			rockchip,pins =
-+				/* hpmcu_jtag_tck_m0 */
-+				<1 RK_PB2 3 &pcfg_pull_none>,
-+				/* hpmcu_jtag_tms_m0 */
-+				<1 RK_PB3 3 &pcfg_pull_none>;
-+		};
-+
-+		hpmcum1_pins: hpmcum1-pins {
-+			rockchip,pins =
-+				/* hpmcu_jtag_tck_m1 */
-+				<3 RK_PA7 4 &pcfg_pull_none>,
-+				/* hpmcu_jtag_tms_m1 */
-+				<3 RK_PA6 4 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	i2c0 {
-+		i2c0m0_xfer: i2c0m0-xfer {
-+			rockchip,pins =
-+				/* i2c0_scl_m0 */
-+				<1 RK_PA3 2 &pcfg_pull_none_smt>,
-+				/* i2c0_sda_m0 */
-+				<1 RK_PA4 2 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c0m1_xfer: i2c0m1-xfer {
-+			rockchip,pins =
-+				/* i2c0_scl_m1 */
-+				<4 RK_PA1 4 &pcfg_pull_none_smt>,
-+				/* i2c0_sda_m1 */
-+				<4 RK_PA0 4 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c0m2_xfer: i2c0m2-xfer {
-+			rockchip,pins =
-+				/* i2c0_scl_m2 */
-+				<3 RK_PA4 3 &pcfg_pull_none_smt>,
-+				/* i2c0_sda_m2 */
-+				<3 RK_PA5 3 &pcfg_pull_none_smt>;
-+		};
-+	};
-+
-+	i2c1 {
-+		i2c1m0_xfer: i2c1m0-xfer {
-+			rockchip,pins =
-+				/* i2c1_scl_m0 */
-+				<0 RK_PA5 1 &pcfg_pull_none_smt>,
-+				/* i2c1_sda_m0 */
-+				<0 RK_PA6 1 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c1m1_xfer: i2c1m1-xfer {
-+			rockchip,pins =
-+				/* i2c1_scl_m1 */
-+				<2 RK_PB0 2 &pcfg_pull_none_smt>,
-+				/* i2c1_sda_m1 */
-+				<2 RK_PB1 2 &pcfg_pull_none_smt>;
-+		};
-+	};
-+
-+	i2c2 {
-+		i2c2m0_xfer: i2c2m0-xfer {
-+			rockchip,pins =
-+				/* i2c2_scl_m0 */
-+				<1 RK_PA0 2 &pcfg_pull_none_smt>,
-+				/* i2c2_sda_m0 */
-+				<1 RK_PA1 2 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c2m1_xfer: i2c2m1-xfer {
-+			rockchip,pins =
-+				/* i2c2_scl_m1 */
-+				<4 RK_PA7 4 &pcfg_pull_none_smt>,
-+				/* i2c2_sda_m1 */
-+				<4 RK_PA5 4 &pcfg_pull_none_smt>;
-+		};
-+	};
-+
-+	i2c3 {
-+		i2c3m0_xfer: i2c3m0-xfer {
-+			rockchip,pins =
-+				/* i2c3_scl_m0 */
-+				<2 RK_PA6 5 &pcfg_pull_none_smt>,
-+				/* i2c3_sda_m0 */
-+				<2 RK_PA7 5 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c3m1_xfer: i2c3m1-xfer {
-+			rockchip,pins =
-+				/* i2c3_scl_m1 */
-+				<1 RK_PD3 3 &pcfg_pull_none_smt>,
-+				/* i2c3_sda_m1 */
-+				<1 RK_PD2 3 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c3m2_xfer: i2c3m2-xfer {
-+			rockchip,pins =
-+				/* i2c3_scl_m2 */
-+				<3 RK_PD1 3 &pcfg_pull_none_smt>,
-+				/* i2c3_sda_m2 */
-+				<3 RK_PD2 3 &pcfg_pull_none_smt>;
-+		};
-+	};
-+
-+	i2c4 {
-+		i2c4m0_xfer: i2c4m0-xfer {
-+			rockchip,pins =
-+				/* i2c4_scl_m0 */
-+				<2 RK_PA1 5 &pcfg_pull_none_smt>,
-+				/* i2c4_sda_m0 */
-+				<2 RK_PA0 5 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c4m1_xfer: i2c4m1-xfer {
-+			rockchip,pins =
-+				/* i2c4_scl_m1 */
-+				<1 RK_PC2 4 &pcfg_pull_none_smt>,
-+				/* i2c4_sda_m1 */
-+				<1 RK_PC3 4 &pcfg_pull_none_smt>;
-+		};
-+
-+		i2c4m2_xfer: i2c4m2-xfer {
-+			rockchip,pins =
-+				/* i2c4_scl_m2 */
-+				<3 RK_PC7 3 &pcfg_pull_none_smt>,
-+				/* i2c4_sda_m2 */
-+				<3 RK_PD0 3 &pcfg_pull_none_smt>;
-+		};
-+	};
-+
-+	i2s0 {
-+		i2s0_pins: i2s0-pins {
-+			rockchip,pins =
-+				/* i2s0_lrck */
-+				<2 RK_PA1 2 &pcfg_pull_none>,
-+				/* i2s0_mclk */
-+				<2 RK_PA2 2 &pcfg_pull_none>,
-+				/* i2s0_sclk */
-+				<2 RK_PA0 2 &pcfg_pull_none>,
-+				/* i2s0_sdi0 */
-+				<2 RK_PA5 2 &pcfg_pull_none>,
-+				/* i2s0_sdo0 */
-+				<2 RK_PA4 2 &pcfg_pull_none>,
-+				/* i2s0_sdo1_sdi3 */
-+				<2 RK_PA7 2 &pcfg_pull_none>,
-+				/* i2s0_sdo2_sdi2 */
-+				<2 RK_PA6 2 &pcfg_pull_none>,
-+				/* i2s0_sdo3_sdi1 */
-+				<2 RK_PA3 2 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	lcd {
-+		lcd_pins: lcd-pins {
-+			rockchip,pins =
-+				/* lcd_clk */
-+				<1 RK_PD3 1 &pcfg_pull_none>,
-+				/* lcd_d0 */
-+				<1 RK_PC7 1 &pcfg_pull_none>,
-+				/* lcd_d1 */
-+				<1 RK_PC6 1 &pcfg_pull_none>,
-+				/* lcd_d2 */
-+				<1 RK_PC5 1 &pcfg_pull_none>,
-+				/* lcd_d3 */
-+				<1 RK_PC4 1 &pcfg_pull_none>,
-+				/* lcd_d4 */
-+				<1 RK_PC3 1 &pcfg_pull_none>,
-+				/* lcd_d5 */
-+				<1 RK_PC2 1 &pcfg_pull_none>,
-+				/* lcd_d6 */
-+				<1 RK_PC1 1 &pcfg_pull_none>,
-+				/* lcd_d7 */
-+				<1 RK_PC0 1 &pcfg_pull_none>,
-+				/* lcd_d8 */
-+				<2 RK_PA0 3 &pcfg_pull_none>,
-+				/* lcd_d9 */
-+				<2 RK_PA1 3 &pcfg_pull_none>,
-+				/* lcd_d10 */
-+				<2 RK_PA2 3 &pcfg_pull_none>,
-+				/* lcd_d11 */
-+				<2 RK_PA3 3 &pcfg_pull_none>,
-+				/* lcd_d12 */
-+				<2 RK_PA4 3 &pcfg_pull_none>,
-+				/* lcd_d13 */
-+				<2 RK_PA5 3 &pcfg_pull_none>,
-+				/* lcd_d14 */
-+				<2 RK_PA6 3 &pcfg_pull_none>,
-+				/* lcd_d15 */
-+				<2 RK_PA7 3 &pcfg_pull_none>,
-+				/* lcd_d16 */
-+				<2 RK_PB0 3 &pcfg_pull_none>,
-+				/* lcd_d17 */
-+				<2 RK_PB1 3 &pcfg_pull_none>,
-+				/* lcd_den */
-+				<1 RK_PD0 1 &pcfg_pull_none>,
-+				/* lcd_hsync */
-+				<1 RK_PD1 1 &pcfg_pull_none>,
-+				/* lcd_vsync */
-+				<1 RK_PD2 1 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	lpmcu {
-+		lpmcum0_pins: lpmcum0-pins {
-+			rockchip,pins =
-+				/* lpmcu_jtag_tck_m0 */
-+				<1 RK_PB2 4 &pcfg_pull_none>,
-+				/* lpmcu_jtag_tms_m0 */
-+				<1 RK_PB3 4 &pcfg_pull_none>;
-+		};
-+
-+		lpmcum1_pins: lpmcum1-pins {
-+			rockchip,pins =
-+				/* lpmcu_jtag_tck_m1 */
-+				<3 RK_PA4 4 &pcfg_pull_none>,
-+				/* lpmcu_jtag_tms_m1 */
-+				<3 RK_PA5 4 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	mipi {
-+		mipi_pins: mipi-pins {
-+			rockchip,pins =
-+				/* mipi_lvds_ck0n */
-+				<3 RK_PC0 2 &pcfg_pull_none>,
-+				/* mipi_lvds_ck0p */
-+				<3 RK_PC1 2 &pcfg_pull_none>,
-+				/* mipi_lvds_ck1n */
-+				<3 RK_PB2 2 &pcfg_pull_none>,
-+				/* mipi_lvds_ck1p */
-+				<3 RK_PB3 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d0n */
-+				<3 RK_PC2 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d0p */
-+				<3 RK_PC3 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d1n */
-+				<3 RK_PB6 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d1p */
-+				<3 RK_PB7 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d2n */
-+				<3 RK_PB4 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d2p */
-+				<3 RK_PB5 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d3n */
-+				<3 RK_PB0 2 &pcfg_pull_none>,
-+				/* mipi_lvds_d3p */
-+				<3 RK_PB1 2 &pcfg_pull_none>,
-+				/* mipi_refclk_out0 */
-+				<3 RK_PC4 2 &pcfg_pull_none>,
-+				/* mipi_refclk_out1 */
-+				<3 RK_PC6 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pmic {
-+		pmicm0_pins: pmicm0-pins {
-+			rockchip,pins =
-+				/* pmic_sleep_m0 */
-+				<0 RK_PA4 1 &pcfg_pull_none>;
-+		};
-+
-+		pmicm1_pins: pmicm1-pins {
-+			rockchip,pins =
-+				/* pmic_sleep_m1 */
-+				<0 RK_PA3 1 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pmu {
-+		pmu_pins: pmu-pins {
-+			rockchip,pins =
-+				/* pmu_debug */
-+				<1 RK_PA1 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	prelight {
-+		prelight_pins: prelight-pins {
-+			rockchip,pins =
-+				/* prelight_trig_out */
-+				<2 RK_PA7 6 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm0 {
-+		pwm0m0_pins: pwm0m0-pins {
-+			rockchip,pins =
-+				/* pwm0_m0 */
-+				<1 RK_PA2 1 &pcfg_pull_none>;
-+		};
-+
-+		pwm0m1_pins: pwm0m1-pins {
-+			rockchip,pins =
-+				/* pwm0_m1 */
-+				<1 RK_PD2 6 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm1 {
-+		pwm1m0_pins: pwm1m0-pins {
-+			rockchip,pins =
-+				/* pwm1_m0 */
-+				<0 RK_PA4 2 &pcfg_pull_none>;
-+		};
-+
-+		pwm1m1_pins: pwm1m1-pins {
-+			rockchip,pins =
-+				/* pwm1_m1 */
-+				<4 RK_PC1 2 &pcfg_pull_none>;
-+		};
-+
-+		pwm1m2_pins: pwm1m2-pins {
-+			rockchip,pins =
-+				/* pwm1_m2 */
-+				<3 RK_PD3 2 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm2 {
-+		pwm2m0_pins: pwm2m0-pins {
-+			rockchip,pins =
-+				/* pwm2_m0 */
-+				<0 RK_PA1 2 &pcfg_pull_none>;
-+		};
-+
-+		pwm2m1_pins: pwm2m1-pins {
-+			rockchip,pins =
-+				/* pwm2_m1 */
-+				<2 RK_PA6 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm2m2_pins: pwm2m2-pins {
-+			rockchip,pins =
-+				/* pwm2_m2 */
-+				<1 RK_PC0 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm3 {
-+		pwm3m0_pins: pwm3m0-pins {
-+			rockchip,pins =
-+				/* pwm3_ir_m0 */
-+				<0 RK_PA2 1 &pcfg_pull_none>;
-+		};
-+
-+		pwm3m1_pins: pwm3m1-pins {
-+			rockchip,pins =
-+				/* pwm3_ir_m1 */
-+				<1 RK_PB0 2 &pcfg_pull_none>;
-+		};
-+
-+		pwm3m2_pins: pwm3m2-pins {
-+			rockchip,pins =
-+				/* pwm3_ir_m2 */
-+				<1 RK_PD0 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm4 {
-+		pwm4m0_pins: pwm4m0-pins {
-+			rockchip,pins =
-+				/* pwm4_m0 */
-+				<1 RK_PA1 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm4m1_pins: pwm4m1-pins {
-+			rockchip,pins =
-+				/* pwm4_m1 */
-+				<2 RK_PA7 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm4m2_pins: pwm4m2-pins {
-+			rockchip,pins =
-+				/* pwm4_m2 */
-+				<1 RK_PC1 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm5 {
-+		pwm5m0_pins: pwm5m0-pins {
-+			rockchip,pins =
-+				/* pwm5_m0 */
-+				<0 RK_PA5 3 &pcfg_pull_none>;
-+		};
-+
-+		pwm5m1_pins: pwm5m1-pins {
-+			rockchip,pins =
-+				/* pwm5_m1 */
-+				<2 RK_PB0 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm5m2_pins: pwm5m2-pins {
-+			rockchip,pins =
-+				/* pwm5_m2 */
-+				<1 RK_PC2 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm6 {
-+		pwm6m0_pins: pwm6m0-pins {
-+			rockchip,pins =
-+				/* pwm6_m0 */
-+				<0 RK_PA6 3 &pcfg_pull_none>;
-+		};
-+
-+		pwm6m1_pins: pwm6m1-pins {
-+			rockchip,pins =
-+				/* pwm6_m1 */
-+				<2 RK_PB1 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm6m2_pins: pwm6m2-pins {
-+			rockchip,pins =
-+				/* pwm6_m2 */
-+				<1 RK_PC3 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm7 {
-+		pwm7m0_pins: pwm7m0-pins {
-+			rockchip,pins =
-+				/* pwm7_ir_m0 */
-+				<1 RK_PA0 3 &pcfg_pull_none>;
-+		};
-+
-+		pwm7m1_pins: pwm7m1-pins {
-+			rockchip,pins =
-+				/* pwm7_ir_m1 */
-+				<1 RK_PB1 2 &pcfg_pull_none>;
-+		};
-+
-+		pwm7m2_pins: pwm7m2-pins {
-+			rockchip,pins =
-+				/* pwm7_ir_m2 */
-+				<3 RK_PC6 2 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm8 {
-+		pwm8m0_pins: pwm8m0-pins {
-+			rockchip,pins =
-+				/* pwm8_m0 */
-+				<3 RK_PA3 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm8m1_pins: pwm8m1-pins {
-+			rockchip,pins =
-+				/* pwm8_m1 */
-+				<1 RK_PC4 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm9 {
-+		pwm9m0_pins: pwm9m0-pins {
-+			rockchip,pins =
-+				/* pwm9_m0 */
-+				<3 RK_PA2 4 &pcfg_pull_none>;
-+		};
-+
-+		pwm9m1_pins: pwm9m1-pins {
-+			rockchip,pins =
-+				/* pwm9_m1 */
-+				<1 RK_PC5 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm10 {
-+		pwm10m0_pins: pwm10m0-pins {
-+			rockchip,pins =
-+				/* pwm10_m0 */
-+				<3 RK_PA4 5 &pcfg_pull_none>;
-+		};
-+
-+		pwm10m1_pins: pwm10m1-pins {
-+			rockchip,pins =
-+				/* pwm10_m1 */
-+				<1 RK_PC6 3 &pcfg_pull_none>;
-+		};
-+
-+		pwm10m2_pins: pwm10m2-pins {
-+			rockchip,pins =
-+				/* pwm10_m2 */
-+				<1 RK_PD1 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pwm11 {
-+		pwm11m0_pins: pwm11m0-pins {
-+			rockchip,pins =
-+				/* pwm11_ir_m0 */
-+				<3 RK_PA5 5 &pcfg_pull_none>;
-+		};
-+
-+		pwm11m1_pins: pwm11m1-pins {
-+			rockchip,pins =
-+				/* pwm11_ir_m1 */
-+				<1 RK_PC7 3 &pcfg_pull_none>;
-+		};
-+
-+		pwm11m2_pins: pwm11m2-pins {
-+			rockchip,pins =
-+				/* pwm11_ir_m2 */
-+				<1 RK_PD3 5 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	rtc {
-+		rtc_pins: rtc-pins {
-+			rockchip,pins =
-+				/* rtc_clko */
-+				<0 RK_PA0 4 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	sdmmc0: sdmmc0 {
-+		sdmmc0_bus4: sdmmc0-bus4 {
-+			rockchip,pins =
-+				/* sdmmc0_d0 */
-+				<3 RK_PA3 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc0_d1 */
-+				<3 RK_PA2 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc0_d2 */
-+				<3 RK_PA7 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc0_d3 */
-+				<3 RK_PA6 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc0_clk: sdmmc0-clk {
-+			rockchip,pins =
-+				/* sdmmc0_clk */
-+				<3 RK_PA4 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc0_cmd: sdmmc0-cmd {
-+			rockchip,pins =
-+				/* sdmmc0_cmd */
-+				<3 RK_PA5 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc0_det: sdmmc0-det {
-+			rockchip,pins =
-+				/* sdmmc0_det */
-+				<3 RK_PA1 1 &pcfg_pull_up>;
-+		};
-+
-+		sdmmc0_idle_pins: sdmmc0-idle-pins {
-+			rockchip,pins =
-+				/* sdmmc0_d0 */
-+				<3 RK_PA3 1 &pcfg_pull_down>,
-+				/* sdmmc0_d1 */
-+				<3 RK_PA2 1 &pcfg_pull_down>,
-+				/* sdmmc0_d2 */
-+				<3 RK_PA7 1 &pcfg_pull_down>,
-+				/* sdmmc0_d3 */
-+				<3 RK_PA6 1 &pcfg_pull_down>,
-+				/* sdmmc0_clk */
-+				<3 RK_PA4 1 &pcfg_pull_down>,
-+				/* sdmmc0_cmd */
-+				<3 RK_PA5 1 &pcfg_pull_down>;
-+		};
-+	};
-+
-+	sdmmc1 {
-+		sdmmc1m0_bus4: sdmmc1m0-bus4 {
-+			rockchip,pins =
-+				/* sdmmc1_d0_m0 */
-+				<2 RK_PA1 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d1_m0 */
-+				<2 RK_PA0 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d2_m0 */
-+				<2 RK_PA5 1 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d3_m0 */
-+				<2 RK_PA4 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m0_clk: sdmmc1m0-clk {
-+			rockchip,pins =
-+				/* sdmmc1_clk_m0 */
-+				<2 RK_PA2 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m0_cmd: sdmmc1m0-cmd {
-+			rockchip,pins =
-+				/* sdmmc1_cmd_m0 */
-+				<2 RK_PA3 1 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m1_bus4: sdmmc1m1-bus4 {
-+			rockchip,pins =
-+				/* sdmmc1_d0_m1 */
-+				<1 RK_PC1 5 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d1_m1 */
-+				<1 RK_PC0 5 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d2_m1 */
-+				<1 RK_PC5 5 &pcfg_pull_up_drv_level_2>,
-+				/* sdmmc1_d3_m1 */
-+				<1 RK_PC4 5 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m1_clk: sdmmc1m1-clk {
-+			rockchip,pins =
-+				/* sdmmc1_clk_m1 */
-+				<1 RK_PC2 5 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m1_cmd: sdmmc1m1-cmd {
-+			rockchip,pins =
-+				/* sdmmc1_cmd_m1 */
-+				<1 RK_PC3 5 &pcfg_pull_up_drv_level_2>;
-+		};
-+
-+		sdmmc1m1_idle_pins: sdmmc1m1-idle-pins {
-+			rockchip,pins =
-+				/* sdmmc1_d0_m1 */
-+				<1 RK_PC1 5 &pcfg_pull_down>,
-+				/* sdmmc1_d1_m1 */
-+				<1 RK_PC0 5 &pcfg_pull_down>,
-+				/* sdmmc1_d2_m1 */
-+				<1 RK_PC5 5 &pcfg_pull_down>,
-+				/* sdmmc1_d3_m1 */
-+				<1 RK_PC4 5 &pcfg_pull_down>,
-+				/* sdmmc1_clk_m1 */
-+				<1 RK_PC2 5 &pcfg_pull_down>,
-+				/* sdmmc1_cmd_m1 */
-+				<1 RK_PC3 5 &pcfg_pull_down>;
-+		};
-+	};
-+
-+	spi0 {
-+		spi0m0_pins: spi0m0-pins {
-+			rockchip,pins =
-+				/* spi0_clk_m0 */
-+				<1 RK_PC1 4 &pcfg_pull_none>,
-+				/* spi0_miso_m0 */
-+				<1 RK_PC3 6 &pcfg_pull_none>,
-+				/* spi0_mosi_m0 */
-+				<1 RK_PC2 6 &pcfg_pull_none>;
-+		};
-+
-+		spi0m0_cs0: spi0m0-cs0 {
-+			rockchip,pins =
-+				/* spi0_cs0n_m0 */
-+				<1 RK_PC0 4 &pcfg_pull_none>;
-+		};
-+
-+		spi0m0_cs1: spi0m0-cs1 {
-+			rockchip,pins =
-+				/* spi0_cs1n_m0 */
-+				<1 RK_PD2 5 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	spi1 {
-+		spi1m0_pins: spi1m0-pins {
-+			rockchip,pins =
-+				/* spi1_clk_m0 */
-+				<4 RK_PA7 2 &pcfg_pull_none>,
-+				/* spi1_miso_m0 */
-+				<4 RK_PA0 2 &pcfg_pull_none>,
-+				/* spi1_mosi_m0 */
-+				<4 RK_PA1 2 &pcfg_pull_none>;
-+		};
-+
-+		spi1m0_cs0: spi1m0-cs0 {
-+			rockchip,pins =
-+				/* spi1_cs0n_m0 */
-+				<4 RK_PA5 2 &pcfg_pull_none>;
-+		};
-+
-+		spi1m0_cs1: spi1m0-cs1 {
-+			rockchip,pins =
-+				/* spi1_cs1n_m0 */
-+				<1 RK_PB1 3 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	uart0 {
-+		uart0m0_xfer: uart0m0-xfer {
-+			rockchip,pins =
-+				/* uart0_rx_m0 */
-+				<0 RK_PA0 1 &pcfg_pull_up>,
-+				/* uart0_tx_m0 */
-+				<0 RK_PA1 1 &pcfg_pull_up>;
-+		};
-+
-+		uart0m1_xfer: uart0m1-xfer {
-+			rockchip,pins =
-+				/* uart0_rx_m1 */
-+				<2 RK_PB0 1 &pcfg_pull_up>,
-+				/* uart0_tx_m1 */
-+				<2 RK_PB1 1 &pcfg_pull_up>;
-+		};
-+
-+		uart0m1_ctsn: uart0m1-ctsn {
-+			rockchip,pins =
-+				/* uart0m1_ctsn */
-+				<2 RK_PA7 1 &pcfg_pull_none>;
-+		};
-+		uart0m1_rtsn: uart0m1-rtsn {
-+			rockchip,pins =
-+				/* uart0m1_rtsn */
-+				<2 RK_PA6 1 &pcfg_pull_none>;
-+		};
-+
-+		uart0m2_xfer: uart0m2-xfer {
-+			rockchip,pins =
-+				/* uart0_rx_m2 */
-+				<4 RK_PA0 3 &pcfg_pull_up>,
-+				/* uart0_tx_m2 */
-+				<4 RK_PA1 3 &pcfg_pull_up>;
-+		};
-+	};
-+
-+	uart1 {
-+		uart1m0_xfer: uart1m0-xfer {
-+			rockchip,pins =
-+				/* uart1_rx_m0 */
-+				<1 RK_PA4 1 &pcfg_pull_up>,
-+				/* uart1_tx_m0 */
-+				<1 RK_PA3 1 &pcfg_pull_up>;
-+		};
-+
-+		uart1m0_ctsn: uart1m0-ctsn {
-+			rockchip,pins =
-+				/* uart1m0_ctsn */
-+				<0 RK_PA6 2 &pcfg_pull_none>;
-+		};
-+		uart1m0_rtsn: uart1m0-rtsn {
-+			rockchip,pins =
-+				/* uart1m0_rtsn */
-+				<0 RK_PA5 2 &pcfg_pull_none>;
-+		};
-+
-+		uart1m1_xfer: uart1m1-xfer {
-+			rockchip,pins =
-+				/* uart1_rx_m1 */
-+				<2 RK_PA5 4 &pcfg_pull_up>,
-+				/* uart1_tx_m1 */
-+				<2 RK_PA4 4 &pcfg_pull_up>;
-+		};
-+
-+		uart1m1_ctsn: uart1m1-ctsn {
-+			rockchip,pins =
-+				/* uart1m1_ctsn */
-+				<2 RK_PA0 4 &pcfg_pull_none>;
-+		};
-+		uart1m1_rtsn: uart1m1-rtsn {
-+			rockchip,pins =
-+				/* uart1m1_rtsn */
-+				<2 RK_PA1 4 &pcfg_pull_none>;
-+		};
-+
-+		uart1m2_xfer: uart1m2-xfer {
-+			rockchip,pins =
-+				/* uart1_rx_m2 */
-+				<4 RK_PA7 3 &pcfg_pull_up>,
-+				/* uart1_tx_m2 */
-+				<4 RK_PA5 3 &pcfg_pull_up>;
-+		};
-+	};
-+
-+	uart2 {
-+		uart2m0_xfer: uart2m0-xfer {
-+			rockchip,pins =
-+				/* uart2_rx_m0 */
-+				<3 RK_PA3 2 &pcfg_pull_up>,
-+				/* uart2_tx_m0 */
-+				<3 RK_PA2 2 &pcfg_pull_up>;
-+		};
-+
-+		uart2m1_xfer: uart2m1-xfer {
-+			rockchip,pins =
-+				/* uart2_rx_m1 */
-+				<1 RK_PB3 2 &pcfg_pull_up>,
-+				/* uart2_tx_m1 */
-+				<1 RK_PB2 2 &pcfg_pull_up>;
-+		};
-+	};
-+
-+	uart3 {
-+		uart3m0_xfer: uart3m0-xfer {
-+			rockchip,pins =
-+				/* uart3_rx_m0 */
-+				<1 RK_PA1 1 &pcfg_pull_up>,
-+				/* uart3_tx_m0 */
-+				<1 RK_PA0 1 &pcfg_pull_up>;
-+		};
-+
-+		uart3m1_xfer: uart3m1-xfer {
-+			rockchip,pins =
-+				/* uart3_rx_m1 */
-+				<1 RK_PD1 5 &pcfg_pull_up>,
-+				/* uart3_tx_m1 */
-+				<1 RK_PD0 5 &pcfg_pull_up>;
-+		};
-+	};
-+
-+	uart4 {
-+		uart4m0_xfer: uart4m0-xfer {
-+			rockchip,pins =
-+				/* uart4_rx_m0 */
-+				<1 RK_PB0 1 &pcfg_pull_up>,
-+				/* uart4_tx_m0 */
-+				<1 RK_PB1 1 &pcfg_pull_up>;
-+		};
-+
-+		uart4m1_xfer: uart4m1-xfer {
-+			rockchip,pins =
-+				/* uart4_rx_m1 */
-+				<1 RK_PC4 4 &pcfg_pull_up>,
-+				/* uart4_tx_m1 */
-+				<1 RK_PC5 4 &pcfg_pull_up>;
-+		};
-+
-+		uart4m1_ctsn: uart4m1-ctsn {
-+			rockchip,pins =
-+				/* uart4m1_ctsn */
-+				<1 RK_PC7 4 &pcfg_pull_none>;
-+		};
-+		uart4m1_rtsn: uart4m1-rtsn {
-+			rockchip,pins =
-+				/* uart4m1_rtsn */
-+				<1 RK_PC6 4 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	uart5 {
-+		uart5m0_xfer: uart5m0-xfer {
-+			rockchip,pins =
-+				/* uart5_rx_m0 */
-+				<3 RK_PA7 2 &pcfg_pull_up>,
-+				/* uart5_tx_m0 */
-+				<3 RK_PA6 2 &pcfg_pull_up>;
-+		};
-+
-+		uart5m0_ctsn: uart5m0-ctsn {
-+			rockchip,pins =
-+				/* uart5m0_ctsn */
-+				<3 RK_PA5 2 &pcfg_pull_none>;
-+		};
-+		uart5m0_rtsn: uart5m0-rtsn {
-+			rockchip,pins =
-+				/* uart5m0_rtsn */
-+				<3 RK_PA4 2 &pcfg_pull_none>;
-+		};
-+
-+		uart5m1_xfer: uart5m1-xfer {
-+			rockchip,pins =
-+				/* uart5_rx_m1 */
-+				<1 RK_PD2 4 &pcfg_pull_up>,
-+				/* uart5_tx_m1 */
-+				<1 RK_PD3 4 &pcfg_pull_up>;
-+		};
-+
-+		uart5m1_ctsn: uart5m1-ctsn {
-+			rockchip,pins =
-+				/* uart5m1_ctsn */
-+				<1 RK_PD1 4 &pcfg_pull_none>;
-+		};
-+		uart5m1_rtsn: uart5m1-rtsn {
-+			rockchip,pins =
-+				/* uart5m1_rtsn */
-+				<1 RK_PD0 4 &pcfg_pull_none>;
-+		};
-+
-+		uart5m2_xfer: uart5m2-xfer {
-+			rockchip,pins =
-+				/* uart5_rx_m2 */
-+				<3 RK_PD0 2 &pcfg_pull_up>,
-+				/* uart5_tx_m2 */
-+				<3 RK_PC7 2 &pcfg_pull_up>;
-+		};
-+
-+		uart5m2_ctsn: uart5m2-ctsn {
-+			rockchip,pins =
-+				/* uart5m2_ctsn */
-+				<3 RK_PD2 2 &pcfg_pull_none>;
-+		};
-+		uart5m2_rtsn: uart5m2-rtsn {
-+			rockchip,pins =
-+				/* uart5m2_rtsn */
-+				<3 RK_PD1 2 &pcfg_pull_none>;
-+		};
-+	};
-+
-+	vicap {
-+		vicapm0_pins: vicapm0-pins {
-+			rockchip,pins =
-+				/* vicap_clkin_m0 */
-+				<3 RK_PC2 1 &pcfg_pull_none>,
-+				/* vicap_clkout_m0 */
-+				<3 RK_PC4 1 &pcfg_pull_none>,
-+				/* vicap_d0_m0 */
-+				<3 RK_PB0 1 &pcfg_pull_none>,
-+				/* vicap_d1_m0 */
-+				<3 RK_PB1 1 &pcfg_pull_none>,
-+				/* vicap_d2_m0 */
-+				<3 RK_PB2 1 &pcfg_pull_none>,
-+				/* vicap_d3_m0 */
-+				<3 RK_PB3 1 &pcfg_pull_none>,
-+				/* vicap_d4_m0 */
-+				<3 RK_PB4 1 &pcfg_pull_none>,
-+				/* vicap_d5_m0 */
-+				<3 RK_PB5 1 &pcfg_pull_none>,
-+				/* vicap_d6_m0 */
-+				<3 RK_PB6 1 &pcfg_pull_none>,
-+				/* vicap_d7_m0 */
-+				<3 RK_PB7 1 &pcfg_pull_none>,
-+				/* vicap_d8_m0 */
-+				<3 RK_PC0 1 &pcfg_pull_none>,
-+				/* vicap_d9_m0 */
-+				<3 RK_PC1 1 &pcfg_pull_none>,
-+				/* vicap_hsync_m0 */
-+				<3 RK_PC3 1 &pcfg_pull_none>,
-+				/* vicap_vsync_m0 */
-+				<3 RK_PC5 1 &pcfg_pull_none>;
-+		};
-+
-+		vicapm1_pins: vicapm1-pins {
-+			rockchip,pins =
-+				/* vicap_clkin_m1 */
-+				<1 RK_PD0 2 &pcfg_pull_none>,
-+				/* vicap_clkout_m1 */
-+				<1 RK_PD3 2 &pcfg_pull_none>,
-+				/* vicap_d0_m1 */
-+				<1 RK_PA2 3 &pcfg_pull_none>,
-+				/* vicap_d1_m1 */
-+				<1 RK_PB1 4 &pcfg_pull_none>,
-+				/* vicap_d2_m1 */
-+				<1 RK_PC0 2 &pcfg_pull_none>,
-+				/* vicap_d3_m1 */
-+				<1 RK_PC1 2 &pcfg_pull_none>,
-+				/* vicap_d4_m1 */
-+				<1 RK_PC2 2 &pcfg_pull_none>,
-+				/* vicap_d5_m1 */
-+				<1 RK_PC3 2 &pcfg_pull_none>,
-+				/* vicap_d6_m1 */
-+				<1 RK_PC4 2 &pcfg_pull_none>,
-+				/* vicap_d7_m1 */
-+				<1 RK_PC5 2 &pcfg_pull_none>,
-+				/* vicap_d8_m1 */
-+				<1 RK_PC6 2 &pcfg_pull_none>,
-+				/* vicap_d9_m1 */
-+				<1 RK_PC7 2 &pcfg_pull_none>,
-+				/* vicap_hsync_m1 */
-+				<1 RK_PD1 2 &pcfg_pull_none>,
-+				/* vicap_vsync_m1 */
-+				<1 RK_PD2 2 &pcfg_pull_none>;
-+		};
-+
-+		vicap_d10: vicap-d10 {
-+			rockchip,pins =
-+				/* vicap_d10 */
-+				<3 RK_PC6 1 &pcfg_pull_none>;
-+		};
-+		vicap_d11: vicap-d11 {
-+			rockchip,pins =
-+				/* vicap_d11 */
-+				<3 RK_PC7 1 &pcfg_pull_none>;
-+		};
-+		vicap_d12: vicap-d12 {
-+			rockchip,pins =
-+				/* vicap_d12 */
-+				<3 RK_PD0 1 &pcfg_pull_none>;
-+		};
-+		vicap_d13: vicap-d13 {
-+			rockchip,pins =
-+				/* vicap_d13 */
-+				<3 RK_PD1 1 &pcfg_pull_none>;
-+		};
-+		vicap_d14: vicap-d14 {
-+			rockchip,pins =
-+				/* vicap_d14 */
-+				<3 RK_PD2 1 &pcfg_pull_none>;
-+		};
-+		vicap_d15: vicap-d15 {
-+			rockchip,pins =
-+				/* vicap_d15 */
-+				<3 RK_PD3 1 &pcfg_pull_none>;
-+		};
-+	};
-+};
-diff --git a/arch/arm/dts/rv1106.dtsi b/arch/arm/dts/rv1106.dtsi
-new file mode 100644
-index 00000000000..df2386eb31e
---- /dev/null
-+++ b/arch/arm/dts/rv1106.dtsi
-@@ -0,0 +1,328 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2022 Rockchip Electronics Co., Ltd.
-+ */
-+
-+#include <dt-bindings/clock/rv1106-cru.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/pinctrl/rockchip.h>
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	compatible = "rockchip,rv1106";
-+
-+	interrupt-parent = <&gic>;
-+
-+	aliases {
-+		gpio0 = &gpio0;
-+		gpio1 = &gpio1;
-+		gpio2 = &gpio2;
-+		gpio3 = &gpio3;
-+		gpio4 = &gpio4;
-+		serial0 = &uart0;
-+		serial1 = &uart1;
-+		serial2 = &uart2;
-+		serial3 = &uart3;
-+		serial4 = &uart4;
-+		serial5 = &uart5;
-+	};
-+
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		cpu0: cpu@f00 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a7";
-+			reg = <0xf00>;
-+		};
-+	};
-+
-+	timer {
-+		compatible = "arm,armv7-timer";
-+		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>;
-+		clock-frequency = <24000000>;
-+	};
-+
-+	xin24m: oscillator {
-+		compatible = "fixed-clock";
-+		clock-frequency = <24000000>;
-+		clock-output-names = "xin24m";
-+		#clock-cells = <0>;
-+	};
-+
-+	grf: syscon@ff000000 {
-+		compatible = "rockchip,rv1106-grf", "syscon", "simple-mfd";
-+		reg = <0xff000000 0x68000>;
-+
-+		grf_cru: grf-clock-controller {
-+			compatible = "rockchip,rv1106-grf-cru";
-+			#clock-cells = <1>;
-+		};
-+	};
-+
-+	gic: interrupt-controller@ff1f0000 {
-+		compatible = "arm,gic-400";
-+		interrupt-controller;
-+		#interrupt-cells = <3>;
-+		#address-cells = <0>;
-+
-+		reg = <0xff1f1000 0x1000>,
-+		      <0xff1f2000 0x2000>,
-+		      <0xff1f4000 0x2000>,
-+		      <0xff1f6000 0x2000>;
-+		interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>;
-+	};
-+
-+	pmuioc: syscon@ff388000 {
-+		compatible = "rockchip,rv1106-pmuioc", "syscon";
-+		reg = <0xff388000 0x1000>;
-+	};
-+
-+	cru: clock-controller@ff3a0000 {
-+		compatible = "rockchip,rv1106-cru";
-+		reg = <0xff3a0000 0x20000>;
-+		rockchip,grf = <&grf>;
-+		#clock-cells = <1>;
-+		#reset-cells = <1>;
-+
-+		assigned-clocks =
-+			<&cru PLL_GPLL>, <&cru PLL_CPLL>,
-+			<&cru ARMCLK>,
-+			<&cru ACLK_PERI_ROOT>, <&cru HCLK_PERI_ROOT>,
-+			<&cru PCLK_PERI_ROOT>, <&cru ACLK_BUS_ROOT>,
-+			<&cru PCLK_TOP_ROOT>, <&cru PCLK_PMU_ROOT>,
-+			<&cru HCLK_PMU_ROOT>;
-+		assigned-clock-rates =
-+			<1188000000>, <1000000000>,
-+			<816000000>,
-+			<400000000>, <200000000>,
-+			<100000000>, <300000000>,
-+			<100000000>, <100000000>,
-+			<200000000>;
-+	};
-+
-+	saradc: saradc@ff3c0000 {
-+		compatible = "rockchip,rv1106-saradc";
-+		reg = <0xff3c0000 0x100>;
-+		interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
-+		#io-channel-cells = <1>;
-+		clocks = <&cru CLK_SARADC>, <&cru PCLK_SARADC>;
-+		clock-names = "saradc", "apb_pclk";
-+		resets = <&cru SRST_P_SARADC>;
-+		reset-names = "saradc-apb";
-+		status = "disabled";
-+	};
-+
-+	uart0: serial@ff4a0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4a0000 0x100>;
-+		interrupts = <GIC_SPI 25 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART0>, <&cru PCLK_UART0>;
-+		clock-names = "baudclk", "apb_pclk";
-+		status = "disabled";
-+	};
-+
-+	uart1: serial@ff4b0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4b0000 0x100>;
-+		interrupts = <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART1>, <&cru PCLK_UART1>;
-+		clock-names = "baudclk", "apb_pclk";
-+		status = "disabled";
-+	};
-+
-+	uart2: serial@ff4c0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4c0000 0x100>;
-+		interrupts = <GIC_SPI 27 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART2>, <&cru PCLK_UART2>;
-+		clock-names = "baudclk", "apb_pclk";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&uart2m1_xfer>;
-+		status = "disabled";
-+	};
-+
-+	uart3: serial@ff4d0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4d0000 0x100>;
-+		interrupts = <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART3>, <&cru PCLK_UART3>;
-+		clock-names = "baudclk", "apb_pclk";
-+		status = "disabled";
-+	};
-+
-+	uart4: serial@ff4e0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4e0000 0x100>;
-+		interrupts = <GIC_SPI 29 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART4>, <&cru PCLK_UART4>;
-+		clock-names = "baudclk", "apb_pclk";
-+		status = "disabled";
-+	};
-+
-+	uart5: serial@ff4f0000 {
-+		compatible = "rockchip,rv1106-uart", "snps,dw-apb-uart";
-+		reg = <0xff4f0000 0x100>;
-+		interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
-+		reg-shift = <2>;
-+		reg-io-width = <4>;
-+		clock-frequency = <24000000>;
-+		clocks = <&cru SCLK_UART5>, <&cru PCLK_UART5>;
-+		clock-names = "baudclk", "apb_pclk";
-+		status = "disabled";
-+	};
-+
-+	ioc: syscon@ff538000 {
-+		compatible = "rockchip,rv1106-ioc", "syscon";
-+		reg = <0xff538000 0x40000>;
-+	};
-+
-+	wdt: watchdog@ff5a0000 {
-+		compatible = "rockchip,rv1106-wdt", "snps,dw-wdt";
-+		reg = <0xff5a0000 0x100>;
-+		clocks = <&cru TCLK_WDT_NS>, <&cru PCLK_WDT_NS>;
-+		clock-names = "tclk", "pclk";
-+		interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
-+		resets = <&cru SRST_P_WDT_NS>;
-+		reset-names = "reset";
-+		status = "disabled";
-+	};
-+
-+	emmc: mmc@ffa90000 {
-+		compatible = "rockchip,rv1106-dw-mshc", "rockchip,rk3288-dw-mshc";
-+		reg = <0xffa90000 0x4000>;
-+		interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
-+		clocks = <&cru HCLK_EMMC>, <&cru CCLK_SRC_EMMC>,
-+			 <&grf_cru SCLK_EMMC_DRV>, <&grf_cru SCLK_EMMC_SAMPLE>;
-+		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
-+		fifo-depth = <0x100>;
-+		max-frequency = <200000000>;
-+		status = "disabled";
-+	};
-+
-+	sdmmc: mmc@ffaa0000 {
-+		compatible = "rockchip,rv1106-dw-mshc", "rockchip,rk3288-dw-mshc";
-+		reg = <0xffaa0000 0x4000>;
-+		interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
-+		clocks = <&cru HCLK_SDMMC>, <&cru CCLK_SRC_SDMMC>,
-+			 <&grf_cru SCLK_SDMMC_DRV>, <&grf_cru SCLK_SDMMC_SAMPLE>;
-+		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
-+		cd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-+		fifo-depth = <0x100>;
-+		max-frequency = <200000000>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&sdmmc0_clk &sdmmc0_cmd &sdmmc0_det &sdmmc0_bus4>;
-+		status = "disabled";
-+	};
-+
-+	sfc: spi@ffac0000 {
-+		compatible = "rockchip,sfc";
-+		reg = <0xffac0000 0x4000>;
-+		interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
-+		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
-+		clock-names = "clk_sfc", "hclk_sfc";
-+		assigned-clocks = <&cru SCLK_SFC>;
-+		assigned-clock-rates = <75000000>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&fspi_pins &fspi_cs0>;
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		status = "disabled";
-+	};
-+
-+	pinctrl: pinctrl {
-+		compatible = "rockchip,rv1106-pinctrl";
-+		rockchip,grf = <&ioc>;
-+		rockchip,pmu = <&pmuioc>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		gpio0: gpio@ff380000 {
-+			compatible = "rockchip,gpio-bank";
-+			reg = <0xff380000 0x100>;
-+			interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cru PCLK_PMU_GPIO0>, <&cru DBCLK_PMU_GPIO0>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&pinctrl 0 0 32>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+		};
-+
-+		gpio1: gpio@ff530000 {
-+			compatible = "rockchip,gpio-bank";
-+			reg = <0xff530000 0x100>;
-+			interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cru PCLK_GPIO1>, <&cru DBCLK_GPIO1>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&pinctrl 0 32 32>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+		};
-+
-+		gpio2: gpio@ff540000 {
-+			compatible = "rockchip,gpio-bank";
-+			reg = <0xff540000 0x100>;
-+			interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cru PCLK_GPIO2>, <&cru DBCLK_GPIO2>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&pinctrl 0 64 32>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+		};
-+
-+		gpio3: gpio@ff550000 {
-+			compatible = "rockchip,gpio-bank";
-+			reg = <0xff550000 0x100>;
-+			interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cru PCLK_GPIO3>, <&cru DBCLK_GPIO3>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&pinctrl 0 96 32>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+		};
-+
-+		gpio4: gpio@ff560000 {
-+			compatible = "rockchip,gpio-bank";
-+			reg = <0xff560000 0x100>;
-+			interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cru PCLK_GPIO4>, <&cru DBCLK_GPIO4>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&pinctrl 0 128 32>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+		};
-+	};
-+};
-+
-+#include "rv1106-pinctrl.dtsi"
-diff --git a/include/dt-bindings/clock/rv1106-cru.h b/include/dt-bindings/clock/rv1106-cru.h
-new file mode 100644
-index 00000000000..8febd5d8a66
---- /dev/null
-+++ b/include/dt-bindings/clock/rv1106-cru.h
-@@ -0,0 +1,572 @@
++++ b/arch/arm/include/asm/arch-rockchip/cru_rv1106.h
+@@ -0,0 +1,305 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
 + * Copyright (c) 2022 Rockchip Electronics Co. Ltd.
 + * Author: Elaine Zhang <zhangqing@rock-chips.com>
 + */
 +
-+#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RV1106_H
-+#define _DT_BINDINGS_CLK_ROCKCHIP_RV1106_H
++#ifndef _ASM_ARCH_CRU_RV1106_H
++#define _ASM_ARCH_CRU_RV1106_H
 +
-+/* pll clocks */
-+#define PLL_APLL		1
-+#define PLL_DPLL		2
-+#define PLL_CPLL		3
-+#define PLL_GPLL		4
-+#define ARMCLK			5
 +
-+/* clk (clocks) */
-+#define PCLK_DDRPHY		11
-+#define PCLK_DDR_ROOT		12
-+#define PCLK_DDRMON		13
-+#define CLK_TIMER_DDRMON	14
-+#define PCLK_DDRC		15
-+#define PCLK_DFICTRL		16
-+#define ACLK_DDR_ROOT		17
-+#define ACLK_SYS_SHRM		18
-+#define HCLK_NPU_ROOT		19
-+#define ACLK_NPU_ROOT		20
-+#define PCLK_NPU_ROOT		21
-+#define HCLK_RKNN		22
-+#define ACLK_RKNN		23
-+#define PCLK_ACODEC		24
-+#define MCLK_ACODEC_TX		25
-+#define MCLK_ACODEC_RX		26
-+#define CLK_CORE_CRYPTO		27
-+#define CLK_PKA_CRYPTO		28
-+#define ACLK_CRYPTO		29
-+#define HCLK_CRYPTO		30
-+#define ACLK_DECOM		31
-+#define PCLK_DECOM		32
-+#define DCLK_DECOM		33
-+#define ACLK_DMAC		34
-+#define PCLK_DSM		35
-+#define MCLK_DSM		36
-+#define CCLK_SRC_EMMC		37
-+#define HCLK_EMMC		38
-+#define PCLK_GPIO4		39
-+#define DBCLK_GPIO4		40
-+#define PCLK_I2C0		41
-+#define CLK_I2C0		42
-+#define PCLK_I2C2		43
-+#define CLK_I2C2		44
-+#define PCLK_I2C3		45
-+#define CLK_I2C3		46
-+#define PCLK_I2C4		47
-+#define CLK_I2C4		48
-+#define HCLK_I2S0		49
-+#define PCLK_DFT2APB		50
-+#define HCLK_IVE		51
-+#define ACLK_IVE		52
-+#define PCLK_PWM0_PERI		53
-+#define CLK_PWM0_PERI		54
-+#define CLK_CAPTURE_PWM0_PERI	55
-+#define PCLK_PERI_ROOT		56
-+#define ACLK_PERI_ROOT		57
-+#define HCLK_PERI_ROOT		58
-+#define CLK_TIMER_ROOT		59
-+#define ACLK_BUS_ROOT		60
-+#define HCLK_SFC		61
-+#define SCLK_SFC		62
-+#define PCLK_UART0		63
-+#define CLK_PVTM_CORE		64
-+#define PCLK_UART1		65
-+#define CLK_CORE_MCU_RTC	66
-+#define PCLK_PWM1_PERI		67
-+#define CLK_PWM1_PERI		68
-+#define CLK_CAPTURE_PWM1_PERI	69
-+#define PCLK_PWM2_PERI		70
-+#define CLK_PWM2_PERI		71
-+#define CLK_CAPTURE_PWM2_PERI	72
-+#define HCLK_BOOTROM		73
-+#define HCLK_SAI		74
-+#define MCLK_SAI		75
-+#define PCLK_SARADC		76
-+#define CLK_SARADC		77
-+#define PCLK_SPI1		78
-+#define CLK_SPI1		79
-+#define PCLK_STIMER		80
-+#define CLK_STIMER0		81
-+#define CLK_STIMER1		82
-+#define PCLK_TIMER		83
-+#define CLK_TIMER0		84
-+#define CLK_TIMER1		85
-+#define CLK_TIMER2		86
-+#define CLK_TIMER3		87
-+#define CLK_TIMER4		88
-+#define CLK_TIMER5		89
-+#define HCLK_TRNG_NS		90
-+#define HCLK_TRNG_S		91
-+#define PCLK_UART2		92
-+#define HCLK_CPU		93
-+#define PCLK_UART3		94
-+#define CLK_CORE_MCU		95
-+#define PCLK_UART4		96
-+#define PCLK_DDR_HWLP		97
-+#define PCLK_UART5		98
-+#define ACLK_USBOTG		100
-+#define CLK_REF_USBOTG		101
-+#define CLK_UTMI_USBOTG		102
-+#define PCLK_USBPHY		103
-+#define CLK_REF_USBPHY		104
-+#define PCLK_WDT_NS		105
-+#define TCLK_WDT_NS		106
-+#define PCLK_WDT_S		107
-+#define TCLK_WDT_S		108
-+#define CLK_DDR_FAIL_SAFE	109
-+#define XIN_OSC0_DIV		110
-+#define CLK_DEEPSLOW		111
-+#define PCLK_PMU_GPIO0		112
-+#define DBCLK_PMU_GPIO0		113
-+#define CLK_PMU			114
-+#define PCLK_PMU		115
-+#define PCLK_PMU_HP_TIMER	116
-+#define CLK_PMU_HP_TIMER	117
-+#define CLK_PMU_32K_HP_TIMER	118
-+#define PCLK_I2C1		119
-+#define CLK_I2C1		120
-+#define PCLK_PMU_IOC		121
-+#define PCLK_PMU_MAILBOX	122
-+#define CLK_PMU_MCU		123
-+#define CLK_PMU_MCU_RTC		124
-+#define CLK_PMU_MCU_JTAG	125
-+#define CLK_PVTM_PMU		126
-+#define PCLK_PVTM_PMU		127
-+#define CLK_REFOUT		128
-+#define CLK_100M_PMU		129
-+#define PCLK_PMU_ROOT		130
-+#define HCLK_PMU_ROOT		131
-+#define HCLK_PMU_SRAM		132
-+#define PCLK_PMU_WDT		133
-+#define TCLK_PMU_WDT		134
-+#define CLK_DFICTRL		135
-+#define CLK_DDRMON		136
-+#define CLK_DDR_PHY		137
-+#define ACLK_DDRC		138
-+#define CLK_CORE_DDRC_SRC	139
-+#define CLK_CORE_DDRC		140
-+#define CLK_50M_SRC		141
-+#define CLK_100M_SRC		142
-+#define CLK_150M_SRC		143
-+#define CLK_200M_SRC		144
-+#define CLK_250M_SRC		145
-+#define CLK_300M_SRC		146
-+#define CLK_339M_SRC		147
-+#define CLK_400M_SRC		148
-+#define CLK_450M_SRC		149
-+#define CLK_500M_SRC		150
-+#define CLK_I2S0_8CH_TX_SRC	151
-+#define CLK_I2S0_8CH_TX_FRAC	152
-+#define CLK_I2S0_8CH_TX		153
-+#define CLK_I2S0_8CH_RX_SRC	154
-+#define CLK_I2S0_8CH_RX_FRAC	155
-+#define CLK_I2S0_8CH_RX		156
-+#define I2S0_8CH_MCLKOUT	157
-+#define MCLK_I2S0_8CH_RX	158
-+#define MCLK_I2S0_8CH_TX	159
-+#define CLK_REF_MIPI0_SRC	160
-+#define CLK_REF_MIPI0_FRAC	161
-+#define CLK_REF_MIPI0_OUT	162
-+#define CLK_REF_MIPI1_SRC	163
-+#define CLK_REF_MIPI1_FRAC	164
-+#define MCLK_REF_MIPI0		165
-+#define MCLK_REF_MIPI1		166
-+#define CLK_REF_MIPI0		167
-+#define CLK_REF_MIPI1		168
-+#define CLK_UART0_SRC		169
-+#define CLK_UART0_FRAC		170
-+#define CLK_UART0		171
-+#define SCLK_UART0		172
-+#define CLK_UART1_SRC		173
-+#define CLK_UART1_FRAC		174
-+#define CLK_UART1		175
-+#define SCLK_UART1		176
-+#define CLK_UART2_SRC		177
-+#define CLK_UART2_FRAC		178
-+#define CLK_UART2		179
-+#define SCLK_UART2		180
-+#define CLK_UART3_SRC		181
-+#define CLK_UART3_FRAC		182
-+#define CLK_UART3		183
-+#define SCLK_UART3		184
-+#define CLK_UART4_SRC		185
-+#define CLK_UART4_FRAC		186
-+#define CLK_UART4		187
-+#define SCLK_UART4		188
-+#define CLK_UART5_SRC		189
-+#define CLK_UART5_FRAC		190
-+#define CLK_UART5		191
-+#define SCLK_UART5		192
-+#define CLK_VICAP_M0_SRC	193
-+#define CLK_VICAP_M0_FRAC	194
-+#define CLK_VICAP_M0		195
-+#define SCLK_VICAP_M0		196
-+#define CLK_VICAP_M1_SRC	197
-+#define CLK_VICAP_M1_FRAC	198
-+#define CLK_VICAP_M1		199
-+#define SCLK_VICAP_M1		200
-+#define DCLK_VOP_SRC		201
-+#define PCLK_CRU		202
-+#define PCLK_TOP_ROOT		203
-+#define PCLK_SPI0		204
-+#define CLK_SPI0		205
-+#define SCLK_IN_SPI0		206
-+#define CLK_UART_DETN_FLT	207
-+#define HCLK_VEPU		208
-+#define ACLK_VEPU		209
-+#define CLK_CORE_VEPU		210
-+#define CLK_CORE_VEPU_DVBM	211
-+#define PCLK_GPIO1		212
-+#define DBCLK_GPIO1		213
-+#define HCLK_VEPU_PP		214
-+#define ACLK_VEPU_PP		215
-+#define HCLK_VEPU_ROOT		216
-+#define ACLK_VEPU_COM_ROOT	217
-+#define ACLK_VEPU_ROOT		218
-+#define PCLK_VEPU_ROOT		219
-+#define PCLK_VICAP_VEPU		220
-+#define PCLK_CSIHOST0		221
-+#define CLK_RXBYTECLKHS_0	222
-+#define PCLK_CSIHOST1		223
-+#define CLK_RXBYTECLKHS_1	224
-+#define PCLK_GPIO3		225
-+#define DBCLK_GPIO3		226
-+#define HCLK_ISP3P2		227
-+#define ACLK_ISP3P2		228
-+#define CLK_CORE_ISP3P2		229
-+#define PCLK_MIPICSIPHY		230
-+#define CCLK_SRC_SDMMC		231
-+#define HCLK_SDMMC		232
-+#define CLK_SDMMC_DETN_FLT	233
-+#define HCLK_VI_ROOT		234
-+#define ACLK_VI_ROOT		235
-+#define PCLK_VI_ROOT		236
-+#define PCLK_VI_RTC_ROOT	237
-+#define PCLK_VI_RTC_TEST	238
-+#define PCLK_VI_RTC_PHY		239
-+#define DCLK_VICAP		240
-+#define PCLK_VICAP		241
-+#define ACLK_VICAP		242
-+#define HCLK_VICAP		243
-+#define I0CLK_VICAP		244
-+#define I1CLK_VICAP		245
-+#define RX0PCLK_VICAP		246
-+#define RX1PCLK_VICAP		247
-+#define ISP0CLK_VICAP		248
-+#define PCLK_GPIO2		249
-+#define DBCLK_GPIO2		250
-+#define ACLK_MAC		251
-+#define PCLK_MAC		252
-+#define CLK_GMAC0_50M_O		253
-+#define CLK_GMAC0_TX_50M_O	254
-+#define CLK_GMAC0_REF_50M	255
-+#define CLK_GMAC0_TX_50M	256
-+#define CLK_GMAC0_RX_50M	257
-+#define ACLK_MAC_ROOT		258
-+#define CLK_MACPHY		259
-+#define CLK_OTPC_ARB		260
-+#define PCLK_OTPC_NS		261
-+#define CLK_SBPI_OTPC_NS	262
-+#define CLK_USER_OTPC_NS	263
-+#define PCLK_OTPC_S		264
-+#define CLK_SBPI_OTPC_S		265
-+#define CLK_USER_OTPC_S		266
-+#define PCLK_OTP_MASK		267
-+#define CLK_PMC_OTP		268
-+#define HCLK_RGA2E		269
-+#define ACLK_RGA2E		270
-+#define CLK_CORE_RGA2E		271
-+#define CCLK_SRC_SDIO		272
-+#define HCLK_SDIO		273
-+#define PCLK_TSADC		274
-+#define CLK_TSADC		275
-+#define CLK_TSADC_TSEN		276
-+#define ACLK_VO_ROOT		277
-+#define HCLK_VO_ROOT		278
-+#define PCLK_VO_ROOT		279
-+#define ACLK_VOP_ROOT		280
-+#define HCLK_VOP		281
-+#define DCLK_VOP		282
-+#define ACLK_VOP		283
-+#define CLK_RTC_32K		284
-+#define PCLK_MAILBOX		291
++#define MHz		1000000
++#define KHz		1000
++#define OSC_HZ		(24 * MHz)
 +
-+#define CLK_NR_CLKS		(PCLK_MAILBOX + 1)
++#define APLL_HZ		(816 * MHz)
++#define GPLL_HZ		(1188 * MHz)
++#define CPLL_HZ		(1000 * MHz)
 +
-+#define SCLK_EMMC_DRV		1
-+#define SCLK_EMMC_SAMPLE	2
-+#define SCLK_SDMMC_DRV		3
-+#define SCLK_SDMMC_SAMPLE	4
-+#define SCLK_SDIO_DRV		5
-+#define SCLK_SDIO_SAMPLE	6
++/* RV1106 pll id */
++enum rv1106_pll_id {
++	APLL,
++	DPLL,
++	CPLL,
++	GPLL,
++	PLL_COUNT,
++};
 +
-+#define CLK_NR_GRF_CLKS		(SCLK_SDIO_SAMPLE + 1)
++struct rv1106_clk_info {
++	unsigned long id;
++	char *name;
++	bool is_cru;
++};
 +
-+/********Name=PMUSOFTRST_CON00,Offset=0xA00********/
-+#define SRST_P_I2C1		3
-+#define SRST_I2C1		4
-+#define SRST_H_PMU_BIU		6
-+#define SRST_P_PMU_BIU		7
-+#define SRST_H_PMU_SRAM		8
-+#define SRST_PMU_MCU		9
-+#define SRST_PMU_MCU_PWRUP	10
-+#define SRST_PMU_MCU_CPU	11
-+#define SRST_T_PMU_MCU_CPU	12
-+/********Name=PMUSOFTRST_CON01,Offset=0xA04********/
-+#define SRST_P_PMU_GPIO0	18
-+#define SRST_PMU_GPIO0		19
-+#define SRST_PVTM_PMU		20
-+#define SRST_P_PVTM_PMU		21
-+#define SRST_DDR_FAIL_SAFE	31
-+/********Name=PMUSOFTRST_CON02,Offset=0xA08********/
-+#define SRST_P_PMU_HP_TIMER	32
-+#define SRST_PMU_HP_TIMER	33
-+#define SRST_PMU_32K_HP_TIMER	34
-+#define SRST_P_PMU_IOC		35
-+#define SRST_P_PMU_CRU		36
-+#define SRST_P_PMU_GRF		37
-+#define SRST_P_PMU_SGRF		38
-+#define SRST_P_PMU_SGRF_REMAP	39
-+#define SRST_P_PMU_WDT		40
-+#define SRST_T_PMU_WDT		41
-+#define SRST_P_PMU_MAILBOX	42
-+#define SRST_WRITE_ENABLE	48
-+/********Name=SOFTRST_CON02,Offset=0x10A08********/
-+#define SRST_REF_PVTPLL_0	262183
-+#define SRST_REF_PVTPLL_1	262184
-+#define SRST_P_CRU		262186
-+#define SRST_P_CRU_BIU		262187
-+/********Name=PERISOFTRST_CON00,Offset=0x12A00********/
-+#define SRST_P_PERI_BIU		294916
-+#define SRST_A_PERI_BIU		294917
-+#define SRST_H_PERI_BIU		294918
-+#define SRST_H_BOOTROM		294919
-+#define SRST_P_TIMER		294920
-+#define SRST_TIMER0		294921
-+#define SRST_TIMER1		294922
-+#define SRST_TIMER2		294923
-+#define SRST_TIMER3		294924
-+#define SRST_TIMER4		294925
-+#define SRST_TIMER5		294926
-+#define SRST_P_STIMER		294927
-+/********Name=PERISOFTRST_CON01,Offset=0x12A04********/
-+#define SRST_STIMER0		294928
-+#define SRST_STIMER1		294929
-+#define SRST_P_WDT_NS		294930
-+#define SRST_T_WDT_NS		294931
-+#define SRST_P_WDT_S		294932
-+#define SRST_T_WDT_S		294933
-+#define SRST_P_I2C0		294934
-+#define SRST_I2C0		294935
-+#define SRST_P_I2C2		294938
-+#define SRST_I2C2		294939
-+#define SRST_P_I2C3		294940
-+#define SRST_I2C3		294941
-+#define SRST_P_I2C4		294942
-+#define SRST_I2C4		294943
-+/********Name=PERISOFTRST_CON02,Offset=0x12A08********/
-+#define SRST_P_GPIO4		294944
-+#define SRST_GPIO4		294945
-+#define SRST_P_PERI_IOC		294946
-+#define SRST_P_UART2		294947
-+#define SRST_S_UART2		294950
-+#define SRST_P_UART3		294951
-+#define SRST_S_UART3		294954
-+#define SRST_P_UART4		294955
-+#define SRST_S_UART4		294958
-+#define SRST_P_UART5		294959
-+/********Name=PERISOFTRST_CON03,Offset=0x12A0C********/
-+#define SRST_S_UART5		294962
-+#define SRST_P_SARADC		294963
-+#define SRST_SARADC		294964
-+#define SRST_SARADC_PHY		294965
-+#define SRST_P_SPI1		294966
-+#define SRST_SPI1		294967
-+#define SRST_H_TRNG_NS		294969
-+#define SRST_H_TRNG_S		294970
-+#define SRST_CORE_CRYPTO	294971
-+#define SRST_PKA_CRYPTO		294972
-+#define SRST_A_CRYPTO		294973
-+#define SRST_H_CRYPTO		294974
-+#define SRST_P_PWM1_PERI	294975
-+/********Name=PERISOFTRST_CON04,Offset=0x12A10********/
-+#define SRST_PWM1_PERI		294976
-+#define SRST_P_PWM2_PERI	294978
-+#define SRST_PWM2_PERI		294979
-+#define SRST_P_PERI_GRF		294981
-+#define SRST_P_PERI_CRU		294982
-+#define SRST_A_USBOTG		294983
-+#define SRST_A_BUS_BIU		294986
-+#define SRST_H_EMMC		294989
-+#define SRST_H_SFC		294990
-+/********Name=PERISOFTRST_CON05,Offset=0x12A14********/
-+#define SRST_S_SFC		294992
-+#define SRST_P_USBPHY		294993
-+#define SRST_USBPHY_POR		294994
-+#define SRST_USBPHY_OTG		294995
-+#define SRST_A_DMAC		295000
-+#define SRST_A_DECOM		295001
-+#define SRST_P_DECOM		295002
-+#define SRST_D_DECOM		295003
-+#define SRST_P_PERI_SGRF	295004
-+#define SRST_H_SAI		295005
-+#define SRST_M_SAI		295006
-+#define SRST_M_I2S0_8CH_TX	295007
-+/********Name=PERISOFTRST_CON06,Offset=0x12A18********/
-+#define SRST_H_I2S0		295008
-+#define SRST_M_DSM		295009
-+#define SRST_P_DSM		295010
-+#define SRST_P_ACODEC		295011
-+#define SRST_M_I2S0_8CH_RX	295014
-+#define SRST_P_DFT2APB		295015
-+#define SRST_H_IVE		295017
-+#define SRST_A_IVE		295018
-+#define SRST_P_UART0		295019
-+#define SRST_S_UART0		295022
-+#define SRST_P_UART1		295023
-+/********Name=PERISOFTRST_CON07,Offset=0x12A1C********/
-+#define SRST_S_UART1		295026
-+#define SRST_P_PWM0_PERI	295027
-+#define SRST_PWM0_PERI		295028
-+/********Name=VISOFTRST_CON00,Offset=0x14A00********/
-+#define SRST_H_VI_BIU		327684
-+#define SRST_A_VI_BIU		327685
-+#define SRST_P_VI_BIU		327686
-+#define SRST_CORE_ISP3P2	327689
-+#define SRST_D_VICAP		327690
-+#define SRST_P_VICAP		327691
-+#define SRST_A_VICAP		327692
-+#define SRST_H_VICAP		327693
-+#define SRST_VICAP_I0		327694
-+#define SRST_VICAP_I1		327695
-+/********Name=VISOFTRST_CON01,Offset=0x14A04********/
-+#define SRST_VICAP_RX0		327696
-+#define SRST_VICAP_RX1		327697
-+#define SRST_VICAP_ISP0		327698
-+#define SRST_P_CSIHOST0		327700
-+#define SRST_P_CSIHOST1		327702
-+#define SRST_H_SDMMC		327708
-+#define SRST_SDMMC_DETN_FLT	327709
-+#define SRST_P_MIPICSIPHY	327710
-+#define SRST_P_GPIO3		327711
-+/********Name=VISOFTRST_CON02,Offset=0x14A08********/
-+#define SRST_GPIO3		327712
-+#define SRST_P_VI_IOC		327713
-+#define SRST_P_VI_GRF		327714
-+#define SRST_P_VI_SGRF		327715
-+#define SRST_P_VI_CRU		327716
-+#define SRST_P_VI_RTC_TEST	327717
-+#define SRST_P_VI_RTC_NIU	327719
-+/********Name=NPUSOFTRST_CON00,Offset=0x16A00********/
-+#define SRST_H_NPU_BIU		360451
-+#define SRST_A_NPU_BIU		360452
-+#define SRST_P_NPU_BIU		360453
-+#define SRST_P_NPU_CRU		360454
-+#define SRST_P_NPU_SGRF		360455
-+#define SRST_P_NPU_GRF		360456
-+#define SRST_H_RKNN		360457
-+#define SRST_A_RKNN		360458
-+/********Name=CORESOFTRST_CON00,Offset=0x18A00********/
-+#define SRST_NCOREPORESET	393217
-+#define SRST_NCORESET		393218
-+#define SRST_NDBGRESET		393219
-+#define SRST_NL2RESET		393220
-+#define SRST_A_M_CORE_BIU	393221
-+#define SRST_P_DBG		393222
-+#define SRST_POT_DBG		393223
-+#define SRST_NT_DBG		393224
-+#define SRST_P_CORE_GRF		393227
-+#define SRST_H_CPU_BIU		393228
-+#define SRST_P_CPU_BIU		393229
-+#define SRST_PVTM_CORE		393230
-+#define SRST_P_PVTM_CORE	393231
-+/********Name=CORESOFTRST_CON01,Offset=0x18A04********/
-+#define SRST_REF_PVTPLL_CORE	393232
-+#define SRST_CORE_MCU		393233
-+#define SRST_CORE_MCU_PWRUP	393234
-+#define SRST_CORE_MCU_CPU	393235
-+#define SRST_T_CORE_MCU_CPU	393236
-+#define SRST_MCU_BIU		393237
-+#define SRST_P_MAILBOX		393240
-+#define SRST_P_INTMUX		393241
-+#define SRST_P_CORE_CRU		393242
-+#define SRST_P_CORE_SGRF	393243
-+#define SRST_H_CACHE		393244
-+/********Name=VEPUSOFTRST_CON00,Offset=0x1AA00********/
-+#define SRST_H_VEPU_BIU		425988
-+#define SRST_A_VEPU_BIU		425989
-+#define SRST_A_VEPU_COM_BIU	425990
-+#define SRST_P_VEPU_BIU		425991
-+#define SRST_H_VEPU		425992
-+#define SRST_A_VEPU		425993
-+#define SRST_CORE_VEPU		425994
-+#define SRST_H_VEPU_PP		425995
-+#define SRST_A_VEPU_PP		425996
-+#define SRST_CORE_VEPU_DVBM	425997
-+#define SRST_P_VICAP_VEPU	425998
-+#define SRST_P_GPIO1		425999
-+/********Name=VEPUSOFTRST_CON01,Offset=0x1AA04********/
-+#define SRST_GPIO1		426000
-+#define SRST_P_VEPU_IOC		426001
-+#define SRST_P_SPI0		426002
-+#define SRST_SPI0		426003
-+#define SRST_P_VEPU_CRU		426005
-+#define SRST_P_VEPU_SGRF	426006
-+#define SRST_P_VEPU_GRF		426007
-+#define SRST_UART_DETN_FLT	426008
-+/********Name=VOSOFTRST_CON00,Offset=0x1CA00********/
-+#define SRST_A_VO_BIU		458755
-+#define SRST_H_VO_BIU		458756
-+#define SRST_H_RGA2E		458759
-+#define SRST_A_RGA2E		458760
-+#define SRST_CORE_RGA2E		458761
-+#define SRST_P_VO_GRF		458762
-+#define SRST_A_VOP_BIU		458764
-+#define SRST_H_VOP		458765
-+#define SRST_D_VOP		458766
-+#define SRST_A_VOP		458767
-+/********Name=VOSOFTRST_CON01,Offset=0x1CA04********/
-+#define SRST_P_MAC_BIU		458774
-+#define SRST_A_MAC_BIU		458775
-+#define SRST_A_MAC		458776
-+#define SRST_P_VO_SGRF		458780
-+#define SRST_P_VO_CRU		458781
-+#define SRST_H_SDIO		458783
-+/********Name=VOSOFTRST_CON02,Offset=0x1CA08********/
-+#define SRST_P_TSADC		458784
-+#define SRST_TSADC		458785
-+#define SRST_P_OTPC_NS		458787
-+#define SRST_SBPI_OTPC_NS	458789
-+#define SRST_USER_OTPC_NS	458790
-+#define SRST_P_OTPC_S		458791
-+#define SRST_SBPI_OTPC_S	458793
-+#define SRST_USER_OTPC_S	458794
-+#define SRST_OTPC_ARB		458795
-+#define SRST_MACPHY		458797
-+#define SRST_P_OTP_MASK		458798
-+#define SRST_PMC_OTP		458799
-+/********Name=VOSOFTRST_CON03,Offset=0x1CA0C********/
-+#define SRST_P_GPIO2		458800
-+#define SRST_GPIO2		458801
-+#define SRST_P_VO_IOC		458802
-+/********Name=DDRSOFTRST_CON00,Offset=0x1EA00********/
-+#define SRST_P_DDR_BIU		491522
-+#define SRST_P_DDRC		491525
-+#define SRST_P_DDRMON		491527
-+#define SRST_TIMER_DDRMON	491528
-+#define SRST_P_DFICTRL		491531
-+#define SRST_A_SYS_SHRM		491533
-+#define SRST_A_SHRM_NIU		491534
-+#define SRST_P_DDR_GRF		491535
-+/********Name=DDRSOFTRST_CON01,Offset=0x1EA04********/
-+#define SRST_P_DDR_CRU		491536
-+#define SRST_P_DDR_HWLP		491538
-+#define SRST_P_DDRPHY		491539
-+/********Name=SUBDDRSOFTRST_CON00,Offset=0x1FA00********/
-+#define SRST_MSCH_BIU		507904
-+#define SRST_A_DDRC		507905
-+#define SRST_CORE_DDRC		507907
-+#define SRST_DDRMON		507908
-+#define SRST_DFICTRL		507909
-+#define SRST_DDR_PHY		507910
++struct rv1106_clk_priv {
++	struct rv1106_cru *cru;
++	struct rv1106_grf *grf;
++	ulong gpll_hz;
++	ulong cpll_hz;
++	ulong armclk_hz;
++	ulong armclk_enter_hz;
++	ulong armclk_init_hz;
++	bool sync_kernel;
++	bool set_armclk_rate;
++};
 +
++struct rv1106_grf_clk_priv {
++	struct rv1106_grf *grf;
++};
++
++struct rv1106_pll {
++	unsigned int con0;
++	unsigned int con1;
++	unsigned int con2;
++	unsigned int con3;
++	unsigned int con4;
++	unsigned int reserved0[3];
++};
++
++struct rv1106_cru {
++	unsigned int reserved0[192];
++	unsigned int pmu_clksel_con[8];
++	unsigned int reserved1[312];
++	unsigned int pmu_clkgate_con[3];
++	unsigned int reserved2[125];
++	unsigned int pmu_softrst_con[3];
++	unsigned int reserved3[15741];
++	struct rv1106_pll pll[4];
++	unsigned int reserved4[128];
++	unsigned int mode;
++	unsigned int reserved5[31];
++	unsigned int clksel_con[34];
++	unsigned int reserved6[286];
++	unsigned int clkgate_con[4];
++	unsigned int reserved7[124];
++	unsigned int softrst_con[3];
++	unsigned int reserved8[125];
++	unsigned int glb_cnt_th;
++	unsigned int glb_rst_st;
++	unsigned int glb_srst_fst;
++	unsigned int glb_srst_snd;
++	unsigned int glb_rst_con;
++	unsigned int con[2];
++	unsigned int sdmmc_con[2];
++	unsigned int emmc_con[2];
++	unsigned int reserved9[1461];
++	unsigned int peri_clksel_con[12];
++	unsigned int reserved10[308];
++	unsigned int peri_clkgate_con[8];
++	unsigned int reserved11[120];
++	unsigned int peri_softrst_con[8];
++	unsigned int reserved12[1592];
++	unsigned int vi_clksel_con[4];
++	unsigned int reserved13[316];
++	unsigned int vi_clkgate_con[3];
++	unsigned int reserved14[125];
++	unsigned int vi_softrst_con[3];
++	unsigned int reserved15[3645];
++	unsigned int core_clksel_con[5];
++	unsigned int reserved16[2043];
++	unsigned int vepu_clksel_con[2];
++	unsigned int reserved17[318];
++	unsigned int vepu_clkgate_con[3];
++	unsigned int reserved18[125];
++	unsigned int vepu_softrst_con[2];
++	unsigned int reserved19[1598];
++	unsigned int vo_clksel_con[4];
++	unsigned int reserved20[316];
++	unsigned int vo_clkgate_con[3];
++	unsigned int reserved21[125];
++	unsigned int vo_softrst_con[4];
++};
++check_member(rv1106_cru, vo_softrst_con[0], 0x1ca00);
++
++struct pll_rate_table {
++	unsigned long rate;
++	unsigned int fbdiv;
++	unsigned int postdiv1;
++	unsigned int refdiv;
++	unsigned int postdiv2;
++	unsigned int dsmpd;
++	unsigned int frac;
++};
++
++#define RV1106_TOPCRU_BASE		0x10000
++#define RV1106_SUBDDRCRU_BASE		0x1F000
++
++#define RV1106_PLL_CON(x)		((x) * 0x4 + RV1106_TOPCRU_BASE)
++#define RV1106_MODE_CON			(0x280 + RV1106_TOPCRU_BASE)
++#define RV1106_SUBDDRMODE_CON		(0x280 + RV1106_SUBDDRCRU_BASE)
++
++enum {
++	/* CRU_PMU_CLK_SEL0_CON */
++	CLK_I2C1_SEL_SHIFT		= 6,
++	CLK_I2C1_SEL_MASK		= 0x3 << CLK_I2C1_SEL_SHIFT,
++	CLK_I2C1_SEL_200M		= 0,
++	CLK_I2C1_SEL_100M,
++	CLK_I2C1_SEL_24M,
++	CLK_I2C1_SEL_32K,
++	HCLK_PMU_SEL_SHIFT		= 4,
++	HCLK_PMU_SEL_MASK		= 0x3 << HCLK_PMU_SEL_SHIFT,
++	HCLK_PMU_SEL_200M		= 0,
++	HCLK_PMU_SEL_100M,
++	HCLK_PMU_SEL_24M,
++	PCLK_PMU_SEL_SHIFT		= 3,
++	PCLK_PMU_SEL_MASK		= 0x1 << PCLK_PMU_SEL_SHIFT,
++	PCLK_PMU_SEL_100M		= 0,
++	PCLK_PMU_SEL_24M,
++
++	/* CRU_CLK_SEL5_CON */
++	CLK_UART_SRC_SEL_SHIFT		= 5,
++	CLK_UART_SRC_SEL_MASK		= 0x1 << CLK_UART_SRC_SEL_SHIFT,
++	CLK_UART_SRC_SEL_GPLL		= 0,
++	CLK_UART_SRC_SEL_CPLL,
++	CLK_UART_SRC_DIV_SHIFT		= 0,
++	CLK_UART_SRC_DIV_MASK		= 0x1f << CLK_UART_SRC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL6_CON */
++	CLK_UART_FRAC_NUMERATOR_SHIFT	= 16,
++	CLK_UART_FRAC_NUMERATOR_MASK	= 0xffff << 16,
++	CLK_UART_FRAC_DENOMINATOR_SHIFT	= 0,
++	CLK_UART_FRAC_DENOMINATOR_MASK	= 0xffff,
++
++	/* CRU_CLK_SEL7_CON */
++	CLK_UART_SEL_SHIFT		= 0,
++	CLK_UART_SEL_MASK		= 0x3 << CLK_UART_SEL_SHIFT,
++	CLK_UART_SEL_SRC		= 0,
++	CLK_UART_SEL_FRAC,
++	CLK_UART_SEL_XIN24M,
++
++	/* CRU_CLK_SEL23_CON */
++	DCLK_VOP_SEL_SHIFT		= 8,
++	DCLK_VOP_SEL_MASK		= 0x1 << DCLK_VOP_SEL_SHIFT,
++	DCLK_VOP_SEL_GPLL		= 0,
++	DCLK_VOP_SEL_CPLL,
++	DCLK_VOP_DIV_SHIFT		= 3,
++	DCLK_VOP_DIV_MASK		= 0x1f << DCLK_VOP_DIV_SHIFT,
++
++	/* CRU_CLK_SEL24_CON */
++	PCLK_TOP_SEL_SHIFT		= 5,
++	PCLK_TOP_SEL_MASK		= 0x3 << PCLK_TOP_SEL_SHIFT,
++	PCLK_TOP_SEL_100M		= 0,
++	PCLK_TOP_SEL_50M,
++	PCLK_TOP_SEL_24M,
++
++	/* CRU_PERI_CLK_SEL1_CON */
++	CLK_I2C3_SEL_SHIFT		= 14,
++	CLK_I2C3_SEL_MASK		= 0x3 << CLK_I2C3_SEL_SHIFT,
++	CLK_I2C2_SEL_SHIFT		= 12,
++	CLK_I2C2_SEL_MASK		= 0x3 << CLK_I2C2_SEL_SHIFT,
++	CLK_I2C0_SEL_SHIFT		= 8,
++	CLK_I2C0_SEL_MASK		= 0x3 << CLK_I2C0_SEL_SHIFT,
++	CLK_I2C0_SEL_200M		= 0,
++	CLK_I2C0_SEL_100M,
++	CLK_I2C0_SEL_50M,
++	CLK_I2C0_SEL_24M,
++	HCLK_PERI_SEL_SHIFT		= 4,
++	HCLK_PERI_SEL_MASK		= 0x3 << HCLK_PERI_SEL_SHIFT,
++	HCLK_PERI_SEL_200M		= 0,
++	HCLK_PERI_SEL_100M,
++	HCLK_PERI_SEL_50M,
++	HCLK_PERI_SEL_24M,
++	ACLK_PERI_SEL_SHIFT		= 2,
++	ACLK_PERI_SEL_MASK		= 0x3 << ACLK_PERI_SEL_SHIFT,
++	ACLK_PERI_SEL_400M		= 0,
++	ACLK_PERI_SEL_200M,
++	ACLK_PERI_SEL_100M,
++	ACLK_PERI_SEL_24M,
++	PCLK_PERI_SEL_SHIFT		= 0,
++	PCLK_PERI_SEL_MASK		= 0x3 << PCLK_PERI_SEL_SHIFT,
++	PCLK_PERI_SEL_100M		= 0,
++	PCLK_PERI_SEL_50M,
++	PCLK_PERI_SEL_24M,
++
++	/* CRU_PERI_CLK_SEL2_CON */
++	CLK_I2C4_SEL_SHIFT		= 0,
++	CLK_I2C4_SEL_MASK		= 0x3 << CLK_I2C4_SEL_SHIFT,
++
++	/* CRU_PERI_CLK_SEL6_CON */
++	CLK_PWM2_SEL_SHIFT		= 11,
++	CLK_PWM2_SEL_MASK		= 0x3 << CLK_PWM2_SEL_SHIFT,
++	CLK_PWM1_SEL_SHIFT		= 9,
++	CLK_PWM1_SEL_MASK		= 0x3 << CLK_PWM1_SEL_SHIFT,
++	CLK_PWM_SEL_100M		= 0,
++	CLK_PWM_SEL_50M,
++	CLK_PWM_SEL_24M,
++	CLK_PKA_CRYPTO_SEL_SHIFT	= 7,
++	CLK_PKA_CRYPTO_SEL_MASK		= 0x3 << CLK_PKA_CRYPTO_SEL_SHIFT,
++	CLK_CORE_CRYPTO_SEL_SHIFT	= 5,
++	CLK_CORE_CRYPTO_SEL_MASK	= 0x3 << CLK_CORE_CRYPTO_SEL_SHIFT,
++	CLK_CRYPTO_SEL_300M		= 0,
++	CLK_CRYPTO_SEL_200M,
++	CLK_CRYPTO_SEL_100M,
++	CLK_CRYPTO_SEL_24M,
++	CLK_SARADC_DIV_SHIFT		= 0,
++	CLK_SARADC_DIV_MASK		= 0x7 << CLK_SARADC_DIV_SHIFT,
++	CLK_SPI1_SEL_SHIFT		= 3,
++	CLK_SPI1_SEL_MASK		= 0x3 << CLK_SPI1_SEL_SHIFT,
++
++	/* CRU_PERI_CLK_SEL7_CON */
++	DCLK_DECOM_SEL_SHIFT		= 14,
++	DCLK_DECOM_SEL_MASK		= 0x3 << DCLK_DECOM_SEL_SHIFT,
++	DCLK_DECOM_SEL_400M		= 0,
++	DCLK_DECOM_SEL_200M,
++	DCLK_DECOM_SEL_100M,
++	DCLK_DECOM_SEL_24M,
++	CLK_SFC_SEL_SHIFT		= 12,
++	CLK_SFC_SEL_MASK		= 0x3 << CLK_SFC_SEL_SHIFT,
++	CLK_SFC_SEL_500M		= 0,
++	CLK_SFC_SEL_300M,
++	CLK_SFC_SEL_200M,
++	CLK_SFC_SEL_24M,
++	CLK_SFC_DIV_SHIFT		= 7,
++	CLK_SFC_DIV_MASK		= 0x1f << CLK_SFC_DIV_SHIFT,
++	CLK_EMMC_SEL_SHIFT		= 6,
++	CLK_EMMC_SEL_MASK		= 0x1 << CLK_EMMC_SEL_SHIFT,
++	CLK_MMC_SEL_400M		= 0,
++	CLK_MMC_SEL_24M,
++	CLK_EMMC_DIV_SHIFT		= 0,
++	CLK_EMMC_DIV_MASK		= 0x3f << CLK_EMMC_DIV_SHIFT,
++
++	/* CRU_PERI_CLK_SEL9_CON */
++	ACLK_BUS_SEL_SHIFT		= 0,
++	ACLK_BUS_SEL_MASK		= 0x3 << ACLK_BUS_SEL_SHIFT,
++	ACLK_BUS_SEL_300M		= 0,
++	ACLK_BUS_SEL_200M,
++	ACLK_BUS_SEL_100M,
++	ACLK_BUS_SEL_24M,
++
++	/* CRU_PERI_CLK_SEL11_CON */
++	CLK_PWM0_SEL_SHIFT		= 0,
++	CLK_PWM0_SEL_MASK		= 0x3 << CLK_PWM0_SEL_SHIFT,
++
++	/* CRU_VEPU_CLK_SEL0_CON */
++	CLK_SPI0_SEL_SHIFT		= 12,
++	CLK_SPI0_SEL_MASK		= 0x3 << CLK_SPI0_SEL_SHIFT,
++	CLK_SPI0_SEL_200M		= 0,
++	CLK_SPI0_SEL_100M,
++	CLK_SPI0_SEL_50M,
++	CLK_SPI0_SEL_24M,
++
++	/* CRU_CORE_CLK_SEL0_CON */
++	CLK_CORE_DIV_SHIFT		= 0,
++	CLK_CORE_DIV_MASK		= 0x1f << CLK_CORE_DIV_SHIFT,
++
++	/* CRU_VI_CLK_SEL1_CON */
++	CLK_SDMMC_SEL_SHIFT		= 14,
++	CLK_SDMMC_SEL_MASK		= 0x1 << CLK_SDMMC_SEL_SHIFT,
++	CLK_SDMMC_DIV_SHIFT		= 8,
++	CLK_SDMMC_DIV_MASK		= 0x3f << CLK_SDMMC_DIV_SHIFT,
++
++	/* CRU_VO_CLK_SEL1_CON */
++	ACLK_VOP_SEL_SHIFT		= 10,
++	ACLK_VOP_SEL_MASK		= 0x3 << ACLK_VOP_SEL_SHIFT,
++	ACLK_VOP_SEL_300M		= 0,
++	ACLK_VOP_SEL_200M,
++	ACLK_VOP_SEL_100M,
++	ACLK_VOP_SEL_24M,
++
++	/* CRU_VO_CLK_SEL3_CON */
++	CLK_TSADC_TSEN_DIV_SHIFT	= 5,
++	CLK_TSADC_TSEN_DIV_MASK		= 0x1F << CLK_TSADC_TSEN_DIV_SHIFT,
++	CLK_TSADC_DIV_SHIFT		= 0,
++	CLK_TSADC_DIV_MASK		= 0x1F << CLK_TSADC_DIV_SHIFT,
++};
 +#endif
+diff --git a/drivers/clk/rockchip/Makefile b/drivers/clk/rockchip/Makefile
+index de2635b7475..d76f7d02634 100644
+--- a/drivers/clk/rockchip/Makefile
++++ b/drivers/clk/rockchip/Makefile
+@@ -21,5 +21,6 @@ obj-$(CONFIG_ROCKCHIP_RK3568) += clk_rk3568.o
+ obj-$(CONFIG_ROCKCHIP_RK3576) += clk_rk3576.o
+ obj-$(CONFIG_ROCKCHIP_RK3588) += clk_rk3588.o
+ obj-$(CONFIG_ROCKCHIP_RV1103B) += clk_rv1103b.o
++obj-$(CONFIG_ROCKCHIP_RV1106) += clk_rv1106.o
+ obj-$(CONFIG_ROCKCHIP_RV1108) += clk_rv1108.o
+ obj-$(CONFIG_ROCKCHIP_RV1126) += clk_rv1126.o
+diff --git a/drivers/clk/rockchip/clk_rv1106.c b/drivers/clk/rockchip/clk_rv1106.c
+new file mode 100644
+index 00000000000..7c23c9633df
+--- /dev/null
++++ b/drivers/clk/rockchip/clk_rv1106.c
+@@ -0,0 +1,1319 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2021 Rockchip Electronics Co., Ltd
++ * Author: Elaine Zhang <zhangqing@rock-chips.com>
++ */
++
++#include <bitfield.h>
++#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <errno.h>
++#include <log.h>
++#include <malloc.h>
++#include <syscon.h>
++#include <asm/arch-rockchip/clock.h>
++#include <asm/arch-rockchip/cru_rv1106.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <dt-bindings/clock/rv1106-cru.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define DIV_TO_RATE(input_rate, div)	((input_rate) / ((div) + 1))
++
++static struct rockchip_pll_rate_table rv1106_pll_rates[] = {
++	/* _mhz, _refdiv, _fbdiv, _postdiv1, _postdiv2, _dsmpd, _frac */
++	RK3036_PLL_RATE(1188000000, 1, 99, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1104000000, 1, 92, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1008000000, 1, 84, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1000000000, 3, 250, 2, 1, 1, 0),
++	RK3036_PLL_RATE(816000000, 1, 68, 2, 1, 1, 0),
++	RK3036_PLL_RATE(600000000, 1, 100, 4, 1, 1, 0),
++	RK3036_PLL_RATE(594000000, 1, 99, 4, 1, 1, 0),
++	{ /* sentinel */ },
++};
++
++static struct rockchip_pll_clock rv1106_pll_clks[] = {
++	[APLL] = PLL(pll_rk3328, PLL_APLL, RV1106_PLL_CON(0),
++		     RV1106_MODE_CON, 0, 10, 0, rv1106_pll_rates),
++	[DPLL] = PLL(pll_rk3328, PLL_DPLL, RV1106_PLL_CON(16),
++		     RV1106_SUBDDRMODE_CON, 0, 10, 0, NULL),
++	[CPLL] = PLL(pll_rk3328, PLL_CPLL, RV1106_PLL_CON(8),
++		     RV1106_MODE_CON, 2, 10, 0, rv1106_pll_rates),
++	[GPLL] = PLL(pll_rk3328, PLL_GPLL, RV1106_PLL_CON(24),
++		     RV1106_MODE_CON, 4, 10, 0, rv1106_pll_rates),
++};
++
++static ulong rv1106_peri_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 con, sel, rate;
++
++	switch (clk_id) {
++	case ACLK_PERI_ROOT:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & ACLK_PERI_SEL_MASK) >> ACLK_PERI_SEL_SHIFT;
++		if (sel == ACLK_PERI_SEL_400M)
++			rate = 400 * MHz;
++		else if (sel == ACLK_PERI_SEL_200M)
++			rate = 200 * MHz;
++		else if (sel == ACLK_PERI_SEL_100M)
++			rate = 100 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case HCLK_PERI_ROOT:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & HCLK_PERI_SEL_MASK) >> HCLK_PERI_SEL_SHIFT;
++		if (sel == HCLK_PERI_SEL_200M)
++			rate = 200 * MHz;
++		else if (sel == HCLK_PERI_SEL_100M)
++			rate = 100 * MHz;
++		else if (sel == HCLK_PERI_SEL_50M)
++			rate = 50 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case PCLK_PERI_ROOT:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & PCLK_PERI_SEL_MASK) >> PCLK_PERI_SEL_SHIFT;
++		if (sel == PCLK_PERI_SEL_100M)
++			rate = 100 * MHz;
++		else if (sel == PCLK_PERI_SEL_50M)
++			rate = 50 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case ACLK_BUS_ROOT:
++		con = readl(&cru->peri_clksel_con[9]);
++		sel = (con & ACLK_BUS_SEL_MASK) >> ACLK_BUS_SEL_SHIFT;
++		if (sel == ACLK_BUS_SEL_300M)
++			rate = 300 * MHz;
++		else if (sel == ACLK_BUS_SEL_200M)
++			rate = 200 * MHz;
++		else if (sel == ACLK_BUS_SEL_100M)
++			rate = 100 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case PCLK_TOP_ROOT:
++		con = readl(&cru->clksel_con[24]);
++		sel = (con & PCLK_TOP_SEL_MASK) >> PCLK_TOP_SEL_SHIFT;
++		if (sel == PCLK_TOP_SEL_100M)
++			rate = 100 * MHz;
++		else if (sel == PCLK_TOP_SEL_50M)
++			rate = 50 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case PCLK_PMU_ROOT:
++		con = readl(&cru->pmu_clksel_con[0]);
++		sel = (con & PCLK_PMU_SEL_MASK) >> PCLK_PMU_SEL_SHIFT;
++		if (sel == PCLK_PMU_SEL_100M)
++			rate = 100 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	case HCLK_PMU_ROOT:
++		con = readl(&cru->pmu_clksel_con[0]);
++		sel = (con & HCLK_PMU_SEL_MASK) >> HCLK_PMU_SEL_SHIFT;
++		if (sel == HCLK_PMU_SEL_200M)
++			rate = 200 * MHz;
++		else if (sel == HCLK_PMU_SEL_100M)
++			rate = 100 * MHz;
++		else
++			rate = OSC_HZ;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rate;
++}
++
++static ulong rv1106_peri_set_clk(struct rv1106_clk_priv *priv,
++				 ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int src_clk;
++
++	switch (clk_id) {
++	case ACLK_PERI_ROOT:
++		if (rate >= 396 * MHz)
++			src_clk = ACLK_PERI_SEL_400M;
++		else if (rate >= 198 * MHz)
++			src_clk = ACLK_PERI_SEL_200M;
++		else if (rate >= 99 * MHz)
++			src_clk = ACLK_PERI_SEL_100M;
++		else
++			src_clk = ACLK_PERI_SEL_24M;
++		rk_clrsetreg(&cru->peri_clksel_con[1],
++			     ACLK_PERI_SEL_MASK,
++			     src_clk << ACLK_PERI_SEL_SHIFT);
++		break;
++	case HCLK_PERI_ROOT:
++		if (rate >= 198 * MHz)
++			src_clk = HCLK_PERI_SEL_200M;
++		else if (rate >= 99 * MHz)
++			src_clk = HCLK_PERI_SEL_100M;
++		else if (rate >= 48 * MHz)
++			src_clk = HCLK_PERI_SEL_50M;
++		else
++			src_clk = HCLK_PERI_SEL_24M;
++		rk_clrsetreg(&cru->peri_clksel_con[1],
++			     HCLK_PERI_SEL_MASK,
++			     src_clk << HCLK_PERI_SEL_SHIFT);
++		break;
++	case PCLK_PERI_ROOT:
++		if (rate >= 99 * MHz)
++			src_clk = PCLK_PERI_SEL_100M;
++		else if (rate >= 48 * MHz)
++			src_clk = PCLK_PERI_SEL_50M;
++		else
++			src_clk = PCLK_PERI_SEL_24M;
++		rk_clrsetreg(&cru->peri_clksel_con[1],
++			     PCLK_PERI_SEL_MASK,
++			     src_clk << PCLK_PERI_SEL_SHIFT);
++		break;
++	case ACLK_BUS_ROOT:
++		if (rate >= 297 * MHz)
++			src_clk = ACLK_BUS_SEL_300M;
++		else if (rate >= 198 * MHz)
++			src_clk = ACLK_BUS_SEL_200M;
++		else if (rate >= 99 * MHz)
++			src_clk = ACLK_BUS_SEL_100M;
++		else
++			src_clk = ACLK_BUS_SEL_24M;
++		rk_clrsetreg(&cru->peri_clksel_con[9],
++			     ACLK_BUS_SEL_MASK,
++			     src_clk << ACLK_BUS_SEL_SHIFT);
++		break;
++	case PCLK_TOP_ROOT:
++		if (rate >= 99 * MHz)
++			src_clk = PCLK_TOP_SEL_100M;
++		else if (rate >= 48 * MHz)
++			src_clk = PCLK_TOP_SEL_50M;
++		else
++			src_clk = PCLK_TOP_SEL_24M;
++		rk_clrsetreg(&cru->clksel_con[24],
++			     PCLK_TOP_SEL_MASK,
++			     src_clk << PCLK_TOP_SEL_SHIFT);
++		break;
++	case PCLK_PMU_ROOT:
++		if (rate >= 99 * MHz)
++			src_clk = PCLK_PMU_SEL_100M;
++		else
++			src_clk = PCLK_PMU_SEL_24M;
++		rk_clrsetreg(&cru->pmu_clksel_con[0],
++			     PCLK_PMU_SEL_MASK,
++			     src_clk << PCLK_PMU_SEL_SHIFT);
++		break;
++	case HCLK_PMU_ROOT:
++		if (rate >= 198 * MHz)
++			src_clk = HCLK_PMU_SEL_200M;
++		else if (rate >= 99 * MHz)
++			src_clk = HCLK_PMU_SEL_100M;
++		else
++			src_clk = HCLK_PMU_SEL_24M;
++		rk_clrsetreg(&cru->pmu_clksel_con[0],
++			     HCLK_PMU_SEL_MASK,
++			     src_clk << HCLK_PMU_SEL_SHIFT);
++		break;
++	default:
++		printf("do not support this permid freq\n");
++		return -EINVAL;
++	}
++
++	return rv1106_peri_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_i2c_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, con;
++	ulong rate;
++
++	switch (clk_id) {
++	case CLK_I2C1:
++		con = readl(&cru->pmu_clksel_con[0]);
++		sel = (con & CLK_I2C1_SEL_MASK) >> CLK_I2C1_SEL_SHIFT;
++		if (sel == CLK_I2C1_SEL_200M)
++			rate = 200 * MHz;
++		else if (sel == CLK_I2C1_SEL_100M)
++			rate = 100 * MHz;
++		else if (sel == CLK_I2C1_SEL_24M)
++			rate = OSC_HZ;
++		else
++			rate = 32768;
++		return rate;
++	case CLK_I2C0:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & CLK_I2C0_SEL_MASK) >> CLK_I2C0_SEL_SHIFT;
++		break;
++	case CLK_I2C2:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & CLK_I2C2_SEL_MASK) >> CLK_I2C2_SEL_SHIFT;
++		break;
++	case CLK_I2C3:
++		con = readl(&cru->peri_clksel_con[1]);
++		sel = (con & CLK_I2C3_SEL_MASK) >> CLK_I2C3_SEL_SHIFT;
++		break;
++	case CLK_I2C4:
++		con = readl(&cru->peri_clksel_con[2]);
++		sel = (con & CLK_I2C4_SEL_MASK) >> CLK_I2C4_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	if (sel == CLK_I2C0_SEL_200M)
++		rate = 200 * MHz;
++	else if (sel == CLK_I2C0_SEL_100M)
++		rate = 100 * MHz;
++	else if (sel == CLK_I2C0_SEL_50M)
++		rate = 50 * MHz;
++	else
++		rate = OSC_HZ;
++
++	return rate;
++}
++
++static ulong rv1106_crypto_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, con;
++
++	switch (clk_id) {
++	case CLK_CORE_CRYPTO:
++		con = readl(&cru->peri_clksel_con[6]);
++		sel = (con & CLK_CORE_CRYPTO_SEL_MASK) >>
++		      CLK_CORE_CRYPTO_SEL_SHIFT;
++		break;
++	case CLK_PKA_CRYPTO:
++		con = readl(&cru->peri_clksel_con[6]);
++		sel = (con & CLK_PKA_CRYPTO_SEL_MASK) >>
++		      CLK_PKA_CRYPTO_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++	switch (sel) {
++	case CLK_CRYPTO_SEL_300M:
++		return 300 * MHz;
++	case CLK_CRYPTO_SEL_200M:
++		return 200 * MHz;
++	case CLK_CRYPTO_SEL_100M:
++		return 100 * MHz;
++	case CLK_CRYPTO_SEL_24M:
++		return OSC_HZ;
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1106_crypto_set_clk(struct rv1106_clk_priv *priv,
++				   ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel;
++
++	if (rate >= 297 * MHz)
++		sel = CLK_CRYPTO_SEL_300M;
++	else if (rate >= 198 * MHz)
++		sel = CLK_CRYPTO_SEL_200M;
++	else if (rate >= 99 * MHz)
++		sel = CLK_CRYPTO_SEL_100M;
++	else
++		sel = CLK_CRYPTO_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_CORE_CRYPTO:
++		rk_clrsetreg(&cru->peri_clksel_con[6],
++			     CLK_CORE_CRYPTO_SEL_MASK,
++			     sel << CLK_CORE_CRYPTO_SEL_SHIFT);
++		break;
++	case CLK_PKA_CRYPTO:
++		rk_clrsetreg(&cru->peri_clksel_con[6],
++			     CLK_PKA_CRYPTO_SEL_MASK,
++			     sel << CLK_PKA_CRYPTO_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1106_crypto_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_mmc_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 div, sel, con, prate;
++
++	switch (clk_id) {
++	case CCLK_SRC_SDMMC:
++	case HCLK_SDMMC:
++		con = readl(&cru->vi_clksel_con[1]);
++		sel = (con & CLK_SDMMC_SEL_MASK) >>
++		      CLK_SDMMC_SEL_SHIFT;
++		div = (con & CLK_SDMMC_DIV_MASK) >>
++		      CLK_SDMMC_DIV_SHIFT;
++		if (sel == CLK_MMC_SEL_400M)
++			prate = 400 * MHz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	case CCLK_SRC_EMMC:
++	case HCLK_EMMC:
++		con = readl(&cru->peri_clksel_con[7]);
++		sel = (con & CLK_EMMC_SEL_MASK) >>
++		      CLK_EMMC_SEL_SHIFT;
++		div = (con & CLK_EMMC_DIV_MASK) >>
++		      CLK_EMMC_DIV_SHIFT;
++		if (sel)
++			prate = OSC_HZ;
++		else
++			prate = 400 * MHz;
++		return DIV_TO_RATE(prate, div);
++	case SCLK_SFC:
++	case HCLK_SFC:
++		con = readl(&cru->peri_clksel_con[7]);
++		sel = (con & CLK_SFC_SEL_MASK) >>
++		      CLK_SFC_SEL_SHIFT;
++		div = (con & CLK_SFC_DIV_MASK) >>
++		      CLK_SFC_DIV_SHIFT;
++		if (sel == CLK_SFC_SEL_500M)
++			prate = 500 * MHz;
++		else if (sel == CLK_SFC_SEL_300M)
++			prate = 300 * MHz;
++		else if (sel == CLK_SFC_SEL_200M)
++			prate = 200 * MHz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1106_mmc_set_clk(struct rv1106_clk_priv *priv,
++				ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, src_clk_div;
++	ulong prate = 0;
++
++	if ((OSC_HZ % rate) == 0) {
++		sel = CLK_MMC_SEL_24M;
++		prate = OSC_HZ;
++	} else {
++		sel = CLK_MMC_SEL_400M;
++		prate = 400 * MHz;
++	}
++	src_clk_div = DIV_ROUND_UP(prate, rate);
++
++	switch (clk_id) {
++	case CCLK_SRC_SDMMC:
++	case HCLK_SDMMC:
++		if ((OSC_HZ % rate) == 0) {
++			sel = CLK_MMC_SEL_24M;
++			prate = OSC_HZ;
++		} else {
++			sel = CLK_MMC_SEL_400M;
++			prate = 400 * MHz;
++		}
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->vi_clksel_con[1],
++			     CLK_SDMMC_SEL_MASK |
++			     CLK_SDMMC_DIV_MASK,
++			     (sel << CLK_SDMMC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_SDMMC_DIV_SHIFT));
++		break;
++	case CCLK_SRC_EMMC:
++	case HCLK_EMMC:
++		if ((OSC_HZ % rate) == 0) {
++			sel = CLK_MMC_SEL_24M;
++			prate = OSC_HZ;
++		} else {
++			sel = CLK_MMC_SEL_400M;
++			prate = 400 * MHz;
++		}
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->peri_clksel_con[7],
++			     CLK_EMMC_SEL_MASK |
++			     CLK_EMMC_DIV_MASK,
++			     (sel << CLK_EMMC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_EMMC_DIV_SHIFT));
++		break;
++	case SCLK_SFC:
++	case HCLK_SFC:
++		if ((OSC_HZ % rate) == 0) {
++			sel = CLK_SFC_SEL_24M;
++			prate = OSC_HZ;
++		} else if ((500 * MHz % rate) == 0) {
++			sel = CLK_SFC_SEL_500M;
++			prate = 500 * MHz;
++		} else if ((300 * MHz % rate) == 0) {
++			sel = CLK_SFC_SEL_300M;
++			prate = 300 * MHz;
++		} else {
++			sel = CLK_SFC_SEL_200M;
++			prate = 200 * MHz;
++		}
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->peri_clksel_con[7],
++			     CLK_SFC_SEL_MASK |
++			     CLK_SFC_DIV_MASK,
++			     (sel << CLK_SFC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_SFC_DIV_SHIFT));
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1106_mmc_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_i2c_set_clk(struct rv1106_clk_priv *priv, ulong clk_id,
++				ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate >= 198 * MHz)
++		src_clk = CLK_I2C0_SEL_200M;
++	else if (rate >= 99 * MHz)
++		src_clk = CLK_I2C0_SEL_100M;
++	else if (rate >= 48 * MHz)
++		src_clk = CLK_I2C0_SEL_50M;
++	else
++		src_clk = CLK_I2C0_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_I2C1:
++		if (rate >= 198 * MHz)
++			src_clk = CLK_I2C1_SEL_200M;
++		else if (rate >= 99 * MHz)
++			src_clk = CLK_I2C1_SEL_100M;
++		else if (rate >= 24 * MHz)
++			src_clk = CLK_I2C1_SEL_24M;
++		else
++			src_clk = CLK_I2C1_SEL_32K;
++		rk_clrsetreg(&cru->clksel_con[71], CLK_I2C1_SEL_MASK,
++			     src_clk << CLK_I2C1_SEL_SHIFT);
++		return rv1106_i2c_get_clk(priv, clk_id);
++	case CLK_I2C0:
++		rk_clrsetreg(&cru->peri_clksel_con[1], CLK_I2C0_SEL_MASK,
++			     src_clk << CLK_I2C0_SEL_SHIFT);
++		break;
++	case CLK_I2C2:
++		rk_clrsetreg(&cru->peri_clksel_con[1], CLK_I2C2_SEL_MASK,
++			     src_clk << CLK_I2C2_SEL_SHIFT);
++		break;
++	case CLK_I2C3:
++		rk_clrsetreg(&cru->peri_clksel_con[1], CLK_I2C3_SEL_MASK,
++			     src_clk << CLK_I2C3_SEL_SHIFT);
++		break;
++	case CLK_I2C4:
++		rk_clrsetreg(&cru->peri_clksel_con[2], CLK_I2C4_SEL_MASK,
++			     src_clk << CLK_I2C4_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rv1106_i2c_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_spi_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, con, rate;
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		con = readl(&cru->vepu_clksel_con[0]);
++		sel = (con & CLK_SPI0_SEL_MASK) >> CLK_SPI0_SEL_SHIFT;
++		break;
++	case CLK_SPI1:
++		con = readl(&cru->peri_clksel_con[6]);
++		sel = (con & CLK_SPI1_SEL_MASK) >> CLK_SPI1_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++	if (sel == CLK_SPI0_SEL_200M)
++		rate = 200 * MHz;
++	else if (sel == CLK_SPI0_SEL_100M)
++		rate = 100 * MHz;
++	else if (sel == CLK_SPI0_SEL_50M)
++		rate = 50 * MHz;
++	else
++		rate = OSC_HZ;
++
++	return rate;
++}
++
++static ulong rv1106_spi_set_clk(struct rv1106_clk_priv *priv,
++				ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate >= 198 * MHz)
++		src_clk = CLK_SPI0_SEL_200M;
++	else if (rate >= 99 * MHz)
++		src_clk = CLK_SPI0_SEL_100M;
++	else if (rate >= 48 * MHz)
++		src_clk = CLK_SPI0_SEL_50M;
++	else
++		src_clk = CLK_SPI0_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		rk_clrsetreg(&cru->vepu_clksel_con[0], CLK_SPI0_SEL_MASK,
++			     src_clk << CLK_SPI0_SEL_SHIFT);
++		break;
++	case CLK_SPI1:
++		rk_clrsetreg(&cru->peri_clksel_con[6], CLK_SPI1_SEL_MASK,
++			     src_clk << CLK_SPI1_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rv1106_spi_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_pwm_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, con;
++
++	switch (clk_id) {
++	case CLK_PWM0_PERI:
++		con = readl(&cru->peri_clksel_con[11]);
++		sel = (con & CLK_PWM0_SEL_MASK) >> CLK_PWM0_SEL_SHIFT;
++		break;
++	case CLK_PWM1_PERI:
++		con = readl(&cru->peri_clksel_con[6]);
++		sel = (con & CLK_PWM1_SEL_MASK) >> CLK_PWM1_SEL_SHIFT;
++		break;
++	case CLK_PWM2_PERI:
++		con = readl(&cru->peri_clksel_con[6]);
++		sel = (con & CLK_PWM2_SEL_MASK) >> CLK_PWM2_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	switch (sel) {
++	case CLK_PWM_SEL_100M:
++		return 100 * MHz;
++	case CLK_PWM_SEL_50M:
++		return 100 * MHz;
++	case CLK_PWM_SEL_24M:
++		return OSC_HZ;
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1106_pwm_set_clk(struct rv1106_clk_priv *priv,
++				ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate >= 99 * MHz)
++		src_clk = CLK_PWM_SEL_100M;
++	else if (rate >= 48 * MHz)
++		src_clk = CLK_PWM_SEL_50M;
++	else
++		src_clk = CLK_PWM_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_PWM0_PERI:
++		rk_clrsetreg(&cru->peri_clksel_con[11],
++			     CLK_PWM0_SEL_MASK,
++			     src_clk << CLK_PWM0_SEL_SHIFT);
++		break;
++	case CLK_PWM1_PERI:
++		rk_clrsetreg(&cru->peri_clksel_con[6],
++			     CLK_PWM1_SEL_MASK,
++			     src_clk << CLK_PWM1_SEL_SHIFT);
++		break;
++	case CLK_PWM2_PERI:
++		rk_clrsetreg(&cru->peri_clksel_con[6],
++			     CLK_PWM2_SEL_MASK,
++			     src_clk << CLK_PWM2_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rv1106_pwm_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_adc_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 div, con;
++
++	switch (clk_id) {
++	case CLK_SARADC:
++		con = readl(&cru->peri_clksel_con[6]);
++		div = (con & CLK_SARADC_DIV_MASK) >>
++		      CLK_SARADC_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	case CLK_TSADC_TSEN:
++		con = readl(&cru->vo_clksel_con[3]);
++		div = (con & CLK_TSADC_TSEN_DIV_MASK) >>
++		      CLK_TSADC_TSEN_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	case CLK_TSADC:
++		con = readl(&cru->vo_clksel_con[3]);
++		div = (con & CLK_TSADC_DIV_MASK) >> CLK_TSADC_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1106_adc_set_clk(struct rv1106_clk_priv *priv,
++				ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int src_clk_div;
++
++	src_clk_div = DIV_ROUND_UP(OSC_HZ, rate);
++
++	switch (clk_id) {
++	case CLK_SARADC:
++		assert(src_clk_div - 1 <= 7);
++		rk_clrsetreg(&cru->peri_clksel_con[6],
++			     CLK_SARADC_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_SARADC_DIV_SHIFT);
++		break;
++	case CLK_TSADC_TSEN:
++		assert(src_clk_div - 1 <= 128);
++		rk_clrsetreg(&cru->vo_clksel_con[3],
++			     CLK_TSADC_TSEN_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_TSADC_TSEN_DIV_SHIFT);
++		break;
++	case CLK_TSADC:
++		assert(src_clk_div - 1 <= 128);
++		rk_clrsetreg(&cru->vo_clksel_con[3],
++			     CLK_TSADC_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_TSADC_DIV_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1106_adc_get_clk(priv, clk_id);
++}
++
++/*
++ *
++ * rational_best_approximation(31415, 10000,
++ *		(1 << 8) - 1, (1 << 5) - 1, &n, &d);
++ *
++ * you may look at given_numerator as a fixed point number,
++ * with the fractional part size described in given_denominator.
++ *
++ * for theoretical background, see:
++ * http://en.wikipedia.org/wiki/Continued_fraction
++ */
++static void rational_best_approximation(unsigned long given_numerator,
++					unsigned long given_denominator,
++					unsigned long max_numerator,
++					unsigned long max_denominator,
++					unsigned long *best_numerator,
++					unsigned long *best_denominator)
++{
++	unsigned long n, d, n0, d0, n1, d1;
++
++	n = given_numerator;
++	d = given_denominator;
++	n0 = 0;
++	d1 = 0;
++	n1 = 1;
++	d0 = 1;
++	for (;;) {
++		unsigned long t, a;
++
++		if (n1 > max_numerator || d1 > max_denominator) {
++			n1 = n0;
++			d1 = d0;
++			break;
++		}
++		if (d == 0)
++			break;
++		t = d;
++		a = n / d;
++		d = n % d;
++		n = t;
++		t = n0 + a * n1;
++		n0 = n1;
++		n1 = t;
++		t = d0 + a * d1;
++		d0 = d1;
++		d1 = t;
++	}
++	*best_numerator = n1;
++	*best_denominator = d1;
++}
++
++static ulong rv1106_uart_get_rate(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 reg, con, fracdiv, div, src, p_src, p_rate;
++	unsigned long m, n;
++
++	switch (clk_id) {
++	case SCLK_UART0:
++		reg = 5;
++		break;
++	case SCLK_UART1:
++		reg = 7;
++		break;
++	case SCLK_UART2:
++		reg = 9;
++		break;
++	case SCLK_UART3:
++		reg = 11;
++		break;
++	case SCLK_UART4:
++		reg = 13;
++		break;
++	case SCLK_UART5:
++		reg = 15;
++		break;
++	default:
++		return -ENOENT;
++	}
++	con = readl(&cru->clksel_con[reg + 2]);
++	src = (con & CLK_UART_SEL_MASK) >> CLK_UART_SEL_SHIFT;
++	con = readl(&cru->clksel_con[reg]);
++	div = (con & CLK_UART_SRC_DIV_MASK) >> CLK_UART_SRC_DIV_SHIFT;
++	p_src = (con & CLK_UART_SRC_SEL_MASK) >> CLK_UART_SRC_SEL_SHIFT;
++	if (p_src == CLK_UART_SRC_SEL_GPLL)
++		p_rate = priv->gpll_hz;
++	else if (p_src == CLK_UART_SRC_SEL_CPLL)
++		p_rate = priv->cpll_hz;
++	else
++		p_rate = 480000000;
++	if (src == CLK_UART_SEL_SRC) {
++		return DIV_TO_RATE(p_rate, div);
++	} else if (src == CLK_UART_SEL_FRAC) {
++		fracdiv = readl(&cru->clksel_con[reg + 1]);
++		n = fracdiv & CLK_UART_FRAC_NUMERATOR_MASK;
++		n >>= CLK_UART_FRAC_NUMERATOR_SHIFT;
++		m = fracdiv & CLK_UART_FRAC_DENOMINATOR_MASK;
++		m >>= CLK_UART_FRAC_DENOMINATOR_SHIFT;
++		return DIV_TO_RATE(p_rate, div) * n / m;
++	} else {
++		return OSC_HZ;
++	}
++}
++
++static ulong rv1106_uart_set_rate(struct rv1106_clk_priv *priv,
++				  ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 reg, clk_src, uart_src, div;
++	unsigned long m = 0, n = 0, val;
++
++	if (priv->gpll_hz % rate == 0) {
++		clk_src = CLK_UART_SRC_SEL_GPLL;
++		uart_src = CLK_UART_SEL_SRC;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	} else if (priv->cpll_hz % rate == 0) {
++		clk_src = CLK_UART_SRC_SEL_CPLL;
++		uart_src = CLK_UART_SEL_SRC;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	} else if (rate == OSC_HZ) {
++		clk_src = CLK_UART_SRC_SEL_GPLL;
++		uart_src = CLK_UART_SEL_XIN24M;
++		div = 2;
++	} else {
++		clk_src = CLK_UART_SRC_SEL_GPLL;
++		uart_src = CLK_UART_SEL_FRAC;
++		div = 2;
++		rational_best_approximation(rate, priv->gpll_hz / div,
++					    GENMASK(16 - 1, 0),
++					    GENMASK(16 - 1, 0),
++					    &m, &n);
++	}
++
++	switch (clk_id) {
++	case SCLK_UART0:
++		reg = 5;
++		break;
++	case SCLK_UART1:
++		reg = 7;
++		break;
++	case SCLK_UART2:
++		reg = 9;
++		break;
++	case SCLK_UART3:
++		reg = 11;
++		break;
++	case SCLK_UART4:
++		reg = 13;
++		break;
++	case SCLK_UART5:
++		reg = 15;
++		break;
++	default:
++		return -ENOENT;
++	}
++	rk_clrsetreg(&cru->clksel_con[reg],
++		     CLK_UART_SRC_SEL_MASK |
++		     CLK_UART_SRC_DIV_MASK,
++		     (clk_src << CLK_UART_SRC_SEL_SHIFT) |
++		     ((div - 1) << CLK_UART_SRC_DIV_SHIFT));
++	rk_clrsetreg(&cru->clksel_con[reg + 2],
++		     CLK_UART_SEL_MASK,
++		     uart_src << CLK_UART_SEL_SHIFT);
++	if (m && n) {
++		val = m << CLK_UART_FRAC_NUMERATOR_SHIFT | n;
++		writel(val, &cru->clksel_con[reg + 1]);
++	}
++
++	return rv1106_uart_get_rate(priv, clk_id);
++}
++
++static ulong rv1106_vop_get_clk(struct rv1106_clk_priv *priv, ulong clk_id)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 div, sel, con;
++
++	switch (clk_id) {
++	case ACLK_VOP_ROOT:
++	case ACLK_VOP:
++		con = readl(&cru->vo_clksel_con[1]);
++		sel = (con & ACLK_VOP_SEL_MASK) >> ACLK_VOP_SEL_SHIFT;
++		if (sel == ACLK_VOP_SEL_300M)
++			return 300 * MHz;
++		else if (sel == ACLK_VOP_SEL_200M)
++			return 200 * MHz;
++		else if (sel == ACLK_VOP_SEL_100M)
++			return 100 * MHz;
++		else
++			return  OSC_HZ;
++	case DCLK_VOP_SRC:
++	case DCLK_VOP:
++		con = readl(&cru->clksel_con[23]);
++		sel = (con & DCLK_VOP_SEL_MASK) >> DCLK_VOP_SEL_SHIFT;
++		div = (con & DCLK_VOP_DIV_MASK) >> DCLK_VOP_DIV_SHIFT;
++		if (sel == DCLK_VOP_SEL_GPLL)
++			return DIV_TO_RATE(priv->gpll_hz, div);
++		else
++			return DIV_TO_RATE(priv->cpll_hz, div);
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1106_vop_set_clk(struct rv1106_clk_priv *priv,
++				ulong clk_id, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	int div, sel;
++
++	switch (clk_id) {
++	case ACLK_VOP_ROOT:
++	case ACLK_VOP:
++		if (rate >= 297 * MHz)
++			sel = ACLK_VOP_SEL_300M;
++		else if (rate >= 198 * MHz)
++			sel = ACLK_VOP_SEL_200M;
++		else if (rate >= 99 * MHz)
++			sel = ACLK_VOP_SEL_100M;
++		else
++			sel = ACLK_VOP_SEL_24M;
++		rk_clrsetreg(&cru->vo_clksel_con[1],
++			     ACLK_VOP_SEL_MASK,
++			     sel << ACLK_VOP_SEL_SHIFT);
++		break;
++	case DCLK_VOP_SRC:
++	case DCLK_VOP:
++		if ((priv->cpll_hz % rate) == 0) {
++			sel = DCLK_VOP_SEL_CPLL;
++			div = DIV_ROUND_UP(priv->cpll_hz, rate);
++		} else {
++			sel = DCLK_VOP_SEL_GPLL;
++			div = DIV_ROUND_UP(priv->gpll_hz, rate);
++		}
++		rk_clrsetreg(&cru->clksel_con[23],
++			     DCLK_VOP_SEL_MASK |
++			     DCLK_VOP_DIV_MASK,
++			     sel << DCLK_VOP_SEL_SHIFT |
++			     (div - 1) << DCLK_VOP_DIV_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rv1106_vop_get_clk(priv, clk_id);
++}
++
++static ulong rv1106_decom_get_clk(struct rv1106_clk_priv *priv)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel, con, prate;
++
++	con = readl(&cru->peri_clksel_con[7]);
++	sel = (con & DCLK_DECOM_SEL_MASK) >>
++	      DCLK_DECOM_SEL_SHIFT;
++	if (sel == DCLK_DECOM_SEL_400M)
++		prate = 400 * MHz;
++	else if (sel == DCLK_DECOM_SEL_200M)
++		prate = 200 * MHz;
++	else if (sel == DCLK_DECOM_SEL_100M)
++		prate = 100 * MHz;
++	else
++		prate = OSC_HZ;
++	return prate;
++}
++
++static ulong rv1106_decom_set_clk(struct rv1106_clk_priv *priv, ulong rate)
++{
++	struct rv1106_cru *cru = priv->cru;
++	u32 sel;
++
++	if (rate >= 396 * MHz)
++		sel = DCLK_DECOM_SEL_400M;
++	else if (rate >= 198 * MHz)
++		sel = DCLK_DECOM_SEL_200M;
++	else if (rate >= 99 * MHz)
++		sel = DCLK_DECOM_SEL_100M;
++	else
++		sel = DCLK_DECOM_SEL_24M;
++	rk_clrsetreg(&cru->peri_clksel_con[7], DCLK_DECOM_SEL_MASK,
++		     (sel << DCLK_DECOM_SEL_SHIFT));
++
++	return rv1106_decom_get_clk(priv);
++}
++
++static ulong rv1106_clk_get_rate(struct clk *clk)
++{
++	struct rv1106_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong rate = 0;
++
++	if (!priv->gpll_hz) {
++		printf("%s gpll=%lu\n", __func__, priv->gpll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case PLL_APLL:
++		rate = rockchip_pll_get_rate(&rv1106_pll_clks[APLL], priv->cru,
++					     APLL);
++		break;
++	case PLL_DPLL:
++		rate = rockchip_pll_get_rate(&rv1106_pll_clks[DPLL], priv->cru,
++					     DPLL);
++		break;
++	case PLL_CPLL:
++		rate = rockchip_pll_get_rate(&rv1106_pll_clks[CPLL], priv->cru,
++					     CPLL);
++		break;
++	case PLL_GPLL:
++		rate = rockchip_pll_get_rate(&rv1106_pll_clks[GPLL], priv->cru,
++					     GPLL);
++		break;
++	case ACLK_PERI_ROOT:
++	case HCLK_PERI_ROOT:
++	case PCLK_PERI_ROOT:
++	case ACLK_BUS_ROOT:
++	case PCLK_TOP_ROOT:
++	case PCLK_PMU_ROOT:
++	case HCLK_PMU_ROOT:
++		rate = rv1106_peri_get_clk(priv, clk->id);
++		break;
++	case CLK_CORE_CRYPTO:
++	case CLK_PKA_CRYPTO:
++	case ACLK_CRYPTO:
++		rate = rv1106_crypto_get_clk(priv, clk->id);
++		break;
++	case CCLK_SRC_SDMMC:
++	case CCLK_SRC_EMMC:
++	case SCLK_SFC:
++	case HCLK_SDMMC:
++	case HCLK_EMMC:
++	case HCLK_SFC:
++		rate = rv1106_mmc_get_clk(priv, clk->id);
++		break;
++	case CLK_I2C0:
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++		rate = rv1106_i2c_get_clk(priv, clk->id);
++		break;
++	case CLK_SPI0:
++	case CLK_SPI1:
++		rate = rv1106_spi_get_clk(priv, clk->id);
++		break;
++	case CLK_PWM0_PERI:
++	case CLK_PWM1_PERI:
++	case CLK_PWM2_PERI:
++		rate = rv1106_pwm_get_clk(priv, clk->id);
++		break;
++	case CLK_SARADC:
++	case CLK_TSADC_TSEN:
++	case CLK_TSADC:
++		rate = rv1106_adc_get_clk(priv, clk->id);
++		break;
++	case SCLK_UART0:
++	case SCLK_UART1:
++	case SCLK_UART2:
++	case SCLK_UART3:
++	case SCLK_UART4:
++	case SCLK_UART5:
++		rate = rv1106_uart_get_rate(priv, clk->id);
++		break;
++	case DCLK_VOP_SRC:
++	case DCLK_VOP:
++	case ACLK_VOP_ROOT:
++	case ACLK_VOP:
++		rate = rv1106_vop_get_clk(priv, clk->id);
++		break;
++	case DCLK_DECOM:
++		rate = rv1106_decom_get_clk(priv);
++		break;
++	case TCLK_WDT_NS:
++		rate = OSC_HZ;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rate;
++};
++
++static ulong rv1106_clk_set_rate(struct clk *clk, ulong rate)
++{
++	struct rv1106_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong ret = 0;
++
++	if (!priv->gpll_hz) {
++		printf("%s gpll=%lu\n", __func__, priv->gpll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case PLL_APLL:
++		ret = rockchip_pll_set_rate(&rv1106_pll_clks[APLL], priv->cru,
++					    APLL, rate);
++		break;
++	case PLL_CPLL:
++		ret = rockchip_pll_set_rate(&rv1106_pll_clks[CPLL], priv->cru,
++					    CPLL, rate);
++		break;
++	case PLL_GPLL:
++		ret = rockchip_pll_set_rate(&rv1106_pll_clks[GPLL], priv->cru,
++					    GPLL, rate);
++		break;
++	case ACLK_PERI_ROOT:
++	case HCLK_PERI_ROOT:
++	case PCLK_PERI_ROOT:
++	case ACLK_BUS_ROOT:
++	case PCLK_TOP_ROOT:
++	case PCLK_PMU_ROOT:
++	case HCLK_PMU_ROOT:
++		ret = rv1106_peri_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_CORE_CRYPTO:
++	case CLK_PKA_CRYPTO:
++	case ACLK_CRYPTO:
++		ret = rv1106_crypto_set_clk(priv, clk->id, rate);
++		break;
++	case CCLK_SRC_SDMMC:
++	case CCLK_SRC_EMMC:
++	case SCLK_SFC:
++	case HCLK_SDMMC:
++	case HCLK_EMMC:
++	case HCLK_SFC:
++		ret = rv1106_mmc_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_I2C0:
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++		ret = rv1106_i2c_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_SPI0:
++	case CLK_SPI1:
++		ret = rv1106_spi_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_PWM0_PERI:
++	case CLK_PWM1_PERI:
++	case CLK_PWM2_PERI:
++		ret = rv1106_pwm_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_SARADC:
++	case CLK_TSADC_TSEN:
++	case CLK_TSADC:
++		ret = rv1106_adc_set_clk(priv, clk->id, rate);
++		break;
++	case SCLK_UART0:
++	case SCLK_UART1:
++	case SCLK_UART2:
++	case SCLK_UART3:
++	case SCLK_UART4:
++	case SCLK_UART5:
++		ret = rv1106_uart_set_rate(priv, clk->id, rate);
++		break;
++	case DCLK_VOP_SRC:
++	case DCLK_VOP:
++	case ACLK_VOP_ROOT:
++	case ACLK_VOP:
++		rate = rv1106_vop_set_clk(priv, clk->id, rate);
++		break;
++	case DCLK_DECOM:
++		rate = rv1106_decom_set_clk(priv, rate);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return ret;
++};
++
++static int rv1106_clk_set_parent(struct clk *clk, struct clk *parent)
++{
++	switch (clk->id) {
++	default:
++		return -ENOENT;
++	}
++
++	return 0;
++}
++
++static struct clk_ops rv1106_clk_ops = {
++	.get_rate = rv1106_clk_get_rate,
++	.set_rate = rv1106_clk_set_rate,
++#if CONFIG_IS_ENABLED(OF_CONTROL) && !CONFIG_IS_ENABLED(OF_PLATDATA)
++	.set_parent = rv1106_clk_set_parent,
++#endif
++};
++
++static void rv1106_clk_init(struct rv1106_clk_priv *priv)
++{
++	int ret;
++
++	priv->sync_kernel = false;
++	if (!priv->armclk_enter_hz) {
++		priv->armclk_enter_hz =
++			rockchip_pll_get_rate(&rv1106_pll_clks[APLL],
++					      priv->cru, APLL);
++		priv->armclk_init_hz = priv->armclk_enter_hz;
++	}
++
++	if (priv->armclk_init_hz != APLL_HZ) {
++			ret = rockchip_pll_set_rate(&rv1106_pll_clks[APLL], priv->cru,
++						    APLL, APLL_HZ);
++		if (!ret)
++			priv->armclk_init_hz = APLL_HZ;
++	}
++
++	if (priv->cpll_hz != CPLL_HZ) {
++		ret = rockchip_pll_set_rate(&rv1106_pll_clks[CPLL], priv->cru,
++					    CPLL, CPLL_HZ);
++		if (!ret)
++			priv->cpll_hz = CPLL_HZ;
++	}
++
++	if (priv->gpll_hz != GPLL_HZ) {
++		ret = rockchip_pll_set_rate(&rv1106_pll_clks[GPLL], priv->cru,
++					    GPLL, GPLL_HZ);
++		if (!ret)
++			priv->gpll_hz = GPLL_HZ;
++	}
++}
++
++static int rv1106_clk_probe(struct udevice *dev)
++{
++	struct rv1106_clk_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	rv1106_clk_init(priv);
++
++	/* Process 'assigned-{clocks/clock-parents/clock-rates}' properties */
++	ret = clk_set_defaults(dev, 1);
++	if (ret)
++		debug("%s clk_set_defaults failed %d\n", __func__, ret);
++	else
++		priv->sync_kernel = true;
++	rk_clrsetreg(&priv->cru->core_clksel_con[0],
++		     CLK_CORE_DIV_MASK,
++		     0 << CLK_CORE_DIV_SHIFT);
++
++	return 0;
++}
++
++static int rv1106_clk_of_to_plat(struct udevice *dev)
++{
++	struct rv1106_clk_priv *priv = dev_get_priv(dev);
++
++	priv->cru = dev_read_addr_ptr(dev);
++
++	return 0;
++}
++
++static int rv1106_clk_bind(struct udevice *dev)
++{
++	struct udevice *sys_child;
++	struct sysreset_reg *priv;
++	int ret;
++
++	/* The sysreset driver does not have a device node, so bind it here */
++	ret = device_bind_driver(dev, "rockchip_sysreset", "sysreset",
++				 &sys_child);
++	if (ret) {
++		debug("Warning: No sysreset driver: ret=%d\n", ret);
++	} else {
++		priv = malloc(sizeof(struct sysreset_reg));
++		priv->glb_srst_fst_value = offsetof(struct rv1106_cru,
++						    glb_srst_fst);
++		priv->glb_srst_snd_value = offsetof(struct rv1106_cru,
++						    glb_srst_snd);
++		dev_set_priv(sys_child, priv);
++	}
++
++#if CONFIG_IS_ENABLED(RESET_ROCKCHIP)
++	ret = offsetof(struct rv1106_cru, pmu_softrst_con[0]);
++	ret = rockchip_reset_bind(dev, ret, 15);
++	if (ret)
++		debug("Warning: software reset driver bind failed\n");
++#endif
++
++	return 0;
++}
++
++static const struct udevice_id rv1106_clk_ids[] = {
++	{ .compatible = "rockchip,rv1106-cru" },
++	{ }
++};
++
++U_BOOT_DRIVER(rockchip_rv1106_cru) = {
++	.name		= "rockchip_rv1106_cru",
++	.id		= UCLASS_CLK,
++	.of_match	= rv1106_clk_ids,
++	.priv_auto	= sizeof(struct rv1106_clk_priv),
++	.of_to_plat	= rv1106_clk_of_to_plat,
++	.ops		= &rv1106_clk_ops,
++	.bind		= rv1106_clk_bind,
++	.probe		= rv1106_clk_probe,
++};
 -- 
 2.43.0
 
