@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4628EC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:33:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA41C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:33:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 769C384AA5;
-	Tue,  7 Jul 2026 17:32:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B2A6684AD6;
+	Tue,  7 Jul 2026 17:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gw9h9feT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G6BJ8KNX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 691BA84AD7; Tue,  7 Jul 2026 17:32:42 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 7A7DF84A4A; Tue,  7 Jul 2026 17:32:45 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51297849F6
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29878849F6
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4896ae35be9so1428914b6e.0
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:40 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-497d6c2d000so2708379b6e.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783438359; x=1784043159; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783438362; x=1784043162; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ktWClV7yz7pWlnmRXoPAAfaQeLwr4B2/0bxHS71FDnc=;
- b=Gw9h9feTc0UbovX5+BIxgvlKyeB6HGsZ9Ti/SQwhUwbLg+u3TnQ3yjJEc04FN3ZKun
- wkpWSMEhknuYtKMpiAuEB1TA4mzmcpPmH4/m/q+rWPwX8oarx922am1l5KEeNkHZI50J
- Wly2xQpZ/D1xjwN7J1WYBnl/UAqdJfyhV6XTM=
+ :message-id:reply-to;
+ bh=VcuiF6IAK6t7JCgryhjtoPSZmABEbo83ep/nr7nvX+c=;
+ b=G6BJ8KNXiD3bYCrZgsrGmnQWhCMmkxJRuA8yeOUOEM9ABSxhI0irJK0qnzwFqlFA2H
+ PvFOrRuQWahEuvhLiOuDCsH30Yo/2tjTklIRVkzVrpq/mKa7tQ+cGyW1PGz25tu/pxWe
+ MUZR4lXRTPK3GasLuTlOFA0++MoZf7yOY5yJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438359; x=1784043159;
+ d=1e100.net; s=20251104; t=1783438362; x=1784043162;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ktWClV7yz7pWlnmRXoPAAfaQeLwr4B2/0bxHS71FDnc=;
- b=RnA1KBJxq6nkA+S3JBd9YRb5yJg+HZ6vELxzjD9dZPQUWeZyyDn4PQySDCKxdVfa81
- Qp6J+bqsderQIpfY99HCqm7PAY9KrKbfNZfwKe/K1SdpbzTeoTqO+GLKxHH5JI8eXJ/I
- mkZkJ+54C58/0EM7nR5eNFRW3+stTUBVn22xH67lbT4ns3YbSc7WYyJPVM+KCgZ0WFnw
- Yz/XRsanjjEPeuxURsiTH3jgD71zksymXbfoANdcN3oopL4kStDY0OSqUXa6/sWE9SWN
- s7r2axKK/t9jK/b7m3x+qj+rAh+PXagy7vf1VAfdYqSZKIiRvbglBLFMC9wFOxnkk8hH
- q4qA==
-X-Gm-Message-State: AOJu0Yz3hhyx4Fxbjkz+byWlDjfriZQLFlJSFY64BVAd9nVYPmaIvU2L
- g1YLS/LMEZ5yj0E3/ktGscdHanYJW2lBYiHkozaXG9oLNCbHiwZgYghC2y6SaewnGifZPjiTP77
- E9FeICw==
-X-Gm-Gg: AfdE7clNBzmbunw+Zcs/svowPUPmG4z8zzG/gE3n+ZMQ/qKbY8RCqTGbwh7VYiRd2Oi
- DfXZx2F+4EK72nyt+qEsJcLLU5iQ8DXrydSyBdVKljCn/AdP0d3zC/cMeOOWAXDlCqvZLnFKT+V
- ykCFaJptRiCRXekxSiCVg1ALzvg7h44w+rE3Ac9RJd6T1NXpCWuMHqWGL11vsPHJ3aU12deMDNS
- wBL92QPcrw5dQ2B2bso1OsQuRX4RUXzlDjSnMG6bkzz2vs3hVKcmx2EkuKaPoY3Zpzl7CvX5zR+
- DfSkgiEo5wwfuvSx/rYTJWw3863XGkDwLJYfk/fYeF0gwAAanb7FH7mefGH/yTpqm98fu2M7pob
- qHro1lSyEQzlehPzVmTTbafHd22pYfAuAM6xzt7lEr9UtabbYGembdJiZ5G0h/vGwUQDpe6P6/S
- 4OgLYFWz8=
-X-Received: by 2002:a05:6808:5247:b0:494:9c17:c336 with SMTP id
- 5614622812f47-49fde6ee713mr3822448b6e.34.1783438358950; 
- Tue, 07 Jul 2026 08:32:38 -0700 (PDT)
+ :to:cc:subject:date:message-id:reply-to;
+ bh=VcuiF6IAK6t7JCgryhjtoPSZmABEbo83ep/nr7nvX+c=;
+ b=NmKJC8gpwVdBZTSgujVSfu6JiTcZugPJ9Tzo9ZfUVF0WHi2h+O2mj80Jvg1ocT82a+
+ HWBqrXNP5StI1UDSpUeSzC6B7JrpyxTk8mE3Qj1z0yETFbPN6YlDBWwntuvR05GhbsKF
+ DWbLQa9pgHOvqRzduNmzsneQjYL5qDTPUXCrfVqcQv6tRpq58b8n9Ifg/VUS9vfpfZfr
+ 3nmZOJx9s0be8pdHmuzhu7yLRjyS/xYptGdC37Etbwlb1W236qECGHpRhb05qUMeGkXd
+ +ALR/LNuLA42eTuI3PEj7AXXKkqtaucE3qeu+QOkpxY69uozLcyFQfXzN26u2JIj9xhG
+ 3EZQ==
+X-Gm-Message-State: AOJu0YwRFEFG7Q52Q/Bmg2ohJTXzFwWDZSJ7/zRiHparr9xd02MB11HW
+ hE+bmk+kYHv2GukXZnFWaqvbuETO7Uyov0PwmlTXzf7ZtDjb7/bbN8ZE0oNepYPYFcjiuqSw/UG
+ YIQ3R0A==
+X-Gm-Gg: AfdE7cn0EjRa2e6lEs2hSizqyda3hy5uGHZB+WOMM5M1d55/yTo7WYojuMN+ObcRRpA
+ UcghhK6q4xdTZs2VoKoOTspckd892SJT+Ts4ddZGcKGHiKquW4AJ9BfqlnnaJHKgJ+YuSbtziw0
+ bFEEsC4Qi6UXaNx+lK1bMy/glMgIVAxTJNf8YP/YLNyT/qsoOMvqdqTCfrWiBHXdWc/ybEIKA1h
+ QjkyP5MVhkwgxmVQekC3wb8e8NlXB1aT5LoPpuy7K0chVCO5SnYPyHffoW7ZS7IImm8ql97xY4d
+ NGzdYpYP1jtgn0gPx2x1hyo3gGMD/4nuWdHBzJ6nFQUy1OiHavVqURW62Y1PZGz2F4BCnbEaYTd
+ Esi9pFluFFF8XKPDIWK/AcMiryJpKYcnBWUyzjnwC2hhp6L1vUrIVS3N3AuPQbQbwXegF6Rd/Z2
+ 4zPsqBmPo=
+X-Received: by 2002:a05:6808:f8b:b0:48a:a688:4155 with SMTP id
+ 5614622812f47-49fddad61famr3741493b6e.20.1783438361856; 
+ Tue, 07 Jul 2026 08:32:41 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.37
+ 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:32:37 -0700 (PDT)
+ Tue, 07 Jul 2026 08:32:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Alexey Charkov <alchark@flipper.net>,
- Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 05/15] rockchip: spl-boot-order: Add SPI NAND support
-Date: Tue,  7 Jul 2026 09:31:03 -0600
-Message-ID: <20260707153135.2048115-6-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Alexey Charkov <alchark@gmail.com>,
+ Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>, Johan Jonker <jbx6244@gmail.com>,
+ =?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Genoud <richard.genoud@bootlin.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 06/15] spl: Add SPI NAND support via MTD in SPL
+Date: Tue,  7 Jul 2026 09:31:04 -0600
+Message-ID: <20260707153135.2048115-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
 References: <20260707153135.2048115-1-sjg@chromium.org>
@@ -103,62 +104,203 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-Make spl-boot-order accept booting from SPI NAND as well.
+Add support for booting U-Boot SPL from SPI NAND devices using the MTD
+subsystem:
 
-With this change, it is possible to specify spi_nand as the boot medium
-like this:
+- Introduce CONFIG_SPL_SPI_NAND_LOAD to enable SPL loading from SPI
+  NAND flash.
+- Implement spl_spi_nand.c as a dedicated SPL loader that reads the
+  FIT image from SPI NAND via MTD.
+- Update common/spl/Kconfig and the Makefiles to include the new
+  loader in SPL builds.
+- Adjust drivers/mtd/Makefile and drivers/mtd/nand/Makefile to build
+  the necessary SPI NAND MTD objects only when SPL_SPI_NAND_LOAD is
+  enabled, avoiding a size impact on other boards.
 
-u-boot,spl-boot-order = &spi_nand;
+This allows boards like the Omega4 RV1103B to boot SPL directly from
+SPI NAND, keeping the SPL small and avoiding unnecessary inclusion of
+SPI NOR code.
 
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Guard the spi-nand checks with SPI_NAND_LOAD so that boards without
-  SPI NAND support do not grow in size
+(no changes since v1)
 
- arch/arm/mach-rockchip/spl-boot-order.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ common/spl/Kconfig        | 10 ++++-
+ common/spl/Makefile       |  1 +
+ common/spl/spl_spi_nand.c | 82 +++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/Makefile      |  1 +
+ drivers/mtd/nand/Makefile | 13 ++++++-
+ 5 files changed, 105 insertions(+), 2 deletions(-)
+ create mode 100644 common/spl/spl_spi_nand.c
 
-diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index d2dd5e10935..3942dfe6f5c 100644
---- a/arch/arm/mach-rockchip/spl-boot-order.c
-+++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -4,6 +4,7 @@
-  */
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0618f42c941..0a3b53d0e66 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1576,13 +1576,21 @@ config SPL_SPI_LOAD
+ 	  Enable support for loading next stage, U-Boot or otherwise, from
+ 	  SPI NOR in U-Boot SPL.
  
- #include <dm.h>
++config SPL_SPI_NAND_LOAD
++	bool "Support loading from SPI NAND flash"
++	depends on SPL
++	depends on MTD && DM_MTD
++	help
++	  Enable support for loading next stage, U-Boot or otherwise, from
++	  SPI NAND in U-Boot SPL.
++
+ endif # SPL_SPI_FLASH_SUPPORT
+ 
+ config SYS_SPI_U_BOOT_OFFS
+ 	hex "address of u-boot payload in SPI flash"
+ 	default 0x8000 if ARCH_SUNXI
+ 	default 0x0
+-	depends on SPL_SPI_LOAD || SPL_SPI_SUNXI
++	depends on SPL_SPI_LOAD || SPL_SPI_NAND_LOAD || SPL_SPI_SUNXI
+ 	help
+ 	  Address within SPI-Flash from where the u-boot payload is fetched
+ 	  from.
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 9c94e8f143e..e8365b69825 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -36,6 +36,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
+ obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
+ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
+ obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
++obj-$(CONFIG_$(PHASE_)SPI_NAND_LOAD) += spl_spi_nand.o
+ obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
+ obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+ obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
+diff --git a/common/spl/spl_spi_nand.c b/common/spl/spl_spi_nand.c
+new file mode 100644
+index 00000000000..20b877f75a0
+--- /dev/null
++++ b/common/spl/spl_spi_nand.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/*
++ * SPL loader for SPI NAND devices using the MTD subsystem.
++ *
++ * Based on spl_spi.c, which is:
++ *
++ * Copyright (C) 2011 OMICRON electronics GmbH
++ *
++ * based on drivers/mtd/nand/raw/nand_spl_load.c
++ *
++ * Copyright (C) 2011
++ * Heiko Schocher, DENX Software Engineering, hs@denx.de.
++ */
++
++#include <config.h>
++#include <image.h>
++#include <log.h>
++#include <errno.h>
++#include <spl.h>
++#include <spl_load.h>
++#include <asm/io.h>
 +#include <dm/device_compat.h>
- #include <fdt_support.h>
- #include <log.h>
- #include <mmc.h>
-@@ -75,6 +76,9 @@ static int spl_node_to_boot_device(int node)
- 	 */
- 	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
- 		return BOOT_DEVICE_SPI;
-+	if (CONFIG_IS_ENABLED(SPI_NAND_LOAD) &&
-+	    !fdt_node_check_compatible(gd->fdt_blob, node, "spi-nand"))
-+		return BOOT_DEVICE_SPI;
++#include <dm/ofnode.h>
++#include <dm/uclass.h>
++#include <mtd.h>
++
++static struct mtd_info *spl_spi_nand_get_mtd(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	for (ret = uclass_first_device_err(UCLASS_MTD, &dev);
++	     dev;
++	     ret = uclass_next_device_err(&dev)) {
++		if (ret)
++			continue;
++		if (device_is_compatible(dev, "spi-nand"))
++			return dev_get_uclass_priv(dev);
++	}
++
++	return NULL;
++}
++
++static ulong spl_spinand_fit_read(struct spl_load_info *load, ulong offs,
++				  ulong size, void *buf)
++{
++	struct mtd_info *mtd = load->priv;
++	size_t retlen = 0;
++	int ret;
++
++	ret = mtd_read(mtd, offs, size, &retlen, buf);
++	if (ret && ret != -EUCLEAN) {
++		printf("SPI NAND read failed offs=0x%lx size=0x%lx ret=%d\n",
++		       offs, size, ret);
++		return 0;
++	}
++	if (retlen != size)
++		return 0;
++
++	return retlen;
++}
++
++static int spl_spinand_load_image(struct spl_image_info *spl_image,
++				  struct spl_boot_device *bootdev)
++{
++	struct spl_load_info load;
++	struct mtd_info *mtd;
++
++	mtd = spl_spi_nand_get_mtd();
++	if (!mtd) {
++		puts("SPI NAND probe failed.\n");
++		return -ENODEV;
++	}
++
++	spl_load_init(&load, spl_spinand_fit_read, mtd, 1);
++
++	return spl_load(spl_image, bootdev, &load, 0, CONFIG_SYS_SPI_U_BOOT_OFFS);
++}
++
++/* Use priority 1 so that boards can override this */
++SPL_LOAD_IMAGE_METHOD("SPI NAND", 1, BOOT_DEVICE_SPI, spl_spinand_load_image);
+diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
+index ce05e206073..a12d880a9e9 100644
+--- a/drivers/mtd/Makefile
++++ b/drivers/mtd/Makefile
+@@ -34,6 +34,7 @@ else
+ ifneq ($(mtd-y),)
+ obj-$(CONFIG_SPL_MTD) += mtd.o
+ endif
++obj-$(CONFIG_SPL_SPI_NAND_LOAD) += nand/
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
+ obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
+ obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index c8169cf7390..7cd2a5f1af9 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -1,10 +1,21 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
- 	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
- 		return BOOT_DEVICE_UFS;
-@@ -223,8 +227,14 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
- 			}
- 
- 			ret = uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &dev);
-+			if (ret && CONFIG_IS_ENABLED(SPI_NAND_LOAD)) {
-+				ret = uclass_find_device_by_of_offset(UCLASS_MTD, node, &dev);
-+				if (!ret && !device_is_compatible(dev, "spi-nand"))
-+					ret = -ENODEV;
-+			}
- 			if (ret) {
--				debug("%s: could not find udevice for %s\n", __func__, conf);
-+				debug("%s: could not find udevice for %s\n",
-+				      __func__, conf);
- 				continue;
- 			}
- 
+-ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+ nandcore-objs := core.o bbt.o
++
++ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
++
++# U-Boot proper
+ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
++
+ else
++
++# SPL / XPL / TPL
++# SPL has no MTD_NAND_CORE symbol, so we must key off SPI NAND usage
++obj-$(CONFIG_SPL_SPI_NAND_LOAD) += nandcore.o
++obj-$(CONFIG_SPL_SPI_NAND_LOAD) += spi/
++
++# raw NAND still follows the normal SPL rule
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
+ endif
 -- 
 2.43.0
 
