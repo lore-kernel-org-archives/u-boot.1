@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72835C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94B5C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6D4184AB3;
-	Tue,  7 Jul 2026 18:37:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 221D884AC0;
+	Tue,  7 Jul 2026 18:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Z18xUz2c";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="RzrLY95d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE45684A35; Tue,  7 Jul 2026 18:09:47 +0200 (CEST)
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [IPv6:2001:1600:19:38e0::42aa])
+ id 5907984A3E; Tue,  7 Jul 2026 18:09:48 +0200 (CEST)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [84.16.66.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46EBA84A35
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2636084A06
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQJ5zkjz1Bng;
- Tue,  7 Jul 2026 18:09:44 +0200 (CEST)
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQK4h2yz297;
+ Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783440584;
- bh=5UPEo8ukiI5mD4FyApHfAlTGzgjZJgnsyAAC35Z0PCw=;
+ s=20231125; t=1783440585;
+ bh=Wyz7x7foOo2bND+bNfrZE74JnkFnOsS3mA5J6s/HPQk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Z18xUz2ctLdm8+tg6Gmplg0ofqY9WGPBWiVhUFpa+NKCNXFvQF8zU/RrncvcU7NO8
- ORWpSueTAvyCA39NnxjkktCRdHXyF9J5y25oMzRTXmLhKBOEF8Wisoc/9RhLDtlQzE
- mXZycuO9SV89M71QZAv/Wpa+wORMT5qqEicLlJjnmhscxAAsl+L0gJ3rl0Fss7pPvq
- WK5AWaBifDYkYe9wrp62R7GrqRVwo6htg+OvkrD6YgpqO9CcZyTWCnRSdg7QEaRD/S
- dVcaztAHk1se2D9zoGDogzyxPXiBrAW775sXIV/yzmBT7X8JHcpaqbzKBQiW1jSlhu
- LktCGHL/DrP5A==
+ b=RzrLY95dCaQWkD4QShhu8QrbZ/ZPXdkZud4YL4YQ6YXKpkrROgFJlgUcVCyQFIkrF
+ 0RkfYoBZofS1JareuXwio3myKK0a47LSP4I3SCLxLul0GtGi7x8Wa75hNnXwu3rH0w
+ eYgROZnWEA45mo8CQCfHJdhcpmgr4kfGeLaJ5nWKLA3uj8RISAY4zjdzC269s+Ugst
+ p1HSZS9NRcm7uFnB5OALQPKE4bQpqiOaPBQQTA23CVXNJfqS4ZmT+KZ6wg8J85PYjb
+ dUPjGjBVFgWIAXTYQZktaRa7KY8s1l/ET/Qqu++0MOLAQwRI+fuyUWwEBaxI2eKmcS
+ 8BmDfLdMSBhOQ==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQH5v5qzb5N; Tue,  7 Jul 2026 18:09:43 +0200 (CEST)
+ id 4gvmQJ4sH2zXYk; Tue,  7 Jul 2026 18:09:44 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Date: Tue, 07 Jul 2026 18:09:18 +0200
-Subject: [PATCH 04/12] MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 18:09:19 +0200
+Subject: [PATCH 05/12] MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-rk-custodian-v1-4-dbc9c696e613@0leil.net>
+Message-Id: <20260707-rk-custodian-v1-5-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
@@ -82,31 +82,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PX5 is a Rockchip SoC, so let's match *anything* in U-Boot which
-contains this string in the path. However, this matches a bit too much,
-specifically the PPC-based kmsupx5_defconfig so we need to exclude it
-explicitly.
+Most Rockchip SoCs have their name start with rk3xxx. Historically, the
+second digit is for the generation of SoC, e.g. rk31xx was before
+rk32xx, itself before rk33xx and now rk35xx (and the expected rk36xx end
+of this year). We won't talk about the rk30xx timeline but it's also
+prefixed the same way. So let's match *anything* in U-Boot which
+contains rk3 in the path to simplify the MAINTAINERS entry and hopefully
+catch as much as possible.
+
+board/firefly/ and board/pine64/ only contain subdirectories and each of
+them have rk3 in their name.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
- MAINTAINERS | 3 +++
- 1 file changed, 3 insertions(+)
+ MAINTAINERS | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 37766bfcc3ca..9527af78d391 100644
+index 9527af78d391..393c8abde10c 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -574,7 +574,10 @@ M:	Philipp Tomsich <philipp.tomsich@vrull.eu>
- M:	Kever Yang <kever.yang@rock-chips.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
-+# Exclude from N: px5 matches
-+X:	configs/kmsupx5_defconfig
+@@ -578,20 +578,12 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
+ X:	configs/kmsupx5_defconfig
  N:	px30
-+N:	px5
+ N:	px5
++# RK3xxx SoC family
++N:	rk3
  N:	rockchip
- F:	arch/arm/dts/rk3*
+-F:	arch/arm/dts/rk3*
  F:	arch/arm/dts/rv11*
+-F:	board/amarula/vyasa-rk3288/
+-F:	board/anbernic/rgxx3_rk3566/
+-F:	board/armsom/sige7-rk3588/
+-F:	board/chipspark/popmetal_rk3288
+-F:	board/firefly/
+-F:	board/mqmaker/miqi_rk3288/
+-F:	board/phytec/phycore_rk3288
+-F:	board/pine64
+ F:	board/radxa/
+ F:	board/theobroma-systems
+-F:	board/vamrs/rock960_rk3399/
+ F:	drivers/gpio/rk_gpio.c
+ F:	tools/rkcommon.c
+ F:	tools/rkcommon.h
 
 -- 
 2.55.0
