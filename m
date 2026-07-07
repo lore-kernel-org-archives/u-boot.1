@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0FDCC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 10:50:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1805C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 10:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FF60848EB;
-	Tue,  7 Jul 2026 12:50:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07C37848EB;
+	Tue,  7 Jul 2026 12:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3ABc1pul";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MRSAFk+W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F3488494B; Tue,  7 Jul 2026 12:50:23 +0200 (CEST)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
+ id EBDCC84942; Tue,  7 Jul 2026 12:56:12 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4777E846B4
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 12:50:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F67846B4
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 12:56:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ox7F6EoO34k4WnHZtGTEpj72LSGzS761t7yBjXVxgW/9ZbNK8XA++CMl0QnljrbRq5wlctWd0ri/zH9gI3x525zPg+O4N3efQYuxtGkohxvuMNXeIbs1jK54+Y6/nW/El1jMCCxEMkOb0sH5XcgKO76jSAZyWJzKH4jvcWo2kH0xW7BeBy9D8N994aghWkUUELQF1Q6sNv+3FBb4ypAc3Dbu4eNB1S9L6EdHghwCnJHVfqejEsFOMSJITR5kDLSx6mihXQrbuSFYJ7/N9MCNxbLCupvcu0N2l5fZx15K/emmPm6ICzgUSmzTrQsnrTO87iLDqPD7kFtXsykc2hdXDw==
+ b=XamJjhavs+sjDq9qBT6YaGiBkbYCNMTj8FCuqHddsZ/u4H2pGPK0KDMC7uZA1NBLc01lUxLTgW+KCZec/ihhsMGKQaImIxnPV8GoqQweRlhlTdc1K5e6sRveU7hquaMRhkydAWhybwxrH+oPftAtEFnue7aq9ldYf6MYegDX3/vhhEke3d/tt+i1tFDqXmNRhGFOfMnT7/k+Lpxk2ZQauTxYThdwYthgdksyKdbdJf6xgQk9LzFI85gCnganqJ3LSKQ1IJtY7tzCyKgzSD92Vj4uZ/OQcQjynRQo187z4f4cDL/LpSEAB5CC13PtBZlhlVjDvNVzvmaPNCw6OwsseQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6X63jFZaJy2xTynyHn5UBVOMwPBuT7bYY7aelekVoOg=;
- b=X6O8lkAy4HHamg2Q9az6iEBQVqhdwk+ZAEl9ZssjKVBO3mQ4c9A7TItc9nmdGJgBfK2FKuOypiFgRwM1mB9V7+9cSBFvlDLC66PHATiGTTPfet7xrmM2INWiYA+WgLFtCL0gUwRdVcD7IUef3kuLwd7LnT4u5HU1Rx20MqfpIZxN+pObCKFniTuMP/IVjgBiR6JgHklaaNXFSYv9IX6SFzGLoRrdrgbwhzdLhtW67TPzIM2Nz7AdvY6X8zx1ZY/6KqZG9xB8OrePIvP42I0+C2ei0683Hoeh1jLVnMG4t+d0glBUa3o3iyGpACsYzB2OtAQKaGYpWogPWjNXwvYRmw==
+ bh=PdxCrsgTlEwQEcvo4jZMLSJMCx4yRzPk3bS8KABx9Q8=;
+ b=YEBWPtlSLC+MTUz7n/uPHl5LEGMRcOMzVYRj7n5xqcHMRhlE0ilkXCU18+ON7hfnoMOpaKMD9hCeefwwA9f9EkHc53N0f4tecnDSQX2jw6JHsQQyXnR3MoUwHwk93ip9+33dWUPsvgkz40cZLZJcpgdjfVWGYQDbupVOfJlgWxLUGF++oH/LNZKwMFvIzjffkyTjgIIJcvA0IUJBPaBE9+hjRLk81L++0Fekmcd3IUd9PTjt8TNHXJGwSjvxNWYQreAF6t1QMTS3BaPK61NNmnSJ5jx1L5DigPuewdOXi655PsTuOgstWmVoboa035dnRO0woJ8JVao3Gycy/mIS2g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6X63jFZaJy2xTynyHn5UBVOMwPBuT7bYY7aelekVoOg=;
- b=3ABc1pul6FjkWM29ueeP3NycHp6VlAN5b3I4URzak+qyMVtFq/qHUNjFycu3jbYh2ra6qCf77klGpyGtrIfbbA6H5m7QPBrFGwf/B0Ot4drK53YVOHS99pt0rq8sQfoRrv2VJzID/byquBedjYH9cLF7PBPV5sJQY/0EOW/F8C8=
+ bh=PdxCrsgTlEwQEcvo4jZMLSJMCx4yRzPk3bS8KABx9Q8=;
+ b=MRSAFk+WI8OIiAOz1/PeyWQtt8A0X6fqXf8t+x2ZpupIlvylnobZw1d5AETuvdymqbAPHUfZunqc8HAhWsU6W9otFb74BIdWku/TcDSfq7RbLR8e4Ve/XS+G8WTI8R6Vh/zVqv+7qwUo+/W07aHHBc4KNpZo+cEZ79qb5NYqcrU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by DM3PR12MB9434.namprd12.prod.outlook.com (2603:10b6:0:4b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Tue, 7 Jul
- 2026 10:50:13 +0000
+ by DM4PR12MB6062.namprd12.prod.outlook.com (2603:10b6:8:b2::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.10; Tue, 7 Jul 2026 10:56:03 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0181.009; Tue, 7 Jul 2026
- 10:50:13 +0000
-Message-ID: <18262c85-9bf1-4c4f-a4c6-7590c491c4f1@amd.com>
-Date: Tue, 7 Jul 2026 12:50:09 +0200
+ 10:56:03 +0000
+Message-ID: <879e6b36-29b4-4a14-9c28-6371bcd09d71@amd.com>
+Date: Tue, 7 Jul 2026 12:55:57 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] configs: versal2: enable I3C support
-To: Pranav Tilak <pranav.vinaytilak@amd.com>, u-boot@lists.denx.de
-Cc: git@amd.com, padmarao.begari@amd.com, Tom Rini <trini@konsulko.com>
-References: <20260701102754.345049-1-pranav.vinaytilak@amd.com>
- <20260701102754.345049-4-pranav.vinaytilak@amd.com>
+Subject: Re: [PATCH 2/2] fwu: Gracefully handle missing FWU metadata device
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, git@amd.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+References: <0bd1a1b8bbe48fa3a9b89673c1e1357d50d0684a.1782825467.git.michal.simek@amd.com>
+ <5e5241d02a04871a06dd44d3f8638f5da10893ff.1782825467.git.michal.simek@amd.com>
+ <CAC_iWjKeFMqXqo9tcf27Yuofyvbvr34Hqf5hFpK4zB8crtw8Yg@mail.gmail.com>
+ <f63906f9-29a6-422f-a111-855cdc8d1f2b@amd.com>
+ <CAC_iWjLfC_U=q+iPCy-BXLXwLiwjXBe3UHqH5XuvU1gkyVxKkA@mail.gmail.com>
+ <08e98c15-80a0-40d8-bc7c-8d8edfbf3f99@amd.com>
+ <CAC_iWjKH89ibj3KNvJW9HHXbQ4MhDLb2qWaYytU0S9Q_3xqkgw@mail.gmail.com>
+ <fa17c2ff-866b-40ec-ae10-847f2ff84572@amd.com>
+ <CAC_iWj+VqjpWPDRVGvCYpWMg4hmjeS1YzPBZiMvvQqvRRLe+Vg@mail.gmail.com>
+ <a9285398-9e71-4767-a34e-2dc767c11538@amd.com>
+ <CAC_iWjJiqU8KavYyHEavj+pszLxN-oq9EoucBi=bsjRuVqNMmw@mail.gmail.com>
+ <207fe44d-e18e-4983-b152-be820d720275@amd.com>
+ <CAC_iWjJ2z2TCZT63U5ve53LL80GnZ6PsuR1hOG4EMtizq3+LwA@mail.gmail.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -106,76 +121,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20260701102754.345049-4-pranav.vinaytilak@amd.com>
+In-Reply-To: <CAC_iWjJ2z2TCZT63U5ve53LL80GnZ6PsuR1hOG4EMtizq3+LwA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ2P220CA0012.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:a03:5da::9) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: BY3PR04CA0026.namprd04.prod.outlook.com
+ (2603:10b6:a03:217::31) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM3PR12MB9434:EE_
-X-MS-Office365-Filtering-Correlation-Id: 966b303e-ebd2-4706-2615-08dedc158605
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM4PR12MB6062:EE_
+X-MS-Office365-Filtering-Correlation-Id: 70b688ff-7f5c-4583-5234-08dedc165669
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|23010399003|22082099003|18002099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info: GC8CFd79ek0yQisB7VsUVr2zbr3DvgVTNJOHwgEQB2eV9wrQQjC0fVeYaItlzgIX5Rt7WHIxV6hfhRHRhKM0gxRJidgbqkXbVIBdacme1GradXsTbzmZxBGaGRzVwYbBDnmunbEWLUU2SZ2xTSuTD1HZp6nm+XOiyRjICUDqvqCzTZy+FNBExzMEVUxyGnMpHT5H4ZZ//22iayxQs4eEH1JvtqSi3f5O0CQC5OrxbPrnYREi2QNW0PNMEup4rRPi5S4SjyiPw2iiLEoc9wk/RvA6vcuRwuRi7Qj66oK9zGvCYJ46fWvfLSunBa+HufSd4jDypzf2qaepE1OE0OFqOZVzqsQMXxRn8k5+GI7b43/29KKglgN+kb7xiP7toAyWyzGVe58mTjSv3cPDuQwow86aHyUAinm0qnuJUcygjaAtn7WWTUD20CZPS6kRQEsOfm9iWF967nt2hyVIadCAicrGUodQOghkdt9rwTvBXzjldKSmJa90yjeibwcwlP2uHaQI81eW28VoRLzwt8e6EFprLtZk3JX7rg5/WRteqctTQFVnpqhSeiv5r5xrVJeMZNsq2c2ORhqcYULefazalWGgDtehwe15gHjgVl5anFzeVlqJfMx01koXpdpmPNdOcWWW1PgxbGTIWuNOUUQNiwyzzv8moiDcQ6bIdQ+pHjU=
+ ARA:13230040|1800799024|366016|23010399003|376014|11063799006|4143699003|56012099006|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: OAcbYS/a0hoa0sPgVR8rQV06pGaa5F40zPAewCyWH73RvaJG7+G9H0ObjXzATy9t3UHRBWpgen2pJhFvjTlY3bnhE4CQHXhXPm9DKBBuUCcttRVQ5yb/lME9Eq8GX5d9u5al9n2ZdYmr+Kb5djhSz9pmQI0JK4w2xk55989wkREhNjron22ACKruh31WFXiu4XgwgSQQbMhWANOYQu0RwIAeiBKQWFzNdt7OgaeXtbabcycQm5l/nM8579Yy5K2nEnqiADvDM4JfxO0qRYkXe7A7vjVN0N6emMDpu/H78bxa6Pl3M00dUUGt9eXAz0UdeHgP9MFi42DP6tuw6JYsZNzWJAA99tPUiqFlW6AM8asW1i0bNYBKYHatERTt1hJ1rw1Ohxd0CD0HyudYWgF6STZraa9ipSXcnn6Eu7VajOBot5N8WzvdhTydM5/USRI7GorGB1PPf0tvllKU1EYY24jQywOoK5PjvtvPxAQYmVZReuOxuWZw+XlEiijmRlgvQDhL40JPKWmlrU0kFyrHmvPYNq96GCiCVCPldLBypx1m3p0IkNMe3xoWFQJCl8jVNRDl/OqilgtiaoD6djue5gRbZBmz6HtWV43qgsmpEojgeZkM4vF4a8BQVahBQjNEr5J3/izGwe/iGFPPH8FgFsSDOq/1FGdAoMtcFtlPKcA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(22082099003)(18002099003)(11063799006)(4143699003)(56012099006);
+ SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3V1SVhVdFQ4OHJ3V2NhZmhQRHl4bjJObzBSc0xiRjhmN0hDSlBWMjVIaTNT?=
- =?utf-8?B?ZlJHQXR5MFQ4Yi9CNjNPSkNRMTFGdkZSZnYrZXhzMm5tL1pPd3JQcjVTek8v?=
- =?utf-8?B?dXJQSG41VmVRa00vdjlHY1VpQ3A0U2ZFeFc5eWdzcXd4Q05tck5CUmNYWVhv?=
- =?utf-8?B?V1VKM3p6T1pMeEtRanJ6dG05ZGpjVnVUNmZja3BiUndMUVRPRGtyVU1FdThi?=
- =?utf-8?B?bDBHSm5lTVl5aGpDZ1lBdklqZ3lXOEdPditIeUpjTEw1SThYMVRlSGxENmJP?=
- =?utf-8?B?WVBlWlJUZkhUbW9MOW1SbE5URlVqNlJoYW9yb1VaOGxscTc2clVZQ1dhZS8y?=
- =?utf-8?B?Y21YR1ZjeFpPZS8vanh3Um1tWnpFYzNnVC9JMnBVQThIRVNNY3p4VFNscHRD?=
- =?utf-8?B?REZTM0p4SHJqdUtkS3Y0eFlUMmcvV1NJY2hvTHU3bGhNeXhjMFJFdEJVem1a?=
- =?utf-8?B?cFhHd2kvbG1KUmpkV2UyV0FwNXVrVG9yR2g2V01icm9PWlBMZUFLRzRRZ1BO?=
- =?utf-8?B?S2RaZ0w2a0RTMEpzMFFWNnloTjVqdUNpUFQ0OC9Lc2lXMGNreWZKN096aGdu?=
- =?utf-8?B?VkUxQ3lLT2RaekgreUhwaTVBZUNPV0RkVDE0ZnpwZ1h0amI2bnYzSjBsM1dL?=
- =?utf-8?B?TU5jN1NWZ05ZTGVpR1hNc3E2VWtyR1NBU1dJMEEycEJac29QQktLZVVPVERh?=
- =?utf-8?B?N3FwZVRydVFCKzFPQ2ZRL1NNWHZtb1NGaE1oalo2UHFIT1B4dnIvV0R3eUth?=
- =?utf-8?B?N3hjZ3ZFQUoycmd4MTY0Y1pheERpcVlMSW90VjBCaTR4bStYL2txbm9kNDQ1?=
- =?utf-8?B?ZG8reisxa0VsWERtUWhUSnkrNFNuQU0zU29ZanJxVk1UV095MFRzeFdTYnRF?=
- =?utf-8?B?b3lIREhkMTZhRW1KRXJMaFMzb2VHNW1aUFdmNEk0Qy8yekdXWHhWbmRDV0Zv?=
- =?utf-8?B?VXpLQlJId2ZnMVRSYytwbVhVRy9SV2JDVEhIU3YxMkxFNmNVZFBxaUlTOGJP?=
- =?utf-8?B?YklSclFyKzdpUE1NVEgwWE1WN1pCbjRLWWQ2czIwWFdEeHBqekVNVTVrNGJF?=
- =?utf-8?B?SzNCZ0NENGlkeDcxVGF0RjMxUEtHdndrZ0hNbWVuVVZCYTlLeWIwdVpqR3dp?=
- =?utf-8?B?ZXlxR2dXUmlLWlpkVnc2VGhoZE0rTXk2SUhFU05vYkpPVWVhamNDTE1qMWo2?=
- =?utf-8?B?dDZybDhBQVB5VXRveG5jRWU2T1FPNFR6VUh1eWk3WUdwc0k2ZGg4eDNQZHNj?=
- =?utf-8?B?UCtucWFtM2N1L3hDTVBxVk1UZENmdXY4SHM5WTdPcTJkQVBaL3hQc3NyYjJT?=
- =?utf-8?B?SE9NaGR6YktOVHN6VHJoUGVCZ1BKM1hpaENYTGh2NkxGT01ycmV5a3V3M0tD?=
- =?utf-8?B?T0VkYUdYWFBmMHhMQ1gwS3FndndsSWEyUXMrTzdUa2YrNFZmMnB5QkltRFpG?=
- =?utf-8?B?dmlKcjBXcGlwQmZtTlRJa3Q3ZEVBdUIrRnlMejZVRGpLcGlVb2JOSGxRNFVQ?=
- =?utf-8?B?UlRiTm1DOUpaRDFnVW5IUlU2c1FQeXNueklma0I2QlRTQnJhRy8wMm1TVnBU?=
- =?utf-8?B?c1lyYU45UkpJVWZvR1NTekU4VEt6aE1PbjlQalgyWnhhZWtUKzE5TXNvSWEy?=
- =?utf-8?B?OHlBUnFtRWlsSlF2c0huNmRlcE5lc3pBMU5lcThqeFM5US9HeWpPRGJucFhO?=
- =?utf-8?B?ZEpqZEpKM3FxRXgwY0Vza1crMTR4Z3lHWWU5c0c5cXlYejZ5RnpDaHU3MGI1?=
- =?utf-8?B?UDZsS1NsOTlvaklGZUswSis1Q081dWRpZDR5UTlMZlltaGZqRm1hYno0V3hY?=
- =?utf-8?B?aTAydG9PZkZvQnJTR1VpZVpoR0t5TXQrSEEyZHpsVE9GVGJHMC93UG1qbzNN?=
- =?utf-8?B?ZnVYOHZzeHcwTS9ncjI4V3YzNy8wclRNdGpVNWVrRGJVNUNzL2RNUWZSRy9N?=
- =?utf-8?B?MlBtM2I4KzZDSkdFZk5iK3J2ZVVzcTFaRjl1Q21JZVZJZFoydWZGOWFWTEhR?=
- =?utf-8?B?VnZIVWZZekJKNFpkZ0xsZTlIakNkZnpUUTk5YnlvNHFZUWFQNyt3R2VNY2tv?=
- =?utf-8?B?Q3VSRVEyZmE5dzBjZC9kNFdORFZUWVBKdDhPZy9KNnRCcHhRb0dFZm9SRTZW?=
- =?utf-8?B?VW1zSWhRaS8yNmNTTDFOQkZiZkV2WTl3ZFdHK0NKakJVamhKY1dwR1NjMTBK?=
- =?utf-8?B?UjFwdjJDSXdDNEROWWRtWXBlVVRPNkNNSHNlKzYzRm80V0VMRU9IaGI2WTE2?=
- =?utf-8?B?RHhNYTBaeU5zOWJGTkUxeEJrSGN1dngzYVQ1V3pRSHhNcjJIcG8zRUlXODJ4?=
- =?utf-8?B?S2VLS0RDaVp3VTd1YjhZWkwxRmtwb1h3ZmNMODU3UythbXNuSy9FUT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cFg2cnVxQnNaUDVuMEpiYXFETTlscVZPSUwxOTNQSHkxZndEdC90bWZkOGVQ?=
+ =?utf-8?B?eHZPMDFwbEJubnF0d0RQd24zSGdSL0RQVE50Q0lQdzRJUFFzQXJFbVBBbTV1?=
+ =?utf-8?B?anFPSnpPKzBROTVXcUE0UkVZdTY2V05uaEg4RU91Vm1qelIwUlRwdks5cGcx?=
+ =?utf-8?B?bTRGQ3JFOUJIaEZ4Y1pEc0NWanUvY2dFbUJZTXNrRThvVDQrclJRclROUzZN?=
+ =?utf-8?B?QXZKd3dSMU4wYVJZL3BtcUtidGhsMzExc25ZR1FyekFqVjdiL1dXRERqY2w1?=
+ =?utf-8?B?TFhpcW5WZnJSd2owc2pqUkZ5Q21EdjM1cUJHVXRSOTIrMDVxZHR0OG9nVUx2?=
+ =?utf-8?B?OUNZRXZ2dnNXakZhTkM4eWJ3eW9MLzBqNjFudWJYdWtXN2ZCRmZqTmtLWmhw?=
+ =?utf-8?B?Y2d6S3B6MXBxY3RTbzJTMDkyVjhGTStjbzBNYk5kOEYraktLSnRFQ29FTmtL?=
+ =?utf-8?B?elkzdEpydW9jcVMvcGhSUHBBSlhLTWwwTjI5dTltUmFMN1ZpamQyTk16M3dl?=
+ =?utf-8?B?aUtXV2ZjQVZvdEd3VTdlUWlDdjlRZm5IeXU5ZVJROWVHNnRRSHJyakRMb1Jv?=
+ =?utf-8?B?c2hwTEFZZ0N1dUI0clkrQW9SY2FLY3VyOGdCSWpBYXRPQ0VQb3daY3FkOTNm?=
+ =?utf-8?B?dWEvbG9hTkJPWG9Ma0RURVZjcklkc2NFWW1DWk5JeWdkWGJmVUlvYktyVWV4?=
+ =?utf-8?B?SFd2YUFBc01mci9RdzdrVlVTTkYxNHQ3OVY3TTNMVk1hOGZ3VXlRNWJqRFE5?=
+ =?utf-8?B?MkpVZWtRcnNTME5QZUJRbVIwMGlRODl5b3NXSTJUam5WRFpwNDh4WGRIVDhu?=
+ =?utf-8?B?TmlRUWJMVUhUZG56OTR6WFZzVWdTWkRLRkFqVjhBNDBVbWRKN2JOVFdFWnoy?=
+ =?utf-8?B?d2Z6enh5YXhpTDlWMnRhY3JORnBqUFV4Q2tNeFJYSTZHZk1NRHlYWmFzL09a?=
+ =?utf-8?B?d21uRUNVQ1ZKcmdyVm5sTnFkRDB4NGtzVjdrS1RqdzdPTVJ5Q2gxNUluVG5a?=
+ =?utf-8?B?dnprSm5iSldrNkhrQi9KbndRZHVyZWltZFpEcmVQNHJ6NVNJZFoyNEhUclUz?=
+ =?utf-8?B?Wkp6REVVSm9HTWVON3FHdzR0YWx1ZWlVZW1uSEVxSW44d3EzbXVDMXhPbXQ4?=
+ =?utf-8?B?N1MvRDhIbXlMWHhoSXlmOGtiSGprV1pHbjFQb1hoaHFXVG1UTXVRejNaNFdL?=
+ =?utf-8?B?L2s5bU80aUFieXliOUp6VDNHNGRsSzd0WFgxbXRlZllTY1lxMGlORjFhblpi?=
+ =?utf-8?B?ZUtTQStUamtRZjZoT3dkOG9od3VGMWc1NHBWYjVrYnU0dXF2MG1IZTQwbzlv?=
+ =?utf-8?B?N01KaUpiUkZYdXpoQ3g3SkZialUwa1A2RW80RFRKMEt1UG42cndLU1JlVUJU?=
+ =?utf-8?B?d2M2WFJNMFhKYUk4OFhLL3U1dGJRNmlBSHcwcWJaYUNTZVJiSlpuWGYzYzAx?=
+ =?utf-8?B?K3ZNMng3cWhyeldNcjNsMjBMQ2hWTzQyREU0T3YzL1RCMk1VWDJqS1JGKzE3?=
+ =?utf-8?B?TEw4c1NmQk1zcWJjakpHYm9OaWx5N3F4azROek9YVE9MVU14Z21LWnZtRzFC?=
+ =?utf-8?B?NjRLTXR6MVhMTWp2TlpHRTNQVXRWOGE3Si9aUGpnVEpaNFkyUWhIZUJNMW8w?=
+ =?utf-8?B?RkJVOE5YUVVQNVRDT2xKNDZaNFFYdEwvQjRKRjVZU2hndWVXWjM3NEF2aXVI?=
+ =?utf-8?B?SEV2djNnMWlxWTI4WlhMQTk3ei9tZGdleWdIZGttZWlmTndpRXI5enExUnR1?=
+ =?utf-8?B?YmNOT2tHSXh0UUsrU09weXgxRlMwdzlVNXA2NHlvS1lIYmg4NG5yT25hcEEx?=
+ =?utf-8?B?aU1QdHpCYTlrZ1Z0R2pnMlgxUDJHSkFrNjN2M3p3L0tNam0zU25QVTU0MFd0?=
+ =?utf-8?B?ZzBPcnhXSU5jZVJTRUNkWlVycElxajVqNmRacEpOKzJLYmdmb3p3T2xZbjY3?=
+ =?utf-8?B?V3VYV3dhVUN2Z1RpTDZ6a0MyTU02UzFkQTQ0aXp5bVhnOVlNNTFYdTl4QVRS?=
+ =?utf-8?B?WUc5U2FMUmEvTzdJYTVzNHBqUFNkTWtjMmY0Q0FDTCtKRllCNyswbWtrZ1dP?=
+ =?utf-8?B?NUZ5L09UZE9FRG9xRTVIc0pYN0pjMEtDaDlvVzhPSnRmZ3ArdVNGYlhIbTBz?=
+ =?utf-8?B?ZE03bGtWMEt1Z0hsS3AxVkdOVEpqbTEzdTBlWlZhOTN1R0IxbzhKcExKaVYr?=
+ =?utf-8?B?ZEFXRU9zYnpiUGt3UytpNlFEZTlZRWRFYzFVaW1vV0ZiTHhvUHkvQWhXdUM3?=
+ =?utf-8?B?Q0d1dnJxbTU0SlIzY1QwV3ZwaGFxUGppcy81SDgvOFdndmg2OUsxckg5d0NL?=
+ =?utf-8?B?VUlicGx6ckNhc21wMlg4aHdBRlFnTkdibHE4QW9XSHhvUEgrVi9JUT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 966b303e-ebd2-4706-2615-08dedc158605
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70b688ff-7f5c-4583-5234-08dedc165669
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 10:50:13.4864 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 10:56:03.1634 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sn5cPuMiBXZdJkdxaphuguF0r8WXqkbFbANQ+Rvsjjyw1ykLNXs/XTXHLlrIZd/8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR12MB9434
+X-MS-Exchange-CrossTenant-UserPrincipalName: MA3UAB6xy903r2sT4JNW/em8NBkxY0zgh9zxV8fd9i3n63l72uP3CxxUCqawKHCE
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6062
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -194,38 +209,79 @@ X-Virus-Status: Clean
 
 
 
-On 7/1/26 12:27, Pranav Tilak wrote:
-> Enable I3C controller driver and command support for Versal Gen 2 by
-> adding CONFIG_CMD_I3C, CONFIG_I3C and CONFIG_DW_I3C_MASTER.
+On 7/2/26 15:07, Ilias Apalodimas wrote:
+> On Thu, 2 Jul 2026 at 15:40, Michal Simek <michal.simek@amd.com> wrote:
+>>
+>>
+>>
+>> On 7/2/26 14:24, Ilias Apalodimas wrote:
+>>> Hi Michal,
+>>>
+>>> [...]
+>>>
+>>>>>>>
+>>>>>>> The prints below are just from fwu and efidebug for the ESRT table.
+>>>>>>> Those will work.
+>>>>>>> But what happens if you try to run a capsule update?
+>>>>>>> Eg. efi_capsule_update_firmware() will call
+>>>>>>> fwu_plat_get_update_index() which will fail,. no ?
+>>>>>>
+>>>>>> it fails on fwu_update_checks_pass() before fwu_plat_get_update_index().
+>>>>>>
+>>>>>> versal2> efidebug capsule update -v 0x40000000
+>>>>>> Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
+>>>>>> Capsule flags: 0x18000
+>>>>>> Capsule header size: 0x1c
+>>>>>> Capsule image size: 0x41434
+>>>>>> FWU checks failed. Cannot start update
+>>>>>> Cannot handle a capsule at 0000000040000000
+>>>>>
+>>>>> Ah yes, that ret 0; will never update boottime_check properly.
+>>>>
+>>>> I think the question is if this is acceptable or not.
+>>>> Because none checked error code before
+>>>> 583efb504058 ("event: Check return value from event_notify_null()")
+>>>> and then
+>>>> 353166279c32 ("fwu: Move boottime checks to EVT_POST_PREBOOT")
+>>>> it checks it too.
+>>>> It means in past fwu code error out but u-boot continue to work with above
+>>>> behavior.
+>>>
+>>> That's also a bug imho then.
+>>>
+>>>>
+>>>> Pretty much this patch is bringing back old behavior before these two patches
+>>>> have been applied to the repo.
+>>>
+>>> It doesn't make sense to update to or run a firmware that won't be
+>>> able to use capsule updates ever again.
+>>
+>> It means that can be consider as misconfiguration. Which ends up today in
+>> forever loop (1/2 will at least tell now what it is happening).
+>>
+>> , eth1: ethernet@ed920000
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>> Cannot find fwu device
+>>
+>> But shouldn't be there different action? Go back to second image or reset for
+>> example?
 > 
-> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
-> ---
->   configs/amd_versal2_virt_defconfig | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-> index 61e3671ea4f..e14981695d5 100644
-> --- a/configs/amd_versal2_virt_defconfig
-> +++ b/configs/amd_versal2_virt_defconfig
-> @@ -41,6 +41,7 @@ CONFIG_CMD_CLK=y
->   CONFIG_CMD_DFU=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_I2C=y
-> +CONFIG_CMD_I3C=y
->   CONFIG_CMD_LSBLK=y
->   CONFIG_CMD_MMC=y
->   CONFIG_MMC_SPEED_MODE_SET=y
-> @@ -93,6 +94,8 @@ CONFIG_SYS_I2C_CADENCE=y
->   CONFIG_I2C_MUX=y
->   CONFIG_I2C_MUX_PCA9541=y
->   CONFIG_I2C_MUX_PCA954x=y
-> +CONFIG_I3C=y
-> +CONFIG_DW_I3C_MASTER=y
->   CONFIG_DM_MAILBOX=y
->   CONFIG_ZYNQMP_IPI=y
->   CONFIG_MISC=y
+> At this point, either your metadata is gone, in which case you can
+> either try to recreate them and hope for the best or an update broke
+> the fwu mechanism indeed.
+> In theory the board will automatically revert to the secondary
+> partition after X reboots since no one is providing an acceptance
+> capsule (or variable) so reseting should be fine.
 
-Acked-by: Michal Simek <michal.simek@amd.com>
+It just means that I should drop this patch right?
 
 Thanks,
 Michal
