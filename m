@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6344DC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FA7C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:40:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A256384AF5;
-	Tue,  7 Jul 2026 18:37:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13FF084B01;
+	Tue,  7 Jul 2026 18:37:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="AggLBZsj";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="KYd75ebr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B1D184A3E; Tue,  7 Jul 2026 18:09:53 +0200 (CEST)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:19:b8b8::42ab])
+ id A154384A0B; Tue,  7 Jul 2026 18:09:54 +0200 (CEST)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [IPv6:2001:1600:19:b8b8::bc0b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 065D984A06
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63183849A4
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQQ5Dc9z1L1;
- Tue,  7 Jul 2026 18:09:50 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQR6yp2z4l;
+ Tue,  7 Jul 2026 18:09:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783440590;
- bh=mPu7l1rTEUdh7iUFAtZgiwmhGWxCubROMay6V+fsDZY=;
+ s=20231125; t=1783440591;
+ bh=zR002Ig5C2ZgMOc0R66VeuHrhrvZRfCr/UGyGWJY4n4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=AggLBZsjJ12zfqrzjSPPyqrkQFxAfbf0NgJDX6WeupK/F3V7jR4O2zDrAe1UQqahp
- jgI2u441nZDO79RossrgCA2oH2EBxGBhoOwUhl2xC9P+j144DZBgrAZgKUE8/ySpko
- ydVA0moPIS6mYD8AK42NuoFpr3/GPdHRK25F+JdB2+2pKRdw68U2D0g/2nsbhGmeHV
- i4nw3VWNBZ6ApS8Ks0TWfGKiA+pePMAjyNHOo6WZLb9OEfVVaaQfF/wHuTfbZy9cOu
- mRsnbrA5Ch7ACXxdl5b5NrwyyigjcQHggAEPgRqlki2egi/oxPxNJ3typGRpfaIq+6
- HehnFQ3PQVpxA==
+ b=KYd75ebrXoJnUx4KgAs6vy5ZR4LjdsDRjOTSg+jvgV5MGzgIpCEMHgEBSz0olD3/c
+ ko+x+oVp/VCcC+MM55a1PO/42/DGztsNAlYqLi08ua9WU9TO1o1bqQPoGw06mTh6vX
+ 0U7MkII/4bpAfti3POsPuRYjFu4Cd+aLT+oJgjLNFFcO4bNZ9zqDj7rWkipG4rVALy
+ 9YbS1SAa5tn/jsiVBt50fL8h/boz2mtYyXqijha8KKWxgij+s/al2ksNDjg596eiRo
+ Kf6eH3whxhDAnelQzUQey0uZUoSUeFuC92BrlUCU2y1ABHcealbyElhh07GXcfPpqJ
+ NIiLU9Yej70uA==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQP46v7zWsb; Tue,  7 Jul 2026 18:09:49 +0200 (CEST)
+ id 4gvmQQ3spFzXGg; Tue,  7 Jul 2026 18:09:50 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Date: Tue, 07 Jul 2026 18:09:25 +0200
-Subject: [PATCH 11/12] MAINTAINERS: remove Philipp Tomsich from ARM
- ROCKCHIP maintainers
+Date: Tue, 07 Jul 2026 18:09:26 +0200
+Subject: [PATCH 12/12] MAINTAINERS: add myself as ARM ROCKCHIP maintainer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-rk-custodian-v1-11-dbc9c696e613@0leil.net>
+Message-Id: <20260707-rk-custodian-v1-12-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
@@ -83,23 +82,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Philipp hasn't been active for years so we thank Philipp for his work
-over the years and update the MAINTAINERS entry to reflect the reality.
+Kever has been pulled into different responsibilities at Rockchip and
+this means he has less to no time for his maintainership in U-Boot as
+has been seen for about a year now. Let's try to improve the situation
+and have Rockchip-related things merged again by adding myself as
+another maintainer.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
- MAINTAINERS | 1 -
- 1 file changed, 1 deletion(-)
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index bd2ef6166cb9..1ddd9a3e45c4 100644
+index 1ddd9a3e45c4..068f59412801 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -570,7 +570,6 @@ F:	drivers/usb/host/xhci-rcar*
+@@ -570,6 +570,7 @@ F:	drivers/usb/host/xhci-rcar*
  
  ARM ROCKCHIP
  M:	Simon Glass <sjg@chromium.org>
--M:	Philipp Tomsich <philipp.tomsich@vrull.eu>
++M:	Quentin Schulz <u-boot@0leil.net>
  M:	Kever Yang <kever.yang@rock-chips.com>
  S:	Maintained
  T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
