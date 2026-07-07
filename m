@@ -4,54 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ADF0C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2700C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA57784A75;
-	Tue,  7 Jul 2026 18:37:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BD8984A90;
+	Tue,  7 Jul 2026 18:37:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="YaByCCJR";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="UsRHK2e4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 335A184A35; Tue,  7 Jul 2026 18:09:44 +0200 (CEST)
-Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
- [IPv6:2001:1600:19:fff0::bc0f])
+ id B846584A5B; Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [IPv6:2001:1600:19:8e30::8fa9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEA68849A4
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48339849BA
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQF3PXdznb;
- Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQG24jxzZ4;
+ Tue,  7 Jul 2026 18:09:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783440581;
- bh=cE9TUtHxuYVt2GeXVp5afJpVGX9/47VeFh3SF7jaw+A=;
- h=From:Subject:Date:To:Cc:From;
- b=YaByCCJRzDlzLJBFMgcYPPlYR7FHB8MZXqnhP8WFEe6+pC/gVwUgirSrmw3Hd4zfQ
- WiPi9bdzJ01xjNGl7wtXyRlKFJG900JcQLpZlJ6sq3t57fkSgSPwVPB0dhePpU6NqQ
- Zbn/ulvArR+OWkJZxsjFcEiGbZgeTZSERtB/h6HDvx+U6WJ84lV6wk/OJrIVVuQ23s
- +33Lc80ciwwNas16obFe0Ic/GnHR/TRZdoCEz1F/5M4zdnqiskf9csJptu/tqKyP+I
- j5hVP2q2v0a8798rHfyFDLXTcOaZRcqus8dJlxqG0x1+E42Ba5Ret1J5MgoU5mYiyQ
- LpQoWPg2Inl4Q==
+ s=20231125; t=1783440582;
+ bh=Bc6GTahNdoCPZHUsL90w2pjpqHymQYC0QRsQdO0Lp7I=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=UsRHK2e4TTr0l89BCbiR137Yyrz8Er/53ZWX6wBPW6fR8R/I2cWXcddIWgHUtIESi
+ CffRz6S0U8KgsEQWzLNnwB582teyvhNLG4E7wyvAdxeR4oDIAPkB2oCoewFeBX+X26
+ NQAvvub4w6/JooU5ukKPttw+K+NqH3PTrArmL95LTguXkVybkySJ7JocjxxHeDUr12
+ NAZs90TdRDYjU55vnP5/ZDj6H8lvt0+/OWYgyGpDcy5cKcQF1Ogr9CrMUMXxW1xwwg
+ nmQjdFoWmngrIHp8UTmcjQf0bgOUtY5jcIPej8QQVjyO9tgy/KleYn00j9PYiAaTY6
+ 9IX9xZje48ogQ==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQC633HzZdt; Tue,  7 Jul 2026 18:09:39 +0200 (CEST)
+ id 4gvmQF2MBNzZdw; Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Subject: [PATCH 00/12] MAINTAINERS: update entry for ARM ROCKCHIP
-Date: Tue, 07 Jul 2026 18:09:14 +0200
-Message-Id: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
+Date: Tue, 07 Jul 2026 18:09:15 +0200
+Subject: [PATCH 01/12] MAINTAINERS: remove redundant entries for ARM ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5AMBBA4avIrDWpnyCuIhY1HQxJSQeRiLsrl
- t/ivQuEPJNAHV3g6WDhxQUkcQQ4GjeQYhsMqU4LXepS+VnhLtti2TiV5YhVphOyfQ4hWT31fH6
- 7pv0tezcRbu8D7vsBHlIZ1HAAAAA=
-X-Change-ID: 20260707-rk-custodian-34cc8301edf4
+Message-Id: <20260707-rk-custodian-v1-1-dbc9c696e613@0leil.net>
+References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
+In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
 Cc: Heiko Stuebner <heiko@sntech.de>, Jonas Karlman <jonas@kwiboo.se>, 
  Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -84,85 +82,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify the ARM ROCKCHIP entry in MAINTAINERS by making extensive use
-of the N: regex. For some reason, it slightly modifies the list of
-people returned by get_maintainer.pl but I believe the ones reported as
-maintainers are still correct.
+The ARM ROCKCHIP entry already specifies an N: rockchip so we don't need
+to repeat a path with F: if it has rockchip in the path, so drop it.
 
-Add more files under the ARM ROCKCHIP umbrella.
-
-Remove inactive maintainer (Philipp Tomsich).
-
-@Simon, since you don't have permission to push to the Rockchip
-custodian tree, I was planning to remove you from Rockchip maintainers
-as well to reflect the reality but since you're still an active
-reviewer/contributor, maybe you would like to be kept as Rockchip
-reviewer (R:)?
-
-Add myself as maintainer.
-
-As could be seen over the last year or so, Rockchip support in U-Boot
-has almost ground to a halt with Kever only being able to find time for
-his maintainership every few months due to his responsibilities at
-Rockchip having changed.
-I would like to express thanks to Kever as it is not that often we get
-people from the SoC vendor actually contributing to upstream projects,
-let alone maintain them. I'm hoping you can keep helping us especially
-for things that aren't documented in manuals or for odd behaviors. This
-is my reason for still keeping you as maintainer for now, but if you
-would like to be switched to Reviewer or dropped entirely from
-MAINTAINERS, please let us know. I likely will automatically switch you
-to reviewer in a few weeks/months if you aren't migrated to the new
-GitLab instance and thus do not have the rights to push to the Rockchip
-custodian tree.
-
-I've reviewed Rockchip stuff for a few years already and my current
-employer has all its products based on Rockchip for almost 10 years now.
-I want to be very clear with what to expect from my maintainership: I am
-likely not going to spend substantially more time than I am today
-reviewing things, I'm essentially just going to unblock the merging part
-of anything Rockchip once they are reviewed. There are many things I'm
-unfamiliar with, so I'll likely ask odd questions or clarifications until
-I can get some basic knowledge in new areas.
-Things aren't going to go faster by themselves so this is also a call to
-action. If you do find yourself frustrated because things take time to
-get reviewed, please consider spending some time reviewing or testing
-other people's patches to help with the global effort. If you do find
-yourself in a position where you can spare some time to review or test
-things, please feel free to do those things (be it for anything Rockchip
-or anything in U-Boot really, or even in FOSS in general).
-Finally, I've never been a maintainer and I haven't really figured out
-my workflow yet so I'll likely make mistakes and asks many questions in
-the beginning, so bear with me and report anything odd or wrong.
-
-@Tom, if/when this gets merged, anything needing to be done in the new
-GitLab and/or patchwork to get me the appropriate permissions and
-duties? For patchwork, I'm already registered under qschulz. For the new
-GitLab, as quentin.schulz.
+Note that for some reason get_maintainer.pl doesn't return the exact
+same list before and after this patch.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
-Quentin Schulz (12):
-      MAINTAINERS: remove redundant entries for ARM ROCKCHIP
-      MAINTAINERS: add rkmux.py to ARM ROCKCHIP
-      MAINTAINERS: add N: px30 regex to ARM ROCKCHIP
-      MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
-      MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
-      MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
-      MAINTAINERS: add N: rv11 regex to ARM ROCKCHIP
-      MAINTAINERS: add N: rkmtd regex to ARM ROCKCHIP
-      MAINTAINERS: add more Rockchip drivers to ARM ROCKCHIP
-      MAINTAINERS: add rockusb to ARM ROCKCHIP
-      MAINTAINERS: remove Philipp Tomsich from ARM ROCKCHIP maintainers
-      MAINTAINERS: add myself as ARM ROCKCHIP maintainer
+ MAINTAINERS | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
 
- MAINTAINERS | 46 ++++++++++++++++++----------------------------
- 1 file changed, 18 insertions(+), 28 deletions(-)
----
-base-commit: ece349ade2973e220f524ce59e59711cc919263f
-change-id: 20260707-rk-custodian-34cc8301edf4
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 45e9076de671..e2c78ce39161 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -574,12 +574,10 @@ M:	Philipp Tomsich <philipp.tomsich@vrull.eu>
+ M:	Kever Yang <kever.yang@rock-chips.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
++N:	rockchip
+ F:	arch/arm/dts/px30*
+ F:	arch/arm/dts/rk3*
+-F:	arch/arm/dts/rockchip*
+ F:	arch/arm/dts/rv11*
+-F:	arch/arm/include/asm/arch-rockchip/
+-F:	arch/arm/mach-rockchip/
+ F:	board/amarula/vyasa-rk3288/
+ F:	board/anbernic/rgxx3_rk3566/
+ F:	board/armsom/sige7-rk3588/
+@@ -590,25 +588,14 @@ F:	board/mqmaker/miqi_rk3288/
+ F:	board/phytec/phycore_rk3288
+ F:	board/pine64
+ F:	board/radxa/
+-F:	board/rockchip/
+ F:	board/theobroma-systems
+ F:	board/vamrs/rock960_rk3399/
+-F:	drivers/clk/rockchip/
+ F:	drivers/gpio/rk_gpio.c
+-F:	drivers/misc/rockchip-efuse.c
+-F:	drivers/mmc/rockchip_sdhci.c
+-F:	drivers/mmc/rockchip_dw_mmc.c
+-F:	drivers/pinctrl/rockchip/
+-F:	drivers/ram/rockchip/
+-F:	drivers/sysreset/sysreset_rockchip.c
+-F:	drivers/ufs/*rockchip*
+-F:	drivers/video/rockchip/
+ F:	tools/rkcommon.c
+ F:	tools/rkcommon.h
+ F:	tools/rkimage.c
+ F:	tools/rksd.c
+ F:	tools/rkspi.c
+-N:	rockchip
+ 
+ ARM SAMSUNG
+ M:	Minkyu Kang <mk7.kang@samsung.com>
 
-Best regards,
---  
-Quentin Schulz <u-boot@0leil.net>
+-- 
+2.55.0
 
