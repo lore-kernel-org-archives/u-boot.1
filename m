@@ -4,122 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1959C43602
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 08:36:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B3B5C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 08:53:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D62A846B4;
-	Tue,  7 Jul 2026 10:36:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0262B846B4;
+	Tue,  7 Jul 2026 10:53:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FaNrhC5P";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="dar9uBsc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A15E801A9; Tue,  7 Jul 2026 10:36:47 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id C0A9E84844; Tue,  7 Jul 2026 10:53:54 +0200 (CEST)
+Received: from mail-244106.protonmail.ch (mail-244106.protonmail.ch
+ [109.224.244.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7807E8497A
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 10:36:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF28801A9
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 10:53:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raphael.gallais-pou@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O+7x+UM9EWY0SaiBVAtV6mJmlhv/Y4ls2Ukj9cXrRr1ofcX+HyzS0O2Sl+W+9NbhIWzdszUktDtEfj60MqrMWevwiqoikuySJsy/9B0Su1QIxWL1LA+Os/3Qefqmd4kathi8UFlXjNc+x5csZu9mo/GsD3iBE7qv4Qe2JYS20wR8NukJktId9HX4kO7O5MmVOM6s6J8v4bQYZSjgLudShDa2Lj6E/fDyVlV0xx0LbW3tYHqWTRtgwtteV5UtTzYqxvjISuuK6T3oC0DWaFMMCYfUh4PnNuon7XMN+Bl4l2h8FKotNWWiBV/y2NMcLv4AyfMpe89mpe9rNRwdXAgqcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FJ8q8t1Ul1tF317VB0KKqFzMr5F+EhO3e+uhVuhegQ4=;
- b=OVS8aMpS3f0VNtjXURjdhIPdh8xbrGTERyb9nIKTpukUYn9dSMqk4vGs1zZBea468ck0vP7dVuEMMUAVIgFq1ZQk4Nv3WoCTyITemznOCEXXKvm01x7D4HTrhOsZlLJm1hIVDebj6y2jtVay8YwvhalTyzkvTjY4r0XFum2aS1dYkt/8LarXDsGzb08A2MA9lHTPD0z2CpJY762qQuKHqVFzoecNnAVhzONPY3rWgzH3+k22iH7XkD9ZFkB4YL3j3CCwCzPMQpvVu2PbEzhctXd7vl6D53b8V4dW3vtbNFNZMdAFX3Yg3zW/nwM3YsO7/AHVNe13TJoH1O3O1W+bIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=oss.nxp.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FJ8q8t1Ul1tF317VB0KKqFzMr5F+EhO3e+uhVuhegQ4=;
- b=FaNrhC5PP2Md4xRzAb7S8iAJHVc9XTEgk4CadZsxLPu20KTcodVavdbxIZ84J6E+KZnxjgLJ+7PtqW7bjXr7mxCzcMJzr+1HxdkHZXLa8wNl+eegQgyU3Sbuv6r5gYpZCiVL7O3GPomgBrmJ/RW+LxmiNEXb+kiFTRCwOa7F36oEUW+H/KwUwB2j9sDHdBPB9xJJfBgdK2IGtiKYSBQu41c4VHlC6ELxOyXHMW4/uvVxQPgnEjyNGzeBUF3is6ADGvR1SbdKFit0qGskj6kwEN60g2YW4uYwGZ6RHKZMVv4awxlvtLON8FdGs+tBTOCFnNvrCNkx8YDkoY0zwd/LAw==
-Received: from AS4P195CA0013.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5e2::16)
- by PA1PR10MB9783.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:564::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.11; Tue, 7 Jul
- 2026 08:36:40 +0000
-Received: from AMS0EPF000001B6.eurprd05.prod.outlook.com
- (2603:10a6:20b:5e2:cafe::1d) by AS4P195CA0013.outlook.office365.com
- (2603:10a6:20b:5e2::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.13 via Frontend Transport; Tue, 7
- Jul 2026 08:36:40 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AMS0EPF000001B6.mail.protection.outlook.com (10.167.16.170) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Tue, 7 Jul 2026 08:36:40 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 7 Jul
- 2026 10:41:29 +0200
-Received: from [10.130.76.182] (10.130.76.182) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 7 Jul
- 2026 10:36:38 +0200
-Message-ID: <960564c4-6b6a-4c0b-a328-774b5b14b32c@foss.st.com>
-Date: Tue, 7 Jul 2026 10:36:37 +0200
+ spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
+ s=protonmail; t=1783414431; x=1783673631;
+ bh=BQXdYKSxwLkVTwELCrcc5lfEblFhqRI/5UK9guFvR8A=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
+ Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=dar9uBsc5TL9QksoWXXcvTGDwe6OOBjBdxLGBbSFWEGgBlqALStoc4cpEBT78Gxis
+ iJl4PTk7TOg7YohzmCql3ODFBBPAAUtx4huzrgEm/+/1sm2a1bNG/Kup7NqniaAVI5
+ J6ceqchiBDt/AIlwL0jtlPNjOb9iwvftTe3o0Qf6i0iOT+UmGPf+Rj1AFewk7OiAYK
+ 347N8llglcLo7WFTIKB1sFuyxFFidb5e7wJxBGla7hUR3VEEsFnOO2t48HHhN543lN
+ JUKuDIKZT6Ifpz39Eh2Cbn0ajpLhrtHjXPIv5dcQDoj8jUotS2MIGNbHCmqz76k2WO
+ ZL/KoyakfsiEQ==
+X-Pm-Submission-Id: 4gvZlL0gk1z1DFT1
+From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+To: "Patrice CHOTARD" <patrice.chotard@foss.st.com>
+Cc: "Marek Vasut" <marek.vasut@mailbox.org>,  <u-boot@lists.denx.de>,
+ "Stefan Roese" <stefan.roese@mailbox.org>,  "Tom Rini" <trini@konsulko.com>
+Subject: Re: [PATCH 2/2] cyclic: parse cyclic list only if next cyclic
+ timestamp is reached
+In-Reply-To: <62451a3d-6fe2-49fd-a724-197774305286@foss.st.com> (Patrice
+ CHOTARD's message of "Tue, 07 Jul 2026 08:03:52 +0200")
+References: <20260702-optimize_cyclic_run-v1-0-92c5a7011f54@foss.st.com>
+ <20260702-optimize_cyclic_run-v1-2-92c5a7011f54@foss.st.com>
+ <b9c4b762-6abd-4025-bde5-ab911fd5f683@mailbox.org>
+ <0d9f5186-8342-4a11-adf3-2ffc2e5267f6@foss.st.com>
+ <5ce8de52-2fec-4d08-a9e6-cfc69edbaa0a@mailbox.org>
+ <13f510d9-6b08-499f-a6c0-f76484488899@foss.st.com>
+ <ec6ed9f4-b302-4336-af02-1645aff668d1@mailbox.org>
+ <tdaxlZF2d_Uu_E3EBGWqa6RvibE8eLsMtvc4ekpUPHvJSli9Tah-PpLHs7xG5VSIlo75XUDaauwgSb3kep-Dyw==@protonmail.internalid>
+ <62451a3d-6fe2-49fd-a724-197774305286@foss.st.com>
+Date: Tue, 07 Jul 2026 10:53:49 +0200
+Message-ID: <871pdfw57m.fsf@rasmusvillemoes.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] dm: core: Correct calloc arguments
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>, "Simon
- Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: Rasmus Villemoes <ravi@prevas.dk>, Casey Connolly
- <casey.connolly@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Romain Gantois <romain.gantois@bootlin.com>, Andrew Goodbody
- <andrew.goodbody@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Markus Schneider-Pargmann <msp@baylibre.com>, Yannick Fertre
- <yannick.fertre@foss.st.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260703-dm-core-v1-0-076d395bded4@nxp.com>
- <20260703-dm-core-v1-3-076d395bded4@nxp.com>
-Content-Language: en-US
-From: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-In-Reply-To: <20260703-dm-core-v1-3-076d395bded4@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.130.76.182]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001B6:EE_|PA1PR10MB9783:EE_
-X-MS-Office365-Filtering-Correlation-Id: 44d8d3f9-dcde-4696-4baa-08dedc02de08
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|7416014|36860700016|376014|23010399003|1800799024|11063799006|56012099006|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: u8oura/SV+FgenNLrl2ZC09DEv69UsimFV8inu9baccF6+f8fYHyKahpUyDTJAHCjRrl8mZq6Wlo6cIDFPH+gu/bT9mSsxWsx3sSu7tKQBohu8DUvxRRIDUHdzso26CfKy+VMSn7fUTrzsyE4c6F5WDzzAbXk4vZx9N4Z1O9kV/aloU5CspmQLZj7PXJOnFgv3GP7U2HjMxu0DJDiTOX+P/QDypurjRvOfH5NtKutp71SaTBIM9cZFw97Aj6qImuhc2ble0kjRbfzCr1ekg1MSqLO7Zb/6hoiYhYl+YvwWugNZghpZKVCsXK/0zkfVmm8QWIYYnXg/J1YnPI0APolBPo3fGb5bq9B8eb7j2KoESeNuLzCEFLtOGhSvRFtt4iJtkU4opbU9kR3kKO6nF7aD9Juf7AI6oYAv6vbITYQ7lsKNBaqkDVXv+1XUs4y5+cjTrYb5cxYzmxsgyeFa+8pSOWona9Ihjaxdny6VcQ1+Bg05NHdeknmJ7seRm2jNPhT8g0OjTCHLT/EpKvNAQV/ro/GfJK1hcEWzkfj9zB2KNYZYeEpddOXzo7t5ksrDyKGQrahjXQazGS+Ek4glkb2I9+IkrjwBeym1YMgnl6bGf83Iq60Bhk1joBmR1Ia2Q+hB5NGjGvPU1DZ9TbuxmUG1+EzVbFtL3Vq4VMaQns+Feu5V8cEsdTMQQcNkLGK2SQJVRLIBpK1QDbW7pmk4fXSA==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(7416014)(36860700016)(376014)(23010399003)(1800799024)(11063799006)(56012099006)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: MZoE6yMNppKxtCwxfv+YFHWix0PYV2piaqF6MLa2z8alqRmSSbSsD9d1p10srKWbQA2EZxzdJ+ScayulffSa7V54amB2bQtsqqA+vYmY3ap97nhUcqdFzC/c0PZOPakb0XdTDAfnbVGTpJ1nJwNTiV8H3jvZi0NIy0HbyKtW+qSfrUykzZWpCCF8gtJ6JReHJgxmxjD2A94PCormKBRk+SPywHy8rLokOplLCjOYKuQuPxIwDt8o8HGwWbRV0xbRdXxTYrEG05MCCjkrCBmNzaXPUjtOFEtbOg0oRzGYuLpIztL8x97EUO0HHg02XwU9SC8DcHmC4Bt3XeWc5/j7phadJqmKQxFzNKOZwY0vjqDLA439aluPrxMAXdh/YLOQKvadEcjBbSdk3Wxmp3m8V3IMSzexP5KKaDoqy5HILIlk+2RH8GLwh8HxmJXORwqR
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 08:36:40.5480 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44d8d3f9-dcde-4696-4baa-08dedc02de08
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B6.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB9783
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,16 +77,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Jul 07 2026, "Patrice CHOTARD" <patrice.chotard@foss.st.com> wrote:
 
+> On 7/6/26 18:00, Marek Vasut wrote:
+>> On 7/6/26 5:16 PM, Patrice CHOTARD wrote:
+>>
+>> Hello Patrice,
+>>
+>>>>> I did a test, it doesn't bring any noticeable improvements, but never=
+theless i will submit a v3 with this update.
+>>>>
+>>>> Does the list iteration exit when it finds the first entry that is not=
+ going to be executed at this time ? If it does not, then there will be no =
+improvement. But for this to work, the list would have to be surely fully o=
+rdered in incrementing timestamp order, is it ?
+>>>
+>>> No, the list iteration parse all entries.
+>>>
+>>> I see your point, on original implementation, entries are not sort by i=
+ncrementing timestamp order.
+>>> I did some implementation test, by sorting cyclic entries in cyclic_lis=
+t when :
+>>> =C2=A0=C2=A0 _ registering a new cyclic callback, put it directly in th=
+e right position in cyclic_list.
+>>> =C2=A0=C2=A0 _ in cyclic_run(), after running a cyclic, compute its nex=
+t call and insrt it in the right position in cyclic_list.
+>>>
+>>> There is no noticeable gain.
+>>
+>> Did you also break from the iteration when you reached the first entry w=
+ith future timestamp ? That might actually help.
+>>
+>
+> In cyclic_run(), as now entries was sorted by increasing timestamp, only =
+the first cyclic in cyclic_list is parsed,
+> we don't need to parse all cyclic_list element.
+>
 
-On 7/3/26 11:11, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>Every other calloc in drivers/core uses
-> calloc(count, size) with count first. Fix the two reversed calloc(sizeof, 1)
-> calls for consistency. Signed-off-by: Peng Fan <peng.fan@nxp.com>---
+The point is kind of moot as v3 seems to work just as well, but I do
+want to point out that no, ensuring that the first expiring timer is at the=
+ front
+does not _sort_ the list, and breaking once we hit the first non-expired
+timer would be wrong. It would of course work for a list with at most
+two elements, but not in general.
 
-Hi,
-
-Reviewed-by: Raphaël Gallais-Pou <raphael.gallais-pou@foss.st.com>
-
-Best regards,
-Raphaël
+Rasmus
