@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94B5C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD0FC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 221D884AC0;
+	by phobos.denx.de (Postfix) with ESMTP id 5E95584AC8;
 	Tue,  7 Jul 2026 18:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="RzrLY95d";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="XsWRVkND";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5907984A3E; Tue,  7 Jul 2026 18:09:48 +0200 (CEST)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [84.16.66.175])
+ id B7A9284A3E; Tue,  7 Jul 2026 18:09:48 +0200 (CEST)
+Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
+ [45.157.188.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2636084A06
+ by phobos.denx.de (Postfix) with ESMTPS id DFA1A849F6
  for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQK4h2yz297;
- Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQL3BtCz19nh;
+ Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783440585;
- bh=Wyz7x7foOo2bND+bNfrZE74JnkFnOsS3mA5J6s/HPQk=;
+ s=20231125; t=1783440586;
+ bh=JjX61VuGI44+0I1j25HwBhGMe5qsMjIrUadI04Ak0+4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=RzrLY95dCaQWkD4QShhu8QrbZ/ZPXdkZud4YL4YQ6YXKpkrROgFJlgUcVCyQFIkrF
- 0RkfYoBZofS1JareuXwio3myKK0a47LSP4I3SCLxLul0GtGi7x8Wa75hNnXwu3rH0w
- eYgROZnWEA45mo8CQCfHJdhcpmgr4kfGeLaJ5nWKLA3uj8RISAY4zjdzC269s+Ugst
- p1HSZS9NRcm7uFnB5OALQPKE4bQpqiOaPBQQTA23CVXNJfqS4ZmT+KZ6wg8J85PYjb
- dUPjGjBVFgWIAXTYQZktaRa7KY8s1l/ET/Qqu++0MOLAQwRI+fuyUWwEBaxI2eKmcS
- 8BmDfLdMSBhOQ==
+ b=XsWRVkNDYeh6OMb2VdrqZmdK8wbiLAz51F0evaARmN3KYLL5FehcY/bOB4EONXW10
+ rUqMQzNVqCM5cU+wu97ekHdBKawkoRMpnu9IhsVctH8yHAjLFH+Mi8r/pps5y/XnIc
+ AwYOo53ionwXO8HCOLbclVrIJ7sjY5hM/w5hWQkJtJFnTNSCI+PhkyhbdLo93F39Jr
+ KMt49X8do/MOBdMBX4ocn5bu5F6Gx0UdFQz+ntNFLjc5/r2zGpiD8ZULZP4eW90NSs
+ ruaSPePiQCYbDnSxPxZMxyEVhpnYDyjj9TyD4zWu93+s9ySTB7WN8yv5vV6Lo853td
+ eXEF3VpNkkxtQ==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQJ4sH2zXYk; Tue,  7 Jul 2026 18:09:44 +0200 (CEST)
+ id 4gvmQK3VMnzXhg; Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Date: Tue, 07 Jul 2026 18:09:19 +0200
-Subject: [PATCH 05/12] MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 18:09:20 +0200
+Subject: [PATCH 06/12] MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-rk-custodian-v1-5-dbc9c696e613@0leil.net>
+Message-Id: <20260707-rk-custodian-v1-6-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
@@ -82,49 +82,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most Rockchip SoCs have their name start with rk3xxx. Historically, the
-second digit is for the generation of SoC, e.g. rk31xx was before
-rk32xx, itself before rk33xx and now rk35xx (and the expected rk36xx end
-of this year). We won't talk about the rk30xx timeline but it's also
-prefixed the same way. So let's match *anything* in U-Boot which
-contains rk3 in the path to simplify the MAINTAINERS entry and hopefully
-catch as much as possible.
-
-board/firefly/ and board/pine64/ only contain subdirectories and each of
-them have rk3 in their name.
+Rockchip also manufactures PMICs and regulators typically under the
+RK8xx naming scheme (e.g. RK806, RK808, RK860, etc.) so let's match
+files with rk8 in their path.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
- MAINTAINERS | 12 ++----------
- 1 file changed, 2 insertions(+), 10 deletions(-)
+ MAINTAINERS | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 9527af78d391..393c8abde10c 100644
+index 393c8abde10c..97d5e8feb51b 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -578,20 +578,12 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
- X:	configs/kmsupx5_defconfig
- N:	px30
+@@ -580,6 +580,8 @@ N:	px30
  N:	px5
-+# RK3xxx SoC family
-+N:	rk3
+ # RK3xxx SoC family
+ N:	rk3
++# RK8xx PMIC/regulator family
++N:	rk8
  N:	rockchip
--F:	arch/arm/dts/rk3*
  F:	arch/arm/dts/rv11*
--F:	board/amarula/vyasa-rk3288/
--F:	board/anbernic/rgxx3_rk3566/
--F:	board/armsom/sige7-rk3588/
--F:	board/chipspark/popmetal_rk3288
--F:	board/firefly/
--F:	board/mqmaker/miqi_rk3288/
--F:	board/phytec/phycore_rk3288
--F:	board/pine64
  F:	board/radxa/
- F:	board/theobroma-systems
--F:	board/vamrs/rock960_rk3399/
- F:	drivers/gpio/rk_gpio.c
- F:	tools/rkcommon.c
- F:	tools/rkcommon.h
 
 -- 
 2.55.0
