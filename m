@@ -4,110 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D981C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ADF0C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D6EC84A67;
+	by phobos.denx.de (Postfix) with ESMTP id DA57784A75;
 	Tue,  7 Jul 2026 18:37:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p4rs+exF";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="YaByCCJR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22CBF84A52; Tue,  7 Jul 2026 17:35:30 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 335A184A35; Tue,  7 Jul 2026 18:09:44 +0200 (CEST)
+Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
+ [IPv6:2001:1600:19:fff0::bc0f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0D6284A0B
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:35:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA68849A4
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-6a347ec19a5so964485eaf.2
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:35:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783438524; x=1784043324; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CIUdVeembzKDP/z//yOys+teCMH3USuItFn3FrvrYoM=;
- b=p4rs+exFn/K3R/SCDDm9hyGqiBXmA+XWf80bb/JcabUa6hMalFLuOt5QgFlBD/Msk4
- eyOoKSbvepjYAV4X2ynOIU4c3fJqC7oBFFWAHmCnI45qPRr5MrglHaDzHKoyOc+5kHzN
- BzrFc+TDWNz5tWlUi/fI6lKuwiRREXdHRFO48=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438524; x=1784043324;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CIUdVeembzKDP/z//yOys+teCMH3USuItFn3FrvrYoM=;
- b=BodYPveVf5yFUpDfNlwJiS0HECByBRTn0zMeVufRX4J6lV4w2cZESHyGqJDRYlmMsX
- So2f+0k37C4BQ3tFAtAjPdOUZbcX2afA9ceaBRBeHtsIjYXlS2r73qPmTuxalqpXLFy6
- IGYjdPk0O9Ba52HicUuhOduHtNsaIGPtfeB7s9eqTIMpvpNP2L3yP1zTfKvE9MPm5gk3
- IdmPR2uhczHUsz0/Aa/6onSwPzEndvNBvaVqT6W+SQHMVm27DZLafvDeoU/c38u/RJMM
- 7prefGspV2id2tXo7zHimjwp0FiNmLMDr8HXn4V9ogMVwkiFvpb3P/XiY/gevoaE0SWH
- Ueaw==
-X-Gm-Message-State: AOJu0Yxh/LnZHx+w0Ve9ibhUv48eDOuiZsbSNadoVbmgvV3DxmtzBxeq
- LDJ9NUMgFpr+EC5LLNUW66m3X6/uegGrDvNrMRxZluasqGa3ToT5uCPB7zON52JE910=
-X-Gm-Gg: AfdE7cnuhOq0L/SACM78+IKqLVk/SiUVUHuNAg3EZaeAZMRydktiHwAfkRJVnbYsjZY
- VLwOUmJ5ZFMyZKrAQKo/gy9oUKWu0KJMZGTmeM+ClvVUH2t2RE2W8oQSzvHFVkeDJVkqJXNtn+p
- 3FzbFojqgAaojO5jK87o6tZfO2GvDjSihMt4Ckqf+gp/tT/8cfbET8fk0HODBHlSzg6vwQjJce8
- 3Bw2AdIrtig90cq1TepD7NiezbSbwa/Qx5Q+ek2PEO8Ip0JiLszNsJwKX8llGpqjtHdP53lmpQk
- bynpyJA9w6Yqf8egbGiH/ZKgpUuS/TvfilqCKOAN8IwpzyBsyvGohYoc44V4513/M/fhaJukTzf
- RIkWxXRNuBVZ/7/CQa8MbvyUv4Zj1dm+rmd45A4Zch+YCm5c0E01u6ou1pv/ESCbpB5kABN2pYa
- xNy2BLL3WamxM8sbiFe6P+1hoEjPfO231zS/8knq4hxESDSAJYKFcehs3/yHUYLuKHrFo52obwV
- 4dHhQqUbZyX1ftBrn/GMVFLHBVApkfIZmEnag==
-X-Received: by 2002:a05:6820:6ae3:b0:6a1:5864:69f5 with SMTP id
- 006d021491bc7-6a355540eaemr3786427eaf.25.1783438524337; 
- Tue, 07 Jul 2026 08:35:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a310003927sm10065042eaf.6.2026.07.07.08.35.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:35:23 -0700 (PDT)
-Date: Tue, 7 Jul 2026 09:35:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Alexey Charkov <alchark@flipper.net>,
- Alexey Charkov <alchark@gmail.com>, Andrew Davis <afd@ti.com>,
- Anshul Dalal <anshuld@ti.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Chris Packham <judge.packham@gmail.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <joaomarcos.costa@bootlin.com>,
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Niu Zhihong <zhihong@nzhnb.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
- Xuhui Lin <xuhui.lin@rock-chips.com>,
- Ye Zhang <ye.zhang@rock-chips.com>, huang lin <hl@rock-chips.com>
-Subject: Re: [PATCH v3 00/15] rockchip: Add support for the RV1103B, RV1103
- and RV1106
-Message-ID: <20260707153518.GI749385@bill-the-cat>
-References: <20260707153135.2048115-1-sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQF3PXdznb;
+ Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1783440581;
+ bh=cE9TUtHxuYVt2GeXVp5afJpVGX9/47VeFh3SF7jaw+A=;
+ h=From:Subject:Date:To:Cc:From;
+ b=YaByCCJRzDlzLJBFMgcYPPlYR7FHB8MZXqnhP8WFEe6+pC/gVwUgirSrmw3Hd4zfQ
+ WiPi9bdzJ01xjNGl7wtXyRlKFJG900JcQLpZlJ6sq3t57fkSgSPwVPB0dhePpU6NqQ
+ Zbn/ulvArR+OWkJZxsjFcEiGbZgeTZSERtB/h6HDvx+U6WJ84lV6wk/OJrIVVuQ23s
+ +33Lc80ciwwNas16obFe0Ic/GnHR/TRZdoCEz1F/5M4zdnqiskf9csJptu/tqKyP+I
+ j5hVP2q2v0a8798rHfyFDLXTcOaZRcqus8dJlxqG0x1+E42Ba5Ret1J5MgoU5mYiyQ
+ LpQoWPg2Inl4Q==
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4gvmQC633HzZdt; Tue,  7 Jul 2026 18:09:39 +0200 (CEST)
+From: Quentin Schulz <u-boot@0leil.net>
+Subject: [PATCH 00/12] MAINTAINERS: update entry for ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 18:09:14 +0200
+Message-Id: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bK7Bwi6ewj7tuHBi"
-Content-Disposition: inline
-In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5AMBBA4avIrDWpnyCuIhY1HQxJSQeRiLsrl
+ t/ivQuEPJNAHV3g6WDhxQUkcQQ4GjeQYhsMqU4LXepS+VnhLtti2TiV5YhVphOyfQ4hWT31fH6
+ 7pv0tezcRbu8D7vsBHlIZ1HAAAAA=
+X-Change-ID: 20260707-rk-custodian-34cc8301edf4
+To: u-boot@lists.denx.de
+Cc: Heiko Stuebner <heiko@sntech.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <u-boot@0leil.net>
+X-Mailer: b4 0.15-dev-47773
+X-Infomaniak-Routing: alpha
 X-Mailman-Approved-At: Tue, 07 Jul 2026 18:37:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -125,55 +84,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Simplify the ARM ROCKCHIP entry in MAINTAINERS by making extensive use
+of the N: regex. For some reason, it slightly modifies the list of
+people returned by get_maintainer.pl but I believe the ones reported as
+maintainers are still correct.
 
---bK7Bwi6ewj7tuHBi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add more files under the ARM ROCKCHIP umbrella.
 
-On Tue, Jul 07, 2026 at 09:30:58AM -0600, Simon Glass wrote:
+Remove inactive maintainer (Philipp Tomsich).
 
-> This series adds support for three small Rockchip camera SoCs and two
-> boards which use them.
->=20
-> The first eight patches are Fabio Estevam's series adding the RV1103B
-> and the Onion Omega4 board, updated here to address the review
-> comments on v2: the board patch is split into SoC and board patches,
-> the devicetree files move into the patches where they belong and the
-> pinctrl driver uses regmap_update_bits() throughout. All credit for
-> this work goes to Fabio. The devicetree concern raised in the v2
-> review is also resolved now: the devicetree files carried here are the
-> versions merged in Linux v7.1, verbatim, and can be dropped once the
-> next dts/upstream sync brings them in.
->=20
-> The remaining patches add the RV1106 and its RV1103 package variant,
-> following the same structure as the RV1103B patches, together with
-> the Luckfox Pico Mini B board. These SoCs have no mainline Linux
-> support yet, so their devicetrees are local for now. The clock and
-> pinctrl drivers are ported from the Rockchip vendor tree and are the
-> work of Elaine Zhang and Ye Zhang. The final patch makes the
-> maskrom-mode RAM-boot images work on 32-bit boards without OP-TEE,
-> which both of these boards rely on.
->=20
-> Tested on the Luckfox Pico Mini B: U-Boot runs from RAM over the USB
-> maskrom path and both the SPI NAND and a microSD card are usable. THe
-> board is running in my lab.
+@Simon, since you don't have permission to push to the Rockchip
+custodian tree, I was planning to remove you from Rockchip maintainers
+as well to reflect the reality but since you're still an active
+reviewer/contributor, maybe you would like to be kept as Rockchip
+reviewer (R:)?
 
-I did ask you not to do this, Simon, as your patches aren't being picked
-up until we've resolved the status of u-boot.org.
+Add myself as maintainer.
 
---=20
-Tom
+As could be seen over the last year or so, Rockchip support in U-Boot
+has almost ground to a halt with Kever only being able to find time for
+his maintainership every few months due to his responsibilities at
+Rockchip having changed.
+I would like to express thanks to Kever as it is not that often we get
+people from the SoC vendor actually contributing to upstream projects,
+let alone maintain them. I'm hoping you can keep helping us especially
+for things that aren't documented in manuals or for odd behaviors. This
+is my reason for still keeping you as maintainer for now, but if you
+would like to be switched to Reviewer or dropped entirely from
+MAINTAINERS, please let us know. I likely will automatically switch you
+to reviewer in a few weeks/months if you aren't migrated to the new
+GitLab instance and thus do not have the rights to push to the Rockchip
+custodian tree.
 
---bK7Bwi6ewj7tuHBi
-Content-Type: application/pgp-signature; name="signature.asc"
+I've reviewed Rockchip stuff for a few years already and my current
+employer has all its products based on Rockchip for almost 10 years now.
+I want to be very clear with what to expect from my maintainership: I am
+likely not going to spend substantially more time than I am today
+reviewing things, I'm essentially just going to unblock the merging part
+of anything Rockchip once they are reviewed. There are many things I'm
+unfamiliar with, so I'll likely ask odd questions or clarifications until
+I can get some basic knowledge in new areas.
+Things aren't going to go faster by themselves so this is also a call to
+action. If you do find yourself frustrated because things take time to
+get reviewed, please consider spending some time reviewing or testing
+other people's patches to help with the global effort. If you do find
+yourself in a position where you can spare some time to review or test
+things, please feel free to do those things (be it for anything Rockchip
+or anything in U-Boot really, or even in FOSS in general).
+Finally, I've never been a maintainer and I haven't really figured out
+my workflow yet so I'll likely make mistakes and asks many questions in
+the beginning, so bear with me and report anything odd or wrong.
 
------BEGIN PGP SIGNATURE-----
+@Tom, if/when this gets merged, anything needing to be done in the new
+GitLab and/or patchwork to get me the appropriate permissions and
+duties? For patchwork, I'm already registered under qschulz. For the new
+GitLab, as quentin.schulz.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak0csgAKCRAr4qD1Cr/k
-Cu30AP9Uch6eyazFcQP9nJFwyJNDwkquuXPaOlncSTpyAe2vpAEA2Hu3fCgCrjTE
-kDYwkS11XM0c9u/2CHVHbXO1QqwFRQ8=
-=nmp6
------END PGP SIGNATURE-----
+Signed-off-by: Quentin Schulz <u-boot@0leil.net>
+---
+Quentin Schulz (12):
+      MAINTAINERS: remove redundant entries for ARM ROCKCHIP
+      MAINTAINERS: add rkmux.py to ARM ROCKCHIP
+      MAINTAINERS: add N: px30 regex to ARM ROCKCHIP
+      MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
+      MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
+      MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
+      MAINTAINERS: add N: rv11 regex to ARM ROCKCHIP
+      MAINTAINERS: add N: rkmtd regex to ARM ROCKCHIP
+      MAINTAINERS: add more Rockchip drivers to ARM ROCKCHIP
+      MAINTAINERS: add rockusb to ARM ROCKCHIP
+      MAINTAINERS: remove Philipp Tomsich from ARM ROCKCHIP maintainers
+      MAINTAINERS: add myself as ARM ROCKCHIP maintainer
 
---bK7Bwi6ewj7tuHBi--
+ MAINTAINERS | 46 ++++++++++++++++++----------------------------
+ 1 file changed, 18 insertions(+), 28 deletions(-)
+---
+base-commit: ece349ade2973e220f524ce59e59711cc919263f
+change-id: 20260707-rk-custodian-34cc8301edf4
+
+Best regards,
+--  
+Quentin Schulz <u-boot@0leil.net>
+
