@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3DEBC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 11:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16791C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 11:36:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB6CC8490A;
-	Tue,  7 Jul 2026 13:36:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17E618497A;
+	Tue,  7 Jul 2026 13:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JgND74Sg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GY97gTop";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0372E8494B; Tue,  7 Jul 2026 13:36:06 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id A7C58849A4; Tue,  7 Jul 2026 13:36:09 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B1C8490A
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 13:36:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79ECE84979
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 13:36:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-44c9f8c9c4aso1155735fac.3
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 04:36:03 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-448b89f700fso2087710fac.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 04:36:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783424162; x=1784028962; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783424166; x=1784028966; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CE/x8xajmk4aS76nFz66CBtty7I/ubVO23qOSAT7vJM=;
- b=JgND74SgVqbw9Y+GmOBplKF2wnIDCma6jM3/jqt18xe5ORFaCLbdG4eK//3jR5EVSg
- bLiMecgRf+4SJ0Mnxm17mL0Z8VMBwOO5dkgPBLopsonxgBqlfJlS0GouNTIfIn4rNSpG
- 2VUpvQYUf4qS5IFX5Zt6JTa5XZvrbBWtx8mkU=
+ bh=1y2TBFVx7enAA4VRkNr6EzkMFpVCnwU5iGD4Gr/jtu0=;
+ b=GY97gTop/IYhheBkE/axg2shzsbRVV47JXMY3qPcCYEOHqrLGv7OM4p3nQl+ssDyIF
+ jLimeuu4hcuNwNzWalb4SKF9bLlZDzFAmd/eRhfc+R0hrYY3jBHC/73TKPE8TXLkF/l8
+ oW7ERD6f91GMEU2iHy+vjgJk1NauN87lf7Wv0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783424162; x=1784028962;
+ d=1e100.net; s=20251104; t=1783424166; x=1784028966;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=CE/x8xajmk4aS76nFz66CBtty7I/ubVO23qOSAT7vJM=;
- b=Ky7/2b/OlIVvuljP+OZxMvifJB39ulFBI2FiaFE78mdobF/jcu462aDOQWTPCsocX4
- jl8uh1dD2oZ+3y+3WrvXdKNlqZi/+9x+weU0tvgSnDy7eLCG7n2V7fXaAPg2gTeTlN4c
- ps5sE8dt1uDgX2ayCy0y3PixoxeigTu3UMkWTw9xYuuqNippUvMV97k+ctaNY0T32C8j
- pOaohAW8eQehzKu0lTcDpshM+OrcDSvLi4YhK/A45jACAmxZ5ED4yfcYyeDtUP/SjqvQ
- 6espXQQQj7GCDihsBxb71QGN3qjNy0WAgXSVqkuqlrTBi+GhD1cYXxz7Op1CBdVZCHo0
- uUYw==
-X-Gm-Message-State: AOJu0Yznu/F2S0Pw8WO+vA+Y23Z0FlfA9+NQ56kPjS+0ezL7i1DFOgCz
- vqSgU+hij7FEpwXTFE/RPvHCh3ZqjRXYgr7CA/Vp0vYtrymbMuR/fpgrYlVeVxBOZtvhIXB8qpw
- 2nU9UIg==
-X-Gm-Gg: AfdE7ckzlam4WkPbM0vvzDIo0KNh9fZfXGo3EjittpGO0+qzz5JX9BqqDctaRg6NU58
- IRJr2ViNtSHevOwAwhHI7XWKhk66nSb+YPEO10dQ5WXciOta1ScAXUR3Modn0UilEjJfTRs+axV
- pobbXkbVSBKoHY/Dkz/0NJniFuIyW5XGsCdAYHk9HO12FaFExnV/N9/3SBomx7VBOpfUa+l0hXu
- IbaVmlbPFs5hdw3cJZqG63cDUS7HALZQful2LAb9huI4904+rlmd9RHVFOrgGre0wGIHAF2Ebru
- NE/5UksNCzmEv2aMBtqlvcQ6mwuikj++PPD1VLL/4iWxAw/ubmByGfgHxD/nnFqaSEu/gtEpntY
- UCXdnMD3T+N9+dtGfM/my/eSaCALmQ0e/QX+eIZiCDhkVWX9IUoVqq70/hkoD5dED+DTsDsGQ8z
- yE2PnLFxw=
-X-Received: by 2002:a05:6870:82a5:b0:441:419:1fea with SMTP id
- 586e51a60fabf-45105e891bemr3160217fac.11.1783424162546; 
- Tue, 07 Jul 2026 04:36:02 -0700 (PDT)
+ bh=1y2TBFVx7enAA4VRkNr6EzkMFpVCnwU5iGD4Gr/jtu0=;
+ b=mwWVEEtx67Kt9dgFgHiKvacROCnUo8B4UirY+d105ywsfnVr4WuKgVeuYf7f9d+qp0
+ IIJO3ZYRRCSau+RJxBMnQx91IW7fpinJhVNmonM1VyebhRSPKhPTOCNTGSQp8noEPEcc
+ iTWefDC4ULcDoAVxuliEA6+jB5afMOARgWd4TXnBUb48LTo4mWQsuFF5zhTM2V/hIF2U
+ 9i9hXIB18+0zSHUMrlq+T/pnqfP6JuccRvR+vHvRikUrEkl1AWb8Yyl8QtlcXrlhhge5
+ f/CbFoCz4OK5MxxRzskyOUnlPPAsbTuEEBWEE6QFA7ufRL7DcRAEUZaRrg7TpTn/vj24
+ 5XNg==
+X-Gm-Message-State: AOJu0Yyh0Ee3/9q5pICRmHCRpr7cjG1rSMtwJ0FwA+G1/1E2guDkX48u
+ bx7nid8sFV1jxmpbTZm5mX7Gn1n+GEMj8zJVuinx9C0d1awFOMIl5PC+wd7wYcqljDaAmKLhcJY
+ /UhwdDg==
+X-Gm-Gg: AfdE7cmaKprT5hD4IzBWMlc25OKRKSME8uON6QcCF7RaRZ2cVEY7bvwnLFxkfjq7r/+
+ RYe75JY7OVtgKr3FO74NSH51M+1ODPRPahdwhdC3XXN/lJI4L4VoK4gbY7dW4VHKy2doR1ZoGiY
+ rWXhfhnFhye1becYmQ7KWkinNq0xxBzIggQREsojUkQCVTU3akEz0T5GiVj/w6O+1ridHmIR/7a
+ AIKyoWda5fKXBJXb9AziGUb7JMAtJJoxd8esIqlQVtJZlpiOvIOZZsH/nbUjOhbF3uOnj96EUQV
+ Ljuwelc4mEuVGqHIcHJtKoH5nX4af+7xcPeFQdriYmphPrvv8srLhopfsnUjwXYagJYJ3D4KN3u
+ lmPbwVugXtwch3GYW+dQKs9c+wQuGkz5PtOAGcIpzTzIsNi4EGMWHX2ICLFNB3BQGTVi7+8k3dv
+ 50UqMRfbk=
+X-Received: by 2002:a05:6870:8125:b0:447:534c:8a85 with SMTP id
+ 586e51a60fabf-451061f6faemr3146184fac.18.1783424166124; 
+ Tue, 07 Jul 2026 04:36:06 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb6691d1sm13440825fac.17.2026.07.07.04.36.01
+ 586e51a60fabf-44cfb6691d1sm13440825fac.17.2026.07.07.04.36.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 04:36:01 -0700 (PDT)
+ Tue, 07 Jul 2026 04:36:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/13] buildman: Fix kconfiglib string-value escaping
-Date: Tue,  7 Jul 2026 05:35:02 -0600
-Message-ID: <20260707113538.3382145-2-sjg@chromium.org>
+Subject: [PATCH 02/13] qconfig: Add a way to select defconfigs without stdin
+Date: Tue,  7 Jul 2026 05:35:03 -0600
+Message-ID: <20260707113538.3382145-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707113538.3382145-1-sjg@chromium.org>
 References: <20260707113538.3382145-1-sjg@chromium.org>
@@ -94,84 +94,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The C Kconfig implementation (scripts/kconfig/confdata.c) stores string
-values from .config files verbatim -- no unescaping on read, no
-escaping on write. But kconfiglib's unescape() strips backslashes
-before ANY character (\n -> n, \x -> x), and escape() only re-adds
-them for \ and ". This means \n in a .config string silently becomes n
-after a round-trip.
+Sometimes it is useful to process just one or two defconfigs and it is
+convenient to do this just by listing them in the arguments. Add a -D
+option for this.
 
-Fix unescape() to only handle \" (the only escape that matters for
-.config parsing), and escape() to only handle " -> \". This makes
-string values pass through unchanged, matching the C behaviour.
-
-Also fix _expand_str() (the Kconfig file string parser) to only
-consume \\, \", \', and \$ (meaningful Kconfig escapes), leaving \n
-and similar sequences as-is.
+Update the docs to avoid mentioning boards which have been removed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
- tools/buildman/kconfiglib.py | 30 ++++++++++++++++++------------
- 1 file changed, 18 insertions(+), 12 deletions(-)
+ doc/develop/qconfig.rst |  7 +++++--
+ tools/qconfig.py        | 23 +++++++++++++++--------
+ 2 files changed, 20 insertions(+), 10 deletions(-)
 
-diff --git a/tools/buildman/kconfiglib.py b/tools/buildman/kconfiglib.py
-index 27abbf9a7a1..1bf96e35249 100644
---- a/tools/buildman/kconfiglib.py
-+++ b/tools/buildman/kconfiglib.py
-@@ -2727,10 +2727,14 @@ class Kconfig(object):
-                 return (s, match.end())
+diff --git a/doc/develop/qconfig.rst b/doc/develop/qconfig.rst
+index a18f32470ca..3b995355967 100644
+--- a/doc/develop/qconfig.rst
++++ b/doc/develop/qconfig.rst
+@@ -62,10 +62,13 @@ or::
  
-             elif match.group() == "\\":
--                # Replace '\x' with 'x'. 'i' ends up pointing to the character
--                # after 'x', which allows macros to be canceled with '\$(foo)'.
-+                # Replace '\x' with 'x' for characters that are meaningful
-+                # escapes in Kconfig string literals: \\, \", \', and \$
-+                # (to cancel macro expansion). Other \<char> sequences
-+                # like \n are left as-is, so that the stored value
-+                # round-trips correctly through escape().
-                 i = match.end()
--                s = s[:match.start()] + s[i:]
-+                if i < len(s) and s[i] in "\\\"'$":
-+                    s = s[:match.start()] + s[i:]
+    grep -l X86 configs/* | ./tools/qconfig.py -s -d -
  
-             elif match.group() == "$(":
-                 # A macro call within the string
-@@ -6176,23 +6180,25 @@ def split_expr(expr, op):
++or::
++
++   ./tools/qconfig.py -s -D $(grep -l X86 configs/*)
++
+ To process CONFIG_CMD_FPGAD only for a subset of configs based on path match::
  
- def escape(s):
-     r"""
--    Escapes the string 's' in the same fashion as is done for display in
--    Kconfig format and when writing strings to a .config file. " and \ are
--    replaced by \" and \\, respectively.
-+    Escapes the string 's' for writing to a .config file. Only " is escaped
-+    (to \"), matching the symmetric unescape() behaviour. Backslash sequences
-+    like \\ and \n are left as-is, since unescape() preserves them and the C
-+    Kconfig implementation does not process them.
+-   ls configs/{hrcon*,iocon*,strider*} | \
+-       ./tools/qconfig.py -C CONFIG_CMD_FPGAD -d -
++   ./tools/qconfig.py -C CONFIG_CMD_FPGAD -D configs/{amd_versal2,am68_sk}*
+ 
+ 
+ Finding boards with particular CONFIG combinations
+diff --git a/tools/qconfig.py b/tools/qconfig.py
+index 5b85f9d22c3..9d59568dfbc 100755
+--- a/tools/qconfig.py
++++ b/tools/qconfig.py
+@@ -125,23 +125,26 @@ def get_matched_defconfig(line):
+         pattern = os.path.join('configs', line)
+     return glob.glob(pattern) + glob.glob(pattern + '_defconfig')
+ 
+-def get_matched_defconfigs(defconfigs_file):
+-    """Get all the defconfig files that match the patterns in a file.
++def get_matched_defconfigs(defconfigs_in):
++    """Get all the defconfig files that match the patterns given.
+ 
+     Args:
+-        defconfigs_file (str): File containing a list of defconfigs to process,
+-            or '-' to read the list from stdin
++        defconfigs_in (str or list of str): File containing a list of
++            defconfigs to process, or '-' to read the list from stdin, or a
++            list of defconfig names
+ 
+     Returns:
+         list of str: A list of paths to defconfig files, with no duplicates
      """
--    # \ must be escaped before " to avoid double escaping
--    return s.replace("\\", r"\\").replace('"', r'\"')
-+    return s.replace('"', r'\"')
+     defconfigs = []
+     with ExitStack() as stack:
+-        if defconfigs_file == '-':
++        if isinstance(defconfigs_in, list):
++            inf = defconfigs_in
++        elif defconfigs_in == '-':
+             inf = sys.stdin
+-            defconfigs_file = 'stdin'
++            defconfigs_in = 'stdin'
+         else:
+-            inf = stack.enter_context(open(defconfigs_file, encoding='utf-8'))
++            inf = stack.enter_context(open(defconfigs_in, encoding='utf-8'))
+         for i, line in enumerate(inf):
+             line = line.strip()
+             if not line:
+@@ -150,7 +153,7 @@ def get_matched_defconfigs(defconfigs_file):
+                 line = line.split(' ')[0]  # handle 'git log' input
+             matched = get_matched_defconfig(line)
+             if not matched:
+-                print(f"warning: {defconfigs_file}:{i + 1}: no defconfig matched '{line}'",
++                print(f"warning: {defconfigs_in}:{i + 1}: no defconfig matched '{line}'",
+                       file=sys.stderr)
  
+             defconfigs += matched
+@@ -738,6 +741,8 @@ def move_config(args):
  
- def unescape(s):
-     r"""
--    Unescapes the string 's'. \ followed by any character is replaced with just
--    that character. Used internally when reading .config files.
-+    Unescapes the string 's'. \" is replaced with ". Other \<char> sequences,
-+    including \\, are left as-is so that escape() can round-trip them
-+    correctly. This matches the C Kconfig implementation which does not
-+    unescape string values read from .config files.
-     """
-     return _unescape_sub(r"\1", s)
+     if args.defconfigs:
+         defconfigs = get_matched_defconfigs(args.defconfigs)
++    elif args.defconfiglist:
++        defconfigs = get_matched_defconfigs(args.defconfiglist)
+     else:
+         defconfigs = get_all_defconfigs()
  
--# unescape() helper
--_unescape_sub = re.compile(r"\\(.)").sub
-+# unescape() helper - only unescape \"
-+_unescape_sub = re.compile(r'\\(")').sub
- 
- 
- def standard_kconfig(description=None):
+@@ -1530,6 +1535,8 @@ doc/develop/moveconfig.rst for documentation.'''
+                       help='a file containing a list of defconfigs to move, '
+                       "one per line (for example 'snow_defconfig') "
+                       "or '-' to read from stdin")
++    parser.add_argument('-D', '--defconfiglist', type=str, nargs='*',
++                        help='list of defconfigs to move')
+     parser.add_argument('-e', '--exit-on-error', action='store_true',
+                       default=False,
+                       help='exit immediately on any error')
 -- 
 2.43.0
 
