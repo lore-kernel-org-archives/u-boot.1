@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1776FC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 18:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B005C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 18:31:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92FAF849A4;
-	Tue,  7 Jul 2026 20:30:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECD90849A4;
+	Tue,  7 Jul 2026 20:31:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="X+OQiUOA";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="lIbrv40Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F0FD849D2; Tue,  7 Jul 2026 20:30:57 +0200 (CEST)
+ id 2E93484A06; Tue,  7 Jul 2026 20:31:48 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B377B84942
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 20:30:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D5CF84942
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 20:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -28,12 +28,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  s=gloria202408;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
- bh=IlRjG6d86rhI/nNEYt+QBTf2vOBQC5+xHTTiFj14qC0=; b=X+OQiUOA1p7Pu0KlU8YVngJ8QL
- 7KsZXQPblMXkHA1fHMZ+HX6ioC/ejT3a62rZqb2+lvikXwJnz5nTqCqIX3k+4r4ZRUanuMoAOipe/
- I/OhOGG9rMtufmOcp2wTQOAHs6ncczgs3JLxmEYV3QnTbZqAZJ6t6mfWBYNULIqKra9/zEZXmA9Gz
- sHpE01gdfTvd2lS3yTxSdY2jRXh+OanZtew5GhwrR02yZGczM3fmW1ZerFI5yE1BFiUdC9+/+BFaw
- xR8LL2pRwGQsKM9dtIlCmTZ8e0r0BQQ4ztMy0IMSLwE+3dk+R73u8XfWYsiKqz2aSgswyLw21pMtO
- JFH5Li1g==;
+ bh=smROyZTsDEljS1lDV50JPhGMZ9d70KdY54v9yeBuvrc=; b=lIbrv40YY/2ANfXQAQ4D22DC9U
+ t3DQQcnTA+FzOzc3furUD06bo4dZFUrT8IzR5TfuvcREj/sTpSWol5emDq4aDtITqiCMOL8fMEbNB
+ 5kBbQL1MSwaBHtwF7T52fi80Ien4AVmMwuUyQYHdRYQskyujW0WfSyhCCXjMm+0YPOS0jb6YJ5B4Z
+ ZRntI+MyypEtzZmhUnOpSNEvGcKuz6TCRnrzijzIdOGt4htpNCEJv7lhs8BjPl7ih3bho6LNje+MJ
+ CzuoOrfGQGZ6LwAe69+1H//uyAc3JF2SCD95J44WLPx13Fxvi9msA5Xsg2gnTiHa9dcH1Ne74S5qu
+ Jws+X2pg==;
 From: Heiko Stuebner <heiko@sntech.de>
 To: u-boot@lists.denx.de, Quentin Schulz <u-boot@0leil.net>
 Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
@@ -45,12 +45,12 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  Philip Molloy <philip.molloy@analog.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Quentin Schulz <u-boot@0leil.net>
-Subject: Re: [PATCH 03/12] MAINTAINERS: add N: px30 regex to ARM ROCKCHIP
-Date: Tue, 07 Jul 2026 20:30:53 +0200
-Message-ID: <2042808.PYKUYFuaPT@phil>
-In-Reply-To: <20260707-rk-custodian-v1-3-dbc9c696e613@0leil.net>
+Subject: Re: [PATCH 04/12] MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 20:31:44 +0200
+Message-ID: <7964075.EvYhyI6sBW@phil>
+In-Reply-To: <20260707-rk-custodian-v1-4-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
- <20260707-rk-custodian-v1-3-dbc9c696e613@0leil.net>
+ <20260707-rk-custodian-v1-4-dbc9c696e613@0leil.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -70,10 +70,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Dienstag, 7. Juli 2026, 18:09:17 Mitteleurop=C3=A4ische Sommerzeit schri=
+Am Dienstag, 7. Juli 2026, 18:09:18 Mitteleurop=C3=A4ische Sommerzeit schri=
 eb Quentin Schulz:
-> PX30 is a Rockchip SoC, so let's match *anything* in U-Boot which
-> contains this string in the path.
+> PX5 is a Rockchip SoC, so let's match *anything* in U-Boot which
+> contains this string in the path. However, this matches a bit too much,
+> specifically the PPC-based kmsupx5_defconfig so we need to exclude it
+> explicitly.
 >=20
 > Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 
