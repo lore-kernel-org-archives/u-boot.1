@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33907C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 11:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197C1C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 11:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51F2A8496E;
-	Tue,  7 Jul 2026 13:36:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E37A84A0A;
+	Tue,  7 Jul 2026 13:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KXt7SEMU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kiBpVuiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5665849BA; Tue,  7 Jul 2026 13:36:11 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id DC20880087; Tue,  7 Jul 2026 13:36:12 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A30580087
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 13:36:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B71C784979
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 13:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-43bfe209e45so1851569fac.0
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 04:36:09 -0700 (PDT)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-6a116bd18ebso2041608eaf.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 04:36:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783424168; x=1784028968; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783424169; x=1784028969; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=dsju8TfV58bHj19zKvy+JC4HDh7uQre5ZfH31b9lfjI=;
- b=KXt7SEMUFhTdkFELdjsyQOc03ZlVYg+ybGiTnNo5yJmXNXEv3YDGOi7pRuqn8f1xkC
- NzRG+C4tx1Pk2M4eUzLOcmRNFeVFtSHI1l19IpOZL0aAWift36St5RkIxb8aZjkXpi7A
- sGtr1vj19RpqXS6c4MsIlOuC86DPbuvswzBDA=
+ bh=DxIwGsUoyrQ4PwlqCU9eTkk966Ts+8lzZx35enILK+w=;
+ b=kiBpVuiRStsZS+K0XsQtTdymLGLweZ0S1auAm4q1Ua+w8uDSZFmLsBKfB9J0Xdo2am
+ DIG1/TDfpOkvpu8zKzI5B9w8k7Y4XHAPxw9dtaKLqtbt0DX6Ua3pvJEWT4cm8GTjl3e0
+ LdSPDBioZGEkG6GLQcYx2hRjr0H2q6ZKdjarM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783424168; x=1784028968;
+ d=1e100.net; s=20251104; t=1783424169; x=1784028969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=dsju8TfV58bHj19zKvy+JC4HDh7uQre5ZfH31b9lfjI=;
- b=N73FoFy7oGeTw3bB8Elde2y200vDpM08lG5JjDeOh3yjsE0tj4iar+8Oa2y9URYoOB
- oWAxfSXvK82y4zbcZzhEeC/KjthTgq8clmizXPQhrdSvtfnBJbCUmd1uBfrAduRam5UR
- sIttoEPfO4Z/2hfYWAowrVuaAj1asWt/zLL5r6QMjzUFcB4p4Jpa811jWTKf3KunQPoD
- 4Q+8vXqe0bOcUeqHhTOihPYEpu+wgJeQF4j2xjLyCk4zVS8loI7GQ4m33gxeRdQUWZt0
- Elvz04TFfDJcVthwmx0IJT/yKdcqM8Fl2GvqBrqWJUqb6sUMqK/iXIk2XxqrXLhblDVZ
- +Sdg==
-X-Gm-Message-State: AOJu0YxzQfu1J/Jopa1KAdNNNOk1JfwwDuZupq6PCPWPm4hIP01PiYEV
- y/ATOD01pDccvb5ITrfF+quONzacs5pmSLiO5IQAkFpl4HAfY8kYLQDXgVQ8IpBbhPr8tvmeGaK
- rTGhfQA==
-X-Gm-Gg: AfdE7cn2a90X4SxbcUzqmH4ZmkSXVl6HsWelcvJh/FM8ORGwQa2POyKAJopkIK/4A9R
- pP2cc33sMjoxoSlu0JIFtgleMEvjc1mGLAtADTHk+EyGvVkJDguDB8dKK+/ATPW5sW58WR9gBxS
- dAhWs0inGMtmbZZ8pq6CilydjP+9qjMTIAnJ9EvAcXXIeFsb/I0ryJO6fNUzlLQkDoizP6u+H35
- iTkIvpfDdAVknsI+5rt8y86Tvb/v6HrarKesJKJHMxIZp+b+Ki5OIw9GvJtbS2hMvdcbv6ygq0U
- 2qFAynQJ0T3kW0BrifwX4gV6BGN9MROkHLM1xXQB1VUqAhikTvRrw4zUcYlxsZtGWacBPi+JTS/
- 1GO+cneZQ6h/Xh26JRugitdIYcXRlsWxSaygfRFNFJj6EnxmyHJifwLaMveSop8q4LmSirZoqta
- 0uZeCIZIA=
-X-Received: by 2002:a05:6871:3402:b0:448:558c:d8cb with SMTP id
- 586e51a60fabf-451064d6a57mr2940786fac.41.1783424167795; 
- Tue, 07 Jul 2026 04:36:07 -0700 (PDT)
+ bh=DxIwGsUoyrQ4PwlqCU9eTkk966Ts+8lzZx35enILK+w=;
+ b=QIe6dBlUR0ZoreGFYpwf6RrG6OAsepLJ0Li9lM9VbsCJ7B3d37p8LckZ9DcF3WI9Tc
+ rNC1tN8xImaRMAYOk3UO9ANT1xjmzV8mHYVmux1uftlJj6zeJi32kG0CJggnVGUUGmWC
+ Y7eeW2u2WrSyr0/IgrwX5bYmOPdQqRx3F4pIPsydj6joURG9PdwMLqADRvSysQer5Ztt
+ oHBSsSW4N9aFjAft0AEqzWylKdwp0bMk7KS8QgGYyEnK9Uik0zlUxvs6qAl3adeODp/V
+ tExBSrgTPmLpADW+VXS1Hvt9q8t6sC/evfbrN2auYq6qNXG6JOK2VNSjYV8HEnIUJCxK
+ 1w7Q==
+X-Gm-Message-State: AOJu0YyKDGvHk048VzDGX/PisdqdkYOCRjOlYU4rousN6t7jBuSiLdlu
+ qh/tcAjW+si5qfHPNYgfY4LsTFqyWBuiCJ2WJQHM2bhTC93UD+Wr4js/oJBbRvw0Nx3oLZp8MNo
+ vogqIYg==
+X-Gm-Gg: AfdE7ckGopS/bOh8fi3CqQA5yeE9nDu8PbAu5CTz6WosD3gfqKLIaIMcifzrRx2yRCO
+ tVZnS4eJJZ0vGJMdjCfJEiG0cVuzz5GGYfnUwY2DvBdpsQ1NqwtqPwFqrPVvQPrdjU8DH8gh45V
+ t5cKvDqS7Xqh/fmdhDf6Xngy3spPQzfJSRlRDsDhgWG+CZCGxRGnZfE7Hu0HjvKILwtig7XhDbL
+ YgQdu52AQuX3iW0jxh6NOjrH23WUL0czUhvmWpG6RMV17dD93Tf1Bn1AhHrfJqLPdt+Ptk01nWn
+ NcFH9muXDWCQ5CqXGdNr3bFTmnKJ+1tHYXoKUpWpyUNIw+w6MvaphoyXTz394gsBZiOWVa8W+K1
+ Yrf1HRRw8vurXp3Jos04SDAG2gjVpQ12ETuGv7kIjJ/DSzWPI0VibYybfB4/c8t6EfLELsvIUYS
+ 2jBWZR3Qg=
+X-Received: by 2002:a05:6820:8c2:b0:6a1:7f97:6e58 with SMTP id
+ 006d021491bc7-6a35559ce63mr3117669eaf.43.1783424169482; 
+ Tue, 07 Jul 2026 04:36:09 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb6691d1sm13440825fac.17.2026.07.07.04.36.06
+ 586e51a60fabf-44cfb6691d1sm13440825fac.17.2026.07.07.04.36.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 04:36:07 -0700 (PDT)
+ Tue, 07 Jul 2026 04:36:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 03/13] qconfig: Ignore defconfigs containing #include
-Date: Tue,  7 Jul 2026 05:35:04 -0600
-Message-ID: <20260707113538.3382145-4-sjg@chromium.org>
+Subject: [PATCH 04/13] qconfig: Refactor to allow buildman to read the database
+Date: Tue,  7 Jul 2026 05:35:05 -0600
+Message-ID: <20260707113538.3382145-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707113538.3382145-1-sjg@chromium.org>
 References: <20260707113538.3382145-1-sjg@chromium.org>
@@ -94,74 +94,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Running "tools/qconfig.py -s" will re-sync files with #include in them
-and so un-#include them.
+The qconfig tool has the ability to search for CONFIGs used by boards.
+Refactor the code slightly so that buildman can obtain the database.
 
-Ignore these and mark them as failures.
-
-Report these files in the summary, along with a count of files which
-synced OK.
-
-Link: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/28
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/qconfig.py | 23 +++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+ tools/qconfig.py | 36 ++++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
 diff --git a/tools/qconfig.py b/tools/qconfig.py
-index 9d59568dfbc..a01481de207 100755
+index a01481de207..efdb0a0f472 100755
 --- a/tools/qconfig.py
 +++ b/tools/qconfig.py
-@@ -32,6 +32,8 @@ from buildman import bsettings
- from buildman import kconfiglib
- from buildman import toolchain
- from u_boot_pylib import terminal
-+from u_boot_pylib.terminal import tprint
-+from u_boot_pylib import tools
+@@ -1118,23 +1118,22 @@ def defconfig_matches(configs, re_match, re_val):
+                 return True
+     return False
  
- SHOW_GNU_MAKE = 'scripts/show-gnu-make'
- SLEEP_TIME=0.03
-@@ -551,14 +553,25 @@ class Slot:
-         orig_defconfig = os.path.join('configs', self.defconfig)
-         new_defconfig = os.path.join(self.build_dir, 'defconfig')
-         updated = not filecmp.cmp(orig_defconfig, new_defconfig)
-+        success = True
+-def do_find_config(config_list, list_format):
+-    """Find boards with a given combination of CONFIGs
++def find_config(dbase, config_list):
++    """Find all defconfigs which match a config list
  
-         if updated:
--            self.log.append(
--                self.col.build(self.col.BLUE, 'defconfig updated', bright=True))
-+            # Files with #include get mangled as savedefconfig doesn't
-+            # know how to deal with them. Ignore them
-+            success = b'#include' not in tools.read_file(orig_defconfig)
-+            if success:
-+                self.log.append(
-+                    self.col.build(self.col.BLUE, 'defconfig updated',
-+                                   bright=True))
-+            else:
-+                self.log.append(
-+                    self.col.build(self.col.RED, 'ignored due to #include',
-+                                   bright=True))
-+                updated = False
+     Args:
++        dbase (tuple): Database from read_database()
+         config_list (list of str): List of CONFIG options to check (each a regex
+             consisting of a config option, with or without a CONFIG_ prefix. If
+             an option is preceded by a tilde (~) then it must be false,
+             otherwise it must be true)
+-        list_format (bool): True to write in 'list' format, one board name per
+-            line
  
-         if not self.args.dry_run and updated:
-             shutil.move(new_defconfig, orig_defconfig)
--        self.finish(True)
-+        self.finish(success)
- 
-     def finish(self, success):
-         """Display log along with progress and go to the idle state.
-@@ -1664,7 +1677,9 @@ def move_done(progress):
+     Returns:
+-        int: exit code (0 for success)
++        set: matching defconfigs, without the '_defconfig' suffix
      """
-     col = progress.col
-     if progress.failed:
--        print(col.build(col.RED, f'{progress.failure_msg}see {FAILED_LIST}', True))
-+        if progress.good:
-+            tprint(f'{progress.good} OK, ', newline=False, colour=col.GREEN)
-+        tprint(f'{progress.failure_msg}see {FAILED_LIST}', colour=col.RED)
-     else:
-         # Add enough spaces to overwrite the progress indicator
-         print(col.build(
+-    _, all_defconfigs, config_db, _ = read_database()
+-
+     # Start with all defconfigs
++    _, all_defconfigs, config_db, _ = dbase
++
+     out = all_defconfigs
+ 
+     # Work through each config in turn
+@@ -1161,10 +1160,31 @@ def do_find_config(config_list, list_format):
+             has_cfg = defconfig_matches(config_db[defc], re_match, re_val)
+             if has_cfg == want:
+                 out.add(defc)
++
++    result = {c.split('_defconfig')[0] for c in out}
++
++    return result
++
++def do_find_config(config_list, list_format):
++    """Find boards with a given combination of CONFIGs
++
++    Args:
++        config_list (list of str): List of CONFIG options to check (each a regex
++            consisting of a config option, with or without a CONFIG_ prefix. If
++            an option is preceded by a tilde (~) then it must be false,
++            otherwise it must be true)
++        list_format (bool): True to write in 'list' format, one board name per
++            line
++
++    Returns:
++        int: exit code (0 for success)
++    """
++    dbase = read_database()
++    out = find_config(dbase, config_list)
+     if not list_format:
+         print(f'{len(out)} matches')
+     sep = '\n' if list_format else ' '
+-    print(sep.join(item.split('_defconfig')[0] for item in sorted(list(out))))
++    print(sep.join(sorted(list(out))))
+     return 0
+ 
+ 
 -- 
 2.43.0
 
