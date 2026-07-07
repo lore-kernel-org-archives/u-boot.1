@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E329C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7CBC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:10:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA23684A06;
-	Tue,  7 Jul 2026 17:10:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3288B849B1;
+	Tue,  7 Jul 2026 17:10:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cd9tN+qJ";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="HFPh11fT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08BAC8494B; Tue,  7 Jul 2026 17:10:31 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 7E92084A0E; Tue,  7 Jul 2026 17:10:32 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09C588496E
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:10:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4151C8497A
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:10:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6a149bfb2a8so1929409eaf.2
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:10:26 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-448df16ab34so1609052fac.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:10:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783437026; x=1784041826; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783437028; x=1784041828; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=W/h/wCaTAst9onv8h2SkLi2Ez1dGXqVJPL18bRqsAFo=;
- b=cd9tN+qJGEhsFa26CyCAkfOkorPDImAkQAQ99jkG2bCZZH9mBap7wGCiSNh1D/uaJv
- wmi/F09G2cme1+ZvwYeEGo43HBTNBZv/DafXIGD8ALs1UFIli2bZMGpPGr/CH+y5uDtS
- gFA6elFw+Vkeqc63V0aq/ICqRx47s+2sawzZjyNIS3bscs6k5XRcUCeXYgBpl2wRtTep
- nhHvGNsaKx8iZmgawYhYlJ8g0uLAlei5NuPUcglC4IWFMpcQW0lzpoI0PX9egEHtql7d
- aMCPVKJzYEQhd29ehAQ/hn6MR1KfZ4pnuRaj4qhMMTb8TDyN90h+H7U7MxLwoKKe8P8s
- fXcA==
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=bRxgSL/bANz7lSyeIlPLX5cTUszSihlw//SvgeN3qFw=;
+ b=HFPh11fTEm0bHurxkZI5crMTfuncExqz1Hy/khpp660JrTKocBH5qznX8HswC37NAA
+ C229gg1CfXt6tVM4OPiA+GIyOnBGtifj3/6wPwuIFw1yZiwdWbI1P7KTF3NZceVE1ozO
+ HFg3GtvN0Efk6QeAwhFC3N2eZmZNxVHUkX0M7b6c+g94UGTGC2pwwWHKbgBbpus3Vptk
+ UFi/Xrf141iuHubtVIKcubHFNU0CKd2uT0/2AkCOaxj5qEbNTf8SDXCMkwH+jBf3Sara
+ tffGrGviYXyalYQCOx65b5bDgUFvDwTh76obi/bMl6PrfN/8jnzxJ3fi2kVj4K8+R3s/
+ StKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783437026; x=1784041826;
+ d=1e100.net; s=20251104; t=1783437028; x=1784041828;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=W/h/wCaTAst9onv8h2SkLi2Ez1dGXqVJPL18bRqsAFo=;
- b=fhlLu1UsHeXg/QUC3X+CFw4q/YNN5km0HsON4IlXO4RvoV5GpnRzxwi4+1btKHeI1t
- Icm6+FJ5MXeMDPokzHTD1pNmQOyoUNOR8hKFmP1jBnP4EHWtxPlVFj4M6gdqnEdXfq85
- 832tsnMXdfEz32SbvlgdSqKiAhD/v4Ccfzp1ypvFH/JAVHEtJECWwO7j+iofJYcU9LO6
- BtLrtVUyr5eCM19oCZeVpY/8fduZaQIQLM2OTgQ3HF3OMIDnQ4UEA0i2CL2LOVsmyw16
- AeO4bXnJosaL5C5pFi92ToE8V0NGRgJRb7LgMlsdJwCa7bOxAoiwnxpQIMEKsMHRK++8
- sFoA==
-X-Gm-Message-State: AOJu0Yzte5gI6IZC9tzGeH+lI6vfesHsuz1PQuP0qxAYQGQaNWDjd6Ag
- +UIDd7V9ISp9zMxbAH25kgZV8HAHTEn/hurOHqBHzJOlA+LI0azcKI2KwKtUlrvWRqA=
-X-Gm-Gg: AfdE7ckESW7EDzRWBTBic4P1pd17xbYp3OTVuR1WY0vmD5p8IMM8sMuZIJHRzreS4nI
- pfIHkKK9GJFJpRRFdsLhWK0EoB1n3vux4a2tghXAQ2wwqqbMCTvBT9TjRNovZuYKshIbuyInbDw
- 3DB00HPC4FbfLyvdwMe+xXlAxJ5SrLl6RrQSO5R1u2IIJ9yofh8ibuZD+BZ4BtaVm1ZZWgODof5
- 41vZ+e/83tO61YpdNGncuWkbg27rbranSv6m1UFbQJbnkHJ25MwTZBAOzxnJ7dccJ273HSRAEXW
- alouio/dkpU8QQduVQn8KiEzNL0nBVqJUZNPnttjDXlP6d3RwnSsjPAUJM0DPX2EWVuROnm/uGl
- Yf/Rx8HTbqoTWA1z+7YaeypvxQxGM860sU01qbDUbaAWLKNx6AiPanKBLNddE2k36TloU3KCaAj
- 4uxPv0YxqsjfjEb5IX9g==
-X-Received: by 2002:a05:6820:99a:b0:6a1:7cce:a3a6 with SMTP id
- 006d021491bc7-6a3553d62bdmr3332528eaf.54.1783437025624; 
- Tue, 07 Jul 2026 08:10:25 -0700 (PDT)
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=bRxgSL/bANz7lSyeIlPLX5cTUszSihlw//SvgeN3qFw=;
+ b=S8Q8c8U7IPcdlda5W4BpQF+cINQNj1O9ta2LrwX8SosCurFksdF+zwhxTd5b8bP1fj
+ X7SXTIdedgG1fwGHCf/ce2z6cYMBrCQ/vYky2ySGiGTyt//z3YucYP/W+nLfQj6J9cLu
+ 1ZiiSUWJ/2UimRCURHzrI2+ASGgyb1XYxFUUxKPWC9GX+yU2why6nOwO46qbCMAftKkY
+ JybYRqaoxF5BGDQcOjx+p7YPrUA01ZdqniXAHE0EH+w+22ZtxttK1lB1GK8P6auRcjoq
+ B9bTDGBt5khRgX2SYQXLLFW2cVpNUoUXq5CLWUwZnI+59LpffpTRYGL1CyloxkP1jSb9
+ 4rMg==
+X-Gm-Message-State: AOJu0Yxx9WLlMVxMMSPmLlu14TL/oiB2mgTkknKy9k4+LdO6wyBbfSlZ
+ S29wDpVSqDkLJFqNSjwx8a+EHMn3iVQRKsqr9mtFK799+wG7YTDS0dO3HM3CXkDInw4=
+X-Gm-Gg: AfdE7cmTorYWjswT/f/JIbN+RJIbzDhLdO6GLvEaFTl4P2rUZ77OPYczf2GvYjb6gGo
+ FCdny+xF6oiqSzPx8Bi/zV1Fz8wbKlm+TsfGNAy+p7KBTm0Nvv3ERF+UNP9oBNnCokFDn7DKbUv
+ +ZLGNe1UtbjJH71V3+gcrHrJsD8rYKKSzISW6csVXAMjpNvGXnvCzMA/mpTKuc3gL1JMI5cA54+
+ 7qzYcfgnQiLsigoEAuY6NcJEIog+cYF1C4CtbCF6y+jNrzb3USySx3g8sy7Se4QCohrvCcw9Jsm
+ YkaMjnaW7yH2o5iKc4HkDCWbfeuPkUFNDE/ghy7rZyOPU3lKMRpFgXHYs2NJMvPTKNCQpZZ965P
+ F94xFTilxceAsakzmkeHcZofXDbWxlMtmQT4WqJelx82NqLFXRyTENzYEAZ4KE0Z2Ibo5jZTtg+
+ vpcVQToj0Z6FwFDO5jzA==
+X-Received: by 2002:a05:6870:2dca:b0:448:558c:d8b4 with SMTP id
+ 586e51a60fabf-4510607eedfmr3749223fac.42.1783437027901; 
+ Tue, 07 Jul 2026 08:10:27 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7649:dd46:9d68:b169])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb1d011asm14846352fac.8.2026.07.07.08.10.24
+ 586e51a60fabf-44cfb1d011asm14846352fac.8.2026.07.07.08.10.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:10:25 -0700 (PDT)
+ Tue, 07 Jul 2026 08:10:27 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 07 Jul 2026 10:07:21 -0500
-Subject: [PATCH 01/24] clk: mediatek: mt7622: set parent flag for
- GATE_APMIXED()
+Date: Tue, 07 Jul 2026 10:07:23 -0500
+Subject: [PATCH 03/24] clk: mediaTek: mt7622: add clock tree type flags
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-mtk-clk-parent-lookup-improvements-v1-1-65d24cc0d569@baylibre.com>
+Message-Id: <20260707-mtk-clk-parent-lookup-improvements-v1-3-65d24cc0d569@baylibre.com>
 References: <20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com>
 In-Reply-To: <20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -90,16 +87,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=877; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2151; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=+rGURoIXzGmZb1CpOtNKCyPXsCrdMEwzYCgvp1EBjJo=; 
- b=kA0DAAoBwswgAf8Bj8AByyZiAGpNFjaj1RQSdztcVAWES45LyE3ONRFPuRGqhm4TvRaJHhHn/
- okBSgQAAQoANBYhBOwY2Z5iDoPWnNhomMLMIAH/AY/ABQJqTRY2FhxkbGVjaG5lckBiYXlsaWJy
- ZS5jb20ACgkQwswgAf8Bj8Cp2Qf/aQu446EodUr+71uxN5DL3Jfi0jAbh5U2RZKdeg9AKNMX/oG
- TmXv070RjGDK4/fUexHKhfcy8tGeqITzFp43ZS+JfKJWoLKrep8romHCQzZTCyHiu5mK6Vv2/LV
- q8god8CDg/dcvihTeta+UDZhJPmzlmBxad9pTs913LPZ4apesUBXNSXfNmt2ykcKn8wh5IIAuPw
- SThIJxSmQEHwzjCGA8QHk+qALevKCtnm95CHoMO4kDkxAwZ8omCppW3Xq1rdwX1x+Q15Cb4kFda
- epwd/dKgV/JZym+fVRDbYEaeLlEYrnQaCFU5/1dwdOCKazZNyq9u8zYUFKrIEoj0YDWvtA==
+ bh=QrW+amW7ykQRoxj4FuZFWDgrLriYJ1jfszwF7axFC+Q=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqTRZETv6c+dLpd03R1qnO4rMw6SrETK8U/iIJb
+ oQEeCLu7x6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCak0WRBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AwuwH/iFToau4Z/xj5PcNHnb6l9zVYgqpVFs3XHTmx2y
+ HeiP3DPDx1Str7MQuON6KelhUzxYgroEnUGxm/swa0T2dn8xTiq0DLGM25LNMfJoVKb9xpFPN/A
+ oHnfdP38b1bTruUwnAoiUfKPyvYzuQrNnDITF1O+bgiKBpOkeMos/PcvGpkP3Mqq529VkTrrffN
+ yKHb+xTwqBzqSSz/y4wtJDDiQE3+iCTS3czof1MuH3OLPVjM01NCPxPAJlRMQtyl8Df53l5oC4X
+ KS8YsUBwDmYrsyX+Z0ljQgCIZcdEO+u5ycygVqx62RmkpSx2GXyDNFVXAwcycwh/yl2fvRn/gtJ
+ v9tw=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,29 +116,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the parent flag for GATE_APMIXED() clocks.
-
-By having parent flags on all clocks we can simplify the parent lookup
-process. This is the only mediatek clock still without this flag.
+Add clock tree type flags to the mt7622 clock tree structures. These
+will be used later for parent lookup.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7622.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/mediatek/clk-mt7622.c | 25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
-index 79315912fd4..60f4a872a66 100644
+index 60f4a872a66..fd51173a701 100644
 --- a/drivers/clk/mediatek/clk-mt7622.c
 +++ b/drivers/clk/mediatek/clk-mt7622.c
-@@ -85,7 +85,7 @@ static const struct mtk_gate_regs apmixed_cg_regs = {
- 		.parent = _parent,			\
- 		.regs = &apmixed_cg_regs,		\
- 		.shift = _shift,			\
--		.flags = CLK_GATE_NO_SETCLR_INV,	\
-+		.flags = CLK_GATE_NO_SETCLR_INV | CLK_PARENT_APMIXED,	\
- 	}
+@@ -613,6 +613,21 @@ static const struct mtk_clk_tree mt7622_apmixed_clk_tree = {
+ 	.gates = apmixed_cgs,
+ 	.num_plls = ARRAY_SIZE(apmixed_plls),
+ 	.num_gates = ARRAY_SIZE(apmixed_cgs),
++	.type = MTK_CLK_TREE_APMIXED,
++};
++
++static const struct mtk_clk_tree mt7622_topckgen_clk_tree = {
++	.ext_clk_rates = ext_clock_rates,
++	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
++	.fdivs_offs = CLK_TOP_TO_USB3_SYS,
++	.muxes_offs = CLK_TOP_AXI_SEL,
++	.fclks = top_fixed_clks,
++	.fdivs = top_fixed_divs,
++	.muxes = top_muxes,
++	.num_fclks = ARRAY_SIZE(top_fixed_clks),
++	.num_fdivs = ARRAY_SIZE(top_fixed_divs),
++	.num_muxes = ARRAY_SIZE(top_muxes),
++	.type = MTK_CLK_TREE_TOPCKGEN,
+ };
  
- static const struct mtk_gate apmixed_cgs[] = {
+ static const struct mtk_clk_tree mt7622_infra_clk_tree = {
+@@ -640,14 +655,6 @@ static const struct mtk_clk_tree mt7622_peri_clk_tree = {
+ static const struct mtk_clk_tree mt7622_clk_tree = {
+ 	.ext_clk_rates = ext_clock_rates,
+ 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+-	.fdivs_offs = CLK_TOP_TO_USB3_SYS,
+-	.muxes_offs = CLK_TOP_AXI_SEL,
+-	.fclks = top_fixed_clks,
+-	.fdivs = top_fixed_divs,
+-	.muxes = top_muxes,
+-	.num_fclks = ARRAY_SIZE(top_fixed_clks),
+-	.num_fdivs = ARRAY_SIZE(top_fixed_divs),
+-	.num_muxes = ARRAY_SIZE(top_muxes),
+ };
+ 
+ static int mt7622_mcucfg_probe(struct udevice *dev)
+@@ -687,7 +694,7 @@ static int mt7622_apmixedsys_probe(struct udevice *dev)
+ 
+ static int mt7622_topckgen_probe(struct udevice *dev)
+ {
+-	return mtk_common_clk_init(dev, &mt7622_clk_tree);
++	return mtk_common_clk_init(dev, &mt7622_topckgen_clk_tree);
+ }
+ 
+ static int mt7622_infracfg_probe(struct udevice *dev)
 
 -- 
 2.43.0
