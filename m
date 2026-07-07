@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48B6C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:34:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C687BC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E194A84AE2;
-	Tue,  7 Jul 2026 17:33:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75F5184B1F;
+	Tue,  7 Jul 2026 17:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AGl9P1VO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aysS3TUf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28B8684AF7; Tue,  7 Jul 2026 17:33:08 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 19C3084AF7; Tue,  7 Jul 2026 17:33:11 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D7784AFF
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:33:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 612B184AFF
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7e9f6e7846bso1938880a34.2
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:33:05 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-44ae264a785so2177093fac.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783438384; x=1784043184; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783438387; x=1784043187; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=+XguByM1sd2w/MDNKH31ewO5PtL05j2AeF4JSN9/FyI=;
- b=AGl9P1VO5zzdOj2yyGhgc7O9dbuljsI7OrexSsLzHOa7Zt/mgv/NjBnoHNWInRBfOJ
- YEmbi+FtnKVdPq2CjIWK/XUV5XFFviODViFUNU88EzAYzpO4SsU8V8Lu5MpokEMUR6o0
- 8CLpQQrFLLlwx3ctCZbAQ1W7jAZUMMhpAyWuU=
+ bh=ZAVNyJy/MTrAYSjqq7UzL2nDQ/NylNSTKYUntIqi+lw=;
+ b=aysS3TUfEeXR8D45ATn3aM42qojRPE2b4RwcuvI2tRNE+onmfof9IgPu5bHnNt86GZ
+ 11NEn7P1dgK5feI51k2NJjXciSnWRBf19k/9QJWR2WBfhqWgs1+7COwm31zdm2cFPOOj
+ t98XB91YhBsHSeZx9BeHMxI2wja6CnECwBv8o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438384; x=1784043184;
+ d=1e100.net; s=20251104; t=1783438387; x=1784043187;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=+XguByM1sd2w/MDNKH31ewO5PtL05j2AeF4JSN9/FyI=;
- b=I9EG3/Y7Jf5Ek1RmFHavh4PVR1VEO0Z3HhvAPrqUaMZGAW2tk9ivLkfJVwSwaSyz7H
- pl5La5TgZs/0096sGM652UWcgf32xNl4KaLUq8Q72KFnq/e1L/wgQILY7+y2VoMPVlLc
- IWUKcM0MYEtWPrAbdO2SHQ8IyVyyW62yUB0x01rx6Gr7sx3z72/DvnB+nNkQkJWKM5y/
- 2ltCNZjwV3OJmOz2bPyUZ8dHQgHo7P95aCwbbukeoZS2r5g9AshNO1lRDKpdX64+vpyA
- z+NZuOMMrpA3zo5RedlCyZdrMXfZOODVzmv5QeVqauFEFIlZGduz42JSsvN4jdAIoTjg
- yJNw==
-X-Gm-Message-State: AOJu0YyKU2e3kRWiNhkjoWm/pM9Nemfwnu0u/cBf5X4Hej5LWhmEKa+k
- JHFHN8IXcHSd809fEopyy7JZ19h9I4cTgK3UhGc3YoKd6twTNISA273YyFmEnuu2IOsp8Qhusb5
- JK+NgyA==
-X-Gm-Gg: AfdE7cnFF3xTcpgJlI5PV553dYvC1gLVhhMifUOOl13/AT/uKK1MET/7+JMkwjtPEhx
- hCT2xlMpkBamwnKwliacK8FkSsTTcOaQhPiCU4W4wY0dm5d5CuAA2ygsb37YIMXfhNkbPwIZNu+
- eBua7KCWXOfx0o/9M6TfFkx/Kih7tixRZt+QiXopOPALJJDjin1n/eGJ5fKU6Ai/HNZHZcYGsXW
- GBycBe2r2cxZEcBTsHrFrc+iB7/U5flH7BkxNKsQIsvXMkqajWMU769v1wPLvngtsM8igW4VgRX
- G/bJEw4ixjhM9rige5EXS4ms1Izex+BYjbwlDCoQA1o9nrb+KR4sga1okZJmKD71RNEZLTEGOBY
- q9aXwr5Hew7CXhH9TZKa5P/3iRoiXIvWe9rMmCGZdoOj+7iYsN9mJjdieVYDU0g/92k818q/+T1
- mdHip3KP0=
-X-Received: by 2002:a05:6808:1455:b0:493:b20:d7cb with SMTP id
- 5614622812f47-49fdbe40292mr3396434b6e.1.1783438384064; 
- Tue, 07 Jul 2026 08:33:04 -0700 (PDT)
+ bh=ZAVNyJy/MTrAYSjqq7UzL2nDQ/NylNSTKYUntIqi+lw=;
+ b=gxEj6uUvlBl7e2UDv/IO+nTWDRSGzh0wjqjSTJsFljvwokD2D2l4VEezjmj0DBaWKe
+ hu4mxZ2uYdTam4G+27dbwbZbB6eV1zmRc9ihXQSbjQcgaqCJtKgSceL0oclxV62TyQ5O
+ kX+8VNoBJIAdLdW7OHuxcE4xr04/IcLclnQ3eqOGKPm3sO8RPp/vblTxeRgcPsbRAOSH
+ /a7K6gF3ZNB3YF2ZRul77EYvg8fkzij9amBUtA7TeEydcaeRNn6L2emvPYn03K0anYWl
+ uUohrrumnaMrbwlEz4aRyXxDd2bnvzNdUGxVguSbNgeKB2InMDIFF0dpEb3Xlri4yl7Y
+ 7qeg==
+X-Gm-Message-State: AOJu0YzoECx4dLKD2bHGq7ugqcH9/RXhcycZJAFmGZyc26DNvKH4xg+c
+ ueVrPnwa2g4pCQQ4AR0xo28Da1TIWRdQSz/xCW447z2DABDaBYw1WKHrQnkyUdpw2SftNB+SP6y
+ LKYwzkw==
+X-Gm-Gg: AfdE7cmnQIkJe/H9RhkPZstLxr1lhCOouPL2wdL3Hs0jgEcQ+D8lo5IWWZ9erTl1RjN
+ 7kM+8u4S0qoDjn6IVs8sCtYxJvd2rzonlFaxwV6jP5cSM3dK03aLEt6L3ieHV2N0fI+kCHhVx7h
+ 4Xl4xalFw57Wf30Wn8wubFnzUtIJTx0aB8c2cFP6bKgtGDQtziMNktWa25k/oZIvfsyAXC3lWu7
+ EaXwpnvDf/zpLEkQtjFZdnci+eNYPQzLLGutVi+8nV1AUvfFzTsvXJ3ZR7jZnsalIkeW4rjcFaZ
+ 1xSE4+eTb3w3UfPicQZTdnagUTKtaEZda2cz0CIk2KG7CTHIvzGlnu0h+fA6YoZxmQQuqUkqwTn
+ G4/JCKYhQpx4KCYhYIj2E/5/KiGEJLf9YFG1WQqB0aaVPy9gDfw/wR5cX0Qdfl3zRH1OFkrheAL
+ DwlqvLeDg=
+X-Received: by 2002:a05:6808:524a:b0:495:e677:1332 with SMTP id
+ 5614622812f47-49fdea0d521mr4106661b6e.36.1783438387008; 
+ Tue, 07 Jul 2026 08:33:07 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.33.01
+ 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.33.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:33:02 -0700 (PDT)
+ Tue, 07 Jul 2026 08:33:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+ Chris Packham <judge.packham@gmail.com>, FUKAUMI Naoki <naoki@radxa.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Johan Jonker <jbx6244@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Niu Zhihong <zhihong@nzhnb.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 13/15] rockchip: rv1106: Add SoC support
-Date: Tue,  7 Jul 2026 09:31:11 -0600
-Message-ID: <20260707153135.2048115-14-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 14/15] luckfox-pico: Add the initial support
+Date: Tue,  7 Jul 2026 09:31:12 -0600
+Message-ID: <20260707153135.2048115-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
 References: <20260707153135.2048115-1-sjg@chromium.org>
@@ -101,388 +104,428 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RV1106 is an ARM-based SoC with a single Cortex-A7 32-bit core
-which integrates NEON and FPU. It contains a built-in NPU for AI
-related applications. The RV1103 is a package variant of the RV1106
-with fewer pins.
+Add the initial support for the Luckfox Pico Mini B board, which uses
+the RV1103 with 64MB of in-package DDR2 and a 128MB Winbond SPI NAND.
 
-Add the core SoC support for it: the Kconfig and Makefile entries, the
-boot0 hook, the SoC init code (firewall setup, watchdog release and
-the pvtpll reboot workaround from the vendor tree), the syscon driver
-and the SoC u-boot.dtsi
+The board boots from the SPI NAND, or over USB in maskrom mode using
+the u-boot-rockchip-usb471/usb472 images, in which case U-Boot runs
+entirely from RAM. The console is on UART2 at 115200 baud
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/arm/dts/rv1106-u-boot.dtsi               |   4 +
- arch/arm/include/asm/arch-rv1106/boot0.h      |  11 ++
- arch/arm/mach-rockchip/Kconfig                |  15 +++
- arch/arm/mach-rockchip/Makefile               |   1 +
- arch/arm/mach-rockchip/rv1106/Kconfig         |  28 +++++
- arch/arm/mach-rockchip/rv1106/Makefile        |  12 ++
- arch/arm/mach-rockchip/rv1106/clk_rv1106.c    |  31 +++++
- arch/arm/mach-rockchip/rv1106/rv1106.c        | 118 ++++++++++++++++++
- arch/arm/mach-rockchip/rv1106/syscon_rv1106.c |  19 +++
- board/luckfox/pico/Kconfig                    |  12 ++
- include/configs/rv1106_common.h               |  13 ++
- 11 files changed, 264 insertions(+)
- create mode 100644 arch/arm/dts/rv1106-u-boot.dtsi
- create mode 100644 arch/arm/include/asm/arch-rv1106/boot0.h
- create mode 100644 arch/arm/mach-rockchip/rv1106/Kconfig
- create mode 100644 arch/arm/mach-rockchip/rv1106/Makefile
- create mode 100644 arch/arm/mach-rockchip/rv1106/clk_rv1106.c
- create mode 100644 arch/arm/mach-rockchip/rv1106/rv1106.c
- create mode 100644 arch/arm/mach-rockchip/rv1106/syscon_rv1106.c
- create mode 100644 board/luckfox/pico/Kconfig
- create mode 100644 include/configs/rv1106_common.h
+ .../rv1103-luckfox-pico-mini-b-u-boot.dtsi    | 10 +++
+ arch/arm/dts/rv1103-luckfox-pico-mini-b.dts   | 85 +++++++++++++++++++
+ board/luckfox/pico/MAINTAINERS                |  6 ++
+ board/luckfox/pico/Makefile                   |  7 ++
+ board/luckfox/pico/pico.c                     | 19 +++++
+ board/luckfox/pico/pico.env                   |  4 +
+ configs/luckfox-pico-mini-b-rv1103_defconfig  | 79 +++++++++++++++++
+ doc/board/index.rst                           |  1 +
+ doc/board/luckfox/index.rst                   |  9 ++
+ doc/board/luckfox/luckfox-pico.rst            | 71 ++++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  4 +
+ include/configs/luckfox_pico.h                | 11 +++
+ 12 files changed, 306 insertions(+)
+ create mode 100644 arch/arm/dts/rv1103-luckfox-pico-mini-b-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rv1103-luckfox-pico-mini-b.dts
+ create mode 100644 board/luckfox/pico/MAINTAINERS
+ create mode 100644 board/luckfox/pico/Makefile
+ create mode 100644 board/luckfox/pico/pico.c
+ create mode 100644 board/luckfox/pico/pico.env
+ create mode 100644 configs/luckfox-pico-mini-b-rv1103_defconfig
+ create mode 100644 doc/board/luckfox/index.rst
+ create mode 100644 doc/board/luckfox/luckfox-pico.rst
+ create mode 100644 include/configs/luckfox_pico.h
 
-diff --git a/arch/arm/dts/rv1106-u-boot.dtsi b/arch/arm/dts/rv1106-u-boot.dtsi
+diff --git a/arch/arm/dts/rv1103-luckfox-pico-mini-b-u-boot.dtsi b/arch/arm/dts/rv1103-luckfox-pico-mini-b-u-boot.dtsi
 new file mode 100644
-index 00000000000..fa062c8ee84
+index 00000000000..968bf1dfa66
 --- /dev/null
-+++ b/arch/arm/dts/rv1106-u-boot.dtsi
-@@ -0,0 +1,4 @@
++++ b/arch/arm/dts/rv1103-luckfox-pico-mini-b-u-boot.dtsi
+@@ -0,0 +1,10 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+// (C) Copyright 2022 Rockchip Electronics Co., Ltd
++// (C) Copyright 2026 Simon Glass <sjg@chromium.org>
 +
 +#include "rockchip-u-boot.dtsi"
-diff --git a/arch/arm/include/asm/arch-rv1106/boot0.h b/arch/arm/include/asm/arch-rv1106/boot0.h
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = &spi_nand;
++	};
++};
+diff --git a/arch/arm/dts/rv1103-luckfox-pico-mini-b.dts b/arch/arm/dts/rv1103-luckfox-pico-mini-b.dts
 new file mode 100644
-index 00000000000..e132eb98116
+index 00000000000..b0eac7d13c1
 --- /dev/null
-+++ b/arch/arm/include/asm/arch-rv1106/boot0.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/dts/rv1103-luckfox-pico-mini-b.dts
+@@ -0,0 +1,85 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * (C) Copyright 2022 Rockchip Electronics Co., Ltd
++ * Copyright (c) 2023 Luckfox Electronics Co., Ltd
 + */
 +
-+#ifndef __ASM_ARCH_BOOT0_H__
-+#define __ASM_ARCH_BOOT0_H__
++/dts-v1/;
 +
-+#include <asm/arch-rockchip/boot0.h>
++#include "rv1103.dtsi"
 +
-+#endif
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 1969c313f47..5b1032f258b 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -544,6 +544,20 @@ config ROCKCHIP_RV1103B
- 	  32-bit core which integrates NEON and FPU.
- 	  It contains a built-in NPU for AI related applications.
- 
-+config ROCKCHIP_RV1106
-+	bool "Support Rockchip RV1106"
-+	select CPU_V7A
-+	select SPL_ARMV7_SET_CORTEX_SMPEN
-+	select SUPPORT_SPL
-+	select SPL
-+	imply ROCKCHIP_COMMON_BOARD
-+	help
-+	  The Rockchip RV1106 is an ARM-based SoC with a single Cortex-A7
-+	  32-bit core which integrates NEON and FPU. It contains a built-in
-+	  NPU for AI related applications. The RV1103 is a package variant
-+	  of the RV1106 with fewer pins and is also supported by this
-+	  option.
++/ {
++	model = "Luckfox Pico Mini B";
++	compatible = "luckfox,pico-mini-b", "rockchip,rv1103";
 +
- config ROCKCHIP_RV1108
- 	bool "Support Rockchip RV1108"
- 	select CPU_V7A
-@@ -808,6 +822,7 @@ source "arch/arm/mach-rockchip/rk3568/Kconfig"
- source "arch/arm/mach-rockchip/rk3576/Kconfig"
- source "arch/arm/mach-rockchip/rk3588/Kconfig"
- source "arch/arm/mach-rockchip/rv1103b/Kconfig"
-+source "arch/arm/mach-rockchip/rv1106/Kconfig"
- source "arch/arm/mach-rockchip/rv1108/Kconfig"
- source "arch/arm/mach-rockchip/rv1126/Kconfig"
- 
-diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-index e09dc44a7ad..0d42ddbe678 100644
---- a/arch/arm/mach-rockchip/Makefile
-+++ b/arch/arm/mach-rockchip/Makefile
-@@ -48,6 +48,7 @@ obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568/
- obj-$(CONFIG_ROCKCHIP_RK3576) += rk3576/
- obj-$(CONFIG_ROCKCHIP_RK3588) += rk3588/
- obj-$(CONFIG_ROCKCHIP_RV1103B) += rv1103b/
-+obj-$(CONFIG_ROCKCHIP_RV1106) += rv1106/
- obj-$(CONFIG_ROCKCHIP_RV1108) += rv1108/
- obj-$(CONFIG_ROCKCHIP_RV1126) += rv1126/
- 
-diff --git a/arch/arm/mach-rockchip/rv1106/Kconfig b/arch/arm/mach-rockchip/rv1106/Kconfig
++	aliases {
++		mmc0 = &sdmmc;
++		spi0 = &sfc;
++	};
++
++	chosen {
++		stdout-path = "serial2:115200n8";
++	};
++};
++
++&sdmmc {
++	bus-width = <4>;
++	cap-sd-highspeed;
++	disable-wp;
++	status = "okay";
++};
++
++&sfc {
++	status = "okay";
++
++	spi_nand: flash@0 {
++		compatible = "spi-nand";
++		reg = <0>;
++		bootph-pre-ram;
++		bootph-some-ram;
++		spi-max-frequency = <75000000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <1>;
++
++		partitions {
++			compatible = "fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			partition@0 {
++				label = "env";
++				reg = <0x00000000 0x00040000>;
++			};
++
++			partition@40000 {
++				label = "idblock";
++				reg = <0x00040000 0x00100000>;
++				read-only;
++			};
++
++			partition@140000 {
++				label = "uboot";
++				reg = <0x00140000 0x00100000>;
++				read-only;
++			};
++
++			partition@240000 {
++				label = "boot";
++				reg = <0x00240000 0x00800000>;
++			};
++
++			partition@a40000 {
++				label = "ubi";
++				reg = <0x00a40000 0x075c0000>;
++			};
++		};
++	};
++};
++
++&uart2 {
++	bootph-all;
++	status = "okay";
++};
++
++&wdt {
++	status = "okay";
++};
+diff --git a/board/luckfox/pico/MAINTAINERS b/board/luckfox/pico/MAINTAINERS
 new file mode 100644
-index 00000000000..05eafd96833
+index 00000000000..debf7059cf9
 --- /dev/null
-+++ b/arch/arm/mach-rockchip/rv1106/Kconfig
-@@ -0,0 +1,28 @@
-+if ROCKCHIP_RV1106
-+
-+config TARGET_LUCKFOX_PICO_RV1103
-+	bool "LUCKFOX_PICO_RV1103"
-+	help
-+	  Support Luckfox's Pico series of RV1103 boards, such as the Pico
-+	  Mini B. These are small, low-cost boards with 64MB of in-package
-+	  DDR2, a microSD slot and a USB-C port used for both power and
-+	  maskrom-mode USB download; most I/O is on castellated edge pins.
-+	  The Mini B adds a 128MB Winbond SPI NAND, from which it boots.
-+	  U-Boot can also run entirely from RAM over USB, with nothing
-+	  written to the flash.
-+
-+config ROCKCHIP_BOOT_MODE_REG
-+	default 0xff020200
-+
-+config ROCKCHIP_STIMER_BASE
-+	default 0xff590020
-+
-+config SYS_SOC
-+	default "rv1106"
-+
-+config SYS_MALLOC_F_LEN
-+	default 0x400
-+
-+source "board/luckfox/pico/Kconfig"
-+
-+endif
-diff --git a/arch/arm/mach-rockchip/rv1106/Makefile b/arch/arm/mach-rockchip/rv1106/Makefile
++++ b/board/luckfox/pico/MAINTAINERS
+@@ -0,0 +1,6 @@
++LUCKFOX PICO
++M:	Simon Glass <sjg@chromium.org>
++S:	Maintained
++F:	board/luckfox/pico
++F:	include/configs/luckfox_pico.h
++F:	configs/luckfox-pico-mini-b-rv1103_defconfig
+diff --git a/board/luckfox/pico/Makefile b/board/luckfox/pico/Makefile
 new file mode 100644
-index 00000000000..66aba9fbfe2
+index 00000000000..4d2f5caff96
 --- /dev/null
-+++ b/arch/arm/mach-rockchip/rv1106/Makefile
-@@ -0,0 +1,12 @@
++++ b/board/luckfox/pico/Makefile
+@@ -0,0 +1,7 @@
 +#
-+# (C) Copyright 2022 Rockchip Electronics Co., Ltd
++# SPDX-License-Identifier:	GPL-2.0+
 +#
-+# SPDX-License-Identifier:     GPL-2.0+
++# Copyright 2026 Simon Glass <sjg@chromium.org>
 +#
 +
-+obj-y += rv1106.o
-+obj-y += clk_rv1106.o
-+
-+ifndef CONFIG_XPL_BUILD
-+obj-y += syscon_rv1106.o
-+endif
-diff --git a/arch/arm/mach-rockchip/rv1106/clk_rv1106.c b/arch/arm/mach-rockchip/rv1106/clk_rv1106.c
++obj-y	+= pico.o
+diff --git a/board/luckfox/pico/pico.c b/board/luckfox/pico/pico.c
 new file mode 100644
-index 00000000000..86020c45c22
+index 00000000000..a8a471c20f3
 --- /dev/null
-+++ b/arch/arm/mach-rockchip/rv1106/clk_rv1106.c
-@@ -0,0 +1,31 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * (C) Copyright 2022 Rockchip Electronics Co., Ltd
-+ */
-+
-+#include <dm.h>
-+#include <syscon.h>
-+#include <asm/arch-rockchip/clock.h>
-+#include <asm/arch-rockchip/cru_rv1106.h>
-+#include <linux/err.h>
-+
-+int rockchip_get_clk(struct udevice **devp)
-+{
-+	return uclass_get_device_by_driver(UCLASS_CLK,
-+			DM_DRIVER_GET(rockchip_rv1106_cru), devp);
-+}
-+
-+void *rockchip_get_cru(void)
-+{
-+	struct rv1106_clk_priv *priv;
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = rockchip_get_clk(&dev);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	priv = dev_get_priv(dev);
-+
-+	return priv->cru;
-+}
-diff --git a/arch/arm/mach-rockchip/rv1106/rv1106.c b/arch/arm/mach-rockchip/rv1106/rv1106.c
-new file mode 100644
-index 00000000000..a93c3e5f2fe
---- /dev/null
-+++ b/arch/arm/mach-rockchip/rv1106/rv1106.c
-@@ -0,0 +1,118 @@
++++ b/board/luckfox/pico/pico.c
+@@ -0,0 +1,19 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2022 Rockchip Electronics Co., Ltd
-+ */
++//
++// Copyright 2026 Simon Glass <sjg@chromium.org>
 +
-+#include <dm.h>
-+#include <spl.h>
-+#include <asm/io.h>
-+#include <linux/delay.h>
++#include <asm/global_data.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
 +
-+#define PERI_GRF_BASE			0xff000000
-+#define PERI_GRF_PERI_CON1		0x0004
-+
-+#define PERI_SGRF_BASE			0xff070000
-+#define PERI_SGRF_FIREWALL_CON0		0x0020
-+#define PERI_SGRF_FIREWALL_CON1		0x0024
-+#define PERI_SGRF_FIREWALL_CON2		0x0028
-+#define PERI_SGRF_FIREWALL_CON3		0x002c
-+#define PERI_SGRF_FIREWALL_CON4		0x0030
-+#define PERI_SGRF_SOC_CON3		0x00bc
-+
-+#define CORE_SGRF_BASE			0xff076000
-+#define CORE_SGRF_FIREWALL_CON0		0x0020
-+#define CORE_SGRF_FIREWALL_CON1		0x0024
-+#define CORE_SGRF_FIREWALL_CON2		0x0028
-+#define CORE_SGRF_FIREWALL_CON3		0x002c
-+#define CORE_SGRF_FIREWALL_CON4		0x0030
-+#define CORE_SGRF_CPU_CTRL_CON		0x0040
-+
-+#define PMU_SGRF_BASE			0xff080000
-+
-+#define FW_DDR_BASE			0xff900000
-+#define FW_DDR_MST3_REG			0x4c
-+#define FW_SHRM_BASE			0xff910000
-+#define FW_SHRM_MST1_REG		0x44
-+
-+#define CRU_BASE			0xff3b0000
-+#define CRU_GLB_RST_CON			0x0c10
-+#define CRU_PVTPLL0_CON0_L		0x1000
-+#define CRU_PVTPLL0_CON1_L		0x1008
-+#define CRU_PVTPLL1_CON0_L		0x1030
-+#define CRU_PVTPLL1_CON1_L		0x1038
-+
-+#define VICRU_BASE			0xff3b4000
-+#define VICRU_VISOFTRST_CON01		0x0a04
-+
-+#define CHIP_VER_REG			0xff020204
-+#define CHIP_VER_MSK			0x7
-+#define V(x)				((x) - 1)
-+#define ROM_VER_REG			0xffff4ffc
-+#define ROM_V2				0x30303256
-+
-+void board_debug_uart_init(void)
++int dram_init(void)
 +{
-+	/* The BootROM leaves the debug UART configured */
-+}
-+
-+static void rv1106_xpl_init(void)
-+{
-+	/* Save the chip version to OS_REG1[2:0] */
-+	if (readl(ROM_VER_REG) == ROM_V2)
-+		writel((readl(CHIP_VER_REG) & ~CHIP_VER_MSK) | V(2),
-+		       CHIP_VER_REG);
-+	else
-+		writel((readl(CHIP_VER_REG) & ~CHIP_VER_MSK) | V(1),
-+		       CHIP_VER_REG);
-+
-+	/* Set all devices to non-secure */
-+	writel(0xffff0000, PERI_SGRF_BASE + PERI_SGRF_FIREWALL_CON0);
-+	writel(0xffff0000, PERI_SGRF_BASE + PERI_SGRF_FIREWALL_CON1);
-+	writel(0xffff0000, PERI_SGRF_BASE + PERI_SGRF_FIREWALL_CON2);
-+	writel(0xffff0000, PERI_SGRF_BASE + PERI_SGRF_FIREWALL_CON3);
-+	writel(0xffff0000, PERI_SGRF_BASE + PERI_SGRF_FIREWALL_CON4);
-+	writel(0x000f0000, PERI_SGRF_BASE + PERI_SGRF_SOC_CON3);
-+	writel(0xffff0000, CORE_SGRF_BASE + CORE_SGRF_FIREWALL_CON0);
-+	writel(0xffff0000, CORE_SGRF_BASE + CORE_SGRF_FIREWALL_CON1);
-+	writel(0xffff0000, CORE_SGRF_BASE + CORE_SGRF_FIREWALL_CON2);
-+	writel(0xffff0000, CORE_SGRF_BASE + CORE_SGRF_FIREWALL_CON3);
-+	writel(0xffff0000, CORE_SGRF_BASE + CORE_SGRF_FIREWALL_CON4);
-+	writel(0x00030002, CORE_SGRF_BASE + CORE_SGRF_CPU_CTRL_CON);
-+	writel(0x20000000, PMU_SGRF_BASE);
-+
-+	/* Allow the eMMC and FSPI to access the secure area */
-+	writel(0x00000000, FW_DDR_BASE + FW_DDR_MST3_REG);
-+	writel(0xff00ffff, FW_SHRM_BASE + FW_SHRM_MST1_REG);
-+
-+	/* Release the watchdog */
-+	writel(0x2000200, PERI_GRF_BASE + PERI_GRF_PERI_CON1);
-+	writel(0x400040, CRU_BASE + CRU_GLB_RST_CON);
-+
-+	/*
-+	 * When the venc/npu use the pvtpll, a reboot fails because the
-+	 * pvtpll is reset before the venc/npu reset, so the venc/npu is
-+	 * not completely reset and the system blocks when accessing the
-+	 * NoC in SPL. Enable the pvtpll so that the venc/npu reset can
-+	 * complete.
-+	 */
-+	writel(0xffff0018, CRU_BASE + CRU_PVTPLL0_CON1_L);
-+	writel(0x00030003, CRU_BASE + CRU_PVTPLL0_CON0_L);
-+	writel(0xffff0018, CRU_BASE + CRU_PVTPLL1_CON1_L);
-+	writel(0x00030003, CRU_BASE + CRU_PVTPLL1_CON0_L);
-+	udelay(2);
-+}
-+
-+int arch_cpu_init(void)
-+{
-+	if (is_xpl())
-+		rv1106_xpl_init();
-+
-+	/* Reset the sdmmc0 to prevent a power leak */
-+	writel(0x30003000, VICRU_BASE + VICRU_VISOFTRST_CON01);
-+	udelay(1);
-+	writel(0x30000000, VICRU_BASE + VICRU_VISOFTRST_CON01);
++	gd->ram_size = SZ_64M;
 +
 +	return 0;
 +}
-diff --git a/arch/arm/mach-rockchip/rv1106/syscon_rv1106.c b/arch/arm/mach-rockchip/rv1106/syscon_rv1106.c
++
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	return gd->ram_top;
++}
+diff --git a/board/luckfox/pico/pico.env b/board/luckfox/pico/pico.env
 new file mode 100644
-index 00000000000..d669991fbc5
+index 00000000000..0d954ee4f98
 --- /dev/null
-+++ b/arch/arm/mach-rockchip/rv1106/syscon_rv1106.c
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2022 Rockchip Electronics Co., Ltd
-+ */
-+
-+#include <dm.h>
-+#include <syscon.h>
-+#include <asm/arch-rockchip/clock.h>
-+
-+static const struct udevice_id rv1106_syscon_ids[] = {
-+	{ .compatible = "rockchip,rv1106-grf", .data = ROCKCHIP_SYSCON_GRF },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(syscon_rv1106) = {
-+	.name = "rv1106_syscon",
-+	.id = UCLASS_SYSCON,
-+	.of_match = rv1106_syscon_ids,
-+};
-diff --git a/board/luckfox/pico/Kconfig b/board/luckfox/pico/Kconfig
++++ b/board/luckfox/pico/pico.env
+@@ -0,0 +1,4 @@
++kernel_addr_r=0x00800000
++fdt_addr_r=0x02000000
++ramdisk_addr_r=0x03000000
++bootargs=console=ttyS2,115200 mtdparts=spi0.0:256K(env),1M@256K(idblock),1M(uboot),8M(boot),-(ubi) ro rootwait ubi.mtd=ubi ubi.block=0,rootfs root=/dev/ubiblock0_0 rootfstype=squashfs
+diff --git a/configs/luckfox-pico-mini-b-rv1103_defconfig b/configs/luckfox-pico-mini-b-rv1103_defconfig
 new file mode 100644
-index 00000000000..62176b3779f
+index 00000000000..f857f0a42c0
 --- /dev/null
-+++ b/board/luckfox/pico/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_LUCKFOX_PICO_RV1103
-+
-+config SYS_BOARD
-+	default "pico"
-+
-+config SYS_VENDOR
-+	default "luckfox"
-+
-+config SYS_CONFIG_NAME
-+	default "luckfox_pico"
-+
-+endif
-diff --git a/include/configs/rv1106_common.h b/include/configs/rv1106_common.h
++++ b/configs/luckfox-pico-mini-b-rv1103_defconfig
+@@ -0,0 +1,79 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_SYS_ARCH_TIMER=y
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_TEXT_BASE=0x00200000
++CONFIG_SYS_MALLOC_F_LEN=0x80000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x00400000
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_DEFAULT_DEVICE_TREE="rv1103-luckfox-pico-mini-b"
++CONFIG_ROCKCHIP_RV1106=y
++CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_EXTERNAL_TPL=y
++CONFIG_ROCKCHIP_MASKROM_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_LUCKFOX_PICO_RV1103=y
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
++CONFIG_SYS_BOOTM_LEN=0x04000000
++CONFIG_SYS_LOAD_ADDR=0x00008000
++CONFIG_DEBUG_UART_BASE=0xff4c0000
++CONFIG_DEBUG_UART_CLOCK=24000000
++# CONFIG_DEBUG_UART_BOARD_INIT is not set
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_FIT_CIPHER=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_FIT_BEST_MATCH=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_BOOTDELAY=1
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_NO_BSS_LIMIT=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_SPI_NAND_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x140000
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_SPI=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_NO_NET=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SYSCON=y
++CONFIG_SPL_SYSCON=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++# CONFIG_RSA is not set
++# CONFIG_SPL_SHA1 is not set
++# CONFIG_SPL_SHA256 is not set
++CONFIG_LZMA=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 2454c3598fb..11ec39cf915 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -39,6 +39,7 @@ Board-specific doc
+    kontron/index
+    lenovo/index
+    lg/index
++   luckfox/index
+    liebherr/index
+    mediatek/index
+    microchip/index
+diff --git a/doc/board/luckfox/index.rst b/doc/board/luckfox/index.rst
 new file mode 100644
-index 00000000000..1678fe54676
+index 00000000000..66feee84257
 --- /dev/null
-+++ b/include/configs/rv1106_common.h
-@@ -0,0 +1,13 @@
++++ b/doc/board/luckfox/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Luckfox
++=======
++
++.. toctree::
++   :maxdepth: 2
++
++   luckfox-pico
+diff --git a/doc/board/luckfox/luckfox-pico.rst b/doc/board/luckfox/luckfox-pico.rst
+new file mode 100644
+index 00000000000..a971ee67e0b
+--- /dev/null
++++ b/doc/board/luckfox/luckfox-pico.rst
+@@ -0,0 +1,71 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Luckfox Pico boards
++===================
++
++U-Boot for the Luckfox Pico series of RV1103/RV1106 boards. Only the
++Pico Mini B (RV1103, 64MB DDR2, 128MB SPI NAND) is supported so far.
++
++Quick Start
++-----------
++
++- Get the DDR initialization binary
++- Build U-Boot
++- Boot the board over USB, or flash U-Boot into the SPI NAND
++
++Get the DDR initialization binary
++---------------------------------
++
++.. code-block:: bash
++
++   $ git clone https://github.com/rockchip-linux/rkbin.git
++
++The DDR initialization binary is at rkbin/bin/rv11/rv1106_ddr_924MHz_v1.15.bin
++and covers both the RV1103 and the RV1106.
++
++Build U-Boot
++------------
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=arm-linux-gnueabihf-
++   $ export ROCKCHIP_TPL=<path-to-rkbin>/bin/rv11/rv1106_ddr_924MHz_v1.15.bin
++   $ make luckfox-pico-mini-b-rv1103_defconfig
++   $ make
++
++This produces idbloader.img and u-boot.img for flashing to the SPI
++NAND, plus u-boot-rockchip-usb471.bin and u-boot-rockchip-usb472.bin
++for booting over USB.
++
++Boot over USB (maskrom mode)
++----------------------------
++
++Hold the BOOT button while applying power (or leave the boot media
++blank) and the BootROM enters maskrom mode on the USB OTG port,
++appearing as USB ID 2207:110c. U-Boot then runs entirely from RAM;
++nothing is written to the flash.
++
++Send the two images with a maskrom download tool such as rockusb or
++rkdeveloptool (note that the loader format parser in older
++rkdeveloptool versions is not needed here, since these are raw
++images):
++
++.. code-block:: bash
++
++   $ rockusb download-boot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
++
++Flash U-Boot into the SPI NAND
++------------------------------
++
++Enter maskrom mode as above, then use a loader from rkbin to run the
++Rockchip usbplug and write the images:
++
++.. code-block:: bash
++
++   $ cd <path-to-rkbin>
++   $ ./tools/boot_merger RKBOOT/RV1106MINIALL.ini
++   $ ./tools/upgrade_tool db rv1106_download_*.bin
++   $ ./tools/upgrade_tool wl 0x200 idbloader.img
++   $ ./tools/upgrade_tool wl 0xa00 u-boot.img
++
++Power cycle the board and U-Boot output appears on UART2 (115200,8N1).
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 2574a1da52c..532a13594fc 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -180,6 +180,10 @@ List of mainline supported Rockchip boards:
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
+      - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
+ 
++* rv1103
++     - Luckfox Pico Mini B (luckfox-pico-mini-b-rv1103), see
++       :doc:`../luckfox/luckfox-pico`
++
+ * rv1103b
+      - Onion Omega4 (omega4-rv1103b), see :doc:`../onion/omega4-rv1103b`
+ 
+diff --git a/include/configs/luckfox_pico.h b/include/configs/luckfox_pico.h
+new file mode 100644
+index 00000000000..107ab622dd5
+--- /dev/null
++++ b/include/configs/luckfox_pico.h
+@@ -0,0 +1,11 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * (C) Copyright 2022 Rockchip Electronics Co., Ltd
++ * Copyright 2026 Simon Glass <sjg@chromium.org>
 + */
-+#ifndef __CONFIG_RV1106_COMMON_H
-+#define __CONFIG_RV1106_COMMON_H
 +
-+#include "rockchip-common.h"
++#ifndef __CONFIG_H
++#define __CONFIG_H
 +
-+#define CFG_IRAM_BASE			0xff6c0000
-+#define CFG_SYS_SDRAM_BASE		0x00000000
++#include <configs/rv1106_common.h>
 +
 +#endif
 -- 
