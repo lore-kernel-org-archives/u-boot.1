@@ -4,104 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3439EC43458
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jul 2026 23:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F817C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 00:02:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19F7C846B4;
-	Tue,  7 Jul 2026 01:53:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9914784844;
+	Tue,  7 Jul 2026 02:02:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="FoZ+3iUZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jF0Ah+0q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E26DC84844; Tue,  7 Jul 2026 01:52:59 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id F2B2D84852; Tue,  7 Jul 2026 02:02:14 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86E39801A9
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 01:52:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1D1E801A9
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 02:02:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-4472500e25fso1550152fac.1
- for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 16:52:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-48611ccd5aeso1790957b6e.2
+ for <u-boot@lists.denx.de>; Mon, 06 Jul 2026 17:02:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783381976; x=1783986776; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e/4uh7F+KrAKUeOREwCEF9hlXb+NGKZViXaJtFlJtbk=;
- b=FoZ+3iUZDb1eug2z/oVauVM3qFp0AmQipaAhqmbsHY4yp8e6e7OEAGp3Y7jEz5LZ8T
- sPVifbOE87wptJjR3ZlEeuulKOvY3jwfS/+v9737X9nV18cQTI1IvRPdWoicNw0ux9Pa
- JlTu1qJ9Q3xfpPFiAUpyNhDZt198xpF6hKm8U5XiJnC6/K3EsMmzmHYMZDp6Uvr4RWca
- pszvCw6RDpSPs0UDCosk3W5OMe2qvezBgPEVUuK3E5oQJf4yA+vUn+PInR3gtBpAuOSy
- YbSgd8s4LzgnEQcqAaJOpZ/jyV0cnaTT0oNr3DGCaUNoQ0FY4nxGa5JzVXE+4IYybWtq
- N4nw==
+ d=konsulko.com; s=google; t=1783382530; x=1783987330; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QesBLnRsX8mjAMCThlGSGbdnCZQF4RwsxZiDg70itKw=;
+ b=jF0Ah+0qdeoE1yyj4crKBG2apdAZWLvS7RmLIV3h7lR1Kj5LPQcmlgyJcSFESK8Yee
+ YM71U0dJ3YncYozilUsPzsV8n/2/Al965WfREPk0XK4CWoZuTGiCsEBtzRC8xWYlNgjZ
+ Nuo3gYZ6hYwpOGUh+ZFHM/tgZ5C8c3TdD4UZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783381976; x=1783986776;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e/4uh7F+KrAKUeOREwCEF9hlXb+NGKZViXaJtFlJtbk=;
- b=BzEKmPtgu+HKP+eOYmbN4VyYCtOLK2A5JgblmdkBKgZxoDDIs1yyZLL7zuONofQumF
- pfqz5015y9i1NmgB2A7U9y/e9nSD9ULdj80IjJ/fqqgA00xbkhuOwDrI5QWUQzGRrDrF
- QbC9f9kioNQC4+72P6UtlRNttBqxHYMVQRgnrTVHZGHrn11T1gnW23NOdjYoZkJsPr7a
- RxEJfWBQs8Gz/atWHkXB0vjYgTBSk6p6MTcz0Nq37xr61rWkxf7SYURb7I0964QJytFL
- bxDbUSPjPjWwIgIGmSY7aaEN/lzr11kXbq8M7IaEd+HrUWSK4B9trWEO00kVxw2lrqMM
- EmSA==
-X-Gm-Message-State: AOJu0Yz9IWpzvYoSxRLKr+3rifc7yqGsyS3R0jnhtH0mYxfDl2Aqqi+L
- 2uZNF549N9BjGYK6Zh6SZ+djKOlej17h9N+rDebC0nmX8JkE32x0Xy9dUiv3jX2GAd0=
-X-Gm-Gg: AfdE7ckF3kpIOf3CQvTAT/lwvJchR4/zeZiRrcT/PTRXyN8nk4U0SBCeiIOLx1j1/a+
- gIM9F53Y/MPINiExmX05/nOz2wz/AFz+FOynXNNZa3XSlzNLCYspzboA5rfW+9AyIJ1yjI4aRLA
- VkOwRzknTSQlX1gXFvb+UnMp3cjHxA0wFW1XTVb0nIoVYwQ2UIW0zeIOmBfZJfb1H1Ab+ViRMbi
- aPpza6CY4EC1miBT8N7KqudCEYSzgrCCd0dIVvOuAGlm45PM4s2BEPY0UcVp8NzDAeIxyKNbpDV
- jjZ6wkCYwc3nE8DWMsLMRj3hj4KEhHUSrI7EqVJAMad0DkoqKC0SW2glZerIoxDo/FxJP7GM+PK
- 4KJxvFJmBCaNW/4++LnNqGGbK29Wb9/0ia9G/kDqcPzhlmpKk/l0Xe9djpaONfLWr3n1M3h4OgH
- TVZNf3imGzLa51W6/LRg==
-X-Received: by 2002:a05:6870:d1c6:b0:44c:e350:a0b7 with SMTP id
- 586e51a60fabf-451065bf419mr1912336fac.27.1783381975845; 
- Mon, 06 Jul 2026 16:52:55 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:a38a:a0af:ed1d:5c77])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb54f775sm12085603fac.10.2026.07.06.16.52.54
+ d=1e100.net; s=20251104; t=1783382530; x=1783987330;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QesBLnRsX8mjAMCThlGSGbdnCZQF4RwsxZiDg70itKw=;
+ b=P9aHHLoxR8HduAvOVF8K3L6CPKdTb4imcu8mEX/BarvThLN2fOYQlDUCH4jmrz5zp2
+ 9dqBKH15Fyt2N2Dw6U6zq+aG0+StPIsEBlOSjn4Vz0jIn4Y2/99cDpKtpRUzXwe353w4
+ vcMbDu5pDjMR8I4tVyeuv4/xV8XglKULkUGMaluXYDZG0mQPzTN6rHccNJRG8RdRNj54
+ VowSgu+zeJ5luHp8xSuXevAuRs+nVlgSqT+RQEE69Zu3q2lYkjuFkKCmdLSs0x20dIxm
+ TsN6UKa5xcMf9QOtCDk65VTWrJMnAFHZmjgLJPPrre9Mqr9dAA1NOYzaAxe2w31lKo/B
+ ihJw==
+X-Gm-Message-State: AOJu0Ywm50x32N2eNKYEpiE1wSpsVKq8TskxnpkYFDriIE7F9c/sSBsx
+ XR84Re81Jh8xpC+MOU/IOBfMeG4c8DeqyhZ45+P9E/PkucLZLSSVr4K7kBBaxIVjROGySgV/mZV
+ dghFnOW0=
+X-Gm-Gg: AfdE7clUOuXkQeSXUjFZZ5KHxC/F1BBSra7zFzy7vp1I2Eo7u5zEFte6P2UWt7kdxpH
+ gtU5m0N4sosZir1DfuFLN7bpVSBhjrjuuEcjZXTuXu/NiEPyWrnZ1ZZsuZYnQPRjdFyTWXuLCdr
+ 7Z4nlOoqkOl9mJZEF+puYZpkIXnPFgguGBlBPvB6r+maBH7pfkLcmrzlSDBXIQX5+K01CCz/b9n
+ odr+Mc1U7EBr9WyiLXVyh59HMbHinDO99GSyfPbfKJnhVcnMgE2mpl+bgSOOu/6BKYMnVKARqVC
+ Yzo80Cc0Bnfjn8Yzk5jnFUQTfxEdROuq4Nf1e6mlUp1TDZ+aeVr/CQ+mzkMnn2JFouESRS6EVae
+ sy50g5pqGzvjHOCPQ+YTqmPSS9MIa9gOAeliER9pcVxIq2ptNSVU3nBY7cXfXI7vETpL9zEA/Kq
+ YqlTmfw0PULNkv+NXvGJ51m0xetWnckAAhigv24JiIJArNlL62wfmXC4qdHqK2V0Dn2SbrauQtN
+ bFxzoMJJsKyF9bw6Ps4Vj1VYDMpay9s5n0yUg==
+X-Received: by 2002:a05:6808:199e:b0:486:4bd0:9a1c with SMTP id
+ 5614622812f47-49fdf20c0e7mr2469199b6e.43.1783382530322; 
+ Mon, 06 Jul 2026 17:02:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-497d1853afbsm10108839b6e.8.2026.07.06.17.02.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 16:52:55 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 06 Jul 2026 18:52:44 -0500
-Subject: [PATCH] clk: mediatek: mt8189: fix VLP_CK wrong parents
+ Mon, 06 Jul 2026 17:02:09 -0700 (PDT)
+Date: Mon, 6 Jul 2026 18:02:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.07 released
+Message-ID: <20260707000207.GZ749385@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-mtk-clk-mt8189-fix-vlp-parent-v1-1-aedc2f8cc69d@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CMBCF4auQWTtJqSlWr2Jc0DLICNamrcSEc
- HcGWb18ycu/QKbElOFWLZBo5syfIKhPFfihDU9C7sSglW7URTX4LiP6aZS1tb1izz+cp4ixTRQ
- KnrUipx0ZYw1IIyaSx79/fxzOX/ciX/YorOsG//3sj4EAAAA=
-X-Change-ID: 20260706-mtk-clk-mt8189-fix-vlp-parent-320eb2be5585
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1547; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=pWZFNkgKPQGsg0tAUH3biRx2kPeV4CLP2CqRyoxdU/8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqTD/P1UilJC4M09M6pESdn5YsdkXCd6uh1OHzn
- tWvknACJR6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCakw/zxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZH4H+wW5b+4NUhM/xIk+7erMhyx62BpwEAyNeaRynWK
- 1O6oB+r0LMW57m/Las0EfMmMpfoTYWFT4CR0k018x1YwEzsqWhCXs5/aDOuKqSP/NOF+aUnIGv6
- FDZKW2Q8mNra/nRvOHNEPfspL6kggLbPFL41mGNh5lMkbLoTNSHy6aic19lvFETBuAgl3ovpNQB
- LLF75xkouZ2ZWGBhioJ70wQjR2fMVnI2pMIICRlyLxJF2JlhmfoR6o41UP+UnMF2unY2kCuq2kS
- GTd8P0Vo07cdj8Y54E1JWrqtIi1ImxN38ReHPFW/JkpJN8z+pxEgWYNnvZJ0CNhdQaNflvdrn5k
- ZGV0=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JQPVFx1xeq0uOK6D"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,36 +94,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a couple of places where we used the wrong macro to set the parent
-flag for vlpcfg_ao_clks.
 
-Fixes: 04b3a834c654 ("clk: mediatek: mt8189: add some VLP clocks")
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/clk/mediatek/clk-mt8189.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--JQPVFx1xeq0uOK6D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/clk/mediatek/clk-mt8189.c b/drivers/clk/mediatek/clk-mt8189.c
-index d11947ee461..b174e259f28 100644
---- a/drivers/clk/mediatek/clk-mt8189.c
-+++ b/drivers/clk/mediatek/clk-mt8189.c
-@@ -1915,8 +1915,8 @@ static const struct mtk_gate vlpcfg_ao_clks[] = {
- 	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SCP, CLK_VLP_CK_SCP_SEL, 28),
- 	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_RG_R_APXGPT_26M, CLK_PAD_CLK26M, 24),
- 	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_DPMSRCK_TEST, CLK_PAD_CLK26M, 23),
--	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_RG_DPMSRRTC_TEST, CLK_PAD_CLK32K, 22),
--	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_DPMSRULP_TEST, CLK_TOP_OSC_D10, 21),
-+	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_RG_DPMSRRTC_TEST, CLK_PAD_CLK32K, 22),
-+	GATE_VLPCFG_AO_TOP(CLK_VLPCFG_REG_DPMSRULP_TEST, CLK_TOP_OSC_D10, 21),
- 	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SPMI_P_MST, CLK_VLP_CK_SPMI_P_MST_SEL, 20),
- 	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_SPMI_P_MST_32K, CLK_PAD_CLK32K, 18),
- 	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PMIF_SPMI_P_SYS, CLK_VLP_CK_PWRAP_ULPOSC_SEL, 13),
+Hey all,
 
----
-base-commit: 861858fd3a984cbdd1c7a39c6a4b126f814dbe6d
-change-id: 20260706-mtk-clk-mt8189-fix-vlp-parent-320eb2be5585
+So it's release day and I have tagged and pushed things out and I will
+pull in the next branch shortly.
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+The big things to talk about right now are infrastructure updates. For
+the mailing lists, as I've mentioned before we have a test instance
+setup of moving mailman 2 over to lists.u-boot-project.org and are
+working on coordination of a final migration. This will mean turning off
+the lists on lists.denx.de, moving the data over, importing it, and then
+bringing lists.u-boot-project.org live. I will follow up when we have
+more details on when exactly this will be done. The next thing is gitlab
+on source.denx.de. We have a new gitlab instance up and being tested
+now, and I'll be reaching out to custodians to get them migrated over in
+the next day or two, and then we can put the old instance up in
+read-only mode shortly afterwards. For this part of the migration, I
+expect us to be able to complete that this month.
 
+As I've said throughout this cycle, after this release we'll be dropping
+support for building host tools under MSYS on Windows. Users are
+encouraged to instead make use of WSL to fill in this gap. If that's
+just not feasible, we're happy for someone to volunteer and resolve the
+problems we're having moving forward[1].
+
+We're continuing with a community meeting following the release and the
+calendar link is
+https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
+Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
+mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
+89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
+lendar.google.com&scp=3DALL
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/yyx-dsaj-iwr
+July 7th, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/yyx-dsaj-iwr?pin=3D7760044274127&hs=3D1
+
+In terms of a rough changelog for the whole release:
+- We have synced with the v7.0-dts tag for upstream device trees /
+  bindings.
+- As is always the case, most platforms / SoCs have received some
+  updates.
+- Fixes in our UEFI, SMBIOS, MMC, DFU, USB, networking, UFS, pytest,
+  I2C, UBI, NVMe, virtio, hush shell commands, squashfs, environment,
+  documentation and FWU update subsystems.
+- Global cleanup of "gd" inclusion in code.
+- The legacy LED API has been removed (thanks again all!)
+- Updates to our binman tooling
+- Removed patman, it is now its own external project.
+
+I'll be releasing v2026.10-rc1 on Monday, July 27th 2026.
+
+Thanks all!
+
+[1]: https://lore.kernel.org/u-boot/ae_KfGqNrsWZ1rfQ@daedalus/
+
+--=20
+Tom
+
+--JQPVFx1xeq0uOK6D
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCakxB/gAKCRAr4qD1Cr/k
+CjjGAQCf4BSf/Se0a8Zf+nIdc5Pvwo8z3ph3sDaaO8BOm//izgEA61s0CzevNRQc
+6nwTtWhicWNwxULywQjG5u4fYKavcAY=
+=sZfF
+-----END PGP SIGNATURE-----
+
+--JQPVFx1xeq0uOK6D--
