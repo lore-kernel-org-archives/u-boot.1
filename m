@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD0FC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8D2EC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E95584AC8;
+	by phobos.denx.de (Postfix) with ESMTP id A269184ACF;
 	Tue,  7 Jul 2026 18:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="XsWRVkND";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="QFgsFcXW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7A9284A3E; Tue,  7 Jul 2026 18:09:48 +0200 (CEST)
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
+ id 9005E84A0B; Tue,  7 Jul 2026 18:09:49 +0200 (CEST)
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [IPv6:2001:1600:19:7ff8::bc0e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFA1A849F6
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA4B384A30
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQL3BtCz19nh;
- Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQM1y1rz19sM;
+ Tue,  7 Jul 2026 18:09:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783440586;
- bh=JjX61VuGI44+0I1j25HwBhGMe5qsMjIrUadI04Ak0+4=;
+ s=20231125; t=1783440587;
+ bh=TuczWXTJGJoC/7VVCd9bTpvLnUFqWleSz6zoqUycQjU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=XsWRVkNDYeh6OMb2VdrqZmdK8wbiLAz51F0evaARmN3KYLL5FehcY/bOB4EONXW10
- rUqMQzNVqCM5cU+wu97ekHdBKawkoRMpnu9IhsVctH8yHAjLFH+Mi8r/pps5y/XnIc
- AwYOo53ionwXO8HCOLbclVrIJ7sjY5hM/w5hWQkJtJFnTNSCI+PhkyhbdLo93F39Jr
- KMt49X8do/MOBdMBX4ocn5bu5F6Gx0UdFQz+ntNFLjc5/r2zGpiD8ZULZP4eW90NSs
- ruaSPePiQCYbDnSxPxZMxyEVhpnYDyjj9TyD4zWu93+s9ySTB7WN8yv5vV6Lo853td
- eXEF3VpNkkxtQ==
+ b=QFgsFcXWklDK4iNxMvUKjIB1DI9twj7tDw4IinjC8GpoYSTK2oHLppcgT1zMWnEt8
+ +2DJGdzk7GkwWj7eV82tpQA0T1SiUto3LWeTT0oQJ5k53ZgYBEqKA86cnoe8+z+gR+
+ LvUtBGbPIqEqdAVyHu+KQ+rY0X+nH+Ll29YiH3Lnb4bPK/s6lcdjI2gOXBsUr2SGAX
+ /TzmhPpAqZusGTKNe5TPoiTrRZVNz7S4FfDSbxI+rlpT6UqRAfjbm+wplToF8xIsz8
+ v2cP8FpHiSu5j78mF59vX0IHAhagnKkR3436aDyf5V/Fhe/Tp8B8n/9WVc+egiUQi4
+ nMs/0vywd+wwQ==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQK3VMnzXhg; Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
+ id 4gvmQL28shzYBh; Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Date: Tue, 07 Jul 2026 18:09:20 +0200
-Subject: [PATCH 06/12] MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 18:09:21 +0200
+Subject: [PATCH 07/12] MAINTAINERS: add N: rv11 regex to ARM ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-rk-custodian-v1-6-dbc9c696e613@0leil.net>
+Message-Id: <20260707-rk-custodian-v1-7-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
@@ -82,28 +82,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip also manufactures PMICs and regulators typically under the
-RK8xx naming scheme (e.g. RK806, RK808, RK860, etc.) so let's match
-files with rk8 in their path.
+Rockchip has an RV11xx SoC series (RV1103, RV1106, RV1126) so let's
+match *anything* in U-Boot which contains this string in the path and
+not only the U-Boot Device Trees.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+ MAINTAINERS | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 393c8abde10c..97d5e8feb51b 100644
+index 97d5e8feb51b..49b35945f820 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -580,6 +580,8 @@ N:	px30
- N:	px5
- # RK3xxx SoC family
- N:	rk3
-+# RK8xx PMIC/regulator family
-+N:	rk8
+@@ -583,7 +583,8 @@ N:	rk3
+ # RK8xx PMIC/regulator family
+ N:	rk8
  N:	rockchip
- F:	arch/arm/dts/rv11*
+-F:	arch/arm/dts/rv11*
++# RV11xx SoC family
++N:	rv11
  F:	board/radxa/
+ F:	board/theobroma-systems
+ F:	drivers/gpio/rk_gpio.c
 
 -- 
 2.55.0
