@@ -4,90 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B5C1C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 13:05:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2806AC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 13:31:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8834849F6;
-	Tue,  7 Jul 2026 15:05:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=etu.esisar.grenoble-inp.fr
+	by phobos.denx.de (Postfix) with ESMTP id 7BEDC84942;
+	Tue,  7 Jul 2026 15:31:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="tDuX0Hv5";
-	dkim=pass (1024-bit key) header.d=etu.esisar.grenoble-inp.fr header.i=@etu.esisar.grenoble-inp.fr header.b="k1WHV82m";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="ZqUDqc20";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3F888494B; Tue,  7 Jul 2026 14:33:48 +0200 (CEST)
-Received: from mx1.esisar.grenoble-inp.fr (mx1.esisar.grenoble-inp.fr
- [195.220.36.33])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE8DC848EB
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 14:33:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=etu.esisar.grenoble-inp.fr
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=theodore.oviguian@etu.esisar.grenoble-inp.fr
-Received: from mx1.esisar.grenoble-inp.fr (localhost [127.0.0.1])
- by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id 38E59223EFC;
- Tue,  7 Jul 2026 14:33:43 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTP id 237F2223F02;
- Tue,  7 Jul 2026 14:33:43 +0200 (CEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mx1.esisar.grenoble-inp.fr 237F2223F02
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=etu.esisar.grenoble-inp.fr;
- s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1783427623;
- bh=6hSx16gefkAtwAQmqR0UaT0lYSXi3YMPPPklg1W2bc8=;
- h=From:To:Date:Message-ID:MIME-Version;
- b=tDuX0Hv54UxAWVHC/UNz1A7D4qW1I8LdYFeefxwq52zvLuXvADoferG7e9/S5RlBA
- 4JnM5e0j62Epb0Jc3xzUxd2FIZnAjSC2FLD5HXsi3tcYt89KJRIi5cdG2N23ZxLB0Y
- VlCYRZM2sXSgCdtFL5y5Do/dLr3MqUL9FUeIOcyk=
-Received: from mx1.esisar.grenoble-inp.fr ([127.0.0.1])
- by localhost (mx1.esisar.grenoble-inp.fr [127.0.0.1]) (amavis, port 10026)
- with ESMTP id NhbXtkA8c2Hh; Tue,  7 Jul 2026 14:33:43 +0200 (CEST)
-Received: from srv-zimbra.esisar.grenoble-inp.fr (unknown [172.21.100.139])
- by mx1.esisar.grenoble-inp.fr (Postfix) with ESMTPS id ECFD1223EFC;
- Tue,  7 Jul 2026 14:33:42 +0200 (CEST)
-Received: from srv-zimbra.esisar.grenoble-inp.fr (localhost [127.0.0.1])
- by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPS id DE7626E0FE7;
- Tue,  7 Jul 2026 14:33:42 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTP id CC9B76E02B5;
- Tue,  7 Jul 2026 14:33:42 +0200 (CEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 srv-zimbra.esisar.grenoble-inp.fr
- CC9B76E02B5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=etu.esisar.grenoble-inp.fr;
- s=29808A28-1FE8-11E5-B58B-F10B7632C813; t=1783427622;
- bh=6hSx16gefkAtwAQmqR0UaT0lYSXi3YMPPPklg1W2bc8=;
- h=From:To:Date:Message-ID:MIME-Version;
- b=k1WHV82mFfDEP4xedivVK1VTixl17ujvq1skmx3TYlsZkjp3Xm2RAql61E5VrbmW8
- Vwq5KVzS/Is9gnvPVv8bRHN4jadErKfrRG038WpdPyB1k/7xZHLPZVlcnS+6xoHpWL
- LG/Gz5wFScMX4hgotcp1NfvBfDf746auWTX3EJ+w=
-Received: from srv-zimbra.esisar.grenoble-inp.fr ([127.0.0.1])
- by localhost (srv-zimbra.esisar.grenoble-inp.fr [127.0.0.1]) (amavis,
- port 10026)
- with ESMTP id q08WxwemNqja; Tue,  7 Jul 2026 14:33:42 +0200 (CEST)
-Received: from Ubuntu.eur.gad.schneider-electric.com
- (71.169.185.81.rev.sfr.net [81.185.169.71])
- by srv-zimbra.esisar.grenoble-inp.fr (Postfix) with ESMTPSA id 32B6F6E1413;
- Tue,  7 Jul 2026 14:33:42 +0200 (CEST)
-From: theodore.oviguian@etu.esisar.grenoble-inp.fr
-To: u-boot@lists.denx.de
-Cc: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>,
- Theodore Oviguian <theodore.oviguian@se.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Neha Malcom Francis <n-francis@ti.com>
-Subject: [PATCH 1/3] ti_pwm: Add EHRPWM TBCLK clock driver
-Date: Tue,  7 Jul 2026 12:33:21 +0000
-Message-ID: <20260707123325.639840-2-theodore.oviguian@etu.esisar.grenoble-inp.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260707123325.639840-1-theodore.oviguian@etu.esisar.grenoble-inp.fr>
-References: <20260707123325.639840-1-theodore.oviguian@etu.esisar.grenoble-inp.fr>
+ id E38078494B; Tue,  7 Jul 2026 15:31:54 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 93085848EB
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 15:31:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 71EE31A2D;
+ Tue,  7 Jul 2026 06:31:47 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
+ ECB603F85F; Tue,  7 Jul 2026 06:31:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1783431111; bh=wJ1vh8dLe4d8Fie83914eK500UlrxDu4qxlaeKNYdDY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ZqUDqc201V7E+la0UZMU6/7JsUF/qOf59jHc2Vu49lkOhhgL8GAIE531w5MSgJnWI
+ 36GhG1/z6qWWFk4IUdu3lJbvK4FK3NHFSOScFfOE22tji6x7Ismmv653RRWh0k4OL1
+ GTBUy569Ks61zO8/SdPGTAuzOFxwN9rnB/q9m4Mc=
+Message-ID: <61a7e0c7-46b2-4a85-8f53-b8e2486e89e7@arm.com>
+Date: Tue, 7 Jul 2026 15:31:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 07 Jul 2026 15:05:06 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: sunxi: mask DATA0 during H6-family clock updates
+To: James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20260703194738.3540286-1-james.hilliard1@gmail.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20260703194738.3540286-1-james.hilliard1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,133 +65,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Theodore Oviguian <theodore.oviguian@etu.esisar.grenoble-inp.fr>
+Hi James,
 
-Add a TI eHRPWM TBCLK clock driver.
-TBCLK provides the input clock required by all eHRPWM instances, so this
-clock must be enabled before eHRPWM can operate.
 
-Signed-off-by: Theodore Oviguian <theodore.oviguian@se.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Neha Malcom Francis <n-francis@ti.com>
----
+On 7/3/26 21:47, James Hilliard wrote:
+> Linux marks the H6/A100-style controllers with mask_data0 and sets the
+> CLKCR MASK_DATA0 bit while issuing update-clock commands. Without this,
+> the controller can sample DAT0 as busy around clock updates before the
+> first card command, so card detection may fail with -ETIMEDOUT.
 
-V2:
-(Change : remove unused macro, comply with the U-Boot coding style : use
-u32 instead og uint32_t & remove trailing whitespace)
-I decide to let EHRPWM_TBCLK help comment on one line to comply with the
-Kconfig file style and because I think there was nothing more the=20
-say in it
+Can you please say *WHY* this change is needed? Is this "card detection 
+may fail" a theoretical assumption, or did this happen to you in 
+practice? I wouldn't be aware of any reports about issues with MMC in 
+U-Boot, so I'd be curious to hear about that, with a concrete example, 
+and how often this happens, if you experienced this. Also if that 
+applies to the SPL or to U-Boot proper only.
 
-V3:
-Remove useless stdint header include
-Make clk_ops a constant
+> Mirror the Linux behavior for H6-family and NCAT2-family controllers while
+> updating the card clock.
+> 
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> ---
+>   drivers/mmc/sunxi_mmc.c | 30 +++++++++++++++++++++++++++---
+>   drivers/mmc/sunxi_mmc.h |  1 +
+>   2 files changed, 28 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+> index e28c81afffe..145d6bd7c9d 100644
+> --- a/drivers/mmc/sunxi_mmc.c
+> +++ b/drivers/mmc/sunxi_mmc.c
+> @@ -64,6 +64,12 @@ static bool sunxi_mmc_can_calibrate(void)
+>   	       IS_ENABLED(CONFIG_MACH_SUN8I_R40);
+>   }
+>   
+> +static bool sunxi_mmc_needs_data0_mask(void)
+> +{
+> +	return IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> +	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2);
 
-Thanks to Neha Malcom Francis for the quality and speed of the reviews
+Meh, I see that this is a pragmatic approach, but I wonder if this 
+should come from the DT when in U-Boot proper (or when using DM_MMC in 
+general).
 
- drivers/clk/ti/Kconfig        |  7 ++++
- drivers/clk/ti/Makefile       |  1 +
- drivers/clk/ti/ehrpwm-tbclk.c | 65 +++++++++++++++++++++++++++++++++++
- 3 files changed, 73 insertions(+)
- create mode 100644 drivers/clk/ti/ehrpwm-tbclk.c
+> +}
+> +
+>   static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
+>   {
+>   	unsigned int pll, pll_hz, div, n, oclk_dly, sclk_dly;
+> @@ -201,14 +207,31 @@ static int mmc_update_clk(struct sunxi_mmc_priv *priv)
+>   	return 0;
+>   }
+>   
+> +static int mmc_update_clk_with_data0_mask(struct sunxi_mmc_priv *priv)
 
-diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-index 3b995ab8f47..937f586706d 100644
---- a/drivers/clk/ti/Kconfig
-+++ b/drivers/clk/ti/Kconfig
-@@ -83,3 +83,10 @@ config SPL_CLK_K3
- 	depends on CLK && SPL
- 	help
- 	  Enables the clock translation layer from DT to device clocks.
-+
-+config EHRPWM_TBCLK
-+	bool "Clock support for TI AM6X EHRPWM"
-+	depends on ARCH_K3 && CLK
-+	default y if PWM_TI_EHRPWM
-+	help
-+	  Enables clock support for TI AM6X pwms.
-diff --git a/drivers/clk/ti/Makefile b/drivers/clk/ti/Makefile
-index 74e4329a343..2c685224e7d 100644
---- a/drivers/clk/ti/Makefile
-+++ b/drivers/clk/ti/Makefile
-@@ -13,3 +13,4 @@ obj-$(CONFIG_CLK_TI_OMAP4_CM) +=3D omap4-cm.o
- obj-$(CONFIG_CLK_TI_SCI) +=3D clk-sci.o
- obj-$(CONFIG_$(PHASE_)CLK_K3_PLL) +=3D clk-k3-pll.o
- obj-$(CONFIG_$(PHASE_)CLK_K3) +=3D clk-k3.o
-+obj-$(CONFIG_EHRPWM_TBCLK) +=3D ehrpwm-tbclk.o
-diff --git a/drivers/clk/ti/ehrpwm-tbclk.c b/drivers/clk/ti/ehrpwm-tbclk.=
-c
-new file mode 100644
-index 00000000000..699b9350e68
---- /dev/null
-+++ b/drivers/clk/ti/ehrpwm-tbclk.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *
-+ * Copyright (C) 2026 Schneider Electric - https://se.com
-+ *	Th=C3=A9odore Oviguian <theodore.oviguian@se.com>
-+ */
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <asm/io.h>
-+
-+static int ehrpwm_tbclk_enable(struct clk *clk)
-+{
-+	fdt_addr_t reg =3D dev_read_addr(clk->dev);
-+	u32 reg_val =3D readl(reg);
-+
-+	reg_val |=3D BIT(clk->id);
-+
-+	writel(reg_val, reg);
-+
-+	return 0;
-+}
-+
-+static int ehrpwm_tbclk_disable(struct clk *clk)
-+{
-+	fdt_addr_t reg =3D dev_read_addr(clk->dev);
-+	u32 reg_val =3D readl(reg);
-+
-+	reg_val &=3D ~BIT(clk->id);
-+
-+	writel(reg_val, reg);
-+
-+	return 0;
-+}
-+
-+static ulong ehrpwm_tbclk_get_rate(struct clk *clk)
-+{
-+	return 0;
-+}
-+
-+static const struct clk_ops ehrpwm_tbclk_ops =3D {
-+	.enable =3D ehrpwm_tbclk_enable,
-+	.disable =3D ehrpwm_tbclk_disable,
-+	.get_rate =3D ehrpwm_tbclk_get_rate,
-+};
-+
-+static const struct udevice_id ehrpwm_tbclk_ids[] =3D {
-+	{ .compatible =3D "ti,am654-ehrpwm-tbclk" },
-+	{ .compatible =3D "ti,am64-epwm-tbclk" },
-+	{ .compatible =3D "ti,am62-epwm-tbclk" },
-+	{ /* sentinel */ }
-+};
-+
-+static int ehrpwm_tbclk_probe(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(ehrpwm_tbclk) =3D {
-+	.name =3D "ehrpwm_tbclk",
-+	.id =3D UCLASS_CLK,
-+	.of_match =3D ehrpwm_tbclk_ids,
-+	.ops =3D &ehrpwm_tbclk_ops,
-+	.probe =3D ehrpwm_tbclk_probe,
-+	.priv_auto	=3D 0,
-+};
---=20
-2.43.0
+If I see this correctly, then this function is only called (twice) from 
+mmc_config_clock() below, but you don't change the other user in the 
+error path of sunxi_mmc_send_cmd_common(), right? It's probably worth 
+mentioning this in the commit message.
+
+And if that's true, please fold the functionality into 
+mmc_config_clock(). This one knows the value of clkcr already, so no 
+need for two read/modify/write operations, and no need for a function 
+with a lengthy name.
+
+> +{
+> +	bool mask_data0 = sunxi_mmc_needs_data0_mask();
+> +	int ret;
+> +
+> +	if (mask_data0)
+> +		setbits_le32(&priv->reg->clkcr, SUNXI_MMC_CLK_MASK_DATA0);
+> +
+> +	ret = mmc_update_clk(priv);
+> +
+> +	if (mask_data0)
+> +		clrbits_le32(&priv->reg->clkcr, SUNXI_MMC_CLK_MASK_DATA0);
+> +
+> +	return ret;
+> +}
+> +
+>   static int mmc_config_clock(struct sunxi_mmc_priv *priv, struct mmc *mmc)
+>   {
+>   	unsigned rval = readl(&priv->reg->clkcr);
+>   
+>   	/* Disable Clock */
+> -	rval &= ~SUNXI_MMC_CLK_ENABLE;
+> +	rval &= ~(SUNXI_MMC_CLK_ENABLE | SUNXI_MMC_CLK_POWERSAVE |
+
+What about this POWERSAVE bit? If you change this as well, please 
+mention this in the commit message, and say why this is needed (as it 
+wasn't used before in the driver).
+
+Cheers,
+Andre
+
+> +		  SUNXI_MMC_CLK_MASK_DATA0);
+>   	writel(rval, &priv->reg->clkcr);
+> -	if (mmc_update_clk(priv))
+> +	if (mmc_update_clk_with_data0_mask(priv))
+>   		return -1;
+>   
+>   	/* Set mod_clk to new rate */
+> @@ -231,9 +254,10 @@ static int mmc_config_clock(struct sunxi_mmc_priv *priv, struct mmc *mmc)
+>   #endif
+>   
+>   	/* Re-enable Clock */
+> +	rval &= ~(SUNXI_MMC_CLK_POWERSAVE | SUNXI_MMC_CLK_MASK_DATA0);
+>   	rval |= SUNXI_MMC_CLK_ENABLE;
+>   	writel(rval, &priv->reg->clkcr);
+> -	if (mmc_update_clk(priv))
+> +	if (mmc_update_clk_with_data0_mask(priv))
+>   		return -1;
+>   
+>   	return 0;
+> diff --git a/drivers/mmc/sunxi_mmc.h b/drivers/mmc/sunxi_mmc.h
+> index 71865160319..c9a0f3833a2 100644
+> --- a/drivers/mmc/sunxi_mmc.h
+> +++ b/drivers/mmc/sunxi_mmc.h
+> @@ -58,6 +58,7 @@ struct sunxi_mmc {
+>   
+>   #define SUNXI_MMC_CLK_POWERSAVE		(0x1 << 17)
+>   #define SUNXI_MMC_CLK_ENABLE		(0x1 << 16)
+> +#define SUNXI_MMC_CLK_MASK_DATA0	(0x1U << 31)
+>   #define SUNXI_MMC_CLK_DIVIDER_MASK	(0xff)
+>   
+>   #define SUNXI_MMC_GCTRL		0x000
 
