@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B8ADC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC936C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:32:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEE1184A0B;
-	Tue,  7 Jul 2026 17:32:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF27A84AD1;
+	Tue,  7 Jul 2026 17:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WhAzfH8z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FpQsTE/s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 849A484A27; Tue,  7 Jul 2026 17:32:31 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id B9D5784ACD; Tue,  7 Jul 2026 17:32:36 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 195FD8497A
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 285A584A4A
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7eb3865ea6fso3255083a34.2
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:29 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-4877a7b451dso2779394b6e.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783438348; x=1784043148; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783438352; x=1784043152; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6t21EZV0VOIJY2OstbTSgCqn6WAyxC1AkmRr4L05N5g=;
- b=WhAzfH8ziPwuy2yFW28MtZi9mWOheC7MmsE7xoKIFA6+6U/TcUDO1kpAlr2hnz1O4q
- 6aBb/ZLVgCJBY3WWmbXW7sjR/q9v46p8086WlE7sWIa1HV2Bf4VNfYETlgfheixKpQpX
- /83ARYmMUSwPRqOW9+NL8+GZL/URsZ+OJixSM=
+ :message-id:reply-to:content-type;
+ bh=ZVTlh9oq6hAb2LtbMZYMrotDhie/PJZMk7oaT+ezAk4=;
+ b=FpQsTE/suOO8y2E2IiP4QkoaLrQHBHPeZ0Rd2QI058BOwlqAEFsbDaFUyTUrI3knkV
+ y0ZSEqfz2z9y0weTmQjk36R9x6pixK13KRyytoSZz/5MJhAOvJhIF29sOR1S4PWBQIvv
+ kzC1iBCDul4RPcLhpbiarirZz3lzWlHWyFkWE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438348; x=1784043148;
+ d=1e100.net; s=20251104; t=1783438352; x=1784043152;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=6t21EZV0VOIJY2OstbTSgCqn6WAyxC1AkmRr4L05N5g=;
- b=W3SrEwFS1T02uWIEsv0PyP9Yq2+vySN9G/38T8v4cSW8GXW9B6Z/AllQJ64lBfseJj
- Mi60x3gNZM5ki4epxOieTyM9qurOJx7o7cqjbuLjtmTdvLZmWvc/dcgbzZz/o+Up/RNa
- 0740QCUVIRIokt4mSWwNbeElEemKonEhPHXQqsFlh1O5/XpkVviQ/EwHoeA3x44UMd8O
- 8XrxTH1O4WwBY4UD4Y7FGaAkiJw2IGJ8uRBicu5HFbX3ochwcy65k5Cy+Bh2cPnQDqNT
- 3jJdJSFMmkT/8QN/kvnh2FdxaAYuq2kYdX4Vw+xmRalW70yzF4IQxMvu3m3QFKiPy7mX
- O7dA==
-X-Gm-Message-State: AOJu0YxrfhbRun/cAoLluaz4JcNUKJniRqJ2PLh2cMlagaU+TOcwOCxS
- P06JNy4YesE6nDOWsCvVKeRLduNd4GD/Id6l9jxfgYevtG/W7wwKwpd74VBptp04iMSq/wpOXQv
- g3nlJZg==
-X-Gm-Gg: AfdE7cm+aqbMkGVFXOUJdYOoOBxmwl4diuZ04jmlFegSAsUjvq/MZ7p0HIMut1DcSXL
- wwjUqZb14oMERty3ppBEqkIU4uAZs7x5u3Ci9bgZ8JPCrkf8aAF3d4HK6bLXS/YoJytFjjky3mp
- pMOKeSUZDHPi/FEWw8wDMhYAcdlLyDv7GxJzviVGmRW2JZiTYxMdXxqla6cKA94uSTyibZttI6a
- E1yuwsVIxq0qqXis9d3PY6q06K16EIJQChK5WC4tCOcMHOwx2jelHgpOfQYr4eez0t7E++lmYrf
- 7yRWDK61MBLmcFPB7ocIlNGrasMTbYqVo/x/SLVYMTKhQRH4KM9BTevClzM00URWqA1ktl853TP
- iR6bj/v4jlT+zrKhmDrBww2fdbCHJyL56qNyH2r8nTWcJ4bVH6E2CwlSbFtPv3NR5nkQdRC2PlH
- pG1NZRb1s=
-X-Received: by 2002:a05:6808:c3e9:b0:486:503a:ce99 with SMTP id
- 5614622812f47-49fddad584dmr3958979b6e.27.1783438347740; 
- Tue, 07 Jul 2026 08:32:27 -0700 (PDT)
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ZVTlh9oq6hAb2LtbMZYMrotDhie/PJZMk7oaT+ezAk4=;
+ b=dCkiQtyOAhorAoUdqxDFC1GFg4w2/AcEbkEX/dkq4Gy92avSWpJiOTGxva0R1c4EWi
+ Fki6jtoNBUM3HA31FVvpJOqmHjE/EawO0kfn+cVg9zFc0hF7InUCn46UIZhFux6BFK60
+ g/dVFW0LqFhTfekRpl87r+4WNE+rF5JPzTZ9KfJ8JhgZXVJzQZtCBVFHxGv/vTGwarRp
+ k0U5ILsUXvVUK9mAgzvh2NuAe4NkwL+A2ugSguydu0yhHG07XqJQEmLhUao17c3p/qkz
+ ZRhMAe0ycFD9Veb5Z6tGhFEeOW275y2elElisyK6jg7IU9/Y6neJsAr0XvCATuPhmMCs
+ cZ4g==
+X-Gm-Message-State: AOJu0YyOIMp16dGZbuMTNNO5594ztXLYOQzWEuXzIshrYkDhOJ56z6es
+ Zke5fKj9QInetbhRIKpFVswhEgTeH1HZEnP5G/2FTqccnhLtH2M0qUTeFLDtWZCpo0P+pc7Rrvm
+ Yu9n4Cg==
+X-Gm-Gg: AfdE7cnK0WX907OoSwz925XJbVGqav2+a1QTGbuGaySkhK1mAt0V8Q7sYf6LnPMsGDa
+ kt/Ls0fHI0tnMj8vjIv5LD8hqZBp1nr9Yq5DvWT8iKVYR85TpeQ2SeR3uH0EZJfmXSybWTBgvw2
+ x5HE+pvMtXqGXTs5bvG+JKcT9k8aGgO1YMVHLk+DNSYJoIAqeG4KNoTiF68vQd5gw+Gr93B8AZJ
+ ildu8qY+A0G8Z/bzUTwvl4qqfIYixgmzRxBnZjw862j5xak61svTSvRvPNy1k8qIgn15yO2kuQb
+ uTuKYn/RwGdB+gdxJsLeQSeYxbgzTysDVD5RO3GzTYnwvraUmlv/Lpn/+H+LQA23kV+4LZY4JL+
+ ky8L7VbAWls+FgAZiAKXwS/Wga21bOH8AYB4sQWhFNj7NQ6eAP6+qmkEeAeGfteu7mjEKfCLNUN
+ +ainMkZ2hcfp4LcBNrDQ==
+X-Received: by 2002:a05:6808:7006:b0:49a:9d5e:a92f with SMTP id
+ 5614622812f47-49fddbce0bfmr3843009b6e.24.1783438351451; 
+ Tue, 07 Jul 2026 08:32:31 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.25
+ 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:32:25 -0700 (PDT)
+ Tue, 07 Jul 2026 08:32:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>,
- Ye Zhang <ye.zhang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Elaine Zhang <zhangqing@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 02/15] pinctrl: rockchip: Add RV1103B support
-Date: Tue,  7 Jul 2026 09:31:00 -0600
-Message-ID: <20260707153135.2048115-3-sjg@chromium.org>
+Subject: [PATCH v3 03/15] clk: rockchip: Add RV1103B clock driver
+Date: Tue,  7 Jul 2026 09:31:01 -0600
+Message-ID: <20260707153135.2048115-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
 References: <20260707153135.2048115-1-sjg@chromium.org>
@@ -98,448 +100,1424 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Zhang <ye.zhang@rock-chips.com>
+From: Elaine Zhang <zhangqing@rock-chips.com>
 
-Add the pinctrl driver for the RV1103B.
+Add the basic clock driver for the RV1103B.
 
-Signed-off-by: Ye Zhang <ye.zhang@rock-chips.com>
+Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Use regmap_update_bits() in all the remaining places (Jonas)
-- Align continuation lines with the open parenthesis (checkpatch)
+- Use CONFIG_IS_ENABLED() to guard the set_parent operation, matching
+  clk_rk3588.c, since plain IS_ENABLED() needs the CONFIG_ prefix
 
 Changes in v2:
 - Use the original author from Rockchip's vendor U-Boot tree
-- Use regmap_update_bits()
-- Remove unneeded blank lines
-- Remove unneeded logging functions
 
- drivers/pinctrl/rockchip/Makefile          |   1 +
- drivers/pinctrl/rockchip/pinctrl-rv1103b.c | 402 +++++++++++++++++++++
- 2 files changed, 403 insertions(+)
- create mode 100644 drivers/pinctrl/rockchip/pinctrl-rv1103b.c
+ .../include/asm/arch-rockchip/cru_rv1103b.h   |  266 ++++
+ .../include/asm/arch-rockchip/grf_rv1103b.h   |   31 +
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rv1103b.c            | 1068 +++++++++++++++++
+ 4 files changed, 1366 insertions(+)
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rv1103b.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/grf_rv1103b.h
+ create mode 100644 drivers/clk/rockchip/clk_rv1103b.c
 
-diff --git a/drivers/pinctrl/rockchip/Makefile b/drivers/pinctrl/rockchip/Makefile
-index 0405df128df..b7ce6402ea3 100644
---- a/drivers/pinctrl/rockchip/Makefile
-+++ b/drivers/pinctrl/rockchip/Makefile
-@@ -19,5 +19,6 @@ obj-$(CONFIG_ROCKCHIP_RK3528) += pinctrl-rk3528.o
- obj-$(CONFIG_ROCKCHIP_RK3568) += pinctrl-rk3568.o
- obj-$(CONFIG_ROCKCHIP_RK3576) += pinctrl-rk3576.o
- obj-$(CONFIG_ROCKCHIP_RK3588) += pinctrl-rk3588.o
-+obj-$(CONFIG_ROCKCHIP_RV1103B) += pinctrl-rv1103b.o
- obj-$(CONFIG_ROCKCHIP_RV1108) += pinctrl-rv1108.o
- obj-$(CONFIG_ROCKCHIP_RV1126) += pinctrl-rv1126.o
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1103b.c b/drivers/pinctrl/rockchip/pinctrl-rv1103b.c
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rv1103b.h b/arch/arm/include/asm/arch-rockchip/cru_rv1103b.h
 new file mode 100644
-index 00000000000..4bd74312c8c
+index 00000000000..fc7aa4dfc0d
 --- /dev/null
-+++ b/drivers/pinctrl/rockchip/pinctrl-rv1103b.c
-@@ -0,0 +1,402 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/include/asm/arch-rockchip/cru_rv1103b.h
+@@ -0,0 +1,266 @@
++/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * (C) Copyright 2024 Rockchip Electronics Co., Ltd
++ * Copyright (c) 2024 Rockchip Electronics Co. Ltd.
++ * Author: Elaine Zhang <zhangqing@rock-chips.com>
 + */
 +
++#ifndef _ASM_ARCH_CRU_RV1103B_H
++#define _ASM_ARCH_CRU_RV1103B_H
++
++#define MHz		1000000
++#define KHz		1000
++#define OSC_HZ		(24 * MHz)
++#define RC_OSC_HZ	(125 * MHz)
++
++#define GPLL_HZ		(1188 * MHz)
++
++/* RV1103B pll id */
++enum rv1103b_pll_id {
++	GPLL,
++	PLL_COUNT,
++};
++
++struct rv1103b_clk_info {
++	unsigned long id;
++	char *name;
++	bool is_cru;
++};
++
++struct rv1103b_clk_priv {
++	struct rv1103b_cru *cru;
++	struct rv1103b_grf *grf;
++	ulong gpll_hz;
++	ulong armclk_hz;
++	ulong armclk_enter_hz;
++	ulong armclk_init_hz;
++	bool sync_kernel;
++	bool set_armclk_rate;
++};
++
++struct rv1103b_grf_clk_priv {
++	struct rv1103b_grf *grf;
++};
++
++struct rv1103b_pll {
++	unsigned int con0;
++	unsigned int con1;
++	unsigned int con2;
++	unsigned int con3;
++	unsigned int con4;
++	unsigned int reserved0[3];
++};
++
++struct rv1103b_cru {
++	unsigned int reserved0[192];
++	unsigned int peri_clksel_con[4];
++	unsigned int reserved1[316];
++	unsigned int peri_clkgate_con[12];
++	unsigned int reserved2[116];
++	unsigned int peri_softrst_con[12];
++	unsigned int reserved3[15924];
++	unsigned int vepu_clksel_con[3];
++	unsigned int reserved4[317];
++	unsigned int vepu_clkgate_con[1];
++	unsigned int reserved5[127];
++	unsigned int vepu_softrst_con[1];
++	unsigned int reserved6[15935];
++	unsigned int npu_clksel_con[3];
++	unsigned int reserved7[317];
++	unsigned int npu_clkgate_con[1];
++	unsigned int reserved8[127];
++	unsigned int npu_softrst_con[1];
++	unsigned int reserved9[15935];
++	unsigned int vi_clksel_con[1];
++	unsigned int reserved10[319];
++	unsigned int vi_clkgate_con[3];
++	unsigned int reserved11[125];
++	unsigned int vi_softrst_con[3];
++	unsigned int reserved12[15933];
++	unsigned int core_clksel_con[3];
++	unsigned int reserved13[16381];
++	unsigned int ddr_clksel_con[1];
++	unsigned int reserved14[16207];
++	struct rv1103b_pll pll[2];
++	unsigned int reserved15[128];
++	unsigned int mode;
++	unsigned int reserved16[31];
++	unsigned int clksel_con[42];
++	unsigned int reserved17[278];
++	unsigned int clkgate_con[7];
++	unsigned int reserved18[121];
++	unsigned int softrst_con[1];
++	unsigned int reserved19[127];
++	unsigned int glb_cnt_th;
++	unsigned int glb_rst_st;
++	unsigned int glb_srst_fst;
++	unsigned int glb_srst_snd;
++	unsigned int glb_rst_con;
++	unsigned int reserved20[15803];
++	unsigned int pmu_clksel_con[3];
++	unsigned int reserved21[317];
++	unsigned int pmu_clkgate_con[3];
++	unsigned int reserved22[125];
++	unsigned int pmu_softrst_con[3];
++	unsigned int reserved23[15933];
++	unsigned int pmu1_clksel_con[1];
++	unsigned int reserved24[319];
++	unsigned int pmu1_clkgate_con[2];
++	unsigned int reserved25[126];
++	unsigned int pmu1_softrst_con[2];
++};
++
++check_member(rv1103b_cru, pmu1_softrst_con[1], 0x80a04);
++
++struct pll_rate_table {
++	unsigned long rate;
++	unsigned int fbdiv;
++	unsigned int postdiv1;
++	unsigned int refdiv;
++	unsigned int postdiv2;
++	unsigned int dsmpd;
++	unsigned int frac;
++};
++
++#define RV1103B_TOPCRU_BASE		0x60000
++#define RV1103B_PERICRU_BASE		0x0
++#define RV1103B_VICRU_BASE		0x30000
++#define RV1103B_NPUCRU_BASE		0x20000
++#define RV1103B_CORECRU_BASE		0x40000
++#define RV1103B_VEPUCRU_BASE		0x10000
++#define RV1103B_DDRCRU_BASE		0x50000
++#define RV1103B_SUBDDRCRU_BASE		0x58000
++#define RV1103B_PMUCRU_BASE		0x70000
++#define RV1103B_PMU1CRU_BASE		0x80000
++
++#define RV1103B_CRU_BASE		0x20000000
++
++#define RV1103B_PLL_CON(x)		((x) * 0x4 + RV1103B_TOPCRU_BASE)
++#define RV1103B_MODE_CON		(0x280 + RV1103B_TOPCRU_BASE)
++#define RV1103B_CLKSEL_CON(x)		((x) * 0x4 + 0x300 + RV1103B_TOPCRU_BASE)
++#define RV1103B_SUBDDRMODE_CON		(0x280 + RV1103B_SUBDDRCRU_BASE)
++
++enum {
++	/* CORECRU_CLK_SEL0_CON */
++	CLK_CORE_SRC_SEL_SHIFT		= 1,
++	CLK_CORE_SRC_SEL_MASK		= 0x1 << CLK_CORE_SRC_SEL_SHIFT,
++	CLK_CORE_SRC_SEL_GPLL		= 0,
++	CLK_CORE_SRC_SEL_PVTPLL,
++
++	/* CRU_PERI_CLK_SEL0_CON */
++	CLK_TSADC_TSEN_DIV_SHIFT	= 10,
++	CLK_TSADC_TSEN_DIV_MASK		= 0x1f << CLK_TSADC_TSEN_DIV_SHIFT,
++	CLK_TSADC_DIV_SHIFT		= 4,
++	CLK_TSADC_DIV_MASK		= 0x1f << CLK_TSADC_DIV_SHIFT,
++	PCLK_PERI_DIV_SHIFT		= 0,
++	PCLK_PERI_DIV_MASK		= 0x3 << PCLK_PERI_DIV_SHIFT,
++
++	/* CRU_PERI_CLK_SEL1_CON */
++	CLK_SARADC_DIV_SHIFT		= 0,
++	CLK_SARADC_DIV_MASK		= 0x7 << CLK_SARADC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL5_CON */
++	CLK_UART2_SRC_DIV_SHIFT		= 10,
++	CLK_UART2_SRC_DIV_MASK		= 0x1f << CLK_UART2_SRC_DIV_SHIFT,
++	CLK_UART1_SRC_DIV_SHIFT		= 5,
++	CLK_UART1_SRC_DIV_MASK		= 0x1f << CLK_UART1_SRC_DIV_SHIFT,
++	CLK_UART0_SRC_DIV_SHIFT		= 0,
++	CLK_UART0_SRC_DIV_MASK		= 0x1f << CLK_UART0_SRC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL10_CON */
++	CLK_UART_FRAC_NUMERATOR_SHIFT	= 16,
++	CLK_UART_FRAC_NUMERATOR_MASK	= 0xffff << 16,
++	CLK_UART_FRAC_DENOMINATOR_SHIFT	= 0,
++	CLK_UART_FRAC_DENOMINATOR_MASK	= 0xffff,
++
++	/* CRU_CLK_SEL31_CON */
++	CLK_EMMC_SEL_SHIFT		= 15,
++	CLK_EMMC_SEL_MASK		= 0x1 << CLK_EMMC_SEL_SHIFT,
++	ACLK_PERI_SEL_SHIFT		= 10,
++	ACLK_PERI_SEL_MASK		= 0x3 << ACLK_PERI_SEL_SHIFT,
++	ACLK_PERI_SEL_600M		= 0,
++	ACLK_PERI_SEL_480M,
++	ACLK_PERI_SEL_400M,
++	LSCLK_PERI_SEL_SHIFT		= 9,
++	LSCLK_PERI_SEL_MASK		= 0x1 << LSCLK_PERI_SEL_SHIFT,
++	LSCLK_PERI_SEL_300M		= 0,
++	LSCLK_PERI_SEL_200M,
++	CLK_EMMC_DIV_SHIFT		= 0,
++	CLK_EMMC_DIV_MASK		= 0xff << CLK_EMMC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL32_CON */
++	CLK_SDMMC_SEL_SHIFT		= 15,
++	CLK_SDMMC_SEL_MASK		= 0x1 << CLK_SDMMC_SEL_SHIFT,
++	CLK_MMC_SEL_GPLL		= 0,
++	CLK_MMC_SEL_OSC,
++	CLK_UART2_SEL_SHIFT		= 12,
++	CLK_UART2_SEL_MASK		= 3 << CLK_UART2_SEL_SHIFT,
++	CLK_UART1_SEL_SHIFT		= 10,
++	CLK_UART1_SEL_MASK		= 3 << CLK_UART1_SEL_SHIFT,
++	CLK_UART0_SEL_SHIFT		= 8,
++	CLK_UART0_SEL_MASK		= 3 << CLK_UART0_SEL_SHIFT,
++	CLK_UART_SEL_SRC		= 0,
++	CLK_UART_SEL_FRAC,
++	CLK_UART_SEL_OSC,
++	CLK_SDMMC_DIV_SHIFT		= 0,
++	CLK_SDMMC_DIV_MASK		= 0xff << CLK_SDMMC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL33_CON */
++	CLK_SFC_SEL_SHIFT		= 15,
++	CLK_SFC_SEL_MASK		= 0x1 << CLK_SFC_SEL_SHIFT,
++	CLK_SFC_DIV_SHIFT		= 0,
++	CLK_SFC_DIV_MASK		= 0xff << CLK_SFC_DIV_SHIFT,
++
++	/* CRU_CLK_SEL34_CON */
++	CLK_PWM2_SEL_SHIFT		= 14,
++	CLK_PWM2_SEL_MASK		= 1 << CLK_PWM2_SEL_SHIFT,
++	CLK_PWM1_SEL_SHIFT		= 13,
++	CLK_PWM1_SEL_MASK		= 1 << CLK_PWM1_SEL_SHIFT,
++	CLK_PWM0_SEL_SHIFT		= 12,
++	CLK_PWM0_SEL_MASK		= 1 << CLK_PWM0_SEL_SHIFT,
++	CLK_PWM_SEL_100M		= 0,
++	CLK_PWM_SEL_24M,
++	CLK_SPI0_SEL_SHIFT		= 2,
++	CLK_SPI0_SEL_MASK		= 3 << CLK_SPI0_SEL_SHIFT,
++	CLK_SPI0_SEL_200M		= 0,
++	CLK_SPI0_SEL_100M,
++	CLK_SPI0_SEL_50M,
++	CLK_SPI0_SEL_24M,
++	CLK_I2C1_SEL_SHIFT		= 1,
++	CLK_I2C1_SEL_MASK		= 0x1 << CLK_I2C1_SEL_SHIFT,
++	CLK_I2C0_SEL_SHIFT		= 0,
++	CLK_I2C0_SEL_MASK		= 0x1 << CLK_I2C0_SEL_SHIFT,
++	CLK_I2C_SEL_100M		= 0,
++	CLK_I2C_SEL_24M,
++
++	/* CRU_CLK_SEL35_CON */
++	CLK_PKA_CRYPTO_SEL_SHIFT	= 4,
++	CLK_PKA_CRYPTO_SEL_MASK		= 0x3 << CLK_PKA_CRYPTO_SEL_SHIFT,
++	CLK_CORE_CRYPTO_SEL_SHIFT	= 2,
++	CLK_CORE_CRYPTO_SEL_MASK	= 0x3 << CLK_CORE_CRYPTO_SEL_SHIFT,
++	CLK_CORE_CRYPTO_SEL_300M	= 0,
++	CLK_CORE_CRYPTO_SEL_200M,
++	CLK_CORE_CRYPTO_SEL_100M,
++	DCLK_DECOM_SEL_SHIFT		= 0,
++	DCLK_DECOM_SEL_MASK		= 0x3 << DCLK_DECOM_SEL_SHIFT,
++	DCLK_DECOM_SEL_480M		= 0,
++	DCLK_DECOM_SEL_400M,
++	DCLK_DECOM_SEL_300M,
++
++	/* CRU_CLK_SEL37_CON */
++	CLK_CORE_GPLL_DIV_SHIFT		= 13,
++	CLK_CORE_GPLL_DIV_MASK		= 0x7 << CLK_CORE_GPLL_DIV_SHIFT,
++	CLK_CORE_GPLL_SEL_SHIFT		= 12,
++	CLK_CORE_GPLL_SEL_MASK		= 0x1 << CLK_CORE_GPLL_SEL_SHIFT,
++	CLK_CORE_GPLL_SEL_GPLL		= 0,
++	CLK_CORE_GPLL_SEL_OSC,
++
++	/* CRU_PMU_CLK_SEL2_CON */
++	LSCLK_PMU_SEL_SHIFT		= 4,
++	LSCLK_PMU_SEL_MASK		= 0x1 << LSCLK_PMU_SEL_SHIFT,
++	LSCLK_PMU_SEL_24M		= 0,
++	LSCLK_PMU_SEL_RC_OSC,
++	LSCLK_PMU_DIV_SHIFT		= 0,
++	LSCLK_PMU_DIV_MASK		= 0x3 << LSCLK_PMU_DIV_SHIFT,
++
++};
++#endif
+diff --git a/arch/arm/include/asm/arch-rockchip/grf_rv1103b.h b/arch/arm/include/asm/arch-rockchip/grf_rv1103b.h
+new file mode 100644
+index 00000000000..6bb382a8e07
+--- /dev/null
++++ b/arch/arm/include/asm/arch-rockchip/grf_rv1103b.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier:     GPL-2.0+ */
++
++/*
++ * (C) Copyright 2024 Rockchip Electronics Co., Ltd.
++ */
++
++#ifndef _ASM_ARCH_GRF_RV1103B_H
++#define _ASM_ARCH_GRF_RV1103B_H
++
++#define VEPU_GRF	0x20100000
++#define NPU_GRF		0x20110000
++#define VI_GRF		0x20120000
++#define CPU_GRF		0x20130000
++#define DDR_GRF		0x20140000
++#define SYS_GRF		0x20150000
++#define PMU_GRF		0x20160000
++
++struct rv1103b_grf {
++	u32 reserved0[(SYS_GRF + 0xA0 - VEPU_GRF) / 4];
++	u32 gmac_con0;				/* address offset: 0x00a0 */
++	u32 gmac_clk_con;			/* address offset: 0x00a4 */
++	u32 gmac_st;				/* address offset: 0x00a8 */
++	u32 reserved00ac;			/* address offset: 0x00ac */
++	u32 macphy_con0;			/* address offset: 0x00b0 */
++	u32 macphy_con1;			/* address offset: 0x00b4 */
++	u32 reserved1[(PMU_GRF + 0x10000 - (SYS_GRF + 0xB4)) / 4];
++};
++
++check_member(rv1103b_grf, macphy_con1, SYS_GRF + 0xB4 - VEPU_GRF);
++
++#endif /*  _ASM_ARCH_GRF_RV1103B_H  */
+diff --git a/drivers/clk/rockchip/Makefile b/drivers/clk/rockchip/Makefile
+index 07525c36432..de2635b7475 100644
+--- a/drivers/clk/rockchip/Makefile
++++ b/drivers/clk/rockchip/Makefile
+@@ -20,5 +20,6 @@ obj-$(CONFIG_ROCKCHIP_RK3528) += clk_rk3528.o
+ obj-$(CONFIG_ROCKCHIP_RK3568) += clk_rk3568.o
+ obj-$(CONFIG_ROCKCHIP_RK3576) += clk_rk3576.o
+ obj-$(CONFIG_ROCKCHIP_RK3588) += clk_rk3588.o
++obj-$(CONFIG_ROCKCHIP_RV1103B) += clk_rv1103b.o
+ obj-$(CONFIG_ROCKCHIP_RV1108) += clk_rv1108.o
+ obj-$(CONFIG_ROCKCHIP_RV1126) += clk_rv1126.o
+diff --git a/drivers/clk/rockchip/clk_rv1103b.c b/drivers/clk/rockchip/clk_rv1103b.c
+new file mode 100644
+index 00000000000..c94a6ebb3dd
+--- /dev/null
++++ b/drivers/clk/rockchip/clk_rv1103b.c
+@@ -0,0 +1,1068 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2024 Rockchip Electronics Co., Ltd
++ * Author: Elaine Zhang <zhangqing@rock-chips.com>
++ */
++
++#include <bitfield.h>
++#include <clk-uclass.h>
 +#include <dm.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <asm/io.h>
++#include <dm/lists.h>
++#include <dt-bindings/clock/rockchip,rv1103b-cru.h>
++
++#include <clk.h>
 +#include <log.h>
-+#include <dm/pinctrl.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <linux/bitops.h>
++#include <malloc.h>
++#include <asm/global_data.h>
++#include <asm/arch-rockchip/clock.h>
++#include <asm/arch-rockchip/cru_rv1103b.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <linux/delay.h>
++#include <linux/stringify.h>
 +
-+#include "pinctrl-rockchip.h"
++DECLARE_GLOBAL_DATA_PTR;
 +
-+static int rv1103b_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
++#define DIV_TO_RATE(input_rate, div)	((input_rate) / ((div) + 1))
++
++#ifndef BITS_WITH_WMASK
++#define BITS_WITH_WMASK(bits, msk, shift) \
++	((bits) << (shift)) | ((msk) << ((shift) + 16))
++#endif
++
++static struct rockchip_pll_rate_table rv1103b_pll_rates[] = {
++	/* _mhz, _refdiv, _fbdiv, _postdiv1, _postdiv2, _dsmpd, _frac */
++	RK3036_PLL_RATE(1188000000, 1, 99, 2, 1, 1, 0),
++	RK3036_PLL_RATE(594000000, 1, 99, 4, 1, 1, 0),
++	{ /* sentinel */ },
++};
++
++static struct rockchip_pll_clock rv1103b_pll_clks[] = {
++	[GPLL] = PLL(pll_rk3328, PLL_GPLL, RV1103B_PLL_CON(24),
++		     RV1103B_MODE_CON, 0, 10, 0, rv1103b_pll_rates),
++};
++
++static ulong rv1103b_peri_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
 +{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+	int iomux_num = (pin / 8);
-+	struct regmap *regmap;
-+	u32 data, rmask;
-+	int reg, mask;
-+	u8 bit;
++	struct rv1103b_cru *cru = priv->cru;
++	u32 con, sel, div, rate, prate;
 +
-+	if (bank->bank_num == 2 && pin >= 12)
-+		return 0;
-+
-+	regmap = priv->regmap_base;
-+	reg = bank->iomux[iomux_num].offset;
-+	if ((pin % 8) >= 4)
-+		reg += 0x4;
-+	bit = (pin % 4) * 4;
-+	mask = 0xf;
-+
-+	if (bank->recalced_mask & BIT(pin))
-+		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
-+	data = (mask << (bit + 16));
-+	rmask = data | (data >> 16);
-+	data |= (mux & mask) << bit;
-+
-+	return regmap_update_bits(regmap, reg, rmask, data);
-+}
-+
-+#define RV1103_DRV_BITS_PER_PIN		8
-+#define RV1103_DRV_PINS_PER_REG		2
-+#define RV1103_DRV_GPIO0_A_OFFSET		0x40100
-+#define RV1103_DRV_GPIO0_B_OFFSET		0x50110
-+#define RV1103_DRV_GPIO1_A01_OFFSET		0x140
-+#define RV1103_DRV_GPIO1_A67_OFFSET		0x1014C
-+#define RV1103_DRV_GPIO2_OFFSET		0x30180
-+#define RV1103_DRV_GPIO2_SARADC_OFFSET		0x3080C
-+
-+static int rv1103b_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
-+					int pin_num, struct regmap **regmap,
-+					int *reg, u8 *bit)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+	int ret = 0;
-+
-+	*regmap = priv->regmap_base;
-+	switch (bank->bank_num) {
-+	case 0:
-+		if (pin_num < 7)
-+			*reg = RV1103_DRV_GPIO0_A_OFFSET;
-+		else if (pin_num > 7 && pin_num < 14)
-+			*reg = RV1103_DRV_GPIO0_B_OFFSET - 0x10;
++	switch (clk_id) {
++	case ACLK_PERI_SRC:
++		con = readl(&cru->clksel_con[31]);
++		sel = (con & ACLK_PERI_SEL_MASK) >> ACLK_PERI_SEL_SHIFT;
++		if (sel == ACLK_PERI_SEL_600M)
++			rate = 600 * MHz;
++		else if (sel == ACLK_PERI_SEL_480M)
++			rate = 480 * MHz;
 +		else
-+			ret = -EINVAL;
++			rate = 400 * MHz;
 +		break;
-+
-+	case 1:
-+		if (pin_num < 6)
-+			*reg = RV1103_DRV_GPIO1_A01_OFFSET;
-+		else if (pin_num >= 6 && pin_num < 23)
-+			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
-+		else if (pin_num >= 24 && pin_num < 30)
-+			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
++	case LSCLK_PERI_SRC:
++		con = readl(&cru->clksel_con[31]);
++		sel = (con & LSCLK_PERI_SEL_MASK) >> LSCLK_PERI_SEL_SHIFT;
++		if (sel == LSCLK_PERI_SEL_300M)
++			rate = 300 * MHz;
 +		else
-+			ret = -EINVAL;
++			rate = 200 * MHz;
 +		break;
-+
-+	case 2:
-+		if (pin_num < 12) {
-+			*reg = RV1103_DRV_GPIO2_OFFSET;
-+		} else if (pin_num >= 16) {
-+			ret = -EINVAL;
-+		} else {
-+			*reg = RV1103_DRV_GPIO2_SARADC_OFFSET;
-+			*bit = 10;
-+
-+			return 0;
-+		}
++	case PCLK_PERI_ROOT:
++		con = readl(&cru->peri_clksel_con[0]);
++		div = (con & PCLK_PERI_DIV_MASK) >> PCLK_PERI_DIV_SHIFT;
++		rate = DIV_TO_RATE(rv1103b_peri_get_clk(priv, LSCLK_PERI_SRC),
++				   div);
 +		break;
-+
++	case PCLK_TOP_ROOT:
++		rate = DIV_TO_RATE(priv->gpll_hz, 11);
++		break;
++	case LSCLK_PMU_ROOT:
++	case PCLK_PMU:
++		con = readl(&cru->pmu_clksel_con[2]);
++		sel = (con & LSCLK_PMU_SEL_MASK) >> LSCLK_PMU_SEL_SHIFT;
++		div = (con & LSCLK_PMU_DIV_MASK) >> LSCLK_PMU_DIV_SHIFT;
++		if (sel == LSCLK_PMU_SEL_24M)
++			prate = OSC_HZ;
++		else
++			prate = RC_OSC_HZ;
++		rate = DIV_TO_RATE(prate, div);
++		break;
 +	default:
-+		ret = -EINVAL;
-+		break;
++		return -ENOENT;
 +	}
 +
-+	if (ret) {
-+		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
-+		return ret;
-+	}
-+
-+	*reg += ((pin_num / RV1103_DRV_PINS_PER_REG) * 4);
-+	*bit = pin_num % RV1103_DRV_PINS_PER_REG;
-+	*bit *= RV1103_DRV_BITS_PER_PIN;
-+
-+	return 0;
++	return rate;
 +}
 +
-+static int rv1103b_set_drive(struct rockchip_pin_bank *bank,
-+			     int pin_num, int strength)
++static ulong rv1103b_peri_set_clk(struct rv1103b_clk_priv *priv,
++				  ulong clk_id, ulong rate)
 +{
-+	struct regmap *regmap;
-+	int reg, ret, i;
-+	u32 data, rmask;
-+	u8 bit;
-+	int rmask_bits = RV1103_DRV_BITS_PER_PIN;
++	struct rv1103b_cru *cru = priv->cru;
++	int src_clk, div;
 +
-+	ret = rv1103b_calc_drv_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+	if (ret)
-+		return ret;
-+
-+	for (i = 0, ret = 1; i < strength; i++)
-+		ret = (ret << 1) | 1;
-+
-+	if (bank->bank_num == 2 && pin_num >= 12) {
-+		rmask_bits = 2;
-+		ret = strength;
-+	}
-+
-+	/* Enable the write to the equivalent lower bits */
-+	data = ((1 << rmask_bits) - 1) << (bit + 16);
-+	rmask = data | (data >> 16);
-+	data |= (ret << bit);
-+
-+	return regmap_update_bits(regmap, reg, rmask, data);
-+}
-+
-+#define RV1103_PULL_BITS_PER_PIN		2
-+#define RV1103_PULL_PINS_PER_REG		8
-+#define RV1103_PULL_GPIO0_A_OFFSET		0x40200
-+#define RV1103_PULL_GPIO0_B_OFFSET		0x50204
-+#define RV1103_PULL_GPIO1_A01_OFFSET		0x210
-+#define RV1103_PULL_GPIO1_A67_OFFSET		0x10210
-+#define RV1103_PULL_GPIO2_OFFSET		0x30220
-+#define RV1103_PULL_GPIO2_SARADC_OFFSET	0x3080C
-+
-+static int rv1103b_calc_pull_reg_and_bit(struct rockchip_pin_bank *bank,
-+					 int pin_num, struct regmap **regmap,
-+					 int *reg, u8 *bit)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+	int ret = 0;
-+
-+	*regmap = priv->regmap_base;
-+	switch (bank->bank_num) {
-+	case 0:
-+		if (pin_num < 7)
-+			*reg = RV1103_PULL_GPIO0_A_OFFSET;
-+		else if (pin_num > 7 && pin_num < 14)
-+			*reg = RV1103_PULL_GPIO0_B_OFFSET - 0x4;
++	switch (clk_id) {
++	case ACLK_PERI_SRC:
++		if (rate >= 594 * MHz)
++			src_clk = ACLK_PERI_SEL_600M;
++		else if (rate >= 480 * MHz)
++			src_clk = ACLK_PERI_SEL_480M;
 +		else
-+			ret = -EINVAL;
++			src_clk = ACLK_PERI_SEL_400M;
++		rk_clrsetreg(&cru->clksel_con[31],
++			     ACLK_PERI_SEL_MASK,
++			     src_clk << ACLK_PERI_SEL_SHIFT);
 +		break;
-+
-+	case 1:
-+		if (pin_num < 6)
-+			*reg = RV1103_PULL_GPIO1_A01_OFFSET;
-+		else if (pin_num >= 6 && pin_num < 23)
-+			*reg = RV1103_PULL_GPIO1_A67_OFFSET;
-+		else if (pin_num >= 24 && pin_num < 30)
-+			*reg = RV1103_PULL_GPIO1_A67_OFFSET;
++	case LSCLK_PERI_SRC:
++		if (rate >= 297 * MHz)
++			src_clk = LSCLK_PERI_SEL_300M;
 +		else
-+			ret = -EINVAL;
++			src_clk = LSCLK_PERI_SEL_200M;
++		rk_clrsetreg(&cru->clksel_con[31],
++			     LSCLK_PERI_SEL_MASK,
++			     src_clk << LSCLK_PERI_SEL_SHIFT);
 +		break;
-+
-+	case 2:
-+		if (pin_num < 12) {
-+			*reg = RV1103_PULL_GPIO2_OFFSET;
-+		} else if (pin_num >= 16) {
-+			ret = -EINVAL;
++	case PCLK_PERI_ROOT:
++		div = DIV_ROUND_UP(rv1103b_peri_get_clk(priv, LSCLK_PERI_SRC),
++				   rate);
++		rk_clrsetreg(&cru->peri_clksel_con[0],
++			     PCLK_PERI_DIV_MASK,
++			     (div - 1) << PCLK_PERI_DIV_SHIFT);
++		break;
++	case PCLK_TOP_ROOT:
++		break;
++	case LSCLK_PMU_ROOT:
++	case PCLK_PMU:
++		if (!(OSC_HZ % rate)) {
++			src_clk = LSCLK_PMU_SEL_24M;
++			div = DIV_ROUND_UP(OSC_HZ, rate);
 +		} else {
-+			*reg = RV1103_PULL_GPIO2_SARADC_OFFSET;
-+			*bit = 13;
-+
-+			return 0;
++			src_clk = LSCLK_PMU_SEL_RC_OSC;
++			div = DIV_ROUND_UP(RC_OSC_HZ, rate);
 +		}
++		rk_clrsetreg(&cru->pmu_clksel_con[2],
++			     LSCLK_PMU_SEL_MASK | LSCLK_PMU_DIV_MASK,
++			     (src_clk << LSCLK_PMU_SEL_SHIFT) |
++			     ((div - 1) << LSCLK_PMU_DIV_SHIFT));
 +		break;
-+
 +	default:
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	if (ret) {
-+		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
-+		return ret;
-+	}
-+
-+	*reg += ((pin_num / RV1103_PULL_PINS_PER_REG) * 4);
-+	*bit = pin_num % RV1103_PULL_PINS_PER_REG;
-+	*bit *= RV1103_PULL_BITS_PER_PIN;
-+
-+	return 0;
-+}
-+
-+static int rv1103b_set_pull(struct rockchip_pin_bank *bank,
-+			    int pin_num, int pull)
-+{
-+	struct regmap *regmap;
-+	int reg, ret;
-+	u8 bit, type;
-+	u32 data, rmask;
-+
-+	if (pull == PIN_CONFIG_BIAS_PULL_PIN_DEFAULT)
++		printf("do not support this permid freq\n");
 +		return -EINVAL;
-+
-+	ret = rv1103b_calc_pull_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+	if (ret)
-+		return ret;
-+	type = bank->pull_type[pin_num / 8];
-+
-+	if (bank->bank_num == 2 && pin_num >= 12)
-+		type = 1;
-+
-+	ret = rockchip_translate_pull_value(type, pull);
-+	if (ret < 0) {
-+		debug("unsupported pull setting %d\n", pull);
-+		return ret;
 +	}
 +
-+	/* Enable the write to the equivalent lower bits */
-+	data = ((1 << RV1103_PULL_BITS_PER_PIN) - 1) << (bit + 16);
-+	rmask = data | (data >> 16);
-+	data |= (ret << bit);
-+
-+	return regmap_update_bits(regmap, reg, rmask, data);
++	return rv1103b_peri_get_clk(priv, clk_id);
 +}
 +
-+#define RV1103_SMT_BITS_PER_PIN		1
-+#define RV1103_SMT_PINS_PER_REG		8
-+#define RV1103_SMT_GPIO0_A_OFFSET		0x40400
-+#define RV1103_SMT_GPIO0_B_OFFSET		0x50404
-+#define RV1103_SMT_GPIO1_A01_OFFSET		0x410
-+#define RV1103_SMT_GPIO1_A67_OFFSET		0x10410
-+#define RV1103_SMT_GPIO2_OFFSET		0x30420
-+#define RV1103_SMT_GPIO2_SARADC_OFFSET		0x3080C
-+
-+static int rv1103b_calc_schmitt_reg_and_bit(struct rockchip_pin_bank *bank,
-+					    int pin_num,
-+					    struct regmap **regmap,
-+					    int *reg, u8 *bit)
++static ulong rv1103b_i2c_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
 +{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+	int ret = 0;
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, con;
++	ulong rate;
 +
-+	*regmap = priv->regmap_base;
-+	switch (bank->bank_num) {
-+	case 0:
-+		if (pin_num < 7)
-+			*reg = RV1103_SMT_GPIO0_A_OFFSET;
-+		else if (pin_num > 7 && pin_num < 14)
-+			*reg = RV1103_SMT_GPIO0_B_OFFSET - 0x4;
-+		else
-+			ret = -EINVAL;
++	switch (clk_id) {
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++	case CLK_I2C_PERI:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_I2C1_SEL_MASK) >> CLK_I2C1_SEL_SHIFT;
 +		break;
-+
-+	case 1:
-+		if (pin_num < 6)
-+			*reg = RV1103_SMT_GPIO1_A01_OFFSET;
-+		else if (pin_num >= 6 && pin_num < 23)
-+			*reg = RV1103_SMT_GPIO1_A67_OFFSET;
-+		else if (pin_num >= 24 && pin_num < 30)
-+			*reg = RV1103_SMT_GPIO1_A67_OFFSET;
-+		else
-+			ret = -EINVAL;
++	case CLK_I2C0:
++	case CLK_I2C_PMU:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_I2C0_SEL_MASK) >> CLK_I2C0_SEL_SHIFT;
 +		break;
-+
-+	case 2:
-+		if (pin_num < 12) {
-+			*reg = RV1103_SMT_GPIO2_OFFSET;
-+		} else if (pin_num >= 16) {
-+			ret = -EINVAL;
-+		} else {
-+			*reg = RV1103_SMT_GPIO2_SARADC_OFFSET;
-+			*bit = 8;
-+
-+			return 0;
-+		}
-+		break;
-+
 +	default:
-+		ret = -EINVAL;
++		return -ENOENT;
++	}
++
++	if (sel == CLK_I2C_SEL_100M)
++		rate = 100 * MHz;
++	else
++		rate = OSC_HZ;
++
++	return rate;
++}
++
++static ulong rv1103b_crypto_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, con, rate;
++
++	switch (clk_id) {
++	case ACLK_CRYPTO:
++	case HCLK_CRYPTO:
++	case HCLK_RK_RNG_NS:
++	case HCLK_RK_RNG_S:
++		return rv1103b_peri_get_clk(priv, LSCLK_PERI_SRC);
++	case CLK_CORE_CRYPTO:
++		con = readl(&cru->clksel_con[35]);
++		sel = (con & CLK_CORE_CRYPTO_SEL_MASK) >>
++		      CLK_CORE_CRYPTO_SEL_SHIFT;
 +		break;
++	case CLK_PKA_CRYPTO:
++		con = readl(&cru->clksel_con[35]);
++		sel = (con & CLK_PKA_CRYPTO_SEL_MASK) >>
++		      CLK_PKA_CRYPTO_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++	if (sel == CLK_CORE_CRYPTO_SEL_300M)
++		rate = 300 * MHz;
++	else if (sel == CLK_CORE_CRYPTO_SEL_200M)
++		rate = 200 * MHz;
++	else
++		rate = 100 * MHz;
++
++	return rate;
++}
++
++static ulong rv1103b_crypto_set_clk(struct rv1103b_clk_priv *priv,
++				    ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel;
++
++	if (rate >= 297 * MHz)
++		sel = CLK_CORE_CRYPTO_SEL_300M;
++	else if (rate >= 198 * MHz)
++		sel = CLK_CORE_CRYPTO_SEL_200M;
++	else
++		sel = CLK_CORE_CRYPTO_SEL_100M;
++
++	switch (clk_id) {
++	case ACLK_CRYPTO:
++	case HCLK_CRYPTO:
++	case HCLK_RK_RNG_NS:
++	case HCLK_RK_RNG_S:
++		rv1103b_peri_set_clk(priv, LSCLK_PERI_SRC, rate);
++	case CLK_CORE_CRYPTO:
++		rk_clrsetreg(&cru->clksel_con[35],
++			     CLK_CORE_CRYPTO_SEL_MASK,
++			     (sel << CLK_CORE_CRYPTO_SEL_SHIFT));
++		break;
++	case CLK_PKA_CRYPTO:
++		rk_clrsetreg(&cru->clksel_con[35],
++			     CLK_PKA_CRYPTO_SEL_MASK,
++			     (sel << CLK_PKA_CRYPTO_SEL_SHIFT));
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1103b_crypto_get_clk(priv, clk_id);
++}
++
++static ulong rv1103b_mmc_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 div, sel, con, prate;
++
++	switch (clk_id) {
++	case CCLK_SDMMC1:
++	case HCLK_SDMMC1:
++		con = readl(&cru->clksel_con[36]);
++		sel = (con & CLK_SDMMC_SEL_MASK) >>
++		      CLK_SDMMC_SEL_SHIFT;
++		div = (con & CLK_SDMMC_DIV_MASK) >>
++		      CLK_SDMMC_DIV_SHIFT;
++		if (sel == CLK_MMC_SEL_GPLL)
++			prate = priv->gpll_hz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	case CCLK_SDMMC0:
++	case HCLK_SDMMC0:
++		con = readl(&cru->clksel_con[32]);
++		sel = (con & CLK_SDMMC_SEL_MASK) >>
++		      CLK_SDMMC_SEL_SHIFT;
++		div = (con & CLK_SDMMC_DIV_MASK) >>
++		      CLK_SDMMC_DIV_SHIFT;
++		if (sel == CLK_MMC_SEL_GPLL)
++			prate = priv->gpll_hz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	case CCLK_EMMC:
++	case HCLK_EMMC:
++		con = readl(&cru->clksel_con[31]);
++		sel = (con & CLK_EMMC_SEL_MASK) >>
++		      CLK_EMMC_SEL_SHIFT;
++		div = (con & CLK_EMMC_DIV_MASK) >>
++		      CLK_EMMC_DIV_SHIFT;
++		if (sel == CLK_MMC_SEL_GPLL)
++			prate = priv->gpll_hz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	case SCLK_SFC_2X:
++	case HCLK_SFC:
++		con = readl(&cru->clksel_con[33]);
++		sel = (con & CLK_SFC_SEL_MASK) >>
++		      CLK_SFC_SEL_SHIFT;
++		div = (con & CLK_SFC_DIV_MASK) >>
++		      CLK_SFC_DIV_SHIFT;
++		if (sel == CLK_MMC_SEL_GPLL)
++			prate = priv->gpll_hz;
++		else
++			prate = OSC_HZ;
++		return DIV_TO_RATE(prate, div);
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1103b_mmc_set_clk(struct rv1103b_clk_priv *priv,
++				 ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, src_clk_div;
++	ulong prate = 0;
++
++	if ((OSC_HZ % rate) == 0) {
++		sel = CLK_MMC_SEL_OSC;
++		prate = OSC_HZ;
++	} else {
++		sel = CLK_MMC_SEL_GPLL;
++		prate = priv->gpll_hz;
++	}
++	src_clk_div = DIV_ROUND_UP(prate, rate);
++
++	switch (clk_id) {
++	case CCLK_SDMMC1:
++	case HCLK_SDMMC1:
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->clksel_con[36],
++			     CLK_SDMMC_SEL_MASK |
++			     CLK_SDMMC_DIV_MASK,
++			     (sel << CLK_SDMMC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_SDMMC_DIV_SHIFT));
++		break;
++	case CCLK_SDMMC0:
++	case HCLK_SDMMC0:
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->clksel_con[32],
++			     CLK_SDMMC_SEL_MASK |
++			     CLK_SDMMC_DIV_MASK,
++			     (sel << CLK_SDMMC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_SDMMC_DIV_SHIFT));
++		break;
++	case CCLK_EMMC:
++	case HCLK_EMMC:
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->clksel_con[31],
++			     CLK_EMMC_SEL_MASK |
++			     CLK_EMMC_DIV_MASK,
++			     (sel << CLK_EMMC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_EMMC_DIV_SHIFT));
++		break;
++	case SCLK_SFC_2X:
++	case HCLK_SFC:
++		src_clk_div = DIV_ROUND_UP(prate, rate);
++		rk_clrsetreg(&cru->clksel_con[33],
++			     CLK_SFC_SEL_MASK |
++			     CLK_SFC_DIV_MASK,
++			     (sel << CLK_SFC_SEL_SHIFT) |
++			     ((src_clk_div - 1) <<
++			      CLK_SFC_DIV_SHIFT));
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1103b_mmc_get_clk(priv, clk_id);
++}
++
++static ulong rv1103b_i2c_set_clk(struct rv1103b_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate == OSC_HZ)
++		src_clk = CLK_I2C_SEL_24M;
++	else
++		src_clk = CLK_I2C_SEL_100M;
++
++	switch (clk_id) {
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++	case CLK_I2C_PERI:
++		rk_clrsetreg(&cru->clksel_con[34], CLK_I2C1_SEL_MASK,
++			     src_clk << CLK_I2C1_SEL_SHIFT);
++		break;
++	case CLK_I2C0:
++	case CLK_I2C_PMU:
++		rk_clrsetreg(&cru->clksel_con[34], CLK_I2C0_SEL_MASK,
++			     src_clk << CLK_I2C0_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1103b_i2c_get_clk(priv, clk_id);
++}
++
++static ulong rv1103b_spi_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, con, rate;
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_SPI0_SEL_MASK) >> CLK_SPI0_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++	if (sel == CLK_SPI0_SEL_200M)
++		rate = 200 * MHz;
++	else if (sel == CLK_SPI0_SEL_100M)
++		rate = 100 * MHz;
++	else if (sel == CLK_SPI0_SEL_50M)
++		rate = 50 * MHz;
++	else
++		rate = OSC_HZ;
++
++	return rate;
++}
++
++static ulong rv1103b_spi_set_clk(struct rv1103b_clk_priv *priv,
++				 ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate >= 198 * MHz)
++		src_clk = CLK_SPI0_SEL_200M;
++	else if (rate >= 99 * MHz)
++		src_clk = CLK_SPI0_SEL_100M;
++	else if (rate >= 48 * MHz)
++		src_clk = CLK_SPI0_SEL_50M;
++	else
++		src_clk = CLK_SPI0_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		rk_clrsetreg(&cru->clksel_con[34], CLK_SPI0_SEL_MASK,
++			     src_clk << CLK_SPI0_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
 +	}
 +
-+	if (ret) {
-+		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
-+		return ret;
++	return rv1103b_spi_get_clk(priv, clk_id);
++}
++
++static ulong rv1103b_pwm_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, con;
++
++	switch (clk_id) {
++	case CLK_PWM0:
++	case CLK_PWM0_SRC:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_PWM0_SEL_MASK) >> CLK_PWM0_SEL_SHIFT;
++		break;
++	case CLK_PWM1:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_PWM1_SEL_MASK) >> CLK_PWM1_SEL_SHIFT;
++		break;
++	case CLK_PWM2:
++		con = readl(&cru->clksel_con[34]);
++		sel = (con & CLK_PWM2_SEL_MASK) >> CLK_PWM2_SEL_SHIFT;
++		break;
++	default:
++		return -ENOENT;
 +	}
 +
-+	*reg += ((pin_num / RV1103_SMT_PINS_PER_REG) * 4);
-+	*bit = pin_num % RV1103_SMT_PINS_PER_REG;
-+	*bit *= RV1103_SMT_BITS_PER_PIN;
++	switch (sel) {
++	case CLK_PWM_SEL_100M:
++		return 100 * MHz;
++	case CLK_PWM_SEL_24M:
++		return OSC_HZ;
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1103b_pwm_set_clk(struct rv1103b_clk_priv *priv,
++				 ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	int src_clk;
++
++	if (rate >= 99 * MHz)
++		src_clk = CLK_PWM_SEL_100M;
++	else
++		src_clk = CLK_PWM_SEL_24M;
++
++	switch (clk_id) {
++	case CLK_PWM0:
++	case CLK_PWM0_SRC:
++		rk_clrsetreg(&cru->clksel_con[34],
++			     CLK_PWM0_SEL_MASK,
++			     src_clk << CLK_PWM0_SEL_SHIFT);
++		break;
++	case CLK_PWM1:
++		rk_clrsetreg(&cru->clksel_con[34],
++			     CLK_PWM1_SEL_MASK,
++			     src_clk << CLK_PWM1_SEL_SHIFT);
++		break;
++	case CLK_PWM2:
++		rk_clrsetreg(&cru->clksel_con[34],
++			     CLK_PWM2_SEL_MASK,
++			     src_clk << CLK_PWM2_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rv1103b_pwm_get_clk(priv, clk_id);
++}
++
++static ulong rv1103b_adc_get_clk(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 div, con;
++
++	switch (clk_id) {
++	case CLK_SARADC:
++		con = readl(&cru->peri_clksel_con[1]);
++		div = (con & CLK_SARADC_DIV_MASK) >>
++		      CLK_SARADC_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	case CLK_TSADC_TSEN:
++		con = readl(&cru->peri_clksel_con[0]);
++		div = (con & CLK_TSADC_TSEN_DIV_MASK) >>
++		      CLK_TSADC_TSEN_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	case CLK_TSADC:
++		con = readl(&cru->peri_clksel_con[0]);
++		div = (con & CLK_TSADC_DIV_MASK) >> CLK_TSADC_DIV_SHIFT;
++		return DIV_TO_RATE(OSC_HZ, div);
++	default:
++		return -ENOENT;
++	}
++}
++
++static ulong rv1103b_adc_set_clk(struct rv1103b_clk_priv *priv,
++				 ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	int src_clk_div;
++
++	src_clk_div = DIV_ROUND_UP(OSC_HZ, rate);
++
++	switch (clk_id) {
++	case CLK_SARADC:
++		assert(src_clk_div - 1 <= 7);
++		rk_clrsetreg(&cru->peri_clksel_con[1],
++			     CLK_SARADC_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_SARADC_DIV_SHIFT);
++		break;
++	case CLK_TSADC_TSEN:
++		assert(src_clk_div - 1 <= 32);
++		rk_clrsetreg(&cru->peri_clksel_con[0],
++			     CLK_TSADC_TSEN_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_TSADC_TSEN_DIV_SHIFT);
++		break;
++	case CLK_TSADC:
++		assert(src_clk_div - 1 <= 32);
++		rk_clrsetreg(&cru->peri_clksel_con[0],
++			     CLK_TSADC_DIV_MASK,
++			     (src_clk_div - 1) <<
++			     CLK_TSADC_DIV_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++	return rv1103b_adc_get_clk(priv, clk_id);
++}
++
++/*
++ *
++ * rational_best_approximation(31415, 10000,
++ *		(1 << 8) - 1, (1 << 5) - 1, &n, &d);
++ *
++ * you may look at given_numerator as a fixed point number,
++ * with the fractional part size described in given_denominator.
++ *
++ * for theoretical background, see:
++ * http://en.wikipedia.org/wiki/Continued_fraction
++ */
++static void rational_best_approximation(unsigned long given_numerator,
++					unsigned long given_denominator,
++					unsigned long max_numerator,
++					unsigned long max_denominator,
++					unsigned long *best_numerator,
++					unsigned long *best_denominator)
++{
++	unsigned long n, d, n0, d0, n1, d1;
++
++	n = given_numerator;
++	d = given_denominator;
++	n0 = 0;
++	d1 = 0;
++	n1 = 1;
++	d0 = 1;
++	for (;;) {
++		unsigned long t, a;
++
++		if (n1 > max_numerator || d1 > max_denominator) {
++			n1 = n0;
++			d1 = d0;
++			break;
++		}
++		if (d == 0)
++			break;
++		t = d;
++		a = n / d;
++		d = n % d;
++		n = t;
++		t = n0 + a * n1;
++		n0 = n1;
++		n1 = t;
++		t = d0 + a * d1;
++		d0 = d1;
++		d1 = t;
++	}
++	*best_numerator = n1;
++	*best_denominator = d1;
++}
++
++static ulong rv1103b_uart_get_rate(struct rv1103b_clk_priv *priv, ulong clk_id)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 reg, con, fracdiv, div, src, p_rate;
++	unsigned long m, n;
++
++	switch (clk_id) {
++	case SCLK_UART0:
++		reg = 10;
++		con = readl(&cru->clksel_con[32]);
++		src = (con & CLK_UART0_SEL_MASK) >> CLK_UART0_SEL_SHIFT;
++		con = readl(&cru->clksel_con[5]);
++		div = (con & CLK_UART0_SRC_DIV_MASK) >> CLK_UART0_SRC_DIV_SHIFT;
++		break;
++	case SCLK_UART1:
++		reg = 11;
++		con = readl(&cru->clksel_con[32]);
++		src = (con & CLK_UART1_SEL_MASK) >> CLK_UART1_SEL_SHIFT;
++		con = readl(&cru->clksel_con[5]);
++		div = (con & CLK_UART1_SRC_DIV_MASK) >> CLK_UART1_SRC_DIV_SHIFT;
++		break;
++	case SCLK_UART2:
++		reg = 12;
++		con = readl(&cru->clksel_con[32]);
++		src = (con & CLK_UART2_SEL_MASK) >> CLK_UART2_SEL_SHIFT;
++		con = readl(&cru->clksel_con[5]);
++		div = (con & CLK_UART2_SRC_DIV_MASK) >> CLK_UART2_SRC_DIV_SHIFT;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	p_rate = priv->gpll_hz;
++	if (src == CLK_UART_SEL_SRC) {
++		return DIV_TO_RATE(p_rate, div);
++	} else if (src == CLK_UART_SEL_FRAC) {
++		fracdiv = readl(&cru->clksel_con[reg]);
++		n = fracdiv & CLK_UART_FRAC_NUMERATOR_MASK;
++		n >>= CLK_UART_FRAC_NUMERATOR_SHIFT;
++		m = fracdiv & CLK_UART_FRAC_DENOMINATOR_MASK;
++		m >>= CLK_UART_FRAC_DENOMINATOR_SHIFT;
++		return DIV_TO_RATE(p_rate, div) * n / m;
++	} else {
++		return OSC_HZ;
++	}
++}
++
++static ulong rv1103b_uart_set_rate(struct rv1103b_clk_priv *priv,
++				   ulong clk_id, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 reg, uart_src, div;
++	unsigned long m = 0, n = 0, val;
++
++	if (priv->gpll_hz % rate == 0) {
++		uart_src = CLK_UART_SEL_SRC;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	} else if (rate == OSC_HZ) {
++		uart_src = CLK_UART_SEL_OSC;
++		div = 2;
++	} else {
++		uart_src = CLK_UART_SEL_FRAC;
++		div = 2;
++		rational_best_approximation(rate, priv->gpll_hz / div,
++					    GENMASK(16 - 1, 0),
++					    GENMASK(16 - 1, 0),
++					    &m, &n);
++	}
++
++	switch (clk_id) {
++	case SCLK_UART0:
++		reg = 10;
++		rk_clrsetreg(&cru->clksel_con[5],
++			     CLK_UART0_SRC_DIV_MASK,
++			     div << CLK_UART0_SRC_DIV_SHIFT);
++		rk_clrsetreg(&cru->clksel_con[32],
++			     CLK_UART0_SEL_MASK,
++			     uart_src << CLK_UART0_SEL_SHIFT);
++		break;
++	case SCLK_UART1:
++		reg = 11;
++		rk_clrsetreg(&cru->clksel_con[5],
++			     CLK_UART1_SRC_DIV_MASK,
++			     div << CLK_UART1_SRC_DIV_SHIFT);
++		rk_clrsetreg(&cru->clksel_con[32],
++			     CLK_UART1_SEL_MASK,
++			     uart_src << CLK_UART1_SEL_SHIFT);
++		break;
++	case SCLK_UART2:
++		reg = 12;
++		rk_clrsetreg(&cru->clksel_con[5],
++			     CLK_UART2_SRC_DIV_MASK,
++			     div << CLK_UART2_SRC_DIV_SHIFT);
++		rk_clrsetreg(&cru->clksel_con[32],
++			     CLK_UART2_SEL_MASK,
++			     uart_src << CLK_UART2_SEL_SHIFT);
++		break;
++	default:
++		return -ENOENT;
++	}
++	if (m && n) {
++		val = m << CLK_UART_FRAC_NUMERATOR_SHIFT | n;
++		writel(val, &cru->clksel_con[reg]);
++	}
++
++	return rv1103b_uart_get_rate(priv, clk_id);
++}
++
++static ulong rv1103b_decom_get_clk(struct rv1103b_clk_priv *priv)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel, con, prate;
++
++	con = readl(&cru->clksel_con[35]);
++	sel = (con & DCLK_DECOM_SEL_MASK) >>
++	      DCLK_DECOM_SEL_SHIFT;
++	if (sel == DCLK_DECOM_SEL_480M)
++		prate = 480 * MHz;
++	else if (sel == DCLK_DECOM_SEL_400M)
++		prate = 400 * MHz;
++	else
++		prate = 300 * MHz;
++	return prate;
++}
++
++static ulong rv1103b_decom_set_clk(struct rv1103b_clk_priv *priv, ulong rate)
++{
++	struct rv1103b_cru *cru = priv->cru;
++	u32 sel;
++
++	if (rate >= 480 * MHz)
++		sel = DCLK_DECOM_SEL_480M;
++	else if (rate >= 396 * MHz)
++		sel = DCLK_DECOM_SEL_400M;
++	else
++		sel = DCLK_DECOM_SEL_300M;
++	rk_clrsetreg(&cru->clksel_con[35], DCLK_DECOM_SEL_MASK,
++		     (sel << DCLK_DECOM_SEL_SHIFT));
++
++	return rv1103b_decom_get_clk(priv);
++}
++
++static ulong rv1103b_clk_get_rate(struct clk *clk)
++{
++	struct rv1103b_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong rate = 0;
++
++	if (!priv->gpll_hz) {
++		printf("%s gpll=%lu\n", __func__, priv->gpll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case PLL_GPLL:
++		rate = rockchip_pll_get_rate(&rv1103b_pll_clks[GPLL], priv->cru,
++					     GPLL);
++		break;
++	case ACLK_PERI_SRC:
++	case LSCLK_PERI_SRC:
++	case PCLK_PERI_ROOT:
++	case PCLK_TOP_ROOT:
++	case LSCLK_PMU_ROOT:
++	case PCLK_PMU:
++		rate = rv1103b_peri_get_clk(priv, clk->id);
++		break;
++	case ACLK_CRYPTO:
++	case HCLK_CRYPTO:
++	case HCLK_RK_RNG_NS:
++	case HCLK_RK_RNG_S:
++	case CLK_CORE_CRYPTO:
++	case CLK_PKA_CRYPTO:
++		rate = rv1103b_crypto_get_clk(priv, clk->id);
++		break;
++	case CCLK_SDMMC1:
++	case HCLK_SDMMC1:
++	case CCLK_SDMMC0:
++	case HCLK_SDMMC0:
++	case CCLK_EMMC:
++	case HCLK_EMMC:
++	case SCLK_SFC_2X:
++	case HCLK_SFC:
++		rate = rv1103b_mmc_get_clk(priv, clk->id);
++		break;
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++	case CLK_I2C_PERI:
++	case CLK_I2C0:
++	case CLK_I2C_PMU:
++		rate = rv1103b_i2c_get_clk(priv, clk->id);
++		break;
++	case CLK_SPI0:
++		rate = rv1103b_spi_get_clk(priv, clk->id);
++		break;
++	case CLK_PWM0:
++	case CLK_PWM0_SRC:
++	case CLK_PWM1:
++	case CLK_PWM2:
++		rate = rv1103b_pwm_get_clk(priv, clk->id);
++		break;
++	case CLK_SARADC:
++	case CLK_TSADC_TSEN:
++	case CLK_TSADC:
++		rate = rv1103b_adc_get_clk(priv, clk->id);
++		break;
++	case SCLK_UART0:
++	case SCLK_UART1:
++	case SCLK_UART2:
++		rate = rv1103b_uart_get_rate(priv, clk->id);
++		break;
++	case DCLK_DECOM_SRC:
++	case DCLK_DECOM:
++		rate = rv1103b_decom_get_clk(priv);
++		break;
++	case TCLK_WDT_LPMCU:
++	case TCLK_WDT_HPMCU:
++	case TCLK_WDT_NS:
++	case TCLK_WDT_S:
++		rate = OSC_HZ;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rate;
++};
++
++static ulong rv1103b_clk_set_rate(struct clk *clk, ulong rate)
++{
++	struct rv1103b_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong ret = 0;
++
++	if (!priv->gpll_hz) {
++		printf("%s gpll=%lu\n", __func__, priv->gpll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case PLL_GPLL:
++		ret = rockchip_pll_set_rate(&rv1103b_pll_clks[GPLL], priv->cru,
++					    GPLL, rate);
++		break;
++	case ACLK_PERI_SRC:
++	case LSCLK_PERI_SRC:
++	case PCLK_PERI_ROOT:
++	case PCLK_TOP_ROOT:
++	case LSCLK_PMU_ROOT:
++	case PCLK_PMU:
++		ret = rv1103b_peri_set_clk(priv, clk->id, rate);
++		break;
++	case ACLK_CRYPTO:
++	case HCLK_CRYPTO:
++	case HCLK_RK_RNG_NS:
++	case HCLK_RK_RNG_S:
++	case CLK_CORE_CRYPTO:
++	case CLK_PKA_CRYPTO:
++		ret = rv1103b_crypto_set_clk(priv, clk->id, rate);
++		break;
++	case CCLK_SDMMC1:
++	case HCLK_SDMMC1:
++	case CCLK_SDMMC0:
++	case HCLK_SDMMC0:
++	case CCLK_EMMC:
++	case HCLK_EMMC:
++	case SCLK_SFC_2X:
++	case HCLK_SFC:
++		ret = rv1103b_mmc_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_I2C1:
++	case CLK_I2C2:
++	case CLK_I2C3:
++	case CLK_I2C4:
++	case CLK_I2C_PERI:
++	case CLK_I2C0:
++	case CLK_I2C_PMU:
++		ret = rv1103b_i2c_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_SPI0:
++		ret = rv1103b_spi_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_PWM0:
++	case CLK_PWM0_SRC:
++	case CLK_PWM1:
++	case CLK_PWM2:
++		ret = rv1103b_pwm_set_clk(priv, clk->id, rate);
++		break;
++	case CLK_SARADC:
++	case CLK_TSADC_TSEN:
++	case CLK_TSADC:
++		ret = rv1103b_adc_set_clk(priv, clk->id, rate);
++		break;
++	case SCLK_UART0:
++	case SCLK_UART1:
++	case SCLK_UART2:
++		ret = rv1103b_uart_set_rate(priv, clk->id, rate);
++		break;
++	case DCLK_DECOM_SRC:
++	case DCLK_DECOM:
++		rate = rv1103b_decom_set_clk(priv, rate);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return ret;
++};
++
++static int rv1103b_clk_set_parent(struct clk *clk, struct clk *parent)
++{
++	switch (clk->id) {
++	default:
++		return -ENOENT;
++	}
 +
 +	return 0;
 +}
 +
-+static int rv1103b_set_schmitt(struct rockchip_pin_bank *bank,
-+			       int pin_num, int enable)
++static struct clk_ops rv1103b_clk_ops = {
++	.get_rate = rv1103b_clk_get_rate,
++	.set_rate = rv1103b_clk_set_rate,
++#if (CONFIG_IS_ENABLED(OF_CONTROL)) || (!CONFIG_IS_ENABLED(OF_PLATDATA))
++	.set_parent = rv1103b_clk_set_parent,
++#endif
++};
++
++static void rv1103b_clk_init(struct rv1103b_clk_priv *priv)
 +{
-+	struct regmap *regmap;
-+	int reg, ret;
-+	u32 data, rmask, mask;
-+	u8 bit;
++	int ret;
++	u32 div;
 +
-+	ret = rv1103b_calc_schmitt_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+	if (ret)
-+		return ret;
-+
-+	mask = (1 << RV1103_SMT_BITS_PER_PIN) - 1;
-+	if (bank->bank_num == 2 && pin_num >= 12) {
-+		mask = 0x3;
-+		enable = enable ? 0x3 : 0;
++	priv->sync_kernel = false;
++	priv->gpll_hz = rockchip_pll_get_rate(&rv1103b_pll_clks[GPLL],
++					      priv->cru, GPLL);
++	if (priv->gpll_hz != GPLL_HZ) {
++		ret = rockchip_pll_set_rate(&rv1103b_pll_clks[GPLL], priv->cru,
++					    GPLL, GPLL_HZ);
++		if (!ret)
++			priv->gpll_hz = GPLL_HZ;
 +	}
 +
-+	/* enable the write to the equivalent lower bits */
-+	data = mask << (bit + 16);
-+	rmask = data | (data >> 16);
-+	data |= (enable << bit);
-+
-+	return regmap_update_bits(regmap, reg, rmask, data);
++	if (!priv->armclk_enter_hz) {
++		div = (readl(&priv->cru->clksel_con[37]) &
++		       CLK_CORE_GPLL_DIV_MASK) >>
++		      CLK_CORE_GPLL_DIV_SHIFT;
++		priv->armclk_enter_hz = DIV_TO_RATE(priv->gpll_hz, div);
++		priv->armclk_init_hz = priv->armclk_enter_hz;
++	}
 +}
 +
-+static struct rockchip_mux_recalced_data rv1103b_mux_recalced_data[] = {
-+	{
-+		.num = 1,
-+		.pin = 6,
-+		.reg = 0x10024,
-+		.bit = 8,
-+		.mask = 0xf
-+	}, {
-+		.num = 1,
-+		.pin = 7,
-+		.reg = 0x10024,
-+		.bit = 12,
-+		.mask = 0xf
-+	},
-+};
++static int rv1103b_clk_probe(struct udevice *dev)
++{
++	struct rv1103b_clk_priv *priv = dev_get_priv(dev);
++	int ret;
 +
-+static struct rockchip_pin_bank rv1103b_pin_banks[] = {
-+	PIN_BANK_IOMUX_FLAGS_OFFSET(0, 32, "gpio0",
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    0x40000, 0x50008, 0x50010, 0x50018),
-+	PIN_BANK_IOMUX_FLAGS_OFFSET(1, 32, "gpio1",
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    0x20, 0x10028, 0x10030, 0x10038),
-+	PIN_BANK_IOMUX_FLAGS_OFFSET(2, 32, "gpio2",
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    IOMUX_WIDTH_4BIT,
-+				    0x30040, 0x30048, 0x30050, 0x30058),
-+};
++#ifdef CONFIG_SPL_BUILD
++	/* fix lsclk_prei div */
++	writel(BITS_WITH_WMASK(1, 0x1U, 9), RV1103B_CRU_BASE + RV1103B_CLKSEL_CON(31));
++	/* fix cpu div */
++	writel(BITS_WITH_WMASK(1, 0x7U, 13), RV1103B_CRU_BASE + RV1103B_CLKSEL_CON(37));
++	/* fix gpll postdiv1 */
++	writel(BITS_WITH_WMASK(1, 0x7U, 12), RV1103B_CRU_BASE + RV1103B_PLL_CON(24));
++#endif
 +
-+static const struct rockchip_pin_ctrl rv1103b_pin_ctrl = {
-+	.pin_banks		= rv1103b_pin_banks,
-+	.nr_banks		= ARRAY_SIZE(rv1103b_pin_banks),
-+	.iomux_recalced		= rv1103b_mux_recalced_data,
-+	.niomux_recalced	= ARRAY_SIZE(rv1103b_mux_recalced_data),
-+	.set_mux		= rv1103b_set_mux,
-+	.set_pull		= rv1103b_set_pull,
-+	.set_drive		= rv1103b_set_drive,
-+	.set_schmitt		= rv1103b_set_schmitt,
-+};
++	rv1103b_clk_init(priv);
 +
-+static const struct udevice_id rv1103b_pinctrl_ids[] = {
-+	{
-+		.compatible = "rockchip,rv1103b-pinctrl",
-+		.data = (ulong)&rv1103b_pin_ctrl
-+	},
++	/* Process 'assigned-{clocks/clock-parents/clock-rates}' properties */
++	ret = clk_set_defaults(dev, 1);
++	if (ret)
++		debug("%s clk_set_defaults failed %d\n", __func__, ret);
++	else
++		priv->sync_kernel = true;
++	return 0;
++}
++
++static int rv1103b_clk_of_to_plat(struct udevice *dev)
++{
++	struct rv1103b_clk_priv *priv = dev_get_priv(dev);
++
++	priv->cru = dev_read_addr_ptr(dev);
++
++	return 0;
++}
++
++static int rv1103b_clk_bind(struct udevice *dev)
++{
++	struct udevice *sys_child;
++	struct sysreset_reg *priv;
++	int ret;
++
++	/* The sysreset driver does not have a device node, so bind it here */
++	ret = device_bind_driver(dev, "rockchip_sysreset", "sysreset", &sys_child);
++	if (ret) {
++		debug("Warning: No sysreset driver: ret=%d\n", ret);
++	} else {
++		priv = malloc(sizeof(struct sysreset_reg));
++		priv->glb_srst_fst_value = offsetof(struct rv1103b_cru, glb_srst_fst);
++		priv->glb_srst_snd_value = offsetof(struct rv1103b_cru, glb_srst_snd);
++		dev_set_priv(sys_child, priv);
++	}
++
++#if CONFIG_IS_ENABLED(RESET_ROCKCHIP)
++	ret = offsetof(struct rv1103b_cru, peri_softrst_con[0]);
++	ret = rockchip_reset_bind(dev, ret, 12); /* number of reset registers */
++	if (ret)
++		debug("Warning: software reset driver bind failed\n");
++#endif
++
++	return 0;
++}
++
++static const struct udevice_id rv1103b_clk_ids[] = {
++	{ .compatible = "rockchip,rv1103b-cru" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(pinctrl_rv1103b) = {
-+	.name		= "rockchip_rv1103b_pinctrl",
-+	.id		= UCLASS_PINCTRL,
-+	.of_match	= rv1103b_pinctrl_ids,
-+	.priv_auto	= sizeof(struct rockchip_pinctrl_priv),
-+	.ops		= &rockchip_pinctrl_ops,
-+#if !CONFIG_IS_ENABLED(OF_PLATDATA)
-+	.bind		= dm_scan_fdt_dev,
-+#endif
-+	.probe		= rockchip_pinctrl_probe,
++U_BOOT_DRIVER(clk_rv1103b) = {
++	.name		= "clk_rv1103b",
++	.id		= UCLASS_CLK,
++	.of_match	= rv1103b_clk_ids,
++	.priv_auto	= sizeof(struct rv1103b_clk_priv),
++	.of_to_plat	= rv1103b_clk_of_to_plat,
++	.ops		= &rv1103b_clk_ops,
++	.bind		= rv1103b_clk_bind,
++	.probe		= rv1103b_clk_probe,
 +};
 -- 
 2.43.0
