@@ -4,83 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2764DC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 20:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AEE6C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 21:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3430C84979;
-	Tue,  7 Jul 2026 22:57:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DA83D8496E;
+	Tue,  7 Jul 2026 23:23:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cn0ImeDS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cd/JFXbo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 354E18497A; Tue,  7 Jul 2026 22:57:52 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id A65AC84979; Tue,  7 Jul 2026 23:23:23 +0200 (CEST)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 133BD848EB
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 22:57:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 597E9848EB
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 23:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-493c55d5c7aso44679805e9.1
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 13:57:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-5bbc717c52aso1516296e0c.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 14:23:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783459400; cv=none;
+ d=google.com; s=arc-20260327;
+ b=qfWx6cgoiGN++/DcvZMVaqB2XXrZweJ8h99KrZ5X+NHhIAgmbaJUvgU9ASqIAijnMA
+ Fpw1TW64VCfneG2GfXO1RPuqmnuRagMWpjOQ8E5tO9YmFA/T3FxdAC+gPjantVD7GP0f
+ 0Na9F+S9cWzE9TLwyGk/LmM5HNk+C54HO6UU1NC5QvhrYrLI0I7jlOi/WTNQV/JcqoZa
+ 7P9Dbpa2/NEqEWcEV0SG5jDmFaU3Yx4zcO9CNukz4f+mLHpYasR3lwwtIt3jnA0AoESe
+ N8hZxcC04UNSgbxkBNJAYk+rytWcdVzQM85AZoaypqMSq27mAQflegLaZYvnrSqUD2VH
+ VFCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
+ fh=qvwHz7ZPqH2m/rE5Zf2H9mGygl3pN9N29dMB7t1DbME=;
+ b=qWT4UUXawwbpKhW3aes9qjNDcD+VnGZWVi9fCF6mZCX+kycs539Cl82nMVhukSylG9
+ KzkI9AEwB4gq3kyptbnpqYaCgfasFQH3s3pSm3Yn+kIe7YXyQg87HOSxYrQmVh8dexwe
+ qvaVHlf0hS7opV1/eBKORerCaMXCZOOIxunPu4r9Az8p/zdeQpaU0JDYgRxq6adCNchi
+ fXGxm3V9XyfWR/RjdKKLczTulFUUqyplG+p4vJFex3jVgCTm288AMpI2adPVSX/Z1F9f
+ VKu9VPda5PEGal4a0KPpbccV3mHpR+Pvls0sTTWsxz4ttoYmEZ75pmPpsyeNU6BShJfc
+ aWEg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783457869; x=1784062669; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=av7Pfhh+bunkacy31WYDlHSEFapmsJhKVn3S/5rb00E=;
- b=cn0ImeDSgofr83Co+phHROCyLHjIuoP1/Ut9SWeKTwm2SeoF1U9dyoech0fX0Sh4sN
- sIDv34jDQB0KlJ4PWCjy0Wa0gS333BmZ1Nj6DXFy40pxysxviwT3LL82iRv7LXNHGO68
- dLIEy0CtAEE0VbhR6UdEJpUvx7umMb/ZfJe1WL2rrAIEln2HcdKu7zLOrX/rpStTSGSY
- iUkwvhUm9qXQl4Bj+LSJsZ1BrwFD1r+bSJ57AYNfL0p+jqcHGRmTefdHhOgafAiWk0sD
- aio/x/AwV+0MyxuqjY3xqOIvblDdIL+pLPElaGHauxx9V5nTMegiWIbOLrb6RHJfgsQv
- MU0w==
+ d=gmail.com; s=20251104; t=1783459400; x=1784064200; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
+ b=cd/JFXbo0NmBEkXRyTUPKj7QIWTwjj5t1ZxbF2hsY0m4NKyp2DkVDLLiKJC0/e6VeB
+ 2/CCs16FIXABMqNWVfl5beXOTDLBEdRSCgSQul4sACBwALZ2lG1HMcSLWJ5qunkYxrQC
+ zjb6PCRckEY2q5kTj/2XZU4HY8HEi7oTY9x5zWc7MJ6cBg0oLrDlmZ+hmkiuk+LY63Ep
+ s19xDnt9mvDFYDUSdV/i1VfeZG5CBW7x/tHLlY5rWkZAU+8r+VspI41d6XfxcVXj5n17
+ qr9mpPGaWLVmZSqelCA6hIidhc375342X5J1oO681x61SLpsLZtvgtuNgHZFkcXjyIW4
+ kmqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783457869; x=1784062669;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=av7Pfhh+bunkacy31WYDlHSEFapmsJhKVn3S/5rb00E=;
- b=FDEBlb/VWzaXh8aDtHbLVAJYnpjVWPFQKujKwUPfkB9WGU66Kx+En/tQPfQSDbRexl
- CUd59/5mJjQWQPVNveEiWB2cqxcBnf+Gz/gyI/Ergoxje8sz9G7UyGlXFBWtcIZx5Wlc
- ZlyB+Nq5bSUyBp4vqx9ldCad7Dko3El/31XjMUOkmTZDW71StHkhcXhvZGR1As6hfbiN
- NO2fB/4LfMd9MFIymeQ410jU41wPpwglB2fgcd1whNYnCPqkq3J43PkeFzXnB1/+0huG
- 3u0+q7I9MQwlxHiwVau0J2NOxJhbGCAusA9suwIuCoxK/tXyckNw+5/ZpPtyyB421tDB
- sqYA==
+ d=1e100.net; s=20251104; t=1783459400; x=1784064200;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
+ b=TfGlpaFAl/DC8KvRuMceOBS/YyFgVQpoJZSCq/+I32/g02C7YXdd1TlKwzoFWhksmZ
+ bEFXxdbz3yTG78U/r7Hfys3kfYTO3Kwig7VsW1H8aYpXf1mWkplmHAkjvKV1pcGqu0Af
+ fEE5DtKpd6naohRK+/IGK4sljdFSRqfGH4KZSEZmPdNhceAxq86AIjTf8rEVLb9Lm1y6
+ dID7hKZtKdcImOlmjOVKymShQ8CJVFRAj4QhXoFhBIh5XjH9GlyMEG9TYoc0YcE7u0yM
+ LOnVunnlSJFdIxareX/W9CaXC4NYLhILuSdM/RmaDBv7wAJQEjpgyZccgVNvmM7Yxopn
+ uDMA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr6ZLB0XkswGP5qVOnz2zn4KJLzGJEhygozoXs3Oyk70AUOWftQ7KiSOLyzfVEBDaNHe0PbjMA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzK0eGV+JA/YOniUjg7wDRzPWryEEgvEyogcSglUeKX0/Z/v6yE
- 8XY8TE0SLsJy8hOmtN6hMsrFH8GQ+NsoFbcnL9Ss+TtRwTWBj1eV5yhFrnjolZ2DUkjdH1jIvp8
- D+Pmd35kk8iiV
-X-Gm-Gg: AfdE7ck7bj45tNyUey22QdQh8KlHbdrd36T2lb1+hs/E5pwP0BY1ibB8WKhT0Nmh2la
- znPs2+gE4TyG5NNe/tmf+2tag/tVTf6ekFqp36ICy35AZ8uF1ooPlasmShZxCtcNHSvUEvgNnyp
- eZ3THUhx0/ds2IlvolqQEXZCcpeq5wRqgrLH3ei1/pLuOeA7Mwu7DgtwSPbBPCKqIHU3GVhD0SK
- +OBhObwzFzxnhJ67FUHgtlvoGKjCC1s6MSCiYjMlUfG64xWjhAM/m0AKD7sla77sEzZ2Ai+EUN7
- 5mK31a/ZGV2m2tgAnjlpMKlJm7clmJ3XdcvHcLAOzcHEoS+rt3wfkH+uK6p/wwfZkW1Xndg6Yrx
- eh7Skq0uVvfeTHVN0DFPgCXSRZkTo6BV3tAlBohKAnME4nklheKNbnw2T3T0Ne3gNLGfc6CT912
- FB5B12XVaaa1WdFGVmeLc9SmE=
-X-Received: by 2002:a05:600c:310f:b0:493:cc25:85cb with SMTP id
- 5b1f17b1804b1-493df082ffamr73438345e9.8.1783457869292; 
- Tue, 07 Jul 2026 13:57:49 -0700 (PDT)
-Received: from macbook ([95.236.170.123]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa039ad21sm36094303f8f.20.2026.07.07.13.57.48
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Jul 2026 13:57:48 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-To: trini@konsulko.com, sjg@chromium.org, quentin.schulz@cherry.de,
- u-boot@lists.denx.de, dlechner@baylibre.com, jstephan@baylibre.com
-Cc: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH] fit: prefer the default configuration on best-match ties
-Date: Tue,  7 Jul 2026 22:54:11 +0200
-Message-ID: <20260707205611.65287-1-ccaione@baylibre.com>
-X-Mailer: git-send-email 2.55.0
+ AHgh+RqCl5PbpaVX4pqjKyFtIaRuySVbhorkLF5MBnqDZBCcK9176HXjuxtCch4s+JzxahTGpDfOn9M=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvN0k2dpAJ/wLAWV3K8stmLEdm/irXthtxpxUJ00pATUEC+zu/
+ vAEfLP+5fgdT9MG+fok3eOIb42ZVsePZlPSN1Ch8fBw33WE6WB5sD/K+P5M5HIMGQElVOB2h8VE
+ 1NMNf9NN5TLuBsRlk/quuIFdG8WxiWMg=
+X-Gm-Gg: AfdE7ckhdN93zhcMliSoE4PkbuDDJUi3IvZdTa/x5/q1C8Lu3v2hfyBNvQS2BHk9LbG
+ FiBGxYoZ5EIPJz91XhiVGWptZyYv4TSRgBx4EmjAOuum0WzH4FzQrV4VOpfPkUUHvYws6f5KDps
+ Gnjoq4ajVzeUd3NQoxZKae2aDkteo5AHO+kG0N8Dd4QQELrcw1onuw1gI8/3fVZyKuYI8eMjbGv
+ id6L0SccM2aikLgvAnHcFWd6w2qvWKBEex+Eg+hpZmPGBQKaKirdxEbpDO2E3TECsTclawA
+X-Received: by 2002:a05:6122:3b8d:b0:5bd:c6ff:b6e5 with SMTP id
+ 71dfb90a1353d-5be90517ccfmr4246683e0c.1.1783459400029; Tue, 07 Jul 2026
+ 14:23:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <ak0w7CcAOoBPKc4Y@Vsevolods-MacBook-Pro.local>
+In-Reply-To: <ak0w7CcAOoBPKc4Y@Vsevolods-MacBook-Pro.local>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Tue, 7 Jul 2026 17:23:08 -0400
+X-Gm-Features: AVVi8CczAQJXi5La02QkzjQTBaRBUCNmyztP4WGEhxjM8x1DDGc3Gvqgoe6iQLU
+Message-ID: <CAMDkj5wyWwA+pP5D0QYtqLQokON8H_1J_BTPbQ0cVAOKWWJ4Og@mail.gmail.com>
+Subject: Re: [PATCH v2] lib/mbedtls: Do not use ERR_PTR with mbedTLS error
+ values
+To: Vsevolod Kozlov <zaba@mm.st>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,184 +116,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
-configuration matching the most specific U-Boot compatible string; on
-equal matches the first listed configuration wins and the configurations
-node 'default' property is never consulted.
+Hi Vsevolod,
 
-A FIT whose configurations all share the same base devicetree compatible
-(e.g. one manifest carrying a base tree plus overlay combinations for a
-single board) therefore always boots the first configuration, silently
-ignoring the default chosen by the manifest author.
+On Tue, Jul 7, 2026 at 1:01=E2=80=AFPM Vsevolod Kozlov <zaba@mm.st> wrote:
+>
+> MbedTLS functions usually return zero for success and negative error
+> codes to indicate failure, but its error codes lie way outside the range
+> of -MAX_ERRNO, so using them with ERR_PTR creates values that do not
+> pass the IS_ERR check and lead to crashes.
+>
+> Signed-off-by: Vsevolod Kozlov <zaba@mm.st>
+> ---
+> Changes since v1: Convert return values of all mbedtls functions at
+>  their call sites instead of trying to do it right before returning
+>  ERR_PTR.
+>
 
-Break score ties in favour of the default configuration. A strictly
-better compatible match still wins over it, and FITs without a default
-keep the current first-listed behaviour.
+There might be some misunderstandings. I meant that there were two options:
+1. Like what you mentioned, update ERR_PTR/IS_ERR.
+2. Have a shim wrapper on top of ERR_PTR/IS_ERR for lib/mbedtls use only.
+But having wrappers on those mbedtls_ functions is not a good idea,
+especially explicitly with a prefix wrapped_.
 
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
- boot/Kconfig      |  2 ++
- boot/image-fit.c  | 20 ++++++++++++--
- include/image.h   |  4 +++
- test/boot/image.c | 68 +++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 92 insertions(+), 2 deletions(-)
+Regards,
+Raymond
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8e468c56176..c67dc0ba493 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -191,6 +191,8 @@ config FIT_BEST_MATCH
- 	  U-Boot itself. A match is considered "best" if it matches the
- 	  most specific compatibility entry of U-Boot's fdt's root node.
- 	  The order of entries in the configuration's fdt is ignored.
-+	  If several configurations match equally well, the one named by
-+	  the configurations node 'default' property is preferred.
- 
- config FIT_IMAGE_POST_PROCESS
- 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 044a40e1910..ef90c5abd18 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1799,6 +1799,8 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 	int fdt_compat_len;
- 	int best_match_offset = 0;
- 	int best_match_pos = 0;
-+	const char *default_name;
-+	int default_noffset = -1;
- 
- 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
- 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
-@@ -1813,6 +1815,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 		return -ENXIO;
- 	}
- 
-+	/* the default configuration breaks ties between equal matches */
-+	default_name = fdt_getprop(fit, confs_noffset, FIT_DEFAULT_PROP, NULL);
-+	if (default_name) {
-+		default_noffset = fdt_subnode_offset(fit, confs_noffset,
-+						     default_name);
-+		if (default_noffset < 0)
-+			default_noffset = -1;
-+	}
-+
- 	/*
- 	 * Loop over the configurations in the FIT image.
- 	 */
-@@ -1863,10 +1874,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 		cur_fdt_compat = fdt_compat;
- 		/*
- 		 * Look for a match for each U-Boot compatibility string in
--		 * turn in the compat string property.
-+		 * turn in the compat string property. A configuration only
-+		 * replaces the current best match on a strictly better
-+		 * position, or on an equal position if it is the default
-+		 * configuration.
- 		 */
- 		for (i = 0; len > 0 &&
--		     (!best_match_offset || best_match_pos > i); i++) {
-+		     (!best_match_offset || best_match_pos > i ||
-+		      (best_match_pos == i && noffset == default_noffset));
-+		     i++) {
- 			int cur_len = strlen(cur_fdt_compat) + 1;
- 
- 			if (!fdt_node_check_compatible(fdt, compat_noffset,
-diff --git a/include/image.h b/include/image.h
-index 9c8a746d576..01a814ed76e 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1526,6 +1526,10 @@ int fit_check_format(const void *fit, ulong size);
-  * compatible list, "foo,bar", matches a compatible string in the root of fdt1.
-  * "bim,bam" in fdt2 matches the second string which isn't as good as fdt1.
-  *
-+ * If several configurations match at the same position, the one named by the
-+ * 'default' property of the configurations node is preferred, then the first
-+ * one listed.
-+ *
-  * As an optimization, the compatible property from the FDT's root node can be
-  * copied into the configuration node in the FIT image. This is required to
-  * match configurations with compressed FDTs.
-diff --git a/test/boot/image.c b/test/boot/image.c
-index 4df7b17ce88..2c6d9dcbc22 100644
---- a/test/boot/image.c
-+++ b/test/boot/image.c
-@@ -8,8 +8,76 @@
- 
- #include <image.h>
- #include <test/ut.h>
-+#include <linux/libfdt.h>
- #include "bootstd_common.h"
- 
-+/* Test that the default configuration breaks best-match ties */
-+static int test_fit_conf_find_compat(struct unit_test_state *uts)
-+{
-+	char fdt[256], fit[1024];
-+	int confs, images, node;
-+	int ret;
-+
-+	/* control devicetree with a two-entry compatible list */
-+	ut_assertok(fdt_create_empty_tree(fdt, sizeof(fdt)));
-+	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
-+					  "test,board-a"));
-+	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
-+					  "test,fallback"));
-+
-+	/* FIT with two configurations matching the same compatible */
-+	ut_assertok(fdt_create_empty_tree(fit, sizeof(fit)));
-+	images = fdt_add_subnode(fit, 0, "images");
-+	ut_assert(images >= 0);
-+	confs = fdt_add_subnode(fit, 0, "configurations");
-+	ut_assert(confs >= 0);
-+	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
-+	/*
-+	 * fdt_add_subnode() inserts before existing subnodes: create conf-2
-+	 * first so that conf-1 ends up listed first, like an .its compiled
-+	 * with the configurations in that order
-+	 */
-+	node = fdt_add_subnode(fit, confs, "conf-2");
-+	ut_assert(node >= 0);
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,board-a"));
-+	node = fdt_add_subnode(fit, confs, "conf-1");
-+	ut_assert(node >= 0);
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,board-a"));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	node = fdt_first_subnode(fit, confs);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, node, NULL));
-+
-+	/* on a tie, the default configuration wins */
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-2", fdt_get_name(fit, ret, NULL));
-+
-+	/* without a default, the first listed configuration wins */
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertok(fdt_delprop(fit, confs, FIT_DEFAULT_PROP));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertnull((void *)fdt_getprop(fit, confs, FIT_DEFAULT_PROP, NULL));
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
-+
-+	/* a strictly better match still beats the default */
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	node = fdt_subnode_offset(fit, confs, "conf-2");
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,fallback"));
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(test_fit_conf_find_compat, 0);
-+
- /* Test of image phase */
- static int test_image_phase(struct unit_test_state *uts)
- {
--- 
-2.55.0
-
+>  lib/mbedtls/pkcs7_parser.c     | 48 ++++++++++++++++++++++++++--------
+>  lib/mbedtls/x509_cert_parser.c | 10 +++++--
+>  2 files changed, 45 insertions(+), 13 deletions(-)
+>
+> diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
+> index bf8ee17b5b8..6d255250e62 100644
+> --- a/lib/mbedtls/pkcs7_parser.c
+> +++ b/lib/mbedtls/pkcs7_parser.c
+> @@ -29,6 +29,20 @@ static void pkcs7_free_sinfo_mbedtls_ctx(struct pkcs7_=
+sinfo_mbedtls_ctx *ctx)
+>         }
+>  }
+>
+> +/* Convert mbedTLS error codes to negative errno to avoid creating
+> + * out-of-range ERR_PTR values */
+> +static int wrapped_asn1_get_tag(unsigned char **p,
+> +                               const unsigned char *end,
+> +                               size_t *len, int tag)
+> +{
+> +       int ret =3D mbedtls_asn1_get_tag(p, end, len, tag);
+> +       if (ret) {
+> +               debug("mbedtls_asn1_get_tag() failed: %x\n", ret);
+> +               return -EINVAL;
+> +       }
+> +       return 0;
+> +}
+> +
+>  /*
+>   * Parse Authenticate Attributes
+>   * TODO: Shall we consider to integrate decoding of authenticate attribu=
+te into
+> @@ -105,30 +119,30 @@ static int authattrs_parse(struct pkcs7_message *ms=
+g, void *aa, size_t aa_len,
+>         unsigned char *inner_p;
+>         size_t seq_len =3D 0;
+>
+> -       ret =3D mbedtls_asn1_get_tag(&p, end, &seq_len,
+> +       ret =3D wrapped_asn1_get_tag(&p, end, &seq_len,
+>                                    MBEDTLS_ASN1_CONTEXT_SPECIFIC |
+>                                    MBEDTLS_ASN1_CONSTRUCTED);
+>         if (ret)
+>                 return ret;
+>
+> -       while (!mbedtls_asn1_get_tag(&p, end, &seq_len,
+> +       while (!wrapped_asn1_get_tag(&p, end, &seq_len,
+>                                      MBEDTLS_ASN1_CONSTRUCTED |
+>                                      MBEDTLS_ASN1_SEQUENCE)) {
+>                 inner_p =3D p;
+> -               ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_len, &len,
+> +               ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_len, &len,
+>                                            MBEDTLS_ASN1_OID);
+>                 if (ret)
+>                         return ret;
+>
+>                 if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_PKCS9_CONTENTTYPE, i=
+nner_p, len)) {
+>                         inner_p +=3D len;
+> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+>                                                    MBEDTLS_ASN1_CONSTRUCT=
+ED |
+>                                                    MBEDTLS_ASN1_SET);
+>                         if (ret)
+>                                 return ret;
+>
+> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+>                                                    MBEDTLS_ASN1_OID);
+>                         if (ret)
+>                                 return ret;
+> @@ -151,13 +165,13 @@ static int authattrs_parse(struct pkcs7_message *ms=
+g, void *aa, size_t aa_len,
+>                 } else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_PKCS9_MESSAGE=
+DIGEST, inner_p,
+>                                                 len)) {
+>                         inner_p +=3D len;
+> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+>                                                    MBEDTLS_ASN1_CONSTRUCT=
+ED |
+>                                                    MBEDTLS_ASN1_SET);
+>                         if (ret)
+>                                 return ret;
+>
+> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+>                                                    MBEDTLS_ASN1_OCTET_STR=
+ING);
+>                         if (ret)
+>                                 return ret;
+> @@ -172,15 +186,18 @@ static int authattrs_parse(struct pkcs7_message *ms=
+g, void *aa, size_t aa_len,
+>                         mbedtls_x509_time st;
+>
+>                         inner_p +=3D len;
+> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
+n, &len,
+>                                                    MBEDTLS_ASN1_CONSTRUCT=
+ED |
+>                                                    MBEDTLS_ASN1_SET);
+>                         if (ret)
+>                                 return ret;
+>
+>                         ret =3D mbedtls_x509_get_time(&inner_p, p + seq_l=
+en, &st);
+> -                       if (ret)
+> +                       if (ret) {
+> +                               debug("mbedtls_x509_get_time() failed: %x=
+\n", ret);
+> +                               ret =3D -EINVAL;
+>                                 return ret;
+> +                       }
+>                         sinfo->signing_time =3D x509_get_timestamp(&st);
+>
+>                         if (__test_and_set_bit(sinfo_has_signing_time, &s=
+info->aa_set))
+> @@ -287,8 +304,11 @@ static int x509_populate_sinfo(struct pkcs7_message =
+*msg,
+>          * info. Assume that we are using RSA.
+>          */
+>         ret =3D mbedtls_oid_get_md_alg(&mb_sinfo->alg_identifier, &md_alg=
+);
+> -       if (ret)
+> +       if (ret) {
+> +               debug("mbedtls_oid_get_md_alg() failed: %x\n", ret);
+> +               ret =3D -EINVAL;
+>                 goto out_err_sinfo;
+> +       }
+>         s->pkey_algo =3D "rsa";
+>
+>         /* Translate the hash algorithm */
+> @@ -451,8 +471,14 @@ struct pkcs7_message *pkcs7_parse_message(const void=
+ *data, size_t datalen)
+>         mbedtls_pkcs7_init(&pkcs7_ctx);
+>         ret =3D mbedtls_pkcs7_parse_der(&pkcs7_ctx, data, datalen);
+>         /* Check if it is a PKCS#7 message with signed data */
+> -       if (ret !=3D MBEDTLS_PKCS7_SIGNED_DATA)
+> +       if (ret !=3D MBEDTLS_PKCS7_SIGNED_DATA) {
+> +               debug("mbedtls_pkcs7_parse_der() failed: %x\n", ret);
+> +
+> +               /* MbedTLS error codes lie beyond MAX_ERRNO and are not
+> +                * suitable for ERR_PTR. */
+> +               ret =3D -EINVAL;
+>                 goto parse_fail;
+> +       }
+>
+>         /* Assume that we are using PKCS#7, not CMS ver 3 */
+>         msg->version =3D 1;       /* 1 for [PKCS#7 or CMS ver 1] */
+> diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parse=
+r.c
+> index e163e16b9bc..181727e1eda 100644
+> --- a/lib/mbedtls/x509_cert_parser.c
+> +++ b/lib/mbedtls/x509_cert_parser.c
+> @@ -425,13 +425,19 @@ struct x509_certificate *x509_cert_parse(const void=
+ *data, size_t datalen)
+>  {
+>         mbedtls_x509_crt mbedtls_cert;
+>         struct x509_certificate *cert =3D NULL;
+> -       long ret;
+> +       int ret;
+>
+>         /* Parse DER encoded certificate */
+>         mbedtls_x509_crt_init(&mbedtls_cert);
+>         ret =3D mbedtls_x509_crt_parse_der(&mbedtls_cert, data, datalen);
+> -       if (ret)
+> +       if (ret) {
+> +               debug("mbedtls_x509_crt_parse_der() failed: %x\n", ret);
+> +
+> +               /* MbedTLS error codes lie beyond MAX_ERRNO and are not
+> +                * suitable for ERR_PTR. */
+> +               ret =3D -EINVAL;
+>                 goto clean_up_ctx;
+> +       }
+>
+>         /* Populate x509_certificate from mbedtls_x509_crt */
+>         ret =3D x509_populate_cert(&mbedtls_cert, &cert);
+> --
+> 2.47.3
+>
