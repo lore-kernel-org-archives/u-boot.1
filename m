@@ -4,104 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B3CC43602
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:14:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A30C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CEF984AA4;
-	Tue,  7 Jul 2026 17:11:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CD69084A20;
+	Tue,  7 Jul 2026 17:22:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Ti7CNf06";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="QcwEFi2E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A23A84A67; Tue,  7 Jul 2026 17:10:57 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 92A8784A30; Tue,  7 Jul 2026 17:22:12 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B12784A8F
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:10:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F62084994
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7e9ecb1e13cso3756966a34.3
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:10:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=eric.chung@riscstar.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-3811e59df58so2714141a91.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783437054; x=1784041854; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=SIV+3mHstq3+8J+7LV0VH6fNfYlxrCv/xRuoLBUF8Hc=;
- b=Ti7CNf06zsS0ikEYz11ysLsnHuHD9FlrrZhn5vIFEJOZMUkTza1QvNEPcbg2lzZ9Ca
- FomaekgjcfmFPilR/pRL3z5sfxQoM71ZJlGBTHzAqn0PFp/jwoC2McVzEzkQqcnlhSev
- q9OmtVyGjZZVLDo2ymn07MLT9IcTfpkMy40rPxmTtRlOBhAym4q7MtoE6INzjVbgetP/
- hs8o6Kukjo/wWP2eG2PVskiLR2L3WpRBz7jmd5RGXnFuC9s5z0FJYukJ5dWIdxG7OVBG
- y7v1XvaMpoSSSpXYjRRVDgthQbvdZDMBABDYsAm9mwjpU79OzRkzHsiXP7ER1s62MBh8
- EdrQ==
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1783437726; x=1784042526;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=GcUeu1LdkVzPLVqWBe47pmRgVspVWgVBJDzyDv6xKKI=;
+ b=QcwEFi2EeAHmOz0pg4/wXGLMoKiPLRhRVdoN6c2kdmjhbDPCMdWvSsCmAqFqorrUgO
+ g1Zn8KSRH5FBFWp9tgzNT85QZ4UTVZvObDBGdQRz6woA0SCEmNJp+9VFexcUVH7XETvL
+ Ps4FSoM7EUpO9Bx/rmrbtA1ZbccUVQ1H5GK4Q7PAFHzgNIe05wEBPaJNdVqvVWkmLyR/
+ 2eh++aFJxStY/DFU26FvHra25FmEv1dsP/2W7vmGSlq862vL/VUluDAD4O24Dl/RG9W7
+ yRWWljUdoYb7siRZzvD4AlpieVOU3ZE7TPx43xQrNBxGI8mLfCoOZ1fjor/Lt9b12uUn
+ ETrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783437054; x=1784041854;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=SIV+3mHstq3+8J+7LV0VH6fNfYlxrCv/xRuoLBUF8Hc=;
- b=hSDqbDmsd6xN4F8kjW3WeKgvTCQ/RzZadxGdfLCd8VMuzU5WbE1KkgLSupimCx1XV6
- SIeL4Mo6jtql2xeeMjlCgW6WOC2jqxjbUrUhcW+lcs5waOBKInWeLOnjPCHCKhSGfKhf
- 7pEpsDAsjb1MtCbIPCqZnB7inSN/g50P5AM+T8PIdXhh1vehAsKR7/ZNht0P/997RQk4
- bfvSjEXLYeRcxoVCQiCoK+8M7j/UU6KqhRHViXOHUt2oJSi68kaWd2oFvJ938nz3v/3F
- 00FyvHV6lmDfurM5pEiLhNYRrCZkIiDNm95sgMU4SHEGM5CvdqRMEegWqFlQqIl1O92t
- mcsw==
-X-Gm-Message-State: AOJu0YxvvRJlulXiCmTxJSkMitZ0OZXUJ6YWNTQKvTDnkj32KiH1i4wc
- yzvjCd5tjoXCY6lupS06neuaW3kV0KLuXZTJP7F25y6kFf6/6RtTv8Zswt30+052C4Q=
-X-Gm-Gg: AfdE7ck11Gh3Cat+qYqghCmjJvh4Z/W4JGWnE+4DZ7VIHIw30gvCWH+BqF+lskBcHmf
- pFVEy94AoBNViLjaMHRyjymrlSMJfKqteJR/hBRJBlhwItmFa+HeHSreO98xgbP7kyOXbdRIwEW
- VBgd0pn/+VsT3zY0J7NsvhZYJh37bNMxqE8H8/oqoYC8KiLxKWNFDY66mmSb6JuiM9FK25K5niV
- yQyWyX6kPm53nZZa0qDHk7TXYQvk7a+tJjwXzbjk/lTn6ZuLz5RzsjTTj5FAtovq8CIRrLwjgfd
- 6DLV552j1iZrTmitYZGecrywV1ZY6nSsjT8RQozxpjYkPxQBpwHkbeKI6e1w7QnL67e+nxL1bxZ
- pa6xjpOfDeRiQxcN81l3do0mmJf6MEQ3DM/kI7BmqDOdv4ghRSCP0CAoya2sB5QW4+RfTjuCTv+
- QeeEQ1VUMD7s4BP8mMLQ==
-X-Received: by 2002:a05:6820:2114:b0:6a1:788e:86a1 with SMTP id
- 006d021491bc7-6a355367590mr4069050eaf.18.1783437053784; 
- Tue, 07 Jul 2026 08:10:53 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7649:dd46:9d68:b169])
+ d=1e100.net; s=20251104; t=1783437726; x=1784042526;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=GcUeu1LdkVzPLVqWBe47pmRgVspVWgVBJDzyDv6xKKI=;
+ b=VOKy6W7/vGiVxL8FeRM7vditugOblKLmWzGo1NTdsTbc5DdXR6eOXvlZXlc6+L8/pZ
+ cTRPgBVPyBYaE9Phd0OfoW2Od+XMPsmRP16OWf6Xi2/fVF1MY3lw79rd695TTYNNuXzM
+ tPU86wXkjIR7L/YRJVLwMVK8EfqObDMumkqn5SWcHWvz8uVzQ/Q/BIPpLIjm7xwdHC5F
+ ReIngo6suewQN2ERnwdY/3/bdwprBJVof9EkRYy8hLNWTVy5AGtJmxvZxA+jalNI8Fyp
+ wWm+8uBszEAt+mzOQsK7F4cNlXJXdSZYDWUeRpv8PtlAzzXld04E9Pxdz9ZTmqPS20HA
+ mGHg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpXx9lftyTMY3gX/9urGrkHlFpYW4CMSRU8SA1rolPQ8DiXCadhm+0Nt0C/377bzdcI/LSRktw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyf9qlhirTaVSClkWFJekMnuA8TBRhJvDAj0aNpxLT5EcekeB89
+ 1t4ZxbPWxDlizvlvTwshhmnF/kxcBw2FSrt3N7RPlo9RDC4p0YWjt+iwKc+k8hM41is=
+X-Gm-Gg: AfdE7cldE8F17qU25VKy0mgmXMwcvd7VZvo9QMgUBpaUS5RQBfI5mui6jewyIcszvi7
+ baf2kr3OFjII1fw9ow7Rod7dU6own0/JisJzeMEMCSaW2OEnvWgFi17nQKSvBWuZ8C8kL0/Pzh+
+ hausQbx2flsIS6FnDMHKQTVsgdM6dRdisBq1T3BqO5N/zQYZFQ4Wv6ehJ/XDydLvfexfVl6T2t5
+ FOq/8vkJD4sJ0PMMFaQGKOsShL63iXeAAqsGfF6ii5t8Cxj7qGa3rjEkQKCT5E5E09JneHoaVeB
+ S69eCRo7c+Qcd0lPJtfuvI0bC6VeFarXTkOwRj41DLfOR0AD2p6FeXbpySSSwZsgSzzlx2M0e0H
+ QQ4k6rMfOxpQJ2ixZ2pg65McOxF5/cNp2dRHkGlodg/rgESDQwHLy3M53G7vEC3b04jXSXWERq9
+ FfNkHgPsOvMWwU41Igiu56GGDR5xmk2DL8oYQgcyatKns93TawyoCnJ6eiFA5i9809CG77x0qa7
+ JTtD3TKj0ZmGNSdgjfTdVTa0+eYhw2b2KAz2o/RDY0iGECZrHWwCA==
+X-Received: by 2002:a17:90b:48c1:b0:37f:f4ae:5f25 with SMTP id
+ 98e67ed59e1d1-38756ce281dmr5356904a91.20.1783437726559; 
+ Tue, 07 Jul 2026 08:22:06 -0700 (PDT)
+Received: from [127.0.1.1] ([209.170.101.129])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb1d011asm14846352fac.8.2026.07.07.08.10.52
+ 5a478bee46e88-3117483ddd1sm9594997eec.9.2026.07.07.08.22.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:10:53 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 07 Jul 2026 10:07:44 -0500
-Subject: [PATCH 24/24] clk: mediatek: mt7629: remove mt7629_peri_clk_tree
+ Tue, 07 Jul 2026 08:22:06 -0700 (PDT)
+From: Eric Chung <eric.chung@riscstar.com>
+Subject: [PATCH v4 00/10] spacemit mmc driver
+Date: Tue, 07 Jul 2026 23:21:41 +0800
+Message-Id: <20260707-m4-v4-0-dbd01185f911@riscstar.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-mtk-clk-parent-lookup-improvements-v1-24-65d24cc0d569@baylibre.com>
-References: <20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com>
-In-Reply-To: <20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1628; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=QioXU5PksNsBW2lRklmB4LxfP6wdpbpA3Bupk+Mq6ks=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqTRbXNQ/1iIBCn9WPz2UnE1uLsAJycOwo5X0+g
- qM+6Yj4xgGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCak0W1xYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A5E4IAILnyaFUspx8DC+kZcWqp2bZDFTJz5T7NT9Kc0H
- EKYnfG7YEPmttqShNXe2NI3QoMlctJi8TEla+Q12+WKdLjIQ/ew6LRIYIFSPBZWbGR/LN8VjlNW
- f0vaFs3pENl8TphQ5QA5VkYcD36cpZLdYzamNobQ7hlOsoXmkmGA4RwBEIkLw8cpcnwrPxnqsTn
- a909ls6WhydYICD82G/784SgDuLxPqIvLy8lujS8MFx5xFTKogB5Z5Q0fQ12/4C/cV642npIZpn
- Tej3Yp/4YDrcLySGgfwnP8c6wxHWEwHjbIR3QT+h2QkqSXCt9CecuG/AzKM5oIWjPniaXVYoxlq
- kzfA=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-B4-Tracking: v=1; b=H4sIAIUZTWoC/23NTQ7CIBQE4KsY1mKAFlpceQ/jAl4fFpO2BirRN
+ L27tC6MP8tJ5puZSMTgMZL9ZiIBk49+6HMotxsCrenPSH2TMxFMKKaEpl1JdY2MK6kdOkty8Rr
+ Q+fs6cjy9crzZC8K4yKXR+jgO4bG+JL70PgYTp4wazl3dlFqhEofgI8TRhB0MHVk2k/hVIiuwo
+ DkoWxdN/UcVb1UxuaoiK2m0hcoJ6UB+qXmenxvF8MsVAQAA
+X-Change-ID: 20260629-m4-98e01659fefb
+To: u-boot-spacemit@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, Han Xu <han.xu@nxp.com>, 
+ Yanir Levin <yanir.levin@tandemg.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>, 
+ Daniel Palmer <daniel@thingy.jp>, Anshul Dalal <anshuld@ti.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guodong Xu <guodong.xu@riscstar.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Eric Chung <eric.chung@riscstar.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,52 +120,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the mt7629_peri_clk_tree struct. Most of the fields are unused
-and we can just use mt7629_clk_tree instead as it has the required
-fields.
+This series adds MMC support for the SpacemiT K1: an SDHCI platform
+driver, the SD card device-tree overlay, defconfig options, and SPL
+boot-device selection from the SoC strap/config registers. The SDHCI
+driver is usable in both SPL and U-Boot proper.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+A flashing guide (doc/board/spacemit/k1-flash.rst) describes how to
+write images to eMMC.
+
+This series sits on top of three series still under review, and must be
+applied after them, in this order:
+
+  1. K1 clock/reset/dts migration [1]    (8 patches)
+  2. K1 SPL bring-up v4 [2]              (14 patches)
+  3. K1 pinctrl/GPIO and SPI NOR v2 [3]   (9 patches)
+  Then this series                        (10 patches)
+
+For each series:
+
+  b4 am <cover-msgid>
+  git am ./*.mbx
+
+Link: https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/ [1]
+Link: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc [2]
+Link: https://lore.kernel.org/u-boot/20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com/ [3]
+
 ---
- drivers/clk/mediatek/clk-mt7629.c | 18 +-----------------
- 1 file changed, 1 insertion(+), 17 deletions(-)
+Changes in v4:
+- mmc: Add CMD23 for write.
+- mmc: Fix CMD23 only for CMD18.
+- mmc: Update bulk release operations on reset and clocks for spacemit
+  platform driver.
+- MAINTAINER: update the maintainer of Spacemit K1.
+- Link to v3: https://patch.msgid.link/20260705-m4-v3-0-5a9bc7f25fc5@riscstar.com
 
-diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk-mt7629.c
-index 621abe4d1a3..793cabf8490 100644
---- a/drivers/clk/mediatek/clk-mt7629.c
-+++ b/drivers/clk/mediatek/clk-mt7629.c
-@@ -603,22 +603,6 @@ static const struct mtk_clk_tree mt7629_clk_tree = {
- 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
- };
- 
--static const struct mtk_clk_tree mt7629_peri_clk_tree = {
--	.pll_parent = EXT_PARENT(CLK_PAD_CLK20M),
--	.ext_clk_rates = ext_clock_rates,
--	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
--	.fdivs_offs = CLK_TOP_TO_USB3_SYS,
--	.muxes_offs = CLK_TOP_AXI_SEL,
--	.plls = apmixed_plls,
--	.fclks = top_fixed_clks,
--	.fdivs = top_fixed_divs,
--	.muxes = top_muxes,
--	.num_plls = ARRAY_SIZE(apmixed_plls),
--	.num_fclks = ARRAY_SIZE(top_fixed_clks),
--	.num_fdivs = ARRAY_SIZE(top_fixed_divs),
--	.num_muxes = ARRAY_SIZE(top_muxes),
--};
--
- static int mt7629_mcucfg_probe(struct udevice *dev)
- {
- 	void __iomem *base;
-@@ -665,7 +649,7 @@ static int mt7629_infracfg_probe(struct udevice *dev)
- 
- static int mt7629_pericfg_probe(struct udevice *dev)
- {
--	return mtk_common_clk_gate_init(dev, &mt7629_peri_clk_tree, peri_cgs,
-+	return mtk_common_clk_gate_init(dev, &mt7629_clk_tree, peri_cgs,
- 					ARRAY_SIZE(peri_cgs), CLK_PERI_PWM1_PD);
- }
- 
+Changes in v3:
+- pinctrl: Fix "fast" by "uhs".
+- pinctrl: Add syscon dependency.
+- mmc: Fix quick by capability.
+- doc: Add SD boot support.
+- Link to v2: https://lore.kernel.org/u-boot/20260630-m1-v1-0-83f13347b3ba@riscstar.com/T/#m2aba875a2696a7bb9b704618d22ae2fd7f7f5acc
 
--- 
-2.43.0
+Changes in v2:
+- cmd: drop patches on eminfo & tlv_eeprom.
+- configs: Enable ADMA and SYSCON support.
+- dts: Use vmmc-supply as vqmmc-supply on the SD card node.
+- mmc: k1: Enable ADMA mode support, use CMD23 for multi-block
+  read/write, correct pinctrl state from "fast" to "uhs".
+- mmc: sdhci: Add new quirk patch to enable CMD23 for multi-block
+  transfers.
+- pinctrl: k1: Add new IO power domain configuration support for
+  dual-voltage GPIO banks.
+- spacemit: k1: Use FIELD_GET() to parse boot strap mode.
+- Link to v1: https://lore.kernel.org/u-boot/20260521-k1-spl-mmc-sdcard-v1-0-1bd14b8c4f9f@riscstar.com/
+
+To: u-boot-spacemit@groups.io
+To: u-boot@lists.denx.de
+Cc: Huan Zhou <pericycle.cc@gmail.com>
+Cc: Guodong Xu <guodong.xu@riscstar.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tim Ouyang <tim609@andestech.com>
+Cc: Leo Liang <leo.liang@sifive.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Han Xu <han.xu@nxp.com>
+Cc: Yanir Levin <yanir.levin@tandemg.com>
+Cc: Christoph Stoidner <c.stoidner@phytec.de>
+Cc: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+Cc: Daniel Palmer <daniel@thingy.jp>
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Signed-off-by: Eric Chung <eric.chung@riscstar.com>
+
+---
+Eric Chung (10):
+      spacemit: k1: select boot device via config registers
+      pinctrl: k1: add IO power domain configuration support
+      mmc: enable CMD23 for multi-block transfers
+      mmc: k1: add sdhci platform driver
+      dts: k1: add SD card support in u-boot overlay
+      configs: k1: enable SD and eMMC support
+      MAINTAINER: update Spacemit K1 entry
+      doc: spacemit: flash on K1 SoC based boards
+      config: k1: enable ENV support for eMMC
+      spacemit: k1: load product name from environment variable
+
+ arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  87 +++-
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  82 +++-
+ board/spacemit/k1/MAINTAINERS             |   5 +-
+ board/spacemit/k1/spl.c                   | 120 ++++--
+ configs/spacemit_k1_defconfig             |  26 +-
+ doc/board/spacemit/index.rst              |   1 +
+ doc/board/spacemit/k1-mmc.rst             | 320 ++++++++++++++
+ drivers/mmc/Kconfig                       |   7 +
+ drivers/mmc/Makefile                      |   1 +
+ drivers/mmc/mmc.c                         |  16 +-
+ drivers/mmc/mmc_write.c                   |  19 +-
+ drivers/mmc/spacemit_sdhci.c              | 685 ++++++++++++++++++++++++++++++
+ drivers/pinctrl/spacemit/Kconfig          |   2 +-
+ drivers/pinctrl/spacemit/pinctrl-k1.c     |  83 +++-
+ include/mmc.h                             |   3 +
+ 15 files changed, 1401 insertions(+), 56 deletions(-)
+---
+base-commit: e7a6b33b153be98fcca16729e189f90c2d91a98c
+change-id: 20260629-m4-98e01659fefb
+
+Best regards,
+--  
+Eric Chung <eric.chung@riscstar.com>
 
