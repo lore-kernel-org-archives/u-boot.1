@@ -4,102 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AEE6C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 21:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B64C43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 22:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA83D8496E;
-	Tue,  7 Jul 2026 23:23:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A78F78496E;
+	Wed,  8 Jul 2026 00:03:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cd/JFXbo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kvOLbumI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A65AC84979; Tue,  7 Jul 2026 23:23:23 +0200 (CEST)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
+ id EB05484979; Wed,  8 Jul 2026 00:03:02 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 597E9848EB
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 23:23:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9419484942
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 00:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-5bbc717c52aso1516296e0c.0
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 14:23:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783459400; cv=none;
- d=google.com; s=arc-20260327;
- b=qfWx6cgoiGN++/DcvZMVaqB2XXrZweJ8h99KrZ5X+NHhIAgmbaJUvgU9ASqIAijnMA
- Fpw1TW64VCfneG2GfXO1RPuqmnuRagMWpjOQ8E5tO9YmFA/T3FxdAC+gPjantVD7GP0f
- 0Na9F+S9cWzE9TLwyGk/LmM5HNk+C54HO6UU1NC5QvhrYrLI0I7jlOi/WTNQV/JcqoZa
- 7P9Dbpa2/NEqEWcEV0SG5jDmFaU3Yx4zcO9CNukz4f+mLHpYasR3lwwtIt3jnA0AoESe
- N8hZxcC04UNSgbxkBNJAYk+rytWcdVzQM85AZoaypqMSq27mAQflegLaZYvnrSqUD2VH
- VFCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
- fh=qvwHz7ZPqH2m/rE5Zf2H9mGygl3pN9N29dMB7t1DbME=;
- b=qWT4UUXawwbpKhW3aes9qjNDcD+VnGZWVi9fCF6mZCX+kycs539Cl82nMVhukSylG9
- KzkI9AEwB4gq3kyptbnpqYaCgfasFQH3s3pSm3Yn+kIe7YXyQg87HOSxYrQmVh8dexwe
- qvaVHlf0hS7opV1/eBKORerCaMXCZOOIxunPu4r9Az8p/zdeQpaU0JDYgRxq6adCNchi
- fXGxm3V9XyfWR/RjdKKLczTulFUUqyplG+p4vJFex3jVgCTm288AMpI2adPVSX/Z1F9f
- VKu9VPda5PEGal4a0KPpbccV3mHpR+Pvls0sTTWsxz4ttoYmEZ75pmPpsyeNU6BShJfc
- aWEg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7e9f69ee6f4so59647a34.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 15:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783459400; x=1784064200; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
- b=cd/JFXbo0NmBEkXRyTUPKj7QIWTwjj5t1ZxbF2hsY0m4NKyp2DkVDLLiKJC0/e6VeB
- 2/CCs16FIXABMqNWVfl5beXOTDLBEdRSCgSQul4sACBwALZ2lG1HMcSLWJ5qunkYxrQC
- zjb6PCRckEY2q5kTj/2XZU4HY8HEi7oTY9x5zWc7MJ6cBg0oLrDlmZ+hmkiuk+LY63Ep
- s19xDnt9mvDFYDUSdV/i1VfeZG5CBW7x/tHLlY5rWkZAU+8r+VspI41d6XfxcVXj5n17
- qr9mpPGaWLVmZSqelCA6hIidhc375342X5J1oO681x61SLpsLZtvgtuNgHZFkcXjyIW4
- kmqA==
+ d=konsulko.com; s=google; t=1783461779; x=1784066579; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=f9wRtEW0G8zo9C7TEvoBLWcpwDHzgg3SW5FANNS5/WQ=;
+ b=kvOLbumIdIFdtt2WO2oiCiAQRC++KknGDxluOvCWsd+/+F8j/xaHLnYnIFZ7pf2Qi9
+ CYxgB4wJescTPcKOfWqT4x+SGhOmW8EJHGGm3hYR8CtDvl0qy8zDXOABygbn6RInBtXy
+ o6kliGpsKEn+HEO4nPJGnpuZqVleNj6e/vae0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783459400; x=1784064200;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=8T5hFAVZdO3/EyEAFzzpTUjyvR1hK5QG4EsM/y3HJs0=;
- b=TfGlpaFAl/DC8KvRuMceOBS/YyFgVQpoJZSCq/+I32/g02C7YXdd1TlKwzoFWhksmZ
- bEFXxdbz3yTG78U/r7Hfys3kfYTO3Kwig7VsW1H8aYpXf1mWkplmHAkjvKV1pcGqu0Af
- fEE5DtKpd6naohRK+/IGK4sljdFSRqfGH4KZSEZmPdNhceAxq86AIjTf8rEVLb9Lm1y6
- dID7hKZtKdcImOlmjOVKymShQ8CJVFRAj4QhXoFhBIh5XjH9GlyMEG9TYoc0YcE7u0yM
- LOnVunnlSJFdIxareX/W9CaXC4NYLhILuSdM/RmaDBv7wAJQEjpgyZccgVNvmM7Yxopn
- uDMA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqCl5PbpaVX4pqjKyFtIaRuySVbhorkLF5MBnqDZBCcK9176HXjuxtCch4s+JzxahTGpDfOn9M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvN0k2dpAJ/wLAWV3K8stmLEdm/irXthtxpxUJ00pATUEC+zu/
- vAEfLP+5fgdT9MG+fok3eOIb42ZVsePZlPSN1Ch8fBw33WE6WB5sD/K+P5M5HIMGQElVOB2h8VE
- 1NMNf9NN5TLuBsRlk/quuIFdG8WxiWMg=
-X-Gm-Gg: AfdE7ckhdN93zhcMliSoE4PkbuDDJUi3IvZdTa/x5/q1C8Lu3v2hfyBNvQS2BHk9LbG
- FiBGxYoZ5EIPJz91XhiVGWptZyYv4TSRgBx4EmjAOuum0WzH4FzQrV4VOpfPkUUHvYws6f5KDps
- Gnjoq4ajVzeUd3NQoxZKae2aDkteo5AHO+kG0N8Dd4QQELrcw1onuw1gI8/3fVZyKuYI8eMjbGv
- id6L0SccM2aikLgvAnHcFWd6w2qvWKBEex+Eg+hpZmPGBQKaKirdxEbpDO2E3TECsTclawA
-X-Received: by 2002:a05:6122:3b8d:b0:5bd:c6ff:b6e5 with SMTP id
- 71dfb90a1353d-5be90517ccfmr4246683e0c.1.1783459400029; Tue, 07 Jul 2026
- 14:23:20 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783461779; x=1784066579;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=f9wRtEW0G8zo9C7TEvoBLWcpwDHzgg3SW5FANNS5/WQ=;
+ b=nN6U1YNSQRAXqINOtQzYGfLcQ0wiMagC3G5UzF/5Wk1H7FrlZw+puvj40qlObG/GIz
+ T7fOJ+3FRFvDMBUbJHpoIQSsqui8UnENxgTs17lLS4iNe100uXci5tNxiVV0eLyzPJV6
+ 9o3/NuvkPxHDZmHvUVU4rdNnsLaUXvYXcA55ijUW/nofv0rPcJJFCIc5GcpM3KPiiILa
+ 20nTLtYnUUJWgAD6XzBjCne6u5XdGqJLDqU91gbCunt6UKRHpGKyq9F5iiRoK/T9XQt5
+ 265gQyCmGMWquEunzdv1jV5gJR4c0bkKQJLUql+QlzYNNjubNI6bmF6LYx6OOfYZDlvn
+ snqA==
+X-Gm-Message-State: AOJu0Yxra6YS8ED/XZceDLBq/1Aui4ISLe32WGBRdUYWhgegWyJ97ybu
+ VHn0u/v0tP/tYeqwI5XHXksfz+sa43EV5i0WTAaQIkQeaQd4XDl6dUQV+CT4v87yzxC9rkfP+1z
+ L/MevvEI=
+X-Gm-Gg: AfdE7cncv+f860PL2H09HawrQ92t/ph2eKfRLEgFTK2EdDpa/ysLOfYpkbo+M+GEWKs
+ h3P/DxWfKZb88yPrNlwvwnsb/u1IT3GZhVBwM/Orev04YaAHq/x5GoEC1w1VW6fvC/bFtEMzeAr
+ rjczGo1oAF9S3E62wIsahnKJewBgSTakZ+DUmxfrIwndGeyR6hDuHkq82iWGODjQIMhVByiIJ2V
+ 2fJHCSbHGOQf0HasLyIyXct4e/LjYRmFfBDrJlC2D2ur1gBjtRawvnUzYgY1AYn2fhY2x6aYfog
+ QaA/YcN5iHA4pgY/Ss9pTuoLGifReZwvgKs9os/4T4b4qdX0HOAfZHDGGcB4RGQpFfidezq/yLW
+ NMJHbxEvQq7wkxhI4Wyly+hL9hkHDfqNY7a0+4IQu1ryfRvcM/SjZbLm4dLrNehAMSapI2usazD
+ Bd2jGMvny9/0vouDd5rTB1qVb4GiCkRQNQcPb2RRLUtd97gw0nLLpS4wiyBAW9ot8EUHbWLZkEW
+ EswBqIXC7wVPQRTCKc0KOC6ja4bxkJ4WZ4NU1zP9rhC1ahjpbNCBoIxuFM5DQ==
+X-Received: by 2002:a05:6830:6ae8:b0:7e6:deb1:485b with SMTP id
+ 46e09a7af769-7ebb23223b2mr4978994a34.16.1783461779276; 
+ Tue, 07 Jul 2026 15:02:59 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-100-56.totalplay.net. [189.203.100.56])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ebcb2bd6c4sm423159a34.23.2026.07.07.15.02.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jul 2026 15:02:58 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH] arm: qcom: Update ipq5424-rdp466-u-boot.dtsi for v7.1-dts
+ changes
+Date: Tue,  7 Jul 2026 16:02:57 -0600
+Message-ID: <20260707220257.252911-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <ak0w7CcAOoBPKc4Y@Vsevolods-MacBook-Pro.local>
-In-Reply-To: <ak0w7CcAOoBPKc4Y@Vsevolods-MacBook-Pro.local>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Tue, 7 Jul 2026 17:23:08 -0400
-X-Gm-Features: AVVi8CczAQJXi5La02QkzjQTBaRBUCNmyztP4WGEhxjM8x1DDGc3Gvqgoe6iQLU
-Message-ID: <CAMDkj5wyWwA+pP5D0QYtqLQokON8H_1J_BTPbQ0cVAOKWWJ4Og@mail.gmail.com>
-Subject: Re: [PATCH v2] lib/mbedtls: Do not use ERR_PTR with mbedTLS error
- values
-To: Vsevolod Kozlov <zaba@mm.st>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,217 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vsevolod,
+Once we move to the v7.0-dts tag, we get a failure to build of:
+dts/upstream/src/arm64/qcom/ipq5424.dtsi:556.21-573.5: ERROR (phandle_references): /soc@0/mmc@7804000: Reference to non-existent node or label "sdc_default_state"
 
-On Tue, Jul 7, 2026 at 1:01=E2=80=AFPM Vsevolod Kozlov <zaba@mm.st> wrote:
->
-> MbedTLS functions usually return zero for success and negative error
-> codes to indicate failure, but its error codes lie way outside the range
-> of -MAX_ERRNO, so using them with ERR_PTR creates values that do not
-> pass the IS_ERR check and lead to crashes.
->
-> Signed-off-by: Vsevolod Kozlov <zaba@mm.st>
-> ---
-> Changes since v1: Convert return values of all mbedtls functions at
->  their call sites instead of trying to do it right before returning
->  ERR_PTR.
->
+  also defined at arch/arm/dts/ipq5424-rdp466-u-boot.dtsi:20.8-39.4
+ERROR: Input tree has errors, aborting (use -f to force output)
 
-There might be some misunderstandings. I meant that there were two options:
-1. Like what you mentioned, update ERR_PTR/IS_ERR.
-2. Have a shim wrapper on top of ERR_PTR/IS_ERR for lib/mbedtls use only.
-But having wrappers on those mbedtls_ functions is not a good idea,
-especially explicitly with a prefix wrapped_.
+Looking over the changes, this appears to be what's required to keep the
+platform functioning as expected.
 
-Regards,
-Raymond
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+This file isn't covered by MAINTAINERS directly, so can someone please
+follow-up and correct that? And, based on looking at the changes between
+v7.0-dts and v7.1-dts, this would appear to be the right change, but I
+don't know the platform.
 
->  lib/mbedtls/pkcs7_parser.c     | 48 ++++++++++++++++++++++++++--------
->  lib/mbedtls/x509_cert_parser.c | 10 +++++--
->  2 files changed, 45 insertions(+), 13 deletions(-)
->
-> diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
-> index bf8ee17b5b8..6d255250e62 100644
-> --- a/lib/mbedtls/pkcs7_parser.c
-> +++ b/lib/mbedtls/pkcs7_parser.c
-> @@ -29,6 +29,20 @@ static void pkcs7_free_sinfo_mbedtls_ctx(struct pkcs7_=
-sinfo_mbedtls_ctx *ctx)
->         }
->  }
->
-> +/* Convert mbedTLS error codes to negative errno to avoid creating
-> + * out-of-range ERR_PTR values */
-> +static int wrapped_asn1_get_tag(unsigned char **p,
-> +                               const unsigned char *end,
-> +                               size_t *len, int tag)
-> +{
-> +       int ret =3D mbedtls_asn1_get_tag(p, end, len, tag);
-> +       if (ret) {
-> +               debug("mbedtls_asn1_get_tag() failed: %x\n", ret);
-> +               return -EINVAL;
-> +       }
-> +       return 0;
-> +}
-> +
->  /*
->   * Parse Authenticate Attributes
->   * TODO: Shall we consider to integrate decoding of authenticate attribu=
-te into
-> @@ -105,30 +119,30 @@ static int authattrs_parse(struct pkcs7_message *ms=
-g, void *aa, size_t aa_len,
->         unsigned char *inner_p;
->         size_t seq_len =3D 0;
->
-> -       ret =3D mbedtls_asn1_get_tag(&p, end, &seq_len,
-> +       ret =3D wrapped_asn1_get_tag(&p, end, &seq_len,
->                                    MBEDTLS_ASN1_CONTEXT_SPECIFIC |
->                                    MBEDTLS_ASN1_CONSTRUCTED);
->         if (ret)
->                 return ret;
->
-> -       while (!mbedtls_asn1_get_tag(&p, end, &seq_len,
-> +       while (!wrapped_asn1_get_tag(&p, end, &seq_len,
->                                      MBEDTLS_ASN1_CONSTRUCTED |
->                                      MBEDTLS_ASN1_SEQUENCE)) {
->                 inner_p =3D p;
-> -               ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_len, &len,
-> +               ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_len, &len,
->                                            MBEDTLS_ASN1_OID);
->                 if (ret)
->                         return ret;
->
->                 if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_PKCS9_CONTENTTYPE, i=
-nner_p, len)) {
->                         inner_p +=3D len;
-> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
-> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
->                                                    MBEDTLS_ASN1_CONSTRUCT=
-ED |
->                                                    MBEDTLS_ASN1_SET);
->                         if (ret)
->                                 return ret;
->
-> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
-> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
->                                                    MBEDTLS_ASN1_OID);
->                         if (ret)
->                                 return ret;
-> @@ -151,13 +165,13 @@ static int authattrs_parse(struct pkcs7_message *ms=
-g, void *aa, size_t aa_len,
->                 } else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_PKCS9_MESSAGE=
-DIGEST, inner_p,
->                                                 len)) {
->                         inner_p +=3D len;
-> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
-> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
->                                                    MBEDTLS_ASN1_CONSTRUCT=
-ED |
->                                                    MBEDTLS_ASN1_SET);
->                         if (ret)
->                                 return ret;
->
-> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
-> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
->                                                    MBEDTLS_ASN1_OCTET_STR=
-ING);
->                         if (ret)
->                                 return ret;
-> @@ -172,15 +186,18 @@ static int authattrs_parse(struct pkcs7_message *ms=
-g, void *aa, size_t aa_len,
->                         mbedtls_x509_time st;
->
->                         inner_p +=3D len;
-> -                       ret =3D mbedtls_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
-> +                       ret =3D wrapped_asn1_get_tag(&inner_p, p + seq_le=
-n, &len,
->                                                    MBEDTLS_ASN1_CONSTRUCT=
-ED |
->                                                    MBEDTLS_ASN1_SET);
->                         if (ret)
->                                 return ret;
->
->                         ret =3D mbedtls_x509_get_time(&inner_p, p + seq_l=
-en, &st);
-> -                       if (ret)
-> +                       if (ret) {
-> +                               debug("mbedtls_x509_get_time() failed: %x=
-\n", ret);
-> +                               ret =3D -EINVAL;
->                                 return ret;
-> +                       }
->                         sinfo->signing_time =3D x509_get_timestamp(&st);
->
->                         if (__test_and_set_bit(sinfo_has_signing_time, &s=
-info->aa_set))
-> @@ -287,8 +304,11 @@ static int x509_populate_sinfo(struct pkcs7_message =
-*msg,
->          * info. Assume that we are using RSA.
->          */
->         ret =3D mbedtls_oid_get_md_alg(&mb_sinfo->alg_identifier, &md_alg=
-);
-> -       if (ret)
-> +       if (ret) {
-> +               debug("mbedtls_oid_get_md_alg() failed: %x\n", ret);
-> +               ret =3D -EINVAL;
->                 goto out_err_sinfo;
-> +       }
->         s->pkey_algo =3D "rsa";
->
->         /* Translate the hash algorithm */
-> @@ -451,8 +471,14 @@ struct pkcs7_message *pkcs7_parse_message(const void=
- *data, size_t datalen)
->         mbedtls_pkcs7_init(&pkcs7_ctx);
->         ret =3D mbedtls_pkcs7_parse_der(&pkcs7_ctx, data, datalen);
->         /* Check if it is a PKCS#7 message with signed data */
-> -       if (ret !=3D MBEDTLS_PKCS7_SIGNED_DATA)
-> +       if (ret !=3D MBEDTLS_PKCS7_SIGNED_DATA) {
-> +               debug("mbedtls_pkcs7_parse_der() failed: %x\n", ret);
-> +
-> +               /* MbedTLS error codes lie beyond MAX_ERRNO and are not
-> +                * suitable for ERR_PTR. */
-> +               ret =3D -EINVAL;
->                 goto parse_fail;
-> +       }
->
->         /* Assume that we are using PKCS#7, not CMS ver 3 */
->         msg->version =3D 1;       /* 1 for [PKCS#7 or CMS ver 1] */
-> diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parse=
-r.c
-> index e163e16b9bc..181727e1eda 100644
-> --- a/lib/mbedtls/x509_cert_parser.c
-> +++ b/lib/mbedtls/x509_cert_parser.c
-> @@ -425,13 +425,19 @@ struct x509_certificate *x509_cert_parse(const void=
- *data, size_t datalen)
->  {
->         mbedtls_x509_crt mbedtls_cert;
->         struct x509_certificate *cert =3D NULL;
-> -       long ret;
-> +       int ret;
->
->         /* Parse DER encoded certificate */
->         mbedtls_x509_crt_init(&mbedtls_cert);
->         ret =3D mbedtls_x509_crt_parse_der(&mbedtls_cert, data, datalen);
-> -       if (ret)
-> +       if (ret) {
-> +               debug("mbedtls_x509_crt_parse_der() failed: %x\n", ret);
-> +
-> +               /* MbedTLS error codes lie beyond MAX_ERRNO and are not
-> +                * suitable for ERR_PTR. */
-> +               ret =3D -EINVAL;
->                 goto clean_up_ctx;
-> +       }
->
->         /* Populate x509_certificate from mbedtls_x509_crt */
->         ret =3D x509_populate_cert(&mbedtls_cert, &cert);
-> --
-> 2.47.3
->
+Cc: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+CC: Casey Connolly <casey.connolly@linaro.org>
+---
+ arch/arm/dts/ipq5424-rdp466-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+index 36640f31d616..56677cd6f6da 100644
+--- a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
++++ b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+@@ -24,7 +24,7 @@
+ 		mmc-hs200-1_8v;
+ 		max-frequency = <192000000>;
+ 		bus-width = <4>;
+-		pinctrl-0 = <&sdc_default_state>;
++		pinctrl-0 = <&qpic_snand_default_state>;
+ 		pinctrl-names = "default";
+ 		non-removable;
+ 
+-- 
+2.43.0
+
