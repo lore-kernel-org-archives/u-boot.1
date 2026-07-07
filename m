@@ -4,100 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DAAC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 19:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9344AC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 19:43:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F2B48497A;
-	Tue,  7 Jul 2026 21:35:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CE27A8497A;
+	Tue,  7 Jul 2026 21:43:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Mc64OUOR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fKRGfvfK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2837F8499C; Tue,  7 Jul 2026 21:35:58 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 89D398498B; Tue,  7 Jul 2026 21:43:12 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0938380433
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 21:35:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D34CE80433
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 21:43:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7e9dd333d37so1547079a34.0
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 12:35:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-92e501244f5so215171485a.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 12:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783452955; x=1784057755; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lBZttinOSVvturGHcknvcBH+gTavNaRv4ilRlxpkEx0=;
- b=Mc64OUORSEAejeEKrsnG02eK0lJGVqo3r/MgzaATj85En4Y0u45rJ0Afov1oyICACx
- ipIyrEdceNbgy3Fz6x66J/B0OHR3ZXBzX6CLEdnBVKBp1Mb5FQECTKy4oCC+5gQkChpw
- r97uZ+6GSERFpItTPWqbGXZ9F+QUjmdExsuzxc3WQEMzE2gsbtsgMC7V/sSy6sfxnZVx
- 7R65Nf8Em/EGay6Ka7wmr2x8n96HYXgN8sWrS7VdmwUHLtBCrSAhVgEjC+b+Sscy/WpC
- UqNz9ZClSUIttqajrkEoKjhxu8hTnPnsPHbEBpn2GO4Ls18yFqIUFxEUBPi8LQr1v3Vg
- D3Yg==
+ d=linaro.org; s=google; t=1783453389; x=1784058189; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=RDtmXvD//RHOLcqM+TpazNjaKtF+qcnoxA5U2azvwLk=;
+ b=fKRGfvfKKrWKGReo06yfw2w/kMkxMPOnlEZ+euJ89tSuSbsatGbvGsrymyyIEiYDxL
+ FA0JOGjS99Zqp43jNi5hWJWvMC9A14Zo83RbREzK2nsWoCKAfvOm/johT/B9/I4VMjQZ
+ I7PLwJFk+Ue1Q12ralPd4cpbAUPs2AnEeBQBz1h/BPI9CBd0RV7Od9XeiPO4zUrTOD+l
+ PDrEfpAIyDkoi2KOGC1S7ybzhMJwVw+28w7iv1HdKrBt24xRhAdHE/jS6jg6hCmqhbwk
+ d5+yapvGgFhfTVtTcdMLk7lFR0PACeoFiFTI8Ty6N1dSncbqLosodg0OmDTZxuII6Ebv
+ +/MA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783452955; x=1784057755;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=lBZttinOSVvturGHcknvcBH+gTavNaRv4ilRlxpkEx0=;
- b=rudYy99uH3EfWN7DJBq/4m5Aqtwjh6RyGdcl9nSgu+Nu2Fr459LRkXyZQXLupQmPMW
- pC6hdc56drTBawKadFiD0ZKZa3y6Bon5xv6qKf5QYgur8adsn8H16zqZj9HLJENxJ1/Y
- ig6WvfojfQf2wlEFBCIz5ea6g4rytCIj5z9yLUKt3jvoN5nXK9CTT6ufemyxyQ6WayXc
- ryelioFIuf3WoKt94xFJUyMZa51pFcnLpzD+Gfbf8814zIu7z2Mrnu79fRxLjvcVBB0d
- zqd4dRVO1YniwCqxtXFcFuZNakb5rRObIBzP9obxGl0Cnnbt3j+jFZbKVMOBkSzUCCh9
- pSIw==
-X-Gm-Message-State: AOJu0Yz5jAKF2xw6wt1JC89ljtzRTBIN1W3bJV/OznhGNO9Tv2kRdWKu
- cGnJlzwxCziSBas2B6XqS6Q4IP+kFS6T31/NNhxiDFxTwPl5eODKzvaRK0su7Btx8TM=
-X-Gm-Gg: AfdE7cke47YFC8Ph7iuakWHiA/0tKVVKSUNrJDEXzHGARvLnK1I1AJXT74MrmCvCCxM
- PJXsd6W2QXhnnb/zL0xdPf2cptHVSnG923Q7eurpkWyM8D6e/mC3y7fGJluES/AfwY9VGquP6AV
- gIabfvO/dTfTvh5pkt9dOTsDdkuwD3uAzlR6X4hcFmX8HlVnIOlzdtWeX+S5uzcR6jA8T8+lkIP
- ilzwy08lWgsMDYpS5iUmksIgZpX9mhuJfIegIzgSII22khJDgxt8I1u7woQSmn1ZmeYY+I0UIx5
- RuJp5yYwrf5nupa2HaVcxchWB1kx74HbsZyBQ54BNJ5vAe7dntJXN6IfqahjPFhireDknqmKKiT
- QeMrLsLLf9wrlHjXwvU5+z5/Lpn1hC/82zD1yA9g6ZAQFKgQ6A86/1VY8g4O5kvzhQBv3BVvwYJ
- FA3zhkTektmhxEW5iBMw==
-X-Received: by 2002:a05:6830:211b:b0:7d7:c985:3a30 with SMTP id
- 46e09a7af769-7ebb22cf6a8mr5019593a34.11.1783452954512; 
- Tue, 07 Jul 2026 12:35:54 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7649:dd46:9d68:b169])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcae1ddb8sm208508a34.6.2026.07.07.12.35.53
+ d=1e100.net; s=20251104; t=1783453389; x=1784058189;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=RDtmXvD//RHOLcqM+TpazNjaKtF+qcnoxA5U2azvwLk=;
+ b=B8eR8SYOS6b1+lzSer80Ij4UlP49Bi6Xe3f0525p0V+hcbp1fND7/5an7FIKzAfoH5
+ jBADYOLzMuJ6MVzmdWGeBS42O7qZ5p4V58nlq8UhUDi7d2Jq8UGXNWCRhPXq7bdrCNju
+ tbHRbqUovivzKXy8wVamxVM0UkxW5FvcTOuvvkriWanDJqJ0mBJOy5Q8vN792rPrVEYM
+ mxS1zSQ3YjNAs8ISW6PaZlM6sC6IMb+U8bfT9xf5TcQ/v+8d8M01jj2a60xsJNBqhsal
+ 93DAA5X5Y1Eo0+Erk4y5IqQbraKcoI4NhR7zGjeKfSVukaH/AUYTrS/62XZqIJ95ryDx
+ aK3g==
+X-Gm-Message-State: AOJu0YwL5ICD5cXvo8Oapt1xiEQ7eNX2D90F6lzo3LlObMcsm5Wr4/sf
+ DmQDw4Wi5BZMRpJ4mMgp0avSPqpqha4ys+RaNXDRJBeNHzuXAH55zhfXBKnEhVKF6e0=
+X-Gm-Gg: AfdE7clKVvDUpFY1IEBsUR8VRP1Rdpb6iOOAjXUpcA45toF6KL5r/mPkmxTwQuPlyb9
+ TI7dVAv+QA6QJu4ONLeZ6xCjPAofM+xRSvJ85qNerN2u/Wm8ZGrixzLNgYuoLRhanCIb7da3gi4
+ /aKDKRfxmEI61W5IVsR1VcMzo6Fd25wTuITL6YBP4sL5t2tNmhMEvFba3mzZj8v8rikK29SiXgu
+ tsluDKr7PLzRjeeMxRj6sDTCMtdbptKljmJaZJ8869B5W3jNEZ0zs4tiNkmrUJP+WA+ba5+FZAu
+ epJQdn1kXhohjsl6BNk2FNjfAIgS27l5dybqraF7OUMbfduHCCdf+oR0UhyRlfnI3tHONDG/b0v
+ KN4WG0KZMZDG5UZev8TWk6vYLHhSsDFX4+EmB9Rbx2OTDTAW8CwiBmp9IHjV08gP1LkWUkqrn4U
+ 3AtwMGjGCEQ22HpbsDhboKAiNxNPOdR5xQ/WmGvwXHp3Q1JeW13yCB4gcPRIz+U9w0P0dw4G3kL
+ CPubI01CQ==
+X-Received: by 2002:a05:620a:199d:b0:92e:c116:bef6 with SMTP id
+ af79cd13be357-92ec116c3fbmr426104085a.83.1783453387604; 
+ Tue, 07 Jul 2026 12:43:07 -0700 (PDT)
+Received: from localhost ([198.58.133.142]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-92e90ccdf8dsm1240440285a.37.2026.07.07.12.43.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 12:35:53 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-In-Reply-To: <20260617024105.152655-1-marek.vasut+renesas@mailbox.org>
-References: <20260617024105.152655-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] MAINTAINERS: Replace Mediatek with N:
-Message-Id: <178345293961.745447.4727684849141112722.b4-ty@b4>
-Date: Tue, 07 Jul 2026 14:35:39 -0500
+ Tue, 07 Jul 2026 12:43:07 -0700 (PDT)
+Date: Tue, 7 Jul 2026 15:43:01 -0400
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+To: Romain Gantois <romain.gantois@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Herve Codina <herve.codina@bootlin.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
+Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
+ support
+Message-ID: <ak1WxStgv_6HtXkV@maple.netwinder.org>
+References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
+ <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=304; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=SOsiyKxZaiqaPRJeTNaDK/4twoWV6v5XZVGeod2AEqg=; 
- b=kA0DAAoBwswgAf8Bj8AByyZiAGpNVRLIWQK406FAsZVhHFvKVBeUZyXDnhVDAoOCuf2KKeZGB
- okBSgQAAQoANBYhBOwY2Z5iDoPWnNhomMLMIAH/AY/ABQJqTVUSFhxkbGVjaG5lckBiYXlsaWJy
- ZS5jb20ACgkQwswgAf8Bj8Al7wf/abjXUZ7XGDmnUjLNYE9QFSPybjy9fbwLhvaA7DTY7byCpHT
- 082JV6QVktqENsxVcDQN6tKGI5yVRIjNT4QCcUPtsJpDXl/ArPktqz3Fx+DxBAIXRnh2Gv0r4jQ
- Zw8x37lsakf/kpoPo4ULxT3z5ox+IyMu885KwKF7cAvtj5yHZFm4OVBn4gTgJ/PR0pUvLMsFEoJ
- h10zdWorvAcQJKospLs1IcsVBOxCqT1dQLejMYpdEpCjuaFbTOOgbR5mHgTvC6uIujYXtJN2BsC
- H8RXILoQgFeDKSPakozZwgsVPcll1shUeL5t0W9nRPiVdtIHxBANJIsi1rBmVVCTqOPy2Q==
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,15 +121,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Jun 2026 04:40:53 +0200, Marek Vasut wrote:
-> MAINTAINERS: Replace Mediatek with N:
+On Thu, Jul 02, 2026 at 10:11:09AM +0200, Romain Gantois wrote:
+>From: Herve Codina <herve.codina@bootlin.com>
+>
+>Add support for the Renesas USBF controller. This is an USB2.0 UDC
+>controller available in the RZ/N1 SoC.
+>
+>This driver was originally written by Hervé Codina for the Linux kernel.
+>Suspend/resume features have been removed in this U-Boot port.
+>
+>Linux revision this was ported from:
+>
+>74851fbb6d64 usb: gadget: renesas_usbf: Handle devm_pm_runtime_...
+>
+>Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+>Co-developed-by: Romain Gantois (Schneider Electric) <romain.gantois@bootlin.com>
+>Signed-off-by: Romain Gantois (Schneider Electric) <romain.gantois@bootlin.com>
 
-Applied to mediatek-for-master, thanks!
+I've performed functional testing with this driver, admittedly on the 
+exact same hardware that Romain and Herve are using. With the 
+corresponding configuration options enabled, both DFU and fastboot 
+protocols operate successfully over the USB interface.
 
-[1/1] MAINTAINERS: Replace Mediatek with N:
-      commit: ef6693efc4ee5da9306487dec29a7269546f4ef4
+Tested-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
-
+Regards,
+Ralph
