@@ -4,121 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66528C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 06:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C416EC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 08:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7611E846B4;
-	Tue,  7 Jul 2026 08:04:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id CA1C2846B4;
+	Tue,  7 Jul 2026 10:14:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ATIA/eEw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KuF1vlzb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF6FA84844; Tue,  7 Jul 2026 08:04:25 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 06C3284844; Tue,  7 Jul 2026 10:14:19 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34F72801A9
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 08:04:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74867801A9
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 10:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ezLsCu/UUesRuYvJRYqNCVrTRm4Br+gWT1kN7c9R7vln2wmnPdR/IEDuzuZrYTmui4S3P8OEhqri2GsnB3cUKJ3d6n7a9qt+mvRfbaBc4nFkIPMIx2FGwTVx6ZB3IoAZplVnpVf6gQmGcP5AqeKNGgcZ3t7+xhPL0kFy33NQ77lSabK6gAXgaKPtz5frrO3W/A/sUpP+Z0rftn9fAvzgKmdN6KW8qQe1/SRazKBH28+ZeUopWGS9GsRQFCTwgqCZrHJ3bWbm3o65XZdMVdA/J63PfY+Vi6kf3LzD0V6pMzfeWC6inE6ATP4ghuXkNai643B5zekAgnj0ohLsTyygZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9oZfR8WVDTazObdGusItLs9Bxl0vI5dZvNC8FRv377I=;
- b=GlO7Gtfy7hxMBevdnK2BYUqgX+ZzY5hwGbZsiQPdGMV2i1QaLe+/HyXZOGXiGFPmqBnSBqr/06SZPJOtsHoGyF+elNkZcZnLzo8iR5hERGfKpBFIeT4VEmoyAlaRebkEo5fwIlQMnEPPOUAcJ63kydySgbPPfa7dUaQgREJF0YSflmZHuzV70V+3hYksTa+Js3lQmwE7TonBl4wCFF7tYSJUtXP9f6UgSem2jI0uzsI43QubU922Jqb9+IN45AEy2a/0TFECGRoHem+ycVqioVhjFLpF0DAJSDti4sowDyoIcc3Vx3Wv/6MW++4Bw2mecytGj0XPzC8XRBMkzWdPXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9oZfR8WVDTazObdGusItLs9Bxl0vI5dZvNC8FRv377I=;
- b=ATIA/eEwzcik8DvZBBXIkbWlt61r6+x7Hz1pwQSkc5eDdS2su002JhzOCqOGCQjr9FpK8loyZVij4dy/zG9S651XQjnic3F7CLN9Y9JM1/Z8TSJRAJgKChPoz7VvGKov3C5rbypCg9wUKv3QErAAa+vrpjkViq0CjCqCazTSk5qsr9vxDcvORG/Yvh9D9+lUbuOh+9m5LNIAd356eUtrSdgsmyaGTJsqrUKsoCSNv87U0vS/cjw530IgU1Mj2CxiJKx0OX8tMTa4pp5t+lCJccCnfVDrfdbfMRpFYEFAf6RU2O/nunGK4/cPtnEL+65k61HhXp+9SDKAdtSFN5zgKg==
-Received: from DB9PR02CA0009.eurprd02.prod.outlook.com (2603:10a6:10:1d9::14)
- by AM7PR10MB3780.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:17e::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.13; Tue, 7 Jul
- 2026 06:04:20 +0000
-Received: from DB3PEPF0000885D.eurprd02.prod.outlook.com
- (2603:10a6:10:1d9:cafe::a3) by DB9PR02CA0009.outlook.office365.com
- (2603:10a6:10:1d9::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.9 via Frontend Transport; Tue, 7
- Jul 2026 06:04:20 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB3PEPF0000885D.mail.protection.outlook.com (10.167.242.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Tue, 7 Jul 2026 06:04:20 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 7 Jul
- 2026 08:08:58 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 7 Jul
- 2026 08:03:53 +0200
-Message-ID: <62451a3d-6fe2-49fd-a724-197774305286@foss.st.com>
-Date: Tue, 7 Jul 2026 08:03:52 +0200
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-c9d1fc053e0so3234349a12.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 01:14:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783412055; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Xa0tdftOxOpa04eG824WK6Xx12UOoNnv0SELzQX5t17tiZz57rIGl8u/Ocd85vmQ4W
+ pWV1pOOnvR+AMrFKy9Jcsny/VX8m9fc0DgF/1gzd6TwrjWrjpiXCNOvMd4Mx2LdDWGYN
+ J1DkRK5E3rjWj+SYVyckysf0EEWROKI1JOo6oQYVaVeVaH1JOKkgO+sbsOsIkyC+iaeQ
+ sf/OQn2JSelqRwHOWSs+EL3cYbirjOEwuYGgyLmvD/AORCcS2RXukSH+jtzVZy9/4R5P
+ qXfdiO34VlKQNPvUGgSGhtrzFXdFbyGLhyZHQjFkBi6VfBWFgzy2xnd86Um9wew/ICHz
+ ImxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2LPWQEMH1uPUJ0lNqDQY3X+iT/p0KjThx8BBwTOpv0s=;
+ fh=czSSP/LUr8ZZbp/8thY4FtDQo7KtY703J0qadFIGkmM=;
+ b=PljWPOv5h1B/i5eNcNw89fsOHe/qmaUlskfBwr77/AIZlvC2oL6SesEqA8t0G2PPHr
+ ikF2h8lZCkXNPlpIQMns0X41OSBA49lKlt0R8mUb14g69ZLz+4YhAtdT0jssRT3cSLR3
+ ujZ7HneceIC13QomwvwfbJ/8V4dKRWf4IuKwkVJfcv94RMV3dSwLllT/Ptq6Th3MrgEG
+ hFhM6cNSP7ao0SIzL+aatJoWtCSAURxge7SzW7cro3+FmDxRJ5mphNubLpDpkZlNr/2B
+ 7qeHC5nb7A/DrKMKhe7NpjsEiKPNUQnE8Y9lE1vS61UTWP/6SLDb0IwNTKSdRVNIfbJ7
+ sTqA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783412055; x=1784016855; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=2LPWQEMH1uPUJ0lNqDQY3X+iT/p0KjThx8BBwTOpv0s=;
+ b=KuF1vlzb5Pnzi5I+F92hwlJzqlaiTdizEDh5cvq+D26PNoHjV1omDGyBQWV/YJnkjv
+ hJYSJNTSDr5H+vuGb92u0MRWE/Wkxs1aH8KEs9c53RtBAQYPFW3zlAVd0YxIcG0KdTFJ
+ 2h9SOUcqy+jiVefCO4BraOljFSwng740dsPWSsDaq+xCvzScAUj2Vfl6HpN4kA4cPzEV
+ ewjkda1LDbFMSTLIDKHwqGs+vFA91ix/O/z2OYdofMRhNyuUqAKWgcBdLAc6sk8FSL3L
+ 6Zw0pPcPtMtU1eK7dFdHZ2r0o2mGAxtk4yyh+IHFaBzsjHyP4niXlkv9At9FrrSnFxtO
+ r6dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783412055; x=1784016855;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=2LPWQEMH1uPUJ0lNqDQY3X+iT/p0KjThx8BBwTOpv0s=;
+ b=PyVJaKioiF20ilCL09LWpq9gtceQi0z5ef1SM2TwZkO+PQ5OnRf+9o/ccfl9I6aTmZ
+ 3Jdb07lkHpsYX3TOlpOJMqNCBZQHuBkBDqZTkTb6NX7lD7k5GKL5u9yLrmB5hUhv9VzC
+ 5LpNDsNcEf1JuUdzN4g22QkKUHQIEGL2eDKkEB9wJaKS7iRLMSq7IWGHZr6wdSaTRi4U
+ DdCqVr87mnPFKGCbrLb2RCpsbcRLqxJ0y/vGN4wq3Tt2njUYCyenaVHm9XFh9H7jnmxa
+ LRoMJJL1XmwuR0aXj1jjAsm0fU21ypSX3P/tP7cyB+El2tEEFEcAe3VCIFWyrf9ScCSE
+ dCmQ==
+X-Gm-Message-State: AOJu0YwBcr/VfIeUqgD1x/ap0BIJ7TNzj55Rug/WmDCyFzGlCIBmUyRa
+ ZGkzUWUdGyU0dxzJ3qtGfMihDLCfkcPcxH1gu6oDfzWAB5PzbsO0tTqQi+lipPWK7RqKJNHnDek
+ KAUya2Q9xDJ9mAXC2tN2+MNNb+2bIaLI=
+X-Gm-Gg: AfdE7ckFzEsVUaMa4+xe+mUw4X1QkrbdP6JTRT4j4U9POXnywOk1rvD6kFN0X96jiX1
+ iJltYvSXUt4xJZjgNGzDT5A/dvXCsiDWgxjZMbA/sbelvnEeneUnxHmDXbkxetFUmfiloO68Me4
+ u+AbOgkwJwFCFWMjpd2pLKuIzbR2u0LbMz1n6kU/ZcWW2e2LvS4iv123ZwYdHmyGKlrehBDrxb7
+ jY/2cba3cmMwn9IM0Ot4sfBN+9VfLn7Q6kBaQAO7e58jO9ZS4D2D3X1Hctsx7O6oYdPGcPDMrC0
+ x7+B8g0g3g7Op6rwuu/Hrh6aYZyhog==
+X-Received: by 2002:a05:6300:2206:b0:3b7:aefe:4367 with SMTP id
+ adf61e73a8af0-3c08ee3949fmr5044800637.33.1783412054784; Tue, 07 Jul 2026
+ 01:14:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] cyclic: parse cyclic list only if next cyclic
- timestamp is reached
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-References: <20260702-optimize_cyclic_run-v1-0-92c5a7011f54@foss.st.com>
- <20260702-optimize_cyclic_run-v1-2-92c5a7011f54@foss.st.com>
- <b9c4b762-6abd-4025-bde5-ab911fd5f683@mailbox.org>
- <0d9f5186-8342-4a11-adf3-2ffc2e5267f6@foss.st.com>
- <5ce8de52-2fec-4d08-a9e6-cfc69edbaa0a@mailbox.org>
- <13f510d9-6b08-499f-a6c0-f76484488899@foss.st.com>
- <ec6ed9f4-b302-4336-af02-1645aff668d1@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <ec6ed9f4-b302-4336-af02-1645aff668d1@mailbox.org>
+References: <20260702151325.290749-1-advaitd@mechasystems.com>
+In-Reply-To: <20260702151325.290749-1-advaitd@mechasystems.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 7 Jul 2026 11:14:03 +0300
+X-Gm-Features: AVVi8CfWWeWjzvit2Bc7i8k1iAJDZwIpUPQfukMfRFk677MexpU4yx-g82dk6po
+Message-ID: <CAPVz0n1YGYKMWo6fVHF8gXZ8_6BjHCC4WUs-BBL5__+L8Bhi3w@mail.gmail.com>
+Subject: Re: [PATCH v2] video: add ChipWealth CH13726A AMOLED panel driver
+To: Advait Dhamorikar <advaitd@mechasystems.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, ag.dev.uboot@gmail.com, 
+ ion@agorria.com, dario.binacchi@amarulasolutions.com, 
+ michael@amarulasolutions.com, xypron.glpk@gmx.de, ravi@prevas.dk, 
+ sjg@chromium.org, patrice.chotard@foss.st.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885D:EE_|AM7PR10MB3780:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5aeed211-91d9-4194-b240-08dedbed9615
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700016|23010399003|82310400026|11063799006|56012099006|4143699003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info: YfcoP34hbCYTlQ1Ntl39yfYUaKtFtSpRI+PRuYjUbs9Yj1pipsBtloBJwVXBn4Ukgf6nI0sumH+Z36gL2E72pMj4EbEHYPb1/Ab+Fo+FONv8mRGTjDPlS8rJYfn7adXKUuNJFS3fZC7McYNjIBw/1MpXXWKooFOqZ274eHReDdQjU0dwoexnh9pWAwb2vVJWix1sOzU1lbdvowRNyvz6Rhtfh3Gz1xAvTDZopwU7pC/wLu2DUBYqeL/KuvBDf532a0yi65+Pf+CH2IL2Hkm7cOuhw5WKUsVMVticu/csfzbyr1ZXK08fv42WeSda5PGZP85F6xo5hOFNZnwJd0p9z18OHo/0ckMoh29EhojQY/BvkJo9wtZ+w+zUyDmo6M4qMusiUoO2Q2sZ/5TV9BI4Iuuca2ImzQ4HKPQ7Y+Sl5LvFACUozVUshmG54vY/jlb7wBKqygR5GFX2X9Jdv64iOUD1xMycr5Zri9ZoGPXSubeG2q+FG/KtiiBHc4r6BLeYuU759NpmeRP1HEkHxWtpNzrkBvBdbpijh+h1Tk3EPfLNZ0RdnpUxALFITNaY5hXVE2bj9k87rpK4iX6ckowscVdWhjxD4tyGiuNaQ5LBTV7cQFv3bg64f8rdJdzqEhO82lB/c325VBQVYKdfQ8oHqmZ3oyBTHAWgdjwY5xxnP/hvagNDzBDHh7ISfZNVHt9mK/z254aa39agf2CSzmW2NQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700016)(23010399003)(82310400026)(11063799006)(56012099006)(4143699003)(18002099003)(22082099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: YdqHkv6fdiaKyRTyuVgYfsmRN2646HDoDbxHrrZ/q5moNRcOOxfkXzT15OAKx0zKEPHHbA9eAqGRrpiTphu9ovfgxmX3dfuL5JUoHXEbTH+PlEu2tO9Gr2DXoyCFdNbL+c/VvBJDThhrlq+7vOY4Q1g9bwBbNLna0VRAy4DP0+UvI/Hydg7qJ+OkqfvrIBEVGkXRRVl+qdw4DP7D8IAd4fhOenu8ofeMxf6elRihsgpoe77TEsChFgyxKugOPneMqeHkiY55ZSiXSkEUYvF2kFeWOUf3X9gISYa4YVTNKaZLnTOS4AHvrtE4bmltFB8Og/PINPsdngzZ0VfkCNdH50I1jgC5NGKN5iGzEEP8qLJz3WOkqjPW6Kj+Hvi3C4sMfR3rCLM7I8ViuG/pKUISgRWa5f2vouuSvmGjwsZ+j2b++GCOeVH2fNEtT6IuxNSq
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 06:04:20.3840 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5aeed211-91d9-4194-b240-08dedbed9615
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885D.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3780
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,37 +117,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D1=87=D1=82, 2 =D0=BB=D0=B8=D0=BF. 2026=E2=80=AF=D1=80. =D0=BE 18:14 Advai=
+t Dhamorikar <advaitd@mechasystems.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Add support for AMOLED panels based on the ChipWealth CH13726A
+> MIPI DSI display driver IC.
+>
+> The driver configures the MIPI DSI interface for 4 data lanes in RGB888
+> video mode, performs the panel reset sequence, sends the vendor-specific
+> initialization commands required by the controller, and enables the
+> panel using the standard MIPI DCS Sleep Out and Display On commands.
+>
+> This driver is based on an earlier implementation by Pratham Malaviya.
+>
+> Signed-off-by: Advait Dhamorikar <advaitd@mechasystems.com>
+> ---
+>
+> v1->v2
+> - Expand CC list based on get_maintainer.pl output.
+>
+>  drivers/video/Kconfig               |   8 ++
+>  drivers/video/Makefile              |   1 +
+>  drivers/video/chipwealth-ch13726a.c | 193 ++++++++++++++++++++++++++++
+>  3 files changed, 202 insertions(+)
+>  create mode 100644 drivers/video/chipwealth-ch13726a.c
+>
 
+Hey there! Thanks for your contribution, it is pretty solid but there
+are a few places that can be improved.
 
-On 7/6/26 18:00, Marek Vasut wrote:
-> On 7/6/26 5:16 PM, Patrice CHOTARD wrote:
-> 
-> Hello Patrice,
-> 
->>>> I did a test, it doesn't bring any noticeable improvements, but nevertheless i will submit a v3 with this update.
->>>
->>> Does the list iteration exit when it finds the first entry that is not going to be executed at this time ? If it does not, then there will be no improvement. But for this to work, the list would have to be surely fully ordered in incrementing timestamp order, is it ?
->>
->> No, the list iteration parse all entries.
->>
->> I see your point, on original implementation, entries are not sort by incrementing timestamp order.
->> I did some implementation test, by sorting cyclic entries in cyclic_list when :
->>    _ registering a new cyclic callback, put it directly in the right position in cyclic_list.
->>    _ in cyclic_run(), after running a cyclic, compute its next call and insrt it in the right position in cyclic_list.
->>
->> There is no noticeable gain.
-> 
-> Did you also break from the iteration when you reached the first entry with future timestamp ? That might actually help.
-> 
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index c2acc13139c..7e82778e294 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -533,6 +533,14 @@ config VIDEO_BCM2835
+>           that same resolution (or as near as possible) and 32bpp depth, =
+so
+>           that U-Boot can access it with full colour depth.
+>
+> +config VIDEO_AMOLED_CHIPWEALTH_CH13726A
 
-In cyclic_run(), as now entries was sorted by increasing timestamp, only the first cyclic in cyclic_list is parsed, 
-we don't need to parse all cyclic_list element.
+May you please rename AMOLED > PANEL
 
-Nevertheless, in v2, Rasmus identified that get_timer_us() is the expensive part of the cyclic_run() execution. 
-And he also noticed that my patch didn't cover every corner cases.
+> +       bool "ChipWealth CH13726A AMOLED panel support"
+> +       depends on VIDEO
 
-He suggested me a more simple patch i tested and the result are identical to mine, 
-see v3 : https://patchwork.ozlabs.org/project/uboot/list/?series=512333
- 
+"depends on PANEL && BACKLIGHT"
 
-Patrice
+> +       select VIDEO_MIPI_DSI
+> +       help
+> +         Say Y here if you want to enable support for AMOLED panels
+> +         based on the ChipWealth CH13726A MIPI DSI display driver IC.
+> +
+>  config VIDEO_LCD_ENDEAVORU
+>         tristate "Endeavoru 720x1280 DSI video mode panel"
+>         depends on PANEL && BACKLIGHT
+> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+> index 082b8967982..56df5e1860d 100644
+> --- a/drivers/video/Makefile
+> +++ b/drivers/video/Makefile
+> @@ -55,6 +55,7 @@ obj-$(CONFIG_VIDEO_DW_HDMI) +=3D dw_hdmi.o
+>  obj-$(CONFIG_VIDEO_DW_MIPI_DSI) +=3D dw_mipi_dsi.o
+>  obj-$(CONFIG_VIDEO_EFI) +=3D efi.o
+>  obj-y +=3D imx/
+> +obj-$(CONFIG_VIDEO_AMOLED_CHIPWEALTH_CH13726A) +=3D chipwealth-ch13726a.=
+o
+>  obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) +=3D ivybridge_igd.o
+>  obj-$(CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804) +=3D anx9804.=
+o
+>  obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) +=3D endeavoru-panel.o
+> diff --git a/drivers/video/chipwealth-ch13726a.c b/drivers/video/chipweal=
+th-ch13726a.c
+> new file mode 100644
+> index 00000000000..e6fef6c8e7f
+> --- /dev/null
+> +++ b/drivers/video/chipwealth-ch13726a.c
+> @@ -0,0 +1,193 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * ChipWealth CH13726A DSI panel driver
+> + *
+> + * Copyright (C) 2026 Mecha Systems
+> + * Author(s):
+> + *   Advait Dhamorikar <advaitd@mechasystems.com>
+> + *   Pratham Malaviya  <prathamm@mechasystems.com>
+> + */
+> +
+> +#include <backlight.h>
+> +#include <dm.h>
+> +#include <mipi_dsi.h>
+> +#include <panel.h>
+> +#include <asm/gpio.h>
+> +#include <linux/delay.h>
+> +#include <log.h>
+> +
+> +struct ch13726a_panel_priv {
+> +       struct udevice *reg;
+> +       struct udevice *backlight;
+> +       struct gpio_desc reset;
+> +};
+
+You are lacking supplies here: vdd1v2, vddio, vdd and avdd
+
+U-Boot can handle them so you should include control over them.
+
+> +
+> +static const struct display_timing default_timing =3D {
+> +       .pixelclock.typ                 =3D       59832000,
+> +       .hactive.typ                    =3D       1080,
+> +       .hfront_porch.typ               =3D       12,
+> +       .hback_porch.typ                =3D       12,
+> +       .hsync_len.typ                  =3D       28,
+> +       .vactive.typ                    =3D       1240,
+> +       .vfront_porch.typ               =3D       2,
+> +       .vback_porch.typ                =3D       2,
+> +       .vsync_len.typ                  =3D       2,
+> +};
+> +
+> +static int ch13726a_dcs_write_buf(struct udevice *dev, const void *data,
+> +                                 size_t len)
+> +{
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +       int ret;
+> +
+> +       ret =3D mipi_dsi_dcs_write_buffer(plat->device, data, len);
+> +       if (ret < 0)
+> +               log_err("failed to write dcs sequence: %d\n", ret);
+> +
+> +       return ret;
+> +}
+> +
+> +#define dcs_write_seq(dev, cmd, seq...)                                \
+> +({                                                             \
+> +       const u8 d[] =3D { cmd, seq };                    \
+> +                                                               \
+> +       ch13726a_dcs_write_buf(dev, d, ARRAY_SIZE(d));          \
+> +})
+> +
+
+You can fold this.
+
+> +static void ch13726a_reset(struct udevice *dev)
+> +{
+> +       struct ch13726a_panel_priv *priv =3D dev_get_priv(dev);
+> +
+> +       dm_gpio_set_value(&priv->reset, true);
+> +       mdelay(10);
+> +       dm_gpio_set_value(&priv->reset, false);
+> +       mdelay(10);
+> +       dm_gpio_set_value(&priv->reset, true);
+> +       mdelay(5);
+> +}
+> +
+> +static int ch13726a_set_backlight(struct udevice *dev, int percent)
+> +{
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +       struct mipi_dsi_device *device =3D plat->device;
+> +       u8 brightness;
+> +
+> +       if (percent < 0)
+> +               percent =3D 0;
+> +       else if (percent > 100)
+> +               percent =3D 100;
+> +
+> +       brightness =3D (percent * 255) / 100;
+> +
+> +       return mipi_dsi_dcs_set_display_brightness(device, brightness);
+> +}
+> +
+> +static int ch13726a_panel_enable_backlight(struct udevice *dev)
+> +{
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +       struct mipi_dsi_device *device =3D plat->device;
+> +       int ret;
+> +
+> +       device->lanes =3D plat->lanes;
+> +       device->format =3D plat->format;
+> +       device->mode_flags =3D plat->mode_flags;
+> +
+
+You don't need this assignment.
+
+> +       ret =3D mipi_dsi_attach(device);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       ch13726a_reset(dev);
+> +
+> +       device->mode_flags |=3D MIPI_DSI_MODE_LPM;
+> +
+
+LPM flag is removed by mipi_dsi_device_transfer so you don't need it here.
+
+> +       ret =3D dcs_write_seq(dev, 0x53, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed(%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       ret =3D dcs_write_seq(dev, 0x17, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed (%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       ret =3D dcs_write_seq(dev, 0x41, 0x00);
+> +       if (ret < 0) {
+> +               log_debug("%s: Init command failed (%d)\n",
+> +                         __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       ret =3D mipi_dsi_dcs_exit_sleep_mode(device);
+> +       if (ret)
+> +               return ret;
+> +
+> +       mdelay(120);
+> +
+> +       ret =3D mipi_dsi_dcs_set_display_on(device);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return 0;
+> +}
+> +
+> +static int ch13726a_panel_get_display_timing(struct udevice *dev,
+> +                                            struct display_timing *timin=
+gs)
+> +{
+> +       memcpy(timings, &default_timing, sizeof(*timings));
+> +       return 0;
+> +}
+> +
+> +static int ch13726a_panel_of_to_plat(struct udevice *dev)
+> +{
+> +       struct ch13726a_panel_priv *priv =3D dev_get_priv(dev);
+> +       int ret;
+> +
+> +       ret =3D gpio_request_by_name(dev, "reset-gpios", 0,
+> +                                  &priv->reset,
+> +                                  GPIOD_IS_OUT);
+> +       if (ret) {
+> +               log_err("%s: cannot get reset GPIO (%d)\n",
+> +                       __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int ch13726a_panel_probe(struct udevice *dev)
+> +{
+> +       struct mipi_dsi_panel_plat *plat =3D dev_get_plat(dev);
+> +
+> +       plat->lanes =3D 4;
+> +       plat->format =3D MIPI_DSI_FMT_RGB888;
+> +       plat->mode_flags =3D MIPI_DSI_MODE_VIDEO |
+> +                          MIPI_DSI_MODE_VIDEO_BURST;
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct panel_ops ch13726a_panel_ops =3D {
+> +       .enable_backlight       =3D       ch13726a_panel_enable_backlight=
+,
+> +       .set_backlight          =3D       ch13726a_set_backlight,
+> +       .get_display_timing     =3D       ch13726a_panel_get_display_timi=
+ng,
+> +};
+> +
+> +static const struct udevice_id ch13726a_panel_ids[] =3D {
+> +       { .compatible   =3D       "chipwealth,ch13726a" },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(ch13726a_panel) =3D {
+> +       .name           =3D       "ch13726a_panel",
+> +       .id                     =3D       UCLASS_PANEL,
+> +       .of_match       =3D       ch13726a_panel_ids,
+> +       .ops            =3D       &ch13726a_panel_ops,
+> +       .of_to_plat     =3D       ch13726a_panel_of_to_plat,
+> +       .probe          =3D       ch13726a_panel_probe,
+> +       .plat_auto      =3D       sizeof(struct mipi_dsi_panel_plat),
+> +       .priv_auto      =3D       sizeof(struct ch13726a_panel_priv),
+> +};
+> --
+> 2.43.0
+>
