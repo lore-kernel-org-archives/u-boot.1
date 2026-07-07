@@ -4,107 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9344AC43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 19:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2764DC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 20:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE27A8497A;
-	Tue,  7 Jul 2026 21:43:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3430C84979;
+	Tue,  7 Jul 2026 22:57:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fKRGfvfK";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cn0ImeDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89D398498B; Tue,  7 Jul 2026 21:43:12 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 354E18497A; Tue,  7 Jul 2026 22:57:52 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D34CE80433
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 21:43:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 133BD848EB
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 22:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-92e501244f5so215171485a.1
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 12:43:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-493c55d5c7aso44679805e9.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 13:57:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783453389; x=1784058189; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=RDtmXvD//RHOLcqM+TpazNjaKtF+qcnoxA5U2azvwLk=;
- b=fKRGfvfKKrWKGReo06yfw2w/kMkxMPOnlEZ+euJ89tSuSbsatGbvGsrymyyIEiYDxL
- FA0JOGjS99Zqp43jNi5hWJWvMC9A14Zo83RbREzK2nsWoCKAfvOm/johT/B9/I4VMjQZ
- I7PLwJFk+Ue1Q12ralPd4cpbAUPs2AnEeBQBz1h/BPI9CBd0RV7Od9XeiPO4zUrTOD+l
- PDrEfpAIyDkoi2KOGC1S7ybzhMJwVw+28w7iv1HdKrBt24xRhAdHE/jS6jg6hCmqhbwk
- d5+yapvGgFhfTVtTcdMLk7lFR0PACeoFiFTI8Ty6N1dSncbqLosodg0OmDTZxuII6Ebv
- +/MA==
+ d=baylibre.com; s=google; t=1783457869; x=1784062669; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=av7Pfhh+bunkacy31WYDlHSEFapmsJhKVn3S/5rb00E=;
+ b=cn0ImeDSgofr83Co+phHROCyLHjIuoP1/Ut9SWeKTwm2SeoF1U9dyoech0fX0Sh4sN
+ sIDv34jDQB0KlJ4PWCjy0Wa0gS333BmZ1Nj6DXFy40pxysxviwT3LL82iRv7LXNHGO68
+ dLIEy0CtAEE0VbhR6UdEJpUvx7umMb/ZfJe1WL2rrAIEln2HcdKu7zLOrX/rpStTSGSY
+ iUkwvhUm9qXQl4Bj+LSJsZ1BrwFD1r+bSJ57AYNfL0p+jqcHGRmTefdHhOgafAiWk0sD
+ aio/x/AwV+0MyxuqjY3xqOIvblDdIL+pLPElaGHauxx9V5nTMegiWIbOLrb6RHJfgsQv
+ MU0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783453389; x=1784058189;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=RDtmXvD//RHOLcqM+TpazNjaKtF+qcnoxA5U2azvwLk=;
- b=B8eR8SYOS6b1+lzSer80Ij4UlP49Bi6Xe3f0525p0V+hcbp1fND7/5an7FIKzAfoH5
- jBADYOLzMuJ6MVzmdWGeBS42O7qZ5p4V58nlq8UhUDi7d2Jq8UGXNWCRhPXq7bdrCNju
- tbHRbqUovivzKXy8wVamxVM0UkxW5FvcTOuvvkriWanDJqJ0mBJOy5Q8vN792rPrVEYM
- mxS1zSQ3YjNAs8ISW6PaZlM6sC6IMb+U8bfT9xf5TcQ/v+8d8M01jj2a60xsJNBqhsal
- 93DAA5X5Y1Eo0+Erk4y5IqQbraKcoI4NhR7zGjeKfSVukaH/AUYTrS/62XZqIJ95ryDx
- aK3g==
-X-Gm-Message-State: AOJu0YwL5ICD5cXvo8Oapt1xiEQ7eNX2D90F6lzo3LlObMcsm5Wr4/sf
- DmQDw4Wi5BZMRpJ4mMgp0avSPqpqha4ys+RaNXDRJBeNHzuXAH55zhfXBKnEhVKF6e0=
-X-Gm-Gg: AfdE7clKVvDUpFY1IEBsUR8VRP1Rdpb6iOOAjXUpcA45toF6KL5r/mPkmxTwQuPlyb9
- TI7dVAv+QA6QJu4ONLeZ6xCjPAofM+xRSvJ85qNerN2u/Wm8ZGrixzLNgYuoLRhanCIb7da3gi4
- /aKDKRfxmEI61W5IVsR1VcMzo6Fd25wTuITL6YBP4sL5t2tNmhMEvFba3mzZj8v8rikK29SiXgu
- tsluDKr7PLzRjeeMxRj6sDTCMtdbptKljmJaZJ8869B5W3jNEZ0zs4tiNkmrUJP+WA+ba5+FZAu
- epJQdn1kXhohjsl6BNk2FNjfAIgS27l5dybqraF7OUMbfduHCCdf+oR0UhyRlfnI3tHONDG/b0v
- KN4WG0KZMZDG5UZev8TWk6vYLHhSsDFX4+EmB9Rbx2OTDTAW8CwiBmp9IHjV08gP1LkWUkqrn4U
- 3AtwMGjGCEQ22HpbsDhboKAiNxNPOdR5xQ/WmGvwXHp3Q1JeW13yCB4gcPRIz+U9w0P0dw4G3kL
- CPubI01CQ==
-X-Received: by 2002:a05:620a:199d:b0:92e:c116:bef6 with SMTP id
- af79cd13be357-92ec116c3fbmr426104085a.83.1783453387604; 
- Tue, 07 Jul 2026 12:43:07 -0700 (PDT)
-Received: from localhost ([198.58.133.142]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-92e90ccdf8dsm1240440285a.37.2026.07.07.12.43.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 12:43:07 -0700 (PDT)
-Date: Tue, 7 Jul 2026 15:43:01 -0400
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-To: Romain Gantois <romain.gantois@bootlin.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
-Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
- support
-Message-ID: <ak1WxStgv_6HtXkV@maple.netwinder.org>
-References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
- <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
+ d=1e100.net; s=20251104; t=1783457869; x=1784062669;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=av7Pfhh+bunkacy31WYDlHSEFapmsJhKVn3S/5rb00E=;
+ b=FDEBlb/VWzaXh8aDtHbLVAJYnpjVWPFQKujKwUPfkB9WGU66Kx+En/tQPfQSDbRexl
+ CUd59/5mJjQWQPVNveEiWB2cqxcBnf+Gz/gyI/Ergoxje8sz9G7UyGlXFBWtcIZx5Wlc
+ ZlyB+Nq5bSUyBp4vqx9ldCad7Dko3El/31XjMUOkmTZDW71StHkhcXhvZGR1As6hfbiN
+ NO2fB/4LfMd9MFIymeQ410jU41wPpwglB2fgcd1whNYnCPqkq3J43PkeFzXnB1/+0huG
+ 3u0+q7I9MQwlxHiwVau0J2NOxJhbGCAusA9suwIuCoxK/tXyckNw+5/ZpPtyyB421tDB
+ sqYA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr6ZLB0XkswGP5qVOnz2zn4KJLzGJEhygozoXs3Oyk70AUOWftQ7KiSOLyzfVEBDaNHe0PbjMA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzK0eGV+JA/YOniUjg7wDRzPWryEEgvEyogcSglUeKX0/Z/v6yE
+ 8XY8TE0SLsJy8hOmtN6hMsrFH8GQ+NsoFbcnL9Ss+TtRwTWBj1eV5yhFrnjolZ2DUkjdH1jIvp8
+ D+Pmd35kk8iiV
+X-Gm-Gg: AfdE7ck7bj45tNyUey22QdQh8KlHbdrd36T2lb1+hs/E5pwP0BY1ibB8WKhT0Nmh2la
+ znPs2+gE4TyG5NNe/tmf+2tag/tVTf6ekFqp36ICy35AZ8uF1ooPlasmShZxCtcNHSvUEvgNnyp
+ eZ3THUhx0/ds2IlvolqQEXZCcpeq5wRqgrLH3ei1/pLuOeA7Mwu7DgtwSPbBPCKqIHU3GVhD0SK
+ +OBhObwzFzxnhJ67FUHgtlvoGKjCC1s6MSCiYjMlUfG64xWjhAM/m0AKD7sla77sEzZ2Ai+EUN7
+ 5mK31a/ZGV2m2tgAnjlpMKlJm7clmJ3XdcvHcLAOzcHEoS+rt3wfkH+uK6p/wwfZkW1Xndg6Yrx
+ eh7Skq0uVvfeTHVN0DFPgCXSRZkTo6BV3tAlBohKAnME4nklheKNbnw2T3T0Ne3gNLGfc6CT912
+ FB5B12XVaaa1WdFGVmeLc9SmE=
+X-Received: by 2002:a05:600c:310f:b0:493:cc25:85cb with SMTP id
+ 5b1f17b1804b1-493df082ffamr73438345e9.8.1783457869292; 
+ Tue, 07 Jul 2026 13:57:49 -0700 (PDT)
+Received: from macbook ([95.236.170.123]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47aa039ad21sm36094303f8f.20.2026.07.07.13.57.48
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 07 Jul 2026 13:57:48 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+To: trini@konsulko.com, sjg@chromium.org, quentin.schulz@cherry.de,
+ u-boot@lists.denx.de, dlechner@baylibre.com, jstephan@baylibre.com
+Cc: Carlo Caione <ccaione@baylibre.com>
+Subject: [PATCH] fit: prefer the default configuration on best-match ties
+Date: Tue,  7 Jul 2026 22:54:11 +0200
+Message-ID: <20260707205611.65287-1-ccaione@baylibre.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,29 +97,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 02, 2026 at 10:11:09AM +0200, Romain Gantois wrote:
->From: Herve Codina <herve.codina@bootlin.com>
->
->Add support for the Renesas USBF controller. This is an USB2.0 UDC
->controller available in the RZ/N1 SoC.
->
->This driver was originally written by Hervé Codina for the Linux kernel.
->Suspend/resume features have been removed in this U-Boot port.
->
->Linux revision this was ported from:
->
->74851fbb6d64 usb: gadget: renesas_usbf: Handle devm_pm_runtime_...
->
->Signed-off-by: Herve Codina <herve.codina@bootlin.com>
->Co-developed-by: Romain Gantois (Schneider Electric) <romain.gantois@bootlin.com>
->Signed-off-by: Romain Gantois (Schneider Electric) <romain.gantois@bootlin.com>
+With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
+configuration matching the most specific U-Boot compatible string; on
+equal matches the first listed configuration wins and the configurations
+node 'default' property is never consulted.
 
-I've performed functional testing with this driver, admittedly on the 
-exact same hardware that Romain and Herve are using. With the 
-corresponding configuration options enabled, both DFU and fastboot 
-protocols operate successfully over the USB interface.
+A FIT whose configurations all share the same base devicetree compatible
+(e.g. one manifest carrying a base tree plus overlay combinations for a
+single board) therefore always boots the first configuration, silently
+ignoring the default chosen by the manifest author.
 
-Tested-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+Break score ties in favour of the default configuration. A strictly
+better compatible match still wins over it, and FITs without a default
+keep the current first-listed behaviour.
 
-Regards,
-Ralph
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+---
+ boot/Kconfig      |  2 ++
+ boot/image-fit.c  | 20 ++++++++++++--
+ include/image.h   |  4 +++
+ test/boot/image.c | 68 +++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 92 insertions(+), 2 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8e468c56176..c67dc0ba493 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -191,6 +191,8 @@ config FIT_BEST_MATCH
+ 	  U-Boot itself. A match is considered "best" if it matches the
+ 	  most specific compatibility entry of U-Boot's fdt's root node.
+ 	  The order of entries in the configuration's fdt is ignored.
++	  If several configurations match equally well, the one named by
++	  the configurations node 'default' property is preferred.
+ 
+ config FIT_IMAGE_POST_PROCESS
+ 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 044a40e1910..ef90c5abd18 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1799,6 +1799,8 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 	int fdt_compat_len;
+ 	int best_match_offset = 0;
+ 	int best_match_pos = 0;
++	const char *default_name;
++	int default_noffset = -1;
+ 
+ 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
+ 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
+@@ -1813,6 +1815,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 		return -ENXIO;
+ 	}
+ 
++	/* the default configuration breaks ties between equal matches */
++	default_name = fdt_getprop(fit, confs_noffset, FIT_DEFAULT_PROP, NULL);
++	if (default_name) {
++		default_noffset = fdt_subnode_offset(fit, confs_noffset,
++						     default_name);
++		if (default_noffset < 0)
++			default_noffset = -1;
++	}
++
+ 	/*
+ 	 * Loop over the configurations in the FIT image.
+ 	 */
+@@ -1863,10 +1874,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 		cur_fdt_compat = fdt_compat;
+ 		/*
+ 		 * Look for a match for each U-Boot compatibility string in
+-		 * turn in the compat string property.
++		 * turn in the compat string property. A configuration only
++		 * replaces the current best match on a strictly better
++		 * position, or on an equal position if it is the default
++		 * configuration.
+ 		 */
+ 		for (i = 0; len > 0 &&
+-		     (!best_match_offset || best_match_pos > i); i++) {
++		     (!best_match_offset || best_match_pos > i ||
++		      (best_match_pos == i && noffset == default_noffset));
++		     i++) {
+ 			int cur_len = strlen(cur_fdt_compat) + 1;
+ 
+ 			if (!fdt_node_check_compatible(fdt, compat_noffset,
+diff --git a/include/image.h b/include/image.h
+index 9c8a746d576..01a814ed76e 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1526,6 +1526,10 @@ int fit_check_format(const void *fit, ulong size);
+  * compatible list, "foo,bar", matches a compatible string in the root of fdt1.
+  * "bim,bam" in fdt2 matches the second string which isn't as good as fdt1.
+  *
++ * If several configurations match at the same position, the one named by the
++ * 'default' property of the configurations node is preferred, then the first
++ * one listed.
++ *
+  * As an optimization, the compatible property from the FDT's root node can be
+  * copied into the configuration node in the FIT image. This is required to
+  * match configurations with compressed FDTs.
+diff --git a/test/boot/image.c b/test/boot/image.c
+index 4df7b17ce88..2c6d9dcbc22 100644
+--- a/test/boot/image.c
++++ b/test/boot/image.c
+@@ -8,8 +8,76 @@
+ 
+ #include <image.h>
+ #include <test/ut.h>
++#include <linux/libfdt.h>
+ #include "bootstd_common.h"
+ 
++/* Test that the default configuration breaks best-match ties */
++static int test_fit_conf_find_compat(struct unit_test_state *uts)
++{
++	char fdt[256], fit[1024];
++	int confs, images, node;
++	int ret;
++
++	/* control devicetree with a two-entry compatible list */
++	ut_assertok(fdt_create_empty_tree(fdt, sizeof(fdt)));
++	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
++					  "test,board-a"));
++	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
++					  "test,fallback"));
++
++	/* FIT with two configurations matching the same compatible */
++	ut_assertok(fdt_create_empty_tree(fit, sizeof(fit)));
++	images = fdt_add_subnode(fit, 0, "images");
++	ut_assert(images >= 0);
++	confs = fdt_add_subnode(fit, 0, "configurations");
++	ut_assert(confs >= 0);
++	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
++	/*
++	 * fdt_add_subnode() inserts before existing subnodes: create conf-2
++	 * first so that conf-1 ends up listed first, like an .its compiled
++	 * with the configurations in that order
++	 */
++	node = fdt_add_subnode(fit, confs, "conf-2");
++	ut_assert(node >= 0);
++	ut_assertok(fdt_setprop_string(fit, node, "compatible",
++				       "test,board-a"));
++	node = fdt_add_subnode(fit, confs, "conf-1");
++	ut_assert(node >= 0);
++	ut_assertok(fdt_setprop_string(fit, node, "compatible",
++				       "test,board-a"));
++	confs = fdt_path_offset(fit, "/configurations");
++	node = fdt_first_subnode(fit, confs);
++	ut_asserteq_str("conf-1", fdt_get_name(fit, node, NULL));
++
++	/* on a tie, the default configuration wins */
++	ret = fit_conf_find_compat(fit, fdt);
++	ut_assert(ret > 0);
++	ut_asserteq_str("conf-2", fdt_get_name(fit, ret, NULL));
++
++	/* without a default, the first listed configuration wins */
++	confs = fdt_path_offset(fit, "/configurations");
++	ut_assertok(fdt_delprop(fit, confs, FIT_DEFAULT_PROP));
++	confs = fdt_path_offset(fit, "/configurations");
++	ut_assertnull((void *)fdt_getprop(fit, confs, FIT_DEFAULT_PROP, NULL));
++	ret = fit_conf_find_compat(fit, fdt);
++	ut_assert(ret > 0);
++	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
++
++	/* a strictly better match still beats the default */
++	confs = fdt_path_offset(fit, "/configurations");
++	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
++	confs = fdt_path_offset(fit, "/configurations");
++	node = fdt_subnode_offset(fit, confs, "conf-2");
++	ut_assertok(fdt_setprop_string(fit, node, "compatible",
++				       "test,fallback"));
++	ret = fit_conf_find_compat(fit, fdt);
++	ut_assert(ret > 0);
++	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
++
++	return 0;
++}
++BOOTSTD_TEST(test_fit_conf_find_compat, 0);
++
+ /* Test of image phase */
+ static int test_image_phase(struct unit_test_state *uts)
+ {
+-- 
+2.55.0
+
