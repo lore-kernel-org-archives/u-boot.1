@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91193C44501
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4628EC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 15:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3681A84A67;
-	Tue,  7 Jul 2026 17:32:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 769C384AA5;
+	Tue,  7 Jul 2026 17:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P1uqlIn8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gw9h9feT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01C9884ACA; Tue,  7 Jul 2026 17:32:41 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 691BA84AD7; Tue,  7 Jul 2026 17:32:42 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 485C084A4A
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51297849F6
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 17:32:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-497deab2d66so566024b6e.0
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:37 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-4896ae35be9so1428914b6e.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 08:32:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783438356; x=1784043156; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783438359; x=1784043159; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZdbEC9LFjF+1xHiUmY+dV70gFM4KLE0JJkoECtmO2A4=;
- b=P1uqlIn8eOmRRGdLiyZmBCTOU0OrsvG50iBD4JItDj87ZvmL/62JrbI4szIBrqp2bM
- Tw3kXLfv3po9/FeszEski3noaKZOKgswIVcXkFbL4Y5YWSNTo78D/Pi5oBnQ0jYbMh79
- 75uefxBVOa4H1Xv4tCUCZQGZZ9f42OcwYsUZE=
+ bh=ktWClV7yz7pWlnmRXoPAAfaQeLwr4B2/0bxHS71FDnc=;
+ b=Gw9h9feTc0UbovX5+BIxgvlKyeB6HGsZ9Ti/SQwhUwbLg+u3TnQ3yjJEc04FN3ZKun
+ wkpWSMEhknuYtKMpiAuEB1TA4mzmcpPmH4/m/q+rWPwX8oarx922am1l5KEeNkHZI50J
+ Wly2xQpZ/D1xjwN7J1WYBnl/UAqdJfyhV6XTM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783438356; x=1784043156;
+ d=1e100.net; s=20251104; t=1783438359; x=1784043159;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ZdbEC9LFjF+1xHiUmY+dV70gFM4KLE0JJkoECtmO2A4=;
- b=BAWbbT3kYYEOm/bRnAejIgPnLL1wB7ud/N+Zczc5M2V7MJmuw7aWIDTyRnJ5YWFGSX
- IWyuwSH2y8Jrnli1OekVdPyXsk9Eg2EAhaX+06DaH1rVtAeBr5X6ahzKys+5tuHcEWsx
- nb9yOTEMTp7hjWGA0jtWZZe+T0GBqj3t5Z2shCeE9YDpBHJUunLrGsBpf9sE36Sr5vH+
- IdYLnJryJofusS733cdYZ1sGcRzuTKcTv8ukw7CqVQp6bRGun5eb6wUFltmMWud/a7/a
- +3/ddGXFaIyQNnpHuOFPRAWs3F0IkAPrZJvkMw7KVaTcO96I1VblCbQGRA2juvgQGxJp
- XIxQ==
-X-Gm-Message-State: AOJu0YxqEnVPuFtoX430BWaebeUFAxXFj2EfPeglsbxtE4SF2Ht4bpoz
- TTla2DaxRtWpw1DPXVxa2xW6TLAHPMXvBAZ2g/E8r3ytpInfkD46rcQ3ilpxfW2hCfWcKEYKcLH
- eM/pYHA==
-X-Gm-Gg: AfdE7cl8gFCasgblCn9Eq/SORFChK5x2EHRnSyTzA2yBm5fcjPMInl8872zpxOog9Sc
- L6S+b/MVWcYUa/IWHL0Rgrx5NPBhhYjIu3QSBmu2Yr4/hhU6MOa5n+F75Oz21aZAsWjvV5IMYJb
- P3PEyJj5oPnFRmaDpt8cHj3ToOr1xdHy/spTnCInPdW6nQ6CaMnWmj/eNA2npSHsFJ/IRJ98OoG
- syOkQBxrXsu4zkJULdo2sO3a2F8WFqhsFRjmBAXv/R/iSPlGN4ahXApk5vBELRLHJA1Vdj4mfR4
- s97YLseR3oWCj9fnSGwYm+OSnpVoW1rs1MwQY6sFEPible6nsjdRE3jwA/G2bfTR6ut7JezyytX
- 070hdj6gcdHCmrFIVXZvLbYGnyIh8cULMwpCiYzGxLWPzq3PDWekiI2gsnTZnYClXggabHNtXOp
- UQDqHEGAQ=
-X-Received: by 2002:a05:6808:6884:b0:49e:d43f:1b94 with SMTP id
- 5614622812f47-4a0740bde81mr1480121b6e.0.1783438355968; 
- Tue, 07 Jul 2026 08:32:35 -0700 (PDT)
+ bh=ktWClV7yz7pWlnmRXoPAAfaQeLwr4B2/0bxHS71FDnc=;
+ b=RnA1KBJxq6nkA+S3JBd9YRb5yJg+HZ6vELxzjD9dZPQUWeZyyDn4PQySDCKxdVfa81
+ Qp6J+bqsderQIpfY99HCqm7PAY9KrKbfNZfwKe/K1SdpbzTeoTqO+GLKxHH5JI8eXJ/I
+ mkZkJ+54C58/0EM7nR5eNFRW3+stTUBVn22xH67lbT4ns3YbSc7WYyJPVM+KCgZ0WFnw
+ Yz/XRsanjjEPeuxURsiTH3jgD71zksymXbfoANdcN3oopL4kStDY0OSqUXa6/sWE9SWN
+ s7r2axKK/t9jK/b7m3x+qj+rAh+PXagy7vf1VAfdYqSZKIiRvbglBLFMC9wFOxnkk8hH
+ q4qA==
+X-Gm-Message-State: AOJu0Yz3hhyx4Fxbjkz+byWlDjfriZQLFlJSFY64BVAd9nVYPmaIvU2L
+ g1YLS/LMEZ5yj0E3/ktGscdHanYJW2lBYiHkozaXG9oLNCbHiwZgYghC2y6SaewnGifZPjiTP77
+ E9FeICw==
+X-Gm-Gg: AfdE7clNBzmbunw+Zcs/svowPUPmG4z8zzG/gE3n+ZMQ/qKbY8RCqTGbwh7VYiRd2Oi
+ DfXZx2F+4EK72nyt+qEsJcLLU5iQ8DXrydSyBdVKljCn/AdP0d3zC/cMeOOWAXDlCqvZLnFKT+V
+ ykCFaJptRiCRXekxSiCVg1ALzvg7h44w+rE3Ac9RJd6T1NXpCWuMHqWGL11vsPHJ3aU12deMDNS
+ wBL92QPcrw5dQ2B2bso1OsQuRX4RUXzlDjSnMG6bkzz2vs3hVKcmx2EkuKaPoY3Zpzl7CvX5zR+
+ DfSkgiEo5wwfuvSx/rYTJWw3863XGkDwLJYfk/fYeF0gwAAanb7FH7mefGH/yTpqm98fu2M7pob
+ qHro1lSyEQzlehPzVmTTbafHd22pYfAuAM6xzt7lEr9UtabbYGembdJiZ5G0h/vGwUQDpe6P6/S
+ 4OgLYFWz8=
+X-Received: by 2002:a05:6808:5247:b0:494:9c17:c336 with SMTP id
+ 5614622812f47-49fde6ee713mr3822448b6e.34.1783438358950; 
+ Tue, 07 Jul 2026 08:32:38 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.32
+ 5614622812f47-497d1b43cfcsm12052218b6e.14.2026.07.07.08.32.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 08:32:33 -0700 (PDT)
+ Tue, 07 Jul 2026 08:32:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@nabladev.com>, Jonas Karlman <jonas@kwiboo.se>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Simon Glass <sjg@chromium.org>, Alexey Charkov <alchark@flipper.net>,
+ Anshul Dalal <anshuld@ti.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
  Kever Yang <kever.yang@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 04/15] tools: rkcommon: Add RV1103B support
-Date: Tue,  7 Jul 2026 09:31:02 -0600
-Message-ID: <20260707153135.2048115-5-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH v3 05/15] rockchip: spl-boot-order: Add SPI NAND support
+Date: Tue,  7 Jul 2026 09:31:03 -0600
+Message-ID: <20260707153135.2048115-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707153135.2048115-1-sjg@chromium.org>
 References: <20260707153135.2048115-1-sjg@chromium.org>
@@ -99,32 +101,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Xuhui Lin <xuhui.lin@rock-chips.com>
+From: Fabio Estevam <festevam@nabladev.com>
 
-Allow rkcommon to generate an image for the RV1103B.
+Make spl-boot-order accept booting from SPI NAND as well.
 
-Signed-off-by: Xuhui Lin <xuhui.lin@rock-chips.com>
+With this change, it is possible to specify spi_nand as the boot medium
+like this:
+
+u-boot,spl-boot-order = &spi_nand;
+
 Signed-off-by: Fabio Estevam <festevam@nabladev.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Guard the spi-nand checks with SPI_NAND_LOAD so that boards without
+  SPI NAND support do not grow in size
 
- tools/rkcommon.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-rockchip/spl-boot-order.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-index b39777fc060..6f25a1cda31 100644
---- a/tools/rkcommon.c
-+++ b/tools/rkcommon.c
-@@ -153,6 +153,7 @@ static struct spl_info spl_infos[] = {
- 	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
- 	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
- 	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
-+	{ "rv1103b", "110E", 0x40000 - 0x1000, false, RK_HEADER_V2 },
- 	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
- 	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
- };
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index d2dd5e10935..3942dfe6f5c 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <dm.h>
++#include <dm/device_compat.h>
+ #include <fdt_support.h>
+ #include <log.h>
+ #include <mmc.h>
+@@ -75,6 +76,9 @@ static int spl_node_to_boot_device(int node)
+ 	 */
+ 	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
+ 		return BOOT_DEVICE_SPI;
++	if (CONFIG_IS_ENABLED(SPI_NAND_LOAD) &&
++	    !fdt_node_check_compatible(gd->fdt_blob, node, "spi-nand"))
++		return BOOT_DEVICE_SPI;
+ 
+ 	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
+ 		return BOOT_DEVICE_UFS;
+@@ -223,8 +227,14 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
+ 			}
+ 
+ 			ret = uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &dev);
++			if (ret && CONFIG_IS_ENABLED(SPI_NAND_LOAD)) {
++				ret = uclass_find_device_by_of_offset(UCLASS_MTD, node, &dev);
++				if (!ret && !device_is_compatible(dev, "spi-nand"))
++					ret = -ENODEV;
++			}
+ 			if (ret) {
+-				debug("%s: could not find udevice for %s\n", __func__, conf);
++				debug("%s: could not find udevice for %s\n",
++				      __func__, conf);
+ 				continue;
+ 			}
+ 
 -- 
 2.43.0
 
