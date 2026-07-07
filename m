@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1805C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 10:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C53BC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 10:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07C37848EB;
-	Tue,  7 Jul 2026 12:56:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C182A848EB;
+	Tue,  7 Jul 2026 12:58:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MRSAFk+W";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="B+/H23IF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBDCC84942; Tue,  7 Jul 2026 12:56:12 +0200 (CEST)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 285CC8496E; Tue,  7 Jul 2026 12:58:27 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4F67846B4
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 12:56:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1D1B846B4
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 12:58:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XamJjhavs+sjDq9qBT6YaGiBkbYCNMTj8FCuqHddsZ/u4H2pGPK0KDMC7uZA1NBLc01lUxLTgW+KCZec/ihhsMGKQaImIxnPV8GoqQweRlhlTdc1K5e6sRveU7hquaMRhkydAWhybwxrH+oPftAtEFnue7aq9ldYf6MYegDX3/vhhEke3d/tt+i1tFDqXmNRhGFOfMnT7/k+Lpxk2ZQauTxYThdwYthgdksyKdbdJf6xgQk9LzFI85gCnganqJ3LSKQ1IJtY7tzCyKgzSD92Vj4uZ/OQcQjynRQo187z4f4cDL/LpSEAB5CC13PtBZlhlVjDvNVzvmaPNCw6OwsseQ==
+ b=wl33OEeOdXu9fWxd6rql/f8S3VEFRlzKG31n5YM1Q5y+zLeUqYo/xt4/kkFo/kmxS2SZiZVMJ42Y0AW9QXKUhrF0f1t2H6LE80EiS8Fu1tdinYRqOeTQNW15zRyXLp75pC0b98P9Zc3wMmRIltXMCDAtDmyasWizFihZQxiUlVpY+yewFVbo8rsZv8lfNigp8Oar7bejsngK9oymZepoXFfbgBxEHUcdM1fSUK774Ua/xQdH4D3s+2mGILhPKuHq0Udm1QNoEo8Xxv56IzEdMtCL8kNHCnC7Y6y4RDnbgWOsMBPwfHezGK79SH0PSV+PV498OAvOsvb4SWo+Us+vCg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PdxCrsgTlEwQEcvo4jZMLSJMCx4yRzPk3bS8KABx9Q8=;
- b=YEBWPtlSLC+MTUz7n/uPHl5LEGMRcOMzVYRj7n5xqcHMRhlE0ilkXCU18+ON7hfnoMOpaKMD9hCeefwwA9f9EkHc53N0f4tecnDSQX2jw6JHsQQyXnR3MoUwHwk93ip9+33dWUPsvgkz40cZLZJcpgdjfVWGYQDbupVOfJlgWxLUGF++oH/LNZKwMFvIzjffkyTjgIIJcvA0IUJBPaBE9+hjRLk81L++0Fekmcd3IUd9PTjt8TNHXJGwSjvxNWYQreAF6t1QMTS3BaPK61NNmnSJ5jx1L5DigPuewdOXi655PsTuOgstWmVoboa035dnRO0woJ8JVao3Gycy/mIS2g==
+ bh=ucinz0MLnNUisJJOErtKw1eWSRf3vauuwL+SXEzw054=;
+ b=wQ3mAG8YWpoukgG2dRD2yyneHLs3jGAbETt1T6yRvNxXyho7hvGAlCcnhyotNgGW2+hwIHnFck6Cc+lpmAWwGBoA5qGGqugZKzVhwflwSbftxk9mPYRbuJTUKnvIP2u0CG1aCKRYwG5hLrysJ1i7QFmXV5GlB/n9H8rjKBRWtr65R1Sa1imq2KAePcrOnyHedTAMccvrAfAwQBjTiUnAwhG/iRgym0FYPICFm+46cJ6btL6Hgjl631Cn0dc2v2yEGy+F4HEP6sa7f0A5lfznkqq6NVicvyC7DqPbgO4OLxfrPPc50AGxs1HILdz4mVfTS3J2r3Jak4gNItJtTjiJsQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PdxCrsgTlEwQEcvo4jZMLSJMCx4yRzPk3bS8KABx9Q8=;
- b=MRSAFk+WI8OIiAOz1/PeyWQtt8A0X6fqXf8t+x2ZpupIlvylnobZw1d5AETuvdymqbAPHUfZunqc8HAhWsU6W9otFb74BIdWku/TcDSfq7RbLR8e4Ve/XS+G8WTI8R6Vh/zVqv+7qwUo+/W07aHHBc4KNpZo+cEZ79qb5NYqcrU=
+ bh=ucinz0MLnNUisJJOErtKw1eWSRf3vauuwL+SXEzw054=;
+ b=B+/H23IFTnAKL6BDKokwOzuXh9CJdjDHyqhUcw4elsY6Wlm1MyufL8i+TRifSM6dQqrNJR0suGxu303eWniF/80dsOK2YJEgC3Ib45hw+2lciJz8gZJg+zWkZP0DDrI8+zGSN49OA17R5WOjzjiyVJ/9Y6bqxCy9RkVN4EzjK6E=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by DM4PR12MB6062.namprd12.prod.outlook.com (2603:10b6:8:b2::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.10; Tue, 7 Jul 2026 10:56:03 +0000
+ by CH2PR12MB4327.namprd12.prod.outlook.com (2603:10b6:610:7d::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.14; Tue, 7 Jul
+ 2026 10:58:20 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0181.009; Tue, 7 Jul 2026
- 10:56:03 +0000
-Message-ID: <879e6b36-29b4-4a14-9c28-6371bcd09d71@amd.com>
-Date: Tue, 7 Jul 2026 12:55:57 +0200
+ 10:58:20 +0000
+Message-ID: <bc5f81fd-a553-4b44-82db-39aeb1622657@amd.com>
+Date: Tue, 7 Jul 2026 12:58:14 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] fwu: Gracefully handle missing FWU metadata device
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, git@amd.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Padmarao Begari <padmarao.begari@amd.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-References: <0bd1a1b8bbe48fa3a9b89673c1e1357d50d0684a.1782825467.git.michal.simek@amd.com>
- <5e5241d02a04871a06dd44d3f8638f5da10893ff.1782825467.git.michal.simek@amd.com>
- <CAC_iWjKeFMqXqo9tcf27Yuofyvbvr34Hqf5hFpK4zB8crtw8Yg@mail.gmail.com>
- <f63906f9-29a6-422f-a111-855cdc8d1f2b@amd.com>
- <CAC_iWjLfC_U=q+iPCy-BXLXwLiwjXBe3UHqH5XuvU1gkyVxKkA@mail.gmail.com>
- <08e98c15-80a0-40d8-bc7c-8d8edfbf3f99@amd.com>
- <CAC_iWjKH89ibj3KNvJW9HHXbQ4MhDLb2qWaYytU0S9Q_3xqkgw@mail.gmail.com>
- <fa17c2ff-866b-40ec-ae10-847f2ff84572@amd.com>
- <CAC_iWj+VqjpWPDRVGvCYpWMg4hmjeS1YzPBZiMvvQqvRRLe+Vg@mail.gmail.com>
- <a9285398-9e71-4767-a34e-2dc767c11538@amd.com>
- <CAC_iWjJiqU8KavYyHEavj+pszLxN-oq9EoucBi=bsjRuVqNMmw@mail.gmail.com>
- <207fe44d-e18e-4983-b152-be820d720275@amd.com>
- <CAC_iWjJ2z2TCZT63U5ve53LL80GnZ6PsuR1hOG4EMtizq3+LwA@mail.gmail.com>
-Content-Language: en-US
+Subject: Re: [PATCH 0/4] arm64: zynqmp: DT updates
 From: Michal Simek <michal.simek@amd.com>
+To: u-boot@lists.denx.de, git@amd.com
+Cc: Harini T <harini.t@amd.com>, Neal Frager <neal.frager@amd.com>,
+ Nithish Kumar Naroju <nithishkumar.naroju@amd.com>,
+ Quanyang Wang <quanyang.wang@windriver.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ "Rob Herring (Arm)" <robh@kernel.org>,
+ Rohit Visavalia <rohit.visavalia@amd.com>,
+ Shaikh Mohammed Suhan <suhan.sm@amd.com>, Tom Rini <trini@konsulko.com>
+References: <cover.1782726386.git.michal.simek@amd.com>
+Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -121,76 +111,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <CAC_iWjJ2z2TCZT63U5ve53LL80GnZ6PsuR1hOG4EMtizq3+LwA@mail.gmail.com>
+In-Reply-To: <cover.1782726386.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY3PR04CA0026.namprd04.prod.outlook.com
- (2603:10b6:a03:217::31) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR13CA0016.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::21) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM4PR12MB6062:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70b688ff-7f5c-4583-5234-08dedc165669
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CH2PR12MB4327:EE_
+X-MS-Office365-Filtering-Correlation-Id: f9c4c620-8438-4d82-8851-08dedc16a80c
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|376014|11063799006|4143699003|56012099006|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info: OAcbYS/a0hoa0sPgVR8rQV06pGaa5F40zPAewCyWH73RvaJG7+G9H0ObjXzATy9t3UHRBWpgen2pJhFvjTlY3bnhE4CQHXhXPm9DKBBuUCcttRVQ5yb/lME9Eq8GX5d9u5al9n2ZdYmr+Kb5djhSz9pmQI0JK4w2xk55989wkREhNjron22ACKruh31WFXiu4XgwgSQQbMhWANOYQu0RwIAeiBKQWFzNdt7OgaeXtbabcycQm5l/nM8579Yy5K2nEnqiADvDM4JfxO0qRYkXe7A7vjVN0N6emMDpu/H78bxa6Pl3M00dUUGt9eXAz0UdeHgP9MFi42DP6tuw6JYsZNzWJAA99tPUiqFlW6AM8asW1i0bNYBKYHatERTt1hJ1rw1Ohxd0CD0HyudYWgF6STZraa9ipSXcnn6Eu7VajOBot5N8WzvdhTydM5/USRI7GorGB1PPf0tvllKU1EYY24jQywOoK5PjvtvPxAQYmVZReuOxuWZw+XlEiijmRlgvQDhL40JPKWmlrU0kFyrHmvPYNq96GCiCVCPldLBypx1m3p0IkNMe3xoWFQJCl8jVNRDl/OqilgtiaoD6djue5gRbZBmz6HtWV43qgsmpEojgeZkM4vF4a8BQVahBQjNEr5J3/izGwe/iGFPPH8FgFsSDOq/1FGdAoMtcFtlPKcA=
+ ARA:13230040|23010399003|366016|376014|1800799024|56012099006|18002099003|11063799006|22082099003;
+X-Microsoft-Antispam-Message-Info: G0a5hpAppYB/zhLY8fxr2Kpt/KczbKdPcDZ1qSkoRMvNWKVFGzQx2Pu3NxvmZQj8oP6on5DOAFa80jNs7ZFHvEmgdmsTD2NKUlUPkygf1OKGM0K4qm3SXU4pitUuSNyWr4t1t2rB+mIJrAGOBEuaBZ5rN6aim6DGZcACFJUYnvTX/PFgFwB/OPFcxfhsh/sPT6SpB6Ky89OPoEHQ9TNMGSCJz2Ucell+/X5/qphK26f+k7JD1OV3yKywNI3YL22Tn6/tUzqiF9Ximd/8p4pbDXPG/umsuy2rYXPg77TYO+Czu5Gz1jaJeuKjh6885QI02JlhU4Td1l4805/ZhWdU8UI/npgY/3kBeSJOpvnWDNVPhzVZ+MQHoACKXLlmjVvl1WMjb5s/q6k1eg4Tkhh0N3bBXm6VguYpy6jxhMze0IlxpozTY4XRQnQYOT8LsDUDJyvoZH+62DArWHKqNNReaCayxLJxL4RfeGBemx/T82MO7XDUfAoHjl5dFfOJx52DOM9KhV95PQ3298IbFKC/shTb+LTIhb6AmZo03lQ8wFe6u6yw3FqtNH2JfVHcE+T89uyWdsiN5zKboK6rCfs2vH+ak1kYE8RCpkGg5AhGDrnSqz6/4PWmmfCdZX82yojuRRJhfHKdLr1Rz7qMLtpvrCxO7meGaCFiJLO42G/iR9U=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003)(6133799003);
+ SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(56012099006)(18002099003)(11063799006)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cFg2cnVxQnNaUDVuMEpiYXFETTlscVZPSUwxOTNQSHkxZndEdC90bWZkOGVQ?=
- =?utf-8?B?eHZPMDFwbEJubnF0d0RQd24zSGdSL0RQVE50Q0lQdzRJUFFzQXJFbVBBbTV1?=
- =?utf-8?B?anFPSnpPKzBROTVXcUE0UkVZdTY2V05uaEg4RU91Vm1qelIwUlRwdks5cGcx?=
- =?utf-8?B?bTRGQ3JFOUJIaEZ4Y1pEc0NWanUvY2dFbUJZTXNrRThvVDQrclJRclROUzZN?=
- =?utf-8?B?QXZKd3dSMU4wYVJZL3BtcUtidGhsMzExc25ZR1FyekFqVjdiL1dXRERqY2w1?=
- =?utf-8?B?TFhpcW5WZnJSd2owc2pqUkZ5Q21EdjM1cUJHVXRSOTIrMDVxZHR0OG9nVUx2?=
- =?utf-8?B?OUNZRXZ2dnNXakZhTkM4eWJ3eW9MLzBqNjFudWJYdWtXN2ZCRmZqTmtLWmhw?=
- =?utf-8?B?Y2d6S3B6MXBxY3RTbzJTMDkyVjhGTStjbzBNYk5kOEYraktLSnRFQ29FTmtL?=
- =?utf-8?B?elkzdEpydW9jcVMvcGhSUHBBSlhLTWwwTjI5dTltUmFMN1ZpamQyTk16M3dl?=
- =?utf-8?B?aUtXV2ZjQVZvdEd3VTdlUWlDdjlRZm5IeXU5ZVJROWVHNnRRSHJyakRMb1Jv?=
- =?utf-8?B?c2hwTEFZZ0N1dUI0clkrQW9SY2FLY3VyOGdCSWpBYXRPQ0VQb3daY3FkOTNm?=
- =?utf-8?B?dWEvbG9hTkJPWG9Ma0RURVZjcklkc2NFWW1DWk5JeWdkWGJmVUlvYktyVWV4?=
- =?utf-8?B?SFd2YUFBc01mci9RdzdrVlVTTkYxNHQ3OVY3TTNMVk1hOGZ3VXlRNWJqRFE5?=
- =?utf-8?B?MkpVZWtRcnNTME5QZUJRbVIwMGlRODl5b3NXSTJUam5WRFpwNDh4WGRIVDhu?=
- =?utf-8?B?TmlRUWJMVUhUZG56OTR6WFZzVWdTWkRLRkFqVjhBNDBVbWRKN2JOVFdFWnoy?=
- =?utf-8?B?d2Z6enh5YXhpTDlWMnRhY3JORnBqUFV4Q2tNeFJYSTZHZk1NRHlYWmFzL09a?=
- =?utf-8?B?d21uRUNVQ1ZKcmdyVm5sTnFkRDB4NGtzVjdrS1RqdzdPTVJ5Q2gxNUluVG5a?=
- =?utf-8?B?dnprSm5iSldrNkhrQi9KbndRZHVyZWltZFpEcmVQNHJ6NVNJZFoyNEhUclUz?=
- =?utf-8?B?Wkp6REVVSm9HTWVON3FHdzR0YWx1ZWlVZW1uSEVxSW44d3EzbXVDMXhPbXQ4?=
- =?utf-8?B?N1MvRDhIbXlMWHhoSXlmOGtiSGprV1pHbjFQb1hoaHFXVG1UTXVRejNaNFdL?=
- =?utf-8?B?L2s5bU80aUFieXliOUp6VDNHNGRsSzd0WFgxbXRlZllTY1lxMGlORjFhblpi?=
- =?utf-8?B?ZUtTQStUamtRZjZoT3dkOG9od3VGMWc1NHBWYjVrYnU0dXF2MG1IZTQwbzlv?=
- =?utf-8?B?N01KaUpiUkZYdXpoQ3g3SkZialUwa1A2RW80RFRKMEt1UG42cndLU1JlVUJU?=
- =?utf-8?B?d2M2WFJNMFhKYUk4OFhLL3U1dGJRNmlBSHcwcWJaYUNTZVJiSlpuWGYzYzAx?=
- =?utf-8?B?K3ZNMng3cWhyeldNcjNsMjBMQ2hWTzQyREU0T3YzL1RCMk1VWDJqS1JGKzE3?=
- =?utf-8?B?TEw4c1NmQk1zcWJjakpHYm9OaWx5N3F4azROek9YVE9MVU14Z21LWnZtRzFC?=
- =?utf-8?B?NjRLTXR6MVhMTWp2TlpHRTNQVXRWOGE3Si9aUGpnVEpaNFkyUWhIZUJNMW8w?=
- =?utf-8?B?RkJVOE5YUVVQNVRDT2xKNDZaNFFYdEwvQjRKRjVZU2hndWVXWjM3NEF2aXVI?=
- =?utf-8?B?SEV2djNnMWlxWTI4WlhMQTk3ei9tZGdleWdIZGttZWlmTndpRXI5enExUnR1?=
- =?utf-8?B?YmNOT2tHSXh0UUsrU09weXgxRlMwdzlVNXA2NHlvS1lIYmg4NG5yT25hcEEx?=
- =?utf-8?B?aU1QdHpCYTlrZ1Z0R2pnMlgxUDJHSkFrNjN2M3p3L0tNam0zU25QVTU0MFd0?=
- =?utf-8?B?ZzBPcnhXSU5jZVJTRUNkWlVycElxajVqNmRacEpOKzJLYmdmb3p3T2xZbjY3?=
- =?utf-8?B?V3VYV3dhVUN2Z1RpTDZ6a0MyTU02UzFkQTQ0aXp5bVhnOVlNNTFYdTl4QVRS?=
- =?utf-8?B?WUc5U2FMUmEvTzdJYTVzNHBqUFNkTWtjMmY0Q0FDTCtKRllCNyswbWtrZ1dP?=
- =?utf-8?B?NUZ5L09UZE9FRG9xRTVIc0pYN0pjMEtDaDlvVzhPSnRmZ3ArdVNGYlhIbTBz?=
- =?utf-8?B?ZE03bGtWMEt1Z0hsS3AxVkdOVEpqbTEzdTBlWlZhOTN1R0IxbzhKcExKaVYr?=
- =?utf-8?B?ZEFXRU9zYnpiUGt3UytpNlFEZTlZRWRFYzFVaW1vV0ZiTHhvUHkvQWhXdUM3?=
- =?utf-8?B?Q0d1dnJxbTU0SlIzY1QwV3ZwaGFxUGppcy81SDgvOFdndmg2OUsxckg5d0NL?=
- =?utf-8?B?VUlicGx6ckNhc21wMlg4aHdBRlFnTkdibHE4QW9XSHhvUEgrVi9JUT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MXVUdmxLMUlTNTV4L2RIdHFRQ1lyVEdHVUFoVWpwY3R0Yng1M09GNFJXYnky?=
+ =?utf-8?B?cmpvY3pLRVhsa2dZSzFFU1Y5R2c0V21QTEtBeHhSQXlZSnlsNlhGTWRZUTd2?=
+ =?utf-8?B?dFhqQ3o4M2Jsa2YyaVczaEpjaVhycUE1Q1dYZG85VDFzSHZzaEl1dDRBYUV0?=
+ =?utf-8?B?MDZ0bEFsZGhJSTZzcFpaQnpSWDVMZ09IZ2h6SEZLdGtWQVFyNUpHU0NMZ0c2?=
+ =?utf-8?B?cjgyMUJFQ20rUWRwYXdwVjBQZUxybkRNNjM5dVNXZnp4UmhnZ3VibENWZXF2?=
+ =?utf-8?B?emNVSHpscERnbFRBUDhHL3FjUDI4Mm9RTytja0hvaEhxZTM1Njg1aHZRalp5?=
+ =?utf-8?B?aWppdUYwaVVId00vaER1b0QvYWNGZXkzMFd5MDNwS2xIVHplNHBVNmI2ODFt?=
+ =?utf-8?B?bDdkS0JZQ0ExbkhLSWt4S1owcW1kejZ1aTN1RjBJSElWek1TNmJ5ZUpYMzl6?=
+ =?utf-8?B?VkRaMnZvK1F1Vi9JVjN2ZklZdEhWMEx2OFBadnVVbERpd3JxQ0wxVDUzZlQx?=
+ =?utf-8?B?MjFWU2xJRFRCMTZ1V0k2VFY0T3hucHJUSjVUOW5jRm0yeVB2U1Q5M2g0TVkw?=
+ =?utf-8?B?ZEd6MEo3eWg1YzRncFVKa0VsY1pQTjROMVQ3NE9DdFplenJGT2FSNzA1NjJm?=
+ =?utf-8?B?QTk0TFJVS2pCVUt0ZHI5SGwzbHJBTFhvQ0JiOHZLZ3gwaHZOYTdJVUFlaDNW?=
+ =?utf-8?B?azgrbDNPd1RLNHhGdnF0UjUwUzBWTVB5d3F3VVZBVk4xMmgyQThhZ0tMU0JD?=
+ =?utf-8?B?K0Z6ejREUjI4MnhDcU8rYktrQXR5UHl2dmtLNXhmSUp3UnpXbUJFWUNXN3Vx?=
+ =?utf-8?B?M0t6TXJpeksvam96eDBmSjQ2czRRUUFlNzg2MVpYcGhsbzZnTnJiand2ZG9I?=
+ =?utf-8?B?ajdQTHFtNVc0bXdwUDVKUXgzSTNQYURUOEFyNzc1YXNBN2pISk9wcGw3VFAx?=
+ =?utf-8?B?QnA5T09hbllEOXo3RG52akFhVitNajR6bmxSWld4WVNIemI4RzlKYm9HaVhT?=
+ =?utf-8?B?RkRQYURxd0g1TGRrdnlCRkJ2WTFkWUwrN09jQ2Z3SW0rdWY3cWc2aDh2clRk?=
+ =?utf-8?B?ZUZLT3IxZE5Rb2l6aWhUdmtzZVdpZ1BWV0JYZDFJNkpycFJMT0lkbTlYWU9L?=
+ =?utf-8?B?dUpOU0x2TnlsdGdZSGxXdUNrUWt5ejlPUG5zcUNZYld2SVpZb0tyOTdBQnJU?=
+ =?utf-8?B?eW5uMGwraUdXWWxLT3VOelkyNXFEcm1xNTRKTUhaaHdZWUEyZktndkVGQThI?=
+ =?utf-8?B?WXJIdVEybzBJR0dIcnRFb280czlhUXo2YUJJenpzTCtCTmVtSlhqYndLc3hF?=
+ =?utf-8?B?RjdEMWUrUXpCVDdSb2VSZjRZL1BLMk1mc2NSM1NIMFJ4NTROekkrZTN6VGto?=
+ =?utf-8?B?VkF3TUhMeXFFREdyTGtWSjVFV1I5VU5YcHVmQTA2aHpNZUhNeEtxNERPN0lS?=
+ =?utf-8?B?Z2xHSThnRjIwQTNQWWFCWDkvN1JSNTZkeXh5RDh3bXhiQ2xPdVBZNXlHdktU?=
+ =?utf-8?B?RVFKbEpNN3dTTWF1RkkwMmY0Sm84STBjUXE4TzhnamFIb1hXc1RlTGZZcEkw?=
+ =?utf-8?B?Q1M3ek9KUnlaTWxIZzMyVGdobVRpdVMwUTZHNk4zOXd3akV4aUJscTl3d1Bp?=
+ =?utf-8?B?cWQ1MnZ6TUxNdXJJME92aGRLWE1wbWR4VnNYWTYwMjkxL3grQVphZUUzTXJ6?=
+ =?utf-8?B?QnJvQ2VrY1I3T1pzaG5neEI0MGhSbGwxeUtSR3hhRkk0VzYwaUhtdGdvYjk3?=
+ =?utf-8?B?WlpGK0ZYcWJkMTYwSHUzb05xck43bHNrWlpoTG15TmV0QkxCL0ZRVUZKOXRj?=
+ =?utf-8?B?Z0JXV0d2SnREbU1xOFliRUJIV3BLVFFjNjZtcVJFak9ra2krTEFJeFFuR2ll?=
+ =?utf-8?B?cnpaVk5ETUVHa29lMGRraTFJbWZxdTZFL0Q5MnRDdWkwT3Nlc2VESzNybzFr?=
+ =?utf-8?B?WGZYb3NmSWRZRmU5NXJ2ME95azZaWGRhWkNKTHJ2WmlwZjFnSEMwVEJCalB6?=
+ =?utf-8?B?SmRnVW1qWlRHOHhXbktRbzQyRC8wVTI4bnM3ZnoveUQ3RmpuLzFRUlB4bmJV?=
+ =?utf-8?B?OTRXc3JBSFNKY2tON3ZlVlJHVlhHbDJlY24zYnRnTWlVeGdidHFFZjZrOFFU?=
+ =?utf-8?B?ZjIzRXZ4WWFCcUprMHFoL2xrY0J5VzVFK2NrMGovajZwb0RFRWZNTHM0cTY2?=
+ =?utf-8?B?eXRlanVxWGtxY0hQTE5ra0ZxK1hET0V2a3N6RGVPM2NTanlYVVRzbmVMelBV?=
+ =?utf-8?B?WnVMRmhxNTYwV1FmS0JRWFlJaFN2aERGdFJqdDIzK0g1bGdFeExpTkJSdm00?=
+ =?utf-8?B?ZzBBU1RMMnRZQ0JtQVFxeC9PanltR0V4a2RpMzlyYUhYbmZEZnBkQT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70b688ff-7f5c-4583-5234-08dedc165669
+X-MS-Exchange-CrossTenant-Network-Message-Id: f9c4c620-8438-4d82-8851-08dedc16a80c
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 10:56:03.1634 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jul 2026 10:58:20.1236 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MA3UAB6xy903r2sT4JNW/em8NBkxY0zgh9zxV8fd9i3n63l72uP3CxxUCqawKHCE
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6062
+X-MS-Exchange-CrossTenant-UserPrincipalName: QVVULiDuR4YgxUlT57APjcguirvsHYYq6MESWCHIlarwYrIk/gynoXgQyUri13tJ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4327
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -209,79 +199,49 @@ X-Virus-Status: Clean
 
 
 
-On 7/2/26 15:07, Ilias Apalodimas wrote:
-> On Thu, 2 Jul 2026 at 15:40, Michal Simek <michal.simek@amd.com> wrote:
->>
->>
->>
->> On 7/2/26 14:24, Ilias Apalodimas wrote:
->>> Hi Michal,
->>>
->>> [...]
->>>
->>>>>>>
->>>>>>> The prints below are just from fwu and efidebug for the ESRT table.
->>>>>>> Those will work.
->>>>>>> But what happens if you try to run a capsule update?
->>>>>>> Eg. efi_capsule_update_firmware() will call
->>>>>>> fwu_plat_get_update_index() which will fail,. no ?
->>>>>>
->>>>>> it fails on fwu_update_checks_pass() before fwu_plat_get_update_index().
->>>>>>
->>>>>> versal2> efidebug capsule update -v 0x40000000
->>>>>> Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
->>>>>> Capsule flags: 0x18000
->>>>>> Capsule header size: 0x1c
->>>>>> Capsule image size: 0x41434
->>>>>> FWU checks failed. Cannot start update
->>>>>> Cannot handle a capsule at 0000000040000000
->>>>>
->>>>> Ah yes, that ret 0; will never update boottime_check properly.
->>>>
->>>> I think the question is if this is acceptable or not.
->>>> Because none checked error code before
->>>> 583efb504058 ("event: Check return value from event_notify_null()")
->>>> and then
->>>> 353166279c32 ("fwu: Move boottime checks to EVT_POST_PREBOOT")
->>>> it checks it too.
->>>> It means in past fwu code error out but u-boot continue to work with above
->>>> behavior.
->>>
->>> That's also a bug imho then.
->>>
->>>>
->>>> Pretty much this patch is bringing back old behavior before these two patches
->>>> have been applied to the repo.
->>>
->>> It doesn't make sense to update to or run a firmware that won't be
->>> able to use capsule updates ever again.
->>
->> It means that can be consider as misconfiguration. Which ends up today in
->> forever loop (1/2 will at least tell now what it is happening).
->>
->> , eth1: ethernet@ed920000
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->> Cannot find fwu device
->>
->> But shouldn't be there different action? Go back to second image or reset for
->> example?
+On 6/29/26 11:46, Michal Simek wrote:
+> Hi,
 > 
-> At this point, either your metadata is gone, in which case you can
-> either try to recreate them and hope for the best or an update broke
-> the fwu mechanism indeed.
-> In theory the board will automatically revert to the secondary
-> partition after X reboots since no one is providing an acceptance
-> capsule (or variable) so reseting should be fine.
+> sending some patches to integrated the latest DT updates for ZynqMP SOC.
+> 
+> Thanks,
+> Michal
+> 
+> 
+> Harini T (1):
+>    arch: arm: dts: Add RTC clock nodes for ZynqMP platform
+> 
+> Michal Simek (3):
+>    arm64: zynqmp: Disable ina226 iio-hwmon nodes
+>    arm64: xilinx: Add missing newline in kr260-revA
+>    arm: dts: zynqmp: Fix space indentation to use tabs
+> 
+>   arch/arm/dts/zynqmp-clk-ccf.dtsi              | 15 ++++++-
+>   arch/arm/dts/zynqmp-e-a2197-00-revA.dts       | 20 ++++++++++
+>   arch/arm/dts/zynqmp-g-a2197-00-revA.dts       |  6 +++
+>   arch/arm/dts/zynqmp-m-a2197-01-revA.dts       |  6 +++
+>   arch/arm/dts/zynqmp-m-a2197-02-revA.dts       |  5 +++
+>   arch/arm/dts/zynqmp-m-a2197-03-revA.dts       |  5 +++
+>   .../arm/dts/zynqmp-sc-vm-p-m1369-00-revA.dtso | 20 +++++++++-
+>   .../arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso | 16 ++++++++
+>   arch/arm/dts/zynqmp-sck-kr-g-revA.dtso        |  1 +
+>   arch/arm/dts/zynqmp-sck-kv-g-revA.dtso        | 40 +++++++++----------
+>   arch/arm/dts/zynqmp-zcu100-revC.dts           |  2 +
+>   arch/arm/dts/zynqmp-zcu102-revA.dts           | 18 +++++++++
+>   arch/arm/dts/zynqmp-zcu104-revC.dts           |  1 +
+>   arch/arm/dts/zynqmp-zcu106-revA.dts           | 18 +++++++++
+>   arch/arm/dts/zynqmp-zcu111-revA.dts           | 14 +++++++
+>   arch/arm/dts/zynqmp-zcu208-revA.dts           | 14 +++++++
+>   arch/arm/dts/zynqmp-zcu216-revA.dts           | 14 +++++++
+>   arch/arm/dts/zynqmp-zcu670-revA.dts           | 14 +++++++
+>   arch/arm/dts/zynqmp-zcu670-revB.dts           | 14 +++++++
+>   arch/arm/dts/zynqmp.dtsi                      |  1 -
+>   20 files changed, 220 insertions(+), 24 deletions(-)
+> 
+> ---
+> base-commit: 3819bbedb39a31a0f872540dac5ed6076d39c026
+> branch: debian-sent3
+> 
 
-It just means that I should drop this patch right?
-
-Thanks,
-Michal
+Applied.
+M
