@@ -4,95 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95395C44501
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:40:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8020C44501
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:40:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A82E984AA8;
-	Tue,  7 Jul 2026 18:38:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1047784AD6;
+	Tue,  7 Jul 2026 18:39:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=vrull.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IXQKhACy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=vrull.eu header.i=@vrull.eu header.b="Bd/hscBL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550DC849D2; Tue,  7 Jul 2026 18:38:13 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 3DED684A30; Tue,  7 Jul 2026 18:39:01 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AABD84AE3
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:38:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 132FC84AD6
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=vrull.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-6a198cdc4e4so1489552eaf.1
- for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 09:38:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=philipp.tomsich@vrull.eu
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-c1222885048so27817266b.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jul 2026 09:38:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783442337; cv=none;
+ d=google.com; s=arc-20260327;
+ b=qHdRkQhk4kYx1Y2qT03nPQow+mUJ5WumiK8L9daeGMUCrf27INxfBmRQdarG7mA6z9
+ vxmWk/Wx3NfyYKWCslU4ORJTByEys0wQZ/Vm/dsMY9cCYsLGG4vvahrBTva84jRpSG3T
+ xp0tLRuYjeAvsUhdCCYeW2RNVICN4CCM8OlYX/M1DHSbEIF9/cwiW349ZUNtRxqWZIBc
+ ZeBMMumP8AETcDRE9+y6t6Fyb2Vva7+WUFOFpcboJPJs2o+7SnWxOHJmXZaP8kOAE8nN
+ FKwDJOQDzHgTwOn1FhI+FxAnP4oHbdkau82Kjt1P9NL4VpHYcDAlimMx4adhuANMkT7d
+ Dzrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=kSVvDWf5J0eXk7H8JSKKXfGmY5GeA5zMtpPaVkqDjWk=;
+ fh=lcJ8qvA0549YKPXHagusDFx6cXEnQPwdlUuGeF65SQM=;
+ b=Mg/hYSY1+n6TuVkWN5g0n8VRm+yqVLM7evm6jT6/9vkhZ6Aj+gfE7uOB1ONVQsKV55
+ suq3CZf1Ee5SsMqAwd28ibXE1IeUEiSxzw1KwFYyf+783bCOw4eQX3O7hjpz7rzd551H
+ 8dGSfIRYVRIg/AO4pQZ07HUGTZwVy5HOzCzewTz/UdGmyB4B6bid4/vkS9Q9YFH1HOXQ
+ MP5WuKmyom/BrP6zhKaUt2m4t9aoNfE4BBpu4h/CNS4lqhMEYUeHc9s9rHwmtkt5cUyM
+ 4QuvcNKCp6O1WnPjDC3jXRryLIiB8+108WcpToT4QDuo/SGs9Qs1XQEymRgFSVD8oGSo
+ Q/Bg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783442289; x=1784047089; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zKzhrTvyr6uL8HPK5Iw1nNyZsbwmt+HFObQEDCcHpRo=;
- b=IXQKhACyDGJu7BOkcygmOSS204Se1+KP9uruN0exNUXJ7Um+MNFIbkozQyQfK/bETU
- 2bFQ6JKAKE+iOyYOrI5y2TGzD/70Pqps6PluoX2193jIQB/4uC2PrDxwwIhInvIk4IAH
- FxjsE+DeMqHlNZmu6mcKEwWA6RafiEmSEi9kQ=
+ d=vrull.eu; s=google; t=1783442337; x=1784047137; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=kSVvDWf5J0eXk7H8JSKKXfGmY5GeA5zMtpPaVkqDjWk=;
+ b=Bd/hscBL8J/T1Iq5SXvDffX36ZRatW6Wd0DWuMatfd8BGZUtntDxzBzbtQId9aNZM3
+ PNizeW9zU+s1jy33a67C8H/RgmO1s7xWm/+z3ubnuA4fDPQa09Lc/XrChn/QqYkf3m61
+ 7S1dDHMcVqGQzB0PVGYe9Ronkgc3VwGtRbEQItMnehBDtbp7UKYJd3OSIveaCckIabni
+ irSD5tPABYpNPYToXaTEzim9u9NGYEpevuZztCZXWe1VnXt4tccUtWtRGilyCbmZN5x1
+ VpMmrcDqfsBEyhJ5vGdi4iiPlJ18PG3ZG9eG9e5DQFQE3jjE5PZQv7QdodQDFc5Ljl3h
+ G6Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783442289; x=1784047089;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zKzhrTvyr6uL8HPK5Iw1nNyZsbwmt+HFObQEDCcHpRo=;
- b=FOycSUiG2tN9JxgHds8iuYhVvZLf0/pXIIzrVQi2tlYUpKnUz3gwD1SfwudXiJRccl
- LtHc5gHmWjclbiut8KmCj/UmzAjgI002ooJVNJDrMXGYt+jJHG2h0Nlc1JsTf8CY1U5b
- 2QoOV1QMhK2qC0rSWPIJAFJNyV0aeSuXr5p+UZftntbQQJKwfO0DYqt92X33z9abWQLz
- WHp6LIcf37TaKL4DSQv0wOtguxzcjmN6c3U/AuVNOOlMr98gmCSNkJhki6QoYOWR5IPS
- o9dCDOMns6WmdtYnIsG0PktXyOwXyRA0eofZ2nBHw7OmrnIfWWu6UEhGJZHJ6kzlbjn1
- 8GJw==
-X-Gm-Message-State: AOJu0Yyrl6O6l/dNrsHMULtWsvS50tjhaaOn8SGKPtJPIZ2/qVoApabX
- e4WrV6T4PWV40C83epLsCG3W2KyO+FtfLrnLheTS6fxpGd4B67OSSOx5MdqZrLnvdA4=
-X-Gm-Gg: AfdE7clsgMLsIZ/IHzet2tnI+kgvHGl9KRf7wwLlDDORWFPaL1x1PoxoszmwZhu8Ner
- 3tlJ8kL7UcE1U9uWsjhonaPlhRP8oxQGukgAgspB5QYKFOTtBgv72DzmcrueREw/OO5c/cNtd1z
- UFcF7rXkNvpAABHCMcjiN4BMU+flncLiwB381gVtebDP2hOWDeDgWod5NthlOGDeAc2AUacFjRO
- qYGBtUOKUCTwJ0Hr78hiVL2hws22JTeO437ihGAJ6jKtUyxHm+vYPzo5KdcSkWX3Kb63A4PLMkv
- Z6ae+61vu7CzfWwLAR1UR1/gdxBlIKwuGrY9ReIJ5SDZJim5Sb6vMcpnuYNRtRazoPV1/gWD3x0
- NUh3Ua0f6sUPyWGAOPFsbTW+uT4+i+NAOmB2f4ize/G5YuiVOxMU/k1fC8RC9q1OyJhIDE47tqs
- Fo5hehuUPE85b5EPu+eBDkom7IsjPiX1VhjpNXiQbTzc3i2L/wLqN2uDYgwydvryieJkXF2T0gc
- pii4aS/Vwxjyth7yzsq99wbcFFIQ2IvE+oWXQQ7YuH/ZkaV
-X-Received: by 2002:a05:6820:4b83:b0:6a1:57aa:28a3 with SMTP id
- 006d021491bc7-6a3552acb04mr3538755eaf.26.1783442288914; 
- Tue, 07 Jul 2026 09:38:08 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb13e15esm15137194fac.3.2026.07.07.09.38.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 09:38:08 -0700 (PDT)
-Date: Tue, 7 Jul 2026 10:38:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>,
- Jonas Karlman <jonas@kwiboo.se>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Subject: Re: [PATCH 12/12] MAINTAINERS: add myself as ARM ROCKCHIP maintainer
-Message-ID: <20260707163805.GK749385@bill-the-cat>
-References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
- <20260707-rk-custodian-v1-12-dbc9c696e613@0leil.net>
+ d=1e100.net; s=20251104; t=1783442337; x=1784047137;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=kSVvDWf5J0eXk7H8JSKKXfGmY5GeA5zMtpPaVkqDjWk=;
+ b=a4ncKN+lqzGoJhjLm2jgq15SWOZICsL3wIz5JqvhK1+KkFwcf50ClcyBitEaMd6lpK
+ uzKU05A6wP48gjs6R1WeU+YWYCHUQl4AYn7aJRI9S4rfYjDw3ZOpH9c8UipfOT+YI7i1
+ hOJOyqxgK81xGpEVcTRd4ElWIt4UGgzRlR5LKWSqjCyHP10e3ANEnY/+EbPUxTXrwp2T
+ X/0n/1LFOKE6AGKZQMJlTizVN9QUA9j8Sy6XezVDfNIxxOc0/HcSbBjSzh5nvfREnR7c
+ OdtFCd7WsaG3MKgMahSefyz5RDGebiXH/xqQ4o0q67Pc0J2KgwQySJea2F7h4P9aGYJt
+ hkpA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoacAk5fQUD/oOuEhTeJsdU6VwILU1ORcgNIADmHu2EAxu19a8B7H+JG5dvi6en3GJge2Khp+8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyIIQwxdT9c4OQV+ggT8yHeGXNIA6xo/HB4zPflwMLPUdfOaX0
+ 0h5AxbTRRc54axCl6oxQ6YZ1knC51ynHCmQhkqmZ7w1j8UIevFVaR+xTlvnDp3l6RfAELAF5Hae
+ vMMkhri80VTsGpAj45TWH3N6Es+a80mX0lNRwIVed9Q==
+X-Gm-Gg: AfdE7ckxnMO9rfR0ObNVuX7kY9XoG/uEIYxKxSAhyYmdFrqla5/6WfEXun8/sCjsTda
+ elIXjNNG4kLKtYF0Tu5Mwv9E6MLETrk45JsIigDanRhtIbQPUyDC34+dx1oycKD5O/ENzJsTXe/
+ gUSmRr/+RDIL9M9WCumLYSyHTAl29C7lV9Ih8O3i8Stkp1stSHw/KspLc2QWOc26ZJgpfgouFrR
+ PtSrJLSsVObU8wt4d8CCmkZXZudvNWzg+/oIUDEJttTNZ1EXkgEIwlmTRu27G7kw25cQ9Do8UGd
+ ZLGoEjOUiCp1/koyZwCayGQCi0DS
+X-Received: by 2002:a17:907:7b84:b0:c12:c7ca:d704 with SMTP id
+ a640c23a62f3a-c12e4400c5amr454245266b.6.1783442337358; Tue, 07 Jul 2026
+ 09:38:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P8vv2dwLoXUkjkja"
-Content-Disposition: inline
-In-Reply-To: <20260707-rk-custodian-v1-12-dbc9c696e613@0leil.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
+ <20260707-rk-custodian-v1-11-dbc9c696e613@0leil.net>
+ <20260707163754.GJ749385@bill-the-cat>
+In-Reply-To: <20260707163754.GJ749385@bill-the-cat>
+From: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Date: Tue, 7 Jul 2026 18:38:46 +0200
+X-Gm-Features: AVVi8CeilA-nyModBdHyHiPqUx4KuaUZXRG7zLCEq7NGIEVOX0JJJcoMsaG1Ddc
+Message-ID: <CAAeLtUCeywSD6Z0ZnBZrPgoJDKgnDxycb-5qHhgNT7yX3tNacw@mail.gmail.com>
+Subject: Re: [PATCH 11/12] MAINTAINERS: remove Philipp Tomsich from ARM
+ ROCKCHIP maintainers
+To: Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <u-boot@0leil.net>, u-boot@lists.denx.de, 
+ Heiko Stuebner <heiko@sntech.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Philip Molloy <philip.molloy@analog.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,36 +124,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It's been an honor!
 
---P8vv2dwLoXUkjkja
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Cheers,
+Philipp.
 
-On Tue, Jul 07, 2026 at 06:09:26PM +0200, Quentin Schulz wrote:
+On Tue, 7 Jul 2026 at 18:37, Tom Rini <trini@konsulko.com> wrote:
 
-> Kever has been pulled into different responsibilities at Rockchip and
-> this means he has less to no time for his maintainership in U-Boot as
-> has been seen for about a year now. Let's try to improve the situation
-> and have Rockchip-related things merged again by adding myself as
-> another maintainer.
->=20
-> Signed-off-by: Quentin Schulz <u-boot@0leil.net>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---P8vv2dwLoXUkjkja
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak0rbQAKCRAr4qD1Cr/k
-Ci86AP9mu2EwxtyrbQrwgkNyXHOGFuSyJaPlMLl/JgFaQNs54QD/VAu7PNr3ub0G
-/3izvA6fESDOL+ab0/ck3cowItHE7ww=
-=id7C
------END PGP SIGNATURE-----
-
---P8vv2dwLoXUkjkja--
+> On Tue, Jul 07, 2026 at 06:09:25PM +0200, Quentin Schulz wrote:
+>
+> > Philipp hasn't been active for years so we thank Philipp for his work
+> > over the years and update the MAINTAINERS entry to reflect the reality.
+> >
+> > Signed-off-by: Quentin Schulz <u-boot@0leil.net>
+>
+> Yes, thanks Philipp!
+>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+>
+> --
+> Tom
+>
