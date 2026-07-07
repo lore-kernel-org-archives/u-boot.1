@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2700C43458
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5320CC43458
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jul 2026 16:38:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BD8984A90;
+	by phobos.denx.de (Postfix) with ESMTP id 5E6A784AA1;
 	Tue,  7 Jul 2026 18:37:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="UsRHK2e4";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="XOhf0djY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B846584A5B; Tue,  7 Jul 2026 18:09:45 +0200 (CEST)
-Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
- [IPv6:2001:1600:19:8e30::8fa9])
+ id 0D81F849BA; Tue,  7 Jul 2026 18:09:46 +0200 (CEST)
+Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
+ [83.166.143.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48339849BA
- for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8771484A0B
+ for <u-boot@lists.denx.de>; Tue,  7 Jul 2026 18:09:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQG24jxzZ4;
- Tue,  7 Jul 2026 18:09:42 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gvmQH0fW8z1BR;
+ Tue,  7 Jul 2026 18:09:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
  s=20231125; t=1783440582;
- bh=Bc6GTahNdoCPZHUsL90w2pjpqHymQYC0QRsQdO0Lp7I=;
+ bh=oewB5eUy3KZooOQOxoqNafi8wKK9pv0BUGLMr/O5JbA=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=UsRHK2e4TTr0l89BCbiR137Yyrz8Er/53ZWX6wBPW6fR8R/I2cWXcddIWgHUtIESi
- CffRz6S0U8KgsEQWzLNnwB582teyvhNLG4E7wyvAdxeR4oDIAPkB2oCoewFeBX+X26
- NQAvvub4w6/JooU5ukKPttw+K+NqH3PTrArmL95LTguXkVybkySJ7JocjxxHeDUr12
- NAZs90TdRDYjU55vnP5/ZDj6H8lvt0+/OWYgyGpDcy5cKcQF1Ogr9CrMUMXxW1xwwg
- nmQjdFoWmngrIHp8UTmcjQf0bgOUtY5jcIPej8QQVjyO9tgy/KleYn00j9PYiAaTY6
- 9IX9xZje48ogQ==
+ b=XOhf0djY2WNe7XrFz6MtQ4iaychZMFj/xXzIptgLX7i0tOFD2QvjINggMNTQIYhBC
+ Bnt3ksv7Phcm6Cxe2/LLlAoJIM25q8H9Mcy7si6u1WkwdRqjMbQ7A6tLDSPdJ7Ifwe
+ vR1XjJ8Dlg1XJbgM5wrERMP7R5B1oZWRcuI+QqvN4c33ARuIi5+SVt19uDV1rJdw1V
+ ug+oV7Zsdgo0KGqtEefJzqH1VgXrh+ch9kaES6fHNtHDwqAQu1CkOo9G+L3pGQsmyM
+ /ySrnTT26R4t85DHodl0QdktkMd4wP84sXElPzSJspk03kC+pJ92L2BvJ1Zt1C5sR1
+ YeEaZT21J18Eg==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gvmQF2MBNzZdw; Tue,  7 Jul 2026 18:09:41 +0200 (CEST)
+ id 4gvmQG10F5zYyG; Tue,  7 Jul 2026 18:09:42 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-Date: Tue, 07 Jul 2026 18:09:15 +0200
-Subject: [PATCH 01/12] MAINTAINERS: remove redundant entries for ARM ROCKCHIP
+Date: Tue, 07 Jul 2026 18:09:16 +0200
+Subject: [PATCH 02/12] MAINTAINERS: add rkmux.py to ARM ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260707-rk-custodian-v1-1-dbc9c696e613@0leil.net>
+Message-Id: <20260707-rk-custodian-v1-2-dbc9c696e613@0leil.net>
 References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
 To: u-boot@lists.denx.de
@@ -82,61 +82,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ARM ROCKCHIP entry already specifies an N: rockchip so we don't need
-to repeat a path with F: if it has rockchip in the path, so drop it.
-
-Note that for some reason get_maintainer.pl doesn't return the exact
-same list before and after this patch.
+It is a tool to be used with Rockchip SoCs so let's add it to the
+MAINTAINERS entry for ARM ROCKCHIP.
 
 Signed-off-by: Quentin Schulz <u-boot@0leil.net>
 ---
- MAINTAINERS | 15 +--------------
- 1 file changed, 1 insertion(+), 14 deletions(-)
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 45e9076de671..e2c78ce39161 100644
+index e2c78ce39161..6f52fb76fede 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -574,12 +574,10 @@ M:	Philipp Tomsich <philipp.tomsich@vrull.eu>
- M:	Kever Yang <kever.yang@rock-chips.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-rockchip.git
-+N:	rockchip
- F:	arch/arm/dts/px30*
- F:	arch/arm/dts/rk3*
--F:	arch/arm/dts/rockchip*
- F:	arch/arm/dts/rv11*
--F:	arch/arm/include/asm/arch-rockchip/
--F:	arch/arm/mach-rockchip/
- F:	board/amarula/vyasa-rk3288/
- F:	board/anbernic/rgxx3_rk3566/
- F:	board/armsom/sige7-rk3588/
-@@ -590,25 +588,14 @@ F:	board/mqmaker/miqi_rk3288/
- F:	board/phytec/phycore_rk3288
- F:	board/pine64
- F:	board/radxa/
--F:	board/rockchip/
- F:	board/theobroma-systems
- F:	board/vamrs/rock960_rk3399/
--F:	drivers/clk/rockchip/
- F:	drivers/gpio/rk_gpio.c
--F:	drivers/misc/rockchip-efuse.c
--F:	drivers/mmc/rockchip_sdhci.c
--F:	drivers/mmc/rockchip_dw_mmc.c
--F:	drivers/pinctrl/rockchip/
--F:	drivers/ram/rockchip/
--F:	drivers/sysreset/sysreset_rockchip.c
--F:	drivers/ufs/*rockchip*
--F:	drivers/video/rockchip/
+@@ -594,6 +594,7 @@ F:	drivers/gpio/rk_gpio.c
  F:	tools/rkcommon.c
  F:	tools/rkcommon.h
  F:	tools/rkimage.c
++F:	tools/rkmux.py
  F:	tools/rksd.c
  F:	tools/rkspi.c
--N:	rockchip
  
- ARM SAMSUNG
- M:	Minkyu Kang <mk7.kang@samsung.com>
 
 -- 
 2.55.0
