@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711C5C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF132C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52BB084A12;
-	Wed,  8 Jul 2026 22:37:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94EF18496E;
+	Wed,  8 Jul 2026 22:37:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="Rou2dbk4";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="c8xGuaoh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 381D784A51; Wed,  8 Jul 2026 22:37:26 +0200 (CEST)
-Received: from mail-106111.protonmail.ch (mail-106111.protonmail.ch
- [79.135.106.111])
+ id 4F5E584A67; Wed,  8 Jul 2026 22:37:29 +0200 (CEST)
+Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch
+ [79.135.106.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4A508496E
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A913684A1D
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783543039; x=1783802239;
- bh=wfPaxdhMgu6ngSXG05iNg5pj0ZEadvu4Su5WcEC4TgU=;
+ s=protonmail; t=1783543042; x=1783802242;
+ bh=4Hp0omT6Y+mkNUdwYsnMOcDS80uvXfzEwSDCQHxZKfM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=Rou2dbk4INqP8kvfDu6Mbmkc7TbyjS7K3YYB0iTQtq+c3nVuuwb535nyqo+nEiAc5
- Ija64DSba8y37aGuvx07XciGtd7NR1HXHSTEVEowqdi7CNbJt+PozXobOTw7Il3S77
- rvOwWYrqxvtLIrJHG1XANHGgJ5fdgIbqDWkEkgtboIwZtYC1zNof81d+xfc6u9UYUt
- bIK5EmYx8AV4kz554k/mlFtH1eIuDmtkHtUAo7DHTmNkmzIU6w27C/mS9VrYnTqaq/
- bW/epgC59uQR5CVMmMhZ4zACPL+kzMLhTB+sezRQ/BjTEy3mTg4PkK9kUk4c4pKviq
- 8QPstvZbvEV1Q==
-X-Pm-Submission-Id: 4gwVJZ1VDjz2ScND
+ b=c8xGuaohfVa9tUQJjC+L3cgh6eNUnBomf8BPFx/eCXs8uQzXHaSkqQfbN9oh7rzYr
+ BxmJGpgqvezKjx/LdUXKOhdUvkOdNFcoqpJ0qWXVUa50T139/GXSY4uWf06XAxKxo1
+ A96m+X/DO/okx0bOHKJRyf1Zm0vJZetAsNSgTsfLN5nEoeB80FGfsZPIEiqJ4jOjMq
+ poiChfFO58X2HVlTN14e/cgh2aSvkdTQtrPZmDs/EHxLBAo8tzRaMYpcnv76rl6GDC
+ 1pMbw79onCbt8ORbqYElMd3/bwIH4VweLGkmLGznV1XddMcDIJk1mVaqZ94keAlW++
+ gjSeHaAhGASLw==
+X-Pm-Submission-Id: 4gwVJd1mcCz1DFTT
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH v2 01/10] sh: clean up asm/string.h
-Date: Wed,  8 Jul 2026 22:37:02 +0200
-Message-ID: <20260708203711.849489-2-rv@rasmusvillemoes.dk>
+Subject: [PATCH v2 02/10] string: correct prototype of strchrnul()
+Date: Wed,  8 Jul 2026 22:37:03 +0200
+Message-ID: <20260708203711.849489-3-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
 References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
@@ -66,92 +66,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-First, remove the !__KERNEL__ block, since U-Boot is always compiled
-with -D__KERNEL__.
-
-Second, remove the mention of the non-existing file
-arch/sh/lib/strcasecmp.c and the redundant declaration of strcasecmp()
-If sh did have a strcasecmp.c file, presumably the header would have
-had to #define __HAVE_ARCH_STRCASECMP.
-
-Third, remove the explicit #undefs of various __HAVE_ARCH_* and
-redundant declarations of standard functions, which are anyway
-declared in linux/string.h. In the linux source tree, those are all
-#defines, and indeed linux does have asm implementations of those functions.
+Both glibc's (where this originated as a GNU extension) and the
+kernel's versions of strchrnul() return "char *", not "const
+char *". That also makes it consistent with the standard strchr()
+function.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- arch/sh/include/asm/string.h | 51 ------------------------------------
- 1 file changed, 51 deletions(-)
+ include/linux/string.h | 2 +-
+ lib/string.c           | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/sh/include/asm/string.h b/arch/sh/include/asm/string.h
-index 999febcb6b7..12a9a8f796c 100644
---- a/arch/sh/include/asm/string.h
-+++ b/arch/sh/include/asm/string.h
-@@ -8,8 +8,6 @@
-  * from linux kernel code.
+diff --git a/include/linux/string.h b/include/linux/string.h
+index 850356d7c3f..488a459ed99 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -63,7 +63,7 @@ extern char * strchr(const char *,int);
+  * @c: character to search for
+  * Return: position of @c in @s, or end of @s if not found
   */
+-const char *strchrnul(const char *s, int c);
++char *strchrnul(const char *s, int c);
  
--#ifdef __KERNEL__               /* only set these up for kernel code */
--
- #define __HAVE_ARCH_STRCPY
- static inline char *strcpy(char *__dest, const char *__src)
+ #ifndef __HAVE_ARCH_STRRCHR
+ extern char * strrchr(const char *,int);
+diff --git a/lib/string.c b/lib/string.c
+index 37ea8c29561..a76dcd48d20 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -263,12 +263,12 @@ char * strchr(const char * s, int c)
+ }
+ #endif
+ 
+-const char *strchrnul(const char *s, int c)
++char *strchrnul(const char *s, int c)
  {
-@@ -81,53 +79,4 @@ static inline int strcmp(const char *__cs, const char *__ct)
- 	return __res;
+ 	for (; *s != (char)c; ++s)
+ 		if (*s == '\0')
+ 			break;
+-	return s;
++	return (char *)s;
  }
  
--#undef __HAVE_ARCH_STRNCMP
--extern int strncmp(const char *__cs, const char *__ct, size_t __n);
--
--#undef __HAVE_ARCH_MEMSET
--extern void *memset(void *__s, int __c, size_t __count);
--
--#undef __HAVE_ARCH_MEMCPY
--extern void *memcpy(void *__to, __const__ void *__from, size_t __n);
--
--#undef __HAVE_ARCH_MEMMOVE
--extern void *memmove(void *__dest, __const__ void *__src, size_t __n);
--
--#undef __HAVE_ARCH_MEMCHR
--extern void *memchr(const void *__s, int __c, size_t __n);
--
--#undef __HAVE_ARCH_STRLEN
--extern size_t strlen(const char *);
--
--/* arch/sh/lib/strcasecmp.c */
--extern int strcasecmp(const char *, const char *);
--
--#else                           /* KERNEL */
--
--/*
-- * let user libraries deal with these,
-- * IMHO the kernel has no place defining these functions for user apps
-- */
--
--#define __HAVE_ARCH_STRCPY      1
--#define __HAVE_ARCH_STRNCPY     1
--#define __HAVE_ARCH_STRCAT      1
--#define __HAVE_ARCH_STRNCAT     1
--#define __HAVE_ARCH_STRCMP      1
--#define __HAVE_ARCH_STRNCMP     1
--#define __HAVE_ARCH_STRNICMP    1
--#define __HAVE_ARCH_STRCHR      1
--#define __HAVE_ARCH_STRRCHR     1
--#define __HAVE_ARCH_STRSTR      1
--#define __HAVE_ARCH_STRLEN      1
--#define __HAVE_ARCH_STRNLEN     1
--#define __HAVE_ARCH_MEMSET      1
--#define __HAVE_ARCH_MEMCPY      1
--#define __HAVE_ARCH_MEMMOVE     1
--#define __HAVE_ARCH_MEMSCAN     1
--#define __HAVE_ARCH_MEMCMP      1
--#define __HAVE_ARCH_MEMCHR      1
--#define __HAVE_ARCH_STRTOK      1
--
--#endif /* KERNEL */
- #endif /* __ASM_SH_STRING_H */
+ #ifndef __HAVE_ARCH_STRRCHR
 -- 
 2.55.0
 
