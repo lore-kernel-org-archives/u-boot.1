@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FFCC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 18:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37ABEC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 18:09:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1510284A5D;
-	Wed,  8 Jul 2026 20:09:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3A80849D2;
+	Wed,  8 Jul 2026 20:09:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BuBWbCV6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MZGyNCDg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33DA8849D2; Wed,  8 Jul 2026 20:09:27 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 06BD384A0A; Wed,  8 Jul 2026 20:09:49 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8685D84A4A
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 20:09:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E848E8497A
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 20:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-448b69cfc6dso440007fac.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 11:09:24 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7e6b5737bb2so100129a34.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 11:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783534163; x=1784138963; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783534185; x=1784138985; darn=lists.denx.de;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=o56qeFkcha6n/98aSR9nU6uf4a/EC2z4nnbSnkO9/ec=;
- b=BuBWbCV64RKXeDTascL2paccuj80d7sq0rKjcN31HB+3M5a0M5hpJ15bqLyMFVnTmF
- d6t0NgrFf/qWIHXURbv17BdopkxvXZs6Df43yN7QgZhxByR4oDSesJsMP+MnZvHTn2zP
- +ZrEWRq4UsoXF7HOvUYvO6MBuisqO3jRubp3M=
+ bh=LuIGdyg4f+BaRMdtCq/0KBICpEVJ0wSH9zRg4Juk7Gc=;
+ b=MZGyNCDg7DxKYG6oVlPNBPJOaRsaXtZ7Qi+myI7bInLIU7TtGz6nhbBNwZyOa/8NSH
+ juxZHO5KtUu4GAfz887FZ2dpUjwwV7oJ9aguZBF2c9dm94QQvJeI67xUVtduSNdFBwmF
+ ryVkM6L6hUnnMuNqkgjKlvdzvmlf7z1DcACOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783534163; x=1784138963;
+ d=1e100.net; s=20251104; t=1783534185; x=1784138985;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=o56qeFkcha6n/98aSR9nU6uf4a/EC2z4nnbSnkO9/ec=;
- b=FtrNZrYsyZwlWKLVzPOCk4CrADQQ8wRLcYirWhbkKGJtphSvVLh+Tq/5ZN96SzoUzT
- I+KwdlzUHmtosztGxUml/DcTI8v+BzhXCaYHg9A3UhJ69MYO1px1gGYyIygR80RcCktf
- 7OKCYuyamMvUztz72MqSSKLyTuxVAV2dOdp/OcESQYtf0QmINnWYWxo4y2F1CR2UeJvX
- BfPgF0+KMVjgoPO43iaawo+54qyl/OEB3uU4sNS0kGFDYXKQUkgcQ0J7NslxVUFCOkCK
- /9BCnwxI38pBH3cPsLGDq82QQAJxpffjZQe4uDabAW3KU7sVdW8INfNZ2sewDhuZF01l
- 35fw==
-X-Gm-Message-State: AOJu0Yz4sb4p9PV2l4RAMKFtW/KAv1CshwkB2Gsw358q6v2u+JW/Z7Pi
- f6+lEGu0t1fWNrH4ZnwVTtN0AWBKG160iLl/or+JPdtbVqjHOVLNb9Coyrwhj7y7IWE=
-X-Gm-Gg: AfdE7clJNdmpjQeYAm01247tIXRHkBLowrlxjHb+8PWu2Hwv5XF5mXZ49fSvZvK3cJt
- Osf22BrNfOH6N6OVuPy84Zl5fSOpO8r0d4bZ2VBByOSR0YY7HwIxRopXb+N+poJafJJPKOdEyJj
- 31fnuR/BX2Bgvy36GchK6xtbp9RYPZ6UFCI2k6bx37SIIzXllXZQXhXdKUpSLZOKaeRfdbImfW2
- soNhrabzbgy7L4Jfd2Nbjyik+3t9aOF8OlYg8oFiyqgA/qwwmBb7eXi5twND7pLAoUT1rvOr2UP
- JYBwIzScaON4VAttc7ebt104/rNbULmuttWTCF6v5zH02E0tm80c1rixBmszC053RAsXS3QKol1
- UXnltXMEOdhHnm0uWy0orqviODv5nLcFxLoiBfanLY8d62lEJ4g5BNm0x242k4PHsqcfDvLwnh9
- nTCst1JQoc9xuNJ3Qpq7YYathrWRYUJ7qSfuFYAUXAQfcwDAUEJdZ/TeOM15e6YXFbEGLcftPQJ
- 2rNq+YHT6XBtRgFJjQVGxRK/GlpIj0WtU/CGw==
-X-Received: by 2002:a05:6870:47a2:b0:448:b149:eb09 with SMTP id
- 586e51a60fabf-45163c20befmr2333264fac.21.1783534162946; 
- Wed, 08 Jul 2026 11:09:22 -0700 (PDT)
+ bh=LuIGdyg4f+BaRMdtCq/0KBICpEVJ0wSH9zRg4Juk7Gc=;
+ b=VeqGWprwdPnNZWlEmGpL5wn1ynENQumvlu+GQsZN3bFifHcQx6rRG01SFAKsUnprwB
+ nUEluYsYc2/wO1hlVQM4eilb5Bm7835oUqH1ZIooa7XuX338/bHGMHTDSowLNxtD/a9t
+ 2/s9K9ryif4uJXzDhlOh3eyOcSj5glylss8Y/MPJaggnSFvmTVPOr7+1y8Zroig/1Vz5
+ DbWeIhgbOVfXK9Mh+B/uIleJ5eU+A4zW5fthDCSgb1UnjxRpfIrswzWhCrZi/DsUe/kT
+ htXiybqaZ7PUUQhay7AvLCEBhYDPoiLYZLzZzijPTA++6UykB5N9DiXXI8kKzDktr3h5
+ vOew==
+X-Gm-Message-State: AOJu0Yy+H3hmvSB1216zvtXRiR2ceVqiHl8tFmbk2lebQPSOzLQ5jwq5
+ TBF574kBP3ToyRfiJ0N2rJD0gVCGyICMahEb38NUJJ3j1XTRVG6Dm0icXzStlqhBo9I=
+X-Gm-Gg: AfdE7cmzqPJdTqbIAioYDxJSkuB6sYmoYgTp/mFJFyUU2PBJheGucB2MziC35XCEf0+
+ EU3HD6fDKrFXY4bdpkbaVy3SmKXqkxh9vDugfF/j+zvAvZJZ3yT9wBC0P41y95G9jxsbR4cFMi2
+ dhe82x7ni4/aK8XTT0+Q41tay2QZbWy74NSpw50EecUvf+rQ82ipK6AaXrKLZSYPzmKtoFw8IHV
+ nNYiICLFP8EppEHGb0zmzxfoJlUQZF+tRk4TyunnNb3oJ36D/xmiNhMHcYzzU10GZ4JahUhgy2r
+ S6aV4Q9pCCQyJ3MVmSA3QbSnBjh3V6JKkeLdDlWto6i1rAJ3DLrMiv6tGV861O3Ld6nqSj3g62f
+ tZhSk0+8tGWEKQAPO+oc42ISJkTA9BIZeDQDLFYNTDN4ujLkus0i64P5TmrkZbqcZ9EX2l3kZ5S
+ HCcjP25GF62vic1YQulehuhldFG4ZZilim3yz3TdLfnOvb/VEUGo2znF8Ea9HvYDLKuEZP4op9T
+ 90vL9mVHcuo4QiJ/HiOzNZKwmH5Jyzhjqm18w==
+X-Received: by 2002:a05:6830:2e01:b0:7eb:21d:70b9 with SMTP id
+ 46e09a7af769-7ebd02e3e6bmr2259652a34.22.1783534185721; 
+ Wed, 08 Jul 2026 11:09:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb13c9efsm17484958fac.4.2026.07.08.11.09.21
+ 46e09a7af769-7ebcae1ddb8sm2397394a34.6.2026.07.08.11.09.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 11:09:22 -0700 (PDT)
-Date: Wed, 8 Jul 2026 12:09:20 -0600
+ Wed, 08 Jul 2026 11:09:45 -0700 (PDT)
+Date: Wed, 8 Jul 2026 12:09:42 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
  Simon Glass <sjg@chromium.org>, Tony Dinh <mibodhi@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 1/3] doc: CONTRIBUTE: use internal link instead of
- hardcoded external URL
-Message-ID: <20260708180920.GE749385@bill-the-cat>
+Subject: Re: [PATCH 3/3] doc: CONTRIBUTE: explicitly list tests and
+ documentation as welcome contributions
+Message-ID: <20260708180942.GF749385@bill-the-cat>
 References: <20260708-other-contrib-v1-0-8b3bd4d265ef@cherry.de>
- <20260708-other-contrib-v1-1-8b3bd4d265ef@cherry.de>
+ <20260708-other-contrib-v1-3-8b3bd4d265ef@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s90UEhEyIAjdGbGT"
+ protocol="application/pgp-signature"; boundary="jNqGPYKOJI/4roor"
 Content-Disposition: inline
-In-Reply-To: <20260708-other-contrib-v1-1-8b3bd4d265ef@cherry.de>
+In-Reply-To: <20260708-other-contrib-v1-3-8b3bd4d265ef@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,20 +104,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---s90UEhEyIAjdGbGT
+--jNqGPYKOJI/4roor
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 08, 2026 at 07:21:13PM +0200, Quentin Schulz wrote:
+On Wed, Jul 08, 2026 at 07:21:15PM +0200, Quentin Schulz wrote:
 
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >=20
-> This way we don't need to make sure this link still points to something
-> that exists, as Sphinx will enforce it at build time. It also has the
-> added benefit that if someone builds the docs they will point at their
-> docs (though that is debatable whether that's useful, but at least you
-> stay on the same website).
+> We don't have too many people looking at those at the moment, so having
+> people getting into the project by adding tests or documentation is I
+> believe a good thing so let's encourage those specific contributions.
 >=20
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
@@ -126,15 +124,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---s90UEhEyIAjdGbGT
+--jNqGPYKOJI/4roor
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak6STwAKCRAr4qD1Cr/k
-CoKHAP9D5MTXMaNngy0wklHUIN9MvaPHCAsTgmT0iZUfBEJxWwD/SDK6pEa011DY
-5nhY1nSM822rckPM5dPEMxpPrq+uUAg=
-=AcX8
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak6SZgAKCRAr4qD1Cr/k
+Cj0AAP9ix7CRL2S+eA/T2f3+XOSfOZrYU3JXEXe2OQdTYp/cbgD/QRih/KIuecqe
+d17db01YfRRbi51buk5YC05iTUkjIwk=
+=/ui2
 -----END PGP SIGNATURE-----
 
---s90UEhEyIAjdGbGT--
+--jNqGPYKOJI/4roor--
