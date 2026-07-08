@@ -4,99 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4270C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A38BC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:27:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 479B48496E;
-	Wed,  8 Jul 2026 18:26:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03AD68496E;
+	Wed,  8 Jul 2026 18:27:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bHUHuVpt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eiNzRXQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F352849D2; Wed,  8 Jul 2026 18:26:20 +0200 (CEST)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id 75E0E849F0; Wed,  8 Jul 2026 18:27:52 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0120B843B6
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:26:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D7F2843B6
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:27:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-7383cdb7800so774258137.1
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:26:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783527975; cv=none;
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-7370ea43b9cso14359137.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:27:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783528069; cv=none;
  d=google.com; s=arc-20260327;
- b=nbl2Rd3Y0v71VsGurnrcvnRAdRLDnuahXB1IAiO3a9643P+bK4VzCLxnnYtwRMOoof
- BoqloQtc7xrbSTIVbvqABRFLQruFIvzEoNx7L6SceJaCf5sSkgAcS32mcCajagp4CZPA
- jAk2/dkURp2ILZhjCSZw16Re2W5VdAdEu/hvRqvN947POwmUf1PWjj2BgvySncGjmKBw
- BCB/YXWVcaozTdfnnubd2BYAXHnUpb1UZ0ruZ/jC4KxLpvudU5ofY6a9zkVqy0DBjV78
- uIP2yZ13a0wkAfxZYdMHY8hBypzLIEkeYT2sj9PZg3n++v0jO3CJTYtJKHrKb71xnRuS
- 7Oeg==
+ b=CJVGXb9LgpVqF0+AUIspAIzuP5xtuam+XoEQ8y4ApI7Nro8SlawTzNRVB+fgsmkLvY
+ A9nR71JV1WJ1sRZQlxSuGJwVEzaAJCmJoQGGpN3IEP17Ho3YRYesDDcYqefWKvCBm+1Q
+ ld2fp+LDjWZsQmI1YSo2ScDbzBcn79ROaBYrIWDnLgtanjbCnUNo6vdJQ0r5JpbFTvIn
+ idh2BsvPdMu9ZcaAspAPDp/EKLEWoy3i1bg9m27O35i/DYIUTAeIqJk0O83zI8Y0Kgym
+ sQjRmHt1KH6G9wMa1yhJJs2OZtaMrgkAu5Xat47QyjXgSNASyCLsPpqI0xI0Q2plyUwk
+ LoVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
- fh=SocK4OiObrDE01rf4A/mD/sAU8tp2xGapfK+9vDyWYA=;
- b=ByFAstvROAMTiQbelwht3Ix+kh8Dkk3O1//5ebnTLdQDAVqt5q/C0IfuoLx5kodF30
- TAvXN+p6+7Zln1aTobZpLUu9EBySclUtC5YEEdGIYPbYpUudjXtR0kNat61SUlxHkFZg
- DLErnzJpFLCLQR/rTTnxA2wbO0Tnup4YM9x5X86dou369QOMaOKlvqE67nZEevUittT3
- JDWfvrmFV1gYfgo4PkGQG4Gndw4c6GZu0BeR4N2xkXVLzSnEiV/mR1VzrsyiXHhlp2Db
- 5yUtX3B26Y+aVhGi2acwBQy2MNoSScGn4Ff76uOBbZPjv4ePVPjT6HKVosbtmpycZR0x
- cHBg==; darn=lists.denx.de
+ bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
+ fh=LZbEPCewkc/qeyFMw6h0MLrH/Dob+uA1NY7zcWWyQgk=;
+ b=R+nbRgjqSAr3SdYU8cKe1twraMXyuSqsfNurh7QDC4Eh6hz581UfOh47P5Ftgj6PpH
+ M1eHjKUoql1U9rP+6nVDI9cbw8QxLuLizfpeFD9kvy6nBodhoT3dluO6KJeZp1PWuU6Y
+ zIl8QmvhUDPSJAQxQKPGLAavf5egtyA8TVbHl/vo4S3qGeHIusTyQ334+geVcT3tZyJR
+ ZwJ9T/ac3PbVG9aX6BesYU3+iZdP1YKF1n0XNq8c4kLeFeCCYyJocnhY44W4yMb5rKw+
+ APzikmTIe1kN5NMpwsWq9mVeV4Lj0taMVQfxj37bkkjlnVjnuVTBdrgtyQrQ/AdZ2h8R
+ h+Jg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783527975; x=1784132775; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783528069; x=1784132869; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
- b=bHUHuVptlAemjHoHf84MDl3HB6ri+7NLoK3ZthdhhL3UuCR/eoRzgUuGEMFzgWzZWc
- UizDu8lumAfqhdRGNfxNtPuKf9/iN7jZXCr+xuQGdXIg/rqMseGnoPAAdALeqlV22V9Y
- qYrkg+FdfDrbf5suWgo6SVagkVoybCtxxCoQzgJLEFFWEVYFcSbzUhfRqlfE+81qW8GC
- NAsiZs3270+04v7biU316XN7IXxYfb2SEqA3wsBOBwaAcNUCiapLQn8Y98uItUTbf9b1
- gDGEQY0BRNj+sddKGN3m1+T1sZGHBXSNNdWp2BWiyFZVz+Fhv3qA6RvIHD4ykF6aQDMs
- hYpQ==
+ bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
+ b=eiNzRXQprvZzhb905A94yDLisd/MGwQA3MdFrKhFFPRgbW7vWa1KpkDRjONP6l7f8f
+ X2GEkPcoPCJeNbKqfLrM7I3uj/qkhoLv8R82OETJGST9MDwghOjrKZHz+GI6CFH/A3tq
+ X9Lrsr3WwD+GHQ7VDsHZK8IrxYhk2cYxdgPZE9ipXdJ5nEnOB01/2zJTT8EzbXmxCZky
+ PZ7yitjy1lKjztSL6FrPsOxrEU094YAF5+Ffk+GBhUYQQ5uyGQgT41j0Z6mlU1A/diQK
+ aH/9ydwG8gna2zeOGb0Gtdol8t/fC3IUo0Wp6uZxW69oJIYG7QfSuIcJFysQ4kgSt5tW
+ xpqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783527975; x=1784132775;
+ d=1e100.net; s=20251104; t=1783528069; x=1784132869;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
- b=WZpNuWFTjXva1xgQQyYTz4Mwc6tJwYQa4e1M4MR1ItQhg/JHS4X96zySXqnsEUl5+q
- vilwaUh3y2redOomNW5NpeUu60FBD0pxjsTjmsMfgdBCUQp4PVs0eOE6RjqPoLrZY63G
- ctN/7NuIVM6HqsgvwH38uFxnEqgIBbrcWE1FiRFsUxdEfBD0yeqLrSRfp8TxUaXnTJ4I
- tNlfRE/BT18pTR1Hgi0b6mRUWUb//AtdARreTwtuz9A4I/xqaCJolchbuvWb9zOAjya9
- wT2niF7h4chttJCcy1F7lWmMUGaN2PMGOnR1drBFLXmhfvqeB1qoUxBV4yPoAGcSfLHA
- +TUA==
-X-Gm-Message-State: AOJu0Yw/jOQKGDFI2FhgDOO6gRS8XuFePa041Q8usxcayH9oNW414xbj
- yYdxVoIOOUGZ9l97oD+ogj7G6mKQWChbzK6n+K8Cuo5tJg7R/t/aYFrn/asMZKFxN0Y7uuD+L2W
- ZgCCjj9n2brO+53NraDz+6LwAY253r3pmv6WbsFc=
-X-Gm-Gg: AfdE7cmQu7jSlp18j38elWzEJ+i1Q0dGShr+lqpfJkfacPWH3v7wg6FstztDMSIJ/fm
- xglUe5rmRaPbIE4hrRoVpiyeOXzfy38czI923Gb4k1HqlWNcYU9DeslB40gwIXVyGWTvloJR22H
- DBE+LzePHCFEK8C8uP51+R7nipWyBIXuPbwshDsobAFmg6HK3AMBODLU8UIcw9/2/RQWiUMYM/J
- 6MHgvYCG5SjJsBt0FsOHki28e64c73qLDOUV4EajvntQO+gndtsPTh+iuPdnAVR8VonSjne
-X-Received: by 2002:a05:6102:688b:b0:631:ff40:22b5 with SMTP id
- ada2fe7eead31-744e0333f94mr1736582137.21.1783527975294; Wed, 08 Jul 2026
- 09:26:15 -0700 (PDT)
+ bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
+ b=KAepldkptoVMxJnrti20sTIV6Mkn8Fc/kMETwo8sKq0BpVe57yt11RugskTRZil25G
+ 7S4ay2bop0RkiTAFS1ja56yp0dZSmg4qphuS2MBLczdnc/p9owifISRNVlqz1QwLZpD7
+ ZH6HI8clDG4E1l1//W7bYX39YtjL5YRJXdu6U2HybTMIMq8mfZXHPGWz/41tjbWG+XIu
+ UM2dh+h2C5aDMhNfoENTBi2qMSsl/WkPc+14tLJ7n5v9lVmVu5O3UwggDHuzaCuS+U9Y
+ xkADbs8HCzPRxnllpXyqMdjJKw2B9dW7BkkrRzprsOMi1n94JDX/amNkm/UfsNj+9/lK
+ N9tw==
+X-Gm-Message-State: AOJu0YyV1Aq2Y0oK7gVDcPhoJYPPkrVvwUKxZ5DGK/u9H9m4cEwTh5t8
+ z2DUu85Uax2lWlOwbl3e2Hn7PKbl9tG27wnv/TsLv0JREyjzVBQhkK3qK/c1kU+YW2wJJ5+Z/6M
+ Q5DIiKgeQv/gKjHiHSV+9JhcgGx/Lhbw=
+X-Gm-Gg: AfdE7ck/57Z9aBDnxwZbemFfrw0dn0rokThbu64CtGJ4lnpcpT7tnQCf1HU34YLmYKK
+ hQhvwle7c5Y9FIVya3sU7PzACLAqYrAoBrre9FxjvFB4R3mSWVOUwgv1tqRiJgB+EGsALmj4HXN
+ CB57cM44bxtWm8ZPUQrxQiPvVzsh3NDPbSRKT8kkPKHOf12MdJQxIQXgA6UOY8Mxp87kHe/Ir1G
+ Ias2jJG0xvZz9NYGwAuh035EtObTij+8MzJ2+yBDdR+vbFXjchFu2oC26HEK67ZHyhJkBz76zN0
+ OdCcmkc=
+X-Received: by 2002:a05:6102:5492:b0:73e:bba6:bd59 with SMTP id
+ ada2fe7eead31-744dcbc8ce1mr1989605137.3.1783528068854; Wed, 08 Jul 2026
+ 09:27:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708013019.288985-1-trini@konsulko.com>
- <20260708013019.288985-2-trini@konsulko.com>
-In-Reply-To: <20260708013019.288985-2-trini@konsulko.com>
+ <20260708013019.288985-3-trini@konsulko.com>
+In-Reply-To: <20260708013019.288985-3-trini@konsulko.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 8 Jul 2026 12:26:04 -0400
-X-Gm-Features: AUfX_mwTZKx2q2l2tCH_CvtWXVxIFkzSh690XoQ7ohlDfqznnlTi6pu8lg7XCa4
-Message-ID: <CAMDkj5xfkpW4eRi-ZMC-SNG8-af5gr96Jv0-Jj4QwFNH5jwp7w@mail.gmail.com>
-Subject: Re: [PATCH 1/7] lib/fdtdec.c: Disallow overriding the fdt address
- with mandatory passage
+Date: Wed, 8 Jul 2026 12:27:37 -0400
+X-Gm-Features: AUfX_mya4w0x7hDlF8pvJLigV9juS2OYlwq_je6dCVsFMb5JC6iK6kMv1t1kGaQ
+Message-ID: <CAMDkj5zYbRL3u6iUKt11Kn+RqDGVMjGcAOpEWt9k-oSR8smy-g@mail.gmail.com>
+Subject: Re: [PATCH 2/7] vexpress64: Correct CONFIG symbol logic around device
+ tree passage
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, David Feng <fenghua@phytium.com.cn>, 
+ Linus Walleij <linusw@kernel.org>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -119,50 +122,84 @@ Hi Tom,
 
 On Tue, Jul 7, 2026 at 9:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 >
-> When we have CONFIG_BLOBLIST_PASSAGE_MANDATORY don't allow the device
-> tree address to be overridden. The device tree we're given is the one
-> that must be used.
+> When we don't have BLOBLIST_PASSAGE_MANDATORY enabled, then we're being
+> passed the device tree in some other manner, via OF_HAS_PRIOR_STAGE.
+> Correct our logic around which symbols are used to guard what is
+> generated / used and when.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: David Feng <fenghua@phytium.com.cn>
+> Cc: Linus Walleij <linusw@kernel.org>
+> Cc: Peter Hoyes <Peter.Hoyes@arm.com>
+> Cc: Raymond Mao <raymondmaoca@gmail.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  board/armltd/vexpress64/Kconfig      | 2 +-
+>  board/armltd/vexpress64/Makefile     | 2 ++
+>  board/armltd/vexpress64/vexpress64.c | 4 ++--
+>  3 files changed, 5 insertions(+), 3 deletions(-)
 >
 
-The commit message does not explicitly mention this is only for
-OF_BOARD. So I think we need to add
-"!IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)" to the next check as
-well:
-
-         /* Allow the early environment to override the fdt address */
- -       if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
- +       if (!IS_ENABLED(CONFIG_XPL_BUILD) &&
- +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
-                 ulong addr;
-
-Or, state in the commit message that it is for OF_BOARD only.
+Sounds good to me.
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
 Regards,
 Raymond
 
 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> ---
->  lib/fdtdec.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kc=
+onfig
+> index 49c7fda0b83a..a988c7198498 100644
+> --- a/board/armltd/vexpress64/Kconfig
+> +++ b/board/armltd/vexpress64/Kconfig
+> @@ -31,7 +31,7 @@ choice
+>  config TARGET_VEXPRESS64_BASE_FVP
+>         bool "Support Versatile Express ARMv8a FVP BASE model"
+>         select VEXPRESS64_BASE_MODEL
+> -       imply OF_HAS_PRIOR_STAGE if !BLOBLIST
+> +       imply OF_HAS_PRIOR_STAGE
 >
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index b91e067106dd..ecb22a58b964 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1856,7 +1856,8 @@ int fdtdec_setup(void)
->         }
+>  config TARGET_VEXPRESS64_BASER_FVP
+>         bool "Support Versatile Express ARMv8r64 FVP BASE model"
+> diff --git a/board/armltd/vexpress64/Makefile b/board/armltd/vexpress64/M=
+akefile
+> index b0dd1d0af879..5f9dc2af930a 100644
+> --- a/board/armltd/vexpress64/Makefile
+> +++ b/board/armltd/vexpress64/Makefile
+> @@ -5,6 +5,8 @@
 >
->         /* Allow the board to override the fdt address. */
-> -       if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> +       if (IS_ENABLED(CONFIG_OF_BOARD) &&
-> +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
->                 void *blob;
+>  obj-y  :=3D vexpress64.o
 >
->                 blob =3D (void *)gd->fdt_blob;
+> +ifeq ($(CONFIG_BLOBLIST_PASSAGE_MANDATORY),)
+>  obj-$(CONFIG_OF_HAS_PRIOR_STAGE)       +=3D lowlevel_init.o
+> +endif
+>
+>  obj-$(CONFIG_TARGET_VEXPRESS64_JUNO)   +=3D pcie.o
+> diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress=
+64/vexpress64.c
+> index d68da0e3d650..8b6b96d757d5 100644
+> --- a/board/armltd/vexpress64/vexpress64.c
+> +++ b/board/armltd/vexpress64/vexpress64.c
+> @@ -97,7 +97,7 @@ int dram_init_banksize(void)
+>   * Push the variable into the .data section so that it
+>   * does not get cleared later.
+>   */
+> -#ifdef CONFIG_OF_HAS_PRIOR_STAGE
+> +#ifndef CONFIG_BLOBLIST_PASSAGE_MANDATORY
+>  unsigned long __section(".data") prior_stage_fdt_address[2];
+>  #endif
+>
+> @@ -150,7 +150,7 @@ static phys_addr_t find_dtb_in_nor_flash(const char *=
+partname)
+>  }
+>  #endif
+>
+> -#ifdef CONFIG_OF_HAS_PRIOR_STAGE
+> +#ifndef CONFIG_BLOBLIST_PASSAGE_MANDATORY
+>  /*
+>   * Filter for a valid DTB, as TF-A happens to provide a pointer to some
+>   * data structure using the DTB format, which we cannot use.
 > --
 > 2.43.0
 >
