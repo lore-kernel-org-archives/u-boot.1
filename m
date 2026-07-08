@@ -4,88 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A9FBC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2604CC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DD298496E;
-	Wed,  8 Jul 2026 18:32:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A6BA8496E;
+	Wed,  8 Jul 2026 18:58:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="syigMnhC";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="jWJxJpjo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2016A84994; Wed,  8 Jul 2026 18:32:10 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 90B928497A; Wed,  8 Jul 2026 18:58:20 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA8FD843B6
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:32:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03928843B6
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-44cedfaab6bso384776fac.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:32:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-6a116bd18ebso469293eaf.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:58:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783528327; x=1784133127; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=HGSTqetAkZQp4IhGO/i+j2vOSb1iBNhFTxXfph817aU=;
- b=syigMnhCVpNr5fGdyy/WHgWqckZHZ6fwRMgPiRnmTEA8kEwj+3hGrjOJSwW1eZq7bx
- NBLTnkQCjVpNayaPIGq3urDTC86nzD7lZNQwM20h6jnRtD9Trg2PrMsLXA8RciYlWC+T
- 0GvU7DQdiBmmuHisgIOU6YfMH+6JqRJMSQJlY=
+ d=baylibre.com; s=google; t=1783529895; x=1784134695; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=PsCF+8fw34RcQvCqPGcjdeQsaGM7khvGg4NqjQlE+eE=;
+ b=jWJxJpjodBgwVEXHoqDd2skEjpPgrhHa9oIohCPBPVN/YzPG8rBw/5HJMCH4zLOuQW
+ P8D7zELA5O9s8oF7Hp+E9rF25ILsKnLXvVb1k57NJfLvZz6DJ2ZIeBlnDBsRBPJoWs/7
+ wOLbDYqageWoU06/LPHBDdkQ2FqdJWl84R7Duo23yD5Rkhe4uf7RFIanK4i77IuhGY11
+ jyiws6uM2pLAYMKBMfUMj7B8YxN/CpAXkzftiLgqNK9/wwbQRxA6F2AHiORIUgsP+gzN
+ R2oZskda6cXL1duyuTCY3DWGpTNePKBSao20eSrgXdfWFe4PpzNEtJ7q7XzMC8ZKyNhR
+ 3sEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783528327; x=1784133127;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=HGSTqetAkZQp4IhGO/i+j2vOSb1iBNhFTxXfph817aU=;
- b=YZP/H01ft5Aiszs2XeLQvrEAGO9z89Dl0hjS6P0Rdlq1oZGl/k/Ur72zSwZz9t+l4h
- l2wtxQ7La4ne1NVHgQ1NjW3fbpyqvwA1cR+5bP1YM/PpJIorzX5pykQ8GFwm1pSV8Prl
- jb6zoCIeQdGBtjkEllrQy1KdwV9yaJRmSfUF7WZHCyEGo7v0ZfrTiriNjYXmOO8J+kju
- 1ZSXYp7HXKazajfPVM1Mf43rwSWn6JhW0WCwrEyOUT66i0q8JntcvLcaxJkM0QxKURH5
- bmpOAhNAEtSrOQ1CAaMFIjdOqijUp8DPOB4/yOLf6wioIOT9ErN7Oe0q5FWMk/8nRPGA
- zd2w==
-X-Gm-Message-State: AOJu0YwRM+oKKoudKHdxIHdZZZ7OkPV9vQVGcm8Kh7ZiAnUVpI0zZH4g
- no8eYbXAgWVgfz7aPPx8Ik5KERxygd2wmZ18gqfuZId/bkJPIyJT58P9SDrxWbiSp5px1JXmzGq
- /69104JI=
-X-Gm-Gg: AfdE7ck5tA25i5+OrIRiNM3yWOM2UuXoEpQdw9+Oet+1dkQ7q4Dd6m5Z/1ws85CMGdr
- bF26FhXhWHySU9kf3dGzBinwXbSRc7u4M7K0vila5oVKFOFmS4n9YlZgCbshFrWRfMcdUv41/fo
- enkzMqatNk2SSoIfFv44T7J0o74ZyTizGSY+BrwcZFIsUPaXmrhj7nusOSM9850SoHga1vAvVok
- xnOtpLE5MsdMLVpB5fjV/Pmpesgf48JVSefv9JAcsbraPHgKr3hr/UE/uRGHhkvm/89ZHwsX4Q/
- 7sNFl3oLQ7upI8md03wSWmj/nFtU8qmLqUYyrEGw2bYRWOv4qVr8StPpDUaRxpNmhwDfwLzhVZp
- uhSxdoQ5+OeRovzLsqjH872SRotqC3RbE1MeQfRvv3zZiRAMpNMcS038UwWVZonpfBFS30fYtl4
- +Pt7iyEFYE3NzRnE82u4T8aW1Ssc0MVPoVb06ya1BdGlm/oCWa/dZQrbgQHl/VWwlNnWt/iT6Vs
- 3A7ER8LyFrIOf4u87v9cF1TzTYjCy6qG9L3lbDsy+9U89rE
-X-Received: by 2002:a05:6820:981:b0:6a1:7ceb:fec1 with SMTP id
- 006d021491bc7-6a36da64224mr2409477eaf.67.1783528326662; 
- Wed, 08 Jul 2026 09:32:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a36a83eb2dsm2145453eaf.10.2026.07.08.09.32.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 09:32:06 -0700 (PDT)
-Date: Wed, 8 Jul 2026 10:32:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 1/7] lib/fdtdec.c: Disallow overriding the fdt address
- with mandatory passage
-Message-ID: <20260708163204.GV749385@bill-the-cat>
-References: <20260708013019.288985-1-trini@konsulko.com>
- <20260708013019.288985-2-trini@konsulko.com>
- <CAMDkj5xfkpW4eRi-ZMC-SNG8-af5gr96Jv0-Jj4QwFNH5jwp7w@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1783529895; x=1784134695;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=PsCF+8fw34RcQvCqPGcjdeQsaGM7khvGg4NqjQlE+eE=;
+ b=gbAvYQyCzySfT9h7d/o5Jx34MblzQhU9CYGGbp3wBfMUeZnfb0Raq0lFCCAv3HEKFy
+ tD/lNlcEIIcaJCK0d7iDmv2DJ/BjSZ3qwwr1E4N6HYVc7iM3Ho7Axu89Swimd8wk7ZzQ
+ GvfkHovRcCrODIy3d7nYb5q//83OCjg5SW6zVenGXosv6Q6sl4J/WO8ZA+8w8hWbMTv+
+ TQL5EeQxGcVl4waVWupB5erRxAjbQKd3dAzg9yvS9zR6DZiqDWCXMDfePbGzKOar7YUN
+ b4SF/vjn1bAVq0JTgdHqxq03cGFqmCwaEGz5LyrZbgACPgMZB2W9sCTbrmnyvPJGcto7
+ PaLw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+5kAh36Z4CZyCsN4PoEiw9aiy1U6mGgne2JPYkJVTg1uNEoYdcl7AkcLG2ZeonMjLSpMf3ZvQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgoZU1x4uSurz6pARn3JKsm7h6caFOKc/05k0Rfq1bR3MN0xF2
+ 2N9+T8QBFyrf4selUJCHK7eJT0Ql/1FtFh9ihfnWjeNYcdvMoxb+kyL95ZQnxO/WPh4=
+X-Gm-Gg: AfdE7clUMGjzraG4jQ9voPx3TCx6tFt1iXjUq1FLusJx9xWXQ5r8VcYu+HxW5a2987v
+ X35r+hcCw7UX1Ws4lMWYL/I6ZFYEA2mQUeu1u+Gk+pYn5ZW9x1seeMT1XCIpfJjthfArrBEKQ4A
+ /vGPm47/zReKgk3/X/A71+LlpMddHIaQHiO5lZrFT3nrQvNEUQ8JreB12yv3KJHzCgezUoIFauW
+ qbBBSBwa+cuppoKdcWWgtbicLh1NGYPzyFqC5LY1lMj3miBvZZKHaoOXi6lmjHUVIzzGFZJKMYq
+ sJvjzqBAYEPorflgewuA0rcugNBDCsKITosR1ojisMtZVYlQsJpAOPfNWlQ/DB+QQ4OGISQsbK0
+ wEOSJB5TtCiM6ImE3MvEj26u8hGpOMiKMzSwadWbELkFwOg/SEP48M7AueouYvrsvJF5A6YK5O9
+ J8tthmUPs1KHyta3nEpzE0CKjdhKr0e5G0nD48ID6bSa9Pcwvuo4UGxvTGgDeWElg=
+X-Received: by 2002:a05:6820:c2c8:10b0:6a3:7761:b50d with SMTP id
+ 006d021491bc7-6a37761b6ffmr454259eaf.55.1783529895685; 
+ Wed, 08 Jul 2026 09:58:15 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:19a8:8ead:9ca9:cb30?
+ ([2600:8803:e7e4:500:19a8:8ead:9ca9:cb30])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-44cfb5db92dsm16767613fac.13.2026.07.08.09.58.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jul 2026 09:58:14 -0700 (PDT)
+Message-ID: <4aee0aac-f7e4-457f-8613-a2e7da6953aa@baylibre.com>
+Date: Wed, 8 Jul 2026 11:58:13 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0FDrHT5Wm+thY9/K"
-Content-Disposition: inline
-In-Reply-To: <CAMDkj5xfkpW4eRi-ZMC-SNG8-af5gr96Jv0-Jj4QwFNH5jwp7w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 19/24] clk: mediatek: drop parent udevice field
+From: David Lechner <dlechner@baylibre.com>
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com>
+ <20260707-mtk-clk-parent-lookup-improvements-v1-19-65d24cc0d569@baylibre.com>
+ <CAEHHSvatOuqzids0w1=OD29vYO4U1j_rypL3YVTNpMkEuxZVuQ@mail.gmail.com>
+ <38d99cad-1a5a-45ba-8e6a-8e7f501cd930@baylibre.com>
+Content-Language: en-US
+In-Reply-To: <38d99cad-1a5a-45ba-8e6a-8e7f501cd930@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,82 +111,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 7/8/26 11:11 AM, David Lechner wrote:
+> On 7/8/26 9:59 AM, Julien Stephan wrote:
+>> Le mar. 7 juil. 2026 à 17:10, David Lechner <dlechner@baylibre.com> a écrit :
+>>>
+>>> Remove the parent field from the mediatek clock private data structures.
+>>> This was no longer used other than debug prints.
+>>>
+>>
+>> Hi David,
+>>
+>> Looks like this commit is breaking mmc on me Genio 700 board.
+>>
+>>   Card did not respond to voltage select! : -5
+>>
+>> And then it fails to boot.
+>> clk dump output is equivalent to what I used to have on my Genio 700
+>> (without the parent debug print)
+> 
+> This is unexpected since in theory this commit should just be removing
+> dead code. I'll try to see if I can reproduce that.
+> 
+I was able to reproduce something similar on Genio 520. Apparently
+calling uclass_get_device_by_driver() has some side effect that was
+being depended upon. I will keep investigating.
 
---0FDrHT5Wm+thY9/K
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jul 08, 2026 at 12:26:04PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Tue, Jul 7, 2026 at 9:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > When we have CONFIG_BLOBLIST_PASSAGE_MANDATORY don't allow the device
-> > tree address to be overridden. The device tree we're given is the one
-> > that must be used.
-> >
->=20
-> The commit message does not explicitly mention this is only for
-> OF_BOARD. So I think we need to add
-> "!IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)" to the next check as
-> well:
->=20
->          /* Allow the early environment to override the fdt address */
->  -       if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
->  +       if (!IS_ENABLED(CONFIG_XPL_BUILD) &&
->  +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
->                  ulong addr;
->=20
-> Or, state in the commit message that it is for OF_BOARD only.
->=20
-> Regards,
-> Raymond
->=20
->=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Cc: Raymond Mao <raymondmaoca@gmail.com>
-> > ---
-> >  lib/fdtdec.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > index b91e067106dd..ecb22a58b964 100644
-> > --- a/lib/fdtdec.c
-> > +++ b/lib/fdtdec.c
-> > @@ -1856,7 +1856,8 @@ int fdtdec_setup(void)
-> >         }
-> >
-> >         /* Allow the board to override the fdt address. */
-> > -       if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> > +       if (IS_ENABLED(CONFIG_OF_BOARD) &&
-> > +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
-> >                 void *blob;
-> >
-> >                 blob =3D (void *)gd->fdt_blob;
-
-I might have to jump back to what the code looked like in January or so,
-to figure this out again. We never set OF_BOARD and
-BLOBLIST_PASSAGE_MANDATORY so this change here never matters. It might
-have been because I was doing this on top of the (now merged) rework of
-bloblist_init and bloblist_maybe_init. I'll look harder at this and post
-a v2, thanks!
-
---=20
-Tom
-
---0FDrHT5Wm+thY9/K
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak57fAAKCRAr4qD1Cr/k
-CudkAP44209JNXuczPaCXQdpXCdkpqKk+HkNMuwSSP3kwyeW3QEAtb8QxbIkQiBe
-ByluRsQRKpe+DFblsaokOQCibz5bkwk=
-=l227
------END PGP SIGNATURE-----
-
---0FDrHT5Wm+thY9/K--
