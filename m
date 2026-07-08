@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F541C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E969C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:41:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F216F84A04;
-	Wed,  8 Jul 2026 14:40:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4311F84A1D;
+	Wed,  8 Jul 2026 14:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="EVKiyNWr";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kgTT5dc2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A567849F0; Wed,  8 Jul 2026 03:13:07 +0200 (CEST)
+ id 6A154838D7; Wed,  8 Jul 2026 03:13:07 +0200 (CEST)
 Received: from MW6PR02CU001.outbound.protection.outlook.com
  (mail-westus2azlp170120002.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c007::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 104A4838D7
+ by phobos.denx.de (Postfix) with ESMTPS id 6DC1C84994
  for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 03:13:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chen.huei.lok@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mKqZzTz05+OIT0935ETSHxquMjNC5oO1gCnZsZ8wJFfmzIhOVaEBeBBwseinFMurSZAlZ1JaSlGc17FbTrE0ldGFXDUBm99n1ERIEkNV51JPkQX6lQVe760zJc3DJNm8p7KTRs2DLf1KIGCr7KuDvHbbwpHlCG2HNrVQdw99evT1flUW9L7E0RnLSAFCGa3QYru1Tks0n7pPWtgG/ZGwZlK9bJ86FqjtYBFQu6m0eTONsv+2dULrp98NGFXUETUicM9VzE1woXqhp8kl+wjZXMk/3pMOn7JprAg7w4BQ/t7rkf7XoZD0DyzQU0OSjt1x6EsN7VEYizz6dberp/Kf+Q==
+ b=tOVrPffgps8L7Jm9ZVZifqcW5H/3geULdNoJN99YYdic2r+ZB8AM8wu6qGhXico1WHbseFOl3zPgOr5gWwUxOOT3Glfh4V0+pN9nuwEoZZjSbSKI+Gw2nzEKHsMEO94qKQjAZ5X2e59ebTwyv182Km/7XoRQvUcSFjc5yUVapPToK6gETk5CH3avwDmDwZ40LQAcql0c1OkoAYoUIQ7CBWJrTlVhQOm7E6D3ksnoCl0whB4H+F9nr6EyNrp2WuWZ4LZnBQcVcN5Konk4x81nqtATGeTi5aHjFQnEa6sWwz2rfIuJ3JHO9j52dbOh+jXudTkYqhA0dOz65dZaKFySbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iDKwntztk2qhJBkX+VX4EQCe7yYX88AgI+vfsvAQXlQ=;
- b=JNCkcQA1AQ8ZY09YMxjmtFHm7SIy6dUDJqU25HaZFDjdSI2UYwPV/3tbR2jJwdsIbRFA5IT6lmQXVB88hmbDinTgadVnB6pbcJJEq8N9SM6Q75eGwei5IZ7GnqRH1+EgZXu0zHtj+cW5/IA39eov89Sx1d71uwh0XKxU12V9AToK3/0POtPBXPdSIYe/+mBVxeLaLGMpBY4OJmdxEiP6nhdimDWAssXJxVTStjKjOQjpz9WZDbUM2wpcFnd0s4oqQUuy8EyY6ae+yX52paRjCc82QhmVFiNDjAhJ9SehruM1qqH98C36wjTIgIzlRg02nLVDs4+kvxZVsVkFMHPhRg==
+ bh=FKX4iVV7W5K/ymLj7CKrzKQdCKbmiMxLeAlswpyD2cg=;
+ b=V43QyZaI1UX69g2qstiiW0L4K0ahEmTHXO8c/48sDPBqJAdJiv+l1b2utew3NaRWgEpIGGrkgWVGQeiHvRZypFQVrmJfY1V6DJk2Y9CIjBnkHVFRyXqssE7grO8yccBtkxwmw8mXco/wSHXLhmCUSN33w1qbfOqnT1IehyuxPw7kqKHGCjkjuhBRQbg8gUM6wCD8oNu5Q3zwsZa/4qDulEghmI4keOs0qK9YrK4lb2lx7D16yEZMg875aRg2pVo9MkJ7dI7fgsxs6ETuACiByKtJCqAXTi1lzWK1ivX0oT8Vv9uAANBz0B9zGQmFCIgCY2/mZhKR/Gm7p7lg/qz0CQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iDKwntztk2qhJBkX+VX4EQCe7yYX88AgI+vfsvAQXlQ=;
- b=EVKiyNWrpgC4ViT171qYk70fv6YW3GHuOsoL/JWPBmJ4jT/R9+ElhaDVK/LRThraZgz6pHAVhE6fBozTUhWL+ZyDy/BTxxmWHS1vro+CzQo+yn2YOCmuUMYB6VIhn9kjxEMuxLJBqS7c4P/Ut+jHmJrqkn0UX11Fns2ThcRD1MzDL5mQVkcGRidhCbDWbPIzwZ2Ip3fkYK+d8qgKnuTs4uzTgcleebBzPH/RAKJYAVCtNk2J67Dh4KAS86s4+ER3xrTfmdcUgLiupJvR1vfDDGb1/0WzGMds73Rq8aatf9dITOHWunt9D9iKeR0TFyprRR7AVd+bPBekEFqShB3JYQ==
+ bh=FKX4iVV7W5K/ymLj7CKrzKQdCKbmiMxLeAlswpyD2cg=;
+ b=kgTT5dc2GxwmGaF/Mn+2PlIVZ/h7wniu2W60jU3CiIEsHJ2XVqzD9XqtOgb1TnJFFatV8KQLBf85xwJ6024dhKNZfxyxog2G+rHbuUGU6nsu00DJzDiGINUR3ooodAfd+nY47UiOUcwbEIrubWVgRmyg92jeGSZB6SOov+sKG1IXq7/muaWno6IGc+gea8xkMkDCd08sToa0bKYd493mik2rnV+F9k+jbVpnmgKJ/BZWI//1zNF/s8HBklUHzArP4PXKzFpEfmMfxBIDJFwDlB7mD0i6oKqve7BKOMS/oqrEkMm4C377S3xEh3dsFDmSLANIe5Xu1B10GiSmRcSK+Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
  by MW4PR03MB6473.namprd03.prod.outlook.com (2603:10b6:303:120::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 8 Jul 2026
- 01:12:59 +0000
+ 01:13:02 +0000
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0181.008; Wed, 8 Jul 2026
- 01:12:59 +0000
+ 01:13:02 +0000
 From: Chen Huei Lok <chen.huei.lok@altera.com>
 To: u-boot@lists.denx.de
 Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
@@ -63,10 +63,9 @@ Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH 02/15] arm: dts: socfpga: n5x: add DDR retention calibration
- backup nodes
-Date: Wed,  8 Jul 2026 09:12:15 +0800
-Message-ID: <20260708011228.15613-3-chen.huei.lok@altera.com>
+Subject: [PATCH 03/15] arm: socfpga: n5x: enable QSPI mailbox before DDR init
+Date: Wed,  8 Jul 2026 09:12:16 +0800
+Message-ID: <20260708011228.15613-4-chen.huei.lok@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260708011228.15613-1-chen.huei.lok@altera.com>
 References: <20260708011228.15613-1-chen.huei.lok@altera.com>
@@ -78,57 +77,57 @@ X-ClientProxiedBy: SJ0PR03CA0062.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|MW4PR03MB6473:EE_
-X-MS-Office365-Filtering-Correlation-Id: ea164003-348e-4ddc-15ef-08dedc8e0c79
+X-MS-Office365-Filtering-Correlation-Id: a1aa678f-1cf2-4b16-2d9c-08dedc8e0ecb
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|1800799024|376014|18002099003|11063799006|55112099003|56012099006|22082099003;
-X-Microsoft-Antispam-Message-Info: PxlI1wPAmv8Q2SD70AkxJf317ckgXUFdEIsFbikJys3rsPLYtYrlZA0cKw0lbBH/Gx0x7NYQGv8WlvjF6+yatgtAUYe1glsOl4eT7aXWb2sV1K1Yh0iQvvgOmEXyFglgz0pRePyE6FcLcU0Qm1P3hOe30fyNexxq1Tyen/X/0NNuhxRd0NStc/x5Rq4ry79N+XndlskEkU/pSoiMCMArqHHuszmahDt1MtH5Q11DSw9CNyAIZuR3Ydh8RwbtszAKm6n/KcK170Qds3J2XPfpmaLwOezdnnZi7wMQ0rx+QCYuUay/f0fjWdmynE+eZuUL5IESrHYuAFlO+Gpb1yh0o6L2RSww7gdoLBMJv/KPVVRZiw0UyMX8naGikZZuiVzkUXOrxUhqBYYKlr5Br0WP3gGVJZYrlqticV1mI6Vs33+y6tdfTFmVwXJ2VFkvghkGLFcB6J5+aT4SLksA7+39I/zIS/CLzbD8DwVGdGuq3//biQZbzvLayOE50qZ5aQtc8ufWzIbASdXOz6FuDfI5hMFUOflI0yfcPHy6w5XkokpWoVhOjTdsE9xkuIWdr/3rfd0JREMlLIuywWQFTVPqoyR9mo+mtTf98Xxd7JrojBZS7bCkV6sUupUfvC/yoH3ZEFmmgw+qK0aAb+eTuqbqae/YMUsy5QqWWO/Pwi7L7Fk=
+ ARA:13230040|366016|23010399003|1800799024|376014|18002099003|11063799006|55112099003|56012099006|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: pL7D6xO6vYCk1gGgUWpbh6VyTW71hV3/hHTb2rytHer24QkuzGjVjnGC/O2cp5oZvSG2HTdtA9LbzkAEVGhrWGPhvvQgzbMxY4XJVXu5hP6nomLgZTyqSdDukz0TozaXOxwLL22nuqLZnSdSYn4fMZ9bRp9EGv7c87xMgLiIbd2gC73yQYnk1a4SeesFwOuvUYGgJwiRFvgzW5PMVFYOTI1H1zneD8n61al/OF/a3jU5G2f7B68n8MqBIZSKsEjp9s3RKskKx1784pQzM9PXzXqxE0m+ttpWz8kai8d1aX935KDa6kP6ii3qM7b1ScS7ArGWWLnMiU3S9DK9qtrudpFwT6YKnSGGCS005fUGN4N+rnmYb6xre/LHSGpxSFoo0Sk/RJ5q4iup3ugt7TuoNUPhfbo1qfqL6wPl7MjQ/NimvVdQiBF7Jrz4YT83m1mgNLfLY1C03o1ZJLiEq4SC3LyXfQK6fNgA4g6M7wbalXb6EanpiebXAXChZYJk3IrgwuTndwlArixKJ93kM1+5+oszEVYL1B4nGevAht7hphDQYrAW9/fPYz2vPRSQiJokT1+jd5aqPmx6k2Vrl+iRRHF2B2hBiJvTqcb/aXPVYtjjz/VvInapEnp8qJ7j3hLQwHPYYun5Mc/NdMf0FSU2nmzSFILkyF5cQEEhSQbLYbc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(11063799006)(55112099003)(56012099006)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(11063799006)(55112099003)(56012099006)(22082099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4ARJCvxdC2FPcHOGwodOUnZL2k0ic6+tRB5lOH3MvoG83O9Lu86D7mjbevhX?=
- =?us-ascii?Q?8j8cySHmfAhOUimy58/np3SG9ZOkfQ77kI6dVhTCNLwjgNc1R2ftt7ABJ0hg?=
- =?us-ascii?Q?soRNcPVf1ZpjifO3nxDpeBzp8/zjLrl++4c+sNpARzR/jNELlHmNg8LCu9OF?=
- =?us-ascii?Q?d+PHlsJiIPl3UJ9iROjVesThzFOGvki3sbZR7jPD3451XhQdGuoos554d2aO?=
- =?us-ascii?Q?9KS1cAweMLLCJop29W1kXunLTsK1D5ZgqrxiDmoFroQJMFhQ1fRJ0eFjZqzk?=
- =?us-ascii?Q?/9063tYjtxqk4Lg33Ork+wVeoKVhUzpn1j9YXLbLYlZs8REm93UK2xDXyaYS?=
- =?us-ascii?Q?9edK51CqAiPe1ZN+6sEddY89+tN4OG1shPpuC4BKy7Q3xvWtiWkPiulB6NG4?=
- =?us-ascii?Q?YoW+gusdcOdsM15285D6z7K9CKVAWPCVLlYrUcRs4AfsACsqvBankxxyDq5K?=
- =?us-ascii?Q?/oMRsE/csnC7qHmVpFtLkRCcBvBK0IRGjlHwZduAjgZMynURoS8OiCYIjA7U?=
- =?us-ascii?Q?DP2WEPUrW1RG3DgXtP/DbTi+pbfzKbcjdSblX4ry0WoSkh1Im7ug+gXVSL/C?=
- =?us-ascii?Q?buWd+qM74kiPVu9LwoaNomLq7Hspw/T/Ff+1VVRgf2nHAkl6KRK5Rx6w5E09?=
- =?us-ascii?Q?Wfu5o9s50P/cq8xn20CBszAMbwODvuUw5o+FrkGe9GW+RSG16L6spYg75lcV?=
- =?us-ascii?Q?9+urD5Ibt1awviX88SkKD6rWusAmoxte997xyTmREM8M79KDgspYDOzKB7pt?=
- =?us-ascii?Q?EzRSuFJuGyfBh+b1o1YaucXRzrZbuvBUFXc9iaUAMxp+q1snXvKoym2xCvnW?=
- =?us-ascii?Q?c323nm+52SO39IJsoEAsusNCcbZbg9JcXT5DKzmLzaYhD+WdnH7feaZe7IdX?=
- =?us-ascii?Q?mn/bBd5oASncw8xk7AvMGzzwI4jdmHYy6C3oDZzLJfCt1Ub7KNcbzrikG3Hm?=
- =?us-ascii?Q?ogCA6zyMgbUUhy99HRsLYcSN0IrNXIsBbg5D0L3QHRaaFJTVneKVFPjH2blM?=
- =?us-ascii?Q?8A0JYCw6Tth8ae7j41JBHL9FfLQmz/LYT8TM/njhfpP8yuq2HqPUFjI46LXt?=
- =?us-ascii?Q?SoPsKub90vPV1K8WXIELabZpGnbgW8P04LbTablQY0Fylsopmo9SrIYSBPDp?=
- =?us-ascii?Q?CYpprMDXr0KYr5y4LXIMxZZOB68eTTHW0WxC8Ao0nikRtYs6YyHI2d4L9TFW?=
- =?us-ascii?Q?eUxDI/TWtdvmRRRde1AwfqqaKnL81rnR8UE8Mp6KAL21qGOdxADmw1zbfO5c?=
- =?us-ascii?Q?2q0mV41n0H69TtLeszEk8v68H8VdqxeMi1WenQF0SR8q4EwnO4UUZYD6RoB4?=
- =?us-ascii?Q?p8tFeKldyzchHOguUVh4nSk9UPrG37L0NyLBtkFr8F+JymUlMwCK44QuWr/D?=
- =?us-ascii?Q?h4lhA4aX+lY5ozS+VyyZA0xAWhUksTid1bTzOC6/MUqxhlGVeZinqS5nLh57?=
- =?us-ascii?Q?WKAqGpm9ETF6K229+xIXJ7p/VzpcGZzt/ehKHxu6SSIjvdvziFl5P4AgJOm0?=
- =?us-ascii?Q?hvtz/ZiMCVqo580tXxilsuQYEOBHf3E91QxO/cxW/Ju5RAtuHuADJygRFL4u?=
- =?us-ascii?Q?pzdsURpWV4p0uJTMbcXZQubtSIpeqn05z/7GcHayB8vTJ6HvUSTy0J/2S0Qm?=
- =?us-ascii?Q?V6SVWmapr8KFa0LhU0p5I9olSJI1W3neg+Rc28GL+TvY969yePZfUNVyJ1+D?=
- =?us-ascii?Q?uwitQKQIuRl0ACFuaPVIIxHPC6nHXEbJCTZRMVM9Mfc+5A5Vnvc0v0Wr+ZiK?=
- =?us-ascii?Q?h9QegahO66Gg/2p//0Z9IUGxV04gyNg=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FtijX8XX3RvOXWcpKXkfX9jpAA/6Kd7iTXMu5moUBfIX9elxaD1Afwqhwtag?=
+ =?us-ascii?Q?++e5L5n+yXK3wTxH2O24V8EJIfGDJqhCh+98/oC6Lf5L4LU5TUJZIjDk9FHo?=
+ =?us-ascii?Q?PnpJJRv1SHWYbNhTcz15XZghFhmPyXrBx0cHjtvfkDG7FdOghSylE0ufR8UQ?=
+ =?us-ascii?Q?mTYdc+Yoss/PUIeRqBsd/26AT5EQXJ+L9A+61cVAYnyRHrr4bCDB7XS/hbXs?=
+ =?us-ascii?Q?59i4miyK5ay9Lhw+NfOn5BkbS32ArIa4td85zcWOwQNzO4cVJB5enidwsFgK?=
+ =?us-ascii?Q?nUBqjqa7HU8xYJ/+HrOoeA2oi1+WWtK+uu+azBOrp1CLNjObQSPFEtq6t72K?=
+ =?us-ascii?Q?SmVmyiWiHTXgPvC5Z3lJV7CbRUR0jGt/HZ6E178GFa3LekUBFsnXZeq8V/MD?=
+ =?us-ascii?Q?ogNBFiGCPcwWdHdvW0yIZD5JZVHwUpebL7wgwiYXEXbL8OpMdXW4WvUgaJQQ?=
+ =?us-ascii?Q?XWg6bxugl7FGajZexg8Y2hXDQoA3HC3LwmDfK3O0MpHxY+zjzS3x8n6qkndl?=
+ =?us-ascii?Q?jHrIVFszGiCP83uVW2JColaRdyP366pcg8DtI5dAIKING50RUnxyGrh8ticK?=
+ =?us-ascii?Q?UEGrY78CS+GaV4d0mnCJ+HWqiRshz/4XZ9gs/Mzmaso0o+16aKoJDtCDEkxE?=
+ =?us-ascii?Q?yZ6lrKgJdciBEesFuMwfpQ6jI5oMT/aOgkK4GNqmEGaYrMrHl1DogldXBW6H?=
+ =?us-ascii?Q?D0JnUUHv0sFnkPbL23Nkc6q1Vof9nymvHFBWwP56ZnJ9fEwSO/yQ4z89raSO?=
+ =?us-ascii?Q?4JI8ggqEkZtPXfkQOObIGvxKFPtnNhPbCe8wRtEiyRLUXLGUrsVuB8srCJNV?=
+ =?us-ascii?Q?61FCpdrNysC/3up0SoVzKyRvSVFVPCGA9mbj++yccfXCJuNiL/M2R1cQxg+M?=
+ =?us-ascii?Q?CoObE1zA7IY+x5RgeHdv8BJGaqEJNtKHWLdhiulBceXunPU2bUjRgYe+uXXM?=
+ =?us-ascii?Q?/bP6B+d2vxSucP5I4VhYUs52+wM6j+KRGRcOEsm9dwT3KIo9goOVgAor7yq2?=
+ =?us-ascii?Q?DA1kTZxqzYo7uVEE314WQP9jk+vvOvWeb+Ekr4CETTG1mVWdt12cFQBFwHAF?=
+ =?us-ascii?Q?l01hFZxe12Mj4aPgbaVSL2eNOQL9RgXoeexQITI2vcSy4PWJ2SlWktnK6LTQ?=
+ =?us-ascii?Q?nWg9Zw0otT6t9W9d6aZuW2JkkMkJpcMnl232m5OrhM1dVLgIEzEOiCBCe+1/?=
+ =?us-ascii?Q?03Ww/bBSozYZmS/sNU7fgAlQMqKRAukHWH0gvfseykE5I/zK2Ngq1jbD2pwJ?=
+ =?us-ascii?Q?NG0mWwqfjtYiJrs1X9lM7vy+1R+Ft//SfvD2sDGc4oQ014NuxlKerqItuHxm?=
+ =?us-ascii?Q?ri4J+r2ttWPH6DcFzVppSSIZOmiG7WHamvdiQLp4wRc/7J+F44TwYmAv1hf5?=
+ =?us-ascii?Q?9sBIcxWHVVO2WER2wl5R+1zhJnV0ZjlWqj8JCwHZuAABUwh+GA0fZSoaNbfA?=
+ =?us-ascii?Q?GJO26W0u9nv4NVmFlJg4QvFo1RZhUeQo6LhxwjNS//OPSSM+xcaMVWGinzjE?=
+ =?us-ascii?Q?i1NGh8AwzPfTE3kQ6kn/OxkXi0i/q2IQSEK9oEfqHgCHmyf8D7wHuwO0gxEy?=
+ =?us-ascii?Q?mGDw9wzwif0TQfYELtpeww19LrskGOMWOQwF7etrKAr8gkuVV24P8HSnxwNX?=
+ =?us-ascii?Q?YRpdWyYm3Gu79eSDyTd60lBpvLUhxB1/rOw8mDnnuScMQX2LF8imkeIuDD8k?=
+ =?us-ascii?Q?Jyb9yWiXABcv9b3if8EYesIytq1EU7rK2Sl8upFeW75tjfv9umrCEZfDbLZV?=
+ =?us-ascii?Q?bDEaH9BizwUFCRoVnyNaKItUdTU6CMA=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea164003-348e-4ddc-15ef-08dedc8e0c79
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1aa678f-1cf2-4b16-2d9c-08dedc8e0ecb
 X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 01:12:58.9486 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 01:13:02.8047 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NLs2b6ZHxjR2TJTpWy/eO9SD4nAY4EhgPloaJfTnC0PlEmntB5tNFpLFMUEmwTpeNGNGjW7bEN528ZNiorX/xbF33mfgrnXDyuDLlBxm3Vg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: OyqMDg1TmasO+rTewoaOcyLLTtDd5Zz+9F+hXi5ujmIKpY6wOYA4hlmE8N/V7aYLRU/k0rDIdegq34hfVmBGGgymzSDzs3ZVtccw+LUOH80=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6473
 X-Mailman-Approved-At: Wed, 08 Jul 2026 14:40:34 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -147,54 +146,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the device tree nodes that the N5X DDR retention restore path depends
-on. Reintroduce the fs-loader node and the &sdr DDR calibration backup
-properties (firmware-loader, intel,ddrcal-qspi-offset and
-intel,ddrcal-ddr-offset) that were dropped during the switch to the
-upstream Linux DT config. These describe where the backup calibration
-data is stored and the firmware-loader instance used to read it back in
-SPL.
+Move the mbox_qspi_open() call ahead of DRAM initialization so the QSPI
+controller is handed over to the HPS and its reference clock is
+configured before the DDR retention path reads the calibration backup
+from QSPI during DDR init.
 
-Use bootph-all in place of the legacy u-boot,dm-pre-reloc so the nodes
-are bound in the pre-relocation SPL phase on the migrated device tree.
-
-Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 ---
- arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ arch/arm/mach-socfpga/spl_n5x.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-index 1bed87c1231..6f7d6d6b188 100644
---- a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-@@ -8,6 +8,12 @@
- #include "socfpga_n5x-u-boot.dtsi"
+diff --git a/arch/arm/mach-socfpga/spl_n5x.c b/arch/arm/mach-socfpga/spl_n5x.c
+index 8b03d047f33..0810aed6597 100644
+--- a/arch/arm/mach-socfpga/spl_n5x.c
++++ b/arch/arm/mach-socfpga/spl_n5x.c
+@@ -104,6 +104,10 @@ void board_init_f(ulong dummy)
+ 		hang();
+ 	}
  
- /{
-+	fs_loader0: fs-loader {
-+		bootph-all;
-+		compatible = "u-boot,fs-loader";
-+		sfconfig = <0 0>;
-+	};
++#ifdef CONFIG_CADENCE_QSPI
++	mbox_qspi_open();
++#endif
 +
- 	chosen {
- 		u-boot,spl-boot-order = &mmc;
- 	};
-@@ -36,6 +42,13 @@
- 	};
- };
- 
-+&sdr {
-+	intel,ddrcal-qspi-offset = "0x7000000";
-+	intel,ddrcal-ddr-offset = "0x100000";
-+	firmware-loader = <&fs_loader0>;
-+	bootph-all;
-+};
-+
- &flash0 {
- 	bootph-all;
- 	cdns,page-size = <256>;
+ #if CONFIG_IS_ENABLED(ALTERA_SDRAM)
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 	if (ret) {
+@@ -111,8 +115,4 @@ void board_init_f(ulong dummy)
+ 		hang();
+ 	}
+ #endif
+-
+-#ifdef CONFIG_CADENCE_QSPI
+-	mbox_qspi_open();
+-#endif
+ }
 -- 
 2.43.7
 
