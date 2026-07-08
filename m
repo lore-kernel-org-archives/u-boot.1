@@ -4,132 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00A1C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24A3FC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:43:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2425084AA2;
-	Wed,  8 Jul 2026 14:40:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BBAF849F6;
+	Wed,  8 Jul 2026 14:40:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="TqIhvJte";
+	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="qoTbkD4p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B13B384118; Wed,  8 Jul 2026 03:13:57 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6AA3084942; Wed,  8 Jul 2026 05:46:56 +0200 (CEST)
+Received: from out203-205-221-192.mail.qq.com (out203-205-221-192.mail.qq.com
+ [203.205.221.192])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9087A838D7
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 03:13:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98B76838D7
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 05:46:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=foxmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chen.huei.lok@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DWNKZc/qA9/q59BVWXetuV+ftXNICLqqlxMVqYV2Dt9UIgQjCYeKIXYIv1QIAw/CteNsWu5JS/5FfKOqW9RX5igY46rpLu3c/yoCXv3WGifVVY0Sx1ZMAP7893cUh8FA6GI2PEJgIyOHMN7PnLHGR8xWsSUBjFSMxTOg7cSUF3zMdZKD4ts6LswRpmL3+DocKPY+5q86X31uRT0M9EEiT1VjMDVXsk8rX1aiwGm1jA0RVQ/0GbdGeBTdR7hvPgoDVejBJrMPAIUAhygSVzyIuNXCkfs2ISDnOJevgn/cOU1UG5C6eQ9LOrkutEvPpSedz+52uxHSPDJ1zTkIoOZJyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OX9JYJXc3Ph2pPlQmqnJhiR27TTz8LMBJNalyLCvsIk=;
- b=W3Avtkz8vMUgt6PbusNcyUQF01X/6pk1EO8v/h1Bonq83y1V9E6Hp8/B1NRka+NyAi+bRajSd+ArZPJ/yYlxjGQgS2sPVoSpzNJSLV2Mfu4An0NgCZU6nw2xPa7UTp84dfamhD5vQjxCh2u8xmG/LyGDTjCsXvgiT8qenz7H4NqRNe5WVLd1hHBVenG+zKflMAf7cidmT1L5ipz9o+5Oyt0Hl5UBSBuBxrBmFSvth/fCta3pBHM4IYMQgAOgXsTIHEKR5z5T6TWqtqTdoapiYynf0gUj19uruldZ6T01HLyTw77r+rHWqO0QvIAfT9MwBRCxyNvsHQaBP2qNkvStNw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OX9JYJXc3Ph2pPlQmqnJhiR27TTz8LMBJNalyLCvsIk=;
- b=TqIhvJtecmdehpswKnSaZ1Lt9HNw1uRkEVDWP/2/avdh7WUiGvIXaMUyFbGEDLvUR/OlfMNktoFmS027ZwxOP2nvkpkOuXWR1x5t869OecC8KIHiM1rscG+DEyGZQemm/KB9PUj3exGbIzTp9YQksPIgjJ9uLThl8fNQCnpjuTzgbfKXBSBNxhXO7vSwEy1wIV7GhRoLogluDB4nhshUzaUD2MeFpSN/pTDX3M/8GdZXZKpKRDdlw4EPXw1Ky5h7Hy4brnrpFf3u+v9D85fbcNanAxNL8iNQIpc6DAI/eg77ipbG+bsCyMg0DEsNT3O5t/qKkUj8lrcsQRWvFuBL3A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
- by MW4PR03MB6473.namprd03.prod.outlook.com (2603:10b6:303:120::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 8 Jul 2026
- 01:13:52 +0000
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0181.008; Wed, 8 Jul 2026
- 01:13:52 +0000
-From: Chen Huei Lok <chen.huei.lok@altera.com>
-To: u-boot@lists.denx.de
-Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH 15/15] ddr: altera: n5x: Replay PIE handoff on DDR retention
- restore
-Date: Wed,  8 Jul 2026 09:12:28 +0800
-Message-ID: <20260708011228.15613-16-chen.huei.lok@altera.com>
-X-Mailer: git-send-email 2.43.7
-In-Reply-To: <20260708011228.15613-1-chen.huei.lok@altera.com>
-References: <20260708011228.15613-1-chen.huei.lok@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0062.namprd03.prod.outlook.com
- (2603:10b6:a03:331::7) To IA3PR03MB8021.namprd03.prod.outlook.com
- (2603:10b6:208:502::17)
+ spf=pass smtp.mailfrom=hehongbo918@foxmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+ s=s201512; t=1783482406;
+ bh=Rl+PHzHsVgd2MoxJEEhrNNhbXu7vG3Zrkd74rgtXbmo=;
+ h=From:To:Subject:Date;
+ b=qoTbkD4pkjNkUL+nwILhq8RfUw1b8u2zU7CzpUKXTF5JogV+A9tjMVDVJfUs9vKMY
+ zAI0oV97pAAsUewNWVofzBCFkHCNq2RCRkzDYr0MHTzw2K/5H8bqmuSp4xswOUuP6t
+ CXjWyH2ZDcq5d4VJl5QsGR/XADQR9ihX/S7ex7nQ=
+Received: from localhost ([115.238.104.202])
+ by newxmesmtplogicsvrsza53-0.qq.com (NewEsmtp) with SMTP
+ id BAD05C52; Wed, 08 Jul 2026 11:46:45 +0800
+X-QQ-mid: xmsmtpt1783482405tesafmzef
+Message-ID: <tencent_7F1F7AFEFB034F7BF957EC0F0819BD4B5609@qq.com>
+X-QQ-XMAILINFO: MqswyhUqVe0CSge0LwI7iI4HNgeW1AWRU3c8IlhZm7/t8xdTLKb6r0LIgmqhp1
+ x/KkJO/y1qEg8bJKBUprzqaZ/H9g5ZHjHH4E2+bOIMAXoYxQlF1zmnai1K0id/UssqEBhFYuz4wg
+ 7yf5L8HcyGt1tBl4eOelvIW451PaJNRiZMYoZhGMtI/sJQldvktdL2qq8QyHWr/0CKqRCKyBwdzI
+ GiFUuJtPc7rWi4BTgU2tCT55+Sq2LdK6EUQLjxob4xRoHG27Gkca3oeMX5VqbHgWWSMf0pvWf/dG
+ hOt/2v47ofXrGrQDdWkRxkI1knAHgiAtfccHKRcUk1R5L2slXHUZkBqo1IkmlFZ4ZMasecmecl4W
+ 6iO/7Fyzrh31bxWHSYLI27MtSMPQVv6Kq/H2TcJkAVNtOOOMP1+uScbrdoDgWWBmqFNE6s3RIEs6
+ NS4ZGyuVh8bK6bL9ZzJ2POpXXszStA0oT2iRz0Kh9d+rl1jgnfxCc7mxoC/vv72/ADff/8INaLak
+ mCn4l3EVjwxfXLhCXUNhIt/HHyVFQlultJbCgZ4stbMXTl/t3JZczb5nGRMKrKkVMd6SIZIc1shh
+ 5gyc+fPg9RHsA3Mgu4Ti7q0qqvB4wvqtb2ghugfZPGQ3ZHJEDfAJdjbsijpFMr01ousfjpzQCom5
+ +MzFEGmpOAFNnBtp526pIKOQUnlzf4SGbf0P6qpDqeD7fMsEHxxE3pLXahQp9Gcoy0hINLCFIH25
+ 45jO91qE/avGETZ2wyAbNE/fo8pGIqlh/K2zOPu6CZrGCaJHd5sotLQ2uhm44qBMFfNP3pkHT92h
+ zaPV7c12n4mL25CPTiNshjS8MvdHJyaRCtNshIEwTpCoVAQAUqtDuldI1h8ef9uCbEFl2cXfPSPE
+ dyM6nZ2W3B3vsSr7tXlnAEhReoRquixfjiuEDhfsUTk5mShy1P85LNfJjpldLMmqFrcnQF0zb6fm
+ 9s85+sum7v983KoB+a1FiYFRROtKEYpuXrg2h2YhAk/Yot1mcxGQ==
+X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+From: hehongbo918@foxmail.com
+To: hehongbo918@gmail.com,
+	u-boot@lists.denx.de
+Subject: [PATCH] serial: esp32: add driver for esp32 series chips
+Date: Wed,  8 Jul 2026 11:46:44 +0800
+X-OQ-MSGID: <20260708034644.600076-1-hehongbo918@foxmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|MW4PR03MB6473:EE_
-X-MS-Office365-Filtering-Correlation-Id: d60c1cc4-1c3a-41f1-5679-08dedc8e2c1f
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|1800799024|376014|18002099003|11063799006|55112099003|56012099006|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info: rfXjDYU0XyGrOqKlrBNPCiXQJ9S954xoWgpqdnnM3UQD1yOznoOBcSwrLMNe130qXL/iFvM8cSeNN4EuXHZrGy4IOeZFESbXIopC7VbdYw51eNUq3kBGRxBh827fB+Q9BNNbbnBwqIOTTzZeno1k64Ho1CE9okyCWfvHL1xFBY3O6gqmZ0U2ci3KQ38xwKcNvESIOqCr5efrHfGf4Zcyz7MvDLzUrM5mThHahJPQvq6VTWvBy+NotQVeUOh8poUdK049+JI9othpkJdgtFTV/oGXwNRPM7TKWsYVFQQ3BxouEqfgchtsRksxXBD/W1Lm81arA5r71MAFKG4aSRkWrw5BN42tz/WLtrk7Jgpmr7+VDym++mKDlUcviJB187hAsHQc+g4YVzXjk+haHJKs8+NZeEMueMU/+hxyvj1QLimTgk+41ECzYdmVU1u2ZKbZYj1KF8vw4icJNXNhHJTfIY7MykgyvTelwseUjAXhS0PEHvCrLf6in5bKO58m7zNiomKdgp+HQZIZijd1EYc5dT8cMkkNrwmdnlJ/vwlzK+Bhl4S7auPIeY2qcjKXOpDhTR9Ut6R5GQYNYacLVHphcC1nYJuTiLQBYId56ly2O1XqI9WS7m75ENjrbCfL/zX3twLfID/1sqpfmxzamYKSUzghCtFDmNEWPRyRH7RoTtc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(11063799006)(55112099003)(56012099006)(22082099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qRmpwR1vZfnm2C2GRS2ZFHhAqc4ykRWpEH05z4oRXhLTzYr+xn/ZIUlBQ5D6?=
- =?us-ascii?Q?y7f6emNq3kn/3X4m45acVsF+95k3ENzhT3eAoWXdIRiXF0hZ7eFHPnrcsqG/?=
- =?us-ascii?Q?wNSorFpImfmuVYWYjb1ZssylJkWMsNy+i6dRnJnIGEk3tzHwGLejNmFtCdp5?=
- =?us-ascii?Q?Przeu499WaSf/wcSRSP1dcBbg8N9k4Qvt/BvsuSoyenokb7ik2CduOTUDLRs?=
- =?us-ascii?Q?yYL9pMhjS3ZgxAeWhhrdc/KcUBHkIEy4sStJMFKb/Ozm0BlSTvsOp1sYLwkE?=
- =?us-ascii?Q?xTLYYn6s1Dp9BdP0SS9Q5H6XceMthOXX976qtVeqq2wllTigSyx3+IYVbdQH?=
- =?us-ascii?Q?s8jfWWuLUnVcXCMCBti2WW/ZVfDbv8GRE85Vfczg3wZYlAxHajB/BfTjrZBv?=
- =?us-ascii?Q?ooZYMLlkciSAWLtoYq61xDCbn3usDrrX4lXwVCo0oLl1I7ql40591dy+NBdC?=
- =?us-ascii?Q?gaquaosjRvYvkfLk0WO1ARfpppWXBnVDIrZ/0DbE6VUdl+ATzlVkpEsi8q1y?=
- =?us-ascii?Q?q/g2ScBWUOmpv+pfXcyLs8vNcJLIy1gTN+5vfwuKMEU+cD7cBMHblh+mHeps?=
- =?us-ascii?Q?wYLlnj0gzBMU3h6GjzMVLLMOB7l5ZanMxXb3FlwP0CBm+BnQQ2odNtCbMU5U?=
- =?us-ascii?Q?RbnI3itlhydLzwG/d4We4BPyUS5z7LCSmHF3hUnayFfpbXjw4SO/MyaJoMa6?=
- =?us-ascii?Q?t6z+byRd6KGg+KtUyFWUwTxWgfH9UPT85uGrAeYXZBL+oWfUV2xGslLKDsuV?=
- =?us-ascii?Q?KzKiPBtMmZQvzF4sVkvyXnk8Oxv/WdsTaGVaqB7NRjn4qWytQQm+tJzCiJEx?=
- =?us-ascii?Q?rCc3xKCFMxZIUlRftpEbFpY/EhPzj3azX0a6BbGsUPCreuvXuDBkWdQ2n2uj?=
- =?us-ascii?Q?iX1A+HZ0640aaS5FmpLKKZFBqti7tr0LhH1XhlhBdyrSJvFZri7h5tHsmGHM?=
- =?us-ascii?Q?QxNlCj995llPWyHRcr0hW+CYGTyKy4QG6XA9fxT0K6HoV4rPrCOMFBGCPpKN?=
- =?us-ascii?Q?1418kGvkYab4ymfRmOhMqEg38sSY4h12aRuUe+yvuJA8sQ6q3gl/FNWoyFlR?=
- =?us-ascii?Q?qcOx3GQsq1ON9E5r6WI7nQ3o2CixZgvo7ovcbC5IsqjX9QnX+VD6ANi+OQLM?=
- =?us-ascii?Q?pux9TwpzUnE4YyZc1uH5mif6qEk27mrD9HcjFFq7DykphSHuAmcPvHJkK131?=
- =?us-ascii?Q?WVzgJEidBzQE7w5FWxNI7CyjzbKWsbmNUbJIR3geTyjBuEeXc75XzmfmbDF2?=
- =?us-ascii?Q?s0+lI0RAC9fkN42B2QLKd50pfVCvqAADStSAEVNQGDwNtbuisbz3frXPIpBq?=
- =?us-ascii?Q?Pf6o/TlLxiNqFVHSHRo1J8amG4x90m5B8t7kM8/ldiM5mqfeKfS0hbvQWHdZ?=
- =?us-ascii?Q?kI9iV0R3CsImpgbjLUdUFQOknCtPgK/P49eHTuHsr+403UzBMVvreQx1OtYG?=
- =?us-ascii?Q?kZ/D0WdNCS9tbGhMxxsci580HQr7/Jy1jCauDGHaA51GgW6wHGXjErIwQpTF?=
- =?us-ascii?Q?YR83SrgJKtdKJabEsEsi9LBsZo0mk2kGSwhEglF1cc45hx+WYCKDETYCtZgY?=
- =?us-ascii?Q?nTxyDGsALqVkGILZ7vEA7v1yVpy29S2UbqTnlk+AkEI6v1VZrtp6EicihiWA?=
- =?us-ascii?Q?kGC+xO7bOJCNTT6e7WXutjoC924AoY/JSqlnTWBcR1pU4+i9wLtYVLguL80n?=
- =?us-ascii?Q?RZDYabJ3dBJbqPUw+Sw5UsauhWP6pWkj/oL+SEuLDquEhQMvhe/vOD8DYLrG?=
- =?us-ascii?Q?XXn2ChebjsMUCjU3vcYQgBKcweIE3vU=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d60c1cc4-1c3a-41f1-5679-08dedc8e2c1f
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 01:13:52.0786 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 54BmgaGmynAS6YkKLE6cSyYfrGTW0BVyEu4RuyEjQR47DefrMyY7G8HQn7JPaWWJotV8ga9tHvXq34Aate+Xt+4p2RVlm1tBGnUxBLlbl1o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6473
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 08 Jul 2026 14:40:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -147,104 +79,369 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the DDR retention restore path the trained PHY results are reloaded
-from the calibration backup by cal_data_ocram() in init_phy(), which
-leaves the PHY microcontroller stalled. Running update_training_result()
-there reads back results from a PHY that was never freshly trained and
-fails the DFI handshake, so DRAM init returns -ENODEV.
+From: Honbo He <hehongbo918@gmail.com>
 
-Instead, bring the PHY microcontroller out of reset/stall and replay the
-PHY Init Engine handoff to return the PHY to normal operating mode.
+Add a driver model serial driver for Espressif ESP32 UART
+controllers. The driver supports ESP32, ESP32-S3 and ESP32-S31 UART
+register variants, including baud-rate setup, FIFO access and basic
+port initialization.
 
-The PIE handoff table shares memory with the memclk hash scratch area
-(DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512) used by
-is_ddrconfig_hash_match(). Snapshot and restore those bytes around the
-hash computation so the replayed PIE table is not corrupted.
-
-Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
+Signed-off-by: Honbo He <hehongbo918@gmail.com>
 ---
- drivers/ddr/altera/sdram_n5x.c | 48 +++++++++++++++++++++++++++++-----
- 1 file changed, 42 insertions(+), 6 deletions(-)
+ drivers/serial/Kconfig        |   7 +
+ drivers/serial/Makefile       |   1 +
+ drivers/serial/serial_esp32.c | 312 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 320 insertions(+)
+ create mode 100644 drivers/serial/serial_esp32.c
 
-diff --git a/drivers/ddr/altera/sdram_n5x.c b/drivers/ddr/altera/sdram_n5x.c
-index bfa08f62ad6..d09cea5d2ac 100644
---- a/drivers/ddr/altera/sdram_n5x.c
-+++ b/drivers/ddr/altera/sdram_n5x.c
-@@ -1496,6 +1496,9 @@ static bool is_ddrconfig_hash_match(const void *buffer)
- 	u8 hash[SHA384_SUM_LEN];
- 	u32 memclk_table[4];
- 	u32 size = ARRAY_SIZE(memclk_table);
-+	u8 *memclk_hash_dst = (u8 *)(DDR_HANDOFF_IMG_ADDR +
-+				     DDR_HANDOFF_IMG_LEN - SZ_512);
-+	u8 saved_handoff[SHA384_SUM_LEN];
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index e221800d5d0..f0e8a0b8026 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -1069,6 +1069,13 @@ config HTIF_CONSOLE
+ 	  console. The HTIF device is quite common in RISC-V emulators and
+ 	  RISC-V ISS so this driver allows using U-Boot on such platforms.
  
- 	/* Magic symbol in first 4 bytes of header */
- 	struct cal_header_t *header = (struct cal_header_t *)buffer;
-@@ -1512,14 +1515,26 @@ static bool is_ddrconfig_hash_match(const void *buffer)
- 		return -EFAULT;
- 	}
- 
++config ESP32_SERIAL
++	bool "Espressif ESP32 UART support"
++	depends on DM_SERIAL
++	help
++	  Select this to enable UART support for Espressif ESP32 family
++	  devices using the U-Boot driver model.
++
+ config SIFIVE_SERIAL
+ 	bool "SiFive UART support"
+ 	depends on DM_SERIAL
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index 66088b44eb6..44fb2170f9a 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -22,6 +22,7 @@ obj-$(CONFIG_COREBOOT_SERIAL) += serial_coreboot.o
+ obj-$(CONFIG_CORTINA_UART) += serial_cortina.o
+ obj-$(CONFIG_DEBUG_SBI_CONSOLE) += serial_sbi.o
+ obj-$(CONFIG_EFI_APP) += serial_efi.o
++obj-$(CONFIG_ESP32_SERIAL) += serial_esp32.o
+ obj-$(CONFIG_MCFUART) += serial_mcf.o
+ obj-$(CONFIG_SYS_NS16550) += ns16550.o
+ obj-$(CONFIG_S5P_SERIAL) += serial_s5p.o
+diff --git a/drivers/serial/serial_esp32.c b/drivers/serial/serial_esp32.c
+new file mode 100644
+index 00000000000..16b687fb5c1
+--- /dev/null
++++ b/drivers/serial/serial_esp32.c
+@@ -0,0 +1,312 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026, Honbo He <hehongbo918@gmail.com>
++ */
++
++#define LOG_CATEGORY UCLASS_SERIAL
++
++#include <clk.h>
++#include <dm.h>
++#include <errno.h>
++#include <fdtdec.h>
++#include <serial.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/err.h>
++#include <linux/bitops.h>
++
++#define UART_FIFO			0x00
++#define UART_INT_ENA		0x0c
++#define UART_INT_CLR		0x10
++#define UART_CLKDIV			0x14
++#define UART_STATUS			0x1c
++#define UART_CONF0			0x20
++
++#define UART_CLKDIV_FRAG_SHIFT	20
++#define UART_CLKDIV_FRAG_MASK	0xf
++
++#define UART_TX_FLOW_EN		BIT(13)
++#define UART_LOOPBACK		BIT(12)
++#define UART_STOP_BIT_1		BIT(4)
++#define UART_PARITY_EN		BIT(1)
++#define UART_PARITY			BIT(0)
++
++#define UART_BIT_NUM_8		(3 << 2)
++
++#define UART_BIT_NUM_MASK	GENMASK(3, 2)
++#define UART_STOP_BIT_MASK	GENMASK(5, 4)
++
++#define UART_RXFIFO_CNT_SHIFT	0
++#define UART_TXFIFO_CNT_SHIFT	16
++#define UART_FIFO_LEN		128
++
++#define UART_UPDATE_TIMEOUT 10000
++
++struct esp32_uart_soc_data {
++	u32 reg_update;		/* UART_ID_REG */
++	u32 reg_update_bit; /* UART_REG_UPDATE */
++	u32 clkdiv_mask;
++	u32 fifo_cnt_mask;
++	u32 rx_fifo_rst;	/* UART_RXFIFO_RST */
++	u32 tx_fifo_rst;	/* UART_TXFIFO_RST */
++
++	bool broken_fifo_rst; /* true for ESP32, false otherwise */
++};
++
++/* Information about a serial port */
++struct esp32_uart_plat {
++	void __iomem *base; /* address of registers in physical memory */
++	const struct esp32_uart_soc_data *data;
++	u32 clock_rate;
++};
++
++static const struct esp32_uart_soc_data esp32_uart_data = {
++	.clkdiv_mask = 0xfffff,
++	.fifo_cnt_mask = 0xff,
++	.rx_fifo_rst = BIT(17),
++	.tx_fifo_rst = BIT(18),
++
++	.broken_fifo_rst = true,
++};
++
++static const struct esp32_uart_soc_data esp32s3_uart_data = {
++	.reg_update = 0x80,
++	.reg_update_bit = BIT(31),
++	.clkdiv_mask = 0xfff,
++	.fifo_cnt_mask = 0x3ff,
++	.rx_fifo_rst = BIT(17),
++	.tx_fifo_rst = BIT(18),
++};
++
++static const struct esp32_uart_soc_data esp32s31_uart_data = {
++	.reg_update = 0x98,
++	.reg_update_bit = BIT(0),
++	.clkdiv_mask = 0xfff,
++	.fifo_cnt_mask = 0xff,
++	.rx_fifo_rst = BIT(22),
++	.tx_fifo_rst = BIT(23),
++};
++
++static u32 esp32_uart_read(struct esp32_uart_plat *plat, u32 offset)
++{
++	return readl(plat->base + offset);
++}
++
++static void esp32_uart_write(struct esp32_uart_plat *plat, u32 offset, u32 val)
++{
++	writel(val, plat->base + offset);
++}
++
++static u32 esp32_uart_field(u32 val, u32 mask, u32 shift)
++{
++	return (val >> shift) & mask;
++}
++
++static u32 esp32_uart_rx_fifo_count(struct esp32_uart_plat *plat)
++{
++	const struct esp32_uart_soc_data *data = plat->data;
++	u32 status = esp32_uart_read(plat, UART_STATUS);
++
++	return esp32_uart_field(status, data->fifo_cnt_mask,
++				UART_RXFIFO_CNT_SHIFT);
++}
++
++static u32 esp32_uart_tx_fifo_count(struct esp32_uart_plat *plat)
++{
++	const struct esp32_uart_soc_data *data = plat->data;
++	u32 status = esp32_uart_read(plat, UART_STATUS);
++
++	return esp32_uart_field(status, data->fifo_cnt_mask,
++				UART_TXFIFO_CNT_SHIFT);
++}
++
++static int esp32_uart_update(struct esp32_uart_plat *plat)
++{
++	const struct esp32_uart_soc_data *data = plat->data;
++	int timeout = UART_UPDATE_TIMEOUT;
++
++	if (!data->reg_update_bit)
++		return 0;
++
++	setbits_le32(plat->base + data->reg_update, data->reg_update_bit);
++	while ((esp32_uart_read(plat, data->reg_update) & data->reg_update_bit) &&
++	       timeout--)
++		;
++
++	return timeout < 0 ? -ETIMEDOUT : 0;
++}
++
++static int esp32_uart_reset_fifo(struct esp32_uart_plat *plat)
++{
++	const struct esp32_uart_soc_data *data = plat->data;
++	u32 mask = data->tx_fifo_rst;
++	int ret;
++
 +	/*
-+	 * The memclk hash is written into the tail of the hashed handoff image
-+	 * (DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512) so that the
-+	 * whole-image hash covers it. That location overlaps the PHY init
-+	 * engine handoff table that phy_init_engine() replays on the retention
-+	 * restore path, so snapshot the original handoff bytes and restore them
-+	 * once the hash has been computed.
++	 * uart2 of ESP32 doesn't have any register to reset Tx_FIFO or Rx_FIFO,
++	 * and the FIFO_RST of uart1 may impact the functioning of uart2
++	 * so use soft reset instead
 +	 */
-+	memcpy(saved_handoff, memclk_hash_dst, SHA384_SUM_LEN);
++	if (data->broken_fifo_rst) {
++		while (esp32_uart_rx_fifo_count(plat))
++			esp32_uart_read(plat, UART_FIFO);
++		return 0;
++	}
++	mask |= data->rx_fifo_rst;
 +
- 	sha384_csum_wd((u8 *)memclk_table, (4 * sizeof(u32)),
--		       (u8 *)DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512,
--		       CHUNKSZ_PER_WD_RESET);
-+		       memclk_hash_dst, CHUNKSZ_PER_WD_RESET);
- 
- 	/* Generate HASH384 from the image */
- 	sha384_csum_wd((u8 *)DDR_HANDOFF_IMG_ADDR, DDR_HANDOFF_IMG_LEN,
- 		       hash, CHUNKSZ_PER_WD_RESET);
- 
-+	/* Restore the handoff bytes clobbered by the memclk hash above */
-+	memcpy(memclk_hash_dst, saved_handoff, SHA384_SUM_LEN);
++	setbits_le32(plat->base + UART_CONF0, mask);
++	ret = esp32_uart_update(plat);
++	if (ret)
++		return ret;
 +
- 	ret = memcmp((void *)hash, (const void *)header->ddrconfig_hash,
- 		     SHA384_SUM_LEN);
- 	if (ret) {
-@@ -2956,10 +2971,31 @@ int sdram_mmr_init_full(struct udevice *dev)
- 			}
- 
- 		} else {
--			/* Updating training result to DDR controller */
--			ret = update_training_result(&ddr_handoff_info);
--			if (ret)
--				return ret;
-+			/*
-+			 * Retention restore path: the trained results were
-+			 * already reloaded into the PHY by cal_data_ocram()
-+			 * (LOADING) in init_phy(), so update_training_result()
-+			 * must not run here (it would read back results from a
-+			 * PHY that was never freshly trained and fail the DFI
-+			 * handshake). Bring the PHY microcontroller out of
-+			 * reset/stall, then replay the PIE handoff to return the
-+			 * PHY to normal operating mode.
-+			 */
-+			clrbits_le16(ddr_handoff_info.phy_base +
-+				     DDR_PHY_APBONLY0_OFFSET,
-+				     DDR_PHY_MICROCONTMUXSEL);
-+			setbits_le16(ddr_handoff_info.phy_base +
-+				     DDR_PHY_MICRORESET_OFFSET,
-+				     DDR_PHY_MICRORESET_RESET |
-+				     DDR_PHY_MICRORESET_STALL);
-+			clrbits_le16(ddr_handoff_info.phy_base +
-+				     DDR_PHY_MICRORESET_OFFSET,
-+				     DDR_PHY_MICRORESET_RESET);
-+			setbits_le16(ddr_handoff_info.phy_base +
-+				     DDR_PHY_APBONLY0_OFFSET,
-+				     DDR_PHY_MICROCONTMUXSEL);
++	clrbits_le32(plat->base + UART_CONF0, mask);
++	return esp32_uart_update(plat);
++}
 +
-+			phy_init_engine(&ddr_handoff_info);
- 		}
- 
- 		/*
++/*
++ * div = clkdiv_int + clkdiv_frag / 16
++ * baudrate = uart_clk / div
++ */
++static int esp32_serial_setbrg(struct udevice *dev, int baudrate)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++	const struct esp32_uart_soc_data *data = plat->data;
++	u32 div, int_div, frag;
++
++	if (!plat->clock_rate || baudrate <= 0)
++		return -EINVAL;
++	if (plat->clock_rate > (UINT_MAX >> 4))
++		return -EINVAL;
++
++	/* shifting left by 4 bits to preserve frag field */
++	div = (plat->clock_rate << 4) / baudrate;
++	int_div = div >> 4;
++	frag = div & UART_CLKDIV_FRAG_MASK;
++
++	if (!int_div || int_div > data->clkdiv_mask)
++		return -EINVAL;
++
++	esp32_uart_write(plat, UART_CLKDIV,
++			 int_div | (frag << UART_CLKDIV_FRAG_SHIFT));
++
++	return esp32_uart_update(plat);
++}
++
++static int esp32_serial_getc(struct udevice *dev)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++
++	if (!esp32_uart_rx_fifo_count(plat))
++		return -EAGAIN;
++
++	return esp32_uart_read(plat, UART_FIFO) & 0xff;
++}
++
++static int esp32_serial_putc(struct udevice *dev, const char ch)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++
++	if (esp32_uart_tx_fifo_count(plat) >= UART_FIFO_LEN)
++		return -EAGAIN;
++
++	esp32_uart_write(plat, UART_FIFO, ch);
++
++	return 0;
++}
++
++static int esp32_serial_pending(struct udevice *dev, bool input)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++
++	if (input)
++		return esp32_uart_rx_fifo_count(plat);
++
++	return esp32_uart_tx_fifo_count(plat) ? 1 : 0;
++}
++
++static int esp32_serial_probe(struct udevice *dev)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++	const struct esp32_uart_soc_data *data;
++	u32 conf0;
++
++	data = (const struct esp32_uart_soc_data *)dev_get_driver_data(dev);
++	if (!data)
++		return -EINVAL;
++	plat->data = data;
++
++	esp32_uart_write(plat, UART_INT_ENA, 0);
++	esp32_uart_write(plat, UART_INT_CLR, 0xffffffff);
++
++	conf0 = esp32_uart_read(plat, UART_CONF0);
++	conf0 &= ~(UART_PARITY | UART_PARITY_EN |
++		   UART_BIT_NUM_MASK | UART_STOP_BIT_MASK |
++		   UART_LOOPBACK | UART_TX_FLOW_EN);
++	conf0 |= UART_BIT_NUM_8 | UART_STOP_BIT_1;
++	esp32_uart_write(plat, UART_CONF0, conf0);
++
++	return esp32_uart_reset_fifo(plat);
++}
++
++static int esp32_serial_of_to_plat(struct udevice *dev)
++{
++	struct esp32_uart_plat *plat = dev_get_plat(dev);
++	fdt_addr_t addr;
++	struct clk clk;
++	int ret;
++
++	addr = dev_read_addr(dev);
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	plat->base = (void __iomem *)(uintptr_t)addr;
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (!ret) {
++		ret = clk_get_rate(&clk);
++		if (!IS_ERR_VALUE(ret))
++			plat->clock_rate = ret;
++	} else if (ret != -ENOENT && ret != -ENODEV && ret != -ENOSYS) {
++		dev_err(dev, "failed to get clock: %d\n", ret);
++		return ret;
++	}
++
++	if (!plat->clock_rate)
++		plat->clock_rate = dev_read_u32_default(dev, "clock-frequency", 0);
++
++	if (!plat->clock_rate) {
++		dev_err(dev, "missing clock\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static const struct dm_serial_ops esp32_serial_ops = {
++	.putc = esp32_serial_putc,
++	.pending = esp32_serial_pending,
++	.getc = esp32_serial_getc,
++	.setbrg = esp32_serial_setbrg,
++};
++
++static const struct udevice_id esp32_serial_ids[] = {
++	{ .compatible = "esp,esp32-uart",
++	  .data = (ulong)&esp32_uart_data },
++	{ .compatible = "esp,esp32s3-uart",
++	  .data = (ulong)&esp32s3_uart_data },
++	{ .compatible = "esp,esp32s31-uart",
++	  .data = (ulong)&esp32s31_uart_data },
++	{ }
++};
++
++U_BOOT_DRIVER(serial_esp32) = {
++	.name = "serial_esp32",
++	.id = UCLASS_SERIAL,
++	.of_match = of_match_ptr(esp32_serial_ids),
++	.of_to_plat = of_match_ptr(esp32_serial_of_to_plat),
++	.plat_auto = sizeof(struct esp32_uart_plat),
++	.probe = esp32_serial_probe,
++	.ops = &esp32_serial_ops,
++#if !CONFIG_IS_ENABLED(OF_CONTROL)
++	.flags = DM_FLAG_PRE_RELOC,
++#endif
++};
 -- 
-2.43.7
+2.34.1
 
