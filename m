@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D44C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:36:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA6E2C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50067849F0;
+	by phobos.denx.de (Postfix) with ESMTP id 946C48497A;
 	Wed,  8 Jul 2026 19:36:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="XBpX0Dfc";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="SnrnRsOd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DC9984A04; Wed,  8 Jul 2026 15:07:04 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 3D15084A04; Wed,  8 Jul 2026 15:07:07 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8718849F0
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 234C8849F0
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-493e8d4f4dcso1420985e9.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:01 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-4728c12ba97so404531f8f.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783516021; x=1784120821; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=QLK42WOXbhwWhEaDyigxROqmKOM60cA56zyk3CSL9s4=;
- b=XBpX0DfcePHZBibJT2C2oK67qbqfHkqs+ve6mcAj/veq/HzSaDI1qxTqKKDRNRUI+S
- /FPqLW0ZyK1JBvIsTGTfE+utsFC6NSvKcWNReY39yPUByem4UYzzXY8elJKEyemgEG8j
- n3u4dvuGbttME3wq6SaAMMXpG1AfI9yHAnR+2FKDjifJ8e3VuqezLU69Z5PoU8IY691W
- Wj+oRSTCWKiqBJ6EpSPCuDS2+itj0LD4HBOr16413P0fXjwPeCccV3LavObrHB+nzibD
- WnduzXzckLDH/2Q0CH7kLAkM8PdatuoPkvPtWIdvDY8A6lR5FrCRw5EHjJPw6AWg+TFU
- 8AWw==
+ d=baylibre.com; s=google; t=1783516024; x=1784120824; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=cGZdG3SJfy9h9i6nQxJ6piCZBWq5f0YpdyA/BmigpSo=;
+ b=SnrnRsOdAG6iogTqFbA8y5X9rkhMx2Ho1ELw9k4iDSkxZ62/kXJcithi/fA/jxhrCl
+ XZAmFQUCpAIAurAvJw3Rc0dSKcnxvnzR+rrQI8vRPuCgLHcAGRSRAq0siPJ5S5X7h8OS
+ Ll0DxR4BczokV7beUsH7O+kjr1VXLMxugg3vvZIGhqooQhooxR1+FQNM8oOG1D8IzDQ9
+ vpJCOaOnvbVSl5UXtI56XYeGZHCvPC514IutZ/et9LrVQrntGiHWFYGfqxk+RUeywjhH
+ qOAvFsRFkSY/awWhnbBm3VD5zrIT8PSjh8rYExiUH5oCFWeyvZjrvnrH3WdJwbT5L73x
+ Jj8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783516021; x=1784120821;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=QLK42WOXbhwWhEaDyigxROqmKOM60cA56zyk3CSL9s4=;
- b=H5rR9X+KWVZa0t6keR47sJ3dKy4Kf5W0RpHOZ42w0PjG9Bzac6TEQsVzFvHcy6Cb2O
- ZiUypnlA7VGTDbX9n4MlQ6gWiHCcENLmYvHuJcYNBktB94xCEkTSSDea7Zhagq4/VfTI
- muZO38CM+hqNkjxY9/voLYkd7dv92BnZC5GswtvlwCWu11c91fykN8QNG03bJ8/4hpOs
- 5yOCLuO2RSeuWas8EebH5w7fOmycRvOaqEbUbsOsfEdlwNIphbdXWQFt3+wLQpo57L5O
- YwMO7MGsRB/oAmuHzfPhlb3gQGNEcfj0Tqyf1zLTygCxdYouwnjbAFbzx7jMDClxIhzn
- c8iw==
-X-Gm-Message-State: AOJu0Ywj/EV9sjRpymHebvKRDhg5vepsTInTmA4Rh1tPo+I0y/o9ZN2H
- RuzVt03xGGLWLml+jibOMLjSA9BgT1qvFm1LwT88s6eZ9B8y4Gmy3jsyX4xAJBg8LoQ=
-X-Gm-Gg: AfdE7cle1tt506xdUStarDffYhiQPFYwhRxsASMlyrhL4Xdl4XsBscs8O5JA4pAbTL7
- 8PkkuPSuUeGq11JKTvcFP57cvVSMW041h0eva7rR3qp1bIOkceZmh8OPpHpwbLsA5zEZuYH8Lx/
- tKOr47Nvm7PEHdSIPZcpI8msJ52rj/1y4YkMxqWXHBqarv2RUZDOZ4gWz+U/m0wreY/FzZZUlow
- RVXnr7vj0PlSShdcG619Cs3AB7FQLYozv9GasXHSIgyFk/Kt2dRHlDggG8OIWzsBOfT5luxH+n0
- z3Sks/NASZBalttkLgNGIZGAcTLoWwqJVWcZrLmYG8QYEgyQVM8EexXIzzU+3HkZ0OUYVKtgCjY
- AwaY3cqbCZqNhB4HWJdzUz9wHU2L/rWwee1BddeGlErykpzIy0PX8y4ggKe4TSc6pTxL1eo30GE
- vV/vjZAsB3SvtF4i5j9/74JgwQue1mZtx7i7EJyVyRHvafbCgReMtUkp7Eg2cs9FoIq93gftyUG
- yS8MIp+jLHsQOznwsM1lvEeZLlk/6uQRN+UDV+F4pqN87vdGPR29Jzh
-X-Received: by 2002:a05:600c:34d1:b0:493:a5f9:d33d with SMTP id
- 5b1f17b1804b1-493e6891cfcmr25299345e9.18.1783516021091; 
- Wed, 08 Jul 2026 06:07:01 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783516024; x=1784120824;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=cGZdG3SJfy9h9i6nQxJ6piCZBWq5f0YpdyA/BmigpSo=;
+ b=tAh85Q5mgZj8KhABc9XwLSgamQzm5zVca5dDFXqQNj7x3h7Wi4ewlx/ejLICkFnYla
+ Dfv9OceiuEZvIEpe4vio4c0+Z+kXgiARtvV6Alt22bLX52dz/UvgOIRosBz9rL4oTTRR
+ DZ7Fj5dKDxUzfVmTZwZrv9QlvArn+wKoHEtSgb58YkZ8TUmwM/5vohtz8lotnBfQ0YVc
+ vt8Z4gKuM2ccrYxIrnRuXub3vQ8htSAmZ6KBfYXH0XOntqUrEqcgxg2Sxw/IJbbbKiPt
+ iV2LOZd1CK21fPw5paX1LMQMkevJm0N/PesjgBZWvhsrZ2jLFtFLc8mF3TVLoAHmcoTU
+ ETPg==
+X-Gm-Message-State: AOJu0YyZ3XQ5cZNe/qTSqehOh0oBgdQu5o8loMe4/x2IQk2MNEfRoDGi
+ TYaiJZ9uMBsdAbC857lOFw8gtC/PxAo95dNBwQiSTR/aJipg/1E1CQoE4T9ohT4pj1A=
+X-Gm-Gg: AfdE7cmYd7xQ/d2ZCQkme6qALqecDTFfgZLv+wGf2XbAZV7sVH41guHRt8kMyBoWnbF
+ ZrtdOisHZoT6KJSENgau7o5W+ItHFBVL3AkQecyWcrfL/QYJEh0G2UqFvLSTtJDWPssmFq2fNis
+ NhPgtgF98C5n0iT4NVE6jE9YkwBw73C27ui9M0gvk/lVCwpAo1fk4efTMM1uNA2aii5BdG4zk3e
+ dhfV2pwINjoZtqkQ0qufjpgv+fSXhfOh4lX70L5LQuakjCFIGd4o2Ndlp+oABdH49kVPO/hs2mq
+ rwbzM9D/JA6ittEZ565jYdeGwoYFm+4+e6AFiDzz3adFqVLl9WhvsZI1i+cyuNayboDy8oBmx72
+ Z9R4ogvF7b6NTiuSBZqW1yrgMT3TPupPooMp/NX345zFa579qgExwvQAHaDy9IUCj/ae/acjioK
+ kkShB+eyy3XTmnsx56/xFd0Tm7yxYGg8Za2V5CdwGAP7oQxjz6C6nYPkF2RYENW1YLK5MJGxABo
+ wHToY7wf9no1FzdPCYFsVxopolpynwQdOrifC921JNH1DeH6818LGm+JrP8/m1Xp7UmvX8=
+X-Received: by 2002:a05:6000:25c7:b0:47d:ec60:657e with SMTP id
+ ffacd0b85a97d-47df076f100mr2644485f8f.39.1783516024447; 
+ Wed, 08 Jul 2026 06:07:04 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.06.58
+ ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 06:07:00 -0700 (PDT)
+ Wed, 08 Jul 2026 06:07:03 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH 00/12] power: domain: mediatek: refactor driver and add
- MT8188 support
-Date: Wed, 08 Jul 2026 15:07:06 +0200
-Message-Id: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
+Date: Wed, 08 Jul 2026 15:07:07 +0200
+Subject: [PATCH 01/12] power: domain: keep Makefile and Kconfig sorted
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/zWP3W7CMAxGX6XK9TzFoRtpr3iPiYv8uJ0Habqkw
- CbEu88UJl8d6fPn46uqVJiq6purKnTmynkSwJdGhU83jQQchZXR5l1vtYG0WLQWXIww5wsViDk
- 5nqC1dtDBROcoKtmeCw38szZ/7B9cT/6LwnKveyYKfZ/k5PKIKe8qQcgp8dI3FjVSNG/tFu/pR
- LW6VadvnjL4LxOOh1Uoca08jcI5HECkZnkuDCO4DGcEmQ3qzmPXmdbuvPs9si/0KhfV/nb7A+Z
- Es1UMAQAA
-X-Change-ID: 20260702-mt8188-add-power-domain-488f0c2daaed
+Message-Id: <20260708-mt8188-add-power-domain-v1-1-0e930b4f714e@baylibre.com>
+References: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
+In-Reply-To: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -137,119 +133,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds power domain support for the MediaTek MT8188 SoC, used
-by the Genio 510 (mt8370) and Genio 700 (mt8390) EVKs.
+Sort the Makefile and Kconfig alphabetically.
 
-The existing MediaTek scpsys power domain driver is a single file
-driver, that supports MT7622/MT7623/MT7629 SoCs.
-MT8188 is much more complex and adding it to the current driver will
-make it really big and difficult to maintain.
-
-The series is organised as follows:
-
- - First, some cleanup:
-   - drop CONFIG_MTK_POWER_DOMAIN from the defconfigs whose device
-     trees have no matching scpsys node. It builds only dead code.
-   - remove the enum-based per-SoC dispatch, keeping the per-SoC
-     information in the match data.
-   - keep the Makefile and Kconfig sorted,
-
- - Then preparatory refactoring with no functional change:
-   - prefix the power_domain_ops callbacks with mtk_,
-   - split the monolithic driver into per-SoC drivers
-     sharing a common core (selected through a hidden MTK_POWER_DOMAIN
-     symbol), and wrap each SoC's domain table in a struct scp_soc_data
-     that also carries its size.
-
- - Extend core driver:
-   - rename the flat probe to mtk_scpsys_probe
-   - add support for the power-controller model, i.e. per-domain power
-     status register offsets, ordered bus-protection steps, per-domain
-     clocks and parent domains, and a probe that walks the controller's
-     subnodes to build the domain tree.
-
- - Add the MT8188 power domain driver and enable it on the Genio 510 and
-   Genio 700 EVKs.
-
-The existing MT7622/MT7623/MT7629 drivers are functionally unchanged.
-
-Tested on Genio 700 board.
-
-Note: when booting the following warnings are displayed:
-
-  mt8188_power_domain power-controller: power-domain@22: failed to get subsys clk at index 0: -19
-  mt8188_power_domain power-controller: failed to add child domain: power-domain@22
-  mt8188_power_domain power-controller: power-domain@30: failed to get subsys clk at index 0: -19
-  mt8188_power_domain power-controller: failed to add child domain: power-domain@30
-  mt8188_power_domain power-controller: power-domain@24: failed to get subsys clk at index 0: -19
-  mt8188_power_domain power-controller: failed to add child domain: power-domain@24
-  mt8188_power_domain power-controller: power-domain@21: failed to get subsys clk at index 0: -19
-  mt8188_power_domain power-controller: failed to add child domain: power-domain@21
-  mt8188_power_domain power-controller: power-domain@13: failed to get clk at index 2: -19
-  mt8188_power_domain power-controller: failed to add child domain: power-domain@13
-
-Theses warnings are harmless. They exist because the clock driver is
-missing some clock definitions, such as audio. These clock definition can
-be added later, when needed.
-
-This series depends on [1] to fix a pericfg-ao clock.
-
-The new files added by this series are not listed in MAINTAINERS: they
-will be covered by the pending "MAINTAINERS: Replace Mediatek with N:"
-patch from Marek [2].
-
-[2]: https://lore.kernel.org/all/20260617024105.152655-1-marek.vasut%2Brenesas@mailbox.org/
-
-[1]: https://lore.kernel.org/all/20260701-mt8188-clk-add-missing-clock-in-pericfg-ao-v1-1-13109b199248@baylibre.com/
+No functional change.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Julien Stephan (12):
-      power: domain: keep Makefile and Kconfig sorted
-      configs: mediatek: drop unused CONFIG_MTK_POWER_DOMAIN
-      power: domain: mediatek: remove enum scp_domain_type
-      power: domain: mediatek: prefix internal identifiers with mtk_
-      power: domain: mediatek: constify scp_domain_data instances
-      power: domain: mediatek: split into per-SoC drivers
-      power: domain: mediatek: wrap domain tables in struct scp_soc_data
-      power: domain: mediatek: rename mtk_power_domain_probe to mtk_scpsys_probe
-      power: domain: mediatek: rename struct mtk_scp_domain to mtk_scpsys
-      power: domain: mediatek: add support for the power-controller model
-      power: domain: mediatek: add MT8188 power domain driver
-      configs: mediatek: enable MT8188 power domain
+ drivers/power/domain/Kconfig  | 62 +++++++++++++++++++++----------------------
+ drivers/power/domain/Makefile | 12 ++++-----
+ 2 files changed, 37 insertions(+), 37 deletions(-)
 
- MAINTAINERS                                |   1 +
- configs/mt7622_rfb_defconfig               |   2 +-
- configs/mt7623a_unielec_u7623_02_defconfig |   2 +-
- configs/mt7623n_bpir2_defconfig            |   2 +-
- configs/mt7629_rfb_defconfig               |   2 +-
- configs/mt7981_emmc_rfb_defconfig          |   2 -
- configs/mt7981_rfb_defconfig               |   2 -
- configs/mt7981_sd_rfb_defconfig            |   2 -
- configs/mt7986_rfb_defconfig               |   2 -
- configs/mt7986a_bpir3_emmc_defconfig       |   2 -
- configs/mt7986a_bpir3_sd_defconfig         |   2 -
- configs/mt7987_emmc_rfb_defconfig          |   2 -
- configs/mt7987_rfb_defconfig               |   2 -
- configs/mt7987_sd_rfb_defconfig            |   2 -
- configs/mt7988_rfb_defconfig               |   2 -
- configs/mt7988_sd_rfb_defconfig            |   2 -
- configs/mt8188.config                      |   2 +
- drivers/power/domain/Kconfig               |  89 ++--
- drivers/power/domain/Makefile              |  15 +-
- drivers/power/domain/mt7623-power-domain.c |  85 ++++
- drivers/power/domain/mt7629-power-domain.c |  60 +++
- drivers/power/domain/mt8188-power-domain.c | 665 +++++++++++++++++++++++++++++
- drivers/power/domain/mtk-power-domain.c    | 576 ++++++++++++++-----------
- drivers/power/domain/mtk-power-domain.h    | 131 ++++++
- 24 files changed, 1352 insertions(+), 302 deletions(-)
----
-base-commit: 8101ed2547180109903e9c7a2ecc8e0679c7ec35
-change-id: 20260702-mt8188-add-power-domain-488f0c2daaed
-prerequisite-message-id: 20260701-mt8188-clk-add-missing-clock-in-pericfg-ao-v1-1-13109b199248@baylibre.com
-prerequisite-patch-id: be920ef2f5c93fb8111072d8fb30411d227a52de
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index bb9c52155d2..a96c3fb979c 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -9,6 +9,14 @@ config POWER_DOMAIN
+ 	  domains). This may be used to save power. This API provides the
+ 	  means to control such power management hardware.
+ 
++config AGILEX5_PMGR_POWER_DOMAIN
++	bool "Enable the Agilex5 PMGR power domain driver"
++	depends on SPL_POWER_DOMAIN && ARCH_SOCFPGA_SOC64
++	help
++	  Enable support for power gating peripherals' SRAM specified in
++	  the handoff data values obtained from the bitstream to reduce
++	  power consumption.
++
+ config APPLE_PMGR_POWER_DOMAIN
+ 	bool "Enable the Apple PMGR power domain driver"
+ 	depends on POWER_DOMAIN
+@@ -18,14 +26,6 @@ config APPLE_PMGR_POWER_DOMAIN
+ 	  This driver is needed to power on parts of the SoC that have
+ 	  not been powered on by previous boot stages.
+ 
+-config AGILEX5_PMGR_POWER_DOMAIN
+-	bool "Enable the Agilex5 PMGR power domain driver"
+-	depends on SPL_POWER_DOMAIN && ARCH_SOCFPGA_SOC64
+-	help
+-	  Enable support for power gating peripherals' SRAM specified in
+-	  the handoff data values obtained from the bitstream to reduce
+-	  power consumption.
+-
+ config BCM6328_POWER_DOMAIN
+ 	bool "Enable the BCM6328 power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_BMIPS
+@@ -62,12 +62,12 @@ config IMX8MP_MEDIAMIX_BLKCTRL
+ 	help
+ 	  Enable support for manipulating NXP i.MX8MP on-SoC MEDIAMIX block controller.
+ 
+-config MTK_POWER_DOMAIN
+-	bool "Enable the MediaTek power domain driver"
+-	depends on POWER_DOMAIN && ARCH_MEDIATEK
++config MESON_EE_POWER_DOMAIN
++	bool "Enable Amlogic Everything-Else power domain driver"
++	depends on POWER_DOMAIN && ARCH_MESON
+ 	help
+-	  Enable support for manipulating MediaTek power domains via MMIO
+-	  mapped registers.
++	  Enable support for manipulating Amlogic Meson Everything-Else power
++	  domains.
+ 
+ config MESON_GX_VPU_POWER_DOMAIN
+ 	bool "Enable Amlogic Meson GX VPU power domain driver"
+@@ -76,13 +76,6 @@ config MESON_GX_VPU_POWER_DOMAIN
+ 	  Enable support for manipulating Amlogic Meson GX Video Processing
+ 	  Unit power domain.
+ 
+-config MESON_EE_POWER_DOMAIN
+-	bool "Enable Amlogic Everything-Else power domain driver"
+-	depends on POWER_DOMAIN && ARCH_MESON
+-	help
+-	  Enable support for manipulating Amlogic Meson Everything-Else power
+-	  domains.
+-
+ config MESON_SECURE_POWER_DOMAIN
+ 	bool "Enable Amlogic Secure power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_MESON && MESON_A1
+@@ -90,6 +83,13 @@ config MESON_SECURE_POWER_DOMAIN
+ 	  Enable support for manipulating Amlogic Meson Secure power domains.
+ 	  Support for Amlogic A1 series.
+ 
++config MTK_POWER_DOMAIN
++	bool "Enable the MediaTek power domain driver"
++	depends on POWER_DOMAIN && ARCH_MEDIATEK
++	help
++	  Enable support for manipulating MediaTek power domains via MMIO
++	  mapped registers.
++
+ config QCOM_RPMH_POWER_DOMAIN
+ 	bool "Enable the QCOM RPMH Power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_SNAPDRAGON
+@@ -128,12 +128,13 @@ config TEGRA186_POWER_DOMAIN
+ 	  Enable support for manipulating Tegra's on-SoC power domains via IPC
+ 	  requests to the BPMP (Boot and Power Management Processor).
+ 
+-config TI_SCI_POWER_DOMAIN
+-	bool "Enable the TI SCI-based power domain driver"
+-	depends on POWER_DOMAIN && TI_SCI_PROTOCOL
++config TI_OMAP_PRM_POWER_DOMAIN
++	bool "Enable the TI OMAP PRM power domain driver"
++	depends on POWER_DOMAIN && ARCH_OMAP2PLUS
+ 	help
+-	  Generic power domain implementation for TI devices implementing the
+-	  TI SCI protocol.
++	  Enable support for TI OMAP Power and Reset Manager (PRM) power domains.
++	  The driver is currently a stub to be able to probe devices that
++	  require this type of power domain device.
+ 
+ config TI_POWER_DOMAIN
+ 	bool "Enable the TI K3 Power domain driver"
+@@ -141,13 +142,12 @@ config TI_POWER_DOMAIN
+ 	help
+ 	  Generic power domain implementation for TI K3 devices.
+ 
+-config TI_OMAP_PRM_POWER_DOMAIN
+-	bool "Enable the TI OMAP PRM power domain driver"
+-	depends on POWER_DOMAIN && ARCH_OMAP2PLUS
++config TI_SCI_POWER_DOMAIN
++	bool "Enable the TI SCI-based power domain driver"
++	depends on POWER_DOMAIN && TI_SCI_PROTOCOL
+ 	help
+-	  Enable support for TI OMAP Power and Reset Manager (PRM) power domains.
+-	  The driver is currently a stub to be able to probe devices that
+-	  require this type of power domain device.
++	  Generic power domain implementation for TI devices implementing the
++	  TI SCI protocol.
+ 
+ config ZYNQMP_POWER_DOMAIN
+ 	bool "Enable the Xilinx ZynqMP Power domain driver"
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 110153d5cf8..f3cce2b104e 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -4,24 +4,24 @@
+ #
+ 
+ obj-$(CONFIG_$(PHASE_)POWER_DOMAIN) += power-domain-uclass.o
+-obj-$(CONFIG_APPLE_PMGR_POWER_DOMAIN) += apple-pmgr.o
+ obj-$(CONFIG_AGILEX5_PMGR_POWER_DOMAIN) += altr-pmgr-agilex5.o
++obj-$(CONFIG_APPLE_PMGR_POWER_DOMAIN) += apple-pmgr.o
+ obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
+ obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
+ obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
+ obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
+ obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
+-obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
+-obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
++obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_SECURE_POWER_DOMAIN) += meson-secure-pwrc.o
++obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
++obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
+ obj-$(CONFIG_RENESAS_R8A78000_POWER_DOMAIN) += renesas-r8a78000-power-domain.o
+ obj-$(CONFIG_SANDBOX_POWER_DOMAIN) += sandbox-power-domain.o
+ obj-$(CONFIG_SANDBOX_POWER_DOMAIN) += sandbox-power-domain-test.o
+ obj-$(CONFIG_SCMI_POWER_DOMAIN) += scmi-power-domain.o
+ obj-$(CONFIG_TEGRA186_POWER_DOMAIN) += tegra186-power-domain.o
+-obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
+-obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
+ obj-$(CONFIG_TI_OMAP_PRM_POWER_DOMAIN) += ti-omap-prm.o
++obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
++obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
+ obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
+-obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
 
-Best regards,
---  
-Julien Stephan <jstephan@baylibre.com>
+-- 
+2.54.0
 
