@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC94C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6159C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D50084A29;
-	Wed,  8 Jul 2026 19:21:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C02F84A27;
+	Wed,  8 Jul 2026 19:21:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="I3Sg1/dC";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="eXjBiVe3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C397843B6; Wed,  8 Jul 2026 19:21:36 +0200 (CEST)
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [IPv6:2001:1600:19:38e0::42aa])
+ id D070184A49; Wed,  8 Jul 2026 19:21:36 +0200 (CEST)
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [IPv6:2001:1600:19:7ff8::bc0e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0749784A30
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:21:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 605B684A27
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gwPyh4ZBnz4mG;
- Wed,  8 Jul 2026 19:21:32 +0200 (CEST)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gwPyh00JLz4gF;
+ Wed,  8 Jul 2026 19:21:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783531292;
- bh=l+CtSVfAB+L5Vuskxw+HgoaQGAIMMcv0uO2Kwm0vVuY=;
+ s=20231125; t=1783531291;
+ bh=1fhymfP5POY1NZSMLuSWYXey0UM89tCXqOThvNTCdNk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=I3Sg1/dCtokhxCExLbDbe1T94YUtYRLhUQBzl9jTO58qgsl6Q89d7V2R9CCEvo83v
- kWvRHxi04TJeG8FoYdRCje+T8+cKK3DMZsFCqDrbtFaUs367e87QEb7av6GdMl9VKi
- Zzi+D2r7qnxWGN0LiSCiCtJJ4/TeqnVQ8172gwJdAHvo99mT9WwcyZ8oNsRh+PaiBI
- FtAXhpQEAaWmyfU+qsq8Xa9F4QZbpVMLeWjC8ytmLZ3P+3FH4+CLIOXm1CqAahoft0
- iwbNbJNyW9tQLHy2GmRnOvF/2eUMaj3K+AK5zuvpYClRlY9AFRq+MxnK+2LLM+tQGS
- 0dROPLdXlkI7w==
+ b=eXjBiVe3cQoHvF+L0XgcUn5DYBEM5b9wM/sN1bh+DyVUZzx8s7Rmj4Ws3Izc2ZrPF
+ B7BGbiAjHG5Wgk2JHu94J3ZjfhXbR7jbKl1cFcBzUd3Hz+xXa5lcYIYOPDT4fG4DYL
+ TzfsbTMQplQlKqVKXh+CWIwJdgpsDki/GexZg68Npoux5UDVs1RxwlrKA9FENmz1EI
+ BH09Fejp7yxj/nknmEnURvIX2ZvkES5BUk+goDGuIz5oNU9AhmzMuM0v3XkNBRjS6Z
+ I1lap9Tk/eLtt++3pSgfyD2dwwgzonrvDhIGkbXx/h/0CmG0yQKyNobyVZH4aEnGq1
+ gOH8n+mh08ihw==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gwPyg67ZfzbH0; Wed,  8 Jul 2026 19:21:31 +0200 (CEST)
+ id 4gwPyg2ggKzbj3; Wed,  8 Jul 2026 19:21:31 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 08 Jul 2026 19:21:15 +0200
-Subject: [PATCH 3/3] doc: CONTRIBUTE: explicitly list tests and
- documentation as welcome contributions
+Date: Wed, 08 Jul 2026 19:21:14 +0200
+Subject: [PATCH 2/3] doc: CONTRIBUTE: tell people reviewing *is* contributing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-other-contrib-v1-3-8b3bd4d265ef@cherry.de>
+Message-Id: <20260708-other-contrib-v1-2-8b3bd4d265ef@cherry.de>
 References: <20260708-other-contrib-v1-0-8b3bd4d265ef@cherry.de>
 In-Reply-To: <20260708-other-contrib-v1-0-8b3bd4d265ef@cherry.de>
 To: u-boot@lists.denx.de
@@ -77,29 +76,35 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-We don't have too many people looking at those at the moment, so having
-people getting into the project by adding tests or documentation is I
-believe a good thing so let's encourage those specific contributions.
+We are "a bit" struggling with reviewing things and it's most of the
+time maintainers or long time contributors reviewing patches on the
+mailing list.
+
+Hint that reviewing is also contributing to the project and that even if
+you don't feel you're an expert, your review is still welcome and can
+help us catch bugs before they are merged.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/CONTRIBUTE.rst | 7 +++++++
- 1 file changed, 7 insertions(+)
+ doc/CONTRIBUTE.rst | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
-index cd9a381a3eb8..e8fa595ed4ab 100644
+index 0179d55dbcc0..cd9a381a3eb8 100644
 --- a/doc/CONTRIBUTE.rst
 +++ b/doc/CONTRIBUTE.rst
-@@ -47,6 +47,13 @@ to what's most often believed, you do not need to be an expert to review patches
- and the project will benefit from people with different skillsets and experience
- looking at the same patches and each catch different bugs.
+@@ -38,6 +38,15 @@ script. Please don't send patches as attachments, and ensure corporate mail
+ systems don't reformat patches, append disclaimers or other unnecessary notes.
+ The b4 tool automates a number of components mentioned above.
  
-+The project would also benefit from more :ref:`develop/index:testing`.
-+
-+New sections or updates to the documentation are most welcome, e.g.
-+:ref:`usage/index:shell commands`. See :doc:`/develop/docstyle`.
-+
-+Thank you for your help!
++Code is not the only thing you can contribute to the project. As most
++open-source projects, the U-Boot project suffers from a lack of reviewers.
++Consider spending some time reading patches on `the mailing list archive
++<https://lists.denx.de/pipermail/u-boot/>`_ and providing feedback to
++contributors when something could be improved or if you have questions. Contrary
++to what's most often believed, you do not need to be an expert to review patches
++and the project will benefit from people with different skillsets and experience
++looking at the same patches and each catch different bugs.
 +
  Patch Series
  ------------
