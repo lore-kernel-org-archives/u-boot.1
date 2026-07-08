@@ -4,116 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006CEC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:38:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB09C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 833EA84A63;
+	by phobos.denx.de (Postfix) with ESMTP id C6BE084AC0;
 	Wed,  8 Jul 2026 19:36:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=mechasystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Q2wRr5Fy";
+	dkim=pass (2048-bit key; unprotected) header.d=mechasystems.com header.i=@mechasystems.com header.b="IIyJMKm1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A469849F6; Wed,  8 Jul 2026 15:07:42 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 79546849F0; Wed,  8 Jul 2026 15:45:53 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F0784A04
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EB5B849BA
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:45:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=mechasystems.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-46ed4f66256so580147f8f.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=advaitd@mechasystems.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-847a69ba83dso594586b3a.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:45:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783518349; cv=none;
+ d=google.com; s=arc-20260327;
+ b=XKCS13td8bfGzFmJuPlLWQqyJkXrkN2XBrW9H1BoTuRtXoChaLT2re2GUaOrUQ25ZU
+ oP8sPLnTIfr5aRJJH2VCAaeLAGJkDFIliQk2zrItQu0KsJhA7wMqWw0QPXuUT68X9OWj
+ NlhYfVk1ZuW7vzbHjcFumhO3znxpRupRcahu+gntpSl++xTawBqno08asVNn0ICFgnpq
+ uxe04GiDDpdZkWl/gwGR2ylPUqgYM5NjnyKpd4gXFMzuyGb+x518uvo7fMNv1t+QQt5v
+ 3yTWYSvd+6OZfzR5/34CUq2XsrPfnelFYyVi8JgMVjixHcibGn4gnlW5brT8VUbUbIDh
+ pWrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=NDbgLXZJwZdHhCjaS2rPGcG3CqDKQSBsO6H5IGM7IXg=;
+ fh=KEkhknkdNbyoW26fplXFgN8sA5BthZq3KpGIIy9YmVk=;
+ b=lPfHjXqS33lHCDWkdFp6yJk3l65426Cn+ZyOpO5EnLuARTCrZ4aisiSM0qdWJ/U/WW
+ ine6Gg2rk9wUKOPuusqvWrmbx8U8YCUsLwGCLU/w3gvv9OON9aT1H7zwQ8XWCsW3Dz9h
+ 9NKeH1t3ZiF3w09BajS5N+lSz8nDl/v0EJ3eaCgWNHEC51J2gZy7uSMRwgHk0x+M5A6P
+ EtXCAKJHkQNqWqbBujFbz50eL/7GtOLtgmS/CxVQClng6HFC1DRg2RIvl6H5VmiofgfF
+ nDVCstjwSwU2jZ/qwhPSs87THa1CJJ01ypBd9E+GHMsCpCpHVZ7eIvLpJXp6PBual3jk
+ ykBg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783516059; x=1784120859; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FRN6ZVt1VbqnQo6FTJcJAFgDeQFfWM2FOpxwD5VJyyE=;
- b=Q2wRr5FyJXwL9MlHbpmA/m5qjtUo/rF6Yh1HdtxWVBjTn3PjoGpz+Pb8nX38MeoEh9
- HI1GAYsae26X+kDm3CCvdDzWcY8O2Kt1d7hLm/B/ci8SOD8/aegV9o/MuON6bbys48zN
- DIE6MrStpavnvz1G86TIb5gzl4LfcQOeZ0+BaO3NwKwU4HdcAGHeII0dHNwY9w0qG3Ib
- I/1bkGvV2C5eM2bSg5kT2/RJ8DiZrNW5KS+AXQ6T1aomS68QDhIFYybDKRGWUv2XG/uW
- /U+AvHmBo9k03ON+IOsCRpCjkThrQIFvPiViMrWeBYgNqDusUz68HcEBOPQ8ZSLyka0R
- NVQg==
+ d=mechasystems.com; s=google; t=1783518349; x=1784123149; darn=lists.denx.de; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=NDbgLXZJwZdHhCjaS2rPGcG3CqDKQSBsO6H5IGM7IXg=;
+ b=IIyJMKm1Pgqchh8264LduJJs3JpCZuD7p7gw25zL1qyNSW5rRfYIjEFO9uOBcZK55I
+ nrNlevvz3dnP/TncaXh3oVi+yh1AY17ElAUl+gjRq8OcedZgHITVP5m0HembdGqiI4xv
+ D4aqgK3MD7QO4o9kF98FM366nIxXc026wO+OQDVkgUXWtrEBV1pGaKs3s1qXCeAtvR+h
+ 2TJYeSpNbZwvcFJSeN/1d+r53HZaybCz3olGSHDq5AjMA9IEHETYTHywjCHmS/0Knb1E
+ +GZ0LdrDJT2TcA+Kxp8b9lTOzjXCpezl0UZjqrmY7X/uA2juLfEW35sAgVltBfO51nSZ
+ p3KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783516059; x=1784120859;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=FRN6ZVt1VbqnQo6FTJcJAFgDeQFfWM2FOpxwD5VJyyE=;
- b=ovK/vQbpnrwbMS2OFJ3jaWjHSbWjL2k+wfdq51L/CpYAfX2WHvhN//azKJEtFg2eiZ
- btmjV1boVRA2heEpF+6BAUrKwgUCIpjWCXnRUSTnX6qDidflESKb4t2qEUoUIAzhHPPR
- 0zinM2g2Q4mzNnphBhp3Epf+CZEIvJyd/HZ+e0rrHDXm6gTrYdocYy9rhr6kDw9NUiFr
- K68Mb+rQufCUmEC8B74gdxkqfVrqskhnyoTBg6GnRZI72UBUaiigTa0G/G+rE7xIsFXW
- gzHD1OIs3iBsW9TXS5E5jSAqQB5fBYzLy3HcW2fVIdwYpQYrZyeGO84uV/DE1/iykTPw
- FfdA==
-X-Gm-Message-State: AOJu0Yw15F8xd1zw/YiKbksYH/u1crzD9JN4Pj1/J/NjBFQ1pSSWFWVL
- rKqLF0+97z//dCiAQ2zV3UK4Ze9mdyQ9/FjHuX7ZrrhZjPosykMMPDnYiVpH4WSId44=
-X-Gm-Gg: AfdE7cmu8J8uavdJ7zH4b91MNo1E88oatdMHOX3/ICfRY7eOl90do7IMuwndWibVC7b
- GOJdK7lK3zHWSdriCoEFf+cZQ7KYPlfI/fIjQGBi79fxNUH9UpmcN2Cp3Vh9eZTSxqWfgVM5j9K
- 29hEVonmZb9PxfFd5V6fu84KGh4KUGXkCNjk6bmarLQbdUL2wmzKz4us6qDMiZelv6X5M5az60m
- JJu0MScxq9xHlkKs0tEqDC3OxLqgHFzhhO0otLIQ7l1c+9qcDiwRsg/W33g7dYeK1c+5jRlGPpp
- frBz1qaPsxWCb/4B3S31Xy3oE2oZm7AR2by0hxq9y21RqYRAxMSHMkKD0XsbNmxjWUt1D8MR4ZM
- 7eMfcrO5aQXf0ttG74jlWvzVifrmmKOgf8gBJ5cBIf5mz8tu5A98x2M08W6Aah/gUX2HPVFGY88
- +G2QnliJb/OcD17k4a8McafExr4Ms8wPzeF6N1RePJ9qqty1agzB/E1zi4orc4bY4KGWfq7yVwa
- yS860OJSMqsMNmcBV2D8T+AhgLJKvRi6gWj2KwDHLowzNwRMEhrTynSNHnA1O2xb1Ngj98=
-X-Received: by 2002:a5d:5d10:0:b0:475:f0d1:eb6d with SMTP id
- ffacd0b85a97d-47df07d2d32mr3022057f8f.58.1783516059119; 
- Wed, 08 Jul 2026 06:07:39 -0700 (PDT)
-Received: from [192.168.1.65]
- (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
- [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 06:07:37 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 08 Jul 2026 15:07:18 +0200
-Subject: [PATCH 12/12] configs: mediatek: enable MT8188 power domain
+ d=1e100.net; s=20251104; t=1783518349; x=1784123149;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=NDbgLXZJwZdHhCjaS2rPGcG3CqDKQSBsO6H5IGM7IXg=;
+ b=rtG8Q2pU+WRoB//mf5JqJsqkoPHVd0W6s53/Stag6NKZUqpjoyadRQEmglYsGRycDE
+ 7rZmZWGEr4U+KEOnLufxgnATfJs5fVEr+fj9wXcslIwT+p4a3VRQBrmeFXpWoGtOtKJp
+ r1pWX8VBbt+d83YeAGVErm0SCusAoqtM2XbgVYGjr3x+ERUG9S0Ys+VEyAEqezZyjr+k
+ rrxI3YKHW/WrYabte9LdKddT7uhHN2FwD4PYL891exJs5dA7peKmBUPPhKNUyWJF5Ldb
+ 2f5uqp9DPMcTHZ9F8JrqGosdxH8sG6GgXcGaQtxTFkhFzTao2Ba8CCrecO0by3VAxBh0
+ naKQ==
+X-Gm-Message-State: AOJu0Yw1vGi04WQ7pTM6JWYpByRZs9feEjDyBzKJEz7p/+pbz+NcERbA
+ N2peP8dWvEP81bvODNJNlnaufxH1rxLHvMFmygssTsxSIs3+Ap16HwlVXVn2Dw2xoOk/TuP4aWp
+ nKfGWkzufuEeDPwtXGUw3SCL4myrOnQO4fntEA2tQUQ==
+X-Gm-Gg: AfdE7ckuyq5A4Xw55PoZ6GC1dUPVmLFEiBGEymdc4xsQFryhr91rXFDGW5+zH4CJ3C6
+ d9Hkm9OkRuq3tYh/Ix84B3rxpSHCnDDg7sFwpKLAnzrAqhQmh/SgmDgzf5KdGnJkpqGhJKoVWMS
+ S/3K0jyd4ObdiQXmarnqLdB+iwga8gaUR4h/hzQHuCwz834gnXxb1AwvljHSIzGSIk1R1acakHD
+ gLxJWxi6BCbAYY1BGsGj2KNt93EltymT1Ht44aKD5Mr7HXdx+GrcCBCL3PW90Du/JoC8pZjKJg2
+ 8TywMqzyY9Kup9Eaj9eir4EQ43KfAw==
+X-Received: by 2002:a05:6a20:d499:b0:3c0:9c18:d5a6 with SMTP id
+ adf61e73a8af0-3c0bd1b22ffmr3487153637.67.1783518349495; Wed, 08 Jul 2026
+ 06:45:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-mt8188-add-power-domain-v1-12-0e930b4f714e@baylibre.com>
-References: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
-In-Reply-To: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>, 
- Brian Sune <briansune@gmail.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Sam Shih <sam.shih@mediatek.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- David Woodhouse <dwmw2@infradead.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Marek Vasut <marex@nabladev.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Johan Jonker <jbx6244@gmail.com>, Carlo Caione <ccaione@baylibre.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.15.2
+References: <20260702151325.290749-1-advaitd@mechasystems.com>
+ <CAPVz0n1YGYKMWo6fVHF8gXZ8_6BjHCC4WUs-BBL5__+L8Bhi3w@mail.gmail.com>
+In-Reply-To: <CAPVz0n1YGYKMWo6fVHF8gXZ8_6BjHCC4WUs-BBL5__+L8Bhi3w@mail.gmail.com>
+From: Advait Dhamorikar <advaitd@mechasystems.com>
+Date: Wed, 8 Jul 2026 19:15:37 +0530
+X-Gm-Features: AVVi8CddcIunhQYhW5c4Z1lAaNXZMi5uTjB1vPyP8HgvmuWbftttVOAe0iF0qQ8
+Message-ID: <CAAPs2HSH4qz292VEcxT-knTm-CrcVXmypceq2n1XLJX4qcQKxg@mail.gmail.com>
+Subject: Re: [PATCH v2] video: add ChipWealth CH13726A AMOLED panel driver
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, ag.dev.uboot@gmail.com, 
+ ion@agorria.com, dario.binacchi@amarulasolutions.com, 
+ michael@amarulasolutions.com, xypron.glpk@gmx.de, ravi@prevas.dk, 
+ sjg@chromium.org, patrice.chotard@foss.st.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 08 Jul 2026 19:36:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -131,30 +116,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the MT8188 power domain driver.
+> Hey there! Thanks for your contribution, it is pretty solid but there
+> are a few places that can be improved.
+Hi Svyatoslav, thanks for your inputs!
 
-CONFIG_POWER_DOMAIN is required as CONFIG_MT8188_POWER_DOMAIN depends
-on it.
+> > +config VIDEO_AMOLED_CHIPWEALTH_CH13726A
+>
+> May you please rename AMOLED > PANEL
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- configs/mt8188.config | 2 ++
- 1 file changed, 2 insertions(+)
+Most of the drivers say `CONFIG_VIDEO_LCD_XXXX`
+Since this driver is an AMOLED I thought of using that.
+There also don't seem to be any existing setups named `CONFG_VIDEO_PANEL_XXX`.
+Should I still rename it to VIDEO_PANEL_CHIPWEALTH_CH13726A?
 
-diff --git a/configs/mt8188.config b/configs/mt8188.config
-index ece4e60f1ee..29e2b3db878 100644
---- a/configs/mt8188.config
-+++ b/configs/mt8188.config
-@@ -19,6 +19,8 @@ CONFIG_MMC_MTK=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT8188=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_MT8188_POWER_DOMAIN=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
+> > +static int ch13726a_dcs_write_buf(struct udevice *dev, const void *data,
+> > +                                 size_t len)
+> > +{
+> > +       struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
+> > +       int ret;
+> > +
+> > +       ret = mipi_dsi_dcs_write_buffer(plat->device, data, len);
+> > +       if (ret < 0)
+> > +               log_err("failed to write dcs sequence: %d\n", ret);
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +#define dcs_write_seq(dev, cmd, seq...)                                \
+> > +({                                                             \
+> > +       const u8 d[] = { cmd, seq };                    \
+> > +                                                               \
+> > +       ch13726a_dcs_write_buf(dev, d, ARRAY_SIZE(d));          \
+> > +})
+> > +
 
--- 
-2.54.0
+> You can fold this.
 
+I'll fold this into one single #define altogether.
+
+> > +struct ch13726a_panel_priv {
+> > +       struct udevice *reg;
+> > +       struct udevice *backlight;
+> > +       struct gpio_desc reset;
+> > +};
+>
+> You are lacking supplies here: vdd1v2, vddio, vdd and avdd
+>
+> U-Boot can handle them so you should include control over them.
+
+My board has the input rails permanently powered, so the current
+driver doesn't request any regulators
+I'll add support for the vdd, vddio, vdd1v2, and avdd supplies. Should
+these be treated as
+optional (-ENOENT) and guarded with CONFIG_IS_ENABLED(DM_REGULATOR)?
+I couldn't find other panel drivers that consistently follow one approach,
+so I'd like to match the preferred U-Boot style.
+
+Best regards,
+Advait
