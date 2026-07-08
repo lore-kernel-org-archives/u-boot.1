@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5060CC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 22:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AFA1C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 22:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC0EA84ABB;
-	Thu,  9 Jul 2026 00:06:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A5CCB84ACF;
+	Thu,  9 Jul 2026 00:06:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="INOjZni3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cTzNmjNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4254F84ABE; Thu,  9 Jul 2026 00:06:07 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ id EC60E84AC8; Thu,  9 Jul 2026 00:06:07 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C602584AB7
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 00:06:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F97F84AC0
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 00:06:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1783548360; bh=4rYruVFll6tQRzqTsHCn5KLUV6I5LrbwJDv9fgUnxT4=;
- b=INOjZni35lVpa82xmCbh5uJRmXa2zCXxKYWpuhbTReLfRpEqiAlcPajXKu+p6u8KAD6z8jf0U
- k9/OuT9m/nc86/jSkCoTa6+ICgxjKnf1GVmIOZDrRtAwlzsY4PTzHF0A/uEEBnLgCNHt9XuEBNN
- nTwl5HHtlGK8tGskYfBIAp2hT5uWXDIsZE6nbtYyZt31GPsaMAfFUuOiKfcXoFvPTS0JBpHE1ZN
- 30Y5Wwuc0dY5zD5DW4QqCASYm5fml83f1SCXHVfox4M3qTNYE5zJlNQ4qQPwQYWv+B+S8VCaGze
- oGYfdErVi8DDgzdOERugzHdOWcZ3Ix4B9Rg487bN4F7w==
-X-Forward-Email-ID: 6a4ec9c52402b3ca75f9046e
+ t=1783548361; bh=zwhCif8zYJ8MzbQucZRSXD+MMw4UGGZrd6pFMw7Y/go=;
+ b=cTzNmjNettNiJZpKylwx91Kk5yrZVgPj1OwJZdvpW90dMmsYabFRDICHIsBVaRGXbuyxhWyAs
+ CGtMQd2c+tO5chWCRbHVdonyOhNYL5IsnswPBGq0gs0+48sbOkRCgT/rVmILxK6oTYioXmT7Zs1
+ ArYxlKvsOzLWN7JVvKyX5mIG5eLa4uRw6mOnH2XODQEoJrFWMVWM2WPSr3mc2QkrE6JjACwsQhU
+ OA1YL8TuD2kcJ+7CkFy1tXqnii2Cvd39pfMz/O2UmAZt8u+CL49pAr8BMd9eQZ51vgn+PcDDEPb
+ vUz7/89WpK5/sODpsIUOmeLFAi4uCAZv+L+Mo1zde0Rw==
+X-Forward-Email-ID: 6a4ec9c82402b3ca75f90489
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
+ 121.127.44.73
 X-Forward-Email-Version: 2.10.2
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -46,9 +46,9 @@ From: Jonas Karlman <jonas@kwiboo.se>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 05/11] spl: Simplify xPL_BUILD conditional guard example
-Date: Wed,  8 Jul 2026 22:05:31 +0000
-Message-ID: <20260708220540.3368825-6-jonas@kwiboo.se>
+Subject: [PATCH 06/11] Kconfig: Add missing depends on xPL to xPL_ symbols
+Date: Wed,  8 Jul 2026 22:05:32 +0000
+Message-ID: <20260708220540.3368825-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260708220540.3368825-1-jonas@kwiboo.se>
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
@@ -70,31 +70,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The old meaning of the SPL_BUILD symbol has been transfered to a new
-XPL_BUILD symbol, leaving the SPL_BUILD symbol only to be defined for
-SPL builds, and not all xPL builds.
+xPL_<name> symbols should typically depend on the associated xPL symbol.
 
-Change to only use the SPL_BUILD symbol in the SPL code example to
-cleanup from an old SPL to XPL symbol rename.
+Add missing depends on xPL to xPL_<name> symbols to avoid the xPL_<name>
+symbols being available when the associated xPL symbol is disabled.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- include/spl.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/Kconfig | 2 ++
+ lib/Kconfig    | 7 ++++++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/include/spl.h b/include/spl.h
-index 5078d7525abb..45dd44e03d13 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -93,7 +93,7 @@ enum xpl_phase_t {
-  *
-  * To include code only in SPL, you might do:
-  *
-- *    #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-+ *    #ifdef CONFIG_SPL_BUILD
-  *    ...
-  *    #endif
-  *
+diff --git a/common/Kconfig b/common/Kconfig
+index 345be4b8ca14..ab0557c3666b 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -138,6 +138,7 @@ config SILENT_CONSOLE
+ 
+ config SPL_SILENT_CONSOLE
+ 	bool "Use a silent console in SPL"
++	depends on SPL
+ 	default y if SILENT_CONSOLE && !SANDBOX
+ 	help
+ 	  This selects a silent console in SPL. When enabled it drops some
+@@ -149,6 +150,7 @@ config SPL_SILENT_CONSOLE
+ 
+ config TPL_SILENT_CONSOLE
+ 	bool "Use a silent console in TPL"
++	depends on TPL
+ 	default y if SILENT_CONSOLE && !SANDBOX
+ 	help
+ 	  This selects a silent console in TPL. When enabled it drops some
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 9e0f0ad7d068..72b53d7d5490 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -960,6 +960,7 @@ config TPL_LZMA
+ 
+ config VPL_LZMA
+ 	bool "Enable LZMA decompression support for VPL build"
++	depends on VPL
+ 	default y if LZMA
+ 	help
+ 	  This enables support for LZMA compression algorithm for VPL boot.
+@@ -972,23 +973,27 @@ config SPL_LZO
+ 
+ config SPL_GZIP
+ 	bool "Enable gzip decompression support for SPL build"
++	depends on SPL
+ 	select SPL_ZLIB
+ 	help
+ 	  This enables support for the GZIP compression algorithm for SPL boot.
+ 
+ config TPL_GZIP
+-	bool "Enable gzip decompression support for SPL build"
++	bool "Enable gzip decompression support for TPL build"
++	depends on TPL
+ 	select TPL_ZLIB
+ 	help
+ 	  This enables support for the GZIP compression algorithm for TPL
+ 
+ config SPL_ZLIB
+ 	bool
++	depends on SPL
+ 	help
+ 	  This enables compression lib for SPL boot.
+ 
+ config TPL_ZLIB
+ 	bool
++	depends on TPL
+ 	help
+ 	  This enables compression lib for TPL
+ 
 -- 
 2.54.0
 
