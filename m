@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAED0C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 21:52:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F43DC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 21:53:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC1EB84A63;
-	Wed,  8 Jul 2026 23:52:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30E8284AC3;
+	Wed,  8 Jul 2026 23:52:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ahJqBFOW";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="iR8ImAgD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B591D8407E; Wed,  8 Jul 2026 23:52:44 +0200 (CEST)
+ id 532B984AC0; Wed,  8 Jul 2026 23:52:50 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73BE884A63
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 23:52:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A89084A6F
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 23:52:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=642353e54=Charles.Perry@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1783547561; x=1815083561;
+ t=1783547568; x=1815083568;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=RY7nUG57mcvMz4Fbqzw+xzj+PmhWnb9Koz7kQYRP4Qg=;
- b=ahJqBFOW8qnjwwrs1z5ygwiNzcRJ+ihQTkSrUKHtvTKZ1CYnHZfLmzC/
- qoDh4Kr6VTG12MIC+E7E7TZJabdlhcYD3kwWJz1jWM6TJKFuw0lUOzV/C
- Q6tGtC329cyNAVWpMGk5Os0lez5XRjoWM89PIFMQRO+b7miyNRJebjRfT
- 7YnxKd/0IwrxldMoB3mjgPlo475qjHmGFn0MPcLVf4uHHZ8b4AMNPGg/K
- yvjl8HC9EsZPKP/H6DiaTHQgeMLlv5eLQyOtygi4krrpyF04hgGJASdQL
- TLlokOSHl60NfH7pwV8sYxEIKgtksbfl/2TU+MGG1TthPzXBBXQMDST5H w==;
-X-CSE-ConnectionGUID: Z3fuZnOCSlKdLT83pT5VDw==
-X-CSE-MsgGUID: lJsREkUGRdmFN3WcKJ0CPg==
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; d="scan'208";a="227475544"
+ bh=8IsFQHM6sGG0pmxHVWwLAe5k0ugrBAAU2hCnNJB4F5g=;
+ b=iR8ImAgDHlGPNHzdQOlp/77tWcWpA/VRzlMRqxgheJZcP9aSqI0AqvQW
+ 7AIot9KZLvI9b58nPj0RCIpz58BD3kndn1s2pAi/vqMYcyMTKAn31hzg+
+ WnFpff5HbNSiChX0J6XWc482iPsG9XLJTuc70lelo9cuD3HVeNNjlWhHx
+ S6jilEx4VaaKwPlkPIUQbhP5nt5F7YPn056rbLbRZsl0Vc4+PcR2YFkTe
+ 5eegTvQvRpKUi9M2xrHeh0VQhn9k2cKy4f8dmD/QMjOGp51gA9+05F3BD
+ RnIwhcWkLALtT4KIrIr6RKXUxkMgSKGPZehC83q+TNnIeET3Jq9KmQVc6 Q==;
+X-CSE-ConnectionGUID: LMoyQCYkQXqIGv134d7vqQ==
+X-CSE-MsgGUID: 5us3DTwiRtOOewH5Ly7Pig==
+X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; d="scan'208";a="291698044"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jul 2026 14:52:39 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
- chn-vm-ex3.mchp-main.com (10.10.87.32) with Microsoft SMTP Server
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 08 Jul 2026 14:52:46 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.43; Wed, 8 Jul 2026 14:52:39 -0700
+ 15.1.2507.58; Wed, 8 Jul 2026 14:52:44 -0700
 Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 8 Jul 2026 14:52:38 -0700
+ 15.1.2507.58 via Frontend Transport; Wed, 8 Jul 2026 14:52:44 -0700
 From: Charles Perry <charles.perry@microchip.com>
 To: <u-boot@lists.denx.de>
 CC: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
- Charles Perry <charles.perry@microchip.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/5] firmware: rpmi: add support for the SBI MPXY transport
-Date: Wed, 8 Jul 2026 14:51:39 -0700
-Message-ID: <20260708215200.1331416-3-charles.perry@microchip.com>
+ Charles Perry <charles.perry@microchip.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 3/5] firmware: rpmi: add support for shared memory transport
+Date: Wed, 8 Jul 2026 14:51:40 -0700
+Message-ID: <20260708215200.1331416-4-charles.perry@microchip.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260708215200.1331416-1-charles.perry@microchip.com>
 References: <20260708215200.1331416-1-charles.perry@microchip.com>
@@ -82,149 +81,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds an RPMI transport driver for the Supervisor Binary Interface
-(SBI) message proxy (MPXY) extension [1].
+Add support for transport of RPMI messages over shared memory as
+described in the RPMI spec [1]. This uses two or four ring buffers
+composed of a fixed number of "slots" to pass messages between the AP
+and the PuC. U-Boot is the Application processor (AP) and sends messages
+through the a2p-req queue and receives response though the p2a-ack
+queue. There is no support for platform microcontroller (PuC) initiated
+requests nor notifications.
 
-This is for S-Mode U-Boot where some supervisor software (such as
-OpenSBI) runs in M-Mode and handles the low level communication with the
-PuC.
+This transport can be used in M or S mode U-Boot, but in the S-mode
+case, one must make sure that the supervisor software isn't already
+using the AP side of the shared memory.
 
-[1]: https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
+[1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 2)
 
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
 Changes in v2: (from Yao Zi review)
  - Reorder headers
- - Remove struct sbi_mpxy_rpmi_channel_attrs and struct
-   sbi_mpxy_channel_attrs for simpler u32 arrays
  - Don't null check pointers before free()
 ---
- arch/riscv/include/asm/sbi.h          |  57 ++++
- drivers/firmware/rpmi/Kconfig         |   9 +
- drivers/firmware/rpmi/Makefile        |   1 +
- drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 410 ++++++++++++++++++++++++++
- 4 files changed, 477 insertions(+)
- create mode 100644 drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+ drivers/firmware/rpmi/Kconfig      |   8 +
+ drivers/firmware/rpmi/Makefile     |   1 +
+ drivers/firmware/rpmi/rpmi-shmem.c | 473 +++++++++++++++++++++++++++++
+ include/rpmi_proto.h               |  23 ++
+ 4 files changed, 505 insertions(+)
+ create mode 100644 drivers/firmware/rpmi/rpmi-shmem.c
 
-diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-index 47124dbaac84..10e03257d8e6 100644
---- a/arch/riscv/include/asm/sbi.h
-+++ b/arch/riscv/include/asm/sbi.h
-@@ -10,6 +10,7 @@
- #define _ASM_RISCV_SBI_H
- 
- #include <linux/types.h>
-+#include <linux/errno.h>
- 
- enum sbi_ext_id {
- 	SBI_EXT_0_1_SET_TIMER = 0x0,
-@@ -104,6 +105,17 @@ enum sbi_ext_dbcn_fid {
- 	SBI_EXT_DBCN_CONSOLE_WRITE_BYTE,
- };
- 
-+enum sbi_ext_mpxy_fid {
-+	SBI_EXT_MPXY_GET_SHMEM_SIZE = 0,
-+	SBI_EXT_MPXY_SET_SHMEM,
-+	SBI_EXT_MPXY_GET_CHANNEL_IDS,
-+	SBI_EXT_MPXY_READ_ATTRS,
-+	SBI_EXT_MPXY_WRITE_ATTRS,
-+	SBI_EXT_MPXY_SEND_MSG_WITH_RESP,
-+	SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP,
-+	SBI_EXT_MPXY_GET_NOTIFICATION_EVENTS,
-+};
-+
- #ifdef CONFIG_SBI_V01
- #define SBI_EXT_SET_TIMER		SBI_EXT_0_1_SET_TIMER
- #define SBI_FID_SET_TIMER		0
-@@ -132,6 +144,14 @@ enum sbi_ext_dbcn_fid {
- #define SBI_SPEC_VERSION_MAJOR_MASK	0x7f
- #define SBI_SPEC_VERSION_MINOR_MASK	0xffffff
- 
-+static inline unsigned long sbi_mk_version(unsigned long major,
-+					   unsigned long minor)
-+{
-+	return ((major & SBI_SPEC_VERSION_MAJOR_MASK)
-+		<< SBI_SPEC_VERSION_MAJOR_SHIFT) |
-+	       (minor & SBI_SPEC_VERSION_MINOR_MASK);
-+}
-+
- /* SBI return error codes */
- #define SBI_SUCCESS			0
- #define SBI_ERR_FAILURE			-1
-@@ -139,6 +159,43 @@ enum sbi_ext_dbcn_fid {
- #define SBI_ERR_INVALID_PARAM		-3
- #define SBI_ERR_DENIED			-4
- #define SBI_ERR_INVALID_ADDRESS		-5
-+#define SBI_ERR_ALREADY_AVAILABLE	-6
-+#define SBI_ERR_ALREADY_STARTED		-7
-+#define SBI_ERR_ALREADY_STOPPED		-8
-+#define SBI_ERR_NO_SHMEM		-9
-+#define SBI_ERR_INVALID_STATE		-10
-+#define SBI_ERR_BAD_RANGE		-11
-+#define SBI_ERR_TIMEOUT			-12
-+#define SBI_ERR_IO			-13
-+#define SBI_ERR_DENIED_LOCKED		-14
-+
-+static inline int sbi_to_linux_error(int err)
-+{
-+	switch (err) {
-+	case SBI_SUCCESS:
-+		return 0;
-+	case SBI_ERR_DENIED:
-+	case SBI_ERR_DENIED_LOCKED:
-+		return -EPERM;
-+	case SBI_ERR_INVALID_PARAM:
-+	case SBI_ERR_INVALID_STATE:
-+		return -EINVAL;
-+	case SBI_ERR_BAD_RANGE:
-+		return -ERANGE;
-+	case SBI_ERR_INVALID_ADDRESS:
-+		return -EFAULT;
-+	case SBI_ERR_NO_SHMEM:
-+		return -ENOMEM;
-+	case SBI_ERR_TIMEOUT:
-+		return -ETIMEDOUT;
-+	case SBI_ERR_IO:
-+		return -EIO;
-+	case SBI_ERR_NOT_SUPPORTED:
-+	case SBI_ERR_FAILURE:
-+	default:
-+		return -EOPNOTSUPP;
-+	};
-+}
- 
- struct sbiret {
- 	long error;
 diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-index 54fd77ad8f48..708d931263ff 100644
+index 708d931263ff..421a1fa9deba 100644
 --- a/drivers/firmware/rpmi/Kconfig
 +++ b/drivers/firmware/rpmi/Kconfig
-@@ -7,3 +7,12 @@ config RPMI_FIRMWARE
- 	  protocol for communication between an Application Processor (AP) and a
- 	  platform microcontroller (PuC). The RPMI specification is available
- 	  at: https://github.com/riscv-non-isa/riscv-rpmi
+@@ -16,3 +16,11 @@ config RPMI_SBI_MPXY
+ 	  (MPXY) extension of the supervisor binary interface (SBI). The
+ 	  specification for the MPXY extension is available at:
+ 	  https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
 +
-+config RPMI_SBI_MPXY
-+	bool "RPMI over SBI MPXY transport"
-+	depends on RPMI_FIRMWARE && SBI
++config RPMI_SHMEM
++	bool "RPMI over shared memory transport"
++	depends on RPMI_FIRMWARE
 +	help
-+	  Enable support for transport of RPMI messages over the message proxy
-+	  (MPXY) extension of the supervisor binary interface (SBI). The
-+	  specification for the MPXY extension is available at:
-+	  https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
++	  Enable support for transport of RPMI messages over shared memory as
++	  described in chapter 2 of the RPMI specification, available at:
++	  https://github.com/riscv-non-isa/riscv-rpmi
 diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
-index d69c718d150e..71c4aeaed910 100644
+index 71c4aeaed910..4f4bcb929db4 100644
 --- a/drivers/firmware/rpmi/Makefile
 +++ b/drivers/firmware/rpmi/Makefile
-@@ -1 +1,2 @@
+@@ -1,2 +1,3 @@
  obj-y	+= rpmi-uclass.o
-+obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
-diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
+ obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
++obj-$(CONFIG_RPMI_SHMEM) += rpmi-shmem.o
+diff --git a/drivers/firmware/rpmi/rpmi-shmem.c b/drivers/firmware/rpmi/rpmi-shmem.c
 new file mode 100644
-index 000000000000..9ccca0eb59b2
+index 000000000000..8014e86d336f
 --- /dev/null
-+++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-@@ -0,0 +1,410 @@
++++ b/drivers/firmware/rpmi/rpmi-shmem.c
+@@ -0,0 +1,473 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
@@ -232,158 +145,271 @@ index 000000000000..9ccca0eb59b2
 +
 +#define LOG_CATEGORY UCLASS_RPMI
 +
++#include <asm/barrier.h>
 +#include <asm/io.h>
-+#include <asm/sbi.h>
 +#include <asm/types.h>
 +#include <dm.h>
 +#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/kernel.h>
++#include <linux/delay.h>
 +#include <log.h>
 +#include <malloc.h>
 +#include <rpmi-uclass.h>
-+#include <string.h>
 +
-+/* SBI MPXY channel IDs data in shared memory */
-+struct sbi_mpxy_channel_ids_data {
-+	/* Remaining number of channel ids */
-+	__le32 remaining;
-+	/* Returned channel ids in current function call */
-+	__le32 returned;
-+	/* Returned channel id array */
-+	__le32 channel_array[];
++#define RPMI_SLOT_SIZE_MIN 64
++
++enum rpmi_queue_idx {
++	RPMI_QUEUE_IDX_A2P_REQ = 0,
++	RPMI_QUEUE_IDX_P2A_ACK = 1,
++	RPMI_QUEUE_IDX_P2A_REQ = 2,
++	RPMI_QUEUE_IDX_A2P_ACK = 3,
++	RPMI_QUEUE_IDX_MAX_COUNT = 4,
++	RPMI_A2P_DOORBELL = 5,
 +};
 +
-+enum sbi_mpxy_attribute_id {
-+	/* Standard channel attributes managed by MPXY framework */
-+	SBI_MPXY_ATTR_MSG_PROT_ID = 0x00000000,
-+	SBI_MPXY_ATTR_MSG_PROT_VER = 0x00000001,
-+	SBI_MPXY_ATTR_MSG_MAX_LEN = 0x00000002,
-+	SBI_MPXY_ATTR_MSG_SEND_TIMEOUT = 0x00000003,
-+	SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT = 0x00000004,
-+	SBI_MPXY_ATTR_CHANNEL_CAPABILITY = 0x00000005,
-+	SBI_MPXY_ATTR_SSE_EVENT_ID = 0x00000006,
-+	SBI_MPXY_ATTR_MSI_CONTROL = 0x00000007,
-+	SBI_MPXY_ATTR_MSI_ADDR_LO = 0x00000008,
-+	SBI_MPXY_ATTR_MSI_ADDR_HI = 0x00000009,
-+	SBI_MPXY_ATTR_MSI_DATA = 0x0000000A,
-+	SBI_MPXY_ATTR_EVENTS_STATE_CONTROL = 0x0000000B,
-+	SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
-+	/*
-+	 * Message protocol specific attributes, managed by
-+	 * the message protocol specification.
-+	 */
-+	SBI_MPXY_ATTR_MSGPROTO_ATTR_START = 0x80000000,
-+	SBI_MPXY_ATTR_MSGPROTO_ATTR_END = 0xffffffff
++struct shmem_queue {
++	u32 num_slot;
++	__le32 *headptr;
++	__le32 *tailptr;
++	void *buffer;
 +};
 +
-+/* SBI_MPXY_ATTR_CHANNEL_CAPABILITY bits */
-+#define SBI_MPXY_CHAN_CAP_MSI BIT(0)
-+#define SBI_MPXY_CHAN_CAP_SSE BIT(1)
-+#define SBI_MPXY_CHAN_CAP_EVENTS_STATE BIT(2)
-+#define SBI_MPXY_CHAN_CAP_SEND_WITH_RESP BIT(3)
-+#define SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP BIT(4)
-+#define SBI_MPXY_CHAN_CAP_GET_NOTIFICATIONS BIT(5)
-+
-+/* RPMI message protocol specific MPXY attributes */
-+enum sbi_mpxy_rpmi_attribute_id {
-+	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID,
-+	SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
-+	SBI_MPXY_RPMI_ATTR_IMPL_ID,
-+	SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
-+	SBI_MPXY_RPMI_ATTR_MAX_ID
-+};
-+
-+/* Possible values of MSG_PROT_ID attribute as-per SBI v3.0 (or higher) */
-+enum sbi_mpxy_msgproto_id {
-+	SBI_MPXY_MSGPROTO_RPMI_ID = 0x0,
-+};
-+
-+struct sbi_mpxy_chan_desc {
-+	u32 id;
-+	u32 max_xfer_len;
-+	u32 attrs[SBI_MPXY_ATTR_STD_ATTR_MAX_IDX];
-+	u32 rpmi_attrs[SBI_MPXY_RPMI_ATTR_MAX_ID];
-+};
-+
-+struct rpmi_sbi_mpxy {
++struct rpmi_shmem {
 +	struct udevice *dev;
-+	void *shmem;
-+	unsigned long shmem_size;
-+	u32 channel_count;
-+	struct sbi_mpxy_chan_desc *channel_descs;
++	struct shmem_queue a2p_req;
++	struct shmem_queue p2a_ack;
++	int slot_size;
++	int rx_timeout_ms;
++	u32 token;
++	void *doorbell;
++	u32 doorbell_value;
++	u32 spec_version;
++	u32 impl_version;
++	u32 impl_id;
 +};
 +
-+static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
-+				    u32 base_attrid, u32 attr_count,
-+				    u32 *attrs_buf)
++struct rpmi_shmem_chan_priv {
++	struct rpmi_shmem *priv;
++	u32 servicegroup_id;
++	u32 servicegroup_version;
++};
++
++static int rpmi_shmem_queue_idx(const char *name)
 +{
-+	struct sbiret sret;
-+	int i;
++	static const struct {
++		int id;
++		const char *name;
++	} id_names[] = {
++		{ RPMI_QUEUE_IDX_A2P_REQ, "a2p-req" },
++		{ RPMI_QUEUE_IDX_P2A_ACK, "p2a-ack" },
++		{ RPMI_QUEUE_IDX_P2A_REQ, "p2a-req" },
++		{ RPMI_QUEUE_IDX_A2P_ACK, "a2p-ack" },
++		{ RPMI_A2P_DOORBELL, "a2p-doorbell" },
++	};
 +
-+	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_READ_ATTRS, channel_id,
-+			 base_attrid, attr_count, 0, 0, 0);
-+	if (sret.error)
-+		return sbi_to_linux_error(sret.error);
++	for (int i = 0; i < ARRAY_SIZE(id_names); i++) {
++		if (strcmp(name, id_names[i].name) == 0)
++			return id_names[i].id;
++	}
 +
-+	for (i = 0; i < attr_count; i++)
-+		attrs_buf[i] = le32_to_cpu(((__le32 *)mpxy->shmem)[i]);
++	return -ENODEV;
++}
++
++static bool rpmi_smq_queue_full(struct shmem_queue *qctx)
++{
++	return ((le32_to_cpu(*qctx->tailptr) + 1) % qctx->num_slot ==
++		le32_to_cpu(*qctx->headptr));
++}
++
++/* 31                                            0
++ * +---------------------+-----------------------+
++ * | FLAGS | SERVICE_ID  |   SERVICEGROUP_ID     |
++ * +---------------------+-----------------------+
++ * |        TOKEN        |     DATA LENGTH       |
++ * +---------------------+-----------------------+
++ * |                 DATA/PAYLOAD                |
++ * +---------------------------------------------+
++ */
++struct rpmi_message_header {
++	__le16 servicegroup_id;
++	u8 service_id;
++	u8 flags;
++	__le16 datalen;
++	__le16 token;
++} __packed;
++
++static int rpmi_smq_rx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
++		       u32 service_group_id, u32 service_id, u16 token,
++		       void *response, unsigned long max_response_len,
++		       unsigned long *out_response_len)
++{
++	struct rpmi_message_header *msg;
++	u32 dlen, headidx, tailidx;
++	int rxretry = 0;
++	void *src;
++
++	headidx = le32_to_cpu(*qctx->headptr);
++
++	/* Wait for the Rx message with matching token, discard any other
++	 * messages received in the mean time
++	 */
++	while (true) {
++		tailidx = le32_to_cpu(*qctx->tailptr);
++
++		if (headidx != tailidx) {
++			msg = (void *)qctx->buffer +
++			      (headidx * priv->slot_size);
++			if (le16_to_cpu(msg->token) == token)
++				break;
++
++			headidx = (headidx + 1) % qctx->num_slot;
++		}
++
++		mdelay(1);
++		rxretry += 1;
++		if (rxretry > priv->rx_timeout_ms)
++			return -ETIMEDOUT;
++	}
++
++	/* Extract data from the message */
++	if (response) {
++		dlen = le16_to_cpu(msg->datalen);
++		if (dlen > max_response_len)
++			dlen = max_response_len;
++		if (out_response_len)
++			*out_response_len = dlen;
++		src = (void *)msg + sizeof(struct rpmi_message_header);
++		memcpy(response, src, dlen);
++	}
++
++	/* Update the head index */
++	headidx = (headidx + 1) % qctx->num_slot;
++	*qctx->headptr = cpu_to_le32(headidx);
 +
 +	return 0;
 +}
 +
-+static int rpmi_sbi_mpxy_send_message(void *shmem, u32 mpxy_fid, u32 channel_id,
-+				      u32 msg_id, const void *tx,
-+				      unsigned long tx_len, void *rx,
-+				      unsigned long max_rx_len,
-+				      unsigned long *rx_len)
++static int rpmi_smq_tx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
++		       u32 service_group_id, u32 service_id,
++		       enum rpmi_message_type type, u16 token,
++		       const void *request, unsigned long request_len)
 +{
-+	unsigned long rx_bytes;
-+	struct sbiret sret;
++	struct rpmi_message_header header = { 0 };
++	u32 tailidx;
++	void *dst;
 +
-+	if (tx)
-+		memcpy(shmem, tx, tx_len);
++	/* Tx sanity checks */
++	if (request_len >
++	    (priv->slot_size - sizeof(struct rpmi_message_header)))
++		return -EINVAL;
 +
-+	sret = sbi_ecall(SBI_EXT_MPXY, mpxy_fid, channel_id, msg_id, tx_len, 0,
-+			 0, 0);
++	if (rpmi_smq_queue_full(qctx))
++		return -ENOMEM;
 +
-+	if (rx && !sret.error) {
-+		rx_bytes = sret.value;
-+		if (rx_bytes > max_rx_len)
-+			return -ENOSPC;
++	tailidx = le32_to_cpu(*qctx->tailptr);
 +
-+		memcpy(rx, shmem, rx_bytes);
-+		if (rx_len)
-+			*rx_len = rx_bytes;
-+	}
++	/* Prepare the header to be written into the slot */
++	header.servicegroup_id = cpu_to_le16(service_group_id);
++	header.service_id = service_id;
++	header.flags = type;
++	header.datalen = cpu_to_le16(request_len);
++	header.token = cpu_to_le16(token);
 +
-+	return sbi_to_linux_error(sret.error);
++	/* Write header into the slot */
++	dst = (char *)qctx->buffer + (tailidx * priv->slot_size);
++	memcpy(dst, &header, sizeof(header));
++	dst += sizeof(header);
++
++	/* Write data into the slot */
++	if (request)
++		memcpy(dst, request, request_len);
++
++	/* Make sure queue chanages are visible to PuC before updating tail */
++	wmb();
++
++	/* Update the tail/write index */
++	tailidx = (tailidx + 1) % qctx->num_slot;
++	*qctx->tailptr = cpu_to_le32(tailidx);
++
++	/* Ring the RPMI doorbell if present */
++	if (priv->doorbell)
++		writel(priv->doorbell_value, priv->doorbell);
++
++	return 0;
 +}
 +
-+static int rpmi_sbi_mpxy_get_attr(struct rpmi_chan *chan,
-+				  enum rpmi_attribute_id id, u32 *data)
++static int rpmi_shmem_request_priv(struct rpmi_shmem *priv, u32 servicegroup_id,
++				   u32 service_id, const void *request,
++				   unsigned long request_len, void *response,
++				   unsigned long max_response_len,
++				   unsigned long *out_response_len)
 +{
-+	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(chan->dev);
-+	struct sbi_mpxy_chan_desc *desc = &mpxy->channel_descs[chan->id];
++	enum rpmi_message_type type = response ? RPMI_MSG_NORMAL_REQUEST :
++						 RPMI_MSG_POSTED_REQUEST;
++	int err;
++
++	if (!request && request_len)
++		return -EINVAL;
++
++	err = rpmi_smq_tx(priv, &priv->a2p_req, servicegroup_id, service_id,
++			  type, priv->token, request, request_len);
++	if (err) {
++		dev_err(priv->dev, "tx failed %i\n", err);
++		goto out;
++	}
++
++	if (response) {
++		err = rpmi_smq_rx(priv, &priv->p2a_ack, servicegroup_id,
++				  service_id, priv->token, response,
++				  max_response_len, out_response_len);
++		if (err) {
++			dev_err(priv->dev, "rx failed %i\n", err);
++			goto out;
++		}
++	}
++
++out:
++	priv->token++;
++	return err;
++}
++
++static int rpmi_shmem_request(struct rpmi_chan *chan, u32 service_id,
++			      const void *request, unsigned long request_len,
++			      void *response, unsigned long max_response_len,
++			      unsigned long *out_response_len)
++{
++	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
++	struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
++
++	return rpmi_shmem_request_priv(priv, chan_priv->servicegroup_id,
++				       service_id, request, request_len,
++				       response, max_response_len,
++				       out_response_len);
++}
++
++static int rpmi_shmem_get_attr(struct rpmi_chan *chan,
++			       enum rpmi_attribute_id id, u32 *data)
++{
++	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
++	struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
 +
 +	switch (id) {
 +	case RPMI_ATTR_SPEC_VERSION:
-+		*data = desc->attrs[SBI_MPXY_ATTR_MSG_PROT_VER];
++		*data = priv->spec_version;
 +		break;
 +	case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-+		*data = desc->max_xfer_len;
++		*data = priv->slot_size - sizeof(struct rpmi_message_header);
 +		break;
 +	case RPMI_ATTR_SERVICEGROUP_ID:
-+		*data = desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID];
++		*data = chan_priv->servicegroup_id;
 +		break;
 +	case RPMI_ATTR_SERVICEGROUP_VERSION:
-+		*data = desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION];
++		*data = chan_priv->servicegroup_version;
 +		break;
 +	case RPMI_ATTR_IMPL_ID:
-+		*data = desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_IMPL_ID];
++		*data = priv->impl_id;
 +		break;
 +	case RPMI_ATTR_IMPL_VERSION:
-+		*data = desc->rpmi_attrs[SBI_MPXY_RPMI_ATTR_IMPL_VERSION];
++		*data = priv->impl_version;
 +		break;
 +	default:
 +		return -EOPNOTSUPP;
@@ -392,249 +418,231 @@ index 000000000000..9ccca0eb59b2
 +	return 0;
 +}
 +
-+static int rpmi_sbi_mpxy_request(struct rpmi_chan *chan, u32 service_id,
-+				 const void *request, unsigned long request_len,
-+				 void *response, unsigned long max_response_len,
-+				 unsigned long *out_response_len)
++static int rpmi_shmem_base_service_req(struct rpmi_shmem *priv, u32 service_id,
++				       const u32 *arg_in, u32 *arg_out)
 +{
-+	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(chan->dev);
-+	struct sbi_mpxy_chan_desc *desc = &mpxy->channel_descs[chan->id];
-+	u32 caps = desc->attrs[SBI_MPXY_ATTR_CHANNEL_CAPABILITY];
-+	u32 mpxy_fid;
++	int len = 0;
++	u32 rx[2];
++	u32 tx[1];
++	int ret;
 +
-+	if (!request && request_len)
-+		return -EINVAL;
-+
-+	if (request_len > desc->max_xfer_len)
-+		return -EINVAL;
-+
-+	if (!response && max_response_len)
-+		return -EINVAL;
-+
-+	if (response) {
-+		if (!(caps & SBI_MPXY_CHAN_CAP_SEND_WITH_RESP))
-+			return -EIO;
-+
-+		mpxy_fid = SBI_EXT_MPXY_SEND_MSG_WITH_RESP;
-+	} else {
-+		if (!(caps & SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP))
-+			return -EIO;
-+
-+		mpxy_fid = SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP;
++	if (arg_in) {
++		tx[0] = cpu_to_le32(*arg_in);
++		len = sizeof(*arg_in);
 +	}
 +
-+	return rpmi_sbi_mpxy_send_message(mpxy->shmem, mpxy_fid, desc->id,
-+					  service_id, request, request_len,
-+					  response, max_response_len,
-+					  out_response_len);
-+}
-+
-+static int rpmi_sbi_mpxy_of_xlate(struct rpmi_chan *chan,
-+				  struct ofnode_phandle_args *args)
-+{
-+	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(chan->dev);
-+	u32 channel_id, proto;
-+	int i;
-+
-+	if (args->args_count != 2)
-+		return -EINVAL;
-+
-+	channel_id = args->args[0];
-+	proto = args->args[1];
-+
-+	for (i = 0; i < mpxy->channel_count; i++) {
-+		if (mpxy->channel_descs[i].id == channel_id &&
-+		    mpxy->channel_descs[i].attrs[SBI_MPXY_ATTR_MSG_PROT_ID] ==
-+			    proto) {
-+			chan->id = i;
-+			return 0;
-+		}
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int rpmi_sbi_mpxy_get_shmem_size(unsigned long *shmem_size)
-+{
-+	struct sbiret sret;
-+
-+	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_SHMEM_SIZE, 0, 0, 0, 0,
-+			 0, 0);
-+	if (sret.error)
-+		return sbi_to_linux_error(sret.error);
-+
-+	/* The shared memory size MUST be at least 4096 bytes */
-+	if (sret.value < PAGE_SIZE)
-+		return -ENODEV;
-+
-+	/* The shared memory size MUST be multiple of 4096 bytes */
-+	if (sret.value & (PAGE_SIZE - 1))
-+		return -ENODEV;
-+
-+	if (shmem_size)
-+		*shmem_size = sret.value;
-+
-+	return 0;
-+}
-+
-+static int rpmi_sbi_mpxy_get_channel_ids(struct rpmi_sbi_mpxy *mpxy)
-+{
-+	struct sbi_mpxy_channel_ids_data *sdata = mpxy->shmem;
-+	u32 remaining, returned, channel_id, start_index = 0;
-+	struct sbiret sret;
-+	int i, ret;
-+
-+	do {
-+		sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_CHANNEL_IDS,
-+				 start_index, 0, 0, 0, 0, 0);
-+		if (sret.error)
-+			return sbi_to_linux_error(sret.error);
-+
-+		remaining = le32_to_cpu(sdata->remaining);
-+		returned = le32_to_cpu(sdata->returned);
-+
-+		// Allocate memory on the first call.
-+		if (!mpxy->channel_descs) {
-+			mpxy->channel_count = returned + remaining;
-+			if (mpxy->channel_count == 0)
-+				return -ENODEV;
-+
-+			mpxy->channel_descs =
-+				calloc(mpxy->channel_count,
-+				       sizeof(struct sbi_mpxy_chan_desc));
-+			if (!mpxy->channel_descs)
-+				return -ENOMEM;
-+
-+			dev_dbg(mpxy->dev, "channel count = %i\n",
-+				mpxy->channel_count);
-+		}
-+
-+		if (remaining && !returned)
-+			return -EPROTO;
-+
-+		if (start_index + returned > mpxy->channel_count)
-+			return -EPROTO;
-+
-+		for (i = 0; i < returned; i++) {
-+			mpxy->channel_descs[start_index + i].id =
-+				le32_to_cpu(sdata->channel_array[i]);
-+		}
-+		start_index += returned;
-+	} while (remaining);
-+
-+	for (i = 0; i < mpxy->channel_count; i++) {
-+		channel_id = mpxy->channel_descs[i].id;
-+
-+		ret = rpmi_sbi_mpxy_read_attrs(mpxy, channel_id,
-+					       SBI_MPXY_ATTR_MSG_PROT_ID,
-+					       SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
-+					       mpxy->channel_descs[i].attrs);
-+		if (ret)
-+			return ret;
-+
-+		if (mpxy->channel_descs[i].attrs[SBI_MPXY_ATTR_MSG_PROT_ID] ==
-+		    SBI_MPXY_MSGPROTO_RPMI_ID) {
-+			ret = rpmi_sbi_mpxy_read_attrs(
-+				mpxy, channel_id,
-+				SBI_MPXY_ATTR_MSGPROTO_ATTR_START,
-+				SBI_MPXY_RPMI_ATTR_MAX_ID,
-+				mpxy->channel_descs[i].rpmi_attrs);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int rpmi_sbi_mpxy_probe(struct udevice *dev)
-+{
-+	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(dev);
-+	struct sbi_mpxy_chan_desc *desc;
-+	unsigned long flags;
-+	struct sbiret sret;
-+	int i, ret;
-+
-+	mpxy->dev = dev;
-+
-+	/* Probe for SBI MPXY extension */
-+	if (sbi_get_spec_version() < sbi_mk_version(1, 0) ||
-+	    sbi_probe_extension(SBI_EXT_MPXY) <= 0) {
-+		dev_info(dev, "SBI MPXY extension not available\n");
-+		return -ENODEV;
-+	}
-+
-+	/* Find-out shared memory size */
-+	ret = rpmi_sbi_mpxy_get_shmem_size(&mpxy->shmem_size);
++	ret = rpmi_shmem_request_priv(priv, RPMI_SRVGRP_BASE, service_id, tx,
++				      len, rx, sizeof(rx), NULL);
 +	if (ret) {
-+		dev_err(dev, "failed to get MPXY shared memory size\n");
-+		return -ENODEV;
++		dev_err(priv->dev, "BASE service %i failed (%i)\n", service_id,
++			ret);
++		return ret;
 +	}
 +
-+	mpxy->shmem = memalign(PAGE_SIZE, mpxy->shmem_size);
-+	if (!mpxy->shmem)
++	if (rx[0]) {
++		ret = rpmi_to_linux_error(le32_to_cpu(rx[0]));
++		dev_err(priv->dev, "BASE service %i returned code %i\n",
++			service_id, ret);
++		return ret;
++	}
++
++	if (arg_out)
++		*arg_out = le32_to_cpu(rx[1]);
++
++	return 0;
++}
++
++static int rpmi_shmem_of_xlate(struct rpmi_chan *chan,
++			       struct ofnode_phandle_args *args)
++{
++	if (args->args_count != 1)
++		return -EINVAL;
++
++	// args[0] is the servicegroup id.
++	chan->id = args->args[0];
++
++	return 0;
++}
++
++static int rpmi_shmem_open(struct rpmi_chan *chan)
++{
++	struct rpmi_shmem *priv = dev_get_priv(chan->dev);
++	u32 servicegroup_id, servicegroup_version;
++	struct rpmi_shmem_chan_priv *chan_priv;
++	int ret;
++
++	servicegroup_id = chan->id;
++
++	ret = rpmi_shmem_base_service_req(priv,
++					  RPMI_BASE_SRV_PROBE_SERVICE_GROUP,
++					  &servicegroup_id,
++					  &servicegroup_version);
++	if (ret)
++		return ret;
++
++	chan_priv = malloc(sizeof(*chan_priv));
++	if (!chan_priv)
 +		return -ENOMEM;
 +
-+	/* Setup shmem in OVERWRITE mode. (flags[1:0] = 00b) */
-+	flags = 0;
-+	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_SET_SHMEM,
-+			 virt_to_phys(mpxy->shmem), 0, flags, 0, 0, 0);
-+	if (sret.error) {
-+		ret = sbi_to_linux_error(sret.error);
-+		goto err;
-+	}
++	chan->con_priv = chan_priv;
 +
-+	ret = rpmi_sbi_mpxy_get_channel_ids(mpxy);
-+	if (ret)
-+		goto err;
-+
-+	for (i = 0; i < mpxy->channel_count; i++) {
-+		desc = &mpxy->channel_descs[i];
-+		desc->max_xfer_len =
-+			min((u32)mpxy->shmem_size,
-+			    desc->attrs[SBI_MPXY_ATTR_MSG_MAX_LEN]);
-+	}
++	chan_priv->priv = priv;
++	chan_priv->servicegroup_id = servicegroup_id;
++	chan_priv->servicegroup_version = servicegroup_version;
 +
 +	return 0;
-+
-+err:
-+	free(mpxy->channel_descs);
-+	free(mpxy->shmem);
-+
-+	return ret;
 +}
 +
-+static int rpmi_sbi_mpxy_remove(struct udevice *dev)
++static void rpmi_shmem_close(struct rpmi_chan *chan)
 +{
-+	struct rpmi_sbi_mpxy *mpxy = dev_get_priv(dev);
++	free(chan->con_priv);
++}
 +
-+	free(mpxy->channel_descs);
-+	free(mpxy->shmem);
++static int rpmi_shmem_probe(struct udevice *dev)
++{
++	struct rpmi_shmem *priv = dev_get_priv(dev);
++	int i, ret, qidx, qcount, qslotcnt;
++	struct shmem_queue *queue;
++	u32 arg_in, arg_out;
++	const char *qname;
++	fdt_size_t qsize;
++	void *start;
++
++	priv->dev = dev;
++	priv->rx_timeout_ms = 20;
++
++	priv->slot_size = dev_read_u32_default(dev, "riscv,slot-size", 0);
++	if (priv->slot_size < RPMI_SLOT_SIZE_MIN)
++		return -EINVAL;
++
++	priv->doorbell_value =
++		dev_read_u32_default(dev, "riscv,a2p-doorbell-value", 0);
++
++	qcount = dev_read_string_count(dev, "reg-names");
++	if (qcount < 0 || qcount > 5)
++		return -EINVAL;
++
++	for (i = 0; i < qcount; i++) {
++		ret = dev_read_string_index(dev, "reg-names", i, &qname);
++		if (ret)
++			continue;
++
++		qidx = rpmi_shmem_queue_idx(qname);
++		if (qidx < 0)
++			continue;
++
++		start = dev_read_addr_size_index_ptr(dev, i, &qsize);
++		if (!start)
++			continue;
++
++		if (qidx == RPMI_A2P_DOORBELL) {
++			priv->doorbell = start;
++		} else {
++			qslotcnt = qsize / priv->slot_size;
++			if (qslotcnt < 4)
++				continue;
++
++			if (qidx == RPMI_QUEUE_IDX_A2P_REQ)
++				queue = &priv->a2p_req;
++			else if (qidx == RPMI_QUEUE_IDX_P2A_ACK)
++				queue = &priv->p2a_ack;
++			else
++				continue;
++
++			queue->headptr = start;
++			queue->tailptr = start + priv->slot_size;
++			queue->buffer = start + (2 * priv->slot_size);
++			queue->num_slot = qslotcnt - 2;
++		}
++	}
++
++	if (!priv->a2p_req.num_slot || !priv->p2a_ack.num_slot)
++		return -EINVAL;
++
++	arg_in = RPMI_SRVGRP_BASE;
++	ret = rpmi_shmem_base_service_req(
++		priv, RPMI_BASE_SRV_PROBE_SERVICE_GROUP, &arg_in, &arg_out);
++	if (ret)
++		return ret;
++
++	if (arg_out < RPMI_MKVER(1, 0))
++		return -EINVAL;
++
++	ret = rpmi_shmem_base_service_req(
++		priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION, NULL, &arg_out);
++	if (ret)
++		return ret;
++	priv->impl_version = arg_out;
++
++	ret = rpmi_shmem_base_service_req(
++		priv, RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN, NULL, &arg_out);
++	if (ret)
++		return ret;
++	priv->impl_id = arg_out;
++
++	ret = rpmi_shmem_base_service_req(priv, RPMI_BASE_SRV_GET_SPEC_VERSION,
++					  NULL, &arg_out);
++	if (ret)
++		return ret;
++	priv->spec_version = arg_out;
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id rpmi_sbi_mpxy_ids[] = {
-+	{ .compatible = "riscv,sbi-mpxy-mbox" },
++static const struct udevice_id rpmi_shmem_ids[] = {
++	{ .compatible = "riscv,rpmi-shmem-mbox" },
 +	{}
 +};
 +
-+static const struct rpmi_transport_ops rpmi_sbi_mpxy_ops = {
-+	.of_xlate = rpmi_sbi_mpxy_of_xlate,
-+	.get_attr = rpmi_sbi_mpxy_get_attr,
-+	.request = rpmi_sbi_mpxy_request,
++static const struct rpmi_transport_ops rpmi_shmem_ops = {
++	.of_xlate = rpmi_shmem_of_xlate,
++	.get_attr = rpmi_shmem_get_attr,
++	.request = rpmi_shmem_request,
++	.open = rpmi_shmem_open,
++	.close = rpmi_shmem_close,
 +};
 +
-+U_BOOT_DRIVER(rpmi_sbi_mpxy) = {
-+	.name = "rpmi-sbi-mpxy",
++U_BOOT_DRIVER(rpmi_shmem) = {
++	.name = "rpmi-shmem",
 +	.id = UCLASS_RPMI,
-+	.of_match = rpmi_sbi_mpxy_ids,
-+	.probe = rpmi_sbi_mpxy_probe,
-+	.remove = rpmi_sbi_mpxy_remove,
-+	.priv_auto = sizeof(struct rpmi_sbi_mpxy),
-+	.ops = &rpmi_sbi_mpxy_ops,
++	.of_match = rpmi_shmem_ids,
++	.probe = rpmi_shmem_probe,
++	.priv_auto = sizeof(struct rpmi_shmem),
++	.ops = &rpmi_shmem_ops,
 +	.flags = DM_FLAG_PRE_RELOC,
 +};
+diff --git a/include/rpmi_proto.h b/include/rpmi_proto.h
+index 012ae93d7317..4b557bfeedf5 100644
+--- a/include/rpmi_proto.h
++++ b/include/rpmi_proto.h
+@@ -60,4 +60,27 @@ enum rpmi_servicegroup_id {
+ 	RPMI_SRVGRP_VENDOR_END		= 0xFFFF,
+ };
+ 
++/** RPMI Base ServiceGroup Service IDs */
++enum rpmi_base_service_id {
++	RPMI_BASE_SRV_ENABLE_NOTIFICATION = 0x01,
++	RPMI_BASE_SRV_GET_IMPLEMENTATION_VERSION = 0x02,
++	RPMI_BASE_SRV_GET_IMPLEMENTATION_IDN = 0x03,
++	RPMI_BASE_SRV_GET_SPEC_VERSION = 0x04,
++	RPMI_BASE_SRV_GET_PLATFORM_INFO = 0x05,
++	RPMI_BASE_SRV_PROBE_SERVICE_GROUP = 0x06,
++	RPMI_BASE_SRV_GET_ATTRIBUTES = 0x07,
++};
++
++/** RPMI Messages Types */
++enum rpmi_message_type {
++	/* Normal request backed with ack */
++	RPMI_MSG_NORMAL_REQUEST = 0x0,
++	/* Request without any ack */
++	RPMI_MSG_POSTED_REQUEST = 0x1,
++	/* Acknowledgment for normal request message */
++	RPMI_MSG_ACKNOWLDGEMENT = 0x2,
++	/* Notification message */
++	RPMI_MSG_NOTIFICATION = 0x3,
++};
++
+ #endif
 -- 
 2.47.3
 
