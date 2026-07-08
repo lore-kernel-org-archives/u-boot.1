@@ -4,106 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D65CC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 11:48:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDD2C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D5E8843B6;
-	Wed,  8 Jul 2026 13:48:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 869EF8497A;
+	Wed,  8 Jul 2026 14:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H9342Nj2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ckqiqC9p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB87184979; Wed,  8 Jul 2026 13:48:41 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
+ id D3AA084979; Wed,  8 Jul 2026 14:11:17 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41FD184118
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 13:48:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA0584118
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 14:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-667627ae83aso697807d50.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 04:48:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783511316; cv=none;
- d=google.com; s=arc-20260327;
- b=b/kKDgODPspfQc5fvQyWKzPYumAQJjIRuBgvGVbbaamQtFfoWff0ud8KO39aCQN0k2
- aOOcgswN2rRx1ff2+lutJN7ahenBCss0KnPt2nZajFinrlRFRsGMspMJBRzJ3HH/2LFs
- eFqiXqVLQNIMtgYf4Tuk8heHc/Md7l1jB57+78A4C3yVFj0X1s09Vfh1pN2MbHnBoOZm
- tKoqEDQo+0HQLN4s731h2lqRjJ5OVQ0B9EQtiiciuuIneoLmu6Ul0LssUdxr2IXk/a+M
- ID8sbNAcM1acplX9aQbJ+1FcruHCQZ/OXJxZZbdl5GsjUPosFmoe3vZnyganWbtKeMtw
- 27DA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ZiUZRWEOwfgE5+LeZrb6NF+lBjHGKlffGHODW6L5GT0=;
- fh=tJHuAKXewfII5qNVfwXQ7mOd0P1awial3MZAFbXBJQw=;
- b=jKGSusc+6HaEERsXVoOpjL3k0VTq+sX5djByXKAAA7I+CYoSFUuuKX12hRBZPiJXiu
- YL0lx5cKh84JuIXXMgnYiDl2NqRWkZRpVVk8a7NMlUNeYb3ArGYDXh71mhJwFW15PTNe
- 4Zm4w/f6qn+n0NP092LjybU0epCG+GiyWN/BfWZatm2CdPbnU0sefvudDD57+CmqHYwd
- av/AYfVTqhpsrSnWtuFQQb6vlYEnrw90GMbLIEvHYdNN0Fn/VErv6MZk1jlV+61UBler
- gg5SaT3J6xSgImSnVHO4/wafpWIiiTtvjxgt88pJeBTVHKBrAZDR2OKgBXJXmBSOOG9h
- ranQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-848479c9bd5so337584b3a.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 05:11:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783511316; x=1784116116; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ZiUZRWEOwfgE5+LeZrb6NF+lBjHGKlffGHODW6L5GT0=;
- b=H9342Nj2HhcTAl7X7fM0mdrjtjDvR/AqZII7D4M/jQK61zZ/7MoQNmqoJDf9DgUkNl
- HgrUVP0RLmyoLyw/bXI7mKbvBvuS/AtgsD4QJffNXFFFb3lKZ9jIisY6+WyKyNgqGaET
- ZYgmoUqcSTWIu0mO9/PLSlYSkx5IsLXddry5y3yvYmCHSj389Dc8Nvnb8qsFj4UP70G4
- jOPBG7AraxXo+pdUVh6cTcBdMg8W2Jla5zwXLjuYkRPD+rM/ZW1BZhsq2QgktpTYC0Nb
- XoRi44FITJdw2JQT+UjRNRSDRy9+UekRdYbcypLcDR0U9d8id27k9DTSoNXOLOY3oT2o
- J9cg==
+ d=linaro.org; s=google; t=1783512674; x=1784117474; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=JqRtJ+khLTfAaENOUW5lQ58JjLcnpVprujtYaQTyQDM=;
+ b=ckqiqC9p2Zrnj3BqU89apEtm+UnmBNu3Xg1E2Xlmt/Ad6364M+4DV+s9nc4JIgWIAS
+ 5JlzsTVIME055lvon3q6DE/8s6Nb5Y/Ypi72vGrLfYfwkfWIE8WXhwCBD97+BTNRrzfI
+ cleqdnl9BoWEM3tcgXkana/iGKX/+qEdMEC4lyrrfPsCNZJJjB9SobeEBXjJcIDGLlM9
+ 0QjBOs/dZzzw0SUpEDBrW0tTJU14hq351DdLIanK16Ru/t1/n72++7X8zx7Zm8cXg8d2
+ o8aSwEm0JiWaX65NTFxS6uwJb7FDus86c6yrL2AvimtpmyuoFdebJJ1gCsC4QSyY2Kpw
+ UEww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783511316; x=1784116116;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=ZiUZRWEOwfgE5+LeZrb6NF+lBjHGKlffGHODW6L5GT0=;
- b=K3lFCxwho55tEag8JNndNv7T/bAgcdJHQB77uBiqc7bsOIguuhzJ/5ASJ7Xt3/kORx
- VKmlo82FgcT2V+JQlcsTuSye1+G3ubHeuN5iuQZMABui5BAR+IIr+JeF5/eCysES/sJT
- aQM/r4zXLjudeRE7Xbjr5DAommxpBLLy4fp3S1W1bEp6Z25Fvx0pcFDY1jzcl+9tXvns
- o29gMWeoE0eiwDaGQKbGi+xlOTK/7PYvE+KwPJcZNuU3gYS90jxTrrpqaUb2J6DNT6Wy
- i8mxFz8T7pDWos1ijSG/Cbe9Gg3MzPT2XmCevU/fTFdVWAUSrKD46MPUKZMjIIXoRYgi
- 8Cdg==
-X-Gm-Message-State: AOJu0YyZgd5jAKcXmKGY3pxjqU94gGMtakOunHcEcxxqtolJ2CLAdWjM
- 0jxA/soRP14vMOkZ8EWtfrJELoiREEb0s1ny8xDzyOStys6t/J6h2qBUEFlRp17eccB9caLmY6k
- cKhUu7vfwGfXXRjFprbe+QPoayDYNXpE8ezmzqQJGlQ==
-X-Gm-Gg: AfdE7cmv6XNy6PfEeOa9eRz9jxlCK0YaeaVA77Qi6xB2JdDf3kgh709FYyxHkJJ/grN
- H5Uu8oQYKL3hVjgqLXf4RITqhj29bq0ThN4s2fRiG51PmlK6yopdNJQ4FdtRhgpUuM/9xP2IGkp
- NGK8+PfxjHxETTNl3xt0MUdkOp/1Y2kM2217YRo9dnXJkgS8ODO2nHg1pqDj+FefgBnt+u854yz
- pNrZxm8UNmtBqcbAYx+wFIQwH1MlE6pkSsZxFJyCgB2CDpPHEs+E2WocuvGg7CrlGWN5YD9YDDl
- z18tCdPO8pd6zuotxbsXVH5dNfKJxER3kTyH3ypJNnH5kFVdxk1vD/eKsWJ15Iq4I2tQ+E8WJmh
- 6YhxuF7R33R/uIFC/eVn7k9qu1aNjbgLdP+7daZkJJt9K/LGHBBpkGbok8sl+cSjB1NM/cxCal4
- PahV7R2PxE1AXYVQ9sLAghKGvvesB/MrfpbLfzyd4WqrDK6QYCc333uVOAn03uprhMwyfIQhBez
- 12U2wej4LWwSnv0kr0DhtAfcbCl2C00D1phSHHNHLyvkGiLxAmvIEL0q67B6XReoCbX8TZi7LkG
- nsoEQg7EbV2MW5FBVm7x7rzkG1y+j8SyyrzhyL0dCSG3rHwsY+DFNbZsqpQFGub2gR1LTeo=
-X-Received: by 2002:a53:e6c7:0:b0:667:9ae7:8d24 with SMTP id
- 956f58d0204a3-6679f1d0886mr1294538d50.83.1783511315739; Wed, 08 Jul 2026
- 04:48:35 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783512674; x=1784117474;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=JqRtJ+khLTfAaENOUW5lQ58JjLcnpVprujtYaQTyQDM=;
+ b=IAgxVSN3wl743vXBhQ8MNQKg8WKumOBOVsNw95qxjDsNwwNwJu8x2EPYPaol8OH8md
+ 0wzIbTvz/nNu5/fPj7fJ8QOQvR9bUW0BvZkmyh15iVGb01YSULIRgEW9jc/usKiipYcH
+ 01Q39aY2qiNojjsSVJkKq/nn9dX0+umTHhbNwOZxT32Jfuwxkm3VwVuSakDtmeU0U2EH
+ VEXcrEn+nSl/uKrz8P7mAOENchC50/37chgH7HWwfg+Gj3yvYi/V99/sLZfCfVa1LuHr
+ UuhUcICK/t2l696oN4JU7MN9HN1jhm/r3UVtUDzEkH2/wJPklVuiDoeIknAO0Qbu/vyp
+ FHVw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqCpp2hKAxfInU2n3m+GE1Ap7RCYqIQbcK2h+AG7fTAo4P8i5wfLBKCBVUh8HmYEysJwW/r+RU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9zEcVAt1JIuG3WeC5kzVUb12cj3l5QjgF7C2Hm20fgzpGnpYm
+ tY/i3esfpxdSKYwjpaRKmQy1E3q44Itqyn01kCtBjEtux3F+txgjnv5uuOrkxmqPH8iZ86Dbv8g
+ /xBj4O5b2Sg==
+X-Gm-Gg: AfdE7cmn+RSB42//0BMhZUSnattS7U7Clhd1ZSKqpce8Dg/PvtP47x/dRDRzL+VboDn
+ qXa9lK3C7E96zcdGLuiF8bHBGZMYsapliA+YFOoNLhujHCAKNiz8yN5wAMUS9aGywrCQQX1qc6v
+ JhuC9zqOOKL1fQfEB95fEf0tXkOTAXdz41kVaabfzg4X8xUGnItw3rtM8/0dfPw+TlA+4Vs5GDd
+ diRz+cFQN5fMoDhZH0QbrsIDpXvCfcTwicQsVn8+E43PeJ+BczPUaxmvJro2G3fbOtB9y9Yj8aR
+ J1LyUqZeU6VPC9jMJccGdt1puGmka4C0zfnOVUaNGyurDY9Mlv7letiRGRFx4GyF8RafC/SqkHR
+ tUsT9dTwKrnLev3Z8UWQzBXBI7YQHBmAWm4Uhn9FhwprLtr1VxnNr4YgOND5TdwltnqtxitPmoI
+ kRt1uMPOpEE2NnKX1avaolvRgZWXA=
+X-Received: by 2002:a05:6a00:4292:b0:847:9c06:2bef with SMTP id
+ d2e1a72fcca58-84842ee3fcbmr2579890b3a.29.1783512673470; 
+ Wed, 08 Jul 2026 05:11:13 -0700 (PDT)
+Received: from [192.168.45.141] ([112.212.195.74])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-ca5afbc1363sm2272566a12.8.2026.07.08.05.11.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jul 2026 05:11:12 -0700 (PDT)
+Message-ID: <005d2642-e23d-467c-9c02-ace78c108daf@linaro.org>
+Date: Wed, 8 Jul 2026 14:11:10 +0200
 MIME-Version: 1.0
-References: <20260708111721.1455945-1-akshay.belsare@amd.com>
-In-Reply-To: <20260708111721.1455945-1-akshay.belsare@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 8 Jul 2026 14:47:59 +0300
-X-Gm-Features: AVVi8CfY_hs9u3IhMCGEPtsP-X-YXHGI15RvfZBmHMRtXITNfdtYgigox7qvxpY
-Message-ID: <CAC_iWjKDy8ziyMkuHwhg=-VGZ7C5HMYXFQG+ZjATXqwEDjvipQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: armv8: mmu: fix DCACHE_OFF incorrectly unmapping
- region
-To: Akshay Belsare <akshay.belsare@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@amd.com, 
- padmarao.begari@amd.com, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Simon Glass <sjg@chromium.org>, Mark Kettenis <kettenis@openbsd.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: qcom: Update ipq5424-rdp466-u-boot.dtsi for v7.1-dts
+ changes
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ u-boot-qcom@groups.io,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+References: <20260707220257.252911-1-trini@konsulko.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260707220257.252911-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,72 +107,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Akshay
+Can someone confirm this?
 
-On Wed, 8 Jul 2026 at 14:17, Akshay Belsare <akshay.belsare@amd.com> wrote:
->
-> DCACHE_OFF is defined as (0 << 2) = 0, and PTE_TYPE_FAULT is defined
-> as (0 << 0) = 0. In mmu_set_region_dcache_behaviour(), the cache
-> attribute passed to set_regions() is computed as:
->   attrs = PMD_ATTRINDX(option >> 2)
-> For DCACHE_OFF=0 this evaluates to PMD_ATTRINDX(0) = 0, which equals
-> PTE_TYPE_FAULT.
->
-> Commit 6468ca13ffd6f ("armv8: mmu: fix and optimise explicitly unmapping
-> regions") added an unmap path to set_one_region() that
-> triggers when attrs == PTE_TYPE_FAULT. Because DCACHE_OFF and
-> PTE_TYPE_FAULT share the same numerical value (0), any call to
-> mmu_set_region_dcache_behaviour() with DCACHE_OFF silently unmaps the
-> target region instead of changing its cache attributes to non-cached.
->
-> The subsequent flush_dcache_range() call at the end of
-> mmu_set_region_dcache_behaviour() then crashes with a Level 3
-> translation fault because the region it tries to flush has just been
-> unmapped.
->
-> The existing flag parameter already distinguishes the two callers:
->  - mmu_set_region_dcache_behaviour() always passes flag=false
->  - mmu_change_region_attr_nobreak() always passes flag=true, and is the
->    only legitimate caller that passes PTE_TYPE_FAULT to unmap a region
->
-> Guard the unmap path with flag so that DCACHE_OFF attribute changes
-> take the correct else branch, which ORs in the ATTRINDX bits only,
-> leaving the PTE valid.
+On 7/8/26 00:02, Tom Rini wrote:
+> Once we move to the v7.0-dts tag, we get a failure to build of:
+> dts/upstream/src/arm64/qcom/ipq5424.dtsi:556.21-573.5: ERROR (phandle_references): /soc@0/mmc@7804000: Reference to non-existent node or label "sdc_default_state"
+> 
+>    also defined at arch/arm/dts/ipq5424-rdp466-u-boot.dtsi:20.8-39.4
+> ERROR: Input tree has errors, aborting (use -f to force output)
+> 
+> Looking over the changes, this appears to be what's required to keep the
+> platform functioning as expected.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-I don't really love the 'flag' attribute that distinguishes between
-preserving or overwriting the permission bits...
+Acked-by: Casey Connolly <casey.connolly@linaro.org>
 
-However, this does fix an issue.
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->
-> This was observed as a boot crash on Versal, Versal Net, and ZynqMP
-> platforms during network initialisation. The zynq_gem driver calls
-> mmu_set_region_dcache_behaviour() with DCACHE_OFF to make its BD
-> descriptor ring non-cached. With the bug the BD memory is unmapped,
-> and the subsequent dcache flush inside
-> mmu_set_region_dcache_behaviour() faults.
->
-> Fixes: 6468ca13ffd6f ("armv8: mmu: fix and optimise explicitly unmapping regions")
-> Signed-off-by: Akshay Belsare <akshay.belsare@amd.com>
 > ---
->  arch/arm/cpu/armv8/cache_v8.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index e59528e576e..ad232435eb2 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -1006,7 +1006,7 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->
->         /* Can we can just modify the current level block/page? */
->         if (is_aligned(start, size, levelsize)) {
-> -               if (attrs == PTE_TYPE_FAULT) {
-> +               if (attrs == PTE_TYPE_FAULT && flag) {
->                         if (pte_type(pte) == PTE_TYPE_TABLE && level < 3)
->                                 *pte = 0;
->                         else
-> --
-> 2.25.1
->
+> This file isn't covered by MAINTAINERS directly, so can someone please
+> follow-up and correct that? And, based on looking at the changes between
+> v7.0-dts and v7.1-dts, this would appear to be the right change, but I
+> don't know the platform.
+> 
+> Cc: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+> CC: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>   arch/arm/dts/ipq5424-rdp466-u-boot.dtsi | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> index 36640f31d616..56677cd6f6da 100644
+> --- a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> +++ b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> @@ -24,7 +24,7 @@
+>   		mmc-hs200-1_8v;
+>   		max-frequency = <192000000>;
+>   		bus-width = <4>;
+> -		pinctrl-0 = <&sdc_default_state>;
+> +		pinctrl-0 = <&qpic_snand_default_state>;
+>   		pinctrl-names = "default";
+>   		non-removable;
+>   
+
