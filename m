@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B69E5C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 14:32:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BFE4C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 14:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC687849BA;
-	Wed,  8 Jul 2026 16:32:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E287849BA;
+	Wed,  8 Jul 2026 16:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bbwCwX7z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BSt+kMxt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4ACF849D2; Wed,  8 Jul 2026 16:32:22 +0200 (CEST)
+ id 385A2849F6; Wed,  8 Jul 2026 16:33:14 +0200 (CEST)
 Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
  [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF19484994
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 16:32:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACFA384994
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 16:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
 Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-92e67555e24so35845285a.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 07:32:21 -0700 (PDT)
+ af79cd13be357-92e855da580so61094285a.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 07:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783521140; x=1784125940; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783521187; x=1784125987; darn=lists.denx.de;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ZMG5TEcUuUXVMUEzyztTkgmn16k5vqB3IflvuydOI/E=;
- b=bbwCwX7zbEYNCG3mKWgz8atqIBWaAP6XVadF1adeoXQoeK8H10mTV/G3lKOMAJpXov
- J/g2OivneT/8sv/W74eavSani0XDNI5PyYHhtwNI1xLyBquGMoAWV3InDKDL5iNlOiHd
- EjN4mdHYkexYUqlmSYg+vJw6V+3F22X0ZrWVcQD7QBVbH95Ch5DmOPg6xFjCTjPf5V89
- nIaIRBO9ITBXAnMNw4sKfhsYc8zFh9fvDaZ1RH2JOcrqCPYvwjEOBelyGgabQ+poJELB
- hNCNJXO/JxlrRSCvwbx3dzdNMB2/KtQ10V7+sS1wSOFzpA7m+MAUDGUF+LCJWfwCMldd
- gRZw==
+ :content-type; bh=1STqlnG3vcbsY6Btad2kydtNcUu9mCo4ztAB4D/4i2U=;
+ b=BSt+kMxtsSaR3hl5kQlS9urqomVJv+v+2dFpgCT7dp1Iuz3MKFGPCV1LGiS1Q8En3t
+ Pbt1QihcHWE/hGK7LDMLUzpNC0QIpdZpEGWFBbtrnCWfC+HlUiir1mNrIpduuvGnL9xa
+ lwR9UqPaMLI74p5cJ5Mdr4FdGWwyKfovRjuf5RVgoAtmPam56tw50IB1ML7EyloT8xTS
+ hcIBSZvXKaldf/JCtxwswqWiGM347Cj/xHUBHb5zwEsXSExSVYwpeWK11NkBLCdXaqXi
+ 0H1Iao7LHbvG4HFys9L5+N4ccMgSrSeuerlA8EJ0rCtiky6knpLxFymjl6ajTXjWIR7Z
+ uQHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783521140; x=1784125940;
+ d=1e100.net; s=20251104; t=1783521187; x=1784125987;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZMG5TEcUuUXVMUEzyztTkgmn16k5vqB3IflvuydOI/E=;
- b=dHtNqGOXJjle/CHk7B3R9tiNPUsdcfAXSkkrQLsdZ/MxoWU2e6zjPMgB6mdmEUDW8C
- tVZeAaXCj1F3L78RdKA61ITq1hwRQdo4K9f551fJlwX0uYd81FEDkpYzLSDVoAIRpoDz
- 5avKCxJJ9+owJxWpSm0+YbvHY9bHmRUMnULJiuuR7IulJ1VFPAUEub6FJzmgpoQkmIpc
- d9xzUvkhuNrOUTaYg0DV+cwi68YFA8T84TP0Tc5Ol4YPdrC2GIDEZw/hl+PDKRy4AQng
- V24cE/vCq9kZDXatDOUlP3oNVUQCYoaXnkZ3Pq8Y+33kthRQCPZLkIwE4lCUDh+AnKiE
- q+NQ==
-X-Gm-Message-State: AOJu0YyJaU4703rcXoKkF7E58z5mt4NKWBrFaSn9vcMTmXboXOyIFGDB
- F2cabuBwNeXFHpasOKlqopripLJs71VlvWaSYfbwyP3/fJEEnJ+Ggyur
-X-Gm-Gg: AfdE7ckTq01NdPilmatu+7T+f2YlllX9evE82xBgNfoEh088TxkMIdG/DmKFW2Df3+J
- Y3uD7HWzUXQqbBuhKB8NyJn4p30097G0fHdj6NGdDdPPE/oNcAh59A3CSOfL4BJZnoWAxGG2926
- OPqirYht4jTwsjop0+CADMafsP14oqxDrKmh7Hc4lvCGUySguiYC1e0Wc/BRJgZyT+Pibe72tVC
- JhHytq5lkLqjZlM0M0unVCZ0g1GhlM30Sjy32GR41Nyntu86QObwlL7TlgYlhVeN9o4afDy8ClJ
- xW5LpxIVMBOc3DHFT7iIebS9f8XGFsb8lf9zNNrjGTHbtn4ho2DPXruw2Ulm4tl1hKJzfIIlgCR
- RgmLZTc6C2R4WXvsF+nbKPvdKXkuScN/NOr1HWeFPV7JUlEdNn5ulm5ykOyQxYjTbOVWwJWgbLl
- mIMg60tGi6Ew==
-X-Received: by 2002:a05:620a:45a5:b0:92e:70e9:6865 with SMTP id
- af79cd13be357-92ecf68ce28mr261772385a.59.1783521140441; 
- Wed, 08 Jul 2026 07:32:20 -0700 (PDT)
+ bh=1STqlnG3vcbsY6Btad2kydtNcUu9mCo4ztAB4D/4i2U=;
+ b=N/51wrQKx7BtoJM+nR0q2deVlhPFaMPdkOerrro+hSpuIu8G4mDVnmfzJr+fcJvMG+
+ qa6jEiRoQwaNgIGdaByd79FXq5is7A09MzcfXzt3wMwfKdtwZ50pzXCVI7UXPFU/wW8b
+ 0W1kAoaM3zZ1XOojIyxXp4x8xZfkKK829qAly7vg5dryXLH0fAIk/cZfOs4+2bJrm2nY
+ Se1YD8V2YU1YIdksUUBoEGMvA1ltlCDYSMN01IbHtO3z6osPw8MaRsP+f58RKg2C3vcn
+ 29D7LY/0ZmAt9WCBifaTEhwkuLwIoYMRqo1cW5yb1+daUKjv8u0pq1f4s1selcKinN45
+ +AGg==
+X-Gm-Message-State: AOJu0YxxFiAwGmLMwbQhWxOHrlXjqgRTQp3H8BfE4HS9cFW6om5ejVnL
+ /oYyAPbT6ePuuXG8EHm2xfIHulrSSk0lXtvfLJQmvEb/qYuSWLSYE1heLJVvtg==
+X-Gm-Gg: AfdE7cnOTq3vkQARoNcRT6LvGvba5he+iRg7rSUAMF8eAJYblguTaIsCGQSQ5adgpjO
+ R1H8KJnC6m0sqG8WR7L3CO0w4TvJOKrmegalVQl8+0s27hs+rwEC614ob/jCOp5Qiv3dpEOxHCO
+ 00HP22YPE+Pb2hYtxJJdWadHNxnIzR2qhgjHjMqEcgd+haW4Ed7SXBhlJ2G9rWxGZVEEg0e4DlG
+ BV0A+mJ0Q4mk1dF24uOQhEtKLyZW8soQHbQwthccENuLfvRJja0NkU2sD06465dJQ0etiZOvu9q
+ B8UZqT+DO33MxilwcBIci0+h+up1iiYJgf/vvWEbU06hQ1RvLAGfeiPHMd2tHt2bO7LXcHXHHfg
+ EOlDM5LNgcYKSO8qKzHCeFBA7bKm2cl9kZZxYgnR4mfVBSaXFvuKi7erAyWzbuhpzbKINvKo033
+ qGHj8bFA5ypw==
+X-Received: by 2002:a05:620a:2802:b0:90f:9cde:977e with SMTP id
+ af79cd13be357-92ecf4cd698mr255432085a.0.1783521187513; 
+ Wed, 08 Jul 2026 07:33:07 -0700 (PDT)
 Received: from localhost ([49.36.187.33]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-92e90b804dasm1417154285a.1.2026.07.08.07.32.19
+ af79cd13be357-92e90b800efsm1372393185a.4.2026.07.08.07.33.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 07:32:20 -0700 (PDT)
-Date: Wed, 8 Jul 2026 20:02:17 +0530
+ Wed, 08 Jul 2026 07:33:07 -0700 (PDT)
+Date: Wed, 8 Jul 2026 20:03:04 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: led: reject unknown LED state instead of silently
- returning success
-Message-ID: <ifny32czr2jodibz3wyerwqfjzbepdkt3tfhvgw5qp6ymm736m@kmqqewswdxqq>
+Subject: [PATCH] cmd: read: fix unsigned overflow bypassing range check
+Message-ID: <ex5nk6rhdq2xmoebwmbxtc3xxepoq42qlqb3u6ve3rd4inpxul@tuqk6be3rl22>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -94,57 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-get_led_cmd() searches state_label[] for a matching name and returns
--1 on no match, but its declared return type is enum led_state_t.
-All enumerators of that enum are non-negative, so the compiler is
-free to pick an unsigned underlying type (and does so with
--fshort-enums, which several U-Boot targets enable). In that case
--1 is reinterpreted as a large positive value and any subsequent
-comparison against -1 silently misbehaves.
+The bounds check in do_rw() was written as:
 
-In do_led() the returned value is stored into an enum led_state_t
-and dispatched through a switch that has no default arm and no case
-for the sentinel. When the user supplies an unknown state name the
-switch falls through, ret was already set to 0 by led_get_by_label(),
-and the command reports success without doing anything.
+    if (cnt + blk > limit)
 
-Return LEDST_COUNT from get_led_cmd() on no match. LEDST_COUNT is
-already a valid enumerator, so this avoids all questions about the
-enum's underlying representation. In do_led(), when a state argument
-was actually supplied (argc > 2) and the lookup produced LEDST_COUNT,
-reject it with a diagnostic and CMD_RET_USAGE; the existing
-LEDST_COUNT switch arm continues to handle the "no state argument"
-case where it means "show current state".
+with cnt and blk declared as uint (unsigned int) and limit as ulong.
+C's usual arithmetic conversions are applied per binary operator, so
+"cnt + blk" is evaluated entirely in unsigned int and wraps modulo
+2^32 before the result is widened for the comparison against limit.
+With cnt = 0xFFFFFFFF and blk = 1 the sum wraps to 0 and the guard
+passes, allowing blk_dread()/blk_dwrite() to be issued with a 4 GiB
+transfer count that runs past the partition (or, when no partition
+is selected, the entire device).
+
+Rewrite the check as two comparisons that do not overflow:
+
+    if (blk > limit || cnt > limit - blk)
+
+The subtraction is performed in ulong (limit's type), so no truncation
+occurs, and the two sub-conditions cover both "start block past end"
+and "count would push us past end" failure modes.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- cmd/led.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ cmd/read.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/led.c b/cmd/led.c
-index 296c07b3b38..d547276e480 100644
---- a/cmd/led.c
-+++ b/cmd/led.c
-@@ -27,7 +27,7 @@ enum led_state_t get_led_cmd(char *var)
- 			return i;
+diff --git a/cmd/read.c b/cmd/read.c
+index 8e21f004423..efc255ce85d 100644
+--- a/cmd/read.c
++++ b/cmd/read.c
+@@ -46,7 +46,7 @@ do_rw(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		limit = ~0;
  	}
  
--	return -1;
-+	return LEDST_COUNT;
- }
- 
- static int show_led_state(struct udevice *dev)
-@@ -84,6 +84,10 @@ int do_led(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return list_leds();
- 
- 	cmd = argc > 2 ? get_led_cmd(argv[2]) : LEDST_COUNT;
-+	if (argc > 2 && cmd == LEDST_COUNT) {
-+		printf("Unknown LED state '%s'\n", argv[2]);
-+		return CMD_RET_USAGE;
-+	}
- 	if (cmd == LEDST_BLINK) {
- 		if (argc < 4)
- 			return CMD_RET_USAGE;
+-	if (cnt + blk > limit) {
++	if (blk > limit || cnt > limit - blk) {
+ 		printf("%s out of range\n", cmdtp->name);
+ 		unmap_sysmem(ptr);
+ 		return 1;
 -- 
 2.43.0
 
