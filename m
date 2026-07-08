@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D5CC44501
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77122C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:38:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA54784A29;
-	Wed,  8 Jul 2026 22:37:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CF8284A67;
+	Wed,  8 Jul 2026 22:37:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="tzXVuAr+";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="nL4McyQH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 644E884A6B; Wed,  8 Jul 2026 22:37:31 +0200 (CEST)
-Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch
- [185.70.43.172])
+ id 9F0B584A77; Wed,  8 Jul 2026 22:37:35 +0200 (CEST)
+Received: from mail-43170.protonmail.ch (mail-43170.protonmail.ch
+ [185.70.43.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D916584A29
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CAB8847AF
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783543044; x=1783802244;
- bh=ROxMYjgGJCrV7w5Jdc2JLFPAl7He7HDMYU28mVP+n/w=;
+ s=protonmail; t=1783543047; x=1783802247;
+ bh=PfQ8kV6xz2IcJ9Uo1DaYIepG3HWuFs+H1tpfqOthio8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=tzXVuAr+Hu9salUgjXhq7XU2Y5tRiB/0dIIDqytrnN0ss6tIT6ZADbx72wiq7rkRz
- OkWW7DN2+qmPUtNUDem+REHMEmTSqe5jkyMXfF0oAxFdM/za3OOo2qgGGNrMSSP/en
- k9fCFjkCVXrq2l9qOQUW2H7Q+Orr+fZ8+5tYjJAyTNFaDP3Ky7dZfQB66rs2LX5/fc
- Gpyme4etF4wrkbgiRdpYHTXd/43wDRsyu7MK0r1lZDuTODha98rPEHOjQ83waEweBk
- Oi6dmR1NIPZHRUN4hw/Msxy9+aZ3ORdmG7nQ92woYOV4KJ4pwIY/L6iNXe0quncxc6
- WOajTXb0qTT1Q==
-X-Pm-Submission-Id: 4gwVJf4nRtz2Sd4y
+ b=nL4McyQHFN2o+x/hQDnNBIctqSg1B+4/hliQXn5rouCEErOQwj7tNxD/b19ENO3fY
+ NkxiWwpUQuYej4PM5+IVszfL9mElbFtwOFcwQ20zTgyr3q0oIWwAFE1ebgKTXIc/ME
+ a7Cr1q0YYq5gruDABLul/G0IK+/R5H6nzhsCrsfZQmidXVhW1uCdJc6o5MwFPtgttc
+ yShkSuJe60UzRxJ0Po7kF/O+VHcTWI0G42AG8B6/NYTIh/VOlUsNyzZ5veW3jRD4d0
+ 76JDKdR1gghGmcq2OIL+HHpomWeh7lMs0CDi6MLah3/9FjNW0ED5eUJsA7Mwvk34FK
+ bS3RNDMI0pDcg==
+X-Pm-Submission-Id: 4gwVJk2LgVz1DDpQ
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH v2 03/10] string: correct documentation for strstr and strnstr
-Date: Wed,  8 Jul 2026 22:37:04 +0200
-Message-ID: <20260708203711.849489-4-rv@rasmusvillemoes.dk>
+Subject: [PATCH v2 05/10] string: remove more pointless __HAVE_ARCH_STR*
+Date: Wed,  8 Jul 2026 22:37:06 +0200
+Message-ID: <20260708203711.849489-6-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
 References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
@@ -66,38 +66,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The len parameter for strnstr() concerns the maximum size of the
-haystack to consider, not the length of the needle being searched for.
+None of these six macros are defined by any architecture. Moreover,
+the ifndef guard only exists in either string.h or string.c, making them
+completely pointless.
 
-strstr() obviously has no len parameter, so remove the copy-pasta.
+I'm not sure whether we have an explicit coding style discouraging the
+"extern" qualifier on function declarations, and string.h has a random
+mix of everything, but I can't leave it on strncasecmp() now that it
+will be immediately after strcasecmp() which doesn't have it.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- lib/string.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ include/linux/string.h | 6 +-----
+ lib/string.c           | 8 --------
+ 2 files changed, 1 insertion(+), 13 deletions(-)
 
+diff --git a/include/linux/string.h b/include/linux/string.h
+index 5bcbf72a89b..5e4594b19df 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -43,12 +43,8 @@ extern int strcmp(const char *,const char *);
+ #ifndef __HAVE_ARCH_STRNCMP
+ extern int strncmp(const char *,const char *,__kernel_size_t);
+ #endif
+-#ifndef __HAVE_ARCH_STRCASECMP
+ int strcasecmp(const char *s1, const char *s2);
+-#endif
+-#ifndef __HAVE_ARCH_STRNCASECMP
+-extern int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+-#endif
++int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+ #ifndef __HAVE_ARCH_STRCHR
+ extern char * strchr(const char *,int);
+ #endif
 diff --git a/lib/string.c b/lib/string.c
-index a76dcd48d20..45f0f5f8d09 100644
+index 82d0b6a9caa..20c934c18c3 100644
 --- a/lib/string.c
 +++ b/lib/string.c
-@@ -702,7 +702,7 @@ void *memdup(const void *src, size_t len)
-  *
-  * @s1:		string to be searched
-  * @s2:		string to search for
-- * @len:	maximum number of characters in s2 to consider
-+ * @len:	maximum number of characters in s1 to consider
-  *
-  * Return:	pointer to the first occurrence or NULL
-  */
-@@ -728,7 +728,6 @@ char *strnstr(const char *s1, const char *s2, size_t len)
-  *
-  * @s1:		string to be searched
-  * @s2:		string to search for
-- * @len:	maximum number of characters in s2 to consider
-  *
-  * Return:	pointer to the first occurrence or NULL
-  */
+@@ -399,7 +399,6 @@ void kfree_const(const void *x)
+ }
+ 
+ 
+-#ifndef __HAVE_ARCH_STRSPN
+ /**
+  * strspn - Calculate the length of the initial substring of @s which only
+  *	contain letters in @accept
+@@ -424,9 +423,7 @@ size_t strspn(const char *s, const char *accept)
+ 
+ 	return count;
+ }
+-#endif
+ 
+-#ifndef __HAVE_ARCH_STRPBRK
+ /**
+  * strpbrk - Find the first occurrence of a set of characters
+  * @cs: The string to be searched
+@@ -444,9 +441,7 @@ char * strpbrk(const char * cs,const char * ct)
+ 	}
+ 	return NULL;
+ }
+-#endif
+ 
+-#ifndef __HAVE_ARCH_STRTOK
+ /**
+  * strtok - Split a string into tokens
+  * @s: The string to be searched
+@@ -473,9 +468,7 @@ char * strtok(char * s,const char * ct)
+ 	___strtok = send;
+ 	return (sbegin);
+ }
+-#endif
+ 
+-#ifndef __HAVE_ARCH_STRSEP
+ /**
+  * strsep - Split a string into tokens
+  * @s: The string to be searched
+@@ -501,7 +494,6 @@ char * strsep(char **s, const char *ct)
+ 
+ 	return sbegin;
+ }
+-#endif
+ 
+ #ifndef __HAVE_ARCH_MEMSET
+ /**
 -- 
 2.55.0
 
