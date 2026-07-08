@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5B8C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D78C44506
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:37:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4D3A84A30;
-	Wed,  8 Jul 2026 19:36:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E06184A4F;
+	Wed,  8 Jul 2026 19:36:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="RHzLXceL";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="ng7WQDSr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1620684A0B; Wed,  8 Jul 2026 15:07:10 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 8D2B184A0B; Wed,  8 Jul 2026 15:07:12 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0461F849F0
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 948F2849F0
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-493bc8fda98so5026745e9.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:08 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-47d6c634f45so501585f8f.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783516027; x=1784120827; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783516030; x=1784120830; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=4M7Y6QoiDmYaokkyO537D1/trYHBcHnzouYNIFahmYA=;
- b=RHzLXceLIBvQmwl7w41uW0+rks03D2H4hBztJ4TmloOGKG9gCNJesaoTF3J4ctWdlj
- LD8imW1NzTQZJRzPeOEYenUpN+9cZFwzIc+XZe4WDxKUzDM6GAMjW6T/8VstrbpH9GLJ
- JzTB2pTbxn17+gWrLJHrys3eALJucO/d8tsZLGGb59XImzTbySyIdBnmN63uX1Wey1i9
- mTsCSRcbP4MJUVZ65JTeB8YbI+S85mf1p2gyREKpg6ubptXyrKHHnHyOmt2oMXkogIFX
- 3HOxCoRpTDOr89WCydzwyaoJvNHESWKN2sydyEKNJmdgoVyQnZDr6e95yZTKHG4bYN+A
- YFlA==
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=llPu8Prg2WtoqnCvI7hTtL1jBF1b+RKxTVg/XgjlfgQ=;
+ b=ng7WQDSr3TX4gjlmSL7Cvnq4jowwtwiGPpUxuut5cXOaE/kPt1afDIwX/Y6hdxyHrR
+ PdZVKgqTwwBTifPOKX+wWyAHg1hp+zaBJ6Xo1CDAVnGbwCYq8ne6KaEmMV6VGGLvcTOI
+ n6XBKNYfHiI+uexNKD9SIQEPTelHOmVUz7NlxuTbog3wdN76+zrZYG0gnl1oGl/wohdo
+ 9yz9ITmZzky+JNphGNxcpwCMxmE8E6Z5pkKuxY7TI83lRkCo63EQcI4txvipc7GQ2aF6
+ auiim2fKEEdpiDX4/6joHfxsAbjR4nnEZTcCDvaG2Hxzb7h/11/g7GEZBx5/HIHHJCy8
+ ucpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783516027; x=1784120827;
+ d=1e100.net; s=20251104; t=1783516030; x=1784120830;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=4M7Y6QoiDmYaokkyO537D1/trYHBcHnzouYNIFahmYA=;
- b=QQQQRIL6DCBFtPflur+WxVH7gkQY73N5rnZRvs8D5r8cwFdxyCUhXSsk6BSU/wl1aR
- zsVv+zZg1m8iqdDb+b6FCFtQLNoeGUMwvDEUKKNnIw5/n70ePWr2Uizw5LEUoCp6Qkcl
- 5gBIUsVK3HMvtd+w/DKPZHwDJIu/kV94NZ2sFBhvCj3orztPY+jemgl75NlM0g5HjMUs
- UbN+eh3cWf2gtgm55IZzuqn04Hu0oNDSBbF4i4vnpUqkQEhhxtIP7b/W/eyYtl/BVNQd
- g3mn5GhNwLm9CKTjmlc0X+O5SmoY7dq7b3SsFedz6KVEvplpPPCok5Ckd7Io5iS+3Qst
- +nMw==
-X-Gm-Message-State: AOJu0YwEW6sXO+JVKcviwd6yn0SnfesZUe6X7pwwZuKH2PAQ53S431W8
- 3BRr0+J9kYOINZgRFaYw8mu/AKex6nXl5T8+PBxlr40UGzk6MK2Ic5WusOuJMpSOORw=
-X-Gm-Gg: AfdE7cl/IkOHxdOtFxMqiUI2YurCpUqnJ9jbxyQfEZP5gj/u571q7vdzr4XWQjMKgZj
- mydhAh8QEnju7+6Q7ukWpdlmokGRmUZeKeFC1mfE8uFDJWgreUP93PpUd+NpCupMZlTJFVmyeTI
- omWtfhQxw2mZuj3+Mpc88DCEw6TWwyxxkvf8PVpJRH8JOCUEtRx3nsd4+78eIct4DxCDCsSNRTA
- THXvU9yJN6B2c67u46Je8EuLQkotFcUYlQEzkuRPKFEziG/8OpSIV1dBMe4LN8UV02BAs8U6iJ9
- 6sVBrbLmv1W3UUgcC5j3gR/rD9G+TYF0YHvqt9q4s7vGMdL9rD12YcDvnTBLjIrdlhST3q6hkAn
- STh5mqfa13T28xhNqol9cfTmGEvh90Ck6suSCkw0BS/E+oAuXPaNdd1P1dlZYg2YodM5d5KcTOg
- eLmaRzQBXbE//E+d/vsLi899B9tg+tMTBgAEDA3p2sT1e2NrCO0Izhj+X+sd/T14oej3HvYG571
- tKSBxip2pj+b2/BIZu+dvCM5pDpeFS4CwkLt1wT78U1THOTtJdSb5bKGIf+2NkSnem4n8A=
-X-Received: by 2002:a05:600c:638d:b0:493:df5d:6ca6 with SMTP id
- 5b1f17b1804b1-493e68c41d7mr22325245e9.25.1783516027268; 
- Wed, 08 Jul 2026 06:07:07 -0700 (PDT)
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=llPu8Prg2WtoqnCvI7hTtL1jBF1b+RKxTVg/XgjlfgQ=;
+ b=U6EOU9kO/Yb0DL3Bj17t4JH/mMuErJGr4L9Ag2KodyIKsbyfAzj6gOZZsExmx78ql5
+ hpXMTa/q7Qb3+A9lYcMLVQ2R5WA8A848T2RGbBH+HP0Goxf+9PQAaVpHINuy2ukS2R7K
+ /UAln+mKcsP8p5qclbuUOZnahl4t27UDF5PJETy3iJTJlHFLHup9O4zkPgUi9GWZvfk/
+ DwtGwoMd7WrRv3biqeEReuABBQRR9mpxmoZbTf2HCPouL69FdmVzpTGIUeSGOgidFrP6
+ 09ryihpjd16dy661vfsrYMYuHwaRTudmFo4cRDqSrKe27AkUPz/LBaOnhDouJclM26xX
+ wk7g==
+X-Gm-Message-State: AOJu0YztHblrWTZqj3H9b45hn1MiPwBMWevjml3ekG+CCPlPVgCzNAdJ
+ f4nJjkXId2P6URhDtVLWdhZvkiXASZmUBr+T+4udIzK6kAOjl0y3CpR5YKT8XTz169U=
+X-Gm-Gg: AfdE7cnroGL+aGKGsIAV3oFE2iD5VG3/pS/MizQr0q717/A39ckOCUwM696qL37Llu6
+ Omeb4Iv/scEJOHfYunSeZAer3DJ/rBwsjYg57iQeHGVRTZ6/GmoRC85nkKAzRmRsuKKMSFxw+z2
+ EpY8TnmEvquIB5No6BKHh5Rv1dSKjhb51J8ZQXie1dTUm2+fKojdnsVMIpwHsQIJaVdymcaxStN
+ jGIkfQAoRu8HC6z68Y5Yha8FIP/j9TlQNyfmultO/6h4OhILNEJEan0aGfSxjJwiJHFiVH/VG4J
+ qt88aQoJrJIuT2ayFksx01HVG897Rv2guYujWM0EJKEh81UCmKTNFUAgEvoZch7oysqx1xOXcIz
+ 6t3VtkLnSEDhIwS5Kb4slE6WoYIcQdykH5zNOJ8C/bChDTUVcqQxwdhdx37Zjk/x5/25cMKvAZb
+ tdjvXs+2xpbdc7eOff8WDk+mhrsXqd+S51jR30NavnL/DQGD3ogR2G+OiGcVq8rr//4jB3+gR31
+ iNeMqoxFksyzSzrk+axYwqXAzggOyqSif9E7EzBtIXLuEYHDjxYFygG7uHqT+ktfASmkx8=
+X-Received: by 2002:a05:6000:3cb:b0:472:aaba:faed with SMTP id
+ ffacd0b85a97d-47df075e330mr2647674f8f.31.1783516029976; 
+ Wed, 08 Jul 2026 06:07:09 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.04
+ ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 06:07:06 -0700 (PDT)
+ Wed, 08 Jul 2026 06:07:09 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 08 Jul 2026 15:07:08 +0200
-Subject: [PATCH 02/12] configs: mediatek: drop unused CONFIG_MTK_POWER_DOMAIN
+Date: Wed, 08 Jul 2026 15:07:09 +0200
+Subject: [PATCH 03/12] power: domain: mediatek: remove enum scp_domain_type
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-mt8188-add-power-domain-v1-2-0e930b4f714e@baylibre.com>
+Message-Id: <20260708-mt8188-add-power-domain-v1-3-0e930b4f714e@baylibre.com>
 References: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 In-Reply-To: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 To: u-boot@lists.denx.de
@@ -133,177 +131,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MT7981, MT7986, MT7987 and MT7988 SoCs do not have a scpsys power
-domain block: none of their device trees carry a "mediatek,*-scpsys"
-compatible, so the driver never binds and enabling CONFIG_MTK_POWER_DOMAIN
-only builds dead code.
+The driver mapped each compatible to an enum scp_domain_type via the
+match data, then used mtk_power_domain_hook() to switch on that enum
+and select the per-SoC domain table. This forces every new SoC to add
+an enum value and a switch case in shared code.
 
-Note: the MT7987 and MT7988 device trees do carry a
-"mediatek,mt79xx-power-controller" compatible on their topmisc syscon,
-but no U-Boot driver binds it and no node consumes power-domains, so
-the symbols are unused there as well.
+Store a pointer to the per-SoC table directly in the match data and
+drop the enum, the type field, and mtk_power_domain_hook(). This keeps
+per-SoC information in the match data where it belongs, making it
+possible to later split the SoC-specific tables into standalone drivers.
 
-Remove the unused symbols (CONFIG_MTK_POWER_DOMAIN and
-CONFIG_POWER_DOMAIN) from these defconfigs.
+No functional change intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- configs/mt7981_emmc_rfb_defconfig    | 2 --
- configs/mt7981_rfb_defconfig         | 2 --
- configs/mt7981_sd_rfb_defconfig      | 2 --
- configs/mt7986_rfb_defconfig         | 2 --
- configs/mt7986a_bpir3_emmc_defconfig | 2 --
- configs/mt7986a_bpir3_sd_defconfig   | 2 --
- configs/mt7987_emmc_rfb_defconfig    | 2 --
- configs/mt7987_rfb_defconfig         | 2 --
- configs/mt7987_sd_rfb_defconfig      | 2 --
- configs/mt7988_rfb_defconfig         | 2 --
- configs/mt7988_sd_rfb_defconfig      | 2 --
- 11 files changed, 22 deletions(-)
+ drivers/power/domain/mtk-power-domain.c | 38 ++++-----------------------------
+ 1 file changed, 4 insertions(+), 34 deletions(-)
 
-diff --git a/configs/mt7981_emmc_rfb_defconfig b/configs/mt7981_emmc_rfb_defconfig
-index e5f193b7233..75e7140bdfa 100644
---- a/configs/mt7981_emmc_rfb_defconfig
-+++ b/configs/mt7981_emmc_rfb_defconfig
-@@ -52,8 +52,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7981=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7981_rfb_defconfig b/configs/mt7981_rfb_defconfig
-index bf361bc3ccc..6322af51b18 100644
---- a/configs/mt7981_rfb_defconfig
-+++ b/configs/mt7981_rfb_defconfig
-@@ -54,8 +54,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7981=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SPI=y
-diff --git a/configs/mt7981_sd_rfb_defconfig b/configs/mt7981_sd_rfb_defconfig
-index f77d80f3a0a..de05e2486a0 100644
---- a/configs/mt7981_sd_rfb_defconfig
-+++ b/configs/mt7981_sd_rfb_defconfig
-@@ -52,8 +52,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7981=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7986_rfb_defconfig b/configs/mt7986_rfb_defconfig
-index 2cbed019147..87fbe677624 100644
---- a/configs/mt7986_rfb_defconfig
-+++ b/configs/mt7986_rfb_defconfig
-@@ -54,8 +54,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7986=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SPI=y
-diff --git a/configs/mt7986a_bpir3_emmc_defconfig b/configs/mt7986a_bpir3_emmc_defconfig
-index 80962adb43a..92459ad9fe2 100644
---- a/configs/mt7986a_bpir3_emmc_defconfig
-+++ b/configs/mt7986a_bpir3_emmc_defconfig
-@@ -52,8 +52,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7986=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7986a_bpir3_sd_defconfig b/configs/mt7986a_bpir3_sd_defconfig
-index 0b91b275500..2c88255e69d 100644
---- a/configs/mt7986a_bpir3_sd_defconfig
-+++ b/configs/mt7986a_bpir3_sd_defconfig
-@@ -52,8 +52,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7986=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7987_emmc_rfb_defconfig b/configs/mt7987_emmc_rfb_defconfig
-index 11673f9a1f2..00d7e5a610a 100644
---- a/configs/mt7987_emmc_rfb_defconfig
-+++ b/configs/mt7987_emmc_rfb_defconfig
-@@ -77,8 +77,6 @@ CONFIG_PHY_ETHERNET_ID=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7987=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_PWM=y
- CONFIG_PWM_MTK=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7987_rfb_defconfig b/configs/mt7987_rfb_defconfig
-index fd2c67de4f8..0b353c6cf01 100644
---- a/configs/mt7987_rfb_defconfig
-+++ b/configs/mt7987_rfb_defconfig
-@@ -72,8 +72,6 @@ CONFIG_PHY_ETHERNET_ID=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7987=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_PWM=y
- CONFIG_PWM_MTK=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7987_sd_rfb_defconfig b/configs/mt7987_sd_rfb_defconfig
-index b8e01475b22..30ff09365da 100644
---- a/configs/mt7987_sd_rfb_defconfig
-+++ b/configs/mt7987_sd_rfb_defconfig
-@@ -77,8 +77,6 @@ CONFIG_PHY_ETHERNET_ID=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7987=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_PWM=y
- CONFIG_PWM_MTK=y
- CONFIG_DM_SERIAL=y
-diff --git a/configs/mt7988_rfb_defconfig b/configs/mt7988_rfb_defconfig
-index 8230628312d..375df418ce0 100644
---- a/configs/mt7988_rfb_defconfig
-+++ b/configs/mt7988_rfb_defconfig
-@@ -67,8 +67,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7988=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_PWM=y
- CONFIG_PWM_MTK=y
- CONFIG_RAM=y
-diff --git a/configs/mt7988_sd_rfb_defconfig b/configs/mt7988_sd_rfb_defconfig
-index db3ca7801f9..aafbed7bea5 100644
---- a/configs/mt7988_sd_rfb_defconfig
-+++ b/configs/mt7988_sd_rfb_defconfig
-@@ -55,8 +55,6 @@ CONFIG_PHY_FIXED=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7988=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
- CONFIG_DM_PWM=y
- CONFIG_PWM_MTK=y
- CONFIG_RAM=y
+diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
+index 24dd540897d..16a97094303 100644
+--- a/drivers/power/domain/mtk-power-domain.c
++++ b/drivers/power/domain/mtk-power-domain.c
+@@ -61,12 +61,6 @@
+ 
+ #define DCM_TOP_EN		BIT(0)
+ 
+-enum scp_domain_type {
+-	SCPSYS_MT7622,
+-	SCPSYS_MT7623,
+-	SCPSYS_MT7629,
+-};
+-
+ struct scp_domain;
+ 
+ struct scp_domain_data {
+@@ -81,7 +75,6 @@ struct scp_domain_data {
+ struct scp_domain {
+ 	void __iomem *base;
+ 	void __iomem *infracfg;
+-	enum scp_domain_type type;
+ 	struct scp_domain_data *data;
+ };
+ 
+@@ -316,27 +309,6 @@ static int scpsys_power_request(struct power_domain *power_domain)
+ 	return 0;
+ }
+ 
+-static int mtk_power_domain_hook(struct udevice *dev)
+-{
+-	struct scp_domain *scpd = dev_get_priv(dev);
+-
+-	scpd->type = (enum scp_domain_type)dev_get_driver_data(dev);
+-
+-	switch (scpd->type) {
+-	case SCPSYS_MT7623:
+-		scpd->data = scp_domain_mt7623;
+-		break;
+-	case SCPSYS_MT7622:
+-	case SCPSYS_MT7629:
+-		scpd->data = scp_domain_mt7629;
+-		break;
+-	default:
+-		return -EINVAL;
+-	}
+-
+-	return 0;
+-}
+-
+ static int mtk_power_domain_probe(struct udevice *dev)
+ {
+ 	struct ofnode_phandle_args args;
+@@ -349,9 +321,7 @@ static int mtk_power_domain_probe(struct udevice *dev)
+ 	if (!scpd->base)
+ 		return -ENOENT;
+ 
+-	err = mtk_power_domain_hook(dev);
+-	if (err)
+-		return err;
++	scpd->data = (struct scp_domain_data *)dev_get_driver_data(dev);
+ 
+ 	/* get corresponding syscon phandle */
+ 	err = dev_read_phandle_with_args(dev, "infracfg", NULL, 0, 0, &args);
+@@ -379,15 +349,15 @@ static int mtk_power_domain_probe(struct udevice *dev)
+ static const struct udevice_id mtk_power_domain_ids[] = {
+ 	{
+ 		.compatible = "mediatek,mt7622-scpsys",
+-		.data = SCPSYS_MT7622,
++		.data = (ulong)&scp_domain_mt7629,
+ 	},
+ 	{
+ 		.compatible = "mediatek,mt7623-scpsys",
+-		.data = SCPSYS_MT7623,
++		.data = (ulong)&scp_domain_mt7623,
+ 	},
+ 	{
+ 		.compatible = "mediatek,mt7629-scpsys",
+-		.data = SCPSYS_MT7629,
++		.data = (ulong)&scp_domain_mt7629,
+ 	},
+ 	{ /* sentinel */ }
+ };
 
 -- 
 2.54.0
