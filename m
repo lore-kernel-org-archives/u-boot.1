@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFABAC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 22:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7DFC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 22:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECC4584ADD;
-	Thu,  9 Jul 2026 00:06:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E82E84AC0;
+	Thu,  9 Jul 2026 00:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wjh0VAJt";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="AhCSHPfK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A08AB84AC3; Thu,  9 Jul 2026 00:06:09 +0200 (CEST)
+ id 3BD4184AD3; Thu,  9 Jul 2026 00:06:11 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA0F584AC9
+ by phobos.denx.de (Postfix) with ESMTPS id C3F3B84A1F
  for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 00:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1783548365; bh=QVcEANd0Bh6DO05/DSifVIUw08Kain2aP92ZNTXbu9I=;
- b=wjh0VAJtTnjxyZ/iXUKR708smW46byogYHQW8nDcCnvYFybvKpd5lm2Gr0lo102XXkFtx/KJb
- Pf7YQR59pKylzsNSE8aXGlnHafHWYdVCI01qdW0k0E3EzJy3/QLzNioZgqhCZnMspkIyszhjxnj
- Mei55Kqj0dxvuFNG5E8qoU7xsKsUv5HPi3rIoYQ0/XAJ57LWiBrxQm9rWjs5jOvd+UBUGBjcJpx
- UsMKELhYakDwe0IiYWyDSvgbw2Re0Ea5ecNqiS6VskiODHRKPKAKz3xzgZAzoEf/RFbIIhIOgFT
- /dRf8fBkITi0YgQ1YGYxLVrw8IhVi7iyvhScLrLq0kQg==
-X-Forward-Email-ID: 6a4ec9cc2402b3ca75f904bf
+ t=1783548365; bh=crqUNb7gd9GqO+zyn/HsYY1XaGNpuBejtlJXtddvKgY=;
+ b=AhCSHPfKgt0qK3SXF/uV4VE07dlufvIJeakREbH8IWhti3qmGC1o5rLIabgbne82DbIVo4CwW
+ TmeV3XkLovoHhZvIHeUUyEgjqPgIg0+jimEfQc6T1w7+aWAmqNrlelssfOTolycetqhwAM5qGyL
+ dmom8mQsjwUkjn6o2YsDbPRbHhEy+XxlkyRKHqTl6yZxVs+KpKyhqMKtJ4WmvrzPXWjLhHC1pfD
+ Osx97kPurBSv+FfSsUszMrrxAU5JpwUQIz3KROC7dSL8I90iaV1zING+TvarjxbqYNo3VoJwFOT
+ 8nTmQ73A97QZVyjy3QCmR6Uiig7WKjg/6RVOZ4pq0CHg==
+X-Forward-Email-ID: 6a4ec9ca2402b3ca75f904a4
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.10.2
@@ -44,12 +44,12 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Tom Rini <trini@konsulko.com>,
-	Heiko Schocher <hs@nabladev.com>
+	Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
-Date: Wed,  8 Jul 2026 22:05:34 +0000
-Message-ID: <20260708220540.3368825-9-jonas@kwiboo.se>
+Subject: [PATCH 07/11] Kconfig: Depend on correct xPL symbol
+Date: Wed,  8 Jul 2026 22:05:33 +0000
+Message-ID: <20260708220540.3368825-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260708220540.3368825-1-jonas@kwiboo.se>
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
@@ -71,35 +71,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
-only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
+Change to depend on correct xPL symbol instead of a xPL symbol intended
+for a different phase to make affected symbols available for correct
+phase.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/i2c/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/Kconfig         | 2 +-
+ common/spl/Kconfig   | 2 +-
+ drivers/core/Kconfig | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index ab5af17858c8..125dc84819e6 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 8d63afeb138e..408e53524e5f 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -508,7 +508,7 @@ config SPL_SKIP_LOWLEVEL_INIT
  
- config SPL_SYS_I2C_LEGACY
- 	bool "Enable legacy I2C subsystem and drivers in SPL"
--	depends on SUPPORT_SPL && !SPL_DM_I2C
-+	depends on SPL && !SPL_DM_I2C
+ config TPL_SKIP_LOWLEVEL_INIT
+ 	bool "Skip calls to certain low level initialization functions in TPL"
+-	depends on SPL && ARM
++	depends on TPL && ARM
  	help
- 	  Enable the legacy I2C subsystem and drivers in SPL.  This is useful
- 	  in some size constrained situations.
+ 	  If enabled, then certain low level initializations (like setting up
+ 	  the memory controller) are omitted and/or U-Boot does not relocate
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0618f42c9410..988d815f8c79 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1768,7 +1768,7 @@ config TPL
+ source "common/spl/Kconfig.tpl"
  
- config TPL_SYS_I2C_LEGACY
- 	bool "Enable legacy I2C subsystem and drivers in TPL"
--	depends on SUPPORT_TPL && !SPL_DM_I2C
-+	depends on TPL && !TPL_DM_I2C
+ config VPL
+-	depends on SUPPORT_SPL && !COMPILE_TEST
++	depends on SUPPORT_VPL && !COMPILE_TEST
+ 	bool "Enable VPL"
  	help
- 	  Enable the legacy I2C subsystem and drivers in TPL.  This is useful
- 	  in some size constrained situations.
+ 	  If you want to build VPL as well as the normal image, TPL and SPL,
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index ae0c34667723..a0e252b0529c 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -394,8 +394,8 @@ config TPL_OF_TRANSLATE
+ 	  smaller in size than fdt_translate_address()
+ 
+ config VPL_OF_TRANSLATE
+-	bool "Translate addresses using fdt_translate_address in SPL"
+-	depends on SPL_DM && VPL_OF_CONTROL
++	bool "Translate addresses using fdt_translate_address in VPL"
++	depends on VPL_DM && VPL_OF_CONTROL
+ 	help
+ 	  If this option is enabled, the reg property will be translated
+ 	  using the fdt_translate_address() function. This is necessary
 -- 
 2.54.0
 
