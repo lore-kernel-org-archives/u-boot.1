@@ -4,88 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3D7C44501
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 10:48:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2413AC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 11:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBFC184118;
-	Wed,  8 Jul 2026 12:48:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E648843B6;
+	Wed,  8 Jul 2026 13:22:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="HmnZuG1n";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="Pfc8MF2G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E3E8843B6; Wed,  8 Jul 2026 12:48:16 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 89E1584979; Wed,  8 Jul 2026 13:22:43 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F175F838D7
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 12:48:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97C5084118
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 13:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=suse.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-493e4ccccc2so3669355e9.2
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 03:48:12 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-493bab44440so3356595e9.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 04:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1783507692; x=1784112492; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
+ d=suse.com; s=google; t=1783509761; x=1784114561; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=F2nkJH94TTrgerifuxqWkF7boW+uWJ6kp8cFPqF9AlI=;
- b=HmnZuG1nQDSeFkmNYrVzrPvi56XJjIE3Y/2FXbaMb3P4rHpERyV4LBrtRcE3B7iL2z
- cw5Ky0/MXNs8k3puMqwxP+ssM4MvovHYWg5CNoLQTnbr31v1acseXto5BygSQ57HcStr
- WtMkbF+MeQyYyoFBDt0Xnr8sNA9lMJ2aXiVuqh29KYT9W4QD8IivOdfSrdF/yLNMbQvC
- nN1G6Dl/oYX88EX4NSpeuUyKGlvEGnJBxRrFeXoY8jIVdHT+5gXRKpTqrk2E3plVwLep
- 5j6stdo7xstWhBFOiB+SrM2HvWD+pAE7MY2ut6j7dpEgIsTsaeJMjM9/mxZ6MCkPleif
- mi4w==
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=cdWE60ZpwHu7jMQOnXHkC7WQJPOUa09aEIow3hlgHyY=;
+ b=Pfc8MF2GMlGHA2p4/GkNMZ37MWd6z6ax4+uUy6mWcfhlvxP/ZcJpDKO9OwzaOTWN4j
+ isDIcD0fFYzPfFEQQV95fafYrC+pR7ZLJW+xmHrR63SOZTxNJXumuf2WBrvqJtL2mWF2
+ MFpg9izDxOB8YxSt/AeH4uLeHLTDUV99YIzxclgzcOhxpBy/d9j8lvVqZQJ8QtD3Uc5I
+ BJaSTkbeK5TCo8a3a09jX/jYpDyOhUMcaZLeUiB7QFi8o+Lxv+LxOcHoE1LoYQF32+hW
+ 0UvEG+k9MYdliESoL8UpHTFO/nN0v6OaySb1nKMG+f8wwdBTbtxE164wjYG9QCAg57M2
+ KgXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783507692; x=1784112492;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
+ d=1e100.net; s=20251104; t=1783509761; x=1784114561;
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F2nkJH94TTrgerifuxqWkF7boW+uWJ6kp8cFPqF9AlI=;
- b=q0p1fZKzd3tYAky6BQv+sMbW3YcZFTP8fJ7Rg8mX61oIVvBVLgFQ4ORucUlMEe1bxr
- uqjT5BWuF/c6E9bXllMeOjYjM+TB0ZqzKCFm37nksJ5emX8oSE87Ss80zpEFIOqq0BNG
- Nc4mTs7DqQlNrrXlIcbR3j1jzK2YsoPz3YxiXuiCjKzz1CAS1DE6pg+XurCPI/zHEq+W
- q0BcG/toJC/XnRDIOCZV1v9dKHx1XEWsoiIpxMtPstDaJ210/Z5cDjX0RD0Oz7T5e8wD
- G+Lzo2BKfT0u+bH/3IxBgeMf9L/zyive91ejDoQ7JCy9IaZGmTVaeRERSrbEoLqIbo3p
- vV4w==
+ :message-id:reply-to:content-type;
+ bh=cdWE60ZpwHu7jMQOnXHkC7WQJPOUa09aEIow3hlgHyY=;
+ b=RVS9d396vTY40A9GWYHULkqdpFfGBris+a1o2JxfKH/fP220NBTTG1IBBncpA9EvW8
+ MVUOclGo3ykFxV+05w8qlN5X/M7L7qsdFsEg09OLnaa9koaND+JF0BWERCFgGHnR2sEi
+ rrh7oLvd1SDxxxwicUPKHC2Ja998Q8XB3NTw1uynM4dmW8HjGWrk/KxPMVee9N5X0JNs
+ RJ3PyZWaZw69gyKOBM4dZdIWs+aFfsD09/6V+GvvHxh7jrCMKL8UptN82l5ibThri02h
+ 29yZZdL1vhhCWshcMFtYjqZTH3zmKkAZZzAItibUyzyT61ggQxAqcTRNS8qrkvSi/p+o
+ H1bg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoLzNs2wEnE+sd6RT8EgnAeffL8LA5Rn7T8H6cvYMD2hgrH8IB7AbKorOurtJ2URbkMsJpoJxw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz03HyrbtxsxYaNsvGa+IaBPC4apw3a8QZz9Uwj3AJFpX+kXM9e
- dhTV0UQ5fIohJ5VtvlE9h9ile8hNuPUnIM12BsVcr28ZhIzmXIDydH3xwVRfwY+7woo=
-X-Gm-Gg: AfdE7cnxSqNiThT/+5jTrHsZJtSPOZf8CkXeL3DRg6W8ajZainm1BZKQRkiwssd1LEP
- DG6lHEf/z1bdsqp40MG7rfQ+vCZ1VjDGgPWatYmFxQMPkzVKyx8uQdthfOz6wg9deFO28xIHxrK
- ckIHlei2QyF8yYOuQdmb3Lx9TViNCIs1pCXO48DUDouOFWIyNL7JNnWKVQYUlTk3EK/0oN4vXE2
- u2MPwHv+9bwjzYIzmRzsipIcZ4ciBfZfTkW4Y4bpRqZUbO4Vjujo1xNBwjcYuGHDuu2xplVLo7d
- C/ersj7dK56nELCAphOPVdgqi37ncF/YuC9XOad4puSjCeKqlBh2hoj1MA7e0prLbnkGffND8vI
- nBkNwl+SYWZlhNrMvGEE8TK3McKFbZQJkVHent72EBrUA8IMYcefvuYaQFXUaeDkmk0UnUHPRLP
- FEJGFA6nlGqdUrcEupuPMz7TWzqB9MrmV2XGtbc0GlTxM7pXpHf8diH6D4LPqn0W5Gez7sKEo=
-X-Received: by 2002:a5d:5f82:0:b0:475:f0c2:5b05 with SMTP id
- ffacd0b85a97d-47df07a463emr2027133f8f.59.1783507692362; 
- Wed, 08 Jul 2026 03:48:12 -0700 (PDT)
+ AHgh+RpQl7ccAVj0T7L3T3FjUWuPif///HCpIBpOT6hByFFpWi++Vk1jCRVzkJPb+KE6Bv5ImXuwgnk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8mhiWGNzrCH/2FrjJY1TieJDDJNiJSpREVdY7jX1GAQJiqRZ2
+ 9Yy0xZV9WBJIv72K2IhiA90BK9HYh3kjFylJ1dFUhqEIAD7Y5fo+hiWNoljDbM+vFsE=
+X-Gm-Gg: AfdE7cniMcL5PKphwnxke3gSZcOtlDrID/h/VuRHCRdVOacGtabY8EMGuOP8PcZud9k
+ 2Lo7/pChkRUP5NzW3WNkLUeHQDSaq0vAyYHXKoXtlzAy354s9KV9PN6aNrqMD2aqKDacbJnOp0P
+ rLhkHrXYsolBtq2e6I+gYFG8rUQyj07e+zq2dJk9trJYmx3h3yojcFdu0ClUJXdskdfTsDaSZB0
+ rMckB4LgkQHE10BbpnDyL4yGNwyUoc9cRMOk8c+6m9FOj71XMzdgVZUOTsy+R/wsMy0ybIFDhGm
+ 6w3aTvHzzSS/spd1noFAdDJ/0DjfRAWSB9xnjSrxhKd7bheIsm4Z31TMQFgXkfKUmU7dEYDHHOf
+ vl/YlSVtD2oAq7uf6UeDk5gwrnKnBK2xWt72wPWRiSimAIFvKv2qxnzTQLuaWU4CG7Ut7jXe/we
+ BRdGvy/JpxL/InGjUzZciUDk6+Y7A8ZWcZYjz18hjU/TiFXBiUIuhSjFK43xzk
+X-Received: by 2002:a05:600c:4e93:b0:492:714d:8c4 with SMTP id
+ 5b1f17b1804b1-493e6393522mr20565565e9.11.1783509760946; 
+ Wed, 08 Jul 2026 04:22:40 -0700 (PDT)
 Received: from [192.168.0.25] (static-163-111-87-188.ipcom.comunitel.net.
  [188.87.111.163]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa0960816sm40139133f8f.29.2026.07.08.03.48.10
+ 5b1f17b1804b1-493e0f40d50sm153309115e9.5.2026.07.08.04.22.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jul 2026 03:48:11 -0700 (PDT)
-Message-ID: <5fbc9e5f-1a34-4bce-a49e-d861a3f79bc8@suse.com>
-Date: Wed, 8 Jul 2026 12:48:08 +0200
+ Wed, 08 Jul 2026 04:22:40 -0700 (PDT)
+Message-ID: <edaab48a-0584-4b1f-8724-f60e360bb653@suse.com>
+Date: Wed, 8 Jul 2026 13:22:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rpi: copy /chosen/bootloader partition and set
- boot_partition
-To: Gregor Herburger <gregor.herburger@linutronix.de>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>,
- Anders Roxell <anders.roxell@linaro.org>
-References: <20260708-tryboot-v1-1-13a14aeacf71@linutronix.de>
+Subject: Re: [PATCH v2 1/4] core: Skip parent device nodes without a DT
+ reference when looking for dma-ranges
+To: Torsten Duwe <duwe@lst.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heiko Schocher <hs@nabladev.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Martin Schwan <m.schwan@phytec.de>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Prashant Kamble <prashant.kamble223@gmail.com>,
+ Denis Mukhin <dmukhin@ford.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ u-boot@lists.denx.de
+References: <20260706172028.C148E68BEB@verein.lst.de>
+ <20260706172147.C934268B05@verein.lst.de>
 Content-Language: en-US, ca-ES, es-ES
 From: Matthias Brugger <mbrugger@suse.com>
 Autocrypt: addr=mbrugger@suse.com; keydata=
@@ -131,7 +139,7 @@ Autocrypt: addr=mbrugger@suse.com; keydata=
  LV6nybxdRG/jp8ZQdQQixPA9azZDzuTu+NjKtzIA5qtfZfmm8xC+kAwAMZ/ZnfCsKwN0bbnD
  YfO3B5Q131ASmu0kbwY03Mw4PhxDzZNrt4a89Y95dq5YkMtVH2Me1ZP063cFCCYCkvEAK/C8
  PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20260708-tryboot-v1-1-13a14aeacf71@linutronix.de>
+In-Reply-To: <20260706172147.C934268B05@verein.lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -152,71 +160,51 @@ X-Virus-Status: Clean
 
 
 
-On 08/07/2026 08:30, Gregor Herburger wrote:
-> The Raspberry Pi has the "tryboot" feature where it can boot from a
-> different partition enabling failsafe A/B updates. After boot the
-> firmware sets 'partition' property in /chosen/bootloader. Copy this
-> property to the device tree and set the env variable boot_partition.
-> This allows boards to create a bootcmd based on the boot partition.
+On 06/07/2026 19:21, Torsten Duwe wrote:
+> From: Torsten Duwe <duwe@suse.de>
 > 
-> Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
+> If a device node got created dynamically, there is no guarantee that the
+> parent node has an associated device tree node which could specify dma
+> constraints. Especially PCI(e) enumeration adds intermediate "bus nodes",
+> also dynamically.
+> 
+> Try harder to find the correct configuration by walking up the tree until
+> a DT association is found.
+> 
+> Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
+> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
 Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
 > ---
->   board/raspberrypi/rpi/rpi.c | 18 ++++++++++++++++++
->   1 file changed, 18 insertions(+)
+>   drivers/core/device.c | 14 +++++++++++++-
+>   1 file changed, 13 insertions(+), 1 deletion(-)
 > 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 1da5df92351..7a2ff646ac8 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -480,6 +480,20 @@ static void set_serial_number(void)
->   	env_set("serial#", serial_string);
->   }
+> diff --git a/drivers/core/device.c b/drivers/core/device.c
+> index d365204ba11..b6d00cf4714 100644
+> --- a/drivers/core/device.c
+> +++ b/drivers/core/device.c
+> @@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice *dev)
+>   	u64 size = 0;
+>   	int ret;
 >   
-> +static void set_boot_partition_fdt(void)
-> +{
-> +	void *fdtp = (void *)gd->fdt_blob;
-> +	u32 partition;
+> -	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
+> +	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
+> +		return 0;
 > +
-> +	partition = fdt_getprop_u32_default(fdtp, "/chosen/bootloader", "partition", 1);
-> +	if (!partition) {
-> +		printf("Failed to the get partition property.\n");
-> +		return;
+> +	/* Look for the first node in the parent chain */
+> +	while (parent) {
+> +		if (dev_has_ofnode(parent))
+> +			break;
+> +
+> +		parent = dev_get_parent(parent);
 > +	}
 > +
-> +	env_set_ulong("boot_partition", partition);
-> +}
-> +
->   int misc_init_r(void)
->   {
->   	set_fdt_addr();
-> @@ -489,6 +503,7 @@ int misc_init_r(void)
->   	set_board_info();
->   #endif
->   	set_serial_number();
-> +	set_boot_partition_fdt();
+> +	/* No parents have a node, bail out */
+> +	if (!parent)
+>   		return 0;
 >   
->   	return 0;
->   }
-> @@ -641,6 +656,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->   
->   	/* copy uart clk as provided by the firmware */
->   	copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
-> +
-> +	/* Copy the boot partition */
-> +	copy_property(fdt, fw_fdt, "/chosen/bootloader", "partition");
->   }
->   
->   int ft_board_setup(void *blob, struct bd_info *bd)
-> 
-> ---
-> base-commit: ee5d46b45ec0c63f8f9dd1e816e0dac3452ccc3d
-> change-id: 20260708-tryboot-c11aa44bf1cc
-> 
-> Best regards,
-> --
-> Gregor Herburger <gregor.herburger@linutronix.de>
-> 
+>   	/*
 
