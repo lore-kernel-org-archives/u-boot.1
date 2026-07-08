@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAFE2C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00A1C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:42:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D319284A9E;
-	Wed,  8 Jul 2026 14:40:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2425084AA2;
+	Wed,  8 Jul 2026 14:40:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kE43+DsP";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="TqIhvJte";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE7F484118; Wed,  8 Jul 2026 03:13:53 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id B13B384118; Wed,  8 Jul 2026 03:13:57 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FA8C838D7
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 03:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9087A838D7
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 03:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chen.huei.lok@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iEQCudU5Rb/rz/mzCt/cHuJLxAzE0/+R5vup/7fkhvxkOa+cv9u/FNOVBIix2szV8mkPWvqmruoNUWnJWjCcd4w9vkmqiMQXGsKQSc1jP9IK92U6f3zwtsHhMO2g7V0bMzJn9BNFa0garJTgtBppStMu4a4L3UfwuLCYD52Ajd5S8AeabLc+slRZ5clCjC6aPrUuYKqp8l6li17nSG3thCJo2cRqVMoQQztpWi9XpC9PvSeXMCn4hteK8HfdHX7ByqZORlbg9hwMkj3c5vYJDn7pO0TTmNBf1oMu2K8vdpZmQy0pedeQDe9AedIDtE5n39EZzW8EKQ3JtiQDjMYfhA==
+ b=DWNKZc/qA9/q59BVWXetuV+ftXNICLqqlxMVqYV2Dt9UIgQjCYeKIXYIv1QIAw/CteNsWu5JS/5FfKOqW9RX5igY46rpLu3c/yoCXv3WGifVVY0Sx1ZMAP7893cUh8FA6GI2PEJgIyOHMN7PnLHGR8xWsSUBjFSMxTOg7cSUF3zMdZKD4ts6LswRpmL3+DocKPY+5q86X31uRT0M9EEiT1VjMDVXsk8rX1aiwGm1jA0RVQ/0GbdGeBTdR7hvPgoDVejBJrMPAIUAhygSVzyIuNXCkfs2ISDnOJevgn/cOU1UG5C6eQ9LOrkutEvPpSedz+52uxHSPDJ1zTkIoOZJyg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=STd0ONaheOAq4/eOXR+uFpCX1WEVTCptXnzdOg0LtAc=;
- b=GLVX/5sJeLj8RqLM3UPMn0WaO9tp0Rl5j3lFdAfw6z9ebMNzI35QCwF1Somqdr++stgkWRbc+eydbNfztY+vKqcD73Ump329Xks3uPR2ozusqDHIkhEWeyGjugRSu07OoKpc3yb+nQwq+hTxAIpaUpl+QwgSub8etJwEbv6DpLk7KHzf357D0qjBtLn7ZSZtdSGa20LZpv+LKx/48OqA7bHMJ4j/WoZF5Ny6GyQtM8s1ZvYIJj6+WA6aGGml+djQ4doZSHpdAAVaTf1iV3dtM9dhxl10Tgb6r6nIYTSDIEnk9L0qXlHM0Jovldb9DxRYbODSdThyw1tvwEzmA6faEA==
+ bh=OX9JYJXc3Ph2pPlQmqnJhiR27TTz8LMBJNalyLCvsIk=;
+ b=W3Avtkz8vMUgt6PbusNcyUQF01X/6pk1EO8v/h1Bonq83y1V9E6Hp8/B1NRka+NyAi+bRajSd+ArZPJ/yYlxjGQgS2sPVoSpzNJSLV2Mfu4An0NgCZU6nw2xPa7UTp84dfamhD5vQjxCh2u8xmG/LyGDTjCsXvgiT8qenz7H4NqRNe5WVLd1hHBVenG+zKflMAf7cidmT1L5ipz9o+5Oyt0Hl5UBSBuBxrBmFSvth/fCta3pBHM4IYMQgAOgXsTIHEKR5z5T6TWqtqTdoapiYynf0gUj19uruldZ6T01HLyTw77r+rHWqO0QvIAfT9MwBRCxyNvsHQaBP2qNkvStNw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=STd0ONaheOAq4/eOXR+uFpCX1WEVTCptXnzdOg0LtAc=;
- b=kE43+DsPuKRDtNrINALCleTa56aLjldW2mLdKJiSRCgDqGQZqmVOMVLSR/FhgNjpCJeG8bpWPlCo4mEzhx7GiFetlafIOHkRL9+9ZkaP3iCt/VGerGbWZNZQT4XIRGOF1pJCwL+HDJ35l4CkFB3WZurp3Sbgn5BeOv/3N4V68nX9UqxRAH6+WvAUVb3ATfFSL08En3jsdlcC1G5hYD257/75z/q3/OW/F3KgdpefUX0X0hvt0fcnaflvXqa/EfV7b+UM2ihkTPgR9R2024Yuy3mMeHMnSoBtx7wMIf+3nsJMNcVc8xspD3B1zvQxQX4BIfvxxPlU4zsoui//BZ3J1Q==
+ bh=OX9JYJXc3Ph2pPlQmqnJhiR27TTz8LMBJNalyLCvsIk=;
+ b=TqIhvJtecmdehpswKnSaZ1Lt9HNw1uRkEVDWP/2/avdh7WUiGvIXaMUyFbGEDLvUR/OlfMNktoFmS027ZwxOP2nvkpkOuXWR1x5t869OecC8KIHiM1rscG+DEyGZQemm/KB9PUj3exGbIzTp9YQksPIgjJ9uLThl8fNQCnpjuTzgbfKXBSBNxhXO7vSwEy1wIV7GhRoLogluDB4nhshUzaUD2MeFpSN/pTDX3M/8GdZXZKpKRDdlw4EPXw1Ky5h7Hy4brnrpFf3u+v9D85fbcNanAxNL8iNQIpc6DAI/eg77ipbG+bsCyMg0DEsNT3O5t/qKkUj8lrcsQRWvFuBL3A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
  by MW4PR03MB6473.namprd03.prod.outlook.com (2603:10b6:303:120::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 8 Jul 2026
- 01:13:48 +0000
+ 01:13:52 +0000
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0181.008; Wed, 8 Jul 2026
- 01:13:48 +0000
+ 01:13:52 +0000
 From: Chen Huei Lok <chen.huei.lok@altera.com>
 To: u-boot@lists.denx.de
 Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
@@ -63,10 +63,10 @@ Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH 14/15] ddr: altera: n5x: reconfigure DDR when mem-clk handoff
- changes
-Date: Wed,  8 Jul 2026 09:12:27 +0800
-Message-ID: <20260708011228.15613-15-chen.huei.lok@altera.com>
+Subject: [PATCH 15/15] ddr: altera: n5x: Replay PIE handoff on DDR retention
+ restore
+Date: Wed,  8 Jul 2026 09:12:28 +0800
+Message-ID: <20260708011228.15613-16-chen.huei.lok@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260708011228.15613-1-chen.huei.lok@altera.com>
 References: <20260708011228.15613-1-chen.huei.lok@altera.com>
@@ -78,57 +78,57 @@ X-ClientProxiedBy: SJ0PR03CA0062.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|MW4PR03MB6473:EE_
-X-MS-Office365-Filtering-Correlation-Id: dcf342a3-ce28-45f7-7719-08dedc8e29b9
+X-MS-Office365-Filtering-Correlation-Id: d60c1cc4-1c3a-41f1-5679-08dedc8e2c1f
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|23010399003|1800799024|376014|18002099003|11063799006|55112099003|56012099006|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info: ruTkxg+Gtd360cHfDmZ7gsmZyKWpD5C16i50Mzy+qY/AqA71vZhzF5TFdkpx2XVkhxONiCkKoVwmTxBadJYhWkXTBqlMCsTlCb9KU01KZsgEBWC1LIY2WkIDjOnoBon+PfSDjPujBJ4k4iOBhX5eZWCqvfbhEqouDSbBezCRLzWBTHcGdhpqL1nsUo3FVL+Upqq/PSV1AgeGUc5IU1ZM52R1vY7jorRGOlQQwr01F0vVWU8NB/p/mVy1eAGBdu4KPy/Gtqrpem5eKS4bCNbkPEYgMsnskIuUE5q3SjPJ2dJJpnP6y5O6EFxyjuquTfpJks1FrbjG4IfOTyI+UE4tujG2jLRSLrt8kNRFwRABSuNZRzHCMyftMsiqMYwyAGwMQUHIAvFdSZVrw8d+1pp+t79j9SrJjIG+yjDh6t1mzUfPe2gi2yPFa6numaIChR0snz8AlzcvUZA7Z8q7D973o5urta0Wpq5v2joQI0vOCN2u6w9xAR6NVScuce6/BCgv6qdrHXM8o9lgGcVBLCqzT9a1iUV0IFD34wIxjPyLS/hOHGszVIy9CB4yHFxgwuJeLKlBfmknCs8gDv0sjP7IIqQRi0u73GYMpHOLRAIh63OdD0z265GsQvkmdxr4qQlLrHUb3S14P/kArtuWrp3kq3yVNeIBzXLyygEKh/OvGoU=
+X-Microsoft-Antispam-Message-Info: rfXjDYU0XyGrOqKlrBNPCiXQJ9S954xoWgpqdnnM3UQD1yOznoOBcSwrLMNe130qXL/iFvM8cSeNN4EuXHZrGy4IOeZFESbXIopC7VbdYw51eNUq3kBGRxBh827fB+Q9BNNbbnBwqIOTTzZeno1k64Ho1CE9okyCWfvHL1xFBY3O6gqmZ0U2ci3KQ38xwKcNvESIOqCr5efrHfGf4Zcyz7MvDLzUrM5mThHahJPQvq6VTWvBy+NotQVeUOh8poUdK049+JI9othpkJdgtFTV/oGXwNRPM7TKWsYVFQQ3BxouEqfgchtsRksxXBD/W1Lm81arA5r71MAFKG4aSRkWrw5BN42tz/WLtrk7Jgpmr7+VDym++mKDlUcviJB187hAsHQc+g4YVzXjk+haHJKs8+NZeEMueMU/+hxyvj1QLimTgk+41ECzYdmVU1u2ZKbZYj1KF8vw4icJNXNhHJTfIY7MykgyvTelwseUjAXhS0PEHvCrLf6in5bKO58m7zNiomKdgp+HQZIZijd1EYc5dT8cMkkNrwmdnlJ/vwlzK+Bhl4S7auPIeY2qcjKXOpDhTR9Ut6R5GQYNYacLVHphcC1nYJuTiLQBYId56ly2O1XqI9WS7m75ENjrbCfL/zX3twLfID/1sqpfmxzamYKSUzghCtFDmNEWPRyRH7RoTtc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(11063799006)(55112099003)(56012099006)(22082099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?fzqF3yG4HaRjzurpkZy+ZRpb4yKeZRotw/+0BWprw7GLtpeYDDExHjqV7GIx?=
- =?us-ascii?Q?mp50Iym3dwOvhFL3yyAsK/7N4zLNuCTjFOcCWO2M1OFv9I6jB2LuVd2H0+cV?=
- =?us-ascii?Q?T9KA3ihZ2JBFBpCL3sQRP8PlB5yK0t/2ri3qGroGJVTk93se100+kZm7LmOE?=
- =?us-ascii?Q?kwsOLUDTX3TsiePvio1BK+QJvKE/vH3DemZPCukaPHtyuvzNVPOOYGmua03f?=
- =?us-ascii?Q?SQ3EnZCmX3R3dRMXWj21/mA1v44jhG/KxCWl/3U/E1DDvIeWZZci+H9JBdzK?=
- =?us-ascii?Q?LcoY3YHZz5oaNKYVOdJL1KcJ9Aa2gJU297ZpL5oSYK6SfZVAuqFV+c+qGvV6?=
- =?us-ascii?Q?vreyEOjTEIqV4PEdQCP5uTZIe0Sj6GloL2r2kBuw3mDQwRAfjEhx3ConHaFn?=
- =?us-ascii?Q?svLIsOBpCf2V7oL6pq4M7UtKA5RO9h2aGUGM3dFRPHKkPeky0G8Y7DvBiRew?=
- =?us-ascii?Q?KTZQokG6HtM/2AvpuV0i6w6b6lnCTy7oe4s5esYsSPKSUp9DOcfgUmcj/55w?=
- =?us-ascii?Q?SbjzR4XGKx5/xSyEJfQdSaeEz4pjNNh06dJYG3ind4UYND8miXxdqn+lcKLc?=
- =?us-ascii?Q?yYWlFiE340BQCqt53rDV0D31/HXMjeaLimeyMxQ37AmXpTVb3JpvlwW2JQz5?=
- =?us-ascii?Q?XnHf00H5n68nliJjjXR3pkz3SlooDn3fHgCBJ8TKdEab5OBoSkO9hojb7Bvq?=
- =?us-ascii?Q?63r8DNGM9Dk9DlUvlV3e/jSjbnQ2fk4qTCMI4i1aSGg8KgMc4JRlhmpgAXtQ?=
- =?us-ascii?Q?Z0KICpyNe/wUhfCZlU8LBaFKEwip2Buw1I0cLFb+cYsg7jL9IstlYBT3u+fO?=
- =?us-ascii?Q?mIqtP6c9wxutKL5URWo6PLdaeee34/0RWxLMHrAKx/v6NB8Wt3xSTJtk0D0Q?=
- =?us-ascii?Q?EikBrDgjN620q6O/AfwxGzlkSzSPgCDydsxBUHiDBe8QT0IWm4vWf48MJdkL?=
- =?us-ascii?Q?FOuh/swlY2D8JcW1auT1c8xZ38ByvITyxyI/d+WiRx+ljBe4SkK0aMQKlEii?=
- =?us-ascii?Q?nbtUDtaNmJd0NZ4pQC10KwOqFAUSNVVLe3ZO7oABg8Egj4dn4YAOiqVFnFYI?=
- =?us-ascii?Q?xECDKdbSETfg1eWVxob/FwqkVn7q6Bp8A2JxGbteUrUS/kI6MtBDivtUDqdR?=
- =?us-ascii?Q?ejswyGRMBIYdXRHjlkZ/YPATQz73F2UL/45jNW2P8YpCSnaEKdIgNB9nki1V?=
- =?us-ascii?Q?Xlbfd1jNT/4QR3oF10QWG0+rK34aF1ja4GxxC4GynwCNmuhxvXQi7Jjb6F7P?=
- =?us-ascii?Q?0F7TxgSg4aUtdoUnL8Wa8JA/vYzVOz9WeeOVgrZF3R40XHB99MT6bzngioI2?=
- =?us-ascii?Q?Uo1xVibQWS/dGUdo+KhIHPIQ9vmDFikC4AGjRN+MbWSoI/PSsmS16xc3ZVV1?=
- =?us-ascii?Q?Xtn/hUJGFdQFQNx46g05l1vwBwACK8D/Oo3sl/TlVLWJ04zBRkBSYnxiAlEl?=
- =?us-ascii?Q?j/fJ2N0rnlVHzWU1OtslWARz5KBRXccWcEaE60Q6r6AkjCMVbN7ip2DepKLB?=
- =?us-ascii?Q?AB8kZEFpJMUoUKG8UPnE/0toa6WZ63hjp4ukMOR6+ClajPwqhX6dysRgGaPF?=
- =?us-ascii?Q?Cs7SzFRll6Ah4vbCacmvaO5Uu29UeP3TB5pYoGi2MBm3ZEvF9rNxM3Xa95cT?=
- =?us-ascii?Q?8I+2+6csONpbqvYi/6RPMj6k0DK/Mip+GvHBunrUYV6N5gX5v41Kw8aIW5Ll?=
- =?us-ascii?Q?GlMG+RAMq10KS6lZr8yTTLkDJKDc28aS85XRsYCjvAufTz2vJQ9GzY8j4mp3?=
- =?us-ascii?Q?5BF3/YrxE+/M2UpF7j/PTiKDg4JsTPo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qRmpwR1vZfnm2C2GRS2ZFHhAqc4ykRWpEH05z4oRXhLTzYr+xn/ZIUlBQ5D6?=
+ =?us-ascii?Q?y7f6emNq3kn/3X4m45acVsF+95k3ENzhT3eAoWXdIRiXF0hZ7eFHPnrcsqG/?=
+ =?us-ascii?Q?wNSorFpImfmuVYWYjb1ZssylJkWMsNy+i6dRnJnIGEk3tzHwGLejNmFtCdp5?=
+ =?us-ascii?Q?Przeu499WaSf/wcSRSP1dcBbg8N9k4Qvt/BvsuSoyenokb7ik2CduOTUDLRs?=
+ =?us-ascii?Q?yYL9pMhjS3ZgxAeWhhrdc/KcUBHkIEy4sStJMFKb/Ozm0BlSTvsOp1sYLwkE?=
+ =?us-ascii?Q?xTLYYn6s1Dp9BdP0SS9Q5H6XceMthOXX976qtVeqq2wllTigSyx3+IYVbdQH?=
+ =?us-ascii?Q?s8jfWWuLUnVcXCMCBti2WW/ZVfDbv8GRE85Vfczg3wZYlAxHajB/BfTjrZBv?=
+ =?us-ascii?Q?ooZYMLlkciSAWLtoYq61xDCbn3usDrrX4lXwVCo0oLl1I7ql40591dy+NBdC?=
+ =?us-ascii?Q?gaquaosjRvYvkfLk0WO1ARfpppWXBnVDIrZ/0DbE6VUdl+ATzlVkpEsi8q1y?=
+ =?us-ascii?Q?q/g2ScBWUOmpv+pfXcyLs8vNcJLIy1gTN+5vfwuKMEU+cD7cBMHblh+mHeps?=
+ =?us-ascii?Q?wYLlnj0gzBMU3h6GjzMVLLMOB7l5ZanMxXb3FlwP0CBm+BnQQ2odNtCbMU5U?=
+ =?us-ascii?Q?RbnI3itlhydLzwG/d4We4BPyUS5z7LCSmHF3hUnayFfpbXjw4SO/MyaJoMa6?=
+ =?us-ascii?Q?t6z+byRd6KGg+KtUyFWUwTxWgfH9UPT85uGrAeYXZBL+oWfUV2xGslLKDsuV?=
+ =?us-ascii?Q?KzKiPBtMmZQvzF4sVkvyXnk8Oxv/WdsTaGVaqB7NRjn4qWytQQm+tJzCiJEx?=
+ =?us-ascii?Q?rCc3xKCFMxZIUlRftpEbFpY/EhPzj3azX0a6BbGsUPCreuvXuDBkWdQ2n2uj?=
+ =?us-ascii?Q?iX1A+HZ0640aaS5FmpLKKZFBqti7tr0LhH1XhlhBdyrSJvFZri7h5tHsmGHM?=
+ =?us-ascii?Q?QxNlCj995llPWyHRcr0hW+CYGTyKy4QG6XA9fxT0K6HoV4rPrCOMFBGCPpKN?=
+ =?us-ascii?Q?1418kGvkYab4ymfRmOhMqEg38sSY4h12aRuUe+yvuJA8sQ6q3gl/FNWoyFlR?=
+ =?us-ascii?Q?qcOx3GQsq1ON9E5r6WI7nQ3o2CixZgvo7ovcbC5IsqjX9QnX+VD6ANi+OQLM?=
+ =?us-ascii?Q?pux9TwpzUnE4YyZc1uH5mif6qEk27mrD9HcjFFq7DykphSHuAmcPvHJkK131?=
+ =?us-ascii?Q?WVzgJEidBzQE7w5FWxNI7CyjzbKWsbmNUbJIR3geTyjBuEeXc75XzmfmbDF2?=
+ =?us-ascii?Q?s0+lI0RAC9fkN42B2QLKd50pfVCvqAADStSAEVNQGDwNtbuisbz3frXPIpBq?=
+ =?us-ascii?Q?Pf6o/TlLxiNqFVHSHRo1J8amG4x90m5B8t7kM8/ldiM5mqfeKfS0hbvQWHdZ?=
+ =?us-ascii?Q?kI9iV0R3CsImpgbjLUdUFQOknCtPgK/P49eHTuHsr+403UzBMVvreQx1OtYG?=
+ =?us-ascii?Q?kZ/D0WdNCS9tbGhMxxsci580HQr7/Jy1jCauDGHaA51GgW6wHGXjErIwQpTF?=
+ =?us-ascii?Q?YR83SrgJKtdKJabEsEsi9LBsZo0mk2kGSwhEglF1cc45hx+WYCKDETYCtZgY?=
+ =?us-ascii?Q?nTxyDGsALqVkGILZ7vEA7v1yVpy29S2UbqTnlk+AkEI6v1VZrtp6EicihiWA?=
+ =?us-ascii?Q?kGC+xO7bOJCNTT6e7WXutjoC924AoY/JSqlnTWBcR1pU4+i9wLtYVLguL80n?=
+ =?us-ascii?Q?RZDYabJ3dBJbqPUw+Sw5UsauhWP6pWkj/oL+SEuLDquEhQMvhe/vOD8DYLrG?=
+ =?us-ascii?Q?XXn2ChebjsMUCjU3vcYQgBKcweIE3vU=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dcf342a3-ce28-45f7-7719-08dedc8e29b9
+X-MS-Exchange-CrossTenant-Network-Message-Id: d60c1cc4-1c3a-41f1-5679-08dedc8e2c1f
 X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 01:13:48.0116 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 01:13:52.0786 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JYW4oCNkaVUhZtBL4ReqQ8A0foTT8qLyqJ6XexBCeE7KsJBJfzITxWfBmubfVQYsjpC+0oS3+ZQ9rH6Ewfqm52TSLSP8A5ySR+yFBAyxyWY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 54BmgaGmynAS6YkKLE6cSyYfrGTW0BVyEu4RuyEjQR47DefrMyY7G8HQn7JPaWWJotV8ga9tHvXq34Aate+Xt+4p2RVlm1tBGnUxBLlbl1o=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6473
 X-Mailman-Approved-At: Wed, 08 Jul 2026 14:40:34 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -147,158 +147,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Trigger a DDR reconfiguration when the memory clock values in the handoff
-data have changed, so that a retention restore is not attempted against a
-DDR configuration that no longer matches the running mem-clk settings.
+On the DDR retention restore path the trained PHY results are reloaded
+from the calibration backup by cal_data_ocram() in init_phy(), which
+leaves the PHY microcontroller stalled. Running update_training_result()
+there reads back results from a PHY that was never freshly trained and
+fails the DFI handshake, so DRAM init returns -ENODEV.
+
+Instead, bring the PHY microcontroller out of reset/stall and replay the
+PHY Init Engine handoff to return the PHY to normal operating mode.
+
+The PIE handoff table shares memory with the memclk hash scratch area
+(DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512) used by
+is_ddrconfig_hash_match(). Snapshot and restore those bytes around the
+hash computation so the replayed PIE table is not corrupted.
 
 Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 ---
- .../mach-socfpga/include/mach/handoff_soc64.h |  1 +
- arch/arm/mach-socfpga/wrap_handoff_soc64.c    |  8 ++-
- drivers/ddr/altera/sdram_n5x.c                | 59 ++++++++++++++++++-
- 3 files changed, 66 insertions(+), 2 deletions(-)
+ drivers/ddr/altera/sdram_n5x.c | 48 +++++++++++++++++++++++++++++-----
+ 1 file changed, 42 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-index ae5af1f0100..0fb43acc98b 100644
---- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-@@ -47,6 +47,7 @@
- #define SOC64_HANDOFF_BASE		0x0007F000
- #elif IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)
- #define SOC64_HANDOFF_BASE		0xFFE5F000
-+#define SOC64_HANDOFF_DDR_CLK_HANDOFF	(SOC64_HANDOFF_BASE + 0x610)
- #define SOC64_HANDOFF_MISC		(SOC64_HANDOFF_BASE + 0x630)
- 
- /* DDR handoff */
-diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-index ecde90f76f4..bd1160f55bc 100644
---- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-+++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-@@ -27,7 +27,6 @@ static enum endianness check_endianness(u32 handoff)
- 	case SOC64_HANDOFF_MAGIC_IOCTL:
- 	case SOC64_HANDOFF_MAGIC_FPGA:
- 	case SOC64_HANDOFF_MAGIC_DELAY:
--	case SOC64_HANDOFF_MAGIC_CLOCK:
- 	case SOC64_HANDOFF_MAGIC_SDRAM:
- #if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5)
- 	case SOC64_HANDOFF_MAGIC_PERI:
-@@ -35,6 +34,13 @@ static enum endianness check_endianness(u32 handoff)
- 	case SOC64_HANDOFF_MAGIC_MISC:
- #endif
- 		return BIG_ENDIAN;
-+	case SOC64_HANDOFF_MAGIC_CLOCK:
-+#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)
-+		debug("%s: mem clk  handoff data\n", __func__);
-+		return LITTLE_ENDIAN;
-+#else
-+		return BIG_ENDIAN;
-+#endif
- #if IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)
- 	case SOC64_HANDOFF_DDR_UMCTL2_MAGIC:
- 		debug("%s: umctl2 handoff data\n", __func__);
 diff --git a/drivers/ddr/altera/sdram_n5x.c b/drivers/ddr/altera/sdram_n5x.c
-index f7a26e07cf0..bfa08f62ad6 100644
+index bfa08f62ad6..d09cea5d2ac 100644
 --- a/drivers/ddr/altera/sdram_n5x.c
 +++ b/drivers/ddr/altera/sdram_n5x.c
-@@ -38,8 +38,9 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- /* DDR handoff SHA384 attribute */
- #define DDR_HANDOFF_IMG_ADDR	0xFFE44000
--#define DDR_HANDOFF_IMG_LEN	0x1A000
-+#define DDR_HANDOFF_IMG_LEN	0x1A200
- #define CHUNKSZ_PER_WD_RESET	(256 * 1024)
-+#define MEMCLK_HANDOFF_SIZE 0x2C
- 
- /* MPFE NOC registers */
- #define FPGA2SDRAM_MGR_MAIN_SIDEBANDMGR_FLAGOUTSET0	0xF8024050
-@@ -1106,6 +1107,28 @@ static void phy_ocram(phys_addr_t phy_base, phys_addr_t phy_offset,
- 	}
- }
- 
-+static int populate_memclk_handoff(void *handoff_base, u32 *mclk_table, u32 size)
-+{
-+	u32 length = MEMCLK_HANDOFF_SIZE - 4;
-+	u32 offset = length - 8;
-+	u32 handoff_table[length];
-+	u32 i;
-+	int ret = 0;
-+
-+	ret = socfpga_handoff_read((void *)handoff_base, handoff_table, length);
-+	if (ret) {
-+		debug("%s: handoff read failed. ret: %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	for (i = 0; i < size; i++) {
-+		mclk_table[i] = handoff_table[offset + i];
-+		debug("mclk_table[%d]: 0x%x\n", i, mclk_table[i]);
-+	}
-+
-+	return ret;
-+}
-+
- static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
- 			  enum data_process proc)
- {
-@@ -1391,6 +1414,11 @@ static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
- 	size_t phybak_num;
- 	const u32 *phybak_p = phybak;
- 	u16 *data;
-+	u32 memclk_table[4];
-+	u32 size = ARRAY_SIZE(memclk_table);
-+	u8 *memclk_hash_offset = (u8 *)(SOC64_OCRAM_PHY_BACKUP_BASE - SZ_1K);
-+	int ret = 0;
-+
- 	struct bac_cal_data_t *cal = (struct bac_cal_data_t *)
- 					((uintptr_t)addr);
- 
-@@ -1425,6 +1453,17 @@ static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
- 	};
- 
- 	if (proc == STORE) {
-+		ret = populate_memclk_handoff((void *)SOC64_HANDOFF_CLOCK,
-+					      memclk_table, size);
-+		if (ret) {
-+			debug("%s: Memclks config Magic Number miss match. ret :%d\n",
-+			      __func__, ret);
-+			return -EFAULT;
-+		}
-+
-+		sha384_csum_wd((u8 *)memclk_table, 4 * size,
-+			       memclk_hash_offset, CHUNKSZ_PER_WD_RESET);
-+
- 		/* Creating header */
- 		/* Generate HASH384 from the DDR config */
- 		sha384_csum_wd((u8 *)DDR_HANDOFF_IMG_ADDR,
-@@ -1455,10 +1494,28 @@ static bool is_ddrconfig_hash_match(const void *buffer)
- {
- 	int ret;
+@@ -1496,6 +1496,9 @@ static bool is_ddrconfig_hash_match(const void *buffer)
  	u8 hash[SHA384_SUM_LEN];
-+	u32 memclk_table[4];
-+	u32 size = ARRAY_SIZE(memclk_table);
+ 	u32 memclk_table[4];
+ 	u32 size = ARRAY_SIZE(memclk_table);
++	u8 *memclk_hash_dst = (u8 *)(DDR_HANDOFF_IMG_ADDR +
++				     DDR_HANDOFF_IMG_LEN - SZ_512);
++	u8 saved_handoff[SHA384_SUM_LEN];
  
  	/* Magic symbol in first 4 bytes of header */
  	struct cal_header_t *header = (struct cal_header_t *)buffer;
+@@ -1512,14 +1515,26 @@ static bool is_ddrconfig_hash_match(const void *buffer)
+ 		return -EFAULT;
+ 	}
  
 +	/*
-+	 * Read and generate the hash for the Mem clk values and store before
-+	 * calcuting the HASH384 generation before Image.
++	 * The memclk hash is written into the tail of the hashed handoff image
++	 * (DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512) so that the
++	 * whole-image hash covers it. That location overlaps the PHY init
++	 * engine handoff table that phy_init_engine() replays on the retention
++	 * restore path, so snapshot the original handoff bytes and restore them
++	 * once the hash has been computed.
 +	 */
-+	ret = populate_memclk_handoff((void *)SOC64_HANDOFF_CLOCK,
-+				      memclk_table, size);
-+	if (ret) {
-+		debug("%s: Memclks config Magic Number miss match. ret : %d\n",
-+		      __func__, ret);
-+		return -EFAULT;
-+	}
++	memcpy(saved_handoff, memclk_hash_dst, SHA384_SUM_LEN);
 +
-+	sha384_csum_wd((u8 *)memclk_table, (4 * sizeof(u32)),
-+		       (u8 *)DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512,
-+		       CHUNKSZ_PER_WD_RESET);
-+
+ 	sha384_csum_wd((u8 *)memclk_table, (4 * sizeof(u32)),
+-		       (u8 *)DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512,
+-		       CHUNKSZ_PER_WD_RESET);
++		       memclk_hash_dst, CHUNKSZ_PER_WD_RESET);
+ 
  	/* Generate HASH384 from the image */
  	sha384_csum_wd((u8 *)DDR_HANDOFF_IMG_ADDR, DDR_HANDOFF_IMG_LEN,
  		       hash, CHUNKSZ_PER_WD_RESET);
+ 
++	/* Restore the handoff bytes clobbered by the memclk hash above */
++	memcpy(memclk_hash_dst, saved_handoff, SHA384_SUM_LEN);
++
+ 	ret = memcmp((void *)hash, (const void *)header->ddrconfig_hash,
+ 		     SHA384_SUM_LEN);
+ 	if (ret) {
+@@ -2956,10 +2971,31 @@ int sdram_mmr_init_full(struct udevice *dev)
+ 			}
+ 
+ 		} else {
+-			/* Updating training result to DDR controller */
+-			ret = update_training_result(&ddr_handoff_info);
+-			if (ret)
+-				return ret;
++			/*
++			 * Retention restore path: the trained results were
++			 * already reloaded into the PHY by cal_data_ocram()
++			 * (LOADING) in init_phy(), so update_training_result()
++			 * must not run here (it would read back results from a
++			 * PHY that was never freshly trained and fail the DFI
++			 * handshake). Bring the PHY microcontroller out of
++			 * reset/stall, then replay the PIE handoff to return the
++			 * PHY to normal operating mode.
++			 */
++			clrbits_le16(ddr_handoff_info.phy_base +
++				     DDR_PHY_APBONLY0_OFFSET,
++				     DDR_PHY_MICROCONTMUXSEL);
++			setbits_le16(ddr_handoff_info.phy_base +
++				     DDR_PHY_MICRORESET_OFFSET,
++				     DDR_PHY_MICRORESET_RESET |
++				     DDR_PHY_MICRORESET_STALL);
++			clrbits_le16(ddr_handoff_info.phy_base +
++				     DDR_PHY_MICRORESET_OFFSET,
++				     DDR_PHY_MICRORESET_RESET);
++			setbits_le16(ddr_handoff_info.phy_base +
++				     DDR_PHY_APBONLY0_OFFSET,
++				     DDR_PHY_MICROCONTMUXSEL);
++
++			phy_init_engine(&ddr_handoff_info);
+ 		}
+ 
+ 		/*
 -- 
 2.43.7
 
