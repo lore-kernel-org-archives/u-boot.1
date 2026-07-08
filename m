@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E581C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C880C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0745584AC9;
-	Wed,  8 Jul 2026 19:36:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DD08849D2;
+	Wed,  8 Jul 2026 19:53:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cy8lEwSe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fnLsbzcR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CAB7849D2; Wed,  8 Jul 2026 19:02:46 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 70E46849F0; Wed,  8 Jul 2026 19:53:25 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33EFD8496E
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D5D28497A
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=royzah@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-493c19bad03so9054375e9.2
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 10:02:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e9f829d75aso520873a34.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 10:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783530164; x=1784134964; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=zcnbao9Q/haaCYa6vhwxnfTqcIXBORptuj0oPuob0M4=;
- b=cy8lEwSemIHaAI497kRFOWScuxSCW2KUpwX7Geg6Ol+g8zVWiYSEKKJrPncwzBQH47
- j7TLXinraw41cnanR3u9EnDT83mY3Atk53zi9wFY9dkVdDVHzYi5n/gcgV7+k4eku92s
- ToLW7HVUa85xzf6OBlTkbaPmPtqeouHQPOOfERcHgI8Elx0y8islxIouCIz3zrG84NNl
- 27pawbDTLnSx8kCv124rqu/t9TXI62If6mHl2xc/ueMqx3a/0uKaLzdrMBOnSvHz3dFs
- lS0rM9G9L3kehfQYOqGnAdIJMo4ODQCxMGDF52aH22+2HyBkDv/GJpqpKq7p66SJ4sli
- g/OA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783530164; x=1784134964;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1783533202; x=1784138002; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=zcnbao9Q/haaCYa6vhwxnfTqcIXBORptuj0oPuob0M4=;
- b=IHo7GF5Y1HN7L/tZDHgKKQN4BMcI0J4vg3lL7fJ0tPeYt6nxSdgT0D/79CFjlCX6jL
- WrhRNHV0s3v892IQQe7asCYfrT8Hg29s6GbNJcdKlPszZf2rAAsW5F7oszCHiRoGqRps
- wj04HMf3p3S0N1qvWfkdiXu7FQucscMWab4vKtnR9oxZXkASayBJXqTCFrxEyGJFBfg4
- js4b8zZZlvxVRqbp/0Se7xPu9b1MLWGLdsWs6H8PeK37Nl7sYw8EvsHxN8XSqmTTJDKU
- 6Hf9CQCZOZSYa6wzDXj3zwFrm/4/OqohXPK0iYYvyNJPArnZ+eDE1cejU9hnzs6Hm+Qz
- mO3w==
-X-Gm-Message-State: AOJu0YxvjEgPTHLU3/x8zQbyFqSZMe9jMHMbHhIw5qgUHoOKftpBlJkm
- BN4JTfbhQFvFbl99ou5J0zwpsSY4Armx3ZMw6LetELnmfIUmmMFqhWzW5o9i/ZFRXEuL2THt
-X-Gm-Gg: AfdE7cm+KTJPQHOCvzuaXbe/69AqiqV1LnpSAdUZHCKOW4iYKvUq5HizRLgS43kPUXM
- XVLtuZud2ITK2VQly5dhMpSHnxEJrAlHEtOLy1Y6cbit5U4YZvNga9dBpvLqgIMYtkCl8DKzPPo
- cl73ZSsCoQBMOQ1EnK/Htr6GUK1ubDeYMoH2tZHjOXMwSGJhrI22LcN1joOaieeIjbi5/SiiCFW
- GegZh0iHsNiNRSxV1686sRROHV2iqMRYmJQv6S81mxKLWRmoPVfEM5KMpgN7OswEslkmltai5Lg
- abz2sEUAyk6rJlD3JNoBxsQzv2GkBy2wixeUhB4Sn3KAoYyUk4tshyV2VR4RKbT9MO6f88fvnMW
- kDZhN3GDeUvjsd0NcQJ93VE1m21G9Mb8lpRBKufOyExYJvl8bDDjRRMEA1beRRK+tMs6tppT8GL
- bQgUgd5iTpiwHlcWYufcIGQYHcnBBrzQ==
-X-Received: by 2002:a05:600c:3b26:b0:493:e3e9:85fb with SMTP id
- 5b1f17b1804b1-493e685f1f6mr37032335e9.20.1783530163301; 
- Wed, 08 Jul 2026 10:02:43 -0700 (PDT)
-Received: from royzah-ThinkPad-T14-Gen-4.lan
- ([2001:8f8:1137:19c:166:4fca:c84a:eee4])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493e0fbd355sm143349355e9.13.2026.07.08.10.02.41
+ bh=JsmMwd5WqbHFuyUk/y3N5iIhRyrppMGsFt7G4DLy3T8=;
+ b=fnLsbzcRbK6MCcYvmK6c2wOidWeAAI9MPF4wxcTnCrN1TUlKvEskyXVRyR6SpSVXi7
+ eN8whPEOF12hxVksbx3S/r6iaLn/qoT4l8xLIS1Sbwnl5YNgX6Zc7tOEVw4TCN+aAi76
+ 5cOM3zxFagKS9b5RUKhgNcXSllyXGfUFlFVGo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783533202; x=1784138002;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=JsmMwd5WqbHFuyUk/y3N5iIhRyrppMGsFt7G4DLy3T8=;
+ b=U2s3rFzmvngifJBoY4Fzvg6XacM1a/x54d3BrV+Wc/3mKJk+EnzdJ5kM/w988kC6yN
+ xbpL5VK2nY53w8gvGQ+WuHKR8ROSYFl8WjvIRui3mXoJ1OsGp+VoPsmKv8d+w+ny9rex
+ c8TrIIt7CI2ahHaW7vlBoj6sXl1IPIHJ0L8kF8Hs1apFslxY8UUBhuZesbyDGq0tGkW7
+ 3r/RdsRKdsAaafESJYzXRY5GesCMjQBmZF71VoNtuci5uKTX4KWRL5+TkpRjSrrorkrj
+ zPJLLygqYdI8h8aj2j2tO5t1BS3d7FUu8PtzuZ+dGOXJSjcjPa9gaof7GIbFTUcfk1vm
+ njZg==
+X-Gm-Message-State: AOJu0Yx0gdUsYqjl3p9H2Jq6MjRI5/mHFUMZkopiKTf9NT950ZwBIF+k
+ W1sJaIXAQ/mM2V7gY+HBVrh8S6vvgV4VksyZgf9A/CzoQUIhWI7al8lBT6khDtqwPB6F7K2Pt6Z
+ DOCuPSKU=
+X-Gm-Gg: AfdE7cmE9xRpzBfCWiBEwhw6xW7iiJxW1MP02XWjma1OdlLA/Z87Tj/1EsJ5v/Rk56O
+ oTS4nuijnD3dxMjviYErDWGkFKdcN1j/gQasW9hPWX8Zvwon3jDLmlyNY3MK+JjBIhUiempP6O+
+ pGAheW9EbeRQOkWbfHpxMg7T0WpN1XocnwfhvfkUdyD0n3rl0ygYE2a116UT+Z33BMyDgKWULPq
+ kOcqJjsr8nl7z/Ip9fxAoy1SaX2bZtXpk28t4d8tWraB/DwZv0OYFHv3gt4ILqYJgr91u+wbb6D
+ Wq0zUjG4xgS8FNW6NX2Etbuxa+s7FFPzJX5cohOA5jqKXvjRnTy8mzaKXr+seClA3OjIhuZhM5k
+ 6vow9hofMQL4PJEb08inxCV4N0yq2Y/KdlSOb0W6zBhFdOJyIVDJIz0CagnMk8PLgiinVXZeUcc
+ RgE+GXsba1GifcRXGa/H6imI74C3KIRyzFwSji8XqUwiNmzxQ4BvPFjxFz71Y/V3QiS0Yk1qHnU
+ +zQfatdShV+1qBV+Dpv/rlnbxcFWOehja2N
+X-Received: by 2002:a05:6830:8389:b0:7e9:b4d0:53a5 with SMTP id
+ 46e09a7af769-7ebd004384bmr2203952a34.30.1783533202117; 
+ Wed, 08 Jul 2026 10:53:22 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ebcb262f50sm2261540a34.15.2026.07.08.10.53.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 10:02:42 -0700 (PDT)
-From: Royyan Zahir <royzah@gmail.com>
-To: u-boot@lists.denx.de
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, lukma@denx.de, Royyan Zahir <royzah@gmail.com>
-Subject: [PATCH] clk: qcom: sa8775p: enable GPLL9 before SDCC1 high-speed rates
-Date: Wed,  8 Jul 2026 21:02:28 +0400
-Message-ID: <20260708170228.621618-1-royzah@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ Wed, 08 Jul 2026 10:53:21 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <e5c267b5-2be7-4a86-aa36-a19ee56658d5@monstr.eu>
+References: <e5c267b5-2be7-4a86-aa36-a19ee56658d5@monstr.eu>
+Subject: Re: [GIT PULL] amd/xilinx/fpga patches for v2025.10-rc1 v3
+Message-Id: <178353320102.1908983.2332397074452254420.b4-ty@konsulko.com>
+Date: Wed, 08 Jul 2026 11:53:21 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 08 Jul 2026 19:36:50 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,62 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lemans/sa8775p, the SDCC1 apps clock high-speed rates (192 and 384 MHz)
-source from GPLL9 (ftbl_gcc_sdcc1_apps_clk_src), but the driver never enables
-GPLL9. When SDCC1 is set to such a rate the RCG switches its source to a PLL
-that is off, so the CMD_RCGR update bit never self-clears and U-Boot warns:
+On Wed, 8 Jul 2026 11:09:30 +0200, Michal Simek wrote:
 
-  WARNING: RCG @ 0x120014 stuck at off
+> please pull these patches to your tree. I can't see any issue in CI.
+> The main part is firmware interface cleanup which I expect will continue in near
+> future.
+> 
+> Thanks,
+> Michal
+> 
+> 
+> [...]
 
-Vote GPLL9 on before selecting it as the SDCC1 source, mirroring how
-clock-sm8250.c enables GPLL9 for SDCC2. GPLL9's mode/status register is at
-0x9000 (lock is bit 31) and its enable vote is bit 9 of the APCS GPLL vote
-register 0x4b028, matching gcc-sa8775p.c in Linux.
+Merged into u-boot/master, thanks!
 
-Not hardware-validated for SDCC high speed: the board this was found on
-(Qualcomm IQ-9075 / Lemans EVK) boots from UFS with no SD card populated, so
-here it only clears the stuck-RCG warning. Build-tested on lemans.
+-- 
+Tom
 
-Signed-off-by: Royyan Zahir <royzah@gmail.com>
----
- drivers/clk/qcom/clock-sa8775p.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
---- a/drivers/clk/qcom/clock-sa8775p.c
-+++ b/drivers/clk/qcom/clock-sa8775p.c
-@@ -26,6 +26,9 @@
-
- #define SDCC1_APPS_CLK_CMD_RCGR			0x20014
-
-+#define APCS_GPLL9_STATUS			0x9000
-+#define APCS_GPLLX_ENA_REG			0x4b028
-+
- #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
- #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
- #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
-@@ -90,6 +93,14 @@
- 	{ }
- };
-
-+/* GPLL9 (SDCC1 high-speed source) is not enabled by earlier boot stages. */
-+static const struct pll_vote_clk gpll9_vote_clk = {
-+	.status = APCS_GPLL9_STATUS,
-+	.status_bit = BIT(31),
-+	.ena_vote = APCS_GPLLX_ENA_REG,
-+	.vote_bit = BIT(9),
-+};
-+
- static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
- {
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -130,6 +141,9 @@
- 		return 19200000;
- 	case GCC_SDCC1_APPS_CLK:
- 		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
-+		/* SDCC1 high-speed rates source from GPLL9; vote it on first. */
-+		if (freq->src == CFG_CLK_SRC_GPLL9)
-+			clk_enable_gpll0(priv->base, &gpll9_vote_clk);
- 		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
- 				     freq->pre_div, freq->m, freq->n, freq->src, 8);
- 		return freq->freq;
