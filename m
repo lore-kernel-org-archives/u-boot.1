@@ -4,131 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4978C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F6FFC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 12:43:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0226584AC0;
+	by phobos.denx.de (Postfix) with ESMTP id 5158884AC7;
 	Wed,  8 Jul 2026 14:40:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zxUl3/6m";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nsDcFspf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C479584942; Wed,  8 Jul 2026 09:56:03 +0200 (CEST)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id 5ACD184979; Wed,  8 Jul 2026 12:35:33 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A62B838D7
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 09:56:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F28FE838D7
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 12:35:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Jayaramudu.Desapogu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bnn4qpc+8Ks4Aie7/2lf8/96soyMvo9L0j3VAx0BQITDVb9mmpk0ymPuZuLRh2QiNop22wkktTrIItCo955/r5ENLsqTWMBS7p0dKkKgAMie+0uhcDvNvi/FK6k2zd0ZAczDpPy5sjU8CvUOrhzk3Qjvii7FrZm3wEkzAXZt60sU699TlnjsPnRpqHbi7XsEC3vdjlMZGscPdUtY2y0UtOZlOqUY8/62WIjWjWyKnBpsvlnIAdjwsxZjPrq66v7aHDrVXMLxn50uaHZ0tpDL3v7qxTegdJK7fjCqNGQRk95vcpQw2my08+CjO+v9Zb+DqOD6XBhAwNV88yOITaREzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X3RKfiPNz1I3JOh/sNWCn2JLJVZJlFfnRcEQYwSYpS8=;
- b=n++DjFt1mZjYg6+2UjEhZ/0JKl0EWTVmHx2TUOQia6g/NFuJklMgEL+HRp1At9ufO2/ci5mIN1i8UxNyN89tNqZida30N8LdhnQvS48BLBb8yD7f4h6jUUQT08WI/qL6E9sjtdmSTt1JRsaOwVXVenDyeg53ZjYmxvRblhCBYspzLKJAYyiqUWTiJaKkyUgfLnX2YSG/RgpimvAGaLLG+Yzp9hfELS7l2rZu6tU1/1uN7+FJ5W8u645KA3g5BsYlm+twywlfLVQ8hBZd0yRCYB82VbEg/lgRvrMLQN6HI5AuCZhdHV4cjdwXukq3gdoERqN9NsfNBMcHbjbrBrHUXA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X3RKfiPNz1I3JOh/sNWCn2JLJVZJlFfnRcEQYwSYpS8=;
- b=zxUl3/6m7Mwkp1hE3OOltvJFoyTK4UyBlWxg38K2y3TRMIhK0Qc0RF/dWFll9gITWcvrjy61f4u1xcX3KsTgLNakOtqwpzRQzgK6C9QJWZjX0N4alnS/lF2tIKLijh6MUTJd9IKXjE2j9NAfmkk6kNkmdMaozgPPOJtfXdY3oZ8=
-Received: from LV8PR12MB9360.namprd12.prod.outlook.com (2603:10b6:408:205::16)
- by BY5PR12MB4179.namprd12.prod.outlook.com (2603:10b6:a03:211::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Wed, 8 Jul
- 2026 07:55:54 +0000
-Received: from LV8PR12MB9360.namprd12.prod.outlook.com
- ([fe80::75a4:7817:3fe:f0b1]) by LV8PR12MB9360.namprd12.prod.outlook.com
- ([fe80::75a4:7817:3fe:f0b1%3]) with mapi id 15.21.0181.009; Wed, 8 Jul 2026
- 07:55:54 +0000
-From: "Desapogu, Jayaramudu" <Jayaramudu.Desapogu@amd.com>
-To: "sjg@chromium.org" <sjg@chromium.org>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "trini@konsulko.com"
- <trini@konsulko.com>, "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>
-Subject: RE: [PATCH] video: fix no display when serial console is disabled
-Thread-Topic: [PATCH] video: fix no display when serial console is disabled
-Thread-Index: AQHc810p2niv5I3TYkW3LFYonqZzDbZjda5w
-Date: Wed, 8 Jul 2026 07:55:54 +0000
-Message-ID: <LV8PR12MB93602C400E0DC621AAED473FE4FF2@LV8PR12MB9360.namprd12.prod.outlook.com>
-References: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
-In-Reply-To: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Enabled=True;
- MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
- MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_SetDate=2026-07-08T07:48:45.0000000Z;
- MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Name=AMD General
- v26; MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_ContentBits=3;
- MSIP_Label_198e8dea-a4f3-4850-b16a-fd6d2b1302b4_Method=Standard
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR12MB9360:EE_|BY5PR12MB4179:EE_
-x-ms-office365-filtering-correlation-id: fdeca86c-400c-4781-e920-08dedcc65668
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|23010399003|56012099006|11063799006|6133799003|3023799007|22082099003|18002099003|38070700021;
-x-microsoft-antispam-message-info: i1BNWFx+0I+GWiCzxhtMjnXQpoiN0mZru/g993x/C94GjG9SU6qmN5mAmF3q4z79m8X2iDCNDN7UAat6mYcSfo9zerF3r8pvhUTJjwBnUY4vb5L8wD9NcBFYPzkU6+Rd3SaVqU9MQkADUW2z5i4wLXxiprqbA74/2V1lbhQ2o5A8EfkfyEPXGKSBKL3nosV12pVsRlPb0+jwPu5ZzqiBsb3hcwsXSRzhgBWtuleso/Ja+YaTPrhPLO8OqslSnAvdKJzswOmuDgIjB/jefzfM9boNlymnW3rHIYp1R5v+Se2Q6011o+5QDolIbXdYVIeJtPCvw+EdL1ZZw+gKIlhU1FCeVYfkwU7Qtnrkzihi+WAXZ+m8b5yYDET7RiCpC6nlGw3MoOR5FwYAUlzR9bylKtsFOcBYn5EtgEdplwKgZL1Et8O8dBKFeCD3tKXU4aB4996q4cVGuVw40kTal11ACVWH6Ku0SpzQkX2xsmHvzraEjXWhTsVHL018JRMYOoUhz8FUq3JjRuvcVU6KaqKwdURnsWFkKUCXBHQfxNlBpB8NtdWA0GYaq1yijzX1TyjTIca8TzLr+kdVU1tEvclf+gLeXS/mU0c9Stl+117J5r730x2yG5k2tQBJjKqhfG4Ag/v6UIeZulYFwyGUL5AnQgDtYGl+RhxzTZl7AAkbULw+h9lJC5kfTACMdXZqIhwUNgV617nBGW1uXj/v/SJZcHl1nhSPjoyrLtII7+1btfY=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR12MB9360.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(56012099006)(11063799006)(6133799003)(3023799007)(22082099003)(18002099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?osgzy44MHDxgqdvzjWAntj9rK4fiQdY3HaFHg2wDBffjE3X+gp7DpRlvhYCb?=
- =?us-ascii?Q?E9o3h4/UKrstjiHORQUa4o/WRjpmHFokl7vw+sXxJkJ+TquNNkkF4vpeSmxC?=
- =?us-ascii?Q?cOi1EoJ64t3zeDsnEz1ZtsTmMNE7/qzf45d5ScTTns7vlcSIINfLg6DqHAZp?=
- =?us-ascii?Q?H3IXpZY4IA7J6hm+gj3qy74dWQqg+kKlecAF3hBx+Nrf8Rs2fRC5PaKSRdZM?=
- =?us-ascii?Q?8j7QXx6NEuuH5Ctz8pAGRdbId9ysQR7ICyHtLMurta2zJ8l2pW6XHdUcs0fK?=
- =?us-ascii?Q?3jEX2gojR3AD+LuqvbXYAimNInzVvxu46coN36hMr/OjFfqDtjZU1169Z3T9?=
- =?us-ascii?Q?9nUJ+1y2mAt8RW4L3vSN/jql7qVbprD0ZK1cnkwU3eUWF01PQL7QcGfB5F7p?=
- =?us-ascii?Q?XJ3AouyDDoqaM6GJZaPc3NkNMdhFEsSfUopKw15yNGrBFYAyuMYFhxx6kYH7?=
- =?us-ascii?Q?323OAYcnTZMEKwh4bZ5oPXu4EQ5fCDCtNyOh6c2hqHu7ZfN0kYqO0ZHZXhFM?=
- =?us-ascii?Q?eWw1qCrkMtQ/baf0gCz2k/R/60ZNUfc0ynFIjMMWk3mQJCFCrZjT7yx2sPY9?=
- =?us-ascii?Q?0PrzFQJkz8kX6jrQCSPv4rdK1dry//Au0K3ZPeIdE5Vze1cXodroNXsLuQwU?=
- =?us-ascii?Q?jTmQJWQvLl/Oj44twF5aZv6P4dPkmrvUfP601QaZGgURrMGoAPSFTiGVknN1?=
- =?us-ascii?Q?S0tGzGqDyySdDSOkc9nPMC+WwYH5hWnaH5Bar8JlBulaUWfxYbX6g0u92D0F?=
- =?us-ascii?Q?XjOcumHI64RvmtggG9eEVRvluObnICO+u9qt5keTVXOFyVT6WanChLRXk77P?=
- =?us-ascii?Q?iC9l/l8/Ex/a9nHu/AIWe4rfrMshIw9TUMu9UsCaIMMup61AEoZXA8nbmzWx?=
- =?us-ascii?Q?wJwazzbPc3dYP4QyontUKkK2hIzyMZsQR4EiqxCIaj7COmAzEyelAOI2WtYL?=
- =?us-ascii?Q?ok9hA8okbk9Ivxywi0KPO/RTIrf3r+gMDYXeRWTALTHdUdqfUHoHeJkAuTBk?=
- =?us-ascii?Q?UK7g0yRypr6ZLlvl0NtLBHn7RXdePxrKsWhuZ4WlBotoQE0G8udWC5YX6Wqu?=
- =?us-ascii?Q?nUSTl7hqfMqUX6ejZunyjs9tZ2gFRvcv89PGJCkz2aua1apxdChdvmp5Bsf3?=
- =?us-ascii?Q?f34wDRQI3qyLJ56eKA82rMMwB+JZITGge+ATzoJzfJiVyKOyfvPFZCdvY28K?=
- =?us-ascii?Q?eMcCfLP87nSfRMJAX8psvjU+grb+2BPavTyLHS115XgYQakphisi2XKoHjmJ?=
- =?us-ascii?Q?xwPC2HR0CJN/XuLBV68uYWcmJd9Z5l+935EflhQOBUlWYcYnhEHKUQfPBUIk?=
- =?us-ascii?Q?5NKXT3doiD+FkOnFoV7T0zRM8s4OCQKUgvFkRXIby+8tMa8vAzPffjdrS+4H?=
- =?us-ascii?Q?fB1CB5dUDHKS64LAJq7qiMAfN+P/foUQVnExTCNn/cNfeVOxSxCZ6/YZgx2L?=
- =?us-ascii?Q?k4O3YV/XaRJpDdRj3YqDPhsrGfs0ulrdqul5LGtIHE4BshJhXBjh6HM1OSu3?=
- =?us-ascii?Q?+12fnysxnzphPjdw8o0MRDEHFpelKEHMuU6lUduaZsXk8UWKceFHPUUjJFwh?=
- =?us-ascii?Q?he6vrgjPw0796ttKNS9Rq68uSe4cEzSPxf7JonyGAH64wf278kshmzkyrzK6?=
- =?us-ascii?Q?CtLwKnlRMJcGPGZr2Oc8P0qYq72MnfVulZkr6s2H8DZRwBnYP2TTA4iihstG?=
- =?us-ascii?Q?g1kaMRvDPHcK0/0QaTaDDEgJpQ4JlYWF+4UeJ4oZNPYiDXoG?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 596003F427
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 10:35:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1783506930;
+ bh=cBW1jalaLfwmxR7CFIh7Z8NalEoBp/1EyBjgzkMCepY=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=nsDcFspfMWfB4GUjwVvDA+58rI28+ZTXq3H1ZTVJT9Z8r1LhcOIrQ4SMsXyq7r+oe
+ i4QMfoYnnzczzzyFLuYCLVZ13XCfALri7vDczFl8jrvksHCV4EszByNq46J1/KAS9q
+ xWexggVMAnd3ScCzsp1QzzNNSU5sHR8YcRGKwkuPd4DovxjVFDnCEzWz/C3O0xL6b9
+ oFyj+nTa7DS5zy7vdbyUAR7UhsAmlX9+dLSJKSSjfRCz96RAoMmJyrcI5w2xRvQ26y
+ WYjr3zGXHvNiXH9aTYZC7hRhMy0LcQB5+iyOT5AmNCQOyacrbIIKgudUUnH4wHQOyy
+ sM9s600rp9AGdrSeP2aSdLT3Eb+rID5bjc5evMQNoeTp06Kcd2HeWXYUbXSpOq5A7X
+ kJNumj1bza1e1isTxZNSadNX3+KqPEWaobeWBBaBdJxKXnIv6sAtc44myFtlfl8DGH
+ rh882v0OVwe+xI/MzG0cbR6G6eEyjQkarxHwWroz8nLvQzYKBPHikExbbo2ijYmn7M
+ D0IPfOovGEl1xLwt87gzjUY2sm8IAzCnzXF5va9JtRUQKNkEvA+dOquWeDZj4yKYTi
+ i6MhYghVPU79FLBh+SGCMhHHvJU1oldmG6sC+H9o6ZOJu+YsyLRMmSvMQh4/zz8BbU
+ MJq9+UtBGbQsKSxx4DqDgLao=
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-381250979d5so708970a91.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 03:35:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783506929; x=1784111729;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=cBW1jalaLfwmxR7CFIh7Z8NalEoBp/1EyBjgzkMCepY=;
+ b=GbKx50bEUysREA8B+2bdrevhCg6dcUOYOMgy8s1pT8ud/tPy/U0DCN3xnhEgNb/7gR
+ KwFWV39nNwKW6GgX0UnzJydp/aNor3beJKImKfDe7dQf8iKgDbfiT6Ly04Zu9tcMKg7s
+ aKg7iT9u13d6gpk93R/bYDpbmdtrXoLp9KRA+oxDaLeS2ZlPjUgJ5039CfBIa48+bXlA
+ 93CzdtbPmv3yv2EuY1bM/JOSEXZXqNII/gq0P6vntbhhI2g3TRsjsCH5d04tyZ5TzfGD
+ Qx9iGWYzK5OuVBpCYuA6pU2ZJjvxryn1qQ5yXyXBkD1qCoqDbjCR4NTll9iPMfFemWnj
+ Vm3w==
+X-Gm-Message-State: AOJu0Ywh41dVH+rI4lbt7FW3E6aJEhb6kVxLjd9ufV9dRXNilasGZqzz
+ y356+kIoWPT2ElHOrKgllaMxU30pewKAMq7WSRmVoiHs/E5gLEAycziQ4ZRLixFxMZXKh+BAIxI
+ 4f0tvaZW+YcznqQ9VrcsHaiQOVCwRq803fKmz63Tho49dTNAd91F1oZQiq2T9SvqFHDD91CaA8+
+ cfjqI=
+X-Gm-Gg: AfdE7clbcgea2xki4U8Pu/LHDCauYylBmJRP6vB0o4T3IyptuASbDnxmqju2uvmzhyP
+ /Tu34Re4w4XuyPuNz5FKbpuibg+HJebjeg7M0mDstK9CFPcgQyBR8M51JUSaTLvIOVq+6JD0hKg
+ xA7ZAK523PZZCLyGXIwk55gkws0Yp6dGFcd+H675a0nUdPCf8w8Xt+6Ebhh4cwCYWfHlvLPB+86
+ 9p8ZIjhfjKZ1N41nTUyXYlg9Dnm2yiwt2XjSL8wC1RHSRe9TwcDerFo/I6u57oz4TM+iAPdGZSh
+ r9ej5fvWWzLfGGet/SwPTXonK8z9zIi4mHXrePvNV2ZB0xgRkVj6xYjW7/HKNIt7uokrs8StBQJ
+ GgZwISki+lXAy96nFTjwIDXoSaJPHIo84OhZLvRB/0tn//wA2+T3K9jNttcO5BA==
+X-Received: by 2002:a17:90b:2752:b0:37e:10d1:c05b with SMTP id
+ 98e67ed59e1d1-389417e4858mr1905458a91.22.1783506928522; 
+ Wed, 08 Jul 2026 03:35:28 -0700 (PDT)
+X-Received: by 2002:a17:90b:2752:b0:37e:10d1:c05b with SMTP id
+ 98e67ed59e1d1-389417e4858mr1905417a91.22.1783506928024; 
+ Wed, 08 Jul 2026 03:35:28 -0700 (PDT)
+Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
+ [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-387d12fcd99sm2563896a91.2.2026.07.08.03.35.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jul 2026 03:35:27 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v2 0/2] spl: fit: bound external data-size in load_simple_fit()
+Date: Wed,  8 Jul 2026 10:34:47 +0000
+Message-ID: <20260708103452.49277-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260618154750.180675-1-aristo.chen@canonical.com>
+References: <20260618154750.180675-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9360.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fdeca86c-400c-4781-e920-08dedcc65668
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jul 2026 07:55:54.4472 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bDGQhMMp53d54rVNHcfjtkAAwsMrnIm2aWVitNGRUnWgimKRUKkgtaYyfhVGYBO7yIfCRYz/fxswUW7V8zTaVw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4179
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 08 Jul 2026 14:40:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -146,53 +113,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AMD General
+Link to v1:
+https://lore.kernel.org/u-boot/20260618154750.180675-1-aristo.chen@canonical.com/
 
-Hi ,
+Changes from v1 (all from Simon's review of patch 1):
 
-Gentle ping for this patch.
+- Move the shared error label to the end of the function so no goto
+  jumps into an if-body. Both bound checks now goto too_big and the
+  printf/return sits after the final return 0.
+- Rewrite the comment on the early len > max_size check. The real
+  reason it exists is to keep get_aligned_image_size() from running
+  its int arithmetic on a hostile value; the block-aligned size
+  check further down is the mathematically binding one because size
+  is len rounded up.
+- Include the data-size value in the diagnostic printf so a real
+  failure is triageable from a board log.
+- Note in the fix commit message that CONFIG_SYS_BOOTM_LEN is a
+  conservative ceiling for the firmware/loadables/FDT/FPGA callers
+  rather than the exact capacity at the destination. The overlay
+  caller remains the one that is actually tight against its buffer.
 
-Could someone please take a look when time permits?
-
-Thanks,
-Jayaram
-
------Original Message-----
-From: Desapogu, Jayaramudu <Jayaramudu.Desapogu@amd.com>
-Sent: Wednesday, June 3, 2026 7:00 PM
-To: sjg@chromium.org
-Cc: u-boot@lists.denx.de; Desapogu, Jayaramudu <Jayaramudu.Desapogu@amd.com=
->
-Subject: [PATCH] video: fix no display when serial console is disabled
-
-When the serial console is disabled in coreboot configuration, no display o=
-utput is observed during boot.
-
-This happens because DBG2 (Debug Port 2 table) configuration is required fo=
-r proper UART initialization and affects the video initialization path.
-
-Fix this by ensuring DBG2 is correctly configured as a 16550-compatible UAR=
-T, allowing video initialization to proceed independently of serial console=
- settings.
-
-Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
 ---
- include/acpi/acpi_table.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h index 48=
-95366a618..3517698ff3e 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -667,7 +667,7 @@ struct __packed acpi_dmar {
+This series closes a pre-authentication memory corruption window in
+the SPL FIT loader. load_simple_fit() in common/spl/spl_fit.c reads
+external image data from the boot device with a transfer sized from
+the FIT data-size property, and only verifies the image hash after
+the read has already happened. data-size is in the exc_prop[]
+exclusion list in boot/image-fit-sig.c, so it is not covered by the
+configuration signature and stays under the control of anyone able
+to modify the boot medium even when CONFIG_SPL_FIT_SIGNATURE is on.
+An inflated value drives info->read() into the destination before
+fit_image_verify_with_data() can reject the image. The device-tree
+overlay path is the sharpest case, because there the destination is
+a fixed CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ heap buffer rather
+than a sized load region.
 
- /* Subtypes for port_subtype field */
+Patch 1 adds a max_size argument to load_simple_fit() and rejects
+both the raw data-size and the block-aligned transfer length with
+-EFBIG before the device read is issued. The size check is the
+mathematically binding one because size is len rounded up to the
+device block length; the early len check exists so
+get_aligned_image_size() never runs on a hostile value, where its
+int arithmetic would invoke signed-integer overflow. Callers that
+load into a memory region pass CONFIG_SYS_BOOTM_LEN, the same limit
+spl_parse_legacy_validate() already applies to legacy images. The
+overlay path passes the size of its temporary buffer.
 
--#define ACPI_DBG2_16550_COMPATIBLE     0x0000
-+#define ACPI_DBG2_16550_COMPATIBLE     0x0012
- #define ACPI_DBG2_16550_SUBSET         0x0001
- #define ACPI_DBG2_ARM_PL011            0x0003
- #define ACPI_DBG2_ARM_SBSA_32BIT       0x000D
---
-2.25.1
+Patch 2 adds a sandbox regression test in test/image/spl_load.c. It
+builds a FIT with external data, then rewrites the data-size
+property in place to a value far beyond both the image buffer and
+any plausible load region, and asserts that spl_load_simple_fit()
+returns -EFBIG instead of overrunning the destination. Without the
+fix the test crashes inside the test-harness read callback when
+memcpy() walks past the small calloc'd image; with the fix the load
+is rejected cleanly.
+
+Verified on sandbox_spl_defconfig: the new test passes, and the full
+SPL unit test suite reports 20 run, 1 skipped, 0 failures. Also
+cross-built am335x_hs_evm_defconfig and am335x_hs_evm_spi_defconfig
+with arm-linux-gnueabihf-, both within the SRAM budget.
+
+On the size question from v1 review: the cleaner shape (single
+too_big label at end of function) plus the expanded printf now
+costs 71 bytes text on am335x_hs_evm (vs the 57 bytes v1 quoted
+for the goto-into-if shape). text+data lands at 45132 out of the
+CONFIG_SPL_MAX_SIZE = 0xb0b0 = 45232 budget, so 100 bytes of
+headroom.
+
+Aristo Chen (2):
+  spl: fit: bound the external data size before reading it
+  test: spl: check load_simple_fit() rejects an oversized data-size
+
+ common/spl/spl_fit.c  | 51 ++++++++++++++++++++++++++++++++++++++-----
+ test/image/spl_load.c | 49 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 94 insertions(+), 6 deletions(-)
+
+-- 
+2.43.0
 
