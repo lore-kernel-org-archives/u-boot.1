@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DCCC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E581C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A3F84A8D;
-	Wed,  8 Jul 2026 19:36:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0745584AC9;
+	Wed,  8 Jul 2026 19:36:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jzfac44M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cy8lEwSe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF5BE849D2; Wed,  8 Jul 2026 16:57:03 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 1CAB7849D2; Wed,  8 Jul 2026 19:02:46 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B60684994
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 16:57:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33EFD8496E
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:02:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ssunkkan@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2ccdb73f0e1so7972085ad.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 07:57:01 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=royzah@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-493c19bad03so9054375e9.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 10:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783522620; x=1784127420; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=JqkRa8/LBoS/biuL4llxook8+65SiIG/lfptBCWldc8=;
- b=Jzfac44M1Vy9kxdYwRhySpg8PU6J2LvzpXvJ/nK+l2xKs6fmRCO6Qn309KYZ/TT1hr
- Zhas8aZS5d7XR8nFuim48u/wC06kBJKM+7qxCuPAHH6yKQ8zNN6AK7UPogIx2jamHDg5
- M7qhJikcXGF/9p6uFB8yCMK4OfpKLT5H1CkrZH7AXroZPf+y3Q0hhuxZvXNLwEGZ3ZjR
- 5a6MRlE76MSRYVXVUuYGeC3uJLCD9BK5lug23lsN8sx+2jVwyHygdMCmxubCWNYetAQJ
- 5OCNaJYcMF0s03ePQFYuMUD9b1QzkMQMBLkoJWidPf3x4uLFoC/ZhFeVnIdU2nkSfTL/
- 2xyw==
+ d=gmail.com; s=20251104; t=1783530164; x=1784134964; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=zcnbao9Q/haaCYa6vhwxnfTqcIXBORptuj0oPuob0M4=;
+ b=cy8lEwSemIHaAI497kRFOWScuxSCW2KUpwX7Geg6Ol+g8zVWiYSEKKJrPncwzBQH47
+ j7TLXinraw41cnanR3u9EnDT83mY3Atk53zi9wFY9dkVdDVHzYi5n/gcgV7+k4eku92s
+ ToLW7HVUa85xzf6OBlTkbaPmPtqeouHQPOOfERcHgI8Elx0y8islxIouCIz3zrG84NNl
+ 27pawbDTLnSx8kCv124rqu/t9TXI62If6mHl2xc/ueMqx3a/0uKaLzdrMBOnSvHz3dFs
+ lS0rM9G9L3kehfQYOqGnAdIJMo4ODQCxMGDF52aH22+2HyBkDv/GJpqpKq7p66SJ4sli
+ g/OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783522620; x=1784127420;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=JqkRa8/LBoS/biuL4llxook8+65SiIG/lfptBCWldc8=;
- b=A0nK5+3owHjIs+rrQ5eRIK7VvuuElG2pcCB6oVVM3LKc9G5HNCXdcAZTPDD6Np8e71
- MG30sq327iMpiTfqizj9kh9VdcWvityrjUtvZ/uYxRs08siNOInssPYBegl4q8geIT2p
- pKyjJFSHmRlQdO6jgqAjpp3jCiM+LdcjWy5NCdi+PCIQDHF6KtRZO87hDDrI0+o7xXMR
- CHxLOtjCTJFg721vcSWsBk1fmPqWtbJMSgMSmR+iquYA8NM8xmALoPz7lsuhB/gZEir5
- 8k3shGytE1jGVhtLnouADB9b90kjwJm4EAvdCkPyMOZH+R8+qkFe0+DbGvth8rNBxk7F
- iXzg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RopUNL/YAFut3aaELyKYQY2eHNW91drKp2Pn7JFsOh8VqqQGFWG74PF6zZYGPcFDZXUJhyadKo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1zqFV/NLMFao6glZAPL8eDgQa2t8hz5JaN8eZ9kmMu5pwsVEB
- wroIx6rmdPDQu3japevm6sbsPo4VOlVzAHBxIKFZ9NuaGkHMqOlBkANaaHmu80ZRjjo=
-X-Gm-Gg: AfdE7clJmnMHc4Hys4yc6DLrNni3yh3yafyqnDkMz0LrUbdMCXlWI66n2K/9qCrBlGc
- +t+SSvt/Yg+y8YvhZk7z2LoTck4ePrbozcKwuSVklUBkDFyJRy2CgwNWPb17WTGe+4Pj73I6Vzm
- 2EsALeVhXUyFx7JFp1b2cQnYKqogqw+WlyRlb40uyzrqdXDrdvLyE1QG1N4PUomvHB2yqenqAji
- a67j1MOQp5sT/gBM3D4CvpXVRxKovN2sDZyxJC2QjirZvvQhVHrPjtzriTKW6xH88h+wUbybITR
- 6GkYFchzOR1z524FYTHvaXAx7A7R2m6sBeUTHJoCT6zyqjxf/z3J+Ru/sCWCuFMqB4jNDGz5gaA
- lyZLXao68+tnY4TIP1C3fLd9m3Sfapc6VjF49D+kZOay5QODlHL8IsODrILYrC/a36o+XYwoFpx
- B7wCutyg==
-X-Received: by 2002:a17:903:2307:b0:2ca:6d2a:871 with SMTP id
- d9443c01a7336-2ccea47c7a5mr29164875ad.37.1783522620156; 
- Wed, 08 Jul 2026 07:57:00 -0700 (PDT)
-Received: from Sun ([240e:3a2:de2:fc10:e8b4:4f4b:5cf5:26b8])
+ d=1e100.net; s=20251104; t=1783530164; x=1784134964;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zcnbao9Q/haaCYa6vhwxnfTqcIXBORptuj0oPuob0M4=;
+ b=IHo7GF5Y1HN7L/tZDHgKKQN4BMcI0J4vg3lL7fJ0tPeYt6nxSdgT0D/79CFjlCX6jL
+ WrhRNHV0s3v892IQQe7asCYfrT8Hg29s6GbNJcdKlPszZf2rAAsW5F7oszCHiRoGqRps
+ wj04HMf3p3S0N1qvWfkdiXu7FQucscMWab4vKtnR9oxZXkASayBJXqTCFrxEyGJFBfg4
+ js4b8zZZlvxVRqbp/0Se7xPu9b1MLWGLdsWs6H8PeK37Nl7sYw8EvsHxN8XSqmTTJDKU
+ 6Hf9CQCZOZSYa6wzDXj3zwFrm/4/OqohXPK0iYYvyNJPArnZ+eDE1cejU9hnzs6Hm+Qz
+ mO3w==
+X-Gm-Message-State: AOJu0YxvjEgPTHLU3/x8zQbyFqSZMe9jMHMbHhIw5qgUHoOKftpBlJkm
+ BN4JTfbhQFvFbl99ou5J0zwpsSY4Armx3ZMw6LetELnmfIUmmMFqhWzW5o9i/ZFRXEuL2THt
+X-Gm-Gg: AfdE7cm+KTJPQHOCvzuaXbe/69AqiqV1LnpSAdUZHCKOW4iYKvUq5HizRLgS43kPUXM
+ XVLtuZud2ITK2VQly5dhMpSHnxEJrAlHEtOLy1Y6cbit5U4YZvNga9dBpvLqgIMYtkCl8DKzPPo
+ cl73ZSsCoQBMOQ1EnK/Htr6GUK1ubDeYMoH2tZHjOXMwSGJhrI22LcN1joOaieeIjbi5/SiiCFW
+ GegZh0iHsNiNRSxV1686sRROHV2iqMRYmJQv6S81mxKLWRmoPVfEM5KMpgN7OswEslkmltai5Lg
+ abz2sEUAyk6rJlD3JNoBxsQzv2GkBy2wixeUhB4Sn3KAoYyUk4tshyV2VR4RKbT9MO6f88fvnMW
+ kDZhN3GDeUvjsd0NcQJ93VE1m21G9Mb8lpRBKufOyExYJvl8bDDjRRMEA1beRRK+tMs6tppT8GL
+ bQgUgd5iTpiwHlcWYufcIGQYHcnBBrzQ==
+X-Received: by 2002:a05:600c:3b26:b0:493:e3e9:85fb with SMTP id
+ 5b1f17b1804b1-493e685f1f6mr37032335e9.20.1783530163301; 
+ Wed, 08 Jul 2026 10:02:43 -0700 (PDT)
+Received: from royzah-ThinkPad-T14-Gen-4.lan
+ ([2001:8f8:1137:19c:166:4fca:c84a:eee4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d1e279sm29449365ad.45.2026.07.08.07.56.57
+ 5b1f17b1804b1-493e0fbd355sm143349355e9.13.2026.07.08.10.02.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 07:56:59 -0700 (PDT)
-From: Ssunk <ssunkkan@gmail.com>
-To: vigneshr@ti.com
-Cc: takahiro.kuwano@infineon.com, trini@konsulko.com, u-boot@lists.denx.de,
- Ssunk <ssunkkan@gmail.com>
-Subject: [PATCH v2] mtd: spi-nor: Add Dosilicon DS25Q4BB support
-Date: Wed,  8 Jul 2026 22:56:48 +0800
-Message-ID: <20260708145648.329-1-ssunkkan@gmail.com>
-X-Mailer: git-send-email 2.53.0.windows.2
-In-Reply-To: <20260614134406.542-1-ssunkkan@gmail.com>
-References: <20260614134406.542-1-ssunkkan@gmail.com>
+ Wed, 08 Jul 2026 10:02:42 -0700 (PDT)
+From: Royyan Zahir <royzah@gmail.com>
+To: u-boot@lists.denx.de
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, Royyan Zahir <royzah@gmail.com>
+Subject: [PATCH] clk: qcom: sa8775p: enable GPLL9 before SDCC1 high-speed rates
+Date: Wed,  8 Jul 2026 21:02:28 +0400
+Message-ID: <20260708170228.621618-1-royzah@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 08 Jul 2026 19:36:50 +0200
@@ -101,29 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for Dosilicon DS25Q4BB (256M-bit) SPI NOR flash.
+On lemans/sa8775p, the SDCC1 apps clock high-speed rates (192 and 384 MHz)
+source from GPLL9 (ftbl_gcc_sdcc1_apps_clk_src), but the driver never enables
+GPLL9. When SDCC1 is set to such a rate the RCG switches its source to a PLL
+that is off, so the CMD_RCGR update bit never self-clears and U-Boot warns:
 
-Link: https://www.dosilicon.com/resources/SPI%20NOR/DS25Q4BB-XXXXX_Rev03.pdf
-Signed-off-by: Ssunk <ssunkkan@gmail.com>
+  WARNING: RCG @ 0x120014 stuck at off
+
+Vote GPLL9 on before selecting it as the SDCC1 source, mirroring how
+clock-sm8250.c enables GPLL9 for SDCC2. GPLL9's mode/status register is at
+0x9000 (lock is bit 31) and its enable vote is bit 9 of the APCS GPLL vote
+register 0x4b028, matching gcc-sa8775p.c in Linux.
+
+Not hardware-validated for SDCC high speed: the board this was found on
+(Qualcomm IQ-9075 / Lemans EVK) boots from UFS with no SD card populated, so
+here it only clears the stuck-RCG warning. Build-tested on lemans.
+
+Signed-off-by: Royyan Zahir <royzah@gmail.com>
 ---
-Changes in v2:
-- Replace Google Drive datasheet link with the official Dosilicon link.
+ drivers/clk/qcom/clock-sa8775p.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+--- a/drivers/clk/qcom/clock-sa8775p.c
++++ b/drivers/clk/qcom/clock-sa8775p.c
+@@ -26,6 +26,9 @@
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 31a2ba4..0a63e50 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -87,6 +87,8 @@ const struct flash_info spi_nor_ids[] = {
- 		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("ds25q4dn", 0xe5301b, 0, 64 * 1024, 2048,
- 		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("ds25q4bb", 0xe53019, 0, 64 * 1024, 512,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- #endif
- #ifdef CONFIG_SPI_FLASH_EON		/* EON */
- 	/* EON -- en25xxx */
--- 
-2.53.0.windows.2
+ #define SDCC1_APPS_CLK_CMD_RCGR			0x20014
+
++#define APCS_GPLL9_STATUS			0x9000
++#define APCS_GPLLX_ENA_REG			0x4b028
++
+ #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
+ #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
+ #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
+@@ -90,6 +93,14 @@
+ 	{ }
+ };
+
++/* GPLL9 (SDCC1 high-speed source) is not enabled by earlier boot stages. */
++static const struct pll_vote_clk gpll9_vote_clk = {
++	.status = APCS_GPLL9_STATUS,
++	.status_bit = BIT(31),
++	.ena_vote = APCS_GPLLX_ENA_REG,
++	.vote_bit = BIT(9),
++};
++
+ static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+ {
+ 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+@@ -130,6 +141,9 @@
+ 		return 19200000;
+ 	case GCC_SDCC1_APPS_CLK:
+ 		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
++		/* SDCC1 high-speed rates source from GPLL9; vote it on first. */
++		if (freq->src == CFG_CLK_SRC_GPLL9)
++			clk_enable_gpll0(priv->base, &gpll9_vote_clk);
+ 		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
+ 				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+ 		return freq->freq;
