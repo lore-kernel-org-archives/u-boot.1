@@ -4,102 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1D2C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D44C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:36:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7D1E849BA;
-	Wed,  8 Jul 2026 19:32:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 50067849F0;
+	Wed,  8 Jul 2026 19:36:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="QXCpULkd";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="XBpX0Dfc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD08F849D2; Wed,  8 Jul 2026 19:32:25 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 7DC9984A04; Wed,  8 Jul 2026 15:07:04 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D1838407E
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:32:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id C8718849F0
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-493b27c7451so1493175e9.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 10:32:23 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-493e8d4f4dcso1420985e9.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1783531943; x=1784136743; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ d=baylibre.com; s=google; t=1783516021; x=1784120821; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=lm3qncQYKJ+ToJavg+A8K3tu6BQ2Bq38AsofTMpA1dw=;
- b=QXCpULkdD6CT8pfsODh5V5i7N1LaQjxbL2lCNtALeDOJz3H7/sbJ6yGb/G7A1VJmBS
- ZbwTvxg6pyerx39DtQ5Vgc9J5qEBqu7WBCa1JK0YBdJi1C6Ffi4mt6LkIM9/w9pYe39M
- 3W2mlD1bpKB6RqJZl0bA5FlvRtUszxpaW2dO3wkR8fEY5NlSVfeTIrc/rVdEBqHCSX1c
- FcCPl5BYY/HzN7HBwQjrrtdVAsMhZhqRYQqDGmoi6jbESd22KrUPHv2XZ8Nc//xKWf9T
- 1QqwWIbg1dg1vxD1b/REMhmiwTfTsBq35cDi1sdtmzQKVwo/oD5U9T1O/qkGyOsSXitC
- VPhw==
+ bh=QLK42WOXbhwWhEaDyigxROqmKOM60cA56zyk3CSL9s4=;
+ b=XBpX0DfcePHZBibJT2C2oK67qbqfHkqs+ve6mcAj/veq/HzSaDI1qxTqKKDRNRUI+S
+ /FPqLW0ZyK1JBvIsTGTfE+utsFC6NSvKcWNReY39yPUByem4UYzzXY8elJKEyemgEG8j
+ n3u4dvuGbttME3wq6SaAMMXpG1AfI9yHAnR+2FKDjifJ8e3VuqezLU69Z5PoU8IY691W
+ Wj+oRSTCWKiqBJ6EpSPCuDS2+itj0LD4HBOr16413P0fXjwPeCccV3LavObrHB+nzibD
+ WnduzXzckLDH/2Q0CH7kLAkM8PdatuoPkvPtWIdvDY8A6lR5FrCRw5EHjJPw6AWg+TFU
+ 8AWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783531943; x=1784136743;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=lm3qncQYKJ+ToJavg+A8K3tu6BQ2Bq38AsofTMpA1dw=;
- b=kY70fLLZQLoz+8dC8jjVfJirW6X98BVEMJ4l0VPg3Jbj7YIAk4gacpH7zBC/VHWFQO
- zAw2wm7GaQWFD5lH6rKd9XsFzr9LtgyERAyCcXXvLfFQgSkHIIy95D+yyCvzohkBo7Ws
- /s8Skih/S9wcKXJNpL4bau2RTb7bJnYRDiFDPM5AQHY72mFr6MJ/Fuic4sGtspV/6sCP
- bR+EOkURx8J3Ap+mcRNImI1tH+ByNTphNhxcXZC3Akf9HBotL9bawGXTOriJ/+TmQaPL
- dtQHODZ021Zq1Wq21fBvgyfb2+BHDKgmvGq3mjJGtm5RwPB2RkeRPAiTqkafIWe+0XFz
- pZlw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr+LPIXER6SH13fCbbZ1huTHPZt0a380+A6mEqG65DXzh2B1m1yq8zOa6Su7ILGtlT6ASRrD2c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwK7ImDWBfFPDMpNBf1CS772BHzReUcYUij6vnnIHkNw4uFRsg
- XQdTO6Em0j8pHq8/pGUeTCqBWajpqpLqb/nzhZwP+N0RDEs0XIZkdHG9j8tvKggEjOY=
-X-Gm-Gg: AfdE7cnS0OAHUHan+I1nb4puL2n1oFlPMys0aAiFMAN9vUnkXsz0lA8kPjsHDyPR16Z
- bfd1k8folcExBTEU/FUmy9gou0nzmDlojcVBhO4yLovfMTztqIU8poE2clqSLbGhOjczgHKORC1
- bqOnZLDy3Eix2CBQGqR5XEBzHbR8NON+OUzPmk3SI914Db2Efgb/Ym8NWzc7NMvJisEvIsIG4yg
- nvbhRpLkA9HAiA829zi+yD5CjYRqcf84xwW+ZDti3MchAfnZn6fw++tjFxFrqHBckg/WmPS2oeO
- eOCk9rtMsFNZithownBLMOOt+sfez6F5V4TaolBgbG1XY7jI/XPgK0/3Bxehj3psAP1UZf2dFYI
- 0dohFWb7nq9VB4sLK3Q35WWxaR1jwj/k8VkTjiY6X9ZRNDb1uyXPIMGRe/5Hby7vjRJEoKfXHVA
- 4Qdos5vUCax9oCOYnIJ3gMBgoXZp3eu/8zvKBm7OA/+G1sxwyXmi401jQoSM/70U14
-X-Received: by 2002:a05:600c:1f94:b0:493:d3c5:6c32 with SMTP id
- 5b1f17b1804b1-493e63711a6mr36098985e9.6.1783531942890; 
- Wed, 08 Jul 2026 10:32:22 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
- [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493e0faee30sm131991785e9.10.2026.07.08.10.32.20
+ d=1e100.net; s=20251104; t=1783516021; x=1784120821;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=QLK42WOXbhwWhEaDyigxROqmKOM60cA56zyk3CSL9s4=;
+ b=H5rR9X+KWVZa0t6keR47sJ3dKy4Kf5W0RpHOZ42w0PjG9Bzac6TEQsVzFvHcy6Cb2O
+ ZiUypnlA7VGTDbX9n4MlQ6gWiHCcENLmYvHuJcYNBktB94xCEkTSSDea7Zhagq4/VfTI
+ muZO38CM+hqNkjxY9/voLYkd7dv92BnZC5GswtvlwCWu11c91fykN8QNG03bJ8/4hpOs
+ 5yOCLuO2RSeuWas8EebH5w7fOmycRvOaqEbUbsOsfEdlwNIphbdXWQFt3+wLQpo57L5O
+ YwMO7MGsRB/oAmuHzfPhlb3gQGNEcfj0Tqyf1zLTygCxdYouwnjbAFbzx7jMDClxIhzn
+ c8iw==
+X-Gm-Message-State: AOJu0Ywj/EV9sjRpymHebvKRDhg5vepsTInTmA4Rh1tPo+I0y/o9ZN2H
+ RuzVt03xGGLWLml+jibOMLjSA9BgT1qvFm1LwT88s6eZ9B8y4Gmy3jsyX4xAJBg8LoQ=
+X-Gm-Gg: AfdE7cle1tt506xdUStarDffYhiQPFYwhRxsASMlyrhL4Xdl4XsBscs8O5JA4pAbTL7
+ 8PkkuPSuUeGq11JKTvcFP57cvVSMW041h0eva7rR3qp1bIOkceZmh8OPpHpwbLsA5zEZuYH8Lx/
+ tKOr47Nvm7PEHdSIPZcpI8msJ52rj/1y4YkMxqWXHBqarv2RUZDOZ4gWz+U/m0wreY/FzZZUlow
+ RVXnr7vj0PlSShdcG619Cs3AB7FQLYozv9GasXHSIgyFk/Kt2dRHlDggG8OIWzsBOfT5luxH+n0
+ z3Sks/NASZBalttkLgNGIZGAcTLoWwqJVWcZrLmYG8QYEgyQVM8EexXIzzU+3HkZ0OUYVKtgCjY
+ AwaY3cqbCZqNhB4HWJdzUz9wHU2L/rWwee1BddeGlErykpzIy0PX8y4ggKe4TSc6pTxL1eo30GE
+ vV/vjZAsB3SvtF4i5j9/74JgwQue1mZtx7i7EJyVyRHvafbCgReMtUkp7Eg2cs9FoIq93gftyUG
+ yS8MIp+jLHsQOznwsM1lvEeZLlk/6uQRN+UDV+F4pqN87vdGPR29Jzh
+X-Received: by 2002:a05:600c:34d1:b0:493:a5f9:d33d with SMTP id
+ 5b1f17b1804b1-493e6891cfcmr25299345e9.18.1783516021091; 
+ Wed, 08 Jul 2026 06:07:01 -0700 (PDT)
+Received: from [192.168.1.65]
+ (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
+ [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.06.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 10:32:22 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 08 Jul 2026 21:32:07 +0400
-Subject: [PATCH] boot: android: fix out-of-bounds access in bootconfig parsing
+ Wed, 08 Jul 2026 06:07:00 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 00/12] power: domain: mediatek: refactor driver and add
+ MT8188 support
+Date: Wed, 08 Jul 2026 15:07:06 +0200
+Message-Id: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-image-android-oob-fix-v1-1-a96de8ccd25e@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMywqEMAwAf0Vy3kAV0bK/Ih76iBphW2lXEcR/N
- +pxBmYOyJSYMnyLAxJtnDkGgfJTgJtMGAnZC0Olqka1SiP/jEgTfIrsMUaLA++orXZky7ZRNYG
- 0SyLRz7frX86rncn97xmc5wV9FU4LeQAAAA==
-X-Change-ID: 20260708-image-android-oob-fix-8b8ceb17604e
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Safae Ouajih <souajih@baylibre.com>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, 
- Guillaume Ranquet <ranquet.guillaume@gmail.com>, 
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/zWP3W7CMAxGX6XK9TzFoRtpr3iPiYv8uJ0Habqkw
+ CbEu88UJl8d6fPn46uqVJiq6purKnTmynkSwJdGhU83jQQchZXR5l1vtYG0WLQWXIww5wsViDk
+ 5nqC1dtDBROcoKtmeCw38szZ/7B9cT/6LwnKveyYKfZ/k5PKIKe8qQcgp8dI3FjVSNG/tFu/pR
+ LW6VadvnjL4LxOOh1Uoca08jcI5HECkZnkuDCO4DGcEmQ3qzmPXmdbuvPs9si/0KhfV/nb7A+Z
+ Es1UMAQAA
+X-Change-ID: 20260702-mt8188-add-power-domain-488f0c2daaed
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Brian Sune <briansune@gmail.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Alexey Charkov <alchark@flipper.net>
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Sam Shih <sam.shih@mediatek.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ David Woodhouse <dwmw2@infradead.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Marek Vasut <marex@nabladev.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Carlo Caione <ccaione@baylibre.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Julien Stephan <jstephan@baylibre.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4232; i=alchark@flipper.net;
- h=from:subject:message-id; bh=lnZs9TNOWH4xFV23h+xy3f8mNx/h2mgUw7cURXOEGP8=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWT5dS5JYf5aIyGflPtLqdPt/Utdf5Et5hUe0761r1p9b
- /XxxxZTOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdYx0jBi5OAZjq28WMDIv5JLimGHB2rt+7Rdrb7+0n2+9G/zQ/Cy+tdW841aaptYaRYb+Nx+S
- 4+eqrlu9ad21f0O7+2Vu4N1es+zEp2PXEuqvzOFgA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Mailman-Approved-At: Wed, 08 Jul 2026 19:36:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,103 +137,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When android_image_get_vendor_bootimg_size is called, its buffer is only
-allocated with enough space for the bootconfig header, but the
-android_vendor_boot_image_v3_v4_parse_hdr helper attempts to append a
-bootconfig trailer to it, causing an out-of-bounds access and heap
-corruption in some cases (e.g. triggered in sandbox test builds when
-extra bootmeths are added, resulting in a segfault of the sandbox
-process).
+This series adds power domain support for the MediaTek MT8188 SoC, used
+by the Genio 510 (mt8370) and Genio 700 (mt8390) EVKs.
 
-Skip the dangerous memcpy operations altogether when the
-android_vendor_boot_image_v3_v4_parse_hdr helper is only called for size
-calculation purposes, and only append the bootconfig trailer when called
-from the actual bootconfig parsing code path.
+The existing MediaTek scpsys power domain driver is a single file
+driver, that supports MT7622/MT7623/MT7629 SoCs.
+MT8188 is much more complex and adding it to the current driver will
+make it really big and difficult to maintain.
 
-Fixes: 57e405e1f474 ("android: boot: support bootconfig")
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+The series is organised as follows:
+
+ - First, some cleanup:
+   - drop CONFIG_MTK_POWER_DOMAIN from the defconfigs whose device
+     trees have no matching scpsys node. It builds only dead code.
+   - remove the enum-based per-SoC dispatch, keeping the per-SoC
+     information in the match data.
+   - keep the Makefile and Kconfig sorted,
+
+ - Then preparatory refactoring with no functional change:
+   - prefix the power_domain_ops callbacks with mtk_,
+   - split the monolithic driver into per-SoC drivers
+     sharing a common core (selected through a hidden MTK_POWER_DOMAIN
+     symbol), and wrap each SoC's domain table in a struct scp_soc_data
+     that also carries its size.
+
+ - Extend core driver:
+   - rename the flat probe to mtk_scpsys_probe
+   - add support for the power-controller model, i.e. per-domain power
+     status register offsets, ordered bus-protection steps, per-domain
+     clocks and parent domains, and a probe that walks the controller's
+     subnodes to build the domain tree.
+
+ - Add the MT8188 power domain driver and enable it on the Genio 510 and
+   Genio 700 EVKs.
+
+The existing MT7622/MT7623/MT7629 drivers are functionally unchanged.
+
+Tested on Genio 700 board.
+
+Note: when booting the following warnings are displayed:
+
+  mt8188_power_domain power-controller: power-domain@22: failed to get subsys clk at index 0: -19
+  mt8188_power_domain power-controller: failed to add child domain: power-domain@22
+  mt8188_power_domain power-controller: power-domain@30: failed to get subsys clk at index 0: -19
+  mt8188_power_domain power-controller: failed to add child domain: power-domain@30
+  mt8188_power_domain power-controller: power-domain@24: failed to get subsys clk at index 0: -19
+  mt8188_power_domain power-controller: failed to add child domain: power-domain@24
+  mt8188_power_domain power-controller: power-domain@21: failed to get subsys clk at index 0: -19
+  mt8188_power_domain power-controller: failed to add child domain: power-domain@21
+  mt8188_power_domain power-controller: power-domain@13: failed to get clk at index 2: -19
+  mt8188_power_domain power-controller: failed to add child domain: power-domain@13
+
+Theses warnings are harmless. They exist because the clock driver is
+missing some clock definitions, such as audio. These clock definition can
+be added later, when needed.
+
+This series depends on [1] to fix a pericfg-ao clock.
+
+The new files added by this series are not listed in MAINTAINERS: they
+will be covered by the pending "MAINTAINERS: Replace Mediatek with N:"
+patch from Marek [2].
+
+[2]: https://lore.kernel.org/all/20260617024105.152655-1-marek.vasut%2Brenesas@mailbox.org/
+
+[1]: https://lore.kernel.org/all/20260701-mt8188-clk-add-missing-clock-in-pericfg-ao-v1-1-13109b199248@baylibre.com/
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-This was uncovered while adjusting the test suite to cover the BLS type 1
-boot method following Simon's feedback at [1]. While my BLS code did
-indeed leak memory as Simon pointed out (tripping some of the tests),
-it also happened to uncover a latent bug in the existing Android boot
-method which only seems to be triggered when the heap is pre-filled with
-more boot methods than were used in the master branch so far, so even
-fixed BLS code still resulted in a failing test there.
+Julien Stephan (12):
+      power: domain: keep Makefile and Kconfig sorted
+      configs: mediatek: drop unused CONFIG_MTK_POWER_DOMAIN
+      power: domain: mediatek: remove enum scp_domain_type
+      power: domain: mediatek: prefix internal identifiers with mtk_
+      power: domain: mediatek: constify scp_domain_data instances
+      power: domain: mediatek: split into per-SoC drivers
+      power: domain: mediatek: wrap domain tables in struct scp_soc_data
+      power: domain: mediatek: rename mtk_power_domain_probe to mtk_scpsys_probe
+      power: domain: mediatek: rename struct mtk_scp_domain to mtk_scpsys
+      power: domain: mediatek: add support for the power-controller model
+      power: domain: mediatek: add MT8188 power domain driver
+      configs: mediatek: enable MT8188 power domain
 
-[1] https://lore.kernel.org/u-boot/CAFLszTikihqsUmOGdmb8Q9WypiEHb0nq-a7vXH5XrXNxRVeNjg@mail.gmail.com/
+ MAINTAINERS                                |   1 +
+ configs/mt7622_rfb_defconfig               |   2 +-
+ configs/mt7623a_unielec_u7623_02_defconfig |   2 +-
+ configs/mt7623n_bpir2_defconfig            |   2 +-
+ configs/mt7629_rfb_defconfig               |   2 +-
+ configs/mt7981_emmc_rfb_defconfig          |   2 -
+ configs/mt7981_rfb_defconfig               |   2 -
+ configs/mt7981_sd_rfb_defconfig            |   2 -
+ configs/mt7986_rfb_defconfig               |   2 -
+ configs/mt7986a_bpir3_emmc_defconfig       |   2 -
+ configs/mt7986a_bpir3_sd_defconfig         |   2 -
+ configs/mt7987_emmc_rfb_defconfig          |   2 -
+ configs/mt7987_rfb_defconfig               |   2 -
+ configs/mt7987_sd_rfb_defconfig            |   2 -
+ configs/mt7988_rfb_defconfig               |   2 -
+ configs/mt7988_sd_rfb_defconfig            |   2 -
+ configs/mt8188.config                      |   2 +
+ drivers/power/domain/Kconfig               |  89 ++--
+ drivers/power/domain/Makefile              |  15 +-
+ drivers/power/domain/mt7623-power-domain.c |  85 ++++
+ drivers/power/domain/mt7629-power-domain.c |  60 +++
+ drivers/power/domain/mt8188-power-domain.c | 665 +++++++++++++++++++++++++++++
+ drivers/power/domain/mtk-power-domain.c    | 576 ++++++++++++++-----------
+ drivers/power/domain/mtk-power-domain.h    | 131 ++++++
+ 24 files changed, 1352 insertions(+), 302 deletions(-)
 ---
- boot/image-android.c | 30 +++++++++++++++++++++---------
- 1 file changed, 21 insertions(+), 9 deletions(-)
-
-diff --git a/boot/image-android.c b/boot/image-android.c
-index fb26290d40c7..7740cae8cb62 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -131,7 +131,8 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
- }
- 
- static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot_img_hdr
--						      *hdr, struct andr_image_data *data)
-+						      *hdr, struct andr_image_data *data,
-+						      bool write_trailer)
- {
- 	ulong end;
- 
-@@ -167,12 +168,23 @@ static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot
- 	end += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
- 	data->bootconfig_addr = end;
- 	if (hdr->bootconfig_size) {
--		void *bootconfig_ptr = map_sysmem(data->bootconfig_addr,
--						  data->bootconfig_size +
--						  BOOTCONFIG_TRAILER_SIZE);
--		data->bootconfig_size += add_trailer((ulong)bootconfig_ptr,
--						     data->bootconfig_size);
--		unmap_sysmem(bootconfig_ptr);
-+		if (write_trailer) {
-+			void *bootconfig_ptr = map_sysmem(data->bootconfig_addr,
-+							  data->bootconfig_size +
-+							  BOOTCONFIG_TRAILER_SIZE);
-+			data->bootconfig_size += add_trailer((ulong)bootconfig_ptr,
-+							     data->bootconfig_size);
-+			unmap_sysmem(bootconfig_ptr);
-+		} else {
-+			/*
-+			 * Only the header has been loaded here (this is a
-+			 * size-only query), so the bootconfig region is not
-+			 * present in the buffer. Account for the trailer that
-+			 * will be appended at load time without writing it, to
-+			 * avoid corrupting memory past the header buffer.
-+			 */
-+			data->bootconfig_size += BOOTCONFIG_TRAILER_SIZE;
-+		}
- 		data->ramdisk_size += data->bootconfig_size;
- 	}
- 	end += ALIGN(data->bootconfig_size, hdr->page_size);
-@@ -265,7 +277,7 @@ bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img
- 		return false;
- 	}
- 
--	android_vendor_boot_image_v3_v4_parse_hdr(hdr, &data);
-+	android_vendor_boot_image_v3_v4_parse_hdr(hdr, &data, false);
- 
- 	*vendor_boot_img_size = data.vendor_boot_img_total_size;
- 
-@@ -304,7 +316,7 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
- 			return false;
- 		}
- 		android_boot_image_v3_v4_parse_hdr((const struct andr_boot_img_hdr_v3 *)bhdr, data);
--		android_vendor_boot_image_v3_v4_parse_hdr(vhdr, data);
-+		android_vendor_boot_image_v3_v4_parse_hdr(vhdr, data, true);
- 		unmap_sysmem(vhdr);
- 	} else {
- 		android_boot_image_v0_v1_v2_parse_hdr(bhdr, data);
-
----
-base-commit: a18265f1ccb7a272721ed4286ed3b5a6182ff424
-change-id: 20260708-image-android-oob-fix-8b8ceb17604e
+base-commit: 8101ed2547180109903e9c7a2ecc8e0679c7ec35
+change-id: 20260702-mt8188-add-power-domain-488f0c2daaed
+prerequisite-message-id: 20260701-mt8188-clk-add-missing-clock-in-pericfg-ao-v1-1-13109b199248@baylibre.com
+prerequisite-patch-id: be920ef2f5c93fb8111072d8fb30411d227a52de
 
 Best regards,
 --  
-Alexey Charkov <alchark@flipper.net>
+Julien Stephan <jstephan@baylibre.com>
 
