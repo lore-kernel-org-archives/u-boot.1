@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C880C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60D07C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 18:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DD08849D2;
-	Wed,  8 Jul 2026 19:53:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8CB11849D2;
+	Wed,  8 Jul 2026 20:07:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fnLsbzcR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mC5YaZms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70E46849F0; Wed,  8 Jul 2026 19:53:25 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 4237E849F0; Wed,  8 Jul 2026 20:07:13 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D5D28497A
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 19:53:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19AFD8496E
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 20:07:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7e9f829d75aso520873a34.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 10:53:23 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-448cf99c133so98551fac.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 11:07:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783533202; x=1784138002; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=JsmMwd5WqbHFuyUk/y3N5iIhRyrppMGsFt7G4DLy3T8=;
- b=fnLsbzcRbK6MCcYvmK6c2wOidWeAAI9MPF4wxcTnCrN1TUlKvEskyXVRyR6SpSVXi7
- eN8whPEOF12hxVksbx3S/r6iaLn/qoT4l8xLIS1Sbwnl5YNgX6Zc7tOEVw4TCN+aAi76
- 5cOM3zxFagKS9b5RUKhgNcXSllyXGfUFlFVGo=
+ d=konsulko.com; s=google; t=1783534030; x=1784138830; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=3QmmKo16WF5wQbM4yQn9hkx97cQzPtTGhXkCt4BQTWo=;
+ b=mC5YaZmsNoCTYVWVhA1f5nupb7A1x13aqs5eoT/ov0hGqfywZoymzETfL2ZOt3Tmex
+ A71IOuo9KFcgPIpeLXafLDsWFtXt/fF9vxE90WfnZ91P6aDzzHyjDkBIeGjXAGp11tvF
+ Q3Jy9OeP7uI8SEOlYYmzjZqs8O2+xQbFMIX+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783533202; x=1784138002;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ d=1e100.net; s=20251104; t=1783534030; x=1784138830;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JsmMwd5WqbHFuyUk/y3N5iIhRyrppMGsFt7G4DLy3T8=;
- b=U2s3rFzmvngifJBoY4Fzvg6XacM1a/x54d3BrV+Wc/3mKJk+EnzdJ5kM/w988kC6yN
- xbpL5VK2nY53w8gvGQ+WuHKR8ROSYFl8WjvIRui3mXoJ1OsGp+VoPsmKv8d+w+ny9rex
- c8TrIIt7CI2ahHaW7vlBoj6sXl1IPIHJ0L8kF8Hs1apFslxY8UUBhuZesbyDGq0tGkW7
- 3r/RdsRKdsAaafESJYzXRY5GesCMjQBmZF71VoNtuci5uKTX4KWRL5+TkpRjSrrorkrj
- zPJLLygqYdI8h8aj2j2tO5t1BS3d7FUu8PtzuZ+dGOXJSjcjPa9gaof7GIbFTUcfk1vm
- njZg==
-X-Gm-Message-State: AOJu0Yx0gdUsYqjl3p9H2Jq6MjRI5/mHFUMZkopiKTf9NT950ZwBIF+k
- W1sJaIXAQ/mM2V7gY+HBVrh8S6vvgV4VksyZgf9A/CzoQUIhWI7al8lBT6khDtqwPB6F7K2Pt6Z
- DOCuPSKU=
-X-Gm-Gg: AfdE7cmE9xRpzBfCWiBEwhw6xW7iiJxW1MP02XWjma1OdlLA/Z87Tj/1EsJ5v/Rk56O
- oTS4nuijnD3dxMjviYErDWGkFKdcN1j/gQasW9hPWX8Zvwon3jDLmlyNY3MK+JjBIhUiempP6O+
- pGAheW9EbeRQOkWbfHpxMg7T0WpN1XocnwfhvfkUdyD0n3rl0ygYE2a116UT+Z33BMyDgKWULPq
- kOcqJjsr8nl7z/Ip9fxAoy1SaX2bZtXpk28t4d8tWraB/DwZv0OYFHv3gt4ILqYJgr91u+wbb6D
- Wq0zUjG4xgS8FNW6NX2Etbuxa+s7FFPzJX5cohOA5jqKXvjRnTy8mzaKXr+seClA3OjIhuZhM5k
- 6vow9hofMQL4PJEb08inxCV4N0yq2Y/KdlSOb0W6zBhFdOJyIVDJIz0CagnMk8PLgiinVXZeUcc
- RgE+GXsba1GifcRXGa/H6imI74C3KIRyzFwSji8XqUwiNmzxQ4BvPFjxFz71Y/V3QiS0Yk1qHnU
- +zQfatdShV+1qBV+Dpv/rlnbxcFWOehja2N
-X-Received: by 2002:a05:6830:8389:b0:7e9:b4d0:53a5 with SMTP id
- 46e09a7af769-7ebd004384bmr2203952a34.30.1783533202117; 
- Wed, 08 Jul 2026 10:53:22 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ bh=3QmmKo16WF5wQbM4yQn9hkx97cQzPtTGhXkCt4BQTWo=;
+ b=eQ920ek6++cufIztRxnXgTzHj/XvhGJ/jaUE6PgkA6WIvWn5d3pcGQ3rjVLzfMK8pD
+ mDOqjK8pslot2CSXaSjpwhHSt5d5YuZeeOlTojrja8VSxmMOuFUdjieAha84/PoxCzOi
+ xogY3VnUIMz0e6jqol+QMfDqotjluxyqHbLgC7uk75BUAD+OtnEUjHyPNCVsULvZd0lo
+ O6uq8109kZu5dBAzQz36jmh1hHoBLC2OnA7gs2McS/4vJncFHDiFb+W680CLYCdTLp84
+ bE4gn9bBNLnucPp3zd2J8LFunyli1WiKlmH9IauX1nioPZBNBsRcTDDyyFx2XyAs1DXG
+ QTlg==
+X-Gm-Message-State: AOJu0Yx1ccttceny3eBBjCpZgJu9cx1UIt1RFRljb0AJXjRUmTkEmiqB
+ NVXB1VlZnEp5wSyMmr9yBUaydFfJXhoLYAcy3geFPgMvta5N068bpBy6jxj772FB63U=
+X-Gm-Gg: AfdE7cnkKww+wnizJegRnyN8tROFUj5GsAj0SLGVAl4bJg6BpXm66OYELZ1sFk0eXMt
+ KI047o6NUF0qWnosgTa2GPBHtNvOJiV+61cLtlog7JfnNaO9pXSAmEbyTYR+Kk4IbwqEOKkFVK1
+ gEy/ptISQvGzRpzvuOwecgaDfnFz5DeW58peJzHrOh2YrsSVc4rbk4fZa8asPFjG7i8DH2mrBM2
+ MYgf1vUcH5i+mSVkbTSVjxuIfcBMO/p6CxtHTIczefwqAwsYNfNtxZR7Gb8ucx5LKWNxcuWT5tO
+ IJN/RDGHCCs8Un+JltwdhYyoMEDrrhVb9sto/wY9h6ipvRb3rzcoyeVxWKnyK+KbkzLvkPGQpA7
+ oG0Du/eqjXJqsOSxwHeSzSJ1L4xLYJ375aHHsdaOVRWqGpMtt2Za9aWqfaCU/i/H8yGovRaJlGu
+ 5/nJKlDVqTDZ0eNIFM/4+JZBee4+kEw4awEAX+EN7pffZ6hVmxYPGhNljQrJI2koCCDZXYLtVaV
+ tTVacuDMVO8bt4e3coUKkJdnOz1EnE3RPgpBp/TTNQwaz2o
+X-Received: by 2002:a05:6808:308c:b0:497:d84e:97a1 with SMTP id
+ 5614622812f47-4a1ee780e8amr2877015b6e.2.1783534029732; 
+ Wed, 08 Jul 2026 11:07:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcb262f50sm2261540a34.15.2026.07.08.10.53.21
+ 5614622812f47-4a1ad4ac92csm2261025b6e.5.2026.07.08.11.07.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 10:53:21 -0700 (PDT)
+ Wed, 08 Jul 2026 11:07:09 -0700 (PDT)
+Date: Wed, 8 Jul 2026 12:07:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-In-Reply-To: <e5c267b5-2be7-4a86-aa36-a19ee56658d5@monstr.eu>
-References: <e5c267b5-2be7-4a86-aa36-a19ee56658d5@monstr.eu>
-Subject: Re: [GIT PULL] amd/xilinx/fpga patches for v2025.10-rc1 v3
-Message-Id: <178353320102.1908983.2332397074452254420.b4-ty@konsulko.com>
-Date: Wed, 08 Jul 2026 11:53:21 -0600
+To: Aristo Chen <aristo.chen@canonical.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: Re: [PATCH v1] bootm: teach handle_decomp_error() about the noload
+ decompression buffer
+Message-ID: <20260708180706.GB749385@bill-the-cat>
+References: <20260705145445.2339-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="I4T+5pQI7FxN+CfM"
+Content-Disposition: inline
+In-Reply-To: <20260705145445.2339-1-aristo.chen@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,21 +102,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 8 Jul 2026 11:09:30 +0200, Michal Simek wrote:
 
-> please pull these patches to your tree. I can't see any issue in CI.
-> The main part is firmware interface cleanup which I expect will continue in near
-> future.
-> 
-> Thanks,
-> Michal
-> 
-> 
-> [...]
+--I4T+5pQI7FxN+CfM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+On Sun, Jul 05, 2026 at 02:51:22PM +0000, Aristo Chen wrote:
 
--- 
+> For a compressed kernel_noload image, bootm_load_os() allocates a
+> per-image decompression buffer of ALIGN(image_len * 8, SZ_1M) rather
+> than the global CONFIG_SYS_BOOTM_LEN. When decompression fails on that
+> path, handle_decomp_error() still prints
+>=20
+>     Image too large: increase CONFIG_SYS_BOOTM_LEN
+>=20
+> which is misleading: increasing CONFIG_SYS_BOOTM_LEN does not help
+> because the smaller per-image buffer is the actual bound. Commit
+> 2ff26c1e378d ("bootm: fix overflow of the noload kernel decompression
+> buffer") worked around this by printing a follow-up note right after
+> handle_decomp_error() returned, but the boot log then reads as two
+> contradictory sentences.
+>=20
+> Introduce enum bootm_decomp_limit and pass it into
+> handle_decomp_error() so the helper picks the right message in one
+> place. For the noload path it now prints
+>=20
+>     Image too large for the kernel_noload buffer (0x100000 bytes)
+>=20
+> quoting the actual buffer size; the global path is unchanged. Drop the
+> trailing note in bootm_load_os() so only one line is printed.
+>=20
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+
+Thanks for doing this. It's clearer for the user and after checking a
+handful of platforms, we only grow by 8 bytes, so, that's well worth it.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
 Tom
 
+--I4T+5pQI7FxN+CfM
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak6RxwAKCRAr4qD1Cr/k
+CriVAQDyeN3V6Z7DoEJIPNY51OUT8YaJYzLKNLPAHP8V5bJXbQD/WS9oU2Yw9fvG
+/v2TTPOHXD+ZIAYIzsj2tqHq7uV1ewc=
+=QupT
+-----END PGP SIGNATURE-----
+
+--I4T+5pQI7FxN+CfM--
