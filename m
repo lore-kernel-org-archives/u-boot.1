@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818A2C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5197AC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 17:38:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8CD384AA4;
-	Wed,  8 Jul 2026 19:36:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 045518407E;
+	Wed,  8 Jul 2026 19:36:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="NnYL6klL";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="jdNGytKS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F625849F0; Wed,  8 Jul 2026 15:07:30 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 0A29284A0B; Wed,  8 Jul 2026 15:07:34 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 124AA849F6
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A697C849F0
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 15:07:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-474560436c3so627000f8f.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:28 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-476a130c138so740410f8f.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 06:07:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783516047; x=1784120847; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783516051; x=1784120851; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NA95gP4cLpRoEWPOeniEOILdGdFjCYLrK9hDyTjT+Pc=;
- b=NnYL6klLRMDUq2D/2mm7OZi3tv3Fbg60RGjsXdjUzY1dUcGc51qXcSPewfWYsMWA38
- rDbH8fNppLiRdQMq0DvY1edHDVuKVVNzhmmw+P9jNrRrQoCQwhwnH93c8hGxRQ143js/
- FroPlU08jSIEcosBesWNXbfO7ezFegqBTpOKYayR8frIs1gt6T4+ZvCO1yeufhVRuwL/
- MdqXyNDL4O5WuwA/od9uye4CGfuc58nDj7veNENS5lmASBaJtE+4Tr/Uym2+fIidszoW
- d99YuUa+D+6qWu5pNE4sxVSGpVfeslArvb477MGkNgme0ojNMA0MVH7OIyaxi6aFe4Z8
- G+YA==
+ bh=CEZ7l5Ft5jiqeBS15sLUKnOvi+SSitpi6RJ1DCAw4p4=;
+ b=jdNGytKSWWmVzz44E5RTL/MNTlwAeBNEUZ17X6jDz6iSgoC9oNM8awtmG+YwueC256
+ mVW3+KQQujKFlDKCquZyo0yFZWjZaUpkUPCT89FOdFz0bk1y1z/njniWoQDY7eAgrwtK
+ 0smxgYkPj3i0FW9TwRrpq9NedLEUwjIEUFWNRYzzIxOeN/g+4EzOKT2X+bKcRresB4x9
+ HH8tcyaMs+9xdp4Rglm2HfAh3UwxuPQKOXt+U51WmxTUZDQPOSsPl7ZfzcQ9jI5nKTeM
+ ly7Gq5NdFdFEVRzkMn1xPZdZpNUhBjrJUWe1CZwyujuVJMTP9kGYuCdECBeYB1XtQBJD
+ dYiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783516047; x=1784120847;
+ d=1e100.net; s=20251104; t=1783516051; x=1784120851;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=NA95gP4cLpRoEWPOeniEOILdGdFjCYLrK9hDyTjT+Pc=;
- b=MVmxU27nsYS91+CL9qkmBU5mFzZH2CcxLRfusGo/RAKJIO30vVqEC68wcwvfxeEF4b
- kHlXTJcD+KXasejhuOMY6AAeHI6SUy4KdibmSpA0XOIOnTEHZfxLv4HIM2kLA0lmd06c
- LKtrgKwn1zGoVVVaZOxFUSVsWPlvX79voPq+NxUX+vcXa2eYDFDGuGkWDgURktjMAjix
- GTr3rVfS/5+RTKTsoRxSMeS13oHk3LfMmtsJ3RvLqosgdWwna3JrTich1TlSC4cD8yr2
- eN2esm98FiLCdxoVm7bW0y9ThLv0bubT/KUuxwb5q6BFfife/89/Iyr/P9pVe6M+1Z6W
- Qi9Q==
-X-Gm-Message-State: AOJu0Yz82+3aNzQbKLrCJsn+XyRVWzz0TDJlGb+LMxpp28AEpGVZex9r
- IUIMAh6a+spIUOiMVuzIEYy0PiyJogrKgFstpQVy1Dgww3j/JgcNSovXgmcXzUlxHWw=
-X-Gm-Gg: AfdE7cl+r8oiiEwTcwAAufJMo/84InKGqpvZpvljCwNNnI6E9joEbqkj/9Ok2inU8h+
- fXRXI7xIGpkXAoYF8hxA6dpGM/iN4BQJ0gtsDRjxYg+XHKLRefZNOMevWy5M/7yk2gyCdCRvvVN
- 1zPV9f0lBB+HpSFDsDGQ3MOJS+8g85Weh27PF31wy9ZjIStpPPHL5rgq8Cxd3QxN/Ntgxlqf8kj
- HLbyDVt1FArH1DPp1v6XSJRTIF1w7h57QBZlyi7SohdBCVLuGsCGN8rnPug5ACfLcbAQNFryRmW
- u3fZnzTKLFAK8hxc6T0PDWHMHxa9GdBK5lXBLFBY6KivUDZZjA2DpsxDa3ZKd9yFY1GQeblCycR
- d3FZYoQKKTzeKPhNmGLkU2Lo9xjYouzapP9mSbVynMvJDscUwIDYJgfzaDYQVwHStzHuoF5Q+Uw
- yLqmR7Fqr/1J2UROOZflBIg8cu38VczPqGlIOIfwjTB5eTgZ/nWSiZpFBAxNVB+1qG2dbWFXbsg
- TMptpuyZmGImFaJtY06Zm3v+sWdX4jflASb+VcYVRLVyaHZZbyiVTF/dlNkJd3u7SJRp6k=
-X-Received: by 2002:a05:6000:2084:b0:46f:558:a42a with SMTP id
- ffacd0b85a97d-47df078bc0amr2732128f8f.34.1783516047402; 
- Wed, 08 Jul 2026 06:07:27 -0700 (PDT)
+ bh=CEZ7l5Ft5jiqeBS15sLUKnOvi+SSitpi6RJ1DCAw4p4=;
+ b=DdX5QzCPfifG1sDHBxLfAVG9MfSka2IyX+o8nVJjqrNnopwilG/PsUrk1fx5JIVCqP
+ AjPGnWTUV9rKDuP0iF8TsfDsfoLDk/psjxEc3Abb5m+pTGwuYp2qqIeUelJazCTFhNAn
+ 55/beAYN9dybQ8Xz/HfXk1u5Z4f0kBxkS6Vob6TPZvSLjkVaLc77JJr9hlkcDsAmX44N
+ CZpTNF8uoUP4AN2kT42v/V2gxHu2PEbw/1i62BrTX1uL9hQ6SiyZpq5cyVdENORoVXnZ
+ M63UyJlrXzn1WUxuQEiRo6vq75bgqj3Uz8XzN8qJcNzSeU0+FiFg75qAaaL9aPQWiS4K
+ kkiA==
+X-Gm-Message-State: AOJu0Yy5Y7JH/sduotsj5LC9pMntFakwoEuU8S71G05YAceZeaCFr4SX
+ V4iMTsIlgN3LoPdo6K653yNscIydNmstR7A2zEntJpBbVHYDy84n2lShjUb7uGkQ3DU=
+X-Gm-Gg: AfdE7clutgEo32RJGIAUoylPr7X7G/w4cWa4e9c2MMbsVKEhQOS5/y7vD+bmarLXB8d
+ 3sstzfzKKsaemPhEHrxmElCrAuxWgcWrLPeRydtEu7CgaxroWSRExUIqh95irtWfFqq31c2Vlr0
+ 8w87QaTDHKL5Y4+sUDSY6UJMcVVEWrDgtIVguqhDoS+6EpmkoJTokDRAgaOLN4DRRgV0E4XE33l
+ 40DjxAnV6WeHEMtjOPcF/85zzpF95AiwyszGN32/Eakqnv4yEqo8pmXyvtErb9xSvZndMfTlrFv
+ Xh/yUa8yuQeQ1Pb5D/avBwbLlTg4r3qBAgwiIcnjQRyQHYZZY5NDyIia+ELlShy/F2ONHuTjSQ0
+ 24s9NWp1asVd0bmfW49Q2Qe8yeZSErYlCHhxwH8Ze+wW3tyVF8V3djZoZ7dwF2C8jjlV+7La4h+
+ v9oYIzMiwX5JsHPAjX47BfqqDG6Q0zxlD4TaOO7tUdoKN7tgZGD5SBG2zD9NIR1SI1S+Dqt9Oqk
+ 36EzE2wOV1pOGAl8p5/pHgPKV0SVnVTKxvyR4SP/MyZKU+g4r1hOEDpc5iJPOjd7VH7YAE=
+X-Received: by 2002:a05:6000:98a:b0:46d:d6c1:8383 with SMTP id
+ ffacd0b85a97d-47df0767535mr2453619f8f.44.1783516051064; 
+ Wed, 08 Jul 2026 06:07:31 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.24
+ ffacd0b85a97d-47aa039af67sm49000664f8f.17.2026.07.08.06.07.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 06:07:26 -0700 (PDT)
+ Wed, 08 Jul 2026 06:07:29 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 08 Jul 2026 15:07:15 +0200
-Subject: [PATCH 09/12] power: domain: mediatek: rename struct
- mtk_scp_domain to mtk_scpsys
+Date: Wed, 08 Jul 2026 15:07:16 +0200
+Subject: [PATCH 10/12] power: domain: mediatek: add support for the
+ power-controller model
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-mt8188-add-power-domain-v1-9-0e930b4f714e@baylibre.com>
+Message-Id: <20260708-mt8188-add-power-domain-v1-10-0e930b4f714e@baylibre.com>
 References: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 In-Reply-To: <20260708-mt8188-add-power-domain-v1-0-0e930b4f714e@baylibre.com>
 To: u-boot@lists.denx.de
@@ -134,171 +134,542 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prepare for support of future MediaTek SoCs by renaming struct
-mtk_scp_domain to struct mtk_scpsys.
+The current driver handles a flat scpsys node with a single, fixed set
+of power status registers and one infracfg bus-protection mask. Newer
+MediaTek SoCs describe their domains as child nodes of a power
+controller and need a richer model:
 
-Upcoming SoCs require additional per-domain runtime data obtained from
-Device Tree. To keep the domain_data description in soc_data static
-const, a new wrapper structure will be introduced to combine the
-immutable domain_data description with the runtime data. The natural
-name for that wrapper is struct mtk_scp_domain, so free that name by
-renaming the existing runtime state structure to struct mtk_scpsys.
+  - per-domain power status register offsets (pwr_sta_offs /
+    pwr_sta2nd_offs), falling back to the legacy SPM_PWR_STATUS
+    registers when not set;
+  - an ordered list of bus-protection steps (scpsys_bus_prot_data /
+    BUS_PROT_WR), each with its own set/clear/status register, applied
+    on power-off and released in reverse on power-on;
+  - per-domain clocks and an optional parent power domain.
 
-Update the MT7623 and MT7629 drivers accordingly.
+Add mtk_power_controller_probe(), which walks the controller's subnodes,
+resolves each domain's id, clocks and infracfg, and builds the domain
+tree. The existing flat probe (mtk_scpsys_probe) is left unchanged.
 
-No functional change intended.
+No functional change for the existing MT7623/MT7629 drivers.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/power/domain/mt7623-power-domain.c |  2 +-
- drivers/power/domain/mt7629-power-domain.c |  2 +-
- drivers/power/domain/mtk-power-domain.c    | 44 +++++++++++++++---------------
- drivers/power/domain/mtk-power-domain.h    |  2 +-
- 4 files changed, 25 insertions(+), 25 deletions(-)
+ drivers/power/domain/mtk-power-domain.c | 333 ++++++++++++++++++++++++++++++--
+ drivers/power/domain/mtk-power-domain.h |  38 ++++
+ 2 files changed, 357 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/power/domain/mt7623-power-domain.c b/drivers/power/domain/mt7623-power-domain.c
-index 318f0fc8e76..b47ad4cde47 100644
---- a/drivers/power/domain/mt7623-power-domain.c
-+++ b/drivers/power/domain/mt7623-power-domain.c
-@@ -81,5 +81,5 @@ U_BOOT_DRIVER(mt7623_power_domain) = {
- 	.ops = &mtk_power_domain_ops,
- 	.probe = mtk_scpsys_probe,
- 	.of_match = mt7623_power_domain_ids,
--	.priv_auto = sizeof(struct mtk_scp_domain),
-+	.priv_auto = sizeof(struct mtk_scpsys),
- };
-diff --git a/drivers/power/domain/mt7629-power-domain.c b/drivers/power/domain/mt7629-power-domain.c
-index 6cc413b7a89..2f7f462579a 100644
---- a/drivers/power/domain/mt7629-power-domain.c
-+++ b/drivers/power/domain/mt7629-power-domain.c
-@@ -56,5 +56,5 @@ U_BOOT_DRIVER(mt7629_power_domain) = {
- 	.ops = &mtk_power_domain_ops,
- 	.probe = mtk_scpsys_probe,
- 	.of_match = mt7629_power_domain_ids,
--	.priv_auto = sizeof(struct mtk_scp_domain),
-+	.priv_auto = sizeof(struct mtk_scpsys),
- };
 diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-index e0293aadfd8..3b0a90d3f94 100644
+index 3b0a90d3f94..9eef58d2d57 100644
 --- a/drivers/power/domain/mtk-power-domain.c
 +++ b/drivers/power/domain/mtk-power-domain.c
-@@ -43,12 +43,12 @@ static int mtk_infracfg_clear_bus_protection(void __iomem *infracfg,
+@@ -11,6 +11,8 @@
+ #include <asm/io.h>
+ #include <linux/err.h>
+ #include <linux/iopoll.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
  
+ #include "mtk-power-domain.h"
+ 
+@@ -41,14 +43,79 @@ static int mtk_infracfg_clear_bus_protection(void __iomem *infracfg,
+ 				  !(val & mask), 100);
+ }
+ 
++static int _scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
++				      void __iomem *reg)
++{
++	u32 val = 0, mask = bpd->bus_prot_mask;
++
++	if (!mask)
++		return 0;
++
++	if (bpd->bus_prot_reg_update)
++		clrsetbits_le32(reg + bpd->bus_prot_set, mask, mask);
++	else
++		writel(mask, reg + bpd->bus_prot_set);
++
++	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, (val & mask) == mask, 1000);
++}
++
++static int _scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
++				       void __iomem *reg)
++{
++	u32 val = 0, mask = bpd->bus_prot_mask;
++
++	if (!mask)
++		return 0;
++
++	if (bpd->bus_prot_reg_update)
++		clrbits_le32(reg + bpd->bus_prot_clr, mask);
++	else
++		writel(mask, reg + bpd->bus_prot_clr);
++
++	if (bpd->ignore_clr_ack)
++		return 0;
++
++	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, !(val & mask), 1000);
++}
++
++static int scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
++				     int bpd_size, void __iomem *reg)
++{
++	int ret, i;
++
++	for (i = 0; i < bpd_size; i++) {
++		ret = _scpsys_bus_protect_enable(&bpd[i], reg);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
++				      int bpd_size, void __iomem *reg)
++{
++	int i, ret;
++
++	for (i = bpd_size - 1; i >= 0; i--) {
++		ret = _scpsys_bus_protect_disable(&bpd[i], reg);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
  static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
  {
--	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
--	u32 sta = readl(scpd->base + SPM_PWR_STATUS) &
--			data->sta_mask;
--	u32 sta2 = readl(scpd->base + SPM_PWR_STATUS_2ND) &
--			 data->sta_mask;
-+	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
-+	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
-+	u32 sta = readl(scpsys->base + SPM_PWR_STATUS) &
-+		data->sta_mask;
-+	u32 sta2 = readl(scpsys->base + SPM_PWR_STATUS_2ND) &
-+		data->sta_mask;
+ 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
+-	u32 sta = readl(scpsys->base + SPM_PWR_STATUS) &
+-		data->sta_mask;
+-	u32 sta2 = readl(scpsys->base + SPM_PWR_STATUS_2ND) &
+-		data->sta_mask;
++	const struct mtk_scp_domain_data *data = scpsys->domains[power_domain->id].data;
++	u32 spm_pwr_status = data->pwr_sta_offs ?: SPM_PWR_STATUS;
++	u32 spm_pwr_status_2nd = data->pwr_sta2nd_offs ?: SPM_PWR_STATUS_2ND;
++	u32 sta, sta2;
++
++	sta = readl(scpsys->base + spm_pwr_status) & data->sta_mask;
++	sta2 = readl(scpsys->base + spm_pwr_status_2nd) & data->sta_mask;
  
  	/*
  	 * A domain is on when both status bits are set. If only one is set
-@@ -64,14 +64,14 @@ static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
- 
+@@ -65,12 +132,36 @@ static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
  static int mtk_scpsys_power_on(struct power_domain *power_domain)
  {
--	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
--	void __iomem *ctl_addr = scpd->base + data->ctl_offs;
-+	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
-+	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
-+	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
- 	u32 pdn_ack = data->sram_pdn_ack_bits;
+ 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
+-	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
+-	u32 pdn_ack = data->sram_pdn_ack_bits;
++	struct mtk_scp_domain *domain;
++	const struct mtk_scp_domain_data *data;
++	void __iomem *ctl_addr;
++	void __iomem *infracfg;
++	u32 pdn_ack;
  	u32 val;
  	int ret, tmp;
  
--	writel(SPM_EN, scpd->base);
-+	writel(SPM_EN, scpsys->base);
++	if (power_domain->id >= scpsys->soc_data->num_domains)
++		return -EINVAL;
++
++	domain = &scpsys->domains[power_domain->id];
++	data = domain->data;
++	if (!data)
++		return -EINVAL;
++
++	ctl_addr = scpsys->base + data->ctl_offs;
++	infracfg = domain->infracfg ? domain->infracfg : scpsys->infracfg;
++	pdn_ack = data->sram_pdn_ack_bits;
++
++	if (domain->has_pd) {
++		ret = power_domain_on(&domain->parent_pd);
++		if (ret)
++			return ret;
++	}
++
++	ret = clk_enable_bulk(&domain->clks);
++	if (ret)
++		return ret;
++
+ 	writel(SPM_EN, scpsys->base);
  
  	val = readl(ctl_addr);
- 	val |= PWR_ON_BIT;
-@@ -102,7 +102,7 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+@@ -94,6 +185,10 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ 	val |= PWR_RST_B_BIT;
+ 	writel(val, ctl_addr);
+ 
++	ret = clk_enable_bulk(&domain->subsys_clks);
++	if (ret)
++		return ret;
++
+ 	val &= ~data->sram_pdn_bits;
+ 	writel(val, ctl_addr);
+ 
+@@ -102,11 +197,14 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
  		return ret;
  
  	if (data->bus_prot_mask) {
--		ret = mtk_infracfg_clear_bus_protection(scpd->infracfg,
-+		ret = mtk_infracfg_clear_bus_protection(scpsys->infracfg,
+-		ret = mtk_infracfg_clear_bus_protection(scpsys->infracfg,
++		ret = mtk_infracfg_clear_bus_protection(infracfg,
  							data->bus_prot_mask);
  		if (ret)
  			return ret;
-@@ -113,15 +113,15 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ 	}
++	ret = scpsys_bus_protect_disable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
++	if (ret < 0)
++		return ret;
  
+ 	return 0;
+ }
+@@ -114,19 +212,37 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
  static int mtk_scpsys_power_off(struct power_domain *power_domain)
  {
--	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
--	void __iomem *ctl_addr = scpd->base + data->ctl_offs;
-+	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
-+	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
-+	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
- 	u32 pdn_ack = data->sram_pdn_ack_bits;
+ 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
+-	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
+-	u32 pdn_ack = data->sram_pdn_ack_bits;
++	struct mtk_scp_domain *domain;
++	const struct mtk_scp_domain_data *data;
++	void __iomem *ctl_addr;
++	void __iomem *infracfg;
++	u32 pdn_ack;
  	u32 val;
  	int ret, tmp;
  
++	if (power_domain->id >= scpsys->soc_data->num_domains)
++		return -EINVAL;
++
++	domain = &scpsys->domains[power_domain->id];
++	data = domain->data;
++	if (!data)
++		return -EINVAL;
++
++	ctl_addr = scpsys->base + data->ctl_offs;
++	infracfg = domain->infracfg ?: scpsys->infracfg;
++	pdn_ack = data->sram_pdn_ack_bits;
++
  	if (data->bus_prot_mask) {
--		ret = mtk_infracfg_set_bus_protection(scpd->infracfg,
-+		ret = mtk_infracfg_set_bus_protection(scpsys->infracfg,
+-		ret = mtk_infracfg_set_bus_protection(scpsys->infracfg,
++		ret = mtk_infracfg_set_bus_protection(infracfg,
  						      data->bus_prot_mask);
  		if (ret)
  			return ret;
-@@ -161,16 +161,16 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
- int mtk_scpsys_probe(struct udevice *dev)
- {
- 	struct ofnode_phandle_args args;
--	struct mtk_scp_domain *scpd = dev_get_priv(dev);
-+	struct mtk_scpsys *scpsys = dev_get_priv(dev);
+ 	}
+ 
++	ret = scpsys_bus_protect_enable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
++	if (ret < 0)
++		return ret;
++
+ 	val = readl(ctl_addr);
+ 	val |= data->sram_pdn_bits;
+ 	writel(val, ctl_addr);
+@@ -136,6 +252,10 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
+ 	if (ret < 0)
+ 		return ret;
+ 
++	ret = clk_disable_bulk(&domain->subsys_clks);
++	if (ret)
++		return ret;
++
+ 	val |= PWR_ISO_BIT;
+ 	writel(val, ctl_addr);
+ 
+@@ -155,6 +275,10 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
+ 	if (ret < 0)
+ 		return ret;
+ 
++	ret = clk_disable_bulk(&domain->clks);
++	if (ret)
++		return ret;
++
+ 	return 0;
+ }
+ 
+@@ -164,7 +288,7 @@ int mtk_scpsys_probe(struct udevice *dev)
+ 	struct mtk_scpsys *scpsys = dev_get_priv(dev);
  	struct regmap *regmap;
  	struct clk_bulk bulk;
- 	int err;
+-	int err;
++	int err, i;
  
--	scpd->base = dev_read_addr_ptr(dev);
--	if (!scpd->base)
-+	scpsys->base = dev_read_addr_ptr(dev);
-+	if (!scpsys->base)
- 		return -ENOENT;
+ 	scpsys->base = dev_read_addr_ptr(dev);
+ 	if (!scpsys->base)
+@@ -172,6 +296,14 @@ int mtk_scpsys_probe(struct udevice *dev)
  
--	scpd->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
-+	scpsys->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
+ 	scpsys->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
  
++	scpsys->domains = devm_kcalloc(dev, scpsys->soc_data->num_domains,
++				       sizeof(*scpsys->domains), GFP_KERNEL);
++	if (!scpsys->domains)
++		return -ENOMEM;
++
++	for (i = 0; i < scpsys->soc_data->num_domains; i++)
++		scpsys->domains[i].data = &scpsys->soc_data->data[i];
++
  	/* get corresponding syscon phandle */
  	err = dev_read_phandle_with_args(dev, "infracfg", NULL, 0, 0, &args);
-@@ -181,12 +181,12 @@ int mtk_scpsys_probe(struct udevice *dev)
- 	if (IS_ERR(regmap))
- 		return PTR_ERR(regmap);
- 
--	scpd->infracfg = regmap_get_range(regmap, 0);
--	if (!scpd->infracfg)
-+	scpsys->infracfg = regmap_get_range(regmap, 0);
-+	if (!scpsys->infracfg)
- 		return -ENOENT;
- 
- 	/* enable Infra DCM */
--	setbits_le32(scpd->infracfg + INFRA_TOPDCM_CTRL, DCM_TOP_EN);
-+	setbits_le32(scpsys->infracfg + INFRA_TOPDCM_CTRL, DCM_TOP_EN);
- 
- 	err = clk_get_bulk(dev, &bulk);
  	if (err)
+@@ -195,6 +327,179 @@ int mtk_scpsys_probe(struct udevice *dev)
+ 	return clk_enable_bulk(&bulk);
+ }
+ 
++static int mtk_scpsys_add_one_domain(struct udevice *dev, ofnode node, int parent_id)
++{
++	struct mtk_scpsys *scpsys = dev_get_priv(dev);
++	struct ofnode_phandle_args args;
++	struct mtk_scp_domain *domain;
++	struct regmap *regmap;
++	const char *clk_name;
++	int i, ret, num_clks;
++	u32 id;
++
++	ret = ofnode_read_u32(node, "reg", &id);
++	if (ret) {
++		dev_err(dev, "%s: failed to retrieve domain id from reg: %d\n",
++			ofnode_get_name(node), ret);
++		return ret;
++	}
++
++	if (id >= scpsys->soc_data->num_domains) {
++		dev_err(dev, "%s: invalid domain id %d\n", ofnode_get_name(node), id);
++		return -EINVAL;
++	}
++
++	domain = &scpsys->domains[id];
++	domain->data = &scpsys->soc_data->data[id];
++
++	if (parent_id >= 0) {
++		domain->has_pd = true;
++		domain->parent_pd.dev = dev;
++		domain->parent_pd.id = parent_id;
++	}
++
++	if (ofnode_read_bool(node, "mediatek,infracfg")) {
++		ret = ofnode_parse_phandle_with_args(node, "mediatek,infracfg", NULL, 0, 0, &args);
++		if (ret)
++			return ret;
++
++		regmap = syscon_node_to_regmap(args.node);
++		if (IS_ERR(regmap))
++			return PTR_ERR(regmap);
++
++		domain->infracfg = regmap_get_range(regmap, 0);
++
++		/* enable Infra DCM */
++		if (domain->infracfg)
++			setbits_le32(domain->infracfg + INFRA_TOPDCM_CTRL,
++				     DCM_TOP_EN);
++	}
++
++	num_clks = ofnode_read_string_count(node, "clock-names");
++	for (i = 0; i < num_clks; i++) {
++		ret = ofnode_read_string_index(node, "clock-names", i, &clk_name);
++		if (ret) {
++			dev_err(dev, "%s: failed to retrieve clock-names at index %i: %d\n",
++				ofnode_get_name(node), i, ret);
++			return ret;
++		}
++
++		if (strchr(clk_name, '-'))
++			domain->subsys_clks.count++;
++		else
++			domain->clks.count++;
++	}
++
++	if (domain->clks.count) {
++		domain->clks.clks = devm_kcalloc(dev, domain->clks.count,
++						 sizeof(struct clk), GFP_KERNEL);
++		if (!domain->clks.clks)
++			return -ENOMEM;
++	}
++
++	if (domain->subsys_clks.count) {
++		domain->subsys_clks.clks = devm_kcalloc(dev,
++							domain->subsys_clks.count,
++							sizeof(struct clk), GFP_KERNEL);
++		if (!domain->subsys_clks.clks)
++			return -ENOMEM;
++	}
++
++	for (i = 0; i < domain->clks.count; i++) {
++		ret = clk_get_by_index_nodev(node, i, &domain->clks.clks[i]);
++		if (ret < 0) {
++			dev_err(dev, "%s: failed to get clk at index %d: %d\n",
++				ofnode_get_name(node), i, ret);
++			goto err_put_clocks;
++		}
++	}
++
++	for (i = 0; i < domain->subsys_clks.count; i++) {
++		ret = clk_get_by_index_nodev(node, i + domain->clks.count,
++					     &domain->subsys_clks.clks[i]);
++		if (ret < 0) {
++			dev_err(dev, "%s: failed to get subsys clk at index %d: %d\n",
++				ofnode_get_name(node), i + domain->clks.count, ret);
++			goto err_put_subsys_clocks;
++		}
++	}
++
++	return 0;
++
++err_put_subsys_clocks:
++	clk_release_all(domain->subsys_clks.clks, domain->subsys_clks.count);
++	domain->subsys_clks.count = 0;
++err_put_clocks:
++	clk_release_all(domain->clks.clks, domain->clks.count);
++	domain->clks.count = 0;
++	domain->data = NULL;
++	return ret;
++}
++
++static int mtk_scpsys_add_subdomain(struct udevice *dev, ofnode node)
++{
++	ofnode subnode;
++	int ret;
++	u32 id;
++
++	ret = ofnode_read_u32(node, "reg", &id);
++	if (ret) {
++		dev_err(dev, "%s: failed to get domain id\n", ofnode_get_name(node));
++		return ret;
++	}
++
++	ofnode_for_each_subnode(subnode, node) {
++		ret = mtk_scpsys_add_one_domain(dev, subnode, id);
++		if (ret) {
++			dev_err(dev, "failed to add child domain: %s\n",
++				ofnode_get_name(subnode));
++			continue;
++		}
++
++		ret = mtk_scpsys_add_subdomain(dev, subnode);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++int mtk_power_controller_probe(struct udevice *dev)
++{
++	struct mtk_scpsys *scpsys = dev_get_priv(dev);
++	ofnode subnode;
++	int ret;
++
++	scpsys->base = dev_read_addr_ptr(dev_get_parent(dev));
++	if (!scpsys->base)
++		return -ENOENT;
++
++	scpsys->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
++
++	scpsys->domains = devm_kcalloc(dev, scpsys->soc_data->num_domains,
++				       sizeof(*scpsys->domains), GFP_KERNEL);
++	if (!scpsys->domains)
++		return -ENOMEM;
++
++	dev_for_each_subnode(subnode, dev) {
++		ret = mtk_scpsys_add_one_domain(dev, subnode, -1);
++		if (ret) {
++			dev_err(dev, "failed to add child domain: %s\n",
++				ofnode_get_name(subnode));
++			continue;
++		}
++
++		ret = mtk_scpsys_add_subdomain(dev, subnode);
++		if (ret) {
++			dev_err(dev, "failed to add sub domain: %s\n",
++				ofnode_get_name(subnode));
++			return ret;
++		}
++	}
++
++	return 0;
++}
++
+ const struct power_domain_ops mtk_power_domain_ops = {
+ 	.off = mtk_scpsys_power_off,
+ 	.on = mtk_scpsys_power_on,
 diff --git a/drivers/power/domain/mtk-power-domain.h b/drivers/power/domain/mtk-power-domain.h
-index 830d6947962..689ec4d1657 100644
+index 689ec4d1657..5bf0ca850ec 100644
 --- a/drivers/power/domain/mtk-power-domain.h
 +++ b/drivers/power/domain/mtk-power-domain.h
-@@ -80,7 +80,7 @@ static const struct mtk_scp_soc_data _name##_scp_soc_data = {	\
+@@ -9,6 +9,7 @@
+ #ifndef __MTK_POWER_DOMAIN_H
+ #define __MTK_POWER_DOMAIN_H
+ 
++#include <clk.h>
+ #include <power-domain-uclass.h>
+ #include <linux/bitops.h>
+ #include <linux/compiler.h>
+@@ -59,14 +60,28 @@ struct udevice;
+ 
+ #define DCM_TOP_EN		BIT(0)
+ 
++#define SPM_MAX_BUS_PROT_DATA	6
++
+ struct mtk_scp_domain;
+ 
++struct mtk_scpsys_bus_prot_data {
++	u32 bus_prot_mask;
++	u32 bus_prot_set;
++	u32 bus_prot_clr;
++	u32 bus_prot_sta;
++	bool bus_prot_reg_update;
++	bool ignore_clr_ack;
++};
++
+ struct mtk_scp_domain_data {
+ 	u32 sta_mask;
+ 	int ctl_offs;
+ 	u32 sram_pdn_bits;
+ 	u32 sram_pdn_ack_bits;
+ 	u32 bus_prot_mask;
++	const struct mtk_scpsys_bus_prot_data bp_infracfg[SPM_MAX_BUS_PROT_DATA];
++	int pwr_sta_offs;
++	int pwr_sta2nd_offs;
+ };
+ 
+ struct mtk_scp_soc_data {
+@@ -80,13 +95,36 @@ static const struct mtk_scp_soc_data _name##_scp_soc_data = {	\
  	.num_domains = ARRAY_SIZE(_domains),			\
  }
  
--struct mtk_scp_domain {
-+struct mtk_scpsys {
++struct mtk_scp_domain {
++	const struct mtk_scp_domain_data *data;
++	void __iomem *infracfg;
++	struct clk_bulk clks;
++	struct clk_bulk subsys_clks;
++	bool has_pd;
++	struct power_domain parent_pd;
++};
++
+ struct mtk_scpsys {
  	void __iomem *base;
  	void __iomem *infracfg;
  	const struct mtk_scp_soc_data *soc_data;
++	struct mtk_scp_domain *domains;
+ };
+ 
++#define _BUS_PROT(_mask, _set, _clr, _sta, _update, _ignore) {	\
++	.bus_prot_mask = (_mask),				\
++	.bus_prot_set = (_set),					\
++	.bus_prot_clr = (_clr),					\
++	.bus_prot_sta = (_sta),					\
++	.bus_prot_reg_update = (_update),			\
++	.ignore_clr_ack = (_ignore),				\
++}
++
++#define BUS_PROT_WR(_mask, _set, _clr, _sta)			\
++	_BUS_PROT(_mask, _set, _clr, _sta, false, false)
++
+ int mtk_scpsys_probe(struct udevice *dev);
++int mtk_power_controller_probe(struct udevice *dev);
+ 
+ extern const struct power_domain_ops mtk_power_domain_ops;
+ 
 
 -- 
 2.54.0
