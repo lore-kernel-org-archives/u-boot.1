@@ -4,81 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C762C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4270C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:26:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C47F78496E;
-	Wed,  8 Jul 2026 18:19:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 479B48496E;
+	Wed,  8 Jul 2026 18:26:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SHPMnYc8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bHUHuVpt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA8A1849F0; Wed,  8 Jul 2026 18:19:52 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 7F352849D2; Wed,  8 Jul 2026 18:26:20 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B10C38496E
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:19:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0120B843B6
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-43cce34c881so470295fac.2
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:19:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-7383cdb7800so774258137.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:26:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783527975; cv=none;
+ d=google.com; s=arc-20260327;
+ b=nbl2Rd3Y0v71VsGurnrcvnRAdRLDnuahXB1IAiO3a9643P+bK4VzCLxnnYtwRMOoof
+ BoqloQtc7xrbSTIVbvqABRFLQruFIvzEoNx7L6SceJaCf5sSkgAcS32mcCajagp4CZPA
+ jAk2/dkURp2ILZhjCSZw16Re2W5VdAdEu/hvRqvN947POwmUf1PWjj2BgvySncGjmKBw
+ BCB/YXWVcaozTdfnnubd2BYAXHnUpb1UZ0ruZ/jC4KxLpvudU5ofY6a9zkVqy0DBjV78
+ uIP2yZ13a0wkAfxZYdMHY8hBypzLIEkeYT2sj9PZg3n++v0jO3CJTYtJKHrKb71xnRuS
+ 7Oeg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
+ fh=SocK4OiObrDE01rf4A/mD/sAU8tp2xGapfK+9vDyWYA=;
+ b=ByFAstvROAMTiQbelwht3Ix+kh8Dkk3O1//5ebnTLdQDAVqt5q/C0IfuoLx5kodF30
+ TAvXN+p6+7Zln1aTobZpLUu9EBySclUtC5YEEdGIYPbYpUudjXtR0kNat61SUlxHkFZg
+ DLErnzJpFLCLQR/rTTnxA2wbO0Tnup4YM9x5X86dou369QOMaOKlvqE67nZEevUittT3
+ JDWfvrmFV1gYfgo4PkGQG4Gndw4c6GZu0BeR4N2xkXVLzSnEiV/mR1VzrsyiXHhlp2Db
+ 5yUtX3B26Y+aVhGi2acwBQy2MNoSScGn4Ff76uOBbZPjv4ePVPjT6HKVosbtmpycZR0x
+ cHBg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783527588; x=1784132388; darn=lists.denx.de;
- h=content-disposition:content-type:mime-version:message-id:subject:cc
- :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=L81axNqiZeF5ZQVi9ZpQUV+BUSxOSisbfVPLm7KAv5U=;
- b=SHPMnYc85wGPaKYfiQUrmJKsfYGBMIaOLU96a5S0a5+8v9/fqklXn12nqD1Z5tU0A0
- iJhJyQDuB+8wCEB2NhP18YdDW4AJVNH6ehZ3EqVon5NvxyozccM00SIB6NzRovbWKWhC
- 86+TMVK2N0ERvhJEDH1S+/X1njqUWklCWpeos=
+ d=gmail.com; s=20251104; t=1783527975; x=1784132775; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
+ b=bHUHuVptlAemjHoHf84MDl3HB6ri+7NLoK3ZthdhhL3UuCR/eoRzgUuGEMFzgWzZWc
+ UizDu8lumAfqhdRGNfxNtPuKf9/iN7jZXCr+xuQGdXIg/rqMseGnoPAAdALeqlV22V9Y
+ qYrkg+FdfDrbf5suWgo6SVagkVoybCtxxCoQzgJLEFFWEVYFcSbzUhfRqlfE+81qW8GC
+ NAsiZs3270+04v7biU316XN7IXxYfb2SEqA3wsBOBwaAcNUCiapLQn8Y98uItUTbf9b1
+ gDGEQY0BRNj+sddKGN3m1+T1sZGHBXSNNdWp2BWiyFZVz+Fhv3qA6RvIHD4ykF6aQDMs
+ hYpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783527588; x=1784132388;
- h=content-disposition:content-type:mime-version:message-id:subject:cc
- :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=L81axNqiZeF5ZQVi9ZpQUV+BUSxOSisbfVPLm7KAv5U=;
- b=REiDmQ+Ya0FE7zHKLghwoapSf0gElpkoWZmYPbmH1CGTClzwCKqYA+0cQFumH7KQyg
- EGJA2Hdwaip+3A91nq3TWFSEkkWnPDxfx7TFc6CcaGe9hr6ak/fnAEmFh5KNXMugQspN
- pNIiCAXf8KxRhbDj30BdH6Rmbp5EsITb+jEm/Te4J0YBs4K8HvlzHMmjyu6wjDPuv63T
- J8O90Tp/CgD8GFXrCJ2VWx10//fZkCCTCtgDX2YgDZB8MvYW5KgeLqEVA95UHzoRbTC/
- OwJsAjjHR7vxfN38stWP9wWAKQRNXx5M4ruY3hpRYf+15PsWKnE0CmMBr8e1DxyqHElZ
- CRMw==
-X-Gm-Message-State: AOJu0YzzUNRThkAtpoqzBdbRcgX2+C4Y3xwoLhyXkwBWx/nomG3vaokW
- V3xP1zijyv/9ZRqTI9eY8KO8wdRMIPx97+CISQk+tsptVWHcYv/j27LGn5L73u6EKcpuokCuc0y
- dEj2fCaA=
-X-Gm-Gg: AfdE7clZt1pjL7KR6sq9zSwhiIJPGF4SvudLwIu4pfloWwtKAhQsNvsV04q+n0KuYf1
- Ja+WHK3Vo26MoSHhah8zsCogacRy7lhVr1vjZEJWyFai0MBv3xQpBRG1/zk2Nb1HWc3Aa4VD6XN
- ltWvvZRSWpgW5ha9+md7K8HmJh6f2oZWgqYT3Y1xVWlaekY60Aa8o+E4HccsH67jCrzZOjU0Xm7
- 40AP/zBe+9A0e6sPK84SZ9DhlJUB65kN96GZ6Lk+DynzHyZnyiWBVuBkOk8DxYQ3quKHtawglcp
- 5gRjZ3yny1PEtqXIlMKWTsy2GJ3XzreYmSvRwoxONcOlY6EBFZawpCie2LunrvEWQN1io4Z9cyR
- FAW7DHeSc2JNqR3Lclz1d9NpZsy4vheE6sLTkpbCwDav4mSAhXcYDKLJlbrY6xsPn49EyuSoPK9
- UEAQBzOc+TGF0z1QLqKRVxVpMt61Qzv5NFVo1zO5AVFS1CXOl1XisAiiQLFrpFW2QmptvUgxCUp
- 68bSirAcoxwJKv1MgIfMxg79JeB8RIODmz0wA==
-X-Received: by 2002:a05:6871:20e:b0:448:5591:15d6 with SMTP id
- 586e51a60fabf-45163d515edmr2097958fac.34.1783527588122; 
- Wed, 08 Jul 2026 09:19:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44cfb13d624sm17036021fac.1.2026.07.08.09.19.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 09:19:47 -0700 (PDT)
-Date: Wed, 8 Jul 2026 10:19:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-board-maintainers@lists.denx.de, u-boot-custodians@lists.denx.de
-Subject: [ANN] Updating branching scheme to use "main"
-Message-ID: <20260708161945.GU749385@bill-the-cat>
+ d=1e100.net; s=20251104; t=1783527975; x=1784132775;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=3kV1hJjkzlyMsCS+aSeRRGyV8PfTZC3VbFahj/zpw/w=;
+ b=WZpNuWFTjXva1xgQQyYTz4Mwc6tJwYQa4e1M4MR1ItQhg/JHS4X96zySXqnsEUl5+q
+ vilwaUh3y2redOomNW5NpeUu60FBD0pxjsTjmsMfgdBCUQp4PVs0eOE6RjqPoLrZY63G
+ ctN/7NuIVM6HqsgvwH38uFxnEqgIBbrcWE1FiRFsUxdEfBD0yeqLrSRfp8TxUaXnTJ4I
+ tNlfRE/BT18pTR1Hgi0b6mRUWUb//AtdARreTwtuz9A4I/xqaCJolchbuvWb9zOAjya9
+ wT2niF7h4chttJCcy1F7lWmMUGaN2PMGOnR1drBFLXmhfvqeB1qoUxBV4yPoAGcSfLHA
+ +TUA==
+X-Gm-Message-State: AOJu0Yw/jOQKGDFI2FhgDOO6gRS8XuFePa041Q8usxcayH9oNW414xbj
+ yYdxVoIOOUGZ9l97oD+ogj7G6mKQWChbzK6n+K8Cuo5tJg7R/t/aYFrn/asMZKFxN0Y7uuD+L2W
+ ZgCCjj9n2brO+53NraDz+6LwAY253r3pmv6WbsFc=
+X-Gm-Gg: AfdE7cmQu7jSlp18j38elWzEJ+i1Q0dGShr+lqpfJkfacPWH3v7wg6FstztDMSIJ/fm
+ xglUe5rmRaPbIE4hrRoVpiyeOXzfy38czI923Gb4k1HqlWNcYU9DeslB40gwIXVyGWTvloJR22H
+ DBE+LzePHCFEK8C8uP51+R7nipWyBIXuPbwshDsobAFmg6HK3AMBODLU8UIcw9/2/RQWiUMYM/J
+ 6MHgvYCG5SjJsBt0FsOHki28e64c73qLDOUV4EajvntQO+gndtsPTh+iuPdnAVR8VonSjne
+X-Received: by 2002:a05:6102:688b:b0:631:ff40:22b5 with SMTP id
+ ada2fe7eead31-744e0333f94mr1736582137.21.1783527975294; Wed, 08 Jul 2026
+ 09:26:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Nz5t4Z31cjA4fyMf"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260708013019.288985-1-trini@konsulko.com>
+ <20260708013019.288985-2-trini@konsulko.com>
+In-Reply-To: <20260708013019.288985-2-trini@konsulko.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Wed, 8 Jul 2026 12:26:04 -0400
+X-Gm-Features: AUfX_mwTZKx2q2l2tCH_CvtWXVxIFkzSh690XoQ7ohlDfqznnlTi6pu8lg7XCa4
+Message-ID: <CAMDkj5xfkpW4eRi-ZMC-SNG8-af5gr96Jv0-Jj4QwFNH5jwp7w@mail.gmail.com>
+Subject: Re: [PATCH 1/7] lib/fdtdec.c: Disallow overriding the fdt address
+ with mandatory passage
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,32 +115,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---Nz5t4Z31cjA4fyMf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Jul 7, 2026 at 9:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> When we have CONFIG_BLOBLIST_PASSAGE_MANDATORY don't allow the device
+> tree address to be overridden. The device tree we're given is the one
+> that must be used.
+>
 
-Hey all,
+The commit message does not explicitly mention this is only for
+OF_BOARD. So I think we need to add
+"!IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)" to the next check as
+well:
 
-As part of migrating from source.denx.de and over to
-git.u-boot-project.org, I think it's time to change the branching scheme
-=66rom master or next to main or next. Since we'll be changing the URLs, I
-don't think we need to (and I'm not sure we can automatically) have a
-period where both exist. Thanks!
+         /* Allow the early environment to override the fdt address */
+ -       if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
+ +       if (!IS_ENABLED(CONFIG_XPL_BUILD) &&
+ +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
+                 ulong addr;
 
---=20
-Tom
+Or, state in the commit message that it is for OF_BOARD only.
 
---Nz5t4Z31cjA4fyMf
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Raymond
 
------BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak54nQAKCRAr4qD1Cr/k
-CpCsAQCxKrRwB5SbywfQJcgmsbmsiajH0cC9zqv2JxQcdMPPZgD5AUoiggGWllHy
-D4XAgPBMrmN4PUg2gN++v89lFPtv+wE=
-=YqcY
------END PGP SIGNATURE-----
-
---Nz5t4Z31cjA4fyMf--
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Raymond Mao <raymondmaoca@gmail.com>
+> ---
+>  lib/fdtdec.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index b91e067106dd..ecb22a58b964 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1856,7 +1856,8 @@ int fdtdec_setup(void)
+>         }
+>
+>         /* Allow the board to override the fdt address. */
+> -       if (IS_ENABLED(CONFIG_OF_BOARD)) {
+> +       if (IS_ENABLED(CONFIG_OF_BOARD) &&
+> +           !IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY)) {
+>                 void *blob;
+>
+>                 blob =3D (void *)gd->fdt_blob;
+> --
+> 2.43.0
+>
