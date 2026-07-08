@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C62E9C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18368C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:38:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BC3584A8D;
+	by phobos.denx.de (Postfix) with ESMTP id 944D084A85;
 	Wed,  8 Jul 2026 22:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="lgpJcDtT";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="PU8n5kUN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA17084A77; Wed,  8 Jul 2026 22:37:35 +0200 (CEST)
-Received: from mail-244107.protonmail.ch (mail-244107.protonmail.ch
- [109.224.244.107])
+ id AC83184A7A; Wed,  8 Jul 2026 22:37:37 +0200 (CEST)
+Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch
+ [79.135.106.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAFC684A6F
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A77A0847AF
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783543045; x=1783802245;
- bh=NUjgMtnyzCZT98JYalidQLM43Uts79bogqvMqUwq9uM=;
+ s=protonmail; t=1783543054; x=1783802254;
+ bh=NU6oONhFfP4zB2PrSvqlQ78ImkuHUNhksVaKvNIRnjI=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=lgpJcDtTr42STwcLf6CmSEjhUrnwHamaBDO73onOB0HmVTsgf5AhI3C6pnmGDJwXj
- tUScRNN4cAxyEAN8/SZuaB4RXYPp2zf2thxR3PHOZmCkj6WV5cfl1P2aWMWPfDz+i7
- jE6ucIevyNBCaS9Cz7+9pt5hAfU/uOpDSiRYEVvY87aJozdcklr+TbatqqfB8UBUyb
- bikd4DMGj3i7TkXMG7t9gBcJ09snoLrSVBeiHF3Ei9Pf3CVW85pukvHi3+JpODNO2S
- oZvbaMNP7i6Dbzp60Q2SL3Y+SIYSqkbkQZ0hrCqrYespDHSxu5oSQNMcTKD70uVxtJ
- DVQWWtUsx2XsQ==
-X-Pm-Submission-Id: 4gwVJh4Jyfz1DFGQ
+ b=PU8n5kUNxfpDU64VgRtkhVLPPbcJEc8yVUv45upASn2M/PboS3/mEcDiFO6LRssrt
+ e/ZhPSTnSypbNVOu+q0PpA8YYeQHfBPdS8ToNe4C9RRUx4mASBYixGQKvKRDsnZZ/h
+ fkhwc8rNkxrXP0GC18LtphVm6ij4yo8ICjgwlQXKesprehXYxvU6NzQtNGsB/SgOLz
+ n4FA+n98KJVTfYoymCyqxXYPJme6srrqwyh4zMkCNglMaZEmi+hdv7w8Ieov191RJi
+ 2Evh6/T++yUCQMX9q4bnuEKrDcXyn748jGijDgbrhzqKVCFDHXm6GF3+QAXNQucm1a
+ vjBDz8ZuHfdCw==
+X-Pm-Submission-Id: 4gwVJt0Zglz2Scsj
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH v2 04/10] string: remove unused strswab() function
-Date: Wed,  8 Jul 2026 22:37:05 +0200
-Message-ID: <20260708203711.849489-5-rv@rasmusvillemoes.dk>
+Subject: [PATCH v2 07/10] test: string: add test of new strcasestr() function
+Date: Wed,  8 Jul 2026 22:37:08 +0200
+Message-ID: <20260708203711.849489-8-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
 References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
@@ -66,77 +66,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The last use of this function with rather peculiar semantics[*] vanished
-in 2021 with 0a527fda782 ("Fix IDE commands issued, fix endian issues,
-fix non MMIO"). It has no tests, and should a need for something
-similar ever appear, it is better done with some proper
-utf16le/utf16be/utf16 abstractions rather than cluttering code with
-'#ifdef __LITTLE_ENDIAN'.
+Change the existing strstr() test a little so that the substring not
+found is "bits", i.e. one that is actually found when doing case
+insensitive search.
 
-[*] The byte-swapping itself is weird enough. But why is an input string
-of odd length ok, while the empty string is not allowed?
+Then copy all of lib_strstr(), adapt the expectation for the
+strcasestr(s1, s3) result, and add another "not found" case.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- include/linux/string.h |  4 ----
- lib/string.c           | 28 ----------------------------
- 2 files changed, 32 deletions(-)
+ test/lib/string.c | 24 +++++++++++++++++++++---
+ 1 file changed, 21 insertions(+), 3 deletions(-)
 
-diff --git a/include/linux/string.h b/include/linux/string.h
-index 488a459ed99..5bcbf72a89b 100644
---- a/include/linux/string.h
-+++ b/include/linux/string.h
-@@ -107,10 +107,6 @@ extern char * strndup(const char *, size_t);
- extern const char *strdup_const(const char *s);
- extern void kfree_const(const void *x);
+diff --git a/test/lib/string.c b/test/lib/string.c
+index db6f28dbfdf..d418a40c4d4 100644
+--- a/test/lib/string.c
++++ b/test/lib/string.c
+@@ -284,18 +284,36 @@ static int lib_strstr(struct unit_test_state *uts)
+ {
+ 	const char *s1 = "Itsy Bitsy Teenie Weenie";
+ 	const char *s2 = "eenie";
+-	const char *s3 = "easy";
++	const char *s3 = "bits";
  
--#ifndef __HAVE_ARCH_STRSWAB
--extern char * strswab(const char *);
--#endif
--
- #ifndef __HAVE_ARCH_MEMSET
- extern void * memset(void *,int,__kernel_size_t);
- #endif
-diff --git a/lib/string.c b/lib/string.c
-index 45f0f5f8d09..82d0b6a9caa 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -503,34 +503,6 @@ char * strsep(char **s, const char *ct)
+ 	ut_asserteq_ptr(&s1[12], strstr(s1, s2));
+ 	ut_asserteq_ptr(&s1[13], strstr(&s1[3], &s2[1]));
+ 	ut_assertnull(strstr(s1, s3));
+-	ut_asserteq_ptr(&s1[2], strstr(s1, &s3[2]));
+-	ut_asserteq_ptr(&s1[8], strstr(&s1[5], &s3[2]));
++	ut_asserteq_ptr(&s1[1], strstr(s1, &s3[2]));
++	ut_asserteq_ptr(&s1[7], strstr(&s1[5], &s3[2]));
+ 
+ 	return 0;
  }
- #endif
+ LIB_TEST(lib_strstr, 0);
  
--#ifndef __HAVE_ARCH_STRSWAB
--/**
-- * strswab - swap adjacent even and odd bytes in %NUL-terminated string
-- * s: address of the string
-- *
-- * returns the address of the swapped string or NULL on error. If
-- * string length is odd, last byte is untouched.
-- */
--char *strswab(const char *s)
--{
--	char *p, *q;
--
--	if ((NULL == s) || ('\0' == *s)) {
--		return (NULL);
--	}
--
--	for (p=(char *)s, q=p+1; (*p != '\0') && (*q != '\0'); p+=2, q+=2) {
--		char  tmp;
--
--		tmp = *p;
--		*p  = *q;
--		*q  = tmp;
--	}
--
--	return (char *) s;
--}
--#endif
--
- #ifndef __HAVE_ARCH_MEMSET
- /**
-  * memset - Fill a region of memory with the given value
++/** lib_strcasestr() - unit test for strcasestr() */
++static int lib_strcasestr(struct unit_test_state *uts)
++{
++	const char *s1 = "Itsy Bitsy Teenie Weenie";
++	const char *s2 = "eenie";
++	const char *s3 = "bits";
++
++	ut_asserteq_ptr(&s1[12], strcasestr(s1, s2));
++	ut_asserteq_ptr(&s1[13], strcasestr(&s1[3], &s2[1]));
++	ut_asserteq_ptr(&s1[5], strcasestr(s1, s3));
++	ut_asserteq_ptr(&s1[1], strcasestr(s1, &s3[2]));
++	ut_asserteq_ptr(&s1[7], strcasestr(&s1[5], &s3[2]));
++	ut_assertnull(strcasestr(&s1[6], s3));
++
++	return 0;
++}
++LIB_TEST(lib_strcasestr, 0);
++
+ static int lib_strim(struct unit_test_state *uts)
+ {
+ 	char buf[BUFLEN], *p;
 -- 
 2.55.0
 
