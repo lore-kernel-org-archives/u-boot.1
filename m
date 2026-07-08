@@ -4,104 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A38BC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2BB1C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 16:30:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03AD68496E;
-	Wed,  8 Jul 2026 18:27:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E0268496E;
+	Wed,  8 Jul 2026 18:30:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eiNzRXQp";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="JtqtUH61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75E0E849F0; Wed,  8 Jul 2026 18:27:52 +0200 (CEST)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DA888497A; Wed,  8 Jul 2026 18:30:38 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D7F2843B6
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 18:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D15A843B6;
+ Wed,  8 Jul 2026 18:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-7370ea43b9cso14359137.1
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 09:27:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783528069; cv=none;
- d=google.com; s=arc-20260327;
- b=CJVGXb9LgpVqF0+AUIspAIzuP5xtuam+XoEQ8y4ApI7Nro8SlawTzNRVB+fgsmkLvY
- A9nR71JV1WJ1sRZQlxSuGJwVEzaAJCmJoQGGpN3IEP17Ho3YRYesDDcYqefWKvCBm+1Q
- ld2fp+LDjWZsQmI1YSo2ScDbzBcn79ROaBYrIWDnLgtanjbCnUNo6vdJQ0r5JpbFTvIn
- idh2BsvPdMu9ZcaAspAPDp/EKLEWoy3i1bg9m27O35i/DYIUTAeIqJk0O83zI8Y0Kgym
- sQjRmHt1KH6G9wMa1yhJJs2OZtaMrgkAu5Xat47QyjXgSNASyCLsPpqI0xI0Q2plyUwk
- LoVg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
- fh=LZbEPCewkc/qeyFMw6h0MLrH/Dob+uA1NY7zcWWyQgk=;
- b=R+nbRgjqSAr3SdYU8cKe1twraMXyuSqsfNurh7QDC4Eh6hz581UfOh47P5Ftgj6PpH
- M1eHjKUoql1U9rP+6nVDI9cbw8QxLuLizfpeFD9kvy6nBodhoT3dluO6KJeZp1PWuU6Y
- zIl8QmvhUDPSJAQxQKPGLAavf5egtyA8TVbHl/vo4S3qGeHIusTyQ334+geVcT3tZyJR
- ZwJ9T/ac3PbVG9aX6BesYU3+iZdP1YKF1n0XNq8c4kLeFeCCYyJocnhY44W4yMb5rKw+
- APzikmTIe1kN5NMpwsWq9mVeV4Lj0taMVQfxj37bkkjlnVjnuVTBdrgtyQrQ/AdZ2h8R
- h+Jg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783528069; x=1784132869; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
- b=eiNzRXQprvZzhb905A94yDLisd/MGwQA3MdFrKhFFPRgbW7vWa1KpkDRjONP6l7f8f
- X2GEkPcoPCJeNbKqfLrM7I3uj/qkhoLv8R82OETJGST9MDwghOjrKZHz+GI6CFH/A3tq
- X9Lrsr3WwD+GHQ7VDsHZK8IrxYhk2cYxdgPZE9ipXdJ5nEnOB01/2zJTT8EzbXmxCZky
- PZ7yitjy1lKjztSL6FrPsOxrEU094YAF5+Ffk+GBhUYQQ5uyGQgT41j0Z6mlU1A/diQK
- aH/9ydwG8gna2zeOGb0Gtdol8t/fC3IUo0Wp6uZxW69oJIYG7QfSuIcJFysQ4kgSt5tW
- xpqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783528069; x=1784132869;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+G3UW83yYgmZZMzqUwnYRcV/zkxyA2vEFlMKnBkWKSg=;
- b=KAepldkptoVMxJnrti20sTIV6Mkn8Fc/kMETwo8sKq0BpVe57yt11RugskTRZil25G
- 7S4ay2bop0RkiTAFS1ja56yp0dZSmg4qphuS2MBLczdnc/p9owifISRNVlqz1QwLZpD7
- ZH6HI8clDG4E1l1//W7bYX39YtjL5YRJXdu6U2HybTMIMq8mfZXHPGWz/41tjbWG+XIu
- UM2dh+h2C5aDMhNfoENTBi2qMSsl/WkPc+14tLJ7n5v9lVmVu5O3UwggDHuzaCuS+U9Y
- xkADbs8HCzPRxnllpXyqMdjJKw2B9dW7BkkrRzprsOMi1n94JDX/amNkm/UfsNj+9/lK
- N9tw==
-X-Gm-Message-State: AOJu0YyV1Aq2Y0oK7gVDcPhoJYPPkrVvwUKxZ5DGK/u9H9m4cEwTh5t8
- z2DUu85Uax2lWlOwbl3e2Hn7PKbl9tG27wnv/TsLv0JREyjzVBQhkK3qK/c1kU+YW2wJJ5+Z/6M
- Q5DIiKgeQv/gKjHiHSV+9JhcgGx/Lhbw=
-X-Gm-Gg: AfdE7ck/57Z9aBDnxwZbemFfrw0dn0rokThbu64CtGJ4lnpcpT7tnQCf1HU34YLmYKK
- hQhvwle7c5Y9FIVya3sU7PzACLAqYrAoBrre9FxjvFB4R3mSWVOUwgv1tqRiJgB+EGsALmj4HXN
- CB57cM44bxtWm8ZPUQrxQiPvVzsh3NDPbSRKT8kkPKHOf12MdJQxIQXgA6UOY8Mxp87kHe/Ir1G
- Ias2jJG0xvZz9NYGwAuh035EtObTij+8MzJ2+yBDdR+vbFXjchFu2oC26HEK67ZHyhJkBz76zN0
- OdCcmkc=
-X-Received: by 2002:a05:6102:5492:b0:73e:bba6:bd59 with SMTP id
- ada2fe7eead31-744dcbc8ce1mr1989605137.3.1783528068854; Wed, 08 Jul 2026
- 09:27:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260708013019.288985-1-trini@konsulko.com>
- <20260708013019.288985-3-trini@konsulko.com>
-In-Reply-To: <20260708013019.288985-3-trini@konsulko.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 8 Jul 2026 12:27:37 -0400
-X-Gm-Features: AUfX_mya4w0x7hDlF8pvJLigV9juS2OYlwq_je6dCVsFMb5JC6iK6kMv1t1kGaQ
-Message-ID: <CAMDkj5zYbRL3u6iUKt11Kn+RqDGVMjGcAOpEWt9k-oSR8smy-g@mail.gmail.com>
-Subject: Re: [PATCH 2/7] vexpress64: Correct CONFIG symbol logic around device
- tree passage
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, David Feng <fenghua@phytium.com.cn>, 
- Linus Walleij <linusw@kernel.org>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
+ARC-Seal: i=1; a=rsa-sha256; t=1783528226; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=myn8RKTvqHJLG2OPfF8WZ1AfakyCVRpt0aJl1sLjqIR1PlhjbIPoL+Mtoxn5tsIfyUavc0TFd659YFrZMMYAViyL53jnxjiV2tlWI0ipHexCsApqptyVDashHYQQ7FOkYWMZjkUoKaMgXdV99+P7+asyjtzNgPFnzE4w9NhYlgE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1783528226;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=qnRE+t9LfIxJMrx+etHv0hwuwS8Quu0bl5byZx7o18Y=; 
+ b=mXtg+7MiRuoL9G9IGx4I87rxOJCI0tSTCAj7BiNr9skqwoGiI7dxhm1Ag03ZnGGzH/7wbjj7pXM+Zgjmc0Lo9YGhDoqBkMmk/PcVk1ZkV6CKxosCBVVvf3pt0YMiAtFNC4dc+qvMTic/ri1/pinpdMQz8lFRq7I/xHYI07qZG54=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1783528226; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:Subject:Subject:From:From:To:To:References:In-Reply-To:Reply-To;
+ bh=qnRE+t9LfIxJMrx+etHv0hwuwS8Quu0bl5byZx7o18Y=;
+ b=JtqtUH615OHAHfoVJNl46YZCYKDHKcGew4hn9xy6lWEVKNVu5KcO8q3PjaMSTgwv
+ nz7fe01QJatV/r1reLZjv2TSSzusTYNNgqeUemJGr6q9f7R3WrmxCjregrjID7SqGzL
+ 4t8iHFgGSbbxPyZd0X43OSoSx0yMBFPzYNLdRgJI=
+Received: by mx.zohomail.com with SMTPS id 1783528222436250.33926475826763;
+ Wed, 8 Jul 2026 09:30:22 -0700 (PDT)
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 09 Jul 2026 00:30:14 +0800
+Message-Id: <DJTBZIJR5BOF.35DYSOL36RB6H@pigmoral.tech>
+Cc: "Lukasz Majewski" <lukma@denx.de>, "Tom Rini" <trini@konsulko.com>,
+ "Rick Chen" <rick@andestech.com>, "Leo" <ycliang@andestech.com>, "Kongyang
+ Liu" <seashell11234455@gmail.com>, "Martin Herren" <sputnik@on-the-web.ch>,
+ "Michal Simek" <michal.simek@amd.com>, "Randolph Sheng-Kai Lin"
+ <randolph@andestech.com>, "Yao Zi" <me@ziyao.cc>, "Andreas Schwab"
+ <schwab@suse.de>, "U-Boot" <u-boot-bounces@lists.denx.de>
+Subject: Re: [PATCH 2/3] riscv: milkv_duo: Use upstream devicetree
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+To: "Zhuxu Ran" <zhuxu_ran@zohomail.com>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0
+References: <20260706-milkv-duo-upstream-dts-v1-0-8d010ddda7ca@zohomail.com>
+ <20260706-milkv-duo-upstream-dts-v1-2-8d010ddda7ca@zohomail.com>
+In-Reply-To: <20260706-milkv-duo-upstream-dts-v1-2-8d010ddda7ca@zohomail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,88 +82,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Zhuxu,
 
-On Tue, Jul 7, 2026 at 9:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+On Mon Jul 6, 2026 at 9:43 AM CST, Zhuxu Ran wrote:
+> Switch Milk-V Duo to the upstream CV1800B devicetree by enabling
+> CONFIG_OF_UPSTREAM and selecting sophgo/cv1800b-milkv-duo.
 >
-> When we don't have BLOBLIST_PASSAGE_MANDATORY enabled, then we're being
-> passed the device tree in some other manner, via OF_HAS_PRIOR_STAGE.
-> Correct our logic around which symbols are used to guard what is
-> generated / used and when.
+> The upstream devicetree keeps the Ethernet MAC disabled. Add a
+> small U-Boot override to keep the existing U-Boot networking
+> support enabled.
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Zhuxu Ran <zhuxu_ran@zohomail.com>
 > ---
-> Cc: David Feng <fenghua@phytium.com.cn>
-> Cc: Linus Walleij <linusw@kernel.org>
-> Cc: Peter Hoyes <Peter.Hoyes@arm.com>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  board/armltd/vexpress64/Kconfig      | 2 +-
->  board/armltd/vexpress64/Makefile     | 2 ++
->  board/armltd/vexpress64/vexpress64.c | 4 ++--
->  3 files changed, 5 insertions(+), 3 deletions(-)
+>  arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi | 12 ++++++++++++
+>  configs/milkv_duo_defconfig                  |  3 ++-
+>  2 files changed, 14 insertions(+), 1 deletion(-)
 >
+> diff --git a/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi b/arch/riscv/dt=
+s/cv1800b-milkv-duo-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..158b02a543a
+> --- /dev/null
+> +++ b/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> +/*
+> + * U-Boot overrides for Milk-V Duo.
+> + *
+> + * The upstream Linux device tree describes the CV1800B Ethernet MAC, bu=
+t
+> + * keeps it disabled. Enable it here to preserve the existing U-Boot
+> + * networking support when using the upstream device tree.
+> + */
 
-Sounds good to me.
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+What about moving this comment to be right above the &gmac0 node,
+instead of having it as a top-level file description? This file may be
+extended with other U-Boot overrides in the future.
 
-Regards,
-Raymond
+> +
+> +&gmac0 {
+> +	status =3D "okay";
+> +};
+> diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
+> index f1f3930564b..9d6b80362d5 100644
+> --- a/configs/milkv_duo_defconfig
+> +++ b/configs/milkv_duo_defconfig
+> @@ -4,7 +4,8 @@ CONFIG_SYS_MALLOC_F_LEN=3D0x8000
+>  CONFIG_NR_DRAM_BANKS=3D1
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x82300000
+> -CONFIG_DEFAULT_DEVICE_TREE=3D"cv1800b-milkv-duo"
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"sophgo/cv1800b-milkv-duo"
+> +CONFIG_OF_UPSTREAM=3Dy
+>  CONFIG_SYS_LOAD_ADDR=3D0x80080000
+>  CONFIG_IDENT_STRING=3D"milkv_duo"
+>  CONFIG_TARGET_MILKV_DUO=3Dy
 
+--=20
+Best regards,
+Junhui Liu
 
-> diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kc=
-onfig
-> index 49c7fda0b83a..a988c7198498 100644
-> --- a/board/armltd/vexpress64/Kconfig
-> +++ b/board/armltd/vexpress64/Kconfig
-> @@ -31,7 +31,7 @@ choice
->  config TARGET_VEXPRESS64_BASE_FVP
->         bool "Support Versatile Express ARMv8a FVP BASE model"
->         select VEXPRESS64_BASE_MODEL
-> -       imply OF_HAS_PRIOR_STAGE if !BLOBLIST
-> +       imply OF_HAS_PRIOR_STAGE
->
->  config TARGET_VEXPRESS64_BASER_FVP
->         bool "Support Versatile Express ARMv8r64 FVP BASE model"
-> diff --git a/board/armltd/vexpress64/Makefile b/board/armltd/vexpress64/M=
-akefile
-> index b0dd1d0af879..5f9dc2af930a 100644
-> --- a/board/armltd/vexpress64/Makefile
-> +++ b/board/armltd/vexpress64/Makefile
-> @@ -5,6 +5,8 @@
->
->  obj-y  :=3D vexpress64.o
->
-> +ifeq ($(CONFIG_BLOBLIST_PASSAGE_MANDATORY),)
->  obj-$(CONFIG_OF_HAS_PRIOR_STAGE)       +=3D lowlevel_init.o
-> +endif
->
->  obj-$(CONFIG_TARGET_VEXPRESS64_JUNO)   +=3D pcie.o
-> diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress=
-64/vexpress64.c
-> index d68da0e3d650..8b6b96d757d5 100644
-> --- a/board/armltd/vexpress64/vexpress64.c
-> +++ b/board/armltd/vexpress64/vexpress64.c
-> @@ -97,7 +97,7 @@ int dram_init_banksize(void)
->   * Push the variable into the .data section so that it
->   * does not get cleared later.
->   */
-> -#ifdef CONFIG_OF_HAS_PRIOR_STAGE
-> +#ifndef CONFIG_BLOBLIST_PASSAGE_MANDATORY
->  unsigned long __section(".data") prior_stage_fdt_address[2];
->  #endif
->
-> @@ -150,7 +150,7 @@ static phys_addr_t find_dtb_in_nor_flash(const char *=
-partname)
->  }
->  #endif
->
-> -#ifdef CONFIG_OF_HAS_PRIOR_STAGE
-> +#ifndef CONFIG_BLOBLIST_PASSAGE_MANDATORY
->  /*
->   * Filter for a valid DTB, as TF-A happens to provide a pointer to some
->   * data structure using the DTB format, which we cannot use.
-> --
-> 2.43.0
->
