@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18368C43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:38:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D8BC43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:38:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 944D084A85;
-	Wed,  8 Jul 2026 22:37:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE6C384A77;
+	Wed,  8 Jul 2026 22:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="PU8n5kUN";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="ttJYLMhF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC83184A7A; Wed,  8 Jul 2026 22:37:37 +0200 (CEST)
+ id 71E3684A85; Wed,  8 Jul 2026 22:37:38 +0200 (CEST)
 Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch
  [79.135.106.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77A0847AF
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E03A843B6
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783543054; x=1783802254;
- bh=NU6oONhFfP4zB2PrSvqlQ78ImkuHUNhksVaKvNIRnjI=;
+ s=protonmail; t=1783543053; x=1783802253;
+ bh=0M2fBsCDrHWAkeO7/cWIvpvR/SM/yTgldq81TRYE0Ns=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=PU8n5kUNxfpDU64VgRtkhVLPPbcJEc8yVUv45upASn2M/PboS3/mEcDiFO6LRssrt
- e/ZhPSTnSypbNVOu+q0PpA8YYeQHfBPdS8ToNe4C9RRUx4mASBYixGQKvKRDsnZZ/h
- fkhwc8rNkxrXP0GC18LtphVm6ij4yo8ICjgwlQXKesprehXYxvU6NzQtNGsB/SgOLz
- n4FA+n98KJVTfYoymCyqxXYPJme6srrqwyh4zMkCNglMaZEmi+hdv7w8Ieov191RJi
- 2Evh6/T++yUCQMX9q4bnuEKrDcXyn748jGijDgbrhzqKVCFDHXm6GF3+QAXNQucm1a
- vjBDz8ZuHfdCw==
-X-Pm-Submission-Id: 4gwVJt0Zglz2Scsj
+ b=ttJYLMhFivo/tIpJFDy30oo4UwJaE9AQ39RHzg5YfpqK4MSJYNFE/ffuzAw3vn5wM
+ 4cQ1pBiA19V8XrvnVJeJ7hvAAJAwuP1IF7NdElaA0WEjPWoJQT8MJib7+D7HSBaJQ7
+ bYCbEXywOxIlOu8FmSWKInbSoktc+6juoWhYRki8+gV+JyzUtUvyE4AyGmk8IrA1by
+ bWEftLDPJqU78WHNq889lU1G9qIHcy37RbcH75LwQXoZ0C5De8yVUxjg7VqWuTB8Fj
+ xPX978YOotX4lGrHVFmCDIHiw30FyS1BkFgeIc6XPuInI1/cZ5yskFbm7iDAiyR7jJ
+ /+Qs4tBYZ8ZSw==
+X-Pm-Submission-Id: 4gwVJm3zWrz1DFGQ
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH v2 07/10] test: string: add test of new strcasestr() function
-Date: Wed,  8 Jul 2026 22:37:08 +0200
-Message-ID: <20260708203711.849489-8-rv@rasmusvillemoes.dk>
+Subject: [PATCH v2 06/10] string: add strcasestr()
+Date: Wed,  8 Jul 2026 22:37:07 +0200
+Message-ID: <20260708203711.849489-7-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
 References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
@@ -66,63 +66,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the existing strstr() test a little so that the substring not
-found is "bits", i.e. one that is actually found when doing case
-insensitive search.
-
-Then copy all of lib_strstr(), adapt the expectation for the
-strcasestr(s1, s3) result, and add another "not found" case.
+While this is not likely needed by any "real" driver code, a later
+convenience addition to the "config" command will need this. As usual,
+the linker will throw it away if nothing actually uses it, so it
+should have no size impact when not used.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- test/lib/string.c | 24 +++++++++++++++++++++---
- 1 file changed, 21 insertions(+), 3 deletions(-)
+ include/linux/string.h |  1 +
+ lib/string.c           | 27 +++++++++++++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
-diff --git a/test/lib/string.c b/test/lib/string.c
-index db6f28dbfdf..d418a40c4d4 100644
---- a/test/lib/string.c
-+++ b/test/lib/string.c
-@@ -284,18 +284,36 @@ static int lib_strstr(struct unit_test_state *uts)
- {
- 	const char *s1 = "Itsy Bitsy Teenie Weenie";
- 	const char *s2 = "eenie";
--	const char *s3 = "easy";
-+	const char *s3 = "bits";
- 
- 	ut_asserteq_ptr(&s1[12], strstr(s1, s2));
- 	ut_asserteq_ptr(&s1[13], strstr(&s1[3], &s2[1]));
- 	ut_assertnull(strstr(s1, s3));
--	ut_asserteq_ptr(&s1[2], strstr(s1, &s3[2]));
--	ut_asserteq_ptr(&s1[8], strstr(&s1[5], &s3[2]));
-+	ut_asserteq_ptr(&s1[1], strstr(s1, &s3[2]));
-+	ut_asserteq_ptr(&s1[7], strstr(&s1[5], &s3[2]));
- 
- 	return 0;
+diff --git a/include/linux/string.h b/include/linux/string.h
+index 5e4594b19df..986499dfc70 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -71,6 +71,7 @@ extern char * strstr(const char *,const char *);
+ #ifndef __HAVE_ARCH_STRNSTR
+ extern char *strnstr(const char *, const char *, size_t);
+ #endif
++char *strcasestr(const char *, const char *);
+ #ifndef __HAVE_ARCH_STRLEN
+ extern __kernel_size_t strlen(const char *);
+ #endif
+diff --git a/lib/string.c b/lib/string.c
+index 20c934c18c3..dbf2ce340df 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -701,6 +701,33 @@ char *strstr(const char *s1, const char *s2)
  }
- LIB_TEST(lib_strstr, 0);
+ #endif
  
-+/** lib_strcasestr() - unit test for strcasestr() */
-+static int lib_strcasestr(struct unit_test_state *uts)
++/**
++ * strcasestr() - Case insensitive substring search
++ *
++ * @haystack:	string to be searched
++ * @needle:	string to search for
++ *
++ * Return:	pointer to the first occurrence or NULL
++ *
++ * The case of both strings are ignored.
++ */
++char *strcasestr(const char *haystack, const char *needle)
 +{
-+	const char *s1 = "Itsy Bitsy Teenie Weenie";
-+	const char *s2 = "eenie";
-+	const char *s3 = "bits";
++	size_t l1, l2;
 +
-+	ut_asserteq_ptr(&s1[12], strcasestr(s1, s2));
-+	ut_asserteq_ptr(&s1[13], strcasestr(&s1[3], &s2[1]));
-+	ut_asserteq_ptr(&s1[5], strcasestr(s1, s3));
-+	ut_asserteq_ptr(&s1[1], strcasestr(s1, &s3[2]));
-+	ut_asserteq_ptr(&s1[7], strcasestr(&s1[5], &s3[2]));
-+	ut_assertnull(strcasestr(&s1[6], s3));
++	l1 = strlen(haystack);
++	l2 = strlen(needle);
 +
-+	return 0;
++	while (l1 >= l2) {
++		if (!strncasecmp(haystack, needle, l2))
++			return (char *)haystack;
++		haystack++;
++		l1--;
++	}
++
++	return NULL;
 +}
-+LIB_TEST(lib_strcasestr, 0);
 +
- static int lib_strim(struct unit_test_state *uts)
- {
- 	char buf[BUFLEN], *p;
+ #ifndef __HAVE_ARCH_MEMCHR
+ /**
+  * memchr - Find a character in an area of memory.
 -- 
 2.55.0
 
