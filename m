@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586ACC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711C5C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 20:37:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD3784A4A;
-	Wed,  8 Jul 2026 22:37:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52BB084A12;
+	Wed,  8 Jul 2026 22:37:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="RT2yuktq";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="Rou2dbk4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F621843B6; Wed,  8 Jul 2026 22:37:24 +0200 (CEST)
-Received: from mail-43170.protonmail.ch (mail-43170.protonmail.ch
- [185.70.43.170])
+ id 381D784A51; Wed,  8 Jul 2026 22:37:26 +0200 (CEST)
+Received: from mail-106111.protonmail.ch (mail-106111.protonmail.ch
+ [79.135.106.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32848843B6
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4A508496E
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 22:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783543036; x=1783802236;
- bh=CaKv56Zgvj22Om+WfVkY7LQAdwM2Q5sfr711tQZIpZQ=;
- h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
- Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=RT2yuktqxW6UhJ0WYdMtbV4apWY3ZrIGoXdLu29XRA2rXw7z08Y62lvZHhC15TRap
- 9vUjS1/C5sDLDYMyT5yPlvaz0mcWEuEWuI5Mn6s1yp+Awn7pgv7Si+RlP3grezuKN8
- nKMFMoEmmDvXXGh5ABAGH6O9RGDFbYu1pTcMaI7l8ab+eP1OJldZKg3t58Ywkx6bNR
- rmu2JFOe6h0vjOxUGxUT8qf3ieElg1/UWlUEple+DsVSp2qgw+aPlFQ9YSatqyQj+L
- 9c9cJh3DxaIY/EYj38Wj/htbj80K0i1XaD064b0sQ+NgKfJRBkS7urqZKlWHUWHYFX
- L6TXYUYJwfk5Q==
-X-Pm-Submission-Id: 4gwVJW3Kp4z1DDpQ
+ s=protonmail; t=1783543039; x=1783802239;
+ bh=wfPaxdhMgu6ngSXG05iNg5pj0ZEadvu4Su5WcEC4TgU=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
+ Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=Rou2dbk4INqP8kvfDu6Mbmkc7TbyjS7K3YYB0iTQtq+c3nVuuwb535nyqo+nEiAc5
+ Ija64DSba8y37aGuvx07XciGtd7NR1HXHSTEVEowqdi7CNbJt+PozXobOTw7Il3S77
+ rvOwWYrqxvtLIrJHG1XANHGgJ5fdgIbqDWkEkgtboIwZtYC1zNof81d+xfc6u9UYUt
+ bIK5EmYx8AV4kz554k/mlFtH1eIuDmtkHtUAo7DHTmNkmzIU6w27C/mS9VrYnTqaq/
+ bW/epgC59uQR5CVMmMhZ4zACPL+kzMLhTB+sezRQ/BjTEy3mTg4PkK9kUk4c4pKviq
+ 8QPstvZbvEV1Q==
+X-Pm-Submission-Id: 4gwVJZ1VDjz2ScND
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH v2 00/10] some string cleanup,
- and a tweak of the "config" command
-Date: Wed,  8 Jul 2026 22:37:01 +0200
-Message-ID: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
+Subject: [PATCH v2 01/10] sh: clean up asm/string.h
+Date: Wed,  8 Jul 2026 22:37:02 +0200
+Message-ID: <20260708203711.849489-2-rv@rasmusvillemoes.dk>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
+References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,40 +66,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This started by me wanting something like what patch 8 does. That
-wasn't too hard, except we had no strcasestr(), and also our regex
-engine (which I didn't really want to pull into the mix anyway)
-doesn't have a flag that requests case-insensitive matching. So I
-wanted to add strcasestr(), but then I stumbled on a bunch of stuff
-that should be cleaned up in str-land.
+First, remove the !__KERNEL__ block, since U-Boot is always compiled
+with -D__KERNEL__.
 
-v2: Include Simon's R-b in the first 8 patches, incorporating most of
-the minor comments. Patches 9 and 10 are new in v2.
+Second, remove the mention of the non-existing file
+arch/sh/lib/strcasecmp.c and the redundant declaration of strcasecmp()
+If sh did have a strcasecmp.c file, presumably the header would have
+had to #define __HAVE_ARCH_STRCASECMP.
 
-Rasmus Villemoes (10):
-  sh: clean up asm/string.h
-  string: correct prototype of strchrnul()
-  string: correct documentation for strstr and strnstr
-  string: remove unused strswab() function
-  string: remove more pointless __HAVE_ARCH_STR*
-  string: add strcasestr()
-  test: string: add test of new strcasestr() function
-  cmd: config: allow simple filtering of output
-  doc: document 'config' command
-  test: add test of 'config' command
+Third, remove the explicit #undefs of various __HAVE_ARCH_* and
+redundant declarations of standard functions, which are anyway
+declared in linux/string.h. In the linux source tree, those are all
+#defines, and indeed linux does have asm implementations of those functions.
 
- arch/sh/include/asm/string.h | 51 --------------------------
- cmd/config.c                 | 26 ++++++++++++--
- doc/usage/cmd/config.rst     | 40 +++++++++++++++++++++
- include/linux/string.h       | 13 ++-----
- lib/string.c                 | 70 ++++++++++++++++--------------------
- test/cmd/Makefile            |  1 +
- test/cmd/config.c            | 28 +++++++++++++++
- test/lib/string.c            | 24 +++++++++++--
- 8 files changed, 146 insertions(+), 107 deletions(-)
- create mode 100644 doc/usage/cmd/config.rst
- create mode 100644 test/cmd/config.c
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+---
+ arch/sh/include/asm/string.h | 51 ------------------------------------
+ 1 file changed, 51 deletions(-)
 
+diff --git a/arch/sh/include/asm/string.h b/arch/sh/include/asm/string.h
+index 999febcb6b7..12a9a8f796c 100644
+--- a/arch/sh/include/asm/string.h
++++ b/arch/sh/include/asm/string.h
+@@ -8,8 +8,6 @@
+  * from linux kernel code.
+  */
+ 
+-#ifdef __KERNEL__               /* only set these up for kernel code */
+-
+ #define __HAVE_ARCH_STRCPY
+ static inline char *strcpy(char *__dest, const char *__src)
+ {
+@@ -81,53 +79,4 @@ static inline int strcmp(const char *__cs, const char *__ct)
+ 	return __res;
+ }
+ 
+-#undef __HAVE_ARCH_STRNCMP
+-extern int strncmp(const char *__cs, const char *__ct, size_t __n);
+-
+-#undef __HAVE_ARCH_MEMSET
+-extern void *memset(void *__s, int __c, size_t __count);
+-
+-#undef __HAVE_ARCH_MEMCPY
+-extern void *memcpy(void *__to, __const__ void *__from, size_t __n);
+-
+-#undef __HAVE_ARCH_MEMMOVE
+-extern void *memmove(void *__dest, __const__ void *__src, size_t __n);
+-
+-#undef __HAVE_ARCH_MEMCHR
+-extern void *memchr(const void *__s, int __c, size_t __n);
+-
+-#undef __HAVE_ARCH_STRLEN
+-extern size_t strlen(const char *);
+-
+-/* arch/sh/lib/strcasecmp.c */
+-extern int strcasecmp(const char *, const char *);
+-
+-#else                           /* KERNEL */
+-
+-/*
+- * let user libraries deal with these,
+- * IMHO the kernel has no place defining these functions for user apps
+- */
+-
+-#define __HAVE_ARCH_STRCPY      1
+-#define __HAVE_ARCH_STRNCPY     1
+-#define __HAVE_ARCH_STRCAT      1
+-#define __HAVE_ARCH_STRNCAT     1
+-#define __HAVE_ARCH_STRCMP      1
+-#define __HAVE_ARCH_STRNCMP     1
+-#define __HAVE_ARCH_STRNICMP    1
+-#define __HAVE_ARCH_STRCHR      1
+-#define __HAVE_ARCH_STRRCHR     1
+-#define __HAVE_ARCH_STRSTR      1
+-#define __HAVE_ARCH_STRLEN      1
+-#define __HAVE_ARCH_STRNLEN     1
+-#define __HAVE_ARCH_MEMSET      1
+-#define __HAVE_ARCH_MEMCPY      1
+-#define __HAVE_ARCH_MEMMOVE     1
+-#define __HAVE_ARCH_MEMSCAN     1
+-#define __HAVE_ARCH_MEMCMP      1
+-#define __HAVE_ARCH_MEMCHR      1
+-#define __HAVE_ARCH_STRTOK      1
+-
+-#endif /* KERNEL */
+ #endif /* __ASM_SH_STRING_H */
 -- 
 2.55.0
 
