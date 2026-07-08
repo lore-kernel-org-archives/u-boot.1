@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A6AC44501
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 18:41:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5854C43458
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 18:59:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FDAF8497A;
-	Wed,  8 Jul 2026 20:41:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A6738496E;
+	Wed,  8 Jul 2026 20:59:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="xwPSzGBE";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="UNoLhQ6z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAFC6849D2; Wed,  8 Jul 2026 20:41:11 +0200 (CEST)
-Received: from mail-43170.protonmail.ch (mail-43170.protonmail.ch
- [185.70.43.170])
+ id 1A8AD8497A; Wed,  8 Jul 2026 20:59:54 +0200 (CEST)
+Received: from mail-244107.protonmail.ch (mail-244107.protonmail.ch
+ [109.224.244.107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40D738496E
- for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 20:41:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 015018407E
+ for <u-boot@lists.denx.de>; Wed,  8 Jul 2026 20:59:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783536064; x=1783795264;
- bh=bizBQfgVj0qXKhvkESD2XMSU3WXVq+10kXsgBCSUUGY=;
+ s=protonmail; t=1783537191; x=1783796391;
+ bh=No0zBflBBRXe4SQq9jhNhrR0bFW+vGLIq206h12+PFE=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
  Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=xwPSzGBEfnn1PZND2AwDpov0+OmE73x0uGPINp2JqW2HwRfpyXJHSNnVp3gVboAxr
- k0oNP+yEXp20MZrwezRZCgSgTwyR6Bqg0FF7GPeLfsYxiPIKhkV3vvhyC7cHM9byOu
- GqFKfl9RKMNFo4ysL0MRp2TDJ7WX4mInBNs5FysE7E+YxYImHQITHSEDAJ0uk6ysQf
- f8FRja8W/oziWF9qg3GN3+KYpOxzfyi2bPwdnkK2iHWmViAaT4x0R7LTen/IkXhTgU
- HJeRcLD9gN27MIwkWm6QzvV3i2I636hTGlU8a6C6d2qnWvyF8d0T6/NJ9XkEcLLwNY
- Q0RJQoFKgx/jw==
-X-Pm-Submission-Id: 4gwRkP2vbRz2Sd51
+ b=UNoLhQ6z0Ft4QICaa6KUAOeHetz6LOsAgfACNO9S/snTcnx0HRLm7uSUTEiyqH8a+
+ kJ755zOJzeCpJZa189hXVwDsSSfx5BfU9XDJFZXlMqpcQ6TMY3299RAuXo9ROKkR/x
+ Z9nY350IfVHkH+8/3M7+28d87FrQ2mPQ4JJD1d0JX5LkFWBePaqy1YB4Jl7FhzG7oj
+ rPbfOgf+sR7Z3IiFFbW3JJMv2EpirXC3BF2hrWc9O9KChUeiPPqwUqT+/Rpa0uq2Uh
+ DdRVSAEtn3oD7r0/RKAEMjCRkkERD5gnCweHFAYvTeQRtg03QJAeJw9/lOIvMXHY8+
+ HAxsY7Ms8X5Kw==
+X-Pm-Submission-Id: 4gwS855BF0z2Scsk
 From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 To: "Simon Glass" <sjg@chromium.org>
 Cc: <u-boot@lists.denx.de>,  "Tom Rini" <trini@konsulko.com>,  "Casey
  Connolly" <casey.connolly@linaro.org>
-Subject: Re: [PATCH 6/8] string: add strcasestr()
-In-Reply-To: <CAFLszTi58-YBJU=Z-Ab00xSTaaFGkibyogd4dP_whYv70MqOpQ@mail.gmail.com>
- (Simon Glass's message of "Thu, 02 Jul 2026 09:30:15 +0100")
+Subject: Re: [PATCH 8/8] cmd: config: allow simple filtering of output
+In-Reply-To: <CAFLszTgNgDUY-sKspO9O5JaSg7ERv7g-qO-UV8apunFs4w6ZWA@mail.gmail.com>
+ (Simon Glass's message of "Thu, 02 Jul 2026 09:30:24 +0100")
 References: <20260701171535.906272-1-rv@rasmusvillemoes.dk>
- <20260701171535.906272-7-rv@rasmusvillemoes.dk>
- <-L2J8wyvBfsoNZ_oj3Z9kf9VHJFXGSNTsIaWTbFhAyLP_MEWPFZBwC5BJtJLV-ucgg_88lw_CVudQN9BYQaJVQ==@protonmail.internalid>
- <CAFLszTi58-YBJU=Z-Ab00xSTaaFGkibyogd4dP_whYv70MqOpQ@mail.gmail.com>
-Date: Wed, 08 Jul 2026 20:40:59 +0200
-Message-ID: <878q7luxxg.fsf@rasmusvillemoes.dk>
+ <20260701171535.906272-9-rv@rasmusvillemoes.dk>
+ <mDleQcmnzVaEqwpyh0836NLo6HZabQwOFGxUtd7JIm67SxPNzQIE3-UQzl01D2cxbu6hE8WppO_QBg3PLkEzWQ==@protonmail.internalid>
+ <CAFLszTgNgDUY-sKspO9O5JaSg7ERv7g-qO-UV8apunFs4w6ZWA@mail.gmail.com>
+Date: Wed, 08 Jul 2026 20:59:48 +0200
+Message-ID: <8733xtux23.fsf@rasmusvillemoes.dk>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -75,37 +75,62 @@ On Thu, Jul 02 2026, "Simon Glass" <sjg@chromium.org> wrote:
 > Hi Rasmus,
 >
 > On 2026-07-01T17:15:27, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
->> string: add strcasestr()
+>> cmd: config: allow simple filtering of output
 >>
->> While this is not likely needed by any 'real' driver code, a later
->> convenience addition to the 'config' command will need this. As usual,
->> the linker will throw it away if nothing actually uses it, so it
->> should have no size impact when not used.
+>> When doing development, it can be quite useful to enable
+>> CONFIG_CMD_CONFIG, so that one can always check whether a config knob
+>> one has just enabled has actually made it to target.
 >>
->> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+>> Because sometimes, one doesn't flash the right binary, or maybe one
+>> has just done CONFIG_FOO=y in some config fragment, but that had no
+>> effect because one would also have to do CONFIG_BAR=y.
 >>
->> include/linux/string.h |  1 +
->>  lib/string.c           | 27 +++++++++++++++++++++++++++
->>  2 files changed, 28 insertions(+)
+>> However, 2400+ lines of text are rather hard to read through. One
+>> probably uses a terminal emulator with capturing enabled, but
+>> searching back through the capture file is a little tedious, and one
+>> easily ends up finding something that doesn't pertain to the most
+>> recent 'config' command invocation.
+>>
+>> So make it possible to limit the output to those lines containing a
+>> given string. Like the search functionality in menuconfig, make it
+>> case insensitive, because it is much more convenient to type "config
+>> pinctrl" than "config PINCTRL".
+>> [...]
+>>
+>> cmd/config.c | 25 ++++++++++++++++++++++---
+>>  1 file changed, 22 insertions(+), 3 deletions(-)
 >
->> diff --git a/include/linux/string.h b/include/linux/string.h
->> @@ -77,6 +77,7 @@ extern __kernel_size_t strlen(const char *);
->>  #ifndef __HAVE_ARCH_STRNLEN
->>  extern __kernel_size_t strnlen(const char *,__kernel_size_t);
->>  #endif
->> +char *strcasestr(const char *, const char *);
+>> diff --git a/cmd/config.c b/cmd/config.c
+>> @@ -29,7 +29,23 @@ static int do_config(struct cmd_tbl *cmdtp, int flag, int argc,
+>> +             while (b < e) {
+>> +                     n = strchrnul(b, '\n');
+>> +                     *n = '\0';
+>> +
+>> +                     if (strcasestr(b, s)) {
+>> +                             puts(b);
+>> +                             puts('\n');
+>> +                     }
+>> +                     b = n + 1;
+>> +             }
 >
-> I've been trying to add proper function docs to newly added ones, so
-> we can clearly see the behaviour. Despite these being well-known
-> function, they sometimes differ in how they handle edge-conditions.
->
-> Also you could group this with the strstr()/strnstr() declarations a
-> few lines above, so it sits alongside its siblings.
+> The two puts() could be a single printf("%s\n", b). 
 
-Sure, I can move the declaration up. As for function docs, they exist,
-but in string.c, which is also where the docs for str[n]str is (an
-earlier patch had fixups for those). I see some kernel docs in
-string.h, and I dunno which is preferred, but most, including the
-sibling str[n]str ones, are in the .c file. So I'll leave it there.
+Well, originally I just had the first puts(), then I found out that our
+puts() is not standards-compliant (which would automatically add that
+newline). I think I prefer keeping these as-is, to avoid a pathological
+case of some .config line exceeding CONFIG_SYS_PBSIZE and then be
+truncated (that could happen with some of the config options that are
+potentially long lists of strings, OF_LIST, DEVICE_TREE_INCLUDES, the like).
+
+> Also please add an explicit #include <linux/string.h> now that we rely
+> on strchrnul() and strcasestr() here.
+
+Ack.
+
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> In addition to Tom's comment, how about a simple sandbox test?
+
+Ack.
 
 Rasmus
