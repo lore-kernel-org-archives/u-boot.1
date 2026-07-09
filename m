@@ -4,84 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24004C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 10:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5404EC44501
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 10:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6559884AE9;
-	Thu,  9 Jul 2026 12:50:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9621184AE9;
+	Thu,  9 Jul 2026 12:57:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="YlCLVX3Q";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="YmOMz2c/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35A1684B0E; Thu,  9 Jul 2026 12:50:35 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 16C4584B20; Thu,  9 Jul 2026 12:57:31 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 016AE84AB8
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 12:50:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1380C84AB8
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 12:57:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-493bf73ec2aso10334115e9.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 03:50:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783594231; x=1784199031; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=jAu5qeWdJ6Y7kZc5OgYOWfLwY80RX5TakDrZ2DjKHCI=;
- b=YlCLVX3QS/ju0dvWjQ7ZFX8virnUnZ+dXVfosD2hkDz8Ke6bhhlHd3t6Rgmq7qy/Ry
- j+2YL5BMApMiUA8rDLGYLoArt3GXn9q8/Q7ByvgpBCcSJcHpL5wAKENpM1Cscgy8eQq4
- tgmIKslRkVaYcJ/5BYx9NkULiZGlMkSmhvCQElqN5n2tkwGhHKlGFOPYfIJAuj9Hq1d5
- gPpGF3rXKAbJ1HhtGaTbM3RNyKv0YJvXIq+x/sWdNrcVoSuS6BMkv34XPnwQpSzpleKl
- 0yk5HzOCzd7VT+NtPY2rBPAbxWb0AM6a1IoyUIZcYBPlxKyiWV5SJmQaRFQUVVZqgrHL
- pQfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783594231; x=1784199031;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=jAu5qeWdJ6Y7kZc5OgYOWfLwY80RX5TakDrZ2DjKHCI=;
- b=A4WyrF3FOJCcSNCpA9cFql7Wb88x2arcAZrQURjaL6aSUxL4PoCAITjL9g3hBpUwyB
- kttLsTms/dD+zGWEkeV759toEXvdmJLTox3/OBWU8o6TTF/0rlbk9ULQlfwfuCG6C9Hu
- NXZTmkQGVa8lmC7KmT56V6gps0AfpF1RU1J/jN/3SoPPc2rXr/+olXaBgr7phVMrHBxa
- BaWXYt7WhPdjPBfrZ+ELce3ZM6amdM+9mBAvi7IMf6JxMx+9MGeariJc8rBAz02qPxrm
- URrFewmDBix7W2j1YUVi5wMEXo0tToQRC86h4MPTHUrPQVZ+SYQldMNmSIuYJ2ks2mM6
- Thdg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqSv28kUEWSQXTTTuWBYH1WMMZuVUWucYrvhcG+CHeNM/wTMqijPJsmn+QkXX0TVHwaEgwE2vM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxkkoeqcbfVxe06ZvaMciP+Mqa+/+mvjDnDG69aIY/ty6w+EF2i
- kyr2TmrmnlsSZT5xkchidMefIFm9QVzr3qeaazQroMpoe6sRsB1CrHuiMlgqBFxp9Tw=
-X-Gm-Gg: AfdE7ckKMdO/QpuYZq861PmYrDIgK/aEi3+Ikni39EWByXRt7vB4dLA2klm1xd5mIYf
- s3ULg+dmjFQKrS8vpAocnQy83htCtbUhcj/degux8wRH16us4sFstKVkHQu3tXhFrNvU9Hhauq5
- V3gCLNQCDz9C0YRh0LB4rNsutAB5Xzwqz6whgfDoVuN+cFwhSOBThv+9SLTHFLpHlQk9iOuLyo9
- pNJKmDwQsr+AfWYRr8+Vlk31QPw+6JbdPpXMqqWOb6xDHArJH8gdoPH5dcFB18ZzifKI7scYLqc
- 0WR5DVLA22n9LXrhcB7fsX3vjO8BRbKBt2hVZSAxQFOTvzowcln1xfXgGpwtpOtqC1VVQOcPMf+
- d8fhJ6Wfv3wmlAL6uudQqQF2yZ/vbduus6mhfYY8UEYufyoKi/K03LXwpJB+BBQKqvAEsXSbB0u
- 7DFJhU4fGkAH8xS/ABV4rLtmq0vq7wLg93QrrJvyizpM6vx0ASf60qL4qk3sipbMd3x5284A==
-X-Received: by 2002:a05:600c:6206:b0:493:d078:796 with SMTP id
- 5b1f17b1804b1-493e6a4a8a4mr60622345e9.17.1783594231347; 
- Thu, 09 Jul 2026 03:50:31 -0700 (PDT)
-Received: from macbook (host-79-16-115-126.retail.telecomitalia.it.
- [79.16.115.126]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493eb70a372sm52723605e9.7.2026.07.09.03.50.30
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 09 Jul 2026 03:50:30 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-To: trini@konsulko.com, sjg@chromium.org, quentin.schulz@cherry.de,
- u-boot@lists.denx.de, dlechner@baylibre.com, jstephan@baylibre.com,
- GSS_MTK_Uboot_upstream@mediatek.com
-Cc: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH v2] fit: prefer the default configuration on best-match ties
-Date: Thu,  9 Jul 2026 12:48:31 +0200
-Message-ID: <20260709104940.75514-1-ccaione@baylibre.com>
-X-Mailer: git-send-email 2.55.0
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KrPQUZ5whPenZEX0g8VM/7Qupjf6izhIdcn34C7AcNULjoZEqoaZY2M9RolxFBebu0QWHFbSBpdpRurvWmIrOTZQBTbekmjwGzOUjRkV42qrDtUxADPpPsZ/TPACWp62D0l6spipxEA+Txmozcv2tmO+VnDMwOzm65w81zCUFRK3vGMx0yloI/fafY4pZaL9NB2CiqcSOAH3rddUHgbMtynoPW3vGId1cMBPv9ZexV4X8uBFhqKc8748lsKIgvJCUv8Q1QWUK51IWGOPIwrsN/h56VleByfMpm7Y7TK5R/4H3YT4otuwRfyHSKti3TlsG/sTPjivsxpG3JZdVFCT1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=F93ouSUnqYW+IRmA1RdJSLnjmwnIKiIQLOOkt/VCAmk=;
+ b=Q0dBGXfTTuytd+X8AkzYYB1aPtf01dtThkWPaAUKm/9r0Y51us8EbqDx0va0dEmjPlXrIXVPy7X/tT0aAGgWlLlnup5XpL8fh8WFD1W7EdhB4caEpVUweciOS8RcPVe1z30lgQoxH/XMUxElJCRaM9mSCg0ACV4VvAzMlNYbrytAIypijLPB34EsL/D+Hdg9hw/jlGUXGMcoy5pWm4xSszhnr+hHuanZxKDw5LQlwBEtLG+tdpR02c812WMhf3KqtWx+gON7xl6ZnToOGAOUB/ErgMZ8Wnij1fyYO1+hBY/0nONDVg/rdNC+NfOeMd+9Zis2ovX+mgUU1ATeAN1RDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=F93ouSUnqYW+IRmA1RdJSLnjmwnIKiIQLOOkt/VCAmk=;
+ b=YmOMz2c/XIabUsyUlOjLg23oH/wegWZ7xpK9izpM+i6pmiqZsqu+yR8j3XIS9swNnnWeAzhBdl09V8OxfMXFhu3o5LvYyqIh1DJMy2xA7Zf86rme7xXWMrx1crlHw349I3lqp/AIH68YajD2i9Gik65e1OtxKUW+4RiPeJSwP4Ua2TBWPeZ2+8JgwqBQaYawmqFjYHA09SNByhuzLMWBgGeeIA0Xuz7BuW4q+mSPy1vxThm8MmrMpeFPkt5JuUBswHzlmeTrYF09kZ1IKWN7ypT4cbsfOf31IzhjviBV3FRDAeXDJv0IhfD4LkFK+gj5/IYH2ePurN7xnUvQmhbnXQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by BL1PR03MB6166.namprd03.prod.outlook.com (2603:10b6:208:31e::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Thu, 9 Jul
+ 2026 10:57:26 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.21.0181.009; Thu, 9 Jul 2026
+ 10:57:26 +0000
+Message-ID: <754b4e4b-ddfa-460f-9a89-b7875a2e1e23@altera.com>
+Date: Thu, 9 Jul 2026 18:57:17 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] arch: arm: dts: socfpga: Update L4_SYS Security
+ Control Register size
+To: Boon Khai Ng <boon.khai.ng@altera.com>,
+ U-boot Openlist <u-boot@lists.denx.de>
+Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tingting Meng <tingting.meng@altera.com>, Tom Rini <trini@konsulko.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Lok Chen Huei <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+References: <20260225032149.1342-1-boon.khai.ng@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260225032149.1342-1-boon.khai.ng@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SG2P153CA0024.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::11)
+ To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|BL1PR03MB6166:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1371c06b-95c5-46dc-88b5-08dedda8dc89
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|1800799024|366016|18002099003|22082099003|56012099006|11063799006|55112099003;
+X-Microsoft-Antispam-Message-Info: 0X8L4WWYgz/vWxMxA3UgCQB4GUgi1oZ6bH4c3EYYjVLBnmZMuncGGAJgpzEyjDHMI6KDpzAo2HDinkvKH8ksTkwM1YGjxK9RAu/TM3PlNMayDpU5xb6xrYBfONBuTV3/4GCUn3BmBRyYqy/FjX2RKsuH0lHzV1+sGVhn9r6k+vSEnmQFTaH2dhE81PvCmfWSjk6aEhnfKmrEejjQrs6JoTP5VX58HBrOekcYAekxir7DaQuH57gwz5Y4uX9yEIpiuH0TZ9H4XgIy/EZVcYZczUhSjLTVw06CVg0JQjSgvLB+twlsaIv9FeAqdejEgZhmF6z2ULlyNuN+nlP88mXho3UXhsrDnNqhPtk+rpabuD7gX33z7E6M3kQKMY38t2ziBIEECy6hnbGAc/8S0Vul1gkiwPvxDKCvUFtrcFBJjXbvb2N4zknZ79Nh71VPkfyA238Bqk9K8ATEuqz3I6TkuDdI55rVZT2Apme7VjDLrmfQzkTJLzgb7P5g74oi2s/7dOpGtrRw+/agPL18b2PP1z1ID2kJkAmFj/F2tBMK1YtJYBnl4QLeM969gIPOjrMUMpV2m5X5yNylHfCa7rSWozNQ+oF0am2CsQgE99mTD61VINCBKz6aE2C9VkLeg8HEodWDeuhav6fkxm206/8zpM/u4qxdeps3fpWA/MXRdtw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(22082099003)(56012099006)(11063799006)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SW9kcXRPSzRlUFlhR2dUMEg0aVdoQWFTa3ZXTVNEZURJZnVuaTMwSHFubW9O?=
+ =?utf-8?B?ZGRveElDUXNacW5uYkVNZFo1QlpaZ2RwM0NybDRSWXllVlUyNDBVc3pmdy9H?=
+ =?utf-8?B?c2tBcHRqZ1lLekltdkkzY1VLOTNkczB0dEwzcDNUQTlrMTRwQnFnWUVJOGVO?=
+ =?utf-8?B?N2VtSUhwdm0yUjlNbVNuMktQVUF0MkhKUHZGYU4zMUdSVXJBazlBK0poN2pO?=
+ =?utf-8?B?WmFqcUV4b1JGdDlNaVJvaDloK1VwR3I4SGRPdjZsdUJEdUJtZjA0dlFNeFJv?=
+ =?utf-8?B?ZDZURHBSdXUwVm5JYlpVNDUzdFpjRC9WR3VuTHYzQnlYT3ZKUGhCOHhwL2px?=
+ =?utf-8?B?eVJPcHN4UGtQY0hrWXQ5NVNLTWxYaGordDhFK0g1cWFucnZJcGdHOVArOTho?=
+ =?utf-8?B?VVhQV2JneEg2Zld1QlFmaWZ1MXNUZi9NNERyeTRJVmlPTlRBQVN2T0tVd2xK?=
+ =?utf-8?B?YVpiNURIWWppQ25kRSt0RmNOV0VPMDBrMG5yUTB6eFJkU3p0WkZ2cVNkR2w0?=
+ =?utf-8?B?NFBkb0hOUVluOEw5ZW5iNlJtMHpGdnhJYWtSQk94b1VWUE9odkVld3UzQVpS?=
+ =?utf-8?B?SWZVWTBlbmh6ZTdsSFl2ZEkvbXEwWkpGY3RJSkJ0VjRlN04vUnVFNDg0SEVV?=
+ =?utf-8?B?RGFoM1NBQlg3NXV1RXJ5NEJ5WFFybnh1bzV1WEFORzZ1ZEpMNEErSXpCQXo2?=
+ =?utf-8?B?UHBGK1VDM2lnYkRJNncrcnNHN2NvSWNZTW85ZTl1aUZ3ZzBlU0RpWWgwaVh1?=
+ =?utf-8?B?by9lcWRra0l2V0ppQmkzcGFBdVI0aGdKMEhpR2k1cTNNVlNJeER3OXU2VFdl?=
+ =?utf-8?B?TU05cHhhMS8yNEcvK1o0c2o5NFpnSGdtVEViZ2NDK3VkaTJUS3NXZkJLamQ3?=
+ =?utf-8?B?MzlISVF1MFQ5SC9mdEp4cmVKZlVFeHlVUDZTVW0wV1h2bFc0MUhuOHFRSW1C?=
+ =?utf-8?B?MDdCem5TbHhscTFUUVZhRXh2Y05jdGtsbTFpRFgyS1QxR09uREhCQWFCMlBH?=
+ =?utf-8?B?ZVc4RnFJTE1yV01XcVVtYi9ySzZCM1d0ZHVhL3ZZT2tTaStGNW42Y0tzWFM4?=
+ =?utf-8?B?QWU4UVl0d25rc2UwRzFRTlZ6L1EzaVlTaUpVZDR6LzZ5ODRGVk9mbUdvS2FN?=
+ =?utf-8?B?cmxIVnBHNEg5NDhoc1R2T0QweXRza0dSYWpwbUViVUMxdm5LS2l4UU1sckxa?=
+ =?utf-8?B?cWdJOW5mNmtYRnhBdERSeThVQmdERWZ3dGFzcmFjTXM4QWExK3pBTXZNRWkw?=
+ =?utf-8?B?cnhLSmQzWitJLy8yV0VkL2JkWG1QSHVaNUNnNWFFMkovbVJLZFhTMHBYekg1?=
+ =?utf-8?B?cXIvL3hvcmZjdVhmei96eENPQldJMjJNcE5jWkJ4NUwyR1RHa1pFZW02K0NJ?=
+ =?utf-8?B?dU5oSjhMY09PbGpPdEh0OHQwVlA1V3R4bHBtdkNDdVNKOWU5bGdvTkZDZWcv?=
+ =?utf-8?B?SHI1QkszWDM1ZzZMbFYwcHdydldGdWZMbzZMenhCeWpvTjZBcm95TmNsanZT?=
+ =?utf-8?B?YzFaUVRYcjdQM2pZanhqeENjSUszWTJxZlVzVmQ0TjRsbjVtUTJ1ZjRjM1lk?=
+ =?utf-8?B?ejE3azFYTllZQlNSUWhHQ2tLUDhYQmxvUXFuUU01MUpoS1M4a0ZBVFlqRTNm?=
+ =?utf-8?B?a1A1bVBuN25UVUNRUzhkdG42a2FobDRSM3E2NWFvR0tqV1NlTkY5R0dPSUxj?=
+ =?utf-8?B?d2ZSWkdOT1FUelJ5S3RCY05pbmRxNDlVMVFnbURCM3NONFRxZEg2YU5odi9L?=
+ =?utf-8?B?THdveXowUVVOdWNkZXIrOTlpN01sb1hnS1pjcmd1bWpxaUpENGVtM1VGdHRn?=
+ =?utf-8?B?UVNlU3RackNaSHljM1QrdUVTdytYSnZzVEdQWVp4cG81eTV5SE5sdUtzbW1T?=
+ =?utf-8?B?UmhiNVg1aVlyeGlNZTc0eEF6V0dybzBrVlZoaElMV21yS1BXbXM4Tjc0Slpm?=
+ =?utf-8?B?akFNeE1FaWlHNjl4Nmlja0JlV3o4TjMvMjNYZWlZK3Z2czRvc203NG11dWRl?=
+ =?utf-8?B?RGRKY1BlMldoYmJ4N0hNMk9KSGNjL01DSE5DRk1PR3IwQjRmcXZSUzRPbnRC?=
+ =?utf-8?B?ZngxNmxLRldBdHlSWThKRnd3NEg3QS9CdmpVWTZxZ1NNSlhJZDYzM0VUQU90?=
+ =?utf-8?B?ckpyTU5FdVZianZ2R1Q1azVMbW5EYlB6cVJUMitDYnJ1dS8zNzYydkFqWkkw?=
+ =?utf-8?B?cVdwek5mSmhMb0hGZnZOU1dValdhTmJPN2RDRTNlWWkyWndaeUcwR0FBblVJ?=
+ =?utf-8?B?SEQvRjJiNm9Bbi94bUpHM3pxL3FoS25xQk9acmFoNko0dXpKdU8yNkxwZWlV?=
+ =?utf-8?B?WDdPWnBKZmJ2VkFLWlRlZEh3MDRFUGZuZWpKTlJQU0w5Q3ROTXBaZUlHbFVh?=
+ =?utf-8?Q?x9FeeBQmwfAVPnD0=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1371c06b-95c5-46dc-88b5-08dedda8dc89
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 10:57:26.1424 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sO4/IeqOpt7Qv5oa6LbTK5CRP180xcD0WNChn359+5nfRZHQ5GBtepGyaPkPmN54ZtfnMuajUkJRgv4NB5nQg1jQHhx7zlSoTOgOofOkGuA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR03MB6166
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,204 +157,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
-configuration matching the most specific U-Boot compatible string; on
-equal matches the first listed configuration wins and the configurations
-node 'default' property is never consulted.
+Hi Boon Khai,
 
-A FIT whose configurations all share the same base devicetree compatible
-(e.g. one manifest carrying a base tree plus overlay combinations for a
-single board) therefore always boots the first configuration, silently
-ignoring the default chosen by the manifest author.
+On 25/2/2026 11:21 am, Boon Khai Ng wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> noc_fw_tcu_tcu_scr register has a base address of 0xFFD21400 and an end
+> address of 0xFFD214FF for Agilex7/7M and Stratix10, which makes the size of
+> the register a total of 256 bytes.
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+> ---
+>   arch/arm/dts/socfpga_soc64_u-boot.dtsi | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/dts/socfpga_soc64_u-boot.dtsi b/arch/arm/dts/socfpga_soc64_u-boot.dtsi
+> index ce5b37ef547..a6e0b615717 100644
+> --- a/arch/arm/dts/socfpga_soc64_u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_soc64_u-boot.dtsi
+> @@ -132,7 +132,7 @@
+>   
+>   			/* TCU */
+>   			noc_fw_tcu_tcu_scr@ffd21400 {
+> -				reg = <0xffd21400 0x00000004>;
+> +				reg = <0xffd21400 0x00000100>;
+>   				intel,offset-settings =
+>   					<0x00000000 0x01010001 0x01010001>;
+>   				bootph-all;
 
-Break score ties in favour of the default configuration. A strictly
-better compatible match still wins over it, and FITs without a default
-keep the current first-listed behaviour.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
- boot/Kconfig                       |  2 +
- boot/image-fit.c                   | 20 ++++++++-
- doc/usage/fit/overlay-fdt-boot.rst |  6 +++
- include/image.h                    |  4 ++
- test/boot/image.c                  | 68 ++++++++++++++++++++++++++++++
- 5 files changed, 98 insertions(+), 2 deletions(-)
+The patch updates noc_fw_tcu_tcu_scr@ffd21400 under 
+socfpga_smmu_secure_config (line 134) but leaves the duplicate under 
+socfpga_l3interconnect_firewall (line 111) at reg = <0xffd21400 0x00000004>.
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8e468c56176..c67dc0ba493 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -191,6 +191,8 @@ config FIT_BEST_MATCH
- 	  U-Boot itself. A match is considered "best" if it matches the
- 	  most specific compatibility entry of U-Boot's fdt's root node.
- 	  The order of entries in the configuration's fdt is ignored.
-+	  If several configurations match equally well, the one named by
-+	  the configurations node 'default' property is preferred.
- 
- config FIT_IMAGE_POST_PROCESS
- 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 044a40e1910..ef90c5abd18 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1799,6 +1799,8 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 	int fdt_compat_len;
- 	int best_match_offset = 0;
- 	int best_match_pos = 0;
-+	const char *default_name;
-+	int default_noffset = -1;
- 
- 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
- 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
-@@ -1813,6 +1815,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 		return -ENXIO;
- 	}
- 
-+	/* the default configuration breaks ties between equal matches */
-+	default_name = fdt_getprop(fit, confs_noffset, FIT_DEFAULT_PROP, NULL);
-+	if (default_name) {
-+		default_noffset = fdt_subnode_offset(fit, confs_noffset,
-+						     default_name);
-+		if (default_noffset < 0)
-+			default_noffset = -1;
-+	}
-+
- 	/*
- 	 * Loop over the configurations in the FIT image.
- 	 */
-@@ -1863,10 +1874,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 		cur_fdt_compat = fdt_compat;
- 		/*
- 		 * Look for a match for each U-Boot compatibility string in
--		 * turn in the compat string property.
-+		 * turn in the compat string property. A configuration only
-+		 * replaces the current best match on a strictly better
-+		 * position, or on an equal position if it is the default
-+		 * configuration.
- 		 */
- 		for (i = 0; len > 0 &&
--		     (!best_match_offset || best_match_pos > i); i++) {
-+		     (!best_match_offset || best_match_pos > i ||
-+		      (best_match_pos == i && noffset == default_noffset));
-+		     i++) {
- 			int cur_len = strlen(cur_fdt_compat) + 1;
- 
- 			if (!fdt_node_check_compatible(fdt, compat_noffset,
-diff --git a/doc/usage/fit/overlay-fdt-boot.rst b/doc/usage/fit/overlay-fdt-boot.rst
-index 5df304047c6..e210619a26d 100644
---- a/doc/usage/fit/overlay-fdt-boot.rst
-+++ b/doc/usage/fit/overlay-fdt-boot.rst
-@@ -111,6 +111,12 @@ Where config is one of::
- 
- This selects the DTB to use when booting.
- 
-+If no configuration is given, U-Boot picks one automatically: with
-+``CONFIG_FIT_BEST_MATCH`` it selects the configuration whose fdt is the most
-+compatible with U-Boot's own control devicetree, and falls back to the
-+``default`` configuration otherwise. When several configurations match
-+equally well, the ``default`` one is preferred.
-+
- .. _fit_configuration_using_overlays:
- 
- Configuration using overlays
-diff --git a/include/image.h b/include/image.h
-index 9c8a746d576..01a814ed76e 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1526,6 +1526,10 @@ int fit_check_format(const void *fit, ulong size);
-  * compatible list, "foo,bar", matches a compatible string in the root of fdt1.
-  * "bim,bam" in fdt2 matches the second string which isn't as good as fdt1.
-  *
-+ * If several configurations match at the same position, the one named by the
-+ * 'default' property of the configurations node is preferred, then the first
-+ * one listed.
-+ *
-  * As an optimization, the compatible property from the FDT's root node can be
-  * copied into the configuration node in the FIT image. This is required to
-  * match configurations with compressed FDTs.
-diff --git a/test/boot/image.c b/test/boot/image.c
-index 4df7b17ce88..2c6d9dcbc22 100644
---- a/test/boot/image.c
-+++ b/test/boot/image.c
-@@ -8,8 +8,76 @@
- 
- #include <image.h>
- #include <test/ut.h>
-+#include <linux/libfdt.h>
- #include "bootstd_common.h"
- 
-+/* Test that the default configuration breaks best-match ties */
-+static int test_fit_conf_find_compat(struct unit_test_state *uts)
-+{
-+	char fdt[256], fit[1024];
-+	int confs, images, node;
-+	int ret;
-+
-+	/* control devicetree with a two-entry compatible list */
-+	ut_assertok(fdt_create_empty_tree(fdt, sizeof(fdt)));
-+	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
-+					  "test,board-a"));
-+	ut_assertok(fdt_appendprop_string(fdt, 0, "compatible",
-+					  "test,fallback"));
-+
-+	/* FIT with two configurations matching the same compatible */
-+	ut_assertok(fdt_create_empty_tree(fit, sizeof(fit)));
-+	images = fdt_add_subnode(fit, 0, "images");
-+	ut_assert(images >= 0);
-+	confs = fdt_add_subnode(fit, 0, "configurations");
-+	ut_assert(confs >= 0);
-+	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
-+	/*
-+	 * fdt_add_subnode() inserts before existing subnodes: create conf-2
-+	 * first so that conf-1 ends up listed first, like an .its compiled
-+	 * with the configurations in that order
-+	 */
-+	node = fdt_add_subnode(fit, confs, "conf-2");
-+	ut_assert(node >= 0);
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,board-a"));
-+	node = fdt_add_subnode(fit, confs, "conf-1");
-+	ut_assert(node >= 0);
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,board-a"));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	node = fdt_first_subnode(fit, confs);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, node, NULL));
-+
-+	/* on a tie, the default configuration wins */
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-2", fdt_get_name(fit, ret, NULL));
-+
-+	/* without a default, the first listed configuration wins */
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertok(fdt_delprop(fit, confs, FIT_DEFAULT_PROP));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertnull((void *)fdt_getprop(fit, confs, FIT_DEFAULT_PROP, NULL));
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
-+
-+	/* a strictly better match still beats the default */
-+	confs = fdt_path_offset(fit, "/configurations");
-+	ut_assertok(fdt_setprop_string(fit, confs, FIT_DEFAULT_PROP, "conf-2"));
-+	confs = fdt_path_offset(fit, "/configurations");
-+	node = fdt_subnode_offset(fit, confs, "conf-2");
-+	ut_assertok(fdt_setprop_string(fit, node, "compatible",
-+				       "test,fallback"));
-+	ret = fit_conf_find_compat(fit, fdt);
-+	ut_assert(ret > 0);
-+	ut_asserteq_str("conf-1", fdt_get_name(fit, ret, NULL));
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(test_fit_conf_find_compat, 0);
-+
- /* Test of image phase */
- static int test_image_phase(struct unit_test_state *uts)
- {
--- 
-2.55.0
+Both nodes program the same physical register at offset 0 today, so 
+runtime is unchanged. DT is inconsistent; a future offset-settings entry 
+in the l3 block would hit the driver's blk_sz overflow check.
+
+Fix: In patch 1/2, also set line 112 to <0xffd21400 0x00000100>
+
+Best regards,
+Tien Fong
 
