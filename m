@@ -4,120 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD94BC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 08:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E73C2C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 09:11:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C80284A51;
-	Thu,  9 Jul 2026 10:36:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F8FF84A51;
+	Thu,  9 Jul 2026 11:11:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="YI5NqI2Z";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="I/o02XI0";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="I/o02XI0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1764984A78; Thu,  9 Jul 2026 10:36:23 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BCD6C84AB8; Thu,  9 Jul 2026 11:11:20 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C822849BA
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 10:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CC4849BA
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 11:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7eb4d8a21a8so981006a34.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 01:36:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783586179; cv=none;
- d=google.com; s=arc-20260327;
- b=DMjZGyNT0hLQbuJvqv8tma3dOpGDj/HTALZA52auMfIXssj7z3PHq/nXG4mWRvvk6g
- t7xcTvOWdG7x5VIzhSGvOFjy7N0BwgRORXO5ctzuq7y/JdyUJMtiPOREdyv4rz6xfkjm
- 9cjEx3DfdmVXMRB3/nXAB6Wahug+fFqL2n6RUv8MLvhxLBh0ZAIcOqYyEuh0j9s1BqLH
- yNt5hKJPENXVPdD+0/QqChE7M15QzZ7i4H004K4YdYcDEWXb9HhRBNJKW12EI7m/QGBS
- PqhMglXga/KhxXg+pp0/s0TPf0elq8DBqLv/C1uXcgX7LWjrgycWyGNSXuLRatKIdYJU
- CrUA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=OIM0JIXouykj9FTkzuEJ1byQZbtOVu822UYTD+/A2vs=;
- fh=oTMOb4w+vB7TeWRv0wOLHRCBshw4WXF0p8wPAgOsXMI=;
- b=XHhBv0jnxMsWEo7vKR58SA7iT+bFS58kK9HKnN3MDXU6w5dd72gi5GXEqTqLHyjhhR
- VxneUO+8kOZwIEnH72Aqz6sYCoTXla0y2rRX6VpQy5SVOHrayAgJXn7MWxahyV9hQfRI
- KQh71Eipq3NHEPv6cKLiLHmYJrlXX3SZtMsw6yX4SmH3mUaO+kLYeRhrkjsqgMYiSFBn
- OoVjp2qnL3qdofHCLkZN6+Q370NUFE2lDd+wsEjftNq7TlounD7TTJiB+Pmi0WSsBL+O
- AB00tGwyGO5MHyLs6ozAtbtEGKN4X+H2JO6gN+pdcRfW9Ze+jlDO3qU8SfiSqnR3WJDr
- Uwxg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783586179; x=1784190979; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=OIM0JIXouykj9FTkzuEJ1byQZbtOVu822UYTD+/A2vs=;
- b=YI5NqI2Zkt9qJjYWYHqjawvbJVFGTeEGMR277KDQrjyq4o02X5k/n3To95b/o581EF
- gugseA8y+aBt1P5538NTE1v6C3xEuST23gTPXu0lcG1vkaVi0dMiGQSkFaS8IFAbLPQU
- jQ1bQas/6fy4iy5cWYJxI/qqkostTCs/D8dM2uj0HHK29ZH+voHtWumcAmFrxPQo1Ud6
- d94MdhEj3VHO/kJKnCxcCXDnr7ohb68L69BZIMRp5uP1H0Vr7/rEa9+sxeX+VG8Pd+K9
- TTsvL2cuuDNsvSK99lCYsj5PkYoYA/eBCYN6tNmWh5Nyse9N7OykqAoeQVMpx2aUOONt
- dJTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783586179; x=1784190979;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=OIM0JIXouykj9FTkzuEJ1byQZbtOVu822UYTD+/A2vs=;
- b=e6RsYt3V+Vd2dBE86LI6jFsmA96twg9iGufgQpxJtrkJO8nNx9+E6e4fFW10xMJYS7
- DRCOCWi4ll3KxhDIJ8KFf+4l618Fq2S4mgHP6cckPhg1f3ZWVELkr866Kvs09dyAOP8m
- 20pSpoQiZtlGzyJ1aQfOHVbbpQiQj/96zXSjy9cwz0IxWfxidrkadSdylqMTenT/t56R
- RyskcECP/Di20TbkVKNIoY9A0JbM0FPXYs/rHs3jS/H2jY95D+dReldWs6ZuDfCmlm9x
- Y1WEaqrDsRfJ2kpPtWa2pd6J5JLFuOQ9gGcnjtjecXvmNaY5yz0VRYJYP40VFXZSKdlE
- 8qQg==
-X-Gm-Message-State: AOJu0YzIeuiabYydBh6gEfLCYTiuCX9cS2XwAUyprgP2H7mFW1LQGk9x
- GJJwDz4YGCG2KmTEPNFlti2upZL5sApBfqRI/iZ/oA9DamtHLt4g8tlCTJGyf7tqHrP8E3AgNY2
- nEym5g33ZcAPMpeHSJYKhrVOMCSVeCwk8rs9tkliBhw==
-X-Gm-Gg: AfdE7cn54lIBMu7oVnVcIFFUQMz+4sZ4H0gBCK0P5qHH4Kio3QDZ3IYSjIJTpEi3Cl3
- IZfmBD2TyYX/qxM8rsHI+5Wj7vylhkid3P9mY3aQ0l3kpAX+1yzJj0BkTwIQxOmX8XSZFyJ5s26
- Zg/P7dRa/r0JH7V4Kp8g/39oOvo/MXzb4+z61Ge6rqda3HK5suzFt/ah90LxDd4p/BVnVpIOAJD
- z/D0Q+StOWpGJhPsX+MyKc9bxlxFWL1cCWm+c7D6rO3gaidgt/3QPV+H15+qQKhUCfPOQKl
-X-Received: by 2002:a05:6830:4129:b0:7e9:e4b8:8cc2 with SMTP id
- 46e09a7af769-7ebcffc5eb5mr5126730a34.27.1783586178888; Thu, 09 Jul 2026
- 01:36:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
- <20260706-ccaione-upstream-ebbr-v1-1-e742cdd6abe5@baylibre.com>
- <20260708171806.GZ749385@bill-the-cat>
-In-Reply-To: <20260708171806.GZ749385@bill-the-cat>
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Thu, 9 Jul 2026 10:36:06 +0200
-X-Gm-Features: AUfX_mzouRv1GlCgdgoUKq-RDe_8v2Ui_OsC38jWx6nJztmqH4953gJwpkYY_AA
-Message-ID: <CADh8LseqgrheGSjHhwXsH=prD1=Tnpnt0ZMx=-9jKV88Gsbumg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] bootstd: add a firmware-owned devicetree source
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, 
- Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Raymond Mao <raymond.mao@riscstar.com>, 
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=ZYAIQJSDla0GFEWrcdy3ABYPn7gF97BJR9tcmQpmgv3DVS/s1D+rj2rjICdqf78diELwujBXmvEFGtdlPfFe6psfBJCYz63zgyjn4CufmL/AkqNFI6X0tHTU12qEtelKIGCag5/aYLlNHwBYFkmZYZpDFxUXVtLsDR1q93okh7x9C2jlTjUdicJtfdyX+L0Nln9JplpEp9XWpCGkdH7auUNn5FwrNPWLMvfJtlxJCC9o+piDv7jQ3Kax5j8pdOawiXQkAugNNQSYVqqlcPHeUx+sp6tPPP/5yy55JRvawcc8rI1VzEuTBe78VFzFTteDucRpheXrHGFLJkYXGqZQpw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HQx9ML6M3vMwwDotQsf/CSSP5X1gBxYyto/vLqzAaSM=;
+ b=GaW01PCiE6ibEmimqAJASjhogYjVXK0Uv1Pq5I6FoAb6Uds/dkKkm/JEHRZjdOaflQAMe3W7iBi7Y52IFEA02bxtUKgJAN4qcCJqJ4Pznr29RjDKv9qjII3YkfP6rQVxnrlS5ZOGEywkxD0p3qAri8TG0MNjQkEd04H1FwRTI6BjYdvp284Tu2Qb1j76lZEtyp6aE1s2P6Z8hWJap5UxM216aMTLgPnrErLY6J65/lPkwTwpFRvLfne/NoETHEL/RyJH6ehMHN7bSAjAhySH48QxqTVHGNlHDfJiPL2pOr8hXPrBACi6z4gEzzyOJ43CtesPpnbwZHXewsHbpVEZMw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HQx9ML6M3vMwwDotQsf/CSSP5X1gBxYyto/vLqzAaSM=;
+ b=I/o02XI0TwmkdBRqWIKSCM6Hgp82wRc9sXLdxtgW6VrYiz8PkOqkisF/sU1pPK5UVC2j2WJS3RtAxnwDg/wscu4USz2MUvZG06w/7XLc1lM5GimMwOEJR41UwE9IUI52c/s+i4o8EoAHwDlld/nj+euE/rVZeNybA2WFd8t3llA=
+Received: from DUZPR01CA0141.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4bd::28) by AS4PR08MB7829.eurprd08.prod.outlook.com
+ (2603:10a6:20b:519::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
+ 2026 09:11:09 +0000
+Received: from DU2PEPF00028D10.eurprd03.prod.outlook.com
+ (2603:10a6:10:4bd:cafe::a0) by DUZPR01CA0141.outlook.office365.com
+ (2603:10a6:10:4bd::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.11 via Frontend Transport; Thu, 9
+ Jul 2026 09:11:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU2PEPF00028D10.mail.protection.outlook.com (10.167.242.24) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
+ via Frontend Transport; Thu, 9 Jul 2026 09:11:09 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xDE0iy3dpJyFsUaII1zNZnkauJMFTzjWc5Fb76Snx0+RpT9LEywm+rKkCKqClia2lhUQBSlIAsC2mnZ6MwQGJzON+RAa1Iu1wYR0WZtYj9DMY0670pOBjnjcVj37c/AjPPgKZmS1ubsz0zY+knqysUaOY1c89QcR2hJp0/zTlQBut55JAcfMRnItgw3RfOn3A515jmHBvr17Ym3+PNFyYLVgaacTCziwVOAPpIXjy3yEdZ7U9fEGd797eHlHJL+I9pjCo/rA0i1Z/PmWSDDel8u03vPFfUkLNOAt9qJ8577L5DFx+QoW1ROz+M52ckQRuoesvMDq2oX84paLNsxjjg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HQx9ML6M3vMwwDotQsf/CSSP5X1gBxYyto/vLqzAaSM=;
+ b=mo7somE52ykFlkQei5/ocg/eX+r3adkyQ1Rw0scn0ZjH4Z+6UhgoZMLZXAFqqL0rpSbjwAz2qMi3AJWZTjhaYDL+rmbYdsHox+jf+ypTwgsn/xieUEjZSgQ8Uu/atlpDx0P7OUCJemD/g5Ogml/7tBz6/DTyu8VrNskgF+Xat8avPVuhfGrrI05+Pagt5/1ynI+xSsC3GZ3lIegvK/+bwqhXDa/iVUKzkNqdQ5409dgkJlwVAY722ddyB2SIKyR2ZPZpbNunyvEQtt/iQeWLkDIh5+hoDUIWsrmicOgkJhNskSotZLo3s+cEelvisc/EyzoNGeCCUAsOIN3bSXseig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HQx9ML6M3vMwwDotQsf/CSSP5X1gBxYyto/vLqzAaSM=;
+ b=I/o02XI0TwmkdBRqWIKSCM6Hgp82wRc9sXLdxtgW6VrYiz8PkOqkisF/sU1pPK5UVC2j2WJS3RtAxnwDg/wscu4USz2MUvZG06w/7XLc1lM5GimMwOEJR41UwE9IUI52c/s+i4o8EoAHwDlld/nj+euE/rVZeNybA2WFd8t3llA=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by VE1PR08MB5791.eurprd08.prod.outlook.com
+ (2603:10a6:800:1b1::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
+ 2026 09:10:04 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0181.009; Thu, 9 Jul 2026
+ 09:10:04 +0000
+Message-ID: <56319b9d-0ede-42d1-991a-0ffbc8cbac3c@arm.com>
+Date: Thu, 9 Jul 2026 11:10:02 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] net: lwip: add tftpsrv command
+To: James Hilliard <james.hilliard1@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Johan Jonker <jbx6244@gmail.com>, Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>, 
- Philip Molloy <philip.molloy@analog.com>, Anshul Dalal <anshuld@ti.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <floss@jetm.me>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heiko Schocher <hs@nabladev.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Martin Schwan <m.schwan@phytec.de>, Michal Simek <michal.simek@amd.com>, 
- Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Pranav Tilak <pranav.vinaytilak@amd.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Pranav Sanwal <pranav.sanwal@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, nd@arm.com
+References: <20260708193123.2557776-1-james.hilliard1@gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260708193123.2557776-1-james.hilliard1@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0259.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:37c::9) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|VE1PR08MB5791:EE_|DU2PEPF00028D10:EE_|AS4PR08MB7829:EE_
+X-MS-Office365-Filtering-Correlation-Id: da6f2295-c008-42dd-a944-08dedd9a0414
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|1800799024|23010399003|7416014|376014|11063799006|56012099006|3023799007|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info-Original: Dps2SnTDXrt7i6Iw2UBqnRHqLAh7ozvGUUHSIa921VkE8dVEaJFE/wganG3E5l78lCbSQGR4d7QJ2V6i3ub0FBWAqLZCQpierIHgvV0f/g1aiGMx+GB+OxgyB3XTL5KatOFhYV3Ll87bVt+qqYSzkwUfG9iw6D/hR3a3qoVr+RMjEoXdVIDv/IAKOSCHfaVjLW8LaK1CdhHR9eZqq95eXKvreqOIOSsZVZZdP4+J4kYPhYzmx0cwHRS9P/IwddhRAjR9kFYe5B7aW4fVrSaxx8nuzV8EL374bzPX1FJU1ptQIEfV9ySCF90nt2rbp8zeJRCJRpU44s8g2G+py3zWeYLFZ0zVU66UrFJZHEnleNSQza1dos2CxMYh0Gty+xZvoGP15Aq1PyHWkv4T5HJyUz8EVoXnIAS/4PALXsRvtGx0aWW31lOQOEdHnyB7cJqsGEMekZi5ahXeIoYWgriJrm2f3MoeaDRmXiWEjPDTYizOAh+PkonytGxLz1psicu+a01uHAq3bXAzmz7GpG1v/GWllIYqPez7FyhRYJ8hz70o+l/qQ21tlS8KqGOpU5czopsvvOMeLLf/wGMe0hbtLmJiJ4JCeH6ArA0pagniHTM94aGZLqAjDCMf5fT1vT/yyE7vEDdkgCFjSPJzlJeR6rI4umEtKaQidofA7elkzak=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(23010399003)(7416014)(376014)(11063799006)(56012099006)(3023799007)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: YOcML5eNCQ/jxq6tZBRsZ3rqABiKNFBf9bFiUJpMYwXQAZmgLA2UV02T6uXeLRq9wvkxJnrDSvqALkJKurOZ02On9MFX1ji5TPV9Eh1w2Nue8IywSrcioTLH4vrnJmxJks3O8HroHZ67y60j4y8K8lwB9sX0lkGjzvkWFNDWDII9tCqG8I0cm7xE8k7KPDxeXhJcQ8xRf6QUO6nkrQzU99VcTXLnxDfrrhI3LUmv7+xROEQjDobDixWxAguOgRHO20R5pz6yV52vq4ODV5xlTOCAIwScqXUEHesgFgGVrPaMCTyoVTCLEX84m0Oqp8BM/FfB8Kk45hz12J6OkdSSjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5791
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU2PEPF00028D10.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 6c375846-20f0-46d4-db60-08dedd99dd3f
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|7416014|376014|35042699022|14060799003|36860700016|82310400026|1800799024|22082099003|3023799007|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: VpxXAgSPMbXJ/r7rkB9s3hNZXwENtR8wiAQT6kPPArGN9G51FyUThzABdINtiCbicK0H/y2XQOFSD/IkLbdVWvTf9Hf9sy8r6Nzh9YHEz1yxgnqFawjr1FfEFcuUHyX4gDhinwkSB6BdzKGg/quvmbYuz/K/kVbmbOiqRSW3iyABHep3SQz1MtICgk09BLm1cDPa6BDc2aO4DjrI3oOdmZGFVVLy74jQIuH6k3q3jV5FVgLxcPYZaqXrc1+DOFmFd2W2Mbwf/EBT0thaI8N66g56sFyRWssVqQKVeeoprDHbWwh3wzKSNLyYhhOKk+4rp2fNXv+8lY4nA8VGTMPKfwYP+bZJlrX3KXELeDgoTDSS3lIWHXaY+3vS57IQHLHldVbrVHKD6RaS5pONjIkfnfTrYezBfVJdNF9+dHhUx+KF9mOqf3uNkRIIfBCF9OtvqiDpIxFjfdHF7lDkXNaIm9Jc0rnJfr6h25UJJYqQ4aNxloLBgF1ahFkH6lJNjgcDUnz4vXCKBq+r8ERHV4Wgq7LKlYxhXF6U3EsSNc4zzscRg8llHG2rLBJgVjPVTjQIt81R9TrYR08VAyZlOfytoSrIMjKo1i72IVg9e+yzHchwqHHLy82oAX6H+aOoazMGpuWrpfes5prLHr+Cq8wO329iMc/8xwspiVUqIu3gTGkCM4NeB16uuHY5XE0Jds66L8qcaqbW2YM1c3pX1Pxk4Q==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(23010399003)(7416014)(376014)(35042699022)(14060799003)(36860700016)(82310400026)(1800799024)(22082099003)(3023799007)(18002099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Ohi8sCNydmYJ8knoOkt2sRj2L+4bZ2egNELOaQAr1kpZxrLK4hAdgu0ndmhRzjBxLtvPft9Q9F6sepUR9z25eT3pG9QLTCFLjPXMSaho9IZsOtpCsN+UiU6NcxbZNGvR1+BFxzxLlAnKo19mArOCK8sL4gMa2yG56nLXcL6u2/0lAtq0Mfe6wGekts3QdoAn+wPUlTgm7DfwdnIwNxjSSO1FJjO5I0ZOgWGcenNzKRI1OoLdIBvgjKMwmYVcdtoQOKiCSootq2Vj+dYekWZEYb8FOI8fb5xAa+EAy+yXSwkby+Gs8R6LuegWXCXwmVqm69P8jjJf+fH4qEt1Oi+RLBzbJyT8wB/f9GO2ncnHO/ORerHoBLKPTk76wJsb30i3rwTI0KVL8ZUCcLKF0ykEaq7sZX+Kz/9PD3xfvvwbUVDX75frQVMDWXs10+FM+FzK
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 09:11:09.5219 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: da6f2295-c008-42dd-a944-08dedd9a0414
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D10.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7829
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,99 +176,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 8, 2026 at 7:18=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+On 08/07/2026 21:31, James Hilliard wrote:
+> The legacy network stack supports tftpsrv, which listens for an
+> incoming TFTP write request and receives the first file into memory.
+> Despite the old command help wording, the command returns after
+> receiving the file and does not boot it automatically.
+> 
+> The lwIP stack already builds the lwIP TFTP application, but only wires
+> it up for client-side tftpboot. Add a lwIP tftpsrv command and
+> implement the server path with tftp_init_server(). Reuse the existing
+> lwIP TFTP write callback and memory copy path so LMB checks, progress
+> output, filesize/fileaddr updates and EFI bootdev handling stay
+> consistent with tftpboot.
+> 
+> Track receive timeout and write-failure state around the lwIP callbacks
+> so a stalled or rejected receive is not reported as a successful close.
+> 
+> Move CMD_TFTPSRV out of the legacy-only Kconfig block so it can be
+> enabled with either network stack. Update the command help text and add
+> usage documentation for the receive-only behavior.
+> 
+> Add pytest coverage for tftpsrv using a generated host file and curl's
+> TFTP upload support. Enable the command in qemu_arm64_lwip_defconfig so
+> the test can be run with the existing lwIP QEMU build when the boardenv
+> provides env__net_tftpsrv_file.
+> 
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> ---
+> Changes v3 -> v4:
+>   - Match lwIP TFTP filename length with legacy TFTP
+>   - Keep the server transfer context on the stack
+>   - Use the existing net_lwip_eth_stop() helper after tftpsrv exits
+> 
+> Changes v2 -> v3:
+>   - Use an explicit TFTPSRV_LISTEN_TIMEOUT_MS value
+>   - Allocate the server transfer context dynamically
+>   - Halt the lwIP Ethernet device after tftpsrv exits
+> 
+> Changes v1 -> v2:
+>   - Add tftpsrv usage documentation  (suggested by Quentin Schulz)
+>   - Add tftpsrv pytest coverage  (suggested by Quentin Schulz)
+>   - Enable CMD_TFTPSRV in qemu_arm64_lwip_defconfig
+>   - Allow tftpsrv pytest coverage to use an explicit upload URL
+>   - Keep tftpsrv pytest coverage gated by env__net_tftpsrv_file
+>   - Clarify that tftpsrv returns after receiving instead of booting
+>   - Update legacy and lwIP command help text for receive-only behavior
+> ---
+>  cmd/Kconfig                       |  14 ++-
+>  cmd/lwip/Makefile                 |   1 +
+>  cmd/lwip/tftpsrv.c                |  11 ++
+>  cmd/net.c                         |   4 +-
+>  configs/qemu_arm64_lwip_defconfig |   1 +
+>  doc/usage/cmd/tftpsrv.rst         |  73 ++++++++++++
+>  include/net-lwip.h                |   1 +
+>  lib/lwip/u-boot/lwipopts.h        |  11 ++
+>  net/lwip/tftp.c                   | 188 +++++++++++++++++++++++++++++-
+>  test/py/tests/test_net.py         |  94 +++++++++++++++
+>  10 files changed, 385 insertions(+), 13 deletions(-)
+>  create mode 100644 cmd/lwip/tftpsrv.c
+>  create mode 100644 doc/usage/cmd/tftpsrv.rst
+> 
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index ca1039f6a03..c9a6c7c33a2 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2134,12 +2134,6 @@ config CMD_TFTPPUT
+>  	help
+>  	  TFTP put command, for uploading files to a server
+>  
+> -config CMD_TFTPSRV
+> -	bool "tftpsrv"
+> -	depends on CMD_TFTPBOOT
+> -	help
+> -	  Act as a TFTP server and boot the first received file
+> -
+>  config NET_TFTP_VARS
+>  	bool "Control TFTP timeout and count through environment"
+>  	depends on CMD_TFTPBOOT
+> @@ -2286,6 +2280,14 @@ config CMD_TFTPBOOT
+>  	help
+>  	  tftpboot - load file via network using TFTP protocol
+>  
+> +config CMD_TFTPSRV
+> +	bool "tftpsrv"
+> +	depends on CMD_TFTPBOOT
+> +	help
+> +	  Act as a TFTP server and receive the first incoming file into
+> +	  memory. The command returns successfully after the transfer so
+> +	  boot scripts can boot the received image from the load address.
+> +
+>  config CMD_WGET
+>  	bool "wget"
+>  	default y if SANDBOX || ARCH_QEMU
+> diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+> index 90df1f5511c..245683a9672 100644
+> --- a/cmd/lwip/Makefile
+> +++ b/cmd/lwip/Makefile
+> @@ -4,4 +4,5 @@ obj-$(CONFIG_CMD_NFS) += nfs.o
+>  obj-$(CONFIG_CMD_PING) += ping.o
+>  obj-$(CONFIG_CMD_SNTP) += sntp.o
+>  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+> +obj-$(CONFIG_CMD_TFTPSRV) += tftpsrv.o
+>  obj-$(CONFIG_CMD_WGET) += wget.o
+> diff --git a/cmd/lwip/tftpsrv.c b/cmd/lwip/tftpsrv.c
+> new file mode 100644
+> index 00000000000..6370c900489
+> --- /dev/null
+> +++ b/cmd/lwip/tftpsrv.c
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <command.h>
+> +#include <net.h>
+> +
+> +U_BOOT_CMD(tftpsrv, 2, 1, do_tftpsrv,
+> +	   "act as a TFTP server and receive the first file",
+> +	   "[loadAddress]\n"
+> +	   "Listen for an incoming TFTP transfer and receive a file into memory.\n"
+> +	   "The transfer is aborted if a transfer has not been started after\n"
+> +	   "about 50 seconds or if Ctrl-C is pressed.");
+> diff --git a/cmd/net.c b/cmd/net.c
+> index f6f556f36ae..0f0b2386d87 100644
+> --- a/cmd/net.c
+> +++ b/cmd/net.c
+> @@ -89,9 +89,9 @@ static int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc,
+>  
+>  U_BOOT_CMD(
+>  	tftpsrv,	2,	1,	do_tftpsrv,
+> -	"act as a TFTP server and boot the first received file",
+> +	"act as a TFTP server and receive the first file",
+>  	"[loadAddress]\n"
+> -	"Listen for an incoming TFTP transfer, receive a file and boot it.\n"
+> +	"Listen for an incoming TFTP transfer and receive a file into memory.\n"
+>  	"The transfer is aborted if a transfer has not been started after\n"
+>  	"about 50 seconds or if Ctrl-C is pressed."
+>  );
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+> index a974970c3d3..06ed5a131db 100644
+> --- a/configs/qemu_arm64_lwip_defconfig
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -7,6 +7,7 @@ CONFIG_NET_LWIP=y
+>  CONFIG_CMD_DNS=y
+>  CONFIG_CMD_NFS=y
+>  CONFIG_CMD_SNTP=y
+> +CONFIG_CMD_TFTPSRV=y
+>  CONFIG_CMD_WGET=y
+>  CONFIG_EFI_HTTP_BOOT=y
+>  CONFIG_WGET_HTTPS=y
+> diff --git a/doc/usage/cmd/tftpsrv.rst b/doc/usage/cmd/tftpsrv.rst
+> new file mode 100644
+> index 00000000000..597a2f3a8bd
+> --- /dev/null
+> +++ b/doc/usage/cmd/tftpsrv.rst
+> @@ -0,0 +1,73 @@
+> +.. SPDX-License-Identifier: GPL-2.0+:
 
-> I think I wasn't clear enough on the RFC, sorry. We need to get this
-> binding approved over in https://github.com/devicetree-org/dt-schema/
-> and I strongly suspect that barebox would be able to make use of this
-> too, so a u-boot prefix would be inappropriate.
+Extra ':' character. No need to respin, I can remove it when taking
+the patch.
 
-Addressing also the comment from David:
+Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
 
-> I have some doubts that it is safe to add arbitrary child nodes to
-> arbitrary storage controller devices like this. Many of these devices
-> already define child nodes in their bindings, so this could break
-> drivers that expect a certain type of child node already. (And also
-> break validation against the binding schemas.)
->
-> So it seems like it should go under /bootstd if this is u-boot-only
-> or /options [1] if we want to try to make it generic for other bootloader=
-s.
-> And it could just have a phandle to reference the target block device
-> provider or just reference it by name (to match using alias).
+Thanks,
+-- 
+Jerome
 
-Thank you both for the review.
-
-I would like to split this into two parts:
-
-1. The on-media contract: a firmware-owned devicetree FIT manifest
-where configurations describe the valid base+overlay combinations and,
-when signed, authenticate the whole combination.
-
-2. The bootloader-local locator: how a particular bootloader finds
-that FIT container on its platform.
-
-The first part is the piece that looks useful beyond U-Boot. The
-second part is bootloader policy (IMO).
-
-For the U-Boot-local locator, I would like to follow the existing FWU
-metadata precedent. FWU metadata solves a similar problem:
-firmware-owned data whose storage location the bootloader must find,
-using GPT and MTD backends. It uses a standalone U-Boot control-DT
-node, not a child of the storage controller, and points to the storage
-provider by phandle:
-
-    fwu-mdata {
-        compatible =3D "u-boot,fwu-mdata-gpt";
-        fwu-mdata-store =3D <&sdmmc1>;
-    };
-
-Modeled the same way, the firmware-devicetree source would become a
-standalone U-Boot control-DT node, per backend:
-
-    /* eMMC / SD (GPT) */
-    firmware-fdt {
-        compatible =3D "u-boot,firmware-fdt-block";
-        firmware-fdt-store =3D <&mmc0>;
-        partition-type-uuid =3D "384e979b-eb76-435a-a3a6-1a071dbad91d";
-        partition-name =3D "firmware";
-        filename =3D "fdt.itb";
-    };
-
-    /* SPI-NOR / UBI */
-    firmware-fdt {
-        compatible =3D "u-boot,firmware-fdt-mtd";
-        firmware-fdt-store =3D <&spi_nor>;
-        ubi-volume =3D "firmware";
-        filename =3D "fdt.itb";
-    };
-
-(please note that for the sake of simplification in the patchset we
-are only implementing the `u-boot,firmware-fdt-block` backend, `-mtd`
-variant to follow).
-
-This fixes the child-node problem David raised: the controller node is
-untouched and only referenced by a phandle. It also keeps this as
-U-Boot control-DT policy, matching the existing FWU metadata pattern,
-rather than defining a new cross-bootloader locator ABI in this series
-(so exonerating us from dealing with dt-schema at all, considering
-also that we would deal with that for each different
-`u-boot,firmware-fdt-*` backend that we would introduce).
-
-What I think is genuinely shareable with barebox is the on-media
-contract: the `fdt.itb` FIT layout, configuration semantics, signing
-model, and whatever partition or volume naming convention the platform
-or specification defines. That seems like the right thing to document
-at the EBBR level, where barebox could adopt the same container
-convention independently of how each bootloader locates it. So we
-share and define the 'what' but how then barebox (or any other
-bootloader) would source `ftd.itb` (the what) is not part of the ABI
-and very much bootloader specific.
-
-Does following the existing U-Boot FWU-metadata precedent work if we
-scope this binding explicitly as U-Boot control-DT policy?
-
-Cheers,
-
---
-Carlo Caione
