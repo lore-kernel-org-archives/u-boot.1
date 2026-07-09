@@ -4,139 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 076CEC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 10:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00C3C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 10:24:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 388B584A51;
-	Thu,  9 Jul 2026 12:24:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 7667C84AFF;
+	Thu,  9 Jul 2026 12:24:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="YYVBV09b";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FempLI3b";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l/kTrv9T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBD0684AF2; Thu,  9 Jul 2026 12:24:11 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 5B8C884B01; Thu,  9 Jul 2026 12:24:24 +0200 (CEST)
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D94D984994
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 12:24:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C38A484994
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 12:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 669ALEuZ776561; Thu, 9 Jul 2026 05:24:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=proofpoint-05-2026; bh=mmONq2MaCBnaM
+ z5GvOFH6O2oB1xWBpyCExUqEwScRuo=; b=FempLI3b4jRgK3nbkvNPy98KEyyRN
+ BFeYsK1il1SYw4fEYFR/Xt2NAP0Lg3e6L9loj5QLQaEYU+Qi/BRFWVl5fH42SkZY
+ DDgpbSoSh06B73Mjy9+SDGmj0C70Xre7poUljQsxEC6Ofb4Q4wRSWRk7SzlRvoCJ
+ NQfoU1Pb7KR7F0Ery9eMlMd8gFx5EpBDt7bIZPNyLWOuwXF2DfymaitGc+DXD+h/
+ K/ErVwyzDlbmPkBKEKq2WthBDn0jotRPNiXDl5dPiGg4Ahyfpw8aTM4H9I3SpgnY
+ lqLH/I+cgS1RePEqFUCIJhAHziipfQVgRIG50VgQj6k9RHM1s9k6p7Uqg==
+Received: from mw6pr02cu001.outbound.protection.outlook.com
+ (mail-westus2azon11012067.outbound.protection.outlook.com [52.101.48.67])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fa8v9rb0y-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 09 Jul 2026 05:24:19 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FUTmlGxousL+ugHowANRMfjXBSupFBTQQHxP2B3vbQKq6RetOSv7lDAuHxr5UuhVj0STTbPpvrjuOpyxPmX8yUSaqTgJfgTlTJMbLKsfSwMRxrM9RXhXTmiuO7unkQyc4+Cc3Rddi9AHKKEgzKZ31qfEDWbO9MOs2yOZNR5SX/Sa2SSV/EBjLLOphQAwLluda077deXrQH2bUuxr9K+gJLNaPVXF97OGTEkeOKed22Kh08zYGsZGYhtsKzCf+UOn5fI3CsbA2lkM2ThTfqnzUN+7AGGUd1dO9dROzVdhxAaGAVyWexlfCbTJP3Rkn7xlFXS1Q+YRUaq7IWHEco1hhw==
+ b=feWNbdGqae86iLtMY68SRcDFH3sGRZP8Alsc4GF6BSU8aYUaMxRG6lzLhN/3k7oJpc0BcxOveYV1iwzn+fuwvj8G/jN1X+H6Lh5uXzqBVpy/h27TDz5xAUXRXmwVoD1X3ueJ2vZT7qqQMYfnhwKhRJFM49poesNq+tUWejcRcqT4fiuIMv6O6gcguRYf1pwv8HLs7BsVNp8NzPOTrNjTzSJxtACc8oBkNgl97KIKqUIVhsJFqCKXg2haWIMQvmd8+ofVzhb6twDVYvTIQ6uYz2OZyEXkXjvNfsRjDI0BP3K1WIsgbgd0u7+9wkz6m7aaNhYd/LCA5JdE2F3YQuz5hA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GqgGywKpImibq7Ml9QI+Vatnuk+qUm6rHWu4/CQxJyI=;
- b=rbhYAQ+US9TYjw5bpiNc1CJMxFxYwllYK37ecFeK3+zrhPWh5AGY5qRco6T+NrPe/nhDnl5lxZhBxiwsrKjXsZJ7wXLkhpJ2crXIRpthu5MUR1O6uwVSBigQdITT51mJN1JzVBtGHb+K2qKju8cxi6dfXBgjBeQA33OnmGAFXikrBnaI6OnsFpsKMkXpvVI2zAbRwpQrZi74cUh46vbqfZMHpkUffyDeBILhTjY0dufWtYbs7v1pSN2+sP6ouaPu2P+sMSPRpO//ve37nraiyg5K6HRuLfCQLdWG+EvUfzjbOvff+Ew0Q/X3I2ImPvyhVVV2z8qQ2RdtbSnZRkLJrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=mmONq2MaCBnaMz5GvOFH6O2oB1xWBpyCExUqEwScRuo=;
+ b=vCbJNKc1taBmXf5hxxJ9rKx9hHBhjAcVowWdKsTgNgz6bvCETm8xcZkOD1dEnpguNYF5figmA7FTnThW2yJxOR5cw9leRWOX8ImsmrHgUh8m6I5uKQVxvECnPueFZEL7m4AWouzVCJR5PVhI0FEicvl2SLoQKYhWpBH3jbH41Lbw3YCVe/r5S91wJvAUz5hF0SwS2a2lPapJIzBztm7nK4mVyBTxujDotId15OXqabzH/nRKPWhc2cwREKfNJITxgU/Usi8mOFM3mQa1Rh6Q8pLBiMVlzGivAJa1vBoaaD36O15VVvQrXVkPOG+cx+bX8bj8bAMnUHsqkCd+BdKxbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GqgGywKpImibq7Ml9QI+Vatnuk+qUm6rHWu4/CQxJyI=;
- b=YYVBV09bkFYHGYQibrYJ7Jx+KiR3w8OFZtwtloRMYvBIUYe8TggdXAs/gz6gKrRtpsbXLukpJAEf7GrD7g5Xi/SG/5iiVxax3iBMkP8rDeDWEx7cuKJ1T0SLOZduiA/Er1sdRP8jxGkPRhTnvpCUG2HV3CY0dW9Fdg0wSbfPV/J7NTl9p2fcrvhcm1aybT06xsVBUibOPttuUHdEtLzX9Tr6XYF7sAMXYIcFynNmubimAo/YZl7tWp3qlE5wiXi6HPffU5vihE/Tw2y8sV7jy4Pt51nz19TfMBg7DdVJ9Td2cTzDZzLWyLycWhR2QdkO5/psNoDNg++dKPU3jJI8cg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by DM4PR03MB5965.namprd03.prod.outlook.com (2603:10b6:5:39a::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.9; Thu, 9 Jul 2026
- 10:24:06 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.21.0181.009; Thu, 9 Jul 2026
- 10:24:06 +0000
-Message-ID: <02515472-3898-495b-b663-dad44152d8e7@altera.com>
-Date: Thu, 9 Jul 2026 18:23:57 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: socfpga: agilex: Add eMMC device tree source
- file
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <20260429022901.4326-1-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260429022901.4326-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI3PR02CA0013.apcprd02.prod.outlook.com
- (2603:1096:4:295::10) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ bh=mmONq2MaCBnaMz5GvOFH6O2oB1xWBpyCExUqEwScRuo=;
+ b=l/kTrv9TrHGnLtX06PyO+HEzhxFohX4XnIaXhUbQvsK28AwkLSCH5QJMozLSrT+PcgZraJb3Tu5L0DZW3bXseifeKhgKGu0Wxjzmr1qe0f+NcYac4QKadftyLxL5P+57hI52jdUx3cmJoGBfci5tMjyXYjG8rIQbZe/UXTgbHSQ=
+Received: from BN9PR03CA0448.namprd03.prod.outlook.com (2603:10b6:408:113::33)
+ by MW6PR10MB7640.namprd10.prod.outlook.com (2603:10b6:303:245::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
+ 2026 10:24:14 +0000
+Received: from BN3PEPF0000B06D.namprd21.prod.outlook.com
+ (2603:10b6:408:113:cafe::24) by BN9PR03CA0448.outlook.office365.com
+ (2603:10b6:408:113::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Thu, 9
+ Jul 2026 10:24:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ BN3PEPF0000B06D.mail.protection.outlook.com (10.167.243.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.223.0 via Frontend Transport; Thu, 9 Jul 2026 10:24:11 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 9 Jul
+ 2026 05:24:11 -0500
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 9 Jul
+ 2026 05:24:10 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 9 Jul 2026 05:24:10 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 669AO9sc1010644;
+ Thu, 9 Jul 2026 05:24:10 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Date: Thu, 9 Jul 2026 15:54:07 +0530
+Subject: [PATCH v2] fdt: fix phandles not copying when using templates
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260709-binman_template_phandle_copy_fix-v2-1-6c4017eec04d@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5WOQQ6DIBBFr2JYl0axEunKezSGII51GgUC1NQY7
+ 160J2hm9X5e/p+NBPAIgdyzjXhYMKA1CdglI3pU5gkU+8SE5YznnAnaoZmVkRFmN6kI0iWrn0B
+ q61Y54IeKine61HCre05SjfOQ4nPi0f44vLsX6Hj0HsaIIVq/nj8sxeH9MbcUNJ3gg6hUUZZ13
+ US8ajuTdt/3L/bLbYHfAAAA
+X-Change-ID: 20260629-binman_template_phandle_copy_fix-956bc3ce48d6
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Anshul
+ Dalal" <anshuld@ti.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783592649; l=3658;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=wi5fLkrM9RRcnWeZ95WbnQ3y+7BSyhH6/XjGYAD3uJU=;
+ b=/wQywkjPF72ZynjBDJ/RhuocmuW0cvdXkIakRRhNbK4ODHhmaOiBwQmyCuniQpsLO+TGwPltC
+ 8W46T4GShsAAR/75VeenWFowiDJNd7rmUIFSTg4ZTpzCRDZ9lSEkgsW
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|DM4PR03MB5965:EE_
-X-MS-Office365-Filtering-Correlation-Id: bc3265ae-d755-4cba-70a0-08dedda43463
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06D:EE_|MW6PR10MB7640:EE_
+X-MS-Office365-Filtering-Correlation-Id: e75cdefa-362b-4fdd-fc56-08dedda437ef
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|23010399003|18002099003|22082099003|55112099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: z0Sdo7VjymaiJuFmEyEH8CuY+YwhQXfNcYUf/mQQjG1+ujUoy4jvH7z3yjeIfZv/zB8Z9OnF5Y06rAfnFHXn91zk27x8xVt891DFRb+RJ43QF2ZdpFypXNqQHDGeamT5UKrMM65iCsOAKdUGMYZYzDcq+aH13nUqtmlE9VZBD3CuLwzwDPRVfhFf1i6ocC/JOmDrOdDB8uehXRxKrbYglsr1l/ne6hthkdgcTEf2eEYU8fdPY6sYAeQz9IHmRTymtr3iUIe1AcUCPA0POTUWNy//xDzBgwR3R4DTOLHRE4R8ui5ITy+91WDtR9nwKWM/Geqe1gw1/k86JkJuITB6hQU2F8/9VNRRyKCJGSL+ICxDkrhQVyxmQwOA8W66nMLW3pyKpxePa0ffJ9eKusdxMVbPmOdDXHMddI9uJ9ZnGizMzb7XqP3e8oySEKzuL71qcc9SXuAox8Axt9ScVSd6C9YdyrISHAQyDG9A6CPKX7ZJdFsc52hJpuQ4hyfNH5inu8jo7srifS6AghwBDGLzbYIumrS47mfUso+NcymuoAF+XxMJ6AYwqADMjUOYAGWqjZWaHiRu6l7BUQfpOEDORT3VB7Yl+0GNjmS4cHis3+A=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(18002099003)(22082099003)(55112099003)(11063799006)(56012099006);
+ ARA:13230040|82310400026|23010399003|376014|36860700016|1800799024|13003099007|3023799007|56012099006|6133799003|18002099003;
+X-Microsoft-Antispam-Message-Info: zamLDFZIPMX7ivgWDI3DbRTVte+VEznTwnOHVWnxHiw4w78nMScebQTXeAm0QeCRkPLJqzBBCe//tsWFInMzP8Ls5ro2kV4pLXoBT33Htj4Eiw/sm6r63/h/LuXU2B22j2uMqTqJ5KabBab/dWYdQIx1Uk97FzRtcBf01RGMbkk0qJ3lA2AFr/masIgHMThdyZmBe1xO+h2f6D3p0tM/E8DKbslQB9ftQy28ItO9FnM5BKf/qXQIV/Ui8iYHSmSPOZ6MH3VQmYn90+rJhzVScOJ4xYnXvlIvIcnl6TGvwbUwGK7/UFN+8aIX73sarXgEk08ReA64DiAJzR7jPQVPbZNzXwc3Am8oo3prwE11NZm7HiAdKzjATcctFxGYlu/H+E2xwsPrHVdU1gYgeddhy546vrNJeN8bnWM93POGOuOXOH7eF1GCuH4w12FWIIhnFjpaY1bNgrsN69BkZUGA7XbcW1gYVmuMR2CK0qERv4rPpaCEz5J9+Jb+uYuyp/5ieZO5AzNMbtSiO7ERiccM1C0JsFOCJ7AOxl927k3HeZtL1f5n5TwUpWeJKmRaXAB5RijiMXzrCwuWiDqP1YDYC6Hu2UqJY/DhKHxPqDFYqDJoE0N8ojUTP3NSYOPTKV//IUhHak5yKW7tjtLsC6uoqX4rcsuIO6pBvnvARCSIJr8=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(23010399003)(376014)(36860700016)(1800799024)(13003099007)(3023799007)(56012099006)(6133799003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?REM1VkhEMm5xQlRON2dHUW0zR0ZESlVZVkMwVVEwaGhkZG1tVmxVSU1UbDND?=
- =?utf-8?B?TnFLL3E2bzhyYk4rWTlOWEhhVk94Ykt0elpCYlNBSFVuZDJSdHljYnZpOTZ5?=
- =?utf-8?B?Tmt0bXJwWTQ3a1VtUjB4T3FuQm9IaHI3VCtnVFNjU3J2Sk9GL0xQVDNiREYy?=
- =?utf-8?B?emVxZDlZQWU3NTk5ZVljWkxZa1ZzdjVsTmFRVFFzcVJpNVBXemlONmNJazV2?=
- =?utf-8?B?MHlYSEVEOXZMOHpaclI2MVJ6NTdKY0JzUmtCRllrWWV2NWR4eDd2OGFiTUta?=
- =?utf-8?B?akFYT2FhK1grd1djcUZ3U2F3WFZ1KzZxcGZvbTJRVVlHbno5OFA1ZFN0emJn?=
- =?utf-8?B?QWZzM3pXUFR6ckJXQThOY3g0aWhUQThiUVIzaE5kSDdwWWgzQUZaOGJLMnVG?=
- =?utf-8?B?VTlSWVY3cHJlc2NPQjVYSGdwSkpwZEFQclM4WTE4cDlpWFBMeERmU1owelNk?=
- =?utf-8?B?NlFiUFFqR2xROC9laHhMT1VPMEkwQnJGZUtKQ0FXclpqb2MrbjJLcDZncGh4?=
- =?utf-8?B?c1djSTdhc0ZScE9FRlpUdFhzNjhXTTAxeGpWeERNNWh4WE9UYmp4aWtBRi9a?=
- =?utf-8?B?Z1JMb0E2VFVlZkpTYjk2NVA2TDRadzF6WWJ3UlRnTHZBcks4T0l4aE9vU0xk?=
- =?utf-8?B?UDY1ZEpzM0hYUWJyYjhTMytqOWw3aHd6UXk2eVdzOFowbHdteEZ4alpRRDNn?=
- =?utf-8?B?K2N1YTArRS90SmtBdnpiaW1wc3M1MmUvek5Kak9ja3FyU3R0RHdMaEdjellB?=
- =?utf-8?B?ZThSNVFiS3c4c09UWnZoMVpKRFZLVWdWL3Nja0pkVml6NVhZUmlrWTF0WFFU?=
- =?utf-8?B?U25lenBVQTNmbGtFSnhqcXluT0lkZ1k4V0ZZaUxEdWx5VHJvQXZia0xqZnp4?=
- =?utf-8?B?RHppZDdCZG0xSEpmcTM2ZzhRc3YzOWpyenY5WUdYekN6M3l1ZGxqdGZFUXp5?=
- =?utf-8?B?bUlhTm1oVXpwZjhqZkxYUExmelJBWFQ3N2NBa3E2L2hYWDlQYjZVUVhEQXcy?=
- =?utf-8?B?SGpMOFZ2MTFsK3FEUW9OWEtzc2FBTTR4ZUh5UlRrd3FJOURyV0NCWGpxcnVq?=
- =?utf-8?B?a2RBRldUcm45bllYQjBOd3c3dSt6Qnl4bEE3aVU0MHJUYjkzVDFBVVphVWxx?=
- =?utf-8?B?NEttU3ZRZGFSNUR4U3M0NUNudWJZV1lLYnVhOElxRFNZYm9GMDdLZGdDYnp3?=
- =?utf-8?B?VEZ6NGkzYk9nOFNXczNBZnVoWkRMay9xZFRPZkVQSFVobnY1NC90eHhsM3Vr?=
- =?utf-8?B?aktZOUlydlFwOFFQWWtLSGM0K2pPWFpsUU1Uck8vQXUrbnM5WlJYZDlwc3F6?=
- =?utf-8?B?dGt3R3AreVY4V2xKQTUxUmZxTEZVYkZiYXF0c1RSS3ozeStnb1dhbUs5WlN3?=
- =?utf-8?B?WmNGWVBOWFZxZ2h0Ym9Velg5bWhVK01yUmh0UWp1OVVZcXJFOEpkRkhXRHpy?=
- =?utf-8?B?NVA2Z2xTby95TU1GMHFSWU0zZHROaGo4cDgrQWV1MHA5ZUd3dmxOSHJ6V2ZP?=
- =?utf-8?B?R0hMREhxb1ZadXNTVDQxL3ppOG5kOGhpZmJoSklsMzZ1ZTdyaFRjMFVjWDNk?=
- =?utf-8?B?eFNSeVFNbWZaOGpDc0RKMDFSbVAxcTZZYUV4UHI2NXNLR09TNmFxeVlrQmwx?=
- =?utf-8?B?dWJFOEtjM2dicU1LTCtUaUxFK1BuR3YwQXBqcnczTXIyTjg1Yld5SFdseVVo?=
- =?utf-8?B?MW9URndRdG9nd1NvL3hkaXA4MTZNeldmV2piK1JsUXhRb3dRZXFRSTd6dDJy?=
- =?utf-8?B?NUcvU29xazJXM0s4VmtTcjRoZWpvRTRIUmgwejhUYkp1dW50RFJCQzdVZzJx?=
- =?utf-8?B?MnNwOVdFZE96d0Y2TWZUaW5JbytBTVhBQ1g5T24vL01iaWhnaGN5RFZEU1Jq?=
- =?utf-8?B?cGw1bHM5aCtnTjJ4WG9GMzdpYmFpdlJ1TkxSQTY3RVB5eHVmVStnTExGZnpz?=
- =?utf-8?B?NU5XbVVEU2NQUUNkTUZPSUpMK1FVQjhYYkhlOVFLNjZUMXdnTHZGQXg3SFpW?=
- =?utf-8?B?VEhKdjBVdnU4WWd5a21yWnFpMzFuaHpQNldybmFXa2xhQThWdW0rb1p6TERV?=
- =?utf-8?B?Ym9sMk16UzdlYU0xeDk3RmR5NXl2a0FKM3dkN1dza3cvcWx0QkJYNC9GdFhI?=
- =?utf-8?B?NTdGZ1lUZ2M1V1VSWWkzZUhENVp3RDlwOEduY2tuampUWWZ2WkdrSnFrNGZj?=
- =?utf-8?B?bFFhamdRMEJtZUc2UVYraEpsaGd0ZVhRV3ZSMStyRW9mcHEvZTVLOUU5VVhN?=
- =?utf-8?B?TDB1MHhxQzk4QkpYakNGQ1FIclo3UEdDWU9XOXhiL0svaDdsV05jQVZuM2Nx?=
- =?utf-8?B?VTdoT1VqRGVYLzdFSWRhd0NqMnE2QWFNMVhqdEZ6VWx2MW1xL1RSSjh0dW00?=
- =?utf-8?Q?+/6z2BKGZO6qQtj8=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bc3265ae-d755-4cba-70a0-08dedda43463
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 10:24:06.1425 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c3KQVl85+CeTDAbtdBFugJMJn5NinyDBZMoh8ng7wJJFG52z5wJbhR1rowy5gIV8juLXCD2aFKEBo2tj8VBTlLXXmKLK7BLeUsZSO+PDghU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB5965
+X-MS-Exchange-AntiSpam-MessageData-0: s5jaaiy2V/fXQN9PsRX9GlnpfD+Gf2+Z+ZH4iw5GwZ+F6io5tmnK4m/oqP12+Dx9wB19DhOV9V8D+qS9JfG4qmVCE0xVINTrDLkjjitmCc6hP94ctZ9Ekfwp3sthFhowlcg+PCFKeHvPwgq9w1TmYkvbAdm5QCoIrf5REJg316l9jDhryAkBtv3dkvWt5hVVDB8onosgfVUffnKWbvXCwbM0SEbIBSEQayXgHHfy9mkQ/SjNE0NF10bGauabiPi5N8jYhwZfNQkn8qxfqNP1DiMMIfqM40O4idYmPlAKbMROSlxA/UeTld70a5hdW3A7GoyN+JizFMDXlwxOp4O1y+ijymV5N+yhjLMVTfxq2JNZDYwEZHATBNTmWDKfy5R9bnFY8vdzUdW71ZtWd+CAul5RRzInxkGEDZHGdaIaWdt0IPwqgBpYcNUl8mSWlZUh
+X-Exchange-RoutingPolicyChecked: QEj0OaAzo8RnJ7cfLa+R0W43Vmd8OpO5xeZdx1NPGtt994GjM8jkd44KkzAmCd5V939MUB5ae+/yk60CfTFlZ3nGSXm9o5Y/bk2C7tLcXMfDDfEZukq9I7XgDlnB/9miUKr1qpLvjtfbrZgK0zJ97fbLvEIdF/fxO+5gzwqJoLTM1CVzOHeDs1Zd6vKc2bqr7/5j+UCgefSA4G/Ix/HEbldVWXAAamvgUjKfqm4I+xGfKAboWdIuAM613bVuJvKVZzq0DgUmD+vLmGqFKSJ3uiiwRqnDjilDnE0ykoMiBH0APZuQ4oEn6XvHDFRXebQpFwRcrfT+UZEeLaemzMedig==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 10:24:11.4951 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e75cdefa-362b-4fdd-fc56-08dedda437ef
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06D.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR10MB7640
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA5MDA5OSBTYWx0ZWRfXxIT2SXh6bLih
+ /SWxu6xVGJ2A4dZuHUZhCPNqGill6Ha2Kw9LjyLXruC1V92+f2emT50cTYj37bIQgCBcBpFL6S+
+ eSJQO2BMgizMf7TH3h/KaRbnHXMXUA/2HH2GldipY4aOamIl04nOLg1hI9Z23ERj92U5V7gcVUF
+ UV0SdpK4crHVOFOkYly5q+YejdM03ckI3tj02bZqLLk1TKwN4EPiJiCvZsjRk9Hw6xMmCv1ry1r
+ MLbuJenW6Uwqh9LNkJeVAxongY+U0vMoRlNfy19uFaLx1bJ7gZD/6AM5COJuFsyAB71GD6knEhP
+ p6VO0yiMr+SPU8oYmrArXQtZEaiTeSO5EGyCUTpMxP/3vcjaFK/8H0NBCQXRd1M+wGIwTfeoMxP
+ +PksMZcNMVYTfT4MwIPTS8A7IeN7t5kyezLOpFziqZSFnB7z5FvwU2lYk2J8UVTP1PoWR3dzRk8
+ 93PUTVFpAVktxmCfA4g==
+X-Proofpoint-ORIG-GUID: ciNdDEQO697j8apjsY5RqjYQkm9mwS72
+X-Proofpoint-GUID: ciNdDEQO697j8apjsY5RqjYQkm9mwS72
+X-Authority-Analysis: v=2.4 cv=SNVykuvH c=1 sm=1 tr=0 ts=6a4f76d3 cx=c_pps
+ a=9ZCHOKVckkl3mlSiZqIMSA==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=bC-a23v3AAAA:8
+ a=sozttTNsAAAA:8 a=vNd5UedqpktBE-O_desA:9 a=QEXdDO2ut3YA:10
+ a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA5MDA5OSBTYWx0ZWRfXyY+wrQLULuMC
+ preJn6IzuPDT10GI4iZENMuwEFLiJbED/379mmoL9bD+FzpUFC12LbgbmwCbp1KKN2gND/11eEW
+ II126Hf2pqs7uBL0DSxPGyT8/6v/RD0=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-09_02,2026-07-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0
+ phishscore=0 priorityscore=1501 spamscore=0 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607090099
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,106 +188,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29/4/2026 10:29 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->
-> The Agilex devkit supports a separate NAND/eMMC daughter card.
->
-> The NAND/eMMC daughter card replaces the SDMMC slot that is on the default
-> daughter card and thus requires a separate board dts file.
->
-> New eMMC dts which is based on the existing NAND dts is needed to comply
-> with spec in which eMMC board ID is designated as 2.
->
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> ---
->   arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi | 24 +++++++++++++++++++
->   .../dts/socfpga_agilex_socdk_emmc-u-boot.dtsi | 16 +++++++++++++
->   configs/socfpga_agilex_defconfig              |  2 +-
->   3 files changed, 41 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/socfpga_agilex_socdk_emmc-u-boot.dtsi
->
-> diff --git a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
-> index f2150b7eb7b..d3d4e550d0a 100644
-> --- a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
-> +++ b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
-> @@ -199,6 +199,18 @@
->   			algo = "crc32";
->   		};
->   	};
-> +
-> +	fdt-2 {
-> +		description = "socfpga_socdk_emmc";
-> +		type = "flat_dt";
-> +		compression = "none";
-> +		fdt_2_blob: blob-ext {
-> +			filename = "dts/upstream/src/arm64/intel/socfpga_agilex_socdk_emmc.dtb";
-> +		};
-> +		hash {
-> +			algo = "crc32";
-> +		};
-> +	};
->   };
->   
->   &board_config {
-> @@ -213,6 +225,18 @@
->   			sign-images = "atf", "uboot", "fdt-1";
->   		};
->   	};
-> +
-> +	board-2 {
-> +		description = "board_2";
-> +		firmware = "atf";
-> +		loadables = "uboot";
-> +		fdt = "fdt-2";
-> +		signature {
-> +			algo = "crc32";
-> +			key-name-hint = "dev";
-> +			sign-images = "atf", "uboot", "fdt-2";
-> +		};
-> +	};
->   };
->   
->   &binman {
-> diff --git a/arch/arm/dts/socfpga_agilex_socdk_emmc-u-boot.dtsi b/arch/arm/dts/socfpga_agilex_socdk_emmc-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..fd301ff28a9
-> --- /dev/null
-> +++ b/arch/arm/dts/socfpga_agilex_socdk_emmc-u-boot.dtsi
-> @@ -0,0 +1,16 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * U-Boot additions
-> + *
-> + * Copyright (C) 2026 Altera Corporation <www.altera.com>
-> + */
-> +
-> +#include "socfpga_agilex_socdk-u-boot.dtsi"
-> +
-> +&gmac0 {
-> +	status = "disabled";
-> +};
-> +
-> +&gmac2 {
-> +	status = "okay";
-> +};
-> diff --git a/configs/socfpga_agilex_defconfig b/configs/socfpga_agilex_defconfig
-> index b2c7b30d546..1690e1ad8ed 100644
-> --- a/configs/socfpga_agilex_defconfig
-> +++ b/configs/socfpga_agilex_defconfig
-> @@ -58,7 +58,7 @@ CONFIG_CMD_CACHE=y
->   CONFIG_CMD_SMC=y
->   CONFIG_CMD_UBI=y
->   CONFIG_OF_UPSTREAM=y
-> -CONFIG_OF_LIST="intel/socfpga_agilex_socdk intel/socfpga_agilex_socdk_nand"
-> +CONFIG_OF_LIST="intel/socfpga_agilex_socdk intel/socfpga_agilex_socdk_nand intel/socfpga_agilex_socdk_emmc"
->   CONFIG_ENV_IS_IN_FAT=y
->   CONFIG_ENV_IS_IN_UBI=y
->   CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+The phandles used inside a template were not being copied to the node
+inserting the template, leading to a missing phandle error.
 
+The following example can be used to reproduce the issue:
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
+&binman {
+  some_template: template-0 {
+    ti-secure-rom {
+      content = <&some_data>;
+      keyfile = "some_key";
+    };
+    some_data: blob-ext {
+      optional;
+    };
+  };
+  output-bin {
+    insert-template = <&some_template>;
+  };
+};
+
+With the error 'binman: Node '/binman/output-bin/ti-secure-rom': Cannot
+find node for phandle 103' observed.
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Changes in v2:
+- Add 'testTemplatePhandleCopy' binman test
+- Change assignment in fdt.py from unused 'dst' to _
+- Link to v1: https://patch.msgid.link/20260629-binman_template_phandle_copy_fix-v1-1-196f95a13388@ti.com
+---
+ tools/binman/ftest.py                           | 17 +++++++++++++++++
+ tools/binman/test/fdt/template_phandle_copy.dts | 22 ++++++++++++++++++++++
+ tools/dtoc/fdt.py                               |  2 +-
+ 3 files changed, 40 insertions(+), 1 deletion(-)
+
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index bf98b268ac15..04459aca7530 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8552,5 +8552,22 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertEqual(len(subnode4.props), 0,
+                         "subnode shouldn't have any properties")
+ 
++    def testTemplatePhandleCopy(self):
++        """Test if phandles are copied properly when inserting template"""
++        _, _, _, out_dtb_fname = self._DoReadFileDtb("fdt/template_phandle_copy.dts")
++        dtb = fdt.Fdt(out_dtb_fname)
++        dtb.Scan()
++        parent = dtb.GetNode("/binman/section@0/section@1")
++        child = parent.FindNode("section@2")
++        parent_phandle = child.props["parent"]
++        child_phandle = parent.props["child"]
++        self.assertEqual(
++            parent, dtb.LookupPhandle(fdt_util.fdt32_to_cpu(parent_phandle.value))
++        )
++        self.assertEqual(
++            child, dtb.LookupPhandle(fdt_util.fdt32_to_cpu(child_phandle.value))
++        )
++
++
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/test/fdt/template_phandle_copy.dts b/tools/binman/test/fdt/template_phandle_copy.dts
+new file mode 100644
+index 000000000000..5c6782372a48
+--- /dev/null
++++ b/tools/binman/test/fdt/template_phandle_copy.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman: binman {
++		some_template: template {
++			parent: section@1 {
++				child = <&child>;
++				child: section@2 {
++					parent = <&parent>;
++				};
++			};
++		};
++
++		section@0 {
++			insert-template = <&some_template>;
++		};
++	};
++};
+diff --git a/tools/dtoc/fdt.py b/tools/dtoc/fdt.py
+index 991a36b98796..cd687f2eaf2e 100644
+--- a/tools/dtoc/fdt.py
++++ b/tools/dtoc/fdt.py
+@@ -780,7 +780,7 @@ class Node:
+             parent = self.GetFdt().LookupPhandle(phandle)
+             tout.debug(f'adding template {parent.path} to node {self.path}')
+             for node in parent.subnodes.__reversed__():
+-                dst = self.copy_node(node)
++                _ = self.copy_node(node, True)
+ 
+             tout.debug(f'merge props from {parent.path} to {self.path}')
+             self.merge_props(parent, False)
+
+---
+base-commit: 63f6cc8ba618396cb9c0161bb5c6d217604ae1d0
+change-id: 20260629-binman_template_phandle_copy_fix-956bc3ce48d6
 
 Best regards,
-Tien Fong
+--  
+Anshul Dalal <anshuld@ti.com>
 
