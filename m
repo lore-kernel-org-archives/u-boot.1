@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CDF8C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B0FC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD9384B96;
+	by phobos.denx.de (Postfix) with ESMTP id AF6D484B9C;
 	Thu,  9 Jul 2026 15:05:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="GjCzjyQs";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="OI1Wjx1a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24B3B84B2C; Thu,  9 Jul 2026 14:58:22 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 5152884A3E; Thu,  9 Jul 2026 14:58:23 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37CF484A3E
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5494E84AFF
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-493b27c7451so11282065e9.0
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:19 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-493ece78b0cso4438595e9.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783601899; x=1784206699; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783601901; x=1784206701; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=KcqsSmCEvJCBaTX9HZnc2vQ/DZSJS/b6+qTQjfDA3oY=;
- b=GjCzjyQsRxGMHekj6HQj2AWzk3LhwkuVAWZb+AfsqXVTsDmayeJ/7f8tjmXAfN8PNQ
- WeDs5DvPMcTBv1tlfdmG/3CESw75jpBCfEySoma85qBc9/T30Eknrsvg3WFGoKaHsCew
- o/dVaQJmx4H9fT4YUz+BZy/ohrSLS/22kuvHq77FXNnjx7GKfKaI/GEMCgVh24lqhuQy
- Brq8zHXfaLWewd50OGOUuvdCFOLFuMrxvsSkP6Y+fXer+6i7i2YOOd9RR0Pq7yXUsqP0
- 6UFMxqK8+xIJx4Tt9YZoY/P2PBL3pos/CRX+9CgAgqjZ3+Tmt+O/i8fYgb+u+gGGFRP4
- xU6A==
+ bh=ArrA+Y23BrqdKJeKkH2B0pXjIQvh3ZKL/fUYeilXdlA=;
+ b=OI1Wjx1a2uebCHR/ks3OQUho2nm+eJne9nQxKrJh206jmA4Zt4geFh0NHSk6czpMSP
+ h9lyAE1R0zzkrwai1GWTXLdrsJKFAzK23Np725MrG2JKCQ2daEQ12GAPyEFsRWmtKyyl
+ +jI8cYafy6jN5kvcN8RGqNkCS7VqXE6E8GWdPzHWEkNXeH5nENot1X5Jkg9aSnHrLTRN
+ 3kcj2klc4TLVkZbrnIohQljvHZwK8kjMFp3tcOeCKGyJuDwRdC4pALHMCqSQD4z1VJXQ
+ zsljcBRNIh7vlcOMUHgdHQYBKeAoW3YuR1qLYg+gzF0gIcUqKQKn33xOBjXiRYADS4pR
+ gaFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783601899; x=1784206699;
+ d=1e100.net; s=20251104; t=1783601901; x=1784206701;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=KcqsSmCEvJCBaTX9HZnc2vQ/DZSJS/b6+qTQjfDA3oY=;
- b=clcQ/mUSuDB39OnubbSNovu3CmmSYYqPGtJygNYP2hq9TuohquT4oVKxp5boB4OBbm
- muKkIApqs9iVuTInynV9L5hbxtq7ulPYuFZa24Bbofv5Zb+pEvEtL0fs32ejztmuORFq
- VbM8Tzn9DQwat8nYGA3H8I7JGJOo6wpmWWntuM9yhhayfYSwmnRSg+Q9H4e7TLA9+ntJ
- ZfNDSumnVMJAS5MfY4zUbjMr5Sm4m4jG4GuNdBZgRfZAeGvFGgkKxC9bO093rn2t4iDG
- qfOnnEDIyFRDXQNTxb40Ncs2rFUI5x+BfWhfOtYME38eASS7GynQZ/Qg7Yk4QAZF71VJ
- OEUw==
-X-Gm-Message-State: AOJu0YxFLNK3sdhODFUowIovG4bKFh5kIptSHM8w6M9sOOL98ftTY9hZ
- 1rbdDCDGcPluTsjamsUr7FQ+JnbLqdVsv4U9l6VoCNWMv+KVfYoHTONIDsjUHXk7JrQ=
-X-Gm-Gg: AfdE7cm4Vjb1OOJSjoAQe8EaeuCjx4Jcj6U2IIGUHat4Idu7aGtrvuUt7HGB6eng7FJ
- 4rDeXsJqjcC8fzRgraPxCrlCo1jqThvLFYl6cr2O8vTub3sShtiOJ3iQuQDFgGegy3hatUX2JoP
- pumvxd1el0jb7Hji5prMevMJ8FkXCcyxxoXI/ha+VE3bUkXa+wuJPYX1XzVeLxUaJH7rP3ZVzSG
- 4xZcxfbaEx9b1xKDQ/xRl8EGY3jZYI5agpbF5AfcWFtkDf74WgJiKX4TqY4eujyy4q5MvVyMyTe
- OKL8Qkzw9iY7QxEB5bptllOwhyxV2gF+0Gg4bZaNAzsmHybyaQDMK/70YYtcjcmRAtjbCy5MmLu
- aNlAxLrrVyT9cqgfp0TVHyG9btVsW9BlUrnaQC7jIr3XTGB+M0DAqOpD5jiQJy9FFQ2VMGv1skl
- CVcnZ1eocTj7arR6TSZ/G7/4aPE/HMIQ/Hdrco0YddaD5w4P+qEUkUaUi2OSiXMhkSSaWGD8fHm
- c336Rd9emDJAs/PV7q/Ylx763qI1Fb5b3fmrX5IxLUZ2DBiNR76D66B4pVgxmWZorvyvw8=
-X-Received: by 2002:a05:6000:4313:b0:473:1e79:87e6 with SMTP id
- ffacd0b85a97d-47df7547efamr3139796f8f.3.1783601898581; 
- Thu, 09 Jul 2026 05:58:18 -0700 (PDT)
+ bh=ArrA+Y23BrqdKJeKkH2B0pXjIQvh3ZKL/fUYeilXdlA=;
+ b=eHgDTdsuf+hMl5iJimomp7nlf8BEbUbwBTlsnlZobgzeFW05mud6AD2WrcJoOVHJfJ
+ dl43qhtOB/sBAVtcUne9n3UAsYTjgBemXfPlMaFwFBjqdx1ErSvHu9/WE6xbfommBq5s
+ 6/ozFoEUurnt9Q7YTfM64k2gXQxwsWKGwPwJQOHfjh3YTqxTrxn6bo3NFU2xsp9YRMdu
+ 56x4SY0AHj89Eyj4bfRda6lXUmNP8wi5lq6aDdlLg1o/aDzmPT9uJVFh3CWkUq9Yih58
+ BEPRMnERe3sBlLD/ihDcQBcDm2tIPzoCVktHQxDoC5pCVLWlF7X8WX5EqYM4xjs6zWVt
+ HWXA==
+X-Gm-Message-State: AOJu0Yw2VCfAnEY1Ip34aCygVfjEQUXOTQ1rJ3WmUjjDuhhu3hix6PJm
+ V0Szxdoea/JgHPg5IxTcwImPmtzUzEvQlLk/+l5VMRFVF/WFHKWaOIBL+80kRvyLpAQ=
+X-Gm-Gg: AfdE7cnoO8TUcXHBn/FOejpUIWwUrX0snax7lXXyD58NVk2FEehXcCSz39gaInRJpxi
+ ebKfDj/uWH4Fgm8uExTAu2TE3cXlB0viTM1OZbLhuKz3h5noV/94hAcoCpI7qCPsqvuyXHYctch
+ gSoF0t1ozYSlbf7/huu8tqjjp+kNdiBylIpUBhifrLy02TbYAOqeFbZ/sTHC41y2ZulmZXBLQVQ
+ 1BEZkApYw4IKO8Kg51tf3E/h1XXxDCkLG6iS+nG9hfGn2iijGELcpjA7pnUW/pSsRzkILIHZzC6
+ kwUAvVVyMPt1SddYzg2n6HEgNg0MFZIX+tA98/8xkfJcYHhfaRdLZdX2TpTUvvprdWp3VeQj1Cq
+ Yo0EpFpd8puzEQSLQgRy7aJn//JGc/T3C1Y+vUJ2Tg+/2PtmT3fQJ7TbJuasSzv4cDvqKCMzmE8
+ UmZ3WIo5bBXPrzy/P0kqyjFEDtMuI8H/DWhsoHwuvbmpJ590OEnbpPlNrAN2dkj0dHej0QUGMe5
+ G8XtXOcTTr63vIBqnLDutKRDkHyWIZtYlVIvdQ3DmWYSWgFgFMEsZaajHxbPj8FFc9Hwgs=
+X-Received: by 2002:a05:600c:8a0d:10b0:493:d9f7:a3cf with SMTP id
+ 5b1f17b1804b1-493e695bcf9mr54141885e9.17.1783601900646; 
+ Thu, 09 Jul 2026 05:58:20 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.16
+ ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 05:58:18 -0700 (PDT)
+ Thu, 09 Jul 2026 05:58:20 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 09 Jul 2026 14:58:14 +0200
-Subject: [PATCH v2 08/14] power: domain: mediatek: split into per-SoC drivers
+Date: Thu, 09 Jul 2026 14:58:15 +0200
+Subject: [PATCH v2 09/14] power: domain: mediatek: wrap domain tables in
+ struct scp_soc_data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-mt8188-add-power-domain-v2-8-589ace7d30e2@baylibre.com>
+Message-Id: <20260709-mt8188-add-power-domain-v2-9-589ace7d30e2@baylibre.com>
 References: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 In-Reply-To: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 To: u-boot@lists.denx.de
@@ -133,593 +134,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to prepare addition of future SoC, split the current driver
-into common shared code and SoC specific drivers:
+The per-SoC match data currently points directly at the array of
+mtk_scp_domain_data. Wrap it in a new struct mtk_scp_soc_data that
+carries the table pointer together with its size, and add a
+MTK_SCP_SOC_DATA() helper that fills both from a single table definition
+via ARRAY_SIZE().
 
-  - mtk-power-domain.c now only holds the common register access and
-    power on/off/request/probe logic plus the shared power_domain_ops.
-  - mtk-power-domain.h exposes the register definitions, the mtk_scp_domain
-    data structures and the core helpers to the per-SoC drivers.
-  - mt7623-power-domain.c and mt7629-power-domain.c each hold their own
-    domain table and U_BOOT_DRIVER registration. The mt7629 driver also
-    matches the mt7622 compatible, preserving the previous behaviour.
-
-Update the mt7622, mt7623 and mt7629 defconfigs to select the matching
-per-SoC driver.
+The num_domains field is not used yet; it is added here so that upcoming
+SoC support can validate the domain index coming from the device tree
+against the size of the table.
 
 No functional change intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- MAINTAINERS                                |   1 +
- configs/mt7622_rfb_defconfig               |   2 +-
- configs/mt7623a_unielec_u7623_02_defconfig |   2 +-
- configs/mt7623n_bpir2_defconfig            |   2 +-
- configs/mt7629_rfb_defconfig               |   2 +-
- drivers/power/domain/Kconfig               |  23 +++-
- drivers/power/domain/Makefile              |   2 +
- drivers/power/domain/mt2701-power-domain.c |  87 +++++++++++++++
- drivers/power/domain/mt7622-power-domain.c |  54 +++++++++
- drivers/power/domain/mtk-power-domain.c    | 171 +----------------------------
- drivers/power/domain/mtk-power-domain.h    |  81 ++++++++++++++
- 11 files changed, 252 insertions(+), 175 deletions(-)
+ drivers/power/domain/mt2701-power-domain.c |  6 ++++--
+ drivers/power/domain/mt7622-power-domain.c |  4 +++-
+ drivers/power/domain/mtk-power-domain.c    |  8 ++++----
+ drivers/power/domain/mtk-power-domain.h    | 14 +++++++++++++-
+ 4 files changed, 24 insertions(+), 8 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8867921426c..40c3e3bf6b7 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -418,6 +418,7 @@ R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
- T:	git https://source.denx.de/u-boot/custodians/u-boot-mediatek.git
- S:	Maintained
- F:	arch/arm/dts/mt*
-+F:	drivers/power/domain/mt*
- F:	drivers/power/regulator/mt*.c
- F:	drivers/usb/mtu3/
- F:	include/power/mt*.h
-diff --git a/configs/mt7622_rfb_defconfig b/configs/mt7622_rfb_defconfig
-index b3b688ff825..10df7847a4b 100644
---- a/configs/mt7622_rfb_defconfig
-+++ b/configs/mt7622_rfb_defconfig
-@@ -51,7 +51,7 @@ CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7622=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
-+CONFIG_MT7622_POWER_DOMAIN=y
- CONFIG_RAM=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-diff --git a/configs/mt7623a_unielec_u7623_02_defconfig b/configs/mt7623a_unielec_u7623_02_defconfig
-index 826f49a9626..77473e2731f 100644
---- a/configs/mt7623a_unielec_u7623_02_defconfig
-+++ b/configs/mt7623a_unielec_u7623_02_defconfig
-@@ -49,7 +49,7 @@ CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7623=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
-+CONFIG_MT2701_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SYSRESET=y
-diff --git a/configs/mt7623n_bpir2_defconfig b/configs/mt7623n_bpir2_defconfig
-index aeef3bebe96..aacaf5380fa 100644
---- a/configs/mt7623n_bpir2_defconfig
-+++ b/configs/mt7623n_bpir2_defconfig
-@@ -51,7 +51,7 @@ CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7623=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
-+CONFIG_MT2701_POWER_DOMAIN=y
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
- CONFIG_SYSRESET=y
-diff --git a/configs/mt7629_rfb_defconfig b/configs/mt7629_rfb_defconfig
-index 72b1c83312e..91da684939a 100644
---- a/configs/mt7629_rfb_defconfig
-+++ b/configs/mt7629_rfb_defconfig
-@@ -83,7 +83,7 @@ CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_PINCTRL_MT7629=y
- CONFIG_POWER_DOMAIN=y
--CONFIG_MTK_POWER_DOMAIN=y
-+CONFIG_MT7622_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_RAM=y
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index a96c3fb979c..0cadd9b93a9 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -83,12 +83,29 @@ config MESON_SECURE_POWER_DOMAIN
- 	  Enable support for manipulating Amlogic Meson Secure power domains.
- 	  Support for Amlogic A1 series.
- 
--config MTK_POWER_DOMAIN
--	bool "Enable the MediaTek power domain driver"
-+config MT2701_POWER_DOMAIN
-+	bool "Enable the MediaTek power domain driver for MT2701 compatible SoC"
- 	depends on POWER_DOMAIN && ARCH_MEDIATEK
-+	select MTK_POWER_DOMAIN
- 	help
- 	  Enable support for manipulating MediaTek power domains via MMIO
--	  mapped registers.
-+	  mapped registers for MT2701 compatible SoC. The driver powers
-+	  the SoC power domains on and off and handles the associated bus
-+	  protection bits. It is also used on MT7623.
-+
-+config MT7622_POWER_DOMAIN
-+	bool "Enable the MediaTek power domain driver for MT7622 compatible SoC"
-+	depends on POWER_DOMAIN && ARCH_MEDIATEK
-+	select MTK_POWER_DOMAIN
-+	help
-+	  Enable support for manipulating MediaTek power domains via MMIO
-+	  mapped registers for MT7622 compatible SoC. The driver powers
-+	  the SoC power domains on and off and handles the associated bus
-+	  protection bits. It is also used on MT7629.
-+
-+config MTK_POWER_DOMAIN
-+	bool
-+	depends on POWER_DOMAIN && ARCH_MEDIATEK
- 
- config QCOM_RPMH_POWER_DOMAIN
- 	bool "Enable the QCOM RPMH Power domain driver"
-diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-index f3cce2b104e..66772b5d346 100644
---- a/drivers/power/domain/Makefile
-+++ b/drivers/power/domain/Makefile
-@@ -14,6 +14,8 @@ obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
- obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
- obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
- obj-$(CONFIG_MESON_SECURE_POWER_DOMAIN) += meson-secure-pwrc.o
-+obj-$(CONFIG_MT2701_POWER_DOMAIN) += mt2701-power-domain.o
-+obj-$(CONFIG_MT7622_POWER_DOMAIN) += mt7622-power-domain.o
- obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
- obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
- obj-$(CONFIG_RENESAS_R8A78000_POWER_DOMAIN) += renesas-r8a78000-power-domain.o
 diff --git a/drivers/power/domain/mt2701-power-domain.c b/drivers/power/domain/mt2701-power-domain.c
-new file mode 100644
-index 00000000000..5626235360e
---- /dev/null
+index 5626235360e..58ef47c3001 100644
+--- a/drivers/power/domain/mt2701-power-domain.c
 +++ b/drivers/power/domain/mt2701-power-domain.c
-@@ -0,0 +1,87 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2018 MediaTek Inc.
-+ * Copyright (C) 2026 BayLibre, SAS
-+ * Author: Ryder Lee <ryder.lee@mediatek.com>
-+ *         Julien Stephan <jstephan@baylibre.com>
-+ */
+@@ -65,14 +65,16 @@ static const struct mtk_scp_domain_data mt2701_scp_domain[] = {
+ 	},
+ };
+ 
++MTK_SCP_SOC_DATA(mt2701, mt2701_scp_domain);
 +
-+#include <dm.h>
-+#include <dt-bindings/power/mt2701-power.h>
-+#include <linux/bitops.h>
-+
-+#include "mtk-power-domain.h"
-+
-+static const struct mtk_scp_domain_data mt2701_scp_domain[] = {
-+	[MT2701_POWER_DOMAIN_CONN] = {
-+		.sta_mask = PWR_STATUS_CONN,
-+		.ctl_offs = SPM_CONN_PWR_CON,
-+		.bus_prot_mask = BIT(8) | BIT(2),
-+	},
-+	[MT2701_POWER_DOMAIN_DISP] = {
-+		.sta_mask = PWR_STATUS_DISP,
-+		.ctl_offs = SPM_DIS_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.bus_prot_mask = BIT(2),
-+	},
-+	[MT2701_POWER_DOMAIN_MFG] = {
-+		.sta_mask = PWR_STATUS_MFG,
-+		.ctl_offs = SPM_MFG_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(12, 12),
-+	},
-+	[MT2701_POWER_DOMAIN_VDEC] = {
-+		.sta_mask = PWR_STATUS_VDEC,
-+		.ctl_offs = SPM_VDE_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(12, 12),
-+	},
-+	[MT2701_POWER_DOMAIN_ISP] = {
-+		.sta_mask = PWR_STATUS_ISP,
-+		.ctl_offs = SPM_ISP_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(13, 12),
-+	},
-+	[MT2701_POWER_DOMAIN_BDP] = {
-+		.sta_mask = PWR_STATUS_BDP,
-+		.ctl_offs = SPM_BDP_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+	},
-+	[MT2701_POWER_DOMAIN_ETH] = {
-+		.sta_mask = PWR_STATUS_ETH,
-+		.ctl_offs = SPM_ETH_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(15, 12),
-+	},
-+	[MT2701_POWER_DOMAIN_HIF] = {
-+		.sta_mask = PWR_STATUS_HIF,
-+		.ctl_offs = SPM_HIF_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(15, 12),
-+	},
-+	[MT2701_POWER_DOMAIN_IFR_MSC] = {
-+		.sta_mask = PWR_STATUS_IFR_MSC,
-+		.ctl_offs = SPM_IFR_MSC_PWR_CON,
-+	},
-+};
-+
-+static const struct udevice_id mt2701_power_domain_ids[] = {
-+	{
-+		.compatible = "mediatek,mt2701-scpsys",
-+		.data = (ulong)&mt2701_scp_domain,
-+	},
-+	{
-+		.compatible = "mediatek,mt7623-scpsys",
-+		.data = (ulong)&mt2701_scp_domain,
-+	},
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(mt2701_power_domain) = {
-+	.name = "mt2701_power_domain",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.ops = &mtk_power_domain_ops,
-+	.probe = mtk_power_domain_probe,
-+	.of_match = mt2701_power_domain_ids,
-+	.priv_auto = sizeof(struct mtk_scp_domain),
-+};
+ static const struct udevice_id mt2701_power_domain_ids[] = {
+ 	{
+ 		.compatible = "mediatek,mt2701-scpsys",
+-		.data = (ulong)&mt2701_scp_domain,
++		.data = (ulong)&mt2701_scp_soc_data,
+ 	},
+ 	{
+ 		.compatible = "mediatek,mt7623-scpsys",
+-		.data = (ulong)&mt2701_scp_domain,
++		.data = (ulong)&mt2701_scp_soc_data,
+ 	},
+ 	{ /* sentinel */ }
+ };
 diff --git a/drivers/power/domain/mt7622-power-domain.c b/drivers/power/domain/mt7622-power-domain.c
-new file mode 100644
-index 00000000000..487ae477bb0
---- /dev/null
+index 487ae477bb0..b98c384c3b1 100644
+--- a/drivers/power/domain/mt7622-power-domain.c
 +++ b/drivers/power/domain/mt7622-power-domain.c
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2018 MediaTek Inc.
-+ * Copyright (C) 2026 BayLibre, SAS
-+ * Author: Ryder Lee <ryder.lee@mediatek.com>
-+ *         Julien Stephan <jstephan@baylibre.com>
-+ */
+@@ -36,10 +36,12 @@ static const struct mtk_scp_domain_data mt7622_scp_domain[] = {
+ 	},
+ };
+ 
++MTK_SCP_SOC_DATA(mt7622, mt7622_scp_domain);
 +
-+#include <dm.h>
-+#include <dt-bindings/power/mt7622-power.h>
-+#include <linux/bitops.h>
-+
-+#include "mtk-power-domain.h"
-+
-+static const struct mtk_scp_domain_data mt7622_scp_domain[] = {
-+	[MT7622_POWER_DOMAIN_ETHSYS] = {
-+		.sta_mask = PWR_STATUS_ETHSYS,
-+		.ctl_offs = SPM_ETHSYS_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(15, 12),
-+		.bus_prot_mask = (BIT(3) | BIT(17)),
-+	},
-+	[MT7622_POWER_DOMAIN_HIF0] = {
-+		.sta_mask = PWR_STATUS_HIF0,
-+		.ctl_offs = SPM_HIF0_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(15, 12),
-+		.bus_prot_mask = GENMASK(25, 24),
-+	},
-+	[MT7622_POWER_DOMAIN_HIF1] = {
-+		.sta_mask = PWR_STATUS_HIF1,
-+		.ctl_offs = SPM_HIF1_PWR_CON,
-+		.sram_pdn_bits = GENMASK(11, 8),
-+		.sram_pdn_ack_bits = GENMASK(15, 12),
-+		.bus_prot_mask = GENMASK(28, 26),
-+	},
-+};
-+
-+static const struct udevice_id mt7622_power_domain_ids[] = {
-+	{
-+		.compatible = "mediatek,mt7622-scpsys",
-+		.data = (ulong)&mt7622_scp_domain,
-+	},
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(mt7622_power_domain) = {
-+	.name = "mt7622_power_domain",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.ops = &mtk_power_domain_ops,
-+	.probe = mtk_power_domain_probe,
-+	.of_match = mt7622_power_domain_ids,
-+	.priv_auto = sizeof(struct mtk_scp_domain),
-+};
+ static const struct udevice_id mt7622_power_domain_ids[] = {
+ 	{
+ 		.compatible = "mediatek,mt7622-scpsys",
+-		.data = (ulong)&mt7622_scp_domain,
++		.data = (ulong)&mt7622_scp_soc_data,
+ 	},
+ 	{ /* sentinel */ }
+ };
 diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-index 18a45a131b8..a8045c1f91e 100644
+index a8045c1f91e..752ca404875 100644
 --- a/drivers/power/domain/mtk-power-domain.c
 +++ b/drivers/power/domain/mtk-power-domain.c
-@@ -6,153 +6,13 @@
- 
- #include <clk.h>
- #include <dm.h>
--#include <malloc.h>
--#include <power-domain-uclass.h>
- #include <regmap.h>
- #include <syscon.h>
- #include <asm/io.h>
--#include <asm/processor.h>
--#include <linux/bitops.h>
- #include <linux/err.h>
- #include <linux/iopoll.h>
- 
--#include <dt-bindings/power/mt2701-power.h>
--#include <dt-bindings/power/mt7622-power.h>
--
--#define SPM_EN			(0xb16 << 16 | 0x1)
--#define SPM_VDE_PWR_CON		0x0210
--#define SPM_MFG_PWR_CON		0x0214
--#define SPM_ISP_PWR_CON		0x0238
--#define SPM_DIS_PWR_CON		0x023c
--#define SPM_CONN_PWR_CON	0x0280
--#define SPM_BDP_PWR_CON		0x029c
--#define SPM_ETH_PWR_CON		0x02a0
--#define SPM_HIF_PWR_CON		0x02a4
--#define SPM_IFR_MSC_PWR_CON	0x02a8
--#define SPM_ETHSYS_PWR_CON	0x2e0
--#define SPM_HIF0_PWR_CON	0x2e4
--#define SPM_HIF1_PWR_CON	0x2e8
--#define SPM_PWR_STATUS		0x60c
--#define SPM_PWR_STATUS_2ND	0x610
--
--#define PWR_RST_B_BIT		BIT(0)
--#define PWR_ISO_BIT		BIT(1)
--#define PWR_ON_BIT		BIT(2)
--#define PWR_ON_2ND_BIT		BIT(3)
--#define PWR_CLK_DIS_BIT		BIT(4)
--
--#define PWR_STATUS_CONN		BIT(1)
--#define PWR_STATUS_DISP		BIT(3)
--#define PWR_STATUS_MFG		BIT(4)
--#define PWR_STATUS_ISP		BIT(5)
--#define PWR_STATUS_VDEC		BIT(7)
--#define PWR_STATUS_BDP		BIT(14)
--#define PWR_STATUS_ETH		BIT(15)
--#define PWR_STATUS_HIF		BIT(16)
--#define PWR_STATUS_IFR_MSC	BIT(17)
--#define PWR_STATUS_ETHSYS	BIT(24)
--#define PWR_STATUS_HIF0		BIT(25)
--#define PWR_STATUS_HIF1		BIT(26)
--
--/* Infrasys configuration */
--#define INFRA_TOPDCM_CTRL	0x10
--#define INFRA_TOPAXI_PROT_EN	0x220
--#define INFRA_TOPAXI_PROT_STA1	0x228
--
--#define DCM_TOP_EN		BIT(0)
--
--struct mtk_scp_domain;
--
--struct mtk_scp_domain_data {
--	u32 sta_mask;
--	int ctl_offs;
--	u32 sram_pdn_bits;
--	u32 sram_pdn_ack_bits;
--	u32 bus_prot_mask;
--};
--
--struct mtk_scp_domain {
--	void __iomem *base;
--	void __iomem *infracfg;
--	const struct mtk_scp_domain_data *data;
--};
--
--static const struct mtk_scp_domain_data scp_domain_mt2701[] = {
--	[MT2701_POWER_DOMAIN_CONN] = {
--		.sta_mask = PWR_STATUS_CONN,
--		.ctl_offs = SPM_CONN_PWR_CON,
--		.bus_prot_mask = BIT(8) | BIT(2),
--	},
--	[MT2701_POWER_DOMAIN_DISP] = {
--		.sta_mask = PWR_STATUS_DISP,
--		.ctl_offs = SPM_DIS_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.bus_prot_mask = BIT(2),
--	},
--	[MT2701_POWER_DOMAIN_MFG] = {
--		.sta_mask = PWR_STATUS_MFG,
--		.ctl_offs = SPM_MFG_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(12, 12),
--	},
--	[MT2701_POWER_DOMAIN_VDEC] = {
--		.sta_mask = PWR_STATUS_VDEC,
--		.ctl_offs = SPM_VDE_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(12, 12),
--	},
--	[MT2701_POWER_DOMAIN_ISP] = {
--		.sta_mask = PWR_STATUS_ISP,
--		.ctl_offs = SPM_ISP_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(13, 12),
--	},
--	[MT2701_POWER_DOMAIN_BDP] = {
--		.sta_mask = PWR_STATUS_BDP,
--		.ctl_offs = SPM_BDP_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--	},
--	[MT2701_POWER_DOMAIN_ETH] = {
--		.sta_mask = PWR_STATUS_ETH,
--		.ctl_offs = SPM_ETH_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(15, 12),
--	},
--	[MT2701_POWER_DOMAIN_HIF] = {
--		.sta_mask = PWR_STATUS_HIF,
--		.ctl_offs = SPM_HIF_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(15, 12),
--	},
--	[MT2701_POWER_DOMAIN_IFR_MSC] = {
--		.sta_mask = PWR_STATUS_IFR_MSC,
--		.ctl_offs = SPM_IFR_MSC_PWR_CON,
--	},
--};
--
--static const struct mtk_scp_domain_data scp_domain_mt7622[] = {
--	[MT7622_POWER_DOMAIN_ETHSYS] = {
--		.sta_mask = PWR_STATUS_ETHSYS,
--		.ctl_offs = SPM_ETHSYS_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(15, 12),
--		.bus_prot_mask = (BIT(3) | BIT(17)),
--	},
--	[MT7622_POWER_DOMAIN_HIF0] = {
--		.sta_mask = PWR_STATUS_HIF0,
--		.ctl_offs = SPM_HIF0_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(15, 12),
--		.bus_prot_mask = GENMASK(25, 24),
--	},
--	[MT7622_POWER_DOMAIN_HIF1] = {
--		.sta_mask = PWR_STATUS_HIF1,
--		.ctl_offs = SPM_HIF1_PWR_CON,
--		.sram_pdn_bits = GENMASK(11, 8),
--		.sram_pdn_ack_bits = GENMASK(15, 12),
--		.bus_prot_mask = GENMASK(28, 26),
--	},
--};
-+#include "mtk-power-domain.h"
- 
- /**
-  * This function enables the bus protection bits for disabled power
-@@ -298,7 +158,7 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
- 	return 0;
- }
- 
--static int mtk_power_domain_probe(struct udevice *dev)
-+int mtk_power_domain_probe(struct udevice *dev)
+@@ -44,7 +44,7 @@ static int mtk_infracfg_clear_bus_protection(void __iomem *infracfg,
+ static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
  {
- 	struct ofnode_phandle_args args;
- 	struct mtk_scp_domain *scpd = dev_get_priv(dev);
-@@ -335,32 +195,7 @@ static int mtk_power_domain_probe(struct udevice *dev)
- 	return clk_enable_bulk(&bulk);
- }
+ 	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpd->data[power_domain->id];
++	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
+ 	u32 sta = readl(scpd->base + SPM_PWR_STATUS) &
+ 			data->sta_mask;
+ 	u32 sta2 = readl(scpd->base + SPM_PWR_STATUS_2ND) &
+@@ -65,7 +65,7 @@ static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
+ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ {
+ 	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpd->data[power_domain->id];
++	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
+ 	void __iomem *ctl_addr = scpd->base + data->ctl_offs;
+ 	u32 pdn_ack = data->sram_pdn_ack_bits;
+ 	u32 val;
+@@ -114,7 +114,7 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
+ static int mtk_scpsys_power_off(struct power_domain *power_domain)
+ {
+ 	struct mtk_scp_domain *scpd = dev_get_priv(power_domain->dev);
+-	const struct mtk_scp_domain_data *data = &scpd->data[power_domain->id];
++	const struct mtk_scp_domain_data *data = &scpd->soc_data->data[power_domain->id];
+ 	void __iomem *ctl_addr = scpd->base + data->ctl_offs;
+ 	u32 pdn_ack = data->sram_pdn_ack_bits;
+ 	u32 val;
+@@ -170,7 +170,7 @@ int mtk_power_domain_probe(struct udevice *dev)
+ 	if (!scpd->base)
+ 		return -ENOENT;
  
--static const struct udevice_id mtk_power_domain_ids[] = {
--	{
--		.compatible = "mediatek,mt2701-scpsys",
--		.data = (ulong)&scp_domain_mt2701,
--	},
--	{
--		.compatible = "mediatek,mt7622-scpsys",
--		.data = (ulong)&scp_domain_mt7622,
--	},
--	{
--		.compatible = "mediatek,mt7623-scpsys",
--		.data = (ulong)&scp_domain_mt2701,
--	},
--	{ /* sentinel */ }
--};
--
--static const struct power_domain_ops mtk_power_domain_ops = {
-+const struct power_domain_ops mtk_power_domain_ops = {
- 	.off = mtk_scpsys_power_off,
- 	.on = mtk_scpsys_power_on,
- };
--
--U_BOOT_DRIVER(mtk_power_domain) = {
--	.name = "mtk_power_domain",
--	.id = UCLASS_POWER_DOMAIN,
--	.ops = &mtk_power_domain_ops,
--	.probe = mtk_power_domain_probe,
--	.of_match = mtk_power_domain_ids,
--	.priv_auto	= sizeof(struct mtk_scp_domain),
--};
+-	scpd->data = (const struct mtk_scp_domain_data *)dev_get_driver_data(dev);
++	scpd->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
+ 
+ 	/* get corresponding syscon phandle */
+ 	err = dev_read_phandle_with_args(dev, "infracfg", NULL, 0, 0, &args);
 diff --git a/drivers/power/domain/mtk-power-domain.h b/drivers/power/domain/mtk-power-domain.h
-new file mode 100644
-index 00000000000..0c2c06a045f
---- /dev/null
+index 0c2c06a045f..ade77af8f33 100644
+--- a/drivers/power/domain/mtk-power-domain.h
 +++ b/drivers/power/domain/mtk-power-domain.h
-@@ -0,0 +1,81 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2018 MediaTek Inc.
-+ * Copyright (C) 2026 BayLibre, SAS
-+ * Author: Ryder Lee <ryder.lee@mediatek.com>
-+ *         Julien Stephan <jstephan@baylibre.com>
-+ */
-+
-+#ifndef __MTK_POWER_DOMAIN_H
-+#define __MTK_POWER_DOMAIN_H
-+
-+#include <power-domain-uclass.h>
-+#include <linux/bitops.h>
-+#include <linux/compiler.h>
-+#include <linux/types.h>
-+
-+struct udevice;
-+
-+#define SPM_EN			(0xb16 << 16 | 0x1)
-+#define SPM_VDE_PWR_CON		0x0210
-+#define SPM_MFG_PWR_CON		0x0214
-+#define SPM_ISP_PWR_CON		0x0238
-+#define SPM_DIS_PWR_CON		0x023c
-+#define SPM_CONN_PWR_CON	0x0280
-+#define SPM_BDP_PWR_CON		0x029c
-+#define SPM_ETH_PWR_CON		0x02a0
-+#define SPM_HIF_PWR_CON		0x02a4
-+#define SPM_IFR_MSC_PWR_CON	0x02a8
-+#define SPM_ETHSYS_PWR_CON	0x2e0
-+#define SPM_HIF0_PWR_CON	0x2e4
-+#define SPM_HIF1_PWR_CON	0x2e8
-+#define SPM_PWR_STATUS		0x60c
-+#define SPM_PWR_STATUS_2ND	0x610
-+
-+#define PWR_RST_B_BIT		BIT(0)
-+#define PWR_ISO_BIT		BIT(1)
-+#define PWR_ON_BIT		BIT(2)
-+#define PWR_ON_2ND_BIT		BIT(3)
-+#define PWR_CLK_DIS_BIT		BIT(4)
-+
-+#define PWR_STATUS_CONN		BIT(1)
-+#define PWR_STATUS_DISP		BIT(3)
-+#define PWR_STATUS_MFG		BIT(4)
-+#define PWR_STATUS_ISP		BIT(5)
-+#define PWR_STATUS_VDEC		BIT(7)
-+#define PWR_STATUS_BDP		BIT(14)
-+#define PWR_STATUS_ETH		BIT(15)
-+#define PWR_STATUS_HIF		BIT(16)
-+#define PWR_STATUS_IFR_MSC	BIT(17)
-+#define PWR_STATUS_ETHSYS	BIT(24)
-+#define PWR_STATUS_HIF0		BIT(25)
-+#define PWR_STATUS_HIF1		BIT(26)
-+
-+/* Infrasys configuration */
-+#define INFRA_TOPDCM_CTRL	0x10
-+#define INFRA_TOPAXI_PROT_EN	0x220
-+#define INFRA_TOPAXI_PROT_STA1	0x228
-+
-+#define DCM_TOP_EN		BIT(0)
-+
-+struct mtk_scp_domain;
-+
-+struct mtk_scp_domain_data {
-+	u32 sta_mask;
-+	int ctl_offs;
-+	u32 sram_pdn_bits;
-+	u32 sram_pdn_ack_bits;
-+	u32 bus_prot_mask;
-+};
-+
-+struct mtk_scp_domain {
-+	void __iomem *base;
-+	void __iomem *infracfg;
+@@ -12,6 +12,7 @@
+ #include <power-domain-uclass.h>
+ #include <linux/bitops.h>
+ #include <linux/compiler.h>
++#include <linux/kernel.h>
+ #include <linux/types.h>
+ 
+ struct udevice;
+@@ -68,10 +69,21 @@ struct mtk_scp_domain_data {
+ 	u32 bus_prot_mask;
+ };
+ 
++struct mtk_scp_soc_data {
 +	const struct mtk_scp_domain_data *data;
++	int num_domains;
 +};
 +
-+int mtk_power_domain_probe(struct udevice *dev);
++#define MTK_SCP_SOC_DATA(_name, _domains)			\
++static const struct mtk_scp_soc_data _name##_scp_soc_data = {	\
++	.data = _domains,					\
++	.num_domains = ARRAY_SIZE(_domains),			\
++}
 +
-+extern const struct power_domain_ops mtk_power_domain_ops;
-+
-+#endif /* __MTK_POWER_DOMAIN_H */
+ struct mtk_scp_domain {
+ 	void __iomem *base;
+ 	void __iomem *infracfg;
+-	const struct mtk_scp_domain_data *data;
++	const struct mtk_scp_soc_data *soc_data;
+ };
+ 
+ int mtk_power_domain_probe(struct udevice *dev);
 
 -- 
 2.54.0
