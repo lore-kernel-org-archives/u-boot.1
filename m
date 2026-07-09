@@ -4,104 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE61EC44501
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6A2C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DB1F84ADD;
+	by phobos.denx.de (Postfix) with ESMTP id 6816E84B43;
 	Thu,  9 Jul 2026 15:05:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ri9X+uOz";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="WH1j+Wmk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E50C184A51; Thu,  9 Jul 2026 06:21:58 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A3DE084AB8; Thu,  9 Jul 2026 10:38:59 +0200 (CEST)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99213849BA
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 06:21:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A38849BA
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 10:38:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=royzah@gmail.com
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-664c535f1a0so736162d50.1
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 21:21:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783570915; cv=none;
- d=google.com; s=arc-20260327;
- b=Q9eFTIKqt5YRlchRquxh7dPVeZoPeEeMW8whXo+JQSI29k6rHp/AKchq5I4Q4y/x+F
- cOHHpV3YP574hgpwt90BH8EL0eV3GsRXEuIonDvH9me1mEHreWdqlIyLfCfdN8DJSdeJ
- LI0LWOR0H7uFfpfHNVPdtPl4p26nBSF0BSuE6IznCH3l3W+kABmNa6l0qJ5OV1pz9PBz
- 2lIePUumXVQEsMRLAkmeILvQfXVcj8eMo7nGg8TVXdHATAElhciX20Mjah5+XA6zKVI3
- jAviWPWxSQOmWmrWJkCrgfK6+DNXVxonQI8ZguUlupNyVxSgSJIU/V3IeZ955+Wz4s+f
- ofow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=KBjWuWwRLUTsFJ45rIJwkcJ0nZB6AcoPxYqrfXDPWcA=;
- fh=FGYByrkKwCjP+a6qYoeOwM11ezFFIIDnX4hNCEQGMgY=;
- b=jrWR7RQKPpy9/CW2ki8fjEk134oLM9oKlvB7Va1r6JiJGVQCH87K+aMSfy8WKTKgbo
- vImOH/Gkw8QqWFChwElqEFoDDiWwMN3o8jk5+FKAQZCM32GvCjnPl8UNldbaVfXtqZGj
- ++aT9hzR+GnDmaTT9U4ZeWwFq+gc6aW7HCGTsVy0yLs528yKcUu9OdEjYAghNJ+izL72
- bTfiiH92mx4PcprQEi7g4qUGFCS/NGhIWo+3r7R5Np3wqcC61tY3632wCZ6o5u5MXZNt
- vj6NDU6ntzLJQMbiE2zKGfGBo7xClKjGsJl4smNtF4qtI0lTt9FLfZoHMMrADzfhoCMm
- vLrA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783570915; x=1784175715; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=KBjWuWwRLUTsFJ45rIJwkcJ0nZB6AcoPxYqrfXDPWcA=;
- b=ri9X+uOzD6PLSCD5o6npQazI6PaaRhc6yfPkhKwF9AEjcYPP/v7iUXN5UFUFaLyNj6
- zJf+GHcM55JJ5WCJfFU17NXD1SfckbKDKsKv3LYcR3HnLWYyaZ79pMETwfB1t9JELD8P
- F7M5zIkAS2tdRxCc5vo3Cravdcl+j9L1txRzSQQYvVzZVUABz2azTbxY0P356dLjodxl
- aD12hA+aMC5KYn/5TPZZkqRFaxwlrG+CZA879VM3lHKU+JCLvAqaCaGbGVV341CZrCaL
- JuCvx+WEE9Q/4MOSAtlvJIJWGl6DIhJni52s1hZtpzy/4SDvLDxJKn+1nc00LOXqArWR
- xVpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783570915; x=1784175715;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=KBjWuWwRLUTsFJ45rIJwkcJ0nZB6AcoPxYqrfXDPWcA=;
- b=jNVBtfDbkpGzawL6Vk+wQByM2sY9aJlu9KbQF08CLTVXQls+eBJq0L9zLdeRGV7E8O
- mRpSE+vHHv4L9NXeT1whvNybGOH6GH7skgvq2+CUdduWF6qtDuRdmcsMYeKVmhuaoR64
- aiqdQ8FCFikvzkv1kH9DIwQM3X66Vy7kZ12Zy/pClu9622XWlu9qq4RY4NjduUg5aj3H
- owXUnXCoYpiKSvtk+Auwhr8onC8xTZGbXMlomI6Szy4qaoUNO++F7yexX7jNsGZcxwZ8
- dWH+Sctyxv1QvENU2cWret+dA9JC3wnV72ThvNBsvzOAm7rRmbK54jpYYNaubn8RF34b
- kaTg==
-X-Gm-Message-State: AOJu0YwrwS8ioBkg8TWrZ1q+3VGnr44VvQ0b3Tx6ppTVpYfnr6IzNq9s
- XckcrUJ0hRHfRPh2WjsQYSipVW/UqzFAG0JmYaEpp0lW1oIMvYUxnYH8IlhiprnEUWxu5TdFRXH
- hn8t8CAmwLWsPoXGpDuM5aylQ1JocEfJ3ZmCJpgmHa3rdBBk=
-X-Gm-Gg: AfdE7ckKa5Zb6aZpXSjL36EJr2Zk+LuAV6z3BsJwBCTwEkO92IRtGYWCNQSXUESMu/w
- 45gkzsG6ifwHqP4hyHUYhyXsYPrgFylKB57golpcdWhZQiFUbhOyEo1mtzmivBW3QhUfuBhEydc
- 9Viw2B7IG4gCHjCh9YsLMknG84qqUoAbGArcDXsmn1rJTVbfhDN2RBfKk7TGG2cZ/kIdAk7CKOZ
- dKGhUUIdabjyJGf7GSG7ibjhvwVfiB7ZagmhptTEWEmgcAs1r3aHrENIxRIt3cxpCSWfKnSsg++
- 6oklE2Lcz2BJNo31BzwWlfdTtbEU
-X-Received: by 2002:a05:690e:4083:b0:667:997e:7cfa with SMTP id
- 956f58d0204a3-6679f2c8816mr3924189d50.94.1783570915263; Wed, 08 Jul 2026
- 21:21:55 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Suraj.HanumantKakade@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gxcNaxWyE4MB1fSrOO7waTBFlQI+pVQUu7SbJom1ixpqhjhPF2uySZLFs8+IiHxj3Gc3oiB7wxzhyJE8gJay675VVNQKuVRfRHih8jYLKU4Bt5byx2YOS4FToS8uzep8O4ToKI/Wi3cLHp9/KntwYW8BF0mvsp/zFmpHeaWcdoJsQ1s2uh5s755yMHgpCFknFZhnECq8/iv/Q5RoCNb5CfKSXXgSapmnX4+vCYFrbyTf391DTPQr/eEYeE2yWmhDEsiPiz/cBg8Hmb9e3loePVx4cc4fJHypKlIgAsN0rPkuGMJhxYAfNAetn2IeVIZ0e2Nrrt7+EwxhAQ8qy2Y5kg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xdkJrbkPzD/3IBwXF+rcJaPig/JtsU5HXmeOgB0K+/U=;
+ b=xqgw2FZZnkZ13AVFr2Jc2pxLDygpQaZHVBQ7q53vLV5jLjkHHi3u4twbC58nWCo6d1IeW6lCp/Q7G/p8xcUOzzGeYkIQ1zNiLpNsAQRT4D2igJPZso6ga/MbUspMpPUtHzmCNGB5zDsK3gSBDXCY8njyNDhibXThbqus13Onh6QCUmD8WcC/MnvhqqkL3ol7+kSAkX/vrs5l14cMP4JUxVZExcDG5+QLFeuB0DQUKr1QJqwnYy5Xa5C6qRdmrz03sRgKF8HZ8OD7L2efsS1aZhJjD9gLkMoQr5kay2X6KTNkAQIMLWAChL3sgT9wFz5UMOCAhIWoUZZI8XWugz/GbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xdkJrbkPzD/3IBwXF+rcJaPig/JtsU5HXmeOgB0K+/U=;
+ b=WH1j+Wmk01FdrV4xCoL7ayi9cYvZW6qy4hqLBAXjyPqSzNbkYkpWYuhQXoFlL0VP8ccDM68w0wLRdEek0C8LJ3eeb2b5iLoXHuqE4ybulv7giHJlQ8+uTB20/QEN0MhQ5NshKF482uKOcQie8nIcbel0GFmmxzRYlXdhKcV9UE0=
+Received: from BLAPR03CA0120.namprd03.prod.outlook.com (2603:10b6:208:32a::35)
+ by DS0PR12MB8342.namprd12.prod.outlook.com (2603:10b6:8:f9::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.16; Thu, 9 Jul
+ 2026 08:38:51 +0000
+Received: from MN1PEPF0000F0E1.namprd04.prod.outlook.com
+ (2603:10b6:208:32a:cafe::69) by BLAPR03CA0120.outlook.office365.com
+ (2603:10b6:208:32a::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Thu, 9
+ Jul 2026 08:38:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MN1PEPF0000F0E1.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.6 via Frontend Transport; Thu, 9 Jul 2026 08:38:51 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
+ 2026 03:38:49 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
+ Transport; Thu, 9 Jul 2026 03:38:47 -0500
+From: Suraj Kakade <suraj.hanumantkakade@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Suraj Kakade
+ <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, Jagan Teki
+ <jagan@openedev.com>, Siva Durga Prasad Paladugu
+ <siva.durga.prasad.paladugu@amd.com>
+Subject: [PATCH] spi: zynqmp_gqspi: fix quad mode bus conflict
+Date: Thu, 9 Jul 2026 14:07:26 +0530
+Message-ID: <20260709083757.1851446-1-suraj.hanumantkakade@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260708170228.621618-1-royzah@gmail.com>
- <48cde03b-5032-4863-b44a-a401dc793cfe@linaro.org>
-In-Reply-To: <48cde03b-5032-4863-b44a-a401dc793cfe@linaro.org>
-From: Muhammad Royyan Zahir <royzah@gmail.com>
-Date: Thu, 9 Jul 2026 08:21:44 +0400
-X-Gm-Features: AVVi8CeE9o_qt1frCJX1JEEvDvDFi_qcKZFMk1CMybG6iEhzXEyhxm6-_CvYLbA
-Message-ID: <CAO9oOQJMAuU=54CRSCk25CvsPqStJYUgVPPe_OtWKn_2=9yEPg@mail.gmail.com>
-Subject: Re: [PATCH] clk: qcom: sa8775p: enable GPLL9 before SDCC1 high-speed
- rates
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E1:EE_|DS0PR12MB8342:EE_
+X-MS-Office365-Filtering-Correlation-Id: c1f3a3b7-c6a6-4390-fc24-08dedd9580e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|23010399003|376014|1800799024|82310400026|18002099003|56012099006|11063799006|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: pwLKlpSvszSOTzDW+fSHLOEWOGXjRepIVM5Q+foLocHUewgD2GaxYgIm74uu+WQpIynEfCzwRBnccXIKfOb5mNhknzd/fO4gDVgbRqJyWsuhmAJ6HfArAFdVEHw2RHuu3GjiJdiq1s+ldO5qN4y6iiHEMv4cGtiTgKkRFm27NfQ6bGIJWpKQS/xNb71QQJjahG6cfMrEf8BmhlBqqvhN9TSq+fma7Cf9hD2RdwKMsF82HCCjiPc3tqxQY+PcUYLqaSyQ9nDq4KzUhDtXzZdbCn8dSdmvSDNGSTnQaf9tOwQUf3BXjsEVVG727kzzngwoS11QbfTxI0ec8bBflL5wJ+YLJxW9yP0MrkoH7JMDAX6z6AW+eIZD4gZu3NzP2814cCtD0lVd9bnTAILJwtbbwV+8xvSDrIggkBEdAG53S5yYtVEWU0fCXTIfAK1rsNa3ExJulQQTD0NSYub7U2F5BlbsDgtJ0PMVWfCGGnYymbxC3fA2zss7HNpyncdlIphKNv8CEoE3daCJeifJ1/XqZ5EEvUrhlhnag4rVJBxkcJThZj3fpzqnQ2YGvXPWfwlS4LAF6BbZyrXqfz/GRaz//+mREgglZoU5vIKDz7Ug+1C1yEriJReHj6oMKvGuwF2Oo89jNBglw8q3+kcqJEarQ8iJkTFIfSzJh7oPHjP5268Ycr482IIYedKRZjGp6efPSIXqo589AVvr4+ShPByX1A==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(23010399003)(376014)(1800799024)(82310400026)(18002099003)(56012099006)(11063799006)(6133799003)(3023799007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: UrglKB5nzrPiZLPUBkJC34b/KC/eBBwvqLu5Wrmo5g9tOyoY/zMeUB82X53tOmXKc6icJdk4hEbFhe5J+JJviY9lOI36BQnNMj5VCF4rFGKLdOkznYozfmM/cthKK3brDUJ3MS9i5EITBOezi7PnJP1yTjOm5fwJd785rSCCCqr8xLLXPkVae9PK+OkvkX+ygvdOJ3TJdIS13L8jBQgkU7pkEKF4rkJsbQ0KjfSepqN6U/X97H7dCVfAsQpzphhQ+CtRqT86hZ8oR4FE9FMNaNA3NLjlKoMiyJCyneX+f63QGelr1VGm6ZG+czCrpzDoZUAJdVmFCiIYFm8Vz7IP6mu1FRynZ01tdRjMqv2OWDFRUsxhyrS74egjaSLwNGHveqYPEwADVBzV7ltDHeWu3OVpJil7QGYUGc4FsM1TQaEvEzWuuTBZ7vvpDKl0fr2d
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 08:38:51.5516 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c1f3a3b7-c6a6-4390-fc24-08dedd9580e9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E1.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8342
 X-Mailman-Approved-At: Thu, 09 Jul 2026 15:05:30 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,117 +125,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+Starting the GENFIFO after each CMD and ADDR entry creates a gap
+between the address phase (TX) and data phase (RX). For read commands
+without dummy cycles, the controller is still driving DQ2/DQ3 HIGH
+when the flash switches to output mode, causing a bus conflict.
 
-Thanks for the review!
+Split the GENFIFO helper into a write-only variant and a
+start-and-wait variant. Queue CMD, ADDR and dummy entries without
+starting the GENFIFO. The data phase appends its entry and starts
+the queued sequence, keeping the address-to-data transition
+continuous.
 
-I confirmed SDCC1 here is the board's single sdhc controller (mmc@87c4000,
-GCC_SDCC1_APPS_CLK), and the EVK's sd-card overlay wires it to the SD slot,
-so a card in high-speed mode exercises exactly the GPLL9-sourced 192 MHz
-rate this patch enables.
+Since genfifo_cmd() no longer triggers after each entry, operations
+without a data phase have no trigger path. Call start_gen_fifo()
+from exec_op() before deasserting chip select to execute the queued
+CMD and ADDR entries.
 
-I do not have the board on hand at the moment (i am travelling) my
-mate does, so I will arrange the SD-card file-access test through him and
-follow up with a Tested-by.
-If Balaji, Varadarajan or Sumit get to it first on their boards, all the
-better.
+Fixes: 22cca1730ec4 ("spi: zynqmp_gqspi: Add support for ZynqMP qspi driver")
+Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ drivers/spi/zynqmp_gqspi.c | 43 +++++++++++++++++++++++++++++---------
+ 1 file changed, 33 insertions(+), 10 deletions(-)
 
-Thanks,
-Royyan
+diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+index 2a095d0c58e..f572f2b3f15 100644
+--- a/drivers/spi/zynqmp_gqspi.c
++++ b/drivers/spi/zynqmp_gqspi.c
+@@ -283,16 +283,21 @@ static u32 zynqmp_qspi_genfifo_mode(u8 buswidth)
+ 	}
+ }
+ 
+-static void zynqmp_qspi_fill_gen_fifo(struct zynqmp_qspi_priv *priv,
+-				      u32 gqspi_fifo_reg)
++static void zynqmp_qspi_write_gen_fifo(struct zynqmp_qspi_priv *priv,
++				       u32 gqspi_fifo_reg)
+ {
+ 	struct zynqmp_qspi_regs *regs = priv->regs;
+-	u32 config_reg, ier;
+-	int ret = 0;
+ 
+ 	log_content("%s, GFIFO_CMD: 0x%X\n", __func__, gqspi_fifo_reg);
+ 
+ 	writel(gqspi_fifo_reg, &regs->genfifo);
++}
++
++static int zynqmp_qspi_start_gen_fifo(struct zynqmp_qspi_priv *priv)
++{
++	struct zynqmp_qspi_regs *regs = priv->regs;
++	u32 config_reg, ier;
++	int ret = 0;
+ 
+ 	config_reg = readl(&regs->confr);
+ 	/* Manual start if needed */
+@@ -310,6 +315,15 @@ static void zynqmp_qspi_fill_gen_fifo(struct zynqmp_qspi_priv *priv,
+ 	if (ret)
+ 		log_warning("%s, Timeout\n", __func__);
+ 
++	return ret;
++}
++
++static int zynqmp_qspi_fill_gen_fifo(struct zynqmp_qspi_priv *priv,
++				     u32 gqspi_fifo_reg)
++{
++	zynqmp_qspi_write_gen_fifo(priv, gqspi_fifo_reg);
++
++	return zynqmp_qspi_start_gen_fifo(priv);
+ }
+ 
+ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
+@@ -573,7 +587,7 @@ static void zynqmp_qspi_genfifo_cmd(struct zynqmp_qspi_priv *priv)
+ 	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(op->cmd.buswidth);
+ 	gen_fifo_cmd |= GQSPI_GFIFO_TX;
+ 	gen_fifo_cmd |= op->cmd.opcode;
+-	zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++	zynqmp_qspi_write_gen_fifo(priv, gen_fifo_cmd);
+ 
+ 	/* Send address */
+ 	for (i = 0; i < op->addr.nbytes; i++) {
+@@ -584,7 +598,7 @@ static void zynqmp_qspi_genfifo_cmd(struct zynqmp_qspi_priv *priv)
+ 		gen_fifo_cmd |= GQSPI_GFIFO_TX;
+ 		gen_fifo_cmd |= addr;
+ 
+-		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		zynqmp_qspi_write_gen_fifo(priv, gen_fifo_cmd);
+ 	}
+ 
+ 	/* Send dummy */
+@@ -596,7 +610,7 @@ static void zynqmp_qspi_genfifo_cmd(struct zynqmp_qspi_priv *priv)
+ 		gen_fifo_cmd &= ~(GQSPI_GFIFO_TX | GQSPI_GFIFO_RX);
+ 		gen_fifo_cmd |= GQSPI_GFIFO_DATA_XFR_MASK;
+ 		gen_fifo_cmd |= dummy_cycles;
+-		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		zynqmp_qspi_write_gen_fifo(priv, gen_fifo_cmd);
+ 	}
+ }
+ 
+@@ -644,7 +658,9 @@ static int zynqmp_qspi_genfifo_fill_tx(struct zynqmp_qspi_priv *priv)
+ 
+ 	while (priv->len) {
+ 		len = zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
+-		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		ret = zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		if (ret)
++			return ret;
+ 
+ 		if (gen_fifo_cmd & GQSPI_GFIFO_EXP_MASK)
+ 			ret = zynqmp_qspi_fill_tx_fifo(priv, 1 << len);
+@@ -666,6 +682,7 @@ static int zynqmp_qspi_start_io(struct zynqmp_qspi_priv *priv,
+ 	struct zynqmp_qspi_regs *regs = priv->regs;
+ 	u32 last_bits;
+ 	u32 *traverse = buf;
++	int ret;
+ 
+ 	while (priv->len) {
+ 		len = zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
+@@ -674,7 +691,9 @@ static int zynqmp_qspi_start_io(struct zynqmp_qspi_priv *priv,
+ 			priv->bytes_to_receive = (1 << len);
+ 		else
+ 			priv->bytes_to_receive = len;
+-		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		ret = zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++		if (ret)
++			return ret;
+ 
+ 		/* Manual start */
+ 		config_reg = readl(&regs->confr);
+@@ -741,7 +760,9 @@ static int zynqmp_qspi_start_dma(struct zynqmp_qspi_priv *priv,
+ 
+ 		while (priv->len) {
+ 			zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
+-			zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++			ret = zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
++			if (ret)
++				return ret;
+ 		}
+ 
+ 		ret = wait_for_bit_le32(&dma_regs->dmaisr,
+@@ -886,6 +907,8 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 		ret = zynqmp_qspi_genfifo_fill_rx(priv);
+ 	else if (op->data.dir == SPI_MEM_DATA_OUT)
+ 		ret = zynqmp_qspi_genfifo_fill_tx(priv);
++	else
++		ret = zynqmp_qspi_start_gen_fifo(priv);
+ 
+ 	zynqmp_qspi_chipselect(priv, 0);
+ 
+-- 
+2.34.1
 
-On Thu, Jul 9, 2026 at 8:03=E2=80=AFAM Casey Connolly <casey.connolly@linar=
-o.org>
-wrote:
-
-> Hi Royyan,
->
-> On 7/8/26 19:02, Royyan Zahir wrote:
-> > On lemans/sa8775p, the SDCC1 apps clock high-speed rates (192 and 384
-> MHz)
-> > source from GPLL9 (ftbl_gcc_sdcc1_apps_clk_src), but the driver never
-> enables
-> > GPLL9. When SDCC1 is set to such a rate the RCG switches its source to =
-a
-> PLL
-> > that is off, so the CMD_RCGR update bit never self-clears and U-Boot
-> warns:
-> >
-> >    WARNING: RCG @ 0x120014 stuck at off
-> >
-> > Vote GPLL9 on before selecting it as the SDCC1 source, mirroring how
-> > clock-sm8250.c enables GPLL9 for SDCC2. GPLL9's mode/status register is
-> at
-> > 0x9000 (lock is bit 31) and its enable vote is bit 9 of the APCS GPLL
-> vote
-> > register 0x4b028, matching gcc-sa8775p.c in Linux.
->
-> Nice find! Thanks for fixing this.
->
-> >
-> > Not hardware-validated for SDCC high speed: the board this was found on
-> > (Qualcomm IQ-9075 / Lemans EVK) boots from UFS with no SD card
-> populated, so
-> > here it only clears the stuck-RCG warning. Build-tested on lemans.
->
-> Can you test file access on an sdcard perhaps?
->
-> Balaji, Varadarajan, Sumit: could you confirm this fix and maybe send a
-> T-b?
->
-> >
-> > Signed-off-by: Royyan Zahir <royzah@gmail.com>
->
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
->
-> Thanks,
-> // Casey
->
-> > ---
-> >   drivers/clk/qcom/clock-sa8775p.c | 14 ++++++++++++++
-> >   1 file changed, 14 insertions(+)
-> >
-> > diff --git a/drivers/clk/qcom/clock-sa8775p.c
-> b/drivers/clk/qcom/clock-sa8775p.c
-> > --- a/drivers/clk/qcom/clock-sa8775p.c
-> > +++ b/drivers/clk/qcom/clock-sa8775p.c
-> > @@ -26,6 +26,9 @@
-> >
-> >   #define SDCC1_APPS_CLK_CMD_RCGR                     0x20014
-> >
-> > +#define APCS_GPLL9_STATUS                    0x9000
-> > +#define APCS_GPLLX_ENA_REG                   0x4b028
-> > +
-> >   #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
-> >   #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
-> >   #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
-> > @@ -90,6 +93,14 @@
-> >       { }
-> >   };
-> >
-> > +/* GPLL9 (SDCC1 high-speed source) is not enabled by earlier boot
-> stages. */
-> > +static const struct pll_vote_clk gpll9_vote_clk =3D {
-> > +     .status =3D APCS_GPLL9_STATUS,
-> > +     .status_bit =3D BIT(31),
-> > +     .ena_vote =3D APCS_GPLLX_ENA_REG,
-> > +     .vote_bit =3D BIT(9),
-> > +};
-> > +
-> >   static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
-> >   {
-> >       struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
-> > @@ -130,6 +141,9 @@
-> >               return 19200000;
-> >       case GCC_SDCC1_APPS_CLK:
-> >               freq =3D qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate=
-);
-> > +             /* SDCC1 high-speed rates source from GPLL9; vote it on
-> first. */
-> > +             if (freq->src =3D=3D CFG_CLK_SRC_GPLL9)
-> > +                     clk_enable_gpll0(priv->base, &gpll9_vote_clk);
-> >               clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
-> >                                    freq->pre_div, freq->m, freq->n,
-> freq->src, 8);
-> >               return freq->freq;
->
->
