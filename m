@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B4EC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 06:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8842FC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 07:12:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6376C84AB5;
-	Thu,  9 Jul 2026 08:45:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BAEA084A51;
+	Thu,  9 Jul 2026 09:12:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aUlOFiIX";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Tr9l/7W1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WRU7zznA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2845584AB5; Thu,  9 Jul 2026 08:45:34 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id C6C9984AA3; Thu,  9 Jul 2026 09:12:32 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B029584AC5
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 08:45:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gwlpM2R9DzKvyY;
- Thu, 09 Jul 2026 08:45:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783579531;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ceJFBJUn5YhpXNih4dD7JMiBuvoW4y+Y9edixLScbA4=;
- b=aUlOFiIXiF+zYR9tVW3jsWkjKm+rmBpdmW2v4XSruOvpQSzD/9a12C+fBfaUx8i7nDAA/n
- o8bTeey/fuAIQsMinErjI6S9r6fCaUEDffDMKBn/99d/AAT/UG5q+yCJuVudCfw1aClYWM
- zSstvSrCC9AHJ0uTh6+k8YLnLBGUAyk3zI/hrRTu1MZXMCxoDKG82Z2xRpM2znEfI2oECz
- hfMCrI9H/nTsfn+BSQkxZ4LwBga6D6evtRcaaYm3hptakXOUzN6+TSRX79h+Wb9vOqczSF
- IUv3RxdAFfabAc4RjC3CAzoXxp1oECcxifYFt5kvuEWjaEQgqIBR6tRXZEJYxw==
-Message-ID: <4db10c8c-e8ab-4a9c-9114-87d195754e15@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783579529;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ceJFBJUn5YhpXNih4dD7JMiBuvoW4y+Y9edixLScbA4=;
- b=Tr9l/7W1MYnQF79NknzP3PkcnyoRzJGq086OwDsOUg7WIO6ln+/I7RSj0McucOHK3kjr+P
- jT67Kh/W+JDO12Twf0dz+4T7oe1379rCPgf+oFGUj9UKHjeayZUUhkexjarsxrWl2SBca/
- 80MGBTuWzwwesu5jtp0TCEXzDO4r4s90/M02AEG3aGvQAEWMO16i/T6Ig/+v9RlNxPZAQF
- e2YRLuuljwa2hzPTJZMo41AFcupQreiitoj7AJP/jyXlh0LyYo7aAjAJdh/7pgr1NOfa4R
- KCb5bSuEMTBO2HsYrwyOB/F5pczCLvqtw1QOdgP2X3ja7gRULE4ZYtJR6G9XSA==
-Date: Thu, 9 Jul 2026 08:45:25 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 223FC84A3E
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 09:12:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=747f=FD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1783581148;
+ bh=d3iI4avzt7PAFfFO/cGSX4lnXK7FdZPKxVYW7NGxL8M=;
+ b=WRU7zznAjEXIzdrOhCBhFjvTFWiOIkaOczgB4AFO+rYe7YA4l2tMmBe89vAIQMEpmun57TFHS
+ r0sH6o3F4cJbRgLp4v1a1seGzH57abM04bKTu2IdfqFk1nCgoVVdTW5QLqOkOzD7a+TAL511p2Q
+ iOnFBp2hXMXrXq7gbkLbP0B0PPtUmeXiyVyLt1Q13WjhU0pIHCCxlcTOFMPqjBJpm8agCfqZox+
+ BRRyd/5IJc8uB+tbGNHBRSC788enTUnNAkh+3cM/7+/2+/1SaiWE1DE9NHcMP6rY6htV0SofrZl
+ 7rugm4Q4dyhkmd6qh4PKFkVHiTb9N74tHDo/03biR1Rw==
+X-Forward-Email-ID: 6a4f49da311aa3fa97ce4197
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.10.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <f544cab6-1db6-481b-8f91-06cc2fb6829b@kwiboo.se>
+Date: Thu, 9 Jul 2026 09:12:24 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: ast2600: add AST2700 support
-To: Ryan Chen <ryan_chen@aspeedtech.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@nabladev.com>, Johan Jonker <jbx6244@gmail.com>
-References: <20260702-aspeed_wdt-v1-1-1c44c38430e6@aspeedtech.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
+To: Tom Rini <trini@konsulko.com>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de
+References: <20260708220540.3368825-1-jonas@kwiboo.se>
+ <20260708220540.3368825-9-jonas@kwiboo.se>
+ <20260709015247.GR749385@bill-the-cat>
 Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260702-aspeed_wdt-v1-1-1c44c38430e6@aspeedtech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260709015247.GR749385@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 870979b2e9c39371f06
-X-MBO-RS-META: i7t14sfnw3qiwzfi7814bs75s49qqqxj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,63 +74,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/2/26 09:17, Ryan Chen wrote:
-> The AST2700 reuses the AST2600 watchdog block unchanged. Bind the
-> driver to the aspeed,ast2700-wdt compatible and enable WDT_AST2600
-> on the AST2700.
-> 
-> Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
+Hi Tom,
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
-
-Thanks,
-Stefan
-
-> ---
-> The AST2700 reuses the AST2600 watchdog block with an identical register
-> layout and reset behaviour, so no new driver is needed. Bind the existing
-> ast2600 watchdog driver to the aspeed,ast2700-wdt compatible and allow
-> WDT_AST2600 to be selected on the AST2700.
-> ---
->   drivers/watchdog/Kconfig       | 6 +++---
->   drivers/watchdog/ast2600_wdt.c | 1 +
->   2 files changed, 4 insertions(+), 3 deletions(-)
+On 7/9/2026 3:52 AM, Tom Rini wrote:
+> On Wed, Jul 08, 2026 at 10:05:34PM +0000, Jonas Karlman wrote:
 > 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index b91727e1265..3c56c541505 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -130,11 +130,11 @@ config WDT_ASPEED
->   	  Second Boot.
->   
->   config WDT_AST2600
-> -	bool "Aspeed AST2600 watchdog timer support"
-> -	depends on WDT && ASPEED_AST2600
-> +	bool "Aspeed AST2600/AST2700 watchdog timer support"
-> +	depends on WDT && (ASPEED_AST2600 || ASPEED_AST2700)
->   	default y
->   	help
-> -	  Select this to enable watchdog timer for Aspeed ast2500/ast2400 devices.
-> +	  Select this to enable watchdog timer for Aspeed ast2600/ast2700 devices.
->   	  The watchdog timer is stopped when initialized. It performs reset, either
->   	  full SoC reset or CPU or just some peripherals, based on the flags.
->   
-> diff --git a/drivers/watchdog/ast2600_wdt.c b/drivers/watchdog/ast2600_wdt.c
-> index 190490f3692..5eb9b4ba96f 100644
-> --- a/drivers/watchdog/ast2600_wdt.c
-> +++ b/drivers/watchdog/ast2600_wdt.c
-> @@ -87,6 +87,7 @@ static const struct wdt_ops ast2600_wdt_ops = {
->   
->   static const struct udevice_id ast2600_wdt_ids[] = {
->   	{ .compatible = "aspeed,ast2600-wdt" },
-> +	{ .compatible = "aspeed,ast2700-wdt" },
->   	{ }
->   };
->   
+>> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
+>> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>  drivers/i2c/Kconfig | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+>> index ab5af17858c8..125dc84819e6 100644
+>> --- a/drivers/i2c/Kconfig
+>> +++ b/drivers/i2c/Kconfig
+>> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
+>>  
+>>  config SPL_SYS_I2C_LEGACY
+>>  	bool "Enable legacy I2C subsystem and drivers in SPL"
+>> -	depends on SUPPORT_SPL && !SPL_DM_I2C
+>> +	depends on SPL && !SPL_DM_I2C
+>>  	help
+>>  	  Enable the legacy I2C subsystem and drivers in SPL.  This is useful
+>>  	  in some size constrained situations.
+>>  
+>>  config TPL_SYS_I2C_LEGACY
+>>  	bool "Enable legacy I2C subsystem and drivers in TPL"
+>> -	depends on SUPPORT_TPL && !SPL_DM_I2C
+>> +	depends on TPL && !TPL_DM_I2C
+>>  	help
+>>  	  Enable the legacy I2C subsystem and drivers in TPL.  This is useful
+>>  	  in some size constrained situations.
 > 
-> ---
-> base-commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
-> change-id: 20260702-aspeed_wdt-76e73f1c8853
+> Building on the last email, I think these might need to be
+> [ST]PL_FRAMEWORK not [ST]PL.
 > 
-> Best regards,
 
+I have mostly tested this series with additional changes that alias
+putc()/puts() to printch()/printascii() in xPL builds when
+common/console.o is unavailable and DEBUG_UART=y, patches that will
+be sent as a separate series.
+
+It is possible such change may have hidden some latent issues, now
+trying to push a branch that contains changes that ends at the patches
+included in this series, but due to timeouts it was not possible prior
+to sending this reply.
+
+This patch can also be dropped if it causes any issues, I only added it
+after a search for SUPPORT_xPL and noticed that these depends seem to be
+incorrect. SUPPORT_xPL is used to tell if xPL can be enabled or not,
+not if xPL is enabled/disabled.
+
+Regards,
+Jonas
