@@ -4,94 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FCCC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A0CC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06A5784A29;
-	Thu,  9 Jul 2026 03:21:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1A7284A29;
+	Thu,  9 Jul 2026 03:23:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FU/hfmjk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fc0EysCL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AD9984A48; Thu,  9 Jul 2026 03:21:41 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 6330684A51; Thu,  9 Jul 2026 03:23:32 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BACC84A1F
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:21:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F07CF84A1F
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c126b8118afso182930766b.2
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:21:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783560097; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-693c51a8a19so539044a12.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:23:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783560208; cv=none;
  d=google.com; s=arc-20260327;
- b=h8XhtpqHjEfggVwu61/xJH8gwMywUlAKwzlAb/sMDJIA9ZdhRYE3eXH3sWYqFLc0f2
- fLsZUDgM2ByFb31XZvKSnHqP869S4h9MjtMpGhz4dV8IxRJ02A/oW1xa/Tjvib657+Ez
- qRw8ZQk31l7qI2R9poBw/seZqxM5xQdQCAwouwKdg+UzxF6BAKlPxfkOD9BfKumHgDh1
- w9OTcIqdIv8FgGwNsx/WlLWRvuzkzuhV5Fi+ecuJw14rhCPzB4+UXtcKThxeAgWSzI2h
- r24DG1yJW9NR1ZGjMH1t4iMj9PkbyG8vnxkRadsApJB0vfnpqTr35mxzrqqxODHATf3G
- 7UMg==
+ b=C9WHZcrNIJY1VftcRn+pXuWYwcqQBN6z8YJKlnSM9pbnfbJI3Qmf0ji4eIUhFjm9Ss
+ sTfE4NsfmG2nThiigEII2+Ne9j9xkqeakYlYG9nO+ayMDpV2GcLcoLSuElm3Cyzt3XIo
+ 1YJAd8VzoVzQfO8mcJDygWV2GVI3FSn1CVoM0Q6WxIlt9G5eF7loaMatqXT7XlxKlfII
+ iZQX6ne+jK4NSIUjNtshF7/AxvOf+/YXKX+2A0kQosBvYh2f1FRqVrkIf8jdw+LazAVF
+ BrWqwkBZlN8BQMQ6XLk6SpmqlNFo344evT6LFQzQykFdrH7/EHCRHDFTdDIlAknLAR4w
+ TsQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
- fh=DDQzrwH1M51KrRiJ9rD49fa0HzsLApQ8iBK28xqUwYI=;
- b=q0ZNQSm4ND9FKEowQ1czoMphXTrOk3HP8dSrESGt9JZaoaRcvrvb8vHNLvEW2E0xte
- vjdgfAF179+PLuIvmmoM16relP/2HUZdt6mhjic1xhuMINypzZlseinikzrLZVfz+Plc
- slzabaaBbp9rqvoJNvI/EW5TZsVxTJYHHA3KYst9HhVkPtyc9qTIKuJzKBiyGla9XbH7
- dRn/88O6oIfPWgt3vh0pKSGsa5wxBN18kFEiINhbRVdzFbIhnbswvtzlq/kNO9Yxifj+
- FEFpPpqtUDhR6OK2d2/sdDqqNUnq4zRmYeu9LbwXjwmQwgDuIayULDwaBtCOorGM5i5i
- n33g==; darn=lists.denx.de
+ bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
+ fh=NJvti96iWr1RedAx5v2nMvfBUKn0yf6cwr/0thOFQRA=;
+ b=O58Xh7zIuK5Y8VdbI23orJq6n1uSilvkYyZsk+IWp4i8xeB5tEmxHXy/nVzRvoe+Wh
+ +YBx+TtXDThbVXK2smGo+ugoSWpOGzHjzAP9LX2yKdXEOQZBLKPVYQg4ZJNuNoQFBV7J
+ L373415zw+8qbH9QqIyId35aYF8xeqdEuO6JtywLSIKYaaLD2jbmxx9HLJs55+JrKqiy
+ SPYgIZkcDzraEedPqBxa6aMSQJHhCnj5mXO/E14QQDiB6REQmBkNUdzDEItai1OvaaUM
+ RHHhADMuXlIaG3Mov/Tt0unLVIo/deIKTicB0ZieibQbi9k4XgtsgVf5f9bww4mXpUG6
+ /S4Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783560097; x=1784164897; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783560208; x=1784165008; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
- b=FU/hfmjkFYEf2C9DVe+b5F3J3OgQMCNkNkuBzt2BE+7/7U4lGvvL/kMHXh96r44YEx
- EI3M1Ef0/4u5I1IO+xHdmIJleOVwauHrTbRxOXgNuJXrz8Sn4PA2LzRnD0aM1vfMbMSo
- 8yHuBlq+PE0+PtH4hZWLCoww3gfs9p9FgV3Us=
+ :content-type; bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
+ b=fc0EysCLkY4H05HWxxUsn3VrgGFfAcCkKeI2sv1HO4R9pYnZ7n4oObTAmvgHHL7AYy
+ dPAxdBWMaTKiD1iqEo/WgxkkF/nAnVQgvV+E7dRuBL0j+GOr7W6DORM8H5lM8cVPLe9h
+ 1czNKVb8fp6Cc2UdZLJlnNu1DCo11Xwa1MimQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783560097; x=1784164897;
+ d=1e100.net; s=20251104; t=1783560208; x=1784165008;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
- b=TnByGWGgi2p21JO4I+1J6FI9YtntigNkzkQn/u/Rzz4W6xSVFxqMfdYspCE7YtJ0yS
- SoFqV4J6Oo76fBvIdv85gbcSbO+CFIKmEen7zch+idyeGpHofPDh88A3ei6s8X1O5Zzq
- pckJjJbeVUYLI8TRJOQICAuupShJi5mvklxIbJaG/ljcL14GXyHPBZM97nWYy4iFEsHn
- UDOANEo6EGOwQ2ScP/l+XEqRSOjiwakmfgU6WRC5w2ggioIfKvU+P7IZ8K/QGRCQrAqP
- iul3Qhq+G/I3SJgF7zWlHYS1ZgxGCfER8t2aI2fcYdUk0VDrQf6AHRpEuLdbbuIad1NZ
- FMrw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrqqCI1n9O7DJ5qfsaq0Bce2AzgCwuMcK2dJTs/E4t+Xfx2uG5vFh15FFGXITJ7ghGJUYON/0c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbeTpl8YzA+z7nOEHC9STYKX0OP7WK3flazGXBt+cV62vVen1h
- EQislzkskhPqLGRJhVQcszto/XrBM+hNC+aJI1ZI8k5Rk4ZwUniGIgTnEXD9rczuImA8Ks38ftt
- FVRrxZEoiLwx6T3sFlMsUSX3SHrnfDcHhIbZ7aOms
-X-Gm-Gg: AfdE7cljGgAWJ1Ev7aKztbkQz3BdnU4HJblXLd9gT7i9bGTEuXfbzTs/UAz4NwD5bPh
- IBFUqRvJMkjZb9REi1+cmEl7ldkUVFZkK8D+ynr0tTydyvXVeiztV/v4f8jMkP73R2NIwfimU8w
- UYw9pAIxK+O8NWh6zo1wLnpMVAbDSZdZJkdBAljQh7+UJCgY6HtkwnlS9S10e5FmErWahRH/KAU
- P2IEbSq+xCUHS1Igsq0Ce7cStT9rdLnBbB0uKEdxrgzGd+BTM4m81t072+1YvXWENQkrrm3ZeZv
- VKkECA==
-X-Received: by 2002:a17:906:2083:b0:c15:b830:8bf5 with SMTP id
- a640c23a62f3a-c15ce1085b2mr102235666b.43.1783560097547; Wed, 08 Jul 2026
- 18:21:37 -0700 (PDT)
+ bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
+ b=gPuGuw+rwk5qkMzhP9N/m5MQHp+oJVnFPxzb6DAXd9phg33PPkrIx9JZPWlV5NcU6A
+ 3fzf8pWuM7iYUDuFPXgrGQqOKdGTEYVsRJkFlgFr35bWBxrJtKqKbn3gMgXh3nDuCIot
+ v575ubrQz1qIkiGmvI4MOuez+DOtXwOexCPInMRgHhar0qUxpZVYDcM6qDMdK8he9h6u
+ B4Hhx81Pgmdb68PT+szUagEg6dxYKDpXSDv7c3qIFglGsG8RQTFmupvlX7nn2rPM0+WW
+ X+aNx0kV2VvbBK0elefhBZzJKjlsn1Q5syRsRnuUGKUKHtCkdFFFgURmyUguIWF0RAIp
+ t7lA==
+X-Gm-Message-State: AOJu0YxaXcn+Gz44LCwYwTvHl39XxG0bsov4zs4I5imEcEvMfshwOthT
+ 5x6iHPX1C2AB3BqYQGHw2k23jiUeAW1QRCU8+LBdvefWGE+BYqgljFM6ipuDKC2cQcmLL8H1t+h
+ 2DvBRcg5Of6wyLL0MOdOUTCFPUxx9xWQazVqDxDTp
+X-Gm-Gg: AfdE7cl2pxILDNNVQrVWaEM59fKzcZfjm2JMhbqI5DVBvBgvAsbI991Mp24R4ioVrur
+ g82hEAoWWwAcQO2F3tBb1pA+W82XxkznI04O1rKNvY470+ElF7QAMGcOPx/UDtwacIOJa4oLIHi
+ CR/sQnfULyfBqx33pH7bobAwhP48YpEJR4nDJKt/BX6tUGwoaldTkTViL6kuUyURItcLV6i7mMk
+ S5ZJ/yoSrNh5UiBzpBOi2OXFAC8HpQ7mBBTLQQl+ywJZeyhlvhCUNYXQZZn1FGWKy8sxMk=
+X-Received: by 2002:a05:6402:234e:b0:69a:9c4a:3d63 with SMTP id
+ 4fb4d7f45d1cf-69ab4469a96mr1947534a12.17.1783560208433; Wed, 08 Jul 2026
+ 18:23:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
-In-Reply-To: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
+References: <20260703213308.3804461-1-james.hilliard1@gmail.com>
+In-Reply-To: <20260703213308.3804461-1-james.hilliard1@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Jul 2026 19:21:26 -0600
-X-Gm-Features: AUfX_mwtaHwfXWymdJIgSWbsBRwu9Myy650EYVWkxEo3wbvCK-LakDXOxAKXwbQ
-Message-ID: <CAFLszTgvBrNzb1Nvrj6CH0KBFW=v-Af5=0Q7UAHP15vy4P-LqQ@mail.gmail.com>
-Subject: Re: [PATCH] video: fix no display when serial console is disabled
-To: jayaramudu.desapogu@amd.com
-Cc: sjg@chromium.org, u-boot@lists.denx.de
+Date: Wed, 8 Jul 2026 19:23:16 -0600
+X-Gm-Features: AVVi8CdsUSggB4L5Li-VpypgpF53kHVfR7l_-7TJRbo_BlQP3IYjYT7TSxYkv8s
+Message-ID: <CAFLszTgZbTwszEkEQ8tz0CPbBBpAjvc3-iM4Pwc4gQZOKJXjHA@mail.gmail.com>
+Subject: Re: [PATCH] tools: binman: add build key directory option
+To: james.hilliard1@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
+ Chukun Pan <amadeus@jmu.edu.cn>, 
+ Yannic Moog <y.moog@phytec.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Aristo Chen <jj251510319013@gmail.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,80 +116,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Desapogu,
+Hi James,
 
-On 2026-06-03T13:29:53, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com> wrote:
-> video: fix no display when serial console is disabled
+On 2026-07-03T21:33:03, James Hilliard <james.hilliard1@gmail.com> wrote:
+> tools: binman: add build key directory option
 >
-> When the serial console is disabled in coreboot configuration,
-> no display output is observed during boot.
+> U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
+> internal binman builds only received the generic BINMAN_INDIRS search
+> path. FIT entries with fit,sign or fit,encrypt therefore had to infer
+> the key directory from include directories before invoking mkimage -k.
 >
-> This happens because DBG2 (Debug Port 2 table) configuration
-> is required for proper UART initialization and affects the
-> video initialization path.
+> Add a binman build -k/--keydir option and pass KEYDIR through with
+> that option from the top-level Makefile. FIT entries prefer this key
+> directory over include-dir discovery and then pass it to mkimage -k.
 >
-> Fix this by ensuring DBG2 is correctly configured as a
-> 16550-compatible UART, allowing video initialization to
-> proceed independently of serial console settings.
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 >
-> Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+> Makefile                  |  1 +
+>  tools/binman/binman.rst   | 10 +++++++++-
+>  tools/binman/cmdline.py   |  2 ++
+>  tools/binman/control.py   |  1 +
+>  tools/binman/etype/fit.py | 24 +++++++++++++---------
+>  tools/binman/ftest.py     | 51 ++++++++++++++++++++++++++++++++++++++++++++---
+>  tools/binman/state.py     | 21 +++++++++++++++++++
+>  7 files changed, 97 insertions(+), 13 deletions(-)
+
+> diff --git a/tools/binman/state.py b/tools/binman/state.py
+> @@ -41,6 +41,9 @@ fdt_path_prefix = ''
+>  # Arguments passed to binman to provide arguments to entries
+>  entry_args = {}
 >
-> include/acpi/acpi_table.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> +# Directory containing keys for FIT signing/encryption
+> +keydir = None
+> +
 
-Thanks for looking at this!
+Please use the existing EntryArg mechanism instead (see
+etype/vblock.py and etype/gbb.py). Then cmdline.py, control.py and
+state.py need no changes - fit.py declares EntryArg('keydir', str) and
+reads it, and the Makefile passes '-a keydir=$(KEYDIR)' alongside the
+other -a args. That matches how atf-bl31-path, tee-os-path, of-list
+etc. are handled.
 
-The commit message does not match the change. DBG2 is an ACPI table
-produced by coreboot and consumed by U-Boot only as a fallback in
-read_dbg2() when lib_sysinfo.serial is NULL; it is not on the video
-init path. Please describe what actually happens. I suspect that when
-the coreboot serial console is disabled, coreboot emits a DBG2 with
-port_subtype 0x0012 (16550 with parameters defined in the GAS), the
-check in serial_coreboot.c rejects it, the UART is not detected, and
-that somehow prevents the video console from coming up. Please
-describe the real chain of events and the observed symptom.
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> @@ -500,6 +505,7 @@ class Entry_fit(Entry_section):
+>          self._fit_list_prop = None
+>          self._fit_default_dt = None
+>          self._priv_entries = {}
+> +        self._keydir = state.GetKeydir()
 
-> diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-> @@ -667,7 +667,7 @@ struct __packed acpi_dmar {
+Reading global state in __init__ makes this harder to test and couples
+the entry to a module-level variable. If EntryArg is not used, please
+fetch it lazily in ObtainContents() next to the existing engine/keydir
+logic.
+
+> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+> @@ -2161,6 +2164,11 @@ BINMAN_INDIRS
 >
->  /* Subtypes for port_subtype field */
->
-> -#define ACPI_DBG2_16550_COMPATIBLE   0x0000
-> +#define ACPI_DBG2_16550_COMPATIBLE   0x0012
+> +KEYDIR
+> +    Sets the key directory passed to FIT entries by adding a -k argument.
+> +    FIT entries use this directory for mkimage's -k argument when fit,sign
+> +    or fit,encrypt is enabled.
+> +
 
-Not quite. Per the Microsoft DBG2 specification (and Linux's
-acpi/actbl1.h), 0x0000 is "Fully 16550-compatible" and 0x0012 is
-"16550-compatible with parameters defined in the Generic Address
-Structure", i.e. two distinct subtypes. Redefining the existing macro
-silently changes the value written out by acpi_create_dbg2() in
-lib/acpi/acpi_table.c and by spcr->interface_type in
-acpi_write_spcr(), so every board that emits these tables now
-advertises the wrong subtype to the OS.
-
-Please leave ACPI_DBG2_16550_COMPATIBLE = 0x0000, add a new macro
-(e.g. ACPI_DBG2_16550_GAS = 0x0012), and fix the real problem in
-drivers/serial/serial_coreboot.c by accepting both subtypes:
-
-    if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
-        dbg->port_subtype != ACPI_DBG2_16550_GAS) {
-
-That way the coreboot fallback works whichever subtype coreboot emits,
-and the tables U-Boot writes remain correct.
-
-Please also include the coreboot output showing the actual
-port_subtype in your DBG2 (a hex dump, or the log_debug from
-read_dbg2()) so the reasoning is verifiable.
-
-Also you might look at this series where I had a similar problem:
-
-https://patchwork.ozlabs.org/project/uboot/list/?series=433605&state=*
-
-IMO coreboot should provide the serial details regardless of whether
-the console is enabled, but I was unable to get that change in, so
-your approach is the best.
-
-Also let me know if you are working with OpenSIL. I would be great to
-see a coreboot + OpenSIL + U-Boot combination.
+This section is for binman env vars, but KEYDIR is a make variable the
+Makefile forwards. Please clarify, or drop this hunk if EntryArg is
+used.
 
 Regards,
 Simon
