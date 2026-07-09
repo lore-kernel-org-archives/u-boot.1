@@ -4,60 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C26DC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 06:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B4EC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 06:45:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF0F884A48;
-	Thu,  9 Jul 2026 08:41:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6376C84AB5;
+	Thu,  9 Jul 2026 08:45:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kH3bf9tU";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aUlOFiIX";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Tr9l/7W1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F74684A51; Thu,  9 Jul 2026 08:41:27 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 2845584AB5; Thu,  9 Jul 2026 08:45:34 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0088407E
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 08:41:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=747f=FD=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1783579283;
- bh=D2IR2uclguHtKMrAs6LiCYThKJ/X8449QmHwX5M+6H4=;
- b=kH3bf9tUhvlDsvrMHcIQ9X9erskKEHbadCd3Wv+LdMzkkzyRmP5D/gaADnNt+h2aRJxeXFxqv
- a1ekqS0rrqAHaQp/K0tqJRbBGp+RMfXcRhKqhx5o4QYA7kzb5pT/OjR6cOxnmbqFAs4VEzs6t0B
- AmQDwjz0iaquJk8qwQUoHVnXiTKLrcNGwIYllH1H10v2qi251k62lpccLCBXxQdU6y6geTWJZys
- 8vzhu00YYiL+DY2QULTZwFNkf0rprS01ckVhhvnmQUS3pgbOngdI3BK4jIeEuVmHYjRISsZDIc1
- psR5Z2YE4wlkBgOehZBS2z0+XDQdqG2g3FMQWWH0yWew==
-X-Forward-Email-ID: 6a4f428e40f9cb1df2448d1a
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.10.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <1f7d7469-692a-428b-b85d-f1a1df5b4a14@kwiboo.se>
-Date: Thu, 9 Jul 2026 08:41:16 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id B029584AC5
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 08:45:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gwlpM2R9DzKvyY;
+ Thu, 09 Jul 2026 08:45:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1783579531;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ceJFBJUn5YhpXNih4dD7JMiBuvoW4y+Y9edixLScbA4=;
+ b=aUlOFiIXiF+zYR9tVW3jsWkjKm+rmBpdmW2v4XSruOvpQSzD/9a12C+fBfaUx8i7nDAA/n
+ o8bTeey/fuAIQsMinErjI6S9r6fCaUEDffDMKBn/99d/AAT/UG5q+yCJuVudCfw1aClYWM
+ zSstvSrCC9AHJ0uTh6+k8YLnLBGUAyk3zI/hrRTu1MZXMCxoDKG82Z2xRpM2znEfI2oECz
+ hfMCrI9H/nTsfn+BSQkxZ4LwBga6D6evtRcaaYm3hptakXOUzN6+TSRX79h+Wb9vOqczSF
+ IUv3RxdAFfabAc4RjC3CAzoXxp1oECcxifYFt5kvuEWjaEQgqIBR6tRXZEJYxw==
+Message-ID: <4db10c8c-e8ab-4a9c-9114-87d195754e15@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1783579529;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ceJFBJUn5YhpXNih4dD7JMiBuvoW4y+Y9edixLScbA4=;
+ b=Tr9l/7W1MYnQF79NknzP3PkcnyoRzJGq086OwDsOUg7WIO6ln+/I7RSj0McucOHK3kjr+P
+ jT67Kh/W+JDO12Twf0dz+4T7oe1379rCPgf+oFGUj9UKHjeayZUUhkexjarsxrWl2SBca/
+ 80MGBTuWzwwesu5jtp0TCEXzDO4r4s90/M02AEG3aGvQAEWMO16i/T6Ig/+v9RlNxPZAQF
+ e2YRLuuljwa2hzPTJZMo41AFcupQreiitoj7AJP/jyXlh0LyYo7aAjAJdh/7pgr1NOfa4R
+ KCb5bSuEMTBO2HsYrwyOB/F5pczCLvqtw1QOdgP2X3ja7gRULE4ZYtJR6G9XSA==
+Date: Thu, 9 Jul 2026 08:45:25 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/11] Kconfig: Add missing depends on xPL to xPL_ symbols
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-7-jonas@kwiboo.se>
- <20260709015241.GQ749385@bill-the-cat>
+Subject: Re: [PATCH] watchdog: ast2600: add AST2700 support
+To: Ryan Chen <ryan_chen@aspeedtech.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@nabladev.com>, Johan Jonker <jbx6244@gmail.com>
+References: <20260702-aspeed_wdt-v1-1-1c44c38430e6@aspeedtech.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260709015241.GQ749385@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20260702-aspeed_wdt-v1-1-1c44c38430e6@aspeedtech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 870979b2e9c39371f06
+X-MBO-RS-META: i7t14sfnw3qiwzfi7814bs75s49qqqxj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,44 +93,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On 7/9/2026 3:52 AM, Tom Rini wrote:
-> On Wed, Jul 08, 2026 at 10:05:32PM +0000, Jonas Karlman wrote:
+On 7/2/26 09:17, Ryan Chen wrote:
+> The AST2700 reuses the AST2600 watchdog block unchanged. Bind the
+> driver to the aspeed,ast2700-wdt compatible and enable WDT_AST2600
+> on the AST2700.
 > 
->> xPL_<name> symbols should typically depend on the associated xPL symbol.
->>
->> Add missing depends on xPL to xPL_<name> symbols to avoid the xPL_<name>
->> symbols being available when the associated xPL symbol is disabled.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>  common/Kconfig | 2 ++
->>  lib/Kconfig    | 7 ++++++-
->>  2 files changed, 8 insertions(+), 1 deletion(-)
+> Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
+
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
+
+> ---
+> The AST2700 reuses the AST2600 watchdog block with an identical register
+> layout and reset behaviour, so no new driver is needed. Bind the existing
+> ast2600 watchdog driver to the aspeed,ast2700-wdt compatible and allow
+> WDT_AST2600 to be selected on the AST2700.
+> ---
+>   drivers/watchdog/Kconfig       | 6 +++---
+>   drivers/watchdog/ast2600_wdt.c | 1 +
+>   2 files changed, 4 insertions(+), 3 deletions(-)
 > 
-> Did this go through CI? I ask because with SPL/TPL, we have the problem
-> of PowerPC being special from the rest of the world with these symbols
-> and I want to be sure everything still is building, before I do a
-> before/after size check on the series (and probably keep the binaries,
-> so I can checksum before/after and make sure they're the same).
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index b91727e1265..3c56c541505 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -130,11 +130,11 @@ config WDT_ASPEED
+>   	  Second Boot.
+>   
+>   config WDT_AST2600
+> -	bool "Aspeed AST2600 watchdog timer support"
+> -	depends on WDT && ASPEED_AST2600
+> +	bool "Aspeed AST2600/AST2700 watchdog timer support"
+> +	depends on WDT && (ASPEED_AST2600 || ASPEED_AST2700)
+>   	default y
+>   	help
+> -	  Select this to enable watchdog timer for Aspeed ast2500/ast2400 devices.
+> +	  Select this to enable watchdog timer for Aspeed ast2600/ast2700 devices.
+>   	  The watchdog timer is stopped when initialized. It performs reset, either
+>   	  full SoC reset or CPU or just some peripherals, based on the flags.
+>   
+> diff --git a/drivers/watchdog/ast2600_wdt.c b/drivers/watchdog/ast2600_wdt.c
+> index 190490f3692..5eb9b4ba96f 100644
+> --- a/drivers/watchdog/ast2600_wdt.c
+> +++ b/drivers/watchdog/ast2600_wdt.c
+> @@ -87,6 +87,7 @@ static const struct wdt_ops ast2600_wdt_ops = {
+>   
+>   static const struct udevice_id ast2600_wdt_ids[] = {
+>   	{ .compatible = "aspeed,ast2600-wdt" },
+> +	{ .compatible = "aspeed,ast2700-wdt" },
+>   	{ }
+>   };
+>   
 > 
+> ---
+> base-commit: e800cc67f5b6cb50a20f37c993ec1cd4063bdbd3
+> change-id: 20260702-aspeed_wdt-76e73f1c8853
+> 
+> Best regards,
 
-The CI has been run [1] on a branch that contains these changes and the
-pending Rockchip TPL cleanup/consistency series, not standalone.
-
-Compared to the patches that was sent there is a small diff with && xPL
-being dropped in the final series sent to ML:
-
- config xPL_SERIAL_PRESENT
-        bool "Provide a serial driver in xPL"
--       depends on xPL_DM_SERIAL && xPL
-+       depends on xPL_DM_SERIAL
-        default y
-        help
-          In very space-constrained devices even the full UART driver is too
-
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/pipelines/30636
-
-Regards,
-Jonas
