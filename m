@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73B77C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 02:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFECC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 04:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B58DF84B01;
-	Thu,  9 Jul 2026 04:29:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D945184A51;
+	Thu,  9 Jul 2026 06:03:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qm8Bn7tP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MuacxASg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0505D84B0E; Thu,  9 Jul 2026 04:29:21 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id E3E0484A6F; Thu,  9 Jul 2026 06:03:50 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF9F484AA2
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 04:29:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1534A84A3E
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 06:03:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7e9ecb1e13cso1625065a34.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 19:29:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-8454160043aso1388956b3a.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 21:03:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783564155; x=1784168955; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=8FfUL/l8zY/G4Mznf9Nti7950HyMtaG+vQ45yTlsYnE=;
- b=Qm8Bn7tPYKGtkIeZ/taKYGWYNJDz+UuHVX8Z2gjlAgyNdJ2MW/bJkiX0GNi6C0NJ9Y
- L8FYt4Xt8ExltYpOw24zcvKhhMpV+fL2S9kO0wBIr18/I34GRshM3KfB58muGMpAdcot
- q1rDpbY1cx5H/yDEWXWdAX+Us/J/oS15OgxPH+dpmrRQLkJpChk/aOoEB5Ld4uxD560i
- r1tG04A6xXhzLVIbJ3zWUqQIjuij05FKrL8bJYP3ac1gwPs3q9M+X9PpWHTsPvfP86OG
- auewptpa+OJvydnje/OKtTGV1PLPuM4vuLSAHirwq5QKzkfxCM54WDNxWjkxWcLwKP5E
- 1qvg==
+ d=linaro.org; s=google; t=1783569825; x=1784174625; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=Bqc4nn5dH/4ZsKP8axt2cJk05nqspIKLc3jCJraKR3Y=;
+ b=MuacxASgSl4PoJiH3+Vpb6a391mAjE4B6ovs1dg+dCRuWG0/9jYXrYG7LIamU01W5l
+ 6dIxDNMAd6IgzFPYy7H5LQnVAazyw0warqOiPE4IWxxZ+6rkIONdBcfIRzhdXXCCeNsh
+ u06G8NsJ07ePYwmxFhG51ILFTC+66r5riWlA67+yYK2M5zoNGg8OfZ3VZd4eyh8v/lhj
+ RqnCQ1bliaQyXpArRG9y9mmYHGJeOvO6dEbg3S3GXQ11iWcNJNlG5pW3Got/wukOxgqL
+ vEaeeQ2GnLieUH9q4lS5p+UFK96kEfui4MdQ/v5QJqu6pYuiI40KEC1wN2DyLJscOzgU
+ g+NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783564155; x=1784168955;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1783569825; x=1784174625;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=8FfUL/l8zY/G4Mznf9Nti7950HyMtaG+vQ45yTlsYnE=;
- b=a3cT30fjh9irzefS86ZrC129OnF1tM5VjjJa8+/5DsnIzmS11MHA5Jgk+vOplWVT+R
- kXBGf9Tr4PyaiIakghGVHJfKa1aAeZm/lJqMp0U5sVkqpWpxaAKpRSUNrDHHxC8DEr+G
- 57ZGEG7W/mAttRp8z93xoLRJ66QFzdf/jDpj9yqGGeEar+qu6Sef0wNUfyudsZ/OBov2
- kiT6ZlYgkqG6IMhX/gqsOOavYGw94rJ0/HXSj4vIYFnVGL1KBT6HoYk8z135N6C2UF5y
- uzHVu2zNXa35/zbRPSyosszk2hv/BtxJCNKJFYPXklOSGvdUjX9b1BetEmwYa+mKa3Pz
- JwUQ==
-X-Gm-Message-State: AOJu0YzKz5Nkn6wNV4eqdFW9VaZBLj0zqC3cWcy+LgHDBlhfmZgtaSbG
- XQqgMnVDTVbuerd7/JZ1aVj4w1ZiSH/HMnDM2p8pWYKunHIC3pgnxK6ej56o7y8wLqxkXA==
-X-Gm-Gg: AfdE7cl7wm76ZDg9kWlkLMthsI1eB06xLorCLA5Kyj9SWrGRTHELcnjaZ/Wo5otTWGt
- HUbySNGrdTq8jjF+2IHxMH9Xm6uq8y31P8LdI7ImQ08RrEUGmKwJn01l3MZ3gKhGwjYN49Z99ny
- y9M2WqRhAcGEQUhOJnpgXJHhwpdJi4aKpTMZ6zJpSWnD+ByAo4E3fSSWEZuxIL9ete1G+70Jdgw
- LiJHyxWYGqrEWD33ze2S9jCAI2u0MOrKT7Sjx/feVODrGehuy/Q/iPy96cZTbtm1UI0kkcsUbIr
- 0kOA/u5OQO/0/R60A909CHf3v6Wf5M94o9fAeo5JoFEWsaiJ8tDiMCUkhIvoX7Bsq7LtkdLbGve
- PGtuh64AfKS5druwxPvqWG9XouAx8HIsWeQ4M8Lmgv0lxOrlyfcWgMhvkY7k3g2lrnC73zejBP/
- kSEMt/3f7h1eor9HcDVQOYNaoUpNrgRb94DKUyC72HyRMKdmkuToaIcfgi9FyhRL2/w3YpdCyEP
- vdgVTc/w87thQac1QSL/gzX56CGNGzMxEqkom6PmXYR8KK7i8dfgoxy2BYZJBo+RlfDpFEA+/Tj
- CTWeoORKDw==
-X-Received: by 2002:a05:6820:2212:b0:6a1:5c42:73fa with SMTP id
- 006d021491bc7-6a36d9cf079mr3380124eaf.45.1783564155407; 
- Wed, 08 Jul 2026 19:29:15 -0700 (PDT)
-Received: from james-x399.tailafd1a.ts.net (174-29-11-8.hlrn.qwest.net.
- [174.29.11.8]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4519124d07dsm787551fac.2.2026.07.08.19.29.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 19:29:14 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Aristo Chen <jj251510319013@gmail.com>,
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Subject: [PATCH v2] tools: binman: pass KEYDIR to FIT entries
-Date: Wed,  8 Jul 2026 20:29:00 -0600
-Message-ID: <20260709022904.3226038-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ bh=Bqc4nn5dH/4ZsKP8axt2cJk05nqspIKLc3jCJraKR3Y=;
+ b=O0YWi94SCNR/ueySlv7Ge1m+b6LeAARo55UlalEeyNWhvVjP5hBk1zfkZL7UhDF2I4
+ LTuMCmgw3NqA7CmqNUErsKmd763GOQ3RpkZloFtzfjVoyEBiPePJdq0c3whkU324KeST
+ ZURbmNwKULluD6PjnY2qcAuRVv3/53+eHVAtKFp9VmEIuwOhs8TkNqWh1zrcFmrkomJ3
+ tK9Yht3EvPxi6CrwCF5ZlsBsGXWdv2zNpuQOzjcKkVDjl8dnrnrWsY3nPrkdNlxdeQs/
+ 8Ho+PGnKtxGriKF34bT4XElbUbSwrWDY/8VBQxIR65P5uDdhbngT35LArLmoEzgxn9uk
+ QL0w==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpF1bFX+WG3avK+oOVYCk51OgxfFL4UGlSbCgkakGRayN2eS0gE+yS+SZBOhMRppPbRJz1PSTg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSEWlZYtDsBHsvwTh0A+oh2QEyqg3Y/7YgtXoZn9jUnk9xPwVw
+ LDzBBXsIz7Janqc5YTAE0hUQzupyEwRsMw1sU5H0Cge3N0B4rYfS70Q1+/FDWR7kE2o=
+X-Gm-Gg: AfdE7cl4Ylp3r4F83gcXn07sEFL4Yy6q/z6/h1DwEZ3b/Lc0EHjrqoRFI3T++Qd0cqM
+ CWRRBa2Oe5SKMmQ3iBnXzXjq+hLe6NCKwujcbaaPKMKoyqYnlp/K55IY6KEfzIfVlEIlKoCJS1f
+ uGr+Q4qBfdLJ0AAgCbQbxoy80DK8++PLpYLTnCrqsFDYho2Usq8/J5GcX4N+j3pHnokyRIYYM2N
+ KOKSddAaU5jUobxMm0M8T6iybtNSgMiwXGmN/gzBiLiQYhA5n7qFGZC95QWErfkyy1PtldRKbT/
+ 7DG02iosHvY45eObbfZB4Pl0npNjKDOLJ3VhLoj6J2/n5dMEnbjkrxaGkksWkoUD2Z5gk3Byf3Y
+ bh/B0UJtNqSLEOi1VTHALab7lN0Ci5ztOxwIiYS0HOvZpLrzdRtfWFsYKZj5s3HgF/Ap+Iz7BLI
+ QjO3LmP3gzuy8p/XePaO2r3ziXzBY=
+X-Received: by 2002:a05:6a00:1493:b0:848:5d9b:687c with SMTP id
+ d2e1a72fcca58-8485d9b6c08mr647953b3a.54.1783569824663; 
+ Wed, 08 Jul 2026 21:03:44 -0700 (PDT)
+Received: from [192.168.45.141] ([112.212.195.74])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-84848939b38sm1616671b3a.10.2026.07.08.21.03.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jul 2026 21:03:44 -0700 (PDT)
+Message-ID: <48cde03b-5032-4863-b44a-a401dc793cfe@linaro.org>
+Date: Thu, 9 Jul 2026 06:03:41 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: sa8775p: enable GPLL9 before SDCC1 high-speed
+ rates
+To: Royyan Zahir <royzah@gmail.com>, u-boot@lists.denx.de,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de
+References: <20260708170228.621618-1-royzah@gmail.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260708170228.621618-1-royzah@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,183 +105,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
-internal binman FIT builds only receive the generic BINMAN_INDIRS search
-path. Adding KEYDIR to BINMAN_INDIRS treats it as one more input-file
-search path: FIT entries still auto-detect a key directory from all
-include directories, so an explicit KEYDIR may not be the directory that
-gets passed to mkimage. It also makes a key-only directory part of the
-generic blob lookup path.
+Hi Royyan,
 
-Forward KEYDIR as a binman entry argument named keydir, matching the
-existing entry-argument mechanism used for BL31, TEE, of-list and other
-U-Boot build inputs. FIT entries use that directory directly for
-mkimage -k when fit,sign or fit,encrypt is enabled, falling back to the
-include-directory autodetection when keydir is not provided.
+On 7/8/26 19:02, Royyan Zahir wrote:
+> On lemans/sa8775p, the SDCC1 apps clock high-speed rates (192 and 384 MHz)
+> source from GPLL9 (ftbl_gcc_sdcc1_apps_clk_src), but the driver never enables
+> GPLL9. When SDCC1 is set to such a rate the RCG switches its source to a PLL
+> that is off, so the CMD_RCGR update bit never self-clears and U-Boot warns:
+> 
+>    WARNING: RCG @ 0x120014 stuck at off
+> 
+> Vote GPLL9 on before selecting it as the SDCC1 source, mirroring how
+> clock-sm8250.c enables GPLL9 for SDCC2. GPLL9's mode/status register is at
+> 0x9000 (lock is bit 31) and its enable vote is bit 9 of the APCS GPLL vote
+> register 0x4b028, matching gcc-sa8775p.c in Linux.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
-Changes v1 -> v2:
-  - Use the existing EntryArg mechanism instead of adding a binman build
-    -k/--keydir option and global state
-  - Explain why KEYDIR should not just be added to BINMAN_INDIRS
-  - Clarify KEYDIR documentation as a Makefile-forwarded EntryArg
----
- Makefile                  |  1 +
- tools/binman/binman.rst   |  5 +++++
- tools/binman/etype/fit.py | 28 +++++++++++++++------------
- tools/binman/ftest.py     | 40 +++++++++++++++++++++++++++++++++++++++
- 4 files changed, 62 insertions(+), 12 deletions(-)
+Nice find! Thanks for fixing this.
 
-diff --git a/Makefile b/Makefile
-index d8287323c43..c8ac56d36e4 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1689,6 +1689,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		-I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
- 		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
- 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
-+		$(if $(KEYDIR),-a keydir=$(KEYDIR)) \
- 		-a atf-bl1-path=${BL1} \
- 		-a atf-bl31-path=${BL31} \
- 		-a tee-os-path=${TEE} \
-diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-index 366491089ad..3a860421a69 100644
---- a/tools/binman/binman.rst
-+++ b/tools/binman/binman.rst
-@@ -2161,6 +2161,11 @@ BINMAN_INDIRS
-     Sets the search path for input files used by binman by adding one or more
-     `-I` arguments. See :ref:`External blobs`.
- 
-+KEYDIR
-+    Sets the key directory passed to FIT entries by adding a
-+    `-a keydir=$(KEYDIR)` argument. FIT entries use this directory for
-+    mkimage's `-k` argument when `fit,sign` or `fit,encrypt` is enabled.
-+
- BINMAN_TOOLPATHS
-     Sets the search path for external tool used by binman by adding one or more
-     `--toolpath` arguments. See :ref:`External tools`.
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index f28b1e6b4cb..32caa03a7e1 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -105,18 +105,20 @@ class Entry_fit(Entry_section):
-         fit,sign
-             Enable signing FIT images via mkimage as described in
-             verified-boot.rst.
--            If the property is found and fit,engine is not set, the private
--            keys path is detected among binman include directories and passed to
--            mkimage via -k flag. All the keys required for signing FIT must be
--            available at time of signing and must be located in single include
--            directory.
-+            If the property is found and fit,engine is not set, the `keydir`
-+            entry argument is passed to mkimage via the -k flag. If no key
-+            directory is provided, the private keys path is detected among
-+            binman include directories. All the keys required for signing FIT
-+            must be available at time of signing and must be located in a
-+            single directory.
- 
-         fit,encrypt
-             Enable data encryption in FIT images via mkimage. If the property
--            is found, the keys path is detected among binman include
--            directories and passed to mkimage via  -k flag. All the keys
--            required for encrypting the FIT must be available at the time of
--            encrypting and must be located in a single include directory.
-+            is found, the `keydir` entry argument is passed to mkimage via the
-+            -k flag. If no key directory is provided, the keys path is detected
-+            among binman include directories. All the keys required for
-+            encrypting the FIT must be available at the time of encrypting and
-+            must be located in a single directory.
- 
-             Incompatible with fit,engine.
- 
-@@ -485,6 +487,7 @@ class Entry_fit(Entry_section):
-                 includes 'generator' entries which are used to create the FIT,
-                 but should not be processed as real entries. This is set up once
-                 we have the entries
-+            _keydir (str): Key directory from the keydir EntryArg, if provided
-             _loadables (list of str): List of generated split-elf nodes, each
-                 a node name
-             _remove_props (list of str): Value of of-spl-remove-props EntryArg,
-@@ -502,8 +505,9 @@ class Entry_fit(Entry_section):
-         self._priv_entries = {}
-         self._loadables = []
-         self._remove_props = []
--        props = self.GetEntryArgsOrProps(
--            [EntryArg('of-spl-remove-props', str)], required=False)[0]
-+        props, self._keydir = self.GetEntryArgsOrProps(
-+            [EntryArg('of-spl-remove-props', str),
-+             EntryArg('keydir', str)], required=False)
-         if props:
-             self._remove_props = props.split()
-         self.mkimage = None
-@@ -701,7 +705,7 @@ class Entry_fit(Entry_section):
-             args.update({'engine': engine})
-             # If no engine, keys must exist locally, find them
-             if engine is None:
--                keydir = self._get_keys_dir(data)
-+                keydir = self._keydir or self._get_keys_dir(data)
-             elif self._fit_props.get('fit,encrypt') is not None:
-                 self.Raise('fit,engine currently does not support encryption')
- 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index bf98b268ac1..7b84d79eec0 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -8167,6 +8167,31 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             self.assertIsNotNone(signature)
-             self.assertIsNotNone(signature.props.get('value'))
- 
-+    def testFitSignKeydir(self):
-+        """Test that the keydir EntryArg is passed to mkimage"""
-+        if not elf.ELF_TOOLS:
-+            self.skipTest('Python elftools not available')
-+        data = tools.read_file(self.TestFile("fit/rsa2048.key"))
-+        self._MakeInputFile("keys/rsa2048.key", data)
-+
-+        test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
-+        keys_subdir = os.path.join(self._indir, "keys")
-+        entry_args = {
-+            'of-list': 'test-fdt1',
-+            'default-dt': 'test-fdt1',
-+            'atf-bl31-path': 'bl31.elf',
-+            'keydir': keys_subdir,
-+        }
-+        data = self._DoReadFileDtb(
-+            'fit/signature.dts',
-+            entry_args=entry_args,
-+            extra_indirs=[test_subdir])[0]
-+
-+        dtb = fdt.Fdt.FromData(data)
-+        dtb.Scan()
-+        signature = dtb.GetNode('/configurations/conf-uboot-1/signature')
-+        self.assertIsNotNone(signature.props.get('value'))
-+
-     def testFitSignEngineSimple(self):
-         """Test that image with FIT and signature nodes can be signed with an
-            OpenSSL Engine"""
-@@ -8507,6 +8532,21 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             dec_data = file.read()
-         self.assertEqual(U_BOOT_NODTB_DATA, dec_data.encode('ascii'))
- 
-+    def testSimpleFitEncryptedDataKeydir(self):
-+        """Test that encrypted FIT data uses the keydir EntryArg"""
-+        data = tools.read_file(self.TestFile("fit/aes256.bin"))
-+        self._MakeInputFile("keys/aes256.bin", data)
-+
-+        keys_subdir = os.path.join(self._indir, "keys")
-+        data = self._DoReadFileDtb(
-+            'fit/encrypt_data.dts',
-+            entry_args={'keydir': keys_subdir})[0]
-+
-+        fit = fdt.Fdt.FromData(data)
-+        fit.Scan()
-+        node = fit.GetNode('/images/u-boot')
-+        self.assertIn('data-size-unciphered', fit.GetProps(node))
-+
-     def testSimpleFitEncryptedDataMissingKey(self):
-         """Test an image with a FIT containing data to be encrypted but with a missing key"""
-         with self.assertRaises(ValueError) as e:
--- 
-2.53.0
+> 
+> Not hardware-validated for SDCC high speed: the board this was found on
+> (Qualcomm IQ-9075 / Lemans EVK) boots from UFS with no SD card populated, so
+> here it only clears the stuck-RCG warning. Build-tested on lemans.
+
+Can you test file access on an sdcard perhaps?
+
+Balaji, Varadarajan, Sumit: could you confirm this fix and maybe send a T-b?
+
+> 
+> Signed-off-by: Royyan Zahir <royzah@gmail.com>
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+Thanks,
+// Casey
+
+> ---
+>   drivers/clk/qcom/clock-sa8775p.c | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+> --- a/drivers/clk/qcom/clock-sa8775p.c
+> +++ b/drivers/clk/qcom/clock-sa8775p.c
+> @@ -26,6 +26,9 @@
+> 
+>   #define SDCC1_APPS_CLK_CMD_RCGR			0x20014
+> 
+> +#define APCS_GPLL9_STATUS			0x9000
+> +#define APCS_GPLLX_ENA_REG			0x4b028
+> +
+>   #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
+>   #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
+>   #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
+> @@ -90,6 +93,14 @@
+>   	{ }
+>   };
+> 
+> +/* GPLL9 (SDCC1 high-speed source) is not enabled by earlier boot stages. */
+> +static const struct pll_vote_clk gpll9_vote_clk = {
+> +	.status = APCS_GPLL9_STATUS,
+> +	.status_bit = BIT(31),
+> +	.ena_vote = APCS_GPLLX_ENA_REG,
+> +	.vote_bit = BIT(9),
+> +};
+> +
+>   static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>   {
+>   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -130,6 +141,9 @@
+>   		return 19200000;
+>   	case GCC_SDCC1_APPS_CLK:
+>   		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
+> +		/* SDCC1 high-speed rates source from GPLL9; vote it on first. */
+> +		if (freq->src == CFG_CLK_SRC_GPLL9)
+> +			clk_enable_gpll0(priv->base, &gpll9_vote_clk);
+>   		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
+>   				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+>   		return freq->freq;
 
