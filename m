@@ -4,56 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 772B8C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 15:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D10C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 15:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D9884B88;
-	Thu,  9 Jul 2026 17:15:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EA7FB84B88;
+	Thu,  9 Jul 2026 17:18:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ERQwyti0";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="QUpq+W11";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 663A784B8D; Thu,  9 Jul 2026 17:15:54 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 1BC5A84B9B; Thu,  9 Jul 2026 17:18:26 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E337584B77
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 17:15:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 24774429DA;
- Thu,  9 Jul 2026 15:15:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DA911F000E9;
- Thu,  9 Jul 2026 15:15:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783610150;
- bh=FeCvKEfiosY4DqhXX8tVKTx7ktJsK9xNBs+aCX1cxXg=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=ERQwyti0DIgQrNotKBsZfe4UbnOvEPPfnu/YbZSW3KpY5+xNMii02iZZFvRYUcVAi
- jrF0z8ZQrr1pKRBxchO+uBjpnioJ3anC4GicrGEE3xruuubulDlB5ayxYGm92jKZZv
- du7wcMPcGP3yBdHm+UylE8KsyMuCu/AQPm+6LWapx+cr/hzIBjW2R5eaoouAa6zc7u
- O20qxg9wE/sAB3PdelcXTKugw8FszEzfAAuREma0TKTR9NyrhiiSaCycFc+cgDc1Zg
- F1rGeeXMGRYlRLqsiFY+Uj7o1XPk4DgkXK5+yFe6jHmtmlc8e8uMC3SuMmSZhqLnE2
- nzve14qud6kEg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Lothar =?utf-8?Q?Wa=C3=9Fmann?= <LW@KARO-electronics.de>,
- u-boot@lists.denx.de
-Cc: Petr =?utf-8?Q?Bene=C5=A1?= <petr.benes@ysoft.com>
-Subject: Re: Regression in f_fastboot due to commit 6a92e9827650 ("usb:
- ci_udc: Check ci_ep->desc before use")
-In-Reply-To: <20260708071255.13f58e98.LW@KARO-electronics.de>
-References: <20260708071255.13f58e98.LW@KARO-electronics.de>
-Date: Thu, 09 Jul 2026 17:15:47 +0200
-Message-ID: <875x2okxcs.fsf@kernel.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 3F80B84B77
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 17:18:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1723B117C81; Thu,  9 Jul 2026 17:18:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1783610303;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=fk9rpVhxbFmFfwS4DfNsFsfI7CGDWs90rPVMfB49AmU=;
+ b=QUpq+W11Vq6FECbuNOVfvULPzlf3k4k8B1klkon2V5PeZ2NVcxRG4Yg0aEw7CNf57e8bRe
+ pjHb/647v5TCUblF/kCZ6BAtQycGNAeil1Ac8d+e0HecNe94VC3ES2FkLe5EAwfJLfBufb
+ jgmy5bP9RnRcH80Lral5Ecp7m30iCxdGTM3f+vktntAROb4qHsGHx7oQ+BZ6FTYN3PGdJ/
+ Xc+GFypjD0x8siXVlTWa1A0U+hvYU8aS+KyPTVxepovBFKRkL/xFWsKqvAgUixX0F5uym3
+ OhlMaomC6owsyPoWSESJoPHBZErLGxZOHtGeNAF2NF4vdnuPXjN30+K1w6COiw==
+Message-ID: <ef429e32-2b06-a6df-91be-d720ac62e5ab@nabladev.com>
+Date: Thu, 9 Jul 2026 17:17:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2] cmd: kconfig: i2c: add missing I2C API dependency
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+References: <20260702-cmd-i2-add-dm-i2c-dependency-v2-1-e048ab426191@baylibre.com>
+ <20260702163358.GA749385@bill-the-cat>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20260702163358.GA749385@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,33 +75,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lothar,
+Hello Julien,
 
-On Wed, Jul 08, 2026 at 07:12, Lothar Wa=C3=9Fmann <LW@KARO-electronics.de>=
- wrote:
+On 02.07.26 18:33, Tom Rini wrote:
+> On Thu, Jul 02, 2026 at 05:26:57PM +0200, Julien Stephan wrote:
+> 
+>> CMD_I2C relies on either the Driver Model I2C API or the legacy I2C
+>> API, but its Kconfig currently does not enforce either dependency.
+>>
+>> As a result, enabling CMD_I2C without DM_I2C or SYS_I2C_LEGACY can lead
+>> to link errors due to unresolved i2c_* symbols.
+>>
+>> Require either DM_I2C or SYS_I2C_LEGACY to prevent unsupported
+>> configurations while preserving support for legacy platforms.
+>>
+>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> 
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> 
 
-> Hi,
->
-> commit 6a92e9827650 ("usb: ci_udc: Check ci_ep->desc before use") has
-> the side effect that an empty buffer is being passed on to
-> rx_handler_command() in drivers/usb/gadget/f_fastboot.c upon
-> termination of a fastboot session which leads to a
-> 'command  not recognized' error message being printed on the console.
+Applied to u-boot-i2c.git
 
-Thank you for reporting this.
+Thanks!
 
->
-> Obviously without the commit the offending USB request had been silently
-> dropped but is now delivered to the upper levels.
->
-> I'm not sure what the correct fix would be.
-> Should the fastboot driver ignore the empty command buffer or should
-> the "Moreover, the patch gets rid of possible outstanding requests
-> if the endpoint's state changes to disabled." part of the commit be
-> reverted?
-
-Petr, did you observe similar behaviour with the ums gadget?
-
->
->
-> Lothar Wa=C3=9Fmann
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
