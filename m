@@ -4,107 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77B2C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 09:22:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118ADC44508
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 09:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D41584AF2;
-	Thu,  9 Jul 2026 11:22:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D4D384AFF;
+	Thu,  9 Jul 2026 11:22:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zk6FAoQ1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdwA3MrD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0476484AE7; Thu,  9 Jul 2026 11:22:20 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
+ id AE4A484B01; Thu,  9 Jul 2026 11:22:50 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96FAA84AE7
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 11:22:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9673284AE7
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 11:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-6679d88abdcso2405205d50.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 02:22:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783588935; cv=none;
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-664d78637f8so2392442d50.3
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 02:22:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783588967; cv=none;
  d=google.com; s=arc-20260327;
- b=aHN83N8sH/qLJfR1dgK238dsJrcvGfpQlg59pVjw20+/NO3zCnlZ/dVkoIS6vk1IVW
- XTwIliQNvE23/RZOWlba/IojnLGnB1S+DScamyRYP+W/MPre85kSdPPbdPbUrQ9ucwGi
- bbGcaBFSIZH/NTKwsKz6uYuSn2D8dAruHlEkAnjkCAQtjFM2Fs7rvU45aUsHeW7vvQOd
- zpfIwAGXGPENH8Tz57xnteE0O7ciwlwxUsmLdrOxgAK3NOeHoG7XclY7G6r9b+Y5elDr
- s6Jt6AzpOlsK+QkUlCAIbBGMhy7Varr+EmPVmwPuMPTsGTMKFpJxtKb1cocRu7qbR4k2
- I4GA==
+ b=MYW8VEz97u78pHnvtk6Hq/hzDk/Ux4p6u+i6meBt9IEf9eHblbd2/OaJ1Ec6Ta0ejM
+ m1DZ79zo6MGP/HekZwGXXR3pOlP65WAS8TlRpJotiwJyqhDVygWryOVrw7Qb2EjlQ/8G
+ 7/Ne7xcYMD+1i3zGj29BsGRX+NEp9kE8V+/QKhzLD1AGJz+Pans770Vor5zp58+j4yYu
+ OZWknlR3pQymgNlJDkbKJbtXNvCAdLrcQHL9PwpvqGmvZ2Pp7HBy1YhCiKS39RGAhzxc
+ hjVsvdpApS/3DcU3nGv4FWShM+pMAgRU6ZiErlh38o0nNoPSwd1I4MeFe1/ephMm5SZk
+ NuEA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=fN7f9HhToW7DW+5JxYwPNwYrFEXL6X6GA6tgOJhYIHk=;
+ bh=Bjfd+E0U2jdqOFWe58XuNwIRbzeZLwtmwssum9MIPU8=;
  fh=V38ZUJKxcdlJXqozTolwU01RKxD8Otqlj8bb6/l6OaE=;
- b=W7I6kMDnBjRmlfBNvDshhOSV5Kf6No2DT2rYmvVs84p3tbUDGEl9zWuz9EaG9ErAk3
- LRTw7K48+ez99DtcwVtait1aP92cGhgzIyzihEZzBjLjDAshYUzJ/5KcJS4m44I0QYoA
- RJ//78RooMo4kkcM4+CZXnaB4KQ0g0CrAGsucAKcN70eW/pIMZ6OVMqPM6oZQDk4nURM
- JAkWMyysWqS/6NM+CbDkVr/SP/DM0DcumufuEqlaEXxcW04r9bSPAXiTeaZzt60s4drc
- RbqnvPwZ+qF6SvK5TKtKkxlviHubqXO7yKxnqhqN1nZrEm+JoloQ3LfkhuMKzLs7mVZQ
- I2tA==; darn=lists.denx.de
+ b=E1iVtJrluzIBOBG4RiWXWPj6YDK7OASp9oO0j8WgT8C5dyS+tyk/vR2wb4pzo/sKJ9
+ CMfreeb+Kq+fz9TUziFLrnyRWO9Fz4AwxXAToZmOrNOmiC5R39OqUWJSbQWc0s/ptwRp
+ Fm9K+EmOe23yTdHxXlEOhCXh44cLsbJQIZpvmfpLs8rTikaJyvSWLmn4l1TDWhz7o5Dd
+ f/YV6KWKqIv/1jYaoG3mgF4dfT0+RxMAHZc3ken31csd4QL+ybv8PiPRZnND7ihK35Wd
+ vDI76KUZTsSK5QkJ5TskqInV4S6pK2Egfj0ZxR4Zm9pjneUGYSwIsm4WfxRf3kl++3dW
+ yauQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783588935; x=1784193735; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1783588967; x=1784193767; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=fN7f9HhToW7DW+5JxYwPNwYrFEXL6X6GA6tgOJhYIHk=;
- b=zk6FAoQ1FaijpJjI/m3AnL5gYL2XmaHWmQD0mT6fXXv8SIKnU4j5fzRf7PqrJSMM3f
- 786wGEJh7GAedkxj5kBtPWOVdB6oHB4djqk2ixL1a6ZvK7wruVgXd0cf8FN7vH4PKnmW
- q882mNv1RSveZ80V8nMRcsHdZ47xPcRLsrWNW9ge8cDvv/PjE6Zb1wjM5RVMKtZKRhDZ
- Sw+K/mHm6dnnZwekQAADUMQe0mIUdvAYEuvaTIULplVkxL62M8vEgyUhYLFUYoHQjpAj
- hWzYrL/3tBQ65N6uQjhRAsWgneiYk47Ab2UfKlCQEZnyf4bP0OMxh+e0/lxq641VLAaV
- PMFA==
+ :content-type; bh=Bjfd+E0U2jdqOFWe58XuNwIRbzeZLwtmwssum9MIPU8=;
+ b=sdwA3MrDevilHSwA6RS282UfhsMTtbPHC00iypOcT0Vrz30mHsQNtjy8BV7eK7YsMi
+ KaMusTqZBrSm7Tshg0p0zWg/lH8SOI0Z+4PYhkAPnSJFsgzWBN9jsYYD3lSd2e0LGLTD
+ pYN+fLyyKPbrZMjJPznWAEexkI0+J3w/sE7aRVo96wBmEwRnHstOJ0Cd+POUl9vlNH6u
+ 5hYQdI+bQa9EQCA08J38P9OyqoofCPikVH6CJvSGwGJCVQSm58Shb/QpFrZ+4gMN8GYN
+ vugtU6QJ1mSpm/rQJlXdBSUO0aUseLwJwpupNw3247HZW3kOIHpwxFE/nCT9D4RibWAM
+ ntTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783588935; x=1784193735;
+ d=1e100.net; s=20251104; t=1783588967; x=1784193767;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=fN7f9HhToW7DW+5JxYwPNwYrFEXL6X6GA6tgOJhYIHk=;
- b=d2Kts+3vbgLTCDHeK6X5x71PKOW1cOH0qOUdU5glaONFF3rO/gz0sZuWBrLsmzgo3W
- 219/TN+FyQQxQ14PFE3WiAR5Q0NChJPMAqkHwLpt5fHo3xuRV+MVJWtpuPsXDQBSKiI+
- b5AhDMF69G2p2fN8LUY9xiTRSvnbhRhJCFTHT40T6CWHPgSt1qEh+VrIZfO8Ysp2H5MF
- xU6HzrgaYW+iuM+9wylvyLB5XG9/+XC7vZU9bFfrUKPQTcNpXv1C1nVjOqEcq+1favEk
- eDyUCQbOtNlx21AVtX1DcDGTivd4tFytr8kKFpovOOKTN/gNlGT0UJi8IXDt5rc8pX8j
- 74qA==
-X-Gm-Message-State: AOJu0Yy3SYj6D3em+38KYZ3csQBWiDjcmaSs7UND6j3yxEhklwzwfu3g
- JuRhoUWmsRoMxjw28MO5ZopDhdAx5LT0sHZNvadWFcEU9zuIHMzgtrSU8o5ppFiDKDw8PO7Jqx3
- Gp9D5Eun1PJ8zmbBe40eGYNJId9cTDv+wWZQoq1XruA==
-X-Gm-Gg: AfdE7cnNCa1x52UEDxff2mSf4lSuy0DPqizJJpEOSJAWHEw3hmIutjFpULkfofc/hCG
- oLuGWrWVxYmaSVv38Ixm7fpds9W383tpScJZvclUsaiqKV7COW6WrgdwpNpSgW4ecD7OIjXIfbr
- bQDcKPZS9iyGoar2Pv4EpuZ0v+ycyLuKjN4v3nXOyJMIgHocWgzUFmdDGYOSVPjfnNOg+OxisVr
- 2IRyjGRXGaUH5q9U+8V1ejFCaFRsuz3ZeLSiLM8qB7Md2NjrWVTtyhg3KbKEEBnuKMQjHFV3doC
- U5SoTLXTovXffbHDEbGeoEBdd96qLLc+jp6HFfvBzy9IrUNQzBarUaqMNyLLXc6VnHs40KGEtBD
- DX1U9bwWNqnRSr1CKYmEzpehzf84VJyEvzW9cIWNgJd5HpfTcnHn98XgsuYBBRhzAIcAvBuhnRL
- TQm1c4upfBti7oDcHNPlciom0Om1yVmHa7RL8iJkOQouHjgrLr/vIwrNOSMSOF07ecxZjEBBXDB
- KmKO8uQAURdsclfDiLR0lfDnnKNW8cXpkg1LnynfBy3S6rZmGxdlWyIZ6lalT6rtWu22Ic9a4s7
- StKiQZjJ0X6LUlyOcn1gGhvUJi105tE5YhW52T/+1soOsyepp9t9sB+CD4Bz+FAmnUqI6UlRXU2
- drik4sA==
-X-Received: by 2002:a53:b0c5:0:b0:664:ae6a:f04 with SMTP id
- 956f58d0204a3-6679f26b792mr3697678d50.78.1783588935171; Thu, 09 Jul 2026
- 02:22:15 -0700 (PDT)
+ bh=Bjfd+E0U2jdqOFWe58XuNwIRbzeZLwtmwssum9MIPU8=;
+ b=S9V6XjA3hLXsbhmSJu7II1DlTM4PBcmvhC/g191eQOceo8oMCNXYqGXLqa3k5V3PWy
+ rssJWiejVNmeLakPm4LChrVYX+KHkVF5sVE9+nbz90JjHyiioKhzQqmxJfyNA73SVFDO
+ RRnyShQriRY5TE71wjekx7IPWdn+wsub/PoLZfu1Lt6YSoHZd04IXg+JtE+dMNj+ClD6
+ oSGi2hbrCHcw5/LWXYa3wvHXGi4WqWl9gsH8aWOuiwBSfuMsFya52YYKrp5k8V4LLpfu
+ K0b5szglkYIQo62HfA4lU+1KnKHYRYLED225bFQh3MK/0GwdLSGIVWEzAMy2B6ACxpV1
+ 0PkQ==
+X-Gm-Message-State: AOJu0YzH0KnFahz2EDTyNea4d7hSPKL119CThNEIr+NMMo5SMjcEjlnQ
+ oocsL3MgWryUebbwtTvkdPeX/rFZl1jr/xwEW5ul3F8BfrtUXMMFuQ+p8rUVX/gEp9busOOoAPW
+ QoZALUXoQwBAW5M08anY+njd1XjyK0+vJ4UjAYz4XNRa6Yq1h021kV2OdBw==
+X-Gm-Gg: AfdE7cliEUphryBAhWzX1Pel0U9/khHlBOPelQeLIK7oxRUj0O/Q7fGclc+SsMF94f+
+ TxEQTjO96osf8WzbU00Zyi1rgxgj2JOuVdFh/nVODDCACjGtSC3iyVZGaBEf+xc+7aQ5X5GtmVY
+ zaZ9EjcE5wZ6Pb672fTf23yyUM1cMAc2pIB5C3FzQxy/vuK0zfqv5fnJIX2OZbeco4zkk4WGs1P
+ 2nB7YFsahOUe2b6YbpA6VZqsKWFPKNopSrPXPAoDtBtP6IIQNPwvcHKP9gQvaCCJn4d1Khog5js
+ 6HfJgtiLLWlHWilDs9/unGvvryH4P+kkfh/xB1saIg2jbpK9nBg/mMJhfUIv2lkG0HCaMADJw2v
+ z0l1K1IGLSHNhB3CxAZ9KGZMQDzosurTIUQhzA/fyspWO25eveQksbiYbOeVcFBTpy/CoHM2U+G
+ ee3nWI9IPFlxJ70dkj9hz9tF/lmSzBLHhYlguVuqlBptk3mt1L1exAXZAkvuXmZnMSU3iz4n1X2
+ ziOf/LPPZsrRUpWV2gmqs9WIXSNOgcF18/XLYYE+4HoxXoptkrgRSZvPGyPbVj4I3COW1YpPwvF
+ yivwGRm/rkCrS58XESv5lcTV5rQPxjYgwFyC+pGTOJ8NsYPDbOny1BddQ/mKxnSU5F8WDtM=
+X-Received: by 2002:a05:690e:14c4:b0:667:aec2:a905 with SMTP id
+ 956f58d0204a3-667aec2b864mr3359939d50.53.1783588967347; Thu, 09 Jul 2026
+ 02:22:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260703-usb-prep-dwc3-sync-v1-0-1352bc238c9b@kernel.org>
- <20260703-usb-prep-dwc3-sync-v1-1-1352bc238c9b@kernel.org>
-In-Reply-To: <20260703-usb-prep-dwc3-sync-v1-1-1352bc238c9b@kernel.org>
+ <20260703-usb-prep-dwc3-sync-v1-2-1352bc238c9b@kernel.org>
+In-Reply-To: <20260703-usb-prep-dwc3-sync-v1-2-1352bc238c9b@kernel.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 9 Jul 2026 12:21:39 +0300
-X-Gm-Features: AVVi8CfPsPJ2t0Sgqg63IJsdgl3aLf6Sy0-Vl44TvOWcUIzYIELiPrqV__otjVE
-Message-ID: <CAC_iWj+F2rfnis7LwaN_REs=BQ0PXjq=hYPZyYrRZPJmLFU5aA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] usb: gadget: dwc2: Use usb_ep_set_maxpacket_limit()
- for fifo sizes
+Date: Thu, 9 Jul 2026 12:22:11 +0300
+X-Gm-Features: AVVi8Cdu_bruuKzyvjWxwi-iJUUiKxVfSACBuB08k3WgmUBftY1EwzUcKvtEnjw
+Message-ID: <CAC_iWj+RAohmH1hdbgwfT5X4Zdj801BjcjY9WXguADu=zuQVeg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] usb: gadget: dwc2: Set endpoint capabilities via
+ .caps field
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@nabladev.com>, 
  Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,94 +119,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Not really an expert on USB but this seems reasonable
-
-On Fri, 3 Jul 2026 at 16:29, Mattijs Korpershoek <mkorpershoek@kernel.org>
-wrote:
-
-> More recent versions of usb_ep_autoconfig() use the maxpacket_limit
-> field from struct usb_ep.
+On Fri, 3 Jul 2026 at 16:29, Mattijs Korpershoek
+<mkorpershoek@kernel.org> wrote:
 >
-> This field has been introduced in the linux kernel via commit
-> e117e742d310 ("usb: gadget: add "maxpacket_limit" field to struct usb_ep")
-> And has been ported to U-Boot via commit
-> 747a0a5b387f ("usb: dwc3: gadget: make dwc3 gadget build in uboot")
+> Endpoint capabilities can be described via the .caps field of
+> struct usb_ep since commit
+> 77dcbdf3c1ce ("usb: gadget: Add match_ep() op to usb_gadget_ops")
 >
-> However, the dwc2 gadget driver was not converted to use
-> usb_ep_set_maxpacket_limit().
-> This is harmless for now, but the driver will break once
-> usb_ep_autoconfig() is updated to a more recent version.
+> In linux, the following commit introduces it:
+> b86f33a3a371 ("usb: gadget: epautoconf: add endpoint capabilities flags verification")
 >
-> Set maxpacket_limit via the recommended helper function to prepare for
-> a core gadget update.
+> Linux's change also reworks the ep matching function by relying on
+> these new capabilities instead of guessing based on the endpoint name.
+>
+> Prepare the dwc2 UDC driver for capability-based matching by adding the
+> required capabilities for each endpoint.
 >
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 > ---
->
 
- Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  drivers/usb/gadget/dwc2_udc_otg.c | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
+>  drivers/usb/gadget/dwc2_udc_otg.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
 >
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c
-> b/drivers/usb/gadget/dwc2_udc_otg.c
-> index e475b14b9ac3..9c85383fd62a 100644
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+> index 9c85383fd62a..570fed347c9e 100644
 > --- a/drivers/usb/gadget/dwc2_udc_otg.c
 > +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -828,7 +828,6 @@ static struct dwc2_udc memory = {
+> @@ -828,6 +828,11 @@ static struct dwc2_udc memory = {
 >                 .ep = {
 >                         .name = ep0name,
 >                         .ops = &dwc2_ep_ops,
-> -                       .maxpacket = EP0_FIFO_SIZE,
+> +                       .caps = {
+> +                               .type_control = 1,
+> +                               .dir_in = 1,
+> +                               .dir_out = 1,
+> +                       },
 >                 },
 >                 .dev = &memory,
 >
-> @@ -843,7 +842,6 @@ static struct dwc2_udc memory = {
+> @@ -842,6 +847,10 @@ static struct dwc2_udc memory = {
 >                 .ep = {
 >                         .name = "ep1in-bulk",
 >                         .ops = &dwc2_ep_ops,
-> -                       .maxpacket = EP_FIFO_SIZE,
+> +                       .caps = {
+> +                               .type_bulk = 1,
+> +                               .dir_in = 1,
+> +                       },
 >                 },
 >                 .dev = &memory,
 >
-> @@ -858,7 +856,6 @@ static struct dwc2_udc memory = {
+> @@ -856,6 +865,10 @@ static struct dwc2_udc memory = {
 >                 .ep = {
 >                         .name = "ep2out-bulk",
 >                         .ops = &dwc2_ep_ops,
-> -                       .maxpacket = EP_FIFO_SIZE,
+> +                       .caps = {
+> +                               .type_bulk = 1,
+> +                               .dir_out = 1,
+> +                       },
 >                 },
 >                 .dev = &memory,
 >
-> @@ -873,7 +870,6 @@ static struct dwc2_udc memory = {
+> @@ -870,6 +883,10 @@ static struct dwc2_udc memory = {
 >                 .ep = {
 >                         .name = "ep3in-int",
 >                         .ops = &dwc2_ep_ops,
-> -                       .maxpacket = EP_FIFO_SIZE,
+> +                       .caps = {
+> +                               .type_int = 1,
+> +                               .dir_in = 1,
+> +                       },
 >                 },
 >                 .dev = &memory,
 >
-> @@ -893,6 +889,7 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
->  {
->         struct dwc2_udc *dev = &memory;
->         int retval = 0;
-> +       int i;
->
->         debug("%s: %p\n", __func__, pdata);
->
-> @@ -909,6 +906,10 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
->
->         the_controller = dev;
->
-> +       usb_ep_set_maxpacket_limit(&dev->ep[0].ep, EP0_FIFO_SIZE);
-> +       for (i = 1; i < DWC2_MAX_ENDPOINTS; i++)
-> +               usb_ep_set_maxpacket_limit(&dev->ep[i].ep, EP_FIFO_SIZE);
-> +
->         usb_ctrl = memalign(CONFIG_SYS_CACHELINE_SIZE,
->                             ROUND(sizeof(struct usb_ctrlrequest),
->                                   CONFIG_SYS_CACHELINE_SIZE));
 >
 > --
 > 2.54.0
->
 >
