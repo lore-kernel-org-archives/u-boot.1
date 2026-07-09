@@ -4,101 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A0CC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:23:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F0EAC44501
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:24:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A7284A29;
-	Thu,  9 Jul 2026 03:23:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 141D684994;
+	Thu,  9 Jul 2026 03:24:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fc0EysCL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h35oW8xr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6330684A51; Thu,  9 Jul 2026 03:23:32 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 313A284A1F; Thu,  9 Jul 2026 03:24:48 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F07CF84A1F
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:23:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D5AB8496E
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:24:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-693c51a8a19so539044a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:23:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783560208; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-697763eeafcso2342250a12.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:24:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783560286; cv=none;
  d=google.com; s=arc-20260327;
- b=C9WHZcrNIJY1VftcRn+pXuWYwcqQBN6z8YJKlnSM9pbnfbJI3Qmf0ji4eIUhFjm9Ss
- sTfE4NsfmG2nThiigEII2+Ne9j9xkqeakYlYG9nO+ayMDpV2GcLcoLSuElm3Cyzt3XIo
- 1YJAd8VzoVzQfO8mcJDygWV2GVI3FSn1CVoM0Q6WxIlt9G5eF7loaMatqXT7XlxKlfII
- iZQX6ne+jK4NSIUjNtshF7/AxvOf+/YXKX+2A0kQosBvYh2f1FRqVrkIf8jdw+LazAVF
- BrWqwkBZlN8BQMQ6XLk6SpmqlNFo344evT6LFQzQykFdrH7/EHCRHDFTdDIlAknLAR4w
- TsQQ==
+ b=gLNqiUeXlweBpoOJt6GE8Vz/AJsOBCtSWlmQ/F4lzqq638B9Po/L1pGUE+NTydXpXS
+ +XwB4g2/Seuk4DSBg2oYicojqxegZImWgo3r+pTiavh8CT+7DpaRPu+fuN2swdA+pPtz
+ s8IwJcIoAWUgD8eWU7YqSgW+qKjVhcYTz0LDBZZY8gKKLTftYfcU+gzFH7BuWgy2NVt+
+ TLo/jzB4hjIDpvVqhd1MBMnXmEvUOPUZwl7BSBT7o8yfknuqmv0xTVZAKZurtVGx/bWJ
+ VBjFeyRDTTYZGenito6eqSMi2WpQ+uiv8LrJ0dEwV+RATHZCYwLlATR+nFitey4AxHtd
+ dJgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
- fh=NJvti96iWr1RedAx5v2nMvfBUKn0yf6cwr/0thOFQRA=;
- b=O58Xh7zIuK5Y8VdbI23orJq6n1uSilvkYyZsk+IWp4i8xeB5tEmxHXy/nVzRvoe+Wh
- +YBx+TtXDThbVXK2smGo+ugoSWpOGzHjzAP9LX2yKdXEOQZBLKPVYQg4ZJNuNoQFBV7J
- L373415zw+8qbH9QqIyId35aYF8xeqdEuO6JtywLSIKYaaLD2jbmxx9HLJs55+JrKqiy
- SPYgIZkcDzraEedPqBxa6aMSQJHhCnj5mXO/E14QQDiB6REQmBkNUdzDEItai1OvaaUM
- RHHhADMuXlIaG3Mov/Tt0unLVIo/deIKTicB0ZieibQbi9k4XgtsgVf5f9bww4mXpUG6
- /S4Q==; darn=lists.denx.de
+ bh=36HUDd1f2S/DNtE4DS9YPN9Llm9wwngCyGLaVRGCopw=;
+ fh=+6povcerqHjgn+6VFq2cIMMHL8V1jKmE0QZ9TDr4nYE=;
+ b=P6HcVDalOC7XxsUWnVvAjAlZs+3QBvCxiV2+FHaQ1ztKY/Z0qOSX6D3im2P3XnaqmX
+ hS9kyiEqdvx4h7idVvVpqYq24odVdxnucrIZAj4DBHmKwhh3xSQVnVLEW4/G+FlO6O9D
+ ZdWGcRqwmnA1pX/a7FqDZRI0mtCmZ4m2DigJ4nP7gjhQ0+l28xXIVcY5pcoX9os7ZZLa
+ 02gKynw28tsaX8hl1jrY9+l6ZsJyKzvqHt7UjbAYxP0c6+cxRVLctGXWhREv/wi3tfGl
+ 5ruymuU41BHppw9lZ/2dcajDZL51gwnMCPBKCdPRmJY60QaqP52aE2QsuR33mMePgA8H
+ tOaw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783560208; x=1784165008; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783560286; x=1784165086; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
- b=fc0EysCLkY4H05HWxxUsn3VrgGFfAcCkKeI2sv1HO4R9pYnZ7n4oObTAmvgHHL7AYy
- dPAxdBWMaTKiD1iqEo/WgxkkF/nAnVQgvV+E7dRuBL0j+GOr7W6DORM8H5lM8cVPLe9h
- 1czNKVb8fp6Cc2UdZLJlnNu1DCo11Xwa1MimQ=
+ :content-type; bh=36HUDd1f2S/DNtE4DS9YPN9Llm9wwngCyGLaVRGCopw=;
+ b=h35oW8xr7k1EhYkq1n8BRbnYnzftTEfYrpirpu/MbHHYjn4KKO0mBU4w/DuUKtA6Pu
+ 19QSqmdFY2+MMzCvwpBaWjPI6b0hAe9XqIAwzMLM55IxUyae9vALBYPIPfvSYgiDScig
+ BuS2JkEsKKaMDwgXzYs+6LIxb1Xq7SoJ9EHsE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783560208; x=1784165008;
+ d=1e100.net; s=20251104; t=1783560286; x=1784165086;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=hvQkScZ8cn5V2YCvtEEktLwdJYjUdStAsVb9Av7tdKo=;
- b=gPuGuw+rwk5qkMzhP9N/m5MQHp+oJVnFPxzb6DAXd9phg33PPkrIx9JZPWlV5NcU6A
- 3fzf8pWuM7iYUDuFPXgrGQqOKdGTEYVsRJkFlgFr35bWBxrJtKqKbn3gMgXh3nDuCIot
- v575ubrQz1qIkiGmvI4MOuez+DOtXwOexCPInMRgHhar0qUxpZVYDcM6qDMdK8he9h6u
- B4Hhx81Pgmdb68PT+szUagEg6dxYKDpXSDv7c3qIFglGsG8RQTFmupvlX7nn2rPM0+WW
- X+aNx0kV2VvbBK0elefhBZzJKjlsn1Q5syRsRnuUGKUKHtCkdFFFgURmyUguIWF0RAIp
- t7lA==
-X-Gm-Message-State: AOJu0YxaXcn+Gz44LCwYwTvHl39XxG0bsov4zs4I5imEcEvMfshwOthT
- 5x6iHPX1C2AB3BqYQGHw2k23jiUeAW1QRCU8+LBdvefWGE+BYqgljFM6ipuDKC2cQcmLL8H1t+h
- 2DvBRcg5Of6wyLL0MOdOUTCFPUxx9xWQazVqDxDTp
-X-Gm-Gg: AfdE7cl2pxILDNNVQrVWaEM59fKzcZfjm2JMhbqI5DVBvBgvAsbI991Mp24R4ioVrur
- g82hEAoWWwAcQO2F3tBb1pA+W82XxkznI04O1rKNvY470+ElF7QAMGcOPx/UDtwacIOJa4oLIHi
- CR/sQnfULyfBqx33pH7bobAwhP48YpEJR4nDJKt/BX6tUGwoaldTkTViL6kuUyURItcLV6i7mMk
- S5ZJ/yoSrNh5UiBzpBOi2OXFAC8HpQ7mBBTLQQl+ywJZeyhlvhCUNYXQZZn1FGWKy8sxMk=
-X-Received: by 2002:a05:6402:234e:b0:69a:9c4a:3d63 with SMTP id
- 4fb4d7f45d1cf-69ab4469a96mr1947534a12.17.1783560208433; Wed, 08 Jul 2026
- 18:23:28 -0700 (PDT)
+ bh=36HUDd1f2S/DNtE4DS9YPN9Llm9wwngCyGLaVRGCopw=;
+ b=rBZETQejG79MoHegxBKBIP3Q1SIepz8dtGsI3xyUUXU6fdBxqvLoPMEds2a3ngW49d
+ ZiAHt563M1ce1MJRTUrFUoE50xS9JfnV8546j5kntWjDMVLMpORWz1a9j+41gz4oSqzJ
+ ueinQUs/vG9d56zezePIMlJmUoZ6yWeDe/9dKdOoX24KZtm+6UIa8J1XeK5fsoupWiEH
+ KUamvRY8fiSFD9X1WK/a7CRCoAh7AUdTjRBv5F0NCO3+UUlBwStkE2Th7Vb5UviUVe0d
+ IHnHWkQ1sI/L8xo6p0V+jmy7HQkq5VpWxGLsBjIX61U6eTSKBue2AMsvZ9OwizVdSr/7
+ juGQ==
+X-Gm-Message-State: AOJu0Yyq9bPVDuki9yN2t5GVQmaoE+g7aTTIIRy2pL2d0EAjgflgAt7q
+ DH9RB3FNXkNVmqyB/bXhxt07b+r/GKW7Sk5+8JWUwIS0qeK+WmBJb/ps0ychV+ahHLGA6rpPMDB
+ h/xphwNr+XUAMunMGqqiXrNhby+cPBuKm9JqJdPEd
+X-Gm-Gg: AfdE7cn1mKxHAEc+358SXghSuf7Aa3jHrmv1g4fZ8LwzfR27wIWzfJz4AUOTrcMteYX
+ bWCqrJiLtnWWzp/4I0sFJXwh9keytTPwY1cZRjMmiTGRTdb1fA4/eCTZy1cJhnMdPwzOkYFPO3B
+ wgPsWaTz5iXstLLf8dboyQChm8G6UM3P6Sz7ffWswpoYv0lo2+coodN/X/fjMPmyxXwFxP6SgsM
+ 6UPw/Mw4FSjQrVL+VijKC6DdcME+RVP5/5+Z9wnhbYEb66uM9LUtlFqK1sI18EqHR+PgAk=
+X-Received: by 2002:a05:6402:51d2:b0:698:be56:d7cf with SMTP id
+ 4fb4d7f45d1cf-69ab4477801mr2070830a12.16.1783560285807; Wed, 08 Jul 2026
+ 18:24:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260703213308.3804461-1-james.hilliard1@gmail.com>
-In-Reply-To: <20260703213308.3804461-1-james.hilliard1@gmail.com>
+References: <20260705212037.319801-1-marex@nabladev.com>
+In-Reply-To: <20260705212037.319801-1-marex@nabladev.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Jul 2026 19:23:16 -0600
-X-Gm-Features: AVVi8CdsUSggB4L5Li-VpypgpF53kHVfR7l_-7TJRbo_BlQP3IYjYT7TSxYkv8s
-Message-ID: <CAFLszTgZbTwszEkEQ8tz0CPbBBpAjvc3-iM4Pwc4gQZOKJXjHA@mail.gmail.com>
-Subject: Re: [PATCH] tools: binman: add build key directory option
-To: james.hilliard1@gmail.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
- Chukun Pan <amadeus@jmu.edu.cn>, 
- Yannic Moog <y.moog@phytec.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Aristo Chen <jj251510319013@gmail.com>,
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Date: Wed, 8 Jul 2026 19:24:33 -0600
+X-Gm-Features: AUfX_mxqQ_WMD51oBYS0Mf0HQElH2Ge2XTGjRj_-ZsdVOqIUx9JZAfoOQtMHdVg
+Message-ID: <CAFLszThTW2_-NFEywfW6HDOTJ9u2eyvYwXkZCtXX3fgoET9weg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/3] binman: imx8mimage: Generate FSPI header in binman
+ instead of mkimage
+To: marex@nabladev.com
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>, 
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>, Yannic Moog <y.moog@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,71 +111,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi James,
+Hi Marek,
 
-On 2026-07-03T21:33:03, James Hilliard <james.hilliard1@gmail.com> wrote:
-> tools: binman: add build key directory option
+On 2026-07-05T21:19:05, Marek Vasut <marex@nabladev.com> wrote:
+> binman: imx8mimage: Generate FSPI header in binman instead of mkimage
 >
-> U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
-> internal binman builds only received the generic BINMAN_INDIRS search
-> path. FIT entries with fit,sign or fit,encrypt therefore had to infer
-> the key directory from include directories before invoking mkimage -k.
+> Stop depending on the current mkimage method of generating the FSPI
+> header, instead generate the FSPI header within binman itself. This
+> is more flexible, as the FSPI header properties can be configured
+> from within the board-specific DT instead of being hard-coded in
+> mkimage at build time.
 >
-> Add a binman build -k/--keydir option and pass KEYDIR through with
-> that option from the top-level Makefile. FIT entries prefer this key
-> directory over include-dir discovery and then pass it to mkimage -k.
+> Acked-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 >
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
->
-> Makefile                  |  1 +
->  tools/binman/binman.rst   | 10 +++++++++-
->  tools/binman/cmdline.py   |  2 ++
->  tools/binman/control.py   |  1 +
->  tools/binman/etype/fit.py | 24 +++++++++++++---------
->  tools/binman/ftest.py     | 51 ++++++++++++++++++++++++++++++++++++++++++++---
->  tools/binman/state.py     | 21 +++++++++++++++++++
->  7 files changed, 97 insertions(+), 13 deletions(-)
+> tools/binman/etype/nxp_imx8mimage.py               | 95 ++++++++++++++++++++--
+>  tools/binman/ftest.py                              | 23 +++---
+>  tools/binman/test/vendor/nxp_imx8m_fspi.dts        |  1 -
+>  .../nxp_imx8m_fspi_fail_columnadresswidth.dts      | 19 +++++
+>  ...fail.dts => nxp_imx8m_fspi_fail_devicetype.dts} |  3 +-
+>  .../vendor/nxp_imx8m_fspi_fail_flashpadtype.dts    | 19 +++++
+>  .../nxp_imx8m_fspi_fail_readsampleclksrc.dts       | 19 +++++
+>  .../vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts   | 19 +++++
+>  tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts   |  1 -
+>  9 files changed, 178 insertions(+), 21 deletions(-)
 
-> diff --git a/tools/binman/state.py b/tools/binman/state.py
-> @@ -41,6 +41,9 @@ fdt_path_prefix = ''
->  # Arguments passed to binman to provide arguments to entries
->  entry_args = {}
->
-> +# Directory containing keys for FIT signing/encryption
-> +keydir = None
-> +
+I'm not sure if you are planning on a v4 based on my other comments.
+In any case:
 
-Please use the existing EntryArg mechanism instead (see
-etype/vblock.py and etype/gbb.py). Then cmdline.py, control.py and
-state.py need no changes - fit.py declares EntryArg('keydir', str) and
-reads it, and the Makefile passes '-a keydir=$(KEYDIR)' alongside the
-other -a args. That matches how atf-bl31-path, tee-os-path, of-list
-etc. are handled.
-
-> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> @@ -500,6 +505,7 @@ class Entry_fit(Entry_section):
->          self._fit_list_prop = None
->          self._fit_default_dt = None
->          self._priv_entries = {}
-> +        self._keydir = state.GetKeydir()
-
-Reading global state in __init__ makes this harder to test and couples
-the entry to a module-level variable. If EntryArg is not used, please
-fetch it lazily in ObtainContents() next to the existing engine/keydir
-logic.
-
-> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> @@ -2161,6 +2164,11 @@ BINMAN_INDIRS
->
-> +KEYDIR
-> +    Sets the key directory passed to FIT entries by adding a -k argument.
-> +    FIT entries use this directory for mkimage's -k argument when fit,sign
-> +    or fit,encrypt is enabled.
-> +
-
-This section is for binman env vars, but KEYDIR is a make variable the
-Makefile forwards. Please clarify, or drop this hunk if EntryArg is
-used.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
