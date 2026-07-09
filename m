@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B95F6C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 09:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC34C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 09:19:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E407F84AD3;
-	Thu,  9 Jul 2026 11:19:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7173884A3E;
+	Thu,  9 Jul 2026 11:19:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KSp4dGaz";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LiCMYp+E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47CA084ADD; Thu,  9 Jul 2026 11:19:04 +0200 (CEST)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 05A0E84A3E; Thu,  9 Jul 2026 11:19:52 +0200 (CEST)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 073CB84A3E
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 11:19:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9AB584994
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 11:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RtseuIg49hphxDPZJWUxyA7ntYjdWfFd4gZzz4XbNJXAttUyOKtllqeYRC/KGu43mVWAfgrMwUSzwI6Xrc1H9te4cdPlV/g39uOmY3mLJmfQxCa5E45CMbBNnEIB+u0ISspCuDNrADd5cJsSH9THDTRvKCSE5418IlGBIy06EmYgqOxnkHIWmw7FcuASclkXDM0xKR/xkmlrZPlhg/h3Mebs7jogMbP8aUA+Bz1gq2zUifMnuhKa8oLQiP9Udwb8TlCoPDnlpf849EyRwf3E8EL2qfWQXBCzpah1jA8ktADY2mlKhyFK1HYcT+q2u1LfHPWhIjJiSwtzSJjFM+/oLQ==
+ b=FEK1+ot3Bpf2oJHm4x3y9EkCAkMAGTs+2TGQTLQSq8q+ovtbngy0pIviiP99ofdNG7MICptlb8iJkfAKhxkcNNDxIvRklCVyIt9iYYuu2ZDvpjNjuWeM3r0DhCT8DsgfyOSOchLTRk2nxCNeNnw1qsad1TedTXtWL1gwnUm9StV/L5GX5T09+95r7mwqLUj4B18jMgkd1Iz/XBzbizElItKG8nUXK4QfDEtIfe5YdiX7iL08E3uSFPECKFQZUwovOak6lMiGjuUXzSwZw05b+TbIAyxVlm5tyGcCUHquDL/DP2BLmdUHuLVxYCM1DDrS99rDF1PiHO9lr4vOu1ChDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ajLIVAbZhU01Sz1MU1n8wBuxvhud493Sa99oNdke0oQ=;
- b=wo7BGVgGRKJMa/wmm0arCx2GYvTl+zrWTzEGsjmWsV6aMCxPjblJUIfUUrfS47O7+sgvw+lSSfhDXCPJNfo9Cy9vdbfPik/y8FZVeUxVBxHJ4oTRelLcW3askSdoX7XPSk4wmR1V+XRTRsLWnT1Mh5LwG0DeawpGT1cAy+Q07h0UTpW8l6YoT/qqgPpm3E0PZQkipwfG1PhBHPYAnY5LrXGc6C3fiTTM8ZQE0IFhY4L+KuorxOPkNbVKXfrVkxXwxHdWUpPFlsbwxP2vYaMf1MeBEFu7q59e061LW3WvXwoO1E2lg8Yxepbj2ZIOxJXNhPONliz01LAKi3BMY4xjwg==
+ bh=Ef4tTQ/dfz2CcZ+4dxOUJJ4BzuvcuT7ggUULszD/Qf0=;
+ b=zFihD9Nr3tEnySpUFhOST1gaK+GvLtbte8zIa7N1Cu5lO+lFMEZweAhcMLjW8n8tOymKOmmoM8FHlB2jiO3keP5TGN+Z+epel5B57pWI7fAXOaKPGrEl5uua8kczfWn3jzczDfUbJfuYDj5B2HynQSSvpgP31SIGR4cekay+17dhXoJsAPqLe6FDHRRT0BACjd/7QUbKggzJ2WD+nQlu3UA1PnpyYEZZErzomoTG110HKYuhE6KyTn084MbbYC/hxGqmzuI4q46W5NAgqU9+z8Evd3kAvwd2MtS1NmU0qvtV3ISiUNMKlgfVPqEfSjc0+wu8r4iJx+qy86Em8RQVIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ajLIVAbZhU01Sz1MU1n8wBuxvhud493Sa99oNdke0oQ=;
- b=KSp4dGazpQ61iieLoOZ8rTT7rDakV07JasH3UlRc2ukmnu6Pd0w/6lShrB545KsOJnoU9/gUQNCUnR38jzEZ75U9YkjN40hQr258ieNVXqkfrxUxiLVWryDB7B1l8MtI3N7Lg9QnBlxbORkSJ+nUU0gVEh4PSJBU8nqBIH7Sqzg=
-Received: from CH0PR04CA0011.namprd04.prod.outlook.com (2603:10b6:610:76::16)
- by MW3PR12MB4441.namprd12.prod.outlook.com (2603:10b6:303:59::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
- 2026 09:18:56 +0000
-Received: from CH2PEPF0000014A.namprd02.prod.outlook.com
- (2603:10b6:610:76:cafe::6f) by CH0PR04CA0011.outlook.office365.com
- (2603:10b6:610:76::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Thu, 9
- Jul 2026 09:18:56 +0000
+ bh=Ef4tTQ/dfz2CcZ+4dxOUJJ4BzuvcuT7ggUULszD/Qf0=;
+ b=LiCMYp+EK+HSC9U3I5Pm+5cdB2tJIMxv3OeTiG7gwSb8KQV6Ck86yS8/UyAAwwWJimDfqQ52rahCRK8MmcY73Oy8PqGUt8dMZd8N5ZooiDU7Y0wWThTtUdVykSbxFbUaGk8Hsv/DRmZVY/34PMwT6gxm4khqupPRKBlzwUaCtH4=
+Received: from DS7P220CA0106.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:25d::16) by
+ PH7PR12MB5688.namprd12.prod.outlook.com (2603:10b6:510:130::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.181.8; Thu, 9 Jul 2026 09:19:42 +0000
+Received: from DS2PEPF000061C5.namprd02.prod.outlook.com
+ (2603:10b6:8:25d:cafe::6b) by DS7P220CA0106.outlook.office365.com
+ (2603:10b6:8:25d::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.11 via Frontend Transport; Thu, 9
+ Jul 2026 09:19:42 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH2PEPF0000014A.mail.protection.outlook.com (10.167.244.107) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS2PEPF000061C5.mail.protection.outlook.com (10.167.23.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Thu, 9 Jul 2026 09:18:56 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.181.6 via Frontend Transport; Thu, 9 Jul 2026 09:19:41 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
- 2026 04:18:55 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 9 Jul
- 2026 04:18:54 -0500
+ 2026 04:19:40 -0500
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Thu, 9 Jul 2026 04:18:53 -0500
+ Transport; Thu, 9 Jul 2026 04:19:38 -0500
 From: Pranav Tilak <pranav.vinaytilak@amd.com>
 To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
 CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/4] configs: versal2: enable I3C support
-Date: Thu, 9 Jul 2026 14:42:54 +0530
-Message-ID: <20260709091357.1860417-4-pranav.vinaytilak@amd.com>
+ <pranav.vinaytilak@amd.com>, Dinesh <dinesh.maniyam@altera.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH v2 4/4] i3c: dw: fix slave device setup after DAA
+Date: Thu, 9 Jul 2026 14:42:55 +0530
+Message-ID: <20260709091357.1860417-5-pranav.vinaytilak@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260709091357.1860417-1-pranav.vinaytilak@amd.com>
 References: <20260709091357.1860417-1-pranav.vinaytilak@amd.com>
@@ -89,29 +86,29 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000014A:EE_|MW3PR12MB4441:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59cf04a8-4809-4f06-6161-08dedd9b1a1f
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C5:EE_|PH7PR12MB5688:EE_
+X-MS-Office365-Filtering-Correlation-Id: 43531b5f-9a6c-4c94-428e-08dedd9b357a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|36860700016|82310400026|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 0V2OlEhTJRRGlw+OTtfpCqSCG3arcPK129LsJiw00ddFNkEhgFHSY7IvVMUydR1g1/e3Iw5+t0sGMiGl2S2g8HNXsVj8DJkRghoVR+8VfqxT28EpJ2PFZZAdQlfkN5P6Qv8+tltGwH0y47th2u4WMxcD3O8Sqsebjs9XBWFjinBMznFOlwHbXgC3KY2NHxq3H2l4rbdWx+8z66yaD9ylo4QTFuE17L5ZBlvQ4tcZ9cNz4dmg62T8XPBT9fwvurdVCKY2juWtpCNvaR1PuKcCq0cd/6JWNrUnh439iniRoGYB3LXy+dm/mMi5bQZ6pQtM37YBx5etqHqaM0WHtvvLMHqntT791x/K5ZYkA2Nqm2qL99XkOTvWsNeqK3rNQXQd/IFqyt1zhcxnGH1Kj2ZZVUHlXlvRTQ2jhTtdgtYXXEnJcjuwcjDdJnSRS5IKQ836q6Kx3hjrM5FynI1oGCyLgy+E9upyWhr+7YaJgDRRNBRGo5IBFf9OfBhHQPvHtzbV/n1c61fgke2cb3nwmaNBEF6lll8Gs9WokMPIqyEBKyEfBFP5nlgIKkqq2Izrz7/UD3+s/AZQJZ+VXdA6zL43W90Po3U/uLkD1Q0BJCQpEtGjI1YJB2FrCaX6AogQ3YQEuDK0PuWng8NVR3nTZHWGypPdKXP9kBHK4VuJvPD9NvfD7bdHXCGyj4EQ7CSxE/k7nOUPcvmUuTZf6JIgCIR4mg==
+ ARA:13230040|82310400026|36860700016|376014|1800799024|23010399003|11063799006|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: X15tuqkyI7JMiAx/G1XgCPjJYjUtcxl5nrYbkND+y+uOpTV6fDBeQ2HoyxLA1ymWG5kfV++1vLNC4b66iHz+38UTKsxcBrKANxAKBFFtG+hlgoPJow2QugS7iNNFCYNEOeGPLmxtC7MgWy9yNOyhpnnOSo2N83V0Q3XNdrJ3lmAVRtNPHpkdceaJOVqnjyE8kAoK6pIBHt7Yl5tODtiZTdnaKiVPQCLlHXhKrJkOnLklwZH1Q3ZAvOC+CiHSSEETiokw4OuVoQmAMbqDXLSScx73VpwSvjeSLIjgey9ZxRwUeweosK7wLNhO2Qxapja39bg0nXfPrR0Jr9m2YSAm91h91otM5xuqHERmTzwgIpsfEGK9+tRpAxIlD6jf59bmpMzTuC2D+piBcWEa+BlWOCyZ00O4d+KWtlFcugQOBYTq2SLHEX2fsHDwmvGHstYlg7LbiJfsr1TOnN6Ez74QGu7h6pyvaMV0E9ybTY+00HHRhlvbWN4zioHYBg0EvswNPCnoA0D7F8EVJLeRNKudEKVGDiHhd6EzLH4XyDHhdWjAmJhFpa1y6wZGTAG7Hhx7mZ2boPR/ZMb5saGB+QKfZoVkiZjVQqYwFhaouzDK2DJ84v+IBwFQET2XtrFuEA5FyDCMR5dQAYQ37Gm8ECjxGMxKQmxrrz3IvK2yQpDvDWMIVL4iIDs77RVtBc8YD8z7tmpNZ+lJQdLQBXdxaQqQIw==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(36860700016)(82310400026)(56012099006)(11063799006)(22082099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(23010399003)(11063799006)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 6/XQcD5ftVhzBIoTNmYGm250j1dAOrBNyhJjk5QmM8j/D7AO4B0PudkKFefuxM33SAJz4aFaqbzzocrQW0mf89eJOD1DMIkvcxjkBf/T9bjs/4OXwMoS1yd3Rz0xDI3PMW2oDIf/nINKqHgh9WrckK/nm+gKdF1fOrfu6pfGVw0wcDaWPEmGXPEU5DZhwWGz5a4Of+1ZSgA6eW+JCCPWD7S0YsDnG2fpIZV19nET2JdLQYrE0KsqACtKawFu6t94i66p6njp4lF2CObCEp3KhVgtGpq9TwOjMvTI1C/GZyEZE3F0xUmG2iM+LO3kTOyFIU9zDlhg9RiWYHzmDYweQ3CeDN/W1G5qHJA1eAiIYoNa63PXolYPqqqMwVmd3rGhnCtlQzQ4DLXWmiLvgreVilRK9oqb6V5KxmDtYYcqBkUmiQEMf3UhIQN5b78fVpSq
+X-MS-Exchange-AntiSpam-MessageData-0: W1K+svcoHBA+e38TX2Qlom2d71J6gk/ZD+B/0x7fKGeWHAhSIawRJmwOXgtrPgqWQocx7bV/IxylNurcsiQKo9HnXWqeEx4RSa2diwX5sp4l17kfHHYpM7TKXmjHL98VU3na3QnMpVGrc1SMTPiLTi/SVqEaUnldqR12SAk/fIokEA8r4ncxkk7Guo5JlkAEyXZ6CX1xIzgMH0OLwqTcw5wjt0fr7PuBvfti6Dk8xvHK1+UDobw+dmFh+MoSdA9HP79MY/FVTIiqkr7bOMynmedymjq/IGRgGQn92RcgGI0W7luJsXzYkvLzivdXIEgMlZ7I6m5+lP5oGe5DsJBQuLhqiqiB6vyK00Q78ddBxD187wkv/yB2MIJkpWcdsh2h629Dd1ZKS4KLhhxAlBNiKGjU4Jo6EPkbbXi7J1KmyCPLfuSeGdMJ+lgC5JLY90OZ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 09:18:56.0581 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59cf04a8-4809-4f06-6161-08dedd9b1a1f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 09:19:41.9251 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43531b5f-9a6c-4c94-428e-08dedd9b357a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000014A.namprd02.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF000061C5.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4441
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5688
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,36 +125,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable I3C controller driver and command support for Versal Gen 2 by
-adding CONFIG_CMD_I3C, CONFIG_I3C and CONFIG_DW_I3C_MASTER.
+i3c_master_add_i3c_dev_locked() incorrectly set master->this to the
+newly discovered slave device, causing i3c_master_attach_i3c_dev()
+to skip the attach_i3c_dev() callback. As a result the slave device
+never got its master_priv (DAT slot index) allocated, free_pos was
+never updated, and the DAT entry was never written.
 
+Fix by removing the incorrect master->this assignment. Store the
+slave descriptor directly in master->i3cdev[pos] inside
+dw_i3c_master_attach_i3c_dev() where the DAT slot index is already
+known. Also check the return value of i3c_master_add_i3c_dev_locked()
+and skip num_i3cdevs increment on failure, fixing dummy devices shown
+when no slaves are present on the bus.
+
+Fixes: 1009c96f1590 ("drivers: i3c: Add driver for MIPI DWI3C")
 Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
-Acked-by: Michal Simek <michal.simek@amd.com>
 ---
- configs/amd_versal2_virt_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/i3c/master.c               | 1 -
+ drivers/i3c/master/dw-i3c-master.c | 5 +++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 00ccc81a83b..ea02b0c011b 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -46,6 +46,7 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
-+CONFIG_CMD_I3C=y
- CONFIG_CMD_LSBLK=y
- CONFIG_CMD_MMC=y
- CONFIG_MMC_SPEED_MODE_SET=y
-@@ -103,6 +104,8 @@ CONFIG_SYS_I2C_CADENCE=y
- CONFIG_I2C_MUX=y
- CONFIG_I2C_MUX_PCA9541=y
- CONFIG_I2C_MUX_PCA954x=y
-+CONFIG_I3C=y
-+CONFIG_DW_I3C_MASTER=y
- CONFIG_DM_MAILBOX=y
- CONFIG_ZYNQMP_IPI=y
- CONFIG_MISC=y
+diff --git a/drivers/i3c/master.c b/drivers/i3c/master.c
+index 019167a2dc5..1cf1ffd99cc 100644
+--- a/drivers/i3c/master.c
++++ b/drivers/i3c/master.c
+@@ -1443,7 +1443,6 @@ int i3c_master_add_i3c_dev_locked(struct i3c_master_controller *master,
+ 	if (IS_ERR(newdev))
+ 		return PTR_ERR(newdev);
+ 
+-	master->this = newdev;
+ 	ret = i3c_master_attach_i3c_dev(master, newdev);
+ 	if (ret)
+ 		goto err_free_dev;
+diff --git a/drivers/i3c/master/dw-i3c-master.c b/drivers/i3c/master/dw-i3c-master.c
+index c6ce54a1d3b..25933adf010 100644
+--- a/drivers/i3c/master/dw-i3c-master.c
++++ b/drivers/i3c/master/dw-i3c-master.c
+@@ -671,8 +671,8 @@ static int dw_i3c_master_daa(struct i3c_master_controller *m)
+ 
+ 	for (pos = 0; pos < master->maxdevs; pos++) {
+ 		if (newdevs & BIT(pos)) {
+-			i3c_master_add_i3c_dev_locked(m, master->addrs[pos]);
+-			master->i3cdev[pos] = m->this;
++			if (i3c_master_add_i3c_dev_locked(m, master->addrs[pos]))
++				continue;
+ 			master->num_i3cdevs++;
+ 		}
+ 	}
+@@ -806,6 +806,7 @@ static int dw_i3c_master_attach_i3c_dev(struct i3c_dev_desc *dev)
+ 	master->addrs[pos] = dev->info.dyn_addr ? : dev->info.static_addr;
+ 	master->free_pos &= ~BIT(pos);
+ 	i3c_dev_set_master_data(dev, data);
++	master->i3cdev[pos] = dev;
+ 
+ 	writel(DEV_ADDR_TABLE_DYNAMIC_ADDR(master->addrs[pos]),
+ 	       master->regs +
 -- 
 2.34.1
 
