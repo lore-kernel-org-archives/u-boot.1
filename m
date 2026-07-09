@@ -4,92 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D05C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 20:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B93C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 23:02:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 065C984C15;
-	Thu,  9 Jul 2026 22:20:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A60B884BFC;
+	Fri, 10 Jul 2026 01:02:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sumn3C4e";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nwWk9nfi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B72B84C36; Thu,  9 Jul 2026 22:20:56 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9554084B20; Fri, 10 Jul 2026 01:02:54 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCACB84C39
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 22:20:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-698e5859a3cso502762a12.0
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 13:20:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783628452; cv=none;
- d=google.com; s=arc-20260327;
- b=hsNSWH77EnyLwBI7jhQRRq2iWqJW0sLdEWV3NGJ51jskaxx73+5wOOXxjDhE+gu1To
- OBmh8yXwjpeRUEwbcG+Kv/yXuzPJaT4CaNjCfAxIPfDRG0K3242mgStYUkb7LXgBPnAh
- 2zp8caZs4rfE3gL/o8iiqEp2q0JJhXI6Ee8CXUZUYSlK5nutM0QsJQquJQYlXMvHlxhF
- tWPflgKcl2zIZF0SJMt65+2V6t+4TqcHDzpE28ULpNhM9UQPBdVgEvt/Y8q/N35jOBw8
- u3HSy/Ze7LQpUnXXx+1UmYfw5ZjjrxF6j/qR7DPH4DSedagps3VhIuTfCQu+RiqwpQXw
- 6X3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wriQCmqJnWM02ZV0NPy0J5CdpQFIycHxKvoLw1NzPbA=;
- fh=tan36dRLf1GAD2waOUw16naAL/I31vD3AOVyoUzw7XQ=;
- b=ZZByvslTXYzgZsTbb+nodqj5+c3rUZBRBUjoLAsd6xJDU2YL88GcrK0xWayWiHzfmb
- eNJqyrxzCYfe0pcZPcfqcRJ5qq9HxdSbGjBZDZxGjnW6cUzUIB8K6J2nWhWp4/pLOi7c
- BZybYCo09i5x+IotyA5pGf67GtgFuh3InJZZkoj4QR3TOKjRzSRGKEpihrd1YFbX7anb
- UCausekUHGHRAzcPDW0xPmFENTKQPNuz2cXPPOCnUR6IXVb+Yj4zGEX6AfmOeNHlBZL3
- WO7fXwaBff5phKr7gVicjOzI7ZHHZbi9GfRnpNUdaarIQqlDLvJwx5erWq+v2FIOXsZ2
- ZLPA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783628452; x=1784233252; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=wriQCmqJnWM02ZV0NPy0J5CdpQFIycHxKvoLw1NzPbA=;
- b=Sumn3C4ewy1cJ+nipXAN5n/ODg+6KN/VJp4DROqJFKM7Cdl2iEl6er32X97pLZNTsu
- AXJpiRaPmt19sQ0r5sa34NvdYlDvoWRRyl4zLGL+9dnoJcdp4YIhXEozHT50t9adKg5+
- 3Z6mBJoaw2Z0gEgfQN4cbqiM6GAVTzUiSC8aM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783628452; x=1784233252;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=wriQCmqJnWM02ZV0NPy0J5CdpQFIycHxKvoLw1NzPbA=;
- b=WCNqN0b5DHvsAFBw/B72f3cSKNPRvo2F+5+dsxSd/dCf22iG7q4P7d/zIdjMMzhYt6
- gW5V2M8G/ARUmwhsnSajELg6Wt2BIAB4+95AN2kbnq1grXrqJFZwuqMBwwyNxBxcFUgU
- dIgzG7VXWWZKpe+7nAa+5T+FZ9E/az2LtOh3BHMsPZPR3ZTz13i6IHcwtIUIsJ+pT4At
- aauPjZPznmEvTLLjp/FQRWicWTQkV0YfiC9CXwHO9JHt3SVZyUYLG41sepf8GYGjDHBq
- M9kTeYS/+6zy75wsAv2nIHUthi3rfDtcyyAAEQtWT8mdTq30JZileX9Tom0omQx1Acdo
- hBvA==
-X-Gm-Message-State: AOJu0YxLdLSzIYT3scwk3m2gg+vARwB1NXyxZR5+0lHIDpN8TrSwjbak
- 3LJiSNaCQHflG9L4zPtAhNvPQ4cmIDUFLekIbn9jnm0YO3xjdICB3tgt7qDI+clSblPqL9WQ/Ao
- VGwPdX53XGhzMNTykAFoobpy8NvJbdOHGSyDz3/6giyFTFqpR9TO8gQ==
-X-Gm-Gg: AfdE7ckJ9AFapr42qIGdwE1oTYw6PJ3ufczmx1V5U/R2OBPr4cqlQiCp0Euca11mOM2
- rveKIYI+0HGDN80+NFEeNtM+W7vu9kulgwg0OfZ3jTvdB2AbAazc7ccZP5OSHt48uz93WfEPp48
- JSsYdh5Yrfxb9AbYXdk+F10lHa6NhuOjxsDIvwbmSzkaSIWcDywv1WB18+1pivxQ6a15DTE9+S7
- iqgCFBfOK4ELDSL0OwrMfShHJ1KWsFTxQ6VTddF7TYIJua9qMDe5G7abUU2i/CqzCms56Q=
-X-Received: by 2002:a05:6402:5411:b0:698:1504:bb22 with SMTP id
- 4fb4d7f45d1cf-69c24f9e59bmr343661a12.15.1783628452188; Thu, 09 Jul 2026
- 13:20:52 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 60B4A84B20
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 01:02:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4682=FE=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1783638170;
+ bh=c++Ih0TNoZOCn7KSnIEHgxbE8//Dc8NCbTvqmjR9NWU=;
+ b=nwWk9nfi0fWgyMJD0VISD+wXs3pnhxOhgM74q8MYM6KY4hwGggcFQLyIhN136kbD4Ql1dtF19
+ nNue61qhs8cRu9xLDo87GPl7AeBGUpsrj6sscas1ikj2nl1wiisU4JTMM3BKJaFyoL12zEviIl1
+ lODVj6CUnYp6935O9wleSWksIdg5jLzGnruT5J6jFQ4CfjZVEu50E/CQyx9zXCIrzswf1ZQjGXF
+ ZpHB8dtKxyX+jPDSEW/9jW6Ty7A0Uk9yHulPFYNo3yZw2W+01RTOO+1adMy0AWgyIWbM9eogrJT
+ I9OAYFwhANpjZWLxIwAJomDCHSZ+oZm2v3y+5G+VBPvA==
+X-Forward-Email-ID: 6a502898145c9a471a72e250
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.10.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 0/4] mmc: dw_mmc: Allow use of in-spec voltage range for
+ vqmmc-supply
+Date: Thu,  9 Jul 2026 23:02:38 +0000
+Message-ID: <20260709230244.3516247-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-References: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
-In-Reply-To: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jul 2026 14:20:40 -0600
-X-Gm-Features: AUfX_myDXV7u_BHh72LfWSA_1WfVyEdJccqKeMzE6IF0xCSSN5Ym5z3fRBLrheY
-Message-ID: <CAFLszTh5R2XQ0nB_a9HphsNcUwPeaC6CObf-Q9+BUxB7XZ1A_A@mail.gmail.com>
-Subject: Re: [0/4] bootstd: firmware-owned devicetree for EBBR / SystemReady IR
-To: ccaione@baylibre.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,49 +71,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Carlo,
+The Rockchip RK3399 SoC SDMMC IO domain supports 1.8V and 3.0V mode, so
+vqmmc-supply for SD-cards is typically limited to max 3.0V to avoid
+damage to the SoC.
 
-On 2026-07-06T15:06:41, Carlo Caione <ccaione@baylibre.com> wrote:
+The SD Standards allow for an operating voltage range of 1.70V-1.95V and
+2.7V-3.6V, meaning the 3.0V mode follows spec.
 
-> This series adds a bootstd-level facility for sourcing the
-> firmware-owned devicetree from a FIT manifest on a dedicated GPT
-> partition
+The commit 0b75109b6aaf ("mmc: dw_mmc: return error for invalid voltage
+setting") help enforce strict 1.8V and 3.3V when setting vqmmc-supply
+making mmc_set_signal_voltage() possible fail for MMC_SIGNAL_VOLTAGE_330
+and can lead to an improper switch to MMC_SIGNAL_VOLTAGE_180.
 
-Thanks for working on this - a generic replacement for the vendor
-dtbprobe-style commands is very welcome! Herewith a few general
-comments.
+This series adds a regulator_set_value_clamp() helper set voltage value
+within a requested voltage range instead of an exact value, and changes
+dw_mmc to use this helper to set a voltage within in-spec range to fix
+use of SD-cards with 3.3V signal voltage on Rockchip RK3399 boards using
+MMC_IO_VOLTAGE=y.
 
-The "bootstd-level facility" framing doesn't match what the code does.
-Nothing plugs into the bootflow iterator: no bootdev, no bootmeth, no
-bootflow, and the only consumers are the EFI bootmeth and
-efi_bootmgr_run(). Shouldn't this feature be more general than just
-EFI?
+Changes in v2:
+- Add static inline variant to #else block
+- Collect r-b tags
 
-> the control devicetree points at the source: a 'firmware-fdt-source'
-> phandle under /bootstd referencing a 'u-boot,firmware-fdt-block' node
-> under the owning media device
+Jonas Karlman (4):
+  power: regulator: Add helper to set voltage within an acceptable range
+  test: dm: regulator: Add regulator_set_value_clamp() tests
+  mmc: dw_mmc: Allow use of in-spec voltage range for vqmmc-supply
+  mmc: sdhci: Use CONFIG_IS_ENABLED for MMC_IO_VOLTAGE
 
-I'm a bit nervous about adding this into a media node, but if that is
-what your binding ends up as, OK. The other way to do this would be
-like VBE, which has a node in bootstd which points to the media
-(although it does not include the full path, nor a phandle...
+ arch/sandbox/dts/sandbox_pmic.dtsi         |  6 ++++
+ doc/usage/cmd/dm.rst                       |  3 +-
+ drivers/mmc/dw_mmc.c                       |  6 ++--
+ drivers/mmc/sdhci.c                        |  2 +-
+ drivers/power/regulator/regulator-uclass.c | 27 +++++++++++++++
+ drivers/power/regulator/sandbox.c          | 11 ++++---
+ include/power/regulator.h                  | 18 ++++++++++
+ include/power/sandbox_pmic.h               | 15 +++++++--
+ test/dm/regulator.c                        | 38 ++++++++++++++++++++++
+ 9 files changed, 115 insertions(+), 11 deletions(-)
 
-> - both EFI launch paths consume it, the EFI bootmeth (disk and network)
->   and the EFI boot manager, all funneling into efi_install_fdt();
+-- 
+2.54.0
 
-The two consumers (distro_efi_firmware_fdt() in bootmeth_efi.c and
-the new block in efi_bootmgr_run()) carry near-identical staging
-logic and log strings. Please factor into a single helper alongside
-firmware_fdt_load() - e.g. efi_stage_firmware_fdt() - so one place
-owns the staging policy (fdt_addr_r, size cap, fail-closed vs
--ENOENT).
-
-> The 'boot_dtb' environment variable may pin an A/B partition number.
-
-boot_dtb seems quite generic - it reads like an address or filename,
-How about something like fw_fdt_part so it lines up with
-fw_fdt_config. While you're there, both names deserve to appear in
-doc/usage/environment.rst
-
-Regards,
-Simon
