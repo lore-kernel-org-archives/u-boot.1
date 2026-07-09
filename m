@@ -4,104 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F32C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 17:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D28CC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 17:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD87184B73;
-	Thu,  9 Jul 2026 19:37:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D8E4E84B73;
+	Thu,  9 Jul 2026 19:48:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BMCxvHqn";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="GgY6NCHu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDD1384A8F; Thu,  9 Jul 2026 19:37:15 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2412884BBF; Thu,  9 Jul 2026 19:48:25 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 661E484B8D
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 19:37:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1483F84A8F
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 19:48:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-6a1888969ddso94167eaf.3
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 10:37:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783618632; x=1784223432; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Bz7bPVB8pnvn/Zs5wZDXQKz2j9n422he04+HOWryANo=;
- b=BMCxvHqnc4xbRV2jC14ojOcAXu8Vat4yoUw8cjUT3PIpo4CWlrieubkUP0AI1ZHtZc
- 6uHv7UEToW9PKCvKJ/eyKaSP5Pcws4QqTwrExVUh0qFDMHjtfgub4MA6mlPQbk3+MmoB
- NkmTq+ru+PMkg6Xx/D3SLTCxUZ/Gbkig6Cfbg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783618632; x=1784223432;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Bz7bPVB8pnvn/Zs5wZDXQKz2j9n422he04+HOWryANo=;
- b=SjWJXUlbQ3F8JEbYJImMtHpMMigp+R99leeislbRHHVUWJmuZfnDFt6p0NAMXSJ/LS
- KdQIa10LCrOCsLU5WQ+dcqVsi1gw1iBTbj63VGjkW15a1N4elA4CLKxjZLYiiCWisNyl
- bsZD+TAkz/AN1eiT5sTugR2RMcWHZX+ZEQdjxmsbxgFGWyWEXhMdutVDjSyiS0c/uHkV
- vJunAMIGjLXxLmV7rtobYnMK6DL4QHJQV3t3DOQswhOLcudyvZ+a7BN/KK3uOmfVECuz
- G+EdBF3XpmIBRnfc3fhkKAIvpHqtEZa4v+l+oxGszUoBIKERFbQDOh4Hh/W1Qmma28kG
- uWkA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9V58Cyd4LmEO7BGl+EGEtr46C0pMKl5/tqThQVbOzGY1/b8FJ+pDN6C9ETFj76TZPKL8ukP6o=@lists.denx.de
-X-Gm-Message-State: AOJu0YzC3UNLrZFxj+mYrCzrcGp4umBhA8dz3ZmM8s65QEF0Ga1iIn6C
- RajgcjYj6aKDZNnPeV+PgtRvQ5zA9cTCir5KzEIdfchicWJ1nOUJO0hOvOqXkk2eH9g=
-X-Gm-Gg: AfdE7ckcobHvlgEQQomaDek6s9k6cgg89NL8i/oGZSi1iPVQhF3t5Ne+SA5gFkNWvUw
- Z/h+NNdmc3PpkVBGZW40pE6HG/J6vqA2jW9cejReGzkp3dJW+IXoF3cvLOjY9sXEct1Q23CIN9I
- nSd039Xgh5oagV5q6LxziVCkm0wAS9HwTaW+u5H9rS1S0B4kh0bD+z+d7jTjCuwJ1zJaMI475+v
- M6JAaag3JXOIuLR/ZuzDRn8CwJO6Rl8slNzyouRwEBXUOk5mz3AZEeF2NaLvWn9uGh+w7ByTDja
- kwC/fQe+XQcyQaYfFHaT1KPnYqWjQCVgiARNC2BoJJzMeDteytBj5bIqyYPFgyyQdcCtmvWBmpO
- dB5tKkqXq/Onb2PWKK9NUP248qFon+SF2L4zXxqAKQVTVMw6ub/jAtNyJjXImK2G+XTd+bh7Jx8
- lUMeycYXAUCuLQMRsAB4tAggR5xZLyWcGUhNtWJyNHkM8XGxo91NFnWJlDDsQ+6PlmAzjNlrab3
- CWa64xK/mHQaMvGyuBXv4TbyhUvGNvaqwsB
-X-Received: by 2002:a05:6820:99a:b0:6a3:83ee:6338 with SMTP id
- 006d021491bc7-6a383ee6c43mr1809063eaf.26.1783618632124; 
- Thu, 09 Jul 2026 10:37:12 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4519134dff2sm2522419fac.8.2026.07.09.10.37.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 10:37:11 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Sean Anderson <sean.anderson@linux.dev>, 
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de, 
- Markus Gothe <markus.gothe@genexis.eu>, 
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>, 
- Benjamin Larsson <benjamin.larsson@genexis.eu>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260703115627.2317120-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20260703115627.2317120-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH v15 00/24] pinctrl: add support of Airoha SoCs
-Message-Id: <178361863014.2290342.10627903121263378059.b4-ty@konsulko.com>
-Date: Thu, 09 Jul 2026 11:37:10 -0600
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eBqlHbYQog9z86Gxehr2TMJxGf4A5aGrsPNyTHIU2AIgezEiumf7ygz47aRsFAHIQMAxV4+FO6X2iGcCYUGRWHrqArJCqvOdrFmXApnoGDbqLaMTVvajL8Bt0FMbS1AqgaZRJGNCzBY4mgRhoFMwHj9C0CzepcBM2xpLZfYTsKdQhWYPrmu9F6zHwd8KCb3UarYUmoGhmGH1e2hEb1WNyf2dGKdbexUSIQYFg8GjMJrm8Z4QaRCVmy8WsnlZMmYfkWIBaLBpjDQrqeCP1nHCRWvtWCfbspg0KvU+WT5FLkNBXTvji/jqhRz4oaKgeV7YHApDxFwbDo9K98mD0vtOCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kVH+jgcxwTW3LjIgbV5cYFEtkmTgHBhpWTQvaiBySv4=;
+ b=Bo1zaChumjCgVvrJvygx+VvymhoKcArDREaH+dZePbDEKd8tYaTieupMObu1l7mlZXGBnPK/yn/2hc1pzqmfZAQq6+lpbkNZSQAnRj0Gj+nUrIUNl5OYmKpH1oFE7IGQi5pIfuE2Kib7vkWCuB/Nu2MQ9Ztovw7wZPK1soJoIBpJkmByz2d5xfGFZf/G9nRJ2WBep+sHUjvRAGr0N4SJT3NCCsFkUjjVdTYNCOJN9mz1PsYamODGEkyUCwwhK/Hk79t1i1+TbDgh1MB3XzzaNgQhIG4xLJWCnpSzB+waMMa7dDk5KTyFjB0BxjkmX3U7xg0fi/fjo2c+xZEAadFA0g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kVH+jgcxwTW3LjIgbV5cYFEtkmTgHBhpWTQvaiBySv4=;
+ b=GgY6NCHu2fbinVVATOGv2fWjjuIaSQGmPjp+AEix06h/pLj9+EsDsqFXcxHIF+h3s5nqjEkmDGxognyTSa9JPfC7/qjehDRWxwlhDicEOLJsVcqmiFVcoSAiEQImqaTTt43gVFV16Ls2rqfIhM4HsNJDl/nJS0N7qi/LDJVzn5g=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by VI1PR04MB9761.eurprd04.prod.outlook.com (2603:10a6:800:1df::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
+ 2026 17:48:19 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.014; Thu, 9 Jul 2026
+ 17:48:19 +0000
+Message-ID: <817b7bd1-f27d-4887-ba3c-e76e906d67bf@cherry.de>
+Date: Thu, 9 Jul 2026 19:48:17 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] mtd: nand: raw: rockchip_nfc: fix oobfree length
+ calculation
+To: Johan Jonker <jbx6244@gmail.com>, kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ trini@konsulko.com, u-boot@lists.denx.de
+References: <12b6e0d5-637e-446e-9e4b-82c82e6fad40@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <12b6e0d5-637e-446e-9e4b-82c82e6fad40@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-ClientProxiedBy: WA1PEPF00005B70.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::609) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|VI1PR04MB9761:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9cd30e2a-e695-4d05-9d1b-08dedde242e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|23010399003|22082099003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: DZ8z2GcBml3uGgprXyMoTwYUY3vAGr50ezgmwX8QGhdYHQEteKKEQpUhC4NxIENhwEhyX/LUZmXw/+njoQn31MdNW8f6KFOG7BgYZoLgqnetVuQLgAaWAXhrOP5fU5A0qiXLIaQtH57DnY5S5WCQ2YqWTufKRqxg8xdjl8k7s1H49A5NqsMGJ+VyOn4Lx54qbd7ZK41kftI8nfOBcO8NHWI4maBExYKKQYbLWu09Eipl5FRtfN3tcK1UcFdpUdd2NocZjywIDupj6WZT71MFayXhIrh2Pxyz5SCOuGN7AZ6HWw5KUXNKSnOEOZlII2V2R1Ut64ZSyV7CZiyA8iZ6I3EdAvQr1i9FBvxOhLtaTDcF5PikF5IoNmot2aLG0LScCBq15X/f6ozsOZmNoAuet1ucvgVgKYvsD1/FRbR1hq1XWNp6hsIheYsbigdqqM1EX2Ixzj+DDqneNhclt5FXtMlErrRMRFmCkkK5CNSa66+/srllwplxYyllyiGRtwyovSldtV5ab5q0c3NcY+oXwiIdP2NVMZ2wUBxyT4WWcgvQhkYLS+WiU3H1m2YzOBQQZEsIgrz1SlGXnNk44mEB97aU6nGRTIcAgFOycH5TJA3L5+8DItLOT8hth4/BFA8tD0ftf1uXTdUT/ucphU8UKk2OQolUhKwxzHsFjUFPy4s=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(22082099003)(18002099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T1RUQi83dlhMS29hZDU3QVpVdi9IMnFWL0Z2Ly9RMUtlZnI5VFpnWDhic2d3?=
+ =?utf-8?B?TlFzV0prci9lWkFLblczM1UyWitzMzhpM2NTSVA1YU1YTnkxOUdHUE91djNl?=
+ =?utf-8?B?b1pvR0IrMm1YUWdLL3pPT3JxWnFBUkhqRE9JUWlRN2E5U2M5T3AzSXdpSGpB?=
+ =?utf-8?B?cGJOYXR3U293dUFyck9seTBBdTgrZGF1b2l0OFNmTTJXLy9pVG5XOTczdzQx?=
+ =?utf-8?B?Y3ptcHN3RVpocnFhNmpLUFh4MlhvNDRqa0NYZGRTY2VsK3phQ3RHQ0NOOVFS?=
+ =?utf-8?B?Y0VDOHFKSVdHMDFYdGZlVWlXTmVDelhhWXRUcjM4dXRlZTF0VURidTIvVis4?=
+ =?utf-8?B?c095b2cyUnl2T3M3MmJPUlRObGF2WWF4cW52TktaS1k4UUJYbW5idDVhdzA0?=
+ =?utf-8?B?YStWNUtCd1pKdTMzcjBBM0J0dEg4OGxuNXplaGRyQSs4VGxoNDhKT1BWcVhF?=
+ =?utf-8?B?U25zZFJlWGE1TDJhUDhqTXM1UkxuK1hzM2xkTGExM0M2RDAxTEl5dEdGU3FW?=
+ =?utf-8?B?RzFxaUxkT3YvWldBek9yL1k4QmJNc0dXalJPMnRRZnFvTHhodjFlR1QvNEh6?=
+ =?utf-8?B?RWdzaWd4ZXFrY1Y3cFE0YXk0dGMvQUdiQ3JYdHpQa0l3QkxFRG9UcHkzTU13?=
+ =?utf-8?B?b0ZNRlBYV0dxT1FibUNpTHhKemxJSlN4T1RaenVQSFFpbHRQNGJVSEJ4RGFT?=
+ =?utf-8?B?bTVac0daSGIrQUZVVkJWOUpIakdvSUJqdU94aVUrMDMybU5sekU0WWVqQWpJ?=
+ =?utf-8?B?MCttKytnajRJazZ6K3RwVnMrMGJqL3ZEOURTVXdkZVFhZndtNTZoSWIzZFZ0?=
+ =?utf-8?B?WkV4QjFDWDRsbkVoVUtoeW9wOXdLK3Ywb0tvVXZURlNkcGgzRHdWT3gzTGdl?=
+ =?utf-8?B?V0ZzaVQrRkVRVVVJTk1wbkU4Uy9FekxCS1FwUzk2cFE4SnZQTU53N0RoMEZQ?=
+ =?utf-8?B?NUFINXcyT1BaRU5yZmpyU2JTbnJWTTdwZ0JGMndkOUMrK0p5SkdvSzlLVzQ2?=
+ =?utf-8?B?Nmd2QTFUWE10eDJ5SXViK3htWExDM0ZoK05KcVlhTVJNTWw3eUpVVnlDclQx?=
+ =?utf-8?B?MklVRDV6Z1hqZ3E1cnVhVHdoOTdwcFlaSG1pL2lrNnVkK2l5MFo3Q0ZETlhY?=
+ =?utf-8?B?VWVxbWREeXI4elQrcllYWTdpN3BqRFFzcHlkTWZFejI5MlJ4ZUxhZnZLcm1l?=
+ =?utf-8?B?b2JmeFdSL1R6Vi90Y01uTnJ1RHU0YXVXYncrWHFvV3dmbXU4V3VyZ2psU0hv?=
+ =?utf-8?B?K3prSWtYSDFkOVIwM09rKzRmUVdvSGxFdXVuRWsxVXJQVEp1QTFnb0V2Y2dh?=
+ =?utf-8?B?d0pZNG1qc2VDTjczMXVZd29iT0VLbVYvSi9vSU8vZlBFYTNTVTVSME9ZQ3N2?=
+ =?utf-8?B?UGpaekxmbjVkQnJIQnk3dkU1NjNvRzhla2FxbVlUTGFxbE10WUFTYVprK0xp?=
+ =?utf-8?B?ZGk5UmJpM0JDQUFMQUVrWnAzNUgvVWxONG04enkzTEJ1MGRYb0hGNDhQYW9M?=
+ =?utf-8?B?dTJyU0xpNW01eFVOTWNaeFYyNHpFaS9iQjZLdXVkMWRYUWNyUXc4bEhoTVNH?=
+ =?utf-8?B?RERNYklGdDhBNWhGNFFhNnhVZEpsMEVCT21Qbzh4dkdDZU9vR2p2YkVWS0NJ?=
+ =?utf-8?B?QjhmZ1c1T28xSGt4RklFeG5HWHB3QlJNS2EwQVY1akV4b3JoRW81YmtOY1ho?=
+ =?utf-8?B?Ymt5bTNhV0dWelVLZjFoOHFmbVgzd0E4UFp1S1ZpRisrWHNTUVF5eTgyNHhv?=
+ =?utf-8?B?M0tjRHdwSm5TemxvOFQ2T3liNnhVUlVFWmxuUllOREhkaWxENzdEak9SamZr?=
+ =?utf-8?B?N3dCMTdTTGhGQy9scjcwWHgvMUFrNGI4L0FzNXlCQUJmdXlTTG9IR0RkcUNs?=
+ =?utf-8?B?Wno1T2ozZ0lmRkozWWVrM3psSGlBa0ZEd0Fhajc5a0JSWk93aHBQNzBWblRy?=
+ =?utf-8?B?dGRUNnp1M3ZPRVhicjYycGpMSVIwVWdHN2pkMHZXSjRzQkJsUWpuVFMwbkN3?=
+ =?utf-8?B?OFIvWENMcFFHK3dUMWdaeGx4RnNMak9SSndKaHZPZkRoUzh4WURBMis5RnlC?=
+ =?utf-8?B?TlZ0c1lYeStZMnJQTHd4QmJtWXZYTEQvSVUzTDFQSmtMWDQ1KzBrbjR5ZjEv?=
+ =?utf-8?B?Z2dYMTJjYjFqOEM0TmZCYm1JOE9nWGxtKzNuVjBrZnlSdDZKa1ErVUtjM3hD?=
+ =?utf-8?B?QmViQWRNcVorWEpiMDlkcHM1Q3ptMER4ZEJVcllWVEplWnJobUtqTjBqUFhw?=
+ =?utf-8?B?NVp5SVU1eHlTWlBWK2U2Q1prVTAwREtPK0hzVndMb3IwREJYbkNEYTBObDB3?=
+ =?utf-8?B?MTV0cXVYWWRKRGNzOHFsQmZGWkpEL2pzcmJvTUtiNTVvY1MzZ0V3UT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9cd30e2a-e695-4d05-9d1b-08dedde242e9
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 17:48:19.0843 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jFTHM808vm+rQsb89vSGjnXN1rnYLy6dda8kajz9EUcAjvL9OnvQY7oiKV6UflAir3MuMhsHgemuwqSK9PXJY0K1GmDAl2onNd8OoVyfMDA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9761
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,68 +149,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 03 Jul 2026 14:56:03 +0300, Mikhail Kshevetskiy wrote:
+Hi Johan,
 
-> This patch series add pin controller and gpio driver support for EN7523/
-> AN7581/AN7583 SoCs. The driver based on official linux airoha pinctrl and
-> gpio driver with Matheus Sampaio Queiroga changes.
+On 6/30/26 3:32 PM, Johan Jonker wrote:
+> The oobfree[0].length calculation depends on the
+
+Not only that, but also ecc->layout->eccpos[i] just above.
+
+> rknand->metadata_size value, but this is calculated
+> after the function rk_nfc_ecc_init is called. Move this
+> calculation to a location before it's value is required.
 > 
-> The original Matheus Sampaio Queiroga driver can be taken from the repo:
->   https://sirherobrine23.com.br/airoha_en7523/kernel/src/branch/airoha_en7523_pinctrl
-> 
-> [...]
+> Fixes: 1b3fcb3c0456 ("mtd: nand: raw: rockchip_nfc: add layout structure")
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-[01/24] watchdog: renesas_wwdt: #undef field_{get, prep}() before definition
-        commit: b8b9ca05c720d97c6f5f9d0738e7743de94e7a26
-[02/24] power: domain: renesas-r8a78000: #undef field_{get, prep}() before definition
-        commit: 40db9d313be6f6700ae1530b245e48dd1f60d51b
-[03/24] net: hifemac: #undef field_{get, prep}() before definition
-        commit: cd36be5a4731fb1d640458101ae7327b3e450c73
-[04/24] mtd: nand: raw: sunxi: #undef field_{get, prep}() before definition
-        commit: 9b5c0b883485a63eac437ade055b1f3a928eb39a
-[05/24] clk: renesas: #undef field_{get, prep}() before definition
-        commit: 6bbf6cfc915672005f118c5b8419d7a971fd3515
-[06/24] board: renesas: gen5-cm33: #undef field_{get, prep}() before definition
-        commit: 08badbd7d82c2f1e69051f110cd8966e4bfd573d
-[07/24] bitops: import BITS_PER_TYPE() macro from linux
-        commit: ab447ac61782bad20b73bd9e19dcadb255c27f8a
-[08/24] bitfield: Add less-checking __FIELD_{GET,PREP}()
-        commit: 9c10cba536874641bbc70a53588d6a59c9292e2e
-[09/24] bitfield: Add non-constant field_{prep, get}() helpers
-        commit: da10fca9b062bde09144d65a0559676c658ac0ae
-[10/24] watchdog: renesas_wwdt: Convert to common field_{get, prep}() helpers
-        commit: c02633a823b837cf59d84324472ce4169a39dfa5
-[11/24] power: domain: renesas-r8a78000: Convert to common field_{get, prep}() helpers
-        commit: 0a1ca728f97f433f1b264c541c0376818dc88631
-[12/24] net: hifemac: Convert to common field_{get, prep}() helpers
-        commit: d2f172f3054b98e9ec51180bc9574bf6e3581e63
-[13/24] mtd: nand: raw: sunxi: Convert to common field_{get, prep}() helpers
-        commit: 3253f2b326b3ce7a520c3233923f03760c510fcd
-[14/24] clk: renesas: rcar-cpg-lib: Convert to common field_{get, prep}() helpers
-        commit: 575717f4b67a5b3f2e342ad22283473cd5f3e975
-[15/24] board: renesas: gen5-cm33: Convert to common field_{get, prep}() helpers
-        commit: d26cb20e6bd70a47ca7ca2ca8d9145e669475824
-[16/24] pinctrl: add more pinconf/pinctrl definitions
-        commit: 7518f6fbc4b9f786dabef4ada2881024a2039bb9
-[17/24] pinctrl: sort and format the contents of the makefile
-        commit: 05a8f13bbdbf6b7f0e6b799668a1758046a90fd5
-[18/24] pinctrl: airoha: add shared pinctrl code
-        commit: dcdd7aa2644ad66a004c17aeeb878ea9da35b295
-[19/24] pinctrl: airoha: add pin controller and gpio driver for AN7581 SoC
-        commit: 1c98e84c04bf7f9ae183849e4c9ae05b535ccc92
-[20/24] pinctrl: airoha: add pin controller and gpio driver for AN7583 SoC
-        commit: 56d820371f3a8025b6d435276d07bf6dc1342c93
-[21/24] pinctrl: airoha: add pin controller and gpio driver for EN7523 SoC
-        commit: 5c07bb58962d474bcf8902819a7305b682d0dc3a
-[22/24] configs: airoha: an7581: enable pinctrl/gpio support
-        commit: 8f99a782fdb3ed4a934174f763cf5feafcbb7941
-[23/24] configs: airoha: en7523: enable pinctrl/gpio support
-        commit: 4c7f94a738572f406e2b0644b34b0e57493de115
-[24/24] arm: dts: en7523: add pinctrl/gpio support, drop legacy gpio support
-        commit: c56c7298c42b06043aa3e9ae5bafd021bf1bac4c
--- 
-Tom
-
-
+Thanks!
+Quentin
