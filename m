@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A2DCC44501
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 12:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EBEDC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:00:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EE6C84B07;
+	by phobos.denx.de (Postfix) with ESMTP id AACD284B19;
 	Fri, 10 Jul 2026 14:56:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Il7cdgH2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qiQ9FCX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB298484A; Fri, 10 Jul 2026 00:46:53 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id CAC3784B65; Fri, 10 Jul 2026 00:46:55 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A87AD84B65
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:46:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB8784BBF
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:46:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-6a376ad8fc0so150003eaf.0
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:46:51 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-4518ad44e83so150153fac.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:46:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783637210; x=1784242010; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783637212; x=1784242012; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=WQL7NyC0xnD/EBxulCmyVTPoNPz1LE0kUz+4iiqUA2c=;
- b=Il7cdgH2Mc8OpRfJAwAF90zztyDhfu7Oe56SfCVpH8Et16RulnJVTiNoadxctEqPe9
- 4QPcODfc7DZiPwIwF5qZkF4FcWmkjKJ3mtaxzSk70H2gZArzWoMv3BLAGDdKtzjIogPl
- inkASTZ2tBWNYiC2lowA5U/STy+Jqf0rSScYjM/XiJxQp83P2pYabx/9QLThQozbFFHA
- MUp0N62ywPx/W2PcDFO3xOMVZioq8J3OCBXptoY0ki77fz6GysAKK8KexQXFp2sDVJMP
- nIOkDdLZdbpl2dqomP13gDhMMY0LVi0tl+4MVqH23Zo1uy1z939lA9PlqWYXuaSd1iy+
- mS4w==
+ bh=E2gSOQg7Wc1sleX3luoU+HDXj4g81KKvN8w/aXXCN/c=;
+ b=qiQ9FCX4FkHSZWVOYaKyHlws166BPciJLsoTYIWuy11J/BY3WdWdQH0r+JUfGU7Ziv
+ OR989K0PQC11wh19eYoraHqfRUPuyzkokdSulEIp3zA6d0KaYM7vp5rGUorkKKoUs6iq
+ OojAZXv4RXPtzOd0Q9/15d0IgbAl44hDj8OJpv1sxy1oeXvrcbm+abXx9ORSYllqPUYz
+ cV51ewY0dpnNNpRxUhcTBaz0DdT8VC8pb7I+ckgnVYAqv+1+0ch9p68o/i27R2w6UVIJ
+ uj8z2sQtuPddY5ih1QbpQjDgJsrG4dt8pslbLK6x797sq/B6xYygQsvooE310ghqNcx0
+ F+dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783637210; x=1784242010;
+ d=1e100.net; s=20251104; t=1783637212; x=1784242012;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=WQL7NyC0xnD/EBxulCmyVTPoNPz1LE0kUz+4iiqUA2c=;
- b=issldzRauw8uyh4wMNGc5FUCXbTUo+BJJqnmSvnFeki+Ivdg2zRv0bPX1cKm0e28MW
- v2pA7OKXe3kQHtQc4aIeBeCoHwSPSqLXOi8xVFoDsZagENlsMPimoLBamFELgmYfbdbY
- 5/K9OxF74n598GvVVxDM3tkqBPaSWu1DzhlH5gWd7OyZCsqHLX+HG3hAGf3eLYy2FX0k
- dd/suUoGLxQFmgzEe5OihDoWWHqDD3fKd6HiYe0gmI5EtuZuyoda2s77oSXimLt1X+Gd
- CakBSdie0bVlEyjDZ5QBpo+3NbkNJOWL8tYc6Y4Gp5YIhOxYSAwHxVWXQ+Sg4bVPhQSQ
- fZOw==
-X-Gm-Message-State: AOJu0YxR/wxjYvCPsJ2UR/BZqblBTAk6RmBGwrTsi0dnH4jRKwd40uyC
- DTKO1MypiFynSVYKlD1OteSwdSzYXQRDR0V/t63olB32HGE6KK5d/8XT
-X-Gm-Gg: AfdE7cnYAM+NdFoaIMs2a7QeAQAufT7vSEoHwyOIxvX86+UbA/NYQ7Isto0N1qiRgqb
- zE8l4JG3LE8TejbF09pk32aF1eg3oZOEMmj2HwAVMcIVhZnAKD+u9aYPQ18eSF6rb8MHZv7Mx00
- Ss/SUqxz1laMsbQeBjuPOINlwLlWFc5hJylW6hyd9b0rjdRoD2nD4Lzm82aXgRdF9sC6miuZB+z
- gXTRZeyjSH6GDArMKsq5WM22Hk4JMc2XWYlTB8AbkCEGZc5kS3q+LSgoXHfg7ca9qC/7EhPte3G
- LdagCRn5AzvQ9sVCqwhv/YGHt+mRzaAUizl5O3l5lg0cHUvHPkmEAg5+PHmPNkAuRr1KMU1HTBs
- eLRMaxp3tQaqZdfju/dHu5CnOCg18vfDdTQE1/t5uEJ43u+7NKX6VmYKhsr/X4gzmf1G1Cbtx0s
- 9W5sZaTg82xaDJClWfTWYe5JckJQy6+ahqDLIPtrhN/e9nrdYto0vm8AhmZNna6icjgKth62GhH
- EElkl/9wMtuBR0nEbyPyf93TYnBUtPzenx9q3CPL7rULFjP9PRPzGZusY0+Nt1n
-X-Received: by 2002:a05:6820:4df4:b0:69d:9dfb:7928 with SMTP id
- 006d021491bc7-6a36d878bf4mr6475928eaf.3.1783637210348; 
- Thu, 09 Jul 2026 15:46:50 -0700 (PDT)
+ bh=E2gSOQg7Wc1sleX3luoU+HDXj4g81KKvN8w/aXXCN/c=;
+ b=BO8cEz04Wox/qLyUSp+7GRCv764lp1+G7rYBMDsXcwcBO5WaeknMKYML45UVKQ3bS6
+ ngRK7YUYJJJ4X7S00NjkUz/N7Pm4ljIddj7sL0P5v+Cgah9qYh9vZVI+GTlySVYB9gcW
+ nTzCzvU8aOkm4+IdeVxNUXq+uoj3yVtNgAwNMXGAj6jJxey7MAWUIOdoG91E3O4b/dSM
+ AwyIZELsZY7qmalB+a4Eld723WvVE8vZjY1YaDZ/Ygl395gC1z/b+nHkSkPnbh/HBa/z
+ hp3RG8n34q8w75J389Yha73mTjTaOAGcgIeCUOV5a0DkZSFKVyVT/CJfb2UjMx0VIsJ3
+ sF5g==
+X-Gm-Message-State: AOJu0Yw8QZFn7OVwg/Mlr+fKOxvL6/nIUo1FHtWg1GO2IEIUN0Umwy5B
+ EcWZRRvrbuV9pQYMd+Sxfjrwk+1Lcnf94ASNyT1zPK65GDQXp3e4WDEY
+X-Gm-Gg: AfdE7cm+49//6UFkS/vXAAqfANWxkCEKS4fvzmMIovHqAhW0LYK3rnMING2OUX2LFoN
+ 0mm1dyrK/sFWdFwwWwGIIYma4KOSN8wUsqE6Fd4DIdTrep0Tix/n1LMRXbwWKnfDr3MJO/6lRLO
+ UEKKvHlYyQ0UYPwp8D4kSl9kxnFWpQMvs8ae06lyuJqzAxBRwmH+Po+QhwrANmit3sihQRRq/aS
+ ZVa42CR+LVLYnTmLT40Wp7wrzJTKnb6Wt6bYjwHEGUaMsLq+PTP2eKUJwlK5jJ9ubX/K7WrA6kn
+ p5X8N2RXuuPtTpNzLhSTx2YylygfbB60jtSTvhPD9Lu80qTOY5nf8jYXWlj4ikQch6Z/QjmLhc6
+ MWyPzy4/d3UZZymsDX+Oai89NNpw7XZZLsDZndgHaoJqmDlchhxXVNMXlBxZX0LeVz+QA8OoMdO
+ HuZFiBP5+ODFgy7XnODjrytyhP0dLJ+x5+jkQCqQPTGmEM/mdHb/SwrUCQdJjEB5j1V9/bZ2toS
+ hHkoThBOaWrx11Sj1wzA39usbYJQPmd8RXYXSdUhxwP5plr/Hq8CBIB4epVZglI
+X-Received: by 2002:a05:6870:3924:b0:443:154e:45b4 with SMTP id
+ 586e51a60fabf-45163cb580fmr6891872fac.28.1783637212242; 
+ Thu, 09 Jul 2026 15:46:52 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.46.48
+ 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.46.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 15:46:49 -0700 (PDT)
+ Thu, 09 Jul 2026 15:46:51 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 09 Jul 2026 16:46:23 -0600
-Subject: [PATCH v3 01/10] cmd: aes: fix DM operation handling
+Date: Thu, 09 Jul 2026 16:46:24 -0600
+Subject: [PATCH v3 02/10] crypto: aes: allow DM AES in SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-submit-ce-series-v2-v3-1-5017da8c9bef@gmail.com>
+Message-Id: <20260709-submit-ce-series-v2-v3-2-5017da8c9bef@gmail.com>
 References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 In-Reply-To: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
@@ -131,55 +131,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DM AES command path takes operation-specific arguments after the
-common arguments. argv[1] holds the mode, "ecb" or "cbc", while argv[2]
-holds the requested operation, "enc" or "dec".
+The AES uclass Makefile is already keyed by CONFIG_$(PHASE_)DM_AES,
+but there is no SPL_DM_AES symbol to build it for SPL.
 
-The DM path checked argv[1] for the operation, so the ecb and cbc
-commands always returned CMD_RET_USAGE before running. Parse argv[2]
-instead.
+Add the SPL variant so SPL code can use UCLASS_AES providers, for
+example when decrypting FIT images before loading U-Boot proper. Select
+SPL_CRYPTO from SPL_DM_AES as well, since drivers/Makefile only descends
+into drivers/crypto/ for SPL when SPL_CRYPTO is enabled.
 
-Fixes: b01444aa14cf ("cmd: aes: Add support for DM AES drivers")
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes v1 -> v2:
-  - Limit the patch to the argv parsing fix  (suggested by Simon Glass)
-  - State that the commands always returned usage  (suggested by Simon Glass)
-  - Add a Fixes tag  (suggested by Simon Glass)
+  - Select SPL_CRYPTO from SPL_DM_AES  (suggested by Simon Glass)
 ---
- cmd/aes.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/crypto/aes/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/cmd/aes.c b/cmd/aes.c
-index 3fd83013ffe..edcd87cf11b 100644
---- a/cmd/aes.c
-+++ b/cmd/aes.c
-@@ -175,9 +175,9 @@ int cmd_aes_ecb(int argc, char *const argv[], u32 key_len)
- 	if (ret)
- 		return ret;
+diff --git a/drivers/crypto/aes/Kconfig b/drivers/crypto/aes/Kconfig
+index 7e1b1b2875d..254cb598568 100644
+--- a/drivers/crypto/aes/Kconfig
++++ b/drivers/crypto/aes/Kconfig
+@@ -4,6 +4,14 @@ config DM_AES
+ 	help
+ 	  If you want to use driver model for AES crypto operations, say Y.
  
--	if (!strncmp(argv[1], "enc", 3))
-+	if (!strncmp(argv[2], "enc", 3))
- 		enc = 1;
--	else if (!strncmp(argv[1], "dec", 3))
-+	else if (!strncmp(argv[2], "dec", 3))
- 		enc = 0;
- 	else
- 		return CMD_RET_USAGE;
-@@ -223,9 +223,9 @@ int cmd_aes_cbc(int argc, char *const argv[], u32 key_len)
- 	if (ret)
- 		return ret;
- 
--	if (!strncmp(argv[1], "enc", 3))
-+	if (!strncmp(argv[2], "enc", 3))
- 		enc = 1;
--	else if (!strncmp(argv[1], "dec", 3))
-+	else if (!strncmp(argv[2], "dec", 3))
- 		enc = 0;
- 	else
- 		return CMD_RET_USAGE;
++config SPL_DM_AES
++	bool "Enable Driver Model for AES crypto operations in SPL"
++	depends on SPL_DM
++	select SPL_CRYPTO
++	help
++	  If you want to use driver model for AES crypto operations in SPL,
++	  say Y.
++
+ config AES_SOFTWARE
+ 	bool "Enable driver for AES in software"
+ 	depends on DM_AES && AES
 
 -- 
 2.53.0
