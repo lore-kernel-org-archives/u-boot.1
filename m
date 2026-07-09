@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC27BC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C64C44501
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08AA184B57;
-	Thu,  9 Jul 2026 15:44:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EBB8F84BDA;
+	Thu,  9 Jul 2026 15:44:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BIIn5Y0+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k5fuhAln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 210CE84BD5; Thu,  9 Jul 2026 15:44:01 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 567F084BDB; Thu,  9 Jul 2026 15:44:19 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81AF184AFF
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 15:43:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A2A584AFF
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 15:44:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-495c49f8eccso1300359b6e.3
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 06:43:58 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7eb29ed2bbdso292967a34.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 06:44:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783604637; x=1784209437; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783604656; x=1784209456; darn=lists.denx.de;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=+YXrKATw0ZEI1xbIOVuig3WyqiSfx0xLFRW7c29UpJU=;
- b=BIIn5Y0+tlZVyxY+wdMin+F/YvvG20TZxtjaK7Mk7JBVnNvGMbAPDd5x0HvcIUbOSR
- SFVr7+h801k3NI0xNO/Kj/X1DnAkSlnbs+vVO9TCGxycJmkjk1QgnqEPsomP8MSfpjHz
- Do/AQEgwUVkjPymEUhZccb7iOL0GU4EVM67i0=
+ bh=WdlXiEhUp8Rzcdf3df+jSREY5ethQ8mHb/zsQlcQeZ4=;
+ b=k5fuhAln1N0UIm7LG8lkWR8AeE9hTNAzKLC7e9vS1jlLkLqZRHyuWjJNXW17Ak2uuG
+ kp/TsKBj8EJ/huwz8bHV6B5S8APWcm8u4k0pXkZg42kCZfL90qDSMrr0VxFL2OiQV5mF
+ aXc9nOJgwSO2GbE0U7k+WA/J7O7Fd5vIETxrk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783604637; x=1784209437;
+ d=1e100.net; s=20251104; t=1783604656; x=1784209456;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+YXrKATw0ZEI1xbIOVuig3WyqiSfx0xLFRW7c29UpJU=;
- b=NO+50d+m6vRwdUU/pxlK919w/6U3fAi/u4OSNLXmI3SYCb6ibujJRFYlWa9nlWtorj
- w0ejVHVthsaywgRJv3cOCASb7LCxYE57wCIwX/keinEPk9VSLZj9wyblx4lW6HcFcVmY
- GLaFhghkQYdF8QP3aE3mkSB9B9vB1TmBpFd3tPZcH1VmYCq+dMAu9Wrm/wmGa11RREUf
- mawJzBX/4tZ8bdTuaFwzlUMCtmRkFciS1h4PL/DZL1I8SPt5Kg+PjCHrrci9QakILjeh
- eQuQ+YmdHotmg1IZGzlTpzrmlbNGwvCOb11PPeVeOhGKJwdoUFmqE0/QLfjOhw6mv2mE
- 0+Jg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8CDjzFhbZPmlS6J6Mty/4pdvcdLmdXF8QIjxzvaLQ+uhneYtK1goVRFxQqUYrevwd6B3oYJGE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTAh62VsTPc9fb6wy93d2lUdfVS3HmSBA/WsN0ZblL9wsWN0e7
- GkMKQCmUMXL27Xs+O2XvLoF0p7/j8IsuOA1nnHHIaXF4caTBzppoiMvgo+A/JOc8X24=
-X-Gm-Gg: AfdE7cm6ilDYd/Qr3cB1EHAjCPUhGytvXDTm6cleGWUTgRYDwMiFnHrXPSJHcjsQ427
- jGOPDtbfxq1FY2xtitqRtWm8sfL1uc8qXvjTNK3lyl6yhj7r2iuDTs1h2a99AsAl6rs9SyYOpsD
- SXNxhgtTxIfOq2Z3Dhwlrdw0XqeDfMsIKRaO3ZfyPjeGtHiZqiisH6KhAuT6MLU40InqY6A87et
- hUcBEzW9+u2/2NDoz4RsO0Yb+X+H6JiQlUII0au/5W6i7fJSBTFuvFI9SV60DEo3mHfSxM7pO7a
- rCeYr4cxYcMtKrNlzezE96qUjwE5i0A7Z//ATomCP7pi2NqdG77M/eRTkG/cDl/qkD1AELw+Wrk
- /2O/xGZ8JmjiVhT6fzyGgxiUTEEQ9bd2BvRlRgk0L731PNdqUwTd9IB7ph+Ca6heO9CVdkgImzx
- ZSzZ7DvVFMevjr/OfzzjmkyK1qCluRrsjg6wC/cs0d7h+rrJHSVlNUivwVNrt0TKgBqVgVy50a9
- Cm9QgIBeeOCjiuSqnNP5/WH95m1NXkcfpS/C20yPGZ0h7LA
-X-Received: by 2002:a05:6808:1594:b0:4a3:eece:cbb with SMTP id
- 5614622812f47-4a3eece5aa0mr982577b6e.21.1783604637083; 
- Thu, 09 Jul 2026 06:43:57 -0700 (PDT)
+ bh=WdlXiEhUp8Rzcdf3df+jSREY5ethQ8mHb/zsQlcQeZ4=;
+ b=XZhP6gYtE6Rb/T6Bs8u0JHh0UVe+EqWMxCbaK1vmm6EHzLYmoN+fUXycYIneUlKY4q
+ ilR6XqnFFgCbvqMiEwIywDM8oxT6NRZXxBGs7sYsmV6nMAFQfvfuubhnJl/vvv0FwlcT
+ T+dTXXh6rGLVOXkI+2FqntsnO2tslDxTDaxeI0mV8nahdufPT1r5Haq/YY+Nm4+2Ixpc
+ onuCLtk08eIeuEMUHWksj8HzdE8wVwtLI0XcEEL/4yFdXfH1i80daSj9rQmlzLcErVPj
+ cCq2rsHcy/Lve8OF/UQBT9JYbGpuP/s8Wa1FPgxpN4+t10WuWyVp5gITMNgjLTMutniw
+ S9GQ==
+X-Gm-Message-State: AOJu0Yzg5uiZrbQnk5M1S7KoedLRC7t1w9walBo+QDyuW3YUoC+VuJUc
+ DirTtyxLJolnw+t8Nz1SjWTtnq4F0irendRnc4KcxH8d4LD5jciPW2TiiCtbv43JunOeWuQVWV5
+ 8sWDmfFs=
+X-Gm-Gg: AfdE7ckqzEaGEKyDBx+lRrA16ijTDaQsW1Rh6/62ysTr7Bqa3HjfvSQuEOc5tVhfqnR
+ aqg0FNnR4JEq3nom5+4Ovuqatu713LbRBlFFq6vTp2PXYWOIEfM3NzPW/+LY3Yg8hPcb1H/rI6v
+ 33P9IdM41J5cmW9cgo0QohkuKvIOgZf8iBoGuU5aT7EagWFdCSGC9UxCFxv7WVDDKCpp+5QRTCS
+ 0e/Hq8/BvS4uVsAcVzr5ZZ5o3WXM0tHbEadAUp6Fib8tg31dLQkcsJHIM9aV0254Mx5MponVSq1
+ F0108kskbJOhRy6TfqRh+DfgQayk+5CLqR7YuHRBwuatmOYgG+mqfNaaF7S+qqOFsJyKfWhfoer
+ +e4lGZmAoJY+Pm+b0lmwlEWjfEtNkTC42rA4COE/VDdkznurAdWWsnJzI8LXj1n+qrgGu0I6RIC
+ otfpuw9avXyRcgUKqWHVGbLtNLDJ/Adw+dyWWUv8AHpQiSx/3+3ESTraVbxGGL/toMM9fdLsZzl
+ r40TcYlpApHKlcGg7TL/yaoU6Ye+AzykjRJDA==
+X-Received: by 2002:a05:6830:6737:b0:7e9:b4cf:683c with SMTP id
+ 46e09a7af769-7ebd0033de6mr5427296a34.28.1783604655739; 
+ Thu, 09 Jul 2026 06:44:15 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4a1ad4ac92csm3858401b6e.5.2026.07.09.06.43.55
+ 46e09a7af769-7ebcafda2ffsm4116946a34.12.2026.07.09.06.44.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 06:43:56 -0700 (PDT)
-Date: Thu, 9 Jul 2026 07:43:54 -0600
+ Thu, 09 Jul 2026 06:44:15 -0700 (PDT)
+Date: Thu, 9 Jul 2026 07:44:13 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
-Message-ID: <20260709134354.GX749385@bill-the-cat>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 09/11] Kconfig: serial: Depend on correct xPL symbol
+Message-ID: <20260709134413.GY749385@bill-the-cat>
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-9-jonas@kwiboo.se>
- <20260709015247.GR749385@bill-the-cat>
- <f544cab6-1db6-481b-8f91-06cc2fb6829b@kwiboo.se>
+ <20260708220540.3368825-10-jonas@kwiboo.se>
+ <20260709015300.GT749385@bill-the-cat>
+ <c43c2a98-b6aa-46da-a74d-0601287534c2@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oUu/hLIZYGCFcaJ/"
+ protocol="application/pgp-signature"; boundary="nKdEE1LJxJKlM6Dd"
 Content-Disposition: inline
-In-Reply-To: <f544cab6-1db6-481b-8f91-06cc2fb6829b@kwiboo.se>
+In-Reply-To: <c43c2a98-b6aa-46da-a74d-0601287534c2@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,78 +103,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oUu/hLIZYGCFcaJ/
+--nKdEE1LJxJKlM6Dd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 09, 2026 at 09:12:24AM +0200, Jonas Karlman wrote:
+On Thu, Jul 09, 2026 at 09:27:07AM +0200, Jonas Karlman wrote:
 > Hi Tom,
 >=20
-> On 7/9/2026 3:52 AM, Tom Rini wrote:
-> > On Wed, Jul 08, 2026 at 10:05:34PM +0000, Jonas Karlman wrote:
+> On 7/9/2026 3:53 AM, Tom Rini wrote:
+> > On Wed, Jul 08, 2026 at 10:05:35PM +0000, Jonas Karlman wrote:
 > >=20
-> >> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
-> >> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
+> >> Change xPL_SERIAL_PRESENT symbols to depend on the xPL_DM_SERIAL symbol
+> >> intended for the related xPL phase instead of the DM_SERIAL symbol
+> >> used for U-Boot proper to make CONFIG_IS_ENABLED(SERIAL_PRESENT) guards
+> >> work as intended.
 > >>
 > >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > >> ---
-> >>  drivers/i2c/Kconfig | 4 ++--
-> >>  1 file changed, 2 insertions(+), 2 deletions(-)
+> >>  drivers/serial/Kconfig | 6 +++---
+> >>  1 file changed, 3 insertions(+), 3 deletions(-)
 > >>
-> >> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-> >> index ab5af17858c8..125dc84819e6 100644
-> >> --- a/drivers/i2c/Kconfig
-> >> +++ b/drivers/i2c/Kconfig
-> >> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
+> >> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> >> index e221800d5d06..f125061fe184 100644
+> >> --- a/drivers/serial/Kconfig
+> >> +++ b/drivers/serial/Kconfig
+> >> @@ -71,7 +71,7 @@ config SERIAL_PRESENT
 > >> =20
-> >>  config SPL_SYS_I2C_LEGACY
-> >>  	bool "Enable legacy I2C subsystem and drivers in SPL"
-> >> -	depends on SUPPORT_SPL && !SPL_DM_I2C
-> >> +	depends on SPL && !SPL_DM_I2C
+> >>  config SPL_SERIAL_PRESENT
+> >>  	bool "Provide a serial driver in SPL"
+> >> -	depends on DM_SERIAL && SPL
+> >> +	depends on SPL_DM_SERIAL
+> >>  	default y
 > >>  	help
-> >>  	  Enable the legacy I2C subsystem and drivers in SPL.  This is useful
-> >>  	  in some size constrained situations.
-> >> =20
-> >>  config TPL_SYS_I2C_LEGACY
-> >>  	bool "Enable legacy I2C subsystem and drivers in TPL"
-> >> -	depends on SUPPORT_TPL && !SPL_DM_I2C
-> >> +	depends on TPL && !TPL_DM_I2C
-> >>  	help
-> >>  	  Enable the legacy I2C subsystem and drivers in TPL.  This is useful
-> >>  	  in some size constrained situations.
+> >>  	  In very space-constrained devices even the full UART driver is too
 > >=20
-> > Building on the last email, I think these might need to be
-> > [ST]PL_FRAMEWORK not [ST]PL.
+> > Using the database option to qconfig.py, this is not equivalent. There's
+> > 901 platforms today that enable SPL_SERIAL_PRESENT, and 344 that enable
+> > SPL_SERIAL_PRESENT but not SPL_DM_SERIAL. Now it's possible that there's
+> > no functional change here. Something like "pinetab" would be a single
+> > platform to check the size changes on as it's SPL_SERIAL_PRESENT=3Dy and
+> > SPL_DM_SERIAL=3Dn.
 > >=20
 >=20
-> I have mostly tested this series with additional changes that alias
-> putc()/puts() to printch()/printascii() in xPL builds when
-> common/console.o is unavailable and DEBUG_UART=3Dy, patches that will
-> be sent as a separate series.
+> This discrepancy is likely due to the 'default y' and the strange
+> 'depend on', based on my observation xPL_SERIAL_PRESENT is mostly used
+> to guard U_BOOT_DRIVER() and other DM related functions, so I do not
+> expect any functional change after these changes.
 >=20
-> It is possible such change may have hidden some latent issues, now
-> trying to push a branch that contains changes that ends at the patches
-> included in this series, but due to timeouts it was not possible prior
-> to sending this reply.
+> Also did quick build tests of pinetab_defconfig and there was no binary
+> change to spl/ before or after this series.
 
-OK. You should have access to git.u-boot-project.org now, to run CI
-there. To ensure there's no timeout problems you might need to do a
-local patch to switch the yaml to use git.u-boot-project.org too when
-cloning test hooks.
+OK, good to know, thanks. I'll grab the series and do the world build
+before/after test.
 
 --=20
 Tom
 
---oUu/hLIZYGCFcaJ/
+--nKdEE1LJxJKlM6Dd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak+lmQAKCRAr4qD1Cr/k
-Ct5uAP4nQmKXq1wBszCK63wJ8genVS/nD0LMfGsSiRYJCShy+wD/XKNPDuArf7DU
-/RWwLX+ww5dm43Mbfvdn+2AGRz3L2ws=
-=hoHm
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak+lrAAKCRAr4qD1Cr/k
+ClxyAQC/uzcQH5OFxX7J8LocMNSFmXpMqEpWnoOVEgksGk7BXQD9GiEMK4I6Ctni
+EySZbb0KPff/Cf7Zl6UtOXR2hu9CtAM=
+=HcRE
 -----END PGP SIGNATURE-----
 
---oUu/hLIZYGCFcaJ/--
+--nKdEE1LJxJKlM6Dd--
