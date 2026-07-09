@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FBF0C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:06:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7287CC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:06:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 682C584B73;
-	Thu,  9 Jul 2026 15:05:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CE0684A3E;
+	Thu,  9 Jul 2026 15:05:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="M0fBsLeI";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="F8G9SoFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CA6B84B39; Thu,  9 Jul 2026 14:58:11 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id D0D6884AFF; Thu,  9 Jul 2026 14:58:12 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A884C84A3E
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B70B784B01
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-475881b9a4bso1598836f8f.3
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:08 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-475cb71a4ebso1699464f8f.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783601888; x=1784206688; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783601890; x=1784206690; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Mlz85fs2BB6M7gQj6gtL6Ts/IRrwVuzV6DULKBs1nVI=;
- b=M0fBsLeI9ydOvNJvX35ly2eie1vOGwWQavYxt3m0QskUK2keBiiRcRoATQw6QB0xgx
- C6vUqHw/omYlrhlQx39fki17+iLFrmefZQKOsAIp7Pt/NpfEzNwozfa4AryY1gDfu0PU
- KAlBmqYS2BW6w2xMAEqT6ylNUV0ORkq7QIhjJCuEIh0qrin/SZBDWx4R89G7aDZzeeMj
- l267QKyh46QZ9k+1MUXjBr2STErpaVS9OriGFEN2qevrUQqMJNCfTrbp/YFPl/pqtlbN
- h7X0JFddv79jY1KgKrYfvXtHfv5BsXPDTMusd7mrizYblQyy3vXyMWOSepSjxjmfkQYa
- rZTQ==
+ bh=MteWLfL3w/JtPMjymW+34Jmb98JiR/1MW0Dd5pEuX3Q=;
+ b=F8G9SoFeDzbu3mpj6xqikexIKYxtVpxCzxidDjDNLwdF1NNw8c6T7GTG30jvlqvlZV
+ bs/GBQCr0XlEhJSS00GQsAdCo4ZntvK11wzUVL32cwnyilzWvD81pwEdqhuwfzXQCyxS
+ oUDGygNhcDlw+cr0BVD+ULO0OUMs1MORze9JboA17j/UHIlq7hUpq//tv8dE533Oea+l
+ gtBPoRAakv7jmx3iQhCp3obbuLvYaCeZwltLL3wXNiBwP6xP7CchcBvxS6SIQDTmMCtL
+ Opfiu1QxZiVdc4QuRoAVkMYLWDubmflOYa+COvPtbgyHGV8/qICY4z4bqEWknT1plKlG
+ /TDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783601888; x=1784206688;
+ d=1e100.net; s=20251104; t=1783601890; x=1784206690;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Mlz85fs2BB6M7gQj6gtL6Ts/IRrwVuzV6DULKBs1nVI=;
- b=HDhx1rG3o0LumcFP31Fg6A0fO81Buw8hw4Epdvd97U+nthiq6q8tFAZPhRjBxjYBaG
- f4dcoIjLkDVMNzwu9CV60H1R7aKbXzZPtrp7HGV7HAkcv9AeQ0G+c1TSabOoSDNvF3fG
- FMPJCQIxKwejLs4zbxp4y7cd01USGo9Lqc7obWMGT6k9N3CjPE08+AuKMJ0YYISPXI3Q
- BCyoS0FEe8G99d/Ex1y37zPV5jUrTk+bQPbBIrg9p98biA1kPWKkTm0f+1eEo/ZOHmHq
- bbVTyW6JgkHLGKGtL4YdBKVBF6qFQsA3zHvf08GynstKxZJpfyo0ez8yKrD/Gduh5bQ3
- uNlQ==
-X-Gm-Message-State: AOJu0YwhaSy/VcGPb8RzHiIT+EbrCp4xrGgJROkC2I4apXGgI8xqGhWi
- ZXmq8mnVZdbMGjLNhI20t6der2SDWC0if12793aXzlJaVu2mq3p5mtiSu58YZXpTSK4=
-X-Gm-Gg: AfdE7ckTHHrZVdh7mcyXzp1XaLh65+zc7xH+157Qb9qN2kvPHaWOT1HO5yts+Rk/oAH
- 9rmGfsJW8UAs7RM7a/xQhVH7gHWLkM8QiUsPh7bbyB5NSizUm3pWTuBKVXSWOojdhNJcC5BYvb5
- 3s005P0nUWdxDE8kfFqIhAPZSdFhDZpJl2qKjATNC6VioPKtaXVT6LR9mfwoJlsnQjFdPDPWqLJ
- C5+dRqTXKEs05xkwrvCmMfq3JFO6AdPxRnlR+l33rfZMFpPwTK9kVb585Dpx3GwHFxMObkcYHgZ
- EmNNh8CVe2UMxH2FJFaghV4Y71W6B76SGdw2YrY1v6fqJ0tAH95EVNp8cRUBYsqEOET/BPI34kC
- A2QrC9WU6pNn7sDEFXMqI5ld21M96zQB7HTlhg896b12VYx1DEOfU/Awfwcaqntrb5mZHhuovlo
- jAtm9vUYhld83Ikca1hixEgwzfv3SHnkdT95d5BuhEoyKz0wA/AHDZo61V77pVFZwdOEHo187R4
- ur39oviCRJ4Cv/D5DadmrAdF/xqrafV3rZjSBYMGX4V/uybw6rvAOtqf3Xm7rmo3QOkGso=
-X-Received: by 2002:a05:6000:4020:b0:475:f100:35fb with SMTP id
- ffacd0b85a97d-47df077cadfmr7755635f8f.56.1783601888026; 
- Thu, 09 Jul 2026 05:58:08 -0700 (PDT)
+ bh=MteWLfL3w/JtPMjymW+34Jmb98JiR/1MW0Dd5pEuX3Q=;
+ b=AdC9TjP5kznAQjGbZGJ8o7ZPzrtCbsoLweR7GGIwH51q47C2A/OpzxlmON16tIgvlw
+ NiP0uAGuK+khKvCJ5spoo3O8ZVGBz9d6Tf9gJCyJZOUmW/fImk9dOdNNj4r8upvmgvE5
+ rDbuE0WlnR8ITkpnZrv5Dww91kto1Nx8bFc8ZNJm0oFGwDRs7c32V60VC6nB2Qv4qBN+
+ B2n6Ofnh7nqguatI7e+uGz3AL4w6wHvLvKl0OZtbKXeJ1yd3gYyhlX8u6gPSFlvTbroO
+ ujZABMHLKZ6xlLpjNyPXL8CD2YqP9S1LiE5zumr0SR9X8ttw6ke/1z5MzoPLgqhi8Hco
+ ojMg==
+X-Gm-Message-State: AOJu0YxBvgP3jdpRwSv/n5Cer7KxLLk7Diflo4a83kG6Xu9k4I6a2eh5
+ x4IC+Ck4goWEjcjAgyuZVKE7WKnTZX6X192yJIORJLg6hZDQxmw9mp6ImxNgpSZkjIU=
+X-Gm-Gg: AfdE7clnGIqRl+SeQKho+vEg96Z/VckyHTMbwIVJpGIdvUUxP5tqJOmfmGtYlqToRiR
+ GgtP8IoIs46rhfkVHIhE8Onl7F+fjjrwR9IS46ItlkA0SMhinvZOwg76d20UoaCBtbpq4dJ2i58
+ 3hTGu+pZaHq085WZkD4C9hmYQ3paLCXU8x+spcbqjm/h4ZOjcif/6cvba8zsLP0bOdVEZp3z/Np
+ L8+ImzbxHaUQkEPTF5vVfojKRaWWIjYSTxslXky4duTerzue/CsaSQXA9MRXZR082pjdXgLaTRE
+ dm91FoWJcgP17VUtyOoBUtmJ+rIrKZ42SBiPx54EGd39jtnzciiYjfke97szlTirHtqDv2ATa10
+ 2/NM5TcyjCKCD93zx5GCYET4o3zyrqvfchmsf5LKuO4Tnvjp1ufgj9EBpTCiTlfVXuLehqFcQWp
+ TH/lnnXELu/1e3mdRS3fueTYQNQrnWPR1eJiX7SPiruR/EiLrxstbQI9rfbSNeNEcwXXj/MOJ0B
+ X3gXM0ZkNk+oudEvlBv3yMVJkFSeSgmYdlFQjKoztm1MkwMIgFCbbhSBg2xBlhuQyZAk/s=
+X-Received: by 2002:a05:6000:2285:b0:475:f0c2:75ac with SMTP id
+ ffacd0b85a97d-47df07baa0cmr7882300f8f.61.1783601890135; 
+ Thu, 09 Jul 2026 05:58:10 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.04
+ ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 05:58:07 -0700 (PDT)
+ Thu, 09 Jul 2026 05:58:09 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 09 Jul 2026 14:58:09 +0200
-Subject: [PATCH v2 03/14] power: domain: mediatek: use MT7622 naming
- instead of MT7629
+Date: Thu, 09 Jul 2026 14:58:10 +0200
+Subject: [PATCH v2 04/14] power: domain: mediatek: use MT2701 naming
+ instead of MT7623
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-mt8188-add-power-domain-v2-3-589ace7d30e2@baylibre.com>
+Message-Id: <20260709-mt8188-add-power-domain-v2-4-589ace7d30e2@baylibre.com>
 References: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 In-Reply-To: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 To: u-boot@lists.denx.de
@@ -134,105 +134,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream DT bindings define "mediatek,mt7629-scpsys" to fall back to
-"mediatek,mt7622-scpsys". Align the driver with this convention by
-using MT7622 naming throughout.
+Upstream DT bindings define "mediatek,mt7623-scpsys" to fall back to
+"mediatek,mt2701-scpsys". Align the driver with this convention by
+using MT2701 naming throughout.
 
 This also allows the driver to use the upstream
-dts/upstream/include/dt-bindings/power/mt7622-power.h header instead of
-the local include/dt-bindings/power/mt7629-power.h, since both expose
+dts/upstream/include/dt-bindings/power/mt2701-power.h header instead of
+the local include/dt-bindings/power/mt7623-power.h, since both expose
 equivalent power domain definitions.
 
-Rename scp_domain_mt7629 to scp_domain_mt7622, remove the
-SCPSYS_MT7629 enum, and switch all MT7629 power domain defines to their
-MT7622 equivalents.
+Rename scp_domain_mt7623 to scp_domain_mt2701, replace SCPSYS_MT7623
+enum by SCPSYS_MT2701, and switch all MT7623 power domain defines to
+their MT2701 equivalents.
 
-Also drop the explicit "mediatek,mt7629-scpsys" compatible entry and
-rely on the DT fallback instead.
+Note:
+we intentionally keep the explicit "mediatek,mt7623-scpsys"
+compatible entry to avoid breaking legacy boards
+(mt7623a_unielec_u7623_02 and mt7623n_bpir2_defconfig) that didn't
+switched yet to OF_UPSTREAM. Same for
+include/dt-bindings/power/mt7623-power.h that is only used in these
+boards.
 
-Suggested-by: David Lechner <dlechner@baylibre.com>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/power/domain/mtk-power-domain.c | 22 ++++++++--------------
- 1 file changed, 8 insertions(+), 14 deletions(-)
+ drivers/power/domain/mtk-power-domain.c | 36 ++++++++++++++++++---------------
+ 1 file changed, 20 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-index 24dd540897d..dd45f63b763 100644
+index dd45f63b763..9888d00421c 100644
 --- a/drivers/power/domain/mtk-power-domain.c
 +++ b/drivers/power/domain/mtk-power-domain.c
 @@ -16,8 +16,8 @@
  #include <linux/err.h>
  #include <linux/iopoll.h>
  
-+#include <dt-bindings/power/mt7622-power.h>
- #include <dt-bindings/power/mt7623-power.h>
--#include <dt-bindings/power/mt7629-power.h>
++#include <dt-bindings/power/mt2701-power.h>
+ #include <dt-bindings/power/mt7622-power.h>
+-#include <dt-bindings/power/mt7623-power.h>
  
  #define SPM_EN			(0xb16 << 16 | 0x1)
  #define SPM_VDE_PWR_CON		0x0210
-@@ -64,7 +64,6 @@
+@@ -62,8 +62,8 @@
+ #define DCM_TOP_EN		BIT(0)
+ 
  enum scp_domain_type {
++	SCPSYS_MT2701,
  	SCPSYS_MT7622,
- 	SCPSYS_MT7623,
--	SCPSYS_MT7629,
+-	SCPSYS_MT7623,
  };
  
  struct scp_domain;
-@@ -138,22 +137,22 @@ static struct scp_domain_data scp_domain_mt7623[] = {
- 	},
+@@ -84,54 +84,54 @@ struct scp_domain {
+ 	struct scp_domain_data *data;
  };
  
--static struct scp_domain_data scp_domain_mt7629[] = {
--	[MT7629_POWER_DOMAIN_ETHSYS] = {
-+static struct scp_domain_data scp_domain_mt7622[] = {
-+	[MT7622_POWER_DOMAIN_ETHSYS] = {
- 		.sta_mask = PWR_STATUS_ETHSYS,
- 		.ctl_offs = SPM_ETHSYS_PWR_CON,
+-static struct scp_domain_data scp_domain_mt7623[] = {
+-	[MT7623_POWER_DOMAIN_CONN] = {
++static struct scp_domain_data scp_domain_mt2701[] = {
++	[MT2701_POWER_DOMAIN_CONN] = {
+ 		.sta_mask = PWR_STATUS_CONN,
+ 		.ctl_offs = SPM_CONN_PWR_CON,
+ 		.bus_prot_mask = BIT(8) | BIT(2),
+ 	},
+-	[MT7623_POWER_DOMAIN_DISP] = {
++	[MT2701_POWER_DOMAIN_DISP] = {
+ 		.sta_mask = PWR_STATUS_DISP,
+ 		.ctl_offs = SPM_DIS_PWR_CON,
+ 		.sram_pdn_bits = GENMASK(11, 8),
+ 		.bus_prot_mask = BIT(2),
+ 	},
+-	[MT7623_POWER_DOMAIN_MFG] = {
++	[MT2701_POWER_DOMAIN_MFG] = {
+ 		.sta_mask = PWR_STATUS_MFG,
+ 		.ctl_offs = SPM_MFG_PWR_CON,
+ 		.sram_pdn_bits = GENMASK(11, 8),
+ 		.sram_pdn_ack_bits = GENMASK(12, 12),
+ 	},
+-	[MT7623_POWER_DOMAIN_VDEC] = {
++	[MT2701_POWER_DOMAIN_VDEC] = {
+ 		.sta_mask = PWR_STATUS_VDEC,
+ 		.ctl_offs = SPM_VDE_PWR_CON,
+ 		.sram_pdn_bits = GENMASK(11, 8),
+ 		.sram_pdn_ack_bits = GENMASK(12, 12),
+ 	},
+-	[MT7623_POWER_DOMAIN_ISP] = {
++	[MT2701_POWER_DOMAIN_ISP] = {
+ 		.sta_mask = PWR_STATUS_ISP,
+ 		.ctl_offs = SPM_ISP_PWR_CON,
+ 		.sram_pdn_bits = GENMASK(11, 8),
+ 		.sram_pdn_ack_bits = GENMASK(13, 12),
+ 	},
+-	[MT7623_POWER_DOMAIN_BDP] = {
++	[MT2701_POWER_DOMAIN_BDP] = {
+ 		.sta_mask = PWR_STATUS_BDP,
+ 		.ctl_offs = SPM_BDP_PWR_CON,
+ 		.sram_pdn_bits = GENMASK(11, 8),
+ 	},
+-	[MT7623_POWER_DOMAIN_ETH] = {
++	[MT2701_POWER_DOMAIN_ETH] = {
+ 		.sta_mask = PWR_STATUS_ETH,
+ 		.ctl_offs = SPM_ETH_PWR_CON,
  		.sram_pdn_bits = GENMASK(11, 8),
  		.sram_pdn_ack_bits = GENMASK(15, 12),
- 		.bus_prot_mask = (BIT(3) | BIT(17)),
  	},
--	[MT7629_POWER_DOMAIN_HIF0] = {
-+	[MT7622_POWER_DOMAIN_HIF0] = {
- 		.sta_mask = PWR_STATUS_HIF0,
- 		.ctl_offs = SPM_HIF0_PWR_CON,
+-	[MT7623_POWER_DOMAIN_HIF] = {
++	[MT2701_POWER_DOMAIN_HIF] = {
+ 		.sta_mask = PWR_STATUS_HIF,
+ 		.ctl_offs = SPM_HIF_PWR_CON,
  		.sram_pdn_bits = GENMASK(11, 8),
  		.sram_pdn_ack_bits = GENMASK(15, 12),
- 		.bus_prot_mask = GENMASK(25, 24),
  	},
--	[MT7629_POWER_DOMAIN_HIF1] = {
-+	[MT7622_POWER_DOMAIN_HIF1] = {
- 		.sta_mask = PWR_STATUS_HIF1,
- 		.ctl_offs = SPM_HIF1_PWR_CON,
- 		.sram_pdn_bits = GENMASK(11, 8),
-@@ -323,13 +322,12 @@ static int mtk_power_domain_hook(struct udevice *dev)
+-	[MT7623_POWER_DOMAIN_IFR_MSC] = {
++	[MT2701_POWER_DOMAIN_IFR_MSC] = {
+ 		.sta_mask = PWR_STATUS_IFR_MSC,
+ 		.ctl_offs = SPM_IFR_MSC_PWR_CON,
+ 	},
+@@ -322,12 +322,12 @@ static int mtk_power_domain_hook(struct udevice *dev)
  	scpd->type = (enum scp_domain_type)dev_get_driver_data(dev);
  
  	switch (scpd->type) {
-+	case SCPSYS_MT7622:
-+		scpd->data = scp_domain_mt7622;
++	case SCPSYS_MT2701:
++		scpd->data = scp_domain_mt2701;
 +		break;
- 	case SCPSYS_MT7623:
- 		scpd->data = scp_domain_mt7623;
+ 	case SCPSYS_MT7622:
+ 		scpd->data = scp_domain_mt7622;
  		break;
--	case SCPSYS_MT7622:
--	case SCPSYS_MT7629:
--		scpd->data = scp_domain_mt7629;
+-	case SCPSYS_MT7623:
+-		scpd->data = scp_domain_mt7623;
 -		break;
  	default:
  		return -EINVAL;
  	}
-@@ -385,10 +383,6 @@ static const struct udevice_id mtk_power_domain_ids[] = {
- 		.compatible = "mediatek,mt7623-scpsys",
- 		.data = SCPSYS_MT7623,
+@@ -375,13 +375,17 @@ static int mtk_power_domain_probe(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id mtk_power_domain_ids[] = {
++	{
++		.compatible = "mediatek,mt2701-scpsys",
++		.data = SCPSYS_MT2701,
++	},
+ 	{
+ 		.compatible = "mediatek,mt7622-scpsys",
+ 		.data = SCPSYS_MT7622,
  	},
--	{
--		.compatible = "mediatek,mt7629-scpsys",
--		.data = SCPSYS_MT7629,
--	},
+ 	{
+ 		.compatible = "mediatek,mt7623-scpsys",
+-		.data = SCPSYS_MT7623,
++		.data = SCPSYS_MT2701,
+ 	},
  	{ /* sentinel */ }
  };
- 
 
 -- 
 2.54.0
