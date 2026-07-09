@@ -4,114 +4,184 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DCEC44501
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 12:22:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3CD3C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18A6884B01;
-	Thu,  9 Jul 2026 14:22:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DE64584ADD;
+	Thu,  9 Jul 2026 15:02:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KsMhzzEE";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ejH0m2pJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFA2584B2C; Thu,  9 Jul 2026 14:22:46 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD6D984ADD; Thu,  9 Jul 2026 15:02:27 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E7D584ADD
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C1A84A3E
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 15:02:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-51c2a449c57so10935661cf.1
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:22:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783599763; cv=none;
- d=google.com; s=arc-20260327;
- b=OLagUWNr9Y2hiSJKQYncep8B+kAcZhvskIclnhDezrmKf6eyVK3u93PgJja5/27oQj
- mYxnawPq4QB4op6Lg1sgCS9rItX5ZoQAGveW4JfDNL8crR4HI4QCACn8rsyMEapvco5V
- k/+LKKY3td3nL7klKCK8GsLKiENXtklnVDUmUs8Q8vG/xovXcbs5M6pL/MeqelSN4xOL
- pqp9snY/arVV0j5R/p0RI8CliXS04rK8uK26XOB0VPUZh7QaYMT6vFQ+F9ShJ4z8uFar
- 6le5TKHU3dfCKLm5QqnxWtosTgVBUQ7Wvd2nRajj/rPnKXeWmyP1T9RrgsF+4zMJNzH8
- 38UQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=d3I2V3U0lh1k/Uph66nK5PcFuSdWa7GZdhkWR98p7qk=;
- fh=CgzkqVp1CcUAbz5widuZB2NcSANHTuSUxmKLbgBQrHA=;
- b=UAlkQ9KIWKYZvxp4Gwn+EgZxFN6o153nrUm/JVx3I2XgXJGtIAewa58OphMPcxDtrc
- sPf+wMmF2MaLd45G91BrK4GmfPd1fZxcfYn8dh53yWXAqBjhXsNeKtLErBSs6/vnNFLh
- L1G4EgRPMAlfaRABQYvL81ifajyyeqVK8WZ/m3oDuSSGktx8WxcisOjaNNIvfL7vPkUH
- dlatMzPhSyH+J8ILCV/jh25aIQdpMXnZ+ssZ3q19gVVWKRYWYG9vV49Cp8ljsJAGf8kB
- P2yvtokfNRpGSk4rDWXcT8N/1Gfdfvqz0jcMlmZi9IGQfB9j5OVXFEfVoR282PffQ3vx
- euPg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783599763; x=1784204563; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=d3I2V3U0lh1k/Uph66nK5PcFuSdWa7GZdhkWR98p7qk=;
- b=KsMhzzEEl5Fxwf/KgPEIWiXi7bMLEapkkam5uCD8ebAJqGHJIavHS0yeVWnz3TNVqN
- ec5z4j0uI3PexqLZZnRZp2G1gAQk9ioTCn1/P0EuHbp4mkw+Bwp1m1sexBpe534hV4da
- qQgeevR4b924ADwooc8NIq3pK50+ws/tKVDjH+EWj20o+OTxHyhVTIf6BLQM9OIIUZdt
- ce+AuuYM2qRjrUihTFueIh+GTjdg+bMzoQ3YgWfoKQJ7GQylEEq1bO97OsYypjRpbFEj
- 3tKmEwN0ybdFv9mz+yeJ9jidArJQuysqHgOSt7WQrbq5pC9IVjiedaUS2cllTdYtdUMe
- d5QQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783599763; x=1784204563;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=d3I2V3U0lh1k/Uph66nK5PcFuSdWa7GZdhkWR98p7qk=;
- b=YoOamthcTqIln3XsuBRxzD6eXXtmEeud7D1LNrJq8lpB+aacf7vxaN9XfKNPHcutHD
- 1DWsbFnm3C70kyqny9gxRjSgHn2eCtyCsfZxIJDb+ns5n2tSq5LS42K+c3PI3vpXDreO
- sal1F+Nm+4FJkitGohAIOcmGKNmi98b1sVP0qUgKPYNx9kSwMbQF8Vm4AfU+7ZPBgpWI
- ueGTr+ap2bAcHhve6zu/3EmBQlLIWyVOfknQ8NaREHNCuGwrp0ykAP50pWRCRiG29+6w
- pYJMZqNkvChDldJcMx0UmOSVMxuvB+FXtELx57973VMA4RYDAswxmflurVfIiz7xGBpE
- YjRg==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rp/zRUxCrN0p5/Ha6G392ddVXIBtaB79eYYAV4O1WASRFDXdgEvOkLnqNyDYIuikSQowb+6kL4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5I997F9+5soPTehBIjekZwFhWRs8vwi7COz3CQNInedUWi9M4
- LZxpZNUFXRHmeA+sySMAwkj4QkLdRE2cax8pC4p2JQw90cSjKSw8xBOGW+X2w+2RA7O3jng6rCj
- edP+W8nr7mv3hKdlOqPcJv/74ThVS9Xk=
-X-Gm-Gg: AfdE7ckRMUfllmR944a8pknAkSi3xRl9CHO3SrEeW77e9jAb4amjexPzl/8vNixy5lw
- S7ozNU6d7icfG16QxMV9L0pUPKlcent/GH++KGj/sdE+/lfJhaDx1cj3kho8qRUWfevRgvtbD7a
- W1dNmf2GQEUeBZJnpugzpXkwukMymjHIw7FjnnL1NHoZm22gO7E3jFlNQYA7/adi2qjbRY8Un0p
- +e1kL3MFXAE55t1pCFcNBLlXLzrM4lfc9U11ufpy3z7mPhSFIL4TTXrJLsXaHi7xvM4e9qgUKBD
- Jd2a4PFCjSn1Tq9uTPeP0kKyq/wY0u75TU5C720XK2tVSAYzRjn9PVr8wXHK2QmE02gyoII7Z9c
- IZw3EnCET1W0N45KZLsbEqDDRNi7M1gTf/ZuoevUrhnnVNh4rkV36VSA0gfBf1xNYrkXQiokIPB
- 4U8w==
-X-Received: by 2002:a05:622a:1312:b0:51c:7b13:62f9 with SMTP id
- d75a77b69052e-51c8b439112mr74793081cf.79.1783599763252; Thu, 09 Jul 2026
- 05:22:43 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Dlk3QMHxgxQ91OsIS6HOWZAIMuBOrtrGamTq69bDt6HMZwMjS7JGM3wSR4m8lBSnT73EtlK3p1Tw4llBCeBKXHKkpUO5VNIcXG98Ju4pZtgwfPkOCcXxgzrX32aPGLFB61o9iZlNchoDR0+lGF0eGWcnQ3JoB71vE00y0tQ5jOPu28KaWlvT7PJ7Gg/ike9NbJxrIDjdx8kUHRy3n3ZHgsmkU4Kc5m+cpB1RkfRobsMdflEla1Hw1Uk2jS1IuafSeO9aHwcVEGIovznVgoFcNmqZqU113ZCRdeBINuB/vYcLeAUJhAK+q8+0KN07pXjbaUOoDgLXmz9evT2V0v5zag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iaAHyXPXc68FWGbqcVa2TEcC3SNzZyIkVj2Z0GVvPT4=;
+ b=jn17tljy2LQ2Kwj7fukC6b4NifcJgZTm/cfyJ7dv8kn9ZIySSEpUF+3WD5hq682/KGR+RF3rjq2+Zs5HHqprOgYQhYamsNvmqU4lraCcuoitKK/NFASeCihMjrp8GnU9+5+NpolThgwbUq5mU+L6jLITuBk7RFb1CCSCzKCaL4Y5g+TLvAIpOyT9IpWqA2LgpRsvtfdDiOG4PKbUTCHGel/+OlmHbCk5wSjJZuF7hu1iCwSO9eoh30eGSPwnPFhU8zfwbd7uXr2t0s8BQFmHjvkr274JRUK9yiXHnD5ijO6RT3Cqpzut+k6O5apMq1pPJHNGGqJt6g6//8+W886mDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iaAHyXPXc68FWGbqcVa2TEcC3SNzZyIkVj2Z0GVvPT4=;
+ b=ejH0m2pJ2YV+5uGlgj8IeVVvJxnsyBsr2+nor69V4It0kMCAXONaHrs5y88UR+aDwjr79Y9e7ZyAcIE2Yj47Rya5E2qvsYRq08P2TlpGdVVxaOcV0fa0/zZsOqS4TEz5Qa23H4J+mHmB/KxiEYxAPQY+2ssz81nJb23mmZmyDW4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by CY5PR12MB6600.namprd12.prod.outlook.com (2603:10b6:930:40::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Thu, 9 Jul
+ 2026 13:02:19 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0181.009; Thu, 9 Jul 2026
+ 13:02:19 +0000
+Message-ID: <c2c87ebf-e26b-4987-bf78-cc2508ec7ca8@amd.com>
+Date: Thu, 9 Jul 2026 15:02:11 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/5] Add support for RPMI to U-Boot
+To: Charles Perry <charles.perry@microchip.com>, u-boot@lists.denx.de
+Cc: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Romain Caritey <romain.caritey@microchip.com>,
+ Mame Maria Mbaye <MameMaria.Mbaye@microchip.com>,
+ Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Souvik Chakravarty <Souvik.Chakravarty@arm.com>
+References: <20260708215200.1331416-1-charles.perry@microchip.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <20260708215200.1331416-1-charles.perry@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR13CA0098.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c5::13) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
 MIME-Version: 1.0
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
- <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
- <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
- <CAFLszThAqVjZ0Jd5kdB5q=bhGTNpAeHw3WXpUHnFQ_OH_KmXLA@mail.gmail.com>
- <6d0f3078-2ba8-474c-9a1f-481eeb7f47bf@cherry.de>
- <CAFLszTi+4s51HtaQrgBLEsOzoCjtZ+CGdvqBm4B9_fj-rpKqwg@mail.gmail.com>
- <CALeDE9OWeMs3peX8+4+i6iTmZn-EO2e+7s7q6S1yFaRUa0dksQ@mail.gmail.com>
- <CAFLszTg24RTHi0A0vWfv62FfZhm1Uz4iw=4m7NZ6_4W3R3kwyQ@mail.gmail.com>
- <CALeDE9Mcg2TUcnv3LD4k2pmCnogV97KqjUn-dQiDfAZt+hPN4Q@mail.gmail.com>
- <CALeDE9O4cPp7aWsiHreqOt_sE4t=y5MzvnyuCCGpwzD6hFjuAg@mail.gmail.com>
- <CAFLszTgRUEGG6UpfE0X83RXPU_pb8ZAMv18zNrmcHbrvyg=k5A@mail.gmail.com>
-In-Reply-To: <CAFLszTgRUEGG6UpfE0X83RXPU_pb8ZAMv18zNrmcHbrvyg=k5A@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 9 Jul 2026 13:22:30 +0100
-X-Gm-Features: AUfX_mz-ygK6ApQ9AeC9tPVOsYXKnjCsfSDER8orp_tOhHqXCn1Ty8C_aDbyMGU
-Message-ID: <CALeDE9N0e-K52+Qucy5bjJefvQJx0jM+3+XJQUsNo=yg_Ab3VA@mail.gmail.com>
-Subject: Re: U-Boot Concept Tree Proposal
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, tom.rini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CY5PR12MB6600:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8517b69-2332-4197-7257-08deddba4ecd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|23010399003|7416014|376014|22082099003|18002099003|3023799007|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: 1ivV4wIeaTHw7EMkIjXBSBOit/5+l7lH5hHcJ8s+vkTbd6ThPMhfeyj82fSBEfNMBdzR3cCQ5ViFeU28U49mS/wYO5OSKpJGACBYO6HW1D3i5Qs5cobg1ilhMFUAeP/HKIUvjwR+6u2Vz8tMon/G1o9sfvrbnR8PH4n41zi5WR1EmhMc3CSmSaz93kodxfg5GZ0Con6+Ge7+onCY22w9mgdH8IkU51Z7igCef9KrWFALsd2zekx6k3Orahj/UyWgB8irxqu490sSPPq7Tbzdbz2eFd09vI0FacVwl7RHpNkAP2XQcRFqno0038/eYY9uwHdvfdhhRjtm1zeoFjPrh5v/9vfVF1JoftEOYB6onoIpZHpAAvv97RIXfzlttEdRQ5oH1z6EDL+0nlFx37NqKyC0zfdGLNLGc4VInWk2ELgxmNUUdjdNVOwM9eE0l73jvwqEz4lTUEvXQWGVDq7PFPclFeI/xMfGw32Anx1N7PdXuIUo3GFkYJ0chjoOCDs3N3RlqW3RRXTVjvkRXYOS7hd11RXovzJUA9J/w63jT7hsRMSkK431r9RvQvCLPPnXd2sUKdj4C7lckrfR4mVjJXkpqsW6WyaIdfTe7AnVAfY+7KU5JUPn0aY7JUqjE3HhDxUY8O5erKR2UXn2blRDprK6pQ6W2rfAD2BKJN2RZkU=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(23010399003)(7416014)(376014)(22082099003)(18002099003)(3023799007)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZVdSTlJCVTZXTWlKZGtVTm5xZG1LUmQyeTdZUW5CWmllRDQzelBIbGtvZFUr?=
+ =?utf-8?B?SG9KbGN3QUppWUdtL3RvcWdVbWpsSEZzODhoOGtlYklTdUVNM0d1TTcyQzB5?=
+ =?utf-8?B?RUxlSE1UMGhZSGZobDZtdHhUSHZtMFhhL081WnYxeWdweHltQnRiTVhHamN4?=
+ =?utf-8?B?dTN3SlRNdWkrck1tdS93bUpZRFo0S1NsTWxlTzYyRmxNa2paNkJCV0s1SzBS?=
+ =?utf-8?B?UDJtSzBvbzRTSWJ0VEJ0NU9Nd1VWTTM5RlRONXV4WmpQS3gzbm9jRDRqZTlQ?=
+ =?utf-8?B?U3dCK0l2RnlnMmFiU3FaLzd3UjJVRU12R1pNVEc4ZW0rcnNNaHFrbFJ3eWp2?=
+ =?utf-8?B?cSt6ZXZvNi81N2JvZVZHK3c4eSt6NHd1c3RzV2FsUUlTOGY4VVVTNGdRZk9O?=
+ =?utf-8?B?RkxYZzhPejk5RGtCMzYvSFVoR0xuT2NxM2RSQmlEMllZUkFGWlp6emczay82?=
+ =?utf-8?B?MkpQRXJkYW53SnRJcFhZMmhnTG5oMlZ2YXVmVmJjT2NQWVlZeERWMEc5Y0t0?=
+ =?utf-8?B?M25paHo3SnVNR0dvMVJDc1hpNlZXZ010QXBoakZkQU5weDBVUFdnVnJvMHk3?=
+ =?utf-8?B?V0MzZFA3N0RWWTcvN3pjcHR0WmdQK3hTVktwSDZGR3NyUWpnV00zdWlFL21y?=
+ =?utf-8?B?cEJzL0UyaWZ1QjVpWmxwOU5QbnFyeUhLaEVrNWQ4L1RSbUVQM1JudWdmQmtG?=
+ =?utf-8?B?N1dZNldCK3FEYzBxaW1HaExjbFg5SmNhLzV2dlBXTkF2YWNsUGpTZmM1VExr?=
+ =?utf-8?B?N0F6ZWlETHg3M09TdHpUNTNYeG8rSGxJY3V1NXVUNC8yL3FQUWdtSXFobzFE?=
+ =?utf-8?B?MHV3VXhWUUlhekJlMGVIRFgxcklRbzVzZTdyNi9TRGM0NVJFM21uUWNJWWNU?=
+ =?utf-8?B?SzNkZDFkSGRkanFSalNkRVJ0Q3FBdXpKUTlPK1JTcmlKY3RCclJrQUhKQ1lZ?=
+ =?utf-8?B?QnJkQ3JpU01vMUF6NUpUMmI0UGZvMWl2WjV5TmlHRXdHUUIvZ3A2ZjUxSk1a?=
+ =?utf-8?B?aFBWT3J1NTdGeEVzRzNLZFM2MGVucW83RWoyTG0wSVZzczlTTUZIZ2VZUEFR?=
+ =?utf-8?B?NHFrZkxPWGVCdFg5VEpmUTlSa1p3bzh3VTU2LzFybVpMQ1ZWWjFlaThnWURj?=
+ =?utf-8?B?NzA2bnZTejNlem1UT2hOOE5iNXZVS1BSbUQvcGpHdlFvR3c5cXoxM0EzZkNJ?=
+ =?utf-8?B?dEFSMVVqOXN1dWVaK0F6WVAvS3JzamNTNGxzclF1VVdReExxd0FLK05nYi9q?=
+ =?utf-8?B?V3dHVGhKckFCNU41bUdiZ0hlUEJWN0hPdEpzRDdidTBEU3ZnUEZvb2VBWWZk?=
+ =?utf-8?B?dlBmUzNPWjVnZktETUlxQitaNHhKQnV1akM0M3ZnWnRCajRQYzA0VGRnTGFQ?=
+ =?utf-8?B?aENOenJncE5oUXdFd1BscTZyS1gyZy9MamVqR0M5UzAyMTh0S00zN1YxYUkr?=
+ =?utf-8?B?VWhRczBJNDdTWmY4amlWNWtpaG8xTXBPV1VKMW90QzRDWGxQZzVKa2FTWEI5?=
+ =?utf-8?B?L2c2VlI5M2NxSnNMNzZ3NTJndzJlZFJZVGt4cFJSQ0hEUlFsWEppQUtwRjZM?=
+ =?utf-8?B?STVGMGNNVlMyK0ExVkl0aHBWbDdKRXlObmZ5WnFPTXViaDRuT0V3eWNMWVYx?=
+ =?utf-8?B?YlZ3UUVqMEhHcU15dzhuVjJyOURTY3JQdFlabnJtMm9FaS92emtZRzE3aHRp?=
+ =?utf-8?B?Ty9RdkQydE81dkozZUZkSTBjb3FQa0FHSHNBcEJrNUx2dkFRcm9KazFvWVFZ?=
+ =?utf-8?B?SUJFY3J2Q3p6QTJKbGtkQlVZMWE0ZkRBQUxLVDZZdDBzTUhVdUcxcis2Ull5?=
+ =?utf-8?B?RThYMkNTall2cTl6Y2QzaWFmYzVFK0pjQVg5dnN3ZlcxRm5jR0J3b004eWMx?=
+ =?utf-8?B?ZE1VUWtFa2I3T1Z4ZS81cEVxNjZlS3BqNWNiTlFkUGtlRjJsYlRDR0pMN1dU?=
+ =?utf-8?B?ZVV6NTFtNDN5aGFDZmNxOHJ5bngwaWd2NzJRUHY1bzBiYTR3b1JPWHVzQmsw?=
+ =?utf-8?B?T1M0V1BSaWFvT3BRaDMwazd6TnBOdUZMSzREd0hQd0J0WVY5M0txeE1jVUE0?=
+ =?utf-8?B?cWRmNlBMR2lUOVNCWnpPc2ZWdzBmeVVyUFlGS1M0OHdwUnBvb0hYTS9CRUYr?=
+ =?utf-8?B?OENDVUI4R3ZQUm1DUXN2RXFlK21TcCtQSU5JV3dFODNORmdabEIxc3JVNXU1?=
+ =?utf-8?B?NXI2b2RuQ0xHMVRZVmpxUnc5ZEl2bXduZ01GM28vM3M0UXRlZ2JucVpvVlkw?=
+ =?utf-8?B?REMrUWtpOVJtZDg4eXZZQ2JOV2U0b04zS2NtTUJwR3MvTnNCM3VDeEdreEQx?=
+ =?utf-8?B?V0dOOXRNZzc0Ni9rN2xhLzR0aTJ4MFc2TEhiM1EyRGVuNmtTa0RSUT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8517b69-2332-4197-7257-08deddba4ecd
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 13:02:19.0430 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dHSBVkqNhY03Hz6jVqMcpJBSwT2t2f4sGNGhg3JQjO/0nsZRkinvOtgfazgozy3U
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6600
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,155 +198,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-> > > > > In the follow up private discussions about it after it was clear as a
-> > > > > whole that the PLC was uncomfortable with a specific websiite (we
-> > > > > don't plan on supporting forks, would we provide that feature for all
-> > > > > forks?) for concept. I offered the idea of a custodians tree to allow
-> > > > > you to develop and maintain the features that you were preparing for
-> > > > > upstream in your concept tree to enable easier collaboration for those
-> > > > > that wished to work with you on those specific features. Maybe I
-> > > > > wasn't clear enough in my communications but it was never intended to
-> > > > > be the location to host a fork.
-> > > >
-> > > > A fork would be something which forks off mainline and goes its
-> > > > separate way. Concept is not a fork. Perhaps a constantly merged,
-> > > > multi-feature branch would be a better term. Please read my original
-> > > > email again on this point and I'm happy to explain it further. Quite a
-> > > > few series have already found their way to mainline.
-> > > >
-> > > > > So I think you need to revist what the idea of concept actually is and
-> > > > > come back to the community with an adjusted proposal.
-> > > >
-> > > > It seems that you are rejecting the whole idea of a Concept tree (my
-> > > > original post on this thread). Can you please confirm that? But if you
-> > > > have ideas on how it could work with modifications, please share them.
-> > > > There must be some common ground somewhere.
-> > >
-> > > Nope, not at all rejecting it, what I was saying is that I don't
-> > > believe you have got the community to buy into your idea. I don't see
-> > > it as the PLC's job to reject/accept it, as I've always stated it's a
-> > > community decision, of which I am but one voice.
-> > >
-> > > On ideas I believe I have already shared the idea of working branches
-> > > for features you believe should be in mainline U-Boot. Outside of that
-> > > I don't have other ideas, but it's also not my concept.
-> > >
-> > > > > First though, I repeat again, would you please explain to the
-> > > > > community why you are holding the u-boot.oirg domain hostage to try
-> > > > > and force the PLC to accept an idea that we have been explicit about
-> > > > > the need to get the community to buy into this "concept". I think the
-> > > > > community deserves an answer.
-> > > >
-> > > > This is a bit of a one-sided view. The real situation is that for many
-> > > > years to implement major features and improvements in U-Boot, but that
-> > > > became progressively more difficult as Tom started refusing to accept
-> > > > series and I have no ability to get PRs applied. Perhaps I was naive
-> > > > to expect our good working relationship would continue forever, but I
-> > > > have contributed a huge amount to U-Boot and having the rug pulled out
-> > > > felt very unfair, not to say bad for the project. Regarding the
-> > >
-> > > So that gives you a right to hold the domain hostage why?
-> > >
-> > > Also your past contributions doesn't give you a free pass to force the
-> > > landing of patch series that you think should be in there. That's not
-> > > how open source works, it's certainly not how this project works.
-> > >
-> > > I think you need to step back and ask yourself why you're finding it
-> > > hard to get patches reviewed and accepted.
-> > >
-> > > To give you an idea I have had numerous community members complain to
-> > > me about you, I am sure Tom has similar, some are to the point where
-> > > the only way they will deal with your code is if it's part of the
-> > > subsystems they maintain and hence it ends up in their patchwork queue
-> > > and otherwise they actively filter mails out from you so they don't
-> > > see them. I don't keep a count or details but it's well over 5 and I
-> > > may even have to start using something other than fingers.
-> > >
-> > > To put in straight forward terms, a lot of people are fed up with your
-> > > behaviour, then when you get called out for it, or Tom has to have a
-> > > conversation with you about it rather than addressing the actual issue
-> > > you "take some time out" and come back a few months later without
-> > > actually addressing your behaviour.
-> > >
-> > > Now you're holding the domain hostage which is similar bad behaviour.
-> > > Not to even mention that you registered a US U-Boot charity and
-> > > attempted to register the trademark all without telling *ANYONE* in
-> > > the community what you were doing. Did you think you could just walk
-> > > away and keep the project "Because of all your contributions"? Again,
-> > > while you have contributed a lot I think the wider community of
-> > > contributors as a whole have contributed more, and by contribute I
-> > > don't just mean purely on the lines of code, but reviews,
-> > > architectural discussions and all sorts of other things that actually
-> > > make a community and it gives you no right of ownership over the
-> > > project.
-> > >
-> > > I'm sorry Simon but the way to get your patches reviewed is to rebuild
-> > > your standing with the community not by trying to force an official
-> > > recognition of a fork by holding the domain hostage.
->
-> Reading this I feel that you have imputed all sorts of motives which
-> are not there.
 
-Maybe they're not their from you're perspective, but there's a lot of
-questions there for you to answer if it's not actually the case.
+On 7/8/26 23:51, Charles Perry wrote:
+> Hello,
+> 
+> This series adds support for RISC-V Platform Management Interface (RPMI) to
+> U-Boot. RPMI is an OS-agnostic protocol for communication between an
+> Application Processor (AP) and a Platform Microcontroller (PuC) [1]. The
+> goals and purpose of RPMI are similar to ARM's SCMI.
 
-> > > > domain, I have offered to point subdomains to anywhere you wish, which
-> > > > would resolve this. In the meantime I have mirrored the website and
-> > > > moved various things away from the domain. But I cannot support the
-> > > > sort of split that happened with Barebox, if that is your goal.
-> > >
-> > > And as I've stated we can't use it that way, the SFC has requirements
-> > > around the project's assets (which include things like domains) as
-> > > Neal has explained and I am fairly certain as has the SFC. Also
-> > > there's dynamic infrastructure where we need to be able to move things
-> > > with little notice so it would cause outages without the control of
-> > > the domain.
-> > >
-> > > > I don't mind hosting a separate tree somewhere else, if that is your
-> > > > preference, but it needs to have some relationship with U-Boot and a
-> > > > clear understanding of what that relationship is. If that is not
-> > > > possible / acceptable, then I suppose we should close this thread. I'm
-> > > > skeptical of our ability to resolve complex things on mailing lists in
-> > > > cany case, although I started this thread at your request.
-> > >
-> > > As I've stated numerous times before you need to get the community to
-> > > buy into this.
-> > >
-> > > You have kept this "secret" from the community for a very long time,
-> > > and by secret you've not been open about your intentions, until we
-> > > explicitly asked you to go and explain it to the community.
->
-> Well my hope was that we could make some progress and I did take up
-> your suggestion. But it seems to have just resulted in creating more
-> disagreement. I'm sure that wasn't your intention, but it seems you
-> were genuinely surprised by what I wrote.
+ From the first look it looks like SCMI. Why do you introducing something what 
+can be replaced by SCMI?
+And SCMI has only specific ARM transport layer but the rest is arch independent.
 
-Because I was somewhat because it wasn't my understanding from what at
-least my intentions from my understanding of what you wanted to do.
+In our case where we have Microblaze V in programmable logic I can't see any 
+reason to use RPMI for talking to the same server if I need to do it from ARM 
+side too via SCMI.
 
-> I don't want to suggest that I had a clear idea or plan about any of
-> this when I set up my tree, other than trying to figure out a way to
-> unblock my efforts. But in writing up this Concept idea I thought it
-> would add real value to the project. I still recall that you shot down
-> standard boot and that was around the beginning of all this.
+I pretty much think that there should be communication with ARM and instead of 
+creating another firmware interface talk to each other and have only one which 
+can be used across multiple architectures.
 
-I'm not sure what "standard boot" means in this context, that term is
-used in a number of contexts in early boot firmware. I think of
-standard boot as UEFI, there's also you bootstd and a number of other
-options. You would have to provide more context.
-
-But I am ultimately allowed to have an opinion, as are you, and
-everyone else in the community, some ideas individuals think are good,
-some bad, ultimately the community as a whole will generally end up
-with the overwhelming opinion that somethings are good and they
-ultimately land as a feature in the project, thinks like DM and UEFI I
-think are good examples of that, some ideas don't get that backing and
-shouldn't land just because they exist in code, and that is also
-alright. Ultimately I would hope that an individual takes their ideas
-to the community sooner rather than later before the individual does a
-large amount of work so as to not invest large amounts of time in
-something that the community isn't bought into.
-
-Peter
+Thanks,
+Michal
