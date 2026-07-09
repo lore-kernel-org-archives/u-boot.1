@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84567C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E6AC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 13:07:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FAD784BB9;
+	by phobos.denx.de (Postfix) with ESMTP id 9689C84BC3;
 	Thu,  9 Jul 2026 15:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="iatclPIt";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="LWcVQ++N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B43D084B2C; Thu,  9 Jul 2026 14:58:29 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id E918284B2C; Thu,  9 Jul 2026 14:58:31 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7083D84ADD
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70D8B84A3E
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 14:58:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-47df4e62d2bso386337f8f.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:27 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-493c19bad03so17449995e9.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 05:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783601907; x=1784206707; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783601909; x=1784206709; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=CEZ7l5Ft5jiqeBS15sLUKnOvi+SSitpi6RJ1DCAw4p4=;
- b=iatclPItfRey9QLhs7pLbUVXn3dGzV+AcPTtyR6iIKjOlYwziZ4mNFHLHrJ+U6vw1H
- jQ6BPYY66G53YTTMCewObcATPF7IwG6T5xmGeTSeMDQpe1B+dvF9aFrbxBJ8hB/RouMK
- nX9mHPUYOfJCEy5Xn3stb+6gkSROAyobIpVMP2jYUs3ofPHAYebzfks9Aw+SXsIQkW8B
- Bsj4rgTxNvdbG8dcml3NL44yjziFbl/wJghaZ1oMeNG0J6CyjONPbX9zm6cDi60R1Veb
- RZjbyXWA+SGiWD9yLnoxJXX7SXYTx2dOz3PkEPRX16BLI2jOnNZu9UDzN620kv/CsNcL
- 5d/Q==
+ bh=V8I2ZkPBm/LbbUZNLJ7So3FT3q7th2a8++d5CkB0Mdg=;
+ b=LWcVQ++NU3ZfgtsHoIQnxAMlrr+kbyc8FqdW/VLJ6UIo2W1zW/qKNKmP9HFf5pbXwP
+ qWwXw1RTLqICUmIaTOnJH1B8dNmftSNlgDfzky5lG1EBD4HbuQa9+nk6cSZG4s9D9KzU
+ bP5JAdSr8u6VjkA6tK0wCZFHV3nUGs0p6ql0A9Ui4Qi3JLtPPkDdk7AjycaeTZxjiH72
+ 2tIa61XuSFwU7I2m1nIQ8cGXVMnUipFTQC75JyruvJqDL/gT/qjdEujHKApl3IUGWwNM
+ 2JflVs8r112zmSkAafLKdZlLP1p3FG8vFBMrk0MUA5iMrQKBMC6dK18mev8IUoYoCifg
+ ZM9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783601907; x=1784206707;
+ d=1e100.net; s=20251104; t=1783601909; x=1784206709;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=CEZ7l5Ft5jiqeBS15sLUKnOvi+SSitpi6RJ1DCAw4p4=;
- b=LkvvDMbFfdqUk+WASHVqoYqLLxUfrOLDb1pSl4rLyW+sR3ongT+8UJttIHw/NHus5b
- GU76PczUVaffp4oKsjNCNeUkRXu1VyyE659kfsxuinp3xKU+EQLMpE23Tlj+SPY1YM8W
- Klk90YeUi+H9jd6jKH19OeT7Rhw97iUmOCo25zNDW1Dv83YkohQTvZmHZ2XcnLSakZqK
- 5rFq1AjovyOw6J7sDk9fPnOwHG3vfW9GQx/seL2raOhjGxzh6dMaBTr0QKiTDzIb8hD9
- X/HijDH5OuTd9yQxbH/KhVq/yKjc+KOIosspPIJsolnpU2eTPRi0AnxElJ+9T+wcTogr
- FZ2A==
-X-Gm-Message-State: AOJu0YwlUB4/5J5x4EGl13zla+07AIrMvZQFZXd3EQZ55WmQZfPLHY6i
- lIHqsUtiu31koKHjOWo/PEc/8wtB+o4VBswjCfDCp6clvlkOxQDiRHFO9QGNQyVlOdU=
-X-Gm-Gg: AfdE7cngUlQYlhW3LggNMtFE8QRQVEhrXE5a3KsPwBG0r4I+m+Vc8vWN0/QsrDCp29J
- 54a5Z16/RuTjSokYoYipfcf+SxMwrwAQVeH+psnBce3p5Gaj4ZGKG++ORhASVYeaUTeyeuVK1y+
- ywpYcNHnjmrcNwW17KyB6IQJeviIaJxgUHVFQKyR9nfsES6a7P6xAeSQlEch6jtiUusdxFM1PZC
- ve9C7YhnqyjrvlYqHNaMWbRK0ZuMYKkGc+Ie6o6J0Qw2JYARcITQs+bijawS6/g3YBArXj6cqa7
- yF8vUOwEDYUJoQUNC97nReS70Ft8U1H2EvJVyLlLQ6HoXe+fpQ5Np6dpKmgW9gew/U+aV/bRJCM
- FMPXdBllzV6s0OOv9Z4N4LmGDex1lVM8FyTkDAJT4Iq3HrlptKNiiESs9H7vXg5SZy27v3OexL/
- HWvw0pqeT91b6nvK0rz3hD/hn18kCfRKcngD8Z2oOhouXYxcbxeGHKBeCYhdMJIlSm5KzK1Bu7u
- lvtg/fXTucq/7a+0GOR0oK8gTpRvJhTjaOk7r4R+xI+jbL2xcN0JdDT1qWE+LYQkBSxHqQ=
-X-Received: by 2002:a05:6000:2002:b0:475:94e1:29d5 with SMTP id
- ffacd0b85a97d-47df0723560mr7663400f8f.20.1783601906857; 
- Thu, 09 Jul 2026 05:58:26 -0700 (PDT)
+ bh=V8I2ZkPBm/LbbUZNLJ7So3FT3q7th2a8++d5CkB0Mdg=;
+ b=XRjQy0j4iSaOJ95asJn1Ha/UAWf+c+gFDY64arrIT+7LctSLqZPEL7Ks2PSsqZV29T
+ lL6+xb0GK6rzPKY0GnyTBAzdNW8lT79PmhhVA6FLwqYGqwyxxufbtyyy/vxI786x1tJ1
+ g8hB/aJUP4wc7BvOsNfESQ4b82Zxczk3pq8SSGM7x5LlaDydzzs5BRjB/QiMQIbXtomu
+ ymNZbsfOYd9FUvzhbGbxPnE2s19Jfy/aUaQWlmNxOX2YEXJjC4zbzGf8aXVDn2q+bb8a
+ PBPp+C8aacypemq+kzux5ANpyT6no59ftwvzESPSDScgtgWsu1AVMfHfAAFGlNatdcNC
+ zbZg==
+X-Gm-Message-State: AOJu0Yy0ggm6eGsIOZ99STbAt1KgFFZdELYjMV84m2xz4HVtS0hiE7gn
+ gLLPp0r3rq4DOhGXAFfxThtYwOhAeIxLZ1QPQZKdl1lL9v97/7cEfc4bjkngUJxtMzHrr73J3R6
+ rtwQ/2Do=
+X-Gm-Gg: AfdE7ck4KV3bVCNXN2imSK1uQ6/0YhiBy/W3cRcFR8F3O7IRIZTk8LlNcjQFW4yF81y
+ vClxjpEilUzmzdHiysoT1XJHXbkt66B3zJERE1Kav/d/VdZwAzRKxnzf/ZRgaw53ArCd8NT/QCs
+ sbrhWlZT7lnT00GfcD2nGemIdsSOidDKZ1eVXmhE+5iWkGJs4/JS3k28F5eh9qDEhFV8wYZIopo
+ Qhes48E6hH7MxtyG1sTgRWRqPeokp1gmTZaAg2nnVFQjJ7NAi53owqDEK9m7xO6eqyboGGC1H/s
+ qkk2MOjqAeYs2HgR8FOMOcibKMr48ZdtLYcbSk8nfQGTjUuCMo3ucluIb38KMANgzhUSyPcYq8n
+ hT1yrLL/TrjI3ZCm3HGASKf1UyisvyPCHx+0tk47K2Jts2Y5FbQcQDbkCyNuUmFB9g6xRaaTnrU
+ u5d9QF31sK8E4X8VFncAkztWNIL8OeHFX8Nnns/+ZR7Qb7Bne7yQXgfiStvkXvjpCC+zJP5VS/s
+ GlDICrg89R+yyfdzTLLFrihKjvnt3DNASxvX/0dZdWPUryw7sDdglNwI/z8vFULj4nwye8=
+X-Received: by 2002:a05:600c:a0d:b0:490:e5c1:b8bf with SMTP id
+ 5b1f17b1804b1-493e6841006mr74393875e9.13.1783601908905; 
+ Thu, 09 Jul 2026 05:58:28 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.24
+ ffacd0b85a97d-47ad69519c2sm55165977f8f.37.2026.07.09.05.58.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 05:58:26 -0700 (PDT)
+ Thu, 09 Jul 2026 05:58:28 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 09 Jul 2026 14:58:18 +0200
-Subject: [PATCH v2 12/14] power: domain: mediatek: add support for the
- power-controller model
+Date: Thu, 09 Jul 2026 14:58:19 +0200
+Subject: [PATCH v2 13/14] power: domain: mediatek: add MT8188 power domain
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-mt8188-add-power-domain-v2-12-589ace7d30e2@baylibre.com>
+Message-Id: <20260709-mt8188-add-power-domain-v2-13-589ace7d30e2@baylibre.com>
 References: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 In-Reply-To: <20260709-mt8188-add-power-domain-v2-0-589ace7d30e2@baylibre.com>
 To: u-boot@lists.denx.de
@@ -134,542 +135,727 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current driver handles a flat scpsys node with a single, fixed set
-of power status registers and one infracfg bus-protection mask. Newer
-MediaTek SoCs describe their domains as child nodes of a power
-controller and need a richer model:
+Add the power domain driver for the MediaTek MT8188 SoC. It describes
+the SoC's power domains (MFG, display, camera, codec, ADSP, PCIe, ...)
+as a table of mtk_scp_domain_data entries and reuses the shared scpsys
+core through the power-controller probe, including the per-domain power
+status offsets and the ordered infracfg bus-protection steps.
 
-  - per-domain power status register offsets (pwr_sta_offs /
-    pwr_sta2nd_offs), falling back to the legacy SPM_PWR_STATUS
-    registers when not set;
-  - an ordered list of bus-protection steps (scpsys_bus_prot_data /
-    BUS_PROT_WR), each with its own set/clear/status register, applied
-    on power-off and released in reverse on power-on;
-  - per-domain clocks and an optional parent power domain.
+The domain tables and ordered bus-protection sequences mirror the
+Linux mt8188-pm-domains.h data.
 
-Add mtk_power_controller_probe(), which walks the controller's subnodes,
-resolves each domain's id, clocks and infracfg, and builds the domain
-tree. The existing flat probe (mtk_scpsys_probe) is left unchanged.
-
-No functional change for the existing MT7623/MT7629 drivers.
-
+Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/power/domain/mtk-power-domain.c | 333 ++++++++++++++++++++++++++++++--
- drivers/power/domain/mtk-power-domain.h |  38 ++++
- 2 files changed, 357 insertions(+), 14 deletions(-)
+ drivers/power/domain/Kconfig               |  10 +
+ drivers/power/domain/Makefile              |   1 +
+ drivers/power/domain/mt8188-power-domain.c | 665 +++++++++++++++++++++++++++++
+ 3 files changed, 676 insertions(+)
 
-diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-index 3b0a90d3f94..9eef58d2d57 100644
---- a/drivers/power/domain/mtk-power-domain.c
-+++ b/drivers/power/domain/mtk-power-domain.c
-@@ -11,6 +11,8 @@
- #include <asm/io.h>
- #include <linux/err.h>
- #include <linux/iopoll.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index 0cadd9b93a9..12b0e2c9914 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -103,6 +103,16 @@ config MT7622_POWER_DOMAIN
+ 	  the SoC power domains on and off and handles the associated bus
+ 	  protection bits. It is also used on MT7629.
  
- #include "mtk-power-domain.h"
- 
-@@ -41,14 +43,79 @@ static int mtk_infracfg_clear_bus_protection(void __iomem *infracfg,
- 				  !(val & mask), 100);
- }
- 
-+static int _scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
-+				      void __iomem *reg)
-+{
-+	u32 val = 0, mask = bpd->bus_prot_mask;
++config MT8188_POWER_DOMAIN
++	bool "Enable the MediaTek power domain driver for MT8188 compatible SoC"
++	depends on POWER_DOMAIN && ARCH_MEDIATEK
++	select MTK_POWER_DOMAIN
++	help
++	  Enable support for manipulating MediaTek power domains via MMIO
++	  mapped registers for MT8188 compatible SoC. The driver powers
++	  the SoC power domains on and off and handles the associated bus
++	  protection steps, per-domain clocks and parent domains.
 +
-+	if (!mask)
-+		return 0;
+ config MTK_POWER_DOMAIN
+ 	bool
+ 	depends on POWER_DOMAIN && ARCH_MEDIATEK
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 66772b5d346..e6fe71c374a 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -16,6 +16,7 @@ obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_SECURE_POWER_DOMAIN) += meson-secure-pwrc.o
+ obj-$(CONFIG_MT2701_POWER_DOMAIN) += mt2701-power-domain.o
+ obj-$(CONFIG_MT7622_POWER_DOMAIN) += mt7622-power-domain.o
++obj-$(CONFIG_MT8188_POWER_DOMAIN) += mt8188-power-domain.o
+ obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
+ obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
+ obj-$(CONFIG_RENESAS_R8A78000_POWER_DOMAIN) += renesas-r8a78000-power-domain.o
+diff --git a/drivers/power/domain/mt8188-power-domain.c b/drivers/power/domain/mt8188-power-domain.c
+new file mode 100644
+index 00000000000..265d222f17a
+--- /dev/null
++++ b/drivers/power/domain/mt8188-power-domain.c
+@@ -0,0 +1,665 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2026 MediaTek Inc.
++ * Copyright (C) 2026 BayLibre, SAS.
++ * Authors: Chris-QJ Chen <chris-qj.chen@mediatek.com>
++ *          Julien Stephan <jstephan@baylibre.com>
++ */
 +
-+	if (bpd->bus_prot_reg_update)
-+		clrsetbits_le32(reg + bpd->bus_prot_set, mask, mask);
-+	else
-+		writel(mask, reg + bpd->bus_prot_set);
++#include <dm.h>
++#include <dt-bindings/power/mediatek,mt8188-power.h>
++#include <linux/bitops.h>
 +
-+	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, (val & mask) == mask, 1000);
-+}
++#include "mtk-power-domain.h"
 +
-+static int _scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
-+				       void __iomem *reg)
-+{
-+	u32 val = 0, mask = bpd->bus_prot_mask;
++/* Infra bus protection register offsets */
++#define MT8188_TOP_AXI_PROT_EN_SET			0x2A0
++#define MT8188_TOP_AXI_PROT_EN_CLR			0x2A4
++#define MT8188_TOP_AXI_PROT_EN_STA			0x228
++#define MT8188_TOP_AXI_PROT_EN_1_SET			0x2A8
++#define MT8188_TOP_AXI_PROT_EN_1_CLR			0x2AC
++#define MT8188_TOP_AXI_PROT_EN_1_STA			0x258
++#define MT8188_TOP_AXI_PROT_EN_2_SET			0x714
++#define MT8188_TOP_AXI_PROT_EN_2_CLR			0x718
++#define MT8188_TOP_AXI_PROT_EN_2_STA			0x724
++#define MT8188_TOP_AXI_PROT_EN_MM_SET			0x2D4
++#define MT8188_TOP_AXI_PROT_EN_MM_CLR			0x2D8
++#define MT8188_TOP_AXI_PROT_EN_MM_STA			0x2EC
++#define MT8188_TOP_AXI_PROT_EN_MM_2_SET			0xDCC
++#define MT8188_TOP_AXI_PROT_EN_MM_2_CLR			0xDD0
++#define MT8188_TOP_AXI_PROT_EN_MM_2_STA			0xDD8
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET		0xB84
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR		0xB88
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA		0xB90
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_SET	0xBCC
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_CLR	0xBD0
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_STA	0xBD8
 +
-+	if (!mask)
-+		return 0;
++/* MFG1 bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_MFG1_STEP1			BIT(11)
++#define MT8188_TOP_AXI_PROT_EN_2_MFG1_STEP2			BIT(7)
++#define MT8188_TOP_AXI_PROT_EN_1_MFG1_STEP3			BIT(19)
++#define MT8188_TOP_AXI_PROT_EN_2_MFG1_STEP4			BIT(5)
++#define MT8188_TOP_AXI_PROT_EN_MFG1_STEP5			GENMASK(22, 21)
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_MFG1_STEP6	BIT(17)
 +
-+	if (bpd->bus_prot_reg_update)
-+		clrbits_le32(reg + bpd->bus_prot_clr, mask);
-+	else
-+		writel(mask, reg + bpd->bus_prot_clr);
++/* PCIe bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_PEXTP_MAC_P0_STEP1		BIT(2)
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_PEXTP_MAC_P0_STEP2	(BIT(8) | BIT(18) | BIT(30))
 +
-+	if (bpd->ignore_clr_ack)
-+		return 0;
++/* Ethernet / HDMI / DP / eDP bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_ETHER_STEP1		BIT(24)
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_HDMI_TX_STEP1		BIT(20)
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_DP_TX_STEP1		BIT(23)
++#define MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_EDP_TX_STEP1		BIT(22)
 +
-+	return readl_poll_timeout(reg + bpd->bus_prot_sta, val, !(val & mask), 1000);
-+}
++/* ADSP bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_AO_STEP1			GENMASK(31, 29)
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_AO_STEP2			(GENMASK(4, 3) | BIT(28))
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_INFRA_STEP1		(GENMASK(16, 14) | BIT(23) | BIT(27))
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_INFRA_STEP2		(GENMASK(19, 17) | GENMASK(26, 25))
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_STEP1			GENMASK(11, 8)
++#define MT8188_TOP_AXI_PROT_EN_2_ADSP_STEP2			GENMASK(22, 21)
 +
-+static int scpsys_bus_protect_enable(const struct mtk_scpsys_bus_prot_data *bpd,
-+				     int bpd_size, void __iomem *reg)
-+{
-+	int ret, i;
++/* Audio bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_2_AUDIO_STEP1			BIT(20)
++#define MT8188_TOP_AXI_PROT_EN_2_AUDIO_STEP2			BIT(12)
++#define MT8188_TOP_AXI_PROT_EN_2_AUDIO_ASRC_STEP1		BIT(24)
++#define MT8188_TOP_AXI_PROT_EN_2_AUDIO_ASRC_STEP2		BIT(13)
 +
-+	for (i = 0; i < bpd_size; i++) {
-+		ret = _scpsys_bus_protect_enable(&bpd[i], reg);
-+		if (ret)
-+			return ret;
-+	}
++/* Video / display bus protection bits */
++#define MT8188_TOP_AXI_PROT_EN_VPPSYS0_STEP1			BIT(10)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS0_STEP2		GENMASK(9, 8)
++#define MT8188_TOP_AXI_PROT_EN_VPPSYS0_STEP3			BIT(23)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS0_STEP4		(BIT(1) | BIT(4) | BIT(11))
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_VPPSYS0_STEP5	BIT(20)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDOSYS0_STEP1			(GENMASK(18, 17) | GENMASK(21, 20))
++#define MT8188_TOP_AXI_PROT_EN_VDOSYS0_STEP2			BIT(6)
++#define MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_VDOSYS0_STEP3	BIT(21)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDOSYS1_STEP1			GENMASK(31, 30)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDOSYS1_STEP2			BIT(22)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VDOSYS1_STEP3		BIT(10)
++#define MT8188_TOP_AXI_PROT_EN_MM_VPPSYS1_STEP1			GENMASK(6, 5)
++#define MT8188_TOP_AXI_PROT_EN_MM_VPPSYS1_STEP2			BIT(23)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS1_STEP3		BIT(18)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_WPE_STEP1			BIT(23)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_WPE_STEP2			BIT(21)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDEC0_STEP1			BIT(13)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VDEC0_STEP2			BIT(13)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDEC1_STEP1			BIT(14)
++#define MT8188_TOP_AXI_PROT_EN_MM_VDEC1_STEP2			BIT(29)
++#define MT8188_TOP_AXI_PROT_EN_MM_VENC_STEP1			(BIT(9) | BIT(11))
++#define MT8188_TOP_AXI_PROT_EN_MM_VENC_STEP2			BIT(26)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_VENC_STEP3			BIT(2)
++#define MT8188_TOP_AXI_PROT_EN_MM_IMG_VCORE_STEP1		(BIT(1) | BIT(3))
++#define MT8188_TOP_AXI_PROT_EN_MM_IMG_VCORE_STEP2		BIT(25)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_IMG_VCORE_STEP3		BIT(16)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_IMG_MAIN_STEP1		GENMASK(27, 26)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_IMG_MAIN_STEP2		GENMASK(25, 24)
++#define MT8188_TOP_AXI_PROT_EN_MM_CAM_VCORE_STEP1		(BIT(2) | BIT(4))
++#define MT8188_TOP_AXI_PROT_EN_2_CAM_VCORE_STEP2		BIT(0)
++#define MT8188_TOP_AXI_PROT_EN_1_CAM_VCORE_STEP3		BIT(22)
++#define MT8188_TOP_AXI_PROT_EN_MM_CAM_VCORE_STEP4		BIT(24)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_CAM_VCORE_STEP5		BIT(17)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_CAM_MAIN_STEP1		GENMASK(31, 30)
++#define MT8188_TOP_AXI_PROT_EN_2_CAM_MAIN_STEP2			BIT(2)
++#define MT8188_TOP_AXI_PROT_EN_MM_2_CAM_MAIN_STEP3		GENMASK(29, 28)
++#define MT8188_TOP_AXI_PROT_EN_2_CAM_MAIN_STEP4			BIT(1)
 +
-+	return 0;
-+}
-+
-+static int scpsys_bus_protect_disable(const struct mtk_scpsys_bus_prot_data *bpd,
-+				      int bpd_size, void __iomem *reg)
-+{
-+	int i, ret;
-+
-+	for (i = bpd_size - 1; i >= 0; i--) {
-+		ret = _scpsys_bus_protect_disable(&bpd[i], reg);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
- {
- 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
--	u32 sta = readl(scpsys->base + SPM_PWR_STATUS) &
--		data->sta_mask;
--	u32 sta2 = readl(scpsys->base + SPM_PWR_STATUS_2ND) &
--		data->sta_mask;
-+	const struct mtk_scp_domain_data *data = scpsys->domains[power_domain->id].data;
-+	u32 spm_pwr_status = data->pwr_sta_offs ?: SPM_PWR_STATUS;
-+	u32 spm_pwr_status_2nd = data->pwr_sta2nd_offs ?: SPM_PWR_STATUS_2ND;
-+	u32 sta, sta2;
-+
-+	sta = readl(scpsys->base + spm_pwr_status) & data->sta_mask;
-+	sta2 = readl(scpsys->base + spm_pwr_status_2nd) & data->sta_mask;
- 
- 	/*
- 	 * A domain is on when both status bits are set. If only one is set
-@@ -65,12 +132,36 @@ static int mtk_scpsys_domain_is_on(struct power_domain *power_domain)
- static int mtk_scpsys_power_on(struct power_domain *power_domain)
- {
- 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
--	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
--	u32 pdn_ack = data->sram_pdn_ack_bits;
-+	struct mtk_scp_domain *domain;
-+	const struct mtk_scp_domain_data *data;
-+	void __iomem *ctl_addr;
-+	void __iomem *infracfg;
-+	u32 pdn_ack;
- 	u32 val;
- 	int ret, tmp;
- 
-+	if (power_domain->id >= scpsys->soc_data->num_domains)
-+		return -EINVAL;
-+
-+	domain = &scpsys->domains[power_domain->id];
-+	data = domain->data;
-+	if (!data)
-+		return -EINVAL;
-+
-+	ctl_addr = scpsys->base + data->ctl_offs;
-+	infracfg = domain->infracfg ? domain->infracfg : scpsys->infracfg;
-+	pdn_ack = data->sram_pdn_ack_bits;
-+
-+	if (domain->has_pd) {
-+		ret = power_domain_on(&domain->parent_pd);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = clk_enable_bulk(&domain->clks);
-+	if (ret)
-+		return ret;
-+
- 	writel(SPM_EN, scpsys->base);
- 
- 	val = readl(ctl_addr);
-@@ -94,6 +185,10 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
- 	val |= PWR_RST_B_BIT;
- 	writel(val, ctl_addr);
- 
-+	ret = clk_enable_bulk(&domain->subsys_clks);
-+	if (ret)
-+		return ret;
-+
- 	val &= ~data->sram_pdn_bits;
- 	writel(val, ctl_addr);
- 
-@@ -102,11 +197,14 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
- 		return ret;
- 
- 	if (data->bus_prot_mask) {
--		ret = mtk_infracfg_clear_bus_protection(scpsys->infracfg,
-+		ret = mtk_infracfg_clear_bus_protection(infracfg,
- 							data->bus_prot_mask);
- 		if (ret)
- 			return ret;
- 	}
-+	ret = scpsys_bus_protect_disable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
-+	if (ret < 0)
-+		return ret;
- 
- 	return 0;
- }
-@@ -114,19 +212,37 @@ static int mtk_scpsys_power_on(struct power_domain *power_domain)
- static int mtk_scpsys_power_off(struct power_domain *power_domain)
- {
- 	struct mtk_scpsys *scpsys = dev_get_priv(power_domain->dev);
--	const struct mtk_scp_domain_data *data = &scpsys->soc_data->data[power_domain->id];
--	void __iomem *ctl_addr = scpsys->base + data->ctl_offs;
--	u32 pdn_ack = data->sram_pdn_ack_bits;
-+	struct mtk_scp_domain *domain;
-+	const struct mtk_scp_domain_data *data;
-+	void __iomem *ctl_addr;
-+	void __iomem *infracfg;
-+	u32 pdn_ack;
- 	u32 val;
- 	int ret, tmp;
- 
-+	if (power_domain->id >= scpsys->soc_data->num_domains)
-+		return -EINVAL;
-+
-+	domain = &scpsys->domains[power_domain->id];
-+	data = domain->data;
-+	if (!data)
-+		return -EINVAL;
-+
-+	ctl_addr = scpsys->base + data->ctl_offs;
-+	infracfg = domain->infracfg ?: scpsys->infracfg;
-+	pdn_ack = data->sram_pdn_ack_bits;
-+
- 	if (data->bus_prot_mask) {
--		ret = mtk_infracfg_set_bus_protection(scpsys->infracfg,
-+		ret = mtk_infracfg_set_bus_protection(infracfg,
- 						      data->bus_prot_mask);
- 		if (ret)
- 			return ret;
- 	}
- 
-+	ret = scpsys_bus_protect_enable(data->bp_infracfg, SPM_MAX_BUS_PROT_DATA, infracfg);
-+	if (ret < 0)
-+		return ret;
-+
- 	val = readl(ctl_addr);
- 	val |= data->sram_pdn_bits;
- 	writel(val, ctl_addr);
-@@ -136,6 +252,10 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
- 	if (ret < 0)
- 		return ret;
- 
-+	ret = clk_disable_bulk(&domain->subsys_clks);
-+	if (ret)
-+		return ret;
-+
- 	val |= PWR_ISO_BIT;
- 	writel(val, ctl_addr);
- 
-@@ -155,6 +275,10 @@ static int mtk_scpsys_power_off(struct power_domain *power_domain)
- 	if (ret < 0)
- 		return ret;
- 
-+	ret = clk_disable_bulk(&domain->clks);
-+	if (ret)
-+		return ret;
-+
- 	return 0;
- }
- 
-@@ -164,7 +288,7 @@ int mtk_scpsys_probe(struct udevice *dev)
- 	struct mtk_scpsys *scpsys = dev_get_priv(dev);
- 	struct regmap *regmap;
- 	struct clk_bulk bulk;
--	int err;
-+	int err, i;
- 
- 	scpsys->base = dev_read_addr_ptr(dev);
- 	if (!scpsys->base)
-@@ -172,6 +296,14 @@ int mtk_scpsys_probe(struct udevice *dev)
- 
- 	scpsys->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
- 
-+	scpsys->domains = devm_kcalloc(dev, scpsys->soc_data->num_domains,
-+				       sizeof(*scpsys->domains), GFP_KERNEL);
-+	if (!scpsys->domains)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < scpsys->soc_data->num_domains; i++)
-+		scpsys->domains[i].data = &scpsys->soc_data->data[i];
-+
- 	/* get corresponding syscon phandle */
- 	err = dev_read_phandle_with_args(dev, "infracfg", NULL, 0, 0, &args);
- 	if (err)
-@@ -195,6 +327,179 @@ int mtk_scpsys_probe(struct udevice *dev)
- 	return clk_enable_bulk(&bulk);
- }
- 
-+static int mtk_scpsys_add_one_domain(struct udevice *dev, ofnode node, int parent_id)
-+{
-+	struct mtk_scpsys *scpsys = dev_get_priv(dev);
-+	struct ofnode_phandle_args args;
-+	struct mtk_scp_domain *domain;
-+	struct regmap *regmap;
-+	const char *clk_name;
-+	int i, ret, num_clks;
-+	u32 id;
-+
-+	ret = ofnode_read_u32(node, "reg", &id);
-+	if (ret) {
-+		dev_err(dev, "%s: failed to retrieve domain id from reg: %d\n",
-+			ofnode_get_name(node), ret);
-+		return ret;
-+	}
-+
-+	if (id >= scpsys->soc_data->num_domains) {
-+		dev_err(dev, "%s: invalid domain id %d\n", ofnode_get_name(node), id);
-+		return -EINVAL;
-+	}
-+
-+	domain = &scpsys->domains[id];
-+	domain->data = &scpsys->soc_data->data[id];
-+
-+	if (parent_id >= 0) {
-+		domain->has_pd = true;
-+		domain->parent_pd.dev = dev;
-+		domain->parent_pd.id = parent_id;
-+	}
-+
-+	if (ofnode_read_bool(node, "mediatek,infracfg")) {
-+		ret = ofnode_parse_phandle_with_args(node, "mediatek,infracfg", NULL, 0, 0, &args);
-+		if (ret)
-+			return ret;
-+
-+		regmap = syscon_node_to_regmap(args.node);
-+		if (IS_ERR(regmap))
-+			return PTR_ERR(regmap);
-+
-+		domain->infracfg = regmap_get_range(regmap, 0);
-+
-+		/* enable Infra DCM */
-+		if (domain->infracfg)
-+			setbits_le32(domain->infracfg + INFRA_TOPDCM_CTRL,
-+				     DCM_TOP_EN);
-+	}
-+
-+	num_clks = ofnode_read_string_count(node, "clock-names");
-+	for (i = 0; i < num_clks; i++) {
-+		ret = ofnode_read_string_index(node, "clock-names", i, &clk_name);
-+		if (ret) {
-+			dev_err(dev, "%s: failed to retrieve clock-names at index %i: %d\n",
-+				ofnode_get_name(node), i, ret);
-+			return ret;
-+		}
-+
-+		if (strchr(clk_name, '-'))
-+			domain->subsys_clks.count++;
-+		else
-+			domain->clks.count++;
-+	}
-+
-+	if (domain->clks.count) {
-+		domain->clks.clks = devm_kcalloc(dev, domain->clks.count,
-+						 sizeof(struct clk), GFP_KERNEL);
-+		if (!domain->clks.clks)
-+			return -ENOMEM;
-+	}
-+
-+	if (domain->subsys_clks.count) {
-+		domain->subsys_clks.clks = devm_kcalloc(dev,
-+							domain->subsys_clks.count,
-+							sizeof(struct clk), GFP_KERNEL);
-+		if (!domain->subsys_clks.clks)
-+			return -ENOMEM;
-+	}
-+
-+	for (i = 0; i < domain->clks.count; i++) {
-+		ret = clk_get_by_index_nodev(node, i, &domain->clks.clks[i]);
-+		if (ret < 0) {
-+			dev_err(dev, "%s: failed to get clk at index %d: %d\n",
-+				ofnode_get_name(node), i, ret);
-+			goto err_put_clocks;
-+		}
-+	}
-+
-+	for (i = 0; i < domain->subsys_clks.count; i++) {
-+		ret = clk_get_by_index_nodev(node, i + domain->clks.count,
-+					     &domain->subsys_clks.clks[i]);
-+		if (ret < 0) {
-+			dev_err(dev, "%s: failed to get subsys clk at index %d: %d\n",
-+				ofnode_get_name(node), i + domain->clks.count, ret);
-+			goto err_put_subsys_clocks;
-+		}
-+	}
-+
-+	return 0;
-+
-+err_put_subsys_clocks:
-+	clk_release_all(domain->subsys_clks.clks, domain->subsys_clks.count);
-+	domain->subsys_clks.count = 0;
-+err_put_clocks:
-+	clk_release_all(domain->clks.clks, domain->clks.count);
-+	domain->clks.count = 0;
-+	domain->data = NULL;
-+	return ret;
-+}
-+
-+static int mtk_scpsys_add_subdomain(struct udevice *dev, ofnode node)
-+{
-+	ofnode subnode;
-+	int ret;
-+	u32 id;
-+
-+	ret = ofnode_read_u32(node, "reg", &id);
-+	if (ret) {
-+		dev_err(dev, "%s: failed to get domain id\n", ofnode_get_name(node));
-+		return ret;
-+	}
-+
-+	ofnode_for_each_subnode(subnode, node) {
-+		ret = mtk_scpsys_add_one_domain(dev, subnode, id);
-+		if (ret) {
-+			dev_err(dev, "failed to add child domain: %s\n",
-+				ofnode_get_name(subnode));
-+			continue;
-+		}
-+
-+		ret = mtk_scpsys_add_subdomain(dev, subnode);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+int mtk_power_controller_probe(struct udevice *dev)
-+{
-+	struct mtk_scpsys *scpsys = dev_get_priv(dev);
-+	ofnode subnode;
-+	int ret;
-+
-+	scpsys->base = dev_read_addr_ptr(dev_get_parent(dev));
-+	if (!scpsys->base)
-+		return -ENOENT;
-+
-+	scpsys->soc_data = (const struct mtk_scp_soc_data *)dev_get_driver_data(dev);
-+
-+	scpsys->domains = devm_kcalloc(dev, scpsys->soc_data->num_domains,
-+				       sizeof(*scpsys->domains), GFP_KERNEL);
-+	if (!scpsys->domains)
-+		return -ENOMEM;
-+
-+	dev_for_each_subnode(subnode, dev) {
-+		ret = mtk_scpsys_add_one_domain(dev, subnode, -1);
-+		if (ret) {
-+			dev_err(dev, "failed to add child domain: %s\n",
-+				ofnode_get_name(subnode));
-+			continue;
-+		}
-+
-+		ret = mtk_scpsys_add_subdomain(dev, subnode);
-+		if (ret) {
-+			dev_err(dev, "failed to add sub domain: %s\n",
-+				ofnode_get_name(subnode));
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- const struct power_domain_ops mtk_power_domain_ops = {
- 	.off = mtk_scpsys_power_off,
- 	.on = mtk_scpsys_power_on,
-diff --git a/drivers/power/domain/mtk-power-domain.h b/drivers/power/domain/mtk-power-domain.h
-index 689ec4d1657..5bf0ca850ec 100644
---- a/drivers/power/domain/mtk-power-domain.h
-+++ b/drivers/power/domain/mtk-power-domain.h
-@@ -9,6 +9,7 @@
- #ifndef __MTK_POWER_DOMAIN_H
- #define __MTK_POWER_DOMAIN_H
- 
-+#include <clk.h>
- #include <power-domain-uclass.h>
- #include <linux/bitops.h>
- #include <linux/compiler.h>
-@@ -59,14 +60,28 @@ struct udevice;
- 
- #define DCM_TOP_EN		BIT(0)
- 
-+#define SPM_MAX_BUS_PROT_DATA	6
-+
- struct mtk_scp_domain;
- 
-+struct mtk_scpsys_bus_prot_data {
-+	u32 bus_prot_mask;
-+	u32 bus_prot_set;
-+	u32 bus_prot_clr;
-+	u32 bus_prot_sta;
-+	bool bus_prot_reg_update;
-+	bool ignore_clr_ack;
++static const struct mtk_scp_domain_data mt8188_scp_domain[] = {
++	[MT8188_POWER_DOMAIN_MFG0] = {
++		.sta_mask = BIT(1),
++		.ctl_offs = 0x300,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_MFG1] = {
++		.sta_mask = BIT(2),
++		.ctl_offs = 0x304,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MFG1_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_MFG1_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_1_MFG1_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_1_SET,
++				    MT8188_TOP_AXI_PROT_EN_1_CLR,
++				    MT8188_TOP_AXI_PROT_EN_1_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_MFG1_STEP4,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MFG1_STEP5,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_MFG1_STEP6,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_MFG2] = {
++		.sta_mask = BIT(3),
++		.ctl_offs = 0x308,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_MFG3] = {
++		.sta_mask = BIT(4),
++		.ctl_offs = 0x30C,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_MFG4] = {
++		.sta_mask = BIT(5),
++		.ctl_offs = 0x310,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_PEXTP_MAC_P0] = {
++		.sta_mask = BIT(10),
++		.ctl_offs = 0x324,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_PEXTP_MAC_P0_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_PEXTP_MAC_P0_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_PEXTP_PHY_TOP] = {
++		.sta_mask = BIT(12),
++		.ctl_offs = 0x328,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++	},
++	[MT8188_POWER_DOMAIN_CSIRX_TOP] = {
++		.sta_mask = BIT(17),
++		.ctl_offs = 0x3C4,
++		.pwr_sta_offs = 0x174,
++		.pwr_sta2nd_offs = 0x178,
++	},
++	[MT8188_POWER_DOMAIN_ETHER] = {
++		.sta_mask = BIT(1),
++		.ctl_offs = 0x338,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_ETHER_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_HDMI_TX] = {
++		.sta_mask = BIT(18),
++		.ctl_offs = 0x37C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_HDMI_TX_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_ADSP_AO] = {
++		.sta_mask = BIT(10),
++		.ctl_offs = 0x35C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_AO_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_AO_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_ADSP_INFRA] = {
++		.sta_mask = BIT(9),
++		.ctl_offs = 0x358,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_INFRA_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_INFRA_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_ADSP] = {
++		.sta_mask = BIT(8),
++		.ctl_offs = 0x354,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_ADSP_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_AUDIO] = {
++		.sta_mask = BIT(6),
++		.ctl_offs = 0x34C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_AUDIO_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_AUDIO_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_AUDIO_ASRC] = {
++		.sta_mask = BIT(7),
++		.ctl_offs = 0x350,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_AUDIO_ASRC_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_AUDIO_ASRC_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VPPSYS0] = {
++		.sta_mask = BIT(11),
++		.ctl_offs = 0x360,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_VPPSYS0_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS0_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_VPPSYS0_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS0_STEP4,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_VPPSYS0_STEP5,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VDOSYS0] = {
++		.sta_mask = BIT(13),
++		.ctl_offs = 0x368,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDOSYS0_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_VDOSYS0_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_SET,
++				    MT8188_TOP_AXI_PROT_EN_CLR,
++				    MT8188_TOP_AXI_PROT_EN_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_VDOSYS0_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_SUB_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VDOSYS1] = {
++		.sta_mask = BIT(14),
++		.ctl_offs = 0x36C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDOSYS1_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDOSYS1_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VDOSYS1_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_DP_TX] = {
++		.sta_mask = BIT(16),
++		.ctl_offs = 0x374,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_DP_TX_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_EDP_TX] = {
++		.sta_mask = BIT(17),
++		.ctl_offs = 0x378,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_EDP_TX_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_SET,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_CLR,
++				    MT8188_TOP_AXI_PROT_EN_INFRA_VDNR_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VPPSYS1] = {
++		.sta_mask = BIT(12),
++		.ctl_offs = 0x364,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VPPSYS1_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VPPSYS1_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VPPSYS1_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_WPE] = {
++		.sta_mask = BIT(15),
++		.ctl_offs = 0x370,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_WPE_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_WPE_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VDEC0] = {
++		.sta_mask = BIT(19),
++		.ctl_offs = 0x380,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDEC0_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VDEC0_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VDEC1] = {
++		.sta_mask = BIT(20),
++		.ctl_offs = 0x384,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDEC1_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VDEC1_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_VENC] = {
++		.sta_mask = BIT(22),
++		.ctl_offs = 0x38C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VENC_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_VENC_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_VENC_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_IMG_VCORE] = {
++		.sta_mask = BIT(28),
++		.ctl_offs = 0x3A4,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_IMG_VCORE_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_IMG_VCORE_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_IMG_VCORE_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_IMG_MAIN] = {
++		.sta_mask = BIT(29),
++		.ctl_offs = 0x3A8,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_IMG_MAIN_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_IMG_MAIN_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_DIP] = {
++		.sta_mask = BIT(30),
++		.ctl_offs = 0x3AC,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_IPE] = {
++		.sta_mask = BIT(31),
++		.ctl_offs = 0x3B0,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_CAM_VCORE] = {
++		.sta_mask = BIT(27),
++		.ctl_offs = 0x3A0,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_CAM_VCORE_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_CAM_VCORE_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_1_CAM_VCORE_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_1_SET,
++				    MT8188_TOP_AXI_PROT_EN_1_CLR,
++				    MT8188_TOP_AXI_PROT_EN_1_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_CAM_VCORE_STEP4,
++				    MT8188_TOP_AXI_PROT_EN_MM_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_CAM_VCORE_STEP5,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_CAM_MAIN] = {
++		.sta_mask = BIT(24),
++		.ctl_offs = 0x394,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++		.bp_infracfg = {
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_CAM_MAIN_STEP1,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_CAM_MAIN_STEP2,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_MM_2_CAM_MAIN_STEP3,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_MM_2_STA),
++			BUS_PROT_WR(MT8188_TOP_AXI_PROT_EN_2_CAM_MAIN_STEP4,
++				    MT8188_TOP_AXI_PROT_EN_2_SET,
++				    MT8188_TOP_AXI_PROT_EN_2_CLR,
++				    MT8188_TOP_AXI_PROT_EN_2_STA),
++		},
++	},
++	[MT8188_POWER_DOMAIN_CAM_SUBA] = {
++		.sta_mask = BIT(25),
++		.ctl_offs = 0x398,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
++	[MT8188_POWER_DOMAIN_CAM_SUBB] = {
++		.sta_mask = BIT(26),
++		.ctl_offs = 0x39C,
++		.pwr_sta_offs = 0x16C,
++		.pwr_sta2nd_offs = 0x170,
++		.sram_pdn_bits = BIT(8),
++		.sram_pdn_ack_bits = BIT(12),
++	},
 +};
 +
- struct mtk_scp_domain_data {
- 	u32 sta_mask;
- 	int ctl_offs;
- 	u32 sram_pdn_bits;
- 	u32 sram_pdn_ack_bits;
- 	u32 bus_prot_mask;
-+	const struct mtk_scpsys_bus_prot_data bp_infracfg[SPM_MAX_BUS_PROT_DATA];
-+	int pwr_sta_offs;
-+	int pwr_sta2nd_offs;
- };
- 
- struct mtk_scp_soc_data {
-@@ -80,13 +95,36 @@ static const struct mtk_scp_soc_data _name##_scp_soc_data = {	\
- 	.num_domains = ARRAY_SIZE(_domains),			\
- }
- 
-+struct mtk_scp_domain {
-+	const struct mtk_scp_domain_data *data;
-+	void __iomem *infracfg;
-+	struct clk_bulk clks;
-+	struct clk_bulk subsys_clks;
-+	bool has_pd;
-+	struct power_domain parent_pd;
++MTK_SCP_SOC_DATA(mt8188, mt8188_scp_domain);
++
++static const struct udevice_id mt8188_power_domain_ids[] = {
++	{
++		.compatible = "mediatek,mt8188-power-controller",
++		.data = (ulong)&mt8188_scp_soc_data,
++	},
++	{ /* sentinel */ }
 +};
 +
- struct mtk_scpsys {
- 	void __iomem *base;
- 	void __iomem *infracfg;
- 	const struct mtk_scp_soc_data *soc_data;
-+	struct mtk_scp_domain *domains;
- };
- 
-+#define _BUS_PROT(_mask, _set, _clr, _sta, _update, _ignore) {	\
-+	.bus_prot_mask = (_mask),				\
-+	.bus_prot_set = (_set),					\
-+	.bus_prot_clr = (_clr),					\
-+	.bus_prot_sta = (_sta),					\
-+	.bus_prot_reg_update = (_update),			\
-+	.ignore_clr_ack = (_ignore),				\
-+}
-+
-+#define BUS_PROT_WR(_mask, _set, _clr, _sta)			\
-+	_BUS_PROT(_mask, _set, _clr, _sta, false, false)
-+
- int mtk_scpsys_probe(struct udevice *dev);
-+int mtk_power_controller_probe(struct udevice *dev);
- 
- extern const struct power_domain_ops mtk_power_domain_ops;
- 
++U_BOOT_DRIVER(mt8188_power_domain) = {
++	.name = "mt8188_power_domain",
++	.id = UCLASS_POWER_DOMAIN,
++	.ops = &mtk_power_domain_ops,
++	.probe = mtk_power_controller_probe,
++	.of_match = mt8188_power_domain_ids,
++	.priv_auto = sizeof(struct mtk_scpsys),
++};
 
 -- 
 2.54.0
