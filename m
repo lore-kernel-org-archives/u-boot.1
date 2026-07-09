@@ -4,101 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D31FC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 19:16:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665EBC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 20:18:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0708884C2B;
-	Thu,  9 Jul 2026 21:16:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 776E584BF6;
+	Thu,  9 Jul 2026 22:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CQgqEOQT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tqdt09ap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 319E084C2A; Thu,  9 Jul 2026 21:16:07 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 6707084BFC; Thu,  9 Jul 2026 22:18:31 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC64E84C02
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 21:16:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F15B984BF4
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 22:18:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-698b6c87884so247799a12.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 12:16:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783624564; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-69a5ecbbfb2so337317a12.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 13:18:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783628308; cv=none;
  d=google.com; s=arc-20260327;
- b=rLsK5lLCKmNrnb1Ri0taNz/c4CGckpOlNMb/cbcls6phs+8Mp7ZiQIfeH+lQVToZkn
- mL0GQjn0n/bc5nfxw80f9CDdTzrfzBKmWMdGsOeY8yl4Nf5pCtOjdXp577tpj9aqdoWU
- zvgqz1mLQSj4V2GX8ag3GhXFCZa2f07P248yVD7+PblAs+eGTViJqqQRz8wEsIWH1dED
- ggTMOnw9114KXzuIpi6vyN1K4MKP41VgpnQjh80Bn6KLz6JvB4WzUni0O8htXOZQ8GIX
- Pfq/jC6sE5DlFf0y7Y7oONZnrB1S7S1SWuatv9a+zI9ZHW6MNFV9htXbi8H3tECHT5kW
- EgJw==
+ b=PthohS+ei40waGbpeyPpjKmCudoTNrWZly4R45URuK3RqKZJFqx4Es745zaQ9teNYI
+ caKLgi1jvqddwwBbAcoJ9q1yPKPb7B9vZtm8F8XOcROGGVY3hrmv/57pF6RlXvnEtqnq
+ /Gxs8F/n3cHI4raks5n8eWLMtbBb8sIO71HJaUv7gfJRboMyRK+6fyMsPi6jkBoi6V5y
+ MnYMdrhvJGDULPC1ZsXWe5/ok4xOmmCKwIGryYAVaCCzkwSEY9L8SlG3pbaYrOenS6wL
+ o5DmvlrGrlcVnHZH7r30BcIfA+9qCQQgK+T5xTKlaRdsaFrO/l6RiLvMl1tGwRhEM94w
+ 0upQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=qKnWTTNb1+tN2bYt0/6nCZ4XCHOO7lWfOV0xcqKPgHE=;
- fh=6hUQ+cBDEhdswFVdh7jsmENQZaH9K2EJzvSA9UTasck=;
- b=qcuaAWZvIU22tzNEI32kfccJOfs3DtnWya8LtiN2RDRzTMvjSEhWHyek8Omb0mr/v2
- HAJfbxe9HtO6rZtZwrEWsHlKMdpWBDMZjM5E84syUNoi8usuy67WZR0l3AwavqvoH90J
- /RvQBKPyCju1GCsdrXjWxtUm7re6Y90OtH5es1Oc3mvNRGRfakZsBE1VjDk+8dxuHeqI
- igTNba4LB8AagH44SmdFCvZgcSEZmMQoY8xaraX8DH9yQFE4aCI9HJQIWfCL0rD0wwve
- VqowAATJLwahqyXREpknO+s5pZs5zpPlKoQ+qrlZq+BaIdwDUlvxH3XA0mLujWiWySQH
- /1uQ==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=PKZxNaM24vFnYl6SUAkXvR/W6GLK+9rG+JqibTS130k=;
+ fh=Pxq0yxYGRjphnM+U5aBE5iEiDvtwTenPIVGTvPAHeLA=;
+ b=e2E+BgTYxA16q+Wer4ux/oLkR2lKKdJ8t7u4afSogG79PfOU0ZnBUmHaYLL6xN9n7k
+ +QHAVqwEJACm6KukPOFvJgiBUZHCP0pSu3LiGicGUYnUmsPr5HXTcUzza9dZhF6WTdMd
+ B/pnhI+XaYwkvr9LKaVAKTm5l4R+/IRjrHD6mRtGItuVPamzxf3n2uPrrH7Jhw606c8/
+ RaXgm+DhdlhymkGshchQfVQOMtcaRkZ9dvlpZXIbmnakpgPheVgctnmjUWklqatcu6y+
+ RDDwWp9gQVwQBgTBgvK/PFN0Ss2EoXPJ31KtHUiZUn0MVYcK4tft/eAzEXrzOVmd2yn6
+ jycw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783624564; x=1784229364; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=qKnWTTNb1+tN2bYt0/6nCZ4XCHOO7lWfOV0xcqKPgHE=;
- b=CQgqEOQT4UpEx8FYGpahmvNmIlJDnpXMD7gIzh9mXPFlBEM533FmfuHJgr5cH5sp3H
- mYEHh4na2ZEjveJ7cMNxAUK72yaefX6lVSySX8ECsRi24arxq0zlHZyIl9dMY0RCSSNw
- uztdgYowrLIUTYPc58R0KHvUN4Epq+GYefLeo=
+ d=chromium.org; s=google; t=1783628308; x=1784233108; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=PKZxNaM24vFnYl6SUAkXvR/W6GLK+9rG+JqibTS130k=;
+ b=Tqdt09ap5LYVaBSgHtcNnmOpa0qHurmWimOgJWucLYmb9HdANRk2KcbC3kY8YLRWlc
+ +rYEqYuFEhbDJChpAN9IzivCy+wwyzKzYFkrbzJ0JlWdYi3vhJtUzutFo+PVCKMzILPB
+ TUOQota293tTQHgDu0enavOj25GHAXMcPafjs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783624564; x=1784229364;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qKnWTTNb1+tN2bYt0/6nCZ4XCHOO7lWfOV0xcqKPgHE=;
- b=q2Fv3PoIXVFSe1UfSUFYsXVGfSBAYTLfXlaBz+xDEVr1aoU+eZCVWHm+CmQ1s8S9X4
- 8TIAlpJHiphdCbu0AJo9nolDps62YQzv5G9+SnFlbotHSmt0lqshi6EvzfTZV816WyAi
- vWqEbPlLWJUJJKHU9Skzi3qkQU7bTptmdap6M/tRk7oOmH/D65gpG+Ilug+9mPiJSDrk
- WFuhxlw62zDexxKGakkP248OBhiBSLwW23X3KQl2fEHyFosoCo613nlpfZhEHmeFLGLR
- 5YCMwiZ2ZDdwHkEdQgR7NjAU73ir9ZjlcdpxMvmPHlO5+FGradZeqK130hwEcGg4Y27N
- 2FSg==
-X-Gm-Message-State: AOJu0YxjkNhvG45ymmbOGqV8wtK9SpwoUyUxV/tyhmKW0zroYg+sC9YH
- RH26gYFpbGp01WB+uE4eMFHbvznq6Dh2vSKstn2znrLVQ1aNncLbVqnTfsX9a16WGUc47BTVR9p
- TWBYIIyX1e9eHhlcZolIBBQuwQq7lNeN7mLWSglYo
-X-Gm-Gg: AfdE7cldBStxQTkaZ9ehRFktpG4XFCeG9J86+mLrYLlQZcKH37W50xxSr3AqZofCU5d
- 2qusYFWOjIJtK1uMpF5znqjXM/nk9v14LPoug7so1sSJpWPUx5d7NZqx1lgulUvEhVL6RQWYXw9
- azsEofmGCYHz5/t4ecEOQ9ODOQe8oDKvup8+S1KmN5gGC0/wWuSvplEB002vf475DI+p0wSvSG9
- 2PLKLyj2x0HAFYMFhT9j2tQyiHvkivJMTVNM4R1JPyW7amv9008n22Rhzykw/A+L2upTwstAJDK
- t8lC9g==
-X-Received: by 2002:a17:907:9495:b0:c12:8cd5:de26 with SMTP id
- a640c23a62f3a-c15cded025emr380042366b.6.1783624564209; Thu, 09 Jul 2026
- 12:16:04 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783628308; x=1784233108;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=PKZxNaM24vFnYl6SUAkXvR/W6GLK+9rG+JqibTS130k=;
+ b=Uq9IhY5TDJjcX4211U/toFClt2A0GFC1xOl6wETtRkC6j8fQKnTVj0dlnrQd9XG8lJ
+ K2YEYgErTsEXppRC7Wd2h+8zutVsV6g2SVLsEqARTY+6dfzyOolLXBDuLibb6BuWF9xp
+ VxHM4qBK157BuemYlhieGtNfXwQUj2flhgkwy5qFKB/Wz5yTX2O/RRVZryT21b12njwy
+ hrXP+wVgWMGKpS8M84jbZibuyGGRs86OSW0s4jne7OA3tu5qJkzt7pbCynrb2B+QiK8K
+ 0vCkwAQ7PNuL/hISXxNanI6ny2XlH0ccCyQpWw+cySFu/4ZYloUW8JXqVgGK4PCMG8lt
+ gEsg==
+X-Gm-Message-State: AOJu0Yxk1zAg6MGloCbooB2r0E31/AXLZTBktA7yEVBktgv+iA2WCPAT
+ 0Xnmt0gyi+evNlt1Vvi2rkrfIqsiH2zt+/oFUmiV/ILIbMnOLbOGQOMfg0SpBuVqmL+3J4Ftvr+
+ hSMS4HcPArSzCFXf6/XZnVTiMzZIGtczC1J6CQnVW
+X-Gm-Gg: AfdE7clAEySnZRWPGq7YdI5ReRPMoUl/UC1idqA3C67Jd9EfxnXNFIYYfxZ5Fy2FOC8
+ 0greA4cPDySewcRalIe5fu6lhxdn9yw/L4e47RN92Tfk7TVf+KEHvzC0TdAYfIgMpODAE3NxFGd
+ wH9F8CRT8HSzduNl8Sq6Gc+w/tHi6QHh6s2OpOjzSPYuh4e10crPNMbAIrfc2YtZacj35iy8ssw
+ +G4hkDnWEyoXaiG7qU4rpGWJsVlvzHydBRK47OuYuXk6ZEKi+60kn4JHul9pMToq1m4naM=
+X-Received: by 2002:a05:6402:1f89:b0:69a:9355:ec35 with SMTP id
+ 4fb4d7f45d1cf-69ab44b5e42mr3879480a12.41.1783628308384; Thu, 09 Jul 2026
+ 13:18:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
- <CAFLszTgP05iS-4dyaLbzmPGppdMmFxUQvh=JJJGnSjKJ0MnL7Q@mail.gmail.com>
- <CADh8LscDis-pfMK26usYEfS-cfRRSwvcm5hg_akXr287oDXQ=A@mail.gmail.com>
-In-Reply-To: <CADh8LscDis-pfMK26usYEfS-cfRRSwvcm5hg_akXr287oDXQ=A@mail.gmail.com>
+References: <20260706-ccaione-upstream-ebbr-v1-0-e742cdd6abe5@baylibre.com>
+ <20260706-ccaione-upstream-ebbr-v1-1-e742cdd6abe5@baylibre.com>
+In-Reply-To: <20260706-ccaione-upstream-ebbr-v1-1-e742cdd6abe5@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jul 2026 13:15:52 -0600
-X-Gm-Features: AUfX_mwq5APFLUy8xCSjjW9imr5WfrgdHHmv4n_-b9sCmluk6AvcJXbzqFvFtck
-Message-ID: <CAFLszTgqQtt-FMx7Rh3vVE_NLL8cKp5vveqmi4iNOKE2GwJt=Q@mail.gmail.com>
-Subject: Re: [RFC] bootstd: firmware-owned OS devicetree for EBBR /
- SystemReady IR
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com, 
- baylibre-upstreaming@groups.io
+Date: Thu, 9 Jul 2026 14:18:16 -0600
+X-Gm-Features: AUfX_mx7TdfpMG07p1ZhklOxLiljKsjbR-BHmH0LYfpgdd4KA5hnAVgWE87fG0o
+Message-ID: <CAFLszTjfHDNmydFwhM85OUtvrK0AVLreTYidfqNu+CaUNDQTrQ@mail.gmail.com>
+Subject: Re: [PATCH 1/4] bootstd: add a firmware-owned devicetree source
+To: ccaione@baylibre.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, Anshul Dalal <anshuld@ti.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <floss@jetm.me>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Heiko Schocher <hs@nabladev.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Martin Schwan <m.schwan@phytec.de>, Michal Simek <michal.simek@amd.com>, 
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,134 +128,135 @@ X-Virus-Status: Clean
 
 Hi Carlo,
 
-On Thu, 2 Jul 2026 at 08:27, Carlo Caione <ccaione@baylibre.com> wrote:
+On 2026-07-06T15:06:41, Carlo Caione <ccaione@baylibre.com> wrote:
+> bootstd: add a firmware-owned devicetree source
 >
-> On Thu, Jul 2, 2026 at 3:09=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
+> Platforms following EBBR / Arm SystemReady IR keep the devicetree on
+> a firmware-owned partition, updated independently of the operating
+> system, rather than shipping it in the OS image or on the EFI System
+> Partition. U-Boot has no generic way to source the devicetree from such
+> a partition, so vendors carry out-of-tree machinery for it.
 >
-> > For Mediatek specifically, I am hoping to eventually upstream support
-> > for a load-only FIT (the spec supports it) so that you can load the DT
-> > from a firmware partition, then still boot the OS (without a DT). This
-> > works with FIT, but would need adjustment if the OS is actually an EFI
-> > app.
-> >
-> > I wrote a post about this challenge:
-> >
-> > https://www-concept.deinde.dev/blog/devicetree-in-firmware-or-packaged-=
-with-the-os/
+> Add a bootstd helper, firmware_fdt_load(), that assembles the OS
+> devicetree from a FIT manifest carried on that partition: the FIT images
+> hold the base DTB and its overlays, and each FIT configuration names one
+> bootable combination through its 'fdt' property.
 >
-> Well, this is convenient because your suggestion converges nicely with
-> where this work has gone since I posted the RFC (I was ready to send
-> out a V2 soon-ish).
+> The partition is described in the control devicetree: the bootstd node
+> carries a 'firmware-fdt-source' phandle to a source node, a child of
+> the media device owning the partition, which identifies it by GPT type
+> UUID and/or name. The 'boot_dtb' environment variable may pin an A/B
+> partition number.
 >
-> v2 of this design replaces the environment-described file set with a
-> FIT manifest carried on the firmware partition itself: the FIT images
-> hold the base DTB and the overlays, and each FIT configuration names
-> one bootable combination through the standard 'fdt' property.
+> The error semantics are fail closed: -ENOENT strictly means "no source
+> [...]
 >
-> Not exactly sure what you mean with =E2=80=9Cload-only=E2=80=9D but there=
- no kernel in
-> it, the assembled devicetree is handed to the EFI app via the
-> configuration table.
->
-> v2 is implemented and validated on (my) hardware; I will post the
-> updated RFC shortly. Some of your comments below are already addressed
-> by it, noted inline.
->
-> > > The *location* is described in the control devicetree. The bootstd no=
-de carries
-> > > a `firmware-fdt-source` phandle to a node that is a child of the medi=
-a device
-> > > that owns the partition, and identifies the partition by GPT type UUI=
-D and/or
-> > > name:
-> > >
-> > >         bootstd {
-> > >                 compatible =3D "u-boot,boot-std";
-> > >                 firmware-fdt-source =3D <&fw_fdt>;
-> > >         };
-> > >
-> > >         &mmc0 {
-> > >                 fw_fdt: firmware-fdt {
-> > >                         compatible =3D "u-boot,firmware-fdt-block";
-> >
-> > Does the -block suffix indicate that it is a block device, rather than
-> > a filesystem? How does this cope with the fast where multiple DTs are
-> > provided for different models?
->
-> The suffix names the backend: this one is a block device with a GPT
-> partition holding a filesystem. It leaves room for sibling backends
-> later, e.g. an UBI/MTD variant for NOR-based boards, which some
-> MediaTek platforms would need. I will spell that out in the binding
-> text.
->
-> Multiple models are the manifest's job in v2: one FIT configuration
-> per model/SKU, so the per-model knowledge lives with the devicetrees
-> it describes and is updated atomically with them.
->
-> > >                         partition-type-uuid =3D "....";   /* GPT type=
- UUID */
-> > >                         partition-name =3D "firmware";    /* optional=
- */
-> > >                         extra-size =3D <0x3000>;          /* overlay =
-headroom */
-> >
-> > This seems like a parameter which would be better handled by U-Boot its=
-elf?
->
-> Yup, and it is gone in v2.
->
-> > >   - the control DT describes the source and the partition policy;
-> > >   - the board default environment carries factory defaults for the st=
-atic values
-> > >     (`fdtfile` and `dtb_path` for the base DTB, and the `fdt_addr_r` =
-/
-> > >     `fdtoverlay_addr_r` working addresses), so a from-source build bo=
-ots and
-> > >     `env default` restores a loadable configuration;
-> >
-> > I wish we could move away from filenames and use compatible strings
-> > instead, as FIT does - this is how the FDT spec is written.
->
-> v2 does this. 'fdtfile' and 'dtb_path' are gone leveraging
-> FIT_BEST_MATCH. The only filename left is the manifest container
-> itself (fdt.itb by default), which is a fixed convention (we can
-> change it of course, I don't have a strong imagination).
->
-> > > each installing the result through `efi_install_fdt()`. That is the c=
-onvergence
-> > > point all EFI launches pass through, so the firmware devicetree is in=
-stalled
-> > > regardless of how the EFI application was started, including the boot=
--manager
-> > > autoboot path that SystemReady IR uses.
-> >
-> > What if you run GRUB?
->
-> Not sure I 100% got this objection but it is not very special I guess,
-> the firmware devicetree is installed into the EFI configuration table
-> before the EFI app starts, GRUB does not touch it, and the kernel's
-> EFI stub picks it up
-> from the table (as long as GRUB does not install a different DTB at that =
-point).
+> MAINTAINERS                               |   3 +
+>  boot/Kconfig                              |  23 ++
+>  boot/Makefile                             |   1 +
+>  boot/firmware_fdt.c                       | 382 ++++++++++++++++++++++++++++++
+>  doc/develop/bootstd/firmware_fdt.rst      |  94 ++++++++
+>  doc/develop/bootstd/index.rst             |   1 +
+>  doc/device-tree-bindings/firmware-fdt.txt | 149 ++++++++++++
+>  include/firmware_fdt.h                    |  78 ++++++
+>  8 files changed, 731 insertions(+)
 
-Just on this point, the question is really whether GRUB does not touch
-it. My understand is that it actually loads the FDT from a file (Ilias
-is the expert here) and that is why we have an EFI fix-up protocol to
-send that loaded FDT back to U-Boot to be fixed up before booting.
+(See naming comment on the cover letter)
 
->
-> > >   5. Should the signed-FIT verification be part of this series or a f=
-ollow-up?
-> >
-> > You likely get this for free, so I suggest including it.
->
-> Indeed, since now the manifest is a FIT.
->
-> I will post the v2 RFC as a follow-up to this thread.
->
-> thanks for the review,
->
+diff --git a/boot/firmware_fdt.c b/boot/firmware_fdt.c
+new file mode 100644
+index 00000000000..952299f1e1b
+--- /dev/null
++++ b/boot/firmware_fdt.c
+@@ -0,0 +1,382 @@
+
+> diff --git a/boot/firmware_fdt.c b/boot/firmware_fdt.c
+> @@ -0,0 +1,382 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Firmware-owned devicetree (FDT) source.
++ *
++ * Some platforms (EBBR / Arm SystemReady IR) keep the devicetree on a
++ * firmware-owned partition rather than in the OS image or the EFI System
++ * Partition. The devicetree is carried by a FIT manifest on that partition:
++ * the FIT images hold the base DTB and its overlays, and each FIT
++ * configuration names one bootable combination through its 'fdt' property.
++ *
+
+By FIT manifest I think you mean a FIT?
+
+> +static int fw_fdt_get_source(ofnode *srcp)
+> +{
+> +     ofnode bootstd, src;
+> +     const void *prop;
+> +
+> +     bootstd = ofnode_by_compatible(ofnode_null(), 'u-boot,boot-std');
+> +     if (!ofnode_valid(bootstd))
+> +             return -ENOENT;
+
+Please look the node up via the bootstd device rather than the raw
+compatible string - every other bootstd consumer uses
+uclass_first_device_err(UCLASS_BOOTSTD, &dev) and dev_ofnode(dev),
+which also ensures the device is probed. Open-coding the compatible
+walk bypasses the uclass and duplicates knowledge that lives in
+bootstd-uclass.c
+
+> diff --git a/boot/firmware_fdt.c b/boot/firmware_fdt.c
+> @@ -0,0 +1,382 @@
+> +void firmware_fdt_free(struct firmware_fdt *fw)
+> +{
+> +     u8 *fit = fw->fit;
+> +
+> +     /*
+> +      * The assembled devicetree either points into the manifest buffer or
+> +      * is a separate allocation (made when applying overlays, or when
+> +      * aligning the devicetree); free it only in the latter case.
+> +      */
+> +     if (fw->fdt &&
+> +         ((u8 *)fw->fdt < fit || (u8 *)fw->fdt >= fit + fw->fit_size))
+> +             free(fw->fdt);
+
+Comparing pointers from two different allocations is undefined in
+strict C, and the "is fdt inside fit?" heuristic depends on assembly
+internals that could change. Please track ownership explicitly, e.g.
+a bool fdt_owned set at assemble time, and free based on that.
+I am nervous about mentioning it, but an abuf could help here, since
+it handles things which are allocated or not.
+
+> diff --git a/boot/firmware_fdt.c b/boot/firmware_fdt.c
+> @@ -0,0 +1,382 @@
+> +     fname = ofnode_read_string(src, 'filename');
+> +     if (!fname)
+> +             fname = FW_FDT_FILENAME;
+> ...
+> +     out->fdt = fdt;
+> +     out->size = len;
+> +     out->name = fname;
+
+out->name either points into the live devicetree or at a static
+string; the caller (bootmeth_efi in patch 2) strdup()s it, but
+nothing in the API contract says the caller must copy before the
+tree is modified. Please strdup() here, or spell out the lifetime
+rule in the header.
+
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> @@ -671,6 +671,29 @@ config BOOTMETH_EFILOADER
+> +config BOOTSTD_FIRMWARE_FDT
+> +     bool "Source the devicetree from a firmware-owned partition"
+> +     depends on BOOTSTD && BLK && FIT
+> +     select EFI_PARTITION
+> +     select PARTITION_TYPE_GUID
+> +     select OF_LIBFDT
+> +     select OF_LIBFDT_OVERLAY
+
+The cover letter advertises best-match against the control DT
+(CONFIG_FIT_BEST_MATCH), but nothing here selects or depends on
+FIT_BEST_MATCH - with the default config selection silently falls
+through to the manifest default. Either select FIT_BEST_MATCH or
+note in the help text and doc that best-match applies only when the
+user turns it on.
+
+Selecting it might have code-size implementation, though...
 
 Regards,
 Simon
