@@ -4,136 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48751C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 17:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F32C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 17:37:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B64284B8D;
-	Thu,  9 Jul 2026 19:17:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id BD87184B73;
+	Thu,  9 Jul 2026 19:37:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="TNpbp9K/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BMCxvHqn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E92F984B9B; Thu,  9 Jul 2026 19:17:12 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EDD1384A8F; Thu,  9 Jul 2026 19:37:15 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D825C84B73
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 19:17:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 661E484B8D
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 19:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rPp6+Rr3ujk6u6w6iIkrvRN7xbGrd5umbELtUXkEoZxOmVWCOn80YxPvzxrkvdl1NtbpKazfa6hoDnAL7C8miCgn8f5TZjo2OAGq80MGh/R4jV1Het6wqaKeNCkE68/0p6MoDkSfhefxD5hPoC+81pVtdS001lWHKFv8BvZPmWmVHw3pWVsaVzv6BZvVQO7hwE4iHGkzruw79h1LT8V4Xh6w0miUxmh+lw7yVhlXw1Gdtx1R6WcOa3yFzcLl8Ule+gewFsSrwtUFxSTLk+IF77+EsjX6apQPbAmRjAme+HeZo34mv2szF4Nhx7SRIU4iNsc/68ohYF6Vd9i0owHUZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PiSgTmoSGdGw99m8wfP6zxs73eoLisIKKjrhd1BN2N4=;
- b=spnH1Y0locfjdUa2R6Z1NW6A8thzkjtqXuSnfSBjiRMgFrJ/qzUPU4Kshye9//b+Ys0T+1GitZnoXaDcV7UEzhpUdTk1i0hpeNbFhkrfk96+jMfdaqfdneU3Gi00ZQkGjrS3EuRELjmgPHtUc5H1CdYUqig6H8AdBY6/wEuoDmYnl6n007+z9/ZMl9wdnu1fBdfT+pNkd4rL75yHcYO3rsOyobyncqMnTY0x+FgVo73TZc1tKEgZWmtedfAt+FbCvo3e658SntrFO4zv6UlwVMgfgoYA+0nbUDFr7Es86UFfHs1XiNrYqPIKMgGG/fZF4Q/8bL51V2CtQ5F4c8lP1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PiSgTmoSGdGw99m8wfP6zxs73eoLisIKKjrhd1BN2N4=;
- b=TNpbp9K/wsEvrzNAg7RiC02x0DtLDcFUmKXP/UIijQ3djyZffmCVI08DdqRjOzX76ivtLPg6NjLdmhwyghD6MfwvPsu3bqReFZz8zLWb1tT8oCBkK4NmjWNMqPLU2R15vAJ6hhQySUDKG8f/vR16spt24RlzoBRW6/Bux8VZSfE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AS8PR04MB8626.eurprd04.prod.outlook.com (2603:10a6:20b:429::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Thu, 9 Jul
- 2026 17:17:07 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.014; Thu, 9 Jul 2026
- 17:17:07 +0000
-Message-ID: <578ce91b-56a2-47e1-8acf-2f4b7e78c3f3@cherry.de>
-Date: Thu, 9 Jul 2026 19:17:05 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: set M.2 NVMe PERSTN low in
- spl_board_init on Jaguar
-To: Jakob Unterwurzacher <jakobunt@gmail.com>, Simon Glass
- <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Klaus Goger <klaus.goger@cherry.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
-References: <20260625-pub-jaguar-puma-ringneck-tiger-v2025-07_nvme-v2-1-c57bf1020d63@cherry.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260625-pub-jaguar-puma-ringneck-tiger-v2025-07_nvme-v2-1-c57bf1020d63@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA1PEPF00005B7B.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::613) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6a1888969ddso94167eaf.3
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 10:37:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1783618632; x=1784223432; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Bz7bPVB8pnvn/Zs5wZDXQKz2j9n422he04+HOWryANo=;
+ b=BMCxvHqnc4xbRV2jC14ojOcAXu8Vat4yoUw8cjUT3PIpo4CWlrieubkUP0AI1ZHtZc
+ 6uHv7UEToW9PKCvKJ/eyKaSP5Pcws4QqTwrExVUh0qFDMHjtfgub4MA6mlPQbk3+MmoB
+ NkmTq+ru+PMkg6Xx/D3SLTCxUZ/Gbkig6Cfbg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783618632; x=1784223432;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Bz7bPVB8pnvn/Zs5wZDXQKz2j9n422he04+HOWryANo=;
+ b=SjWJXUlbQ3F8JEbYJImMtHpMMigp+R99leeislbRHHVUWJmuZfnDFt6p0NAMXSJ/LS
+ KdQIa10LCrOCsLU5WQ+dcqVsi1gw1iBTbj63VGjkW15a1N4elA4CLKxjZLYiiCWisNyl
+ bsZD+TAkz/AN1eiT5sTugR2RMcWHZX+ZEQdjxmsbxgFGWyWEXhMdutVDjSyiS0c/uHkV
+ vJunAMIGjLXxLmV7rtobYnMK6DL4QHJQV3t3DOQswhOLcudyvZ+a7BN/KK3uOmfVECuz
+ G+EdBF3XpmIBRnfc3fhkKAIvpHqtEZa4v+l+oxGszUoBIKERFbQDOh4Hh/W1Qmma28kG
+ uWkA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9V58Cyd4LmEO7BGl+EGEtr46C0pMKl5/tqThQVbOzGY1/b8FJ+pDN6C9ETFj76TZPKL8ukP6o=@lists.denx.de
+X-Gm-Message-State: AOJu0YzC3UNLrZFxj+mYrCzrcGp4umBhA8dz3ZmM8s65QEF0Ga1iIn6C
+ RajgcjYj6aKDZNnPeV+PgtRvQ5zA9cTCir5KzEIdfchicWJ1nOUJO0hOvOqXkk2eH9g=
+X-Gm-Gg: AfdE7ckcobHvlgEQQomaDek6s9k6cgg89NL8i/oGZSi1iPVQhF3t5Ne+SA5gFkNWvUw
+ Z/h+NNdmc3PpkVBGZW40pE6HG/J6vqA2jW9cejReGzkp3dJW+IXoF3cvLOjY9sXEct1Q23CIN9I
+ nSd039Xgh5oagV5q6LxziVCkm0wAS9HwTaW+u5H9rS1S0B4kh0bD+z+d7jTjCuwJ1zJaMI475+v
+ M6JAaag3JXOIuLR/ZuzDRn8CwJO6Rl8slNzyouRwEBXUOk5mz3AZEeF2NaLvWn9uGh+w7ByTDja
+ kwC/fQe+XQcyQaYfFHaT1KPnYqWjQCVgiARNC2BoJJzMeDteytBj5bIqyYPFgyyQdcCtmvWBmpO
+ dB5tKkqXq/Onb2PWKK9NUP248qFon+SF2L4zXxqAKQVTVMw6ub/jAtNyJjXImK2G+XTd+bh7Jx8
+ lUMeycYXAUCuLQMRsAB4tAggR5xZLyWcGUhNtWJyNHkM8XGxo91NFnWJlDDsQ+6PlmAzjNlrab3
+ CWa64xK/mHQaMvGyuBXv4TbyhUvGNvaqwsB
+X-Received: by 2002:a05:6820:99a:b0:6a3:83ee:6338 with SMTP id
+ 006d021491bc7-6a383ee6c43mr1809063eaf.26.1783618632124; 
+ Thu, 09 Jul 2026 10:37:12 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4519134dff2sm2522419fac.8.2026.07.09.10.37.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jul 2026 10:37:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Simon Glass <sjg@chromium.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Sean Anderson <sean.anderson@linux.dev>, 
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>, 
+ Geert Uytterhoeven <geert+renesas@glider.be>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de, 
+ Markus Gothe <markus.gothe@genexis.eu>, 
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>, 
+ Benjamin Larsson <benjamin.larsson@genexis.eu>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20260703115627.2317120-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260703115627.2317120-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH v15 00/24] pinctrl: add support of Airoha SoCs
+Message-Id: <178361863014.2290342.10627903121263378059.b4-ty@konsulko.com>
+Date: Thu, 09 Jul 2026 11:37:10 -0600
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8626:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa92ec22-50e2-400d-00ef-08dedddde764
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: tRw3bFCgfZ+IELygpc7orosO7WwRmMlh406tp8T8EEkF1CAWDrTF5Y7ZHlm0vcfpo0dFIfzHJKj2aKtomp6G8nb7VDoevgnrFX36TyYd0mKMAQhVz3su5fviqArfYq56tcSWkpgxKyQ75sbdbhUHekcYLjvJ2JXMZuLLzqPWBEvCjSu0bUteHm8juT0jcHXByGhT3Y8KvlNJkNnYd1bNOyUliLxCOFtqHUhEv+MYTQQvAvvn2FKgpN/uT0BC6ETbewsf5+hdhfYSYhVRKLzSRyM6Z3IQuD957/W+m03IKR23kwvYFbB24sCayvP6AtG++tEIN+515cFGF2+F2OSOyr5nVeL3ludDT2YplLyYz20mBa2Y65yx9IphEbs5XnbpbjCaKTcY+H9ErnN0bRbmfnUm/NGjAN7BWmko+4k5CA+FGc26azC5eheDeUQL6XYrTmtDkifbti/LQAGGWBXTOiTwU1mzqmpFdf9+jrne1uFOvf0uWwJZH1IrP+Rrig/O62rVdQUU58ySX2TFO8DGlJsghEJBmFXz8/uvj7o+VGZwHi6s5sbgJIyhvrki1XNj1si2xBq8YpJvLeDa3qggXguokN4rMCatVHLqeE8OLdMxWqm/ZUc9ibPYEUThh3Zf/bPQDoyH4fJ8ma04z8IA3tyabD8oLcSWyKIhlAfuO2I=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(11063799006)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SmFWOHZuenFtYStoVTBOQ3E4QzZwbDBBTUlHTFlTTlM0U3g2U0VkSWlyRkJX?=
- =?utf-8?B?N0ExK0YxL2xkVTE5VGU4LzRoWFNiQVhqRFdLVVhYa0JhTkJwQlZaVWs0aHFQ?=
- =?utf-8?B?L2NmdUZOY3R6RWNlNXJYMUk3QzJjc3JqaDJyY21nTStlL1FxcEdNSmFIMzR2?=
- =?utf-8?B?aXhuOUxSTExPWXpyQm5EdUdJWmZzUHJKT2NXbHU2a213bWR4dEI0TVFqU09r?=
- =?utf-8?B?MVBBVUt2TkdHMllHcXZLOExyMTRoU2V0Vi92N2gxTUIxbEZyVzBvd1k5dFhZ?=
- =?utf-8?B?RFFaSW14V2Y4NG5JMkJpY2s0OE5nbTBhRVdjSnZZUmRkWXd4VkJCQ1pVOVdN?=
- =?utf-8?B?YUpoamRWd29MbTV5TEZoL2cyYmtzN3ppVkQ0Vm5RUmdyOEVqMEJMNW5uOGVN?=
- =?utf-8?B?VnRaczRxUXUwbWxBa3RMcGxzQ24xYkY4Q3lFSnQxdURlWDJ0Y0l2QytzM1hO?=
- =?utf-8?B?Q3BMejVnNnk2a2lEdXhEOHJVVjAxYWYxOENhOXZocUlLTWplaE1UeWVBZTJD?=
- =?utf-8?B?ZWw0VUNnMW9VTSsrL2U1NEd1UTNsSWNyblgwNmdrOWN3ZVJYaHVydGpEZ0xa?=
- =?utf-8?B?dXNrMUZCZkdBVk4wUVdoMmRFa3ozb0tIT1Rqbys1bDdYZytMQnRhVy84NVlE?=
- =?utf-8?B?aGQvMjhHb25Mc3hIR25wYncxK0dUakEwcHpvMWhSYkpOZld6OFZxMVgzWGJ2?=
- =?utf-8?B?UzViOTA4M1o3YnhXeCtnOSs0aEFXZlNnZUFXL1F6anVCdWo1dDJ1cklDMWJn?=
- =?utf-8?B?a2ZjWFlqaGQvRk84ckdIalNyRThqZUtQVWZud1VXellIenpKbEN3MzFCNUM5?=
- =?utf-8?B?d2hTMjFXS2dmOGNBbFFJNzl0ckl4cXU0QkY3MVZNZHE4S0lXNmR0Zm9meUhF?=
- =?utf-8?B?V2xTQXBxa25COW9ldG1zeGl0ZmExT0VJaS9PbVhUUVlIS3REMVhJRVZhdndK?=
- =?utf-8?B?cGxrQy9qN296MmhrWnpyak8rVlp4eElKV2EyejBKS21JcGtDczFLWU14NVA2?=
- =?utf-8?B?OE5wakp3Z0RhcjJsbVUwTEU4QUFxZUVpSk5DL0JMVjRRaTVmSmlOcUNMSndO?=
- =?utf-8?B?N0U0QVp4Zm5iWnR3QmNLS2c3eUc1YTdVb2N4MnJsa0kza1hUczdDb2VQSlFs?=
- =?utf-8?B?UEI5UFBvYU1pakk0ZGlJYUVaVWVtbnJ4bndVMStmcDUxRHhqQm5aeDJvN2RV?=
- =?utf-8?B?cWV3bXZuQklxSnJ1djFHbURlQTJJM0p1VThYMDFOY0hGbDl0aTF5OVI0VTNY?=
- =?utf-8?B?L2NCQmVJSUdKYzh5UEFMSGZ1dlZ4RS9hWXZTMDQ0V2RVWWxzdHNoNWdvT0V0?=
- =?utf-8?B?bUI1TzNxVyt1bUV0VlZObG82YjRyT3dGU0ZXYWNKQkJYNFhaNCs3U3IyanA3?=
- =?utf-8?B?OHQzeHlUTC9GY0NhTXMzVURmc1cyT0FxRDdFdFg2WnVwVkRuTjF5ZFNvdVV2?=
- =?utf-8?B?VVIrMFFJcFhPczY3S0NPbFpwYys0eGZBcGVQN0g5T0dnTTNvV0lLQi9IQlha?=
- =?utf-8?B?V1UwSzVPWmY0S1dGdTNzaVVXZ1VLaWluVHd5eGk3aHZUZUJlZzBETU9DZ3RW?=
- =?utf-8?B?UHR6N1UvY0FaZlJxZkwycFBucHgzaXpJTHBOUVlzMytOSk1QcGIxNVFHa3NG?=
- =?utf-8?B?ak05Vm10VklDR3F3QUo5MzRVY1NHbGoySUI3eHhOcnlKZVBGUTNWZjljbzVw?=
- =?utf-8?B?aFExVVZLUS9pZ0VlWE5rSmxWZkNiRkRGdjBFSG5nQjFiemtZd2JUMTlpZjdu?=
- =?utf-8?B?ZWNrTytnMEF5TllrZE5DY3ZvOGw0ZzJXSi85N0dzVkx4R1RMaTMyRjR1eXhp?=
- =?utf-8?B?SHp3R3dCV0lXRlFnK2FJUXBTVE9GUStpZ3F2My9td1ZSMWhFTVE0bU82RWJB?=
- =?utf-8?B?RFV4b2RUbVJJeXA5YzBJa1lYeDRmUUg2NklnZkR1R2Zwd2g0cnZ5bkFMNE9z?=
- =?utf-8?B?VzZYZVhiY1ovOTRZZEEvenkycmhacDJMUDhhVnV3d0ZpVUI4QjhLSHkyL3k3?=
- =?utf-8?B?Z3psMVVVREphNXM5ajlnQVVqY2cvaTBIbW51TFhQRlg1RTlEV3J6ZVo4RjNr?=
- =?utf-8?B?SW5QZGI2cnhIVTJweElPR1ZHSTdSQmxIbVU4MXhZVVhXMnMwRGM1em9JV3RI?=
- =?utf-8?B?Y0lDNU5rd21tdGhEK3FwV3Y1QUgyOENaNjN5YWM3Z1BlemhpRW1hTU5HZFhZ?=
- =?utf-8?B?MWNycVI2RG85TnlGV1FaNys2OXcwRHMyLzY0anlEbXBhaTNrYkU2WTZVcVBP?=
- =?utf-8?B?UnlabzBuV0ZXVWZoT1BINHZaZVlxdVhZNG13bDdyZVFBL21IRHR0VDhTRHQ4?=
- =?utf-8?B?WUdqKzUzeVlsMU0vTW5zN2NrSXBNVDk4YzdKS252aUxqcWRwY3dhZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa92ec22-50e2-400d-00ef-08dedddde764
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2026 17:17:07.5393 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OkIVqMDndWNFnLcP7KivQK+OnZsp54Oe+5cFuEHN3mkQ/OVOSFHtqTVfqRbZcOm4NNyI061oIdGwWuR55TnqVm1XJQaLodfPj7H16s8bQxw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8626
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,44 +118,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jakob,
+On Fri, 03 Jul 2026 14:56:03 +0300, Mikhail Kshevetskiy wrote:
 
-On 6/25/26 1:55 PM, Jakob Unterwurzacher wrote:
-> From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+> This patch series add pin controller and gpio driver support for EN7523/
+> AN7581/AN7583 SoCs. The driver based on official linux airoha pinctrl and
+> gpio driver with Matheus Sampaio Queiroga changes.
 > 
-> As it is, an NVMe's built-in PERSTN pull-up fights against the
-> SoC's built-in pull-down which results in an undefined logic state
-> on the Samsung SSD 980 and likely others.
+> The original Matheus Sampaio Queiroga driver can be taken from the repo:
+>   https://sirherobrine23.com.br/airoha_en7523/kernel/src/branch/airoha_en7523_pinctrl
 > 
-> Fix that by forcing PERSTN low as early as possible, which is SPL.
-> 
-> Both Linux and U-Boot (via "pci enum") set the pin high later
-> as needed and the NVMe is detected fine.
-> 
-> Oscillocope shots ("x" means undefined logic state at around 1.5V):
-> 
-> Before:
-> 
-> 	3V3     ____|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-> 	PERSTN  ____xxxxxxxxxxxxxxx_|‾‾‾‾‾
-> 	PCICLK  ____∿∿∿∿∿∿∿∿∿∿∿∿___∿∿∿∿∿∿∿
->                      ^U-Boot     ^ Linux
-> 
-> After:
-> 
-> 	3V3     ____|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-> 	PERSTN  ____x_______________|‾‾‾‾‾
-> 	PCICLK  ____∿∿∿∿∿∿∿∿∿∿∿∿___∿∿∿∿∿∿∿
->                      ^U-Boot     ^ Linux
-> 
-> With this change, the power-up sequence conforms to PCIe specs,
-> except a remaining short PERSTN glitch. The glitch is about 400ms
-> long. It could be shortened by moving the logic to TPL, but
-> completely fixing it is only possible in hardware.
-> 
-> Signed-off-by: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+> [...]
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Applied to u-boot/master, thanks!
 
-Thanks!
-Quentin
+[01/24] watchdog: renesas_wwdt: #undef field_{get, prep}() before definition
+        commit: b8b9ca05c720d97c6f5f9d0738e7743de94e7a26
+[02/24] power: domain: renesas-r8a78000: #undef field_{get, prep}() before definition
+        commit: 40db9d313be6f6700ae1530b245e48dd1f60d51b
+[03/24] net: hifemac: #undef field_{get, prep}() before definition
+        commit: cd36be5a4731fb1d640458101ae7327b3e450c73
+[04/24] mtd: nand: raw: sunxi: #undef field_{get, prep}() before definition
+        commit: 9b5c0b883485a63eac437ade055b1f3a928eb39a
+[05/24] clk: renesas: #undef field_{get, prep}() before definition
+        commit: 6bbf6cfc915672005f118c5b8419d7a971fd3515
+[06/24] board: renesas: gen5-cm33: #undef field_{get, prep}() before definition
+        commit: 08badbd7d82c2f1e69051f110cd8966e4bfd573d
+[07/24] bitops: import BITS_PER_TYPE() macro from linux
+        commit: ab447ac61782bad20b73bd9e19dcadb255c27f8a
+[08/24] bitfield: Add less-checking __FIELD_{GET,PREP}()
+        commit: 9c10cba536874641bbc70a53588d6a59c9292e2e
+[09/24] bitfield: Add non-constant field_{prep, get}() helpers
+        commit: da10fca9b062bde09144d65a0559676c658ac0ae
+[10/24] watchdog: renesas_wwdt: Convert to common field_{get, prep}() helpers
+        commit: c02633a823b837cf59d84324472ce4169a39dfa5
+[11/24] power: domain: renesas-r8a78000: Convert to common field_{get, prep}() helpers
+        commit: 0a1ca728f97f433f1b264c541c0376818dc88631
+[12/24] net: hifemac: Convert to common field_{get, prep}() helpers
+        commit: d2f172f3054b98e9ec51180bc9574bf6e3581e63
+[13/24] mtd: nand: raw: sunxi: Convert to common field_{get, prep}() helpers
+        commit: 3253f2b326b3ce7a520c3233923f03760c510fcd
+[14/24] clk: renesas: rcar-cpg-lib: Convert to common field_{get, prep}() helpers
+        commit: 575717f4b67a5b3f2e342ad22283473cd5f3e975
+[15/24] board: renesas: gen5-cm33: Convert to common field_{get, prep}() helpers
+        commit: d26cb20e6bd70a47ca7ca2ca8d9145e669475824
+[16/24] pinctrl: add more pinconf/pinctrl definitions
+        commit: 7518f6fbc4b9f786dabef4ada2881024a2039bb9
+[17/24] pinctrl: sort and format the contents of the makefile
+        commit: 05a8f13bbdbf6b7f0e6b799668a1758046a90fd5
+[18/24] pinctrl: airoha: add shared pinctrl code
+        commit: dcdd7aa2644ad66a004c17aeeb878ea9da35b295
+[19/24] pinctrl: airoha: add pin controller and gpio driver for AN7581 SoC
+        commit: 1c98e84c04bf7f9ae183849e4c9ae05b535ccc92
+[20/24] pinctrl: airoha: add pin controller and gpio driver for AN7583 SoC
+        commit: 56d820371f3a8025b6d435276d07bf6dc1342c93
+[21/24] pinctrl: airoha: add pin controller and gpio driver for EN7523 SoC
+        commit: 5c07bb58962d474bcf8902819a7305b682d0dc3a
+[22/24] configs: airoha: an7581: enable pinctrl/gpio support
+        commit: 8f99a782fdb3ed4a934174f763cf5feafcbb7941
+[23/24] configs: airoha: en7523: enable pinctrl/gpio support
+        commit: 4c7f94a738572f406e2b0644b34b0e57493de115
+[24/24] arm: dts: en7523: add pinctrl/gpio support, drop legacy gpio support
+        commit: c56c7298c42b06043aa3e9ae5bafd021bf1bac4c
+-- 
+Tom
+
+
