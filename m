@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 575F6C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C3FC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:00:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 333BE84B2B;
+	by phobos.denx.de (Postfix) with ESMTP id 7555D84B33;
 	Fri, 10 Jul 2026 14:56:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AImNRLVl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="piqoNYNp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3345684BBF; Fri, 10 Jul 2026 00:47:03 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 483EF84BFC; Fri, 10 Jul 2026 00:47:05 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9553884B61
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:46:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B5C84B65
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:47:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-448df16ab34so119212fac.1
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:46:55 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-447a81776e9so98605fac.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783637214; x=1784242014; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783637220; x=1784242020; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=INGkzRibLs9pKKnupS2WSzEYJoTBwSz3VwXOsC9U8w4=;
- b=AImNRLVl/ZJklV155gFbAHtJAU7z2JCYcbccU4oYT4yWlocz62HZY7f4e2QktRoLxv
- k9RPgPNHy0Z+H9fLvUeeK/jA3Cdje5vwg9FPupNYK7YV4uu4RWo1b5Nj/+0ayoFLQTQV
- 77yJenHqS3odHPnQvLqyObozu8xJ3uCskBJ0UtR7yrWv0bYNjo03q4iMDNZ/HzHUEg9+
- s67JvGBH4xQPQNgS2PZSVAaVZTmAyvjwW1opBcnbc5ygB7V8N50FX5UVHFkyheD3m6zI
- NvMJqDJ/18woIMicLjKsfwwBIZ9TG9v8DAmHfHStcC2Fa2faUkp7F9BkJdxM9mcsgAAj
- SCPA==
+ bh=z879onaUaCrALzcGvBZ3NNSwMs9Srh6cGPFWAVjnqtc=;
+ b=piqoNYNpywDdyfOQVSpykn4HMjF/mHjF/8sx7DqPn8KLa27ACq6uQWOxUqRioamILn
+ wHUT8uWVsjyGP6FLIy/OYGoVgJU9NLDIP8YTsOzM8I3YOFpoYYrmXsr2ozrlzhfiV2ME
+ aNRzsD70UMvO7KRYPZhLCt4LCPFVxb1pyLfeXA8uvUkL2zvioldpaEyFKJBOIyh+4o5x
+ 5AKfTKYBtsov3AQixy0V37gcYQaSOQpxG89NDI1hrwvBLwnKhyW5n14G8IzxcTSvEwKU
+ cZsDIDJqCHp29J/MxlGu2++meDT7WDGmzlyXv9UKtJ2t0vkw7b+jwRJvtRxzVCaEA8rz
+ n1Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783637214; x=1784242014;
+ d=1e100.net; s=20251104; t=1783637220; x=1784242020;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=INGkzRibLs9pKKnupS2WSzEYJoTBwSz3VwXOsC9U8w4=;
- b=WDdGSN5x6Wd1MYaHW5MWE4ByhMay8tNFVOA3JKjJU6QFTzMfbxx/sXgnOBT15erJ74
- RXav7CLfuC457oe/zw9Q+1PmINzq/QljwHDtNB4gG6Xy0tayEzgXrPlptUbUFlG6IC2j
- d5/enVzlGtKZj0lq60lYh61rWm8NWvA9s/j8y40JsK5unYNeDkt/Wu5DHcp43w1Q70m+
- 24vLHOTDmoSud82K02nJsF5vmVDZ++iSWFphisadU7fXzY4Lv5sby46DHB9q8MWDaU0a
- icrjxDnafy67aDcxO6tCaFC9GTPKuoTbBru7ZFHZBQUPpJlMt+Q3by3T4Any0gUcF0n6
- 2osg==
-X-Gm-Message-State: AOJu0YxVS/agK/YoGqJ0dK4PfOCWCVVxPHkAKrXddmzDJBgz676HkjwF
- tO5oNxWIGmnIv9ABNwsdksM+Rkidf8n6N3YlaLPhjmT7F1d3M6ZQcLu5
-X-Gm-Gg: AfdE7clWM10yRtZg/6NxnrN9Csile8KwyGKeNmYYkdYYERnQoIXIEacUyRbDJkeZkNx
- MUtTEbopuE0Ho8ChzZOaUoO61bdRzMUza9U8HG++nIzbq+i0yXAQo8JLxOErvQqklpwMdk4y5Ut
- m6hdo72Se5X4skQ2p6CRKYlQ77NzOEp8FXPC7iXKi8YoViSCxkuJB+scyOumjKPKqIYBEi1lDI0
- KsSoDl31gzEO4sbl9gPa3ApCudWt4E7WxlQd+CWefd1eDnZfIcrymLXAToGt9IEiZCw0EdknxUI
- BA0gOterxvEkeCPkXrmvYlKqBn7F6M97WjqyouWxyQlNIkvIUAKpYghjRQ8tk9INBhQ9SajANDT
- Iljk8e+QBaIW+cPcikuloTlKavR4xgqoy26M0i4Fs0GCzRerLfvkyF61jKG+jJmTJHUjRA1gJIf
- GTUumE+W6zVKreBkUlSt8AZfv+dXWJbbsnwOH4J/RmsdT1u0frXjeCc1+a8UvBuEHsQgb8opbKM
- OmS6MjRxCaZ/iptQmFgo+hjRue16bDhcPtz+Yomzvtcuiz9QBBV4GFthtzWiIMs
-X-Received: by 2002:a05:6871:2e9b:b0:41c:de1:b21e with SMTP id
- 586e51a60fabf-451637d2defmr6184841fac.11.1783637213955; 
- Thu, 09 Jul 2026 15:46:53 -0700 (PDT)
+ bh=z879onaUaCrALzcGvBZ3NNSwMs9Srh6cGPFWAVjnqtc=;
+ b=U4Gs5NPktotiOMvJq2fpygM+/EIv3owqOHGLURi1hDmpVCqXdtIMAKhy00yTaMuZq2
+ Dpv8tddvZ7BAPUJG561hp5Ydkw10A2JvtIGJGuwVzrNnCBpk6ii+JTNdOs4yx9IamIfT
+ yMeyOc5lRv80nhcpOwAx/H0BcyQNIfWgiBdzKSDEcBrFj9Q4KvBtJhhaqdu8EirWZatG
+ XPA50RdocHVejSNCIH8HfM+b2nTPv1BRw0aDdqqh0+QVnR3Uqr07TqFzEU4ASIMFncsR
+ xZRG0kf7eUigL2y/cxHkLCvSr1KVyEGpCXK/g34BpmddJjJ/w2dv+LG14BHBqnA+Ibwh
+ FmzQ==
+X-Gm-Message-State: AOJu0YwTWlMvgm11bkwK15jQuHLujzXHtMq+jYjr3ecSzsLpU3a9ZWzr
+ D8XyQN4d5OsIKePPN/kd4yJqx/P9uAX7VHGOwYG20+NXSFUycPrrsIrs
+X-Gm-Gg: AfdE7cm62QqTG7vmUyAOcWMcMElWKT78JByenh1TdW4uXsLD8PKv4kKEj+otEZcD6XQ
+ qCLLIveF3WDDAaR6BQQJd6Cm3x1/MSs2flNi/pNtzegcSLXVMm+13XfGfol/WQzY/8byTXtqcmh
+ GwtEFIoqVL4ZkDalyq+x90wOLZwKvm5wq41esrtQQMs+wsJEplXrrSnktP2sjPUB2fTLWu0KUuu
+ 3OP4nYt3grBNjUX6UgBcbn0AMOCunKN33jfdKOiqihQBwaxXBwVrV8IvNFE52zXS5NTm2TckYl4
+ QB3W1LDOcjA0m5NZ454obZ/uX1K1oqaewtF9Z5djCUixG4KZepxYUun/sQDSg/Sh6496wvvRT3Q
+ UzAQJA081WoULAncIkXc+iBo1Pt1KIm8AML+qmAn1IuOIgWr90uQOhnUNzOjaQDNDdr9Gksk+DV
+ ycVuwZkq5KI/b24c7DMF9ayZMZwZ/3SGywQ+sr9PUC7fOrO1hc9wv56OoSTWVNrFh4xIZvS4EBo
+ L2TaJans7E+icWnAED8/1ACQHZTUvfG0EADNDHtMxafjgXbcmXb4t74kvDZQ4vAoIBjn7bnRlo=
+X-Received: by 2002:a05:6871:68b:b0:42f:d09d:1fc9 with SMTP id
+ 586e51a60fabf-45163c73427mr5896113fac.32.1783637219529; 
+ Thu, 09 Jul 2026 15:46:59 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.46.52
+ 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.46.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 15:46:53 -0700 (PDT)
+ Thu, 09 Jul 2026 15:46:59 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 09 Jul 2026 16:46:25 -0600
-Subject: [PATCH v3 03/10] boot: image: add FIT decrypt-to-buffer helper
+Date: Thu, 09 Jul 2026 16:46:28 -0600
+Subject: [PATCH v3 06/10] lib: ecdsa: support additional curve sizes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-submit-ce-series-v2-v3-3-5017da8c9bef@gmail.com>
+Message-Id: <20260709-submit-ce-series-v2-v3-6-5017da8c9bef@gmail.com>
 References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 In-Reply-To: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
@@ -131,629 +131,679 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-FIT cipher support currently allocates the output buffer inside the AES
-helper. SPL often needs to decrypt directly into a caller-selected
-buffer, for example a load buffer or a scratch buffer used before
-decompression.
+U-Boot's ECDSA FIT code is tied closely to prime256v1 and secp384r1.
+Hardware verifiers may support a wider set of curves, and FIT public key
+properties need to preserve the fixed coordinate width of those curves.
 
-Add a decrypt_to callback to the FIT cipher algorithm and wire it up for
-AES. The existing allocating decrypt path becomes a wrapper around the
-new helper.
+Add common curve-size handling for secp224r1, prime256v1, secp384r1 and
+secp521r1. Use fixed-width big-endian byte arrays when writing libcrypto
+BIGNUM values into the control FDT so non-32-bit-aligned coordinates such
+as secp521r1 are encoded correctly. RSA key sizes are already multiples
+of 32 bits, so their generated byte encoding is unchanged.
 
-Validate the FIT cipher key length, IV length and unciphered-size
-property while preparing decryption, and build lib/aes/ by phase when
-FIT_CIPHER is enabled so the target-side decrypt helper is available to
-SPL builds.
+Register the corresponding host and target ECDSA algorithm names and
+clean up the libcrypto signing context so raw signatures are owned and
+freed consistently on error paths.
 
-When DM_AES is enabled, try the first UCLASS_AES provider before using
-the software AES fallback in U-Boot proper. If a provider is present,
-ask the provider for the software-provided key slot before loading the
-FIT key, so hardware-specific reserved or preloaded slot policy stays in
-the provider. Return AES device errors to the caller instead of hiding
-them with a software fallback after the device has accepted the operation.
-
-For U-Boot proper, use decrypt_to for in-place decryption when the FIT
-payload is already in writable RAM. The encrypted data is no longer
-needed after hash verification, and this avoids a full-size allocation
-for encrypted payloads loaded into DRAM.
+SPL ECDSA verification uses UCLASS_ECDSA, so make SPL_ECDSA_VERIFY
+depend on SPL_DM. Keep fdt_add_bignum() in the libfdt error namespace so
+RSA and ECDSA callers continue to handle FDT growth and other errors
+consistently.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes v2 -> v3:
-  - Flip the image_aes_decrypt_to() host-tool guard  (suggested by Simon Glass)
-  - Let image_aes_decrypt_to() be the single length-validation path
-    (suggested by Simon Glass)
-  - Document that AES CBC decrypt providers must support in-place decrypt
-    (suggested by Simon Glass)
-
 Changes v1 -> v2:
-  - Explain FIT cipher validation  (suggested by Simon Glass)
-  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
-  - Return -ENOSYS without decrypt support  (suggested by Simon Glass)
-  - Let AES providers choose the software-provided key slot
-  - Use decrypt_to for U-Boot proper in-place decrypt
+  - Explain the RSA impact of fdt_add_bignum()  (suggested by Simon Glass)
+  - Document ECDSA public key byte-array widths  (suggested by Simon Glass)
+  - Document ecdsa_curve_size()  (suggested by Simon Glass)
+  - Keep fdt_add_bignum() errors in libfdt space  (suggested by Simon Glass)
+  - Explain the SPL_DM dependency  (suggested by Simon Glass)
 ---
- boot/image-cipher.c              |  38 ++++++++++++--
- boot/image-fit.c                 |  33 +++++++++++--
- drivers/crypto/aes/aes-sw.c      |   6 +++
- drivers/crypto/aes/aes-uclass.c  |  15 ++++++
- drivers/crypto/tegra/tegra_aes.c |   7 +++
- include/image.h                  |  39 +++++++++++++--
- include/u-boot/aes.h             |  10 ++++
- include/uboot_aes.h              |  40 +++++++++++++--
- lib/Makefile                     |   2 +-
- lib/aes/aes-decrypt.c            | 104 +++++++++++++++++++++++++++++++++------
- 10 files changed, 264 insertions(+), 30 deletions(-)
+ doc/mkimage.1                  |   3 +
+ doc/usage/fit/signature.rst    |   9 ++-
+ include/u-boot/ecdsa.h         |  22 +++++++
+ include/u-boot/fdt-libcrypto.h |   6 +-
+ lib/ecdsa/Kconfig              |   2 +-
+ lib/ecdsa/ecdsa-libcrypto.c    | 141 ++++++++++++++++++++++++++---------------
+ lib/ecdsa/ecdsa-verify.c       |  39 ++++++------
+ lib/fdt-libcrypto.c            |  60 ++++--------------
+ tools/image-sig-host.c         |   7 ++
+ 9 files changed, 162 insertions(+), 127 deletions(-)
 
-diff --git a/boot/image-cipher.c b/boot/image-cipher.c
-index 9d389f26cea..93b3dd3c637 100644
---- a/boot/image-cipher.c
-+++ b/boot/image-cipher.c
-@@ -25,6 +25,7 @@ struct cipher_algo cipher_algos[] = {
+diff --git a/doc/mkimage.1 b/doc/mkimage.1
+index 9a2d07cee75..b6ba88dd314 100644
+--- a/doc/mkimage.1
++++ b/doc/mkimage.1
+@@ -459,7 +459,10 @@ lb.
+ rsa2048
+ rsa3072
+ rsa4096
++ecdsa224
+ ecdsa256
++ecdsa384
++secp521r1
+ .TE
+ .RE
+ .
+diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+index da08cc75c3a..a6aacd691d3 100644
+--- a/doc/usage/fit/signature.rst
++++ b/doc/usage/fit/signature.rst
+@@ -132,13 +132,16 @@ rsa,n0-inverse
+ For ECDSA the following are mandatory:
+ 
+ ecdsa,curve
+-    Name of ECDSA curve (e.g. "prime256v1")
++    Name of ECDSA curve, such as "secp224r1", "prime256v1",
++    "secp384r1", or "secp521r1"
+ 
+ ecdsa,x-point
+-    Public key X coordinate as a big-endian multi-word integer
++    Public key X coordinate as a fixed-width big-endian byte array. The width
++    is the curve size rounded up to whole bytes.
+ 
+ ecdsa,y-point
+-    Public key Y coordinate as a big-endian multi-word integer
++    Public key Y coordinate as a fixed-width big-endian byte array. The width
++    is the curve size rounded up to whole bytes.
+ 
+ These parameters can be added to a binary device tree using parameter -K of the
+ mkimage command::
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index f0ac0f327e9..3d70b138026 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -8,6 +8,7 @@
+ 
+ #include <errno.h>
+ #include <image.h>
++#include <string.h>
+ 
+ /**
+  * crypto_algo API impementation for ECDSA;
+@@ -64,8 +65,29 @@ int ecdsa_verify(struct image_sign_info *info,
+ 		 uint8_t *sig, uint sig_len);
+ /** @} */
+ 
++#define ECDSA224_BYTES	(224 / 8)
+ #define ECDSA256_BYTES	(256 / 8)
+ #define ECDSA384_BYTES	(384 / 8)
+ #define ECDSA521_BYTES	((521 + 7) / 8)
+ 
++/**
++ * ecdsa_curve_size() - Get the size in bits for a named ECDSA curve
++ *
++ * @curve_name: OpenSSL short name for the curve
++ * Return: curve size in bits, or 0 if @curve_name is not supported
++ */
++static inline unsigned int ecdsa_curve_size(const char *curve_name)
++{
++	if (!strcmp(curve_name, "secp224r1"))
++		return 224;
++	else if (!strcmp(curve_name, "prime256v1"))
++		return 256;
++	else if (!strcmp(curve_name, "secp384r1"))
++		return 384;
++	else if (!strcmp(curve_name, "secp521r1"))
++		return 521;
++
++	return 0;
++}
++
  #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -36,6 +37,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -47,6 +49,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	}
+diff --git a/include/u-boot/fdt-libcrypto.h b/include/u-boot/fdt-libcrypto.h
+index b15d8a1eaf4..3164f2891aa 100644
+--- a/include/u-boot/fdt-libcrypto.h
++++ b/include/u-boot/fdt-libcrypto.h
+@@ -12,16 +12,16 @@
+ /**
+  * fdt_add_bignum() - Write a libcrypto BIGNUM as an FDT property
+  *
+- * Convert a libcrypto BIGNUM * into a big endian array of integers.
++ * Convert a libcrypto BIGNUM * into a fixed-width big endian byte array.
+  *
+  * @blob:	FDT blob to modify
+  * @noffset:	Offset of the FDT node
+  * @prop_name:	What to call the property in the FDT
+  * @num:	pointer to a libcrypto big number
+  * @num_bits:	How big is 'num' in bits?
+- * Return: 0 if all good all working, -ve on horror
++ * Return: 0 on success, negative libfdt error on failure
+  */
+ int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+-		   BIGNUM *num, int num_bits);
++		   const BIGNUM *num, int num_bits);
+ 
+ #endif /* _FDT_LIBCRYPTO_H */
+diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+index ca13b6bfa1f..f0c56278fb6 100644
+--- a/lib/ecdsa/Kconfig
++++ b/lib/ecdsa/Kconfig
+@@ -17,7 +17,7 @@ config ECDSA_VERIFY
+ 
+ config SPL_ECDSA_VERIFY
+ 	bool "Enable ECDSA verification support in SPL"
+-	depends on SPL
++	depends on SPL && SPL_DM
+ 	help
+ 	  Allow ECDSA signatures to be recognized and verified in SPL.
+ 
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index c4bfb2cec61..378d53ea242 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -31,7 +31,7 @@ struct signer {
+ 	EVP_PKEY *evp_key;	/* Pointer to EVP_PKEY object */
+ 	EC_KEY *ecdsa_key;	/* Pointer to EC_KEY object */
+ 	void *hash;		/* Pointer to hash used for verification */
+-	void *signature;	/* Pointer to output signature. Do not free()!*/
++	void *signature;	/* Pointer to raw signature buffer */
  };
-@@ -70,6 +73,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 				   int cipher_noffset)
+ 
+ struct ecdsa_public_key {
+@@ -50,11 +50,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->curve_name)
+ 		return -ENOMSG;
+ 
+-	if (!strcmp(key->curve_name, "prime256v1"))
+-		key->size_bits = 256;
+-	else if (!strcmp(key->curve_name, "secp384r1"))
+-		key->size_bits = 384;
+-	else
++	key->size_bits = ecdsa_curve_size(key->curve_name);
++	if (!key->size_bits)
+ 		return -EINVAL;
+ 
+ 	key->x = fdt_getprop(fdt, node, "ecdsa,x-point", &x_len);
+@@ -63,7 +60,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->x || !key->y)
+ 		return -EINVAL;
+ 
+-	if (x_len != key->size_bits / 8 || y_len != key->size_bits / 8)
++	if (x_len != (key->size_bits + 7) / 8 ||
++	    y_len != (key->size_bits + 7) / 8)
+ 		return -EINVAL;
+ 
+ 	return 0;
+@@ -85,18 +83,12 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		return ret;
+ 	}
+ 
+-	if (!strcmp(pubkey.curve_name, "prime256v1")) {
+-		nid = NID_X9_62_prime256v1;
+-	} else if (!strcmp(pubkey.curve_name, "secp384r1")) {
+-		nid = NID_secp384r1;
+-	} else {
++	nid = OBJ_sn2nid(pubkey.curve_name);
++	if (nid == NID_undef) {
+ 		fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.curve_name);
+ 		return -EINVAL;
+ 	}
+ 
+-	fprintf(stderr, "Loading ECDSA key: curve=%s, bits=%d\n", pubkey.curve_name,
+-		pubkey.size_bits);
+-
+ 	ec_key = EC_KEY_new_by_curve_name(nid);
+ 	if (!ec_key) {
+ 		fprintf(stderr, "Failed to allocate EC_KEY for curve %s\n", pubkey.curve_name);
+@@ -111,7 +103,7 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		return -ENOMEM;
+ 	}
+ 
+-	len = pubkey.size_bits / 8;
++	len = (pubkey.size_bits + 7) / 8;
+ 
+ 	uint8_t buf[1 + len * 2];
+ 
+@@ -133,14 +125,13 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		return -EINVAL;
+ 	}
+ 
+-	fprintf(stderr, "Successfully loaded ECDSA key from FDT node %d\n", node);
+ 	EC_POINT_free(point);
+ 	ctx->ecdsa_key = ec_key;
+ 
+ 	return 0;
+ }
+ 
+-static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
++static int init_ctx(struct signer *ctx)
  {
- 	const void *fdt = gd_fdt_blob();
-+	int key_len, iv_len;
- 	const char *node_name;
- 	char node_path[128];
- 	int noffset;
-@@ -94,7 +98,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
+ 	memset(ctx, 0, sizeof(*ctx));
+ 
+@@ -149,11 +140,21 @@ static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
  		return -1;
  	}
  
--	info->iv = fdt_getprop(fit, cipher_noffset, "iv", NULL);
-+	info->iv = fdt_getprop(fit, cipher_noffset, "iv", &iv_len);
- 	info->ivname = fdt_getprop(fit, cipher_noffset, "iv-name-hint", NULL);
++	return 0;
++}
++
++static int alloc_sig_ctx(struct signer *ctx, const struct image_sign_info *info)
++{
+ 	ctx->hash = malloc(info->checksum->checksum_len);
+ 	ctx->signature = malloc(info->crypto->key_len * 2);
  
- 	if (!info->iv && !info->ivname) {
-@@ -136,20 +140,28 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 	}
- 
- 	/* read key */
--	info->key = fdt_getprop(fdt, noffset, "key", NULL);
-+	info->key = fdt_getprop(fdt, noffset, "key", &key_len);
- 	if (!info->key) {
- 		printf("Can't get key in cipher node '%s'\n", node_path);
- 		return -1;
- 	}
-+	if (key_len != info->cipher->key_len) {
-+		printf("Bad key length in cipher node '%s'\n", node_path);
-+		return -1;
-+	}
- 
- 	/* read iv */
- 	if (!info->iv) {
--		info->iv = fdt_getprop(fdt, noffset, "iv", NULL);
-+		info->iv = fdt_getprop(fdt, noffset, "iv", &iv_len);
- 		if (!info->iv) {
- 			printf("Can't get IV in cipher node '%s'\n", node_path);
- 			return -1;
- 		}
- 	}
-+	if (iv_len != info->cipher->iv_len) {
-+		printf("Bad IV length for cipher in image '%s'\n", node_name);
-+		return -1;
+-	if (!ctx->hash || !ctx->signature)
++	if (!ctx->hash || !ctx->signature) {
++		free(ctx->hash);
++		free(ctx->signature);
++		ctx->hash = NULL;
++		ctx->signature = NULL;
+ 		return -ENOMEM;
 +	}
  
  	return 0;
  }
-@@ -173,3 +185,23 @@ int fit_image_decrypt_data(const void *fit,
-  out:
- 	return ret;
+@@ -166,8 +167,8 @@ static void free_ctx(struct signer *ctx)
+ 	if (ctx->evp_key)
+ 		EVP_PKEY_free(ctx->evp_key);
+ 
+-	if (ctx->hash)
+-		free(ctx->hash);
++	free(ctx->hash);
++	free(ctx->signature);
  }
-+
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data_ciphered, size_t size_ciphered,
-+			      void *data_unciphered, size_t *size_unciphered)
-+{
-+	struct image_cipher_info info;
-+	int ret;
-+
-+	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
-+				      cipher_noffset);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (!info.cipher->decrypt_to)
-+		return -ENOSYS;
-+
-+	return info.cipher->decrypt_to(&info, data_ciphered, size_ciphered,
-+				       data_unciphered, size_unciphered);
-+}
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 044a40e1910..a4192db5eb5 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1030,7 +1030,7 @@ int fit_image_get_data_size(const void *fit, int noffset, int *data_size)
-  *
-  * @fit: pointer to the FIT image header
-  * @noffset: component image node offset
-- * @data_size: holds the data-size property
-+ * @data_size: holds the data-size-unciphered property
-  *
-  * returns:
-  *     0, on success
-@@ -1040,10 +1040,13 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
- 				       size_t *data_size)
- {
- 	const fdt32_t *val;
-+	int len;
  
--	val = fdt_getprop(fit, noffset, "data-size-unciphered", NULL);
-+	val = fdt_getprop(fit, noffset, "data-size-unciphered", &len);
- 	if (!val)
- 		return -ENOENT;
-+	if (len != sizeof(*val))
-+		return -EINVAL;
- 
- 	*data_size = (size_t)fdt32_to_cpu(*val);
- 
-@@ -1568,15 +1571,37 @@ static int fit_image_uncipher(const void *fit, int image_noffset,
- 	if (cipher_noffset < 0)
- 		return 0;
- 
-+#ifndef USE_HOSTCC
-+	if (!tools_build()) {
-+		ulong start = map_to_sysmem(*data);
-+		ulong end = start + *size;
-+
-+		/*
-+		 * Avoid a full-size allocation when the FIT payload is already
-+		 * in writable DRAM. The encrypted bytes are no longer needed
-+		 * after hash verification has completed.
-+		 */
-+		if (end >= start && start >= gd->ram_base && end <= gd->ram_top) {
-+			ret = fit_image_decrypt_data_to(fit, image_noffset,
-+							cipher_noffset,
-+							*data, *size, *data,
-+							&size_dst);
-+			if (ret != -ENOSYS)
-+				goto out;
-+		}
+ /*
+@@ -203,7 +204,12 @@ static ECDSA_SIG *ecdsa_sig_from_raw(void *buf, size_t order)
+ 	s_buf = (uintptr_t)buf + point_bytes;
+ 	r = BN_bin2bn(buf, point_bytes, NULL);
+ 	s = BN_bin2bn((void *)s_buf, point_bytes, NULL);
+-	ECDSA_SIG_set0(sig, r, s);
++	if (!r || !s || !ECDSA_SIG_set0(sig, r, s)) {
++		BN_free(r);
++		BN_free(s);
++		ECDSA_SIG_free(sig);
++		return NULL;
 +	}
-+#endif
-+
- 	ret = fit_image_decrypt_data(fit, image_noffset, cipher_noffset,
- 				     *data, *size, &dst, &size_dst);
- 	if (ret)
- 		goto out;
  
- 	*data = dst;
--	*size = size_dst;
-+out:
-+	if (!ret)
-+		*size = size_dst;
- 
-- out:
- 	return ret;
+ 	return sig;
  }
+@@ -271,10 +277,6 @@ static int load_key_from_fdt(struct signer *ctx, const struct image_sign_info *i
+ 	if (!fdt)
+ 		return -EINVAL;
  
-diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-index a65200fb79b..3ce8999663b 100644
---- a/drivers/crypto/aes/aes-sw.c
-+++ b/drivers/crypto/aes/aes-sw.c
-@@ -39,6 +39,11 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
- 	return SW_KEY_SLOTS;
- }
+-	ret = alloc_ctx(ctx, info);
+-	if (ret)
+-		return ret;
+-
+ 	sig_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
+ 	if (sig_node < 0) {
+ 		fprintf(stderr, "No /signature node found\n");
+@@ -331,7 +333,9 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
+ 	int key_len_bytes, ret;
+ 	char kname[1024];
  
-+static int sw_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
- static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct sw_aes_priv *priv = dev_get_priv(dev);
-@@ -145,6 +150,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 
- static const struct aes_ops aes_ops_sw = {
- 	.available_key_slots = sw_aes_ops_available_key_slots,
-+	.get_software_key_slot = sw_aes_ops_get_software_key_slot,
- 	.select_key_slot = sw_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = sw_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = sw_aes_ops_aes_ecb_encrypt,
-diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
-index 5bdd3d736c4..2bfe3dc3fcc 100644
---- a/drivers/crypto/aes/aes-uclass.c
-+++ b/drivers/crypto/aes/aes-uclass.c
-@@ -23,6 +23,21 @@ int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return ops->available_key_slots(dev);
- }
- 
-+int dm_aes_get_software_key_slot(struct udevice *dev)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->get_software_key_slot)
-+		return -ENOSYS;
-+
-+	return ops->get_software_key_slot(dev);
-+}
-+
- int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	const struct aes_ops *ops;
-diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegra_aes.c
-index 55a4cec525b..348115ac5a7 100644
---- a/drivers/crypto/tegra/tegra_aes.c
-+++ b/drivers/crypto/tegra/tegra_aes.c
-@@ -321,6 +321,12 @@ static int tegra_aes_ops_available_key_slots(struct udevice *dev)
- 	return 4; /* 4 slots in Tegra20 and Tegra30 */
- }
- 
-+static int tegra_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	/* Avoid SBK slot 0, which may hold a preloaded key. */
-+	return TEGRA_AES_SLOT_SBK + 1;
-+}
-+
- static int tegra_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct tegra_aes_priv *priv = dev_get_priv(dev);
-@@ -565,6 +571,7 @@ static int tegra_aes_probe(struct udevice *dev)
- 
- static const struct aes_ops tegra_aes_ops = {
- 	.available_key_slots = tegra_aes_ops_available_key_slots,
-+	.get_software_key_slot = tegra_aes_ops_get_software_key_slot,
- 	.select_key_slot = tegra_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = tegra_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = tegra_aes_ops_aes_ecb_encrypt,
-diff --git a/include/image.h b/include/image.h
-index 9c8a746d576..5edbf8fdc33 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1862,11 +1862,40 @@ int fit_image_check_sig(const void *fit, int noffset, const void *data,
- 			size_t size, const void *key_blob, int required_keynode,
- 			char **err_msgp);
- 
--int fit_image_decrypt_data(const void *fit,
--			   int image_noffset, int cipher_noffset,
--			   const void *data, size_t size,
-+/**
-+ * fit_image_decrypt_data() - Decrypt a FIT image payload
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Returns allocated decrypted payload
-+ * @size_unciphered:	Returns size of decrypted payload
-+ * Return: 0 on success, <0 on error
-+ */
-+int fit_image_decrypt_data(const void *fit, int image_noffset,
-+			   int cipher_noffset, const void *data, size_t size,
- 			   void **data_unciphered, size_t *size_unciphered);
- 
-+/**
-+ * fit_image_decrypt_data_to() - Decrypt a FIT image payload to a buffer
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Destination buffer for decrypted payload. The caller
-+ *			must provide at least @size bytes.
-+ * @size_unciphered:	Returns size of decrypted payload
-+ * Return: 0 on success, <0 on error
-+ */
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data, size_t size,
-+			      void *data_unciphered, size_t *size_unciphered);
-+
- /**
-  * fit_region_make_list() - Make a list of regions to hash
-  *
-@@ -1960,6 +1989,10 @@ struct cipher_algo {
- 	int (*decrypt)(struct image_cipher_info *info,
- 		       const void *cipher, size_t cipher_len,
- 		       void **data, size_t *data_len);
-+
-+	int (*decrypt_to)(struct image_cipher_info *info,
-+			  const void *cipher, size_t cipher_len,
-+			  void *data, size_t *data_len);
- };
- 
- int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
-diff --git a/include/u-boot/aes.h b/include/u-boot/aes.h
-index acbc50b9e6f..6d81af3780d 100644
---- a/include/u-boot/aes.h
-+++ b/include/u-boot/aes.h
-@@ -34,6 +34,9 @@ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
- 		      void **data, size_t *size);
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size);
- #else
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
-@@ -41,6 +44,13 @@ int image_aes_decrypt(struct image_cipher_info *info,
- {
- 	return -ENXIO;
- }
-+
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size)
-+{
-+	return -ENXIO;
-+}
- #endif /* IMAGE_ENABLE_DECRYPT */
- 
- #endif
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index 592b7dbee43..92a667badc1 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -128,11 +128,17 @@ struct udevice;
-  * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
-  * thus in those cases the set_key_for_key_slot() may be skipped.
-  *
-- * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
-- * with 128bits key at slot 0 would be as follow:
-+ * Generic callers which load a software-provided key should first ask the
-+ * driver for a suitable software key slot. This lets hardware drivers avoid
-+ * reserved or preloaded slots while keeping the slot policy local to the
-+ * provider.
-  *
-- * set_key_for_key_slot(DEV, 128, KEY, 0);
-- * select_key_slot(DEV, 128, 0);
-+ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash
-+ * example with a 128-bit software-provided key would be as follows:
-+ *
-+ * slot = get_software_key_slot(DEV);
-+ * set_key_for_key_slot(DEV, 128, KEY, slot);
-+ * select_key_slot(DEV, 128, slot);
-  * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
-  * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
-  * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
-@@ -146,6 +152,16 @@ struct aes_ops {
- 	 */
- 	int (*available_key_slots)(struct udevice *dev);
- 
-+	/**
-+	 * get_software_key_slot() - Get a slot for software-provided keys
-+	 *
-+	 * @dev			The AES udevice
-+	 * @return		Key slot to use for a software-provided key,
-+	 *			0 or positive on success, negative value on
-+	 *			failure
-+	 */
-+	int (*get_software_key_slot)(struct udevice *dev);
-+
- 	/**
- 	 * select_key_slot() - Selects the AES key slot to use for following operations
- 	 *
-@@ -210,6 +226,7 @@ struct aes_ops {
- 	 * @iv			Initialization vector
- 	 * @src			Source data of length 'num_aes_blocks' blocks
- 	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 *			Must support dst == src for in-place decrypt
- 	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
- 	 * @return		0 on success, negative value on failure
- 	 */
-@@ -229,6 +246,15 @@ struct aes_ops {
-  */
- int dm_aes_get_available_key_slots(struct udevice *dev);
- 
-+/**
-+ * dm_aes_get_software_key_slot - Get a slot for software-provided keys
-+ *
-+ * @dev			The AES udevice
-+ * Return:		Key slot to use for a software-provided key,
-+ *			0 or positive on success, -ve on failure
-+ */
-+int dm_aes_get_software_key_slot(struct udevice *dev);
-+
- /**
-  * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
-  *
-@@ -291,6 +317,7 @@ int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
-  * @iv			Initialization vector
-  * @src			Source data of length 'num_aes_blocks' blocks
-  * @dst			Destination data of length 'num_aes_blocks' blocks
-+ *			Must support dst == src for in-place decrypt
-  * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-  * Return:		0 on success, negative value on failure
-  */
-@@ -316,6 +343,11 @@ static inline int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return -ENOSYS;
- }
- 
-+static inline int dm_aes_get_software_key_slot(struct udevice *dev)
-+{
-+	return -ENOSYS;
-+}
-+
- static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	return -ENOSYS;
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..c69a928e6d8 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -19,7 +19,6 @@ obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
- 
- obj-$(CONFIG_AES) += aes.o
--obj-$(CONFIG_AES) += aes/
- obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
- 
- obj-$(CONFIG_FW_LOADER) += fw_loader.o
-@@ -88,6 +87,7 @@ obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) += asn1_decoder.o
- 
- obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
- obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
-+obj-$(CONFIG_$(PHASE_)FIT_CIPHER) += aes/
- obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
- obj-$(CONFIG_$(PHASE_)LZO) += lzo/
- obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
-diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
-index 741102a4723..6432320e79b 100644
---- a/lib/aes/aes-decrypt.c
-+++ b/lib/aes/aes-decrypt.c
-@@ -4,37 +4,111 @@
-  */
- 
- #ifndef USE_HOSTCC
-+#include <dm.h>
- #include <malloc.h>
- #endif
- #include <image.h>
- #include <uboot_aes.h>
- 
-+#ifndef USE_HOSTCC
-+static int image_aes_validate_lengths(struct image_cipher_info *info,
-+				      size_t cipher_len)
-+{
-+	if (!cipher_len || cipher_len % AES_BLOCK_LENGTH ||
-+	    info->size_unciphered > cipher_len)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+#endif
-+
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size)
-+{
-+#ifdef USE_HOSTCC
-+	return -ENOSYS;
-+#else
-+	unsigned int aes_blocks, key_len = info->cipher->key_len;
-+	int ret;
-+
-+	ret = image_aes_validate_lengths(info, cipher_len);
+-	memset(ctx, 0, sizeof(*ctx));
++	ret = init_ctx(ctx);
 +	if (ret)
 +		return ret;
-+
-+	*size = info->size_unciphered;
-+
-+	if (CONFIG_IS_ENABLED(DM_AES)) {
-+		struct udevice *dev;
-+
-+		ret = uclass_first_device_err(UCLASS_AES, &dev);
-+		if (!ret) {
-+			u8 slot;
-+
-+			ret = dm_aes_get_software_key_slot(dev);
-+			if (ret < 0)
-+				return ret;
-+			if (ret > 0xff)
-+				return -ERANGE;
-+			slot = ret;
-+
-+			ret = dm_aes_set_key_for_key_slot(dev, key_len * 8,
-+							  (u8 *)info->key,
-+							  slot);
-+			if (ret)
-+				return ret;
-+
-+			ret = dm_aes_select_key_slot(dev, key_len * 8, slot);
-+			if (ret)
-+				return ret;
-+
-+			aes_blocks = cipher_len / AES_BLOCK_LENGTH;
-+
-+			return dm_aes_cbc_decrypt(dev, (u8 *)info->iv,
-+						  (u8 *)cipher, data,
-+						  aes_blocks);
-+		}
-+	}
-+
-+	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
-+		unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
-+
-+		/* First we expand the key. */
-+		aes_expand_key((u8 *)info->key, key_len, key_exp);
-+
-+		/* Calculate the number of AES blocks to decrypt. */
-+		aes_blocks = cipher_len / AES_BLOCK_LENGTH;
-+
-+		aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
-+				       (u8 *)cipher, data, aes_blocks);
-+		return 0;
-+	}
-+
-+	return -ENOSYS;
-+#endif
-+}
-+
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
- 		      void **data, size_t *size)
+ 
+ 	if (info->fdt_blob) {
+ 		return load_key_from_fdt(ctx, info);
+@@ -345,10 +349,6 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
+ 		return -EINVAL;
+ 	}
+ 
+-	ret = alloc_ctx(ctx, info);
+-	if (ret)
+-		return ret;
+-
+ 	ret = read_key(ctx, kname);
+ 	if (ret)
+ 		return ret;
+@@ -368,11 +368,18 @@ static int do_sign(struct signer *ctx, struct image_sign_info *info,
  {
--#ifndef USE_HOSTCC
--	unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
--	unsigned int aes_blocks, key_len = info->cipher->key_len;
-+#ifdef USE_HOSTCC
-+	return 0;
-+#else
+ 	const struct checksum_algo *algo = info->checksum;
+ 	ECDSA_SIG *sig;
++	int ret;
++
++	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
++	if (ret)
++		return ret;
+ 
+-	algo->calculate(algo->name, region, region_count, ctx->hash);
+ 	sig = ECDSA_do_sign(ctx->hash, algo->checksum_len, ctx->ecdsa_key);
++	if (!sig)
++		return -EIO;
+ 
+ 	ecdsa_sig_encode_raw(ctx->signature, sig, info->crypto->key_len);
++	ECDSA_SIG_free(sig);
+ 
+ 	return 0;
+ }
+@@ -389,10 +396,16 @@ static int ecdsa_check_signature(struct signer *ctx, struct image_sign_info *inf
+ 	okay = ECDSA_do_verify(ctx->hash, info->checksum->checksum_len,
+ 			       sig, ctx->ecdsa_key);
+ 	if (!okay)
+-		fprintf(stderr, "WARNING: Signature is fake news!\n");
++		fprintf(stderr, "WARNING: ECDSA signature verification failed\n");
++	else if (okay < 0)
++		fprintf(stderr, "ERROR: ECDSA signature verification failed\n");
+ 
+ 	ECDSA_SIG_free(sig);
+-	return !okay;
++
++	if (okay == 1)
++		return 0;
++
++	return okay < 0 ? -EIO : -EPERM;
+ }
+ 
+ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+@@ -400,6 +413,7 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+ 		     uint8_t *raw_sig, uint sig_len)
+ {
+ 	const struct checksum_algo *algo = info->checksum;
 +	int ret;
  
- 	*data = malloc(cipher_len);
- 	if (!*data) {
- 		printf("Can't allocate memory to decrypt\n");
- 		return -ENOMEM;
+ 	if (sig_len != info->crypto->key_len * 2) {
+ 		fprintf(stderr, "Signature has wrong length\n");
+@@ -407,7 +421,9 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
  	}
--	*size = info->size_unciphered;
--
--	memcpy(&key_exp[0], info->key, key_len);
  
--	/* First we expand the key. */
--	aes_expand_key((u8 *)info->key, key_len, key_exp);
+ 	memcpy(ctx->signature, raw_sig, sig_len);
+-	algo->calculate(algo->name, region, region_count, ctx->hash);
++	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
++	if (ret)
++		return ret;
+ 
+ 	return ecdsa_check_signature(ctx, info);
+ }
+@@ -420,11 +436,16 @@ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+ 
+ 	ret = prepare_ctx(&ctx, info);
+ 	if (ret >= 0) {
+-		do_sign(&ctx, info, region, region_count);
+-		*sigp = ctx.signature;
+-		*sig_len = info->crypto->key_len * 2;
 -
--	/* Calculate the number of AES blocks to encrypt. */
--	aes_blocks = DIV_ROUND_UP(cipher_len, AES_BLOCK_LENGTH);
-+	ret = image_aes_decrypt_to(info, cipher, cipher_len, *data, size);
-+	if (ret) {
-+		free(*data);
-+		*data = NULL;
+-		ret = ecdsa_check_signature(&ctx, info);
++		ret = alloc_sig_ctx(&ctx, info);
++		if (!ret)
++			ret = do_sign(&ctx, info, region, region_count);
++		if (!ret)
++			ret = ecdsa_check_signature(&ctx, info);
++		if (!ret) {
++			*sigp = ctx.signature;
++			*sig_len = info->crypto->key_len * 2;
++			ctx.signature = NULL;
++		}
+ 	}
+ 
+ 	free_ctx(&ctx);
+@@ -439,8 +460,12 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	int ret;
+ 
+ 	ret = prepare_ctx(&ctx, info);
+-	if (ret >= 0)
+-		ret = do_verify(&ctx, info, region, region_count, sig, sig_len);
++	if (ret >= 0) {
++		ret = alloc_sig_ctx(&ctx, info);
++		if (!ret)
++			ret = do_verify(&ctx, info, region, region_count,
++					sig, sig_len);
 +	}
  
--	aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
--			       (u8 *)cipher, *data, aes_blocks);
+ 	free_ctx(&ctx);
+ 	return ret;
+@@ -453,7 +478,7 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+ 	const char *curve_name;
+ 	const EC_GROUP *group;
+ 	const EC_POINT *point;
+-	BIGNUM *x, *y;
++	BIGNUM *x = NULL, *y = NULL;
+ 
+ 	signature_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
+ 	if (signature_node == -FDT_ERR_NOTFOUND) {
+@@ -491,42 +516,54 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+ 	group = EC_KEY_get0_group(ctx->ecdsa_key);
+ 	key_bits = EC_GROUP_order_bits(group);
+ 	curve_name = OBJ_nid2sn(EC_GROUP_get_curve_name(group));
+-	/* Let 'x' and 'y' memory leak by not BN_free()'ing them. */
+ 	x = BN_new();
+ 	y = BN_new();
++	if (!x || !y) {
++		ret = -ENOMEM;
++		goto out;
++	}
++
+ 	point = EC_KEY_get0_public_key(ctx->ecdsa_key);
+-	EC_POINT_get_affine_coordinates(group, point, x, y, NULL);
++	if (!EC_POINT_get_affine_coordinates(group, point, x, y, NULL)) {
++		ret = -EINVAL;
++		goto out;
++	}
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_HINT,
+ 				 info->keyname);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, "ecdsa,curve", curve_name);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,x-point", x, key_bits);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,y-point", y, key_bits);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, FIT_ALGO_PROP,
+ 				 info->name);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	if (info->require_keys) {
+ 		ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
+ 					 info->require_keys);
+ 		if (ret < 0)
+-			return ret;
++			goto out;
+ 	}
+ 
+-	return key_node;
++	ret = key_node;
++
++out:
++	BN_free(x);
++	BN_free(y);
 +	return ret;
- #endif
+ }
+ 
+ int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
+diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+index 629b662cf6c..8570d35028f 100644
+--- a/lib/ecdsa/ecdsa-verify.c
++++ b/lib/ecdsa/ecdsa-verify.c
+@@ -12,22 +12,6 @@
+ #include <dm/uclass.h>
+ #include <u-boot/ecdsa.h>
+ 
+-/*
+- * Derive size of an ECDSA key from the curve name
+- *
+- * While it's possible to extract the key size by using string manipulation,
+- * use a list of known curves for the time being.
+- */
+-static int ecdsa_key_size(const char *curve_name)
+-{
+-	if (!strcmp(curve_name, "prime256v1"))
+-		return 256;
+-	else if (!strcmp(curve_name, "secp384r1"))
+-		return 384;
 -
 -	return 0;
+-}
+-
+ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ {
+ 	int x_len, y_len;
+@@ -38,9 +22,9 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 		return -ENOMSG;
+ 	}
+ 
+-	key->size_bits = ecdsa_key_size(key->curve_name);
++	key->size_bits = ecdsa_curve_size(key->curve_name);
+ 	if (key->size_bits == 0) {
+-		debug("Unknown ECDSA curve '%s'", key->curve_name);
++		debug("Unknown ECDSA curve '%s'\n", key->curve_name);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -50,9 +34,10 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->x || !key->y)
+ 		return -EINVAL;
+ 
+-	if (x_len != (key->size_bits / 8) || y_len != (key->size_bits / 8)) {
+-		printf("%s: node=%d, curve@%p x@%p+%i y@%p+%i\n", __func__,
+-		       node, key->curve_name, key->x, x_len, key->y, y_len);
++	if (x_len != (key->size_bits + 7) / 8 ||
++	    y_len != (key->size_bits + 7) / 8) {
++		debug("%s: node=%d, curve@%p x@%p+%i y@%p+%i\n", __func__,
++		      node, key->curve_name, key->x, x_len, key->y, y_len);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -123,6 +108,12 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
  }
+ 
++U_BOOT_CRYPTO_ALGO(ecdsa224) = {
++	.name = "ecdsa224",
++	.key_len = ECDSA224_BYTES,
++	.verify = ecdsa_verify,
++};
++
+ U_BOOT_CRYPTO_ALGO(ecdsa256) = {
+ 	.name = "ecdsa256",
+ 	.key_len = ECDSA256_BYTES,
+@@ -135,6 +126,12 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) = {
+ 	.verify = ecdsa_verify,
+ };
+ 
++U_BOOT_CRYPTO_ALGO(secp521r1) = {
++	.name = "secp521r1",
++	.key_len = ECDSA521_BYTES,
++	.verify = ecdsa_verify,
++};
++
+ /*
+  * uclass definition for ECDSA API
+  *
+diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
+index ecb0344c8f6..8c5a7282ce9 100644
+--- a/lib/fdt-libcrypto.c
++++ b/lib/fdt-libcrypto.c
+@@ -5,68 +5,34 @@
+  */
+ 
+ #include <libfdt.h>
++#include <stdio.h>
++#include <stdlib.h>
+ #include <u-boot/fdt-libcrypto.h>
+ 
+ int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+-		   BIGNUM *num, int num_bits)
++		   const BIGNUM *num, int num_bits)
+ {
+-	int nwords = num_bits / 32;
+-	int size;
+-	uint32_t *buf, *ptr;
+-	BIGNUM *tmp, *big2, *big32, *big2_32;
+-	BN_CTX *ctx;
++	int size = (num_bits + 7) / 8;
++	unsigned char *buf;
+ 	int ret;
+ 
+-	tmp = BN_new();
+-	big2 = BN_new();
+-	big32 = BN_new();
+-	big2_32 = BN_new();
++	if (size <= 0)
++		return -FDT_ERR_BADVALUE;
+ 
+-	/*
+-	 * Note: This code assumes that all of the above succeed, or all fail.
+-	 * In practice memory allocations generally do not fail (unless the
+-	 * process is killed), so it does not seem worth handling each of these
+-	 * as a separate case. Technicaly this could leak memory on failure,
+-	 * but a) it won't happen in practice, and b) it doesn't matter as we
+-	 * will immediately exit with a failure code.
+-	 */
+-	if (!tmp || !big2 || !big32 || !big2_32) {
+-		fprintf(stderr, "Out of memory (bignum)\n");
+-		return -ENOMEM;
+-	}
+-	ctx = BN_CTX_new();
+-	if (!ctx) {
+-		fprintf(stderr, "Out of memory (bignum context)\n");
+-		return -ENOMEM;
+-	}
+-	BN_set_word(big2, 2L);
+-	BN_set_word(big32, 32L);
+-	BN_exp(big2_32, big2, big32, ctx); /* B = 2^32 */
+-
+-	size = nwords * sizeof(uint32_t);
+ 	buf = malloc(size);
+ 	if (!buf) {
+ 		fprintf(stderr, "Out of memory (%d bytes)\n", size);
+-		return -ENOMEM;
++		return -FDT_ERR_NOSPACE;
+ 	}
+ 
+-	/* Write out modulus as big endian array of integers */
+-	for (ptr = buf + nwords - 1; ptr >= buf; ptr--) {
+-		BN_mod(tmp, num, big2_32, ctx); /* n = N mod B */
+-		*ptr = cpu_to_fdt32(BN_get_word(tmp));
+-		BN_rshift(num, num, 32); /*  N = N/B */
++	if (BN_bn2binpad(num, buf, size) != size) {
++		free(buf);
++		return -FDT_ERR_BADVALUE;
+ 	}
+ 
+-	/*
+-	 * We try signing with successively increasing size values, so this
+-	 * might fail several times
+-	 */
++	/* Callers may retry with a larger FDT if the property does not fit. */
+ 	ret = fdt_setprop(blob, noffset, prop_name, buf, size);
+ 	free(buf);
+-	BN_free(tmp);
+-	BN_free(big2);
+-	BN_free(big32);
+-	BN_free(big2_32);
+ 
+-	return ret ? -FDT_ERR_NOSPACE : 0;
++	return ret;
+ }
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index 5285263c616..aeca83bd440 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -69,6 +69,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = rsa_add_verify_data,
+ 		.verify = rsa_verify,
+ 	},
++	{
++		.name = "ecdsa224",
++		.key_len = ECDSA224_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ 	{
+ 		.name = "ecdsa256",
+ 		.key_len = ECDSA256_BYTES,
 
 -- 
 2.53.0
