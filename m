@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EECBC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 12:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FF8C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 12:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C91284AE6;
+	by phobos.denx.de (Postfix) with ESMTP id 61B6E84AE8;
 	Fri, 10 Jul 2026 14:56:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KtlZ6m8x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fBAB7zMG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B16284B73; Thu,  9 Jul 2026 20:37:38 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 731CD84BF6; Thu,  9 Jul 2026 20:37:47 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13A5484A78
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 20:37:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B20584A78
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 20:37:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba3e6so229765a12.1
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 11:37:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783622255; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0c5adbso219803a12.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 11:37:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783622265; cv=none;
  d=google.com; s=arc-20260327;
- b=di2aLS61Sc5uMurNA/gvd57Doa4XKKFMDF6XPsdS0+6JqGx3QUQoZuHTqLS8SxPV+f
- BfJluwUTFWOvd5sIGaE0MK1mwDfrGdTx+Gdp1HpgvgG3EgrA8i58ctIprSqfHCt7lyVw
- nZoHeKQNGPtv2N/WewYOC9pUdLe89WWwVmcJ4Abmm5RBf36p0ZwuRYn4dYZarVtyaOpy
- 2rmGtRUtNZGIYGxMWafcCrzqwOolyjvqoND8eJpLxSYPDMO+Jkt0JID2/ANOt+HiHKdP
- TIvPNU3HnXSqSf7nuipQqws2v6F5jIrxhJK/ewvSagDaAFMssCIQu2KaMr6nkmMd3T4T
- OGdg==
+ b=gEXAVMm039VNpJmlvwY9ijRYPlXSueHz1t52jeEPtGDAdFW4sApVWc0DcOv3Zs0RbB
+ xqj2Yo5Z8DeozCL43y4An/AjvwXYZZGudJcWRcm9gShwPNnNEdZpsSVB330tgbHwcm9L
+ VmeM4rOU3QejFSzWXcHzcHYvueywxAM7mU4GJaSqn+cDi7CpjF4Y4nYgWuQ8uGAzIrj/
+ w0c6OlIu4i/76DP8grxipqYyJ9oizly5s6mYZ/7O98i9gBV31YmX6hxfDy+OK29Cyqt3
+ IffvB54wZoFjCwHAQ/TlD3kReeSknQVBc9MmwsjLMqLcPvuEWA0osa6aFC4PjgWphXSc
+ yGJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=QQcA8sJwsqJ5xO1SJF4Q+3ZBEGVVX7AJ+Th1L7MNWNM=;
+ bh=Qa9jHu5+Ml0KIWP0OTo3cpq98Y2jOx2Mx6Jb9OrZEEo=;
  fh=syXcLE83OFDraqGbuQhMyZ13Rvk/iT7U0hwLRfOyT4s=;
- b=ovqWrB1oc0OjPvicKWoruJcFYQzDJ1it6KNCB1FUQvlo5JZdZFSgmm12eP8pFv7me+
- GPQcjgyVEMVCbvLIuJcTtPSxtRUKnXY06S7BEnRt6V4UedpN0PPEPLF/LarflzmizYIt
- JAWUCjTDJQ6aPjUxvHNNKYcfxgRGC3TeiA1mj2H/WuHk9NXsmAe8YIRGqNrr3lWpUvoA
- phSPVrQSXB7MnsDAxvuXES9ix9v2jHMn/hxyD5PQdX5imf7ezFZHp5sAYeq/P+t0bPUD
- RYmEwaLW7ns0p8Q41Y8zrPlvSQtOZ1CNNVT5bpz3fFD1M5r+LjQDQY5MqQFy4jU7ixnP
- cfsA==; darn=lists.denx.de
+ b=ql8DOTNNsitvON1qeM1FHDVC+Pa5fc+2Ojb5L4M0n6NpU3xAfFD45KPhaF4tWv3DSD
+ ThYGYC8qKNLrvkTGS4B7NJtIWMuS/l+RFJrF4ks9bZtJpzbgEY3CjmyfotpBhhkLa6Tp
+ NHkuCwH2asfh7UsmudD6AJvmXsZyeDX/xk29EK8zAjPHUyLYbKxjo8Qx+ldPVdqnBjcK
+ VA449nKk1z3ON8B2sX+tnK7m0WjQXxUYNxg3I97CrRm6c0s4ied+DP6gea8bENR3mPvS
+ eOmEyv8FyKZ+k+aIiHnDThWCsclo3jg9aCEEPyI3ZilxBdYNSyi5HsOOHojEaO2TikE7
+ bBdQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783622255; x=1784227055; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783622265; x=1784227065; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=QQcA8sJwsqJ5xO1SJF4Q+3ZBEGVVX7AJ+Th1L7MNWNM=;
- b=KtlZ6m8x+d85fuDe/AiOLry/hPyg+TSwAHtlh/czSzp/3gQ0B9qRo48kJwyd8tmEc9
- yyhbkb7u4795oGxQP4TaWDvZ4u+MaCwQUuwR2bjy7H4ZwS0LUUSg+tE3C0Eds6GNsDhI
- K/fhZdC4Kidfbl7yoYVBRq8jQzl8Cd/gi6Z+o=
+ :content-type; bh=Qa9jHu5+Ml0KIWP0OTo3cpq98Y2jOx2Mx6Jb9OrZEEo=;
+ b=fBAB7zMGvMxomqP0nE39uLYOiWXObem25KfGM4UlSgueE3wtq/fG8e4X9Kp87OhyL/
+ y0bfqHXLf5rlKw4J+zDU5Kp7RIXtV4UWxZcMOc8ndB0jceYZFjpqlA+cJ0Awot50V/L2
+ r0LuKgVRWJwpLs8hSYkgVmaP9AqLGKfRHc/Dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783622255; x=1784227055;
+ d=1e100.net; s=20251104; t=1783622265; x=1784227065;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=QQcA8sJwsqJ5xO1SJF4Q+3ZBEGVVX7AJ+Th1L7MNWNM=;
- b=fGn6bIVB5DmJWQoXmOjeOBkgc+nEorSIsN79Uhid8kHySVgh/qTxdz/ZmwugCrQzhK
- vLWsyMcdOeQcx2n69HFvMOvMqFvD9joXT7ohSE8jIbU7Piuaj1X9BLQMxAm1hY0q+/Zd
- Rj0pUZ31Maj7earI/Y+jldu/W1KAZm2veV5CERCrtE+28yww5j6YjTDHef8GAafennlj
- Rbncydk/jbBKLzDcjSkP4+tgcjzn0tm7kWvEv4DBo5MTL1+AE8a40f1sd49QftAXIVhI
- pD6KQYFa9Xuq/RFaRVU3VtyCVeLL5sHdkmZe+vlPMV2Wa+bqEUpydwxKLCUmkWxWLHOG
- qBAw==
-X-Gm-Message-State: AOJu0YwJoVXYV/OCPfckMJx8HkWzoBAcgRrZ1QfK+ysO+ch9CSifP9s3
- tGciQKEBru7fcKY7h3MNX6Y1lSYou74c56JBWWQpoeXWqasUPIy2uhEt6nL1dR7/fGvWjXMfNyc
- nee2Qc+/IagtRBZPtA/S6B2BEhrNCDCheze5bbhVb
-X-Gm-Gg: AfdE7ck5w+qOwI2clxVqx8ETNbgaZIC8GgbAl0i9uI4MBpBdiS0pLdKOnKkwERJKBhZ
- 9GLFTEQ0MRiNk230+085gKPg7OIJyxfZQ9kdRQgVCiEKTOinJLfcybXBwf/gXgkYcvJhD0C7ypB
- fQVlii9NAQ51zpCdLF6Z6/c+z6DXPRMLlntcKOGqj8aQCK6nghKFthuiyW/YlqixcUS+Sx4nn6z
- BEv/eSPuVrHIZQvrqD2Qb8MiGDbZdGdIwDBXK8pP5JtA3CT8iBeIYh2etRYNadk3ANNSNk=
-X-Received: by 2002:a05:6402:371a:b0:69a:928:9407 with SMTP id
- 4fb4d7f45d1cf-69ab44b5648mr3434701a12.36.1783622255560; Thu, 09 Jul 2026
- 11:37:35 -0700 (PDT)
+ bh=Qa9jHu5+Ml0KIWP0OTo3cpq98Y2jOx2Mx6Jb9OrZEEo=;
+ b=APeTZkIi88icmn7wKR/qq49nv+HzUw//eQfANNsCmaNCp/OCiX7yO4CkqYUkA5nRns
+ ndtbWANiGsxZM/XCYIpggRsm0jiA8AMuGHlLcMH6B98A1MRP6bwW1TCUUs35WvB0ZFxC
+ zQUxgZPugcGbk6hCAWrlTmvXkEwTDoLdqQL35Ttc+wSQgDN0sDVT9CnDJpJCrP7TyRSc
+ vfQsltSFGp9VcS9FOnc7XYtViEtSNBRh5qyyKMUZd8MRnsqMa5Az8VwtcgTos14hu/uv
+ 655L6KlMJt8PBn97YeP8GlWElb5JUJ6ZNwNmgdTz/2LOB924GP0w5bJN+f+FBZzhryzy
+ 1IBQ==
+X-Gm-Message-State: AOJu0YzeVUa2+eLmsMf5FDqOddjMymf5Fb2ooMOuTnasjQREPTM1j1gr
+ 9q5W4oX0WnJxwTnoiH9xSNvMm9VUIoktOOXuYMTNuqRsZ7uuovD426nKeie5H2wdbsHFgcXqhVo
+ b+3ZcHCREG7Mn2kKwToa6Zx0IAsNsdkgwHT3kXk9I
+X-Gm-Gg: AfdE7cmVw/w+fGUaq7Z3Q/nTVxRdISK7ZumC0K1elFveKTFdtvQbUuXjpPFCOXYJxkV
+ 16Lc9l9GYF2x4yFGEPpvvI/KwUGediDzX4BHWE2ftf7AonYALCc+P6VRBOlOFwFjyWCsEbkulVe
+ ecdltjoCpRvoExUlQQrXFNqHTclNIpacpZsZb6iJjJyYO9Gzf+FFQtLLXf+QLvClG5lAMU/kAx9
+ U3WJ2skLvm7t21IPo2CmT3XcnnDvPWWUtzKxBVp/7Dj7Hxo+r/8eCy0C5333D47HVlD0ESpzX0G
+ P0SdAQ==
+X-Received: by 2002:a05:6402:4345:b0:698:3b7c:7e48 with SMTP id
+ 4fb4d7f45d1cf-69ab44d218fmr3497896a12.40.1783622265037; Thu, 09 Jul 2026
+ 11:37:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com>
- <20260702-submit-ce-series-v2-v2-4-ffda5bed58af@gmail.com>
-In-Reply-To: <20260702-submit-ce-series-v2-v2-4-ffda5bed58af@gmail.com>
+ <20260702-submit-ce-series-v2-v2-6-ffda5bed58af@gmail.com>
+In-Reply-To: <20260702-submit-ce-series-v2-v2-6-ffda5bed58af@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jul 2026 12:37:22 -0600
-X-Gm-Features: AUfX_mxCutOE0pwPjPj0YNIMmst5O5Mhgp9lx3r1Z2I6NW8xuD90RdSsg6GzbWo
-Message-ID: <CAFLszThtO25OjJDHd8tb7D5uP00_UBXJLinGmSeH4LxE5hMm1A@mail.gmail.com>
-Subject: Re: [PATCH v2 04/10] spl: fit: support encrypted payloads
+Date: Thu, 9 Jul 2026 12:37:28 -0600
+X-Gm-Features: AUfX_mzazuUupWz8HRw_cy4Xf7QPaHDGcp9bXAELBBPOFBJtikoTsoRE1z0-mzo
+Message-ID: <CAFLszTjzEfuXRrvwurE4+_XgoeAd-KLhuJ5toZg9TmNYX8oH8w@mail.gmail.com>
+Subject: Re: [PATCH v2 06/10] lib: ecdsa: support additional curve sizes
 To: james.hilliard1@gmail.com
 Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
  Ion Agorria <ion@agorria.com>, 
@@ -136,112 +137,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi James,
-
 On 2026-07-03T01:49:45, James Hilliard <james.hilliard1@gmail.com> wrote:
-> spl: fit: support encrypted payloads
+> lib: ecdsa: support additional curve sizes
 >
-> Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
-> decompression or moving it to the final load address.
+> U-Boot's ECDSA FIT code is tied closely to prime256v1 and secp384r1.
+> Hardware verifiers may support a wider set of curves, and FIT public key
+> properties need to preserve the fixed coordinate width of those curves.
 >
-> SPL cannot always allocate a new output buffer while loading FIT images,
-> so use the caller-provided decrypt-to-buffer helper. External encrypted
-> images are read into scratch memory first, then decrypted in place before
-> the existing copy or decompression path consumes them. Embedded encrypted
-> images decrypt into the final load buffer, or into scratch memory when
-> decompression is still required.
+> Add common curve-size handling for secp224r1, prime256v1, secp384r1 and
+> secp521r1. Use fixed-width big-endian byte arrays when writing libcrypto
+> BIGNUM values into the control FDT so non-32-bit-aligned coordinates such
+> as secp521r1 are encoded correctly. RSA key sizes are already multiples
+> of 32 bits, so their generated byte encoding is unchanged.
 >
-> Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
-> support is selected by phase. Keep that path disabled for host tools,
-> since the target-side decrypt helper depends on the U-Boot control FDT
-> and runtime crypto providers.
+> Register the corresponding host and target ECDSA algorithm names and
+> clean up the libcrypto signing context so raw signatures are owned and
+> freed consistently on error paths.
 >
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> SPL ECDSA verification uses UCLASS_ECDSA, so make SPL_ECDSA_VERIFY
+> depend on SPL_DM. Keep fdt_add_bignum() in the libfdt error namespace so
+> RSA and ECDSA callers continue to handle FDT growth and other errors
+> consistently.
+> [...]
 >
-> boot/Kconfig         |  8 +++++++
->  boot/image-fit.c     |  2 +-
->  common/spl/spl_fit.c | 68 ++++++++++++++++++++++++++++++++++++++++++++++------
->  3 files changed, 70 insertions(+), 8 deletions(-)
+> doc/mkimage.1                  |   3 +
+>  doc/usage/fit/signature.rst    |   9 ++-
+>  include/u-boot/ecdsa.h         |  22 +++++++
+>  include/u-boot/fdt-libcrypto.h |   6 +-
+>  lib/ecdsa/Kconfig              |   2 +-
+>  lib/ecdsa/ecdsa-libcrypto.c    | 141 ++++++++++++++++++++++++++---------------
+>  lib/ecdsa/ecdsa-verify.c       |  39 ++++++------
+>  lib/fdt-libcrypto.c            |  60 ++++--------------
+>  tools/image-sig-host.c         |   7 ++
+>  9 files changed, 162 insertions(+), 127 deletions(-)
 
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -256,6 +281,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
->       if (spl_decompression_enabled()) {
->               fit_image_get_comp(fit, node, &image_comp);
->               debug("%s ", genimg_get_comp_name(image_comp));
-> +             needs_decomp = image_comp == IH_COMP_GZIP ||
-> +                            image_comp == IH_COMP_LZMA;
->       }
-
-This also drives buffer selection for the encrypted path. If someone
-later adds a new compression type here (say IH_COMP_LZ4) they will
-have to remember to update this test too, otherwise decrypt lands in
-the load buffer and decomp then overwrites it. Please extract a small
-helper like spl_image_needs_decomp(image_comp) so both sites stay in
-sync.
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -267,6 +294,10 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
->               load_addr = image_info->load_addr;
->       }
->
-> +     if (CONFIG_IS_ENABLED(FIT_CIPHER))
-> +             cipher_node = fdt_subnode_offset(fit, node, FIT_CIPHER_NODENAME);
-> +     encrypted = cipher_node >= 0;
-
-If SPL_FIT_CIPHER is not enabled but the FIT actually carries a cipher
-subnode, this silently treats the ciphertext as plaintext and hands it
-to the copy/decompress path - the hash check passes (FIT hashes are
-over the ciphertext) and SPL then hands garbage to U-Boot proper.
-Should we have a message in that case, or can we assume that
-SPL_FIT_CIPHER must be enabled whenever we encounter a FIT that might
-have ciphertext?
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -331,10 +363,32 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
-> +     load_ptr = map_sysmem(load_addr, length);
-> +     if (encrypted) {
-> +             void *decrypt_ptr;
-> +
-> +             if (needs_decomp) {
-> +                     if (external_data)
-> +                             decrypt_ptr = src;
-> +                     else
-> +                             decrypt_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
-> +                                                            ARCH_DMA_MINALIGN),
-> +                                                      length);
-> +             } else if (external_data) {
-> +                     decrypt_ptr = src;
-> +             } else {
-> +                     decrypt_ptr = load_ptr;
-> +             }
-
-For external_data the answer is always 'decrypt_ptr = src' regardless
-of needs_decomp, so this can flatten to:
-
-    if (external_data)
-        decrypt_ptr = src;
-    else if (needs_decomp)
-        decrypt_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
-                                       ARCH_DMA_MINALIGN), length);
-    else
-        decrypt_ptr = load_ptr;
-
-That also makes the intent easier to match against the "read into
-scratch, decrypt in place" wording in the commit message.
-
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> @@ -352,7 +406,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
->                       return -EIO;
->               }
->               length = loadEnd - CONFIG_SYS_LOAD_ADDR;
-> -     } else {
-> +     } else if (src != load_ptr) {
->               memmove(load_ptr, src, length);
->       }
-
-Please add a one-line comment noting that 'src == load_ptr' only
-happens when we decrypted straight into the load buffer, so the next
-reader doesn't start 'fixing' the else-branch.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
