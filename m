@@ -4,91 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFECC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 04:03:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EC05C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 04:07:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D945184A51;
-	Thu,  9 Jul 2026 06:03:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B655484A3E;
+	Thu,  9 Jul 2026 06:07:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MuacxASg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bmdLyaKq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E0484A6F; Thu,  9 Jul 2026 06:03:50 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 26E0484A51; Thu,  9 Jul 2026 06:07:37 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1534A84A3E
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 06:03:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E24CB83FF5
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 06:07:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-8454160043aso1388956b3a.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 21:03:46 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2cacf197759so22293485ad.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 21:07:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783569825; x=1784174625; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1783570053; x=1784174853; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Bqc4nn5dH/4ZsKP8axt2cJk05nqspIKLc3jCJraKR3Y=;
- b=MuacxASgSl4PoJiH3+Vpb6a391mAjE4B6ovs1dg+dCRuWG0/9jYXrYG7LIamU01W5l
- 6dIxDNMAd6IgzFPYy7H5LQnVAazyw0warqOiPE4IWxxZ+6rkIONdBcfIRzhdXXCCeNsh
- u06G8NsJ07ePYwmxFhG51ILFTC+66r5riWlA67+yYK2M5zoNGg8OfZ3VZd4eyh8v/lhj
- RqnCQ1bliaQyXpArRG9y9mmYHGJeOvO6dEbg3S3GXQ11iWcNJNlG5pW3Got/wukOxgqL
- vEaeeQ2GnLieUH9q4lS5p+UFK96kEfui4MdQ/v5QJqu6pYuiI40KEC1wN2DyLJscOzgU
- g+NQ==
+ :content-type; bh=0iqERuJMJ5cJgfZ8nDmlY6d32q10URCsve8rw5DXusw=;
+ b=bmdLyaKqOMnvv9YxyEkEOcuq8r12BzCMw1IIo2rWuSpH4xoHnbkFJa3YElc+3zewf3
+ h5AZC1kqMFA32wVl9A3l/q2U7mSGS0MRXAyHYc16fiT40AaKOwhwMWGrbR2slcEQrimB
+ CyCsja+cuLWhtjAZYsqdWv3YPLZqbdQxyLvAqZQbYNdJOcK1ta/f1eqn2rwdxqbjwDSD
+ fpbdnBCqIHLe+ahuhv5isFWeNxIWGM6ySN4Ha6k4lmEc2taeO3x4jMptzteqs19bmE8i
+ ki8aOy5STkMEbC8doikU/Ro9Mers65LQkSbzvgIEZpk+Ju11gxibn49kAEjqnagZJfZA
+ ItEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783569825; x=1784174625;
+ d=1e100.net; s=20251104; t=1783570053; x=1784174853;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Bqc4nn5dH/4ZsKP8axt2cJk05nqspIKLc3jCJraKR3Y=;
- b=O0YWi94SCNR/ueySlv7Ge1m+b6LeAARo55UlalEeyNWhvVjP5hBk1zfkZL7UhDF2I4
- LTuMCmgw3NqA7CmqNUErsKmd763GOQ3RpkZloFtzfjVoyEBiPePJdq0c3whkU324KeST
- ZURbmNwKULluD6PjnY2qcAuRVv3/53+eHVAtKFp9VmEIuwOhs8TkNqWh1zrcFmrkomJ3
- tK9Yht3EvPxi6CrwCF5ZlsBsGXWdv2zNpuQOzjcKkVDjl8dnrnrWsY3nPrkdNlxdeQs/
- 8Ho+PGnKtxGriKF34bT4XElbUbSwrWDY/8VBQxIR65P5uDdhbngT35LArLmoEzgxn9uk
- QL0w==
+ bh=0iqERuJMJ5cJgfZ8nDmlY6d32q10URCsve8rw5DXusw=;
+ b=FYkkSI9LrraQV6FiNLDMLAWA3MgDGxUobYsgbbxFtmRfVmFAglJZ3H1s27rLOO/8ut
+ gztRW1C4rXalxdvhaLNRu48U2xOTufm9QJX8rkY7pQPSTXFf7qcED0N4n0G2dwFikrpB
+ 6/kja0/oZfklML70VZjsatPTZNfAmM213Q3JDtL1H/maAibSL0hi6K7zjYSgJmeHyxQw
+ TKpHc3UxHo2/CAKYT781ykPLzIG4ORcGcir145nKzC94mxq+PmDHLIlDdXPXHNC7r8Dh
+ cGni9M2xi/C1TgADKN5BQ6TAE1fFENY4l4JCTZJbdMfVQywIJH1JGi+CCJoPqYfbIO+O
+ ueLw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpF1bFX+WG3avK+oOVYCk51OgxfFL4UGlSbCgkakGRayN2eS0gE+yS+SZBOhMRppPbRJz1PSTg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzSEWlZYtDsBHsvwTh0A+oh2QEyqg3Y/7YgtXoZn9jUnk9xPwVw
- LDzBBXsIz7Janqc5YTAE0hUQzupyEwRsMw1sU5H0Cge3N0B4rYfS70Q1+/FDWR7kE2o=
-X-Gm-Gg: AfdE7cl4Ylp3r4F83gcXn07sEFL4Yy6q/z6/h1DwEZ3b/Lc0EHjrqoRFI3T++Qd0cqM
- CWRRBa2Oe5SKMmQ3iBnXzXjq+hLe6NCKwujcbaaPKMKoyqYnlp/K55IY6KEfzIfVlEIlKoCJS1f
- uGr+Q4qBfdLJ0AAgCbQbxoy80DK8++PLpYLTnCrqsFDYho2Usq8/J5GcX4N+j3pHnokyRIYYM2N
- KOKSddAaU5jUobxMm0M8T6iybtNSgMiwXGmN/gzBiLiQYhA5n7qFGZC95QWErfkyy1PtldRKbT/
- 7DG02iosHvY45eObbfZB4Pl0npNjKDOLJ3VhLoj6J2/n5dMEnbjkrxaGkksWkoUD2Z5gk3Byf3Y
- bh/B0UJtNqSLEOi1VTHALab7lN0Ci5ztOxwIiYS0HOvZpLrzdRtfWFsYKZj5s3HgF/Ap+Iz7BLI
- QjO3LmP3gzuy8p/XePaO2r3ziXzBY=
-X-Received: by 2002:a05:6a00:1493:b0:848:5d9b:687c with SMTP id
- d2e1a72fcca58-8485d9b6c08mr647953b3a.54.1783569824663; 
- Wed, 08 Jul 2026 21:03:44 -0700 (PDT)
+ AHgh+RoVT8NKBaW9kJX7JonZJOrhzFQALOKsteuolV/EiiNRbyYF+Zwwl0L6mfMKWBkqhTtP4/E7Bj4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwmaIE+IqatW6M6vA6acJ+XZldqCMh1NNncN9HcQ+eJjG1SBGQK
+ HYXmW8zQg0UolE6sqwWS4yp9JAuwUhRL6j5F8CTzljZTmh627ECQo+bd8DoLqWrXKuk=
+X-Gm-Gg: AfdE7cnHY9DbflEMUFkaWUJzew+6z6HgBlzuiWKj92w+aU/JWK4uYTqvIxAl6TFUeA+
+ W/EzvWhchO1wzYnns9UmC7wcDlV0nmDWPuwdJLjvT+bahcWWcizmIphaXX8b8OLc0Zpz8mcqAS6
+ Wd1Hv220KY1NfW3Zwywu7L/OC2KTVt/YAfX4kFCKJNVnOFYsHWawMpefTMCNrfiSK2hUUNN+OCY
+ +WxbEYIEb/EVdH9R9PQ6lxMj/7Pi1Nfy9WCfmAZ4Q5AdxI1YL6aR6aJOVg1mUxifGK9ArnY8AP4
+ /cbIsYG1un3VObLBULlorRELYaFgqdFpqw4liwZToHzUKuObEk+smNHV5HeLQ/RP4SwgAdAOG1g
+ 6g58JqsILayz8sw9QAyF8JJP4PtZ3tnCOMAdG/63xYbpl0Qd1R9CtLzk5ulSB5qyHfIxaCYfqB4
+ OJAOFiZ130uGLe0rgQf2PvwmV4+Vs=
+X-Received: by 2002:a17:903:198e:b0:2ca:d31e:ac50 with SMTP id
+ d9443c01a7336-2ccea2ccab6mr56991605ad.17.1783570053141; 
+ Wed, 08 Jul 2026 21:07:33 -0700 (PDT)
 Received: from [192.168.45.141] ([112.212.195.74])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84848939b38sm1616671b3a.10.2026.07.08.21.03.42
+ d9443c01a7336-2ccc9d1ea74sm36554975ad.41.2026.07.08.21.07.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jul 2026 21:03:44 -0700 (PDT)
-Message-ID: <48cde03b-5032-4863-b44a-a401dc793cfe@linaro.org>
-Date: Thu, 9 Jul 2026 06:03:41 +0200
+ Wed, 08 Jul 2026 21:07:30 -0700 (PDT)
+Message-ID: <d57d3026-e9ca-44f5-8431-2ddcfa9d6cf4@linaro.org>
+Date: Thu, 9 Jul 2026 06:07:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: sa8775p: enable GPLL9 before SDCC1 high-speed
- rates
-To: Royyan Zahir <royzah@gmail.com>, u-boot@lists.denx.de,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de
-References: <20260708170228.621618-1-royzah@gmail.com>
+Subject: Re: [PATCH v2 2/2] serial: msm_geni: validate RX FIFO data with IRQ
+ status flags
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Stephen Boyd <swboyd@chromium.org>
+References: <20260707-uart-v2-0-d38277b6c4ce@oss.qualcomm.com>
+ <20260707-uart-v2-2-d38277b6c4ce@oss.qualcomm.com>
+ <7f365f1e-75fb-4cc4-838c-d6e2f91f21ea@linaro.org>
+ <77178f9e-5839-4ea3-83cb-36763c89a018@oss.qualcomm.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260708170228.621618-1-royzah@gmail.com>
+In-Reply-To: <77178f9e-5839-4ea3-83cb-36763c89a018@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,80 +110,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Royyan,
 
-On 7/8/26 19:02, Royyan Zahir wrote:
-> On lemans/sa8775p, the SDCC1 apps clock high-speed rates (192 and 384 MHz)
-> source from GPLL9 (ftbl_gcc_sdcc1_apps_clk_src), but the driver never enables
-> GPLL9. When SDCC1 is set to such a rate the RCG switches its source to a PLL
-> that is off, so the CMD_RCGR update bit never self-clears and U-Boot warns:
+
+On 7/8/26 14:31, Balaji Selvanathan wrote:
+> Hi Casey,
 > 
->    WARNING: RCG @ 0x120014 stuck at off
+> On 7/8/2026 5:54 PM, Casey Connolly wrote:
+>> Hi Balaji,
+>>
+>> On 7/7/26 11:52, Balaji Selvanathan wrote:
+>>> Add IRQ status validation to distinguish legitimate UART data from
+>>> electrical noise in the RX FIFO.
+>>>
+>>> When the UART cable is disconnected, the floating RX line can pick up
+>>> noise that the GENI hardware interprets as valid data and places in
+>>> the FIFO. So, check the RX IRQ status register for RX watermark or last
+>>> flags before reporting pending data.
+>>
+>> Thanks for respinning this series. Is this patch still necessary with 
+>> the first one? Since we should no longer be in this state with noise 
+>> in the FIFO after resetting it correctly iiuc?
 > 
-> Vote GPLL9 on before selecting it as the SDCC1 source, mirroring how
-> clock-sm8250.c enables GPLL9 for SDCC2. GPLL9's mode/status register is at
-> 0x9000 (lock is bit 31) and its enable vote is bit 9 of the APCS GPLL vote
-> register 0x4b028, matching gcc-sa8775p.c in Linux.
+> Even after fixing init sequence, still it stops at U-Boot CLI when the 
+> UART cable is disconnected on QCS615-EVK, so seems SE_GENI_S_IRQ_STATUS 
+> register has to be checked to make sure data is valid.
 
-Nice find! Thanks for fixing this.
+If that's the case then I suspect we're missing something in the init 
+sequence, since it should drain the fifo... Why would you send me patch 
+1 if it doesn't even work???
 
-> 
-> Not hardware-validated for SDCC high speed: the board this was found on
-> (Qualcomm IQ-9075 / Lemans EVK) boots from UFS with no SD card populated, so
-> here it only clears the stuck-RCG warning. Build-tested on lemans.
-
-Can you test file access on an sdcard perhaps?
-
-Balaji, Varadarajan, Sumit: could you confirm this fix and maybe send a T-b?
 
 > 
-> Signed-off-by: Royyan Zahir <royzah@gmail.com>
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-Thanks,
-// Casey
-
-> ---
->   drivers/clk/qcom/clock-sa8775p.c | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
+> Thanks,
 > 
-> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
-> --- a/drivers/clk/qcom/clock-sa8775p.c
-> +++ b/drivers/clk/qcom/clock-sa8775p.c
-> @@ -26,6 +26,9 @@
+> Balaji
 > 
->   #define SDCC1_APPS_CLK_CMD_RCGR			0x20014
-> 
-> +#define APCS_GPLL9_STATUS			0x9000
-> +#define APCS_GPLLX_ENA_REG			0x4b028
-> +
->   #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
->   #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
->   #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
-> @@ -90,6 +93,14 @@
->   	{ }
->   };
-> 
-> +/* GPLL9 (SDCC1 high-speed source) is not enabled by earlier boot stages. */
-> +static const struct pll_vote_clk gpll9_vote_clk = {
-> +	.status = APCS_GPLL9_STATUS,
-> +	.status_bit = BIT(31),
-> +	.ena_vote = APCS_GPLLX_ENA_REG,
-> +	.vote_bit = BIT(9),
-> +};
-> +
->   static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
->   {
->   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> @@ -130,6 +141,9 @@
->   		return 19200000;
->   	case GCC_SDCC1_APPS_CLK:
->   		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
-> +		/* SDCC1 high-speed rates source from GPLL9; vote it on first. */
-> +		if (freq->src == CFG_CLK_SRC_GPLL9)
-> +			clk_enable_gpll0(priv->base, &gpll9_vote_clk);
->   		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
->   				     freq->pre_div, freq->m, freq->n, freq->src, 8);
->   		return freq->freq;
+>>
+>> Thanks,
+>> // Casey
+>>
+>>>
+>>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>>> ---
+>>> Changes in v2:
+>>> - No changes
+>>> ---
+>>>   drivers/serial/serial_msm_geni.c | 28 +++++++++++++++++++++-------
+>>>   1 file changed, 21 insertions(+), 7 deletions(-)
+>>>
+>>> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/ 
+>>> serial_msm_geni.c
+>>> index a580dee8c8a..07d38178759 100644
+>>> --- a/drivers/serial/serial_msm_geni.c
+>>> +++ b/drivers/serial/serial_msm_geni.c
+>>> @@ -483,15 +483,29 @@ static int msm_serial_getc(struct udevice *dev)
+>>>   static int msm_serial_pending(struct udevice *dev, bool input)
+>>>   {
+>>>       struct msm_serial_data *priv = dev_get_priv(dev);
+>>> +    u32 fifo_status;
+>>> +    u32 s_irq_status;
+>>> +    int word_count;
+>>>   -    if (input)
+>>> -        return readl(priv->base + SE_GENI_RX_FIFO_STATUS) &
+>>> -               RX_FIFO_WC_MSK;
+>>> -    else
+>>> -        return readl(priv->base + SE_GENI_TX_FIFO_STATUS) &
+>>> -               TX_FIFO_WC_MSK;
+>>> +    if (input) {
+>>> +        fifo_status = readl(priv->base + SE_GENI_RX_FIFO_STATUS);
+>>> +        word_count = fifo_status & RX_FIFO_WC_MSK;
+>>>   -    return 0;
+>>> +        if (word_count > 0) {
+>>> +            /* Validate RX FIFO data with IRQ status */
+>>> +            s_irq_status = readl(priv->base + SE_GENI_S_IRQ_STATUS);
+>>> +
+>>> +            if (!(s_irq_status & (S_RX_FIFO_WATERMARK_EN | 
+>>> S_RX_FIFO_LAST_EN)))
+>>> +                return 0;
+>>> +        }
+>>> +
+>>> +        return word_count;
+>>> +    } else {
+>>> +        fifo_status = readl(priv->base + SE_GENI_TX_FIFO_STATUS);
+>>> +        word_count = fifo_status & TX_FIFO_WC_MSK;
+>>> +
+>>> +        return word_count;
+>>> +    }
+>>>   }
+>>>     static const struct dm_serial_ops msm_serial_ops = {
+>>>
+>>
 
