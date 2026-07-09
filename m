@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F17C44503
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D2AC44503
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7314184AB5;
-	Thu,  9 Jul 2026 03:52:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A00084AF1;
+	Thu,  9 Jul 2026 03:52:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XK0Ltss9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Aq4klBon";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12DC84AEB; Thu,  9 Jul 2026 03:52:46 +0200 (CEST)
+ id 96B0084AF1; Thu,  9 Jul 2026 03:52:53 +0200 (CEST)
 Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
  [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C19FA84994
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:52:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 824B184994
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:52:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7eb42a2f5feso187066a34.1
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:52:44 -0700 (PDT)
+ 46e09a7af769-7eb63dbd229so315875a34.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783561963; x=1784166763; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783561970; x=1784166770; darn=lists.denx.de;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=YIq/pTtJbPiU6A2Wx7TNFcBkBt2s3SHfa4QkkqfHQOI=;
- b=XK0Ltss9Rpyj4kxIplo9m5WRAbmB05riNIk4aFoRsPKd98nidjW+G5x7uUtNoqEM7Z
- ZkgqZNopruNRDNJ17tK4gbtey3MVEzQ/iOMuHXFGjR9zcO0JN4ioINUuu44S3M8ZtMcH
- tsYc6Qwj0jaMgmL8KVkx9HyRQasKTBQ5CcfjA=
+ bh=SRklGgpSNWxEMRHfLB8EBA82dSxFlILbmSP5Wdyb3x4=;
+ b=Aq4klBonuj6PSBGErsQPPKwLy1DJB6PNKO/umRDuwms7q7bAWZqljpyn6A3egL9QvM
+ l9iGXMBuceHuv4O5LkfxRIDR2NlFBHisjMm8CEDU118r+FerfmULiQWoV6V3BGlXL1z/
+ Ox0x3ltkU5RFuRPSL9ndmR95+xWgn/IGobA34=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783561963; x=1784166763;
+ d=1e100.net; s=20251104; t=1783561970; x=1784166770;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YIq/pTtJbPiU6A2Wx7TNFcBkBt2s3SHfa4QkkqfHQOI=;
- b=a3MX535wZIfiIQNZOS28XlFoLSRc6eBC/L8xW3pH4cBaT5IUc/MbaeFU26ADSKy7gB
- VrrF+Fx8q95hhE8a9V772PTNgjcRwY4CGwj3/9OR/eQ4Zqe9GV31xoYTQeAdMJyjHTYG
- p/4OoAbjH8bF3CPCGc8t6Y9Iar4RVAdjTschNlas6jf8Fm3KQrcB9UOMawPLL3JQWkar
- sykQk7ZSh1gGmReBioLMdN+0y98+uBDthPGaIEdfgmwm6F1y8Pf2NJj27h4avQ9BbboM
- 1lKbOMD9FJzXijnviz/+e+D9U1VCkkG8mtsb50wvb7yKANtMvERlG3sErHyGv6UKIN81
- qEuw==
-X-Gm-Message-State: AOJu0YxUCFfuv0xeJT1oEqy/kx+LtyyF/yR6CxTFTKoYgTaIGV64EeZQ
- M3hiPIPF+ymitNVjxVSk/52p43e/KjBewKlIJpNxruUdKUof3/Ec0G0alB3KRPhMyYdBjTPlaSf
- PuRu3EJg=
-X-Gm-Gg: AfdE7cl03accl5qoITVnhKBFm/6it9WYFlzsRFosZvTnX4gnsQm9CZ/6RM37ovWseXk
- RX0b64HHCOt51294VvpKLwQ0JSLIVJ7XrlV7GYJg9CluiTWhTslJUqJhHKRO9dgKU4a/Z2tavEl
- oGQYIkyMQ9u/pFKiCCi+qjqoLZO1EQ7MXf5b7mcnFxTlySyr8DKwVE5Rlmr0jDSilQNofhI/dn0
- Se0PPXmjVO6h2baYsHP7XfmzNDpk9emRFdF6DaATxpKeLA8Cj8lssc+d9Xtvd8e7keH1z8SD+Hh
- EMc+E8wfkbWzKiXNfeyMZ3U+8yXGeWncjgxLqXbmM6+phsqx3ux5BYi4EDO203H+CrB7buZ5jzZ
- oqgYoVtJAejrS8B350PufoMnaScFd9q9vzT7Y6qO3Jg12XYiDwu+YdnEZV11zsxsWfFtvXfQC43
- wZoIeNkiXHuzeGIaG7TFb8CGybSmQ2ope8H2r7JMWazxmB0Xn2gzv2o4uyae9d8yxfAZ66mJpOH
- p0wZ6sSBBwdub740KXeQBT45cjVXxFunAEp1A==
-X-Received: by 2002:a05:6830:3152:b0:7eb:c792:5091 with SMTP id
- 46e09a7af769-7ebcffd9e26mr3352904a34.25.1783561963520; 
- Wed, 08 Jul 2026 18:52:43 -0700 (PDT)
+ bh=SRklGgpSNWxEMRHfLB8EBA82dSxFlILbmSP5Wdyb3x4=;
+ b=FyhZBdCOx6F++JBv068VqWi4gd7dJpQCkkD8g1jWLLNFxic4wLJXE0WlR2QMkZBKpi
+ gLjBdqiCS+MteUtQbcBQHe5/U80rUuIqU8TYlPN4JltsV03Pya5co5FnzSDnwFOet8fZ
+ OZhWk8yrcsPzkJ3OWePSzfkAFj1KidmWCraR89ZX2QMlQ5w3GfA8BtLx3xNnj95t26de
+ zoSd14oae5OfOzfgvdm/SXFCt2+Ywz9DzIJ/toiNJy9ZVwCScg34bN6kesW2Y5AwMgpx
+ 4IOS7fcDlJ4v9E3QE+II2+1KUewQEVXddbEhKfwdt2n9uCPbBLWzrERizTkJ9HQQZbK1
+ v8gg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+sdwzswqSiG3955nHjcrPNliPcTj9JHpJNcIjGh3YJytEp55wR/3qfv4bOZ2EXkS6Eh4agzJQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxg5LkRX7HLTqHSyqIQoC2/zuU7xJ8/7F+NZFSo0/RC9kw5yA82
+ gmjVD+zTzptY42obQRn3tlzZaUYl9B8AAV528b/nzzIg+qgAGzO1F11ef0FdB4AHg4c=
+X-Gm-Gg: AfdE7ckjcHfo1mwJcqxgVMXPojkezzb+nr9Z2nUJtb4WB7Jk0jaPCML2ybEA5j3ozsG
+ 87Z0KzajwTo+ETEtisk2Wr1CGSy1S3pnEaPQpicUJbGialEF9r7gd3MytgzK6lEPDYL4oHbqh3U
+ Usukgr4rEpPDTY7tGNrWTU1B1qYMuIy8v1LMxHY+hwwmSaLPMfziJCLLGhBJbLV29voI3VMoq1z
+ BuYNscueJEYgHIzdDYD0gYh+PtelhjXTeNm27xlRxe15dKQap4gCfCkvF7Q8IO+zsqU6tzaOkt9
+ L5jrbucBz8iJql5ho4p2Ti0uNbHSSr9W4EeArIBMqKGwl3ZqQ0S4qRxE9xKjIqM0SkxFap41pVO
+ FwsBUaPffYN90Ne+WvGyBTFrO2hajvxWDBUfScn1SLUqhaTdOYlcTy6b8JdIigj0ubhwPVQEV4Y
+ yW6NhfwrVd8v3Ol+OiXrD/qTrcr2UKKdyAvlBmlZSxpGuhMXIpatfHlIBaMSLWpdoDRcbhxBmiC
+ jVTfKnsTw8VKkKB5SuLscZdVB15z6ex723zpA==
+X-Received: by 2002:a9d:7c8f:0:b0:7e9:dd46:b9f8 with SMTP id
+ 46e09a7af769-7ebe1fde031mr399963a34.15.1783561970260; 
+ Wed, 08 Jul 2026 18:52:50 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcb2b79c9sm3021428a34.22.2026.07.08.18.52.42
+ 46e09a7af769-7ebcb3f27besm3027760a34.25.2026.07.08.18.52.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 18:52:42 -0700 (PDT)
-Date: Wed, 8 Jul 2026 19:52:41 -0600
+ Wed, 08 Jul 2026 18:52:49 -0700 (PDT)
+Date: Wed, 8 Jul 2026 19:52:47 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 06/11] Kconfig: Add missing depends on xPL to xPL_ symbols
-Message-ID: <20260709015241.GQ749385@bill-the-cat>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
+Message-ID: <20260709015247.GR749385@bill-the-cat>
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-7-jonas@kwiboo.se>
+ <20260708220540.3368825-9-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zF9veVJOmrXdL1KK"
+ protocol="application/pgp-signature"; boundary="W8DUYIUlmn0LemlK"
 Content-Disposition: inline
-In-Reply-To: <20260708220540.3368825-7-jonas@kwiboo.se>
+In-Reply-To: <20260708220540.3368825-9-jonas@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,42 +102,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zF9veVJOmrXdL1KK
+--W8DUYIUlmn0LemlK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 08, 2026 at 10:05:32PM +0000, Jonas Karlman wrote:
+On Wed, Jul 08, 2026 at 10:05:34PM +0000, Jonas Karlman wrote:
 
-> xPL_<name> symbols should typically depend on the associated xPL symbol.
->=20
-> Add missing depends on xPL to xPL_<name> symbols to avoid the xPL_<name>
-> symbols being available when the associated xPL symbol is disabled.
+> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
+> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
 >=20
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->  common/Kconfig | 2 ++
->  lib/Kconfig    | 7 ++++++-
->  2 files changed, 8 insertions(+), 1 deletion(-)
+>  drivers/i2c/Kconfig | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+> index ab5af17858c8..125dc84819e6 100644
+> --- a/drivers/i2c/Kconfig
+> +++ b/drivers/i2c/Kconfig
+> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
+> =20
+>  config SPL_SYS_I2C_LEGACY
+>  	bool "Enable legacy I2C subsystem and drivers in SPL"
+> -	depends on SUPPORT_SPL && !SPL_DM_I2C
+> +	depends on SPL && !SPL_DM_I2C
+>  	help
+>  	  Enable the legacy I2C subsystem and drivers in SPL.  This is useful
+>  	  in some size constrained situations.
+> =20
+>  config TPL_SYS_I2C_LEGACY
+>  	bool "Enable legacy I2C subsystem and drivers in TPL"
+> -	depends on SUPPORT_TPL && !SPL_DM_I2C
+> +	depends on TPL && !TPL_DM_I2C
+>  	help
+>  	  Enable the legacy I2C subsystem and drivers in TPL.  This is useful
+>  	  in some size constrained situations.
 
-Did this go through CI? I ask because with SPL/TPL, we have the problem
-of PowerPC being special from the rest of the world with these symbols
-and I want to be sure everything still is building, before I do a
-before/after size check on the series (and probably keep the binaries,
-so I can checksum before/after and make sure they're the same).
+Building on the last email, I think these might need to be
+[ST]PL_FRAMEWORK not [ST]PL.
 
 --=20
 Tom
 
---zF9veVJOmrXdL1KK
+--W8DUYIUlmn0LemlK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak7+6AAKCRAr4qD1Cr/k
-ChVHAP97OyIVKKfJiNnbuivTdwBc4jkWphTsibhztYybdeIS1gEA46x1LpkhIdLp
-A1QJHVUQOW4nFkaiv1Rt3YPkpiN9jwc=
-=VeJf
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak7+7wAKCRAr4qD1Cr/k
+CiPOAP0TU4tKbJkx3Ef1SlaPAWb7UM9qkD1AGKkFNuvLoZMdswD/f+LZvwr9Oxqj
+st9egrK9rOAQAN/rCuce+Op6AgWVTQs=
+=iUjp
 -----END PGP SIGNATURE-----
 
---zF9veVJOmrXdL1KK--
+--W8DUYIUlmn0LemlK--
