@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B7EC43458
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jul 2026 23:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FCCC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:21:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB5C584A8F;
-	Thu,  9 Jul 2026 01:17:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 06A5784A29;
+	Thu,  9 Jul 2026 03:21:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aFnWIqi9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FU/hfmjk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C54EC84AB5; Thu,  9 Jul 2026 01:17:21 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 0AD9984A48; Thu,  9 Jul 2026 03:21:41 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B0984A1F
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 01:17:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BACC84A1F
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-43bfe209e45so974626fac.0
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 16:17:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c126b8118afso182930766b.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:21:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783560097; cv=none;
+ d=google.com; s=arc-20260327;
+ b=h8XhtpqHjEfggVwu61/xJH8gwMywUlAKwzlAb/sMDJIA9ZdhRYE3eXH3sWYqFLc0f2
+ fLsZUDgM2ByFb31XZvKSnHqP869S4h9MjtMpGhz4dV8IxRJ02A/oW1xa/Tjvib657+Ez
+ qRw8ZQk31l7qI2R9poBw/seZqxM5xQdQCAwouwKdg+UzxF6BAKlPxfkOD9BfKumHgDh1
+ w9OTcIqdIv8FgGwNsx/WlLWRvuzkzuhV5Fi+ecuJw14rhCPzB4+UXtcKThxeAgWSzI2h
+ r24DG1yJW9NR1ZGjMH1t4iMj9PkbyG8vnxkRadsApJB0vfnpqTr35mxzrqqxODHATf3G
+ 7UMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
+ fh=DDQzrwH1M51KrRiJ9rD49fa0HzsLApQ8iBK28xqUwYI=;
+ b=q0ZNQSm4ND9FKEowQ1czoMphXTrOk3HP8dSrESGt9JZaoaRcvrvb8vHNLvEW2E0xte
+ vjdgfAF179+PLuIvmmoM16relP/2HUZdt6mhjic1xhuMINypzZlseinikzrLZVfz+Plc
+ slzabaaBbp9rqvoJNvI/EW5TZsVxTJYHHA3KYst9HhVkPtyc9qTIKuJzKBiyGla9XbH7
+ dRn/88O6oIfPWgt3vh0pKSGsa5wxBN18kFEiINhbRVdzFbIhnbswvtzlq/kNO9Yxifj+
+ FEFpPpqtUDhR6OK2d2/sdDqqNUnq4zRmYeu9LbwXjwmQwgDuIayULDwaBtCOorGM5i5i
+ n33g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783552638; x=1784157438; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=oEWETU3FPhBXzdeYqqZZKNXjtpfvyhkYf1KWA+A72/k=;
- b=aFnWIqi9KUAxWG9bl8I/ugTqISph+lCK5fCIolismW/dOVQR6wDcgJ+NCb5QdFegtc
- hTtUPHWq0FWnGVhN172R9MYICwGipzB+R7GPhTjVqV7K8ZHos+tI/pqjnsokvpJ60vL2
- rndRnd4RAOUcgZZvulQpwkUBzfBXAmjxXU6GqbM9gbwDa5ReUOLggaUFXpFUWvFYYE72
- mGUhTQEdN5lgKLHFIBh5bBFuebuQlDOGV8nwnznob0asRLXpkGiXwUQrBXzhABFQ3mCP
- VtxJD4uWLXQilamYQKTo61KW8LaqRUpIcN8wtoyQMp997OhDCAGesi+rk0yAigrBuJUC
- HmZA==
+ d=chromium.org; s=google; t=1783560097; x=1784164897; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
+ b=FU/hfmjkFYEf2C9DVe+b5F3J3OgQMCNkNkuBzt2BE+7/7U4lGvvL/kMHXh96r44YEx
+ EI3M1Ef0/4u5I1IO+xHdmIJleOVwauHrTbRxOXgNuJXrz8Sn4PA2LzRnD0aM1vfMbMSo
+ 8yHuBlq+PE0+PtH4hZWLCoww3gfs9p9FgV3Us=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783552638; x=1784157438;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=oEWETU3FPhBXzdeYqqZZKNXjtpfvyhkYf1KWA+A72/k=;
- b=jowvjNPI8Y0o2BjHAzxPvFmJ4TOXd++C7gfOTXQfCvdl/Tt1QXU2M2nxo840gFjX++
- 6I6uZUr/Q9GEycSXC/lDNcsqPSLIdDCjHNIdiFTMNPyjCI4e/2r28h7KusKOG6hcB+b7
- WBBlNMLMhQo797vlwShpGsxAhZnnSSxA2r34W9mt6UZwyJ9PBkHvGKxg6e5b8N0+hpTv
- O+a3gRePpKniY3K4+EJei8oY7lgJnI5SM9c0rgKzSWhDfkAmB+a2T+uGdLFzqk5PLgR+
- a9s3K3+JFOodhiApNO9SbbItg6O3/hZR6b+N4zNvCGYlP/bQc7jPbvHfiSE8+YU+QpAx
- VfvQ==
-X-Gm-Message-State: AOJu0Yyi3hvi+lRBVQ3pKl5LvfgRNmhRsBMiYWkOIzBy0uJK5MHY78x4
- cOczpgAvYzvvgzvg0DmCv0pF6+AZJ3P2Z6P4shtrTnxyDCKz2Ch3giwMfztITbYqjVTJyA==
-X-Gm-Gg: AfdE7cmMIfdJInhX4ehDpg1xT4Oy6X9/jIjjOnwWEiD8eX3BmtxzLLS+ChINpxTUgLJ
- Za66wdfr7Z7hQWnS8HH6G3Zw6xIK3j4Vy3MvSe112GigqwL9RHqCDRHagQrEhshRUk2iwYTYOxh
- f3PogI9kJgmPBwEppTd468hnA+mt3bPa5w84NAElDxUGHaM26yjyZYfk5sj0sYtL5eFEW1JXfLO
- EjR8hSuRvcjBcL9k4G8r3vNMJ9mXf4hXzQkLiBZ0G+dlBQW6XJnyMa/HowuO2Yvh3/zthwdwQEP
- Pt0ttKVG/CX64ARMQRvdyO9R/vnuhWBUrPELS6Ob4GVswDRC9nC3TMAOu8ostyNijZK73mSqZ5W
- 1E5mweSBm++TyVaaYuR1dqfyF5eZGNkwLDk53NYWmQy1E/sJXhfADmLES5lijV4U9mFOHw8BwqJ
- 6D4jtgn6WdX59wX6a864MaPvlGM9y0Yo51GMrlSqaJ/sTTinDZyW13DNxfxKcd0dg1qXExy0Wuc
- ZtC/fQdKjuahLAVW0qFF4MLWa4qWJil2UuMzkBKMpbtZ8+92hL/ML57KPIeG0aOv+cdYwtFhKdN
- AbD/mU87wA==
-X-Received: by 2002:a05:6870:b52a:b0:44c:a987:82f4 with SMTP id
- 586e51a60fabf-451637e26c4mr2784484fac.10.1783552637952; 
- Wed, 08 Jul 2026 16:17:17 -0700 (PDT)
-Received: from james-x399.tailafd1a.ts.net (174-29-11-8.hlrn.qwest.net.
- [174.29.11.8]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4519124d07dsm429514fac.2.2026.07.08.16.17.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 16:17:17 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
- Neha Malcom Francis <n-francis@ti.com>, Paresh Bhagat <p-bhagat@ti.com>,
- Bryan Brattlof <bb@ti.com>, Shiva Tripathi <s-tripathi1@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Andrew Davis <afd@ti.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Aristo Chen <aristo.chen@canonical.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] tools: fit: sign all config image references
-Date: Wed,  8 Jul 2026 17:17:07 -0600
-Message-ID: <20260708231711.2609159-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ d=1e100.net; s=20251104; t=1783560097; x=1784164897;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=riu1GDlfFuE1XslP52ibE8UDCHWccwkoFDjY5jH64z0=;
+ b=TnByGWGgi2p21JO4I+1J6FI9YtntigNkzkQn/u/Rzz4W6xSVFxqMfdYspCE7YtJ0yS
+ SoFqV4J6Oo76fBvIdv85gbcSbO+CFIKmEen7zch+idyeGpHofPDh88A3ei6s8X1O5Zzq
+ pckJjJbeVUYLI8TRJOQICAuupShJi5mvklxIbJaG/ljcL14GXyHPBZM97nWYy4iFEsHn
+ UDOANEo6EGOwQ2ScP/l+XEqRSOjiwakmfgU6WRC5w2ggioIfKvU+P7IZ8K/QGRCQrAqP
+ iul3Qhq+G/I3SJgF7zWlHYS1ZgxGCfER8t2aI2fcYdUk0VDrQf6AHRpEuLdbbuIad1NZ
+ FMrw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrqqCI1n9O7DJ5qfsaq0Bce2AzgCwuMcK2dJTs/E4t+Xfx2uG5vFh15FFGXITJ7ghGJUYON/0c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbeTpl8YzA+z7nOEHC9STYKX0OP7WK3flazGXBt+cV62vVen1h
+ EQislzkskhPqLGRJhVQcszto/XrBM+hNC+aJI1ZI8k5Rk4ZwUniGIgTnEXD9rczuImA8Ks38ftt
+ FVRrxZEoiLwx6T3sFlMsUSX3SHrnfDcHhIbZ7aOms
+X-Gm-Gg: AfdE7cljGgAWJ1Ev7aKztbkQz3BdnU4HJblXLd9gT7i9bGTEuXfbzTs/UAz4NwD5bPh
+ IBFUqRvJMkjZb9REi1+cmEl7ldkUVFZkK8D+ynr0tTydyvXVeiztV/v4f8jMkP73R2NIwfimU8w
+ UYw9pAIxK+O8NWh6zo1wLnpMVAbDSZdZJkdBAljQh7+UJCgY6HtkwnlS9S10e5FmErWahRH/KAU
+ P2IEbSq+xCUHS1Igsq0Ce7cStT9rdLnBbB0uKEdxrgzGd+BTM4m81t072+1YvXWENQkrrm3ZeZv
+ VKkECA==
+X-Received: by 2002:a17:906:2083:b0:c15:b830:8bf5 with SMTP id
+ a640c23a62f3a-c15ce1085b2mr102235666b.43.1783560097547; Wed, 08 Jul 2026
+ 18:21:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
+In-Reply-To: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 8 Jul 2026 19:21:26 -0600
+X-Gm-Features: AUfX_mwtaHwfXWymdJIgSWbsBRwu9Myy650EYVWkxEo3wbvCK-LakDXOxAKXwbQ
+Message-ID: <CAFLszTgvBrNzb1Nvrj6CH0KBFW=v-Af5=0Q7UAHP15vy4P-LqQ@mail.gmail.com>
+Subject: Re: [PATCH] video: fix no display when serial console is disabled
+To: jayaramudu.desapogu@amd.com
+Cc: sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,324 +109,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Target-side configuration verification builds the signed-region list from
-every image-reference property in the selected configuration. Host-side
-signing still uses either the signature node sign-images property or the
-legacy kernel/fdt/script default list.
+Hi Desapogu,
 
-This lets mkimage generate configuration signatures which U-Boot cannot
-verify when the configuration references other image types, such as
-firmware, loadables or ramdisk entries. It also lets the host and target
-disagree when sign-images names only a subset of the configuration images.
+On 2026-06-03T13:29:53, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com> wrote:
+> video: fix no display when serial console is disabled
+>
+> When the serial console is disabled in coreboot configuration,
+> no display output is observed during boot.
+>
+> This happens because DBG2 (Debug Port 2 table) configuration
+> is required for proper UART initialization and affects the
+> video initialization path.
+>
+> Fix this by ensuring DBG2 is correctly configured as a
+> 16550-compatible UART, allowing video initialization to
+> proceed independently of serial console settings.
+>
+> Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+>
+> include/acpi/acpi_table.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Build the host-side signing list from the configuration properties in the
-same way as target-side verification. This makes signed configurations
-cover the root node, the configuration node, every referenced image node,
-and its hash/cipher subnodes, regardless of image type.
+Thanks for looking at this!
 
-Update the signed-configuration documentation to describe the same rule and
-to stop recommending sign-images as a selection mechanism.
+The commit message does not match the change. DBG2 is an ACPI table
+produced by coreboot and consumed by U-Boot only as a fallback in
+read_dbg2() when lib_sysinfo.serial is NULL; it is not on the video
+init path. Please describe what actually happens. I suspect that when
+the coreboot serial console is disabled, coreboot emits a DBG2 with
+port_subtype 0x0012 (16550 with parameters defined in the GAS), the
+check in serial_coreboot.c rejects it, the UART is not detected, and
+that somehow prevents the video console from coming up. Please
+describe the real chain of events and the observed symptom.
 
-Fixes: 2092322b31cc ("boot: Add fit_config_get_hash_list() to build signed node list")
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- doc/board/ti/k3.rst                | 10 ++--
- doc/usage/fit/beaglebone_vboot.rst |  5 +-
- doc/usage/fit/sign-configs.rst     |  7 ++-
- doc/usage/fit/signature.rst        | 25 ++++-----
- doc/usage/fit/uefi.rst             |  2 -
- tools/fit_image.c                  | 12 ++---
- tools/image-host.c                 | 82 ++++++++++++------------------
- 7 files changed, 63 insertions(+), 80 deletions(-)
+> diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+> @@ -667,7 +667,7 @@ struct __packed acpi_dmar {
+>
+>  /* Subtypes for port_subtype field */
+>
+> -#define ACPI_DBG2_16550_COMPATIBLE   0x0000
+> +#define ACPI_DBG2_16550_COMPATIBLE   0x0012
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 21973d53b15..cc1a7396c3a 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -546,7 +546,6 @@ corresponding configuration node as follows.
-             signature-1 {
-                     algo = "sha512,rsa4096";
-                     key-name-hint = "custMpk";
--                    sign-images = "kernel", "fdt";
-             };
-     };
-     # Optional configurations
-@@ -557,14 +556,13 @@ corresponding configuration node as follows.
-             signature-1 {
-                     algo = "sha512,rsa4096";
-                     key-name-hint = "custMpk";
--                    sign-images = "fdt";
-             };
-     };
- 
--Specify all images you need the signature to authenticate as a part of
--sign-images. The key-name-hint needs to be changed if you are using some
--other key other than the TI dummy key that we are using for this example.
--It should be the name of the file containing the keys.
-+Signed configurations authenticate all images referenced by the configuration
-+node. The key-name-hint needs to be changed if you are using some other key
-+other than the TI dummy key that we are using for this example. It should be
-+the name of the file containing the keys.
- 
- .. note::
- 
-diff --git a/doc/usage/fit/beaglebone_vboot.rst b/doc/usage/fit/beaglebone_vboot.rst
-index b15399441ee..27e80f47eb2 100644
---- a/doc/usage/fit/beaglebone_vboot.rst
-+++ b/doc/usage/fit/beaglebone_vboot.rst
-@@ -169,7 +169,6 @@ Put this into a file in that directory called sign.its::
-                 signature-1 {
-                     algo = "sha256,rsa2048";
-                     key-name-hint = "dev";
--                    sign-images = "fdt", "kernel";
-                 };
-             };
-         };
-@@ -178,7 +177,8 @@ Put this into a file in that directory called sign.its::
- 
- The explanation for this is all in the documentation you have already read.
- But briefly it packages a kernel and device tree, and provides a single
--configuration to be signed with a key named 'dev'. The kernel is compressed
-+configuration to be signed with a key named 'dev'. The configuration signature
-+covers all images referenced by the configuration. The kernel is compressed
- with LZO to make it smaller.
- 
- 
-@@ -407,7 +407,6 @@ First we can check which nodes are actually hashed by the configuration::
-     value
-     algo
-     key-name-hint
--    sign-images
- 
-     $ fdtget image.fit /configurations/conf-1/signature-1 hashed-nodes
-     / /configurations/conf-1 /images/fdt-1 /images/fdt-1/hash /images/kernel /images/kernel/hash-1
-diff --git a/doc/usage/fit/sign-configs.rst b/doc/usage/fit/sign-configs.rst
-index 6d98d44430c..51a97b1b99f 100644
---- a/doc/usage/fit/sign-configs.rst
-+++ b/doc/usage/fit/sign-configs.rst
-@@ -45,8 +45,13 @@ Signed configurations
-                 signature {
-                     algo = "sha256,rsa2048";
-                     key-name-hint = "dev";
--                    sign-images = "fdt", "kernel";
-                 };
-             };
-         };
-     };
-+
-+For signed configurations, mkimage signs every image referenced by the
-+configuration node, such as ``kernel``, ``fdt``, ``ramdisk``, ``firmware`` and
-+``loadables`` entries. No ``sign-images`` property is required. Older FIT
-+source files may still include ``sign-images``, but current mkimage and U-Boot
-+verification do not use it to limit the signed image list.
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index da08cc75c3a..32d11a9d27a 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -341,25 +341,26 @@ So the above example is adjusted to look like this::
- 
- You can see that we have added hashes for all images (since they are no
- longer signed), and a signature to each configuration. In the above example,
--mkimage will sign configurations/conf-1, the kernel and fdt that are
--pointed to by the configuration (/images/kernel-1, /images/kernel-1/hash-1,
--/images/fdt-1, /images/fdt-1/hash-1) and the root structure of the image
--(so that it isn't possible to add or remove root nodes). The signature is
--written into /configurations/conf-1/signature-1/value. It can easily be
--verified later even if the FIT has been signed with other keys in the
--meantime.
-+mkimage will sign configurations/conf-1, every image referenced by that
-+configuration (kernel, fdt, ramdisk, firmware, loadables, etc.) and the root
-+structure of the image (so that it isn't possible to add or remove root
-+nodes). The signature is written into
-+/configurations/conf-1/signature-1/value. It can easily be verified later
-+even if the FIT has been signed with other keys in the meantime.
- 
- 
- Details
- -------
- The signature node contains a property ('hashed-nodes') which lists all the
--nodes that the signature was made over.  The signer (mkimage) writes this
--property as a record of what was included in the hash.  During verification,
-+nodes that the signature was made over. The signer (mkimage) writes this
-+property as a record of what was included in the hash. During verification,
- however, U-Boot does not read 'hashed-nodes'. Instead it rebuilds the node
- list from the configuration's own image references (kernel, fdt, ramdisk,
--etc.), since 'hashed-nodes' is not itself covered by the signature. The
--rebuilt list always includes the root node, the configuration node, each
--referenced image node and its hash/cipher subnodes.
-+firmware, loadables, etc.), since 'hashed-nodes' is not itself covered by the
-+signature. The rebuilt list always includes the root node, the configuration
-+node, each referenced image node and its hash/cipher subnodes. Current mkimage
-+uses the same rule when signing configurations. The older 'sign-images'
-+property is not required and is not used to limit the signed image list.
- 
- The image is walked in order and each tag processed as follows:
- 
-diff --git a/doc/usage/fit/uefi.rst b/doc/usage/fit/uefi.rst
-index 3bbacb5cad0..86422bec7b4 100644
---- a/doc/usage/fit/uefi.rst
-+++ b/doc/usage/fit/uefi.rst
-@@ -55,7 +55,6 @@ relies on the FDT provided by the board emulator.
-                 signature-1 {
-                     algo = "sha256,rsa2048";
-                     key-name-hint = "dev";
--                    sign-images = "kernel", "fdt";
-                 };
-             };
- 
-@@ -65,7 +64,6 @@ relies on the FDT provided by the board emulator.
-                 signature-1 {
-                     algo = "sha256,rsa2048";
-                     key-name-hint = "dev";
--                    sign-images = "kernel";
-                 };
-             };
-         };
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index 5831b07c090..4153b54e550 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -60,13 +60,11 @@ static int fit_estimate_hash_sig_size(struct image_tool_params *params, const ch
- 	 * FDT by fit_image_process_verity().
- 	 *
- 	 * One could try to be more precise in the estimates by
--	 * looking at the "algo" property and, in the case of
--	 * configuration signatures, the sign-images property. Also,
--	 * when signing an already created FIT image, the hash nodes
--	 * already have properly sized value properties, so one could
--	 * also take pre-existence of "value" properties in hash nodes
--	 * into account. But this rather simple approach should work
--	 * well enough in practice.
-+	 * looking at the "algo" property. Also, when signing an already
-+	 * created FIT image, the hash nodes already have properly sized value
-+	 * properties, so one could also take pre-existence of "value"
-+	 * properties in hash nodes into account. But this rather simple
-+	 * approach should work well enough in practice.
- 	 */
- 	for (depth = 0, noffset = fdt_next_node(fdt, 0, &depth);
- 	     noffset >= 0 && depth > 0;
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 8f1e7be4066..6df6ea6df3b 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -1162,27 +1162,6 @@ static int strlist_add(struct strlist *list, const char *str)
- 	return 0;
- }
- 
--static const char *fit_config_get_image_list(const void *fit, int noffset,
--					     int *lenp, int *allow_missingp)
--{
--	static const char default_list[] = FIT_KERNEL_PROP "\0"
--			FIT_FDT_PROP "\0" FIT_SCRIPT_PROP;
--	const char *prop;
--
--	/* If there is an "sign-image" property, use that */
--	prop = fdt_getprop(fit, noffset, "sign-images", lenp);
--	if (prop) {
--		*allow_missingp = 0;
--		return *lenp ? prop : NULL;
--	}
--
--	/* Default image list */
--	*allow_missingp = 1;
--	*lenp = sizeof(default_list);
--
--	return default_list;
--}
--
- /**
-  * fit_config_add_hash() - Add a list of nodes to hash for an image
-  *
-@@ -1272,8 +1251,10 @@ err_path:
- /**
-  * fit_config_get_hash_list() - Get the regions to sign
-  *
-- * This calculates a list of nodes to hash for this particular configuration,
-- * returning it as a string list (struct strlist, not a devicetree string list)
-+ * This calculates a list of nodes to hash for this particular configuration by
-+ * walking the same image-reference properties as target-side verification.
-+ * The result is returned as a string list (struct strlist, not a devicetree
-+ * string list).
-  *
-  * @fit:	Pointer to the FIT format image header
-  * @conf_noffset: Offset of configuration node to sign (child of
-@@ -1286,12 +1267,11 @@ err_path:
- static int fit_config_get_hash_list(const void *fit, int conf_noffset,
- 				    int sig_offset, struct strlist *node_inc)
- {
--	int allow_missing;
--	const char *prop, *iname, *end;
- 	const char *conf_name, *sig_name;
-+	int prop_offset;
- 	char name[200];
- 	int image_count;
--	int ret, len;
-+	int ret;
- 
- 	conf_name = fit_get_name(fit, conf_noffset, NULL);
- 	sig_name = fit_get_name(fit, sig_offset, NULL);
-@@ -1306,34 +1286,38 @@ static int fit_config_get_hash_list(const void *fit, int conf_noffset,
- 	    strlist_add(node_inc, name))
- 		goto err_mem;
- 
--	/* Get a list of images that we intend to sign */
--	prop = fit_config_get_image_list(fit, sig_offset, &len,
--					&allow_missing);
--	if (!prop)
--		return 0;
--
--	/* Locate the images */
--	end = prop + len;
-+	/* Process each image referenced by the config */
- 	image_count = 0;
--	for (iname = prop; iname < end; iname += strlen(iname) + 1) {
--		int image_noffset;
--		int index, max_index;
-+	fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
-+		const char *prop_name;
-+		int img_count, i;
-+
-+		fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
-+		if (!prop_name)
-+			continue;
- 
--		max_index = fdt_stringlist_count(fit, conf_noffset, iname);
-+		/* Skip properties that are not image references */
-+		if (!strcmp(prop_name, FIT_DESC_PROP) ||
-+		    !strcmp(prop_name, FIT_COMPAT_PROP) ||
-+		    !strcmp(prop_name, FIT_DEFAULT_PROP))
-+			continue;
- 
--		for (index = 0; index < max_index; index++) {
--			image_noffset = fit_conf_get_prop_node_index(fit, conf_noffset,
--								     iname, index);
-+		img_count = fdt_stringlist_count(fit, conf_noffset, prop_name);
-+		for (i = 0; i < img_count; i++) {
-+			const char *iname;
-+			int image_noffset;
- 
--			if (image_noffset < 0) {
--				fprintf(stderr,
--					"Failed to find image '%s' in  configuration '%s/%s'\n",
--					iname, conf_name, sig_name);
--				if (allow_missing)
--					continue;
-+			iname = fdt_stringlist_get(fit, conf_noffset, prop_name,
-+						   i, NULL);
-+			if (!iname)
-+				continue;
- 
--				return -ENOENT;
--			}
-+			image_noffset = fit_conf_get_prop_node_index(fit,
-+								     conf_noffset,
-+								     prop_name,
-+								     i);
-+			if (image_noffset < 0)
-+				continue;
- 
- 			ret = fit_config_add_hash(fit, image_noffset, node_inc,
- 						  conf_name, sig_name, iname);
--- 
-2.53.0
+Not quite. Per the Microsoft DBG2 specification (and Linux's
+acpi/actbl1.h), 0x0000 is "Fully 16550-compatible" and 0x0012 is
+"16550-compatible with parameters defined in the Generic Address
+Structure", i.e. two distinct subtypes. Redefining the existing macro
+silently changes the value written out by acpi_create_dbg2() in
+lib/acpi/acpi_table.c and by spcr->interface_type in
+acpi_write_spcr(), so every board that emits these tables now
+advertises the wrong subtype to the OS.
 
+Please leave ACPI_DBG2_16550_COMPATIBLE = 0x0000, add a new macro
+(e.g. ACPI_DBG2_16550_GAS = 0x0012), and fix the real problem in
+drivers/serial/serial_coreboot.c by accepting both subtypes:
+
+    if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
+        dbg->port_subtype != ACPI_DBG2_16550_GAS) {
+
+That way the coreboot fallback works whichever subtype coreboot emits,
+and the tables U-Boot writes remain correct.
+
+Please also include the coreboot output showing the actual
+port_subtype in your DBG2 (a hex dump, or the log_debug from
+read_dbg2()) so the reasoning is verifiable.
+
+Also you might look at this series where I had a similar problem:
+
+https://patchwork.ozlabs.org/project/uboot/list/?series=433605&state=*
+
+IMO coreboot should provide the serial details regardless of whether
+the console is enabled, but I was unable to get that change in, so
+your approach is the best.
+
+Also let me know if you are working with OpenSIL. I would be great to
+see a coreboot + OpenSIL + U-Boot combination.
+
+Regards,
+Simon
