@@ -4,96 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1123EC43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:25:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 525E3C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7750784AA2;
-	Thu,  9 Jul 2026 03:25:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CDC6D84994;
+	Thu,  9 Jul 2026 03:40:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BiU2Uqmc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JReIM3+7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88BF584AA2; Thu,  9 Jul 2026 03:24:59 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 024E983FF5; Thu,  9 Jul 2026 03:40:53 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4AE384A8F
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:24:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2CC983FF5
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:40:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6983f20a8bfso559894a12.1
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:24:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783560297; cv=none;
- d=google.com; s=arc-20260327;
- b=hCZK5LkWJvvJkadLdD50+cPxbUOiwG3R/Q3IPsV/zM6Q7vDI6SVFwmoq0yJxDBdtQA
- hwB7E+Q5gcyaA6Bra8hurUbZMWTOLj8ucB5fTmez4BQJsiVoGPcJJFkurTNG4OQ79zPU
- klvOFVxeDdGpeiKx9vPsa/Q0UUz/nU/Zt0tq+hvYlqcheXFAI60TYDlss+0QKNX4wi6v
- VqSDl7rnwY4htabOlZNQhllONWeQ4vEgCNFIJJVzokhcy2ehaa09OJZQBcpAtkXHGgew
- YYrDZTVRR/c8GJTkSB6I8Q0/wp4kwNZaoO9YJfv2B5yIGXZypeDizxx2sy9itfoNpMH7
- 6B0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=gKlQeYDPpwvGtP3A05KbCYpzMLdlZ3Z6P5YX42uzWxc=;
- fh=j5AyEtJHdM3P6X8+CT+zzf48tep060SLPcEuUkVeS1I=;
- b=D2q+QsFJTDJyO15obmuxttxJq52MtxS8UuQ3uBt6NJxpR3nG2rOVC8UzneV8uJqj0k
- 5Pqf6IGXM3WLthJda+QY0KU7QcSkYL+e3gOskxtqZnAYG/Emx/C4FBDqSwtnLbzPemob
- esRdiBwj5fV5Y6ZKh0KzXPadtOWqRWsgMabW7pTxLiXrL6+tlOhGSDKHKrDtoionguVY
- +3UsWmuU+A187PMAhJYGHk+9Q23dsPvlC5W6PIbMsVgZffgbIT1Uj+2rEgtUPrPgz5xo
- 5cZCPlgP9yJ/SdYYjz+9iuJ7qgNcmPDxfluVa3rxpcIDHfuPHdoqdhHx+zzn2c8EM7yU
- Rb5A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-497e6956acfso500918b6e.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783560297; x=1784165097; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=gKlQeYDPpwvGtP3A05KbCYpzMLdlZ3Z6P5YX42uzWxc=;
- b=BiU2UqmcYf1MfbBk+dw22LIkKHIfUHwH4nDBIJcY2N6bNr7jE7qAdapHrjBGpliv16
- 1+ER5qZcAswR465QhYaSvZuKpOj1UVRhb1riuq26L3W00yZXY679ayHAhF2jJE6aFMuW
- mCF/FKHu0D3Zy+p1CrJQ9199FBIEePpoQRhT0=
+ d=konsulko.com; s=google; t=1783561249; x=1784166049; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=sSOOObM9AsBYbukX7h7StT3A7/OuMg06+1WtbP6CgDA=;
+ b=JReIM3+7mzAuis9tZNL8g4wX+2oTpW0Iej61k6EVJ5dbTl3+JHhJ+/LqeeF4YkMtx5
+ 02D9vXPXvRzOY5hpFOucGPoXn0tSf3b9q3Z5ofWrQ3KyThj6N5ZU0gQsNfPCW7BB10xY
+ /PzFBiB3bgFyI4rUnjot/bUikHQPN9M6SWFEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783560297; x=1784165097;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=gKlQeYDPpwvGtP3A05KbCYpzMLdlZ3Z6P5YX42uzWxc=;
- b=f0AQAwPK2obSBncb8FDIb9bLrG/e9Z4dwiNoPcuB44RV95qxpOvAe1fJJhuJSHbcJa
- NufvA0WJXxUKyBTB0P5SGiyuHRvxnJQ39jPYK63xc60RlwwhNZhnTtMh6GZspBBIj7Ex
- 4B7UN81iBnoUpbeHbv13asiT/AQc8t9XdrMZT9ohIw3IX+9eGcdeOWrl+aEHEoH7PbZa
- f2W6RZvyyab1rwiIXIEaJjTzCgTDrqr2W9e8LZPKCsR+3XdLcVPnspXXAhGLShOfOZSA
- EH+7YbDZYLFDOEV68XN6pZ2aW8s2r1FQ08wEiE44pGkwAR1UYsyCf7JISvqBdN1/xb7h
- wAAw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrwK7h63cICFrKReXYcogptsX8/Z1QPHeLzjJdJdS+7QBjCfzF3OHXQueyh4sM1BY8m1wFTqPM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzN1rS9AJZZAnn+9cx7J/jfCbUKtWuvfU+qnSDTYDmwTUlfvl+h
- Ru6mX77oyjZN/bA7gBlut4ZBcqTirjCb9HwuY/umG8UmNWNUDEXinaCJa8xOkWYBhhrdpAL9/gR
- OjLFzSI8ti6hP3KeO0n9Hfu6w5Mqw94CvDRlRtjpw
-X-Gm-Gg: AfdE7ckns+Y97YzC7rmnaNrHwCGD+OQVXToKswMI5IIZwCewRTb3pEGMp7uZxf0w0FY
- VN5mXUI/wfa+HjUDhJsMAMRZ+ixtBS9r+PrjzxmGyeG5hLy/8fVJ+sfuQ/f5NG4e8Cucxj5lIHN
- t9qs3mIjOA/o4PJzLHemn7V6JP/BcWLofYzGKIxb4JdwspMULQNn2h9wSV2eNEboUoP9j31vhS7
- QYZn45PYuj14nDan76llqngFh5SFsDmaeKvjN6tBpMAKS+LdgCvt5vO3l5wxScweejH6cszMI6S
- I+WcPg==
-X-Received: by 2002:a05:6402:381a:b0:69a:2ee6:4c95 with SMTP id
- 4fb4d7f45d1cf-69ab43eb501mr1954303a12.0.1783560297149; Wed, 08 Jul 2026
- 18:24:57 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783561249; x=1784166049;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=sSOOObM9AsBYbukX7h7StT3A7/OuMg06+1WtbP6CgDA=;
+ b=sjVOXSBGpeyChuMyF+FkJTN6X5UFqQlrJkKNBRBsYIaFR3BvYf+eEGmrpX7o/C6wsc
+ pmB0ohWl3yNUpe5lzDsgA9djtO8c+aJ7MdROOzUO/mAjs32cwLjlKmng/o48uqGPDtS7
+ dRPLsT9ehmd1X4zyX3DFIOZS6N1Or5CtjqEY1PJFj3c+f/ZvgM4693YXi6Le0BaLbold
+ zAFug1KQiaJS4x/lnX6936gTmea0PNwIa9iCVKQ2eLsgpe2+DKA3+eACyhhQiZiKn05J
+ CT+pleSeTca7sV09Jga7r8+9PwgkZBICYhNImPimV+6lFykbhcSrVHIEh0UTyrOMLJva
+ +/2g==
+X-Gm-Message-State: AOJu0YxApwKXH09ZS2OPRajUsTsG0632UwKEGDpk4jTRlXyoWOPEA6ME
+ 4ky/IC+WwdoWHYm7l4Nw9FdcPj2NwJpzalVbCkLHt2xeM9GD8qA+QQoFTEU5azruT3Q=
+X-Gm-Gg: AfdE7ckQ7vukwePeIBBxWlKJuQXuitTLixZ3J+YM3xrF/VvcJEhwuQ+Ebr4zeMxgOzb
+ VQDGJvvqqLyKpd+lp+WD87TF0mI6DQn0t1BgsGoyU7LgQp7xMDx0qD4MmFLUEi4pnqK4H+kir5g
+ lf7b8F235Wu7iuzacokHC2ne8JE80o75osEvjYXoqsjtNidnNXe/13PdsTxJjowSIyH3PYO0ycs
+ +aGjvmzmNT+kKVuXXpJx1A+f4khDBm3KlCw17CCPk5i1MKS5Pharhzd1dyJ7AN9Rxm1jPLuDrjV
+ HmVNvEfaq2l8D6/GY881ozjcAyQkQ6xs5wTftEGc1gyNFI4O8KkzhZcTLOkbdpuwbNJ791bFLGI
+ WCdfJ42g2UYtEaKLDBHyXKbVjgp2aY8aQXu/2nlZRlQQO5RhAhgbUzdg2r5GFZfJGPfOeuJgsyq
+ crNe5yrsBeR/1D/SdZeGIg4bzMrpXJ3gOPOP+e2QSCeTjWODhRl+K8tBofQERFktWpHl6GTP4BQ
+ KfbXtOdWZRuYNQ6yQV91kAZSYzNmwyNYBLxvEZDVHPdnkst
+X-Received: by 2002:a05:6808:bc3:b0:492:7ecb:94ef with SMTP id
+ 5614622812f47-4a34eb5f046mr712241b6e.18.1783561249455; 
+ Wed, 08 Jul 2026 18:40:49 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4a1afde6cffsm2989292b6e.11.2026.07.08.18.40.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jul 2026 18:40:48 -0700 (PDT)
+Date: Wed, 8 Jul 2026 19:40:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 00/15] rockchip: Add support for the RV1103B, RV1103
+ and RV1106
+Message-ID: <20260709014046.GK749385@bill-the-cat>
+References: <20260707153135.2048115-1-sjg@chromium.org>
+ <20260707153518.GI749385@bill-the-cat>
+ <CAFLszTjyo-Xizh8p_tv6xPLvM+yu_3KCoH6G2J-hCqPn_zKUHA@mail.gmail.com>
+ <20260709003834.GI749385@bill-the-cat>
+ <CAFLszTjyuz_5XyHxFN7Td-r-fyEHf2rhobd0PLPjC7f=vwzZ4w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20260707205611.65287-1-ccaione@baylibre.com>
-In-Reply-To: <20260707205611.65287-1-ccaione@baylibre.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Jul 2026 19:24:44 -0600
-X-Gm-Features: AUfX_mytsmm3NSuUlu4mtFEJuBAzLfbfI6FVFo1SGg9NHAQM22srGK0j8GGzCQA
-Message-ID: <CAFLszThaMksN7J_u8-B+eDY6vi5WS-ODGD89GLG1j=wCTyRr6A@mail.gmail.com>
-Subject: Re: [PATCH] fit: prefer the default configuration on best-match ties
-To: ccaione@baylibre.com
-Cc: trini@konsulko.com, sjg@chromium.org, quentin.schulz@cherry.de, 
- u-boot@lists.denx.de, dlechner@baylibre.com, jstephan@baylibre.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QCrJDRxyh5cgYZ4v"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjyuz_5XyHxFN7Td-r-fyEHf2rhobd0PLPjC7f=vwzZ4w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,36 +103,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 2026-07-07T20:54:11, Carlo Caione <ccaione@baylibre.com> wrote:
-> fit: prefer the default configuration on best-match ties
->
-> With CONFIG_FIT_BEST_MATCH, fit_conf_find_compat() selects the
-> configuration matching the most specific U-Boot compatible string; on
-> equal matches the first listed configuration wins and the configurations
-> node 'default' property is never consulted.
->
-> A FIT whose configurations all share the same base devicetree compatible
-> (e.g. one manifest carrying a base tree plus overlay combinations for a
-> single board) therefore always boots the first configuration, silently
-> ignoring the default chosen by the manifest author.
->
-> Break score ties in favour of the default configuration. A strictly
-> better compatible match still wins over it, and FITs without a default
-> keep the current first-listed behaviour.
->
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
->
-> boot/Kconfig      |  2 ++
->  boot/image-fit.c  | 20 ++++++++++++++--
->  include/image.h   |  4 ++++
->  test/boot/image.c | 68 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 92 insertions(+), 2 deletions(-)
+--QCrJDRxyh5cgYZ4v
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Dropping everyone else except for the list itself.
 
-This could use a spec tweak, perhaps?
+On Wed, Jul 08, 2026 at 07:27:52PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 8 Jul 2026 at 18:38, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Jul 08, 2026 at 04:36:57PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 7 Jul 2026 at 09:35, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Jul 07, 2026 at 09:30:58AM -0600, Simon Glass wrote:
+> > > >
+> > > > > This series adds support for three small Rockchip camera SoCs and=
+ two
+> > > > > boards which use them.
+> > > > >
+> > > > > The first eight patches are Fabio Estevam's series adding the RV1=
+103B
+> > > > > and the Onion Omega4 board, updated here to address the review
+> > > > > comments on v2: the board patch is split into SoC and board patch=
+es,
+> > > > > the devicetree files move into the patches where they belong and =
+the
+> > > > > pinctrl driver uses regmap_update_bits() throughout. All credit f=
+or
+> > > > > this work goes to Fabio. The devicetree concern raised in the v2
+> > > > > review is also resolved now: the devicetree files carried here ar=
+e the
+> > > > > versions merged in Linux v7.1, verbatim, and can be dropped once =
+the
+> > > > > next dts/upstream sync brings them in.
+> > > > >
+> > > > > The remaining patches add the RV1106 and its RV1103 package varia=
+nt,
+> > > > > following the same structure as the RV1103B patches, together with
+> > > > > the Luckfox Pico Mini B board. These SoCs have no mainline Linux
+> > > > > support yet, so their devicetrees are local for now. The clock and
+> > > > > pinctrl drivers are ported from the Rockchip vendor tree and are =
+the
+> > > > > work of Elaine Zhang and Ye Zhang. The final patch makes the
+> > > > > maskrom-mode RAM-boot images work on 32-bit boards without OP-TEE,
+> > > > > which both of these boards rely on.
+> > > > >
+> > > > > Tested on the Luckfox Pico Mini B: U-Boot runs from RAM over the =
+USB
+> > > > > maskrom path and both the SPI NAND and a microSD card are usable.=
+ THe
+> > > > > board is running in my lab.
+> > > >
+> > > > I did ask you not to do this, Simon, as your patches aren't being p=
+icked
+> > > > up until we've resolved the status of u-boot.org.
+> > >
+> > > I just saw that email Tom...OK, so I should not send any patches at a=
+ll?
+> >
+> > As I told you on the community call over two weeks ago now, I'm not
+> > comfortable taking your patches until we have resolved the u-boot.org
+> > domain transfer. So no, your patches are not being merged.
+>=20
+> Do you mean:
+>=20
+> - still send patches, they might be reviewed but will not be merged
+> until we resolve the Concept tree / domain
+> - stop sending patches completely
 
-Regards,
-Simon
+I don't want to start another mega-thread.
+
+I'm unsure what is unclear about "I'm not comfortable taking your
+patches until we have resolved the u-boot.org domain transfer".
+
+I'm unsure what else I can add here that won't result in another
+mega-thread.
+
+--=20
+Tom
+
+--QCrJDRxyh5cgYZ4v
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCak78GgAKCRAr4qD1Cr/k
+Cml+AQCSUNZjycf2nxa1FotmDfnSjVr+dYx8yZRLNARMqmcayAEAg/D4HkBXDP3c
+ECHPK6Bhza/9aUKgYdGaObmR/8wtVwM=
+=rEE9
+-----END PGP SIGNATURE-----
+
+--QCrJDRxyh5cgYZ4v--
