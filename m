@@ -4,123 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 592A5C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 01:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73B77C43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 02:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA1D484B62;
-	Thu,  9 Jul 2026 03:53:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B58DF84B01;
+	Thu,  9 Jul 2026 04:29:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DKIsf3tB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qm8Bn7tP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F8B584A8F; Thu,  9 Jul 2026 03:28:06 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 0505D84B0E; Thu,  9 Jul 2026 04:29:21 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 197A684994
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 03:28:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF9F484AA2
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 04:29:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-69a50189d25so2357077a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 18:28:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783560483; cv=none;
- d=google.com; s=arc-20260327;
- b=QB3dyfwO3tHNUm04jGkSzZTcr7oheyBKo8xpGyjkHf4d2T4fmJsZ1fY0Di5CA9kYXj
- 11YJrwkpQwByLcBjYi7TZX+/m7NMartN1fHLTJ4PE5egeqloqjrSqAMFwOhRq+y33nJp
- vZ3T0KFS2SViT070KAHGrglCJfN+CwvVlnCiKmY8q7BtVqM3Nc2MRHql8Pq4femiJL00
- 2EmT0aIauDOjcbVpX05ZmPZWAPqguwIC6L5PA9Nfd+6GcmPmuGm7Z5Dv+GifnEjyfOfi
- 88/8Wd/7soZxdHAcWVYEHgIQ8u9fn6VkR7dKYj4M9bgx7+5LQqJN4wv5DlNpgz6D9Hvd
- a+7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tkGH0oYS9lWibLX910LrG+GrsYOF6LUdlgv7Euk48s4=;
- fh=cIieWWq0sQXGIpsmr9XJ7yBzdHRSEPDfzIO+1YmWnWk=;
- b=BMRgV9nN6mThiQdzJn0dX4vLQOk6dIubg5PpFE9yPb38BA9Hi2APrXXrVXYcPQsbeZ
- w8FPusD9x+APIIGMg2fA6TTs9Ur1JgodhgAqcxLtUO5LyNSOoiQof0GlJNZ01iXC963m
- +Yxyesq3lW5A7nXMdCJ6bl6avT201AN+XJLl8J2B50cnL+NRX4jXEQ8mXJwg2IMkD5X7
- O1UoftDMXnZ6leIMDPsyqM8PDj7Q2oLyv71GlhxnPwuKZDF7KhM729On/zN0t/Hmb4Mb
- 9NwsyiDXM9oWcNc8gtNrVqIUzfCJMwNCgFhDj4xzTjxxRiHh9pggRwfQt1jtfHoAd16I
- 6w1g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7e9ecb1e13cso1625065a34.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jul 2026 19:29:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783560483; x=1784165283; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=tkGH0oYS9lWibLX910LrG+GrsYOF6LUdlgv7Euk48s4=;
- b=DKIsf3tBFpRzoXQDRN3SpuReAg0iu1B8BTG9HnVmWvXDQQOLcITXuBrSSya3Uxukbi
- 5uL8CEH196Mta0Utkyu8gtga2nUDIHRieofLW/TC7YybAwUC/LiqN7Yjs/vnL84N5peg
- bFNuXRQev55nAyz8D2m2P2qG+v+HylgGpFrKk=
+ d=gmail.com; s=20251104; t=1783564155; x=1784168955; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8FfUL/l8zY/G4Mznf9Nti7950HyMtaG+vQ45yTlsYnE=;
+ b=Qm8Bn7tPYKGtkIeZ/taKYGWYNJDz+UuHVX8Z2gjlAgyNdJ2MW/bJkiX0GNi6C0NJ9Y
+ L8FYt4Xt8ExltYpOw24zcvKhhMpV+fL2S9kO0wBIr18/I34GRshM3KfB58muGMpAdcot
+ q1rDpbY1cx5H/yDEWXWdAX+Us/J/oS15OgxPH+dpmrRQLkJpChk/aOoEB5Ld4uxD560i
+ r1tG04A6xXhzLVIbJ3zWUqQIjuij05FKrL8bJYP3ac1gwPs3q9M+X9PpWHTsPvfP86OG
+ auewptpa+OJvydnje/OKtTGV1PLPuM4vuLSAHirwq5QKzkfxCM54WDNxWjkxWcLwKP5E
+ 1qvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783560483; x=1784165283;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=tkGH0oYS9lWibLX910LrG+GrsYOF6LUdlgv7Euk48s4=;
- b=ZuY7LT8MvfQ1GA2gndgDBNNGc5p+QHz3c2QdA75KFBPhDGWq4bNVQdbPmqz/KR/89h
- LvrI8CE5wiAa6jeQ7QEoxh4an+j7+5PSL9FhXsbbnCIt1T19oZRarR/59UD3wGX+TNAQ
- RxQtMIIuW7uvmxnJTtaRNr02rPPlJi3pNSneIiOayFckh0SakAKvNEa463pSXZO9PqkY
- KSV4QdWGr8GIxtWBA+So7zoRlwn0Z1yEA+Sc4C4MFz483bT5zY3ddpSHsISD1P28lCi3
- seCCHvq8bj2JDCy0TJwboIekHegQqdSCPhGotFjAMvXSzhKbsqi8erYpoVVqpxUOBEUU
- nBnA==
-X-Gm-Message-State: AOJu0YzAFiYlDnOH+qy6KudyKUMpsdSZUmFc2/Op2NiK5/MycqqG+Req
- l+gu8YPXrJTyZGnfN5U+23vwDrJUW1gqcWtRT6ZPrqtJMNdd/qQp7B+9uSTvI2WsiDUU8S0zEgn
- IysCdVTwnhcYjoxvLPUUrbeoOkLHdwWOBWZmAZsso
-X-Gm-Gg: AfdE7cnavcluQY2HKHSBxDtjtGhXQWmoJQLlV9Dr9YUurVSCRQGm3eZI82M9SOV2x/i
- T+QhNAi+2KLtWNgqBq24R/j6deQJof4myDT5tvoD44MDmNdmvUWaH4KPKzAFXmrQbWzJ8aZnaoI
- MBm0gEs4dlkWZMQxENf7J4uKxXrb3txDzOhiJyUg0TAl7k127EoLuFRyG5SYecOnAL0YBhVTxBF
- hgFm+al5w4ePwS1dEVbuQ70Ez6QP1fwWtHEUVtO+p6oYNCpZ6ary3dv15YkQdscsOP84bg=
-X-Received: by 2002:a05:6402:13d4:b0:699:8397:55f8 with SMTP id
- 4fb4d7f45d1cf-69ab4486282mr2025973a12.18.1783560483554; Wed, 08 Jul 2026
- 18:28:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260707153135.2048115-1-sjg@chromium.org>
- <20260707153518.GI749385@bill-the-cat>
- <CAFLszTjyo-Xizh8p_tv6xPLvM+yu_3KCoH6G2J-hCqPn_zKUHA@mail.gmail.com>
- <20260709003834.GI749385@bill-the-cat>
-In-Reply-To: <20260709003834.GI749385@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Jul 2026 19:27:52 -0600
-X-Gm-Features: AUfX_mxqB38u10q_tuVymOhKyHbf_y8-d9ePqwb0otlB3mvUOu4AxgwEl4zp-Wo
-Message-ID: <CAFLszTjyuz_5XyHxFN7Td-r-fyEHf2rhobd0PLPjC7f=vwzZ4w@mail.gmail.com>
-Subject: Re: [PATCH v3 00/15] rockchip: Add support for the RV1103B, RV1103
- and RV1106
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Fabio Estevam <festevam@nabladev.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Albert Aribaud <albert.u.boot@aribaud.net>, 
- Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Alexey Charkov <alchark@flipper.net>, 
- Alexey Charkov <alchark@gmail.com>, Andrew Davis <afd@ti.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Chris Morgan <macromorgan@hotmail.com>, 
- Chris Packham <judge.packham@gmail.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, 
- FUKAUMI Naoki <naoki@radxa.com>, Finley Xiao <finley.xiao@rock-chips.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Hrushikesh Salunke <h-salunke@ti.com>,
+ d=1e100.net; s=20251104; t=1783564155; x=1784168955;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8FfUL/l8zY/G4Mznf9Nti7950HyMtaG+vQ45yTlsYnE=;
+ b=a3cT30fjh9irzefS86ZrC129OnF1tM5VjjJa8+/5DsnIzmS11MHA5Jgk+vOplWVT+R
+ kXBGf9Tr4PyaiIakghGVHJfKa1aAeZm/lJqMp0U5sVkqpWpxaAKpRSUNrDHHxC8DEr+G
+ 57ZGEG7W/mAttRp8z93xoLRJ66QFzdf/jDpj9yqGGeEar+qu6Sef0wNUfyudsZ/OBov2
+ kiT6ZlYgkqG6IMhX/gqsOOavYGw94rJ0/HXSj4vIYFnVGL1KBT6HoYk8z135N6C2UF5y
+ uzHVu2zNXa35/zbRPSyosszk2hv/BtxJCNKJFYPXklOSGvdUjX9b1BetEmwYa+mKa3Pz
+ JwUQ==
+X-Gm-Message-State: AOJu0YzKz5Nkn6wNV4eqdFW9VaZBLj0zqC3cWcy+LgHDBlhfmZgtaSbG
+ XQqgMnVDTVbuerd7/JZ1aVj4w1ZiSH/HMnDM2p8pWYKunHIC3pgnxK6ej56o7y8wLqxkXA==
+X-Gm-Gg: AfdE7cl7wm76ZDg9kWlkLMthsI1eB06xLorCLA5Kyj9SWrGRTHELcnjaZ/Wo5otTWGt
+ HUbySNGrdTq8jjF+2IHxMH9Xm6uq8y31P8LdI7ImQ08RrEUGmKwJn01l3MZ3gKhGwjYN49Z99ny
+ y9M2WqRhAcGEQUhOJnpgXJHhwpdJi4aKpTMZ6zJpSWnD+ByAo4E3fSSWEZuxIL9ete1G+70Jdgw
+ LiJHyxWYGqrEWD33ze2S9jCAI2u0MOrKT7Sjx/feVODrGehuy/Q/iPy96cZTbtm1UI0kkcsUbIr
+ 0kOA/u5OQO/0/R60A909CHf3v6Wf5M94o9fAeo5JoFEWsaiJ8tDiMCUkhIvoX7Bsq7LtkdLbGve
+ PGtuh64AfKS5druwxPvqWG9XouAx8HIsWeQ4M8Lmgv0lxOrlyfcWgMhvkY7k3g2lrnC73zejBP/
+ kSEMt/3f7h1eor9HcDVQOYNaoUpNrgRb94DKUyC72HyRMKdmkuToaIcfgi9FyhRL2/w3YpdCyEP
+ vdgVTc/w87thQac1QSL/gzX56CGNGzMxEqkom6PmXYR8KK7i8dfgoxy2BYZJBo+RlfDpFEA+/Tj
+ CTWeoORKDw==
+X-Received: by 2002:a05:6820:2212:b0:6a1:5c42:73fa with SMTP id
+ 006d021491bc7-6a36d9cf079mr3380124eaf.45.1783564155407; 
+ Wed, 08 Jul 2026 19:29:15 -0700 (PDT)
+Received: from james-x399.tailafd1a.ts.net (174-29-11-8.hlrn.qwest.net.
+ [174.29.11.8]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4519124d07dsm787551fac.2.2026.07.08.19.29.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jul 2026 19:29:14 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Niu Zhihong <zhihong@nzhnb.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Genoud <richard.genoud@bootlin.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, Ye Zhang <ye.zhang@rock-chips.com>, 
- huang lin <hl@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 09 Jul 2026 03:53:48 +0200
+ Aristo Chen <jj251510319013@gmail.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Subject: [PATCH v2] tools: binman: pass KEYDIR to FIT entries
+Date: Wed,  8 Jul 2026 20:29:00 -0600
+Message-ID: <20260709022904.3226038-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,57 +107,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+U-Boot's Makefile passes KEYDIR to direct mkimage invocations, but
+internal binman FIT builds only receive the generic BINMAN_INDIRS search
+path. Adding KEYDIR to BINMAN_INDIRS treats it as one more input-file
+search path: FIT entries still auto-detect a key directory from all
+include directories, so an explicit KEYDIR may not be the directory that
+gets passed to mkimage. It also makes a key-only directory part of the
+generic blob lookup path.
 
-On Wed, 8 Jul 2026 at 18:38, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Jul 08, 2026 at 04:36:57PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 7 Jul 2026 at 09:35, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jul 07, 2026 at 09:30:58AM -0600, Simon Glass wrote:
-> > >
-> > > > This series adds support for three small Rockchip camera SoCs and two
-> > > > boards which use them.
-> > > >
-> > > > The first eight patches are Fabio Estevam's series adding the RV1103B
-> > > > and the Onion Omega4 board, updated here to address the review
-> > > > comments on v2: the board patch is split into SoC and board patches,
-> > > > the devicetree files move into the patches where they belong and the
-> > > > pinctrl driver uses regmap_update_bits() throughout. All credit for
-> > > > this work goes to Fabio. The devicetree concern raised in the v2
-> > > > review is also resolved now: the devicetree files carried here are the
-> > > > versions merged in Linux v7.1, verbatim, and can be dropped once the
-> > > > next dts/upstream sync brings them in.
-> > > >
-> > > > The remaining patches add the RV1106 and its RV1103 package variant,
-> > > > following the same structure as the RV1103B patches, together with
-> > > > the Luckfox Pico Mini B board. These SoCs have no mainline Linux
-> > > > support yet, so their devicetrees are local for now. The clock and
-> > > > pinctrl drivers are ported from the Rockchip vendor tree and are the
-> > > > work of Elaine Zhang and Ye Zhang. The final patch makes the
-> > > > maskrom-mode RAM-boot images work on 32-bit boards without OP-TEE,
-> > > > which both of these boards rely on.
-> > > >
-> > > > Tested on the Luckfox Pico Mini B: U-Boot runs from RAM over the USB
-> > > > maskrom path and both the SPI NAND and a microSD card are usable. THe
-> > > > board is running in my lab.
-> > >
-> > > I did ask you not to do this, Simon, as your patches aren't being picked
-> > > up until we've resolved the status of u-boot.org.
-> >
-> > I just saw that email Tom...OK, so I should not send any patches at all?
->
-> As I told you on the community call over two weeks ago now, I'm not
-> comfortable taking your patches until we have resolved the u-boot.org
-> domain transfer. So no, your patches are not being merged.
+Forward KEYDIR as a binman entry argument named keydir, matching the
+existing entry-argument mechanism used for BL31, TEE, of-list and other
+U-Boot build inputs. FIT entries use that directory directly for
+mkimage -k when fit,sign or fit,encrypt is enabled, falling back to the
+include-directory autodetection when keydir is not provided.
 
-Do you mean:
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - Use the existing EntryArg mechanism instead of adding a binman build
+    -k/--keydir option and global state
+  - Explain why KEYDIR should not just be added to BINMAN_INDIRS
+  - Clarify KEYDIR documentation as a Makefile-forwarded EntryArg
+---
+ Makefile                  |  1 +
+ tools/binman/binman.rst   |  5 +++++
+ tools/binman/etype/fit.py | 28 +++++++++++++++------------
+ tools/binman/ftest.py     | 40 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 62 insertions(+), 12 deletions(-)
 
-- still send patches, they might be reviewed but will not be merged
-until we resolve the Concept tree / domain
-- stop sending patches completely
+diff --git a/Makefile b/Makefile
+index d8287323c43..c8ac56d36e4 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1689,6 +1689,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		-I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
+ 		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
++		$(if $(KEYDIR),-a keydir=$(KEYDIR)) \
+ 		-a atf-bl1-path=${BL1} \
+ 		-a atf-bl31-path=${BL31} \
+ 		-a tee-os-path=${TEE} \
+diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+index 366491089ad..3a860421a69 100644
+--- a/tools/binman/binman.rst
++++ b/tools/binman/binman.rst
+@@ -2161,6 +2161,11 @@ BINMAN_INDIRS
+     Sets the search path for input files used by binman by adding one or more
+     `-I` arguments. See :ref:`External blobs`.
+ 
++KEYDIR
++    Sets the key directory passed to FIT entries by adding a
++    `-a keydir=$(KEYDIR)` argument. FIT entries use this directory for
++    mkimage's `-k` argument when `fit,sign` or `fit,encrypt` is enabled.
++
+ BINMAN_TOOLPATHS
+     Sets the search path for external tool used by binman by adding one or more
+     `--toolpath` arguments. See :ref:`External tools`.
+diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+index f28b1e6b4cb..32caa03a7e1 100644
+--- a/tools/binman/etype/fit.py
++++ b/tools/binman/etype/fit.py
+@@ -105,18 +105,20 @@ class Entry_fit(Entry_section):
+         fit,sign
+             Enable signing FIT images via mkimage as described in
+             verified-boot.rst.
+-            If the property is found and fit,engine is not set, the private
+-            keys path is detected among binman include directories and passed to
+-            mkimage via -k flag. All the keys required for signing FIT must be
+-            available at time of signing and must be located in single include
+-            directory.
++            If the property is found and fit,engine is not set, the `keydir`
++            entry argument is passed to mkimage via the -k flag. If no key
++            directory is provided, the private keys path is detected among
++            binman include directories. All the keys required for signing FIT
++            must be available at time of signing and must be located in a
++            single directory.
+ 
+         fit,encrypt
+             Enable data encryption in FIT images via mkimage. If the property
+-            is found, the keys path is detected among binman include
+-            directories and passed to mkimage via  -k flag. All the keys
+-            required for encrypting the FIT must be available at the time of
+-            encrypting and must be located in a single include directory.
++            is found, the `keydir` entry argument is passed to mkimage via the
++            -k flag. If no key directory is provided, the keys path is detected
++            among binman include directories. All the keys required for
++            encrypting the FIT must be available at the time of encrypting and
++            must be located in a single directory.
+ 
+             Incompatible with fit,engine.
+ 
+@@ -485,6 +487,7 @@ class Entry_fit(Entry_section):
+                 includes 'generator' entries which are used to create the FIT,
+                 but should not be processed as real entries. This is set up once
+                 we have the entries
++            _keydir (str): Key directory from the keydir EntryArg, if provided
+             _loadables (list of str): List of generated split-elf nodes, each
+                 a node name
+             _remove_props (list of str): Value of of-spl-remove-props EntryArg,
+@@ -502,8 +505,9 @@ class Entry_fit(Entry_section):
+         self._priv_entries = {}
+         self._loadables = []
+         self._remove_props = []
+-        props = self.GetEntryArgsOrProps(
+-            [EntryArg('of-spl-remove-props', str)], required=False)[0]
++        props, self._keydir = self.GetEntryArgsOrProps(
++            [EntryArg('of-spl-remove-props', str),
++             EntryArg('keydir', str)], required=False)
+         if props:
+             self._remove_props = props.split()
+         self.mkimage = None
+@@ -701,7 +705,7 @@ class Entry_fit(Entry_section):
+             args.update({'engine': engine})
+             # If no engine, keys must exist locally, find them
+             if engine is None:
+-                keydir = self._get_keys_dir(data)
++                keydir = self._keydir or self._get_keys_dir(data)
+             elif self._fit_props.get('fit,encrypt') is not None:
+                 self.Raise('fit,engine currently does not support encryption')
+ 
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index bf98b268ac1..7b84d79eec0 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8167,6 +8167,31 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             self.assertIsNotNone(signature)
+             self.assertIsNotNone(signature.props.get('value'))
+ 
++    def testFitSignKeydir(self):
++        """Test that the keydir EntryArg is passed to mkimage"""
++        if not elf.ELF_TOOLS:
++            self.skipTest('Python elftools not available')
++        data = tools.read_file(self.TestFile("fit/rsa2048.key"))
++        self._MakeInputFile("keys/rsa2048.key", data)
++
++        test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
++        keys_subdir = os.path.join(self._indir, "keys")
++        entry_args = {
++            'of-list': 'test-fdt1',
++            'default-dt': 'test-fdt1',
++            'atf-bl31-path': 'bl31.elf',
++            'keydir': keys_subdir,
++        }
++        data = self._DoReadFileDtb(
++            'fit/signature.dts',
++            entry_args=entry_args,
++            extra_indirs=[test_subdir])[0]
++
++        dtb = fdt.Fdt.FromData(data)
++        dtb.Scan()
++        signature = dtb.GetNode('/configurations/conf-uboot-1/signature')
++        self.assertIsNotNone(signature.props.get('value'))
++
+     def testFitSignEngineSimple(self):
+         """Test that image with FIT and signature nodes can be signed with an
+            OpenSSL Engine"""
+@@ -8507,6 +8532,21 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             dec_data = file.read()
+         self.assertEqual(U_BOOT_NODTB_DATA, dec_data.encode('ascii'))
+ 
++    def testSimpleFitEncryptedDataKeydir(self):
++        """Test that encrypted FIT data uses the keydir EntryArg"""
++        data = tools.read_file(self.TestFile("fit/aes256.bin"))
++        self._MakeInputFile("keys/aes256.bin", data)
++
++        keys_subdir = os.path.join(self._indir, "keys")
++        data = self._DoReadFileDtb(
++            'fit/encrypt_data.dts',
++            entry_args={'keydir': keys_subdir})[0]
++
++        fit = fdt.Fdt.FromData(data)
++        fit.Scan()
++        node = fit.GetNode('/images/u-boot')
++        self.assertIn('data-size-unciphered', fit.GetProps(node))
++
+     def testSimpleFitEncryptedDataMissingKey(self):
+         """Test an image with a FIT containing data to be encrypted but with a missing key"""
+         with self.assertRaises(ValueError) as e:
+-- 
+2.53.0
 
-Regards,
-Simon
