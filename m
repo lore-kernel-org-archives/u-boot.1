@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C6FDC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC675C44501
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 439C384B45;
+	by phobos.denx.de (Postfix) with ESMTP id 7F53C84B51;
 	Fri, 10 Jul 2026 14:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DT37oNaw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="r3z336WV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64E1F84B65; Fri, 10 Jul 2026 00:47:10 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id AD2BB84BFC; Fri, 10 Jul 2026 00:47:09 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F7A484BA3
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:47:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6873D84C12
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 00:47:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-448de0cc236so165940fac.2
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:47:05 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-43b7e186a0cso117708fac.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 15:47:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783637223; x=1784242023; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783637225; x=1784242025; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HNvxdIZ2T1eQXOJ/byuNnljqf/Sq5QNTb0m0raOuO8Y=;
- b=DT37oNawZrNMuTuWkwMm7aGju0dC99kCehxZZCJ7Ls/mBiWYx/OBZhr38MNQtOgQSv
- cj2NiU8zxCatHWGq0aUQ4hfC/BbeBCuPVdcmX5bzF4oOkbsWtUd4r0o+SVcNwF2nhH7c
- uDefGo8k0OUnQMWfnFf/JWhPISOn5OC/UeGOGhurnESjkSoMOe3Yi4GlqtaD3ILrpR26
- BrhXogkqVy4+nTwf7gXDmrJDo5npPWreISV5Iq9etppHQcHg64NMBXKPP4czmWpmjcwe
- RLvKGKp1NP04FWeQfU0zPpoPzZY8pYgmDnJJ7bWdgfehVEQVYblJu3RwiWe/jXp5aN7W
- +AqA==
+ bh=lLjn3hPUwXWfIALAEpjy6ZU7PRr7M0mfrF6I62cXewE=;
+ b=r3z336WV7WBlY6J59Yor/yl27MoTrF2h+vSwOxDynyWtziNNvLJ5695F151t165cOD
+ Ma6UAPY2FVNYAoNx3yTE2N+1/LEQwEtzi1Jh5cl39zWacCyntsW5wXalvhLm4OCi0DTl
+ nbxFqS6YXmeTNl9xJ/xDNBFZefR6/fWfgvbLOlGbBc8sEsOJJ/EqYWDlOYxKShU6EenD
+ qcwii9WHaCs7GQgSN8m+7MIKBarHwNmlLiQCdakpLgkHeDlSVALY8BkdooW2B3zV/EHq
+ onhJHOp9/ozX3OJqkxylMtA8AosjSqXtdTJb0vUF3Wjru9sN28CzeO/vfdC87SmB7K4U
+ kRJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783637223; x=1784242023;
+ d=1e100.net; s=20251104; t=1783637225; x=1784242025;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=HNvxdIZ2T1eQXOJ/byuNnljqf/Sq5QNTb0m0raOuO8Y=;
- b=HwvWcvwmDdqnyc7VhnnP5NqGAPFmnqxG6/XsN9q/PMcX4zY1xDlvcAZMKnc2Vcs3Og
- o9F353VldOMaM4rLsf21ozZGHKf8I6lzsNbpJZNkQbIBXvVn7TrrgfoFk7R+Ozniy9s3
- HHHDJQLS1pmLhJq6rqQr2sGfKXQlPeSIgkYue5I6Rmn8x7JbjulRcs2aPgWOl8pAK1LX
- Y07gbBPBrCJetHJEBU/+UboH5Lvk1vzYtKTBIKf+/u8yMOb9xXGBrREOJXpuRjY+1HjR
- 57oSrSDwKRT+D7Ug1mOLqV+scg+Yd3RRanQt6GumN3ijgcaU3Co2iQkcW8t9fhwle+87
- z5QQ==
-X-Gm-Message-State: AOJu0Yzw4UeTJOPqf23KWpBONiE6pcTgf6xIHffulF57tEt7RRwAJq9Z
- QGLPLTt1ZbFNYt7Mrwy16aAaWsw5+TKhrZPtsc/NFfbwuo8TdgeJKYSa
-X-Gm-Gg: AfdE7clqqU7cufAUYK/XArDBzMIVyxyAciolQTOSCCWHe0rzz1oNQimRAKfAlld81WJ
- 8il3sb4ojPb3yO2U+tddvFIK66vZH+iOqtMxxIo3HYPyLp9/0I/tq02g2oNuKDA+Xi6N8ZbWap4
- 96agToOhJtIsStdOr/Z/xRw3GLmZFZUBSvlU9cPr9T3gEGIamxIyHsOG5Vub8e0qJ4zce8/4uPd
- yZ5UALKcvlxYwwJ7rjjbHZOWNeJjd0UCXRTR4HAH8MHU0To9voGB8PiZXyPF2iqslrFIPAxbfb7
- 1Ll9lk0vqw7gVpPY99D53r4MfbRW620NAron+/VjR5uDzaEtmyYK86cGzu+KEf13QRLxv5Hld6h
- md843rzqz5LvnEPnXE+XXDbZfnzk8+pnVs+MtMiHiwyq7E898R5j+/2TrdCb7vKhUUIy3J8yIZV
- zAgtKlBvxfSCuwKU/CSY3t9vmbGup6h4WP/a5V0stItrWm9D2fcVdwpI1YmObtnXjfTeXOT0LUE
- 2Gf+YwVDiSzOxGNkSCCmmMhpbcpd2hq8RkRlHhof+iflidaq0IbCe8aNFSrwC7g
-X-Received: by 2002:a05:6870:b30f:b0:448:558c:d84b with SMTP id
- 586e51a60fabf-45163d2d69cmr6423795fac.38.1783637223267; 
- Thu, 09 Jul 2026 15:47:03 -0700 (PDT)
+ bh=lLjn3hPUwXWfIALAEpjy6ZU7PRr7M0mfrF6I62cXewE=;
+ b=KCgiy9v6R/iW7XvitmTiEV/A15uhCTORn9ewA9cLnjm5/5ywuI8+yu6Rn1gYfRBlcq
+ IPvgLhpK5G7JMFg9OqAxh6VE7YgJyEToF+plBU7MdIYtEeq1r8fDYKaJUMhhFbNxlAxI
+ M0K8ZCXyeCn6kt5GuNLg0ghjEBJraZxtr9sRqq+A0KHFTyXuevYOxS4TGssnBJopls8M
+ uovDU8cHplk4Fow6BbuDzTDGeBvpF8L+xml0w8BNGM2oAC8Sz9sImUbv9Ie93gR+r8if
+ PiZzKY6dCPxDqahO8mZ64/jo+laCA8Ldx2kh9zVDnBj/QGSLhIRl3ZheyHz+zaVhBKTc
+ F/Cw==
+X-Gm-Message-State: AOJu0YynHBENKi+O4NtY+zTTqI2wzxUIRDXrtf1vGPU2zxxHdHg/H9Qm
+ Xxe33+0BJHTrQZ1k3KzDIE1ES+jgacFp43xXyls6czMcCcFXB6Fr/6Tr
+X-Gm-Gg: AfdE7cm0O/5rlAss7oy6dGl9hVCjK76fGv+T7UqyglcfbD4CuJ80lcFdc+fgewgyEud
+ 55S3QrkeTwasvz3BUe/YaKmoM8swBu99kYB+XDGM9IXHFZJ8jKpoM2H+Y0wQ6m6Wxk49TkeHCE6
+ i5BT90Oj2HnoNRdPfdmMpGHWRaJIF9yIBtNhVWpXgiZWpLO3fMs6ckDkzsmMS9WOi/vNTxNPa6T
+ q8xNbs0R8QFLVcDC5ti6TOEPYgSIzgpOvmaYkQ3Hr3CPGUz5smg0xOHAlSDr16PNipVbYV00B6k
+ y2LLBHQ6AHiXLRyT1i8eEFfWX6Q/UnG1FSNWCD1EpWsq3YHCwpQcdiGvyKwjxMaE4ZOMZRYGuHH
+ JWSfJV2wmo8mPSbOZN+1xWN9iAORwNfLw1DLV4QP8mOCMsp4yH2G31dsilQYT+QyVE7tVoYpNnP
+ VZeF31GOzMJgZPP72sL6JR02wyvGSCpf8a7g3vQ6mkBr66JveQLM0mpTrxmFowciA7z8ciJ8sqZ
+ 8Sf8rDEjJUvJycSsuLTX7i+NZ+j/qH0gorsGo2BEmoaQCCA5PFZj9JF2xv3xzcr
+X-Received: by 2002:a05:6871:4506:b0:447:4c65:d956 with SMTP id
+ 586e51a60fabf-45162de7e20mr5734050fac.0.1783637225153; 
+ Thu, 09 Jul 2026 15:47:05 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.47.01
+ 586e51a60fabf-45191643abdsm3310749fac.11.2026.07.09.15.47.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 15:47:02 -0700 (PDT)
+ Thu, 09 Jul 2026 15:47:04 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 09 Jul 2026 16:46:30 -0600
-Subject: [PATCH v3 08/10] crypto: allwinner: add sun8i-ce ECDSA verifier
+Date: Thu, 09 Jul 2026 16:46:31 -0600
+Subject: [PATCH v3 09/10] crypto: hash: allow DM hash in SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260709-submit-ce-series-v2-v3-8-5017da8c9bef@gmail.com>
+Message-Id: <20260709-submit-ce-series-v2-v3-9-5017da8c9bef@gmail.com>
 References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 In-Reply-To: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
 To: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>, 
@@ -131,636 +131,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The H616 Crypto Engine includes an ECC engine which can verify ECDSA
-signatures. Add a UCLASS_ECDSA child for the sun8i-ce parent so FIT
-signature verification can use the hardware block from U-Boot proper and
-SPL.
+The hash uclass is currently keyed only by CONFIG_DM_HASH, so SPL cannot
+enable UCLASS_HASH independently. Any SPL code using hash_digest*() has to
+rely on U-Boot proper also enabling DM_HASH, and the FIT hash path selects
+the driver-model implementation with a non-phase-aware preprocessor check.
 
-The CE takes explicit curve parameters for each operation. Provide tables
-for the curves accepted by U-Boot's FIT ECDSA parser: secp224r1,
-prime256v1, secp384r1 and secp521r1. Make each curve independently
-selectable for U-Boot proper and SPL so SRAM-constrained builds can keep
-only the curves they need. The task input layout follows the ECC verify
-buffer order used by Allwinner's CE implementation.
-
-The CE input buffer uses fixed-width curve fields. Reuse the parameter
-packing logic for the message digest as well, so wider digests are
-truncated to the leftmost curve-width bytes according to ECDSA rules.
+Add SPL_DM_HASH, build the hash uclass from CONFIG_$(PHASE_)DM_HASH and use
+CONFIG_IS_ENABLED(DM_HASH) when selecting the FIT hash implementation. This
+lets SPL FIT verification use a UCLASS_HASH provider without requiring the
+U-Boot proper hash uclass.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes v1 -> v2:
-  - Document the CE input-buffer layout  (suggested by Simon Glass)
-  - Document ECC byte-sized task length  (suggested by Simon Glass)
-  - Make CE ECDSA curves individually selectable  (suggested by Simon Glass)
-  - Use neutral wording in comments and commit log
+Changes v2 -> v3:
+  - Remove the bare software-hash fallback scope  (suggested by Simon Glass)
+  - Document that SPL_DM_HASH needs a hardware provider unless a phase-aware
+    software hash provider is added  (suggested by Simon Glass)
 ---
- drivers/crypto/allwinner/sun8i-ce/Kconfig          |  93 +++++
- drivers/crypto/allwinner/sun8i-ce/Makefile         |   1 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  |   8 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 434 +++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |   4 +
- 5 files changed, 540 insertions(+)
+ boot/image-fit.c             | 50 +++++++++++++++++++++++---------------------
+ drivers/crypto/hash/Kconfig  | 13 ++++++++++++
+ drivers/crypto/hash/Makefile |  2 +-
+ 3 files changed, 40 insertions(+), 25 deletions(-)
 
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Kconfig b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-index f72cf3498fe..e780638d86f 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Kconfig
-+++ b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-@@ -37,3 +37,96 @@ config SPL_SUNXI_CE_AES
- 	  Select this option to enable AES decryption in SPL using the Crypto
- 	  Engine found in Allwinner H6 and H616 compatible SoCs. This can be
- 	  used to decrypt FIT images before loading U-Boot proper.
-+
-+config SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier"
-+	depends on ARCH_SUNXI
-+	depends on ECDSA_VERIFY
-+	depends on CLK && DM_RESET
-+	select SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification using
-+	  the Crypto Engine found in Allwinner sunxi SoCs. FIT image
-+	  signatures can then be checked by the hardware accelerator in
-+	  U-Boot proper. Digests wider than the selected curve are
-+	  truncated according to ECDSA rules.
-+
-+config SPL_SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier in SPL"
-+	depends on ARCH_SUNXI
-+	depends on MACH_SUN50I_H616
-+	depends on SPL_DM
-+	depends on SPL_OF_CONTROL
-+	depends on SPL_ECDSA_VERIFY
-+	select SPL_CRYPTO
-+	select SPL_SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification in SPL
-+	  using the Crypto Engine found in Allwinner H616-compatible SoCs.
-+	  This allows SPL FIT image signatures to be checked by the hardware
-+	  accelerator before U-Boot proper is loaded. Digests wider than the
-+	  selected curve are truncated according to ECDSA rules.
-+
-+if SUNXI_CE_ECDSA
-+
-+config SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+endif
-+
-+if SPL_SUNXI_CE_ECDSA
-+
-+config SPL_SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1 in SPL"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+endif
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Makefile b/drivers/crypto/allwinner/sun8i-ce/Makefile
-index 2a8778065b1..753ea827a0d 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Makefile
-+++ b/drivers/crypto/allwinner/sun8i-ce/Makefile
-@@ -2,3 +2,4 @@
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index c84cbfaf4a8..e38d84c361f 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -32,10 +32,8 @@ extern void *aligned_alloc(size_t alignment, size_t size);
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <asm/global_data.h>
+-#ifdef CONFIG_DM_HASH
+ #include <dm.h>
+ #include <u-boot/hash.h>
+-#endif
+ #define aligned_alloc(a, s)	memalign((a), (s))
  
- obj-$(CONFIG_$(PHASE_)SUNXI_CE) += sun8i-ce-core.o
- obj-$(CONFIG_$(PHASE_)SUNXI_CE_AES) += sun8i-ce-aes.o
-+obj-$(CONFIG_$(PHASE_)SUNXI_CE_ECDSA) += sun8i-ce-ecdsa.o
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-index 3674e54ec12..743a93ca3d3 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-@@ -252,6 +252,13 @@ static int sunxi_ce_bind(struct udevice *dev)
- 			return ret;
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -1321,43 +1319,47 @@ int fit_set_timestamp(void *fit, int noffset, time_t timestamp)
+ int calculate_hash(const void *data, int data_len, const char *name,
+ 			uint8_t *value, int *value_len)
+ {
+-#if !defined(USE_HOSTCC) && defined(CONFIG_DM_HASH)
++	struct hash_algo *algo;
++	int ret;
++
++#ifndef USE_HOSTCC
+ 	int rc;
+ 	enum HASH_ALGO hash_algo;
+ 	struct udevice *dev;
+ 
+-	rc = uclass_get_device(UCLASS_HASH, 0, &dev);
+-	if (rc) {
+-		debug("failed to get hash device, rc=%d\n", rc);
+-		return -1;
+-	}
++	if (CONFIG_IS_ENABLED(DM_HASH)) {
++		rc = uclass_get_device(UCLASS_HASH, 0, &dev);
++		if (rc) {
++			debug("failed to get hash device, rc=%d\n", rc);
++			return -1;
++		}
+ 
+-	hash_algo = hash_algo_lookup_by_name(name);
+-	if (hash_algo == HASH_ALGO_INVALID) {
+-		debug("Unsupported hash algorithm\n");
+-		return -1;
+-	};
++		hash_algo = hash_algo_lookup_by_name(name);
++		if (hash_algo == HASH_ALGO_INVALID) {
++			debug("Unsupported hash algorithm\n");
++			return -1;
++		}
+ 
+-	rc = hash_digest_wd(dev, hash_algo, data, data_len, value, CHUNKSZ);
+-	if (rc) {
+-		debug("failed to get hash value, rc=%d\n", rc);
+-		return -1;
+-	}
++		rc = hash_digest_wd(dev, hash_algo, data, data_len, value,
++				    CHUNKSZ);
++		if (rc) {
++			debug("failed to get hash value, rc=%d\n", rc);
++			return -1;
++		}
+ 
+-	*value_len = hash_algo_digest_size(hash_algo);
+-#else
+-	struct hash_algo *algo;
+-	int ret;
++		*value_len = hash_algo_digest_size(hash_algo);
++		return 0;
++	}
++#endif
+ 
+ 	ret = hash_lookup_algo(name, &algo);
+ 	if (ret < 0) {
+-		debug("Unsupported hash alogrithm\n");
++		debug("Unsupported hash algorithm\n");
+ 		return -1;
  	}
  
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA) && variant->has_ecdsa) {
-+		ret = device_bind_driver(dev, "sun8i-ce-ecdsa",
-+					 "sun8i-ce-ecdsa", NULL);
-+		if (ret)
-+			return ret;
-+	}
-+
+ 	algo->hash_func_ws(data, data_len, value, algo->chunk_size);
+ 	*value_len = algo->digest_size;
+-#endif
+ 
  	return 0;
  }
+diff --git a/drivers/crypto/hash/Kconfig b/drivers/crypto/hash/Kconfig
+index 72b955ac791..272af7bce18 100644
+--- a/drivers/crypto/hash/Kconfig
++++ b/drivers/crypto/hash/Kconfig
+@@ -4,6 +4,19 @@ config DM_HASH
+ 	help
+ 	  If you want to use driver model for Hash, say Y.
  
-@@ -345,6 +352,7 @@ static const struct sunxi_ce_variant sun50i_h6_variant = {
++config SPL_DM_HASH
++	bool "Enable Driver Model for Hash in SPL"
++	depends on SPL_DM
++	select SPL_CRYPTO
++	help
++	  Enable the hash uclass in SPL so SPL code can bind and use
++	  UCLASS_HASH providers through the driver model. This is useful for
++	  FIT verification paths that want to calculate image hashes through a
++	  hardware hash accelerator before U-Boot proper is loaded.
++	  HASH_SOFTWARE depends on DM_HASH, so SPL_DM_HASH alone does not
++	  provide a software hash device. Enable a hardware hash provider for
++	  SPL when selecting this option.
++
+ config HASH_SOFTWARE
+ 	bool "Enable driver for Hash in software"
+ 	depends on DM_HASH
+diff --git a/drivers/crypto/hash/Makefile b/drivers/crypto/hash/Makefile
+index 33d88161ed4..9f0d30f9be3 100644
+--- a/drivers/crypto/hash/Makefile
++++ b/drivers/crypto/hash/Makefile
+@@ -2,5 +2,5 @@
+ #
+ # Copyright (c) 2021 ASPEED Technology Inc.
  
- static const struct sunxi_ce_variant sun50i_h616_variant = {
- 	.has_aes = true,
-+	.has_ecdsa = true,
- 	.cipher_t_dlen_in_bytes = true,
- 	.needs_word_addresses = true,
- 	.setup_mod_clock = sun50i_h616_ce_setup_mod_clock,
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-new file mode 100644
-index 00000000000..15b35d91cf9
---- /dev/null
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-@@ -0,0 +1,434 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 James Hilliard
-+ */
-+
-+#include <crypto/ecdsa-uclass.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <string.h>
-+#include <linux/dma-mapping.h>
-+#include <linux/kernel.h>
-+#include "sun8i-ce.h"
-+
-+#define SUNXI_ECDSA_PARAMS		12
-+#define SUNXI_ECDSA_MAX_WORDS						\
-+	(CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) ? 17 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) ? 12 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) ? 8 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) ? 7 : 1)
-+#define SUNXI_ECDSA_MAX_BYTES		(SUNXI_ECDSA_MAX_WORDS * sizeof(u32))
-+#define SUNXI_ECDSA_MAX_SRC_BYTES	(SUNXI_ECDSA_PARAMS * SUNXI_ECDSA_MAX_BYTES)
-+
-+struct sunxi_ecdsa_job {
-+	struct sunxi_ce_task task __aligned(ARCH_DMA_MINALIGN);
-+	u8 src[SUNXI_ECDSA_MAX_SRC_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+	u8 dst[SUNXI_ECDSA_MAX_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+};
-+
-+struct sunxi_ecdsa_curve {
-+	const char *name;
-+	const u8 *p;
-+	const u8 *a;
-+	const u8 *gx;
-+	const u8 *gy;
-+	const u8 *n;
-+	u16 bits;
-+	u8 bytes;
-+	u8 words;
-+};
-+
-+static const u8 ecdsa_p224_p[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x01,
-+};
-+
-+static const u8 ecdsa_p224_a[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xfe,
-+};
-+
-+static const u8 ecdsa_p224_gx[] = {
-+	0xb7, 0x0e, 0x0c, 0xbd, 0x6b, 0xb4, 0xbf, 0x7f,
-+	0x32, 0x13, 0x90, 0xb9, 0x4a, 0x03, 0xc1, 0xd3,
-+	0x56, 0xc2, 0x11, 0x22, 0x34, 0x32, 0x80, 0xd6,
-+	0x11, 0x5c, 0x1d, 0x21,
-+};
-+
-+static const u8 ecdsa_p224_gy[] = {
-+	0xbd, 0x37, 0x63, 0x88, 0xb5, 0xf7, 0x23, 0xfb,
-+	0x4c, 0x22, 0xdf, 0xe6, 0xcd, 0x43, 0x75, 0xa0,
-+	0x5a, 0x07, 0x47, 0x64, 0x44, 0xd5, 0x81, 0x99,
-+	0x85, 0x00, 0x7e, 0x34,
-+};
-+
-+static const u8 ecdsa_p224_n[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x16, 0xa2,
-+	0xe0, 0xb8, 0xf0, 0x3e, 0x13, 0xdd, 0x29, 0x45,
-+	0x5c, 0x5c, 0x2a, 0x3d,
-+};
-+
-+static const u8 ecdsa_p256_p[] = {
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x01,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+};
-+
-+static const u8 ecdsa_p256_a[] = {
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x01,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfc,
-+};
-+
-+static const u8 ecdsa_p256_gx[] = {
-+	0x6b, 0x17, 0xd1, 0xf2, 0xe1, 0x2c, 0x42, 0x47,
-+	0xf8, 0xbc, 0xe6, 0xe5, 0x63, 0xa4, 0x40, 0xf2,
-+	0x77, 0x03, 0x7d, 0x81, 0x2d, 0xeb, 0x33, 0xa0,
-+	0xf4, 0xa1, 0x39, 0x45, 0xd8, 0x98, 0xc2, 0x96,
-+};
-+
-+static const u8 ecdsa_p256_gy[] = {
-+	0x4f, 0xe3, 0x42, 0xe2, 0xfe, 0x1a, 0x7f, 0x9b,
-+	0x8e, 0xe7, 0xeb, 0x4a, 0x7c, 0x0f, 0x9e, 0x16,
-+	0x2b, 0xce, 0x33, 0x57, 0x6b, 0x31, 0x5e, 0xce,
-+	0xcb, 0xb6, 0x40, 0x68, 0x37, 0xbf, 0x51, 0xf5,
-+};
-+
-+static const u8 ecdsa_p256_n[] = {
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xbc, 0xe6, 0xfa, 0xad, 0xa7, 0x17, 0x9e, 0x84,
-+	0xf3, 0xb9, 0xca, 0xc2, 0xfc, 0x63, 0x25, 0x51,
-+};
-+
-+static const u8 ecdsa_p384_p[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe,
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+};
-+
-+static const u8 ecdsa_p384_a[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe,
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xfc,
-+};
-+
-+static const u8 ecdsa_p384_gx[] = {
-+	0xaa, 0x87, 0xca, 0x22, 0xbe, 0x8b, 0x05, 0x37,
-+	0x8e, 0xb1, 0xc7, 0x1e, 0xf3, 0x20, 0xad, 0x74,
-+	0x6e, 0x1d, 0x3b, 0x62, 0x8b, 0xa7, 0x9b, 0x98,
-+	0x59, 0xf7, 0x41, 0xe0, 0x82, 0x54, 0x2a, 0x38,
-+	0x55, 0x02, 0xf2, 0x5d, 0xbf, 0x55, 0x29, 0x6c,
-+	0x3a, 0x54, 0x5e, 0x38, 0x72, 0x76, 0x0a, 0xb7,
-+};
-+
-+static const u8 ecdsa_p384_gy[] = {
-+	0x36, 0x17, 0xde, 0x4a, 0x96, 0x26, 0x2c, 0x6f,
-+	0x5d, 0x9e, 0x98, 0xbf, 0x92, 0x92, 0xdc, 0x29,
-+	0xf8, 0xf4, 0x1d, 0xbd, 0x28, 0x9a, 0x14, 0x7c,
-+	0xe9, 0xda, 0x31, 0x13, 0xb5, 0xf0, 0xb8, 0xc0,
-+	0x0a, 0x60, 0xb1, 0xce, 0x1d, 0x7e, 0x81, 0x9d,
-+	0x7a, 0x43, 0x1d, 0x7c, 0x90, 0xea, 0x0e, 0x5f,
-+};
-+
-+static const u8 ecdsa_p384_n[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xc7, 0x63, 0x4d, 0x81, 0xf4, 0x37, 0x2d, 0xdf,
-+	0x58, 0x1a, 0x0d, 0xb2, 0x48, 0xb0, 0xa7, 0x7a,
-+	0xec, 0xec, 0x19, 0x6a, 0xcc, 0xc5, 0x29, 0x73,
-+};
-+
-+static const u8 ecdsa_p521_p[] = {
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff,
-+};
-+
-+static const u8 ecdsa_p521_a[] = {
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xfc,
-+};
-+
-+static const u8 ecdsa_p521_gx[] = {
-+	0x00, 0xc6, 0x85, 0x8e, 0x06, 0xb7, 0x04, 0x04,
-+	0xe9, 0xcd, 0x9e, 0x3e, 0xcb, 0x66, 0x23, 0x95,
-+	0xb4, 0x42, 0x9c, 0x64, 0x81, 0x39, 0x05, 0x3f,
-+	0xb5, 0x21, 0xf8, 0x28, 0xaf, 0x60, 0x6b, 0x4d,
-+	0x3d, 0xba, 0xa1, 0x4b, 0x5e, 0x77, 0xef, 0xe7,
-+	0x59, 0x28, 0xfe, 0x1d, 0xc1, 0x27, 0xa2, 0xff,
-+	0xa8, 0xde, 0x33, 0x48, 0xb3, 0xc1, 0x85, 0x6a,
-+	0x42, 0x9b, 0xf9, 0x7e, 0x7e, 0x31, 0xc2, 0xe5,
-+	0xbd, 0x66,
-+};
-+
-+static const u8 ecdsa_p521_gy[] = {
-+	0x01, 0x18, 0x39, 0x29, 0x6a, 0x78, 0x9a, 0x3b,
-+	0xc0, 0x04, 0x5c, 0x8a, 0x5f, 0xb4, 0x2c, 0x7d,
-+	0x1b, 0xd9, 0x98, 0xf5, 0x44, 0x49, 0x57, 0x9b,
-+	0x44, 0x68, 0x17, 0xaf, 0xbd, 0x17, 0x27, 0x3e,
-+	0x66, 0x2c, 0x97, 0xee, 0x72, 0x99, 0x5e, 0xf4,
-+	0x26, 0x40, 0xc5, 0x50, 0xb9, 0x01, 0x3f, 0xad,
-+	0x07, 0x61, 0x35, 0x3c, 0x70, 0x86, 0xa2, 0x72,
-+	0xc2, 0x40, 0x88, 0xbe, 0x94, 0x76, 0x9f, 0xd1,
-+	0x66, 0x50,
-+};
-+
-+static const u8 ecdsa_p521_n[] = {
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xfa, 0x51, 0x86, 0x87, 0x83, 0xbf, 0x2f,
-+	0x96, 0x6b, 0x7f, 0xcc, 0x01, 0x48, 0xf7, 0x09,
-+	0xa5, 0xd0, 0x3b, 0xb5, 0xc9, 0xb8, 0x89, 0x9c,
-+	0x47, 0xae, 0xbb, 0x6f, 0xb7, 0x1e, 0x91, 0x38,
-+	0x64, 0x09,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp224r1 = {
-+	.name = "secp224r1",
-+	.bits = 224,
-+	.bytes = 28,
-+	.words = 7,
-+	.p = ecdsa_p224_p,
-+	.a = ecdsa_p224_a,
-+	.gx = ecdsa_p224_gx,
-+	.gy = ecdsa_p224_gy,
-+	.n = ecdsa_p224_n,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_prime256v1 = {
-+	.name = "prime256v1",
-+	.bits = 256,
-+	.bytes = 32,
-+	.words = 8,
-+	.p = ecdsa_p256_p,
-+	.a = ecdsa_p256_a,
-+	.gx = ecdsa_p256_gx,
-+	.gy = ecdsa_p256_gy,
-+	.n = ecdsa_p256_n,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp384r1 = {
-+	.name = "secp384r1",
-+	.bits = 384,
-+	.bytes = 48,
-+	.words = 12,
-+	.p = ecdsa_p384_p,
-+	.a = ecdsa_p384_a,
-+	.gx = ecdsa_p384_gx,
-+	.gy = ecdsa_p384_gy,
-+	.n = ecdsa_p384_n,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp521r1 = {
-+	.name = "secp521r1",
-+	.bits = 521,
-+	.bytes = 66,
-+	.words = 17,
-+	.p = ecdsa_p521_p,
-+	.a = ecdsa_p521_a,
-+	.gx = ecdsa_p521_gx,
-+	.gy = ecdsa_p521_gy,
-+	.n = ecdsa_p521_n,
-+};
-+
-+static const struct sunxi_ecdsa_curve *
-+sunxi_ecdsa_find_curve(const struct ecdsa_public_key *pubkey)
-+{
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) &&
-+	    !strcmp(pubkey->curve_name, sunxi_ecdsa_secp224r1.name))
-+		return &sunxi_ecdsa_secp224r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) &&
-+	    !strcmp(pubkey->curve_name, sunxi_ecdsa_prime256v1.name))
-+		return &sunxi_ecdsa_prime256v1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) &&
-+	    !strcmp(pubkey->curve_name, sunxi_ecdsa_secp384r1.name))
-+		return &sunxi_ecdsa_secp384r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) &&
-+	    !strcmp(pubkey->curve_name, sunxi_ecdsa_secp521r1.name))
-+		return &sunxi_ecdsa_secp521r1;
-+
-+	return NULL;
-+}
-+
-+static void sunxi_ecdsa_copy_le_param(u8 **dst,
-+				      const struct sunxi_ecdsa_curve *curve,
-+				      const void *src, size_t len)
-+{
-+	const u8 *p = src;
-+	size_t copy_len;
-+	int i;
-+
-+	copy_len = min_t(size_t, len, curve->bytes);
-+	for (i = 0; i < copy_len; i++)
-+		(*dst)[i] = p[copy_len - 1 - i];
-+	*dst += curve->words * sizeof(u32);
-+}
-+
-+static void sunxi_ecdsa_fill_src(struct sunxi_ecdsa_job *job,
-+				 const struct sunxi_ecdsa_curve *curve,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature)
-+{
-+	const u8 *r = signature;
-+	const u8 *s = r + curve->bytes;
-+	u8 *dst = job->src;
-+
-+	/*
-+	 * The H616 CE manual specifies this fixed sequence of little-endian
-+	 * curve-width fields for ECC signature verification:
-+	 *
-+	 *   n, s, e, r, p, a, Gx, Gy, Qx, Qy, n, r
-+	 */
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->n, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, s, curve->bytes);
-+	/* ECDSA uses the leftmost bits when the digest is wider than the key. */
-+	sunxi_ecdsa_copy_le_param(&dst, curve, hash, hash_len);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, r, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->p, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->a, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->gx, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->gy, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, pubkey->x, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, pubkey->y, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, curve->n, curve->bytes);
-+	sunxi_ecdsa_copy_le_param(&dst, curve, r, curve->bytes);
-+}
-+
-+static void sunxi_ecdsa_fill_task(struct sunxi_ce_priv *priv,
-+				  struct sunxi_ecdsa_job *job,
-+				  const struct sunxi_ecdsa_curve *curve,
-+				  dma_addr_t src, dma_addr_t dst)
-+{
-+	struct sunxi_ce_task *task = &job->task;
-+	u32 bytes = curve->words * sizeof(u32);
-+
-+	task->t_id = SUNXI_CE_CHAN;
-+	task->t_common_ctl = SUNXI_CE_COMM_INT | SUNXI_CE_METHOD_ECC;
-+	task->t_asym_ctl = curve->words |
-+			   (SUNXI_CE_ECC_OP_VERIFY << SUNXI_CE_ECC_OP_SHIFT);
-+	/* The ECC engine uses a byte-sized task length on H616. */
-+	task->t_dlen = SUNXI_ECDSA_PARAMS * bytes;
-+	task->t_src[0].addr = sunxi_ce_desc_dma_addr(priv, src);
-+	task->t_src[0].len = task->t_dlen / sizeof(u32);
-+	task->t_dst[0].addr = sunxi_ce_desc_dma_addr(priv, dst);
-+	task->t_dst[0].len = curve->words;
-+}
-+
-+static int sunxi_ecdsa_run(struct sunxi_ce_priv *priv,
-+			   struct sunxi_ecdsa_job *job,
-+			   const struct sunxi_ecdsa_curve *curve)
-+{
-+	size_t dst_len = curve->words * sizeof(u32);
-+	size_t src_len = SUNXI_ECDSA_PARAMS * dst_len;
-+	dma_addr_t src_dma, dst_dma;
-+	u32 result;
-+	int ret;
-+
-+	src_dma = dma_map_single(job->src, src_len, DMA_TO_DEVICE);
-+	if (dma_mapping_error(NULL, src_dma))
-+		return -EIO;
-+
-+	dst_dma = dma_map_single(job->dst, dst_len, DMA_FROM_DEVICE);
-+	if (dma_mapping_error(NULL, dst_dma)) {
-+		ret = -EIO;
-+		goto out_unmap_src;
-+	}
-+
-+	sunxi_ecdsa_fill_task(priv, job, curve, src_dma, dst_dma);
-+	sunxi_ce_flush(&job->task, sizeof(job->task));
-+
-+	ret = sunxi_ce_run_task(priv, &job->task);
-+
-+	dma_unmap_single(dst_dma, dst_len, DMA_FROM_DEVICE);
-+	if (ret)
-+		goto out_unmap_src;
-+
-+	result = *(u32 *)job->dst;
-+	ret = result == 1 ? 0 : -EPERM;
-+
-+out_unmap_src:
-+	dma_unmap_single(src_dma, src_len, DMA_TO_DEVICE);
-+
-+	return ret;
-+}
-+
-+static int sunxi_ecdsa_verify_common(struct sunxi_ce_priv *priv,
-+				     const struct ecdsa_public_key *pubkey,
-+				     const void *hash, size_t hash_len,
-+				     const void *signature, size_t sig_len)
-+{
-+	const struct sunxi_ecdsa_curve *curve;
-+	struct sunxi_ecdsa_job *job;
-+	int ret;
-+
-+	curve = sunxi_ecdsa_find_curve(pubkey);
-+	if (!curve || pubkey->size_bits != curve->bits || !hash_len ||
-+	    sig_len != curve->bytes * 2)
-+		return -EINVAL;
-+
-+	job = malloc_cache_aligned(sizeof(*job));
-+	if (!job)
-+		return -ENOMEM;
-+
-+	memset(job, 0, sizeof(*job));
-+	sunxi_ecdsa_fill_src(job, curve, pubkey, hash, hash_len, signature);
-+
-+	ret = sunxi_ecdsa_run(priv, job, curve);
-+	free(job);
-+
-+	return ret;
-+}
-+
-+static int sunxi_ecdsa_verify_dm(struct udevice *dev,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature, size_t sig_len)
-+{
-+	struct sunxi_ce_priv *priv = dev_get_priv(dev_get_parent(dev));
-+
-+	return sunxi_ecdsa_verify_common(priv, pubkey, hash, hash_len,
-+					 signature, sig_len);
-+}
-+
-+static const struct ecdsa_ops sunxi_ecdsa_ops = {
-+	.verify = sunxi_ecdsa_verify_dm,
-+};
-+
-+U_BOOT_DRIVER(sun8i_ce_ecdsa) = {
-+	.name = "sun8i-ce-ecdsa",
-+	.id = UCLASS_ECDSA,
-+	.ops = &sunxi_ecdsa_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-index 1580fff35fe..7facd6d89ad 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-@@ -15,6 +15,9 @@
- #define SUNXI_CE_CHAN_INT		BIT(SUNXI_CE_CHAN)
- #define SUNXI_CE_COMM_INT		BIT(31)
- #define SUNXI_CE_METHOD_AES		0
-+#define SUNXI_CE_METHOD_ECC		33
-+#define SUNXI_CE_ECC_OP_VERIFY		7
-+#define SUNXI_CE_ECC_OP_SHIFT		16
- #define SUNXI_CE_MAX_SG			8
- 
- struct sunxi_ce_sginfo {
-@@ -39,6 +42,7 @@ struct sunxi_ce_task {
- 
- struct sunxi_ce_variant {
- 	bool has_aes;
-+	bool has_ecdsa;
- 	bool cipher_t_dlen_in_bytes;
- 	bool needs_word_addresses;
- 	void (*setup_mod_clock)(void);
+-obj-$(CONFIG_DM_HASH) += hash-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_HASH) += hash-uclass.o
+ obj-$(CONFIG_HASH_SOFTWARE) += hash_sw.o
 
 -- 
 2.53.0
