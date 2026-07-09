@@ -4,101 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F86C43458
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 18:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD1BC43458
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jul 2026 18:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8454E84B3B;
-	Thu,  9 Jul 2026 20:41:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 357C084C02;
+	Thu,  9 Jul 2026 20:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K22Bb6LE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MUuq874X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACE5A84B73; Thu,  9 Jul 2026 20:41:15 +0200 (CEST)
-Received: from mail-ed2-x01.google.com (mail-ed2-x01.google.com
- [IPv6:2a00:1450:4864:33::1])
+ id 4357584C03; Thu,  9 Jul 2026 20:51:17 +0200 (CEST)
+Received: from mail-pj2-x02.google.com (mail-pj2-x02.google.com
+ [IPv6:2607:f8b0:4864:39::2])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CED384A78
- for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 20:41:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB4DA84C01
+ for <u-boot@lists.denx.de>; Thu,  9 Jul 2026 20:51:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=coiaprant@gmail.com
-Received: by mail-ed2-x01.google.com with SMTP id
- 4fb4d7f45d1cf-69850336c9cso49163a12.1
- for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 11:41:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783622473; cv=none;
- d=google.com; s=arc-20260327;
- b=gDDz0wVjqRgUz5c2JvOZ/MSH5c4vsQQ8eTYtLUQcXhXlK5oI7zgvuWv7IF9KaRT1l6
- pzZiBihU7m9HVLbg6Sfn81/N7lgZp+0ArRzP25WLuMCDHV2LJ2tkJb0F24poWhGZOQEr
- HJWV/4YWXEU37xEZDkj0Tb/Cpf+lE0WVeapnMWRLi7K7MWm3RW4L1M0G3e7blhb5wpEs
- BiGOCPLfTauCFXHKQA9yBENHQH48mLtLfwuIVSFHv/oFEudvhIV6PFkmX1a28OfCn5DE
- ClRmdvefZ372DRzoWQ1wmkUhsIdyJUwRqyUVvcTcnRlAn9v/WsKf6ItZl8vr6iqfcshr
- Bj/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=7JMtX61LhQpjUcIoSI+nU3EfDNI0EJjVwl2Wy830DFw=;
- fh=g1vppUl4QHxN7ytj8qA6rpkcQwr6jdB5fVbHGDZJXvo=;
- b=Z4WraiERdBLJYs0Ef9A5L3+8NWT+ljrqRHsNW67dtwniZGRXaxBvUWZ0yUGABUFz8m
- 3DzHx4Le49BeGaMUiPXIf0v3vU81xOu9fY9zOCic8Htgw3Qpz+GzcUwZx4s3VeXg9Cyt
- dqaNeWBvCyDFCQi6C50x2rbg6oAM9TusXTGp7HW4kQljmAnq8l+EiiQvxfLX/SdzdxPg
- SwOBB3eWt5Tyky246RP49zfDkV+fKHKlKaHNhT21HuLRD8HTMz2tnFTo36c8UW9JCWLm
- DxTnTTlyH+ls3M5QKyxudiC1z5u7oC38oAEvSbI3zCyeQMMT1rMqmajIRuhWbJPUfM8u
- /xQg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-pj2-x02.google.com with SMTP id
+ d9443c01a7336-2cb3f5bb19aso198635ad.1
+ for <u-boot@lists.denx.de>; Thu, 09 Jul 2026 11:51:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783622473; x=1784227273; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=7JMtX61LhQpjUcIoSI+nU3EfDNI0EJjVwl2Wy830DFw=;
- b=K22Bb6LEgf9iIla2xArXqwuYcxjq0CmtsVOyoPD2DHFQ+h7F8dlm550LBEJz8ICzuv
- klgbklT/etCbxowPc8ThrVHwxORWBjAbsGQqKMRNpteq26uQGNwSAEhuLLP9PYCTRBqf
- hVLZ0VVy6DcimmwzrT9hJaRZbMnKoNDfzd1LmG/WZCgtOHl7FjAryhQraDmdSTiiODcg
- E3/3++5CEtdBDdE2jnK5WoeY26tShJ9qAv9dscsnMARxW/l/2pVJUB5jaJtdNJec4JLo
- 4YUchgun0UVD/9II824d5Py/f5EYNRSuf5QgwIFuv8gfhY72/qmV+z2DLOFWs6f5dFKV
- LC/A==
+ d=gmail.com; s=20251104; t=1783623073; x=1784227873; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=YzA+IyafgyGiM90GrPxF2gyVUYDIQV/tos8Uy1c7e7s=;
+ b=MUuq874XumLtiTniMs9U4mFsdsOYnfn8m1USJh1ZfYyRKHvBpaUVrSC1Ph7j8/GYYD
+ +UUFbKCfOXyhqfrPi5F8Wk7QsC9zccfZuB6Jr9/hut2jk2LIjJYl3xNHiHL39kAKXOwM
+ wWu/8uSNhGM7kbiGbcu6tGx55lAUjfiU8zxKMs4/jX+LyfmnimwdU411+DULfDfBW5m6
+ JUafZ1blWvttL+qlWykBiFd+Mg29vpM980T9LOQGq9L0n9Dz9Yvk1dz9mlHp0rGVsh/I
+ 0dAdqN7RBoeODyDpv+uMl94s5mFjr5Fsa8XEuofbMQXKDiL9IoLuY4/DltxSWFC2f9Q9
+ /URQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783622473; x=1784227273;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=7JMtX61LhQpjUcIoSI+nU3EfDNI0EJjVwl2Wy830DFw=;
- b=XMBp8Xu4nQ97zmAeOawEp+l2Y0j8Bq1dUkDgtv96XbkdW3OmK09AkYRnSYBd6k/fwm
- 05lUHe44UxpGeFUJEQ7Wm+9F9tjQwTsKVK7w64UWDlOnHjLAFtBD2/x1/bIFSRO45A/j
- bfQQsi193curv4v9LPI9fVm7Pz6D2BoFtSSFH7fmSM6IkFWQzVAxx8KtspR3ySwcyxU0
- X/d6rgQYmTwW6nKON2HN/MifFVdLynrv2WR8zxKEKxqoZvnYpWUQRftDqSt/Sym3gki9
- WI/4skiB7z21CrLmBb+xbbkIazBnnyYb0j/iYcN3rb5Kd1cg1x1spKpnuMQvi0dw89qv
- Oy4Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpqFa/CyDlgXllbCeu+QE42MerXcpZGdKfiOXmZuJUYG0piOfJ8Ubbom9K9JPqNvT9kTDsXGqk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbLNdnFymZmcsSTzOq0gT7ARmpqBvFKURc17toZNqHD2VH1Lqa
- 310VI6Gc2oq1fHxxrYLRpefvcBXcSyuuHBdnY2yj2AmRKmh0YB8WnfmvXBQCAN8Gu7wl6EMGfDH
- ZHUpRBCLr6X2LLqhmwIq0KDfrNBewdx4=
-X-Gm-Gg: AfdE7cmOIZ/3ncapc/ltNbdk/va4Ob7SfBHF/hm4P7TNhfdEj+zexX3AVXaCtq4qWTU
- vEyC+5ws+dyzRsY/WODcL7LXWWeF0aa/2ch+W9s3mYPR/FGd7xCpcKgBe15pC9JEcB/oKtP/UEK
- gdqKnOZP+rRk33LXUokH7RErzGWT2XR5uNPwHDV8+flxm3pK1wSrvn6QgfN9J9CEl3Edwt/ifVw
- IliWyGDU05EndG+cMZtLwiZXB5D79v/t0T8O6ixSf5HOCLT0M4GUcAgaNMhcJQZi+xZ7ZpF5d4=
-X-Received: by 2002:a17:907:e90:b0:beb:b53d:4839 with SMTP id
- a640c23a62f3a-c15ce0d2fdbmr421167766b.33.1783622472459; Thu, 09 Jul 2026
- 11:41:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260625155021.2269190-2-coiaprant@gmail.com>
- <a71f2d27-4ba0-4abe-af1b-0ac409c2ba74@cherry.de>
-In-Reply-To: <a71f2d27-4ba0-4abe-af1b-0ac409c2ba74@cherry.de>
+ d=1e100.net; s=20251104; t=1783623073; x=1784227873;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=YzA+IyafgyGiM90GrPxF2gyVUYDIQV/tos8Uy1c7e7s=;
+ b=tAOreQIk4YIu0SNyxBlXEcm0lv0lu8uym20BejdFQ+wPEK39Ei0Axv0mnEXvIFyUZb
+ KDPLl4o+v0oaEES5/sNZn+Sh8RdGREpYodjcLZf2tuzoJneOfOH7oJnE4sV2wBo3ffnY
+ F5qAWiNzcJtLmFdu6I7forBqXjMqkenAjBl+DWEFRCpNjpenanm7IyoNEH0M9D5zC77x
+ rphEa54bDWrfGukLhMkvZ6YBZoRa4v/kgTdhXSD3fyfhjRV7JLQYLGgxaH2hasVzW1nT
+ fwy2bY5dCrg966eJZwwv/pzS40ub2sK0eUOIhti91KvSrmtoyBqrRZ21SGim99DoKHSN
+ c02g==
+X-Gm-Message-State: AOJu0YxPpqgw0nQDvCloUIn22ntuGY6BVlmXUPlR6mWvCTV2p73169R/
+ jT9R/0TxIlhk/n2Rv1XyO3LRQuWLkV5Ip9pZCMSpWRc63qsi6OoTmHjw7ffuJbj22A4T2g==
+X-Gm-Gg: AfdE7cnCjiaRTS9gWC69cnb251Q2hav/W6/UKDC3m20RYkSexSxaqSB3xNosexnSzfD
+ WpZ6uk4n5f04E//2a50S6RlieGc61nkD+FLAuxVKJ0X8ZEC/ndB8taWixfGwzw+kGPA0HfiEd8p
+ V8GVx+okx+/spm71oxv5Mzz33A/junYbBxYUkIrOn/SjrFZcEqgrwgChTUmemEecm2sBnRlgJrR
+ 6IT3ioapiMwElwPvf5ZUjFduiwEKCpcDyeZzVqb8vrV+BmA2KVj2AXQZM1uQYPTjmenT7a377Lg
+ Ynt3cJiEZ0TqdMIiUHRLAJ67RFXPmIncUYG1n45tQOO1SQCqJGbQVmDOnt6E7QjvyPzM0RddqwP
+ zOUzxf8g4VajWUFl1L7XcYRswrYulHTefRghOlL17EqQXd1xsuU4KJ3VDYsnFFdtr5HtiJlOSE/
+ G3duS7e+gCBgPYsIPLGg==
+X-Received: by 2002:a17:903:1247:b0:2ca:eea:eb5c with SMTP id
+ d9443c01a7336-2ccea373170mr86541815ad.18.1783623072868; 
+ Thu, 09 Jul 2026 11:51:12 -0700 (PDT)
+Received: from server.lan ([103.213.4.16]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ccc9d1e28fsm49922135ad.43.2026.07.09.11.51.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jul 2026 11:51:12 -0700 (PDT)
 From: Coia Prant <coiaprant@gmail.com>
-Date: Fri, 10 Jul 2026 02:41:01 +0800
-X-Gm-Features: AVVi8Cec2qigP5R1Aj37cuVEoII2N8Pq-texz2syX5QDUtIlKQ8QUuWKKwNxSng
-Message-ID: <CALj3r0g-S6+Kzr97MHzKqdmw6RC2--2VxWs_FYc_JGMorPzE9g@mail.gmail.com>
-Subject: Re: [PATCH v2] board: rockchip: Add for 9Tripod X3568 v4
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de,
+	Coia Prant <coiaprant@gmail.com>
+Subject: [PATCH v3] board: rockchip: Add support for 9Tripod X3568 v4
+Date: Fri, 10 Jul 2026 02:51:01 +0800
+Message-ID: <20260709185101.2149485-1-coiaprant@gmail.com>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,30 +97,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > --- /dev/null
-> > +++ b/configs/9tripod-x3568-v4-rk3568_defconfig
-> > @@ -0,0 +1,79 @@
-> > +CONFIG_ARM=y
-> > +CONFIG_SKIP_LOWLEVEL_INIT=y
-> > +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->
-> This cannot be enabled because you don't have CONFIG_RTL8169 enabled.
->
-> There are a bunch of other symbols that are in this defconfig that don't
-> need to be or are not applicable. Can you please send a v3 after running
-> make savedefconfig and copying defconfig to
-> configs/9tripod-x3568-v4-rk3568_defconfig?
->
-> If you edited the defconfig by hand, please avoid as it's error-prone,
-> simply use make menuconfig and enable the options you want through the
-> menu (and save before exiting). Then run make savedefconfig as
-> instructed above to get the defconfig to put into the source code.
->
-> Cheers,
-> Quentin
+The 9Tripod X3568 v4 is an RK3568-based SBC, just like the RK3568-EVB.
+It always uses soldered connections between the X3568CV2/X3568CV3/X3568CV4 core board
+and the X3568bv4 I/O board.
 
-Yeah, Let me use "make savedefconfig".
-Thanks.
+The differences between the core boards
+- PCB size, layout
+- CPU (RK3568B2/RK3568J)
+- Memory type (DDR4/LPDDR4/LPDDR4X) and size
+- eMMC size
+- DSI/EDP resistor values
+Although the components vary, they maintain full compatibility.
 
-Cheers,
-Coia
+The X3568 board has multiple hardware revisions, and we currently support v4 (I/O board).
+
+Specification:
+- SoC: RockChip RK3568 ARM64 (4 cores)
+- eMMC: 16-128 GB
+- RAM: 2-16 GB
+- Power: DC 12V 2A
+- Ethernet: 2x YT8521SC RGMII (10/100/1000 Mbps)
+- Wireless radio: 802.11b/g/n/ac/ax dual-band
+- LED:
+  Power: AlwaysOn
+  User: GPIO
+- Button:
+  VOL+: SARADC/0 <35k µV>
+  VOL-: SARADC/0 <450k µV>
+  Power/Reset: PMIC RK809
+- CAN
+  CAN/1: 4-pin (PH 2.0)
+- PWM
+  PWM/4: Backlight DSI/0 DSI/1
+  PWM/7: IR Receiver [may not install]
+- UART:
+  UART/2: Debug TTL - 1500000 8N1 (1.25mm)
+  UART/3: TTL (PH 2.0)
+  UART/4: TTL (PH 2.0)
+  UART/8: AP6275S Bluetooth
+  UART/9: TTL (PH 2.0)
+- I2C:
+  I2C/0: PMIC RK809
+  I2C/1: Touchscreen DSI/0 DSI/1
+  I2C/4: Camera
+  I2C/5: RTC@51 PCF8563
+- I2S:
+  I2S/0: miniHDMI Sound
+  I2S/1: RK809 Audio Codec
+  I2S/3: AP6275S Bluetooth Sound
+- SDMMC:
+  SDMMC/0: microSD (TF) slot
+  SDMMC/2: AP6275S SDIO WiFi card
+- Camera: 1x CSI
+- Video: miniHDMI / DSI0 (MIPI/LVDS) / DSI1 (MIPI/EDP)
+- Audio: miniHDMI / MIC on-board / Speaker / SPDIF / 3.5mm Headphones / AP6275S Bluetooth
+- USB:
+  USB 2.0 HOST x2
+  USB 2.0 HOST x3 (4-pin)
+  USB 2.0 OTG x1 (shared with USB 3.0 OTG/HOST) [slot may not install]
+  USB 3.0 HOST x1
+  USB 3.0 OTG/HOST x1
+- SATA: 1x SATA 3.0 with Power/4-pin [slot may not install]
+- PCIe: 1x PCIe 3.0 x2 (x4 connector) [power/clock/slot may not install]
+
+Link:
+- https://appletsapi.52solution.com/media/X3568V4%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf
+- https://blog.gov.cooking/archives/research-ninetripod-x3568-v4-and-flash.html
+
+Signed-off-by: Coia Prant <coiaprant@gmail.com>
+---
+ board/rockchip/evb_rk3568/MAINTAINERS     |  5 ++
+ configs/9tripod-x3568-v4-rk3568_defconfig | 76 +++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst           |  1 +
+ 3 files changed, 82 insertions(+)
+ create mode 100644 configs/9tripod-x3568-v4-rk3568_defconfig
+
+diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+index 7e17a6a987a..9ae22ce6845 100644
+--- a/board/rockchip/evb_rk3568/MAINTAINERS
++++ b/board/rockchip/evb_rk3568/MAINTAINERS
+@@ -1,3 +1,8 @@
++9TRIPOD-X3568-V4
++M:	Coia Prant <coiaprant@gmail.com>
++S:	Maintained
++F:	configs/9tripod-x3568-v4-rk3568_defconfig
++
+ BANANAPI-BPI-R2-PRO
+ M:	Frank Wunderlich <frank-w@public-files.de>
+ S:	Maintained
+diff --git a/configs/9tripod-x3568-v4-rk3568_defconfig b/configs/9tripod-x3568-v4-rk3568_defconfig
+new file mode 100644
+index 00000000000..c0e7a565359
+--- /dev/null
++++ b/configs/9tripod-x3568-v4-rk3568_defconfig
+@@ -0,0 +1,76 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-9tripod-x3568-v4"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-9tripod-x3568-v4.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_MOTORCOMM=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index a31ee7100b9..0c996cf880b 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -126,6 +126,7 @@ List of mainline supported Rockchip boards:
+      - Xunlong Orange Pi 3B (orangepi-3b-rk3566)
+ 
+ * rk3568
++     - 9Tripod X3568 v4 (9tripod-x3568-v4-rk3568)
+      - Rockchip Evb-RK3568 (evb-rk3568)
+      - Banana Pi BPI-R2 Pro (bpi-r2-pro-rk3568)
+      - EmbedFire LubanCat 2 (lubancat-2-rk3568)
+-- 
+2.47.3
+
