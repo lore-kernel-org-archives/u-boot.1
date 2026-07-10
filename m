@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E372C44501
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 19:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3828C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 19:01:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19A8B84BB3;
+	by phobos.denx.de (Postfix) with ESMTP id 5DBB084BBD;
 	Fri, 10 Jul 2026 20:59:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Y9wGYn/u";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="I94GMVm7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0158D84BB2; Fri, 10 Jul 2026 20:59:33 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 08CC684BB2; Fri, 10 Jul 2026 20:59:34 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C04D184B9B
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E513C84A90
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-44ce4d7883bso802994fac.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:30 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-448b89f700fso835490fac.2
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783709969; x=1784314769; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783709971; x=1784314771; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=R/jJjCp8InVF+QP5ss4yS20NZ0/5YvaA8txDn/UIjIY=;
- b=Y9wGYn/uAxSc2Pad2VhXsT+HkIdQPCEBFSdS/yEnIryBZqDrx+5A4XzbnCsXF061RY
- eL2EFuHLGwAGMdtrOc4uNQ1oBnFXYUhH6TJQvbPuwwas0dBE0LvPMMFYW0F/hym9dMvR
- FBSdacT4o8R2sKnyG3RJtXp4+MzsTF23W7H0YMzU+Q0jU4zIIAxK6IGpkbxk5vJcN9xj
- fA4n2290t0EaHKUjt1Erw4iIIyX/s0zUM3rZpvpdlN/5ComCWqeX3M7Sg7THPk1ADV7z
- mEOuzX4V0jKc2VeQcSbUnUz8LroQ03pqr8pn3lnWldrwWgO+OjBmfKjEwgBh/e6klWUv
- 1tBg==
+ bh=N6XbtpASWPm0DtZhg+fyogHE68OB9V8mSjXCrs3PXJo=;
+ b=I94GMVm74VSNsCjvAKaFFXKV8lqz59qKeOSzDlhOk3w5Xy6XfvqyDQ2PFs80ti9Z/L
+ UMVKSCcszLSqY/1MH0wM7OsNMvOJFn7oCLSXW35t/+JWWhdzx2D50zW5BlsB52WxIDL7
+ 0yviN/nNtn6mUfAx2kvDWdSgMp2ICTc4mDswjSXStmnOBfX+4VSsarp28zYrQFDHwQhR
+ C03GiuJQ8/kqHumKgpAL7wBIVahCDsEUC7vZxAto3WkXHeMeH6Gyu8cL5/JuLzgopH63
+ O3P9smjJMfdCCR5ikQ8MJlnBk2r31eQqlLQWA/rHSIylsg1a56Wtb3kfhpzcsInbu1uQ
+ Qdag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783709969; x=1784314769;
+ d=1e100.net; s=20251104; t=1783709971; x=1784314771;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=R/jJjCp8InVF+QP5ss4yS20NZ0/5YvaA8txDn/UIjIY=;
- b=oRDeClY0nMgBIApKPEwyqN4snAATxtxLAox7IXi5XDA49Azju015NEIT4fdPXChXK0
- Hpjwe/WazazKnWen1AQPK3lmm9Dks4lkcvjQagBoQ97M1b/rSAiHJdDgHc2j4ka70FzQ
- UbmbWfiqIOEcd+5K2OKLoFWdRu5PwTnZlqrDezL4xKM6EwheEJVId37VZj7xC3qlNWrY
- zYdPwRTOLkeMYBemCOQ1Rj5X91LGn6t1m+k2ht6TZg0cwcfHJGDft3AXh6pw0Oulvz1h
- G4z4uqGLdyh1IGzAG+c7yGF6TEPIa1sUn6EaA3RwnwcXYFEjC00P+Czgl77WSRuIc4lO
- Ndhw==
-X-Gm-Message-State: AOJu0YzDm8ToGGQiskn1uvXQQwVa9HuiEiIxfnhRH+LCV3Gwwz1Y2Ty1
- cSyOt3y9Zj41OCd0ICakPp3G0AHMGicca2xFLwRAKq18X9TQztPHyTlJZksPn9UamdvzN1LjNJi
- sJ7iv
-X-Gm-Gg: AfdE7ckkS3qtFVGBnUixODCJfWSf+VRVGcytcRK/jdsr3wO1Ty8GrJNfyxXZSs2EE+O
- aaz994HLqm1axbJQJyMGIBZu9o4uGwZIp/1PWRgp0Wh+RiWab22vu7suPOzuitVOxX3UMyC3Ico
- tDFgeM5iSHuf1OZrniTKu6IwSo4iS5QGIZY3cJEdgjvmsk8QlcwchyhwwsgjQyEOBw8MQTR5jmu
- hcOSED3niTSPHDEsbldK6NoTHCG4HiT61VK6f0fC0HI09FA9a8xtzCMoMgMM+sW2jkf0S8sQ/2u
- v2fDS0HYmN+YXUS4ifuVtNdLLeLtEpYrriJOnWSO0wu7uXRi9AaVRI7PhYRnSvyDVxvmGGZnaCz
- j475eQdAzUkJtOstTOd0yK5f3vRhGtd+e2Brrbv0B+1V6jK+0Ypwhd6JvziZvNR1KhGxV4sZNbV
- JX4mOBGC2XE5O3+I1g
-X-Received: by 2002:a05:6871:68d:b0:448:558c:d838 with SMTP id
- 586e51a60fabf-451f174c9c3mr82222fac.39.1783709969541; 
- Fri, 10 Jul 2026 11:59:29 -0700 (PDT)
+ bh=N6XbtpASWPm0DtZhg+fyogHE68OB9V8mSjXCrs3PXJo=;
+ b=hWe32KkoKfuBPJ4hc59CNDGCoeI1sYitbaDTfXniEBrxbXCEV6fY/wIa1wlDZZ5Uaq
+ aIG+hG2vtqrFx4hUYaAUMIZa7JXn/EZhd9r3Y4W3J34ErAvLeRPmCl7YaL2ZI8VczIeJ
+ jukCRPQNBMeqT9E3LqMRRIefSxedan3lYVSO2kXzQcRC1sh+2dmNF8VtkbKUYgfN9LGT
+ YP0RLqLInhTTRL1A4tsbfFpT41PdRt5RaMPm7o/4/gCkZ1dNUGk3C30DDQrbFGr6klSl
+ Upab/+sGHDtYjXHnyQghp72RP4R3mUyGkVR6fVpktOHhzrN8CoapZ1kGF+v61GmLnX3p
+ jGoA==
+X-Gm-Message-State: AOJu0YycaDPgDJIBSKfJ7/SC6k0o9+dJ1xHiGJEEAVGTCvmntilckS82
+ Yr6C0N+3pnv2MI14vkwFdS/fEkB7l8dzEHt8EBPrNaNgLSxX2vUHLQIqh4J7WikmXG8ebI1j5Ge
+ FUyqE
+X-Gm-Gg: AfdE7ckD8OUWqCpRCfwEUmeKNkw6GgnJUqnQBEzplC5ZYju5wnfmjiQuFgppSvzEytG
+ N3Ypi7TaDLKL9hQDb2PBZZyrS2hGtMj3SMYw8n72DLvQ40priTqs6GjebEmXKZkSBJfpYUPBpTO
+ ktvL3NBvP0QPbHg4kxLW6mxNVPjkztSQN8q6NFMZCBhPzzBLGueYz98SuGanYbp9ALECVbcwQWF
+ qzocjLjyAO4vDKnLpCsSUhP9e89JegpIwCR9tMlPRrWXlxMjMQxx5Fm9kkKbgV10SSMi3/PH+kV
+ 01xEymJ9OdYr0XxYwFPPXUIruR52DZJh+bp5bD0ADUU44WfL1k0WyPRtfTw2jBI5d0Ysb44j2ja
+ TQWUEU5KWpPr80ArwSkvvN+yqaLIjwyvCcjpD22d4ZhgNpDECErd/tmv9s3+cKA4NISA2q3Q+qb
+ DZvpotDQmUSMuYHySq
+X-Received: by 2002:a05:6871:8795:b0:447:7f2a:baa7 with SMTP id
+ 586e51a60fabf-451f12294acmr84761fac.16.1783709970685; 
+ Fri, 10 Jul 2026 11:59:30 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:1b03:95c:fbd4:4d00])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.28
+ 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 11:59:28 -0700 (PDT)
+ Fri, 10 Jul 2026 11:59:30 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 10 Jul 2026 13:56:28 -0500
-Subject: [PATCH v2 12/24] clk: mediaTek: mt8189: add clock tree type flags
+Date: Fri, 10 Jul 2026 13:56:29 -0500
+Subject: [PATCH v2 13/24] clk: mediaTek: mt8195: add clock tree type flags
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-12-f3f3a4a28dca@baylibre.com>
+Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-13-f3f3a4a28dca@baylibre.com>
 References: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
 In-Reply-To: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -90,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3120; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1657; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=ambeXEvB4wY2o9ijPg+JRNwFa3NIYlJeHqGEh+OTdB8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUCnc/bwENlZ/PWcnDSCqXgjiWMsfQK3WAHt1
- SvRFthZl1uJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFApxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ADqwH/jnT3Qir2Dz3Wusc5hoga6H+E+WKSVNS5d6Kh75
- eqJnwxgZBAaeWVsdhBS7LEBhGZ0nQKLglrtD8gn38s1KmY9NlhCrWNnRNaGjbT2ca7OH9BrtPdD
- Y+pCjDE9UjE7ItEm0m3VDp6vYPw0ETith7jSlK0YxpvZLyep3HmImkUOvOeRbfbnCYIHAZVRfKd
- BPA42gYTLUuZbyJS7DleURnZg0Xs5lNQqyesekYnzcd23UcUclZYd4nJQOyUwJGCA9rhGPxwW8c
- 9A53bggrRkGKnh2uj6BIDwNVnLNeWFAAJp21wPsDIDIA8tHNlq8hdZCddtm/17QTPcbg7PT+h9b
- 0rUk=
+ bh=nWyypTMzg6/FhxRE+e7ULXHE/QdVrjdX07l1yq1NEcM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUCuQAsdPrDUNpy8MB0SWFVMADoTmK2LvFIf5
+ XR6emCY4XOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFArhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABtkIAIG7XWyhX/8GWh6nbnB06XSMvRgY33p3El6tBcP
+ bZBErwqTgLzqeIpBPSkqKjqGtu0q6/FuEDZesBG3vuNjHgEKxFL8I/1h5acTUtzgjQYx6g9270Q
+ q5w0abl7zm9p8mv5ZAE68DZ33VrvI7/sPJ2O9DmteMLxEAO9Kjk1KUnr6j+ngTKE3f4RRZLnn2w
+ JMRWFh33wctAOcfQXxd/fGnXBQEDGJi5/ZmGN6viafJl98tyy9Kwwwrvr9lS5KOsHVdp3Nb5YVa
+ VDGUF48UMbDl3ug+sG5cICtBBsPt/9xXMt9gol6NgwEa1vh9UY8oikNTPPylKuM1NoQnmpjoIe3
+ 6wng=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -119,88 +119,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clock tree type flags to the mt8189 clock tree structures. These
+Add clock tree type flags to the mt8195 clock tree structures. These
 will be used later for parent lookup.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt8189.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ drivers/clk/mediatek/clk-mt8195.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/clk/mediatek/clk-mt8189.c b/drivers/clk/mediatek/clk-mt8189.c
-index b174e259f28..25b88198fd8 100644
---- a/drivers/clk/mediatek/clk-mt8189.c
-+++ b/drivers/clk/mediatek/clk-mt8189.c
-@@ -1898,6 +1898,7 @@ static const struct mtk_gate_regs vlpcfg_ao_regs = {
-  * arbitrary parent trees.
-  */
- #define CLK_PARENT_VLP_CK CLK_PARENT_INFRASYS
-+#define MTK_CLK_TREE_VLP_CK MTK_CLK_TREE_INFRASYS
- 
- #define GATE_VLPCFG_AO(id, parent, shift, flags) \
- 	GATE_FLAGS(id, parent, &vlpcfg_ao_regs, shift, flags | CLK_GATE_NO_SETCLR_INV)
-@@ -1939,6 +1940,7 @@ static const struct mtk_clk_tree mt8189_apmixedsys_clk_tree = {
+diff --git a/drivers/clk/mediatek/clk-mt8195.c b/drivers/clk/mediatek/clk-mt8195.c
+index 37cceb5f32b..3afae4d725c 100644
+--- a/drivers/clk/mediatek/clk-mt8195.c
++++ b/drivers/clk/mediatek/clk-mt8195.c
+@@ -101,6 +101,7 @@ static const struct mtk_clk_tree mt8195_apmixedsys_clk_tree = {
  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
  	.plls = apmixed_plls,
  	.num_plls = ARRAY_SIZE(apmixed_plls),
 +	.type = MTK_CLK_TREE_APMIXED,
  };
  
- static const struct mtk_clk_tree mt8189_topckgen_clk_tree = {
-@@ -1953,6 +1955,7 @@ static const struct mtk_clk_tree mt8189_topckgen_clk_tree = {
+ #define FIXED_CLK0(_id, _rate)	\
+@@ -1423,6 +1424,7 @@ static const struct mtk_clk_tree mt8195_topckgen_clk_tree = {
  	.num_fdivs = ARRAY_SIZE(top_fixed_divs),
  	.num_muxes = ARRAY_SIZE(top_muxes),
- 	.num_gates = ARRAY_SIZE(top_gates),
+ 	.num_gates = ARRAY_SIZE(top_cg_clks),
 +	.type = MTK_CLK_TREE_TOPCKGEN,
  };
  
- static const struct mtk_clk_tree mt8189_vlpckgen_clk_tree = {
-@@ -1964,6 +1967,12 @@ static const struct mtk_clk_tree mt8189_vlpckgen_clk_tree = {
- 	.gates = vlp_ck_gates,
- 	.num_muxes = ARRAY_SIZE(vlp_ck_muxes),
- 	.num_gates = ARRAY_SIZE(vlp_ck_gates),
-+	.type = MTK_CLK_TREE_VLP_CK,
-+};
-+
-+static const struct mtk_clk_tree mt8189_clk_tree = {
-+	.ext_clk_rates = ext_clock_rates,
-+	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
- };
- 
- static const struct udevice_id mt8189_apmixed[] = {
-@@ -2031,7 +2040,7 @@ static int mt8189_clk_gate_probe(struct udevice *dev)
- 
- 	data = (void *)dev_get_driver_data(dev);
- 
--	return mtk_common_clk_gate_init(dev, &mt8189_topckgen_clk_tree,
-+	return mtk_common_clk_gate_init(dev, &mt8189_clk_tree,
- 					data->gates, data->num_gates,
- 					data->gates[0].id);
- }
-@@ -2040,6 +2049,7 @@ U_BOOT_DRIVER(mtk_clk_apmixedsys) = {
- 	.name = "mt8189-apmixedsys",
+ static const struct mtk_gate_regs infra_ao0_cg_regs = {
+@@ -1635,6 +1637,7 @@ U_BOOT_DRIVER(mtk_clk_apmixedsys) = {
+ 	.name = "mt8195-apmixedsys",
  	.id = UCLASS_CLK,
- 	.of_match = mt8189_apmixed,
+ 	.of_match = mt8195_apmixed,
 +	.bind = mtk_common_clk_parent_bind,
- 	.probe = mt8189_apmixedsys_probe,
+ 	.probe = mt8195_apmixedsys_probe,
  	.priv_auto = sizeof(struct mtk_clk_priv),
  	.ops = &mtk_clk_apmixedsys_ops,
-@@ -2050,6 +2060,7 @@ U_BOOT_DRIVER(mtk_clk_topckgen) = {
- 	.name = "mt8189-topckgen",
+@@ -1645,6 +1648,7 @@ U_BOOT_DRIVER(mtk_clk_topckgen) = {
+ 	.name = "mt8195-topckgen",
  	.id = UCLASS_CLK,
- 	.of_match = mt8189_topckgen_compat,
+ 	.of_match = mt8195_topckgen_compat,
 +	.bind = mtk_common_clk_parent_bind,
- 	.probe = mt8189_topckgen_probe,
+ 	.probe = mt8195_topckgen_probe,
  	.priv_auto = sizeof(struct mtk_clk_priv),
  	.ops = &mtk_clk_topckgen_ops,
-@@ -2060,6 +2071,7 @@ U_BOOT_DRIVER(mtk_clk_vlpckgen) = {
- 	.name = "mt8189-vlpckgen",
- 	.id = UCLASS_CLK,
- 	.of_match = mt8189_vlpckgen,
-+	.bind = mtk_common_clk_parent_bind,
- 	.probe = mt8189_infrasys_probe,
- 	.priv_auto = sizeof(struct mtk_clk_priv),
- 	.ops = &mtk_clk_infrasys_ops,
 
 -- 
 2.43.0
