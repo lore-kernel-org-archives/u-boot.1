@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C2FAC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 19:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7984CC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 19:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB96184BDE;
-	Fri, 10 Jul 2026 20:59:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 649D98407E;
+	Fri, 10 Jul 2026 20:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="fnV7LtRq";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="boRC5kLn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B909484BD7; Fri, 10 Jul 2026 20:59:40 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 190028407E; Fri, 10 Jul 2026 20:59:42 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AB0D84B9B
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5B5884A90
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e9f5637634so855496a34.3
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:38 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-44856d185bcso681079fac.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783709977; x=1784314777; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783709978; x=1784314778; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=gVhwqxx66a6jqFXBf4/4B5mULxrQF3FJtr+WYk5nt/g=;
- b=fnV7LtRqY5k/Ss0xZU6WM/2oJ/PjiQfRqvrXNR3zMTZyC+xZpVYDbTUy4c9vSW5cEE
- xwxRiX7IOxYIEILeFbaTw+XZCnXH2xTSUeag58p4dU88fwgGKepodEONr5TBkGw517JX
- f+iwFvL4+CdkddcsrSC9OYk/PRvWCKiADtZZ1XyN1sIOCYtJEzjdo8NpWNv5UHr+nzqE
- pBY2EngmUvqYgSIaRiSz4JC2an/D50BPGo5TZe1mCr5GQYx3ef8MTks6Dvpf7Q3LhFsK
- GdWsg8gjoa6YKx++BxMsBOwUYlRqqAHZBVTWw3Ps+tky0gIvidkVqkyoJV9CQ4TB381U
- nkZg==
+ bh=PGSeHIq1E6tUkU1n97vkOmiM2gVFmaviiqqDwyf1B3U=;
+ b=boRC5kLnZEG9OwjOhI4wuVANUnqGq3uD7ifQcjK49EiZWViQr+T6s/K2PNSpNio9Bg
+ K2BLI4DSTyJR45xHH+leX3G0GLKV1NeIfm8WsO6JqHdHGLGoKZd3TGeFFy3LM/QrRO1T
+ E4pTLJokdKTfI/4xUdolq8B5jAoCxJ+34QUJ5RIsJinLWSEAPOFwqDmZAnqlDN3bXro/
+ /rkrtsfzmBZE5dEtpmh6yqNrWP0MnOISpOPMLjTC8dGhiaNb99TzYJv+jo1v/WElOz6p
+ euO8PCQE0zL2RJHafp5LRAEnEaNtr8sEgZOk5xqzrI32Vxm1gdJn0orN1AnayzDjGXks
+ DCnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783709977; x=1784314777;
+ d=1e100.net; s=20251104; t=1783709978; x=1784314778;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=gVhwqxx66a6jqFXBf4/4B5mULxrQF3FJtr+WYk5nt/g=;
- b=a2KIfXqyJL0PG2NtCDypFNC7dkraoAmI6LWmXzLKteLSBcsW5pdIY+idiHNbc26cnd
- 24eCWJKYH5C3glTFBid5i+kmDr78AVJEfxUaIF80RdH/bZ2338ySPwS2h44r5zklkgIP
- S0lX5FKxzAzci2T8jtnWBuC+fPLX/Vfivg61C8ETTgU59aMnXG8eNDlki88xCJ+VXuRx
- 1lLVSgPazY50W1aNxxWnibK+p8Hwn5ZjGAD1xbC04EK5EGbS2LkW8k7k14Kw7X+0tHX5
- lBgLcvbogqKEQ4G1WNfQmvflNvQeMfVHZhHZNSPjvBQ24VQQciCLcOGanXgXr97kxMSp
- tAIQ==
-X-Gm-Message-State: AOJu0Yw//Ek7jMwDKSA/H21j3vxFOnD4csIq1VNtzNBy5FxYgqIHEM52
- LL0wJUoVlnJd8kNj1HfW3oudzXK3NhR7v1UHRnqpeI+Vk0DUl1qrjEjFH/UfqDfyXDtk504NmQM
- HTKWC
-X-Gm-Gg: AfdE7ckt2ToZBk4Rwu8mnkdYhdXe4uwIGhqy1d8nV/mO+NyfltZllCXdjMQvnm+YCZ8
- s20FurxY3t35tcYxFgFDx/WvsfBnpbC9ONGOGKdCJDcs6x7XizNPcbLui0zB2SuGvT0azOB08rJ
- Ke4T7ruHaeYtpJauXbpQnyTWN6NE4GEwiH0xejZJxqFKjya61OBmVL6Z3i6vJxNnydtF58QJBH6
- 5zxlgW4ZMuoKPUIzx+e3/C0j1HPC8/f9gGBaDBRPtyxMVkH1KSJXuYcHT6agFvZjopeL+z3Cvhr
- CeMjEklU+iPDP6p9ZrHJ+I7nj/PDXu47tAoIs9d8Mb7q/Gu6KDuttW6byYaQY6DKzB8Djuj9TFw
- 30OtO1glodalq1QfAJ73lrUKOO9YDRt9W0IG+bUYzpaD8HWoRfoMsoG9WCoG2dgbhoR2XBhuCSs
- Jd6ojI9sZBrZEiZC/9
-X-Received: by 2002:a05:6820:4c86:b0:69d:f7f8:4825 with SMTP id
- 006d021491bc7-6a39a85624bmr359184eaf.34.1783709977204; 
- Fri, 10 Jul 2026 11:59:37 -0700 (PDT)
+ bh=PGSeHIq1E6tUkU1n97vkOmiM2gVFmaviiqqDwyf1B3U=;
+ b=kok+iMQP2sgqc3bq8Xu+ETZt/lKUgyZ1BfZ1c2QenYsO/HF3GrC69j/ecvgpVyCvRu
+ Kplhk0GoZcJxj3oKF7dl1BOoyRocdRP3ucTlDMqDfdz3fffwP/Z/ZHmyqV6yY/OWfjz5
+ rdgkYx3/sx3Dn+esq57NucwkwZYc9yNH1ODsKaTD4qkEkmoVfpW0L7g9NMDklICMhxmg
+ jqLUPSWMOkqz3Ia/CsjdZG8H3WCRTM9v0hVockyp1GgieSlL1Zasavi95si3rWIe7kC2
+ 7itd66kBBIoP2HDO6D72m8u+skNkVV4cexb9Z+vVB63TPZ4gXD8JDUUrifiWovacOKIr
+ 5DUA==
+X-Gm-Message-State: AOJu0YyM1QvbVqkkT2FMi76gr6i65zm2UG4Zh7XdAWPblbr4H383ciq8
+ 2T2FgF2FaHbDirL3YRTs1mqx3ijbWzBhIK+lEkUxk3UgJYAU/TKp2Q1FFTSIgcDrW3A+XjDZhYw
+ md66L
+X-Gm-Gg: AfdE7ckeoRCJXI75Gnpk3Xyd7YNTFicSMVE/BY/iBj6rYt11+IdRaZhaTEMCtEo1spd
+ J/LEot4th2PsFYMZM1ArHmN6SPDoFD6CyKtyYJw7e/wBUiWSLhsRNbUP3iUiBTYiY8Oa/PWSTIa
+ Hq3hCpKsPAeHRxaAk3uiGIZ2JnOfiT9oVSPHlbz2nqTgqEVgVFG/tu4oHserMOqTbkQAPd8JoIh
+ QwikKqNqp6wGA92a0lsshezIA6GWPb6ZJLhHtznL43UeaRlz8vE7vNGehJkBpqAURovWqP8RN1t
+ JlSajBWaj+ZVPDtPGVr7CcDMz0IwV0yjFAPovBHDqO/BRrcjfvW+p0wyp7GLSoGj0P1fO5TQrQK
+ loKuPrKeIlq4x7GPA0o/RKp/B7UFomfii1JpYR9aq4Y4XK5quNrW7rfodo0oS3pTPnKm+IvdNhA
+ MszDsByrdsKRh2a3mb
+X-Received: by 2002:a05:6870:f629:b0:43c:5b9d:4bfd with SMTP id
+ 586e51a60fabf-451f14838fbmr91967fac.31.1783709978568; 
+ Fri, 10 Jul 2026 11:59:38 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:1b03:95c:fbd4:4d00])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.36
+ 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 11:59:36 -0700 (PDT)
+ Fri, 10 Jul 2026 11:59:37 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 10 Jul 2026 13:56:34 -0500
-Subject: [PATCH v2 18/24] clk: mediatek: use registered provider for parent
- lookup
+Date: Fri, 10 Jul 2026 13:56:35 -0500
+Subject: [PATCH v2 19/24] clk: mediatek: drop parent udevice field
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-18-f3f3a4a28dca@baylibre.com>
+Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-19-f3f3a4a28dca@baylibre.com>
 References: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
 In-Reply-To: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5119; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4826; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=A/3VqK11trHPWFVqqCwvWK7XQatEqQV9dWRmwM89gzc=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUDP6tC1hm3UedC+Mh1nGu1LPURXJN091b4/w
- LoUXaQhyOuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFAzxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A7j4H/jMsJ0WGmF2VAduCCExVgqVujfBPkQwti1k2+ck
- x6/CiUHwTCl7nD/Dl24Tmt7BH+3UAyzWWPeF2iIcrhJJ9w8yo6jjV1OHP6VOyfw6n7dU0nMHd1v
- 4kNOhqy0kxpFWHgRvUykxzx/1xzXsUjPpix4p5xUidQbo3oOMcW30SuOhHqdqXeaiTDzZ40qNto
- cZus42OwJsCfgjYrCLrOb7skzWukBeca3SPO/Ddm3i5p2Zru+joR3T+ZJ/gghUkDwhrhMB4IWso
- dc6gv1idhfbtMT4lREKT8v1CYiR7oY6MBGD/rY5y3u1CVVpEl36cnKQD4aLt0N4kkhJwMjLSPUl
- 1d+E=
+ bh=AKPwBtyaz2JY5jcIIl5Xte6SIUMkuGbyI+QCCqnlQEE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUDWpWeQukfqRNQsMawHE9HASo6VGIBZG34a+
+ nxcsDWqUXWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFA1hYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AisMIAJn096X37qT6KjXcI0yT7Nz/WADk3aTxrCv/e4C
+ +0Oj4eK1s4GpTh/pUDlsVbClf0AXHGb7BzJXdmF4h5UjwlVLrDsJM7g7TatyTJHqM63N+nWL0ec
+ uhoN0iHPhaQQkI6Bi+wsp0iOR2Ar0B+VMDO/udzHqCQksKjjYn0fZ7B3Vdw1Qht0afAobVC3uTz
+ 9LBdkPI3vRLSrzAxPJ4OJgP/x7iFdIjOq+wNgS1DE8+oA6LqObHUNW9MKMLzslWkksoq3oyXGKG
+ +YYIKuTa+hrMtkfLhOta/SjW4HMKWVfb7wJpp0axw6j6ibHvgLVDzet3j7lInyCQ+rxNMjK3H2W
+ rIZI=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,158 +119,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace complex and fragile parent/grandparent lookup logic with a
-simple lookup that matches CLK_PARENT_* flags to registered clock
-providers.
+Remove the parent field from the mediatek clock private data structures.
+This was no longer used other than debug prints.
 
-Previously, we were walking priv->parent path to find a the matching
-provider by either looking at driver name or driver ops. This was
-fragile because more than one udevice could match the criteria and the
-search depth had different rules depending on the clock type and the
-parent type.
-
-This will also enable more simplification in the future since we no
-longer have to keep track of the udevice parents.
+The uclass_get_device_* functions had the effect of ensuring that
+parents were probed. This is done now by having parent providers
+probe on bind, so re-probing here is no longer necessary. Clock trees
+could have more than one parent anyway, so the existing code was not
+completely correct anyway.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mtk.c | 98 ++++++++++++++++++------------------------
- 1 file changed, 42 insertions(+), 56 deletions(-)
+ drivers/clk/mediatek/clk-mtk.c | 48 ++----------------------------------------
+ drivers/clk/mediatek/clk-mtk.h |  2 --
+ 2 files changed, 2 insertions(+), 48 deletions(-)
 
 diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index da584aba0c3..9a1001ff938 100644
+index 9a1001ff938..52d3428438a 100644
 --- a/drivers/clk/mediatek/clk-mtk.c
 +++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -41,6 +41,33 @@ static bool mtk_clk_tree_type_is_provider(enum mtk_clk_tree_type type)
- 	return type != MTK_CLK_TREE_NONE && type < MTK_CLK_TREE_NUM_TYPES;
- }
- 
-+static enum mtk_clk_tree_type mtk_clk_tree_type_from_parent_flags(u16 flags)
-+{
-+	switch (flags & CLK_PARENT_MASK) {
-+	case CLK_PARENT_APMIXED:
-+		return MTK_CLK_TREE_APMIXED;
-+	case CLK_PARENT_TOPCKGEN:
-+		return MTK_CLK_TREE_TOPCKGEN;
-+	case CLK_PARENT_INFRASYS:
-+		return MTK_CLK_TREE_INFRASYS;
-+	default:
-+		return MTK_CLK_TREE_NONE;
-+	}
-+}
-+
-+static struct udevice *mtk_clk_tree_get_provider(enum mtk_clk_tree_type type)
-+{
-+	if (!mtk_clk_tree_type_is_provider(type))
-+		return NULL;
-+
-+	return mtk_clk_providers[type] ?: ERR_PTR(-ENOENT);
-+}
-+
-+static struct udevice *mtk_clk_parent_get_provider(u16 flags)
-+{
-+	return mtk_clk_tree_get_provider(mtk_clk_tree_type_from_parent_flags(flags));
-+}
-+
- static int mtk_clk_tree_register_provider(struct udevice *dev,
- 					  const struct mtk_clk_tree *tree)
- {
-@@ -228,50 +255,16 @@ static ulong mtk_clk_find_parent_rate(struct clk *clk, int id,
- static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
- 				  const int parent, u16 flags)
- {
--	struct udevice *parent_dev;
-+	struct udevice *pdev;
- 
--	switch (flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_APMIXED:
--		/* APMIXEDSYS can be parent or grandparent. */
--		if (dev_get_driver_ops(clk->dev) == &mtk_clk_apmixedsys_ops ||
--		    dev_get_driver_ops(clk->dev) == &mtk_clk_fixed_pll_ops) {
--			parent_dev = clk->dev;
--		} else if (dev_get_driver_ops(priv->parent) == &mtk_clk_apmixedsys_ops ||
--			   dev_get_driver_ops(priv->parent) == &mtk_clk_fixed_pll_ops) {
--			parent_dev = priv->parent;
--		} else {
--			struct udevice *grandparent_dev = dev_get_parent(priv->parent);
--
--			if (dev_get_driver_ops(grandparent_dev) == &mtk_clk_apmixedsys_ops ||
--			    dev_get_driver_ops(grandparent_dev) == &mtk_clk_fixed_pll_ops)
--				parent_dev = grandparent_dev;
--			else
--				return -EINVAL;
--		}
--		break;
--	case CLK_PARENT_TOPCKGEN:
--		if (dev_get_driver_ops(clk->dev) == &mtk_clk_topckgen_ops)
--			parent_dev = clk->dev;
--		else if (dev_get_driver_ops(priv->parent) == &mtk_clk_topckgen_ops)
--			parent_dev = priv->parent;
--		else
--			return -EINVAL;
--
--		break;
--	case CLK_PARENT_INFRASYS:
--		if (dev_get_driver_ops(clk->dev) != &mtk_clk_infrasys_ops)
--			return -EINVAL;
--
--		parent_dev = clk->dev;
--		break;
--	case CLK_PARENT_EXT:
-+	if ((flags & CLK_PARENT_MASK) == CLK_PARENT_EXT)
- 		return mtk_ext_clock_get_rate(priv->tree, parent);
--	default:
--		parent_dev = NULL;
--		break;
--	}
- 
--	return mtk_clk_find_parent_rate(clk, parent, parent_dev);
-+	pdev = mtk_clk_parent_get_provider(flags);
-+	if (IS_ERR(pdev))
-+		return PTR_ERR(pdev);
-+
-+	return mtk_clk_find_parent_rate(clk, parent, pdev);
- }
- 
- static ulong mtk_clk_mux_get_rate(struct clk *clk, u32 off)
-@@ -1104,29 +1097,22 @@ static int mtk_clk_gate_disable(struct clk *clk)
- static ulong mtk_clk_gate_get_rate(struct clk *clk)
- {
- 	struct mtk_cg_priv *priv = dev_get_priv(clk->dev);
--	struct udevice *parent = priv->parent;
- 	const struct mtk_gate *gate;
-+	struct udevice *pdev;
- 
- 	if (clk->id < priv->gates_offs)
- 		return -EINVAL;
- 
- 	gate = &priv->gates[clk->id - priv->gates_offs];
--	/*
--	 * With requesting a TOPCKGEN parent, make sure the dev parent
--	 * is actually topckgen. This might not be the case for an
--	 * infracfg-ao implementation where:
--	 * parent = infracfg
--	 * parent->parent = topckgen
--	 */
--	if (gate->flags & CLK_PARENT_TOPCKGEN &&
--	    parent->driver != DM_DRIVER_GET(mtk_clk_topckgen)) {
--		priv = dev_get_priv(parent);
--		parent = priv->parent;
--	} else if (gate->flags & CLK_PARENT_EXT) {
-+
-+	if (gate->flags & CLK_PARENT_EXT)
- 		return mtk_ext_clock_get_rate(priv->tree, gate->parent);
--	}
- 
--	return mtk_clk_find_parent_rate(clk, gate->parent, parent);
-+	pdev = mtk_clk_parent_get_provider(gate->flags);
-+	if (IS_ERR(pdev))
-+		return -ENOENT;
-+
-+	return mtk_clk_find_parent_rate(clk, gate->parent, pdev);
+@@ -320,11 +320,6 @@ static int mtk_clk_mux_set_parent(void __iomem *base, u32 parent,
  }
  
  #if CONFIG_IS_ENABLED(CMD_CLK)
+-static void mtk_clk_print_dev_parent(struct udevice *parent)
+-{
+-	printf("Parent device: %s %s\n", parent->driver->name, parent->name);
+-}
+-
+ static void mtk_clk_print_mapped_id(int unmapped_id, int mapped_id, bool has_map)
+ {
+ 	/*
+@@ -677,8 +672,6 @@ static void mtk_apmixedsys_dump(struct udevice *dev)
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 	u32 i;
+ 
+-	mtk_clk_print_dev_parent(priv->parent);
+-
+ 	for (i = 0; i < tree->num_plls; i++) {
+ 		const struct mtk_pll_data *pll = &tree->plls[i];
+ 
+@@ -883,8 +876,6 @@ static void mtk_topckgen_dump(struct udevice *dev)
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 	u32 i;
+ 
+-	mtk_clk_print_dev_parent(priv->parent);
+-
+ 	for (i = 0; i < tree->num_fclks; i++) {
+ 		const struct mtk_fixed_clk *fclk = &tree->fclks[i];
+ 
+@@ -1019,8 +1010,6 @@ static void mtk_infrasys_dump(struct udevice *dev)
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 	u32 i;
+ 
+-	mtk_clk_print_dev_parent(priv->parent);
+-
+ 	for (i = 0; i < tree->num_fdivs; i++) {
+ 		const struct mtk_fixed_factor *fdiv = &tree->fdivs[i];
+ 
+@@ -1122,8 +1111,6 @@ static void mtk_clk_gate_dump(struct udevice *dev)
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 	u32 i;
+ 
+-	mtk_clk_print_dev_parent(priv->parent);
+-
+ 	for (i = 0; i < priv->num_gates; i++) {
+ 		const struct mtk_gate *gate = &priv->gates[i];
+ 
+@@ -1200,43 +1187,23 @@ int mtk_common_clk_parent_bind(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int mtk_common_clk_init_drv(struct udevice *dev,
+-				   const struct mtk_clk_tree *tree,
+-				   const struct driver *drv)
++int mtk_common_clk_init(struct udevice *dev, const struct mtk_clk_tree *tree)
+ {
+ 	struct mtk_clk_priv *priv = dev_get_priv(dev);
+-	struct udevice *parent;
+-	int ret;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+ 	if (!priv->base)
+ 		return -ENOENT;
+ 
+-	ret = uclass_get_device_by_phandle(UCLASS_CLK, dev, "clock-parent", &parent);
+-	if (ret || !parent) {
+-		ret = uclass_get_device_by_driver(UCLASS_CLK, drv, &parent);
+-		if (ret || !parent)
+-			return -ENOENT;
+-	}
+-
+-	priv->parent = parent;
+ 	priv->tree = tree;
+ 
+ 	return mtk_clk_tree_register_provider(dev, tree);
+ }
+ 
+-int mtk_common_clk_init(struct udevice *dev,
+-			const struct mtk_clk_tree *tree)
+-{
+-	return mtk_common_clk_init_drv(dev, tree,
+-				       DM_DRIVER_GET(mtk_clk_apmixedsys));
+-}
+-
+ int mtk_common_clk_infrasys_init(struct udevice *dev,
+ 				 const struct mtk_clk_tree *tree)
+ {
+-	return mtk_common_clk_init_drv(dev, tree,
+-				       DM_DRIVER_GET(mtk_clk_topckgen));
++	return mtk_common_clk_init(dev, tree);
+ }
+ 
+ int mtk_common_clk_gate_init(struct udevice *dev,
+@@ -1245,22 +1212,11 @@ int mtk_common_clk_gate_init(struct udevice *dev,
+ 			     int gates_offs)
+ {
+ 	struct mtk_cg_priv *priv = dev_get_priv(dev);
+-	struct udevice *parent;
+-	int ret;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+ 	if (!priv->base)
+ 		return -ENOENT;
+ 
+-	ret = uclass_get_device_by_phandle(UCLASS_CLK, dev, "clock-parent", &parent);
+-	if (ret || !parent) {
+-		ret = uclass_get_device_by_driver(UCLASS_CLK,
+-				DM_DRIVER_GET(mtk_clk_topckgen), &parent);
+-		if (ret || !parent)
+-			return -ENOENT;
+-	}
+-
+-	priv->parent = parent;
+ 	priv->tree = tree;
+ 	priv->gates = gates;
+ 	priv->num_gates = num_gates;
+diff --git a/drivers/clk/mediatek/clk-mtk.h b/drivers/clk/mediatek/clk-mtk.h
+index ce0685b830e..2993dc35efb 100644
+--- a/drivers/clk/mediatek/clk-mtk.h
++++ b/drivers/clk/mediatek/clk-mtk.h
+@@ -280,13 +280,11 @@ struct mtk_clk_tree {
+ };
+ 
+ struct mtk_clk_priv {
+-	struct udevice *parent;
+ 	void __iomem *base;
+ 	const struct mtk_clk_tree *tree;
+ };
+ 
+ struct mtk_cg_priv {
+-	struct udevice *parent;
+ 	void __iomem *base;
+ 	const struct mtk_clk_tree *tree;
+ 	const struct mtk_gate *gates;
 
 -- 
 2.43.0
