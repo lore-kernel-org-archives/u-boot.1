@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1704AC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED2AC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E6B784B32;
-	Fri, 10 Jul 2026 17:16:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51B6C84B42;
+	Fri, 10 Jul 2026 17:20:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T/18CKnj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AFWtZ2PF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C78184B2B; Fri, 10 Jul 2026 17:16:44 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 9E5FF84B4C; Fri, 10 Jul 2026 17:20:48 +0200 (CEST)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E925D84B4C
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:16:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AE0984B2B
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:20:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-8487b7b3fc7so507187b3a.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:16:41 -0700 (PDT)
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-66766d649fdso1513651d50.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783696600; x=1784301400; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=xYQOb8b6JcuE/L/VkePl4CFSWOwZ/jq3mQOWmhmnwSk=;
- b=T/18CKnjF0PSpNZMIpWSuFQUYF//D5Lmx8/U9I+VED/zmvMo/LhGRREzaMXlm2THft
- PaRnbuPSQ2eNhTvfjdOZXo+sgUMxtzGeCNQN0S7Po21UYE55vWWSooDOiq9bQUGd865k
- /IhNZpfo+nGeYRlSG/dPcHB6qLDwFrrp1VIkOEp140NrH3O2lws5UmBm0P7vol3+JBE1
- ntP7by0L8jCPji4mJv+8DXeh8oOLiyJB8TIynJAmptPlNAUSDniarAMnJRmqgxbwCPrM
- PCCusNma2ecsvjIJlybM3srrV4yoCJuPlVOtCxfGKyG4w/KRUisbvuovMvpwx5rh6wsB
- Yj+g==
+ d=gmail.com; s=20251104; t=1783696845; x=1784301645; darn=lists.denx.de;
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=6NZWJkLdUbaP+7z2xfadcvdZo1/QD1ONXi0tQbBi2ZQ=;
+ b=AFWtZ2PFfugaY4T3pC8N4hVZFy1Z12zmtfnpoU5qqGCqYycyoDSiiHTRXcL0pYsiv4
+ x5/2ivTB9fqGSH/ARXEv2ZvK6l5xC8fgbsMnMtm1Qkh3pvZK9QqwFz7j3iEA9IfhKG3u
+ IFZ/8glnmPvm2pX9xHzDvDMsWhE7yaQRb0TWgyi1Ni/7SYM2aCFnuND2J4D+m8RkBDpZ
+ lCcj5Z5I2qfZ8cMfVr4c+zIZ7vGGlMZN1uNSoF6nwYZwmwIwAb14bzctiEUOqe8L1qli
+ HjQAxX1hnVmR4yoEIGlxRFjz9YQUyAmWUQFqD+MVIvQ8WRThQj0+esjUa0AMJuRN7KDH
+ vB9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783696600; x=1784301400;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=xYQOb8b6JcuE/L/VkePl4CFSWOwZ/jq3mQOWmhmnwSk=;
- b=G+ELe+a91gVsjHpSRQDotn+YoOekDXHZgwiU09kmo1D8Hsq1yyZpZhRsdNxMccZ/zx
- tcUiVPTXxALLGfTxjSxrSLzvTijscem2H1GaWTrW03kgii5GvqjGxpluyKVlws2LTv9y
- uBrcG8jX9T5+OcpSl9Tkv+LggR7/iNuXPfQeYRiYUWaqW5tFBEXOOy8sBZUvx1cyq40k
- jZsltKtp3JKNeU3ian5CjPdDUZUx+ZE3gqD+e9OXfsZHSTLiVvFeAJSCFMYkY0O6I5an
- t8bFtF/ENkQuaakRxrdJlNNqxvuhJKjVJVCF7dmqlOU1qILIMsfpP9urxu3eljr9XDQu
- FA4Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rq1zRFomq8u3aEt6uC8PD0F9352p6RKOkbtePHkilJRwCpHAbDTYc9cS8oKHhI68zF79KJvNLQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyv8uv0e8mJiBhFV8JD6WbWCBDllubOr20nuRJScOoqoYBWPPsi
- N5mMz2QSW+NiiaDV5TLxNMVp+Iqr0gj9ob5EMLjqb8T1DFQgrSG6BN5ze/KcRw==
-X-Gm-Gg: AfdE7cmSFxo9P6+N5H1Ultu5SXgNudlMwrDb21P+WPWUe2n4dGnh0SXs09AGj7pfQUW
- gxnhzbk3mIpU6dwL3N5/CbLqP6MKhGVCQ7L5wKd5K/xDACbxEkUto1wh9Q52je3Aez3kxYAGrm/
- mqH1qJvL8RnJnKwLSsQ663NoszhoRPmuLmWX56Gk632WqVNlL+iDT1HN9ARXr4GimfdI6e/AbT5
- FnjFgjQj5GJl8UN124Wujk/yNGiwTeJLb2yYyrpllFycbP7Av9UyY9/B/r4ZnJqCJq9mvi0TU1H
- UM0OY++L/P3LSI1kkLBDVE366FljshAk9fLTZEfgAx5MSGDHFEPfMtd5KTEWZ81+PTEroYUcNmX
- Ziej22o02g4pD9hec+bSoA2ribIN7o5vA685jbnpW6LZxYUciKUecogJcfDtlKgD26avh2qaULq
- V7lVmdU1a4bg==
-X-Received: by 2002:a05:6a00:3e12:b0:848:3dae:66e2 with SMTP id
- d2e1a72fcca58-84842ee541bmr11174415b3a.26.1783696599891; 
- Fri, 10 Jul 2026 08:16:39 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783696845; x=1784301645;
+ h=content-disposition:content-type:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6NZWJkLdUbaP+7z2xfadcvdZo1/QD1ONXi0tQbBi2ZQ=;
+ b=tOfM1SEQWZ6YzvlX4JVbqb9wf39KnkuWEgFqfkvEUmlYItM39CQm7O1lColnERffR0
+ JKBZ35d7VxdNuYdKlhixmJC9Ri+xU+4vk+FhlhbClHEs4fWv4DcihBNpIOMfqtgZnY2P
+ UTASZthmc60h8kFcPsUUIh91dfs40OfJa1h1tDy3F6W8NfznblF34zvbtYnTnqP2avrz
+ /ehWKgc3vbzb7cA5ZZoXAmRnZ0lOCPV6qeDKAeJebIjSflCzgzvnrJcT0ToWtX+a1LfI
+ ZUNY1nMQsKCe7eo8bnZ+n0m301avT9OEUvlr4kTRWkXkcs3fB7+E5MPVgX4Jqi8lnARL
+ p15A==
+X-Gm-Message-State: AOJu0YxkYF9j9l0iwfdqaguOuBwUT2HP6ffrnWP5bbkvcC1tGhrFSPog
+ yHpWt3BDn343tWX8f3i+qcwNBzM8//q70M1rGMr5s17bYuEUd9oci2qO
+X-Gm-Gg: AfdE7cntPkj6Q3IcmF+GFrdokMpfSJpL8iHw2lGLxOuRvJe6GsgdMY6rfErggT9MM91
+ o5XUmP3oRZ6kaucDrVxBFMbOOT3seF3w8W3feyncbFbz7B4JF1LzM7NOcqunUOrLCnVwqLrYaDJ
+ 6Bu2GfDP5KwkS8b1uqvnwS9YMc+Y/UQfXIIkVJzBOZTxBVDZZAhdqkvB5Q0CdQf6Xbm4/Sq6zhM
+ 6Tfq8VYLWpuM3DCKMbHnDE2Jb8xbauDs3kwxRSEMoDhJeFQKFsKj/CVFqV+kkWecZpIcgf7seC3
+ +CFLxUrcA3sYNXKKfzRSuJpQvTJbabXdsiZwmkQM8ute0qVxlFr6Ljxkhs4d+j/OMDVUb10GC5V
+ wicj9taOIa3QG4es6vULEP7dJfzZ5CaZnGjO131u3hWmzXYsZbe6IQ20EUaALHEONSkdAno3Ohy
+ JiDKlGjxU+eAVwAmG0F7xD
+X-Received: by 2002:a05:690e:4890:20b0:667:c09c:4a3e with SMTP id
+ 956f58d0204a3-667c09c6250mr2951494d50.13.1783696845027; 
+ Fri, 10 Jul 2026 08:20:45 -0700 (PDT)
 Received: from localhost ([49.36.187.33]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-847f6db0eaasm10415629b3a.52.2026.07.10.08.16.38
+ 956f58d0204a3-667879cada5sm7089378d50.11.2026.07.10.08.20.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 08:16:39 -0700 (PDT)
-Date: Fri, 10 Jul 2026 20:46:37 +0530
+ Fri, 10 Jul 2026 08:20:44 -0700 (PDT)
+Date: Fri, 10 Jul 2026 20:50:40 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: trini@konsulko.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: led: reject unknown LED state instead of silently
- returning success
-Message-ID: <za2nl6cv6cpqajy25eb2y5nvin2o6rkxotiussamspnvsdze5f@aq6ebysavqth>
-References: <ifny32czr2jodibz3wyerwqfjzbepdkt3tfhvgw5qp6ymm736m@kmqqewswdxqq>
- <b6336f00-4c3f-4cde-9702-353bf9a0f7fd@cherry.de>
+To: jerome.forissier@arm.com, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] cmd: lwip: sntp: fix netif leak when ntpserverip is unset
+Message-ID: <oggze2g2aloxhrxqmcnt6tqa5e2lf473vy647b72odfvahwosx@zqawezfx5t7c>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <b6336f00-4c3f-4cde-9702-353bf9a0f7fd@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,167 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After the commit 72675b063b6e changed led states to an enum, I honestly
-don't see any problem (others can correct me). The current
-implementation is more readable than if-else ladder, specially when the
-list grows for whatever reason.
+sntp_loop() allocates a netif via net_lwip_new_netif() and normally
+releases it with net_lwip_remove_netif() before returning. The error
+path taken when no explicit server IP is passed and ntp_server_known()
+is false returns -1 directly without freeing the netif, leaking the
+lwIP netif structure (and its associated state) on every failed
+invocation of the sntp command.
 
-However, thanks to your comment, I went through the implementation once
-more and found that the below define in led.c seems leftover and buggy
-to me and needs to be removed :
+Call net_lwip_remove_netif(netif) before returning on this path so it
+matches the other exits.
 
-#define LED_TOGGLE LEDST_COUNT
+Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+---
+ cmd/lwip/sntp.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thoughts?
+diff --git a/cmd/lwip/sntp.c b/cmd/lwip/sntp.c
+index 608345c873b..a3659c73ce1 100644
+--- a/cmd/lwip/sntp.c
++++ b/cmd/lwip/sntp.c
+@@ -71,6 +71,7 @@ static int sntp_loop(struct udevice *udev, ip_addr_t *srvip)
+ 	} else {
+ 		if (!ntp_server_known()) {
+ 			log_err("error: ntpserverip not set\n");
++			net_lwip_remove_netif(netif);
+ 			return -1;
+ 		}
+ 	}
+-- 
+2.43.0
 
-Regards,
-Naveen
-
-On Wed 08 Jul 06:00 PM, Quentin Schulz wrote:
-> Hi Naveen,
-> 
-> On 7/8/26 4:32 PM, Naveen Kumar Chaudhary wrote:
-> > get_led_cmd() searches state_label[] for a matching name and returns
-> > -1 on no match, but its declared return type is enum led_state_t.
-> > All enumerators of that enum are non-negative, so the compiler is
-> > free to pick an unsigned underlying type (and does so with
-> > -fshort-enums, which several U-Boot targets enable). In that case
-> > -1 is reinterpreted as a large positive value and any subsequent
-> > comparison against -1 silently misbehaves.
-> > 
-> > In do_led() the returned value is stored into an enum led_state_t
-> > and dispatched through a switch that has no default arm and no case
-> > for the sentinel. When the user supplies an unknown state name the
-> > switch falls through, ret was already set to 0 by led_get_by_label(),
-> > and the command reports success without doing anything.
-> > 
-> > Return LEDST_COUNT from get_led_cmd() on no match. LEDST_COUNT is
-> > already a valid enumerator, so this avoids all questions about the
-> > enum's underlying representation. In do_led(), when a state argument
-> > was actually supplied (argc > 2) and the lookup produced LEDST_COUNT,
-> > reject it with a diagnostic and CMD_RET_USAGE; the existing
-> > LEDST_COUNT switch arm continues to handle the "no state argument"
-> > case where it means "show current state".
-> > 
-> 
-> That looks correct to me, but I think get_led_cmd() is overengineered and
-> actually still flawed. Indeed, we iterate up to LEDST_COUNT-1 times on the
-> state_label[] array, but nothing guarantees the array is that big (it is
-> right now) so we could theoretically have out-of-bounds access in the
-> future. It also isn't handling the case when there's no matching string at a
-> given index (e.g. holes in the array or padding at the end due to the last
-> element in the array not being LEDST_COUNT-1), where state_label[i] would be
-> NULL and strncmp doesn't seem to be handling that case (it isn't in
-> lib/string.c for example).
-> 
-> I think the answer is to instead get rid of this and drastically simplify.
-> 
-> Remove get_led_cmd() and state_label[] and do something like the following
-> in do_led() (NOT TESTED):
-> 
-> """
-> diff --git a/cmd/led.c b/cmd/led.c
-> index 296c07b3b38b..d1fc9dc8cdbd 100644
-> --- a/cmd/led.c
-> +++ b/cmd/led.c
-> @@ -9,27 +9,6 @@
->  #include <led.h>
->  #include <dm/uclass-internal.h>
-> 
-> -#define LED_TOGGLE LEDST_COUNT
-> -
-> -static const char *const state_label[] = {
-> -	[LEDST_OFF]	= "off",
-> -	[LEDST_ON]	= "on",
-> -	[LEDST_TOGGLE]	= "toggle",
-> -	[LEDST_BLINK]	= "blink",
-> -};
-> -
-> -enum led_state_t get_led_cmd(char *var)
-> -{
-> -	int i;
-> -
-> -	for (i = 0; i < LEDST_COUNT; i++) {
-> -		if (!strncmp(var, state_label[i], strlen(var)))
-> -			return i;
-> -	}
-> -
-> -	return -1;
-> -}
-> -
->  static int show_led_state(struct udevice *dev)
->  {
->  	int ret;
-> @@ -83,12 +62,24 @@ int do_led(struct cmd_tbl *cmdtp, int flag, int argc,
-> char *const argv[])
->  	if (strncmp(led_label, "list", 4) == 0)
->  		return list_leds();
-> 
-> -	cmd = argc > 2 ? get_led_cmd(argv[2]) : LEDST_COUNT;
-> -	if (cmd == LEDST_BLINK) {
-> +	if (argc == 2) {
-> +		cmd = LEDST_COUNT;
-> +	} else if (!strncmp(argv[2], "off", strlen(argv[2]))) {
-> +		cmd = LEDST_OFF;
-> +	} else if (!strncmp(argv[2], "on", strlen(argv[2]))) {
-> +		cmd = LEDST_ON;
-> +	} else if (!strncmp(argv[2], "toggle", strlen(argv[2]))) {
-> +		cmd = LEDST_TOGGLE;
-> +	} else if (!strncmp(argv[2], "blink", strlen(argv[2]))) {
->  		if (argc < 4)
->  			return CMD_RET_USAGE;
-> +
-> +		cmd = LEDST_BLINK;
->  		freq_ms = dectoul(argv[3], NULL);
-> +	} else {
-> +		return CMD_RET_USAGE;
->  	}
-> +
->  	ret = led_get_by_label(led_label, &dev);
->  	if (ret) {
->  		printf("LED '%s' not found (err=%d)\n", led_label, ret);
-> """
-> 
-> What do you think?
-> 
-> I wouldn't necessarily add a printf for when the user mistypes, just return
-> CMD_RET_USAGE where we list what's possible. If you really want to keep it
-> at least replace "state" with "operation" as it's something we do on the LED
-> not its state (e.g. one can request "toggle" which definitely isn't a
-> state).
-> 
-> Please also add
-> Fixes: ffe2052d6e8a ("dm: led: Add a new 'led' command")
-> 
-> to your commit log also as that's the commit introducing the error.
-> 
-> Cheers,
-> Quentin
-> 
-> > Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-> > ---
-> >   cmd/led.c | 6 +++++-
-> >   1 file changed, 5 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/cmd/led.c b/cmd/led.c
-> > index 296c07b3b38..d547276e480 100644
-> > --- a/cmd/led.c
-> > +++ b/cmd/led.c
-> > @@ -27,7 +27,7 @@ enum led_state_t get_led_cmd(char *var)
-> >   			return i;
-> >   	}
-> > -	return -1;
-> > +	return LEDST_COUNT;
-> >   }
-> >   static int show_led_state(struct udevice *dev)
-> > @@ -84,6 +84,10 @@ int do_led(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> >   		return list_leds();
-> >   	cmd = argc > 2 ? get_led_cmd(argv[2]) : LEDST_COUNT;
-> > +	if (argc > 2 && cmd == LEDST_COUNT) {
-> > +		printf("Unknown LED state '%s'\n", argv[2]);
-> > +		return CMD_RET_USAGE;
-> > +	}
-> >   	if (cmd == LEDST_BLINK) {
-> >   		if (argc < 4)
-> >   			return CMD_RET_USAGE;
-> 
