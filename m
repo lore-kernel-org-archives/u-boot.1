@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B34C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5628C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:59:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51C8484A73;
-	Fri, 10 Jul 2026 20:59:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B08F84AD6;
+	Fri, 10 Jul 2026 20:59:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="f2zaMhUB";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="nztE5URv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99F3A84AA8; Fri, 10 Jul 2026 20:59:13 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 1EF0784AC8; Fri, 10 Jul 2026 20:59:15 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96631849BA
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 056DB84A78
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 20:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-44cc65b0a7fso2013370fac.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:10 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-447a81776e9so415093fac.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783709949; x=1784314749; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=lcZRodWh7+qJtlkKyQgU8rhfyxZHHX2m2oDLAmKOMmM=;
- b=f2zaMhUBnHbeauVslh2JEOuuOTWEMUZNk5lDJDRAxlpsqPy6legFE2MPvYA+eM9mw0
- gvGDPmK/1T/xckPpgWDFZTCl6IyDVlt6thjnD3UhFerzodXm3+rhwhGteiJQwb5tJnVC
- P/2G9viMX/KKUSlMOkVqX9L9pT13qFHsVNxHn8t+6odAbEI87GUY9xywFy1YltI6EL39
- ZxCVDBA7N7PCXCfX9JoTiUgfkatrs8ohZwSVSVEXxO7Hy39yLSjvQzfKmhgHWvRIBWGE
- J/c2dhpgkW8Zp1+E4TdmptP9I8qlUuVuc3yKGf3tkIDQ4MD9vMU6i82AZSVEEOKkQVoc
- +AoQ==
+ d=baylibre.com; s=google; t=1783709952; x=1784314752; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=W/h/wCaTAst9onv8h2SkLi2Ez1dGXqVJPL18bRqsAFo=;
+ b=nztE5URv1saJ7Vvizi6BaGvphKgZtYDUyw8idLNQ9S6Z9x6KSjxI+FQLmNDKdnsKsR
+ 4aqjH51sK7/do8Teh0R3mSmrY25nOEA5tcC3eoV1bM38N+JyCmwUc65czlizzsjohxKG
+ 4XOGoxaJ9Vb8Jj9pFtSeq6Bprs/Uqh+tffqh/pgMmhoOq8VLq5MkJvYTtw8SkEquA+jY
+ 7iaV1bhVYABNK/megDrFZ3Bz+j52TvZxT9lJewBYfxAqT2+al+AfQSQI6mpCQEZ/OWw1
+ wgxEsyMOYJElYtiXvnAXikbESj1DzlVCcul3UW6K3qkV3lb3qktZ/uVuS6v32x5NuaT8
+ i3zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783709949; x=1784314749;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=lcZRodWh7+qJtlkKyQgU8rhfyxZHHX2m2oDLAmKOMmM=;
- b=JU2XQ2ogA0+ebnS9VEt3/t9UAor6+cnB3RrQTVgQOG33n4wQW3iXV6KvEbjk22eaDw
- 5ByyMKe95qxr7j5q/C8Ug81KBR2TSV8xLjc2w24krjVlvFZppXuzIMLPlZQmtM9H8yZ8
- rsoklrL8z1ulqKwTUL/PvWgbT/ZFe3Dh75TRzHgVOkH4COrXXMzz9DvCOcQ2SDh8J11t
- g1R3yuTvuAtkhrY7OCoRSkBvGH4fl34a4f+ZcUbFl2/nORrmdhPfOQN+yt/trlxlzKnN
- edgSCY7TEwIBm8FpiiND9NXFna9aP/6Tqx3LtbTIIF0hETY8spwhua+OkaTZGddvugrR
- WPoQ==
-X-Gm-Message-State: AOJu0YyhziuTD2lB3AE5gxihENQnF2GgPYAwWiHm+i/LBpk7Wt+hS8B7
- L6nfX/6XVjro1ynf7p7JkY9PzmV61MrsExjS7FHHJEBZFeOlPXxLI65U5lBiMHYRm+13M5kI5Lg
- ja36i
-X-Gm-Gg: AfdE7cloq3SBqO5bHvcQQdFA6pZydohoztoJI8NA4HNuFetdl4QjDeMk8tn8pHNNPR5
- fLtZTrcCgJ/BEZlRrp4WZ1YbZ/Ieu7+2l+9IVmQ6Y4QII1IHrMP0Z80g4Svyu7PWQnW4XMGLDGS
- 5DCz6iCh35GVTkkOZ1nP5Gm0x2UWtEZbybykd1froZw8oL6k1PNkfrIugpUwhQqmX3QR9/4ItT6
- 6oUMUG9MYK2CKcCwzUnGu4cwGxvVkaD09TmIXavdXLE6QsucJdDXr1uAEtnmbPeapfJj7hQ8QHg
- XttAeaYJPuKey2cY9Ctwz2qL3SkWYANEJu7cl26kD4mrH9FcEahd2Kfmw6awZsMaVAty4fJbiqv
- dyWTzOjx5nv84SfWvu+xHq01zT6bcZS6PgfWfw3ikZU5ijvJMRMe2IMDMOblqxFs951lV14As9I
- nSldN7mkf2OdlLskaW
-X-Received: by 2002:a05:6871:5210:b0:43b:6d2d:202a with SMTP id
- 586e51a60fabf-451bac7cab8mr2402515fac.5.1783709949240; 
- Fri, 10 Jul 2026 11:59:09 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783709952; x=1784314752;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=W/h/wCaTAst9onv8h2SkLi2Ez1dGXqVJPL18bRqsAFo=;
+ b=VVHfSIaEQikFzZbCod0OMCba6LADzRQ8J4fVngBUbjflTmsKoPX07XirA4AF+SVag9
+ B9SBxjYGG2nPUhTk2trzY0NJK6rXo+dH09M30I+DcTV45AfPHoHOQ2HqXRslKZ7asovs
+ GRHruvsgJ+JOkZqgWcRXheSshWj/OcxSPo8XfAw1RQcW0K6c3JHBuioY8iRIYqX1mIEE
+ bgcTlyNeMrkb7JnCjqMEAaynHlv3OQXxH6cvyqqyR0+XtxqJD4vlIy0m1QaXAa8KJWxZ
+ sra+afCmQ5Jo50qNa/Jt+WTMiJLjRg8HifOCZVoHcUd85C4z6j/bqQN0ehvzDTUKE39P
+ 3z8A==
+X-Gm-Message-State: AOJu0YwPLVXxCUh09HnafgTCrCtQm+j9mbEUZNajm1m5PuAIBttg6rWC
+ k+osZi5dQ/WjMS/deBDqgk9erlivh4Qr2zf6Rp9Ogk7ZHjTkxgB1KIvbrIb0c3Sr3e+8SL8kw9o
+ BrEq6
+X-Gm-Gg: AfdE7ck6Hyslmx99I7PvPa8+qfiaJL5N9Cxo7Z7KR09G811xVYtFX51olcp6DU1O9Wh
+ KZGXOvBPKIWaNpk7XXEc58JDWGwvIIdBgDDq7cDzH6pOdb4nsjGyMBOeT3pUwNc1wyOwznYqAom
+ ufBhEFLwulyFfud643Re4bAku5bvBCI3KtCw3QjrWU++o7u/++4B5KhVyNQUXEa1CvY7wMj++lT
+ aMwK0/K/cgHqTqL0DytR9wIWn1vOo7uz7lcpT7SyXkfPbi3Z9pXRBgzsRYLkxVKhEvM9scwTy1i
+ wOW4BlkWp7R2Bt3M2bGY68o6DZ8X89hB+hSkE7P5an1CICeU1H+fb4AN/K9NGDLKIZqKT6fe1RY
+ utSWMJpGcLtcCZDz4hwRVp88VRObMSe4r0iEIAwNLfZt9SLItfneOJCyo+KsXDaoHLKrHs9qXcO
+ QDhqsPeGFQtCf61Ro0NxF/Hhuv3Us=
+X-Received: by 2002:a05:6870:bacb:b0:448:6c60:9781 with SMTP id
+ 586e51a60fabf-451f0f4cb2emr108174fac.6.1783709951664; 
+ Fri, 10 Jul 2026 11:59:11 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:1b03:95c:fbd4:4d00])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.07
+ 586e51a60fabf-451916f31d4sm5789657fac.16.2026.07.10.11.59.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 11:59:08 -0700 (PDT)
+ Fri, 10 Jul 2026 11:59:10 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v2 00/24] clk: mediatek: more clock parent improvements
-Date: Fri, 10 Jul 2026 13:56:16 -0500
-Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
+Date: Fri, 10 Jul 2026 13:56:17 -0500
+Subject: [PATCH v2 01/24] clk: mediatek: mt7622: set parent flag for
+ GATE_APMIXED()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OQQ6CMBREr0K69ptSoYgr72FYQPnIF0pJW4iEc
- HcLxr3LN5nMm5U5tISO3aKVWZzJkRkCiFPEVFsOTwSqAzPBheQZl6B9B6rvYCwtDh56Y7ppBNK
- jNTPqEDm4xnEieZlfUDUsDI0WG3ofkkfxZTdVL1R+X94bLTlv7HK8mOO99xNm/wjnGDjItBaJU
- rxOZX6vyqWnyuJZGc2Kbds+I6IMaekAAAA=
-X-Change-ID: 20260706-mtk-clk-parent-lookup-improvements-811460a93ecf
+Message-Id: <20260710-mtk-clk-parent-lookup-improvements-v2-1-f3f3a4a28dca@baylibre.com>
+References: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
+In-Reply-To: <20260710-mtk-clk-parent-lookup-improvements-v2-0-f3f3a4a28dca@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -92,17 +91,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4245; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=877; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=TBjVgd4haGeD/NhKQVLEov3ZQxdlIQFtDUPmj/Hdy7A=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUBVwe4ZyAhvuVbfT0UR94QAPUObXpZtSXuz2
- T4iOTyYBm6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFAVRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Aa2gH/3x7vqmt1l37yNM1fIHWweOeo9jpOP+MGFUE/9A
- P9tesQQme192fpyyE/FN7ZoWfDoUOVzNT+bZhlkJ5ljzHX0H31kHr0pSNzSVtAsOgNQfCAg/x3Q
- z/5+PmXwKhzNo14v06PlMFf7KnuXrDSIc4r/LAlula5D2CIJS7KeDF2Mwm8YtmrxNxVXBz29/H5
- 33Btp3aeb837Nk+iMndhHfO+Pa9cQCk/7Ehyf5deTuo7sxiTHaeuKDvFcUj5S9tB6dfK6JbgidA
- qNHEil80XczTLLHPrlnCy5pYroQfT4pYyvwa5nRQsk5ZTKlLeAgsPdL8J94/LfmUMg3daRwhP3i
- YtTE=
+ bh=+rGURoIXzGmZb1CpOtNKCyPXsCrdMEwzYCgvp1EBjJo=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqUUBdIYk2VowgiUSSd4OC4qRliK18pQn7HtVLn
+ Rgxp9VPs1iJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCalFAXRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AIg0H/1wBtbzaR2+a5nt7xzJQ8LLg7mYLDN3xDUzu84t
+ BiguYwHUn1+K+pNZ3JM5IaTxj3JuybXWS4m7sMYktLRo48WRcyMOeAlEgeIyAFqb7haDpIvXBmQ
+ tnxN8M/waZPtZyyWXVgCTRTqnbPuiJdpwS7PfjQNkUPtkORMdR79GvB5q7Vb4ascZOYoNVMHRaX
+ KVm4e0xfsoHvUNujw9sX9ayTxBOH9RGnTiPsEZZFyVYYdZ8YqnG4xypn8b6euXeh4IQwwcDPAAK
+ 3HsLpP1AZ/36AZh5ioLbGGkbCwSM6JE0v3xLODd0RtzQFHvJagNqFPeuspMKK5BXLdXPXCCVx+t
+ Cclg=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -121,92 +120,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is the start of another wave of Mediatek clock driver improvements
-with the aim to simplify things.
+Set the parent flag for GATE_APMIXED() clocks.
 
-This series replaces complex rules about clock tree ancestor relations
-used to look up parent clocks with a simple table to register clock
-trees that provide a certain parent type.
-
-Now, clock trees that contain parent clocks just need to populate the
-type field with the appropriate type and they will be registered during
-driver init. Then we can just look up the clock tree that contains a
-parent clock from this table at runtime without having to walk ancestors
-in the clock tree.
-
-This is done in phases to break things down into logical components:
-* First patch is something that was missed in earlier cleanups where
-  all clocks now have a parent flag set rather than relying on implicit
-  parent relationships from the clock tree structure itself.
-* The next patch adds the infrastructure to register clock trees with
-  a specific parent type.
-* Then there is a group of patches to add the required info to each
-  chip-specific clock trees so that they actually get registered.
-* The next patch then replaces all of the lookups for parent clocks to
-  use the new table-based mechanism.
-* Then the rest of the patches are removing code that is no longer used
-  after the previous changes.
+By having parent flags on all clocks we can simplify the parent lookup
+process. This is the only mediatek clock still without this flag.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v2:
-- Make the clock parent providers bind on probe.
-- Moved removing unused `int ret;` to the correct patch.
-- Link to v1: https://patch.msgid.link/20260707-mtk-clk-parent-lookup-improvements-v1-0-65d24cc0d569@baylibre.com
+ drivers/clk/mediatek/clk-mt7622.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
----
-David Lechner (24):
-      clk: mediatek: mt7622: set parent flag for GATE_APMIXED()
-      clk: mediatek: add registration function for clock tree types
-      clk: mediaTek: mt7622: add clock tree type flags
-      clk: mediaTek: mt7623: add clock tree type flags
-      clk: mediaTek: mt7629: add clock tree type flags
-      clk: mediaTek: mt7981: add clock tree type flags
-      clk: mediaTek: mt7986: add clock tree type flags
-      clk: mediaTek: mt7987: add clock tree type flags
-      clk: mediaTek: mt7988: add clock tree type flags
-      clk: mediaTek: mt8183: add clock tree type flags
-      clk: mediaTek: mt8188: add clock tree type flags
-      clk: mediaTek: mt8189: add clock tree type flags
-      clk: mediaTek: mt8195: add clock tree type flags
-      clk: mediaTek: mt8365: add clock tree type flags
-      clk: mediaTek: mt8512: add clock tree type flags
-      clk: mediaTek: mt8516: add clock tree type flags
-      clk: mediaTek: mt8518: add clock tree type flags
-      clk: mediatek: use registered provider for parent lookup
-      clk: mediatek: drop parent udevice field
-      clk: mediatek: remove mtk_common_clk_infrasys_init()
-      arm: dts: mt7981: remove clock-parent properties
-      arm: dts: mt7986: remove clock-parent properties
-      arm: dts: mt7988: remove clock-parent properties
-      clk: mediatek: mt7629: remove mt7629_peri_clk_tree
+diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
+index 79315912fd4..60f4a872a66 100644
+--- a/drivers/clk/mediatek/clk-mt7622.c
++++ b/drivers/clk/mediatek/clk-mt7622.c
+@@ -85,7 +85,7 @@ static const struct mtk_gate_regs apmixed_cg_regs = {
+ 		.parent = _parent,			\
+ 		.regs = &apmixed_cg_regs,		\
+ 		.shift = _shift,			\
+-		.flags = CLK_GATE_NO_SETCLR_INV,	\
++		.flags = CLK_GATE_NO_SETCLR_INV | CLK_PARENT_APMIXED,	\
+ 	}
+ 
+ static const struct mtk_gate apmixed_cgs[] = {
 
- arch/arm/dts/mt7981.dtsi          |   3 -
- arch/arm/dts/mt7986.dtsi          |   3 -
- arch/arm/dts/mt7988.dtsi          |  12 ---
- drivers/clk/mediatek/clk-mt7622.c |  33 ++++---
- drivers/clk/mediatek/clk-mt7623.c |   6 +-
- drivers/clk/mediatek/clk-mt7629.c |  30 +++----
- drivers/clk/mediatek/clk-mt7981.c |  19 +++-
- drivers/clk/mediatek/clk-mt7986.c |  15 +++-
- drivers/clk/mediatek/clk-mt7987.c |  15 +++-
- drivers/clk/mediatek/clk-mt7988.c |  22 +++--
- drivers/clk/mediatek/clk-mt8183.c |  24 +++--
- drivers/clk/mediatek/clk-mt8188.c |   4 +
- drivers/clk/mediatek/clk-mt8189.c |  16 +++-
- drivers/clk/mediatek/clk-mt8195.c |   4 +
- drivers/clk/mediatek/clk-mt8365.c |   4 +
- drivers/clk/mediatek/clk-mt8512.c |  24 +++--
- drivers/clk/mediatek/clk-mt8516.c |  24 +++--
- drivers/clk/mediatek/clk-mt8518.c |  24 +++--
- drivers/clk/mediatek/clk-mtk.c    | 184 ++++++++++++++++----------------------
- drivers/clk/mediatek/clk-mtk.h    |  21 ++++-
- 20 files changed, 292 insertions(+), 195 deletions(-)
----
-base-commit: f1d4a6f0c80ee17081131b706f48d00a5c8586ea
-change-id: 20260706-mtk-clk-parent-lookup-improvements-811460a93ecf
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
