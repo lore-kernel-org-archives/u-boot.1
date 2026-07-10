@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D500C44506
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F6CC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3F9484B73;
-	Fri, 10 Jul 2026 17:22:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51B5F84B77;
+	Fri, 10 Jul 2026 17:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qQHBnSfI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eWz+7JoP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C05284B74; Fri, 10 Jul 2026 17:22:22 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 1C54384B7A; Fri, 10 Jul 2026 17:23:07 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E25B84B72
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:22:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0368884B72
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7eb1dc6bd53so662185a34.2
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:22:20 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-92e99ef0902so52781185a.2
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:23:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783696939; x=1784301739; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783696984; x=1784301784; darn=lists.denx.de;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=3F2rmjgFrPvsUA2l5UFzAc8nH4bLet+eLiLs2Mg44u0=;
- b=qQHBnSfIe45C5sZzmdkeECIK71XgImK8Xc7JLpiPOJCYAu4ZQzOEGyawxQWAqdVdC9
- NS7hjIEL4Pp5P7GwEmM+FqRr+4qyVQlUVy2WBUwgRIYdov0Px98dtHsQUvcvWznAdith
- Nt6AwvB+yQanHawsdGvjFXCi+D4wz/2nyufwvNpwZT34BcggoeI32yKRC0M6eox2fIgn
- Q+lUTWOM6dGflyxPfewwv/YrIijQ5tcCpF0esgIWqE5cxkur4UazK5mM1+RPX5+8B4Pa
- epW1pktMPdj4Yon/Mrmi3xRjyoKIL8og2Z+NKhmviM2NDxxXfuoDcU2k/s/XHZosF7QS
- SrtA==
+ :content-type; bh=0yMYoBC0c7/XDpUlxpZRrYoNxRTR/FRTO3u69FVh+zg=;
+ b=eWz+7JoP/B/ceqToA2ptfA9HmpZYPVMFwS7pB/AZKRaqPi+PDpjDXSaCiDmddmWn0b
+ oODX9VEhqeiq9wRqnJrXvFETuUcb8xXk12gTXOXMgpJ1DivnkPNEp2mmSSglHS9x9rm9
+ H2hRXo2fpGiAbzUN0X4EI1CH2J21DCfMoDISCSbZs4ZrhKKVcOySHr+Osw2V5nY+IGI3
+ SXHfTssEblx/gRlQ8zNN4HOy2MCtSYUzwbpK9jxmVJNnPQ8uBxsK6PJqfmNOBPzVdkPs
+ ui4LCz7WaniEFLseOfWwRnDmF3noHXDVRgtwFA7OL9zH1Vnx9In1yxX1frL1vLRjbjg0
+ ezbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783696939; x=1784301739;
+ d=1e100.net; s=20251104; t=1783696984; x=1784301784;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=3F2rmjgFrPvsUA2l5UFzAc8nH4bLet+eLiLs2Mg44u0=;
- b=BqncwyXZ/pbJY6rg2jLUvTLH0tDI6+p6M9clzgQWN2/p7WZqlSbNKC+4DIq5oAusXr
- M1JzmI9moS8SAnSNXkfMGb5+m9aY23mVodnSGKpdhxzGQXYlcPhiirhhp76a0lPybJ3u
- tm/JjUywcV6+hPzyhd1l8TC0bL/BhZveNirdTEJytAQV4q1bG99VgS5OGDoDpER3qcL/
- mXwTx6/+OGTrW0VIwNEQQiqcwf7soUCIP4JXlJbEBDOPgC0ve0nwIyxfkwRs5/KpIZCE
- vxW5ccU/Yuu/Fu8pur7StI702lmEiS8nn1fLvBmlUmQvCnOZJ0r7/OjAN8a6BKtQyGq5
- 6Wzg==
-X-Gm-Message-State: AOJu0YwCGnxm31HyAmM9h2YyA2slmeEKLc8AJ5XfNq9b36N5vDxeZWFN
- /5URif/US8rtm3GNF9aVJWfzuOfMGW6YYkOSuXBzri+dYLuZMTwcL0v+WcYvLg==
-X-Gm-Gg: AfdE7cncNsFWvHycmc/SZS/w7Te3vsu/gdZfKpcS0GoQG1smMJDbl39EKvDFAGWv8WO
- QRCjTqtD/ZfU+sWjbl3qsfdnWp9wVwkSEW1cJBazbKffv8Y5dSYrt6oIuxvfBQxI6sY5FmxZ0bV
- LtJJ+JKeT2vRSFp/IvhYEyOaRkr/qyd5PHMnVzzN1LzmXVCUO3S/tquvS6BisKGA6N0MeMCIFml
- 1Bq7aEdPLFwSV89kNNwk/UKAtRM+9rWouSTue+n4QUXLr3+FZXC8DyejMMC9yu0tlKUIxskGG3A
- LzwXhDfdiFMgm/7XvBVK+d537ksyE3pJNyHQeeK8ZC+aaTUOOuPN8wS/ZJ9YN9bsnpdfzBxt3v+
- m4K8a7UYJIDchBiWHPrzJzy/rakfi71UQb/5QuAk09rcm3491Is874jwq/vAtNNcWmPVR/xNjQ9
- vzFBTAnUoXhg==
-X-Received: by 2002:a05:6830:3154:b0:7ea:fc52:839c with SMTP id
- 46e09a7af769-7ebd02f9482mr8845656a34.25.1783696938830; 
- Fri, 10 Jul 2026 08:22:18 -0700 (PDT)
+ bh=0yMYoBC0c7/XDpUlxpZRrYoNxRTR/FRTO3u69FVh+zg=;
+ b=BWMB+UpSNzp1JXhvHTuvKNAAVUewiqAETYkSsIXU2TLaT/HiWhHcia0XerUG3L0KX2
+ k5GMXBVfI3DveXLCRhXKy/H/HT0sWHBeREEqN/ujQiPPPgFZaPrSaFHaL1Bm1X9Yn06b
+ elXafizbna8FOdno68i5vRpY5jbxRHoDaoEA9iuTHisBz7H/zMQrgSNGLLflMeq/oHtm
+ wk2bTam/sDVtQDLcFtjqaIiuUdX983rry4ZALGrFDa6ERAQYrxpIMHUm8dRRyBYvRZE6
+ ETypWqZr2aF9K9hfPGljB7lYJ2NIZ8W2L035Ss/85M4OstOo30lEx0Tudo/czbZsW/CG
+ kSWg==
+X-Gm-Message-State: AOJu0Ywsd9bI02fzcvCrICE5Yaq3GTmVDsLraSsvUYXrxxtBKHwsZrKi
+ lgNN9Y1cXKSS1jd6JpeGva5c+wSb3QwXIAqv165BuJiQlTdJ+82Fli+qdBv2RQ==
+X-Gm-Gg: AfdE7ckJq5fjgo3cGOfQhjwCRejAsS/yUfaFyzAAmwzqukzSRkD5va+DgWm/BCBTj3C
+ 31VgefzAYt3/THuQFIiElpYbCNG/JeYvaR7dTg02G12LLJxEMiLV6R3hgmRmSfWvKLR4+2yNxjA
+ lWcL86l5EWo8DICZPEEmoA4xIIeEsSQ+DcYlEtSMHmUSY79p9c0IKctpP9ljTBJvoeu6yi28Lpy
+ A9PFPLQvPI9N7DEdSO8WOd2zKKgIsE2BGJS/iNHSMuFrbAl+TV0oY0P61+oHb1B8XZQCZS7HVPL
+ 8prZvG88Pk0a2tsI6kEukALj18QgTUArEHZ9bdkHWDmaj5paOt/TdpZ7MCodc7bXrFHUPdBRm/u
+ Cx3thrJDwOv5OLbj6eIOWKKocHY/hq45o5hueUwalto/I/9596Z8mFnwC6AASbZ37Ho96wm/jrq
+ 4EEbp/L8jiJw==
+X-Received: by 2002:a05:620a:ac14:b0:92e:ef09:f8f2 with SMTP id
+ af79cd13be357-92eef0a1b5emr130513385a.66.1783696983691; 
+ Fri, 10 Jul 2026 08:23:03 -0700 (PDT)
 Received: from localhost ([49.36.187.33]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcb262da7sm6535489a34.17.2026.07.10.08.22.17
+ af79cd13be357-92ee5b86276sm218390285a.11.2026.07.10.08.23.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 08:22:18 -0700 (PDT)
-Date: Fri, 10 Jul 2026 20:52:15 +0530
+ Fri, 10 Jul 2026 08:23:03 -0700 (PDT)
+Date: Fri, 10 Jul 2026 20:52:59 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: mbr: return false instead of NULL from bool found_key()
-Message-ID: <do7oqauhs54jgjz7h6zaajwmxzhdcppmm4dt65zxjx5onwn2xr@iufsnhhebnkx>
+Subject: [PATCH] cmd: pstore: bound path formatting with snprintf to avoid
+ stack overflow
+Message-ID: <clk4uaks6k2ljuzyobu4e7m5dwxgsdgtia5jfvhmargg2x4qfe@3f2jmjmsknns>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -93,31 +94,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-found_key() is declared to return bool but returns NULL when strdup()
-fails. NULL is a pointer constant; while it happens to convert to
-zero (i.e. false) it is a type mismatch that trips stricter
-compilers/static analysers.
+pstore_save() writes four different filenames into a fixed 256-byte
+stack buffer 'path' using sprintf() with "%s" fed from argv[3] (the
+user-supplied mount directory). The U-Boot command line buffer
+(CONFIG_SYS_CBSIZE) is typically 1024 or 2048 bytes, so a directory
+path in argv[3] can easily exceed 240 characters and overflow 'path',
+corrupting the surrounding stack frame including the return address.
 
-Return false to match the declared return type.
+Replace the four sprintf(path, ...) call sites with snprintf() using
+sizeof(path) as the bound. The neighbouring sprintf() calls into the
+'addr' and 'length' buffers are left as-is; they write fixed-width
+numeric conversions whose maximum length is bounded by the size of
+ulong/u32 in hex and cannot overflow those buffers.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- cmd/mbr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ cmd/pstore.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/mbr.c b/cmd/mbr.c
-index 7fe6c9e103a..b282b68d50e 100644
---- a/cmd/mbr.c
-+++ b/cmd/mbr.c
-@@ -73,7 +73,7 @@ static bool found_key(const char *str, const char *key)
+diff --git a/cmd/pstore.c b/cmd/pstore.c
+index 9795eea2dbc..f2c0034abbe 100644
+--- a/cmd/pstore.c
++++ b/cmd/pstore.c
+@@ -413,8 +413,8 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
  
- 	strcopy = strdup(str);
- 	if (!strcopy)
--		return NULL;
-+		return false;
+ 		sprintf(addr, "0x%08lx", (ulong)map_to_sysmem(buffer + header_len));
+ 		sprintf(length, "0x%X", size - header_len);
+-		sprintf(path, "%s/dmesg-ramoops-%u%s", argv[3], index,
+-			compressed ? ".enc.z" : "");
++		snprintf(path, sizeof(path), "%s/dmesg-ramoops-%u%s", argv[3],
++			 index, compressed ? ".enc.z" : "");
+ 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
+ 		index++;
+ 	}
+@@ -426,7 +426,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 				 buffer);
+ 	if (size != 0) {
+ 		sprintf(length, "0x%X", size);
+-		sprintf(path, "%s/console-ramoops-0", argv[3]);
++		snprintf(path, sizeof(path), "%s/console-ramoops-0", argv[3]);
+ 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
+ 	}
+ 	ptr += pstore_console_size;
+@@ -438,7 +438,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 	size = pstore_get_buffer(0, ptr, pstore_ftrace_size, buffer);
+ 	if (size != 0) {
+ 		sprintf(length, "0x%X", size);
+-		sprintf(path, "%s/ftrace-ramoops-0", argv[3]);
++		snprintf(path, sizeof(path), "%s/ftrace-ramoops-0", argv[3]);
+ 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
+ 	}
+ 	ptr += pstore_ftrace_size;
+@@ -448,7 +448,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 				 buffer);
+ 	if (size != 0) {
+ 		sprintf(length, "0x%X", size);
+-		sprintf(path, "%s/pmsg-ramoops-0", argv[3]);
++		snprintf(path, sizeof(path), "%s/pmsg-ramoops-0", argv[3]);
+ 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
+ 	}
  
- 	s = strcopy;
- 	while (s) {
 -- 
 2.43.0
 
