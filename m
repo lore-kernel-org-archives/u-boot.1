@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0902EC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007B7C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9D5084ABE;
-	Fri, 10 Jul 2026 20:11:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08A0784AD6;
+	Fri, 10 Jul 2026 20:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="CnKWgXyN";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NqeR2E+n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B0084AE6; Fri, 10 Jul 2026 15:24:23 +0200 (CEST)
+ id E66AF84ADB; Fri, 10 Jul 2026 15:24:23 +0200 (CEST)
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD0C784ADB
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:24:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6871084ADD
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=imullins@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1783689859;
+ s=mimecast20190719; t=1783689860;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bw5V0JW59Csvg+wkpF2D09yzgt4aryxltKkfc+Km7UA=;
- b=CnKWgXyNV8Q5B2lZxJHXd/gNmxARHKNPZ4377Cm719HwUoUZIZwemYteXEn+f3Bvx5cdoA
- aQVFLDP0fVhUKBLSwuqiDsnrHUQp5u+CqXxgq4orCwQG5lQOHsJz6x7XsmCHfqg/XCTRGX
- 6ag+ZgvShRpD9S++e2qPRLAyLz6Cuus=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=235TeRTaP37oN6y7lT+lQKXe2rYJZ3R3odPK8qSdtnc=;
+ b=NqeR2E+nNbxDizsrkAEnhqJtWIliA0tSso4kaZRuTsHxzUDwE6uWWhFu0aeGeJLldeh0PH
+ I74O5MKJYvqaUZBqqRd1sgIeDFfv8uMIWA4bd0ZpmN5RgM8oj+0/Axhw9rWsvFTQeFbUjt
+ 4veU5pen/DQdqHuoIeCwwm7lkhhBzeY=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-65-av5LzrdZPMOqPGOFku09NA-1; Fri, 10 Jul 2026 09:24:18 -0400
-X-MC-Unique: av5LzrdZPMOqPGOFku09NA-1
-X-Mimecast-MFC-AGG-ID: av5LzrdZPMOqPGOFku09NA_1783689857
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-476d52b13d7so967320f8f.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 06:24:18 -0700 (PDT)
+ us-mta-86-3OTcQSCZN3mX8H2CtfZyWA-1; Fri, 10 Jul 2026 09:24:17 -0400
+X-MC-Unique: 3OTcQSCZN3mX8H2CtfZyWA-1
+X-Mimecast-MFC-AGG-ID: 3OTcQSCZN3mX8H2CtfZyWA_1783689856
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-493bab443f7so5998275e9.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 06:24:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783689857; x=1784294657;
+ d=1e100.net; s=20251104; t=1783689855; x=1784294655;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=bw5V0JW59Csvg+wkpF2D09yzgt4aryxltKkfc+Km7UA=;
- b=LWkpgIMwyi8dJg9WoC4rSQ/GVrtX3bh/dkODN1eMAj5KVFBRnw1oXlzcM6PeN63Q6U
- 5pl+yGFAni5Zg82DtSwia1YWJJGfi/NuniRiIINJIR/RHBNylGVaYa/ixptUNjCnagD4
- 91TCsb4lRcCkSRkBHkod+Rwgw2HxPdTW+TiOLCSTXtw7ikrOjOox6jhxh2XhNzjJ8GKK
- hYJc0qpXIJLhCdxamyPiRJEX433eHPef4DawfmIHC4HiHb2lEWMrblRU1/BTCeuNY/DR
- 5L5HDtdTs+3+N0ufyzjKgJ/1dNnzhRLUZ4W4GmIyAt3p9wry61NxFFV0LCw6W8ZfIb9G
- zQdA==
-X-Gm-Message-State: AOJu0YxujgziFL/bRnIBM1EjSPNvwenSsVCd+p/bXnwjKs+UvICvT/Vj
- /f+jb++T2cMAhKQMSPMWLY58zkxXi5IDA4ANpM8o/7fSSHKz7QflTJ0/K59l8nO+W1BTAm8uzVn
- JElCSuiduvo9Xs1Os8cCoQgNO30CEDPsa36dvWVhfUN8mJXxJkfKMveo=
-X-Gm-Gg: AfdE7clwc7jR3wxiZqbSkDOaJXm6Mfm06yh8hYA4fOUD9PeHCuQ6oMmxo0ViRp1UUgj
- jNuIMId31m37MuYZkRNovD5/IsUylwuDFOVkDQFEX9lMn2NfZmQbIgtLVtG8coU4PNqLZzawnXK
- WPll9SuHzT4+9M0P0jrDxp8jsyoXsDBBWQDTFJ3T85/KKdhvItu6KXlBUz9PoLPa74W2ud4K1tm
- p+sHnUGPEZlQxZCcpKpGsRdno9oXN6sPA693JIT+nyL7UXRZ5taycQK8MEGcGwrZNMdFG9WNFcT
- SgpbyFqGG0buUmyK4cZ6+rJsHNoP8K7BYLWI1Ki+Q5ORvfDy58fJEesIpwP3hq0CemCJkvzD6Bw
- Kx7GtI/S7bjZ0XobwEm19EzyhIprCpzA6jAAxK5aR8g==
-X-Received: by 2002:a05:600c:c4a4:b0:493:f2dc:fc4e with SMTP id
- 5b1f17b1804b1-493f2ea3c86mr36456125e9.17.1783689856850; 
- Fri, 10 Jul 2026 06:24:16 -0700 (PDT)
-X-Received: by 2002:a05:600c:c4a4:b0:493:f2dc:fc4e with SMTP id
- 5b1f17b1804b1-493f2ea3c86mr36455595e9.17.1783689856294; 
- Fri, 10 Jul 2026 06:24:16 -0700 (PDT)
+ bh=235TeRTaP37oN6y7lT+lQKXe2rYJZ3R3odPK8qSdtnc=;
+ b=P+Q2TOqkFID/3Iw51RPIcE4y4ez37sPSft5nb8loQ5Q5w1MZLrLz4nuCvp4iUJyctw
+ x37m1FC/RPTwKcNDzG6vEpUwqm/GkOrt+ti4KG3bNsKB7NnDnRt1SPUFid6k7pr99LMK
+ rq3OVpQKiBY/3ztnrxW2P4IEaQ7UmCDwndx/xSBAAcqGRahyMyGoTjRB5nGWVGZqtaly
+ sgn0ReRuXVnVoWAErtFuF/YUaFNJALR1+IqO1aOyGrCGj4iHuC21/t211XJFkLgWfphm
+ 2tS0FdmASYXQzah7T/VcIb7VtSY22a0bx/gEbrH0uToLjAJ2sKsaHlsdT42r97hIfhbl
+ LVig==
+X-Gm-Message-State: AOJu0Yxu8hNGFHxCpkXMo9Juy9T/cG4sosCeCqpMcUHWm24dfAa8VtdV
+ s4BBwgU2yWloVJvC2iYgucoEwNf9r/SM+r1LQItxew4eO+CllvSqgaK/mpBo5mv0SUVbAPawDn5
+ tnX9qq8wYJO1S+2cBeytpri0eOAYbJsDo1QkEOLK3li9HuirZBh45L4E=
+X-Gm-Gg: AfdE7cm3y94u0173eqIWfTsec0rreZAasjSdN1K6iqWepeXhbKkRjWmyhaGL4dSmxFX
+ yXElY3uz//m+pkiHAK/DehHBh/C+l8y+lYnMXR37+E488ZQ38HaI+Lb9QUoUNUi5+vY6+eXngvq
+ 5IKfckPdAYxD6h0njXIfwaSPyqccRNwDKK6NYL++oc55/3erkZxPwgVwRYCfb5atNUtEOX8gOe9
+ BcL8Jtbhd1V6u8xE42q2eLsLsGPCGxaoA8DqhOxw33LIWmKtdT2cRa5zdYjhrPGd129DTyk3e5h
+ NwM39GHHJBO1VhgJEu06lxDYgEYCEV74ENA6nl9LqK+Ksgk98TCTJ+blSiVXvW2ji507dMXvpoA
+ h5eI+ZeZZLDuHz0dQ/r2JkESRRq9UrHye/8CS1/mfFg==
+X-Received: by 2002:a05:600c:3495:b0:493:ecf5:89fd with SMTP id
+ 5b1f17b1804b1-493f2b4a78bmr34468505e9.17.1783689855551; 
+ Fri, 10 Jul 2026 06:24:15 -0700 (PDT)
+X-Received: by 2002:a05:600c:3495:b0:493:ecf5:89fd with SMTP id
+ 5b1f17b1804b1-493f2b4a78bmr34468125e9.17.1783689855034; 
+ Fri, 10 Jul 2026 06:24:15 -0700 (PDT)
 Received: from [192.168.68.133] (33b7f9ad.skybroadband.com. [51.183.249.173])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493f2e77c2esm41527715e9.2.2026.07.10.06.24.15
+ 5b1f17b1804b1-493f2e77c2esm41527715e9.2.2026.07.10.06.24.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 06:24:16 -0700 (PDT)
+ Fri, 10 Jul 2026 06:24:14 -0700 (PDT)
 From: Ian Mullins <imullins@redhat.com>
-Date: Fri, 10 Jul 2026 14:23:09 +0100
-Subject: [PATCH 2/2] efi_selftest: add tests for security architecture
- protocols
+Date: Fri, 10 Jul 2026 14:23:08 +0100
+Subject: [PATCH 1/2] efi_loader: implement EFI Security Architecture protocols
 MIME-Version: 1.0
-Message-Id: <20260710-efi_security_protocol-v1-2-a06cef90057b@redhat.com>
+Message-Id: <20260710-efi_security_protocol-v1-1-a06cef90057b@redhat.com>
 References: <20260710-efi_security_protocol-v1-0-a06cef90057b@redhat.com>
 In-Reply-To: <20260710-efi_security_protocol-v1-0-a06cef90057b@redhat.com>
 To: u-boot@lists.denx.de
@@ -101,28 +100,28 @@ Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Masahisa Kojima <kojima.masahisa@socionext.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Udit Kumar <u-kumar1@ti.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=16479; i=imullins@redhat.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13489; i=imullins@redhat.com; 
  h=from:subject:message-id;
- bh=1BybdwAR1LrUx/iAtgbvxFK/MU0yn3feGFnjzWlV4eY=; 
- b=owEBbQKS/ZANAwAKAdSOKmyUBwJWAcsmYgBqUPJ7Mwr6s3myGpCpt53N87kjXe6pmSSf0O7Wm
- jgOIaCh31WJAjMEAAEKAB0WIQTdLPzJ05Wjhy4Uwd3UjipslAcCVgUCalDyewAKCRDUjipslAcC
- Vj9uD/9b60fySR4P44qdJI5RpRMCSp3uqUNGXvmnvfxnXbIG0tZR1kDq44y+s7yCXBQInBNmage
- QFqSw+0Yf3OXrR4nzgqW6RYj1uCEuOhCDP3KSWeK3Oa3AS6expMktiUC1EfoGxA2n2eBBuOPU/Q
- 9EIiVIyWJ49cTQuWYwD4iKrwNauoH5SXWTswY7OKxANtmSCkV7+dGZ6fqxeivW6YFlKGVczYlyy
- tASv2/hOe4piHjely+Cbome5Q19KdPWeLh7zFfkPh3ld4NAvqJ+X9Mi584WaNaUKeqnR6zWoz6c
- UOc6rh8teB6tU3xCcVeNIVzXbtm7tm6+WUMGasXoMftMwDn3U4BQR7RRS53VLwlLMlO69oCv/ZU
- AGvQJ++yKIrJrX8OQyitNtZMsHpPoo0wu4TeQEOyCyh7R9wt0FfMNrV80XiCYrYnBOcPyfQCfyc
- 6sNrxdeedM7z/ZuCNxgkjNCvVZjir3B2Kf06NdcH2m3lmKu1uX/y47LB2yRxIzG2eP6MTyRJ+Yk
- /TzCGJ/Qsxoe/cZWWOYStgzgCbChdBgIdcO5pHEPcCm1skKAga8IZBG1kOI2UhIfG7ifaKf5xG5
- ngZzQurHXb4QkADLWCMX+SiWEWrSboYYYo1BXhazDgD2KupoOUot76mCxJiniLyLDpOiy1fwEsk
- GTBoprz46iHhYfA==
+ bh=uMpriCj1LLvGVYLvlpIx5awGdCLYhKon7lH+++apRmU=; 
+ b=owEBbQKS/ZANAwAKAdSOKmyUBwJWAcsmYgBqUPJ7JWdSsq7r5YRk2oSFsjAEqYIz9WU6AntF8
+ vvEtiFpVQOJAjMEAAEKAB0WIQTdLPzJ05Wjhy4Uwd3UjipslAcCVgUCalDyewAKCRDUjipslAcC
+ VvhBEACEqizZIc0dVI0hewnk+O8IaZBGkJRB0e7xnkVButWGzA9hkgyWOPWFS+vkXcoPM2aQ4Kj
+ AIbCf9inW+xdsMPXsC90qh/VLcQl3oOTawuYxBBYnN/kynNCaiQArlUGDDbOksIrXfA/ZkYtmed
+ wUJ7+2o5ldXKrrs3ZGwb7tPq9DLIpIwZvwgVx2PvxiYoEauSlfokrSxpKQfcgkeDmhZ590tHqYu
+ GTmiQ/c6s2M/n2XAqxXRvehyxNIdIwWNbwO/ucpKsRyVi/dl+Z+EU1fBUUksu3AWBBrEn01PfqA
+ 07luvU5bxbYy0e/57TPYn7W4dgLWhT3pnI+yJZBCQBgqbimh0hIy1dD/Nscqq+hBPl2ofWNWVjK
+ ysKfgM7sAB+U1glAyWjaNllIE3sF/e7bxyrhVsrkihwPkWaD/XjxKuq2jdsHeoC5PSY484rl1ht
+ X6Woe17+K/EF3Z9etkNN1hSLBxQ9Fn3DEYzQ/CHG9ZxfyAV8lmnLrRQcJK/VJetLvxzNbNyL1ZQ
+ DTfRM5fQynwRc5Co1OPZs0rnvQds1PB8+mUzsQaRcUHOdCxMMRKlvwX6L3SFJgWWSxcTFnrXwDK
+ wBYU/+3XwfKyjc8xjdCSk1ZJyyxTaHt4t0xckyhCWWlN8tzI9q/uGVzDl+2iLuQMqg5vSK3+1WK
+ tREbXE7cC5j2nKA==
 X-Developer-Key: i=imullins@redhat.com; a=openpgp;
  fpr=DD2CFCC9D395A3872E14C1DDD48E2A6C94070256
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: TjYCfY0rRExTWL6cO-nUJyPWLvKsQlYstBA2UzVdGvQ_1783689857
+X-Mimecast-MFC-PROC-ID: sdxvJxC8kQvV3zHfYdZtQwwsyq5J1fzPeacb7sBoeSs_1783689856
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 10 Jul 2026 20:11:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,456 +141,361 @@ X-Virus-Status: Clean
 
 From: Enric Balletbo i Serra <eballetbo@kernel.org>
 
-Add unit tests and Python integration tests for the
-EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL
-implementation.
+This patch implements the EFI_SECURITY_ARCH_PROTOCOL and
+EFI_SECURITY2_ARCH_PROTOCOL as defined in the UEFI Platform
+Initialization (PI) specification.
 
-The C-based unit test verifies:
-- Protocols are correctly installed on the root handle.
-- The FileAuthentication override mechanism works, which is required for
-  tools like systemd-stub to bypass secure boot for embedded
-  UKI payloads.
+These protocols provide a mechanism for the EFI loader to perform security
+checks on images before they are executed. By default, the implementation
+delegates to the internal UEFI Secure Boot authentication logic.
 
-The Python tests verify:
-- Protocols are discoverable via 'efidebug dh'.
-- Functional regression: Signed images still authenticate and boot
-  correctly.
-- Functional regression: Unsigned images are still rejected under
-  Secure Boot.
-
-Additionally, add a README with step-by-step instructions for manual
-end-to-end testing using a real Unified Kernel Image (UKI) and QEMU.
+The primary motivation is to support EFI applications like systemd-stub
+in Unified Kernel Images (UKI). These applications can install a custom
+version of the security protocols to temporarily override authentication
+for embedded payloads that were already verified as part of the signed
+PE binary.
 
 Signed-off-by: Enric Balletbo i Serra <eballetbo@kernel.org>
 Signed-off-by: Ian Mullins <imullins@redhat.com>
 ---
- lib/efi_selftest/Makefile                          |   1 +
- lib/efi_selftest/efi_selftest_security_arch.c      | 110 +++++++++++
- .../py/tests/test_efi_secboot/README.security_arch | 208 +++++++++++++++++++++
- .../tests/test_efi_secboot/test_security_arch.py   |  73 ++++++++
- 4 files changed, 392 insertions(+)
+ include/efi_api.h                 | 30 ++++++++++++
+ include/efi_loader.h              | 15 +++++-
+ lib/efi_loader/Kconfig            | 11 +++++
+ lib/efi_loader/Makefile           |  1 +
+ lib/efi_loader/efi_boottime.c     |  3 +-
+ lib/efi_loader/efi_image_loader.c | 31 +++++++++---
+ lib/efi_loader/efi_security.c     | 99 +++++++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_setup.c        |  7 +++
+ 8 files changed, 188 insertions(+), 9 deletions(-)
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 67102648703..06de55c6f4f 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -65,6 +65,7 @@ obj-y += efi_selftest_unaligned.o
- endif
- obj-$(CONFIG_EFI_LOADER_HII) += efi_selftest_hii.o
- obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_selftest_rng.o
-+obj-$(CONFIG_EFI_SECURITY_ARCH_PROTOCOL) += efi_selftest_security_arch.o
- obj-$(CONFIG_EFI_GET_TIME) += efi_selftest_rtc.o
- obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_selftest_tcg2.o
+diff --git a/include/efi_api.h b/include/efi_api.h
+index d4fdd50c49e..1c52855af63 100644
+--- a/include/efi_api.h
++++ b/include/efi_api.h
+@@ -487,6 +487,14 @@ struct efi_runtime_services {
+ 	EFI_GUID(0xccd15fec, 0x6f73, 0x4eec, 0x83, \
+ 		 0x95, 0x3e, 0x69, 0xe4, 0xb9, 0x40, 0xbf)
  
-diff --git a/lib/efi_selftest/efi_selftest_security_arch.c b/lib/efi_selftest/efi_selftest_security_arch.c
++#define EFI_SECURITY_ARCH_PROTOCOL_GUID \
++	EFI_GUID(0xa46423e3, 0x4617, 0x49f1, 0xb9, 0xff, \
++		 0xd1, 0xbf, 0xa9, 0x11, 0x58, 0x39)
++
++#define EFI_SECURITY2_ARCH_PROTOCOL_GUID \
++	EFI_GUID(0x94ab2f58, 0x1438, 0x4ef1, 0x91, 0x52, \
++		 0x18, 0x94, 0x1a, 0x3a, 0x0e, 0x68)
++
+ /**
+  * struct efi_configuration_table - EFI Configuration Table
+  *
+@@ -2445,4 +2453,26 @@ struct efi_disk {
+ 					  void *buffer);
+ };
+ 
++struct efi_security_arch_protocol;
++
++typedef efi_status_t (EFIAPI *efi_security_file_authentication_state)(const struct efi_security_arch_protocol *this,
++		u32 authentication_status,
++		const struct efi_device_path *file);
++
++struct efi_security_arch_protocol {
++	efi_security_file_authentication_state file_authentication_state;
++};
++
++struct efi_security2_arch_protocol;
++
++typedef efi_status_t (EFIAPI *efi_security2_file_authentication)(const struct efi_security2_arch_protocol *this,
++		const struct efi_device_path *device_path,
++		void *file_buffer,
++		efi_uintn_t file_size,
++		bool boot_policy);
++
++struct efi_security2_arch_protocol {
++	efi_security2_file_authentication file_authentication;
++};
++
+ #endif
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 3a4d502631c..b80ce390466 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -381,6 +381,9 @@ extern const efi_guid_t efi_guid_cert_type_pkcs7;
+ 
+ /* GUID of RNG protocol */
+ extern const efi_guid_t efi_guid_rng_protocol;
++/* GUIDs for EFI Security Architecture Protocols */
++extern const efi_guid_t efi_guid_security_arch_protocol;
++extern const efi_guid_t efi_guid_security2_arch_protocol;
+ /* GUID of capsule update result */
+ extern const efi_guid_t efi_guid_capsule_report;
+ /* GUID of firmware management protocol */
+@@ -671,6 +674,12 @@ efi_status_t efi_console_register(void);
+ efi_status_t efi_disks_register(void);
+ /* Called by efi_init_obj_list() to install EFI_RNG_PROTOCOL */
+ efi_status_t efi_rng_register(void);
++/* Called by efi_init_obj_list() to install Security Architecture Protocols */
++efi_status_t efi_security_arch_register(void);
++/* Check image authentication via Security2 Architecture Protocol */
++efi_status_t efi_security_check_image(const struct efi_device_path *file_path,
++				      void *file_buffer, efi_uintn_t file_size,
++				      bool boot_policy);
+ /* Called by efi_init_obj_list() to install EFI_TCG2_PROTOCOL */
+ efi_status_t efi_tcg2_register(void);
+ /* Called by efi_init_obj_list() to install RISCV_EFI_BOOT_PROTOCOL */
+@@ -728,10 +737,14 @@ efi_status_t efi_set_watchdog(unsigned long timeout);
+ void efi_timer_check(void);
+ /* Check if a buffer contains a PE-COFF image */
+ efi_status_t efi_check_pe(void *buffer, size_t size, void **nt_header);
++/* Verify a PE image's signature against secure boot databases */
++bool efi_image_authenticate(void *efi, size_t efi_size);
+ /* PE loader implementation */
+ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 			 void *efi, size_t efi_size,
+-			 struct efi_loaded_image *loaded_image_info);
++			 struct efi_loaded_image *loaded_image_info,
++			 struct efi_device_path *file_path,
++			 bool boot_policy);
+ /* Called once to store the pristine gd pointer */
+ void efi_save_gd(void);
+ /* Call this to relocate the runtime section to an address space */
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 4cb13ae7c8a..b253af121a4 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -71,6 +71,17 @@ config EFI_SECURE_BOOT
+ 	  it is signed with a trusted key. To do that, you need to install,
+ 	  at least, PK, KEK and db.
+ 
++config EFI_SECURITY_ARCH_PROTOCOL
++	bool "Install EFI Security Architecture Protocols"
++	depends on EFI_SECURE_BOOT
++	default y
++	help
++	  Install EFI_SECURITY_ARCH_PROTOCOL and
++	  EFI_SECURITY2_ARCH_PROTOCOL. These allow EFI applications
++	  (such as systemd-stub in Unified Kernel Images) to temporarily
++	  override secure boot authentication for embedded payloads that
++	  were already verified as part of a signed PE binary.
++
+ config EFI_SIGNATURE_SUPPORT
+ 	bool
+ 
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index d73ad43951b..2cfa33bb114 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -67,6 +67,7 @@ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
+ obj-$(CONFIG_ACPI) += efi_acpi.o
+ obj-$(CONFIG_SMBIOS) += efi_smbios.o
+ obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
++obj-$(CONFIG_EFI_SECURITY_ARCH_PROTOCOL) += efi_security.o
+ obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
+ obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) += efi_riscv.o
+ obj-$(CONFIG_EFI_LOAD_FILE2_INITRD) += efi_load_initrd.o
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index de57823bd44..934bdd89a69 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -2120,7 +2120,8 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
+ 	efi_dp_split_file_path(file_path, &dp, &fp);
+ 	ret = efi_setup_loaded_image(dp, fp, image_obj, &info);
+ 	if (ret == EFI_SUCCESS)
+-		ret = efi_load_pe(*image_obj, dest_buffer, source_size, info);
++		ret = efi_load_pe(*image_obj, dest_buffer, source_size, info,
++				  file_path, boot_policy);
+ 	if (!source_buffer)
+ 		/* Release buffer to which file was loaded */
+ 		efi_free_pages((uintptr_t)dest_buffer,
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index f9a2d2df405..f128aabf142 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -641,7 +641,7 @@ static bool efi_image_verify_digest(struct efi_image_regions *regs,
+  *
+  * Return:	true if authenticated, false if not
+  */
+-static bool efi_image_authenticate(void *efi, size_t efi_size)
++bool efi_image_authenticate(void *efi, size_t efi_size)
+ {
+ 	struct efi_image_regions *regs = NULL;
+ 	WIN_CERTIFICATE *wincerts = NULL, *wincert;
+@@ -818,7 +818,7 @@ out:
+ 	return ret;
+ }
+ #else
+-static bool efi_image_authenticate(void *efi, size_t efi_size)
++bool efi_image_authenticate(void *efi, size_t efi_size)
+ {
+ 	return true;
+ }
+@@ -890,11 +890,15 @@ static u32 section_size(IMAGE_SECTION_HEADER *sec)
+  * @efi:		pointer to the EFI binary
+  * @efi_size:		size of @efi binary
+  * @loaded_image_info:	loaded image protocol
++ * @file_path:		device path of the image (for security protocol)
++ * @boot_policy:	true if loading as a boot option
+  * Return:		status code
+  */
+ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 			 void *efi, size_t efi_size,
+-			 struct efi_loaded_image *loaded_image_info)
++			 struct efi_loaded_image *loaded_image_info,
++			 struct efi_device_path *file_path,
++			 bool boot_policy)
+ {
+ 	IMAGE_NT_HEADERS32 *nt;
+ 	IMAGE_DOS_HEADER *dos;
+@@ -939,11 +943,24 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 	}
+ 
+ 	/* Authenticate an image */
+-	if (efi_image_authenticate(efi, efi_size)) {
+-		handle->auth_status = EFI_IMAGE_AUTH_PASSED;
++	if (IS_ENABLED(CONFIG_EFI_SECURITY_ARCH_PROTOCOL)) {
++		efi_status_t auth_ret;
++
++		auth_ret = efi_security_check_image(file_path, efi, efi_size,
++						    boot_policy);
++		if (auth_ret == EFI_SUCCESS) {
++			handle->auth_status = EFI_IMAGE_AUTH_PASSED;
++		} else {
++			handle->auth_status = EFI_IMAGE_AUTH_FAILED;
++			log_err("Image not authenticated\n");
++		}
+ 	} else {
+-		handle->auth_status = EFI_IMAGE_AUTH_FAILED;
+-		log_err("Image not authenticated\n");
++		if (efi_image_authenticate(efi, efi_size)) {
++			handle->auth_status = EFI_IMAGE_AUTH_PASSED;
++		} else {
++			handle->auth_status = EFI_IMAGE_AUTH_FAILED;
++			log_err("Image not authenticated\n");
++		}
+ 	}
+ 
+ 	/* Calculate upper virtual address boundary */
+diff --git a/lib/efi_loader/efi_security.c b/lib/efi_loader/efi_security.c
 new file mode 100644
-index 00000000000..384146a187a
+index 00000000000..66f2e79ad31
 --- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_security_arch.c
-@@ -0,0 +1,110 @@
++++ b/lib/efi_loader/efi_security.c
+@@ -0,0 +1,99 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * efi_selftest_security_arch
++ * EFI Security Architecture Protocol implementation
 + *
-+ * Test the EFI Security Architecture Protocols.
++ * Implements EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL
++ * as defined in the UEFI Platform Initialization (PI) specification.
 + *
-+ * Verifies that EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL
-+ * can be located, and that the override mechanism works -- this is the same
-+ * pattern used by systemd-stub to temporarily bypass secure boot for
-+ * embedded UKI payloads.
++ * These protocols allow EFI applications (such as systemd-stub in Unified
++ * Kernel Images) to temporarily override secure boot authentication for
++ * embedded payloads that were already verified as part of a signed PE binary.
 + */
 +
-+#include <efi_selftest.h>
++#define LOG_CATEGORY LOGC_EFI
 +
-+static struct efi_boot_services *boottime;
++#include <efi_loader.h>
++#include <log.h>
 +
-+static efi_guid_t security_guid = EFI_SECURITY_ARCH_PROTOCOL_GUID;
-+static efi_guid_t security2_guid = EFI_SECURITY2_ARCH_PROTOCOL_GUID;
++const efi_guid_t efi_guid_security_arch_protocol =
++	EFI_SECURITY_ARCH_PROTOCOL_GUID;
++const efi_guid_t efi_guid_security2_arch_protocol =
++	EFI_SECURITY2_ARCH_PROTOCOL_GUID;
 +
-+static int setup(const efi_handle_t handle,
-+		 const struct efi_system_table *systable)
-+{
-+	boottime = systable->boottime;
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/*
-+ * Custom Security2 hook that always succeeds -- mimics what systemd-stub
-+ * installs for its embedded kernel payload.
-+ */
 +static efi_status_t EFIAPI
-+permissive_file_authentication(const struct efi_security2_arch_protocol *this,
-+			       const struct efi_device_path *device_path,
-+			       void *file_buffer, efi_uintn_t file_size,
-+			       bool boot_policy)
++default_file_auth_state(const struct efi_security_arch_protocol *this,
++			u32 authentication_status,
++			const struct efi_device_path *file)
 +{
 +	return EFI_SUCCESS;
 +}
 +
-+static int execute(void)
++static efi_status_t EFIAPI
++default_file_authentication(const struct efi_security2_arch_protocol *this,
++			    const struct efi_device_path *device_path,
++			    void *file_buffer, efi_uintn_t file_size,
++			    bool boot_policy)
 +{
-+	struct efi_security_arch_protocol *security = NULL;
-+	struct efi_security2_arch_protocol *security2 = NULL;
-+	efi_security2_file_authentication original_hook;
-+	efi_status_t ret;
++	if (efi_image_authenticate(file_buffer, file_size))
++		return EFI_SUCCESS;
 +
-+	/* Locate Security Architecture Protocol */
-+	ret = boottime->locate_protocol(&security_guid, NULL,
-+					(void **)&security);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Could not locate EFI_SECURITY_ARCH_PROTOCOL\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	if (!security->file_authentication_state) {
-+		efi_st_error("FileAuthenticationState callback is NULL\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Locate Security2 Architecture Protocol */
-+	ret = boottime->locate_protocol(&security2_guid, NULL,
-+					(void **)&security2);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Could not locate EFI_SECURITY2_ARCH_PROTOCOL\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	if (!security2->file_authentication) {
-+		efi_st_error("FileAuthentication callback is NULL\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/*
-+	 * Test override mechanism: save original, install permissive hook,
-+	 * verify it was installed, then restore original.
-+	 */
-+	original_hook = security2->file_authentication;
-+
-+	security2->file_authentication = permissive_file_authentication;
-+
-+	if (security2->file_authentication != permissive_file_authentication) {
-+		efi_st_error("Failed to override FileAuthentication\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Call the overridden hook directly to verify it works */
-+	ret = security2->file_authentication(security2, NULL, NULL, 0, false);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Permissive hook did not return EFI_SUCCESS\n");
-+		security2->file_authentication = original_hook;
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* Restore original handler */
-+	security2->file_authentication = original_hook;
-+
-+	if (security2->file_authentication != original_hook) {
-+		efi_st_error("Failed to restore FileAuthentication\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	return EFI_ST_SUCCESS;
++	return EFI_SECURITY_VIOLATION;
 +}
 +
-+EFI_UNIT_TEST(security_arch) = {
-+	.name = "security architecture protocols",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.setup = setup,
-+	.execute = execute,
++static struct efi_security_arch_protocol efi_security_arch = {
++	.file_authentication_state = default_file_auth_state,
 +};
-diff --git a/test/py/tests/test_efi_secboot/README.security_arch b/test/py/tests/test_efi_secboot/README.security_arch
-new file mode 100644
-index 00000000000..d1792703c26
---- /dev/null
-+++ b/test/py/tests/test_efi_secboot/README.security_arch
-@@ -0,0 +1,208 @@
-+QEMU Integration Test: EFI Security Architecture Protocols with UKI
-+====================================================================
 +
-+This describes how to manually test the EFI_SECURITY_ARCH_PROTOCOL and
-+EFI_SECURITY2_ARCH_PROTOCOL implementation end-to-end with a real Unified
-+Kernel Image (UKI) on QEMU.
++static struct efi_security2_arch_protocol efi_security2_arch = {
++	.file_authentication = default_file_authentication,
++};
 +
-+IMPORTANT: Both U-Boot and the UKI must be built for the same architecture.
-+If your UKI is x86_64, you must use qemu-x86_64. If your UKI is aarch64,
-+you must use qemu_arm64. A mismatch causes:
-+  "Machine type 0x8664 is not supported"
++/**
++ * efi_security_check_image() - authenticate image via Security2 protocol
++ *
++ * Calls the currently installed FileAuthentication callback on the
++ * EFI_SECURITY2_ARCH_PROTOCOL instance. This may be the default handler
++ * (which delegates to efi_image_authenticate()) or a custom override
++ * installed by an EFI application such as systemd-stub.
++ *
++ * @file_path:		device path of the image being loaded
++ * @file_buffer:	pointer to the image data
++ * @file_size:		size of the image data
++ * @boot_policy:	true if image is being loaded as a boot option
++ * Return:		EFI_SUCCESS if authenticated, error code otherwise
++ */
++efi_status_t efi_security_check_image(const struct efi_device_path *file_path,
++				      void *file_buffer, efi_uintn_t file_size,
++				      bool boot_policy)
++{
++	return efi_security2_arch.file_authentication(&efi_security2_arch,
++						      file_path, file_buffer,
++						      file_size, boot_policy);
++}
 +
-+Prerequisites
-+-------------
-+- qemu-system-x86_64 (or qemu-system-aarch64 for arm64)
-+- systemd-ukify (for creating UKIs)
-+- sbsign (for signing PE binaries)
-+- efitools (cert-to-efi-sig-list, sign-efi-sig-list)
-+- mtools (mcopy, mmd -- for populating FAT images without root)
-+- openssl
++/**
++ * efi_security_arch_register() - install Security Architecture Protocols
++ *
++ * Installs both EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL
++ * on the root handle during EFI subsystem initialization.
++ *
++ * Return:	status code
++ */
++efi_status_t efi_security_arch_register(void)
++{
++	efi_status_t ret;
 +
-+Overview
-+--------
-+The test works by packing everything into a single FAT disk image (esp.img):
++	ret = efi_add_protocol(efi_root, &efi_guid_security_arch_protocol,
++			       (void *)&efi_security_arch);
++	if (ret != EFI_SUCCESS) {
++		log_err("Cannot install EFI_SECURITY_ARCH_PROTOCOL\n");
++		return ret;
++	}
 +
-+  esp.img  (FAT, passed to QEMU as a virtio disk)
-+  ├── PK.auth          Secure Boot Platform Key
-+  ├── KEK.auth         Key Exchange Key
-+  ├── db.auth          Authorized Signature Database
-+  └── EFI/
-+      └── BOOT/
-+          └── BOOTX64.EFI   The signed UKI (contains systemd-stub + kernel + initrd)
++	ret = efi_add_protocol(efi_root, &efi_guid_security2_arch_protocol,
++			       (void *)&efi_security2_arch);
++	if (ret != EFI_SUCCESS)
++		log_err("Cannot install EFI_SECURITY2_ARCH_PROTOCOL\n");
 +
-+U-Boot sees this as "virtio 0:1". First you enroll the keys from the root
-+of the FAT, then you boot the UKI from EFI/BOOT/.
++	return ret;
++}
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index f302bb62ab9..7c8ce129e22 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -338,6 +338,13 @@ efi_status_t efi_init_obj_list(void)
+ 			goto out;
+ 	}
+ 
++	/* Security Architecture Protocols */
++	if (IS_ENABLED(CONFIG_EFI_SECURITY_ARCH_PROTOCOL)) {
++		ret = efi_security_arch_register();
++		if (ret != EFI_SUCCESS)
++			goto out;
++	}
 +
-+Step 1: Build U-Boot
-+---------------------
-+
-+  For x86_64:
-+
-+    make qemu-x86_64_defconfig
-+    scripts/config --enable FIT_SIGNATURE
-+    scripts/config --enable EFI_SECURE_BOOT
-+    scripts/config --enable EFI_SECURITY_ARCH_PROTOCOL
-+    make olddefconfig
-+    make -j$(nproc)
-+
-+    Output: u-boot.rom
-+
-+  For aarch64:
-+
-+    make qemu_arm64_defconfig
-+    scripts/config --enable FIT_SIGNATURE
-+    scripts/config --enable EFI_SECURE_BOOT
-+    scripts/config --enable EFI_SECURITY_ARCH_PROTOCOL
-+    make olddefconfig
-+    make -j$(nproc)
-+
-+    Output: u-boot.bin
-+
-+Step 2: Create Secure Boot Keys
-+---------------------------------
-+  GUID='11111111-2222-3333-4444-123456789abc'
-+  mkdir -p keys && cd keys
-+
-+  # Platform Key
-+  openssl req -x509 -sha256 -newkey rsa:2048 \
-+    -subj /CN=Test_PK/ -keyout PK.key -out PK.crt -nodes -days 365
-+  cert-to-efi-sig-list -g $GUID PK.crt PK.esl
-+  sign-efi-sig-list -t "2024-01-01" -c PK.crt -k PK.key PK PK.esl PK.auth
-+
-+  # Key Exchange Key
-+  openssl req -x509 -sha256 -newkey rsa:2048 \
-+    -subj /CN=Test_KEK/ -keyout KEK.key -out KEK.crt -nodes -days 365
-+  cert-to-efi-sig-list -g $GUID KEK.crt KEK.esl
-+  sign-efi-sig-list -t "2024-01-01" -c PK.crt -k PK.key KEK KEK.esl KEK.auth
-+
-+  # Authorized Signature Database
-+  openssl req -x509 -sha256 -newkey rsa:2048 \
-+    -subj /CN=Test_db/ -keyout db.key -out db.crt -nodes -days 365
-+  cert-to-efi-sig-list -g $GUID db.crt db.esl
-+  sign-efi-sig-list -t "2024-01-01" -c KEK.crt -k KEK.key db db.esl db.auth
-+
-+  cd ..
-+
-+Step 3: Create and Sign a UKI
-+-------------------------------
-+  # Get a kernel and initrd matching your target architecture.
-+  # Tip: use a small initrd for initial testing to avoid memory issues.
-+
-+  For x86_64:
-+
-+    ukify build \
-+      --linux /boot/vmlinuz \
-+      --initrd /boot/initrd.img \
-+      --cmdline "console=ttyS0 root=/dev/vda1" \
-+      --output test.uki.unsigned
-+
-+  For aarch64:
-+
-+    ukify build \
-+      --linux /boot/vmlinuz \
-+      --initrd /boot/initrd.img \
-+      --cmdline "console=ttyAMA0 root=/dev/vda1" \
-+      --output test.uki.unsigned
-+
-+  # Sign the UKI with the db key
-+  sbsign --key keys/db.key --cert keys/db.crt \
-+    --output test.uki test.uki.unsigned
-+
-+Step 4: Build the ESP Disk Image
-+----------------------------------
-+  All files -- keys and the signed UKI -- go into one FAT image.
-+  This image is what gets passed to QEMU as a disk.
-+
-+  dd if=/dev/zero of=esp.img bs=1M count=128
-+  mkfs.vfat esp.img
-+
-+  # Copy the key enrollment files to the FAT root
-+  mcopy -i esp.img keys/PK.auth  ::PK.auth
-+  mcopy -i esp.img keys/KEK.auth ::KEK.auth
-+  mcopy -i esp.img keys/db.auth  ::db.auth
-+
-+  # Copy the signed UKI as the default EFI boot binary
-+  mmd   -i esp.img ::EFI ::EFI/BOOT
-+
-+  For x86_64:
-+    mcopy -i esp.img test.uki ::EFI/BOOT/BOOTX64.EFI
-+
-+  For aarch64:
-+    mcopy -i esp.img test.uki ::EFI/BOOT/BOOTAA64.EFI
-+
-+Step 5: Launch QEMU
-+---------------------
-+  The esp.img disk image (containing both keys and the UKI) is passed
-+  to QEMU as a virtio drive. U-Boot accesses it as "virtio 0:1".
-+
-+  For x86_64:
-+
-+    qemu-system-x86_64 \
-+      -bios u-boot.rom \
-+      -m 4G \
-+      -drive if=virtio,format=raw,file=esp.img \
-+      -nographic
-+
-+  For aarch64:
-+
-+    qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 4G \
-+      -bios u-boot.bin \
-+      -drive if=virtio,format=raw,file=esp.img \
-+      -nographic
-+
-+Step 6: Enroll Keys and Boot (in U-Boot console)
-+---------------------------------------------------
-+  # All files are on the same disk: virtio 0:1
-+
-+  # 1. Enroll secure boot keys (from FAT root)
-+  fatload virtio 0:1 4000000 db.auth
-+  setenv -e -nv -bs -rt -at -i 4000000:$filesize db
-+  fatload virtio 0:1 4000000 KEK.auth
-+  setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK
-+  fatload virtio 0:1 4000000 PK.auth
-+  setenv -e -nv -bs -rt -at -i 4000000:$filesize PK
-+
-+  # 2. Verify secure boot is active
-+  printenv -e SecureBoot
-+
-+  # 3. Verify security protocols are installed
-+  #    Look for GUIDs a46423e3-... and 94ab2f58-... on the root handle
-+  efidebug dh
-+
-+  # 4. Boot the signed UKI (from EFI/BOOT/ on the same disk)
-+  For x86_64:
-+    efidebug boot add -b 1 UKI virtio 0:1 /EFI/BOOT/BOOTX64.EFI -s ""
-+
-+  For aarch64:
-+    efidebug boot add -b 1 UKI virtio 0:1 /EFI/BOOT/BOOTAA64.EFI -s ""
-+
-+  efidebug boot order 1
-+  bootefi bootmgr
-+
-+Expected Result
-+----------------
-+1. The UKI outer PE passes secure boot authentication (signed with db key).
-+2. systemd-stub inside the UKI locates EFI_SECURITY2_ARCH_PROTOCOL.
-+3. systemd-stub overrides the FileAuthentication callback.
-+4. systemd-stub calls LoadImage() for the embedded kernel.
-+5. U-Boot's efi_load_pe() calls the overridden callback, which returns
-+   EFI_SUCCESS for the embedded kernel.
-+6. The kernel starts successfully via StartImage().
-+7. After loading, systemd-stub restores the original callback.
-+
-+Troubleshooting
-+----------------
-+- "Machine type 0x8664 is not supported": The UKI is x86_64 but U-Boot
-+  was built for a different architecture. Rebuild with qemu-x86_64_defconfig.
-+
-+- "Machine type 0xaa64 is not supported": The UKI is aarch64 but U-Boot
-+  was built for x86_64. Rebuild with qemu_arm64_defconfig.
-+
-+- "Failed to load initrd: 0x8000000000000009" (EFI_OUT_OF_RESOURCES):
-+  Not enough EFI memory for the initrd. Increase QEMU RAM (-m 4G), use
-+  a smaller initrd, or increase CONFIG_SYS_MALLOC_LEN in U-Boot.
-+
-+- Keys fail to enroll: Make sure the .auth files are time-based
-+  authenticated variables signed with the correct parent key (db signed
-+  by KEK, KEK signed by PK, PK self-signed).
-diff --git a/test/py/tests/test_efi_secboot/test_security_arch.py b/test/py/tests/test_efi_secboot/test_security_arch.py
-new file mode 100644
-index 00000000000..9ba3cbcf944
---- /dev/null
-+++ b/test/py/tests/test_efi_secboot/test_security_arch.py
-@@ -0,0 +1,73 @@
-+# SPDX-License-Identifier:      GPL-2.0+
-+# Copyright (c) 2026
-+#
-+# U-Boot UEFI: Security Architecture Protocol Test
-+
-+"""
-+This test verifies that EFI_SECURITY_ARCH_PROTOCOL and
-+EFI_SECURITY2_ARCH_PROTOCOL are installed and discoverable.
-+"""
-+
-+import pytest
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('efi_security_arch_protocol')
-+@pytest.mark.buildconfigspec('cmd_efidebug')
-+@pytest.mark.slow
-+class TestEfiSecurityArch(object):
-+    def test_efi_security_protocols_installed(self, ubman):
-+        """
-+        Test that Security Architecture Protocols are visible on root handle.
-+        """
-+        ubman.restart_uboot()
-+        output = ubman.run_command('efidebug dh')
-+        # EFI_SECURITY_ARCH_PROTOCOL_GUID
-+        assert 'a46423e3-4617-49f1-b9ff-d1bfa9115839' in ''.join(output).lower() \
-+            or 'Security' in ''.join(output)
-+        # EFI_SECURITY2_ARCH_PROTOCOL_GUID
-+        assert '94ab2f58-1438-4ef1-9152-18941a3a0e68' in ''.join(output).lower() \
-+            or 'Security2' in ''.join(output)
-+
-+    def test_efi_security_signed_image_with_protocol(self, ubman, efi_boot_env):
-+        """
-+        Regression: signed images still authenticate when the security
-+        architecture protocols are installed and route the authentication.
-+        """
-+        ubman.restart_uboot()
-+        disk_img = efi_boot_env
-+        output = ubman.run_command_list([
-+            'host bind 0 %s' % disk_img,
-+            'fatload host 0:1 4000000 db.auth',
-+            'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
-+            'fatload host 0:1 4000000 KEK.auth',
-+            'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
-+            'fatload host 0:1 4000000 PK.auth',
-+            'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK'])
-+        assert 'Failed to set EFI variable' not in ''.join(output)
-+        output = ubman.run_command_list([
-+            'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed -s ""',
-+            'efidebug boot order 1',
-+            'bootefi bootmgr'])
-+        assert 'Hello, world!' in ''.join(output)
-+
-+    def test_efi_security_unsigned_image_rejected(self, ubman, efi_boot_env):
-+        """
-+        Regression: unsigned images are still rejected under secure boot
-+        when the security architecture protocols are installed.
-+        """
-+        ubman.restart_uboot()
-+        disk_img = efi_boot_env
-+        output = ubman.run_command_list([
-+            'host bind 0 %s' % disk_img,
-+            'fatload host 0:1 4000000 KEK.auth',
-+            'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
-+            'fatload host 0:1 4000000 PK.auth',
-+            'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK'])
-+        assert 'Failed to set EFI variable' not in ''.join(output)
-+        output = ubman.run_command_list([
-+            'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi -s ""',
-+            'efidebug boot order 1',
-+            'efidebug test bootmgr'])
-+        assert '\'HELLO\' failed' in ''.join(output)
-+        assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
+ 	/* Indicate supported runtime services */
+ 	ret = efi_init_runtime_supported();
+ 	if (ret != EFI_SUCCESS)
 
 -- 
 2.54.0
