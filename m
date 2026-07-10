@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA05CC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 14:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 843B3C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 14:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB44F84B14;
-	Fri, 10 Jul 2026 16:12:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 485B784AED;
+	Fri, 10 Jul 2026 16:12:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Hf6n2Wp4";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="G3nTTRJY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED8B484B07; Fri, 10 Jul 2026 16:12:53 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 186C684B04; Fri, 10 Jul 2026 16:12:55 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D55F984A7A
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:12:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2662F84B04
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:12:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-493ba701891so8425375e9.3
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:12:51 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-493e497643fso6073995e9.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:12:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783692771; x=1784297571; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=FzuR13hgSYW2ims78E2KXWubmp82cbkhGwVRO4NoZN8=;
- b=Hf6n2Wp4sgDYSwyDlMVuDfLkC+SOViHfp2EPChDYUFRGvEu7IMxOGTTnC/+2dWix2p
- y3RM7/rm2FyjMyRJBtQYWqm7arOfhG3BLT+gzszx/x+N63BvyKV8J5hKa4/iPvmzfdOX
- 2r92YSJ2+dDCqLfLErVgpTTzpeXSuj/HvR7q/Svhdqupv+kfnnwnRkGxqI2j5vUUr8hU
- 0LX4LFDPTPLu7haG9+kiAt47EHyvJPNwjOti5vg7HMYji8OdP4fW7nWsGZEjGOgqxse3
- CgfkHt8euqPiKtKQ5UkfsUcxFyuSBZjRwh/FuvwFti4eezi+RxPhEGE1MvMU25uTW2py
- RvHw==
+ d=baylibre.com; s=google; t=1783692772; x=1784297572; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=lqPqVIDk7myjOHDdypRPHc0NzCS56g2I88ekVislEN0=;
+ b=G3nTTRJYPP7/Tv2cJs2JCMHAPigYyz3cT/OqfnJdD81kNZVe7nPZ8VhZE3xjBOA3vs
+ WRXj1i63+ESYx9B7vYX/wckrya8wISPMMPjetVuD0I0iCva3ABElCYgOMQkrfr3zeU+l
+ DCHFhVlKGUGd4j4sr7Tpo0tv+xVWoEx/dFOFLPJ+9e7l4QKktTMXRsJgSaxz1rwHB/3w
+ tQyqKg7av8jrYrAC0XfudjvioyUtM/NgE022xgHvMEIIgCPvc+i25OcLImnO46NhGnPv
+ C4RrU0Y/ekcrUH3Sq/7P98vDRz7d6NPesorFCeUqqswb/FweTO/q0Sfd9ISOAOWXIn50
+ wSXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783692771; x=1784297571;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=FzuR13hgSYW2ims78E2KXWubmp82cbkhGwVRO4NoZN8=;
- b=nop2PHtbDvP+MYxEL5DrvSsO3nXYSzY7x1U+tH3Mc15gG5kxetE5ZN7pdr07DpJSsx
- 8LaLXdoZPWRhde3SN8OSdNW/A/C1vsK60NfFxjgLciT8XjTff0pj3bhqNJim3d+CDG+B
- l9n1p/dmHQXLHV6kfIe5B/jdTy7N/g5Eg/yCssYAlqZ7Tn+QyuAtBwpAvi2IRGyvBy5R
- 690txl4tuyvDnSOpPMsfvN6aWn1JsgWKHpUk19GGxxDJtnBFyXZiTiVhtu0B4JsX/3Oi
- RmmQhsTF44zFdM1FQ86bjZV02xvLpZafwYVYW/4qP6TYiX1NwBf10uztn+awcfD0FpU2
- OYUg==
-X-Gm-Message-State: AOJu0YxZH6/eOD6BkcpB66u5WMaCIJ9tFFqcs5WfbUtSdC/5CAOa72ZT
- gaBsAcERSU6jOYAZGaUxO9aJ9K1RRg7l0HPIRMyb8gj9zYuP6r6MB2qAPI2bv5oHGtg=
-X-Gm-Gg: AfdE7cl6+lx6MbQ0rEuLyKl5LWEYCEWdw1iypAb/jYzjc2TsQSLQdH+r5XZy8y4XWUq
- LG2H5Sc3kiNvvFI6m8sSh50hkhnNeG3p7K1Bu3H4OCXJhcdSCR7GQXP+Vg/Qx3aj/WE99ALZM1H
- j5xAxhonzqf0FgoNCpiRXmwo2obwUdDYqMw9fcpINXYCuezsUjtx1Lo/WNEb/vy15kJmu3V0ycX
- 0V9sXcqHokewIJfJRIgJFG8onbrUX3jWKtVrsbtgK++OoQ03xNvrgz0J6lshri5VsEtPe3SNZMx
- hzccobPMpbMUpQOWYvwSkN/XsYSHaDpD3UPYlGEberpsAg9Lpqysx30Ul95er+I46LvmFPOJS8e
- UvJ4R3O59WPlQMGHpAQ+iiWIsOLbIENhLpgwVtgAUBnaM/teP2DOqUV3zW8XhYamisFjo8hnTeZ
- wVK7MTVj3FZCRw3ieX9YyqMkSMWxF22wzt/1GyBxk/Wl3HVBn45+kGxIcTpIZdrUeOhQkQjujnW
- EwLWp/2U/zI0tATCApvJ4Iof8Q7Rbs+byb+Amnkr45bK1GwKHVB6zF9Gz102i5Cey7MsdM=
-X-Received: by 2002:a05:600c:a49:b0:493:ee4d:5c5d with SMTP id
- 5b1f17b1804b1-493ee4d60aemr62666505e9.31.1783692771185; 
- Fri, 10 Jul 2026 07:12:51 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783692772; x=1784297572;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=lqPqVIDk7myjOHDdypRPHc0NzCS56g2I88ekVislEN0=;
+ b=Uw5KuD7WJuqPu2C+b6T+ppYJM6uWKxjtI0RkjZQmKkn+2wDCHaUiMXCqaJda72VtI9
+ oTtbTIsGEpA635Z6WtPM1hXzvgkwkmzmwYSz1RK9Fedu5eXVDrWiT4GfdubExFQ4ms5y
+ aRL3T0MhXIeNL35Ex3S90OkB9rDCPUaLcMg+Qj/OQ0AYxIYxy4sWBPqDA7gJjyM5FXjb
+ 8JO788ImhPrLxoDnyZxDDiXmYAVRq9Cuu/d7BDITFI9x6hKj/r3WvHJtRmQVqV+yUTYS
+ 7vwKn5LABNkTsyeaCFtvC79kdL2iYxvFFI4z+1bUQERN004l2gXz0Dde5oB9LX1yd06o
+ +TSw==
+X-Gm-Message-State: AOJu0Ywt9LLRt2FvqaYCZ5QePqvNszUGOPqlPi4qgNEKPaZl7c+wL5PP
+ is6wM6247YJpc5KmJQJ5ejTZ2IFCmsUg8Ac5kp/653uOUG3K3mfbUsTcROrI/SZWKIE=
+X-Gm-Gg: AfdE7cnwIzU5B4GCmh5Dn98GuwymJ9yBlZHCapCgngZ3RYC3iPYUyAJiQ+GjKUMDiTe
+ xCu4jT7hLncr9YiDAAa38pE6N92bEJVgPDPxtJwCewiL3f2NWbFzRORgDQRucbzxujWHs4P3hRX
+ EK5aAoZ9GR7GMoiqOHo8CNaDHSLvu5zNz3VKBy9B5c3F0tw2Io2Ie8MspDoh1yrJiD9lNbqtSDY
+ g8L+G6DrHbcGSzbr6VPzMVLxsLDXHOpNUXsm/h8/tR2HHp3vnrYr1zzQV+aVsWgZI0Yosve4ESO
+ AUdSdMuNGIZVt45UoMWol51WKBFaqZFFqb+/Ox4mec0xjDXUHibi173+zaJpqaHE88j1rz8NjOT
+ NoxnD9bC/AKKSVNhQ/vUogOJDEL9oi7NX5gFUSRA3Gj37gsu4V/GloOOCf7K4TbQDtwhsy5hsD5
+ Qw1BoPhnLMb/+FvwWw1ub39pTaJEfvqhvRGAvbREYbLQsLIXfvUyD/0V6M4HCsHO15nu8YWn+DQ
+ xaObe+b2aDjK3jzJO0ORfe6yuIyeoqsMhCmtCfTMo2806+/Kw8XB9gFOqNjl6YB+zZrrRQ=
+X-Received: by 2002:a05:600c:3496:b0:493:bc4a:c6b4 with SMTP id
+ 5b1f17b1804b1-493f7499191mr8858795e9.38.1783692772569; 
+ Fri, 10 Jul 2026 07:12:52 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493f2d88698sm64073205e9.1.2026.07.10.07.12.49
+ 5b1f17b1804b1-493f2d88698sm64073205e9.1.2026.07.10.07.12.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 07:12:50 -0700 (PDT)
+ Fri, 10 Jul 2026 07:12:52 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH 0/9] clk: mediatek: deduplicate clock gate drivers
-Date: Fri, 10 Jul 2026 16:12:51 +0200
-Message-Id: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
+Date: Fri, 10 Jul 2026 16:12:52 +0200
+Subject: [PATCH 1/9] clk: mediatek: introduce mtk_gate_clk_data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNywrCMBBFf6XM2oEkVC3+irjIY6xjNS0zaRFK/
- 91UF5fD2Zy7gpIwKVyaFYQWVh5zFXtoID587gk5VQdn3MmcrcHQ4rsMGF/7yOd5qhzjgL0vhEl
- 4IVE0wVnbHZ1PnYXamoTu/Pn9XG9/1zk8KZY9Dtv2BTINwyOJAAAA
-X-Change-ID: 20260710-b4-mtk-clk-cleanup-clock-gate-drivers-0b211852ad81
+Message-Id: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-1-a4b5c491d9bf@baylibre.com>
+References: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
+In-Reply-To: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -113,73 +112,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Several MediaTek SoCs expose multiple clock gate controller instances.
-In U-Boot, each instance currently requires its own U_BOOT_DRIVER,
-mtk_clk_tree, probe() function and compatible table, even though they
-all share the same implementation. This results in a significant
-amount of duplicated code, and the duplication grows every time a new
-clock gate controller is added (for example the ones needed for
-upcoming HDMI support on MT8188).
+Each instance currently requires its own U_BOOT_DRIVER, mtk_clk_tree,
+probe() function and struct udevice_id table, even though they all
+share the same implementation.
+
+For example, MT8188 defines five nearly identical clock gate drivers,
+resulting in a significant amount of duplicated code. As additional clock
+gate controllers are introduced, such as those required for HDMI support,
+this duplication will continue to grow.
 
 MT8189 already avoids this by using a single generic U_BOOT_DRIVER
 shared across all clock gate controller compatibles, with the
-SoC-specific gate tables provided through driver data.
+SoC-specific information provided through driver data.
 
-This series generalizes that approach. The first patch introduces
-struct mtk_gate_clk_data and the MTK_GATE_CLK_DATA() helper in
-clk-mtk.h, the second one converts MT8189 to it as the first user, and
-the remaining patches convert every SoC that declares more than one
-clock gate driver: MT8188, MT7622, MT7623, MT7629, MT7981, MT7988 and
-MT8512.
-
-Drivers are only merged when they share the same DM flags and bind()
-callback, so device lifecycle (pre-relocation binding/probing, reset
-controller binding) is preserved. Controllers that bind a reset
-controller keep a dedicated U_BOOT_DRIVER but still share the generic
-probe() function.
-
-SoCs with a single clock gate controller (MT7986, MT7987, MT8183,
-MT8195, MT8365, MT8516, MT8518) are left untouched since there is no
-duplication to remove there.
-
-All conversions are intended to be non-functional changes, with one
-exception called out in its commit message: on MT7629 the conversion
-fixes an off-by-one in the infracfg gate lookup, whose clock IDs start
-at 1 while the driver used a gate offset of 0.
-
-Build-tested using the following command:
-./tools/buildman/buildman -b b4/b4-mtk-clk-cleanup-clock-gate-drivers -c 10 -x mips mt7622 mt7623 mt7629 mt7981 mt7986 mt7987 mt7988 mt8183 mt8195 mt8365 mt8512 mt8516 mt8518
-
-Tested on genio-700: clk dump before and after is equivalent (other than
-the driver name)
+Generalize this approach by introducing struct mtk_gate_clk_data,
+allowing MediaTek clock gate drivers to share a common driver,
+probe() function and clock tree definition while keeping the
+SoC-specific data separate. This removes duplicated code and provides a
+reusable framework for existing and future MediaTek SoCs.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Julien Stephan (9):
-      clk: mediatek: introduce mtk_gate_clk_data
-      clk: mediatek: mt8189: convert to mtk_gate_clk_data
-      clk: mediatek: mt8188: convert to mtk_gate_clk_data
-      clk: mediatek: mt7622: convert to mtk_gate_clk_data
-      clk: mediatek: mt7623: convert to mtk_gate_clk_data
-      clk: mediatek: mt7629: convert to mtk_gate_clk_data
-      clk: mediatek: mt7981: convert to mtk_gate_clk_data
-      clk: mediatek: mt7988: convert to mtk_gate_clk_data
-      clk: mediatek: mt8512: convert to mtk_gate_clk_data
+ drivers/clk/mediatek/clk-mtk.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
- drivers/clk/mediatek/clk-mt7622.c | 113 +++++++++-----------------
- drivers/clk/mediatek/clk-mt7623.c |  67 +++++++---------
- drivers/clk/mediatek/clk-mt7629.c | 109 ++++++++++----------------
- drivers/clk/mediatek/clk-mt7981.c |  66 +++++++---------
- drivers/clk/mediatek/clk-mt7988.c |  74 +++++++-----------
- drivers/clk/mediatek/clk-mt8188.c | 161 ++++++++++----------------------------
- drivers/clk/mediatek/clk-mt8189.c |  26 ++----
- drivers/clk/mediatek/clk-mt8512.c |  52 ++++++------
- drivers/clk/mediatek/clk-mtk.h    |  11 +++
- 9 files changed, 252 insertions(+), 427 deletions(-)
----
-base-commit: b5fca5f601e5da4955a3ab815f614e1a1300ec2b
-change-id: 20260710-b4-mtk-clk-cleanup-clock-gate-drivers-0b211852ad81
+diff --git a/drivers/clk/mediatek/clk-mtk.h b/drivers/clk/mediatek/clk-mtk.h
+index e363a375093..545a493572c 100644
+--- a/drivers/clk/mediatek/clk-mtk.h
++++ b/drivers/clk/mediatek/clk-mtk.h
+@@ -230,6 +230,17 @@ struct mtk_gate {
+ 	u32 flags;
+ };
+ 
++struct mtk_gate_clk_data {
++	const struct mtk_gate *gates;
++	int num_gates;
++};
++
++#define MTK_GATE_CLK_DATA(name) \
++static const struct mtk_gate_clk_data name##_data = { \
++	.gates = name,			\
++	.num_gates = ARRAY_SIZE(name)	\
++}
++
+ #define GATE_FLAGS(_id, _parent, _regs, _shift, _flags) {	\
+ 		.id = _id,					\
+ 		.parent = _parent,				\
 
-Best regards,
---  
-Julien Stephan <jstephan@baylibre.com>
+-- 
+2.54.0
 
