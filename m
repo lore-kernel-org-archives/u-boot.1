@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50399C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 12:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45359C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 12:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B75178498C;
-	Fri, 10 Jul 2026 14:36:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04B0784A63;
+	Fri, 10 Jul 2026 14:36:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="U0sG8tVp";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="XHcY+wfQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8FB5846A4; Fri, 10 Jul 2026 14:36:36 +0200 (CEST)
+ id A08FA846A4; Fri, 10 Jul 2026 14:36:37 +0200 (CEST)
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCA5084A0B
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 14:36:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B1B984A60
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 14:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QTjnDgAZ7piIZ3jbw0R1zHIUqiqpRNuC8X2Ue8OkXhhpBBehEKEuHLwDTzAk0FXFe6Ac2AY11YoYQD5pwG0XmtZw028ILAf1LPAsDaBI3JNjDlKRFUAFfPpkaUdnfpmNDcOERqbyXgSvuCruAg6qwkMNs0E9uS9aOMLVGjUxX8sBySlPBJpjMXVRC+e0Cf/OBYyd9j2AyQkDVKUThF31NcDrOyEC2ZJT9WOvUoUAxinJno5ksIA/QNKw4onH3TX4WLCHssLSK2DzFcEu/xHHuodddjv4zFt0gKWtKfA+es6+hSyBbmcfF9ece23cUoZl5rM4NPOFpM+msVKr+E5zvw==
+ b=M+sclIfNSj1TFgS2tvUfKZ5ddO/k8Tt9MMqrLTEutRPjCvfXrnzQ+JTtgxuKnLQfKd2qO83bZ1qwlC/CkNfS+Qri91kyM2Dw37NrF5PPqR3RWkksTDkH1DGQKUPEKBArEo4dr8X0I6O0BegvFzwd5pyEQRDD86/Auhvo93ChrPd2uRmR+UlCOM++wi7C5j2jZpQX+37566U5AyZyYBAX74yKPaXAPwKb61JHXbfLGN3f3xorTHXw32eavM1kWIKaWfXts3w6Ltq13/3HoebWCignhKdBIykzgtVdENvAX8wItfiB99cEbZrC0HqoVdUrwc8U2JuZHn5K+KCgfNpRCw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gzMNaWchWUNOqIgBuNaY3ma3kAnm4hY3U1ovw2ta/oY=;
- b=cU0d1UFdIrr1OvOZxesJ8lkDlxrVVMmzN/ysP06fNZJJ2KaWP7MrMWns5dm9Tf6hXTLY7jy+QDpCGl5RyQK7wrkeBAyVRXsueGl1UBLr7Y414M/v09PKk29tJbmDohbxlg+KQ+bcTUDJCnaBCtbziUy0G+/a3Xc/MahhSubYqZwLWIcH4a/PkUoxC9t5IT9iT/blpdZolnWdhdEmhl+jy/BqBeSYWNaHCs8sb3POp90kZzWD2szTTg9V+80h1+jyd8Oibe+tJeZuDpUtOfKYbnfwxeX2RJydtlBlmb3xozux0UwNapRXVFX1dp2QnGfS77ageGZuJGqE5YjkSMd8Hw==
+ bh=HuQciiXAhmAxn9nVtNDqZu6shtxGYp4P/sDxmKIVRFU=;
+ b=Q0GoTvA5aV5ZqlFaBXlL7/MMTWZFnKvnCBsZu/adT+x0ByfxhUcRHQIF0w+t81RDO7OUFZhslybSoMPkgGF2JSzC/vSqffXu8V5+/It8NmhNNkVB3EXJH+2VjRnSqlzKxCg0qUY4c83lPJiHLvvhFQvaVCu/MPbsYNqZ4YvqnkMkLND3RCn0edhWr2xLgz2+c4dG3wncBaxiEqAJtjeLDpPiP/Dyj4z923PZwG5wuvc5HkQhjpHxVA6QIE8PG6zKBTc5v5PMdu2CWgP4wKRTqU/ne0Lt8WhPzwajO3++AWFMluKwrAsEARLhCiVwUlDomLq/H3O/CMLxnM8cIQTSog==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gzMNaWchWUNOqIgBuNaY3ma3kAnm4hY3U1ovw2ta/oY=;
- b=U0sG8tVpELSJUkk2TQBMCrFU0gEaOLJXdOecTT7fIs6R9yr+1iD1/XSOhCho860mHFpU17KlTuQCfTVkn5OYBtv2IYZDxY8vw9mRKEPfAzMrSkHeH9Yt57ScmXp+Qqxjj/2oCBICxGdWfkB3UuIdPDcNbcYvNDoJ/bOl+QMmAz4=
+ bh=HuQciiXAhmAxn9nVtNDqZu6shtxGYp4P/sDxmKIVRFU=;
+ b=XHcY+wfQbe/p6m+XtdcjAExDH5nyXHz05PPfngleufLTPXCA2sEBJMKX6Qwshimz3akR84EMZppbsltCGIE+07VbNQuGJLo7ASY7Uq2IJ2XjBmR6d9t60OKxvJTiJIwpHVxiy2e7kb5MWd15ybDjbOqBwk2+dMpU2K9/r0c0QFI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
@@ -57,70 +57,71 @@ To: u-boot@lists.denx.de
 Cc: Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 5/6] k3-binman.dtsi: add empty distinguished_name_template
-Date: Fri, 10 Jul 2026 14:36:17 +0200
-Message-ID: <20260710123618.2036728-6-ravi@prevas.dk>
+Subject: [PATCH 6/6] k3-binman.dtsi: insert keyfile and distinguished name
+ templates in all ti-secure(-rom) nodes
+Date: Fri, 10 Jul 2026 14:36:18 +0200
+Message-ID: <20260710123618.2036728-7-ravi@prevas.dk>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260710123618.2036728-1-ravi@prevas.dk>
 References: <20260710123618.2036728-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0006.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:1::16) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: CPAP307CA0006.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:3::14) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB4PR10MB6942:EE_
-X-MS-Office365-Filtering-Correlation-Id: 797f59b8-2027-46dc-7bcd-08dede7fde7c
+X-MS-Office365-Filtering-Correlation-Id: 0571cb55-e68c-47ea-6559-08dede7fdf30
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: /fvWr0UnMFK3Kyb8oFJnRhN+eSHOqLRXBgZuP5rv02JOJ2LCnKicbZJYwuYyE0oaWYiAGxPRgtHcxRJKsRb5vuFvIRStPKpd9PCh8Gc3XfVF5d6ycK9XOIIMM1gHBcE91joxTHxw+g0gRQSVjlvxv+sfDaxC8QJkFT9coLizHk5CLr5159A0jq+14RzYTInigSGtw2j0+W4zxZAuXVR8iyzpwhZzcs3s35xs+yPHw3vJU2R5XESFsD2L+80JcV6aY/tSkrp/tIJqec8NWVSw4RmOEE1gxtgLk1dz3B5bSyS1XtxaRNjb6cdyEmqfQGj77Fpl4RVS4ApLgIukRii7LTTR5nqmhBhwI+/yv2uwh1bv9E0VwVbh+il/UWXIClnwp09wPSRsew9NtIUudlu+Lo5Ib+T41zfUXQOsVO2D4x+X3v80eBjLwJFZogKi3e/5hTJuLSmkXbdkc22fdzTqX30vK3n1iMcYtxRNWc88mxr74X+8ZuevwEgCIqqZSFJrOF6rPaBd1q+1dxZ88TvjO1N5jpjP5rJ/TCDwPmv2/wnrq/EWJldjpdWU9D9SMK6T6GoFh2oVXI16oUk6j0UJsoXxAjaKWNPez/ln4pqr8I83S5upwruclDsbCfhUt1c48QosUUGFpLxP/A3ZcGJ1vZJ4j2sLPnWtrNYezQhHos4=
+ ARA:13230040|366016|23010399003|376014|1800799024|56012099006|11063799006|3023799007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: PuN1f+tSgbt8CWAGQGhcXYVPT70DAVDVRCD30yJ47h5oVbApulOkqayEOgSZHC4Fvq6Js9AS3HMMdAlvd7cCJjusIk8jM2gGAAnYy59KJ81o6vpEWCXS9f6ijM5oPm8uFGCcCUA8Cb3al9Hwg2gRJzUWcP23ANLhzzSbae2NOoNEIWmZlmIe3sT7VhiW8KD20bIr1lLxMudFr7WxXznHA6YSD6psG9BFWztz0tX81JOxzLT7LlukY836DkTAs+PKsW2ke2K9VT7k9Plnbllk5vT0FHv1H0GNXn4A/OOuEMwD9NtUkCLmI5gJQ8YiPT8ijbcecVG0yhykcuuir6KlsIXZHUrt8v7uk6wBghKxLbV9YK3oX2FTcsGzV4l6X7dud4cg5ydJpNdM7yOwnbD4FsV3bJyhu/O6trjPw/FkxXWJ7K8owETnYPy7Vb8vgKjh2mK3C4MiRjJntn2hsynZGfzLqXgzGze4D+anINGC3Vzg2d70KpDauDWxMRy+HtDcuQglrNinsYtxPE3EciUJSEXt/S7CnrK8Vs/TQoQOgcgFtmSi62D4KZZI8V2PoF3dD65XTuruPO7L+YuPWBD4HpRJOu1DPMkCYOj8rKhUkF5nQYYmNaArn+Ejl2lgri0fuQQfrujsoql43iZau/BNna2sVePMI6WRMupBfYdoZ/k=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(56012099006)(11063799006)(3023799007)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dQnpxv85+9GxJuU1gpIf8z0SBAAm1f/beptfrKBbvsdvHl1b1Y4GxH/RxWCs?=
- =?us-ascii?Q?Wuh28mLECWp1Fq+TXKcldTRmO4E5y+v8s+BSobanbCG3c7jRo66azAxhsusQ?=
- =?us-ascii?Q?flehTM/qvNLDFNe+emzaSTevzH5FpqX8E1doLKi3WzlILrjqZRmsB7DddwcN?=
- =?us-ascii?Q?uBntJ2/gpfizLXeWa70l4LdE0TZxlttOStwZOd3pS390cKgtChXtkxyGQMJS?=
- =?us-ascii?Q?gNvYsTIojojNkxar+sglbx2dtZOBPJCyzMaBBjM5VB8LXHlnhrPoWRRVRlly?=
- =?us-ascii?Q?joj99FovlZM/6cvNGYJTIhu0VVvqt51H9EMc25FNM/cZnWN6XT3QsqvpnBjH?=
- =?us-ascii?Q?BwRbjD0FpHLLnTE4bAV+Lv2l8DeRJBdXnu0SrVTpyzq1/Bl02GyUm3STcYht?=
- =?us-ascii?Q?Hu5A76QcGWFDjxTlZmmuKOVFE34E+2xkgZ5tBMIucOMDT1ZkTRFAzTvaAQ0m?=
- =?us-ascii?Q?bN234Doy8GIOEUfz/qPBvsbqfHaK3DLn2glgtQl64jk0uebBynmH0baO3FR3?=
- =?us-ascii?Q?4FbVIaiZFSVkoVjKZZNkjlckmh5o9Tt6sYxt8WlO0f0wjAYUQGfG7VALSnbu?=
- =?us-ascii?Q?SjtwZwb8grpE5c3TZXoqjTkuoT+eeRC0xe2kAUDGCT31iwkqDuTUOIH1TAA4?=
- =?us-ascii?Q?tigMD5qXlXZK5Fwa5+7HQqnTEYRQ9hSGhjsN/OJBkJiQ9OEp21oYMlmus2dO?=
- =?us-ascii?Q?pwFW8xa7Kbfs1lybPIRAi6mTjnY/R7inkFsssU8M96ZdESMXPBPxvlcTOs0+?=
- =?us-ascii?Q?Yke2AICkwy/vQKE3hIXpZhDsRNSCJabCM4nMUxVLxRQ8aFTcljfpRUCLu7bw?=
- =?us-ascii?Q?W1Gl2z7gNO2w5lWHcy6jZeZefOD93CEVg6D5bD/m1V9kOAhNTziSz3Qfw2hu?=
- =?us-ascii?Q?C9btnqlL+m4Z+seutTpKUwENadNMS4cDvbqp2EedVOGCjriMhPt1bsMFg+Wl?=
- =?us-ascii?Q?JkwjS4A4nlMiHmEAA/CVBljVRWO/em1J92BgraUjIvkdFEyNDiX3NTMiEqS9?=
- =?us-ascii?Q?i6i5IXfa6miTO9s1x3jnBuIrwyMYHlR0qmXpE2Phn9jNhrvTJQT04oIJmh3s?=
- =?us-ascii?Q?UZzdLhpmiEL14zIAN59ja7TvucKco206F8H4z2xhh/HfSQsZupstdhcvRo+c?=
- =?us-ascii?Q?bAtRjAUXv1+Q1Edr/sLJQNXALg/pJe+EiayQyOcjVmPcsSo4pyGLNn5Wm3Cp?=
- =?us-ascii?Q?Si7Om6CN2MBKOyBhq3awEYl9LpfArJhLkgupST882z8GZAFSGX2TDr6x+Mq3?=
- =?us-ascii?Q?iPGzXvhXkCA2VcJXQi/ClUDix9/seVOisxKw/j5LluzXdBuzhn92j8qCqMfo?=
- =?us-ascii?Q?msLAn7zkI7Z6diQtTZrPKHvZmkU3sU57wEvvywlVUujROFYx4lj0YNqcl9GL?=
- =?us-ascii?Q?F7Ff/1InWHTwAzwuMwLcENbvT/RXlTAeztNv9nAU6TF/YbFEkKPkpy5cSJTR?=
- =?us-ascii?Q?z9pM0bL4KujyhsIQDwssRAnjcHosSrjFP+8Rjz12Nb23PJfw3MLm9g/Vxljh?=
- =?us-ascii?Q?MvZ6Xu1WYG15ocXA6PbhnGUqVdZKk6Ygx1FbvG52or3VvC7srsJBkREU1nLp?=
- =?us-ascii?Q?2zctPb+ojzebLacKBU7eQlM2Jh4lp38PWCd1jO+Id9z/SP/0TLArDKtCdYiN?=
- =?us-ascii?Q?xuWNjqkskzUnvJvzUsGHqmPcORg4tO5mvmN39JafIUMz4MgDYuu8qDdTKzld?=
- =?us-ascii?Q?6+heBxUbNFtBy1MN5vpIDfdoxpF87n3iyb8jYOLpboi2RCmbREVN/+pHDU2D?=
- =?us-ascii?Q?bQfhtsQOie+Ihyi+3oar2yy+llr06Fw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zPGSU6N5xgcJ+mm/AdEUl5YG5BBPv8NcninyYq03R1UT/qRjn9KBFEZk2hCr?=
+ =?us-ascii?Q?4KSd3VmRVTmvFuBkKBbRms7Dl9etGufIj0I2pzHDZ3DCfhf+hnb9T3zhGqN6?=
+ =?us-ascii?Q?a6YCQK8yIFz+U2XpMTpZ+gBk68lKahuzrFCHb3I775H8MXbqqJIcj1UiJgJ0?=
+ =?us-ascii?Q?BfDxQeLDVY4BfxiabhIEjIIyxTkFNXkqBG5Z88wallUdUslGoy5fU2dj2lRw?=
+ =?us-ascii?Q?9XjyfMpAKF/qH8ieOJzP8NAVX7GE3gyywv/AXuLlzcdjWQf5rhkH+12DnHKq?=
+ =?us-ascii?Q?Ft2bjw6YIBUtP3iQVgiA57JXRGEF1Y7dHuSC/GxbbXLl9foG53YUUQWEGPio?=
+ =?us-ascii?Q?iD/6erMDAnLkBUkRgKbP3PcjOuTA03l6j/7e6VerRGmIyV4XGEVlErW/0GKR?=
+ =?us-ascii?Q?h3i8sOIE9onQa9HPTG5Ea4mcH3ma9g0R4knOrkXbcAF/ZPXakQuefaR0kHV9?=
+ =?us-ascii?Q?MOB+tSa5dHiFYu6OKbxzFWYvYLDIkO6K2P91AkVf+fcCboJvcQWl6HARiW7T?=
+ =?us-ascii?Q?ctxZLh+XIjyVWoeGNeFSYZhpMgmAihDjUI43zGdd3q4IEl36Swo9Y3IJZng6?=
+ =?us-ascii?Q?erSodLl8/8ydQ0zf8ezBGJK6vln+blbyiaaz1AvzVj2AgI2UCPzcCBbCf60o?=
+ =?us-ascii?Q?Qax4lZJp/Psx/rHHb5NwsrI5T7AX3bhPX8UrtSErnbA0a0dv2JQpyKTCGlUL?=
+ =?us-ascii?Q?F5TwVgq5RzULemsssDoG8eanNs8XzDTu7TEfw6Ec9YhLsBiTgRH83SnzMs7f?=
+ =?us-ascii?Q?7ms4ouqwJWBZhCQfFWbEoZiW+IOrf+Fh8Pg1y39+01mKXxDkj5/6BnXVLunp?=
+ =?us-ascii?Q?95sQObdnwdMHQpSkpRq7L7Gap7DAy9YOErZOq8wS8Jf1mQPmhBIqAUI6IqOP?=
+ =?us-ascii?Q?sFRN6+DrF4FKWWfak4PjRS8ujpAlagwulhQNsG19MXfLXc2u8rqKmsy5xC5C?=
+ =?us-ascii?Q?3YyTWXIEzM7B1vw2s4CW4/7PbLFFeVByGGhVJlBs3Sr1QdPNKKYhphACapfE?=
+ =?us-ascii?Q?D6e42vdJv10TbNMHyOPQysbImQxpG2TJ+6MrOQvRW+fk1K3Mti5yQxV43v4A?=
+ =?us-ascii?Q?JnCFsQzPoPcpSTzzeVu7TALVkzoDsamYYA/wbgiWiYy/mj2eH+BceuTFv9sc?=
+ =?us-ascii?Q?+g+QBPCtoW/mSRk351f4qLm950BWFb+ZYNLe0B69JrIhcVQQRSfXZJZWg+3m?=
+ =?us-ascii?Q?oSeXFDtwDRFY7Cd7LGTwWaLKj8q7HyZroSk3qQBgu+nI5kbdHU5VEA+ExXC7?=
+ =?us-ascii?Q?7Q29UfvX2snDc9nGo5INv/CzkrUgWziuBkOV3PBMVlcS/1L32ZS+T9GTqbQg?=
+ =?us-ascii?Q?It/6QQwXtVNCmMng0Nrn55fqDwTDW/ECsTpnoSJ7QLGFkWYC0CsF8YvUydzM?=
+ =?us-ascii?Q?QP+NQrJ4iIWG/emFarL35PaPsQH1IaXVrVS3iYd0y7RkHzY9guxVZRSn8C12?=
+ =?us-ascii?Q?7tJDQgMvCrCoThPTuzBo9N9DfKQK/YTeMb6hCT+vsPOtHec7VW7FOzJd8ysA?=
+ =?us-ascii?Q?tlVvqam+xPCVRzZ8dAt4YiL9oXuGrkXOAGcS9VNwy/NYwjpJ4VCmC399MG+B?=
+ =?us-ascii?Q?47BpNBTIUBfa0eDy6740DRxEMRjZJJxbrMIMJ4sMOkU6pm3p1x33lVwymwBN?=
+ =?us-ascii?Q?RaD3npeaTku+Rz0dYygqLg1fIAm42jFo2YK1nbQjU3SI3xzoQU9J1B03w15R?=
+ =?us-ascii?Q?rtTCaHuBVUSzG9QhA0iIV8MvyDdEiH0ZaCsYSRO17fY6KHsmyHFobSBgcPNv?=
+ =?us-ascii?Q?ptgJnfVQWU9gGF59q82+mHlSvwKJeoc=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 797f59b8-2027-46dc-7bcd-08dede7fde7c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0571cb55-e68c-47ea-6559-08dede7fdf30
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 12:36:30.9712 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 12:36:32.1320 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: utEqSAQnYYuNRUoYOGNVbnSYaGus7awxwyD/fyOaH6/aNrMwQQRVoatBSIEkoV1qaQ6TuhksrxOgTZxSr/uiUFEvtPzIPClpLIs3h9J3SVk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: GJmntMgYrdxvARmVqOEsK3hnxxHLul1m93jif8TtDk5dHClDDRMo9kcYeaVCHzovFri/FXf1TnARrfHKzxcCcIuj7PJrfyaDDkz32t2/zoA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB6942
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,54 +139,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the previous commit, "binman: x509_cert: allow and parse
-distinguished-name subnode", it is possible for downstream boards to
-put more appropriate values in the req_distinguished_name section in
-the certificate being generated than the hard-coded TI
-values. However, that requires adding a distinguished-name section to
-each and every ti-secure or ti-secure-rom binman node.
-
-In order to avoid lots of repetition and make it easier to just add
-the information in one place, add an empty template-dist-name template
-which we can inject in every such binman node. That makes no
-difference for existing boards, but makes it possible for downstream
-boards to simply do
-
-    &distinguished_name_template {
-        distinguished-name {
-            C = "DK";
-            ...
-        };
-    };
-
-in their -u-boot.dtsi.
+This should not make any functional difference, and downstream boards
+that already override the keyfile property via an explicit .dtsi
+fragment for each node will continue to have precedence over the value
+coming from the template. But this makes it much more ergonomic to
+have the keyfile and distinguished-name have consistent values
+throughout, because one only has to override the values in the
+templates and not each and every individual node.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- arch/arm/dts/k3-binman.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/dts/k3-binman.dtsi | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 69214bb32fb..2c9e5b619b7 100644
+index 2c9e5b619b7..aca243f72f2 100644
 --- a/arch/arm/dts/k3-binman.dtsi
 +++ b/arch/arm/dts/k3-binman.dtsi
-@@ -29,6 +29,16 @@
- 	keyfile_template: template-keyfile {
- 		keyfile = "custMpk.pem";
- 	};
-+
-+	distinguished_name_template: template-dist-name {
-+		/*
-+		 * Empty, but allows downstreams to inject a
-+		 * distinguished-name subnode with appropriate
-+		 * contents from their -u-boot.dtsi, which will
-+		 * propagate to all ti-secure(-rom) nodes including
-+		 * this template.
-+		 */
-+	};
- };
+@@ -150,8 +150,8 @@
+ 					arch = "arm";
+ 					compression = "none";
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&board_cfg>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					board_cfg: board-cfg {
+ 						filename = "board-cfg.bin";
+@@ -165,8 +165,8 @@
+ 					arch = "arm";
+ 					compression = "none";
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&pm_cfg>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					pm_cfg: pm-cfg {
+ 						filename = "pm-cfg.bin";
+@@ -179,8 +179,8 @@
+ 					arch = "arm";
+ 					compression = "none";
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&rm_cfg>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					rm_cfg: rm-cfg {
+ 						filename = "rm-cfg.bin";
+@@ -193,8 +193,8 @@
+ 					arch = "arm";
+ 					compression = "none";
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&sec_cfg>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					sec_cfg: sec-cfg {
+ 						filename = "sec-cfg.bin";
+@@ -287,8 +287,8 @@
+ 					load = <CONFIG_K3_ATF_LOAD_ADDR>;
+ 					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&atf>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					atf: atf-bl31 {
+ 					};
+@@ -303,8 +303,8 @@
+ 					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&tee>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					tee: tee-os {
+ 						optional;
+@@ -330,8 +330,8 @@
+ 					load = <CONFIG_SPL_TEXT_BASE>;
+ 					entry = <CONFIG_SPL_TEXT_BASE>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&u_boot_spl_nodtb>;
+-						keyfile = "custMpk.pem";
  
- #ifndef CONFIG_ARM64
+ 					};
+ 					u_boot_spl_nodtb: blob-ext {
+@@ -419,8 +419,8 @@
+ 					compression = "none";
+ 					load = <CONFIG_TEXT_BASE>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&u_boot_nodtb>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					u_boot_nodtb: u-boot-nodtb {
+ 					};
+@@ -521,8 +521,8 @@
+ 					load = <CONFIG_K3_ATF_LOAD_ADDR>;
+ 					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&atf_falcon>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					atf_falcon: atf-bl31 {
+ 					};
+@@ -536,8 +536,8 @@
+ 					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					ti-secure {
++						insert-template = <&keyfile_template>, <&distinguished_name_template>;
+ 						content = <&tee_falcon>;
+-						keyfile = "custMpk.pem";
+ 					};
+ 					tee_falcon: tee-os {
+ 						optional;
 -- 
 2.55.0
 
