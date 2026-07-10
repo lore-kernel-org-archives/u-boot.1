@@ -4,139 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F53C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 09:28:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2A38C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 09:46:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E55D184119;
-	Fri, 10 Jul 2026 11:28:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 0119D849D2;
+	Fri, 10 Jul 2026 11:46:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="akIr1qzK";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Uooc5OOf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECB26843B6; Fri, 10 Jul 2026 11:28:38 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 58DF18498B; Fri, 10 Jul 2026 11:46:36 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 693688407E
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:28:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BE098496E
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:46:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Gq5bM2kwcIMDg6hYn869FO312KUSUa/1MI15vgSPMP4G5ubHdAtAlWMkf1p5GOLkVrObJ8oZnJwNOcQbBvLozOPkVdPx2FkF1dMVRrehe/jYEiwfyyJX5oS5s3IaaDkT8pYTH9CUAl8qum+kiNV88awDrpAOWwCFZwLWxk1cPfaJhi3xNbPsJiKaxZnGbjGLnuXGtfBN9FCbpIOUeOUP7s6h+rvFUJUBEGLEXwCloUm39WTc3YuIlhtCaveFRpyDxal5HyOVZfrh9q8cH2nTAPgBkq2d7jAuWfsysZ5RwVqfY/dlQnwS0AGW+5bKZlGIsq8jZWGBjL+P4h/awm3PIg==
+ b=uHTDyZy0tXbkIUQQKhNM/qQY3jRSLXNKQ0QeTDvAQLJotyA8P8ul3e+dftRXDp99UOXG7Vzu07UuhszLkPIvveqLZywLPue8uJFixVBo/bHbuUuQ9Nvat8qsEewFX2t+sXoASMhkHr0rQBgv7/+/iNNSVOISCqEy0bhJo08kAu75uKHvNva0b2FdByCGbmsulGg9R7KTowCNFLNteYlzlaEDOUQvLJSxdPBriVpD6v89OR96ZAmIweA2ZESEN7fpuNaf6eRL9RNPQklK6SBdjpJ5ApcnvfWU9RTGUYn2fccr3xsErrkBKEMh5nZ+UulEHdJcaQEpKLXCyjiPrxEbtA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n47Vuaie5As94VqdhuL93U6RLYQGyJs4KGddnPTxKBE=;
- b=u9yd3Mb4mAMyL9DkAQknqHh3x79q2LNGA9mD4QYMska+hXhAjv+BK9kZJczAtAgJ2IvVFgcBh9XFTVRsF/GD6QqS7w362F7drAIGFJBLIecpSDbPZsoBf6ohbbYSmTAVDmTOktFI8tj2PI/L8vnVkHbfDQ57j/WDQPJBg0PpBtlwF9zAkOTR3KBtzyuDAohzodRRntNlcb3J3v/a6l/pL4Le42WoWMzTCGGZu96HEyd+yyT5zgY2y7JqWeuRApB5fAauvX6QVIJ6r8VHxTJeJpa7RHD2BRSgUyp1A5PsTV140bQDyf85RjfNP1K5BI20KU7mVWJqZDrEN+QFCGrHVA==
+ bh=1L1TkH5CYmrCcJDDUkFQrIZJ+FO9xD+2JviKqm19L5U=;
+ b=phdBbmwsriNdx6RX0X4zjqa6lFs0e7lyFKilUbKzR8ydQl5kU/bRrrzAviLioucgDEi6fYSijJfqJdZcf0FLYJqN+JeA+veGN48H8jnmWpg0NOej+OmE/zEMf3T1qvzYXz19lAcuxUrLIjTD4o+FIgQaLC4qjXYwYNmNHeLPVHsXosaMXwPUvu8xrZNz9ZNbppzMAGh11mkb/6f2tNji+/x9tQM/8JNb13yMf/VBhNNmmrsxUocAqXfbPubbD977KbYJSdSlnaKxxTu2X2nc0dqR2Gxrst85RtaVFC8rpZZ8s1AySu2zUzANdodIuYGSY7lzg6Dnmu3xLpZLnW9tUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n47Vuaie5As94VqdhuL93U6RLYQGyJs4KGddnPTxKBE=;
- b=akIr1qzKypvpxwodQN1uI66Zu4efmwiGKxgb2nZ6jZDdQzGVqwn9o8DQkhPK1qAVTdJ1pr+z178jC6tCM2BpaaATXHRL8dDn+Aa0ApzbodP/6M7rr24BG903tn4DdLV4iE+pdy2+GOFIEzSlAV7+03owJ7arGHK9Bue8mhBo1LENLigul/pcIumxr5uR48HHiGfzQSBHI9LQ20QwwlHqK0oa8qeJ4gYgF4x9K+7GmRTeLR6ikyKOcM7S6Q/I0nbOoboam6ChfC74nsuMMchDNPYCLEvuzldCVRxyd53TyPHLuLqUe0QgExDKbFZjDVQhHdsfQ0LOA4hitx/mkCzvHg==
+ bh=1L1TkH5CYmrCcJDDUkFQrIZJ+FO9xD+2JviKqm19L5U=;
+ b=Uooc5OOfuatK5uZpO752GTUNp+scwe1aYcuaA/cRx/4r7sgmxTq1Q7LwhHk7AqOpnAaBYfNpLcb3Lwdj2ldYp7Ax/VTk3aepOnwMIA30GfaA58U7l4XUa+rXxMTKMc+GB5v1hU9GJsY+oHmAbrZ4I4R8KoCdC6gMPg4qcWUk9ks=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB12214.eurprd04.prod.outlook.com
- (2603:10a6:150:336::18) by AS5PR04MB9855.eurprd04.prod.outlook.com
- (2603:10a6:20b:652::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Fri, 10 Jul
- 2026 09:28:33 +0000
-Received: from GV2PR04MB12214.eurprd04.prod.outlook.com
- ([fe80::52c:37d:f2c0:797d]) by GV2PR04MB12214.eurprd04.prod.outlook.com
- ([fe80::52c:37d:f2c0:797d%6]) with mapi id 15.21.0181.014; Fri, 10 Jul 2026
- 09:28:33 +0000
-Message-ID: <adfa3625-6870-4bae-919d-f7c9ff6e44fb@oss.nxp.com>
-Date: Fri, 10 Jul 2026 17:28:09 +0800
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB7590.eurprd04.prod.outlook.com (2603:10a6:20b:23d::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Fri, 10 Jul
+ 2026 09:46:28 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.016; Fri, 10 Jul 2026
+ 09:46:27 +0000
+Message-ID: <a4a0d7e5-f117-456c-a25f-2f05373c09da@cherry.de>
+Date: Fri, 10 Jul 2026 11:46:26 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] usb: ci_udc: verify all dtds are inactive before
- completing request
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Ye Li <ye.li@nxp.com>,
- lukma@denx.de, u-boot@lists.denx.de
-Cc: festevam@gmail.com, peng.fan@nxp.com, uboot-imx@nxp.com,
- xu.yang_2@nxp.com, jason.he_1@nxp.com
-References: <20260522075512.1291485-1-ye.li@nxp.com>
- <20260522075512.1291485-3-ye.li@nxp.com> <87fr2mhlxu.fsf@kernel.org>
+Subject: Re: [PATCH] rockchip: Add support for Radxa E52C
+To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ trini@konsulko.com, jonas@kwiboo.se, heiko@sntech.de,
+ christopher.obbard@linaro.org, cnsztl@gmail.com, xuhui.lin@rock-chips.com
+References: <20260110011505.36915-1-naoki@radxa.com>
 Content-Language: en-US
-From: Ye Li <ye.li@oss.nxp.com>
-In-Reply-To: <87fr2mhlxu.fsf@kernel.org>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260110011505.36915-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TP0P295CA0027.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:910:5::14) To GV2PR04MB12214.eurprd04.prod.outlook.com
- (2603:10a6:150:336::18)
+X-ClientProxiedBy: WA2PEPF000008AB.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::645) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB12214:EE_|AS5PR04MB9855:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4992c61e-823e-4fc3-26e3-08dede659c89
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB7590:EE_
+X-MS-Office365-Filtering-Correlation-Id: 86e407f4-a6c6-481c-60fc-08dede681cf7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|366016|376014|19092799006|42112799006|4143699003|18002099003|22082099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: Mjk/Pgpq09jcgS2D4BTQgnb4sk39OLXiMNV4hy9zBLahFfVVG0xyHrvAeB+SDhBaCHkeir80Tg30kDaaQ+heYmWfSBjeU8hbFo3fxltefFBLXxx0TNSD/d+9dlAocz2BKN5RPp4lx/9kAGDEDtnNOym4aIoznWbvKxmdOvbgxvPXFdT0logdUZfeHix4diZzQA6kSqG1BJBRXOD7lm0l00KcxUdLzRHTzl85URBEWapmf1G2sBbyDJICiR1WGjKwOWWooig+x+zvdEq+5ii1/hbeVA56x93qSb6zmZOS05Rn1FrH9ZnQap2/cmAjM5F024Tta5e1lvYjna3jkIkzkgW4agVKPoLd8lFHLViYofLRo3PHHdCBkqvgbsegomSFP+7f1XMbbbIJW/VQ2J9JxaFbwYDuZLIAQax1H7Kzy9BWPIfAFzVM8ssVfT3wfAVhrfQH5YziXo+4jYhCJO+JVUDJFwbCSTtA+W/kCKjLMNK8xVKiZuXIgoxtc2VPvy0XRRpH5Vut+qK8/jM9DDin8kw6X2p0TYrP1ipwdGlH6D/c9S2tAnAqYC+RJBtkowYgXGt+S/UZZADCbXwPCATvzIPkqx7Rkj9NrsM/TArpsu70wvROk4YF4tvjbfcdlVvacVT9WmYHRoe70TKG3T3aFUtPfJI9UlYTc5TJ+ty2pMs=
+ ARA:13230040|23010399003|366016|7416014|376014|1800799024|11063799006|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 5XZUG5u1WTM29HHGs9GuC9K0F7KARd50qKmUFetTEjWGGSNiu+76pwNNSuutXwWrh3/tDMLMPajxI4OknhP/At+n+uvzOzndE4QKKEhl6kvTlPV6sDFgs3vzxpzlbGuUA/n/9qcFl9Ds0d8UThfOn6NJFAzcUvrB59CozQPx3GY95M6tkcEhZTt2KVFxcO8oHxim6tgoUPiUlhSM7F8P6Z5QWpreVmj+UBtH/9eNsw4FFNzZinocvM1tm4Cm4I7n76arSEx+pmo6MDKf6gc7aGgkwa7hTtXMb6ET1aEWSHnLeQdsEa6FifXT6xu3bvpw+qJy/3LTIN6T7GEcwl6oheC2aYiGmFPH78PuZv7OZETqD6XlP6DCl4Frg7QPtt275YwiKWSEBJfLkxNDqbRnfQQl3rfWtynjrWJkeJq75DFhxuBKaTLDGbTJqtkon5y9B4N9JOA8VMf0whD4CSKx4OE9plgrlODVq56sJO51UW0Ik8zg9fMfda8mFPeFjbdaSzTz17sD6TiEZP8qzrGuSNUx2rK9PKc6UVGb/PyYud+t1dQEIu3saSm6K6jyqFu6kyrRqKexxZhPxozci0YF1mf+rXWkD3tp/1nHpIFFuj9xPYDMMHjJkFp2wohL69ig
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR04MB12214.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(19092799006)(42112799006)(4143699003)(18002099003)(22082099003)(56012099006)(11063799006);
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(7416014)(376014)(1800799024)(11063799006)(22082099003)(18002099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YXRmWko2QnlBRDR3bjUrSVhPNHFsKzgxdkxoUVBSbUZ5YnUxNURBMVM5Y2Rw?=
- =?utf-8?B?TmRwaXV6U1RhZDNaMndaR0MzaWFzMldYUDFTZkl5U0xLTjgzU0xkaFoxQkI1?=
- =?utf-8?B?TGVrUjJjRCtiaTlWNmhnV216aTltcmJRN3dpUWtQdUhjQkVQbzZSL056V0dS?=
- =?utf-8?B?K1JOa1FTOTlBcXhSSUdkdlhQWFR2a0xLVy9hYitCdm03Z3JkZHdQTW91UW5P?=
- =?utf-8?B?TlJxbktoUEIxbXJmOU1zUSt3c2tabjF3dWxQWXA3SzJRVThZOHpYTEFuVVc1?=
- =?utf-8?B?NWNJWEdudnZUdCtSLzVTd3I5SnNkb01FbFh5clhaSzZBR3lVdTJDdkxaZG95?=
- =?utf-8?B?cFdmMWJ1SmtJeW9rWjlUd2g0MEs0ejdJRGFVU2s3Y2tITDBDeUFoMHlKUm1j?=
- =?utf-8?B?MjFWa29NdzFpTDdXY1lJRVBqelEwYjhhb0txSVpOZ2JvZ2pYQ3pqaVRRRllG?=
- =?utf-8?B?T1lleGc3Q0JPUnl1RVlMSW41WEVFS0dydzlJbmtQMy9wWGlLc2lnbVRuUjYy?=
- =?utf-8?B?RXJ4ZzRoWlZuQWlZN2drZWhLbXBUajFrSm9QNHB4RmpnYWxqaURMZmZvbXBz?=
- =?utf-8?B?cGZqakNWR3VSWWMwUEZ1b3BUclBZRTZZaDRRKzR1VHAyd3lRb3M2Nk1tcmJ3?=
- =?utf-8?B?Qjg2SE5NL1F4c3lJVHJwako2bmdobjNyU20vWnpCczFLRWZvUThJUDliSmd6?=
- =?utf-8?B?MXlEcWRmUlN6MlZCc0Rsc2IrV0oreHRLTStXczZPdUNxeHpDN0NUL2ovUUlm?=
- =?utf-8?B?a1JnOXB1U2lnUkRtR01zZjJ3UERzYVlrSUZjQUNpL2cxcmt2QzNPYnFsb1J0?=
- =?utf-8?B?TzFqZFQvaTlFR3FYQTRFWVdPYURpcE9xM0h5enJ0U3RXSVpiMEdlM3BDSm9q?=
- =?utf-8?B?SWdhcmhFRVJPeWpnaWR0Y2ZEQTAyN05ZNnNMM1U4UUpEbXgvOE9BM3RMMTUz?=
- =?utf-8?B?NHhDNGwrZDJEdjh3ZitGdVFJYjFYUVhFcXNwQ2JlMm51ME5SUDI1SXdMRE5k?=
- =?utf-8?B?UExERlBpZkpSN2xQYUQ5MEVrbzVoVytzb0NqN202QmhwQjlMbUw0VFFoZDkw?=
- =?utf-8?B?eXZJUVdTVW9yQ25mUEE2Z052T21hUGhvMmhSMk5mQ0p4VUo4ZTBSWTJWdDdC?=
- =?utf-8?B?N1A2VmFLU043NHQwVWZWZlZQQ2p6anBUQ2x0YkJIVGYxbzVlK3NsTTYrMTNS?=
- =?utf-8?B?MkN5eGdmMWMyU1ZOMXo1NE10U0EzUnk2NEZLQS9lYWpqckdJSzNNOXc4d1BL?=
- =?utf-8?B?dXRDc0lrR2ZrYU5yK3dJZ052Vm1VaWpPQ0RRLzlzek1ocFRhN2l1aXF4bEdW?=
- =?utf-8?B?V2E4NjhMMVZseUlRTzY0dlZpOHdQNVFTWGRQcFlSVjRkeHpzYTM2a0NFS3JH?=
- =?utf-8?B?cDRIbzJyeE1KWEprRjhWQjg1eUtKQWZFSGhRdWplaTE5eXR2NXZPbG9RVkdT?=
- =?utf-8?B?UEZHL3ZUOWNUa0lTbm8yMmdpRVBCcE1pR1h4YURCR1Iwb0ZjSEtUc0k3c01V?=
- =?utf-8?B?dUJKRHhWaGhFVmljaU5zT0JybnJQc2I4UFJyMEEweWlYTnhDclg1cFdTdVhS?=
- =?utf-8?B?MzR3V09heDNXd25aTGtxT3gvQlgxMkhQWEdVUnpGU0dUek41SU55aGdrbE43?=
- =?utf-8?B?alNEK0ZXYXhweHpUeUFCelVkWHJQYTVZM2JqQ1BuNlFSSytVeGR4MVUrcjlN?=
- =?utf-8?B?UmxBdzJ2OVVPZmdNNlpvVmJUUFhQclNlOFU1VXRaN1lHaVZiemFRbm40aTVu?=
- =?utf-8?B?TlZMTk9HSytOOERxQkkzNlF1aVE3dWI0NXUybkh2SHFpMlhHbm03MTJpWjJ4?=
- =?utf-8?B?TzBCNWF5U1daSTc3YmJSRjBrTHd1OVhPM3U0dFhWTjU5Y2cvS25uMWhZbHFN?=
- =?utf-8?B?WXhoOG4vNlBkSk12b1RoK21rMmRlK2F6VGFUOStvaEF3L1R5ZU5ab3lmYWpZ?=
- =?utf-8?B?TEw2eDZHM2kvbXB5bnJKTWZxMHZaREpybWIrSzNEVk44ZFRzZWQya082TEsr?=
- =?utf-8?B?dmNKUGlVMEd4aGVaRk1aZnV1dnlBSkJpYTBhcXl3bmhZRi8zb1NiaGxzMVhM?=
- =?utf-8?B?TldhUldlTWZrbkEwMVNtZitpOEh3a09mRlNsSXRwVDhjNndGY3JGdDJSTmd3?=
- =?utf-8?B?MGRTZU1RSjJHcCtBWk1qZEtLeFRVSDFEbi9qMlhxc21TK3cyQnRpcGpDeTkw?=
- =?utf-8?B?MDdPUVd0Nk9jZm05Y1dDQTcvZHJFbEM5WGF1bWVTOWZiQjdMWTNQNWg4eXVh?=
- =?utf-8?B?bXYwVElKckNiS2lBMUJ2UElsWU5vWUdpSU5GL2cwdzl1bTdVU1RyVXFVYmZw?=
- =?utf-8?Q?gemv+M9KRHs0/7oP0d?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4992c61e-823e-4fc3-26e3-08dede659c89
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12214.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z2tkRzhTNVVSZlJwSVBnZFFrd1NoM2EwWlJIeDVYUVQ3MjlsbUY2V25jR0hC?=
+ =?utf-8?B?UlA0YzZLQXcwRXNKNGFFZ2laU1B6WldPZmN5NWVreno5ZnpuK2haM2wyUUNL?=
+ =?utf-8?B?YW1nU0VLZTQ5NDhVL1hRNG1XK1RUM1Y4eUt1YmdLbmdsQWZKek9Oc2drenhD?=
+ =?utf-8?B?ZXI2N0xOM2phZEdISHJJcXZIc28xR0YxeGNVRXFENkUxZHZuYlBLWnYwQXNt?=
+ =?utf-8?B?M0NiZnJmR2ZMbDZlU3hxMUFpTkthNndtWHovWkZhcS9BQkNjRTJpM1VuQmla?=
+ =?utf-8?B?c2NJTkdyQk1zM1Q3aFhQUmpZM3FYTUNCWUVJQWNFSHBsUEh2eFJBak9sUUZK?=
+ =?utf-8?B?YkcwZlphTjJPSGZkYk9kQUo1NlVvVXoyOWtGZERtaWx4SHczckhwWEtGV090?=
+ =?utf-8?B?VHFMY2pxRmUrSVJIYXRPR0dCTHhhczlFV2ptMVJTYklxT1NmclVKcEkxeDBk?=
+ =?utf-8?B?bFY0VHZGOEJhVHBzOWN4NE9yc20wdC9YN1pvb3k5ZzdFRlh5aExNTUNJR1VC?=
+ =?utf-8?B?MExBM3ZHQm1VOURRS1ZxMWlwYlp1S2t2Y2NRU1ZnZWFTN00vNDNtcFV2c0t0?=
+ =?utf-8?B?dWhFck11bXJOVFRGNmNjVUV4NTFSZTNOQlB6RG16d0Z0dEthQlJlWTFCbjZR?=
+ =?utf-8?B?VG93WGdDMmsza3BQUFUza1Zaczh0bUhvaWUxMjlSTi9pSk5UTm4wU2NUdWRV?=
+ =?utf-8?B?WHIwa2ZUeHFxR05yd1l6RWxuc0RESld3WGpkT3BoRDlmNU1MMDJvaHBON0ZY?=
+ =?utf-8?B?d1dGOVVRL2JKMVpRVGZxTnRZclFpTi9uMWg3RTcxQ040RFI2VXh4T2tLNDVm?=
+ =?utf-8?B?ajdxUkVBeVNIYmxSWGFTMHRpU08yYWZ5RFBRZ1VOZ1duSlJJZXVGR1FCV1Jr?=
+ =?utf-8?B?RlZuOTN4aTEzaFhGb0hpRzZJUW5GWllTbWs1ZCtaazJSZkFibU9QMEsyZUJI?=
+ =?utf-8?B?VXRBdGtBU09sNW45MkFsMmF2VzJWTXVpUVFGNUtDem10by9iaGJlZ3RsbmtX?=
+ =?utf-8?B?UEJleFNzbEx5OXVaazNTNnJTTElMWGlDb2RyRDdCRGtRMHNuTkRRMDlLVXhE?=
+ =?utf-8?B?eFpVVmpESWN2WUE5Vjk1WklVc0szaS91VHMwTW93UnJ1K3RBc0pzOVhDd3NW?=
+ =?utf-8?B?YUFJMWtNdEZSdk9XY1NVdS9FVUJsblVEbWI5VUlSVzBQTkdvbmRXT3lFRmh0?=
+ =?utf-8?B?QXU2OTRkWlBsYnJHZjdncGxuT0xLZlJIamVqOTJ2R3BQYkVtakJXZkN5WjVs?=
+ =?utf-8?B?VmltM1ZzbGpTYTdkdjg5S2NvRkZwRE1QakZBcy9tN2xndFNiUmJqcDNQcXk2?=
+ =?utf-8?B?WWdIWDlTTi90d1V4cDhaYzlRaGZ2azR2K1RlQ1hiaTZiTkp3ZlFwcS9UWFN2?=
+ =?utf-8?B?M2x5K2N6MitnY0JQVE5Md3pLMU15T3FRTVQ5L2IvRnVXYVRQWnFiam8wcC9Z?=
+ =?utf-8?B?bXlnd29lY2IwbGtUWFhQTFlpb09Fc2l2cGdZaEtpVUxiZEU1NU1oMmI5QnBC?=
+ =?utf-8?B?aFpjaFJMeXJwR2hDMVlSSEsydW9DYmlMOVZvazZDVnR3VkN6M2dsRnVIUzc3?=
+ =?utf-8?B?TkdLVGV6Mk43bjBlTDBWZ2dLN3ZkdVE1dXJvTjkrbWRPRmM3UFNVcmtWeVNE?=
+ =?utf-8?B?cTFGVENROHJkazhhZzVUY0l1ZGswUTlZdWl6TGtqNldBRU94Ykd5YmhoVURi?=
+ =?utf-8?B?NmNtMVVZaEhVL0NhUzB2cHZVRGU5eDNZZmN6dlZjRkNEWU91ZHF0MURLamtk?=
+ =?utf-8?B?bjVodTlHa3JwTTYrRHdDWm1Ld3E1OWpMQnEyb0FRNWJKZGlZWHlmSnNWMnhn?=
+ =?utf-8?B?TkVrSk1OMGoyNm9NSkg4U05tTkJjanlOSndVMzNWb1V0OHdZb3lXeXlOVmRC?=
+ =?utf-8?B?aURabTRKNkk1eU5kbTJlb0d3d1p5M2RBa3pjSjJpN04vNW9Od09pRXVESnpy?=
+ =?utf-8?B?TTdaMC9lTVNMOHdxblZoRzFRZ0pJT3pWeDlSaHkyMFdldzc4NFZIR2FjdTY5?=
+ =?utf-8?B?YS8yNHdNWHJZcmpydzJpOEtzQStSRUN0SUdzN2JncnZaZnErYWRRSmRlV1lJ?=
+ =?utf-8?B?bjdXc2I2WU5wODFJd0NVcFp2U2xCazNYVk1aYnpPZk02cjJDZTdxdUFFZkJa?=
+ =?utf-8?B?bjA2Q3JKQTR4Z3JvbkhhMWlCRGE1UFlxaXp3SGZhQnJDUk1SWVdrQ2NaNHkv?=
+ =?utf-8?B?V0dIOGVoZmF6ZVpWYnJmYmZkL2o0bjFnRDArd0hOYjVtb0FmRnZnSU9BSVZJ?=
+ =?utf-8?B?MlpsZnc1cjltc0thYTVRd250dTAvSkxaaENyQk42L29OVjhsOVlBM3BQZWda?=
+ =?utf-8?B?c0wyL1hXVVRDZEUyUzdKR1pwS1A3WHFjcDRFK1dyVDQreWd4bjNMZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 86e407f4-a6c6-481c-60fc-08dede681cf7
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 09:28:33.6301 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 09:46:27.8589 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LIZ8YdXl1e6WrczFmxAJbEIrYLTIg/U/5zjwMN049SY61RoUXv/W+lmrDlPaKCR3
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9855
+X-MS-Exchange-CrossTenant-UserPrincipalName: +BuJijdHv2wbQeVUI+3PUHPFRAWgMibboFA7alEulsZE6ssCSRKtLMcltmwPjxt9wI4GCSumM7oHfYWh3ssHNPW4mrkonz6mYuZ6+nxiu3A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7590
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,71 +148,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+Hi Naoki,
 
-On 6/16/2026 5:30 PM, Mattijs Korpershoek wrote:
-> Hi Ye,
-> 
-> Thank you for the patch.
-> 
-> On Fri, May 22, 2026 at 15:55, Ye Li <ye.li@nxp.com> wrote:
-> 
->> From: Jason He <jason.he_1@nxp.com>
->>
->> According to device mode spec, the ACTIVE status field of dtds should
->> be check to determine whether the transfers completed successfully.
->> However, this is not implemented in handle_ep_complete.
->> When two EPs are enabled and transferring, EPa requests with multiple dtds
->> and EPb request with one dtd. Irq is triggred on EPb. The udc_irq handler
->> finds both EPb's and EPa's ENDPTCOMPLETE=1 while not all of EPa's dtds
->> have been completed. Because ACTIVE status is not checked, this case
->> causes crash in ci_udc driver.
->>
->> Signed-off-by: Jason He <jason.he_1@nxp.com>
->> Signed-off-by: Ye Li <ye.li@nxp.com>
->> ---
->>   drivers/usb/gadget/ci_udc.c | 11 +++++++++++
->>   1 file changed, 11 insertions(+)
->>
->> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
->> index 0baad83ef90..53796887dac 100644
->> --- a/drivers/usb/gadget/ci_udc.c
->> +++ b/drivers/usb/gadget/ci_udc.c
->> @@ -733,6 +733,17 @@ static void handle_ep_complete(struct ci_ep *ci_ep)
->>   	ci_invalidate_qtd(num);
->>   	ci_req = list_first_entry(&ci_ep->queue, struct ci_req, queue);
->>   
->> +	/* Check all dtd are completed, otherwise return for next irq process */
->> +	next_td = item;
->> +	for (j = 0; j < ci_req->dtd_count; j++) {
->> +		ci_invalidate_td(next_td);
->> +		if (next_td->info & INFO_ACTIVE)
->> +			return;
->> +		if (j != ci_req->dtd_count - 1)
->> +			next_td = (struct ept_queue_item *)(unsigned long)
->> +				next_td->next;
->> +	}
-> 
-> A very similar loop (that walks all the dtds) is just below:
-> 
->> +
->>   	next_td = item;
->>   	len = 0;
->>   	for (j = 0; j < ci_req->dtd_count; j++) {
-> 
-> Can't we merge both loops together?
-> 
-This loop will free each dtd. If the ACTIVE flag is set in the middle of 
-loop, previous dtds should NOT be freed since this transfer is not done. 
-That's why we add a loop to check ACTIVE prior this loop.
+Just to let you know that this patch will not be merged as-is due to 
+review provided by Jonas. Please send a v2 with the feedback taken into 
+account (or continue the discussion on this thread if you disagree with 
+Jonas on his feedback) if you're still interested in adding support for 
+the E52C, thanks!
 
-If merge two loops together, another list to temporally record dtds for 
-free is needed. Then have to traverse the list to free each one when no 
-ACTIVE found. This traversing will add a loop too.
-
-Best regards,
-Ye Li
-
->> -- 
->> 2.37.1
+On 1/10/26 2:15 AM, FUKAUMI Naoki wrote:
+> The Radxa E52C is a compact network computer developed by Radxa, based
+> on the Rockchip RK3582 SoC. [1]
+> 
+> Specification:
+> - Dual Cortex-A76 and Quad Cortex-A55 cores
+> - 5TOPS NPU
+> - Up to 8GB LPDDR4x RAM
+> - Up to 64GB eMMC
+> - microSD card slot
+> - USB 3.0 Type-A OTG port
+> - USB Type-C debug port (USB-UART)
+> - USB Type-C power port (5V)
+> - 2x Gigabit Ethernet ports
+> - Maskrom and User buttons
+> - Aluminum alloy case
+> 
+> [1] https://dl.radxa.com/e/e52c/radxa_e52c_product_brief.pdf
+> 
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+> This patch depends on
+>   https://patchwork.ozlabs.org/project/uboot/patch/20260107230747.3552391-2-jonas@kwiboo.se/
+> ---
+>   arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi | 24 +++++++
+>   configs/radxa-e52c-rk3582_defconfig        | 77 ++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst            |  1 +
+>   3 files changed, 102 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi
+>   create mode 100644 configs/radxa-e52c-rk3582_defconfig
+> 
+> diff --git a/arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi b/arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..dd65cdd250f
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi
+> @@ -0,0 +1,24 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2026 Radxa Computer (Shenzhen) Co., Ltd.
+> + */
+> +
+> +#include "rk3588s-u-boot.dtsi"
+> +
+> +/ {
+> +	leds-0 {
+> +		led-1 {
+> +			default-state = "on";
+> +			gpios = <&gpio4 RK_PB2 GPIO_ACTIVE_LOW>;
+> +		};
+> +
+> +		led-2 {
+> +			default-state = "on";
+> +			gpios = <&gpio4 RK_PB4 GPIO_ACTIVE_LOW>;
+> +		};
+> +	};
+> +};
+> +
+> +&sdhci {
+> +	mmc-hs200-1_8v;
+> +};
+> diff --git a/configs/radxa-e52c-rk3582_defconfig b/configs/radxa-e52c-rk3582_defconfig
+> new file mode 100644
+> index 00000000000..5c1056867f2
+> --- /dev/null
+> +++ b/configs/radxa-e52c-rk3582_defconfig
+> @@ -0,0 +1,77 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3582-radxa-e52c"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_OF_SYSTEM_SETUP=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3582-radxa-e52c.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_MEMINFO=y
+> +CONFIG_CMD_MEMINFO_MAP=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MISC=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_RNG=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +# CONFIG_ADC is not set
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_PHYLIB=y
+> +CONFIG_RTL8169=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_PSCI=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 7a8532b49fc..2fd7d687d2e 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -160,6 +160,7 @@ List of mainline supported Rockchip boards:
+>        - Khadas Edge2 (khadas-edge2-rk3588s)
+>        - MNT Reform2 (mnt-reform2-rk3588)
+>        - Pine64 QuartzPro64 (quartzpro64-rk3588)
+> +     - Radxa E52C (radxa-e52c-rk3582)
+>        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+>        - Radxa ROCK 5A (rock5a-rk3588s)
+>        - Radxa ROCK 5B/5B+/5T (rock5b-rk3588)
 
