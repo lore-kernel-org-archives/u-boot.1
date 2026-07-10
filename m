@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED2AC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43076C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:21:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51B6C84B42;
-	Fri, 10 Jul 2026 17:20:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A066D84B55;
+	Fri, 10 Jul 2026 17:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AFWtZ2PF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KxJyl+Hv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E5FF84B4C; Fri, 10 Jul 2026 17:20:48 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id 2958484B70; Fri, 10 Jul 2026 17:21:41 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AE0984B2B
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:20:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 204E384B2B
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:21:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-66766d649fdso1513651d50.1
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:20:46 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-81e6f2ee60bso24873557b3.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:21:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783696845; x=1784301645; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783696898; x=1784301698; darn=lists.denx.de;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=6NZWJkLdUbaP+7z2xfadcvdZo1/QD1ONXi0tQbBi2ZQ=;
- b=AFWtZ2PFfugaY4T3pC8N4hVZFy1Z12zmtfnpoU5qqGCqYycyoDSiiHTRXcL0pYsiv4
- x5/2ivTB9fqGSH/ARXEv2ZvK6l5xC8fgbsMnMtm1Qkh3pvZK9QqwFz7j3iEA9IfhKG3u
- IFZ/8glnmPvm2pX9xHzDvDMsWhE7yaQRb0TWgyi1Ni/7SYM2aCFnuND2J4D+m8RkBDpZ
- lCcj5Z5I2qfZ8cMfVr4c+zIZ7vGGlMZN1uNSoF6nwYZwmwIwAb14bzctiEUOqe8L1qli
- HjQAxX1hnVmR4yoEIGlxRFjz9YQUyAmWUQFqD+MVIvQ8WRThQj0+esjUa0AMJuRN7KDH
- vB9g==
+ :content-type; bh=BzbZg3CSbStF+3H7rB1GiefixLZTL3+r0G7rVfIlgWc=;
+ b=KxJyl+Hv5tRWs1gUe28WFOUfm+ILwkW/cwsLk5JEaHasgRo32/4zpywHNuvIce+zck
+ adYHfprcMfwTDoln3VBhoafpbuGfyHcV2cJ40w/i5xwgMSgzlCC+Z4u2TTNHld7+Mrzq
+ 2cA+Zzunge0PK3R/9JFFijBRQjQrIsi9e/QGfAUihE+m1WHXrK9ZojgdZYvRQzsMoymh
+ zqrNQbgOt23UGW2xsR8WhhIsr1lKOHodWtLqY+ppTYHRkFm2zc4T++MkXTXB2wltsTxt
+ CHDP9ws6VqCvJ5CgxxHxozGKlBzEDpy/rOHJYcU978020RVetYOcH+BcXmE7HsDFRmrO
+ vBQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783696845; x=1784301645;
+ d=1e100.net; s=20251104; t=1783696898; x=1784301698;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6NZWJkLdUbaP+7z2xfadcvdZo1/QD1ONXi0tQbBi2ZQ=;
- b=tOfM1SEQWZ6YzvlX4JVbqb9wf39KnkuWEgFqfkvEUmlYItM39CQm7O1lColnERffR0
- JKBZ35d7VxdNuYdKlhixmJC9Ri+xU+4vk+FhlhbClHEs4fWv4DcihBNpIOMfqtgZnY2P
- UTASZthmc60h8kFcPsUUIh91dfs40OfJa1h1tDy3F6W8NfznblF34zvbtYnTnqP2avrz
- /ehWKgc3vbzb7cA5ZZoXAmRnZ0lOCPV6qeDKAeJebIjSflCzgzvnrJcT0ToWtX+a1LfI
- ZUNY1nMQsKCe7eo8bnZ+n0m301avT9OEUvlr4kTRWkXkcs3fB7+E5MPVgX4Jqi8lnARL
- p15A==
-X-Gm-Message-State: AOJu0YxkYF9j9l0iwfdqaguOuBwUT2HP6ffrnWP5bbkvcC1tGhrFSPog
- yHpWt3BDn343tWX8f3i+qcwNBzM8//q70M1rGMr5s17bYuEUd9oci2qO
-X-Gm-Gg: AfdE7cntPkj6Q3IcmF+GFrdokMpfSJpL8iHw2lGLxOuRvJe6GsgdMY6rfErggT9MM91
- o5XUmP3oRZ6kaucDrVxBFMbOOT3seF3w8W3feyncbFbz7B4JF1LzM7NOcqunUOrLCnVwqLrYaDJ
- 6Bu2GfDP5KwkS8b1uqvnwS9YMc+Y/UQfXIIkVJzBOZTxBVDZZAhdqkvB5Q0CdQf6Xbm4/Sq6zhM
- 6Tfq8VYLWpuM3DCKMbHnDE2Jb8xbauDs3kwxRSEMoDhJeFQKFsKj/CVFqV+kkWecZpIcgf7seC3
- +CFLxUrcA3sYNXKKfzRSuJpQvTJbabXdsiZwmkQM8ute0qVxlFr6Ljxkhs4d+j/OMDVUb10GC5V
- wicj9taOIa3QG4es6vULEP7dJfzZ5CaZnGjO131u3hWmzXYsZbe6IQ20EUaALHEONSkdAno3Ohy
- JiDKlGjxU+eAVwAmG0F7xD
-X-Received: by 2002:a05:690e:4890:20b0:667:c09c:4a3e with SMTP id
- 956f58d0204a3-667c09c6250mr2951494d50.13.1783696845027; 
- Fri, 10 Jul 2026 08:20:45 -0700 (PDT)
+ bh=BzbZg3CSbStF+3H7rB1GiefixLZTL3+r0G7rVfIlgWc=;
+ b=pHX/YvcjIDeLVjcMm8ooKRyxDOMlcYMCvz/dHI9qo81e6Q3Z8ukjjgV99K/cpFTp4n
+ Gf14/4G7c75ioOZvEPXu9cKkZ0WOAVeN6fOuwU6wjOhjyK5jaCYd7x5SKMylcXgV1E/3
+ S9nfAJ+m81QEZu7m6AUvh1HNSbH7KAUStJTgxd29aWNKGEehZrysm2BG0ulB4OqgG2TD
+ 2V0OEai6kO3uOjnfumoD3Dw0oTY1VolFO5AZuWINjYr3I6g2+YSe6UW4LpS0EOjWbFUU
+ z8kplcjYwKIrkJoJexATMrYYM5a2ZCHmQ26kI0B38U/OZc09WRYy70i+UQ4R4qMaHsiI
+ ZyFw==
+X-Gm-Message-State: AOJu0YwMbj0POLGsjfNwXivGWhQ4i3GKFE9/MBPw5N20NVYVjVAW/P/2
+ LO/PDP9a42+hY+pIZmnEfyi5TZWgvV6+abbQHiiisK39ekdjlxJjzMr1
+X-Gm-Gg: AfdE7cmjj/Os5muf2XqAcyAEb9s1zD+SeCTwbfdP/XGQFtOKrlfd5qrLE+tMEek9Lhv
+ FjM0N6JNo2RXYjz8KOfInXgUDlGhoVLjU1JJCiLCMNpmCID0H0XmIg6mp75PULgtc1o+3Ol0vDo
+ 0liVRt9tu/34I/Tnft7aJhKTdEOggksm178FzWdyMkNLzbrU6QODN97xyGNB9+6tLVWhn2Qd85L
+ jmTP1dgEVbNM3jNB0u8QqqiqDWR5R7G2NJnKTHiS4NAizXURyqGdju+/fHPVGSTpteL9RlwkZQX
+ aJfSPUwOBtlbpe4qspvYZQPCm3wscvS76iFEL2IvJybQ/mcC2KTo6ukcYFqzggkOk1bLb/nUT5a
+ GfLolIvJddHnN2OKH89OuJH8AVLZlXh8x7TI31tTtpMo9/3b+sda2tfh1jELRwWwzeyvOuSitG7
+ nLt9+k9CKJYg==
+X-Received: by 2002:a05:690c:c4c1:b0:81c:2a00:aa42 with SMTP id
+ 00721157ae682-81e7c013db9mr30113757b3.20.1783696897873; 
+ Fri, 10 Jul 2026 08:21:37 -0700 (PDT)
 Received: from localhost ([49.36.187.33]) by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-667879cada5sm7089378d50.11.2026.07.10.08.20.43
+ 00721157ae682-81e6c245d12sm47617307b3.48.2026.07.10.08.21.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 08:20:44 -0700 (PDT)
-Date: Fri, 10 Jul 2026 20:50:40 +0530
+ Fri, 10 Jul 2026 08:21:37 -0700 (PDT)
+Date: Fri, 10 Jul 2026 20:51:33 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 To: jerome.forissier@arm.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: lwip: sntp: fix netif leak when ntpserverip is unset
-Message-ID: <oggze2g2aloxhrxqmcnt6tqa5e2lf473vy647b72odfvahwosx@zqawezfx5t7c>
+Subject: [PATCH] cmd: lwip: wget: free mbedtls x509 cert context to avoid
+ memory leak
+Message-ID: <pqy43tgj6qomfmqneq7e7xl6ifopleolqtmiduhwlo4yt3dufo@pwzqjjjdajdn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -93,33 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sntp_loop() allocates a netif via net_lwip_new_netif() and normally
-releases it with net_lwip_remove_netif() before returning. The error
-path taken when no explicit server IP is passed and ntp_server_known()
-is false returns -1 directly without freeing the netif, leaking the
-lwIP netif structure (and its associated state) on every failed
-invocation of the sntp command.
+_set_cacert() calls mbedtls_x509_crt_init(&crt) followed by
+mbedtls_x509_crt_parse(), which allocates internal storage (parsed
+cert fields, chain links, raw buffers) inside the crt object. The
+function then returns on both the error and success paths without
+calling mbedtls_x509_crt_free(&crt), so all of that internal state
+is leaked when the stack-allocated crt goes out of scope. Every
+invocation of "wget cacert ..." leaks memory.
 
-Call net_lwip_remove_netif(netif) before returning on this path so it
-matches the other exits.
+Free the cert object on both return paths.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- cmd/lwip/sntp.c | 1 +
- 1 file changed, 1 insertion(+)
+ cmd/lwip/wget.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/cmd/lwip/sntp.c b/cmd/lwip/sntp.c
-index 608345c873b..a3659c73ce1 100644
---- a/cmd/lwip/sntp.c
-+++ b/cmd/lwip/sntp.c
-@@ -71,6 +71,7 @@ static int sntp_loop(struct udevice *udev, ip_addr_t *srvip)
- 	} else {
- 		if (!ntp_server_known()) {
- 			log_err("error: ntpserverip not set\n");
-+			net_lwip_remove_netif(netif);
- 			return -1;
- 		}
+diff --git a/cmd/lwip/wget.c b/cmd/lwip/wget.c
+index 4883ad61bce..531e886e986 100644
+--- a/cmd/lwip/wget.c
++++ b/cmd/lwip/wget.c
+@@ -67,12 +67,15 @@ static int _set_cacert(const void *addr, size_t sz)
+ 	if (ret) {
+ 		if (!wget_info->silent)
+ 			printf("Could not parse certificates (%d)\n", ret);
++		mbedtls_x509_crt_free(&crt);
+ 		free(cacert);
+ 		cacert = NULL;
+ 		cacert_size = 0;
+ 		return CMD_RET_FAILURE;
  	}
+ 
++	mbedtls_x509_crt_free(&crt);
++
+ #if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
+ 	cacert_initialized = true;
+ #endif
 -- 
 2.43.0
 
