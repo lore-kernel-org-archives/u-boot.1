@@ -4,60 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C8CEC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:18:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A2CC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:18:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF1E084AC2;
+	by phobos.denx.de (Postfix) with ESMTP id E978984AC9;
 	Fri, 10 Jul 2026 15:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="VHVqrXrx";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="RrKr0AO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F74A84AA3; Fri, 10 Jul 2026 15:17:40 +0200 (CEST)
-Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
- [185.125.25.10])
+ id 4F51E84AA1; Fri, 10 Jul 2026 15:17:40 +0200 (CEST)
+Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
+ [IPv6:2001:1600:19:5550::bc0c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC6284A92
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:17:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A28E384AA4
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:17:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gxXSK3nH7zXh1;
- Fri, 10 Jul 2026 15:17:37 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gxXSJ2GyZzXNw;
+ Fri, 10 Jul 2026 15:17:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783689457;
- bh=dL/+dJ/N9Xa5WPH+BYh+7VgrnKznYcylulwkIXH7Whg=;
+ s=20231125; t=1783689456;
+ bh=HfOgdqUapsLJfIjhKHXjAK3mEhRO1CQ8DCAotlNCdAQ=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=VHVqrXrxJAh1M2Ru6oI5rqKfoDUwrlTVpxNGwtl9KYcivPGWNsceN9P7+u/ivwEhM
- ofPbFEMLtNIhRM6sop8+RhaTbLP/aJDXBGcJcGXQde8Q2RIeulrd90tnUCF0Dvgtc7
- tGmrUl2czLByqjbfUNNRNKxDycpH83HYCYGHSUNG/z4XU/MIsV6JDla7JcFmpm+5GI
- jYn+DHAzkBMxwmhtBKYQksWJB4HvyZ3DL9stjx4UdcAivu4oaYRlXFncqyBg7xqEWF
- Jus62u/mzVwnZgpQG4g/KmQcgvsRg4C+JDsNoRhMyyXWodQJQUCY5k9ZKSD9d3/eoQ
- RQfcbtVlNBq1Q==
+ b=RrKr0AO677wRdWjoPSm2P6p/mJm4meA72o5uLmZOAbr4WWFIDqO7BpLojXK3G3ahe
+ GrhMhCUPbZNUgemGBU6gDlchqVD3NvjaDNmsVf+0tQVxhOxyoCIQYOhbZE/QC1FBoR
+ KWhO68zjGdSU1VzUa/TTKHeRpME5CUx0LfRFYbMSki6AgOCToj/vEBmOy0YK1qkjGa
+ OpX8vX4eG++GaG7XvPlG8gLTM9jaunOix4o6Q/b5gRxkNn8RN886aQY1WBNn8+Cvpn
+ c4lmFkuUNsyWQ7qTz+AbyyMu85UxwKEH6LxJAb5T0nStNLMAmSciEhlkNblh1ote6h
+ N/H3NCElvkr/A==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gxXSJ1V2hzdmB; Fri, 10 Jul 2026 15:17:36 +0200 (CEST)
+ id 4gxXSH3t5WzfZT; Fri, 10 Jul 2026 15:17:35 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-To: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Joseph Chen <chenjh@rock-chips.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Johan Jonker <jbx6244@gmail.com>, FUKAUMI Naoki <naoki@radxa.com>, 
- Liangbin Lian <jjm2473@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260625125818.18914-1-jjm2473@gmail.com>
-References: <20260625125818.18914-1-jjm2473@gmail.com>
-Subject: Re: [PATCH v2 0/1] rockchip: rk3568: Add support for LinkEase
- EasePi R1
-Message-Id: <178368945618.879692.6882293803347985405.b4-ty@b4>
-Date: Fri, 10 Jul 2026 15:17:36 +0200
+To: kever.yang@rock-chips.com, Johan Jonker <jbx6244@gmail.com>
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, 
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
+ trini@konsulko.com, u-boot@lists.denx.de
+In-Reply-To: <12b6e0d5-637e-446e-9e4b-82c82e6fad40@gmail.com>
+References: <12b6e0d5-637e-446e-9e4b-82c82e6fad40@gmail.com>
+Subject: Re: [PATCH v1] mtd: nand: raw: rockchip_nfc: fix oobfree length
+ calculation
+Message-Id: <178368945551.879692.18360924316982097333.b4-ty@b4>
+Date: Fri, 10 Jul 2026 15:17:35 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -79,29 +73,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jun 2026 20:58:17 +0800, Liangbin Lian wrote:
-> LinkEase EasePi R1 [1] is a high-performance mini router.
-> 
-> Specification:
-> - Rockchip RK3568
-> - 2GB/4GB LPDDR4 RAM
-> - 16GB on-board eMMC
-> - 1x M.2 key for 2280 NVMe (PCIe 3.0)
-> - 1x USB 3.0 Type-A
-> - 1x USB 2.0 Type-C (for USB flashing)
-> - 2x 1000 Base-T (native, RTL8211F)
-> - 2x 2500 Base-T (PCIe, RTL8125B)
-> - 1x HDMI 2.0 Output
-> - 12v DC Jack
-> - 1x Power key connected to PMIC
-> - 2x LEDs (one static power supplied, one GPIO controlled)
-> 
-> [...]
+On Tue, 30 Jun 2026 15:32:46 +0200, Johan Jonker wrote:
+> The oobfree[0].length calculation depends on the
+> rknand->metadata_size value, but this is calculated
+> after the function rk_nfc_ecc_init is called. Move this
+> calculation to a location before it's value is required.
 
 Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip (u-boot-rockchip-2026.10), thanks!
 
-[1/1] rockchip: rk3568: Add support for LinkEase EasePi R1
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/3a8b3cdd83a3247d23f59f8c75eaf4e917b7f0b6
+[1/1] mtd: nand: raw: rockchip_nfc: fix oobfree length calculation
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/3f6d1416a89cc213ddf1f1f41dc0cda84b896b5c
 
 Best regards,
 -- 
