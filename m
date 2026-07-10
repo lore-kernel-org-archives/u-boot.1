@@ -4,61 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE20EC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4056FC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28E0C84AAE;
-	Fri, 10 Jul 2026 15:17:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6F4E984AA4;
+	Fri, 10 Jul 2026 15:17:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="btBsJC26";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="gN5pez1/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4140A84AA8; Fri, 10 Jul 2026 15:17:37 +0200 (CEST)
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [84.16.66.173])
+ id 77C2784A63; Fri, 10 Jul 2026 15:17:38 +0200 (CEST)
+Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
+ [IPv6:2001:1600:19:fff0::8faf])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A818D84A63
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:17:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63B4484A9E
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:17:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gxXSG1VxKzkHP;
- Fri, 10 Jul 2026 15:17:34 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gxXSH0NRYzj1L;
+ Fri, 10 Jul 2026 15:17:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783689453;
- bh=uClTC9dF4dcYzVQQAtdSsTLoHZAV6//gOExQ/Aw00Ig=;
+ s=20231125; t=1783689454;
+ bh=FhanyKMqIGwsxsUEVksaWjTlIrJF1aKn6eykk8P432s=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=btBsJC26nki6nigPP14uZ5C66EXoj3Ni8KlBNCVfYFikeUjLisiIBTT5BkGoUi4uZ
- xwE/W1BiLw8ABonH50+qfdgtHdMsF72KieUn67rRbcZKH485wOsZFUT23niBelfbIg
- BHiKrEOooJRY3oervguDmuH6n3WiYdOUJSNV8WlleGguz7k0Mo5se0J5R5yobkg73K
- PskUZ81kQE6yIarxOX51iJaQ0WncwcJTNYKRorp9f848qdrY/ZTXZEUaSwO7JcsDe0
- mCFPwe1ihj7/iX6giPETUZ12ikmgeKREGftywRiTRnsgrZiFcyXEO1b8TcM+fDbx22
- QocnHnCSbWqIA==
+ b=gN5pez1/4utw3J/zHZol1v8FU3tmKJsMGUIMkum8excD5lfNlSzelg7hMhyjEHu1P
+ g5AdbnXLhg+Zz1wXZe4wwW4or2iHtDbvVRlJqlwr90umQ0HHDgCfuqKvovx5fVtyxf
+ xYvFvEyfr5/x6/4P8NDMgeVMXQTcM190V3520i/M/rhBf2G4TU2vj8XOcDFmvFgXVV
+ frsx4gQbNt2dQUsLijn8zslhkQzdPWnxSUh60dy84n7hzSbsx5ItVDc8RGtADWDWS0
+ m/bC6tNhGADTlEE3TKzmgcGnykbUgkOgD6kQADc0aJsMK44K5dus4ERxILs7ymuZuR
+ dOd++oJeHBYoQ==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gxXSD3xH8zfFW; Fri, 10 Jul 2026 15:17:32 +0200 (CEST)
+ id 4gxXSG0NFVzfKx; Fri, 10 Jul 2026 15:17:34 +0200 (CEST)
 From: Quentin Schulz <u-boot@0leil.net>
-To: u-boot@lists.denx.de, Quentin Schulz <u-boot@0leil.net>
-Cc: Heiko Stuebner <heiko@sntech.de>, Jonas Karlman <jonas@kwiboo.se>, 
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-In-Reply-To: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
-References: <20260707-rk-custodian-v1-0-dbc9c696e613@0leil.net>
-Subject: Re: [PATCH 00/12] MAINTAINERS: update entry for ARM ROCKCHIP
-Message-Id: <178368945249.879692.7725398213071632813.b4-ty@b4>
-Date: Fri, 10 Jul 2026 15:17:32 +0200
+To: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+In-Reply-To: <20260707100918.3057718-1-jonas@kwiboo.se>
+References: <20260707100918.3057718-1-jonas@kwiboo.se>
+Subject: Re: [PATCH] arm: dts: rockchip: Align OTP nodes for RK3528/RK356x
+ with Linux v7.1
+Message-Id: <178368945402.879692.2435958373792787796.b4-ty@b4>
+Date: Fri, 10 Jul 2026 15:17:34 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -80,42 +74,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 07 Jul 2026 18:09:14 +0200, Quentin Schulz wrote:
-> Simplify the ARM ROCKCHIP entry in MAINTAINERS by making extensive use
-> of the N: regex. For some reason, it slightly modifies the list of
-> people returned by get_maintainer.pl but I believe the ones reported as
-> maintainers are still correct.
+On Tue, 07 Jul 2026 10:09:17 +0000, Jonas Karlman wrote:
+> The <soc>-u-boot.dtsi OTP nodes for RK3528/RK356x use different names
+> compared to the OTP nodes that was merged in Linux v7.1. This causes
+> build issues when dts/upstream pulls in updated DTs, i.e.:
 > 
-> Add more files under the ARM ROCKCHIP umbrella.
+>   ERROR (duplicate_label): /soc/nvmem@ffce0000: Duplicate label 'otp'
+>                            on /soc/nvmem@ffce0000 and /soc/efuse@ffce0000
 > 
 > [...]
 
 Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip (u-boot-rockchip-2026.10), thanks!
 
-[01/12] MAINTAINERS: remove redundant entries for ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/9b619dfaafdd9f12738631f07ae88b99beaef132
-[02/12] MAINTAINERS: add rkmux.py to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/3dcb974e359f8547284de3590425977a4d653ef4
-[03/12] MAINTAINERS: add N: px30 regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/ff378e804652f700c5121aed7492919679a55f48
-[04/12] MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/7c5ba3733c204b68515f3fe3dbfb68b1de7dca8b
-[05/12] MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/85aacacfbf443556a139e139e1b4676b345e5114
-[06/12] MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/a961c8939554e5782cf1d98d8a3a88e407e99a00
-[07/12] MAINTAINERS: add N: rv11 regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/4582dc53b80f54cc694e587a55eaebf7c16e21e0
-[08/12] MAINTAINERS: add N: rkmtd regex to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/d801fcc7b2443fb2dfd0ba89e8c97decbef2de6b
-[09/12] MAINTAINERS: add more Rockchip drivers to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/412f8f812a1a7a910aaaa7f61de95b294785fd96
-[10/12] MAINTAINERS: add rockusb to ARM ROCKCHIP
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/377c363127977012c16638a1588526992ba6ac9b
-[11/12] MAINTAINERS: remove Philipp Tomsich from ARM ROCKCHIP maintainers
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/9e3e58df50e48c3c2927909faca5c27b8e51be1e
-[12/12] MAINTAINERS: add myself as ARM ROCKCHIP maintainer
-        https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/275e9e482758a31901d7428e919f0b8bcc49816a
+[1/1] arm: dts: rockchip: Align OTP nodes for RK3528/RK356x with Linux v7.1
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/commit/d4140de41eba31166d43c2759fc8c444d9116084
 
 Best regards,
 -- 
