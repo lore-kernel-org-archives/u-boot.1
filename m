@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F1EC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:39:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E95C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6FBA84AE3;
-	Fri, 10 Jul 2026 15:39:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F126484AC8;
+	Fri, 10 Jul 2026 15:39:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qWujNs2L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rb2ZA/BR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FA884ABE; Fri, 10 Jul 2026 15:39:42 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 5F0A984AF6; Fri, 10 Jul 2026 15:39:44 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A21E84A7A
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:39:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 365B584AC8
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-493bf73ec2aso6034595e9.2
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 06:39:39 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-493f60208a5so4339825e9.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 06:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783690778; x=1784295578; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=yVYxP24nfoQhlZR7LjTrBOpaZmawq/16Ee5PXZ45XYI=;
- b=qWujNs2L7gzeByHODZPI7cjxhl+JjHIB173pofS7AP0IHSrh9yudYPEFQoP6LGrcXJ
- deYjquwekZJ9ae+YzExDe4oV5xdiZ8hutBuT9+tpEX+/kcORYCFhZ8hR/k7vimAxJdTV
- OuhmKiIsVju1erg4Wm7zA1C2wkM1JAZ8c3GrxY13uw+iztlgPq+tznU61/DZNW1rIm8V
- MhIKN79H2QTZQKZeROsAmKwhgz6tLOOXY0bxsZ6vWBOyZqUYk/ELCWT//SI6YG982+Gf
- rTYJW5nC1MYkLOaXBUoZHmRmN7NanE0UGDuPVcvO8bBUKDAeKk8ojGv/XzKoy9+WznTU
- LXXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783690778; x=1784295578;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1783690781; x=1784295581; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=yVYxP24nfoQhlZR7LjTrBOpaZmawq/16Ee5PXZ45XYI=;
- b=kQFaYZavFLZpzNEExb2Yh5gdD9sUd1LaKKcXBYbliAQvIazsy5oOpKy5unYB3WN/T5
- 0KtUHXmADpkZZr1+CkUvAdzJt0zxk3bcoDP2N6mVh2pySEsFrkQOcR/GY93kgqKxkdT+
- U8RZAvZrpgQFcCQAz6CxnZConMP54R6Hpj+yyfNOSzoimJQKlj40J0xDyNc3ULSxKQli
- YNFVnWwFMv2B6L2VMpUwf49qdIvxPKs7NFK4D7BlRyI+x9Qf4FGGwgewEJwfTT1kTZb6
- LGAdNeEZ8b0FND4sDs8oEBhMHWEnDHGPK1DqH5ka3k71Pd4oEb5KB6Ovm2Yu5juc1ocN
- t0Lg==
+ bh=V1525JbJ9ajeLTK8jjMb3MX0dVcKMzo3XI3cnN/LXrI=;
+ b=Rb2ZA/BRBw1TFMi0ksNXWhtkC0wJSVvFg++GUF6gPx8LdbSlQ8mKlfOSg3C1dGtXHL
+ bxHjMbD0Gtaa2+I0YrZ9XvIzDKP5mqOjmy8YJbI9Sl+w81rQrmS9otPZU+Gh9qo3WHy6
+ 83WflPNFtLFt4vfW6eYHvO7Bi9tWTYDdSFlpdhdPDywNvBMghNMuvYlWAHuubq/Uod26
+ jhw0eckz09SrqtRRXVizqhY1tiEq7ulgBWOll6RShgBAUbZIA2Zv5AmIo+7ZhlUCctWb
+ zHtOAbMilWa2j5p8op3RQshy1QIhbhos6PDFXZ9JtAP2zHQTuALDnoNZaLDrgaltqVYL
+ qLWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783690781; x=1784295581;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=V1525JbJ9ajeLTK8jjMb3MX0dVcKMzo3XI3cnN/LXrI=;
+ b=p7vaeHITAY75lAZN8ZGEyYLPAXFnRUpYemgkAVhUiBWvCtQ9LjGubCIpq9lDFThvTS
+ 6sXms31c+t/3q2PEaQ7AxFhzeRHaeZ4UEnDVdUb2AjhBADMFThbdSnDpnr2T4yNfo7ly
+ Z1fCvCveCJF83r2s4cciFI0KQq0985PG0wwsVm6LK5e0vKqxiWH1vyWPcp7QTo7LxGMx
+ bpX9DV/ZmWFcjhk8VSt9a+MLuK+KoUMTwridGdPURNnHS31Ly+QkzjHdbOZW2+iOa5pL
+ hLHJDjPDwetfqmu6PKtVfjOurzlA2LEXucaUhVA1DJXLLSZIgnUumzpFMsZRwn8XkGCm
+ f8HA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrwo/Vn9ERD9VC4rcbyfCeNRkhq//xlkhp230FayqtwZokGdm7PBs6LC/yG3LS0IIUng8o2AD8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy42xpa4RYXIttnBKRuboQ8KjJe36UUqi8kFOg5iM1rAqGrpNlr
- bjcmqYA8YbYE+LaJCMMR0W98eKZvjqlEKPY1v3u7G+H/33hOmm9dsK20
-X-Gm-Gg: AfdE7cmR/VJRUmM5/IeODL4M/OUuB5Ej2PiIc3r/Ok1BFkrdi9jHDmwGXI7fDqaYzoD
- wX6P53W0AooMmRdgyhXgvCIjO44v29Kanc2txY5xZx5tkb37n6pcKMhhGbQJ5Zvr/mZymkdYhrE
- EOsOGEIRXdUartqpTXJhrNOVxml3CPkx3x+d2uy4SMmjnysDYNDqyuZT3Np2cJ1XcOYz425ok9j
- E5RAuvJzGX8MGMCFWCOhJb89vS+SY963F9tzSJmaJ70CQ0uwbMAMb/XCylUGi3AiYJ/d1zOgUsU
- I72p3GyNV9tBbgnial+QSwRtAvc2ePQERAe/JNmAcIbHrWF7+YONjaDXm7ocbBYPxPY9+7dvDp8
- ok/tf7AQuk9XA6POSJbmqsAwNMkaWvSvCRPVRDNwSME/+/5MbC5IcZ9AdPgCSqoJXMelYgHv4p6
- zmrrKDE6D9/xaIIlZpf6RW6N3138wQjrIwXC+YMwu+pW3Eh1sZZA0eeXHzRoAY782lIw==
-X-Received: by 2002:a05:600c:3f19:b0:493:e79e:daa6 with SMTP id
- 5b1f17b1804b1-493f47bf9ccmr29864295e9.33.1783690778243; 
- Fri, 10 Jul 2026 06:39:38 -0700 (PDT)
+ AHgh+Rq8ALDvS8FN9BHCm19SQP4HhKRJeNfZwMXkNhehUpzTPUMUIJKihW1RYW+8JaV8hknmVl9EiZs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwyRxNibcnHJGkh8fJ+wB7mGjbz+/qe2ofIxcwkvrxn/fxxgXN
+ 9PWpWHbXlIjG9bGqUOplibjt9KLMONuikmwMhrCBMOQvvfi6wubDTZTu
+X-Gm-Gg: AfdE7cnyXtiNAwCWOhpLOxNsXWo9sEEU2eMvwj9vHLdbBLLPaeq8G/WGpdFA7agEOAj
+ sAn6neQ2VsNRlC/J6ZI6dj0+Tz3DgZUKx8acCVCvTx8ORe+7PNBSOnMz/dMhoWUKaYl9/egmssO
+ GR9wk7Rtc2VEXD/ZkDlDzDCfJoaw4n2/kJplDIQMQHUcvqbIh/jz0Fg+dC49DDRo8M2hRDfuKwa
+ 8orBRY44dqqkabuUrPrIGx/6vtvtxFzlbJG7oLNw6Po5fYLgyKYRv9/GUvnyoeG8S9XIcq92h3e
+ qOfrjFzk/Ayifo7ZBsZOJjHoUBKAE+gwzk3y+APiqblut9ljWhYNgpAsxnqAgG8ybbqdqaobo9n
+ Mn8onABfdqH4sYm5xBaPZOTcJSsMov+3KVUFgykNBKxwbVpyC1Zj1xAs0A+Al5AnvTpHs1oYywh
+ PFFCY4dyco0u4R20w0a8cwEzTJtgUZ8hqEM28zA5x5IbLvlgRWvIC+q/6Vs5Q+RK5Qrw==
+X-Received: by 2002:a05:600c:3e0c:b0:493:c548:87fb with SMTP id
+ 5b1f17b1804b1-493f536ceb3mr24258695e9.36.1783690780628; 
+ Fri, 10 Jul 2026 06:39:40 -0700 (PDT)
 Received: from emanueleg-nb.. (host-87-5-34-196.retail.telecomitalia.it.
  [87.5.34.196]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493f2e714a3sm39801495e9.2.2026.07.10.06.39.37
+ 5b1f17b1804b1-493f2e714a3sm39801495e9.2.2026.07.10.06.39.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 06:39:37 -0700 (PDT)
+ Fri, 10 Jul 2026 06:39:39 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: "Francesco Dolcini" <francesco.dolcini@toradex.com>,
  "Tom Rini" <trini@konsulko.com>
@@ -79,10 +80,12 @@ Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  "Stefano Babic" <sbabic@nabladev.com>,
  "Fabio Estevam" <festevam@gmail.com>, "Peng Fan" <peng.fan@nxp.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 0/2] board: toradex: smarc-imx95/aquila-imx95: detect RAM sizes
-Date: Fri, 10 Jul 2026 15:39:07 +0200
-Message-ID: <20260710133913.388770-1-ghidoliemanuele@gmail.com>
+Subject: [PATCH 2/2] board: toradex: aquila-imx95: detect RAM sizes
+Date: Fri, 10 Jul 2026 15:39:09 +0200
+Message-ID: <20260710133913.388770-3-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260710133913.388770-1-ghidoliemanuele@gmail.com>
+References: <20260710133913.388770-1-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,21 +107,89 @@ X-Virus-Status: Clean
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
 Use alias-based RAM probing to detect different memory configurations
-on Toradex iMX95 modules using LPDDR5. The address wrap-around is not
-linear on LPDDR5 modules: address bits above the module capacity
-alias back with some low address bits XORed (bit 32 -> XOR 0xc000),
-as measured on 4GB and 8GB modules.
+on Toradex Aquila iMX95. The address wrap-around is not linear: address
+bits above the module capacity alias back with some low address bits
+XORed (bit 32 -> XOR 0xc000), as measured on 4GB and 8GB modules.
 
-Emanuele Ghidoli (2):
-  board: toradex: smarc-imx95: detect RAM sizes
-  board: toradex: aquila-imx95: detect RAM sizes
+During probing, skip the first 256MB, since that region is reserved.
 
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
  board/toradex/aquila-imx95/aquila-imx95.c | 23 ++++++++++++++++++++++-
- board/toradex/smarc-imx95/smarc-imx95.c   | 23 ++++++++++++++++++++++-
  include/configs/aquila-imx95.h            | 15 +++++++++------
- include/configs/toradex-smarc-imx95.h     | 15 +++++++++------
- 4 files changed, 62 insertions(+), 14 deletions(-)
+ 2 files changed, 31 insertions(+), 7 deletions(-)
 
+diff --git a/board/toradex/aquila-imx95/aquila-imx95.c b/board/toradex/aquila-imx95/aquila-imx95.c
+index 0c6473e4b3a5..a5b26ef3dc3b 100644
+--- a/board/toradex/aquila-imx95/aquila-imx95.c
++++ b/board/toradex/aquila-imx95/aquila-imx95.c
+@@ -3,14 +3,35 @@
+ 
+ #include <asm/arch/clock.h>
+ #include <asm/arch/sys_proto.h>
++#include <errno.h>
+ #include <fdt_support.h>
+ #include <init.h>
+ 
+ #include "../common/tdx-cfg-block.h"
+ 
++/*
++ * The address wrap-around is not linear: address bits above the module
++ * capacity alias back to the base with some low address bits XORed, as
++ * measured on 4GB and 8GB modules (bit 32 -> XOR 0xc000, bit 33 -> XOR
++ * 0x2000).
++ */
++static const struct ram_alias_check ram_alias_checks[] = {
++	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_4G), (void *)((uintptr_t)PHYS_SDRAM + 0xc000), SZ_8G },
++	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_2G), (void *)(PHYS_SDRAM), SZ_4G },
++	{ NULL }
++};
++
+ int board_phys_sdram_size(phys_size_t *size)
+ {
+-	*size = PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE;
++	phys_size_t sz;
++
++	sz = probe_ram_size_by_alias(ram_alias_checks);
++	if (!sz) {
++		puts("## WARNING: Less than 4GB RAM detected\n");
++		return -EINVAL;
++	}
++
++	*size = sz - PHYS_SDRAM_FW_RSVD;
+ 
+ 	return 0;
+ }
+diff --git a/include/configs/aquila-imx95.h b/include/configs/aquila-imx95.h
+index 07d09d138cb3..96c11ff2d5bf 100644
+--- a/include/configs/aquila-imx95.h
++++ b/include/configs/aquila-imx95.h
+@@ -10,16 +10,19 @@
+ #define CFG_SYS_UBOOT_BASE	\
+ 	(QSPI0_AMBA_BASE + CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512)
+ 
+-/* module has 8GB, 2GB from 0x80000000..0xffffffff, 6GB above */
++/* module has 8GB, 2GB from 0x80000000..0xffffffff, 6GB above.
++ * Actual size is determined at runtime.
++ */
+ #define SZ_6G	_AC(0x180000000, ULL)
+ 
+-/* first 256MB reserved for firmware */
+-#define CFG_SYS_INIT_RAM_ADDR	0x90000000
++/* The first 256MB of SDRAM is reserved for firmware (Cortex M7) */
++#define PHYS_SDRAM_FW_RSVD	SZ_256M
++#define CFG_SYS_INIT_RAM_ADDR	PHYS_SDRAM
+ #define CFG_SYS_INIT_RAM_SIZE	SZ_2M
+ 
+-#define CFG_SYS_SDRAM_BASE	0x90000000
+-#define PHYS_SDRAM		0x90000000
+-#define PHYS_SDRAM_SIZE		(SZ_2G - SZ_256M)
++#define CFG_SYS_SDRAM_BASE	PHYS_SDRAM
++#define PHYS_SDRAM		(0x80000000 + PHYS_SDRAM_FW_RSVD)
++#define PHYS_SDRAM_SIZE		(SZ_2G - PHYS_SDRAM_FW_RSVD)
+ #define PHYS_SDRAM_2_SIZE	SZ_6G
+ 
+ #define CFG_SYS_SECURE_SDRAM_BASE	0x8A000000 /* Secure DDR region for A55, SPL could use first 2MB */
 -- 
 2.43.0
 
