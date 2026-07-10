@@ -4,92 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB6A3C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1612C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9B3984AAE;
-	Fri, 10 Jul 2026 17:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 18F2984AD6;
+	Fri, 10 Jul 2026 17:56:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aHC9kQ49";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="NURfYnR9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88F6784AC9; Fri, 10 Jul 2026 17:56:42 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 0928384A73; Fri, 10 Jul 2026 17:56:43 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DAFE84A73
+ by phobos.denx.de (Postfix) with ESMTPS id 96C9284AAE
  for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:56:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7e6b5737bb2so900711a34.1
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e9ecb1e13cso940749a34.3
  for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:56:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783698999; x=1784303799; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=aqXSo9Hg+pJhWWI2vv2bxbgmva6bEq85NBHywXxEj8U=;
- b=aHC9kQ491qjssdRpT2cc+9n738ZRh3DkO70KejpVnIRW2rGMhxjhMMqE/vkmDvv80F
- 0EhGD/rEVhV9ttB7QKaJd4glo9JhH9JGo1ui1P1jhgvse2h1gi6jeOMIBb0nFeEI28Zb
- HkFWU57R0scCyy/DaNOckLSLfaFHbqaRqtvhk=
+ d=baylibre.com; s=google; t=1783698999; x=1784303799; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=oilH41rNOPLd5eztkdoLX5oVurRdHmphbX8oTv1wFJE=;
+ b=NURfYnR9jhGenBqS2HeuDr9xuj0wOMHndKrxV92cusPSWO5AYYNzF7JjNzH0XbNlPr
+ /ocec3LtBJv/JAhgMGMw894GodbqJTYE7pDmihZFsDvnubNsyzrFsVRCbnF3A99WunIt
+ DbP8AS4lUPG7iS+mbECpzpB5lUlrwH6lSLDdyAwt1j4JnP1+txr1vnTC3VW6QYFH5PpF
+ iidu0Zir1LhwitUdr+WKWCYWHDncFxLxr+L+aTFj6w1LrBdCScVylqafCS5/GEtaPm4H
+ mEXI+xLDPtCzbZlH8+TmQzRqsgRY1bQgCxCeV6bqlFN50yqkioG6WxtpdDpD2fGzijoV
+ kMhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1783698999; x=1784303799;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=aqXSo9Hg+pJhWWI2vv2bxbgmva6bEq85NBHywXxEj8U=;
- b=TpsGFvKmDcmap5HVFHBYAkh2n91zw8Ud6nTS6/ykIfLSZm3a8+P3//iKCF01D15iP8
- 1kdTohKuryhDLjUrncZOjS7vM26+LpSUOpXj/17Pv5vxcVltrNZ2+AgBd8+mdk/7ToG3
- msu1WbfRMx48St3Y8byENDLhfiVDGc+ild5Nj0PmVA3i6C3yjTUxsRJrfzW49IAtVoYg
- 6XJ9Yi45YLb8DtwKn6SeL26TP6nIC+UZow8WzRCFSk2UwhiF3STDFw2f1qFYYe+18l8Z
- zM8ScEJZ5mg7beMW0hUTb9XP2e0A7QDTAJVz1VF92YHeKOb9eOysYcjn8smSeNKSC8gA
- yLyw==
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=oilH41rNOPLd5eztkdoLX5oVurRdHmphbX8oTv1wFJE=;
+ b=LBo/Lw1AXm5px5OY9e28P68rILuW4iXYdothqWgFwg4yDEN6spsiQZFTzTKbrSzrLC
+ sC1DPIPPxHeiqZRu+r7TgtKGiQlv48EDO86Z8v+0ccEaRKrdHQzQJLfQX1trjyRXgQR7
+ 6HvsL2z1AI1sVjGvp7ZwJuP4DsQwhAPMsyH04vVLw9gw96itNrBrDLEqkhcjkm160eGF
+ iwj7OUm5ZHEVitL3T3B5jgwBCEZe0xPYkzMwmuGUWQbIA3lC+i4eyUA9mW4frPxDYnE/
+ dnVxZXdVGFG6kfppulNRmNR6JsmY7DXiF8bIDUpFOgW6tR82inkmoh1h4OcMAg2H2Dgl
+ mKkw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+2y7GIm0i4daqAyZVVDqMB0q3KnRHW9xXKHzWOScXXlDE+30lr6vmliZN4lEmt6X9yrZnqnHU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7NXBGhJ4wkpCAznSgyGcoGA+eAyVNV3WjItu0NvaWMNBkN+rV
- mHiiFz8daLlh8u3zAErO/g0S1zCODrjftfMBh/JbYPTTEvH4vkKLALg1yDhrt/Lytq5BmLtHiWT
- Z2oflbYs=
-X-Gm-Gg: AfdE7cm6EvfgQTQaCGjzx662EmN7w8nOs7axDduhu0/HNd38p6kWIVYFWDjsB7/t1bR
- 0msWLIIUMfh65b15VjYD/gWOG2aeJB3+/9ClAhPmUFo+LKVnr80biTPQIhpAaTX5fEyzpak0OW+
- 0f+/0s4oN2zvQ75rMC00ppbrzZFpr9eKsypqPzhqUNYbVCbjrE4U29qcRkaG/dF7SSiWy2ptwlg
- UMh/oEAfiuyhIKgjqEPPLabOrnJ346F2fPbddegPpOOm45kFYURMfQRUco5Wkiu7qvZW0rl4KF8
- zbChQPg1NF4uzlRBuask2pDvp1wXncjjytavp+I18uZbfBFVE/scKd3+5YBk50saXkr60Xr5rRm
- XqPKE0Ci8DUuPfLhh1/ighvR3vgLPglkP54Kxa8eeKjgZS8UuANA6bLB6nI/CNHqX8vmsRd1N2o
- tuMLiKjyqyULnn/hHYiMZ5L4ItSVwhX/3aGarqboze6LD2rWzrO919k7wKjwFZDMe0Gut5Ej1Ye
- 3wybgp3QPLRYReTqiBwQgkdR8lAswErapvCTA==
-X-Received: by 2002:a05:6830:6c11:b0:7d9:7201:1acf with SMTP id
- 46e09a7af769-7ebd00cbd30mr8117856a34.5.1783698998927; 
+ AFNElJ/Zwv34rAr8DBKhRFG3vssY2i9IY06wKLPDfOW9ZAlorNasB8QOdN8fmArqvglpFbMECcQnxg0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxIqIYd8qn5MNL2JeYboktA9k3SbldUOYnxAM3v01usQ0oqjnZ
+ gw7GZxmrL/BT0fCIKCvuSTNmYu31Rjfn8M8ns9rA+eIzy06/wmyGuMc37AFrt9koFi8=
+X-Gm-Gg: AfdE7cmIlEfIpXZ6xL/r+ILOLA/4PFOsrerC7kS39YDBdw+ky3BP2TOkYYWqTzoLckT
+ C0jI4jLuktLbM6zzfBNhLNUnC/LntkI/zxbNsmI8H4M3zX8SBaUtfmFs/PpU/x8T/EKWZhSq8Jv
+ oMlhL3EVnvZN1DftpUyGRbkFKsCzW0K7whnz1Zx3cppAktMOa7RZviK+I6xv5KoF65J+di65gLF
+ 9JoDoOgGOKkRMvigL9VKVt3ijDkgf/tuIMTMfodV6XkqWrxNgvTzMMFDJsj+1AD9GiOGKu6rq5I
+ ELAVQlVk3I2TL/3nrotE9AgL0GRFlutHJCMC+WPImTOAaVvxDppZe66X19zw3jOwcoPtk4XPVXr
+ klRQLqng/wXMWRQLZrPhh+zE/ptG/Dxgi/PYxJqg4QLlyQscyWptxw9ZxD9pPVVchkMBiA1BFOO
+ d+BfKUUyCCWvADE7zS4xHkJrin0L9wg7/PQ1JQLdNmjyJshDrwawBG0V15dwpw
+X-Received: by 2002:a05:6820:2d49:b0:6a1:3e91:dcac with SMTP id
+ 006d021491bc7-6a36d9400efmr8050747eaf.31.1783698999174; 
+ Fri, 10 Jul 2026 08:56:39 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:1b03:95c:fbd4:4d00?
+ ([2600:8803:e7e4:500:1b03:95c:fbd4:4d00])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a38e16c7d8sm1499528eaf.9.2026.07.10.08.56.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
  Fri, 10 Jul 2026 08:56:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcae206e2sm6634630a34.2.2026.07.10.08.56.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 08:56:38 -0700 (PDT)
-Date: Fri, 10 Jul 2026 09:56:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
-Message-ID: <20260710155636.GL749385@bill-the-cat>
-References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-9-jonas@kwiboo.se>
- <20260709015247.GR749385@bill-the-cat>
- <f544cab6-1db6-481b-8f91-06cc2fb6829b@kwiboo.se>
- <20260710135030.GI749385@bill-the-cat>
- <ec6db006-bd05-4621-a9e6-cba6dd9690bd@kwiboo.se>
+Message-ID: <ef9e72ed-093e-4ab8-9deb-7a831da7ad58@baylibre.com>
+Date: Fri, 10 Jul 2026 10:56:36 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cMkGnV0jQd/yJGmu"
-Content-Disposition: inline
-In-Reply-To: <ec6db006-bd05-4621-a9e6-cba6dd9690bd@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/9] clk: mediatek: mt8188: convert to mtk_gate_clk_data
+From: David Lechner <dlechner@baylibre.com>
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ Chris Chen <chris-qj.chen@mediatek.com>, Julien Masson
+ <jmasson@baylibre.com>, Daniel Golle <daniel@makrotopia.org>
+References: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
+ <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-3-a4b5c491d9bf@baylibre.com>
+ <cb527477-b1e4-452c-b61d-fbcea090891e@baylibre.com>
+Content-Language: en-US
+In-Reply-To: <cb527477-b1e4-452c-b61d-fbcea090891e@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,127 +112,301 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 7/10/26 10:52 AM, David Lechner wrote:
+> On 7/10/26 9:12 AM, Julien Stephan wrote:
+>> MT8188 currently declares a separate U_BOOT_DRIVER, mtk_clk_tree,
+>> probe() function and compatible table for each clock gate controller,
+>> despite all of them sharing the same implementation.
+>>
+>> Convert MT8188 to use the generic mtk_gate_clk_data infrastructure.
+>> This allows all clock gate controllers to share a single generic
+>> driver, eliminating duplicated code while preserving the existing
+>> behaviour.
+>>
+>> No functional change intended.
+>>
+> Since the recent clock changes I made (still under review on list),
+> I was hoping we could avoid using struct mtk_gate and mtk_common_clk_gate_init()
+> in new code so we could eventually remove them. It should now be possible
+> to use struct mtk_clk_tree and mtk_common_clk_init() instead with
+> mtk_clk_topckgen_ops.
+> 
+> So something like this (untested):
+> 
+> ---
+> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+> index f73fa1fce95..84256ad5c5a 100644
+> --- a/drivers/clk/mediatek/clk-mt8188.c
+> +++ b/drivers/clk/mediatek/clk-mt8188.c
+> @@ -1622,6 +1622,8 @@ static const struct mtk_gate infracfg_ao_clks[] = {
+>  static const struct mtk_clk_tree mt8188_infracfg_ao_clk_tree = {
+>  	.ext_clk_rates = ext_clock_rates,
+>  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+> +	.gates = infracfg_ao_clks,
+> +	.num_gates = ARRAY_SIZE(infracfg_ao_clks),
+>  };
+>  
+>  static const struct mtk_gate_regs peri_ao_cg_regs = {
+> @@ -1665,6 +1667,8 @@ static const struct mtk_gate pericfg_ao_clks[] = {
+>  static const struct mtk_clk_tree mt8188_pericfg_ao_clk_tree = {
+>  	.ext_clk_rates = ext_clock_rates,
+>  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+> +	.gates = pericfg_ao_clks,
+> +	.num_gates = ARRAY_SIZE(pericfg_ao_clks),
+>  };
+>  
+>  static const struct mtk_gate_regs imp_iic_wrap_cg_regs = {
+> @@ -1697,19 +1701,49 @@ static const struct mtk_gate imp_iic_wrap_en_clks[] = {
+>  	GATE_IMP_IIC_WRAP(CLK_IMP_IIC_WRAP_EN_AP_CLOCK_I2C6, CLK_TOP_I2C, 1),
+>  };
+>  
+> -const struct mtk_clk_tree mt8188_imp_iic_wrap_c_clk_tree = {
+> +static const struct mtk_clk_tree mt8188_imp_iic_wrap_c_clk_tree = {
+>  	.ext_clk_rates = ext_clock_rates,
+>  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+> +	.gates = imp_iic_wrap_c_clks,
+> +	.num_gates = ARRAY_SIZE(imp_iic_wrap_c_clks),
+>  };
+>  
+> -const struct mtk_clk_tree mt8188_imp_iic_wrap_w_clk_tree = {
+> +static const struct mtk_clk_tree mt8188_imp_iic_wrap_w_clk_tree = {
+>  	.ext_clk_rates = ext_clock_rates,
+>  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+> +	.gates = imp_iic_wrap_w_clks,
+> +	.num_gates = ARRAY_SIZE(imp_iic_wrap_w_clks),
+>  };
+>  
+> -const struct mtk_clk_tree mt8188_imp_iic_wrap_en_clk_tree = {
+> +static const struct mtk_clk_tree mt8188_imp_iic_wrap_en_clk_tree = {
+>  	.ext_clk_rates = ext_clock_rates,
+>  	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+> +	.gates = imp_iic_wrap_en_clks,
+> +	.num_gates = ARRAY_SIZE(imp_iic_wrap_en_clks),
+> +};
+> +
+> +static const struct udevice_id of_match_mt8188_clk[] = {
+> +	{
+> +		.compatible = "mediatek,mt8188-infracfg-ao",
+> +		.data = (ulong)&mt8188_infracfg_ao_clk_tree
+> +	},
+> +	{
+> +		.compatible = "mediatek,mt8188-pericfg-ao",
+> +		.data = (ulong)&mt8188_pericfg_ao_clk_tree
+> +	},
+> +	{
+> +		.compatible = "mediatek,mt8188-imp-iic-wrap-c",
+> +		.data = (ulong)&mt8188_imp_iic_wrap_c_clk_tree
+> +	},
+> +	{
+> +		.compatible = "mediatek,mt8188-imp-iic-wrap-w",
+> +		.data = (ulong)&mt8188_imp_iic_wrap_w_clk_tree
+> +	},
+> +	{
+> +		.compatible = "mediatek,mt8188-imp-iic-wrap-en",
+> +		.data = (ulong)&mt8188_imp_iic_wrap_en_clk_tree
+> +	},
+> +	{ }
+>  };
+>  
+>  static int mt8188_apmixedsys_probe(struct udevice *dev)
+> @@ -1722,39 +1756,12 @@ static int mt8188_topckgen_probe(struct udevice *dev)
+>  	return mtk_common_clk_init(dev, &mt8188_topckgen_clk_tree);
+>  }
+>  
+> -static int mt8188_infracfg_ao_probe(struct udevice *dev)
+> -{
+> -	return mtk_common_clk_gate_init(dev, &mt8188_infracfg_ao_clk_tree,
+> -					infracfg_ao_clks,
+> -					ARRAY_SIZE(infracfg_ao_clks), 0);
+> -}
+> -
+> -static int mt8188_pericfg_ao_probe(struct udevice *dev)
+> -{
+> -	return mtk_common_clk_gate_init(dev, &mt8188_pericfg_ao_clk_tree,
+> -					pericfg_ao_clks,
+> -					ARRAY_SIZE(pericfg_ao_clks), 0);
+> -}
+> -
+> -static int mt8188_imp_iic_wrap_c_probe(struct udevice *dev)
+> -{
+> -	return mtk_common_clk_gate_init(dev, &mt8188_imp_iic_wrap_c_clk_tree,
+> -					imp_iic_wrap_c_clks,
+> -					ARRAY_SIZE(imp_iic_wrap_c_clks), 0);
+> -}
+> -
+> -static int mt8188_imp_iic_wrap_w_probe(struct udevice *dev)
+> +/* REVISIT: could be made into a common function shared by all drivers. */
+> +static int mt8188_clk_probe(struct udevice *dev)
+>  {
+> -	return mtk_common_clk_gate_init(dev, &mt8188_imp_iic_wrap_w_clk_tree,
+> -					imp_iic_wrap_w_clks,
+> -					ARRAY_SIZE(imp_iic_wrap_w_clks), 0);
+> -}
+> +	struct mtk_clk_tree *tree = (void *)dev_get_driver_data(dev);
+>  
+> -static int mt8188_imp_iic_wrap_en_probe(struct udevice *dev)
+> -{
+> -	return mtk_common_clk_gate_init(dev, &mt8188_imp_iic_wrap_en_clk_tree,
+> -					imp_iic_wrap_en_clks,
+> -					ARRAY_SIZE(imp_iic_wrap_en_clks), 0);
+> +	return mtk_common_clk_init(dev, tree);
+>  }
+>  
+>  static const struct udevice_id mt8188_apmixed_compat[] = {
+> @@ -1767,31 +1774,6 @@ static const struct udevice_id mt8188_topckgen_compat[] = {
+>  	{ }
+>  };
+>  
+> -static const struct udevice_id mt8188_infracfg_ao_compat[] = {
+> -	{ .compatible = "mediatek,mt8188-infracfg-ao", },
+> -	{ }
+> -};
+> -
+> -static const struct udevice_id mt8188_pericfg_ao_compat[] = {
+> -	{ .compatible = "mediatek,mt8188-pericfg-ao", },
+> -	{ }
+> -};
+> -
+> -static const struct udevice_id mt8188_imp_iic_wrap_c_compat[] = {
+> -	{ .compatible = "mediatek,mt8188-imp-iic-wrap-c", },
+> -	{ }
+> -};
+> -
+> -static const struct udevice_id mt8188_imp_iic_wrap_w_compat[] = {
+> -	{ .compatible = "mediatek,mt8188-imp-iic-wrap-w", },
+> -	{ }
+> -};
+> -
+> -static const struct udevice_id mt8188_imp_iic_wrap_en_compat[] = {
+> -	{ .compatible = "mediatek,mt8188-imp-iic-wrap-en", },
+> -	{ }
+> -};
+> -
+>  U_BOOT_DRIVER(mt8188_clk_apmixedsys) = {
+>  	.name = "mt8188-apmixedsys",
+>  	.id = UCLASS_CLK,
+> @@ -1814,52 +1796,12 @@ U_BOOT_DRIVER(mt8188_clk_topckgen) = {
+>  	.flags = DM_FLAG_PRE_RELOC,
+>  };
+>  
+> -U_BOOT_DRIVER(mt8188_clk_infracfg_ao) = {
+> -	.name = "mt8188-infracfg-ao",
+> -	.id = UCLASS_CLK,
+> -	.of_match = mt8188_infracfg_ao_compat,
+> -	.probe = mt8188_infracfg_ao_probe,
+> -	.priv_auto = sizeof(struct mtk_cg_priv),
+> -	.ops = &mtk_clk_gate_ops,
+> -	.flags = DM_FLAG_PRE_RELOC,
+> -};
+> -
+> -U_BOOT_DRIVER(mt8188_clk_pericfg_ao) = {
+> -	.name = "mt8188-pericfg-ao",
+> -	.id = UCLASS_CLK,
+> -	.of_match = mt8188_pericfg_ao_compat,
+> -	.probe = mt8188_pericfg_ao_probe,
+> -	.priv_auto = sizeof(struct mtk_cg_priv),
+> -	.ops = &mtk_clk_gate_ops,
+> -	.flags = DM_FLAG_PRE_RELOC,
+> -};
+> -
+> -U_BOOT_DRIVER(mt8188_clk_imp_iic_wrap_c) = {
+> -	.name = "mt8188-imp_iic_wrap_c",
+> -	.id = UCLASS_CLK,
+> -	.of_match = mt8188_imp_iic_wrap_c_compat,
+> -	.probe = mt8188_imp_iic_wrap_c_probe,
+> -	.priv_auto = sizeof(struct mtk_cg_priv),
+> -	.ops = &mtk_clk_gate_ops,
+> -	.flags = DM_FLAG_PRE_RELOC,
+> -};
+> -
+> -U_BOOT_DRIVER(mt8188_clk_imp_iic_wrap_w) = {
+> -	.name = "mt8188-imp_iic_wrap_w",
+> +U_BOOT_DRIVER(mt8188_clk) = {
+> +	.name = "mt8188-clk",
+>  	.id = UCLASS_CLK,
+> -	.of_match = mt8188_imp_iic_wrap_w_compat,
+> -	.probe = mt8188_imp_iic_wrap_w_probe,
+> -	.priv_auto = sizeof(struct mtk_cg_priv),
+> -	.ops = &mtk_clk_gate_ops,
+> -	.flags = DM_FLAG_PRE_RELOC,
+> -};
+> -
+> -U_BOOT_DRIVER(mt8188_clk_imp_iic_wrap_en) = {
+> -	.name = "mt8188-imp_iic_wrap_en",
+> -	.id = UCLASS_CLK,
+> -	.of_match = mt8188_imp_iic_wrap_en_compat,
+> -	.probe = mt8188_imp_iic_wrap_en_probe,
+> -	.priv_auto = sizeof(struct mtk_cg_priv),
+> -	.ops = &mtk_clk_gate_ops,
+> +	.of_match = of_match_mt8188_clk,
+> +	.probe = mt8188_clk_probe,
+> +	.priv_auto = sizeof(struct mtk_clk_priv),
+> +	.ops = &mtk_clk_topckgen_ops,
+>  	.flags = DM_FLAG_PRE_RELOC,
+>  };
+> 
 
---cMkGnV0jQd/yJGmu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+And on top of this, even...
 
-On Fri, Jul 10, 2026 at 05:39:08PM +0200, Jonas Karlman wrote:
-> Hi Tom,
->=20
-> On 7/10/2026 3:50 PM, Tom Rini wrote:
-> > On Thu, Jul 09, 2026 at 09:12:24AM +0200, Jonas Karlman wrote:
-> >> Hi Tom,
-> >>
-> >> On 7/9/2026 3:52 AM, Tom Rini wrote:
-> >>> On Wed, Jul 08, 2026 at 10:05:34PM +0000, Jonas Karlman wrote:
-> >>>
-> >>>> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol=
- to
-> >>>> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabl=
-ed.
-> >>>>
-> >>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> >>>> ---
-> >>>>  drivers/i2c/Kconfig | 4 ++--
-> >>>>  1 file changed, 2 insertions(+), 2 deletions(-)
-> >>>>
-> >>>> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-> >>>> index ab5af17858c8..125dc84819e6 100644
-> >>>> --- a/drivers/i2c/Kconfig
-> >>>> +++ b/drivers/i2c/Kconfig
-> >>>> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
-> >>>> =20
-> >>>>  config SPL_SYS_I2C_LEGACY
-> >>>>  	bool "Enable legacy I2C subsystem and drivers in SPL"
-> >>>> -	depends on SUPPORT_SPL && !SPL_DM_I2C
-> >>>> +	depends on SPL && !SPL_DM_I2C
-> >>>>  	help
-> >>>>  	  Enable the legacy I2C subsystem and drivers in SPL.  This is use=
-ful
-> >>>>  	  in some size constrained situations.
-> >>>> =20
-> >>>>  config TPL_SYS_I2C_LEGACY
-> >>>>  	bool "Enable legacy I2C subsystem and drivers in TPL"
-> >>>> -	depends on SUPPORT_TPL && !SPL_DM_I2C
-> >>>> +	depends on TPL && !TPL_DM_I2C
-> >>>>  	help
-> >>>>  	  Enable the legacy I2C subsystem and drivers in TPL.  This is use=
-ful
-> >>>>  	  in some size constrained situations.
-> >>>
-> >>> Building on the last email, I think these might need to be
-> >>> [ST]PL_FRAMEWORK not [ST]PL.
-> >>>
-> >>
-> >> I have mostly tested this series with additional changes that alias
-> >> putc()/puts() to printch()/printascii() in xPL builds when
-> >> common/console.o is unavailable and DEBUG_UART=3Dy, patches that will
-> >> be sent as a separate series.
-> >>
-> >> It is possible such change may have hidden some latent issues, now
-> >> trying to push a branch that contains changes that ends at the patches
-> >> included in this series, but due to timeouts it was not possible prior
-> >> to sending this reply.
-> >>
-> >> This patch can also be dropped if it causes any issues, I only added it
-> >> after a search for SUPPORT_xPL and noticed that these depends seem to =
-be
-> >> incorrect. SUPPORT_xPL is used to tell if xPL can be enabled or not,
-> >> not if xPL is enabled/disabled.
-> >=20
-> > I don't want to drop this, but there are a handful of platforms that
-> > change:
-> > 10: Kconfig: i2c: Depend on correct xPL symbol
-> >    aarch64: (for 1/1 boards) all -60.0 text -60.0
-> >             ls1043aqds_tfa : all -60 text -60
-> >                u-boot: add: 0/-1, grow: 0/-1 bytes: 0/-60 (-60)
-> >                  function                                   old     new=
-   delta
-> >                  board_early_init_f                          68      64=
-      -4
-> >                  i2c_early_init_f                            56       -=
-     -56
-> >=20
-> > Can you please look in to it and see what needs to be changed? Thanks.
->=20
-> From a quick look this size change may be caused due to use of an
-> 'imply SPL_SYS_I2C_LEGACY' instead of using an 'imply SYS_I2C_LEGACY'
-> in arch/arm/cpu/armv8/fsl-layerscape/Kconfig.
->=20
-> 'config MACH_SUN8I_R40' is another platform that also possible miss
-> an 'imply SYS_I2C_LEGACY' to match other similar sunxi platforms.
->=20
-> Building this target I also noticed some more SPL_<name> symbols that
-> may be missing a 'depends on SPL':
->=20
->   > grep CONFIG_SPL .config
->   # CONFIG_SPL_SYS_L2_PL310 is not set
->   # CONFIG_SPL is not set
->   # CONFIG_SPL_SYS_STDIO_DEREGISTER is not set
->   # CONFIG_SPL_NVMEM is not set
->   CONFIG_SPL_SYS_NAND_SELF_INIT=3Dy
->   # CONFIG_SPL_PHY_ATHEROS is not set
->   # CONFIG_SPL_PHY_TI_DP83867 is not set
->   # CONFIG_SPL_LZMA_SIZE_OPTIMIZATION is not set
->=20
-> Should possible add 'depends on' to some of them in a v2.
+---
+diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+index 84256ad5c5a..5a2deb4102b 100644
+--- a/drivers/clk/mediatek/clk-mt8188.c
++++ b/drivers/clk/mediatek/clk-mt8188.c
+@@ -1746,16 +1746,6 @@ static const struct udevice_id of_match_mt8188_clk[] = {
+ 	{ }
+ };
+ 
+-static int mt8188_apmixedsys_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_init(dev, &mt8188_apmixedsys_clk_tree);
+-}
+-
+-static int mt8188_topckgen_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_init(dev, &mt8188_topckgen_clk_tree);
+-}
+-
+ /* REVISIT: could be make a common function shared by all drivers. */
+ static int mt8188_clk_probe(struct udevice *dev)
+ {
+@@ -1765,12 +1755,18 @@ static int mt8188_clk_probe(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id mt8188_apmixed_compat[] = {
+-	{ .compatible = "mediatek,mt8188-apmixedsys", },
++	{
++		.compatible = "mediatek,mt8188-apmixedsys",
++		.data = (ulong)&mt8188_apmixedsys_clk_tree
++	},
+ 	{ }
+ };
+ 
+ static const struct udevice_id mt8188_topckgen_compat[] = {
+-	{ .compatible = "mediatek,mt8188-topckgen", },
++	{
++		.compatible = "mediatek,mt8188-topckgen",
++		.data = (ulong)&mt8188_topckgen_clk_tree
++	},
+ 	{ }
+ };
+ 
+@@ -1779,7 +1775,7 @@ U_BOOT_DRIVER(mt8188_clk_apmixedsys) = {
+ 	.id = UCLASS_CLK,
+ 	.of_match = mt8188_apmixed_compat,
+ 	.bind = mtk_common_clk_parent_bind,
+-	.probe = mt8188_apmixedsys_probe,
++	.probe = mt8188_clk_probe,
+ 	.priv_auto = sizeof(struct mtk_clk_priv),
+ 	.ops = &mtk_clk_apmixedsys_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
+@@ -1790,7 +1786,7 @@ U_BOOT_DRIVER(mt8188_clk_topckgen) = {
+ 	.id = UCLASS_CLK,
+ 	.of_match = mt8188_topckgen_compat,
+ 	.bind = mtk_common_clk_parent_bind,
+-	.probe = mt8188_topckgen_probe,
++	.probe = mt8188_clk_probe,
+ 	.priv_auto = sizeof(struct mtk_clk_priv),
+ 	.ops = &mtk_clk_topckgen_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
 
-Great, thanks!
-
---=20
-Tom
-
---cMkGnV0jQd/yJGmu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalEWMAAKCRAr4qD1Cr/k
-CjjeAQD04Zz50AR/Eh79g9yo973Yf+X214IPDixU0H6vn08TgQD9EjfvqpBQS6Ml
-Zc02YxOXnLDQVbhBchzh5ORx4kKCjgI=
-=5xZJ
------END PGP SIGNATURE-----
-
---cMkGnV0jQd/yJGmu--
