@@ -4,134 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF92C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 08:51:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F53C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 09:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2A9284659;
-	Fri, 10 Jul 2026 10:51:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id E55D184119;
+	Fri, 10 Jul 2026 11:28:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="KInGlAYn";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="akIr1qzK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36D18846D3; Fri, 10 Jul 2026 10:51:54 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id ECB26843B6; Fri, 10 Jul 2026 11:28:38 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C69428407E
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 10:51:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 693688407E
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 11:28:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LKrUD+5HE6KCF9Wc7jlYDG5Co7aNN9I/49KyxppB3xiCMRIfTN3+SBZqfSruqKwBLvOUrtR/nIlPK29o5JBYbQmFajvvAE/3yu3sdHuqBcOcCAtDB6orepR1lzwPqmdkBGtAY6VmZTEPUwu36EzuW6yIZo9fkmczNJTSUnhEDZXkPKUb+FF+GYQHIfg+nSo8iATc9Z8aC+LRsOtlDv5GtBvVVki8O52EhfZZr2zBWR3a0f1W8eGKoSd7oFqCeFZZY3WjjgkQA+qYpPMN91tsXQHaZTEqZ5NOx2kz3odU7nS5/ygZ0XZPDXYpSb+EtlgSnKnUqxPmAaFaAJDb9NjLXg==
+ b=Gq5bM2kwcIMDg6hYn869FO312KUSUa/1MI15vgSPMP4G5ubHdAtAlWMkf1p5GOLkVrObJ8oZnJwNOcQbBvLozOPkVdPx2FkF1dMVRrehe/jYEiwfyyJX5oS5s3IaaDkT8pYTH9CUAl8qum+kiNV88awDrpAOWwCFZwLWxk1cPfaJhi3xNbPsJiKaxZnGbjGLnuXGtfBN9FCbpIOUeOUP7s6h+rvFUJUBEGLEXwCloUm39WTc3YuIlhtCaveFRpyDxal5HyOVZfrh9q8cH2nTAPgBkq2d7jAuWfsysZ5RwVqfY/dlQnwS0AGW+5bKZlGIsq8jZWGBjL+P4h/awm3PIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZDNHKq6OvKep2vBaOY+oVl9xHWRQaBy40GGevaEuJFM=;
- b=qo3BfESQJPPnbQ4hHWkSZvrmUoLcA4JL5wTZVJqS/fi9+CukmDw27IyWxbcjOX66UJ7XX+raLMR9AaSxLffCh67s4uwvqY6Ew7vSzB9OtwENWONPm7lt7D7pvl+wvCiaZrK+YtvXw1SZVMnH3QQ/GtO3j7sjDNvycWrpCS8lUtYf3L6SCxgDDV7FL+2hvZgJLk9hbHRFXJ4a9rBqhed1UH9YaSKfh4VGzHGcqMWIvBJNSOHcSWhAhpUrIDiKAkElNEk1IBdaFenurI0a8yHBw2zrsQMu+vKrZWOMIIz1ggkV7WoamUPowKhBnRpjbPCi5LVQA8Kmd/87IQ5J6+7ELw==
+ bh=n47Vuaie5As94VqdhuL93U6RLYQGyJs4KGddnPTxKBE=;
+ b=u9yd3Mb4mAMyL9DkAQknqHh3x79q2LNGA9mD4QYMska+hXhAjv+BK9kZJczAtAgJ2IvVFgcBh9XFTVRsF/GD6QqS7w362F7drAIGFJBLIecpSDbPZsoBf6ohbbYSmTAVDmTOktFI8tj2PI/L8vnVkHbfDQ57j/WDQPJBg0PpBtlwF9zAkOTR3KBtzyuDAohzodRRntNlcb3J3v/a6l/pL4Le42WoWMzTCGGZu96HEyd+yyT5zgY2y7JqWeuRApB5fAauvX6QVIJ6r8VHxTJeJpa7RHD2BRSgUyp1A5PsTV140bQDyf85RjfNP1K5BI20KU7mVWJqZDrEN+QFCGrHVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZDNHKq6OvKep2vBaOY+oVl9xHWRQaBy40GGevaEuJFM=;
- b=KInGlAYnkANpuQ9ecoX/L4dkV6B5fhWGSkDHHZXX4AlljM3AQoT+jO6tZdutyp5wdH1XOoMwyRKUICylG3EOwVfjnljI9Bz6BAiHOkFSvaSunnjtYRzxq2m5mdQr+86bjwjA3DuO+IKkZOBBK4+YyXBSqjxL2SIARMGSy7KU6Ig=
+ bh=n47Vuaie5As94VqdhuL93U6RLYQGyJs4KGddnPTxKBE=;
+ b=akIr1qzKypvpxwodQN1uI66Zu4efmwiGKxgb2nZ6jZDdQzGVqwn9o8DQkhPK1qAVTdJ1pr+z178jC6tCM2BpaaATXHRL8dDn+Aa0ApzbodP/6M7rr24BG903tn4DdLV4iE+pdy2+GOFIEzSlAV7+03owJ7arGHK9Bue8mhBo1LENLigul/pcIumxr5uR48HHiGfzQSBHI9LQ20QwwlHqK0oa8qeJ4gYgF4x9K+7GmRTeLR6ikyKOcM7S6Q/I0nbOoboam6ChfC74nsuMMchDNPYCLEvuzldCVRxyd53TyPHLuLqUe0QgExDKbFZjDVQhHdsfQ0LOA4hitx/mkCzvHg==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by DB9PR04MB8089.eurprd04.prod.outlook.com (2603:10a6:10:247::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Fri, 10 Jul
- 2026 08:51:48 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0181.016; Fri, 10 Jul 2026
- 08:51:48 +0000
-Message-ID: <cf43de1a-b2ef-4e98-ab06-fa78f299e3f0@cherry.de>
-Date: Fri, 10 Jul 2026 10:51:47 +0200
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB12214.eurprd04.prod.outlook.com
+ (2603:10a6:150:336::18) by AS5PR04MB9855.eurprd04.prod.outlook.com
+ (2603:10a6:20b:652::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Fri, 10 Jul
+ 2026 09:28:33 +0000
+Received: from GV2PR04MB12214.eurprd04.prod.outlook.com
+ ([fe80::52c:37d:f2c0:797d]) by GV2PR04MB12214.eurprd04.prod.outlook.com
+ ([fe80::52c:37d:f2c0:797d%6]) with mapi id 15.21.0181.014; Fri, 10 Jul 2026
+ 09:28:33 +0000
+Message-ID: <adfa3625-6870-4bae-919d-f7c9ff6e44fb@oss.nxp.com>
+Date: Fri, 10 Jul 2026 17:28:09 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] board: rockchip: Add support for 9Tripod X3568 v4
-To: Coia Prant <coiaprant@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-References: <20260709185101.2149485-1-coiaprant@gmail.com>
+Subject: Re: [PATCH 3/3] usb: ci_udc: verify all dtds are inactive before
+ completing request
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Ye Li <ye.li@nxp.com>,
+ lukma@denx.de, u-boot@lists.denx.de
+Cc: festevam@gmail.com, peng.fan@nxp.com, uboot-imx@nxp.com,
+ xu.yang_2@nxp.com, jason.he_1@nxp.com
+References: <20260522075512.1291485-1-ye.li@nxp.com>
+ <20260522075512.1291485-3-ye.li@nxp.com> <87fr2mhlxu.fsf@kernel.org>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260709185101.2149485-1-coiaprant@gmail.com>
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <87fr2mhlxu.fsf@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VIUP296CA0099.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:351::9) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TP0P295CA0027.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:5::14) To GV2PR04MB12214.eurprd04.prod.outlook.com
+ (2603:10a6:150:336::18)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DB9PR04MB8089:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04190a3f-2cd4-45b1-4b63-08dede607a25
+X-MS-TrafficTypeDiagnostic: GV2PR04MB12214:EE_|AS5PR04MB9855:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4992c61e-823e-4fc3-26e3-08dede659c89
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|56012099006|4133799003|5023799004|11063799006|6133799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: +Ze3bDZgYDpD3qlYEPllHeN2AcG7phnHQJn1W1OIhA/Tykftim68d2r4eUakHGNw8wNqfdq/7m4zM0j9uPeOMgPVPErdnaLAvZic1Zjp1PANGgGekHio2RYWGQO5IXtfk6SzPB8ECVFjs30MqGYRdo3Co6cJgeRDsxdVE7LAwsQt/CGBRNLVYhM8v/D4qWdW2eFxS0k9XSLCiUM+bpAr1teURFb1LcaxT5Q+oqRD1lTUQfaAWTMH1CGjLiMFfOAqu1EN8nn148pCeplFv+FVuWenYXSlCYQTgtXYs3HZ3+DihEX26irFouhmZujSDh/zyZVtI6tCgyzJzGSlu6D7budyiWpXfsBlDnkX62QyYme21NGIZSOmBy32OuKSZ25/05FBzsfIUgQXt1RJu8xfnOUgoGc61FN0lnPyFJI9l+3YhYqIat2Pq4nGnBMbHHUeIk/NI7fNrBZjFhGl5RUTDOOdgaGfPCDymPAVuoOksFim4USpG6fn1txdyKjDmc5kx+NU32jX5RoEUDkljp57bQkKkWDwEd8v8FeK7u0GPugku73j9/xKsNv72f7W84MrJ/G1qzSI/k/HEqvo81sYRv5z/xEIQGgX7feA1iiJDhM=
+ ARA:13230040|1800799024|23010399003|366016|376014|19092799006|42112799006|4143699003|18002099003|22082099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: Mjk/Pgpq09jcgS2D4BTQgnb4sk39OLXiMNV4hy9zBLahFfVVG0xyHrvAeB+SDhBaCHkeir80Tg30kDaaQ+heYmWfSBjeU8hbFo3fxltefFBLXxx0TNSD/d+9dlAocz2BKN5RPp4lx/9kAGDEDtnNOym4aIoznWbvKxmdOvbgxvPXFdT0logdUZfeHix4diZzQA6kSqG1BJBRXOD7lm0l00KcxUdLzRHTzl85URBEWapmf1G2sBbyDJICiR1WGjKwOWWooig+x+zvdEq+5ii1/hbeVA56x93qSb6zmZOS05Rn1FrH9ZnQap2/cmAjM5F024Tta5e1lvYjna3jkIkzkgW4agVKPoLd8lFHLViYofLRo3PHHdCBkqvgbsegomSFP+7f1XMbbbIJW/VQ2J9JxaFbwYDuZLIAQax1H7Kzy9BWPIfAFzVM8ssVfT3wfAVhrfQH5YziXo+4jYhCJO+JVUDJFwbCSTtA+W/kCKjLMNK8xVKiZuXIgoxtc2VPvy0XRRpH5Vut+qK8/jM9DDin8kw6X2p0TYrP1ipwdGlH6D/c9S2tAnAqYC+RJBtkowYgXGt+S/UZZADCbXwPCATvzIPkqx7Rkj9NrsM/TArpsu70wvROk4YF4tvjbfcdlVvacVT9WmYHRoe70TKG3T3aFUtPfJI9UlYTc5TJ+ty2pMs=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(56012099006)(4133799003)(5023799004)(11063799006)(6133799003)(22082099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:GV2PR04MB12214.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(19092799006)(42112799006)(4143699003)(18002099003)(22082099003)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGo1c2dIb240STl3WGxiNUpySnRUN2o1b2V6My9qM0ZieWZZWXhLYzIwSnVz?=
- =?utf-8?B?UldzNkVLeVJHMGJkR0tNdHVNSXUzRytRWjlwK3VOK3pvYlBQNWUxUjRudk5l?=
- =?utf-8?B?TWlIZmFFUnczK3FxVGRyKzBUWjRud25kNG5vT0ZqeGVEamwzcHNwUDBXRDJV?=
- =?utf-8?B?clMzalhXYUEvWXczTncvSWx1VmFGMm9mQm1IaERCSEZhL29ISFV5SENlRE1Q?=
- =?utf-8?B?a2U0bEM1WVVyQnFMVElSRGdzdk9LVjVvcmNsVVVKVzU4anVZOTVxejhwTEF5?=
- =?utf-8?B?YUd2SFF0dFFVNjJGWUJXSWFEVmU1MDhxL2dXQ2pyUXppQUQxMElQWFNsdzNr?=
- =?utf-8?B?NzEybXpacmVDQWEvajdiWHZjSXR3WU1rakNnTkowMjZUZUVoaEhkZmM4S0RL?=
- =?utf-8?B?VUp2MlVaQXI0elFPQ2I4Nm5pM3NLQjFFblNWeklnd1hRdTVJK09mckszem1m?=
- =?utf-8?B?bHE3WXorNDlFdDJVQzZ2OXlXU0JYbXJwRmZDNFJmRjZmOW5PTDFlQWRsakRN?=
- =?utf-8?B?TWJqdGNZbjR6bEkzWmk1czhoOGg5NnRRN0FUYXB5K0d3cGNSSjBXTEgvTTVX?=
- =?utf-8?B?cWU4VGRtRGRoV1NQTTRVN2FXZWpBSXRmcUJWOUtERE9rU2NLdXFmQ3k2M0VT?=
- =?utf-8?B?MjJTb21sQnhpc3FocGxXTXdHNnhoWitqQVBVZjU5emdrWFIyd2IxNHpxY21E?=
- =?utf-8?B?dDMwQVJ1R1hZMENiSkR4UGxhM3FSSmhsRWpYeXVTSmxzK3ZGT01xU2x0ZlBa?=
- =?utf-8?B?bE5DRklCS0Y3dDI5SHN5RDFqSThVTnRSbExySzl2TVBnYVc4SzNBYVZEZkxY?=
- =?utf-8?B?MkFKc3BXTGxOYWZxS2FvRmE2RUJhck5tdVFQSytvUEt0YUNDZGJDTE9JTHBi?=
- =?utf-8?B?N3YrYkE0RDJXVEltTThXa1ZCRXlmTUlPUFU3ZkJQaXF4NjhobVltaE1OWjZR?=
- =?utf-8?B?OEVxTVV6R01ZTVZWZ051Vm9ML1I0MUxuc3JNWFNMR09mR2s1UEt1NFJvMjdK?=
- =?utf-8?B?RGNLOElITHEvRHJoaVo5R1ZNdm5qMWdBTEZxWUJ6cjFsZ21TTjVmUFJnODNp?=
- =?utf-8?B?a2E2Z3U5dXF3VTNmbGorKzFiYnhIOU1rc3ZhUHVPdXRjR0Nmdkx5biszeWpD?=
- =?utf-8?B?UlZOdUpNNU1WMkxQRGg3RmNNM3BBYldmdUQ1S280aDFOa3kvSkhGYVZMbXlM?=
- =?utf-8?B?SWFjc3N1K0k0ZmgvUGpyUExCSlZwQ1VSemc3UTFzUHY0Y21jYmR3eXVXY04v?=
- =?utf-8?B?WjUwSm4ra1FhSnl1ZXJMWTlvRUJQalNnZlZzTnZLVlJjaGU4MXZaZXVwTFp6?=
- =?utf-8?B?dm5oK1V5NWZIVFM5aGFLWUR3U1c2dEhMckw4eUFxWFhNdzZYRDV0VFI1L2JI?=
- =?utf-8?B?UXBjeFhNSnRPdkpxaHovYmIxRVlHWWJLVXFoUjllWDhnc2hhSUZ5UzlKOEJK?=
- =?utf-8?B?Zkk3S0dtS1NpSjZvclM3OWpGdnFRWVpqUXdYVXZlSEtDcllGNzhSQVJ4QXBD?=
- =?utf-8?B?WTJuN3hVL3ViTkJScFNOZGQxYUpGSno3R09HSldqdnRmVHVEd0ltcGtVakFQ?=
- =?utf-8?B?a0tFYTBtQ3A5QWZNK1ZmNG5BZ0Z0Z3BxcDNxMXl1ZUVOT1c3UW9MM2tLQjgr?=
- =?utf-8?B?UnpxM0hCbmdDWU9kbWtJYWJTTHBUWHB5ejIyYUs0WURBS09HVGZHRmVjaGRG?=
- =?utf-8?B?OEhzcFEzMTY5cTZ2byt4QStQeVlEV1Bwck4wOXQzV2ZwZzB3U3RmSmd1YWZj?=
- =?utf-8?B?eFVVT1hWSFZwcFZNMXBvL1JaZXhrN2tzTG9PNHhkS0RISDI5R3N5SWREemRq?=
- =?utf-8?B?dTBpR3lxbDhjNjQrNW1JZEtMeXZwSnVibTU3VTRhS0NuK0F6cXU2dWwxdnlX?=
- =?utf-8?B?bWo2aGZ1NGpjOUFmNUdONkJvL1U5OFZUMFpVbHFHVlRHVXdOcW14TGU3bkpX?=
- =?utf-8?B?YlRqakdBMThzNTJNa2IvNjhGenA2eURxeDVkV3ZvREpQbzM4amdFTlZNejRn?=
- =?utf-8?B?NG5XUHFZS3czZVRNaFRGOWRjKzJUSnVMWE55KzdUMkhnMWNNV0VhSGZncEJD?=
- =?utf-8?B?eW0vMzNsVXllMUMwZnl4NTFELy9GeWdyWElHU3Z3WVZvYzc4d2xCTjlIQ3BR?=
- =?utf-8?B?bmVkY0w5K3hYajlCQkJycFUzdjd6Zlp0eC94YkJrVnBlblRLQktzcGVZYzJJ?=
- =?utf-8?B?UiszM0orZnVJWURsYlhIUGl1SWdoK3BWcVl2b2t1dy9xT3NMNjZqT3JsZXd3?=
- =?utf-8?B?R0JwL3NqY2wxL3R0VnFMcEY1NmdLYkkyN2NSM0cwRGxaTCtJVi94eVZLSnRW?=
- =?utf-8?B?b0dZK08ySEt0MTQwSEtIRUI3MnlQRWtnVGJUNEQ3Zk1oeHVndVVWUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04190a3f-2cd4-45b1-4b63-08dede607a25
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YXRmWko2QnlBRDR3bjUrSVhPNHFsKzgxdkxoUVBSbUZ5YnUxNURBMVM5Y2Rw?=
+ =?utf-8?B?TmRwaXV6U1RhZDNaMndaR0MzaWFzMldYUDFTZkl5U0xLTjgzU0xkaFoxQkI1?=
+ =?utf-8?B?TGVrUjJjRCtiaTlWNmhnV216aTltcmJRN3dpUWtQdUhjQkVQbzZSL056V0dS?=
+ =?utf-8?B?K1JOa1FTOTlBcXhSSUdkdlhQWFR2a0xLVy9hYitCdm03Z3JkZHdQTW91UW5P?=
+ =?utf-8?B?TlJxbktoUEIxbXJmOU1zUSt3c2tabjF3dWxQWXA3SzJRVThZOHpYTEFuVVc1?=
+ =?utf-8?B?NWNJWEdudnZUdCtSLzVTd3I5SnNkb01FbFh5clhaSzZBR3lVdTJDdkxaZG95?=
+ =?utf-8?B?cFdmMWJ1SmtJeW9rWjlUd2g0MEs0ejdJRGFVU2s3Y2tITDBDeUFoMHlKUm1j?=
+ =?utf-8?B?MjFWa29NdzFpTDdXY1lJRVBqelEwYjhhb0txSVpOZ2JvZ2pYQ3pqaVRRRllG?=
+ =?utf-8?B?T1lleGc3Q0JPUnl1RVlMSW41WEVFS0dydzlJbmtQMy9wWGlLc2lnbVRuUjYy?=
+ =?utf-8?B?RXJ4ZzRoWlZuQWlZN2drZWhLbXBUajFrSm9QNHB4RmpnYWxqaURMZmZvbXBz?=
+ =?utf-8?B?cGZqakNWR3VSWWMwUEZ1b3BUclBZRTZZaDRRKzR1VHAyd3lRb3M2Nk1tcmJ3?=
+ =?utf-8?B?Qjg2SE5NL1F4c3lJVHJwako2bmdobjNyU20vWnpCczFLRWZvUThJUDliSmd6?=
+ =?utf-8?B?MXlEcWRmUlN6MlZCc0Rsc2IrV0oreHRLTStXczZPdUNxeHpDN0NUL2ovUUlm?=
+ =?utf-8?B?a1JnOXB1U2lnUkRtR01zZjJ3UERzYVlrSUZjQUNpL2cxcmt2QzNPYnFsb1J0?=
+ =?utf-8?B?TzFqZFQvaTlFR3FYQTRFWVdPYURpcE9xM0h5enJ0U3RXSVpiMEdlM3BDSm9q?=
+ =?utf-8?B?SWdhcmhFRVJPeWpnaWR0Y2ZEQTAyN05ZNnNMM1U4UUpEbXgvOE9BM3RMMTUz?=
+ =?utf-8?B?NHhDNGwrZDJEdjh3ZitGdVFJYjFYUVhFcXNwQ2JlMm51ME5SUDI1SXdMRE5k?=
+ =?utf-8?B?UExERlBpZkpSN2xQYUQ5MEVrbzVoVytzb0NqN202QmhwQjlMbUw0VFFoZDkw?=
+ =?utf-8?B?eXZJUVdTVW9yQ25mUEE2Z052T21hUGhvMmhSMk5mQ0p4VUo4ZTBSWTJWdDdC?=
+ =?utf-8?B?N1A2VmFLU043NHQwVWZWZlZQQ2p6anBUQ2x0YkJIVGYxbzVlK3NsTTYrMTNS?=
+ =?utf-8?B?MkN5eGdmMWMyU1ZOMXo1NE10U0EzUnk2NEZLQS9lYWpqckdJSzNNOXc4d1BL?=
+ =?utf-8?B?dXRDc0lrR2ZrYU5yK3dJZ052Vm1VaWpPQ0RRLzlzek1ocFRhN2l1aXF4bEdW?=
+ =?utf-8?B?V2E4NjhMMVZseUlRTzY0dlZpOHdQNVFTWGRQcFlSVjRkeHpzYTM2a0NFS3JH?=
+ =?utf-8?B?cDRIbzJyeE1KWEprRjhWQjg1eUtKQWZFSGhRdWplaTE5eXR2NXZPbG9RVkdT?=
+ =?utf-8?B?UEZHL3ZUOWNUa0lTbm8yMmdpRVBCcE1pR1h4YURCR1Iwb0ZjSEtUc0k3c01V?=
+ =?utf-8?B?dUJKRHhWaGhFVmljaU5zT0JybnJQc2I4UFJyMEEweWlYTnhDclg1cFdTdVhS?=
+ =?utf-8?B?MzR3V09heDNXd25aTGtxT3gvQlgxMkhQWEdVUnpGU0dUek41SU55aGdrbE43?=
+ =?utf-8?B?alNEK0ZXYXhweHpUeUFCelVkWHJQYTVZM2JqQ1BuNlFSSytVeGR4MVUrcjlN?=
+ =?utf-8?B?UmxBdzJ2OVVPZmdNNlpvVmJUUFhQclNlOFU1VXRaN1lHaVZiemFRbm40aTVu?=
+ =?utf-8?B?TlZMTk9HSytOOERxQkkzNlF1aVE3dWI0NXUybkh2SHFpMlhHbm03MTJpWjJ4?=
+ =?utf-8?B?TzBCNWF5U1daSTc3YmJSRjBrTHd1OVhPM3U0dFhWTjU5Y2cvS25uMWhZbHFN?=
+ =?utf-8?B?WXhoOG4vNlBkSk12b1RoK21rMmRlK2F6VGFUOStvaEF3L1R5ZU5ab3lmYWpZ?=
+ =?utf-8?B?TEw2eDZHM2kvbXB5bnJKTWZxMHZaREpybWIrSzNEVk44ZFRzZWQya082TEsr?=
+ =?utf-8?B?dmNKUGlVMEd4aGVaRk1aZnV1dnlBSkJpYTBhcXl3bmhZRi8zb1NiaGxzMVhM?=
+ =?utf-8?B?TldhUldlTWZrbkEwMVNtZitpOEh3a09mRlNsSXRwVDhjNndGY3JGdDJSTmd3?=
+ =?utf-8?B?MGRTZU1RSjJHcCtBWk1qZEtLeFRVSDFEbi9qMlhxc21TK3cyQnRpcGpDeTkw?=
+ =?utf-8?B?MDdPUVd0Nk9jZm05Y1dDQTcvZHJFbEM5WGF1bWVTOWZiQjdMWTNQNWg4eXVh?=
+ =?utf-8?B?bXYwVElKckNiS2lBMUJ2UElsWU5vWUdpSU5GL2cwdzl1bTdVU1RyVXFVYmZw?=
+ =?utf-8?Q?gemv+M9KRHs0/7oP0d?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4992c61e-823e-4fc3-26e3-08dede659c89
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12214.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 08:51:48.2295 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 09:28:33.6301 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 25PUOG0Ht2FTNPQbdTEDCPyIXqVQl6ASZabMy1tmdMhokV7bFvCO5Ki26Ic1oU79iWgVWPw2YrA4BMkJvBgnQoRIe8lKBzLJvold+GUL0So=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8089
+X-MS-Exchange-CrossTenant-UserPrincipalName: LIZ8YdXl1e6WrczFmxAJbEIrYLTIg/U/5zjwMN049SY61RoUXv/W+lmrDlPaKCR3
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9855
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,78 +153,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Coia,
+Hi Mattijs,
 
-On 7/9/26 8:51 PM, Coia Prant wrote:
-> The 9Tripod X3568 v4 is an RK3568-based SBC, just like the RK3568-EVB.
-> It always uses soldered connections between the X3568CV2/X3568CV3/X3568CV4 core board
-> and the X3568bv4 I/O board.
+On 6/16/2026 5:30 PM, Mattijs Korpershoek wrote:
+> Hi Ye,
 > 
-> The differences between the core boards
-> - PCB size, layout
-> - CPU (RK3568B2/RK3568J)
-> - Memory type (DDR4/LPDDR4/LPDDR4X) and size
-> - eMMC size
-> - DSI/EDP resistor values
-> Although the components vary, they maintain full compatibility.
+> Thank you for the patch.
 > 
-> The X3568 board has multiple hardware revisions, and we currently support v4 (I/O board).
+> On Fri, May 22, 2026 at 15:55, Ye Li <ye.li@nxp.com> wrote:
 > 
-> Specification:
-> - SoC: RockChip RK3568 ARM64 (4 cores)
-> - eMMC: 16-128 GB
-> - RAM: 2-16 GB
-> - Power: DC 12V 2A
-> - Ethernet: 2x YT8521SC RGMII (10/100/1000 Mbps)
-> - Wireless radio: 802.11b/g/n/ac/ax dual-band
-> - LED:
->    Power: AlwaysOn
->    User: GPIO
-> - Button:
->    VOL+: SARADC/0 <35k µV>
->    VOL-: SARADC/0 <450k µV>
->    Power/Reset: PMIC RK809
-> - CAN
->    CAN/1: 4-pin (PH 2.0)
-> - PWM
->    PWM/4: Backlight DSI/0 DSI/1
->    PWM/7: IR Receiver [may not install]
-> - UART:
->    UART/2: Debug TTL - 1500000 8N1 (1.25mm)
->    UART/3: TTL (PH 2.0)
->    UART/4: TTL (PH 2.0)
->    UART/8: AP6275S Bluetooth
->    UART/9: TTL (PH 2.0)
-> - I2C:
->    I2C/0: PMIC RK809
->    I2C/1: Touchscreen DSI/0 DSI/1
->    I2C/4: Camera
->    I2C/5: RTC@51 PCF8563
-> - I2S:
->    I2S/0: miniHDMI Sound
->    I2S/1: RK809 Audio Codec
->    I2S/3: AP6275S Bluetooth Sound
-> - SDMMC:
->    SDMMC/0: microSD (TF) slot
->    SDMMC/2: AP6275S SDIO WiFi card
-> - Camera: 1x CSI
-> - Video: miniHDMI / DSI0 (MIPI/LVDS) / DSI1 (MIPI/EDP)
-> - Audio: miniHDMI / MIC on-board / Speaker / SPDIF / 3.5mm Headphones / AP6275S Bluetooth
-> - USB:
->    USB 2.0 HOST x2
->    USB 2.0 HOST x3 (4-pin)
->    USB 2.0 OTG x1 (shared with USB 3.0 OTG/HOST) [slot may not install]
->    USB 3.0 HOST x1
->    USB 3.0 OTG/HOST x1
-> - SATA: 1x SATA 3.0 with Power/4-pin [slot may not install]
-> - PCIe: 1x PCIe 3.0 x2 (x4 connector) [power/clock/slot may not install]
+>> From: Jason He <jason.he_1@nxp.com>
+>>
+>> According to device mode spec, the ACTIVE status field of dtds should
+>> be check to determine whether the transfers completed successfully.
+>> However, this is not implemented in handle_ep_complete.
+>> When two EPs are enabled and transferring, EPa requests with multiple dtds
+>> and EPb request with one dtd. Irq is triggred on EPb. The udc_irq handler
+>> finds both EPb's and EPa's ENDPTCOMPLETE=1 while not all of EPa's dtds
+>> have been completed. Because ACTIVE status is not checked, this case
+>> causes crash in ci_udc driver.
+>>
+>> Signed-off-by: Jason He <jason.he_1@nxp.com>
+>> Signed-off-by: Ye Li <ye.li@nxp.com>
+>> ---
+>>   drivers/usb/gadget/ci_udc.c | 11 +++++++++++
+>>   1 file changed, 11 insertions(+)
+>>
+>> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+>> index 0baad83ef90..53796887dac 100644
+>> --- a/drivers/usb/gadget/ci_udc.c
+>> +++ b/drivers/usb/gadget/ci_udc.c
+>> @@ -733,6 +733,17 @@ static void handle_ep_complete(struct ci_ep *ci_ep)
+>>   	ci_invalidate_qtd(num);
+>>   	ci_req = list_first_entry(&ci_ep->queue, struct ci_req, queue);
+>>   
+>> +	/* Check all dtd are completed, otherwise return for next irq process */
+>> +	next_td = item;
+>> +	for (j = 0; j < ci_req->dtd_count; j++) {
+>> +		ci_invalidate_td(next_td);
+>> +		if (next_td->info & INFO_ACTIVE)
+>> +			return;
+>> +		if (j != ci_req->dtd_count - 1)
+>> +			next_td = (struct ept_queue_item *)(unsigned long)
+>> +				next_td->next;
+>> +	}
 > 
-> Link:
-> - https://appletsapi.52solution.com/media/X3568V4%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf
-> - https://blog.gov.cooking/archives/research-ninetripod-x3568-v4-and-flash.html
+> A very similar loop (that walks all the dtds) is just below:
 > 
+>> +
+>>   	next_td = item;
+>>   	len = 0;
+>>   	for (j = 0; j < ci_req->dtd_count; j++) {
+> 
+> Can't we merge both loops together?
+> 
+This loop will free each dtd. If the ACTIVE flag is set in the middle of 
+loop, previous dtds should NOT be freed since this transfer is not done. 
+That's why we add a loop to check ACTIVE prior this loop.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+If merge two loops together, another list to temporally record dtds for 
+free is needed. Then have to traverse the list to free each one when no 
+ACTIVE found. This traversing will add a loop too.
 
-Thanks!
-Quentin
+Best regards,
+Ye Li
+
+>> -- 
+>> 2.37.1
+
