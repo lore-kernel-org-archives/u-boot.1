@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4607C44506
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA05CC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 14:12:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FE8D84AFF;
-	Fri, 10 Jul 2026 15:51:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EB44F84B14;
+	Fri, 10 Jul 2026 16:12:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pR+TZX1w";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Hf6n2Wp4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4669D84B01; Fri, 10 Jul 2026 15:51:34 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id ED8B484B07; Fri, 10 Jul 2026 16:12:53 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30AD484AA1
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:51:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D55F984A7A
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:12:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6a1888969ddso575162eaf.3
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 06:51:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-493ba701891so8425375e9.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783691491; x=1784296291; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=99NvPRZmc2RPS8fh+T3uf/atju1EOMW5CxXWrv0XElE=;
- b=pR+TZX1wDkfQ3cDq7WGkIBwNr1e3olxLeljkJBtCglbgBtlJ+hxQVOV8v150MepZJC
- uX/+sty96VOJHpl6tjV0PSuNsMrHjZ38v6CSvgLZx92bTOq0zUZY1YKOcKxtlK14ET5v
- XElWZau3w/kE0qxubPgoO33lB5wWP3+zsFIgM=
+ d=baylibre.com; s=google; t=1783692771; x=1784297571; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=FzuR13hgSYW2ims78E2KXWubmp82cbkhGwVRO4NoZN8=;
+ b=Hf6n2Wp4sgDYSwyDlMVuDfLkC+SOViHfp2EPChDYUFRGvEu7IMxOGTTnC/+2dWix2p
+ y3RM7/rm2FyjMyRJBtQYWqm7arOfhG3BLT+gzszx/x+N63BvyKV8J5hKa4/iPvmzfdOX
+ 2r92YSJ2+dDCqLfLErVgpTTzpeXSuj/HvR7q/Svhdqupv+kfnnwnRkGxqI2j5vUUr8hU
+ 0LX4LFDPTPLu7haG9+kiAt47EHyvJPNwjOti5vg7HMYji8OdP4fW7nWsGZEjGOgqxse3
+ CgfkHt8euqPiKtKQ5UkfsUcxFyuSBZjRwh/FuvwFti4eezi+RxPhEGE1MvMU25uTW2py
+ RvHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783691491; x=1784296291;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=99NvPRZmc2RPS8fh+T3uf/atju1EOMW5CxXWrv0XElE=;
- b=Q77xd1osAjwjv9ja3+V1tBXHltubaYwlbemfo3KvPtzJdIPEEWkajBFreqNFJyyHnk
- 1aifyfgZEctEjiTvuoAuRhXKbaitGcOeUvSHHUWXdqfUGRkh782ePyf6v+Rv3YHCtcvo
- XbBCRkndBnJ4ly7gbbihX+jB+PQlaKhCNjw3n0ky14HpfRyJtLkL1g0TwjvVdj482d4t
- r+bwe8NDm4HnHtoDOYr1mGKGjLeB/p8g4Ldn1Q/w+6WZqNDLzQMaxiVAXFiJX2oM5dt8
- KRPXzmPbn913BK7Pin+agNLbqERSTiZaB3orJlsSM96UrINmXux74d/wsCF5qQCz6O4c
- brKw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9oGKegcYqpprgw9O2BnIaPNnhB21IrgBPkTnpGW5YYOYnMYmJOA7k/Cvz2ijlKf7kJvau6BWU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx/u+Aq/bLHZUsO1ceefiTxSjIJMEMDl0y0Y03O8CpI1M4Gl5Rk
- SzU0oq9wQTD3g7hZbX8L7uBVjFcHt0enVhrAMHajWHn4Og9q3HGw4hkZlGquYgqbpbM=
-X-Gm-Gg: AfdE7ckq1rTbHsT5+4VKqK4fNlWwqNPlXIFN37gTY7ZE5zd2yrYODHXQlfy22iPk8C6
- 8iv90SKIekQ90tk1tg5S9KkqTo0qlKTH8DBLxVUoYJ88XCsF4HGTGZuKjUjki447avNFJpTDyPr
- oyKTJI0/t3umG1zbQkVYDbSEs9qG4WEtvyAhnw52Ksj53ix4V7eVwzJuhCgUJJIHfoCRi9F7gyp
- 6Yk/I49Hv7NBQRrNR0YKaHvOSP6JTwzK3PU1ejbNwtfY5pqCTLBuEK1LruIjoTAqYQqrO7REgkk
- a2SbHSVIekYZvI/YB2Cs/z/uaCmpIlpVeos54gxXzUtIi+wqJeesTNR9PU3NyvXxYQ9NyshNT5c
- ktzI/RfOuk0Q9Jg0Bxxm3olEDQRskG0kWkR5lwcNaGOQmQ7gQDTi5BxJcZqgCsIU7B/Une+sEM9
- KokFH8dkXHrBewnwHPABLV98jes7Ven8nifJL1Em41TWNmEuXTRf9IENsYu9P/R8ddhFl8DDFLd
- CtYVmu+E1tDZfsTgO9VPXx/ysUcyDJvlGkKVPgoRgJWbRMB
-X-Received: by 2002:a05:6820:f00e:b0:6a3:98e9:c97a with SMTP id
- 006d021491bc7-6a398e9cb2dmr21795eaf.72.1783691490864; 
- Fri, 10 Jul 2026 06:51:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a36a5eee0fsm6614532eaf.5.2026.07.10.06.51.29
+ d=1e100.net; s=20251104; t=1783692771; x=1784297571;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=FzuR13hgSYW2ims78E2KXWubmp82cbkhGwVRO4NoZN8=;
+ b=nop2PHtbDvP+MYxEL5DrvSsO3nXYSzY7x1U+tH3Mc15gG5kxetE5ZN7pdr07DpJSsx
+ 8LaLXdoZPWRhde3SN8OSdNW/A/C1vsK60NfFxjgLciT8XjTff0pj3bhqNJim3d+CDG+B
+ l9n1p/dmHQXLHV6kfIe5B/jdTy7N/g5Eg/yCssYAlqZ7Tn+QyuAtBwpAvi2IRGyvBy5R
+ 690txl4tuyvDnSOpPMsfvN6aWn1JsgWKHpUk19GGxxDJtnBFyXZiTiVhtu0B4JsX/3Oi
+ RmmQhsTF44zFdM1FQ86bjZV02xvLpZafwYVYW/4qP6TYiX1NwBf10uztn+awcfD0FpU2
+ OYUg==
+X-Gm-Message-State: AOJu0YxZH6/eOD6BkcpB66u5WMaCIJ9tFFqcs5WfbUtSdC/5CAOa72ZT
+ gaBsAcERSU6jOYAZGaUxO9aJ9K1RRg7l0HPIRMyb8gj9zYuP6r6MB2qAPI2bv5oHGtg=
+X-Gm-Gg: AfdE7cl6+lx6MbQ0rEuLyKl5LWEYCEWdw1iypAb/jYzjc2TsQSLQdH+r5XZy8y4XWUq
+ LG2H5Sc3kiNvvFI6m8sSh50hkhnNeG3p7K1Bu3H4OCXJhcdSCR7GQXP+Vg/Qx3aj/WE99ALZM1H
+ j5xAxhonzqf0FgoNCpiRXmwo2obwUdDYqMw9fcpINXYCuezsUjtx1Lo/WNEb/vy15kJmu3V0ycX
+ 0V9sXcqHokewIJfJRIgJFG8onbrUX3jWKtVrsbtgK++OoQ03xNvrgz0J6lshri5VsEtPe3SNZMx
+ hzccobPMpbMUpQOWYvwSkN/XsYSHaDpD3UPYlGEberpsAg9Lpqysx30Ul95er+I46LvmFPOJS8e
+ UvJ4R3O59WPlQMGHpAQ+iiWIsOLbIENhLpgwVtgAUBnaM/teP2DOqUV3zW8XhYamisFjo8hnTeZ
+ wVK7MTVj3FZCRw3ieX9YyqMkSMWxF22wzt/1GyBxk/Wl3HVBn45+kGxIcTpIZdrUeOhQkQjujnW
+ EwLWp/2U/zI0tATCApvJ4Iof8Q7Rbs+byb+Amnkr45bK1GwKHVB6zF9Gz102i5Cey7MsdM=
+X-Received: by 2002:a05:600c:a49:b0:493:ee4d:5c5d with SMTP id
+ 5b1f17b1804b1-493ee4d60aemr62666505e9.31.1783692771185; 
+ Fri, 10 Jul 2026 07:12:51 -0700 (PDT)
+Received: from [192.168.1.65]
+ (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
+ [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493f2d88698sm64073205e9.1.2026.07.10.07.12.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 06:51:30 -0700 (PDT)
-Date: Fri, 10 Jul 2026 07:51:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 11/11] spl: Use CONFIG_IS_ENABLED() for LIBCOMMON_SUPPORT
- checks
-Message-ID: <20260710135127.GJ749385@bill-the-cat>
-References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-12-jonas@kwiboo.se>
- <20260709015313.GV749385@bill-the-cat>
+ Fri, 10 Jul 2026 07:12:50 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 0/9] clk: mediatek: deduplicate clock gate drivers
+Date: Fri, 10 Jul 2026 16:12:51 +0200
+Message-Id: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3h8QBai3V8PVHxTz"
-Content-Disposition: inline
-In-Reply-To: <20260709015313.GV749385@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWNywrCMBBFf6XM2oEkVC3+irjIY6xjNS0zaRFK/
+ 91UF5fD2Zy7gpIwKVyaFYQWVh5zFXtoID587gk5VQdn3MmcrcHQ4rsMGF/7yOd5qhzjgL0vhEl
+ 4IVE0wVnbHZ1PnYXamoTu/Pn9XG9/1zk8KZY9Dtv2BTINwyOJAAAA
+X-Change-ID: 20260710-b4-mtk-clk-cleanup-clock-gate-drivers-0b211852ad81
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Chris Chen <chris-qj.chen@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, Daniel Golle <daniel@makrotopia.org>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,51 +112,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Several MediaTek SoCs expose multiple clock gate controller instances.
+In U-Boot, each instance currently requires its own U_BOOT_DRIVER,
+mtk_clk_tree, probe() function and compatible table, even though they
+all share the same implementation. This results in a significant
+amount of duplicated code, and the duplication grows every time a new
+clock gate controller is added (for example the ones needed for
+upcoming HDMI support on MT8188).
 
---3h8QBai3V8PVHxTz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+MT8189 already avoids this by using a single generic U_BOOT_DRIVER
+shared across all clock gate controller compatibles, with the
+SoC-specific gate tables provided through driver data.
 
-On Wed, Jul 08, 2026 at 07:53:13PM -0600, Tom Rini wrote:
-> On Wed, Jul 08, 2026 at 10:05:37PM +0000, Jonas Karlman wrote:
->=20
-> > Use CONFIG_IS_ENABLED(LIBCOMMON_SUPPORT) instead of directly checking
-> > CONFIG_SPL_LIBCOMMON_SUPPORT when guarding printf/log calls to depend on
-> > correct xPL_LIBCOMMON_SUPPORT symbol. Also change to use IS_ENABLED()
-> > for the XPL_BUILD symbol checks for consistency.
-> >=20
-> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->=20
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+This series generalizes that approach. The first patch introduces
+struct mtk_gate_clk_data and the MTK_GATE_CLK_DATA() helper in
+clk-mtk.h, the second one converts MT8189 to it as the first user, and
+the remaining patches convert every SoC that declares more than one
+clock gate driver: MT8188, MT7622, MT7623, MT7629, MT7981, MT7988 and
+MT8512.
 
-So, this isn't size-neutral:
-   aarch64: (for 1/1 boards) all +77.0 rodata +57.0 text +20.0
-            ax3005_scm3005 : all +77 rodata +57 text +20
-               u-boot: add: 0/0, grow: 2/0 bytes: 41/0 (41)
-                 function                                   old     new   d=
-elta
-                 static.__func__                            285     306    =
- +21
-                 fit_find_config_node                       240     260    =
- +20
+Drivers are only merged when they share the same DM flags and bind()
+callback, so device lifecycle (pre-relocation binding/probing, reset
+controller binding) is preserved. Controllers that bind a reset
+controller keep a dedicated U_BOOT_DRIVER but still share the generic
+probe() function.
 
-(and a number of other boards). But I think it's a bug fix of
-unintentional behavior today. So I'm just noting this here for the
-record.
+SoCs with a single clock gate controller (MT7986, MT7987, MT8183,
+MT8195, MT8365, MT8516, MT8518) are left untouched since there is no
+duplication to remove there.
 
---=20
-Tom
+All conversions are intended to be non-functional changes, with one
+exception called out in its commit message: on MT7629 the conversion
+fixes an off-by-one in the infracfg gate lookup, whose clock IDs start
+at 1 while the driver used a gate offset of 0.
 
---3h8QBai3V8PVHxTz
-Content-Type: application/pgp-signature; name="signature.asc"
+Build-tested using the following command:
+./tools/buildman/buildman -b b4/b4-mtk-clk-cleanup-clock-gate-drivers -c 10 -x mips mt7622 mt7623 mt7629 mt7981 mt7986 mt7987 mt7988 mt8183 mt8195 mt8365 mt8512 mt8516 mt8518
 
------BEGIN PGP SIGNATURE-----
+Tested on genio-700: clk dump before and after is equivalent (other than
+the driver name)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalD43wAKCRAr4qD1Cr/k
-Cl5xAQCVifXEUgVJADXwMEr0QOFjSywG69dFm4nazrGUriC4FgD+PWFLBAvzG8Wc
-SN28HjjO4hBC/8t/I+ZnrmUK0TGIqwo=
-=bmdW
------END PGP SIGNATURE-----
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+Julien Stephan (9):
+      clk: mediatek: introduce mtk_gate_clk_data
+      clk: mediatek: mt8189: convert to mtk_gate_clk_data
+      clk: mediatek: mt8188: convert to mtk_gate_clk_data
+      clk: mediatek: mt7622: convert to mtk_gate_clk_data
+      clk: mediatek: mt7623: convert to mtk_gate_clk_data
+      clk: mediatek: mt7629: convert to mtk_gate_clk_data
+      clk: mediatek: mt7981: convert to mtk_gate_clk_data
+      clk: mediatek: mt7988: convert to mtk_gate_clk_data
+      clk: mediatek: mt8512: convert to mtk_gate_clk_data
 
---3h8QBai3V8PVHxTz--
+ drivers/clk/mediatek/clk-mt7622.c | 113 +++++++++-----------------
+ drivers/clk/mediatek/clk-mt7623.c |  67 +++++++---------
+ drivers/clk/mediatek/clk-mt7629.c | 109 ++++++++++----------------
+ drivers/clk/mediatek/clk-mt7981.c |  66 +++++++---------
+ drivers/clk/mediatek/clk-mt7988.c |  74 +++++++-----------
+ drivers/clk/mediatek/clk-mt8188.c | 161 ++++++++++----------------------------
+ drivers/clk/mediatek/clk-mt8189.c |  26 ++----
+ drivers/clk/mediatek/clk-mt8512.c |  52 ++++++------
+ drivers/clk/mediatek/clk-mtk.h    |  11 +++
+ 9 files changed, 252 insertions(+), 427 deletions(-)
+---
+base-commit: b5fca5f601e5da4955a3ab815f614e1a1300ec2b
+change-id: 20260710-b4-mtk-clk-cleanup-clock-gate-drivers-0b211852ad81
+
+Best regards,
+--  
+Julien Stephan <jstephan@baylibre.com>
+
