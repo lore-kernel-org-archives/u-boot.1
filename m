@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C4F2C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46603C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 18:12:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CB3984AA8;
+	by phobos.denx.de (Postfix) with ESMTP id 698D684B14;
 	Fri, 10 Jul 2026 20:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jy9JJuSf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N4KSj345";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F06F84B51; Fri, 10 Jul 2026 16:33:16 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 69DFB84B07; Fri, 10 Jul 2026 16:33:18 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BDCE84B07
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:33:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD2F784B32
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:33:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so9107605e9.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:33:14 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-47dec32798aso1086897f8f.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783693994; x=1784298794; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=hi6O5Eh9UyndTaZu3CFnXlmviaTHKB0+i8r0EC915Zw=;
- b=jy9JJuSf+hw+3fmA4PzdmOqemXtirS3ejU2jnEeAEhC3bKhy028xSvoFZ/wbYANgwk
- iXoWdiPOA17Uvhe1smGn0I/Fhin4Ss1gijS7LxPj4j7vwUzeKuN3fxpmIixgma78cbZD
- chNIaklrAVJIi72Wlt8DkeHTl/mFtYkeKupJWlMkrkU8QyeKKo6bkmfjG5hW88MH8w+c
- PvZQJucQYz06CZme3FA7/kOz1Mq6YQ/0UJO3SuYiHQPij9scQSML6Rk3rwYZLfGOzu9x
- u9DdWzfVk/V6xFycUK4bcq6JOI5ONZa8X1o901Mx5jsfE4p5lbk/4sOUKAY9DvyacT+G
- nmVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783693994; x=1784298794;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1783693995; x=1784298795; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hi6O5Eh9UyndTaZu3CFnXlmviaTHKB0+i8r0EC915Zw=;
- b=Y1RvNq8RSMlMAHh1jR91EjyQr8XlYIJ3kj7902zfxxneXRIVFy9bv6T7In4rDD0UnT
- XVjfWdoQDtPpIvRrUmQ6lADxR6A7IgnP6CB9/NFeUxYxlKKQiMoQ2UIKInCmG8vafb+p
- 8qC8Rs4fq0M99FWX6Ou9af3tXnsUex2i1YhCs5fQH4lcIK79YjfYc/xqDEZMRQv/ksp1
- 9b6x7XPSQXGpFI8hY7ebFQrx0lA+OW6jp0SZo98G1xxiySkjjpa7bCNeW+Se7DABEDdm
- Bk6ivxg9NoCY+JE93TDPVKDczQTZA/rWdq7XcPLS6kBelPJYfOMKVbN+9DfFrup2rlet
- cI1Q==
+ bh=bc2f4P4Z0Y3E5xN9NgmndVxRAm/CV4IfTAhGn189JlQ=;
+ b=N4KSj345ZO6EhiuVThK/y3HXzgaT7TJ+cXwRE/cPTOH4xPnz4Dw5tu1Xsz1IiySmhi
+ halLqH1RZr14QE6nlv3WIdZjiIgFB+2adFAk+oN8niWZbBDF0TPrHXxlwpK2N7fZgFiX
+ kJBa+0TT3S6mtmqFLLL9AkK3UKDVNpMF+w5WZ4x23DffNEvjh0urfT0jr5Tc62ZqYSwq
+ brdrGi+qMzlzqodIzRgV8NKM9cZEd0La5ApIjJ58DSUl3Ib5TatEJDUX80hQOJ3SfR8u
+ JTOP1yGn7KSNjAyVK7xgSDY1JLkV77o1kIdbayk9m1dTpO7xew2lZeHcRIp6qmgkO4I/
+ rRYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783693995; x=1784298795;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=bc2f4P4Z0Y3E5xN9NgmndVxRAm/CV4IfTAhGn189JlQ=;
+ b=j64KMD9ICEUk3WUM80Y4EUsTH5gP6BVaR8Anp780e2MZrcLk5GXMbpdcksfhzy2MzO
+ YsFgJL22xNfKjD3TPdB/NYMXBYzpf6gzTOqQN+TAIZBaUNLjoj/TSUk86WN2PXtLcHQr
+ vSmPy/j0Sx7RPygtKQ6djvcqGbcZQQzpG4uRCS3aA6XusIDTQY2+/3frC0xzTxmK5kni
+ dkpa03JuLT1cJWBi4nXM/7MpaYH/fYOa5Im3bwYfzCXng9J0oH2MOvN0uXZPZVVXpg6U
+ Z+XGEW1nKA1jOEeisWaw/qvFSU4vZN9fRC12hhjkUTi2lsb1YPiyXP+KbeDI/eDs4V9L
+ xSgA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqAelOLjSOHiK+XwSiMaZe8ppj21ehBhsCdZj93ka44g1MB6SO6ZYzZ6vp1abKn3lE+eaZOABc=@lists.denx.de
-X-Gm-Message-State: AOJu0YycuDE74QxiZhKP7f7wdqy6KvmV2m9olT6Pwynb+23wkssywYBg
- a27RXgt8L/NX8kDlo9fprZtqa7N6QIjHeCtAOspI7Zb+N0zh76UqsjEy
-X-Gm-Gg: AfdE7clfYkpLq+AMaNubaJxVsPjCscbc+eh44DQM+OdtlliYOhsiJF1vXRvZwZ3iFZg
- hdepqxYrmyuZG1uPhKhrAoIvroc8Rmikt1/lJJsMOOxoMnl0Cm2L2WXwechaGXUlryjLGopZbDc
- dE6ffusrCEBpyjDzS3wexE27Px3aRt+1ud+bgtzV67zkCzfcyxP4JqR6pVXUwKFX7x2kxfQUmdH
- odNp3steTZsyUOnzNDSscCbAkWxk+uTbn1q2EDyBv8ha+1/38DftmXAvWeXZ+ops0Iapk0CZsaa
- e4lcwhBp2nDMIiHhskF+25G9HF4bVhqLqv1nocgT8JxQP77v9yqj7It0Ny6hRO9PvjnoMFvJPaR
- VLS+Ow/CbQyIdduqRgPHZzHv+HpAkJRV1BI7BMiSjdMzT36nrmQu65RSgtVlvZymdYT6quw54OW
- xXXM0NL7o6ctIRZ2k=
-X-Received: by 2002:a05:600c:310f:b0:493:d1e0:a4f1 with SMTP id
- 5b1f17b1804b1-493e6c05de0mr106213325e9.0.1783693993759; 
- Fri, 10 Jul 2026 07:33:13 -0700 (PDT)
+ AHgh+Rpk9EjO4l/AjSYhvY2QKw70eYNnCM4G4ftjpleM40bOBykXWv6WtIqyRKiTiqsQDGAZ25ctmj0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyoqpW382JeqGwxtLBil3iE3HMAiCL4Pfg/q6fi0mNX/kVe9xAt
+ u8W3/RUuqGSVuS1TS+3YjxGjNXCBk9nulzeJpXav6JkS6w1y4POHwJmS
+X-Gm-Gg: AfdE7cl8fTnLyNVn11QLoVbpt/0TAJ/yRtbtfIBP8473oOFVXju7qaU+5sOE2mjGxml
+ Y5azb2gC1hQspIdgzLaR/riyitotcqgUwaN+TTcsvhmO8z4gd30wxfIeSM901OvKjR1Bl/e6JYr
+ 4sjEpAaNDyflFP8G6KXkbXgrE4kWy9dauBHFq9rWmwoMWJOaA/BWc1skVLONvf4NWri5api8/xg
+ 4rU7emFtQ39eiNfQSPKsvPr2UhrZ6NvBe/2qUAPxyfj53t1Zc19vhHSJVxQcqfmCR279GYLuCLD
+ 92tlcV9ua+Kf0Jo6WcmHjZ7qoR6yGM1m5Mhxn7NpVEwpmGDZjAJnaUTu2ZqtFQPoEIhG/4+9Gnf
+ wObj0/msCz4n9z6WXX3x4N8kOIO1p5/SEj+nykC08xKJBww8Q365ZA6b0UMtHeR/yu9aE2yb/db
+ JLgAmFo5W3ArBoO/w=
+X-Received: by 2002:a05:6000:238a:b0:46f:a0f1:c33f with SMTP id
+ ffacd0b85a97d-47df0797e16mr13529251f8f.32.1783693995078; 
+ Fri, 10 Jul 2026 07:33:15 -0700 (PDT)
 Received: from vitor-nb ([2001:8a0:c4c6:f00:3cb5:ed02:715f:532b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47a9e4d83bdsm60549688f8f.13.2026.07.10.07.33.12
+ ffacd0b85a97d-47a9e4d83bdsm60549688f8f.13.2026.07.10.07.33.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 07:33:13 -0700 (PDT)
+ Fri, 10 Jul 2026 07:33:14 -0700 (PDT)
 From: Vitor Soares <ivitro@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+ Tom Rini <trini@konsulko.com>
 Cc: Vitor Soares <vitor.soares@toradex.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 0/7] toradex: tdx-cfg-block: Add new PID4 entries
-Date: Fri, 10 Jul 2026 15:32:58 +0100
-Message-ID: <20260710143258.285091-9-ivitro@gmail.com>
+Subject: [PATCH v1 1/7] toradex: tdx-cfg-block: Add smarc imx95 0229 pid4
+Date: Fri, 10 Jul 2026 15:32:59 +0100
+Message-ID: <20260710143258.285091-10-ivitro@gmail.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260710143258.285091-9-ivitro@gmail.com>
+References: <20260710143258.285091-9-ivitro@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 10 Jul 2026 20:11:20 +0200
@@ -102,41 +103,40 @@ X-Virus-Status: Clean
 
 From: Vitor Soares <vitor.soares@toradex.com>
 
-Add new Toradex PID4 entries to the common config block handling.
+Add the new 0229 PID4 to config block handling:
 
-The series adds new Aquila, SMARC, Apalis and Verdin module variants.
-For the Verdin Wi-Fi/Bluetooth variants, update the board-specific
-variant selection to use the Wi-Fi variant.
-
-The new PID4 entries are:
 - 0229 SMARC iMX95 Hexa 4GB IT
-- 0230 Aquila TDA4 Octa 8GB IT
-- 0233 Apalis iMX8QM 4GB WB IT
-- 0234 Apalis iMX8QM 4GB IT
-- 0235 Apalis iMX8QM 8GB WB IT
-- 0236 Verdin iMX8M Plus Quad 4GB WB IT
-- 0237 Verdin iMX8M Plus Quad 4GB IT
-- 0238 Verdin iMX8M Plus Quad 8GB WB IT
-- 0239 Verdin iMX8M Mini Quad 2GB WB IT
-- 0240 SMARC iMX8M Plus Quad 4GB WB IT
-- 0242 Verdin AM62 Dual 1GB WB ET
 
-Vitor Soares (7):
-  toradex: tdx-cfg-block: Add smarc imx95 0229 pid4
-  toradex: tdx-cfg-block: Add aquila tda4 0230 pid4
-  toradex: tdx-cfg-block: Add apalis imx8qm 64gb emmc pid4s
-  toradex: tdx-cfg-block: Add verdin imx8mp 64gb emmc pid4s
-  toradex: tdx-cfg-block: Add verdin imx8mm 0239 pid4
-  toradex: tdx-cfg-block: Add smarc imx8mp 0240 pid4
-  toradex: tdx-cfg-block: Add verdin am62 0242 pid4
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c | 1 +
+ board/toradex/common/tdx-cfg-block.h | 1 +
+ 2 files changed, 2 insertions(+)
 
- board/toradex/common/tdx-cfg-block.c        | 11 +++++++++++
- board/toradex/common/tdx-cfg-block.h        | 11 +++++++++++
- board/toradex/verdin-am62/verdin-am62.c     |  3 ++-
- board/toradex/verdin-imx8mm/verdin-imx8mm.c |  3 ++-
- board/toradex/verdin-imx8mp/verdin-imx8mp.c |  4 +++-
- 5 files changed, 29 insertions(+), 3 deletions(-)
-
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index 896a0d3bd126..c46dd46ca981 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -190,6 +190,7 @@ const struct toradex_som toradex_modules[] = {
+ 	{ VERDIN_IMX95H_4G_WB_IT,                "Verdin iMX95 Hexa 4GB WB IT",          TARGET_IS_ENABLED(VERDIN_IMX95)         },
+ 	{ VERDIN_IMX95H_4G_ET,                   "Verdin iMX95 Hexa 4GB ET",             TARGET_IS_ENABLED(VERDIN_IMX95)         },
+ 	{ VERDIN_IMX95H_16G_IT,                  "Verdin iMX95 Hexa 16GB IT",            TARGET_IS_ENABLED(VERDIN_IMX95)         },
++	{ SMARC_IMX95_HEXA_4GB_IT,               "SMARC iMX95 Hexa 4GB IT",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index 9a96bddfbe17..3ff7c2b6376a 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -153,6 +153,7 @@ enum {
+ 	VERDIN_IMX95H_4G_WB_IT = 226,
+ 	VERDIN_IMX95H_4G_ET,
+ 	VERDIN_IMX95H_16G_IT,
++	SMARC_IMX95_HEXA_4GB_IT,
+ };
+ 
+ enum {
 -- 
 2.54.0
 
