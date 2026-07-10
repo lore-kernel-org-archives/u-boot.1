@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB10C44506
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 10:06:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE48C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 10:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A82384A4A;
-	Fri, 10 Jul 2026 12:05:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F17E684A49;
+	Fri, 10 Jul 2026 12:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QFe27tqM";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VHHY69BA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2994084659; Fri, 10 Jul 2026 12:05:46 +0200 (CEST)
+ id 4DB1B84A4F; Fri, 10 Jul 2026 12:05:49 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05CFA849D2
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 12:05:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05AB184659
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 12:05:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1783677940; bh=ilgLtcUnUj7AVttNv/8CJRFkGfzbcnVXZGiBFZzDMx4=;
- b=QFe27tqMoZOvWBQl30yOh2qHp1ELznluDllZh2imB7Nh5f6PACQht5Wnl84qj0YPsr3WVwq/S
- RnWjrLr/klW4dt3rbQP0mIRe/rlWw657cuLuao+h521VOAAQ6TkMjKHLUgoynf3Y555+JUMKCRs
- B6xZFmDOZstJ5coSPj8bFH2prI5hoWIPfMOAsFBA2ranDaKB4QJ82JcTRhe+Jp0l0PPTeCdmYjn
- IQBHxSBIZ9825yTbTnGFrmbTQLu/hhyPb5kqQEuQV0xFj+KcrzEJ0LGpX+yNEk9dIlDh3sAN94C
- C1T1mQ7ClyWr+J4Nw0bRnGpdKYATdxdPaV/7izbTta6A==
-X-Forward-Email-ID: 6a50c3f128378fa077a3958d
+ t=1783677945; bh=VKTXqY9d7dEkpqO+hoiGc/orDFUfKCD0qf97o7mySJM=;
+ b=VHHY69BAgC858slM6X/qr44U6y3X6xO4TKi9YDwViHjPRaSESFKtiTU+OZmIkhFychfoSLybo
+ CO/enpye7tYJBKAWasM1cLDUu7NwjyleCrVaRHeBRcpNZHoYJZJcgAyObx8mYZte0b9MrAyph2v
+ R3T+CbaGMc3ABlrGJoflayFuBdA6cODMzc+30HaOGNthdVafsePMGrM3Pjp5mDqlaop73tV7HAA
+ VyrPBc+5150ratrX13yqXgp37cR3aDJeNgPEvYLzKko2Mh5p8Ok3YSUL/W9OYbQnfSWKjMU6tOS
+ vaqbry2Sa6rJ+iUbT2nyFdLM+nF8PCdTRchUjU/kFAeA==
+X-Forward-Email-ID: 6a50c3f528378fa077a395c3
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.10.2
@@ -44,13 +44,14 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH 5/7] arm64: dts: rockchip: Enable USB 2.0 ports on ArmSoM Sige1
-Date: Fri, 10 Jul 2026 10:05:17 +0000
-Message-ID: <20260710100521.3677247-6-jonas@kwiboo.se>
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH 7/7] rockchip: rk3528-generic: Add support for USB OTG
+Date: Fri, 10 Jul 2026 10:05:19 +0000
+Message-ID: <20260710100521.3677247-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260710100521.3677247-1-jonas@kwiboo.se>
 References: <20260710100521.3677247-1-jonas@kwiboo.se>
@@ -72,41 +73,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ArmSoM Sige1 has two USB 2.0 Type-A HOST ports behind an onboard
-USB hub, and one USB 2.0 Type-C OTG port.
+Add support for USB OTG, RockUSB and UMS to the generic RK3528 target.
 
-Add support for using the USB 2.0 ports on ArmSoM Sige1.
+USB OTG tested on following boards:
+- ArmSoM Sige1
+- FriendlyElec NanoPi Zero2
+- Radxa E20C
+- Radxa ROCK 2F
 
-The onboard USB hub handles OHCI so only the EHCI controller is enabled.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-[added phy-supply for otg port]
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://patch.msgid.link/20260529190355.4148175-5-heiko@sntech.de
-
-[ upstream commit: b6b74087f90a201cfdd6da6a43e7b92dba8370e3 ]
-
-(cherry picked from commit 959d0d70460b569e212c0daa70404b794cbcd37c)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- .../arm64/rockchip/rk3528-armsom-sige1.dts    | 25 +++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ arch/arm/dts/rk3528-generic.dts  | 18 +++++++++++++++++-
+ configs/generic-rk3528_defconfig | 10 ++++++++++
+ 2 files changed, 27 insertions(+), 1 deletion(-)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3528-armsom-sige1.dts b/dts/upstream/src/arm64/rockchip/rk3528-armsom-sige1.dts
-index c41af8fc0c8d..ee4183fb980d 100644
---- a/dts/upstream/src/arm64/rockchip/rk3528-armsom-sige1.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3528-armsom-sige1.dts
-@@ -480,3 +480,28 @@
- 		vddio-supply = <&vcc_1v8>;
- 	};
+diff --git a/arch/arm/dts/rk3528-generic.dts b/arch/arm/dts/rk3528-generic.dts
+index 637ca03325ed..34d614452ece 100644
+--- a/arch/arm/dts/rk3528-generic.dts
++++ b/arch/arm/dts/rk3528-generic.dts
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /*
+- * Minimal generic DT for RK3528 with eMMC and SD-card enabled
++ * Minimal generic DT for RK3528 with eMMC, SD-card and USB OTG enabled
+  */
+ 
+ /dts-v1/;
+@@ -45,3 +45,19 @@
+ 	pinctrl-0 = <&uart0m0_xfer>;
+ 	status = "okay";
  };
 +
-+&usb_host0_ehci {
-+	status = "okay";
-+};
-+
 +&usb_host0_xhci {
-+	extcon = <&usb2phy>;
++	dr_mode = "peripheral";
 +	maximum-speed = "high-speed";
 +	phys = <&usb2phy_otg>;
 +	phy-names = "usb2-phy";
@@ -117,14 +116,45 @@ index c41af8fc0c8d..ee4183fb980d 100644
 +	status = "okay";
 +};
 +
-+&usb2phy_host {
-+	status = "okay";
-+};
-+
 +&usb2phy_otg {
-+	phy-supply = <&vcc5v0_usb_otg>;
 +	status = "okay";
 +};
+diff --git a/configs/generic-rk3528_defconfig b/configs/generic-rk3528_defconfig
+index c989263e014a..130aa124298a 100644
+--- a/configs/generic-rk3528_defconfig
++++ b/configs/generic-rk3528_defconfig
+@@ -19,6 +19,8 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MISC=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_RNG=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+@@ -26,6 +28,7 @@ CONFIG_CMD_RNG=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_NO_NET=y
+ # CONFIG_ADC is not set
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_MMC_DW=y
+@@ -33,7 +36,14 @@ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
++CONFIG_USB=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.54.0
 
