@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F6CC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69544C43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:23:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51B5F84B77;
-	Fri, 10 Jul 2026 17:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BABAF84B85;
+	Fri, 10 Jul 2026 17:23:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eWz+7JoP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V3Yeiy4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C54384B7A; Fri, 10 Jul 2026 17:23:07 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 9D27D84B85; Fri, 10 Jul 2026 17:23:51 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0368884B72
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98CC784B72
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:23:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-92e99ef0902so52781185a.2
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:23:04 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-51c0006ea8eso7019091cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 08:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783696984; x=1784301784; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783697028; x=1784301828; darn=lists.denx.de;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=0yMYoBC0c7/XDpUlxpZRrYoNxRTR/FRTO3u69FVh+zg=;
- b=eWz+7JoP/B/ceqToA2ptfA9HmpZYPVMFwS7pB/AZKRaqPi+PDpjDXSaCiDmddmWn0b
- oODX9VEhqeiq9wRqnJrXvFETuUcb8xXk12gTXOXMgpJ1DivnkPNEp2mmSSglHS9x9rm9
- H2hRXo2fpGiAbzUN0X4EI1CH2J21DCfMoDISCSbZs4ZrhKKVcOySHr+Osw2V5nY+IGI3
- SXHfTssEblx/gRlQ8zNN4HOy2MCtSYUzwbpK9jxmVJNnPQ8uBxsK6PJqfmNOBPzVdkPs
- ui4LCz7WaniEFLseOfWwRnDmF3noHXDVRgtwFA7OL9zH1Vnx9In1yxX1frL1vLRjbjg0
- ezbQ==
+ :content-type; bh=0CFX2oTvC+jAgiHAe1EjHxdqWRamf8QNYwZwftjdd4w=;
+ b=V3Yeiy4iQYY0XMRd9RJ8ai/a79kX/L7a5DiEt1xYodVAM0m1oPg9clPTkIfEiflcFU
+ /Pa0OUdy+ttlC/pSAk/dbjSc60L/UFT607kgVnvkmBvbUy1VCCiCpZ8oFqqbIx6JdTrp
+ maQ96FXe4PJE2R/3k9czNsRZov0wHpiTEx30ubVf4UlMbQdAVwVrCQrkMkwV3x/undUc
+ k612lXnXG+TLmEKk/XRP6pAU+BK7FEGijftDNfYCPIS+LT3PrI3wEKkdKc+fdjlig8eF
+ hQurX4frVYwVrPHC3fxmwEcv2DIv0xi3HQ6dtlb2u16n2rAzae5g5/hXiT/6Ozvxfssy
+ BaWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783696984; x=1784301784;
+ d=1e100.net; s=20251104; t=1783697028; x=1784301828;
  h=content-disposition:content-type:mime-version:message-id:subject:cc
  :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=0yMYoBC0c7/XDpUlxpZRrYoNxRTR/FRTO3u69FVh+zg=;
- b=BWMB+UpSNzp1JXhvHTuvKNAAVUewiqAETYkSsIXU2TLaT/HiWhHcia0XerUG3L0KX2
- k5GMXBVfI3DveXLCRhXKy/H/HT0sWHBeREEqN/ujQiPPPgFZaPrSaFHaL1Bm1X9Yn06b
- elXafizbna8FOdno68i5vRpY5jbxRHoDaoEA9iuTHisBz7H/zMQrgSNGLLflMeq/oHtm
- wk2bTam/sDVtQDLcFtjqaIiuUdX983rry4ZALGrFDa6ERAQYrxpIMHUm8dRRyBYvRZE6
- ETypWqZr2aF9K9hfPGljB7lYJ2NIZ8W2L035Ss/85M4OstOo30lEx0Tudo/czbZsW/CG
- kSWg==
-X-Gm-Message-State: AOJu0Ywsd9bI02fzcvCrICE5Yaq3GTmVDsLraSsvUYXrxxtBKHwsZrKi
- lgNN9Y1cXKSS1jd6JpeGva5c+wSb3QwXIAqv165BuJiQlTdJ+82Fli+qdBv2RQ==
-X-Gm-Gg: AfdE7ckJq5fjgo3cGOfQhjwCRejAsS/yUfaFyzAAmwzqukzSRkD5va+DgWm/BCBTj3C
- 31VgefzAYt3/THuQFIiElpYbCNG/JeYvaR7dTg02G12LLJxEMiLV6R3hgmRmSfWvKLR4+2yNxjA
- lWcL86l5EWo8DICZPEEmoA4xIIeEsSQ+DcYlEtSMHmUSY79p9c0IKctpP9ljTBJvoeu6yi28Lpy
- A9PFPLQvPI9N7DEdSO8WOd2zKKgIsE2BGJS/iNHSMuFrbAl+TV0oY0P61+oHb1B8XZQCZS7HVPL
- 8prZvG88Pk0a2tsI6kEukALj18QgTUArEHZ9bdkHWDmaj5paOt/TdpZ7MCodc7bXrFHUPdBRm/u
- Cx3thrJDwOv5OLbj6eIOWKKocHY/hq45o5hueUwalto/I/9596Z8mFnwC6AASbZ37Ho96wm/jrq
- 4EEbp/L8jiJw==
-X-Received: by 2002:a05:620a:ac14:b0:92e:ef09:f8f2 with SMTP id
- af79cd13be357-92eef0a1b5emr130513385a.66.1783696983691; 
- Fri, 10 Jul 2026 08:23:03 -0700 (PDT)
+ bh=0CFX2oTvC+jAgiHAe1EjHxdqWRamf8QNYwZwftjdd4w=;
+ b=bOqR3FwEMu/INAa6S4wWd+7Du9WjtzDDCQHrjE1rBqYoRUWrNmpvo7qM8R3eBYWLt+
+ qx4AN0DZaXN6rKopyu3aMa0Pa1YDJxSXHt4yUQ71LXIGcjqOpFNTOoVedgxaztUff+RG
+ VV10t4qz5eHFHmD5MLgQjmFPTo8H7lLXNqUkjbpydWdcwXU9jArnCzA7+uLfVVZpOntP
+ +t3bgApqWeLECD0UfWh1k8Tz8P+Xhb1jvh3MtKMCRj38S0cwjm1GvrB/Uk32DnZW8T10
+ ol8t6QRs45IyPFeJ8/aoihqLVgQuTjZI4myS2oERAgYp/KRveDHw/9VGqoFVzyOdUN+Z
+ RxtQ==
+X-Gm-Message-State: AOJu0YzAhoFHz8UjxnZhZAPfQ9uDP261/1Ewf1aOyFS2W4qY78C2gSX5
+ U0kss1W6upF1e4hNW0FN2j0zy9QWYsQhIcUtdhql81qhHOd828skbAjLodThDA==
+X-Gm-Gg: AfdE7cm5cPStnZlyfnCwx50KlOfW+V4dHwbpEY0fGOjIdZ/72ailRBGKOA06Csnjii9
+ knMNkUIW0fVFYSnltxklrHJtL/xMhbNeDkLAJQb3m4W20K4RfZZ8eWUydgS0R+06VHGCV6NGp7a
+ eggp6y6Q7wo/bMZ647E4hg/2DThUPqyLg2GYe4TBjUkmBS/Lss5Z9dK4Cgv3vY7H4GFqZewL1y7
+ vRKgtvP5dgxk0dnkQTreBGWirU/z4gF9V53cDUHUxFiKAvZyhvZ6mnVoMJpJWmbIaJI+X/UteqY
+ R4JXHeisRrdwM07mUYj5gy7qA6gWISt52NlUreQBIwsbbKYDgAZxwcPhmgxhJ3AZ72S5lxQmshZ
+ Sx7rahkUlAUaXRS8FMzO7fXzIQsE9bTC+bVCA/IcBAidTF3K/svK0pCpLtX2ZD1GJeuXb01S3NS
+ kkhu4IlMRFJg==
+X-Received: by 2002:a05:622a:6d02:10b0:51c:b98a:244b with SMTP id
+ d75a77b69052e-51cb98a3766mr10191171cf.62.1783697028395; 
+ Fri, 10 Jul 2026 08:23:48 -0700 (PDT)
 Received: from localhost ([49.36.187.33]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-92ee5b86276sm218390285a.11.2026.07.10.08.23.02
+ d75a77b69052e-51cba49439dsm3896991cf.27.2026.07.10.08.23.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 08:23:03 -0700 (PDT)
-Date: Fri, 10 Jul 2026 20:52:59 +0530
+ Fri, 10 Jul 2026 08:23:48 -0700 (PDT)
+Date: Fri, 10 Jul 2026 20:53:44 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: pstore: bound path formatting with snprintf to avoid
- stack overflow
-Message-ID: <clk4uaks6k2ljuzyobu4e7m5dwxgsdgtia5jfvhmargg2x4qfe@3f2jmjmsknns>
+Subject: [PATCH] cmd: strings: interpret second argument as a byte count
+Message-ID: <j22mfoxsbrv264hukqkqdo3rr3lfnp3aramfno3proupzriafw@qe5czb3jnsyj>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -94,66 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pstore_save() writes four different filenames into a fixed 256-byte
-stack buffer 'path' using sprintf() with "%s" fed from argv[3] (the
-user-supplied mount directory). The U-Boot command line buffer
-(CONFIG_SYS_CBSIZE) is typically 1024 or 2048 bytes, so a directory
-path in argv[3] can easily exceed 240 characters and overflow 'path',
-corrupting the surrounding stack frame including the return address.
+The help text advertises "<addr> [byte count]" but do_strings()
+stores argv[2] directly into last_addr and the loop condition tests
+"addr < last_addr", i.e. it treats the value as an absolute end
+address. When invoked as documented (e.g. "strings 0x40000000
+0x100") the loop condition fails immediately because the supplied
+count is far below start_addr, and the command prints nothing.
 
-Replace the four sprintf(path, ...) call sites with snprintf() using
-sizeof(path) as the bound. The neighbouring sprintf() calls into the
-'addr' and 'length' buffers are left as-is; they write fixed-width
-numeric conversions whose maximum length is bounded by the size of
-ulong/u32 in hex and cannot overflow those buffers.
+Compute last_addr as start_addr + hextoul(argv[2], NULL) so the
+argument is used as a length in bytes, matching the help. The
+existing repeat-mode fixup (last_addr = addr + (last_addr -
+start_addr)) continues to preserve the same byte-count window
+across CMD_FLAG_REPEAT.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- cmd/pstore.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ cmd/strings.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/pstore.c b/cmd/pstore.c
-index 9795eea2dbc..f2c0034abbe 100644
---- a/cmd/pstore.c
-+++ b/cmd/pstore.c
-@@ -413,8 +413,8 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
- 
- 		sprintf(addr, "0x%08lx", (ulong)map_to_sysmem(buffer + header_len));
- 		sprintf(length, "0x%X", size - header_len);
--		sprintf(path, "%s/dmesg-ramoops-%u%s", argv[3], index,
--			compressed ? ".enc.z" : "");
-+		snprintf(path, sizeof(path), "%s/dmesg-ramoops-%u%s", argv[3],
-+			 index, compressed ? ".enc.z" : "");
- 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
- 		index++;
+diff --git a/cmd/strings.c b/cmd/strings.c
+index beac2a6e6b3..3727c00341a 100644
+--- a/cmd/strings.c
++++ b/cmd/strings.c
+@@ -21,7 +21,7 @@ int do_strings(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	if ((flag & CMD_FLAG_REPEAT) == 0) {
+ 		start_addr = (char *)hextoul(argv[1], NULL);
+ 		if (argc > 2)
+-			last_addr = (char *)hextoul(argv[2], NULL);
++			last_addr = start_addr + hextoul(argv[2], NULL);
+ 		else
+ 			last_addr = (char *)-1;
  	}
-@@ -426,7 +426,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
- 				 buffer);
- 	if (size != 0) {
- 		sprintf(length, "0x%X", size);
--		sprintf(path, "%s/console-ramoops-0", argv[3]);
-+		snprintf(path, sizeof(path), "%s/console-ramoops-0", argv[3]);
- 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
- 	}
- 	ptr += pstore_console_size;
-@@ -438,7 +438,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
- 	size = pstore_get_buffer(0, ptr, pstore_ftrace_size, buffer);
- 	if (size != 0) {
- 		sprintf(length, "0x%X", size);
--		sprintf(path, "%s/ftrace-ramoops-0", argv[3]);
-+		snprintf(path, sizeof(path), "%s/ftrace-ramoops-0", argv[3]);
- 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
- 	}
- 	ptr += pstore_ftrace_size;
-@@ -448,7 +448,7 @@ static int pstore_save(struct cmd_tbl *cmdtp, int flag,  int argc,
- 				 buffer);
- 	if (size != 0) {
- 		sprintf(length, "0x%X", size);
--		sprintf(path, "%s/pmsg-ramoops-0", argv[3]);
-+		snprintf(path, sizeof(path), "%s/pmsg-ramoops-0", argv[3]);
- 		do_save(cmdtp, flag, 6, save_argv, FS_TYPE_ANY);
- 	}
- 
 -- 
 2.43.0
 
