@@ -4,54 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54068C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 15:59:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F73BC44501
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 16:30:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0E1984AAE;
-	Fri, 10 Jul 2026 17:59:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id D5DC184A63;
+	Fri, 10 Jul 2026 18:30:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="P4mCQVlj";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="YFcjGrwI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E36284ACA; Fri, 10 Jul 2026 17:59:07 +0200 (CEST)
-Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
- [84.16.66.172])
+ id A6BAB84A73; Fri, 10 Jul 2026 18:30:18 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3D4284A73
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:59:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82E8F8498C
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 18:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gxc2c2WwYz9Wx
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:59:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1783699144;
- bh=XyipuoRAnllbXL8T1MdCjMAYkfHBXe2FtOX4RBG+YY8=;
- h=Date:To:From:Subject:From;
- b=P4mCQVljdCSN/YM3W0kzGUty1qDTav2yHcIBWnW87jU7JAgIeuo/EJUDtaNfkDd2H
- sKYhYkxGH4cvZoZKmgRy5KZNCPWUrPRD21+RcB/EtvKlELawBAJSX/a1rHqypCVLPf
- tPsbuwN+u8IrLXOycaP/mZFaoGxjt4n9Ldckdf5iKMD3JN5ULJl7Tsl2CQabCbkGRD
- OKIITW/7gt1260gVOJ+I1x2InZ/arak0DXygh0vi9ZYLDyKxjODJWkgD4hI1pkX3KF
- 3pnPAYaAOgnfqS20ILQLAmBIdrX/vVu0J7Sh0fuXjDVUg4gqD8xKtn/ZzANny7Ypc/
- c1ZvmSGH8FxWg==
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gxc2b5cKtzh5b; Fri, 10 Jul 2026 17:59:03 +0200 (CEST)
-Message-ID: <471cfb20-03a3-43f3-a391-d9503d9e6a82@0leil.net>
-Date: Fri, 10 Jul 2026 17:59:03 +0200
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jB6KNu5oUJw8PYzVCXVJ1ft5ZiqNlyr9mLtjFpyBinoilmO+pOlGZXZZ2Xl8jXMECjYpaLcmvTnjTPwrIb8mrwmUpJwYaHSoJiL35axbxjS1HtsZESHa9qeaYBjHy/zVPAGMq2++AoHJA4cLtSKUOsoqW+nR3eoI4cuGzWNqLmsfE/afm4mighZrgPDtWyAZWVwj2MmeeaTDDBTazQsZuNKvRdGqXeGGkxhAF9yLE82+dslJROdGee0//zcIoNUHPDybKVfsLZKIt3/Z/hRyhQaEJP5vo1GR0Ul58T2T0jMKYK+/pVDxgYLkva8lf136L14h8pGMhrBB2aukYnuMGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O14XgHrY67lx+6xrmtMX5/Pa4ttBYkfAmzf253WFAig=;
+ b=FXZ1LifIC9Y/6YkNLcgmZQ4iSXXdvS04YvSDDTS0tGQ4+zuW7bvsEa/hIloVorT6+irPnkpsPlDwy/TGoPDzUHSOV3crCWdo7SaLWxhYt3A+vCQyQ1SREYCTv0s6Ak9Q097u7zpFd/XG406lcE2Os3dMNJkAmT7vK+mv+7X8NtT1IfcSQhswK8atIbbNeKtaM3u33qoXmCE+vq0efPCEW/l8suTaZ+D5Tdhz1uZyzoZM1S9FmARA3E8yIVyw6OKYvXlKJKPm6KZ1tbN6TC7QV/pNrYALBCyYKmgZW4xjTJakD1j13YF97hZqSf6KMD1H47hvCTROI67uAk7AnEorKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O14XgHrY67lx+6xrmtMX5/Pa4ttBYkfAmzf253WFAig=;
+ b=YFcjGrwITFayLBJY0pWMNw8jS7cYUlHUNsWLUDikX6Q8Yjxm4RrhszXh7ZJwRfk1v5uvsU2dZxG7VASNtW3PODzMCJaqHKUrwOUCq+IN08Dcp6y3CG01dqVn+PHoUh0xLKe3iPgL6YALiZ2jngBGrg89gT/j4vKu0f59abu0FFuciDw28SNBE5FV/50SKoQmfAAwJFpAfwISsDc45yDexr2CrUbhzzHhwUIO2Tics0mk8YiiRmf+aL/4RmSwZTDvDh6bH8pYXTGlzGKOakKOEEZn7LqPNfRwyzOI9Qt3yvMjd4u/ghGlEkRRM8idHye9T9WSNRLmvz6v0zhcBojpjQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by IA6PR03MB444442.namprd03.prod.outlook.com (2603:10b6:208:5ea::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.18; Fri, 10 Jul
+ 2026 16:30:12 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.21.0181.017; Fri, 10 Jul 2026
+ 16:30:12 +0000
+Message-ID: <720a1b0e-463e-4c24-ac3d-28b8f39a9fcb@altera.com>
+Date: Sat, 11 Jul 2026 00:30:04 +0800
 User-Agent: Mozilla Thunderbird
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+Subject: Re: [PATCH] arch: arm: dts: agilex: Disable gmac2 node for Agilex7M
+To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20260429081529.5713-1-alif.zakuan.yuslaimi@altera.com>
 Content-Language: en-US
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-From: Quentin Schulz <u-boot@0leil.net>
-Subject: [GIT PULL] Please pull u-boot-rockchip-2026.10-20260710 into main
+In-Reply-To: <20260429081529.5713-1-alif.zakuan.yuslaimi@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+X-ClientProxiedBy: SI3PR03CA0003.apcprd03.prod.outlook.com
+ (2603:1096:4:297::13) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|IA6PR03MB444442:EE_
+X-MS-Office365-Filtering-Correlation-Id: a053bf87-72a1-40c9-202c-08dedea08399
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|376014|1800799024|366016|55112099003|18002099003|22082099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: gfkT7ZOwmt6OEb4EU3VaehaE6GrRZ2uJwJXbbnu69Pc8aCb9eOdOAVyU7PuGcu6pnnIj3WtqE2cJkBmdATnfPEvv9W278/RmPTkkT6scH27NwUnzO/Cp7w2Of+foqRNhgKAZx1dtaFKBmj/KAwYtjyuipzz6Sm1hky2ZtgXu21HiYANM3vJaU2h5NzI7k+DFla091m4+tWH5Sax/HaUocqHNeYniXCOHN65MFiUKi5J5B21ZrRnXCtK8yqjdX05lBVZ2qp+RBJ9CyyxaT2CkZjkSRkj1wyRtYK9QdJkJXCvnZDGAErsr37k9offCRQJuvVf845jwYq/M2wlNK6XVmawxltauVI5Nx8/QbsbZWLeeNoh2VlYdXnMOeZ4wZ45Yxag2uHzwXVuHOlNh3ZTwdC1Y3s0MPNWow2ZC//fY3QwKiYB6f4EtBhBa7ZYFpSdIrTunW/uBz5paHB5yqjWAYtZ3HKCXQTdaJtgC6sW+DMioAr/a87gcGYNDxoOIDrwlSyqK3JDNJoKacq6NruD6DmqWslM+bKFCg9RUBQ07naFMCWrKdZQBsGdfeZ4tD1rSTh+ydg/vW2PgiczkocutOjWvYkdxmePCVWU41X1COodkME1horKiwcltNBrysFlmvHLE+yU0aw0NsbTqudPxCsV7lGbpXU1gzde+C+S5QM0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(55112099003)(18002099003)(22082099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c3BvRFM1M2FXYTNPMFFJYWhhc3Q2MzVHR2VmVThibjVPNDRDRUpJWjEwOUsz?=
+ =?utf-8?B?c3lCMUppQTMyTDZOT3ptdWFwQy9oWCt1QStmTzhTbld2ZzhnTTRjZW4rM0Ju?=
+ =?utf-8?B?aEtBNVd6V0l6V2laRHBMQlhmczZmSG1qZUxlUmlwcGN1WTN5QmtIT3IzMWNZ?=
+ =?utf-8?B?aEx0YmtrYnFGV0xydncvM214VytURXppUU1YSUV6aVdZTGVXQjNhcThWcVB3?=
+ =?utf-8?B?YXBNNHA0Vm9oR1NVenBwMVN1RVZwZnF0RVdJZVEvMFU0THhFYThlN3dqcHhK?=
+ =?utf-8?B?Zk4veDNUdGlGRDgzZVlvN0lWd1M0UGN6OGdOTURBUzFMajY5RURtK0dlcHFN?=
+ =?utf-8?B?TU0yaHduY2RoTzFuVGRVc3A1dG96bFB5YlVmWnVCNkdUTmZ0SmdWVTNIaWZB?=
+ =?utf-8?B?S1dKQ2ZjcytNeHQ1cEMxbXMwUlo0UjdqVUN2enlFMGVqNEpabXZ1Sm10a1FI?=
+ =?utf-8?B?bm9NSGZtcnB3d25EZERZWXJjNzRabHZXcGUyWkdHTXVGRENXR3c4Mzk5UHov?=
+ =?utf-8?B?bncyY2ZyeGg4aVd6UEM0MW9FSms1OUdlMm5SN05xb0xZSU1leEsvMzJBT05i?=
+ =?utf-8?B?OHUrZmhhUW5PU09TYnBuZG1XTjV0OFlJTVFZd1EvSSt2K3diTXJaTjRIc0E1?=
+ =?utf-8?B?SlVYalJYRzRldURCWXoxc0dkQ2t2T0FwZEpZM2FtYUUxcFF2MktmMzVmVDJ2?=
+ =?utf-8?B?NGt2Ukl2Mnhlc0l5L0VFc2p4VXhDOGFnQnlVUmMyVEUzT1JPeFBJSnZzcGhM?=
+ =?utf-8?B?WWoxRHE3RE9wVnV6ZSt6YVhYdE55NFhqL1MxMkh5aHk1YkRjaUlkSlMxNm42?=
+ =?utf-8?B?THdQdnpZTWZCaFVpeHFWdnpGQ1ZlaVV3SFp6RzgrTkUwdW9vNEU1emU4UTV1?=
+ =?utf-8?B?RUZsb2Z0QnRwY3I3MVJuVnFtWjcwS2JidDJoR3FmWDhyLzU5SkEwMjNiRVYr?=
+ =?utf-8?B?Y045NkhYbkRuTklRN1EwVGJaeW9yWU1MdllLbkhpS3phMG5LbzVZQ3FzdVE5?=
+ =?utf-8?B?SkpLNVlDYjNqeWIvd0VMKzg0SDdXeXpJdDJHSVRVQ21hVVJkQ01ZL3puQ3p1?=
+ =?utf-8?B?SlVVRmcydHZYSW85ZUxZcWt2dFFNMkI3Tm91WmFua0xzaVBrTTJMLzFkM2py?=
+ =?utf-8?B?NEVaMDREclc4YUl1UmVWWWdzYzlpLzlLVUVVVXZyanI1Zk51UDhBSUtPZ285?=
+ =?utf-8?B?bnRYS2xlOWRFL0tmTFRzYkFLRmZuR2Naa2xTQStRV1ZneXdUT0lLWFNHY1hR?=
+ =?utf-8?B?bjhDc01OQXJxTVVYK3hsYnlFRDR0WXU4SXBsblBvSzhHWVg4YTNZVUZJWEZI?=
+ =?utf-8?B?d0lIcmptaHovWVlrWFZFQWI4L1M1NXNrWlMwU2NXS2ZPWEhlYUkyMFZRNTBN?=
+ =?utf-8?B?Y2Z3TnFCZXpBZmV3T29QZ3VudHhPZ3pnUW1NNW9LTjV3VWwyeURNeVNQbEFr?=
+ =?utf-8?B?ekU2OXpQWlh2WWloTnc3VWNkcXg0dEpYY01EZ0p4U1JDa1pFd1NteUlDTjAv?=
+ =?utf-8?B?WXZRcHlOMGxoQUVVMmV6Q3J0TzB5L214WlpGL3RoUnFnRjlHN1R5MXVreEFM?=
+ =?utf-8?B?M3UxM0p0a2RxdFRXTVJHMGNoSkxham5tdGZxd3VhNXM0S3crY0N3UzBYaGxw?=
+ =?utf-8?B?Q0djN0xIeWROdGRCZVE2K2NpRDRGT29mK05yVHo1d3lpeDZwUEhZelNzWkNh?=
+ =?utf-8?B?YTZxZm13MjJyWCtpd2U0SDZxcDlHRERrM0J2YlV6Z2xNTmh0ZzAwbkdkYmE4?=
+ =?utf-8?B?R3hid2ZLc1pjazRoSHRUNlNMWkRCeFI2dldPLzhsKzgzWXZDY1Z2eDhPb2ow?=
+ =?utf-8?B?b0FXYWFJeG41RU52b3JKN0ErQ1dHOHoyZmsrLzBrM05zbUx3QVVZd0hISno3?=
+ =?utf-8?B?MERjeGZ2dm11Z0UwRWN0cCt1YWZUaFVFSGs5eUVHbmVoUksxRGtOVXZPMGJl?=
+ =?utf-8?B?ZGxuQkNiS05YdC9PUUhRU1NPRm44eGR6a3BkbkdrMzhYVHZ3bmhmNEIzc29i?=
+ =?utf-8?B?cVFZRFp4dGNaMGdxTzFBMXlDc3JYMDkxU1FJTmFBbHhqdjhLL2FTbDdxcXJh?=
+ =?utf-8?B?SVcveGYvVGgzYU1iN01GWUZqMXgwM1EwNWdUK05EYzQ0aWJ1UHR6ZlVUMzRa?=
+ =?utf-8?B?NHJNeThtVXY4RytLRGdUT1hGdUVVS1VZczF6QTZ5TG5vcmphRUxRalEveERV?=
+ =?utf-8?B?NEtBRkVRZUlPOWw3QjRTbC9od2IxYmhnc2VVS0V1VHRGK0tvQnZYZnFaNVcx?=
+ =?utf-8?B?azhleldHZ1hoMkV5RFBncERKdGh6azNVNnEvUG81eTc2N3g0TDVEL3RmaVdi?=
+ =?utf-8?B?SlRMSWlQZzRMQlQ1MGJuS1hXZkt4SitPVUVtRUltSUVacm5hWUVEdy8zWit6?=
+ =?utf-8?Q?5NpNYQcoRDAxi1AA=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a053bf87-72a1-40c9-202c-08dedea08399
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 16:30:12.1641 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 65Kr6eLXM/8MD7uuJ82QsNjuataKRfKXalTNBSBzUZc/JrAOZaqRpzc2Da0FfKi1miHxGb2D3LEQLhsTdayzvu1s4M5Ln+xghOMyl5r0QQs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA6PR03MB444442
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,91 +151,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Alif,
 
-The following changes since commit 913fedc816570c07bfc7f9c4046dc2a3a55e4099:
+On Wed, 29 Apr 2026 01:15:29 -0700, alif.zakuan.yuslaimi@altera.com wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Disable gmac2 node with the incorrect settings to only enable gmac0 as
+> default for the standard reference Agilex7M devkit.
+>
+> The gmac2 node can be enabled and configured with the correct
+> board-specific settings for other Agilex7M board variants in the Linux
+> device tree.
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
+>  arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi | 30 -------------------
+>  1 file changed, 30 deletions(-)
+>
+> diff --git a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+> index f2150b7eb7b..9dc2c66f6f1 100644
+> --- a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+> @@ -69,36 +69,6 @@
+>  	};
+>  };
+>  
+> -&gmac2 {
+> -	status = "okay";
+> -	phy-mode = "rgmii";
+> -	phy-handle = <&phy0>;
+> -
+> -	max-frame-size = <3800>;
+> -
+> -	mdio2 {
+> -		#address-cells = <1>;
+> -		#size-cells = <0>;
+> -		compatible = "snps,dwmac-mdio";
+> -		phy2: ethernet-phy@2 {
+> -			reg = <4>;
+> -
+> -			txd0-skew-ps = <0>; /* -420ps */
+> -			txd1-skew-ps = <0>; /* -420ps */
+> -			txd2-skew-ps = <0>; /* -420ps */
+> -			txd3-skew-ps = <0>; /* -420ps */
+> -			rxd0-skew-ps = <420>; /* 0ps */
+> -			rxd1-skew-ps = <420>; /* 0ps */
+> -			rxd2-skew-ps = <420>; /* 0ps */
+> -			rxd3-skew-ps = <420>; /* 0ps */
+> -			txen-skew-ps = <0>; /* -420ps */
+> -			txc-skew-ps = <1860>; /* 960ps */
+> -			rxdv-skew-ps = <420>; /* 0ps */
+> -			rxc-skew-ps = <1680>; /* 780ps */
+> -		};
+> -	};
+> -};
+> -
+>  &qspi {
+>  	status = "disabled";
+>  };
 
-   Merge tag 'xilinx-for-v2026.10-rc1-v3' of 
-https://git.u-boot-project.org/u-boot/custodians/u-boot-amd (2026-07-08 
-10:13:24 -0600)
+Looks good to me. Thanks.
 
-are available in the Git repository at:
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-   https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip.git 
-tags/u-boot-rockchip-2026.10-20260710
-
-for you to fetch changes up to b5deaa71fbe543d11644b6235d466b252587641f:
-
-   board: rockchip: Add support for 9Tripod X3568 v4 (2026-07-10 
-10:52:20 +0200)
-
-----------------------------------------------------------------
-- Add new rockchip custodian,
-- Remove inactive rockchip custodian,
-- Preemptively fix rk3528/rk356x DTS issue that will come with 7.1
-   upstream DTS sync,
-- Fix typo in doc,
-- Fix variable used before being set in rockchip_nfc,
-- Fix asm-operand-widths clang warning for RK3528, RK3576 and RK3588,
-- Work around HW undefined state for NVMEs on RK3588 Jaguar,
-- Added support for new devices:
-   - LinkEase EasePi R1
-   - 9Tripod X3568 v4
-
-----------------------------------------------------------------
-
-CI: 
-https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip/-/pipelines/597
-
-Coia Prant (1):
-       board: rockchip: Add support for 9Tripod X3568 v4
-
-Jakob Unterwurzacher (1):
-       board: rockchip: set M.2 NVMe PERSTN low in spl_board_init on Jaguar
-
-Johan Jonker (2):
-       rockchip: doc: fix typo evb-rk3288-rk808_defconfig
-       mtd: nand: raw: rockchip_nfc: fix oobfree length calculation
-
-Jonas Karlman (1):
-       arm: dts: rockchip: Align OTP nodes for RK3528/RK356x with Linux v7.1
-
-Liangbin Lian (1):
-       rockchip: rk3568: Add support for LinkEase EasePi R1
-
-Quentin Schulz (13):
-       MAINTAINERS: remove redundant entries for ARM ROCKCHIP
-       MAINTAINERS: add rkmux.py to ARM ROCKCHIP
-       MAINTAINERS: add N: px30 regex to ARM ROCKCHIP
-       MAINTAINERS: add N: px5 regex to ARM ROCKCHIP
-       MAINTAINERS: add N: rk3 regex to ARM ROCKCHIP
-       MAINTAINERS: add N: rk8 regex to ARM ROCKCHIP
-       MAINTAINERS: add N: rv11 regex to ARM ROCKCHIP
-       MAINTAINERS: add N: rkmtd regex to ARM ROCKCHIP
-       MAINTAINERS: add more Rockchip drivers to ARM ROCKCHIP
-       MAINTAINERS: add rockusb to ARM ROCKCHIP
-       MAINTAINERS: remove Philipp Tomsich from ARM ROCKCHIP maintainers
-       MAINTAINERS: add myself as ARM ROCKCHIP maintainer
-       rockchip: fix asm-operand-widths clang warning
-
-  MAINTAINERS                                           | 46 
-++++++++++++++++++---------------------------
-  arch/arm/dts/rk3528-u-boot.dtsi                       |  2 +-
-  arch/arm/dts/rk356x-u-boot.dtsi                       |  8 +-------
-  arch/arm/dts/rk3588-jaguar-u-boot.dtsi                |  6 ++++++
-  arch/arm/mach-rockchip/rk3528/rk3528.c                |  2 +-
-  arch/arm/mach-rockchip/rk3576/rk3576.c                |  2 +-
-  arch/arm/mach-rockchip/rk3588/rk3588.c                |  2 +-
-  board/rockchip/evb_rk3568/MAINTAINERS                 | 10 ++++++++++
-  board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c | 20 
-++++++++++++++++++++
-  configs/9tripod-x3568-v4-rk3568_defconfig             | 76 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  configs/easepi-r1-rk3568_defconfig                    | 82 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  doc/board/rockchip/rockchip.rst                       |  4 +++-
-  drivers/mtd/nand/raw/rockchip_nfc.c                   | 18 
-+++++++++---------
-  13 files changed, 229 insertions(+), 49 deletions(-)
-  create mode 100644 configs/9tripod-x3568-v4-rk3568_defconfig
-  create mode 100644 configs/easepi-r1-rk3568_defconfig
+Best regards,
+Tien Fong
