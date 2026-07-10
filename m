@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D90DC43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 14:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA08DC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 14:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B103084B04;
-	Fri, 10 Jul 2026 16:13:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0403584B59;
+	Fri, 10 Jul 2026 16:13:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="gWQwp4as";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="SZ3B3u03";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 360A184B5D; Fri, 10 Jul 2026 16:13:05 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 5DD7884B65; Fri, 10 Jul 2026 16:13:06 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FCF084B37
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:13:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63B2A84B51
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 16:13:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-493f75f7172so1570915e9.1
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:13:03 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4921eed3fa2so8857855e9.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 07:13:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1783692782; x=1784297582; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1783692784; x=1784297584; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=QH6LjrrKr29iWY3l1XIL+b7IzBPcM5LTW+rtFNIK8pw=;
- b=gWQwp4asyp81dLQnAJXGh24YEKC4xbHtapReU90fN3c9ZyUXf/oCLFsSj9IjoR5D2y
- P54tLELxrymy30cX8Z/6QQ6P+agFBT9++2rqNOeWtn3asOScXAz2Apa4hmlW6fdvQTMn
- acYltHurbVrMr3HkEcPudt1AEaYgRPlX3MwLviSVyTVQJ0k5Jl4g/LI38LrxbaqS3GNn
- +/UbSfRDCsCOF0JwzcSZ2Ke8DcwcVkyjWOs5zkw5bHGL9gSDsMKGksgc8OYP29VWJ0Mz
- wE2V7E4f5JO8oWeWIR0em3WXon5uJQ/O23zZMM3lG6mofKAx8G+dKeVbQwI9v2HyYcNO
- 4GHQ==
+ bh=Vw8UR5EKyXJSDoGAXGBRYLa7t8LGQqqQeIelTSfgEZ0=;
+ b=SZ3B3u03e9OwL4GpyLVTn55yr+Mc6xUZm3Rrf/QxPMW/7UvHedEKDOqymLRjQoI0ux
+ hQUkuMZPS0zbFkYdrkQoO/6XYwjZf14Yhnu7h17ZO7jH76SxlOw3BeogDc3qD7xhwBE7
+ evx0qzVHmqcp5+xY54Sdv3IMZD3BPMbllnR8Z8QzKYctApXQ8hotf8VO2y7uCUA6/6lZ
+ lhrTfEgV6O46m7zJuhvnlc4rdeN89xPC9HbHoGtcBp94Bsagi5P8B5ke+DUisRs0dQKo
+ M4HFan/dwhzG8wbnxvJW2dOE/O1HBWlJ2iyKGxzSYGLOtxkqLp4rNuxPd+30bJQymcvF
+ 84+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783692782; x=1784297582;
+ d=1e100.net; s=20251104; t=1783692784; x=1784297584;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=QH6LjrrKr29iWY3l1XIL+b7IzBPcM5LTW+rtFNIK8pw=;
- b=TuAVh90TL189IMyBZwoiwZRlBhFCtyP16ov9RVTrTfnVc0APzoA+gmczru6VWM5FnL
- pbFV4xuLhfcTTohqeof0CFzPWLCDM5I0d97F9O2u96zz44nWIweBkLXbh/fESbZNgDSo
- x/q8OVA2I+56u5idgLucseGrub2Quxylen8mb9L+NamufXr8jHD+neaGpE37cWnKYHBM
- PS2VN4rXRyNkaCcgLZ1m8n8uMo005qt6QJcnSFX3nrC2O5YXIft0o+c8pS0nQUf84L1W
- MHeqj9FgPULBCUIiwYWtDsvrsQcVXAUq798NNVas1XMgSN0noqfiQt7+d7mLnRj9SF2O
- 68ig==
-X-Gm-Message-State: AOJu0YwaGBS/uhNmZLc6wIlFzzdRJLLLPm1vT6ocBDnWVShIhcJOb0d+
- wHBam7Z6lUWL5bFbAv5SXjJtUYDsWtzamRDsGHdIitGOQ+sKt33XAvI+Yxik7UdedTYaQ2Z1YqF
- BKiCmUVs=
-X-Gm-Gg: AfdE7clck6NhoBtnCzitBIqSog7f91Rh09xYsTY9W4HBcFPXYEEMuq0YsiQh5MJ6QV9
- 14X6uoBphB4PxYkugE7Gh2ol+YS2vcfPnKCSJXVSSNgl/SOJ9x/yoIM71gs49rmXUyG2MumvtbE
- nqrvpgs4CRD1PUACjTH5RMW0Hl/MHpqqLxC6pXac4PqLF0lAQeb586+YZ8C9FbQ1KCCf0ngx0px
- phqCgMIfdsa4kFF0TdF4gTqR3P6PjmqtdyOsf56nVZ1ubDnjGLNPid0Huglv6UpECVIg6NXQCt8
- 6b8BGDteHMyRYPyFh6ukqy6THmAUjN9vE1aHYCmgQdYRnQwe8lh9MPHOYJBtf9HLpsn7FRtOA9P
- xrx2r05xFAeAlLS8lsKu1qDrxiILGP7DMNXxepJBmUS0e/sMZ1PoTrHyUCeFbky4EjAtpBCY9Ez
- I8sncyhuAwTVat/NKHPocnrSGiuDRkCmiqfMPihjIWor97m55cG9TuUSLAWb/VHF/HkzN0F0rNl
- LNf8jQDzb4KaiXGtmxSDNv0Km8IU3crrHcn6ucu82vH1YvQO1/xI3ybJSqmhAFh0SU1EGU=
-X-Received: by 2002:a05:600d:8496:10b0:493:e034:a3b5 with SMTP id
- 5b1f17b1804b1-493e68c6eaamr90614355e9.24.1783692782503; 
- Fri, 10 Jul 2026 07:13:02 -0700 (PDT)
+ bh=Vw8UR5EKyXJSDoGAXGBRYLa7t8LGQqqQeIelTSfgEZ0=;
+ b=JEzteJpOh/89QTSLdHeNVdcShsYcnKfNEGgDXXgKph6xRPi+/Z4A5OQS5qWVGQ58kG
+ thNRRJdRMVJZmlHwP7Y6wH2f164hZ8ta0s6/IzeY+/w0H1ytZVBW6LIhvXC+J564yFyQ
+ PvlzedLKy2gMPVIllK1fcT+dGSzk1/92Y5ieTtZkPObb2ewpd+Kf/feQoErRgwsw4bjJ
+ PaevkJR0PM8Tt/TBREDB3H+7SSo8hBr9d5WVsDR/5qzyu0AUN8QRKOTviD9hwPUOQ/R6
+ B4UWxc8sxqdH02+S3fA4EFMeTmM93P+uNH/Tw4UP7oovBkALNL5nEn512lXgSVTe9Go0
+ AZTA==
+X-Gm-Message-State: AOJu0YyC0S2+l38ESDFAwjPbAKy4/wsdjiyF25TlH2+SO52+0l7HWJjp
+ zQDf76Zgu0FdYLYfJrTC7Be+2WUYmuj6DUXvYfBZjMojrnJ1/x2mqF8dmevpFZ5mKHs=
+X-Gm-Gg: AfdE7ck1Tc9h+/yFS4upEtAVP6+c2kUsCarx7X6kyJvd8cXRg9aJIiZibbfufBn4uR6
+ Fvj9PMiQqpzDdaKxK32YzGDMjggWJcKjVU+XA9bqTsJCsjSomOhj+XNbdWArBDxc+9TV1uHd0fn
+ dlQfmky1PKHVX2DyPaSiCnAqv/UJAFcfWRLskJmDwLBMByV7R/+p2hpmdX75RyPybGpNAcLAOJD
+ U6SJx9GV/e2rsCKK4Xh03D2PA11at9zrh5KPlWQ0l6uRbuBUPS80giXp3Ps6KQ9uJLdKtT/39Qf
+ LbCQBdLxlHbEtTAV/L8BGPfDco2QW1fk//YXUeRu/wb6hyj6Y9b9zgRHseKV3/KcY7+Z1tf9UDX
+ ye2+Da14gLw+z+KUfOf0PVsN9IYE0MZh2qYSPc3xnMzTIIx/kfIQfPDBApJDnqujyiRLhKv7yLk
+ l57qeoWSR4mWa+idmtu4oQ0uNzLoQDjcJ4oOnO08uqeb9yI3C+hQ95+tadQ3pYuNhgtsamWE9dq
+ erp4SAUKUnTyiFEu0olCi3AGPtNSsUszTFRxwPY4hh7lmyZTeJspM1NKyxcs13fJIR+AiE=
+X-Received: by 2002:a05:600c:628e:b0:492:6113:d4fc with SMTP id
+ 5b1f17b1804b1-493e68cfbbcmr117591145e9.17.1783692783790; 
+ Fri, 10 Jul 2026 07:13:03 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493f2d88698sm64073205e9.1.2026.07.10.07.13.01
+ 5b1f17b1804b1-493f2d88698sm64073205e9.1.2026.07.10.07.13.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 07:13:02 -0700 (PDT)
+ Fri, 10 Jul 2026 07:13:03 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 10 Jul 2026 16:12:59 +0200
-Subject: [PATCH 8/9] clk: mediatek: mt7988: convert to mtk_gate_clk_data
+Date: Fri, 10 Jul 2026 16:13:00 +0200
+Subject: [PATCH 9/9] clk: mediatek: mt8512: convert to mtk_gate_clk_data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-8-a4b5c491d9bf@baylibre.com>
+Message-Id: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-9-a4b5c491d9bf@baylibre.com>
 References: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
 In-Reply-To: <20260710-b4-mtk-clk-cleanup-clock-gate-drivers-v1-0-a4b5c491d9bf@baylibre.com>
 To: u-boot@lists.denx.de
@@ -112,172 +111,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MT7988 currently declares a separate U_BOOT_DRIVER, probe() function
-and compatible table for each clock gate controller, despite all of
-them sharing the same implementation.
+MT8512 currently declares a separate U_BOOT_DRIVER, mtk_clk_tree,
+probe() function and compatible table for each clock gate controller,
+despite all of them sharing the same implementation.
 
-Convert MT7988 to use the generic mtk_gate_clk_data infrastructure.
-sgmiisys_0 and sgmiisys_1 are merged into a single generic driver,
-while ethdma and ethwarp keep their own U_BOOT_DRIVERs since they
-bind different reset controllers, but share the generic probe()
-function.
+Convert MT8512 to use the generic mtk_gate_clk_data infrastructure.
+This allows the topckgen-cg and infracfg clock gate controllers to
+share a single generic driver.
 
 No functional change intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7988.c | 74 +++++++++++++++------------------------
- 1 file changed, 28 insertions(+), 46 deletions(-)
+ drivers/clk/mediatek/clk-mt8512.c | 52 +++++++++++++++++----------------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7988.c b/drivers/clk/mediatek/clk-mt7988.c
-index ebad78a9151..90bed15b4c7 100644
---- a/drivers/clk/mediatek/clk-mt7988.c
-+++ b/drivers/clk/mediatek/clk-mt7988.c
-@@ -933,10 +933,15 @@ static const struct mtk_gate ethdma_mtk_gate[] = {
- 	GATE_ETHDMA(CLK_ETHDMA_FE_EN, "ethdma_fe_en", CLK_TOP_NETSYS_2X_SEL, 6),
- };
+diff --git a/drivers/clk/mediatek/clk-mt8512.c b/drivers/clk/mediatek/clk-mt8512.c
+index 88c55e5ac6c..031c3f87d72 100644
+--- a/drivers/clk/mediatek/clk-mt8512.c
++++ b/drivers/clk/mediatek/clk-mt8512.c
+@@ -830,16 +830,18 @@ static int mt8512_topckgen_probe(struct udevice *dev)
+ 	return mtk_common_clk_init(dev, &mt8512_topckgen_clk_tree);
+ }
  
--static int mt7988_ethdma_probe(struct udevice *dev)
-+static int mt7988_clk_gate_probe(struct udevice *dev)
+-static int mt8512_topckgen_cg_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_gate_init(dev, &mt8512_clk_tree, top_clks,
+-					ARRAY_SIZE(top_clks), 0);
+-}
++MTK_GATE_CLK_DATA(top_clks);
++MTK_GATE_CLK_DATA(infra_clks);
+ 
+-static int mt8512_infracfg_probe(struct udevice *dev)
++static int mt8512_clk_gate_probe(struct udevice *dev)
  {
--	return mtk_common_clk_gate_init(dev, &mt7988_clk_tree, ethdma_mtk_gate,
--					ARRAY_SIZE(ethdma_mtk_gate), 0);
+-	return mtk_common_clk_gate_init(dev, &mt8512_clk_tree, infra_clks,
+-					ARRAY_SIZE(infra_clks), 0);
 +	struct mtk_gate_clk_data *data;
 +
 +	data = (void *)dev_get_driver_data(dev);
 +
-+	return mtk_common_clk_gate_init(dev, &mt7988_clk_tree,
++	return mtk_common_clk_gate_init(dev, &mt8512_clk_tree,
 +					data->gates, data->num_gates,
 +					data->gates[0].id);
  }
  
- static int mt7988_ethdma_bind(struct udevice *dev)
-@@ -952,9 +957,12 @@ static int mt7988_ethdma_bind(struct udevice *dev)
- 	return ret;
- }
- 
-+MTK_GATE_CLK_DATA(ethdma_mtk_gate);
-+
- static const struct udevice_id mt7988_ethdma_compat[] = {
- 	{
- 		.compatible = "mediatek,mt7988-ethdma",
-+		.data = (ulong)&ethdma_mtk_gate_data,
- 	},
- 	{}
- };
-@@ -963,7 +971,7 @@ U_BOOT_DRIVER(mt7988_clk_ethdma) = {
- 	.name = "mt7988-clock-ethdma",
- 	.id = UCLASS_CLK,
- 	.of_match = mt7988_ethdma_compat,
--	.probe = mt7988_ethdma_probe,
-+	.probe = mt7988_clk_gate_probe,
- 	.bind = mt7988_ethdma_bind,
- 	.priv_auto = sizeof(struct mtk_cg_priv),
- 	.ops = &mtk_clk_gate_ops,
-@@ -991,29 +999,6 @@ static const struct mtk_gate sgmiisys_0_mtk_gate[] = {
- 	GATE_SGMII0(CLK_SGM0_RX_EN, "sgm0_rx_en", CLK_TOP_XTAL, 3),
+ static const struct udevice_id mt8512_apmixed_compat[] = {
+@@ -852,13 +854,15 @@ static const struct udevice_id mt8512_topckgen_compat[] = {
+ 	{ }
  };
  
--static int mt7988_sgmiisys_0_probe(struct udevice *dev)
--{
--	return mtk_common_clk_gate_init(dev, &mt7988_clk_tree,
--					sgmiisys_0_mtk_gate,
--					ARRAY_SIZE(sgmiisys_0_mtk_gate), 0);
--}
--
--static const struct udevice_id mt7988_sgmiisys_0_compat[] = {
--	{
--		.compatible = "mediatek,mt7988-sgmiisys_0",
--	},
--	{}
+-static const struct udevice_id mt8512_topckgen_cg_compat[] = {
+-	{ .compatible = "mediatek,mt8512-topckgen-cg", },
+-	{ }
 -};
 -
--U_BOOT_DRIVER(mt7988_clk_sgmiisys_0) = {
--	.name = "mt7988-clock-sgmiisys_0",
--	.id = UCLASS_CLK,
--	.of_match = mt7988_sgmiisys_0_compat,
--	.probe = mt7988_sgmiisys_0_probe,
--	.priv_auto = sizeof(struct mtk_cg_priv),
--	.ops = &mtk_clk_gate_ops,
--};
--
- /* SGMIISYS_1 */
- 
- static const struct mtk_gate_regs sgmii1_cg_regs = {
-@@ -1036,25 +1021,26 @@ static const struct mtk_gate sgmiisys_1_mtk_gate[] = {
- 	GATE_SGMII1(CLK_SGM1_RX_EN, "sgm1_rx_en", CLK_TOP_XTAL, 3),
- };
- 
--static int mt7988_sgmiisys_1_probe(struct udevice *dev)
--{
--	return mtk_common_clk_gate_init(dev, &mt7988_clk_tree,
--					sgmiisys_1_mtk_gate,
--					ARRAY_SIZE(sgmiisys_1_mtk_gate), 0);
--}
-+MTK_GATE_CLK_DATA(sgmiisys_0_mtk_gate);
-+MTK_GATE_CLK_DATA(sgmiisys_1_mtk_gate);
- 
--static const struct udevice_id mt7988_sgmiisys_1_compat[] = {
-+static const struct udevice_id mt7988_clk_gate_compat[] = {
+-static const struct udevice_id mt8512_infracfg_compat[] = {
+-	{ .compatible = "mediatek,mt8512-infracfg", },
++static const struct udevice_id mt8512_clk_gate_compat[] = {
 +	{
-+		.compatible = "mediatek,mt7988-sgmiisys_0",
-+		.data = (ulong)&sgmiisys_0_mtk_gate_data,
++		.compatible = "mediatek,mt8512-topckgen-cg",
++		.data = (ulong)&top_clks_data
 +	},
- 	{
- 		.compatible = "mediatek,mt7988-sgmiisys_1",
-+		.data = (ulong)&sgmiisys_1_mtk_gate_data,
- 	},
- 	{}
++	{
++		.compatible = "mediatek,mt8512-infracfg",
++		.data = (ulong)&infra_clks_data
++	},
+ 	{ }
  };
  
--U_BOOT_DRIVER(mt7988_clk_sgmiisys_1) = {
--	.name = "mt7988-clock-sgmiisys_1",
-+U_BOOT_DRIVER(mt7988_clk_gate) = {
-+	.name = "mt7988-gate-clk",
- 	.id = UCLASS_CLK,
--	.of_match = mt7988_sgmiisys_1_compat,
--	.probe = mt7988_sgmiisys_1_probe,
-+	.of_match = mt7988_clk_gate_compat,
-+	.probe = mt7988_clk_gate_probe,
- 	.priv_auto = sizeof(struct mtk_cg_priv),
- 	.ops = &mtk_clk_gate_ops,
- };
-@@ -1083,13 +1069,6 @@ static const struct mtk_gate ethwarp_mtk_gate[] = {
- 		     CLK_TOP_NETSYS_MCU_SEL, 15),
+@@ -884,21 +888,11 @@ U_BOOT_DRIVER(mt8512_clk_topckgen) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
  };
  
--static int mt7988_ethwarp_probe(struct udevice *dev)
--{
--	return mtk_common_clk_gate_init(dev, &mt7988_clk_tree,
--					ethwarp_mtk_gate,
--					ARRAY_SIZE(ethwarp_mtk_gate), 0);
--}
+-U_BOOT_DRIVER(mt8512_clk_topckgen_cg) = {
+-	.name = "mt8512-topckgen-cg",
+-	.id = UCLASS_CLK,
+-	.of_match = mt8512_topckgen_cg_compat,
+-	.probe = mt8512_topckgen_cg_probe,
+-	.priv_auto	= sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
+-	.flags = DM_FLAG_PRE_RELOC,
+-};
 -
- static int mt7988_ethwarp_bind(struct udevice *dev)
- {
- 	int ret = 0;
-@@ -1103,9 +1082,12 @@ static int mt7988_ethwarp_bind(struct udevice *dev)
- 	return ret;
- }
- 
-+MTK_GATE_CLK_DATA(ethwarp_mtk_gate);
-+
- static const struct udevice_id mt7988_ethwarp_compat[] = {
- 	{
- 		.compatible = "mediatek,mt7988-ethwarp",
-+		.data = (ulong)&ethwarp_mtk_gate_data,
- 	},
- 	{}
- };
-@@ -1114,7 +1096,7 @@ U_BOOT_DRIVER(mt7988_clk_ethwarp) = {
- 	.name = "mt7988-clock-ethwarp",
+-U_BOOT_DRIVER(mt8512_clk_infracfg) = {
+-	.name = "mt8512-infracfg",
++U_BOOT_DRIVER(mt8512_clk_gate) = {
++	.name = "mt8512-gate-clk",
  	.id = UCLASS_CLK,
- 	.of_match = mt7988_ethwarp_compat,
--	.probe = mt7988_ethwarp_probe,
-+	.probe = mt7988_clk_gate_probe,
- 	.bind = mt7988_ethwarp_bind,
- 	.priv_auto = sizeof(struct mtk_cg_priv),
+-	.of_match = mt8512_infracfg_compat,
+-	.probe = mt8512_infracfg_probe,
++	.of_match = mt8512_clk_gate_compat,
++	.probe = mt8512_clk_gate_probe,
+ 	.priv_auto	= sizeof(struct mtk_cg_priv),
  	.ops = &mtk_clk_gate_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
 
 -- 
 2.54.0
