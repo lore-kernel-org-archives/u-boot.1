@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C76B2C43458
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:01:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEDDC43458
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jul 2026 13:16:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C15284B67;
-	Fri, 10 Jul 2026 14:56:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4083B84A8D;
+	Fri, 10 Jul 2026 15:16:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="FG6jJ9gZ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xQYq60sz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5A4984659; Fri, 10 Jul 2026 12:05:26 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B6C808341A
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 12:05:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8F5F61D15;
- Fri, 10 Jul 2026 03:05:18 -0700 (PDT)
-Received: from [10.41.150.148] (e142021.arm.com [10.41.150.148])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C1CD53F66F;
- Fri, 10 Jul 2026 03:05:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1783677922; bh=Fvd8eq951k/8NeEDLSVePURxeCJ00fS0Ru7St2QwTTU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FG6jJ9gZ4kAdeepA2MxkQgmpeGaW+6YcVOLhRZSSERQ9Ub5ySG8pG2vF6G+BZlhnI
- /VV5edKK0lbJ2ulgLAlC2rBWVsKSg3DUnvtwUIPbKMM+Qxr5QqoRDv7AHq0iKC/OqF
- 78ADc9ZT7X4/lfqeplmUgAnU6uoUE1b7wuwxNugw=
-Message-ID: <eefb2d2b-1f2e-451e-a20a-093964e9e138@arm.com>
-Date: Fri, 10 Jul 2026 12:05:15 +0200
+ id DA35584A90; Fri, 10 Jul 2026 15:16:09 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E1684A63
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 15:16:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d8f4=FF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1783689365;
+ bh=/L7ec48rdHLMHn+uaRTGmGIgPRheWzjU3esc6GpIl+k=;
+ b=xQYq60sz4m3s40r1TwiO9wdW21fYvmragnrv1jiGTbOpHMVwvhYbQJ7xv32dljV7eUkfqWe+y
+ jCvhCyiAnhxQuyQKKKtbL7GH6HDta1/aRGkbW2d72Uud3YNubGbvPsWxaAbLmlwgTcTX/j4tYel
+ Nur8RgUmFxvVp6Vab512jjyrc9JlX+zv7V+i/FPaCjU7Oy9uYXBgJt3KfOJMJmTJn0w8QF75ceq
+ 6o5zouOCi3kkji+mOfkpGNfYaNLuqDBxRl6e4kOzuZV7GaBZfEbq1vz4ICF1airOcHkmeOn3ZgE
+ yzMxMfOc2vHpC1VElM7JxSjUrrYL0IPT2g4DVkZty1Qw==
+X-Forward-Email-ID: 6a50f09064bed9dbaa1c2b2d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.10.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] power: regulator: Fix regulator_enable/disable() macros
+Date: Fri, 10 Jul 2026 13:15:53 +0000
+Message-ID: <20260710131554.3686622-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/10] crypto: allwinner: enable sun8i-ce FIT crypto
-To: James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.denx.de,
- Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>
-Cc: Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>,
- Daniel Golle <daniel@makrotopia.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Randolph Sapp <rs@ti.com>,
- Heiko Schocher <hs@nabladev.com>, Alexey Charkov <alchark@gmail.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>,
- Michael Walle <mwalle@kernel.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lukasz Majewski <lukma@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Marek Vasut <marek.vasut@mailbox.org>, E Shattow <e@freeshell.de>,
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu
- <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>, Thierry Reding
- <treding@nvidia.com>, Francois Berder <fberder@outlook.fr>,
- Jonas Karlman <jonas@kwiboo.se>, Jerome Forissier
- <jerome.forissier@arm.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>
-References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
-Content-Language: en-GB
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Fri, 10 Jul 2026 14:56:43 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,224 +69,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi James,
+The commit 076265b75e61 ("compat: regulator: add enable/disable macros")
+added regulator_enable/disable() macros to provide a closer analogue to
+the Linux API.
 
-On 7/10/26 00:46, James Hilliard wrote:
-> This series enables Allwinner Crypto Engine backed FIT decryption and
-> FIT signature/hash validation for secure-boot flows on H6/H616-class
-> boards, covering both SPL and U-Boot proper.
-> 
-> The purpose is to use CE-backed AES for encrypted FIT payloads on H6/H616
-> and CE-backed ECDSA validation where the CE ECC engine is available,
-> currently H616, instead of relying only on software crypto paths.
+These new macros wrap regulator_set_enable() that may return detailed
+error codes and should typically not directly be called by drivers.
 
-May I ask: why? In general those proprietary vendor crypto offload 
-engines are somewhat frowned upon, and especially in the Allwinner case 
-I am not even sure if someone has tried to validate the hardware.
-So what is wrong with using a reviewable (and reviewed) and tested 
-software implementation? Do you have data that shows any advantage here? 
-Just from a high level point of view: the CE uses uncached DMA 
-operations, and runs at 24 MHz, if I see this correctly. I am pretty 
-sure the AES instructions in the Cortex-A53 beat this easily, I guess 
-even a NEON-optimised pure software implementation would be faster.
+Change the macros to wrap regulator_set_enable_if_allowed() that masks
+error codes consumers typically do not expect to closer match the
+behavior of the Linux API.
 
-So what I see here is just a lot of code added, but with little (read: 
-no) improvement.
-In the BROM the rationale is a bit different, so I see why it uses the 
-CE there, but IIRC there is even a chicken bit in the fuses to not use 
-the CE, so they might even have a software fallback?
+Also move the macros outside the #if #else blocks to make the macros
+available when !CONFIG_IS_ENABLED(DM_REGULATOR).
 
-Thoughts?
+Fixes: 076265b75e61 ("compat: regulator: add enable/disable macros")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- Move macros outside the #if #else blocks
+---
+ include/power/regulator.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Cheers,
-Andre
-
-
-> At a high level this adds:
-> 
->    - SPL driver-model crypto plumbing for AES and hash providers.
->    - FIT decrypt-to-buffer support and SPL FIT cipher support, so SPL can
->      decrypt an encrypted U-Boot proper FIT without allocating another full
->      payload buffer.
->    - A shared sun8i-ce parent driver with AES and hash children for H6/H616.
->    - An H616 ECDSA child for CE-backed FIT signature validation, plus common
->      ECDSA curve-size and key-encoding fixes for secp224r1, prime256v1,
->      secp384r1 and secp521r1.
-> 
-> The AES child supports software-provided AES-128/192/256 keys in ECB and
-> CBC modes. The hash child supports the CE one-shot MD5/SHA1/SHA256/SHA384/
-> SHA512 methods used by FIT verification. The ECDSA child exposes the H616
-> CE ECC verifier through UCLASS_ECDSA.
-> 
-> Tested flows include:
-> 
->    - SPL loading an encrypted and signed U-Boot proper FIT with CE-backed
->      AES decryption, hash verification and ECDSA signature verification.
->    - U-Boot proper loading an encrypted and signed FIT with CE-backed AES
->      decryption, hash verification and ECDSA signature verification.
->    - U-Boot proper AES command paths using the DM AES provider.
->    - CE ECDSA verification with secp224r1, prime256v1, secp384r1 and
->      secp521r1 FIT signatures.
-> 
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> ---
-> To: Svyatoslav Ryhel <clamor95@gmail.com>
-> To: Ion Agorria <ion@agorria.com>
-> To: u-boot@lists.denx.de
-> Cc: Chen-Yu Tsai <wens@kernel.org>
-> Cc: Samuel Holland <samuel@sholland.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: James Hilliard <james.hilliard1@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Aristo Chen <aristo.chen@canonical.com>
-> Cc: Anton Ivanov <anton@binarly.io>
-> Cc: Daniel Golle <daniel@makrotopia.org>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-> Cc: Randolph Sapp <rs@ti.com>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Alexey Charkov <alchark@gmail.com>
-> Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Anshul Dalal <anshuld@ti.com>
-> Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Cc: Francesco Valla <francesco@valla.it>
-> Cc: Michael Walle <mwalle@kernel.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> Cc: Richard Genoud <richard.genoud@bootlin.com>
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> Cc: E Shattow <e@freeshell.de>
-> Cc: Enric Balletbo i Serra <eballetbo@kernel.org>
-> Cc: Lucas Dietrich <ld.adecy@gmail.com>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Julien Stephan <jstephan@baylibre.com>
-> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Cc: Raymond Mao <raymond.mao@riscstar.com>
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Francois Berder <fberder@outlook.fr>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Jerome Forissier <jerome.forissier@arm.com>
-> 
-> ---
-> Changes in v3:
-> - Rebase on U-Boot master.
-> - Add review tags from Svyatoslav Ryhel and Simon Glass.
-> - Simplify the AES decrypt helper guard and validation flow.
-> - Document the AES provider in-place CBC decrypt contract.
-> - Tighten SPL encrypted-FIT buffer handling and error reporting.
-> - Clean up the SPL DM hash fallback and Kconfig help text.
-> - Link to v2: https://patch.msgid.link/20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com
-> 
-> To: Svyatoslav Ryhel <clamor95@gmail.com>
-> To: Ion Agorria <ion@agorria.com>
-> To: u-boot@lists.denx.de
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: James Hilliard <james.hilliard1@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-> Cc: Aristo Chen <aristo.chen@canonical.com>
-> Cc: Anton Ivanov <anton@binarly.io>
-> Cc: Daniel Golle <daniel@makrotopia.org>
-> Cc: Francois Berder <fberder@outlook.fr>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Randolph Sapp <rs@ti.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-> Cc: Alexey Charkov <alchark@gmail.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-> Cc: Anshul Dalal <anshuld@ti.com>
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Cc: Francesco Valla <francesco@valla.it>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Michael Walle <mwalle@kernel.org>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Richard Genoud <richard.genoud@bootlin.com>
-> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> Cc: E Shattow <e@freeshell.de>
-> Cc: Enric Balletbo i Serra <eballetbo@kernel.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Lucas Dietrich <ld.adecy@gmail.com>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Julien Stephan <jstephan@baylibre.com>
-> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>
-> Cc: Raymond Mao <raymond.mao@riscstar.com>
-> 
-> ---
-> James Hilliard (10):
->        cmd: aes: fix DM operation handling
->        crypto: aes: allow DM AES in SPL
->        boot: image: add FIT decrypt-to-buffer helper
->        spl: fit: support encrypted payloads
->        clk: sunxi: add H6/H616 CE gates and reset
->        lib: ecdsa: support additional curve sizes
->        crypto: allwinner: add sun8i-ce AES driver
->        crypto: allwinner: add sun8i-ce ECDSA verifier
->        crypto: hash: allow DM hash in SPL
->        crypto: allwinner: add sun8i-ce hash driver
-> 
->   MAINTAINERS                                        |   1 +
->   boot/Kconfig                                       |   8 +
->   boot/image-cipher.c                                |  38 +-
->   boot/image-fit.c                                   |  85 ++--
->   cmd/aes.c                                          |   8 +-
->   common/spl/spl_fit.c                               |  75 +++-
->   doc/mkimage.1                                      |   3 +
->   doc/usage/fit/signature.rst                        |   9 +-
->   drivers/clk/sunxi/clk_h6.c                         |   5 +
->   drivers/clk/sunxi/clk_h616.c                       |   5 +
->   drivers/crypto/Kconfig                             |   2 +
->   drivers/crypto/Makefile                            |   1 +
->   drivers/crypto/aes/Kconfig                         |   8 +
->   drivers/crypto/aes/aes-sw.c                        |   6 +
->   drivers/crypto/aes/aes-uclass.c                    |  15 +
->   drivers/crypto/allwinner/Kconfig                   |   3 +
->   drivers/crypto/allwinner/Makefile                  |   3 +
->   drivers/crypto/allwinner/sun8i-ce/Kconfig          | 158 ++++++++
->   drivers/crypto/allwinner/sun8i-ce/Makefile         |   6 +
->   drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c   | 413 ++++++++++++++++++++
->   drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  | 408 +++++++++++++++++++
->   drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 434 +++++++++++++++++++++
->   drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c  | 298 ++++++++++++++
->   drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |  72 ++++
->   drivers/crypto/hash/Kconfig                        |  13 +
->   drivers/crypto/hash/Makefile                       |   2 +-
->   drivers/crypto/tegra/tegra_aes.c                   |   7 +
->   include/image.h                                    |  39 +-
->   include/u-boot/aes.h                               |  10 +
->   include/u-boot/ecdsa.h                             |  22 ++
->   include/u-boot/fdt-libcrypto.h                     |   6 +-
->   include/uboot_aes.h                                |  40 +-
->   lib/Makefile                                       |   2 +-
->   lib/aes/aes-decrypt.c                              | 104 ++++-
->   lib/ecdsa/Kconfig                                  |   2 +-
->   lib/ecdsa/ecdsa-libcrypto.c                        | 141 ++++---
->   lib/ecdsa/ecdsa-verify.c                           |  39 +-
->   lib/fdt-libcrypto.c                                |  60 +--
->   tools/image-sig-host.c                             |   7 +
->   39 files changed, 2364 insertions(+), 194 deletions(-)
-> ---
-> base-commit: 913fedc816570c07bfc7f9c4046dc2a3a55e4099
-> change-id: 20260702-submit-ce-series-v2-4a77b170c68c
-> 
-> Best regards,
-> --
-> James Hilliard <james.hilliard1@gmail.com>
-> 
+diff --git a/include/power/regulator.h b/include/power/regulator.h
+index b8023721a165..8d4d1450b905 100644
+--- a/include/power/regulator.h
++++ b/include/power/regulator.h
+@@ -371,9 +371,6 @@ int regulator_get_enable(struct udevice *dev);
+  */
+ int regulator_set_enable(struct udevice *dev, bool enable);
+ 
+-#define regulator_enable(dev) regulator_set_enable(dev, true)
+-#define regulator_disable(dev) regulator_set_enable(dev, false)
+-
+ /**
+  * regulator_set_enable_if_allowed: set regulator enable state if allowed by
+  *					regulator
+@@ -651,4 +648,7 @@ static inline int device_get_supply_regulator(struct udevice *dev, const char *s
+ }
+ #endif
+ 
++#define regulator_enable(dev) regulator_set_enable_if_allowed(dev, true)
++#define regulator_disable(dev) regulator_set_enable_if_allowed(dev, false)
++
+ #endif /* _INCLUDE_REGULATOR_H_ */
+-- 
+2.54.0
 
