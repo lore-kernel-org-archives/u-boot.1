@@ -4,132 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54EB9C43458
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jul 2026 02:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A942C43458
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jul 2026 02:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 718BE84AC3;
+	by phobos.denx.de (Postfix) with ESMTP id AD6EE84AE8;
 	Sat, 11 Jul 2026 04:28:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B+5W4WAL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VCCQ3sVq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6C7E84AD9; Sat, 11 Jul 2026 03:06:21 +0200 (CEST)
-Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
- [IPv6:2607:f8b0:4864:20::a30])
+ id 70BCE84AC3; Sat, 11 Jul 2026 03:43:01 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6ECC284AC3
- for <u-boot@lists.denx.de>; Sat, 11 Jul 2026 03:06:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CAD584A92
+ for <u-boot@lists.denx.de>; Sat, 11 Jul 2026 03:42:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-5bfc5b77c02so77335e0c.0
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 18:06:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783731978; cv=none;
+ spf=pass smtp.mailfrom=7991aleschino@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-69c600f76ccso413367a12.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 18:42:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783734178; cv=none;
  d=google.com; s=arc-20260327;
- b=P1RqVM5Y39s8goc3YVLDLmSyUr7eWt5zA6uakwAHUHAJbS5e0MMj7gzl5K5LtVCSPt
- gMvD3j+UblRrJ4YDJTa2iUcokCLS2Gayi6Umo8vzpxtuUBZZFPdgt0wJPawBjWJGgcJe
- pVoBwJPhhs1B7p1xi8Iqs6ACM+hAImbsvEYfxN9QTbm/c2TL1Cku1pxTBISyAKX7/phW
- 3hrulL8cAznXui6+5NMTKkqzjGsFCkTgwwrwgPOnO0dYK1CNQdeY/xtheLLS6gBAmNbX
- JRiiujGR1y2EccOF76l5CyC0xbnJklcC1hX82Fz81hg5MNyMz9RMHvJcwu8Z/Atoe0vP
- AHjw==
+ b=qFIV9ltggrOMP9Rfu2HGzzeRtNtdRl5rfS2wHWqcGF5r4/cwwr+G46iiaGvW0tvLb+
+ xyZ7Fd8V1vXTD7eNGJ6YyV6YbQpK25gLs+/byutuTWU0L9HxdPlk4zwA5JVcG3Al3tLT
+ 2+B7tl8oM654rLdv9X02h5ItKZ19fNcfF4qlR/zdDwHaw3UWME6CCZ1Asi8FBBGSQiCs
+ Wij7MOW/MV/QZz20JweuexrXXQqcF9w4Sc0WULWeuMrCnLacakf5+MR3PqW4CSjQOAp/
+ sZSIK9HsYqc8+v2BYQ8os4EbIMsmIvUIK8yXH0G0GLp2Ic3XrWTjc+9hWtDdnkXMfUQ+
+ kdlw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=BhmbDecceuYBK3PVPocYVRxnYLVZjSjm2QL2mhkXsuE=;
- fh=ZCWhH2JLpVPu/XyBFkIWo50SGo1bf+GllOzJv1hfwlk=;
- b=gByYQKnyfKbsuBWzzv2imnWNKyIAQPBixYqlXuEPg9J+5tXHQvafNkKnpf/ARt0g4V
- QtAY8lCUSadNw9jTyIg1IfoDU+SZkGEvLXYmpRthBBIpzi1vzGyS6WOR6DhTZ+36s/BU
- RK5HhThe20HveyXL+tGI5qN/kQ0iHvTokHAlieEnjVtSvDZR+tdtlCwJd+xRnLVAO+fv
- Bpzf7ALXEib07xUboKTlDNFxz6qnxSub9q07e40lblFECJD/eh/r5gUAv/oxrUHSaade
- jTgGlkIoyxNKpwaMOcFHejesm7fHX07cMaY+45oU7cigoTzaeEibJvWxwcWQ1n7+Ttbo
- bI6w==; darn=lists.denx.de
+ h=to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=O6VPot/gmW3p/eHsCaAqXZsDwcwjvvOducKzTWnHreA=;
+ fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
+ b=oZ4YRvFDRE46STShK1XwBIXepkL61zWwUXr4JNQrF1y2j90ZtN4OnTUez8lnNPQ+q4
+ JfGjagcJ1dEEBvvix4/VW2Up8I1+GzKZY5L6uvWKva/LeMyzYbYJ7RNfe4Tf7cH40sQJ
+ a3nbtpumpME4w4W+6OVOBuwfP9JMRMtMgwrX8KNAT/fzEo/1GeWeD/8b5w9tyiV8rgls
+ 5iWD2AMuIQeF0QkJ+Hpo//FWn04mHu5dM2dTYZIb1NOhuhRE/94q+Ooo/T0v1Ws7Ss0m
+ DtqoatbGIHa1XrbJpl6fVDT8vcXsq+85huUEU9P1z3Jr+x2uG5SUE3+qTqPNrZEv04We
+ cl1g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783731978; x=1784336778; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=BhmbDecceuYBK3PVPocYVRxnYLVZjSjm2QL2mhkXsuE=;
- b=B+5W4WALn4I3WXiJyFcciaFdLfVPiXUSXrkAp0Solh5lksbNc1t7VPJz2I2To0Ajk6
- xsuSxL8Jer3nv0Rbh5oz10i+74BqvxcvVfOccSutfi9LyLPKyQ6YQMMJEYInbIBh5JTs
- TCIaxJJ9bAM0ZIjI7Jf1JcMMpz2MLgZva5+eQRnYbPmC4sSXDQPE4IoVXxD7TDyWCcAR
- lRcQAosJfxqmkcGZdL8NDEUYIAHwYlvWDH6YwHdf8obxzqLB/B52LxFo6JoprMd2214v
- 7UJJL2Ml4z7TTW7FHWLFRD88CiW9RARHlWkn6g+ukSIUvmHayIeNrBIkgteiWwdyCiUA
- ptfQ==
+ d=gmail.com; s=20251104; t=1783734178; x=1784338978; darn=lists.denx.de;
+ h=content-type:to:subject:message-id:date:from:mime-version:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=O6VPot/gmW3p/eHsCaAqXZsDwcwjvvOducKzTWnHreA=;
+ b=VCCQ3sVqCfjtC1/uF0Mbfu9RNuzX/jZGCBO5J69LyiYtbhOIIyigyfySfHR9TJN+dV
+ jN4mUTKIq6bUgWodf0/gYPzcTlrStEURKDU2ZByERtGE1F5amoxSrAQU3E0DrcEsCwA6
+ 91csM2NPJl/44rwwFAeQmeCk6Au+7DUTKksdQLsVuZpIgEYZOIGL8F1NSbJ4z4Zw9uot
+ k8MVckPbwye+rrVdftg8v7K9GZinBBjh345UEUSW2+819GAQB5IzawLEaPCRZEuWkd1a
+ I+vZJWCxxTZSnZKUbgUaklDOQNGrtMV82TXaA+xJ5MA+39ojl4zRjA6JrKipUYkcS2xu
+ 9pGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783731978; x=1784336778;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1783734178; x=1784338978;
+ h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=BhmbDecceuYBK3PVPocYVRxnYLVZjSjm2QL2mhkXsuE=;
- b=GrCxA5f3cbA/SiIdeCkN5Yqs9w1uTPSyyBW7Ai3jH1xtmgzx4tk+MXQ4YwRWPt/0Of
- lamSjP88cnJxoXMBnwXcivIBEjflaCCKtmX/XGl8ACENWXmmSPZKH/JdWHagqUy8TiWH
- 8Pp0OoBI2aGBn7JUSZF1jPD0vmIqagEBgAXa2b+ZXwUo6l0DjzAKoQ0zYJK++V89cnMr
- iz/3Zchdu1b5yFrejnFbdgQleUHdT/k188gSLUmYs7tjNfM59OG24NgNpOsM3y4ry+nk
- BJtG8JE8QJzt411jalw6h2VjI3jlT1rDAzfOevhoxbNzRXCyZf/doZ4Lpmy3mGzAKwU7
- vzcw==
-X-Gm-Message-State: AOJu0Yybf3ow1OigDPANucYlm2v4Rl9H3hBlAEFfPv5fjGSk4UrRBtxc
- FRx70EwoGKE+Zov43W73O81QBoGFIIpWjgIk/TVQbCHoo/KUxFgNclE7dNe9bq9MeY66ZalRlLJ
- HEROfb1cFZZpBYwWkPOwEPnWj3h5zf5k=
-X-Gm-Gg: AfdE7cnGxHOcbitiNtOil15O1bQ921LMM/v976lzTivAbO7jez3wnpyN1J1am87RpHu
- HpogrPNaj/MnGV2VIK/1ZdARSULdyTZ4RIWrbxG5RDLAoMaYX0kOnx3oAprbpsUfwr6DrMZ2bBW
- 1BGPMVO3NHydMZk7QpKFZNK/yRFIz15mV+SVWGu9NO3LpvxcLyI7ORW4va5dUlNifgJQsshZAQ9
- 8bUIkCRseQFuK/jyIAbWL3k2YskHsvMdA6DWf4vfS15pds3IgCBubeF43SXb2Bzb70LIG3ecT7Q
- FTezTRDspPIqtbN5n0XYyo6LfAfbhAAVOeoZh4RpuiYXBA1bGvUIQTz6iHXN5zxFr/b/SJak3fM
- Url6kFKViZb+V+0ZoPqKbow==
-X-Received: by 2002:a05:6102:5a95:b0:740:2654:b49b with SMTP id
- ada2fe7eead31-74533e19c11mr947379137.21.1783731978066; Fri, 10 Jul 2026
- 18:06:18 -0700 (PDT)
+ bh=O6VPot/gmW3p/eHsCaAqXZsDwcwjvvOducKzTWnHreA=;
+ b=A8jNgHdiAnjjZjNLqzXOKG7RsGze3CxKnS/OPJ1m14tYBSlrZ8XHTOsiAhqHhpTjNP
+ AKAjyTEBwbE9CmOB63JNDXU3iRlyeNF0WIDvXcpUsA9M4fN2TVrlqEulWI/bA1kphEiA
+ m4BUjKl6AztNQ2iojzZMM6HigP95hr9CXH+ZYHL0XLU2eYzdKRrM5vcp7ARocNT5Gs4g
+ RchDajBIzs363C5LkAwDfmOOVsGDj/0455rWt2Rwby38F28yJO72UvatWV/I3/zHIxDA
+ UO61m+KrvEurXecOATJ/XVwcpRcnAlr2zG2lWk2r1KuBKJez4UZJ3moNtSqdbdpyHeSn
+ BSoA==
+X-Gm-Message-State: AOJu0YzQ7iWkK2ke3baENvmAg90OFnmtRWHM9juxkhi+Wl2TfaIJCkJ3
+ eDNunQn5P8Zd7WrJRfth8t0dVP2ai01IhPpzasWKfQG7FJXur3p6d6VgQpMqZm6CsVIYvYweKzL
+ acD8zCCNnpXOXy3UFqxOr9hqyw45CvNN29A==
+X-Gm-Gg: AfdE7ck7N/dKo56lAHVy/kem3jmx1thLd+H/XjXCA0iUouZUujFVx4d414wAKzOzlIW
+ /nwFyQw0AKoQKvlIICP7rb+ymedbefdlNBrKGTJ4khBRS2sujphGMAwW9VrInXJi8lRnLpvuTHg
+ CcOgxTIjaZkw4rgvkHG78EWI5amndisU8VMAG589Ub0FFd5G2OZSLEadkyjBZiZK3D6ON5QPAXk
+ pVFSnmQLN+cy6tLI3JgPMM/6hO/Rylztzp+bMnrwJdbibbKNLDGm34mrJu4DMiEWcP9bxDnQBR5
+ xmtK+LyLGfiLO0ODIKhFJbAWJWA=
+X-Received: by 2002:a05:6402:1f84:b0:69c:3ea3:6d39 with SMTP id
+ 4fb4d7f45d1cf-69c5f230794mr659935a12.35.1783734178438; Fri, 10 Jul 2026
+ 18:42:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
- <eefb2d2b-1f2e-451e-a20a-093964e9e138@arm.com>
-In-Reply-To: <eefb2d2b-1f2e-451e-a20a-093964e9e138@arm.com>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 10 Jul 2026 19:06:06 -0600
-X-Gm-Features: AUfX_mwzTlzkrdx981A6-4qYp0z50tbMUmEN_6HTrxqHaIj8zqccz5K6Si_PMok
-Message-ID: <CADvTj4oFVuSP0SarXO_80=22Us6DkKJ_VGfNi0WVg8PBuZbbYA@mail.gmail.com>
-Subject: Re: [PATCH v3 00/10] crypto: allwinner: enable sun8i-ce FIT crypto
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
- Ion Agorria <ion@agorria.com>, 
- Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aristo Chen <aristo.chen@canonical.com>, 
- Anton Ivanov <anton@binarly.io>, Daniel Golle <daniel@makrotopia.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Randolph Sapp <rs@ti.com>, Heiko Schocher <hs@nabladev.com>,
- Alexey Charkov <alchark@gmail.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, Johan Jonker <jbx6244@gmail.com>, 
- Francesco Valla <francesco@valla.it>, Michael Walle <mwalle@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Richard Genoud <richard.genoud@bootlin.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, E Shattow <e@freeshell.de>, 
- Enric Balletbo i Serra <eballetbo@kernel.org>,
- Lucas Dietrich <ld.adecy@gmail.com>, 
- David Lechner <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Thierry Reding <treding@nvidia.com>, 
- Francois Berder <fberder@outlook.fr>, Jonas Karlman <jonas@kwiboo.se>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>
+From: Alessandro Schino <7991aleschino@gmail.com>
+Date: Sat, 11 Jul 2026 03:42:47 +0200
+X-Gm-Features: AUfX_mynr2Q53RDVTwi4ZOUgz48PznUY1OSAIz4nqvHeTC5ChPotMIJHJ6yBrxU
+Message-ID: <CABNe9nNJGCLL1jnDJvDBEBufAYH+vuY54xzz=EMh_YGUjjw5Ew@mail.gmail.com>
+Subject: [SECURITY] Out-of-bounds read in btrfs driver (btrfs_read_extent_reg,
+ fs/btrfs/inode.c)
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Sat, 11 Jul 2026 04:28:37 +0200
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 11 Jul 2026 04:28:37 +0200
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,92 +111,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 10, 2026 at 4:05=E2=80=AFAM Andre Przywara <andre.przywara@arm.=
-com> wrote:
->
-> Hi James,
->
-> On 7/10/26 00:46, James Hilliard wrote:
-> > This series enables Allwinner Crypto Engine backed FIT decryption and
-> > FIT signature/hash validation for secure-boot flows on H6/H616-class
-> > boards, covering both SPL and U-Boot proper.
-> >
-> > The purpose is to use CE-backed AES for encrypted FIT payloads on H6/H6=
-16
-> > and CE-backed ECDSA validation where the CE ECC engine is available,
-> > currently H616, instead of relying only on software crypto paths.
->
-> May I ask: why? In general those proprietary vendor crypto offload
-> engines are somewhat frowned upon, and especially in the Allwinner case
-> I am not even sure if someone has tried to validate the hardware.
+Hello,
+I'm reporting an out-of-bounds read I found in U-Boot's btrfs filesystem
+driver while reviewing the source, and confirmed with a working
+AddressSanitizer reproducer on a sandbox build.
+Summary
+In btrfs_read_extent_reg() (fs/btrfs/inode.c), the compressed-extent path
+uses file_extent_offset =E2=80=94 a value read directly from the on-disk ex=
+tent
+item =E2=80=94 as an offset into the decompression buffer, without validati=
+ng it
+against the buffer size (ram_bytes). A crafted btrfs image with a large
+file_extent_offset makes the subsequent memcpy read far past the end of the
+buffer.
+The two ASSERT() guards earlier in the function do not prevent this:
+U-Boot's assert() is compiled out when _DEBUG is unset (the production
+default), and the asserts do not compare file_extent_offset against
+ram_bytes anyway. U-Boot also does not import btrfs's semantic
+tree-checker, so the field is not validated at leaf-load time.
+Impact
+Out-of-bounds read reachable from an untrusted btrfs image (e.g. removable
+media). The out-of-bounds bytes are copied into the read destination
+(information disclosure); depending on layout the read can also fault
+(denial of service during boot). As this runs in the bootloader, the usual
+runtime mitigations are absent.
+Reproduction and full details
+I confirmed the crash on a sandbox build with CONFIG_ASAN: loading a
+crafted image triggers an AddressSanitizer READ overflow in memcpy, called
+from btrfs_read_extent_reg. I tested against commit 6741b0dfb41 .
+A complete technical writeup, the PoC generator, and the AddressSanitizer
+output are available here:
+https://github.com/inkman97/U-Boot-btrfs-oob
+The writeup also includes a suggested bounds check and a broader
+recommendation to validate btrfs_file_extent_item fields at leaf-load time.
+I'm following coordinated disclosure and happy to work with you on timing
+and testing. Please let me know your preferred channel if you'd rather I
+share the material privately.
 
-Validate the hardware in what sense? While developing this I've
-validated the various crypto operations against the expected outputs
-and everything seems fine.
-
-> So what is wrong with using a reviewable (and reviewed) and tested
-> software implementation? Do you have data that shows any advantage here?
-
-I did some more benchmarking and optimization of the aes decryption
-operations and managed to get it over 4 times faster than this v3
-implementation.
-
-The CE aes decryption after my latest round of optimizations is well
-over 100x faster than the existing uboot software aes implementation.
-
-Here's a few benchmarks I did with a 64 MiB in-place AES-256-CBC
-Buffer Decryption:
-U-Boot's existing AES C software implementation: 3.72 MiB/s
-OpenSSL Generic in Linux userspace: 24.18 MiB/s
-OpenSSL NEON instructions in Linux userspace: 34.98 MiB/s
-OpenSSL ARMv8 AES instructions in Linux userspace: 533.60 MiB/s
-Optimized dual channel CE AES implementation in U-Boot: 568.0 MiB/s
-
-> Just from a high level point of view: the CE uses uncached DMA
-> operations, and runs at 24 MHz, if I see this correctly.
-
-The manual documents it as running at 300MHz for the h616, there's
-actually a bug in my v3 implementation that was only clocking it to
-150MHz, fixing that bug doubled the speed roughly.
-
-> I am pretty
-> sure the AES instructions in the Cortex-A53 beat this easily, I guess
-> even a NEON-optimised pure software implementation would be faster.
-
-I managed to beat both, so I don't think that's the case.
-
-> So what I see here is just a lot of code added, but with little (read:
-> no) improvement.
-> In the BROM the rationale is a bit different, so I see why it uses the
-> CE there, but IIRC there is even a chicken bit in the fuses to not use
-> the CE, so they might even have a software fallback?
-
-Well performance wise at least a CE AES decryption operation does
-seem to beat even OpenSSL's AES instruction optimized
-implementation by a measurable margin.
-
-The chicken-bit fuse documented in the wiki doesn't appear
-to be present in the h616 SBROM at all from my analysis.
-
-If you look at the h616 cryptoengine block diagram in the manual you'll
-notice it actually has 4 CE channels that can operate in parallel. For
-the AES-256 CBC decryption case I noticed we can use two channels
-(Symm/Raes) simultaneously which yielded a ~2x performance increase
-compared to single channel AES decryption.
-
-My v4(not sent yet) which is what the above benchmarks were against
-will be over 4x faster than my v3 for AES decryption due to this dual
-channel decryption optimization and the CE clock frequency fix.
-
-Since the CE Hash channel can operate in parallel with the two AES
-decryption channels we should also in theory be able to hash and
-decrypt a FIT image item in a single pass, although this may require
-some refactoring.
-
-The Asymm CE channel can probably also be fed the signature
-for validation while the other 3 engines decrypt/hash the FIT
-image item buffer in theory.
-
-I still need to compare the ecdsa and hash performance but I'm
-thinking it's likely those can also beat even an optimized software
-implementation.
+Best regards,
+Alessandro Schino
