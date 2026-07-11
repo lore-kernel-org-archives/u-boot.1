@@ -4,61 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BC7C43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 02:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD751C43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 02:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2142D84A29;
-	Sun, 12 Jul 2026 04:15:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97B1784A3E;
+	Sun, 12 Jul 2026 04:15:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xYouVW5F";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TkA/bMre";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZA1qKpWa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0DC9848A1; Sun, 12 Jul 2026 04:15:11 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 0F12284A3E; Sun, 12 Jul 2026 04:15:17 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E3148497A
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 04:15:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E291184A3C
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 04:15:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gyTfz5wCCzMlFS;
- Sun, 12 Jul 2026 04:15:07 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gyTg64bLfzMlGc;
+ Sun, 12 Jul 2026 04:15:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783822507;
+ s=mail20150812; t=1783822514;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tAYDzQZPr633pmwus/YUaF8lwK0Amg0/kKh6Sd9MX/0=;
- b=xYouVW5F91PAlu8mYGbiK0GDhFZwlLITPMaBNMB01A+QKGW+vYkvXqsAgXRrFWDhXSdgB+
- 9G0s7t0dP+igpbmY/tAUGSw6trYg+sZfL8fJEXWDnTXWGjQcptPpDEt6Vce6WeKZHp0H1y
- SMk3n7sySgYAoZpZ/JVDXCMxxSxf3+zkG/s7l0+3WgqrLyHUOXLW9wxWglAWWyv5LAfW9m
- u1O1wz50ttAlxcKGs9pV0FsTGntoRHPvxDvjhvIDNOS3zWRg1fAKmjOnmAGSPReqNmk38E
- o18f4wxtiu5QiRljmob3U7D6Lmx589GBLZGEn2mZXwhMZ6u7CCyJIaZ1U02EfA==
-Message-ID: <b7fbc3f5-bbd2-4c43-8b70-9a436028f04d@mailbox.org>
-Date: Sat, 11 Jul 2026 21:58:13 +0200
+ bh=Z03VTo8mMp/DX0vqUG00271Z0abZ7fSrgBjYbkZPfBU=;
+ b=TkA/bMre1w0m3O2FSUY9fJ4oqJadZG/o84UnmLOLMJTNkpkCRpEqXXKNTbMN18Nbf0JWNm
+ JGBCmDdBXcDmH9+bW+ekSDwVC1KcX07/2RreVVlRKmAyvIWxL5MfeQKvotz27UOMsX/YDT
+ jjMk/0yDj1vHTnmhl4hLLJNPvCQ53+bYpMUunsMjgUfB+juwEKBmVhZYh6pyAnqZTrv55q
+ tztHQrFps0bLVERbRvULbDn7Jrt3hbbhiqQml1cxkUUclCcuF2Jd+NoZXJvodzDVrUpxvk
+ wJ+rYliPpgKKE0HSICYwp//eGyLx/UOFTibdLlYoqpZc2NJOfPrfQGe0jkqsuQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ZA1qKpWa;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <74b9d259-b180-4ca7-9cf6-1c93e175e1f4@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1783822513;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z03VTo8mMp/DX0vqUG00271Z0abZ7fSrgBjYbkZPfBU=;
+ b=ZA1qKpWajxc5R0DWNMUARthHjMy7luXOLu1e2G6osNo4cECOQB20ZqSTkFEsfPbDUEYHXr
+ 14KT+/96XS5j4blNKKFZ6ktywbPNnc3AOGgLuMCeDczFjDkpyxdTGSuM4ADrTS7UevWWAw
+ YrpKgo2rWe7DLezBUUWiJTjCKTM/ERLz5dHcUWLfOhHKKKrkbk18wH8NUNHsq9s0kD8Kp/
+ YQ8h4UcVM5iK22O39wvMRQakG+0WJNc1IfosPMjql3bwnzIBw19L0db50NKuKZn6Ahya9f
+ uUO2NtqsfA0nCYPhyfSKabdvlLiineNvwHMLUDB0UGwpxpzzzH/L+bMp58hzlA==
+Date: Sat, 11 Jul 2026 22:00:52 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 7/8] usb: eth: Bind ASIX AX88179A/AX88772D/AX88279 to CDC
- ECM/NCM driver
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260711160808.2022242-1-jonas@kwiboo.se>
- <20260711160808.2022242-8-jonas@kwiboo.se>
+Subject: Re: [PATCH v2 07/10] usb: dwc3: generic: add board_usb_init/cleanup
+ hooks
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Fabio Estevam <festevam@gmail.com>, Wang Jie <dave.wang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Casey Connolly <casey.connolly@linaro.org>, Ye Li <ye.li@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Balaji Selvanathan
+ <balaji.selvanathan@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260621-tcpci-dwc3-v2-0-990ecacc111c@nxp.com>
+ <20260621-tcpci-dwc3-v2-7-990ecacc111c@nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260711160808.2022242-8-jonas@kwiboo.se>
+In-Reply-To: <20260621-tcpci-dwc3-v2-7-990ecacc111c@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 89f93987fc450c1580d
-X-MBO-RS-META: aybrj764oqixnrtcn4tbecoojzhu9wjm
+X-MBO-RS-META: zobe7siyjydp3w6y3u9djucreh7kco3n
+X-MBO-RS-ID: 5b8a653a888b0de2a86
+X-Rspamd-Queue-Id: 4gyTg64bLfzMlGc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,38 +109,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/11/26 6:08 PM, Jonas Karlman wrote:
-> The ASIX AX88179A, AX88772D and AX88279 USB Ethernet controller
-> revisions has both CDC ECM and CDC NCM support.
+On 6/21/26 4:06 AM, Peng Fan (OSS) wrote:
+> From: Ye Li <ye.li@nxp.com>
 > 
->    AX88179:  0b95:1790 1.00
->    AX88179A: 0b95:1790 2.00
->    AX88772D: 0b95:1790 3.00
->    AX88279:  0b95:1790 4.00
+> Call board_usb_init() during dwc3_generic_probe() and
+> board_usb_cleanup() during dwc3_generic_remove() to allow
+> board-level USB configuration (e.g. Type-C CC role, SS mux,
+> VBUS control) before DWC3 core initialization.
 > 
-> Prefer using the CDC NCM or CDC ECM driver for the 2.00-4.00 version
-> range of the 0b95:1790 ASIX USB Ethernet controllers.
-
-Why this specific range ?
-
-[...]
-
-> +++ b/drivers/usb/eth/asix88179.c
-> @@ -691,7 +691,12 @@ U_BOOT_DRIVER(ax88179_eth) = {
->   };
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>   drivers/usb/dwc3/dwc3-generic.c | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
+> 
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index 2356b3bc0aa..2c6f8e6d8ba 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -9,6 +9,7 @@
 >   
->   static const struct usb_device_id ax88179_eth_id_table[] = {
-> +#if IS_ENABLED(CONFIG_USB_ETHER_CDC_ECM) || IS_ENABLED(CONFIG_USB_ETHER_CDC_NCM)
+>   #include <dm.h>
+>   #include <reset.h>
+> +#include <usb.h>
+>   #include <asm/gpio.h>
+>   #include <dm/device_compat.h>
+>   #include <dm/lists.h>
+> @@ -118,6 +119,11 @@ static int dwc3_generic_probe(struct udevice *dev,
+>   	if (device_is_compatible(dev->parent, "rockchip,rk3399-dwc3"))
+>   		reset_deassert_bulk(&glue->resets);
+>   
+> +	if (mode == USB_DR_MODE_HOST)
+> +		board_usb_init(dev_seq(dev), USB_INIT_HOST);
+> +	else if (mode == USB_DR_MODE_PERIPHERAL)
+> +		board_usb_init(dev_seq(dev), USB_INIT_DEVICE);
 
-This is USB, this should be auto-detected without any need for ifdeffery.
+Pass udevice into the callbacks directly, dev_seq() is a backward 
+compatibility workaround and the board code could always call it if needed.
 
-> +	{ USB_DEVICE_VER(0x0b95, 0x1790, 0, 0x0100),
-> +		.driver_info = FLAG_TYPE_AX88179 },
-> +#else
->   	{ USB_DEVICE(0x0b95, 0x1790), .driver_info = FLAG_TYPE_AX88179 },
-> +#endif
->   	{ USB_DEVICE(0x0b95, 0x178a), .driver_info = FLAG_TYPE_AX88178a },
-[...]
-
-I recall there was some USB URB size limit on this ASIX USB MAC, was 
-that ever sorted out ?
+> +
+>   	priv->base = map_physmem(plat->base, DWC3_OTG_REGS_END, MAP_NOCACHE);
+>   	dwc3->regs = priv->base + DWC3_GLOBALS_REGS_START;
+>   
+> @@ -134,6 +140,7 @@ static int dwc3_generic_remove(struct udevice *dev,
+>   			       struct dwc3_generic_priv *priv)
+>   {
+>   	struct dwc3 *dwc3 = &priv->dwc3;
+> +	enum usb_dr_mode mode = dwc3->dr_mode;
+>   
+>   	if (CONFIG_IS_ENABLED(DM_GPIO) &&
+>   	    device_is_compatible(dev->parent, "xlnx,zynqmp-dwc3") &&
+> @@ -147,6 +154,11 @@ static int dwc3_generic_remove(struct udevice *dev,
+>   	dwc3_shutdown_phy(dev, &priv->phys);
+>   	unmap_physmem(dwc3->regs, MAP_NOCACHE);
+>   
+> +	if (mode == USB_DR_MODE_HOST)
+> +		board_usb_cleanup(dev_seq(dev), USB_INIT_HOST);
+> +	else if (mode == USB_DR_MODE_PERIPHERAL)
+> +		board_usb_cleanup(dev_seq(dev), USB_INIT_DEVICE);
+> +
+This is supposed to be generic DT based glue code, can we avoid the 
+board-specific callbacks entirely ?
