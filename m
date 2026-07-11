@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC89C43458
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jul 2026 00:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 774D7C43458
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jul 2026 00:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E7F384AD9;
-	Sat, 11 Jul 2026 02:17:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A752A84AE2;
+	Sat, 11 Jul 2026 02:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A7iYkklk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NgyFFJFT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E18B84B59; Sat, 11 Jul 2026 02:17:26 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 6756B84AE6; Sat, 11 Jul 2026 02:17:27 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E50F84A92
- for <u-boot@lists.denx.de>; Sat, 11 Jul 2026 02:17:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 587F484ACE
+ for <u-boot@lists.denx.de>; Sat, 11 Jul 2026 02:17:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-45171f2f608so833374fac.1
- for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:17:24 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-6a384e29a20so1062693eaf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jul 2026 17:17:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783729043; x=1784333843; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783729044; x=1784333844; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=MfZMgmpagudzbZPZ7DIeKFCNtJ+ySJpzNg2zR5Nwsms=;
- b=A7iYkklk/e2uus5IGKqgsdTiINwQlyVC5D1REY3+rdmohdOy6/+TWcQ18T1wQdgK7v
- oEfa2f6LxVk/V/v69zFrI8IAyRWPO29t4uIJZHiqB6exmbvjM+DjUx/pXm+Dre/7ZlY+
- pAp+GpNobHT+clT4QOfauxXxFkkDMyqFCxn4I=
+ bh=75CwTibYAIBKqdJ0vBD/kL3j0NVRoOu0j3yRSzGLXdc=;
+ b=NgyFFJFTrXsGzdpsBDjT0tNmbsutgMh5en4e1eOvNMI94Ueu4an/f4ILNzsYvgjcVg
+ 51mLJbcB56PF2pG8Tv36mfAAbTQDyFV1JGG+biZgQtnghlCzFDBoZwgwTQKmnh3x3oAI
+ ZyIK1e108opuLTEKTu5sHxy2sCqlFjfbPuQ5k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783729043; x=1784333843;
+ d=1e100.net; s=20251104; t=1783729044; x=1784333844;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
  :subject:references:in-reply-to:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=MfZMgmpagudzbZPZ7DIeKFCNtJ+ySJpzNg2zR5Nwsms=;
- b=lhwD/f0MO/1/keOBAk4fCMqUpVpFjF/ifoLm44kdbY5XYNxGaGTCVU5NhoJBsOhrfS
- CA+cdS4cxV1vTbXvIK5OfrQT9DHBK+X9CnEDBEL2Z62MnTOgRPxinZFc7WWx8vZmL91e
- 5mo85BjaYtkrwK5jkZXCFcZrHKYNDgbgjLCnTb9CkyF+nSXE+hRb2lO3kzOcc22xneBO
- 0cnqcUJFle9DNNYgSNDpxtbY+nucWRGdvcyzxao/PbgBMJxulXz/uMa3w+494OGhxUc1
- 2ODVmyzM6eOutlfncm2PjUzAFm9KrqH4rN8xElpH7qWmA2ehUks1V9ZvvmyCIaTO/aQw
- /zrg==
-X-Gm-Message-State: AOJu0Yz0culeZUaTBYGHmJ0sQwZzHq07olxIc/sRACjhCxeRpFVtvHcr
- x1cOLnHwL2OcZIyR0IVUUj6UHWdjp2iUQKBpdmk1Q4e9ov70zevfRomV6Odtsr14HLs=
-X-Gm-Gg: AfdE7ckMtjrFLKk35UG0mnMfK/7tH7oMCOfNlfG9z+u0JMMVNTybfqdXizjKKZPqpTK
- xNhEtz8JJ81ohHmhdyDFDZZLoswWoimU4J0QUGkQKmEr5erMuyNxRBNJaUQ+wY2rjTtzB+s4MkI
- yEbLhnr+z2v1TqVMnlJvyYJtHh5ofXE0NjV+gaLdB5RLATDrqbUMZsWww4+IzPg2vqYNG/GzmAu
- CjKjcl98cnsyBjVL66Ne1N3g44dCRp2u3B2IogRjyTUTkuRLpVXVLc6YgGEtnkgnbOUQZtwEK1L
- BgKflcP3MlmdsGxedCjbpbiIh7S0QdmcjMkxWTwtw4NaKlF9fojqL7I4ECmhEslVw9To+7vo9An
- cWICzw7z1SMK6wsv0Eh9I+YoupJWjpq4RPQ6rULudjezXJGcI6O0nebgORcuvjACnu/28Sx+bxC
- VVow4tr3e0wu+DsN3++ObqHVcrrY21nNS5CSmyia5sSeCfZbA1vy7uB28d30h/OLOO6MsGLIP2p
- fVv33u1SGihqm/gGMZcyLvVvmNQ9NhmQIR1
-X-Received: by 2002:a4a:e913:0:b0:6a3:77b8:7115 with SMTP id
- 006d021491bc7-6a39a709eedmr834774eaf.53.1783729043076; 
- Fri, 10 Jul 2026 17:17:23 -0700 (PDT)
+ bh=75CwTibYAIBKqdJ0vBD/kL3j0NVRoOu0j3yRSzGLXdc=;
+ b=UIFjlkwqhiOI63kKv1O1Vo65L+G4mMooRzGlJm8ftl4QaHAvFjz1RyIOYEDBBS3OdD
+ VQUMlo1drvB79Mmru9wXv52Tf0ko8Ik8nibqq7mCBz6cspfbUyRGSPzhsWln81Jk3l1I
+ BFGupwOtwyBudQhOGQEaQm/1McDi1tvZZZYFaaqBAHuY0IPVl9oC902x2unvAZfkPAX3
+ 6Ye93dUSyph0Fxy2D14P9TLMmOAJPBEJCZCHHNEBfhMSMSQwQlBap/95i8RYPhGhZI7f
+ Vmtlxzb4K4o6Q0E6uCU4I7OkMamnPLxEzp9DZH/OHajYfJ7qby7Ac4ALh+fTTKdk5F09
+ HTQw==
+X-Gm-Message-State: AOJu0YxVdnjuHn5Ng68QeagqIAu/ABOGHylUjmKgcAVyoVBgRLDge9b7
+ OQRz4asOXo8DfWxCEm0DwLJVm+bUu4QOD7Xi+Dqrt5Hb0CLy7tlJDnGZVMxlDA//J2w=
+X-Gm-Gg: AfdE7cm/oaN0y1BcFXLhWb3eiLAKMEflzl83NMhnDpsaVvfgovBosDOaQWz+dFJ+axw
+ Y6MAbFn8QloDQyxBrYLosTzfW+sgj3427Dg7hRa6Vt+9iFjf5IkUqA6swH7eAkTWyU4O5MQmRGs
+ wSz9asguiMT3pDWNaadWt9fjnUbI/DEnTAXg7WCiAOPwjTlp09NwRovbPCfU2wneEDa3ouaMzuO
+ iAySplr5rTf8g+9LgXioQRjFifNrl/yB5m3qAah1cDSOtdbYUOj92x0Er+GHcqko+ZiZxskXVDt
+ B3LXqFNmf0cCIVD1r1TPy/JrRXRJJCk6YLo7tyiylK3UBI/vSyJ+Z8g1MHdvzBsO/rDyV9AaONR
+ K7A/EFSPi9yopljweK8tced0+3tJKvJg4oMuYW0C5AcPOZVfusFHllQzg3jFeX4QVOuouX8zcfB
+ SdCQRyounWbuKf6ttzWyy/NTW+4ySepQnNrv+JMKM/zH09CbZJJ5Q0Paem4a1G5g3cISytgnCxz
+ hyzL0jSBqBH9hsgNmZwVWcU2ox4OnhuIZIy
+X-Received: by 2002:a05:6820:f00a:b0:6a3:7ccd:6616 with SMTP id
+ 006d021491bc7-6a39a6e052dmr776823eaf.39.1783729044025; 
+ Fri, 10 Jul 2026 17:17:24 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a39af0e953sm651312eaf.3.2026.07.10.17.17.22
+ 006d021491bc7-6a39af0e953sm651312eaf.3.2026.07.10.17.17.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 17:17:22 -0700 (PDT)
+ Fri, 10 Jul 2026 17:17:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: john@harmon.hk, Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+To: sjg@chromium.org, Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <mpptnmlat2m7k64ny3sxdv3uw7rjysmn6bh5e4f24rut4g4maz@w2jsuzudjwev>
-References: <mpptnmlat2m7k64ny3sxdv3uw7rjysmn6bh5e4f24rut4g4maz@w2jsuzudjwev>
-Subject: Re: [PATCH] cmd: clone: report destination block number on dest
- write error
-Message-Id: <178372904205.2905849.8779013019773395279.b4-ty@konsulko.com>
-Date: Fri, 10 Jul 2026 18:17:22 -0600
+In-Reply-To: <pkrfunq5wqzbioom3k3xw7vsxmahlskafrcczcoefqviaygvbi@z5grmsndxzly>
+References: <pkrfunq5wqzbioom3k3xw7vsxmahlskafrcczcoefqviaygvbi@z5grmsndxzly>
+Subject: Re: [PATCH] cmd: host: fix duplicate device_unbind and wrong error
+ message in unbind
+Message-Id: <178372904322.2905849.1810299103184537632.b4-ty@konsulko.com>
+Date: Fri, 10 Jul 2026 18:17:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,24 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Jun 2026 09:15:42 +0530, Naveen Kumar Chaudhary wrote:
+On Fri, 26 Jun 2026 09:16:46 +0530, Naveen Kumar Chaudhary wrote:
 
-> The error path of the destination blk_dwrite() prints srcblk, which
-> refers to the source device's block counter and is unrelated to the
-> write that just failed. This produces misleading diagnostics that
-> point at the wrong block on the wrong device when a clone aborts on
-> a write error.
+> do_host_unbind()'s error handler for device_unbind() prints the
+> misleading message "Cannot attach file" and then calls device_unbind()
+> a second time on the same device, both of which look like copy-paste
+> mistakes left over from neighbouring code.
 > 
-> Print destblk so the message identifies the block that actually
-> failed, mirroring the existing "Src read error @blk %ld" message
-> above which correctly uses srcblk.
+> Remove the duplicate device_unbind() call and report the correct
+> failure with the device name.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] cmd: clone: report destination block number on dest write error
-      commit: dc3606a961fae711e51d0ec9e0cff7999b62ab2b
+[1/1] cmd: host: fix duplicate device_unbind and wrong error message in unbind
+      commit: 9df08fb181de1c02eec2d74096e14252d779a134
 -- 
 Tom
 
