@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D90FC43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 00:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29339C43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 00:33:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B5008467B;
-	Sun, 12 Jul 2026 02:33:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68B7C84A0B;
+	Sun, 12 Jul 2026 02:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3D6A849D2; Sun, 12 Jul 2026 02:33:28 +0200 (CEST)
+ id DD514844F6; Sun, 12 Jul 2026 02:33:29 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94F84844F6
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 02:33:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4347848A1
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 02:33:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wii84-000000006YK-3zlP; Sun, 12 Jul 2026 00:33:09 +0000
-Date: Sun, 12 Jul 2026 01:33:05 +0100
+ id 1wii8B-000000006YP-4Adr; Sun, 12 Jul 2026 00:33:16 +0000
+Date: Sun, 12 Jul 2026 01:33:13 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>,
@@ -38,11 +38,14 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
  Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
  u-boot@lists.denx.de
-Subject: [PATCH 0/3] boot: fit: authenticate the dm-verity roothash
-Message-ID: <cover.1783816074.git.daniel@makrotopia.org>
+Subject: [PATCH 1/3] boot: fit: factor out node-path collection in
+ fit_config_add_hash()
+Message-ID: <d460c0571dee7cd852267d881938d6c3d2caf300.1783816074.git.daniel@makrotopia.org>
+References: <cover.1783816074.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <cover.1783816074.git.daniel@makrotopia.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,44 +62,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A signed FIT configuration can delegate the integrity of a (potentially
-large) root filesystem image to the kernel's dm-verity instead of having
-U-Boot hash the whole payload at boot: the FIT carries a "dm-verity"
-subnode with the roothash, salt and block parameters, U-Boot passes the
-roothash to Linux through the dm-mod.create bootargs, and dm-verity then
-validates the filesystem block by block against it.
+fit_config_add_hash() repeats the same sequence to append a node's path
+to the hashed-node list three times: for the image node, for each hash
+subnode and for the cipher subnode. Extract it into a helper,
+fit_config_add_node(), with no functional change.
 
-For that to be safe the roothash has to be trusted, and in a signed
-configuration the only thing that establishes trust is the configuration
-signature. The roothash was not covered by it. fit_config_add_hash()
-collected the image node, its hash subnodes and its cipher subnode into
-the signed region, but not the dm-verity subnode, so the roothash, the
-sole integrity anchor for the filesystem, was left unsigned.
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+---
+ boot/image-fit-sig.c | 73 ++++++++++++++++++++++++++------------------
+ 1 file changed, 44 insertions(+), 29 deletions(-)
 
-The result is a verified-boot bypass for the root filesystem: an
-attacker who can rewrite the boot medium can replace the filesystem,
-recompute a matching dm-verity tree, write the new roothash into the
-unsigned dm-verity subnode, and the configuration signature still
-verifies. dm-verity then faithfully validates the malicious filesystem
-against the attacker's roothash.
-
-This series closes the gap.
-
-Daniel Golle (3):
-  boot: fit: factor out node-path collection in fit_config_add_hash()
-  boot: fit: cover the dm-verity roothash with the config signature
-  test: fit: verify dm-verity roothash is covered by the config
-    signature
-
- boot/image-fit-sig.c                  | 119 ++++++++++------
- include/image.h                       |  25 ++++
- test/boot/fit_verity.c                | 194 ++++++++++++++++++++++++++
- test/py/tests/test_fit_verity_sign.py | 162 +++++++++++++++++++++
- tools/image-host.c                    |  22 +++
- 5 files changed, 483 insertions(+), 39 deletions(-)
- create mode 100644 test/py/tests/test_fit_verity_sign.py
-
-
-base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 9b5ab754561..513ee9cc16a 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -230,6 +230,37 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
+ 	return 0;
+ }
+ 
++/**
++ * fit_config_add_node() - Append one node's path to the hashed-node list
++ *
++ * @fit:		FIT blob
++ * @noffset:		Offset of the node whose path should be added
++ * @node_inc:		Array of path pointers to fill
++ * @count:		Pointer to current count (updated on return)
++ * @max_nodes:		Maximum entries in @node_inc
++ * @buf:		Buffer for packed path strings
++ * @buf_used:		Pointer to bytes used in @buf (updated on return)
++ * @buf_len:		Total size of @buf
++ * Return: 0 on success, -ve on error
++ */
++static int fit_config_add_node(const void *fit, int noffset, char **node_inc,
++			       int *count, int max_nodes, char *buf,
++			       int *buf_used, int buf_len)
++{
++	int ret, len;
++
++	if (*count >= max_nodes)
++		return -ENOSPC;
++	ret = fdt_get_path(fit, noffset, buf + *buf_used, buf_len - *buf_used);
++	if (ret < 0)
++		return -ENOENT;
++	len = strlen(buf + *buf_used) + 1;
++	node_inc[(*count)++] = buf + *buf_used;
++	*buf_used += len;
++
++	return 0;
++}
++
+ /**
+  * fit_config_add_hash() - Add hash nodes for one image to the node list
+  *
+@@ -250,18 +281,12 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+ 			       char **node_inc, int *count, int max_nodes,
+ 			       char *buf, int *buf_used, int buf_len)
+ {
+-	int noffset, hash_count, ret, len;
++	int noffset, hash_count, ret;
+ 
+-	if (*count >= max_nodes)
+-		return -ENOSPC;
+-
+-	ret = fdt_get_path(fit, image_noffset, buf + *buf_used,
+-			   buf_len - *buf_used);
+-	if (ret < 0)
+-		return -ENOENT;
+-	len = strlen(buf + *buf_used) + 1;
+-	node_inc[(*count)++] = buf + *buf_used;
+-	*buf_used += len;
++	ret = fit_config_add_node(fit, image_noffset, node_inc, count,
++				  max_nodes, buf, buf_used, buf_len);
++	if (ret)
++		return ret;
+ 
+ 	/* Add all this image's hash subnodes */
+ 	hash_count = 0;
+@@ -273,15 +298,10 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+ 		if (strncmp(name, FIT_HASH_NODENAME,
+ 			    strlen(FIT_HASH_NODENAME)))
+ 			continue;
+-		if (*count >= max_nodes)
+-			return -ENOSPC;
+-		ret = fdt_get_path(fit, noffset, buf + *buf_used,
+-				   buf_len - *buf_used);
+-		if (ret < 0)
+-			return -ENOENT;
+-		len = strlen(buf + *buf_used) + 1;
+-		node_inc[(*count)++] = buf + *buf_used;
+-		*buf_used += len;
++		ret = fit_config_add_node(fit, noffset, node_inc, count,
++					  max_nodes, buf, buf_used, buf_len);
++		if (ret)
++			return ret;
+ 		hash_count++;
+ 	}
+ 
+@@ -296,15 +316,10 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+ 	if (noffset != -FDT_ERR_NOTFOUND) {
+ 		if (noffset < 0)
+ 			return -EIO;
+-		if (*count >= max_nodes)
+-			return -ENOSPC;
+-		ret = fdt_get_path(fit, noffset, buf + *buf_used,
+-				   buf_len - *buf_used);
+-		if (ret < 0)
+-			return -ENOENT;
+-		len = strlen(buf + *buf_used) + 1;
+-		node_inc[(*count)++] = buf + *buf_used;
+-		*buf_used += len;
++		ret = fit_config_add_node(fit, noffset, node_inc, count,
++					  max_nodes, buf, buf_used, buf_len);
++		if (ret)
++			return ret;
+ 	}
+ 
+ 	return 0;
 -- 
 2.55.0
