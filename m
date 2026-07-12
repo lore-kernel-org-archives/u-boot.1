@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA160C43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 09:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A1AAC43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 10:15:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C31448467B;
-	Sun, 12 Jul 2026 11:08:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 366CE844F6;
+	Sun, 12 Jul 2026 12:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RdzB8EeF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CoP8UztG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE536848A1; Sun, 12 Jul 2026 11:08:26 +0200 (CEST)
+ id A7B5B848A1; Sun, 12 Jul 2026 12:14:58 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E798844F6
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 11:08:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9AE5841F2
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 12:14:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1783847303;
- bh=ghtlgNzlFhTXXf1RaB5JQh+EJOx/R9fr7VnWCqB+5LE=;
- b=RdzB8EeFHKhL9WFka1VJxUzrMnJz6nWmHA9v0fN65XF+CT8ETByroW2lKR1nitWpFoFlJ7gPe
- 0Smr40GDxfaFQGoaL2QIwDiwkvXGhmjvhKfc3I/g8znDuhlCnGQzvxkUCdeP157HxXchzOS4qcY
- Q/SXH3KoCNnuUKV8fs8E5WeDZaHss5MI4KTTbyrhcOh7cSpqMlOr9eXWL6KQ8ASx8/HXNmFmaze
- Z1QBa+Rc6JUGq8c/p0ZF6kSutDX601Vd1tD76tG6NEkyo6BdvdNJ6ZOul7+2qlIWgtHejbMm4Zu
- w8P0zg0zbJqNP1HLO9bL5H3GqaGz/voslbTd/lyXcVwA==
-X-Forward-Email-ID: 6a535985e9fa2a52933a7128
+ s=fe-e1b5cab7be; t=1783851294;
+ bh=nkTRqXheSYSGwIoAc5m5R89JEKFb309nhgN/grUWgbk=;
+ b=CoP8UztGIx3/Fquis+zgfEhUyqtTDwGb0BvYmCn3jvwBHuYevBWyzyuyYJO28iu9r7xAbfC2K
+ Bd4fZBf217S4G43rLjWMJf/swkr0brRm6Ed7IAbUv6V+xe56Zsrhftcxk+6tT3F06krm4V7eaJD
+ LJcNS6Di5ZuxhwFsBwEcSQ1N1dXW5QixCpyGl+gJ2SevhstqR5jRzk4MjficR3i2o+JcYTWBYIH
+ WG0vZOcjgMv06q1uueVKm6TQkBeWRoZe72c1Mgu8uQ+kev/magcFStf/rTeeShst4vICtPjXiMp
+ 4WFeuOg1W+W5bI6pabTFo9z4Qtk+02h4Pg5PWvpUAqzA==
+X-Forward-Email-ID: 6a53691dcdb5002fd5b5acbc
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.10.2
@@ -43,19 +43,20 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <e46068aa-1276-4501-af7e-db841de7e291@kwiboo.se>
-Date: Sun, 12 Jul 2026 11:08:18 +0200
+Message-ID: <a1f880cb-219e-4532-bb0f-3e427b297ff5@kwiboo.se>
+Date: Sun, 12 Jul 2026 12:14:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/8] usb: eth: Add CDC ECM support
+Subject: Re: [PATCH 7/8] usb: eth: Bind ASIX AX88179A/AX88772D/AX88279 to CDC
+ ECM/NCM driver
 To: Marek Vasut <marek.vasut@mailbox.org>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20260711160808.2022242-1-jonas@kwiboo.se>
- <20260711160808.2022242-6-jonas@kwiboo.se>
- <2801bed2-d476-4b4b-b531-b182ecc5210b@mailbox.org>
+ <20260711160808.2022242-8-jonas@kwiboo.se>
+ <b7fbc3f5-bbd2-4c43-8b70-9a436028f04d@mailbox.org>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <2801bed2-d476-4b4b-b531-b182ecc5210b@mailbox.org>
+In-Reply-To: <b7fbc3f5-bbd2-4c43-8b70-9a436028f04d@mailbox.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,35 +77,111 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-On 7/11/2026 9:57 PM, Marek Vasut wrote:
+On 7/11/2026 9:58 PM, Marek Vasut wrote:
 > On 7/11/26 6:08 PM, Jonas Karlman wrote:
->> Add support for CDC ECM (Communications Device Class, Ethernet Control
->> Model) devices.
+>> The ASIX AX88179A, AX88772D and AX88279 USB Ethernet controller
+>> revisions has both CDC ECM and CDC NCM support.
 >>
->> References:
->> - [USBECM12] USB Subclass Specification for Ethernet Control Model 1.2.
->> - [USBCDC12] USB Class Definitions for Communications Devices 1.2.
->> - [USB20] USB Specification 2.0.
+>>    AX88179:  0b95:1790 1.00
+>>    AX88179A: 0b95:1790 2.00
+>>    AX88772D: 0b95:1790 3.00
+>>    AX88279:  0b95:1790 4.00
 >>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Is this pulled from Linux or is this written from scratch ?
+>> Prefer using the CDC NCM or CDC ECM driver for the 2.00-4.00 version
+>> range of the 0b95:1790 ASIX USB Ethernet controllers.
+> 
+> Why this specific range ?
 
-As stated in the cover letter this driver was written from scratch.
+Sorry, my commit message was not clear enough. Only the last three
+entries listed above have ECM/NCM support stated in their datasheet.
 
-  The driver implementations was created based of the CDC ECM 1.2 and
-  CDC NCM 1.1 specifications and was tested on a few different USB
-  Ethernet adapters using ASIX or Realtek IC.
-At some point I looked and compared to Linux to ensure ordering of e.g.
-control messages and size limitations where closely matched.
+The version seems to correlate with the different "generation" of the
+AX88179/AX88772 controllers.
 
-In more detail the NCM driver was first created and tested on AX88179.
-Later when tested on RTL815x there were some issues, so I also added the
-ECM variant and tested that on both AX88179 and RTL815x.
+The initial AX88179/AX88772 revisions, tagged with version 1.00, does
+not state support for ECM/NCM in the datasheet. And all my dongles are
+tagged with version 2.00 or above, i.e. using AX88179A or a later
+revision or version in the family.
 
-The ECM variant is likely enough for U-Boot purposes, however NCM still 
-has some good features such as custom MAC-addresses. So, I included both
-in this series, with NCM being preferred over ECM due to driver list
-sorting.
+The version matching also seems to match revision handling in vendor
+driver [1], so that suggest that these assumptions are correct. Based on
+[1] it looks like version 5.00 for AX88279A was added recently.
+
+[1] https://github.com/mmoya/asix-usb-nic-linux-driver/blob/main/ax_main.c#L2913-L2939
+
+> 
+> [...]
+> 
+>> +++ b/drivers/usb/eth/asix88179.c
+>> @@ -691,7 +691,12 @@ U_BOOT_DRIVER(ax88179_eth) = {
+>>   };
+>>   
+>>   static const struct usb_device_id ax88179_eth_id_table[] = {
+>> +#if IS_ENABLED(CONFIG_USB_ETHER_CDC_ECM) || IS_ENABLED(CONFIG_USB_ETHER_CDC_NCM)
+> 
+> This is USB, this should be auto-detected without any need for ifdeffery.
+
+As stated in the cover letter, U-Boot only support driver detection of the
+first (cfgno=0) configuration.
+
+  U-Boot currently only has support for automatic binding of the first
+  device configuration for devices, so this implementaion works by adding
+  bindings for VID/PID pairs and letting the drivers try to change active
+  configuration during probe.
+
+To work around this limitation, the VID/PID pair is added here.
+
+U-Boot USB core structs only have support for carrying information about
+a single configuration, so the cfgno=0 is set as active configuration
+and USB driver matches only on information of this first config.
+
+Initially I tried to add limited support for at least parsing all
+configuration descriptors and make usb command list all possible configs.
+
+However, there are other parts that only where saved during config desc
+parsing and where then overwritten by parsing of next config descriptor.
+
+Next hack was to just force setting the cfgno that matched NCM, and that
+made USB driver matching the new NCM driver, but this was not scalable.
+
+So to not having to re-work how USB core store config and handles driver
+matching, the cleanest way was to export the set config helper and use
+VID/PID matching in these drivers.
+
+Hopefully someone can add proper support for driver matching based on
+all possible device configurations in the future. Not something I plan
+to address, I just wanted my USB Ethernet dongles to work :-)
+
+> 
+>> +	{ USB_DEVICE_VER(0x0b95, 0x1790, 0, 0x0100),
+>> +		.driver_info = FLAG_TYPE_AX88179 },
+>> +#else
+>>   	{ USB_DEVICE(0x0b95, 0x1790), .driver_info = FLAG_TYPE_AX88179 },
+>> +#endif
+>>   	{ USB_DEVICE(0x0b95, 0x178a), .driver_info = FLAG_TYPE_AX88178a },
+> [...]
+> 
+> I recall there was some USB URB size limit on this ASIX USB MAC, was 
+> that ever sorted out ?
+
+Correct, the ax88179_eth driver is currently requesting a bigger RX
+buffer than what the MAC seem to be able to handle when EHCI controller
+is used.
+
+Trying to get a workaround that limited the size to 16 KiB, similar to
+what Linux uses, was partially rejected.
+
+This ultimately made me to look closer at NCM/ECM and the implementation
+of these drivers. And for U-Boot purpose using NCM/ECM mode seems more
+logical than continue trying to use the undocumented vendor magic :-)
+
+For ECM only a single packet is sent, so a 2 KiB buffer is used. And for
+NCM it defaults to 16 KiB and also uses the information provided from
+the descriptors to keep the the used buffer size within device limits.
+
+To conclude, using ECM/NCM mode resolved all issues I had related to USB
+URB size and this ASIX USB MAC so I have now fully switched to just
+using ECM/NCM driver for the boards in my personal lab.
 
 Regards,
 Jonas
