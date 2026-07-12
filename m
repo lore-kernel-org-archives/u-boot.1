@@ -4,147 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92E9C43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 13:09:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3FAC43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 14:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D90D284A7A;
-	Sun, 12 Jul 2026 15:09:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 717E084A0B;
+	Sun, 12 Jul 2026 16:07:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="bI+A3E5K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A9tuQ0V1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBA0384A6F; Sun, 12 Jul 2026 15:09:32 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B21FC84940; Sun, 12 Jul 2026 16:07:31 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 314C584940
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 15:09:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7100484852
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 16:07:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t24NYcM9JyU6AizIg+QjJ2pqoJgLiDIxDLQtlCxVokMrdBzjfhNpaM8Cb9fhIzjDNRNVBHbCrusCqfS3WH9hVErM7Qo5RCIWa1gdODQ391nHHc4D1dKcjXn8ThZ2qt1Uc7REoXH9CIqkOx1EdQq5PX9HskFXwi7zF8dhGMIJfL3f5P46kFW1yToHJur7EHBzFeMIFM5FoASCYX+ellshgOKRhuiwPTC4vQxuGbLVMg17G1ARkSmsm4xmtEseD7wvgJgjt7Jyn0STPQXdQj7TyF3J3KK3nAlkTV77iexqisJOsHzf/gAihsm5FElE7C5yGhvLqEJ3gxRwbwHoxObvJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5NiKFmSirTkTADPzx41oSSyFMF9SwK8xJkIU3+RZPQU=;
- b=uZCse6jm8hkYNYiUI3LSIB1u7Yem7w7k2wg4/YHGdKsR3pGAa4MsUQZM7SBu5Ad513aZBDHwBTqKuEhT4qRGdWth4lOKd8ypMN1UVw0OOmZ4ljXFo7dnb+uzqrXjO2Pf2fUgCMXUoXQgBu5RGdLcMycH+lY8IIXQrPik8wRupev6x2zfpXRgeFjJFajjJ/r1HYCUm6jFIvbZH/P6yGx7tvz6Mw9eYVdfJ/dgzWG0LmXiJlARWGzUU4LR/Qy2OgvB4RaPcgOLDQyKjDFHrr14+eoeEqbVNUuZHtx+uNKJwpzP2jaFpPdIQZvxi7WroCbRvwys65BCq7t/kszMk5u+tg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5NiKFmSirTkTADPzx41oSSyFMF9SwK8xJkIU3+RZPQU=;
- b=bI+A3E5K5x9d3sl+0DAcFsLJvbqesKZtFelQRmVu86uEUZd4JnpYGvBfyRBPVHq96dySRh9ugKVRJ62ph331YvaqzRo+bKBPv7h4DvRPJ3Y0UKc2L/uFAd1ua2c8fbOFJ9QCRCkOXzHyHnGHEkuDQa1koLbQjQVxHoyYM7venVn3KdR5P87vB3kgEM7YwZ9MVKra75ehuUo3Qw3gQ/SAn16f9aj1dByZeJv5MVjZdLmRsY0J55ETdCqyUhDWcJ+qVddo1mhsNTKyMuj6JzcjHgyCBBULcMXtMXw2Eb0lx264Ck0gk4rZCyuFGkrlsm/8U96fn+INY8R2Zav+cigMPw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by GVXPR04MB10945.eurprd04.prod.outlook.com (2603:10a6:150:21e::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.19; Sun, 12 Jul
- 2026 13:09:27 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%3]) with mapi id 15.21.0181.019; Sun, 12 Jul 2026
- 13:09:27 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Sun, 12 Jul 2026 21:07:32 +0800
-Subject: [PATCH 5/5] mmc: fix mmc_deinit regression when card is at 1.8V
- signaling
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c15b509c323so319312566b.0
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 07:07:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783865249; x=1784470049; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=zidCjt/4tbXmQP0806CnrArJnyHgB/h2FZ3aMoDeGFk=;
+ b=A9tuQ0V1y3UbdMx4viyIIOeW0lbt9lMc3+Yawk/ZE2ihv/O7oVzwewTz2ftMcIm04a
+ 8tXGlXT94Mn7vOQ97nlckPtwPx0MM5NsM1bczkFyjPxpEPe6669yRJjmMihUwrYAlXkA
+ 0vWae/s/fgI/hGwMJ2Bj3kwvpfp7qKVcS+g9W4nU5JRCB5+vx4dzsDRvnOL7IfNQ48/y
+ oQ4GNINHh0IU/Np/vSJtTjIl1Jc6DGAOPdqMFmacBp64ITaXRJi5K2q8Y676h2V31iJo
+ 27MBs5VGSd4F6dNjqQQyDfgVrOsGYd4+I0yp2k24kJqsXCaDbQCdfEDzmY7nhvUgERMw
+ F9iA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783865249; x=1784470049;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=zidCjt/4tbXmQP0806CnrArJnyHgB/h2FZ3aMoDeGFk=;
+ b=F5tHMG8TU6o1Vv5tHUi5804UiNjUbgWw0q8Tp9Uf/18SO5LTd93rPdFtx3x4JCQIrt
+ Wl62EWOnEm2IV5QMKRpL2Li/udxSpM6DdyFaza1CztOVA3xR8rNFkSbq9eYlgf/Nehq4
+ xKxFAxMBHWJLPWXfbOEsAMGBnRMxhtimfPDB1SNzY+SANWKS0pImi/c/3fpVF6pTATcl
+ olzUcLohlziPOat8MXC+yWSLgAUjIwY7gWtrPCB09qY562x2vayQIZ7eNAucuWIedisM
+ wWSmwVhfZzB8rqK3mhhfdzaF327cc8X4MhrUYhybxKJ+tfKubxUcYIxGlv9NEls2zH42
+ /Rvw==
+X-Gm-Message-State: AOJu0Yzu51JXk6vHGN22sAWRt387wy3q+Pcj32IvqTp1heiad57CDk1w
+ 5F/ft+oE8vEnwHatWxluP4kO7Msdk36sptCaOUJmRV3E6juH5yCAIBc/RB2KDA==
+X-Gm-Gg: AfdE7cmfBWm1Z6IkGoGW+7TApwb9lCL4zCPE5U6IwjK2sM8sw7Y8X3uNAU1fYTHb3Ra
+ b1RQEYIuroiMXhfzk+V8lJiG17Km9OBAQRpW9voUjZwVm34apGB1VVJqkC7SXnwlrGuU/frstTB
+ fI9CZjcfdehQEmyOFv4WmUc46u6aqVbX1K3KN1S4a+2lVev4bEZcTxcL5DaCOXXj1jJx8bXZ84p
+ JCSfKLjvS4LQ85MXTyplECDTBVv/CzoGskslvGfvjxvbXbuNwZb0tfIfbOl3aWUpRav1+DB/7fH
+ 0bAjhUH+YYAtVE1R2ixrXa/t9estFpYSOBFK/78hx7xVXziY//ZeXSHWhdvBalo1CyugsmYt7qq
+ i0/a9va6Oij1xvG49WsqrSjUiWBrTjdQXaUqDylhdCJDMqG5tbShXYrUW1bC5xjSMwGPJVHYcE4
+ P2AzjwiP0eB4OaQTc9T/SHSK2NrxvIWRRLDw486IkLf+/KYU7VBaIMNYcERPOPSFfrm/FFC3unG
+ olTYE7DoPCEx2ZKE8Y=
+X-Received: by 2002:a17:907:7255:b0:c16:1a3:9022 with SMTP id
+ a640c23a62f3a-c161ea7951dmr232913666b.38.1783865248721; 
+ Sun, 12 Jul 2026 07:07:28 -0700 (PDT)
+Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c15e41121d2sm492856166b.47.2026.07.12.07.07.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Jul 2026 07:07:28 -0700 (PDT)
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Subject: [PATCH 0/2] libavb: update to AOSP 1.3.0
+Date: Sun, 12 Jul 2026 16:07:09 +0200
+Message-Id: <20260712-avb-libavb-1-3-v1-0-44a50dfe2f23@gmail.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260712-mmc-fix-v1-5-99a1136bbe54@nxp.com>
-References: <20260712-mmc-fix-v1-0-99a1136bbe54@nxp.com>
-In-Reply-To: <20260712-mmc-fix-v1-0-99a1136bbe54@nxp.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDc0Mj3cSyJN2czCQQZahrrJtmZG5sZmJqbGaWkqgE1FRQlJqWWQE2MDq
+ 2thYASOLF8WAAAAA=
+X-Change-ID: 20260712-avb-libavb-1-3-f273645366da
 To: u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
- Jens Wiklander <jenswi@kernel.org>, 
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, 
- Yanir Levin <yanir.levin@tandemg.com>, 
- Eran Moshe <emoshe@gsitechnology.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Tanmay Kathpalia <tanmay.kathpalia@gmail.com>, 
- Jimmy Durand Wesolowski <jimmy.wesolowski@mobileye.com>, 
- Iulian Banaga <iulianeugen.banaga@mobileye.com>, 
- Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SI2PR02CA0039.apcprd02.prod.outlook.com
- (2603:1096:4:196::9) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|GVXPR04MB10945:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46882352-1c94-49f8-05d1-08dee016cd6d
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|19092799006|1800799024|376014|366016|7416014|6133799003|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: UgmCcF0m0tHB/Dsbf6xzleyG1klZWBxBTo8HRojWSowMbyxEEOqcqfwpf/i2eVuKXlqkkbdDoW4m8cxPf/4r0xePHNNsO3ix+k0KrURJTTyKpNyic/QoqljNPjBKt1q3Dw5M4rebu6yh2KNUT7pHvXaqHkkXpItylA/3Djsl/I92o4Un46O2JRsB+oDjUpOpfj8J4dgcnb/pId/fIEjB3sw1zhC5XhEp9rpLrMfIb/xZeRGyF93bIFiIOvRY6RyIkZHiBtW6uGTsc5k/P0WMXw2S56NBftRhAeDeehRMRNcQGu7l4M7ZZr7TepyV1WYZWS56Wr3bkPr9ZjhsIWywfpxazQ/73PyULnADtlwDMzaJQ/ngz/huflEHMu/3kJXI9ZOA9V4YnDSWvnJVU1AhVW7XgQxlYzGLaTHH1u4I3cXPFSnmH8cxfSkhjrxkXHLVXRk5oRPy6N7Le/Av9clhog4lLbYpNsU1sJOHdD548rsDo/D2gVkEd+nnlB+cg0mVHnpsHvdMGR4pvuSZRDZDiqX5La1RVej5wtysM64qkmKLKVTX5SLOeB5MbYVZIBubtyAQ+2uzKX3GenLjPVzuymnh9No2bq8QtHisKe0dU7sWH4g2y1dhCHCEAbtTqvDRk5GV4PD5rjRdHOsvmK0da00bYK5NLCAiFsifbTxANT4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(19092799006)(1800799024)(376014)(366016)(7416014)(6133799003)(56012099006)(11063799006)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NkRSWDJKQXBtL1I1LyszbCtpMkRpODlJWTd0NDFoTHVEeTdVT1lhUWJseExI?=
- =?utf-8?B?cUNaSnJHeHdrZ1pHR0V3elVEc2VrUkxMVnMvM3NZaGtUbFVBdzFMVkphVE5V?=
- =?utf-8?B?NlR5ZFM2b0Z2RGxzdlpENVlUMmZaZE9OMy85anFLQTM3TGErMTVOazBzZEp3?=
- =?utf-8?B?MCtjK0pWNmpwbnZiY2tYZUtsNDh4OHFRdCtvMUtiUEkxeWVxVDVpN2tPVERs?=
- =?utf-8?B?N0h5Vyt3SlZ4MEd1TVhnV0FKY2RRMlZDREhyRXA5Y09nSW5TYXJkMW1nSHpk?=
- =?utf-8?B?ZHU5OFExTmcvOFNVZ3ViWmthYzdpMEw3anZJYjB0UGZkakN3TFFhVExlT00v?=
- =?utf-8?B?MGhQOU5SMHVXL2NJV29CdHg4NTV3RGtXcTF6aXBnSmxURHNBUXpha3B1QXVy?=
- =?utf-8?B?REdVMnUxeXpLalcxZ0syWWpOTWhJY0N0RVBzTFBMUkdDMENWVWk0L3ZuMjdG?=
- =?utf-8?B?dVprUzRJMklTZFNpTEgwd3RJWnZJS1J2VlRmQTI0N1Bpb0QrYWIzaURKRnN6?=
- =?utf-8?B?ZEVLcFE0OG9ZTks2NlVFNkZaeStpbWh4NERPOHdTbkZYYWNwYnBJNmx3STZV?=
- =?utf-8?B?dWsvZ3JIWFkzMnRxdkl1OEdHL0U0TVhIcWJIS0NuOWxvYm1DdWF0YUFMa3pX?=
- =?utf-8?B?cXNsM3BVTnU1bWJXTG8vdk5BSStUQmFWM0ZxWHdCT1pTWmJuOVUyYjgzZUM0?=
- =?utf-8?B?OEhFRDJObG1rcTdHcWZnN3BIS3h6MUhJR25RNGFXR1VMQkQ2bWlUZG12Z3pG?=
- =?utf-8?B?Kzc2S3BCL3NKcmI5Tms3ZE9aaFFGV0ZXWTFqUDlRbU5QRTZTalU5eHh4M2hS?=
- =?utf-8?B?Z0JOV1dlL0RGN05BZmJzK0VHYmxXYWxXWlZXd1gyMDVkam85QTZQN0ttaWFB?=
- =?utf-8?B?TVNsTis0YVljZFlxTlNrRGtUNitlMnZDMGV2Sno3cWZXdExUZm9kdXJrUVFS?=
- =?utf-8?B?ZmdQcGg1d0k0RTZiMHFmTERwcCtqUkt2V3pjbXEranBrSlpJRjczeWYyOFZJ?=
- =?utf-8?B?dWl6WXlkcXVhcTFod0lJeHZ3V0w5TitjdmFkU2E0NjBWSzVzVERhYTQzQ2NU?=
- =?utf-8?B?Mk5qNlArQlV3ODZQNXZHQzlXbE51N3YxNXczWGtTWVFkMTZ5MHlTdmovOElQ?=
- =?utf-8?B?UERWYTdKMElmZXFhc3NiOWplZUpPNVBjVzFrLzIzbFFCOWJ3RGE0Rkl4ekZh?=
- =?utf-8?B?YUxIYnZHSitBVHBOUHEyeHNzeXpNOEY3SmtmOU9xYmU4aGZiRmNBd2ZIbFBO?=
- =?utf-8?B?dko0NEF4d0UxVVhOTFgzYkZJUktaMDdOU3dTb2NOWlYrMXBibE1oN3BOYTdN?=
- =?utf-8?B?TFFHYUNWWjFiaUticjdrcnJkUlhPV21rUk5RcHpWQ21hbE1qREtIQi91VzNT?=
- =?utf-8?B?V01hOUJPTk94U1JGdVVBM3Q5ajNtVmVQTzdhZjlhVGpOcE9td2dwTUd0V1Ex?=
- =?utf-8?B?RVFUeUN6V2UxSFhHVXk5ZEdQRk9ZQ3RZRGRRWFFadU9uQzNoUXdNWkt3RW50?=
- =?utf-8?B?VnJpQ09rVXQ0Zk5DVnJYaGtwK2FOMUV4bkl5Q2p3QUpuN2crR210VFNROE1P?=
- =?utf-8?B?WTM4QlZJVmFlYzhuY24rUEVhTWtndUNTaDJNWENITW9jdFJGdmphZ2ZiZmI0?=
- =?utf-8?B?cUlDWTQxZS9ob1p0NzNyQ2lXYXI5OFlIV2ZIWWlJQ3g5Z3huVHdab2pVUFA1?=
- =?utf-8?B?V1dLMTlpcms2UmYyTVIraGVhRFBFeUF0WDZ4eXpzNHo3M1JqVWlVS1dNTnJI?=
- =?utf-8?B?YjRCMDJvcHloRUt6ZTZ1K1ZXMVlqOWZ0SkJyNEE1c3VRSVcxR0JhU1M2Q0lz?=
- =?utf-8?B?aGN1M1ZZb3IwQ1I4U1V6WVhkMEdlc25zclBMQTdlZVNJMG5DbFVwS1UyTjY3?=
- =?utf-8?B?d29mTmVwc210eUs5cFB5Z3pHZ1U3cWdLeDh3RlBZSWlBQXBYUWVDOGJEV3d0?=
- =?utf-8?B?b0ZGbWtUbnMrbzlCOVhjV1liVng3Q2tPenlNNndZeWJIUUtHNFd4VFY0dnZC?=
- =?utf-8?B?VGlHTUIxb05xTk5zdFFiNUM0WFlPUmhHc3UxczZrMy9ZMHdUbmlUR2QxRnZ4?=
- =?utf-8?B?K2RwMzV0WFRiWVQ3N0M4OVRrZTVndjJUNGw3dVh6Z0FKOEs1eWRmL0xEVlZ6?=
- =?utf-8?B?M1hZQmhBcWk4R0lkM2JtaXFmTEloSk10NWR3M2lVSUlxOGVTSWgrdTlEMU1z?=
- =?utf-8?B?Q1h4UzlLZ0gvUVB1cStXQVJDL2xvUVU4T252bitlUHlLYW5aSSszUVhJeWZn?=
- =?utf-8?B?WjZJT3ZhOFhrMFNaUklYMitTSzNCakhxbk52NEtXSFRaNDg1Z3JGVUFmNGVL?=
- =?utf-8?B?ZytWeDh3SEE4bFdCN2E4ZWhIanUwMy9pbmxqSVRoajFEN01pejhGMVp1TGE0?=
- =?utf-8?Q?EZUr8rTbcr1Y9bm6BmYFFXh5EOG3yFeuE8f5m?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46882352-1c94-49f8-05d1-08dee016cd6d
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2026 13:09:27.4885 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VEJQvZ0lfu3dU4i+UODEcSBY/PvurKQG7RZWtPluqLSzKVtZr5IHSPDHkYidOABcRkMUue8PobiyMHqxcQLjQc1Tw//O/OVzBhY3E+8ojJFwclkYyxL154E1SFiy72Je
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10945
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,60 +102,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+The vendored libavb under lib/libavb/ has been frozen at a ~2019 AOSP
+snapshot (AVB version 1.1.0) for about six years. A v1.1.0 library
+rejects any vbmeta whose required libavb minor version is greater than 1
+with UNSUPPORTED_VERSION, so an image signed by a newer avbtool that uses
+a 1.2/1.3 feature fails to verify. This series re-syncs the library to
+version 1.3.0 and picks up the accumulated upstream fixes.
 
-Commit 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without
-power cycle") added detection of cards already operating at 1.8V
-signaling via mmc_sd_card_using_v18(). This correctly handles the
-warm-reboot scenario in mmc_startup(), but causes a regression in
-mmc_deinit().
+The vendored files are taken verbatim from AOSP external/avb commit
+a1fe228b8654 ("libavb: support chain partition no ab"), the commit that
+introduced version 1.3.0 [1].
 
-The problem: mmc_deinit() strips ALL UHS capabilities from the card
-caps and calls sd_select_mode_and_width() to downgrade the card before
-kernel handoff. But sd_select_mode_and_width() now checks
-mmc_sd_card_using_v18(), sees the card is at 1.8V, sets uhs_en=true,
-and tries to use UHS modes -- which were just stripped from the caps.
-The fallback modes (SD_HS, MMC_LEGACY) all fail because they require
-3.3V signaling, which the card cannot revert to without a power cycle.
+Functionality the library now parses:
+  - AvbVBMetaImageHeader.rollback_index_location (v1.2)
+  - AvbChainPartitionDescriptor flags / DO_NOT_USE_AB (v1.3)
+  - AvbHashtreeDescriptor FLAGS_CHECK_AT_MOST_ONCE
+  - AVB_HASHTREE_ERROR_MODE_PANIC
 
-Per SD Physical Layer Specification: "Once the card enters 1.8V
-signaling mode, the card cannot be switched to 3.3V signaling without
-power cycle. If the card receives CMD0, card returns to Idle state but
-still works with SDR12 timing."
+Scope / integration impact:
+  - The AvbOps callback set is unchanged between 1.1.0 and 1.3.0, so the
+    U-Boot integration in common/avb_verify.c needs no changes.
+  - The U-Boot port is preserved rather than pulling upstream's
+    BoringSSL-oriented crypto restructure (sha/, boringssl/):
+    avb_sysdeps.h / avb_sysdeps_posix.c and the flat avb_sha.h /
+    avb_sha256.c / avb_sha512.c are kept as-is. The SHA API signatures
+    are unchanged, so the retained implementation stays compatible.
+  - Per-file licenses are preserved (avb_rsa.c stays MIT OR
+    BSD-3-Clause). The Apache-2.0-licensed avb_crc32.c is not imported,
+    as it is unused by U-Boot.
 
-Fix this by preserving UHS_SDR12 in the filtered caps when the card is
-operating at 1.8V. SDR12 is the minimum valid UHS-I mode and is always
-available at 1.8V signaling per the SD specification.
+Note: patch 1 is a verbatim upstream import and therefore triggers a
+number of checkpatch style warnings. The files are intentionally left in
+upstream (AOSP) coding style to keep them diffable against external/avb;
+they are deliberately not reformatted to U-Boot style.
 
-Fixes: 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without power cycle")
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
+[1] https://android.googlesource.com/platform/external/avb/+/a1fe228b86543a21739c51352f5ce72f134fccfa
+
+Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
- drivers/mmc/mmc.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Igor Opaniuk (2):
+      libavb: update to AOSP 1.3.0
+      doc: android: refresh AVB provenance and pin libavb reference
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 5fd12d21f92..809d7b6b578 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -3178,6 +3178,17 @@ int mmc_deinit(struct mmc *mmc)
- 			  MMC_CAP(UHS_SDR50) | MMC_CAP(UHS_DDR50) |
- 			  MMC_CAP(UHS_SDR104));
- 
-+#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
-+		/*
-+		 * Per SD spec, once a card enters 1.8V signaling it
-+		 * cannot revert to 3.3V without a power cycle.
-+		 * If the card is operating at 1.8V, keep UHS_SDR12
-+		 * as the minimum fallback mode.
-+		 */
-+		if (mmc_sd_card_using_v18(mmc))
-+			caps_filtered |= MMC_CAP(UHS_SDR12);
-+#endif
-+
- 		return sd_select_mode_and_width(mmc, caps_filtered);
- 	} else {
- 		caps_filtered = mmc->card_caps &
+ doc/android/avb2.rst                        |   7 +-
+ lib/libavb/avb_chain_partition_descriptor.c |   1 +
+ lib/libavb/avb_chain_partition_descriptor.h |  16 +-
+ lib/libavb/avb_cmdline.c                    |  44 +---
+ lib/libavb/avb_descriptor.c                 |  62 ++++--
+ lib/libavb/avb_hashtree_descriptor.h        |   3 +
+ lib/libavb/avb_property_descriptor.h        |   8 +-
+ lib/libavb/avb_rsa.c                        |   6 +-
+ lib/libavb/avb_slot_verify.c                | 313 +++++++++++++++-------------
+ lib/libavb/avb_slot_verify.h                |   6 +-
+ lib/libavb/avb_util.c                       |  46 +++-
+ lib/libavb/avb_util.h                       | 140 +++++++------
+ lib/libavb/avb_vbmeta_image.c               |   1 +
+ lib/libavb/avb_vbmeta_image.h               |   8 +-
+ lib/libavb/avb_version.h                    |   2 +-
+ 15 files changed, 384 insertions(+), 279 deletions(-)
+---
+base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
+change-id: 20260712-avb-libavb-1-3-f273645366da
 
+Best regards,
 -- 
-2.51.0
+Igor Opaniuk <igor.opaniuk@gmail.com>
 
