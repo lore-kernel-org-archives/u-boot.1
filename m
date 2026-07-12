@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DACBC43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 12:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13146C43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 12:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E40E984A30;
-	Sun, 12 Jul 2026 14:44:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3384984A49;
+	Sun, 12 Jul 2026 14:44:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FOLFwD2+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LBoNKAdm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3B888497A; Sun, 12 Jul 2026 10:50:52 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 55E4B844F6; Sun, 12 Jul 2026 10:50:54 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D12C5844F6
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 10:50:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C514848A1
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 10:50:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-69c20ba892eso3270685a12.1
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 01:50:50 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-69c19a37eeaso4410825a12.2
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 01:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783846250; x=1784451050; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783846252; x=1784451052; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=akTc10TqlO59c5OZS6OzISzZW5wLJ1Y9dSo/vLcrKyc=;
- b=FOLFwD2+Wl1cJVdunpos1ieaxg3WO7ZpFsh0BuhCM4azmXRs0qqlH8QqBtpTJBlWD7
- Hp5+CDT20MjodSgFHDrcww0OpHQElCPfxXe1AlBTaUXEULnBOgPcVjDeXhYEvW2XCcm7
- nsvGbVnAzLElrx+6fVu7mprFkoEUzHL3bTg8MVdpb/ZusnxnK1aebT6XksZIc04CHQSp
- zTU5LjQfn5VxVukgJZQH2GLI4SCKqhEy8ojncZropv8GpagpcK2oHTCvi0iY2BDJb+S0
- IpneQ1Eu1SohZ8wVE5jXiTFX1fF6wAROBdKSVgX8gUc3F9df9Ct2fxQZw3ikmCul30Ha
- 7MKw==
+ bh=Hrp2nEmTYiRjMz5C8HP5bcSn3U5cDVS1S5+eYXCPJHQ=;
+ b=LBoNKAdmXQXZIRVQYtDYSSZethUcmjNKFHfjOkGRPNSm2mGl4vOJBhrZ0JaDIj9Q00
+ HOroDWITtPoTzIVMjr39qtTxeVfrCUQ3mO16HeXvL25UizfwU7/Uu8EFv6j8raNRi5aF
+ UuKL5/SQiv9y7VyaI6CpxD835AzqEJxRr3IINoevdEosYUruBa6VzVOokrZHNuwjZX3L
+ 9MuwNB1IRsPsxUbGoQzQdrHNOXRXVWihCNUkOuRvWvumvn1ocJ6fkIKBe6v5dlTpr7f6
+ Ad5WOzDsnOh+3j4qahBBfJaiTXFWoyKrAoml0XXVhzl/jZmiX7WJknhXk+j16akhWbar
+ Ym2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783846250; x=1784451050;
+ d=1e100.net; s=20251104; t=1783846252; x=1784451052;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=akTc10TqlO59c5OZS6OzISzZW5wLJ1Y9dSo/vLcrKyc=;
- b=gyFDGNPER2E8pAsB0r+Xwhap40SJpeVTk0iC+fws6AI+1dTdL3mIntY4njVG7Oicqt
- 8zntmmlM9nc1300b9iqRqKIhuPobJE0qvBQG4I8QS3JJ5ici3Emertq+sDD+ui7exXK2
- CI9LCYfWAR0INCZqVq+sQvurTS/ZpJuG8+y2ZAz1gW7T/zcaw9WYU38FAz4a6aGXKa5r
- 3BCfW0XLmlUE2YXmGikVwVYlrhnhboO+4JljE/KVQUKPVBM+yHveNo8ig9hYfp2F0nqL
- Vk0m9Vdn33whTs5V1NHHjNR4Zbwsdf24K7ksiapxgJwvgjT0gfHzv6W9653Vm/GrRO/W
- zzZg==
-X-Gm-Message-State: AOJu0Yzg1UZ7Dd1hd96AeXMV/lWz5tHoyB0W86w2kytwTPgcAkw7jUV8
- 8cVU94z1vH5of0qYTAl4WoqMUNotUBm6w+p33zl1n6gG4qWYgRwhwrshvoYD7Q==
-X-Gm-Gg: AfdE7clRA6/p/9zAdKqg+EinMEQAmaaBQMnPerBjA8d9K0ojDDI1jNjrvs/iZKA3LP5
- 4zAUwQPXibsMm19F2UYChXXc3NMp4nUvlsOXh8Yw8KHHy/mQjWvVqNPwpgKq5OisSNiCupbOcXi
- p+xCo7wcRaxHM3KcY0cGjBS4Ng9/3rWB1Q6K8XAlXse40Mck2fY/aVpZxPoC03XNNi8Kx1vVb8h
- rkoVEAbKyI/gvE6aahoWgY0UWSijvroyCZq7RmpwPL6jzrc6wLIp3b6WNGN4VDrnuQajvnHweyh
- /10BJGhJ86j5nG8xZyiolXvBbDc1cMl89teaBZLirT9zkSn1GLFhZeBmzHXo0DQOy80FuSW/DVN
- 5MWsRBbbVbUCegmI6PGiTLQFWBQMX4SytNTbse6RXSy+pZ1nvL/Or9cIL5k0hVSul895OzhzmpO
- c7jxUATgLmVqbqhZEM52VcpN3XtP1vC2L0YzHe+mF/2px31AkRoPQT4DeG2R+hxOWhbRmcEZzuS
- rwk0ACf
-X-Received: by 2002:a17:907:d40f:b0:c15:fc5b:b667 with SMTP id
- a640c23a62f3a-c161e991be4mr222905566b.19.1783846250217; 
- Sun, 12 Jul 2026 01:50:50 -0700 (PDT)
+ bh=Hrp2nEmTYiRjMz5C8HP5bcSn3U5cDVS1S5+eYXCPJHQ=;
+ b=PIybjT2pwQ/6MyHFGIQqgA0x8D3fNjwuE8osN43RdTxqKQ4nqC5RBh/Qo2bDOYeTo9
+ EduN3Fy2fjBiGbF9xfnxVQ1UpnF6I132DX2g49iE6uHRuQFyNkuhsGVqS6OuDHkEfniu
+ yptmj5Fu4reEPPMdMsxgJvd9huIMkGe+D1mZmTGa2x4ZBZDQaPDGP/nmow6KkWxxAABc
+ TMDwrpSGmAtIyfjo1R8yuDb4LbLgGzk5vkXqKIdgCcvvd5r1MgaRrG7OFudajo3EDxIH
+ KOubtW9/y82bZ1KXtsJ9Jkhjb6VP28wsBJGWN4wUpgKJrU7Gn7pzSW1d9yqgVFZvCkez
+ 116g==
+X-Gm-Message-State: AOJu0Yxdc7XfyKWLhEP1dIkFltzBHyExGvNkWtFHCJpiTIzJuPNcdX6c
+ JpKs1t+S+7/1DYE8c+UGIYKELY5ANLPRmvIRp6ngAuRamLXZupTORSrm
+X-Gm-Gg: AfdE7clSlQACm5cbOqxOuV/LhH7aJmiXSzMi9Kc70UE7O5x932fnA7V0OFasch8Ggz8
+ 0R0+FkZA1xyH9WmAxe56xIMCjFHqCRxhJBmZPOBdLQGXB56QL0c1VxKH58ce/M+np30kX9oWXiF
+ 4E8LC4yjoB2oPG7QFtnmj3DGF5KNzdhKoifo8HeoE+7dXgmZQRTAPQC+r+RrM2M8RlO0SpPi9Js
+ Sc8Gnc9HA/T6MIdXrBVR9C9s2RwFvbWFCjDoff2qUc6a3leqdtiCz8heAXQVSJVLHO7KkL/kTOG
+ CSLYfibPT4bxgK6hSdBL1lJJAczfmQ4zGUGDzohvOLi04B8kgfAt6C/lq68LYh4laQ8pkf8/mfv
+ LLt+989WpEajemXyWqlBZVyn77/DgvnSfLhI8A/VVLRQQYx2o7TFDVuEkll5B7jroU0PFGQtJ9Y
+ 4JBgkwxToX5LlkSpXRzup6ND9nhq9s9EpjOke7BJCH7YToQ1pde/b0fL6yLS4LO2rb1FsdCmuIQ
+ VVfNmP/
+X-Received: by 2002:a17:907:f818:b0:c15:cac2:1ec4 with SMTP id
+ a640c23a62f3a-c161e870837mr224971566b.1.1783846251800; 
+ Sun, 12 Jul 2026 01:50:51 -0700 (PDT)
 Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c15de6c565fsm525483966b.2.2026.07.12.01.50.48
+ a640c23a62f3a-c15de6c565fsm525483966b.2.2026.07.12.01.50.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Jul 2026 01:50:49 -0700 (PDT)
+ Sun, 12 Jul 2026 01:50:51 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Sun, 12 Jul 2026 10:50:20 +0200
-Subject: [PATCH 1/2] boot: android: fix AvbOps and verify-data leaks in AVB
- path
+Date: Sun, 12 Jul 2026 10:50:21 +0200
+Subject: [PATCH 2/2] avb: free mmc_part allocated by get_partition()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260712-avb-fix-memory-leaks-v1-1-51d6d5a42631@gmail.com>
+Message-Id: <20260712-avb-fix-memory-leaks-v1-2-51d6d5a42631@gmail.com>
 References: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
 In-Reply-To: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
 To: u-boot@lists.denx.de
@@ -108,112 +107,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-run_avb_verification() allocates an AvbOps via avb_ops_alloc() but never
-frees it on any return path. Every Android boot attempt therefore leaks
-the AvbOpsData structure and, when CONFIG_OPTEE_TA_AVB is enabled, leaves
-the OP-TEE session open (it is only closed inside avb_ops_free()).
+get_partition() returns a malloc()'d struct mmc_part and only frees it on
+its own internal error path. None of its callers - mmc_byte_io(),
+get_unique_guid_for_partition() and get_size_of_partition() - free the
+returned pointer, so every partition access leaks one struct mmc_part.
+A single "avb verify" issues many such accesses (footer, vbmeta and the
+hashed image chunks), so the leak accumulates quickly.
 
-In addition, the AvbSlotVerifyData returned by avb_slot_verify() is only
-released on the failure branches. The successful "return 0" paths (both
-the locked GREEN/OK case and the unlocked ORANGE/ERROR_VERIFICATION case)
-return without freeing it, leaking the whole out_data (cmdline and loaded
-partition metadata) on every good boot.
+Free the descriptor in all three callers. mmc_byte_io() is reworked to
+use a single exit path so the partition is released on every return.
 
-Route all exit paths through a single cleanup label that frees both
-out_data and avb_ops.
-
-Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
+Fixes: 3af30e4443aa ("avb2.0: implement AVB ops")
 Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
- boot/bootmeth_android.c | 37 +++++++++++++++++++++----------------
- 1 file changed, 21 insertions(+), 16 deletions(-)
+ common/avb_verify.c | 29 +++++++++++++++++++++--------
+ 1 file changed, 21 insertions(+), 8 deletions(-)
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 1d70e8d5c05..ec255b072af 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -428,7 +428,7 @@ static int run_avb_verification(struct bootflow *bflow)
- 	const char * const requested_partitions[] = {"boot", "vendor_boot", NULL};
- 	struct AvbOps *avb_ops;
- 	AvbSlotVerifyResult result;
--	AvbSlotVerifyData *out_data;
-+	AvbSlotVerifyData *out_data = NULL;
- 	enum avb_boot_state boot_state;
- 	char *extra_args;
- 	char slot_suffix[3] = "";
-@@ -443,8 +443,10 @@ static int run_avb_verification(struct bootflow *bflow)
- 		sprintf(slot_suffix, "_%s", priv->slot);
+diff --git a/common/avb_verify.c b/common/avb_verify.c
+index 29a3272579c..76c523fd0ba 100644
+--- a/common/avb_verify.c
++++ b/common/avb_verify.c
+@@ -452,6 +452,7 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 	u64 start_offset, start_sector, sectors, residue;
+ 	u8 *tmp_buf;
+ 	size_t io_cnt = 0;
++	AvbIOResult io_ret = AVB_IO_RESULT_OK;
  
- 	ret = avb_ops->read_is_device_unlocked(avb_ops, &unlocked);
--	if (ret != AVB_IO_RESULT_OK)
--		return log_msg_ret("avb lock", -EIO);
-+	if (ret != AVB_IO_RESULT_OK) {
-+		ret = log_msg_ret("avb lock", -EIO);
+ 	if (!partition || !buffer || io_type > IO_WRITE)
+ 		return AVB_IO_RESULT_ERROR_IO;
+@@ -460,8 +461,10 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 	if (!part)
+ 		return AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION;
+ 
+-	if (!part->info.blksz)
+-		return AVB_IO_RESULT_ERROR_IO;
++	if (!part->info.blksz) {
++		io_ret = AVB_IO_RESULT_ERROR_IO;
 +		goto out;
 +	}
  
- 	result = avb_slot_verify(avb_ops,
- 				 requested_partitions,
-@@ -458,9 +460,8 @@ static int run_avb_verification(struct bootflow *bflow)
- 		if (result != AVB_SLOT_VERIFY_RESULT_OK) {
- 			printf("Verification failed, reason: %s\n",
- 			       str_avb_slot_error(result));
--			if (out_data)
--				avb_slot_verify_data_free(out_data);
--			return log_msg_ret("avb verify", -EIO);
-+			ret = log_msg_ret("avb verify", -EIO);
-+			goto out;
- 		}
- 		boot_state = AVB_GREEN;
- 	} else {
-@@ -469,9 +470,8 @@ static int run_avb_verification(struct bootflow *bflow)
- 		    result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION) {
- 			printf("Unlocked verification failed, reason: %s\n",
- 			       str_avb_slot_error(result));
--			if (out_data)
--				avb_slot_verify_data_free(out_data);
--			return log_msg_ret("avb verify unlocked", -EIO);
-+			ret = log_msg_ret("avb verify unlocked", -EIO);
-+			goto out;
- 		}
- 		boot_state = AVB_ORANGE;
- 	}
-@@ -480,23 +480,28 @@ static int run_avb_verification(struct bootflow *bflow)
- 	if (extra_args) {
- 		/* extra_args will be modified after this. This is fine */
- 		ret = avb_append_commandline_arg(bflow, extra_args);
--		if (ret < 0)
--			goto free_out_data;
-+		if (ret < 0) {
-+			ret = log_msg_ret("avb cmdline", ret);
-+			goto out;
-+		}
- 	}
+ 	start_offset = calc_offset(part, offset);
+ 	while (num_bytes) {
+@@ -489,7 +492,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 				if (ret != 1) {
+ 					printf("%s: read error (%ld, %lld)\n",
+ 					       __func__, ret, start_sector);
+-					return AVB_IO_RESULT_ERROR_IO;
++					io_ret = AVB_IO_RESULT_ERROR_IO;
++					goto out;
+ 				}
+ 				/*
+ 				 * if this is not aligned at sector start,
+@@ -506,7 +510,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 				if (ret != 1) {
+ 					printf("%s: read error (%ld, %lld)\n",
+ 					       __func__, ret, start_sector);
+-					return AVB_IO_RESULT_ERROR_IO;
++					io_ret = AVB_IO_RESULT_ERROR_IO;
++					goto out;
+ 				}
+ 				memcpy((void *)tmp_buf +
+ 					start_offset % part->info.blksz,
+@@ -517,7 +522,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 				if (ret != 1) {
+ 					printf("%s: write error (%ld, %lld)\n",
+ 					       __func__, ret, start_sector);
+-					return AVB_IO_RESULT_ERROR_IO;
++					io_ret = AVB_IO_RESULT_ERROR_IO;
++					goto out;
+ 				}
+ 			}
  
- 	if (result == AVB_SLOT_VERIFY_RESULT_OK) {
- 		ret = avb_append_commandline(bflow, out_data->cmdline);
--		if (ret < 0)
--			goto free_out_data;
-+		if (ret < 0) {
-+			ret = log_msg_ret("avb cmdline", ret);
-+			goto out;
-+		}
- 	}
+@@ -543,7 +549,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
  
--	return 0;
-+	ret = 0;
+ 			if (!ret) {
+ 				printf("%s: sector read error\n", __func__);
+-				return AVB_IO_RESULT_ERROR_IO;
++				io_ret = AVB_IO_RESULT_ERROR_IO;
++				goto out;
+ 			}
  
-- free_out_data:
-+ out:
- 	if (out_data)
- 		avb_slot_verify_data_free(out_data);
-+	avb_ops_free(avb_ops);
+ 			io_cnt += ret * part->info.blksz;
+@@ -557,7 +564,9 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+ 	if (io_type == IO_READ && out_num_read)
+ 		*out_num_read = io_cnt;
  
--	return log_msg_ret("avb cmdline", ret);
-+	return ret;
+-	return AVB_IO_RESULT_OK;
++out:
++	free(part);
++	return io_ret;
  }
- #else
- static int run_avb_verification(struct bootflow *bflow)
+ 
+ /**
+@@ -867,12 +876,15 @@ static AvbIOResult get_unique_guid_for_partition(AvbOps *ops,
+ 		return AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION;
+ 
+ 	uuid_size = sizeof(part->info.uuid);
+-	if (uuid_size > guid_buf_size)
++	if (uuid_size > guid_buf_size) {
++		free(part);
+ 		return AVB_IO_RESULT_ERROR_IO;
++	}
+ 
+ 	memcpy(guid_buf, part->info.uuid, uuid_size);
+ 	guid_buf[uuid_size - 1] = 0;
+ 
++	free(part);
+ 	return AVB_IO_RESULT_OK;
+ }
+ 
+@@ -903,6 +915,7 @@ static AvbIOResult get_size_of_partition(AvbOps *ops,
+ 		return AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION;
+ 
+ 	*out_size_num_bytes = part->info.blksz * part->info.size;
++	free(part);
+ 
+ 	return AVB_IO_RESULT_OK;
+ }
 
 -- 
 2.53.0
