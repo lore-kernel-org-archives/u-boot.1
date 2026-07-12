@@ -4,146 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C192C43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 05:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3AE6C43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 05:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA21D8467B;
-	Sun, 12 Jul 2026 07:26:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27EE98467B;
+	Sun, 12 Jul 2026 07:50:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tqTeQyJg";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="a6jI/rDL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66EE2848A1; Sun, 12 Jul 2026 07:26:42 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id AB0BB848A1; Sun, 12 Jul 2026 07:50:47 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 643D1844F6
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 07:26:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD471844F6
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 07:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1783833999; x=1784438799; i=xypron.glpk@gmx.de;
- bh=cE1LGAc1wh6bVaG+X4gzlw43qyfYqD/NSYqvev5cpyA=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=tqTeQyJgYG+kDGyWEpufvvcOtvtr2R8BEjeobpxaDxRhLuQvOI2q2CVk6Hku64zB
- ZnuZz8hszf5J9Y4yjIm/6nh09IL24aOtVadBVvfV538YRYcc6ncWNfpPCPheCp3cv
- o0qxRT2U0U8mLIMOpg1flVvaDBWHXeP9CA6EruaLz+6yvWwVDZ+u0yYmTRCGKhIxC
- b3Pd/MI00RcV6PJ0WI+mgB/Le6qB8Ma96ZTZNR1wQ0d+NipApvFCPOZu0xNhnwWhu
- 4Ui2sbPTkUnlEh3ObDUSojaDXaUETplxqdSvxhJAk8AAQ2HkQFcVC4VoQAlre8x36
- Tyiy/pQR8qQ59zMrDQ==
+ s=s31663417; t=1783835444; x=1784440244; i=xypron.glpk@gmx.de;
+ bh=jwRyY1FDgP/jItqkYU7Tpc6KmuqmoDYT+L5DLhbNrDk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
+ Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ cc:content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=a6jI/rDLViVhgR3F4sk4oqvMIE/VF2E0RbC8cYJobdPW3bC4E0myRpmcx7zS2AvD
+ DasA4DMHeQ5BiRCFrpuO6aacc2uLql5HF1pNI2cCKKokhKT/tiYF77HiXFrQTg8XP
+ fXAuf1zNrV4dn392Mgq0V0oD2leQWDrMbMcaOW1jSjZ/i3JlD4DjJFJ/JOrw5Zrpg
+ 64eabVGJ/XB+1ef3bMbnZobBrPS4Zzbg5PX2NXKrUy7/XYTtHUWQe0TOfWT42XFA0
+ XvGmatrWhcMDny2aq/4o1CapHgKa1v0xs3kbiUZm4+dmW6V+6awx/eE26Ob8bs8oF
+ nhy8+/ZIE3pOWKHu/A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N4z6k-1xARyt1i9E-00yQNr; Sun, 12
- Jul 2026 07:26:39 +0200
-Message-ID: <056cc92b-4c2f-417e-a48c-f15aa9786328@gmx.de>
-Date: Sun, 12 Jul 2026 07:26:32 +0200
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mj8mb-1xEZWw41Vl-00bwGu; Sun, 12
+ Jul 2026 07:50:44 +0200
+Message-ID: <adc8133d-c3ac-42ab-80db-0d1d7f134f0a@gmx.de>
+Date: Sun, 12 Jul 2026 07:50:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 1/2] efi_selftest: free handles on teardown()
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20260626-rev-v3-0-12a0c0fc0965@arm.com>
  <20260626-rev-v3-1-12a0c0fc0965@arm.com>
+ <056cc92b-4c2f-417e-a48c-f15aa9786328@gmx.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260626-rev-v3-1-12a0c0fc0965@arm.com>
+In-Reply-To: <056cc92b-4c2f-417e-a48c-f15aa9786328@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uf3rSb5eMXExgRg+1FwHLr0rELl+1JkZul4tpC4MKxuM9BZU6IQ
- hbnPhkZlwHmHGblTXRna8iqvp7vZPlQnHznAwE7N6+3mdR+al5cTZR28tYktab/TkTfbwy3
- 3sr4wAfOTASKt8E60FmoZm7Bs0cwfzxf/KBTmuZ1q0ZfOyzsy33S38+YHaNq55XeU6RsAAc
- I4wc4ixJ2/drzX3QLe31A==
-UI-OutboundReport: notjunk:1;M01:P0:79f+FcY4IIs=;EUOS/dhUZ/FI+SeqEIe4g9zzWq0
- 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
- eW8H9uB8DiN+7W3+TZRif
+X-Provags-ID: V03:K1:XRJc1Dd+Q92Hd8qKGEfHqbJOjkSCb/yJ8d0weoPQ1JH+JVVjSSh
+ plfwRCJCcfSqQxD8yCr3EFEKKeItjhiqB76vsH6FqozohyEDu8sAlYfU1gr3HoSQD9HLn8k
+ cKuIwIv3aUVQ81qG0VNoWhp443bvCXagY1NUQcWendTtmT1gldWo1XSm862as1EiIBeYMA9
+ 8sbo738U5Iy68eUMjse1A==
+UI-OutboundReport: notjunk:1;M01:P0:CwDnuHcfG0k=;09QHSPpCai9AhEP2Yq0OJbZy72M
+ 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
+ =
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,75 +160,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/26/26 16:47, Vincent Stehl=C3=A9 wrote:
-> In the block device selftest, make the handles pointer global and free i=
-t
-> also in teardown(), to simplify error handling.
+On 7/12/26 07:26, Heinrich Schuchardt wrote:
+> On 6/26/26 16:47, Vincent Stehl=C3=A9 wrote:
+>> In the block device selftest, make the handles pointer global and free =
+it
+>> also in teardown(), to simplify error handling.
+>>
+>> We also need to nullify the pointer after freeing it on the normal path=
+,
+>> to avoid freeing it a second time during teardown().
+>>
+>> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+>> ---
+>> =C2=A0 lib/efi_selftest/efi_selftest_block_device.c | 14 +++++++++++++-
+>> =C2=A0 1 file changed, 13 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/=20
+>> efi_selftest/efi_selftest_block_device.c
+>> index 9c4be834eeb..b5f6f9353cd 100644
+>> --- a/lib/efi_selftest/efi_selftest_block_device.c
+>> +++ b/lib/efi_selftest/efi_selftest_block_device.c
+>> @@ -58,6 +58,9 @@ static const struct compressed_disk_image img =3D=20
+>> EFI_ST_DISK_IMG;
+>> =C2=A0 /* Decompressed disk image */
+>> =C2=A0 static u8 *image;
+>> +/* Handles buffer */
+>> +static efi_handle_t *handles;
+>> +
+>> =C2=A0 /*
+>> =C2=A0=C2=A0 * Reset service of the block IO protocol.
+>> =C2=A0=C2=A0 *
+>> @@ -276,6 +279,15 @@ static int teardown(void)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 return EFI_ST_FAILURE;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (handles) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 r =3D boottime->free_pool(h=
+andles);
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (r !=3D EFI_SUCCESS) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi=
+_st_error("Failed to free handles\n");
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret=
+urn EFI_ST_FAILURE;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0 }
+>> +
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return r;
+>> =C2=A0 }
+>> @@ -303,7 +315,6 @@ static int execute(void)
+>> =C2=A0 {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_status_t ret;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_uintn_t no_handles, i, len;
+>> -=C2=A0=C2=A0=C2=A0 efi_handle_t *handles;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_handle_t handle_partition =3D NULL;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct efi_device_path *dp_partition;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct efi_block_io *block_io_protocol;
+>> @@ -372,6 +383,7 @@ static int execute(void)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret =3D boottime->free_pool(handles);
+>> +=C2=A0=C2=A0=C2=A0 handles =3D NULL;=C2=A0=C2=A0=C2=A0 /* Avoid double=
+ free on teardown(). */
 >=20
-> We also need to nullify the pointer after freeing it on the normal path,
-> to avoid freeing it a second time during teardown().
+> Thank you for fixing the memory leak.
 >=20
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> ---
->   lib/efi_selftest/efi_selftest_block_device.c | 14 +++++++++++++-
->   1 file changed, 13 insertions(+), 1 deletion(-)
+> handles is a static variable. Why do you explicitly set it to NULL?
 >=20
-> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_self=
-test/efi_selftest_block_device.c
-> index 9c4be834eeb..b5f6f9353cd 100644
-> --- a/lib/efi_selftest/efi_selftest_block_device.c
-> +++ b/lib/efi_selftest/efi_selftest_block_device.c
-> @@ -58,6 +58,9 @@ static const struct compressed_disk_image img =3D EFI_=
-ST_DISK_IMG;
->   /* Decompressed disk image */
->   static u8 *image;
->  =20
-> +/* Handles buffer */
-> +static efi_handle_t *handles;
-> +
->   /*
->    * Reset service of the block IO protocol.
->    *
-> @@ -276,6 +279,15 @@ static int teardown(void)
->   			return EFI_ST_FAILURE;
->   		}
->   	}
-> +
-> +	if (handles) {
-> +		r =3D boottime->free_pool(handles);
-> +		if (r !=3D EFI_SUCCESS) {
-> +			efi_st_error("Failed to free handles\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +	}
-> +
->   	return r;
->   }
->  =20
-> @@ -303,7 +315,6 @@ static int execute(void)
->   {
->   	efi_status_t ret;
->   	efi_uintn_t no_handles, i, len;
-> -	efi_handle_t *handles;
->   	efi_handle_t handle_partition =3D NULL;
->   	struct efi_device_path *dp_partition;
->   	struct efi_block_io *block_io_protocol;
-> @@ -372,6 +383,7 @@ static int execute(void)
->   		break;
->   	}
->   	ret =3D boottime->free_pool(handles);
-> +	handles =3D NULL;	/* Avoid double free on teardown(). */
+> Best regards
+>=20
+> Heinrich
 
-Thank you for fixing the memory leak.
+Sorry I misread the patch.
 
-handles is a static variable. Why do you explicitly set it to NULL?
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Best regards
-
-Heinrich
-
->   	if (ret !=3D EFI_SUCCESS) {
->   		efi_st_error("Failed to free pool memory\n");
->   		return EFI_ST_FAILURE;
+>=20
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (ret !=3D EFI_SUCCESS) {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_st_error("Fa=
+iled to free pool memory\n");
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return EFI_ST_FA=
+ILURE;
+>>
 >=20
 
