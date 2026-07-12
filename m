@@ -4,95 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A1A9C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 00:19:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A5CC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 00:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D38C84A6B;
-	Mon, 13 Jul 2026 02:19:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A54E684852;
+	Mon, 13 Jul 2026 02:52:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XMyP+hb6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TMU47qwt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C861484A0F; Mon, 13 Jul 2026 02:19:42 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2EABD8494B; Mon, 13 Jul 2026 02:52:44 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8A5984A0F
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:19:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A865882991
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:52:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-69c600f76ccso1975911a12.0
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:19:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783901980; cv=none;
- d=google.com; s=arc-20260327;
- b=Vl+iFqJKF45jiMwIC9X+MPfYxZBCT7onDsWV7CVgxTU4w4ONXFJvkpluDKUMK3pdMe
- /eFe1OpatWslwPBg941Q3nk9VVHX8VM+fW2OrkirB5v+HYLDALkahTaCIWN0l8FwU+0+
- 8r35QUYIOY9H+CKeR++uizUkTVv13bKt9lYOuQOe93n9VHLKLnc26ycgYGo8PhJG3Bem
- jfp4VY6MuEd/yT7PjRSdL+GihTMVsaqcRWxDMqMfgabcJlPZwSNEbboN0NgXL1UWdPXt
- NT5swsUPE2Bijog1vPPXSTxEiy/WZ4QRP3iCTuSlp01ld+gzMrKvA6JJGR9+pfPss+01
- OvPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Kd/AR0CQCH5JmURaAes/Q/GILeNYD5P8IQX378Zs+kw=;
- fh=RMotW0d5XlV4ufFtnrZdzQ0yk4gZppNtVCUWCpNgShU=;
- b=JxVEdaEpiymo0FgRERbv1KxsyOox+Ky0E5FDcpgcHWjI65T6ckkTDv9RDLrurMQVtO
- LdUaYFBPgQthMKgsJKBTHVZJ2EE1w0NvMcym75/c9Z6zKve3f83zujcMxafSlzV2jAAd
- Z6XPEfs4eIIXp+nw0XBf7ltEYR1gCL7xtHj7TqrNGF9BhZN3KmZuh0s1WDt7K14r3bhA
- YLOKfvHD5akxD4nl3yNwNeAJ2bqHFackyLHiIfJNC14m9bOo81VhaQ6nM+mkwzuDL/+E
- 83cfYs+kA1JyME8wbXjceGnDGnfgzt+NwYCEB7O5GZdXAxsls/fjw3Ad9QMnCx83a+NM
- kO+Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783901980; x=1784506780; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Kd/AR0CQCH5JmURaAes/Q/GILeNYD5P8IQX378Zs+kw=;
- b=XMyP+hb6JzZtJ792+Y8z8Ob6/kGhdiOwhuHB9ZgVB1wG6xh04nZsxBa9zHTpi6j1BK
- gewI0HdxrUayrhdObm1Gyup7t+n0ls0QFmsVsS7O9o3MWEgppDwNqbQ2896jvUx0vCmd
- Os/uS4ZyIIFBBL667uVn9lYHVxwot1e9KU3hM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783901980; x=1784506780;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Kd/AR0CQCH5JmURaAes/Q/GILeNYD5P8IQX378Zs+kw=;
- b=XuYK3Z4rhli20egbZ8FC8ViSQHvQCitPgMOmP9g8b/ggWtCq5UrveOJka4EejFm4e8
- aqIF0KtAVf0io4z5i2HSq1tx2JHnDtcUwcMSg36pOL3zRmHDBMJRVytjIdAvUMlwirUI
- 8S3+9IM3B+hgjmOD+fsvgQ6QItQXWbmbFvoYRioig35qULS2zwFpt3gQiC/9z/1z575z
- dt6MmSdUXo6CmDuywoSavyStc0/I1HfsbXZJ6Ezlv4RC9OG9+bcV3ax2jBkCXWYmFDpm
- dWUyO6qJSdxkr63TAfNz9ztuo+rUzcE/MlcyUpiG3i3pttbo/2uczx3Lgx2AD0dFQuzQ
- dtLg==
-X-Gm-Message-State: AOJu0YxZ70+Ji5PbXE6q67pQGbZfi0s7uP7UO751z6kaAXKK1T1Jfw9k
- MNXCQB+JLvy1gUFCQ+6Y4Qcv3h4NqQhuiNCXzgSmHC4FnJVri8NtlIoCW33RqL5Vj3WllC0m/Xp
- ytAVoqLUA+sdlt4woWF9hgKGfBH4Cbogolya1tWZP
-X-Gm-Gg: AfdE7cm6r19I8Vq15mWmO5+A/SRG1EIGYHEEITb7AC5t0DgLU73vtvTElxNbYXHOv/6
- g93vb8p0mfa9ibBi6OlkIj/9JnSUqzq7m3AdduL+mdz5lRqoB5mox1fwaeJjj7UuHOYaFfINb5X
- VSigG0Y4Zcx82Pf12fuydYcKABuOq8Owes64UKFAnzC6kEIuXOrdhUad9aZIzc3+T49X1ASK+mX
- l01qDPDMbWD3qaYr8FlIdoOlfqmPNypm8u7wG1HrFryxPIAh3wRewgvUqOH1Z7luvuKBA4=
-X-Received: by 2002:a05:6402:3584:b0:697:add3:a274 with SMTP id
- 4fb4d7f45d1cf-69c5efbc522mr3112966a12.15.1783901980455; Sun, 12 Jul 2026
- 17:19:40 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gz3nL6VtGzKv6w;
+ Mon, 13 Jul 2026 02:52:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1783903958;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QXHph85Xoz5nMXDcFA2MZeeNNAhFMzSugjuWi4gA2H0=;
+ b=TMU47qwtBuXO+lToKNytZJQ4NNAdCzkN6MpHMZ3LoYVT4l+m3/YYQUqKj0hP95mVBzxs/9
+ ulrEn56NTF5n83YWUOkDph7XkRG99zmmA8Rh2VlVU662I/Rjmp1+6UBGPPO/RfxFwYFc1v
+ uSJeGBc+Rhfw3UmSAQQaerpa5qmyk+FKMi5Mx58dNc0PlLjf+XrKBRjohOOeqA3H2zDKQr
+ jWDZTNX1mr751zRb904Gt551r4w2k7FTatFbPepsbZs0PtSKjUM20dm70Y0pw/ITLHGE97
+ +T6jMW7DQw9Mdg6VKbtGC10kcbZ1sYOywwWggErJVQeI4fmaOo1HrKKJRhTzJg==
+Message-ID: <669c9f59-d912-43e0-91ad-2b2f83cc7182@mailbox.org>
+Date: Sun, 12 Jul 2026 15:21:53 +0200
 MIME-Version: 1.0
-References: <20260618154750.180675-1-aristo.chen@canonical.com>
- <20260708103452.49277-1-aristo.chen@canonical.com>
- <20260708103452.49277-3-aristo.chen@canonical.com>
-In-Reply-To: <20260708103452.49277-3-aristo.chen@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Jul 2026 18:19:24 -0600
-X-Gm-Features: AUfX_mzKGy2FpDa8sISG7DF2_He4y05Vitx6GXXlNfhqS9rO8Oho5VlYU0i9TYU
-Message-ID: <CAFLszTiaaWr43xNNNmMNDqP9eV+yYfMHTj_T+ZXweBPqD88NSQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] test: spl: check load_simple_fit() rejects an
- oversized data-size
-To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 5/8] usb: eth: Add CDC ECM support
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260711160808.2022242-1-jonas@kwiboo.se>
+ <20260711160808.2022242-6-jonas@kwiboo.se>
+ <2801bed2-d476-4b4b-b531-b182ecc5210b@mailbox.org>
+ <e46068aa-1276-4501-af7e-db841de7e291@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <e46068aa-1276-4501-af7e-db841de7e291@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 004493d251d3961e15d
+X-MBO-RS-META: 6k15egmspszryy3qbb6zcconotfxi4gu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,19 +76,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-08T10:34:47, Aristo Chen <aristo.chen@canonical.com> wrote:
-> test: spl: check load_simple_fit() rejects an oversized data-size
->
-> Add a regression test that builds a FIT with external data, inflates
-> the data-size property far beyond the image and any plausible load
-> region, and confirms that spl_load_simple_fit() returns -EFBIG instead
-> of reading the declared size off the device. Without the bounds check
-> in load_simple_fit() this test overruns memory and crashes; with it the
-> load is rejected cleanly.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
->
-> test/image/spl_load.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 49 insertions(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 7/12/26 11:08 AM, Jonas Karlman wrote:
+> Hi Marek,
+> 
+> On 7/11/2026 9:57 PM, Marek Vasut wrote:
+>> On 7/11/26 6:08 PM, Jonas Karlman wrote:
+>>> Add support for CDC ECM (Communications Device Class, Ethernet Control
+>>> Model) devices.
+>>>
+>>> References:
+>>> - [USBECM12] USB Subclass Specification for Ethernet Control Model 1.2.
+>>> - [USBCDC12] USB Class Definitions for Communications Devices 1.2.
+>>> - [USB20] USB Specification 2.0.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> Is this pulled from Linux or is this written from scratch ?
+> 
+> As stated in the cover letter this driver was written from scratch.
+> 
+>    The driver implementations was created based of the CDC ECM 1.2 and
+>    CDC NCM 1.1 specifications and was tested on a few different USB
+>    Ethernet adapters using ASIX or Realtek IC.
+> At some point I looked and compared to Linux to ensure ordering of e.g.
+> control messages and size limitations where closely matched.
+> 
+> In more detail the NCM driver was first created and tested on AX88179.
+> Later when tested on RTL815x there were some issues, so I also added the
+> ECM variant and tested that on both AX88179 and RTL815x.
+> 
+> The ECM variant is likely enough for U-Boot purposes, however NCM still
+> has some good features such as custom MAC-addresses. So, I included both
+> in this series, with NCM being preferred over ECM due to driver list
+> sorting.
+OK
