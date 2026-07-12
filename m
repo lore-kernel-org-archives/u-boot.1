@@ -4,145 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DF1C43458
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 17:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CB0C43458
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jul 2026 18:20:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F382F848A1;
-	Sun, 12 Jul 2026 19:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F3AF8490A;
+	Sun, 12 Jul 2026 20:20:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=boogiepop@gmx.com header.b="gRdIhDQH";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="MFiiuaSd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FAB9849A9; Sun, 12 Jul 2026 19:53:25 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id E6EA3849A9; Sun, 12 Jul 2026 20:20:44 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 348CE84852
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 19:53:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BD7D84852
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 20:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boogiepop@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1783878774; x=1784483574; i=boogiepop@gmx.com;
- bh=jt+CQE7lhiCDLCn3HCqtXy7Bva9ef8KjkMTCY9V9hv8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=gRdIhDQHayTfnIq5CzpXtALkYPfnxXEpNIW8Lx1YmaPqlWc0QWFI8CGtzDM7clPx
- pru22aGBVwuQBB2zlMePPiLBkgxddf0dLFybDMKUeJXwQIq2wJ7JCnr+LV1ws0f/E
- 27htWTPs7bB+iUEJcnQnl0647OGe1+MAmpJCu0j5aFAiZrKw+jlKt27LEIRolJJ/C
- QKYecyQ/ENkZOQJmSzem9O7ulA+ZgiRCK8FlDic7wimeVxSBxFkb/pMl5FwUkQqwP
- 9Tts7KKovPJ5qDOWbXqs/ODmYgpLc0/06yyoT/gI6aXhKFxWMzDzBsRsg6ALiaKVC
- uW4kutdFbTsqD93H9Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1M3DJl-1wm0EK3Zdd-004oD7; Sun, 12
- Jul 2026 19:52:53 +0200
-Message-ID: <c3aab298-52cb-457b-9e56-c5213e83d4ee@gmx.com>
-Date: Sun, 12 Jul 2026 19:52:52 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hl+L6tm72IAQtsWvUOCh9CxV+aazGoVAnA1U5nMvhtQ5JynTIKbhpEw1wE960JEaa9hkIOXVlyRZ33VrsbnHSorfF6ZpbCUzRi9UwA/kJKFXYQMeILvfxluipz0hUFYRL3bVSFZqijxPwkkZChfnCDkQqd8w7QoC+p2J0Z3N/383QwKXeLZJIgIrzU3iUv2clE+Y1J0BE7Ke/ofKMHysDRKPkc2iVmu0SZ7UDI2XQvsxsd9goJw5D2WgA3iuCsy42hbAWPdwbmdRwuM1NMUKBzUe8GY2tD2h+/Mo7928/O9Q77+ffpoHJb2g7olNVaWnM0lGCBf2hj7y6tk4Uzd2CQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wNKZpWEzf5Rvl211o55eIUIYaJHGNQXlWHBGNJ9P28w=;
+ b=BCY/D5zt3vCkY80X3uyQXPwnaSjXBWSV7RCMbPEZ+fFbMBlFrb9zprfKw1B7JyAXxhvtZvqorLN1wks1ccbxX1uHPIdRtQ2Na0bSL9vTbKTsLPAisyn2m4Mp9t3sFsm6Pt5UR/ROCuzamhEr2Y2fMsk5zr/nIQd6NV/rub4/KMRcyDuqe72tKVwaRfTp/DntvoIGhoR6xOlZiuRmHngc60YfZYzKByt8fDpF0rxCiQryPfc8vczUIqiF5aQYZV/VY/IQ4RJ5AX+uRDzUpZ+IP2uQwkMvYNBGZlkKqhbkbHaNYZhs4/5CTo5EdxLVGP2hfEL+F4W+FVSIgyxwmZ6XFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wNKZpWEzf5Rvl211o55eIUIYaJHGNQXlWHBGNJ9P28w=;
+ b=MFiiuaSd1mRbppEvKdMveM6FRUaa4BJebzp8h0MYKNnf8zapp9zioQzeXvlVCkU1z1Is4g+HKPW36C0dRbA/xfJhvKt6LKLhAZxXT0YCMAoVW9K4LWctXBgkAyQOGlH+LPrFyi+UfyupZAMDaCGhEBdPOVT8M6DmqABMzTATCcFEgnEUYuWY7vwMpkD9L1E1hm9Hi37p2FGU7S1C40v1vWrg42YpZWeoI9iGpuATfBHqf/gvsoWdQJ5Sa322RVVT8Px8vtoS+aA/LEMwsS/iS1S88k/SkedbzqQJ/JSFoWasGCqdB2H4HN/JJMNPQqpuTNAqTxZPNn6bfFDY9DCWHw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SJ2PR03MB7473.namprd03.prod.outlook.com (2603:10b6:a03:554::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.19; Sun, 12 Jul
+ 2026 18:20:37 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0181.019; Sun, 12 Jul 2026
+ 18:20:37 +0000
+Message-ID: <4bcd0013-787e-4b9d-8641-547e1e714225@altera.com>
+Date: Sun, 12 Jul 2026 23:50:27 +0530
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] mtd: nand: raw: rockchip_nfc: fix ecc setup
-To: Johan Jonker <jbx6244@gmail.com>, u-boot@0leil.net
-Cc: kever.yang@rock-chips.com, sjg@chromium.org,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- trini@konsulko.com, u-boot@lists.denx.de
-References: <c386c38c-4abf-4ac6-b9a1-a007438c0c5d@gmail.com>
+Subject: Re: [PATCH 5/5] mmc: fix mmc_deinit regression when card is at 1.8V
+ signaling
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Jens Wiklander <jenswi@kernel.org>,
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
+ Yanir Levin <yanir.levin@tandemg.com>, Eran Moshe
+ <emoshe@gsitechnology.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Tanmay Kathpalia <tanmay.kathpalia@gmail.com>,
+ Jimmy Durand Wesolowski <jimmy.wesolowski@mobileye.com>,
+ Iulian Banaga <iulianeugen.banaga@mobileye.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260712-mmc-fix-v1-0-99a1136bbe54@nxp.com>
+ <20260712-mmc-fix-v1-5-99a1136bbe54@nxp.com>
 Content-Language: en-US
-From: boogie <boogiepop@gmx.com>
-In-Reply-To: <c386c38c-4abf-4ac6-b9a1-a007438c0c5d@gmail.com>
+From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+In-Reply-To: <20260712-mmc-fix-v1-5-99a1136bbe54@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:I4b5Pp11kw0BqWRCP6DBBuaPZUUFCB7JFXT8cQrO1pmAZw1AzRH
- KQVtvdr+Q4n9kK61OtgQ9O7l/hjI8iMT8KW49Do34GHfKU9IpKstV3bRb8QTYtJWrb5j9V3
- xyPvYCkBUoUvoCYkq7SozEZV+EeWqyZaNqiVhqxMTpgcDDThKqK4KaWJFGnCF7LPGvEBIoY
- rMKX1bZU6fcfy9SRSGtiw==
-UI-OutboundReport: notjunk:1;M01:P0:5lXgKdqOsWU=;QfHhvcHCjOBYTWH3lC8SR0AKnEx
- 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
- z0UB8kEbRCnjl49lwEoTHaFx8JXtZz
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA5P287CA0069.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:1b3::17) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SJ2PR03MB7473:EE_
+X-MS-Office365-Filtering-Correlation-Id: 33e80f37-9368-4126-a444-08dee042452f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|23010399003|366016|1800799024|18002099003|22082099003|56012099006|11063799006|6133799003|4143699003|55112099003;
+X-Microsoft-Antispam-Message-Info: fUL6EHHg7usCx+xMVDQgk6yy65TwqC+NVp1rROwn8gJiu9EBwruzzZV7u7McwrhG4KYh3hMHop39tAfxQ9RuKSkDaeWm8cyjbudMjWFB8HvzYyMxmrScrYx0dWGOqtYIG4Q7Qwldu+EBw5chbSGAOd1GYU0SgBKnKPQ7DsjY/CbZb9wYCO/aM/ISpqOD4rLNGaf4tr5bLTX6majy16P5nAJtzGb7wOkg+E22ydVuQrs+jzhYEgnjAOpkquT4bIMqlX1/g5j5P3CgK5fp8umMQiP1CRzJkO0JDx0S3LC/tRxZ/3j7r1/z0HUOtxsa7OK3wmrDDYw7bP1DLAxqXAzjBS+CdUTCzLo9tvFwuJrPBmRaxQuGl+k15B3JRa8bZnhA0MH3XjyyRFDE302oAArGVcvzsJ47bWhsBHKmVA1zdZEehBTvJPxJZs6xZsa5y2ihsjNTZS7ASQcC8IRFu2Bi4ICJOci5TNBK3s6ge4/tK5L2bmXmO1O8jXgbtCsEcSVPKP8hgdWny2KCa1MyMSWjgokezyyOXEp+mFfpjsHEmYMSBx4pkTArCW9dL59o6N6COQRidrCKYZmkppz9gSUJQW4Fd4PkRVcIOkcCis8QXvJ6fPntH0Cp2pK6d9chHxfcl2GXpoK7GOY5sMZHKwM0rdMK7XKM8RR3SladCJ1gRgE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(23010399003)(366016)(1800799024)(18002099003)(22082099003)(56012099006)(11063799006)(6133799003)(4143699003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NWp1TUtLVVhyTUZHRFlVVVdCS2xWVG4za1JZVlJCN1NGNVdIMkdXREFDVnpQ?=
+ =?utf-8?B?THF3cG9tREgxVHoydnNtS1U1OENPSnh3M3QvYVB4REhyK1pBWjZsWXVwakJD?=
+ =?utf-8?B?dkMxcWRodFdWM0JyU01sOTJHa2lXZUtwNnE4Z0NXNW4xbWlvTzdDSGhFWFlB?=
+ =?utf-8?B?WWo2dzFhVWdBNGRSWnZidkdjdDcvMElXTEFHM0gxSjBkb0JTVjBkSW55bk95?=
+ =?utf-8?B?dzhOQkp6UnlOVEw0elB6M1E2NTRlZVRyelZmUFRPSFEvK3lteXdOdllSNG5q?=
+ =?utf-8?B?V1k5S0tJTEhCdnZMRFNYUWtxZ0VCdUYwQUJVc0swVUVtNGd5REp4TldmNU5i?=
+ =?utf-8?B?MU5iV2JMTXhHWXkwSm05WVpWZyt0WVpmbUNPb0czN3NDWmJtVjVKYitzc01k?=
+ =?utf-8?B?TkFMUXlsMTJOUE54a01jbUNmdEQ0cTN1NmFmOUFnOEdmTlozazRSVHNsVVVC?=
+ =?utf-8?B?NnE3ZkNOOWQybTd2MXNZRkNXckdsdk9hS2RTaDJpZnRDenVrTHdTNVptUW0x?=
+ =?utf-8?B?eElQaGdLbnpPZ3lqRHJJbmMydlcvYjlvb3B6WWFEb3VlKzYzL1hRRzJjWFc3?=
+ =?utf-8?B?cG9wUy9RNDNodUs0NDdGQXYydXE5ZDZFYTNxYUUzNlNVTWhlY290YTFtbE5B?=
+ =?utf-8?B?ZHBwdDNPVXpXWjVwZUhoTGN3RlRBUXNpSHhsc1laY2RvUkhmamRob3kzUGNt?=
+ =?utf-8?B?TmJ3TXIweEVYcGpIWWhNMnM2TXc0ZFFNTTQ2N0RtNXlpTXIvaExEb1A2REVF?=
+ =?utf-8?B?YjNjcXdGNGNrdlk2VERGVFU3L0ovUkNmZFlLcUV1NGZ5T3Z3OVFuUHp4bytR?=
+ =?utf-8?B?aHBnbC9PRnFlcGxKMjlEdjNRUURzQkVWaml0dkxUOTJORDBOYWFPWVRXMVhF?=
+ =?utf-8?B?aFNpcDdWM09ZRUFMSFEvU0czYTU5ZDM1d3o5WkErMFpBOUhLVXgwVDRwNEF1?=
+ =?utf-8?B?TFRFM3pqQm9KV1AyVVhsVFAyWWY5TW9LOEdlSFFOVkYxMnQxWnFUUEh1WW9m?=
+ =?utf-8?B?UzVNVGhVTG13R2x3ZzQyK1VZUmlrL0xSR3R4dWpCZ3BCNFc3SnBLRkhPVFll?=
+ =?utf-8?B?UDBqU3gyemE1RGJuL05oU094bHlUUnlOdzZoRlhmbXcxZE1VdW56N3JSazcv?=
+ =?utf-8?B?SkgrV2h5NEJEcnFwSlNVUENpMHpPTkJndnhQM1M2MTNvd1BNMnNGUUVJdEJW?=
+ =?utf-8?B?NHNORm82N2JocHphd1g1Q3hXa1JINm8wdTZ6NHZ5WVVJRUhxTUlKTGgwZTBK?=
+ =?utf-8?B?S2c1VitpRDJyc3NpYjBuVUdJRG5ycXByZmFUVnBMa0FrMkttYWNkZmlWTXZO?=
+ =?utf-8?B?Q09MNVJVaVdQSDhXU2xqTjI5a0ZxQVB2cW1BYmdrYlF3VytxK255ekV1T3Ex?=
+ =?utf-8?B?aTdLZVBNbkFUMXlXZTBIUWREQm03bW1QZzlCR2VSQTBvbEpZN09ManhxeFM4?=
+ =?utf-8?B?K1hzVXlJV1lVM3phQkZPZjA2cDJ3NGVsZ3lMNXZVK3IrYm9oUjREb09kY2tH?=
+ =?utf-8?B?SmhwNDFydjVUeHE0Y1ZkQ1R6Ymh6T1VJVkZYNGNzc29adXpvdktDcFQ0WVcz?=
+ =?utf-8?B?M2Nia0w3OGRpNEVmdmdLM3A2STdhMGMvYTdMem1Na0UwWkMvWVowT1JHcGhD?=
+ =?utf-8?B?RlVZODZPWko1eHFjb3hVMjlPR3JHZUxDcldpR0F2bS9ZZEc3eDQ0OU1vV1JJ?=
+ =?utf-8?B?MUZhY0V1eDJOWU9UbHlQQk96MEpHZHd3VytDdUE1M2svYXZJbVhpQ1c3ckJH?=
+ =?utf-8?B?aXQrdzRLUkdqTzZkQmpzanVFbitVY3hKOXhuMlBtNThnUjBIcW1XbmJhTDBw?=
+ =?utf-8?B?MURNYjduMW9vREV3VlcxUyt4SnRaRFpvMHlMc1ZDYVh6RkdENFNZNVc1RTlh?=
+ =?utf-8?B?WTJ3MTRMZkh5T1FxYmtjYy9oWFlKUDc4V0ZpMU9MeGFXWU5OTVNUUEQ0ODZl?=
+ =?utf-8?B?NjFpZjc1K0NwWjVtbUNMWlZTeCtscjBkTlZMSWxnYVFtaFhjOWNaNmliQWZL?=
+ =?utf-8?B?Sy9ib1d5b3dJTUgvOW5qSmg4ZHV0K0dzNkFldTc4N1NabXljUEdZWFc1VnVM?=
+ =?utf-8?B?aWJuV1NpQ0U0clFjV0dkcnVYR04xSGU2VmhFWjA0dFlKa011QTNuRVU3Znll?=
+ =?utf-8?B?ZUpCSSswRXJBdTgzZFh2Y3pTWElSNDF0T2NCZTl0bERGMkFydEdrcmNSTDds?=
+ =?utf-8?B?aE4wM2U0M05MbXhWLy9iSVYrSVgxcFc5aks0L1BSV09iZEtBd3M1SklURzh5?=
+ =?utf-8?B?TWQrazZKTkJFSjhmT2xUK1ZGS1JhRFZiVjkxeGVNenJIYzJja0Z0QlNFN1dL?=
+ =?utf-8?B?OStVbmtDZW1ZOWo1Y0JTNFhWYXJrQnFtUFFuWUE2YmNFNUNKZlg2a2pIQXdp?=
+ =?utf-8?Q?5Pv/nCxXoDcq5qiA=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33e80f37-9368-4126-a444-08dee042452f
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2026 18:20:37.3000 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v+IKCkBxHGNgWNYchufiF13FhturE/5j/GrH0PSyjO8aTn2jOeNYvLjhSoiy7pRj43ipi2tEv+7zqDX3XnSsl2p8o8YrC345OSFGuDtR0OA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7473
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,97 +160,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Hi Peng,
 
-Thanks for the patch.
+A few comments.
 
-This also fixes the bug, where you have an UBI layout spanning multiple=20
-chips. First scan after the creation will work fine, but after the=20
-device restart it ubi wont work anymore because the 2nd chip's first n=20
-boot blocks are written in different layout.
 
-example nand config with 2 chip selects
+On 7/12/2026 6:37 PM, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> Commit 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without
+> power cycle") added detection of cards already operating at 1.8V
+> signaling via mmc_sd_card_using_v18(). This correctly handles the
+> warm-reboot scenario in mmc_startup(), but causes a regression in
+> mmc_deinit().
+>
+> The problem: mmc_deinit() strips ALL UHS capabilities from the card
+> caps and calls sd_select_mode_and_width() to downgrade the card before
+> kernel handoff. But sd_select_mode_and_width() now checks
+> mmc_sd_card_using_v18(), sees the card is at 1.8V, sets uhs_en=true,
+> and tries to use UHS modes -- which were just stripped from the caps.
 
-nand@0 {
-	reg =3D <0>, <2>;
-	label =3D "rk-nand-0";
-	nand-bus-width =3D <8>;
-	nand-ecc-mode =3D "hw";
-	nand-ecc-step-size =3D <1024>;
-	nand-ecc-strength =3D <40>;
-	nand-is-boot-medium;
-	rockchip,boot-blks =3D <8>;
-	rockchip,boot-ecc-strength =3D <24>;
-}
+Even before 906ee6785b1c, sd_select_mode_and_width() computed:
+bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false;
+For a card that has switched to 1.8V, OCR_S18R (S18A) is already set in
+mmc->ocr, so uhs_en was already true in this path before the commit.
+So sd_select_mode_and_width() did not newly set uhs_en=true because
+of this commit; that was already the case. Could you reword the
+attribution to reflect that?
 
-Tested-by: H=C3=BCseyin BIYIK <boogiepop@gmx.com>
+> The fallback modes (SD_HS, MMC_LEGACY) all fail because they require
+> 3.3V signaling, which the card cannot revert to without a power cycle.
 
-On 7/12/26 17:56, Johan Jonker wrote:
-> The Rockchip boot ROM only checks for nand chip 0 and with
-> reduced ecc strength. Currently only the read page functions
-> have a condition check added. Fix by adding the same condition
-> to all read and write page functions.
->=20
-> The NAND_IS_BOOT_MEDIUM option was introduced more recently
-> then this driver. Use it to behave identical with the Linux
-> driver.
->=20
-> Fixes: b12dc5d6fa76 ("mtd: nand: NFC drivers for RK3308, RK2928 and othe=
-rs")
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+I think CMD6 switches speed over whatever signaling is already active,
+so this doesn't necessarily fail outright - it likely leaves the card
+in an invalid/inconsistent state (a 3.3V speed mode while signaling at
+1.8V). Might be worth softening "all fail" to that wording, but I'll
+leave it to your judgment/testing.
+
+>
+> Per SD Physical Layer Specification: "Once the card enters 1.8V
+> signaling mode, the card cannot be switched to 3.3V signaling without
+> power cycle. If the card receives CMD0, card returns to Idle state but
+> still works with SDR12 timing."
+>
+> Fix this by preserving UHS_SDR12 in the filtered caps when the card is
+> operating at 1.8V. SDR12 is the minimum valid UHS-I mode and is always
+> available at 1.8V signaling per the SD specification.
+>
+> Fixes: 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without power cycle")
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
->   drivers/mtd/nand/raw/rockchip_nfc.c | 14 ++++++++------
->   1 file changed, 8 insertions(+), 6 deletions(-)
->=20
-> diff --git a/drivers/mtd/nand/raw/rockchip_nfc.c b/drivers/mtd/nand/raw/=
-rockchip_nfc.c
-> index ea8e67d1a23e..e788fda22a95 100644
-> --- a/drivers/mtd/nand/raw/rockchip_nfc.c
-> +++ b/drivers/mtd/nand/raw/rockchip_nfc.c
-> @@ -440,7 +440,8 @@ static int rk_nfc_write_page_raw(struct mtd_info *mt=
-d,
->   	int i, pages_per_blk;
->  =20
->   	pages_per_blk =3D mtd->erasesize / mtd->writesize;
-> -	if ((page < (pages_per_blk * rknand->boot_blks)) &&
-> +	if ((chip->options & NAND_IS_BOOT_MEDIUM) &&
-> +	    (page < (pages_per_blk * rknand->boot_blks)) &&
->   	    rknand->boot_ecc !=3D ecc->strength) {
->   		/*
->   		 * There's currently no method to notify the MTD framework that
-> @@ -560,7 +561,8 @@ static int rk_nfc_write_page_hwecc(struct mtd_info *=
-mtd,
->   	 *
->   	 * Configure the ECC algorithm supported by the boot ROM.
->   	 */
-> -	if (page < (pages_per_blk * rknand->boot_blks)) {
-> +	if ((chip->options & NAND_IS_BOOT_MEDIUM) &&
-> +	    (page < (pages_per_blk * rknand->boot_blks))) {
->   		boot_rom_mode =3D 1;
->   		if (rknand->boot_ecc !=3D ecc->strength)
->   			rk_nfc_hw_ecc_setup(chip, rknand->boot_ecc);
-> @@ -624,8 +626,8 @@ static int rk_nfc_read_page_raw(struct mtd_info *mtd=
-,
->   	int i, pages_per_blk;
->  =20
->   	pages_per_blk =3D mtd->erasesize / mtd->writesize;
-> -	if ((page < (pages_per_blk * rknand->boot_blks)) &&
-> -	    nfc->selected_bank =3D=3D 0 &&
-> +	if ((chip->options & NAND_IS_BOOT_MEDIUM) &&
-> +	    (page < (pages_per_blk * rknand->boot_blks)) &&
->   	    rknand->boot_ecc !=3D ecc->strength) {
->   		/*
->   		 * There's currently no method to notify the MTD framework that
-> @@ -700,8 +702,8 @@ static int rk_nfc_read_page_hwecc(struct mtd_info *m=
-td,
->   	 * are used by the boot ROM.
->   	 * Configure the ECC algorithm supported by the boot ROM.
->   	 */
-> -	if (page < (pages_per_blk * rknand->boot_blks) &&
-> -	    nfc->selected_bank =3D=3D 0) {
-> +	if ((chip->options & NAND_IS_BOOT_MEDIUM) &&
-> +	    (page < (pages_per_blk * rknand->boot_blks))) {
->   		boot_rom_mode =3D 1;
->   		if (rknand->boot_ecc !=3D ecc->strength)
->   			rk_nfc_hw_ecc_setup(chip, rknand->boot_ecc);
+>   drivers/mmc/mmc.c | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+>
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index 5fd12d21f92..809d7b6b578 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -3178,6 +3178,17 @@ int mmc_deinit(struct mmc *mmc)
+>   			  MMC_CAP(UHS_SDR50) | MMC_CAP(UHS_DDR50) |
+>   			  MMC_CAP(UHS_SDR104));
+>   
+> +#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+> +		/*
+> +		 * Per SD spec, once a card enters 1.8V signaling it
+> +		 * cannot revert to 3.3V without a power cycle.
+> +		 * If the card is operating at 1.8V, keep UHS_SDR12
+> +		 * as the minimum fallback mode.
+> +		 */
+> +		if (mmc_sd_card_using_v18(mmc))
+> +			caps_filtered |= MMC_CAP(UHS_SDR12);
+> +#endif
+> +
+>   		return sd_select_mode_and_width(mmc, caps_filtered);
+>   	} else {
+>   		caps_filtered = mmc->card_caps &
+
+Cleaner to decide the mask up front instead of stripping then adding
+back, and reuse UHS_CAPS instead of re-listing the bits:
+     if (IS_SD(mmc)) {
+         u32 uhs_mask = UHS_CAPS;
+
+#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+         /*
+          * Per SD spec, once a card enters 1.8V signaling it cannot
+          * revert to 3.3V without a power cycle. If the card is operating
+          * at 1.8V, keep UHS_SDR12 as the minimum fallback mode so the
+          * card is left in a consistent (1.8V) state at a low, safe speed.
+          */
+         if (mmc_sd_card_using_v18(mmc))
+             uhs_mask &= ~MMC_CAP(UHS_SDR12);
+#endif
+
+         caps_filtered = mmc->card_caps & ~uhs_mask;
+
+Regards,
+Tanmay
 
