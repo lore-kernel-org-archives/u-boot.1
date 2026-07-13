@@ -4,64 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC2BC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E68C5C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:11:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DB2384C2D;
-	Mon, 13 Jul 2026 16:07:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 4082D84BC5;
+	Mon, 13 Jul 2026 16:11:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="weWzzNdz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WHryvXi6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D307E84C39; Mon, 13 Jul 2026 16:07:18 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AB5AD84BD8; Mon, 13 Jul 2026 16:11:31 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 128C584B8D
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:07:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5a7b=FI=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1783951635;
- bh=Hpxb6ZuT6xxSynofxQA+3uplwc79BIArhP8FTNRJ08c=;
- b=weWzzNdzZwH5Z+0ywYGmaX4MJoJSjq2ihG0lLE2+bLHNJ1VFa3x3xn6nCGDsxz3xiLKbxg+QF
- cE0K338XgfL4h0Cp3tEX7WiDuiM71NQ0xfGDPJPoau+doUd3JkyhK4v1NzOxppQUh3y0uw0EJb1
- gBge7/ofQ+W382o4TIkV10BtplnbDlpADGTnplde9FjKUxqalvNGhu3Bqm4US1p3XzUcwNr6StJ
- j5Iu6q2+kWNfctZ90BRdYpZO6jIubUeu0kujSw0XjfR/yArbAeu7/t6cabI66vh0b2u6L+5U/6V
- qc3OQkxvcUNSy66R2k0LdlUwr9p04YX8x9qQh1MuTTPw==
-X-Forward-Email-ID: 6a54f10edd7e85e8e8c0ca98
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.10.5
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <99a50a6c-a731-443d-a196-4944d15c8245@kwiboo.se>
-Date: Mon, 13 Jul 2026 16:07:06 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 686DB84A5D
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:11:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-69c5eb6dfd3so3321279a12.3
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:11:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783951889; cv=none;
+ d=google.com; s=arc-20260327;
+ b=HXBDVtRsKGV10HXx7MJGAtLK+hnhZ6N7eI/NNZig70V+kAnsvz45jm2nxJr13755L0
+ ALcIrCzkD0VMUhzNbt8+A/WQ6UgNX7oBakUWKJ9sTq6h4nA2FDcxIPhuUjdEZ7PrYlGn
+ 6Aa2pu04KnSbIg48lZgc0261ZUKr6Ov9fd5CCMhoypYnb4Fdn+cB3NRHQPhe+9k4qgbo
+ JY45UHSokapn4/oxF5N4kGwwrsTELHIVa/nTgYGvc/X6yKD+ANDgofgdyEN6kd+PlTn7
+ 1zm1+j5M8SUvJLqF5ZEONTUE3X1TNDbO7eS62nvoNJVZyBqPmCZMMhLuGUmTGbZ0zpTv
+ oCeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=bXqOHH9+Nde5GoUHc7XT08q4QbO2RmEFBqSaduZ6H1g=;
+ fh=FC4AFx0LQh+WPMrQRVHzHfQnZ30zeOzn1zK++7eY8+w=;
+ b=qmu5SgTiB5FLBDOjb0H+qwKEnRA1fU/cbQjJwMVG59PcLZ/RzQ/iDigq+G0R/o3CEI
+ s3+dWi7S1bDP0faNInrp5yKolUh9pbpi/8XPDblbwDwz8PzOs4EAtAZisRIa22GmarMu
+ pOjypCXmSEG8mUrxt4LHNEf+lm0/fhw87YObesqvy0FwZ0obGcqKCDW/Fp74m1lyWLT0
+ Qv9LqF1dPanvR2iWq1UssB7fCkLYom4uMHCZPziY94DNUP/+nforlysTLWqNnn1Gx+rL
+ tZ6O7zw1L3eMcIa12jXt9ey2ERonJGkKT9k0iLXuPU1ZC4Dm4AwDi9FMHE/XM3UhWk/h
+ 5DTg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1783951889; x=1784556689; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=bXqOHH9+Nde5GoUHc7XT08q4QbO2RmEFBqSaduZ6H1g=;
+ b=WHryvXi6xEnPBOQacT6qVek2BVHQ8/jPQ9Lt7L7ipnBm+pgppKF/1oAXqD4JRrO4+0
+ dAP7dAAthePDRYhV7qoF+00gDBN9mTmPx/+YvtPCIjZwekLajh8rmRi8DWwiydecCSFf
+ p1AavIPZsevhPGQlHklfWJTLe6bn0Zm/vQjwo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783951889; x=1784556689;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=bXqOHH9+Nde5GoUHc7XT08q4QbO2RmEFBqSaduZ6H1g=;
+ b=aDTSxWbBILrg7BbYKoD2c29bupfr3DUE4GYf2jTk8V6DC8mBnPpNbghbwFN3fnCaL/
+ XZ9bOn7oAyaiC+476+RuizawX51KHRjuY7zGS9VcmkLdzi7IHDwZD4BPsdbdHJYgnFRY
+ uaAhpFxGbnUogMgBEQprMaucLjOUE/eu5MceETA5ebnMaBSg4IjLjNgINhxFJ28abvs7
+ xN4VCm0KmR9qhu9I1t4v6q8KZAHL5qCid3bwjYBAa1OGDdh2wUs9ME5S+LblouI3n9+D
+ 7YXz6aEiTZs24cgCWvm4PZMECDuKz5nXfPzV2zWYoMp2GjtL5y9BPz7Lcvc0hdo9hR0F
+ vkOw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpQV1wEUNomyzlvo8j2BCulRMIPz1/GGk6DqHlQsfxNOS1iTS1SsdQ7wvjYceP2FT/x9TWBRnk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6r4W2qagoxFpLLlEBsWKu2IceEDK2Gn2a0u2CkY9Dqp88Bef5
+ opzWeW+vBWygfbDauS3v7n7q0h6SHVeIgcKvmIL1TMSczh8vFzH9njMU+xzZNFdVyB7eTLwOKVf
+ 95ZhBJK4KPlWepoJJZbESqY0WU9jZF3cf1FEYwcg/Yw6H6Zw8CJ7loJMA
+X-Gm-Gg: AfdE7ckndsvyw60jlVXohZf9gGBiaBiIJIvrtX0JgqCnnf88j51slmaCDmv4C5q1svA
+ COQwS7eljvdNHC8rdKaF9bxsyPP660HWbzeRXWqqvZQrwflXeIxQpLd1jUFROcNeveHttjN7Ign
+ S196Xmbx1LQgt2FObhtc5OM6uU/WODqTNkNq+sNiFwjjBroG/oSLaJvtdp/Ri2KRyBgsg2PrlZg
+ kjvNiDSAALSXP+wVu7vXUQHU79U/gbl96mjqX4H6zgyMlZG8Yn09FDrB3+Pfjblec638mc=
+X-Received: by 2002:a05:6402:3548:b0:66e:abe5:ab22 with SMTP id
+ 4fb4d7f45d1cf-69c5f0babd2mr3902950a12.5.1783951888823; Mon, 13 Jul 2026
+ 07:11:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] rockchip: fix boot from SDMMC on RK3576
-To: Alexey Charkov <alchark@flipper.net>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
- <b09297f9-f22d-493a-974f-47749955e532@kwiboo.se>
- <CAKTNdwFWMKoA3fkXUWXJYJSDROHhrqbPbJ3RTCjvnOAF7UCfQw@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAKTNdwFWMKoA3fkXUWXJYJSDROHhrqbPbJ3RTCjvnOAF7UCfQw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <DJV8L3WDJM4Y.1DD4YDH3JEKK9@ti.com>
+In-Reply-To: <DJV8L3WDJM4Y.1DD4YDH3JEKK9@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 13 Jul 2026 08:11:16 -0600
+X-Gm-Features: AUfX_myYnFJCMddhlOziaaScQPDXXOVmSA7Uir2jQX2lX9BpCSyOw7vWF6feUWk
+Message-ID: <CAFLszTgcORCdBtLuGrsToxV_o8ZcqvOOb1WZ=4jCtXWvmYSwHw@mail.gmail.com>
+Subject: Re: Proposed k3-binman.dtsi and k3-binman-capsule.dtsi cleanup
+To: Randolph Sapp <rs@ti.com>
+Cc: trini@konsulko.com, anshuld@ti.com, bb@ti.com, afd@ti.com, nm@ti.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,189 +109,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hi Randolph,
 
-On 7/13/2026 2:47 PM, Alexey Charkov wrote:
-> On Mon, Jul 13, 2026 at 2:44 PM Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Alexey,
->>
->> On 7/13/2026 12:02 PM, Alexey Charkov wrote:
->>> This aims to upstream Jonas Karlman's long-standing patch series fixing
->>> the boot from SDMMC on RK3576, which requires a hotfix to the boot ROM's
->>> global state area before any SDMMC reads are initiated to avoid clobbing
->>> the ROM's state and breaking the boot process.
->>>
->>> The preparatory patches for the image tools are submitted verbatim from
->>> Jonas' version, while the "boost" code doing the actual hotfix is
->>> converted from using a pre-built tiny binary to a from-source build using
->>> the existing U-Boot build system.
->>
->> Thanks for re-sending this, this should likely have been labeled v2 and
->> there are review comments on my original series [1] that should be
->> addressed.
->>
->> I was planning on sending a v2 of the preparation series now that we
->> once again have an active maintainer for Rockchip, but unsure how to
->> handle that now :-)
->>
->> [1] https://patch.msgid.link/20250129223641.1888833-1-jonas@kwiboo.se/
-> 
-> Oops, here I am again, missing things already reviewed on the ML. My
-> changes, though, are only concerning the very last patch in the series
-> (which hadn't been sent out back then), and I haven't touched the
-> other code in any way.
+On Fri, 10 Jul 2026 at 16:20, Randolph Sapp <rs@ti.com> wrote:
+>
+> Hello,
+>
+> We've got a device that's making it's way upstream "AM62Lx" that will break the
+> current assumption in k3-binman.dtsi that specific binaries should or should not
+> be produced based on the selected *architecture*.
+>
+> Right now I've seen we're just adding a platform specific "*-binman.dtsi" to get
+> around that, but realistically speaking it's not defining anything *new*.
+>
+> I've got 2 ideas on how to clean this up a little bit. Wondering if this is
+> worth doing and if so, which way we'll want to go.
+>
+> ---
+>
+> 1. New Kconfig options
+>
+> I've seen that sunxi-u-boot.dtsi has a nice Kconfig parameter for their binary
+> definitions. A pattern that rockchip-u-boot.dtsi has adopted mostly (with one
+> exception that's still checking the compilation architecture).
+>
+> I like this pattern. I think it's very clear that none of the binman definitions
+> are actually architecture specific, it's just a byproduct of the specific
+> device's boot-flow.
+>
+> We could easily replicate this with a TI_K3_TIBOOT, TI_K3_TISPL, and TI_K3_UBOOT
+> (or similarly named) Kconfig options to remove both the proposed platform
+> specific binman.dtsi and the current k3-binman-capsule-r5.dtsi in one go.
+>
+> It wouldn't require touching that many files, and we can keep a single clean
+> include at the top of the u-boot.dtsi files. It'll also clean up the current
+> conditional includes used for EFI capsule support.
+>
+> ---
+>
+> 2. Reuse existing Kconfig options
+>
+> Almost every K3 platform supporting capsules already has an ifdef for the A53
+> and R5 target platform variants in their corresponding u-boot.dtsi. We could
+> reuse that pattern and simply split the current k3-binman.dtsi into two parts.
+>
+> This would be a little weird if we kept the r5 naming convention for the files
+> though, as the new platform doesn't have an r5 involved in the boot process. I
+> kind of want to use "primary" and "secondary" naming since the split would
+> appear to be arbitrary without this whole explanation.
+>
+> This also means we'll have to add this pattern to any platform's u-boot.dtsi
+> that wasn't already supporting capsules. It'll result in an immediate line count
+> increase across multiple files and a rather messy diff.
+>
+> ---
+>
+> Curious what opinions people have before I start shuffling files on my end.
 
-Hehe, no worries, I was planning on trying to get an updated version
-(without rk3576 parts) out later this week. As stated on IRC [3], I was
-planing to first focus on TPL refactoring and a few RK35xx clock fixes.
+Option 1 seems much better to me. The real problem is that
+CONFIG_ARM64 is being used as a proxy for 'which images does this
+build produce', and this proxy is breaking down. So the fix is to make
+the condition say what it means.
 
-> Would you like to give the mkimage-related patches another go then,
-> and then we bring in the boost.bin changes on top? I'm also happy to
-> help incorporating Quentin's feedback if you'd like, although I don't
-> know if that enters "too many cooks" territory :)
+A few suggestions:
 
-I can try to get the mkimage related patches another go later this week.
-Have some other improvements/fixes I noticed while playing around with
-other SoCs, or that where not ready when initial series was sent.
+- Name the options after the artefacts rather than the boot stage,
+e.g. TI_K3_BINMAN_TIBOOT3 / _TISPL / _UBOOT, since 'tiboot3.bin' etc.
+are the things being gated. Whatever the spelling, the option should
+read as "this build produces this image".
 
-However, I think the boost patch you included (without mkimage parts)
-could be sent as a standalone patch. The resulting .bin-file should work
-as a replacement for the vendor boost blob.
+- Make them hidden options (no prompt), selected by the SoC/target
+Kconfig entries. Boards should not be able to choose an inconsistent
+set, and it keeps the cost per target to a single select.
 
-[3] https://libera.catirclogs.org/linux-rockchip/2026-07-10#40172912;
+- The two capsule files can then merge into one, with each gated on
+the same option as the image it wraps.
 
-> 
->>> From-source build also alleviates the problem with parallel out-of-tree
->>> builds, which could skip the pre-built binary but which always pick up the
->>> from-source build.
->>
->> My original intent was to try and embed the generated code to possible
->> match what I did to support emmc boot with the amlimage format, see [2].
->>
->> Building the boost blob ourself the way you do here seem like a better
->> option, however we should probably change to include the blob and
->> setting the required parameters using binman instead.
->>
->> For e.g. RK3572 and RK3538 there may be dboot/rboot blobs needed prior
->> to ddr-init, along with choosing to load SPL to a different DRAM address.
->> So we should prepare for being able to pass parameters, how I do not yet
->> know, possible using a new rkimage etype in binman.
-> 
-> Having everything in binman sounds neat, but on the other hand the
-> current mkimage-based approach seems to work fine, so why fix what's
-> not (yet?) broken? :)
-> 
-> For RK3576 that would mostly mean "reimplement mkimage in binman",
-> from what I can see, as we still need to give the boot ROM the
-> combined idbloader header it's built for and which mkimage produces.
-
-Initially I was more thinking of wrapping the mkimage etype and passing
-some rkcommon specific parameters to mkimage, not sure that is even
-possible.
-
-Using hardcoded parameters in rkcommon seem like a bad idea and
-something we should avoid if possible, especially now that other SoCs
-also may need similar workarounds or parameters/flags.
-
-I am torn, will try to fix remaining review remarks in a v2 of the
-mkimage preparation series. How we should best handle parameters will
-likely be a discussion for later or be a follow up on that. At least
-that was my plan for a v2, skip the last patch in v1 and only focus on the
-cleanup and adding support for using 4 KiB blocks, together with some
-local patches that e.g. add support for reading signed images.
-
-> 
->> [2] https://patch.msgid.link/20250103215904.2590769-3-jonas@kwiboo.se/
->>
->>> Tested on a number of RK3576 boards, including the Rockchip RK3576 EVB1,
->>> ArmSoM Sige5, FriendlyElec NanoPi M5, Luckfox Omni3576, Radxa Rock 4D and
->>> Flipper One, all of which fail to boot from SDMMC without this series but
->>> boot fine with it applied.
->>
->> It has always been possible to boot from an SD-card if you compose an
->> alternative idbloader.img using boost+ddr blobs and u-boot-spl.bin from
->> U-Boot using the boot_merger tool from rkbin and write that and u-boot.itb
->> to the SD-card.
-> 
-> Rockchip's boost.bin blob does exactly the same thing as your
-> assembly, plus setting UFS power mode parameters - and that's it.
-> Power mode parameters at pre-TPL stage don't make any meaningful
-> difference in any of the workloads I tried, so I'm not even sure why
-> that part is included. So yes, using their blob and their tool should
-> work too, but that doesn't count in the context of mainline IMO :)
-
-I was more thinking something like a RK3576MINIALL-mmc.ini with
-
-[CHIP_NAME]
-NAME=RK3576
-[VERSION]
-MAJOR=1
-MINOR=100
-[CODE471_OPTION]
-NUM=2
-Path1=arch/arm/mach-rockchip/rk3576/rk3576-boost.bin
-Path2=mkimage-in-simple-bin.mkimage-rockchip-tpl
-Sleep=1
-[CODE472_OPTION]
-NUM=1
-Path1=mkimage-in-simple-bin.mkimage-u-boot-spl
-[LOADER_OPTION]
-NUM=3
-LOADER1=FlashBoost
-LOADER2=FlashData
-LOADER3=FlashBoot
-FlashBoost=arch/arm/mach-rockchip/rk3576/rk3576-boost.bin
-FlashData=mkimage-in-simple-bin.mkimage-rockchip-tpl
-FlashBoot=mkimage-in-simple-bin.mkimage-u-boot-spl
-[DOWNLOADBOOT1_PARAM]
-LOAD_ADDR=0x3FFC0000
-FLAG=0x0
-[LOADER1_PARAM]
-LOAD_ADDR=0x3FFC0000
-FLAG=0x0
-[LOADER2_PARAM]
-LOAD_ADDR=0x3FF81000
-FLAG=0x0
-[OUTPUT]
-PATH=u-boot-rockchip-loader.bin
-IDB_PATH=u-boot-rockchip-idblock.bin
-[SYSTEM]
-NEWIDB=true
-ALIGN=8
-[FLAG]
-CREATE_IDB=true
-471_RC4_OFF=true
-RC4_OFF=true
-CRC_OFF=true
-
-and then running something like
-
-  ../rkbin/tools/boot_merger RK3576MINIALL-mmc.ini
-
-after a successful build of a rk3576 defconfig target to get a
-u-boot-rockchip-idblock.bin that should be in correct format as
-idbloader.img. This idblock.bin and u-boot.itb could be used together
-instead of u-boot-rockchip.bin to have working SD-card boot.
-
-This still uses vendor tools and the vendor TPL blob but remaining is
-mainline U-Boot. At least an option until mkimage parts are ready.
+Obviously the genuinely architecture-specific parts (the FIT arch
+properties, load addresses) should stay keyed off CONFIG_ARM64
 
 Regards,
-Jonas
-
-> 
->>> I've also done some JTAG debugging of the boot process, and the single-
->>> word write which the boost binary performs to the SRAM at 0x3ff803b0
->>> appears to be relocating the base of the SDMMC IDMAC DMA descriptor buffer
->>> to the top of SRAM, which prevents large multi-page SDMMC reads from
->>> overrunning adjacent ROM state and thus breaking the boot process. A
->>> comment has been added to the boost code to reflect this.
->>
->> Awesome, thanks for this information :-)
-> 
-> Cutting down magic in this world, one memory store instruction at a time :-D
-> 
-> Best regards,
-> Alexey
-
+Simon
