@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC04C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 00:19:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DFE1C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 00:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AC4684A3A;
-	Mon, 13 Jul 2026 02:19:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 10C3884A3C;
+	Mon, 13 Jul 2026 02:19:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iyRdmyMt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GKT3eoco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 245FE84A49; Mon, 13 Jul 2026 02:19:16 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 9AD5684A0F; Mon, 13 Jul 2026 02:19:22 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3854284852
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3A6B84A4B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:19:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-698e5859a3cso4745934a12.0
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:19:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783901954; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69c5f6f7a40so2477282a12.0
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:19:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783901960; cv=none;
  d=google.com; s=arc-20260327;
- b=ns+mk5vpry+3+3+fve9QDWzRvUU9ZHolM+RXgnUu0VyUPeSmLmfVwNd8l7IqjkBDGh
- vHu+GRNhpGiileq+5NHVY7fv4KI1O9R65uEDAMGZNV74WBciVG5mKFvzCcqrgBtYXufj
- iTB5Csu1rAgvr+ucrA/LHjr305P1xuwBL4dzhIkpDyKLeWg0CU4xNM+L1KuaSxujHVn3
- Lyb9hlbQS/0M+BIlMGcceMtMTSasPbE+NXAYd8KYWRVKwGGvXVL4s5HvKKtifDCU188a
- 7LihCTHnbh7JU+ZoR2CRB109qLUn0Feon4x+e9p299B3F1e8zdOtknTX4EqXN/xlhMv0
- dxeQ==
+ b=f1OeSpsOITONaraR6zgUzxuGAQwxg1NkPZ26qRCstV40j2YfNbVNtfMwScxio4nJsf
+ VjR3uDwCGtQFnk1MN54is2oi4xNISfX6LmZEwlwECgBtOZaBRQJr2oX1XGEczwjMBL+o
+ SHxnVO+yK/2VEpxcapkPrzZzdAqb+HJaWvnHhIf5jdGZrRai059m7dSVoUghArFpG7ks
+ xq4ffRffR+ZZXzaHNnRGeo8ThUDCK0Jio8tjF4b9iEuNdGf6VUmn7OJtWHASpmW+vqSW
+ hodmu5EJpQnHHWDCCvjE1S5H3I0VcuBlKusbICa3hTqxqUQDbyyE3pMDVH/auVivdknv
+ wkNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=29lBHXIBIiiv/7ZY1s8ZxrM/txK4rKZIm334U1OwthM=;
+ bh=FccGbho/1X/zr+s5nJkKQEfkI8dZO1pA+hkLXV6RLsc=;
  fh=EEQIRgfuMtwQmXdjfdH5RZ1j5rBzQhaEFZ9mu3M+W/M=;
- b=KV7xJbLdtFkv13JQT5/3DAqiOMw++tw4r0LlPl8ldi4TEEAzP02Th6TB7GhYPDT5x3
- 4QCTLbfOFYRqICbORojHho9sCXv2NKY1W+jALwCiyxV3trdR1alagmJCfUf0NjitNvPD
- 8s+agmbx/DFTrC7y4NXSV0IMmTnWXd0O9RfiKE8fFMU9Qw9aneEoSNCnQrWo7JNndYtK
- 7QVWk1GHarQGHUCHYtihrppJSgvEDUO4VAAISuY4cVSQdNwMZNLbuLTl/ZqZVEw6uann
- fd9uzzq9r+23MgwTaMoq1dmZEY6JmtozAl2MJRfg7MILJdyAOEdfDxZPVQfQpsoqUtA0
- HCZw==; darn=lists.denx.de
+ b=SiOnSWau+sAwU7XvmWRR8ykAeyFSErsZxeTbAXeRD0/7D5hF+QavmJizw8B8l+SN36
+ v6yz0dMSvLjqZlOt3WCNs7gSSRM7zk4k/AKBhvZYvnR8CRSXomAG0woCNi082NV5B9VX
+ 02417xEP30z930vadf1xVBEqYGxw6qYFU27g/6QCT9a3qbZpoS7Ee874O5dVx/WpCn47
+ VMoVpKJ72+3P16Pf0loT/4LCTYMeIg5vZY8rFgH9u14ysc/HOI4t5218OgTH918RGF3l
+ KV1BoIOtcp/a8+JwoRSjqZPsEOp4XzdxLMeIBKPD5jcGNCD2QVwbBYChBTl3cJzjXm7u
+ w8YQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783901954; x=1784506754; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783901960; x=1784506760; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=29lBHXIBIiiv/7ZY1s8ZxrM/txK4rKZIm334U1OwthM=;
- b=iyRdmyMted4vL+o4O/Q5eTRZHR0gvxinJbimPtY/FEBcRuordxRGBUKFfAWgpNAdSi
- WCxLl99eSGS93J8sFQERzXtSo7jAMqACqgUDAvYl2uhSBIIO3u3uPm7x8T/D2lRhwDY6
- 4nMmhed9pnFBsEqmMpbXeCu4hcKeHGnv4vFxc=
+ :content-type; bh=FccGbho/1X/zr+s5nJkKQEfkI8dZO1pA+hkLXV6RLsc=;
+ b=GKT3eocozNTU6HbSFWeruyHY/NOmlW7bB1JD5lCX69UVL0bSIEaor718x9Jv0zDHXB
+ qlw5+f7lhbE6NEwMJlosnYwwOmn3Q6otgI7fJlFSP0OYPYiFOM5Y9+7MzO0MaYOxGSMm
+ DEtD3RYJ/z+fNQ/agBAclyRPgl+dIWbsPG6vc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783901954; x=1784506754;
+ d=1e100.net; s=20251104; t=1783901960; x=1784506760;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=29lBHXIBIiiv/7ZY1s8ZxrM/txK4rKZIm334U1OwthM=;
- b=dct+NQibdEutEpVHXRsKg2AQioxk7SxzdDIuqDsQMnlRHQ4vC0W0b2iKyBI5HgvmHj
- Iz0xHctDdWSAUL8cGxN0rmMkDS/SEsoY/mRBv1sFUlNw8c/wCpEWfBhsRg6wCN4Rftzk
- jHnEGm88TBgLoIfHNtnNH0XfBHC9vZS1tYMCq07gAraW3retOUxDWvjQJJvS/REg3WML
- XVw7TpubZTMogOGS2rAEm1P0AO2wkRmNKukYz28vdndQxwBY0Ka9XAk6VY3XLiXillQk
- F87w7OrHCcNCgwjRz1D/gIyW8MXKYT9EVhd3KrYgwCNP+hwkq5eptmFlnS4T/AF8tBYW
- +DEQ==
-X-Gm-Message-State: AOJu0YzS0rxDoOKP1bvChNfyuPfu2mSQ63Vl7159W+K4aPbAmu3PBAE/
- SY1mvncyE+OqHz5tkhxR0ayA73JmqsmlkgSJ01cPrdcTeSMu50ENQIklVoOSKkrCRBPGi68BAmZ
- QLw2dcPL4jD4gQ9A1QWp1Wp81A/LMcM0zIUPIOGUH
-X-Gm-Gg: AfdE7ckZAjWFY74/+mof1ABa4g+yW7Mj0g6P3tZYd8EuYrzc/3LMu1LYkGX1yvP/rCK
- lRv+HKiqIJtwu90iA0lD5a24oN9EDjv8/nqbKFM9z9sRGRCnI8L4NK2D4ZLkFeNe67Lp8tlv2+p
- U/Kq6kNDhHE6bX7GgZYYdOHoSvY9d9B8gaSbOinX6v4zfUDoRCn2k0BceoMcOSJdwCRdcHiNB/s
- cgzxmrR/xnOqlKZH0JvwFKjbPwH1mt6V8T7fIqPsgbAKzTNfOh4JG9sAtpUqaMYstea7b4=
-X-Received: by 2002:aa7:c74a:0:b0:69c:20b8:f1e with SMTP id
- 4fb4d7f45d1cf-69c24ea1ae7mr3434762a12.18.1783901953723; Sun, 12 Jul 2026
- 17:19:13 -0700 (PDT)
+ bh=FccGbho/1X/zr+s5nJkKQEfkI8dZO1pA+hkLXV6RLsc=;
+ b=cSEXp5tu42pgrUbn23OhGneCCQpMYON6z5kthO3ViA3xnvwBhVZfdnXLwnZE5pvGCf
+ hcYOR6zlK/52hbyOOnp9a1SABWwfJZ/6d78A0kYhCBCpNMW4OQupGFOT0KSplfytTsvL
+ 6P7Tge36dlIhthTJYTDAF1gScUagjHaoneGYtsfYU7K0fPap4vF/VubRzCneEP6bQvU+
+ LCqD0x/gzqAua0YhHNzPeYGuFjwnAvOpD81er2ADXWSa9opCNe4a5QhBgFhjynp/F9/d
+ V+hTXzpCByJZ68h8WiT5TsY/2XpwGVfpKgv+XtAWGQKEE2k9JSeASz+EglMN/fEoKhxF
+ CiRA==
+X-Gm-Message-State: AOJu0Yyr+WdY2q96ah2JF8pd6/BxMsiDSRgguIf1KuO8yIZ6ustPMh6l
+ AzmrwoiC24SpsZxRWVvHQ0wWiVszL6v69Dq6jywlwqkgFnqVA2aVKKe+whL95FwO2TTATNKGSLm
+ U1gM76cqB2w2k80rWghGXD+VZS1J6mRaa83nRcf0d
+X-Gm-Gg: AfdE7cmPB6MMPq5QpWbRD79NZhri+BFiONNQKSqMPS7s+H4lZU5NWktTgEeMF4wj5fl
+ QbK38gTC6ArX+7lzHROjeZsSSPf7tBlM8QBarykN0TnFVnXgFRUYUlJOpnXqg+Ydgku+bkxSOKK
+ 4+YU0MDgYgpPwRVwRGILy2pLiWWHbuAnqXOPC5/JKVTVofiqVbTIE/CO3YS5TGL0tqoeiHeUxOX
+ x6YPyGHEStdVvj6waz6EgjC2gtUKrsjYq1CPdzn90UriDrCNkZZxBtmMnHFEQGHtzyfyUjnbXBE
+ rfodJQ==
+X-Received: by 2002:a05:6402:448b:b0:69a:596f:ba0d with SMTP id
+ 4fb4d7f45d1cf-69c5f254768mr3053902a12.33.1783901960172; Sun, 12 Jul 2026
+ 17:19:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708-other-contrib-v1-0-8b3bd4d265ef@cherry.de>
- <20260708-other-contrib-v1-2-8b3bd4d265ef@cherry.de>
-In-Reply-To: <20260708-other-contrib-v1-2-8b3bd4d265ef@cherry.de>
+ <20260708-other-contrib-v1-3-8b3bd4d265ef@cherry.de>
+In-Reply-To: <20260708-other-contrib-v1-3-8b3bd4d265ef@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Jul 2026 18:18:59 -0600
-X-Gm-Features: AUfX_mzlcYRxiyk3Ld_HTlkGCLk0-UJq67NrjDPe_nCOuDmaFwE-4cUw7yiloSo
-Message-ID: <CAFLszTjzpdPd_35y7-3pJpbvAThJL04OgVLCHY5ftrmtmbMyhA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] doc: CONTRIBUTE: tell people reviewing *is*
- contributing
+Date: Sun, 12 Jul 2026 18:19:07 -0600
+X-Gm-Features: AUfX_mzXDBpWhxtNelLU51OTTcg-dEIgPsuc0I2wAXJxP90VB2TaSWEjWC37e1k
+Message-ID: <CAFLszTjySPoiJf5vNHw_BrX+aQttQu6b4NfEkm31ZvQYpb2ngA@mail.gmail.com>
+Subject: Re: [PATCH 3/3] doc: CONTRIBUTE: explicitly list tests and
+ documentation as welcome contributions
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -111,33 +112,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
 On 2026-07-08T17:21:12, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> doc: CONTRIBUTE: tell people reviewing *is* contributing
+> doc: CONTRIBUTE: explicitly list tests and documentation as welcome contributions
 >
-> We are "a bit" struggling with reviewing things and it's most of the
-> time maintainers or long time contributors reviewing patches on the
-> mailing list.
->
-> Hint that reviewing is also contributing to the project and that even if
-> you don't feel you're an expert, your review is still welcome and can
-> help us catch bugs before they are merged.
+> We don't have too many people looking at those at the moment, so having
+> people getting into the project by adding tests or documentation is I
+> believe a good thing so let's encourage those specific contributions.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> doc/CONTRIBUTE.rst | 9 +++++++++
->  1 file changed, 9 insertions(+)
+> doc/CONTRIBUTE.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
 
-> diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
-> @@ -38,6 +38,15 @@ script. Please don't send patches as attachments, and ensure corporate mail
-> +Code is not the only thing you can contribute to the project. As most
-> +open-source projects, the U-Boot project suffers from a lack of reviewers.
-
-'As most open-source projects' doesn't parse - there's no verb for the
-comparison to hang on. Maybe 'Like most open-source projects' or 'As
-with most open-source projects'? What do you think?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
