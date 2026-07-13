@@ -4,146 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C43EC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 17:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C34FC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 18:36:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C59C84C6B;
-	Mon, 13 Jul 2026 19:51:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 3436584C71;
+	Mon, 13 Jul 2026 20:36:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="mn5VHdf4";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="hdQjK88n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0690D84C6C; Mon, 13 Jul 2026 19:51:25 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 468F084C70; Mon, 13 Jul 2026 20:36:16 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75DFB84C69
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 19:51:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55BCE84C6D
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 20:36:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KNkhZ+yxbI/35t6Cd9iWRTA7T6EZ0CeHHFXLO6gq0MRyFvU+efvdtdVN6dfp5A59Jg8vl+RKzohbfxjWFXTFt4juFeWuof7RAUoNx++5bYpuPgCA4pxzui9UmMY/0AVrv2HMB+xzQCTpDWWKGE8eV+H68bJq1RiDOpk462/7wlGHdorzOn+x6zT8wf7DtV9qtZDMFhKKmOqA8xlr17CrHE1BZjMpDIfAhLSuaaKrZfB3Yy22n3hMmpqHN8yb6Fae7MgNnYnr4KcBB3G15w3foY2ky9CZAERbTB04Rd4cAvLvdaalWN4Fgl5VaaXDEWG153cKLoKsxxuIWEWWDYdA/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8wrO8jbpUG3MCP1UndvwDVKA4v1EDAjhSrMJ42w4H1g=;
- b=i3HJmmXTxW6IBGfglIRK6SigMC2GR5BdX6kAI9+sbqrNb12c9uhX5dshO6SqYA4HERLUzmwK2h/ReIK3hb8I6ZCYOMYrCETULfEXo/bLpVeIg3sUvrhiWC6El8kqskP9yHqsT7k1781nOPNM0ZrxE13dHqYXpdb2R4y5Bve9aMQOomzp5eSsaQMDSf3TLtjnahbR1cFlGh384UERcki8bGZ80A4mw9z8EIhDZwBL4ZTuJcd3ucp6VP1RrcQGtKgBbv4zVYhJdaCBjiYM0GY9bLi+hGKVboI8RaGa3Nd04BTjDNEtHzABA6+V03EOy8YXQZ4AFbMl45Z/CrjOB/EjaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8wrO8jbpUG3MCP1UndvwDVKA4v1EDAjhSrMJ42w4H1g=;
- b=mn5VHdf4x41jic9JiN5YiOdS7o7HDhsHZNYnDuFpCzRWRKfjF/vR6qU7pQRJaa1eMuoWaE+ar63S6oIinRaq9siBak5mt/Jx5tLkfiPwPrhQ4aPtUL7OXLaAtzuTee1mwMA62MI8QnwjUhB6WdZrBW+p6TRuRobrhl8ILZIyD1VbD7aW7lL93ds3WwV0h1N3bYN3Qzce9ZyzgkUHNpdUoQO7p6vrn2QipgN9O9g7Z0g9FtaG8hj/ktOpVWtXX2pBwpL/PvcYOdur2EPAtr02bsYOmXoSKaWCojWB4Nfsm7Cl+RgqsVmkCkhGA9CDU/WEFXKXA81SYM0y7ABxGdQevw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by LV4PR03MB8259.namprd03.prod.outlook.com (2603:10b6:408:2d9::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Mon, 13 Jul
- 2026 17:51:18 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0202.018; Mon, 13 Jul 2026
- 17:51:17 +0000
-Message-ID: <f37902b5-84fb-4ab8-9ea4-9cfd6b7ffdca@altera.com>
-Date: Mon, 13 Jul 2026 23:21:08 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] mmc: fix mmc_deinit regression when card is at
- 1.8V signaling
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Jens Wiklander <jenswi@kernel.org>,
- Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
- Yanir Levin <yanir.levin@tandemg.com>, Eran Moshe
- <emoshe@gsitechnology.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Tanmay Kathpalia <tanmay.kathpalia@gmail.com>,
- Jimmy Durand Wesolowski <jimmy.wesolowski@mobileye.com>,
- Iulian Banaga <iulianeugen.banaga@mobileye.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260713-mmc-fix-v2-0-b0ba3b4a8d97@nxp.com>
- <20260713-mmc-fix-v2-5-b0ba3b4a8d97@nxp.com>
-Content-Language: en-US
-From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
-In-Reply-To: <20260713-mmc-fix-v2-5-b0ba3b4a8d97@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MA5PR01CA0234.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1f4::9) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-4728c12ba97so1509269f8f.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 11:36:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1783967774; x=1784572574; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=xKoYzBp9qUNcuV+/NtOxSmeYsdo9KCqwAXlGEH2FzA4=;
+ b=hdQjK88nNL7+iEOw/F2zJAxz7wIicouKJs8EJXx0KtfQho4hL/AZn8A1LyN7gO/CCS
+ IpyuH8bS0yF0VP0e0bx0QSrr83fXc97lQWYLJvW3U2CaBUz8Tg6p0aDAwQY37Odscjss
+ Idjh+9Pxz1HYtrlX+3+UQsCvLf2blZ5DLwRM2QclJ//j2gRaBaYGjnxV8/BmE1T2IYrg
+ Wm92yyyW2hnUX+Hzwwh9dMTQmAOQv4QcjcIPVS3QJPAG4pK2TYyrNBc57/aZdDZjFxHy
+ ZvSggtLag1r3rcMtbPKAs8cQrYRFXzrwH76Jj2QyPSKkviJZJnkULESx3Xbl7gdKFY5p
+ N3qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783967774; x=1784572574;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=xKoYzBp9qUNcuV+/NtOxSmeYsdo9KCqwAXlGEH2FzA4=;
+ b=i4XTpn9tir6BLFYgWmUko6eVhxroibvVQZpNm7aKBe6jFUBSiJXRfaQ1E3wS/13ueM
+ rS/DKetiNUFtmv05dhahGDb7l0HTvab5r7BVol7EAPMhDd3vRYl2R6NttP/UcCTU9EKz
+ 8A3D/WQ7Ngsg/DLLft1FsnmOjyhhn0Xh8+9ddXgfgr/rLkxNDt6W7EibGpTcgbMQ/3dQ
+ 6EkLNp2NsGMmbt8aMPqAjD5v3ctt8nxav8gE0NtRQAW2EQIdgwfHbPAQI17FCS+2MS1K
+ zeUUnl+hrGIWrZuut0fQTaH+Z4pA0A5F3ZzT5su/BGy0932cvJ8sSSJzM5xLX5nABs2b
+ Hd+w==
+X-Gm-Message-State: AOJu0YxaWwDgNstSVtDV1w3eax9VpkE2Pwwyp2FhWFeJ8Zka//a7piyM
+ Jfnhvks5rGDv/iHNtteb1x82nui+PCddnFvB7Po7YrVBdqHJ6TDeDwARUZJCSM8fB6k=
+X-Gm-Gg: AfdE7cltkN/7XpQicfrO/mHXMvMy1X85m6hg6Dbzow832SPKLzXXuLDV3/9SXtF+iY2
+ sYtOVrlBZyoAVP0dkh4I9iY0Tgd2UaeRpO/uVqjxbv+mhN7jMw0P6w4AqPS2zdGYRtC3G75D/EJ
+ z9eai7GuYoceggURQUv5KyJ2nzCGlXOihYKjI5VoJer4F8oXBbYHXgp1IZ3srSMUcgtFk4RaQfd
+ +DLXuxmxGAPl/hSTif6zZZf4uRrpfgawfoH3IGHx3ruJHEVpCn76EWuN7E70TIUbZkWXuCT7XOT
+ I57LH1CRGyjNRE/EfelQIUL1d1q2BXLU53iOvmuR7E07p3gwGOFDzRvPOLMUqBNlBMuJ7m/WtFU
+ XV85bBrwB/7hqXjGgdDB4jiiRwkcYRLZ3GVe9MhL4JZwziuRIGAV+ABI19HajPynUe3A0qKfup5
+ fwgkROXGUIWnd797ZThbsxKaRJ1usISMxRAzXUFnQbbpdzeZHuSEEyPn6SerhM5lBb
+X-Received: by 2002:a05:6000:3101:b0:474:3708:b7 with SMTP id
+ ffacd0b85a97d-47f2dcada52mr11419841f8f.3.1783967773635; 
+ Mon, 13 Jul 2026 11:36:13 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
+ [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f464c1f84sm1434703f8f.29.2026.07.13.11.36.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Jul 2026 11:36:12 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Subject: [PATCH 0/6] clk: rockchip: pll: fixes and simplification of maths
+ in RK3588 frac PLL
+Date: Mon, 13 Jul 2026 22:35:16 +0400
+Message-Id: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|LV4PR03MB8259:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4734d46-6c95-4805-b102-08dee10756d5
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|366016|7416014|376014|4143699003|11063799006|56012099006|6133799003|18002099003|22082099003|55112099003;
-X-Microsoft-Antispam-Message-Info: uk2OK2oXq0wq4ivthe34Qi2jXTHWSm5QnqRsR6ytenDTXPkBa5pnSAc3ezxPaGLw9YYQtYtSab+tw++wKg4/ur5s7Y1gOqPbpgX78iG8L2P5e8LN+i99XNP5bNNL67GVhurwr4cqLggVb73ZI3U2pla1rFJFfOPiGZXbCpzvjR4zxQ7Bf7w93NiXSPYPHwsaJyCMQYs+ICEZAXlY3sOTrDTE2ZAqrnfy7k9Npf29b67XWBr60PF0l80KI/6sK6k/sORfbcER7CAfuARWszckOlKML4u/QAuJWMae4vaHPaP+fwuJafdzbO5VHeG2lDZ2UFGp6h3XJMAr5xSoWqBcw9rRUs4UqrawT40Hei1ynZFHxw+gK4ZAVMjA7B7v7z1yhBtgqhYtBrMpCoALfSUsDbMM6XAgh/gEbdygNEwH4ugyqxKY/9JW+PMaFcoTpjmIiNQq8z5zW3l67HMMwiWp1EIZ1WafRqNVDGc48RptrOAAgWDwSg+jjoiDXHcVsQAgZriIAwYvI1P5lrQMdLs5h9aXvKVwPiL34m1hRildmNCz9QqhN12kQ0iNXSX1AcsimTgcbc+AUa2ob553E8GdCLQ069rdnKtNrNd12jFDTSdIUvlBIRHdc8AyrgslpZA6JKiHnRf4AvbdD1HVt2qhjTBO10/QvrygugHNwaojUFY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(366016)(7416014)(376014)(4143699003)(11063799006)(56012099006)(6133799003)(18002099003)(22082099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Yk9QakVXcWpPRUdCL29oN2xrWXovT0FJK3ZBU1Z3bDNUN3FxeWhwSkl3ZmZJ?=
- =?utf-8?B?Zks1SXVLMFk1d2Z4dE1kYWErUjNTQnZNaENiRmY0dTFpZTVzdGZIVU83SHNE?=
- =?utf-8?B?Yyt3VHRQZXBkME1lY0srMHhXVEUwUUZ1ZnN5OEF5MHJZS3BldXNiOElFOU5v?=
- =?utf-8?B?YVdDaVlqTUtuQnZYZVcvTUFzb05zbDhlaXhzcndGS21Dc2FDaTRuN24xUTFZ?=
- =?utf-8?B?Y29TQ0dTcXJRWlFUNHhaWmI4QVJwUWVKbXpkdFhtaU51cFN3cWVyN2RWSFlj?=
- =?utf-8?B?Tk1OLzBMZHdHSlNheXVZNmU0UDBONDhBbkpoN1phdTVYVzIyYktLSW9sa1Qy?=
- =?utf-8?B?SWVvdTAxYW9KV2ZQY1NiSXlaamtxU3BIK08yRjBSU3VrWHlGV3NQZ0RONU5i?=
- =?utf-8?B?ZGVpRS9hV0NoRFYvWlFyV2x6M3BEbm8yRlNkbHozQ0Z6cUljRWZRdDNyR3hv?=
- =?utf-8?B?N3Z2akRjbnp0dW8vanlXYTdpVFF3dEhiNEhPdHpKZlRxUDhCdktzbDJJVWU3?=
- =?utf-8?B?NXE1ZkdtZ2pSSkZIeTJPRnlSSnlhOHFSWmNkQnlyU1UvcldyUEo4R3VMMGFx?=
- =?utf-8?B?aFRneldLTXJqVHdhaUVwNmdDekl2QWx0TFplbUVLTnlyai9va2xLRXdmcFlk?=
- =?utf-8?B?U2ZxUk9vUGpXOGVQK3hJbjJRaUx0aUw5VndEYU9LQXFvT1Z0YWQ5Z05JK0tK?=
- =?utf-8?B?R1FzbDdDNjNVRXhRQWU2dVVZUTZlcWdod1p5V3krRVhnNXp4TFdYVWpMc3BS?=
- =?utf-8?B?NjV5alNMam1SZFFscjVWbEtyVFRkdDNKNHhMVENTdEtQYUUwZVFVdmExUHJP?=
- =?utf-8?B?V0VzKzFSNmN6akRUQXIwMWN5VE0xaUoxdG9Uby82Nmx3TG1vblF1RGVQMDBQ?=
- =?utf-8?B?RjljcXVOdWNXTTByUlRNRGNzNStWTlRmbkZxcTd1aXlpaFNkU3NDQjM2dFdY?=
- =?utf-8?B?MWhNdkRNZi8rWUI2aEFpNWprU0ptMWVkVkVPNm4xRHBnWUhpQ0tLdVUxUmkr?=
- =?utf-8?B?NENSYVRvYVJBZG9SbEdycmhDUFhERDR3am1seWhJaDdmU0tJZXY5STB4Rldi?=
- =?utf-8?B?cEFiK2hiN0RJZnVGOGx4dDJSOWtFaEV6UGdBMkxKSzhPdG40bWVGS3hKR1Jw?=
- =?utf-8?B?T1kzNjJsbjZlc3dsNTBwRlZwVkFGV2pFWmtUTnc1d2Q0UXJuN1F4WGZRR0lS?=
- =?utf-8?B?S2dNV2loSkpOU3c0ekhWcUR6RitXNnRWaFRLR2N0c0cvWlFiZ2Y4cnRrVVdU?=
- =?utf-8?B?WXJiLzIra2x6ZTg0aWhEcWNxTkpKbzVzN0t2WmtoQ1FOWlpjNG5ya2NzLy9v?=
- =?utf-8?B?MUx6Yy9KaC91SytWanFPYmtidjV2R1MrbUFpN1RLQ01WbGRPMzhhU1kzd0tY?=
- =?utf-8?B?bjNwMXRra2xRdW1ZS0NZbTJWRVlucUZMcHZtbEE4UEVyanFUcGF5cVVsTDBv?=
- =?utf-8?B?cmhEV0tVLzVUdzJUTURpYnZRWWN6NUduUzBpU25nK0x5cDB5ZGN3NnZLUTY0?=
- =?utf-8?B?T0EwUm5BQ20xM3JtaEN6MFZVNVZBT0VsVHZ0Q0FMR3E0QSt6bnNGRGtpVGxq?=
- =?utf-8?B?akR2RzkwU1pjeWdFSTNCRzcvc2g4NlNrbWIrRXRDMW5SK1Q3WURtTVNEaXc5?=
- =?utf-8?B?VFBLODBQZzdERzRVdXRRbHMwK1h1d0xWK2VTYlhKMkFjVUFFUkQxZlI1SVJJ?=
- =?utf-8?B?OVlkelhLMHpDUzk0ZU1UWHlHYUsxTFBOMENxMUplRUNqWm8rY2xKUFhGelRl?=
- =?utf-8?B?Q0xUVXgzT1FxN2NDOGc0S3VFZlR4OUNvT3lUOHZra083QWhvRmVTM01RNzhP?=
- =?utf-8?B?K2tXaE1UQk0zWXZJV1V1NGlMS3F6N3h6dkFoanBzUElvL0RTajFtT21VUU1K?=
- =?utf-8?B?Um9xNTNKbnNSRFpheDBlMkVhT3ozUmM2QlhxY1U1emRZOUR3S2tsQ1k3dkdy?=
- =?utf-8?B?dzErOHM5ZFRRVCswZ1hFS0YwRkJMOG5FK2liS0pSUWhhU3lTWlhNNFJCSy9s?=
- =?utf-8?B?cE84Q253MzhKOHk2Y3d4MzE4TEVka2xIMmJOVE1UaUloc2JLaVgrK08yWElx?=
- =?utf-8?B?aFZhVys2K2lJditkNC9rT1J0YlpWQjFQUTVRU3NwenZ2cWE4S21ZUTJRdVcr?=
- =?utf-8?B?SWZlMS9KZy9mK1pBM0Mza0hFZ2d1RVJUbk9uTmt2NUpoRnBHYUMwYkRaWURn?=
- =?utf-8?B?Z2tFRnM3ckpWSUxOZXluRXFOVmlKUFg5V2d3QkVHaFd0OVNZcUh1V0F3aXpq?=
- =?utf-8?B?MWtxRlZhLzBZRUxtZGx0S2FtbVJaenIvTzJFRVJSNlpCWmFtVGowcDN1Vllq?=
- =?utf-8?B?WXAvSGRHTUZzUEVmLzBSRWlhWmNwQ25KYlNRWFk2SFVrQzVudVllZzkxWDlN?=
- =?utf-8?Q?ksDc61eoya1cobFU=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4734d46-6c95-4805-b102-08dee10756d5
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 17:51:17.4212 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Yi7P//HcLtpLeouv76OuGHiWa6Gkc+UpyPpR7Nzh0k09xAx3q7Gb7ugklSSMcVwnPh66owoOX3J5S8xr0inIieU8i5ZFCE/IoPXRkBkXIPo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV4PR03MB8259
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBBA0avIrDVRDW1cRSyoKYMgU0Qi7q5Yv
+ sX/F3hkQg9FdAHjQZ6WOUDGEdi+njsU1AZDmqR5oqUSPKrMGOG4tus0Cd0olM5IbXULIVoZHZ3
+ fsKx++70Z0G7vBe77ATk5i6ZyAAAA
+X-Change-ID: 20260713-rk3588-fracpll-7b3e1f817c7d
+To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
+ Jagan Teki <jagan@edgeble.ai>
+Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1808; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=7NryY0+twb8m6Tmmwxd+gwh9B7OIvRZqYlG+kFLuWfU=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFGkhdvpiybAbT/fcTPSI1bsae9FxvkrzfK8COT3yBw
+ ay1/O/MOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZhqtwaGfwYukrJdFVLTbjjn63+PC7sx1eXCz5cfLea8W2R5oF1nwxaG/zlZTOf
+ upN001g0u3PXp/eUSV2616p4Ducb3xI2Mv/w/xAYA
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,39 +115,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Current fractional PLL code for RK3588 (also applies to RK3576) has two
+issues causing it to overshoot the requested frequency for some negative
+values of the fractional coefficient: one due to rounding, the other due
+to treating -32768 as an invalid value where it is actually valid. It
+also overflows the calculation of the fractional PLL rate when reading
+it back, causing the function to return wrong PLL frequencies for non-
+trivial values of the fractional coefficient.
 
-Thanks for making the changes.
+Fix all three, and also use native signed integer arithmetics to avoid
+manual bitwise operations on the unsigned representation of the fractional
+coefficient, which simplifies the code and makes it easier to read.
 
-On 7/13/2026 7:02 PM, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
->
-> Commit 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without
-> power cycle") added detection of cards already operating at 1.8V
-> signaling via mmc_sd_card_using_v18(). This correctly handles the
-> warm-reboot scenario in mmc_startup().
->
-> However, mmc_deinit() strips ALL UHS capabilities from the card caps
-> and calls sd_select_mode_and_width() to downgrade the card before
-> kernel handoff. For a card that has switched to 1.8V, uhs_en is
-> already true (via OCR_S18R in mmc->ocr), so sd_select_mode_and_width()
-> attempts UHS mode selection -- but no UHS modes remain in the filtered
-> caps. The non-UHS fallbacks (SD_HS, MMC_LEGACY) are 3.3V speed modes
-> which, when selected while signaling at 1.8V, leave the card in an
-> inconsistent state it cannot recover from without a power cycle.
->
-> Per SD Physical Layer Specification: "Once the card enters 1.8V
-> signaling mode, the card cannot be switched to 3.3V signaling without
-> power cycle. If the card receives CMD0, card returns to Idle state but
-> still works with SDR12 timing."
->
-> Fix by using a UHS capability mask that preserves UHS_SDR12 when the
-> card is operating at 1.8V. SDR12 is the minimum valid UHS-I mode and
-> is always available at 1.8V signaling per the SD specification, so the
-> card is left in a consistent (1.8V) state at a low, safe speed.
->
-> Fixes: 906ee6785b1c ("mmc: sd: Handle UHS-I voltage signaling without power cycle")
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+The commits are deliberately split into excruciating granularity to
+ensure each step is explained and easy to review. The final diff is not
+too large though, so I'd be happy to squash as required.
 
-Signed-off-by: Tanmay Kathpalia<tanmay.kathpalia@altera.com>
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+Alexey Charkov (6):
+      clk: rockchip: pll: drop misleading fout in rockchip_rk3588_pll_k_get()
+      clk: rockchip: pll: fix rounding of negative k in RK3588 frac PLL
+      clk: rockchip: pll: fix RK3588 frac PLL result for k=-32768
+      clk: rockchip: pll: let rockchip_rk3588_pll_k_get update m directly
+      clk: rockchip: pll: fractional PLL coefficient is two's complement
+      clk: rockchip: pll: fix overflow and drop manual two's complement in rk3588_pll_get_rate
+
+ arch/arm/include/asm/arch-rockchip/clock.h |  2 +-
+ drivers/clk/rockchip/clk_pll.c             | 70 ++++++++++++------------------
+ 2 files changed, 29 insertions(+), 43 deletions(-)
+---
+base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
+change-id: 20260713-rk3588-fracpll-7b3e1f817c7d
+
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
