@@ -4,135 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E40C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 16:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCD8C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 17:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F01B484C4D;
-	Mon, 13 Jul 2026 18:35:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CF4984C66;
+	Mon, 13 Jul 2026 19:47:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pRjIdtmW";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ifHj+dA1";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jPg6eAoe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0952984C60; Mon, 13 Jul 2026 18:35:18 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id F277184C67; Mon, 13 Jul 2026 19:47:24 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9053B84C43
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 18:35:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB9484C43
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 19:47:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66DF8lIM1908363
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:35:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=oESy0NkAnkJwRPsTcyE9oKV+M30V4qVSXuf
- 6y0uQ6fs=; b=pRjIdtmWzjfkH7Y/s4hb0iMCeRh4BNEmKDg1j7EO+BmG1JIl5sO
- X9QLAKqR5cMeOF7pNZzmlRH4PxzjYTY3Ehb/LF22GaC5ApqG03oZNNJbuNn15XMK
- LYv3bxEHmE34jbiWkxpxi7sypqTCoLx/LuyOYHKyouzLcc9HDT8iLEF5MZHlFUjE
- me6MN6k7jUPOW0xwFmBFQpuPefGc4JWPDfFzTLpmT638efpAQD9tty77pRiqVc81
- 97LlkhNShM45W+vRT8pFZmOitA5X/5PAAnAXjyS8MXrz/hc/gTbt5GBhlkzWvbQQ
- 2Xidnl2SxzScxgK02fBBCNNlBOv5nHiXiPA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwda1pm6-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:35:13 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-38e11baa66eso75028a91.2
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 09:35:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783960513; x=1784565313; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=oESy0NkAnkJwRPsTcyE9oKV+M30V4qVSXuf6y0uQ6fs=;
- b=ifHj+dA1tvD/24Ao+o1W2x1chJWvnNOVq4yVVoQwoEc7dwCuzunPOv/86NyF0ERMd8
- ylDxt4104JG8vnsXILjkr39I9s9wohooQfTrhp5F7fU3ZWWK1DiPaKQz0OaOZCNg2C1E
- /w8RVRUznDekUpW6aXkBo8eXTOdHxvtTVO02L+6D+WO0cufRT81OuMnC+Q/1bJPGCWyI
- yw8xuzRaMxNNJAcMpCdlU/6tBFu5FqHJveZBMIP0UtiVZgxMRkJeN7i5HVnWJM7ozkpS
- CZwZws0pKvPR+J8l552p8aKhqL1Y5Dx3tBHnDP43WSgvkO6unkseLOpyKKluffZDGoQj
- p0bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783960513; x=1784565313;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=oESy0NkAnkJwRPsTcyE9oKV+M30V4qVSXuf6y0uQ6fs=;
- b=KcvXSY6elIlVsh+LQrt6KZ4DF+VJMl1h6HMf9RSc/nGiSHNdSJNgmpexWAuSldIXmM
- WksOLLMSYvghoriFCtYxdaCrDHmtzYdQU6racFs44/FHfijevr6k9fqMDEEQquERtBrU
- QPlblOtJrHLDpxh4cBDcLyNv8BJ4v3LX+PbVIwCGl/07hLQzbBV5EbrQzeT/UiztxpiE
- Oy1W6nJ6xwPVxlEmYZWVME5o8zApbL8euZRWgimWYUGf/xmM6HQHKEJO8zb2JUSA0FN0
- aCnnJfFQaAC+Rl3E6gFRWpxHR3fM6ZmFZhGWHvspUtl/dALyI4K6632cUYCJbPLJ8JhA
- z8Tg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqhvhRHYI0p9S/tiZ3XlFchaCrryjT9685uAn32Ck7T/fAskd0fwc8pXq/SvvmFY3el7c0bxtU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0UtC5GPfeHKvUJC6azNeocdQkJcRqk8Sy1qfWsrQ0gyE+bBU7
- 6UQgCUQ7cHshbHJJtyrW6lTCochu9cH0QIisFLRpP6Hhgw3CoFSSGIXauXgIH+YDa38RpT1BUU6
- 0f/zECUutzCWAbMoio4BNT5seZq4q5iuGPSXXmhdopxW7EH31u1Qqwqjx
-X-Gm-Gg: AfdE7cmCCMNace3hYAcbn4Q3XMs3hj2dhBHC+Gv0kIuJCoB4aCFPoZNLoRnb++2JfOa
- FcdEKz2ww0+g1ZThMEjBZhK2/TXDEbHcW1VNulwhbbquAtX5Ii3Bcxbj1uKJC/1MIAghACnNbJu
- QDZK37VHWyZyZiEwrRX+CQ62BOyDua4caQJQiRomLFx6EIVfY8c4/oqAe4mMixLmW2krFF9cUZ4
- lekSLHzI9fUYFsOAzoKO7djs9lO4t9C5gEHqSEggGr1REWFjgb2gjCP+A72OujwzDWncm3oyqRG
- 6eX1Pa0cbEcZ1NB/H/yqhXwFojoa97W2AglluWcxRAJtyBLU0dMnV4MqGjWjev8ms889hOkRnAH
- TlkUJS2aPUqw6Nyyy/3La2xnbDmd3neR6p3d+yw0k+f4qdmVJ1DgmJG7pLq6p0VqAF7Ez4esof7
- VGUph78wpyT7/u3txyzthqZSSEkJFRxw==
-X-Received: by 2002:a17:90b:1fc8:b0:37e:2005:6507 with SMTP id
- 98e67ed59e1d1-38dc75f4cf5mr9168324a91.15.1783960512806; 
- Mon, 13 Jul 2026 09:35:12 -0700 (PDT)
-X-Received: by 2002:a17:90b:1fc8:b0:37e:2005:6507 with SMTP id
- 98e67ed59e1d1-38dc75f4cf5mr9168299a91.15.1783960512178; 
- Mon, 13 Jul 2026 09:35:12 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3118ee6091dsm81683540eec.14.2026.07.13.09.35.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 09:35:11 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, aswin.murugan@oss.qualcomm.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH] mach-snapdragon: smem: Use available_length for RAM partition
- v2+
-Date: Mon, 13 Jul 2026 22:05:04 +0530
-Message-Id: <20260713163504.1830900-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FK97TLuWkz5c83uBs7pYQJSstedr89F4pWxdcvONRaPkHWBcOj2EYq/6kVCzXb81joZFT2TOXCmV4zyCGOHeYmKa/pSCzvo97SDosPET286gNL64G+eEu0tUCY39TTjCtnoQv6vpE7OE2bIXBbVWjBC0EuO0/B8uy5XceM+R83s8NYgCCdaIZsiQjClXgde803RANkQKPCPGDiq5cWLzRL4a/AzUzHxuRet41bCuNHXp2lwRbQwMvfIcqMfiYfr0Swn3tbdCFVdmW4m68jE0g8Xvoy3WMo8ksImf2k2vUbn8fSm23q87pJiPzT7XHWpnd++whlVQLQmQyXix35oukA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W+cfsl8a7itny9uCB+GMaI3xm+OCUg9weH6MOXAdE2Q=;
+ b=GlcrS3nX5PK0OtWfo5oe5v5wXc0jy4xzo73a/z1eUjVev1TdH+avjX089gLdb35jpZhyXt7WEz8YY3xg1lX3KCduqAKeNV1zUNg4a47ttBR+j2xIT1VEwSzbDeIS3UTS8TOUag0+fq2tGr4U9u8/fvkO1KEq4miI3iTsTTsQtFFFFETMm5rzX5AGoF1ge4QOatX4LkpM7RSW7LlPGw+jVlIBHGQURn/y9ytxRkIj4LhjReQad9kC/HEuQPQXpVV/zOooQlpdhdVTbdj/MLZXjYcF8CgPWt0i20ykOBLZ85DXSxKLKvkqWTfhTzwVG7YqKC3osYXAK7+SOdaxTljn3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W+cfsl8a7itny9uCB+GMaI3xm+OCUg9weH6MOXAdE2Q=;
+ b=jPg6eAoeummxb2N7wpPLyvkdmYuk92DTstNQpmuFOwhBqJOUU0H6oW3YH5V6Hi9s+kfFT1NmSfpDTsktPZHAny31jo0ug3P05htm9cvjcZk2QBRWXX3anp6YWE2PG3BNOAJNblrNzXsD1mMKuhDEEMhXtfyNAKj0iOYpCa5KBnYLBZy8lXJjKNY+iCBmaS8n2Zfh/CGk6fnkNKpToP/Ki92qqNNyB7rbNOxue7LJ1GV/lgYh7opBq0x/b+A6Sp0xd+YDLJSEAFzsfjBE93ury3HOgfCpX3jE7WI2qtksVvm0tPB4zk6SKuGj0hvD8PYc6I9Ug7AFGRK+myqGhXOTBg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by DS0PR03MB7655.namprd03.prod.outlook.com (2603:10b6:8:1f8::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Mon, 13 Jul
+ 2026 17:47:19 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0202.018; Mon, 13 Jul 2026
+ 17:47:19 +0000
+Message-ID: <4eb767c1-7e66-4caa-a786-459a15bbfdc3@altera.com>
+Date: Mon, 13 Jul 2026 23:17:02 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] mmc: fix mmc_poll_for_busy() false timeout when
+ card is ready
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Jens Wiklander <jenswi@kernel.org>,
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
+ Yanir Levin <yanir.levin@tandemg.com>, Eran Moshe
+ <emoshe@gsitechnology.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Tanmay Kathpalia <tanmay.kathpalia@gmail.com>,
+ Jimmy Durand Wesolowski <jimmy.wesolowski@mobileye.com>,
+ Iulian Banaga <iulianeugen.banaga@mobileye.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260713-mmc-fix-v2-0-b0ba3b4a8d97@nxp.com>
+ <20260713-mmc-fix-v2-1-b0ba3b4a8d97@nxp.com>
+Content-Language: en-US
+From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+In-Reply-To: <20260713-mmc-fix-v2-1-b0ba3b4a8d97@nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5PR01CA0233.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1f4::14) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDE3MiBTYWx0ZWRfX50cZLICXsi21
- hBbP8LtkSAf/XRYbHkHGyb2Ej8P3r1EycTYaQKDx01T341Axd87OOzW1zJVbJ6BzOV5rjLj1mhW
- a64xfk5WWTvb3AiI/Ke4v9J+sgpIvss=
-X-Authority-Analysis: v=2.4 cv=cNbQdFeN c=1 sm=1 tr=0 ts=6a5513c1 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=NQbW43lCRD_eDx5gHQUA:9
- a=mQ_c8vxmzFEMiUWkPHU9:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: IoBL_4ZOD0aLrsStfruboxdBeaoMqcOy
-X-Proofpoint-ORIG-GUID: IoBL_4ZOD0aLrsStfruboxdBeaoMqcOy
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDE3MiBTYWx0ZWRfX0WuBVjBoNJ3S
- nB98TC0AQKrVknfu86ECPWWrBhoJVoPNipgS1lkr97P5ruaipgn3P97rq2Gqs5Gyv7YdsxawXoE
- CEfXvW1pdAYR7Mtm1DWyHaJfKgmfea76dxZhl/Ub5RQqHjht3KcCbM1J1CriQ7n1oA/k0uQyTYt
- bBDRYfsrAEOv449aBX3LSgBDZ44VCIpcyCapP/qfW4qdBHDWf2tu6iyfZkMa/Ljrn+vXvcZXyi1
- t7TKLt73i2LWLrPatC5/D/skq7mtRcWpaCODctJSoHa8yf+ES46yAQ0QkSgt69uRX3uuQst0p4t
- Io8aP8uLx9OWb4jz6s0EMjz04VkQCb6kFHsAax5sUDzEARmQiYgqxAzSJwsYBo9npeBLWQyBkkJ
- 4lbYcAlU1KoN67teseW2pjsrwhkhHUAF4YtVlSh1LKAFZTDA4beosm9vVZM3TWFmUpGSTirylkY
- m7fvgYJk/OKePSfnOlA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-13_04,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 spamscore=0 suspectscore=0 impostorscore=0
- phishscore=0 clxscore=1015 adultscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130172
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|DS0PR03MB7655:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59d1f01a-826e-46a7-fb05-08dee106c8c4
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|7416014|366016|1800799024|55112099003|18002099003|22082099003|4143699003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: 5wannTjNPgs9ak/ufjgDHlNOM4RNzJQd/ZqE8dr6cJLKnIr1YzY2cUMsCKo5QEAe8czzGShr92w+v9qT8+4QiTcgXhut1EQBTtpI8DdRz7erCW/HBPANinhQFS8cev4Q1JJ9A8cHZC4Y07KRk7s4E1WEykAJyFTILBrrU4ln1pqHQz2Ri5qXWlQ16iGwb8x1ofVVpTCT6ZPtg3WZA2uHaXj1+ULLR8MP98OCDOg3iD067ZJLXgb2lK7PlbiNfsjF3N7XAqyohVoQsk6OAca+HJeNcaJst6D6Lzb1H/fJbXyegYTpUfpc8aJjGbxREoW5r2tREOqAWZMASDBT2+nux2hhRDBX/UZ6AAs5P0VvCdCoZXevEABtyGAdo+48AM5C1wSWumDC2x/x+suMhGEEp6GgC3kQqS7dLhryo+hNSVyUHpavKZ6asXLdVCVSiaf+hfVKFERIrTQOB4dojuxStU7c09TD0FvImGlws0KU5RRqD21DCJ6MLQ6oP7wXqhcxzTBbZcQT3JFz48m+/Va3E3t4sOlc4jfFwDSfAJCfWZ2aML0hu1//ZECC7hb+9XffnAl2U7qgHOK8V0IwMQ7dl+VQmYN9WmxpEtFDz2Wgau9zaIN3zdJ/rRVFrzVAoJMvV09rJbqtBxBA00O9GHX4VCP9McEym5ML5gi1/Zp0J0U=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(7416014)(366016)(1800799024)(55112099003)(18002099003)(22082099003)(4143699003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YUkwRkhic1lMb2VsdllQcXpQZmZDUWw0bHF4WE54T3NHanRuNDVFaDZoRExt?=
+ =?utf-8?B?UnZheUxWUDJ6SWZ5RExyRHViTFdkanI4UXpTUGZLdHVCMXk4T1g0OUUzT24x?=
+ =?utf-8?B?eXBDaVA3MnhOcmVjWk5Cbzh2VlN4c1h5QkdOT3IwK3BCVlBTS1dacGRUZ1dm?=
+ =?utf-8?B?akk5eXdMd2o1V1FZTXlZWE5uK1JSK3lpblNadFRNNkhnTlZkUUhDVzErU2RW?=
+ =?utf-8?B?ZWJ2U0JkTmVUUExPNU5Xem5TVk5jdFJzWHZmdXFVWkJUSmVNeVF0VUkvZTlK?=
+ =?utf-8?B?TVNzK3Y5T2JpenhWci9rNWxpRGxRT0RXNmpMV3NGOThsblgvYjVNc1dXR2x4?=
+ =?utf-8?B?YnVBUWpvdWhsZWIxbS9qSnBEYWVoV1RvNGt2Qi90aTdyanpNV0tBbXMwSCsw?=
+ =?utf-8?B?bm92dVJPcURHTDg4YiswUnhBczFpZTdjTk9xSEM4VUZ3T1RZK1VURU13bnZ4?=
+ =?utf-8?B?MnJJOUtTSml4S3g2VjRGNW5LVUt5YXU2VHFVZ0M1SUZzY2ZpTjFuczduMXg4?=
+ =?utf-8?B?RjF4RDBxNEV3bFRYd0lyU2hwcWVIL1J0TlBLajFSeE9tMnhIMDk4T01TTFpL?=
+ =?utf-8?B?VUVYYWZEVHJadzR3WVlWbnJreFJ1UXJ0SVNwaUhpc1QvM2lmQVhUU2tEQytU?=
+ =?utf-8?B?S0FyWjJ6SExqbklYSVpTYkcxTmM4Qlp6L05wU2xGQjBBZm5QMU5ELzEzclpY?=
+ =?utf-8?B?VFI3MjhiU1QrRW5ieFVwQTNsNXF0RGVzMldPTmdtdzJRUDJabzViaUZZSkdw?=
+ =?utf-8?B?alZtUlhwYlhZTkVUdGJxYzl3S3NBQ1pQY2gyNURaajJjU0owZmorSGE0RDZJ?=
+ =?utf-8?B?NzZNVXZOUTdUYmtOVHlMc3JsaWd3SXVvVUdxQkR4RWJaZ04zdENYMm8zcS95?=
+ =?utf-8?B?Z083SzNRZDBlTVFjMVl0N0hnTUFFcUdjNUQ2dC9MTUFxZmJIdHFpMnF6RHdD?=
+ =?utf-8?B?SzdyWVBkMzFlQ1R4SUhBL3R5WUdIZVY2TytWaFJaV25pUllqWEc5bUoxTFZE?=
+ =?utf-8?B?bTBJblFoR2UreGtDRjNmTlpEamcwam1od3F0dUF0THM1MElnd3BOVjlBMHc5?=
+ =?utf-8?B?Ym04WUNNaFozVHdTRCtkbkhkQXBGdllwVFRLMEk5TjRINzU4TjJJaGNJc2JT?=
+ =?utf-8?B?WCt0ODlrb0RydWltTll3M2RqYTBrV0ZUbXg1c1M4MHI5M080bG9Ib0padVhn?=
+ =?utf-8?B?QTlQQ09HTUhzZnpTWTFRUGlzT0x5U091Y0FUSG9ZWlNqMEtoaXE5clQ5TC9R?=
+ =?utf-8?B?R2N2V1ZLQnR0eHljRTEreFRGeVVINnZRLzg4Vmtib2xxV0lScnpIdHZoNHJO?=
+ =?utf-8?B?VmdJQ0V3cVZqdHI4M1kyVnFaZzViZDRFUExmaUZFem1ya01qU3plQmtVTjdI?=
+ =?utf-8?B?WUpPdEhMNzc4YUIwQmh3U09yUTJ0ZVhHcys4WHlFSUtDb3NwVndISHFhNzlv?=
+ =?utf-8?B?YjNEbVNwK0tTVEpCR053RnN2ODg1ZjlvY09wa0szK1VuUVdVNGR6ZjBKRlRM?=
+ =?utf-8?B?aTUwbUVFNHFJMW1KQVVQdkVpWEhPZVhxelZYVmlUcmllU3lzT2VuQlRyQU01?=
+ =?utf-8?B?R01ZL09KVkV1V1FZZlZPd21YYUYrVUJZVzhBNmxmcHFyMUFwSmtKODZGU1JD?=
+ =?utf-8?B?VlVmaDhOTklJeWd5RDFicWNqK0d4UXBYK1R6L1JuWWM0dlFQNHZwdmg5MS9T?=
+ =?utf-8?B?SG1OanQvQ1E5cXdZS0lmTGFReTlRWC9IbXFiOENRa1ZjTlA1elRqUWN3VnRM?=
+ =?utf-8?B?eG1WeGt3SEJXTVFvdnl1TlJWMTRnbW9vRGtZZDFoUDlzK1cwUGVVOFlIWURF?=
+ =?utf-8?B?ZnB1RmNBc2pySE9kOTIzM2llTG1ycXpBUys0dEhGbEFsRWlrdURLRE9ZdVdz?=
+ =?utf-8?B?aE5Sd2xVNy9vR0pWd0l0TjlYMnk5RGdvb1RvZUZaSlhPakxvRmZkT2NvRXRw?=
+ =?utf-8?B?MzNHVUU5Q3FaR2M2a2VHdlUrVDdnWWR4RjFYVmlHNlM5a3Fya1laenlKeHBV?=
+ =?utf-8?B?Um9XZUVGc1N3eFpzS2dURkJMWWxPWVRqbnNFTEFIOVVFNTNxNXMwV3RrN3Bq?=
+ =?utf-8?B?RnRMKysvWlZ2M01qVWl3bHlKZjNlaSt0dGFpWlJYM24yMGVhSlJqYTk4V3Rj?=
+ =?utf-8?B?b1o4Y1dkQ09HY1dFY2YzVkFrNlZNYmtkTUJIMy9xbUtpVExrTi9iNG0rNDY2?=
+ =?utf-8?B?Z2tYcndFRzFDMDVVYjdzM3B0Y2VJMXpveDVXQXNGd0RkMTlOdkZUK0Nsc24r?=
+ =?utf-8?B?Qm54Ri8xMjZjZ2J3VE50TUNPNHFXM0NOSXVLK0VpOHVUaUtOR3RIZnpZWW5S?=
+ =?utf-8?B?TzZDVWRZSjZSV2Nad3IrK0R6QjBnK0dycm01SXpUQXBJL3ZaZ1V2UGd3OVJC?=
+ =?utf-8?Q?lpvhubMx6DMgSCY0=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59d1f01a-826e-46a7-fb05-08dee106c8c4
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 17:47:19.1477 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: e3i9SL32mzv06ZnQLcvbHII/l4ORe6NeUN9pJ8d8jZ6F1RZ3tdOzcovW4ttQAzoTP8OBuhQ41vuMCf3GpJ3vYzabD2vunUDYVENebUVLUnI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB7655
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,37 +160,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using length field exposes dynamic carveout regions to kernel, causing
-crashes when accessing these reserved memory areas. Subsystems like
-hypervisor perform runtime carveouts & records it in SMEM.
 
-RAM partition table v2+ includes available_length field which reflects
-memory available after these dynamic carveouts, while length field
-represents total partition size. Switch to available_length for v2+
-to exclude runtime carveout regions.
+On 7/13/2026 7:02 PM, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> mmc_poll_for_busy() returns a false -ETIMEDOUT if the card becomes
+> ready on the exact iteration where timeout_ms reaches 0. The card-ready
+> check breaks out of the loop, but then the post-loop check
+> "if (timeout_ms <= 0)" fires and returns -ETIMEDOUT despite the card
+> being ready.
+>
+> Fix by returning 0 directly when the card is ready instead of breaking
+> out of the loop. The only exit from the loop is now the timeout path,
+> so the post-loop code unconditionally returns -ETIMEDOUT.
+>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
-This patch is based on changes[1] in Qualcomm U-Boot Custodian Tree
-[1] https://lore.kernel.org/u-boot/20260618-b4-modernise-smem-v3-0-472391477988@linaro.org/
----
- arch/arm/mach-snapdragon/dram.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 
-diff --git a/arch/arm/mach-snapdragon/dram.c b/arch/arm/mach-snapdragon/dram.c
-index 0b97b698322..914ee6cd4ff 100644
---- a/arch/arm/mach-snapdragon/dram.c
-+++ b/arch/arm/mach-snapdragon/dram.c
-@@ -70,7 +70,8 @@ int dram_init_banksize(void)
- 				 (v == 1 ? ((struct ram_partition_entry_v1 *)(e))->field : \
- 				  ((struct ram_partition_entry_v3 *)(e))->field))
- #define entry_start(v, e) entry_field(v, e, start_address)
--#define entry_length(v, e) entry_field(v, e, length)
-+#define entry_length(v, e) (v > 1 ? ((struct ram_partition_entry_v3 *)(e))->available_length : \
-+                            entry_field(v, e, length))
- #define entry_category(v, e) entry_field(v, e, partition_category)
- #define entry_domain(v, e) entry_field(v, e, partition_domain)
- #define entry_type(v, e) entry_field(v, e, partition_type)
--- 
-2.34.1
-
+>
