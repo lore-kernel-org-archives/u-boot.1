@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAADC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 20:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 513B5C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 20:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F04584CB4;
-	Mon, 13 Jul 2026 22:57:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFBD784CBB;
+	Mon, 13 Jul 2026 22:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dX0s+6SU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZtGSw7Dp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29ED284CB5; Mon, 13 Jul 2026 22:57:28 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 7B9CD84CBC; Mon, 13 Jul 2026 22:57:41 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF48A84A6B
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 22:57:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93BED84A6B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 22:57:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-698ae09e356so4698847a12.2
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 13:57:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783976245; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa7ba3e6so6312014a12.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 13:57:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783976259; cv=none;
  d=google.com; s=arc-20260327;
- b=Bi1S+hCGL6ZfWOUA7HXY7SSCWYk19FVd+eFnAsljRMzPxysULpjFpyb6nAWpAlVOOG
- S9eX53Zzl0Sk640W1n1bCdutJOMFzCJzCpAIIl9oPJG+avnWVZo+/pnXNJihej5X52mh
- jkw5sWZ/cy5kelFlT1YyI2yTmgQ2zJwhYvaJu9Z9iqj8KPY2hWTI+48oh5IJQyGiK3BT
- qc68jdvHX1W7Bdl5bIRMhH86DAJBpETgdyuH18DMhT7Vm/8YcIDIGClx+LTp5O/1yJ2e
- FrdYRwynWPX1UCGZGA7O4i5XxFS67UUgsSYewIrD+t6HESn6TP1Zd+9Xxk2FBeghJt3r
- ZK/w==
+ b=cohQ2evARpYcwjAMVkRw/02MFZWCvE7meoBt9RSAAQGkVc/0xINx6N3emfZL3/wSZg
+ OireCuLKvPjxIV2ekWwDAzGReeNM7Ww/H2QJHqPZyFHutuIWEWg2GX4jrAiCG9hzTwjI
+ xcKrY3XNVzc7hg19swtzr2J0uhK8jzmdqLmyHe0bVxHD4HJEarliBaNsO8YVmYzBumJy
+ lBByELBXEung+l/5y1nUCv7mik7oiXkVYWXt6PFx8XVW2dQB8KuvGoSeESU+8up+NieD
+ o35zHiZMm1our8wRCLVLxMXAL/MgM9TN6Tz+weWKIcSnqLirLAw5w0qWRFN4G/hQkqzp
+ vMyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=EGPrNRChVvPXQnIrmyPuLno/wzrh1+tkcC9v9Hnhp3M=;
+ bh=5TfKVIneVTYieuSqpF0hXuL15IFY/vMKja6uzJkJVvA=;
  fh=RYRoxNOjuHPJgeepkDgPG4TS1YEj8vlj2h5gDMROLMQ=;
- b=VD0jSAn8Q6LlwukLXjygSdWC+wbBaryOW9jvmxbXvvP8Tmc8qwHCDn6pRexUhYdQ9E
- IWNSjXs/tZ3+7uIba1k3QkuIb8QHk3U7fLjwfDiq141OliiZAWA5WelZn7DpHgI0WIjv
- erAa6jPROrEFRrpeR4amltkigg/mFXzhmLG1sMwi2L+fXFAFcN6SXODfTCEJlxD9vrbk
- JyrrmvmHPC+j7CjWi/yk2PWZ07VlRZKDTcjxrxKYZZK8dB7c5RkraHX78NJVvdTys4xh
- OQFmfcaydo/SgIL73FGH2L8Egc3AtqrCg2Wyx/I8YpreMuBPYnhuYJ/sgE9Q1IF68BUD
- DA0g==; darn=lists.denx.de
+ b=ia2xqDxr0AXpN+e/us8a1z7wn+P9qMasLlzEvW/YU6n/RSHV6Ai5yMwqGEBlt/hDJX
+ m6gmf4clqLPUwQRoKITF5AQaA9IPZnUEKLRRrWbG1kfvRX2MdaSDeisFsbSkiFDDexrU
+ ZCHwqslJQ2S840jDGWRCdN9y/PgWBCoaeiWEKfbc1zML9jdvZxLsR+qwoktyWZbqZrLE
+ hWiKg/+4beNtUrFOx//L0Z2E03X3OwiJ1ymN4m8fVtIfZzKELS42suiovWAKSMRxtegT
+ lvP2sDK1SNDOnjdRUPdkBsJisXizlLFWRcs7ZZKqiK930javK6ycF9GbwfQMEbrsEwCi
+ DLHg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783976245; x=1784581045; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783976259; x=1784581059; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=EGPrNRChVvPXQnIrmyPuLno/wzrh1+tkcC9v9Hnhp3M=;
- b=dX0s+6SUHPhOwoFVhW2grPVkl9sO8wfQNHafGTdZavDGrYWqixenYhg3Ki4bcL+y4q
- Sns9TgH8FeASe7RqVBfMg92HXrrgxb4hdZtWXT5izsabTUebaApRcENXeKYKuDe46dzj
- UJyUHJi1vcuI4X/lmx0nhtwmxdVXjQq0GsTQQ=
+ :content-type; bh=5TfKVIneVTYieuSqpF0hXuL15IFY/vMKja6uzJkJVvA=;
+ b=ZtGSw7DplP5g2skKdq+n4nNK7tixcQ9TUw4OmMouztCqCvBJsIUFCZqcNSn8rafkrT
+ EY+0hI1SsBVIn/1JuqYssNHb/dD6ao9xZXtljFtMhGNG2wcDI2bdU83J+DSZV+gr5I/8
+ GVkQWOKiE+gD0+5LZsah+piCqify6YkgMqK1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783976245; x=1784581045;
+ d=1e100.net; s=20251104; t=1783976259; x=1784581059;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=EGPrNRChVvPXQnIrmyPuLno/wzrh1+tkcC9v9Hnhp3M=;
- b=KybwiJgV3Le3Hz5PmssZAscOCf8uWkrRmNcCi8SLvuhQO8KObBquAS2hb75osJL+D0
- 0UD/UqyL8x7fGDA9OCGHKMjIMR77BND6EcIi2AVDMNPJWAkuNEChrK8n3+8Obr0c6ndy
- vVvYqkLzB3x+RMwbQcG/niM/Q/kOa19ds7n/YieVnTa/qwhYEbGls+3MBzK4tWS1juvn
- 1yUrUou1jIMXwmsY0RVIIJRUt8WnMwLgOGdOiS2w4UfUCZmDeuTNnOXaWYnag9kv4PFq
- +vBxVF1rw9jea0XWOWEvRPdnSKwU5HWqVVesrMJM1vcavawuns0c+EtmGi6UOP7vm4/8
- zVPg==
-X-Gm-Message-State: AOJu0YxxA124ywzdbnn+kVvUIBFMQc1CqwwosdAr7um0UBoQrGkNvYyf
- SGhuhL7BMRV4onZK5tFKnDABThK4KzE7R5k9KAQTd5xW3iSWk+SS4Ot4n93vxHUjDO17L9I6ZJ6
- mONJ+24iOjzLmQ26vuLj3M7VsiFvDjVyKCxJIsm21
-X-Gm-Gg: AfdE7cmEI67dK1+z+Ow2DBGq3IVY2kKc3HtWV1hAzcVy4OjatS871zCg2ZMd+0QYY2X
- 0WyvfxX/uBvUr5Zql3a8O78LzGwz9ngIP/q5q14bMQeDEuw1TFEdZKEgw2m0Icrz1bfYE1UyLPy
- 2OeqXedcDDlR90t/hbp9shKjJcLQIAMqQH5cDwDrqOlmUgfe4+YXT3+pw6YGqPlIf4zH9iXjGmU
- hD8uMoExu077+G8yeyj0LFtX9wX11O9r8MmuOOMpIUxtgxZKetvHnA7tj5FrHLetjWOxZQ=
-X-Received: by 2002:a05:6402:321e:b0:697:84d1:e5c9 with SMTP id
- 4fb4d7f45d1cf-69c5ef8741amr4932388a12.3.1783976245380; Mon, 13 Jul 2026
- 13:57:25 -0700 (PDT)
+ bh=5TfKVIneVTYieuSqpF0hXuL15IFY/vMKja6uzJkJVvA=;
+ b=RaGe+YOIrItN3CrJEGX7Ko0GJygwbQjEKi78TG1fCLv7pUOdtsd042027V65/1mGnv
+ jeG2s9KXF5vNvLT10t8lv0PmISKsE+58gjyVFQdCBvirYP7zXOWekEgXDiIlbprtONna
+ KwVackdPT2HocVEwl7Gx9oE8NVEhU0R/YJiOqnKLRdmL+nG8YfgTQPTWpu5v6PwV8FZ4
+ LqWGT4gbLfOk6CNAt2TS2gJlixmtpvTTsgDByHOWgdNA7mKHVbtsPnCM6iiYpgYzQU+n
+ Ani/CU3qWg08YJXDjPYeKwZR5IWNk5Bs3stI5G8Z5aHCrb854q9pKhPakeyj/sE8dTpt
+ lWcA==
+X-Gm-Message-State: AOJu0Yxa4Cu01vtLlgytRI5h+FN5SUC/uoSW1On56Hm6wXP5lXoD69zD
+ Zmwj6aeJKVEMfyfjd7IukaAfq2jXLu/kt2S9ZOV1L8xIXTxoH9Uzvy8Gt+8StI45ra3FUQiH272
+ +qkVjdTHJqszjBOU7GldSPlq5AO6JSZucKt41qM3b
+X-Gm-Gg: AfdE7ck0rwr+cY8B+O3lBLFQq/JmLdZ9Pt0a7U7fTCDEpt3Izw1V6Yb4Vfg/hFYz37t
+ 0QUSoGsy3AdNMdW6X4aDgsIpxNVLiONojpo2NrcDyU7YUGrRA5Odnq2aYNeMkTG2dATjk/POJVd
+ 6ReX7WqEoQ/wPgCA2jK6Ih80Z2EpZI9EMp79/g8/QxTrFVTTASubT15EjobQr5ZFJ/KXS9o93/N
+ xCEESnC9qOm+niVh2MuKpwumESN396toq1PfmR57B7lF5hXuAi4g3qfcUFny3i9e3DNCuQ=
+X-Received: by 2002:a05:6402:3208:b0:69a:2ee6:4ca5 with SMTP id
+ 4fb4d7f45d1cf-69c5f0c77bcmr5063606a12.4.1783976258940; Mon, 13 Jul 2026
+ 13:57:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260709142901.2054431-1-pranav.sanwal@amd.com>
- <20260709142901.2054431-4-pranav.sanwal@amd.com>
-In-Reply-To: <20260709142901.2054431-4-pranav.sanwal@amd.com>
+In-Reply-To: <20260709142901.2054431-1-pranav.sanwal@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 14:57:13 -0600
-X-Gm-Features: AUfX_myRz6WrEoLvcwqa1fqoGPLGgnjjlXq6umV8dJr-mUQegf8YuVqgm2ULNek
-Message-ID: <CAFLszTjOw7UKS+7OvTkS8RHTcUNcE+YEcTuXqY2AxHdjmt0MhA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] gpio: delay: fix offset propagation in
- gpio_delay_xlate()
+Date: Mon, 13 Jul 2026 14:57:26 -0600
+X-Gm-Features: AUfX_mxdH20dXoSOnBHB-I4MBinWQMFdq9kZUtWo0DMV17EmbQVq3ioig23Ak6c
+Message-ID: <CAFLszThNYaMRxxqcZa==hvGt+QiNpNYb+yoy6Dmamysrx6ZT_w@mail.gmail.com>
+Subject: Re: [0/3] gpio: improve claim diagnostics and fix gpio-delay offset
+ handling
 To: pranav.sanwal@amd.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -108,29 +107,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-09T14:28:59, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
-> gpio: delay: fix offset propagation in gpio_delay_xlate()
->
-> gpio_delay_xlate() indexed priv->descs[] correctly using
-> args->args[0], but never propagated that same index into
-> desc->offset. Since gpio_desc_init() initializes offset to 0 before
-> xlate() runs, every consumer's returned descriptor ended up with
-> offset 0 regardless of which index it actually requested.
->
-> On boards where gpio-delay wraps more than one real GPIO line, this
-> caused every consumer past the first to silently collide with the
-> first consumer's already-claimed offset 0 in dm_gpio_request(),
-> which returns -EBUSY. The second consumer's real GPIO line was
-> therefore never toggled.
->
-> Fix gpio_delay_xlate() to record the requested index into
-> desc->offset so each consumer's descriptor is routed to the correct
-> underlying real GPIO.
->
-> Fixes: c866f2f197e2 ("gpio: Add GPIO delay driver")
-> Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
->
-> drivers/gpio/gpio-delay.c | 2 ++
->  1 file changed, 2 insertions(+)
+Hi Pranav,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-07-09T14:28:59, Pranav Sanwal <pranav.sanwal@amd.com> wrote:
+
+> This series improves diagnosability of GPIO offset collisions in the
+> uclass layer and fixes two related bugs in the gpio-delay driver that
+> were uncovered while debugging such a collision.
+
+Thanks for tracking this down.
+
+One thing is missing, though: tests. The gpio-delay driver has no
+sandbox coverage at all, which is presumably why these bugs went
+unnoticed. Please can you add a gpio-delay node to the sandbox test
+devicetree, wrapping at least two GPIO lines, along with a test in
+test/dm/gpio.c that requests both consumers? That would have caught
+the offset-propagation bug in patch 3 directly and would also
+exercise the bounds check and array sizing from patch 2.
+
+Regards,
+Simon
