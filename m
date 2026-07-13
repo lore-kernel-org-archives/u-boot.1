@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F40C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A4FC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 15:02:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EDD384B85;
-	Mon, 13 Jul 2026 16:53:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4949B84BA3;
+	Mon, 13 Jul 2026 17:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iJaP5LjQ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tyNjOGWL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6F8984B86; Mon, 13 Jul 2026 16:53:50 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ id 52B1784BB4; Mon, 13 Jul 2026 17:02:46 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 682B084B51
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:53:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE68B84B8D
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 17:02:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,34 +28,35 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1783954427;
- bh=2s9GugmU33NVmyAcWVlmBjHNWd6263hB41hlrWLKkYc=;
- b=iJaP5LjQcl/GKLrHaHOLPsdjpBfJxPBsChG26H0yas4GtyeYPsqg4gDDJbrKdYVQ7GhnqLV5L
- hmfQLuSm5K4WTiq/ri1g9OxYEruAxot1F2jL1Q5jv3IKEKQAUlefvKHmyLJjBH5JMd/p52L+tXP
- 9zYOJI7nqt9kd0b3znWAafnTuUe15ui39TiiQE874LZFq6Lg7QE7915NNN4tqIG763m4Q5b7eZi
- lx48WanTgZGCQM77DaVfUSdOwH00tJR/bWIhuea0kgcwPvbL7cCn9VhU6OHaaOzXZJzZfhNS3WL
- 6TU1yz6JI3+4s625s2ORadCV0OuW+P4hgv6NE4JmLLUQ==
-X-Forward-Email-ID: 6a54fbf971ce19034bfe8c10
+ s=fe-e1b5cab7be; t=1783954962;
+ bh=NGtZA0hr99g5IQtkGWUQW2FSf8pRjkzRVKHpeEh1wvQ=;
+ b=tyNjOGWLtNJCkMk5T6nrLJonbN5S28Zcu/rqEn9b4zBUewQo4OPK2Ylgdsk+dW8DYXTfJqyCT
+ 90qIXrrl/yVwSliEYCYJ9bz5FRtFiVirkeNgFI2UlC/4HeYwhDZKMZYyVF0smYx8MlliEs0GtNS
+ M8zHqXYqrXqvz7RwFuugNMj50X22R/UoydhVEaU7LdH8/2AsE5BvmdIOUJuUTkfVwQJ+lNzYjk/
+ 6XPc0dT+1X69/jHModkxpKVqyOd/uUja5/nVISRlHLaGfRAFwD246nIBuTsIN/MIWFXVf+Hw9iD
+ L04c/0HHptPaFIfJzYZqYuWgSxIx7xIci7uzEImM3upg==
+X-Forward-Email-ID: 6a54fe10c414db019cbe55ce
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
+ 121.127.44.73
 X-Forward-Email-Version: 2.10.6
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <ab6b6671-fff2-429d-82c4-6d1a9f74fc2e@kwiboo.se>
-Date: Mon, 13 Jul 2026 16:53:43 +0200
+Message-ID: <587d0ac0-000e-4b32-a806-f7bf69f284fd@kwiboo.se>
+Date: Mon, 13 Jul 2026 17:02:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/11] Kconfig: Add missing depends on xPL to xPL_ symbols
+Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
+ u-boot@lists.denx.de
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-7-jonas@kwiboo.se>
- <CAFLszTjxty82LThDuqmAyN7XasOPVT+KBSYdZ_KGd8GC0537Tw@mail.gmail.com>
+ <20260708220540.3368825-9-jonas@kwiboo.se>
+ <CAFLszThMyQzP4FaF4DDhdkiJ_Rs6b41tUK36=x6bA2xQBYX-LA@mail.gmail.com>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTjxty82LThDuqmAyN7XasOPVT+KBSYdZ_KGd8GC0537Tw@mail.gmail.com>
+In-Reply-To: <CAFLszThMyQzP4FaF4DDhdkiJ_Rs6b41tUK36=x6bA2xQBYX-LA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,59 +75,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/13/2026 4:24 PM, Simon Glass wrote:
+Hi Simon,
+
+On 7/13/2026 4:28 PM, Simon Glass wrote:
 > Hi Jonas,
 > 
 > On 2026-07-08T22:05:26, Jonas Karlman <jonas@kwiboo.se> wrote:
->> Kconfig: Add missing depends on xPL to xPL_ symbols
+>> Kconfig: i2c: Depend on correct xPL symbol
 >>
->> xPL_<name> symbols should typically depend on the associated xPL symbol.
->>
->> Add missing depends on xPL to xPL_<name> symbols to avoid the xPL_<name>
->> symbols being available when the associated xPL symbol is disabled.
+>> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
+>> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
 >>
 >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >>
->> common/Kconfig | 2 ++
->>  lib/Kconfig    | 7 ++++++-
->>  2 files changed, 8 insertions(+), 1 deletion(-)
+>> drivers/i2c/Kconfig | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
->> diff --git a/lib/Kconfig b/lib/Kconfig
->> @@ -972,23 +973,27 @@ config SPL_LZO
->>  config TPL_GZIP
->> -     bool "Enable gzip decompression support for SPL build"
->> +     bool "Enable gzip decompression support for TPL build"
->> +     depends on TPL
+>> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+>> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
+>>  config TPL_SYS_I2C_LEGACY
+>>       bool "Enable legacy I2C subsystem and drivers in TPL"
+>> -     depends on SUPPORT_TPL && !SPL_DM_I2C
+>> +     depends on TPL && !TPL_DM_I2C
 > 
-> The prompt fix is separate from adding the dependencies, so please can
-> you mention it in the commit message? Otherwise it looks like a stray
-> hunk.
+> This also changes !SPL_DM_I2C to !TPL_DM_I2C, which fixes what looks
+> like a copy-paste error, similar to the DM_SERIAL fix in the next
+> patch. Please can you mention this in the commit message too? I
+> checked the boards that enable TPL_SYS_I2C_LEGACY (the mpc85xx
+> P1010RDB / P1020RDB / P2020RDB NAND configs) and none enables SPL_DM
+> or TPL_DM, so there should no functional change, but it is worth
+> recording that this dependency is also being corrected.
 
-Sure, will update commit message in v2.
+Sure and great, I will update commit message in v2.
 
 > 
->> diff --git a/lib/Kconfig b/lib/Kconfig
->> @@ -960,6 +960,7 @@ config TPL_LZMA
->>  config VPL_LZMA
->>       bool "Enable LZMA decompression support for VPL build"
->> +     depends on VPL
-> 
-> BTW SPL_LZMA_SIZE_OPTIMIZATION (between SPL_LZMA and TPL_LZMA) has no
-> dependency at all, so it shows up in menuconfig even without SPL. It
-> fits the pattern this patch fixes and could get 'depends on SPL_LZMA'
-> while you are here. What do you think?
+> With that (assuming you figure out what Tom raised):
 
-Thanks, I have already added following for v2 of this patch:
+It looked like SYS_I2C_EARLY_INIT is the culprit for size change.
 
-- SPL_SYS_L2_PL310
-- SPL_SYS_STDIO_DEREGISTER
-- SPL_NVMEM
+See [1] for my findings, and I am still not sure if we can live without
+the call to i2c_early_init_f() for the handful of possible affected
+boards.
 
-And a new patch that adds depends on [xPL_]LZMA to
-[xPL_]LZMA_SIZE_OPTIMIZATION symbols, I felt it was different enough to
-put such change in a dedicated patch.
+My gut feeling, without knowing anything about the affected platform,
+says we should accept the dropped call to i2c_early_init_f() ;-)
 
-Will send the v2 once the I2C_LEGACY size change is resolved/accepted.
+[1] https://lore.kernel.org/u-boot/975a650f-88cf-4b2d-8f83-2df3f93ab25d@kwiboo.se/
 
 Regards,
 Jonas
@@ -136,3 +130,4 @@ Jonas
 > 
 > Regards,
 > Simon
+
