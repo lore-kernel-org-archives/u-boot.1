@@ -4,113 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B8EC44507
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C97C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0042884B45;
-	Mon, 13 Jul 2026 15:11:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9322084B33;
+	Mon, 13 Jul 2026 15:15:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fEUDWnfx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JEVJrZf4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A51984B48; Mon, 13 Jul 2026 15:11:04 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id D6EB984B3B; Mon, 13 Jul 2026 15:15:09 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338AD84B3B
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:11:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E429584B2B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:15:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6983f20a8bfso4619632a12.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:11:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783948261; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-698acd36d67so5662545a12.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:15:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783948507; cv=none;
  d=google.com; s=arc-20260327;
- b=hDcaO7CIvUXTD7B6FwMzKgIv34k3KnbyzfGr6XsXiqWxqgD4PijcNAyZoMhnDeYAG6
- VfyjgCzvHyX6n/EqM5GwVz/uMZBjbCa2LHGGSaWRwiFyQcXPLLvQgWtbqd5NIy54PNHI
- toTN+MIPOKc40lLoc6jYg2PmvAXzIRipeF6LwU9pvxYxxvJ6kVbSVHA1Tha26flaC505
- 0kySWsZQYVeC79jFRFVNLa1E0j2yVIRPeduqf0/3nWvZEIcExTLujsQr7p7lEHg0HQq3
- RjSRRJeZOCCI0Zj1seckaNZcYo7C4KhCAcocySvEc8KmQ6xfqFELGQIjULmGrxrnZox8
- Royg==
+ b=dLoSgwidsByzrRi9pYAD0kcYR4LOtLaKgcpMpBTv8SloARRUGLajntSuDqs5zGhiGc
+ Fuzu9c/1NeGRUfRlVHvSjRrzBP54j3tJ3Hy5oClcbgl3/OGG+66Khxz61I1g5xgPGljA
+ oxtByC8iqTQ2X+IHV0gCjj6p7QZqlC9AjSIE9LG7hCVRRPSjLdrQl//V9FEeLbWnm7tq
+ QIiwudByJmBuMqtlLPXZxyhShvAHQEvqmgXp3Cug6qK+/Q9is06+Dzl086XAi99JuNF2
+ avNPwHOo2CXd/TK4ceSQ4cflo+4jNanznp3McNBuZUUk1H5lEa+xra4R3uXZm+4UAroh
+ R/mA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
- fh=7fq2WdkNCvCMvJmCEHaCPgmX74d0EzLwasMFTlOEV04=;
- b=UBmcygFt9RwW6W0F6o1qjsIiPzC2AEb3/cg9jEMfPsovcQE424PqDzZlZZZmK1TFym
- Yys2/19MmU1mIOYDu0oUdKuWj3KwPeJjWJNVaONCIdSuaXsfp6wZXGSlg09OH0SfNmIM
- vOmOjEZglEZmmK0Uw0dULEUacZLFeRWVagpJXbKYmjosG0G3K09VBBGYGdDAlgq+UuMO
- RNsz6tGwdgAD00vkh5Jhq0CulhOrSdtXGVyfdcaj63NYA0y0DIcj6Q5+FZ+C36PYeGLk
- 3Ejrn67Z/L6GGpyW8oc3zFDHZGhlP33hCivFH5KeU69E6W0MJN+t6j2nD3Cch7v2vO/C
- FcCw==; darn=lists.denx.de
+ bh=Y8TkMcGQhOGzw/P9dKIu9tZrWaXAOQYXKRHtCj+g9Tc=;
+ fh=6hUQ+cBDEhdswFVdh7jsmENQZaH9K2EJzvSA9UTasck=;
+ b=Yd2Xdb5pM42spLJ2ra/i7Yd/oGtoy16RvjuXwypAXmQZbzv9DUChoa1oYpvkc1VMNF
+ KSwRmYhg6aI0G4gi34oMNfVNl+hZFx7YzYYti6YyfnWBscau2zBRPwRX50GgI0snctNN
+ GLYGNMzHrXNB6t+Pw7fnLhcvbHCsZgB3q8YDVf6hrTJBaOq993EHMQ0Q7NPuWwbbFpQi
+ 1ztCx1rD7zdcnfp4mYQWDhTeNMepTDNRwDBWPPLT7HWrBBugZV1hUOlEjyYMo3aYZkhM
+ 2EEj6q25Ds/donyMfPDFZda9Cke0paztmP27Tm1cmVSZQCRN6W6exCehEBqghcselem5
+ wLkg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783948261; x=1784553061; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783948507; x=1784553307; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
- b=fEUDWnfxeG5H+CkT4Cj7HW+uxiu+3TtfoUzTXtpI7TIVHqO4cWnxvIePjyrj8Bz4rn
- GF4z2F2cIXCuHtd6hd2RSd55zvCpzNgvzhCE4hXJG0QJW75sPELeRIrnugFl6N2CZ80p
- VMWp+v3yM3XCUACIe73NQD6JDTueKBrprhnUA=
+ bh=Y8TkMcGQhOGzw/P9dKIu9tZrWaXAOQYXKRHtCj+g9Tc=;
+ b=JEVJrZf4+yEMXWmmBG7GFERDAcHUl/u2JzDWecsEMmcfJJj8xpujWKcGbD2el+yb+g
+ 1YMFaF8pcq9WxubbgzJyf7cE8D4rcOc1AfA3DfOBE5H1dM3eOAMhDnSIdJ8Mtb94f06b
+ dZjD5mnTgrsDTW8w9bKDtOq0ic2q2ZQL2Tmkw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783948261; x=1784553061;
+ d=1e100.net; s=20251104; t=1783948507; x=1784553307;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
- b=R2gwd73N/YeSf8bLai3hqtBKw66AeP4WWhiRt6fUQJxp71IE3npjmbklkE6p3toKrs
- 5W8GBZYTDq2+REmFo4l634g3pkhiCZbiAfHhFVgC17C2IL60HU9jz0St6c6+LTzcVaoL
- BwjoGaK5K8XvvsVxoNf0XtfAlNVuEduNn8fOcHWr/5HyP+kdfgNcKZ9VBU+E0S/qXYrw
- KWUHkgIqBbMp1LHmb3+Qk9BS8VtoK6wpn10trJ0urTo0V3cEkupJv+r6geQzm4FR04vy
- OaTqSsWz5dq2mzGUpc6GU+WUjDSPWSAhCZ7I1egK8qPmQAX5K95RX4dRN4i+TKE0KekO
- czKg==
-X-Gm-Message-State: AOJu0YzlOLhnbU0nurtxwWWAAZNecD3HiDznDKccJFRBbp5rY0P+ApQ0
- ZDNSakGI1wFYN1b9DluK8AJ8dCK4wdOaasc76MIdOLDvcyGAwoFthdmvhg3IE7xVpfTKD1IBcoa
- Pb898F9TWLcOjH3mfKcNUOiNHdD1AZrHByw3hjXz2
-X-Gm-Gg: AfdE7cnuxef6SGkYYLcilv+fh2ThhSnp7pwdSCJRGPvxO7USUAalqSUgq1M0mODn3uU
- tq4aSb4/o/16Th+Hh5F1cNQEmRwVFeN0nlPe2f7M+wVSQUNjpuqUGFBNiM4510OhmbGM3iL7qai
- t8G4no2dYAE1BuOMZoeUEO4yJwMy7NRMUyCAEnwHB1geP9oioG4NCIAYbOV90pAYpGNu6VC3ieI
- ccsuD3tNWta6+ee4HboT9ceZmXfMNAm/XbMWTcMgrVEcqBfne+5WWSO9V4gfcnM/u/KgeM=
-X-Received: by 2002:a05:6402:5253:b0:69a:a4cb:2882 with SMTP id
- 4fb4d7f45d1cf-69c5f0bb815mr3932075a12.9.1783948261560; Mon, 13 Jul 2026
- 06:11:01 -0700 (PDT)
+ bh=Y8TkMcGQhOGzw/P9dKIu9tZrWaXAOQYXKRHtCj+g9Tc=;
+ b=hjft0CJLSJdk9kx4R2vaFlqqXND+bD5R3Dslzrvf0myvE9O5+82gSJh21Xc2bB4+WB
+ 2lRQ8iUUqSfYuWFCyPE7vxMPO0vkWfmf5jPbjQBXSFgV+KBiwgC+9kG28+xsQuIgqUdy
+ UKJh8iPbK5WjnuMFR1Gv46sCT9iqGS8AVcmc2BGzDeal00hwv6IMLMhuu9h3sgP2GCfw
+ WWAi0vkfNuTXGxECG2Uv7jwO37D2Haq4Fci+iVojFenowauI9/G6hgSi99tvwT+lNKvR
+ iIkRLvW7MwSKn9x1AB6weMT5Gs7wT/AwqksWGcaHmSg2WI02NjgGIbLaaWveyPFwEpwO
+ iMVQ==
+X-Gm-Message-State: AOJu0YxvE+fjVHwAXus8Se23jyQjEAxxIoylGjUQPiMfKmIFJ1s/auw5
+ TrSxylDWWjSm2WpYsQTRAa9STmb1x/TvC675R4FFgPzHneDAB5lYwC3mulJrR60aBEuON7VuMgB
+ e56vC/4v7G19YNejaaNULUM22seXmzd8fsTeBE0R5
+X-Gm-Gg: AfdE7ckMP3p5gB9RgWNGpCDEUrE9N1CKYkskSbpn3s/BCCU9vgglOoNNlMo44MMXIvX
+ bXmLOirJ5z06HwmyFopUQFjG619itZZRz0rNNyA18JVUNXFIg1ZvAF8x7RAeixDAg78ngAtL/IX
+ GMhpDAPAj4piexluM7WtiHixkFU+LnEs9NZwT3LjwW9om9N8Un4dekG4nym/E16wzcsXPPhQR+2
+ 6AJ7qLaa9nk+yOeMZaApBsw9G4mFy6skyoGfRPPWeLJ3B6jkCnOL5/lO1FwXoGZ8B+8z/4=
+X-Received: by 2002:a05:6402:3583:b0:698:3b7c:be69 with SMTP id
+ 4fb4d7f45d1cf-69c5f244e46mr4026595a12.37.1783948507299; Mon, 13 Jul 2026
+ 06:15:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
- <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
-In-Reply-To: <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
+References: <205BD474-178D-4E91-8C41-33C46E1CCFBB@baylibre.com>
+ <CAFLszTgP05iS-4dyaLbzmPGppdMmFxUQvh=JJJGnSjKJ0MnL7Q@mail.gmail.com>
+ <CADh8LscDis-pfMK26usYEfS-cfRRSwvcm5hg_akXr287oDXQ=A@mail.gmail.com>
+ <CAFLszTgqQtt-FMx7Rh3vVE_NLL8cKp5vveqmi4iNOKE2GwJt=Q@mail.gmail.com>
+ <CADh8LscEUi5kvGQ28GErjEM=WvQ=6t0p5Kh30jQ-S8ZapG8yrw@mail.gmail.com>
+In-Reply-To: <CADh8LscEUi5kvGQ28GErjEM=WvQ=6t0p5Kh30jQ-S8ZapG8yrw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 07:10:48 -0600
-X-Gm-Features: AUfX_mzvFGeIOb8KatzkC1wZ5JFQpCwEi2LrlmKBeVwX59l1CSTRWZ_E4NNztDs
-Message-ID: <CAFLszThwLCFR+HwhOVa69oGv7NTwcjXvHGtgbFsJ4kbPOweRFA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
- support
-To: romain.gantois@bootlin.com
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Kever Yang <kever.yang@rock-chips.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Herve Codina <herve.codina@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
+Date: Mon, 13 Jul 2026 07:14:55 -0600
+X-Gm-Features: AUfX_mz8i6FQHmc5znYOvs0x1-2x2OfFMIRKzK5UrOJj8eUSYB40EirlF8KOafM
+Message-ID: <CAFLszTgr-j+6rVixiD_3EtC1Ve=iD7aunyKD1=HV=LUEg51iyA@mail.gmail.com>
+Subject: Re: [RFC] bootstd: firmware-owned OS devicetree for EBBR /
+ SystemReady IR
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, dlechner@baylibre.com, jstephan@baylibre.com, 
+ baylibre-upstreaming@groups.io
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -129,95 +116,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Romain,
+Hi Carlo,
 
-On 2026-07-02T08:11:07, Romain Gantois <romain.gantois@bootlin.com> wrote:
-> usb: gadget: Add Renesas RZ/N1 USBF controller support
+On Fri, 10 Jul 2026 at 04:51, Carlo Caione <ccaione@baylibre.com> wrote:
 >
-> Add support for the Renesas USBF controller. This is an USB2.0 UDC
-> controller available in the RZ/N1 SoC.
+> On Thu, Jul 9, 2026 at 9:16=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
 >
-> This driver was originally written by Herv=C3=A9 Codina for the Linux ker=
-nel.
-> Suspend/resume features have been removed in this U-Boot port.
+> > Just on this point, the question is really whether GRUB does not touch
+> > it. My understand is that it actually loads the FDT from a file (Ilias
+> > is the expert here) and that is why we have an EFI fix-up protocol to
+> > send that loaded FDT back to U-Boot to be fixed up before booting.
 >
-> Linux revision this was ported from:
+> Oh, ok, good point. Now, there are two cases:
 >
-> 74851fbb6d64 usb: gadget: renesas_usbf: Handle devm_pm_runtime_...
+> 1. If grub.cfg does not execute the `devicetree` command, GRUB uses
+> the firmware-provided FDT from the EFI configuration table. This is
+> the path I tested (most common in stock distro images?)
+> 2. If grub.cfg executes `devicetree <file>`, GRUB loads that FDT and
+> can replace the configuration-table entry before starting Linux.
+> Debian/Ubuntu GRUB also carries the EFI_DT_FIXUP_PROTOCOL support, so
+> the loaded FDT is passed back to U-Boot before GRUB installs it.
 >
-> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
-> Co-developed-by: Romain Gantois (Schneider Electric) <romain.gantois@boot=
-lin.com>
-> Signed-off-by: Romain Gantois (Schneider Electric) <romain.gantois@bootli=
-n.com>
-> Tested-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+> The mechanism proposed in this RFC (V2) guarantees that the selected
+> and verified firmware FDT is the one presented to the initial EFI
+> application. It does not make that configuration-table entry immutable
+> after the EFI application starts. After all an EFI application can use
+> InstallConfigurationTable() directly, so trying to enforce
+> immutability in the firmware-FDT loader would not be sufficient in any
+> case.
 >
-> MAINTAINERS                       |    5 +
->  drivers/usb/gadget/Kconfig        |    9 +
->  drivers/usb/gadget/Makefile       |    1 +
->  drivers/usb/gadget/renesas_usbf.c | 3036 +++++++++++++++++++++++++++++++=
-++++++
->  4 files changed, 3051 insertions(+)
+> BTW this also means that authentication of the firmware FIT covers the
+> DT provided by firmware, but not a later DT deliberately loaded by the
+> EFI boot manager (we cannot do much about that). The good news on this
+> front is that (AFAICT) in a Secure Boot configuration GRUB's
+> `devicetree` command is normally lockdown-restricted (but again that
+> is a policy enforced by GRUB rather than by this mechanism).
+>
+> In general I think that is correct rather than a hole: same precedence
+> as passing a DT to bootefi, an explicit devicetree beats the firmware
+> default, and firmware cannot stop a loaded image from installing a
+> configuration table anyway.
+>
+> Hope this works, cheers.
 
-> This driver was originally written by Herv=C3=A9 Codina for the Linux ker=
-nel.
-> Suspend/resume features have been removed in this U-Boot port.
-
-Please also mention the two other removals noted in the cover letter -
-handling of endpoints > 2 and dynamic detection of endpoint DMA
-capability. Otherwise users will be surprised when a gadget needing
-more than two endpoints fails to bind.
-
-> +     for (i =3D 0; i < ARRAY_SIZE(udc->ep); i++) {
-> +             ep =3D &udc->ep[i];
-> +
-> +             if (!(usbf_reg_readl(udc, USBF_REG_USBSSCONF) &
-> +                   USBF_SYS_EP_AVAILABLE(i))) {
-> +                     continue;
-> +             }
-> +
-> +             INIT_LIST_HEAD(&ep->queue);
-
-If the availability check fails, INIT_LIST_HEAD() is never called and
-ep->disabled stays 0. usbf_reset() and usbf_detach() then iterate over
-all slots and only skip disabled =3D=3D 1, so they will call
-usbf_ep_nuke() on an ep whose queue list is uninitialised. On RZ/N1
-all three endpoints are always present so this is latent, but please
-set ep->disabled =3D 1 before the continue (or at least init the
-list_head).
-
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> @@ -159,6 +159,15 @@ config CI_UDC
-> +config USB_GADGET_RENESAS_USBF
-> +     bool 'Renesas USB Function controller'
-> +     depends on RZN1
-> +     depends on DM_USB_GADGET
-> +     select USB_GADGET_DUALSPEED
-> +     help
-> +        Renesas USB Function controller is a USB peripheral controller
-> +        available on RZ/N1 Renesas SoCs.
-
-Two Kconfig nits: prompts use double quotes throughout the file. Also,
-the help text is indented one space more than the tab + two spaces
-convention used by the neighbouring entries - compare with CI_UDC just
-above.
-
-> diff --git a/drivers/usb/gadget/renesas_usbf.c b/drivers/usb/gadget/renes=
-as_usbf.c
-> @@ -0,0 +1,3036 @@
-> +static int usbf_remove(struct udevice *dev)
-> +{
-> +     struct usbf_udc *udc =3D dev_get_priv(dev);
-> +
-> +     usb_del_gadget_udc(&udc->gadget);
-> +
-> +     return 0;
-> +}
-
-Just to check - if the device is removed while the pull-up is still
-asserted, D+ stays driven and interrupts remain enabled at the EPC
-level. Would it be worth calling usbf_detach() here so remove() always
-leaves the hardware quiescent? What do you think?
+Yes, this seems right to me, thanks for the write-up.
 
 Regards,
-Simon
+SImon
