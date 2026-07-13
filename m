@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67ED8C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:22:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB5E9C44501
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:22:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E10EF84B9A;
-	Mon, 13 Jul 2026 15:21:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 211B584B9E;
+	Mon, 13 Jul 2026 15:21:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A4uoWX5D";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B9enOrIy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB49084A4F; Mon, 13 Jul 2026 08:43:51 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 2973084A4F; Mon, 13 Jul 2026 08:43:54 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C1E584A4B
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 08:43:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 738E384A49
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 08:43:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7e6128bd9b3so1446923a34.1
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 23:43:49 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-451e2a978a3so1446342fac.1
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 23:43:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783925028; x=1784529828; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783925030; x=1784529830; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/lJNAL5POB5n6xDbVkf8AHgAaCOeGVrED/Phnc0IVLQ=;
- b=A4uoWX5DZ6m3Eu8EGTN0Af5TXu6cGSpfw1dg26kX0dVduedzVAQYs72lWN4x48Qe30
- cchfqO7IumwoMOI2MVSCvUglciO2RLsflj3zYaEb4Vwvetqfvle2hNEH13KHeUCnKQZY
- GVnvV2rzC6N2flpwJC9TDjLEkNLGeBSMXJV4XuU0yEcWBSkhi6Ht4gp05qbKspA/BuUb
- Gz6xwwo3pnmHjBAIzvn9virk1IrtjY7Am5FNFthk2hJPKYKGSMFHffL4bU8Vtprd53pO
- u909l4cIXSlZ4fugPpHJaFQuqxMKzDIXvNJW7NKcgCPjueYeTMEtdUGagJD5H2+xIit9
- HZww==
+ bh=lssM8xE1pvpGheDjdPIwt9YWxbkDl0KGUv/gGuuHxx8=;
+ b=B9enOrIyOWjx/kj8lVTA5eMLkyGrEbKM15YvGkwwG0Jch6dSI1ozsL9N/oSxRof6Pc
+ Cvk6mSQ/kiIKCkTjb/kVpFzBPmSakCZzUxOcssgaQcBNO77w9lL5RPB8ZhKEjnjxaIat
+ LW/lJtJVWAATKGJ8B9So6FYaP6T94SS+keN/HWsPz4mH0QyJ1nNpJQFzVBUt34wikBHE
+ V2pOuqKbGPoZF8zaOy2n3KDrMk7bP+Jt08swsbcHZGEwDn+i+s86jKf6EArtZ+48BRGb
+ g52xADgo50K5awSRmxstqxb5JNCQ5mN7FGkbweTNE9f3GcrQ+zTiCoATiRrA42UHcYFu
+ deAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783925028; x=1784529828;
+ d=1e100.net; s=20251104; t=1783925030; x=1784529830;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/lJNAL5POB5n6xDbVkf8AHgAaCOeGVrED/Phnc0IVLQ=;
- b=fPe6RMmsCiHbE6v1pA9r7vNtY2h+dkzJqFCrLdCG2S59p2EHxatzXQ9dfx3dN9Q5xK
- b33r+Ge4yA+Q+MD8r3tKMie5PdSZ4KUIRusGvuM5brNPF1mAOcZ67OU6Tek62goXWc5U
- urT60AkZs83u+ZbL1lk1WSG/gXPglRwegyG0SUXbQfM7VgwYURmYaTcPDH+FaBFVAJNy
- J2kN43Mc/LEU6iuCYGA2ZdSTx8YxnV6yl02n3CMzQ6fdhhQhhhEkDjvyk7zjURIGyBjt
- gYHmY41c5DsIGHFvX+P1c2+HC8PXTJ00T6noVdMh254BxH8j1EOXhp0CmnMnSCAGPLQ+
- bgzQ==
+ bh=lssM8xE1pvpGheDjdPIwt9YWxbkDl0KGUv/gGuuHxx8=;
+ b=ne6y41sIbXkv8YX/+FEH5Raq1fUxqraEHm8cLg0wyBUClgH7WC1mj6TFJPfrlhDMhx
+ jE4kvB3aHXQ8QNFUgddMUDhMlol6bLRgpKEXIBuE+zABvX6VpFiGQTeG571ShRoaASbi
+ RPl9QzIWYa6wTNgtHKLBS5JQv8meM0TiwpBErhm0yf3kEKg6KK7+LVcSqMrbxExggx/B
+ r5UogjjRl4j6YIzo7sxw51QCIAzN76H2IXSJSnKg3UJe3KMluLhxS7Wn87uj09wUlkYM
+ vLkWxpUUFVmh3hy55mA4rRJOJKmWdh4IvZMZl0hitsvj+HorbJy0aic+1Q5JAiLDLcvO
+ gKrw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/8ZgIu1jLbafkF3ZE+gvZvl8jWEh8a5hxbJdmX9hXxoGqaNXrLhTNPzhz81A8ZtuEDjasK93g=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKaIF2Czt2/pPK/PC4+kmRYmXa6Sx1VwVDyiDnKPRLH+rT8nqO
- 3Ami0h1jatoRd3nD9onavYl7BuWzLUWlegIar+kYGAl4Y74753bPTEOn
-X-Gm-Gg: AfdE7cnGMMipn7VR9vK2cXkgTMYk9nyWaUOGnsnzFODqXMDg+C/i6RSWcoMgS9kDQri
- ALCGLJ1d3AlaaFh4UvWhEhQdoIFCEleyDOlpnXQAXibJ1OrL5Br0eFd13k7QfR09BkvB4anRHnW
- QoP9+z4F/9DRNwOEWi8IdcKSlLdLeFecF58MURE/jMJSgLQTkWzWqntSldQmPpjivHPCYFt4IhA
- ZjE4WXSIYwtabJW025c/oAZ2b/77cko8mB6aEQaeYf+0WHA+y8hmT2D87KVRNG+S22tRTmu3ukg
- AYTAHFeqJo9db5AS3mB78r5g1CpLuwVRsmZhc72T6yQ9fpyMS7HfKODqYr/a4dT+12DGVkMMMSZ
- qrmhao9Xmuvw0UdVLkKzHycgPuvmXPz793gsUGCsX3+dX4sUgD4PabkAgJ+8sAv0yUbvHHqX77z
- JnBGfM//Tm7ujw6qjuSQnXbTs6kpmvOBfsKNzNRw04C0dy7jCmBmIJK6YOs3owWifZuZEmd0Hvd
- vrZSUu8vz38wBl5hv9AUGUk29rUdBKSa0K0nDE5zZV5E9cyuYJxsthjjJWojHBE
-X-Received: by 2002:a05:6830:43a6:b0:7e9:eaec:f348 with SMTP id
- 46e09a7af769-7ec097617e0mr5417023a34.20.1783925027792; 
- Sun, 12 Jul 2026 23:43:47 -0700 (PDT)
+ AFNElJ8t3eMK7qJvIteD4CWjEgZh4zm/lOjhUPATuo0XYfPk4Mae96kVeRNvLsF5s0V3QGJ/AkMneoY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yws0GnNI3uIySUSgYkw9naUHFY6NKwxfNuOOqUDFVS41J/A0j6v
+ ivnQM/qxBQPx2yDm//5OJOw0fiVg71Gi7F2JLonuMtc+/Xpx9QY354OB
+X-Gm-Gg: AfdE7cl4ZhEyKNckUNN83vuWhmp26E/Br/SVLNZq6eoipSd9CDTXh+UDeezbQnDKFfb
+ 891v7dnh5SGBkT9SRe+nRvwpudzy83izVUtKh7nd3PpdEnlW78TN4NqaK+ke7BrhB7RhLv9E9Xb
+ AuSy7TKY2vnf9EDJeR7JRtIWEWvdkjwROlAeM6TVTKlDbYL/9Rsy8GCmg63Bdk/pa+wKggPZkIL
+ gC9mvW9pXrBcj89xADyp2f35+PNvfULot+0u4x+Ka8+2IVinxq/SoS4xZJgs/O+tkwCb/j5imcf
+ FcuJIcp7y4n+YOmK4I8a+NW3kb+PJo0E8ptrRmlnDE5sizvEYa28DpJv+79f5M97fkfRxXI2WcN
+ XcjGhH17+lG25hveIYhehITyU3chGbMIbnhLrtDAhQY15wUQMYOWZIJv/UsVC+WBuKKxYFjvTgh
+ OeQQ2flwUR9Jttg1DP8IKZ+QSvoGQoeOjUR/4vMLrco8eGYLCDYxQ8YCEbuXEMRBWHoXf7fis/Q
+ uW81B8FXLZaJXKh7mkZEROdHyFQo2o/oegs94CkkZ7h254O6Rm5ljL5IkGtGrY2cXtwZ5U8sow=
+X-Received: by 2002:a05:6871:450f:b0:448:9d5b:6393 with SMTP id
+ 586e51a60fabf-451f10e8046mr4506594fac.14.1783925029990; 
+ Sun, 12 Jul 2026 23:43:49 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-451916ce98dsm12538126fac.13.2026.07.12.23.43.45
+ 586e51a60fabf-451916ce98dsm12538126fac.13.2026.07.12.23.43.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Jul 2026 23:43:47 -0700 (PDT)
+ Sun, 12 Jul 2026 23:43:49 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 13 Jul 2026 00:43:04 -0600
-Subject: [PATCH v4 07/14] crypto: aes: add software-key provider dispatch
+Date: Mon, 13 Jul 2026 00:43:05 -0600
+Subject: [PATCH v4 08/14] boot: image: add FIT decrypt-to-buffer helper
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-submit-ce-series-v2-v4-7-ff7edc705b8a@gmail.com>
+Message-Id: <20260713-submit-ce-series-v2-v4-8-ff7edc705b8a@gmail.com>
 References: <20260713-submit-ce-series-v2-v4-0-ff7edc705b8a@gmail.com>
 In-Reply-To: <20260713-submit-ce-series-v2-v4-0-ff7edc705b8a@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -139,462 +139,596 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Generic callers which supply an AES key need a provider-owned slot policy,
-since hardware may reserve or preload particular key slots. Selecting only
-UCLASS_AES device zero also prevents a later provider from handling an
-operation unsupported by the first device.
+FIT cipher support currently allocates the output buffer inside the AES
+helper. SPL often needs to decrypt directly into a caller-selected
+buffer, for example a load buffer or a scratch buffer used before
+decompression.
 
-Add a callback through which each provider exposes a slot for
-software-provided keys. Add a CBC decrypt helper which probes providers in
-order, continuing only when a provider explicitly reports an unsupported
-operation and preserving hard probe, setup and decrypt failures.
+Add a decrypt_to callback to the FIT cipher algorithm and wire it up for
+AES. The existing allocating decrypt path becomes a wrapper around the
+new helper.
 
-Use slot zero for the software provider and avoid Tegra's preloaded SBK
-slot. Add sandbox coverage for provider fallback and hard-error
-propagation.
+Validate the FIT cipher key length, IV length and unciphered-size
+property while preparing decryption, and build lib/aes/ by phase when
+FIT_CIPHER is enabled so the target-side decrypt helper is available to
+SPL builds. Use the DM AES provider helper when enabled, retaining the
+software implementation only when no provider supports the operation.
+
+For U-Boot proper, use decrypt_to for in-place decryption when the FIT
+payload is already in writable RAM. The encrypted data is no longer
+needed after hash verification, and this avoids a full-size allocation
+for encrypted payloads loaded into DRAM.
+
+Add sandbox coverage for out-of-place and in-place AES-256 decrypt and
+malformed key, IV and size inputs.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v3 -> v4:
-  - New patch
----
- drivers/crypto/aes/aes-sw.c      |   6 ++
- drivers/crypto/aes/aes-uclass.c  |  73 +++++++++++++++++++
- drivers/crypto/tegra/tegra_aes.c |   7 ++
- include/uboot_aes.h              |  66 +++++++++++++++--
- test/dm/aes.c                    | 149 +++++++++++++++++++++++++++++++++++++++
- 5 files changed, 297 insertions(+), 4 deletions(-)
+  - Validate cipher metadata before reading the key length
+  - Preserve hard provider failures and fall back only when unsupported
+  - Treat -EINVAL as a hard provider error
+  - Fix disabled-feature declarations and use the public test prototype
+  - Add in-place decrypt and malformed-input tests
+  - Simplify the legacy allocating decrypt wrapper
 
-diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-index 6bad343ea7d..fe06fd2d5ba 100644
---- a/drivers/crypto/aes/aes-sw.c
-+++ b/drivers/crypto/aes/aes-sw.c
-@@ -50,6 +50,11 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
- 	return SW_KEY_SLOTS;
- }
+Changes v2 -> v3:
+  - Flip the image_aes_decrypt_to() host-tool guard  (suggested by Simon Glass)
+  - Let image_aes_decrypt_to() be the single length-validation path
+    (suggested by Simon Glass)
+  - Document that AES CBC decrypt providers must support in-place decrypt
+    (suggested by Simon Glass)
+
+Changes v1 -> v2:
+  - Explain FIT cipher validation  (suggested by Simon Glass)
+  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
+  - Return -ENOSYS without decrypt support  (suggested by Simon Glass)
+  - Use decrypt_to for U-Boot proper in-place decrypt
+---
+ boot/image-cipher.c         | 45 ++++++++++++++++++----
+ boot/image-fit.c            | 33 ++++++++++++++--
+ include/image.h             | 39 +++++++++++++++++--
+ include/u-boot/aes.h        | 27 ++++++++++----
+ lib/Makefile                |  2 +-
+ lib/aes/aes-decrypt.c       | 91 +++++++++++++++++++++++++++++++++++++--------
+ test/lib/Makefile           |  3 ++
+ test/lib/test_aes_decrypt.c | 89 ++++++++++++++++++++++++++++++++++++++++++++
+ 8 files changed, 290 insertions(+), 39 deletions(-)
+
+diff --git a/boot/image-cipher.c b/boot/image-cipher.c
+index 9d389f26cea..9470370a534 100644
+--- a/boot/image-cipher.c
++++ b/boot/image-cipher.c
+@@ -25,6 +25,7 @@ struct cipher_algo cipher_algos[] = {
+ #endif
+ 		.encrypt = image_aes_encrypt,
+ 		.decrypt = image_aes_decrypt,
++		.decrypt_to = image_aes_decrypt_to,
+ 		.add_cipher_data = image_aes_add_cipher_data
+ 	},
+ 	{
+@@ -36,6 +37,7 @@ struct cipher_algo cipher_algos[] = {
+ #endif
+ 		.encrypt = image_aes_encrypt,
+ 		.decrypt = image_aes_decrypt,
++		.decrypt_to = image_aes_decrypt_to,
+ 		.add_cipher_data = image_aes_add_cipher_data
+ 	},
+ 	{
+@@ -47,6 +49,7 @@ struct cipher_algo cipher_algos[] = {
+ #endif
+ 		.encrypt = image_aes_encrypt,
+ 		.decrypt = image_aes_decrypt,
++		.decrypt_to = image_aes_decrypt_to,
+ 		.add_cipher_data = image_aes_add_cipher_data
+ 	}
+ };
+@@ -70,6 +73,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
+ 				   int cipher_noffset)
+ {
+ 	const void *fdt = gd_fdt_blob();
++	int key_len, iv_len;
+ 	const char *node_name;
+ 	char node_path[128];
+ 	int noffset;
+@@ -94,7 +98,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
+ 		return -1;
+ 	}
  
-+static int sw_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	return 0;
+-	info->iv = fdt_getprop(fit, cipher_noffset, "iv", NULL);
++	info->iv = fdt_getprop(fit, cipher_noffset, "iv", &iv_len);
+ 	info->ivname = fdt_getprop(fit, cipher_noffset, "iv-name-hint", NULL);
+ 
+ 	if (!info->iv && !info->ivname) {
+@@ -136,20 +140,28 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
+ 	}
+ 
+ 	/* read key */
+-	info->key = fdt_getprop(fdt, noffset, "key", NULL);
++	info->key = fdt_getprop(fdt, noffset, "key", &key_len);
+ 	if (!info->key) {
+ 		printf("Can't get key in cipher node '%s'\n", node_path);
+ 		return -1;
+ 	}
++	if (key_len != info->cipher->key_len) {
++		printf("Bad key length in cipher node '%s'\n", node_path);
++		return -1;
++	}
+ 
+ 	/* read iv */
+ 	if (!info->iv) {
+-		info->iv = fdt_getprop(fdt, noffset, "iv", NULL);
++		info->iv = fdt_getprop(fdt, noffset, "iv", &iv_len);
+ 		if (!info->iv) {
+ 			printf("Can't get IV in cipher node '%s'\n", node_path);
+ 			return -1;
+ 		}
+ 	}
++	if (iv_len != info->cipher->iv_len) {
++		printf("Bad IV length for cipher in image '%s'\n", node_name);
++		return -1;
++	}
+ 
+ 	return 0;
+ }
+@@ -165,11 +177,28 @@ int fit_image_decrypt_data(const void *fit,
+ 	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
+ 				      cipher_noffset);
+ 	if (ret < 0)
+-		goto out;
++		return ret;
++
++	return info.cipher->decrypt(&info, data_ciphered, size_ciphered,
++				    data_unciphered, size_unciphered);
 +}
 +
- static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct sw_aes_priv *priv = dev_get_priv(dev);
-@@ -164,6 +169,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 
- static const struct aes_ops aes_ops_sw = {
- 	.available_key_slots = sw_aes_ops_available_key_slots,
-+	.get_software_key_slot = sw_aes_ops_get_software_key_slot,
- 	.select_key_slot = sw_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = sw_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = sw_aes_ops_aes_ecb_encrypt,
-diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
-index 5bdd3d736c4..ec1ea075367 100644
---- a/drivers/crypto/aes/aes-uclass.c
-+++ b/drivers/crypto/aes/aes-uclass.c
-@@ -23,6 +23,21 @@ int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return ops->available_key_slots(dev);
- }
- 
-+int dm_aes_get_software_key_slot(struct udevice *dev)
++int fit_image_decrypt_data_to(const void *fit,
++			      int image_noffset, int cipher_noffset,
++			      const void *data_ciphered, size_t size_ciphered,
++			      void *data_unciphered, size_t *size_unciphered)
 +{
-+	const struct aes_ops *ops;
++	struct image_cipher_info info;
++	int ret;
 +
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->get_software_key_slot)
++	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
++				      cipher_noffset);
++	if (ret < 0)
++		return ret;
+ 
+-	ret = info.cipher->decrypt(&info, data_ciphered, size_ciphered,
+-				   data_unciphered, size_unciphered);
++	if (!info.cipher->decrypt_to)
 +		return -ENOSYS;
-+
-+	return ops->get_software_key_slot(dev);
-+}
-+
- int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	const struct aes_ops *ops;
-@@ -113,6 +128,64 @@ int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
- 	return ops->aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
- }
  
-+static bool aes_op_unsupported(int ret)
-+{
-+	return ret == -ENOSYS || ret == -EOPNOTSUPP;
-+}
+- out:
+-	return ret;
++	return info.cipher->decrypt_to(&info, data_ciphered, size_ciphered,
++				       data_unciphered, size_unciphered);
+ }
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 9af38ed8d82..6b55316dd37 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1028,7 +1028,7 @@ int fit_image_get_data_size(const void *fit, int noffset, int *data_size)
+  *
+  * @fit: pointer to the FIT image header
+  * @noffset: component image node offset
+- * @data_size: holds the data-size property
++ * @data_size: holds the data-size-unciphered property
+  *
+  * returns:
+  *     0, on success
+@@ -1038,10 +1038,13 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
+ 				       size_t *data_size)
+ {
+ 	const fdt32_t *val;
++	int len;
+ 
+-	val = fdt_getprop(fit, noffset, "data-size-unciphered", NULL);
++	val = fdt_getprop(fit, noffset, "data-size-unciphered", &len);
+ 	if (!val)
+ 		return -ENOENT;
++	if (len != sizeof(*val))
++		return -EINVAL;
+ 
+ 	*data_size = (size_t)fdt32_to_cpu(*val);
+ 
+@@ -1562,15 +1565,37 @@ static int fit_image_uncipher(const void *fit, int image_noffset,
+ 	if (cipher_noffset < 0)
+ 		return 0;
+ 
++#ifndef USE_HOSTCC
++	if (!tools_build()) {
++		ulong start = map_to_sysmem(*data);
++		ulong end = start + *size;
 +
-+int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
-+				u8 *dst, u32 num_aes_blocks)
-+{
-+	struct udevice *dev;
-+	int first_probe_err = 0;
-+	bool found = false;
-+	int ret;
-+
-+	for (ret = uclass_first_device_check(UCLASS_AES, &dev); dev;
-+	     ret = uclass_next_device_check(&dev)) {
-+		u8 slot;
-+
-+		found = true;
-+		if (ret) {
-+			if (!first_probe_err)
-+				first_probe_err = ret;
-+			continue;
++		/*
++		 * Avoid a full-size allocation when the FIT payload is already
++		 * in writable DRAM. The encrypted bytes are no longer needed
++		 * after hash verification has completed.
++		 */
++		if (end >= start && start >= gd->ram_base && end <= gd->ram_top) {
++			ret = fit_image_decrypt_data_to(fit, image_noffset,
++							cipher_noffset,
++							*data, *size, *data,
++							&size_dst);
++			if (ret != -ENOSYS)
++				goto out;
 +		}
-+
-+		ret = dm_aes_get_software_key_slot(dev);
-+		if (aes_op_unsupported(ret))
-+			continue;
-+		if (ret < 0)
-+			return ret;
-+		if (ret > U8_MAX)
-+			return -ERANGE;
-+		slot = ret;
-+
-+		ret = dm_aes_set_key_for_key_slot(dev, key_size, key, slot);
-+		if (aes_op_unsupported(ret))
-+			continue;
-+		if (ret)
-+			return ret;
-+
-+		ret = dm_aes_select_key_slot(dev, key_size, slot);
-+		if (aes_op_unsupported(ret))
-+			continue;
-+		if (ret)
-+			return ret;
-+
-+		ret = dm_aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
-+		if (!ret)
-+			return 0;
-+		if (!aes_op_unsupported(ret))
-+			return ret;
 +	}
++#endif
 +
-+	if (first_probe_err)
-+		return first_probe_err;
-+
-+	return found ? -EOPNOTSUPP : -ENODEV;
-+}
-+
- static void left_shift_vector(u8 *in, u8 *out, int size)
- {
- 	int carry = 0;
-diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegra_aes.c
-index 55a4cec525b..348115ac5a7 100644
---- a/drivers/crypto/tegra/tegra_aes.c
-+++ b/drivers/crypto/tegra/tegra_aes.c
-@@ -321,6 +321,12 @@ static int tegra_aes_ops_available_key_slots(struct udevice *dev)
- 	return 4; /* 4 slots in Tegra20 and Tegra30 */
+ 	ret = fit_image_decrypt_data(fit, image_noffset, cipher_noffset,
+ 				     *data, *size, &dst, &size_dst);
+ 	if (ret)
+ 		goto out;
+ 
+ 	*data = dst;
+-	*size = size_dst;
++out:
++	if (!ret)
++		*size = size_dst;
+ 
+- out:
+ 	return ret;
  }
  
-+static int tegra_aes_ops_get_software_key_slot(struct udevice *dev)
-+{
-+	/* Avoid SBK slot 0, which may hold a preloaded key. */
-+	return TEGRA_AES_SLOT_SBK + 1;
-+}
-+
- static int tegra_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
- {
- 	struct tegra_aes_priv *priv = dev_get_priv(dev);
-@@ -565,6 +571,7 @@ static int tegra_aes_probe(struct udevice *dev)
+diff --git a/include/image.h b/include/image.h
+index 9c8a746d576..5edbf8fdc33 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1862,11 +1862,40 @@ int fit_image_check_sig(const void *fit, int noffset, const void *data,
+ 			size_t size, const void *key_blob, int required_keynode,
+ 			char **err_msgp);
  
- static const struct aes_ops tegra_aes_ops = {
- 	.available_key_slots = tegra_aes_ops_available_key_slots,
-+	.get_software_key_slot = tegra_aes_ops_get_software_key_slot,
- 	.select_key_slot = tegra_aes_ops_select_key_slot,
- 	.set_key_for_key_slot = tegra_aes_ops_set_key_for_key_slot,
- 	.aes_ecb_encrypt = tegra_aes_ops_aes_ecb_encrypt,
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index 65a9b382843..a2c35aa30ce 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -128,11 +128,17 @@ struct udevice;
-  * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
-  * thus in those cases the set_key_for_key_slot() may be skipped.
-  *
-- * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
-- * with 128bits key at slot 0 would be as follow:
-+ * Generic callers which load a software-provided key should first ask the
-+ * driver for a suitable software key slot. This lets hardware drivers avoid
-+ * reserved or preloaded slots while keeping the slot policy local to the
-+ * provider.
-  *
-- * set_key_for_key_slot(DEV, 128, KEY, 0);
-- * select_key_slot(DEV, 128, 0);
-+ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash
-+ * example with a 128-bit software-provided key would be as follows:
+-int fit_image_decrypt_data(const void *fit,
+-			   int image_noffset, int cipher_noffset,
+-			   const void *data, size_t size,
++/**
++ * fit_image_decrypt_data() - Decrypt a FIT image payload
 + *
-+ * slot = get_software_key_slot(DEV);
-+ * set_key_for_key_slot(DEV, 128, KEY, slot);
-+ * select_key_slot(DEV, 128, slot);
-  * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
-  * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
-  * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
-@@ -146,6 +152,16 @@ struct aes_ops {
- 	 */
- 	int (*available_key_slots)(struct udevice *dev);
- 
-+	/**
-+	 * get_software_key_slot() - Get a slot for software-provided keys
-+	 *
-+	 * @dev			The AES udevice
-+	 * @return		Key slot to use for a software-provided key,
-+	 *			0 or positive on success, negative value on
-+	 *			failure
-+	 */
-+	int (*get_software_key_slot)(struct udevice *dev);
-+
- 	/**
- 	 * select_key_slot() - Selects the AES key slot to use for following operations
- 	 *
-@@ -210,6 +226,7 @@ struct aes_ops {
- 	 * @iv			Initialization vector
- 	 * @src			Source data of length 'num_aes_blocks' blocks
- 	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 *			Must support dst == src for in-place decrypt
- 	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
- 	 * @return		0 on success, negative value on failure
- 	 */
-@@ -229,6 +246,15 @@ struct aes_ops {
-  */
- int dm_aes_get_available_key_slots(struct udevice *dev);
++ * @fit:		FIT image
++ * @image_noffset:	Offset of the image node to decrypt
++ * @cipher_noffset:	Offset of the cipher node for the image
++ * @data:		Encrypted image payload
++ * @size:		Size of encrypted image payload
++ * @data_unciphered:	Returns allocated decrypted payload
++ * @size_unciphered:	Returns size of decrypted payload
++ * Return: 0 on success, <0 on error
++ */
++int fit_image_decrypt_data(const void *fit, int image_noffset,
++			   int cipher_noffset, const void *data, size_t size,
+ 			   void **data_unciphered, size_t *size_unciphered);
  
 +/**
-+ * dm_aes_get_software_key_slot - Get a slot for software-provided keys
++ * fit_image_decrypt_data_to() - Decrypt a FIT image payload to a buffer
 + *
-+ * @dev			The AES udevice
-+ * Return:		Key slot to use for a software-provided key,
-+ *			0 or positive on success, -ve on failure
++ * @fit:		FIT image
++ * @image_noffset:	Offset of the image node to decrypt
++ * @cipher_noffset:	Offset of the cipher node for the image
++ * @data:		Encrypted image payload
++ * @size:		Size of encrypted image payload
++ * @data_unciphered:	Destination buffer for decrypted payload. The caller
++ *			must provide at least @size bytes.
++ * @size_unciphered:	Returns size of decrypted payload
++ * Return: 0 on success, <0 on error
 + */
-+int dm_aes_get_software_key_slot(struct udevice *dev);
++int fit_image_decrypt_data_to(const void *fit,
++			      int image_noffset, int cipher_noffset,
++			      const void *data, size_t size,
++			      void *data_unciphered, size_t *size_unciphered);
 +
  /**
-  * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
+  * fit_region_make_list() - Make a list of regions to hash
   *
-@@ -291,11 +317,31 @@ int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
-  * @iv			Initialization vector
-  * @src			Source data of length 'num_aes_blocks' blocks
-  * @dst			Destination data of length 'num_aes_blocks' blocks
-+ *			Must support dst == src for in-place decrypt
-  * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-  * Return:		0 on success, negative value on failure
-  */
- int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks);
- 
-+/**
-+ * dm_aes_cbc_decrypt_with_key() - Decrypt using a software-provided key
-+ *
-+ * Probe AES providers in order and use the first one which accepts the key
-+ * and CBC operation. Hard failures from an accepting provider are returned
-+ * without trying another provider.
-+ *
-+ * @key_size: AES key size in bits
-+ * @key: AES key
-+ * @iv: Initialization vector
-+ * @src: Ciphertext input
-+ * @dst: Plaintext output, which may be the same buffer as @src
-+ * @num_aes_blocks: Number of AES blocks to decrypt
-+ * Return: 0 on success, -ENODEV if there are no providers, -EOPNOTSUPP if no
-+ * provider supports the operation, or another error from a provider
-+ */
-+int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
-+				u8 *dst, u32 num_aes_blocks);
+@@ -1960,6 +1989,10 @@ struct cipher_algo {
+ 	int (*decrypt)(struct image_cipher_info *info,
+ 		       const void *cipher, size_t cipher_len,
+ 		       void **data, size_t *data_len);
 +
- /**
-  * dm_aes_cmac - Hashes the input data with AES-CMAC, putting the result into dst.
-  * The key slot must be selected already.
-@@ -316,6 +362,11 @@ static inline int dm_aes_get_available_key_slots(struct udevice *dev)
- 	return -ENOSYS;
++	int (*decrypt_to)(struct image_cipher_info *info,
++			  const void *cipher, size_t cipher_len,
++			  void *data, size_t *data_len);
+ };
+ 
+ int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
+diff --git a/include/u-boot/aes.h b/include/u-boot/aes.h
+index acbc50b9e6f..8fd43f02adc 100644
+--- a/include/u-boot/aes.h
++++ b/include/u-boot/aes.h
+@@ -16,15 +16,16 @@ int image_aes_encrypt(struct image_cipher_info *info,
+ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
+ 			      void *fit, int node_noffset);
+ #else
+-int image_aes_encrypt(struct image_cipher_info *info,
+-		      const unsigned char *data, int size,
+-		      unsigned char **cipher, int *cipher_len)
++static inline int image_aes_encrypt(struct image_cipher_info *info,
++				    const unsigned char *data, int size,
++				    unsigned char **cipher, int *cipher_len)
+ {
+ 	return -ENXIO;
  }
  
-+static inline int dm_aes_get_software_key_slot(struct udevice *dev)
-+{
-+	return -ENOSYS;
-+}
-+
- static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+-int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
+-			      void *fit, int node_noffset)
++static inline int image_aes_add_cipher_data(struct image_cipher_info *info,
++					    void *keydest, void *fit,
++					    int node_noffset)
  {
- 	return -ENOSYS;
-@@ -351,6 +402,13 @@ static inline int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 	return -ENOSYS;
+ 	return -ENXIO;
  }
- 
-+static inline int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv,
-+					      u8 *src, u8 *dst,
-+					      u32 num_aes_blocks)
+@@ -34,10 +35,20 @@ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
+ int image_aes_decrypt(struct image_cipher_info *info,
+ 		      const void *cipher, size_t cipher_len,
+ 		      void **data, size_t *size);
++int image_aes_decrypt_to(struct image_cipher_info *info,
++			 const void *cipher, size_t cipher_len,
++			 void *data, size_t *size);
+ #else
+-int image_aes_decrypt(struct image_cipher_info *info,
+-		      const void *cipher, size_t cipher_len,
+-		      void **data, size_t *size)
++static inline int image_aes_decrypt(struct image_cipher_info *info,
++				    const void *cipher, size_t cipher_len,
++				    void **data, size_t *size)
 +{
-+	return -ENOSYS;
++	return -ENXIO;
 +}
 +
- static inline int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
++static inline int image_aes_decrypt_to(struct image_cipher_info *info,
++				       const void *cipher, size_t cipher_len,
++				       void *data, size_t *size)
  {
- 	return -ENOSYS;
-diff --git a/test/dm/aes.c b/test/dm/aes.c
-index 9c85fb1dac9..9f4ce42ab2a 100644
---- a/test/dm/aes.c
-+++ b/test/dm/aes.c
-@@ -6,7 +6,10 @@
+ 	return -ENXIO;
+ }
+diff --git a/lib/Makefile b/lib/Makefile
+index d0ffabc2b47..c69a928e6d8 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -19,7 +19,6 @@ obj-$(CONFIG_ARCH_AT91) += at91/
+ obj-$(CONFIG_OPTEE_LIB) += optee/
+ 
+ obj-$(CONFIG_AES) += aes.o
+-obj-$(CONFIG_AES) += aes/
+ obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
+ 
+ obj-$(CONFIG_FW_LOADER) += fw_loader.o
+@@ -88,6 +87,7 @@ obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) += asn1_decoder.o
+ 
+ obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
+ obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
++obj-$(CONFIG_$(PHASE_)FIT_CIPHER) += aes/
+ obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
+ obj-$(CONFIG_$(PHASE_)LZO) += lzo/
+ obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
+diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
+index 741102a4723..43a5f8742bb 100644
+--- a/lib/aes/aes-decrypt.c
++++ b/lib/aes/aes-decrypt.c
+@@ -4,37 +4,98 @@
   */
  
- #include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/root.h>
- #include <dm/test.h>
-+#include <dm/uclass-internal.h>
+ #ifndef USE_HOSTCC
++#include <dm.h>
+ #include <malloc.h>
+ #endif
+ #include <image.h>
  #include <uboot_aes.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -162,3 +165,149 @@ static int dm_test_aes_key_sizes(struct unit_test_state *uts)
- }
  
- DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
-+
-+static int unsupported_calls;
-+static int success_calls;
-+static int hard_error_calls;
-+
-+static int aes_test_get_slot(struct udevice *dev)
++#ifndef USE_HOSTCC
++static int image_aes_validate(struct image_cipher_info *info,
++			      const void *cipher, size_t cipher_len,
++			      void *data, size_t *size)
 +{
++	if (!info || !info->cipher || !info->key || !info->iv || !cipher ||
++	    !data || !size)
++		return -EINVAL;
++	if (info->cipher->iv_len != AES_BLOCK_LENGTH ||
++	    (info->cipher->key_len != AES128_KEY_LENGTH &&
++	     info->cipher->key_len != AES192_KEY_LENGTH &&
++	     info->cipher->key_len != AES256_KEY_LENGTH))
++		return -EINVAL;
++	if (!cipher_len || cipher_len % AES_BLOCK_LENGTH ||
++	    info->size_unciphered > cipher_len)
++		return -EINVAL;
++
 +	return 0;
 +}
++#endif
 +
-+static int aes_test_set_key(struct udevice *dev, u32 key_size, u8 *key,
-+			    u8 slot)
++int image_aes_decrypt_to(struct image_cipher_info *info,
++			 const void *cipher, size_t cipher_len,
++			 void *data, size_t *size)
 +{
-+	return 0;
-+}
-+
-+static int aes_test_select_key(struct udevice *dev, u32 key_size, u8 slot)
-+{
-+	return 0;
-+}
-+
-+static int aes_test_unsupported_slot(struct udevice *dev)
-+{
-+	unsupported_calls++;
-+
++#ifdef USE_HOSTCC
 +	return -ENOSYS;
-+}
-+
-+static int aes_test_success_decrypt(struct udevice *dev, u8 *iv, u8 *src,
-+				    u8 *dst, u32 num_aes_blocks)
-+{
-+	success_calls++;
-+	memcpy(dst, src, num_aes_blocks * AES_BLOCK_LENGTH);
-+
-+	return 0;
-+}
-+
-+static int aes_test_hard_error_decrypt(struct udevice *dev, u8 *iv, u8 *src,
-+				       u8 *dst, u32 num_aes_blocks)
-+{
-+	hard_error_calls++;
-+
-+	return -EINVAL;
-+}
-+
-+static const struct aes_ops aes_test_unsupported_ops = {
-+	.get_software_key_slot = aes_test_unsupported_slot,
-+};
-+
-+static const struct aes_ops aes_test_success_ops = {
-+	.get_software_key_slot = aes_test_get_slot,
-+	.set_key_for_key_slot = aes_test_set_key,
-+	.select_key_slot = aes_test_select_key,
-+	.aes_cbc_decrypt = aes_test_success_decrypt,
-+};
-+
-+static const struct aes_ops aes_test_hard_error_ops = {
-+	.get_software_key_slot = aes_test_get_slot,
-+	.set_key_for_key_slot = aes_test_set_key,
-+	.select_key_slot = aes_test_select_key,
-+	.aes_cbc_decrypt = aes_test_hard_error_decrypt,
-+};
-+
-+U_BOOT_DRIVER(aes_test_unsupported_drv) = {
-+	.name = "aes_test_unsupported",
-+	.id = UCLASS_AES,
-+	.ops = &aes_test_unsupported_ops,
-+};
-+
-+U_BOOT_DRIVER(aes_test_success_drv) = {
-+	.name = "aes_test_success",
-+	.id = UCLASS_AES,
-+	.ops = &aes_test_success_ops,
-+};
-+
-+U_BOOT_DRIVER(aes_test_hard_error_drv) = {
-+	.name = "aes_test_hard_error",
-+	.id = UCLASS_AES,
-+	.ops = &aes_test_hard_error_ops,
-+};
-+
-+static int aes_test_unbind_all(void)
-+{
-+	struct udevice *dev;
++#else
++	unsigned int aes_blocks, key_len;
 +	int ret;
 +
-+	for (;;) {
-+		ret = uclass_find_first_device(UCLASS_AES, &dev);
-+		if (ret || !dev)
-+			return ret;
-+		if (device_active(dev)) {
-+			ret = device_remove(dev, DM_REMOVE_NORMAL);
-+			if (ret)
-+				return ret;
++	ret = image_aes_validate(info, cipher, cipher_len, data, size);
++	if (ret)
++		return ret;
++	key_len = info->cipher->key_len;
++	aes_blocks = cipher_len / AES_BLOCK_LENGTH;
++
++	if (CONFIG_IS_ENABLED(DM_AES)) {
++		ret = dm_aes_cbc_decrypt_with_key(key_len * 8, (u8 *)info->key,
++						  (u8 *)info->iv, (u8 *)cipher,
++						  data, aes_blocks);
++		if (!ret) {
++			*size = info->size_unciphered;
++			return 0;
 +		}
-+		ret = device_unbind(dev);
-+		if (ret)
++		if (ret != -ENODEV && ret != -EOPNOTSUPP)
 +			return ret;
 +	}
++
++	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
++		unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
++
++		/* First we expand the key. */
++		aes_expand_key((u8 *)info->key, key_len, key_exp);
++
++		aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
++				       (u8 *)cipher, data, aes_blocks);
++		*size = info->size_unciphered;
++		return 0;
++	}
++
++	return -ENOSYS;
++#endif
 +}
 +
-+static int aes_test_bind(const struct driver *drv, const char *name)
-+{
-+	struct udevice *dev;
-+
-+	return device_bind(dm_root(), drv, name, 0, ofnode_null(), &dev);
-+}
-+
-+static int dm_test_aes_provider_selection(struct unit_test_state *uts)
-+{
-+	u8 key[AES128_KEY_LENGTH] = { };
-+	u8 iv[AES_BLOCK_LENGTH] = { };
-+	u8 src[AES_BLOCK_LENGTH] = { 0x5a };
-+	u8 dst[AES_BLOCK_LENGTH] = { };
+ int image_aes_decrypt(struct image_cipher_info *info,
+ 		      const void *cipher, size_t cipher_len,
+ 		      void **data, size_t *size)
+ {
+-#ifndef USE_HOSTCC
+-	unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
+-	unsigned int aes_blocks, key_len = info->cipher->key_len;
++#ifdef USE_HOSTCC
++	return 0;
++#else
 +	int ret;
+ 
+ 	*data = malloc(cipher_len);
+ 	if (!*data) {
+ 		printf("Can't allocate memory to decrypt\n");
+ 		return -ENOMEM;
+ 	}
+-	*size = info->size_unciphered;
+-
+-	memcpy(&key_exp[0], info->key, key_len);
+-
+-	/* First we expand the key. */
+-	aes_expand_key((u8 *)info->key, key_len, key_exp);
+ 
+-	/* Calculate the number of AES blocks to encrypt. */
+-	aes_blocks = DIV_ROUND_UP(cipher_len, AES_BLOCK_LENGTH);
++	ret = image_aes_decrypt_to(info, cipher, cipher_len, *data, size);
++	if (ret) {
++		free(*data);
++		*data = NULL;
++	}
+ 
+-	aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
+-			       (u8 *)cipher, *data, aes_blocks);
++	return ret;
+ #endif
+-
+-	return 0;
+ }
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index f25383a40e5..721d1470185 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -29,6 +29,9 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
+ obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+ obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+ obj-$(CONFIG_AES) += test_aes.o
++ifeq ($(CONFIG_FIT_CIPHER)$(CONFIG_DM_AES),yy)
++obj-y += test_aes_decrypt.o
++endif
+ obj-$(CONFIG_SHA256) += test_sha256_hmac.o
+ obj-$(CONFIG_HKDF_MBEDTLS) += test_sha256_hkdf.o
+ obj-$(CONFIG_GETOPT) += getopt.o
+diff --git a/test/lib/test_aes_decrypt.c b/test/lib/test_aes_decrypt.c
+new file mode 100644
+index 00000000000..3b498e23e4b
+--- /dev/null
++++ b/test/lib/test_aes_decrypt.c
+@@ -0,0 +1,89 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Tests for target-side FIT AES decryption
++ *
++ * Copyright (C) 2026 James Hilliard
++ */
 +
-+	ut_assertok(aes_test_unbind_all());
-+	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_unsupported_drv),
-+				  "aes-unsupported"));
-+	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
-+				  "aes-success"));
++#include <image.h>
++#include <u-boot/aes.h>
++#include <uboot_aes.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+	unsupported_calls = 0;
-+	success_calls = 0;
-+	ut_assertok(dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1));
-+	ut_asserteq(1, unsupported_calls);
-+	ut_asserteq(1, success_calls);
-+	ut_asserteq_mem(src, dst, sizeof(src));
++static int lib_test_image_aes_decrypt(struct unit_test_state *uts)
++{
++	u8 key[AES256_KEY_LENGTH] = { };
++	u8 key_exp[AES256_EXPAND_KEY_LENGTH];
++	u8 iv[AES_BLOCK_LENGTH] = { };
++	u8 plain[2 * AES_BLOCK_LENGTH];
++	u8 cipher[sizeof(plain)];
++	u8 output[sizeof(plain)];
++	struct cipher_algo algo = {
++		.name = "aes256",
++		.key_len = sizeof(key),
++		.iv_len = sizeof(iv),
++	};
++	struct image_cipher_info info = {
++		.cipher = &algo,
++		.key = key,
++		.iv = iv,
++		.size_unciphered = sizeof(plain),
++	};
++	size_t size;
++	int i, ret;
 +
-+	ut_assertok(aes_test_unbind_all());
-+	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_hard_error_drv),
-+				  "aes-hard-error"));
-+	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
-+				  "aes-success"));
++	for (i = 0; i < sizeof(key); i++)
++		key[i] = i;
++	for (i = 0; i < sizeof(iv); i++)
++		iv[i] = 0x80 + i;
++	for (i = 0; i < sizeof(plain); i++)
++		plain[i] = 0x40 + i;
 +
-+	hard_error_calls = 0;
-+	success_calls = 0;
-+	ret = dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1);
++	aes_expand_key(key, sizeof(key), key_exp);
++	aes_cbc_encrypt_blocks(sizeof(key), key_exp, iv, plain, cipher,
++			       ARRAY_SIZE(cipher) / AES_BLOCK_LENGTH);
++
++	size = 0;
++	ut_assertok(image_aes_decrypt_to(&info, cipher, sizeof(cipher), output,
++					 &size));
++	ut_asserteq(sizeof(plain), size);
++	ut_asserteq_mem(plain, output, sizeof(plain));
++
++	memcpy(output, cipher, sizeof(cipher));
++	size = 0;
++	ut_assertok(image_aes_decrypt_to(&info, output, sizeof(output), output,
++					 &size));
++	ut_asserteq(sizeof(plain), size);
++	ut_asserteq_mem(plain, output, sizeof(plain));
++
++	size = 0x55;
++	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher) - 1, output,
++				   &size);
 +	ut_asserteq(-EINVAL, ret);
-+	ut_asserteq(1, hard_error_calls);
-+	ut_asserteq(0, success_calls);
++	ut_asserteq(0x55, size);
++
++	info.size_unciphered = sizeof(cipher) + 1;
++	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
++	ut_asserteq(-EINVAL, ret);
++	info.size_unciphered = sizeof(plain);
++
++	info.key = NULL;
++	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
++	ut_asserteq(-EINVAL, ret);
++	info.key = key;
++	info.iv = NULL;
++	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
++	ut_asserteq(-EINVAL, ret);
++	info.iv = iv;
++	info.cipher = NULL;
++	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
++	ut_asserteq(-EINVAL, ret);
++	ret = image_aes_decrypt_to(NULL, cipher, sizeof(cipher), output, &size);
++	ut_asserteq(-EINVAL, ret);
 +
 +	return 0;
 +}
 +
-+DM_TEST(dm_test_aes_provider_selection, UTF_SCAN_FDT);
++LIB_TEST(lib_test_image_aes_decrypt, 0);
 
 -- 
 2.53.0
