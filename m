@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9503AC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 18:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A95C44501
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 18:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D0C884C78;
-	Mon, 13 Jul 2026 20:36:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A601684C6E;
+	Mon, 13 Jul 2026 20:36:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="AHymmo2z";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="G+Brat71";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B49F784C75; Mon, 13 Jul 2026 20:36:18 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 80A6A84C70; Mon, 13 Jul 2026 20:36:21 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0D6984C6D
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 20:36:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A34F784C6D
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 20:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-47db714766aso118493f8f.0
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 11:36:16 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-47ddf7b09aaso2311411f8f.3
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 11:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1783967776; x=1784572576; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1783967779; x=1784572579; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=kQa/CsKSSswb1w1i4iINqQa+br41ULN4gvOLljruM2s=;
- b=AHymmo2zY7NPY47X7fra3d6+BdsRcj1xVlKcpQI6fdKp86n6f0klP3IY/UryiPGmhO
- ArCG9frYEcfIaDG9lZV+JfzSbxBo6Ur92hzb/QtBeTVvj8/vkM2jwa+DfcVr8aLwT0ZL
- 9Fm4pS0jRaQxPq0/LtukCrPFw7j6G8VxZL72gDOiBVgxmtaTwK4HlZDGIA2FiYcYe6tG
- DVEqGriK0PeIVdXyz3JPCpMv10yL0ODoY5zX9bV11r/lhfk0kzyAOrhsW8feVdQs33fa
- EvZgbeRetpGhwJu+jSjP8eI70zRjCP3HHhxdcv0g4eSkbi3AAznCc52YjwiHqdoFnOjq
- vVFw==
+ bh=xf2wvAXW9xr19iioTATRhueMgFggrBaJTXFTiNPs1Mk=;
+ b=G+Brat71rbJCqbxtE+FihuPwwDtKXZ5XqZ5HYeektjn1bgyigcITld7Gx3gXQRv9Fb
+ RSpV1+dcihif3IBE1gQOBp2hl/2lJOSW8S5hEKiFD+DPdgtLDUWX8df0aLGaCHI6DSTO
+ G9+XRNZIUpELrxcFpZc3JQ+4MJ3u/1BFe7ji5nOGFV6t6rsY6WZ9H4Z/tFQky68fdX5R
+ vZcq9gBKIduSZTTrs+XdUn0RZ+YMuMvt5FF5yf3132S/AO8CxYUSKOO1YRT4wVOBdqDe
+ CWIdzpBWTvkWRZ9eTKXne83L1s6SAAEpi5cBWpheYL1+zfOFGaVSaaF5XX8naJFiEnBt
+ 6b8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783967776; x=1784572576;
+ d=1e100.net; s=20251104; t=1783967779; x=1784572579;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=kQa/CsKSSswb1w1i4iINqQa+br41ULN4gvOLljruM2s=;
- b=e07P5Kh3PU4J879xpFKRq0zyd8RG7l79Dn359DSUsF+RO2ZETu/dk/gKRUiH4uEGRs
- 8udZ7dCUZgkPwh45LwTgV9pCt/s8TmDqRghlhMado/tRZ5AD52s+M+p6fbAJh6fiKLpq
- Id3y5LjhtRLR4xyK7jW5JnRTrQj7zWlxgFxurjJB02swjDPiQiNTolCDqg98gPyAr20s
- Vj3euOkAcQlTXKDUq2nIeYo90XRpJ+QHaj+GK09sY7Qj1VVWVURp7jSNYU40g0NvLwre
- dzpWVXnBbx52pxlTnxV0re1woTGX7gSL9hIELTKBbxiXuyYQyIVgBb08k1hvKMH+UBi1
- np7A==
-X-Gm-Message-State: AOJu0YxNXxfSwdoywZU/7aRoUTrTJ0b1MzysRm/feNg402vPJReNV0L9
- Wiv5O4D7LQ06ObmUr/t5kZ0EMo72iCaxt3TIc/pY9HWObXu6TasHkWH1mdtaWadXGCEvaQT7g+V
- Uwzc/
-X-Gm-Gg: AfdE7cnOD825EN1Q3hoxfvexw8bp0LaJ0JLqdwlxsFpWArMZ5wv8t/tMylKi3oBMZdH
- mLytfR1v2dfzDWmhS/Os6w1CJYuSfHaoPG3eVhIujv9DGYt3R9aL4uaaunRp/U9acF5icIKoWkB
- 4JlGgFp2RXl1iTY+vbYU3XslYwebncz8LyYRLzGga1v3pQTvvlDKPBTc6AIJAiqFMNigbmyiRUT
- 0BqGaSplUoowHhJaP1ZSUh9k93IcqBJoTXQG+J5y4yh854d/WaW+OyvI/lHeJpxWh0nAelvL95O
- lpyr+s9aqmOuaLAar1vT3nL7M9ekoIouMxrQgNizV1u+cbDYFQTU9cf+3eDbXITisvhAmgp97lK
- 8MJVj1BFmccdkhux6NQtFE9eKIXsoj4SR/EczA1brQ/n5zQaWyUR5ym5hD2NoDaxjKjdF/ApNAE
- jgyjpe4mtEO4VS7j1FM2kho0EzQftZT2oE23vRFSaIzF9y2Q4DkfPhH79SWoSt9IRR
-X-Received: by 2002:a05:6000:614:b0:47d:f681:b74a with SMTP id
- ffacd0b85a97d-47ef6990c8dmr17175578f8f.26.1783967776267; 
- Mon, 13 Jul 2026 11:36:16 -0700 (PDT)
+ bh=xf2wvAXW9xr19iioTATRhueMgFggrBaJTXFTiNPs1Mk=;
+ b=a/Y6UGX5eWwNEs0gO3KT3b9Hr2CH/ZjweVCO49kTd482S9Ju7yLb6jFXmYQSkvjz+0
+ 4imlKgN3t8SKGSt/5PR+pAKv60x0sTq6KcAdoi6v6dzfglulvyAAkCDgtboHGN4KCY4Q
+ 04A0kycAg58aOwRN3VNWjVVFmVhIOx37PNT/ULYnsNb4oCpBnFhF4kWobRp/N/kvZPdW
+ Ay0eAdzXYdm4wm4/Ug8gLV4qtNFrmy8okzrqP8IEja4dOXzJXxqMp2cDuc3P7iKw5yfV
+ mBhgMuOXbu2QExi7BM0gWJTTkBMsVRdeFtSE9ZaeKeOiX/7xQQJCm/Ht94SuET0S0Lct
+ v1FQ==
+X-Gm-Message-State: AOJu0Yy/FXBO4+iz7Rv5zXVHeo8xP85QtCxGLJQVDGLC3xfm+viMrr+K
+ cQit14oYkGgUnOXgeuo1DAPLe+Xe3W40APTHjDwvZsXhJvj5SbQu6EfAV5vTIvg4G40=
+X-Gm-Gg: AfdE7ckHWfMDILsAc98UR4QBr7GqgCg+D2grtrgiTlK2SqW/n/G5NUyKnTk3YyvfSpJ
+ fRyylcueudi7YFW1dbwoOvhSi/CosrSxHu2QKB3ZK+chrY4S4f2dVhZIiY+Xjf+CmF9FqsLkPBr
+ YledxzGlyANcEEVXtYv1hGs7Hrl43H1iWUE2+UtXC0RX3gNt/KuVo7UDbPlItWrZq0DQiZ3VCAr
+ jRKDgcOF6gpEWSt9Hu96jR7XLrefRdeF5yP7X8E/wcQJ/Gd3EssQ8g585VfgP06x/y3x9sIP0s6
+ l5NPg+1PNm4g53VF/BLw1H3OHj9KTRYKDTstn6JbUQpye5VS4xyYfgf+sfo7+b+F37VaWaevGKz
+ TwYuxxwq03ZhsMSj93qDUAvIAw1/w4amxTp7aki9+lI4+PVAY+/3Rad++o3+5s93k/cMfP1NAmx
+ KttiMjFS0JAQ4PoWo2wFULXK1ijGzay44ialcnb6fGmZbtS6ks8CaZPf9Rfmap+4+978l1+I7fg
+ Do=
+X-Received: by 2002:a5d:6e47:0:b0:475:f0f0:9eef with SMTP id
+ ffacd0b85a97d-47f463a3d05mr679624f8f.52.1783967779024; 
+ Mon, 13 Jul 2026 11:36:19 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
  [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f464c1f84sm1434703f8f.29.2026.07.13.11.36.13
+ ffacd0b85a97d-47f464c1f84sm1434703f8f.29.2026.07.13.11.36.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 11:36:15 -0700 (PDT)
+ Mon, 13 Jul 2026 11:36:18 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 13 Jul 2026 22:35:17 +0400
-Subject: [PATCH 1/6] clk: rockchip: pll: drop misleading fout in
- rockchip_rk3588_pll_k_get()
+Date: Mon, 13 Jul 2026 22:35:18 +0400
+Subject: [PATCH 2/6] clk: rockchip: pll: fix rounding of negative k in
+ RK3588 frac PLL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-rk3588-fracpll-v1-1-cdf47f2ca0b8@flipper.net>
+Message-Id: <20260713-rk3588-fracpll-v1-2-cdf47f2ca0b8@flipper.net>
 References: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
 In-Reply-To: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
 To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
@@ -91,12 +91,12 @@ Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
  Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1279; i=alchark@flipper.net;
- h=from:subject:message-id; bh=W3nuv0XG5mChpeYxbtU6xLVNL9tK+QYWpzS35Q7HaSc=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFGkgVzvprceHAUcXPUyorrr2YLJ/E66NnWvPgxftN1
- 5NudWnkdUxkYRDjYrAUU2SZ+22J7VQjvlm7PDy+wsxhZQIZIi3SwAAELAx8uYl5pUY6Rnqm2oZ6
- hkY6xjpGDFycAjDVMnsY/vCG3xat7vjz+OBS9hT7e/XHMq2dJB5OiXe1/6RTcsPlTQMjw3LWrrC
- L4rcveP6fFF7/mulAsYrfEov66eaT+PRepsV/ZgQA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1444; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=NSq1opaVli5nw3t3IGjfmrj162AKlviqf0gY5+KpNxY=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFGkidfHDTRf+gmZrEvgORO7dF/f2bP9Hid5dXBEML6
+ /zEpy8/dUxkYRDjYrAUU2SZ+22J7VQjvlm7PDy+wsxhZQIZIi3SwAAELAx8uYl5pUY6Rnqm2oZ6
+ hkY6xjpGDFycAjDVObYM/wuTpFcsSaqadVTvTfa86eaT7DrnzpiUe+n5JnWn1rvF0+cw/LPT22L
+ d9+96iYvEnYyV/mcniho+D3v39HKiuk/0KX2tq9wA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
@@ -115,41 +115,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The calculation in rockchip_rk3588_pll_k_get() uses an intermediate
-variable misleadingly named fout, which is not the output frequency.
+Current code uses magical constants when rounding up the magnitude of
+negative fractional PLL component k. This leads to overshooting the
+requested rate when the calculated fractional part has less than 0.3 in
+its decimal part due to failure to round up the fractional part.
 
-Drop it and inline its calculation into the k assignment, which also
-improves clarity. While at that, also drop the redundant reassignment of
-fref which doesn't change within this function.
+Use a proper rounding up function to avoid overshooting the requested
+rate and make the calculation more readable.
 
+Fixes: 6bfb37e70209 ("clk: rockchip: rk3588: fix up the frac pll calculation")
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/clk/rockchip/clk_pll.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ drivers/clk/rockchip/clk_pll.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 9dec40b1fe83..d0df3b8fb49d 100644
+index d0df3b8fb49d..69d2d182dcb5 100644
 --- a/drivers/clk/rockchip/clk_pll.c
 +++ b/drivers/clk/rockchip/clk_pll.c
-@@ -169,18 +169,15 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
- static u32
- rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
- {
--	u64 fref, fout, ffrac;
-+	u64 fref, ffrac;
- 	u32 k = 0;
+@@ -11,6 +11,7 @@
+ #include <asm/arch-rockchip/hardware.h>
+ #include <div64.h>
+ #include <linux/delay.h>
++#include <linux/math64.h>
  
- 	fref = fin_hz / p;
- 	ffrac = fvco - (m * fref);
--	fout = ffrac * 65536;
--	k = fout / fref;
-+	k = ffrac * 65536 / fref;
+ static struct rockchip_pll_rate_table rockchip_auto_table;
+ 
+@@ -177,7 +178,10 @@ rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
+ 	k = ffrac * 65536 / fref;
  	if (k > 32767) {
--		fref = fin_hz / p;
  		ffrac = ((m + 1) * fref) - fvco;
--		fout = ffrac * 65536;
--		k = ((fout * 10 / fref) + 7) / 10;
-+		k = ((ffrac * 65536 * 10 / fref) + 7) / 10;
+-		k = ((ffrac * 65536 * 10 / fref) + 7) / 10;
++		/*
++		 * Round up to avoid overshooting requested rate for negative k
++		 */
++		k = DIV64_U64_ROUND_UP(ffrac * 65536, fref);
  		if (k > 32767)
  			k = 0;
  		else
