@@ -4,100 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC544C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 18:37:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807C7C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 19:30:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7E3984C8D;
-	Mon, 13 Jul 2026 20:36:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id AAFE584C7A;
+	Mon, 13 Jul 2026 21:30:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="xAj0Cw3s";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="MsX/d/Lf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC2B184C86; Mon, 13 Jul 2026 20:36:33 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 62C3984C7B; Mon, 13 Jul 2026 21:30:52 +0200 (CEST)
+Received: from mail-43171.protonmail.ch (mail-43171.protonmail.ch
+ [185.70.43.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EA6E84C8D
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 20:36:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BA4484B49
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 21:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-4798bea72f9so1885579f8f.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 11:36:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1783967790; x=1784572590; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=XO70k/Toquqvi/lJge3J+jyHf8Jh0fPgEyuzYTcgmRQ=;
- b=xAj0Cw3syUgnHr42gzFc1GBbEeoQjbBk84H1qzYnvvWbf7R444vRVtyacWFdwOiiS/
- /8C4hCPvXv80P+WOltbSvEFeS+0slZ79KcLC7rcEBPIFCKjL6sJTlPr/uRmb57NI5JKi
- WFaPy4gYU4NhvHjk742gjo/qDXyLbIPO+tEcfM3bmgNf3LpVt2Np1r9ZPKzriDca1AAp
- 0eKdI0f9QWSgXS/bc8XgNh2ud6XHoIdxo4EyZOXMfb89qCOmyms0VT9p9VzAKmwO9Vx/
- svUPgoSMe3c12/8L/BJSUtFMJIlGYhoRcLytg+GbUzt1RoePSN+fCo2x9cKh1G5vhjga
- kpxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783967790; x=1784572590;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=XO70k/Toquqvi/lJge3J+jyHf8Jh0fPgEyuzYTcgmRQ=;
- b=hwcHcYEmb5G9Z3CH77noyjuLboDKpCN+V4Qj97mw2O5VRmKn6I7U1FRnX0GcA9yfvo
- j2Zv2qtstR6EDQSgVqT0G1/Da2njNuorWZr5l/rPgDb3BFxbvCGXGa4nEwn/RRZTnbxQ
- 1HzZQK94cxMxOW81Zqxv+Dthfk/gxq7n0cba6q1m42uX+pjLPseoC4RVCHmiHrm8SOPe
- Efj/KYiPvzHtyONg/Wg9kzfW2mlykb7475Z3IF45/5uuphEye20AsPg2XqsCDrlzbDlb
- 82/l6ef0SftcfAcqHRR9d3D61yYvThe0j8DM9Xi/HDVgbU+n6L5lvlZpCMwTlY1aXsrU
- N5UQ==
-X-Gm-Message-State: AOJu0YxYdaTRX3/0KXB8Z6wS+tMHb9wLfU7p7my/qOy2vLTsr7utJt0i
- XYBvY8rjyrMo+Kl8d3CAl9RypBXtH8ohQ+H0ckK9qrjjkB+/N3zThiYmzKXMjxhMrUg=
-X-Gm-Gg: AfdE7ckD4BDXQXq5g7ejcqUDA06Ar5L54RmjdvxlQr79mDvgJW/4kzAa9mJ1vQgzziz
- 3YJAbmuPlvrJinuxt9jAHdmOBH8GetB+UhiGV/sauQxGjrmjjuOsKzW+fa5ogL59pK2VBh3rzqU
- jASqFdTi9E1nmuRJyxIbhSLhtYh4bXtMVFaNnq/K6oNEA7U5f59PxbWMJdeqq5xVFpKaLc5Hho4
- 9rZM7ZT2DMC7mEGRySzfFRD8WIiMFh1LvVBYh9DQOS1y0w91bxYZTxRVYHxazVYgGTwkAWjJ4UX
- aShGdqjKpXGRMPFuV02BRbzEH89my7kaNRkdQ6HdUxI+zJLpVYIlUQEa6+7WE++SRrTdM+syRyr
- DlXvYtm/B4D9ryktkuS57CBRCwG6oDt2A9qCnmC4OVIo4zf8sq3L0yeYMbbshhIhsSQgtLAGAPC
- olcu2Jy6bZtBx1Hz6pX64s3JUm4WNEbuKv7gnoOJ3nnDDhwRvL8DcpRk7w0je6B03Q
-X-Received: by 2002:a05:6000:290f:b0:47f:250f:720c with SMTP id
- ffacd0b85a97d-47f2dce7333mr11649022f8f.59.1783967790588; 
- Mon, 13 Jul 2026 11:36:30 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
- [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f464c1f84sm1434703f8f.29.2026.07.13.11.36.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 11:36:30 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 13 Jul 2026 22:35:22 +0400
-Subject: [PATCH 6/6] clk: rockchip: pll: fix overflow and drop manual two's
- complement in rk3588_pll_get_rate
+ spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
+ s=protonmail; t=1783971049; x=1784230249;
+ bh=2WNzupjhkc3dKpHJp7OJzSF/9B/aqkK8s6K7e45gLrY=;
+ h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
+ Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=MsX/d/LfKD/t/0pJScMY2nvNdBEftmBAvaMrbpGkHiBeHYuVOQ7y7PkzQJD1/ebCF
+ qW8gHwG7XHjIGm2AR4d5PCH+C4ba1seMHCZIRO20FYHSQj6wsFAmZKGg/nJP7V9xJk
+ 0EhVResQXySygK+MqSaqs02PWIt9SfhFmlwLsUTJEHiDy6hlLePVfe+9CqNTHk1oz7
+ /1aASsjhUk4rYH3O8ORPp4mDn4Bt5ASB0NPiVCtzRMoLZ1D9k2ziy8gd+joyzXqN5W
+ Gm5qZ5CgYT3XV0Iw3lfSV6kCH7Em1HCNuoByUPe7ByM6KyE5W7w1QWyYJAzYMqAM72
+ S3VShKWrxzJOA==
+X-Pm-Submission-Id: 4gzXbW2vCjz2Sd3Y
+From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>
+Subject: [PATCH] net: drop pointless .bind methods
+Date: Mon, 13 Jul 2026 21:30:43 +0200
+Message-ID: <20260713193043.2851418-1-rv@rasmusvillemoes.dk>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-rk3588-fracpll-v1-6-cdf47f2ca0b8@flipper.net>
-References: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
-In-Reply-To: <20260713-rk3588-fracpll-v1-0-cdf47f2ca0b8@flipper.net>
-To: u-boot@lists.denx.de, Elaine Zhang <zhangqing@rock-chips.com>, 
- Jagan Teki <jagan@edgeble.ai>
-Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2046; i=alchark@flipper.net;
- h=from:subject:message-id; bh=65ec8ksZjiGrbJGiFOJTJjOiTkBxm0n6USnj4as9n9o=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFGkizWh0+2xzgbBb6+oD8LKGWa5/8xfM5PhUKz6jqn
- iYjEHS1YyILgxgXg6WYIsvcb0tspxrxzdrl4fEVZg4rE8gQaZEGBiBgYeDLTcwrNdIx0jPVNtQz
- NNIx1jFi4OIUgKnOrmP4p+UksDmELePWnIQHx/Sl4lkuHmXq4Vas2Xz7rILgXb2kmwz/3ds31/A
- mv46Inn/29jyXDQ9ivib1lzd+5msW3/rq92IxLgA=
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,67 +64,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current code calculates the fractional component in 32 bits before
-assigning it to a 64-bit holding variable, causing overflow for real-world
-values of k, given that OSC_HZ is 24000000U. It also does bitwise manual
-massaging of an unsigned representation of what is actually a two's
-complement signed value, which is confusing and makes the code harder to
-read.
+Considering that device_set_name() does
 
-Read k into a properly signed type and promote operands to avoid overflow,
-which also enables the use of div_s64() to express the math more clearly.
+  int device_set_name(struct udevice *dev, const char *name)
+  {
+	name = strdup(name);
+	if (!name)
+		return -ENOMEM;
+	dev->name = name;
+	device_set_name_alloced(dev);
 
-Fixes: b851c006a150 ("clk: rockchip: pll: Add pll_rk3588 type for rk3588")
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+	return 0;
+  }
+
+it should be pretty clear that these .bind methods are at best
+pointless (there's a fixup for device_set_name() en route that will
+make this not a memory leak).
+
+I presume one of them got added by mistake and the remaining are
+cargo-culted, but regardless, just remove them to prevent yet more
+copies of this anti-pattern to appear.
+
+Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
 ---
- drivers/clk/rockchip/clk_pll.c | 25 ++++---------------------
- 1 file changed, 4 insertions(+), 21 deletions(-)
+ drivers/net/dm9000x.c    | 6 ------
+ drivers/net/ftmac100.c   | 6 ------
+ drivers/net/ks8851_mll.c | 6 ------
+ drivers/net/smc911x.c    | 6 ------
+ 4 files changed, 24 deletions(-)
 
-diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index ebe90b55ea06..9d529242be31 100644
---- a/drivers/clk/rockchip/clk_pll.c
-+++ b/drivers/clk/rockchip/clk_pll.c
-@@ -559,9 +559,10 @@ static int rk3588_pll_set_rate(struct rockchip_pll_clock *pll,
- static ulong rk3588_pll_get_rate(struct rockchip_pll_clock *pll,
- 				 void __iomem *base, ulong pll_id)
+diff --git a/drivers/net/dm9000x.c b/drivers/net/dm9000x.c
+index 9e17f0b9c28..53225979b66 100644
+--- a/drivers/net/dm9000x.c
++++ b/drivers/net/dm9000x.c
+@@ -638,11 +638,6 @@ static int dm9000_read_rom_hwaddr(struct udevice *dev)
+ 	return !is_valid_ethaddr(pdata->enetaddr);
+ }
+ 
+-static int dm9000_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static int dm9000_of_to_plat(struct udevice *dev)
  {
--	u32 m, p, s, k;
-+	u32 m, p, s;
- 	u32 con = 0, shift, mode;
--	u64 rate, postdiv;
-+	u64 rate;
-+	s16 k;
+ 	struct dm9000_priv *db = dev_get_priv(dev);
+@@ -673,7 +668,6 @@ U_BOOT_DRIVER(dm9000) = {
+ 	.name		= "eth_dm9000",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= dm9000_ids,
+-	.bind		= dm9000_bind,
+ 	.of_to_plat = dm9000_of_to_plat,
+ 	.ops		= &dm9000_ops,
+ 	.priv_auto	= sizeof(struct dm9000_priv),
+diff --git a/drivers/net/ftmac100.c b/drivers/net/ftmac100.c
+index fa0b3dbb6d1..d9826178e82 100644
+--- a/drivers/net/ftmac100.c
++++ b/drivers/net/ftmac100.c
+@@ -429,11 +429,6 @@ static int ftmac100_remove(struct udevice *dev)
+ 	return 0;
+ }
  
- 	con = readl(base + pll->mode_offset);
- 	shift = pll->mode_shift;
-@@ -588,25 +589,7 @@ static ulong rk3588_pll_get_rate(struct rockchip_pll_clock *pll,
+-static int ftmac100_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
+-
+ static const struct eth_ops ftmac100_ops = {
+ 	.start	= ftmac100_start,
+ 	.send	= ftmac100_send,
+@@ -451,7 +446,6 @@ U_BOOT_DRIVER(ftmac100) = {
+ 	.name	= "ftmac100",
+ 	.id	= UCLASS_ETH,
+ 	.of_match = ftmac100_ids,
+-	.bind	= ftmac100_bind,
+ 	.of_to_plat = ftmac100_of_to_plat,
+ 	.probe	= ftmac100_probe,
+ 	.remove = ftmac100_remove,
+diff --git a/drivers/net/ks8851_mll.c b/drivers/net/ks8851_mll.c
+index 2c956154d09..c2f87d4222b 100644
+--- a/drivers/net/ks8851_mll.c
++++ b/drivers/net/ks8851_mll.c
+@@ -571,11 +571,6 @@ static int ks8851_read_rom_hwaddr(struct udevice *dev)
+ 	return !is_valid_ethaddr(pdata->enetaddr);
+ }
  
- 		rate = OSC_HZ / p;
- 		rate *= m;
--		if (k & BIT(15)) {
--			/* fractional mode */
--			u64 frac_rate64;
+-static int ks8851_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
 -
--			k = (~(k - 1)) & RK3588_PLLCON2_K_MASK;
--			frac_rate64 = OSC_HZ * k;
--			postdiv = p;
--			postdiv *= 65536;
--			do_div(frac_rate64, postdiv);
--			rate -= frac_rate64;
--		} else {
--			/* fractional mode */
--			u64 frac_rate64 = OSC_HZ * k;
+ static int ks8851_probe(struct udevice *dev)
+ {
+ 	struct ks_net *ks = dev_get_priv(dev);
+@@ -615,7 +610,6 @@ U_BOOT_DRIVER(ks8851) = {
+ 	.name		= "eth_ks8851",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= ks8851_ids,
+-	.bind		= ks8851_bind,
+ 	.of_to_plat = ks8851_of_to_plat,
+ 	.probe		= ks8851_probe,
+ 	.ops		= &ks8851_ops,
+diff --git a/drivers/net/smc911x.c b/drivers/net/smc911x.c
+index f39ba40944f..2835eb45856 100644
+--- a/drivers/net/smc911x.c
++++ b/drivers/net/smc911x.c
+@@ -431,11 +431,6 @@ static int smc911x_read_rom_hwaddr(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int smc911x_bind(struct udevice *dev)
+-{
+-	return device_set_name(dev, dev->name);
+-}
 -
--			postdiv = p;
--			postdiv *= 65536;
--			do_div(frac_rate64, postdiv);
--			rate += frac_rate64;
--		}
-+		rate += div_s64((s64)OSC_HZ * k, p * 65536);
- 		rate = rate >> s;
- 		return rate;
- 	case RKCLK_PLL_MODE_DEEP:
-
+ static int smc911x_probe(struct udevice *dev)
+ {
+ 	struct smc911x_priv *priv = dev_get_priv(dev);
+@@ -487,7 +482,6 @@ U_BOOT_DRIVER(smc911x) = {
+ 	.name		= "eth_smc911x",
+ 	.id		= UCLASS_ETH,
+ 	.of_match	= smc911x_ids,
+-	.bind		= smc911x_bind,
+ 	.of_to_plat = smc911x_of_to_plat,
+ 	.probe		= smc911x_probe,
+ 	.ops		= &smc911x_ops,
 -- 
-2.53.0
+2.55.0
 
