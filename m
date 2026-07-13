@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B21ADC44501
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D09C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:25:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50CEA84C20;
-	Mon, 13 Jul 2026 16:25:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89BF984C40;
+	Mon, 13 Jul 2026 16:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I/zwOh0+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dSj4I/nm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 119EC84C2B; Mon, 13 Jul 2026 16:25:11 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 2682A84C06; Mon, 13 Jul 2026 16:25:15 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3E0784C06
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:25:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0069384C40
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-38e07ebd263so482715a91.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:25:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783952707; cv=none;
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-84847482584so2149960b3a.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:25:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783952711; cv=none;
  d=google.com; s=arc-20260327;
- b=cTaPJzRQjcVGNiB5eYeFEA7LT98Qsb1642z6tJvSSPhVwud3Q1fbqg5APm6l6xRXXJ
- 5mHJCeiTRWZwLHX/x502LXM7bvN6hXOLgJ056N9Q+VNjgRX4mHzaa395ibJi8ZRTFBqu
- oGuKv6pauvtb7S5odk/pbKkvNzNqvyWdc+IiNM3HGoh3VNAeGAGAjooxISnIQh4G0HaK
- asLW7ja9VG9qONud4oIZoL+30VJs30RRwdCnwtmBrBCO4KMkIoHvkMhHN7giFe4UUEj3
- PTy/NR3Ff1KMKgeC6Dz3i9CviZAlxHIAneKNUUwgtgkF/a744FA7PbZQjZpPS31fg5up
- yU0A==
+ b=OOQ+RjiQxmvZNofbAe+HCqnwyhG9DqzWXXT6gBc5osAB9H+i3AeuEKnNFJRFiFY9dk
+ HBDPrlisC4v5GuzZXu6UJpU75R3PaPJr7jUCZTE/LlxRqtj4Mfq2QqIZ9UK515cGLO/X
+ 67AEnL7bqhHk3M1iHpRfGVK7x/QdKCMc+Ogdn++n3elMkJb0jBBFPK2LuQ1rb6yBFxuP
+ p/e/gPSQlXUdFUjPLWi1K6YSHPZi13ptk9WpXZE7qAaXT7QVuLdwICt/rIm99PLNeH8B
+ Wdx0cio41UhMSr8Nq0PobjfniixpUlZPH/x4obwd1GksRvwmyOvyPd+HDecmGFjVsMcO
+ rQHw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
- fh=BwhJ/qa3q2umnvSxC/8qPTLnUTxbKx1GYFMZhGakBJM=;
- b=ShgcZkd+dHj5rHBpQgAw71lK6HNFfT7g3LLsaX9atl/CHKmZHnMMkI/L2Ijz/KIJw8
- ViLkemlMiYvrLL6JbJhfBRCQzXx32ZgVXWku15Qe+ngiEl42PD8eIHOydhWraqsxxnBW
- c0W6+9+mlp5JWNq7n3gOZZNcCDkGcyKWVKOf2KRtTB5CwqOcqeRtYn0cL0d4kMVsxycS
- wCIOpRgU2esyeGVqUsi0LZ+kAz7rcqRx+gqSJeFSyyX1Ry2NEjkBl/FXJscYfs932vfS
- h3eenwBsnQfx4LWC++ST486/LQt4zQ5EUwp+n2eBVtrR4257gDuCr/0nfcn3i49UQvpc
- 9b4w==; darn=lists.denx.de
+ bh=yAoO+OqlSVuIE309IJyUWBVGU0O/0KMudcGzBF9njow=;
+ fh=64/PWCbL5YO6h/UuPtAzCycyVp4BM+MtGQHujwHBilg=;
+ b=AGQkqtoGaxtngOyE2mCuzHnqZ5XLnR1eKkcY361sGigoK8/s/xcvb2k8P0IYzvRUcd
+ a0zFOYiyp4Hg4paP/ll/ROsaoenOAGxt6ECXe6CIKIq7SLeiyURgA/MvKGdPWA0NcurU
+ 4tbbZWGg+X4yzpJCktpdVcqPxEplbS/oqO/ExkbRzXTAoM7aUwbhwGmObACbeKH9hl2e
+ bjFl8Do+dh7nCS7Y1lo5aovc7b9Z5aohG7BkzzxRXJ33/CXmr9OXzKdCzns18sWibqLe
+ jlLT0KmLZc6Yg8MYxnePxN4fOOT78L3GktrLm3q1qNRF2Ul/PvYdAML29h1/zvfUbRkF
+ SsDg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783952707; x=1784557507; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783952711; x=1784557511; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
- b=I/zwOh0+VnLEhGEh4xGbMFokC01Td/2W6ZwpZCecVuAwugw5zLIhQtIHjmNiFC03Qh
- n7pvspj3T2fCUxTj6BwsCgAWb2Y94sWE8Hc6gQpArv5P3Ko/0+a/4aToDfUGg2cb7chx
- MQwcJL5iZ6e9nSKTjOesYAmoCAKBJeQ6BZBPo=
+ :content-type; bh=yAoO+OqlSVuIE309IJyUWBVGU0O/0KMudcGzBF9njow=;
+ b=dSj4I/nm/0YYzUQnSuNrDzr9/Lsd9StUOJwYRqzjRiLlW8+fDRuMy4PNuV61JBV/yJ
+ PHHpdqpFLc+kTO9M68nErpP2T+GoopX6v+qYQrKmRBS8qjzWaiKtIo5qNl0HFcjNd1WL
+ VKzXMnv8E5gaV9eh9Ddo7eawNf/GxLYPxPKOQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783952707; x=1784557507;
+ d=1e100.net; s=20251104; t=1783952711; x=1784557511;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
- b=of5qdKZ50lCj5QsRr6SFP36PlIASVhswDLrwUzEwnBo0SosBtaNN6p98cGeCjqaukE
- DkQtHvtxQFPiTyYP5GC8kttg+zuqgYk8E0n7nEAshdfsmB6Vd/YKQxindtiNnwNKYlT6
- q/Oqr6ChmiVLvhXyztyl7CUrgExLn/980sb+SQ/eDn5ZMhTPk7WjNVAsIEE+L1eb1FOD
- p4x3a+zLp4fBmUq9flnvoRNQcztrw+JYUC6so34N2HtODW+bBNwYd1ncy+vY+l76pwf1
- 4DlP3tvQ7skvIRG16YaYHpcXN4Q146Sfxmag2SkAbFJLUVWPyoMgHPDdTVLgRL2rfnPO
- +tpA==
+ bh=yAoO+OqlSVuIE309IJyUWBVGU0O/0KMudcGzBF9njow=;
+ b=ky2nt0yhtrTFLwg3TvOpJNTYfLOkk+H7cZuq/QIxry4QGPeAe2Me/IH8CBBtjxDMLX
+ 3ndSmRzxnPQLU5YWDNcqsZ7dPvCeKifpNVkL4jojTPg+mYeTtPyjNfZEW1NfHWnyRo79
+ 64S2s9p9XPVJP0p7QUlo3VFV3LQXB8VCqJVvIV/hTjf053iN+DkaU/CkBGvMphnTztWm
+ +6TjGMgDXC088szF3+gt0YHvMca8UjZmqiXxuJDWibcwcI3/2DH6CxNSb73COP27wf5t
+ YHNf7uym+Qd+PkD8e8bBjusr8fYCrrEI+KOBey9A3dnZWHAg8pInI/9J+IZqsr7mLcu0
+ Z/cg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqM2V2K4Omx/JpY708+Icn+y4BX4rTm5H3xqMleXp1sE8wiWuh0tTIR2mGlZcrJKisZrFpvhEU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxj0ss9Tcj6odnH1W67Cfy8OeXSrKlBGNJk8AQyJYaCHvCQ3gTq
- OzPFCVb/UwpaCa7YnIM6Eub+Jvv3mVWQ+HnLPvONEDxjt8kqIh/fL1paaRw7PcCp2WFH0YyASnv
- xdSxS6ppreFBxJLPSvK9cYGxKCiG9ao9IQ95suWHAhsgL0lTvp7QvoA==
-X-Gm-Gg: AfdE7cmdXRPFQ0vebON/lIDY8pYDWf4WbeDL7SJBRcGRSUMOrocWOa6DCIJ/YNEZOol
- P8ZQG72EICzFUhF6Kz9b/4Zeq7gnun3QEGf/tT8hqgIZWcrPoNDshBmqZmFYgyDLVXz4aGtCXhN
- +3b92V5nZ34XvKcTkDS76r0nK5iJtA/qEQwKgm0mFqowfS6KqAbJMgjHKdqBiWotxXd8d9KX4mF
- XMp8zlpWR3hOhElruBewFIz5o/UcLmKFiMGw5CXtKT+utpVH63ikpSgugdO/ahz1cOr7J0=
-X-Received: by 2002:a17:90b:1fc8:b0:37e:2005:6507 with SMTP id
- 98e67ed59e1d1-38dc75f4cf5mr8813108a91.15.1783952706945; Mon, 13 Jul 2026
- 07:25:06 -0700 (PDT)
+ AHgh+Rri5IGLyQVISiOfjqvuf1IitnqEFgqchHBYMasyi2hFFVAupFnJU8MEEni0UGJwVX7pdvEiiFk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSW/YmJy3Oob38oG/3L8Rr/l1aYxcrdjziBELM1K+PRfYTWYe/
+ mWf7GfHRjS54DDjJj9K8cNiFeoWxgyGfkjuGwEn7NrprGD+A9HKmVBFa1jSWtoGZUEUXvxYLiIU
+ ll/LuUV7gp+1g59TYsZqWyPOUxMqsIklmYBZZ6nj8
+X-Gm-Gg: AfdE7ckGz8VY218VG1bh4dlbxgQzK4GpYrr5f0TVfBqy0cARAgaZHZprmi2YR8y+Nh9
+ SL1FB0c7ZYxvb0HXY/v3wRe7aST+MMDuob1JfTpOyC5vEF8sgs3UxdMsCmyZgM51sZHkSOvK5jB
+ iiCIf3AqUqzFwB158L3CFcUuAL82NGvDubwcKHl4dJk2MSycT2RQfWViybTDtABqUtvat8CWs+M
+ wZloRvFi9uuQXJ2cnJhOZKdLd6W/I4xJTqUMw7gRzBJpcQqVj3mXCZpvEwNBCZzVxb8tFw=
+X-Received: by 2002:a05:6a00:2e23:b0:848:2ef5:50d9 with SMTP id
+ d2e1a72fcca58-8488ad08e69mr7736498b3a.33.1783952711363; Mon, 13 Jul 2026
+ 07:25:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-6-jonas@kwiboo.se>
-In-Reply-To: <20260708220540.3368825-6-jonas@kwiboo.se>
+ <20260708220540.3368825-7-jonas@kwiboo.se>
+In-Reply-To: <20260708220540.3368825-7-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 08:24:16 -0600
-X-Gm-Features: AVVi8CeNn0fSPrc2BPFZJW52fJV5Ts6xF6Q9-tkkF_wqSRACar1RvRVVUH8RHXc
-Message-ID: <CAFLszTiafmnLwxq8On6vKo8jRs8LoOthUkA14SQnZxLmVZa-_w@mail.gmail.com>
-Subject: Re: [PATCH 05/11] spl: Simplify xPL_BUILD conditional guard example
+Date: Mon, 13 Jul 2026 08:24:41 -0600
+X-Gm-Features: AVVi8CdTXaJ_6s-pjm6UMJxdbQik8Vtmm1Qrf5_qh9_tu2vWJl_4WcwXzkOcWBw
+Message-ID: <CAFLszTjxty82LThDuqmAyN7XasOPVT+KBSYdZ_KGd8GC0537Tw@mail.gmail.com>
+Subject: Re: [PATCH 06/11] Kconfig: Add missing depends on xPL to xPL_ symbols
 To: jonas@kwiboo.se
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -109,20 +109,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
+
 On 2026-07-08T22:05:26, Jonas Karlman <jonas@kwiboo.se> wrote:
-> spl: Simplify xPL_BUILD conditional guard example
+> Kconfig: Add missing depends on xPL to xPL_ symbols
 >
-> The old meaning of the SPL_BUILD symbol has been transfered to a new
-> XPL_BUILD symbol, leaving the SPL_BUILD symbol only to be defined for
-> SPL builds, and not all xPL builds.
+> xPL_<name> symbols should typically depend on the associated xPL symbol.
 >
-> Change to only use the SPL_BUILD symbol in the SPL code example to
-> cleanup from an old SPL to XPL symbol rename.
+> Add missing depends on xPL to xPL_<name> symbols to avoid the xPL_<name>
+> symbols being available when the associated xPL symbol is disabled.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> include/spl.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> common/Kconfig | 2 ++
+>  lib/Kconfig    | 7 ++++++-
+>  2 files changed, 8 insertions(+), 1 deletion(-)
+
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> @@ -972,23 +973,27 @@ config SPL_LZO
+>  config TPL_GZIP
+> -     bool "Enable gzip decompression support for SPL build"
+> +     bool "Enable gzip decompression support for TPL build"
+> +     depends on TPL
+
+The prompt fix is separate from adding the dependencies, so please can
+you mention it in the commit message? Otherwise it looks like a stray
+hunk.
+
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> @@ -960,6 +960,7 @@ config TPL_LZMA
+>  config VPL_LZMA
+>       bool "Enable LZMA decompression support for VPL build"
+> +     depends on VPL
+
+BTW SPL_LZMA_SIZE_OPTIMIZATION (between SPL_LZMA and TPL_LZMA) has no
+dependency at all, so it shows up in menuconfig even without SPL. It
+fits the pattern this patch fixes and could get 'depends on SPL_LZMA'
+while you are here. What do you think?
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
