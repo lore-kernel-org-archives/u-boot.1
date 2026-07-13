@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A291FC44501
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 10:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D409C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 10:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B41484AA2;
-	Mon, 13 Jul 2026 12:02:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B291784A9E;
+	Mon, 13 Jul 2026 12:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="TM7BKEHe";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="zpyk93Aa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D366284A78; Mon, 13 Jul 2026 12:02:53 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 0170C84AA6; Mon, 13 Jul 2026 12:02:57 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC45184A7B
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 12:02:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0741284A90
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 12:02:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-47f3e6cc44aso810889f8f.3
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 03:02:51 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so2891409f8f.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 03:02:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1783936971; x=1784541771; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1783936974; x=1784541774; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=fgqzAb68i9ihlFkgq7cjJ1BNVN2vB2qo/0Yp3oDyDi8=;
- b=TM7BKEHe6vphjEezu13XAlsfdoXjyuziBqSUK3Hh4/Jr2e2foxj0ucYVzoSDdClWoN
- Rc7OPtrh6xiB92K0Fl9Ai5B8Uu/DBdlE6FsAvFytnliaKp1PAVqsiNfzcQ3thkKx0NZC
- c/bOkZcsJ4bjK8lpNo2egI644FsSl4NgSqdWMpW1PJaFoOiv7Zwr73VALdXcm8s4Lif+
- vFdQb44XISgRjo9iLET8/AJzheEdGabtn0ik2OT2CnbApwYlkaEHQmYkJVxsBtNfOYLi
- jw6zPuD8CbpNRy6Xxf925dcAfGKAh/oS3RYIfRse3aaF6RJPxJdIsFxzTpqTKsNoQZr1
- 23yQ==
+ bh=ZRje9XS2T4olQM/NzcsYJOtJLb8OVpbDX5Gkj1rEJIs=;
+ b=zpyk93AahdNA2bMC2+0M0awKrO8ygGulTBocMDZJJBT2wqpx7RmgKzFbWJWE1tpmAY
+ 8PPxhw7ClLK7NftWf0CxgJ2oBFL8vWnuqA8ift9np6UXuIOMJa90C54hXJo6yY6AaWtJ
+ t4+QvBlZ4fu+ziEPu3ZHdIr8/r81FXdRt/uIHmGHeQzE35K51AKXdZxEPMP92N9wkCky
+ VTMAvkp6BIajeRo8RHosUjO11LoWgaDZ7f7keYaxV+DUWxGYRpRiqXyBkWte2YAosfhC
+ gReRAiedsVVnMZMHar7mR5cMwZeQsArQS4TRS2MotBr38Syxt9pMF69Xy42u8rbUUUzb
+ hNOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783936971; x=1784541771;
+ d=1e100.net; s=20251104; t=1783936974; x=1784541774;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fgqzAb68i9ihlFkgq7cjJ1BNVN2vB2qo/0Yp3oDyDi8=;
- b=Z1lITaBb6N3nHsPJrx8/yTdiF9z8Jw7EBP0Sz5Dv1FO0HLhASFXekYVNDOeRa0MlNe
- hxWvWJ8+YAPeUqSQ53AF4CEGzGrFkqFGjF6M8Omy+4uJRh6TQKP75N2bJtI+TmkhRt4/
- 8HYZS1IUrvjCRMEfBs2zz9rxFS0orxvxLGIaBTpXcKmW1VkpTaMmyymFOxSV52OcNtSV
- ywXMYWmF1g9kYzTf/kDbRB2Te+1kdmcc5pCWF3WvVmWVrq0vmkHNziHdFevnxqJXNAhN
- LrgyglOgvd6yPzxXHEWldcM/oTTCQzwBWW7cCIochXnGztTCPp4IOpHOtnzji6Te2en0
- pzPQ==
-X-Gm-Message-State: AOJu0Yyiyw4Dk9ep+6NdIdkBjxUktgm4myc5JsFTnPAI5hMmhFgzTaVL
- i521o9l8mq10HXbbsP6Rmu3xKxvwq3aaVZDOiXylC2gwpIcw/bfWNi7btVZfO7XVLIw=
-X-Gm-Gg: AfdE7clyWqB2PyG+vQ4wJ2snUAgmCP7bp5J4mEpz0y19L/L+6YeXyCGxU8JU4jKvCdn
- jIgHF0l6smnqc6pCu81/51RD01De5oUCy8x5t5IzdZT7tYCOFKl8pBiNamDETl4SbVimVqS2+vr
- cnfLeG1aH56AiRB29EXYHABzkvbXIzVoY/UNS4mfd/IBAwrb/cK83Oz2qGnF5OyBWlf/px3s+TF
- usSC4yrvf3R9D4XoLuNjxCHf0PDvKDP/zm7/a8weDVqzb6ZJpz5zoxjBe955ISaBv5sK+H3ocJa
- IvwS/mMpd3d5oChAxztdpyuHWRNLmtjZatMAm9YJs82uX7vvXaShrMW6n9o31YVhMOTxYrPrW5R
- sTkUYgx70550lxZ4QVkxKadS/o11nU91YENHUHAjptV38vtqQ8nfsJXcXLOPEiv13yxq4UfHfJX
- WYQGHnTJpeFPvIh+/b3TUQwMELDUEvD0+s7HnqsiqG5ReViy0SoWUjztL/HuGajO06
-X-Received: by 2002:a05:6000:2305:b0:47d:eee8:ec40 with SMTP id
- ffacd0b85a97d-47f2dcd717dmr9212192f8f.38.1783936971052; 
- Mon, 13 Jul 2026 03:02:51 -0700 (PDT)
+ bh=ZRje9XS2T4olQM/NzcsYJOtJLb8OVpbDX5Gkj1rEJIs=;
+ b=Q+QqcT6+3g+Y+On3+C6s3SlqAycL4vvG5TAHGezPONcdzzmCL/eTafIhTX8To2Mr8j
+ TESA7Jh9Gh9FHBi7SiNh5u5gGg11oD/AvFxhLocJBnuUudDMjgtYh1ggt/b24i4sUxIJ
+ Qo1nabLnCOsuNWafhjT5UvYXKxnx1DjbkmC2o7wxXa/Ps+Xay2YZ+4eEn3RAH3CeM6px
+ 2mD68BVq2eZsbg9hQJMSQE7CmgaaWdObqZovx9oexb4LiR1/lBSyDLEpgtnVElgrT3/A
+ zvMvXWwIUkVD2xExWXc4RF4UQZK6K3/dGN5G/VzXVCR4Vb9QeZ7A/MemBBBSUG6R9VJa
+ EC2g==
+X-Gm-Message-State: AOJu0Yz9AfGF+DKCkTxD6LeViriPiR6tKGG1qfsRP3n8apJZxMorU4of
+ 8te3NY0pQwnDX6dykZfurSjYz6ZE36RFYYayu72Max6Ty7Fo+BjAtL9ViW6yciqLDFo=
+X-Gm-Gg: AfdE7cks8XadyhFZKQNgczpbIjA19FxDacAEqRfc36ebiQ+jVldnCgGGgF9oikWvv46
+ rWur/D+uj7Z5geraQjqUCBXzzVJs4Og8PM4rRJoDtD5g6wRCZ952jpevV2JEAaEMu/Ie2VZmp3E
+ NJ/0x0iXWxUaLG6JToUQG0ddQWCsS86RvnrDwwPcpn++7dMTGCSacnP3C0PECgZidXjlxc5rRqA
+ XNT84eEugdXK/afe0yP4HAPX7Wl+p5LCEG6/CKBEQgL2xapEzepmHPAUWb1n4goFGtssYBnCYZD
+ +8OKAn0c2Vl/3xl3BCORbOgsDxAVvESUAO3386uzXOoJlucVAemzOzrWv8OaBgoFWI6lxZIWtnk
+ MJb/NOY4nbKEC2jfs4jodvq9c8w+1GD6BfSoR/k/GGhuB4M7og57qLbCzoVpR8Ngv+1Nd2BccaI
+ lL7ZVgkX5GxvSPumpxfibzNEDoWWLEZ62gRmyIsffzZljlbWD2LrWxK8IbeS+YGFg7cjfBzwN+f
+ 34=
+X-Received: by 2002:a5d:5d86:0:b0:47d:fb9e:c3f6 with SMTP id
+ ffacd0b85a97d-47f2dc9b97cmr8781367f8f.20.1783936973202; 
+ Mon, 13 Jul 2026 03:02:53 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-92-99-174-41.alshamil.net.ae.
  [92.99.174.41]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f25b23b7esm29135772f8f.18.2026.07.13.03.02.48
+ ffacd0b85a97d-47f25b23b7esm29135772f8f.18.2026.07.13.03.02.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 03:02:50 -0700 (PDT)
+ Mon, 13 Jul 2026 03:02:52 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 13 Jul 2026 14:02:42 +0400
-Subject: [PATCH 1/7] rockchip: mkimage: Split size_and_off and size_and_nimage
+Date: Mon, 13 Jul 2026 14:02:43 +0400
+Subject: [PATCH 2/7] rockchip: mkimage: Print image information for all
+ embedded images
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-rk3576-boost-v1-1-9d23aa08f674@flipper.net>
+Message-Id: <20260713-rk3576-boost-v1-2-9d23aa08f674@flipper.net>
 References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
 In-Reply-To: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
 To: u-boot@lists.denx.de
@@ -89,12 +91,12 @@ Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4522; i=alchark@flipper.net;
- h=from:subject:message-id; bh=CS0iKPHRZJBCyL76zyAI0FyUDSMXCvIa3G9h0bAjuCk=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFbD/mpr3q2azjZbleWr2XaxVvdgimqhXlfU6552zLw
- TT7+Zo7HRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOsY4RAxenAEw1z3pGhrvvT+6xnNYgLWz0arLA/DMZOdGLn/VIxS9/H3h08/35XjGMDFsvzHo
- tXHF13u48zyOblDoK2Br5kpZ13A68+yE4UZ5BlRcA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3609; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=WmsU0eQNIScF9MWdTgGWtPcvYfCYbgJ201LD9vTSHLw=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWSFbD92t4gz59+fa+eZ0n9/+rl/3p59LKX8PxNDJD6WB
+ f5WeKp3qWMiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
+ MzTSMdYxYuDiFICptsxh+O97L0KjW0XTMdD4TkG01NFvumsjnwnKTe3Zt2eTtMFe52BGhva2gAu
+ hemH/eDwLI1/vZg5+fDlSjzPJdMeNu9dahTZasAIA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
@@ -115,125 +117,111 @@ X-Virus-Status: Clean
 
 From: Jonas Karlman <jonas@kwiboo.se>
 
-Split 32-bit size_and_off and size_and_nimage fields of the v2 image
-format header into their own 16-bit size, offset and num_images fields.
+The v2 image format can embed up to 4 data files compared to the two
+init and boot data files using the older image format.
 
-Set num_images based on number of images passed by the datafile
-parameter and size based on the offset to the hash field to fix using a
-single init data file and no boot data file for the v2 image format.
+Add support for displaying more of the image header information that
+exists in the v2 image format, e.g. image load address and flag.
+
+Example for v2 image format:
+
+  > tools/mkimage -l rk3576_idblock_v1.09.107.img
+  Rockchip Boot Image (v2)
+  Image 1: 4096 @ 0x1000
+  - Load address: 0x3ffc0000
+  Image 2: 77824 @ 0x2000
+  - Load address: 0x3ff81000
+  Image 3: 262144 @ 0x15000
+
+Example for older image format:
+
+  > tools/mkimage -l u-boot-rockchip.bin
+  Rockchip RK32 (SD/MMC) Boot Image
+  Init Data: 20480 @ 0x800
+  Boot Data: 112640 @ 0x5800
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- tools/rkcommon.c | 44 ++++++++++++++++++++++++--------------------
- 1 file changed, 24 insertions(+), 20 deletions(-)
+ tools/rkcommon.c | 41 +++++++++++++++++++++++++++++++----------
+ 1 file changed, 31 insertions(+), 10 deletions(-)
 
 diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-index b39777fc0607..034896d57f80 100644
+index 034896d57f80..fe0afc5629b3 100644
 --- a/tools/rkcommon.c
 +++ b/tools/rkcommon.c
-@@ -34,15 +34,16 @@ enum hash_type {
- /**
-  * struct image_entry
-  *
-- * @size_and_off:	[31:16]image size;[15:0]image offset
-- * @address:	default as 0xFFFFFFFF
-+ * @offset:	image offset (unit as 512 byte blocks)
-+ * @size:	image size (unit as 512 byte blocks)
-+ * @address:	load address (default as 0xFFFFFFFF)
-  * @flag:	no use
-  * @counter:	no use
-  * @hash:	hash of image
-- *
-  */
- struct image_entry {
--	uint32_t size_and_off;
-+	uint16_t offset;
-+	uint16_t size;
- 	uint32_t address;
- 	uint32_t flag;
- 	uint32_t counter;
-@@ -56,16 +57,17 @@ struct image_entry {
-  * This is stored at SD card block 64 (where each block is 512 bytes)
-  *
-  * @magic:	Magic (must be RK_MAGIC_V2)
-- * @size_and_nimage:	[31:16]number of images;[15:0]
-- *			offset to hash field of header(unit as 4Byte)
-- * @boot_flag:	[3:0]hash type(0:none,1:sha256,2:sha512)
-- * @signature:	hash or signature for header info
-- *
-+ * @size:	offset to hash field of header (unit as 4 bytes)
-+ * @num_images:	number of images
-+ * @boot_flag:	[3:0] hash type (0:none, 1:sha256, 2:sha512)
-+ * @images:	images
-+ * @hash:	hash or signature for header info
-  */
- struct header0_info_v2 {
- 	uint32_t magic;
- 	uint8_t reserved[4];
--	uint32_t size_and_nimage;
-+	uint16_t size;
-+	uint16_t num_images;
- 	uint32_t boot_flag;
- 	uint8_t reserved1[104];
- 	struct image_entry images[4];
-@@ -351,17 +353,18 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
- 	printf("Image Type:   Rockchip %s boot image\n",
- 		rkcommon_get_spl_hdr(params));
+@@ -350,8 +350,6 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
+ 	uint8_t *image_ptr = NULL;
+ 	int i;
+ 
+-	printf("Image Type:   Rockchip %s boot image\n",
+-		rkcommon_get_spl_hdr(params));
  	memset(buf, '\0', RK_INIT_OFFSET * RK_BLK_SIZE);
--	hdr->magic   = cpu_to_le32(RK_MAGIC_V2);
--	hdr->size_and_nimage = cpu_to_le32((2 << 16) + 384);
-+	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
+ 	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
  	hdr->boot_flag = cpu_to_le32(HASH_SHA256);
- 	sector_offset = 4;
- 	image_size_array[0] = spl_params.init_size;
- 	image_size_array[1] = spl_params.boot_size;
- 
- 	for (i = 0; i < 2; i++) {
-+		if (!image_size_array[i])
-+			break;
- 		image_sector_count = image_size_array[i] / RK_BLK_SIZE;
--		hdr->images[i].size_and_off = cpu_to_le32((image_sector_count
--							<< 16) + sector_offset);
-+		hdr->images[i].offset = cpu_to_le16(sector_offset);
-+		hdr->images[i].size = cpu_to_le16(image_sector_count);
- 		hdr->images[i].address = 0xFFFFFFFF;
- 		hdr->images[i].counter = cpu_to_le32(i + 1);
- 		image_ptr = buf + sector_offset * RK_BLK_SIZE;
-@@ -370,6 +373,8 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
- 		sector_offset = sector_offset + image_sector_count;
- 	}
- 
-+	hdr->num_images = cpu_to_le16(i);
-+	hdr->size = cpu_to_le16(offsetof(typeof(*hdr), hash) / sizeof(uint32_t));
- 	do_sha256_hash(buf, (void *)hdr->hash - buf, hdr->hash);
+@@ -505,6 +503,29 @@ int rkcommon_verify_header(unsigned char *buf, int size,
+ 	return -ENOENT;
  }
  
-@@ -516,10 +521,8 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
++static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
++{
++	uint32_t val;
++	int i;
++
++	printf("Rockchip Boot Image (v2)\n");
++
++	for (i = 0; i < le16_to_cpu(hdr->num_images); i++) {
++		printf("Image %u: %u @ 0x%x\n",
++		       le32_to_cpu(hdr->images[i].counter),
++		       le16_to_cpu(hdr->images[i].size) * RK_BLK_SIZE,
++		       le16_to_cpu(hdr->images[i].offset) * RK_BLK_SIZE);
++
++		val = le32_to_cpu(hdr->images[i].address);
++		if (val != 0xFFFFFFFF)
++			printf("- Load address: 0x%x\n", val);
++
++		val = le32_to_cpu(hdr->images[i].flag);
++		if (val)
++			printf("- Flag: 0x%x\n", val);
++	}
++}
++
+ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
+ {
+ 	struct header0_info header0;
+@@ -521,8 +542,7 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
  			return;
  		}
  
--		init_size = header0_v2.images[0].size_and_off >> 16;
--		init_size = init_size * RK_BLK_SIZE;
--		boot_size = header0_v2.images[1].size_and_off >> 16;
--		boot_size = boot_size * RK_BLK_SIZE;
-+		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
-+		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
+-		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
+-		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
++		rkcommon_print_header_v2(&header0_v2);
  	} else {
  		ret = rkcommon_parse_header(buf, &header0, &spl_info);
  
-@@ -533,8 +536,9 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
- 		}
+@@ -540,15 +560,16 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
+ 		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
+ 			    init_size;
  
- 		image_type = ret;
--		init_size = header0.init_size * RK_BLK_SIZE;
--		boot_size = header0.init_boot_size * RK_BLK_SIZE - init_size;
-+		init_size = le16_to_cpu(header0.init_size) * RK_BLK_SIZE;
-+		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
-+			    init_size;
+-		printf("Image Type:   Rockchip %s (%s) boot image\n",
+-		       spl_info->spl_hdr,
++		printf("Rockchip %s (%s) Boot Image\n", spl_info->spl_hdr,
+ 		       (image_type == IH_TYPE_RKSD) ? "SD/MMC" : "SPI");
+-	}
  
- 		printf("Image Type:   Rockchip %s (%s) boot image\n",
- 		       spl_info->spl_hdr,
+-	printf("Init Data Size: %d bytes\n", init_size);
++		printf("Init Data: %d @ 0x%x\n", init_size,
++		       le16_to_cpu(header0.init_offset) * RK_BLK_SIZE);
+ 
+-	if (boot_size != RK_MAX_BOOT_SIZE)
+-		printf("Boot Data Size: %d bytes\n", boot_size);
++		if (boot_size != RK_MAX_BOOT_SIZE)
++			printf("Boot Data: %d @ 0x%x\n", boot_size, init_size +
++			       le16_to_cpu(header0.init_offset) * RK_BLK_SIZE);
++	}
+ }
+ 
+ void rkcommon_rc4_encode_spl(void *buf, unsigned int offset, unsigned int size)
 
 -- 
 2.53.0
