@@ -4,65 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D467DC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 00:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FE5C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 01:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E394E84A0B;
-	Mon, 13 Jul 2026 02:52:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D244C84852;
+	Mon, 13 Jul 2026 03:41:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d+mK5cp6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AM8yCX9A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B39582991; Mon, 13 Jul 2026 02:52:44 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 46D668490A; Mon, 13 Jul 2026 02:17:12 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01AD3848EB
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:52:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0F8782991
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:17:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gz3nM500pzMlGS;
- Mon, 13 Jul 2026 02:52:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1783903959;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vyB/0h7lHqc9AoT+wg2rvssTb0XKBl442qPLaxYxjTY=;
- b=d+mK5cp6evVyvQDH7+UNHkLkkklhjBo/cKT+Jipp0JkVud3OAjGbuQP8Gf+dnEBneWPbFp
- Sr9JBAivpZDSve+Kjb4IW3Gq6lALuJiZK4AL5XKMJxG0iDZNBiU2uFdWqR99ZrP29wJN64
- 1NG7BHpuODj+NSlUu3ddEYhwivHvo8G7IURgfnaaG35jXlkwnQCOUQ4XHKrYVu6Xjq+Q4P
- 03P6Onsd12x+vskQBrHUrfl3+JMTHOsV1AqI6CXWDvua2w6txqWqOWS0G3q6jikkvZB/di
- IVzqd9KkyNsgRNDQc7xIGzfr4p1wmMSD3MolBm4LluR5mJJSfDWsK6YMCLQK9Q==
-Message-ID: <fa6c1687-c12a-4c85-b280-6e14a66cd397@mailbox.org>
-Date: Sun, 12 Jul 2026 15:39:17 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0c5adbso5252010a12.2
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:17:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783901829; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Bfgy+rYIhTfYMAeZ2Iu4ZCQ4i1ESC1dljedA8g/cd8mmny3qX3vvweWX9szsqUZQb0
+ gHIFSr1LyKSl3NuayTDQrSnEyyvB8Pkg4Di5Er4K+hlf9ZqDHpg9LgNzqVwjWOIxMYVe
+ uH0h3AYF5LzTvxsDn1O2ho9fqlHh0kZAsnBgO5Q4XFz6g77fllV8pxMBo1QhyYE7QBHZ
+ nz41Mzq7M+kPxdz3LSei7/S9vV/t02VkcvDwFyI8s5WvqJDBjSK2PpL931zx5nqrs8L4
+ F5sJ9CLfILEr/chNuVlaeZXbdRl5AbomWoNa0CgAvze5VadzpTT0Nafe36OttcTymo4k
+ uaCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
+ fh=o0sOm2vp2y3CWH0wXZkGsEhY/jVD/FgGEsUTF4L6s7w=;
+ b=PznLnQGdmb5GQF7yw1jXNXZjpWkkRXZ9vkpQ9AP03RNPG/BpA+5BH0J9/xBPDm6Hzl
+ TH1+s/QpqCzl90vyVmXjd4AZVlz3earU6O6u42Oma/RJDDPjH2YT9d6di527cxUe2Rhd
+ oUb9kavhLXlCXmdpfxXu6OgfafBv6V2vflvtzupfmIkKqI4kPUZdwv6dCWmTN96wms3C
+ fs0953i0QTN4MWnJ3pBwGuaNKGtePpmtW7Ca3QDvc6AWQ2nbBQrPw/KkfrUQuYZq/m2Y
+ ymMZrZaTRiSgXViMlq+8HmvgmdLYDcToe3mDUo6wgGX5oLFFvuxRaxdf//pSwRomCi1W
+ YXnQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1783901829; x=1784506629; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
+ b=AM8yCX9Ap1pE+xefl5YOyPe+WkqJomq+28j8QyCbRQ2Fx91vsOOmgLb4PdRrPSImlx
+ U5apgdg1lsLeyugj/AGlopPiUNXnDXeJyc3zLPcf1fFaeWrUOVGHHWRmK1pYfcPTqiA1
+ 4g4msYyLpCd46Y2Z1vz9SsH4ZprNrj2E6bga0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783901829; x=1784506629;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
+ b=P+8B5Q7sn4dF4VzFGarsennacz9Ex+AFGf7/qjeuvMgQ6cLqtA+WY3bZtOG7xKKPB2
+ lbsyGT9Wum/jGcwgpkc5I6L83eLgHGgglnnktNKlOLYh1eFMrdgpropcvdeHuM254DPz
+ shPD7ZlJejv5jXRIouAT+9mi+9WiqK0vxjEVOADDQm29nG5CnljwW45iNl1JpuxZqtVs
+ QFY1wivFK6s68LQWIt6D9/KkOy/ZTxHtt9BksxKLMgYW+TpXrNW7DmrndL3dsxlQ0uXG
+ OWevrieJDMVb3wDMCDEQVWfn6YAQCpA0vLcCialf8/sVkllsH+nbfZcS3NS8vUsUUwjq
+ 1CCg==
+X-Gm-Message-State: AOJu0YxPyBaPRNh+M1nVMZkgejOYquYd6nE+jVb0im+1tnRqKBXQIO6o
+ HXKsx06/kgVOfu6b5j28SX3orGEMvCHCeaxyt7vf5QGd5FxWtdFNkHa4IeKuSGRcVLoy7E/5sgc
+ lNiR+BnegOypcJvUG77brY8oZu39zvvzet2Lhv9Ow
+X-Gm-Gg: AfdE7clTNrNUZwkg4B+AZbX0WLXOjbs6/URwDfQouAIC+fdBHXRDLIUsLLDYHhBEHXI
+ 1THTgC+nPZPx78IeS31OsCLtNxDxHK01+TCc8VSVKs+0rFv/gVFhtdGoW2XjyJfoZ8UEwdiAUZA
+ 8ta3SO+91L3s7GjI9UqzxkYUgsOU0e+Ae3zuz42hMRViFVtWImRENy5LCF4bbH58W115/rkDRFf
+ FgGDKDrKiB0NPbqVazzCPI02HcpdbbTHRUKl+UwangED10ocCON6iuSLiYLweJvT7W0Alq5CAeP
+ PwwkVQ==
+X-Received: by 2002:a05:6402:4149:b0:69c:769d:6eb6 with SMTP id
+ 4fb4d7f45d1cf-69c769d77d7mr2627222a12.31.1783901829306; Sun, 12 Jul 2026
+ 17:17:09 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 7/8] usb: eth: Bind ASIX AX88179A/AX88772D/AX88279 to CDC
- ECM/NCM driver
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260711160808.2022242-1-jonas@kwiboo.se>
- <20260711160808.2022242-8-jonas@kwiboo.se>
- <b7fbc3f5-bbd2-4c43-8b70-9a436028f04d@mailbox.org>
- <a1f880cb-219e-4532-bb0f-3e427b297ff5@kwiboo.se>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <a1f880cb-219e-4532-bb0f-3e427b297ff5@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: aefb7062cd48273c25c
-X-MBO-RS-META: 8i1hd4xgoiykawiwfqa1hyqzowfxo95x
+References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
+ <20260709-submit-ce-series-v2-v3-4-5017da8c9bef@gmail.com>
+In-Reply-To: <20260709-submit-ce-series-v2-v3-4-5017da8c9bef@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 12 Jul 2026 18:16:53 -0600
+X-Gm-Features: AUfX_mw3Mpceh41g9J9T5ikqY2CokoN_SRCe9G8nvXSnv5nzPaJhuqBMa6Q53io
+Message-ID: <CAFLszTjfbXVWKN8RGb1vqTdpbG6QTLDErLLn39gxQxGVvFwirQ@mail.gmail.com>
+Subject: Re: [PATCH v3 04/10] spl: fit: support encrypted payloads
+To: james.hilliard1@gmail.com
+Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ion Agorria <ion@agorria.com>, 
+ Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aristo Chen <aristo.chen@canonical.com>, 
+ Anton Ivanov <anton@binarly.io>, Daniel Golle <daniel@makrotopia.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
+ Randolph Sapp <rs@ti.com>, Heiko Schocher <hs@nabladev.com>,
+ Alexey Charkov <alchark@gmail.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>, Johan Jonker <jbx6244@gmail.com>, 
+ Francesco Valla <francesco@valla.it>, Michael Walle <mwalle@kernel.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>, 
+ Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Thierry Reding <treding@nvidia.com>, Francois Berder <fberder@outlook.fr>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Mon, 13 Jul 2026 03:41:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,118 +139,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/12/26 12:14 PM, Jonas Karlman wrote:
+On 2026-07-09T22:46:22, James Hilliard <james.hilliard1@gmail.com> wrote:
+> spl: fit: support encrypted payloads
+>
+> Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
+> decompression or moving it to the final load address.
+>
+> SPL cannot always allocate a new output buffer while loading FIT images,
+> so use the caller-provided decrypt-to-buffer helper. External encrypted
+> images are read into scratch memory first, then decrypted in place before
+> the existing copy or decompression path consumes them. Embedded encrypted
+> images decrypt into the final load buffer, or into scratch memory when
+> decompression is still required.
+>
+> Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
+> support is selected by phase. Keep that path disabled for host tools,
+> since the target-side decrypt helper depends on the U-Boot control FDT
+> and runtime crypto providers.
+>
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+>
+> boot/Kconfig         |  8 ++++++
+>  boot/image-fit.c     |  2 +-
+>  common/spl/spl_fit.c | 75 +++++++++++++++++++++++++++++++++++++++++++++++-----
+>  3 files changed, 77 insertions(+), 8 deletions(-)
 
-Hello Jonas,
-
->> On 7/11/26 6:08 PM, Jonas Karlman wrote:
->>> The ASIX AX88179A, AX88772D and AX88279 USB Ethernet controller
->>> revisions has both CDC ECM and CDC NCM support.
->>>
->>>     AX88179:  0b95:1790 1.00
->>>     AX88179A: 0b95:1790 2.00
->>>     AX88772D: 0b95:1790 3.00
->>>     AX88279:  0b95:1790 4.00
->>>
->>> Prefer using the CDC NCM or CDC ECM driver for the 2.00-4.00 version
->>> range of the 0b95:1790 ASIX USB Ethernet controllers.
->>
->> Why this specific range ?
-> 
-> Sorry, my commit message was not clear enough. Only the last three
-> entries listed above have ECM/NCM support stated in their datasheet.
-> 
-> The version seems to correlate with the different "generation" of the
-> AX88179/AX88772 controllers.
-> 
-> The initial AX88179/AX88772 revisions, tagged with version 1.00, does
-> not state support for ECM/NCM in the datasheet. And all my dongles are
-> tagged with version 2.00 or above, i.e. using AX88179A or a later
-> revision or version in the family.
-> 
-> The version matching also seems to match revision handling in vendor
-> driver [1], so that suggest that these assumptions are correct. Based on
-> [1] it looks like version 5.00 for AX88279A was added recently.
-> 
-> [1] https://github.com/mmoya/asix-usb-nic-linux-driver/blob/main/ax_main.c#L2913-L2939
-
-OK
-
->> [...]
->>
->>> +++ b/drivers/usb/eth/asix88179.c
->>> @@ -691,7 +691,12 @@ U_BOOT_DRIVER(ax88179_eth) = {
->>>    };
->>>    
->>>    static const struct usb_device_id ax88179_eth_id_table[] = {
->>> +#if IS_ENABLED(CONFIG_USB_ETHER_CDC_ECM) || IS_ENABLED(CONFIG_USB_ETHER_CDC_NCM)
->>
->> This is USB, this should be auto-detected without any need for ifdeffery.
-> 
-> As stated in the cover letter, U-Boot only support driver detection of the
-> first (cfgno=0) configuration.
-> 
->    U-Boot currently only has support for automatic binding of the first
->    device configuration for devices, so this implementaion works by adding
->    bindings for VID/PID pairs and letting the drivers try to change active
->    configuration during probe.
-> 
-> To work around this limitation, the VID/PID pair is added here.
-> 
-> U-Boot USB core structs only have support for carrying information about
-> a single configuration, so the cfgno=0 is set as active configuration
-> and USB driver matches only on information of this first config.
-> 
-> Initially I tried to add limited support for at least parsing all
-> configuration descriptors and make usb command list all possible configs.
-> 
-> However, there are other parts that only where saved during config desc
-> parsing and where then overwritten by parsing of next config descriptor.
-> 
-> Next hack was to just force setting the cfgno that matched NCM, and that
-> made USB driver matching the new NCM driver, but this was not scalable.
-> 
-> So to not having to re-work how USB core store config and handles driver
-> matching, the cleanest way was to export the set config helper and use
-> VID/PID matching in these drivers.
-> 
-> Hopefully someone can add proper support for driver matching based on
-> all possible device configurations in the future. Not something I plan
-> to address, I just wanted my USB Ethernet dongles to work :-)
-
-Try and look at 575c68279c41 ("usb: kbd: support Apple Magic Keyboards 
-(2021)") , maybe that can help with some handling of second interface 
-descriptor ?
-
->>> +	{ USB_DEVICE_VER(0x0b95, 0x1790, 0, 0x0100),
->>> +		.driver_info = FLAG_TYPE_AX88179 },
->>> +#else
->>>    	{ USB_DEVICE(0x0b95, 0x1790), .driver_info = FLAG_TYPE_AX88179 },
->>> +#endif
->>>    	{ USB_DEVICE(0x0b95, 0x178a), .driver_info = FLAG_TYPE_AX88178a },
->> [...]
->>
->> I recall there was some USB URB size limit on this ASIX USB MAC, was
->> that ever sorted out ?
-> 
-> Correct, the ax88179_eth driver is currently requesting a bigger RX
-> buffer than what the MAC seem to be able to handle when EHCI controller
-> is used.
-> 
-> Trying to get a workaround that limited the size to 16 KiB, similar to
-> what Linux uses, was partially rejected.
-> 
-> This ultimately made me to look closer at NCM/ECM and the implementation
-> of these drivers. And for U-Boot purpose using NCM/ECM mode seems more
-> logical than continue trying to use the undocumented vendor magic :-)
-> 
-> For ECM only a single packet is sent, so a 2 KiB buffer is used. And for
-> NCM it defaults to 16 KiB and also uses the information provided from
-> the descriptors to keep the the used buffer size within device limits.
-> 
-> To conclude, using ECM/NCM mode resolved all issues I had related to USB
-> URB size and this ASIX USB MAC so I have now fully switched to just
-> using ECM/NCM driver for the boards in my personal lab.
-Can we fix the EHCI driver too ?
-
-It feels like there is a bug, which is papered over by these patches.
+Reviewed-by: Simon Glass <sjg@chromium.org>
