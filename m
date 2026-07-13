@@ -4,55 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20C7DC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:23:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98B15C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8595084B7A;
-	Mon, 13 Jul 2026 15:21:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D45E84B9D;
+	Mon, 13 Jul 2026 15:21:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sony.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="UO8y/Ln5";
+	dkim=pass (2048-bit key; unprotected) header.d=sony.com header.i=@sony.com header.b="JsMuEiXh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4442584A4B; Mon, 13 Jul 2026 09:46:01 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+ id 694BF84A4C; Mon, 13 Jul 2026 10:31:50 +0200 (CEST)
+Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp
+ [IPv6:2001:cf8:ace:41::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6371B84A48
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 09:45:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CF5684A48
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 10:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
+ dmarc=pass (p=none dis=none) header.from=sony.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liulhong617@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=fv
- yhptfiHJWLtCur8aVRK5hVx1BdwGrLPIp5wZxf1ys=; b=UO8y/Ln5mwod9B1EpM
- B9ehMBfCyGPKJmgvuVG8nivziOwIKSC9lAqH/gkFoGXj65ywz632a+ppBihfrLtO
- lB5qtVOt1sl+/QQTYge7nEpx1LOl3ENKW/Gn3BlFRK1oqLyPU8vzrVrHxIDslRhf
- 0H3SuZrBrauqyMTLYF+QXJTxc=
-Received: from liulianghong01.hobot.cc (unknown [])
- by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id
- _____wD3n_Gjl1RqtnlWJA--.34828S2; 
- Mon, 13 Jul 2026 15:45:40 +0800 (CST)
-From: lianghong617 <liulhong617@163.com>
-To: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
-	lianghong617 <liulhong617@163.com>
-Subject: [PATCH v2] Makefile: depend on OF_LIST dts sources for fit-dtb.blob
-Date: Mon, 13 Jul 2026 15:45:39 +0800
-Message-Id: <20260713074539.32875-1-liulhong617@163.com>
+ spf=pass smtp.mailfrom=Jacky.Cao@sony.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sony.com; s=s1jp; t=1783931507; x=1815467507;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=tWb6b4uSfOSZfOYaGpWRDtkfu3pCY8CZ9AYrhMH0cYM=;
+ b=JsMuEiXh8N0cxQbdeTrg+9kDvqsc8JSXY7n/7d4fP6Hd6GGfL6PUQWeW
+ pBRJjOuzh+7DaUt90ayZCl06L1GFVnMMsISjuoqUpljBdIYLcnCxpJCkZ
+ S2cYf4MexbmXYze1C24R3H7EPGE9kCT29uFpP3MGWZ1BJofcrME1FjYy+
+ p50QKWYeTIA47Krdq6WXBAUmW/SzX3xyvpGdsY1NxpWDVxvDSza1ndVO0
+ TjgCZgfPPO5nx1ttBeO+6dj0DuzM/fzXTITEe+E1JHBNaFdY+yI9wTP4s
+ SGmUWoeYkfKpXgrRGMxHQDJUT9PwmQ8VpcQjo8fSdD5SvyldlFPygQKEI Q==;
+X-CSE-ConnectionGUID: yh+Bm3vhRbmuRr8BzKXwdw==
+X-CSE-MsgGUID: kRn4Tw4OT7KI5/bao4jjjw==
+Received: from unknown (HELO jpmta-ob1.noc.sony.co.jp)
+ ([IPv6:2001:cf8:0:6e7::6])
+ by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/TLS_AES_256_GCM_SHA384;
+ 13 Jul 2026 17:31:45 +0900
+X-CSE-ConnectionGUID: CS6S1FNvSR+eFWMf2LzOsw==
+X-CSE-MsgGUID: dgUYJ5h/TPuAOs8OXTRRUw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779116400"; d="scan'208";a="655292138"
+Received: from unknown (HELO cscsh-5109201560-dev.ap.sony.com)
+ ([43.82.111.224])
+ by jpmta-ob1.noc.sony.co.jp with ESMTP; 13 Jul 2026 17:31:43 +0900
+From: Jacky Cao <Jacky.Cao@sony.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, nora.schiffer@ew.tq-group.com,
+ Steffen.Doster@tq-group.com, alexander.feilke@ew.tq-group.com,
+ Max.Merchel@ew.tq-group.com, peng.fan@nxp.com, Jacky.Cao@sony.com
+Subject: [PATCH v1] env: Fix compile error for envtools
+Date: Mon, 13 Jul 2026 16:31:41 +0800
+Message-Id: <20260713083141.2772971-1-Jacky.Cao@sony.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wD3n_Gjl1RqtnlWJA--.34828S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxXr1xtFy5Xryfur1ftFWDArb_yoWrWr4fp3
- sYvr48Kr1kJFWrtay8Zr4xua43K3sxtryjkF95Jr10yr45Gw1xuFsakayjqr17Jwn7t3yY
- vrs2v3y3GF45Wa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRb6p9UUUUU=
-X-Originating-IP: [39.170.101.209]
-X-CM-SenderInfo: holxzxxrqjliqx6rljoofrz/xtbC+gS+GWpUl6TzcAAA3X
 X-Mailman-Approved-At: Mon, 13 Jul 2026 15:20:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,89 +77,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_MULTI_DTB_FIT is enabled, fit-dtb.blob is produced by
-mkimage with one "-b <dtb>" argument for every entry in
-CONFIG_OF_LIST.  The make rule, however, only listed dts/dt.dtb
-(i.e. the CONFIG_DEFAULT_DEVICE_TREE blob) as a prerequisite:
+Following error happens when build envtools for mx6qsabrelite.
 
-  fit-dtb.blob: dts/dt.dtb FORCE
-      $(call if_changed,mkimage)
+$ make tools envtools
+  UPD     include/generated/timestamp_autogenerated.h
+  HOSTCC  tools/printinitialenv
+  GENENV  u-boot-initial-env
+  COPY    tools/version.h
+  HOSTCC  tools/env/crc32.o
+  HOSTCC  tools/env/ctype.o
+  HOSTCC  tools/env/env_attr.o
+  HOSTCC  tools/env/env_flags.o
+In file included from ./arch/arm/include/asm/mach-imx/regs-lcdif.h:16,
+                 from ./arch/arm/include/asm/arch/imx-regs.h:371,
+                 from include/configs/mx6_common.h:21,
+                 from include/configs/nitrogen6x.h:13,
+                 from include/config.h:3,
+                 from include/env.h:12,
+                 from tools/env/../../env/flags.c:7,
+                 from tools/env/env_flags.c:1:
+./arch/arm/include/asm/mach-imx/regs-common.h:51:9: error: unknown type name 'uint8_t'
+   51 |         __mxs_reg_8(reg)
+      |         ^~~~~~~~~~~
 
-Because FORCE is PHONY, if_changed ignores it and rebuilds only when
-any-prereq or arg-check is non-empty.  Editing a non-default dts in
-OF_LIST rebuilds its .dtb (tracked correctly via fixdep), but that
-.dtb was not a prerequisite of fit-dtb.blob, so $? stayed empty; the
-mkimage command line was unchanged too, so arg-check was empty as
-well.  if_changed therefore skipped mkimage and fit-dtb.blob kept the
-stale dtbs.  u-boot.bin, which appends fit-dtb.blob, then shipped the
-old device tree and the dts change did not take effect.
+uint8_t type is defined in linux/types.h header file.
+The config.h includes regs-common.h that uses uint8_t type,
+to fix this, include config.h after linux/types.h in env.h file.
 
-A previous attempt to fix this added every OF_LIST .dtb *output* as a
-prerequisite.  That is wrong on two counts:
+Fixes: 9f1807e57cbb ("env: add env_set_runtime() helper")
 
-  * Clean build regression: the OF_LIST .dtb files are produced only
-    by the recursive dts/dt.dtb -> arch-dtbs sub-make descent and have
-    no rule at the top make level, so listing them as prerequisites
-    makes them rule-less/intermediate.  After a from-scratch rebuild
-    (e.g. `rm -rf out/.../build/uboot`) it fails:
-
-      make[1]: *** No rule to make target 'arch/arm/dts/<of>.dtb',
-               needed by 'fit-dtb.blob'.  Stop.
-
-  * Incremental two-build race still present: the .dtb outputs are
-    written by a child sub-make, whose mtime updates GNU make does not
-    re-stat in the top-level process (GNU make bug #58734).  if_changed
-    evaluates $? (prerequisites newer than the target) using that cached
-    mtime; when the stale fit-dtb.blob mtime is newer than the stale
-    .dtb mtime (the normal post-build state, since mkimage runs after
-    dtc), $? is empty at evaluation time and mkimage is skipped, so the
-    edit still needs two `make` invocations to take effect under
-    parallel make (the `bdm uboot` flow runs `make -j33`).
-
-Depend on the OF_LIST *source* .dts files instead of the compiled .dtb
-outputs.  The .dts sources are found via VPATH (srctree) and never need
-a recipe at this level, so they do not break a clean build.  Their mtime
-is set by the user's edit rather than by a child sub-make, so it is
-always fresh in the top-level process and any-prereq fires mkimage in a
-single parallel make, sidestepping the cached-mtime race entirely.
-
-This fixes both the clean-build regression and the incremental
-two-build race without serialising the target.
-
-Fixes: 6f59fb07f497 ("Makefile: Build additional binaries for dtb FIT blobs appended to U-boot")
-Signed-off-by: lianghong617 <liulhong617@163.com>
+Signed-off-by: Jacky Cao <Jacky.Cao@sony.com>
 ---
-Changes in v2:
-  - Depend on the OF_LIST *.dts sources instead of the compiled *.dtb
-    outputs.  The previous version added every OF_LIST *.dtb as a
-    prerequisite, which broke clean builds ("No rule to make target
-    'arch/arm/dts/<of>.dtb'") because those .dtb files are produced by
-    the recursive dts/dt.dtb -> arch-dtbs sub-make descent and have no
-    rule at the top make level.
-  - The source-dep approach also closes an incremental two-build race
-    left by the .dtb-output approach: child sub-make mtime updates are
-    not re-stated by the top-level process (GNU make bug #58734), so
-    $? stayed empty and a single parallel `make -j` invocation still
-    needed to be run twice.  .dts mtimes are set by the user's edit and
-    are always fresh, so any-prereq fires in one pass.
-  - Add the Fixes: tag.
----
- Makefile | 2 +-
+ include/env.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 7d83ce16721..a9aa51b2108 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1212,7 +1212,7 @@ fit-dtb.blob.gz: fit-dtb.blob
- fit-dtb.blob.lzo: fit-dtb.blob
- 	@lzop -f9 $< > $@
+diff --git a/include/env.h b/include/env.h
+index 9b872fb26eb..dcd017fa5e6 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -9,10 +9,10 @@
+ #ifndef __ENV_H
+ #define __ENV_H
  
--fit-dtb.blob: dts/dt.dtb FORCE
-+fit-dtb.blob: dts/dt.dtb $(patsubst %,arch/$(ARCH)/dts/%.dts,$(subst ",,$(CONFIG_OF_LIST))) FORCE
- 	$(call if_changed,mkimage)
- ifneq ($(SOURCE_DATE_EPOCH),)
- 	touch -d @$(SOURCE_DATE_EPOCH) fit-dtb.blob
+-#include <config.h>
+ #include <compiler.h>
+ #include <stdbool.h>
+ #include <linux/types.h>
++#include <config.h>
+ 
+ struct environment_s;
+ 
 -- 
 2.34.1
 
