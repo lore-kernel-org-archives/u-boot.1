@@ -4,96 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D4BC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B8EC44507
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0623284B42;
-	Mon, 13 Jul 2026 15:08:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0042884B45;
+	Mon, 13 Jul 2026 15:11:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ym05ul8K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fEUDWnfx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E4EE84B43; Mon, 13 Jul 2026 15:08:07 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 3A51984B48; Mon, 13 Jul 2026 15:11:04 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8FD384B3B
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:08:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 338AD84B3B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:11:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-699fbcd23ccso4371302a12.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:08:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783948085; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6983f20a8bfso4619632a12.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:11:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783948261; cv=none;
  d=google.com; s=arc-20260327;
- b=dj0d8a0y9vpaSWWpiJH1CKoPQq/XeZM9w3J5BCteo2mn8FQbahmkhPeqgm6xGO3MRZ
- MCN06N6v3YWIQRq4vx5EKEfS1F/vCTA9ZNJFTYU80ZA/HF5O1Topw8gPByoqlHx2fute
- zfIGH0Tfr4k+EXCb7nosraUN/CgXUEeiDdhP13f+bULsv2Va18YnF0Xbw6tsfFhmae/m
- iRMntw4P68NgXGIPk+9BvPYz/xhhh/mgFBiChd8rjsInxf4u4KuIjL52sSebg5of78/g
- RdeB/vtfTXMcS9X/ZwQPQzAEVDUaR4XyCWcuHnG5d9GpuMTr0YSa5sz1YFNXjz/4bqq5
- qWYQ==
+ b=hDcaO7CIvUXTD7B6FwMzKgIv34k3KnbyzfGr6XsXiqWxqgD4PijcNAyZoMhnDeYAG6
+ VfyjgCzvHyX6n/EqM5GwVz/uMZBjbCa2LHGGSaWRwiFyQcXPLLvQgWtbqd5NIy54PNHI
+ toTN+MIPOKc40lLoc6jYg2PmvAXzIRipeF6LwU9pvxYxxvJ6kVbSVHA1Tha26flaC505
+ 0kySWsZQYVeC79jFRFVNLa1E0j2yVIRPeduqf0/3nWvZEIcExTLujsQr7p7lEHg0HQq3
+ RjSRRJeZOCCI0Zj1seckaNZcYo7C4KhCAcocySvEc8KmQ6xfqFELGQIjULmGrxrnZox8
+ Royg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
- fh=joWFw7uQNAewTc9d3BnbzDW7eparBJAilOzfYIz9J54=;
- b=qyW5U0N9Ig84nm7lVR8hGbt2+kUMf+5qET7hcrDydWDBdh7YoGuDq04E6kZ5YWXEXo
- uGUX/WJJh4f83Q9NjnK4tQIoj2YvMKyfRlp29dF4oeZg2M3tnvNOnhm0w1M+I5hOFQji
- xXl7nNr/UZroyD6jiMhd7oEOcihgtBjUROrfrspFhWPchH9piam1qtu/I9c6rabKRprq
- gSkU7xzklq/sYnJFuc4yAEU7IcVaawyjrWJGtrMgx82+6ufrg1kD8D4g860lSEBIQzbO
- +jFoJ3uiCxfu0pOHBLYQ1MHhtX0Ynu6hlqiaUB94t4Ng7Ubmp355FDyWG2QVz1qNlWDM
- TrXA==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
+ fh=7fq2WdkNCvCMvJmCEHaCPgmX74d0EzLwasMFTlOEV04=;
+ b=UBmcygFt9RwW6W0F6o1qjsIiPzC2AEb3/cg9jEMfPsovcQE424PqDzZlZZZmK1TFym
+ Yys2/19MmU1mIOYDu0oUdKuWj3KwPeJjWJNVaONCIdSuaXsfp6wZXGSlg09OH0SfNmIM
+ vOmOjEZglEZmmK0Uw0dULEUacZLFeRWVagpJXbKYmjosG0G3K09VBBGYGdDAlgq+UuMO
+ RNsz6tGwdgAD00vkh5Jhq0CulhOrSdtXGVyfdcaj63NYA0y0DIcj6Q5+FZ+C36PYeGLk
+ 3Ejrn67Z/L6GGpyW8oc3zFDHZGhlP33hCivFH5KeU69E6W0MJN+t6j2nD3Cch7v2vO/C
+ FcCw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783948085; x=1784552885; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
- b=Ym05ul8KEWrZ+9mYp6/hPkEn3zrPu5l3/goXLqKxpNMXxrvdnp5zjJLEhwztJzKsFx
- Na19AdaRhe28powrm7V4UrrSXGmScIe8KQq7tyuTT8uHzeW1MRJ73Q8CaLZQBNzkloiQ
- BnwazabQWzCKUjgAiL+mCT3/D3ST35oaIno7U=
+ d=chromium.org; s=google; t=1783948261; x=1784553061; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
+ b=fEUDWnfxeG5H+CkT4Cj7HW+uxiu+3TtfoUzTXtpI7TIVHqO4cWnxvIePjyrj8Bz4rn
+ GF4z2F2cIXCuHtd6hd2RSd55zvCpzNgvzhCE4hXJG0QJW75sPELeRIrnugFl6N2CZ80p
+ VMWp+v3yM3XCUACIe73NQD6JDTueKBrprhnUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783948085; x=1784552885;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
- b=U+F29dHN1Y9ww69H1SZxr/kBECOynSAqWFxkiQ5b0Fn3xX3ORIo1jEyc+7l4HQ8jTD
- w1Xhd2Y3E3Th4qgSzXVTZQDFaZVSu8XwKCg1rjSLgL4YnRo6IwKtqPFs5Y3OyCIm3omD
- 8/QqD7ZXD0pwKtTdKxgfrlgDLJRBZO/7cCvWRJtuYhViN7HdSoEBf7d4V/RnBTjLVUC2
- ZOpUo5Ial/KscArX4ZuM7muC2GGfUy/+0v9gI8PR3IePqAJ/3c3SQ3HInqef2zoImt5S
- k2qTAQIyzfjh54mgYw89CWp1AexCRtqCUgIXhZ5cPm+ZT9AR8AZGiH1rdY62AcNmX+OV
- OeCg==
-X-Gm-Message-State: AOJu0YxJm9S/UyVod3+NjwCevlD17h4swDH7FaqocNgOdhFnPmAHvdDW
- Q/XbZpk9WV0Gz54Csd3y0COLJSZaV9vzwB/JIZyV7D/MQb/JWBw4a0+BbS2jum0333Pd9eSG+G7
- cj2SsW7mpPqFrJr4EEC2w7Gv7T/tTKtxV8/hbm6V2
-X-Gm-Gg: AfdE7cmgPy0xzK9KiFhj2DI1T4XoozFdyaoFhrHEGUYKYylFBMcZB3P5ttNhcNfLnrD
- Rmu/5abLaTOluDJ0FYQJ44HaNbDjaTNqPC+sCWk8MQojz72L+a44VYJ6szs3857SBnwFOv5fEf0
- frznr/AJl+JBetjXI6YkdBbpTGX0mgFIf345M36BPYW8JlZ6LA7t8y17e4WedgoSVMDF2iE7z8X
- IyV35HZUg4S7JEn7ozpc/PMu1vc1KGuqUSdBVq8wsQ5h+ziQZ/0/HM8wCBi1nkR8op1YZI=
-X-Received: by 2002:a05:6402:2808:b0:696:8f45:4ae7 with SMTP id
- 4fb4d7f45d1cf-69c5ef9beb1mr4132754a12.13.1783948085166; Mon, 13 Jul 2026
- 06:08:05 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783948261; x=1784553061;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=sqbfqV39WtEaJ8GnnYHn5xwi+n7v0E1SfHFvDPWx/8k=;
+ b=R2gwd73N/YeSf8bLai3hqtBKw66AeP4WWhiRt6fUQJxp71IE3npjmbklkE6p3toKrs
+ 5W8GBZYTDq2+REmFo4l634g3pkhiCZbiAfHhFVgC17C2IL60HU9jz0St6c6+LTzcVaoL
+ BwjoGaK5K8XvvsVxoNf0XtfAlNVuEduNn8fOcHWr/5HyP+kdfgNcKZ9VBU+E0S/qXYrw
+ KWUHkgIqBbMp1LHmb3+Qk9BS8VtoK6wpn10trJ0urTo0V3cEkupJv+r6geQzm4FR04vy
+ OaTqSsWz5dq2mzGUpc6GU+WUjDSPWSAhCZ7I1egK8qPmQAX5K95RX4dRN4i+TKE0KekO
+ czKg==
+X-Gm-Message-State: AOJu0YzlOLhnbU0nurtxwWWAAZNecD3HiDznDKccJFRBbp5rY0P+ApQ0
+ ZDNSakGI1wFYN1b9DluK8AJ8dCK4wdOaasc76MIdOLDvcyGAwoFthdmvhg3IE7xVpfTKD1IBcoa
+ Pb898F9TWLcOjH3mfKcNUOiNHdD1AZrHByw3hjXz2
+X-Gm-Gg: AfdE7cnuxef6SGkYYLcilv+fh2ThhSnp7pwdSCJRGPvxO7USUAalqSUgq1M0mODn3uU
+ tq4aSb4/o/16Th+Hh5F1cNQEmRwVFeN0nlPe2f7M+wVSQUNjpuqUGFBNiM4510OhmbGM3iL7qai
+ t8G4no2dYAE1BuOMZoeUEO4yJwMy7NRMUyCAEnwHB1geP9oioG4NCIAYbOV90pAYpGNu6VC3ieI
+ ccsuD3tNWta6+ee4HboT9ceZmXfMNAm/XbMWTcMgrVEcqBfne+5WWSO9V4gfcnM/u/KgeM=
+X-Received: by 2002:a05:6402:5253:b0:69a:a4cb:2882 with SMTP id
+ 4fb4d7f45d1cf-69c5f0bb815mr3932075a12.9.1783948261560; Mon, 13 Jul 2026
+ 06:11:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
- <20260629100104.v4.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
-In-Reply-To: <20260629100104.v4.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
+References: <20260702-rzn1-usbf-v2-0-00ceecebaea6@bootlin.com>
+ <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
+In-Reply-To: <20260702-rzn1-usbf-v2-2-00ceecebaea6@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 07:07:53 -0600
-X-Gm-Features: AUfX_mwe9CYc7KBmx7CQSCi2BeF1XEmH4bYgQobSLjUWIykkaeySPUKrDG7clLo
-Message-ID: <CAFLszThb02vyHNBEbdPEgtdvyJwW_io=J9Ag1KaFHDk9Dd=S=Q@mail.gmail.com>
-Subject: Re: [PATCH v4 2/6] tpm: print all PCRs from pcr_read
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>,
+Date: Mon, 13 Jul 2026 07:10:48 -0600
+X-Gm-Features: AUfX_mzvFGeIOb8KatzkC1wZ5JFQpCwEi2LrlmKBeVwX59l1CSTRWZ_E4NNztDs
+Message-ID: <CAFLszThwLCFR+HwhOVa69oGv7NTwcjXvHGtgbFsJ4kbPOweRFA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] usb: gadget: Add Renesas RZ/N1 USBF controller
+ support
+To: romain.gantois@bootlin.com
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Herve Codina <herve.codina@bootlin.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, Johan Jonker <jbx6244@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,39 +129,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Hi Romain,
 
-On 2026-06-29T08:00:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> tpm: print all PCRs from pcr_read
+On 2026-07-02T08:11:07, Romain Gantois <romain.gantois@bootlin.com> wrote:
+> usb: gadget: Add Renesas RZ/N1 USBF controller support
 >
-> Output is now more similar to the Linux userspace tool 'tpm2_pcrread'.
+> Add support for the Renesas USBF controller. This is an USB2.0 UDC
+> controller available in the RZ/N1 SoC.
 >
-> The old semantics that require specifying one PCR number are
-> retained. In addition with no arguments the command now prints
-> contents of all PCR registers.
+> This driver was originally written by Herv=C3=A9 Codina for the Linux ker=
+nel.
+> Suspend/resume features have been removed in this U-Boot port.
 >
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Linux revision this was ported from:
 >
-> cmd/tpm-v2.c               | 69 +++++++++++++++++++++++++++++++++-------------
->  test/py/tests/test_tpm2.py |  9 ++----
->  2 files changed, 53 insertions(+), 25 deletions(-)
+> 74851fbb6d64 usb: gadget: renesas_usbf: Handle devm_pm_runtime_...
+>
+> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+> Co-developed-by: Romain Gantois (Schneider Electric) <romain.gantois@boot=
+lin.com>
+> Signed-off-by: Romain Gantois (Schneider Electric) <romain.gantois@bootli=
+n.com>
+> Tested-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+>
+> MAINTAINERS                       |    5 +
+>  drivers/usb/gadget/Kconfig        |    9 +
+>  drivers/usb/gadget/Makefile       |    1 +
+>  drivers/usb/gadget/renesas_usbf.c | 3036 +++++++++++++++++++++++++++++++=
+++++++
+>  4 files changed, 3051 insertions(+)
 
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -168,25 +170,51 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
-> +             if (rc == 0) {
-> +                     printf('0x');
-> +                     for (int i = 0; i < algo_len; ++i)
-> +                             printf('%02X', data[i]);
-> +                     printf(" (%u known updates)\n", updates);
-> +             } else {
-> +                     log_err("PCR #%u read failed: %d\n", index, rc);
-> +                     ret = report_return_code(rc);
+> This driver was originally written by Herv=C3=A9 Codina for the Linux ker=
+nel.
+> Suspend/resume features have been removed in this U-Boot port.
+
+Please also mention the two other removals noted in the cover letter -
+handling of endpoints > 2 and dynamic detection of endpoint DMA
+capability. Otherwise users will be surprised when a gadget needing
+more than two endpoints fails to bind.
+
+> +     for (i =3D 0; i < ARRAY_SIZE(udc->ep); i++) {
+> +             ep =3D &udc->ep[i];
+> +
+> +             if (!(usbf_reg_readl(udc, USBF_REG_USBSSCONF) &
+> +                   USBF_SYS_EP_AVAILABLE(i))) {
+> +                     continue;
 > +             }
+> +
+> +             INIT_LIST_HEAD(&ep->queue);
 
-prefer if (!rc) over if (rc == 0), and report_return_code()
-double-prints the error on top of log_err(). Please just set ret =
-CMD_RET_FAILURE here.
+If the availability check fails, INIT_LIST_HEAD() is never called and
+ep->disabled stays 0. usbf_reset() and usbf_detach() then iterate over
+all slots and only skip disabled =3D=3D 1, so they will call
+usbf_ep_nuke() on an ep whose queue list is uninitialised. On RZ/N1
+all three endpoints are always present so this is latent, but please
+set ep->disabled =3D 1 before the continue (or at least init the
+list_head).
+
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> @@ -159,6 +159,15 @@ config CI_UDC
+> +config USB_GADGET_RENESAS_USBF
+> +     bool 'Renesas USB Function controller'
+> +     depends on RZN1
+> +     depends on DM_USB_GADGET
+> +     select USB_GADGET_DUALSPEED
+> +     help
+> +        Renesas USB Function controller is a USB peripheral controller
+> +        available on RZ/N1 Renesas SoCs.
+
+Two Kconfig nits: prompts use double quotes throughout the file. Also,
+the help text is indented one space more than the tab + two spaces
+convention used by the neighbouring entries - compare with CI_UDC just
+above.
+
+> diff --git a/drivers/usb/gadget/renesas_usbf.c b/drivers/usb/gadget/renes=
+as_usbf.c
+> @@ -0,0 +1,3036 @@
+> +static int usbf_remove(struct udevice *dev)
+> +{
+> +     struct usbf_udc *udc =3D dev_get_priv(dev);
+> +
+> +     usb_del_gadget_udc(&udc->gadget);
+> +
+> +     return 0;
+> +}
+
+Just to check - if the device is removed while the pull-up is still
+asserted, D+ stays driven and interrupts remain enabled at the EPC
+level. Would it be worth calling usbf_detach() here so remove() always
+leaves the hardware quiescent? What do you think?
 
 Regards,
 Simon
