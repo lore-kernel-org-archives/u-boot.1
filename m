@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBABAC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B21ADC44501
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D75CE84C3D;
-	Mon, 13 Jul 2026 16:24:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50CEA84C20;
+	Mon, 13 Jul 2026 16:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O5+F6jaS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I/zwOh0+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDF7C84C3F; Mon, 13 Jul 2026 16:24:07 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 119EC84C2B; Mon, 13 Jul 2026 16:25:11 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AECC784C06
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:24:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3E0784C06
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-8487b7b3fc7so1298624b3a.0
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:24:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783952644; cv=none;
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-38e07ebd263so482715a91.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:25:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783952707; cv=none;
  d=google.com; s=arc-20260327;
- b=Dxoa47mfjEL3oJNQnMrRmPMlCLgEERs8w/LC9ZsOgvSMnV8hFnhUDoQzTYMP42Y4wu
- 4dNxY7WvyMJ2Dw7SUVF6nt6LtzlrHvioG0fnHb/DcFDI6yPU5bpW7RQdNoefVtfGRMma
- itaZlwvLvkRYeCSjvXNgTgNnaeXQuz1Cn8+4K7lx0DH8pa7yCFi+r1b7xX37Dq2kx0CG
- zMBJjeBZ9hvj6fFwZr2CrVY04IvMaHlVJugWNmo4VINdTQG3GiqLTCBpGEvQ3pzq2U7J
- MbEPKhnbt59lUg/xx2TKIMl40evdfqzxQXOWwh1S9qZFO3mRLLCTfdSjZpNjsNvId8tF
- r/Ig==
+ b=cTaPJzRQjcVGNiB5eYeFEA7LT98Qsb1642z6tJvSSPhVwud3Q1fbqg5APm6l6xRXXJ
+ 5mHJCeiTRWZwLHX/x502LXM7bvN6hXOLgJ056N9Q+VNjgRX4mHzaa395ibJi8ZRTFBqu
+ oGuKv6pauvtb7S5odk/pbKkvNzNqvyWdc+IiNM3HGoh3VNAeGAGAjooxISnIQh4G0HaK
+ asLW7ja9VG9qONud4oIZoL+30VJs30RRwdCnwtmBrBCO4KMkIoHvkMhHN7giFe4UUEj3
+ PTy/NR3Ff1KMKgeC6Dz3i9CviZAlxHIAneKNUUwgtgkF/a744FA7PbZQjZpPS31fg5up
+ yU0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MUxIkEeDeTeR3R/RJCgB1Ql+ZlifuP8hZXwx6ZG36EQ=;
- fh=qUOps0b6OtTg4hWAo/UhSwr703HeCsU1mPNp0+c4VNA=;
- b=biNIQUDi+zt/ze6o9w5ru4h2yBZPE2z6v21X2T/iFuallVQCIwU1bhUJS1pAInWisX
- HAFRodMCeDbK2nXWgVGCNFfZ60d5fm9VtK/OKHJ7bNvfHyoTYFnAi09QCWZNVGvGQ1kc
- BgB24CptEQhW1jDztNnfAh8THT4tMCh2/I8kNGwXKGwt2nS03mWGL6ZpL5K6V8fws9pd
- 1w9Nsc65uFGlbUygzAgSqizuFt9+nnVfT+cjfE0k8bRqn0nYo5azgcrra0vYgiWTNqC2
- RUE8b4NhO4k5LuolwLFuwPo+ooc8ek6bd41GYmIOr8mwWiEJ4U7hoOwGGm/0iUn358K7
- 0p1g==; darn=lists.denx.de
+ bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
+ fh=BwhJ/qa3q2umnvSxC/8qPTLnUTxbKx1GYFMZhGakBJM=;
+ b=ShgcZkd+dHj5rHBpQgAw71lK6HNFfT7g3LLsaX9atl/CHKmZHnMMkI/L2Ijz/KIJw8
+ ViLkemlMiYvrLL6JbJhfBRCQzXx32ZgVXWku15Qe+ngiEl42PD8eIHOydhWraqsxxnBW
+ c0W6+9+mlp5JWNq7n3gOZZNcCDkGcyKWVKOf2KRtTB5CwqOcqeRtYn0cL0d4kMVsxycS
+ wCIOpRgU2esyeGVqUsi0LZ+kAz7rcqRx+gqSJeFSyyX1Ry2NEjkBl/FXJscYfs932vfS
+ h3eenwBsnQfx4LWC++ST486/LQt4zQ5EUwp+n2eBVtrR4257gDuCr/0nfcn3i49UQvpc
+ 9b4w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783952644; x=1784557444; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783952707; x=1784557507; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=MUxIkEeDeTeR3R/RJCgB1Ql+ZlifuP8hZXwx6ZG36EQ=;
- b=O5+F6jaS57/VAzWI5IJAJ/e8QGcSoFS1DsDrvwzqcS9dsGKtHWi0miG+Y+WMlqWQne
- PYrKjvLzcvJYsSIQ3CoqkWh7uKecHENePD/fE+5+qiBltXfrY7ssiO62IdJfW5zBsVyC
- MiCjK1JzKaJ8z8Ez80b9kbMRyGk4VwxF+Mi78=
+ :content-type; bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
+ b=I/zwOh0+VnLEhGEh4xGbMFokC01Td/2W6ZwpZCecVuAwugw5zLIhQtIHjmNiFC03Qh
+ n7pvspj3T2fCUxTj6BwsCgAWb2Y94sWE8Hc6gQpArv5P3Ko/0+a/4aToDfUGg2cb7chx
+ MQwcJL5iZ6e9nSKTjOesYAmoCAKBJeQ6BZBPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783952644; x=1784557444;
+ d=1e100.net; s=20251104; t=1783952707; x=1784557507;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=MUxIkEeDeTeR3R/RJCgB1Ql+ZlifuP8hZXwx6ZG36EQ=;
- b=g2k/1k20cnPeiSikuCgiN6kUcyIQmnFcB8mZQYPwp3/TktilkXAQSemfP3RQb01VER
- w2Rz3I380kLoObc9Gx6HPh5WT0Jrn2HNcDjyGeHH7J64DN4ZHO9hD9s2prM7u2rk9NnL
- 0pVGdXt7PPmhdVb7D63eOx+hDVDWAOLN7Mj1hHns5mF59JFkll5JKWqofivcxUkpS5Ba
- gobmMtBVyfa9gJ3bG0WP+MJW9ANjZjts7sHC7o7tbUC7GbUkEDhaADnRsED2HKTKj2bB
- pFs30x58Aqmpty2rMsy3UHaGXaDbu02ElBP260rzhNS0gQi7Z3OZUpwxt9hYabf/vJYm
- 6TYQ==
+ bh=98w7C58M890ptBjnQ2Maprdkxe7yVjwn5kTGTjpApnA=;
+ b=of5qdKZ50lCj5QsRr6SFP36PlIASVhswDLrwUzEwnBo0SosBtaNN6p98cGeCjqaukE
+ DkQtHvtxQFPiTyYP5GC8kttg+zuqgYk8E0n7nEAshdfsmB6Vd/YKQxindtiNnwNKYlT6
+ q/Oqr6ChmiVLvhXyztyl7CUrgExLn/980sb+SQ/eDn5ZMhTPk7WjNVAsIEE+L1eb1FOD
+ p4x3a+zLp4fBmUq9flnvoRNQcztrw+JYUC6so34N2HtODW+bBNwYd1ncy+vY+l76pwf1
+ 4DlP3tvQ7skvIRG16YaYHpcXN4Q146Sfxmag2SkAbFJLUVWPyoMgHPDdTVLgRL2rfnPO
+ +tpA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrrs2BsrI49Sf7ZhgjlvWttufeh/fw02w+qb74Qrs3HqaPgLiemHSthb4f2FLCUlnKiF+rtvk4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNc0w5hEW1kBGEmobfb0IxytSXSdYmiY1LWKVXcnA9PAfztmW5
- 4lPRwz4dBQM30EOMAFD2OWQqsXdcUwvIwxByPoblmt51h3uRDJZBJBbnhWXVupJzTJP5ANUZg9R
- h9ivdIEpvPqIC5jZOL4mkvnm529WhYi3sX4hcskU6
-X-Gm-Gg: AfdE7clmu7YsMlrsMfk8A4XDQi7Zz+i2i69VPFmtq7rYT6EtXixv9xQ2yuDe9V1VN93
- RG+iWMe0Tf6O4RV4l79CEcsLoMsRxSbrcvyPStlV0zVcU+EPQwT+NItB18LCpJTA9DyB7wehrVC
- IeRC4xcE0gJ7TpqzvTydIgNWEvywMqwpLyzeVHpTH4K/i4m262ELdJmwiJphVLGYl3tNr7gFO1v
- p9QM80o5I82NOwplKVuATXCEr/yrgY8TxMrDcbvHn/dbpuhw9/lSBIdwRbYucBu+psgTjM=
-X-Received: by 2002:a05:6a00:1c87:b0:848:4b27:36ce with SMTP id
- d2e1a72fcca58-848897efa11mr7967750b3a.73.1783952644120; Mon, 13 Jul 2026
- 07:24:04 -0700 (PDT)
+ AHgh+RqM2V2K4Omx/JpY708+Icn+y4BX4rTm5H3xqMleXp1sE8wiWuh0tTIR2mGlZcrJKisZrFpvhEU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxj0ss9Tcj6odnH1W67Cfy8OeXSrKlBGNJk8AQyJYaCHvCQ3gTq
+ OzPFCVb/UwpaCa7YnIM6Eub+Jvv3mVWQ+HnLPvONEDxjt8kqIh/fL1paaRw7PcCp2WFH0YyASnv
+ xdSxS6ppreFBxJLPSvK9cYGxKCiG9ao9IQ95suWHAhsgL0lTvp7QvoA==
+X-Gm-Gg: AfdE7cmdXRPFQ0vebON/lIDY8pYDWf4WbeDL7SJBRcGRSUMOrocWOa6DCIJ/YNEZOol
+ P8ZQG72EICzFUhF6Kz9b/4Zeq7gnun3QEGf/tT8hqgIZWcrPoNDshBmqZmFYgyDLVXz4aGtCXhN
+ +3b92V5nZ34XvKcTkDS76r0nK5iJtA/qEQwKgm0mFqowfS6KqAbJMgjHKdqBiWotxXd8d9KX4mF
+ XMp8zlpWR3hOhElruBewFIz5o/UcLmKFiMGw5CXtKT+utpVH63ikpSgugdO/ahz1cOr7J0=
+X-Received: by 2002:a17:90b:1fc8:b0:37e:2005:6507 with SMTP id
+ 98e67ed59e1d1-38dc75f4cf5mr8813108a91.15.1783952706945; Mon, 13 Jul 2026
+ 07:25:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-5-jonas@kwiboo.se>
-In-Reply-To: <20260708220540.3368825-5-jonas@kwiboo.se>
+ <20260708220540.3368825-6-jonas@kwiboo.se>
+In-Reply-To: <20260708220540.3368825-6-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 08:23:36 -0600
-X-Gm-Features: AVVi8CeczxS5ue03L8Vgf-bdEWqrv3Jl_Ekj5HXttWmaE714VfZdqs0nZP8fxvo
-Message-ID: <CAFLszTjiW=9yGncr7DmNDUzx9EOkbeYLxhK3=ipqr3qrTo5Sgg@mail.gmail.com>
-Subject: Re: [PATCH 04/11] x86: apl: fsp_bindings: Drop redundant
- CONFIG_TPL_BUILD check
+Date: Mon, 13 Jul 2026 08:24:16 -0600
+X-Gm-Features: AVVi8CeNn0fSPrc2BPFZJW52fJV5Ts6xF6Q9-tkkF_wqSRACar1RvRVVUH8RHXc
+Message-ID: <CAFLszTiafmnLwxq8On6vKo8jRs8LoOthUkA14SQnZxLmVZa-_w@mail.gmail.com>
+Subject: Re: [PATCH 05/11] spl: Simplify xPL_BUILD conditional guard example
 To: jonas@kwiboo.se
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,20 +110,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-07-08T22:05:26, Jonas Karlman <jonas@kwiboo.se> wrote:
-> x86: apl: fsp_bindings: Drop redundant CONFIG_TPL_BUILD check
+> spl: Simplify xPL_BUILD conditional guard example
 >
-> The XPL_BUILD symbol is set for all xPL phases, i.e. TPL, VPL and SPL.
-> Conditional guards that test for both XPL_BUILD and TPL_BUILD symbols
-> are therefore redundant.
+> The old meaning of the SPL_BUILD symbol has been transfered to a new
+> XPL_BUILD symbol, leaving the SPL_BUILD symbol only to be defined for
+> SPL builds, and not all xPL builds.
 >
-> Drop the redundant TPL_BUILD symbol check from conditional guards that
-> also test for the XPL_BUILD symbol to cleanup from an old SPL to XPL
-> symbol rename.
+> Change to only use the SPL_BUILD symbol in the SPL code example to
+> cleanup from an old SPL to XPL symbol rename.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> arch/x86/cpu/apollolake/fsp_bindings.c | 2 +-
+> include/spl.h | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
