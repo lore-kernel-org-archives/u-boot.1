@@ -4,141 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D64DC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC2BC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:07:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3FB584C2F;
-	Mon, 13 Jul 2026 15:52:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 6DB2384C2D;
+	Mon, 13 Jul 2026 16:07:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="odo1Kid/";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="weWzzNdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECDB384C33; Mon, 13 Jul 2026 15:52:39 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id D307E84C39; Mon, 13 Jul 2026 16:07:18 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 042CD84AE6
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:52:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qz24HtbsyrPTH6NsLW/XAXglVUmsiSLJ99q3YHJ/MpF6Vjdl7bU1VCSaF4wPqgrn+6uv5Ig2ujVM6F/JJQQ7yEHAV/uowJYYsvldF5poMaIiT5Ab4BrsbMr/3yJNNX8hpUCI+jQgMzBBWRaBw1PVJzkegVKYCuZVk86WYNiU/qNKJDStkhERRQXbR8DmMJ6kcTEuxoDB45zdSKMl+2cn4K/M1d7+K1H+brWOCr4st3FBMOc8LoP1ERVjF0NlVJB6QbeNxCfyCcbnUoySkEQQ1V1/AC3dTutrnYQvODv/pZDzYR356piZcF+3ekaxDE4zWdILcz6Yln0xxITDsEkUZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hc/1GBIyvBaS7mWIMeKSVSGc8Rq/al9uGNuwd6gwNiM=;
- b=Ctmr3Mtn5yMVWE5kMiGuVgZmZfGZZeIgCe/cHprgfx+CwzuKYP4mcYzcIFElGOu/wGepguHGky6v/n8VXiAAFiuMLlezBUCJGqXssbce98czyCS46fj91RXGb2X9Zdx3OypW+xh57dlDJMF7XUwQi3aTHoJrq7kD3RyG+l9Do7XO1axAhizFyjfhS4k61xKC7IlPj7zB0PC4CIR3oa+NH+3Rl0Rli/udyLhEUH7MtQTVuRLIEo+9gnPnSuKx67Ij1TU6OxlLmOdHr6oGRoBPx8kDeeF1zoK4iI6wts6/uaMGZlN7Hk9KYLHG0qz+yU8Fsvd5Q5DamGEzBdA655THRw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hc/1GBIyvBaS7mWIMeKSVSGc8Rq/al9uGNuwd6gwNiM=;
- b=odo1Kid/DooB5VpMVgLSIk5n+W5lSMRsx2mz2Hgk2mwYPiTVrXZk/+VcV6trB8hiccUDCp+nGxDWVwExdyy7vU4H9u9fv/KZ9TTnRvkWYmmkqFq3t1WYWP4KO+GbSbsfS7iqXuCGcwPFLHqzqH+bSxBJDRbn1wQm/iIV9legy/A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB7380.namprd12.prod.outlook.com (2603:10b6:510:20f::20)
- by MW3PR12MB4492.namprd12.prod.outlook.com (2603:10b6:303:57::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Mon, 13 Jul
- 2026 13:52:28 +0000
-Received: from PH7PR12MB7380.namprd12.prod.outlook.com
- ([fe80::28ed:346e:a324:acd1]) by PH7PR12MB7380.namprd12.prod.outlook.com
- ([fe80::28ed:346e:a324:acd1%6]) with mapi id 15.21.0202.018; Mon, 13 Jul 2026
- 13:52:27 +0000
-Message-ID: <6051fd86-9f84-4a43-9788-1fa07510c4c0@amd.com>
-Date: Mon, 13 Jul 2026 19:22:21 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id 128C584B8D
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:07:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5a7b=FI=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1783951635;
+ bh=Hpxb6ZuT6xxSynofxQA+3uplwc79BIArhP8FTNRJ08c=;
+ b=weWzzNdzZwH5Z+0ywYGmaX4MJoJSjq2ihG0lLE2+bLHNJ1VFa3x3xn6nCGDsxz3xiLKbxg+QF
+ cE0K338XgfL4h0Cp3tEX7WiDuiM71NQ0xfGDPJPoau+doUd3JkyhK4v1NzOxppQUh3y0uw0EJb1
+ gBge7/ofQ+W382o4TIkV10BtplnbDlpADGTnplde9FjKUxqalvNGhu3Bqm4US1p3XzUcwNr6StJ
+ j5Iu6q2+kWNfctZ90BRdYpZO6jIubUeu0kujSw0XjfR/yArbAeu7/t6cabI66vh0b2u6L+5U/6V
+ qc3OQkxvcUNSy66R2k0LdlUwr9p04YX8x9qQh1MuTTPw==
+X-Forward-Email-ID: 6a54f10edd7e85e8e8c0ca98
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.10.5
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <99a50a6c-a731-443d-a196-4944d15c8245@kwiboo.se>
+Date: Mon, 13 Jul 2026 16:07:06 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] mtd: rawnand: zynq: Fixes and software ECC support
-To: Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
-References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
- <af5b229e-0466-45cf-9562-434dc0fa383f@amd.com>
- <6a9f0530-ea41-491b-b4f4-f7d03ee2fd3a@amd.com>
- <b22d644a-6d11-4ac8-9a38-82fd8ce5d5fb@bootlin.com>
+Subject: Re: [PATCH 0/7] rockchip: fix boot from SDMMC on RK3576
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
+ <b09297f9-f22d-493a-974f-47749955e532@kwiboo.se>
+ <CAKTNdwFWMKoA3fkXUWXJYJSDROHhrqbPbJ3RTCjvnOAF7UCfQw@mail.gmail.com>
 Content-Language: en-US
-From: "Kumar, Love" <love.kumar@amd.com>
-In-Reply-To: <b22d644a-6d11-4ac8-9a38-82fd8ce5d5fb@bootlin.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAKTNdwFWMKoA3fkXUWXJYJSDROHhrqbPbJ3RTCjvnOAF7UCfQw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA5P287CA0303.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:21e::6) To PH7PR12MB7380.namprd12.prod.outlook.com
- (2603:10b6:510:20f::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB7380:EE_|MW3PR12MB4492:EE_
-X-MS-Office365-Filtering-Correlation-Id: bf89cb4a-5d59-433d-4cd1-08dee0e5f9a4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|23010399003|1800799024|18002099003|22082099003|3023799007|6133799003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: X/24VsaGp3nYGqD4iLUnLSBew9FHl5OisxzV7/1gi2gd2JH1atce+X9w2ZBJ61904J7U+3Msi7Ba7p7gHyCgJx/WdakbYOedld/KvUTaK2atSAgmX4PSdxvKBrqoDI1i/Y/3JhTQYpQZ3fr1WAEEpqUl+4acaO08HDM5fFdlI0dJhGsWIRSTVda44zNZMYTY5+V+dI47K3iW2aBxre0/yKNNQBIizEypAFKRy+X16Bzdl448PgvCXDLOZCEwBbswHf0Zss6Hpke0usHEFihLUDPcniYeRQBrrGyYZ+hXpKB2v5jOgHKamB3jXr1qpJ5dYn17xkWGXlTYdvQjFNR+3QUZMNJDnrBxeNYpdgPS4a5Ulg2csyI1oFEgl1oC3XGiChVQq4JM0ZtTC/Ic53hrMAKX4PPcOoMu8Tt4xPAnkd2uGmRrN7fwqLvcebR+x8sGp6A76VuKGsbbBq2Gtzf3qgizCUPaeosbo01e4C7aL6tr3BBYwtT+GTQZTrEJHLwPMbdUpCT6m6fZjwDca8vMysQWbmzoZBuWLQIAiXNKKFI1P03F6WHS8HUwLkRt56lFRoRjFrk+PQGwHmSk/5nF7WcoZXgWw7WXVvBURkevI9aQ1RqWgnjsTOrIhBa0kPtmRHJLa9WS/8kj4hknYVdMQOiy5wKwrhckdHhSX4U+OOQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR12MB7380.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(18002099003)(22082099003)(3023799007)(6133799003)(4143699003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aTNxTVpObzlyQUxsM01vRHdYN3JBUFFnMlpZQUxmcnl6TWlXMGkzdldXVjZU?=
- =?utf-8?B?YU50MzRNb1d6dHNzQmJMZmYzc2xVdjJJY0RaNlE5WWhUNzZWWE9CblJnajRL?=
- =?utf-8?B?SEd1NmRmTTdTRUFoKzVzQXkzclVLN0V5WDlzMUFibkZPNytxeDdBeUkxTi9E?=
- =?utf-8?B?UkpncVhzSnJ5a1J3UWkxSmJ1c0FKSmY4U2MvZWpBSXByaHVnUFYwTDdKWWNk?=
- =?utf-8?B?T0ora2x2T2ZvTXFzd1E5c3pHT3Y2MThIM3k4VUNKWkxVR1N3cFVjYXBnL2JE?=
- =?utf-8?B?dWVIYk92cUsycWtVTitNT0lZb3ZBUUgyNkRISmI0bHlMZzcrdmk5WXNyU080?=
- =?utf-8?B?dUVFS3E4Z0hycnoxU210YmFxTTh0NE9rWnRsUlRkeEIzRkNpTDZtMmRzODFQ?=
- =?utf-8?B?UkdHU1JJYlhmNXcyeUxXcm9pdWlkTGN0aCtTcDBpVHJnck9LbE5HbmVuaHZ1?=
- =?utf-8?B?NVRCeG12VDAyNnR1VkNlUnc1WEl4S1M5UHgvK2h1T2dReFZUay8rRU5Ed0JZ?=
- =?utf-8?B?MnpaREo2azdCdnQ1S1lwT3ZpeTFaOHFkRWlCTituTGZkOENGNmoyY016UUZS?=
- =?utf-8?B?bnJGL0dwTWVGYzFyR1pEVUlOUzJLYkNleFhZRkhRWGw3L2hxYVpEMmxnbExw?=
- =?utf-8?B?Y0RESk9UUmpYbWRqRlVjdUZ3T2JmSE9jY0VLWTQ0VEM5ZzVZRFNweE14dGRQ?=
- =?utf-8?B?d0JPZUFvRmlvK0ZQcG55Sjg5NHFGOHlEeUJINmh4dUdtTW4wRG1ZY3pGREFs?=
- =?utf-8?B?dG0rSGdWTktxK0ZSdGxMakJYYUhzRUk1WnpKU3lWQktnM2NrVzgwM3JWMlhL?=
- =?utf-8?B?Tmg0cGIvZ2FqRmx0NHVYRDdxcjVzcHNHSUJPaFB5NkF3bExLa1VTTloyMEFQ?=
- =?utf-8?B?azVwVW14NTZ2VjV0VTdTcXdVWmpiSFFBU2Noa01pbkxZVTVsTDVuOFNyUlY0?=
- =?utf-8?B?eXp6YkloWDZxZ3ZTMGFVZklMWUhTY2RSNkd1WUl1U2lNZWprUUdlOHRkUWt5?=
- =?utf-8?B?ZmxEUWt6SjNJWG93bXdMUmorNkNmUEdZVUZZeWtYQ2l6WlFtU3hzNkVpNGJt?=
- =?utf-8?B?OUpSci9pSU1iYVhDeGNseForSTNmVFdjcXRCWVBmQk5ObzIvM2hUWUI0WGZn?=
- =?utf-8?B?YXhrMHNyZHN0c0toUkRMSzRVc0k2SEF6ekdvN1Z4QVFVRzZ0Rit0RGZrQTlw?=
- =?utf-8?B?YWJCVURwbm11VVpwREVIL3FSLzZyVlhhb3VMeUVlRUpwU3BrdG1hQWpaeE1S?=
- =?utf-8?B?TGFTYlk5OVpKVnZCT3h6TERDVE5PTW5nNEtxR09xdG11b0pwb09qNUN6V2pH?=
- =?utf-8?B?TDVMT0hmUlVHRzVHNFBzSUhLd0tIdnYzWFdXQUFjOFJqTUVFVlVmN3ZNRUhw?=
- =?utf-8?B?dkdPcDBxTi9SMGIwaTAyTDNwTFoyMGIzZlIrdWYyUzFNbUVJK2VtekkySW1B?=
- =?utf-8?B?VVNmQVNTeWM5UWtURTh5MUNuZTIySGRMUFovdm5zVnBvcm9iL2hLeUdOcUwx?=
- =?utf-8?B?UVZFN1NoL20vd2x5VHFOOFNDM05YbGRtNmpaVDhzZXhRZGhPZ3NkWlNCNE5J?=
- =?utf-8?B?bWIzVmJqd0hiRE90bmIxZjVRL2pDYTNNSVRoeGpTMElPckFOc0xWTDVaSXhE?=
- =?utf-8?B?TkpSaUFSTXY4dEFuc1VkcVRqRndQczRQS1B2d1I4RktsVlpDQncxcFRVazV1?=
- =?utf-8?B?ZVcvNXdzTmJEeXhBLzlrMUFJWXZyYWNaM2JIYmpnbm8rVGFwN040RVRNckFR?=
- =?utf-8?B?RHB0d2Rnd0FpQnJTdEZvVklaeFJSTkdYZWVjditCRG5xRkgyM2ZjR0hLZzdW?=
- =?utf-8?B?emIxRkgreXlDVFg0QjRZRDdaV0J1aEZFcXlDazc2N0hPR1FnclNHeGZCcFpm?=
- =?utf-8?B?UFZ2dWNWNldneE54amI4UFViU2FLVXF4cENSeHFSR09Hcjc2VHdZVGFBZ2xT?=
- =?utf-8?B?aHpVdEVCQ2k1ZkdHNHk0Tnh4UnR2bTM5bTd0RDROTHRNSVh6MGxVTVkzb0RH?=
- =?utf-8?B?eGM3SE9zaGVjWjBGWjNJV0QyOC9YMnlKb1lVZGUxemMxdXBwbnNpc1MvZlBD?=
- =?utf-8?B?ZkUwK3hnK2doUUlBYWdnK2p2Mnl1aW55UGpETVgzL2RKSjNCQUxWWDJKcGw1?=
- =?utf-8?B?NWNFNkZBQ2tleVIyK09mdFRTUE9lUmZTWTNvb3BhUjd4ZXJaOE5uWVliWThh?=
- =?utf-8?B?Yk5abFFHUitTdktQbll5STZFb1hpeVVjUWFqdFNLSWprS3pOL3RiK2xSaWRp?=
- =?utf-8?B?VzRMWjRYeW5zRDd1ZGdibnZLNWozVEtHc0dtZ2VnMlhuQW1XeElCQTFndUZD?=
- =?utf-8?Q?APG5MyysT8Xyk00/ka?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bf89cb4a-5d59-433d-4cd1-08dee0e5f9a4
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB7380.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 13:52:27.7460 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WNIuTPThC/nP2VIEL8M+64Q0LJl2sZirwS5dZ6Vg5aJH/ToNRXoqWnbjyWE2qnKi
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4492
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,120 +78,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bastien,
+Hi Alexey,
 
-On 7/13/2026 3:18 PM, Bastien Curutchet wrote:
-> Hi Love,
-> 
-> On 7/11/26 8:36 AM, Kumar, Love wrote:
->> Hi Michal,
+On 7/13/2026 2:47 PM, Alexey Charkov wrote:
+> On Mon, Jul 13, 2026 at 2:44 PM Jonas Karlman <jonas@kwiboo.se> wrote:
 >>
->> On 7/9/2026 11:23 AM, Michal Simek wrote:
->>> Hi Love,
+>> Hi Alexey,
+>>
+>> On 7/13/2026 12:02 PM, Alexey Charkov wrote:
+>>> This aims to upstream Jonas Karlman's long-standing patch series fixing
+>>> the boot from SDMMC on RK3576, which requires a hotfix to the boot ROM's
+>>> global state area before any SDMMC reads are initiated to avoid clobbing
+>>> the ROM's state and breaking the boot process.
 >>>
->>> On 7/2/26 15:08, Bastien Curutchet wrote:
->>>> This driver is deeply broken in many ways. Miquèl has cleaned it up by:
->>>> - flagging the most hideous parts (where Micron on-die ECC support is
->>>>     hardcoded)
->>>> - enabling DT support, eg. for reading the ECC configuration
->>>> - fixing software ECC support
->>>> - aligning the software ECC OOB layout to the rest of the world and
->>>>     allow a working interoperability in Linux.
->>>>
->>>> I then added a patch to fix writes when soft ECC is on.
->>>>
->>>> Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
->>>> Signed-off-by: Bastien Curutchet (DAVE.eu) <bastien.curutchet@bootlin.com>
->>>> ---
->>>> Changes in v3:
->>>> - Add patch 6 to fix write issues in soft ECC.
->>>> - Link to v2: https://lore.kernel.org/r/20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com
->>>>
->>>> Changes in v2:
->>>> - Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
->>>> - Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
->>>>
->>>> ---
->>>> Bastien Curutchet (DAVE.eu) (1):
->>>>         mtd: rawnand: nand_base: Don't overwrite read/write_page_raw() for soft ECC
->>>>
->>>> Miquel Raynal (DAVE.eu) (5):
->>>>         mtd: rawnand: zynq: Align the layout structures with the driver namespace
->>>>         mtd: rawnand: zynq: Add comments about very bad practices
->>>>         mtd: rawnand: zynq: Make sure an of node is attached
->>>>         mtd: rawnand: zynq: Do not fail the probe for no reason
->>>>         mtd: rawnand: zynq: Fix Software ECC engine support
->>>>
->>>>    drivers/mtd/nand/raw/nand_base.c |   6 +-
->>>>    drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
->>>>    2 files changed, 32 insertions(+), 89 deletions(-)
->>>> ---
->>>> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
->>>> change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
->>>>
->>>> Best regards,
->>>
->>> Please test this series.
+>>> The preparatory patches for the image tools are submitted verbatim from
+>>> Jonas' version, while the "boost" code doing the actual hotfix is
+>>> converted from using a pre-built tiny binary to a from-source build using
+>>> the existing U-Boot build system.
 >>
->> We are again seeing the NAND write issue with zynq-zc770-xm011 board.
+>> Thanks for re-sending this, this should likely have been labeled v2 and
+>> there are review comments on my original series [1] that should be
+>> addressed.
 >>
->> Below is the log snippet:
+>> I was planning on sending a v2 of the preparation series now that we
+>> once again have an active maintainer for Rockchip, but unsure how to
+>> handle that now :-)
 >>
->> Zynq> nand write 0x80000 0x0 0x126f80
->> nand write 0x80000 0x0 0x126f80
->> NAND write: device 0 offset 0x0, size 0x126f80
->> NAND write to offset 0 failed -5
->>
-> The exact same command works in my setup:
+>> [1] https://patch.msgid.link/20250129223641.1888833-1-jonas@kwiboo.se/
 > 
-> ```
-> Zynq> nand write 0x80000 0x0 0x126f80
-> 
-> NAND write: device 0 offset 0x0, size 0x126f80
->  1208192 bytes written: OK
-> ```
-> 
-> Can you please share your device-tree / defconfig ? I'd like to dig into this a bit.
-> 
-> I'd also be interested in seeing the output of 'mtd list' and 'nand info' on your side.
+> Oops, here I am again, missing things already reviewed on the ML. My
+> changes, though, are only concerning the very last patch in the series
+> (which hadn't been sent out back then), and I haven't touched the
+> other code in any way.
 
-I have used the xilinx_zynq_virt_defconfig with zynq-zc770-xm011 DT.
-Below are the log snippets for 'nand info' and 'mtd list' commands:
- 
-Zynq> nand info
- 
-Device 0: nand0, sector size 128 KiB
-  Page size         2048 b
-  OOB size            64 b
-  Erase size      131072 b
-  ecc strength         0 bits
-  ecc step size     2048 b
-  subpagesize       2048 b
-  options       0x40000000
-  bbt options   0x00028000
- 
-Zynq> mtd list
-List of MTD devices:
-* nand0
-  - type: NAND flash
-  - block size: 0x20000 bytes
-  - min I/O: 0x800 bytes
-  - OOB size: 64 bytes
-  - OOB available: 38 bytes
-  - 0x000000000000-0x000008000000 : "nand0"
-	  - 0x000000000000-0x000001000000 : "nand-fsbl-uboot"
-	  - 0x000001000000-0x000003000000 : "nand-linux"
-	  - 0x000003000000-0x000003200000 : "nand-rootfs"
-Zynq>
+Hehe, no worries, I was planning on trying to get an updated version
+(without rk3576 parts) out later this week. As stated on IRC [3], I was
+planing to first focus on TPL refactoring and a few RK35xx clock fixes.
 
-Please let me know if you need any additional info.
+> Would you like to give the mkimage-related patches another go then,
+> and then we bring in the boost.bin changes on top? I'm also happy to
+> help incorporating Quentin's feedback if you'd like, although I don't
+> know if that enters "too many cooks" territory :)
+
+I can try to get the mkimage related patches another go later this week.
+Have some other improvements/fixes I noticed while playing around with
+other SoCs, or that where not ready when initial series was sent.
+
+However, I think the boost patch you included (without mkimage parts)
+could be sent as a standalone patch. The resulting .bin-file should work
+as a replacement for the vendor boost blob.
+
+[3] https://libera.catirclogs.org/linux-rockchip/2026-07-10#40172912;
+
+> 
+>>> From-source build also alleviates the problem with parallel out-of-tree
+>>> builds, which could skip the pre-built binary but which always pick up the
+>>> from-source build.
+>>
+>> My original intent was to try and embed the generated code to possible
+>> match what I did to support emmc boot with the amlimage format, see [2].
+>>
+>> Building the boost blob ourself the way you do here seem like a better
+>> option, however we should probably change to include the blob and
+>> setting the required parameters using binman instead.
+>>
+>> For e.g. RK3572 and RK3538 there may be dboot/rboot blobs needed prior
+>> to ddr-init, along with choosing to load SPL to a different DRAM address.
+>> So we should prepare for being able to pass parameters, how I do not yet
+>> know, possible using a new rkimage etype in binman.
+> 
+> Having everything in binman sounds neat, but on the other hand the
+> current mkimage-based approach seems to work fine, so why fix what's
+> not (yet?) broken? :)
+> 
+> For RK3576 that would mostly mean "reimplement mkimage in binman",
+> from what I can see, as we still need to give the boot ROM the
+> combined idbloader header it's built for and which mkimage produces.
+
+Initially I was more thinking of wrapping the mkimage etype and passing
+some rkcommon specific parameters to mkimage, not sure that is even
+possible.
+
+Using hardcoded parameters in rkcommon seem like a bad idea and
+something we should avoid if possible, especially now that other SoCs
+also may need similar workarounds or parameters/flags.
+
+I am torn, will try to fix remaining review remarks in a v2 of the
+mkimage preparation series. How we should best handle parameters will
+likely be a discussion for later or be a follow up on that. At least
+that was my plan for a v2, skip the last patch in v1 and only focus on the
+cleanup and adding support for using 4 KiB blocks, together with some
+local patches that e.g. add support for reading signed images.
+
+> 
+>> [2] https://patch.msgid.link/20250103215904.2590769-3-jonas@kwiboo.se/
+>>
+>>> Tested on a number of RK3576 boards, including the Rockchip RK3576 EVB1,
+>>> ArmSoM Sige5, FriendlyElec NanoPi M5, Luckfox Omni3576, Radxa Rock 4D and
+>>> Flipper One, all of which fail to boot from SDMMC without this series but
+>>> boot fine with it applied.
+>>
+>> It has always been possible to boot from an SD-card if you compose an
+>> alternative idbloader.img using boost+ddr blobs and u-boot-spl.bin from
+>> U-Boot using the boot_merger tool from rkbin and write that and u-boot.itb
+>> to the SD-card.
+> 
+> Rockchip's boost.bin blob does exactly the same thing as your
+> assembly, plus setting UFS power mode parameters - and that's it.
+> Power mode parameters at pre-TPL stage don't make any meaningful
+> difference in any of the workloads I tried, so I'm not even sure why
+> that part is included. So yes, using their blob and their tool should
+> work too, but that doesn't count in the context of mainline IMO :)
+
+I was more thinking something like a RK3576MINIALL-mmc.ini with
+
+[CHIP_NAME]
+NAME=RK3576
+[VERSION]
+MAJOR=1
+MINOR=100
+[CODE471_OPTION]
+NUM=2
+Path1=arch/arm/mach-rockchip/rk3576/rk3576-boost.bin
+Path2=mkimage-in-simple-bin.mkimage-rockchip-tpl
+Sleep=1
+[CODE472_OPTION]
+NUM=1
+Path1=mkimage-in-simple-bin.mkimage-u-boot-spl
+[LOADER_OPTION]
+NUM=3
+LOADER1=FlashBoost
+LOADER2=FlashData
+LOADER3=FlashBoot
+FlashBoost=arch/arm/mach-rockchip/rk3576/rk3576-boost.bin
+FlashData=mkimage-in-simple-bin.mkimage-rockchip-tpl
+FlashBoot=mkimage-in-simple-bin.mkimage-u-boot-spl
+[DOWNLOADBOOT1_PARAM]
+LOAD_ADDR=0x3FFC0000
+FLAG=0x0
+[LOADER1_PARAM]
+LOAD_ADDR=0x3FFC0000
+FLAG=0x0
+[LOADER2_PARAM]
+LOAD_ADDR=0x3FF81000
+FLAG=0x0
+[OUTPUT]
+PATH=u-boot-rockchip-loader.bin
+IDB_PATH=u-boot-rockchip-idblock.bin
+[SYSTEM]
+NEWIDB=true
+ALIGN=8
+[FLAG]
+CREATE_IDB=true
+471_RC4_OFF=true
+RC4_OFF=true
+CRC_OFF=true
+
+and then running something like
+
+  ../rkbin/tools/boot_merger RK3576MINIALL-mmc.ini
+
+after a successful build of a rk3576 defconfig target to get a
+u-boot-rockchip-idblock.bin that should be in correct format as
+idbloader.img. This idblock.bin and u-boot.itb could be used together
+instead of u-boot-rockchip.bin to have working SD-card boot.
+
+This still uses vendor tools and the vendor TPL blob but remaining is
+mainline U-Boot. At least an option until mkimage parts are ready.
 
 Regards,
-Love Kumar
+Jonas
 
 > 
+>>> I've also done some JTAG debugging of the boot process, and the single-
+>>> word write which the boost binary performs to the SRAM at 0x3ff803b0
+>>> appears to be relocating the base of the SDMMC IDMAC DMA descriptor buffer
+>>> to the top of SRAM, which prevents large multi-page SDMMC reads from
+>>> overrunning adjacent ROM state and thus breaking the boot process. A
+>>> comment has been added to the boost code to reflect this.
+>>
+>> Awesome, thanks for this information :-)
+> 
+> Cutting down magic in this world, one memory store instruction at a time :-D
 > 
 > Best regards,
-> Bastien
-> 
+> Alexey
 
