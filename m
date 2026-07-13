@@ -4,96 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DF8C44507
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085E1C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:30:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C342084C56;
-	Mon, 13 Jul 2026 16:29:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9178F84C59;
+	Mon, 13 Jul 2026 16:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DwMcOFyN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X3KgMZq/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AD7F84C5C; Mon, 13 Jul 2026 16:29:26 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 83AC584C5A; Mon, 13 Jul 2026 16:30:45 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF34184C55
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:29:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CEB284C55
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:30:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c165a41a52bso39394366b.3
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:29:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783952964; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-69a5ecbbfb2so4886520a12.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:30:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783953043; cv=none;
  d=google.com; s=arc-20260327;
- b=NaroFam8DN3sI6Uphl1ODtWKuhJW0eEsgEBNRYab0H4CfS5NbSQRhyzqyl7cFFEUZo
- 15HsPeA/00+l+4t398dcqKgsPrHtIPOetTrDaQ9MiQEqq5poTJl1X7ukWhBuyfHU5J/t
- 05HDgCNo7f9EYk2t/JJHWOlMBK+q9TmMQ88e/hKkzBocOjVmAT9gvZCOXTOuewqxNArB
- XYwejOiRVaZjsc0egIk8LhsKCRkFcEjVrFAL5pJXyC1eMcDVsUUlrQOk6VwjcKWZ+R4H
- +AvmMQi31H/trp7hXyAlxFcPEPmIQ86yE0BkIpU63XbpOcM2+v0Pxk2z4nSKpfWmCQm+
- cbfg==
+ b=OYBMa6fQW3SU+sSffneXKyC9lG7PCvnXYBrJTIFGzUtkZTLNHG+p23AgzyCkYPDya4
+ HPKV/LN3z5m+vV2TBtbuAnxqVrMlGgep1v47ZzWoa4AMJVYSrUdRE6uI0GVFqAc0TQiQ
+ rzzFDY3AP5HjHHTjUYEAWCP1wxwN24lW2oPmmx4vFyHuYfhrl/0YmR3dYLjSx5EyEW1L
+ X8ESLvx22c4jdfw3ZfjM5GsNBTFXWZLoQ2+I+pIIZ99l/K7L/gcE6bMg4nRviHe4ydkO
+ TQPK+0gKJERUGMwfvlq98d9iqMgyFKTCOjzbm8isi7bJF8d0jcOafOLMK9gXwl1rdzJB
+ ipkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=h0Pa/HeZkyoHGlWrwkc/oBn6EzdXXEqG0s0Q406HZGM=;
- fh=BPbJXPvbnFXv1FsvaaL2Uxh2ezIiO8M31mBnn2yMbVw=;
- b=rDuzpj09AXRsLkPBQmevERFljBcr9qki7yqq8CKOk8KY1txsdwk7cnaiF/DcDATvUe
- scR2uG7uPgmtnqJrlXSbjwjguQb8R+tdgyg2oANt3rbmHM3fwTa0aoTFDONK0Fu3MfHC
- HptLlQgAtFWGfflNFYNehh/lnR5DVp/Tb4neOersIqjYn2+BtlwkaNCdNsGA4TPf0vLF
- k3XRpN5MPkSMo3CDHcZVoOo/OmFOyViIlPgEhZwON7mhN+PInmXYPMYAQdT4uBWvjIrz
- HQSlBiXO7b6pGyZnzF4AEd9meQlHQXiZD9smJxcnVSjjh9rqgiwvC10APCZttD0UpVmS
- 51dg==; darn=lists.denx.de
+ bh=zCKEceIZG5gmscJRcRTsyKBrF7JmxGNVmFCPWd0aDwg=;
+ fh=rzP7mr+0EjoRg0xiX0EhCi57TMw21tZVLXvNWCTwFDw=;
+ b=F4q20IkivQZmu56L9VGCSojok5vcveO56N3q/7vhP6shr3nRMdy9CEOc3fLpTZtM9G
+ ph4T8uzkzdI1vLt8pIhLQQQRtZUkLiNy6Se1HB58RJhmCBgBx8NerkAVYF24fhEPabBV
+ q5uB+zhhzfpaDywn+iPlvhs22LzTyN/cVNqYy5zohhSZGeaURrQB87B6GBJ9fM5ytdyY
+ QIDOADhJVrHf2rrSODBDKEySTMjUMxfbMjg+m5Wm6bZANDQCEv5fLe8MEKKF57dg/0U+
+ kCGBwSBxChPuoIDA1EotpMjNm6JGABHoggXbUvMqZ6fag5aHwbmMktxulOLX95ceMyAw
+ HDCQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783952964; x=1784557764; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783953043; x=1784557843; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=h0Pa/HeZkyoHGlWrwkc/oBn6EzdXXEqG0s0Q406HZGM=;
- b=DwMcOFyNLhsSbcW0OQaFtWoQeU9GBMrAiPgqVzJwxRdVyn9ugINwBv+C7c6IbhXMuX
- Gz1zENarBDab2COln4W60wq7Lv4Ji2WraZxzSi+Sh5TQCnwCEUs2Sna9K+U+Cyvz1t++
- W3y8qd0fOrcYYTUWUJ8ymEcjyepUKOYDUXFo4=
+ :content-type; bh=zCKEceIZG5gmscJRcRTsyKBrF7JmxGNVmFCPWd0aDwg=;
+ b=X3KgMZq/0NEyv1hePA3A4LEfPfYIjF3McWNS9GWAL7zflen28YfFbVJ92c+t4UjRPP
+ zR66brBrE5h7pISf45bZuudbXjVSQIXWEeNTjHqCxp+NMPLNiguvxDP9TjjF6j2/zPI2
+ +0mxpu0IavmuPjP4Mg/hH5WuHU9Xh4xc0qvdE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783952964; x=1784557764;
+ d=1e100.net; s=20251104; t=1783953043; x=1784557843;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=h0Pa/HeZkyoHGlWrwkc/oBn6EzdXXEqG0s0Q406HZGM=;
- b=rnESqrtgKCd9Kglj5/Sm3y6d5ifKiTLY7P/LhglF7+pEH1LHAwPFb/E9bgduWV2Obm
- jhi6S7nHOcnyl1xVGv6KLaCd82IO4ETrLulkZG2LqqHcLYpx+LbnM2T5KAGaP5UoHCD6
- zixqJphhczT1VpkRUlb7dRopxPbiWkJcTYqAspSXscK4kcGCYcZBaVH1mgQ3Dy2ak8qQ
- Vhf5whK49k5nee6D4AjHXwUp87l4I7+JvYymOXF2R8pRT7cpfvdn03I5RN/MF7kwie7N
- CebxWGKhtecOWzEz7sp2ulAPGV/g2V2zESU5WoOpMEyFh6xvoBc0yzly+VTQDKeAJSLE
- CIxw==
+ bh=zCKEceIZG5gmscJRcRTsyKBrF7JmxGNVmFCPWd0aDwg=;
+ b=cCeA6PwnAkB5HgNjoX0tE+pWomzoF7rC4Jcxyz/6dqOfn8EdXHcpKBFxIzBAmfzUiO
+ WZ+An4xpFXv/gARIhhckS/IRZ87TcCuLd65JbXbykUfId8TgGrxUHmBu18unQVXMsanp
+ Lw+/YVAsJ1RlbTbaeqo8I7Ry3MKnRSxvFCKDZTaZqVkG7ChwxKXa2tlnuqbFjhNp9FzC
+ Fn4jvRCOjxt6SJN0Nvyb8A8gEa6rQCH70kwDbXuZNvh+PKMKGhPQkSHYeaZshiWgwQwK
+ Cx4kCWi68sAY+6ukbqT7+gJVugzkFZxVEgdoEFn/Ql7xqQUPxGZcxpV5JVBnHZsjzs07
+ vbZg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqlwesFbaLRaFUOI+obhsamEbPq92xn8NNtSSow6tbqErsUKuFIBlmQSnzVJseGUg0X3F1Jh8Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqUXNMuKEImjankEp0tScIXXye2IKr6HZPqiIxLmlCoRWdFVCQ
- r9s4Y0BPLGzGtskdzw+8KVHqDVWAJ1V0+yHbTuRhiQUgx7OVEDZ0XcpL+kU0edLP6mss8qULk4R
- 334Dn+rXjKioC9gbDAcq38VccloBzy6JyxQbq4QKL
-X-Gm-Gg: AfdE7ckvb/vJqSoYCGNxnsrP2SGk3+r2YryzcXRRcRMc8oLz7aSBV0BbnbUKhcU9SwB
- b3+oQdvMNiL+KKBm1o7LwEwglC/vK4MC+AbuNcfWFQPdPyGOOu2YJ2LsP9zlzDNuJhW7ZKWpE+9
- Rqq2phe+GeWY0i+xWx+3AiutvJoMfaM65lVmZ8YPunMtDR6lzbWMCzYS+vS5gs+ISOXML0AmR2y
- XJxozn11o6MG0QorYmVEYGB88RNwR3v9SFA9RvEJghklau+x13dKnvVeiteNf0RZF3Ws0g=
-X-Received: by 2002:a17:907:706:b0:c16:55de:60e4 with SMTP id
- a640c23a62f3a-c1655de94c1mr88974866b.50.1783952964318; Mon, 13 Jul 2026
- 07:29:24 -0700 (PDT)
+ AHgh+RpBTALCTKAzsKbQagM1802+/U7vAGlZZsMK6RSgFJN2nP6WctaxMq1Qdx9t+A4CYhRQd8zpNkc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXMaFfVBPEPu2YukzN2Vty8S0+SZbN1/FETAvy1dBdPo6OO6jK
+ EGpFPgFMaONVekMMzdfiF4ZAQOLbqMUKgEbiowmFw0QCLU9rHR+pgntLsw34LephGpwScqV6NUR
+ Sd1Ms0xcPy121klHRHbUTnHN1DWr6mCUVd5pD4IEH
+X-Gm-Gg: AfdE7cnps2YMuR37yc71P927/XyfLF8sqZiOlbTkJS4/HMYi4NEl2aLFgblrF0YAQEX
+ QMvSO7rxsNZVTI947ur+29fcKBkXOP2lGxt1vDavL+shKqYzuY/n0kyLFWKXB3sH7KgI1tHNx3N
+ 2Hk6wNeo6uvgLhZ4f5v/YnIpl+/056vr6qrpuoM3Tg9Xn8siRUNy1bYvJSB8tLPpmYFfwPVdFb6
+ h6vQMDAAKPWE0hDue4N8hH+COxS0HGH9lzbG7xdU6aqsg4Dd9uhC/eH0mAYPnPglJvWCu2mX7kF
+ /xp03A==
+X-Received: by 2002:a05:6402:d08:b0:69a:9355:ec36 with SMTP id
+ 4fb4d7f45d1cf-69c5f38af61mr3822057a12.42.1783953042970; Mon, 13 Jul 2026
+ 07:30:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-12-jonas@kwiboo.se>
-In-Reply-To: <20260708220540.3368825-12-jonas@kwiboo.se>
+ <20260708220540.3368825-10-jonas@kwiboo.se>
+In-Reply-To: <20260708220540.3368825-10-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 08:29:11 -0600
-X-Gm-Features: AUfX_mxLOH7sdFpsKzaR0wFS2IHRtaP8qgH3Kpgzc4v3W78wDzTWXbtZjo35Tfw
-Message-ID: <CAFLszThDZTQbO6xPntwXUuECFR3EoisCD-9koqyyobUdJUcQ2w@mail.gmail.com>
-Subject: Re: [PATCH 11/11] spl: Use CONFIG_IS_ENABLED() for LIBCOMMON_SUPPORT
- checks
+Date: Mon, 13 Jul 2026 08:30:30 -0600
+X-Gm-Features: AUfX_myRzFaz4kp1HiZgQTiPPrSLmsrs0kekaPRCJdRVwiIXACrh1O3aGZoCo6o
+Message-ID: <CAFLszTgPO+zQybrxDMwDgmY6XJWryVCJnGBQNRy0JephytBhZg@mail.gmail.com>
+Subject: Re: [PATCH 09/11] Kconfig: serial: Depend on correct xPL symbol
 To: jonas@kwiboo.se
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,24 +110,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
+
 On 2026-07-08T22:05:26, Jonas Karlman <jonas@kwiboo.se> wrote:
-> spl: Use CONFIG_IS_ENABLED() for LIBCOMMON_SUPPORT checks
+> Kconfig: serial: Depend on correct xPL symbol
 >
-> Use CONFIG_IS_ENABLED(LIBCOMMON_SUPPORT) instead of directly checking
-> CONFIG_SPL_LIBCOMMON_SUPPORT when guarding printf/log calls to depend on
-> correct xPL_LIBCOMMON_SUPPORT symbol. Also change to use IS_ENABLED()
-> for the XPL_BUILD symbol checks for consistency.
+> Change xPL_SERIAL_PRESENT symbols to depend on the xPL_DM_SERIAL symbol
+> intended for the related xPL phase instead of the DM_SERIAL symbol
+> used for U-Boot proper to make CONFIG_IS_ENABLED(SERIAL_PRESENT) guards
+> work as intended.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> boot/common_fit.c        |  2 +-
->  common/spl/spl_usb.c     |  2 +-
->  drivers/mmc/mmc-uclass.c |  4 ++--
->  drivers/mmc/mmc.c        | 16 ++++++++--------
->  drivers/mmc/mmc_legacy.c |  4 ++--
->  include/spl.h            |  6 +++---
->  lib/hang.c               |  2 +-
->  7 files changed, 18 insertions(+), 18 deletions(-)
+> drivers/serial/Kconfig | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> @@ -81,7 +81,7 @@ config SPL_SERIAL_PRESENT
+>  config TPL_SERIAL_PRESENT
+>       bool "Provide a serial driver in TPL"
+> -     depends on DM_SERIAL && TPL
+> +     depends on TPL_DM_SERIAL
+
+BTW this makes the workaround in ns16550.c redundant:
+
+    /* TODO(sjg@chromium.org): Integrate this into a macro like
+CONFIG_IS_ENABLED */
+    #if !defined(CONFIG_TPL_BUILD) || defined(CONFIG_TPL_DM_SERIAL)
+
+That guard sits inside CONFIG_IS_ENABLED(SERIAL_PRESENT), which with
+this change already implies TPL_DM_SERIAL in a TPL build. Please can
+you add a patch to drop it? I'd be happy to see that hack go :-)
+
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> @@ -91,7 +91,7 @@ config TPL_SERIAL_PRESENT
+>  config VPL_SERIAL_PRESENT
+>       bool "Provide a serial driver in VPL"
+> -     depends on DM_SERIAL && VPL
+> +     depends on VPL_DM_SERIAL
+
+Just below this, the help text says 'This option enables the full UART
+in TPL' where it should say VPL - it would be nice to fix it here or
+in a follow-up.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
