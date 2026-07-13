@@ -4,50 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807C7C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 19:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8829C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 19:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAFE584C7A;
-	Mon, 13 Jul 2026 21:30:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
+	by phobos.denx.de (Postfix) with ESMTP id 144EF84C86;
+	Mon, 13 Jul 2026 21:59:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="MsX/d/Lf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aHkIXlAQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62C3984C7B; Mon, 13 Jul 2026 21:30:52 +0200 (CEST)
-Received: from mail-43171.protonmail.ch (mail-43171.protonmail.ch
- [185.70.43.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2A44684C0F; Mon, 13 Jul 2026 16:18:37 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BA4484B49
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 21:30:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=rasmusvillemoes.dk
+ by phobos.denx.de (Postfix) with ESMTPS id 9444584B93
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:18:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1783971049; x=1784230249;
- bh=2WNzupjhkc3dKpHJp7OJzSF/9B/aqkK8s6K7e45gLrY=;
- h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
- Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=MsX/d/LfKD/t/0pJScMY2nvNdBEftmBAvaMrbpGkHiBeHYuVOQ7y7PkzQJD1/ebCF
- qW8gHwG7XHjIGm2AR4d5PCH+C4ba1seMHCZIRO20FYHSQj6wsFAmZKGg/nJP7V9xJk
- 0EhVResQXySygK+MqSaqs02PWIt9SfhFmlwLsUTJEHiDy6hlLePVfe+9CqNTHk1oz7
- /1aASsjhUk4rYH3O8ORPp4mDn4Bt5ASB0NPiVCtzRMoLZ1D9k2ziy8gd+joyzXqN5W
- Gm5qZ5CgYT3XV0Iw3lfSV6kCH7Em1HCNuoByUPe7ByM6KyE5W7w1QWyYJAzYMqAM72
- S3VShKWrxzJOA==
-X-Pm-Submission-Id: 4gzXbW2vCjz2Sd3Y
-From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: [PATCH] net: drop pointless .bind methods
-Date: Mon, 13 Jul 2026 21:30:43 +0200
-Message-ID: <20260713193043.2851418-1-rv@rasmusvillemoes.dk>
-X-Mailer: git-send-email 2.55.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=allan.elkaim@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-38e08baf860so643778a91.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:18:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783952313; cv=none;
+ d=google.com; s=arc-20260327;
+ b=V46UrR3KlIcTCc6w11q4aPWCPhb6LczvGHUm1B92LvdITg4tqFF1RD/eXkD6jBIy+b
+ 8ittdT1SIOVXWUroDdoNWSRmAMYXhuvTtfr2gKlKJdG6rrKEenlIWzpLO/msPwCU4QTn
+ s/00gegT78RLkdk0Tf1hZNcY5JxhaQR8DRK1GYfrNoUuJkoLqd2hM+xFSKEL2gLzhaC5
+ mBrqk2MO147+UHM7lymAJNqPOdR71LqXLM101cwoe6yhIk9S5JjXDX7VKu08oRVDcdzZ
+ 4d6Ygq83eATKn4hq88YSnNlB5Cnl9FHyX2cezxEA1SHXmnHxOSf85hjAo7lq69oxLJgG
+ DK+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=FRFoKuFTK83AQdgfpydTX1QrqRHDw8OGwwjsFxBXOJA=;
+ fh=kCc17K58xO4O+yx/fTM8mpTkxC8iofy3bqAtC7rxpM8=;
+ b=YaAGFH/u08+g7bvkdk1UirXiOo4eXRXGRaicUt/bs5DDVlTOzsvHiyQI7X8OKjfUWf
+ rA4Rp/NGN+GX0UasBc8R18Go7UvvNXEt+A1gkNocunT5RDwAezNvAyV4wzTbNDUJBuH7
+ c3mxyACijUL+U65Wc6Mg1VzEKOW9vgrsRHFl1PIfxsXb2xCVAR2XABi0guG3iqq6ZHNI
+ v23gDlIGmDCxSKybwS0tOMdE9QvcZcDgVn8VYi4QPqS0dzPKtVhzku2A/l10DOsDlcCB
+ ZA3ZR0nWoLSV5ilrCSLk+R/vQCCw1HyxkJ31KOtXTPGN0NstPXODmPyUplcJG2MdVNLH
+ 14qg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783952313; x=1784557113; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=FRFoKuFTK83AQdgfpydTX1QrqRHDw8OGwwjsFxBXOJA=;
+ b=aHkIXlAQPXteakvQg6bsOt11YuS58xSfEXeBqBw+uuyao0NQHmkRFtnf6TivylM3NU
+ pxKV4Wnw2U3JTkrhwkEeqm+Hb3ByhnWdTxl91U/wSnWDtdKheKFGs4K2B6TGxAMGvfeR
+ 1fnp9SWe1T3QgX5nPW6Jspmfa8ecDGb388l4FEsqnDuxcExgNRKnVvTNTf3nukQWVt40
+ cU2/VanwI9zM+lsGBQkZ72S3IT8JaRUMpkIqWEE3yNyClcUo+5LM/fdPXciiFJkCYFR4
+ RZWvcdpXri4vzavj2f1fWLTPaMT3Op+vgToxhcUikza2umkdd1Stx+8bV522awpl0o2i
+ dtpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783952313; x=1784557113;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=FRFoKuFTK83AQdgfpydTX1QrqRHDw8OGwwjsFxBXOJA=;
+ b=f1gYBGqDnCbaKvz9nut99kl3srZRmqyljhKjprZB6SqtDxbGZf5FS05GAcMgOE19HQ
+ H8v1abIKgwclVpyqy2cje9XG1dFJlhxM0CNmkVxUV6i235BG576Bm6WVJOzcDBs3rDKw
+ ulwktVB2ALt3Huj7hZkCOMWdEAfEeLsVTYCe5tt7PvTft/3VlRTDKBiQoyIS6n1+1uPo
+ LjnFls+p2R+w3Bk7wzlia9OQzBrQxbwQZ7pqMPp15DjkqH2Gn/5qo6iVoD7p4uYfGKHW
+ XxHxZsUueYj7Vuo1zNAfgvv6erRGtoH0Di3Cew8IWcYYUmm2O+ZLtYliV65L++dVqngV
+ EoIg==
+X-Gm-Message-State: AOJu0YwTzkcYsKaSpDGnZP+RGRMVbDJB09UO890QRfgVoKvnPKilUrD3
+ l+0dV8T4HgVruCI7qnLJGNeA2L8WpXqfwW4PKFMCm6tvCBYPZdeU9zDDsGehdl86oaYYtV9WCOJ
+ CQFJqmEWgfUavlovi9pc/1ORjVOlgh8A=
+X-Gm-Gg: AfdE7ckWBvgUlQK89GGNHZr7dHZNAKAAwi2KSrvmxgC+h0vVpjQH80MXs13mVwgLtI2
+ 6zfYIDMhYNVbNewq5H5DmLhGSkK4sSQVbfk3F/KwwwGJv0XXFsr4yUKMEqAYQRWiju2/eY8RS7P
+ 7d6Yl1Kk1dOirvVrI609iSbxzaVRp3gmcadkGYCJGoJhRUX2dfQbLFtSU3IHnKC7LjtkNIG3wyB
+ 2IGb6IoTsx/KQelca/rVlg8PuocBh3SQCdB/wZpyYakAhRPYjAohDxu9hAQYlM9pR5QN2Wx6rA9
+ 41WhI4+izkystImwneoqWqywN6GuolWcAMMTqX6hbxFqZ/+afPyPf+NNxi1NU4/sDm6ICmdiYdh
+ TIUJGtERvBd0h4RxO2EOY0WKF64Klr2/nqsw=
+X-Received: by 2002:a17:90b:5585:b0:37f:ad5c:d18 with SMTP id
+ 98e67ed59e1d1-38dc75ed90dmr8764596a91.11.1783952312758; Mon, 13 Jul 2026
+ 07:18:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260611094353.722555-1-allan.elkaim@gmail.com>
+ <20260611094353.722555-4-allan.elkaim@gmail.com>
+ <1bfb8b3a-5204-47ef-9aa7-fc5748248453@bootlin.com>
+In-Reply-To: <1bfb8b3a-5204-47ef-9aa7-fc5748248453@bootlin.com>
+From: Allan Elkaim <allan.elkaim@gmail.com>
+Date: Mon, 13 Jul 2026 16:18:16 +0200
+X-Gm-Features: AVVi8Ce0l3HvSPIzyWb29tZdVtVyhOpcXqx3MerwyvHIg9v3q6PRaGAguVHYhxc
+Message-ID: <CACgNL-FkyDzLxMwMeheUVyW95KtLfb4O1EVRZFNUy_FcUjRQQg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] fs/squashfs: fix dirs->entry leak on inode lookup
+ failure
+To: Richard GENOUD <richard.genoud@bootlin.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+X-Mailman-Approved-At: Mon, 13 Jul 2026 21:59:35 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,131 +121,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Considering that device_set_name() does
+Hi Richard,
 
-  int device_set_name(struct udevice *dev, const char *name)
-  {
-	name = strdup(name);
-	if (!name)
-		return -ENOMEM;
-	dev->name = name;
-	device_set_name_alloced(dev);
+Le 24/06/2026 =C3=A0 17:23, Richard GENOUD a =C3=A9crit :
 
-	return 0;
-  }
+> Having a 2nd look at the whole function, it seems that there a lot of:
+> ret =3D -Exxx;
+> goto out;
+> without freeing dirs->entry
 
-it should be pretty clear that these .bind methods are at best
-pointless (there's a fixup for device_set_name() en route that will
-make this not a memory leak).
+You're right, my v2 only fixed one of them. Going through the function
+again, the entry is also leaked on the -ELOOP path, on all seven
+allocation/tokenization failures in the symlink resolution block, and
+in a more subtle case: when sqfs_readdir_nest() aborts via its
+sqfs_find_inode() failure path *after* sqfs_read_entry() succeeded,
+the while loop exits with a live entry that the "Cannot find
+directory" path then leaks.
 
-I presume one of them got added by mistake and the remaining are
-cargo-culted, but regardless, just remove them to prevent yet more
-copies of this anti-pattern to appear.
+> It seems to me that we could keep free(dirs->entry):
+> - in the while (!sqfs_readdir_nest(dirsp, &dent)) loop
+> - at the end of the for (j =3D 0; j < token_count; j++) loop
+> - and before the recursive call to sqfs_search_dir()
+>
+> And remove all the rest to add something like:
+> [...]
+> out:
+> +       if (ret < 0) {
+> +               free(dirs->entry);
+> +               dirs->entry =3D NULL;
+> +       }
+>
+> (not tested)
+>
+> What do you think?
 
-Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
----
- drivers/net/dm9000x.c    | 6 ------
- drivers/net/ftmac100.c   | 6 ------
- drivers/net/ks8851_mll.c | 6 ------
- drivers/net/smc911x.c    | 6 ------
- 4 files changed, 24 deletions(-)
+I agree, this is better than fixing each site individually. I checked
+that it holds on every path:
 
-diff --git a/drivers/net/dm9000x.c b/drivers/net/dm9000x.c
-index 9e17f0b9c28..53225979b66 100644
---- a/drivers/net/dm9000x.c
-+++ b/drivers/net/dm9000x.c
-@@ -638,11 +638,6 @@ static int dm9000_read_rom_hwaddr(struct udevice *dev)
- 	return !is_valid_ethaddr(pdata->enetaddr);
- }
- 
--static int dm9000_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int dm9000_of_to_plat(struct udevice *dev)
- {
- 	struct dm9000_priv *db = dev_get_priv(dev);
-@@ -673,7 +668,6 @@ U_BOOT_DRIVER(dm9000) = {
- 	.name		= "eth_dm9000",
- 	.id		= UCLASS_ETH,
- 	.of_match	= dm9000_ids,
--	.bind		= dm9000_bind,
- 	.of_to_plat = dm9000_of_to_plat,
- 	.ops		= &dm9000_ops,
- 	.priv_auto	= sizeof(struct dm9000_priv),
-diff --git a/drivers/net/ftmac100.c b/drivers/net/ftmac100.c
-index fa0b3dbb6d1..d9826178e82 100644
---- a/drivers/net/ftmac100.c
-+++ b/drivers/net/ftmac100.c
-@@ -429,11 +429,6 @@ static int ftmac100_remove(struct udevice *dev)
- 	return 0;
- }
- 
--static int ftmac100_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static const struct eth_ops ftmac100_ops = {
- 	.start	= ftmac100_start,
- 	.send	= ftmac100_send,
-@@ -451,7 +446,6 @@ U_BOOT_DRIVER(ftmac100) = {
- 	.name	= "ftmac100",
- 	.id	= UCLASS_ETH,
- 	.of_match = ftmac100_ids,
--	.bind	= ftmac100_bind,
- 	.of_to_plat = ftmac100_of_to_plat,
- 	.probe	= ftmac100_probe,
- 	.remove = ftmac100_remove,
-diff --git a/drivers/net/ks8851_mll.c b/drivers/net/ks8851_mll.c
-index 2c956154d09..c2f87d4222b 100644
---- a/drivers/net/ks8851_mll.c
-+++ b/drivers/net/ks8851_mll.c
-@@ -571,11 +571,6 @@ static int ks8851_read_rom_hwaddr(struct udevice *dev)
- 	return !is_valid_ethaddr(pdata->enetaddr);
- }
- 
--static int ks8851_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int ks8851_probe(struct udevice *dev)
- {
- 	struct ks_net *ks = dev_get_priv(dev);
-@@ -615,7 +610,6 @@ U_BOOT_DRIVER(ks8851) = {
- 	.name		= "eth_ks8851",
- 	.id		= UCLASS_ETH,
- 	.of_match	= ks8851_ids,
--	.bind		= ks8851_bind,
- 	.of_to_plat = ks8851_of_to_plat,
- 	.probe		= ks8851_probe,
- 	.ops		= &ks8851_ops,
-diff --git a/drivers/net/smc911x.c b/drivers/net/smc911x.c
-index f39ba40944f..2835eb45856 100644
---- a/drivers/net/smc911x.c
-+++ b/drivers/net/smc911x.c
-@@ -431,11 +431,6 @@ static int smc911x_read_rom_hwaddr(struct udevice *dev)
- 	return 0;
- }
- 
--static int smc911x_bind(struct udevice *dev)
--{
--	return device_set_name(dev, dev->name);
--}
--
- static int smc911x_probe(struct udevice *dev)
- {
- 	struct smc911x_priv *priv = dev_get_priv(dev);
-@@ -487,7 +482,6 @@ U_BOOT_DRIVER(smc911x) = {
- 	.name		= "eth_smc911x",
- 	.id		= UCLASS_ETH,
- 	.of_match	= smc911x_ids,
--	.bind		= smc911x_bind,
- 	.of_to_plat = smc911x_of_to_plat,
- 	.probe		= smc911x_probe,
- 	.ops		= &smc911x_ops,
--- 
-2.55.0
+- On success (ret =3D=3D 0), dirs->entry is provably already NULL: it is
+  freed at the end of each token iteration and before recursing into
+  a symlink target, and the root-directory early return never
+  allocates it. So the conditional free at out: can never take away
+  an entry a caller would use (sqfs_opendir_nest() doesn't read it
+  after return anyway).
 
+- No double free is possible: every free site resets the pointer to
+  NULL, including the recursive case, where the child's out: label
+  runs before the parent's.
+
+- The three frees you list are exactly the ones that must stay: the
+  first two run on success paths that the "ret < 0" guard at out:
+  would skip, and the one before the recursive call is needed because
+  the child's sqfs_read_entry() overwrites the pointer without
+  freeing it.
+
+- SQFS_EMPTY_DIR is -1, so the empty-directory path is covered by the
+  "ret < 0" test like the current explicit free.
+
+I've reworked patch 3 accordingly for v3 (with your Suggested-by),
+dropping the now-redundant frees on the individual error paths,
+including the two added by patch 2. Tested on sandbox with the
+squashfs test suite ("test.py -k sqfs") plus a manual sqfsload
+through a symlink on the image that originally triggered the bug
+report, and the error paths (missing file, bad directory).
+
+v3 also moves the collected tags before my Signed-off-by, per your
+remark on patch 2. Thanks for the review!
+
+Regards,
+Allan
+
+
+Le mer. 24 juin 2026 =C3=A0 17:24, Richard GENOUD <richard.genoud@bootlin.c=
+om> a
+=C3=A9crit :
+
+> Le 11/06/2026 =C3=A0 11:43, Allan ELKAIM a =C3=A9crit :
+> > In sqfs_search_dir(), when sqfs_find_inode() fails to locate the inode
+> > of a directory entry just returned by sqfs_readdir_nest(), the function
+> > returns directly while dirs->entry still holds the entry allocation,
+> > leaking it. The bare return also bypasses the regular error path.
+> >
+> > Free the entry and leave through the out label instead, consistent
+> > with the other error paths in this function.
+> >
+> > Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
+> > ---
+> >
+> > Changes in v2:
+> > - New patch, fixing a pre-existing leak of the same kind as the ones
+> >    addressed in patch 2 (suggested by Richard Genoud's review)
+> >
+> >   fs/squashfs/sqfs.c | 8 ++++++--
+> >   1 file changed, 6 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+> > index af32d008..df988774 100644
+> > --- a/fs/squashfs/sqfs.c
+> > +++ b/fs/squashfs/sqfs.c
+> > @@ -547,8 +547,12 @@ static int sqfs_search_dir(struct
+> squashfs_dir_stream *dirs, char **token_list,
+> >               /* Get reference to inode in the inode table */
+> >               table =3D sqfs_find_inode(dirs->inode_table,
+> new_inode_number,
+> >                                       sblk->inodes, sblk->block_size);
+> > -             if (!table)
+> > -                     return -EINVAL;
+> > +             if (!table) {
+> > +                     free(dirs->entry);
+> > +                     dirs->entry =3D NULL;
+> > +                     ret =3D -EINVAL;
+> > +                     goto out;
+> > +             }
+> >               dir =3D (struct squashfs_dir_inode *)table;
+> >
+> >               /* Check for symbolic link and inode type sanity */
+>
+> Having a 2nd look at the whole function, it seems that there a lot of:
+> ret =3D -Exxx;
+> goto out;
+> without freeing dirs->entry
+>
+> Like here:
+>                         [...]
+>                         if (++symlinknest =3D=3D MAX_SYMLINK_NEST) {
+>                                 ret =3D -ELOOP;
+>                                 goto out;
+>                         }
+>
+>                         sym =3D (struct squashfs_symlink_inode *)table;
+>                         /* Get first j + 1 tokens */
+>                         path =3D sqfs_concat_tokens(token_list, j + 1);
+>                         if (!path) {
+>                                 ret =3D -ENOMEM;
+>                                 goto out;
+>                         }
+>                         /* Resolve for these tokens */
+>                         target =3D sqfs_resolve_symlink(sym, path);
+>                         if (!target) {
+>                                 ret =3D -ENOMEM;
+>                                 goto out;
+>                         }
+>                         [...]
+>
+> It seems to me that we could keep free(dirs->entry):
+> - in the while (!sqfs_readdir_nest(dirsp, &dent)) loop
+> - at the end of the for (j =3D 0; j < token_count; j++) loop
+> - and before the recursive call to sqfs_search_dir()
+>
+> And remove all the rest to add something like:
+> @@ -677,6 +677,10 @@ static int sqfs_search_dir(struct squashfs_dir_strea=
+m
+> *dirs, char **token_list,
+>                  memcpy(&dirs->i_ldir, ldir, sizeof(*ldir));
+>
+>   out:
+> +       if (ret < 0) {
+> +               free(dirs->entry);
+> +               dirs->entry =3D NULL;
+> +       }
+>          free(res);
+>          free(rem);
+>          free(path);
+>
+> (not tested)
+>
+> What do you think?
+>
+>
+> Regards,
+> Richard
+>
