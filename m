@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A548FC44508
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05569C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 14:29:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31D6384C3A;
-	Mon, 13 Jul 2026 16:28:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82B0384C51;
+	Mon, 13 Jul 2026 16:29:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WRmLNEz0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X4S6kZ23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CEA484C4F; Mon, 13 Jul 2026 16:28:30 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id B1D1D84C51; Mon, 13 Jul 2026 16:29:19 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48E6C84C06
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:28:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC1B884C06
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:29:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c12614b81c9so590924566b.3
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:28:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783952907; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c15bf399d3bso383310966b.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:29:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783952957; cv=none;
  d=google.com; s=arc-20260327;
- b=NRS8UgG+uH5SUfM+cgnOFp08pnNk4+7q2+jBKglex//b8IPtRqp23b02KEYTNbxaMw
- 1FT+woxCRABS8Sk8v9rtrex0DITnaxqMppTGCJK1cVTiqcOK3N3ZUJ0aBNdRdCxr9SWy
- hb2eTXTnQYOeL4RAKHBj4nMjC+MEniRpo9g+Z5TchOs5RGs6Rq5CIqKQI5Nw462n4tmC
- nv8L8emuc5g7wrtOQKJtOyXmfZEuF+jlwSgcESKPJmA7RiyXPtWRbNdxHSg7rmDtLRNu
- c52aaCt/8/inkTeTtZEAsU8wrC23wSVU2J1cQvNae3eGDdF4L3DktStOCRuL4d5iu/LW
- uStw==
+ b=mhycpNjIgRZW05826rElXYaFegO3+PFzhaa0dlmfafdMXU9eAuC/NiYnubQNXe9y9T
+ lKbmSnGicDZXeH/+xHjFFVk5EefA1KIWHzBTPnlANMgRbfvtXsgZF2N5i5G/5uJDxsAy
+ fBA+IMj5wT5JgvnuNXk4j0p1DRmpKx0PisSEz21JOWY7vDzKHH0mOc0QZEozwJQaKdta
+ 5LWNZZJLHqJS10+FMIwG+Dc2Qo3knoHnTDY9TbCpkIYE3s4G6CH1RNJHKEchCocdKEVI
+ 0XajHdr9sM3WbagYyjXAywYm15sjIpYy8xsYVRzbzzc9bG3XpZV0h5V/ijbA0BmXPfYg
+ o9BA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=gSyiyT/uZ5/Q/h5ek7TodwyPJHZmF5M1RPythHqCWHs=;
- fh=8blbiRpS5mipyi/DO5sIXO0+46Z74q1ENcuVv9IWduA=;
- b=GDUsbnuHW2klKqofGyOkZxzrsc5vXiiEjcEjhcTFsqoa5rqAkjsBToNaix3ZOpZGdH
- 7gNfOneSHw+UqaaAtqddAORX/UnxrXKCUpdRYf759eyuiSwCir60M7DuJm/nKDPvMWnW
- HLtktHV4GHhKCHwWe1xSuhfF8GiJpu0pK/aTx3JFqErbnZxXXopv8AJ8TpIPfIdEWWga
- wCAksNNC28dPKA8bUyGUkSvzr56AxiZ/YBlp+kL4MfSrrcang+C8ktM8TApDrFzlzDgm
- ZDe7cz8zDhnkknNWYkLtFfmjccBijq7Vbsm73xOnzKJRiVipuCeocL00A93/ngKHv2xt
- 40EA==; darn=lists.denx.de
+ bh=ZsxkXd+p3q4Tp7m1wSqixvR2s2CRFoZzIHX4VArFg38=;
+ fh=HADF8q3dYLaw+r1mrqoaWYTrn/W5KFtrsaZX2ttkYDE=;
+ b=ZrLQZ6Qyrc2hzZkKN0GYF3uM3E1KmwL7w9gxVMVdfc0Bl7ZmAtYohwyNxNrSD5gtzC
+ /JQxDVkBgXM0DxVqosayZ37qUA5NjevccjGB1i3+OjXAFPQp0/oIj4300ezYqTD8fL0U
+ hguydbEcx1zuU2irteTIYf3+42wo5RnYhmFMVrJALWqfVxCx+zHGt3bmfEIeSeaKh2zf
+ 5hE8UivEqxDy22t1CkgevTx6PYbNpItPFlfnzWy2IzE39cfavyDPmF9Eu1Ys54wybsDC
+ vg0EKPcgab67s2ACu6TqiDGniIDz0Ah/OVDWkcD+HoOf1yW9hFhc1ewggqKT2/VCiyC0
+ JRGA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783952907; x=1784557707; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783952957; x=1784557757; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=gSyiyT/uZ5/Q/h5ek7TodwyPJHZmF5M1RPythHqCWHs=;
- b=WRmLNEz03AH0lEN9e9gSKwq3vCHFz+u8495gYTt54sdtZxt7sHy6h5cgN5E7HSdkAJ
- 2SNI4abvLqcYVxiVxwQEP+0bZRx0qsKhjdi2W4W1x4LeMVsfRxlUTUzYHGrNeVnVZOo6
- lj9oCag79zIE1zWuMVDOGSVXx0k4qIdlCdjXo=
+ :content-type; bh=ZsxkXd+p3q4Tp7m1wSqixvR2s2CRFoZzIHX4VArFg38=;
+ b=X4S6kZ23TGTD/+UkllVe7l5zThnmaEZio/qLFfgo42/lUzGYXd0gRJIsXPmDJ0AKJd
+ CFO0a4xmXVfBxgrgG6v3Ae9DUFUwi3P7q+V/Uhw5UuxdGye0lOfmfMABkmPCRTPUqJmo
+ oDUrqNcUzefXaQlnGtYQRAGFhDT6kc/kv6/9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783952907; x=1784557707;
+ d=1e100.net; s=20251104; t=1783952957; x=1784557757;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=gSyiyT/uZ5/Q/h5ek7TodwyPJHZmF5M1RPythHqCWHs=;
- b=mfzl8gNVSV5MiXpW0vQTDhj1oZhYSFOQvUTlmMX8Mxo2ppKPOrSsW6j/N2XGn0kBrE
- 2aaw9Tn/yk0HUJSu7FK37D8dT207yGnBI/UXc5UgcoLPDmO/Tb/KL9PLLqpInxRk8yHi
- l/z9S6TQ6Dzdtvr0b6nmFK18kLrvW24ZX/6JvT3iASTmk88UcLRZ2nnq+Q81aql9+QZS
- lSkN7rQV7fIWpjJ5IHI1Bnj2g9oMg7DWHvaQP0l1EHwRWBYL9p5C1ZCDX5CuCFWwDj2x
- iBVTKOUCTLwlHnUXlx4ob0AIpu8OdVV2STLT2vxU6WuoPyxx6HruVEyUWeO2qe1RFkra
- Vzrw==
+ bh=ZsxkXd+p3q4Tp7m1wSqixvR2s2CRFoZzIHX4VArFg38=;
+ b=qlIrbHpjXKM6EYaKSVyHrHOQBN7tqF+mcYbEzY4A4uLiarvr7R5fxLWTfcE1XyHSuT
+ Ptnv1KJQkZZ3Omgt9ksxVe7U9SH/dh3R/dRtqIGeomos7gDcEkA69h6kgGCuiDy0ci7W
+ 7Q1Lw3gqKeumVYO3YMjyYf8O6u3zYc37o4l/Sawf2vzLtnp8x3m4sNs5Pb0udldmcTC2
+ vu20nyDD9WqpJnz3W8sfjcPA76Ly4Q5HsfcRUeIMqVBKRqZlUTZQfAt1DFGFSo/2ZXmr
+ +Y6sbIqkJjkEMNSCatOvethSgZ0AodCG0mPtMRztl5rzgDyFz6mM2m5w7eohZq72dX2+
+ ovHg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr+BmLQSvEsION2MbQdNi8s3ysvtoomhyPOTpv7a40IQ6ZbceD0WuNDbnPzfCh1TROspC3ADrs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxA1QakExaxNwoNaWv55UgHWKEBscF/2FbwuiJmwHiKOqmEY3lb
- FrnF8xchtY5dOKHNb3Lh75W5J7U6vUSGggD/pdRAJOGnWVA5lheQc4pwj23cOiA4AMP24IpBnxc
- 36ixjubHr8lbOfgkzDfEBAiR698QaG0HJc3ez7ImR
-X-Gm-Gg: AfdE7cm6QlSh+dnjK8RIDjYSH2fugQZQYtInwjRbfUQ71xK2+SyeSGoKR/24k+ffmGE
- Y9zjB8N0gGeLo5OlkJaKSSydminmos6bl1xV0umbw9GwFphjAEp87GIHxRIxpezUfbksC0Hbbh+
- V2aV9Ew7MaigIshL7LGyFQJm2qcyh3PeKcMJlQZbVrULDFxG8qIx7EXgxblc730QIUs+Do87/Uq
- TKw65dG/bMh95W7gd/u1VPBdFBF4cyYN/I1YhkMVOu95NZVnRoBPFS960K4S0VqAVWPniM=
-X-Received: by 2002:a17:907:3d42:b0:c0f:fb53:9308 with SMTP id
- a640c23a62f3a-c161ea8d4f7mr397497666b.29.1783952907048; Mon, 13 Jul 2026
- 07:28:27 -0700 (PDT)
+ AHgh+RpwP3GvwK7PeNuM/Hr4ep3/nszzJPjt7eAnkQDf+hjs5/xgUk/0KQmybp1njkdX+9RLZEJwZuc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwG5XLBOrzrvHL7ChWzas3t618UVmID03BP7tMs1feFq02ccJL2
+ n2B/Qr7EPgBNlnoCSCz68mRQlkAkJoYu4EA4pPj6Kb7yrxgtpRaYOXHJQZgCXIffnrtnatx2A3e
+ Cm48+rLpuoDKh7ESxWCdB7FtzhHjaWTQnpzj19pEM
+X-Gm-Gg: AfdE7cmpHbL0dsTAFfaWX9l8QkduwqKQgo/YR7VZksT2MU1DVqaUfS3DcnsLb4lrHYQ
+ jQbJwTd5Q7KNFBQb2p8UYASJK4bdIFik3nlufMMcfyXS1o339ZIz26PNVAEE0pH+N9bO4kjB7rg
+ 6cRnnypk8NQ0jo4U+2pgRVvsmDKItQ8tJalw6zvlEZmMtrMF1gclTwQ/qNs3ci+8la5MaBhbk1T
+ MGN93IWmiYSGsTVTP5M538l+5OHIBl/TOvPYWUjdxAX8AZtUJrfdudsJHsaQMYK/3CJ2i4=
+X-Received: by 2002:a17:907:cf87:b0:c15:c638:d03c with SMTP id
+ a640c23a62f3a-c161e9fbce2mr374755866b.47.1783952957126; Mon, 13 Jul 2026
+ 07:29:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260708220540.3368825-1-jonas@kwiboo.se>
- <20260708220540.3368825-9-jonas@kwiboo.se>
-In-Reply-To: <20260708220540.3368825-9-jonas@kwiboo.se>
+ <20260708220540.3368825-11-jonas@kwiboo.se>
+In-Reply-To: <20260708220540.3368825-11-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 08:28:15 -0600
-X-Gm-Features: AUfX_mzENQP2aUIksQbAYWJgeQy-jWaTlq4C6AhxL9wiY79lwVxeT45vGSWpfDE
-Message-ID: <CAFLszThMyQzP4FaF4DDhdkiJ_Rs6b41tUK36=x6bA2xQBYX-LA@mail.gmail.com>
-Subject: Re: [PATCH 08/11] Kconfig: i2c: Depend on correct xPL symbol
+Date: Mon, 13 Jul 2026 08:29:04 -0600
+X-Gm-Features: AUfX_mwB9MQL9ZGvUNc726QZ5_8I3Me3zbF5YS0Y1N6QtMQUyPk6chHt8Xe3_bs
+Message-ID: <CAFLszTgeXz5eDB6T4DzE4FWr9JCJzZt8j==PhZa6g4AdmxTf9A@mail.gmail.com>
+Subject: Re: [PATCH 10/11] console: Use CONFIG_IS_ENABLED() for SILENT_CONSOLE
+ checks
 To: jonas@kwiboo.se
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
+Cc: Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -113,34 +114,50 @@ X-Virus-Status: Clean
 Hi Jonas,
 
 On 2026-07-08T22:05:26, Jonas Karlman <jonas@kwiboo.se> wrote:
-> Kconfig: i2c: Depend on correct xPL symbol
+> console: Use CONFIG_IS_ENABLED() for SILENT_CONSOLE checks
 >
-> Change to depend on the xPL symbol instead of the SUPPORT_xPL symbol to
-> only make the xPL_SYS_I2C_LEGACY symbols available when xPL is enabled.
+> The xPL_SILENT_CONSOLE Kconfig symbols are not fully respected for xPL
+> builds, instead common code is guarded by a mix of SILENT_CONSOLE and
+> xPL_SILENT_CONSOLE symbols.
+>
+> Change to consistently use CONFIG_IS_ENABLED(SILENT_CONSOLE) to make the
+> common code properly guarded by the intended Kconfig symbol.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> drivers/i2c/Kconfig | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> board/friendlyarm/nanopi2/board.c |  4 ++--
+>  boot/bootm.c                      |  4 ++--
+>  common/autoboot.c                 |  2 +-
+>  common/console.c                  | 12 ++++++------
+>  include/env_callback.h            |  2 +-
+>  5 files changed, 12 insertions(+), 12 deletions(-)
 
-> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-> @@ -78,14 +78,14 @@ config SYS_I2C_LEGACY
->  config TPL_SYS_I2C_LEGACY
->       bool "Enable legacy I2C subsystem and drivers in TPL"
-> -     depends on SUPPORT_TPL && !SPL_DM_I2C
-> +     depends on TPL && !TPL_DM_I2C
+> diff --git a/common/console.c b/common/console.c
+> @@ -736,7 +736,7 @@ void putc(const char c)
+> -     if (IS_ENABLED(CONFIG_SILENT_CONSOLE) && (gd->flags & GD_FLG_SILENT)) {
+> +     if (CONFIG_IS_ENABLED(SILENT_CONSOLE) && (gd->flags & GD_FLG_SILENT)) {
 
-This also changes !SPL_DM_I2C to !TPL_DM_I2C, which fixes what looks
-like a copy-paste error, similar to the DM_SERIAL fix in the next
-patch. Please can you mention this in the commit message too? I
-checked the boards that enable TPL_SYS_I2C_LEGACY (the mpc85xx
-P1010RDB / P1020RDB / P2020RDB NAND configs) and none enables SPL_DM
-or TPL_DM, so there should no functional change, but it is worth
-recording that this dependency is also being corrected.
+This slightly changes what SPL_SILENT_CONSOLE means. Previously the
+xPL symbol only dropped the boot-progress messages in spl.c at build
+time, but now it also gates the run-time GD_FLG_SILENT checks here
+when console.c is built for SPL (i.e. with SPL_SERIAL). The help text
+in common/Kconfig still says "The GD_FLG_SILENT flag is not used in
+SPL so there is no run-time control of console messages in SPL", which
+no longer matches. Please can you update the SPL_SILENT_CONSOLE and
+TPL_SILENT_CONSOLE help text?
 
-With that (assuming you figure out what Tom raised):
+> diff --git a/common/console.c b/common/console.c
+> @@ -72,7 +72,7 @@ static int on_console(const char *name, const char *value, enum env_op op,
+> -#ifdef CONFIG_SILENT_CONSOLE
+> +#if CONFIG_IS_ENABLED(SILENT_CONSOLE)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Just to check: there is no VPL_SILENT_CONSOLE symbol, so in a VPL
+build this (and the other converted checks) is now always false, where
+before it followed the proper symbol. I suspect that is fine since no
+in-tree board enables both VPL and SILENT_CONSOLE, but please mention
+it in the commit message, or add the VPL symbol alongside the SPL/TPL
+ones in common/Kconfig
 
 Regards,
 Simon
