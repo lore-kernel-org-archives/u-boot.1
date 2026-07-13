@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FE6C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 22:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A2DC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 22:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D34FF84C43;
-	Tue, 14 Jul 2026 00:08:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 255F784C69;
+	Tue, 14 Jul 2026 00:08:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cE1wt2DJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hmhFHBdc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9A8E84C75; Tue, 14 Jul 2026 00:08:08 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 4244D84C69; Tue, 14 Jul 2026 00:08:20 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4220E84B73
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 00:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07C0D84B73
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 00:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-6a116bd18ebso264136eaf.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:08:06 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-6a116bd18ebso264218eaf.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:08:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1783980485; x=1784585285; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1783980497; x=1784585297; darn=lists.denx.de;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=XouXMVRjLVj/fV0d8LczvGZlolgNH8+di2AZuWvt5lY=;
- b=cE1wt2DJngu6ybyZzdV4PVKHT3ybR7djZgBPYvjoIhkrIYytVdC7hEqKMJX0zPgTT/
- xsIQwjSPtVUSj6PAKD/Xt2u1H8xK7eouARDs4JHF/ArHEhJjYJ7/ssQAyK0hYOCpNvjd
- jndShYLcVmcGHUNUJup0F8Xb3vSp+vVVz36BM=
+ bh=29aoB6KM0RqAre+vJkoZHkwk6kzB8pLBrFOWb8jwVUk=;
+ b=hmhFHBdcR1XFpXjVI+c+BCsY0yCFBQk9Rz0TBeyZqeeLqh6IGCzoNSCNFwlFC1x2n7
+ IzOI/72q41pXQ/pJlUW2LGp8KS0DA1KETKFdkLYIoOtRFKz6xUXVAeN/SUVR5WT1d7r6
+ TUdr3Xy8zvEmW3NTRog6769iOHHveFcgIZ1+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783980485; x=1784585285;
+ d=1e100.net; s=20251104; t=1783980497; x=1784585297;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=XouXMVRjLVj/fV0d8LczvGZlolgNH8+di2AZuWvt5lY=;
- b=f8qLKj509i8CAdbrfrFSGHAIyS4feDM1+ls0P5InYnzLJDjnaKJX5ltyrcn+847aVz
- z7Iz9FR9b9kN9X7PWad0xnRCdWr06eBG2RevcOXjOIR2Of/u2yf0mFhZ+mS7jTV8bw1J
- TU6TCaoxOxZLRHm29BqdVI+9r7rwTqea8ftPh+7naj+gZnKCcrYQ4Cnf3jkh24GqX+uh
- Ho1CaNila6jku7Xtlj2j74iRAmEvSlPgwDoxiEx9V63WSRYNIxQFlnAG9I6E/Dq/hysp
- zjErjzamkTVdVmL3stXVFkr5PHcjJ48xmQvMPYgHFVRUCv/MZUptsJuZd9XTefm97fKp
- h3fw==
+ bh=29aoB6KM0RqAre+vJkoZHkwk6kzB8pLBrFOWb8jwVUk=;
+ b=baqoJDc+dXfapkYoKGE6YkQY1RAGbLkvk5diPsDwVttcb302TI1AI6sxzyFojyGzYL
+ XOI6W6AhwYJhpnqx+PVHy07xNttlbM0YIPscle1gEqxqusQsOiorovzy7TGij4rRr1fn
+ N+60ckLgRlnYsRQ61TM7K7vdb7CraPkTFuJXKXKFpoyA0GTFqLYi79DsASQ216z0JIUv
+ fwZJAY813eWw4wr478j0lko+LcN4YDIPxAJD4y+lnyxlUOAECyB85QocoMIq2bBbCWVz
+ DbgrjvDXV/+mzpL0NPf5vVgFc5yYUjiMxa4YvYBaGRwso6Py0mjSxYRyXG5pglOigqPr
+ quYA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/1v4pFW9PdMWt22lK7F+JhNq6hxTXIpjg8ZNmFAd9+x2vYLSA3ksi5b7FZlgNwzXlZ8446/vw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyZck5u8GhGq7vbxNtHyJSKZw8GkCwiU2gEepO777BCobgY7xtv
- UZ1rp52qY9O2R8/Tfn5CbnsaymbnYq0bzSKEaAwL3hVnbfgwot9ib5a8UR1W8zV6UMI=
-X-Gm-Gg: AfdE7cnggycTY2R16Y0xdGUDAOFqJW+W6VobYUCaCzO4Jjb4guEdBSWgEqVnURO/JiU
- ar25nCoYINTFBGnA1OPtUL3yeq7twccqF4T63dWwCcsNKhYaRnCxhkdNHgjtk8CdOSknck3840t
- hiwQ+jy5tZe+6MZVhgNmkjFQJsl8DSOeEKWyPH2mORxXkE8OSQkdpSmgduFqg4FafMLE3nDxjvQ
- i22fwlWSRdwCBkPpBNZAtgUg3k2BGvEVnQA+GTxVwWUXQ1cMFWmTMoKtzVRSceYySb2K9ZIYE1U
- jPlFu+PRV5Op87drsEX/CO790bVDMPIDd0h5oPRxYS7c3iT+Lncm9A4RHiz5HXPTxROmYvrvhzP
- KDoyiOetVMhVTmEYv2GC6H7MoubDdTxFT7XLkyXWmwdaLIf9ZUF1uT1frz2fiu9gJRF/8WovizV
- +phkB4FgSTRk+Dw/9JWQHS6ZtciNCTCKq1DAXBzHIDljgUwpX0UPaPjt97qBzfZxjk/FSltQZMh
- ++8c90cbdPC3RsTCWEdgDitNLM1X6LU5xPHa0UNjvBumW3f
-X-Received: by 2002:a05:6820:1a06:b0:6a1:43bc:d0b3 with SMTP id
- 006d021491bc7-6a39a5fd2f5mr6445322eaf.27.1783980484641; 
- Mon, 13 Jul 2026 15:08:04 -0700 (PDT)
+ AFNElJ9wqF0objL8e5lX79YIEZg6C+WDwYy4QgL4ZIv1U++a3BXsSGwrUdDS/cUUe5M0vt0rLAabCM4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxubLp9zROgkKICYQ7KiXuz3NW+Fwg6i+LTIfFea8FDAGesW2Rw
+ qeUJkrOHJI4jja3i9h+jjPI5C4Fuao4kkYYQaRUAmCuf1ik5kSzPlpIjzHrJ8gzXXRQ=
+X-Gm-Gg: AfdE7cnIfo69s06xUki1bj2sN7kuX47W7Gftr2c1nnV2S2K4oi75OSokVfX/u45Bsh4
+ uZ4mTZIF8cy5PYSq1bHTVm4t3xzS4S2YLrckpj3I8ruDwR6PCnNy2r3k0L0iFfezmZmfDHE8Nhq
+ 2lDn3ymAe9jrIKOvbFtFN1tqRR9mjR2hpiGg7B/TcvNHFG8iakWcmoQ+t9XcHM+tbAM234DJFkr
+ WDyTKDFxc5y84pCzSsoF+n2rzeQZRvS65bcPauBySeYe1oI5gRAkWSxPrwsS+LQONHcttDvr5Lj
+ x90UpytHoyfiNn+A1ZnnN/B2PmUHR7bQqkh0aLdOh+RSjtUgS3q5wk1p37EsqK/d6fspznXviKx
+ UxCBenGOuUtWo6D9VLplCEWOPXgo7gq47vrlTl4hrtwP7f/YcfwQr47msp85IAyntKH126BbiIj
+ Xr2PhFMudtmMXAg3ySELhW9Ig623/lvYYO/DRJYKGo2MFIHmqIGrKpUPdxtVw0Yt/u2mwQvAFtm
+ fgDel+GJxZSZdwE8Yk/USQhckgs/jFCwaC3gA==
+X-Received: by 2002:a05:6820:2112:b0:6a3:ce0:a34d with SMTP id
+ 006d021491bc7-6a39a728551mr6203717eaf.54.1783980496782; 
+ Mon, 13 Jul 2026 15:08:16 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-455b767413dsm4884362fac.3.2026.07.13.15.08.02
+ 006d021491bc7-6a38a4bd734sm7426886eaf.4.2026.07.13.15.08.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 15:08:03 -0700 (PDT)
-Date: Mon, 13 Jul 2026 16:08:01 -0600
+ Mon, 13 Jul 2026 15:08:15 -0700 (PDT)
+Date: Mon, 13 Jul 2026 16:08:13 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Simon Glass <sjg@chromium.org>, Ludwig Nussel <ludwig.nussel@siemens.com>,
@@ -82,16 +82,16 @@ Cc: Simon Glass <sjg@chromium.org>, Ludwig Nussel <ludwig.nussel@siemens.com>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
  Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] boot: fit: factor out node-path collection in
- fit_config_add_hash()
-Message-ID: <20260713220801.GW749385@bill-the-cat>
+Subject: Re: [PATCH 2/3] boot: fit: cover the dm-verity roothash with the
+ config signature
+Message-ID: <20260713220813.GX749385@bill-the-cat>
 References: <cover.1783816074.git.daniel@makrotopia.org>
- <d460c0571dee7cd852267d881938d6c3d2caf300.1783816074.git.daniel@makrotopia.org>
+ <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZBWokbDjiM1HqNcm"
+ protocol="application/pgp-signature"; boundary="atBEZdFTnxxRmLJ2"
 Content-Disposition: inline
-In-Reply-To: <d460c0571dee7cd852267d881938d6c3d2caf300.1783816074.git.daniel@makrotopia.org>
+In-Reply-To: <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,17 +110,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZBWokbDjiM1HqNcm
+--atBEZdFTnxxRmLJ2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 12, 2026 at 01:33:13AM +0100, Daniel Golle wrote:
+On Sun, Jul 12, 2026 at 01:33:21AM +0100, Daniel Golle wrote:
 
-> fit_config_add_hash() repeats the same sequence to append a node's path
-> to the hashed-node list three times: for the image node, for each hash
-> subnode and for the cipher subnode. Extract it into a helper,
-> fit_config_add_node(), with no functional change.
+> A dm-verity protected filesystem image is not hashed by U-Boot when it
+> is loaded; its integrity is delegated to the kernel, which validates the
+> filesystem on the fly against the roothash taken from the FIT dm-verity
+> subnode. The roothash is therefore the sole integrity anchor for the
+> filesystem, yet fit_config_add_hash() only added the image node, its
+> hash subnodes and its cipher subnode to the signed region, leaving the
+> dm-verity subnode (roothash, salt and block parameters) unsigned.
+>=20
+> An attacker able to rewrite the boot medium could then replace both the
+> filesystem and the roothash, recompute a matching dm-verity tree and
+> keep the configuration signature valid, defeating verified boot for the
+> root filesystem.
+>=20
+> Add the dm-verity subnode to the list of nodes covered by the
+> configuration signature, both when signing (tools/image-host.c) and when
+> verifying (boot/image-fit-sig.c), so the roothash and salt are
+> authenticated together with the rest of the configuration.
 >=20
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
@@ -129,15 +142,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---ZBWokbDjiM1HqNcm
+--atBEZdFTnxxRmLJ2
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalVhugAKCRAr4qD1Cr/k
-CkhhAQC1ADzNQQroylDKlf533STwGshOintYIDjlvP56aFGesAEA3OQiBONFLAU7
-mLSn0+lVHEWINYXp1n4OTupopEzIugY=
-=9/SH
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalVhzAAKCRAr4qD1Cr/k
+CiE/AP9a/pyt27mSdHbwCEBP/UIc0DwkV3XzcS45frY4/WX8nAD/UzqkE0Y/Ixnj
+XIZ3v3NyUPKFTy2exGkgn9VpUklltw0=
+=Qxy4
 -----END PGP SIGNATURE-----
 
---ZBWokbDjiM1HqNcm--
+--atBEZdFTnxxRmLJ2--
