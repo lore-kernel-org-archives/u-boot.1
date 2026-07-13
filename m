@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4792FC43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 07:08:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 111C5C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 07:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78E5384A49;
-	Mon, 13 Jul 2026 09:07:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 5758484A49;
+	Mon, 13 Jul 2026 09:59:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="dnvkSZar";
+	dkim=pass (2048-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="DH6DsBnp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D36FF84A4A; Mon, 13 Jul 2026 09:07:56 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id 0063684A4B; Mon, 13 Jul 2026 09:59:35 +0200 (CEST)
+Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch
+ [185.70.43.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3C7B84A48
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 09:07:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F03E84A48
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 09:59:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
- by mail11.truemail.it (Postfix) with ESMTPA id D2CED1FD35;
- Mon, 13 Jul 2026 09:07:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1783926474;
- bh=YRO1wAgy/JoR8s9+N6Hi8Sx/cboxS/rOS9ndugw2cCg=; h=From:To:Subject;
- b=dnvkSZar8aEtIn4peIOFG9tomwPFsfgKkDd8jStgs866enivWwcuBbjQWZyfcQi+Y
- u5+7sNsdOYPxQlhNvewKzoKAqDFz+q9tNLtlvD27HnPAf+FRngPTss/5SBal0guyyK
- EAKh6nnnQw1JQ5Opc/RGhu8H9QMuyfgSZuxGaAzBOVJh+fMlgoi6gmLwq12uU8FAxb
- ZvPAbUByGRc3b6q5bk8HF6e4QYMbB8EDB6bvT4sEERhBIpwO0k2RAGNj7fs0fpM5r4
- 0QnJ8VZunfxKsLTeza5r/7OaKwQlB4Tonxg/nRBIxSSFXVUT1sCxp0p0ChbjP9mvjd
- iK/trMpszR3lA==
-Date: Mon, 13 Jul 2026 09:07:52 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Judith Mendez <jm@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH] gpio: pca953x: Add GPIO settle delay
-Message-ID: <20260713070752.GC13102@francesco-nb>
-References: <20260710230409.147210-1-jm@ti.com>
+ spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
+ s=protonmail; t=1783929570; x=1784188770;
+ bh=MTS4kXBPO3DLCwbw1b6BMG8WKvC9aW4XFg5T/9RSrkQ=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
+ Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=DH6DsBnpfOrawKyPh6LNBPhj08WAOlpezQ1BpsSjWKs6/WC7HO0xVR+tTeemwDsoQ
+ JiWCnqB+DDZwxR4GFprfKPH6McEa00vfUvo62Y03RG6uJwFKc9Lk6JEYg1xdf1yWX5
+ LH4oTpNfmgu1W+2jEb/ynlHDI1QVgVjx/VIx22IyqcWYjeZIU9EhrFFll2QSORl+jB
+ c5YE0zJtyENJdjL8fMAn2sKoc7bZf6r8L9O3l0tjzqAeHbzwc30AmxcU6i0C2hbS/f
+ xKrx21ebsMHCSr0h7c9Mzz2tVZwhZ/BGMdQLnnPYebM+WitnRHD1QoxdJgI7koMlPy
+ ITPTBgtGxuucw==
+X-Pm-Submission-Id: 4gzFFr6tdZz1DDpB
+From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+To: "Simon Glass" <sjg@chromium.org>
+Cc: <u-boot@lists.denx.de>,  "Tom Rini" <trini@konsulko.com>
+Subject: Re: [PATCH v2 10/10] test: add test of 'config' command
+In-Reply-To: <CAFLszTi=ytF1MTd4Egvo3LZDgrP5KZ5=K4Uz5jUVFcRkOagAgQ@mail.gmail.com>
+ (Simon Glass's message of "Sun, 12 Jul 2026 18:18:32 -0600")
+References: <20260708203711.849489-1-rv@rasmusvillemoes.dk>
+ <20260708203711.849489-11-rv@rasmusvillemoes.dk>
+ <FA-v9BFSUTj-TRyvSvaYa8kaUuphTp9fZRIO_BnXaIe0fdFBItff9747oLX6ihRtP0d73XCcmuSDxqsGffREpw==@protonmail.internalid>
+ <CAFLszTi=ytF1MTd4Egvo3LZDgrP5KZ5=K4Uz5jUVFcRkOagAgQ@mail.gmail.com>
+Date: Mon, 13 Jul 2026 09:59:28 +0200
+Message-ID: <8733xntj4v.fsf@rasmusvillemoes.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260710230409.147210-1-jm@ti.com>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,34 +69,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Judith,
+On Sun, Jul 12 2026, "Simon Glass" <sjg@chromium.org> wrote:
 
-On Fri, Jul 10, 2026 at 06:04:09PM -0500, Judith Mendez wrote:
-> Some board designs have slow RC circuits on GPIO outputs controlled by
-> PCA953X I2C expanders. On some board designs, pin voltage transitions
-> can take significant time after I2C write command completes.
-> 
-> Add an optional "gpio-settle-delay-ms" device tree property for the
-> pca953x driver to add a delay after I2C write if specified, allowing to
-> compensate for slow RC circuits.
-> 
-> Signed-off-by: Judith Mendez <jm@ti.com>
-> ---
->  drivers/gpio/pca953x_gpio.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/gpio/pca953x_gpio.c b/drivers/gpio/pca953x_gpio.c
-> index 965a5fcf30b..54b957069c9 100644
-> --- a/drivers/gpio/pca953x_gpio.c
-> +++ b/drivers/gpio/pca953x_gpio.c
-> @@ -333,6 +339,8 @@ static int pca953x_probe(struct udevice *dev)
->  
->  	info->bank_count = DIV_ROUND_UP(info->gpio_count, BANK_SZ);
->  
-> +	info->settle_delay_ms = dev_read_u32_default(dev, "gpio-settle-delay-ms", 0);
+> Hi Rasmus,
+>
+> On 2026-07-08T20:37:01, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
+>> test: add test of 'config' command
+>>
+>> Add some test cases for the 'config' command, including the ability to
+>> filter the output.
+>>
+>> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+>>
+>> test/cmd/Makefile |  1 +
+>>  test/cmd/config.c | 28 ++++++++++++++++++++++++++++
+>>  2 files changed, 29 insertions(+)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+>> diff --git a/test/cmd/config.c b/test/cmd/config.c
+>> @@ -0,0 +1,28 @@
+>> +     ut_assertok(run_command('config', 0));
+>> +     ut_assert_skip_to_line("# Automatically generated file; DO NOT EDIT.");
+>> +     ut_assert_skip_to_linen("# Compiler:");
+>> +     ut_assert_skip_to_line('CONFIG_CMD_CONFIG=y');
+>> +
+>> +     console_record_reset_enable();
+>
+> Just to check, is there a reason the first block doesn't finish with
+> ut_assert_console_end() before the reset? The other invocations round
+> out with it, and it would be nice to verify we consumed to a known
+> point rather than discarding whatever was left.
 
-Is this property supported also in Linux and defined in the Linux
-binding? I do not think we should have U-Boot specific DT properties.
+Yes. When printing the whole .config, I know that there'll be the
+commented out lines I check for at the top, and obviously also the
+CMD_CONFIG option itself must be enabled. But I don't know anything else
+about what might be in the .config, and in particular, there's no way to
+know what the last line will look like (the .config file does not have a
+"# end of .config" footer or similar). So I can neither skip to or
+assert existence of other lines after the CONFIG_CMD_CONFIG=y check. I
+don't think there's anything else to do.
 
-Francesco
+When invoked with a filter, I do know exactly what line(s) to expect, in
+in those cases it is also more important to assert that there are no
+unexpected lines.
 
+Rasmus
