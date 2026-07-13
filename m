@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12336C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 20:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29951C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 20:00:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE2A084CA4;
-	Mon, 13 Jul 2026 21:59:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D7D484CAD;
+	Mon, 13 Jul 2026 21:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Os0Sq0hq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lgWQ4dG+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B50DA84C4F; Mon, 13 Jul 2026 16:27:04 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 0BB1384C4F; Mon, 13 Jul 2026 16:27:31 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4DE084C06
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F28E84C06
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 16:27:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=allan.elkaim@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-47dec32798aso3312091f8f.1
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:27:02 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-493b779003fso14204985e9.3
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 07:27:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783952822; x=1784557622; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783952848; x=1784557648; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=axvvkqPr7KkIUrHu5YdnkcBPhKQ7sOoI7vqolHKc3RM=;
- b=Os0Sq0hqqMl0oLlXJyiA0tXZj/CwFNoYXwECNKh5E+VSqtDvD4OWoVd64vMSZJraoo
- Nr6APAyr3EGlrcx/EroJCcd6zh0gBo5NRcLNV3JkL0oxus8jT5LUiNg5SGXVaBKkVTfL
- 26lLuKbOoCthS6Uc2NZu0XxPs8oLYa6Ra2JIoKzLMUsW77rlTd7ko0xqbPgQ7H0aFxMZ
- NFu7oLMyxAKgEXY4fd6qDYsCe8Gd9hyKaUb0KetZwvW9MPQq18eix9/tFnU0gYhf2A8T
- bC5A8R94czwJ2xaZ1iv+D51OjUjvECYEeePHOIyMQRrFq1dQvyxzX86LGFdUS39NWZhU
- p8mA==
+ bh=Ld8zaGpioEdhLkrTI1mQFECS3AIphnchbz29EClg6vQ=;
+ b=lgWQ4dG+QnE1fOnG1x5iGFChfn6Wpu954pn4ICjovjLEHCEgplJ58RnNc8iVnSxT04
+ 8uLL382ujB88Kyo31lULYOk7JfRpiWyRfnNnhhJFJEZpzaNNHTe/8hMwHD4iLENbO+Os
+ 1X9zjKB222kGQA+S8E4H6Tk9rH/LlponBAGSNzWePXFLGoplSa0GL3WLqNPPioDdOQld
+ o1lcXQyAFM/81J1xrDLrkMonBtUwAYqjn3SCfOfRQfCNJuX56KICbFARDOScsXa/gtCo
+ fBaXKZDanSYYqnNBPuMYbWw1DBy1VIG0pYKZf5BNKwAfgzZJD29nL3Hue6W7pFJuEvh2
+ eueA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783952822; x=1784557622;
+ d=1e100.net; s=20251104; t=1783952848; x=1784557648;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=axvvkqPr7KkIUrHu5YdnkcBPhKQ7sOoI7vqolHKc3RM=;
- b=AOCic2PyCau0KNLrOMyYhDHWHuOAXKpVsIQAACXjWku3QFQVvvXr4FQzQ9IqY/HjMJ
- hHN9RRoKflk+1EMlgo7JcpalsI5z/V5/hERfD8KyYoWQlvSk2gqrbiZHTfClCS+OHtCh
- T9kyrhwK+5sT3yrZcPmywhTCbP5kVfXKfUV/IDBjJWpHAotiBApdM/J3WceihM5VWe8c
- 66wKfEQ53yjwgP3lvHJKEoDgk8BIQPXjYBmvMBPedsO48B8ZO5+pI6Lx2EO5FSIX6Fm/
- dE+R4hpmesiiQsFnCzSmRpaW4VaexoWPKBNqag59SixhT3y3FdXBy1eYXgzqAnb/7qHo
- vO6w==
-X-Gm-Message-State: AOJu0YwrlGsfKzlpqSbca14waGT6jpn3bxVz4fVBNVPDDR1MREVJYnpu
- kvM3+h/w67kEOOOuDefG/OA/ytXJTqWZsnFeTSAu5EY10KyvD1mXpMVR1PxbsodQ
-X-Gm-Gg: AfdE7cl3geaGwvjE1dakEQa0OMEdNtxItSoIjv3P+ULRptp0C/oNuN+1ctrcOGHz0UM
- pYQejoqMWVIMWVypfrzayORPuOdhIm8uUKoy8foBcVFkkb3YY3J7Y8HKXPmdfD/pCDoRMX5vi8m
- mzn9a8GUqz4TITdbQmroPAOjAZtXJfpi4RVot6wm1bay8GcY94vs5qB3zWXKObA1zqySnCcjOO6
- ZK4RSHLgppFUcoI7ssBw0/Zm8teW7Q8dkLmIHQCF3HBbo5t5rySkS8v9l07BRQ833U8ILILePiK
- 1OrIYQu/eibJkDp95nCToKd5L9DRHYK1bmIxd07J2M5y2t916nFW1gnP9zahuJawoQC6CVeOhTf
- rJ7FDbLF8nnIcgKGaDmQ8vtM79d8lQKeKt8bSkqvsDCgjEbhHVetxvEwk9OE+Jb+auwYKxBD4aa
- Ca7mKf5M8mXnz1D/LOTFgcew6RvzU6G1ZpdLZ49d4c0BeZsmLMqSBC47KKyrczlj4KjuHiPA5FU
- p/ArL0dh6dMK3AE63OvWL4GkSk2j1UVBeCdOAxz3vupU7DCcJzTIc9I0JrAtSdEyso7GHAx7Xtv
- MkAX
-X-Received: by 2002:a05:6000:2511:b0:43b:498f:dceb with SMTP id
- ffacd0b85a97d-47f2dc8cc19mr11387251f8f.9.1783952822288; 
- Mon, 13 Jul 2026 07:27:02 -0700 (PDT)
+ bh=Ld8zaGpioEdhLkrTI1mQFECS3AIphnchbz29EClg6vQ=;
+ b=JXitq7SZ6ClIi0nN3RtS+tmpMxX54ZJzD6phgHvMStvXXwxX3uHE859FH9H1VMMNAZ
+ 5BKbj7PmUpvUSWANzCKfcRogBRuUJJoh1+tw6iquReNZIY0PZ5tVtvl7hY3A3767Sy7b
+ k4U++XFJ01Wpw1FV6aUnO9Bwm7K9E+DkXvvvogYuZ4pAzlqh0dpZDayGlRzP5Slo2jga
+ +Ky0Pgbym+BiHet2S2JcZ9mamdmoAJKjq9emrCtdiFkqg2yewAxJGA7jIlkVWxgL0Q5g
+ 1KHZuqCyWYHWmcuRb++SYXSaLgdyqDhogSGKFn8YsctvhHcJixq08JpGlt03meZMlFCM
+ j+Cw==
+X-Gm-Message-State: AOJu0Yyxl7CqNjwkv62b2ROazJ0vcZoXBwc8AyEuC0afpFPUvHjxit12
+ hCCrhX3IMIXcvQxXz+F/RwLf00Xzwy72LbbCBUlg3zUegkXPhL+IXFBadNbRBNrJ
+X-Gm-Gg: AfdE7claS45Jymyi4xh/jjtZTZHYaJLPlE8KzZKY9yKvBA4srLgJYJO6Z3LtPrp04At
+ l/eh5CnTZVMjvt89SrpT72A05odIN4S8eJh+a3s2SLKAvQMSMr0tAjwDXHIKU6hosxiqfc5CMat
+ ImukMz0ObbNsLavwQia+jLWmPuWJtIBF5unI6X2Wgru+DoDc2oMzK+LYi60YKza+HyUmhccjbC0
+ +OnOzFC1f2YwvydLfDiCnlzYVhhgh78sjAyt5QNp/0sZKb4KiDSq/NuQQTIj0dB5MSJuv/IYDzi
+ KCTbynv8as9qAVnKhj/cevYlzfBOA8NYfftCrxBUw+7RTRa6u5iqFb8iyyFqy5OEllrKkya5W/R
+ PpY4VqydEzWkOmfDQf6cgS/6ozIYaA5jqIObush995CsSFDpgI3q2o99lXWT2cSoTyRSuZSuI82
+ vhNpQuPn82nui3iXM8oq1mVpfpRQGochNWvIiJE/FmaUmZNZir2a3UHK5AFHRydh9DjymNMcMya
+ 615sAjF+VUTA+5XVdfjjHOcYjhGCDKGeqMNGn2waBX1D/tc+fFTXdeU2QCgPM1RxiHWjJMp/cg7
+ YUUfZ/Xd6yiCXEc=
+X-Received: by 2002:a05:600c:4e0d:b0:492:6113:d4fc with SMTP id
+ 5b1f17b1804b1-494042b0a1emr22688205e9.17.1783952847813; 
+ Mon, 13 Jul 2026 07:27:27 -0700 (PDT)
 Received: from thinkpad-t15g-g2 (82-64-82-74.subs.proxad.net. [82.64.82.74])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47a9e4d83bdsm83691562f8f.13.2026.07.13.07.27.01
+ ffacd0b85a97d-47a9e4d83bdsm83691562f8f.13.2026.07.13.07.27.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jul 2026 07:27:01 -0700 (PDT)
+ Mon, 13 Jul 2026 07:27:27 -0700 (PDT)
 From: Allan ELKAIM <allan.elkaim@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Joao Marcos Costa <jmcosta944@gmail.com>,
@@ -79,9 +79,10 @@ Cc: Joao Marcos Costa <jmcosta944@gmail.com>,
  Tom Rini <trini@konsulko.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
  Allan ELKAIM <allan.elkaim@gmail.com>,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v3 2/3] fs/squashfs: add sqfs_dir_offset() error checks
-Date: Mon, 13 Jul 2026 16:22:45 +0200
-Message-ID: <20260713142420.2618339-5-allan.elkaim@gmail.com>
+Subject: [PATCH v3 3/3] fs/squashfs: fix dirs->entry leaks on
+ sqfs_search_dir() error paths
+Date: Mon, 13 Jul 2026 16:22:47 +0200
+Message-ID: <20260713142420.2618339-7-allan.elkaim@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260713142420.2618339-1-allan.elkaim@gmail.com>
 References: <20260713142420.2618339-1-allan.elkaim@gmail.com>
@@ -104,74 +105,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sqfs_dir_offset() returns a negative errno on failure, but three
-call sites in sqfs_search_dir() use the return value as an array
-index without checking for errors first. If the lookup fails,
-dirs->table is set to an invalid address, leading to undefined
-behavior.
+Several error paths in sqfs_search_dir() return through 'goto out'
+while a directory entry obtained from sqfs_readdir_nest() is still
+held, leaking dirs->entry: the inode lookup failure, the symlink
+nesting limit check, every allocation/tokenization failure during
+symlink resolution, and the case where readdir aborts after an
+entry was already read.
 
-Add negative-value guards after each sqfs_dir_offset() call so
-that any lookup failure propagates cleanly as an error rather
-than producing incorrect results.
+Instead of freeing dirs->entry at each error site, centralize the
+cleanup at the 'out' label: on error, no valid entry may be handed
+back to the caller, so it can be freed unconditionally there. On
+success, dirs->entry is already NULL: it is freed at the end of
+each token iteration and before recursing into a symlink target,
+and the root directory path never allocates it.
 
-Note: the corresponding sqfs_find_inode() NULL checks and the
-heap exhaustion fix during symlink resolution are applied in
-separate patches.
+Explicit frees remain only where a success path needs them:
+between reads in the readdir loop, at the end of each token
+iteration, and before the recursive call. The now-redundant frees
+on individual error paths are removed.
 
-Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Richard Genoud <richard.genoud@bootlin.com>
+Suggested-by: Richard Genoud <richard.genoud@bootlin.com>
 Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Centralize dirs->entry cleanup at the 'out' label instead of
+  freeing only on the inode lookup failure path, covering the
+  remaining leaky error paths (suggested by Richard Genoud)
 
-Changes in v2:
-- Free dirs->entry and reset it to NULL in the two error paths
-  reachable while a directory entry is held, so a lookup failure
-  no longer leaks the entry (reported by Richard Genoud)
-
- fs/squashfs/sqfs.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ fs/squashfs/sqfs.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 07e2bd82..af32d008 100644
+index af32d008..471ea7d9 100644
 --- a/fs/squashfs/sqfs.c
 +++ b/fs/squashfs/sqfs.c
-@@ -496,6 +496,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
- 
- 	/* get directory offset in directory table */
- 	offset = sqfs_dir_offset(table, m_list, m_count);
-+	if (offset < 0)
-+		return offset;
- 	dirs->table = &dirs->dir_table[offset];
- 
- 	/* Setup directory header */
-@@ -627,6 +629,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
- 
- 		/* Get dir. offset into the directory table */
- 		offset = sqfs_dir_offset(table, m_list, m_count);
-+		if (offset < 0) {
-+			free(dirs->entry);
-+			dirs->entry = NULL;
-+			ret = offset;
+@@ -547,8 +547,10 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 		/* Get reference to inode in the inode table */
+ 		table = sqfs_find_inode(dirs->inode_table, new_inode_number,
+ 					sblk->inodes, sblk->block_size);
+-		if (!table)
+-			return -EINVAL;
++		if (!table) {
++			ret = -EINVAL;
 +			goto out;
 +		}
- 		dirs->table = &dirs->dir_table[offset];
+ 		dir = (struct squashfs_dir_inode *)table;
  
- 		/* Copy directory header */
-@@ -651,6 +659,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
- 	}
+ 		/* Check for symbolic link and inode type sanity */
+@@ -617,8 +619,6 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 			goto out;
+ 		} else if (!sqfs_is_dir(get_unaligned_le16(&dir->inode_type))) {
+ 			printf("** Cannot find directory. **\n");
+-			free(dirs->entry);
+-			dirs->entry = NULL;
+ 			ret = -EINVAL;
+ 			goto out;
+ 		}
+@@ -630,8 +630,6 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 		/* Get dir. offset into the directory table */
+ 		offset = sqfs_dir_offset(table, m_list, m_count);
+ 		if (offset < 0) {
+-			free(dirs->entry);
+-			dirs->entry = NULL;
+ 			ret = offset;
+ 			goto out;
+ 		}
+@@ -644,8 +642,6 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 		/* Check for empty directory */
+ 		if (sqfs_is_empty_dir(table)) {
+ 			printf("Empty directory.\n");
+-			free(dirs->entry);
+-			dirs->entry = NULL;
+ 			ret = SQFS_EMPTY_DIR;
+ 			goto out;
+ 		}
+@@ -660,8 +656,6 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
  
  	offset = sqfs_dir_offset(table, m_list, m_count);
-+	if (offset < 0) {
+ 	if (offset < 0) {
+-		free(dirs->entry);
+-		dirs->entry = NULL;
+ 		ret = offset;
+ 		goto out;
+ 	}
+@@ -673,6 +667,10 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 		memcpy(&dirs->i_ldir, ldir, sizeof(*ldir));
+ 
+ out:
++	if (ret < 0) {
 +		free(dirs->entry);
 +		dirs->entry = NULL;
-+		ret = offset;
-+		goto out;
 +	}
- 	dirs->table = &dirs->dir_table[offset];
- 
- 	if (get_unaligned_le16(&dir->inode_type) == SQFS_DIR_TYPE)
+ 	free(res);
+ 	free(rem);
+ 	free(path);
 -- 
 2.53.0
 
