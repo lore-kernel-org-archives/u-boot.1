@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FE5C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 01:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58655C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 01:41:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D244C84852;
-	Mon, 13 Jul 2026 03:41:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E5238494B;
+	Mon, 13 Jul 2026 03:41:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AM8yCX9A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jgmQQPV/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46D668490A; Mon, 13 Jul 2026 02:17:12 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 1ADBA8490A; Mon, 13 Jul 2026 02:17:15 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0F8782991
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:17:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB26782991
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 02:17:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6976b0c5adbso5252010a12.2
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:17:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783901829; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6983d3dae7aso5894946a12.0
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 17:17:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783901832; cv=none;
  d=google.com; s=arc-20260327;
- b=Bfgy+rYIhTfYMAeZ2Iu4ZCQ4i1ESC1dljedA8g/cd8mmny3qX3vvweWX9szsqUZQb0
- gHIFSr1LyKSl3NuayTDQrSnEyyvB8Pkg4Di5Er4K+hlf9ZqDHpg9LgNzqVwjWOIxMYVe
- uH0h3AYF5LzTvxsDn1O2ho9fqlHh0kZAsnBgO5Q4XFz6g77fllV8pxMBo1QhyYE7QBHZ
- nz41Mzq7M+kPxdz3LSei7/S9vV/t02VkcvDwFyI8s5WvqJDBjSK2PpL931zx5nqrs8L4
- F5sJ9CLfILEr/chNuVlaeZXbdRl5AbomWoNa0CgAvze5VadzpTT0Nafe36OttcTymo4k
- uaCg==
+ b=CowBkJ2rgIc3zANyylC7nwzN5DMGjWaugIuMWpESpk1OvXLPElF2aqSuGrBpaPX4t3
+ RP3JaMv9PhW1+BCJQYeVvCPgxhw4ePmYd/OcWW9BstTL5A45H/fMHNo5t9LEYaAyGJYt
+ FaTXTRpJI2LX9npUrogzpqmeKvlpOJwXFHfO8nQfO8oyQfMf9UHeKRaktZhtQFxXuVdG
+ 5tvZC+0bL4y3Y47xVZ3SEiLH6nqwzQLQbHa5nkIMLJmtKi55q+ucp1s+s1OYFf8urfzT
+ 9eU/ScsM03Tk82F3kAE3W14I2TGjFeZGfT0otxnEHul/joX565UBPyl5qinExPrLsHyL
+ 2vBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
+ bh=n1Nw9EEWL2tkoi9wlz0jFs4TpR3HNj1nBSxLN2fGV/4=;
  fh=o0sOm2vp2y3CWH0wXZkGsEhY/jVD/FgGEsUTF4L6s7w=;
- b=PznLnQGdmb5GQF7yw1jXNXZjpWkkRXZ9vkpQ9AP03RNPG/BpA+5BH0J9/xBPDm6Hzl
- TH1+s/QpqCzl90vyVmXjd4AZVlz3earU6O6u42Oma/RJDDPjH2YT9d6di527cxUe2Rhd
- oUb9kavhLXlCXmdpfxXu6OgfafBv6V2vflvtzupfmIkKqI4kPUZdwv6dCWmTN96wms3C
- fs0953i0QTN4MWnJ3pBwGuaNKGtePpmtW7Ca3QDvc6AWQ2nbBQrPw/KkfrUQuYZq/m2Y
- ymMZrZaTRiSgXViMlq+8HmvgmdLYDcToe3mDUo6wgGX5oLFFvuxRaxdf//pSwRomCi1W
- YXnQ==; darn=lists.denx.de
+ b=OtjQus617HlNQZVfS0nJALDg1PVx+9eNwUYLpqabjeDLqceyfaRgtG1HAKOPWcvtLS
+ fbdEFiTNU5VYkmK3pbVWTws0N/mu0pTw1fJBVoTgmFNCfU716oAxCDzlEKnmj0mtukb7
+ ntVdVnUY1tZ7Fh4Bc/tBUOpbts2wldx2nEp34XEycIFcDGGtyMID1tEU2Yu4To50MOMU
+ 8LN6M3qCz8zyrvOm8JwSrGRDqvMRMulY6FJ3Zx97+0un7XnpyHgJdSmvIxi7TYZXk5Vx
+ FGJQfRVjbX6w/0ZxtEmWKLySTqCTzeQdmaf980lF1wqwgxoMdkT/+JF/P2NO79nBFkkJ
+ N8/w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783901829; x=1784506629; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783901832; x=1784506632; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
- b=AM8yCX9Ap1pE+xefl5YOyPe+WkqJomq+28j8QyCbRQ2Fx91vsOOmgLb4PdRrPSImlx
- U5apgdg1lsLeyugj/AGlopPiUNXnDXeJyc3zLPcf1fFaeWrUOVGHHWRmK1pYfcPTqiA1
- 4g4msYyLpCd46Y2Z1vz9SsH4ZprNrj2E6bga0=
+ :content-type; bh=n1Nw9EEWL2tkoi9wlz0jFs4TpR3HNj1nBSxLN2fGV/4=;
+ b=jgmQQPV/D6sQvy24uAxgB57nMmVQPPzOI87lGaoSYguGaOcedaATpPXhSnVUKEVC9m
+ BZqFXl4+xRth0XvVnRNQY0HQ5ZrcrdQXDGl8l4V/Yk5KmyG2IdcZ0sKFwPyf5Y1JMjXV
+ DFkdJteSfs+9k2GC/PgMuwlKOyOEPXkL95DfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783901829; x=1784506629;
+ d=1e100.net; s=20251104; t=1783901832; x=1784506632;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=NTrD5aY2KoYiX+ciTkc59qHEzbkYrFJoONxy+OFYCtg=;
- b=P+8B5Q7sn4dF4VzFGarsennacz9Ex+AFGf7/qjeuvMgQ6cLqtA+WY3bZtOG7xKKPB2
- lbsyGT9Wum/jGcwgpkc5I6L83eLgHGgglnnktNKlOLYh1eFMrdgpropcvdeHuM254DPz
- shPD7ZlJejv5jXRIouAT+9mi+9WiqK0vxjEVOADDQm29nG5CnljwW45iNl1JpuxZqtVs
- QFY1wivFK6s68LQWIt6D9/KkOy/ZTxHtt9BksxKLMgYW+TpXrNW7DmrndL3dsxlQ0uXG
- OWevrieJDMVb3wDMCDEQVWfn6YAQCpA0vLcCialf8/sVkllsH+nbfZcS3NS8vUsUUwjq
- 1CCg==
-X-Gm-Message-State: AOJu0YxPyBaPRNh+M1nVMZkgejOYquYd6nE+jVb0im+1tnRqKBXQIO6o
- HXKsx06/kgVOfu6b5j28SX3orGEMvCHCeaxyt7vf5QGd5FxWtdFNkHa4IeKuSGRcVLoy7E/5sgc
- lNiR+BnegOypcJvUG77brY8oZu39zvvzet2Lhv9Ow
-X-Gm-Gg: AfdE7clTNrNUZwkg4B+AZbX0WLXOjbs6/URwDfQouAIC+fdBHXRDLIUsLLDYHhBEHXI
- 1THTgC+nPZPx78IeS31OsCLtNxDxHK01+TCc8VSVKs+0rFv/gVFhtdGoW2XjyJfoZ8UEwdiAUZA
- 8ta3SO+91L3s7GjI9UqzxkYUgsOU0e+Ae3zuz42hMRViFVtWImRENy5LCF4bbH58W115/rkDRFf
- FgGDKDrKiB0NPbqVazzCPI02HcpdbbTHRUKl+UwangED10ocCON6iuSLiYLweJvT7W0Alq5CAeP
- PwwkVQ==
-X-Received: by 2002:a05:6402:4149:b0:69c:769d:6eb6 with SMTP id
- 4fb4d7f45d1cf-69c769d77d7mr2627222a12.31.1783901829306; Sun, 12 Jul 2026
- 17:17:09 -0700 (PDT)
+ bh=n1Nw9EEWL2tkoi9wlz0jFs4TpR3HNj1nBSxLN2fGV/4=;
+ b=dQK2tdRvlH2b7IA9PxaovfbzNNvYFhD1/V4fcc3cXM15cw9qnb+ARXr+WHQ6iVw8p1
+ uzEJt9oggoroZ/w0HmYYM9LEUr/Z/FiS3k6SPszN4SJGbg3NRKK9TBNJclztXGMyi4bC
+ OeW/N8n7CVqdA8dKs8hlIZUAbfTb1SkseHRiieukfAhpVHzUCEyWH35PlWck4/xOEA6P
+ 5xmZX3PyKabQyg/Yt0+bjnwc7Ybz3Y8H0geoDQdD1rafJdhO5crWweQE+cm9l3B+hq3S
+ nnceIQa1jYUKkf7ZpeLEo/UZJk6BwhMzXJoE5AXfQer2f8c3ApgxkW5tVg4mOM+hpsO8
+ VQ3w==
+X-Gm-Message-State: AOJu0YzPQiQ0/wb/Yp9Hr1Knss0eFp29vs/DYAW+U57ipSDWBXe/eAt/
+ ceMujGkjchhkG/pcDPjNMb7GypIT4V7Q2zQaKsjxhJV0ucFH+8sBLQXyNo9VznqCSSp5hSrH21b
+ lX05MgWlAp8km2YtfcO28hJpVm5LQbd3g0sNLIZma
+X-Gm-Gg: AfdE7cnv5ncJuSbPnm1vWQDKCi1QV6lavw4V4FHtMEsUgzbUy8Dr2SoGhbo5jrZexwQ
+ TMrbG/RwnsdfEXELnFfBQnk0pgXdpwmEd4zvzivloBz/GMMG6ozpW49uuObXQ3GaQ7iRParZmY9
+ PDEdEj7Ut73DpKWs1riG/3M0njX7pDDzv8mBMhynSqdEXNpUmZaAqSRFlBh2sh+fQR/y6pHBaHe
+ RQDwjodsPxxzx8/hfbn7qvQw4XGCARn8Zc5EwvosicKiTUtNIJsSeVghJ1vM/Zm58ogkeY=
+X-Received: by 2002:a50:c908:0:b0:69a:b449:f8cf with SMTP id
+ 4fb4d7f45d1cf-69c24e21c25mr3700813a12.4.1783901832415; Sun, 12 Jul 2026
+ 17:17:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com>
- <20260709-submit-ce-series-v2-v3-4-5017da8c9bef@gmail.com>
-In-Reply-To: <20260709-submit-ce-series-v2-v3-4-5017da8c9bef@gmail.com>
+ <20260709-submit-ce-series-v2-v3-9-5017da8c9bef@gmail.com>
+In-Reply-To: <20260709-submit-ce-series-v2-v3-9-5017da8c9bef@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Jul 2026 18:16:53 -0600
-X-Gm-Features: AUfX_mw3Mpceh41g9J9T5ikqY2CokoN_SRCe9G8nvXSnv5nzPaJhuqBMa6Q53io
-Message-ID: <CAFLszTjfbXVWKN8RGb1vqTdpbG6QTLDErLLn39gxQxGVvFwirQ@mail.gmail.com>
-Subject: Re: [PATCH v3 04/10] spl: fit: support encrypted payloads
+Date: Sun, 12 Jul 2026 18:16:56 -0600
+X-Gm-Features: AUfX_mw_EJ5vpgRUGdkKEc0-ijnQrpG14t1f3eBFX3JufWpZ5h_5BVxtkNvmwH0
+Message-ID: <CAFLszThb4oXZNStq=fyUObH34M71b01Pz0sE835pNB_pKRiqYQ@mail.gmail.com>
+Subject: Re: [PATCH v3 09/10] crypto: hash: allow DM hash in SPL
 To: james.hilliard1@gmail.com
 Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>,
  Ion Agorria <ion@agorria.com>, 
@@ -140,28 +139,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-07-09T22:46:22, James Hilliard <james.hilliard1@gmail.com> wrote:
-> spl: fit: support encrypted payloads
+> crypto: hash: allow DM hash in SPL
 >
-> Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
-> decompression or moving it to the final load address.
+> The hash uclass is currently keyed only by CONFIG_DM_HASH, so SPL cannot
+> enable UCLASS_HASH independently. Any SPL code using hash_digest*() has to
+> rely on U-Boot proper also enabling DM_HASH, and the FIT hash path selects
+> the driver-model implementation with a non-phase-aware preprocessor check.
 >
-> SPL cannot always allocate a new output buffer while loading FIT images,
-> so use the caller-provided decrypt-to-buffer helper. External encrypted
-> images are read into scratch memory first, then decrypted in place before
-> the existing copy or decompression path consumes them. Embedded encrypted
-> images decrypt into the final load buffer, or into scratch memory when
-> decompression is still required.
->
-> Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
-> support is selected by phase. Keep that path disabled for host tools,
-> since the target-side decrypt helper depends on the U-Boot control FDT
-> and runtime crypto providers.
+> Add SPL_DM_HASH, build the hash uclass from CONFIG_$(PHASE_)DM_HASH and use
+> CONFIG_IS_ENABLED(DM_HASH) when selecting the FIT hash implementation. This
+> lets SPL FIT verification use a UCLASS_HASH provider without requiring the
+> U-Boot proper hash uclass.
 >
 > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 >
-> boot/Kconfig         |  8 ++++++
->  boot/image-fit.c     |  2 +-
->  common/spl/spl_fit.c | 75 +++++++++++++++++++++++++++++++++++++++++++++++-----
->  3 files changed, 77 insertions(+), 8 deletions(-)
+> boot/image-fit.c             | 50 +++++++++++++++++++++++---------------------
+>  drivers/crypto/hash/Kconfig  | 13 ++++++++++++
+>  drivers/crypto/hash/Makefile |  2 +-
+>  3 files changed, 40 insertions(+), 25 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
