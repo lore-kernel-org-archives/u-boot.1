@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE32CC44507
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67ED8C43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:22:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2F2984B87;
+	by phobos.denx.de (Postfix) with ESMTP id E10EF84B9A;
 	Mon, 13 Jul 2026 15:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eUm+P+IM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A4uoWX5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B2C184A4F; Mon, 13 Jul 2026 08:43:49 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id EB49084A4F; Mon, 13 Jul 2026 08:43:51 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2904F84A48
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 08:43:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C1E584A4B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 08:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-4472500e25fso1328463fac.1
- for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 23:43:47 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7e6128bd9b3so1446923a34.1
+ for <u-boot@lists.denx.de>; Sun, 12 Jul 2026 23:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783925026; x=1784529826; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1783925028; x=1784529828; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=90F51Koe7yFjcx9Q5OaPQdkwZWssxkYpZdxGtD2uZkA=;
- b=eUm+P+IMye74q4iYlSIrg90v8bgkwi4omMAY4FZuiWgovVuhB76gxtjgb+vy2j3XUW
- yODpNGwo6BEMVDu+gGxNPp9sOAaMeVp0oN/d2BIbOCku2I2X2zKIJBWjk5FYZgxqJmJq
- JmQ/vsTGD2LmoAhbQjlWckaj+bPeqJb9WiO64zVI3GNPjyjzwXhrIyEvkfuJJbnIaBFN
- aSAES87zXaV8hU9FsnWXiRXUMC+NhedCrGxl+7UeBMiAysrl4vV3iYnwZxQdQufiQpVF
- PDZPwaWWJwA4zY0uDO+fkxL1nL3cGJfqD6HdnjMUzKG2N7MZn297OPUdb+YAUZvaID2b
- SgwA==
+ bh=/lJNAL5POB5n6xDbVkf8AHgAaCOeGVrED/Phnc0IVLQ=;
+ b=A4uoWX5DZ6m3Eu8EGTN0Af5TXu6cGSpfw1dg26kX0dVduedzVAQYs72lWN4x48Qe30
+ cchfqO7IumwoMOI2MVSCvUglciO2RLsflj3zYaEb4Vwvetqfvle2hNEH13KHeUCnKQZY
+ GVnvV2rzC6N2flpwJC9TDjLEkNLGeBSMXJV4XuU0yEcWBSkhi6Ht4gp05qbKspA/BuUb
+ Gz6xwwo3pnmHjBAIzvn9virk1IrtjY7Am5FNFthk2hJPKYKGSMFHffL4bU8Vtprd53pO
+ u909l4cIXSlZ4fugPpHJaFQuqxMKzDIXvNJW7NKcgCPjueYeTMEtdUGagJD5H2+xIit9
+ HZww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783925026; x=1784529826;
+ d=1e100.net; s=20251104; t=1783925028; x=1784529828;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=90F51Koe7yFjcx9Q5OaPQdkwZWssxkYpZdxGtD2uZkA=;
- b=DdNaxCvAh4mvGP8JWa+hoFOcgTnV4r45E4xddvjg+7xdz8PlzA0QcOtGQLIIpHJT8r
- ljOmoUtkcL2S2v/hYM1GG3gPAZLoyx5e95749nkLfjlDO2HEQz2v6kBYZayU+ux122Dl
- LOLrqv0SLUHqzPzBftppGqYyo6HJP511by6KP3J+D152ofbuNjhnThzNL1604M9t5EDS
- R20E5QdgD/psIUHxrll7RCX5ZiJuyU7HlhFGLOZRWDZqQ679HxG35safDmtf9N1RuuDd
- j6S9k6TeKcncS9KcIUT7P97jGovBvLOkLvpWi1xiEyLkGhteSjSZdnKAYC+yo2bH3qAu
- CPxw==
+ bh=/lJNAL5POB5n6xDbVkf8AHgAaCOeGVrED/Phnc0IVLQ=;
+ b=fPe6RMmsCiHbE6v1pA9r7vNtY2h+dkzJqFCrLdCG2S59p2EHxatzXQ9dfx3dN9Q5xK
+ b33r+Ge4yA+Q+MD8r3tKMie5PdSZ4KUIRusGvuM5brNPF1mAOcZ67OU6Tek62goXWc5U
+ urT60AkZs83u+ZbL1lk1WSG/gXPglRwegyG0SUXbQfM7VgwYURmYaTcPDH+FaBFVAJNy
+ J2kN43Mc/LEU6iuCYGA2ZdSTx8YxnV6yl02n3CMzQ6fdhhQhhhEkDjvyk7zjURIGyBjt
+ gYHmY41c5DsIGHFvX+P1c2+HC8PXTJ00T6noVdMh254BxH8j1EOXhp0CmnMnSCAGPLQ+
+ bgzQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqyum/Frk33xV5l6pV6jeXdpMrWijPQ2p1dxn6Zq1wxifxNqaUHNITCeM8eyWKv+m4/kRx5ozo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/zeB3b0kzWfezEpWzoaE6xJT2YP+L0afrrPF5mqMPNfSvYPUz
- piYlsNvYmRiCUWsrY3xltpY8PJIV8LaDNxVh6wGPJMzflvPw17BsxbhK
-X-Gm-Gg: AfdE7ckR6om4dykV8bFGlwevvY+Vc91KgBufPzQH/x3l90l7XijohtFHlV0qt72Sdop
- isl91htapulvwfaI1ihs8b2ygNZkg3iMDoW/DKa8XrNbkslwd9IVjz62vl5Py/D6DYu6GJFxWJn
- 8cKQL8QNM+IqeTY6dS9y/sKI91QOMlX9yZKO0Buu5E5mb0//Xn6zDFlc3y/UNFj8To1jEv/4zyE
- UzjX8lT+AvqnPSRa/SoiHgH4trwUe/ePg4YYk78RA8NCaW5/Ru9XXCnUqeRevZgABiqoaLnYgdi
- 4/BGNeyhY6BxvGn8QvfwTbXVmNEpfDs6iYjNEUSTJwadStaWAeJefEksTfnmNECCInbZhmh8rHW
- ycg5Ugt3SU6VjSkrGPW9OWNWjafZKyz+Ekri20FJWK2LYMruSCu2glQWaxQcCytos60D2b/J7+d
- I0eRZ6sqD+7X6Dbpm47Yg4a/iAWP0OZWiwCwUhCcnfoPBSu3QrtrYO22fDJ8HWBGiM+2kx+vU7k
- x1bHAzMO4qF/qGBrspv5/n8AcuY3lR6ZAmRBFPj/baLtEH7If00Ej2gKFlBZWV7
-X-Received: by 2002:a05:6870:312a:b0:43f:41cc:1e34 with SMTP id
- 586e51a60fabf-451f0f4cbf9mr4559658fac.1.1783925025740; 
- Sun, 12 Jul 2026 23:43:45 -0700 (PDT)
+ AFNElJ/8ZgIu1jLbafkF3ZE+gvZvl8jWEh8a5hxbJdmX9hXxoGqaNXrLhTNPzhz81A8ZtuEDjasK93g=@lists.denx.de
+X-Gm-Message-State: AOJu0YzKaIF2Czt2/pPK/PC4+kmRYmXa6Sx1VwVDyiDnKPRLH+rT8nqO
+ 3Ami0h1jatoRd3nD9onavYl7BuWzLUWlegIar+kYGAl4Y74753bPTEOn
+X-Gm-Gg: AfdE7cnGMMipn7VR9vK2cXkgTMYk9nyWaUOGnsnzFODqXMDg+C/i6RSWcoMgS9kDQri
+ ALCGLJ1d3AlaaFh4UvWhEhQdoIFCEleyDOlpnXQAXibJ1OrL5Br0eFd13k7QfR09BkvB4anRHnW
+ QoP9+z4F/9DRNwOEWi8IdcKSlLdLeFecF58MURE/jMJSgLQTkWzWqntSldQmPpjivHPCYFt4IhA
+ ZjE4WXSIYwtabJW025c/oAZ2b/77cko8mB6aEQaeYf+0WHA+y8hmT2D87KVRNG+S22tRTmu3ukg
+ AYTAHFeqJo9db5AS3mB78r5g1CpLuwVRsmZhc72T6yQ9fpyMS7HfKODqYr/a4dT+12DGVkMMMSZ
+ qrmhao9Xmuvw0UdVLkKzHycgPuvmXPz793gsUGCsX3+dX4sUgD4PabkAgJ+8sAv0yUbvHHqX77z
+ JnBGfM//Tm7ujw6qjuSQnXbTs6kpmvOBfsKNzNRw04C0dy7jCmBmIJK6YOs3owWifZuZEmd0Hvd
+ vrZSUu8vz38wBl5hv9AUGUk29rUdBKSa0K0nDE5zZV5E9cyuYJxsthjjJWojHBE
+X-Received: by 2002:a05:6830:43a6:b0:7e9:eaec:f348 with SMTP id
+ 46e09a7af769-7ec097617e0mr5417023a34.20.1783925027792; 
+ Sun, 12 Jul 2026 23:43:47 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-451916ce98dsm12538126fac.13.2026.07.12.23.43.43
+ 586e51a60fabf-451916ce98dsm12538126fac.13.2026.07.12.23.43.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Jul 2026 23:43:45 -0700 (PDT)
+ Sun, 12 Jul 2026 23:43:47 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 13 Jul 2026 00:43:03 -0600
-Subject: [PATCH v4 06/14] crypto: aes: fix software key-size handling
+Date: Mon, 13 Jul 2026 00:43:04 -0600
+Subject: [PATCH v4 07/14] crypto: aes: add software-key provider dispatch
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-submit-ce-series-v2-v4-6-ff7edc705b8a@gmail.com>
+Message-Id: <20260713-submit-ce-series-v2-v4-7-ff7edc705b8a@gmail.com>
 References: <20260713-submit-ce-series-v2-v4-0-ff7edc705b8a@gmail.com>
 In-Reply-To: <20260713-submit-ce-series-v2-v4-0-ff7edc705b8a@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -139,331 +139,462 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AES uclass API expresses key sizes in bits, while the common software
-AES primitives take key lengths in bytes. The software provider passes the
-uclass value through unchanged, so AES-192 and AES-256 select the AES-128
-round count and key schedule shape. Key expansion also copies the bit count
-as a byte count for every key size.
+Generic callers which supply an AES key need a provider-owned slot policy,
+since hardware may reserve or preload particular key slots. Selecting only
+UCLASS_AES device zero also prevents a later provider from handling an
+operation unsupported by the first device.
 
-Validate the uclass key size, convert it to bytes once and retain that byte
-length for the software operations. Correct the primitive API documentation
-and add NIST ECB and CBC vectors for AES-128, AES-192 and AES-256.
+Add a callback through which each provider exposes a slot for
+software-provided keys. Add a CBC decrypt helper which probes providers in
+order, continuing only when a provider explicitly reports an unsupported
+operation and preserving hard probe, setup and decrypt failures.
+
+Use slot zero for the software provider and avoid Tegra's preloaded SBK
+slot. Add sandbox coverage for provider fallback and hard-error
+propagation.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v3 -> v4:
   - New patch
 ---
- drivers/crypto/aes/aes-sw.c |  43 +++++++++++++-----
- include/uboot_aes.h         |  20 ++++-----
- test/dm/aes.c               | 107 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 148 insertions(+), 22 deletions(-)
+ drivers/crypto/aes/aes-sw.c      |   6 ++
+ drivers/crypto/aes/aes-uclass.c  |  73 +++++++++++++++++++
+ drivers/crypto/tegra/tegra_aes.c |   7 ++
+ include/uboot_aes.h              |  66 +++++++++++++++--
+ test/dm/aes.c                    | 149 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 297 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-index a65200fb79b..6bad343ea7d 100644
+index 6bad343ea7d..fe06fd2d5ba 100644
 --- a/drivers/crypto/aes/aes-sw.c
 +++ b/drivers/crypto/aes/aes-sw.c
-@@ -12,13 +12,23 @@ struct sw_aes_priv {
- 	u8 key_slots[SW_KEY_SLOTS][AES256_KEY_LENGTH];
- 	u8 key_schedule[AES256_EXPAND_KEY_LENGTH];
- 	u8 selected_slot;
--	u32 selected_key_size;
-+	u8 selected_key_len;
- 	bool key_expanded;
- };
+@@ -50,6 +50,11 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
+ 	return SW_KEY_SLOTS;
+ }
  
-+static int sw_aes_key_len(u32 key_size)
++static int sw_aes_ops_get_software_key_slot(struct udevice *dev)
 +{
-+	if (key_size == AES128_KEY_LENGTH * 8 ||
-+	    key_size == AES192_KEY_LENGTH * 8 ||
-+	    key_size == AES256_KEY_LENGTH * 8)
-+		return key_size / 8;
-+
-+	return -EINVAL;
++	return 0;
 +}
 +
- static int prepare_aes(struct sw_aes_priv *priv)
- {
--	if (!priv->selected_key_size) {
-+	if (!priv->selected_key_len) {
- 		log_debug("%s: AES key size not set, setup a slot first\n", __func__);
- 		return 1;
- 	}
-@@ -28,7 +38,8 @@ static int prepare_aes(struct sw_aes_priv *priv)
- 
- 	priv->key_expanded = 1;
- 
--	aes_expand_key(priv->key_slots[priv->selected_slot], priv->selected_key_size,
-+	aes_expand_key(priv->key_slots[priv->selected_slot],
-+		       priv->selected_key_len,
- 		       priv->key_schedule);
- 
- 	return 0;
-@@ -42,12 +53,16 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
  static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
  {
  	struct sw_aes_priv *priv = dev_get_priv(dev);
-+	int key_len;
+@@ -164,6 +169,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
  
- 	if (slot >= SW_KEY_SLOTS)
--		return 1;
-+		return -EINVAL;
-+	key_len = sw_aes_key_len(key_size);
-+	if (key_len < 0)
-+		return key_len;
- 
- 	priv->selected_slot = slot;
--	priv->selected_key_size = key_size;
-+	priv->selected_key_len = key_len;
- 	priv->key_expanded = 0;
- 
- 	return 0;
-@@ -57,14 +72,18 @@ static int sw_aes_ops_set_key_for_key_slot(struct udevice *dev, u32 key_size,
- 					   u8 *key, u8 slot)
- {
- 	struct sw_aes_priv *priv = dev_get_priv(dev);
-+	int key_len;
- 
- 	if (slot >= SW_KEY_SLOTS)
--		return 1;
-+		return -EINVAL;
-+	key_len = sw_aes_key_len(key_size);
-+	if (key_len < 0)
-+		return key_len;
- 
--	memcpy(priv->key_slots[slot], key, key_size / 8);
-+	memcpy(priv->key_slots[slot], key, key_len);
- 
- 	if (priv->selected_slot == slot)
--		priv->selected_key_size = key_size;
-+		priv->selected_key_len = key_len;
- 
- 	priv->key_expanded = 0;
- 
-@@ -82,7 +101,7 @@ static int sw_aes_ops_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst,
- 		return ret;
- 
- 	while (num_aes_blocks > 0) {
--		aes_encrypt(priv->selected_key_size, src, priv->key_schedule, dst);
-+		aes_encrypt(priv->selected_key_len, src, priv->key_schedule, dst);
- 		num_aes_blocks -= 1;
- 		src += AES_BLOCK_LENGTH;
- 		dst += AES_BLOCK_LENGTH;
-@@ -102,7 +121,7 @@ static int sw_aes_ops_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst,
- 		return ret;
- 
- 	while (num_aes_blocks > 0) {
--		aes_decrypt(priv->selected_key_size, src, priv->key_schedule, dst);
-+		aes_decrypt(priv->selected_key_len, src, priv->key_schedule, dst);
- 		num_aes_blocks -= 1;
- 		src += AES_BLOCK_LENGTH;
- 		dst += AES_BLOCK_LENGTH;
-@@ -121,7 +140,7 @@ static int sw_aes_ops_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src,
- 	if (ret)
- 		return ret;
- 
--	aes_cbc_encrypt_blocks(priv->selected_key_size, priv->key_schedule, iv,
-+	aes_cbc_encrypt_blocks(priv->selected_key_len, priv->key_schedule, iv,
- 			       src, dst, num_aes_blocks);
- 
- 	return 0;
-@@ -137,7 +156,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 	if (ret)
- 		return ret;
- 
--	aes_cbc_decrypt_blocks(priv->selected_key_size, priv->key_schedule,
-+	aes_cbc_decrypt_blocks(priv->selected_key_len, priv->key_schedule,
- 			       iv, src, dst, num_aes_blocks);
- 
- 	return 0;
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index 592b7dbee43..65a9b382843 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -47,30 +47,30 @@ enum {
-  * operations.
-  *
-  * @key		Key
-- * @key_size	Size of the key (in bits)
-+ * @key_len	Size of the key in bytes
-  * @expkey	Buffer to place expanded key, AES_EXPAND_KEY_LENGTH
-  */
--void aes_expand_key(u8 *key, u32 key_size, u8 *expkey);
-+void aes_expand_key(u8 *key, u32 key_len, u8 *expkey);
- 
- /**
-  * aes_encrypt() - Encrypt single block of data with AES 128
-  *
-- * @key_size	Size of the aes key (in bits)
-+ * @key_len	Size of the AES key in bytes
-  * @in		Input data
-  * @expkey	Expanded key to use for encryption (from aes_expand_key())
-  * @out		Output data
-  */
--void aes_encrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
-+void aes_encrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
- 
- /**
-  * aes_decrypt() - Decrypt single block of data with AES 128
-  *
-- * @key_size	Size of the aes key (in bits)
-+ * @key_len	Size of the AES key in bytes
-  * @in		Input data
-  * @expkey	Expanded key to use for decryption (from aes_expand_key())
-  * @out		Output data
-  */
--void aes_decrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
-+void aes_decrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
- 
- /**
-  * Apply chain data to the destination using EOR
-@@ -86,27 +86,27 @@ void aes_apply_cbc_chain_data(u8 *cbc_chain_data, u8 *src, u8 *dst);
- /**
-  * aes_cbc_encrypt_blocks() - Encrypt multiple blocks of data with AES CBC.
-  *
-- * @key_size		Size of the aes key (in bits)
-+ * @key_len		Size of the AES key in bytes
-  * @key_exp		Expanded key to use
-  * @iv			Initialization vector
-  * @src			Source data to encrypt
-  * @dst			Destination buffer
-  * @num_aes_blocks	Number of AES blocks to encrypt
-  */
--void aes_cbc_encrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
-+void aes_cbc_encrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- 			    u32 num_aes_blocks);
- 
- /**
-  * Decrypt multiple blocks of data with AES CBC.
-  *
-- * @key_size		Size of the aes key (in bits)
-+ * @key_len		Size of the AES key in bytes
-  * @key_exp		Expanded key to use
-  * @iv			Initialization vector
-  * @src			Source data to decrypt
-  * @dst			Destination buffer
-  * @num_aes_blocks	Number of AES blocks to decrypt
-  */
--void aes_cbc_decrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
-+void aes_cbc_decrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- 			    u32 num_aes_blocks);
- 
- /* An AES block filled with zeros */
-diff --git a/test/dm/aes.c b/test/dm/aes.c
-index 702e4db2b35..9c85fb1dac9 100644
---- a/test/dm/aes.c
-+++ b/test/dm/aes.c
-@@ -55,3 +55,110 @@ static int dm_test_aes(struct unit_test_state *uts)
+ static const struct aes_ops aes_ops_sw = {
+ 	.available_key_slots = sw_aes_ops_available_key_slots,
++	.get_software_key_slot = sw_aes_ops_get_software_key_slot,
+ 	.select_key_slot = sw_aes_ops_select_key_slot,
+ 	.set_key_for_key_slot = sw_aes_ops_set_key_for_key_slot,
+ 	.aes_ecb_encrypt = sw_aes_ops_aes_ecb_encrypt,
+diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
+index 5bdd3d736c4..ec1ea075367 100644
+--- a/drivers/crypto/aes/aes-uclass.c
++++ b/drivers/crypto/aes/aes-uclass.c
+@@ -23,6 +23,21 @@ int dm_aes_get_available_key_slots(struct udevice *dev)
+ 	return ops->available_key_slots(dev);
  }
  
- DM_TEST(dm_test_aes, UTF_SCAN_FDT);
++int dm_aes_get_software_key_slot(struct udevice *dev)
++{
++	const struct aes_ops *ops;
 +
-+struct aes_test_vector {
-+	u32 key_size;
-+	u8 key[AES256_KEY_LENGTH];
-+	u8 ecb[AES_BLOCK_LENGTH];
-+	u8 cbc[AES_BLOCK_LENGTH];
-+};
++	if (!dev)
++		return -ENODEV;
 +
-+static const u8 aes_test_plaintext[AES_BLOCK_LENGTH] = {
-+	0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96,
-+	0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a,
-+};
++	ops = aes_get_ops(dev);
 +
-+static const u8 aes_test_iv[AES_BLOCK_LENGTH] = {
-+	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+};
++	if (!ops->get_software_key_slot)
++		return -ENOSYS;
 +
-+static const struct aes_test_vector aes_test_vectors[] = {
-+	{
-+		.key_size = 128,
-+		.key = {
-+			0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
-+			0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c,
-+		},
-+		.ecb = {
-+			0x3a, 0xd7, 0x7b, 0xb4, 0x0d, 0x7a, 0x36, 0x60,
-+			0xa8, 0x9e, 0xca, 0xf3, 0x24, 0x66, 0xef, 0x97,
-+		},
-+		.cbc = {
-+			0x76, 0x49, 0xab, 0xac, 0x81, 0x19, 0xb2, 0x46,
-+			0xce, 0xe9, 0x8e, 0x9b, 0x12, 0xe9, 0x19, 0x7d,
-+		},
-+	}, {
-+		.key_size = 192,
-+		.key = {
-+			0x8e, 0x73, 0xb0, 0xf7, 0xda, 0x0e, 0x64, 0x52,
-+			0xc8, 0x10, 0xf3, 0x2b, 0x80, 0x90, 0x79, 0xe5,
-+			0x62, 0xf8, 0xea, 0xd2, 0x52, 0x2c, 0x6b, 0x7b,
-+		},
-+		.ecb = {
-+			0xbd, 0x33, 0x4f, 0x1d, 0x6e, 0x45, 0xf2, 0x5f,
-+			0xf7, 0x12, 0xa2, 0x14, 0x57, 0x1f, 0xa5, 0xcc,
-+		},
-+		.cbc = {
-+			0x4f, 0x02, 0x1d, 0xb2, 0x43, 0xbc, 0x63, 0x3d,
-+			0x71, 0x78, 0x18, 0x3a, 0x9f, 0xa0, 0x71, 0xe8,
-+		},
-+	}, {
-+		.key_size = 256,
-+		.key = {
-+			0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe,
-+			0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
-+			0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7,
-+			0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4,
-+		},
-+		.ecb = {
-+			0xf3, 0xee, 0xd1, 0xbd, 0xb5, 0xd2, 0xa0, 0x3c,
-+			0x06, 0x4b, 0x5a, 0x7e, 0x3d, 0xb1, 0x81, 0xf8,
-+		},
-+		.cbc = {
-+			0xf5, 0x8c, 0x4c, 0x04, 0xd6, 0xe5, 0xf1, 0xba,
-+			0x77, 0x9e, 0xab, 0xfb, 0x5f, 0x7b, 0xfb, 0xd6,
-+		},
-+	},
-+};
++	return ops->get_software_key_slot(dev);
++}
 +
-+static int dm_test_aes_key_sizes(struct unit_test_state *uts)
+ int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	const struct aes_ops *ops;
+@@ -113,6 +128,64 @@ int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
+ 	return ops->aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
+ }
+ 
++static bool aes_op_unsupported(int ret)
++{
++	return ret == -ENOSYS || ret == -EOPNOTSUPP;
++}
++
++int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
++				u8 *dst, u32 num_aes_blocks)
 +{
 +	struct udevice *dev;
-+	u8 key[AES256_KEY_LENGTH];
-+	u8 input[AES_BLOCK_LENGTH];
-+	u8 iv[AES_BLOCK_LENGTH];
-+	u8 buf[AES_BLOCK_LENGTH];
-+	int i, ret;
++	int first_probe_err = 0;
++	bool found = false;
++	int ret;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
++	for (ret = uclass_first_device_check(UCLASS_AES, &dev); dev;
++	     ret = uclass_next_device_check(&dev)) {
++		u8 slot;
 +
-+	for (i = 0; i < ARRAY_SIZE(aes_test_vectors); i++) {
-+		const struct aes_test_vector *vector = &aes_test_vectors[i];
++		found = true;
++		if (ret) {
++			if (!first_probe_err)
++				first_probe_err = ret;
++			continue;
++		}
 +
-+		memcpy(key, vector->key, vector->key_size / 8);
-+		memcpy(input, aes_test_plaintext, sizeof(input));
-+		memcpy(iv, aes_test_iv, sizeof(iv));
-+		ut_assertok(dm_aes_select_key_slot(dev, vector->key_size, 0));
-+		ret = dm_aes_set_key_for_key_slot(dev, vector->key_size, key, 0);
-+		ut_assertok(ret);
++		ret = dm_aes_get_software_key_slot(dev);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret < 0)
++			return ret;
++		if (ret > U8_MAX)
++			return -ERANGE;
++		slot = ret;
 +
-+		ut_assertok(dm_aes_ecb_encrypt(dev, input, buf, 1));
-+		ut_asserteq_mem(vector->ecb, buf, sizeof(buf));
-+		ut_assertok(dm_aes_ecb_decrypt(dev, buf, buf, 1));
-+		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++		ret = dm_aes_set_key_for_key_slot(dev, key_size, key, slot);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret)
++			return ret;
 +
-+		ut_assertok(dm_aes_cbc_encrypt(dev, iv, input, buf, 1));
-+		ut_asserteq_mem(vector->cbc, buf, sizeof(buf));
-+		ut_assertok(dm_aes_cbc_decrypt(dev, iv, buf, buf, 1));
-+		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++		ret = dm_aes_select_key_slot(dev, key_size, slot);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret)
++			return ret;
++
++		ret = dm_aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
++		if (!ret)
++			return 0;
++		if (!aes_op_unsupported(ret))
++			return ret;
 +	}
 +
-+	ut_asserteq(-EINVAL, dm_aes_select_key_slot(dev, 64, 0));
-+	ret = dm_aes_set_key_for_key_slot(dev, 64, key, 0);
-+	ut_asserteq(-EINVAL, ret);
++	if (first_probe_err)
++		return first_probe_err;
++
++	return found ? -EOPNOTSUPP : -ENODEV;
++}
++
+ static void left_shift_vector(u8 *in, u8 *out, int size)
+ {
+ 	int carry = 0;
+diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegra_aes.c
+index 55a4cec525b..348115ac5a7 100644
+--- a/drivers/crypto/tegra/tegra_aes.c
++++ b/drivers/crypto/tegra/tegra_aes.c
+@@ -321,6 +321,12 @@ static int tegra_aes_ops_available_key_slots(struct udevice *dev)
+ 	return 4; /* 4 slots in Tegra20 and Tegra30 */
+ }
+ 
++static int tegra_aes_ops_get_software_key_slot(struct udevice *dev)
++{
++	/* Avoid SBK slot 0, which may hold a preloaded key. */
++	return TEGRA_AES_SLOT_SBK + 1;
++}
++
+ static int tegra_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	struct tegra_aes_priv *priv = dev_get_priv(dev);
+@@ -565,6 +571,7 @@ static int tegra_aes_probe(struct udevice *dev)
+ 
+ static const struct aes_ops tegra_aes_ops = {
+ 	.available_key_slots = tegra_aes_ops_available_key_slots,
++	.get_software_key_slot = tegra_aes_ops_get_software_key_slot,
+ 	.select_key_slot = tegra_aes_ops_select_key_slot,
+ 	.set_key_for_key_slot = tegra_aes_ops_set_key_for_key_slot,
+ 	.aes_ecb_encrypt = tegra_aes_ops_aes_ecb_encrypt,
+diff --git a/include/uboot_aes.h b/include/uboot_aes.h
+index 65a9b382843..a2c35aa30ce 100644
+--- a/include/uboot_aes.h
++++ b/include/uboot_aes.h
+@@ -128,11 +128,17 @@ struct udevice;
+  * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
+  * thus in those cases the set_key_for_key_slot() may be skipped.
+  *
+- * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
+- * with 128bits key at slot 0 would be as follow:
++ * Generic callers which load a software-provided key should first ask the
++ * driver for a suitable software key slot. This lets hardware drivers avoid
++ * reserved or preloaded slots while keeping the slot policy local to the
++ * provider.
+  *
+- * set_key_for_key_slot(DEV, 128, KEY, 0);
+- * select_key_slot(DEV, 128, 0);
++ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash
++ * example with a 128-bit software-provided key would be as follows:
++ *
++ * slot = get_software_key_slot(DEV);
++ * set_key_for_key_slot(DEV, 128, KEY, slot);
++ * select_key_slot(DEV, 128, slot);
+  * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
+  * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
+  * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
+@@ -146,6 +152,16 @@ struct aes_ops {
+ 	 */
+ 	int (*available_key_slots)(struct udevice *dev);
+ 
++	/**
++	 * get_software_key_slot() - Get a slot for software-provided keys
++	 *
++	 * @dev			The AES udevice
++	 * @return		Key slot to use for a software-provided key,
++	 *			0 or positive on success, negative value on
++	 *			failure
++	 */
++	int (*get_software_key_slot)(struct udevice *dev);
++
+ 	/**
+ 	 * select_key_slot() - Selects the AES key slot to use for following operations
+ 	 *
+@@ -210,6 +226,7 @@ struct aes_ops {
+ 	 * @iv			Initialization vector
+ 	 * @src			Source data of length 'num_aes_blocks' blocks
+ 	 * @dst			Destination data of length 'num_aes_blocks' blocks
++	 *			Must support dst == src for in-place decrypt
+ 	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
+ 	 * @return		0 on success, negative value on failure
+ 	 */
+@@ -229,6 +246,15 @@ struct aes_ops {
+  */
+ int dm_aes_get_available_key_slots(struct udevice *dev);
+ 
++/**
++ * dm_aes_get_software_key_slot - Get a slot for software-provided keys
++ *
++ * @dev			The AES udevice
++ * Return:		Key slot to use for a software-provided key,
++ *			0 or positive on success, -ve on failure
++ */
++int dm_aes_get_software_key_slot(struct udevice *dev);
++
+ /**
+  * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
+  *
+@@ -291,11 +317,31 @@ int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
+  * @iv			Initialization vector
+  * @src			Source data of length 'num_aes_blocks' blocks
+  * @dst			Destination data of length 'num_aes_blocks' blocks
++ *			Must support dst == src for in-place decrypt
+  * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
+  * Return:		0 on success, negative value on failure
+  */
+ int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks);
+ 
++/**
++ * dm_aes_cbc_decrypt_with_key() - Decrypt using a software-provided key
++ *
++ * Probe AES providers in order and use the first one which accepts the key
++ * and CBC operation. Hard failures from an accepting provider are returned
++ * without trying another provider.
++ *
++ * @key_size: AES key size in bits
++ * @key: AES key
++ * @iv: Initialization vector
++ * @src: Ciphertext input
++ * @dst: Plaintext output, which may be the same buffer as @src
++ * @num_aes_blocks: Number of AES blocks to decrypt
++ * Return: 0 on success, -ENODEV if there are no providers, -EOPNOTSUPP if no
++ * provider supports the operation, or another error from a provider
++ */
++int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
++				u8 *dst, u32 num_aes_blocks);
++
+ /**
+  * dm_aes_cmac - Hashes the input data with AES-CMAC, putting the result into dst.
+  * The key slot must be selected already.
+@@ -316,6 +362,11 @@ static inline int dm_aes_get_available_key_slots(struct udevice *dev)
+ 	return -ENOSYS;
+ }
+ 
++static inline int dm_aes_get_software_key_slot(struct udevice *dev)
++{
++	return -ENOSYS;
++}
++
+ static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	return -ENOSYS;
+@@ -351,6 +402,13 @@ static inline int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
+ 	return -ENOSYS;
+ }
+ 
++static inline int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv,
++					      u8 *src, u8 *dst,
++					      u32 num_aes_blocks)
++{
++	return -ENOSYS;
++}
++
+ static inline int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
+ {
+ 	return -ENOSYS;
+diff --git a/test/dm/aes.c b/test/dm/aes.c
+index 9c85fb1dac9..9f4ce42ab2a 100644
+--- a/test/dm/aes.c
++++ b/test/dm/aes.c
+@@ -6,7 +6,10 @@
+  */
+ 
+ #include <dm.h>
++#include <dm/device-internal.h>
++#include <dm/root.h>
+ #include <dm/test.h>
++#include <dm/uclass-internal.h>
+ #include <uboot_aes.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+@@ -162,3 +165,149 @@ static int dm_test_aes_key_sizes(struct unit_test_state *uts)
+ }
+ 
+ DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
++
++static int unsupported_calls;
++static int success_calls;
++static int hard_error_calls;
++
++static int aes_test_get_slot(struct udevice *dev)
++{
++	return 0;
++}
++
++static int aes_test_set_key(struct udevice *dev, u32 key_size, u8 *key,
++			    u8 slot)
++{
++	return 0;
++}
++
++static int aes_test_select_key(struct udevice *dev, u32 key_size, u8 slot)
++{
++	return 0;
++}
++
++static int aes_test_unsupported_slot(struct udevice *dev)
++{
++	unsupported_calls++;
++
++	return -ENOSYS;
++}
++
++static int aes_test_success_decrypt(struct udevice *dev, u8 *iv, u8 *src,
++				    u8 *dst, u32 num_aes_blocks)
++{
++	success_calls++;
++	memcpy(dst, src, num_aes_blocks * AES_BLOCK_LENGTH);
 +
 +	return 0;
 +}
 +
-+DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
++static int aes_test_hard_error_decrypt(struct udevice *dev, u8 *iv, u8 *src,
++				       u8 *dst, u32 num_aes_blocks)
++{
++	hard_error_calls++;
++
++	return -EINVAL;
++}
++
++static const struct aes_ops aes_test_unsupported_ops = {
++	.get_software_key_slot = aes_test_unsupported_slot,
++};
++
++static const struct aes_ops aes_test_success_ops = {
++	.get_software_key_slot = aes_test_get_slot,
++	.set_key_for_key_slot = aes_test_set_key,
++	.select_key_slot = aes_test_select_key,
++	.aes_cbc_decrypt = aes_test_success_decrypt,
++};
++
++static const struct aes_ops aes_test_hard_error_ops = {
++	.get_software_key_slot = aes_test_get_slot,
++	.set_key_for_key_slot = aes_test_set_key,
++	.select_key_slot = aes_test_select_key,
++	.aes_cbc_decrypt = aes_test_hard_error_decrypt,
++};
++
++U_BOOT_DRIVER(aes_test_unsupported_drv) = {
++	.name = "aes_test_unsupported",
++	.id = UCLASS_AES,
++	.ops = &aes_test_unsupported_ops,
++};
++
++U_BOOT_DRIVER(aes_test_success_drv) = {
++	.name = "aes_test_success",
++	.id = UCLASS_AES,
++	.ops = &aes_test_success_ops,
++};
++
++U_BOOT_DRIVER(aes_test_hard_error_drv) = {
++	.name = "aes_test_hard_error",
++	.id = UCLASS_AES,
++	.ops = &aes_test_hard_error_ops,
++};
++
++static int aes_test_unbind_all(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	for (;;) {
++		ret = uclass_find_first_device(UCLASS_AES, &dev);
++		if (ret || !dev)
++			return ret;
++		if (device_active(dev)) {
++			ret = device_remove(dev, DM_REMOVE_NORMAL);
++			if (ret)
++				return ret;
++		}
++		ret = device_unbind(dev);
++		if (ret)
++			return ret;
++	}
++}
++
++static int aes_test_bind(const struct driver *drv, const char *name)
++{
++	struct udevice *dev;
++
++	return device_bind(dm_root(), drv, name, 0, ofnode_null(), &dev);
++}
++
++static int dm_test_aes_provider_selection(struct unit_test_state *uts)
++{
++	u8 key[AES128_KEY_LENGTH] = { };
++	u8 iv[AES_BLOCK_LENGTH] = { };
++	u8 src[AES_BLOCK_LENGTH] = { 0x5a };
++	u8 dst[AES_BLOCK_LENGTH] = { };
++	int ret;
++
++	ut_assertok(aes_test_unbind_all());
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_unsupported_drv),
++				  "aes-unsupported"));
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
++				  "aes-success"));
++
++	unsupported_calls = 0;
++	success_calls = 0;
++	ut_assertok(dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1));
++	ut_asserteq(1, unsupported_calls);
++	ut_asserteq(1, success_calls);
++	ut_asserteq_mem(src, dst, sizeof(src));
++
++	ut_assertok(aes_test_unbind_all());
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_hard_error_drv),
++				  "aes-hard-error"));
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
++				  "aes-success"));
++
++	hard_error_calls = 0;
++	success_calls = 0;
++	ret = dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1);
++	ut_asserteq(-EINVAL, ret);
++	ut_asserteq(1, hard_error_calls);
++	ut_asserteq(0, success_calls);
++
++	return 0;
++}
++
++DM_TEST(dm_test_aes_provider_selection, UTF_SCAN_FDT);
 
 -- 
 2.53.0
