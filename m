@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F76C43458
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D4BC43458
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jul 2026 13:08:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A92E384B39;
-	Mon, 13 Jul 2026 15:07:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0623284B42;
+	Mon, 13 Jul 2026 15:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m2cSWtdr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ym05ul8K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC79F84B3A; Mon, 13 Jul 2026 15:07:01 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8E4EE84B43; Mon, 13 Jul 2026 15:08:07 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2B5C84B27
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:06:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8FD384B3B
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 15:08:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-c15e0c3f395so369354766b.3
- for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:06:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783948019; cv=none;
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-699fbcd23ccso4371302a12.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jul 2026 06:08:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783948085; cv=none;
  d=google.com; s=arc-20260327;
- b=Y4sisOESFF5qhGbg49aiWDH9723IkoewRpAlk+D3hlB6HRAAEmf47r47YEh2WCwMNM
- Hhrlni9wjw/7sbSrO39Wtc+nqpu7wRtF8mz2Shu7RVs3zNEIrTfuFUgmLOFY34vYA7rg
- 3Xp9TP1VkhgMpFelyly6FHuxY4YRF7w9klQHoHBbtZWwKWKu47EcdPtzzt+agAswK3tK
- g2zNrX7vdPeL5UQyLinWtouyqJzS89lwQHcFVmyJ1563H1e3yV+kbBu5hIi0CqUfu8fu
- +hdJci3D8RaQFFnzLrxd7cM43FjNeUUR4V2TV7UOBiBfyZ5UvuWMlYDUqt/yHM6TkHKv
- Llqw==
+ b=dj0d8a0y9vpaSWWpiJH1CKoPQq/XeZM9w3J5BCteo2mn8FQbahmkhPeqgm6xGO3MRZ
+ MCN06N6v3YWIQRq4vx5EKEfS1F/vCTA9ZNJFTYU80ZA/HF5O1Topw8gPByoqlHx2fute
+ zfIGH0Tfr4k+EXCb7nosraUN/CgXUEeiDdhP13f+bULsv2Va18YnF0Xbw6tsfFhmae/m
+ iRMntw4P68NgXGIPk+9BvPYz/xhhh/mgFBiChd8rjsInxf4u4KuIjL52sSebg5of78/g
+ RdeB/vtfTXMcS9X/ZwQPQzAEVDUaR4XyCWcuHnG5d9GpuMTr0YSa5sz1YFNXjz/4bqq5
+ qWYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vT2Bo5HiF4S9K8aIjBs7Cid5QBmjlH0DLF59wfNC/Io=;
- fh=mkEYNmuFNxJfhqS3FPHZk+x7OcStFw/zDeQdbqQeFVU=;
- b=WzphwKsV+qZM2/WlMCae7Hn4sZpUt4Om+ke7KoUqEiMJn2sEHxG48+/4gIFFw0qvn9
- gN0xC+Udy700U5Qr2dUq+CA/y/eIgsdUW/RXJ/T+tWEj6jF5CIb9eF3O5kUzts7lWlMK
- 69+SySAy4D7e6Xi2dxyeVDW6w8U9OUTX/kz29P6UqSjrhz4MOTXG6dIAcCFqEtL6uoAj
- qIS2VINuo/UsHKNDJQG2y/Ss+87gX/CRhrssGBc+XSN3O2yaXO4JiI9+Qk2lbLSY3V9w
- FOArqhsUy/3Q8lsZv1B/gkug72M0nVPTZp1ZCohfqPBZXn95v6N4ei7EvyvHPp4IBXYM
- Ko3w==; darn=lists.denx.de
+ bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
+ fh=joWFw7uQNAewTc9d3BnbzDW7eparBJAilOzfYIz9J54=;
+ b=qyW5U0N9Ig84nm7lVR8hGbt2+kUMf+5qET7hcrDydWDBdh7YoGuDq04E6kZ5YWXEXo
+ uGUX/WJJh4f83Q9NjnK4tQIoj2YvMKyfRlp29dF4oeZg2M3tnvNOnhm0w1M+I5hOFQji
+ xXl7nNr/UZroyD6jiMhd7oEOcihgtBjUROrfrspFhWPchH9piam1qtu/I9c6rabKRprq
+ gSkU7xzklq/sYnJFuc4yAEU7IcVaawyjrWJGtrMgx82+6ufrg1kD8D4g860lSEBIQzbO
+ +jFoJ3uiCxfu0pOHBLYQ1MHhtX0Ynu6hlqiaUB94t4Ng7Ubmp355FDyWG2QVz1qNlWDM
+ TrXA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1783948019; x=1784552819; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1783948085; x=1784552885; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=vT2Bo5HiF4S9K8aIjBs7Cid5QBmjlH0DLF59wfNC/Io=;
- b=m2cSWtdrE/LV4mvkXq8nB3ezLo+Y4rcKftBK47sY5cOhdtX+M9iAfM6PUpNWWTBVCe
- cvioZiePvd/52ffSt/joFAO56mV7mYyPzD5vCKewuStbfOZMCGQhC2J+hgzI8zBv6I/N
- OZLpjfQd8Nd0YEACZSpuETRrJvBHMJ4peE1vU=
+ :content-type; bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
+ b=Ym05ul8KEWrZ+9mYp6/hPkEn3zrPu5l3/goXLqKxpNMXxrvdnp5zjJLEhwztJzKsFx
+ Na19AdaRhe28powrm7V4UrrSXGmScIe8KQq7tyuTT8uHzeW1MRJ73Q8CaLZQBNzkloiQ
+ BnwazabQWzCKUjgAiL+mCT3/D3ST35oaIno7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783948019; x=1784552819;
+ d=1e100.net; s=20251104; t=1783948085; x=1784552885;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=vT2Bo5HiF4S9K8aIjBs7Cid5QBmjlH0DLF59wfNC/Io=;
- b=PrhoYl+DEu1M49Rai2RUQgCqigF57MseSrnNoIUs1i2rGCmkjsIVIspS4gor+ru6Zb
- Dbuqs2ADGSkXc/4jrfbcOmZY5/ivxUE+kJugFLJ/SIFGqmIF1P0Q4KT9tBZgCPuYC0mB
- Q8cYSSxjtqp+b5g7pMAllq838FyOkZYGT79yFsKkp3h4IxG35MvnH92O7oSncGGxCHap
- 6mqTy7HWYHQt+vMDhkXqoBJsQR+8RxaCch0FXUnufWSpedLydqEqgOXvL5MynWSPrtS0
- s3L3u57qyruA2/6tPWlixOpD6LP345qj4+ocrVk9mKJOI3UEv1NZvusZUbbxIUJgMZgJ
- J2Yg==
-X-Gm-Message-State: AOJu0Yxrlh1v8+a81P3SesCEOPBsaLegL2gRz6eqkfHXrO0xFpS+uoNG
- wAhsmb/hfk6d+ufM6oMBfX1WjcSxWnTcKDrY+DKY29odFpF6VSufpp5VjtOsQIdTSiIssvMEIj5
- fZuQi0dceHUu1cJFdRAVcegDumIIXKAmk4B8nEInPJgQwggGxfL0B/g==
-X-Gm-Gg: AfdE7cl8eavbvR3s+09lY8wB/IQQURsq2nekdiqjkKAzZgYmVKF7PRlzPho5LZpLcPh
- XdSHv4yEnRtLWzBZbOaX/QJft2LAdFM6TyjqdOuhlUNPhez1CIMs4iNvXmwUw8alf/eVa1oaRe2
- L8lzdYtuPqLSwJuO0UJ4chd4RePMJE4ueEkkqD2+t/eMD01tjfvFupR0iS7zlk4C5WHhtmRz3cx
- xu19VybkbJqe0q3PWzBcffYpj1VEk0kAPYx1QiPIDRMjC4AfGp4rXZd4HcVsswznLYcV+c=
-X-Received: by 2002:a17:906:af7c:b0:c12:8c41:3bf5 with SMTP id
- a640c23a62f3a-c161f3e0f1bmr266142766b.59.1783948019428; Mon, 13 Jul 2026
- 06:06:59 -0700 (PDT)
+ bh=w9VEs4O3BfcBOAQDavzKhhkYrnCywazO97VMV2SXdJI=;
+ b=U+F29dHN1Y9ww69H1SZxr/kBECOynSAqWFxkiQ5b0Fn3xX3ORIo1jEyc+7l4HQ8jTD
+ w1Xhd2Y3E3Th4qgSzXVTZQDFaZVSu8XwKCg1rjSLgL4YnRo6IwKtqPFs5Y3OyCIm3omD
+ 8/QqD7ZXD0pwKtTdKxgfrlgDLJRBZO/7cCvWRJtuYhViN7HdSoEBf7d4V/RnBTjLVUC2
+ ZOpUo5Ial/KscArX4ZuM7muC2GGfUy/+0v9gI8PR3IePqAJ/3c3SQ3HInqef2zoImt5S
+ k2qTAQIyzfjh54mgYw89CWp1AexCRtqCUgIXhZ5cPm+ZT9AR8AZGiH1rdY62AcNmX+OV
+ OeCg==
+X-Gm-Message-State: AOJu0YxJm9S/UyVod3+NjwCevlD17h4swDH7FaqocNgOdhFnPmAHvdDW
+ Q/XbZpk9WV0Gz54Csd3y0COLJSZaV9vzwB/JIZyV7D/MQb/JWBw4a0+BbS2jum0333Pd9eSG+G7
+ cj2SsW7mpPqFrJr4EEC2w7Gv7T/tTKtxV8/hbm6V2
+X-Gm-Gg: AfdE7cmgPy0xzK9KiFhj2DI1T4XoozFdyaoFhrHEGUYKYylFBMcZB3P5ttNhcNfLnrD
+ Rmu/5abLaTOluDJ0FYQJ44HaNbDjaTNqPC+sCWk8MQojz72L+a44VYJ6szs3857SBnwFOv5fEf0
+ frznr/AJl+JBetjXI6YkdBbpTGX0mgFIf345M36BPYW8JlZ6LA7t8y17e4WedgoSVMDF2iE7z8X
+ IyV35HZUg4S7JEn7ozpc/PMu1vc1KGuqUSdBVq8wsQ5h+ziQZ/0/HM8wCBi1nkR8op1YZI=
+X-Received: by 2002:a05:6402:2808:b0:696:8f45:4ae7 with SMTP id
+ 4fb4d7f45d1cf-69c5ef9beb1mr4132754a12.13.1783948085166; Mon, 13 Jul 2026
+ 06:08:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260629080241.36311-1-ludwig.nussel@siemens.com>
- <20260629080241.36311-2-ludwig.nussel@siemens.com>
-In-Reply-To: <20260629080241.36311-2-ludwig.nussel@siemens.com>
+ <20260629100104.v4.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
+In-Reply-To: <20260629100104.v4.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jul 2026 07:06:46 -0600
-X-Gm-Features: AUfX_mz6w26Yz6q29VqWqWgMNXbAoouVOS69xCoeM3bGbl9NXJ1zFk6rvuLPdhE
-Message-ID: <CAFLszTgw=nk9fJnkt+4JiMRky5nBZ=MqmqZjWMP4_JhnMWTCGg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/6] tpm: unify the tcg2 eventlog structures
+Date: Mon, 13 Jul 2026 07:07:53 -0600
+X-Gm-Features: AUfX_mwe9CYc7KBmx7CQSCi2BeF1XEmH4bYgQobSLjUWIykkaeySPUKrDG7clLo
+Message-ID: <CAFLszThb02vyHNBEbdPEgtdvyJwW_io=J9Ag1KaFHDk9Dd=S=Q@mail.gmail.com>
+Subject: Re: [PATCH v4 2/6] tpm: print all PCRs from pcr_read
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,69 +110,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Ludwig,
 
 On 2026-06-29T08:00:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> tpm: unify the tcg2 eventlog structures
+> tpm: print all PCRs from pcr_read
 >
-> We currently have two structures describing the internal TCG EventLog
-> buffers we keep in memory.
-> The first one is 'struct event_log_buffer' and it carries all the
-> necessary members to keep track of the information needed to implement
-> the EFI TCG protocol.
+> Output is now more similar to the Linux userspace tool 'tpm2_pcrread'.
 >
-> The second one is 'struct tcg2_event_log' which was introduced later,
-> when some functions from the TCG protocol moved to U-Boots core, and is
-> is used to measure binaries when booting with bootm, booti etc.
+> The old semantics that require specifying one PCR number are
+> retained. In addition with no arguments the command now prints
+> contents of all PCR registers.
 >
-> The split led to some duplication -- e.g tcg2_measure_data() and
-> measure_event() functions are very similar with the exception of
-> extending the EventLog.
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> Since the latter is a subset of the former, let's move all the members
-> to a single struct and use that instead.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> [...]
->
-> include/tpm_tcg2.h        | 15 ++++++++++++
->  lib/efi_loader/efi_tcg2.c | 60 +++++++++++++++--------------------------------
->  2 files changed, 34 insertions(+), 41 deletions(-)
+> cmd/tpm-v2.c               | 69 +++++++++++++++++++++++++++++++++-------------
+>  test/py/tests/test_tpm2.py |  9 ++----
+>  2 files changed, 53 insertions(+), 25 deletions(-)
 
-> diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-> @@ -163,6 +163,15 @@ struct tcg_efi_spec_id_event {
->   * @log_size:                Log space available
->   * @found:           Boolean indicating if an existing log was discovered
->   * @allocated:               Boolean indicating that the log was allocated by u-boot
-> + * @final_buffer:    finalevent config table buffer. Only used for EFI
-> + * @final_position:  current position of 'final_buffer'. Only used for EFI
-> + * @last_event_size:         Size of the last event. Only used for EFI
-> + * @get_event_called:        true if GetEventLog has been invoked at least once.
-> + *                   Only used for EFI
-> + * @ebs_called:              true if ExitBootServices has been invoked.
-> + *                   Only used for EFI
-> + * @truncated:               true if the 'buffer' is truncated.
-> + *                   Only used for EFI
+> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+> @@ -168,25 +170,51 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+> +             if (rc == 0) {
+> +                     printf('0x');
+> +                     for (int i = 0; i < algo_len; ++i)
+> +                             printf('%02X', data[i]);
+> +                     printf(" (%u known updates)\n", updates);
+> +             } else {
+> +                     log_err("PCR #%u read failed: %d\n", index, rc);
+> +                     ret = report_return_code(rc);
+> +             }
 
-A few small doc nits:
-
-- finalevent should be final event
-- @truncated refers to buffer but the renamed field is log
-- @last_event_size: has a stray space before the tab (checkpatch will flag it)
-
-> diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-> @@ -170,6 +179,12 @@ struct tcg_efi_spec_id_event {
->       u32 log_size;
->       bool found;
->       bool allocated;
-> +     void *final_buffer;
-> +     u32 final_position;
-> +     u32 last_event_size;
-
-Just to check: the previous EFI struct used size_t for
-pos/final_pos/last_event_size, and these become u32 here. Fine for the
-current CONFIG_TPM2_EVENT_LOG_SIZE range, but worth calling out in the
-commit message since it is a silent narrowing on 64-bit builds.
+prefer if (!rc) over if (rc == 0), and report_return_code()
+double-prints the error on top of log_err(). Please just set ret =
+CMD_RET_FAILURE here.
 
 Regards,
 Simon
