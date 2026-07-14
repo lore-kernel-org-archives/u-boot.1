@@ -4,142 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B194C43458
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 09:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AEC7C43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 11:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA48784CEF;
-	Tue, 14 Jul 2026 11:53:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id A5C8984CEC;
+	Tue, 14 Jul 2026 13:05:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="p5axNIGg";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JeN+iiIl";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Avsi3NfP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="loYjKCdv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73D4384CF0; Tue, 14 Jul 2026 11:53:07 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 3E73884CEC; Tue, 14 Jul 2026 13:05:26 +0200 (CEST)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B1BE84CEC
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 11:53:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66E7YGA64101708
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:52:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- P+KAvSWsDKXiobSsiPUT9vNBQpqTfSoB0FEqXQ5N0EI=; b=p5axNIGgKAw4iewh
- 4SIgXQAgsC48zWvn9w0H9peOA6hSieW4aUKwbMXLTG4eXqIFBvBWbkN7fsh6NTEJ
- 7tP6zpJ2Ug34xukfCoax4TCApkps/spG9qWXnrjYEGTRYLpErMQOc7bAzBtk+Gs3
- hI/BXp2F94wlKF8QDKctPQAorkygr/T3HI5JCBb6DjIwC7yXGnjZ2gY0XfkQGp6k
- Q8mEy3Ae+bM1SyB8Go7CP3eVu+8XsbdXG+3UIAralOwcYcfdHRg37b8rmq38oxpb
- gnYlPND03n3q3W4xrPrHYscBdnmd6y9O8E+fSERMpLPAY1SMIx4o3lU38ebnPzvs
- S6W9mQ==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fdgudgh13-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:52:57 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-84a06bc82easo3731295b3a.2
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 02:52:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784022777; x=1784627577; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=P+KAvSWsDKXiobSsiPUT9vNBQpqTfSoB0FEqXQ5N0EI=;
- b=JeN+iiIll7zM+ExcMv0IxNVhI7RFi5O8pCro9x/vNalE5MKShkAxN+vUIqkPXxz05r
- Oeqf6HVOpJ9Iu0pwA1StNvc6NAXvtB4eZCGQ0LDylsleNJsvcIQvs0apJQSMnZdDReGz
- Xns9IyGKbNzQLu2yru/+nTUFCLEK4HM2IQcQiq7KsQTeiKdw2/qT9k/UgvTI2X/nL/FV
- HNTigCoLeqiN/0lmyo173Ky8EdOKXuQFZRQAJQn3yNsd/V6/ikLSyrgDCLsQvaRIC3Gj
- RJnqhiD6/Y5iU97hdDd8XouDyv2QHCOgoy7NpfGg6rdLRRagcLqYhRJeXUZhC8BPZG44
- 4eVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784022777; x=1784627577;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=P+KAvSWsDKXiobSsiPUT9vNBQpqTfSoB0FEqXQ5N0EI=;
- b=Wca2QEVhs74fexjDxKo29S4D0Udslr1pjTqraB8zjrVOP+XmIwYfUPiAzD2+gtliwa
- js1A5GCJGXscT57Ye1Q82AjEdudSuFCfgSW7HPTcaFsk1jS+kpwk2tW7L/z64FNr/c9o
- lDvgZwAbRuoHJk0ko/N5UNEY1IQ7sYAV7/IW+B/bxuLK+2snfborOH5XDSsNtKiN7HJg
- Of23riq5LG+ZhBKxsr6e9WusvAgtHlp47Oz1xmO7ZLNbItr8ykRN+s1IZwxBOn+ngWuL
- 4FyUOIDsEdPcmuu4H+F0zuvSaaXBrbIyw4Exzp8zD63eB5KMX6te3jX/q5nk77FqqRnI
- aYsQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoVKnRYqrdEoqNdrsDS1yzWr06dQxKh9XrZHx2hpl4t746svNXP9zmbT2TKIVoWfxkN+5jxUhk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzimDC//dvSYYxf/zZELTRCz1g0FKdI9pQp6YK3bUk3n6X1r2nU
- CxUDQA0q9hMStLMZCYjGpXvgNj5eaJj1dA6CxRf75YcnepOlpfP17/LXTQVvu4UcNeoA8j5nb4m
- w1myXmez45jnoh4OvHf+FQkOCiBAB8uy/dN8vvDsBMV1bWSgctTC+AYGe
-X-Gm-Gg: AfdE7cm573gowtRiaj68/0bU0ARacyu6mSRMXNWm3b8qhixK1SaUf7XohNq9BfGN4es
- 5rDSv/ePW+9TKyR1Y5il9WatUonoUlSHdxvXjh07gvj87PVWoK4QxqdwqMpCM3J0Lq58Z60YHXn
- zSiFBOeMVSEiHEvmevoCg4ogRL/7PYK5OGm/RFAP0QQwWcxU2zZPoRxNrS950Hfi8wJteI1uydL
- fESqm3SdoRuHFnHv8sKqwxO3v+LFwiPjmOd89s6G++jwtsjBiIkyl1Xv2e+P0AH/SGVmoFCWTwv
- 6m+5Vdro630yzitIbjSXSEqpqN0YuOYJIRMwXt29JfD2I4A3PqnoFK+a0MxZCthpB6BzCMDmxDX
- lYUDzeIpEuvntOY67gbUPokFxOx0jZNwQN6qHMQQ2/Gac8X5n/lqsmwAN3g5DMP0XI+lvfUetMQ
- 6FVDPalFjOu2d87FVc+yysMzq06L3e3qbuFPXHjTv3
-X-Received: by 2002:a05:6a21:e8a:b0:3bf:97e8:a026 with SMTP id
- adf61e73a8af0-3c35701e55emr2122274637.25.1784022776664; 
- Tue, 14 Jul 2026 02:52:56 -0700 (PDT)
-X-Received: by 2002:a05:6a21:e8a:b0:3bf:97e8:a026 with SMTP id
- adf61e73a8af0-3c35701e55emr2122240637.25.1784022776233; 
- Tue, 14 Jul 2026 02:52:56 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13b9081d5c3sm28180537c88.9.2026.07.14.02.52.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 02:52:55 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Tue, 14 Jul 2026 15:22:40 +0530
-Subject: [PATCH 3/3] tools: qcom: mkmbn: Add support to create multi-elf
+ by phobos.denx.de (Postfix) with ESMTPS id DA14384AED
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 13:05:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66E6UVNV1524544;
+ Tue, 14 Jul 2026 06:05:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=SwbMnIhOWCaWUoJXLKXdPZWfkfeIHWulYUvJuAVSu
+ qc=; b=Avsi3NfP7P4ldXklC0PhkhO428mtg6Vcs5r+4dIlPZT7v0PvgtTBb1Opc
+ 44Xoa/CeGvQQVT3oy2a/DL5lUbXRgZCI51mceGuUtJvGy6MywSsP4ILL8cumNb43
+ RWtKeanvdme+pFr30vDvKzbVZ/mWJFBy8V8cpd4hWXLZi4Gwyga/xmQ0CctmADGF
+ nbvfmPGihjQF8Dzt7bJ4TY/8PRzAOMPabopY2yiA6wBNtMmHjFkjUVh1Gw+22CFn
+ 8hlQaxH8Sg5zSW065fhPNG7vo6oU/c7jruLeCdpo/qRCS2KheU+gpWQJrqFCzpiX
+ 1p8HGa2d9GGYtr9LCXbbCZ6Ggnbqg==
+Received: from sa9pr02cu001.outbound.protection.outlook.com
+ (mail-southcentralusazon11013000.outbound.protection.outlook.com
+ [40.93.196.0])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4fdcw5a2bn-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2026 06:05:19 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GkT20D2eXtxM9zPCCqkvWbGNQ/zS+Q9GHnMVF8w4kTd+T3ygn7MMgOVV55uaj2g+yFudmrvYai/bnMnEDf0Icphmxr9BGYTVXR+wSuheLjT/Wxtmamzs3/xb1Vtvr/TGrtTlLnHLxFJF+Z+XzIU6lOSaLnquSoSPUjHBYNRMMEgOU4Qso/5ucWyj1qFQU/u7U7VJGN/tKFelqC5UQq3nG83leIgdn/ukH+HTqE7Inb/pc0H0I2DJPuopN8wsG+w4hGsk0RsA8ahsapPLMcQqh1nx/uCkZpjVhYry/bhU5L7dpK+coUAzdBngrslkb9OoUmYjLsnPDpcxy6dnzpFhCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SwbMnIhOWCaWUoJXLKXdPZWfkfeIHWulYUvJuAVSuqc=;
+ b=c7QRc4/Y/JIUrgiIYcDwRp7Y34SdYwxYbybpqYYhKlRus8BJpxHP34uXABK+JUNa89Mwlxel75o+fUrKVh+7gNETXc7ST3wF6dow1SW2Twg0iWhTcszRqZLrl0Wfqy4EmtEC7LKfRidS2022rzhumyfjCyV3XX1cQTOpJyAlhK/d4TRCHA9e1gByVKCsZkOUjQeJ1J5OS78Y+MspZWMgQLEz28WdkgD7u8GMny5MAcJpVYRN9jVmNYMLfuSdHcJj69mUdafeUejnFhNXoKaLgPnpoqU5DmZDABQDJ+mpL/1tIshortsESyyLGsJWUf03eWbyuc5Kl5HVxUtDfiHCZw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SwbMnIhOWCaWUoJXLKXdPZWfkfeIHWulYUvJuAVSuqc=;
+ b=loYjKCdv3lS2Ejn/PzjVGfkJx9JxkpsSEliEdty4WeAqkpdnW+rAhKOp70HuSqlCO7N0mCdzLoVSOYuHg9vvkOJkTYQ5YZuGDp93Psss9BQ8YyIcd0mOfH7OCoSSyXUgMa/VNQTBmXfLRbz2inmIS45uuDzNCAtY1ApfBPist64=
+Received: from PH8P220CA0010.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:345::11)
+ by CHAPR10MB997696.namprd10.prod.outlook.com (2603:10b6:610:2f5::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.10; Tue, 14 Jul
+ 2026 11:05:16 +0000
+Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
+ (2603:10b6:510:345:cafe::98) by PH8P220CA0010.outlook.office365.com
+ (2603:10b6:510:345::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.10 via Frontend Transport; Tue,
+ 14 Jul 2026 11:05:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.223.9 via Frontend Transport; Tue, 14 Jul 2026 11:05:15 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
+ 2026 06:05:13 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
+ 2026 06:05:13 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 14 Jul 2026 06:05:13 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66EB5CJ13983835;
+ Tue, 14 Jul 2026 06:05:12 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260714-ipq5210-v1-3-0b98251aabbd@oss.qualcomm.com>
-References: <20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com>
-In-Reply-To: <20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Proofpoint-GUID: ADj6UsbOzW_ESaD-Ni7vClmH2a4HpkMV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDEwMyBTYWx0ZWRfX0TY+KmkMr56S
- +dx563Zrltuptf7LzWIAWGErLP0iGisnwQ0D9FuTB31RPZhYMS1Vq5lFdDqMdlngfyQUlt+A8jz
- vevbWGcV1bqSRVOMyTd6u3WCTyFAqvwZEh8DlZM98UBX4dCkekiHE0/qSpHlV/tnu8qTOVMlLhj
- 1xIytMAFpMUmPNrUW/LLV+34/CWF/NdoD87qlXhNBJIXznNC274iuwcr/5fyOm6Wt74I2coAxXv
- k16ziPA0i5nF8er5SM94fZt1wewsup1cbaWoEYz1A88fZCfE0zQcjeWToh6l8e7JmJHO/phDMRB
- x22pNeGEe4rzLFxRon5RCtgJeHhd/zw1EN8sarFvMwfkq0ujZhdVdtRAH707ERGMN3APChc9FLo
- 6aoKRr3txGJcOdgaZwbyT5KFsMjeT3UqqMk6ftA9P6eQq7sh4pu8TlBQf2NnzauDRCyUufhOqre
- IOJCVwK4IYDHKUAVsIQ==
-X-Authority-Analysis: v=2.4 cv=T/O8ifKQ c=1 sm=1 tr=0 ts=6a5606f9 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=cg-7CpDhVU-K4Wno2zgA:9 a=QEXdDO2ut3YA:10
- a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDEwMyBTYWx0ZWRfX2dHAmhU4QVCl
- buBCGxTnImi2bE+cugXKTSdr6gkT2bY6aZEHEyVgZbNCvBPtRNwillknjwJirb24iBABxtLenR9
- Bqqoptqm3ImRuUmHKV6RltGR+yj9lHs=
-X-Proofpoint-ORIG-GUID: ADj6UsbOzW_ESaD-Ni7vClmH2a4HpkMV
+Subject: Re: [PATCH v2 1/3] configs: am62ax_evm_r5_ethboot: Enable config
+ options required for Ethernet boot
+From: Anshul Dalal <anshuld@ti.com>
+To: Chintan Vankar <c-vankar@ti.com>
+CC: Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Anshul Dalal <anshuld@ti.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+In-Reply-To: <20260710102229.2980029-2-c-vankar@ti.com>
+References: <20260710102229.2980029-1-c-vankar@ti.com>
+ <20260710102229.2980029-2-c-vankar@ti.com>
+Date: Tue, 14 Jul 2026 16:35:08 +0530
+Message-ID: <178402710825.246195.801934357937492160.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784027109; l=650;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=WI43HKTwIU7yZ3wj5SldxS3uxEyIrGF3ltmCw5SpFwk=;
+ b=+RrrwAyIVCWKuhmD3Qnqn/a6L1NS0VMFjj9JX4iUgsGBTl62Uqtv6g2hpxThtyrCnov+oBsJn
+ x+Gq0pbJk3WCwDuS70dPzTXGjnjQUVl8plJbf8nSNXZ8GejnR/C9mLJ
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|CHAPR10MB997696:EE_
+X-MS-Office365-Filtering-Correlation-Id: d0019f89-edf1-4887-4023-08dee197c877
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|1800799024|82310400026|23010399003|376014|4143699003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: Wb08pgSsX6hk2ObR/ttec8Y9IBeiqBWEpSKli/TLJva0YDSpyQNle5zW93nWLKeVlNUiCxSC2EzSPb2tQ2UkRYlr+o+w/skxBTtpLJCvkMef5Z+QD4BfePwKJELnSfDODO8QKr20p57t1P64a4c1up4+/sj0Mr4DTiN0wZqQPPZlc7osNtyZRg/LU/M8m5nKHMlIn8wOfKc7rs+lF4OiXrFZfrVWM0DlxPrcgC5sVBMExnLP2OP+KtJpa/W+oDjPLXDF+1Sdzgkoj0BrdByjRBlJeGKide9etpc31qvvzF6bQAaeMb1Zv3rwiL64p2OF599aBJlMoYFSh10QRuNzGw9vlmR05t68ShMtuwF2WkKu8iXyUPoHiD2hvQvGoTKqoNgErdntFvTzGneUXG3Srxthc1Kfs9ESoz/Ja3+DLwfw/Wi9qO7BIptiDHCKvZVWYvBJFwKCJNZu+kSdq+gK0UIkzZ2P6u1oismhIuNXVzgxyPAjcv7iYjXJweA5iVRMisRn9HTTI8TFhc7AFNv9q6EkRuWbh7tgNZcNhwXHBzKriXHErSPWuDfTpRf9vvlktveoAOgwh3kRaPWXV7NNqTVNKf/nzNmPQjWspSeCBXI7xagu9ZDT0rOpl6iyf172eqiHhC+7k2P05u8f8npUKDJfAHfW8+z6CFYnaV5BVNjMzyFiNtqPpqpxLjZ09C84QjPKuiqvporJrkjHFNdDFg==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(1800799024)(82310400026)(23010399003)(376014)(4143699003)(56012099006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: ALGsD0hgVWVxTXX0dFvAZkiYSWymxJAI/r2wphLzYmsZwSljlz2IOS951lhbMjNAUV0mhCHK1zYQDlluT2Q9r1NyllEtN972YAHaJLtPhhB5oFoLO7gZCyYPVOSL7Kk/cl5H9AaMt3Hykab5Ceowo6hvmZvN6xkY+yHnY2svL0TQ2yEjW27vi1MWOsHNVw+K58FUq/99bT/+dhbkyp8o/KGabfOTpEPtp/OFpQ67Mw9WWOGWEgxpg72pSoPIDHmUZsCCZTTAlB2iw9X80B90gZ6oVzx4dvP2uOwi9Dqd2DaVL5VnHGsECUK02g6BbCzAnoGr9vJQppX87jRmoP6xZ6zM38ecxnsTmcYLBaJNWJGirbl+3AvYci7FPG/rdLqbJqvqF1U+0ovG6pVH6z8/aRwz4mGB/ZkbMkA5PVs1nvWy7vAjGTTeyEKhfR6/IwIU
+X-Exchange-RoutingPolicyChecked: TXN02ZvPKh/HtJisFy1ZepN1D3oBygg+mAYSFvU32euMwfnwNPwFIpub/2tMRbKgX9/HeM26qSflmvdKx0Uh5CUyDVXwyBUNEDCVXNHVlP3r4ALKafP/s5uRvU+YncdzyKc2CtszGCBPbfckPhVnvrIH/HU6gLFtcY132/eulPt6lHQ2e21duaVcq6weq18HoBfA/DQ51SjbUK4KlsPhozKFz5Vy1nPJn9t1ftdOvi/Ul952JzpRYFQskdeSU4jWznpcAVHohxux1znFAaT98p3n6iX0bKVIXtu2Uxcbkeza1PQeUHQB/JIo4+Sf7XdB1/MhFFIBLv3fIiypuu0iVg==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 11:05:15.1119 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0019f89-edf1-4887-4023-08dee197c877
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHAPR10MB997696
+X-Proofpoint-GUID: 3uc8VqjfYVOfsdzlWovn5oCV0U5T1eui
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDExNSBTYWx0ZWRfX/vcBi2d8U+D1
+ T/ZDtk/AcEe+jNpD+eGdPCLNJLDgX3Akhucrk7GrJUoduLcblsyAGAMAYNa4kmtMRWSR02YtH+L
+ pB7kQ92sJZ4js/qFsYEnOheS+VPuyiI=
+X-Proofpoint-ORIG-GUID: 3uc8VqjfYVOfsdzlWovn5oCV0U5T1eui
+X-Authority-Analysis: v=2.4 cv=Ir8utr/g c=1 sm=1 tr=0 ts=6a5617ef cx=c_pps
+ a=9AjoWhdl+q7f6/Aw5qa/DQ==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8
+ a=AupYsw9dfYiDXhegs-YA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDExNSBTYWx0ZWRfX/aHZIcd85pUx
+ Oj0r6bXrRXZpwIpJ6HDb6Yg0YiA3c/VljM7QDf93ExN9INjA1MDZQUJjYHsBVfri1ig3P2qDgI+
+ jTGYvoBZnVVyfdQ+AV9sM8MZLdHrIec7crs1QCpCugA6XXniV9CmWAy+XNJj8GgmtGsQgff8UWl
+ OX0bkAkEEOYSZUnBARDqeUoOp9C1Abs9o4aSUvem7iU3ggLT2CwDkhVmEV2jOBFWjC6yQGzKEHg
+ D8a+gMy5aFR7VoGfDlygdxfxIhaKv5N/DRTr5dnb343naGWtdyZhJzOYpAtijkXhzl+bjSklDxq
+ Qc8g5PHomfSw8iwI3aeF+OoyW0wD7jffsyKFCWTs/DJQ0ICEOcA5csZYsPeRKKoiVHLaguaBN7g
+ KNjJFC0MtZnb5yFuKpclsbh3aDuix8iO1SlcOQkeYXX6fHOq90o9D4UFYs+hHqw6x4KTp/z7t2Q
+ o6mrN503WIf/NuS/8LQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-14_02,2026-07-10_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 spamscore=0 phishscore=0
- clxscore=1015 bulkscore=0 suspectscore=0 impostorscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607140103
+ priorityscore=1501 suspectscore=0 lowpriorityscore=0 phishscore=0
+ impostorscore=0 malwarescore=0 bulkscore=0 clxscore=1015 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607140115
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,48 +191,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a command line argument to take a list of files to be combined to create a
-multi-elf expected by the boot rom.
+On Fri, 10 Jul 2026 15:52:27 +0530, Chintan Vankar <c-vankar@ti.com> wrote:
+> diff --git a/configs/am62ax_evm_r5_ethboot_defconfig b/configs/am62ax_evm_r5_ethboot_defconfig
+> new file mode 100644
+> index 000000000000..2986feef29a5
+> --- /dev/null
+> +++ b/configs/am62ax_evm_r5_ethboot_defconfig
+> @@ -0,0 +1,22 @@
+> +#include <configs/am62ax_evm_r5_defconfig>
+> +
+> +# CONFIG_NO_NET is not set
+> +CONFIG_SPL_GPIO=y
+> +CONFIG_SPL_MMC=n
+> +CONFIG_SPL_BOARD_INIT=y
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
----
- tools/qcom/mkmbn/mkmbn.py | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+We already enable SPL_BOARD_INIT for the r5 and a53 defconfigs, rest looks good
+to me.
 
-diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
-index 46edbcafb32..a2df1433129 100755
---- a/tools/qcom/mkmbn/mkmbn.py
-+++ b/tools/qcom/mkmbn/mkmbn.py
-@@ -104,6 +104,9 @@ parser.register("type", "hex", lambda s: int(s, 16))
- parser.add_argument(
-     "-l", "--load", type=lambda x: int(x, 0), default=0, help="Load address"
- )
-+parser.add_argument(
-+    "-m", "--melfs", nargs='+', default=[], help="List of ELFs to include in multi-elf"
-+)
- parser.add_argument(
-     "-o", "--output", type=Path, default="u-boot.mbn", help="Output file"
- )
-@@ -119,6 +122,18 @@ parser.add_argument(
- args = parser.parse_args()
- verbose = args.verbose
- 
-+if (len(args.melfs)):
-+    try:
-+        with open(args.output, "wb") as f:
-+            for path in args.melfs:
-+                with open(path, 'rb') as tmp:
-+                    f.write(tmp.read())
-+    except Exception as e:
-+        print(f"Error: {e}")
-+        sys.exit(1)
-+
-+    sys.exit(0)
-+
- elf = Elf()
- 
- data: bytes = args.bin.read()
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
 
 -- 
-2.34.1
-
+Anshul Dalal <anshuld@ti.com>
