@@ -4,48 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C3A9C43458
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 02:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21998C43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 05:24:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210FC84CAA;
-	Tue, 14 Jul 2026 04:35:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 3695184B4C;
+	Tue, 14 Jul 2026 07:24:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RpZT78Jb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f3/cE5Jq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A5B184CCA; Tue, 14 Jul 2026 04:35:46 +0200 (CEST)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
+ id 93F3684CBE; Tue, 14 Jul 2026 07:24:45 +0200 (CEST)
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A7E84B51
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 04:35:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 30A8A84B49
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 07:24:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wjSza-000000002G4-1c07; Tue, 14 Jul 2026 02:35:30 +0000
-Date: Tue, 14 Jul 2026 03:35:27 +0100
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Daniel Golle <daniel@makrotopia.org>,
- Ludwig Nussel <ludwig.nussel@siemens.com>, Anton Ivanov <anton@binarly.io>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jonas Karlman <jonas@kwiboo.se>, Randolph Sapp <rs@ti.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/3] test: fit: verify dm-verity roothash is covered by
- the config signature
-Message-ID: <6e3ad25e8546d7e9472fbcb57e7e9fbb6aebeda1.1783995924.git.daniel@makrotopia.org>
-References: <cover.1783995924.git.daniel@makrotopia.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66E38idb1087126; Tue, 14 Jul 2026 00:24:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16
+ CU=; b=RpZT78JbL+MfKEfbo881h9DiU5GRniCoySnLi2zXb5NBvFuoopH42W2ca
+ fvCY/FgzC6nuPmmNSjfcM9Y7Kszr6R08U5M517yAqXg3SvQ+l3a4WJP+R+Vj0fzW
+ UY9XwBVBsLlXtIZdeOk0sDqxFvU8HWdNMKrNfBsuQN3fYAT2tpYIvTbVqw3a8wPJ
+ MKejoBCuXrnIkrb2bYKICUs12xKTM6t8B9ToFPzcnUL7kNj/hFjk+PVHli/PP//8
+ glu02kGAc3t/3orEz+2N6o1+0a4wXm0QRoYfeRLAkAG04zHCSI3hxEglNb7/ihkR
+ dAAOy5lHMbJ3/amEkGk9Nvm7BHOyw==
+Received: from bn8pr05cu002.outbound.protection.outlook.com
+ (mail-eastus2azon11011036.outbound.protection.outlook.com [52.101.57.36])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fdcwu0gkf-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2026 00:24:39 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=L/+lLlD5YGT642sjEdVyM9Sp8XJDrrry0oYVmKKhFHVOufmjB3Lwk9os3YAwc5TnAWC7pKL3pNCBKi9SGjghdQ+9OH5KnxB/9lmEMxzWDy+yPw/uuM4xtesuSsD9rXijAH7d5VJtcP8/CwxAVsseRI8usSbazSlkw0hKwsH5xW1tL/TI6OhO9wagK/Wwh0btouThyUYPycZdUgZfIexeE+MaZsxt5f+QjWVHdqtjX0gbleKRdc5XCkyv6iZlzwwRHluM+DxoU1uHp8HuQ2XzQDjzaouZAKK+SNXtIu8VVGgJLcwHS5PgY1XcnAx3H79+YfACiYoenDk7Zg8xWeaMjg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16CU=;
+ b=qXf7VL7YdFot5HkxH9Od9g5B+Q1leCbDwYiY+P3JHVX0gS9rTj2zxHNqDJCofZq6gmlpV3PHIuu8D7Q4jHp+Tb2gzXiOU9gH4O7MKDMN5zUBTK3/+q73mviowqVy3SEGuw6UaAyuU0bEpXHjlIwtRkNdR+Bvy0kWRK2LfV1p+2650l3BN9pOeA3iRJ3Cqj9KggksUmK8aousbLHaWUm0eMqnzrQ0Chj6ItXFwjLvBXVOlk7u8vhmjZ3wwKKwKyQMI3UGyHKo2L19TQb4pW0rSbbL1vedo4DV/f9iyy76F6ec9L5dseYTYAjAd/x+QtUXdt+/9Fhe9xlGwF7KgoqGvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16CU=;
+ b=f3/cE5JqpFNqh5d8tin8YdEWkJ2TpFOdog/oJSrCNtr+HU/9XTrYSm+NYXrkMuMbzm61DscxSwh0WYY2FBhc5nI3v+VCNkkC5IuDq13n9o2eCxjryjg42UgMKr4ePe59YuSshnzgWdtuNdQ7MaEc8TZOmSMWgk7UAPljcXBgiCw=
+Received: from CH0PR03CA0220.namprd03.prod.outlook.com (2603:10b6:610:e7::15)
+ by DM4PR10MB6134.namprd10.prod.outlook.com (2603:10b6:8:b5::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.18; Tue, 14 Jul
+ 2026 05:24:36 +0000
+Received: from CH2PEPF0000013D.namprd02.prod.outlook.com
+ (2603:10b6:610:e7:cafe::2b) by CH0PR03CA0220.outlook.office365.com
+ (2603:10b6:610:e7::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.9 via Frontend Transport; Tue, 14
+ Jul 2026 05:24:36 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CH2PEPF0000013D.mail.protection.outlook.com (10.167.244.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.223.9 via Frontend Transport; Tue, 14 Jul 2026 05:24:34 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
+ 2026 00:24:03 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
+ 2026 00:24:03 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 14 Jul 2026 00:24:03 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66E5O2eP3352316;
+ Tue, 14 Jul 2026 00:24:03 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1783995924.git.daniel@makrotopia.org>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 14 Jul 2026 10:54:02 +0530
+Message-ID: <DJY1KP97NN91.2F605W5BR722H@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCH] tools: binman: fix changes not being written to source.dtb
+From: Anshul Dalal <anshuld@ti.com>
+To: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260707-binman_bootph_fix-v1-1-3603996799e0@ti.com>
+ <CAFLszTg5Qu3stt8AkeBpWibTyYxp1tXAern3aLE6MEHkHmVRyQ@mail.gmail.com>
+ <DJXETQLM9PQP.C2LCLMD6LMI@ti.com>
+ <CAFLszTg4hhLezFpkvkHY9qK_WQ8xfcRi8AWx2RcVkAeP+RPMvw@mail.gmail.com>
+In-Reply-To: <CAFLszTg4hhLezFpkvkHY9qK_WQ8xfcRi8AWx2RcVkAeP+RPMvw@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000013D:EE_|DM4PR10MB6134:EE_
+X-MS-Office365-Filtering-Correlation-Id: 20d13d71-9911-4fd9-302a-08dee16830d0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|56012099006|6133799003|4143699003|18002099003|17002099007|22082099003|3023799007;
+X-Microsoft-Antispam-Message-Info: yZ/QNYN+zHDR/u/IUcMLws3ghWuIqIKMq7KuSG2YdkX66h10iIbwYXK60xz8+Besbr09bdzT/sMBPimQ4buWTnHRhCNAkiytOyLSU5gut0OMD8fS1zxukJ9RkhMa7aNuZ6aKa7TWf+Nn+ySn+IFLakSX2t0MyVgGSslGSp1l2F4fqJ7/WcWUZikSNmaxXSHZ3jlBjajMR2zCRLSO1+RW5J8cyDsoHMRR7NXP5tbzjqtoCYAMMT3JkZDGmqLqFF5ny1BYoqFmpZFByaw9PJIY96G7bXK1+MaiTkJCtUbXx8gRJDUjJ+6STlwVpwdjGVwpKgh+eYP+AEDJfXMslwA6JrFLVCD7CntVy8OfH9P4VXpP2HOD9ggBIS4A6QEsQqAxJbww6h/AOVejFVU+93Ka+arS1/lrT5xud1YAEZy8hNj69pQpJFT3GrwdEBhhxq5/k0YUI6CwRpmDTDnKHgxz1OQGo0GLg1ahcD3BSIFtBa1x84b+wQuS0J6lUuZN+5BDRKvYfWp740eJlnPhWfND7MO1vrE5NsnDuNKmvM/aOeAOYYbdqOyIecqfDNLDe8t1CsSPHSAMHE/9NBL2lGZOTC21xXPU15zKzbTd81zaDHog0x4HbEqoBxQeysaMSgon1h85vgfpi//iTHYPb5Hd6/8qsy2S5l4tunZCU6iFeqaYheRpvPcxCCVWBkNu8R+MA8scJV+0ihj+oBQoebl4MQ==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(56012099006)(6133799003)(4143699003)(18002099003)(17002099007)(22082099003)(3023799007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: nX51sSXpGEj/iwe3wELhKonMV78x01j55GP5my+3Nl0pX6wx32Ktj4GqKV2W52rdICwxcwi8G3eFeapSV03bQo9vVc3FiUPZ987fPdIMZEV7TUfOpCoooFZj+63aRKfd/IVMp5p1nKUv7GBdTvHbbZV1Oc32pWwkdRHvpMdcnzseIW8K7cCxatvQBmGgCFCm6SbRxYpxBJ7sq9MYtkB77o+fqAAbGJ13O366SgVwIbyhHjrfmL8V/623VuzwD6MevHq9ZIwDfO839ZlbpbNUlc8Igovvq9jaO0scfUxXDmsNRxOreTwVN2FgjyFXZunSbbr78DUDcRt0V7+mT0v6HzZkYfDT0MKUolQYAwbXxE3hYeYmWhCFfPfrWKuCsjatp6JdYg899vKMc2LbU3mJ7HQpplbXrWsMbeQj34+ONUeb+17DcNv0JxOTHk3dPla4
+X-Exchange-RoutingPolicyChecked: g/A15JouJTnb4D98fLXqDFmoZ5WY/OMac2VE5Mp4APofcCQYiothciroJgUpUQk4YIzmchI+O1uPoFz4U4UkHPVYRw5FKNX8mZFWvmLiC9Mi1AvAA0PT2AhitqNSNSMAscBeG29GDwUbiQTQvaXwRyBQtYTWrxaCsCh21PSy/st2gJjQOIaoqbO6lL+KdGNXaycjJYBJx14zdoIxvJfY/hg93o8aHZyMHhIebSP+mg1rpVdleB74TUQSFL2+m4ME3nMbQkLbxNmXQrtgdguh/6hAeGKva99UvM3somTpy6aLtcKf5RarVqDyjDCRA2wAcZBJ5LjeEb0VsnhuxgMXlA==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 05:24:34.3999 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20d13d71-9911-4fd9-302a-08dee16830d0
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6134
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDA1MyBTYWx0ZWRfX9Gp8krT9ZCiX
+ 6x0MaPQPY+6TUOljg5ROkw5K+F9sgykxylaWycTE+M+DN40rJnry4n+anMU9HaSTMpJUyaECzp5
+ fKkp6WgRR2ljEgClYDU2KaTgXM11MVg=
+X-Proofpoint-GUID: pZ9Pz2Icg85EF_BJGB68ezCk_kK-SzAw
+X-Proofpoint-ORIG-GUID: pZ9Pz2Icg85EF_BJGB68ezCk_kK-SzAw
+X-Authority-Analysis: v=2.4 cv=LvWiDHdc c=1 sm=1 tr=0 ts=6a55c817 cx=c_pps
+ a=9qX6K/GtqWsr64T/c6OOlw==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8 a=wIc7PlybEO9OI9lC9b4A:9
+ a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDA1MyBTYWx0ZWRfXyU3Bn3UxL0hS
+ wma8vq5pvzxSZ4VKR5pKxXpOooFarlp0eWBowzz0cnFIxzvr3VedCyTlCUR0K3zzF58ZCEYLf5w
+ yVYYPM8zDVDGHU1P+tKZIdWCaad3fcfbTojwqFNVOFoYuxjAdcD1n/vXDDnKBOOaOHU/VTLvcVO
+ gHxoyKLhYZcAR0ou3JuhzVGKzOvu1Tvt64G4skCDs4asGFwWTVIkVLmSWFG4FPpNmmSlLTNPbt/
+ iL/IhftjYUyuJ/iYpisPAm22PT1lYYaIeTpJnhmrEU/xwlyPRDN2bcbJjHNIk23DAohJKKbf+k4
+ 6dEesp+iPLHVOALCsoLJTnJj68EwZxnyS8tzUAzIfrBkhsCaX872Ix+tOBVrAyKlse+sCJdEqxA
+ RCO4lj2RtLJ/0cSKvKTEUm7o5dmxVzLnkGT7us8+EMpSFtW5OZtEPujatUGVndsyM4o8Svuofp2
+ AAaksfMybJ2UtL7oTjg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-14_01,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 phishscore=0 suspectscore=0 malwarescore=0
+ bulkscore=0 priorityscore=1501 impostorscore=0 lowpriorityscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607140053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,557 +180,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A dm-verity protected filesystem image is not hashed by U-Boot; its
-integrity is delegated to the kernel, which trusts the roothash taken
-from the FIT dm-verity subnode. For that chain of trust to hold, the
-roothash (and salt) must be part of the region covered by the
-configuration signature, otherwise an attacker can replace both the
-filesystem and the roothash while keeping the signature valid.
+Hi Simon,
 
-Add two independent checks of this property:
+On Mon Jul 13, 2026 at 7:43 PM IST, Simon Glass wrote:
+> On Mon, 13 Jul 2026 at 05:34, Anshul Dalal <anshuld@ti.com> wrote:
+>>
+>> On Fri Jul 10, 2026 at 12:44 AM IST, Simon Glass wrote:
+>> > Hi Anshul,
+>> >
+>> > On 2026-07-07T10:44:09, Anshul Dalal <anshuld@ti.com> wrote:
+>> >> tools: binman: fix changes not being written to source.dtb
+>> >>
+>> >> In the current setup the changes done to the dtb by binman such as
+>> >> bootph propagation are only made to the intermediary *.dtb.out but no=
+t
+>> >> the final dtb.
+>> >>
+>> >> This means the final dtb that's in *-binman.dtsi never gets the requi=
+red
+>> >> changes applied. Therefore this patch fixes the behaviour by writing =
+to
+>> >> the supplied dtb before exiting with a modified test to catch any fut=
+ure
+>> >> regressions.
+>> >>
+>> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> >>
+>> >> tools/binman/control.py |  3 +++
+>> >>  tools/binman/ftest.py   | 41 ++++++++++++++++++++++-----------------=
+--
+>> >>  2 files changed, 25 insertions(+), 19 deletions(-)
+>> >
+>> > Please can you spell out the concrete symptom? What breaks in a real
+>> > build when u-boot.dtb doesn't carry the bootph propagation - which
+>> > stage reads it, what does it expect to find, and what goes wrong when
+>> > it isn't there? The *-binman.dtsi reference is confusing since a .dtsi
+>> > is a source file, not something written to.
+>>
+>> The actual issue was observed while we were adding support for our a new
+>> platform 'AM62l EVM' to U-Boot where the missing bootph properties meant
+>> that the parent drivers were not being probed leading to boot failure.
+>>
+>> >
+>> > Also please rewrite in imperative present tense: 'Write the modified
+>> > dtb back to dtb_fname so that ...' rather than 'this patch fixes the
+>> > behaviour by ...'
+>>
+>> Yeah, the former is more clear. Will fix in the next revision.
+>>
+>> >
+>> >> diff --git a/tools/binman/control.py b/tools/binman/control.py
+>> >> @@ -677,6 +677,9 @@ def PrepareImagesAndDtbs(dtb_fname, select_images=
+, update_fdt, use_expanded, ind
+>> >>          dtb_item.Sync(auto_resize=3DTrue)
+>> >>          dtb_item.Pack()
+>> >>          dtb_item.Flush()
+>> >> +
+>> >> +    # Copy the intermediary dtb ('u-boot.dtb.out') to the dtb suppli=
+ed to binman
+>> >> +    tools.write_file(dtb_fname, dtb.GetContents())
+>> >
+>> > This is updating an input file...really not keen on that! The updated
+>> > dtb should already be written into the final image created by Binman.
+>>
+>> Perhaps it's an issue with how we're using 'u-boot.dtb'. As I see now, a
+>> lot of platforms (including TI's) are using 'u-boot.dtb' as the fdt for
+>> U-Boot FIT. Do we not expect the final U-Boot FIT produced in those
+>> builds to have this propagation logic applied?
+>>
+>> To test things out, I built the am62x_evm_a53 platform and the fdt
+>> extracted out of the built u-boot.img lacks proper bootph propagation
+>> without this patch applied:
+>>
+>>         fdtget -t r build/u-boot.img_unsigned /images/fdt-0/ data > extr=
+acted.dtb
+>>
+>> It makes sense to not modify the input files so then should we change
+>> the DTB we use in the u-boot's FIT to 'u-boot.dtb.out' instead of
+>> 'u-boot.dtb'?
+>
+> Possibly, but are you using Binman to create the FIT? If so it should
+> use the updated FDT. This might be a hole in how Binman works?
+>
 
- - test/py/tests/test_fit_verity_sign.py signs a configuration that
-   references a filesystem image carrying a dm-verity subnode, then
-   confirms that tampering the roothash or the salt is rejected by
-   fit_check_sign. A control that tampers a byte known to be signed
-   proves the check can fail. A matching page is added under
-   doc/develop/pytest/ so the module documentation is rendered with
-   the rest of the generated docs.
+Yes, we are using binman for FIT creation here.
 
- - test/boot/fit_verity.c gains a runtime unit test that builds the
-   exact node list the configuration signature is computed over,
-   turns it into hashed regions and checks both that the roothash
-   bytes fall inside a signed region and that tampering them changes
-   the hash. It needs no private key, so it also runs on real devices
-   and uses the same hash path a device would.
+I'm not sure what's the correct behaviour here either, in our binman
+DTSI for the platform (k3-am625-sk-binman.dtsi) we explicitly set the
+fdt-0 for the u-boot node as a blob-ext with "u-boot.dtb" as the
+filename.
 
-To let the unit test build the signed-region node list, rename the
-config node-list helper to fit_config_get_signed_nodes(), make it
-non-static and declare it in image.h.
+Since the same file is given as an input to binman and we don't want to
+modify the input files we have two options here:
 
-Signed-off-by: Daniel Golle <daniel@makrotopia.org>
----
-v2: address comments by Tom Rini
- * drop the VISIBLE_IF_UT visibility macro and simply make
-   fit_config_get_signed_nodes() non-static
- * convert the comment block in test_fit_verity_sign.py into a module
-   docstring, add an ITS example and add a page under doc/develop/pytest/
-   so the module is rendered in the generated documentation
+1. If 'u-boot.dtb.out' is known to be the fdt outputted by binman with
+all the fixes applied, we could just use that instead as the external
+blob in fdt-0.
 
- boot/image-fit-sig.c                        |  14 +-
- doc/develop/pytest/test_fit_verity_sign.rst |  10 +
- include/image.h                             |  23 +++
- test/boot/fit_verity.c                      | 194 +++++++++++++++++++
- test/py/tests/test_fit_verity_sign.py       | 202 ++++++++++++++++++++
- 5 files changed, 436 insertions(+), 7 deletions(-)
- create mode 100644 doc/develop/pytest/test_fit_verity_sign.rst
- create mode 100644 test/py/tests/test_fit_verity_sign.py
+2. We could have binman detect a node as 'fdt' and apply the required
+fixes in-place before spitting out the final 'u-boot.img' FIT.
 
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index c2f09885492..bfc6d2a8eed 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -341,7 +341,7 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
- }
- 
- /**
-- * fit_config_get_hash_list() - Build the list of nodes to hash
-+ * fit_config_get_signed_nodes() - Build the list of nodes to hash
-  *
-  * Works through every image referenced by the configuration and collects the
-  * node paths: root + config + all referenced images with their hash,
-@@ -358,9 +358,9 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
-  * @buf_len:	Size of @buf
-  * Return: number of entries in @node_inc, or -ve on error
-  */
--static int fit_config_get_hash_list(const void *fit, int conf_noffset,
--				    char **node_inc, int max_nodes,
--				    char *buf, int buf_len)
-+int fit_config_get_signed_nodes(const void *fit, int conf_noffset,
-+				char **node_inc, int max_nodes,
-+				char *buf, int buf_len)
- {
- 	const char *conf_name;
- 	int image_count;
-@@ -500,9 +500,9 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
- 	}
- 
- 	/* Build the node list from the config, ignoring hashed-nodes */
--	count = fit_config_get_hash_list(fit, conf_noffset,
--					 node_inc, IMAGE_MAX_HASHED_NODES,
--					 hash_buf, sizeof(hash_buf));
-+	count = fit_config_get_signed_nodes(fit, conf_noffset,
-+					    node_inc, IMAGE_MAX_HASHED_NODES,
-+					    hash_buf, sizeof(hash_buf));
- 	if (count < 0) {
- 		*err_msgp = "Failed to build hash node list";
- 		return -1;
-diff --git a/doc/develop/pytest/test_fit_verity_sign.rst b/doc/develop/pytest/test_fit_verity_sign.rst
-new file mode 100644
-index 00000000000..94a39b08952
---- /dev/null
-+++ b/doc/develop/pytest/test_fit_verity_sign.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+test_fit_verity_sign
-+====================
-+
-+.. automodule:: test_fit_verity_sign
-+   :synopsis:
-+   :member-order: bysource
-+   :members:
-+   :undoc-members:
-diff --git a/include/image.h b/include/image.h
-index 9c8a746d576..081508707ff 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1884,6 +1884,29 @@ struct image_region *fit_region_make_list(const void *fit,
- 		struct fdt_region *fdt_regions, int count,
- 		struct image_region *region);
- 
-+/**
-+ * fit_config_get_signed_nodes() - Build the list of nodes covered by a config
-+ *				   signature
-+ *
-+ * Collects the paths of the nodes that the configuration signature is
-+ * computed over: the root node, the configuration node, and for each image
-+ * referenced by the configuration its node, its hash subnodes and its cipher
-+ * and dm-verity subnodes. The result is the same node list used when creating
-+ * and verifying the signature, and is suitable for passing to
-+ * fdt_find_regions().
-+ *
-+ * @fit:	FIT blob
-+ * @conf_noffset: Configuration node offset
-+ * @node_inc:	Array to fill with pointers to packed path strings
-+ * @max_nodes:	Number of entries in @node_inc
-+ * @buf:	Buffer for the packed null-terminated path strings
-+ * @buf_len:	Size of @buf
-+ * Return: number of entries written to @node_inc, or -ve on error
-+ */
-+int fit_config_get_signed_nodes(const void *fit, int conf_noffset,
-+				char **node_inc, int max_nodes,
-+				char *buf, int buf_len);
-+
- static inline int fit_image_check_target_arch(const void *fdt, int node)
- {
- #ifndef USE_HOSTCC
-diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
-index 7459a9d6f81..a0a423f6666 100644
---- a/test/boot/fit_verity.c
-+++ b/test/boot/fit_verity.c
-@@ -6,6 +6,11 @@
-  */
- 
- #include <image.h>
-+#include <fdt_region.h>
-+#include <malloc.h>
-+#include <linux/kernel.h>
-+#include <linux/libfdt.h>
-+#include <u-boot/hash-checksum.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-@@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
- 	return 0;
- }
- FIT_VERITY_TEST(fit_verity_test_bad_blocksize, 0);
-+
-+#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
-+/**
-+ * build_signed_verity_fit() - build a FIT with a signable verity config
-+ * @buf:	output buffer (at least FIT_BUF_SIZE bytes)
-+ *
-+ * Like build_verity_fit(), but the filesystem image also carries a hash
-+ * subnode (required for a configuration to be signable) so the config's
-+ * signed-region node list can be built with fit_config_get_signed_nodes().
-+ *
-+ * Return: configuration node offset, or -ve on error
-+ */
-+static int build_signed_verity_fit(void *buf)
-+{
-+	int images_node, confs_node, conf_node, img_node, hash_node, verity_node;
-+	fdt32_t val;
-+	int ret;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	if (ret)
-+		return ret;
-+
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	if (images_node < 0)
-+		return images_node;
-+
-+	img_node = fdt_add_subnode(buf, images_node, "rootfs");
-+	if (img_node < 0)
-+		return img_node;
-+	ret = fdt_setprop_string(buf, img_node, FIT_TYPE_PROP, "filesystem");
-+	if (ret)
-+		return ret;
-+
-+	hash_node = fdt_add_subnode(buf, img_node, "hash-1");
-+	if (hash_node < 0)
-+		return hash_node;
-+	ret = fdt_setprop_string(buf, hash_node, FIT_ALGO_PROP, "sha256");
-+	if (ret)
-+		return ret;
-+	ret = fdt_setprop(buf, hash_node, FIT_VALUE_PROP, test_digest,
-+			  sizeof(test_digest));
-+	if (ret)
-+		return ret;
-+
-+	verity_node = fdt_add_subnode(buf, img_node, FIT_VERITY_NODENAME);
-+	if (verity_node < 0)
-+		return verity_node;
-+	ret = fdt_setprop_string(buf, verity_node, FIT_VERITY_ALGO_PROP,
-+				 "sha256");
-+	if (ret)
-+		return ret;
-+	val = cpu_to_fdt32(4096);
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_DBS_PROP, &val,
-+			  sizeof(val));
-+	if (ret)
-+		return ret;
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBS_PROP, &val,
-+			  sizeof(val));
-+	if (ret)
-+		return ret;
-+	val = cpu_to_fdt32(100);
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_NBLK_PROP, &val,
-+			  sizeof(val));
-+	if (ret)
-+		return ret;
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBLK_PROP, &val,
-+			  sizeof(val));
-+	if (ret)
-+		return ret;
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_DIGEST_PROP, test_digest,
-+			  sizeof(test_digest));
-+	if (ret)
-+		return ret;
-+	ret = fdt_setprop(buf, verity_node, FIT_VERITY_SALT_PROP, test_salt,
-+			  sizeof(test_salt));
-+	if (ret)
-+		return ret;
-+
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	if (confs_node < 0)
-+		return confs_node;
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	if (conf_node < 0)
-+		return conf_node;
-+	ret = fdt_setprop_string(buf, conf_node, FIT_LOADABLE_PROP, "rootfs");
-+	if (ret)
-+		return ret;
-+
-+	return conf_node;
-+}
-+
-+/*
-+ * Test: the dm-verity roothash and salt are inside the region covered by the
-+ * configuration signature.
-+ *
-+ * A dm-verity filesystem image is not hashed by U-Boot; its integrity is
-+ * delegated to the kernel, which trusts the roothash from the FIT dm-verity
-+ * subnode. That roothash must therefore be part of the signed region, so that
-+ * an attacker cannot swap both the filesystem and the roothash while keeping
-+ * the configuration signature valid.
-+ *
-+ * This checks the property without a private key, so it also runs on real
-+ * devices: it builds the exact node list the signature is computed over
-+ * (fit_config_get_signed_nodes), turns it into hashed regions, and verifies both
-+ * that the roothash bytes fall inside a region and that tampering them changes
-+ * the hash. It uses the same hash path a device would (crypto accelerated where
-+ * available).
-+ */
-+static int fit_verity_test_roothash_signed(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	char *node_inc[32];
-+	char path_buf[256];
-+	char region_path[256];
-+	struct fdt_region fdt_regions[64];
-+	struct image_region *region = NULL;
-+	int conf_node, verity_node;
-+	int count, i, digest_len;
-+	const void *digest;
-+	ulong digest_off, region_off;
-+	bool covered = false;
-+	u8 hash_clean[32], hash_tampered[32], hash_control[32];
-+
-+	conf_node = build_signed_verity_fit(buf);
-+	ut_assert(conf_node >= 0);
-+
-+	verity_node = fdt_path_offset(buf, "/images/rootfs/dm-verity");
-+	ut_assert(verity_node >= 0);
-+
-+	/* Build the node list the configuration signature is computed over. */
-+	count = fit_config_get_signed_nodes(buf, conf_node, node_inc,
-+					    ARRAY_SIZE(node_inc), path_buf,
-+					    sizeof(path_buf));
-+	ut_assert(count > 0);
-+
-+	/*
-+	 * Turn the node list into hashed regions. No exclude list is needed:
-+	 * the excluded properties (data, data-size, data-offset,
-+	 * data-position) never include the dm-verity digest or salt, so the
-+	 * coverage answer is the same with or without it.
-+	 */
-+	count = fdt_find_regions(buf, node_inc, count, NULL, 0, fdt_regions,
-+				 ARRAY_SIZE(fdt_regions) - 1, region_path,
-+				 sizeof(region_path), 0);
-+	ut_assert(count > 0);
-+
-+	region = fit_region_make_list(buf, fdt_regions, count, NULL);
-+	ut_assertnonnull(region);
-+
-+	digest = fdt_getprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
-+			     &digest_len);
-+	ut_assertnonnull(digest);
-+	ut_assert(digest_len > 0);
-+	digest_off = (ulong)((const char *)digest - (const char *)buf);
-+
-+	/*
-+	 * Control: the hash covers a non-empty region and reacts to a change
-+	 * inside it. Flip a byte of the (signed) image hash value and confirm
-+	 * the computed hash differs, proving the region set and hash work.
-+	 */
-+	ut_assertok(hash_calculate("sha256", region, count, hash_clean));
-+	for (i = 0; i < count; i++) {
-+		region_off = (ulong)((const char *)region[i].data -
-+				     (const char *)buf);
-+		if (digest_off >= region_off &&
-+		    digest_off + digest_len <= region_off + region[i].size) {
-+			covered = true;
-+			break;
-+		}
-+	}
-+
-+	/* The roothash must be covered by the configuration signature. */
-+	ut_assert(covered);
-+
-+	/* Tampering the roothash must change the signed hash. */
-+	((u8 *)digest)[0] ^= 0xff;
-+	ut_assertok(hash_calculate("sha256", region, count, hash_tampered));
-+	((u8 *)digest)[0] ^= 0xff;
-+	ut_assert(memcmp(hash_clean, hash_tampered, sizeof(hash_clean)) != 0);
-+
-+	/* Sanity: with the byte restored the hash matches the clean value. */
-+	ut_assertok(hash_calculate("sha256", region, count, hash_control));
-+	ut_asserteq_mem(hash_clean, hash_control, sizeof(hash_clean));
-+
-+	free(region);
-+	return 0;
-+}
-+FIT_VERITY_TEST(fit_verity_test_roothash_signed, 0);
-+#endif /* FIT_SIGNATURE */
-diff --git a/test/py/tests/test_fit_verity_sign.py b/test/py/tests/test_fit_verity_sign.py
-new file mode 100644
-index 00000000000..ccdeccc0149
---- /dev/null
-+++ b/test/py/tests/test_fit_verity_sign.py
-@@ -0,0 +1,202 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright 2026 Daniel Golle <daniel@makrotopia.org>
-+
-+"""Verify that the dm-verity roothash is covered by the FIT configuration
-+signature.
-+
-+A dm-verity protected filesystem image is not hashed by U-Boot; its integrity
-+is delegated to the kernel, which trusts the roothash taken from the FIT
-+``dm-verity`` subnode. That roothash must therefore be part of the signed
-+region of the configuration, otherwise an attacker can replace both the
-+filesystem and the roothash while keeping the configuration signature valid.
-+
-+This test signs a configuration referencing a filesystem image that carries a
-+``dm-verity`` subnode, then flips one byte of the roothash and of the salt and
-+checks that verification rejects the image. A control tampering a byte that is
-+known to be signed confirms that the check is able to detect a broken region.
-+
-+The FIT pairs a signed configuration with a filesystem image carrying a
-+``dm-verity`` subnode:
-+
-+.. code-block:: devicetree
-+
-+    images {
-+        rootfs-1 {
-+            data = /incbin/("rootfs.bin");
-+            type = "filesystem";
-+            compression = "none";
-+            hash-1 {
-+                algo = "sha256";
-+            };
-+            dm-verity {
-+                algo = "sha256";
-+                data-block-size = <4096>;
-+                hash-block-size = <4096>;
-+                num-data-blocks = <16>;
-+                hash-start-block = <16>;
-+            };
-+        };
-+    };
-+
-+    configurations {
-+        conf-1 {
-+            kernel = "kernel-1";
-+            loadables = "rootfs-1";
-+            signature-1 {
-+                algo = "sha256,rsa2048";
-+                key-name-hint = "dev";
-+                sign-images = "kernel", "loadables";
-+            };
-+        };
-+    };
-+
-+mkimage builds the dm-verity hash tree when assembling the image and records
-+the resulting roothash and salt in the ``dm-verity`` subnode; fit_check_sign
-+must reject an image where either was modified after signing.
-+"""
-+
-+import os
-+import pytest
-+import utils
-+
-+# 16 blocks of 4096 bytes, matching num-data-blocks/data-block-size below.
-+ROOTFS_SIZE = 16 * 4096
-+
-+ITS = '''
-+/dts-v1/;
-+/ {
-+    description = "verity roothash signing coverage test";
-+    #address-cells = <1>;
-+
-+    images {
-+        kernel-1 {
-+            description = "kernel";
-+            data = /incbin/("%(tmpdir)skernel.bin");
-+            type = "kernel";
-+            arch = "arm64";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000000>;
-+            entry = <0x40000000>;
-+            hash-1 { algo = "sha256"; };
-+        };
-+        rootfs-1 {
-+            description = "rootfs";
-+            data = /incbin/("%(tmpdir)srootfs.bin");
-+            type = "filesystem";
-+            arch = "arm64";
-+            compression = "none";
-+            hash-1 { algo = "sha256"; };
-+            dm-verity {
-+                algo = "sha256";
-+                data-block-size = <4096>;
-+                hash-block-size = <4096>;
-+                num-data-blocks = <16>;
-+                hash-start-block = <16>;
-+            };
-+        };
-+    };
-+
-+    configurations {
-+        default = "conf-1";
-+        conf-1 {
-+            description = "signed config";
-+            kernel = "kernel-1";
-+            loadables = "rootfs-1";
-+            signature-1 {
-+                algo = "sha256,rsa2048";
-+                key-name-hint = "dev";
-+                sign-images = "kernel", "loadables";
-+            };
-+        };
-+    };
-+};
-+'''
-+
-+VERITY_NODE = '/images/rootfs-1/dm-verity'
-+ROOTFS_HASH_NODE = '/images/rootfs-1/hash-1'
-+
-+
-+def flip_prop_byte(ubman, fit, node, prop):
-+    """Flip the first byte of a byte-array property in a FIT, in place.
-+
-+    The property is rewritten with the same length so that no node is
-+    relaid out and the signed regions keep their offsets.
-+    """
-+    val = utils.run_and_log(ubman, 'fdtget -t bx %s %s %s' % (fit, node, prop))
-+    bytelist = val.split()
-+    bytelist[0] = '%x' % (int(bytelist[0], 16) ^ 0xff)
-+    utils.run_and_log(ubman, 'fdtput -t bx %s %s %s %s' %
-+                      (fit, node, prop, ' '.join(bytelist)))
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('fit_signature')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+@pytest.mark.requiredtool('fdtput')
-+@pytest.mark.requiredtool('openssl')
-+def test_fit_verity_roothash_signed(ubman):
-+    """The dm-verity roothash must be inside the signed configuration region."""
-+    tmpdir = os.path.join(ubman.config.result_dir, 'verity-sign') + '/'
-+    if not os.path.exists(tmpdir):
-+        os.makedirs(tmpdir)
-+    mkimage = ubman.config.build_dir + '/tools/mkimage'
-+    fit_check_sign = ubman.config.build_dir + '/tools/fit_check_sign'
-+    dtc_args = '-I dts -O dtb -i %s' % tmpdir
-+    its = tmpdir + 'verity.its'
-+    fit = tmpdir + 'verity.itb'
-+    dtb = tmpdir + 'control.dtb'
-+
-+    # Signing key and empty control dtb to receive the public key.
-+    utils.run_and_log(ubman, 'openssl genpkey -algorithm RSA -out %sdev.key '
-+                      '-pkeyopt rsa_keygen_bits:2048 '
-+                      '-pkeyopt rsa_keygen_pubexp:65537' % tmpdir)
-+    utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %sdev.key '
-+                      '-out %sdev.crt' % (tmpdir, tmpdir))
-+    with open(tmpdir + 'control.dts', 'w') as f:
-+        f.write('/dts-v1/; / { model = "verity-test"; };\n')
-+    utils.run_and_log(ubman, 'dtc -O dtb -o %s %scontrol.dts' % (dtb, tmpdir))
-+
-+    # Payloads. The rootfs must be a whole number of data blocks so mkimage can
-+    # build the dm-verity hash tree and compute the roothash.
-+    with open(tmpdir + 'rootfs.bin', 'wb') as f:
-+        f.write(b'R' * ROOTFS_SIZE)
-+    with open(tmpdir + 'kernel.bin', 'wb') as f:
-+        f.write(b'KERNEL')
-+
-+    with open(its, 'w') as f:
-+        f.write(ITS % {'tmpdir': tmpdir})
-+
-+    # Build and sign. -E keeps the (large) rootfs external, as on a real device.
-+    utils.run_and_log(ubman, [mkimage, '-D', dtc_args, '-E', '-f', its,
-+                              '-k', tmpdir, '-K', dtb, '-r', fit])
-+
-+    # Baseline: the freshly signed image must verify.
-+    utils.run_and_log(ubman, [fit_check_sign, '-f', fit, '-k', dtb])
-+
-+    # Control: tampering a byte that is signed (the filesystem image hash value)
-+    # must be detected. This proves the check can fail.
-+    control = tmpdir + 'control.itb'
-+    utils.run_and_log(ubman, 'cp %s %s' % (fit, control))
-+    flip_prop_byte(ubman, control, ROOTFS_HASH_NODE, 'value')
-+    utils.run_and_log_expect_exception(
-+        ubman, [fit_check_sign, '-f', control, '-k', dtb],
-+        1, 'Failed to verify required signature')
-+
-+    # Roothash: tampering the dm-verity digest must be rejected. If the digest
-+    # is outside the signed region this check passes and boot is compromised.
-+    tampered = tmpdir + 'tamper-digest.itb'
-+    utils.run_and_log(ubman, 'cp %s %s' % (fit, tampered))
-+    flip_prop_byte(ubman, tampered, VERITY_NODE, 'digest')
-+    utils.run_and_log_expect_exception(
-+        ubman, [fit_check_sign, '-f', tampered, '-k', dtb],
-+        1, 'Failed to verify required signature')
-+
-+    # Salt: likewise, the salt feeds the dm-verity target and must be signed.
-+    tampered = tmpdir + 'tamper-salt.itb'
-+    utils.run_and_log(ubman, 'cp %s %s' % (fit, tampered))
-+    flip_prop_byte(ubman, tampered, VERITY_NODE, 'salt')
-+    utils.run_and_log_expect_exception(
-+        ubman, [fit_check_sign, '-f', tampered, '-k', dtb],
-+        1, 'Failed to verify required signature')
--- 
-2.55.0
+Regards,
+Anshul
