@@ -4,91 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5770BC4450A
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 17:20:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B16C44508
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 17:20:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CC3C84D42;
-	Tue, 14 Jul 2026 19:20:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0443D84D54;
+	Tue, 14 Jul 2026 19:20:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NoszArSt";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="A2FWITWa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B011D84D45; Tue, 14 Jul 2026 19:20:23 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D736484D55; Tue, 14 Jul 2026 19:20:41 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 747FC84D22
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 19:20:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6a384e29a20so2990583eaf.1
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 10:20:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784049620; x=1784654420; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=FFdj9YYy/dr6XqZFpITWFZxCP8zcnHb5dgN9I3nYvdk=;
- b=NoszArStlIPZhd1Cg+mQukvul6GLYNapoG6pQ5EYObyxdpR7VlXFMaJ9nxxE7Gn2aR
- +OijBnX4nUQx5qzobkGNBaZt6TSnbh4pV47WG2Nxv5rfBH+YZ5Z7+wfiEv6GydCFsEgQ
- JC+ERpY2a5elEoVeTF/PS09g2uBJWrC5tcTsY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784049620; x=1784654420;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=FFdj9YYy/dr6XqZFpITWFZxCP8zcnHb5dgN9I3nYvdk=;
- b=JSLaTfbIqkp06Hze49yei0nU4HfTblYIaaEIEzktlrtlc1Y/EYp9FqPCUUcfMeoyB6
- t/s2nyGtpbwvZL0ZAqFoArcXVJKDb4Y1qGbsxcgO5Fs8LP2L50LumPTOyRIBRUWFJNBt
- FWrM4cqeA+7bqdkZ3wXW49CNF3ZrZJ0+yACtdN2ixpf0qbu+lAOj9QQ6r9QipgJNzj+i
- SsI0rakf8hkd5IJTvMhwQ13m6oxdEfTrafytpCUnYK9tpyrAVRlvjw9LNS1O7qqoQUY/
- nx5GdBgBAqSMGoL0Fnm/MiX+A0b1rR/FHduH4l00mwwe4o+aiDNQqzH8UiAC+6yVWrxP
- OPQA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8StchTWTh9axsw3FM+6aT5kqNEOnHc79D6Z3iMk9IZPSMNNNKDcp1+Sr5kCxiigkUta1dpoLo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgNY5R9h/jcoGInEkhNWbh4N4ZQiN7/+cYkLJLRtXIYR2X/hRB
- a1ReNY5G1VdCPwmNhSGJlcvhR+T6i8rHD1gDpChp+1ykXur07Ce62fj5GG+zJxj6No6pihgChiu
- hqljNiWA=
-X-Gm-Gg: AfdE7ckPtT6ZP161NkbICryjRZasXQmxOY3eQ9XCA7wbpY2vrKWcidlGOntEUzGRk63
- V5wcu/wn5Zd04XqRZ7oSl4/ynOlmsbL1gHR4mnZGi9582BL2QsmwQwmQeb1s8q4MBNgap102VOa
- ZauSiBgzBuisUi7uW4S+YKBAWa1C3quwRRp2SUFyZSCXd1MEt+a7RENLq/0CuFHhd7BbtR7vXl/
- knYPTP6V7mEoGVJpnJ/tLKzCPdTSRqgG09jC//kwQkbSUW4zCKhg3Q6O5wUMlXpVGV6rvtbzyJ+
- kwMw/Iz/jk/YA+in8tLDcbfy/4jwntvIir3GCFnh6XyxP5SCfcf7IP2rmvbeoODYQDJQCsM62+z
- yezQFEQPsnRMSNDKdbREmjw9+9YL2ItMEGc8RToDVzNNrwKq9IQxwfWchhBVDF1HYuicLHcWUM1
- Afx2fLv5xzCeAesvBIP/1XAWFJ/re6UsSS7pqHBvrRK/Cbwfpy0WmKpEIZJmlmNqq8tavAFW/aV
- DZbKI3Tb6kMcVpu8pl541PlnMGgbOcOJYmnBw==
-X-Received: by 2002:a05:6820:2011:b0:6a3:1e40:6329 with SMTP id
- 006d021491bc7-6a3c60083ccmr3036920eaf.13.1784049620065; 
- Tue, 14 Jul 2026 10:20:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a39a4a7797sm7258279eaf.6.2026.07.14.10.20.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 10:20:19 -0700 (PDT)
-Date: Tue, 14 Jul 2026 11:20:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <me@ziyao.cc>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id 6CE0184D22
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 19:20:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1784049627; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=KpBGuuUhOoGA/dwfvFyOVtwPJDsQ8DyuEsPRXlPsDCfZqWR6hYM9Nno3k1cRRUYSAv3xqPjp05AsC32yuhVMk12Ozw/11FPULzndxJ70XcO0HEjQaeJilDtdQDVEyuEIgKtJkcQRHr4fY9SCJA6y8uv2kpNRueIbeW+u9mMloKc=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1784049627;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=Szr9Mliar2dRZ5VYXdRsL/7qC2klDhCQ9wzOAbgVVJI=; 
+ b=HiLbZBmBQCVdwyD9dmFOgsBvGymDTWkNd9iCuD89ClCKblDRl5f48hIp26tF6c7vIerxPplqbk2dXGooNDFMSvY6fPMUaOwvsHdva5ei7awURYEDF//Xrdszvpw7++JFNfDJYpART2LZy8lRpumbRgqkd2LTBewu6YPUGx2f0uw=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784049627; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=Szr9Mliar2dRZ5VYXdRsL/7qC2klDhCQ9wzOAbgVVJI=;
+ b=A2FWITWaAWkotIDQ3XDeKGVZmpaqx5l4ZfhW0/fo96Qh75CvDz9xhPnJI+CM7sy+
+ WvZmHR1x3N4yr0Ky/0TdJnS9pYrPcu9G2sdosZUq1AZuxNgGF7Yq9pdDN5gwoSBKixT
+ hY+DgOeScVZBPhOu+8imzHgHdM1QopOSwciD30fA=
+Received: by mx.zohomail.com with SMTPS id 1784049623290352.1806624012322;
+ Tue, 14 Jul 2026 10:20:23 -0700 (PDT)
+Date: Tue, 14 Jul 2026 17:20:17 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Simon Glass <sjg@chromium.org>, me@ziyao.cc
+Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 11/16] LoongArch: Generic CPU type
-Message-ID: <20260714172017.GC749385@bill-the-cat>
+Subject: Re: [PATCH v2 15/16] efi: LoongArch: Define LoongArch bits everywhere
+Message-ID: <alZv0aZPHb-xed4F@pie>
 References: <20260701111808.870705-1-me@ziyao.cc>
- <20260701111808.870705-12-me@ziyao.cc>
- <20260701175503.GR749385@bill-the-cat> <alZs9GZgBGI91_EB@pie>
+ <20260701111808.870705-16-me@ziyao.cc>
+ <CAFLszTihFKatBwxu6YeQDJZvXcbp6_s07Xtgb5STPREGU8K8LA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BC4JSb3usITb1Meo"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <alZs9GZgBGI91_EB@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFLszTihFKatBwxu6YeQDJZvXcbp6_s07Xtgb5STPREGU8K8LA@mail.gmail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,104 +77,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jul 02, 2026 at 11:27:36AM +0100, Simon Glass wrote:
+> Hi Yao,
+> 
+> On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
+> > efi: LoongArch: Define LoongArch bits everywhere
+> >
+> > They are all coming from UEFI specification, PE-COFF specification,
+> > or IANA websites.
+> >
+> > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > Signed-off-by: Yao Zi <me@ziyao.cc>
+> >
+> > include/asm-generic/pe.h                          | 2 ++
+> >  include/config_distro_bootcmd.h                   | 5 +++++
+> >  include/pe.h                                      | 1 +
+> >  lib/efi_loader/efi_helper.c                       | 4 ++++
+> >  lib/efi_loader/efi_image_loader.c                 | 7 +++++++
+> >  lib/efi_loader/efi_runtime.c                      | 4 ++++
+> >  lib/efi_selftest/efi_selftest_miniapp_exception.c | 3 +++
+> >  7 files changed, 26 insertions(+)
+> 
+> > They are all coming from UEFI specification, PE-COFF specification,
+> > or IANA websites.
 
---BC4JSb3usITb1Meo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+...
 
-On Tue, Jul 14, 2026 at 05:08:04PM +0000, Yao Zi wrote:
-> On Wed, Jul 01, 2026 at 11:55:03AM -0600, Tom Rini wrote:
-> > On Wed, Jul 01, 2026 at 11:18:03AM +0000, Yao Zi wrote:
-> > > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > >=20
-> > > Provide a generic CPU type with some common routines
-> > > that expected to be implemented at CPU level.
-> > >=20
-> > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > > ---
-> > >=20
-> > > (No changes from v1)
-> > >=20
-> > >  arch/loongarch/Kconfig              |  1 +
-> > >  arch/loongarch/cpu/generic/Kconfig  | 13 +++++++++++++
-> > >  arch/loongarch/cpu/generic/Makefile |  7 +++++++
-> > >  arch/loongarch/cpu/generic/cpu.c    | 22 ++++++++++++++++++++++
-> > >  arch/loongarch/cpu/generic/dram.c   | 21 +++++++++++++++++++++
-> > >  5 files changed, 64 insertions(+)
-> > >  create mode 100644 arch/loongarch/cpu/generic/Kconfig
-> > >  create mode 100644 arch/loongarch/cpu/generic/Makefile
-> > >  create mode 100644 arch/loongarch/cpu/generic/cpu.c
-> > >  create mode 100644 arch/loongarch/cpu/generic/dram.c
-> > >=20
-> > > diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-> > > index 109d37d8e2c7..5254afb2cd05 100644
-> > > --- a/arch/loongarch/Kconfig
-> > > +++ b/arch/loongarch/Kconfig
-> > > @@ -12,6 +12,7 @@ endchoice
-> > >  # board-specific options below
-> > > =20
-> > >  # platform-specific options below
-> > > +source "arch/loongarch/cpu/generic/Kconfig"
-> > > =20
-> > >  # architecture-specific options below
-> > >  choice
-> > > diff --git a/arch/loongarch/cpu/generic/Kconfig b/arch/loongarch/cpu/=
-generic/Kconfig
-> > > new file mode 100644
-> > > index 000000000000..ac7556d6d4d0
-> > > --- /dev/null
-> > > +++ b/arch/loongarch/cpu/generic/Kconfig
-> > > @@ -0,0 +1,13 @@
-> > > +# SPDX-License-Identifier: GPL-2.0+
-> > > +#
-> > > +# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-> > > +#
-> > > +
-> > > +config GENERIC_LOONGARCH
-> > > +	bool
-> > > +	select SYS_CACHE_SHIFT_6
-> > > +	imply CPU
-> > > +	imply CPU_LOONGARCH
-> > > +	imply LOONGARCH_TIMER
-> > > +	imply CMD_CPU
-> >=20
-> > Which of these "imply" values can ever really be turned off? CMD_CPU?
-> > Yes, others, I don't know.
->=20
-> CPU* are all optional, but to turn them off, we must also turn off
-> DISPLAY_CPUINFO, which is broken without CONFIG_CPU since the
-> implementation of print_cpuinfo() is guarded by CONFIG_IS_ENABLED(CPU).
-> I think we should reflect the dependency in Kconfig?
+> > diff --git a/lib/efi_selftest/efi_selftest_miniapp_exception.c b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+> > @@ -35,6 +35,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> > +#elif defined(CONFIG_LOONGARCH)
+> > +     /* ud 31 */
+> > +     asm volatile (".word 0x386007ff\n");
+> 
+> The rest of the series keys off CONFIG_ARCH_LA64. Please pick one
+> and use it consistently - otherwise a future LA32 build will
+> trigger this ud but be missing all the other bits. Given Tom's
+> suggestion on patch 6 to move to CONFIG_LOONGARCH, that is probably
+> the way to unify it.
 
-So if you're using the CPU driver model implementation, then you should
-have:
-	select CPU if DISPLAY_CPUINFO
-to cover that.
+It's intended to use CONFIG_LOONGARCH instead of CONFIG_ARCH_LA64 here,
+since this UD works for both LA32 and LA64. Could you please explain
+what's wrong with having only this UD defined for the future LA32 port?
 
-> For LOONGARCH_TIMER, it's necessary for delay functions to operate, but
-> if a platform makes use of a non-standard in-core timer implementation
-> in the future, being able to turn LOONGARCH_TIMER off in the board
-> configuration might help in code size. But I don't have a strong opinion
-> for this.
+> > diff --git a/include/pe.h b/include/pe.h
+> > @@ -194,6 +194,7 @@ typedef struct _IMAGE_RELOCATION
+> > +#define IMAGE_REL_BASED_LOONGARCH64_MARK_LA  8 /* yes, 8 too */
+> 
+> The PE-COFF spec also defines IMAGE_REL_BASED_LOONGARCH32_MARK_LA
+> (=8). Since __loongarch_grlen == 32 is handled in efi_image_loader.c
+> below, it would be tidier to add both here even if only the 64-bit
+> one is wired up today.
 
-OK, this seems like the kind of thing to handle if or when the use case
-comes up. Until such a core exists we don't know what other assumptions
-it will invalidate.
+Okay.
 
---=20
-Tom
-
---BC4JSb3usITb1Meo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalZvzQAKCRAr4qD1Cr/k
-CkLnAQCCSPd0ukZIoHAYxCe9mt0cdo1oNsxBAsWmmtJpByKzNQD/V3nTgZSr9YCv
-PEUPp92BSeWZ6o9IdFReFGKoqpcYzQI=
-=0SIK
------END PGP SIGNATURE-----
-
---BC4JSb3usITb1Meo--
+> Regards,
+> Simon
