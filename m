@@ -4,104 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46226C43458
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:17:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F5E0C43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A65D84D0C;
-	Tue, 14 Jul 2026 14:17:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 27D8984D0B;
+	Tue, 14 Jul 2026 14:51:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sony.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NjBE5/iL";
+	dkim=pass (2048-bit key; unprotected) header.d=sony.com header.i=@sony.com header.b="Pf16untt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C907784D16; Tue, 14 Jul 2026 14:17:38 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CB0B84CC9; Tue, 14 Jul 2026 05:05:07 +0200 (CEST)
+Received: from mx08-001d1705.pphosted.com (mx08-001d1705.pphosted.com
+ [185.183.30.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E8BD84CEB
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 14:17:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F7F784CC5
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:05:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2cc7e86e7aeso8098615ad.2
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:17:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784031455; cv=none;
- d=google.com; s=arc-20260327;
- b=HgmMvk4l8DM2KG2GdTYgrAv4vjx2mqQLBJBJw0pRwFAQCHJhZ00SAmbTqm5nJyQz/U
- ZWaNtNZaDwP49OFhKoumNVdBtkqYPxQLo6e8ryEBC6J+2DNsrhs0gYmXJRNA69OAvb71
- lB4RWh5Nl0Vw1pbxUEP7X4xlCP2I5lkiN7zqu7nHoFFhFmToNthQlpUvon8Kr9nn6Fdh
- dZb/IyaM45ZqjHZRu09BFk8PRuEmT69XugOYclMFBVnwgbocx0qzzEuPim2KraoOC/RK
- 1YzTmxSl9irdeLksMYcd+8Yl46zCdGo/KKhBkTHYNIVUZkYUEmuh7wRrKKU2yhAFQnBM
- FqbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
- fh=aKO+wj1tXSCvsqO6STvK2Xycn+f4kyHxGj/G0aaEIPM=;
- b=lrZntgdCnHvAu++GFgfTXre0Z8JOG5KzboOt0qqk2i1maCOeFWlzk1l3xnJ7h0i60h
- Wemub6RcLDTNPw3G4usCNiiuwIm4ID2JzK2NNTbznt5EOFBvrXFIHQsndDmu+oaCLJC5
- jIvh0mv4zEtzlAdeRURaRtIs4e20fWAvyR0SqWl6D5bkHe3pvLzG7gKxtuz7nZZjtMmJ
- MdoXXBR8L4zGqSyCgKZX9MoAY4HYUo/z/EJml5z/zmh4wZioQvzNFEkbpHfh4AngiYX/
- oE3KE2ozgEShmw3j6R45gq4Z24sK/w7XkchYkLEbgig7Ih7qb+tq8J+wF/EycsYTBAUq
- vQiw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784031455; x=1784636255; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
- b=NjBE5/iLpw3fzUaT+N/Paf0ea7t2eIX4+0CrBpX2+sCYLxmbWHE/JsdLlpWJTtgKSj
- LsbPpCc8e2sdF1FWGVjNvuREyLD/Y8pK4+QgtT3ORa4BfH3z9Hn8X8h5QmRqpufRWp90
- NEKHhtDhDRpS6YKQGffWk0ACurVL+7AKlHBtw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784031455; x=1784636255;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
- b=RTdlHKmL6W/TXQ+WdlL2X1Cpg9LubYaU14+1Hbz4OxwwibK1Qe5EP0PVsBPSLiI1dP
- 1/zkpqxP3zvna5fS08X8P5Ba8JLTn4SDXGI1V78DOt736WyZLDbDV7jdN7lq6q09+oM2
- Tk7umq+Lk5sV+Uzmoegax66XiQ5o15jCC+7P4k5p6ZSLQsPxgCClf8IKbTZgqDgSD/u0
- QiF5M9EYE3imJu1Hja0QXpf1HJWQNlZbcPn8XRphYrl64iCqaPTRwR2XCdGXKUej3fqF
- G6Ka2lIf+XKsmp7D+iH26NIrDJXrtkumjPHeei59sFTAPeGiXAA14uoQ6rUdobVazrVv
- xerQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoUXeu/wJcivh2kFbjnvv9V768y26OneWJY81EdTLl/qxt7ef0Qe0mQGLIOrRMPx3JmIcZAkzE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJsDouIJLuNAqg81NHqzI7r+Ru37rZRqOvF0ATrI7q843o91bs
- QC/bkNjrn+d38xrfqrhe9KdE5ATBntQtYYT4pZtmfZ9A8yDMaD5yYdZTeMMypjAX6DIqNJ1v3x4
- UZXgC7LL538G3oJ+0JVZIB9BpYD6YOsda5kTsRMmK
-X-Gm-Gg: AfdE7cmafTKzgvsK7zGkWI+TtRx01RkGMAQ2grJGBawKsaMmG8RgY0ee19xjnQ9zim5
- XlNAwY/d1lyuJB0EyskGoxx7s5DH1IANKQUIT/CL+n6LAzfcOOXWml99g2+v69TIRAAV//56ql0
- xchz4lRWDHca+p4nZe7+2u/+noDTyzl2Q7u6ZsQFH7lXWpTE0aQoAFEjOhQnUBh4BMcRihzeQfb
- 4Bxqdv+awEDnDO7mJcAHnrSo2N/cg0Fh8lgEtb5/TRecXNlFu606jLuGZxYcmo85u9z8uJbW3Q/
- aCECaA==
-X-Received: by 2002:a17:902:f68e:b0:2c2:cf20:213 with SMTP id
- d9443c01a7336-2ce9ee1142emr140232485ad.29.1784031454811; Tue, 14 Jul 2026
- 05:17:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1783816074.git.daniel@makrotopia.org>
- <4adbf45f0d33802ebd2afd627f639e47c6609e17.1783816074.git.daniel@makrotopia.org>
- <20260713220842.GY749385@bill-the-cat>
-In-Reply-To: <20260713220842.GY749385@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jul 2026 06:17:11 -0600
-X-Gm-Features: AUfX_myJK5CEBwMn-XiWN4FFtrmdZCUUuOoD0Jse4VMjHCATfA-kg6OZiAP8-T8
-Message-ID: <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] test: fit: verify dm-verity roothash is covered by
- the config signature
+ dmarc=pass (p=none dis=none) header.from=sony.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Jacky.Cao@sony.com
+Received: from pps.filterd (m0209321.ppops.net [127.0.0.1])
+ by mx08-001d1705.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66DNmik23017739; Tue, 14 Jul 2026 03:04:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sony.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=p1; bh=hU8PyyN
+ hEzMLZ3rTJebK1jPEbUuEcIAYuUbYuXzNQ1c=; b=Pf16unttqdn46Or8nXGFkka
+ 1fD3yUDhNB58c2oyVjM1hO3sizlu0N39SaOv+21qH0xTV2NC620Nbrl5IucrsfvK
+ nV8abx4yzSW7mwuN5POqR35oxAxv0Pve2RzTwtTrzD1HGF2nD8mRA/msLduyMxS+
+ ZxoaB3CkobFJsdG/bpNd6zyl8fwqdPLLnUgJy3AaeueMSDEbvlPUhXsWZfQkvfKK
+ KC2rNHq11MceQb9B4KW2hlQq6zpIJsZnjRzL1xIpX0J2h7T6YMxzhK847Qs90rFJ
+ qfXBVPG1iB25raBjhHFGMklugLFMFTl8zzuNwChkuTSUuoJ/EGgfLECb/MLuuMw=
+ =
+Received: from os8pr02cu002.outbound.protection.outlook.com
+ (mail-japanwestazon11012034.outbound.protection.outlook.com [40.107.75.34])
+ by mx08-001d1705.pphosted.com (PPS) with ESMTPS id 4fbegg2r59-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+ Tue, 14 Jul 2026 03:04:48 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sAVk/Jh87tIz+VU3lZg//MpAI2/fyiqzylcRufZA09Cw5qLbH2VBmCIPOOodZweHiInR/vlZ7NppVYcYV7A0G/if/5v4a8NJuULUtHdewY1iEl4PAaipjY10UZuIAPEXVWJJ3p1RtmzEzu0DAdsREAk0YK3jLvM1/p8xS/nMoIdOi+g1jA2xS4HI8u1L22eQGSdNpDhN+qOpH3jUBbKyo11FKyypFpemDiQ+xWWjE+1bcF8nDo2Qx5Xc4uPkebYu72gsoNi2hchpgfhk3gpN+UlDNCRFh8tdDcTcNfAzgXoDkb1I6ZXDZvjRHzVdbiorp8RvmkR/fANNm1vAEDGtiw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hU8PyyNhEzMLZ3rTJebK1jPEbUuEcIAYuUbYuXzNQ1c=;
+ b=PXBFQ+1NinWKPaSYTNAwlCO7eW5q6izacvnKq4mZL2uiwz2sRoDemWmJNlf4qVvmNoFvxJUudymHLcwV4VkxITtKIS9pjg5kDg2SK7A+RlGJERSU7HDXarE3AV4pFJgI9AqKzb+RvROywlPgOuRs1yTTCNhdNGgfXfC7LOJPieA94eOoD6FyPyJkNJEhv3ACrKkffPqYo1PbKfOHra4ipA4zqKoNgjNsqlp5d2Fwu8jrqVja9gFQytxKkaToq2rt1tbwzAuFAnwMM9JPd9MoL3k0QAi2uEonlTm4wmSXzbr4dTsm+5Op68ho9Gf3y4AMRcMUdexJyCykrR2kZrI05Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sony.com; dmarc=pass action=none header.from=sony.com;
+ dkim=pass header.d=sony.com; arc=none
+Received: from KL1PR04MB6734.apcprd04.prod.outlook.com (2603:1096:820:d8::11)
+ by OSNPR04MB9376.apcprd04.prod.outlook.com (2603:1096:604:487::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Tue, 14 Jul
+ 2026 03:04:43 +0000
+Received: from KL1PR04MB6734.apcprd04.prod.outlook.com
+ ([fe80::6812:7cec:2e9c:ad96]) by KL1PR04MB6734.apcprd04.prod.outlook.com
+ ([fe80::6812:7cec:2e9c:ad96%2]) with mapi id 15.21.0223.008; Tue, 14 Jul 2026
+ 03:04:42 +0000
+From: "Jacky.Cao@sony.com" <Jacky.Cao@sony.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Daniel Golle <daniel@makrotopia.org>,
- Ludwig Nussel <ludwig.nussel@siemens.com>, 
- Anton Ivanov <anton@binarly.io>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Marek Vasut <marek.vasut@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Randolph Sapp <rs@ti.com>, 
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+CC: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "nora.schiffer@ew.tq-group.com"
+ <nora.schiffer@ew.tq-group.com>, "Steffen.Doster@tq-group.com"
+ <Steffen.Doster@tq-group.com>, "alexander.feilke@ew.tq-group.com"
+ <alexander.feilke@ew.tq-group.com>, "Max.Merchel@ew.tq-group.com"
+ <Max.Merchel@ew.tq-group.com>, "Jacky.Cao@sony.com" <Jacky.Cao@sony.com>
+Subject: RE: [PATCH v1] env: Fix compile error for envtools
+Thread-Topic: [PATCH v1] env: Fix compile error for envtools
+Thread-Index: AQHdEqINARnpMVEBj0S9fvVbX43Nz7ZrP/JwgAD8eVCAAAVtAIAAExaw
+Date: Tue, 14 Jul 2026 03:04:42 +0000
+Message-ID: <KL1PR04MB6734A43A5179C30DA1F9B9A887F92@KL1PR04MB6734.apcprd04.prod.outlook.com>
+References: <20260713083141.2772971-1-Jacky.Cao@sony.com>
+ <MRWPR04MB1233021A0AF8D2117DBE5984888FA2@MRWPR04MB12330.eurprd04.prod.outlook.com>
+ <KL1PR04MB6734F919E17C467C8B29DBD787F92@KL1PR04MB6734.apcprd04.prod.outlook.com>
+ <20260714015324.GZ749385@bill-the-cat>
+In-Reply-To: <20260714015324.GZ749385@bill-the-cat>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: KL1PR04MB6734:EE_|OSNPR04MB9376:EE_
+x-ms-office365-filtering-correlation-id: 8fe58688-3126-485d-a9de-08dee154a6af
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|23010399003|376014|6133799003|3023799007|56012099006|4143699003|11063799006|22082099003|18002099003|38070700021;
+x-microsoft-antispam-message-info: NmMqGixEriPfDzfa8DVMMprXBGlztIS0Fmf6WIWG1AMdfvRAj0Gw/ah0rueAaydvmYZ98zDYmWcIeWUzZvF2oBrittBGY1LYLbgUELHxu9+Ppk3E0IjG19SAvN53EAJGCFN94pLeKVw0Pgl7nsVRFcHZ6bK5Pub8w2xL+ojiUjPXwoDKcY3CjY0V0XciI2CxbZJSiYUFmjEFpx0DAbR4qA0vuRv7Tp1v+ITr9HZ75xoRM/lsfO/RG0WqGWiDzM6r0eJxIp1yVsnHcre1d6+qNuipXyy0e+KMP3phMxmZ58AqPf8hz0US50kEqArGCb170P+fgx5ozwP2DUpRlcxycPih/6UrLfDiGCyhcYS9ZGBgkom0hyDLO05JwcrwMfagymX8G9eXVDjKCrq/m+5O2Fz+LC1bkvdZttfFUjVyqL0DXC2VYfbtJXWL3vEqZbWwtR0RB+m3PkWSlwj1eZ3b0fE2nBxtCAvMwjCiKZjv7H5/tPVTiq/7Qlmgd7doaEvTa3jzH39rdEvs4JWmxRa5j1C4OFc1irVcB4ZbC/RK+4V3ll6ZUyPturkQTAO2J/l+37mb5EFwxUDWBUpShXIjcItUkRQs2u4kRqkq8jpcNqKGgLoeiPBFJDcodEnMrbc5qjd3G6ZVdOQ8pR3ZBM/7doF8zNU5+/1aKgE1i/548DpEFVkrncOAnCiQINDP9T4we3D79DV29Yr6u6WDWH8O4FMNY+rAGdIBS/qiZscKOX0=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR04MB6734.apcprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(6133799003)(3023799007)(56012099006)(4143699003)(11063799006)(22082099003)(18002099003)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?rYHwLNaRwvXBtLoA6pQ0lsbAeV1naRJ4JQs6+6kA/WyublqAhlU+6TL8GsXU?=
+ =?us-ascii?Q?8QYltwZ/mPO8tzjsgrvzohTnBjLguaUIjO2FNvDT2EWcaX8RmBSdZZQJYLsw?=
+ =?us-ascii?Q?F8rTH7R4qFtmvfgbIbdlP4QRVHW2xzHfxqDCW8/KlFig+JhWAHlROpNUZjOM?=
+ =?us-ascii?Q?M3zlhn9BlBJ74uyhtMbz2ccuVFJsk6Ubo/9onpgyJ4twJX+90QpCY09TPUAH?=
+ =?us-ascii?Q?+4cBesyhk+zg694ZWDEstl2uiqfWIa+WjQ8wt+TA2r78ZG78wYrbR/LxSLCz?=
+ =?us-ascii?Q?uahUL9k8V4WP6JtbkqQLvsc+1a/vK0OUiVKzNIdKmUUUxIOHwQtoNCrrSYd5?=
+ =?us-ascii?Q?yZA+L2hTvj1aPLGzTMgZoBfH1/o6NkUwMvTOUo/nsH31nElfIbnmtuQFThyE?=
+ =?us-ascii?Q?1CVjEcvInnTQDF2W3mqIEAnV7qa0OONVc9lNlR6uS63c47iGF+yim9BCUJnS?=
+ =?us-ascii?Q?IeOaxsta4tx/NQdYXSYBXRkUiGb3Dfg2oVAj4fddA6PdI8zHUiI2aHvaaeLe?=
+ =?us-ascii?Q?xez4RC7/JkyEuIttd31SaoHkxNxfgjj2iPADL+Ms5ou/QUfoOxhOeumUnLRI?=
+ =?us-ascii?Q?DyQkhvyDlNBLEZLsmIktdnKOPtQOqI5Qcuwn17jx2nu/80TksPXmT+6Y1Jao?=
+ =?us-ascii?Q?XDiqK9zbW4PpnJrHaL8XCXub8PNxcQ2ncpVJFtw6DcthakTKhgaEXkAQHdqm?=
+ =?us-ascii?Q?22yaQx5SEZ1aGS3pSrLm6KiDSWFa39qM1dNh+rdGIdpNCrXKbnHSrSuS9rCX?=
+ =?us-ascii?Q?IgyZUZUgcBSACxHNnZj3UC4b2Nw0wyC9QK1V7ExNOzS1ANRch+ednH6mKy68?=
+ =?us-ascii?Q?0o7JhF3ctA6MDaEoAqxTkeOnvWokSV2W5nQR+eWjtJ3sLBpwPylanujKNU24?=
+ =?us-ascii?Q?uj88GrC5RW21ZlEvw2JvaDN/VxYD2wp2MKO9EtKuu01oJDl+uUhupXg7vBi8?=
+ =?us-ascii?Q?kA0fQ41ntKJX7i9QKMsOXGtNDVwrkWMSaYgsUWgd8ugfLhywo8TSNkDKMVrw?=
+ =?us-ascii?Q?FwSK5voFCvOPmjcQswd7h7hsdNNl6Ejs0v5FqDv1ID+/FJHV7jDwdFl2WmqJ?=
+ =?us-ascii?Q?hDCa9sjsZUpZtF4hqdhBGJ/thuo8WqRRKr5CF6sYgauFWZm0/4b+cs3RjlXk?=
+ =?us-ascii?Q?JiIjZ9vEf/vvUOfBZ89zvUFkMjM+FGEuWu4aCYj2f0DfgMvrOWZR/ivbT7Oe?=
+ =?us-ascii?Q?2wNNEMCChMipX3CS2ryXYCzgZQViEa9faB3z0WZGHEIUU5kJs4dPRCAE+EhM?=
+ =?us-ascii?Q?s4uVEt1VIre/fqH6KWZBMWFucqtgmV709Ry/fcGhhWeWz7avDW2Ot7CeItC6?=
+ =?us-ascii?Q?QjUcX4gAGL5mDVS7C/i0MuXRtxL40n2GJZN8pxZ0ixmIhz3SocU+QEXMd5wj?=
+ =?us-ascii?Q?iA3f90wiBwvg8VdBqhSOkW+Bl6YkihDAINLBkdIxbRdoipYHiYKrzHe1NutN?=
+ =?us-ascii?Q?d8T9M7/qWvTDkTAFs/ujhiKyL8r8O8BTW0RGpcOK+MldR3dBINts5ckfCRId?=
+ =?us-ascii?Q?SCRALmpd24vIapNOFJ0zCel+FWwcY90wTMSJdgW+7pUiqFUZSXwQ8XIOA8Vd?=
+ =?us-ascii?Q?jjGG/id7HjjcpGkbSiMvkuebHkdHbx5K4iFvCML0ifrsG0sJJApUuQmMwgHo?=
+ =?us-ascii?Q?WZcrxJHhNAmX2qi7wciblF4eMYGYMcLbiKno6ZaZr9JWzMVAFOj259RY9TY9?=
+ =?us-ascii?Q?gcIakQ53/X05H38tT7KD13Rwya66aUE3ghmmqF6q1aZHysOB?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked: q/bRaKJJN8E2KS3W0LI4ReT1VbUSb+mbfLn7PgxHai2clxeQwsHF9TwSqJWrCyNQSnM1QRMKrVQpIMKeCjJZGtnJDxVeyqPkdzTTs+2gprojpEGCZoi/tBvln1L9bxXxvsyLKgGPGBbK1GytbsCvAC5XA8xyh4Ebk5gp3JX/c1s/GfcX34NuyqHbxQ2Hdhtwgu3/W/hcf9VKG7Z1KZjApStohDeNEe55NaVIV7AmSyX2iKeFMUO4/kKYObdAOmsQ9tau8s0l8u6Ad22pU3hhSK8XQWa4hI+NQrEMUK7ioSWuqLFDLLGukd0+ZBFNISWBqHND2WMDJAPiKI1Rl5sl8w==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: wbZpZI+RuqcUwkyEYFD3PYE0WfJuOE+ZF+FWh5nepTv1NO73ECCIGy8+P2aqS8EwGs5eOr/oFdq8+2SowTgwWH0yUfVYPIxy4zLYXA74RJvii72di+P+Qv5KiSpOOlw2S93TcTuYDFOokLQNMXUE6DApljrbNwmD55QzOx5JWbQgColR9d+z7CllsuEQV+ExtN7eUfRkm6tJdzY9rIZ/t0RYW7kZl+aaZ8EOI0Ng4VpnPMbAa12Hn9uRxf5uddF0AQ50NMu97WkHswS0hzuhs0UUNChS2FfmSKa2EiOF/Omciv834wb4PFoTdzDXJk6z9AgzlXFlxzfa7bBqajjw2dhw7/2seO3Su5US75RDeNqXF9YO+tYjla1m++etTxzkYFvgxxvUJQuPyYRtLki1IU41VsLHfT5qAbpCeWcxzGly2Zp08Tn2T001R9xA2rup+d6UdKDyD84RqZFObg/cg1A5quGNycRFvRXW7NHNZC5P87Wnj17H/V1erHz07AzXd5CjpJlQl27MRl4flwYITi+VS53nZVt8yY0RFAnDxPcH0TdfENNb8f4HNvi3tgtaHODlHkPOLLVxb+2XYnj+xnnFpcfi4KZpOXO5mLmeMHHGEXwjjS3ngUu1+L5UjA/j
+X-OriginatorOrg: sony.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR04MB6734.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fe58688-3126-485d-a9de-08dee154a6af
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jul 2026 03:04:42.2677 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 66c65d8a-9158-4521-a2d8-664963db48e4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: z8nmWX+Jy5w6496DCjKdjDn2E+VEVBZqxPNaVak6LIpDDYJS6tpsG4SWZwmc8CSDtC1F3zqNXpbV2YZdtLaKTg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSNPR04MB9376
+X-Proofpoint-GUID: 6nR064mmwL5TzhTxPPWFwrBp6kYPq1mg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDAzMCBTYWx0ZWRfX4+H3H4zflXMA
+ SfQnb9+umXMNWiPcchNQuPetIcPtjmscIJslfn3GlRqZU0SCelyIX1PgeoLC9razUiP4CvMUHdq
+ 6ILmfln8ZFiXMTWuZ15LMCK3AT7zolaXAUBy/6b3IL/gwHnIlc4OR95s4JGMgdzLYMQQytXZtMP
+ 4UcjgORCFKG9HkAQfqlXJghU6MC5M1oIOnGkaNbxAAASC8zY/i3B96oRHYTL1mzKosvNN1MhDDM
+ 2tb22m7UO39uboi7dV+q9PjqazeSCFqeBFW3PIzBxvUazLbOQ0AzwUmfY8nfdjaEENx3p/H0Azh
+ CP5uS9hEfCJhhxa4AE2AHp2s/BJID8qzh9IHE4JLsXViNYS9FYzocEtsQ6DEeEWRDa02rZv4zbb
+ Xkf8mN6+NUUFnkbkvrC/EsQwoI7oUh0NGfW2FJCdKuO6HVHLwRqJyiQ/JVwsFUdzvesFKpAsjmp
+ 5ALq/deq0Oz8QO907Bw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDAzMCBTYWx0ZWRfX5VBRNtsRsswT
+ oN/C5FArkcLmqvWJTaiF1Qk8iAKKLf88/9ajRA6ze324qAyUTOLPJN4W5I36h8jk8h+duBEUabi
+ wO9eGj5a7dAAmkY6tx9rRjU7xBu5Ddir6sCdyWG3NMrwWF9qtvpG
+X-Authority-Analysis: v=2.4 cv=LpSiDHdc c=1 sm=1 tr=0 ts=6a55a750 cx=c_pps
+ a=BjOsApdyHS4FXG3HZFVJww==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=RAioF0-LDSMA:10 a=7j0FZ4iXMVMA:10 a=xR56lInIT_wA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=KAb5x4SsHD3PzxGk7EmX:22 a=M2bq-ooH9SiLYa4vvubY:22
+ a=0HgSsbAk5vxDS1aV1eoA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: 6nR064mmwL5TzhTxPPWFwrBp6kYPq1mg
+X-Sony-Outbound-GUID: 6nR064mmwL5TzhTxPPWFwrBp6kYPq1mg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-13_06,2026-07-10_01,2025-10-01_01
+X-Mailman-Approved-At: Tue, 14 Jul 2026 14:51:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,86 +183,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+> > I use master branch of OSS u-boot repo and meet the issue with below
+> > commands:
+> >
+> > make mx6qsabrelite_defconfig
+> > make -j8
+> > make tools envtools
+>=20
+> What host distribution are you building on? And, <config.h> *must* come f=
+irst
+> in the include list, for it to function correctly.
 
-On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
-> test: fit: verify dm-verity roothash is covered by the config signature
->
-> A dm-verity protected filesystem image is not hashed by U-Boot; its
-> integrity is delegated to the kernel, which trusts the roothash taken
-> from the FIT dm-verity subnode. For that chain of trust to hold, the
-> roothash (and salt) must be part of the region covered by the
-> configuration signature, otherwise an attacker can replace both the
-> filesystem and the roothash while keeping the signature valid.
->
-> Add two independent checks of this property:
->
->  - test/py/tests/test_fit_verity_sign.py signs a configuration that
->    references a filesystem image carrying a dm-verity subnode, then
->    confirms that tampering the roothash or the salt is rejected by
->    fit_check_sign. A control that tampers a byte known to be signed
->    proves the check can fail.
->
->  - test/boot/fit_verity.c gains a runtime unit test that builds the
->    exact node list the configuration signature is computed over,
->    turns it into hashed regions and checks both that the roothash
-> [...]
->
-> boot/image-fit-sig.c                  |  25 +++--
->  include/image.h                       |  25 +++++
->  test/boot/fit_verity.c                | 194 ++++++++++++++++++++++++++++++++++
->  test/py/tests/test_fit_verity_sign.py | 162 ++++++++++++++++++++++++++++
->  4 files changed, 399 insertions(+), 7 deletions(-)
-
-Somehow I didn't get this email, but I'll try to reply here.
-
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> @@ -340,8 +340,19 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
-> +#if CONFIG_IS_ENABLED(UNIT_TEST)
-> +#define VISIBLE_IF_UT
-> +#else
-> +#define VISIBLE_IF_UT static
-> +#endif
-
-Tom commented on this, but I'll just add this. Linux has
-VISIBLE_IF_KUNIT but in U-Boot so far we just stop the static when the
-function is needed elsewhere. LTO can be used to avoid the code-size
-increase, for platforms that want it.
-
-
-> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
-> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
-> + count = fdt_find_regions(buf, node_inc, count, NULL, 0, fdt_regions,
-> + ARRAY_SIZE(fdt_regions) - 1, region_path,
-> + sizeof(region_path), 0);
-> + ut_assert(count > 0);
-
-fdt_find_regions() can return a count larger than the max passed in,
-meaning the region array was exhausted (see the 'count >= max_regions -
-1' check in fit_config_check_sig()). If that ever happens here,
-fit_region_make_list() reads past the filled entries. Please can you
-assert that count is within the array size, matching the real
-verification path?
-
-> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
-> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
-> + /* Tampering the roothash must change the signed hash. */
-> + ((u8 *)digest)[0] ^= 0xff;
-
-You already have digest_off, so you could write to buf[digest_off]
-instead of casting away the const from fdt_getprop(). Both work since
-buf is writable, but avoiding the cast is cleaner.
-
-> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
-> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
-> + digest = fdt_getprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
-> +      &digest_len);
-
-The python test also tampers the salt, but the unit test only checks
-the digest. Since both properties sit in the same dm-verity node the
-coverage result is the same, so I don't feel strongly, but a one-line
-comment noting that the digest check stands in for the whole node would
-make the asymmetry clearer. What do you think?
-
-Regards,
-Simon
+Host OS is Ubuntu 22.04.3 LTS.
+Toolchain is Arm GNU Toolchain 11.3.Rel1(arm-none-linux-gnueabihf-).
+Also tried Ubuntu 24.04.4 LTS and Arm GNU Toolchain 15.3.Rel1,
+the issue still happens.
