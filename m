@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6EBCC44501
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE49BC43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D72B84D00;
-	Tue, 14 Jul 2026 14:17:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E220884D11;
+	Tue, 14 Jul 2026 14:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M6U+GIv+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DI1xpEB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13D3384D02; Tue, 14 Jul 2026 14:17:16 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3166584D0F; Tue, 14 Jul 2026 14:17:36 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF8F984CEB
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 14:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8D6B84CEB
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 14:17:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-69531108f25so6922004a12.2
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:17:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784031433; cv=none;
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-38dc69c74b8so2550467a91.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:17:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784031452; cv=none;
  d=google.com; s=arc-20260327;
- b=lO1Djpz1iAxhShNbP7qvAMembuuIvHy8hqpqe7v7KAP61P3f87cbyODFVt5g3oHGSo
- RhasrMRnCdbqILzQ2x9aQcgPNPVh0aS8TQjaC/nAyoggTXjLyJGBIsC2HtT6+rva5Xav
- 9y7Ky+NxbRHqT/j2OrN9POTQvjKBTPPP5Gg4e+vBAfyvimWc8eZOWhfkGVce4V79L26/
- VbWGg5ckpcseOwuyOrreh9xN5oE93X20PrqepbzfMkljWt5t9ZclZirP/+R6oR1nCZaI
- uAPkcmjKSpOFafUHdYxcV0n6Uphae5Pi3YWrriAwcMoWMV0ChnBZu3CeSABer0Vx8MNS
- 1CHQ==
+ b=bivF5yO89+B94BLrL2m9StH9xqFVSTOG+dHOSG7y+IzxlUV2t41ettYPWLSkK16j1w
+ YG+d3/8NsztvnkpzK+pjCHwZJl/Zw/f5hBLydkMwxk/7nqB2hcFc2BizlVK4AFTmC6oT
+ Z3qN8OhzG9QraTe8Nl/1snrdjpyjKEoCAxGGekD5jNuYucLxu2Aq23MpjDwgtnKyfz/q
+ KyqlexuN9NtjKaK6eCRTHiJmknJoNFWD0PXnoRc2Z5Rchutr2VVr+BhOd/yN7RxaLViC
+ yKbbagSN6VT+hIsLLu+EYr0ZTRFN8bUMi+QnU+WBwauPsLfw12R1GosVZaPVTwNuMTDs
+ KZWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=5nWLEjwESLDw6qhVG+Sn7kr73d0th++kRpXtfvCXUOU=;
- fh=j7zCQFIVY/wqwMBEyy9uxzmSL3MOH7Be1CJiFaVemiY=;
- b=qrASNd/Gvu2/1k6URpuJdbHXcYwN+0+cMjYPrZNx2OOdjDCziK9mxx5ZDZUfUjtgaG
- Cm7Cw8N3gm7pNVsPDI2R6p0S7Pnnn/Vyumt/57LKSaao3VfTaldXylsdwTskiZGiQTmo
- jVMFst1XGBJum1b0cwy1hWYwFF2n1R/6PoTpqh8ms4B52+eTottRZaxGO9iTl5jzT4ik
- OKyrGpvH99TEB3shUar7wPwXwnlVzM9vcRz4Nf30GAPqItZ562JHNcQBBoM/W9KBb+De
- tH8A+djiJLTTg90x1soF4Un6znpBeTII2taa+Fbc3NqNvXhIuwjfFIDzAkETmZqYp6xe
- RRGw==; darn=lists.denx.de
+ bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
+ fh=og+o5kBITe9AIUuiCiDU48TccAC6p4JUUdx+LCo3X50=;
+ b=KEZjfqaVVZyVFtQ/L4ZlcxKQQj8GH0BLpkXQRlxOzvjprVTJfpLDuoeeusoo95Vti7
+ VSPOKXW0qLiet3Xtkty/mn8cAzq4SluV6tnZ9MJBalPSqfJtob/RiF86xXMMDcjFt/ry
+ SqYkXLPUv11/UY/nVIEdiOaLxy3gTvUZx0YjyCdlb5vzTCeiumOBHEreh06p4PKw1fgi
+ vHaPnH+G2wsMjKEqOYynEov/XxUkecuZ3Tau5E1GvmrrzEiP+bLvl/aXSI3IvpMi+Fpj
+ +odkoVpEDEo1v3wsXnPS/dT/Tb6sksMQgFHc+ewPv7di7IW31kQ62QwcTwOaCp3QNzI7
+ QBkQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784031433; x=1784636233; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784031452; x=1784636252; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=5nWLEjwESLDw6qhVG+Sn7kr73d0th++kRpXtfvCXUOU=;
- b=M6U+GIv+rqP/dPMBohUyil/MuKpwIm9f6pF+ESPDSoWf8QS7yCQGT6qtMCBNJOqv18
- +6mPdHSbZb66FZGMxvgB8jsPn0dVJjAxot1ljEDNQTc0YAxKiyvliL9er5crcx1W1c3S
- bMQh2AtoQgaZEjQxN5UC8/jCU8sVKULbBIvnw=
+ :content-type; bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
+ b=DI1xpEB4j0Cx9R4LzJUdtVVzqaH3u1QsJsBVFa5KiUYfMtHuh/T3ZLubFXD1qyISuY
+ BNtc5CYkKPV2YG6XCsH8ojwqn0Pl/BLkkeuuTTCutp/r8PkhEyTEj2DIj16XYmCj4xu8
+ CGHlfgggtSou5tpkug0so+ju1zgHDGlheRiRQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784031433; x=1784636233;
+ d=1e100.net; s=20251104; t=1784031452; x=1784636252;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=5nWLEjwESLDw6qhVG+Sn7kr73d0th++kRpXtfvCXUOU=;
- b=ib0hL4LPGrgAmiTyCI3h1Kjwm9dY8V8MPrr4b4k6XCDbNB3G22bjdXePAe1QxDrzHT
- bt+k53i/1KJZ6CQFc/BL+pO4noGVMmVhcNIoz2l++YRDNOPz2y7A7Y9xbCilayd2rl0R
- wCrdmpZcfK8RMqfcoR+OSCA4Ih8TzNO7CtCRh6hRZfIFvyxLN/W3SRBD0BUW6e7uCy8D
- a66PTU0h4ZvcI5kr7sMUFV4i1JQwiFxt9vqdDC5AmVeIpjNUnBQP9InvF2Ik2FKjpt9J
- CPhio6Ijzyc8n/fhkXajofblzdlVyD2WsV5gvdS/W0thdoFl+s54IQYNLLDyoVBPU1jN
- PaWg==
+ bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
+ b=rKxStoU/ipzSomTedwakMqOHwHYLKLlfSTIte3g1poQNb7RYrWrfzGyyMAChqvIibt
+ zOtEAg3JUqrFwMghlEa28sgzgFtDBR5gprVxD7ifFUtNdfL/NzRtrxnyRoI3TwwNkGGi
+ 6psueyIQ5bv2WJ/s54yhMw1NCWtbmTiSh/y1ssNMI9CVNNF0/VdHP97QwsTAfatcxyMB
+ 67GEJY4NShAarwVWK7Zht5E7Mp2aGfiuuwjCmtfJAzwDIhKIGlTcgP+R4xyfNnWNIuDI
+ hFojCDze8dABBE302lxhee6ZG8YSTEvuDaedqdv+2kycV/siCGw1WgBJC8AJXSh7kNfu
+ 29mQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoQlNzrCnAbxue0IQYmG/PVXGyqSHb3SGQ7buTjZ7iLT4JiIiMps7ijdIoNd6d3HBRmofeU/bg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXDEq262XRzoWIZIIK7G4ZQMsM1YZRbfp3PwotnucnWiNd6f//
- VraeLi/6dvP9kVVid4RJZFiye91hr7Q6sy2aHAOITYmNmifjm7aOejB5lYRpfuLjgwo3/tZv0HJ
- QhktG4WqfxLVRu40PRK9CPeRQafPEg4ZFSPxzck6f
-X-Gm-Gg: AfdE7cmwsb3P2nxGFMai9SG+MQ3AmwjEO/P/U6ZPU/J33fq5x6tidoqqzmSqjAgqGRk
- /NhhFBrZWuzh18vwqz3Om3pVa4ksfs+z1sMeEa3+63jvHSP/Q3d/HRt7y+XSv5h+nYFKYHhtz1/
- CT6cx+ZMBRf0IoU5WWT4Q1bJlLL88dzlshUtmZepNYgmp27s2J7NslCb971P41ZPHyn/F2bd0Gp
- IwUKXg1RrVYyMJ/Ak5X8k6J7EzJvYNPuxHw1hlLKAEJ3l/sJbc9/e49XDa0djKHwwNEjkc=
-X-Received: by 2002:a05:6402:2691:b0:698:76b8:e552 with SMTP id
- 4fb4d7f45d1cf-69c5f0c77c7mr6183771a12.2.1784031433076; Tue, 14 Jul 2026
- 05:17:13 -0700 (PDT)
+ AHgh+RqnHkTXb5Q5lMwOFmnu2w1xzTJFHonDO5jFikUt7h66OgxlmrzLc5lWTK2WFeYEGtWX1XtU8Vc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOsw1/EvuXV1Tt2a09olZUv7C9NoI9dAMyRAFdLO4CdrAmiTYV
+ s2vB44pYa//iGwixkbRLTGs0F2WkN+guzKobGlMkIATV/wWoAxXxfZ1farQBfaApv8ArGGUbv1h
+ etA0HrLp+0/Fm3rF63bUecu89nHhWGKojqxv6RA3h
+X-Gm-Gg: AfdE7clYECPnAg1tT1sIpaNSkRi9rJJ4dEoWzJnq3bKNRFsgIIyXMJfegMyYtNuCkmx
+ uBd7/yjyYL6DuZJ+ve7TmUVc9TDaQVa2Eg1hMJI2oMhsWnb2vsPlH648ZVIMtt8saStCV/Ug+MK
+ QFOm4Arus2skA2QDB0rnCI+OILZQJPMBGOXkeoDXI6TUXwwTY5Xt+CexllEMpcvJKNQwbLGxzZc
+ px/hUiLCnLDdhA7pWbNjRgtPMNLvjO76V4vY/sWs3XVmIoGcD3HMdgI667C0K0QsI3Z5nw=
+X-Received: by 2002:a17:90b:3e8d:b0:37f:be6c:f3f2 with SMTP id
+ 98e67ed59e1d1-38dc782279bmr11274506a91.2.1784031452270; Tue, 14 Jul 2026
+ 05:17:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1783816074.git.daniel@makrotopia.org>
- <d460c0571dee7cd852267d881938d6c3d2caf300.1783816074.git.daniel@makrotopia.org>
-In-Reply-To: <d460c0571dee7cd852267d881938d6c3d2caf300.1783816074.git.daniel@makrotopia.org>
+ <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
+In-Reply-To: <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jul 2026 06:17:00 -0600
-X-Gm-Features: AUfX_mwfZhyD2o9S0WsjtDKDypSobRfoq2GYNSOKkOxOtH8N17MFYlH1mv2r0Gg
-Message-ID: <CAFLszThiDJ8-uO_nBHc41XKDY65msUxscL8VdCEkvBpCKn01Yw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] boot: fit: factor out node-path collection in
- fit_config_add_hash()
+Date: Tue, 14 Jul 2026 06:17:05 -0600
+X-Gm-Features: AUfX_mwNDVZ4cJ5zcd2FenCIOZPgfaX5tamkDowD-p5d8Te1o5wGSAhagmfDQ4k
+Message-ID: <CAFLszTgZ7Vi0OL4jqE7QJCgg9g4-F9gc71wu6QCJN1D7jACwsA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] boot: fit: cover the dm-verity roothash with the
+ config signature
 To: daniel@makrotopia.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Ludwig Nussel <ludwig.nussel@siemens.com>, Anton Ivanov <anton@binarly.io>, 
@@ -117,17 +117,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
-> boot: fit: factor out node-path collection in fit_config_add_hash()
->
-> fit_config_add_hash() repeats the same sequence to append a node's path
-> to the hashed-node list three times: for the image node, for each hash
-> subnode and for the cipher subnode. Extract it into a helper,
-> fit_config_add_node(), with no functional change.
->
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
->
-> boot/image-fit-sig.c | 73 +++++++++++++++++++++++++++++++---------------------
->  1 file changed, 44 insertions(+), 29 deletions(-)
+Hi Daniel,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
+> boot: fit: cover the dm-verity roothash with the config signature
+>
+> A dm-verity protected filesystem image is not hashed by U-Boot when it
+> is loaded; its integrity is delegated to the kernel, which validates the
+> filesystem on the fly against the roothash taken from the FIT dm-verity
+> subnode. The roothash is therefore the sole integrity anchor for the
+> filesystem, yet fit_config_add_hash() only added the image node, its
+> hash subnodes and its cipher subnode to the signed region, leaving the
+> dm-verity subnode (roothash, salt and block parameters) unsigned.
+>
+> An attacker able to rewrite the boot medium could then replace both the
+> filesystem and the roothash, recompute a matching dm-verity tree and
+> keep the configuration signature valid, defeating verified boot for the
+> root filesystem.
+>
+> Add the dm-verity subnode to the list of nodes covered by the
+> configuration signature, both when signing (tools/image-host.c) and when
+> verifying (boot/image-fit-sig.c), so the roothash and salt are
+> authenticated together with the rest of the configuration.
+>
+> [...]
+>
+> boot/image-fit-sig.c | 23 +++++++++++++++++++----
+>  tools/image-host.c   | 22 ++++++++++++++++++++++
+>  2 files changed, 41 insertions(+), 4 deletions(-)
+
+> A dm-verity protected filesystem image is not hashed by U-Boot when it
+> is loaded; its integrity is delegated to the kernel, which validates the
+> filesystem on the fly against the roothash taken from the FIT dm-verity
+> subnode. The roothash is therefore the sole integrity anchor for the
+> filesystem, yet fit_config_add_hash() only added the image node, its
+
+Please use present tense when describing the code before this patch
+('only adds ... leaving'), since the code is still in that state when
+the commit is applied.
+
+> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> @@ -329,8 +344,8 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+> - * node paths: root + config + all referenced images with their hash and
+> - * cipher subnodes.
+> + * node paths: root + config + all referenced images with their hash,
+> + * cipher and dm-verity subnodes.
+
+You update the comments here, but doc/usage/fit/signature.rst (in the
+'Details' section) still says the rebuilt node list "always includes
+the root node, the configuration node, each referenced image node and
+its hash/cipher subnodes". Please can you update that to mention the
+dm-verity subnode as well? It would also be worth a sentence in
+doc/usage/fit/dm-verity.rst noting that the roothash and salt are
+covered by the configuration signature, since that is the security
+property people will rely on.
+
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> @@ -1256,6 +1256,28 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+> +     noffset = fdt_subnode_offset(fit, image_noffset,
+> +                                  FIT_VERITY_NODENAME);
+> +     if (noffset != -FDT_ERR_NOTFOUND) {
+> +             if (noffset < 0) {
+> +                     fprintf(stderr,
+> +                             "Failed to get dm-verity node in configuration '%s/%s' image '%s': %s\n",
+> +                             conf_name, sig_name, iname,
+> +                             fdt_strerror(noffset));
+> +                     return -EIO;
+> +             }
+> +             ret = fdt_get_path(fit, noffset, path, sizeof(path));
+> +             if (ret < 0)
+> +                     goto err_path;
+> +             if (strlist_add(node_inc, path))
+> +                     goto err_mem;
+> +     }
+
+This follows the existing cipher pattern, but with this addition the
+host-side fit_config_add_hash() has three copies of the same
+get-path-and-add sequence - exactly the duplication patch 1 removes on
+the boot side. Please can you add a similar factoring patch for
+tools/image-host.c, or fold it into patch 1? The two implementations
+must produce the same node list for verification to succeed, so keeping
+them easy to compare seems better.
+
+Regards,
+Simon
