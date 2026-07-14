@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D0AC44508
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 14:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCD1C44501
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 16:46:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2D4284AE6;
-	Tue, 14 Jul 2026 16:43:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F58A84D23;
+	Tue, 14 Jul 2026 18:46:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HzqAwl/g";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TZoR+/Y9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TUnXzMaR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 203F684AE7; Tue, 14 Jul 2026 16:43:19 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A2FC584D2A; Tue, 14 Jul 2026 18:46:55 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5CBF84A12
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 16:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AB8980287
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 18:46:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4h029J3bHlzKw8S;
- Tue, 14 Jul 2026 16:43:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784040196;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qQmoffvFeGKWIS4Fi3SKS6WUetFUExzmQx0/ome+3nc=;
- b=HzqAwl/gaQSn+iJZ7PO9V72bXy3yAk11m2Dac2zQLGaUtSyM7Uu7WLL1e4iXY+mZm2kXfZ
- xaL4uIW7qQs36sH/zoCK+QPY7JbptInHdRnXxmrHGHtbk4uC88eRDNYZBhX7MrkgSlMXos
- OLX+eOaA1p0eTLEDGbdxD6FJrJWaycSH7YxI2rWejTnwd8FW9tOeO4med34h7XW38xQCAD
- bwIakS8hSeA0VULzitX18i70esr/rA+Vgo1Q3lQQK3rFT0IH/0I/lddX5EhJvzrswzTPj/
- elZAxyyvM0nDX1JBFLfwv/f1Qyds/doOhTI+mU8yVJcdesxlKyuJeD0rG80P2w==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="TZoR+/Y9";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <fa952b03-ecb6-4a08-92ea-79d6d4101f5e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784040195;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qQmoffvFeGKWIS4Fi3SKS6WUetFUExzmQx0/ome+3nc=;
- b=TZoR+/Y9IrAxw9HsDQc/8U8J1J4xPjcNwlNIbtDpKF7QP7V3zgcXmLUTl9KgYIDcFPxjVN
- R912dSuKnmLXWcOF6opyvoenxd6o+Zh1Biw4ZPu7grAVx/EHZZT94e18oAXvS2UZsNK7lt
- wKwqWUhAG7Z8tF3HfJiM6KUygoWxUNdYHFTt3zqLJDrXCObM8cPmGH/+4upp2MNLO2+6UB
- 619e0vyb/SHZpQK5HnDXmrah9IHfiIankgaz7ZyN1adzp3q3wgaBrpg1/0UfPcMcF3Qtw3
- gVAJYEKKgWwperoR6xnM78N61gXAlBEXmVm/zE6Z0L9PQCCkdEswrCwKEZ1LRg==
-Date: Tue, 14 Jul 2026 16:43:10 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-495b250b01cso986307b6e.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:46:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784047611; x=1784652411; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=BUDodNnHtInbFfrCEM2q5DOugitqCFxYKBiALDBNG7o=;
+ b=TUnXzMaRWzLP8CKPlUIp/Qtz2y56uaW8zK3L+AqZqKoTcNawF4YtCgem37Mnt3Gtn1
+ QHGizu4RWefSGjp+U6z5bRoeby68Wjh1x81kkGCFM6LenW33jbDSS555yaptcRvL03KD
+ H3jFF2CJIrWAlcptMTUhvf8nf9ruzOgL1cuMA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784047611; x=1784652411;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=BUDodNnHtInbFfrCEM2q5DOugitqCFxYKBiALDBNG7o=;
+ b=BGlC98T/ofmYRgAqWuxP65g/YrGbfA7n//nv991t4ePHpn03jGETWKt0iEDgPbapj3
+ 9/hY9Z2mllRXn9rcI6fFCMrlTuA1rBFikc7ItIe5PKx/OMQ2R40cus2IG4RQviHhU8yS
+ pUjPYDPZlt7bHNXNDXSoTzkMkHZv5DpT9jvxvg25LhTtNPUNaZzQUm7eOZY+rHCTMWIx
+ q4qgVKmVsEJWzUFJ5xh0EeB8Tuba3vlqBfIbyaolhkd2z2OSE7XUW7I2/KGJUC1yiyrv
+ UmRXJxBfOC1KHb8GUiAEcxtZO6iHVWqXlRBCZtCnX6oZOesYa+dOlGG5vjcsodldWU4f
+ CDyw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+2DpdgangXXznH3lpH2p5u32KE45bYdwa1WJSmO5MJ/d88iJK6hK1uOSv/41qSe6s6vbcBIFk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzCy3SIXhX9WJmMYjrcK9/oR8GM3tvZnPjTFFQh155NCb/1uwu
+ pXH56Sl6psr5vcqtsT8Z9EEQOyefw0ehpDycxZNg1lzIi4YGyCCp0JDQ1VilkWBlA4A=
+X-Gm-Gg: AfdE7cldnjOYQEzupIVpbAuwaA3KqEekhgHJlEADjuw5AmvYsxtQlNccp/DWJO9+5Y4
+ gpP3BeSCTsDsyGrjilNGLgYY4W21fuH7SzWjXvIW3qsRVCj/vjuFOYogPUYOLrGxrPZzX1qKA0d
+ x1KJk8MWgaaX+Rbiau9VrnkCZwtcJNhzZbbkQrN0t2cf461XPD6cCfX6SNhVUw0jMSbB+HbkA1n
+ hpOvNAxdUV8v9jcMjZj4u3UCRvFGCyotPT7xDoVBnu0U192wFhlAGy3/ApGPLi3Lq1qLFFObP1K
+ l0EWJUvt5CD9H1J1pQMsO6dCkqj8eK9LCripFYiePZJ/0ENyD0LxfJm9TFJZRtTo2SVipnuNgKP
+ 4IzB5kwFrakEZiDfITyib/t7eqB+56K6NT70KeEgTcPFN+N+VEkYB/esnANOS/HFp8WLMn2qyuA
+ 0fZvbR2cjsXjzpsgwFv/jgq9AVmn+VO/e5KFBE4GVBrHC8vMVir/PbbDjSrB7XLvxyviLOmkd9y
+ zGNq6Q5NuqBZY6bUJLuipG4fgA+21+cmGsszQ==
+X-Received: by 2002:a05:6808:4701:b0:48b:17c4:3572 with SMTP id
+ 5614622812f47-4a42affd81bmr10879016b6e.29.1784047611160; 
+ Tue, 14 Jul 2026 09:46:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4a1acc82489sm14854906b6e.1.2026.07.14.09.46.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jul 2026 09:46:50 -0700 (PDT)
+Date: Tue, 14 Jul 2026 10:46:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Daniel Golle <daniel@makrotopia.org>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>, Anton Ivanov <anton@binarly.io>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] test: fit: verify dm-verity roothash is covered by
+ the config signature
+Message-ID: <20260714164647.GA749385@bill-the-cat>
+References: <cover.1783816074.git.daniel@makrotopia.org>
+ <4adbf45f0d33802ebd2afd627f639e47c6609e17.1783816074.git.daniel@makrotopia.org>
+ <20260713220842.GY749385@bill-the-cat>
+ <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 07/10] usb: dwc3: generic: add board_usb_init/cleanup
- hooks
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Fabio Estevam <festevam@gmail.com>, Wang Jie <dave.wang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Casey Connolly <casey.connolly@linaro.org>, Ye Li <ye.li@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Balaji Selvanathan
- <balaji.selvanathan@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260621-tcpci-dwc3-v2-0-990ecacc111c@nxp.com>
- <20260621-tcpci-dwc3-v2-7-990ecacc111c@nxp.com>
- <74b9d259-b180-4ca7-9cf6-1c93e175e1f4@mailbox.org>
- <alZB8CUrzBs1mTs8@shlinux89>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <alZB8CUrzBs1mTs8@shlinux89>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 9e7f19ffc6d1e1a2672
-X-MBO-RS-META: 5hxm7epe4emd8ixdk5remtddp4pnbao7
-X-Rspamd-Queue-Id: 4h029J3bHlzKw8S
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6tcIRrFuMKSrlbXK"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,51 +111,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/14/26 4:04 PM, Peng Fan wrote:
-> On Sat, Jul 11, 2026 at 10:00:52PM +0200, Marek Vasut wrote:
->> On 6/21/26 4:06 AM, Peng Fan (OSS) wrote:
->>> From: Ye Li <ye.li@nxp.com>
->>>
->>> Call board_usb_init() during dwc3_generic_probe() and
->>> board_usb_cleanup() during dwc3_generic_remove() to allow
->>> board-level USB configuration (e.g. Type-C CC role, SS mux,
->>> VBUS control) before DWC3 core initialization.
->>>
->>> Signed-off-by: Ye Li <ye.li@nxp.com>
->>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ...
->>>    	dwc3_shutdown_phy(dev, &priv->phys);
->>>    	unmap_physmem(dwc3->regs, MAP_NOCACHE);
->>> +	if (mode == USB_DR_MODE_HOST)
->>> +		board_usb_cleanup(dev_seq(dev), USB_INIT_HOST);
->>> +	else if (mode == USB_DR_MODE_PERIPHERAL)
->>> +		board_usb_cleanup(dev_seq(dev), USB_INIT_DEVICE);
->>> +
->> This is supposed to be generic DT based glue code, can we avoid the
->> board-specific callbacks entirely ?
-> 
-> We need to invoke TCPM configuration code, dropping board callbacks means
-> we need put some #ifdef in dwc3 drivers:
-> 
-> #if CONFIG_IS_ENABLED(TYPEC_TCPM)
-> static int dwc3_typec_setup(struct udevice *dev, struct dwc3_generic_priv *priv,
->                             enum usb_dr_mode mode)
-> {
-> 	/* Handling tcpm */	
-> }
-> #else
-> static int dwc3_typec_setup(struct udevice *dev, struct dwc3_generic_priv *priv,
->                             enum usb_dr_mode mode)
-> {
-> 	return 0;
-> }
-> #endif
-> 
-> I could use above in V3.
-The typec_sel and typec_en GPIOs look like something that could be 
-handled by usb-c-connector , which could be made generic , can it not ?
 
-How does Linux handle those GPIOs ?
+--6tcIRrFuMKSrlbXK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I wanted to say look at the GPIO SBU mux Linux kernel driver, but that 
-operates those GPIOs as OUTPUTs and I think you need INPUTs here?
+On Tue, Jul 14, 2026 at 06:17:11AM -0600, Simon Glass wrote:
+> Hi Daniel,
+>=20
+> On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
+> > test: fit: verify dm-verity roothash is covered by the config signature
+> >
+> > A dm-verity protected filesystem image is not hashed by U-Boot; its
+> > integrity is delegated to the kernel, which trusts the roothash taken
+> > from the FIT dm-verity subnode. For that chain of trust to hold, the
+> > roothash (and salt) must be part of the region covered by the
+> > configuration signature, otherwise an attacker can replace both the
+> > filesystem and the roothash while keeping the signature valid.
+> >
+> > Add two independent checks of this property:
+> >
+> >  - test/py/tests/test_fit_verity_sign.py signs a configuration that
+> >    references a filesystem image carrying a dm-verity subnode, then
+> >    confirms that tampering the roothash or the salt is rejected by
+> >    fit_check_sign. A control that tampers a byte known to be signed
+> >    proves the check can fail.
+> >
+> >  - test/boot/fit_verity.c gains a runtime unit test that builds the
+> >    exact node list the configuration signature is computed over,
+> >    turns it into hashed regions and checks both that the roothash
+> > [...]
+> >
+> > boot/image-fit-sig.c                  |  25 +++--
+> >  include/image.h                       |  25 +++++
+> >  test/boot/fit_verity.c                | 194 ++++++++++++++++++++++++++=
+++++++++
+> >  test/py/tests/test_fit_verity_sign.py | 162 ++++++++++++++++++++++++++=
+++
+> >  4 files changed, 399 insertions(+), 7 deletions(-)
+>=20
+> Somehow I didn't get this email, but I'll try to reply here.
+>=20
+> > diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> > @@ -340,8 +340,19 @@ static int fit_config_add_hash(const void *fit, in=
+t image_noffset,
+> > +#if CONFIG_IS_ENABLED(UNIT_TEST)
+> > +#define VISIBLE_IF_UT
+> > +#else
+> > +#define VISIBLE_IF_UT static
+> > +#endif
+>=20
+> Tom commented on this, but I'll just add this. Linux has
+> VISIBLE_IF_KUNIT but in U-Boot so far we just stop the static when the
+> function is needed elsewhere. LTO can be used to avoid the code-size
+> increase, for platforms that want it.
+
+As part of why this should be its own discussion, a quick look at
+VISIBLE_IF_KUNIT in the kernel leads me to think it's not quite the same
+set of needs, or if so there's a lot more architectural enforcement
+around what is/isn't exposed just for testing, which we lack today.
+Talking about LTO isn't relevant here.
+
+--=20
+Tom
+
+--6tcIRrFuMKSrlbXK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalZn8QAKCRAr4qD1Cr/k
+CmB9AP9AuQivI7nTntuxBwb/2C9YjuaeBjX9g1pdBSHaWWrQOwEA0Q/bnsFwfJ7F
+PilbWQOte98BIQk9I9esLYjJffq9BAU=
+=+Nyt
+-----END PGP SIGNATURE-----
+
+--6tcIRrFuMKSrlbXK--
