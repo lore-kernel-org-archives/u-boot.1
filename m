@@ -4,102 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE49BC43458
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46226C43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 12:17:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E220884D11;
-	Tue, 14 Jul 2026 14:17:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A65D84D0C;
+	Tue, 14 Jul 2026 14:17:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DI1xpEB4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NjBE5/iL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3166584D0F; Tue, 14 Jul 2026 14:17:36 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id C907784D16; Tue, 14 Jul 2026 14:17:38 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8D6B84CEB
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 14:17:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E8BD84CEB
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 14:17:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-38dc69c74b8so2550467a91.0
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:17:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784031452; cv=none;
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso8098615ad.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 05:17:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784031455; cv=none;
  d=google.com; s=arc-20260327;
- b=bivF5yO89+B94BLrL2m9StH9xqFVSTOG+dHOSG7y+IzxlUV2t41ettYPWLSkK16j1w
- YG+d3/8NsztvnkpzK+pjCHwZJl/Zw/f5hBLydkMwxk/7nqB2hcFc2BizlVK4AFTmC6oT
- Z3qN8OhzG9QraTe8Nl/1snrdjpyjKEoCAxGGekD5jNuYucLxu2Aq23MpjDwgtnKyfz/q
- KyqlexuN9NtjKaK6eCRTHiJmknJoNFWD0PXnoRc2Z5Rchutr2VVr+BhOd/yN7RxaLViC
- yKbbagSN6VT+hIsLLu+EYr0ZTRFN8bUMi+QnU+WBwauPsLfw12R1GosVZaPVTwNuMTDs
- KZWA==
+ b=HgmMvk4l8DM2KG2GdTYgrAv4vjx2mqQLBJBJw0pRwFAQCHJhZ00SAmbTqm5nJyQz/U
+ ZWaNtNZaDwP49OFhKoumNVdBtkqYPxQLo6e8ryEBC6J+2DNsrhs0gYmXJRNA69OAvb71
+ lB4RWh5Nl0Vw1pbxUEP7X4xlCP2I5lkiN7zqu7nHoFFhFmToNthQlpUvon8Kr9nn6Fdh
+ dZb/IyaM45ZqjHZRu09BFk8PRuEmT69XugOYclMFBVnwgbocx0qzzEuPim2KraoOC/RK
+ 1YzTmxSl9irdeLksMYcd+8Yl46zCdGo/KKhBkTHYNIVUZkYUEmuh7wRrKKU2yhAFQnBM
+ FqbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
- fh=og+o5kBITe9AIUuiCiDU48TccAC6p4JUUdx+LCo3X50=;
- b=KEZjfqaVVZyVFtQ/L4ZlcxKQQj8GH0BLpkXQRlxOzvjprVTJfpLDuoeeusoo95Vti7
- VSPOKXW0qLiet3Xtkty/mn8cAzq4SluV6tnZ9MJBalPSqfJtob/RiF86xXMMDcjFt/ry
- SqYkXLPUv11/UY/nVIEdiOaLxy3gTvUZx0YjyCdlb5vzTCeiumOBHEreh06p4PKw1fgi
- vHaPnH+G2wsMjKEqOYynEov/XxUkecuZ3Tau5E1GvmrrzEiP+bLvl/aXSI3IvpMi+Fpj
- +odkoVpEDEo1v3wsXnPS/dT/Tb6sksMQgFHc+ewPv7di7IW31kQ62QwcTwOaCp3QNzI7
- QBkQ==; darn=lists.denx.de
+ bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
+ fh=aKO+wj1tXSCvsqO6STvK2Xycn+f4kyHxGj/G0aaEIPM=;
+ b=lrZntgdCnHvAu++GFgfTXre0Z8JOG5KzboOt0qqk2i1maCOeFWlzk1l3xnJ7h0i60h
+ Wemub6RcLDTNPw3G4usCNiiuwIm4ID2JzK2NNTbznt5EOFBvrXFIHQsndDmu+oaCLJC5
+ jIvh0mv4zEtzlAdeRURaRtIs4e20fWAvyR0SqWl6D5bkHe3pvLzG7gKxtuz7nZZjtMmJ
+ MdoXXBR8L4zGqSyCgKZX9MoAY4HYUo/z/EJml5z/zmh4wZioQvzNFEkbpHfh4AngiYX/
+ oE3KE2ozgEShmw3j6R45gq4Z24sK/w7XkchYkLEbgig7Ih7qb+tq8J+wF/EycsYTBAUq
+ vQiw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784031452; x=1784636252; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784031455; x=1784636255; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
- b=DI1xpEB4j0Cx9R4LzJUdtVVzqaH3u1QsJsBVFa5KiUYfMtHuh/T3ZLubFXD1qyISuY
- BNtc5CYkKPV2YG6XCsH8ojwqn0Pl/BLkkeuuTTCutp/r8PkhEyTEj2DIj16XYmCj4xu8
- CGHlfgggtSou5tpkug0so+ju1zgHDGlheRiRQ=
+ :content-type; bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
+ b=NjBE5/iLpw3fzUaT+N/Paf0ea7t2eIX4+0CrBpX2+sCYLxmbWHE/JsdLlpWJTtgKSj
+ LsbPpCc8e2sdF1FWGVjNvuREyLD/Y8pK4+QgtT3ORa4BfH3z9Hn8X8h5QmRqpufRWp90
+ NEKHhtDhDRpS6YKQGffWk0ACurVL+7AKlHBtw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784031452; x=1784636252;
+ d=1e100.net; s=20251104; t=1784031455; x=1784636255;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=NpGfxDLcdxIUtxBiJD0Ce6OuBeE+8NUgTLz9DTUyRc0=;
- b=rKxStoU/ipzSomTedwakMqOHwHYLKLlfSTIte3g1poQNb7RYrWrfzGyyMAChqvIibt
- zOtEAg3JUqrFwMghlEa28sgzgFtDBR5gprVxD7ifFUtNdfL/NzRtrxnyRoI3TwwNkGGi
- 6psueyIQ5bv2WJ/s54yhMw1NCWtbmTiSh/y1ssNMI9CVNNF0/VdHP97QwsTAfatcxyMB
- 67GEJY4NShAarwVWK7Zht5E7Mp2aGfiuuwjCmtfJAzwDIhKIGlTcgP+R4xyfNnWNIuDI
- hFojCDze8dABBE302lxhee6ZG8YSTEvuDaedqdv+2kycV/siCGw1WgBJC8AJXSh7kNfu
- 29mQ==
+ bh=VWvl65PdSduhp0gerFOBNHvdiFAFb34nndxbe4l3Yps=;
+ b=RTdlHKmL6W/TXQ+WdlL2X1Cpg9LubYaU14+1Hbz4OxwwibK1Qe5EP0PVsBPSLiI1dP
+ 1/zkpqxP3zvna5fS08X8P5Ba8JLTn4SDXGI1V78DOt736WyZLDbDV7jdN7lq6q09+oM2
+ Tk7umq+Lk5sV+Uzmoegax66XiQ5o15jCC+7P4k5p6ZSLQsPxgCClf8IKbTZgqDgSD/u0
+ QiF5M9EYE3imJu1Hja0QXpf1HJWQNlZbcPn8XRphYrl64iCqaPTRwR2XCdGXKUej3fqF
+ G6Ka2lIf+XKsmp7D+iH26NIrDJXrtkumjPHeei59sFTAPeGiXAA14uoQ6rUdobVazrVv
+ xerQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqnHkTXb5Q5lMwOFmnu2w1xzTJFHonDO5jFikUt7h66OgxlmrzLc5lWTK2WFeYEGtWX1XtU8Vc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOsw1/EvuXV1Tt2a09olZUv7C9NoI9dAMyRAFdLO4CdrAmiTYV
- s2vB44pYa//iGwixkbRLTGs0F2WkN+guzKobGlMkIATV/wWoAxXxfZ1farQBfaApv8ArGGUbv1h
- etA0HrLp+0/Fm3rF63bUecu89nHhWGKojqxv6RA3h
-X-Gm-Gg: AfdE7clYECPnAg1tT1sIpaNSkRi9rJJ4dEoWzJnq3bKNRFsgIIyXMJfegMyYtNuCkmx
- uBd7/yjyYL6DuZJ+ve7TmUVc9TDaQVa2Eg1hMJI2oMhsWnb2vsPlH648ZVIMtt8saStCV/Ug+MK
- QFOm4Arus2skA2QDB0rnCI+OILZQJPMBGOXkeoDXI6TUXwwTY5Xt+CexllEMpcvJKNQwbLGxzZc
- px/hUiLCnLDdhA7pWbNjRgtPMNLvjO76V4vY/sWs3XVmIoGcD3HMdgI667C0K0QsI3Z5nw=
-X-Received: by 2002:a17:90b:3e8d:b0:37f:be6c:f3f2 with SMTP id
- 98e67ed59e1d1-38dc782279bmr11274506a91.2.1784031452270; Tue, 14 Jul 2026
- 05:17:32 -0700 (PDT)
+ AHgh+RoUXeu/wJcivh2kFbjnvv9V768y26OneWJY81EdTLl/qxt7ef0Qe0mQGLIOrRMPx3JmIcZAkzE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJsDouIJLuNAqg81NHqzI7r+Ru37rZRqOvF0ATrI7q843o91bs
+ QC/bkNjrn+d38xrfqrhe9KdE5ATBntQtYYT4pZtmfZ9A8yDMaD5yYdZTeMMypjAX6DIqNJ1v3x4
+ UZXgC7LL538G3oJ+0JVZIB9BpYD6YOsda5kTsRMmK
+X-Gm-Gg: AfdE7cmafTKzgvsK7zGkWI+TtRx01RkGMAQ2grJGBawKsaMmG8RgY0ee19xjnQ9zim5
+ XlNAwY/d1lyuJB0EyskGoxx7s5DH1IANKQUIT/CL+n6LAzfcOOXWml99g2+v69TIRAAV//56ql0
+ xchz4lRWDHca+p4nZe7+2u/+noDTyzl2Q7u6ZsQFH7lXWpTE0aQoAFEjOhQnUBh4BMcRihzeQfb
+ 4Bxqdv+awEDnDO7mJcAHnrSo2N/cg0Fh8lgEtb5/TRecXNlFu606jLuGZxYcmo85u9z8uJbW3Q/
+ aCECaA==
+X-Received: by 2002:a17:902:f68e:b0:2c2:cf20:213 with SMTP id
+ d9443c01a7336-2ce9ee1142emr140232485ad.29.1784031454811; Tue, 14 Jul 2026
+ 05:17:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1783816074.git.daniel@makrotopia.org>
- <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
-In-Reply-To: <81cb6eed897871b3548e81ee63502b65f797c44a.1783816074.git.daniel@makrotopia.org>
+ <4adbf45f0d33802ebd2afd627f639e47c6609e17.1783816074.git.daniel@makrotopia.org>
+ <20260713220842.GY749385@bill-the-cat>
+In-Reply-To: <20260713220842.GY749385@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jul 2026 06:17:05 -0600
-X-Gm-Features: AUfX_mwNDVZ4cJ5zcd2FenCIOZPgfaX5tamkDowD-p5d8Te1o5wGSAhagmfDQ4k
-Message-ID: <CAFLszTgZ7Vi0OL4jqE7QJCgg9g4-F9gc71wu6QCJN1D7jACwsA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] boot: fit: cover the dm-verity roothash with the
- config signature
-To: daniel@makrotopia.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Ludwig Nussel <ludwig.nussel@siemens.com>, Anton Ivanov <anton@binarly.io>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
- u-boot@lists.denx.de
+Date: Tue, 14 Jul 2026 06:17:11 -0600
+X-Gm-Features: AUfX_myJK5CEBwMn-XiWN4FFtrmdZCUUuOoD0Jse4VMjHCATfA-kg6OZiAP8-T8
+Message-ID: <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] test: fit: verify dm-verity roothash is covered by
+ the config signature
+To: Tom Rini <trini@konsulko.com>
+Cc: Daniel Golle <daniel@makrotopia.org>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>, 
+ Anton Ivanov <anton@binarly.io>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Randolph Sapp <rs@ti.com>, 
+ Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,84 +121,83 @@ X-Virus-Status: Clean
 Hi Daniel,
 
 On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
-> boot: fit: cover the dm-verity roothash with the config signature
+> test: fit: verify dm-verity roothash is covered by the config signature
 >
-> A dm-verity protected filesystem image is not hashed by U-Boot when it
-> is loaded; its integrity is delegated to the kernel, which validates the
-> filesystem on the fly against the roothash taken from the FIT dm-verity
-> subnode. The roothash is therefore the sole integrity anchor for the
-> filesystem, yet fit_config_add_hash() only added the image node, its
-> hash subnodes and its cipher subnode to the signed region, leaving the
-> dm-verity subnode (roothash, salt and block parameters) unsigned.
+> A dm-verity protected filesystem image is not hashed by U-Boot; its
+> integrity is delegated to the kernel, which trusts the roothash taken
+> from the FIT dm-verity subnode. For that chain of trust to hold, the
+> roothash (and salt) must be part of the region covered by the
+> configuration signature, otherwise an attacker can replace both the
+> filesystem and the roothash while keeping the signature valid.
 >
-> An attacker able to rewrite the boot medium could then replace both the
-> filesystem and the roothash, recompute a matching dm-verity tree and
-> keep the configuration signature valid, defeating verified boot for the
-> root filesystem.
+> Add two independent checks of this property:
 >
-> Add the dm-verity subnode to the list of nodes covered by the
-> configuration signature, both when signing (tools/image-host.c) and when
-> verifying (boot/image-fit-sig.c), so the roothash and salt are
-> authenticated together with the rest of the configuration.
+>  - test/py/tests/test_fit_verity_sign.py signs a configuration that
+>    references a filesystem image carrying a dm-verity subnode, then
+>    confirms that tampering the roothash or the salt is rejected by
+>    fit_check_sign. A control that tampers a byte known to be signed
+>    proves the check can fail.
 >
+>  - test/boot/fit_verity.c gains a runtime unit test that builds the
+>    exact node list the configuration signature is computed over,
+>    turns it into hashed regions and checks both that the roothash
 > [...]
 >
-> boot/image-fit-sig.c | 23 +++++++++++++++++++----
->  tools/image-host.c   | 22 ++++++++++++++++++++++
->  2 files changed, 41 insertions(+), 4 deletions(-)
+> boot/image-fit-sig.c                  |  25 +++--
+>  include/image.h                       |  25 +++++
+>  test/boot/fit_verity.c                | 194 ++++++++++++++++++++++++++++++++++
+>  test/py/tests/test_fit_verity_sign.py | 162 ++++++++++++++++++++++++++++
+>  4 files changed, 399 insertions(+), 7 deletions(-)
 
-> A dm-verity protected filesystem image is not hashed by U-Boot when it
-> is loaded; its integrity is delegated to the kernel, which validates the
-> filesystem on the fly against the roothash taken from the FIT dm-verity
-> subnode. The roothash is therefore the sole integrity anchor for the
-> filesystem, yet fit_config_add_hash() only added the image node, its
-
-Please use present tense when describing the code before this patch
-('only adds ... leaving'), since the code is still in that state when
-the commit is applied.
+Somehow I didn't get this email, but I'll try to reply here.
 
 > diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> @@ -329,8 +344,8 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
-> - * node paths: root + config + all referenced images with their hash and
-> - * cipher subnodes.
-> + * node paths: root + config + all referenced images with their hash,
-> + * cipher and dm-verity subnodes.
+> @@ -340,8 +340,19 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
+> +#if CONFIG_IS_ENABLED(UNIT_TEST)
+> +#define VISIBLE_IF_UT
+> +#else
+> +#define VISIBLE_IF_UT static
+> +#endif
 
-You update the comments here, but doc/usage/fit/signature.rst (in the
-'Details' section) still says the rebuilt node list "always includes
-the root node, the configuration node, each referenced image node and
-its hash/cipher subnodes". Please can you update that to mention the
-dm-verity subnode as well? It would also be worth a sentence in
-doc/usage/fit/dm-verity.rst noting that the roothash and salt are
-covered by the configuration signature, since that is the security
-property people will rely on.
+Tom commented on this, but I'll just add this. Linux has
+VISIBLE_IF_KUNIT but in U-Boot so far we just stop the static when the
+function is needed elsewhere. LTO can be used to avoid the code-size
+increase, for platforms that want it.
 
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -1256,6 +1256,28 @@ static int fit_config_add_hash(const void *fit, int image_noffset,
-> +     noffset = fdt_subnode_offset(fit, image_noffset,
-> +                                  FIT_VERITY_NODENAME);
-> +     if (noffset != -FDT_ERR_NOTFOUND) {
-> +             if (noffset < 0) {
-> +                     fprintf(stderr,
-> +                             "Failed to get dm-verity node in configuration '%s/%s' image '%s': %s\n",
-> +                             conf_name, sig_name, iname,
-> +                             fdt_strerror(noffset));
-> +                     return -EIO;
-> +             }
-> +             ret = fdt_get_path(fit, noffset, path, sizeof(path));
-> +             if (ret < 0)
-> +                     goto err_path;
-> +             if (strlist_add(node_inc, path))
-> +                     goto err_mem;
-> +     }
 
-This follows the existing cipher pattern, but with this addition the
-host-side fit_config_add_hash() has three copies of the same
-get-path-and-add sequence - exactly the duplication patch 1 removes on
-the boot side. Please can you add a similar factoring patch for
-tools/image-host.c, or fold it into patch 1? The two implementations
-must produce the same node list for verification to succeed, so keeping
-them easy to compare seems better.
+> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
+> + count = fdt_find_regions(buf, node_inc, count, NULL, 0, fdt_regions,
+> + ARRAY_SIZE(fdt_regions) - 1, region_path,
+> + sizeof(region_path), 0);
+> + ut_assert(count > 0);
+
+fdt_find_regions() can return a count larger than the max passed in,
+meaning the region array was exhausted (see the 'count >= max_regions -
+1' check in fit_config_check_sig()). If that ever happens here,
+fit_region_make_list() reads past the filled entries. Please can you
+assert that count is within the array size, matching the real
+verification path?
+
+> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
+> + /* Tampering the roothash must change the signed hash. */
+> + ((u8 *)digest)[0] ^= 0xff;
+
+You already have digest_off, so you could write to buf[digest_off]
+instead of casting away the const from fdt_getprop(). Both work since
+buf is writable, but avoiding the cast is cleaner.
+
+> diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+> @@ -304,3 +309,192 @@ static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
+> + digest = fdt_getprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
+> +      &digest_len);
+
+The python test also tampers the salt, but the unit test only checks
+the digest. Since both properties sit in the same dm-verity node the
+coverage result is the same, so I don't feel strongly, but a one-line
+comment noting that the digest check stands in for the whole node would
+make the asymmetry clearer. What do you think?
 
 Regards,
 Simon
