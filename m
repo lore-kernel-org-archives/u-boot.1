@@ -4,97 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCD1C44501
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 16:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E57BC4450A
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 16:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F58A84D23;
-	Tue, 14 Jul 2026 18:46:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D64D684D31;
+	Tue, 14 Jul 2026 18:57:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TUnXzMaR";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="o3JlXECL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2FC584D2A; Tue, 14 Jul 2026 18:46:55 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15BCF84D31; Tue, 14 Jul 2026 18:57:47 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AB8980287
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 18:46:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-495b250b01cso986307b6e.0
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:46:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784047611; x=1784652411; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=BUDodNnHtInbFfrCEM2q5DOugitqCFxYKBiALDBNG7o=;
- b=TUnXzMaRWzLP8CKPlUIp/Qtz2y56uaW8zK3L+AqZqKoTcNawF4YtCgem37Mnt3Gtn1
- QHGizu4RWefSGjp+U6z5bRoeby68Wjh1x81kkGCFM6LenW33jbDSS555yaptcRvL03KD
- H3jFF2CJIrWAlcptMTUhvf8nf9ruzOgL1cuMA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784047611; x=1784652411;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=BUDodNnHtInbFfrCEM2q5DOugitqCFxYKBiALDBNG7o=;
- b=BGlC98T/ofmYRgAqWuxP65g/YrGbfA7n//nv991t4ePHpn03jGETWKt0iEDgPbapj3
- 9/hY9Z2mllRXn9rcI6fFCMrlTuA1rBFikc7ItIe5PKx/OMQ2R40cus2IG4RQviHhU8yS
- pUjPYDPZlt7bHNXNDXSoTzkMkHZv5DpT9jvxvg25LhTtNPUNaZzQUm7eOZY+rHCTMWIx
- q4qgVKmVsEJWzUFJ5xh0EeB8Tuba3vlqBfIbyaolhkd2z2OSE7XUW7I2/KGJUC1yiyrv
- UmRXJxBfOC1KHb8GUiAEcxtZO6iHVWqXlRBCZtCnX6oZOesYa+dOlGG5vjcsodldWU4f
- CDyw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+2DpdgangXXznH3lpH2p5u32KE45bYdwa1WJSmO5MJ/d88iJK6hK1uOSv/41qSe6s6vbcBIFk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzCy3SIXhX9WJmMYjrcK9/oR8GM3tvZnPjTFFQh155NCb/1uwu
- pXH56Sl6psr5vcqtsT8Z9EEQOyefw0ehpDycxZNg1lzIi4YGyCCp0JDQ1VilkWBlA4A=
-X-Gm-Gg: AfdE7cldnjOYQEzupIVpbAuwaA3KqEekhgHJlEADjuw5AmvYsxtQlNccp/DWJO9+5Y4
- gpP3BeSCTsDsyGrjilNGLgYY4W21fuH7SzWjXvIW3qsRVCj/vjuFOYogPUYOLrGxrPZzX1qKA0d
- x1KJk8MWgaaX+Rbiau9VrnkCZwtcJNhzZbbkQrN0t2cf461XPD6cCfX6SNhVUw0jMSbB+HbkA1n
- hpOvNAxdUV8v9jcMjZj4u3UCRvFGCyotPT7xDoVBnu0U192wFhlAGy3/ApGPLi3Lq1qLFFObP1K
- l0EWJUvt5CD9H1J1pQMsO6dCkqj8eK9LCripFYiePZJ/0ENyD0LxfJm9TFJZRtTo2SVipnuNgKP
- 4IzB5kwFrakEZiDfITyib/t7eqB+56K6NT70KeEgTcPFN+N+VEkYB/esnANOS/HFp8WLMn2qyuA
- 0fZvbR2cjsXjzpsgwFv/jgq9AVmn+VO/e5KFBE4GVBrHC8vMVir/PbbDjSrB7XLvxyviLOmkd9y
- zGNq6Q5NuqBZY6bUJLuipG4fgA+21+cmGsszQ==
-X-Received: by 2002:a05:6808:4701:b0:48b:17c4:3572 with SMTP id
- 5614622812f47-4a42affd81bmr10879016b6e.29.1784047611160; 
- Tue, 14 Jul 2026 09:46:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4a1acc82489sm14854906b6e.1.2026.07.14.09.46.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 09:46:50 -0700 (PDT)
-Date: Tue, 14 Jul 2026 10:46:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Daniel Golle <daniel@makrotopia.org>,
- Ludwig Nussel <ludwig.nussel@siemens.com>, Anton Ivanov <anton@binarly.io>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Randolph Sapp <rs@ti.com>, Francois Berder <fberder@outlook.fr>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] test: fit: verify dm-verity roothash is covered by
- the config signature
-Message-ID: <20260714164647.GA749385@bill-the-cat>
-References: <cover.1783816074.git.daniel@makrotopia.org>
- <4adbf45f0d33802ebd2afd627f639e47c6609e17.1783816074.git.daniel@makrotopia.org>
- <20260713220842.GY749385@bill-the-cat>
- <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 10D6B84D22
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 18:57:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1784048257; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=J9VpSPZppWwxTnQsuErl2NO4Rivyy69SVb0kFBqTJblI1sofQiyjC3NUK+nHSQhsJoJXplJPnb3zyRP9g0pcCEj7907e4lnrP1JTaZtYnNStIDL00YIwHah0lE3Hf/JihvEQ+Szxy+Szv1agLXDy3vdK+A+YLz0KYPr7dsguZbM=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1784048257;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=5QpcDK58+soDBuqrMXLUyefSmNUJmFvPyYyNWw4RFAU=; 
+ b=czKnErNuq/JjgYGiCvUUJbFP2/GmiaFdKtUHwJ8SKLsC8BG2/WGPcFTo7JOfLVXzRBiUUMJFt4ZAvnOJGLdFR+ZiIkia/mqtjrhSYj4H9fyCgVxKsprK7pEZJmqbxQuXHqMojBSsgQkq8Hzi2nx8vZpKEebhS92EHcReNveXb5Q=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784048257; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=5QpcDK58+soDBuqrMXLUyefSmNUJmFvPyYyNWw4RFAU=;
+ b=o3JlXECLIK2BnXEJH9YILerpQqnfBAFq3RO9z3jCJ2Mrevb4kSzB819JZb5b/RWj
+ LO/rALxtD/iVBTIkffpGzuLmCEuS3eig3s3zdFojEtAl0QsJNxt+QrnabTWuwU3cqu8
+ mVdnm0IBLCfgvhkDxRbB9+2KB+jl5vh7vEVAIKZ4=
+Received: by mx.zohomail.com with SMTPS id 178404825532855.905853835756375;
+ Tue, 14 Jul 2026 09:57:35 -0700 (PDT)
+Date: Tue, 14 Jul 2026 16:57:29 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Simon Glass <sjg@chromium.org>, me@ziyao.cc
+Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 10/16] LoongArch: Boot Image bits
+Message-ID: <alZqPsdSZ_Pd4RBF@pie>
+References: <20260701111808.870705-1-me@ziyao.cc>
+ <20260701111808.870705-11-me@ziyao.cc>
+ <CAFLszTiXWp6CeENHzYnw0621NxwGta_Fk-06EO6JiZtKuP7MQQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6tcIRrFuMKSrlbXK"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjfcmPuUnmVg60pVzsnzSm0kPn3zLL7GMkCTpUyHCQUZw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFLszTiXWp6CeENHzYnw0621NxwGta_Fk-06EO6JiZtKuP7MQQ@mail.gmail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,80 +77,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---6tcIRrFuMKSrlbXK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 14, 2026 at 06:17:11AM -0600, Simon Glass wrote:
-> Hi Daniel,
->=20
-> On 2026-07-12T00:33:05, Daniel Golle <daniel@makrotopia.org> wrote:
-> > test: fit: verify dm-verity roothash is covered by the config signature
+On Thu, Jul 02, 2026 at 11:26:23AM +0100, Simon Glass wrote:
+> Hi Yao,
+> 
+> On 2026-07-01T11:17:53, Yao Zi <me@ziyao.cc> wrote:
+> > LoongArch: Boot Image bits
 > >
-> > A dm-verity protected filesystem image is not hashed by U-Boot; its
-> > integrity is delegated to the kernel, which trusts the roothash taken
-> > from the FIT dm-verity subnode. For that chain of trust to hold, the
-> > roothash (and salt) must be part of the region covered by the
-> > configuration signature, otherwise an attacker can replace both the
-> > filesystem and the roothash while keeping the signature valid.
+> > Implement loading and booting functions for LoongArch
+> > standard kernel image as per spec.
 > >
-> > Add two independent checks of this property:
+> > LoongArch kernel do expect us to fake a efi systemtable
+> > for passing fdt to kernel, we don't need to implement any
+> > EFI functions for kernel because it won't look into anything
+> > beside devicetree from that table if we tell kernel we are
+> > not efi compatible by setting a0 boot argument to zero.
 > >
-> >  - test/py/tests/test_fit_verity_sign.py signs a configuration that
-> >    references a filesystem image carrying a dm-verity subnode, then
-> >    confirms that tampering the roothash or the salt is rejected by
-> >    fit_check_sign. A control that tampers a byte known to be signed
-> >    proves the check can fail.
+> > Link: https://docs.kernel.org/arch/loongarch/booting.html
+> > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > Signed-off-by: Yao Zi <me@ziyao.cc>
 > >
-> >  - test/boot/fit_verity.c gains a runtime unit test that builds the
-> >    exact node list the configuration signature is computed over,
-> >    turns it into hashed regions and checks both that the roothash
-> > [...]
-> >
-> > boot/image-fit-sig.c                  |  25 +++--
-> >  include/image.h                       |  25 +++++
-> >  test/boot/fit_verity.c                | 194 ++++++++++++++++++++++++++=
-++++++++
-> >  test/py/tests/test_fit_verity_sign.py | 162 ++++++++++++++++++++++++++=
-++
-> >  4 files changed, 399 insertions(+), 7 deletions(-)
->=20
-> Somehow I didn't get this email, but I'll try to reply here.
->=20
-> > diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> > @@ -340,8 +340,19 @@ static int fit_config_add_hash(const void *fit, in=
-t image_noffset,
-> > +#if CONFIG_IS_ENABLED(UNIT_TEST)
-> > +#define VISIBLE_IF_UT
-> > +#else
-> > +#define VISIBLE_IF_UT static
-> > +#endif
->=20
-> Tom commented on this, but I'll just add this. Linux has
-> VISIBLE_IF_KUNIT but in U-Boot so far we just stop the static when the
-> function is needed elsewhere. LTO can be used to avoid the code-size
-> increase, for platforms that want it.
+> > arch/loongarch/lib/Makefile |   2 +
+> >  arch/loongarch/lib/bootm.c  | 163 ++++++++++++++++++++++++++++++++++++++++++++
+> >  arch/loongarch/lib/image.c  |  66 ++++++++++++++++++
+> >  cmd/Kconfig                 |   2 +-
+> >  4 files changed, 232 insertions(+), 1 deletion(-)
 
-As part of why this should be its own discussion, a quick look at
-VISIBLE_IF_KUNIT in the kernel leads me to think it's not quite the same
-set of needs, or if so there's a lot more architectural enforcement
-around what is/isn't exposed just for testing, which we lack today.
-Talking about LTO isn't relevant here.
+...
 
---=20
-Tom
+> > diff --git a/arch/loongarch/lib/bootm.c b/arch/loongarch/lib/bootm.c
+> > @@ -0,0 +1,163 @@
+> > +/* LoongArch do expect a EFI style systab */
+> > +static int generate_systab(struct bootm_headers *images)
+> > +{
+> > +     const int nr_cfgtab = 1;
+> > +     struct bd_info *kbd = images->kbd;
+> > +     struct efi_system_table *systab;
+> > +     struct efi_configuration_table *cfgtab;
+> > +     size_t table_size = sizeof(struct efi_system_table) +
+> > +                         nr_cfgtab * sizeof(struct efi_configuration_table);
+> > +
+> > +     systab = memalign(SZ_64K, table_size);
+> 
+> Please add a comment on why 64K alignment is required.
 
---6tcIRrFuMKSrlbXK
-Content-Type: application/pgp-signature; name="signature.asc"
+This is a mistake, we wrongly assumed the system table must be aligned
+to page size, and on LoongArch the least common multiple among possible
+page sizes (4K, 16K, 64K) is 64K. However such requirements do not
+really exist at all, and I'll remove them in v3.
 
------BEGIN PGP SIGNATURE-----
+> > diff --git a/arch/loongarch/lib/bootm.c b/arch/loongarch/lib/bootm.c
+> > @@ -0,0 +1,163 @@
+> > +static void boot_jump_linux(struct bootm_headers *images, int flag)
+> > +{
+> > +     void (*kernel)(ulong efi_boot, char *argc, void *dtb);
+> > +     int fake = (flag & BOOTM_STATE_OS_FAKE_GO);
+> > +
+> > +     kernel = (void (*)(ulong efi_boot, char *argc, void *dtb))images->ep;
+> 
+> The second argument is the kernel command line, not argc - please
+> rename to cmdline. The third is the fake systab pointer, not a raw
+> dtb; please rename that too.
+> 
+> > diff --git a/arch/loongarch/lib/bootm.c b/arch/loongarch/lib/bootm.c
+> > @@ -0,0 +1,163 @@
+> > +     if (!fake) {
+> > +             if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len)
+> > +                     kernel(0, NULL, (void *)images->kbd->bi_boot_params);
+> > +     }
+> 
+> Per the LoongArch booting spec, a1 is the kernel command line.
+> Passing NULL means the bootargs env var never reaches the kernel
+> via that path - it will only be seen in /chosen/bootargs
+> 
+> So don't you wan to pass images->cmdline_start here?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalZn8QAKCRAr4qD1Cr/k
-CmB9AP9AuQivI7nTntuxBwb/2C9YjuaeBjX9g1pdBSHaWWrQOwEA0Q/bnsFwfJ7F
-PilbWQOte98BIQk9I9esLYjJffq9BAU=
-=+Nyt
------END PGP SIGNATURE-----
+Yes, thanks for catching this. It doesn't cause any issues yet, since
+LoongArch platform kernel code currently appends the cmdline passed in
+a1 to /chosen/bootargs.
 
---6tcIRrFuMKSrlbXK--
+> Also, if OF_LIBFDT is disabled or ft_len is zero we drop through
+> without jumping *after* announce_and_cleanup() has torn devices
+> down. Please panic() / hang() in that case rather than silently return.
+
+boot_prep_linux() does a check against OF_LIBFDT and ft_len, too, and
+might emit an error and hang. I'm not very familiar with bootm, could
+boot_jump_linux be called with BOOTM_STATE_OS_GO set but
+BOOTM_STATE_OS_PREP unset, which is the only possible case of dropping
+through this if? This doesn't really make sense to me at the first
+glance...
+
+But anyway, panic/hang() here makes the intention more clear, and I'm
+willing to add one here.
+
+> > diff --git a/arch/loongarch/lib/image.c b/arch/loongarch/lib/image.c
+> > @@ -0,0 +1,66 @@
+> > +struct linux_image_h {
+> > +     uint32_t        code0;                  /* Executable code */
+> > +     uint32_t        code1;                  /* Executable code */
+> > +     uint64_t        kernel_entry;   /* Kernel entry point */
+> > +     uint64_t        image_size;             /* Effective Image size */
+> > +     uint64_t        load_offset;    /* load offset */
+> > +     uint64_t        res1;                   /* reserved */
+> > +     uint64_t        res2;                   /* reserved */
+> > +     uint64_t        res3;                   /* reserved */
+> > +     uint32_t        magic;                  /* Magic number */
+> > +     uint32_t        pe_header;              /* Offset to the PE header */
+> > +};
+> 
+> Comment tabs after kernel_entry/image_size/load_offset are
+> inconsistent with the first two members - please tidy so the
+> comments line up. Also use u32/u64 for consistency with the rest
+> of U-Boot.
+> 
+> I have to wonder whether it would be OK to share this struct with
+> RISC-V in a header file?
+
+RISC-V header is compatible with the AArch64 one, but not the LoongArch
+one, here's RISC-V's definition,
+
+u32 code0;                /* Executable code */
+u32 code1;                /* Executable code */
+u64 text_offset;          /* Image load offset, little endian */
+u64 image_size;           /* Effective Image size, little endian */
+u64 flags;                /* kernel flags, little endian */
+u32 version;              /* Version of this header */
+u32 res1 = 0;             /* Reserved */
+u64 res2 = 0;             /* Reserved */
+u64 magic = 0x5643534952; /* Magic number, little endian, "RISCV" */
+u32 magic2 = 0x05435352;  /* Magic number 2, little endian, "RSC\x05" */
+u32 res3;                 /* Reserved for PE COFF offset */
+
+LoongArch's header has an additional kernel_entry field, but no flags
+field. It also has only one magic number. So I don't think merging
+RISC-V and LoongArch's definitions make much sense.
+
+> > diff --git a/arch/loongarch/lib/image.c b/arch/loongarch/lib/image.c
+> > @@ -0,0 +1,66 @@
+> > +     /* To workaround kernel supplying DMW based virtual address */
+> > +     ep_phys = TO_PHYS(lhdr->kernel_entry);
+> > +     *ep = *relocated_addr + (ep_phys - lhdr->load_offset);
+> 
+> Please expand this comment - from context it looks like kernel_entry
+> is a DMW virtual address, and you are converting to a physical
+> offset within the image and re-basing onto the relocated load
+> address. Spell that out, with a pointer to the relevant paragraph
+> of the booting spec.
+
+DMW is abbreviated from Direct Mapping Window. Both load_offset and
+kernel_entry should be physical addresses, respectively represent the
+expected kernel image loading address and entry point. However, Linux
+kernel before v6.10 wrongly fills in a DMW virtual address in
+kernel_entry, so we must convert it back to physical address to
+calculate the entrypoint offset relative to the image start.
+
+On loongarch64, if an virtual address matches any configured DMW,
+it would be translated to the physical address represented by its lowest
+48 bits, and TO_PHYS() does the same thing.
+
+Here's the Linux commit fixing the issue[1], and I'll make the comment
+more clear in the next version.
+
+> Regards,
+> Simon
+
+Regards,
+Yao Zi
+
+[1]: https://github.com/torvalds/linux/commit/beb2800074c1
