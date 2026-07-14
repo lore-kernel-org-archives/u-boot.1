@@ -4,88 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF8EC44507
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 09:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C40BC43458
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 09:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6189E84CC5;
-	Tue, 14 Jul 2026 11:49:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 93D2E84CE1;
+	Tue, 14 Jul 2026 11:52:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WQ/juq3a";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="heNww70j";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QJR2bYgn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6AE84CDC; Tue, 14 Jul 2026 11:49:19 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0ACA384CDF; Tue, 14 Jul 2026 11:52:53 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13AA384C5E
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 11:49:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-471eeac43bfso4018653f8f.3
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 02:49:17 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CBE884C5E
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 11:52:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66E6SPtu3718299
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:52:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=onDNbpqC7sopxqbB19QsbK
+ mPekHaVRlHi4fXduAE4cA=; b=heNww70j7EsZXKLQDw7Om6zrl96Wo7e2QYZAHU
+ Q574guy7VHrpv6fXWUhhBAJpstAd7yKgHq4bjWx2qxhLnREM9irfAz84gjkGu3He
+ 2Q9oxLNYF7BrEpXJoMhdVTg3PGhPbg3Wtjen5j6VxNP2Wr4a4fdbw4pstHkGARgF
+ 2LX4FAr4fPsgFxtKLdCNLbhIe66QyS8ob0WJwMPB32p9YOEVT9I6lYkPXHDrobr7
+ w5CJuzBmgPzKJEWHN+DJlbU+Arkq1kQo+Ej6Cdh5bnWPk3bMKZZBlG3AlRMsuvDh
+ STpoY3UT43N9p8mT3bVi4BEtJM8ZP2hQWFPFkeZzu2N3HLKQ==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fd7gvjc42-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 09:52:48 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c860544c077so1949147a12.3
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 02:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784022556; x=1784627356; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ d=oss.qualcomm.com; s=google; t=1784022767; x=1784627567; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=8oSxUazGXQpnyt9n8DakWBf/O8KuUIzHXQqmJDV050M=;
- b=WQ/juq3airMnG0ze91O71XDvkgG6HTRq34/pibz31jvRiVtQc6NNsQ+HgbxY7MKnuG
- +UeeqaG/iF6Y0zu3Ah8Q9nhgz9aylFykdByCckJxa/AmCmWUAZoYPMT4P7e+q5u1iVYA
- T2KVl+YED5F3SWJz46R51kyfIvKWJT63z/AJBj9ROayMC05F1YA2ToSGCXKC6iXBB7X5
- i/raWmDYaPggTwAUhM9g7GYxQvFIP79itvN2JQEN30b+tk07Qb0Tllc/Wc8EUQNcqHDG
- +PJGjJA3FZ/7GMc6s2xuk4CAJq6oAPepGid8Nt6kQjXCDAUJ3G7NHAKgdN0KMW8FaAaH
- PvTA==
+ bh=onDNbpqC7sopxqbB19QsbKmPekHaVRlHi4fXduAE4cA=;
+ b=QJR2bYgn0WDg1rZa3XbfBXtgmxeQueZdqG0c5CIoQN7eIfeX9AC0lEeo105ei+eIBP
+ U6+iC/NiIKFY5RfNLJZRV/hpP/RsE/x6UsIkUzRsI41/ZLVgg3kqD0EzrFdfBCMhr6pO
+ Ggd/Qve4AT2a5ZvS9CHvA/mcfjYefE1OLYG9YngfK7hpus9NWIKXbkEWb/MCG0KYAUQ2
+ RqfnXdwKC0A2zHwk+a8cLhLfSkTXAmi53KR6/IU2whpKRkejec+etCMJmuNjsVlxPT65
+ BhM+UXmzZDeLyav4lSTp19LZqkztwlQjhqdZTrcspec6eEyUrcnbvIciLhkKS45NwE31
+ UoxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784022556; x=1784627356;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=8oSxUazGXQpnyt9n8DakWBf/O8KuUIzHXQqmJDV050M=;
- b=RuKQ4PZpTjHDl6tGho1yJP7BFCsUHP2IqtoabtlNY+ndVULpUD5bl1BU6bOSRouO7g
- x6IRLQaM7f5hS+vZ+FCP9ov5zJiiYjgEjnfdK2Tq7TUlXa3WLDQGr88qqvnM9Trf6N3B
- /tm1LKoQt3A3WB1MOE+VRKxKpPZRbl+2NAXeP3/e5xXZCXiGPfrhvZ28SLT2NVX3w4ZE
- /keG60ruFdkzGp8rT6KqZJghfwkag3x3d99hVc5cjR3dIl0wnVgg0+GqOwCnvTD7KqdO
- Iwcaf94IAOmmeJNBUaIQjQgh7Z9T4WanFK7TMNrldi6lv+WK+ch66uQyiAjXA1y+pBy4
- I3gw==
-X-Gm-Message-State: AOJu0YxeU4zM5QlcVaJZ/Vff7nVIfsILf9+aJlrYHjXMLG2Jmxv+nTFm
- 67vJDUwJ3gTAqa63fIuB0WMeD8rmYlyiusjohcIwDg4o7Z4eH4cbiDj3KkI2PsA0I0E=
-X-Gm-Gg: AfdE7cktAel4YDSCrzfJicJ/K5vrQXVwYVgsxVXWkyiwlSh9chIi8EfsgO+IaYO2Gc4
- K18vmcmrNP2vttY9gEGK6WMDPBuGJh9h/h/3JuNv8xfBm9YTFyQtCRyk4ErLf6jJi+6yw4Psgoc
- MjURGCoJ0FlBIWl6vxvd9JuhIIQJgP+AMFf/LtXv4+t3MkgqqoVxV0o5ouSgxJ5K/Jvla/Q8hGb
- J7wDnZW/YcN3UIK9KMtWFWDTf/kTSQ1q4GqUMWwdRyp8R7Qg3ZFQ0jcNZ/7SP94tDWTJ3CEB7oa
- ceeo3ZrTueuUFXMQWmbx28HVMSE1ehz6prd9eBSGq2+J7dOunNJRN8wduaQwMyQb3atMXvYq7tv
- 1pEj3wld6jtt0LXL/8qvkLOh4ePfyALhAjFOe4otwYosz7PSoALLjeQzworbcdb5q/T3mYtzhF2
- 6GHtzRZhhBEDcMVcowzA/ZRhNvnszociK8d1RNQwRK811xgXQeLnihJx9Z0yFYTnncV6v/QFMM7
- V9WZnpskn9/p/mMa4jvkns7XqV/mBsIgmO5
-X-Received: by 2002:a5d:5d0c:0:b0:477:2e75:522c with SMTP id
- ffacd0b85a97d-47f2dce7e5amr13873310f8f.28.1784022556455; 
- Tue, 14 Jul 2026 02:49:16 -0700 (PDT)
-Received: from localhost ([46.229.159.237])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-47f464a9879sm7671502f8f.22.2026.07.14.02.49.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jul 2026 02:49:15 -0700 (PDT)
-From: Patryk Biel <pbiel7@gmail.com>
-Date: Tue, 14 Jul 2026 11:49:14 +0200
-Subject: [PATCH] armv8: layerscape: Fix TF-A DRAM reservation with empty banks
+ d=1e100.net; s=20251104; t=1784022767; x=1784627567;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=onDNbpqC7sopxqbB19QsbKmPekHaVRlHi4fXduAE4cA=;
+ b=LL/HgcnZkpuD/Ftd5TugK9PfTU3504tGCLIFo0pE+Dco6bt5So4ZLTkO83zQWqqq0r
+ aOpHtyACByjgQzXct4zYGpRDGBc6fQPSRnvENotNslfw+rtICy8/LxqAi7of/QdsKX7I
+ /AL7QSohZ96XfcserY5JGTHtA2x93nAV7IjkAdxkFL/4VdxSvbEe29xFzSgFa/2qWU6z
+ uqr81Y2RMW/xHVEDRCueqaW0NJiSzdV08ouygalhyfR7JP1z00krdKwqyN8yaqAxx2RH
+ eEokY/WAfZxJqQjOILLLOo2VvU9RPX2RG/UWxR0wjQ0uEL7cQLrSn9fmyiGAQnFPUa8H
+ IOHw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp2mgofyLqm89fBliDCAEmHb2EsDnACCLiPiHyR3MQ5IFs6HK6XCuwosCiiSaOpKjY5Zgj6ZoA=@lists.denx.de
+X-Gm-Message-State: AOJu0YziWf61gMrtjPtFa2KTMWW0w4EF4h7nM7r3FXa3Ol0FJiTzE3JF
+ 0boWd6L9k+xD7un0XO++yWwgzPEZZu/Tu8QHIEXhfT6ZlGT1O4XtuY3BdVNxHvR9jUQSp7EKwgP
+ QgSD1OnrfmziyHd9H0M0fApGs+1BQq9GsaL7fvwhDTZYtuIE6/jLc2an5
+X-Gm-Gg: AfdE7ckfyO5ef7IMdHqwBuVqxU9/chqIve6Uokrmz7sVl/hFKc0DSbBV289+fsoMMZd
+ ZBARtzJoO4hABvoRaSqr24JzhUi6iyHj1tlwHIVxiL0a44Iqx8I20UsGaBOgs8EQjRmcY/RkyYg
+ y1z2RkXu1G0ugn802qULFe0MS1zKMm0rP1nEoZ6Ssq7O9byIFWhhU6oZlXLZXbYj7T9uibIL5dI
+ LEljxYH2PVrSJ7cxuIDI6UhXDO3niUGDr4HfV4L/MSDMgbnsK8y1UACrCQ8zgtWr25E8zZIVqAk
+ m69StTZciNBcsT5l9FeEKds0CUvWd3RDAIQPVESKpvmJ4WaKHmhw4jpA5c3cW4f7N1UpJ3VQ51W
+ qGK9Rdnv+wZkkWZsggHdaVO72jkrBZZzD7rFYUIz7KE4PBrPPCK8b4t1DKnLKJC3kP/i/afsuVJ
+ XGGyPaQHl83CT+CdE9VcU+82jUMBw0NbaD26hBdDFd
+X-Received: by 2002:a05:6a21:389:b0:3bf:95f4:dad7 with SMTP id
+ adf61e73a8af0-3c11077486dmr13565185637.41.1784022767483; 
+ Tue, 14 Jul 2026 02:52:47 -0700 (PDT)
+X-Received: by 2002:a05:6a21:389:b0:3bf:95f4:dad7 with SMTP id
+ adf61e73a8af0-3c11077486dmr13565152637.41.1784022767051; 
+ Tue, 14 Jul 2026 02:52:47 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-13b9081d5c3sm28180537c88.9.2026.07.14.02.52.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jul 2026 02:52:46 -0700 (PDT)
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH 0/3] tools: qcom: mkmbn: Updates to support ipq5210
+Date: Tue, 14 Jul 2026 15:22:37 +0530
+Message-Id: <20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260714-up-fix-ddr-v1-1-4834874c1e66@gmail.com>
-X-B4-Tracking: v=1; b=H4sIABoGVmoC/x2MQQqAIBAAvyJ7bkEtNPpKdJBcay8mShGIf086D
- sNMhUKZqcAiKmR6uPAVO6hBwH66eBCy7wxaaiOtGvFOGPhF7zPO0gVrQiA1SehBytTVP1u31j5
- vVTDTXAAAAA==
-X-Change-ID: 20260713-up-fix-ddr-80af76ffe140
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Vincent Jardin <vjardin@free.fr>, Ye Li <ye.li@nxp.com>, 
- Patryk Biel <pbiel7@gmail.com>
-X-Mailer: b4 0.14.2
+X-B4-Tracking: v=1; b=H4sIAOUGVmoC/yXMywrDIBSE4VeRs66gh2hoXqVkYc3YnkVumpZCy
+ LtHmuU3DP9OBVlQqFM7ZXylyDxV2Jui+A7TC1qGamLD3rS20bKsjq3RjmGH4EK6p0j1vWQk+f1
+ Lj/5yxvqpwe0a6RkKdJzHUbZOMdh7RMdtpP44Tu0bxf2IAAAA
+X-Change-ID: 20260714-ipq5210-52e1da5af9fc
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDEwMiBTYWx0ZWRfX0nNRSbsK/YQ8
+ 6pO720SJKr9oi447pCURO9MkJGrDi2gyhepsZvewXuUZSMRyCAm1SpV2g8XABAJGeladv5qgvOQ
+ wOxwT3MwO612cmngCjSajIGKD+oRtkH6Wvj4VMd5YIsst2IlxDJsrxBBRDOVm5we2p8i2VIY7Bi
+ ggmTTAYLs8RpRcaWR8lnovD3lesS8yn6nlC7UlFmg7BbHFmAXRdPHT+mbwyMYPf4baRXGzdufhS
+ E9XIBQWVcmN+AZSHsgAVngT6FDkyWm27lIAnfft93yZ7XbOcr96C+nOpSpHMHyt/i6IxuqYybI3
+ Q0EWB80Y5Xg1YUoSFyrj+TjHB9DbGqHNrQcU3iK1tiRkmncVETSqCrW9U7djrIlaHO88f7Ul9sy
+ Xhhu6+x85Xf84UX8XzQ+Cu98UA406pYNmf6/CO9k8DnT8npVH161EgbCUtlXEzQ0DCazceG2iyU
+ dVC8En8buMlAvRGHUgw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDEwMiBTYWx0ZWRfX5aye3wmKXkHn
+ Ip37/JGseSFZx+aCIc2grRgBPzDqQZlxgvo2/dSitfuk14ExuScxQIp83YvzoZ/MD41svmwhuKT
+ uhgMtcKBlmftQZMzjrT/rlyBFCa2Hqw=
+X-Proofpoint-GUID: p3UOm47QQcFShLOrERchyvUnc8SOvDut
+X-Proofpoint-ORIG-GUID: p3UOm47QQcFShLOrERchyvUnc8SOvDut
+X-Authority-Analysis: v=2.4 cv=NYjWEWD4 c=1 sm=1 tr=0 ts=6a5606f0 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=SaGplcZz0KPe9PN_EewA:9
+ a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-14_02,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ malwarescore=0 impostorscore=0 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607140102
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,121 +157,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TF-A DRAM bank setup currently assumes that the number of
-banks reported by TF-A matches the number of entries available in
-gd->bd->bi_dram[].  Limit the loop by CONFIG_NR_DRAM_BANKS so that
-a platform with fewer configured DRAM banks does not write past the
-array.
+As part of adding Qualcomm ipq5210 SoC U-Boot SPL & U-Boot proper support,
+the mkmbn script has to be upgraded to create images that can be used
+in the ipq5210 SoC.
 
-The reserved RAM setup also checks higher DRAM banks before falling
-back to bank 0.  When a higher bank is empty and board_reserve_ram_top()
-returns 0, the old test succeeds for a zero-sized bank.  This can set
-gd->arch.resv_ram to 0.
+These changes are to address the feedback in the 'Qualcomm IPQ5210 SoC
+bringup' series [1] to use mkbn.
 
-On systems with CONFIG_GIC_V3_ITS this value is later used by
-ls_gic_rd_tables_init() to place the GIC LPI tables:
+1 - https://lore.kernel.org/u-boot/78ff6a8d-5c63-4bc2-bf1e-6b71b8f9c6cf@linaro.org/
 
-  gd->arch.resv_ram - GIC_LPI_SIZE
+While at it, fix the MBN version number for ipq5424.
 
-If gd->arch.resv_ram is 0, the subtraction underflows and the GIC LPI
-tables are placed at an invalid high address.
-
-Skip empty banks when selecting the reserved RAM area and fail GIC LPI
-table setup if no reserved RAM address was established.
-
-This fixes LS1028A systems with 2 GiB of RAM, where TF-A reports only
-one populated DRAM bank.
-
-Tested on an LS1028ARDB with TF-A modified to report 2 GiB of RAM, and
-on a custom LS1028A-based board equipped with 2 GiB of RAM.
-
-Signed-off-by: Patryk Biel <pbiel7@gmail.com>
+Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 33 ++++++++++++++++++++++-----------
- arch/arm/cpu/armv8/fsl-layerscape/soc.c |  5 +++++
- 2 files changed, 27 insertions(+), 11 deletions(-)
+Varadarajan Narayanan (3):
+      tools: qcom: mkmbn: Fix ipq5424 MBN version
+      tools: qcom: mkmbn: Add support for ipq5210
+      tools: qcom: mkmbn: Add support to create multi-elf
 
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-index a047494b1fd1adcc015a34520d6e2d7f8fe34334..497bf11b8983b208680a028a23677573f9d1edfd 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-@@ -1381,32 +1381,43 @@ static int tfa_dram_init_banksize(void)
- 		dram_size -= gd->bd->bi_dram[i].size;
- 
- 		i++;
--	} while (dram_size);
-+	} while (dram_size && i < CONFIG_NR_DRAM_BANKS);
-+
-+	if (dram_size)
-+		printf("Warning: CONFIG_NR_DRAM_BANKS is too small, %llx bytes left unassigned\n",
-+		       dram_size);
- 
- 	if (i > 0)
- 		ret = 0;
- 
- #if defined(CONFIG_RESV_RAM) && !defined(CONFIG_XPL_BUILD)
- 	/* Assign memory for MC */
--#ifdef CONFIG_SYS_DDR_BLOCK3_BASE
--	if (gd->bd->bi_dram[2].size >=
-+#if defined(CONFIG_SYS_DDR_BLOCK3_BASE) && (CONFIG_NR_DRAM_BANKS >= 3)
-+	if (gd->bd->bi_dram[2].size &&
-+	    gd->bd->bi_dram[2].size >=
- 	    board_reserve_ram_top(gd->bd->bi_dram[2].size)) {
- 		gd->arch.resv_ram = gd->bd->bi_dram[2].start +
--			    gd->bd->bi_dram[2].size -
--			    board_reserve_ram_top(gd->bd->bi_dram[2].size);
-+			gd->bd->bi_dram[2].size -
-+			board_reserve_ram_top(gd->bd->bi_dram[2].size);
- 	} else
- #endif
- 	{
--		if (gd->bd->bi_dram[1].size >=
-+#if defined(CFG_SYS_DDR_BLOCK2_BASE) && (CONFIG_NR_DRAM_BANKS >= 2)
-+		if (gd->bd->bi_dram[1].size &&
-+		    gd->bd->bi_dram[1].size >=
- 		    board_reserve_ram_top(gd->bd->bi_dram[1].size)) {
- 			gd->arch.resv_ram = gd->bd->bi_dram[1].start +
- 				gd->bd->bi_dram[1].size -
- 				board_reserve_ram_top(gd->bd->bi_dram[1].size);
--		} else if (gd->bd->bi_dram[0].size >
--			   board_reserve_ram_top(gd->bd->bi_dram[0].size)) {
--			gd->arch.resv_ram = gd->bd->bi_dram[0].start +
--				gd->bd->bi_dram[0].size -
--				board_reserve_ram_top(gd->bd->bi_dram[0].size);
-+		} else
-+#endif
-+		{
-+			if (gd->bd->bi_dram[0].size >
-+			    board_reserve_ram_top(gd->bd->bi_dram[0].size)) {
-+				gd->arch.resv_ram = gd->bd->bi_dram[0].start +
-+					gd->bd->bi_dram[0].size -
-+					board_reserve_ram_top(gd->bd->bi_dram[0].size);
-+			}
- 		}
- 	}
- #endif	/* CONFIG_RESV_RAM */
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/soc.c b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-index d85a630f8a3cb722034b131b94529688af4f55fc..24ccb8bb0c4ce737559254ca84dcf0e8bdba3e64 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-@@ -65,6 +65,11 @@ int ls_gic_rd_tables_init(void *blob)
- 	u64 gic_lpi_base;
- 	int ret;
- 
-+	if (!gd->arch.resv_ram) {
-+		debug("%s: failed to reserve memory for gic-lpi-tables\n", __func__);
-+		return -ENOMEM;
-+	}
-+
- 	gic_lpi_base = ALIGN(gd->arch.resv_ram - GIC_LPI_SIZE, SZ_64K);
- 	ret = fdt_add_resv_mem_gic_rd_tables(blob, gic_lpi_base, GIC_LPI_SIZE);
- 	if (ret)
-
+ tools/qcom/mkmbn/mkmbn.py | 31 ++++++++++++++++++++++++++++++-
+ 1 file changed, 30 insertions(+), 1 deletion(-)
 ---
-base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
-change-id: 20260713-up-fix-ddr-80af76ffe140
+base-commit: 2e266ec527c20dabd53dc1b19950ce5b77cf2f24
+change-id: 20260714-ipq5210-52e1da5af9fc
 
 Best regards,
 -- 
-Patryk Biel <pbiel7@gmail.com>
+Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
