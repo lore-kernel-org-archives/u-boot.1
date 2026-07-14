@@ -4,166 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21998C43458
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 05:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ADB4C44501
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 05:30:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3695184B4C;
-	Tue, 14 Jul 2026 07:24:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E14A84AC7;
+	Tue, 14 Jul 2026 07:30:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RpZT78Jb";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f3/cE5Jq";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kPsV+UtQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a/45lLcW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F3684CBE; Tue, 14 Jul 2026 07:24:45 +0200 (CEST)
+ id 86D3F84CC9; Tue, 14 Jul 2026 07:30:04 +0200 (CEST)
 Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
  [148.163.154.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30A8A84B49
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 07:24:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0E0B84A5D
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 07:30:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
  by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66E38idb1087126; Tue, 14 Jul 2026 00:24:39 -0500
+ 66E38mWu1087188; Tue, 14 Jul 2026 00:29:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16
- CU=; b=RpZT78JbL+MfKEfbo881h9DiU5GRniCoySnLi2zXb5NBvFuoopH42W2ca
- fvCY/FgzC6nuPmmNSjfcM9Y7Kszr6R08U5M517yAqXg3SvQ+l3a4WJP+R+Vj0fzW
- UY9XwBVBsLlXtIZdeOk0sDqxFvU8HWdNMKrNfBsuQN3fYAT2tpYIvTbVqw3a8wPJ
- MKejoBCuXrnIkrb2bYKICUs12xKTM6t8B9ToFPzcnUL7kNj/hFjk+PVHli/PP//8
- glu02kGAc3t/3orEz+2N6o1+0a4wXm0QRoYfeRLAkAG04zHCSI3hxEglNb7/ihkR
- dAAOy5lHMbJ3/amEkGk9Nvm7BHOyw==
-Received: from bn8pr05cu002.outbound.protection.outlook.com
- (mail-eastus2azon11011036.outbound.protection.outlook.com [52.101.57.36])
- by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fdcwu0gkf-1
+ proofpoint-05-2026; bh=B/+T7P7IUkaqKIDMZuOw3o0GNb24P2muUbXDCgLZx
+ yg=; b=kPsV+UtQN0uyur4nWO4K1R3k4v3oK/hvh7xT9m4LG7pD+a2wk8gTFGbvk
+ nRQBd7Ba0aBcwJey72DJGIt3vm28FaFjHaWpNY0w/vo/DuLGUtXWPW9XrEwiUMN3
+ 2AVuZEGPuBG+6sIXnkLsTblWQcwpqr98cM1t5Qj6SXaVfhjkRZrJYdczMeFZaJ7Y
+ U1XJt37p9bsQBkjMGYYesq8aqzcaWl67UQoo7F5DITjUqTfjEIG0/j6b5j0thbto
+ EtqkNkHy6f2kef2ZSfjH0HQ4J7e2LivjdZ8VMZAhUeiRoCM5avjj/IG2QY0q8tQO
+ j/BSA5zABJQBm5mbLT7BA4sqSEL5g==
+Received: from cy7pr03cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11010040.outbound.protection.outlook.com
+ [40.93.198.40])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fdcwu0h6p-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2026 00:24:39 -0500 (CDT)
+ Tue, 14 Jul 2026 00:29:59 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L/+lLlD5YGT642sjEdVyM9Sp8XJDrrry0oYVmKKhFHVOufmjB3Lwk9os3YAwc5TnAWC7pKL3pNCBKi9SGjghdQ+9OH5KnxB/9lmEMxzWDy+yPw/uuM4xtesuSsD9rXijAH7d5VJtcP8/CwxAVsseRI8usSbazSlkw0hKwsH5xW1tL/TI6OhO9wagK/Wwh0btouThyUYPycZdUgZfIexeE+MaZsxt5f+QjWVHdqtjX0gbleKRdc5XCkyv6iZlzwwRHluM+DxoU1uHp8HuQ2XzQDjzaouZAKK+SNXtIu8VVGgJLcwHS5PgY1XcnAx3H79+YfACiYoenDk7Zg8xWeaMjg==
+ b=Rtm8bhh+FCw5ylZ2omcX2axFOFhDyQJoOz9EUZsEecckFR4rqG+coIix0iBSUQ8lrMY7hPzKQsykJKbJDwmhV8BJD+fh8xoOgmLgCdCFRCCneJtXruGAQx0sVk5FmOC1jCNIreRgBG50P64PdTjEuFv1qw4lk+hM/KHUx7mzTr1qbJw/bBhtdfbQIqZr2uV+JktlCp6auZ6cfc0g1vBS3pxdW1zeATXHn2irrsQ0EDHdLSggOVBkgfy1s8eiLc26FJioH1hAFdToX3rpeemV9W661rlfZyahjQWa5SQ7DcCQTq2s+X3FrEgfDP1Eo0TU+fcLHV54KYbLoZsIKd5VwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16CU=;
- b=qXf7VL7YdFot5HkxH9Od9g5B+Q1leCbDwYiY+P3JHVX0gS9rTj2zxHNqDJCofZq6gmlpV3PHIuu8D7Q4jHp+Tb2gzXiOU9gH4O7MKDMN5zUBTK3/+q73mviowqVy3SEGuw6UaAyuU0bEpXHjlIwtRkNdR+Bvy0kWRK2LfV1p+2650l3BN9pOeA3iRJ3Cqj9KggksUmK8aousbLHaWUm0eMqnzrQ0Chj6ItXFwjLvBXVOlk7u8vhmjZ3wwKKwKyQMI3UGyHKo2L19TQb4pW0rSbbL1vedo4DV/f9iyy76F6ec9L5dseYTYAjAd/x+QtUXdt+/9Fhe9xlGwF7KgoqGvA==
+ bh=B/+T7P7IUkaqKIDMZuOw3o0GNb24P2muUbXDCgLZxyg=;
+ b=SjxgE4rf0RGLc3nKVvm57PGknbs4cnGr4zLxgTumyHWQhSwxClubY3N7lIlk9y70Nu+ayuLRyie8PkwzaCQv97o1IkoIT1G9yxNrGk902rrC0L9UBYIKbs3hGAf83PKKqH0HlS15VsTl3DFWC7VBdE+72rpF78Bvbsz2MUO5vMNYNvenW1+aUy5cSmTtyFpz9NtW9QOmj4cQ28mC0XJPL/aXVrSVJM1hpAofjqlnEi8bhb5DIqPX7dEwuxlrE4uqbiAJSJAU/P3PbMU0F/YFhqmAoX02OQj55Yeic/SwQ+XwKkOhiF+MchMHv1+srzPxNhdBBOHcFHSsOYVRB4iZ4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
+ 198.47.23.195) smtp.rcpttodomain=prevas.dk smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tspm0rxkoSkehingBNwWV+U4h5ReOgrdaDK/p2G16CU=;
- b=f3/cE5JqpFNqh5d8tin8YdEWkJ2TpFOdog/oJSrCNtr+HU/9XTrYSm+NYXrkMuMbzm61DscxSwh0WYY2FBhc5nI3v+VCNkkC5IuDq13n9o2eCxjryjg42UgMKr4ePe59YuSshnzgWdtuNdQ7MaEc8TZOmSMWgk7UAPljcXBgiCw=
-Received: from CH0PR03CA0220.namprd03.prod.outlook.com (2603:10b6:610:e7::15)
- by DM4PR10MB6134.namprd10.prod.outlook.com (2603:10b6:8:b5::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.18; Tue, 14 Jul
- 2026 05:24:36 +0000
-Received: from CH2PEPF0000013D.namprd02.prod.outlook.com
- (2603:10b6:610:e7:cafe::2b) by CH0PR03CA0220.outlook.office365.com
- (2603:10b6:610:e7::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.9 via Frontend Transport; Tue, 14
- Jul 2026 05:24:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ bh=B/+T7P7IUkaqKIDMZuOw3o0GNb24P2muUbXDCgLZxyg=;
+ b=a/45lLcWuSdmtv6c96T2LvUalbMpVKmu9JAHTwKZ7OO4bv9xB/qFNLfjKeNYX6608XQ27wwDh5lABcKwNPAcCEQwEkbQpin1f6VqmYKOKSwODgxrW+K4B0g/Hdd7uuNOIJKaoCPmfOTHkaC2XMFB1Vu5VPQ/G7JkE8lTbI81tWY=
+Received: from BN9PR03CA0950.namprd03.prod.outlook.com (2603:10b6:408:108::25)
+ by CY5PR10MB6216.namprd10.prod.outlook.com (2603:10b6:930:43::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Tue, 14 Jul
+ 2026 05:29:55 +0000
+Received: from BN1PEPF00005FFC.namprd05.prod.outlook.com
+ (2603:10b6:408:108:cafe::9c) by BN9PR03CA0950.outlook.office365.com
+ (2603:10b6:408:108::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.19 via Frontend Transport; Tue,
+ 14 Jul 2026 05:29:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH2PEPF0000013D.mail.protection.outlook.com (10.167.244.69) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN1PEPF00005FFC.mail.protection.outlook.com (10.167.243.228) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.223.9 via Frontend Transport; Tue, 14 Jul 2026 05:24:34 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.223.9 via Frontend Transport; Tue, 14 Jul 2026 05:29:55 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
- 2026 00:24:03 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:29:54 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 14 Jul
- 2026 00:24:03 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:29:54 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 14 Jul 2026 00:24:03 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.50.146])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66E5O2eP3352316;
- Tue, 14 Jul 2026 00:24:03 -0500
+ Transport; Tue, 14 Jul 2026 00:29:54 -0500
+Received: from [127.0.1.1]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66E5TpI63945363;
+ Tue, 14 Jul 2026 00:29:52 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 14 Jul 2026 10:54:02 +0530
-Message-ID: <DJY1KP97NN91.2F605W5BR722H@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: Re: [PATCH] tools: binman: fix changes not being written to source.dtb
-From: Anshul Dalal <anshuld@ti.com>
-To: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260707-binman_bootph_fix-v1-1-3603996799e0@ti.com>
- <CAFLszTg5Qu3stt8AkeBpWibTyYxp1tXAern3aLE6MEHkHmVRyQ@mail.gmail.com>
- <DJXETQLM9PQP.C2LCLMD6LMI@ti.com>
- <CAFLszTg4hhLezFpkvkHY9qK_WQ8xfcRi8AWx2RcVkAeP+RPMvw@mail.gmail.com>
-In-Reply-To: <CAFLszTg4hhLezFpkvkHY9qK_WQ8xfcRi8AWx2RcVkAeP+RPMvw@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 1/6] binman: openssl: refactor creation of
+ Distinguished Name section from dict
+From: Neha Malcom Francis <n-francis@ti.com>
+To: Rasmus Villemoes <ravi@prevas.dk>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, "Anshul
+ Dalal" <anshuld@ti.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>
+In-Reply-To: <20260710123618.2036728-2-ravi@prevas.dk>
+References: <20260710123618.2036728-1-ravi@prevas.dk>
+ <20260710123618.2036728-2-ravi@prevas.dk>
+Date: Tue, 14 Jul 2026 10:59:50 +0530
+Message-ID: <178400699002.2406821.14193476014351515293.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784006992; l=772;
+ i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
+ bh=DRcVkUfmtbMIoNQcmSWEP8hegOxtvbO0ae/fc+4ajVo=;
+ b=PwcxH+jBbHV+lovqwVQZu9Zntoj2dIqmzoNJhWN8u2zXK5x+e71mOB7aqyn/y2OM6fLcWIjtO
+ xBSWY303yZCCShW2LLaCyka4tZQWVIIm4SjIJp+rsdP8CDr1OFTDInk
+X-Developer-Key: i=n-francis@ti.com; a=ed25519;
+ pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000013D:EE_|DM4PR10MB6134:EE_
-X-MS-Office365-Filtering-Correlation-Id: 20d13d71-9911-4fd9-302a-08dee16830d0
+X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFC:EE_|CY5PR10MB6216:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4935d4fe-35ee-4f61-01f2-08dee168f004
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|56012099006|6133799003|4143699003|18002099003|17002099007|22082099003|3023799007;
-X-Microsoft-Antispam-Message-Info: yZ/QNYN+zHDR/u/IUcMLws3ghWuIqIKMq7KuSG2YdkX66h10iIbwYXK60xz8+Besbr09bdzT/sMBPimQ4buWTnHRhCNAkiytOyLSU5gut0OMD8fS1zxukJ9RkhMa7aNuZ6aKa7TWf+Nn+ySn+IFLakSX2t0MyVgGSslGSp1l2F4fqJ7/WcWUZikSNmaxXSHZ3jlBjajMR2zCRLSO1+RW5J8cyDsoHMRR7NXP5tbzjqtoCYAMMT3JkZDGmqLqFF5ny1BYoqFmpZFByaw9PJIY96G7bXK1+MaiTkJCtUbXx8gRJDUjJ+6STlwVpwdjGVwpKgh+eYP+AEDJfXMslwA6JrFLVCD7CntVy8OfH9P4VXpP2HOD9ggBIS4A6QEsQqAxJbww6h/AOVejFVU+93Ka+arS1/lrT5xud1YAEZy8hNj69pQpJFT3GrwdEBhhxq5/k0YUI6CwRpmDTDnKHgxz1OQGo0GLg1ahcD3BSIFtBa1x84b+wQuS0J6lUuZN+5BDRKvYfWp740eJlnPhWfND7MO1vrE5NsnDuNKmvM/aOeAOYYbdqOyIecqfDNLDe8t1CsSPHSAMHE/9NBL2lGZOTC21xXPU15zKzbTd81zaDHog0x4HbEqoBxQeysaMSgon1h85vgfpi//iTHYPb5Hd6/8qsy2S5l4tunZCU6iFeqaYheRpvPcxCCVWBkNu8R+MA8scJV+0ihj+oBQoebl4MQ==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(56012099006)(6133799003)(4143699003)(18002099003)(17002099007)(22082099003)(3023799007);
+ ARA:13230040|36860700016|23010399003|82310400026|376014|1800799024|6133799003|56012099006|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: Qf7RF3JbCJcV8WYmEWju0PAu4hktlli3nUl2EioCPMJmtYq4XbIwbve3o9j9W76XyPy8qurzjLtZactG5mYhusU+9uHx5zYXyNZiVWPLM9LiV5UCkhw28xg/P9vAwcaNKPKH2NGGfF4/aED+7h2Mzf/JSY93F3lW6vqs4+8mhX7t615xxTC92+HoYKPw294xQ60/Lb3R2EmO7ko6235HabX7vqe50UjylOmVSzT11kwuhkRYAS1/4T31ou6+0tbQ2KZd4tR10pux+wPt5MKjA/cC5jzvdAPumYpnxEcNEKVbUyeS2qUagoUJ+IwKIWvM3OmhknKVvSWrJGk5wL7qqjKvIryLdrrwUI05MEZAl1zjbOFkIGzeMa6OhQ6jly5HqON+R8w+Tq+WkL3u2wHgdWBE0ucNT6x0GRlIMBj1nJRKvTWnOBfxykx1Hm9qswQ2FY/Hr1+wZx6KeQrHY5nXslwC218MCZL6CnoprZWXIjdbts+1r5IKGtUv+PIz6ukijPfqdoONgG9lQjRFSHG73dIyqVVqkH92Shvpc/wG8TcpzSIpKnwlBwjIrzuP9m1CV3YRUyqu4Qdc3g+D0hOE12bZvNewkk5JKoGMvbWcIpkfY6LKc97iVCiYUbzfro7bpjlYFgsHhgpsvn80m9tYt1Bgz3owO54TnFIuW23Cieil3kFA1XQTT6W041Bu2R3/Y2XPLk59kWXMPNUJxXgLFg==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(23010399003)(82310400026)(376014)(1800799024)(6133799003)(56012099006)(4143699003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: nX51sSXpGEj/iwe3wELhKonMV78x01j55GP5my+3Nl0pX6wx32Ktj4GqKV2W52rdICwxcwi8G3eFeapSV03bQo9vVc3FiUPZ987fPdIMZEV7TUfOpCoooFZj+63aRKfd/IVMp5p1nKUv7GBdTvHbbZV1Oc32pWwkdRHvpMdcnzseIW8K7cCxatvQBmGgCFCm6SbRxYpxBJ7sq9MYtkB77o+fqAAbGJ13O366SgVwIbyhHjrfmL8V/623VuzwD6MevHq9ZIwDfO839ZlbpbNUlc8Igovvq9jaO0scfUxXDmsNRxOreTwVN2FgjyFXZunSbbr78DUDcRt0V7+mT0v6HzZkYfDT0MKUolQYAwbXxE3hYeYmWhCFfPfrWKuCsjatp6JdYg899vKMc2LbU3mJ7HQpplbXrWsMbeQj34+ONUeb+17DcNv0JxOTHk3dPla4
-X-Exchange-RoutingPolicyChecked: g/A15JouJTnb4D98fLXqDFmoZ5WY/OMac2VE5Mp4APofcCQYiothciroJgUpUQk4YIzmchI+O1uPoFz4U4UkHPVYRw5FKNX8mZFWvmLiC9Mi1AvAA0PT2AhitqNSNSMAscBeG29GDwUbiQTQvaXwRyBQtYTWrxaCsCh21PSy/st2gJjQOIaoqbO6lL+KdGNXaycjJYBJx14zdoIxvJfY/hg93o8aHZyMHhIebSP+mg1rpVdleB74TUQSFL2+m4ME3nMbQkLbxNmXQrtgdguh/6hAeGKva99UvM3somTpy6aLtcKf5RarVqDyjDCRA2wAcZBJ5LjeEb0VsnhuxgMXlA==
+X-MS-Exchange-AntiSpam-MessageData-0: ZRa7O0gWF3LmtL+rWaD+ATJ9dkqSWju5TEURMv83MzItWbSO/B2u9RtezHEQbibhu+ErMGopP+jRPw1KBwvwbbD0dYwtF3THEGC6ejg11viA3QchN5gjv+BBjtZB5/vWn+dF+hHq6JLlcGb48Ofc3hCa9JZmGB8jy+a6rPgWkZn9psC8cJ9x1yXWsVdnhpltwcy2xpCjRL1fTxMvvLTbcFUSa+tvhqS1lDV8XjMnm8teE1rj4ScLZF7447bj21IBC7OhCFJJgUxr0oMsx8oE5v5zl/x0Lgd2O05svrK1RWCaibe9+uU/HSIMiOzjDA2ATsFufAI0iscAs6HxhqWuwgSrtoyQM6CaxOZ91UkK/XOwnqsghgVe0dg8gCYjg5xsm4xtKF24Q90Hyf+u8TsI3RTwYHqsh+g5tiFaKr14zfrdno1YsdcjApQwgR0vX6K9
+X-Exchange-RoutingPolicyChecked: YD5otFO/kOz85NCsBz2Ay3LGdNq0jvf+1EgsWmkgAgseIHQedJrbNH1kS8/Z81m2fJR89TKmLXPu2eTVmuAzp4hhbWK1VbCoKkVYe5nZAjM1aksyfexI6wQHBlbPLh47JYWak75LcrHKTCgDRIy8HKNeAS4nqNIT+E1yGLKryP6mCsnLBacDMoPLo8Iw8N2HuKu6xn2TZE/0tspeI9lWhfKTiPxhdRdQ0T8CbG/yekCca6IEbPqeZdCTHK5Pgr8MTft52nqZ2e90ZWkB1aHa7wcjQT5pEiFi9EKNlzjRFB/wdS0ic7QYtj+i7b4ORRQ3CEQj+E4hp9mzJoLSeBnWqA==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 05:24:34.3999 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 20d13d71-9911-4fd9-302a-08dee16830d0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2026 05:29:55.1714 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4935d4fe-35ee-4f61-01f2-08dee168f004
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00005FFC.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6134
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDA1MyBTYWx0ZWRfX9Gp8krT9ZCiX
- 6x0MaPQPY+6TUOljg5ROkw5K+F9sgykxylaWycTE+M+DN40rJnry4n+anMU9HaSTMpJUyaECzp5
- fKkp6WgRR2ljEgClYDU2KaTgXM11MVg=
-X-Proofpoint-GUID: pZ9Pz2Icg85EF_BJGB68ezCk_kK-SzAw
-X-Proofpoint-ORIG-GUID: pZ9Pz2Icg85EF_BJGB68ezCk_kK-SzAw
-X-Authority-Analysis: v=2.4 cv=LvWiDHdc c=1 sm=1 tr=0 ts=6a55c817 cx=c_pps
- a=9qX6K/GtqWsr64T/c6OOlw==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6216
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDA1NSBTYWx0ZWRfX4/BsFWTGDPbw
+ rAYZ2TLVEz3OMUm0V16ubCxKalsqmdQdtwjCFus8y08cIRFCGkF7aw58/u2gk0xo8tL6eEYO02s
+ Kv14FN+0HcUGHHmh665HYzBT62P5iOw=
+X-Proofpoint-GUID: GyCxR__SsJ2Ugta_VY6e0t4ktbMHS4cn
+X-Proofpoint-ORIG-GUID: GyCxR__SsJ2Ugta_VY6e0t4ktbMHS4cn
+X-Authority-Analysis: v=2.4 cv=LvWiDHdc c=1 sm=1 tr=0 ts=6a55c957 cx=c_pps
+ a=F7bn8UBrlesmBZzvaxvKyw==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8 a=wIc7PlybEO9OI9lC9b4A:9
- a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDA1MyBTYWx0ZWRfXyU3Bn3UxL0hS
- wma8vq5pvzxSZ4VKR5pKxXpOooFarlp0eWBowzz0cnFIxzvr3VedCyTlCUR0K3zzF58ZCEYLf5w
- yVYYPM8zDVDGHU1P+tKZIdWCaad3fcfbTojwqFNVOFoYuxjAdcD1n/vXDDnKBOOaOHU/VTLvcVO
- gHxoyKLhYZcAR0ou3JuhzVGKzOvu1Tvt64G4skCDs4asGFwWTVIkVLmSWFG4FPpNmmSlLTNPbt/
- iL/IhftjYUyuJ/iYpisPAm22PT1lYYaIeTpJnhmrEU/xwlyPRDN2bcbJjHNIk23DAohJKKbf+k4
- 6dEesp+iPLHVOALCsoLJTnJj68EwZxnyS8tzUAzIfrBkhsCaX872Ix+tOBVrAyKlse+sCJdEqxA
- RCO4lj2RtLJ/0cSKvKTEUm7o5dmxVzLnkGT7us8+EMpSFtW5OZtEPujatUGVndsyM4o8Svuofp2
- AAaksfMybJ2UtL7oTjg==
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8
+ a=mv2VjrsHlGKUbScakdQA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDA1NSBTYWx0ZWRfXyitphBpPl9sq
+ 1AEtt5V1dSjgwSweRCdbH2+lYQtRo8jvjpH3+VV9Tz6u3J0CKHSp8m/mnk62cDiKh/JEwd51sJl
+ B+eijYk8ZrVSuPBobckAPB9F0sdn+fZY273ur6tf1fbKZg1CJN+QgTcGZbsH1gbsy9p2E6kJHhf
+ bfRMIG7VFneEv9Q743b+i9ntz/ziaEwxGF+uqkhMEVBzQXVIyFrDSq7xzZpRqbKlZseTJDn37t3
+ kDIF7SsDc0U1hWpI6+xbsw2xjUnLTYQlnGxFiwUXGsqo3I1o9UavQwXLsdMQuKPkRZFUnZFg3IY
+ kawnlIyy+VyjUxKBifCGalhu0SJ2RF8iG7XX5d6JfwxivaVZYioATMVMCPAtn8m/n92UiH95Yr1
+ TDtpfFAbo8GFUqDEy0EPv4Ky84tZTfOwiRFed4ABsCuc3igLsDCelvMkM8XXMwKtwA2vpCqi7uM
+ Gj8/tP79Aii7LGlnXUw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-14_01,2026-07-10_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 suspectscore=0 malwarescore=0
+ clxscore=1011 spamscore=0 phishscore=0 suspectscore=0 malwarescore=0
  bulkscore=0 priorityscore=1501 impostorscore=0 lowpriorityscore=0
  adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607140053
+ definitions=main-2607140055
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,105 +191,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 10 Jul 2026 14:36:13 +0200, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
+> index b26f087c447..370760ccaa5 100644
+> --- a/tools/binman/btool/openssl.py
+> +++ b/tools/binman/btool/openssl.py
+> @@ -36,6 +36,14 @@ class Bintoolopenssl(bintool.Bintool):
+>              name, 'openssl cryptography toolkit',
+>              version_regex=r'OpenSSL (.*) \(', version_args='version')
+>  
+> +    def dict_to_config_section(self, section_name, d):
+> +        if not d:
+> +            return ''
 
-On Mon Jul 13, 2026 at 7:43 PM IST, Simon Glass wrote:
-> On Mon, 13 Jul 2026 at 05:34, Anshul Dalal <anshuld@ti.com> wrote:
->>
->> On Fri Jul 10, 2026 at 12:44 AM IST, Simon Glass wrote:
->> > Hi Anshul,
->> >
->> > On 2026-07-07T10:44:09, Anshul Dalal <anshuld@ti.com> wrote:
->> >> tools: binman: fix changes not being written to source.dtb
->> >>
->> >> In the current setup the changes done to the dtb by binman such as
->> >> bootph propagation are only made to the intermediary *.dtb.out but no=
-t
->> >> the final dtb.
->> >>
->> >> This means the final dtb that's in *-binman.dtsi never gets the requi=
-red
->> >> changes applied. Therefore this patch fixes the behaviour by writing =
-to
->> >> the supplied dtb before exiting with a modified test to catch any fut=
-ure
->> >> regressions.
->> >>
->> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> >>
->> >> tools/binman/control.py |  3 +++
->> >>  tools/binman/ftest.py   | 41 ++++++++++++++++++++++-----------------=
---
->> >>  2 files changed, 25 insertions(+), 19 deletions(-)
->> >
->> > Please can you spell out the concrete symptom? What breaks in a real
->> > build when u-boot.dtb doesn't carry the bootph propagation - which
->> > stage reads it, what does it expect to find, and what goes wrong when
->> > it isn't there? The *-binman.dtsi reference is confusing since a .dtsi
->> > is a source file, not something written to.
->>
->> The actual issue was observed while we were adding support for our a new
->> platform 'AM62l EVM' to U-Boot where the missing bootph properties meant
->> that the parent drivers were not being probed leading to boot failure.
->>
->> >
->> > Also please rewrite in imperative present tense: 'Write the modified
->> > dtb back to dtb_fname so that ...' rather than 'this patch fixes the
->> > behaviour by ...'
->>
->> Yeah, the former is more clear. Will fix in the next revision.
->>
->> >
->> >> diff --git a/tools/binman/control.py b/tools/binman/control.py
->> >> @@ -677,6 +677,9 @@ def PrepareImagesAndDtbs(dtb_fname, select_images=
-, update_fdt, use_expanded, ind
->> >>          dtb_item.Sync(auto_resize=3DTrue)
->> >>          dtb_item.Pack()
->> >>          dtb_item.Flush()
->> >> +
->> >> +    # Copy the intermediary dtb ('u-boot.dtb.out') to the dtb suppli=
-ed to binman
->> >> +    tools.write_file(dtb_fname, dtb.GetContents())
->> >
->> > This is updating an input file...really not keen on that! The updated
->> > dtb should already be written into the final image created by Binman.
->>
->> Perhaps it's an issue with how we're using 'u-boot.dtb'. As I see now, a
->> lot of platforms (including TI's) are using 'u-boot.dtb' as the fdt for
->> U-Boot FIT. Do we not expect the final U-Boot FIT produced in those
->> builds to have this propagation logic applied?
->>
->> To test things out, I built the am62x_evm_a53 platform and the fdt
->> extracted out of the built u-boot.img lacks proper bootph propagation
->> without this patch applied:
->>
->>         fdtget -t r build/u-boot.img_unsigned /images/fdt-0/ data > extr=
-acted.dtb
->>
->> It makes sense to not modify the input files so then should we change
->> the DTB we use in the u-boot's FIT to 'u-boot.dtb.out' instead of
->> 'u-boot.dtb'?
->
-> Possibly, but are you using Binman to create the FIT? If so it should
-> use the updated FDT. This might be a hole in how Binman works?
->
+Either remove this dead code or perhaps return a bare section header instead
+of an empty string so that config is at least structurally correct.
 
-Yes, we are using binman for FIT creation here.
-
-I'm not sure what's the correct behaviour here either, in our binman
-DTSI for the platform (k3-am625-sk-binman.dtsi) we explicitly set the
-fdt-0 for the u-boot node as a blob-ext with "u-boot.dtb" as the
-filename.
-
-Since the same file is given as an input to binman and we don't want to
-modify the input files we have two options here:
-
-1. If 'u-boot.dtb.out' is known to be the fdt outputted by binman with
-all the fixes applied, we could just use that instead as the external
-blob in fdt-0.
-
-2. We could have binman detect a node as 'fdt' and apply the required
-fixes in-place before spitting out the final 'u-boot.img' FIT.
-
-Regards,
-Anshul
+-- 
+Neha Malcom Francis <n-francis@ti.com>
