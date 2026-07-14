@@ -4,86 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98B11C44508
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 17:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA861C44507
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jul 2026 19:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C55684D75;
-	Tue, 14 Jul 2026 19:56:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AB61084D67;
+	Tue, 14 Jul 2026 21:28:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qMw3HmiS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dg7eUmBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC82384D72; Tue, 14 Jul 2026 19:56:15 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 1BCE184D70; Tue, 14 Jul 2026 21:28:28 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F56184D65
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 19:56:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4E5684D65
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 21:28:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7eb5a9f02e8so2290401a34.0
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 10:56:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0c5adbso9745684a12.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 12:28:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784057305; cv=none;
+ d=google.com; s=arc-20260327;
+ b=eRFWLy7kJT7RZsZshjrZ/GPAB5QPRUO+TwpvRbwVBl4tnrj/AhOEk87at9yBCQ4ozo
+ xWGqPfkqzz+kadLz77JmJa94NHiGkvyuEv4Ibu59QQEe9osC0ARrZ+zhQVYzsln66wkX
+ oKN428FjEjX1rH1xe6IEro6FFB9nXIrWogDTSWfZPwn39BYBDfdiIxl2OI7sBIQB1xIp
+ 8MhyyUgkWc4HcEjyAGtqR4DjJznkPObVuhaAkTfAaDqTLZ2FNZkLeRKL5iyIZgYc5bI/
+ 3Cz9nimUIHb8Ma1uubRmNoXzsRzJSt//P/y4ZWoh679ENJ+oDI0Fc5An5LGNwq0nhBHT
+ /smg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=1/TX/Dj2H7rEsWFGNWOSU8NW7YLs4FJMlry9vNZDxjE=;
+ fh=1+j+hwwHmmFwuRa4oVWm/Pcer6Htho61Brd/nB1EAdE=;
+ b=qCvjS4QM6LCAY7DQILK4Szn4uJwreI8dBQ8R90g0HLDjyPzMyrm7b1nvLjWsOUncgz
+ WYZIEy7jtYliO5xaDaVpXntyS7Tb/LKRJM9k6J9DsgNXe/edMqBemfFl/vXGOCFzrbpw
+ 6YO32P6OTbvcQ/lyOa4fxgma6VtTeQZLqkrxDeVXMfmoJMOG2dPlnfiYmtSr0DPpj4UZ
+ JC5RStO8BFC6NgxlAFqFEXtB2lfP0U9vijF80HWyinIquKFo9/hBaIOgNpr1DqyChhdH
+ SJ5EIs//ta/WyhwdXYT1Xolr7Cw7ko+/u8dRsaOysxKi+UNxr4xAMBrqdn3+lmRNdFpH
+ fiMw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784051771; x=1784656571; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=rOwD5hJp81cPpUGzTGNTd+jjCQope8mrfTspTuN1PYo=;
- b=qMw3HmiSxmTbbkQ2MkLFRGYjlArGK72ErO9PJUIzlZ9Hp7pjh6oM2Ea6Ip5IC5qh+j
- C0fnMWgHvwPQUjtsKFshFpTp+TM5WcNgPU/rUWERkQInKoIA8PYYLRSP+gPjCE/Gw8nF
- gAHZQT8rej1mlM3BiQChUvDzP57cGjjQWTom8=
+ d=chromium.org; s=google; t=1784057305; x=1784662105; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=1/TX/Dj2H7rEsWFGNWOSU8NW7YLs4FJMlry9vNZDxjE=;
+ b=Dg7eUmBnErqBtQq9v+Xh22aWj3Q7zxt816/HszczyYaDkKALQMYFbsNRTmZkkVB/tC
+ jYcTaZ/mI7ibhrYWqVtwtOz8Nm27/+Y8UF5v+YaVbzd9ax7mOPzBdQRTorvv7ZWqJ9by
+ 1/XZQpdCzHg5HS7ueCQCAijc+gDofEDA/Nnls=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784051771; x=1784656571;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=rOwD5hJp81cPpUGzTGNTd+jjCQope8mrfTspTuN1PYo=;
- b=qQZGVmm3bd970G5g32pCf5r9c/IL8tRw6cSP9zyG2Sdajah5PCBdmhC6HFueroh0wa
- Z7yvLSmvdKm5AyLXyVjI6anjKCk3oH7MIVpXRGnyUGV2Gzs5mKXrLVg2EG0GCaogFfth
- aerqbnYKip26MzPVM59R9WWfpc9RCWJjmECaIwHzHblJW6XrdoLB2DzgfhEOOe54VCSp
- BYhpwqdqVPIGnxzckCb5Hgtrzn9eJVjFqsjPnto8l58y0oO6TN0Vsg9Z4A70jdWXRnSc
- MpkezERbF5t82is9q0px/54/PqDXKCHOsmK01QhDE1uevPcBqtyTdJ9/Eq7Qs3JUiC8K
- oEqw==
+ d=1e100.net; s=20251104; t=1784057305; x=1784662105;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=1/TX/Dj2H7rEsWFGNWOSU8NW7YLs4FJMlry9vNZDxjE=;
+ b=fHJSgg0EYQnoI1i58i9cZGh4dpXSgDRNoZL60R6I6kkZPkiacIdVZCtZdly7aIGhgP
+ FcNF4C+wCV59FqVQ/wXI7aqthQ0nlRnfIQvnkRIiTRRcefp9nIxtZrzqIeawxuOL6hgY
+ vIvjHkvhW/sgPHY5vbvYao1SjNs+vs+o92xcb05rLN3cXoDPrfZT0WtV9dp00dOnvNHP
+ Vb9DgDBjV0KVrg4SwFJZTkipqpJVqlKuiwR71SzTQwmFB/RIHi+Utw8sku8esau1u+Mt
+ lV6ZILWq4m3TAjBwQE1J0k8XwoeWJlPymW4pg2/Z+z40+O36NovwBYly9jNEPCvxU+gB
+ xwZA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/Z9oshcpXk3XWCHvAtOEKaG8CltEJKMeNy2fjbvUmFyB4XHgnr49X3XnE73A07QgXthbo5ACk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhbZY1tAlcyp6HXoleh2Tl/qNPMsFQlSzmRvNGYak/WxCvWZI8
- o/lZfUCI8MF4gFJEg30o37W/EdSmege4XdLpaPIkE4vlhPYKwszMxmRmMCo7fTIJh7jXzeYWlgr
- CGfYRojc=
-X-Gm-Gg: AfdE7cm/tpvYObLD0VyzWy351iArOLlKOHQx3ufdmjo2ConzInO6UtJ2blirJt3ro/c
- SMk5bwcVE4wEZzDhqVo0pDS0xC0gJasclR8Ym5Uv8H2UAazdbxCcTEvWtvST7DE/VXzpXC6M3K/
- Q6lOVID0hvmVnZ+TqIeU/OGSWn381MswhO/on2tNdVXP+lQib+g49Txu0TURicYhKT+xzL3w6j7
- kWrk7sGob7TcrUY6oTyeLA0tCh3iFtWLMN9fJUsr0dCvRMleeiCmHJ4q4Bv+GuxHoEIFZM2lCjt
- /Oo9wUSJfUM186AyUC3U2I0NvM96tJMkh3jBnVCPeo1dUDd7TW0gxe3Fxpe1TUEtjqsXlC7S5mG
- 85YK/Ma3bh8yHiKTZtj6pDyDzok49YdkpvuikTNWgjZEep/nrXUotJwdk1aOwM8H8Zlgw/UUMHi
- fEwWGhMxch1B6VoYIl6RFTrNfAwsEqymUKMrx/D1rk+BwUSIg8P3qCrP/ksZrmI3fjkx/ZR1cO6
- AG1tzg1Su9D4849TnK/HCALLnG6GW7gB+SE
-X-Received: by 2002:a05:6830:67d6:b0:7e9:dd93:b88 with SMTP id
- 46e09a7af769-7ec0981d862mr8501547a34.27.1784051771313; 
- Tue, 14 Jul 2026 10:56:11 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcae206e2sm15597648a34.2.2026.07.14.10.56.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 10:56:10 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-In-Reply-To: <20260701095003.212997-1-casey.connolly@linaro.org>
-References: <20260701095003.212997-1-casey.connolly@linaro.org>
-Subject: Re: [PATCH] get_maintainer.pl: tighten up git contributors cc list
-Message-Id: <178405177034.3971373.5983282106793132959.b4-ty@konsulko.com>
-Date: Tue, 14 Jul 2026 11:56:10 -0600
+ AHgh+RqNR6rZ/vQyORavKC5tOJ7iBIrI4AN+cqRYwbDIYIyHP5zUFWHtuP7WRyHZcqtgtYhQxSz131o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN7ZOTrrCWQCq9bXHfv9EqXn+IsqBizBaI/3620w+kQF6QaPsE
+ qeUhnNDF0sq+i0ATF+Ytj0HeO4t2hfQ89pzxp1O8+nebVL/XEI044jtiGk1G/5MgcqrowwEKzd2
+ d2zkBTBkjCD1uIWQkBgfDrGV3ulUIVnrmv0iFWJjE
+X-Gm-Gg: AfdE7cnpvUmqHS7O02naNCWSYMp22uc0MaIw1Vj25TiICJMYED7ya7my3imCLV6Toqg
+ OahvoxBiz7CZNr7PI4PcQ4Jbc06kgT4Hi/R3qn39Gma8FoTPZJ2Rzsn+QIdU41gX2a36A3OXkfF
+ VflfcRUeIYqYa34Nah9DXlf8UrFqk7feahZbXnWz/Itvodrh4kRwEc3tpfz6Wc9EwehDnMLkvmT
+ ywkWHrNeoUoyzZBNLBfWdszmm3YxPZpInRLcj9n04H5IiKb13gK2L8HyjMhsj7u5gYh8TE=
+X-Received: by 2002:a05:6402:26c7:b0:69a:2ee6:4c95 with SMTP id
+ 4fb4d7f45d1cf-69cd6bd43ecmr1954217a12.0.1784057304843; Tue, 14 Jul 2026
+ 12:28:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260713-osuosl-ml-switch-v3-0-48b71dec1a23@linaro.org>
+ <20260713-osuosl-ml-switch-v3-2-48b71dec1a23@linaro.org>
+In-Reply-To: <20260713-osuosl-ml-switch-v3-2-48b71dec1a23@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 14 Jul 2026 13:28:12 -0600
+X-Gm-Features: AUfX_mx7pnkmb2OLR7oFiQcURqSI4SF8r1rHmP0ThZC8_ahE8mNhr2-xhiyBat4
+Message-ID: <CAFLszTivPESwmeNoK0WEm5h+y4JySX5SqamEVe+n=pweq4kSqA@mail.gmail.com>
+Subject: Re: [PATCH RFC v3 2/3] doc: Migrate mailing-list to
+ lists.u-boot-project.org
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tony Dinh <mibodhi@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heiko Schocher <hs@nabladev.com>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Quentin Schulz <u-boot@0leil.net>,
+ Heiko Stuebner <heiko@sntech.de>, David Lechner <dlechner@baylibre.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Daniel Golle <daniel@makrotopia.org>, 
+ Philip Molloy <philip.molloy@analog.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,25 +126,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Jul 2026 11:50:01 +0200, Casey Connolly wrote:
+On Mon, 13 Jul 2026 at 09:57, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+> The U-Boot Mailing-list is moving to the lists.u-boot-project.org
+> domain, so update all references of list.denx.de to the new
+> domain in the documentation.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  doc/CONTRIBUTE.rst              |  2 +-
+>  doc/develop/security.rst        |  2 +-
+>  doc/develop/sending_patches.rst | 12 ++++++------
+>  doc/git-mailrc                  |  2 +-
+>  doc/index.rst                   |  2 +-
+>  5 files changed, 10 insertions(+), 10 deletions(-)
+>
 
-> get_maintainer in U-Boot is configured to include contributors and patch
-> reviewers from the git history in the CC list, going back 1 year if they
-> have contributed more than 5% of the patches.
-> 
-> This is well suited to some core U-Boot code that has a long history and
-> doesn't get much love from any dedicated maintainer but for newer code
-> and board code in general as well as defconfigs it can be frustrating
-> for some contributors who do not wish to be CC'd on patches as well as a
-> general issue when dead emails are included.
-> 
-> [...]
-
-Applied to u-boot/master, thanks!
-
-[1/1] get_maintainer.pl: tighten up git contributors cc list
-      commit: 83f6cbb87177350e32eabcbe6dd92b951dabae25
--- 
-Tom
-
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
