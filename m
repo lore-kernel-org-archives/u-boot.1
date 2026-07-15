@@ -4,108 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833F3C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 13:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A0D1C44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 13:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86F6184ABB;
-	Wed, 15 Jul 2026 15:41:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id B05AA84AAE;
+	Wed, 15 Jul 2026 15:59:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lyJPXwvR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IoZ56Zh8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BE8B84ACE; Wed, 15 Jul 2026 15:41:24 +0200 (CEST)
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E056184ADD; Wed, 15 Jul 2026 15:59:45 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4A5184A3A
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 15:41:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8213C84A6B
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 15:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Jayaramudu.Desapogu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B29ZFVIikWXgkmKQLETp1nslPdqY+/7pzxW6lKP/vAqoc71NOf1pIqUaQ/HE/Z2i0k1nUm5KIftIGiaezjQ194DnFLNG6QHn98x1MS5N10f+ir0Tty2Js4keEd5ND5S93CPPGpigZKdxCiEuZrLUKA51AzqLU5eho2FSrO/3OUdO84bSTG7wvTrgDplhlZ3Tq7dbFVWnDlBvlroXRtE0iie54MlPFhj4q39MfiaR6yTShRv38DDKid1CoRcC8Q/TmCjyfwJwdjOSiy4Veothn1E3Ht7TNLvTc9l57z4xacdkeMMz/A6jbcMitOuVlpVewcClZd3O6Bd5kKVn0WyIxQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gR3wRoCem3pwCkn0jcNx2I+glk/3SJP5c+HOcLyA13M=;
- b=l6LEdopXSBrYlOJfhibaMu8WTSCFRTYKZVzj/FMPW0J1VCyvWE1r72ONQep0kgKOlMnXG+9beTnoxOqCGeF5rIMGQJxjNby1g0IPgf+83m9ftT4HcnbZis4Mv7CPcJufUf5E0c+8xWS1MBQJ8df/ck3XttqJGkiL+TkqKk0aH+loTA5t3dARCCsNVQv8DuVWiWxiGFwnRgAyOQUR2v7tqJcaCoSoDx2FfruM0wi9qRr1PqtfT13EzMHcryvlQn57SKs7pEpA/AWfAASHfU5lzio4unJMeUDQXRBBgccqcb2h6QwUUuNCsZiZuSoe1IMg4CSvJp8JOYeYbGToZFI3Rw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gR3wRoCem3pwCkn0jcNx2I+glk/3SJP5c+HOcLyA13M=;
- b=lyJPXwvRpT6hpe8kB7QbEDoy7IxnTXXvORmDYBBNBrZEp4L2vPefbDyUlJVGJ56TLdm0H8Uk4058wTmKBfGlcToVaMo12TLKOOt5HUcXzxA0KHFrInVUY8e7Tgp290Bji2Va3NuUwnoGYbD8Q7YBI1C6o/guKAk9tpq1txk/N/A=
-Received: from CH5PR02CA0009.namprd02.prod.outlook.com (2603:10b6:610:1ed::10)
- by PH8PR12MB7205.namprd12.prod.outlook.com (2603:10b6:510:227::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Wed, 15 Jul
- 2026 13:41:14 +0000
-Received: from CH2PEPF0000009A.namprd02.prod.outlook.com
- (2603:10b6:610:1ed:cafe::8) by CH5PR02CA0009.outlook.office365.com
- (2603:10b6:610:1ed::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.12 via Frontend Transport; Wed,
- 15 Jul 2026 13:41:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH2PEPF0000009A.mail.protection.outlook.com (10.167.244.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.223.9 via Frontend Transport; Wed, 15 Jul 2026 13:41:13 +0000
-Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 15 Jul
- 2026 08:41:11 -0500
-From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
-To: <sjg@chromium.org>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, jayaram <jayaram@BLRJDESAPOG1.amd.com>, "Desapogu
- Jayaramudu" <jayaramudu.desapogu@amd.com>
-Subject: [PATCH v2] acpi: fix no display when serial console is disabled in
- coreboot config
-Date: Wed, 15 Jul 2026 19:10:49 +0530
-Message-ID: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-497deab2d66so1825968b6e.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 06:59:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784123982; x=1784728782; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=4wnrt9AVgYgJMPnOqIcmqrXleNJdwxYRjxpkdgJAu/A=;
+ b=IoZ56Zh86viHFUNSgrnzz3EENtHBVU8FavaZgYwq7nPH8KPnxieeoyu2neohTEiKJv
+ m/qLvQ1p2ZPNUIc1sHwFGLS8ljjTBnnasJ+iNOrCE2oEdLisvKmmoMeWnS5KfHx0RFW5
+ asEKf90H/CoSIQVaXdXBfT8uHei/PpZTIh72s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784123982; x=1784728782;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=4wnrt9AVgYgJMPnOqIcmqrXleNJdwxYRjxpkdgJAu/A=;
+ b=Fteiu1DSR9CRGCIA5l3AjHT9oWrSqqXxRTCMZCGw9e32auv3Pzad5Xv5bftBl94fFD
+ GbCsxk3R++pMosZETecpKqoJ5t7S2T6TsXlnDjPh5uS6Cj+BUWDbCpx/zKh3pd13gcJv
+ ZBuofzhlGoXoodQ1EiXgVOQLRDay861VVDjYX1hA11D6wXG2OeZZ7kQIBPdb3Bu/2Ih4
+ exlQu+kxcS+QTr3ofGAull1GIH2oP9ch1dkDYH4uICz2ZKingBxEmcIpZ+JIRuzyPoX6
+ y1s5DcXWbX4GaBs0w5Ms5BRVQrHkHT7dvNB8qroQz8X08rQ9W99nWOTLqQYl+ANuo5rT
+ G+dg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Ro2ZzMYZMftBHxykIHVr6cDnTnBdccxHfbUeiZNyfFwndm0b/eeTfbLxvWnYK7zqZmrdv9Vhtg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyef7K4gEfI2awufjUjSd6Uc0mYO/bxsFS2Mco5MaN10AaW8d/t
+ Q8Q3T0s8tM5uqllJI+uX67L8kVaK+ogQWEqPeWn0j6t8IwwVj8cJnG2MN+OII6FibfY=
+X-Gm-Gg: AfdE7cnDm1d3uZ6Z6KGWEHJ2rmYkXrvqF+rnl9hkXEg9SqyD1UoVc0B2F0kdqMr22tJ
+ UmPKadL19CUX2mPN4kFqVbhXeot+Jl4pz0bSy2EbS2v8i6Kw0N3afPoA70e4aE5ofWWGrj0+5EN
+ /Q/rub+LbEK5tCRE/QOmYMp7sbJgZCYiKpY9qDIZcXW+3KLbnV5DvoWto8VQRc6MyCxdRgeZMv6
+ rGJ+MD8wUYpZKrf62oo5EHPtSPxftptEygOsxfCM91WE+69d+1OU71fCn0I1mjT0HlFKuPEK/Ao
+ +uxZ3lcEPfVWi957orm2ILFNLCnFJtckj/gZfLxSvA0VKmPf/FX1Kc02i/Hp7ZeUNRq/I4H0p+0
+ IT5oxv68EfIaem3kejrZGBuVJaIgaMYfvJKrRjNnSdB2a13lNyWW2UWKNufXdkBVBu+ip+u+6Bg
+ gzK7ln95qj0eb34hl0doB3PtxpubjP9RuRbaP0OLIU6L7rrhBlx6oXR/zqsEifE/5uJJBRP9YI3
+ /8NoctXoVjM5kx+nnB2JQXxBpOxye7D1F3ptrD83cZ12k0=
+X-Received: by 2002:a05:6808:180f:b0:4a3:cea7:4ab6 with SMTP id
+ 5614622812f47-4a42d0001d6mr9625654b6e.10.1784123982170; 
+ Wed, 15 Jul 2026 06:59:42 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4a1afbfbbaasm16162301b6e.12.2026.07.15.06.59.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jul 2026 06:59:41 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Joel Stanley <joel@jms.id.au>, u-boot@lists.denx.de, 
+ Billy Tsai <billy_tsai@aspeedtech.com>
+Cc: Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Peng Fan <peng.fan@nxp.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Yao Zi <me@ziyao.cc>, 
+ Sean Anderson <sean.anderson@linux.dev>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+In-Reply-To: <20260702-pinctrl-v1-0-4d2bd89fc213@aspeedtech.com>
+References: <20260702-pinctrl-v1-0-4d2bd89fc213@aspeedtech.com>
+Subject: Re: [PATCH 0/4] pinctrl: aspeed: Add AST2700 pinctrl drivers
+Message-Id: <178412398045.44767.15914058749313027151.b4-ty@konsulko.com>
+Date: Wed, 15 Jul 2026 07:59:40 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009A:EE_|PH8PR12MB7205:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2747fb96-924b-49f7-8e17-08dee276bd1d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|1800799024|82310400026|36860700016|3023799007|6133799003|10067099003|56012099006|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info: OwClm4ZbaTtgj69A/93z9uzniekADu6yRgGZO3A7npUsGa4gzolUmPiSM80s3biqoJgjIJddL98l/IfdVH0ihVW+3Q9gkKKOjCqZS9I/3vxGbb+ZuEhDtRa7N6Hm6j2waDYVQDQpCwrpU7zLIEzNOpCO2QKn/Z3ToUUNjDf/Og+JkXwl3IVR6N/zbxbjPP1yfQYZFC0b9ug3XRG2Tr+26MeAqsRSuQF/qyZ66db8nwJnBv56vbaFTjgahR7Y+spPAveqYz6HCZ30PMKIHHDwJQdqrQHqRnBrfsUuRv6ZQdQpRzkBQ0PNzp6CWoHzDZXx//bBPUn2C0HZupvMFGgIgNaBqZ71+TqUia8dPhCuDLqk9w4xMux2iPnU9D9ziB7g/Biu5TZH4dYBoel0djGdpHJQmKsT4Z/YsLziXr9KCwdOYc2C/h0H69ScxDUzi94TYqgOIGRRIUYDZlRxwQPAlSWrUoMMZt9QATYaA4GutRE5DWbQzOjzGE9qPYWe1s8tWfzxDfiQNxdjLdY49hdxrxDFqDkxF1MoTJWJVGeJafv+59kWXMCEdWekFkPX0nqvE7knduOBF9gfxiJzx6YBwehOpgs4Z5P7FP5DHriw66aM5hLoT7N4HpnutEgAunkFQNQjYtQTzCA/ngpr8uHAeXCv0qSTJCWBZXqApEiYJszRw2aI9CCbz/8twrWJnrGtfAhlqqaic7ZzaKKWh/DpJg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(1800799024)(82310400026)(36860700016)(3023799007)(6133799003)(10067099003)(56012099006)(11063799006)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ck+kMxDepYUuBKjV7kRA/iAvP/QbbbkfL0lsRmvCxS0xPzG0C6Egc9sEP8rWdQ5EX21nBrNKWIlJ1FMBVmw5rkuEmcnfKUGHFcOc7fo5WeRR4VB+3TyRCXqWJn+omYi55GWcTA9VtSBjCNUILMCkIcLeFQHuAZ5I5ta8/frZaOGgxxHIl1EkBsfCc9EJvj39TqqjnamCUhW0m4YOwrS8MVpxBDIp2CQzwLLfuvZHBkMXuRfx6speMylb41QTL55Sj1l3mSEaVt0Hjpkqizuoi+I2N++ZnMSzyyN2qhaQ4qAzCy6Vl0dEZmN8+1CdH/hHebJOYKk71mM2uFvp4YTgNDSP9lIjJWcj2b0oGuCROpU9tozVOq9l9n7O1kjpVe32VdqIAm5mMXL5PldjbQjE1rj8CSyo5uZRuB4RKEB0J8MgiuhQlmNwE4vUJKTruqIk
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2026 13:41:13.9498 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2747fb96-924b-49f7-8e17-08dee276bd1d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009A.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7205
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,64 +107,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: jayaram <jayaram@BLRJDESAPOG1.amd.com>
+On Thu, 02 Jul 2026 18:08:33 +0800, Billy Tsai wrote:
 
-From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+> The AST2700 is Aspeed's 7th-generation BMC SoC with a dual-die
+> architecture: SoC0 (CPU die) and SoC1 (I/O die) each have their own SCU
+> with independent multi-function pin controls. Initial AST2700 platform
+> support is already merged in next, including the ast2700.dtsi pinctrl0
+> and pinctrl1 nodes, but no pinctrl driver backs them yet.
+> 
+> This series adds one pinctrl driver per die, each followed by a patch
+> adding its pin configuration support. Both drivers use the generic
+> pinctrl framework and are compatible with the Linux kernel device tree
+> bindings, using the same group and function names as the Linux
+> aspeed,ast2700-soc0/soc1-pinctrl drivers so pin states can be shared
+> between the kernel and U-Boot device trees.
+> 
+> [...]
 
-When the serial console is disabled in coreboot configuration,
-no display output is observed during boot.
+Applied to u-boot/master, thanks!
 
-coreboot can expose serial console/debug-port information either through
-coreboot tables(lb_serial) in src/lib/coreboot_table.c or through
-ACPI DBG2 tables(RSDT/XSDT) during write_acpi_tables().When coreboot generates
-a DBG2 table,it is publishing UART/debug-port information (IO or MMIO) through
-ACPI for the operating system.By default coreboot assigned subtype
-(ACPI_DBG2_PORT_SERIAL_16550 = 0x12)for both IO/MEM in src/acpi/acpi.c.
-
-U-Boot as a coreboot payload consumes serial data either from coreboot table or
-ACPI DBG2.When serial console is disabled in coreboot config , the coreboot table
-contains no serial data.So U-boot fallback and check the ACPI DBG2 table for UART
-serial console using 'read_dbg2()' to find port type and subtype.Currently u-boot
-reads subtype as 0x12.But u-boot in include/acpi/acpi_table.h subtype defined as
-0x0000 this value suppots only port I/O as per microsoft DBG2. For AMD platforms
-or any other platforms that use memory-mapped I/O,we see display issues when serial
-console is disabled in coreboot config.
-
-Fix this issue by ensuring DBG2 is correctly configured as a
-16550-compatible UART, to support memory-mapped I/O in include/acpi/acpi_table.h and
-checking the correct subtype in drivers/serial/serial_coreboot.c.
-
-Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
----
- drivers/serial/serial_coreboot.c | 2 +-
- include/acpi/acpi_table.h        | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
-index b1f69f6998cfa1..f6fc0fd8ae0f67 100644
---- a/drivers/serial/serial_coreboot.c
-+++ b/drivers/serial/serial_coreboot.c
-@@ -59,7 +59,7 @@ static int read_dbg2(struct ns16550_plat *plat)
- 		log_debug("Not a serial port\n");
- 		return -EPROTOTYPE;
- 	}
--	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE) {
-+	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE && dbg->port_subtype != ACPI_DBG2_16550_GAS) {
- 		log_debug("Incompatible serial port\n");
- 		return -EPROTOTYPE;
- 	}
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 4895366a6188ec..aea608f0ffa7a0 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -668,6 +668,7 @@ struct __packed acpi_dmar {
- /* Subtypes for port_subtype field */
- 
- #define ACPI_DBG2_16550_COMPATIBLE	0x0000
-+#define ACPI_DBG2_16550_GAS             0x0012
- #define ACPI_DBG2_16550_SUBSET		0x0001
- #define ACPI_DBG2_ARM_PL011		0x0003
- #define ACPI_DBG2_ARM_SBSA_32BIT	0x000D
+[1/4] pinctrl: aspeed: Add AST2700 SoC0 pinctrl driver
+      commit: 1b87385aacf2c8a5d6d9296984509ae8376d6165
+[2/4] pinctrl: aspeed: Add AST2700 SoC0 pinconf support
+      commit: ada5d0e7e2ceb118a70df7d8c15b53d0d91c7d3b
+[3/4] pinctrl: aspeed: Add AST2700 SoC1 pinctrl driver
+      commit: c0e2aeb9dfe551a1b01a44dfffe917e8997898c3
+[4/4] pinctrl: aspeed: Add AST2700 SoC1 pinconf support
+      commit: 02d74afe94a5510312d01ad79a3801c589cb6a20
 -- 
-2.25.1
+Tom
+
 
