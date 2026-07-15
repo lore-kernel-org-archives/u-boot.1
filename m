@@ -4,108 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24A3DC44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 23:18:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93360C44507
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 01:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43CCD84CC0;
-	Thu, 16 Jul 2026 01:18:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 26AF484C4F;
+	Thu, 16 Jul 2026 03:03:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="aBm+rpJM";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="24267tGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6EFA84C42; Thu, 16 Jul 2026 01:18:09 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 813F184C12; Wed, 15 Jul 2026 17:17:52 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B7CD84C42
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 01:18:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6858984A3A
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 17:17:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Haller@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DsxTt99pk4R+Obnuwu4R4a96UVJSCjpRAq8jRqfcjtsVj/nM113+ewrElrPOGDffVd9vHXZ8tlQdN1fDYAVt3TJPpn7koXK2CBpqgp2zKyi5dnXECgJLrXawe4SIhpyus5PUUEV+VeteZykD02NPc/u3poNRQ3s7DSaWoOH7P/VaQ/IJvEY41sGYlj8wwvDZNAEhtLiC3n1hgX+8RxrX6nDxcRHygKRWAH9qHKvfiue41tqkskrwzgNyv1igswvNCkgKmTwlvx0o07g9u28AgZDIuepjZFwy6GcS1XCKn/NCsTX2cKU2rGz3Uq4ZagL4vWgYFvW1cOnN0ta71XovRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sWRmnPVS/+AIfPW5TpDuj4hLfIXTthdbwsW//btX27E=;
- b=GruQOMFVMyjhx+fcgixZn8c/iiwWArPClJS8PLxSJXjIE0WdMYBvDYNUsb7tHkOtYhS970UCSS4kG03YCSm6aNAw5sl7AB+oWQ82TGtgnxBlHIW5ptf/7+cJrGrDCsK3I84RUK4BF6XvX9t9yozNBSWf9vhMCLuTmG7eKIZk/KB2Iu0QOgJDqQYaHctS3hS7IxqyZelA8GxJr4wVGu50eyBovAtv4rKiTtLCP3bAaNA+/ICJdX1QjkV+FlBQxRMOjxADNPevsL449bHvVuI+STa0RCxBacqzkJjkaml6y0u+iiTgZA5cytXGxzyQLHugdnmqjKViGBw940XzmJlrIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sWRmnPVS/+AIfPW5TpDuj4hLfIXTthdbwsW//btX27E=;
- b=aBm+rpJMqlzFxqD11XcSlx7II2IfBK/5g6P9uBLpT2QZKmKo7MM/7ePvhItnGxrjvdngkAK/LEdYSBQW0oBBDnvoZoXvtOW6sS8IJLjDmTOl4lT6cH2R8yivuhDZz7oDinj66Q4EGHnrcxy+WYtBSp21zElP5IRTq99WDHZAPzd/mo05jOTKLbV8yuvX5Bfh4sgSFXhhfgYEaAldfa2mtRs2na0zDbhuHNYAG+37fZ/Q34pAG/ilvbnpDBDgfLhuFsI7iiF9rdKT2uP2tfoM8ZSHxWPZmUW1kx6l4QIKEL+QPmUreLVnGbzfgGU3zdG1/3F+gTNx8wrC26dB+RzQ0A==
-Received: from AS4P191CA0011.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:5d5::9)
- by AM4P195MB3140.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:6e6::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Wed, 15 Jul
- 2026 23:18:04 +0000
-Received: from AM1PEPF000252DB.eurprd07.prod.outlook.com
- (2603:10a6:20b:5d5:cafe::4d) by AS4P191CA0011.outlook.office365.com
- (2603:10a6:20b:5d5::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.12 via Frontend Transport; Wed,
- 15 Jul 2026 23:18:04 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- AM1PEPF000252DB.mail.protection.outlook.com (10.167.16.53) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.223.9 via Frontend Transport; Wed, 15 Jul 2026 23:18:04 +0000
-Received: from lws-haller-privat.phytec.de (172.25.39.212) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Thu, 16 Jul
- 2026 01:18:02 +0200
-From: Dominik Haller <d.haller@phytec.de>
-To: Dominik Haller <d.haller@phytec.de>, Tom Rini <trini@konsulko.com>
-CC: <upstream@lists.phytec.de>, <u-boot@lists.denx.de>
-Subject: [PATCH 2/2] board: phytec: phycore_am68x: Turn off pmic watchdog
-Date: Wed, 15 Jul 2026 16:17:40 -0700
-Message-ID: <20260715231742.56105-2-d.haller@phytec.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260715231742.56105-1-d.haller@phytec.de>
-References: <20260715231742.56105-1-d.haller@phytec.de>
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-c15c7d22070so731585566b.2
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 08:17:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fairphone.com; s=fair; t=1784128670; x=1784733470; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=P0U1LVD1q8bu+SLLEmQx6WL3w79Ged+41Hx+a1iAXR4=;
+ b=24267tGLcp6Dx5hIiqnJP8u6Ghs2jED4oAPYgjSJWGpZHNHm1v4KqO8AzrFc1qFaYr
+ 3q0vHK6sun1OxluN8JlfzQHQtH0DryOV3GsylwbUs3lOxWHmD8lT0ikRCfptdSSZQZYf
+ q1S6kfkcnoLfu3xoClQqK40a+4ejEXx2A8+MEWdPixBSD3ewUjzBhdetlYZDH0hoil7W
+ XbfDqmZro+y8Y3grArdosQ9N1tGyVdfr96YsdBfct/hIQcMUzSuo8BXnNH8FhkNY+jDI
+ TdrkCgmK6Lvp22QmMPA7kmSPeLqYAtrMkCCLdUMMT+j3gZo056Q8lg738SPZLjA8DlH+
+ eWeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784128670; x=1784733470;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=P0U1LVD1q8bu+SLLEmQx6WL3w79Ged+41Hx+a1iAXR4=;
+ b=oT2P5jMKkH2gDtE/aYjeLy7led975apCzyU5/zCsToqsWQlr5Ky3hDJ382+sG7GZob
+ cNMaB1tEAVqKv95y9hVOqxMtaBGzGbXFbMT+dxCP1+OF+ApUdK4rIazAzSXRBzJG+33E
+ JFUkrd+Y5JhCxYYgxLeN0y/CVRiRTSbnaNJ6ISMVP68xDkiGOoELYj7K6GjSf2vghSqQ
+ 96XIDzBWDaCvMujQwemEMFv15s2myNNz5pYdzG/LidZZFETwxiur5sjW4OVe5Naj4EAZ
+ Ax5MrAFpSOnpZbo4Nh4ykQ9732/Y0RGqhPHvEyxBc1v7xD6m9sgKlLgQRFGcDNXdl8UL
+ qOsw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq/vbT2rVG4sz3M0nuoehWG1NErMqHBk/GEiISDLd9Xqo2QRgks/aPt9uJ+dEA4V8wHr+hw5Xw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKkzX8BgArM9ajCv8u/0673Qj9W+4SW2ivOdnMh+nCFz+kwKYT
+ zIydPUL7ht7QIQywaLrISwX1dI0P502GknSGg0ptFh9/PSO/X+2lOWvKNia/fwS9MOM7FJo5kO0
+ H48sN
+X-Gm-Gg: AfdE7cms1VZZcu4LOVlCVUTXNCQHS0MKua66JN2YsPlKtuGcB/KIXRu0f06kvpr3EU5
+ c2FhXv1Aubc3u5srnPJhKl7eMVPYzFroSDeaZGUrGJD2No8ClM0LY0qP9cxUQTVZD+tNjGxrzQ1
+ 8EmMhPcfk9kOImenycsi9DT83nFUsj/QrFWuhcHH1HsQiLC7CGnaWQ2Ph4YaYnkw5TKjOhN5t+3
+ tnsEKAN0hqfm5w96QrbgZRQM7PXT1VXvKp0M/RIvmA23eg3kU2UEQy5wagXjv6Ee8VFvaE1LUZu
+ H5Y9eCVGQAnH8JEhNycsmAAgxFHHmoEYH/b8RzGFrhdR7JvChUql7Tx4tIVfgOh2bulniSoVvXA
+ CH379unZWmwAGrVeCT3QllLtxbCKDTY5x40I/1xyqxaZpxdPj6zbjL1BRp9yqeih/F/DvMMbkuN
+ udCRaMplme50Arzr/+IkiRWC+H5CP8XZxnrPFtspDrdlN/z7wRHlx7d0pwkz7fmdauvrg=
+X-Received: by 2002:a05:6938:a093:20b0:c16:76a5:fa9b with SMTP id
+ a640c23a62f3a-c1676a5fbeamr177748266b.13.1784128669693; 
+ Wed, 15 Jul 2026 08:17:49 -0700 (PDT)
+Received: from [172.16.240.102] (144-178-202-142.static.ef-service.nl.
+ [144.178.202.142]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c168716f6dbsm59145766b.15.2026.07.15.08.17.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jul 2026 08:17:49 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH 0/4] Initial MSM8953 support
+Date: Wed, 15 Jul 2026 17:17:39 +0200
+Message-Id: <20260715-msm8953-basic-v1-0-bc4cb5099d8e@fairphone.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.39.212]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM1PEPF000252DB:EE_|AM4P195MB3140:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a250e3d-e218-4d40-610f-08dee2c75283
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|82310400026|1800799024|376014|36860700016|10067099003|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: csOM39IC9WWM0FMBgwYgYUv2If5pfH50rXM6ntlmoFjwB9XDqrNVlzqnwwHuvSzhJq7qTXVjI3lEqqCv3NfG6VWbPCnmFhNH9GoJ5hwDLTJ7USh1L1buO7LFPnE7xIJ87mxRhWmngpLVAPAdRn34ZNBjvqw0BLD9JJ3hd7waKAxrOMYE3d3E7E2AsTJZCM6x7vBfBafZFYwBgUkZrhXnT4tcqnDa0S0ro2skXt4+OFAz0df8kdEOSz3yD4EPzhr1e88EsOxdFAasgg917wSPA+yzTIU6P4HvtJJIol/zIVATxgxz1m+51f2IRwlBmukMd3TYXtKJ4IZnWmzedIaVj8NH7qv65DlazJ38MWDWBSxjvXoIpo5ZMjkBLHLgt2eDZXwtGEZCzhKq71NhpkUUTNWRnaNcjI/P4j4wiztVdy4bVKwpJUKPRauVWA+emwjmtZDlU8vfJ0nOMPanPhEHIfeW+s6aVDcBLZWXOiBhT1OPIWb5QaXu1MpzGp6dxLqJFj7ldN9e0fPNxw3aS1jFVMWjNKX0stodUPsvpKOu92G3cwN31olzsbBtHlgULenqKXpHVrc7pdx+fVAsGJeCuG/bla1tFUSmhhyMxEQNrFzpnakVKMOtUP+e5zGY662wALJwN3YsyRXoPxbeBgRm0nlzx22TrmC07udAwMpg3mRpN1xvA5WsJjdyJed9G7tMBxH3VF/aBuJr7GfQFTmVNQ==
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(23010399003)(82310400026)(1800799024)(376014)(36860700016)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /vSYXlIK9KhtS4X+8CKuQAQqgFts9HhN4vMcOlRjhbWOOczJ0Jsf9HaOo+Xns5FOncHHeN7c61qepg68emvV03e9ZoOCnKSIhrEEBoe/2bT2ziAlqNJM7apmEadnnSPk41SauKj3zYRk5abBgPTfI8e39Ouf6mGtdotPOMPVkiVjh+8tkRwTi6vdSkKmB06JUx41zBMWUh4V1frId/NB6DhP921orJLniwrAv3kI97uMJnGJm6uVqgCzd+1hlHGKoIAvu/ebKNwEMWyBjV+5VZ5rXDknNWFM36e9VtNQKlcV7tCrnqBzfzLIa51pLnRY81tD/QA5op6BnBzDz3QohWD/YV44my++USFFjyAbQAo+xaknDuXkrviLxxk7g1VYiqDt+A+Gbhsrox3Q1qyE0J8sxBo/TSOuDUtXUvnYAC70xKBP1ULZ00lM3Y94QqqS
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2026 23:18:04.3471 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a250e3d-e218-4d40-610f-08dee2c75283
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM1PEPF000252DB.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM4P195MB3140
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw5AMBBA0V+RWWtSmnr9ili0NRiJRzqIRPy7Y
+ nkW917A6AkZqugCjwcxLXNAEkfgBjP3KKgNhlSmmcwTLSaeilIrYQ2TE8q6Vqu8lCbTEJrVY0f
+ n96ub37zbEd32TuC+H47NKhpxAAAA
+X-Change-ID: 20260715-msm8953-basic-3bcd53790a65
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Biswapriyo Nath <nathbappai@gmail.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Johan Jonker <jbx6244@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Antony Kurniawan Soemardi <linux@smankusors.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784128669; l=1732;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=MWaD/VhgExeY4sz8uM+N32gYS0yiB8yHaqyrWBvAtfg=;
+ b=t58RzkAshigtwZGK1/MA87j+9aNfmXLYPIh61LYYs2GalQxwnrm0caca4qrojGkXgYvcujWUE
+ 7omKfy+8bxbCiAfnfwQdRCXtoZ2128bTCVJs/knoKnakVAGvRVnwvYi
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Mailman-Approved-At: Thu, 16 Jul 2026 03:03:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,92 +121,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Starting with pmic firmware version 5 the watchdog is enabled with a
-timeout window of 13 minutes by default.
+Add clock and pinctrl drivers for the MSM8953 SoC, and activate reserved
+memory carveout for MSM8953 and its sibling SDM632.
 
-The TI EVMs use a dip switch to control a gpio on the pmic which gets
-configured as DISABLE_WDOG by the firmware.
-On the phycore_am68x there is no such dip switch so pull resistors would be
-necessary. Using mcu_i2c0 to turn off the pmic watchdog works with all
-hardware and pmic firmware combinations.
+Note, that to boot successfully some more changes/quirks are needed:
+* Decrease CONFIG_SYS_MALLOC_LEN to e.g. 0x1000000, default value
+  crashes u-boot.
+* Disable prng in msm8953.dtsi, crashes u-boot.
+* Optionally disable probe of psci-sysreset driver, not functional on
+  msm8953 and prohibits the pshold driver from getting active and
+  working.
+* Optionally add simple-framebuffer to sdm632-fairphone-fp3.dts,
+  together with some lk2nd parameter this makes framebuffer somewhat
+  functional. Have not played around too much to get that working 100%,
+  since booting via lk2nd anyways is maybe one bootloader too much.
 
-Signed-off-by: Dominik Haller <d.haller@phytec.de>
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- board/phytec/phycore_am68x/phycore-am68x.c | 41 ++++++++++++++++++++++
- configs/phycore_am68x_a72_defconfig        |  1 -
- 2 files changed, 41 insertions(+), 1 deletion(-)
+Luca Weiss (4):
+      clk/qcom: Add MSM8953 clock driver
+      qcom_defconfig: Enable MSM8953 clock driver
+      drivers: pinctrl: Add Qualcomm MSM8953 TLMM driver
+      mach-snapdragon: Do reserved memory carveout for MSM8953/SDM632
 
-diff --git a/board/phytec/phycore_am68x/phycore-am68x.c b/board/phytec/phycore_am68x/phycore-am68x.c
-index 312d7ece23e2..9b71a4bdc680 100644
---- a/board/phytec/phycore_am68x/phycore-am68x.c
-+++ b/board/phytec/phycore_am68x/phycore-am68x.c
-@@ -21,6 +21,7 @@
- #include <dm/uclass-internal.h>
- #include <dm/root.h>
- #include <asm/arch/k3-ddr.h>
-+#include <i2c.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -69,6 +70,46 @@ void spl_perform_board_fixups(struct spl_image_info *spl_image)
- }
- #endif
- 
-+#define TPS6594_I2C_WD_ADDR	0x12
-+#define WD_THR_CFG_REG		0x09
-+#define WD_EN			BIT(6)
-+
-+int tps6594_disable_watchdog(void)
-+{
-+	struct udevice *i2c_bus, *i2c_dev;
-+	int ret;
-+	u8 val;
-+
-+	ret = uclass_get_device_by_name(UCLASS_I2C, "i2c@40b00000", &i2c_bus);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_i2c_probe(i2c_bus, TPS6594_I2C_WD_ADDR, 0, &i2c_dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_i2c_reg_read(i2c_dev, WD_THR_CFG_REG);
-+	if (ret < 0)
-+		return ret;
-+
-+	val = (u8)ret;
-+	val &= ~WD_EN;
-+	ret = dm_i2c_reg_write(i2c_dev, WD_THR_CFG_REG, val);
-+
-+	return ret;
-+}
-+
-+int board_init(void)
-+{
-+	int ret;
-+
-+	ret = tps6594_disable_watchdog();
-+	if (ret)
-+		printf("disabling TPS6594 watchdog failed: %d\n", ret);
-+
-+	return 0;
-+}
-+
- void spl_board_init(void)
- {
- 	struct udevice *dev;
-diff --git a/configs/phycore_am68x_a72_defconfig b/configs/phycore_am68x_a72_defconfig
-index 5ede3eb73e7f..e74e604e1bc7 100644
---- a/configs/phycore_am68x_a72_defconfig
-+++ b/configs/phycore_am68x_a72_defconfig
-@@ -38,7 +38,6 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTCOMMAND="bootflow scan -lb; run ${boot}boot"
- CONFIG_DEFAULT_FDT_FILE="oftree"
- CONFIG_LOGLEVEL=7
--# CONFIG_BOARD_INIT is not set
- CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--- 
-2.43.0
+ arch/arm/mach-snapdragon/board.c       |   6 +-
+ configs/qcom_defconfig                 |   1 +
+ drivers/clk/qcom/Kconfig               |   8 ++
+ drivers/clk/qcom/Makefile              |   1 +
+ drivers/clk/qcom/clock-msm8953.c       | 141 +++++++++++++++++++++++++++++++++
+ drivers/pinctrl/qcom/Kconfig           |   8 ++
+ drivers/pinctrl/qcom/Makefile          |   1 +
+ drivers/pinctrl/qcom/pinctrl-msm8953.c |  80 +++++++++++++++++++
+ 8 files changed, 244 insertions(+), 2 deletions(-)
+---
+base-commit: 501d76ca801343cce6dafb17740a8b679ed17072
+change-id: 20260715-msm8953-basic-3bcd53790a65
+
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
