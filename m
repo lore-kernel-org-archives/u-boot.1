@@ -4,99 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE81EC44508
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:28:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10352C44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10D5F84B61;
-	Wed, 15 Jul 2026 18:28:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C2B284BE4;
+	Wed, 15 Jul 2026 18:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="o/RTdAId";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hOmCcTSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3A2E84B88; Wed, 15 Jul 2026 18:28:50 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id A26B184C03; Wed, 15 Jul 2026 18:29:32 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DAF284B49
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:28:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4576F84B49
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:29:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-497deab2d66so1969430b6e.0
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 09:28:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784132927; cv=none;
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-455a61c53d3so2111903fac.2
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 09:29:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784132969; cv=none;
  d=google.com; s=arc-20260327;
- b=eM+07aIW1/9fcwIif4+BQngo0EsiR06TkPqRzxdym0oJi148WJNhxT7T1tHbVvZMcF
- kfs5mMl9qVmiKfmdJemdTw4EXzf9aHIAAu61WQYD8KGOOwalpjXvDlGoJYOKsecwkhLL
- q0jjY0gyeOFOjplCR05BK8vyjVfn6Y9T9XxAcQVnfnBSNsk+hPTiIq7qw85HQMgkt/S1
- J4bYUd4Bc/A2aXe8DwXoTUxGZ+WHOXzFUwsqKbxFDOoWrqF6W1r6IiVUM6qWnxNVMspu
- Olgf3w8R9xawqBnuCjFSATQWh+68HLarfvekXTjtVnzeAQiGvuuqjgFz81eUrG9JAdmt
- IrRg==
+ b=dKwfFmSqJn+ePj+ShRUaok+3QHyRfHV9RMQJO91wAU3TkniM2OlsJe3YJj5xN65HlN
+ B2KiBbwwqiIGDFEuMLvenzDu5GurxZa81+r4gVhlniZnKb2Oz1lXD+yYMPl0OJYBT57S
+ EaHCa6g1i5OJiNzB3tqmDHvnSS9QwzNdMXfAltAkBKBAd5tYfAFvzbV0hh+HW0mlGdCl
+ U52jDAi1hykcswGjEhOj5ToqTd0oExV3QOHPx6GO8EDH76V2xiIRt8jcwe1j0ZDsX6bj
+ UQWRcxaOiwlGw+pZNazBQE0XU6Oi4TZxOL7bq86dvFEWvs43FfplLp54ia+IrtTcuGp8
+ wDEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=BD3LMNZ/6t04UflP1MzJv+35iyZnELIUa4hlWx5YGHA=;
- fh=O9tFADQ6yXXlDfHWZ/uRQFPEq9GVuIB3D47unK3I/bA=;
- b=jgwiu+Pq/YYLcFDVVS+/i5jkGZpWtb3rnfDwVa6R+dh2rEUfJJvEwNIb1MDlFTDAmB
- fi6PrUTO+JwKM2HYlwEy0EHS47Pu6G0mu0XpEUR1l3mE3HX5RAiRRTzV2bcMyUoz1I7s
- n/lh2opsm4jpIdKFc7uEylgLRbw+3FJZxn3WHNm4bd7nGPpf/8IAyjmvmjXAmJa8GqEZ
- Vix/eF7UzQoQ0nzrxl97ehdwfBHlUV7xwFLoEpxnLhgjo10iPhe3HLIESFmtZwk+YHXx
- DWjCrC1D/O0x54awl7hR7YLLN7cfxknxKe9RLwTWEg6uwh5QBVg6eZzgaBoORdNxfKOg
- PJqQ==; darn=lists.denx.de
+ bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
+ fh=wYXhoYpjb1+GwMlhOd1xSvEboUA9cmXHqWn8BuJbkmo=;
+ b=mMqDIlMNjbIqpfISorrbqu3TvEGCIu+yTgBThcDovyBmdJRTHFUp15BuKVP0B0fJwL
+ 4t7DXL/P7xVX+btFc6IFsFIMgMui19LYDcM39jfQtc3TtmydqdJgz8v5U86b8fb0fE5y
+ xjifbjgAU9zZ9C0SGviMXBZEkAOvVbm1L39ijfnSmuC+03QPzOMKxQ3rzUZPeAZi1OKa
+ 5gvT4g7rkM03jAoSsyIB19go10cSrEF6jOddQZKZZ+e4GyaHjcqIH4h6WWZS2k5THz+V
+ Mz4pOPINAD2QgPSUFV+Ln1mhKy28eNy39Na7Yb1eM7yGAKvMl0/pb2dflloK2Zm2e+to
+ Ps7Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784132927; x=1784737727; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1784132969; x=1784737769; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=BD3LMNZ/6t04UflP1MzJv+35iyZnELIUa4hlWx5YGHA=;
- b=o/RTdAIdtxBEZkola3GDWxPOc+CKgBc12ZK+QCIb9leFDcgOiwBvn/z1zO8YnbtlfE
- 2VpqOCUSaVmsbha7Y24wE6SxQHG+Uk/fZGVnsExOnFxd8qTCtld8eHtXK6IdBRSqf0lJ
- UbOHGFgamqcqmq62FEP2ztj+QqewKnZMNPBAMsDkf6MvS081E0xco0no/w7sdXFFKV8P
- Gjkqi6ZRhwXKZr5fwNmtR0M37vlopLN83vT+PHjAfGoxCyZPemTXosJ3YO8GH7f75YQy
- 0y4ifJEvaysdqFcwB5n+GO1LvYy9+GtCV7KS3kC3Jt8/QhzYBMVA5qJ2EaLIUGpVLXie
- IGVg==
+ bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
+ b=hOmCcTSVsU4bF90DmCjC+6mj1VVHAGcj0xSkz4nG29Uw/KB6q0HWJta/Z/V7sqTwWm
+ La19beGYjwO0ceI5pYIfbcTXopN/fZJ/6jiPr2c6jw3cuygIzQ41SNM6m6ehvLV/28oX
+ dWr2DhWHEX/U5WBzrS9l7rqMnLqheT/xKqfvdspLmx2MnsK4vVBxDxicmZnsiEK/zLGA
+ I5o0hzUxfj8qFzBvS9cv/QNqAJlYbUpRNFM7BvA1HxXFI4BAKGnDnqJCyk3/QfFfHfIF
+ rBrP6ox04ehZVCmtU8h3ENC1Z6ihhudMHMYN6Os3Vv84dyn5RvQAhGFyFZ42L0ztMCAK
+ vluw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784132927; x=1784737727;
+ d=1e100.net; s=20251104; t=1784132969; x=1784737769;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=BD3LMNZ/6t04UflP1MzJv+35iyZnELIUa4hlWx5YGHA=;
- b=I5DH0mXilAKMToz3tuKFOUbikNLXB5U7TYpM2tBIlzJe4xBEYqvz2Ga5zUMTpfmvt3
- 5KK6Qw9zFbyweE/nC3juTvFLsdCOhweDO71b2cnP1WCt1g2TMn4DixJ5tf8EYYqJvZ/6
- DPF0B5tuhOg1V07/QXJgn8HxNCjAj4wJgV+g2GNCtS3oZw6iyQ5rfsx8XdGB/oU+NrX3
- EDKPCLdZHSi0x9i6pBOjj0gc/gbhDCylqKAXnhBOEZFKr02Mk/Wq8OhRjUlhfjS5yyzK
- IVYOTx8Ua0OB5cJqivZyiu68rJPXkEnWVfo6KmvXTTTqq0Vrt68BITbWIx0skDSscwlI
- engA==
-X-Gm-Message-State: AOJu0YykRbpOhqQz8hr836grw6yQnlq7Q91jtvhIqr40tE7k5di2PLnZ
- YK5g7veYczgzPiMcJP8AtctO/uWCAd41xy5BtLnXrr+PTgGDQz+QfSiuxoUA8Br0NrVHG7zE3wT
- QF3vI9TwsI7nD3ODB9WRBjJBilPWZCH45f3ml
-X-Gm-Gg: AfdE7cm23IP3VqY9FQcbU3rBOKZCedzLYLHqobqrSz/8zcADsrsUg6bke9MibhbUypD
- 0M2AEIFUEDw0fjOviX2zV1lLi311iESKLGu/hopoPXAE/ZfWOotR5K/VaNsWEW1eZZUABr3sJaY
- XZrEc4VPcBRNGnV9BDfiI8X1RXC75ZoPcHLqGwukCH5xHywTGPuU2ClEQbkmumkZ1Ruvjrd2w5R
- jpbHhvF5PX+WTOhTFO0w1pS537AunYzrcdKIaSubj9Ep4UwWMk9CPZv5vtHAxOf7JCazuCTl4iC
- AWNwvvHM54dHOoUREu++fKmZdAgSwg==
-X-Received: by 2002:a05:6808:14d2:b0:495:f0ac:8297 with SMTP id
- 5614622812f47-4a4acb05795mr22048b6e.33.1784132927166; Wed, 15 Jul 2026
- 09:28:47 -0700 (PDT)
+ bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
+ b=YQlNwayC+8BG6iGSWuzxL3glFS80Q4vlqGTptI6woS6+m9UZecBjLV6VbuAV8JA9x6
+ 28M4YOJfFLxwIpCG4ye7BBJFyAjQwjqrOEa5zmuG80KyXrk3i7PjbanuRDMRnZQ/Qk0d
+ V/iIsSivHwIHYl/BOKNdrCyfWUwOhgaYHsWfWtw+A74QYNoChxdYbokkxgb+ShN1Hgid
+ FifK8vHS8fLzG6jZxz/8alVIH336FG1FEYhLgIoMeMzARrb3Sv08FGLw/amKLCKuDb99
+ THW6q6Rmc0tx2bTxAzTygy5X/JNE+OMXR/qM8N0t7neJH43VJ7aq3OWMiycpsj9N1huQ
+ jKmg==
+X-Gm-Message-State: AOJu0YxNG3cR0QIz4f4QTNerL1fYK1jc+OkKRkMaEprJXb6/xjlCkUlG
+ ckC4adS/aTCFFrmn1FE2vw964sAnCxJm6j4a+nJiuDA3Y75SQvUYQa+1nCbH4iJNhVy5MAKYoqZ
+ ISRcLRSjfzfEmUHCtP2iGeHT2dIzeysz9G8aQ
+X-Gm-Gg: AfdE7ckefzRga8XkxUlFy/q3cpwEZJ0cjI7rACdBnmNfTpMW9MdwJzAzoZj+IywyJ8+
+ 10c3M+tOpEvZaprVXqttH8utzGlqCW7k52F1ozomfM4/eD09aAYZpMPnsrsB2yDaf0vqlG4nGIr
+ TQR55S3jud7Z+5ojRo169mueERw2mDQg2om6PqTMnkuGr6g7A2Ybl+l4vSQG0zaKxcCQArQezwq
+ jPLWYiXSeDlr9rAlelpjfJQFzP3jGIlmf/K0Z4Xvwk2TddnE48fTKWKFgOnFMtWJZLqH40krHA/
+ IYCRnZ1kySznDUpCXWp03A0wi9rUhQ==
+X-Received: by 2002:a05:6870:380a:b0:42c:49c7:a499 with SMTP id
+ 586e51a60fabf-4560b3eb145mr3777665fac.3.1784132968969; Wed, 15 Jul 2026
+ 09:29:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260712-avb-libavb-1-3-v1-0-44a50dfe2f23@gmail.com>
-In-Reply-To: <20260712-avb-libavb-1-3-v1-0-44a50dfe2f23@gmail.com>
+References: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
+In-Reply-To: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Wed, 15 Jul 2026 18:28:36 +0200
-X-Gm-Features: AUfX_mwU3bcLgWj9HufLf3Zr1pB_lCRogUCy2FbMFZVspQqZFQdPUY2hzhH2LzY
-Message-ID: <CAByghJZk=+pgOaXWKVmxUaw4p_fEFAtzwWpKmpqEN7eV_THw1g@mail.gmail.com>
-Subject: Re: [PATCH 0/2] libavb: update to AOSP 1.3.0
+Date: Wed, 15 Jul 2026 18:29:17 +0200
+X-Gm-Features: AUfX_mwhZ0CL6Pm0UXASpzxr7EFq0zZerKZMu46Xq3_hLmMB2-XoHp9jokAiY5E
+Message-ID: <CAByghJaRbP9Rx3VYRPFS+yfjKbx6y6c8wX3MyUE+HjnG_-L-4A@mail.gmail.com>
+Subject: Re: [PATCH 0/2] avb: fix memory leaks in AVB 2.0 verification path
 To: u-boot@lists.denx.de
 Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, 
+ "Nicolas Belin (TI.com)" <nbelin@baylibre.com>,
+ Francois Berder <fberder@outlook.fr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -115,72 +119,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 12, 2026 at 4:07=E2=80=AFPM Igor Opaniuk <igor.opaniuk@gmail.co=
-m> wrote:
+On Sun, Jul 12, 2026 at 10:50=E2=80=AFAM Igor Opaniuk <igor.opaniuk@gmail.c=
+om> wrote:
 >
-> The vendored libavb under lib/libavb/ has been frozen at a ~2019 AOSP
-> snapshot (AVB version 1.1.0) for about six years. A v1.1.0 library
-> rejects any vbmeta whose required libavb minor version is greater than 1
-> with UNSUPPORTED_VERSION, so an image signed by a newer avbtool that uses
-> a 1.2/1.3 feature fails to verify. This series re-syncs the library to
-> version 1.3.0 and picks up the accumulated upstream fixes.
+> While reviewing the AVB 2.0 integration I noticed several memory leaks in
+> the verification path that accumulate on every boot.
 >
-> The vendored files are taken verbatim from AOSP external/avb commit
-> a1fe228b8654 ("libavb: support chain partition no ab"), the commit that
-> introduced version 1.3.0 [1].
+> In the Android bootmethod, run_avb_verification() allocates an AvbOps via
+> avb_ops_alloc() and receives an AvbSlotVerifyData from avb_slot_verify(),
+> but frees neither on the successful return paths. Every boot therefore
+> leaks the AvbOpsData structure, and with CONFIG_OPTEE_TA_AVB the leaked
+> AvbOps also leaves the OP-TEE session open (it is only closed inside
+> avb_ops_free()). The AvbSlotVerifyData - holding the kernel cmdline and
+> loaded-partition metadata - is leaked on both the locked GREEN/OK and the
+> unlocked ORANGE/ERROR_VERIFICATION success paths.
 >
-> Functionality the library now parses:
->   - AvbVBMetaImageHeader.rollback_index_location (v1.2)
->   - AvbChainPartitionDescriptor flags / DO_NOT_USE_AB (v1.3)
->   - AvbHashtreeDescriptor FLAGS_CHECK_AT_MOST_ONCE
->   - AVB_HASHTREE_ERROR_MODE_PANIC
+> Independently, the AvbOps I/O helpers leak a struct mmc_part on every
+> partition access: get_partition() returns a malloc()'d descriptor that
+> only its internal error path frees, while none of its three callers
+> (mmc_byte_io(), get_unique_guid_for_partition(), get_size_of_partition())
+> release it. A single "avb verify" performs many such accesses (footer,
+> vbmeta and the hashed image chunks), so this leak grows quickly.
 >
-> Scope / integration impact:
->   - The AvbOps callback set is unchanged between 1.1.0 and 1.3.0, so the
->     U-Boot integration in common/avb_verify.c needs no changes.
->   - The U-Boot port is preserved rather than pulling upstream's
->     BoringSSL-oriented crypto restructure (sha/, boringssl/):
->     avb_sysdeps.h / avb_sysdeps_posix.c and the flat avb_sha.h /
->     avb_sha256.c / avb_sha512.c are kept as-is. The SHA API signatures
->     are unchanged, so the retained implementation stays compatible.
->   - Per-file licenses are preserved (avb_rsa.c stays MIT OR
->     BSD-3-Clause). The Apache-2.0-licensed avb_crc32.c is not imported,
->     as it is unused by U-Boot.
->
-> Note: patch 1 is a verbatim upstream import and therefore triggers a
-> number of checkpatch style warnings. The files are intentionally left in
-> upstream (AOSP) coding style to keep them diffable against external/avb;
-> they are deliberately not reformatted to U-Boot style.
->
-> [1] https://android.googlesource.com/platform/external/avb/+/a1fe228b8654=
-3a21739c51352f5ce72f134fccfa
+> No functional change intended: the GREEN/ORANGE boot-state handling and
+> the locked/unlocked acceptance logic are preserved.
 >
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 > ---
 > Igor Opaniuk (2):
->       libavb: update to AOSP 1.3.0
->       doc: android: refresh AVB provenance and pin libavb reference
+>       boot: android: fix AvbOps and verify-data leaks in AVB path
+>       avb: free mmc_part allocated by get_partition()
 >
->  doc/android/avb2.rst                        |   7 +-
->  lib/libavb/avb_chain_partition_descriptor.c |   1 +
->  lib/libavb/avb_chain_partition_descriptor.h |  16 +-
->  lib/libavb/avb_cmdline.c                    |  44 +---
->  lib/libavb/avb_descriptor.c                 |  62 ++++--
->  lib/libavb/avb_hashtree_descriptor.h        |   3 +
->  lib/libavb/avb_property_descriptor.h        |   8 +-
->  lib/libavb/avb_rsa.c                        |   6 +-
->  lib/libavb/avb_slot_verify.c                | 313 +++++++++++++++-------=
-------
->  lib/libavb/avb_slot_verify.h                |   6 +-
->  lib/libavb/avb_util.c                       |  46 +++-
->  lib/libavb/avb_util.h                       | 140 +++++++------
->  lib/libavb/avb_vbmeta_image.c               |   1 +
->  lib/libavb/avb_vbmeta_image.h               |   8 +-
->  lib/libavb/avb_version.h                    |   2 +-
->  15 files changed, 384 insertions(+), 279 deletions(-)
+>  boot/bootmeth_android.c | 37 +++++++++++++++++++++----------------
+>  common/avb_verify.c     | 29 +++++++++++++++++++++--------
+>  2 files changed, 42 insertions(+), 24 deletions(-)
 > ---
 > base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
-> change-id: 20260712-avb-libavb-1-3-f273645366da
+> change-id: 20260712-avb-fix-memory-leaks-831cfd7e2115
 >
 > Best regards,
 > --
