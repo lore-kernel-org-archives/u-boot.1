@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D750C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 12:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B948CC44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 12:39:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D8484A4C;
+	by phobos.denx.de (Postfix) with ESMTP id DA15984AA1;
 	Wed, 15 Jul 2026 14:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="XkqahKnB";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="Y2UrMrsg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1C7184AC5; Wed, 15 Jul 2026 14:27:36 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 2AF7784A3A; Wed, 15 Jul 2026 14:27:37 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B663984A3A
+ by phobos.denx.de (Postfix) with ESMTPS id 5AD5884A29
  for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 14:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6986287534eso9833677a12.3
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-c15f6d667bcso680794266b.2
  for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 05:27:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=fairphone.com; s=fair; t=1784118454; x=1784723254; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Z3bdJbawqurv6AbVMxCsX9G/URUY3kSP4y9ygcXWBHc=;
- b=XkqahKnBZ5V9UGNrSrRW6sOot8blySfg0AqoAXXMm+ji1o5YzNESWeXxkxNM2gYEEg
- HW36iNtD4DLWal4e2b4iUh4EyUEGcOpmcd0FOURbBRyf3wNqjqmXOI1y8VxKYIsyuu8h
- X9K2QhznfWokZSjy0eW1DfT86TLnNX0eYFiS7RfKBbDPzrVH9/m8z6Vo03lC39lE+b3q
- hO2wfZ1waZK3CeNN0IXzBGqyhLNNAhX8NXnz+6R3KViE4tBhdSHEESTKZHW0G+/+O1lQ
- hGknHlSOP4cVqbFAOcg8STpwKMkAlH31xFQfEfPsqt8gIUseZERXKEOvBy+/LcPvQypk
- C+Zg==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=E6zjFxnPbQ07Fll/7xfe1cFHKxDM1spjmt/VxED5Iow=;
+ b=Y2UrMrsgGObMtWbV/MNzfvWqNvytBa5zkcVmSKqfvDhPRhWLjkbBOyK3axI9luxTX/
+ j1l/LTANlck5nkfZFtSrQdTtgd4ktSDYlKwVn8tgXNrY4K8X0w9keZsunlemNE6Oi+yC
+ G8We/NILtY9v2FyLQeclznYld+c8zhglhDA97eyx69Sux3ieUNlVRpzx1VRhD+1FecPu
+ 4p7KL8Dk9Wnij2M2U3KOV47Z5EDS/abXD/UkQcDlwNXX901zYyZUUOh2AAlhVzYM/nHO
+ LJrIVLE2xw39Mr3YsQgoxRSj4jxdB65KFzsnO0vnh+vTwS42VoVOcoa1/UCOcaIeUJhc
+ xw5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1784118454; x=1784723254;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Z3bdJbawqurv6AbVMxCsX9G/URUY3kSP4y9ygcXWBHc=;
- b=HUajrL6sgNe5peaCAnZYadPU48wkcuKmS3W5xYUJGQI7sDxPdiLjnsEt89absVEpWs
- fwZIKg/9QQ2sc7NIKOVxmV/nhFGsQQvhKF1bAop9ExKBViSlPpbN26R74nx+iptnc0je
- Q2AF1AMe8U+/IskZRxp2WZwyGI/fRehUuI9SEWigbgT3MlhmkXKfJ6y8XZ7pRu6CNb8I
- V8FwEdDE1pmTeqtNqU8SN5JsVDxDlza4IIjqK6T6nqpSGQBMU3anDskq5akmbe/O1Boi
- Qtc2/8wxWLDPvTBPnE5DYrmYtqvaaohaPAIgan8Lt3jInXJXrxacYQ4a1MRW8UcYe4bl
- 8Byw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=E6zjFxnPbQ07Fll/7xfe1cFHKxDM1spjmt/VxED5Iow=;
+ b=Q6211FQpC5pmu9QjsYnvt3mTlf0Iw+536VkZJt3eeHSebfF/RXxX9uldx4i8c6KDrJ
+ fJU+zAmuJKzw8sINz6Y+uZsn9G/tlIPmt1+M32h/o4SuKxYzkD1Fek3IOEzxW5n2LZFV
+ i13ww+7B8qISv32baveq9NMo0XL0naB43BLHJMnoZyj8q/CSEv6Fi4Gew3OcsgktrDFj
+ nwYuNTmZeRoTB5eukR0ZP6CJ13EYVF+ARctXsbtbpipW26ebhTjN2YbTwTYF9XqrFLtT
+ WvFSsfIAiVV3VpXODQsG14UP6TxUPIi0vvgpjWGwZEen7FhAWeI/WVTtpyFGuknIxNVQ
+ 1hVQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqrNWeeus27JjwKPM5U73OLcsAQuY1MWhhvPEXj5rSPFTJtPZ56MKsi71iO0a6R9l1CUiUbsPE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyp1fblSSDwAM2ToQNU7q8TI5nfvcZQBVji1dnNIxrtFTqCCZ9A
- ahCWzkbnIma5v45wj2PI17fXbqil5cMic6eKVRyzdg9dpvF5SHASIS7YgZt02nC/rv0=
-X-Gm-Gg: AfdE7cl2rztC5jQhbWs83ITptgym6ckrJG0lRhZaqnbUK/CCyWIEyXs7+9vkJROZrYA
- XlbULRzrwHuP80ITgJW4uH8VZgCLQMtD+QNjJB188sGT8Nucdt5uBB7+GRrF4Xmzu35s5keipQQ
- 6nsGYZnaAKTKUbjAD8qC/XWyCJaW45hiRbXZP5aBn1w63B0gZo3emNYLzuL0BL8NP4DErx54o5y
- +wEK9I6fWAv4wx+ylbxH3C6fQVWpHK4IoSp7x0togQz4ZLw9f161BAKlaBIbLNa/DnxJTh3g+UV
- rqdfHHVKxLwrAj8glq5/NgfFInj/O9iJFvf5sOvIzQCNJqL7CMJoz67c+6xXgGIHWeNfV/lsDpm
- +nirwAYsBIjr5GD6CdCEu+couPpDWwNsSz5/Frk0fhe7+oI/NMeZpvh8w/ARN8kXUw3TA7fxlXh
- 9pwOoBnXJNg5HlSuao3bVi8rhKc4//ZrHyvkmjTDrzs4KE4W1Esf00DRkcRKiSfLk8D84=
-X-Received: by 2002:a17:907:3d50:b0:c16:63c:a749 with SMTP id
- a640c23a62f3a-c16616654acmr464561966b.18.1784118454174; 
- Wed, 15 Jul 2026 05:27:34 -0700 (PDT)
+ AHgh+RpMD1tZ4zUsv/tIJU2S3caEQef12/qmQmolhlLwjDd7ikPrH2S0bfAuBthiimpRqmAPEK+BENk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/WM2nTj2BJ8yzYQ4gR1obBaZ5mOd7/uI2MuAV0cVowteRyiMq
+ 6LYUvhynkJIrRH9ObNDhEvhWe1bwaGXPRQ7QP6zOXvBFqjo8KaMkD+qV3dJsWLAFGtM=
+X-Gm-Gg: AfdE7cmqMxu5H7wtwN1t9YIGV3vlOD+9duiGVvpz7whSLbrKxQ1vvUvRs6oXwooj+UH
+ xz5AAdn4e7hZ+oplgcWOQp3ysEig8hLgLAI5DxIL5bb91S1CvKjby4u2Bp1dNOJ5EioWLJAHyHb
+ ifkvSh4O84Ft/7QYXCL19zCzwH45d5XnhP3PA5IiFhBc14uhUdPU4P4Y45UiqFmgrI9TVo73Pst
+ QIL+4H96d1Wq3i/ff9ZswayUYga+GHvhT7sdA3RyjaZL0dh09je77ihTbvpTg2EyJq+jwycbqTs
+ OApQWlaqEja/qU/3eByzbfxgDVBaNWFVoN8RbyMSL/iM+8OTZcHD1lhT8DQ5ME3YqFzuD0eKr3O
+ v0pZnTqoozw9HSDDIK/wjCkl4TEwTIcFxQc5UzAhSl/WXDD8sRrvwu7t5nSUC+E9d5Y8nqjfPx1
+ Pq+vMVaY892UyBcP/Mk7aHvyFHa9Ex+U3f/C8rxaH0yEm/gJ5sLyGrl7I7rb2VdVcKqYbGzdbt7
+ k26JA==
+X-Received: by 2002:a17:907:c319:b0:c15:ec09:d099 with SMTP id
+ a640c23a62f3a-c167921d6d9mr174032566b.3.1784118453684; 
+ Wed, 15 Jul 2026 05:27:33 -0700 (PDT)
 Received: from [172.16.240.102] (144-178-202-142.static.ef-service.nl.
  [144.178.202.142]) by smtp.gmail.com with ESMTPSA id
  a640c23a62f3a-c168744e6ecsm15062266b.44.2026.07.15.05.27.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Jul 2026 05:27:33 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 15 Jul 2026 14:27:03 +0200
-Subject: [PATCH v2 1/4] clk/qcom: Print more details about stuck GDSC
+Subject: [PATCH v2 0/4] Add GDSC flags, fix checking of non-POLL_CFG_GDSCR
+ GDSCs
+Date: Wed, 15 Jul 2026 14:27:02 +0200
+Message-Id: <20260715-gdsc-flags-v2-0-27704470a24c@fairphone.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260715-gdsc-flags-v2-1-27704470a24c@fairphone.com>
-References: <20260715-gdsc-flags-v2-0-27704470a24c@fairphone.com>
-In-Reply-To: <20260715-gdsc-flags-v2-0-27704470a24c@fairphone.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw5AMBBA0V+RWWtSTTx/RSz6GDUiSAeRiH9XL
+ M/i3gsYAyFDk1wQ8CCmZY5QaQJ20LNHQS4alFSFLLNceMdW9JP2LKStZaYqV5hSQwzWgD2d36z
+ tfvNuRrTbe4D7fgDhmQD7bgAAAA==
+X-Change-ID: 20260715-gdsc-flags-0c90128d6b7a
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@denx.de>, 
@@ -92,11 +95,11 @@ Cc: Lukasz Majewski <lukma@denx.de>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Ajit Singh <blfizzyy@gmail.com>, Biswapriyo Nath <nathbappai@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784118453; l=831;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784118453; l=2258;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=4xgXUDHpUY8FF+7Dj/KO33UP/TwZlPUAHYM6c5aHTfM=;
- b=YxNMKpnZ4DBuY7B61ItNrOC3wle4mEr+Abw4jWhONlaDylIPDBYdIxLLgkzubvQQ7Nt/DuCvL
- W/UYgvFgHnBBgMB3PUGQGS5GD/ONB9jsqWukEKxZOU2Mf/kNUFnkbXN
+ bh=CAdZRk6mSSbICWjCSDcx1Tu3LurZXIocfej2UBf9MHY=;
+ b=zbFLNEuEtAYXPf8h8kN9/jFxq8iyQ/LOVK/986s8QLpMrkuTL+s6Cpd1eCfL3fUhqbClhm70c
+ Gqln+IyoB1pDWBuTqw7PdZi/a7KT6ocmLuWoQmTeF66Zl5FnWiMMxTI
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 15 Jul 2026 14:38:59 +0200
@@ -116,32 +119,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Currently the u-boot GDSC driver has no flags passed, which leads to
+some GDSCs being treated wrongly, mostly ones that don't have
+POLL_CFG_GDSCR set.
 
-Clearly say whether it's stuck during power on or power off.
+Correct this by import all GDSC flags into the clock drivers and then
+start using the correct behavior for GDSCs that don't have
+POLL_CFG_GDSCR set.
 
-Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- drivers/clk/qcom/clock-qcom.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes in v2:
+- Take over series
+- Split patches (done by Alexey)
+- Rebase on latest u-boot code, adjusting more clock drivers in the
+  process
+- Link to v1: https://lore.kernel.org/u-boot/20250108115911.4163437-1-alexeymin@postmarketos.org/
 
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 6b46d9db744..557f30d54d4 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -542,8 +542,8 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
- 					 GDSC_STATUS_POLL_TIMEOUT_US);
- 
- 	if (ret == -ETIMEDOUT)
--		printf("WARNING: GDSC %lu is stuck during power on/off\n",
--		       pwr->id);
-+		printf("WARNING: GDSC %lu is stuck during power o%s\n",
-+		       pwr->id, on ? "n" : "ff");
- 	return ret;
- }
- 
+To: Sumit Garg <sumit.garg@kernel.org>
+To: u-boot-qcom@groups.io
+To: u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Cc: Luca Weiss <luca.weiss@fairphone.com>
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Ajit Singh <blfizzyy@gmail.com>
+Cc: Biswapriyo Nath <nathbappai@gmail.com>
 
--- 
-2.55.0
+---
+Alexey Minnekhanov (4):
+      clk/qcom: Print more details about stuck GDSC
+      clk/qcom: Import GDSC flags from Linux
+      clk/qcom: Add newly added GDSC flags to all qcom clk drivers
+      clk/qcom: Treat different GDSCs differently
+
+ drivers/clk/qcom/clock-milos.c    |  6 ++---
+ drivers/clk/qcom/clock-qcom.c     | 46 ++++++++++++++++++++++-----------
+ drivers/clk/qcom/clock-qcom.h     | 20 +++++++++++++++
+ drivers/clk/qcom/clock-qcs8300.c  |  4 +--
+ drivers/clk/qcom/clock-sa8775p.c  |  4 +--
+ drivers/clk/qcom/clock-sc7280.c   |  8 +++---
+ drivers/clk/qcom/clock-sdm845.c   | 42 +++++++++++++++---------------
+ drivers/clk/qcom/clock-sm6125.c   |  8 +++---
+ drivers/clk/qcom/clock-sm6350.c   |  4 +--
+ drivers/clk/qcom/clock-sm8150.c   | 14 +++++-----
+ drivers/clk/qcom/clock-sm8550.c   | 16 ++++++------
+ drivers/clk/qcom/clock-sm8650.c   | 16 ++++++------
+ drivers/clk/qcom/clock-x1e80100.c | 54 +++++++++++++++++++--------------------
+ 13 files changed, 139 insertions(+), 103 deletions(-)
+---
+base-commit: 501d76ca801343cce6dafb17740a8b679ed17072
+change-id: 20260715-gdsc-flags-0c90128d6b7a
+
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
