@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0D5C44508
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA14AC44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2654384B49;
-	Wed, 15 Jul 2026 18:57:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE7DA84B88;
+	Wed, 15 Jul 2026 18:58:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Xyc30NrS";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="WtjQtcD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 364EB84B86; Wed, 15 Jul 2026 18:57:48 +0200 (CEST)
+ id BAE0184BD7; Wed, 15 Jul 2026 18:58:56 +0200 (CEST)
 Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31F2584B43
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:57:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C54BD84B43
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:58:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 5A90CB00593;
- Wed, 15 Jul 2026 18:57:36 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 4F14EB0057C;
+ Wed, 15 Jul 2026 18:58:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1784134665;
- bh=dy088rUI5InY/3hyc6qUkS9dv8qRa1L3oxV03f6ppFs=;
- h=From:To:Cc:Subject:Date:From;
- b=Xyc30NrStkS9Ro3yT/hoswL1vApHeg+9dOLrJmWuikvKX+UTdnVCtt+phQt4Uwf8s
- 6bETiRNDbprOyZ0XaCE9Z6kTT+bnfrgxCB6mq7vJ47vmpRlA3AWMNO9BeP9hIzPBLu
- k7Cibjc0n4aq+p47M2PlkqvVudVrQdTDW77VPqVCk3JYdnsm0yWHLOaKwgNHjUXyY2
- jfUiAVh4Acqx9Y0ntTFvE57gZ39wxeMQp4sT7R1o0tJNWyQx59XJzG18sDcIXcj1EB
- JB0RzTVTAo7LebOHjVasQbb+h6kMFDPWn38+CwBibr66Kd/giq0zZVEPu59SrUHw47
- lW0a1DZ61sSHg==
+ s=smtp-20201208; t=1784134734;
+ bh=qfmxCrBTmgKaPVc1Ro8hmUBuvzDRYxSA8KQ4a48awas=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=WtjQtcD7MjT0tlfFIBVsfapg3iDbSB5ZlWx02SxsvApM4/WnetHIHYrF/S6Opmyzb
+ MTb8n2zB5V+QhMl9kRu/BYzi9nRTu7BQBxTZAsxoUgQn7aCOXWnHadwxVG34kN6tj8
+ UewwR5de5fh9s9zgNwhmBUFcO3+Vy77SL7DQFIpGIUvpS2fisaeNZOpBzDeeRG3lhy
+ gqFkJYOVFXb04wiPYoAzxWi2b447SqGhnJ83kc5NEqxw2FOparQTNAucpTk9OIWvyY
+ 0FEyBbJ3N+6UCtiVNI6eQQelU9ClMcEWVLzc/aHXUlvcKiFl3Q3B5sYnMw5WB6Jfea
+ lXlW9OwPhfKSA==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
+Cc: Vincent Jardin <vjardin@free.fr>, Simon Glass <sjg@chromium.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <sean.anderson@linux.dev>, Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Timo=20tp=20Prei=C3=9Fl?= <t.preissl@proton.me>,
  Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH v5 0/3] fs: regression-safe load <iface> for null_dev_desc_ok
- fstypes
-Date: Wed, 15 Jul 2026 18:57:14 +0200
-Message-ID: <20260715165735.3207801-1-vjardin@free.fr>
+Subject: [PATCH v5 1/3] fs: dispatch null_dev_desc_ok filesystems before lookup
+Date: Wed, 15 Jul 2026 18:57:15 +0200
+Message-ID: <20260715165735.3207801-2-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260715165735.3207801-1-vjardin@free.fr>
+References: <20260715165735.3207801-1-vjardin@free.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,19 +68,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Filesystems that are null_dev_desc_ok (semihosting, ubifs) have
+no UCLASS_BLK device under their ifname, so on real hardware
+fs_set_blk_dev() always fails at the partition lookup.
+The workaround was to add a per-filesystem
+command (example cmd/ubifs.c), which duplicates the plumbing of
+fstype_info.
 
-3 commits providing documentation of impacts and testing the dispatch
-for null_dev_desc_ok fstypes (semihosting, ubifs, sandbox) in the
-generic `load <iface> ...` command.
+Probe such entries with block_desc=NULL up front, so
+  load semihosting - <addr> <file>
+works without a new command.
 
-The test does not cover ubifs, I could not make it work with
-qemu. Since the code logic is there and testing with semihost
-is done, it should cover the needed cases.
+Sandbox boards that exercise the existing fallback through "host
+bind" stay unchanged.
 
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Changes in v5:
-- test/py/tests/test_semihosting/conftest.py: fix CI
-  issue reported by Tom Rini
+---
+
+(no changes since v4)
 
 Changes in v4:
 - Apply Simon Glass's v3 review:
@@ -104,22 +111,67 @@ Changes in v2:
 - (v2 is my local iteration, not good for the list; the changes
   since v1 are captured in the v3 changelog below.)
 
-Vincent Jardin (3):
-  fs: dispatch null_dev_desc_ok filesystems before lookup
-  doc: usage: cmd: load: null-block-device
-  test: py: load: check null_dev_desc_ok dispatch
+ fs/fs.c | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
 
- doc/usage/cmd/load.rst                        | 33 ++++++++++++
- fs/fs.c                                       | 42 +++++++++++++++
- test/py/tests/test_load_sandbox.py            | 51 +++++++++++++++++++
- test/py/tests/test_semihosting/conftest.py    |  4 +-
- .../test_semihosting/test_load_semihosting.py | 38 ++++++++++++++
- 5 files changed, 166 insertions(+), 2 deletions(-)
- create mode 100644 test/py/tests/test_load_sandbox.py
- create mode 100644 test/py/tests/test_semihosting/test_load_semihosting.py
-
+diff --git a/fs/fs.c b/fs/fs.c
+index 8ea50a6c13c..56f3e0c9204 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -459,11 +459,53 @@ const char *fs_get_type_name(void)
+ 	return fs_get_info(fs_type)->name;
+ }
+ 
++/*
++ * Some fstypes (semihosting, ubifs) have no underlying block device
++ * and ignore the block_desc argument of their probe hook. The legacy
++ * commands (ubifsload, semihosting via env macros) just pass NULL;
++ * for "load <iface> ..." to behave the same, the dispatcher opts
++ * those fstypes in by name here, before any block-device lookup is
++ * attempted.
++ *
++ * Returns the matching fstype_info if @ifname names a fstype that
++ * opts into null_dev_desc_ok dispatch and the caller's @fstype filter
++ * permits it. Returns NULL otherwise.
++ */
++static struct fstype_info *fs_lookup_null_dev_info(const char *ifname,
++						   int fstype)
++{
++	struct fstype_info *info;
++	int i;
++
++	for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes); i++, info++) {
++		if (fstype != FS_TYPE_ANY && info->fstype != FS_TYPE_ANY &&
++		    fstype != info->fstype)
++			continue;
++		if (!info->null_dev_desc_ok || !info->name)
++			continue;
++		if (!strcmp(info->name, ifname))
++			return info;
++	}
++
++	return NULL;
++}
++
+ int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
+ {
+ 	struct fstype_info *info;
+ 	int part, i;
+ 
++	info = fs_lookup_null_dev_info(ifname, fstype);
++	if (info) {
++		fs_dev_desc = NULL;
++		memset(&fs_partition, 0, sizeof(fs_partition));
++		if (!info->probe(NULL, &fs_partition)) {
++			fs_type = info->fstype;
++			fs_dev_part = 0;
++			return 0;
++		}
++	}
++
+ 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
+ 						    &fs_partition, 1);
+ 	if (part < 0)
 -- 
 2.43.0
 
-base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
-branch: for-upstream/fs-null-dev-desc-dispatch-v5
