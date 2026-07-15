@@ -4,141 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5138C4450A
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 05:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D27C44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 06:44:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C84F84AE3;
-	Wed, 15 Jul 2026 07:44:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 590C984AB5;
+	Wed, 15 Jul 2026 08:44:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="OjPoMm2y";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ia9YFkoc";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jABxqqk9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7619883FF5; Wed, 15 Jul 2026 07:44:14 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 5381584AC5; Wed, 15 Jul 2026 08:44:32 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C1FE84AF5
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 07:44:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66F3laVK2504653
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 05:44:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=5isHtaimzWuXd8bLa3HVW1Vm
- UAZt5gobP4jeCh9swpQ=; b=OjPoMm2yGHhVLXgph5eTj1i9GKSJLpaxKsMIdzRS
- LZ84G2Gt0P6FAuE+6MIa5T7vrZ83Q/hTAVTG7Ypdpk2XY0jMRA39UGVvF05p04R4
- V8JO11qaqsCwFkSeJOT8pJ/m8f4dnGIemf0NQr1Q+LZ5Nsw4SNDwyqsqMa/YeWIL
- uP3UG1Iz7oOiJT9S5Pki/P80I/cxovudmuqB7/YCTDtGRl6Pst8wJP57eN5xcExV
- uGiScbxhU8/n0yyeS4ZqtLbZP1KDk6Eak9b1xOPFUHszq3gBVuQfVrWaQhTi4T/8
- 4uHbel3ogC9pVaramHOjmbA6mG71ZFdo6VK4qL9R7s8Bug==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fdwk318c2-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 05:44:09 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c916d17dd43so8503213a12.3
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 22:44:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784094249; x=1784699049; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=5isHtaimzWuXd8bLa3HVW1VmUAZt5gobP4jeCh9swpQ=;
- b=Ia9YFkocwECYemShmxzWp4hICGbW5caVL0QB/JYteL7Wbt4d2sEIc7eOt8Pbh07BGc
- dKw4o3tmVlhTjNVPAMhZBQED1uNm95FiuD/JRyeQ8MpZ9TfEYqwi8yIBv0UmIeLpQiFW
- Byd9yHnNocB38LAQuEN45LFxMjT0bsFj+034duP7ZQsm8jslFZ5KdEfQgPkNWQZDqrEs
- AYrkZ61iHyRMl5sOePg63nu7R6svAOdrtjn1DoyAxRyPAw3+xrnGP0wh2aCfTGCM5Q11
- U0MCNiiHq4mQNA91dtXbEkYiR3cFJ2DWkOGuRUT9ekgVsjDtd3cTJKdVlycElilA9yJ7
- mBWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784094249; x=1784699049;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=5isHtaimzWuXd8bLa3HVW1VmUAZt5gobP4jeCh9swpQ=;
- b=oJtKNYrI0CLkoJYXRr3b+cYrQ6JDcbiI4U3BwoJ+gfZWoOuaPW792grn2uGUcl6hua
- jSP9SQdZI4WWBJ9uEBS++nLCr1m60JEw/r15JrnCrqlLSBDBYyhN066ZMbxDxZEK4UXq
- c4NKc5MO4JPWn2zGeHen6Eijj2ZDGDaV/5G8o0xCvQi7Z4WXI4p9/HaQzmumtrt2oMO8
- 1mOIGcLR75kKF+RK0Atk+t3RpV59iQyyhVqqChKoj5G1CmcAZOcnaPArdTmTMoplJkYI
- l/4AnBLMSnStdGedjBmUD16g9i0NOXEzqDqAIaDJPx1DJOWJ+oa3kqcjFv00fVsAVasI
- /MZA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoneXRYPDX0TuO3FBIfewaGBPmGQDoMfGZDAwoWKV7U8iDlD3GT4DQiPjL4as6JtHfACVt/aes=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7gITw1d+q2mnQKLRF8S9OAllqYk3z+G4UXyENwDUe1IQ6kHsD
- sJLwaVpbxvaoyHiBg/kGcySmhE4wlbuSqy5H/xpnFCDIpRI6k0tWtg4xx2MIbUYpC8mriEvZB9E
- gOnB9V4JRVzGSbko1/oLW1rZdTbgvMwKumxiPHY8A2Lfb0oFyPJihn0FuWUZrFBMe
-X-Gm-Gg: AfdE7clIDOCllED34OYvwggTkJRoQjVzK9nI3S2GhTEfthTPTZniDJHv7PSON3dFeJu
- kfyq7GmniXHP/apNUAov9f0rjNIPIqWKVtkID1eC8EUvkLGOIWDVREg8PI+zQ4iJGRmm92uiOmM
- T5f0Oft07QIuc15ocwLgPcQIBxElVO++YdammS5wrACygcXQq9G9XsQNueKMdkSTY9pxIV0jh0u
- b9MdNwAesFf6EznVLABq+YnuuJ6ytq04PTWWEHDoP9wQ70BFa4ATOgxbkTUzQTVIP2aVzgUsz/S
- xRxxcQzT/Lv+FC7Yc3dwYBM6rCSKhY1xMrm0z6sDLur7fzFpXytsJa1ipGd8w8+ZTd/ImzdoBct
- LEWpB2T9V0nJqhROIgpQ/tbBW3H+qm0LrKdHyk0laHSREAxElXZI4i8/A82co7sR6SOnKGNedGS
- 324wGHGTCeZyyKCNMb8plE+gxijQD6ckVOhrd2bt/f
-X-Received: by 2002:a05:6a21:3297:b0:3c3:69d0:c573 with SMTP id
- adf61e73a8af0-3c36c48a9bbmr1434080637.68.1784094248813; 
- Tue, 14 Jul 2026 22:44:08 -0700 (PDT)
-X-Received: by 2002:a05:6a21:3297:b0:3c3:69d0:c573 with SMTP id
- adf61e73a8af0-3c36c48a9bbmr1434059637.68.1784094248424; 
- Tue, 14 Jul 2026 22:44:08 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13b987fc629sm48534341c88.0.2026.07.14.22.44.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 22:44:07 -0700 (PDT)
-Date: Wed, 15 Jul 2026 11:14:01 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: guohaoprc@163.com
-Cc: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>,
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Vishal Mahaveer <vishalm@ti.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] board: ti: am62x: Fix build without TI_I2C_BOARD_DETECT
-Message-ID: <alceIU3at7mEURSh@hu-varada-blr.qualcomm.com>
-References: <20260715-am62x-no-board-detect-v1-1-2969faec1001@163.com>
+ by phobos.denx.de (Postfix) with ESMTPS id EA98584A67
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 08:44:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UlO/3J/hTwVSaHUQUyozAYgXpOXelg9BfdI6QJ0SYHZiYE/0oSe3RKRSVcZV6u2cgeW1gCcEAUFLn0Z21GftQjEpIwjRSK2KShEUNN6yFsxqHMMISmoAyjYKZcAuU4OaeDiANGEQdnmO0RMf4eyR98fsZC4rMThaLtBVffiGUeZPgtGhF4j9jibKFvzkdPj5w6Rh2Kgs+8qbb8aVrZ++P/ws+CY2qtV0LlfL2g1s1eauaZxM3igD3yRHWrmjFrKOvfbgF4hSSpM3Ndrf8MHfROPJlnHdqFHweokr43yS7hKa2RRvmCS3rNKlUzZqVUvK+f4asMJOY9Q3Hj/xqf1CsA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2c6oFguAoDWhSZVtaMkV487TA7iXNdO+Je6IbEu1+Kg=;
+ b=dmQ1gNQlchzsbOlPpPe9l6Eu4MzJrkjRaQkzWhrQ045iCQrmnIkQZddZxsPo8vUEX++Hlnhfwsxyslb9J+ENMhVXH00uqnrBLnMPQIOdjOT7jlGeiaDpJ1YAtaphObhobbrERr7jROVFwc1Zlqj4YsGrx3NZEnU5xvNbUZ9mWu3SO0DUwynSZHvwA9445L5RCja3G7qkxCDzE9KufWXTdNaqFxnnhrFJT3mjxRvQ8c+2kB/XOiAtkaRLgNO2LEB+fae6ryAslRPAFxTD8AOlcJb/Asa0oHCJDtIRtBgiLxtfMO48uxqlTunX8hDYnwbzNgar/0GVfxsVWFKZ5NcKAA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2c6oFguAoDWhSZVtaMkV487TA7iXNdO+Je6IbEu1+Kg=;
+ b=jABxqqk9tZ22NgWXM2jXU7GSLoxolK75xDP39aAYoV+OZLZV1Ki1n9VO09OMtnLL4bvrI412Aj+YX7GeysjczQeU9ryDo6+v1IbIy9WLIXkeH6ZzZdhR1uBSwMAOvnArI1/Lqnz8/e7SeAbKqs6JDrFk7cvxieCFwAoqs7Y/7E1wFnT2rzMgk7U123gFFs8L83iM6ym1WECb94TfO7V6KU8B/0lnUeez76orZ0l7EunNM5nYQXWkmaUCFBLgsGjbvXmqR3/RgBAFOL+6/NGXboJ7DZ1fS7l9yZOAPsimzS0GPeN4is5bXLsd/JZ/6/TGrUyoQlQ335E1Nr//GZy4hA==
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by LV1PR03MB989608.namprd03.prod.outlook.com (2603:10b6:408:3f5::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Wed, 15 Jul
+ 2026 06:44:27 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%6]) with mapi id 15.21.0202.018; Wed, 15 Jul 2026
+ 06:44:26 +0000
+From: "NG, BOON KHAI" <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>
+CC: Christian Marangi <ansuelsmth@gmail.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, "Chee, Tien
+ Fong" <tien.fong.chee@altera.com>, "MANIYAM, DINESH"
+ <dinesh.maniyam@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, "LOK, CHEN HUEI"
+ <chen.huei.lok@altera.com>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>,
+ "conor@kernel.org" <conor@kernel.org>, "jagan@edgeble.ai" <jagan@edgeble.ai>
+Subject: Re: [PATCH v1] spi: dw: Allow bits_per_word to be configured by
+ device drivers
+Thread-Topic: [PATCH v1] spi: dw: Allow bits_per_word to be configured by
+ device drivers
+Thread-Index: AQHcsds7HwRRcRhI+kK9UbX3VPelubZu4vs9
+Date: Wed, 15 Jul 2026 06:44:26 +0000
+Message-ID: <SA3PR03MB7187C29B807FF1D6A27A417BB4F82@SA3PR03MB7187.namprd03.prod.outlook.com>
+References: <20260312044633.29242-1-boon.khai.ng@altera.com>
+In-Reply-To: <20260312044633.29242-1-boon.khai.ng@altera.com>
+Accept-Language: en-MY, en-US
+Content-Language: en-MY
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Enabled=True;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SiteId=fbd72e03-d4a5-4110-adce-614d51f2077a;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SetDate=2026-07-15T06:44:24.588Z;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Name=Confidential;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_ContentBits=1;
+ MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Method=Standard; 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|LV1PR03MB989608:EE_
+x-ms-office365-filtering-correlation-id: 55dd1a8c-260b-48b2-774a-08dee23c83a2
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|23010399003|376014|38070700021|13003099007|6133799003|56012099006|11063799006|22082099003|18002099003|55112099003;
+x-microsoft-antispam-message-info: CH7UwmGEwZ5vi8ICLJCyv1avd/DojT8l43hMD3ZOZfM9vscqMj7VCUIcWG+nRETrDPvmtN2AnPyCpSA9cK2qWHvdrrv5kBAlV0GWtjk7AnPyMBMJREsYIOsRUcOwFiI5qs/HE+qye18e0PplEWbrFtSxr473ZTQ2agHxtJXtttDWPkcJBP9pG8mY3GZsCUAVNfS5sNgKVEQV7oZQT8EC+pPaDQ160C34IlDjXZx0DQLdPVaXRvnnvqLaYtN6NU4kcnGOLACH10ElywLAbiePnDeSbEvPB2Nu3C/Gev9195871+lnQT25TAdSaGIRqWsZ2yDIlhVSwClzp/1xG0H1PS5zpxRXQyyTij2i7OznmLDbLUVvUFuElsyxKO6mH5NQMRVi8Z9BkN0MRBo3Cof2ZkNdR5pPgrBW+LPa6P6I/oymZPQ1OMeAiomaa/TdhgYNAtdclPR4F94hoenVHctonodYUA6IAFHB7Ba5JY2uCJyfZu05wToUKFr3pRMQOgX8tZZN8qGTOAyfd5g/7tWs7rU7rVNZQOAu3xWtTJVwwHp+La8PGStvJeYHa7Z5V2aZFbMgkHiZveusENOdwCw9FAxhvAiTUViJckd0eXzsUfZIKtRxOCdCeubKCGugRyTLcua0/b/NPFOtc8WJ0XlwWX7mxL9wHr3Oc/vNIGk7vlc/a7lkpqBfVOaSYDomUTLVjYttgfSK06DaZyt+wiOrDcQ8M3b3a4XXnwtZaFlDdqU=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(38070700021)(13003099007)(6133799003)(56012099006)(11063799006)(22082099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?xQkGgFMtD+Pucu33ymoss5f9JmPmVJ8Gs84uuacY0MjvAgkGoTcdG0qOpY?=
+ =?iso-8859-1?Q?8f5V9WRzQfDSrvstSwu9kojqXPHVwIREfd3EVYviGLvQwf/760aS8C9ruT?=
+ =?iso-8859-1?Q?40ZkluwUiFLgQFur5//x8EzBlfDnVvWyAkxWyN/nLLYwGbiaVtSuUF3YYc?=
+ =?iso-8859-1?Q?ilYiFS683DWwmpVahAPmLRevlNCmoz8rBudwXSLKzoKT4L+LguEFyxOYst?=
+ =?iso-8859-1?Q?lLx2AUt5xV3RpIr3arMGO+ju+5HjkZ17UGtkAeSxygqBZn7ANr4tT5M0Is?=
+ =?iso-8859-1?Q?+Zqa4wuitBY0ml9zt64RD15ydgDVO6A8dlbHwXsAwTGD6Y+C5MXuyJM5nD?=
+ =?iso-8859-1?Q?QmbdouJeDzItTs3g1WYFV2hegYUsbqVdQXq6+XDRwXcS+argOw1q/5wPP5?=
+ =?iso-8859-1?Q?7lcM0Qoe1jKCfPaG057sb9YPytX3IldDlLpSL7s0M5mNZRfsLKtXIW9GF7?=
+ =?iso-8859-1?Q?umwFEXA/G9IfqSwPItDf96oNhVgGcbIM0VXBZUkpN27v5z4eVsngjIzFUP?=
+ =?iso-8859-1?Q?jAemgO5gfqFbyZyYMBhRXbC0m1pU/G/4MDMhMzlbjn+gMNw60awiDp4CjF?=
+ =?iso-8859-1?Q?xLhCF5k7yNIEwMqpPSllPC883ZLiTBuqLjKcRSXQl2nGSUmAjRuN2qNeIn?=
+ =?iso-8859-1?Q?GD6YSJc4gJRcBfMhIUxwepYfFiw8pk0QIF+DNJfJl+SBF9gTgpP0z/0fCc?=
+ =?iso-8859-1?Q?pG5hquI5JOrJ33wmSN/k0A139UkfwvlJV7Qa9fKCijl8OTt7MnhioRN7w4?=
+ =?iso-8859-1?Q?tYEay8gZVktuMf9vTe0yJK5A6FzDYrMykYykGZEXhJH9dHHOAYBl7h/nk4?=
+ =?iso-8859-1?Q?14DNz5TMlMKzu1uQzOHuQQ5tqNdObHudeIKl3NjGZH9rMrO4rXay410cWW?=
+ =?iso-8859-1?Q?nBjogmdS3ZLcqfDvNNQcTbRZ8arp69VHDIAs2iQL/be4yVCWFWA5fyc8Ut?=
+ =?iso-8859-1?Q?OD4GwWojT1YB9XW80V9dvZsGnyao1rsj/Pt2s7DHejBtI2nhelmf0BbtZ3?=
+ =?iso-8859-1?Q?nYGF+EXKjTDUCxnHfZXHEAg2kDMGiog0pgrm5Ao5yYPwUBn0Mblq7+pml4?=
+ =?iso-8859-1?Q?Ahnd44eIPrBVopis/h5BMdra8j5AovrjfSnWjVhzTq34eZd/Otfu7KTaKv?=
+ =?iso-8859-1?Q?9R+LCkmkwnb3q/MtHdRWJTWM0Xbz+9PAVEw2O79nI569n6IKLPug1cY49i?=
+ =?iso-8859-1?Q?Fl9X7Jffc/yenPtgBrIM+dRaXMU6AlYgzibx/PuyilR7uoZgArNw2D3XIP?=
+ =?iso-8859-1?Q?e6PI3WwsFZ65HiUB9UqTSn8YgUakemWsSoa45NpbCc0OcAwEWVmdeH69Hp?=
+ =?iso-8859-1?Q?kKC9amX1W/ZYOkWfIdF0HwvEwtZPKjK14euwoIJWOlRl9s98TlffxcxZ4K?=
+ =?iso-8859-1?Q?dFvfTTnUhJrNfmXm1plsgieAI9eOSuUoFtmZbXmLzUzUuJnV6fHl4ZlNNj?=
+ =?iso-8859-1?Q?dpcXHRIvr9KD6SNwcEjoSHjT4U8HiFA8ZCElZAlt2Xzlo75gA5X0FWnM4K?=
+ =?iso-8859-1?Q?ao3aSe2yJG5e8RDMD8fjTdneVCChD1oKjIVsyL8sY03DZS2hqgtrL6zRgk?=
+ =?iso-8859-1?Q?IU3F4VAQ/DTPuNzgvtJunyb0PwXm53KRaG5bSAE5p0giuJrGMwP7tDe9ve?=
+ =?iso-8859-1?Q?BEdgSMrSudhNAGZXQuStIuEy4Sxi6qp6uUpkcqIuoOtbndbmE36vWwUz9U?=
+ =?iso-8859-1?Q?N2orQO73f5ikyKRXyRobMJhU9Ueu/+AkglAv7vUkcuHvAe5APA39KD9sVY?=
+ =?iso-8859-1?Q?96h8QyKR6rOhBlQJR9C/+PKMkG6w+QL0aH6AmTtRh39t6H8ho670mSKi2o?=
+ =?iso-8859-1?Q?l0OjSK3neA=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260715-am62x-no-board-detect-v1-1-2969faec1001@163.com>
-X-Authority-Analysis: v=2.4 cv=Yc6NIQRf c=1 sm=1 tr=0 ts=6a571e29 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=Byx-y9mGAAAA:8 a=EUspDBNiAAAA:8 a=GgQJ5DKRVZ7hj79r504A:9 a=CjuIK1q_8ugA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: zPLwrNIdRc5IOBRB_RjFq8UdGI4rlFdn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDA1MiBTYWx0ZWRfX2Y/5uiwC8FKp
- qJ5hYxaA9k6QoE/sBKUMoGaCtxm0Uzkj69G+8oykCaazMWFOQN8CdCqf2youkeBTEH3001Tb7Yx
- zxpGzRmBf6R0Sv1QU9lQjEzNfqtkBMHFZRHSauHxrq5/aI30lCCrK/1JbsHIZSjoyyKmopEOvaM
- lyEmRRlJAW0CKo1bEqlruwbARL/CHRWg7vXbHoCejxaqP3C4sBf5dSJXHiDwYNm0qfEDvBxyz3f
- CgX0l7vP1dPky0n9ZYcebWEqnUEB9cCo2fMZu3gkwSjg2CJWhmEdq9X84/Pz7sAHUOWAypu7ROp
- iFUsmNy4C2UKXdGq7NmKp4Otv/IEudCXghi2QVcUJDfHRHBPgdmdHZq/5iJ+EqcJ3XibgAAoD+1
- d9LK273glY4swoNE30LrqU+qN9uWAwYDOTpKbGMrtLCgtahqHlVax//ZIGMDYAINMkoL+XuxJDm
- dEID/Ce85QviUN/pkzA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDA1MiBTYWx0ZWRfX2Yck3Lz4IqTj
- uLBwVpc+vwnL050j1JZ1rfynw5ov1fXlYsy4JpWMRROQQP58me7rP2e6rQpxVAgphxzjc32uCxY
- fiqctdgS6lU910ootSVRvY7OyF7RgSg=
-X-Proofpoint-GUID: zPLwrNIdRc5IOBRB_RjFq8UdGI4rlFdn
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-15_02,2026-07-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 spamscore=0 suspectscore=0
- impostorscore=0 adultscore=0 clxscore=1015 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150052
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 55dd1a8c-260b-48b2-774a-08dee23c83a2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jul 2026 06:44:26.7228 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: AxoNPIij9NiIFU9To4885xOeKc+6R6qZFLNMAoqRbjSyaW+Bh7G20TzsGAGptG/FBwsbsTwUJv+JSicSddknQQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV1PR03MB989608
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,20 +155,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 15, 2026 at 11:32:26AM +0800, Guo Hao via B4 Relay wrote:
-> From: Guo Hao <guohaoprc@163.com>
->
-> setup_board_eeprom_env() and setup_serial_am6() are only available when
-> TI_I2C_BOARD_DETECT is enabled.
->
-> IS_ENABLED() does not remove the guarded statements during preprocessing,
-> so disabling TI_I2C_BOARD_DETECT results in an implicit function
-> declaration error. Use a preprocessor condition to match the condition
-> used for the function definition.
->
-> Fixes: ff1b83c095c2 ("board: am62x: Add support for reading eeprom data")
-> Signed-off-by: Guo Hao <guohaoprc@163.com>
-
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-
-[ . . . ]
+Hi Tom, Cornor, Jagan,=0A=
+=0A=
+I would like to follow up on this patch.=0A=
+=0A=
+The original patch introduced a Device Tree binding for =0A=
+bits-per-word, but based on the feedback from Tom and Conor,=0A=
+I reworked the implementation to follow the Linux model instead.=0A=
+Specifically, the updated implementation:=0A=
+=0A=
+Adds bits_per_word to struct spi_slave.=0A=
+Reads slave->bits_per_word in dw_spi_xfer() before each transfer.=0A=
+Validates the requested value against the controller capabilities.=0A=
+Defaults to 8-bit transfers when bits_per_word is not set, =0A=
+preserving backward compatibility.=0A=
+=0A=
+The updated patch has been submitted here:=0A=
+https://patchwork.ozlabs.org/project/uboot/patch/=0A=
+20260312044633.29242-1-boon.khai.ng@altera.com/=0A=
+=0A=
+For reference, the original discussion and patch are here:=0A=
+https://patchwork.ozlabs.org/project/uboot/patch/=0A=
+20260227110434.5058-1-boon.khai.ng@altera.com/=0A=
+=0A=
+When you have some time, could you please take=0A=
+a look at the new patch? I'd appreciate any feedback=0A=
+or comments, and if the approach looks good,=0A=
+I'd be grateful if it could be considered for merging.=0A=
+=0A=
+Thank you for your time and guidance throughout=0A=
+this discussion.=0A=
+=0A=
+Best regards,=0A=
+Boon Khai=0A=
