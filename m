@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A11B3C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7839FC44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:39:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E32E84C67;
-	Wed, 15 Jul 2026 20:39:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD0C284C7E;
+	Wed, 15 Jul 2026 20:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mVR+eALZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RrAbFd2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 301A484C73; Wed, 15 Jul 2026 20:39:01 +0200 (CEST)
+ id 518B884C83; Wed, 15 Jul 2026 20:39:09 +0200 (CEST)
 Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
  [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB5F84C42
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:38:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B0CD84C42
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:39:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6984169c126so10698806a12.1
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:38:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784140738; cv=none;
+ 4fb4d7f45d1cf-698e5859a3cso1767045a12.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:39:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784140747; cv=none;
  d=google.com; s=arc-20260327;
- b=ABwGndE7UxYtSjyzA3taaGlD+M+cuWHboJB3ecDNyGAv4n0pysDC0WhTW5LCINFrwz
- fpa1oFEGH0RkXmWIqK+VnIpiQBAHV5J7X9rwsg5LnvIEIP2Zs175cGZ9qSduil+JJDdF
- HdeN2kL2Icnh1BEJVZS5uHMfGSWzIXNQTrTnRSGVXhPyqV5mkeVFFwvYUM4eFIrZ6Wji
- fJ67/ff1ezJLsKcMit6j7F7LopXZWmu//xwBQXPJjfuGg2PQVwp/3HiRIaA7fULEl0yJ
- /6WqOAPqtVroOI0MxE7Llj6smq1nSjV/nNx86zkBGz7BZ4ScP0lZes1o47LPCRr0NHZ4
- xluw==
+ b=kgQ/26l+zy0px90+WN0W4i0c0L7fs5GLuHMM+z3ZnL9GceN6lpEFexYqEEepOmosV7
+ BzHeuvyij5CEHpFeZDVUJpR03HZSHogWiO01mF0MjNit6IE57caNNx4SVMSz+7JCfJWA
+ udrWfCRiblwvNjhWQ+ae/0VMzUAkeUrsC1o3EUY8tJygoGfQDqRH9Ha5cgnVhEhHjKGl
+ jf8R/R0YYiRWUxAh3AdNuaQd0U+QYBzSg8SqaQ+YqJP76ialDwFA3EgftjVKs87Y4TTL
+ RReYPIGcF0GYmwOJcNzihmrPFDHJyhKZ9AlkpFadMZwv+vOFOPu1FhQ81uqquXi7qqhw
+ UWCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=KWRu15duYszod2VoOo2fTOG0PwNJ5PYG9SJUXodQywI=;
+ bh=3SYK+p0ul/BITm9myxMKVDRABv3ivOC7mRe3DJ8bm5o=;
  fh=iJRW8VB93FX08DrH3y1pKDG0/UVKiIyyGubq8HI//Y8=;
- b=Lr+2dqGspBLd0Pek4bfuVtR4AJksN5gKKMSnPQJiPvz65U2osIM+NM/5L7yIuVgExW
- SZFEJG+ukYSWMXWhKvVHQdjbhpyEm1qNOH+vFtpjJvz/U08Bsert6q0lP7cwaI3quNoo
- zWobAPbkxlKsLWxbPDDBdfl+wAFjE0+5Oy3WgPzYpwZHGslw8t3QcK1bUPGgNdwlrEia
- exYioh7gdRhMDPCDTh1za6bWYj9fj3fJJUhoyTZjZ1aovwc+jU2YEwBGNNlA843kjl+0
- VYD8ePDo1XNn4eqiJDfrswtJegmAKZtYEOX7qW6yEJyIepAnEhflLTR/e3J5NlRNcYKa
- CEEw==; darn=lists.denx.de
+ b=OD+T4ZaPHBOgITOlXw7VhMyO2cJuQKyXb5yG+ONLaaSgkJfX9eLcFVbP2e75I8/Tap
+ iJEk7sa6SmwWmxYrYukrfxIfkeRbTm/hkCqTO928B8wKGJde5UNL2zK5MHMJYJ8V235k
+ SJpyeg4bhzikKn+1YFWfHDrtVpHp0Owwed3MwzpgbU7eCFM7ghzw0FlSCW3D0ncgnoA6
+ +O79YziExU3Wlk54XjKDfwSslwmXwdQ6h9A9ygqXqB/D6At5G7ar3EuDAqVl4RVNLxT5
+ fmUTjTx8XzHNbRyFtq4Mdi0MhvKSM7uF2Vu0DW617+HwAN9gGkEPsblJEP2HQpLcdqGp
+ z2sg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784140738; x=1784745538; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784140747; x=1784745547; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=KWRu15duYszod2VoOo2fTOG0PwNJ5PYG9SJUXodQywI=;
- b=mVR+eALZXENlvDmnJL8obLYA3EMqzkuJQ3B8M8nhx557RqQ6nDKzrzxW84fwQ53EF3
- jLOA4F8sGS7QTstIzfTaUe0AgfqhJ8BBQcz5f6OhccPDnR/pGlKEDSgBWKZ8ziUpE1FZ
- 0WLenw5849U26e/s6ps1TJxCbF1dwcL3I6Na0=
+ :content-type; bh=3SYK+p0ul/BITm9myxMKVDRABv3ivOC7mRe3DJ8bm5o=;
+ b=RrAbFd2Xc4uqDsffB3xj4AoWlrEHAuUk8a8TZma2lBtMtjnrjOTwSvGqr8dU6IHk6v
+ GrXaL7T3eviCLfTUJwMoYRqGRVd+437eHjGPmoJCAutFH4pmSFAKJhmetnuEBSOwZzkO
+ +MWVuYIKt4NtnjOuqTlBHey12f7tP8CtJSEgs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784140738; x=1784745538;
+ d=1e100.net; s=20251104; t=1784140747; x=1784745547;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=KWRu15duYszod2VoOo2fTOG0PwNJ5PYG9SJUXodQywI=;
- b=PnsbODwCJMqfX7nFGPOTFke8gXHQjJct/eixCzkM74rQZnIN7n6AUx7FXs8Q4QGojv
- ypkgPfFup78RXQLsDHuBRICntVXBcla3kzJTs6IDMMdhjATNXa0Rx1kn6p9i+LuFKug5
- QboX+qxfY3gbyV1WrnwPQ4hsrQ9Iai1BIIrEAakeoaqsdVsSHpd+NOdnE8P9SeINIvbC
- AyfbFIB98ZSvr+9fhkxoDjlSUnjaRh6oIiYwkYCrDI2F4N4Rg1opADXi7MDVQedh7sA2
- nKE9iBAXw8OMcYbkkxZ4RjFTJsYoGeDODiyUHiM4bODbP6cEXQzutne9yFbbJmJjqpzV
- POYw==
-X-Gm-Message-State: AOJu0YzsGbEZ4TywnnKu2d1gWWhfUSMiuA4Kbhw1JTZ79AbmCb2YGhsU
- DzDpqH1MgMA9FTZ5OxfL6khWk56qqX68DbZB3QPX0EiHoatM/vkHLisH97X1uwfKN/QNLjx1S16
- Ndhv8dpdKmdW6pIpxh3xFNHIzOUmxb0HTbNXzkKSc
-X-Gm-Gg: AfdE7cnO0ITf+CIyMyOpkIcibp8OLQeDJX0nRAT/PXo7RfoExhP415WLOyivhkG1gLb
- YumieUp1LdjNNvKr2VMOdkFahjncpLrsBDb9NxvLcg7G97lRsMAKrvSW5Lfj7pcpGnqoGS/zNCs
- 7OZznUATrpR36SV/cliBVyG7mi3n6NH9Rm3jNnE8fHC7WGNjAwy8d+ZfAXgxq01vbR4LnRNxCB6
- ESdLvvh0l0+BsjXcfp4Fxo3AtV6KNl4/UuHh79SrDHHYx71yzLiFM6aMoF7EYNghEqEdm0=
-X-Received: by 2002:a05:6402:34d0:b0:698:1504:e3db with SMTP id
- 4fb4d7f45d1cf-69e199dfa05mr2523456a12.29.1784140738618; Wed, 15 Jul 2026
- 11:38:58 -0700 (PDT)
+ bh=3SYK+p0ul/BITm9myxMKVDRABv3ivOC7mRe3DJ8bm5o=;
+ b=rzZulFtcs5hp3Ss6AAA2PfjHmO1gg+w+A4g78hTSe0hkm8IlPeWBzA/vBXEask10Ff
+ HTYK6HkV2/UfMYKJUqcELttu7Q3AHddazHV7x4Igext6HKpLhhKTiRSFy4236cKjaipM
+ klZQgFr/gN/I6NVOKZ1QDJ8JKXj5efw6rk8v6KH6nm4uW39UAyJDFRjKmPD5qhYbKyLS
+ o255rxTOfAeW6q2N2XafTa0+Ek1AwPnGMpSYZTybiN0WcuvtDnT24vdiZxmJb+Wmo1pO
+ KDQwoiZBTfXDCqhgU1M20jfBVbNhJt0y0dlDK8KbLneR9Xc26n43PIAfeJSl+EuMOFnt
+ Uftw==
+X-Gm-Message-State: AOJu0Yy2WQ7XPrJMSnXZYtV/Fd20zmCYCyyLbKMRk9JAiuyqaSsm9GHC
+ BmtznwzGWoBxaoIcMGi0491gcx1pNVwvVe25f8xrH1m2ZFg75llKKdgvfYOjLKDVScWZo9xQyE/
+ fZtiIRLZFoCDvTXbLyiin8h94k1/5mOVbK6dCleqF
+X-Gm-Gg: AfdE7clL7pib0RzN+rONkhe3vOhUYgZOhXdKCm+Yx+CiXoBOKDKpAlcDQN3owQzo//e
+ nPNf+Ae/jY2iv0Zqjb5oPZ7sYXjsYiV7RwJAeXbSrFCcA7YEss5aie6BsBJSewtBtfh++jGvKTn
+ aHxKspNTWxiISImUbHfldLNCYfzmXpA9d3fm2EeBFPXEE5apk8VM8v5L0uN66eUPwfj4/Ay1zp8
+ 2epN7/tamlUJQSqKZDAVDwpjzXJULg3k1r0eRc3giNLA8qiDtbVGHjBc9EBOVKdNNPUaEs=
+X-Received: by 2002:a05:6402:a29c:20b0:698:3b7c:3b30 with SMTP id
+ 4fb4d7f45d1cf-69e2d750776mr253800a12.18.1784140746864; Wed, 15 Jul 2026
+ 11:39:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260710-rinta-watchdog-gettime-v1-0-9a982fb93f49@nokia.com>
- <20260710-rinta-watchdog-gettime-v1-2-9a982fb93f49@nokia.com>
-In-Reply-To: <20260710-rinta-watchdog-gettime-v1-2-9a982fb93f49@nokia.com>
+ <20260710-rinta-watchdog-gettime-v1-3-9a982fb93f49@nokia.com>
+In-Reply-To: <20260710-rinta-watchdog-gettime-v1-3-9a982fb93f49@nokia.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jul 2026 12:38:13 -0600
-X-Gm-Features: AUfX_mx-2JcSoEO0RY9Zkv2uMYQ_HgoEWXkUYV1LUP-k64kkRzc2TpMP8ITDSEA
-Message-ID: <CAFLszTj4n01d7pU6iphURLH=-H14JASyAaRsmOOJF4kJRGo=aA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] cmd: wdt: add gettimeout command
+Date: Wed, 15 Jul 2026 12:38:15 -0600
+X-Gm-Features: AUfX_myt2XrVF0GNAcTzTQuJqwrxIyiALho04XKM43sSrSw6P0QOzZZ8a0SHjjU
+Message-ID: <CAFLszThfsOQozDXqYqj+zq-QFFNf7kf8gbHsm0Rvd+pDt8=d3A@mail.gmail.com>
+Subject: Re: [PATCH 3/6] watchdog: sbsa_gwdt: add get_timeout operation
 To: juuso.rinta@nokia.com
 Cc: u-boot@lists.denx.de, Stefan Roese <stefan.roese@mailbox.org>, 
  Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -114,58 +114,55 @@ X-Virus-Status: Clean
 Hi Juuso,
 
 On 2026-07-10T04:51:17, Juuso Rinta <juuso.rinta@nokia.com> wrote:
-> cmd: wdt: add gettimeout command
+> watchdog: sbsa_gwdt: add get_timeout operation
 >
-> Add support for the subcommand wdt gettimeout in the U-Boot shell.
+> Implement the get_timeout operation for the SBSA watchdog driver.
 >
-> The command queries the selected watchdog device and reports its
-> timeout when the driver implements get_timeout operation. This
-> exposes the timeout printing added to the watchdog uclass to
-> the shell interface.
+> Add a timeout_ms field in sbsa_gwdt_priv.
+>
+> In sbsa_gwdt_start(), store the clamped timeout value
+> written to the register to the timeout_ms field.
+>
+> In sbsa_gwdt_get_timeout(), write the effective timeout
+> to *timeout_ms.
 >
 > Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
 >
-> cmd/wdt.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
+> drivers/watchdog/sbsa_gwdt.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 
-> The command queries the selected watchdog device and reports its
-> timeout when the driver implements get_timeout operation. This
-> exposes the timeout printing added to the watchdog uclass to
-> the shell interface.
-
-The command exposes the wdt_get_timeout() helper, not the timeout
-printing (which stays in wdt_start()). Please can you adjust this?
-
-> diff --git a/cmd/wdt.c b/cmd/wdt.c
-> @@ -162,6 +186,7 @@ U_BOOT_LONGHELP(wdt,
->       "wdt start <timeout ms> [flags] - start watchdog timer\n"
->       "wdt stop - stop watchdog timer\n"
->       "wdt reset - reset watchdog timer\n"
-> +     "wdt gettimeout - get device timeout in ms\n"
->       "wdt expire [flags] - expire watchdog timer immediately\n");
-
-This command is documented in doc/usage/cmd/wdt.rst so please can you
-update that too, in both the synopsis and the description, ideally
-showing the output in the example section?
-
-> diff --git a/cmd/wdt.c b/cmd/wdt.c
-> @@ -131,6 +131,30 @@ static int do_wdt_reset(struct cmd_tbl *cmdtp, int flag, int argc,
-> +     ret = wdt_get_timeout(currdev, &timeout_ms);
-> +     if (ret == -ENOSYS) {
-> +             printf("Getting watchdog timeout not supported.\n");
-> +             return CMD_RET_FAILURE;
-> +     } else if (ret) {
-> +             printf("Getting watchdog timeout failed (%d)\n", ret);
-> +             return CMD_RET_FAILURE;
-> +     }
+> diff --git a/drivers/watchdog/sbsa_gwdt.c b/drivers/watchdog/sbsa_gwdt.c
+> @@ -46,6 +47,14 @@ static int sbsa_gwdt_reset(struct udevice *dev)
+> +static int sbsa_gwdt_get_timeout(struct udevice *dev, u64 *timeout_ms)
+> +{
+> +     struct sbsa_gwdt_priv *priv = dev_get_priv(dev);
+> +     *timeout_ms = priv->timeout_ms;
 > +
-> +     printf("Timeout: %llums\n", timeout_ms);
+> +     return 0;
+> +}
 
-The code looks fine and follows the existing pattern in this file.
-Since the sandbox driver supports the operation (patch 5), please can
-you add a console test in test/dm/wdt.c using ut_assert_nextline() to
-check the 'Timeout: ...' line? Patch 6 only covers wdt_get_timeout()
-directly.
+If this is called before the watchdog has been started (now possible
+from the shell via 'wdt gettimeout' in patch 2), it returns 0 as if
+that were a valid timeout, since priv is zeroed on probe. Please can
+you return an error (e.g. -ENODATA) in that case, or better, drop the
+cached field and read WOR back from the hardware:
+
+    u32 wor = readl(priv->reg_control + SBSA_GWDT_WOR);
+
+    *timeout_ms = lldiv((u64)wor * 2 * 1000, get_tbclk());
+
+That reports the true hardware state, works even if the watchdog was
+set up by an earlier boot stage, and removes the need for the new
+'timeout_ms' field and the change in sbsa_gwdt_start(). What do you
+think?
+
+> diff --git a/drivers/watchdog/sbsa_gwdt.c b/drivers/watchdog/sbsa_gwdt.c
+> @@ -65,6 +74,7 @@ static int sbsa_gwdt_start(struct udevice *dev, u64 timeout, ulong flags)
+> +     priv->timeout_ms = clk ? (tout_wdog * 2 * 1000) / clk : 0;
+
+This 64-bit division needs lldiv() to build on 32-bit platforms -
+plain '/' can pull in libgcc helpers. The same applies if you take the
+read-back approach above.
 
 Regards,
 Simon
