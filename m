@@ -4,105 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10352C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0D5C44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 16:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C2B284BE4;
-	Wed, 15 Jul 2026 18:29:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2654384B49;
+	Wed, 15 Jul 2026 18:57:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hOmCcTSV";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Xyc30NrS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A26B184C03; Wed, 15 Jul 2026 18:29:32 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 364EB84B86; Wed, 15 Jul 2026 18:57:48 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4576F84B49
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:29:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31F2584B43
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-455a61c53d3so2111903fac.2
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 09:29:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784132969; cv=none;
- d=google.com; s=arc-20260327;
- b=dKwfFmSqJn+ePj+ShRUaok+3QHyRfHV9RMQJO91wAU3TkniM2OlsJe3YJj5xN65HlN
- B2KiBbwwqiIGDFEuMLvenzDu5GurxZa81+r4gVhlniZnKb2Oz1lXD+yYMPl0OJYBT57S
- EaHCa6g1i5OJiNzB3tqmDHvnSS9QwzNdMXfAltAkBKBAd5tYfAFvzbV0hh+HW0mlGdCl
- U52jDAi1hykcswGjEhOj5ToqTd0oExV3QOHPx6GO8EDH76V2xiIRt8jcwe1j0ZDsX6bj
- UQWRcxaOiwlGw+pZNazBQE0XU6Oi4TZxOL7bq86dvFEWvs43FfplLp54ia+IrtTcuGp8
- wDEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
- fh=wYXhoYpjb1+GwMlhOd1xSvEboUA9cmXHqWn8BuJbkmo=;
- b=mMqDIlMNjbIqpfISorrbqu3TvEGCIu+yTgBThcDovyBmdJRTHFUp15BuKVP0B0fJwL
- 4t7DXL/P7xVX+btFc6IFsFIMgMui19LYDcM39jfQtc3TtmydqdJgz8v5U86b8fb0fE5y
- xjifbjgAU9zZ9C0SGviMXBZEkAOvVbm1L39ijfnSmuC+03QPzOMKxQ3rzUZPeAZi1OKa
- 5gvT4g7rkM03jAoSsyIB19go10cSrEF6jOddQZKZZ+e4GyaHjcqIH4h6WWZS2k5THz+V
- Mz4pOPINAD2QgPSUFV+Ln1mhKy28eNy39Na7Yb1eM7yGAKvMl0/pb2dflloK2Zm2e+to
- Ps7Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784132969; x=1784737769; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
- b=hOmCcTSVsU4bF90DmCjC+6mj1VVHAGcj0xSkz4nG29Uw/KB6q0HWJta/Z/V7sqTwWm
- La19beGYjwO0ceI5pYIfbcTXopN/fZJ/6jiPr2c6jw3cuygIzQ41SNM6m6ehvLV/28oX
- dWr2DhWHEX/U5WBzrS9l7rqMnLqheT/xKqfvdspLmx2MnsK4vVBxDxicmZnsiEK/zLGA
- I5o0hzUxfj8qFzBvS9cv/QNqAJlYbUpRNFM7BvA1HxXFI4BAKGnDnqJCyk3/QfFfHfIF
- rBrP6ox04ehZVCmtU8h3ENC1Z6ihhudMHMYN6Os3Vv84dyn5RvQAhGFyFZ42L0ztMCAK
- vluw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784132969; x=1784737769;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=k65NJBhOS3+Y5bjC3PeUZM+mP6QId5MJFDVrEL4269U=;
- b=YQlNwayC+8BG6iGSWuzxL3glFS80Q4vlqGTptI6woS6+m9UZecBjLV6VbuAV8JA9x6
- 28M4YOJfFLxwIpCG4ye7BBJFyAjQwjqrOEa5zmuG80KyXrk3i7PjbanuRDMRnZQ/Qk0d
- V/iIsSivHwIHYl/BOKNdrCyfWUwOhgaYHsWfWtw+A74QYNoChxdYbokkxgb+ShN1Hgid
- FifK8vHS8fLzG6jZxz/8alVIH336FG1FEYhLgIoMeMzARrb3Sv08FGLw/amKLCKuDb99
- THW6q6Rmc0tx2bTxAzTygy5X/JNE+OMXR/qM8N0t7neJH43VJ7aq3OWMiycpsj9N1huQ
- jKmg==
-X-Gm-Message-State: AOJu0YxNG3cR0QIz4f4QTNerL1fYK1jc+OkKRkMaEprJXb6/xjlCkUlG
- ckC4adS/aTCFFrmn1FE2vw964sAnCxJm6j4a+nJiuDA3Y75SQvUYQa+1nCbH4iJNhVy5MAKYoqZ
- ISRcLRSjfzfEmUHCtP2iGeHT2dIzeysz9G8aQ
-X-Gm-Gg: AfdE7ckefzRga8XkxUlFy/q3cpwEZJ0cjI7rACdBnmNfTpMW9MdwJzAzoZj+IywyJ8+
- 10c3M+tOpEvZaprVXqttH8utzGlqCW7k52F1ozomfM4/eD09aAYZpMPnsrsB2yDaf0vqlG4nGIr
- TQR55S3jud7Z+5ojRo169mueERw2mDQg2om6PqTMnkuGr6g7A2Ybl+l4vSQG0zaKxcCQArQezwq
- jPLWYiXSeDlr9rAlelpjfJQFzP3jGIlmf/K0Z4Xvwk2TddnE48fTKWKFgOnFMtWJZLqH40krHA/
- IYCRnZ1kySznDUpCXWp03A0wi9rUhQ==
-X-Received: by 2002:a05:6870:380a:b0:42c:49c7:a499 with SMTP id
- 586e51a60fabf-4560b3eb145mr3777665fac.3.1784132968969; Wed, 15 Jul 2026
- 09:29:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
-In-Reply-To: <20260712-avb-fix-memory-leaks-v1-0-51d6d5a42631@gmail.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Wed, 15 Jul 2026 18:29:17 +0200
-X-Gm-Features: AUfX_mwhZ0CL6Pm0UXASpzxr7EFq0zZerKZMu46Xq3_hLmMB2-XoHp9jokAiY5E
-Message-ID: <CAByghJaRbP9Rx3VYRPFS+yfjKbx6y6c8wX3MyUE+HjnG_-L-4A@mail.gmail.com>
-Subject: Re: [PATCH 0/2] avb: fix memory leaks in AVB 2.0 verification path
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from localhost.localdomain (unknown [91.160.0.144])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 5A90CB00593;
+ Wed, 15 Jul 2026 18:57:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1784134665;
+ bh=dy088rUI5InY/3hyc6qUkS9dv8qRa1L3oxV03f6ppFs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Xyc30NrStkS9Ro3yT/hoswL1vApHeg+9dOLrJmWuikvKX+UTdnVCtt+phQt4Uwf8s
+ 6bETiRNDbprOyZ0XaCE9Z6kTT+bnfrgxCB6mq7vJ47vmpRlA3AWMNO9BeP9hIzPBLu
+ k7Cibjc0n4aq+p47M2PlkqvVudVrQdTDW77VPqVCk3JYdnsm0yWHLOaKwgNHjUXyY2
+ jfUiAVh4Acqx9Y0ntTFvE57gZ39wxeMQp4sT7R1o0tJNWyQx59XJzG18sDcIXcj1EB
+ JB0RzTVTAo7LebOHjVasQbb+h6kMFDPWn38+CwBibr66Kd/giq0zZVEPu59SrUHw47
+ lW0a1DZ61sSHg==
+From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, 
- "Nicolas Belin (TI.com)" <nbelin@baylibre.com>,
- Francois Berder <fberder@outlook.fr>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Vincent Jardin <vjardin@free.fr>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Timo=20tp=20Prei=C3=9Fl?= <t.preissl@proton.me>,
+ Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH v5 0/3] fs: regression-safe load <iface> for null_dev_desc_ok
+ fstypes
+Date: Wed, 15 Jul 2026 18:57:14 +0200
+Message-ID: <20260715165735.3207801-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,55 +68,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 12, 2026 at 10:50=E2=80=AFAM Igor Opaniuk <igor.opaniuk@gmail.c=
-om> wrote:
->
-> While reviewing the AVB 2.0 integration I noticed several memory leaks in
-> the verification path that accumulate on every boot.
->
-> In the Android bootmethod, run_avb_verification() allocates an AvbOps via
-> avb_ops_alloc() and receives an AvbSlotVerifyData from avb_slot_verify(),
-> but frees neither on the successful return paths. Every boot therefore
-> leaks the AvbOpsData structure, and with CONFIG_OPTEE_TA_AVB the leaked
-> AvbOps also leaves the OP-TEE session open (it is only closed inside
-> avb_ops_free()). The AvbSlotVerifyData - holding the kernel cmdline and
-> loaded-partition metadata - is leaked on both the locked GREEN/OK and the
-> unlocked ORANGE/ERROR_VERIFICATION success paths.
->
-> Independently, the AvbOps I/O helpers leak a struct mmc_part on every
-> partition access: get_partition() returns a malloc()'d descriptor that
-> only its internal error path frees, while none of its three callers
-> (mmc_byte_io(), get_unique_guid_for_partition(), get_size_of_partition())
-> release it. A single "avb verify" performs many such accesses (footer,
-> vbmeta and the hashed image chunks), so this leak grows quickly.
->
-> No functional change intended: the GREEN/ORANGE boot-state handling and
-> the locked/unlocked acceptance logic are preserved.
->
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> ---
-> Igor Opaniuk (2):
->       boot: android: fix AvbOps and verify-data leaks in AVB path
->       avb: free mmc_part allocated by get_partition()
->
->  boot/bootmeth_android.c | 37 +++++++++++++++++++++----------------
->  common/avb_verify.c     | 29 +++++++++++++++++++++--------
->  2 files changed, 42 insertions(+), 24 deletions(-)
-> ---
-> base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
-> change-id: 20260712-avb-fix-memory-leaks-831cfd7e2115
->
-> Best regards,
-> --
-> Igor Opaniuk <igor.opaniuk@gmail.com>
->
 
-Just a gentle ping on this patch series
+3 commits providing documentation of impacts and testing the dispatch
+for null_dev_desc_ok fstypes (semihosting, ubifs, sandbox) in the
+generic `load <iface> ...` command.
 
---=20
-Best regards - Atentamente - Meilleures salutations
+The test does not cover ubifs, I could not make it work with
+qemu. Since the code logic is there and testing with semihost
+is done, it should cover the needed cases.
 
-Igor Opaniuk
 
-mailto: igor.opaniuk@gmail.com
-https://www.linkedin.com/in/iopaniuk
+Changes in v5:
+- test/py/tests/test_semihosting/conftest.py: fix CI
+  issue reported by Tom Rini
+
+Changes in v4:
+- Apply Simon Glass's v3 review:
+    * commit body: "-" in the example
+    * load.rst: drop the internal code references; fixes
+    * test: drop redundant negative guard
+- Add Simon Glass's Reviewed-by to all three patches
+
+Changes in v3:
+- Apply Simon Glass's v1 review:
+    * Fix typo "thue" -> "the" in the commit body
+    * Refactor the dispatch loop with a fs_lookup_null_dev_info()
+      helper
+- Add doc/usage/cmd/load.rst "Null-block-device interfaces"
+- Add pytest regression tests for the `semihosting` and
+  sandbox ifnames, verified passing on qemu_arm64 (with
+  CONFIG_SEMIHOSTING=y) and on a sandbox build respectively. A
+  ubifs test is intentionally not done.
+
+Changes in v2:
+- (v2 is my local iteration, not good for the list; the changes
+  since v1 are captured in the v3 changelog below.)
+
+Vincent Jardin (3):
+  fs: dispatch null_dev_desc_ok filesystems before lookup
+  doc: usage: cmd: load: null-block-device
+  test: py: load: check null_dev_desc_ok dispatch
+
+ doc/usage/cmd/load.rst                        | 33 ++++++++++++
+ fs/fs.c                                       | 42 +++++++++++++++
+ test/py/tests/test_load_sandbox.py            | 51 +++++++++++++++++++
+ test/py/tests/test_semihosting/conftest.py    |  4 +-
+ .../test_semihosting/test_load_semihosting.py | 38 ++++++++++++++
+ 5 files changed, 166 insertions(+), 2 deletions(-)
+ create mode 100644 test/py/tests/test_load_sandbox.py
+ create mode 100644 test/py/tests/test_semihosting/test_load_semihosting.py
+
+-- 
+2.43.0
+
+base-commit: f605dcee103c897b6f1a8873549a36949bd4e2a1
+branch: for-upstream/fs-null-dev-desc-dispatch-v5
