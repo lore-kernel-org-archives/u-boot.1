@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03176C44507
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 08:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3842C44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 08:30:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00F0084AF5;
-	Wed, 15 Jul 2026 10:29:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 023D684B04;
+	Wed, 15 Jul 2026 10:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="XSlQjXWM";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="kGfmKXRn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBFB684AF6; Wed, 15 Jul 2026 10:29:52 +0200 (CEST)
+ id C320484B06; Wed, 15 Jul 2026 10:30:28 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E82284AF5
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 10:29:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A33FA80087
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 10:30:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 5167ec56802711f1b1788b6acf885367-20260715
+X-UUID: 6b9ecb9e802711f1b1788b6acf885367-20260715
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
  bh=JDUX9ZErfQaLWembXEXQSdq/hKZNnSyfksZUNmn3Xss=; 
- b=XSlQjXWMOpeOq/VK9pMCmyVgk9LIAEXfZtze3afKmjBQ85TpTU3oBlgnqELEep+YFE/iAvlINx+MRUjjlIt5wU4BXAGIyT8VmCnrAMAVVUa+3RizVm/LlHngZGCq1pLNIatDlpJCt1RXW3TX8CdNUivRamcNsWNzojOoBK7nnPs=;
+ b=kGfmKXRnYzgeWbqFwUTBghDA0Itu0XYFCW9VbAEozN7He7uf/d5zfpulPorEcsKMFLxR2HSgxgD2DQNVRfQSlAxNwbHSMIGAqAsegyuRfvfQHLWh7uhKRb9u0XSTFcA3Zh5Fke+KreJl/deCFypRKeSWFuvtG0eRQpLzEYdJEx8=;
+X-CID-CACHE: Type:Local,Time:202607151629+08,HitQuantity:1
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.17, REQID:17f630dd-ee68-47f0-a74c-daf8bd76bc67, IP:0,
+X-CID-O-INFO: VERSION:1.3.17, REQID:dd978376-1c06-45d0-bb46-d2288f2899de, IP:0,
  U
  RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
  :release,TS:-5
-X-CID-META: VersionHash:d497b38, CLOUDID:4946b837-7759-43a9-ae06-f4df9d53bea1,
+X-CID-META: VersionHash:d497b38, CLOUDID:4b46b837-7759-43a9-ae06-f4df9d53bea1,
  B
  ulkID:nil,BulkQuantity:0,SF:102|836|865|888|898,TC:-5,Content:0|15|50|99,E
  DM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0,OSA:0,
@@ -45,18 +46,18 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 5167ec56802711f1b1788b6acf885367-20260715
-Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
+X-UUID: 6b9ecb9e802711f1b1788b6acf885367-20260715
+Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 827533222; Wed, 15 Jul 2026 16:29:38 +0800
+ with ESMTP id 1032433445; Wed, 15 Jul 2026 16:30:22 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ MTKMBS14N2.mediatek.inc (172.21.101.76) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 15 Jul 2026 16:29:36 +0800
+ 15.2.2562.29; Wed, 15 Jul 2026 16:30:20 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 15 Jul 2026 16:29:35 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 15 Jul 2026 16:30:19 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
@@ -68,8 +69,8 @@ CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <yangshiji66@outlook.com>, Bernhard Messerklinger
  <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v7 0/7] Fix and add some spi-nor flash parts (v5)
-Date: Wed, 15 Jul 2026 16:29:31 +0800
+Subject: [PATCH v7 0/7] Fix and add some spi-nor flash parts (v7)
+Date: Wed, 15 Jul 2026 16:30:16 +0800
 Message-ID: <cover.1784100103.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
@@ -90,6 +91,7 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
+Message-ID: <20260715083016.0IAzM0vfsW9AsA4zA_DAN8KSJao9tiMEAiEv4BcLqdU@z>
 
 This patch series correct some existing flash parts and add some new parts.
 
