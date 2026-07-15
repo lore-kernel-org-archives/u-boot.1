@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66674C44507
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 00:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69057C4450A
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 03:00:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ACE684A95;
-	Wed, 15 Jul 2026 02:56:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5CDD384AAC;
+	Wed, 15 Jul 2026 05:00:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9pws8KU";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="TO9yDK8W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01B4F84A95; Wed, 15 Jul 2026 02:56:34 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00EFB84AAE; Wed, 15 Jul 2026 05:00:45 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77AD084A8F
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 02:56:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EE6084AA4
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 05:00:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7e6128bd9b3so2510529a34.1
- for <u-boot@lists.denx.de>; Tue, 14 Jul 2026 17:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784076989; x=1784681789; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=9XknWnR1leMWpeUk/NhjfikWTZ22G3RhdRH8wWizEac=;
- b=M9pws8KUuP4aqcy6ytgZiIzi8h6Ct0T0/Fj/oDm9D5x9/0BubIFaPttitT0x7clCx8
- mK/1sVrKWgIaquPTztPXd7Mr528YkHqpeoDLWq/aVThCUkDCzy+x2qWkRXfuRBTt88dW
- Syn0nWRxq+8hR1Y4c4FCQBzm0NWYChjK4+6FI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784076989; x=1784681789;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=9XknWnR1leMWpeUk/NhjfikWTZ22G3RhdRH8wWizEac=;
- b=QxyAmusH7T3zyHYMhsCOD5tuafBpTUJ6S9wAaAJE87tHCno1DryhdsCxc8R+fZna8a
- j+hoasP1sQywCW3SRkKT5INnJmwKCqWh8og9kmOPZLl/Mfoj5BDVL6izjPuVccuCVcsM
- a9xkHQxEBR2GsOCTGYh/FsYMwOfZ2oF4H+QGGSwqQbXQXejbccQ88Jkjtv6zHck0iD+2
- WYJ7rsiI/ElR19hxxBu1bXhY/wPb4I1/a25pobI0U/KhXY5+8CeOnKuRtia7afWAeyvH
- P8nxXgpuirv60+cni2mmn7cnEY+pqzcHaWRs8aFM3MVhXeMTTKtOFmS+Bwld0NvALYBM
- /7Qw==
-X-Gm-Message-State: AOJu0YzaCaBN5B9Sq6bIocNRH098E6dekGvItAcN17oLjnXFfocWSm0/
- w0jqIIe5G6wYoHQK9956lU7kU2Vlj7FurKN3hZfTBPpV2+vIBtwyWPUf2SMviBDpiJ0=
-X-Gm-Gg: AfdE7cmmRkTzxolLg5bxlan+66i7QXhMnnlOsA8mAbC+np7uEnGGdmnO5vKfj1IbAen
- JNhZ0umg+2v6TTtWIOyXaO7SDcSW0WMD5JNImb6dmAk+0OvVcg1GQ70gJDjbpIzgfn3YXQvqcUP
- iFJYQGXwRvtoxcs5LiVLsa2Ze74eaI3WchwzM9jvDaifvg8C8eZ6+8E77OZhtvYq/ektQz6f7sK
- rv34VjW5ZnINXc0q59cYil5a3snPiMnTJ7AzQjoOF/CtRcVc2nDEM/8gm8QKrMHuR4Yg6g2Frzo
- GaXIwdOanggTbZ0ZXEZ4ScB6vtE5WVSWmuXq2DMy/rWiyi1lFLIpaRzhb8jHSNoTb275MOBZWOW
- D1kYRXGWJwdgLAdWBAoUI729lnjsrtzHCEjn8HrDq5UYZ5AsXzKsUn7H5KHOlN6r/nyjgOCh5W3
- xrijSYcPahmy0oIV43AusvZBISdOyVzXCCC2s3Va8jeHQ1Zmt9ot5cQxyj4lI3UR8+v6O1iLFrN
- 1mGlCpMJnVcrNlj/qi4zwB80cBgOuFlnGpJcg==
-X-Received: by 2002:a05:6830:2402:b0:7e9:e342:3dd with SMTP id
- 46e09a7af769-7ec59d9f250mr490053a34.22.1784076989138; 
- Tue, 14 Jul 2026 17:56:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7ebcb2631dfsm16239289a34.13.2026.07.14.17.56.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jul 2026 17:56:28 -0700 (PDT)
-Date: Tue, 14 Jul 2026 18:56:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Vincent Jardin <vjardin@free.fr>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Sean Anderson <sean.anderson@linux.dev>
-Subject: Re: [PATCH v4 3/3] test: py: load: check null_dev_desc_ok dispatch
-Message-ID: <20260715005625.GA4103122@bill-the-cat>
-References: <20260601131311.1163914-1-vjardin@free.fr>
- <20260702144359.1583239-1-vjardin@free.fr>
- <20260702144359.1583239-4-vjardin@free.fr>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 5740dd5a7ff911f18dc8c9802ae25ab1-20260715
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=W+uYCj9LfKK94eIpILCOk/p0Lmy4ipUFLqgJFkzi18s=; 
+ b=TO9yDK8WfdfDRUWp/EamK3FxJ+DuGcMP1IJwF/p4cXhdUC5qTix0AOS2haCH74TRS0Dsic/d3GVcEkb87+5V3g8J5WY9aCSmlrGuwaEaDTmsHfGDZHT+PhrxmVjCUU1YkdI2aZiTINCT+js7YOQXTdJzb204cnHO/MPPcMdTd6M=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.17, REQID:b89117e8-8750-41da-a6fd-c7313786f4d4, IP:0,
+ U
+ RL:25,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:25
+X-CID-META: VersionHash:d497b38, CLOUDID:2255b537-7759-43a9-ae06-f4df9d53bea1,
+ B
+ ulkID:nil,BulkQuantity:0,SF:80|81|82|83|102|836|865|888|898,TC:-5,Content:
+ 0|15|50|99,EDM:-3,IP:nil,URL:99|11|83|106|80|1,File:130,RT:0,Bulk:nil,QS:n
+ il,BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:
+ 0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_ULN,TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 5740dd5a7ff911f18dc8c9802ae25ab1-20260715
+Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1290126932; Wed, 15 Jul 2026 11:00:31 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Wed, 15 Jul 2026 11:00:30 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Wed, 15 Jul 2026 11:00:29 +0800
+Message-ID: <7be0c4e8dc3fe32bef1452de434a9812719d5dd3.camel@mediatek.com>
+Subject: Re: [PATCH v6 1/7] mtd: spi-nor-ids: Correct flash flags for
+ ESMT/EON flashes
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <Takahiro.Kuwano@infineon.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Date: Wed, 15 Jul 2026 11:00:28 +0800
+In-Reply-To: <d8dfad96296b4654b206e08dc2156600@infineon.com>
+References: <cover.1781508530.git.weijie.gao@mediatek.com>
+ <3facbb0d047ffeab20aacee385ce137bb8894716.1781508530.git.weijie.gao@mediatek.com>
+ <d8dfad96296b4654b206e08dc2156600@infineon.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NVpr60XuD2ymEIWG"
-Content-Disposition: inline
-In-Reply-To: <20260702144359.1583239-4-vjardin@free.fr>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 7bit
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,50 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 2026-07-03 at 09:03 +0000, Takahiro.Kuwano@infineon.com wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
+> 
+> 
+> Hi,
+> 
+> > All currently supported ESMT/EON flashes supports 4KB sector and
+> > dual read.
+> > EN25Q80B also supports 1-1-4 quad read.
+> > 
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B.pdf__;!!CTRNKA9wMg0ARbw!j7E681Y4Vzt6S4aIsheiVdVOq9m8dv0YTHDU9h9Bd3fu83ASyITxt4cxou55heRBOS52p8pOfsmu5cjY5uK7MdQnA5YmOgE$
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH128A*20(2TC).pdf__;JQ!!CTRNKA9wMg0ARbw!j7E681Y4Vzt6S4aIsheiVdVOq9m8dv0YTHDU9h9Bd3fu83ASyITxt4cxou55heRBOS52p8pOfsmu5cjY5uK7MdQn6Cw3FY0$
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25S64A(2SC).pdf__;!!CTRNKA9wMg0ARbw!j7E681Y4Vzt6S4aIsheiVdVOq9m8dv0YTHDU9h9Bd3fu83ASyITxt4cxou55heRBOS52p8pOfsmu5cjY5uK7MdQnfRLy1jE$
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> > v6: removed SPI_NOR_QUAD_READ from incompatible flashes
+> > v5: not changed
+> > v3-v4: updated commit message
+> > v2: not changed
+> > ---
+> >  drivers/mtd/spi/spi-nor-ids.c | 12 ++++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-
+> > nor-ids.c
+> > index c0fa98424aa..0dacb4abdbc 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -90,12 +90,12 @@ const struct flash_info spi_nor_ids[] = {
+> >  #endif
+> >  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
+> >         /* EON -- en25xxx */
+> > -       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K)
+> > },
+> > -       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
+> > -       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K)
+> > },
+> > -       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
+> > -       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
+> > -       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K)
+> > },
+> > +       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, SECT_4K
+> > | SPI_NOR_DUAL_READ) },
+> > +       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K
+> > | SPI_NOR_DUAL_READ) },
+> > +       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K
+> > | SPI_NOR_DUAL_READ) },
+> > +       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K
+> > | SPI_NOR_DUAL_READ) },
+> > +       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K
+> > | SPI_NOR_DUAL_READ) },
+> 
+> In our discussion in previous revision [1], only en25qh128 supports
+> 1-1-4
+> read and program, but you set QUAD_READ flag in en25q80b instead.
+> Please fix.
 
---NVpr60XuD2ymEIWG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I reserved this flag because I found a newer datasheet that claims it
+supports the 6B opcode for 1-1-4 read:
 
-On Thu, Jul 02, 2026 at 04:42:14PM +0200, Vincent Jardin wrote:
+https://www.novitronic.com/Datenbl%C3%A4tter/Aktive%20Komponenten/EN25Q80B%282C%29.pdf
 
-> Some pytest modules exercising the dispatch added by
->   fs: dispatch null_dev_desc_ok filesystems before lookup
->=20
-> test_load_semihosting.py:
->   "load semihosting - <addr> <file>" and the optional
->   [bytes] [pos] variant. Runs on qemu_arm64 with
->   CONFIG_SEMIHOSTING=3Dy; reuses test_hostfs.py's host-staged
->   fixture.
-[snip]
-> +@pytest.fixture(scope=3D'session')
-> +def sandbox_fixture(u_boot_config):
-> +    """Host-staged fixture file read by `load sandbox`."""
-> +    path =3D os.path.join(u_boot_config.persistent_data_dir,
-> +                        'sandbox-fstype.txt')
-> +    with open(path, 'w', encoding=3D'utf-8') as f:
-> +        f.write('Das U-Boot\n')   # 11 bytes, same as test_hostfs.py / s=
-emihosting
-> +    yield path
-> +    os.remove(path)
+As the EN25Q80B is EOL, I can't buy one for testing. I'll remove this
+flag in next patch series.
 
-OK, but this fails CI with:
-https://git.u-boot-project.org/u-boot/u-boot/-/jobs/40773
-and saying it read 34 bytes.
+> 
+> Thanks,
+> Takahiro
+> 
+> [1]
+> 
+https://patchwork.ozlabs.org/project/uboot/patch/64ce1a920dc067717de2b39d2e7a5098e6853aab.1781164951.git.weijie.gao@mediatek.com/
+> 
 
---=20
-Tom
-
---NVpr60XuD2ymEIWG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalbatgAKCRAr4qD1Cr/k
-CiL/AP9PSRBIkxtAw+2q14VXP2YYAGbVjt80FpZrV5BxCP09RwD9G9Oduixi9ldN
-3JBUVqePK0MIX2z6JZjCK+/gGsJd9g0=
-=unmD
------END PGP SIGNATURE-----
-
---NVpr60XuD2ymEIWG--
