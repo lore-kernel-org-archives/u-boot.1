@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78629C44508
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 14:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A7DC44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 14:35:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBE3F84CF0;
-	Wed, 15 Jul 2026 16:34:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1417784CFE;
+	Wed, 15 Jul 2026 16:34:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="Fa7OTHNC";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="paRPxG85";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0A4084CC9; Wed, 15 Jul 2026 16:30:40 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 137E084CAF; Wed, 15 Jul 2026 16:30:42 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CAF884C23
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 16:30:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06AFE84BB4
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 16:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c1600d040e4so335724766b.1
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 07:30:38 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c15f020a223so738480266b.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 07:30:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1784125838; x=1784730638; darn=lists.denx.de;
+ d=fairphone.com; s=fair; t=1784125839; x=1784730639; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=XRTKSZhCX67VfW2vRcLwplBsWGwbf4mFCLLdBHPaBLw=;
- b=Fa7OTHNCgbbXKt3RbXtjp4YmhIiwOLPpzoUdBR/SewJLvqzkdmif4LxVshknCqRNkQ
- JuHsmn4QFLaEZ3YrMY9oifhaLSysGTT+IDIq+bb7Xxln26w+ftMiRxKInzUgOfeKULCr
- miMHLWMBBvuSj5eYm7MT0rrHPjyLSB40hCOsPUZ1wl2gJsYivqKpM0X2ePNCG+a09hSR
- qf9rxsKMLLVGxC1DZvtsb26rHBQL8zaw7/19qy61l6z6ilUe6dqAfSNlh6a8l+iCbSZI
- Ui/8hwAuZxipBQk47yaD1n8mbPtOhASQOJ8euwWRCuLQ5zD5keZB7mXWN8pYZwc0KaHR
- pGBA==
+ bh=eX7ahfRP/akWOeiK1gBbaJOn4byW/1w39K1oF3HaEs4=;
+ b=paRPxG85mlaCUMnzHlm3p3mFrRNRREmvYx38SVttQmJvaJpX617lW0frYPuZJ8mBpM
+ uV7fEgDMGMj5Y5QGirTNXsfJaZlwJVRpeao8JZiysqiiPM0x95+9QquovtiXVz6GS3PY
+ IL9m+rinu9bzdb0JjEzSVzoigy6za0XFaeIhpuwc5mrRUaD/ddXT2uy1QhuttERGE5WR
+ KVO1Ah6caRZcII2/w4aCyHK0d41YbVTQ//QXhEs9dfaqsDzuT2jdbZG7V3nQuKIX7pN5
+ bXR44/+rej7DImII0G6fehHLAqA9pU7vb1I6PqpTLJspwdg1XhMTXsXjzNvEqh1rWvVR
+ sDmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784125838; x=1784730638;
+ d=1e100.net; s=20251104; t=1784125839; x=1784730639;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=XRTKSZhCX67VfW2vRcLwplBsWGwbf4mFCLLdBHPaBLw=;
- b=Qh4yJrk1DeXBxDlBXFwTwRMNBjtYIRK2eaUDjMoMsTClRB2SLyKuft0bcnRA9EZlSO
- hiFUP0hWa6sNdJ8+OH7dV7W1Q6GhVp2nZ2qRQr6UyCI7GO3h4aX0L+Cx1HLDDDogQjAW
- zSjefLZbeQfYF09qieBn6ujO0CxkHm8nO7qu42+btVNPmNlvj4BGEY8AE9OHKA7eAoly
- yeAusv3Ul3StL/pBlyLdIf7yDydMSlpTZzRs3BoIi4odMv8C3vYIn6+hfDe4UISEisCf
- YO0bArl2OkgsBwNmBhNFRPVaM/3oEIecX5WJKrV8+rxbNfVkY/tbxmZh+I/WAbjJeA3I
- 4wDw==
-X-Gm-Message-State: AOJu0Yx3vMd8O3heYbk4qHDe27ZqSvD/NKEphGcIbaIkMS3uIJ+2HECr
- Uq1DJNuat4SsTBUV+oj6WQ543ZJ9Rns6oSFRJ2ChWKUUQubicBk6c+X8LGoudYf6az0=
-X-Gm-Gg: AfdE7cnVqN0rG6CbDX3DC+kkyf0/IXcrW64elQqGeeHXdLMV68JccSIbYtYf+WQeahq
- c7lQYFgfxb08tojgzSsbKG8yDw+cR7uCoU1OamNil7NAhloiQVYXPQpSwBShwPBXM/nXlkX6pLh
- VjdDMJyJ8eRvlshNYc0hD0k+G1HrmLEGaevgu4ONe2PgLRozAr2/UZuFnXm+Rl0m24jNdnX640t
- EIGUZoDthdU8ZR8sFKK/tMnP2OKwTlFN2PXdwXJJ/HsgQBA81MszmkK9dwkdky87LilrZzkmJYS
- fjLdEYm8aHx4aY62Wyaee+wrAebEhFRCG3wGJPZbvUd2zfi8W8YLR7UGSKJPfKlV1ntEfOxjQ2W
- /5TuvYFV7dHUvSRBLax1xCTs03I/2fFfSpC1V1svQe3/AbtU7wuEl9qddqVdzwKu2q189H6G3sL
- qv1QPV+3Se0UgLAWYRbyckwJgJk4vmIhwMTm47db+P4yM5oG/yyRDuIc9kbYCK5MEBhLM=
-X-Received: by 2002:a17:907:3d56:b0:c16:7606:4cef with SMTP id
- a640c23a62f3a-c16760651d6mr289232666b.13.1784125837962; 
- Wed, 15 Jul 2026 07:30:37 -0700 (PDT)
+ bh=eX7ahfRP/akWOeiK1gBbaJOn4byW/1w39K1oF3HaEs4=;
+ b=o42uwEnKWHG9TjXZVqSL5BYPEf56vyEF0sQS+GUe/uqW5IeeMonmSUE3cGJU7smdoa
+ 9JAFb70fxu/VoD8LM6oQMnQwRpubKs7CJ0BcNyrDWJf6GGkrmw2Rk8LYnJnYSONZ8Yr1
+ Kj2JTPHjJPMESGDBgfoHrkLd0rYlmU3xJchupftYSka9lIo97nclF8GaOA3maOoaXpIu
+ EoASgpbr5CqJTQhX0CeshW1tBRgy9TiL9o/WnDPPq1DbreQ5XdmZsBVIfEnYsBfP/mOz
+ SF72JOA475ieLg52+advbs6VA6F532vNMJfdG+dA+A3kcBA0dAoPhCrdAZ5CY9pf+jkD
+ iCsQ==
+X-Gm-Message-State: AOJu0Yw3UN4jnLlTFQJFjkIxQMcRhw4dgC2KcotMDLFnJ7nCmWZtfHHM
+ 5hrADzz8crjkB69TDhYNHsPuJmvKq0t8HOc2P6iFAYUnOwqJ8/4xmu7mmNGq3SlOtyA=
+X-Gm-Gg: AfdE7cl+JNAnQymY1LAiMBBbYMBDFWPlVKf93/s5uI2uPespKLdSuyojhLcHWdvm20u
+ MAbfTpMx7q1kufmfa6gI8YIlnsm56avl0uz7d0Zmyqkv+Ov10xbQ/1sw9YgtMhP3zw1R5VPDmNa
+ Ht+TIbsPIbBnOpidI066Gl8aI+2x1pUFXp3ll4eqc1kVQToUi7xQV44C29GbQW2fleRlL+UV/0F
+ b6o5Zlpp2SmOSpiCLjghSwLvXhI+5cL2KSlfxz37dsAAQWSXpX0FlVuntFmdi0bSLuH1GlzZxV0
+ IElRLl9y5CHnVkDa1QPkrt0IE2lZj4jgS9UAfcsofJli5te/T5BX5YvHB29larkjESAxVxaQ0KM
+ Ycn0gIeCwml6kp5jNpkszyiZid2to5cq8Qx8Ceu1KAbbKihs861t5yFmMraw/UTQvk0iUbmOV9c
+ sGpWRo8TYjyYZ0tA2aXWsEjue1f+HAWKXUM5KQcxN2zWQ/BQAbjjEDB13vB1XWsIqoOCaZeOGLe
+ WOtgA==
+X-Received: by 2002:a17:907:3f12:b0:c16:13c3:b1ef with SMTP id
+ a640c23a62f3a-c1667a0cd22mr393049266b.24.1784125839468; 
+ Wed, 15 Jul 2026 07:30:39 -0700 (PDT)
 Received: from [172.16.240.102] (144-178-202-142.static.ef-service.nl.
  [144.178.202.142]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c16871262casm44827966b.6.2026.07.15.07.30.36
+ a640c23a62f3a-c16871262casm44827966b.6.2026.07.15.07.30.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2026 07:30:37 -0700 (PDT)
+ Wed, 15 Jul 2026 07:30:38 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 15 Jul 2026 16:30:32 +0200
-Subject: [PATCH 1/2] clk/stub: Support qcom,rpm-proc with smd-edge child
+Date: Wed, 15 Jul 2026 16:30:33 +0200
+Subject: [PATCH 2/2] clk/stub: Add qcom,smd-rpm compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260715-clk-stub-smd-v1-1-af9232571ef9@fairphone.com>
+Message-Id: <20260715-clk-stub-smd-v1-2-af9232571ef9@fairphone.com>
 References: <20260715-clk-stub-smd-v1-0-af9232571ef9@fairphone.com>
 In-Reply-To: <20260715-clk-stub-smd-v1-0-af9232571ef9@fairphone.com>
 To: u-boot@lists.denx.de
@@ -87,11 +88,11 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784125833; l=2146;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784125833; l=663;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=5OkeGHvP4XIOBmCF4zhSLpcVFFRLTtUO8th5bCsLuFI=;
- b=U94VsP1hY9kRFrbr78yXPZM1443WMGFjPjy14PzzhI0TBuGsvkJBqBTWXTqQU1U4u/ECwg0lW
- 4B1yBmkLjT0DhQyNd2UsJRSKEHygAFQorceNmKJAZknualizt1nRLkS
+ bh=/UGUw1Dvp7b/NoIzVXP+Wqnq5XvGdZKtZ/vaJ5579ak=;
+ b=/+2+ahHD1w8S6Rim6zVPgVxoFtnbXpPEYMjPOIw3ypVlJpMHVZ79Oi1cFKWljuid3ooROWH+M
+ jhSRxcAWV3rAYbmV6Ns2oGKPX5FumeqUxS1mn+KJgNVuNmuHvo4tQyO
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 15 Jul 2026 16:34:36 +0200
@@ -111,81 +112,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Older Qualcomm SoCs (e.g. msm8953) have a qcom,rpm-proc with an smd-edge
-subnode without compatible, which breaks probing any devices underneath
-smd-edge like rpmcc. Manually find and bind nop_parent to smd-edge so
-that probing of child devices can continue.
-
-Example devicetree hierarchy:
-
-  /remoteproc -> qcom,rpm-proc
-      smd-edge -> (no compatible)
-          rpm-requests -> qcom,smd-rpm
-              clock-controller -> qcom,rpmcc
-              power-controller -> qcom,*-rpmpd
+This node is the parent of rpmcc and rpmpd on some older SoCs (e.g.
+msm8953) and needs to bound to nop_parent so that the children drivers
+can probe.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- drivers/clk/clk-stub.c | 36 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+ drivers/clk/clk-stub.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-index 4a6c71016da..6daf0efa8d0 100644
+index 6daf0efa8d0..5bfee3efd25 100644
 --- a/drivers/clk/clk-stub.c
 +++ b/drivers/clk/clk-stub.c
-@@ -9,10 +9,10 @@
- 
- #include <clk-uclass.h>
- #include <dm.h>
-+#include <dm/lists.h>
- 
- /* NOP parent nodes to stub clocks */
+@@ -15,6 +15,7 @@
  static const struct udevice_id nop_parent_ids[] = {
--	{ .compatible = "qcom,rpm-proc" },
  	{ .compatible = "qcom,glink-rpm" },
  	{ .compatible = "qcom,glink-smd-rpm" },
++	{ .compatible = "qcom,smd-rpm" },
  	{ }
-@@ -26,6 +26,40 @@ U_BOOT_DRIVER(nop_parent) = {
- 	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
  };
  
-+int rpm_proc_bind(struct udevice *dev)
-+{
-+	ofnode child;
-+	struct udevice *child_dev;
-+	int ret;
-+
-+	/* smd-edge subnode has no compatible, bind nop_parent manually */
-+	child = ofnode_find_subnode(dev_ofnode(dev), "smd-edge");
-+	if (ofnode_valid(child)) {
-+		ret = device_bind_driver_to_node(dev, "nop_parent", "smd-edge", child, NULL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	dev_for_each_subnode(child, dev) {
-+		ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id rpm_proc_ids[] = {
-+	{ .compatible = "qcom,rpm-proc" },
-+};
-+
-+U_BOOT_DRIVER(rpm_proc) = {
-+	.name = "rpm_proc",
-+	.id = UCLASS_NOP,
-+	.of_match = rpm_proc_ids,
-+	.bind = rpm_proc_bind,
-+};
-+
- static ulong stub_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	return (clk->rate = rate);
 
 -- 
 2.55.0
