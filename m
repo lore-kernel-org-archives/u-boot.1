@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE67C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 14:29:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99187C44508
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 14:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE66884BBE;
-	Wed, 15 Jul 2026 16:28:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EADC284B77;
+	Wed, 15 Jul 2026 16:28:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="bykcaF5u";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="ZWXXk5tk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4868C84BC3; Wed, 15 Jul 2026 16:28:33 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 7A45884BDC; Wed, 15 Jul 2026 16:28:34 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51C1F84BB4
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 16:28:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7536E84BBD
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 16:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-493c19bad03so49326945e9.2
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 07:28:31 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-493c2c0b9a8so14715965e9.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 07:28:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784125711; x=1784730511; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1784125712; x=1784730512; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=enGkhhSIod1a+YRJRvPwE+LWjCOzuw1ua8GzHOStvrs=;
- b=bykcaF5uSIs3+PuPtm5FVjPH8ByYh9VyCdaZ+RbHfd55BxN1RLmOT713puFh8Ezj7u
- fxijV9YRsZ1pqHFMp1OGJW5wETWmD0gTBNQSqfXDK61L6LzaNJAeLACLtwYPOE95HjDO
- H384zgyWoiKtqzBQJMblNwg/Cp/RleB6Eqjr5F2NqrSD6xGSthFYINxh62BJHHFjagEI
- sfCFGIfkDj14ijoPf/WFrX3tnGzxPSjaMC+1pLCePESq92qDnYAB+enwYhFlKSeicdOF
- R+GmTdVdAsUxFcWLcA0qzKKU+ryTJjbv7Nyi48UZE7hiJpcELctr/Cj1zV0g6mWGzaOh
- M+/g==
+ bh=LFHieM1w3LSo/VlwdKzbmzIDRE3pz0oS5wfiIM9zxtg=;
+ b=ZWXXk5tkc2dUjpJUk/Xm9kId+P2fntf1y3GpJxGS6U6KdvqbcqO3dx8HfsvbCNYd0e
+ Y6xqpPlJr+IfhSEcWodDkWdeY7wDHaoL0qLMCqsYw5qO//Bn1ZnTwvRF3feX90JlAi4+
+ jXx+jJvhvVg0qffllbyf+rYxtu5xCPpMLCFlrbRfTsyVnyI5OfnMjTYAQiff0RDi7cPG
+ nYLgXAgcSsgHsZycW9vntuuaevo9BdoLqO8MWgtSmq6uuAHQ74C4SKE3gky+6BLkJ/at
+ UmCA/HBwvvzusapmSbKMbHDdGIKYVa5jb5KkmDDADHuNrrBaYa7I+6SkE/puF6NgL4zC
+ G8kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784125711; x=1784730511;
+ d=1e100.net; s=20251104; t=1784125712; x=1784730512;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=enGkhhSIod1a+YRJRvPwE+LWjCOzuw1ua8GzHOStvrs=;
- b=PEs4KkyMkL00qfR7I97P1R7FHCA+T1p5foh7j5o+8dyQQUF8/AadDHkjc30c4Qu5Di
- XlqFk0gNifTZ9WZ39QAFHvJZ0Pq9Gm+iOuVcI74bQ3U7C5znpc+vWRLfCiaoglEln1wC
- yaytjlEVaab6PBPtxztl935sCIOsKuGx0ygdLM6n5ooyKf/BvdFTYbvdpoKKydog7pda
- 29CZDqAuNAl7UJ61+KoGn9Pup7wtRSJE4V+whO9oZt2MEkQgY3oF8AlyuM2DI4zcoDdt
- uVckQYgKX0lseZRSblPyHhC5WpMOOD5VxDnxQs65Vc8/gHCJxD2RMDejA1afe9kwAncw
- +5KA==
-X-Gm-Message-State: AOJu0Ywa+4m45kaAN8LKSzOO25taSW2X/GEE/QUMcfK2AsNCQBdyyZrD
- AsbgOuAE4rF2uZnsRpuuLCTh7t3oRw4GJfUm0/mqSnHdhr6z1IOEyaUJav29gi3U2RU=
-X-Gm-Gg: AfdE7cnFafC88ihTFAKUMIHJyDe8G148SNw1EXbdsqS8WuYpte718fnzA/hxUpmBDTD
- QM1r6GfSPKc7VlxY4OwzoGZD1Jp+aa9d5fEq5lOEauPC+qG1i8qwe0gL6lwSRqqGg4VzLfEjClb
- AgCBMxpB/y0v3P6/4Bo0NBRymp6L4I2d6JBBQy629D4zT+3hRs7M8AKDra49Q+J1Qm/4hQaj605
- QHkcj7VdIhN9he5Ag/oS/4/8rDV3wzXLKcIWhIAcN/FCuRjJjOtuZ3pISPegOtDPbQGzAvJDSdu
- ozWJsWdLwq3Gyx6Yv2NHJPUEPbmMSiY3Jc6EdYnMLTi4af+voVQld+VgSi6ay/nBQY/ex9BIdJD
- jj2oSTNBAOF0j4O90xBQCCZRuQdQH8cq/Mi8uJtfrZwAFT/jJeCGkdJurdJ3yeyrpa4R3otX/Vw
- boeNd4BL+R1KiEFiASdJufMb1ZymaZbLWGWBAoXq5rpxch+21sX5YFrHbjDcY2pfm3GQ5tk9pLA
- lWoWkyjmNjuDFHdXYtqPQvMgLhsN9FtzNTRqPIKwzC7wMbqOmMve4k2YSliSPmpE+AKjIR9
-X-Received: by 2002:a05:600c:c83:b0:493:c84c:2b57 with SMTP id
- 5b1f17b1804b1-4953c28b1a6mr31882875e9.29.1784125710538; 
- Wed, 15 Jul 2026 07:28:30 -0700 (PDT)
+ bh=LFHieM1w3LSo/VlwdKzbmzIDRE3pz0oS5wfiIM9zxtg=;
+ b=Up5j46u6rxTJH+dnN84IlXNuZzZxFbhpGwtbd13wnyMgKwnVcret8g4iyQr3Gdw8D1
+ rb6qxxTy3lnUGWMYE0HNPD6T0yyQCTdPKUjJOGod+vJhat2acYT1GXIm665CwHSpM6Km
+ XJ4dDXsqlOyqhuHhBwwhhSNd9qfAp8K9ixHdVYTrUmG4ODNJrtxkxgGRjKQemrO+kFPe
+ zYsBlXhBcFOLt2xij/E7WpadIsPie4tZimcIt3J6Tp4QwqyZYyvtUq7NzVOOKnofJJsx
+ 2w+i8DAsoTNqB0zG3jfjs2MlRz/btkGziWMKWiQfjGf+ev3ZR4Kq62XLFp7DwvKLPChs
+ +QFw==
+X-Gm-Message-State: AOJu0Yzg/tMOS7lRaMqKvj5EaOzaIXHEc1sIVKEq+/czoDAJseKLeiPZ
+ e6R/Mq0zpYwzLhe11sOmaB5h6n3+kCHQ1pfZ/6DWgbNC48fjMtPC6an6kCuiuY4z0qQ=
+X-Gm-Gg: AfdE7cnJL12aYC+K4Gh8IHqtCRAo2fUfNbFQJcWvoeKxNIXfr0qZjtjkaJNL4EzoYDZ
+ JGJ/k/N3VNSAkK2iWN7I/cvuk2XRbtTHv0Gqb/01/OxH3SQLqsK9R2xabP+A/ycLBuo8slthso7
+ +8Ppl88d48PtNxErBpy7t1vVIa5o4UCG2aSobEyEuWstlEVKT6VG0aS04+WwcgFzPrh01kvsNKK
+ TFu6H55uH8TrZGB2NGJzIeE1tWKZlEpwPmoSZLeoOX8DrTehO60WYiZ+Q5bBxaTqdBeiFts6UC0
+ BdqEDbjJ6VBePEFqAwPPGRYxdEshyj2OoQGY/nTNSklxcLPI0/T8d44yRQaZfuEUuc3eCcNfsKN
+ SY0KHfv4o4f8eaiddl2bXCzXyfxb3otln1di5MHBd3wKiWkmchpfY9A0einCFmSRWre1k6VRWBA
+ z+4Ad0D3rpTPZmTHiSfz6zNhfPNWWSBvtLj9w0B0tzfXdkOW60v7HSQSaYt10xv6jZH5O01Y6ys
+ 2fP1bdCgU5YaFLUJqpSrqnftMKR5fNrg0/YShziJtkLzwmBTuR4pTRyrkraao0znpkrM0yn
+X-Received: by 2002:a05:600c:c051:b0:492:3773:a230 with SMTP id
+ 5b1f17b1804b1-493f88268f9mr128709935e9.27.1784125711735; 
+ Wed, 15 Jul 2026 07:28:31 -0700 (PDT)
 Received: from [192.168.1.62]
  (2a02-8428-ae02-5a01-b206-d095-5e9b-f35f.rev.sfr.net.
  [2a02:8428:ae02:5a01:b206:d095:5e9b:f35f])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49508728019sm151881745e9.5.2026.07.15.07.28.29
+ 5b1f17b1804b1-49508728019sm151881745e9.5.2026.07.15.07.28.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2026 07:28:30 -0700 (PDT)
+ Wed, 15 Jul 2026 07:28:31 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 15 Jul 2026 16:28:36 +0200
-Subject: [PATCH v2 08/32] clk: mediatek: mt7629: use driver data to store
- the clock tree
+Date: Wed, 15 Jul 2026 16:28:37 +0200
+Subject: [PATCH v2 09/32] clk: mediatek: mt7981: deduplicate clock gate drivers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260715-b4-mtk-clk-cleanup-clock-gate-drivers-v2-8-23e907516010@baylibre.com>
+Message-Id: <20260715-b4-mtk-clk-cleanup-clock-gate-drivers-v2-9-23e907516010@baylibre.com>
 References: <20260715-b4-mtk-clk-cleanup-clock-gate-drivers-v2-0-23e907516010@baylibre.com>
 In-Reply-To: <20260715-b4-mtk-clk-cleanup-clock-gate-drivers-v2-0-23e907516010@baylibre.com>
 To: u-boot@lists.denx.de
@@ -112,80 +111,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass each controller's struct mtk_clk_tree through the driver data and use
-the generic probe function for all the MT7629 clock drivers, instead of a
-dedicated probe per controller.
+MT7981 declares a separate U_BOOT_DRIVER, probe() function and compatible
+table for each clock gate controller, despite all of them sharing the same
+implementation.
 
-The apmixedsys and topckgen controllers keep their own U_BOOT_DRIVER since
-they rely on dedicated ops and on the parent bind() callback, but they now
-get their tree from the compatible data. The apmixedsys probe still performs
-its SoC specific register tweaks.
+Describe the gates directly in each controller's struct mtk_clk_tree,
+reference the trees from the driver data and use the generic
+mtk_clk_topckgen_ops. The two sgmiisys controllers, which share the same DM
+flags and (absent) bind() callback, are merged into a single U_BOOT_DRIVER;
+ethsys keeps its own driver as it binds a reset controller.
+
+This also stops using mtk_common_clk_gate_init() and struct mtk_cg_priv,
+which are scheduled for removal.
 
 No functional change intended.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7629.c | 20 +++++++++++---------
- 1 file changed, 11 insertions(+), 9 deletions(-)
+ drivers/clk/mediatek/clk-mt7981.c | 91 ++++++++++++++++++++-------------------
+ 1 file changed, 46 insertions(+), 45 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk-mt7629.c
-index 2edf085970f..4bacabc8556 100644
---- a/drivers/clk/mediatek/clk-mt7629.c
-+++ b/drivers/clk/mediatek/clk-mt7629.c
-@@ -654,9 +654,10 @@ static int mt7629_mcucfg_probe(struct udevice *dev)
- static int mt7629_apmixedsys_probe(struct udevice *dev)
- {
- 	struct mtk_clk_priv *priv = dev_get_priv(dev);
+diff --git a/drivers/clk/mediatek/clk-mt7981.c b/drivers/clk/mediatek/clk-mt7981.c
+index 4e3a1c9d835..7efe0dcdf53 100644
+--- a/drivers/clk/mediatek/clk-mt7981.c
++++ b/drivers/clk/mediatek/clk-mt7981.c
+@@ -656,10 +656,12 @@ static const struct mtk_clk_tree mt7981_infracfg_clk_tree = {
+ 	.type = MTK_CLK_TREE_INFRASYS,
+ };
+ 
+-static const struct mtk_clk_tree mt7981_clk_tree = {
+-	.ext_clk_rates = ext_clock_rates,
+-	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+-};
++static int mt7981_clk_probe(struct udevice *dev)
++{
 +	const struct mtk_clk_tree *tree = (void *)dev_get_driver_data(dev);
- 	int ret;
++
++	return mtk_common_clk_init(dev, tree);
++}
  
--	ret = mtk_common_clk_init(dev, &mt7629_apmixed_clk_tree);
-+	ret = mtk_common_clk_init(dev, tree);
- 	if (ret)
- 		return ret;
+ static const struct udevice_id mt7981_fixed_pll_compat[] = {
+ 	{ .compatible = "mediatek,mt7981-fixed-plls" },
+@@ -751,24 +753,11 @@ static const struct mtk_gate sgmii0_cgs[] = {
+ 	GATE_SGMII(CLK_SGM0_CDR_CK0_EN, "sgm0_cdr_ck0_en", CLK_TOP_USB_CDR_CK, 5),
+ };
  
-@@ -668,11 +669,6 @@ static int mt7629_apmixedsys_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static int mt7629_topckgen_probe(struct udevice *dev)
+-static int mt7981_sgmii0sys_probe(struct udevice *dev)
 -{
--	return mtk_common_clk_init(dev, &mt7629_topckgen_clk_tree);
+-	return mtk_common_clk_gate_init(dev, &mt7981_clk_tree,
+-					sgmii0_cgs, ARRAY_SIZE(sgmii0_cgs), 0);
 -}
 -
- static int mt7629_clk_probe(struct udevice *dev)
+-static const struct udevice_id mt7981_sgmii0sys_compat[] = {
+-	{ .compatible = "mediatek,mt7981-sgmiisys_0", },
+-	{}
+-};
+-
+-U_BOOT_DRIVER(mt7981_clk_sgmii0sys) = {
+-	.name = "mt7981-clock-sgmii0sys",
+-	.id = UCLASS_CLK,
+-	.of_match = mt7981_sgmii0sys_compat,
+-	.probe = mt7981_sgmii0sys_probe,
+-	.priv_auto = sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
++static const struct mtk_clk_tree mt7981_sgmii0_clk_tree = {
++	.ext_clk_rates = ext_clock_rates,
++	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
++	.gates = sgmii0_cgs,
++	.num_gates = ARRAY_SIZE(sgmii0_cgs),
+ };
+ 
+ static const struct mtk_gate sgmii1_cgs[] = {
+@@ -778,24 +767,32 @@ static const struct mtk_gate sgmii1_cgs[] = {
+ 	GATE_SGMII(CLK_SGM1_CDR_CK1_EN, "sgm1_cdr_ck1_en", CLK_TOP_USB_CDR_CK, 5),
+ };
+ 
+-static int mt7981_sgmii1sys_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_gate_init(dev, &mt7981_clk_tree,
+-					sgmii1_cgs, ARRAY_SIZE(sgmii1_cgs), 0);
+-}
+-
+-static const struct udevice_id mt7981_sgmii1sys_compat[] = {
+-	{ .compatible = "mediatek,mt7981-sgmiisys_1", },
++static const struct mtk_clk_tree mt7981_sgmii1_clk_tree = {
++	.ext_clk_rates = ext_clock_rates,
++	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
++	.gates = sgmii1_cgs,
++	.num_gates = ARRAY_SIZE(sgmii1_cgs),
++};
++
++static const struct udevice_id of_match_mt7981_sgmiisys[] = {
++	{
++		.compatible = "mediatek,mt7981-sgmiisys_0",
++		.data = (ulong)&mt7981_sgmii0_clk_tree
++	},
++	{
++		.compatible = "mediatek,mt7981-sgmiisys_1",
++		.data = (ulong)&mt7981_sgmii1_clk_tree
++	},
+ 	{}
+ };
+ 
+-U_BOOT_DRIVER(mt7981_clk_sgmii1sys) = {
+-	.name = "mt7981-clock-sgmii1sys",
++U_BOOT_DRIVER(mt7981_clk_sgmiisys) = {
++	.name = "mt7981-clock-sgmiisys",
+ 	.id = UCLASS_CLK,
+-	.of_match = mt7981_sgmii1sys_compat,
+-	.probe = mt7981_sgmii1sys_probe,
+-	.priv_auto = sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
++	.of_match = of_match_mt7981_sgmiisys,
++	.probe = mt7981_clk_probe,
++	.priv_auto = sizeof(struct mtk_clk_priv),
++	.ops = &mtk_clk_topckgen_ops,
+ };
+ 
+ /* ethsys */
+@@ -819,11 +816,12 @@ static const struct mtk_gate eth_cgs[] = {
+ 	GATE_ETH(CLK_ETH_WOCPU0_EN, "eth_wocpu0_en", CLK_TOP_NETSYS_WED_MCU, 15),
+ };
+ 
+-static int mt7981_ethsys_probe(struct udevice *dev)
+-{
+-	return mtk_common_clk_gate_init(dev, &mt7981_clk_tree,
+-					eth_cgs, ARRAY_SIZE(eth_cgs), 0);
+-}
++static const struct mtk_clk_tree mt7981_eth_clk_tree = {
++	.ext_clk_rates = ext_clock_rates,
++	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
++	.gates = eth_cgs,
++	.num_gates = ARRAY_SIZE(eth_cgs),
++};
+ 
+ static int mt7981_ethsys_bind(struct udevice *dev)
  {
- 	const struct mtk_clk_tree *tree = (void *)dev_get_driver_data(dev);
-@@ -694,12 +690,18 @@ static int mt7629_ethsys_bind(struct udevice *dev)
+@@ -839,7 +837,10 @@ static int mt7981_ethsys_bind(struct udevice *dev)
  }
  
- static const struct udevice_id mt7629_apmixed_compat[] = {
--	{ .compatible = "mediatek,mt7629-apmixedsys" },
+ static const struct udevice_id mt7981_ethsys_compat[] = {
+-	{ .compatible = "mediatek,mt7981-ethsys", },
 +	{
-+		.compatible = "mediatek,mt7629-apmixedsys",
-+		.data = (ulong)&mt7629_apmixed_clk_tree
++		.compatible = "mediatek,mt7981-ethsys",
++		.data = (ulong)&mt7981_eth_clk_tree
 +	},
- 	{ }
+ 	{}
  };
  
- static const struct udevice_id mt7629_topckgen_compat[] = {
--	{ .compatible = "mediatek,mt7629-topckgen" },
-+	{
-+		.compatible = "mediatek,mt7629-topckgen",
-+		.data = (ulong)&mt7629_topckgen_clk_tree
-+	},
- 	{ }
- };
- 
-@@ -764,7 +766,7 @@ U_BOOT_DRIVER(mt7629_clk_topckgen) = {
+@@ -847,8 +848,8 @@ U_BOOT_DRIVER(mt7981_clk_ethsys) = {
+ 	.name = "mt7981-clock-ethsys",
  	.id = UCLASS_CLK,
- 	.of_match = mt7629_topckgen_compat,
- 	.bind = mtk_common_clk_parent_bind,
--	.probe = mt7629_topckgen_probe,
-+	.probe = mt7629_clk_probe,
- 	.priv_auto	= sizeof(struct mtk_clk_priv),
- 	.ops = &mtk_clk_topckgen_ops,
- 	.flags = DM_FLAG_PRE_RELOC,
+ 	.of_match = mt7981_ethsys_compat,
+-	.probe = mt7981_ethsys_probe,
++	.probe = mt7981_clk_probe,
+ 	.bind = mt7981_ethsys_bind,
+-	.priv_auto = sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
++	.priv_auto = sizeof(struct mtk_clk_priv),
++	.ops = &mtk_clk_topckgen_ops,
+ };
 
 -- 
 2.54.0
