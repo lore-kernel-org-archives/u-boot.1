@@ -4,58 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEB1C44508
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 06:46:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92462C44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 07:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B90AE84AE7;
-	Wed, 15 Jul 2026 08:46:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 97BED84AD3;
+	Wed, 15 Jul 2026 09:48:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="qmyu4Oup";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hviELbCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C63C84AEB; Wed, 15 Jul 2026 08:46:46 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 18ACC84ADD; Wed, 15 Jul 2026 09:48:34 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84B8684ADD
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 08:46:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1058384A67
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 09:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References;
- bh=k3/L1j7rnMNYyYbgLXXRPyBQfbTxujFcVKKpEw7z5UI=; b=qmyu4OupwcqeUn1zdjzYikYRzV
- ZyS2quaODmes5BhyKLz1c0ha02XCTTGqfjrL7Lp2lJc5GQDWbf670oiNQRuxve/GygviMr5V3/zVl
- FmArjYxieH+V5aoYRjwIyAYgUTOFcF1t98HFxECe7fGglaHSyutcKbSQYf80373laD9h4QsFh0GGO
- /As6cW8IOPYtTTOh9jnxyyuJRqSvlWGkkDMJYWrwz0XUOZ2WnWNqec6F26c9eRcxlmgUkHJ/RY4vX
- hdIp8+Vk6RXgzdMvauIRVrpfZsV/Tvm3JkMUUhI4BoJZSJn/Rh6l3o3m3ED59kWyI9pCIJmiXgsPT
- iF8fdT9w==;
-Received: from sslproxy02.your-server.de ([78.47.166.47])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1wjtOG-000BZf-0h; Wed, 15 Jul 2026 08:46:44 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy02.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1wjtOF-000Orn-2r; Wed, 15 Jul 2026 08:46:43 +0200
-From: Max Merchel <Max.Merchel@ew.tq-group.com>
-To: Max Merchel <max.merchel@ew.tq-group.com>,
-	Tom Rini <trini@konsulko.com>
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- u-boot@ew.tq-group.com, u-boot@lists.denx.de,
- Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH] configs: tqma6ul: add support for redundant environment
-Date: Wed, 15 Jul 2026 08:46:15 +0200
-Message-ID: <20260715064618.462554-1-Max.Merchel@ew.tq-group.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id A43A51A0FF1;
+ Wed, 15 Jul 2026 07:48:31 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 77B986035C;
+ Wed, 15 Jul 2026 07:48:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id BC19911BD3C41; 
+ Wed, 15 Jul 2026 09:48:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1784101710; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=92aOtT/ebONRPnYHwwpaFDoELkym5+ZAS1/TVhsU+EE=;
+ b=hviELbCSQM5mX/84vl6MlQ8hRJaJA01u8+I4LZKWr/FCj95KJmgQK+/0FZNnSEAqXENqD9
+ 05sId251g175FI8OI2OodVkB/9dnqmO/L1lmeso3JC93naNkwIChy1LTSTdiyYKMttEfGn
+ 5RYncXma1VDB7X5YDqdPSfonaxXFvt/Y+cwQOIsTShlg4uqNsGjFbec0y4FWm1PJ7gImiY
+ xMaPxO5FxbTGBJo3Hz/FlFRha95ZCPgVfSI4UUTXhSbldL5gC08BBlEcR42F+3msiuRuWu
+ neObnVksFW9dyN7I0/dRWD2JSFPnsPu/5+BiUSZ2lKfDuX31sSVeQnPKI/dzLQ==
+Message-ID: <2b758807-51ae-499d-8e0f-b251260eafcf@bootlin.com>
+Date: Wed, 15 Jul 2026 09:48:28 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: rawnand: sunxi: fix ECC count register indexing
+To: James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Hans de Goede <hdegoede@redhat.com>, Boris Brezillon <bbrezillon@kernel.org>
+References: <20260714233259.508396-1-james.hilliard1@gmail.com>
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <20260714233259.508396-1-james.hilliard1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,38 +78,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Le 15/07/2026 à 01:32, James Hilliard a écrit :
+> Each ECC error-count register contains four 8-bit correction counts.
+> The register-offset helper already selects the register using the ECC
+> block index divided by four, but field extraction shifts by the full
+> block index. This produces shifts of 32 bits or more for each register
+> after the first.
+> 
+> Use the block index modulo four when extracting the correction count.
+> 
+> Fixes: 4ccae81cdadc ("mtd: nand: Add the sunxi NAND controller driver")
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Reviewed-by: Richard Genoud <richard.genoud@bootlin.com>
 
-Activate the redundant environment and set the required offset.
+NB: While the fix is valid, it doesn't change anything at the end since 
+the step is always 0 here. But it's better to have the right formula anyway.
 
-Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
----
- configs/tqma6ul_common.config | 2 ++
- 1 file changed, 2 insertions(+)
+> ---
+>   drivers/mtd/nand/raw/sunxi_nand.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
+> index 1b2c514852d..96b65c52685 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.h
+> +++ b/drivers/mtd/nand/raw/sunxi_nand.h
+> @@ -167,7 +167,7 @@
+>   #define NFC_ECC_PAT_FOUND(x)	BIT(x)
+>   #define NFC_ECC_PAT_FOUND_MSK(nfc) ((nfc)->caps->pat_found_mask)
+>   
+> -#define NFC_ECC_ERR_CNT(b, x)	(((x) >> ((b) * 8)) & 0xff)
+> +#define NFC_ECC_ERR_CNT(b, x)	(((x) >> (((b) % 4) * 8)) & 0xff)
+>   
+>   #define NFC_USER_DATA_LEN_MSK(step) \
+>   	(0xf << (((step) % NFC_REG_USER_DATA_LEN_CAPACITY) * 4))
 
-diff --git a/configs/tqma6ul_common.config b/configs/tqma6ul_common.config
-index c076fb5d295..6b1fecb9071 100644
---- a/configs/tqma6ul_common.config
-+++ b/configs/tqma6ul_common.config
-@@ -18,6 +18,7 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x88000000
- CONFIG_SPL_STACK_R=y
- CONFIG_SPL=y
-+CONFIG_ENV_OFFSET_REDUND=0x110000
- CONFIG_IMX_MODULE_FUSE=y
- CONFIG_SYS_MEMTEST_START=0x82000000
- CONFIG_SYS_MEMTEST_END=0x83000000
-@@ -76,6 +77,7 @@ CONFIG_MULTI_DTB_FIT_LZO=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_USE_ROOTPATH=y
- CONFIG_ROOTPATH="/srv/nfs"
-
-base-commit: 8dbe57ba648648c4897717cebbc4505a8e0a8c23
--- 
-2.43.0
-
+regards,
+Richard
