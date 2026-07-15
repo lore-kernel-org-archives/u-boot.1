@@ -4,96 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95083C44508
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D89F8C44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:43:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0649A84D0F;
-	Wed, 15 Jul 2026 20:42:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5319884D1D;
+	Wed, 15 Jul 2026 20:43:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iKYO4j8Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jEx9EAeJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FD1584D1F; Wed, 15 Jul 2026 20:42:43 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id EEF5184D25; Wed, 15 Jul 2026 20:42:59 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3995384CC7
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:42:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 071BA84D1B
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:42:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-698beff7178so1296170a12.3
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:42:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784140961; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-c166f1bbeaeso290715466b.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:42:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784140977; cv=none;
  d=google.com; s=arc-20260327;
- b=NI032W7Q+Qrbmx8yrn9vniEFgR6qFpTM1WuN43O7l+bg0M+4pwUppZh4/RC4vmeXvX
- 59C7Pw13xgbn+XRYpX6svj/PxXJXKQzHaXiOI2bHgy0JSbE9mDFBdFr6qH3sO6oBChpa
- Ff5k1R9WjRO6ENPCe/mGdcg8QdWVG2YDpO1wOI29jLQj4/RH9THutMBPdZee8LXqGMSn
- DrJrRe1PhxBvAoqazDxlaG6w4go20Ddq5hSVdLPNHu74ydFxS8pexJGZA5WCSAhpiyyr
- 5IU4QYUPsltRWZ9tgelmIH/ADNYYww7NxQIUDnExRlDEY4XbE8bV5LctK71ptX37j1mI
- cHYA==
+ b=B7QmWDR6l9EGZSmBcYTQo+IHgTOcLr6curcPJw6F/BlLZBc8hBM7hQYBjkcPwfJkdW
+ Mql+Ru/iQldDtLjWjuTj5whxmsMbqBDEkROFfNMqCOw0Vh3NDQ/OgZoEYuVNZTBMXDkS
+ k/5fv8H9ZBWoHF9n4XrvwDctmc3dxuaZJKCPz9UrjXEdG9PimY0ypOfrnoZXN0B5Ay54
+ zWZU0ej8TXEj+I3XgmImwAQxYLN6SgAyreAksG8TNKbmnrHN0cpEitrpdu+PfRMvcYC6
+ 9RAoUsEzTogJsDAPOXGE5DltLvzrEsglCy9Ur89nOJahNufkdF9zUpJot0tlamlbObuy
+ OHzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=e/pfptWIDYaWVzLLpgMEkTFfLKftK9WD5425eUKhXzw=;
- fh=kimxHiw3EdsRWZ/84qPIkIdJF+1xIu48y1C0DQW/JkQ=;
- b=Fn1icB9y4y6whxrcsTTkwlWLUdTKfuzcB5LhX/BGS/hm4H9/cxuDobNkhnBvqZ5459
- GnjnKaf3n7kHE9FGdd4TPcvrvyuDxPX0z8BK9iY9KKJCUQ12JwPlWORelxvs2UMFJcO3
- oskUnBPMabs5Tbsg8FXHt2C5Iu9RWjFCrfXeQx97HFjOLnKG9FIu7mU02+46mUj5PdRV
- CcBIGDbKrlC35Pnn8vPlhz827Z+HLv0hTHVf2CpYW7O8xWPbuMBZYKptfb9p7c2Dw7N0
- Vujv1UnbO218Kcjh3j/OheDsHewjzWL9MPAAWSCFAUt3WWKG3rem+ODVEzn4eGtmxPDd
- NLdw==; darn=lists.denx.de
+ bh=9pW2nFudeHTeMaQc1dlE25Dzya+dhn8bqmykkQqPQ0c=;
+ fh=2LGbMvXCGKc3ffQbSdLHwaKiLzDbvEUHnpcfS2YzIUg=;
+ b=frq8Z1+BWSOgqiNH4OcBxHVmhtgeaRD+jQAv9PMvv96nMJBDDC9W0j6PNz9erLXEYA
+ yA0a9NbjSRgPoN1AULEDKsiyIDg1/NkFTWAQ9sqQg3RRD3yUf1DRn3HZ2Y/dfAmj0ByQ
+ vEsbUjJfKxDjo8rwpCZmmJHV+TIh0Knb5fo56GQI/1fLRCvnNrGW2TfDGfZVL4q/+otE
+ g5kt8iCKJNd7wm0jvramswTVVLhYOiLctQCpWhaPZecHPBb4+cVQNYsV/yR6olf/3fmx
+ iw7Od16lqCeg0M1AJPX7mRfA40pweOOszAiTNVucx/E4TNkn+T4LfAsBkJ998nplEny1
+ GjNw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784140961; x=1784745761; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784140977; x=1784745777; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=e/pfptWIDYaWVzLLpgMEkTFfLKftK9WD5425eUKhXzw=;
- b=iKYO4j8Z47aUL8fDdywf9AcHRvHREZVhZY16S0weDFzpqfsxFB4ud8HY7apHLTMzxU
- 0oo8JlHib7Qp3OUuxnDfBYtWRyPXqfJVN8hd2bH7FC74yKhUgBNW7cU4GjfvLZaNG2Cp
- BthCTostpIuWQ0Ug9Toi4i9uGhHDz4Xno7fZs=
+ :content-type; bh=9pW2nFudeHTeMaQc1dlE25Dzya+dhn8bqmykkQqPQ0c=;
+ b=jEx9EAeJVsZPPi3DvGvB1zwG8TE3HscqGQg+x6DAAW7ei0EGVkg42o8gixBUSfZPIQ
+ ADceIJ/rEWHp8+J7/d0qv3GJODzKMB1nUQ9030xHk7dp9NrO8NYPzKTpEvFXJGHG0jpX
+ nlpDrn1TUM08yo8c4LPG39bOmXM58RNgp4+qI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784140961; x=1784745761;
+ d=1e100.net; s=20251104; t=1784140977; x=1784745777;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=e/pfptWIDYaWVzLLpgMEkTFfLKftK9WD5425eUKhXzw=;
- b=Itj9FtALbNo3LywpmvBE1YmfTNSLu7sKiO0ECxA8w3LinsogyHyvFEQXd1cJt3djpU
- nXN8jLiHksUZYFRcjdUC6YvA5l8+xFgVEt+JRC5ku4sQ4m6wzMmHZwPpfxb5sQoiWqcy
- dA7WRmT1BWpddirRwksVmQUbF1HKZS7WJ4coeGkDOhfUSzM6f3SdJ8DldEs8nEH8SkZG
- 6G/S3nk0D/bRRi/zO08HdRRz1vmpPuH+IwVtxmwMWwPu7bPHkrnB2YFAi5N214jr0vxU
- NcFtVp5bqqfBRtMEjY/XfmrgLho3Ar17cd3E5oFFE89+TGhsrXHkEJP1SaJMVdEcX1Bx
- yLDQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrofhhK/g3C3PUh7Ofon3Z32es0NWaC5JoyfjKrMmX/9oXGkiZUDDnCBGOUnt/2e9neuhCN/Zw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3uIn/HaIsuscACYl2f1NzhF87Z1tOaD/XtlWMfWPVIjE9BOjs
- g1JDsVY/rpCXWWW+jikOBRd3bcJFY7o29TPMhRTiPz49sAmZAQOHv3ihd4yTLPZVo+dywZ2QJao
- Ev7Luztikk6kPntm/hHxnvnS8OQO93I6sgA0yJrlk
-X-Gm-Gg: AfdE7clbZZMI5b/09yLPmn6t01HrPktJnD8mUHU9hSPwqeNWw9BzwWDnkitd5jh+4HH
- sU1KTASUihJXxwbDCKKi6KxYb4MBqjuJpYQzGGk333g8WUaLMSDrDTXqzqHwVY6ZWHJQR1Ozwv6
- L4hh1XcIsk5zMpDcnOXNvRgzNHAcNbQ+i3wy+TmfmOjo41VM7AE5YtD5k+w6fmJElQRzNsd9I8j
- Qu+aLu2VL2GwiSkG+bEkSTYoh6xSblxqkZmw5YQa7bT2jCRG1rKOBpT6isITorv0IoPUHs=
-X-Received: by 2002:a05:6402:40c6:b0:698:e595:a5c with SMTP id
- 4fb4d7f45d1cf-69e198a73bcmr2305584a12.6.1784140960722; Wed, 15 Jul 2026
- 11:42:40 -0700 (PDT)
+ bh=9pW2nFudeHTeMaQc1dlE25Dzya+dhn8bqmykkQqPQ0c=;
+ b=OmhdYO6UXLlVU8oH7+GX6O4dEcKmVEYC2GcqXtVo0+tPHECEEvSpp2GAjfTeu/Ulq6
+ OeIjdIaW2Vez/4GV71IV76q8WT7kApSiKMcdel9m8Rmyi/GH81nGZjz8mIG6Jg6FEJQw
+ DrrUYr7FMokNQudUc+5N26GcDOOEgtLOhsLVc5m/wHJpqfUORTXYY7zI2b7FlEGnjblM
+ lmgONGgNj+YG+4WNY14IZc4Yq/2da0fQ0X6m579g0QXrO/H9rZShqIdLmssNQt5n+RK2
+ fJ+b3vA9dxocie+vR7EFbD3lQnD0fQljdmRrzYZxCvkxOe/2G1LKMwhybzjRKS47WQWX
+ CekQ==
+X-Gm-Message-State: AOJu0YxT3FMf2pJPZpGDKPKJYDrbihBvMRUn4Wji8GvFdGuaHTj4fjkT
+ qJqRqBBw2mZ8/nEKQA/2NM0jZs5osj9iakYSwr78sfZjyefws2M2HXZ/aWx5CFFlkwkIrFYd52L
+ Yyh+iRWjKjKaSJ9hR+haAbyQZuM0iFXh3vCyg86tNawzGXQ2LjJLnjg==
+X-Gm-Gg: AfdE7cm5tOHOKgcZ/wcH90swhAfKm/7TzwQLhsqjBkobkVFpbwnXWskmBQEse4FsExE
+ /tpr6cFv4xAQ2swyjAJQekk2EA9SeOmMJNOFSSna+pRZ6goAdM6p8Ifho8xM37yU83KtxSVqLa0
+ PtqPtm8stIRx72IjpGOCg/Mr3+3PQTqybd5X5EuEHPT2APdfVBXeWIR0XcMYJzKy098fm/2bwiK
+ zC+VT6NI3eiCoJRti5oEFWe64sQlhR71slowmQL3cYGBB+a23pIJ74VAuXQ0oLMZzMtdEk=
+X-Received: by 2002:a17:907:3d50:b0:c16:63c:a749 with SMTP id
+ a640c23a62f3a-c16616654acmr564170766b.18.1784140977493; Wed, 15 Jul 2026
+ 11:42:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260706215446.4068820-1-visitorckw@gmail.com>
- <20260706215446.4068820-5-visitorckw@gmail.com>
-In-Reply-To: <20260706215446.4068820-5-visitorckw@gmail.com>
+In-Reply-To: <20260706215446.4068820-1-visitorckw@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jul 2026 12:42:20 -0600
-X-Gm-Features: AUfX_my_SMzPiyrHcPP5WQOTiSuPEyY7j4ceyvt2aFmiPKe0hUjAvqJnRAjp0YU
-Message-ID: <CAFLszTiWyEZCBarMUfc-J4gnSixijU2t33xAE5hxZhNQgsOLnw@mail.gmail.com>
-Subject: Re: [PATCH 4/4] MAINTAINERS: Add entry for 9PFS
+Date: Wed, 15 Jul 2026 12:42:37 -0600
+X-Gm-Features: AUfX_mzF7ADZct4HIG0svQEmitYMRsX0G-9Uk9Gcy5WdapaKdVZiq6eqMYuGItc
+Message-ID: <CAFLszTg9cOebpV9BDecNbU+GYvo-38+ZOyHPUge8PcUX_iu97g@mail.gmail.com>
+Subject: Re: [0/4] fs: Add 9P filesystem support over virtio
 To: visitorckw@gmail.com
-Cc: trini@konsulko.com, bmeng.cn@gmail.com, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, jerome.forissier@arm.com, jserv@ccns.ncku.edu.tw, 
- eleanor15x@gmail.com, marscheng@google.com, u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,16 +106,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-06T21:54:42, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> MAINTAINERS: Add entry for 9PFS
->
-> Add maintainer entry for the newly introduced 9P filesystem
-> subsystem, including the protocol core, vfs integration, and
-> virtio transport driver.
->
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
->
-> MAINTAINERS | 8 ++++++++
->  1 file changed, 8 insertions(+)
+Hi Kuan-Wei,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-07-06T21:54:42, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+
+> It allows U-Boot to directly mount host directories in virtualization
+> environments via virtio.
+
+Thanks for working on this - a nice feature which has been missing for a while.
+
+My main concern is the overall design. The transport driver registers
+a single global client which the filesystem layer picks up, so there
+can only ever be one 9P device and the QEMU mount tag is ignored.
+Since the transport is already a driver-model device, please can you
+attach the client state to the udevice and have the filesystem layer
+look up the device, rather than using a global? That would let the
+user select a particular device (or mount tag) in the ls and load
+commands instead of passing a dash, and would fit better with the rest
+of U-Boot.
+
+Related to this, intercepting the 9p interface name in the generic
+filesystem code feels like a hack. It would be better to integrate
+with the existing device/partition handling, perhaps along the lines
+of semihosting.
+
+> The functionality has been verified on qemu arm64 by successfully
+> loading a Linux kernel image and an initramfs image via 9P, and booting
+> to the Linux shell.
+
+For the tests Tom asked for, one option would be a sandbox transport
+driver (see the existing sandbox virtio support) so the protocol and
+filesystem code can be exercised in CI without QEMU, plus a pytest for
+the QEMU side. A doc/usage page showing the QEMU flags and U-Boot
+commands from this cover letter would be a good start for the docs.
+
+Regards,
+Simon
