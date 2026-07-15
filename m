@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98793C44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 08:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78343C44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 08:31:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5469784B1A;
-	Wed, 15 Jul 2026 10:30:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 931E084AFA;
+	Wed, 15 Jul 2026 10:30:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="soJ0sIAi";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="emNzZEES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 259A784B6A; Wed, 15 Jul 2026 10:30:44 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id 83D5184B76; Wed, 15 Jul 2026 10:30:47 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E97884B51
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 10:30:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0EAE80087
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 10:30:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 73fdcce0802711f1b1788b6acf885367-20260715
+X-UUID: 766c10fe802711f18dc8c9802ae25ab1-20260715
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=3wkMdKbkM1xWOym9Q+OHs0Xr0X4fd9jNjYW3C/LKDDM=; 
- b=soJ0sIAiUtdF4h82KFKsvP2A9XWrrynZ5vYl89AHuPLpOXumXS/0+dSH3m9c2mIK3YTPFMLkWRrUHXLOVmeq+Gum3W1nbiTSN9A93JnfUZHpyd35fA/l3WLVQLmSo6ulypeaWFKRFZffyz3ZGuA3yHgcYb1mNtfcq6+OsGjz3OM=;
+ bh=kwqO2VfFui6Qp3KdAQAirAeWNmEsJVEoeyyUVWPcVq4=; 
+ b=emNzZEES74t0zr3+bji7Q3VvZ2itMBY68IHWmVatxWzPkTokzrVKNcCYpcDLK2xEpvN7vwf6Q8WEUimu2Ieia5o+gYlTe6tUXbwIq116u12QFRFVQ9Vc6k/+4eyo/p8Cm0/Gtx8C3XXKy8CzOy9LhJYLE+lbqDiezpgUM/d/8TU=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.17, REQID:f298f55e-6ddd-4ba3-90ae-592d42dd9c7a, IP:0,
+X-CID-O-INFO: VERSION:1.3.17, REQID:03f31ad2-69c5-4be0-b127-404823322b15, IP:0,
  U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:d497b38, CLOUDID:0b762519-ab14-4403-9336-76696324c5a8,
+ RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+ N:release,TS:-25
+X-CID-META: VersionHash:d497b38, CLOUDID:ace66b57-bd66-4718-bae2-b5cf68c331c4,
  B
- ulkID:nil,BulkQuantity:0,SF:81|82|102|836|865|888|898,TC:-5,Content:0|15|5
- 0|99,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI
- :0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+ ulkID:nil,BulkQuantity:0,SF:81|82|102|136|836|865|888|898,TC:-5,Content:0|
+ 15|50|99,EDM:-3|-100,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,
+ COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
 X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 73fdcce0802711f1b1788b6acf885367-20260715
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+X-UUID: 766c10fe802711f18dc8c9802ae25ab1-20260715
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 491701207; Wed, 15 Jul 2026 16:30:36 +0800
+ with ESMTP id 398672424; Wed, 15 Jul 2026 16:30:40 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
+ MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 15 Jul 2026 16:30:34 +0800
+ 15.2.2562.29; Wed, 15 Jul 2026 16:30:39 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 15 Jul 2026 16:30:33 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 15 Jul 2026 16:30:38 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
@@ -68,10 +68,10 @@ CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <yangshiji66@outlook.com>, Bernhard Messerklinger
  <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v7 5/7] mtd: spi-nor-ids: Fix Winbond W25Q256JW and remove
- W25Q256FW
-Date: Wed, 15 Jul 2026 16:30:33 +0800
-Message-ID: <a85035e4b13ea9bfffd249b13a2f1276bb9e4435.1784100103.git.weijie.gao@mediatek.com>
+Subject: [PATCH v7 7/7] mtd: spi-nor-ids: Add support for Winbond
+ W25Q256JV-M/W25Q512JV-M
+Date: Wed, 15 Jul 2026 16:30:37 +0800
+Message-ID: <367744f512f7512277ae5e89cd63afec5b305da7.1784100103.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1784100103.git.weijie.gao@mediatek.com>
 References: <cover.1784100103.git.weijie.gao@mediatek.com>
@@ -94,40 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There's no part named W25Q256FW, only W25Q256JW-M (Non-DTR version) exists
-with ID ef6019.
+W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad interface at
+max 104MHz clock rate. DTR is not supported.
+These flashes supports 2.7-3.6V voltage range.
 
-Link: https://www.winbond.com/resource-files/W25Q256JW%20SPI%20RevJ%2003102021%20Plus.pdf
-Fixes: d8c16849a90 (sf: Add Winbond W25Q256 ID)
-Fixes: 760b75564fd (spi_flash: add a bunch of winbond flashes to id-table)
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Both tested on MediaTek's filogic platform.
+
+Link: https://www.winbond.com/resource-files/W25Q256JV%20DTR%20RevK%2010202025%20Plus.pdf
+Link: https://www.winbond.com/resource-files/W25Q512JV%20DTR%20RevD%2006292020%20133.pdf
+Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v5-v7: not changed
+v6-v7: unchanged
+v5: removed locking related flags
 v3-v4: updated commit message
-v2: not changed
+v2: refactored with previous patch. updated commit message
 ---
- drivers/mtd/spi/spi-nor-ids.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ drivers/mtd/spi/spi-nor-ids.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 55b4ad5de54..a8a84222da4 100644
+index 53a4a50b2b0..8cd6e2b95c9 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -607,12 +607,7 @@ const struct flash_info spi_nor_ids[] = {
- 			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
- 	},
- 	{
--		INFO("w25q256fw", 0xef6019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256jw", 0xef7019, 0, 64 * 1024, 512,
-+		INFO("w25q256jw", 0xef6019, 0, 64 * 1024, 512,
- 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
- 			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
- 	},
+@@ -587,6 +587,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+ 	{ INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
+ 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ ) },
++	{ INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ ) },
+ 	{ INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
+ 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+ 	{ INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
 -- 
 2.45.2
 
