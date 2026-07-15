@@ -4,96 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733CEC44501
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4067FC44501
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jul 2026 18:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A7584CD6;
-	Wed, 15 Jul 2026 20:39:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B56784CDA;
+	Wed, 15 Jul 2026 20:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dz9Q7McW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IveFtY7B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73BE84CC7; Wed, 15 Jul 2026 20:39:33 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 0159384CDA; Wed, 15 Jul 2026 20:39:38 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C071A84CDB
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:39:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 212EF84CE8
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 20:39:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-698bf053053so4056681a12.3
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:39:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784140771; cv=none;
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6984169c126so10699761a12.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 11:39:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784140775; cv=none;
  d=google.com; s=arc-20260327;
- b=WgH62q4gLJ7pi7BTBqEWSf0annA0yl9AxNjcVmj0Rb86ZsqAILBD7sY7fmnvTsqHy+
- tLMc5NFs9PRUa/Ky6g5Zk/T47NfUoRGd5/QO06gaPjGQt3jPfRfaCOlskVPK+zYEDmoD
- 7f/MKSovPec93DtfBdmy9AOz9i3Re0pQ8sw72VQXEFZWJTwQgSRqYfq9F/yH04XTbeqy
- oXyXJ7qugc7GtTD4RLayVaq7QqGGyEl1GnciNuv3Ii0TJMEjyOUCpWEVphW/v1b4xKIq
- +7vDz42L7M59nF7XBDqaCn6yOnJ+zG2zldy5NWLlDjLfrOq+94/uAtSVhllNs/MoqPnq
- S8pg==
+ b=OpA9dIxLm8jztMo6LuCdnhhcPgBSNwgdYHQ5NIjEepsCRi3VhNo4HhOnQ3Lq90qn4v
+ 7UIkVxWHy2ZmrnIiWIOl9vZIUfvaljYDtdRObky9RbGEKR/irRm4BYSY4NCPeUem/Dpq
+ XPsEqlxaYdYgss0OSv5y0FnS1jJM66ZrJVPjcTabKJ7gksBGQO/JYz8EYhEpMD56B3ol
+ pYfvnk8VPywsDd8UhfjEyAvPNu/itBgc41fyzHkcwWedetowk4swogR1CUy+MZTkHWZ8
+ UkXqXKMkwa5l3FNywUsbqivr2q+AT9XiIOME9P4H0lRp7kgdAdeH7pcVpiOwnbb7YcVl
+ imvw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=BCoMxIzW2N3v9NAdsRz5Y61QTtmIonoEOos8S1As8k4=;
- fh=iJRW8VB93FX08DrH3y1pKDG0/UVKiIyyGubq8HI//Y8=;
- b=TdKcwP2nPBkfPHicyVQSXVzltsU5udRdjbh+hjez3s0TdK9K2jj3XJlcKoLU+HaLRV
- 2AXzFRu7Fpywbid0+QmH84JqiroHyfJ+6XT5P4/I/rHVgp8IKvU08mDujfkESg0gZihf
- WVCtJl8alJfCBNy5IDYdfndO/UPgv6dSBL//yFGNQ+qkoTjMtrSV8A1NdH25e9WxC8zo
- +FGtKdPpdh2o+8iJMBlbrtzAFnKpSWBdmcoBoG3o8mA6xiP3aIYcVcNOvxUEUgdcFQfC
- OhqaGY8PCPrxRNlDCD7knnH2OVoeOefnilNgSmehI5w1VEFs5ZUYKYnybT3lp5YRz3VC
- N0eQ==; darn=lists.denx.de
+ bh=QfKocPhPI8Of+WvVXQ4jnbkhyJIfixOp9RICzdgoRiw=;
+ fh=T6Kzv4oXehom+zRo3YTqcMr7OqKQl8V35hdJYSfjQGM=;
+ b=UKzlAY+c08wqpQ6yu/IGCW4f93WWI2Dfwn8vdOPzqNX/UtJbSCEAih0YNp2YG5uJty
+ X0jdHIny/GEBAjI81Z5mTBa2p0cN7KL/q7LcAC3SLHXh5FAKrTvmW4Ux9t39rYCAK7ys
+ TS67E3nqoZQnX/JsE84uGUTIuG+xL+OLq0w/zakp5LwV0M5I0NXszjGnEZkiXawPo+G0
+ VvWtI6/NbLbBEhvwKyh2F2CcFpbITpVLv55M6kcQsjEZyD0qV5rlAu0pxmAd5nMaeNMR
+ gf/3DycEIioILagb3vJpWOMWR3mwj4t3z4ENqUayC/7hlWjARE3clZgrhZiFYffyqYg8
+ 31hA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784140771; x=1784745571; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784140775; x=1784745575; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=BCoMxIzW2N3v9NAdsRz5Y61QTtmIonoEOos8S1As8k4=;
- b=dz9Q7McW7fWunzKTUcFu/eopBFIj6k773mTeWPYqSxQ61TRC4JjrN1BE8icPDDGge5
- 9dhcRLYMCtijdaNg5WySzubRxaz2Ij7shOUzqobo31UXLJ9RheGV912FSOorS0j4HHsc
- mgbJ49CcaOUSc2uM3nzYvvc+o3CSTmeBYEMK4=
+ :content-type; bh=QfKocPhPI8Of+WvVXQ4jnbkhyJIfixOp9RICzdgoRiw=;
+ b=IveFtY7B8LHaPVRDWHN1ZCbYzHVcnoVZOfnS8dAOmjCEVF/zh8FdDwhFVbnnz+ChDA
+ cWFBj1EIUq+mq/A0+7AlmdVGg/xgvxW3azCVZlvjr5IljIB9Z5Y3rRCUulItlj9RvHMd
+ VoFIVcOf1KdbjG14bXcqJ9SC+lx6wxxPk0XT4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784140771; x=1784745571;
+ d=1e100.net; s=20251104; t=1784140775; x=1784745575;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=BCoMxIzW2N3v9NAdsRz5Y61QTtmIonoEOos8S1As8k4=;
- b=B8SULUcUUYN3u9xq+xxhcBHXDzR1BD18ds2HHw2ctDSIXXcSaQTD3xYNfJIDHv4yTj
- 25nDUaUIJRX1+LCM0BgMTLUOiEAtg3RotQ8eZQzLTmZKJVPzBd3OstseCH27tp+WoVuj
- Et49G2o8j3Asm7mkEmgiBxPsLkluvmjWIVHFR/G3J3T1Ls4AVUiMKdiFU/TYxS36DSmR
- K/GooevClxp5H0cDBwgnnTG+8gpwMvWmUMBdy74VARzmZi7GfEhjeFPj1PzMaAoXpQlI
- wbGsM9SLXHCrkknWE0G+lskuEXkabV2Ad203sU2xdTPyQ0dcTMLVFik91WKGRM38SiWQ
- V0RA==
-X-Gm-Message-State: AOJu0YzbJOWXsGCa0pBnak7iLz3cSPyCfRfrSxIVuL06Y3EU80/85wYm
- bcV7YOuLhjAegGdXVgZPCErs4k+zDprBA54f2V5+UOf8uBX7FWBq9/Ai//1l9hYkTPxogHA/II5
- fsKkpKJR9HErA8scUJoulmTM2iQeBPT++coOTnu8t
-X-Gm-Gg: AfdE7cmE9ZhufDl41DXFigjFjBWF/S/XNCW/HhZ9L0ZJHob1cXp/MOwiv08pSmJja41
- nUxNG42iylk4BMO2bbElxC/j+SPnZgEv82o08rohRjsGEVDst628vp+cyYaqArnE+iJtJDY79uX
- p4VcRojsWAV1LzjccCQlAO7lkyZ5ueyxV9dos8I3h8djlWxh40B+dq/OU7hbzCj9+9DLlJhnpMT
- +T6aap7Dyj89YiQA8fKP8wLFEeniokFFBPBye4oqzmAf8WpbKU4omDx2pIo565igFTLqis=
-X-Received: by 2002:a05:6402:1e92:b0:698:4d33:b191 with SMTP id
- 4fb4d7f45d1cf-69c5efb5b1fmr10127149a12.9.1784140771186; Wed, 15 Jul 2026
- 11:39:31 -0700 (PDT)
+ bh=QfKocPhPI8Of+WvVXQ4jnbkhyJIfixOp9RICzdgoRiw=;
+ b=dC92oukM0dkmgFP5BC+fP/CCfOe0dE88FBr1XRI4h/74WoQUG/GM3thrRGM0PQxkBm
+ liNgvxHrYD9ZMywG+r2d8hKcHaTwdsSbHdlR2DL/5b48wG2k0kmNWeyZLiPIstaXJQrL
+ CFzd2AIvrMRiy0Je4BjFJs0JS3oB+mf/596SrpdhfAmva5q87uZ2ZnExuLM20XE4XGPk
+ je6zJ6uOD7CcIN6wWJTd8Flpc/iZb6IQkNt0GBlxKmOHwubI508KeKuhlqQM8ACpMOZW
+ liCB9FO2Lc9F1RcFaj6KHHv2IK3EvgQ8vq/DaZ/wGUi9SZH+FqYaDQgiajfGTFYQTzFJ
+ pZiw==
+X-Gm-Message-State: AOJu0Yz2Znsnm6MqX1OQY6T1r2IlVrror98X3TWw5+OL+vwosJZkLeoT
+ zI50OctCUsFsquwu1QXYRQO+QK7mDHHqSfOyG1MYI2lR2vf3NEJQuC9wzDEX6NcHIa8BoOZLENk
+ 9jhgwxlEL9XGHCUPFPKllouA3X4N7aA3JJ9S474pl
+X-Gm-Gg: AfdE7ckpLh2wcRckOIKiuy5LfyFBljE9xnEEfuETIUJQnB7VD9s5lLCMJ7cb5u+C8Rz
+ a+pr0sd+DIGIxSkHHzgctuOgI9WwmiA8do6EFLo7ragv1MWN84z/51zl5pGAyBhAb/zn/SrsmOK
+ G7wdp/y0VJ4b38M0V+EhAEw87sfU0v5Vmzv4zYjV9tOtZY68uF1+37NydY2zImA2qyvxfSl6ozI
+ /NgcZgR6p7pcyfKBedWRDmRpRmhPdfJjcuMiu2kVADcMDptzwPf0eBnx5qAyO9Yqp4BgDg=
+X-Received: by 2002:a05:6402:5108:b0:695:822c:1083 with SMTP id
+ 4fb4d7f45d1cf-69e199df9d7mr2443765a12.28.1784140775569; Wed, 15 Jul 2026
+ 11:39:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260710-rinta-watchdog-gettime-v1-0-9a982fb93f49@nokia.com>
- <20260710-rinta-watchdog-gettime-v1-6-9a982fb93f49@nokia.com>
-In-Reply-To: <20260710-rinta-watchdog-gettime-v1-6-9a982fb93f49@nokia.com>
+In-Reply-To: <20260710-rinta-watchdog-gettime-v1-0-9a982fb93f49@nokia.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jul 2026 12:38:20 -0600
-X-Gm-Features: AUfX_mwh1uGnXC2GM9OKSCKVDA-Ra5SW7cOZMTSAokKbHbgmVVP-Het4dBh3k8s
-Message-ID: <CAFLszTiP4cu9RFc-KvUE325DCG9Y-ziFiyeEp4QajBooRGtY4g@mail.gmail.com>
-Subject: Re: [PATCH 6/6] test: wdt: add a test for wdt_get_timeout
+Date: Wed, 15 Jul 2026 12:38:45 -0600
+X-Gm-Features: AUfX_mwJQBZn1anvVXivyXnTicdZkmCd0Er49fSkpsRDvBuT1vCEgDQesh-bz64
+Message-ID: <CAFLszTijPuGRY2vAN8L2wX41OM6119Fzpa9PF1aVb0uO5Ku2iw@mail.gmail.com>
+Subject: Re: [0/6] watchdog: report effective timeout and add gettimeout
+ command
 To: juuso.rinta@nokia.com
-Cc: u-boot@lists.denx.de, Stefan Roese <stefan.roese@mailbox.org>, 
- Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>, 
- Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Aaro Koskinen <aaro.koskinen@nokia.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,45 +110,15 @@ X-Virus-Status: Clean
 Hi Juuso,
 
 On 2026-07-10T04:51:17, Juuso Rinta <juuso.rinta@nokia.com> wrote:
-> test: wdt: add a test for wdt_get_timeout
->
-> Add a DM test for wdt_get_timeout on the sandbox driver.
->
-> Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
->
-> test/dm/wdt.c | 4 ++++
->  1 file changed, 4 insertions(+)
 
-> diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-> @@ -38,6 +38,10 @@ static int dm_test_wdt_base(struct unit_test_state *uts)
-> +     u64 get_timeout_val = 21;
-> +     ut_assertok(wdt_get_timeout(dev, &get_timeout_val));
-> +     ut_asserteq(get_timeout_val, state->wdt.counter);
+> The series introduces a get_timeout operation in the watchdog uclass,
+> which is used in the start-path console print, exposes the operation
+> with wdt gettimeout shell command, and implements the operation in
+> sbsa_gwdt, octeontx_wdt and sandbox_wdt drivers.
 
-Please can you move the declaration to the top of the function with
-the others? The initialiser of 21 serves no purpose once ut_assertok()
-has passed, so it can be dropped.
-
-The ut_asserteq() convention is (expected, actual), so the arguments
-are swapped. Since the test has already checked that
-state->wdt.counter equals 'timeout' a few lines above, it would be
-clearer to check the expected value directly:
-
-    ut_asserteq(timeout, get_timeout_val);
-
-> diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-> @@ -38,6 +38,10 @@ static int dm_test_wdt_base(struct unit_test_state *uts)
-> +     ut_assertok(wdt_get_timeout(dev, &get_timeout_val));
-
-This only covers the success path - the -ENOSYS branch in
-wdt_get_timeout() from patch 1 is untested. The gpio-wdt device in
-dm_test_wdt_gpio_toggle() has no get_timeout operation, so you could
-add a check there, e.g.
-
-    ut_asserteq(-ENOSYS, wdt_get_timeout(wdt, &val));
-
-along with a check that the value is left unchanged on error, since
-patch 1 documents that behaviour.
+Thanks for the series - the motivation makes sense, since printing a
+timeout that the hardware silently clamped is misleading. Comments on
+the individual patches, the main one being use of per-device uclass data.
 
 Regards,
 Simon
