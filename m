@@ -4,92 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12DFC4450E
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 11:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DA2C4450E
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 11:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61CD084CBA;
-	Thu, 16 Jul 2026 13:20:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0244A84CBC;
+	Thu, 16 Jul 2026 13:55:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X83jx8l8";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yodbcftJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06FCD84CA3; Thu, 16 Jul 2026 13:20:52 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8121584CC4; Thu, 16 Jul 2026 13:55:24 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 129DC84CBC
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 13:20:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c15c42a45adso27706066b.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 04:20:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784200848; x=1784805648; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=fPqdLwJtNhL7Cfhu68zGODUvXN1tPYWCT5NQloz2odw=;
- b=X83jx8l81ox+uPO43YL8fK6pWoxy8vQh5Fy4Bv2onT1ExJ31oQFRDFfTJMXMUvjEWq
- NnA3bVYlfhVi2ANN50KPoKeS4AyBeIJgDOCDYQxd9oYh//AdZoWWgxvr5C5p/6+l4gGW
- +SiNweuVYHwW4TQFjmIEbniSav0nU/Zgkk15H7Fv+sLNq+Z/feRzgQ0F5zJW7FF/zZ/I
- DN2wllX6xvVEywTUOUvje1RZKCZG8VWAiovnNMPE8v+zcJaAsLTM7B8aGJjneQeHgK+X
- sdhnkhYuaQUT0pOXq13evlES3nzlIadisNrj5kz+imHStdfoEy4bUQO/Ez3UPOvnBaaE
- NpvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784200848; x=1784805648;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=fPqdLwJtNhL7Cfhu68zGODUvXN1tPYWCT5NQloz2odw=;
- b=AC9a4LFe6S1iWrDTIupmPrs9LKxM3a0348sei/49MkjA54uuQWKU3HW26JlEtE3uKH
- k0PtY/fdR60XSJi7QJyoRrClNv/cgzhbuBko2N3qnyS/L0YSr6/xTX09QDG6nVXHRu4o
- njtHyTwhDTMO9zVcs2bh4/gWK35Jt7j9FsN46AueekArQzR1SC9yPfQpZvRZyoRSwPXJ
- PZy3YhRe4AHsLuSfwOy4ci047nC7V/f0n/DVCWhtWehvaCydlDr5bbsAoa5PVzhysVu4
- +evzb76SNX3mNTjnLQYIA1+AxgT6ZITtmUvvW1xkz+l5OBxkGlEVi7VOWO8n2rj6naGt
- rEUQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoRxShRKvygqFb2eBHFC/kJZaf3WkxNc1qYaQgefhBBj/CzWcL8RO5bTn5bkCgFmqW2c/kfU+A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbFtxESWJwzrKQ4nLpMcTcOcWhIaDdx7LIRW6MnMJhxIxKZd+R
- tLd8BKq25LPpYQ5RUR8PuPfOpxT+kNDItXCc2Rokn1bK+FUMIbj6i0ROmSQxOpwpjHc=
-X-Gm-Gg: AfdE7clKun5bYTdJhm9kOZxA0OS1Xo58nRIemIvvWmDi07vCQ7hUm+wWVUXwEoTaQ7S
- EYsbMMk4leq3T/WUo/sCdpJkL/BtLJABHArc6XToyilDbkOk4+bAL0Z2Luv9WLxphUQ0VHC6w0y
- Q7qiRJZWo/W2oxuDF14uDSRS1KCzZW2AAPuWWeS7TQqge2+CQCSnTzBhB7bMLoFnsodRn/VT1/2
- ECr1ZZG3yN8iti+Fp9Rt1Ak5BOMLQ/CveJpuCu2pMrKitBedkud7JQbfAZFuNbJMJE/s40ungh2
- +NnX2ySkbJECt5snI7i+EfZj+Ap5PMzckgKCjkTZHb1iPACQJJuHLO+jOygJDCMLdquDQWlle9c
- j/6u2phYIBZ2EfA0RpM7QqWTDSWIYcsCJ9cx5wbg8gK3RUJO2bqpr5RImRmj9aB4o2dLwe11oQ9
- 7juucacsbS1dCUCluSQfWjN+LgMhp+A5j/ZSOlsfbtDqBzO+ZJyVKt9WdR
-X-Received: by 2002:a17:907:980f:b0:c15:a7b9:2ae1 with SMTP id
- a640c23a62f3a-c1692083c5fmr116391266b.6.1784200848460; 
- Thu, 16 Jul 2026 04:20:48 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:1101:38d6:d9a8:b75:f345?
- ([2a0a:ef40:1d11:1101:38d6:d9a8:b75:f345])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c16874a2453sm189824766b.56.2026.07.16.04.20.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 04:20:47 -0700 (PDT)
-Message-ID: <f1900b5d-5701-41aa-94bc-8145a337dd91@linaro.org>
-Date: Thu, 16 Jul 2026 12:20:46 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id AEE8E84CA3
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 13:55:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a79d=FK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1784202920;
+ bh=xuAZEIozX39CslIC3m+BRG3BQyixodt/+qBst7EE9/Q=;
+ b=yodbcftJ7DpBJtNfOcDd/C+V29ZPzTL3A6yg/kmgGwdwd5nWuY3jYRV4/lxP8w5MU4cgH7XMD
+ /2t0cT1x25ixZAIMajVI2prU6Bl8brU0W8lk9OMyB/N3te6AqcoNXUOrzN7jrq5fuE1IXdjvHHq
+ ylvxg8l5QSTTW6QRJr8lM+GxgJ1BopUl1Q8terq9IvEWAmnqYDhGZ3VEjAnPMcQ3t70fH+k7qO3
+ BExPwvwm6igGuHlObS9tsBuNDhuC3vZOiqQ3JHGhutTRT2gfzaihKUmFlJypeqEIt15s7xAb+Qh
+ H1fgV9jqHYScSu3Ql8UhLSx2dR/e2arSfrLxRNJOeScQ==
+X-Forward-Email-ID: 6a58c6a6e6d4cb6492957b5d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.11.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <d170674c-360e-400c-b263-a35aab640d71@kwiboo.se>
+Date: Thu, 16 Jul 2026 13:55:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] configs: Add defconfig for ipq9650 RDP488
-To: Badhrinath S <badhrinath.s@oss.qualcomm.com>, trini@konsulko.com,
- peng.fan@nxp.com, jh80.chung@samsung.com, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, lukma@denx.de, michal.simek@amd.com,
- adrian@mainlining.org, danila@jiaxyga.com, aswin.murugan@oss.qualcomm.com,
- david.wronek@mainlining.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
- <20260716062318.4121929-5-badhrina@qti.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260716062318.4121929-5-badhrina@qti.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH] boot: image-fdt: downgrade -EINVAL reservation failure to
+ debug
+To: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>,
+ Joseph Guo <qijian.guo@nxp.com>, Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Randolph Sapp <rs@ti.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260713-downgrade-v1-1-183a2300741b@nxp.com>
+ <e1a26574-4f7d-46f0-b757-55f419df326b@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <e1a26574-4f7d-46f0-b757-55f419df326b@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,101 +79,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Badhrinath,
+Hi Joseph and Emanuele,
 
-On 7/16/26 07:23, Badhrinath S wrote:
-> From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+On 7/16/2026 10:25 AM, Emanuele Ghidoli wrote:
 > 
-> Add default configuration for the IPQ9650 RDP488 board with eMMC boot
-> support.
 > 
-> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
-> ---
->   configs/qcom_ipq9650_mmc_defconfig | 21 +++++++++++++++++
->   configs/qcom_ipqdefconfig          | 37 ++++++++++++++++++++++++++++++
->   2 files changed, 58 insertions(+)
->   create mode 100644 configs/qcom_ipq9650_mmc_defconfig
->   create mode 100644 configs/qcom_ipqdefconfig
+> On 7/13/26 10:45, Joseph Guo wrote:
+>> When boot_fdt_handle_region() attempts to reserve a DTS reserved-memory
+>> region via lmb_alloc_mem(), it may receive -EINVAL if the region's
+>> physical address falls outside the LMB-managed memory range (i.e.
+>> below PHYS_SDRAM on platforms where U-Boot does not manage the lower
+>> DRAM window).
+>>
+>> A typical example is platforms like i.MX95 where PHYS_SDRAM starts at
+>> 0x90000000, but remoteproc/rpmsg carveouts (vdev vrings, vdev buffer,
+>> resource table) are placed at 0x88xxxxxx by hardware convention. Those
+>> addresses are unreachable by U-Boot's allocator anyway, so failing to
+>> mark them reserved has no practical consequence -- U-Boot will never
+>> accidentally place the initrd or FDT blob there.
+>>
+>> Printing ERROR for a condition that is harmless and expected on many
+>> platforms is misleading. Downgrade the -EINVAL case to debug() to
+>> suppress the spurious output while preserving full visibility under
+>> DEBUG/log builds.
+>>
+>> Real failures (e.g. -EEXIST from an overlapping reservation) continue
+>> to be reported as ERROR.
+
+I sent a similar patch 2-3 weeks ago [1], and was planning to send a v2
+that also change lmb_free() to return -EINVAL to also catch the free
+scenario.
+
+[1] https://patch.msgid.link/20260627204851.1151419-1-jonas@kwiboo.se/
+
+Regards,
+Jonas
+
+>>
+>> Fixes: 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
+>> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+>> ---
+>>  boot/image-fdt.c | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+>> index 9e0e0f93edd34ae9056926883b1a802858e179d9..2175fa338f55110862100fa9f491a0957e85ce56 100644
+>> --- a/boot/image-fdt.c
+>> +++ b/boot/image-fdt.c
+>> @@ -95,6 +95,9 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
+>>  		debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
+>>  		      free ? "freed" : "reserved", (unsigned long long)addr,
+>>  		      (unsigned long long)size, flags);
+>> +	} else if (ret == -EINVAL) {
+>> +		debug("   skipping fdt memory region outside LMB range (addr=%llx size=%llx flags=%x)\n",
+>> +		      (unsigned long long)addr, (unsigned long long)size, flags);
+>>  	} else {
+>>  		printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
+>>  		       free ? "freeing" : "reserving", (unsigned long long)addr,
+>>
+>> ---
+>> base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
+>> change-id: 20260713-downgrade-f8319ab2d75b
+>>
+>> Best regards,
 > 
-> diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
-> new file mode 100644
-> index 000000000000..de730067359c
-> --- /dev/null
-> +++ b/configs/qcom_ipq9650_mmc_defconfig
-> @@ -0,0 +1,21 @@
-> +#include "qcom_ipqdefconfig"
-> +CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-> +CONFIG_TEXT_BASE=0x8a280000
-> +CONFIG_NR_DRAM_BANKS=24
-> +CONFIG_ENV_SIZE=0x40000
-> +CONFIG_ENV_OFFSET=0
-> +CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
-> +CONFIG_SYS_LOAD_ADDR=0x90000000
-> +CONFIG_DEBUG_UART_BASE=0x1a98000
-> +CONFIG_DEBUG_UART_CLOCK=14745600
-> +CONFIG_SYS_PBSIZE=1024
-> +CONFIG_CLK_QCOM_IPQ9650=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_ADMA=y
-> +CONFIG_MMC_SDHCI_MSM=y
-> +CONFIG_PINCTRL_QCOM_IPQ9650=y
-> +CONFIG_DEBUG_UART_MSM_GENI=y
-
-Do we really need debug uart in here?
-
-> +CONFIG_DEBUG_UART_ANNOUNCE=y
-> +CONFIG_SYS_MALLOC_LEN=0xC0000
-> diff --git a/configs/qcom_ipqdefconfig b/configs/qcom_ipqdefconfig
-> new file mode 100644
-> index 000000000000..6a7f3c1b4ac6
-> --- /dev/null
-> +++ b/configs/qcom_ipqdefconfig
-
-
-Does this defconfig build a functional image? Or is it only ever meant 
-to be included by board specific defconfigs? If it's the latter case 
-then this should be a config fragment instead (just rename the file to 
-qcom-ipq.config or something).
-
-
-> @@ -0,0 +1,37 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_POSITION_INDEPENDENT=y
-> +CONFIG_ARCH_SNAPDRAGON=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_REMAKE_ELF=y
-> +# CONFIG_EFI_LOADER is not set
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +# CONFIG_BOOTSTD is not set
-> +CONFIG_OF_BOARD_SETUP=y
-> +CONFIG_USE_PREBOOT=y
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_HUSH_PARSER=y
-> +CONFIG_CMD_PART=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_CLK=y
-> +CONFIG_MSM_GPIO=y
-> +# CONFIG_I2C is not set
-> +# CONFIG_INPUT is not set
-> +CONFIG_MISC=y
-> +CONFIG_QCOM_GENI=y
-> +CONFIG_MTD=y
-> +CONFIG_DM_MDIO=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_QCOM=y
-> +CONFIG_RGMII=y
-> +CONFIG_PHY=y
-> +CONFIG_PHY_QCOM_QMP_UFS=y
-> +CONFIG_PHY_QCOM_QUSB2=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_PINCONF=y
-> +CONFIG_MSM_SERIAL=y
-> +CONFIG_MSM_GENI_SERIAL=y
-> +CONFIG_SOC_QCOM=y
+> Hi Joseph,
+> 
+> Tested on Toradex Aquila iMX95, which has reserved-memory regions for
+> the Cortex-M7 (vrings, vdev buffer, resource table) below PHYS_SDRAM.
+> The spurious ERROR messages are gone and boot is unaffected.
+> 
+> Kind regards,
+> Emanuele
+> 
+> Tested-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
