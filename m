@@ -4,85 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 728FCC44512
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 02:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9547BC4450F
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 04:27:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31E1A847AF;
-	Fri, 17 Jul 2026 04:10:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kleiner.pro
+	by phobos.denx.de (Postfix) with ESMTP id 52E3D84D9A;
+	Fri, 17 Jul 2026 06:27:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kleiner.pro header.i=@kleiner.pro header.b="GBTr81PF";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="ClJ2Q11k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75E9C84DA2; Fri, 17 Jul 2026 02:06:49 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E3ECE84D9C; Fri, 17 Jul 2026 06:27:42 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CA2384D68
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 02:06:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF53484D85
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:27:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kleiner.pro
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chris@gracedigital.studio
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-667b9bee563so861069d50.3
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 17:06:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kleiner.pro; s=google; t=1784246806; x=1784851606; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=w+Cuy9XdD4okEqKJGFTd6ccked1Vup5+fbMXEy8pgYk=;
- b=GBTr81PFeL9N2MmbwQOSoKDW3sAsBaGQVWvB1U6xxQKyESyF52cGZXryUy0hr2N537
- w8jdq3VWWx3vaQeDRol34FyyUm+XuL8ygAaRqz/G/7Cdj/k22mTXHrQdQXFJMX8oT3UE
- Ybf8Siamb7FrqEl2hwnWN1G1DMtLOMUAPKhgZysO9/b9VnM4nj4L50LP6YC4/La1Roqd
- cMmjLqdUOVxBHy0i8LJK3Xx0BAj3rW4w5OCLgZUfC3sh+NA09I6rHoxDGQ11lelEKVgl
- vRxkdQgwkMhN4FkYY2T6H+7alc4qvNx8NJea1YevnH3olv4YYRF7PKxdbKc+bNvc1KVs
- OApw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784246806; x=1784851606;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=w+Cuy9XdD4okEqKJGFTd6ccked1Vup5+fbMXEy8pgYk=;
- b=NTVGQlFtew2PEpMgKnvrHHrcfLz9dzZ9Pvn5A/2UlFSMORILCWB/CQYZ5BCv2H8CPs
- PMtcRIIIKWLWOpjKbT9+oXQXh1ddbYy/TeIa//z6VpjLh2yRKiwU0Os0JMFh53K0HxZ/
- AT4CC7abWr18qwRf3Ly2L3F0ZHGDiAZR93xzqr3zjehUKQz/5Cn6RtstBxApHLol9/VX
- IgNBMDCwWfP3yrce1WyIcB1jF1TS+X0YEfDEYOGSWYqnFlJj34ARhQDEGqiXdN8JmfSN
- 4ajgN1EHKmmGtTxXSqMHRlvzNMMHmLkrib9GbIgDUbOBBXwmHO5tD83YIO6ciFq/gRCQ
- c5Vw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqmKiNnO73UxM0DrxixEoYg4RiHOw/DtUW/9Rm9RLmemjF30/oIUmd3LvPjx9/6Ny9ZSvkQNhw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHRJ7qbZNU1dzmTu27obWf8H5Z+HcPRTI8srS3OZ6J9rde4Zcx
- N5kIAq3S3Njv/dRfsLIp17mtFH+66m00sFkYUNRffu4sudFTIgSIcVdHTpHqUOK9GAeSK7PsYfZ
- h6AlvlSBf
-X-Gm-Gg: AfdE7cnbPeNgHb5V43OGYEkKWUAlEVKXmTIfDPan6LyyxjVZB1mQsDYAtj46JguQGPB
- d4/4BndTGCpSIccN//ZjLi6/a9D0KFSg8Q15R0k57fyVJpKa7hrAMcH/I8kX5MRcPQTr3Agu/KX
- nUhsQLf3DfcOFQw0/85qU0Z6i92fE5G8bRMqAbZb4PllWdfRDSHxCIgAOHCLwF3EBehkfzg9CNF
- ln0BGTwIIQooneUqImR7XEpQgG3H10DjzgWIEYOcFmlgsioZxkW7fC34s/jQYLs5DNsNPPEDFii
- VSbR4A4/1x8a9AwKbnHXjhBY0VXman0TX0fdwaju98h7QRoAs+GdKYovSBmbxpH+UlH1+hm++RB
- KttKcAOw8StUoftYg3ePlyZwuZZoGum4JsPs+RQ2JI8nxkBfOejcC8U+uDm90jJcZMswwTRLVPS
- SuiDzDzvLjdb6yFuIyIYxodGEl
-X-Received: by 2002:a05:690c:e28d:20b0:7fd:6d19:5a8d with SMTP id
- 00721157ae682-81e902bd271mr122998817b3.8.1784246805600; 
- Thu, 16 Jul 2026 17:06:45 -0700 (PDT)
-Received: from localhost.localdomain ([217.180.197.172])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6683b8cd3aasm36755d50.21.2026.07.16.17.06.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 17:06:45 -0700 (PDT)
-From: Christopher Kleiner <chris@kleiner.pro>
-To: trini@konsulko.com,
-	u-boot@lists.denx.de
-Cc: tharvey@gateworks.com
-Subject: [PATCH] board: gateworks: fsa: bound FSA EEPROM gpio descriptor count
-Date: Thu, 16 Jul 2026 20:06:44 -0400
-Message-ID: <20260717000644.61897-1-chris@kleiner.pro>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2D28111A1C9; Fri, 17 Jul 2026 06:27:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1784262460;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=aLCOkVIJgyJIToSS6q4Oar8GrbKjdLUJUBgBlzkSxBc=;
+ b=ClJ2Q11komGhHt4jKYveMjh5cdiC+rfMEXFNEeRhK/ytbbi385vwdseluZc/V6ioB89dAb
+ wN1xUPNWRDKo10ECD7SQDvStWsOgyGaoRNLmQOKjVlEoZk5eVr5u1Jj00G634MAjmXY5RR
+ se9K+8hK+khdrlWsKXBfR4vox6PtWQDNPQOObzuCNhqeUGYN3zRdx/xzwgrGDTZdDzCdWr
+ AxsHpFbWv+qhboYCuggvJxI5iBeCwPvjEFPSOGs5G8+CxQtWl8WWz67mQ6KZeXSUnBcojO
+ Bl8oejlpNcuRijudk+BurWFGQdYsPqkiTJbrARhrO4DgyJqxOAo030tDN5j6Tg==
+Message-ID: <5e143c8a-36db-4e44-b50b-eef29dd85182@nabladev.com>
+Date: Thu, 16 Jul 2026 21:22:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 17 Jul 2026 04:10:26 +0200
+User-Agent: Mozilla Thunderbird
+From: Marek Vasut <marex@nabladev.com>
+Subject: Re: [PATCH v5 00/75] usb: dwc3: sync code with Linux v6.16
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.denx.de,
+ marex@denx.de
+Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com, 
+ michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com
+References: <20260716134305.614278-1-anders.roxell@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,59 +69,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fsa_user_info.gpios[] is a fixed 20-element array, but the number of
-descriptors iterated and indexed comes from the FSA add-on board EEPROM:
-board_info.sockgpios and board_info.ioexpgpios are u8 fields (up to 255
-each) read via dm_i2c_read() with no upper bound.
+On 7/16/26 3:41 PM, Anders Roxell wrote:
+> Hi,
+> 
+> This series syncs the DWC3 USB driver with Linux v6.16.
+> 
+> The driver was forked from the kernel v3.19-rc1 eleven years ago, in
+> commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel to
+> u-boot"). After that almost no kernel changes came back to U-Boot.
+> 
+> I split the work in three steps, so it is easy to follow:
+> 
+> 1. Restore drivers/usb/dwc3 to a clean v3.19-rc1 state.
+> 
+> 2. Import the dwc3 directory once per major kernel version, from v3.19
+>     up to v6.16. Each commit is a raw snapshot from that kernel.
+> 
+> 3. Add back the U-Boot glue, the XHCI/UDC updates and the build fixes.
+>     This part builds on Jerome's work.
+> 
+> The import commits are raw kernel snapshots. They do not build on their
+> own, only the full series builds. This is on purpose. It makes it easy
+> to see what comes from which kernel version, and to compare each import
+> with the matching kernel release. The commit messages say this too.
+> 
+> This is compile-tested only.
+> 
+> The series needs the dwc2 endpoint fixes from Mattijs [3]. They are
+> already on the list and should go in first.
+> 
+> The branch is also available at [4].
+> 
+> [1] v4: https://lore.kernel.org/u-boot/20260629084507.3254232-1-jens.wiklander@linaro.org/
+> [2] Jerome's adaptation work: https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
+> [3] dwc2 prep: https://lore.kernel.org/all/20260703-usb-prep-dwc3-sync-v1-0-1352bc238c9b@kernel.org/
+> [4] https://github.com/roxell/u-boot/tree/usb_dwc3_sync_v5
+> 
+> v4 -> v5:
+> - Split the big "fix build after resync" patch into smaller patches, one
+>    per area, so it is easier to review. Marek and Mattijs asked for this.
+> - Dropped the Tested-by tags from the import patches. They were only
+>    tested as a full series, not one by one.
+> - Removed the merge commits from the "import from kernel vN" changelogs.
+> - Some small cleanups in the new helpers: dropped a dead function, added
+>    a missing NULL check and changed spaces to tabs.
+> - Rebased on latest master.
 
-fsa_config_gpios(), invoked automatically at boot from fsa_init(), loops
-over info->gpios[i] for i < sockgpios + ioexpgpios, reading past the
-20-element array (an out-of-bounds stack read whose contents are then
-used to configure GPIOs and build names). do_fsa_gpio() validates the
-console-supplied index only against the same EEPROM counts, so
-"fsa gpio <i> ..." can memcpy() a descriptor to user_info.gpios[i] for i
-up to 254 -- an out-of-bounds stack write that is then written back to
-the EEPROM.
-
-A malicious or swapped FSA add-on board EEPROM (only a valid checksum is
-required, which the attacker can compute) thus yields OOB accesses on the
-boot path and via the console command.
-
-Clamp the descriptor count to ARRAY_SIZE(info->gpios) before iterating,
-and reject any console index outside the array.
-
-Fixes: da9e2218afc2 ("board: venice: add FSA support")
-Signed-off-by: Christopher Kleiner <chris@kleiner.pro>
----
- board/gateworks/fsa.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/board/gateworks/fsa.c b/board/gateworks/fsa.c
-index 1af8021057..126a897ee2 100644
---- a/board/gateworks/fsa.c
-+++ b/board/gateworks/fsa.c
-@@ -140,6 +140,9 @@ static int fsa_config_gpios(int fsa, struct fsa_user_info *info, int gpios, stru
- 	int i, ret, flags;
- 	char name[32];
- 
-+	/* clamp EEPROM-supplied descriptor count to the array size */
-+	if (gpios > ARRAY_SIZE(info->gpios))
-+		gpios = ARRAY_SIZE(info->gpios);
- 	/* configure GPIO's */
- 	for (i = 0; i < gpios; i++) {
- 		desc = &info->gpios[i];
-@@ -637,6 +640,11 @@ static int do_fsa_gpio(struct cmd_tbl *cmdtp, int flag, int argc, char * const a
- 	memset(&desc, 0, sizeof(desc));
- 	i = simple_strtoul(argv[0], NULL, 10);
- 
-+	if (i < 0 || i >= (int)ARRAY_SIZE(user_info.gpios)) {
-+		printf("invalid index %d", i);
-+		return CMD_RET_FAILURE;
-+	}
-+
- 	if (i >= 0 && i < board_info.sockgpios) {
- 		desc.offset = i;
- 		desc.source = 0xff;
--- 
-2.43.0
-
+Has all the other feedback provided on the 64 patches in v4 been 
+addressed ? I recall the v4 series added various glue code drivers which 
+were never even compiled or used ?
