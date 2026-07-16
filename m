@@ -4,61 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72DE3C44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 13:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50445C44512
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 15:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32AF484C83;
-	Thu, 16 Jul 2026 15:38:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id B072184BED;
+	Thu, 16 Jul 2026 17:18:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="AM3cXAtb";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="lGQsxU7H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D36384CA3; Thu, 16 Jul 2026 15:38:49 +0200 (CEST)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
+ id 5BF0284C23; Thu, 16 Jul 2026 17:18:00 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE19E84C3F
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:38:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1784209122; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=cAMAs2qjo6xUWaWFP0gWrjq6cdrSA3ZhutbHqs1nmNz5l3kESNgfAICBcMMcG57FrUZBtCgvBJ+UZqlcot4DidfJzjS6/8bkA7Me/ok2OSXW+Q3ZQCW6M11z4TL6cp1u4UCjYd47tXDrlSgypkqqdlxT9VtqT49jQAnMQO/y28c=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1784209122;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=84UAuBqH5v/tsKvn2GcpHlgsiau5HQw1ny/3kZI7/Pk=; 
- b=Ay/izNbVfywUfDmOiebcRekM+dWzTz3yrWxLi2/q1xtJk+zUzaY85ejiyaE9tOFpoyFJuJYs0aoasQRBjFfgoZOAx6bv4RyhxviIC/rH29P73wYe/EBbhDyj8eYz4+sjJuGurjbdhp+sEPVkGU2hSkbRCE6Y7JnId6EcaEcuzCo=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784209122; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=84UAuBqH5v/tsKvn2GcpHlgsiau5HQw1ny/3kZI7/Pk=;
- b=AM3cXAtbFnrd+qZ9TVKaurXy4pdoLR1DChUz9N6RHFgjh7Psz/WZFVWcW529vqrH
- rqua5iLGuVaM+a2nbsMBKYEaz2+HlvGW4W7hvoTIZco4IF33vr4ZiF/T7ROVCfDJw84
- viaWHg0U/8xqRe1tIH6JK/1pxarKZygxWWcCzhcg=
-Received: by mx.zohomail.com with SMTPS id 1784209118738935.2567743379011;
- Thu, 16 Jul 2026 06:38:38 -0700 (PDT)
-Date: Thu, 16 Jul 2026 13:38:25 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Michael Opdenacker <michael.opdenacker@rootcommit.com>,
- u-boot@lists.denx.de
-Cc: Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>,
- Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH] doc: thead: lpi4a: detail how to enable fastboot
-Message-ID: <alje0f_T7MZWfYPg@pie>
-References: <20260715-improve-lpi4a-doc-v1-1-4cc045eb59bc@rootcommit.com>
+ by phobos.denx.de (Postfix) with ESMTPS id A906284BDC
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 17:17:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=65092eaa9=Charles.Perry@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1784215077; x=1815751077;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=Xhx0wl5OQjgAf2wULVLIs9fqA+IG40e9INoI2BmrKGg=;
+ b=lGQsxU7Hlo++oXrhOgDG+pcZ8mqStUu82Lk2uRrdmoLCDpejhVLxWdPT
+ ED6eEeS29lLxodni/MvSVhORoDbZtLvOvf4ZGFZ/qpJjiDiEznbLB37ap
+ 9g1o+yaknQmhU0pA/NOiXSlBQJLxh75zvXAtczmCZQ2JtCFSvVXsF/GcA
+ hYHjiyBI04Fqmwlu99QrdrMFTNShtPI4uL+yVW9ahfUPhJw/Unp5cVt1K
+ 57z6sUS4FokafWalOWUXDTeM6VGjGwyWrI5uszQa4gI7wgy9CgMSrGIe7
+ pxM/ZhZ7oWIxMHHCLegmO33N3CQ2mqxp0qXzu5llhOG0HrNrm6jsOQo2i Q==;
+X-CSE-ConnectionGUID: psDOgDVoSZeuzETsYZ9mQw==
+X-CSE-MsgGUID: tg7byaX1Tpa6IuTzZsd4XA==
+X-IronPort-AV: E=Sophos;i="6.25,167,1779174000"; d="scan'208";a="227877604"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 16 Jul 2026 08:17:55 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Thu, 16 Jul 2026 08:17:55 -0700
+Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Thu, 16 Jul 2026 08:17:55 -0700
+Date: Thu, 16 Jul 2026 08:17:53 -0700
+From: Charles Perry <charles.perry@microchip.com>
+To: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
+CC: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>,
+ <anup.patel@oss.qualcomm.com>
+Subject: Re: [PATCH 0/3] riscv: Add generic SBI MPXY interface and MPXY command
+Message-ID: <alj2IeRu5emA2amQ@bby-cbu-swbuild03.eng.microchip.com>
+References: <20260709175605.1070755-1-rahul.pathak@oss.qualcomm.com>
+ <alZvl61jiQ0Wlvl2@bby-cbu-swbuild03.eng.microchip.com>
+ <CAFR3w36bcmGtSMLwt2NBKh7OQ_AW_7dPJfYrqc0=KpGC6LwnUg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <20260715-improve-lpi4a-doc-v1-1-4cc045eb59bc@rootcommit.com>
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAFR3w36bcmGtSMLwt2NBKh7OQ_AW_7dPJfYrqc0=KpGC6LwnUg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,45 +84,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 15, 2026 at 05:04:04PM +0200, Michael Opdenacker wrote:
-> Add that the "BOOT" button must be used
-> to switch the board to fastboot mode.
+On Thu, Jul 16, 2026 at 08:15:42AM +0530, Rahul Pathak wrote:
+> On Tue, Jul 14, 2026 at 10:49 PM Charles Perry
+> <charles.perry@microchip.com> wrote:
+> >
+> > On Thu, Jul 09, 2026 at 11:26:01PM +0530, Rahul Pathak wrote:
+> > > This patch series adds a generic SBI MPXY extension
+> > > implementation which provides an interface to interact
+> > > with platform via supported message protocol (eg. RPMI)
+> > >
+> > > It also adds a mpxy command which uses the generic
+> > > SBI MPXY interface and provides cli support to
+> > > interact with supported message protocol. Currently
+> > > it supports RISC-V RPMI message protocol.
+> >
+> > Hello Rahul,
+> >
+> > I'm happy to see that you're interested in RPMI support in U-Boot.
+> >
+> > Can you share with us the context in which you developed those patches?
+> > i.e., what hardware are you using and how is the "mpxy" command used.
+> >
+> > Is "mpxy" mostly just for debugging or is it expected that a bootscript
+> > would initialize the platform with calls to "mpxy"?
+> >
+> Hi Charles,
 > 
-> Signed-off-by: Michael Opdenacker <michael.opdenacker@rootcommit.com>
-> ---
->  doc/board/thead/lpi4a.rst | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+> I have used QEMU RISC-V Virt platform (with OpenSBI + librpmi
+> providing the RPMI firmware side) for its development, and in terms of
+> use cases its both actually which you outlined - debugging and
+> configuration.
 > 
-> diff --git a/doc/board/thead/lpi4a.rst b/doc/board/thead/lpi4a.rst
-> index acd7ac2698d..3920efcd710 100644
-> --- a/doc/board/thead/lpi4a.rst
-> +++ b/doc/board/thead/lpi4a.rst
-> @@ -91,8 +91,10 @@ OpenSBI firmware and proper U-Boot.
->  Booting
->  ~~~~~~~
->  
-> -u-boot-with-spl.bin should be loaded to SRAM through fastboot. Connect
-> -the board to computer with Type-C cable and run
-> +u-boot-with-spl.bin should be loaded to SRAM through fastboot.
-> +
-> +To put the board in fastboot mode, press and hold the ``BOOT`` button,
-> +connect the board to the computer with a Type-C cable, release ``BOOT`` and run:
->  
->  .. code-block:: bash
->  
+> Debugging is the pretty obvious usecase where mpxy command allows
+> anyone to access message protocol in case of RPMI, it lets you
+> access any custom service group implemented without changing u-boot.
 > 
-> ---
-> base-commit: 8dbe57ba648648c4897717cebbc4505a8e0a8c23
-> change-id: 20260715-improve-lpi4a-doc-feed8191d37c
-> 
-> Best regards,
-> --  
-> Michael Opdenacker <michael.opdenacker@rootcommit.com>
-> 
+> Boot time tweaking of any attribute or any platform state changes via
+> scripts is also possible as you mentioned. The configuration can be
+> board specific and expressed in uboot environment scripts instead of
+> compiled in driver code.
 
-Reviewed-by: Yao Zi <me@ziyao.cc>
+Most people will want the later, i.e. compiled code.
 
-Thanks, this is indeed more clear.
+That doesn't mean you need to modify all the drivers being used on your
+machine because U-Boot already has an abstraction layers for clocks,
+power-domains, resets, and other which are relevant to RPMI.
 
-Regards,
-Yao Zi
+If you make a driver that implements the clock, power-domain, etc. API and
+implement it so that it delegates to RPMI, you can leverage the existing
+drivers and you don't have to add "mpxy" commands to your bootscript. Need
+to use the network? you call "tftpboot" which calls your network device
+driver which calls your clock driver which calls your RPMI driver. Need to
+use the NOR? you call "mtd" and the same magic happens.
+
+I posted an implementation of this, please have a look at it:
+
+https://lore.kernel.org/all/20260708215200.1331416-1-charles.perry@microchip.com/
+
+If you want, we can combine our two patchsets into something that takes
+the best of both.
+
+I can take your patch that adds the "mpxy" command and add it to my
+patchset with a few adjustments.
+
+Thanks,
+Charles
