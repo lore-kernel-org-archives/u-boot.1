@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08129C44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 23:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E6FC44512
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 23:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D93EA84DAF;
-	Fri, 17 Jul 2026 01:25:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D27784DDB;
+	Fri, 17 Jul 2026 01:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IjV2iF3g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hz7kFD6C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5B9484DCA; Fri, 17 Jul 2026 01:25:13 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 0F98384DD1; Fri, 17 Jul 2026 01:25:15 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4D0584DAF
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 01:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE54784DBF
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 01:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-44aeefa1c00so1377194fac.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 16:25:11 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-4471b489240so2477123fac.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 16:25:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784244310; x=1784849110; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1784244312; x=1784849112; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Yq2XO3Yu74eJYWy0nbv3y4oJ1WQGD8jk5CbzGnfkXkM=;
- b=IjV2iF3gg/l6r3BXy332doFdWd8VcdgFcbGhwL1hrwRDiSq1N8fYoZ5ZxwfVPyPxoA
- oNWtrGg9Xk020P2C6H8CEFHtCmLZRU5KHT9VSUTTKj/YoPJZNETUv16SQ/nJ0I/pvjzf
- UKu4svuH0X6bfiiKSgGRcT8yi2cza4k7fMAzg=
+ bh=m4A8HhdNAoRpjFIwXwK2E8ruIfGdoZu4Mf86s8YYUU8=;
+ b=hz7kFD6CIIifEwMjRbhUYGO0ICxeFpr2x4qEV853OMvP8DEF8QEjY4A59aN8hkyQW+
+ plPySqUhzrFNqP7xcU9x6k79PuynpPLkEiWXimZ2G5BdLNKlDqEMYxM+QzsbrnCN30cC
+ APiS4TjfQrFbGIi9Vg790ENytNp0i00QS1DUU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784244310; x=1784849110;
+ d=1e100.net; s=20251104; t=1784244312; x=1784849112;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Yq2XO3Yu74eJYWy0nbv3y4oJ1WQGD8jk5CbzGnfkXkM=;
- b=ngQlnV2K9D3uznRoQeKSVdUGbuxG2zSQQa4EOOFGuHHw4SQHnkcXgFLFx5TIadZUhs
- pPaU7oDrVJ+XtCT7WmmFpnHgFn4tWBwOR9+1quhQ+cRXjy0c5ZHgkHbeKsUi7jSKUZv6
- 36kiVP2IfCakyLU+OHKtDIShjnESI08eNxSzR5wC4r8p6HDnq73BIYfo2o4RGvzGwu/d
- pAOmdXcQwp+bHaXWHU1iqYYSOKMmTX6unbqpUvAzQk1+FLYRGs767wXuEq6B0UxE3ERP
- yFrgTZiyi53LVf//fk0In+yu9Jm1xhn2gajZsLY81R5lVCRSuUlKnLcCgAdAAN+AouiS
- D9lA==
-X-Gm-Message-State: AOJu0Ywp+27Jbp2yJl0pCjSNk2zmJpjEl4K/nPjjwlVdkopy2utC5CMd
- IsHIH0JGGCmfxcro4WD6F4xGcjOlLy+9Z7fUnK84wouyxJfwOZlkOo1aE1K+Fluhoys=
-X-Gm-Gg: AfdE7cmm0pHI/ueASVauNwKHRhr44H3d2BpxdB4AJ89FzLgwZ4m8e1hLnwHVdE7pjhg
- KjtI/wuuFg4myKHQk9RQrxM8SN0rR8wfqT9LOOyBTrJ1gF0wjPFSZ1t9Krjo7nid0AoCU9P4fhX
- XsXG3/7P15MOg2oRTjtMSuHRU3lifcOjNEaKrRIqIvwH4gkHrl3HpVmdJXh1+c/2AQv+izUWkC0
- lWP915rURVXMZiblFt0u3OFXP3vb6jox49+0/JvJYK60+4MH0BdHCCIGXSEE3LqpyhMIIHFNdy7
- LuTPe9dOf/aQJVxFzVQ1QWHlrt86FX+i7nDLWhuwO1kqIUB6hrzODn78vSaRRL+wcOLF1yCkOi3
- d3oeZ6FDlCJ1oAX7uxNa9YCHRr3gLmAR5j93DUX6R/jhGBryknqFCRPeKAbWCdtJksMwq0q3/Yl
- yOjH2V/xfkN2+KpoZHgGT2puQZn4YaSSzVp72Ljon7LpwPyGnaMlM02oAiNIZDfzV+JekXQie4O
- g58wgkhsFVXNrKatcgaPVMtjQ==
-X-Received: by 2002:a05:6870:b14e:b0:448:47cb:da96 with SMTP id
- 586e51a60fabf-4568c616893mr80492fac.4.1784244310546; 
- Thu, 16 Jul 2026 16:25:10 -0700 (PDT)
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=m4A8HhdNAoRpjFIwXwK2E8ruIfGdoZu4Mf86s8YYUU8=;
+ b=N8Dw4bk6ugGygzOBX7stVrIrUgeDX7EU0qx4LNw/GDlKi+F5DHVxtL/uQBQCXs5FEY
+ DqxYXCy93oPQ6uCGD3dG+DIq1KDsynnuF9fO+vB8fn++SN6Fgd57wbl44AygxNIkYll/
+ FNwFZ7/AtHnPeojZZOV869YCVsUCEHF8PSx/An59Op23CXtxFOXvVygIL5h8CpLWymTD
+ 030wBEhup8KeEj5aQqRjCuZxKKYaLaCKFva606Q/SkxVnzQrC3VfI7l9N9jkjy7ZGexs
+ YBv+QldlayHmKbw4Q7BLhsXtJKe7yH9cTDWYOUxZ6TncNw7/HH4BC6Q2P1qJ+8smgMKd
+ fXgw==
+X-Gm-Message-State: AOJu0Yx9yOzC1TdbDR+1s2yxvUbBdNgiLWOUUXdxVEC83twTEUgEsC3Z
+ CyiMHGIkVThE8qCXlTx74gO1XlA41WXdfgfVXteULqE+qPuOQuHXCc/56dAMnOTNKg4=
+X-Gm-Gg: AfdE7ckxfBVt4De5rmyBz7yrKXKyT2FxIWfVGS/NaRXo4TGlOb9GsSvAgiSziclxgPO
+ 9TW07SDsx0V53AQkgfAUS2QaUUoX2vtvN5kdJ17hMN4VPX7LKn9z1bxdP3YnBmAfx2BPJbn+arh
+ 9eUETLRvcGbEgv/RcG1ODSXx8w85owgvePKBYEZnvtFYDxwrbgBXqkqWnif83ivDhmVcJxZy22G
+ lMeRKiVvEF1mDidYCJyMMfDS0hWwpar0HBaQx5sDODGvjYDSCxBUL15miReac69bABby2x0oz59
+ xrof05GPFS6oa5lrU7gbcXBLme6yPn3bY3TS17k+UAai1UJAGeEtURq9/CpB0IFbHxOwTt3UHIz
+ t3a6ONSQlk5y5B4cYybZgHK7RPkTjvR+MnMH7JVHm1DbtUGbMvaY197dsxiL82p6uPyrOhV/42t
+ VFsqM1wqo+0ZMsoayYZj1+heHqNpFTc7OM5aG8xvkWygY7K7rSJYGT09WpdB9+bykLFt/t43Hxu
+ 8cd5ZfOkek7JRwlBHyBYbfiwdFslOoiDMhP
+X-Received: by 2002:a05:6870:940b:b0:451:fb50:a594 with SMTP id
+ 586e51a60fabf-4562b55670amr5994456fac.4.1784244311619; 
+ Thu, 16 Jul 2026 16:25:11 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4568da4ab47sm27308fac.0.2026.07.16.16.25.08
+ 586e51a60fabf-4568da4ab47sm27308fac.0.2026.07.16.16.25.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 16:25:10 -0700 (PDT)
+ Thu, 16 Jul 2026 16:25:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Romain Gantois <romain.gantois@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Markus Schneider-Pargmann <msp@baylibre.com>, 
- Yannick Fertre <yannick.fertre@foss.st.com>, Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20260703-dm-core-v1-0-076d395bded4@nxp.com>
-References: <20260703-dm-core-v1-0-076d395bded4@nxp.com>
-Subject: Re: [PATCH 0/4] dm: core: misc fixes
-Message-Id: <178424430880.1470194.10643571364618939025.b4-ty@konsulko.com>
-Date: Thu, 16 Jul 2026 17:25:08 -0600
+To: u-boot@lists.denx.de, Aristo Chen <aristo.chen@canonical.com>
+In-Reply-To: <20260623141540.618272-1-aristo.chen@canonical.com>
+References: <20260528132746.719699-1-aristo.chen@canonical.com>
+ <20260623141540.618272-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 0/4] arm: k3: replace tifsstub runtime filter with
+ per-state FIT configurations
+Message-Id: <178424431068.1470194.10671045238552718846.b4-ty@konsulko.com>
+Date: Thu, 16 Jul 2026 17:25:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -106,27 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 03 Jul 2026 17:11:23 +0800, Peng Fan (OSS) wrote:
+On Tue, 23 Jun 2026 14:15:14 +0000, Aristo Chen wrote:
 
-> A few misc fixes to dm core. More information could be found in each
-> commit. Patch list:
->  dm: core: free old name in device_set_name to prevent leak
->  dm: core: Correct calloc arguments
->  dm: core: fix wrong strlen check in of_add_subnode
->  dm: core: free fdt when fdt_create_empty_tree failure
+> The AM62x family (TI EVMs, phytec phycore, toradex verdin) ships
+> two or three mutually-exclusive tifsstub variants per tispl.bin FIT
+> image (tifsstub-hs, tifsstub-fs, tifsstub-gp), all assigned the same
+> load address 0x9dc00000. The current platform code loads every
+> variant and discards the wrong ones at runtime by zeroing *p_size in
+> board_fit_image_post_process() (arch/arm/mach-k3/r5/common.c).
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/4] dm: core: free fdt when fdt_create_empty_tree failure
-      commit: e871bb2463fbd6c06b6d771d9201c6d6f4abf947
-[2/4] dm: core: fix wrong strlen check in of_add_subnode
-      commit: 65e1e66a3a38e21128582bec3b93c35548e60687
-[3/4] dm: core: Correct calloc arguments
-      commit: 0af2ed57a3e9c34775602ea70d5c9829c4e830c6
-[4/4] dm: core: free old name in device_set_name to prevent leak
-      commit: e1f345abf4c0df94ef6c5eca400a440c16b47d81
+[1/4] arm: k3: select tifsstub via board_fit_config_name_match
+      commit: c85bf61b14f9caa34662d9b767b61ba2b5da74f0
+[2/4] board: phytec: phycore-am62: select tifsstub via FIT config
+      commit: 857c2151ca8d41add88fec01a7fea8965d0d2c74
+[3/4] board: toradex: verdin-am62: select tifsstub via FIT config
+      commit: feb2b13377534725ee0f428ed4252db7fddaa57f
+[4/4] arm: k3: drop redundant tifsstub runtime filter
+      commit: a5567f46697a733a9ad03eaec9941c8d80e6fb40
 -- 
 Tom
 
