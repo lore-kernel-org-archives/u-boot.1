@@ -4,151 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E14DC44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 02:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B85C44501
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 02:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C856384D61;
-	Thu, 16 Jul 2026 04:12:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A66F884D72;
+	Thu, 16 Jul 2026 04:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="AcKHxv+X";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NaPTgVPb";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="cSqC5QUE";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j7SyrsJN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98B4484D6A; Thu, 16 Jul 2026 04:12:32 +0200 (CEST)
+ id D95E984D73; Thu, 16 Jul 2026 04:45:59 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09B2180087
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 04:12:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A936E84D36
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 04:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rahul.pathak@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G0Xs6j1125301
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:12:28 GMT
+ 66G0XnJp1226890
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:45:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- FpLK/EkJiqvrsC5kwCLozyIkTfSDZTFoBtC6ehFanno=; b=AcKHxv+XO/hFp/Bt
- ja4kHGJaMROTUldCnh4TybqL+4kIq/8KXzjBHCx3L2eKlAj1/dwEP+k8SGInfswq
- QKCFKXMoQF7wnbWvj0Ha8HqhT7CKyw71mkaVkwZ61DknPeWdhED68lGlzpdBmr24
- +0WJW3Ln+DMYKTdFCvYn+T1CzCQGgJjk+eM/zuWCMf4Ax19Hh3KCqkq88fqe5epk
- vrDRwZdmGbcKYKsGUbZxThgY6asprzdTtynSOum8mxbdj3ZnMMsS5CH5KcyUc+AD
- 8QSfQDDCyVRLHFsabsNQMgIk2ADQvqfgjH2DK4ejPeo9eXnBakXm7v3Zaxh4hMtp
- Kdq8FQ==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe7q63g24-1
+ z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=; b=cSqC5QUE1LKxwY9I
+ qIZF2tHiPb7MrvKIVJlmZZWMHhw7aYEJOhhUKEegHYqYz+NaUGuLBqLKQdcea6qC
+ Z4RFkEYhc7rUMtP75KV962L77Rj0WUWJUMsYu/fYUQHpcnmEyaPwA5wjoIvGFY/s
+ JDuJcQOYNrbx0s3EcnfBPv3jh38qLGVFsxWZLAW+pg/TxWLWDRFhSI0iGALEyfbT
+ 6RSUEt8Nifi7cBCUJhFrtcnHIUpOPO33VuVWMCP+vz9EbeigY9PQyxFzGPh9Gfm/
+ p0+tPZrRtu3lwUcIsOUihKcfWhiJ6AA9D/qgThE/Lm8LXVrhQwDTS2YCThws8hNH
+ vet4tw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feeg1hny4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:12:28 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-92d1cae5939so852095585a.0
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 19:12:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784167948; cv=none;
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:45:55 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-92e66f9e2baso442545685a.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 19:45:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784169955; cv=none;
  d=google.com; s=arc-20260327;
- b=mTRDXbH1+OEssfxkOO93FvYZtDxmdbkW3RIC8SoXSwSyXTcIyvfkoG0FDRModcqnlG
- 1XPWP2dE2xloM9+QOXVofWZ19fU6YoPzzTTNXmVtB6crZMJ7viF8aR4tMFZ7i+HZJuRq
- Jr2Vs0E0+FU1NiKOx7s1OSR0S5gUgQ0WyFJjcvHGg/Trec+fKHSegyArfITKxCvaarm4
- leTnYjoWLW3KVWpZKyuNoMACFalPQViQ0vcrcozP4+yRFPOQFcKj88S21BWlzoS0l6gi
- YMqjQa4jDMycL/LSL3s659H9kQ9EvJFCjQkx7ONqYg6+qbOu2u0+x48zPrDNESIBHx5z
- 1HRw==
+ b=hNRdcK1xkvue5EL92xAqg8ya/N81UH3iNAAkAK2kt5Oz7X+ApOTFD5Iu+kKXAnrrc5
+ BZ6WjYcwO54P5pO04Ofxzsfu+GxA38m3CxrbNx0hiA4R17bdKCDCXxhau+Q0kmSnE6DN
+ rfw9fkYS2fDe/Fd0V5u7D0H9gzboUiCDKi6Bdl9z9fLloIYBPlWtIaV7/8FaOtTFpime
+ W09OCWZ1mKBIGtvfrurV9sfa3dU2cal/wKoOu8y3kSiS4L/0HQdVt0up3yqR1KXB+FKY
+ /HAXxl8HVgoCx4cxGIITTdYkM7vNuUhHivwHP8B+rWe0vze8o1kpKrJEbXP920+gDOCs
+ 6/FQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=FpLK/EkJiqvrsC5kwCLozyIkTfSDZTFoBtC6ehFanno=;
+ bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
  fh=lKF8suJlCFCP9fZ6gCQfGg3jHgNxOnuuzuUhGi7d6ow=;
- b=KTn5Z+c1C2ro2Yy70ElR1bHQ5wmQbrAnWJ65g2NzJk7OgPvCsGNHKgqMDBrDrpqG9C
- /e2SACPQemBn3tuQBCRFY/kr2vACaRMAT3UrackvPI0mLBLzY1GhJfmXOgfGL7uwmMcy
- SpU/C8n4nFM8yb9JP7BODK2nDZb+6L3llMm7OH/o8eLd2oJBT9X6y3+G1qaWdN5zYwmn
- MnDvSwBPmYuxA9zwsjQXgFvOiJBbM62hqjRSTgriJcG7nv/xbfV6PPhb3uHpyLBGwki9
- kEwv4um+wxafEuecKHDvX2WkSt0dKFLJ/NX7l6iRUYSZesEP21EGCLQb54Z6Y93+Cbq7
- FC5g==; darn=lists.denx.de
+ b=Bov5mRwIEokJwngcaoPra8A3oNTz0Z/PaX7CQ07jvXVE7JDfcEiJxN0DwZDauP+ISH
+ G1gcokcf09/OZCCYjadqHksWn2MUJ2CdNMk+hKsLkREa8fgctjWooqbdnKlSRxQrPZHg
+ cX7ndDojaSq/I/ur7a0+qfEZ/zdJPpmVqqbnFbPM/csu3CFlT4EN29ij1wBYBjplVbqS
+ bswxQhwLjc51jaNJeRREBJhqHsz82aeZk6ghz0q0o39JrDGHHBZu5oAce5D55Uwc21G0
+ QvsE3SGy8Q5+aw27DoXUjMSzVsW4lpmpKAEcPS+ju6wo2cYTsTsn/7o/FCeJOjA7GSgX
+ hXkQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784167948; x=1784772748; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1784169955; x=1784774755; darn=lists.denx.de; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=FpLK/EkJiqvrsC5kwCLozyIkTfSDZTFoBtC6ehFanno=;
- b=NaPTgVPbc2YXgoNKfW30i47241JVDi8cC0Qb7FVZfJ632D9BwrzpiNthKaWF/6B7oy
- chzerpxwfWhjYA2Pk0z7gnxnoxFuuUUdZDWj2KWcCVgMSZdwqpFM0a1bHBbpw2HZUSA3
- 0C+ut0lEp7jVnkGqCZtla5/j7zCnG/3oFY9rzp79S/gdek969VRD6rI+wR+hJtLhCLN1
- iatUt19oNO3ReCTBVUhEIEvNsmDI/4pYuiADMyOa5lk2+oSBIwX+xzRPd39gg9gJ/ZEB
- Sdjmcpxs65sKhaiGrT3QFp+HaxhIV8m7Q79iKydLLUeGpRa91uxMeIMCyXjl9SYSRKRB
- hyyw==
+ bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
+ b=j7SyrsJNNNxPWKJjI87DtZuiESeQWq0z9ooiSGYxszZj8GLxBaxAiEcTHrFMa8/IrA
+ IYuZ3P9/iIx729eLX7yFulVuHjJRI5YtX85vA8aH1KQ8lR7gHyXnt9U8VXbQnO0XSbfP
+ mWjjtKM4jDrDhUFlUaJeef/9p9PtjbvehHatn93tkePeO5eBzYK0KTRb+Kxu0n2IXtbr
+ +IGEl+pWfBSuRdIfd1fiEUlFJpS7BNq8GoO5q2DY19t4hIsnz3lK8o7ueBYbgwJR71VQ
+ HkTiHVcztB3voCIePZrEQbOyiY8idM4TXTgjBTVi1ft/qpSBCgRUOMeIeZCYZOeJFqjw
+ de+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784167948; x=1784772748;
+ d=1e100.net; s=20251104; t=1784169955; x=1784774755;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FpLK/EkJiqvrsC5kwCLozyIkTfSDZTFoBtC6ehFanno=;
- b=YODXWw8fODVa/MCudxs11aB0wvGVT1vNZ8EmI7cghGMgPlfBHYMZ5ABmaHiX8zFCir
- EEF9XAYn4nxyxGvlMAWsZpKjPcMwBT48uuvUVZtIzaPPMaNIKpzG5DgroSawxQt3R0a7
- Kd7o+VWCzNAZuRTAYqjuwRAvtoBNJBCn1jausWJqVRMU/9+thqoo9y8KG+rWLH5INN3+
- Eu5ME+Ig2yYjO4o3BmIyp1Dq646lyyBvhZlCCmAUIhi8Ypxzbg+qP+Yh4+ErZQdGHw7P
- x8+70jHuV3eKRxzQCnQ2QYKVDxPkUKka/cVntRStS7OQ+uYLHMO1AI7UPlGKwsbQDAdr
- Hcag==
-X-Gm-Message-State: AOJu0YzozbZ/P9R4cwJCw/pE5c6jPdmF3ElnSwo9WWkB16sPOxDGlQxF
- BGrCEocnceVTMdKLtvDgwdygNtby3AfF7cYJIF5Gt3RAQVsPunn9IKc6oCU97IUJifOfVF+q1zW
- cgr/RqH6nGuAqVg7lGWJ9THXJ6JHaloQUw1FcxKAGsM7/OwO5XodG2Y9gqJ25fr3eE+n2msu/Ob
- suqjKix/Qblj7+4reEgxIHssrE25tHXBbtLOB0LyY=
-X-Gm-Gg: AfdE7cmbWrY7HC7nIGBZ+x1vASATb87PJhqzbBIsNqfocHbU789xR5n/n1dG5kTeRLF
- uswgIGLJXKwfgRVbLCLVIS1A/CoVvE+Zr8bTsxJfZUDVn4+qh5D9nJXmcKIwQV3/kjF0X6ZigPJ
- t+CFmlNT9DS+rB5Pc0w5vch8h5PHgPoXdyvlOuhchaxi26e3gaQl+vyqYEBw==
-X-Received: by 2002:a05:620a:171e:b0:92b:67e6:8ab2 with SMTP id
- af79cd13be357-93086be2005mr981293285a.60.1784167947877; 
- Wed, 15 Jul 2026 19:12:27 -0700 (PDT)
-X-Received: by 2002:a05:620a:171e:b0:92b:67e6:8ab2 with SMTP id
- af79cd13be357-93086be2005mr981290985a.60.1784167947409; Wed, 15 Jul 2026
- 19:12:27 -0700 (PDT)
+ bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
+ b=Sss8cmf/czOBhF79t7SBUPl1JhNkbtRxWGvukv02XhrmlfwDK8xq/i9NbUegIeRwLR
+ UPnO1C8B3p5H5/KX3LdHv2B/SbFw77srxB8JCi3NX2AhZVJIXBq/6HtdkGA1rdWU5c+h
+ aKmm2cUSF7+ULgN5oSyWK7Wu/7seqpPxukZWwuTDT64HsVXieu1cfJ5mjbx4aPxBNnPj
+ mUgb9NgIflGkoZkiEJX4pHkFfkTFpRL2zaGrPfTAOEVFgV5/3Pr3ik07zwrFJlGHRhvK
+ HDZ5p9Zab1JRTTQGDVL+hBITAqKsyn6swxodylbrHJpW49KjmrAAcyjYl5VBSrPIx8Fe
+ u46Q==
+X-Gm-Message-State: AOJu0YwkL8z72MyGlmAnrzu2k+8giOb8qCq5mdql/hI4PlcB7v8s7OFX
+ tohRun9XCC1vljXDqLDM+IQbQPUAaYvC0drVZtx93enYdhwjNSYma8BYez0VfHM3PzUBxyKQlt0
+ i2bAjSCgcjLRzMx+tiMO1/LEyNHJcURQf3n76VVPvOUsnVoLmzdWJg2+F6PE+muheYukjaemHK2
+ Jm06DoSDraOt6vmbUGc6DPlz4qPoU5ETg=
+X-Gm-Gg: AfdE7cm3rsOknZi1WeHeIMASd3npd7Hp2V92gehG7K42NQSsJdMUdxuOZhe3ZeJGCRP
+ 8/67Cf5QKrWD/Gk3KxQj3NwxcRpD7mqPpf9sXMW7WxDU9jPdZlKVLHNQOb7HzM8S1VCd5mYGVUP
+ /vDbdixwZD+BSO3r/9hqlHn5Z0J2xmJmkExeb3R4wnzwyVMjoSqPnCAHbZ1w==
+X-Received: by 2002:a05:620a:2a09:b0:92e:cac7:96e6 with SMTP id
+ af79cd13be357-92ef2c29f1bmr2084406385a.58.1784169955283; 
+ Wed, 15 Jul 2026 19:45:55 -0700 (PDT)
+X-Received: by 2002:a05:620a:2a09:b0:92e:cac7:96e6 with SMTP id
+ af79cd13be357-92ef2c29f1bmr2084404085a.58.1784169954747; Wed, 15 Jul 2026
+ 19:45:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260709175605.1070755-1-rahul.pathak@oss.qualcomm.com>
- <20260709175605.1070755-3-rahul.pathak@oss.qualcomm.com>
- <alZ0/jx7H6RTDXeA@bby-cbu-swbuild03.eng.microchip.com>
-In-Reply-To: <alZ0/jx7H6RTDXeA@bby-cbu-swbuild03.eng.microchip.com>
+ <alZvl61jiQ0Wlvl2@bby-cbu-swbuild03.eng.microchip.com>
+In-Reply-To: <alZvl61jiQ0Wlvl2@bby-cbu-swbuild03.eng.microchip.com>
 From: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 07:42:14 +0530
-X-Gm-Features: AUfX_mw4UcSXFXBeF5n2kAtGu4k7LakZfs2KBIYgjkkinFHN4s7-x6Dmyv0leD0
-Message-ID: <CAFR3w34FBGdcJYTgooigq_3yhFfPAFwCa9cxxFYC_YpemK_U1w@mail.gmail.com>
-Subject: Re: [PATCH 2/3] cmd: Add mpxy command and add RISC-V RPMI driver
+Date: Thu, 16 Jul 2026 08:15:42 +0530
+X-Gm-Features: AUfX_mwi-y4lnmE6ByKCkUOsdmi3BWpEqJynQxuFu6FZu1TCy8zxigtrjHI6KeA
+Message-ID: <CAFR3w36bcmGtSMLwt2NBKh7OQ_AW_7dPJfYrqc0=KpGC6LwnUg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] riscv: Add generic SBI MPXY interface and MPXY command
 To: Charles Perry <charles.perry@microchip.com>
 Cc: u-boot@lists.denx.de, anup.patel@oss.qualcomm.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDAxOSBTYWx0ZWRfX+5PlTIWWlyGN
- PSGJaNFX9cCOV6gnx+nnjeilo2s7W1jTdKz28tiwc2hoNJmlzUxAcejdCaRVc4neWWpLXtqOrc6
- EC06Xx4FF/8wkgovBpj8UV/U+6crIas=
-X-Proofpoint-ORIG-GUID: v2WZEQJ-oB0875ZYqZjV_WWfpHEZSQuA
-X-Proofpoint-GUID: v2WZEQJ-oB0875ZYqZjV_WWfpHEZSQuA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDAxOSBTYWx0ZWRfX/aVp9noHQLm3
- 8ogdnl+OJqjmb9KCVOsQTGHgY7WVZcarKHRAh7g5BToSjwEqW7vhdrlDMXkFOdFYqQSedgsIQIC
- 0Yut289np8vOK19vSTMgcd4U94q/VVwAtHrhJaKXwz6M5aOmW9X5IYVZeHEAG85WHp1baVTyjRb
- u8Mhd/va7noRFdPn7AeJWeBaVOMyGoLbAm5MgK7JZWnr2XF/3PDksqGBedB46mrULmFEHpknzIC
- NLl4O9WO9vBJ/d2iCQ5wzgZXsySO2Jf89VIsVpODzRZvq1+hGgC4kC8LQoW3/bxRakKJDOGRUQc
- SN14bj2XcxdMdG7JruwQHdZ2b4aycOhDjt7zCgGEta91gHs0EV8IG4ibh4lRWeb91bdDq5dQUQ5
- QcPnXRjOAB1nUtPzaVS53hIBDE7Fb+pfV8eJIAvbhJYKy5BJFvw3Wtj+qPeHXP/T6w6X+XONjAf
- FUwE6HgRUymbO/ZQpEQ==
-X-Authority-Analysis: v=2.4 cv=BajoFLt2 c=1 sm=1 tr=0 ts=6a583e0c cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDAyNSBTYWx0ZWRfX3jQHeXz0usBp
+ QKOA/177M+1u95ksOq96AGaugVnXI/WWUo3eGRjl7R0s0fabckUfK32ZXRMztI+upt4LlEVGv+C
+ +Zufjghb2pYeKBfUkcoj8syMExGeNuCnp3X5JWL3W6yzqnC8sI4V70lOwTnjaXtjtEu+vou5WyH
+ rK4cVqXMZKE9yjO1jQk4PA9N9NlkUoBShuRhgPdE/GVLS0VIcs9KGv67LkSu89FkUHHQHXIgSVn
+ Y6ZirTQm65uYzqq6Sbb/HkjQWiQBrRZBcKrxkXyWFwN2ESM/dsOFcLRkB0jeOWscBshuVua8g/Q
+ 3PCVvBCrRmYnFQuI5AbeEqZLvB/x7YlYirH9ZepiLogvWCSFXZ7gTMfjNA9vm6uM6jt3+5F8Wtz
+ sfdV92vQ46FZ+Q0IN1f51a9NHxzzJEWaOlYT9JboGKv+MSZ4+FM2Qn6gN+ta3kGVW/hBWLG/JpH
+ 4qB+4nPCvra5dM6XjAA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDAyNSBTYWx0ZWRfX7DdnNOhajWhm
+ hcaR7e1kxsQT4+E67HgmC5+MoP9BbNDd2vNKqxa/sRLasEXfjf/0iwzKLpmMHeTZwGxBNQ3m60M
+ DpJigkTXlGBGaEcIyBhk6Ka3cjMFaww=
+X-Proofpoint-GUID: SJN5ARpk91l_7-QicwYSW5dhAc6Ycq5r
+X-Proofpoint-ORIG-GUID: SJN5ARpk91l_7-QicwYSW5dhAc6Ycq5r
+X-Authority-Analysis: v=2.4 cv=SsOgLvO0 c=1 sm=1 tr=0 ts=6a5845e3 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=XYAwZIGsAAAA:8 a=jCGdHkQCF-2j2eI1uIQA:9
- a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=E8ToXWR_bxluHZ7gmE-Z:22
+ a=3WHJM1ZQz_JShphwDgj5:22 a=XYAwZIGsAAAA:8 a=YJLxltowQ5SDOXdSQccA:9
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=E8ToXWR_bxluHZ7gmE-Z:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_01,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015 bulkscore=0
- impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607160019
+ phishscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 spamscore=0 impostorscore=0 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160025
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,20 +163,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 14, 2026 at 11:12=E2=80=AFPM Charles Perry
+On Tue, Jul 14, 2026 at 10:49=E2=80=AFPM Charles Perry
 <charles.perry@microchip.com> wrote:
 >
-> On Thu, Jul 09, 2026 at 11:26:03PM +0530, Rahul Pathak wrote:
-> > The mpxy command is an interactive command which uses
-> > SBI MPXY interface to interact with supported message
-> > protocol through available MPXY channels.
+> On Thu, Jul 09, 2026 at 11:26:01PM +0530, Rahul Pathak wrote:
+> > This patch series adds a generic SBI MPXY extension
+> > implementation which provides an interface to interact
+> > with platform via supported message protocol (eg. RPMI)
 > >
-> > The command helps if there is a custom RPMI service
-> > group or any other such message protocol implementation
-> > and that can be tested in some manner without requiring
-> > the S-Mode OS driver support.
+> > It also adds a mpxy command which uses the generic
+> > SBI MPXY interface and provides cli support to
+> > interact with supported message protocol. Currently
+> > it supports RISC-V RPMI message protocol.
 >
-> Does that mean the "mpxy" command would also work without the driver from
-> patch #1 ? If yes, how?
+> Hello Rahul,
+>
+> I'm happy to see that you're interested in RPMI support in U-Boot.
+>
+> Can you share with us the context in which you developed those patches?
+> i.e., what hardware are you using and how is the "mpxy" command used.
+>
+> Is "mpxy" mostly just for debugging or is it expected that a bootscript
+> would initialize the platform with calls to "mpxy"?
+>
+Hi Charles,
 
-Here I meant S-Mode OS (Linux) mpxy infra/driver
+I have used QEMU RISC-V Virt platform (with OpenSBI + librpmi
+providing the RPMI firmware side) for its development, and in terms of
+use cases its both actually which you outlined - debugging and
+configuration.
+
+Debugging is the pretty obvious usecase where mpxy command allows
+anyone to access message protocol in case of RPMI, it lets you
+access any custom service group implemented without changing u-boot.
+
+Boot time tweaking of any attribute or any platform state changes via
+scripts is also possible as you mentioned. The configuration can be
+board specific and expressed in uboot environment scripts instead of
+compiled in driver code.
+
+Thanks
+Rahul
