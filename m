@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59863C44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADDD1C44511
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96CB184ECB;
+	by phobos.denx.de (Postfix) with ESMTP id DC24084ED2;
 	Thu, 16 Jul 2026 18:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zkVe0zzQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jLdZyJzF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B88F84CC4; Thu, 16 Jul 2026 15:44:09 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id B8A8780433; Thu, 16 Jul 2026 15:44:54 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19DE784C3F
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1661E84CA3
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c15e62c695cso54123166b.1
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:07 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-c15e62c695cso54138066b.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209446; x=1784814246; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209491; x=1784814291; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SN1dBm1c1Sx6v/dHlwKjb1oS64oT0Nls1+3R6BSqFOw=;
- b=zkVe0zzQ8CFdsXFLIIUQqkUJA+GIgexmrctBUyWzmyBdddpH3cYS2sR2V5Ums4UpQI
- Vhmk4D1a2l4QJCG3TuiiudKKHvsjyIG9nBe3Xq4dBrcUyjldGlGHHbttI5cpgYrGnu6m
- WuIiTFODWqtr2jPPGuF9IyJnzUZnESkloR/Ss2nAvkuj4hV2ZzRAPUJzIovscmWYe+VU
- Agr7G3Mrdxn/STleSmU8Dos5gF3oNBlvSofYjEPKw+hz4HmYRi2n6dvqIdZQ9liwJbqg
- hbNASmkCBxEmUPrS/Cq11370fK6j+lbn9wmOWd5ucsI7eR49V5H9qTADkdX6zFW1kBMS
- Zj/Q==
+ bh=SpUBMVF0uqm7eDNsEOicOMnNcvjHt8cUbo06BjSBZ/E=;
+ b=jLdZyJzFU8udsw0wyaZq4iIwC5DM09D0WmhiSXdP5nyd/Kmr8Xcaw3qROt4dZ+Nwuv
+ k7pyZTMWo7LEegR9ITLbzCXQumMyBbAnOsfT7uRt8Zohyea0pwwGZb7vlOwooMkuOxC5
+ gecBfZ5GcOkpWmm+MiVSALZYrig4vauV9INVHbI2940bL8/epLqJD0szA9AmNcEj15Oj
+ yKUqUfrbtQdNb8ME5hWUzczIaOMbOn06xTMZyRz1vCNRdY4KV0FB4/EvD0ceD2DhFyA0
+ mTpA3aNdJxDDdxe4mV2ZCaO05WZoBYGHXzeYf/Ntrrfu3bEoZMMKoyLixn/M1VBWt4q9
+ PNBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209446; x=1784814246;
+ d=1e100.net; s=20251104; t=1784209491; x=1784814291;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=SN1dBm1c1Sx6v/dHlwKjb1oS64oT0Nls1+3R6BSqFOw=;
- b=P6KUf7VbqLBqTPhiH/m6JwRGRZAyndcPyf7XGguakMUqYexfv4bAXIEW6MD6HYTgd2
- gQuZJBjNe9OLyxB40ScwBLazViLD6B02SiABOD9ba10xa9Kh98pQre3BCzgmnKlg/pFs
- sTRoJUiyXBOHTVzBJrrXRdNjOb7EA2oprzQWKy8PIOE1wqm+yxmT9r9Fbb4vrsm3uT06
- MEvTB9kOoxW2fVCHmo6bsjPS+RFruStm2hxHd71L0jbQx57E5twEHenMt9A6wjiHTV8o
- Lf5j/ky4OtpuzB1MVknmiwdoJ0eMbLAOR/Promlq2QBYkstn0xEhLu98pKS/p7SGsQ4j
- 98og==
-X-Gm-Message-State: AOJu0Yz78dwJOOoQiKyNttVRyCCYiEL382JnZrEcq0SOrMFN54x56YGN
- b4cMH6+SZOKLejNCw7T4jfX8X55NDD6Nr7iocry8bXcU9WctGLS3NOHaUzfS7uiI8BXwcM/bVrE
- ZOQ3B
-X-Gm-Gg: AfdE7cn4MvkE2Sor9hFn7MzY0FGEW308fooGcLkjpcpsve1y8GSR2eZT+tYco4vVEh6
- xlMCEL/QownXge3CgcfxWJNC4Sj7w27rTbSy1fZMWq66UCL2hN2+OKbz32q1YFEUrVHvg9IDxKM
- BWcf8aMZovY53Plis8jyGB0h9CYkWR7QurC/KsgAv4cTgIrEchkHFKCcWomQ9bTmpqtsNKtsNeh
- m4hAyAzkZPi/X/B2pq1aiRmOyEt0lS6dzUTzLHbj7x+fJoPWBMXyQL1fzumK4hPUtCYlUVC5jtk
- CFKqbMZokkniPp+TGJide25nl+nSbQAcmsX3Xgj449Q+FECezJHP8MFfFl5Mdmbqi0N9EmJC63Y
- gzeHsdBbsNwrdk2jGwCiPCfpZRj1tueJcISZ2HDygHmTEAQPm0llxA8/p3FLbLDG2r2hOmrWQgr
- vsh+i2+dsKHAC5DTyEe/8E3hjJgZ80XoEtzDuPhg==
-X-Received: by 2002:a17:906:6a28:b0:c15:de99:8060 with SMTP id
- a640c23a62f3a-c161de22dbemr669222466b.0.1784209446318; 
- Thu, 16 Jul 2026 06:44:06 -0700 (PDT)
+ bh=SpUBMVF0uqm7eDNsEOicOMnNcvjHt8cUbo06BjSBZ/E=;
+ b=JsG3RufKzMANGktyKXfeHJ38o8IoQPCx+quYmnrYmIdJzanDHqHIgGJpskO9RgQwCL
+ HlpxWJKABdx6q3M9tSHcParq6xBwRIvW3XZBEEnJd3+Ytpmp7vM7LuQ9qrNjLm7uh4oM
+ bQnj0hGRL28J2uXLA7OzVc9qylsEEhg2y2B3/ymUUqWIffXjUugrDgZ4nbdtDvYLvaxF
+ Lc3NU5A/RnIYKQKBhiUQRe9QJnBKO3qH8QNyvz/mszZc82Jio6k7PbS0Pmob3PxkxPva
+ Hh4ulWERbTvWIfEbbPg0TzwKVoqBKRoRezi9FOM6OhFUxOjtJ6c0Ua6FpR4tZegs+AmE
+ KV7g==
+X-Gm-Message-State: AOJu0YwqdUbxGxMbnpEmq8wFxC+wj002TxjC3RAMOp+OLN1bgb5gNwok
+ /XrFZgzmmv3KzqhXwkTUyAfMTEAjFlN8WVn5EgBJ3g6XtijHgz/AOANju5Vy6FJkocq6S8Sd5Be
+ qBiKh
+X-Gm-Gg: AfdE7cnK0AKfJ1EKnrUYvINy4jo2jffIMxGTWIxvXf51dcdFYqSSLPbMQrzyoDEEA1a
+ euUlNAabZm8PY3Ki92wNLZCiPGAClnzabXaVnGnpP6RuXWXhSbUjmGDEVaezTXnlwYV5JHFuheD
+ H5P6F7rfuDU6fZbq/YczINEyAQRKqMgJjyvNp7ll/jWgSLLrRwkrOl53HtS83DcOinwfqRXjNzB
+ Wt1rl+IKLFkVC9CVCuSfKPYSoyYnTymnNOEdqPUVAtU9mCJR/QGeegblkeHFheYPNbi8s8CrLd5
+ tMihaxvYSPRdDON1UmpQSOINDmfdI0PwzhsJXfujRIQpfnQEM9KJZg8j2r6m6IOqn+ewBfhyf5Z
+ LenWls0VrkIlb3Mjzgp/KaIuw+jwVHKep/W5IGx1+p8HmWhEDOoMWFNbLoBuKPPZmmRj74MgVaX
+ Lyw1Z+5WOcFVKgAoXyXQwlfijvaami3YsGCwmOPA==
+X-Received: by 2002:a17:907:7b94:b0:c15:e276:5805 with SMTP id
+ a640c23a62f3a-c161f471d9dmr694153166b.8.1784209491425; 
+ Thu, 16 Jul 2026 06:44:51 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1687172f01sm214016766b.24.2026.07.16.06.44.05
+ a640c23a62f3a-c1687318238sm214007566b.41.2026.07.16.06.44.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:05 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:50 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
 Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v5 38/75] usb: dwc3: import from kernel v5.14
-Date: Thu, 16 Jul 2026 15:42:08 +0200
-Message-ID: <20260716134305.614278-39-anders.roxell@linaro.org>
+ Anders Roxell <anders.roxell@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+Subject: [PATCH v5 69/75] usb: dwc3: make the am62 glue build in u-boot
+Date: Thu, 16 Jul 2026 15:42:39 +0200
+Message-ID: <20260716134305.614278-70-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -103,279 +104,499 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jens Wiklander <jens.wiklander@linaro.org>
+Adapt the TI AM62 DWC3 glue to u-boot after the resync.
 
-Sync Linux kernel dwc3 changes from v5.13 to v5.14.
+[Anders: the resync re-adds dwc3-am62.c and dropped the upstream static
+const on ti_am62_ops. Add it back here.]
 
-The following files are preserved accross the import:
-Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-dwc3-layerscape.c ti_usb_phy.c
-
-Skipping unused files:
-debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
-
-Note that this is a raw import and doesn't build.
-A fixup commit at the end of the series fixes that.
-
-List of commits: git log --oneline v5.13..v5.14
-Commits imported:
-4a1e25c0a029 usb: dwc3: gadget: Stop EP0 transfers during pullup disable
-51f1954ad853 usb: dwc3: gadget: Fix dwc3_calc_trbs_left()
-664cc971fb25 Revert "usb: dwc3: gadget: Use list_replace_init() before traversing lists"
-cb10f68ad815 usb: dwc3: gadget: Avoid runtime resume if disabling pullup
-d25d85061bd8 usb: dwc3: gadget: Use list_replace_init() before traversing lists
-40edb52298df usb: dwc3: avoid NULL access of usb_gadget_driver
-84524d1232ec usb: dwc3: Fix debugfs creation flow
-8562d5bfc0fc USB: dwc3: remove debugfs root dentry storage
-45d39448b4d0 usb: dwc3: support 64 bit DMA in platform driver
-2a042767814b usb: dwc3: core: fix kernel panic when do reboot
-5ff90af9da8f usb: dwc3: debugfs: Add and remove endpoint dirs dynamically
-ab00a41e73dc usb: dwc3: trace: Remove unused fields in dwc3_log_trb
-457d22850b27 usb: dwc3: pci: Fix DEFINE for Intel Elkhart Lake
-374ac7448caa usb: dwc3: remove repeated setting of current_dr_role
-
+Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/core.c   |  7 ++++-
- drivers/usb/dwc3/core.h   |  3 +-
- drivers/usb/dwc3/ep0.c    | 10 ++++---
- drivers/usb/dwc3/gadget.c | 59 +++++++++++++++++++++++++++------------
- 4 files changed, 54 insertions(+), 25 deletions(-)
+ drivers/usb/dwc3/dwc3-am62.c | 424 ++++++-----------------------------
+ 1 file changed, 67 insertions(+), 357 deletions(-)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 4ac397e43e19..ba74ad7f6995 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -1545,6 +1545,10 @@ static int dwc3_probe(struct platform_device *pdev)
+diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+index 9db8f3ca493d..8cb5796b6ad0 100644
+--- a/drivers/usb/dwc3/dwc3-am62.c
++++ b/drivers/usb/dwc3/dwc3-am62.c
+@@ -1,129 +1,23 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * dwc3-am62.c - TI specific Glue layer for AM62 DWC3 USB Controller
+- *
+- * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com
++ * TI AM62 specific glue layer for DWC3
+  */
  
- 	dwc3_get_properties(dwc);
+-#include <linux/init.h>
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/platform_device.h>
+-#include <linux/mfd/syscon.h>
+-#include <linux/of.h>
+-#include <linux/of_platform.h>
+-#include <linux/pm_runtime.h>
+-#include <linux/clk.h>
+-#include <linux/regmap.h>
+-#include <linux/pinctrl/consumer.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <asm/io.h>
  
-+	ret = dma_set_mask_and_coherent(dwc->sysdev, DMA_BIT_MASK(64));
-+	if (ret)
-+		return ret;
-+
- 	dwc->reset = devm_reset_control_array_get_optional_shared(dev);
- 	if (IS_ERR(dwc->reset))
- 		return PTR_ERR(dwc->reset);
-@@ -1616,17 +1620,18 @@ static int dwc3_probe(struct platform_device *pdev)
- 	}
+-#include "core.h"
++#include "dwc3-generic.h"
  
- 	dwc3_check_params(dwc);
-+	dwc3_debugfs_init(dwc);
- 
- 	ret = dwc3_core_init_mode(dwc);
- 	if (ret)
- 		goto err5;
- 
--	dwc3_debugfs_init(dwc);
- 	pm_runtime_put(dev);
- 
- 	return 0;
- 
- err5:
-+	dwc3_debugfs_exit(dwc);
- 	dwc3_event_buffers_cleanup(dwc);
- 
- 	usb_phy_shutdown(dwc->usb2_phy);
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index c5d5760cdf53..5991766239ba 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -1013,7 +1013,6 @@ struct dwc3_scratchpad_array {
-  * @link_state: link state
-  * @speed: device speed (super, high, full, low)
-  * @hwparams: copy of hwparams registers
-- * @root: debugfs root folder pointer
-  * @regset: debugfs pointer to regdump file
-  * @dbg_lsp_select: current debug lsp mux register selection
-  * @test_mode: true when we're entering a USB test mode
-@@ -1222,7 +1221,6 @@ struct dwc3 {
- 	u8			num_eps;
- 
- 	struct dwc3_hwparams	hwparams;
--	struct dentry		*root;
- 	struct debugfs_regset32	*regset;
- 
- 	u32			dbg_lsp_select;
-@@ -1281,6 +1279,7 @@ struct dwc3 {
- 	unsigned		dis_metastability_quirk:1;
- 
- 	unsigned		dis_split_quirk:1;
-+	unsigned		async_callbacks:1;
- 
- 	u16			imod_interval;
+-/* USB WRAPPER register offsets */
+-#define USBSS_PID			0x0
+-#define USBSS_OVERCURRENT_CTRL		0x4
+-#define USBSS_PHY_CONFIG		0x8
+-#define USBSS_PHY_TEST			0xc
+-#define USBSS_CORE_STAT			0x14
+-#define USBSS_HOST_VBUS_CTRL		0x18
+ #define USBSS_MODE_CONTROL		0x1c
+-#define USBSS_WAKEUP_CONFIG		0x30
+-#define USBSS_WAKEUP_STAT		0x34
+-#define USBSS_OVERRIDE_CONFIG		0x38
+-#define USBSS_IRQ_MISC_STATUS_RAW	0x430
+-#define USBSS_IRQ_MISC_STATUS		0x434
+-#define USBSS_IRQ_MISC_ENABLE_SET	0x438
+-#define USBSS_IRQ_MISC_ENABLE_CLR	0x43c
+-#define USBSS_IRQ_MISC_EOI		0x440
+-#define USBSS_INTR_TEST			0x490
+-#define USBSS_VBUS_FILTER		0x614
+-#define USBSS_VBUS_STAT			0x618
+-#define USBSS_DEBUG_CFG			0x708
+-#define USBSS_DEBUG_DATA		0x70c
+-#define USBSS_HOST_HUB_CTRL		0x714
+-
+-/* PHY CONFIG register bits */
++#define USBSS_PHY_CONFIG		0x8
+ #define USBSS_PHY_VBUS_SEL_MASK		GENMASK(2, 1)
+ #define USBSS_PHY_VBUS_SEL_SHIFT	1
+-#define USBSS_PHY_LANE_REVERSE		BIT(0)
+-
+-/* CORE STAT register bits */
+-#define USBSS_CORE_OPERATIONAL_MODE_MASK	GENMASK(13, 12)
+-#define USBSS_CORE_OPERATIONAL_MODE_SHIFT	12
+-
+-/* MODE CONTROL register bits */
+ #define USBSS_MODE_VALID	BIT(0)
+-
+-/* WAKEUP CONFIG register bits */
+-#define USBSS_WAKEUP_CFG_OVERCURRENT_EN	BIT(3)
+-#define USBSS_WAKEUP_CFG_LINESTATE_EN	BIT(2)
+-#define USBSS_WAKEUP_CFG_SESSVALID_EN	BIT(1)
+-#define USBSS_WAKEUP_CFG_VBUSVALID_EN	BIT(0)
+-
+-#define USBSS_WAKEUP_CFG_ALL	(USBSS_WAKEUP_CFG_VBUSVALID_EN | \
+-				 USBSS_WAKEUP_CFG_SESSVALID_EN | \
+-				 USBSS_WAKEUP_CFG_LINESTATE_EN | \
+-				 USBSS_WAKEUP_CFG_OVERCURRENT_EN)
+-
+-#define USBSS_WAKEUP_CFG_NONE	0
+-
+-/* WAKEUP STAT register bits */
+-#define USBSS_WAKEUP_STAT_OVERCURRENT	BIT(4)
+-#define USBSS_WAKEUP_STAT_LINESTATE	BIT(3)
+-#define USBSS_WAKEUP_STAT_SESSVALID	BIT(2)
+-#define USBSS_WAKEUP_STAT_VBUSVALID	BIT(1)
+-#define USBSS_WAKEUP_STAT_CLR		BIT(0)
+-
+-/* IRQ_MISC_STATUS_RAW register bits */
+-#define USBSS_IRQ_MISC_RAW_VBUSVALID	BIT(22)
+-#define USBSS_IRQ_MISC_RAW_SESSVALID	BIT(20)
+-
+-/* IRQ_MISC_STATUS register bits */
+-#define USBSS_IRQ_MISC_VBUSVALID	BIT(22)
+-#define USBSS_IRQ_MISC_SESSVALID	BIT(20)
+-
+-/* IRQ_MISC_ENABLE_SET register bits */
+-#define USBSS_IRQ_MISC_ENABLE_SET_VBUSVALID	BIT(22)
+-#define USBSS_IRQ_MISC_ENABLE_SET_SESSVALID	BIT(20)
+-
+-/* IRQ_MISC_ENABLE_CLR register bits */
+-#define USBSS_IRQ_MISC_ENABLE_CLR_VBUSVALID	BIT(22)
+-#define USBSS_IRQ_MISC_ENABLE_CLR_SESSVALID	BIT(20)
+-
+-/* IRQ_MISC_EOI register bits */
+-#define USBSS_IRQ_MISC_EOI_VECTOR	BIT(0)
+-
+-/* VBUS_STAT register bits */
+-#define USBSS_VBUS_STAT_SESSVALID	BIT(2)
+-#define USBSS_VBUS_STAT_VBUSVALID	BIT(0)
+-
+-/* USB_PHY_CTRL register bits in CTRL_MMR */
+-#define PHY_CORE_VOLTAGE_MASK	BIT(31)
+ #define PHY_PLL_REFCLK_MASK	GENMASK(3, 0)
+-
+-/* USB PHY2 register offsets */
+-#define	USB_PHY_PLL_REG12		0x130
+-#define	USB_PHY_PLL_LDO_REF_EN		BIT(5)
+-#define	USB_PHY_PLL_LDO_REF_EN_EN	BIT(4)
+-
+-#define DWC3_AM62_AUTOSUSPEND_DELAY	100
+-
+-#define USBSS_DEBUG_CFG_OFF		0x0
+-#define USBSS_DEBUG_CFG_DISABLED	0x7
+-
+-struct dwc3_am62 {
+-	struct device *dev;
+-	void __iomem *usbss;
+-	struct clk *usb2_refclk;
+-	int rate_code;
+-	struct regmap *syscon;
+-	unsigned int offset;
+-	unsigned int vbus_divider;
+-	u32 wakeup_stat;
+-	void __iomem *phy_regs;
+-};
+-
+-static const int dwc3_ti_rate_table[] = {	/* in KHZ */
++static const int dwc3_ti_am62_rate_table[] = {	/* in KHZ */
+ 	9600,
+ 	10000,
+ 	12000,
+@@ -139,277 +33,93 @@ static const int dwc3_ti_rate_table[] = {	/* in KHZ */
+ 	52000,
  };
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 3cd294264372..2f9e45eed228 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -597,11 +597,13 @@ static int dwc3_ep0_set_address(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
  
- static int dwc3_ep0_delegate_req(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
+-static inline u32 dwc3_ti_readl(struct dwc3_am62 *am62, u32 offset)
+-{
+-	return readl((am62->usbss) + offset);
+-}
+-
+-static inline void dwc3_ti_writel(struct dwc3_am62 *am62, u32 offset, u32 value)
++static void dwc3_ti_am62_glue_configure(struct udevice *dev, int index,
++					enum usb_dr_mode mode)
  {
+-	writel(value, (am62->usbss) + offset);
+-}
+-
+-static int phy_syscon_pll_refclk(struct dwc3_am62 *am62)
+-{
+-	struct device *dev = am62->dev;
+-	struct device_node *node = dev->of_node;
+-	struct regmap *syscon;
 -	int ret;
-+	int ret = -EINVAL;
+-
+-	syscon = syscon_regmap_lookup_by_phandle_args(node, "ti,syscon-phy-pll-refclk",
+-						      1, &am62->offset);
+-	if (IS_ERR(syscon)) {
+-		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
+-		return PTR_ERR(syscon);
+-	}
+-
+-	am62->syscon = syscon;
+-
+-	/* Core voltage. PHY_CORE_VOLTAGE bit Recommended to be 0 always */
+-	ret = regmap_update_bits(am62->syscon, am62->offset, PHY_CORE_VOLTAGE_MASK, 0);
+-	if (ret) {
+-		dev_err(dev, "failed to set phy core voltage\n");
+-		return ret;
+-	}
+-
+-	ret = regmap_update_bits(am62->syscon, am62->offset, PHY_PLL_REFCLK_MASK, am62->rate_code);
+-	if (ret) {
+-		dev_err(dev, "failed to set phy pll reference clock rate\n");
+-		return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-static int dwc3_ti_init(struct dwc3_am62 *am62)
+-{
+-	int ret;
+-	u32 reg;
+-
+-	/* Read the syscon property and set the rate code */
+-	ret = phy_syscon_pll_refclk(am62);
+-	if (ret)
+-		return ret;
+-
+-	/* Workaround Errata i2409 */
+-	if (am62->phy_regs) {
+-		reg = readl(am62->phy_regs + USB_PHY_PLL_REG12);
+-		reg |= USB_PHY_PLL_LDO_REF_EN | USB_PHY_PLL_LDO_REF_EN_EN;
+-		writel(reg, am62->phy_regs + USB_PHY_PLL_REG12);
+-	}
+-
+-	/* VBUS divider select */
+-	reg = dwc3_ti_readl(am62, USBSS_PHY_CONFIG);
+-	if (am62->vbus_divider)
+-		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
+-
+-	dwc3_ti_writel(am62, USBSS_PHY_CONFIG, reg);
+-
+-	clk_prepare_enable(am62->usb2_refclk);
+-
+-	/* Set mode valid bit to indicate role is valid */
+-	reg = dwc3_ti_readl(am62, USBSS_MODE_CONTROL);
+-	reg |= USBSS_MODE_VALID;
+-	dwc3_ti_writel(am62, USBSS_MODE_CONTROL, reg);
+-
+-	return 0;
+-}
+-
+-static int dwc3_ti_probe(struct platform_device *pdev)
+-{
+-	struct device *dev = &pdev->dev;
+-	struct device_node *node = pdev->dev.of_node;
+-	struct dwc3_am62 *am62;
++	struct clk usb2_refclk;
++	int rate_code, i, ret;
+ 	unsigned long rate;
+-	int i, ret;
+-
+-	am62 = devm_kzalloc(dev, sizeof(*am62), GFP_KERNEL);
+-	if (!am62)
+-		return -ENOMEM;
+-
+-	am62->dev = dev;
+-	platform_set_drvdata(pdev, am62);
++	u32 reg;
++	void *usbss;
++	bool vbus_divider;
++	struct regmap *syscon;
++	struct ofnode_phandle_args args;
  
--	spin_unlock(&dwc->lock);
--	ret = dwc->gadget_driver->setup(dwc->gadget, ctrl);
--	spin_lock(&dwc->lock);
-+	if (dwc->async_callbacks) {
-+		spin_unlock(&dwc->lock);
-+		ret = dwc->gadget_driver->setup(dwc->gadget, ctrl);
-+		spin_lock(&dwc->lock);
-+	}
- 	return ret;
- }
- 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index f14c2aa83759..ccb68fe6202e 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -940,19 +940,19 @@ static struct dwc3_trb *dwc3_ep_prev_trb(struct dwc3_ep *dep, u8 index)
- 
- static u32 dwc3_calc_trbs_left(struct dwc3_ep *dep)
- {
--	struct dwc3_trb		*tmp;
- 	u8			trbs_left;
- 
- 	/*
--	 * If enqueue & dequeue are equal than it is either full or empty.
--	 *
--	 * One way to know for sure is if the TRB right before us has HWO bit
--	 * set or not. If it has, then we're definitely full and can't fit any
--	 * more transfers in our ring.
-+	 * If the enqueue & dequeue are equal then the TRB ring is either full
-+	 * or empty. It's considered full when there are DWC3_TRB_NUM-1 of TRBs
-+	 * pending to be processed by the driver.
- 	 */
- 	if (dep->trb_enqueue == dep->trb_dequeue) {
--		tmp = dwc3_ep_prev_trb(dep, dep->trb_enqueue);
--		if (tmp->ctrl & DWC3_TRB_CTRL_HWO)
-+		/*
-+		 * If there is any request remained in the started_list at
-+		 * this point, that means there is no TRB available.
-+		 */
-+		if (!list_empty(&dep->started_list))
- 			return 0;
- 
- 		return DWC3_TRB_NUM - 1;
-@@ -2243,10 +2243,19 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
- 
- 		ret = wait_for_completion_timeout(&dwc->ep0_in_setup,
- 				msecs_to_jiffies(DWC3_PULL_UP_TIMEOUT));
--		if (ret == 0) {
--			dev_err(dwc->dev, "timed out waiting for SETUP phase\n");
--			return -ETIMEDOUT;
--		}
-+		if (ret == 0)
-+			dev_warn(dwc->dev, "timed out waiting for SETUP phase\n");
-+	}
-+
-+	/*
-+	 * Avoid issuing a runtime resume if the device is already in the
-+	 * suspended state during gadget disconnect.  DWC3 gadget was already
-+	 * halted/stopped during runtime suspend.
-+	 */
-+	if (!is_on) {
-+		pm_runtime_barrier(dwc->dev);
-+		if (pm_runtime_suspended(dwc->dev))
-+			return 0;
+-	am62->usbss = devm_platform_ioremap_resource(pdev, 0);
+-	if (IS_ERR(am62->usbss)) {
++	usbss = dev_remap_addr_index(dev, 0);
++	if (IS_ERR(usbss)) {
+ 		dev_err(dev, "can't map IOMEM resource\n");
+-		return PTR_ERR(am62->usbss);
++		return;
  	}
  
- 	/*
-@@ -2447,6 +2456,7 @@ static int __dwc3_gadget_start(struct dwc3 *dwc)
- 	/* begin to receive SETUP packets */
- 	dwc->ep0state = EP0_SETUP_PHASE;
- 	dwc->link_state = DWC3_LINK_STATE_SS_DIS;
-+	dwc->delayed_status = false;
- 	dwc3_ep0_out_start(dwc);
+-	am62->usb2_refclk = devm_clk_get(dev, "ref");
+-	if (IS_ERR(am62->usb2_refclk)) {
++	ret = clk_get_by_name(dev, "ref", &usb2_refclk);
++	if (ret) {
+ 		dev_err(dev, "can't get usb2_refclk\n");
+-		return PTR_ERR(am62->usb2_refclk);
++		return;
+ 	}
  
- 	dwc3_gadget_enable_irq(dwc);
-@@ -2585,6 +2595,16 @@ static int dwc3_gadget_vbus_draw(struct usb_gadget *g, unsigned int mA)
- 	return ret;
+ 	/* Calculate the rate code */
+-	rate = clk_get_rate(am62->usb2_refclk);
+-	rate /= 1000;	// To KHz
+-	for (i = 0; i < ARRAY_SIZE(dwc3_ti_rate_table); i++) {
+-		if (dwc3_ti_rate_table[i] == rate)
++	rate = clk_get_rate(&usb2_refclk);
++	rate /= 1000;	/* To KHz */
++	for (i = 0; i < ARRAY_SIZE(dwc3_ti_am62_rate_table); i++) {
++		if (dwc3_ti_am62_rate_table[i] == rate)
+ 			break;
+ 	}
+ 
+-	if (i == ARRAY_SIZE(dwc3_ti_rate_table)) {
++	if (i == ARRAY_SIZE(dwc3_ti_am62_rate_table)) {
+ 		dev_err(dev, "unsupported usb2_refclk rate: %lu KHz\n", rate);
+-		return -EINVAL;
++		return;
+ 	}
+ 
+-	am62->rate_code = i;
++	rate_code = i;
+ 
+-	am62->phy_regs = devm_platform_ioremap_resource(pdev, 1);
+-	if (IS_ERR(am62->phy_regs)) {
+-		dev_err(dev, "can't map PHY IOMEM resource. Won't apply i2409 fix.\n");
+-		am62->phy_regs = NULL;
++	/* Read the syscon property */
++	syscon = syscon_regmap_lookup_by_phandle(dev, "ti,syscon-phy-pll-refclk");
++	if (IS_ERR(syscon)) {
++		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
++		return;
+ 	}
+ 
+-	am62->vbus_divider = device_property_read_bool(dev, "ti,vbus-divider");
+-
+-	ret = dwc3_ti_init(am62);
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "ti,syscon-phy-pll-refclk", NULL, 1,
++					     0, &args);
+ 	if (ret)
+-		return ret;
++		return;
+ 
+-	pm_runtime_set_active(dev);
+-	pm_runtime_enable(dev);
+-	/*
+-	 * Don't ignore its dependencies with its children
+-	 */
+-	pm_suspend_ignore_children(dev, false);
+-	pm_runtime_get_noresume(dev);
+-
+-	ret = of_platform_populate(node, NULL, NULL, dev);
++	/* Program PHY PLL refclk by reading syscon property */
++	ret = regmap_update_bits(syscon, args.args[0], PHY_PLL_REFCLK_MASK, rate_code);
+ 	if (ret) {
+-		dev_err(dev, "failed to create dwc3 core: %d\n", ret);
+-		goto err_pm_disable;
+-	}
+-
+-	/* Device has capability to wakeup system from sleep */
+-	device_set_wakeup_capable(dev, true);
+-	ret = device_wakeup_enable(dev);
+-	if (ret)
+-		dev_err(dev, "couldn't enable device as a wakeup source: %d\n", ret);
+-
+-	/* Setting up autosuspend */
+-	pm_runtime_set_autosuspend_delay(dev, DWC3_AM62_AUTOSUSPEND_DELAY);
+-	pm_runtime_use_autosuspend(dev);
+-	pm_runtime_mark_last_busy(dev);
+-	pm_runtime_put_autosuspend(dev);
+-	return 0;
+-
+-err_pm_disable:
+-	clk_disable_unprepare(am62->usb2_refclk);
+-	pm_runtime_disable(dev);
+-	pm_runtime_set_suspended(dev);
+-	return ret;
+-}
+-
+-static void dwc3_ti_remove(struct platform_device *pdev)
+-{
+-	struct device *dev = &pdev->dev;
+-	struct dwc3_am62 *am62 = platform_get_drvdata(pdev);
+-	u32 reg;
+-
+-	pm_runtime_get_sync(dev);
+-	device_init_wakeup(dev, false);
+-	of_platform_depopulate(dev);
+-
+-	/* Clear mode valid bit */
+-	reg = dwc3_ti_readl(am62, USBSS_MODE_CONTROL);
+-	reg &= ~USBSS_MODE_VALID;
+-	dwc3_ti_writel(am62, USBSS_MODE_CONTROL, reg);
+-
+-	pm_runtime_put_sync(dev);
+-	pm_runtime_disable(dev);
+-	pm_runtime_dont_use_autosuspend(dev);
+-	pm_runtime_set_suspended(dev);
+-}
+-
+-#ifdef CONFIG_PM
+-static int dwc3_ti_suspend_common(struct device *dev)
+-{
+-	struct dwc3_am62 *am62 = dev_get_drvdata(dev);
+-	u32 reg, current_prtcap_dir;
+-
+-	if (device_may_wakeup(dev)) {
+-		reg = dwc3_ti_readl(am62, USBSS_CORE_STAT);
+-		current_prtcap_dir = (reg & USBSS_CORE_OPERATIONAL_MODE_MASK)
+-				     >> USBSS_CORE_OPERATIONAL_MODE_SHIFT;
+-		/* Set wakeup config enable bits */
+-		reg = dwc3_ti_readl(am62, USBSS_WAKEUP_CONFIG);
+-		if (current_prtcap_dir == DWC3_GCTL_PRTCAP_HOST) {
+-			reg = USBSS_WAKEUP_CFG_LINESTATE_EN | USBSS_WAKEUP_CFG_OVERCURRENT_EN;
+-		} else {
+-			reg = USBSS_WAKEUP_CFG_VBUSVALID_EN | USBSS_WAKEUP_CFG_SESSVALID_EN;
+-			/*
+-			 * Enable LINESTATE wake up only if connected to bus
+-			 * and in U2/L3 state else it causes spurious wake-up.
+-			 */
+-		}
+-		dwc3_ti_writel(am62, USBSS_WAKEUP_CONFIG, reg);
+-		/* clear wakeup status so we know what caused the wake up */
+-		dwc3_ti_writel(am62, USBSS_WAKEUP_STAT, USBSS_WAKEUP_STAT_CLR);
+-	}
+-
+-	/* just to track if module resets on suspend */
+-	dwc3_ti_writel(am62, USBSS_DEBUG_CFG, USBSS_DEBUG_CFG_DISABLED);
+-
+-	clk_disable_unprepare(am62->usb2_refclk);
+-
+-	return 0;
+-}
+-
+-static int dwc3_ti_resume_common(struct device *dev)
+-{
+-	struct dwc3_am62 *am62 = dev_get_drvdata(dev);
+-	u32 reg;
+-
+-	reg = dwc3_ti_readl(am62, USBSS_DEBUG_CFG);
+-	if (reg != USBSS_DEBUG_CFG_DISABLED) {
+-		/* lost power/context */
+-		dwc3_ti_init(am62);
+-	} else {
+-		dwc3_ti_writel(am62, USBSS_DEBUG_CFG, USBSS_DEBUG_CFG_OFF);
+-		clk_prepare_enable(am62->usb2_refclk);
++		dev_err(dev, "failed to set phy pll reference clock rate\n");
++		return;
+ 	}
+ 
+-	if (device_may_wakeup(dev)) {
+-		/* Clear wakeup config enable bits */
+-		dwc3_ti_writel(am62, USBSS_WAKEUP_CONFIG, USBSS_WAKEUP_CFG_NONE);
+-	}
++	/* VBUS divider select */
++	reg = readl(usbss + USBSS_PHY_CONFIG);
++	vbus_divider = dev_read_bool(dev, "ti,vbus-divider");
++	if (vbus_divider)
++		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
+ 
+-	reg = dwc3_ti_readl(am62, USBSS_WAKEUP_STAT);
+-	am62->wakeup_stat = reg;
++	writel(reg, usbss + USBSS_PHY_CONFIG);
+ 
+-	return 0;
++	/* Set mode valid */
++	reg = readl(usbss + USBSS_MODE_CONTROL);
++	reg |= USBSS_MODE_VALID;
++	writel(reg, usbss + USBSS_MODE_CONTROL);
  }
  
-+static void dwc3_gadget_async_callbacks(struct usb_gadget *g, bool enable)
-+{
-+	struct dwc3		*dwc = gadget_to_dwc(g);
-+	unsigned long		flags;
-+
-+	spin_lock_irqsave(&dwc->lock, flags);
-+	dwc->async_callbacks = enable;
-+	spin_unlock_irqrestore(&dwc->lock, flags);
-+}
-+
- static const struct usb_gadget_ops dwc3_gadget_ops = {
- 	.get_frame		= dwc3_gadget_get_frame,
- 	.wakeup			= dwc3_gadget_wakeup,
-@@ -2596,6 +2616,7 @@ static const struct usb_gadget_ops dwc3_gadget_ops = {
- 	.udc_set_ssp_rate	= dwc3_gadget_set_ssp_rate,
- 	.get_config_params	= dwc3_gadget_config_params,
- 	.vbus_draw		= dwc3_gadget_vbus_draw,
-+	.udc_async_callbacks	= dwc3_gadget_async_callbacks,
+-static UNIVERSAL_DEV_PM_OPS(dwc3_ti_pm_ops, dwc3_ti_suspend_common,
+-			    dwc3_ti_resume_common, NULL);
+-
+-#define DEV_PM_OPS	(&dwc3_ti_pm_ops)
+-#else
+-#define DEV_PM_OPS	NULL
+-#endif /* CONFIG_PM */
+-
+-static const struct of_device_id dwc3_ti_of_match[] = {
+-	{ .compatible = "ti,am62-usb"},
+-	{},
++static const struct dwc3_glue_ops ti_am62_ops = {
++	.glue_configure = dwc3_ti_am62_glue_configure,
+ };
+-MODULE_DEVICE_TABLE(of, dwc3_ti_of_match);
+ 
+-static struct platform_driver dwc3_ti_driver = {
+-	.probe		= dwc3_ti_probe,
+-	.remove		= dwc3_ti_remove,
+-	.driver		= {
+-		.name	= "dwc3-am62",
+-		.pm	= DEV_PM_OPS,
+-		.of_match_table = dwc3_ti_of_match,
+-	},
++static const struct udevice_id dwc3_am62_match[] = {
++	{ .compatible = "ti,am62-usb", .data = (ulong)&ti_am62_ops },
++	{ /* sentinel */ }
  };
  
- /* -------------------------------------------------------------------------- */
-@@ -2798,7 +2819,9 @@ static void dwc3_gadget_free_endpoints(struct dwc3 *dwc)
- 			list_del(&dep->endpoint.ep_list);
- 		}
- 
--		debugfs_remove_recursive(debugfs_lookup(dep->name, dwc->root));
-+		debugfs_remove_recursive(debugfs_lookup(dep->name,
-+				debugfs_lookup(dev_name(dep->dwc->dev),
-+					       usb_debug_root)));
- 		kfree(dep);
- 	}
- }
-@@ -3229,7 +3252,7 @@ static void dwc3_endpoint_interrupt(struct dwc3 *dwc,
- 
- static void dwc3_disconnect_gadget(struct dwc3 *dwc)
- {
--	if (dwc->gadget_driver && dwc->gadget_driver->disconnect) {
-+	if (dwc->async_callbacks && dwc->gadget_driver->disconnect) {
- 		spin_unlock(&dwc->lock);
- 		dwc->gadget_driver->disconnect(dwc->gadget);
- 		spin_lock(&dwc->lock);
-@@ -3238,7 +3261,7 @@ static void dwc3_disconnect_gadget(struct dwc3 *dwc)
- 
- static void dwc3_suspend_gadget(struct dwc3 *dwc)
- {
--	if (dwc->gadget_driver && dwc->gadget_driver->suspend) {
-+	if (dwc->async_callbacks && dwc->gadget_driver->suspend) {
- 		spin_unlock(&dwc->lock);
- 		dwc->gadget_driver->suspend(dwc->gadget);
- 		spin_lock(&dwc->lock);
-@@ -3247,7 +3270,7 @@ static void dwc3_suspend_gadget(struct dwc3 *dwc)
- 
- static void dwc3_resume_gadget(struct dwc3 *dwc)
- {
--	if (dwc->gadget_driver && dwc->gadget_driver->resume) {
-+	if (dwc->async_callbacks && dwc->gadget_driver->resume) {
- 		spin_unlock(&dwc->lock);
- 		dwc->gadget_driver->resume(dwc->gadget);
- 		spin_lock(&dwc->lock);
-@@ -3259,7 +3282,7 @@ static void dwc3_reset_gadget(struct dwc3 *dwc)
- 	if (!dwc->gadget_driver)
- 		return;
- 
--	if (dwc->gadget->speed != USB_SPEED_UNKNOWN) {
-+	if (dwc->async_callbacks && dwc->gadget->speed != USB_SPEED_UNKNOWN) {
- 		spin_unlock(&dwc->lock);
- 		usb_gadget_udc_reset(dwc->gadget, dwc->gadget_driver);
- 		spin_lock(&dwc->lock);
-@@ -3583,7 +3606,7 @@ static void dwc3_gadget_wakeup_interrupt(struct dwc3 *dwc)
- 	 * implemented.
- 	 */
- 
--	if (dwc->gadget_driver && dwc->gadget_driver->resume) {
-+	if (dwc->async_callbacks && dwc->gadget_driver->resume) {
- 		spin_unlock(&dwc->lock);
- 		dwc->gadget_driver->resume(dwc->gadget);
- 		spin_lock(&dwc->lock);
+-module_platform_driver(dwc3_ti_driver);
+-
+-MODULE_ALIAS("platform:dwc3-am62");
+-MODULE_AUTHOR("Aswath Govindraju <a-govindraju@ti.com>");
+-MODULE_LICENSE("GPL");
+-MODULE_DESCRIPTION("DesignWare USB3 TI Glue Layer");
++U_BOOT_DRIVER(dwc3_am62_wrapper) = {
++	.name	= "dwc3-am62",
++	.id	= UCLASS_SIMPLE_BUS,
++	.of_match = dwc3_am62_match,
++	.bind = dwc3_glue_bind,
++	.probe = dwc3_glue_probe,
++	.remove = dwc3_glue_remove,
++	.plat_auto	= sizeof(struct dwc3_glue_data),
++};
 -- 
 2.53.0
 
