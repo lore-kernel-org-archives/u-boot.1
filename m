@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADDD1C44511
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E2AC44511
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC24084ED2;
-	Thu, 16 Jul 2026 18:09:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3023884ED6;
+	Thu, 16 Jul 2026 18:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jLdZyJzF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RTW9MhNR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8A8780433; Thu, 16 Jul 2026 15:44:54 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id AFCA684CCF; Thu, 16 Jul 2026 15:44:56 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1661E84CA3
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D04684CEE
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-c15e62c695cso54138066b.1
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:52 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c16111a9b8dso56501566b.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209491; x=1784814291; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209493; x=1784814293; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SpUBMVF0uqm7eDNsEOicOMnNcvjHt8cUbo06BjSBZ/E=;
- b=jLdZyJzFU8udsw0wyaZq4iIwC5DM09D0WmhiSXdP5nyd/Kmr8Xcaw3qROt4dZ+Nwuv
- k7pyZTMWo7LEegR9ITLbzCXQumMyBbAnOsfT7uRt8Zohyea0pwwGZb7vlOwooMkuOxC5
- gecBfZ5GcOkpWmm+MiVSALZYrig4vauV9INVHbI2940bL8/epLqJD0szA9AmNcEj15Oj
- yKUqUfrbtQdNb8ME5hWUzczIaOMbOn06xTMZyRz1vCNRdY4KV0FB4/EvD0ceD2DhFyA0
- mTpA3aNdJxDDdxe4mV2ZCaO05WZoBYGHXzeYf/Ntrrfu3bEoZMMKoyLixn/M1VBWt4q9
- PNBA==
+ bh=nyxesvnlruhlZuAAGBnaLaqT9H/oN3zeMmFPrPQIYLE=;
+ b=RTW9MhNR6YTbOUzURAekSYtSEzQWe2WdU0+A2PG+ldLz40D4ap875B7PMdSkawYQTH
+ dI2NHCXmOgZxLWDdPV6kTe3EJRHa2r8iDtSlhNd1VB3cQjwmO9aujDAQjwDyeDGDOImZ
+ E9OjqEmpGL43y0ItLXyvjne2TWpOVLRXUmMyzlf0tLBfZD1loHyUu43Jxo912rCGFFC3
+ 8JgglwowDI+n42DuWNfSNRJaKNCQxvBWQUR+DpRWPU/kbzs3QBcdfEf9j/Y/lsGiVtaK
+ JRL9V6a12m1bk/1hu3BN4JBNrXg9S+Eu+FmH1UvL6/COrW+n3gPF4pOloEhVrP9eoB7Y
+ UTNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209491; x=1784814291;
+ d=1e100.net; s=20251104; t=1784209493; x=1784814293;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=SpUBMVF0uqm7eDNsEOicOMnNcvjHt8cUbo06BjSBZ/E=;
- b=JsG3RufKzMANGktyKXfeHJ38o8IoQPCx+quYmnrYmIdJzanDHqHIgGJpskO9RgQwCL
- HlpxWJKABdx6q3M9tSHcParq6xBwRIvW3XZBEEnJd3+Ytpmp7vM7LuQ9qrNjLm7uh4oM
- bQnj0hGRL28J2uXLA7OzVc9qylsEEhg2y2B3/ymUUqWIffXjUugrDgZ4nbdtDvYLvaxF
- Lc3NU5A/RnIYKQKBhiUQRe9QJnBKO3qH8QNyvz/mszZc82Jio6k7PbS0Pmob3PxkxPva
- Hh4ulWERbTvWIfEbbPg0TzwKVoqBKRoRezi9FOM6OhFUxOjtJ6c0Ua6FpR4tZegs+AmE
- KV7g==
-X-Gm-Message-State: AOJu0YwqdUbxGxMbnpEmq8wFxC+wj002TxjC3RAMOp+OLN1bgb5gNwok
- /XrFZgzmmv3KzqhXwkTUyAfMTEAjFlN8WVn5EgBJ3g6XtijHgz/AOANju5Vy6FJkocq6S8Sd5Be
- qBiKh
-X-Gm-Gg: AfdE7cnK0AKfJ1EKnrUYvINy4jo2jffIMxGTWIxvXf51dcdFYqSSLPbMQrzyoDEEA1a
- euUlNAabZm8PY3Ki92wNLZCiPGAClnzabXaVnGnpP6RuXWXhSbUjmGDEVaezTXnlwYV5JHFuheD
- H5P6F7rfuDU6fZbq/YczINEyAQRKqMgJjyvNp7ll/jWgSLLrRwkrOl53HtS83DcOinwfqRXjNzB
- Wt1rl+IKLFkVC9CVCuSfKPYSoyYnTymnNOEdqPUVAtU9mCJR/QGeegblkeHFheYPNbi8s8CrLd5
- tMihaxvYSPRdDON1UmpQSOINDmfdI0PwzhsJXfujRIQpfnQEM9KJZg8j2r6m6IOqn+ewBfhyf5Z
- LenWls0VrkIlb3Mjzgp/KaIuw+jwVHKep/W5IGx1+p8HmWhEDOoMWFNbLoBuKPPZmmRj74MgVaX
- Lyw1Z+5WOcFVKgAoXyXQwlfijvaami3YsGCwmOPA==
-X-Received: by 2002:a17:907:7b94:b0:c15:e276:5805 with SMTP id
- a640c23a62f3a-c161f471d9dmr694153166b.8.1784209491425; 
- Thu, 16 Jul 2026 06:44:51 -0700 (PDT)
+ bh=nyxesvnlruhlZuAAGBnaLaqT9H/oN3zeMmFPrPQIYLE=;
+ b=SS9VC2iVrNVM1VfVzKBWCHaC6fImrUav9TAeXl1E6tMURGOZLOO/74HzKF3SvmKlhw
+ c6ezYHVdRowxUa+1hBsy6QsVRl0USxM7QmAfeFCUk1QWSTIAfYW3Puehr20mcN4dJfc0
+ 5NkQAV7+K/Qe1vqtJ4j+hndKKJR5bf+QHPXamcedp+VSC2OR2RMi+lXEQm4wxFWdmhXR
+ 9EdJNLCb3Idbw3/1WkPH0isYCWTn40jlCAXEaHGesWokcJ4ZUVMxqqjwcz8FyfXX6t5Q
+ PdivyuzCnY9NBAEiXGYbaRdf/sSqfN1NnVY9IkVgndp9mHE4PkHoboWAlOYi+2Qr7oVP
+ YbXg==
+X-Gm-Message-State: AOJu0YySFl4abs3S841ueVh/lUfy+v56EYS/AebDbB5qeSBnfZbGSj8J
+ oXi6aJorNV6ZlPvkEDttQO8twwPaLfgn2jI2W5uXcnG+Iqhl+8awIY5Qjc21m2FOfuFfyQTnU9V
+ vfOjt
+X-Gm-Gg: AfdE7ckNBZKSRIfxkUudoxyokuJHeXMFAPr1UI/EpqScbqpghUvaci+yv3LMhSagFRD
+ CrJ5DOWtvJFYfEYqaf5kzNU7Zm/rlyjJOOBqPpNWKdmWuID7LUKH4y7vB2zb5hv5mHmqiP9pDUM
+ Xypj7FclFnA5zYoQN7mYVciPR44dlYNdUEasOGqc4KiQTlrMG/Nw6QVd1zghDWcpHDzmttX/KJq
+ 9zMSq7kz5mj8EtbNaUCaChUicQaMoqkys1Q2hpcMa/KEy8ssrrCiuw33k3VNv8Dgr5TX5ovA1wJ
+ 9kHfn5f2uWsLoBUBe+qZqc8hsIOVK5dZWyaNai/WsYeyIuKpsRuJrBGlkUpe8Of27sUdFJMw0Ul
+ t3jWcJ7ryOV9OMCzGSpXJAy494yRXAiMft4UZEO4+NnbF5m8Il0LcGdjt1D16MSnOSYFVbmtxf1
+ YKDCnS896zhKjE5eKt4k6eDGS0ldiV8eEmfYJskw==
+X-Received: by 2002:a17:907:7256:b0:c15:ccda:26d5 with SMTP id
+ a640c23a62f3a-c168dd4abc0mr114216366b.4.1784209492852; 
+ Thu, 16 Jul 2026 06:44:52 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1687318238sm214007566b.41.2026.07.16.06.44.50
+ a640c23a62f3a-c168744bff3sm222731766b.46.2026.07.16.06.44.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:50 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:52 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
@@ -78,10 +78,10 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
  Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v5 69/75] usb: dwc3: make the am62 glue build in u-boot
-Date: Thu, 16 Jul 2026 15:42:39 +0200
-Message-ID: <20260716134305.614278-70-anders.roxell@linaro.org>
+ Jens Wiklander <jens.wiklander@linaro.org>, Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH v5 70/75] usb: gadget: ci_udc: drop code we do not use
+Date: Thu, 16 Jul 2026 15:42:40 +0200
+Message-ID: <20260716134305.614278-71-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -104,10 +104,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adapt the TI AM62 DWC3 glue to u-boot after the resync.
-
-[Anders: the resync re-adds dwc3-am62.c and dropped the upstream static
-const on ti_am62_ops. Add it back here.]
+After the resync a big part of ci_udc.c is not used in u-boot. Remove
+it.
 
 Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -115,488 +113,527 @@ Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/dwc3-am62.c | 424 ++++++-----------------------------
- 1 file changed, 67 insertions(+), 357 deletions(-)
+ drivers/usb/gadget/ci_udc.c | 470 ------------------------------------
+ 1 file changed, 470 deletions(-)
 
-diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
-index 9db8f3ca493d..8cb5796b6ad0 100644
---- a/drivers/usb/dwc3/dwc3-am62.c
-+++ b/drivers/usb/dwc3/dwc3-am62.c
-@@ -1,129 +1,23 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * dwc3-am62.c - TI specific Glue layer for AM62 DWC3 USB Controller
-- *
-- * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com
-+ * TI AM62 specific glue layer for DWC3
-  */
+diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+index 4729570c5257..95efa4ae1644 100644
+--- a/drivers/usb/gadget/ci_udc.c
++++ b/drivers/usb/gadget/ci_udc.c
+@@ -84,62 +84,15 @@ static struct usb_endpoint_descriptor ep0_desc = {
+ };
  
--#include <linux/init.h>
--#include <linux/kernel.h>
--#include <linux/module.h>
--#include <linux/platform_device.h>
--#include <linux/mfd/syscon.h>
--#include <linux/of.h>
--#include <linux/of_platform.h>
--#include <linux/pm_runtime.h>
--#include <linux/clk.h>
--#include <linux/regmap.h>
--#include <linux/pinctrl/consumer.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <asm/io.h>
+ static int ci_pullup(struct usb_gadget *gadget, int is_on);
+-static int ci_ep_enable(struct usb_ep *ep,
+-		const struct usb_endpoint_descriptor *desc);
+-static int ci_ep_disable(struct usb_ep *ep);
+-static int ci_ep_queue(struct usb_ep *ep,
+-		struct usb_request *req, gfp_t gfp_flags);
+-static int ci_ep_dequeue(struct usb_ep *ep, struct usb_request *req);
+-static struct usb_request *
+-ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags);
+-static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *_req);
  
--#include "core.h"
-+#include "dwc3-generic.h"
+ static const struct usb_gadget_ops ci_udc_ops = {
+ 	.pullup = ci_pullup,
+ };
  
--/* USB WRAPPER register offsets */
--#define USBSS_PID			0x0
--#define USBSS_OVERCURRENT_CTRL		0x4
--#define USBSS_PHY_CONFIG		0x8
--#define USBSS_PHY_TEST			0xc
--#define USBSS_CORE_STAT			0x14
--#define USBSS_HOST_VBUS_CTRL		0x18
- #define USBSS_MODE_CONTROL		0x1c
--#define USBSS_WAKEUP_CONFIG		0x30
--#define USBSS_WAKEUP_STAT		0x34
--#define USBSS_OVERRIDE_CONFIG		0x38
--#define USBSS_IRQ_MISC_STATUS_RAW	0x430
--#define USBSS_IRQ_MISC_STATUS		0x434
--#define USBSS_IRQ_MISC_ENABLE_SET	0x438
--#define USBSS_IRQ_MISC_ENABLE_CLR	0x43c
--#define USBSS_IRQ_MISC_EOI		0x440
--#define USBSS_INTR_TEST			0x490
--#define USBSS_VBUS_FILTER		0x614
--#define USBSS_VBUS_STAT			0x618
--#define USBSS_DEBUG_CFG			0x708
--#define USBSS_DEBUG_DATA		0x70c
--#define USBSS_HOST_HUB_CTRL		0x714
--
--/* PHY CONFIG register bits */
-+#define USBSS_PHY_CONFIG		0x8
- #define USBSS_PHY_VBUS_SEL_MASK		GENMASK(2, 1)
- #define USBSS_PHY_VBUS_SEL_SHIFT	1
--#define USBSS_PHY_LANE_REVERSE		BIT(0)
--
--/* CORE STAT register bits */
--#define USBSS_CORE_OPERATIONAL_MODE_MASK	GENMASK(13, 12)
--#define USBSS_CORE_OPERATIONAL_MODE_SHIFT	12
--
--/* MODE CONTROL register bits */
- #define USBSS_MODE_VALID	BIT(0)
--
--/* WAKEUP CONFIG register bits */
--#define USBSS_WAKEUP_CFG_OVERCURRENT_EN	BIT(3)
--#define USBSS_WAKEUP_CFG_LINESTATE_EN	BIT(2)
--#define USBSS_WAKEUP_CFG_SESSVALID_EN	BIT(1)
--#define USBSS_WAKEUP_CFG_VBUSVALID_EN	BIT(0)
--
--#define USBSS_WAKEUP_CFG_ALL	(USBSS_WAKEUP_CFG_VBUSVALID_EN | \
--				 USBSS_WAKEUP_CFG_SESSVALID_EN | \
--				 USBSS_WAKEUP_CFG_LINESTATE_EN | \
--				 USBSS_WAKEUP_CFG_OVERCURRENT_EN)
--
--#define USBSS_WAKEUP_CFG_NONE	0
--
--/* WAKEUP STAT register bits */
--#define USBSS_WAKEUP_STAT_OVERCURRENT	BIT(4)
--#define USBSS_WAKEUP_STAT_LINESTATE	BIT(3)
--#define USBSS_WAKEUP_STAT_SESSVALID	BIT(2)
--#define USBSS_WAKEUP_STAT_VBUSVALID	BIT(1)
--#define USBSS_WAKEUP_STAT_CLR		BIT(0)
--
--/* IRQ_MISC_STATUS_RAW register bits */
--#define USBSS_IRQ_MISC_RAW_VBUSVALID	BIT(22)
--#define USBSS_IRQ_MISC_RAW_SESSVALID	BIT(20)
--
--/* IRQ_MISC_STATUS register bits */
--#define USBSS_IRQ_MISC_VBUSVALID	BIT(22)
--#define USBSS_IRQ_MISC_SESSVALID	BIT(20)
--
--/* IRQ_MISC_ENABLE_SET register bits */
--#define USBSS_IRQ_MISC_ENABLE_SET_VBUSVALID	BIT(22)
--#define USBSS_IRQ_MISC_ENABLE_SET_SESSVALID	BIT(20)
--
--/* IRQ_MISC_ENABLE_CLR register bits */
--#define USBSS_IRQ_MISC_ENABLE_CLR_VBUSVALID	BIT(22)
--#define USBSS_IRQ_MISC_ENABLE_CLR_SESSVALID	BIT(20)
--
--/* IRQ_MISC_EOI register bits */
--#define USBSS_IRQ_MISC_EOI_VECTOR	BIT(0)
--
--/* VBUS_STAT register bits */
--#define USBSS_VBUS_STAT_SESSVALID	BIT(2)
--#define USBSS_VBUS_STAT_VBUSVALID	BIT(0)
--
--/* USB_PHY_CTRL register bits in CTRL_MMR */
--#define PHY_CORE_VOLTAGE_MASK	BIT(31)
- #define PHY_PLL_REFCLK_MASK	GENMASK(3, 0)
--
--/* USB PHY2 register offsets */
--#define	USB_PHY_PLL_REG12		0x130
--#define	USB_PHY_PLL_LDO_REF_EN		BIT(5)
--#define	USB_PHY_PLL_LDO_REF_EN_EN	BIT(4)
--
--#define DWC3_AM62_AUTOSUSPEND_DELAY	100
--
--#define USBSS_DEBUG_CFG_OFF		0x0
--#define USBSS_DEBUG_CFG_DISABLED	0x7
--
--struct dwc3_am62 {
--	struct device *dev;
--	void __iomem *usbss;
--	struct clk *usb2_refclk;
--	int rate_code;
--	struct regmap *syscon;
--	unsigned int offset;
--	unsigned int vbus_divider;
--	u32 wakeup_stat;
--	void __iomem *phy_regs;
+-static const struct usb_ep_ops ci_ep_ops = {
+-	.enable         = ci_ep_enable,
+-	.disable        = ci_ep_disable,
+-	.queue          = ci_ep_queue,
+-	.dequeue	= ci_ep_dequeue,
+-	.alloc_request  = ci_ep_alloc_request,
+-	.free_request   = ci_ep_free_request,
 -};
 -
--static const int dwc3_ti_rate_table[] = {	/* in KHZ */
-+static const int dwc3_ti_am62_rate_table[] = {	/* in KHZ */
- 	9600,
- 	10000,
- 	12000,
-@@ -139,277 +33,93 @@ static const int dwc3_ti_rate_table[] = {	/* in KHZ */
- 	52000,
- };
- 
--static inline u32 dwc3_ti_readl(struct dwc3_am62 *am62, u32 offset)
--{
--	return readl((am62->usbss) + offset);
--}
--
--static inline void dwc3_ti_writel(struct dwc3_am62 *am62, u32 offset, u32 value)
-+static void dwc3_ti_am62_glue_configure(struct udevice *dev, int index,
-+					enum usb_dr_mode mode)
+ __weak void ci_init_after_reset(struct ehci_ctrl *ctrl)
  {
--	writel(value, (am62->usbss) + offset);
--}
--
--static int phy_syscon_pll_refclk(struct dwc3_am62 *am62)
--{
--	struct device *dev = am62->dev;
--	struct device_node *node = dev->of_node;
--	struct regmap *syscon;
--	int ret;
--
--	syscon = syscon_regmap_lookup_by_phandle_args(node, "ti,syscon-phy-pll-refclk",
--						      1, &am62->offset);
--	if (IS_ERR(syscon)) {
--		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
--		return PTR_ERR(syscon);
--	}
--
--	am62->syscon = syscon;
--
--	/* Core voltage. PHY_CORE_VOLTAGE bit Recommended to be 0 always */
--	ret = regmap_update_bits(am62->syscon, am62->offset, PHY_CORE_VOLTAGE_MASK, 0);
--	if (ret) {
--		dev_err(dev, "failed to set phy core voltage\n");
--		return ret;
--	}
--
--	ret = regmap_update_bits(am62->syscon, am62->offset, PHY_PLL_REFCLK_MASK, am62->rate_code);
--	if (ret) {
--		dev_err(dev, "failed to set phy pll reference clock rate\n");
--		return ret;
--	}
--
--	return 0;
--}
--
--static int dwc3_ti_init(struct dwc3_am62 *am62)
--{
--	int ret;
--	u32 reg;
--
--	/* Read the syscon property and set the rate code */
--	ret = phy_syscon_pll_refclk(am62);
--	if (ret)
--		return ret;
--
--	/* Workaround Errata i2409 */
--	if (am62->phy_regs) {
--		reg = readl(am62->phy_regs + USB_PHY_PLL_REG12);
--		reg |= USB_PHY_PLL_LDO_REF_EN | USB_PHY_PLL_LDO_REF_EN_EN;
--		writel(reg, am62->phy_regs + USB_PHY_PLL_REG12);
--	}
--
--	/* VBUS divider select */
--	reg = dwc3_ti_readl(am62, USBSS_PHY_CONFIG);
--	if (am62->vbus_divider)
--		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
--
--	dwc3_ti_writel(am62, USBSS_PHY_CONFIG, reg);
--
--	clk_prepare_enable(am62->usb2_refclk);
--
--	/* Set mode valid bit to indicate role is valid */
--	reg = dwc3_ti_readl(am62, USBSS_MODE_CONTROL);
--	reg |= USBSS_MODE_VALID;
--	dwc3_ti_writel(am62, USBSS_MODE_CONTROL, reg);
--
--	return 0;
--}
--
--static int dwc3_ti_probe(struct platform_device *pdev)
--{
--	struct device *dev = &pdev->dev;
--	struct device_node *node = pdev->dev.of_node;
--	struct dwc3_am62 *am62;
-+	struct clk usb2_refclk;
-+	int rate_code, i, ret;
- 	unsigned long rate;
--	int i, ret;
--
--	am62 = devm_kzalloc(dev, sizeof(*am62), GFP_KERNEL);
--	if (!am62)
--		return -ENOMEM;
--
--	am62->dev = dev;
--	platform_set_drvdata(pdev, am62);
-+	u32 reg;
-+	void *usbss;
-+	bool vbus_divider;
-+	struct regmap *syscon;
-+	struct ofnode_phandle_args args;
- 
--	am62->usbss = devm_platform_ioremap_resource(pdev, 0);
--	if (IS_ERR(am62->usbss)) {
-+	usbss = dev_remap_addr_index(dev, 0);
-+	if (IS_ERR(usbss)) {
- 		dev_err(dev, "can't map IOMEM resource\n");
--		return PTR_ERR(am62->usbss);
-+		return;
- 	}
- 
--	am62->usb2_refclk = devm_clk_get(dev, "ref");
--	if (IS_ERR(am62->usb2_refclk)) {
-+	ret = clk_get_by_name(dev, "ref", &usb2_refclk);
-+	if (ret) {
- 		dev_err(dev, "can't get usb2_refclk\n");
--		return PTR_ERR(am62->usb2_refclk);
-+		return;
- 	}
- 
- 	/* Calculate the rate code */
--	rate = clk_get_rate(am62->usb2_refclk);
--	rate /= 1000;	// To KHz
--	for (i = 0; i < ARRAY_SIZE(dwc3_ti_rate_table); i++) {
--		if (dwc3_ti_rate_table[i] == rate)
-+	rate = clk_get_rate(&usb2_refclk);
-+	rate /= 1000;	/* To KHz */
-+	for (i = 0; i < ARRAY_SIZE(dwc3_ti_am62_rate_table); i++) {
-+		if (dwc3_ti_am62_rate_table[i] == rate)
- 			break;
- 	}
- 
--	if (i == ARRAY_SIZE(dwc3_ti_rate_table)) {
-+	if (i == ARRAY_SIZE(dwc3_ti_am62_rate_table)) {
- 		dev_err(dev, "unsupported usb2_refclk rate: %lu KHz\n", rate);
--		return -EINVAL;
-+		return;
- 	}
- 
--	am62->rate_code = i;
-+	rate_code = i;
- 
--	am62->phy_regs = devm_platform_ioremap_resource(pdev, 1);
--	if (IS_ERR(am62->phy_regs)) {
--		dev_err(dev, "can't map PHY IOMEM resource. Won't apply i2409 fix.\n");
--		am62->phy_regs = NULL;
-+	/* Read the syscon property */
-+	syscon = syscon_regmap_lookup_by_phandle(dev, "ti,syscon-phy-pll-refclk");
-+	if (IS_ERR(syscon)) {
-+		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
-+		return;
- 	}
- 
--	am62->vbus_divider = device_property_read_bool(dev, "ti,vbus-divider");
--
--	ret = dwc3_ti_init(am62);
-+	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "ti,syscon-phy-pll-refclk", NULL, 1,
-+					     0, &args);
- 	if (ret)
--		return ret;
-+		return;
- 
--	pm_runtime_set_active(dev);
--	pm_runtime_enable(dev);
--	/*
--	 * Don't ignore its dependencies with its children
--	 */
--	pm_suspend_ignore_children(dev, false);
--	pm_runtime_get_noresume(dev);
--
--	ret = of_platform_populate(node, NULL, NULL, dev);
-+	/* Program PHY PLL refclk by reading syscon property */
-+	ret = regmap_update_bits(syscon, args.args[0], PHY_PLL_REFCLK_MASK, rate_code);
- 	if (ret) {
--		dev_err(dev, "failed to create dwc3 core: %d\n", ret);
--		goto err_pm_disable;
--	}
--
--	/* Device has capability to wakeup system from sleep */
--	device_set_wakeup_capable(dev, true);
--	ret = device_wakeup_enable(dev);
--	if (ret)
--		dev_err(dev, "couldn't enable device as a wakeup source: %d\n", ret);
--
--	/* Setting up autosuspend */
--	pm_runtime_set_autosuspend_delay(dev, DWC3_AM62_AUTOSUSPEND_DELAY);
--	pm_runtime_use_autosuspend(dev);
--	pm_runtime_mark_last_busy(dev);
--	pm_runtime_put_autosuspend(dev);
--	return 0;
--
--err_pm_disable:
--	clk_disable_unprepare(am62->usb2_refclk);
--	pm_runtime_disable(dev);
--	pm_runtime_set_suspended(dev);
--	return ret;
--}
--
--static void dwc3_ti_remove(struct platform_device *pdev)
--{
--	struct device *dev = &pdev->dev;
--	struct dwc3_am62 *am62 = platform_get_drvdata(pdev);
--	u32 reg;
--
--	pm_runtime_get_sync(dev);
--	device_init_wakeup(dev, false);
--	of_platform_depopulate(dev);
--
--	/* Clear mode valid bit */
--	reg = dwc3_ti_readl(am62, USBSS_MODE_CONTROL);
--	reg &= ~USBSS_MODE_VALID;
--	dwc3_ti_writel(am62, USBSS_MODE_CONTROL, reg);
--
--	pm_runtime_put_sync(dev);
--	pm_runtime_disable(dev);
--	pm_runtime_dont_use_autosuspend(dev);
--	pm_runtime_set_suspended(dev);
--}
--
--#ifdef CONFIG_PM
--static int dwc3_ti_suspend_common(struct device *dev)
--{
--	struct dwc3_am62 *am62 = dev_get_drvdata(dev);
--	u32 reg, current_prtcap_dir;
--
--	if (device_may_wakeup(dev)) {
--		reg = dwc3_ti_readl(am62, USBSS_CORE_STAT);
--		current_prtcap_dir = (reg & USBSS_CORE_OPERATIONAL_MODE_MASK)
--				     >> USBSS_CORE_OPERATIONAL_MODE_SHIFT;
--		/* Set wakeup config enable bits */
--		reg = dwc3_ti_readl(am62, USBSS_WAKEUP_CONFIG);
--		if (current_prtcap_dir == DWC3_GCTL_PRTCAP_HOST) {
--			reg = USBSS_WAKEUP_CFG_LINESTATE_EN | USBSS_WAKEUP_CFG_OVERCURRENT_EN;
--		} else {
--			reg = USBSS_WAKEUP_CFG_VBUSVALID_EN | USBSS_WAKEUP_CFG_SESSVALID_EN;
--			/*
--			 * Enable LINESTATE wake up only if connected to bus
--			 * and in U2/L3 state else it causes spurious wake-up.
--			 */
--		}
--		dwc3_ti_writel(am62, USBSS_WAKEUP_CONFIG, reg);
--		/* clear wakeup status so we know what caused the wake up */
--		dwc3_ti_writel(am62, USBSS_WAKEUP_STAT, USBSS_WAKEUP_STAT_CLR);
--	}
--
--	/* just to track if module resets on suspend */
--	dwc3_ti_writel(am62, USBSS_DEBUG_CFG, USBSS_DEBUG_CFG_DISABLED);
--
--	clk_disable_unprepare(am62->usb2_refclk);
--
--	return 0;
--}
--
--static int dwc3_ti_resume_common(struct device *dev)
--{
--	struct dwc3_am62 *am62 = dev_get_drvdata(dev);
--	u32 reg;
--
--	reg = dwc3_ti_readl(am62, USBSS_DEBUG_CFG);
--	if (reg != USBSS_DEBUG_CFG_DISABLED) {
--		/* lost power/context */
--		dwc3_ti_init(am62);
--	} else {
--		dwc3_ti_writel(am62, USBSS_DEBUG_CFG, USBSS_DEBUG_CFG_OFF);
--		clk_prepare_enable(am62->usb2_refclk);
-+		dev_err(dev, "failed to set phy pll reference clock rate\n");
-+		return;
- 	}
- 
--	if (device_may_wakeup(dev)) {
--		/* Clear wakeup config enable bits */
--		dwc3_ti_writel(am62, USBSS_WAKEUP_CONFIG, USBSS_WAKEUP_CFG_NONE);
--	}
-+	/* VBUS divider select */
-+	reg = readl(usbss + USBSS_PHY_CONFIG);
-+	vbus_divider = dev_read_bool(dev, "ti,vbus-divider");
-+	if (vbus_divider)
-+		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
- 
--	reg = dwc3_ti_readl(am62, USBSS_WAKEUP_STAT);
--	am62->wakeup_stat = reg;
-+	writel(reg, usbss + USBSS_PHY_CONFIG);
- 
--	return 0;
-+	/* Set mode valid */
-+	reg = readl(usbss + USBSS_MODE_CONTROL);
-+	reg |= USBSS_MODE_VALID;
-+	writel(reg, usbss + USBSS_MODE_CONTROL);
  }
  
--static UNIVERSAL_DEV_PM_OPS(dwc3_ti_pm_ops, dwc3_ti_suspend_common,
--			    dwc3_ti_resume_common, NULL);
--
--#define DEV_PM_OPS	(&dwc3_ti_pm_ops)
--#else
--#define DEV_PM_OPS	NULL
--#endif /* CONFIG_PM */
--
--static const struct of_device_id dwc3_ti_of_match[] = {
--	{ .compatible = "ti,am62-usb"},
--	{},
-+static const struct dwc3_glue_ops ti_am62_ops = {
-+	.glue_configure = dwc3_ti_am62_glue_configure,
- };
--MODULE_DEVICE_TABLE(of, dwc3_ti_of_match);
- 
--static struct platform_driver dwc3_ti_driver = {
--	.probe		= dwc3_ti_probe,
--	.remove		= dwc3_ti_remove,
--	.driver		= {
--		.name	= "dwc3-am62",
--		.pm	= DEV_PM_OPS,
--		.of_match_table = dwc3_ti_of_match,
+-/* Init values for USB endpoints. */
+-static const struct usb_ep ci_ep_init[5] = {
+-	[0] = {	/* EP 0 */
+-		.maxpacket	= 64,
+-		.name		= "ep0",
+-		.ops		= &ci_ep_ops,
 -	},
-+static const struct udevice_id dwc3_am62_match[] = {
-+	{ .compatible = "ti,am62-usb", .data = (ulong)&ti_am62_ops },
-+	{ /* sentinel */ }
- };
- 
--module_platform_driver(dwc3_ti_driver);
+-	[1] = {
+-		.maxpacket	= 512,
+-		.name		= "ep1in-bulk",
+-		.ops		= &ci_ep_ops,
+-	},
+-	[2] = {
+-		.maxpacket	= 512,
+-		.name		= "ep2out-bulk",
+-		.ops		= &ci_ep_ops,
+-	},
+-	[3] = {
+-		.maxpacket	= 512,
+-		.name		= "ep3in-int",
+-		.ops		= &ci_ep_ops,
+-	},
+-	[4] = {
+-		.maxpacket	= 512,
+-		.name		= "ep-",
+-		.ops		= &ci_ep_ops,
+-	},
+-};
 -
--MODULE_ALIAS("platform:dwc3-am62");
--MODULE_AUTHOR("Aswath Govindraju <a-govindraju@ti.com>");
--MODULE_LICENSE("GPL");
--MODULE_DESCRIPTION("DesignWare USB3 TI Glue Layer");
-+U_BOOT_DRIVER(dwc3_am62_wrapper) = {
-+	.name	= "dwc3-am62",
-+	.id	= UCLASS_SIMPLE_BUS,
-+	.of_match = dwc3_am62_match,
-+	.bind = dwc3_glue_bind,
-+	.probe = dwc3_glue_probe,
-+	.remove = dwc3_glue_remove,
-+	.plat_auto	= sizeof(struct dwc3_glue_data),
-+};
+ static struct ci_drv controller = {
+ 	.gadget	= {
+ 		.name	= "ci_udc",
+@@ -263,76 +216,6 @@ static void ci_invalidate_td(struct ept_queue_item *td)
+ 	invalidate_dcache_range(start, end);
+ }
+ 
+-static struct usb_request *
+-ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags)
+-{
+-	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	int num = -1;
+-	struct ci_req *ci_req;
+-
+-	if (ci_ep->desc)
+-		num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+-
+-	if (num == 0 && controller.ep0_req) {
+-		DBG("%s: already got controller.ep0_req = %p\n", __func__, controller.ep0_req);
+-		return &controller.ep0_req->req;
+-	}
+-
+-	ci_req = calloc(1, sizeof(*ci_req));
+-	if (!ci_req)
+-		return NULL;
+-
+-	INIT_LIST_HEAD(&ci_req->queue);
+-
+-	if (num == 0)
+-		controller.ep0_req = ci_req;
+-
+-	return &ci_req->req;
+-}
+-
+-static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *req)
+-{
+-	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	struct ci_req *ci_req = container_of(req, struct ci_req, req);
+-	int num = -1;
+-
+-	if (ci_ep->desc)
+-		num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+-	else
+-		DBG("%s: no endpoint %p descriptor\n", __func__, ci_ep);
+-
+-	if (num == 0) {
+-		if (!controller.ep0_req)
+-			return;
+-		controller.ep0_req = 0;
+-	}
+-
+-	if (ci_req->b_buf)
+-		free(ci_req->b_buf);
+-	free(ci_req);
+-}
+-
+-static void request_complete(struct usb_ep *ep, struct ci_req *req, int status)
+-{
+-	if (req->req.status == -EINPROGRESS)
+-		req->req.status = status;
+-
+-	DBG("%s: req %p complete: status %d, actual %u\n",
+-	    ep->name, req, req->req.status, req->req.actual);
+-
+-	req->req.complete(ep, &req->req);
+-}
+-
+-static void request_complete_list(struct usb_ep *ep, struct list_head *list, int status)
+-{
+-	struct ci_req *req, *tmp_req;
+-
+-	list_for_each_entry_safe(req, tmp_req, list, queue) {
+-		list_del_init(&req->queue);
+-		request_complete(ep, req, status);
+-	}
+-}
+-
+ static void ep_enable(int num, int in, int maxpacket)
+ {
+ 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+@@ -353,145 +236,6 @@ static void ep_enable(int num, int in, int maxpacket)
+ 	writel(n, &udc->epctrl[num]);
+ }
+ 
+-static int ci_ep_enable(struct usb_ep *ep,
+-		const struct usb_endpoint_descriptor *desc)
+-{
+-	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	int num, in;
+-	num = desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+-	in = (desc->bEndpointAddress & USB_DIR_IN) != 0;
+-
+-	if (ci_ep->desc) {
+-		DBG("%s: endpoint num %d in %d already enabled\n", __func__, num, in);
+-		return -EBUSY;
+-	}
+-
+-	ci_ep->desc = desc;
+-	ep->desc = desc;
+-
+-	if (num) {
+-		int max = get_unaligned_le16(&desc->wMaxPacketSize);
+-
+-		if ((max > 64) && (controller.gadget.speed == USB_SPEED_FULL))
+-			max = 64;
+-		if (ep->maxpacket != max) {
+-			DBG("%s: from %d to %d\n", __func__,
+-			    ep->maxpacket, max);
+-			ep->maxpacket = max;
+-		}
+-	}
+-	ep_enable(num, in, ep->maxpacket);
+-	DBG("%s: num=%d maxpacket=%d\n", __func__, num, ep->maxpacket);
+-	return 0;
+-}
+-
+-static int ep_disable(int num, int in)
+-{
+-	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+-	unsigned int ep_bit, enable_bit;
+-	int err;
+-
+-	if (in) {
+-		ep_bit = EPT_TX(num);
+-		enable_bit = CTRL_TXE;
+-	} else {
+-		ep_bit = EPT_RX(num);
+-		enable_bit = CTRL_RXE;
+-	}
+-
+-	/* clear primed buffers */
+-	do {
+-		writel(ep_bit, &udc->epflush);
+-		err = wait_for_bit_le32(&udc->epflush, ep_bit, false, 1000, false);
+-		if (err)
+-			return err;
+-	} while (readl(&udc->epstat) & ep_bit);
+-
+-	/* clear enable bit */
+-	clrbits_le32(&udc->epctrl[num], enable_bit);
+-
+-	return 0;
+-}
+-
+-static int ci_ep_disable(struct usb_ep *ep)
+-{
+-	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	LIST_HEAD(req_list);
+-	int num, in, err;
+-
+-	if (!ci_ep->desc) {
+-		DBG("%s: attempt to disable a not enabled yet endpoint\n", __func__);
+-		err = -EBUSY;
+-		goto nodesc;
+-	}
+-
+-	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+-	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
+-
+-	list_splice_init(&ci_ep->queue, &req_list);
+-	request_complete_list(ep, &req_list, -ESHUTDOWN);
+-
+-	err = ep_disable(num, in);
+-	if (err)
+-		return err;
+-
+-	ci_ep->desc = NULL;
+-	err = 0;
+-
+-nodesc:
+-	ep->desc = NULL;
+-	ci_ep->req_primed = false;
+-	return err;
+-}
+-
+-static int ci_bounce(struct ci_req *ci_req, int in)
+-{
+-	struct usb_request *req = &ci_req->req;
+-	unsigned long addr = (unsigned long)req->buf;
+-	unsigned long hwaddr;
+-	uint32_t aligned_used_len;
+-
+-	/* Input buffer address is not aligned. */
+-	if (addr & (ARCH_DMA_MINALIGN - 1))
+-		goto align;
+-
+-	/* Input buffer length is not aligned. */
+-	if (req->length & (ARCH_DMA_MINALIGN - 1))
+-		goto align;
+-
+-	/* The buffer is well aligned, only flush cache. */
+-	ci_req->hw_len = req->length;
+-	ci_req->hw_buf = req->buf;
+-	goto flush;
+-
+-align:
+-	if (ci_req->b_buf && req->length > ci_req->b_len) {
+-		free(ci_req->b_buf);
+-		ci_req->b_buf = 0;
+-	}
+-	if (!ci_req->b_buf) {
+-		ci_req->b_len = roundup(req->length, ARCH_DMA_MINALIGN);
+-		ci_req->b_buf = memalign(ARCH_DMA_MINALIGN, ci_req->b_len);
+-		if (!ci_req->b_buf)
+-			return -ENOMEM;
+-	}
+-	ci_req->hw_len = ci_req->b_len;
+-	ci_req->hw_buf = ci_req->b_buf;
+-
+-	if (in)
+-		memcpy(ci_req->hw_buf, req->buf, req->length);
+-
+-flush:
+-	hwaddr = (unsigned long)ci_req->hw_buf;
+-	if (!hwaddr)
+-		return 0;
+-
+-	aligned_used_len = roundup(req->length, ARCH_DMA_MINALIGN);
+-	flush_dcache_range(hwaddr, hwaddr + aligned_used_len);
+-
+-	return 0;
+-}
+-
+ static void ci_debounce(struct ci_req *ci_req, int in)
+ {
+ 	struct usb_request *req = &ci_req->req;
+@@ -618,77 +362,6 @@ static void ci_ep_submit_next_request(struct ci_ep *ci_ep)
+ 	writel(bit, &udc->epprime);
+ }
+ 
+-static int ci_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+-{
+-	struct ci_ep *ci_ep = container_of(_ep, struct ci_ep, ep);
+-	struct ci_req *ci_req;
+-
+-	list_for_each_entry(ci_req, &ci_ep->queue, queue) {
+-		if (&ci_req->req == _req)
+-			break;
+-	}
+-
+-	if (&ci_req->req != _req) {
+-		DBG("%s: ci_req not found in the queue\n", __func__);
+-		return -EINVAL;
+-	}
+-
+-	list_del_init(&ci_req->queue);
+-
+-	if (ci_req->req.status == -EINPROGRESS) {
+-		ci_req->req.status = -ECONNRESET;
+-		if (ci_req->req.complete)
+-			ci_req->req.complete(_ep, _req);
+-	}
+-
+-	return 0;
+-}
+-
+-static int ci_ep_queue(struct usb_ep *ep,
+-		struct usb_request *req, gfp_t gfp_flags)
+-{
+-	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	struct ci_req *ci_req = container_of(req, struct ci_req, req);
+-	int in, ret;
+-	int __maybe_unused num;
+-
+-	if (!ci_ep->desc) {
+-		DBG("%s: ci_ep->desc == NULL, nothing to do!\n", __func__);
+-		return -EINVAL;
+-	}
+-
+-	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+-	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
+-
+-	if (!num && ci_ep->req_primed) {
+-		/*
+-		 * The flipping of ep0 between IN and OUT relies on
+-		 * ci_ep_queue consuming the current IN/OUT setting
+-		 * immediately. If this is deferred to a later point when the
+-		 * req is pulled out of ci_req->queue, then the IN/OUT setting
+-		 * may have been changed since the req was queued, and state
+-		 * will get out of sync. This condition doesn't occur today,
+-		 * but could if bugs were introduced later, and this error
+-		 * check will save a lot of debugging time.
+-		 */
+-		printf("%s: ep0 transaction already in progress\n", __func__);
+-		return -EPROTO;
+-	}
+-
+-	ret = ci_bounce(ci_req, in);
+-	if (ret)
+-		return ret;
+-
+-	DBG("ept%d %s pre-queue req %p, buffer %p\n",
+-	    num, in ? "in" : "out", ci_req, ci_req->hw_buf);
+-	list_add_tail(&ci_req->queue, &ci_ep->queue);
+-
+-	if (!ci_ep->req_primed)
+-		ci_ep_submit_next_request(ci_ep);
+-
+-	return 0;
+-}
+-
+ static void flip_ep0_direction(void)
+ {
+ 	if (ep0_desc.bEndpointAddress == USB_DIR_IN) {
+@@ -1034,149 +707,6 @@ static int ci_pullup(struct usb_gadget *gadget, int is_on)
+ 	return 0;
+ }
+ 
+-static int ci_udc_probe(void)
+-{
+-	struct ept_queue_head *head;
+-	int i;
+-
+-	const int num = 2 * NUM_ENDPOINTS;
+-
+-	const int eplist_min_align = 4096;
+-	const int eplist_align = roundup(eplist_min_align, ARCH_DMA_MINALIGN);
+-	const int eplist_raw_sz = num * sizeof(struct ept_queue_head);
+-	const int eplist_sz = roundup(eplist_raw_sz, ARCH_DMA_MINALIGN);
+-
+-	/* The QH list must be aligned to 4096 bytes. */
+-	controller.epts = memalign(eplist_align, eplist_sz);
+-	if (!controller.epts)
+-		return -ENOMEM;
+-	memset(controller.epts, 0, eplist_sz);
+-
+-	controller.items_mem = memalign(ILIST_ALIGN, ILIST_SZ);
+-	if (!controller.items_mem) {
+-		free(controller.epts);
+-		return -ENOMEM;
+-	}
+-	memset(controller.items_mem, 0, ILIST_SZ);
+-
+-	for (i = 0; i < 2 * NUM_ENDPOINTS; i++) {
+-		/*
+-		 * Configure QH for each endpoint. The structure of the QH list
+-		 * is such that each two subsequent fields, N and N+1 where N is
+-		 * even, in the QH list represent QH for one endpoint. The Nth
+-		 * entry represents OUT configuration and the N+1th entry does
+-		 * represent IN configuration of the endpoint.
+-		 */
+-		head = controller.epts + i;
+-		if (i < 2)
+-			head->config = CFG_MAX_PKT(EP0_MAX_PACKET_SIZE)
+-				| CFG_ZLT | CFG_IOS;
+-		else
+-			head->config = CFG_MAX_PKT(EP_MAX_PACKET_SIZE)
+-				| CFG_ZLT;
+-		head->next = TERMINATE;
+-		head->info = 0;
+-
+-		if (i & 1) {
+-			ci_flush_qh(i / 2);
+-			ci_flush_qtd(i / 2);
+-		}
+-	}
+-
+-	INIT_LIST_HEAD(&controller.gadget.ep_list);
+-
+-	/* Init EP 0 */
+-	memcpy(&controller.ep[0].ep, &ci_ep_init[0], sizeof(*ci_ep_init));
+-	controller.ep[0].desc = &ep0_desc;
+-	INIT_LIST_HEAD(&controller.ep[0].queue);
+-	controller.ep[0].req_primed = false;
+-	controller.gadget.ep0 = &controller.ep[0].ep;
+-	INIT_LIST_HEAD(&controller.gadget.ep0->ep_list);
+-
+-	/* Init EP 1..3 */
+-	for (i = 1; i < 4; i++) {
+-		memcpy(&controller.ep[i].ep, &ci_ep_init[i],
+-		       sizeof(*ci_ep_init));
+-		INIT_LIST_HEAD(&controller.ep[i].queue);
+-		controller.ep[i].req_primed = false;
+-		list_add_tail(&controller.ep[i].ep.ep_list,
+-			      &controller.gadget.ep_list);
+-	}
+-
+-	/* Init EP 4..n */
+-	for (i = 4; i < NUM_ENDPOINTS; i++) {
+-		memcpy(&controller.ep[i].ep, &ci_ep_init[4],
+-		       sizeof(*ci_ep_init));
+-		INIT_LIST_HEAD(&controller.ep[i].queue);
+-		controller.ep[i].req_primed = false;
+-		list_add_tail(&controller.ep[i].ep.ep_list,
+-			      &controller.gadget.ep_list);
+-	}
+-
+-	ci_ep_alloc_request(&controller.ep[0].ep, 0);
+-	if (!controller.ep0_req) {
+-		free(controller.items_mem);
+-		free(controller.epts);
+-		return -ENOMEM;
+-	}
+-
+-	return 0;
+-}
+-
+-int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+-{
+-	int ret;
+-
+-	if (!driver)
+-		return -EINVAL;
+-	if (!driver->bind || !driver->setup || !driver->disconnect)
+-		return -EINVAL;
+-
+-#if CONFIG_IS_ENABLED(DM_USB)
+-	ret = usb_setup_ehci_gadget(&controller.ctrl);
+-#else
+-	ret = usb_lowlevel_init(0, USB_INIT_DEVICE, (void **)&controller.ctrl);
+-#endif
+-	if (ret)
+-		return ret;
+-
+-	ret = ci_udc_probe();
+-	if (ret) {
+-		DBG("udc probe failed, returned %d\n", ret);
+-		return ret;
+-	}
+-
+-	ret = driver->bind(&controller.gadget);
+-	if (ret) {
+-		DBG("driver->bind() returned %d\n", ret);
+-		return ret;
+-	}
+-	controller.driver = driver;
+-
+-	return 0;
+-}
+-
+-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-{
+-	udc_disconnect();
+-
+-	driver->unbind(&controller.gadget);
+-	controller.driver = NULL;
+-
+-	ci_ep_free_request(&controller.ep[0].ep, &controller.ep0_req->req);
+-	free(controller.items_mem);
+-	free(controller.epts);
+-
+-#if CONFIG_IS_ENABLED(DM_USB)
+-	usb_remove_ehci_gadget(&controller.ctrl);
+-#else
+-	usb_lowlevel_stop(0);
+-	controller.ctrl = NULL;
+-#endif
+-
+-	return 0;
+-}
+-
+ bool dfu_usb_get_reset(void)
+ {
+ 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
 -- 
 2.53.0
 
