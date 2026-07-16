@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF06AC44511
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:16:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBABFC44511
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:17:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6DD184E40;
-	Thu, 16 Jul 2026 18:09:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37BAA84E44;
+	Thu, 16 Jul 2026 18:09:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rHNdOnUH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IjBeta7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C807284CC4; Thu, 16 Jul 2026 15:44:19 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 3688284C3F; Thu, 16 Jul 2026 15:44:21 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C230C84C3F
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EF7384CEB
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-c160d8760e0so75994466b.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:17 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-698bf274b3fso1003323a12.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209457; x=1784814257; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209458; x=1784814258; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OlqxXzsuKiMYuyRzMCc9CYe8R3cavUr9w8KhmTYvYsc=;
- b=rHNdOnUHndfrOI++PpKNRhZeiAwducoYYUUcBQUDU+kkKEx/bwUrFvUJwBhmB1uKZ5
- 6U5q5Ifw+jCrLPh1pXqdgdUcJPHknuqRWSAUjFtJAc+37ilVaL+r2FyB9DJkv8qx/kBZ
- sPsx+ClqIM/IsaOIWFkSXNu5lPaxoLEe/bEPa6tDsMG1I7dJ2P3jV3goBqevi0d6i3KF
- mr5ldTckIRfko9InsbkjzKUT1D8ayfiGTFZKCwbVWRgMZpzIVYMqdoD05O4tOPj89o1g
- GajCMVCh5SXrnK0g7g0j9H9G29dUKcYJaPsuWZ889U1S13zSpGPB0MnZbhoemScA4Ow/
- G2DQ==
+ bh=3Tizilu1twmrTeCJUDq4hQ3Y3LDdejFF7sN8BlFAOPY=;
+ b=IjBeta7q34FndwZWRoXitHUxg7BPH64kuBYs2hZUMTzdpqtbsi+lzFUOu17f7GJ1c+
+ mT02L8TNnTIyd2ur6Xgkpj4jfva2Z6WkEIgFIRTA5wQWk5s8+YtnPkWv1ezzaN4Il7VL
+ AoUBbOkmIkUMQvxfcJnLIEZWCnLTTjMYULXWY6kRzEQjJSX3ThjKh1Fwtiez6na37/pt
+ pkvEKJECA859rmzpTPE5eyaYIL2GPt5dGNxuvbzDxkh7lFJ495/h8hvINPvz5RMOjsK9
+ exJiXHfgAog6nGRKJEcMdWKAA1YQxv1KzOLJPANSNskwSAScfVsX4D9CwWeFp7aIVh+c
+ iDig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209457; x=1784814257;
+ d=1e100.net; s=20251104; t=1784209458; x=1784814258;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=OlqxXzsuKiMYuyRzMCc9CYe8R3cavUr9w8KhmTYvYsc=;
- b=bsvVM6P7rxY2FfJGnI6cNquHI5PkwJl785puBS8fLgYw6XDNJG60iZizC6on2rzOOg
- lNzE1dNmXPwFVGkmy0Y/uESSuzsBXN039zIVoaqpyn8mPCjduCOoBV1ZXUphUGesMm86
- 2HJdBrd8szAtNp6fJk32w+Xe0zpJkBxRbCrYeWOX9wT9mU0lcct7y9Wx0zso98GhsZsc
- lpfstkGBE06xEjqGXmk94LAs3I8uC1Cifoq+D9bR4FEjA2flRui05I8IGJchBwdRtJle
- yJAIx4L1PYXdd1LsfDauzKKnIjD+gPVXPvxXsPM2eK0mrzD25X0jaKXt8EecDyLoNReQ
- HwUA==
-X-Gm-Message-State: AOJu0YxgRgDnZzdC+W/y4xTzm2IH1PCl3IN/6ZPK+nKGyIXqY2wdFsW1
- d5p/I5lCZXYh1sGz6j6eZbXczaYJ1t+o7IULlNk4l6R+MVLMjo1kh5P9uezVxl8DH2x7JLpy757
- iw/lV
-X-Gm-Gg: AfdE7clcJiEzEye0vzv2BOpNcKvbxwTQoiU588eAAlVlh3KYMQgouH1kyfSZt8P7/Sp
- YB2FKE7ST0H8SUMDxEaddPkmAaP1OL3mhDekZeStw9H9bnnFBfDOBYcPwtrcbC3GyAq5w/njr2C
- +qJDCYUvM+3nDQ2pIBOuLRCOw/ekJQ8Me2aoIwenAOyx3DemJ91A0MX44qfoMzK1CnkoKie5YcH
- 8PK/4z1GhWSWNX5xCepyP5BKps6ulQ74vZmPXEg/v109bWlRNJqk9sKVDPR8PkwVcnC0Ph7alN5
- FjhBZN50BRVmbB5HGsbPCGcGYA9vl54vNeRlQVqhigTWL+iRZs5RWP1RT7us6a99VaSyNwLjkP+
- y1ycNfLXKEqoB2rnig/gW0KykP5dFj6f3XfMxFeW0IrSx9YU+3OSrz/e9mjBXqNN2dx8++vA9Ln
- 4ErIxDaZayz1jasX+cBSMiiot6BzsElz73nE2mHQ==
-X-Received: by 2002:a17:907:3e1e:b0:c12:81be:b077 with SMTP id
- a640c23a62f3a-c161f359f34mr634665966b.8.1784209457036; 
- Thu, 16 Jul 2026 06:44:17 -0700 (PDT)
+ bh=3Tizilu1twmrTeCJUDq4hQ3Y3LDdejFF7sN8BlFAOPY=;
+ b=omZKteY8QJyhqyueT9A6xqV2Tf2V2cgoiP1Kw413kxGVmo4BCzcJwhiOWz3DkIzXk+
+ 5wnIOnlSgWb3l9HZsExoMWlJMZ4ef4kjdarMXxgBwhxw3YahmLiwbwRy2AGTDl6jskxN
+ ntMwa50iFJi5EqFhLIkmsFjJg1zbDv5a+tbYTt5XmEyyKyHlXtR+U+oI08Auigl+AbXn
+ qcjNOZKng6pN/Yz+MncN9T7oE0KbSCK2E8oRikHILCdNCRerSl0qrHVzR/3Nm3TWpCqP
+ 3Z7fnxm7vStqEi5kNMjj5W+TW5pcZKjduavCrYz2sXssv77niSarf795xrxHFofcMWAN
+ 90QQ==
+X-Gm-Message-State: AOJu0YzHq2r/t2jXUkjZGdz2PqN9Tizufuv9AOgvuInD2ANyCjJdBzaX
+ xcddON90ct2zarQNx+rKQcWdAgWloryCbaYi2ucKKFAW8VZZgIV3p+/JL82PjOr50JmT+K6K60Z
+ ZPKuQ
+X-Gm-Gg: AfdE7cm66+V3h4sBDwNpMMQb+6MtTapeJCwJqksfOeO3ar5/UhTT1zTC+J73fhqSWta
+ lKg6d1jGDmjqE4u2biv0L4Z6LFo94jbdR5ExWXxCoIhZ53PWOckaRR+Mz5waSRyMi5D2pV7jaOE
+ kP4sei3ZGCTf/QPzhmq3WRrv6fulqLmzNvkNlqVtTIpCqzkhye/8vDmYRjt1nuLUt51cBLQnzRB
+ suPeiYT0mivW6BU4A0zE/OVuJJM7rlfq9ad20b2vDwFqdHjSndd/UA5sKQQ7sIcEIlK9jY0NNz6
+ LP77Ho5nkHLF47lHFI7yAvjLU5rButQHdguauNmDUdAwMhdbm7QBGvAfw2RMLAghktp7MkDgfHi
+ 6Bv8J3dgXYlW8gJR/6jmmFf1oaFGXh3tMzHNKFla0dC0WnjaPCaaF5fzwqB8mX5aKJHKGlyDLDO
+ ms7BzZwm3WAQ1iAUa4eGLzgDo2iMewONoahIP/VA==
+X-Received: by 2002:a05:6402:5190:b0:68e:4c0:f59a with SMTP id
+ 4fb4d7f45d1cf-69c5ef8767bmr6977487a12.2.1784209458426; 
+ Thu, 16 Jul 2026 06:44:18 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c16874515basm211513866b.53.2026.07.16.06.44.16
+ 4fb4d7f45d1cf-69d4eedbf7dsm3914447a12.24.2026.07.16.06.44.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:16 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:17 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
@@ -78,9 +78,9 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v5 46/75] usb: dwc3: import from kernel v6.2
-Date: Thu, 16 Jul 2026 15:42:16 +0200
-Message-ID: <20260716134305.614278-47-anders.roxell@linaro.org>
+Subject: [PATCH v5 47/75] usb: dwc3: import from kernel v6.3
+Date: Thu, 16 Jul 2026 15:42:17 +0200
+Message-ID: <20260716134305.614278-48-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -105,7 +105,7 @@ X-Virus-Status: Clean
 
 From: Jens Wiklander <jens.wiklander@linaro.org>
 
-Sync Linux kernel dwc3 changes from v6.1 to v6.2.
+Sync Linux kernel dwc3 changes from v6.2 to v6.3.
 
 The following files are preserved accross the import:
 Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -120,142 +120,123 @@ dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 Note that this is a raw import and doesn't build.
 A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v6.1..v6.2
+List of commits: git log --oneline v6.2..v6.3
 Commits imported:
-eb320f76e31d usb: dwc3: qcom: enable vbus override when in OTG dr-mode
-7d80dbd708c1 usb: dwc3: fix extcon dependency
-c4e3ef568539 usb: dwc3: gadget: Ignore End Transfer delay on teardown
-e498a0444324 usb: dwc3: xilinx: include linux/gpio/consumer.h
-63130462c919 usb: dwc3: core: defer probe on ulpi_read_id timeout
-97a48da1619b usb: dwc3: qcom: Fix memory leak in dwc3_qcom_interconnect_init
-62c73bfea048 usb: dwc3: Fix race between dwc3_set_mode and __dwc3_set_mode
-f05f80f217bf usb: dwc3: pci: Update PCIe device ID for USB3 controller on CPU sub-system for Raptor Lake
-3205054dc6fe usb: dwc3: improve the config dependency of USB_DWC3_XILINX
-049142335613 usb: dwc3: gadget: Reduce TRB IOC settings
+ec799c8a92e0 usb: dwc3: pci: add support for the Intel Meteor Lake-S
+d8a2bb4eb758 usb: dwc3: gadget: Add 1ms delay after end transfer command without IOC
+02c1820345e7 usb: dwc3: Fix a typo in field name
+e3eafcf0fabe usb: dwc3: xilinx: Remove unused of_gpio,h
+8e5248c3a877 usb: dwc3: pci: add support for the Intel Meteor Lake-M
+be308d68785b USB: dwc3: fix memory leak with using debugfs_lookup()
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/core.c   | 23 ++++++++++++++++-------
- drivers/usb/dwc3/gadget.c | 19 ++++++++++++++++---
- 2 files changed, 32 insertions(+), 10 deletions(-)
+ drivers/usb/dwc3/core.h   |  4 +++-
+ drivers/usb/dwc3/debug.h  |  3 +++
+ drivers/usb/dwc3/gadget.c | 18 ++++++++++++------
+ 3 files changed, 18 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 1f348bc867c2..476b63618511 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -122,21 +122,25 @@ static void __dwc3_set_mode(struct work_struct *work)
- 	unsigned long flags;
- 	int ret;
- 	u32 reg;
-+	u32 desired_dr_role;
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 8f9959ba9fd4..4743e918dcaf 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1098,7 +1098,7 @@ struct dwc3_scratchpad_array {
+  *			change quirk.
+  * @dis_tx_ipgap_linecheck_quirk: set if we disable u2mac linestate
+  *			check during HS transmit.
+- * @resume-hs-terminations: Set if we enable quirk for fixing improper crc
++ * @resume_hs_terminations: Set if we enable quirk for fixing improper crc
+  *			generation after resume from suspend.
+  * @parkmode_disable_ss_quirk: set if we need to disable all SuperSpeed
+  *			instances in park mode.
+@@ -1117,6 +1117,7 @@ struct dwc3_scratchpad_array {
+  *		     address.
+  * @num_ep_resized: carries the current number endpoints which have had its tx
+  *		    fifo resized.
++ * @debug_root: root debugfs directory for this device to put its files in.
+  */
+ struct dwc3 {
+ 	struct work_struct	drd_work;
+@@ -1332,6 +1333,7 @@ struct dwc3 {
+ 	int			max_cfg_eps;
+ 	int			last_fifo_depth;
+ 	int			num_ep_resized;
++	struct dentry		*debug_root;
+ };
  
- 	mutex_lock(&dwc->mutex);
-+	spin_lock_irqsave(&dwc->lock, flags);
-+	desired_dr_role = dwc->desired_dr_role;
-+	spin_unlock_irqrestore(&dwc->lock, flags);
+ #define INCRX_BURST_MODE 0
+diff --git a/drivers/usb/dwc3/debug.h b/drivers/usb/dwc3/debug.h
+index 48b44b88dc25..8bb2c9e3b9ac 100644
+--- a/drivers/usb/dwc3/debug.h
++++ b/drivers/usb/dwc3/debug.h
+@@ -414,11 +414,14 @@ static inline const char *dwc3_gadget_generic_cmd_status_string(int status)
  
- 	pm_runtime_get_sync(dwc->dev);
- 
- 	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_OTG)
- 		dwc3_otg_update(dwc, 0);
- 
--	if (!dwc->desired_dr_role)
-+	if (!desired_dr_role)
- 		goto out;
- 
--	if (dwc->desired_dr_role == dwc->current_dr_role)
-+	if (desired_dr_role == dwc->current_dr_role)
- 		goto out;
- 
--	if (dwc->desired_dr_role == DWC3_GCTL_PRTCAP_OTG && dwc->edev)
-+	if (desired_dr_role == DWC3_GCTL_PRTCAP_OTG && dwc->edev)
- 		goto out;
- 
- 	switch (dwc->current_dr_role) {
-@@ -164,7 +168,7 @@ static void __dwc3_set_mode(struct work_struct *work)
- 	 */
- 	if (dwc->current_dr_role && ((DWC3_IP_IS(DWC3) ||
- 			DWC3_VER_IS_PRIOR(DWC31, 190A)) &&
--			dwc->desired_dr_role != DWC3_GCTL_PRTCAP_OTG)) {
-+			desired_dr_role != DWC3_GCTL_PRTCAP_OTG)) {
- 		reg = dwc3_readl(dwc->regs, DWC3_GCTL);
- 		reg |= DWC3_GCTL_CORESOFTRESET;
- 		dwc3_writel(dwc->regs, DWC3_GCTL, reg);
-@@ -184,11 +188,11 @@ static void __dwc3_set_mode(struct work_struct *work)
- 
- 	spin_lock_irqsave(&dwc->lock, flags);
- 
--	dwc3_set_prtcap(dwc, dwc->desired_dr_role);
-+	dwc3_set_prtcap(dwc, desired_dr_role);
- 
- 	spin_unlock_irqrestore(&dwc->lock, flags);
- 
--	switch (dwc->desired_dr_role) {
-+	switch (desired_dr_role) {
- 	case DWC3_GCTL_PRTCAP_HOST:
- 		ret = dwc3_host_init(dwc);
- 		if (ret) {
-@@ -1096,8 +1100,13 @@ static int dwc3_core_init(struct dwc3 *dwc)
- 
- 	if (!dwc->ulpi_ready) {
- 		ret = dwc3_core_ulpi_init(dwc);
--		if (ret)
-+		if (ret) {
-+			if (ret == -ETIMEDOUT) {
-+				dwc3_core_soft_reset(dwc);
-+				ret = -EPROBE_DEFER;
-+			}
- 			goto err0;
-+		}
- 		dwc->ulpi_ready = true;
- 	}
- 
+ #ifdef CONFIG_DEBUG_FS
+ extern void dwc3_debugfs_create_endpoint_dir(struct dwc3_ep *dep);
++extern void dwc3_debugfs_remove_endpoint_dir(struct dwc3_ep *dep);
+ extern void dwc3_debugfs_init(struct dwc3 *d);
+ extern void dwc3_debugfs_exit(struct dwc3 *d);
+ #else
+ static inline void dwc3_debugfs_create_endpoint_dir(struct dwc3_ep *dep)
+ {  }
++static inline void dwc3_debugfs_remove_endpoint_dir(struct dwc3_ep *dep)
++{  }
+ static inline void dwc3_debugfs_init(struct dwc3 *d)
+ {  }
+ static inline void dwc3_debugfs_exit(struct dwc3 *d)
 diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 6d524fa76443..89dcfac01235 100644
+index 89dcfac01235..cf5b4f49c3ed 100644
 --- a/drivers/usb/dwc3/gadget.c
 +++ b/drivers/usb/dwc3/gadget.c
-@@ -1464,8 +1464,18 @@ static int dwc3_prepare_trbs_sg(struct dwc3_ep *dep,
- 			 */
- 			if (num_trbs_left == 1 || (needs_extra_trb &&
- 					num_trbs_left <= 2 &&
--					sg_dma_len(sg_next(s)) >= length))
--				must_interrupt = true;
-+					sg_dma_len(sg_next(s)) >= length)) {
-+				struct dwc3_request *r;
-+
-+				/* Check if previous requests already set IOC */
-+				list_for_each_entry(r, &dep->started_list, list) {
-+					if (r != req && !r->request.no_interrupt)
-+						break;
-+
-+					if (r == req)
-+						must_interrupt = true;
-+				}
-+			}
+@@ -1699,6 +1699,7 @@ static int __dwc3_gadget_get_frame(struct dwc3 *dwc)
+  */
+ static int __dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force, bool interrupt)
+ {
++	struct dwc3 *dwc = dep->dwc;
+ 	struct dwc3_gadget_ep_cmd_params params;
+ 	u32 cmd;
+ 	int ret;
+@@ -1722,10 +1723,13 @@ static int __dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force, bool int
+ 	WARN_ON_ONCE(ret);
+ 	dep->resource_index = 0;
  
- 			dwc3_prepare_one_trb(dep, req, trb_length, 1, i, false,
- 					must_interrupt);
-@@ -1717,6 +1727,7 @@ static int __dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force, bool int
- 	else if (!ret)
+-	if (!interrupt)
++	if (!interrupt) {
++		if (!DWC3_IP_IS(DWC3) || DWC3_VER_IS_PRIOR(DWC3, 310A))
++			mdelay(1);
+ 		dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
+-	else if (!ret)
++	} else if (!ret) {
  		dep->flags |= DWC3_EP_END_TRANSFER_PENDING;
++	}
  
-+	dep->flags &= ~DWC3_EP_DELAY_STOP;
+ 	dep->flags &= ~DWC3_EP_DELAY_STOP;
  	return ret;
+@@ -3194,9 +3198,7 @@ static void dwc3_gadget_free_endpoints(struct dwc3 *dwc)
+ 			list_del(&dep->endpoint.ep_list);
+ 		}
+ 
+-		debugfs_remove_recursive(debugfs_lookup(dep->name,
+-				debugfs_lookup(dev_name(dep->dwc->dev),
+-					       usb_debug_root)));
++		dwc3_debugfs_remove_endpoint_dir(dep);
+ 		kfree(dep);
+ 	}
  }
+@@ -3776,7 +3778,11 @@ void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 	 * enabled, the EndTransfer command will have completed upon
+ 	 * returning from this function.
+ 	 *
+-	 * This mode is NOT available on the DWC_usb31 IP.
++	 * This mode is NOT available on the DWC_usb31 IP.  In this
++	 * case, if the IOC bit is not set, then delay by 1ms
++	 * after issuing the EndTransfer command.  This allows for the
++	 * controller to handle the command completely before DWC3
++	 * remove requests attempts to unmap USB request buffers.
+ 	 */
  
-@@ -3722,8 +3733,10 @@ void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
- 	if (dep->number <= 1 && dwc->ep0state != EP0_DATA_PHASE)
- 		return;
- 
-+	if (interrupt && (dep->flags & DWC3_EP_DELAY_STOP))
-+		return;
-+
- 	if (!(dep->flags & DWC3_EP_TRANSFER_STARTED) ||
--	    (dep->flags & DWC3_EP_DELAY_STOP) ||
- 	    (dep->flags & DWC3_EP_END_TRANSFER_PENDING))
- 		return;
- 
+ 	__dwc3_stop_active_transfer(dep, force, interrupt);
 -- 
 2.53.0
 
