@@ -4,151 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6592FC44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 08:46:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8300C4450A
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 09:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71F7F84C2A;
-	Thu, 16 Jul 2026 10:46:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id CBE2384C8E;
+	Thu, 16 Jul 2026 11:43:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="AlMpwCq2";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gP2ookfL";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="OTtPOlMn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 658AF84C63; Thu, 16 Jul 2026 10:46:12 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id DA30384C9E; Thu, 16 Jul 2026 11:43:52 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B22F84C23
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 10:46:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G7DoZl1734297
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:46:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=BC8D1e/HQ8CbGaSaPwRMc3
- 6JR+AQNPyp/sYI8vV2Gv8=; b=AlMpwCq2wHhH8ojcf+KxjUirf78c4Z37Octs4u
- aNtSu/0UJS6oWg7UMWDkjFW1G2tX6qc0wQeslAEtN1cZgfk0XQJ7qe+HXdKMtQjp
- 6c1EXhbo9xgGwJIGXDEg8i7+3yF0cDtqtiyDWpwIRS3GTAGT6KEdG82251r0maOq
- BLUVCSTFCjRnQPewg2G/ycDq61joNbBtU8JKUDAmec3PNx/RzshHxCv4rgR2lsxF
- X1jnrbjsoVlLY3BbnbCVrnWVOMHEtuzgDomsmU3GZNiuAqFmqSBYghtJSjMwaluL
- kHk6h9gSc0BhOzB8h8vgVcOhSqEy0/1syreVSJ5ceGlP8zXQ==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fed063fcs-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:46:06 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-388b404eaa4so8572089a91.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 01:46:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784191566; x=1784796366; darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=BC8D1e/HQ8CbGaSaPwRMc36JR+AQNPyp/sYI8vV2Gv8=;
- b=gP2ookfL8qkizg5IZ2v6jf0x1D138nl+84n5pPs7QkuKs1kNhmRchzhvdKzrugi1Sv
- 1eaCaLg3UYXKyQgK28HVvWYdCbwi2NFwxgYWrkrwnukabykAJQ9gkjMEavpmOGTsJUGb
- oqHElKYhKcG8i3xmQorFKZAnIs8Bxxy+F+M5sWOTG/On61qpyzRFOVvSI2rRRWsZp0H4
- ZTyCZdnpkftwEZamlaLmbyzMD6YbiEtXbtDS+W2oi/2atIGdK2WU3UNVIh7ORwqqa6qp
- MIn6YfbOB0vVKx3TV/BGKs76nIfbc2FpQjMGw0VGj+6NEpcN7/MHhK5qitZD9bAVwmVt
- Bpsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784191566; x=1784796366;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=BC8D1e/HQ8CbGaSaPwRMc36JR+AQNPyp/sYI8vV2Gv8=;
- b=N5RW8qEQumR6MWTPE/R4/Jw1NXuyXZ9Eu/fGB5xKsbHcDECwSKRfTgNok/9EBG+PBh
- i8BlwgMzXFRrrVLFaad8N7ukLyQVeM8tG2VIr/BYQZDPoctWGil3sYgIjQH/mEYj6YIb
- QgVU8NQwbfILumi0de46hmyfjI0Vj9o/5AhJhKKmCqBRFoHUwIkGCPgH6TTnpQRwWAfs
- B2XeRWTiYNyCXmlE3b3JHHNns1HdcfEh1nQjkwnTu9IMXWN9Z1Bes8BB/1YTtLaDrGCx
- iMNQVVG9Vy+zQNi5cqcsLc0ms2pvvez3XQ4eEzAgUdsHg4ijyD84PjHzkB3FPsqBuWU2
- 6woA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrC4YHdvawqebNhD0oQmWPCmCjj+gCgHlP64OG7DVI2KLaCqo4jJfWyDRymIFuKyxHLTzG4XWo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0nXk6JJbfkxBka5kE50usQX+KIomyMhqOhzrJ8FWNXxI9IMm1
- nLPM4qevU1zObV3Xn59JRmDCFjNWO027J6dNF6lsXpcZdyDOZk++Q/4/o8rIU62jJUqwa2QDHPJ
- oHX57gYSHo0X2fMxASh2rOWPxiyI/4bHLqqpSK8QmZJniKEya9OlYr1Pq
-X-Gm-Gg: AfdE7ckXITh69Z88HxlZSfjNNcKJkvf9FVJmcg9l0QTBqYFzdGon+783aTdCuWvW2cO
- UBVhp2QtO5oqQHEtACGwI0q9C7HBleYqa6UNXmCD0DqOhHg2adJVvG4p876Hq9VbncVGwSLTwKR
- 926MfCbHrOi3sIuiYEownRUK199ZIb007kmusmhxuk2HP0C7FE7KQOB13axhOmuN50W4FHW3nfZ
- vGCsCOfJTFXdaBtDzY1gss9EKaV+hLc37BeG8vN4+moA7RGbpIoOPwgHeK81Keq9pwHRZYDKl/X
- 6uWzDk/7xB4TbX2H20eBnrnBXAA6q386hlnEMKkxzLuPAgu6Cm56MTveJeaoH+XbhP7X7lP7KMh
- 68kp8AxI1RhMRZ/63H3Y8LueiPbG1TSeZBThoFdGEGGy0IuKB6rf/DkiLc6QrA0M8TeQnZkky2g
- 7TbT1biDr5DuiN9aC1kouisEC5YyJX4g==
-X-Received: by 2002:a17:90b:57c4:b0:381:9028:5945 with SMTP id
- 98e67ed59e1d1-38e29f97584mr6535529a91.14.1784191565441; 
- Thu, 16 Jul 2026 01:46:05 -0700 (PDT)
-X-Received: by 2002:a17:90b:57c4:b0:381:9028:5945 with SMTP id
- 98e67ed59e1d1-38e29f97584mr6535503a91.14.1784191564929; 
- Thu, 16 Jul 2026 01:46:04 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3140e4fc28dsm10037204eec.2.2026.07.16.01.45.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 01:46:04 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 14:15:51 +0530
-Subject: [PATCH v2] misc: qcom_geni: Add minicore support
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id B004884AA8
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 11:43:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FsutFCIC1rdSt+KNquPmj+Xtts4EVbVQlNYD0jylZQnJr+tQ5uwRzwDOJlDp3oB4NVkoKjiRmIv5+d2YfZDBWUsMDfyTYOlz96K4R2K7D/vfQ2Cx6RvCmXhRbD7DBqIWiNsBT64mwgM9ASEbBLD33RzcQQCvP6hJncv92IX1IN7xoEuxR4wZRSVHv86w5tGELTHn/KnuUN7uM2xt4n8iuixWtfEUrlbYmxOzvu1vKkuDUn560fcBC80PMauaU8PXmvJmaDxgPUuwMLGGVAwd5YLC+0x0+fBHgb48/FHExXOfLUf92Lzhx3roO2Gbgl0kpQa530PHih+Sjp9brOXy8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zHL8cV272Hmau6tbTx7UDw2UyPPfGdd0V3wy5+bN/9U=;
+ b=g37xfgnBf+kmhsHpFW0H53xFf9jS9QVuFY8m9/vWQcSIzgchefMUHaLGsNo0LIKMjFoZAt9+iXbiNLtjmrfQ9FpctM/+PvRjUEeSHCGtkBzE/hFHcgzX72FyZJUZjTt6O4DqB0HeVYuTAwPUQc3a7VcZai9RxVDB9MbIct9kwq6NOl2lB2vdbXwWaTP12bfv3jGOhZjJShExFF3FZqnzst+cdP7u3M0eTGaT/BVSUGgzsMzORMuKql3Ug5SqZIEO9yrcWNfUxYTEIA5qAlDo6TKuhWKzDBwf3LCfdwSzXF9gQsjn93vAae/8igI9WB+oSxQ3yzFl58eY2m9KwWCs+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zHL8cV272Hmau6tbTx7UDw2UyPPfGdd0V3wy5+bN/9U=;
+ b=OTtPOlMn8I18RIZME5NQ7lWcc4wtLNkBJedRYM0Q79cMoVQsFok5eZz+O+cXtxP5B5URef1eFkXUFA0ixIyZmssCzVmAkhu2h+YYW7g71g5+Vhm0gMjqbagOCXRuzbTR6tAf/V2HrbKuZUUeU3YlhFxEbV0kdVP8nTGETr/4WOaUT/m/wRL1POFuUyJaBO5BOmP6q6ghBdkCBMjSsevQZmUU8x5tehGioMKe8CT8jgHmML0geSlNzgHt3mH3rMYzLj+k+rz6iYLWlQpIoNWwHdpHsNWlKb9QcEbbPOp8pawULZzF1Ow71OBwwbKLu5uCGfHeh63Kg1k+wLzFL9RPpw==
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:22f::14)
+ by PRAP195MB1601.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:298::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Thu, 16 Jul
+ 2026 09:43:47 +0000
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7]) by VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7%4]) with mapi id 15.21.0202.014; Thu, 16 Jul 2026
+ 09:43:46 +0000
+From: Yannic Moog <Y.Moog@phytec.de>
+To: INgo Rah <ingo.rah@linutronix.de>, NXP i.MX U-Boot Team
+ <uboot-imx@nxp.com>, "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Teresa Remmet <T.Remmet@phytec.de>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Benjamin Hahn <B.Hahn@phytec.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, Peng Fan
+ <peng.fan@nxp.com>, Francesco Dolcini <francesco.dolcini@toradex.com>, Gregor
+ Herburger <gregor.herburger@linutronix.de>, Benedikt Spranger
+ <b.spranger@linutronix.de>
+Subject: Re: [PATCH v2 1/2] board: phycore_imx8mm: update RAM timings
+Thread-Topic: [PATCH v2 1/2] board: phycore_imx8mm: update RAM timings
+Thread-Index: AQHdD7Alhb5dIHG8uE6I1rdS+wzgkLZv79AA
+Date: Thu, 16 Jul 2026 09:43:46 +0000
+Message-ID: <0dbc2fd7b850eda92b59e6a1251937ee7e81a955.camel@phytec.de>
+References: <20260709-ram_phygate-v2-0-36f8a2f44de2@linutronix.de>
+ <20260709-ram_phygate-v2-1-36f8a2f44de2@linutronix.de>
+In-Reply-To: <20260709-ram_phygate-v2-1-36f8a2f44de2@linutronix.de>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI2P195MB2491:EE_|PRAP195MB1601:EE_
+x-ms-office365-filtering-correlation-id: 052e053f-f0f5-4df7-18dc-08dee31ebb72
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|23010399003|376014|7416014|366016|1800799024|38070700021|6133799003|56012099006|11063799006|4143699003|10067099003|22082099003|18002099003;
+x-microsoft-antispam-message-info: wuPSRxLn9bDg2Foa9SwBfr50C33+YDBKsdbjAzHGwS4OFpbQUJ+7OL8pq0/gSirHOCd6ewUVRMAdQL4f1IvqZHksUiLWLO7IgOgQZqmuaNFQ9/X3yx1vhxZCThhRmEUgPPPNff/zUPMLoEDgMrckVYDcxHBiyo0EfO3q8KimIFw4Lcxtfanydvlkkw/8m172H/zKNhOfZj76CK1KEisf37HZGOSehD/V8pi8GZoUNfOmfOxwyVQxEoJGavNYpPMBPHcXm/dblYQrCUvs0kVgVGne9+n0FYuUPUXdAsMvY7Eq78A7W7xG6T4bWk+WpwMjafCVVhBoEDlYSBGe912fd+MrDXiS3tGdfg1V8B/EJX4qSn3rj1iV4upmCM4cQgHLKhW5/7EgP6kMunYzcCie8L0SPB5/EG3efoyZsHc02zt+C2yVgQIKtj8uUP75ZDof05rDvubROUrCbV96WG66TaCZcVZTiSCi14tiyA95F1XGP7XHOCs3W7i8FQfu1vo0pDkInTVvfiQ4SQUNAACObHX0bZ9OndWUT1ZrAx75rgDGYVCxYa3klWDtdEbJUA6rOP0E1FtovJvbCdf8hXFI9/HeezKShTiji0O5dmdyS0CvNq1h7vEZ06/kJ2+t1+yC2xJjXTSipsGY+PmHVHixmpRzdItGRRbNZRerfVzc+7h2L/beVbXBci0NnWpyfqJ3j3A5VGevnBVR4g797VxM640PHNdshfEIich/bBNmGHg=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI2P195MB2491.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(7416014)(366016)(1800799024)(38070700021)(6133799003)(56012099006)(11063799006)(4143699003)(10067099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZmYzcTRKS1V1MnVmR0VhNmdXbmZjTVMydDVFNy9KSGhLK0psVHZ2cjZRRy9P?=
+ =?utf-8?B?RGhjcXdnazlpTFdDM0JKVlhpc2IvYkc5SzhWQ2xseUphNzVhRlhES3RZK0Nt?=
+ =?utf-8?B?Z2pBSHJRZ2w4YTFZT1VQelNxcVBEZWt4R0RHQ2JCYmZoM2hLNWpmVXdidXFJ?=
+ =?utf-8?B?VzVydWpKbUQ2TGNnVDJsdWJaUXpML25vcmRTQUlzNHFoQkNpZzhjb3hyWFRi?=
+ =?utf-8?B?T2lkTzlocXkrd2pKa24zSjd1UENyTkdMVk9TTnFOME9lMFRyN1V1UGpsdVlE?=
+ =?utf-8?B?MkxpazF5c1l0dFpEZWpJOXMyNkJLMXpmM0w1QXkrM2hkZTFoeHh1MG1LeFhn?=
+ =?utf-8?B?c3J5L2FqVFRjVVA2UW5jbVViaWFGU0xJb01WOHczSVNEMlpCNk1Hdk1FdHpv?=
+ =?utf-8?B?NzlyL3pFUGZiSVMzT0NJSjcxZjlsVkZwUEI5S1dLVUFBcjZqeUJkYkQ3MjZD?=
+ =?utf-8?B?dklyejdNSndtVXhKVzdrTUdqaUJ0MUpDUzNpRi9VS09weGdFdVZwMmkrOWFV?=
+ =?utf-8?B?Vks4Z3FqUU5ITTNEVDZuSHY3MklNbllDVWpmSHJHYmd0RFhqRlRZKzcwZ1ln?=
+ =?utf-8?B?MEdUd0d6b2dHWUJERnkrcmR1S1ZEcHRtaWZHdE9FcXdkZGdsR0E1UjFVdk5G?=
+ =?utf-8?B?Y3Q1aFVnSnh3VjVuc2pNMzRrVnJ6RS9sMmVvVDhVNTdLWE94Z2lYeCsyQzA1?=
+ =?utf-8?B?RGhsaWl3V2lGSU5nK0VGakcyRVFrMHZhWHZJRE9GL08rK0FXcmM3SHNpUzMr?=
+ =?utf-8?B?bTk4NnJRK3R5andyeDdqaGJvRzNwK0VXQVlkYzI5SXo4aDM1Y3NVa1NtSTdw?=
+ =?utf-8?B?SXRBNUFrZXluWURiYVJONFNERFh4VXFFcGhDZElBU0J3OUtoSTB5VnFhUEFO?=
+ =?utf-8?B?ZmdIU0pkNG1Vd0JJZUNsbEhwT2M2elNlczJiZjJOdVBwZ2dVY1EreUhJQVJz?=
+ =?utf-8?B?UHV6eGlsRDJJK0pqakJFd01QR1RyVDQzdTlpV0d3aUFOWTdvZHJHSXE3ZExl?=
+ =?utf-8?B?MDMxcDNibGJqVFVteVVoNnVDT0tiUkZCNm5UTElkWEgrODJrNFN1SmdDMVFl?=
+ =?utf-8?B?YXoyaFgvZndLS2xJSUZJTUlKZDRHQmtlZlFDQTcxL3haU05QTFB0WlptblRQ?=
+ =?utf-8?B?cHdNOWFPdTFVa2wzUHY0UmZiNmg5My92ZnNrcmxaSWMvWXloMEZYdUlvSHdT?=
+ =?utf-8?B?bE52S1RVRDdXN0Y1Mzl4OTFrMy8wa0tSWU9ZMjdBbFBmTnhtSGVNSnZkb1E4?=
+ =?utf-8?B?UUtLbmJCbTlGYkc1ai84Q0luc1FmS1E4ZTlpUGFHNG1HWjljN1RQWWN2VXJE?=
+ =?utf-8?B?dkpwVEZ0QVBMbDloVy9mOG5ycUZOcVp2V1Y4cDdUMDZ5K1ZwV1hKMnFkWVd2?=
+ =?utf-8?B?alpDK25iWndBZFFzcVowVCtLN0dyK1BGTm52YTdwejZxUXd3d3hMSU5wVElv?=
+ =?utf-8?B?MDFHMkt0SnN6ZWgxUGFadHU5K3MwZ0xEZkNhYUlXdmh5QlorajI2SkdkSWNO?=
+ =?utf-8?B?TWYwY2p6dzRyckdFUHZiYkZ1TmQzdzl1MUZ2MkF2eDlmSUFhQUNSWGN5Qkli?=
+ =?utf-8?B?TGxGeGJXUzhXNllYY3d6Smp4YWZmVkJFZG5OV29Cb2hGalBKdmNHWkpTTkcz?=
+ =?utf-8?B?MWZkU3J4UUJZNWM5T2hyWlYwQ0VuTmd2U2RjTkIwSWo0VmoyWDgrREpEdFd5?=
+ =?utf-8?B?RVdOOEZiQVhUMksrdWxjdFdCUXh3TXdnK0hNM2tTOXVmamZjVEdEUUVRcFNJ?=
+ =?utf-8?B?NVJnWmdqcXlYUFZqaDZsbCthWU5JNk9ibU1zZ0x6cVdFQ2M5MFpRTER0VUpL?=
+ =?utf-8?B?YXBMRkVKaE45UHR2VHhlbmcydTVSVEtzTE11dnE1OFYxbzNpL3pheXFuckNS?=
+ =?utf-8?B?MkdqSllrT2NCZXZqSllFVmNWSWliZzdmNFR6VVo4UW9BdWFLcVpUNTYxU3VK?=
+ =?utf-8?B?Ukx5NVl6anRzM1ZiQUovUWZ3V0txbnVac3NFV3I1QnlRSEs4clVRQzgrYXIr?=
+ =?utf-8?B?akZrUWRYL21SMjNUclZ4SEhpZE1UOHNSYXRCTXRjRkp3RkNxYXRoMU9qZUhu?=
+ =?utf-8?B?ZjZnMW0xVG9HN04wbE9iajQ0T2o5WnNGVXIwVXpOUjJodE9MNklrdVNmSzIw?=
+ =?utf-8?B?cGVHTVMyTnFqU3RLbTlRZ1FYM3dIRUVHbzBwUW1HSzhvL05iZjR2eVRNUkln?=
+ =?utf-8?B?MktaeTVrMkFKQ2tiRjNtNXZJN3hFdnBQazc0dzZKaC91RTQ2UTdXMmQ4REZK?=
+ =?utf-8?B?VG83c0tWdlRGRk1BbzJjUFlyVUEyK0R2VG9yTUNUY0VweEswNjZKd3J0R0RT?=
+ =?utf-8?Q?kkKZYCGtIVunEjcc3s?=
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-minicore-v2-1-160af559b273@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAD6aWGoC/2WO0QqDMAxFf2XkeZU2zIp72n8MH2oXZ2Da2ahsi
- P++qo8jEDjhcG8WEIpMAtfTApFmFg59AjyfwLeuf5LiR2JAjVYXRquOe/YhkqrzukAsyTaWIOn
- vSA1/9qh7dXCkYUqJ43GE2gkpH7qOx9RAaC35HAsPm96yjCF+90dms/v/nbNRaUpyOvcXo52+B
- ZFsmNxri83Sgmpd1x9wCUgZ1gAAAA==
-X-Change-ID: 20260710-minicore-b5b7229e6f6e
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Simon Glass <sjg@chromium.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA4OSBTYWx0ZWRfX5s41BAJvQk49
- oNlc/ehI13YtqmwRQSK/xvQHgsjTvWeK/nTiIspd+pg6O5QbyE2Krhn/5Jv7OWHc68ZrUupHn3S
- Ho4NyN05uf+v1WJBqe5+q2e5cALkaAg=
-X-Proofpoint-GUID: LeyV5zQk_7CR-ApDHtbqERDtU7aZj4Av
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA4OSBTYWx0ZWRfXzSxsXjs2DeM+
- C+lzGrsjUS0YQ5b5DBE2tG8pMRMizPyQm/m6AzsR3RKKt4XuBo/ShQ6YM+5sndZCMS1QNOHXJrh
- /3d6B9DUm7HsFv5SDpjpKO2KuMcixjRWIHtNdUN4eEmPavWkCbU80bHSIPjuGlc3JvbFpqbYvZw
- R6GzTvDYr7X7oWcyf4ANYl5z8SgXdBp0mRoJLTURmH2DU0QydF9YrFUKZx/QdqndVjAnx2GDO3n
- kRSQHaZlfOaeG9t1mWmsEGd4FgWJzLY3Bh7LINbBXpQEeQlJwk4rwdhPlLzXK0KalpNnBa/kGmR
- 1Y3e5m8S0KuSDf5G7dV38t32conYbTp21q9mX2k3jzZz1fawqXigzT/BflWjIrnEuj6jjfWovbP
- ZGOU20698x0jm8U/XANqJL0QiVVDY0KqMZ6pCMccmy9zBJ2adu7ahoXKTGiGkIuiJyEANCuofq8
- ck8nTb/E2IBuihXZdZA==
-X-Authority-Analysis: v=2.4 cv=Xb25Co55 c=1 sm=1 tr=0 ts=6a589a4e cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=YfCOm-DyAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=cm27Pg_UAAAA:8 a=cQ2vkqh8qupFpVM6Gu4A:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22 a=zQLMK8awuJ6_Hvp-_9Ux:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: LeyV5zQk_7CR-ApDHtbqERDtU7aZj4Av
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-16_03,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 priorityscore=1501 suspectscore=0 bulkscore=0
- impostorscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160089
+Content-ID: <EAE015814BBA014C9D92276B4BD49F0B@EURP195.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 052e053f-f0f5-4df7-18dc-08dee31ebb72
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jul 2026 09:43:46.6445 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Os6utjhAy0EY3+XF5AU89LT21G0z9S9I/32ehuyGixIoOh56/3X7xuTVGveM+5Z+CDB4o18AUEBVS9m0MwireA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PRAP195MB1601
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,424 +156,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The qcom_geni driver reads an ELF from storage and configures a set of
-registers and programs the firmware to the GENI Serial Engine (GENI-SE)
-wrapper device for the expected functionality.
-
-Unlike the GENI-SE wrapper found in MSM SoCs, the IPQ5210's GENI-SE
-wrapper is pre-configured for one of the functions defined in 'enum
-geni_se_protocol_type'. Hence, the firmware download is not needed.
-Only the register configuration part is needed.
-
-Earlier, the boot stages before U-Boot would configure the GENI-SE (to
-access UART/SPI etc). Since for IPQ5210 U-Boot SPL, the previous stage
-(i.e. boot ROM) doesn't do that modify the driver to do the register
-configuration part alone without reading an ELF from the storage.
-
-Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
----
-Address the feedback in [1].
-	- Separate out minicore related changes from the SPL changes
-	- Avoid CONFIG_QCOM_GENI_MINICORE check in multiple places
-	- Move struct qup_mini_core_info and related defines to separate header
-	- Undo changes w.r.t. EVENT_SPY_SIMPLE
-	- Rebased on https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
-	  to use Micheal's EVENT siupport in SPL
-
-1 - https://lore.kernel.org/u-boot/9f40675f-e39d-4849-a6f5-7dcd7aeb251a@linaro.org/
----
-Changes in v2:
-- Missed to 'git add include/soc/qcom/minicore.h' in the previous version
-- Link to v1: https://lore.kernel.org/r/20260710-minicore-v1-1-19ea05c410a0@oss.qualcomm.com
----
- drivers/misc/Kconfig              |   6 +++
- drivers/misc/Makefile             |   1 +
- drivers/misc/qcom_geni-minicore.c | 103 ++++++++++++++++++++++++++++++++++++++
- drivers/misc/qcom_geni.c          |  85 +++++++++++++++++++++++++++----
- include/soc/qcom/geni-se.h        |   5 ++
- include/soc/qcom/minicore.h       |  25 +++++++++
- include/soc/qcom/qup-fw-load.h    |   1 +
- 7 files changed, 215 insertions(+), 11 deletions(-)
-
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index bde5c640de8..0b7894f131e 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -93,6 +93,12 @@ config QCOM_GENI
- 	  for providing a common interface for various peripherals like UART, I2C, SPI,
- 	  etc.
- 
-+config QCOM_GENI_MINICORE
-+	bool "Support minicores in Qualcomm Generic Interface (GENI) driver"
-+	depends on QCOM_GENI
-+	help
-+	  Enable support for minicores in Qualcomm GENI and its peripherals.
-+
- config ROCKCHIP_EFUSE
- 	bool "Rockchip e-fuse support"
- 	depends on MISC
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index e2170212e5a..2daccbba74d 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -66,6 +66,7 @@ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
- obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
- endif
- obj-$(CONFIG_QCOM_GENI) += qcom_geni.o
-+obj-$(CONFIG_QCOM_GENI_MINICORE) += qcom_geni-minicore.o
- obj-$(CONFIG_$(PHASE_)ROCKCHIP_EFUSE) += rockchip-efuse.o
- obj-$(CONFIG_$(PHASE_)ROCKCHIP_OTP) += rockchip-otp.o
- obj-$(CONFIG_$(PHASE_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
-diff --git a/drivers/misc/qcom_geni-minicore.c b/drivers/misc/qcom_geni-minicore.c
-new file mode 100644
-index 00000000000..12c57bdd8b2
---- /dev/null
-+++ b/drivers/misc/qcom_geni-minicore.c
-@@ -0,0 +1,103 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include <soc/qcom/geni-se.h>
-+#include <soc/qcom/qup-fw-load.h>
-+#include <soc/qcom/minicore.h>
-+
-+/*
-+ * Register configuration for the QUP minicores to setup the corresponding
-+ * functionality of SPI/I2C/UART.
-+ */
-+static u8 cfg_reg_idx[] = {
-+	/* 0 to 18 */
-+	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-+	/* 64 to 113 */
-+	64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-+	81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
-+	98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
-+	112, 113,
-+};
-+
-+static u32 spi_cfg_val[] = {
-+	/* 0 to 18 */
-+	0x00000000, 0x00000400, 0x00000000, 0x00000000, 0x00240E78, 0x00011088,
-+	0x00240007, 0x00000000, 0x00000000, 0x0001000A, 0x00000300, 0x00000000,
-+	0x00000000, 0x00000000, 0x00154400, 0x001483A0, 0x00AA8128, 0x00641002,
-+	0x00004000,
-+	/* 64 to 113 */
-+	0x00000201, 0x0001FE05, 0x0002C2E7, 0x0A435C00, 0x0010011A, 0x08800000,
-+	0x00000000, 0x100CAC00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000018E4, 0x00000000,
-+	0x00000003, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x0007F807, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00200000, 0x00000004, 0x00000009, 0x0007F807, 0x000FFEFE, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00C0033F, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000055,
-+};
-+
-+static u32 uart_cfg_val[] = {
-+	/* 0 to 18 */
-+	0x00000024, 0x00000000, 0x00000024, 0x00000000, 0x00019A00, 0x00400000,
-+	0x00E00000, 0x00010020, 0x00000000, 0x00000000, 0x00000300, 0x00000700,
-+	0x00000400, 0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00C00024,
-+	0x00000B00,
-+	/* 64 to 113 */
-+	0x00020231, 0x0000CE05, 0x000360E7, 0x0941E6A8, 0x00100510, 0x42C01E51,
-+	0x00000401, 0x002E8400, 0x1694581A, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x0000031C, 0x00000000,
-+	0x0000000F, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00081C06, 0x00004010, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x0000000D, 0x00000000, 0x00081C06, 0x00004010, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00C02415, 0x0000000E, 0x00000001,
-+	0x00000001, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000055,
-+};
-+
-+static u32 i2c_cfg_val[] = {
-+	/* 0 to 18 */
-+	0x00000090, 0x00000000, 0x00000090, 0x00000000, 0x00038028, 0x00084080,
-+	0x00000343, 0x00010000, 0x00000000, 0x00001A00, 0x00000100, 0x00000000,
-+	0x00000000, 0x00000000, 0x00808008, 0x001C0020, 0x00000000, 0x00020000,
-+	0x00000000,
-+	/* 64 to 113 */
-+	0x00000201, 0x0001FC01, 0x00036222, 0x09C01FFC, 0x00100120, 0x02C00000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000409, 0x00000003,
-+	0x00000002, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x0007F8FE, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000001, 0x0007F807, 0x000FFEFE, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000055,
-+};
-+
-+struct qup_mini_core_info qup_mini_cores[] = {
-+	{
-+		.serial_protocol = GENI_SE_SPI,
-+		.fw_version = 0xb02,
-+		.cfg_version = 0x9,
-+		.cfg_count = ARRAY_SIZE(spi_cfg_val),
-+		.cfg_val = spi_cfg_val,
-+		.cfg_idx = cfg_reg_idx,
-+	}, {
-+		.serial_protocol = GENI_SE_UART,
-+		.fw_version = 0x405,
-+		.cfg_version = 0xa,
-+		.cfg_count = ARRAY_SIZE(uart_cfg_val),
-+		.cfg_val = uart_cfg_val,
-+		.cfg_idx = cfg_reg_idx,
-+	}, {
-+		.serial_protocol = GENI_SE_I2C,
-+		.fw_version = 0x204,
-+		.cfg_version = 0x9,
-+		.cfg_count = ARRAY_SIZE(i2c_cfg_val),
-+		.cfg_val = i2c_cfg_val,
-+		.cfg_idx = cfg_reg_idx,
-+	}, {
-+		.serial_protocol = GENI_SE_INVALID_PROTO,
-+	},
-+};
-diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-index a62ae6a2478..f3133f85885 100644
---- a/drivers/misc/qcom_geni.c
-+++ b/drivers/misc/qcom_geni.c
-@@ -21,6 +21,7 @@
- #include <linux/printk.h>
- #include <soc/qcom/geni-se.h>
- #include <soc/qcom/qup-fw-load.h>
-+#include <soc/qcom/minicore.h>
- #include <dm/device_compat.h>
- 
- struct qup_se_rsc {
-@@ -34,8 +35,11 @@ struct qup_se_rsc {
- 
- struct geni_se_plat {
- 	bool need_firmware_load;
-+	bool is_mini_core;
- };
- 
-+static int qcom_geni_fw_initialise(void);
-+
- /**
-  * geni_enable_interrupts() Enable interrupts.
-  * @rsc: Pointer to a structure representing SE-related resources.
-@@ -163,16 +167,54 @@ static void geni_config_common_control(struct qup_se_rsc *rsc)
- 		       COMMON_CSR_SLV_CLK_CGC_ON_BMASK);
- }
- 
--static int load_se_firmware(struct qup_se_rsc *rsc, struct elf_se_hdr *hdr)
-+static int load_se_firmware(struct qup_se_rsc *rsc, bool elf, void *info)
- {
-+	struct geni_se_plat *plat = dev_get_plat(rsc->dev->parent);
-+	struct elf_se_hdr *hdr, tmp_hdr;
- 	const u32 *fw_val_arr, *cfg_val_arr;
- 	const u8 *cfg_idx_arr;
- 	u32 i, reg_value, mask, ramn_cnt;
- 	int ret;
- 
--	fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
--	cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
--	cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
-+	if (elf) {
-+		hdr = info;
-+		fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
-+		cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
-+		cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
-+	} else if (plat->is_mini_core) {
-+		/*
-+		 * Minicore controllers come with pre-configured functionality
-+		 * and don't need a firmware download and just need the register
-+		 * configuration. Hence, skipping the firmware part and setting
-+		 * up just the register configuration related information.
-+		 */
-+		struct qup_mini_core_info *qmc = info;
-+
-+		for (; qmc->serial_protocol != GENI_SE_INVALID_PROTO; qmc++)
-+			if (qmc->serial_protocol == rsc->protocol)
-+				break;
-+
-+		if (qmc->serial_protocol == GENI_SE_INVALID_PROTO) {
-+			dev_err(rsc->dev, "Invalid MINICORE protocol (%d)\n",
-+				rsc->protocol);
-+			return -EINVAL;
-+		}
-+
-+		tmp_hdr.magic = MAGIC_NUM_SE;
-+		tmp_hdr.version = 1;
-+		tmp_hdr.serial_protocol = rsc->protocol;
-+		tmp_hdr.fw_version = qmc->fw_version;
-+		tmp_hdr.cfg_version = qmc->cfg_version;
-+		tmp_hdr.fw_size_in_items = qmc->cfg_ram_count;
-+		tmp_hdr.cfg_size_in_items = qmc->cfg_count;
-+		hdr = &tmp_hdr;
-+		fw_val_arr = (const u32 *)qmc->cfg_ram;
-+		cfg_idx_arr = (const u8 *)qmc->cfg_idx;
-+		cfg_val_arr = (const u32 *)qmc->cfg_val;
-+	} else {
-+		dev_err(rsc->dev, "Neither fw nor register settings found\n");
-+		return -EINVAL;
-+	}
- 
- 	geni_config_common_control(rsc);
- 
-@@ -350,8 +392,9 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
- {
- 	struct qup_se_rsc rsc;
- 	struct elf_se_hdr *hdr;
-+	bool elf;
- 	int ret;
--	void *fw;
-+	void *fw, *info;
- 
- 	rsc.dev = dev;
- 	rsc.base = qup_base;
-@@ -377,15 +420,26 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
- 	/* The firmware blob is the private data of the GENI wrapper (parent) */
- 	fw = dev_get_priv(dev->parent);
- 
--	ret = read_elf(&rsc, fw, &hdr);
--	if (ret) {
--		dev_err(dev, "Failed to read ELF: %d\n", ret);
--		return ret;
-+	if (IS_ELF(*(Elf32_Ehdr *)fw)) {
-+		ret = read_elf(&rsc, fw, &hdr);
-+		if (ret) {
-+			dev_err(dev, "Failed to read ELF: %d\n", ret);
-+			return ret;
-+		}
-+		elf = true;
-+		info = hdr;
-+	} else {
-+		elf = false;
-+		info = fw;
-+		if (!IS_ENABLED(CONFIG_QCOM_GENI_MINICORE)) {
-+			dev_err(dev, "Error: f/w ELF not found and minicore support disabled\n");
-+			return -EINVAL;
-+		}
- 	}
- 
- 	dev_info(dev, "Loading QUP firmware...\n");
- 
--	return load_se_firmware(&rsc, hdr);
-+	return load_se_firmware(&rsc, elf, info);
- }
- 
- /*
-@@ -414,6 +468,9 @@ static int geni_se_of_to_plat(struct udevice *dev)
- 
- 		if (proto == GENI_SE_INVALID_PROTO)
- 			plat->need_firmware_load = true;
-+
-+		if (readl(res.start + SE_HW_PARAM_2) & GENI_USE_MINICORES)
-+			plat->is_mini_core = true;
- 	}
- 
- 	return 0;
-@@ -473,7 +530,7 @@ static int probe_children_load_firmware(struct udevice *dev)
- 		ret = 0;
- 		/* Find the device for this ofnode, or bind it */
- 		if (device_find_global_by_ofnode(child, &child_dev))
--			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);	
-+			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);
- 		if (ret) {
- 			/* Skip nodes that don't have drivers */
- 			debug("Failed to probe child %s: %d\n", ofnode_get_name(child), ret);
-@@ -518,6 +575,11 @@ static int qcom_geni_fw_initialise(void)
- 		return 0;
- 	}
- 
-+	if (plat->is_mini_core) {
-+		fw_buf = qup_mini_cores;
-+		goto mini_core;
-+	}
-+
- 	ret = find_qupfw_part(&blk_dev, &part_info);
- 	if (ret) {
- 		pr_err("QUP firmware partition not found\n");
-@@ -544,6 +606,7 @@ static int qcom_geni_fw_initialise(void)
- 		return 0;
- 	}
- 
-+mini_core:
- 	/*
- 	 * OK! Firmware is loaded, now bind and probe remaining children. They will attempt to load
- 	 * firmware during probe. Do this for each GENI SE wrapper that needs firmware loading.
-diff --git a/include/soc/qcom/geni-se.h b/include/soc/qcom/geni-se.h
-index fc9a8e82cd8..3063b37010d 100644
---- a/include/soc/qcom/geni-se.h
-+++ b/include/soc/qcom/geni-se.h
-@@ -77,8 +77,12 @@ enum geni_se_protocol_type {
- #define SE_IRQ_EN			0xe1c
- #define SE_HW_PARAM_0			0xe24
- #define SE_HW_PARAM_1			0xe28
-+#define SE_HW_PARAM_2			0xe2c
- #define SE_DMA_GENERAL_CFG		0xe30
- 
-+/* SE_HW_PARAM_2 fields */
-+#define GENI_USE_MINICORES		BIT(12)
-+
- /* GENI_DFS_IF_CFG fields */
- #define DFS_IF_EN BIT(0)
- 
-@@ -248,6 +252,7 @@ enum geni_se_protocol_type {
- /* SE_HW_PARAM_0 fields */
- #define TX_FIFO_WIDTH_MSK		GENMASK(29, 24)
- #define TX_FIFO_WIDTH_SHFT		24
-+
- /*
-  * For QUP HW Version >= 3.10 Tx fifo depth support is increased
-  * to 256bytes and corresponding bits are 16 to 23
-diff --git a/include/soc/qcom/minicore.h b/include/soc/qcom/minicore.h
-new file mode 100644
-index 00000000000..9f2071ed86b
---- /dev/null
-+++ b/include/soc/qcom/minicore.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) Qualcomm Innovation Center, Inc. All rights reserved.
-+ */
-+#ifndef _SOC_QCOM_MINI_CORE
-+#define _SOC_QCOM_MINI_CORE
-+
-+struct qup_mini_core_info {
-+	u16 serial_protocol;
-+	u16 fw_version;
-+	u16 cfg_version;
-+	u16 cfg_count;
-+	u32 *cfg_val;
-+	u8 *cfg_idx;
-+	u32 *cfg_ram;
-+	u32 cfg_ram_count;
-+};
-+
-+#if IS_ENABLED(CONFIG_QCOM_GENI_MINICORE)
-+extern struct qup_mini_core_info qup_mini_cores[];
-+#else
-+struct qup_mini_core_info *qup_mini_cores;
-+#endif
-+
-+#endif /* _SOC_QCOM_MINI_CORE */
-diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
-index a67a93c72a4..df8a615b46b 100644
---- a/include/soc/qcom/qup-fw-load.h
-+++ b/include/soc/qcom/qup-fw-load.h
-@@ -14,6 +14,7 @@
- #define GENI_INIT_CFG_REVISION		0x0
- #define GENI_S_INIT_CFG_REVISION	0x4
- #define GENI_FORCE_DEFAULT_REG		0x20
-+#define GENI_OUTPUT_CTRL		0x24
- #define GENI_CGC_CTRL			0x28
- #define GENI_CFG_REG0			0x100
- 
-
----
-base-commit: 2e266ec527c20dabd53dc1b19950ce5b77cf2f24
-change-id: 20260710-minicore-b5b7229e6f6e
-
-Best regards,
--- 
-Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-
+SGkgSU5nbywKCk9uIFRodSwgMjAyNi0wNy0wOSBhdCAxNjozNCArMDIwMCwgSU5nbyBSYWggd3Jv
+dGU6Cj4gVXBkYXRlZCBSQU0gdGltaW5ncyB3aXRoIG5ldyBnZW5lcmF0ZWQgc2V0dGluZ3MgdXNp
+bmcKPiBERFIgVG9vbCB2My42LjBfMjItYWEwMTg1NDMuCj4gUHJvdmlkZSBmdW5jdGlvbnMgZm9y
+IDFHQiwgNEdCIGFuZCByZXZpc2lvbiA3IHZhcmlhbnRzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IElO
+Z28gUmFoIDxpbmdvLnJhaEBsaW51dHJvbml4LmRlPgo+IFJldmlld2VkLWJ5OiBHcmVnb3IgSGVy
+YnVyZ2VyIDxncmVnb3IuaGVyYnVyZ2VyQGxpbnV0cm9uaXguZGU+Cj4gUmV2aWV3ZWQtYnk6IEJl
+bmVkaWt0IFNwcmFuZ2VyIDxiLnNwcmFuZ2VyQGxpbnV0cm9uaXguZGU+Cj4gLS0tCj4gwqBib2Fy
+ZC9waHl0ZWMvcGh5Y29yZV9pbXg4bW0vbHBkZHI0X3RpbWluZy5jIHwgMTg2NyArKysrKysrKysr
+KysrLS0tLS0tLS0tLS0tLS0KPiDCoGJvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtbS9scGRkcjRf
+dGltaW5nLmggfMKgwqAgMTMgKwo+IMKgMiBmaWxlcyBjaGFuZ2VkLCA5MjEgaW5zZXJ0aW9ucygr
+KSwgOTU5IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9ib2FyZC9waHl0ZWMvcGh5Y29y
+ZV9pbXg4bW0vbHBkZHI0X3RpbWluZy5jCj4gYi9ib2FyZC9waHl0ZWMvcGh5Y29yZV9pbXg4bW0v
+bHBkZHI0X3RpbWluZy5jCj4gaW5kZXggZjVhMmYzMjY4YjMuLjE2MmIwMjA5ZDkyIDEwMDY0NAo+
+IC0tLSBhL2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtbS9scGRkcjRfdGltaW5nLmMKPiArKysg
+Yi9ib2FyZC9waHl0ZWMvcGh5Y29yZV9pbXg4bW0vbHBkZHI0X3RpbWluZy5jCj4gQEAgLTEsMTYg
+KzEsMTcgQEAKPiDCoC8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wLW9yLWxhdGVy
+Cj4gwqAvKgo+IC0gKiBDb3B5cmlnaHQgMjAxOSBOWFAKPiAtICogQ29weXJpZ2h0IChDKSAyMDIz
+IFBIWVRFQyBNZXNzdGVjaG5payBHbWJICj4gKyAqIENvcHlyaWdodCAyMDI1IE5YUAo+ICsgKiBD
+b3B5cmlnaHQgMjAyNSBQSFlURUMgTWVzc3RlY2huaWsgR21iSAo+IMKgICoKPiAtICogR2VuZXJh
+dGVkIGNvZGUgZnJvbSBNWDhNX0REUl90b29sCj4gKyAqIENvZGUgcGFydGlhbGx5IGdlbmVyYXRl
+ZCB3aXRoIEREUiBUb29sIHYzLjYuMF8yMi1hYTAxODU0My4KPiArICogRERSIFBIWSBGVzIwMTcu
+MDkKPiDCoCAqLwo+IMKgCj4gwqAjaW5jbHVkZSA8bGludXgva2VybmVsLmg+Cj4gwqAjaW5jbHVk
+ZSA8YXNtL2FyY2gvZGRyLmg+Cj4gwqAKPiAKClsuLi5dCgo+ICsKPiArdm9pZCBzZXRfZHJhbV90
+aW1pbmdzXzFnYih2b2lkKQo+ICt7Cj4gKwlkcmFtX3RpbWluZy5kZHJjX2NmZ1s1XS52YWwgPSAw
+eDJkMDA4NzsKPiArCWRyYW1fdGltaW5nLmRkcmNfY2ZnWzIxXS52YWwgPSAweDhkOwo+ICsJZHJh
+bV90aW1pbmcuZGRyY19jZmdbNDJdLnZhbCA9IDB4ZjA3MDcwNzsKPiArfQo+ICsKPiArdm9pZCBz
+ZXRfZHJhbV90aW1pbmdzXzRnYih2b2lkKQo+ICt7Cj4gKwlkcmFtX3RpbWluZy5kZHJjX2NmZ1sy
+XS52YWwgPSAweGEzMDgwMDIwOwo+ICsJZHJhbV90aW1pbmcuZGRyY19jZmdbMzddLnZhbCA9IDB4
+MTc7Cj4gKwlkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9jZmdbOF0udmFsID0gMHgzMTA7Cj4g
+KwlkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9jZmdbMjBdLnZhbCA9IDB4MzsKPiArCWRyYW1f
+dGltaW5nLmZzcF9tc2dbMV0uZnNwX2NmZ1sxMV0udmFsID0gMHgzMTA7Cj4gKwlkcmFtX3RpbWlu
+Zy5mc3BfbXNnWzFdLmZzcF9jZmdbMjNdLnZhbCA9IDB4MzsKPiArfQoKSSB0aGluayB0aGVyZSBp
+cyBhbiBlcnJvciBpbiB0aGUgNGdiIHRpbWluZ3MuIEF0IGxlYXN0IHdoZW4gSSB1c2UgdGhlIHRp
+bWluZyB2YWx1ZXMgeW91IHJlZmVyZW5jZWQKaW4geW91ciBjb3ZlciBsZXR0ZXIgKGNvbW1pdCAw
+MGFjNzY1ZDYwMzIpLCA0R0IgUkFNIHZhcmlhbnQgZG9lcyBib290IGNvcnJlY3RseS4gV2l0aCB0
+aGVzZSB0aW1pbmcKdmFsdWVzLCBpdCBkb2VzIG5vdC4KCkFsc28sIGZvciBlYXNpZXIgdHJvdWJs
+ZXNob290aW5nIChpLmUuIGJpc2VjdCksIEkgc3VnZ2VzdCB0byBmaXJzdCBhZGQgMUdCIGFuZCA0
+R0Igc3VwcG9ydCBhbmQKYWZ0ZXIgdGhhdCBjcmVhdGUgYW5vdGhlciBjb21taXQgdGhhdCB1cGRh
+dGVzIHRoZSB0aW1pbmdzLgoKWWFubmljCgo+ICsKPiArdm9pZCBzZXRfZHJhbV90aW1pbmdzX3Jl
+djcodm9pZCkKPiArewo+ICsJZHJhbV90aW1pbmcuZGRyY19jZmdbMTBdLnZhbCA9IDB4NTUwMDRk
+Owo+ICsJZHJhbV90aW1pbmcuZGRycGh5X2NmZ1s2NF0udmFsID0gMHg2MTg7Cj4gKwlkcmFtX3Rp
+bWluZy5kZHJwaHlfY2ZnWzY1XS52YWwgPSAweDYxODsKPiArCWRyYW1fdGltaW5nLmRkcnBoeV9j
+ZmdbNjZdLnZhbCA9IDB4NjE4Owo+ICsJZHJhbV90aW1pbmcuZGRycGh5X2NmZ1s2N10udmFsID0g
+MHg2MTg7Cj4gKwlkcmFtX3RpbWluZy5kZHJwaHlfY2ZnWzY4XS52YWwgPSAweDYxODsKPiArCWRy
+YW1fdGltaW5nLmRkcnBoeV9jZmdbNjldLnZhbCA9IDB4NjE4Owo+ICsJZHJhbV90aW1pbmcuZGRy
+cGh5X2NmZ1s3MF0udmFsID0gMHg2MTg7Cj4gKwlkcmFtX3RpbWluZy5kZHJwaHlfY2ZnWzcxXS52
+YWwgPSAweDYxODsKPiArCWRyYW1fdGltaW5nLmRkcnBoeV9jZmdbNzJdLnZhbCA9IDB4NjM7Cj4g
+KwlkcmFtX3RpbWluZy5kZHJwaHlfY2ZnWzczXS52YWwgPSAweDYzOwo+ICsJZHJhbV90aW1pbmcu
+ZGRycGh5X2NmZ1s3NF0udmFsID0gMHg2MzsKPiArCWRyYW1fdGltaW5nLmRkcnBoeV9jZmdbNzVd
+LnZhbCA9IDB4NjM7Cj4gKwlkcmFtX3RpbWluZy5kZHJwaHlfY2ZnWzc2XS52YWwgPSAweDYzOwo+
+ICsJZHJhbV90aW1pbmcuZGRycGh5X2NmZ1s3N10udmFsID0gMHg2MzsKPiArCWRyYW1fdGltaW5n
+LmRkcnBoeV9jZmdbNzhdLnZhbCA9IDB4NjM7Cj4gKwlkcmFtX3RpbWluZy5kZHJwaHlfY2ZnWzc5
+XS52YWwgPSAweDYzOwo+ICsJZHJhbV90aW1pbmcuZGRycGh5X2NmZ1s4MF0udmFsID0gMHg2MzsK
+PiArCWRyYW1fdGltaW5nLmRkcnBoeV9jZmdbODFdLnZhbCA9IDB4NjM7Cj4gKwlkcmFtX3RpbWlu
+Zy5mc3BfbXNnWzBdLmZzcF9jZmdbM10udmFsID0gMHgzYzMwOwo+ICsJZHJhbV90aW1pbmcuZnNw
+X21zZ1swXS5mc3BfY2ZnWzExXS52YWwgPSAweDRkNTU7Cj4gKwlkcmFtX3RpbWluZy5mc3BfbXNn
+WzBdLmZzcF9jZmdbMTZdLnZhbCA9IDB4NGQ1NTsKPiArCWRyYW1fdGltaW5nLmZzcF9tc2dbMF0u
+ZnNwX2NmZ1syM10udmFsID0gMHg1NTAwOwo+ICsJZHJhbV90aW1pbmcuZnNwX21zZ1swXS5mc3Bf
+Y2ZnWzI5XS52YWwgPSAweDU1MDA7Cj4gKwlkcmFtX3RpbWluZy5mc3BfbXNnWzFdLmZzcF9jZmdb
+M10udmFsID0gMHgzYzMwOwo+ICsJZHJhbV90aW1pbmcuZnNwX21zZ1sxXS5mc3BfY2ZnWzE0XS52
+YWwgPSAweDRkNTU7Cj4gKwlkcmFtX3RpbWluZy5mc3BfbXNnWzFdLmZzcF9jZmdbMTldLnZhbCA9
+IDB4NGQ1NTsKPiArCWRyYW1fdGltaW5nLmZzcF9tc2dbMV0uZnNwX2NmZ1syNl0udmFsID0gMHg1
+NTAwOwo+ICsJZHJhbV90aW1pbmcuZnNwX21zZ1sxXS5mc3BfY2ZnWzMyXS52YWwgPSAweDU1MDA7
+Cj4gK30KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvcGh5dGVjL3BoeWNvcmVfaW14OG1tL2xwZGRyNF90
+aW1pbmcuaAo+IGIvYm9hcmQvcGh5dGVjL3BoeWNvcmVfaW14OG1tL2xwZGRyNF90aW1pbmcuaAo+
+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMDAwMDAuLjM0MGZlZmUwMWMzCj4g
+LS0tIC9kZXYvbnVsbAo+ICsrKyBiL2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtbS9scGRkcjRf
+dGltaW5nLmgKPiBAQCAtMCwwICsxLDEzIEBACj4gKy8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVy
+OiBHUEwtMi4wLW9yLWxhdGVyICovCj4gKy8qCj4gKyAqIENvcHlyaWdodCAoQykgMjAyNSBQSFlU
+RUMgTWVzc3RlY2huaWsgR21iSAo+ICsgKi8KPiArCj4gKyNpZm5kZWYgX19MUEREUjRfVElNSU5H
+X0hfXwo+ICsjZGVmaW5lIF9fTFBERFI0X1RJTUlOR19IX18KPiArCj4gK3ZvaWQgc2V0X2RyYW1f
+dGltaW5nc18xZ2Iodm9pZCk7Cj4gK3ZvaWQgc2V0X2RyYW1fdGltaW5nc180Z2Iodm9pZCk7Cj4g
+K3ZvaWQgc2V0X2RyYW1fdGltaW5nc19yZXY3KHZvaWQpOwo+ICsKPiArI2VuZGlmIC8qIF9fTFBE
+RFI0X1RJTUlOR19IX18gKi8K
