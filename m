@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DFFC44511
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1943AC44512
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F17C584EE9;
-	Thu, 16 Jul 2026 18:09:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E01F84EF0;
+	Thu, 16 Jul 2026 18:09:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mIUCvVJd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PfdsLS0T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3177284CA3; Thu, 16 Jul 2026 15:45:01 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 99C7B80433; Thu, 16 Jul 2026 15:45:03 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CB3A80433
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 367F884C3F
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:45:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c15de30790bso60048066b.2
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:59 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c15c1f1be0bso85288066b.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:45:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209499; x=1784814299; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209501; x=1784814301; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=QzCzqNxD7YHxU8GkpsMEy1AppJaAsLEymp6otukPDm4=;
- b=mIUCvVJdqkJCPPHpsT6lXJUsOiRLGFN6dj4UkXTHDLM+UFEKHMiNoxGSpR/h/+jJbF
- L7QCeCHF9+to1SYfI83O65DvS2s7b9DRuTyj+QQS628ITYaIKqX3MIL8giLZ3DKBhaD+
- VkYgCbBX5mKSi9aUO9KdAVzekOPJCBko8+V/DXrONCQZWLUdeoHcPjGaCjJOMKJRyovj
- CcArS7CsrsccnnlpwhpRvw+izGm9SvK2/K+m+5Hld0tihh6n5+iTvYVuPI6VfoIeHq0w
- BCHsjcFcW5k+L7elrYXauUMQdjXLmwoMbPXn97ZactOMRd2GNdqHyghVZq/bL8xtUdTN
- bO6Q==
+ bh=uhstW2eBgtDAcJyRahbvY0I77s+zPklo2mV5bKc69mw=;
+ b=PfdsLS0TRhnpbCi7ASQhClEffAM+Yg5m2FNYzQuqezcwO/laPCjvMbhI37nFxapqSp
+ y9/vDTycHL41P2zOFfZpLb5/5gfV2ts26dtp0grZw5BykCbW3eiyAHIL0fh7M38M6R0u
+ +hw78ZBxxUKncFqEZRoHP4Y2b/bJECCVpCKFHlhdnKHIQQXr9kSWq9jFuFW6/QJQP7gG
+ dgymTmng+f98PkOPTwCkH5i4fAmS4oOKbGiNAgir8kycX/a4Z4PCOk/U6LgGQ5++HiTO
+ u1PH3AP/GrBJpaGzrczejyFyxXEU9j7hC+DsOWogE+e3PkMu9Hat4IMz9/Cy9gxfV+cu
+ ptew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209499; x=1784814299;
+ d=1e100.net; s=20251104; t=1784209501; x=1784814301;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=QzCzqNxD7YHxU8GkpsMEy1AppJaAsLEymp6otukPDm4=;
- b=qNjkn/PQ+IVz2gC2BTljXFwKgGlpLNpvzJ9zwkZ1FjNJ8r1BerAVxXrCerHrni9Dvg
- eZqA2nAdW3TMbTHexdKFh240rwRX2ImWIdNFqeRvNdOtWjvbpTffnneEQ0b487JdbUmQ
- 8b5LPi1BAw4Tkq1tmQDsKsPFl8OIjpetGUxllJoRq6DrsWxzxtMIN02/DLpRLLY6MuMM
- U0JAYKRQftauNqakjBUV9PabWK8hY71N2WcMzDl4NjlhB9QLMwb8OR7pA6FiAu/E/iJK
- ei+s7zoESWcDDL7Rh0P+Hg/xlc6yO65LJDWtc617BqlqU4QyOmUqKn+vZctQsvwm40fF
- eQgg==
-X-Gm-Message-State: AOJu0Yx0pZcLnLBEUUAy3WN3PDtUFDRHo6dAInlMzEDmje1/DtGzJcd0
- KKrJdd1dc8AekbY+kiGp324pdFuNg7CASK+kQM+0WzXhLY/aMdFbNnq3ThYezOe/mLi4QEiJUIG
- uOTww
-X-Gm-Gg: AfdE7cmneBOL4TjKbxKnTMmbFUlKnHebjHG3ee6LppL0GOiN2cqEInpUfdVC163041L
- EBxYNAekXwgNWKzXlzI23F2h/8+jbDXQn5BqwIPPGq6HiRH5R9NbznTKEb4qFMDxfzVd+5hVFd+
- 14oav3wiXVrpJJbUSktOULzmCYSB6L1zn3ge7xU83IGMk/vzZfirLHpAYXsjC2JEu8s6utqYvVj
- 4WCTtASIdHzW14YoDj7CH5n1P4ne/HlZNB7erKWrCJSioIhif5/4p/Z2AQDOIayZu+uVMadLd05
- TC6JSOuqOMtq0OIq3GaSSuKeu6GfnHht08gOAP7APW2MIQe28mKz9zm+zdmXNrV1H/AhTGNyuhA
- /QFmRB5KMzSk/e9nYKbmgHz7y6sJStxcrh5UtHRvOeXAyzAG2EqcSAGIcbLQ+iZiuHh3feKBg/1
- 1VJdPGhfShbGfW9POz+Jg127LQDizkIyMNPxO2Ng==
-X-Received: by 2002:a17:907:5cc:b0:c12:c7ca:d704 with SMTP id
- a640c23a62f3a-c161f438d78mr694571566b.6.1784209498610; 
- Thu, 16 Jul 2026 06:44:58 -0700 (PDT)
+ bh=uhstW2eBgtDAcJyRahbvY0I77s+zPklo2mV5bKc69mw=;
+ b=hY3FF3AKKyKbZHIqTd77ND8/5VumuCVDXBGJJ+2SW0WsugHLyO66WMqFeLj/TdALTQ
+ 2NkO9qleAV2MY/WIYHZCLAelTQjx9LpvcKDxjH2k3QhOfIx4eu1smG2ttvHCKE0UP2zH
+ YJz0HUMYGEx2jHIdnBhvTRJmxgYVg+yA67jHajn4WbINHh9EVxm441PwHGd236OtfAYh
+ lE3G5Jvx0KQ+01fBT1uLhYf8JJfG2/tVIkonmkEvdZgTZDdAlr9kc9RO3hv7cKPdyGF6
+ lnax1IOWcuArUw4Drjs7+js83oxbJOZy/yfwMhlRMy56uXzmfR6hTdpXm1DQ56wG1hJ1
+ ioXw==
+X-Gm-Message-State: AOJu0YzT+uTK5XVHpnmABOBqJ1/rxHYiwXTTiZpR3E4Yh2n5WGQa6dZf
+ cyBIZ6uFYW545xS1djjroLrYzqe8V+S4kSVXKKkFBAkFvEIagGOs+IODpeEi7wnkSdCqvQhrzvf
+ GttHLf7M=
+X-Gm-Gg: AfdE7clPk2JGmUmH5JikxtZm0sxBRj/84Jn+A3Lwx7/SaQ/fKBd7wUuAr/r6hvJVPYu
+ qyb9XOKKCtLwBIbcp9Q3AqDlI20Xny6NSmdI5mcryxx9/uo7U11i6PfL6nHSmQN/3eBkBtlrOXD
+ kxk7JBvQdzE9h2gBbcKKywOBRFb3Cao1EBYQNUhvO/b5afFI9YNP6uH9bIlXmrPYua1zK56/Q3Q
+ BkXeCy76/+hlZViMCcy4CKrpZk8wu//tGxWVJRaALg2Pd5s6eNX2M7ROkW8Cl2uSQWIoSiDueL4
+ U8qQZHlOq3HF5vkTY/PMUU+CH+w1yQCXcXv6hg9GfzkZ2UarD/B1/tZb/tkPyWWfo3di/LKcFDO
+ dIoOgRCeOpp/0kvXmOlfPs4GRWzQ/PKpq7BMDuABZvMvCuBFjjiMuppO24iTgL8nsTpq664oNdP
+ Uryxl+VqAWbQurFssYdzl677OYjrX0GsyqpjRLwg==
+X-Received: by 2002:a17:906:7314:b0:c15:f656:d582 with SMTP id
+ a640c23a62f3a-c161ea5f5ddmr696835166b.6.1784209500585; 
+ Thu, 16 Jul 2026 06:45:00 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c16871b3dfasm221245766b.28.2026.07.16.06.44.56
+ a640c23a62f3a-c168731879esm216000266b.32.2026.07.16.06.44.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:56 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:59 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
@@ -78,11 +78,17 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
  Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v5 73/75] usb: gadget: fix up the last UDC drivers after the
- resync
-Date: Thu, 16 Jul 2026 15:42:43 +0200
-Message-ID: <20260716134305.614278-74-anders.roxell@linaro.org>
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Subject: [PATCH v5 74/75] usb: fix up musb-new and mtu3 after the resync
+Date: Thu, 16 Jul 2026 15:42:44 +0200
+Message-ID: <20260716134305.614278-75-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -105,7 +111,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adapt at91_udc, atmel_usba_udc and epautoconf to the new gadget API.
+Adapt the musb-new and mtu3 gadget code to the new gadget API.
 
 Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -113,230 +119,158 @@ Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/gadget/at91_udc.c       |  46 -------------
- drivers/usb/gadget/atmel_usba_udc.c | 102 ++++++++--------------------
- drivers/usb/gadget/epautoconf.c     |   2 -
- 3 files changed, 28 insertions(+), 122 deletions(-)
+ drivers/usb/mtu3/mtu3_gadget_ep0.c     | 16 +++++------
+ drivers/usb/musb-new/musb_gadget_ep0.c | 24 ++++++----------
+ drivers/usb/musb-new/musb_uboot.c      | 39 --------------------------
+ 3 files changed, 16 insertions(+), 63 deletions(-)
 
-diff --git a/drivers/usb/gadget/at91_udc.c b/drivers/usb/gadget/at91_udc.c
-index b3c780a4e35c..5b0c55d59c8d 100644
---- a/drivers/usb/gadget/at91_udc.c
-+++ b/drivers/usb/gadget/at91_udc.c
-@@ -1435,52 +1435,6 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
- 	return at91_udc_irq(udc);
- }
+diff --git a/drivers/usb/mtu3/mtu3_gadget_ep0.c b/drivers/usb/mtu3/mtu3_gadget_ep0.c
+index 4b0bc5f02d10..07775d23d508 100644
+--- a/drivers/usb/mtu3/mtu3_gadget_ep0.c
++++ b/drivers/usb/mtu3/mtu3_gadget_ep0.c
+@@ -300,20 +300,20 @@ static int handle_test_mode(struct mtu3 *mtu, struct usb_ctrlrequest *setup)
+ 	u32 value = 0;
  
+ 	switch (le16_to_cpu(setup->wIndex) >> 8) {
+-	case TEST_J:
+-		dev_dbg(mtu->dev, "TEST_J\n");
++	case USB_TEST_J:
++		dev_dbg(mtu->dev, "USB_TEST_J\n");
+ 		mtu->test_mode_nr = TEST_J_MODE;
+ 		break;
+-	case TEST_K:
+-		dev_dbg(mtu->dev, "TEST_K\n");
++	case USB_TEST_K:
++		dev_dbg(mtu->dev, "USB_TEST_K\n");
+ 		mtu->test_mode_nr = TEST_K_MODE;
+ 		break;
+-	case TEST_SE0_NAK:
+-		dev_dbg(mtu->dev, "TEST_SE0_NAK\n");
++	case USB_TEST_SE0_NAK:
++		dev_dbg(mtu->dev, "USB_TEST_SE0_NAK\n");
+ 		mtu->test_mode_nr = TEST_SE0_NAK_MODE;
+ 		break;
+-	case TEST_PACKET:
+-		dev_dbg(mtu->dev, "TEST_PACKET\n");
++	case USB_TEST_PACKET:
++		dev_dbg(mtu->dev, "USB_TEST_PACKET\n");
+ 		mtu->test_mode_nr = TEST_PACKET_MODE;
+ 		break;
+ 	default:
+diff --git a/drivers/usb/musb-new/musb_gadget_ep0.c b/drivers/usb/musb-new/musb_gadget_ep0.c
+index 25b1de6e58f9..726864aa7979 100644
+--- a/drivers/usb/musb-new/musb_gadget_ep0.c
++++ b/drivers/usb/musb-new/musb_gadget_ep0.c
+@@ -320,51 +320,43 @@ __acquires(musb->lock)
+ 						goto stall;
+ 
+ 					switch (ctrlrequest->wIndex >> 8) {
+-					case 1:
+-						pr_debug("TEST_J\n");
+-						/* TEST_J */
++					case USB_TEST_J:
++						pr_debug("USB_TEST_J\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_J;
+ 						break;
+-					case 2:
+-						/* TEST_K */
+-						pr_debug("TEST_K\n");
++					case USB_TEST_K:
++						pr_debug("USB_TEST_K\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_K;
+ 						break;
+-					case 3:
+-						/* TEST_SE0_NAK */
+-						pr_debug("TEST_SE0_NAK\n");
++					case USB_TEST_SE0_NAK:
++						pr_debug("USB_TEST_SE0_NAK\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_SE0_NAK;
+ 						break;
+-					case 4:
+-						/* TEST_PACKET */
+-						pr_debug("TEST_PACKET\n");
++					case USB_TEST_PACKET:
++						pr_debug("USB_TEST_PACKET\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_PACKET;
+ 						break;
+ 
+ 					case 0xc0:
+-						/* TEST_FORCE_HS */
+ 						pr_debug("TEST_FORCE_HS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_HS;
+ 						break;
+ 					case 0xc1:
+-						/* TEST_FORCE_FS */
+ 						pr_debug("TEST_FORCE_FS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_FS;
+ 						break;
+ 					case 0xc2:
+-						/* TEST_FIFO_ACCESS */
+ 						pr_debug("TEST_FIFO_ACCESS\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FIFO_ACCESS;
+ 						break;
+ 					case 0xc3:
+-						/* TEST_FORCE_HOST */
+ 						pr_debug("TEST_FORCE_HOST\n");
+ 						musb->test_mode_nr =
+ 							MUSB_TEST_FORCE_HOST;
+diff --git a/drivers/usb/musb-new/musb_uboot.c b/drivers/usb/musb-new/musb_uboot.c
+index 43ab3245e5c3..16907c4681bc 100644
+--- a/drivers/usb/musb-new/musb_uboot.c
++++ b/drivers/usb/musb-new/musb_uboot.c
+@@ -383,45 +383,6 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+ 
+ 	return gadget->isr(0, gadget);
+ }
+-
 -int usb_gadget_register_driver(struct usb_gadget_driver *driver)
 -{
--	struct at91_udc *udc = controller;
 -	int ret;
 -
--	if (!driver || !driver->bind || !driver->setup) {
--		printf("bad paramter\n");
+-	if (!driver || driver->speed < USB_SPEED_FULL || !driver->bind ||
+-	    !driver->setup) {
+-		printf("bad parameter.\n");
 -		return -EINVAL;
 -	}
 -
--	if (udc->driver) {
--		printf("UDC already has a gadget driver\n");
--		return -EBUSY;
+-	if (!gadget) {
+-		printf("Controller uninitialized\n");
+-		return -ENXIO;
 -	}
 -
--	at91_start(&udc->gadget, driver);
--
--	udc->driver = driver;
--
--	ret = driver->bind(&udc->gadget);
--	if (ret) {
--		pr_err("driver->bind() returned %d\n", ret);
--		udc->driver = NULL;
+-	ret = musb_gadget_start(&gadget->g, driver);
+-	if (ret < 0) {
+-		printf("gadget_start failed with %d\n", ret);
+-		return ret;
 -	}
 -
--	return ret;
+-	ret = driver->bind(&gadget->g);
+-	if (ret < 0) {
+-		printf("bind failed with %d\n", ret);
+-		return ret;
+-	}
+-
+-	return 0;
 -}
 -
 -int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
 -{
--	struct at91_udc *udc = controller;
--
--	if (!driver || !driver->unbind || !driver->disconnect) {
--		pr_err("bad paramter\n");
--		return -EINVAL;
--	}
--
--	driver->disconnect(&udc->gadget);
--	driver->unbind(&udc->gadget);
--	udc->driver = NULL;
--
--	at91_stop(&udc->gadget);
--
+-	if (driver->disconnect)
+-		driver->disconnect(&gadget->g);
+-	if (driver->unbind)
+-		driver->unbind(&gadget->g);
 -	return 0;
 -}
--
- int at91_udc_probe(struct at91_udc_data *pdata)
- {
- 	struct at91_udc	*udc;
-diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index 0caf8b8b7b45..52900ad654cf 100644
---- a/drivers/usb/gadget/atmel_usba_udc.c
-+++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -32,12 +32,6 @@ static int usba_udc_stop(struct usb_gadget *gadget);
+ #endif /* CONFIG_USB_MUSB_GADGET */
  
- #include "atmel_usba_udc.h"
- 
--static int vbus_is_present(struct usba_udc *udc)
--{
--	/* No Vbus detection: Assume always present */
--	return 1;
--}
--
- static void next_fifo_transaction(struct usba_ep *ep, struct usba_request *req)
- {
- 	unsigned int transaction_len;
-@@ -1169,32 +1163,6 @@ static int usba_udc_irq(struct usba_udc *udc)
- 	return 0;
- }
- 
--static int usba_udc_enable(struct usba_udc *udc)
--{
--	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
--
--	udc->vbus_prev = 0;
--
--	/* If Vbus is present, enable the controller and wait for reset */
--	if (vbus_is_present(udc) && udc->vbus_prev == 0) {
--		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
--		usba_writel(udc, INT_ENB, USBA_END_OF_RESET);
--	}
--
--	return 0;
--}
--
--static int usba_udc_disable(struct usba_udc *udc)
--{
--	udc->gadget.speed = USB_SPEED_UNKNOWN;
--	reset_all_endpoints(udc);
--
--	/* This will also disable the DP pullup */
--	usba_writel(udc, CTRL, USBA_DISABLE_MASK);
--
--	return 0;
--}
--
- static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
- 				      struct usba_udc *udc)
- {
-@@ -1255,69 +1223,55 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
- 	return usba_udc_irq(udc);
- }
- 
--int usb_gadget_register_driver(struct usb_gadget_driver *driver)
-+int usba_udc_probe(struct usba_platform_data *pdata)
- {
--	struct usba_udc *udc = &controller;
--	int ret;
--
--	if (!driver || !driver->bind || !driver->setup) {
--		log_err("bad parameter\n");
--		return -EINVAL;
--	}
-+	struct usba_udc *udc;
- 
--	if (udc->driver) {
--		log_err("UDC already has a gadget driver\n");
--		return -EBUSY;
--	}
-+	udc = &controller;
- 
--	usba_udc_enable(udc);
-+	udc->usba_ep = usba_udc_pdata(pdata, udc);
- 
--	udc->driver = driver;
-+	return 0;
-+}
- 
--	ret = driver->bind(&udc->gadget);
--	if (ret) {
--		log_err("driver->bind() returned %d\n", ret);
--		udc->driver = NULL;
--	}
-+#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
-+struct usba_priv_data {
-+	struct clk_bulk		clks;
-+	struct usba_udc		udc;
-+};
- 
--	return ret;
-+static int vbus_is_present(struct usba_udc *udc)
-+{
-+	/* No Vbus detection: Assume always present */
-+	return 1;
- }
- 
--int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
-+static int usba_udc_enable(struct usba_udc *udc)
- {
--	struct usba_udc *udc = &controller;
--
--	if (!driver || !driver->unbind || !driver->disconnect) {
--		log_err("bad parameter\n");
--		return -EINVAL;
--	}
-+	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
- 
--	driver->disconnect(&udc->gadget);
--	driver->unbind(&udc->gadget);
--	udc->driver = NULL;
-+	udc->vbus_prev = 0;
- 
--	usba_udc_disable(udc);
-+	/* If Vbus is present, enable the controller and wait for reset */
-+	if (vbus_is_present(udc) && udc->vbus_prev == 0) {
-+		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
-+		usba_writel(udc, INT_ENB, USBA_END_OF_RESET);
-+	}
- 
- 	return 0;
- }
- 
--int usba_udc_probe(struct usba_platform_data *pdata)
-+static int usba_udc_disable(struct usba_udc *udc)
- {
--	struct usba_udc *udc;
--
--	udc = &controller;
-+	udc->gadget.speed = USB_SPEED_UNKNOWN;
-+	reset_all_endpoints(udc);
- 
--	udc->usba_ep = usba_udc_pdata(pdata, udc);
-+	/* This will also disable the DP pullup */
-+	usba_writel(udc, CTRL, USBA_DISABLE_MASK);
- 
- 	return 0;
- }
- 
--#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
--struct usba_priv_data {
--	struct clk_bulk		clks;
--	struct usba_udc		udc;
--};
--
- static int usba_udc_start(struct usb_gadget *gadget,
- 			  struct usb_gadget_driver *driver)
- {
-diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
-index 30016b805bfd..93ea70a5d79b 100644
---- a/drivers/usb/gadget/epautoconf.c
-+++ b/drivers/usb/gadget/epautoconf.c
-@@ -6,9 +6,7 @@
-  */
- 
- #include <linux/kernel.h>
--#include <linux/module.h>
- #include <linux/types.h>
--#include <linux/device.h>
- 
- #include <linux/ctype.h>
- #include <linux/string.h>
+ struct musb *musb_register(struct musb_hdrc_platform_data *plat, void *bdata,
 -- 
 2.53.0
 
