@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E6FC44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 23:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E034C4450A
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 23:25:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D27784DDB;
+	by phobos.denx.de (Postfix) with ESMTP id 69D0A84DF5;
 	Fri, 17 Jul 2026 01:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hz7kFD6C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sxRkQ7aO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F98384DD1; Fri, 17 Jul 2026 01:25:15 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 5EC1E84DAA; Fri, 17 Jul 2026 01:25:17 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE54784DBF
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 01:25:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4506284DC3
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 01:25:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-4471b489240so2477123fac.2
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 16:25:12 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-455ca262ccbso3619554fac.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 16:25:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784244312; x=1784849112; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1784244314; x=1784849114; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=m4A8HhdNAoRpjFIwXwK2E8ruIfGdoZu4Mf86s8YYUU8=;
- b=hz7kFD6CIIifEwMjRbhUYGO0ICxeFpr2x4qEV853OMvP8DEF8QEjY4A59aN8hkyQW+
- plPySqUhzrFNqP7xcU9x6k79PuynpPLkEiWXimZ2G5BdLNKlDqEMYxM+QzsbrnCN30cC
- APiS4TjfQrFbGIi9Vg790ENytNp0i00QS1DUU=
+ bh=xr2pXPPujqFWubQ0Hee0rpQRN9YAQZyQQKnanHhWEJU=;
+ b=sxRkQ7aOzsPSzQ8wwvGsRjsRCCDT/jao3DqEHqbNKsSm2HMTj4SSQJ2dUoTa+7fvDI
+ pg7Tx381GYCER7Qqx3DQGDFzBRyKyBMmgvfR70rvCxIRrXiv9fV1imDv3igYWwSVhciP
+ WKlSvgRiMmuyJ9mi6OD+v4cXgJzQQSdT1qgCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784244312; x=1784849112;
+ d=1e100.net; s=20251104; t=1784244314; x=1784849114;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=m4A8HhdNAoRpjFIwXwK2E8ruIfGdoZu4Mf86s8YYUU8=;
- b=N8Dw4bk6ugGygzOBX7stVrIrUgeDX7EU0qx4LNw/GDlKi+F5DHVxtL/uQBQCXs5FEY
- DqxYXCy93oPQ6uCGD3dG+DIq1KDsynnuF9fO+vB8fn++SN6Fgd57wbl44AygxNIkYll/
- FNwFZ7/AtHnPeojZZOV869YCVsUCEHF8PSx/An59Op23CXtxFOXvVygIL5h8CpLWymTD
- 030wBEhup8KeEj5aQqRjCuZxKKYaLaCKFva606Q/SkxVnzQrC3VfI7l9N9jkjy7ZGexs
- YBv+QldlayHmKbw4Q7BLhsXtJKe7yH9cTDWYOUxZ6TncNw7/HH4BC6Q2P1qJ+8smgMKd
- fXgw==
-X-Gm-Message-State: AOJu0Yx9yOzC1TdbDR+1s2yxvUbBdNgiLWOUUXdxVEC83twTEUgEsC3Z
- CyiMHGIkVThE8qCXlTx74gO1XlA41WXdfgfVXteULqE+qPuOQuHXCc/56dAMnOTNKg4=
-X-Gm-Gg: AfdE7ckxfBVt4De5rmyBz7yrKXKyT2FxIWfVGS/NaRXo4TGlOb9GsSvAgiSziclxgPO
- 9TW07SDsx0V53AQkgfAUS2QaUUoX2vtvN5kdJ17hMN4VPX7LKn9z1bxdP3YnBmAfx2BPJbn+arh
- 9eUETLRvcGbEgv/RcG1ODSXx8w85owgvePKBYEZnvtFYDxwrbgBXqkqWnif83ivDhmVcJxZy22G
- lMeRKiVvEF1mDidYCJyMMfDS0hWwpar0HBaQx5sDODGvjYDSCxBUL15miReac69bABby2x0oz59
- xrof05GPFS6oa5lrU7gbcXBLme6yPn3bY3TS17k+UAai1UJAGeEtURq9/CpB0IFbHxOwTt3UHIz
- t3a6ONSQlk5y5B4cYybZgHK7RPkTjvR+MnMH7JVHm1DbtUGbMvaY197dsxiL82p6uPyrOhV/42t
- VFsqM1wqo+0ZMsoayYZj1+heHqNpFTc7OM5aG8xvkWygY7K7rSJYGT09WpdB9+bykLFt/t43Hxu
- 8cd5ZfOkek7JRwlBHyBYbfiwdFslOoiDMhP
-X-Received: by 2002:a05:6870:940b:b0:451:fb50:a594 with SMTP id
- 586e51a60fabf-4562b55670amr5994456fac.4.1784244311619; 
- Thu, 16 Jul 2026 16:25:11 -0700 (PDT)
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=xr2pXPPujqFWubQ0Hee0rpQRN9YAQZyQQKnanHhWEJU=;
+ b=DauXGsfMqNcqh/U1hVTNtRSBCrmgV75dGtYWmw6F0lptgRtc0dpuzjLyb1HSrWAijV
+ GoeXmq0nz94oYlRZfd1odHgmLcvH8HGzQ+3R8IOiOtNByB11l8o8B+LvDWQCF1dCTOEA
+ 8Xuo9VfOL0/f4U9iHk6ORg9wfqZepT8j4kkNY4+tPYusX9WjSj83NnKI/Oaw9AISIjOS
+ k3PPZDq1WotniyNJRGf3YA0z+CM7gWFC6ARYpDzwfcbHw7EQwc6/R3ree1w+Q64oAvsX
+ y5AAv3WAY+PI5tbgNHImTJE8Uqp6mXUYLefJ3w34TZ9q0BPK32bOcVz+QybsfuaGP3T9
+ jvzw==
+X-Gm-Message-State: AOJu0YxQy2i//fswruniWlF5d9zmZcfvJ58UDaBe3c4tRMq6oQWfaro/
+ 6g6y4FJhd2gpVXcUx99v6m1B1yi7DHbyQP0Dor1rnuREH05ZyHUvDANXF0svZzrLUgg=
+X-Gm-Gg: AfdE7cnLAqIZ3xwAy3Rm0KiIw1s8omCYDacNqnFT1koEF01OZgz8lxe/UmnUCC4JCUd
+ dZJdw9bBcJUFFzMSuk1B+I181D+DHsBsXHRY4sIQ5H+GbkLEf1ySARJPePXwe1RgeR8L1lJrM24
+ jVRJanh23iIF6rKHzoRHZjOagWbRwt607G/6Cc0KOnYSxKTXxg76E/JtyL8x7k8yE3e7eqNIDfq
+ wT8UC5x02/hbSpqyPU/wT6lLGB6CgnTOlyv75gHxDoAd47TdWfdRik97sze3bBy4P1f1HPZAYKR
+ NvkohRD/rbP7pn+WyRv3wOKuFCF/74MUuK2i0dvZ/zag88ai/CJLAGmo96vBIO9tFKwQo2qLj8V
+ DGp0jDb7Bu40oOxwhd9F4hWiATEyEDtG4/aLDoU+7aZW2wZN4+Abob/Vzr71MoGedLuLLq7Sfif
+ ReVck7cN/efcRfLeHyiEOhM77Mw5e/bR5xtN9Yf+pYrBXXiVz2rJZX62BtpNIgwIwZFy6lCUVPx
+ HqTjiyMNVofzLzOOEP4FdUwJw==
+X-Received: by 2002:a05:6870:968d:b0:448:84c5:ba5a with SMTP id
+ 586e51a60fabf-4562b69fa3amr6050344fac.24.1784244313937; 
+ Thu, 16 Jul 2026 16:25:13 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4568da4ab47sm27308fac.0.2026.07.16.16.25.10
+ 586e51a60fabf-4568da4ab47sm27308fac.0.2026.07.16.16.25.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 16:25:11 -0700 (PDT)
+ Thu, 16 Jul 2026 16:25:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Aristo Chen <aristo.chen@canonical.com>
-In-Reply-To: <20260623141540.618272-1-aristo.chen@canonical.com>
-References: <20260528132746.719699-1-aristo.chen@canonical.com>
- <20260623141540.618272-1-aristo.chen@canonical.com>
-Subject: Re: [PATCH v2 0/4] arm: k3: replace tifsstub runtime filter with
- per-state FIT configurations
-Message-Id: <178424431068.1470194.10671045238552718846.b4-ty@konsulko.com>
-Date: Thu, 16 Jul 2026 17:25:10 -0600
+To: u-boot@lists.denx.de, Paresh Bhagat <p-bhagat@ti.com>
+Cc: praneeth@ti.com, vigneshr@ti.com, u-kumar1@ti.com, msp@baylibre.com, 
+ v-singh1@ti.com, anshuld@ti.com, afd@ti.com, m-chawdhry@ti.com, 
+ joao.goncalves@toradex.com, bb@ti.com, n-francis@ti.com, 
+ sebin.francis@ti.com
+In-Reply-To: <20260701075021.3626094-1-p-bhagat@ti.com>
+References: <20260701075021.3626094-1-p-bhagat@ti.com>
+Subject: Re: [PATCH v2 0/4] Add DM firmware reserved memory support
+Message-Id: <178424431179.1470194.2877717920905276533.b4-ty@konsulko.com>
+Date: Thu, 16 Jul 2026 17:25:11 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,27 +100,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 23 Jun 2026 14:15:14 +0000, Aristo Chen wrote:
+On Wed, 01 Jul 2026 13:20:17 +0530, Paresh Bhagat wrote:
 
-> The AM62x family (TI EVMs, phytec phycore, toradex verdin) ships
-> two or three mutually-exclusive tifsstub variants per tispl.bin FIT
-> image (tifsstub-hs, tifsstub-fs, tifsstub-gp), all assigned the same
-> load address 0x9dc00000. The current platform code loads every
-> variant and discards the wrong ones at runtime by zeroing *p_size in
-> board_fit_image_post_process() (arch/arm/mach-k3/r5/common.c).
+> This series adds support for DM firmware reserved memory fixup in device
+> tree for K3 SoCs that use separate DM firmware (K3_DM_FW enabled).
+> 
+> The series includes:
+> 1. Fix for phandle corruption in FDT reserved memory fixup
+> 2. Enable OF_SYSTEM_SETUP for AM62D2 to allow device tree fixups
+> 3. Add Kconfig options for DM firmware reserved memory for other K3 SoCs
+> 4. Add DM reserved memory fixup implementation
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/4] arm: k3: select tifsstub via board_fit_config_name_match
-      commit: c85bf61b14f9caa34662d9b767b61ba2b5da74f0
-[2/4] board: phytec: phycore-am62: select tifsstub via FIT config
-      commit: 857c2151ca8d41add88fec01a7fea8965d0d2c74
-[3/4] board: toradex: verdin-am62: select tifsstub via FIT config
-      commit: feb2b13377534725ee0f428ed4252db7fddaa57f
-[4/4] arm: k3: drop redundant tifsstub runtime filter
-      commit: a5567f46697a733a9ad03eaec9941c8d80e6fb40
+[1/4] arm: mach-k3: Fix phandle corruption in fdt fixup
+      commit: d3e287405f0a0f9683f9c6c49e84495ea18d9f01
+[2/4] arm: mach-k3: am62ax: Enable OF_SYSTEM_SETUP for AM62D2
+      commit: f16e4c80040c2d5186ad3cfa83c469b26adbd46f
+[3/4] arm: mack-k3: Kconfig: Add DM firmware reserved memory configs
+      commit: 5e2be9f5ccc4ca3c9cd326d4671a853b783adcae
+[4/4] arm: mach-k3: Add DM reserved memory fixup
+      commit: 0cceea6e449888f4422e674e7157696d382eb686
 -- 
 Tom
 
