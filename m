@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C585C44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DFFC44511
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:21:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADEB484EE3;
+	by phobos.denx.de (Postfix) with ESMTP id F17C584EE9;
 	Thu, 16 Jul 2026 18:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XHtrtchg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mIUCvVJd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7402E80433; Thu, 16 Jul 2026 15:44:58 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 3177284CA3; Thu, 16 Jul 2026 15:45:01 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B6484CA3
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CB3A80433
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c160d8760e0so76005866b.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:56 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-c15de30790bso60048066b.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209496; x=1784814296; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209499; x=1784814299; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=XZ4V9a+Sn9ijW68xnOsApO8mZH3w21jaey6fX0Q8SF8=;
- b=XHtrtchgC/eOSBbg8IZc5Yzmb8SZOZKZfaneJGQJJF+lijLpyw/fz8xrbwXXK5ug+W
- Af18XgblEy5JCtgHgyOmLlL1YDZoKoAhK1F8nVmJc+niJcrfdRpd4JQ6MSA2zSpUGImn
- Oq6fttk2MFVs1YVQfc06eQ1Jh5aeXnfzOne1wKw7y/U0qJ+JVQkuw1iJleebtiFQ4Rxh
- 7lbBaczbZpZIW6P1wIjqYm28UEoPwBG9EdDE+ti3vqIVE+g++Bl/ENipSB2tLa1tHWi4
- RNGV/qdHGKUVsZJJDgUW20A2PhdGJBulH6SeVSpQ8leWVWtVD/TiIhvPW8xgTjwXsyTE
- NN0Q==
+ bh=QzCzqNxD7YHxU8GkpsMEy1AppJaAsLEymp6otukPDm4=;
+ b=mIUCvVJdqkJCPPHpsT6lXJUsOiRLGFN6dj4UkXTHDLM+UFEKHMiNoxGSpR/h/+jJbF
+ L7QCeCHF9+to1SYfI83O65DvS2s7b9DRuTyj+QQS628ITYaIKqX3MIL8giLZ3DKBhaD+
+ VkYgCbBX5mKSi9aUO9KdAVzekOPJCBko8+V/DXrONCQZWLUdeoHcPjGaCjJOMKJRyovj
+ CcArS7CsrsccnnlpwhpRvw+izGm9SvK2/K+m+5Hld0tihh6n5+iTvYVuPI6VfoIeHq0w
+ BCHsjcFcW5k+L7elrYXauUMQdjXLmwoMbPXn97ZactOMRd2GNdqHyghVZq/bL8xtUdTN
+ bO6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209496; x=1784814296;
+ d=1e100.net; s=20251104; t=1784209499; x=1784814299;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=XZ4V9a+Sn9ijW68xnOsApO8mZH3w21jaey6fX0Q8SF8=;
- b=XmZj3CmK/3iFaU4Y2uIS03vHGVIDD09PxaUSDcwFxD1doVbmPrl5jGBaNX8j8lBKiI
- w58J9clp0U0/i4qmLK1m8Fn28lm9fQmRgI0DP1xxbhzclqpz1atDeSRBNENbWs6+/lcB
- H4juSf8h8TaTM5AZDGtutxUBOg8aFkqoWBy44JAHmT8JyrbcDiAGmWyGUU7X3Z/SSPrF
- mJ+viCM5sPT2xRE2vWTJGp2z1C5LV6NVybZlLhd0sNIeY0k4enaW/KL+5RBjDvCUBjtp
- JFWVYSgaFvpv/jFwn+2GOTA5pUxf2S5mk+eYAx/G91qajSdabpaZxRonJyahVV/JwoC7
- FUKw==
-X-Gm-Message-State: AOJu0Yy6P9WzomV9arKu1/kVeBSkLOab2CHmt71DJYp2IdPyzFNiUqG/
- x9O0BciJDba0BDEU4mZjtMRXMz92X7JA5nW+DW+1FtaDVy7DP7bJ6tIRWCm1tzdTTF+NzgFA3jZ
- xI5rr
-X-Gm-Gg: AfdE7cmbPvGEBeZAY3h/gC/I6YiigOtqPaUdSmD97GoMN/tsLkxoVuWm8odFvQ/c0zj
- bEBtWKfQmFhNvCylV2rr+L/AsG8bn8nhx3hC9ONVs4ry1VXo5nyEsdbdEhjMNEedzWWTxXIc1y4
- sZjFvJIIgxUgP0gW06Lug9cixfkZ2ZGhtXNnMTyqKV4DQqt9Xg2gUpLxAOo6pkvCIZ6whQ5CacM
- ofdK6HpFlnh2+7TuKyrl2kyKKmgLXqVvlZk2XGpAoSP9NFqt8VXdrhfnL4GZtAD/2LxkgkobUwU
- ++GHkjRZlYNBIS6ZyfIzJfXTxX1VRQkgoXDmKxO+QNbAPLvcE6UvxrHDvdRPOFgvSwqPth2Lqte
- YgeETiFTtfBcTA4mYqiAy3k1cm5ZDFl5ysFFwtarve3W/jGDLarm1IYHh76TsCr8DzBuVdFma4P
- y+M+Bfd3sxVcySRuU+RG91DPE7kLcoZcXJoRuQUw==
-X-Received: by 2002:a17:906:f587:b0:bed:5a4f:9fdb with SMTP id
- a640c23a62f3a-c161ea8ece8mr652757966b.7.1784209495576; 
- Thu, 16 Jul 2026 06:44:55 -0700 (PDT)
+ bh=QzCzqNxD7YHxU8GkpsMEy1AppJaAsLEymp6otukPDm4=;
+ b=qNjkn/PQ+IVz2gC2BTljXFwKgGlpLNpvzJ9zwkZ1FjNJ8r1BerAVxXrCerHrni9Dvg
+ eZqA2nAdW3TMbTHexdKFh240rwRX2ImWIdNFqeRvNdOtWjvbpTffnneEQ0b487JdbUmQ
+ 8b5LPi1BAw4Tkq1tmQDsKsPFl8OIjpetGUxllJoRq6DrsWxzxtMIN02/DLpRLLY6MuMM
+ U0JAYKRQftauNqakjBUV9PabWK8hY71N2WcMzDl4NjlhB9QLMwb8OR7pA6FiAu/E/iJK
+ ei+s7zoESWcDDL7Rh0P+Hg/xlc6yO65LJDWtc617BqlqU4QyOmUqKn+vZctQsvwm40fF
+ eQgg==
+X-Gm-Message-State: AOJu0Yx0pZcLnLBEUUAy3WN3PDtUFDRHo6dAInlMzEDmje1/DtGzJcd0
+ KKrJdd1dc8AekbY+kiGp324pdFuNg7CASK+kQM+0WzXhLY/aMdFbNnq3ThYezOe/mLi4QEiJUIG
+ uOTww
+X-Gm-Gg: AfdE7cmneBOL4TjKbxKnTMmbFUlKnHebjHG3ee6LppL0GOiN2cqEInpUfdVC163041L
+ EBxYNAekXwgNWKzXlzI23F2h/8+jbDXQn5BqwIPPGq6HiRH5R9NbznTKEb4qFMDxfzVd+5hVFd+
+ 14oav3wiXVrpJJbUSktOULzmCYSB6L1zn3ge7xU83IGMk/vzZfirLHpAYXsjC2JEu8s6utqYvVj
+ 4WCTtASIdHzW14YoDj7CH5n1P4ne/HlZNB7erKWrCJSioIhif5/4p/Z2AQDOIayZu+uVMadLd05
+ TC6JSOuqOMtq0OIq3GaSSuKeu6GfnHht08gOAP7APW2MIQe28mKz9zm+zdmXNrV1H/AhTGNyuhA
+ /QFmRB5KMzSk/e9nYKbmgHz7y6sJStxcrh5UtHRvOeXAyzAG2EqcSAGIcbLQ+iZiuHh3feKBg/1
+ 1VJdPGhfShbGfW9POz+Jg127LQDizkIyMNPxO2Ng==
+X-Received: by 2002:a17:907:5cc:b0:c12:c7ca:d704 with SMTP id
+ a640c23a62f3a-c161f438d78mr694571566b.6.1784209498610; 
+ Thu, 16 Jul 2026 06:44:58 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c1687318238sm214025966b.41.2026.07.16.06.44.55
+ a640c23a62f3a-c16871b3dfasm221245766b.28.2026.07.16.06.44.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:55 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:56 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
@@ -78,14 +78,11 @@ Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
  Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Eddie Cai <eddie.cai.linux@gmail.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <u-boot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>
-Subject: [PATCH v5 72/75] usb: gadget: fix up the function drivers after the
+ Jens Wiklander <jens.wiklander@linaro.org>, Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH v5 73/75] usb: gadget: fix up the last UDC drivers after the
  resync
-Date: Thu, 16 Jul 2026 15:42:42 +0200
-Message-ID: <20260716134305.614278-73-anders.roxell@linaro.org>
+Date: Thu, 16 Jul 2026 15:42:43 +0200
+Message-ID: <20260716134305.614278-74-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -108,8 +105,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adapt the gadget function drivers (acm, fastboot, mass_storage, rockusb,
-sdp, thor, ether and composite) to the new gadget API.
+Adapt at91_udc, atmel_usba_udc and epautoconf to the new gadget API.
 
 Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -117,335 +113,230 @@ Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/gadget/composite.c      |  2 +-
- drivers/usb/gadget/ether.c          | 21 ++++++++++++++-------
- drivers/usb/gadget/f_acm.c          | 20 +++++++++++---------
- drivers/usb/gadget/f_fastboot.c     | 10 +++++-----
- drivers/usb/gadget/f_mass_storage.c |  5 ++++-
- drivers/usb/gadget/f_rockusb.c      | 11 ++++++-----
- drivers/usb/gadget/f_sdp.c          | 12 ++++++++----
- drivers/usb/gadget/f_thor.c         | 19 +++++++++----------
- 8 files changed, 58 insertions(+), 42 deletions(-)
+ drivers/usb/gadget/at91_udc.c       |  46 -------------
+ drivers/usb/gadget/atmel_usba_udc.c | 102 ++++++++--------------------
+ drivers/usb/gadget/epautoconf.c     |   2 -
+ 3 files changed, 28 insertions(+), 122 deletions(-)
 
-diff --git a/drivers/usb/gadget/composite.c b/drivers/usb/gadget/composite.c
-index 04b85419931e..060788419553 100644
---- a/drivers/usb/gadget/composite.c
-+++ b/drivers/usb/gadget/composite.c
-@@ -833,7 +833,7 @@ static int bos_desc(struct usb_composite_dev *cdev)
+diff --git a/drivers/usb/gadget/at91_udc.c b/drivers/usb/gadget/at91_udc.c
+index b3c780a4e35c..5b0c55d59c8d 100644
+--- a/drivers/usb/gadget/at91_udc.c
++++ b/drivers/usb/gadget/at91_udc.c
+@@ -1435,52 +1435,6 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+ 	return at91_udc_irq(udc);
+ }
  
- 		/* Get Controller configuration */
- 		if (cdev->gadget->ops->get_config_params) {
--			cdev->gadget->ops->get_config_params(
-+			cdev->gadget->ops->get_config_params(cdev->gadget,
- 				&dcd_config_params);
- 		} else {
- 			dcd_config_params.bU1devExitLat =
-diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
-index 7973927e8a7f..13a20441419d 100644
---- a/drivers/usb/gadget/ether.c
-+++ b/drivers/usb/gadget/ether.c
-@@ -925,8 +925,9 @@ set_ether_config(struct eth_dev *dev, gfp_t gfp_flags)
- 		dev->status = ep_desc(gadget, &hs_status_desc,
- 						&fs_status_desc);
- 		dev->status_ep->driver_data = dev;
-+		dev->status_ep->desc = dev->status;
- 
--		result = usb_ep_enable(dev->status_ep, dev->status);
-+		result = usb_ep_enable(dev->status_ep);
- 		if (result != 0) {
- 			debug("enable %s --> %d\n",
- 				dev->status_ep->name, result);
-@@ -951,14 +952,16 @@ set_ether_config(struct eth_dev *dev, gfp_t gfp_flags)
- 	 * from REMOTE_NDIS_HALT_MSG, reset from REMOTE_NDIS_RESET_MSG.
- 	 */
- 	if (!cdc_active(dev)) {
--		result = usb_ep_enable(dev->in_ep, dev->in);
-+		dev->in_ep->desc = dev->in;
-+		result = usb_ep_enable(dev->in_ep);
- 		if (result != 0) {
- 			debug("enable %s --> %d\n",
- 				dev->in_ep->name, result);
- 			goto done;
- 		}
- 
--		result = usb_ep_enable(dev->out_ep, dev->out);
-+		dev->out_ep->desc = dev->out;
-+		result = usb_ep_enable(dev->out_ep);
- 		if (result != 0) {
- 			debug("enable %s --> %d\n",
- 				dev->out_ep->name, result);
-@@ -1156,7 +1159,8 @@ static void issue_start_status(struct eth_dev *dev)
- 	 * FIXME iff req->context != null just dequeue it
- 	 */
- 	usb_ep_disable(dev->status_ep);
--	usb_ep_enable(dev->status_ep, dev->status);
-+	dev->status_ep->desc = dev->status;
-+	usb_ep_enable(dev->status_ep);
- 
- 	/*
- 	 * 3.8.1 says to issue first NETWORK_CONNECTION, then
-@@ -1314,7 +1318,8 @@ eth_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
- 				break;
- 			if (dev->status) {
- 				usb_ep_disable(dev->status_ep);
--				usb_ep_enable(dev->status_ep, dev->status);
-+				dev->status_ep->desc = dev->status;
-+				usb_ep_enable(dev->status_ep);
- 			}
- 
- 			value = 0;
-@@ -1333,8 +1338,10 @@ eth_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
- 			if (wValue == 1) {
- 				if (!cdc_active(dev))
- 					break;
--				usb_ep_enable(dev->in_ep, dev->in);
--				usb_ep_enable(dev->out_ep, dev->out);
-+				dev->in_ep->desc = dev->in;
-+				usb_ep_enable(dev->in_ep);
-+				dev->out_ep->desc = dev->out;
-+				usb_ep_enable(dev->out_ep);
- 				dev->cdc_filter = DEFAULT_FILTER;
- 				if (dev->status)
- 					issue_start_status(dev);
-diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-index b6c11d97a62d..5f5400bab7ec 100644
---- a/drivers/usb/gadget/f_acm.c
-+++ b/drivers/usb/gadget/f_acm.c
-@@ -325,20 +325,20 @@ static struct usb_request *acm_start_ep(struct usb_ep *ep, void *complete_cb,
- 
- static int acm_start_data(struct f_acm *f_acm, struct usb_gadget *gadget)
- {
--	const struct usb_endpoint_descriptor *d;
- 	int ret;
- 
- 	/* EP IN */
--	d = ep_desc(gadget, &acm_hs_in_desc, &acm_fs_in_desc);
--	ret = usb_ep_enable(f_acm->ep_in, d);
-+	f_acm->ep_in->desc = ep_desc(gadget, &acm_hs_in_desc, &acm_fs_in_desc);
-+	ret = usb_ep_enable(f_acm->ep_in);
- 	if (ret)
- 		return ret;
- 
- 	f_acm->req_in = acm_start_ep(f_acm->ep_in, acm_tx_complete, f_acm);
- 
- 	/* EP OUT */
--	d = ep_desc(gadget, &acm_hs_out_desc, &acm_fs_out_desc);
--	ret = usb_ep_enable(f_acm->ep_out, d);
-+	f_acm->ep_out->desc = ep_desc(gadget, &acm_hs_out_desc,
-+				      &acm_fs_out_desc);
-+	ret = usb_ep_enable(f_acm->ep_out);
- 	if (ret)
- 		return ret;
- 
-@@ -354,12 +354,11 @@ static int acm_start_data(struct f_acm *f_acm, struct usb_gadget *gadget)
- 
- static int acm_start_ctrl(struct f_acm *f_acm, struct usb_gadget *gadget)
- {
--	const struct usb_endpoint_descriptor *d;
+-int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+-{
+-	struct at91_udc *udc = controller;
+-	int ret;
 -
- 	usb_ep_disable(f_acm->ep_notify);
+-	if (!driver || !driver->bind || !driver->setup) {
+-		printf("bad paramter\n");
+-		return -EINVAL;
+-	}
+-
+-	if (udc->driver) {
+-		printf("UDC already has a gadget driver\n");
+-		return -EBUSY;
+-	}
+-
+-	at91_start(&udc->gadget, driver);
+-
+-	udc->driver = driver;
+-
+-	ret = driver->bind(&udc->gadget);
+-	if (ret) {
+-		pr_err("driver->bind() returned %d\n", ret);
+-		udc->driver = NULL;
+-	}
+-
+-	return ret;
+-}
+-
+-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-{
+-	struct at91_udc *udc = controller;
+-
+-	if (!driver || !driver->unbind || !driver->disconnect) {
+-		pr_err("bad paramter\n");
+-		return -EINVAL;
+-	}
+-
+-	driver->disconnect(&udc->gadget);
+-	driver->unbind(&udc->gadget);
+-	udc->driver = NULL;
+-
+-	at91_stop(&udc->gadget);
+-
+-	return 0;
+-}
+-
+ int at91_udc_probe(struct at91_udc_data *pdata)
+ {
+ 	struct at91_udc	*udc;
+diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+index 0caf8b8b7b45..52900ad654cf 100644
+--- a/drivers/usb/gadget/atmel_usba_udc.c
++++ b/drivers/usb/gadget/atmel_usba_udc.c
+@@ -32,12 +32,6 @@ static int usba_udc_stop(struct usb_gadget *gadget);
  
--	d = ep_desc(gadget, &acm_hs_notify_desc, &acm_fs_notify_desc);
--	usb_ep_enable(f_acm->ep_notify, d);
-+	f_acm->ep_notify->desc = ep_desc(gadget, &acm_hs_notify_desc,
-+					 &acm_fs_notify_desc);
-+	usb_ep_enable(f_acm->ep_notify);
+ #include "atmel_usba_udc.h"
  
- 	acm_start_ep(f_acm->ep_notify, acm_notify_complete, f_acm);
+-static int vbus_is_present(struct usba_udc *udc)
+-{
+-	/* No Vbus detection: Assume always present */
+-	return 1;
+-}
+-
+ static void next_fifo_transaction(struct usba_ep *ep, struct usba_request *req)
+ {
+ 	unsigned int transaction_len;
+@@ -1169,32 +1163,6 @@ static int usba_udc_irq(struct usba_udc *udc)
+ 	return 0;
+ }
  
-@@ -454,6 +453,9 @@ static void acm_disable(struct usb_function *f)
- 	usb_ep_disable(f_acm->ep_out);
- 	usb_ep_disable(f_acm->ep_in);
- 	usb_ep_disable(f_acm->ep_notify);
-+	f_acm->ep_out->desc = NULL;
-+	f_acm->ep_in->desc = NULL;
-+	f_acm->ep_notify->desc = NULL;
+-static int usba_udc_enable(struct usba_udc *udc)
+-{
+-	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
+-
+-	udc->vbus_prev = 0;
+-
+-	/* If Vbus is present, enable the controller and wait for reset */
+-	if (vbus_is_present(udc) && udc->vbus_prev == 0) {
+-		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
+-		usba_writel(udc, INT_ENB, USBA_END_OF_RESET);
+-	}
+-
+-	return 0;
+-}
+-
+-static int usba_udc_disable(struct usba_udc *udc)
+-{
+-	udc->gadget.speed = USB_SPEED_UNKNOWN;
+-	reset_all_endpoints(udc);
+-
+-	/* This will also disable the DP pullup */
+-	usba_writel(udc, CTRL, USBA_DISABLE_MASK);
+-
+-	return 0;
+-}
+-
+ static struct usba_ep *usba_udc_pdata(struct usba_platform_data *pdata,
+ 				      struct usba_udc *udc)
+ {
+@@ -1255,69 +1223,55 @@ int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+ 	return usba_udc_irq(udc);
+ }
  
- 	if (f_acm->req_out) {
- 		free(f_acm->req_out->buf);
-diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-index 8df0e3f331d1..e1eed5fa4cb4 100644
---- a/drivers/usb/gadget/f_fastboot.c
-+++ b/drivers/usb/gadget/f_fastboot.c
-@@ -320,13 +320,13 @@ static int fastboot_set_alt(struct usb_function *f,
- 	struct usb_composite_dev *cdev = f->config->cdev;
- 	struct usb_gadget *gadget = cdev->gadget;
- 	struct f_fastboot *f_fb = func_to_fastboot(f);
--	const struct usb_endpoint_descriptor *d;
+-int usb_gadget_register_driver(struct usb_gadget_driver *driver)
++int usba_udc_probe(struct usba_platform_data *pdata)
+ {
+-	struct usba_udc *udc = &controller;
+-	int ret;
+-
+-	if (!driver || !driver->bind || !driver->setup) {
+-		log_err("bad parameter\n");
+-		return -EINVAL;
+-	}
++	struct usba_udc *udc;
  
- 	debug("%s: func: %s intf: %d alt: %d\n",
- 	      __func__, f->name, interface, alt);
+-	if (udc->driver) {
+-		log_err("UDC already has a gadget driver\n");
+-		return -EBUSY;
+-	}
++	udc = &controller;
  
--	d = fb_ep_desc(gadget, &fs_ep_out, &hs_ep_out, &ss_ep_out);
--	ret = usb_ep_enable(f_fb->out_ep, d);
-+	f_fb->out_ep->desc = fb_ep_desc(gadget, &fs_ep_out, &hs_ep_out,
-+					&ss_ep_out);
-+	ret = usb_ep_enable(f_fb->out_ep);
- 	if (ret) {
- 		puts("failed to enable out ep\n");
- 		return ret;
-@@ -340,8 +340,8 @@ static int fastboot_set_alt(struct usb_function *f,
- 	}
- 	f_fb->out_req->complete = rx_handler_command;
+-	usba_udc_enable(udc);
++	udc->usba_ep = usba_udc_pdata(pdata, udc);
  
--	d = fb_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
--	ret = usb_ep_enable(f_fb->in_ep, d);
-+	f_fb->in_ep->desc = fb_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
-+	ret = usb_ep_enable(f_fb->in_ep);
- 	if (ret) {
- 		puts("failed to enable in ep\n");
- 		goto err;
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index 87ed25e8bb3a..0eb4af993717 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -2158,7 +2158,8 @@ static int enable_endpoint(struct fsg_common *common, struct usb_ep *ep,
- 	int	rc;
+-	udc->driver = driver;
++	return 0;
++}
  
- 	ep->driver_data = common;
--	rc = usb_ep_enable(ep, d);
-+	ep->desc = d;
-+	rc = usb_ep_enable(ep);
- 	if (rc)
- 		ERROR(common, "can't enable %s, result %d\n", ep->name, rc);
- 	return rc;
-@@ -2205,10 +2206,12 @@ reset:
- 		/* Disable the endpoints */
- 		if (fsg->bulk_in_enabled) {
- 			usb_ep_disable(fsg->bulk_in);
-+			fsg->bulk_in->desc = NULL;
- 			fsg->bulk_in_enabled = 0;
- 		}
- 		if (fsg->bulk_out_enabled) {
- 			usb_ep_disable(fsg->bulk_out);
-+			fsg->bulk_out->desc = NULL;
- 			fsg->bulk_out_enabled = 0;
- 		}
+-	ret = driver->bind(&udc->gadget);
+-	if (ret) {
+-		log_err("driver->bind() returned %d\n", ret);
+-		udc->driver = NULL;
+-	}
++#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
++struct usba_priv_data {
++	struct clk_bulk		clks;
++	struct usba_udc		udc;
++};
  
-diff --git a/drivers/usb/gadget/f_rockusb.c b/drivers/usb/gadget/f_rockusb.c
-index d679cdae97c8..37957b202f8c 100644
---- a/drivers/usb/gadget/f_rockusb.c
-+++ b/drivers/usb/gadget/f_rockusb.c
-@@ -202,6 +202,8 @@ static void rockusb_disable(struct usb_function *f)
+-	return ret;
++static int vbus_is_present(struct usba_udc *udc)
++{
++	/* No Vbus detection: Assume always present */
++	return 1;
+ }
  
- 	usb_ep_disable(f_rkusb->out_ep);
- 	usb_ep_disable(f_rkusb->in_ep);
-+	f_rkusb->out_ep->desc = NULL;
-+	f_rkusb->in_ep->desc = NULL;
+-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
++static int usba_udc_enable(struct usba_udc *udc)
+ {
+-	struct usba_udc *udc = &controller;
+-
+-	if (!driver || !driver->unbind || !driver->disconnect) {
+-		log_err("bad parameter\n");
+-		return -EINVAL;
+-	}
++	udc->devstatus = 1 << USB_DEVICE_SELF_POWERED;
  
- 	if (f_rkusb->out_req) {
- 		free(f_rkusb->out_req->buf);
-@@ -246,13 +248,12 @@ static int rockusb_set_alt(struct usb_function *f, unsigned int interface,
- 	struct usb_composite_dev *cdev = f->config->cdev;
- 	struct usb_gadget *gadget = cdev->gadget;
- 	struct f_rockusb *f_rkusb = func_to_rockusb(f);
--	const struct usb_endpoint_descriptor *d;
+-	driver->disconnect(&udc->gadget);
+-	driver->unbind(&udc->gadget);
+-	udc->driver = NULL;
++	udc->vbus_prev = 0;
  
- 	debug("%s: func: %s intf: %d alt: %d\n",
- 	      __func__, f->name, interface, alt);
+-	usba_udc_disable(udc);
++	/* If Vbus is present, enable the controller and wait for reset */
++	if (vbus_is_present(udc) && udc->vbus_prev == 0) {
++		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
++		usba_writel(udc, INT_ENB, USBA_END_OF_RESET);
++	}
  
--	d = rkusb_ep_desc(gadget, &fs_ep_out, &hs_ep_out);
--	ret = usb_ep_enable(f_rkusb->out_ep, d);
-+	f_rkusb->out_ep->desc = rkusb_ep_desc(gadget, &fs_ep_out, &hs_ep_out);
-+	ret = usb_ep_enable(f_rkusb->out_ep);
- 	if (ret) {
- 		printf("failed to enable out ep\n");
- 		return ret;
-@@ -266,8 +267,8 @@ static int rockusb_set_alt(struct usb_function *f, unsigned int interface,
- 	}
- 	f_rkusb->out_req->complete = rx_handler_command;
+ 	return 0;
+ }
  
--	d = rkusb_ep_desc(gadget, &fs_ep_in, &hs_ep_in);
--	ret = usb_ep_enable(f_rkusb->in_ep, d);
-+	f_rkusb->in_ep->desc = rkusb_ep_desc(gadget, &fs_ep_in, &hs_ep_in);
-+	ret = usb_ep_enable(f_rkusb->in_ep);
- 	if (ret) {
- 		printf("failed to enable in ep\n");
- 		goto err;
-diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index cd2c282247ac..0bb386053258 100644
---- a/drivers/usb/gadget/f_sdp.c
-+++ b/drivers/usb/gadget/f_sdp.c
-@@ -625,12 +625,14 @@ static int sdp_set_alt(struct usb_function *f, unsigned intf, unsigned alt)
- 	debug("%s: intf: %d alt: %d\n", __func__, intf, alt);
+-int usba_udc_probe(struct usba_platform_data *pdata)
++static int usba_udc_disable(struct usba_udc *udc)
+ {
+-	struct usba_udc *udc;
+-
+-	udc = &controller;
++	udc->gadget.speed = USB_SPEED_UNKNOWN;
++	reset_all_endpoints(udc);
  
- 	if (gadget_is_dualspeed(gadget) && gadget->speed == USB_SPEED_HIGH) {
--		result = usb_ep_enable(sdp->in_ep, &in_hs_desc);
--		result |= usb_ep_enable(sdp->out_ep, &out_hs_desc);
-+		sdp->in_ep->desc = &in_hs_desc;
-+		sdp->out_ep->desc = &out_hs_desc;
- 	} else {
--		result = usb_ep_enable(sdp->in_ep, &in_desc);
--		result |= usb_ep_enable(sdp->out_ep, &out_desc);
-+		sdp->in_ep->desc = &in_hs_desc;
-+		sdp->out_ep->desc = &out_hs_desc;
- 	}
-+	result = usb_ep_enable(sdp->in_ep);
-+	result |= usb_ep_enable(sdp->out_ep);
- 	if (result)
- 		return result;
+-	udc->usba_ep = usba_udc_pdata(pdata, udc);
++	/* This will also disable the DP pullup */
++	usba_writel(udc, CTRL, USBA_DISABLE_MASK);
  
-@@ -662,6 +664,8 @@ static void sdp_disable(struct usb_function *f)
+ 	return 0;
+ }
  
- 	usb_ep_disable(sdp->in_ep);
- 	usb_ep_disable(sdp->out_ep);
-+	sdp->in_ep->desc = NULL;
-+	sdp->out_ep->desc = NULL;
+-#else /* !CONFIG_IS_ENABLED(DM_USB_GADGET) */
+-struct usba_priv_data {
+-	struct clk_bulk		clks;
+-	struct usba_udc		udc;
+-};
+-
+ static int usba_udc_start(struct usb_gadget *gadget,
+ 			  struct usb_gadget_driver *driver)
+ {
+diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
+index 30016b805bfd..93ea70a5d79b 100644
+--- a/drivers/usb/gadget/epautoconf.c
++++ b/drivers/usb/gadget/epautoconf.c
+@@ -6,9 +6,7 @@
+  */
  
- 	if (sdp->in_req) {
- 		free(sdp->in_req->buf);
-diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
-index 540b9f882378..210537d51e92 100644
---- a/drivers/usb/gadget/f_thor.c
-+++ b/drivers/usb/gadget/f_thor.c
-@@ -909,16 +909,15 @@ static int thor_eps_setup(struct usb_function *f)
- 	struct usb_composite_dev *cdev = f->config->cdev;
- 	struct usb_gadget *gadget = cdev->gadget;
- 	struct thor_dev *dev = thor_func->dev;
--	struct usb_endpoint_descriptor *d;
- 	struct usb_request *req;
- 	struct usb_ep *ep;
- 	int result;
+ #include <linux/kernel.h>
+-#include <linux/module.h>
+ #include <linux/types.h>
+-#include <linux/device.h>
  
- 	ep = dev->in_ep;
--	d = ep_desc(gadget, &hs_in_desc, &fs_in_desc);
--	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
-+	ep->desc = ep_desc(gadget, &hs_in_desc, &fs_in_desc);
-+	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
- 
--	result = usb_ep_enable(ep, d);
-+	result = usb_ep_enable(ep);
- 	if (result)
- 		goto err;
- 
-@@ -933,10 +932,10 @@ static int thor_eps_setup(struct usb_function *f)
- 	req->complete = thor_rx_tx_complete;
- 	dev->in_req = req;
- 	ep = dev->out_ep;
--	d = ep_desc(gadget, &hs_out_desc, &fs_out_desc);
--	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
-+	ep->desc = ep_desc(gadget, &hs_out_desc, &fs_out_desc);
-+	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
- 
--	result = usb_ep_enable(ep, d);
-+	result = usb_ep_enable(ep);
- 	if (result)
- 		goto err_free_in_req;
- 
-@@ -951,10 +950,10 @@ static int thor_eps_setup(struct usb_function *f)
- 	dev->out_req = req;
- 	/* ACM control EP */
- 	ep = dev->int_ep;
--	d = ep_desc(gadget, &hs_int_desc, &fs_int_desc);
--	debug("(d)bEndpointAddress: 0x%x\n", d->bEndpointAddress);
-+	ep->desc = ep_desc(gadget, &hs_int_desc, &fs_int_desc);
-+	debug("(d)bEndpointAddress: 0x%x\n", ep->desc->bEndpointAddress);
- 
--	result = usb_ep_enable(ep, d);
-+	result = usb_ep_enable(ep);
- 	if (result)
- 		goto err;
- 
+ #include <linux/ctype.h>
+ #include <linux/string.h>
 -- 
 2.53.0
 
