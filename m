@@ -4,66 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60CD0C44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 01:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB72C44501
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 01:09:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1924A84D63;
-	Thu, 16 Jul 2026 03:03:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id ACFE384D57;
+	Thu, 16 Jul 2026 03:08:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="TUmVLM9N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kY8GzAhX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5626984C42; Thu, 16 Jul 2026 01:30:08 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1585684CCF; Thu, 16 Jul 2026 03:08:58 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E412384C03
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 01:30:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6494bd2e8=Romain.Caritey@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1784158208; x=1815694208;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=q9rWUxibqR6r7KW47eBesO0qUQvnytBxp9AyFluctO0=;
- b=TUmVLM9NCU1BhirLilkS/gAtQcPOvrzJbvv9cfmXR6ZV9hq7lz1rjViR
- ODcrpS03fqf0fisYxV12WX5xUSOjjiN8SJSXhB387G1Bv9UIbm+TLA7fY
- F+j11gyr9kW6vgNmzbW77AuX9icxK1L0fK2CXqeJe0+mhE/T+zRw/IRjI
- Vug40egv1NaRgN0jTrovgCbG2lvl4hk5Z7KhUPxO6S8a1ZBPbJgntg1G3
- jx+ZvDTUAw1L/l/7GOgEHryKXnN141/dxkJ0DcaOMmRWDKoI4hEkfxy2i
- wvpUVwRrIg0ZHruv2d0Dd9KciW6AtK+PHStw/I/UFfQvih7Fuol+NEZtt w==;
-X-CSE-ConnectionGUID: /NCIb6jkSWmu40Q39k7OUg==
-X-CSE-MsgGUID: GGyRCM51ScCWiawUBNvmpg==
-X-IronPort-AV: E=Sophos;i="6.25,166,1779174000"; d="scan'208";a="61007415"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Jul 2026 16:30:06 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
- chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.43; Wed, 15 Jul 2026 16:30:03 -0700
-Received: from bby-cbu-c71245.eng.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 15 Jul 2026 16:30:02 -0700
-From: <romain.caritey@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: <charles.perry@microchip.com>, <mamemaria.mbaye@microchip.com>,
- <romain.caritey@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd/mtd.c: fix do_mtd_io doesn't support 64bit user address
-Date: Wed, 15 Jul 2026 16:28:54 -0700
-Message-ID: <20260715232921.1182646-1-romain.caritey@microchip.com>
-X-Mailer: git-send-email 2.47.3
+ by phobos.denx.de (Postfix) with ESMTPS id D098A84CCF
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 03:08:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e9fc3de7ceso2256553a34.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:08:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784164134; x=1784768934; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Rd4FPvtmWaQPH0eb1+wmqKL2Bqv6yj+mDP9M4138yyY=;
+ b=kY8GzAhXNpEfp/1bmgiHe5ezVbzZa2ZoyDk8HooBAJivz2NFuSPwXoEW3yX0yOdWcs
+ 7B6bjMnL+IoY7KR5Fv5A08XD2s7u+D/drLH0ceYa4VMb/0vUMkolpvRW6ceOncdqKIq4
+ GSdn2HMuQM51bTeWszlFW0feRd74WH6x5BGzI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784164134; x=1784768934;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Rd4FPvtmWaQPH0eb1+wmqKL2Bqv6yj+mDP9M4138yyY=;
+ b=sRnOxhkxYyYjP8ML0u+Vf1eC5hoe8jpc/po0O8YrWN0o4T4CdsUuMiAMrQAbpr3gnB
+ 8DcPuWJ6022y5sXHG0ZJ9WDJG4pnTYZjO8h3CkseTH+MoeaeC9ZZZiY+drrEMxSMBzl+
+ VmsJ6PDbObthavllEjLGDPSQmv+p/bt6ieujlPdy53sku057J58VuGN/+xBI+qxwdV1T
+ 7tbjxQ7sWQpzrdZTR8s2WtuZiWpjfwFnVPxzyVtoiI0b8XoXCRR96GX1dFsrAuYL2Qjn
+ MkGWVJAwPPk2YR8O4e3rJBULwnz7FF8HXz1xW66P53OeojTBDklNsFbsYAh1/pYJZG2+
+ cRZQ==
+X-Gm-Message-State: AOJu0YwQb+pcqNdLOMWGQbzmt2EYdT9to2X2Cf/Za3fh/OtNQAay3Adz
+ K7JGW8hQDwurZYPDnNBX+61+dW4fZ/ixaD3HrOCpmrfwR0j5Ex1rthddqgdNqbbbTRY=
+X-Gm-Gg: AfdE7cklr+ovepLsNKp0soeVxfOjAuQNII4+EHrzE9jTQcisDybtjBvs08Zi0InnY/x
+ M9N5TVGjkyZ2dqminzI4KbZSeu4eQuQKRxORM5nvI3XA0TC5YkxDJMoZKc0V8XDQ5NcIG43JvLd
+ HRDGAtLuE2VzgdCdal3T8RgCHTVtCBTuqNvxwAyRsgIBCvb54Bgw/uxERQ2Z/xS7eAaE8l+v4aP
+ bRdMUqFvC3gGevG3aQcksV7gDHbsf0VFUu0UCF/y70MeOaj2baNCHDyJAXd32yOdabVmnjDBGTZ
+ ZHbkABciG5afKdt79r2X6fnUAAbGLCab1EqfpT5JSzpoyxjkRbwl7uSmN+KFSz7hci6HSjMOpr5
+ 3kz5Ai3KC663iBy7WkWsY55wRwcPoQr44pZLzn67XepdzzeRT52Es3A8E/mgwQu2/wXI+NP5Kbi
+ bLbtKBTLTqy7CRznEWU2Lxha79mSLpoXeKKAFfyP4LDuCGGVW8qNJCYA23mlcHgcAvdQUHF7Zl0
+ bLIRTk21lT5dut+8cRvP2XVzw==
+X-Received: by 2002:a05:6820:211:b0:6a3:d77e:725a with SMTP id
+ 006d021491bc7-6a3d9f277d3mr3361154eaf.20.1784164134471; 
+ Wed, 15 Jul 2026 18:08:54 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a38e9bc8casm11503854eaf.2.2026.07.15.18.08.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jul 2026 18:08:54 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Lukasz Majewski <lukma@denx.de>
+In-Reply-To: <20260708-fix-beagle-v1-1-c9b5393e6d23@bootlin.com>
+References: <20260708-fix-beagle-v1-1-c9b5393e6d23@bootlin.com>
+Subject: Re: [PATCH] clk: ti: Use CPU ticks to count timeout
+Message-Id: <178416413311.164922.17708860920401879107.b4-ty@konsulko.com>
+Date: Wed, 15 Jul 2026 19:08:53 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Thu, 16 Jul 2026 03:03:52 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,30 +98,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Romain Caritey <romain.caritey@microchip.com>
+On Wed, 08 Jul 2026 10:38:10 +0200, Bastien Curutchet wrote:
 
-Signed-off-by: Romain Caritey <romain.caritey@microchip.com>
----
- cmd/mtd.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> readl_relaxed_poll_timeout() relies on timers. On the beaglebone black,
+> the timer used by readl_relaxed_poll_timeout() depends on this clock
+> driver. So we have a sort of circular dependency [enable_clock ->
+> timer_init -> enable_clock -> timer_init]. It leads to a
+> division-per-zero during the second timer_init() and the beaglebone
+> fails to boot with following message:
+> | CPU  : AM335X-GP rev 2.1
+> | Model: TI AM335x BeagleBone Black
+> | DRAM:  512 MiB
+> | ### ERROR ### Please RESET the board ###
+> 
+> [...]
 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 7f25144098b..ed827accfb5 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -470,10 +470,10 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 		     char *const argv[])
- {
- 	bool dump, read, raw, woob, benchmark, write_empty_pages, has_pages = false;
--	u64 start_off, off, len, remaining, default_len, speed;
-+	u64 start_off, off, len, remaining, default_len, speed, user_addr = 0;
- 	unsigned long bench_start, bench_end;
- 	struct mtd_oob_ops io_op = {};
--	uint user_addr = 0, npages;
-+	uint npages;
- 	const char *cmd = argv[0];
- 	struct mtd_info *mtd;
- 	u32 oob_len;
+Applied to u-boot/main, thanks!
+
+[1/1] clk: ti: Use CPU ticks to count timeout
+      commit: d23b9d4f6ac76223d1354c7241790fb1b6d21fa5
 -- 
-2.47.3
+Tom
+
 
