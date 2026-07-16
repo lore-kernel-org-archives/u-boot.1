@@ -4,149 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B85C44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 02:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B78D1C43458
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 04:05:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A66F884D72;
-	Thu, 16 Jul 2026 04:46:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9010284D36;
+	Thu, 16 Jul 2026 06:05:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="cSqC5QUE";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j7SyrsJN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D95E984D73; Thu, 16 Jul 2026 04:45:59 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B388F84D76; Thu, 16 Jul 2026 04:55:30 +0200 (CEST)
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A936E84D36
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 04:45:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2219184CD5
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 04:55:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rahul.pathak@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G0XnJp1226890
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:45:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=; b=cSqC5QUE1LKxwY9I
- qIZF2tHiPb7MrvKIVJlmZZWMHhw7aYEJOhhUKEegHYqYz+NaUGuLBqLKQdcea6qC
- Z4RFkEYhc7rUMtP75KV962L77Rj0WUWJUMsYu/fYUQHpcnmEyaPwA5wjoIvGFY/s
- JDuJcQOYNrbx0s3EcnfBPv3jh38qLGVFsxWZLAW+pg/TxWLWDRFhSI0iGALEyfbT
- 6RSUEt8Nifi7cBCUJhFrtcnHIUpOPO33VuVWMCP+vz9EbeigY9PQyxFzGPh9Gfm/
- p0+tPZrRtu3lwUcIsOUihKcfWhiJ6AA9D/qgThE/Lm8LXVrhQwDTS2YCThws8hNH
- vet4tw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feeg1hny4-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 02:45:55 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-92e66f9e2baso442545685a.0
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 19:45:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784169955; cv=none;
- d=google.com; s=arc-20260327;
- b=hNRdcK1xkvue5EL92xAqg8ya/N81UH3iNAAkAK2kt5Oz7X+ApOTFD5Iu+kKXAnrrc5
- BZ6WjYcwO54P5pO04Ofxzsfu+GxA38m3CxrbNx0hiA4R17bdKCDCXxhau+Q0kmSnE6DN
- rfw9fkYS2fDe/Fd0V5u7D0H9gzboUiCDKi6Bdl9z9fLloIYBPlWtIaV7/8FaOtTFpime
- W09OCWZ1mKBIGtvfrurV9sfa3dU2cal/wKoOu8y3kSiS4L/0HQdVt0up3yqR1KXB+FKY
- /HAXxl8HVgoCx4cxGIITTdYkM7vNuUhHivwHP8B+rWe0vze8o1kpKrJEbXP920+gDOCs
- 6/FQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
- fh=lKF8suJlCFCP9fZ6gCQfGg3jHgNxOnuuzuUhGi7d6ow=;
- b=Bov5mRwIEokJwngcaoPra8A3oNTz0Z/PaX7CQ07jvXVE7JDfcEiJxN0DwZDauP+ISH
- G1gcokcf09/OZCCYjadqHksWn2MUJ2CdNMk+hKsLkREa8fgctjWooqbdnKlSRxQrPZHg
- cX7ndDojaSq/I/ur7a0+qfEZ/zdJPpmVqqbnFbPM/csu3CFlT4EN29ij1wBYBjplVbqS
- bswxQhwLjc51jaNJeRREBJhqHsz82aeZk6ghz0q0o39JrDGHHBZu5oAce5D55Uwc21G0
- QvsE3SGy8Q5+aw27DoXUjMSzVsW4lpmpKAEcPS+ju6wo2cYTsTsn/7o/FCeJOjA7GSgX
- hXkQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784169955; x=1784774755; darn=lists.denx.de; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
- b=j7SyrsJNNNxPWKJjI87DtZuiESeQWq0z9ooiSGYxszZj8GLxBaxAiEcTHrFMa8/IrA
- IYuZ3P9/iIx729eLX7yFulVuHjJRI5YtX85vA8aH1KQ8lR7gHyXnt9U8VXbQnO0XSbfP
- mWjjtKM4jDrDhUFlUaJeef/9p9PtjbvehHatn93tkePeO5eBzYK0KTRb+Kxu0n2IXtbr
- +IGEl+pWfBSuRdIfd1fiEUlFJpS7BNq8GoO5q2DY19t4hIsnz3lK8o7ueBYbgwJR71VQ
- HkTiHVcztB3voCIePZrEQbOyiY8idM4TXTgjBTVi1ft/qpSBCgRUOMeIeZCYZOeJFqjw
- de+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784169955; x=1784774755;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=z30AOS/Tc8MlEo9cI/X156wbLMNoLI53ViHl7GYk8k0=;
- b=Sss8cmf/czOBhF79t7SBUPl1JhNkbtRxWGvukv02XhrmlfwDK8xq/i9NbUegIeRwLR
- UPnO1C8B3p5H5/KX3LdHv2B/SbFw77srxB8JCi3NX2AhZVJIXBq/6HtdkGA1rdWU5c+h
- aKmm2cUSF7+ULgN5oSyWK7Wu/7seqpPxukZWwuTDT64HsVXieu1cfJ5mjbx4aPxBNnPj
- mUgb9NgIflGkoZkiEJX4pHkFfkTFpRL2zaGrPfTAOEVFgV5/3Pr3ik07zwrFJlGHRhvK
- HDZ5p9Zab1JRTTQGDVL+hBITAqKsyn6swxodylbrHJpW49KjmrAAcyjYl5VBSrPIx8Fe
- u46Q==
-X-Gm-Message-State: AOJu0YwkL8z72MyGlmAnrzu2k+8giOb8qCq5mdql/hI4PlcB7v8s7OFX
- tohRun9XCC1vljXDqLDM+IQbQPUAaYvC0drVZtx93enYdhwjNSYma8BYez0VfHM3PzUBxyKQlt0
- i2bAjSCgcjLRzMx+tiMO1/LEyNHJcURQf3n76VVPvOUsnVoLmzdWJg2+F6PE+muheYukjaemHK2
- Jm06DoSDraOt6vmbUGc6DPlz4qPoU5ETg=
-X-Gm-Gg: AfdE7cm3rsOknZi1WeHeIMASd3npd7Hp2V92gehG7K42NQSsJdMUdxuOZhe3ZeJGCRP
- 8/67Cf5QKrWD/Gk3KxQj3NwxcRpD7mqPpf9sXMW7WxDU9jPdZlKVLHNQOb7HzM8S1VCd5mYGVUP
- /vDbdixwZD+BSO3r/9hqlHn5Z0J2xmJmkExeb3R4wnzwyVMjoSqPnCAHbZ1w==
-X-Received: by 2002:a05:620a:2a09:b0:92e:cac7:96e6 with SMTP id
- af79cd13be357-92ef2c29f1bmr2084406385a.58.1784169955283; 
- Wed, 15 Jul 2026 19:45:55 -0700 (PDT)
-X-Received: by 2002:a05:620a:2a09:b0:92e:cac7:96e6 with SMTP id
- af79cd13be357-92ef2c29f1bmr2084404085a.58.1784169954747; Wed, 15 Jul 2026
- 19:45:54 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=qijian.guo@nxp.com
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 78EEB1A015B;
+ Thu, 16 Jul 2026 04:55:26 +0200 (CEST)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com
+ (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id D81AC1A0146;
+ Thu, 16 Jul 2026 04:55:25 +0200 (CEST)
+Received: from lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com
+ (lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com [10.52.9.99])
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id B6DD81800229;
+ Thu, 16 Jul 2026 10:55:22 +0800 (+08)
+From: Joseph Guo <qijian.guo@nxp.com>
+Date: Thu, 16 Jul 2026 11:55:02 +0900
+Subject: [PATCH v3] imx: Add FRDM-IMX95 initial support
 MIME-Version: 1.0
-References: <20260709175605.1070755-1-rahul.pathak@oss.qualcomm.com>
- <alZvl61jiQ0Wlvl2@bby-cbu-swbuild03.eng.microchip.com>
-In-Reply-To: <alZvl61jiQ0Wlvl2@bby-cbu-swbuild03.eng.microchip.com>
-From: Rahul Pathak <rahul.pathak@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 08:15:42 +0530
-X-Gm-Features: AUfX_mwi-y4lnmE6ByKCkUOsdmi3BWpEqJynQxuFu6FZu1TCy8zxigtrjHI6KeA
-Message-ID: <CAFR3w36bcmGtSMLwt2NBKh7OQ_AW_7dPJfYrqc0=KpGC6LwnUg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] riscv: Add generic SBI MPXY interface and MPXY command
-To: Charles Perry <charles.perry@microchip.com>
-Cc: u-boot@lists.denx.de, anup.patel@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDAyNSBTYWx0ZWRfX3jQHeXz0usBp
- QKOA/177M+1u95ksOq96AGaugVnXI/WWUo3eGRjl7R0s0fabckUfK32ZXRMztI+upt4LlEVGv+C
- +Zufjghb2pYeKBfUkcoj8syMExGeNuCnp3X5JWL3W6yzqnC8sI4V70lOwTnjaXtjtEu+vou5WyH
- rK4cVqXMZKE9yjO1jQk4PA9N9NlkUoBShuRhgPdE/GVLS0VIcs9KGv67LkSu89FkUHHQHXIgSVn
- Y6ZirTQm65uYzqq6Sbb/HkjQWiQBrRZBcKrxkXyWFwN2ESM/dsOFcLRkB0jeOWscBshuVua8g/Q
- 3PCVvBCrRmYnFQuI5AbeEqZLvB/x7YlYirH9ZepiLogvWCSFXZ7gTMfjNA9vm6uM6jt3+5F8Wtz
- sfdV92vQ46FZ+Q0IN1f51a9NHxzzJEWaOlYT9JboGKv+MSZ4+FM2Qn6gN+ta3kGVW/hBWLG/JpH
- 4qB+4nPCvra5dM6XjAA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDAyNSBTYWx0ZWRfX7DdnNOhajWhm
- hcaR7e1kxsQT4+E67HgmC5+MoP9BbNDd2vNKqxa/sRLasEXfjf/0iwzKLpmMHeTZwGxBNQ3m60M
- DpJigkTXlGBGaEcIyBhk6Ka3cjMFaww=
-X-Proofpoint-GUID: SJN5ARpk91l_7-QicwYSW5dhAc6Ycq5r
-X-Proofpoint-ORIG-GUID: SJN5ARpk91l_7-QicwYSW5dhAc6Ycq5r
-X-Authority-Analysis: v=2.4 cv=SsOgLvO0 c=1 sm=1 tr=0 ts=6a5845e3 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=XYAwZIGsAAAA:8 a=YJLxltowQ5SDOXdSQccA:9
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=E8ToXWR_bxluHZ7gmE-Z:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-16_01,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
- malwarescore=0 spamscore=0 impostorscore=0 adultscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160025
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260716-imx95_frdm-v3-1-bb53481157fc@nxp.com>
+X-B4-Tracking: v=1; b=H4sIAAVIWGoC/1XMyw6CMBCF4Vcxs7ZmWhzSuvI9jDGFFpkFl7Smw
+ RDe3YILcXlO8n8zRB/YR7gcZgg+ceShz6M4HqBubf/0gl3eoFCVKJEEd5OhRxNcJ6w2lTdaW9M
+ g5GAMvuFpw273vFuOryG8NzvJ9f0yCs97JkmBQpOrNWbNlu7aT+OpHjpYkaR2oVR/ocqhsVSQJ
+ SwrQ79wWZYPa1tCaNsAAAA=
+X-Change-ID: 20260105-imx95_frdm-a89be988a9f0
+To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Lei Xu <lei.xu@nxp.com>, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Adam Ford <aford173@gmail.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ji Luo <ji.luo@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Justin Jiang <justin.jiang@nxp.com>, 
+ qijian.guo@oss.nxp.com, xinyu.chen@nxp.com, Jacky Bai <ping.bai@nxp.com>, 
+ Tim Harvey <tharvey@gateworks.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Simona Toaca <simona.toaca@nxp.com>, Joseph Guo <qijian.guo@nxp.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784170522; l=20411;
+ i=qijian.guo@nxp.com; s=20250519; h=from:subject:message-id;
+ bh=aLZW2nUYmy4nSQthGN2gJJDaKuEOJI6ficyvgsgghCs=;
+ b=C3jA8vkuQ2yHoUpfTnTXp5/wuC6TwjDXh9T6zUineIlSA6/NLrp7spGL0HfnnUQ4gsIHCASPI
+ 48Mr07SgYZkAPIagqbG24h7uwYPY4Grt56jZdQKzkupVt1WLYmKPxVC
+X-Developer-Key: i=qijian.guo@nxp.com; a=ed25519;
+ pk=VRjOOFhVecTRwBzK4mt/k3JBnHoYfuXKCm9FM+hHQhs=
+X-Mailman-Approved-At: Thu, 16 Jul 2026 06:05:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,44 +87,754 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 14, 2026 at 10:49=E2=80=AFPM Charles Perry
-<charles.perry@microchip.com> wrote:
->
-> On Thu, Jul 09, 2026 at 11:26:01PM +0530, Rahul Pathak wrote:
-> > This patch series adds a generic SBI MPXY extension
-> > implementation which provides an interface to interact
-> > with platform via supported message protocol (eg. RPMI)
-> >
-> > It also adds a mpxy command which uses the generic
-> > SBI MPXY interface and provides cli support to
-> > interact with supported message protocol. Currently
-> > it supports RISC-V RPMI message protocol.
->
-> Hello Rahul,
->
-> I'm happy to see that you're interested in RPMI support in U-Boot.
->
-> Can you share with us the context in which you developed those patches?
-> i.e., what hardware are you using and how is the "mpxy" command used.
->
-> Is "mpxy" mostly just for debugging or is it expected that a bootscript
-> would initialize the platform with calls to "mpxy"?
->
-Hi Charles,
+Add boot support and peripherals like eMMC/SD, UART, I2C, GPIO, ENETC0/1
+and PCIE0/1 for iMX95 15x15 FRDM.
+Updated doc for build instructions.
 
-I have used QEMU RISC-V Virt platform (with OpenSBI + librpmi
-providing the RPMI firmware side) for its development, and in terms of
-use cases its both actually which you outlined - debugging and
-configuration.
+Signed-off-by: Lei Xu <lei.xu@nxp.com>
+Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+---
+Changes in v3:
+- drop board_early_init_f
+- correct usage of fdtfile=CONFIG_DEFAULT_FDT_FILE
+- drop WSOG_BASE_ADDR and add CONFIG_WDT in defconfig
+- add OF_UPSTREAM since the dts already upstream
+- implement board_fix_fdt
+- add qb save option in SPL
+- drop dts patch
+- Link to v2: https://lore.kernel.org/r/20260212-imx95_frdm-v2-0-9a535a506b95@nxp.com
 
-Debugging is the pretty obvious usecase where mpxy command allows
-anyone to access message protocol in case of RPMI, it lets you
-access any custom service group implemented without changing u-boot.
+Changes in v2:
+- drop OF_UPSTREAM
+- sort header
+- align the macros in imx95_frdm.h
+- Link to v1: https://lore.kernel.org/r/20260204-imx95_frdm-v1-0-85dc80e98a6d@nxp.com
+---
+ arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi |  81 +++++++++++++++++
+ arch/arm/mach-imx/imx9/Kconfig            |   9 ++
+ board/nxp/imx95_frdm/Kconfig              |  12 +++
+ board/nxp/imx95_frdm/MAINTAINERS          |   6 ++
+ board/nxp/imx95_frdm/Makefile             |  11 +++
+ board/nxp/imx95_frdm/imx95_frdm.c         |  24 +++++
+ board/nxp/imx95_frdm/imx95_frdm.env       |  93 +++++++++++++++++++
+ board/nxp/imx95_frdm/spl.c                |  82 +++++++++++++++++
+ configs/imx95_15x15_frdm_defconfig        | 143 ++++++++++++++++++++++++++++++
+ doc/board/nxp/imx95_frdm.rst              | 131 +++++++++++++++++++++++++++
+ doc/board/nxp/index.rst                   |   1 +
+ include/configs/imx95_frdm.h              |  23 +++++
+ 12 files changed, 616 insertions(+)
 
-Boot time tweaking of any attribute or any platform state changes via
-scripts is also possible as you mentioned. The configuration can be
-board specific and expressed in uboot environment scripts instead of
-compiled in driver code.
+diff --git a/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi b/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..aa289bd65aa7f81f2ca364461dbbbfd1f2c5f827
+--- /dev/null
++++ b/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi
+@@ -0,0 +1,81 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2026 NXP
++ */
++
++#include "imx95-u-boot.dtsi"
++
++/ {
++	aliases {
++		pci0 = &netc_bus0;
++		pci1 = &netc_bus1;
++	};
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-imem} {
++	filename = "lpddr4x_imem_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-dmem} {
++	filename = "lpddr4x_dmem_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-imem-qb} {
++	filename = "lpddr4x_imem_qb_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-dmem-qb} {
++	filename = "lpddr4x_dmem_qb_v202409.bin";
++};
++
++&lpuart1 {
++	bootph-pre-ram;
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++&usdhc1 {
++	bootph-pre-ram;
++};
++
++&usdhc2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_uart1 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_gpio {
++	bootph-pre-ram;
++};
++
++&pinctrl_reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index cbd0078ba2ac82cfc259a050b9c28fb291a7461c..1271a3e88e6f69037d89758129d78b78aed0cf9d 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -165,6 +165,14 @@ config TARGET_IMX95_15X15_EVK
+ 	imply BOOTSTD_FULL
+ 	imply OF_UPSTREAM
+ 
++config TARGET_IMX95_15X15_FRDM
++	bool "imx95_frdm"
++	select OF_BOARD_FIXUP
++	select IMX95
++	imply BOOTSTD_FULL
++	imply BOOTSTD_BOOTCOMMAND
++	imply OF_UPSTREAM
++
+ config TARGET_IMX943_EVK
+ 	bool "imx943_evk"
+ 	select OF_BOARD_FIXUP
+@@ -210,6 +218,7 @@ source "board/phytec/phycore_imx91_93/Kconfig"
+ source "board/variscite/imx93_var_som/Kconfig"
+ source "board/nxp/imx94_evk/Kconfig"
+ source "board/nxp/imx95_evk/Kconfig"
++source "board/nxp/imx95_frdm/Kconfig"
+ source "board/toradex/aquila-imx95/Kconfig"
+ source "board/toradex/smarc-imx95/Kconfig"
+ source "board/toradex/verdin-imx95/Kconfig"
+diff --git a/board/nxp/imx95_frdm/Kconfig b/board/nxp/imx95_frdm/Kconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..0da9a56adadec661792c38b1258e4eb914af5aa5
+--- /dev/null
++++ b/board/nxp/imx95_frdm/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_IMX95_15X15_FRDM
++
++config SYS_BOARD
++	default "imx95_frdm"
++
++config SYS_VENDOR
++	default "nxp"
++
++config SYS_CONFIG_NAME
++	default "imx95_frdm"
++
++endif
+diff --git a/board/nxp/imx95_frdm/MAINTAINERS b/board/nxp/imx95_frdm/MAINTAINERS
+new file mode 100644
+index 0000000000000000000000000000000000000000..33870f054e7452ed3af36f19236163d451c93665
+--- /dev/null
++++ b/board/nxp/imx95_frdm/MAINTAINERS
+@@ -0,0 +1,6 @@
++i.MX95 FRDM BOARD
++M:	Joseph Guo <qijian.guo@nxp.com>
++S:	Maintained
++F:	board/nxp/imx95_frdm/
++F:	include/configs/imx95_frdm.h
++F:	configs/imx95_15x15_frdm_defconfig
+diff --git a/board/nxp/imx95_frdm/Makefile b/board/nxp/imx95_frdm/Makefile
+new file mode 100644
+index 0000000000000000000000000000000000000000..6965c61a281d44950d2619d3bfebceab39351c4d
+--- /dev/null
++++ b/board/nxp/imx95_frdm/Makefile
+@@ -0,0 +1,11 @@
++#
++# Copyright 2026 NXP
++#
++# SPDX-License-Identifier:      GPL-2.0+
++#
++
++obj-y += imx95_frdm.o
++
++ifdef CONFIG_SPL_BUILD
++obj-y += spl.o
++endif
+diff --git a/board/nxp/imx95_frdm/imx95_frdm.c b/board/nxp/imx95_frdm/imx95_frdm.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..394d6fd459cabdd90c8a0a343bd941a01b94fac5
+--- /dev/null
++++ b/board/nxp/imx95_frdm/imx95_frdm.c
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2025 NXP
++ */
++
++#include <asm/gpio.h>
++#include <asm/arch/clock.h>
++#include <asm/arch/sys_proto.h>
++
++int board_late_init(void)
++{
++	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
++		board_late_mmc_env_init();
++
++	return 0;
++}
++
++#if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
++int board_fix_fdt(void *fdt)
++{
++	/* Remove nodes based on fuses. */
++	return imx9_uboot_fixup_by_fuse(fdt);
++}
++#endif
+diff --git a/board/nxp/imx95_frdm/imx95_frdm.env b/board/nxp/imx95_frdm/imx95_frdm.env
+new file mode 100644
+index 0000000000000000000000000000000000000000..61fbd395645cc307988d1d744c498a9d34780baa
+--- /dev/null
++++ b/board/nxp/imx95_frdm/imx95_frdm.env
+@@ -0,0 +1,93 @@
++sec_boot=no
++initrd_addr=0x93800000
++emmc_dev=0
++sd_dev=1
++scriptaddr=0x93500000
++kernel_addr_r=CONFIG_SYS_LOAD_ADDR
++image=Image
++kernel_comp_addr_r=0xC0000000
++kernel_comp_size=0x2000000
++splashimage=0xA0000000
++console=ttyLP0,115200 earlycon
++fdt_addr_r=0x93000000
++fdt_addr=0x93000000
++cntr_addr=0xA8000000
++cntr_file=os_cntr_signed.bin
++boot_fit=no
++fdtfile=DEFAULT_FDT_FILE
++bootm_size=0x10000000
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
++mmcautodetect=yes
++mmcargs=setenv bootargs console=${console} root=${mmcroot}
++loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
++bootscript=echo Running bootscript from mmc ...; source
++loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
++loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
++loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
++auth_os=auth_cntr ${cntr_addr}
++boot_os=booti ${loadaddr} - ${fdt_addr_r};
++mmcboot=echo Booting from mmc ...;
++		run mmcargs;
++		if test ${sec_boot} = yes; then
++			if run auth_os; then
++				run boot_os;
++			else
++				echo ERR: failed to authenticate;
++			fi;
++		else
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if run loadfdt; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++netargs=setenv bootargs console=${console} root=/dev/nfs
++		ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
++netboot=echo Booting from net ...;
++		run netargs;
++		if test ${ip_dyn} = yes; then
++			setenv get_cmd dhcp;
++		else
++			setenv get_cmd tftp;
++		fi;
++		if test ${sec_boot} = yes; then
++			${get_cmd} ${cntr_addr} ${cntr_file};
++			if run auth_os; then
++				run boot_os;
++			else
++				echo ERR: failed to authenticate;
++			fi;
++		else
++			${get_cmd} ${loadaddr} ${image};
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++bsp_bootcmd=echo Running BSP bootcmd ...;
++			mmc dev ${mmcdev}; if mmc rescan; then
++			if run loadbootscript; then
++				run bootscript;
++			else
++				if test ${sec_boot} = yes; then
++					if run loadcntr; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				else
++					if run loadimage; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				fi;
++			fi;
++		fi;
+diff --git a/board/nxp/imx95_frdm/spl.c b/board/nxp/imx95_frdm/spl.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..c8a5b4f9d41a408d0a68b96fc32db6508192ed24
+--- /dev/null
++++ b/board/nxp/imx95_frdm/spl.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2026 NXP
++ */
++
++#include <hang.h>
++#include <init.h>
++#include <spl.h>
++#include <asm/global_data.h>
++#include <asm/sections.h>
++#include <asm/arch/clock.h>
++#include <asm/arch/mu.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/mach-imx/boot_mode.h>
++#include <asm/mach-imx/ele_api.h>
++#include <asm/mach-imx/qb.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int spl_board_boot_device(enum boot_device boot_dev_spl)
++{
++	switch (boot_dev_spl) {
++	case SD1_BOOT:
++	case MMC1_BOOT:
++		return BOOT_DEVICE_MMC1;
++	case SD2_BOOT:
++	case MMC2_BOOT:
++		return BOOT_DEVICE_MMC2;
++	case USB_BOOT:
++		return BOOT_DEVICE_BOARD;
++	default:
++		return BOOT_DEVICE_NONE;
++	}
++}
++
++void spl_board_init(void)
++{
++	int ret;
++
++	puts("Normal Boot\n");
++
++	ret = ele_start_rng();
++	if (ret)
++		printf("Fail to start RNG: %d\n", ret);
++
++	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
++		spl_imx_qb_save();
++}
++
++void board_init_f(ulong dummy)
++{
++	int ret;
++
++	/* Clear the BSS. */
++	memset(__bss_start, 0, __bss_end - __bss_start);
++
++#ifdef CONFIG_SPL_RECOVER_DATA_SECTION
++	if (IS_ENABLED(CONFIG_SPL_BUILD))
++		spl_save_restore_data();
++#endif
++
++	timer_init();
++
++	/* Need dm_init() to run before any SCMI calls can be made. */
++	spl_early_init();
++
++	/* Need enable SCMI drivers and ELE driver before enabling console */
++	ret = imx9_probe_mu();
++	if (ret)
++		hang(); /* if MU not probed, nothing can output, just hang here */
++
++	arch_cpu_init();
++
++	preloader_console_init();
++
++	debug("SOC: 0x%x\n", gd->arch.soc_rev);
++	debug("LC: 0x%x\n", gd->arch.lifecycle);
++
++	get_reset_reason(true, false);
++
++	board_init_r(NULL, 0);
++}
+diff --git a/configs/imx95_15x15_frdm_defconfig b/configs/imx95_15x15_frdm_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2aa507ec3c29aaab83a3d82b93ae7e92cfaeb12
+--- /dev/null
++++ b/configs/imx95_15x15_frdm_defconfig
+@@ -0,0 +1,143 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX9=y
++CONFIG_TEXT_BASE=0x90200000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_ENV_SOURCE_FILE="imx95_frdm"
++CONFIG_NR_DRAM_BANKS=3
++CONFIG_SF_DEFAULT_SPEED=40000000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_ENV_OFFSET=0x700000
++CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/scmi/imximage.cfg"
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx95-15x15-frdm"
++CONFIG_TARGET_IMX95_15X15_FRDM=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_TEXT_BASE=0x20480000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x204d6000
++CONFIG_SPL_BSS_MAX_SIZE=0x2000
++CONFIG_SYS_LOAD_ADDR=0x90400000
++CONFIG_SPL=y
++CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_PCI=y
++CONFIG_SYS_MEMTEST_START=0x90000000
++CONFIG_SYS_MEMTEST_END=0xA0000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
++CONFIG_DEFAULT_FDT_FILE="imx95-15x15-frdm.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2074
++# CONFIG_BOARD_INIT is not set
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_PCI_INIT_R=y
++CONFIG_SPL_MAX_SIZE=0x20000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_LOAD_IMX_CONTAINER=y
++CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/scmi/container.cfg"
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_SYS_PROMPT="u-boot=> "
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_HASH=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=1
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_USE_ETHPRIME=y
++CONFIG_ETHPRIME="eth0"
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SYS_RX_ETH_BUFFER=8
++CONFIG_SPL_DM=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_SPL_CLK_SCMI=y
++CONFIG_CLK_IMX95_BLKCTRL=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_SPL_FIRMWARE=y
++# CONFIG_SCMI_AGENT_SMCCC is not set
++CONFIG_IMX_RGPIO2P=y
++CONFIG_DM_PCA953X=y
++CONFIG_ADP5585_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_IMX_MU_MBOX=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_AQUANTIA=y
++CONFIG_PHY_MOTORCOMM=y
++CONFIG_DM_MDIO=y
++CONFIG_MII=y
++CONFIG_FSL_ENETC=y
++CONFIG_PCIE_ECAM_GENERIC=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX_SCMI=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_ULP_WATCHDOG=y
++CONFIG_LZO=y
++CONFIG_BZIP2=y
++CONFIG_WDT=y
+diff --git a/doc/board/nxp/imx95_frdm.rst b/doc/board/nxp/imx95_frdm.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..85ef9022e76fc0d8f2a5524128309939f22f4715
+--- /dev/null
++++ b/doc/board/nxp/imx95_frdm.rst
+@@ -0,0 +1,131 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++imx95_frdm
++=======================
++
++U-Boot for the NXP i.MX95 15x15 FRDM board
++
++Quick Start
++-----------
++
++- Get ahab-container.img
++- Get DDR PHY Firmware Images
++- Get and Build OEI Images
++- Get and Build System Manager Image
++- Get and Build the ARM Trusted Firmware
++- Build the Bootloader Image
++- Boot
++
++Get ahab-container.img
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0.2-89161a8.bin
++   $ sh firmware-ele-imx-2.0.2-89161a8.bin --auto-accept
++
++i.MX95 A0 silicon version
++
++.. code-block:: bash
++
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx95a0-ahab-container.img $(srctree)
++
++i.MX95 B0 silicon version
++
++.. code-block:: bash
++
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx95b0-ahab-container.img $(srctree)
++
++Get DDR PHY Firmware Images
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
++   $ sh firmware-imx-8.28-994fa14.bin --auto-accept
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr5*v202409.bin $(srctree)
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4x*v202409.bin $(srctree)
++
++Get and Build OEI Images
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get OEI from: https://github.com/nxp-imx/imx-oei
++branch: master
++
++.. code-block:: bash
++
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-oei.git
++   $ cd imx-oei
++
++i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
++
++.. code-block:: bash
++
++   $ make board=mx95lp4x-15 oei=ddr DEBUG=1 r=B0 all
++   $ cp build/mx95lp4x-15/ddr/oei-m33-ddr.bin $(srctree)
++
++Get and Build System Manager Image
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get System Manager from: https://github.com/nxp-imx/imx-sm
++branch: master
++
++.. code-block:: bash
++
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-sm.git
++   $ cd imx-sm
++   $ make config=mx95evk all
++   $ cp build/mx95evk/m33_image.bin $(srctree)
++
++Get and Build the ARM Trusted Firmware
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get ATF from: https://github.com/nxp-imx/imx-atf/
++branch: lf_v2.12
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ unset LDFLAGS
++   $ unset AS
++   $ git clone -b lf_v2.12 https://github.com/nxp-imx/imx-atf.git
++   $ cd imx-atf
++   $ make PLAT=imx95 bl31
++   $ cp build/imx95/release/bl31.bin $(srctree)
++
++Build the Bootloader Image
++--------------------------
++
++i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ make imx95_15x15_frdm_defconfig
++   $ make
++
++Copy imx-boot-imx95.bin to the MicroSD card:
++
++.. code-block:: bash
++
++   $ sudo dd if=flash.bin of=/dev/sd[x] bs=1k seek=32 conv=fsync
++
++Boot
++----
++
++Set i.MX95 boot device to MicroSD card
+diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
+index 52c8e85fa5b3cdf267d7ab0f3c809e1299983126..b28e5b6ceb93f37090cdf6c09778368d7febd228 100644
+--- a/doc/board/nxp/index.rst
++++ b/doc/board/nxp/index.rst
+@@ -17,6 +17,7 @@ NXP Semiconductors
+    imx93_9x9_qsb
+    imx93_11x11_evk
+    imx93_frdm
++   imx95_frdm
+    imx943_evk
+    imx95_evk
+    imx952_evk
+diff --git a/include/configs/imx95_frdm.h b/include/configs/imx95_frdm.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..132eea2864328d3e001ddc5915328d07d5916762
+--- /dev/null
++++ b/include/configs/imx95_frdm.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2026 NXP
++ */
++
++#ifndef __IMX95_EVK_H
++#define __IMX95_EVK_H
++
++#include <linux/sizes.h>
++#include <linux/stringify.h>
++#include <asm/arch/imx-regs.h>
++
++#define CFG_SYS_INIT_RAM_ADDR	0x90000000
++#define CFG_SYS_INIT_RAM_SIZE	0x200000
++
++#define CFG_SYS_SDRAM_BASE		0x90000000
++#define PHYS_SDRAM			0x90000000
++
++#define PHYS_SDRAM_SIZE			0x70000000 /* 2GB - 256MB DDR */
++
++#define PHYS_SDRAM_2_SIZE		0x180000000 /* 6GB (Totally 8GB) */
++
++#endif
 
-Thanks
-Rahul
+---
+base-commit: fa142cd836ea716398a355f1569c548e7e4347a4
+change-id: 20260105-imx95_frdm-a89be988a9f0
+
+Best regards,
+-- 
+Joseph Guo <qijian.guo@nxp.com>
+
