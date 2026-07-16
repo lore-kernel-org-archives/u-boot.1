@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB72C44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 01:09:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC420C44507
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 01:09:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACFE384D57;
-	Thu, 16 Jul 2026 03:08:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2B4C84D45;
+	Thu, 16 Jul 2026 03:09:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kY8GzAhX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hXyuzaFA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1585684CCF; Thu, 16 Jul 2026 03:08:58 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id E459084D6A; Thu, 16 Jul 2026 03:08:59 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D098A84CCF
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 03:08:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37ECB84D45
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 03:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7e9fc3de7ceso2256553a34.1
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:08:55 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-6a190528769so1642715eaf.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 18:08:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784164134; x=1784768934; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1784164136; x=1784768936; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Rd4FPvtmWaQPH0eb1+wmqKL2Bqv6yj+mDP9M4138yyY=;
- b=kY8GzAhXNpEfp/1bmgiHe5ezVbzZa2ZoyDk8HooBAJivz2NFuSPwXoEW3yX0yOdWcs
- 7B6bjMnL+IoY7KR5Fv5A08XD2s7u+D/drLH0ceYa4VMb/0vUMkolpvRW6ceOncdqKIq4
- GSdn2HMuQM51bTeWszlFW0feRd74WH6x5BGzI=
+ bh=Bmu9dmFM7Npnk54gIyuGcAI8b6AKDyJfoPXE0jos9Cc=;
+ b=hXyuzaFApvfgr/N3RPnUfN8Wd9i/AI/iTUEr6/OAnKsOPnPGw4URPj0PfRpKYD/+IH
+ 2nrFsZNh+d6b+KqUVIi9Nh2xffmr99e8/9bOcUXjR/jTLHT+K2+OjQLJokQiRKCBKLoF
+ C4Uj5gqrT/7SNlCDwuwDLFOvdOhSyGAPeFwZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784164134; x=1784768934;
+ d=1e100.net; s=20251104; t=1784164136; x=1784768936;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Rd4FPvtmWaQPH0eb1+wmqKL2Bqv6yj+mDP9M4138yyY=;
- b=sRnOxhkxYyYjP8ML0u+Vf1eC5hoe8jpc/po0O8YrWN0o4T4CdsUuMiAMrQAbpr3gnB
- 8DcPuWJ6022y5sXHG0ZJ9WDJG4pnTYZjO8h3CkseTH+MoeaeC9ZZZiY+drrEMxSMBzl+
- VmsJ6PDbObthavllEjLGDPSQmv+p/bt6ieujlPdy53sku057J58VuGN/+xBI+qxwdV1T
- 7tbjxQ7sWQpzrdZTR8s2WtuZiWpjfwFnVPxzyVtoiI0b8XoXCRR96GX1dFsrAuYL2Qjn
- MkGWVJAwPPk2YR8O4e3rJBULwnz7FF8HXz1xW66P53OeojTBDklNsFbsYAh1/pYJZG2+
- cRZQ==
-X-Gm-Message-State: AOJu0YwQb+pcqNdLOMWGQbzmt2EYdT9to2X2Cf/Za3fh/OtNQAay3Adz
- K7JGW8hQDwurZYPDnNBX+61+dW4fZ/ixaD3HrOCpmrfwR0j5Ex1rthddqgdNqbbbTRY=
-X-Gm-Gg: AfdE7cklr+ovepLsNKp0soeVxfOjAuQNII4+EHrzE9jTQcisDybtjBvs08Zi0InnY/x
- M9N5TVGjkyZ2dqminzI4KbZSeu4eQuQKRxORM5nvI3XA0TC5YkxDJMoZKc0V8XDQ5NcIG43JvLd
- HRDGAtLuE2VzgdCdal3T8RgCHTVtCBTuqNvxwAyRsgIBCvb54Bgw/uxERQ2Z/xS7eAaE8l+v4aP
- bRdMUqFvC3gGevG3aQcksV7gDHbsf0VFUu0UCF/y70MeOaj2baNCHDyJAXd32yOdabVmnjDBGTZ
- ZHbkABciG5afKdt79r2X6fnUAAbGLCab1EqfpT5JSzpoyxjkRbwl7uSmN+KFSz7hci6HSjMOpr5
- 3kz5Ai3KC663iBy7WkWsY55wRwcPoQr44pZLzn67XepdzzeRT52Es3A8E/mgwQu2/wXI+NP5Kbi
- bLbtKBTLTqy7CRznEWU2Lxha79mSLpoXeKKAFfyP4LDuCGGVW8qNJCYA23mlcHgcAvdQUHF7Zl0
- bLIRTk21lT5dut+8cRvP2XVzw==
-X-Received: by 2002:a05:6820:211:b0:6a3:d77e:725a with SMTP id
- 006d021491bc7-6a3d9f277d3mr3361154eaf.20.1784164134471; 
- Wed, 15 Jul 2026 18:08:54 -0700 (PDT)
+ :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Bmu9dmFM7Npnk54gIyuGcAI8b6AKDyJfoPXE0jos9Cc=;
+ b=C/Td+2xQAuwSYxzVi2PKY/xDxC+nA+FRv8p2B9HMzf3ZIjSLh5c2i5SoHuY/FOdmLU
+ p7b+2OiDSzjZLCgW6ktnbfVypA6i9Nu6M9RfW8Ci6PEJfgT6rwB2uY/rlGnjSaX2Zaet
+ 0l1ktasoy5wzWIiJKbtjWqViCDvK4S81ZRLJiaw5awJYeZWAaj6TXQxV0UlfVF/Nusku
+ K1b+1JwN19V9vAWxavuok582XgktsIClqQmsO1zHajw9oDeQvswL9mUuMrisjHtNBSzf
+ k5xiFxsTF/329pSKS+7HUeT8th+KWxmcMA+a64jIQKhrYW1bldMTboUd08cbqv5wjH+D
+ hqHw==
+X-Gm-Message-State: AOJu0Yxg+GUU205ek8FGgOdwRzQgde8m6bNQ5MUfAM0maRN4WcNHxgtc
+ 2LIGSKVeXaZ5TftymfuI47NWDeiVPJyxJSZx3g8/BC/kVg/b5pPu9Kyu/gXm9Wtq+cO+etoyov/
+ 5yE6C9lQ=
+X-Gm-Gg: AfdE7ckzlc6EiTtAm05jd91jbGSAJsXUiwi855PWRiLBpB/3IWlW2JJF8AVlnVJ4A5L
+ 7Y8BzUlwf0PqBoneO56LwEbGIke3TgavXRHOodDt2vK3RMrLR6tQkVTi5LGpEixc5/wtQwJUYZg
+ yGf6943dSktYTY1IYSdOLFknIlNHanpGnYK1XciPyU0OHY7OJzsJlo6+ptbc2XEVVC3i+aNur0/
+ OtMi9AbrHC8j2bfxtgnFnRZvCCeL19GWAw0e28rrGbVwjfhDJRtE8mg8KPmud2HqCpDS0z9uPP4
+ MLfG85Z5uUxhBHMOlhLRFsSjIA04LKUUZavjjpvazaWCtPIwqLS7DLUlDjntaZ1HOTg7R8nuQG7
+ cxBxjuVBZcH2wwL3Yf/qqGoDw+2tDZHUf9hq69/19rviPMGhPkWFI9FzQkcUzM47ztD7yddO8HL
+ 2bnW7LCFia1BLbrgAlFrRTnYSthO0Se+/FJzzRzy0sfKGukoRFP+kbMOfOVMKqKgHAgqJTRt4w+
+ SECoVVrRKiqwMysimG/k/gHPA==
+X-Received: by 2002:a05:6820:a0a:b0:6a1:40ad:cfa9 with SMTP id
+ 006d021491bc7-6a3d9c2f265mr3133108eaf.0.1784164135838; 
+ Wed, 15 Jul 2026 18:08:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a38e9bc8casm11503854eaf.2.2026.07.15.18.08.53
+ 006d021491bc7-6a38e9bc8casm11503854eaf.2.2026.07.15.18.08.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2026 18:08:54 -0700 (PDT)
+ Wed, 15 Jul 2026 18:08:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Bastien Curutchet <bastien.curutchet@bootlin.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Lukasz Majewski <lukma@denx.de>
-In-Reply-To: <20260708-fix-beagle-v1-1-c9b5393e6d23@bootlin.com>
-References: <20260708-fix-beagle-v1-1-c9b5393e6d23@bootlin.com>
-Subject: Re: [PATCH] clk: ti: Use CPU ticks to count timeout
-Message-Id: <178416413311.164922.17708860920401879107.b4-ty@konsulko.com>
-Date: Wed, 15 Jul 2026 19:08:53 -0600
+To: u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>
+In-Reply-To: <20260624-335-ddr-cke-delay-v1-0-21d65d40a83f@ti.com>
+References: <20260624-335-ddr-cke-delay-v1-0-21d65d40a83f@ti.com>
+Subject: Re: [PATCH 0/2] mach-omap2: am33xx: ddr JEDEC spec fixups
+Message-Id: <178416413466.164922.1815779899316696582.b4-ty@konsulko.com>
+Date: Wed, 15 Jul 2026 19:08:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,25 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 08 Jul 2026 10:38:10 +0200, Bastien Curutchet wrote:
+On Wed, 24 Jun 2026 10:35:06 -0500, Bryan Brattlof wrote:
 
-> readl_relaxed_poll_timeout() relies on timers. On the beaglebone black,
-> the timer used by readl_relaxed_poll_timeout() depends on this clock
-> driver. So we have a sort of circular dependency [enable_clock ->
-> timer_init -> enable_clock -> timer_init]. It leads to a
-> division-per-zero during the second timer_init() and the beaglebone
-> fails to boot with following message:
-> | CPU  : AM335X-GP rev 2.1
-> | Model: TI AM335x BeagleBone Black
-> | DRAM:  512 MiB
-> | ### ERROR ### Please RESET the board ###
+> Someone figured out that we do not wait long enough for the DDR chip to
+> be ready during initializing. During that debug it was also discovered
+> we don't handle warm resets correctly. These 2 patches should fix this.
+> 
+> I don't have a scope fast enough to prove these patches have fixed the
+> reported issues but I am boot testing (cold and warm resets) with a BBB
+> at my desk which seems to be OK with these applied.
 > 
 > [...]
 
 Applied to u-boot/main, thanks!
 
-[1/1] clk: ti: Use CPU ticks to count timeout
-      commit: d23b9d4f6ac76223d1354c7241790fb1b6d21fa5
+[1/2] arm: mach-omap2: am33xx: ddr: ensure proper reset->cke delay
+      commit: b158ef7c445a1ab66134c410c901766d0a73e486
+[2/2] arm: mach-omap2: am33xx: check VTP before reinitalizing
+      commit: 3ddd0f9bc879ab62522164b50c41181e909b9a0b
 -- 
 Tom
 
