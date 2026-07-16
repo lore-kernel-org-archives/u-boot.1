@@ -4,148 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9FEC44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 19:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B057FC44514
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 20:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B77A84D3C;
-	Thu, 16 Jul 2026 21:56:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A1D3F84C23;
+	Thu, 16 Jul 2026 22:03:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kiUk8Amn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tcVfPocJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5144A84D55; Thu, 16 Jul 2026 21:56:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2ED084C23; Thu, 16 Jul 2026 22:03:26 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EF2C84BBF
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 21:56:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C42584B86
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 22:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1784231765; x=1784836565; i=xypron.glpk@gmx.de;
- bh=Zijs3K4z4s4KBkW6YwSpLm1R+yGa2nZo3wCg9ayodqI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=kiUk8AmnMkZwwNucMZRqX49wHCTfcvi3aiyGqMatENy2nrHz7UHpusfK/70XEerp
- K8ARPrspk81yBtDwhsNiBX7EfoTLKoXCK+pyyB6+eixgvn3mQk2AfhxSH741sJpWF
- aa5ITrTq1+kyf2aJMzKBORxCZWS4X7Hk3ahPSYP9Fcae4Ew/OMiazsbPOdzpt9Xn9
- 8BvetaoHq7wpS/L61wYyE9ifgRrXTmHoYEmEnWJctm2WPq2K0pajwUuaIW/KrgQW0
- v3miCiNu4LIkF0ZwEty5Gjlvss/EyVIov7m75L1Q6uDp2nunRmX5uUncstWWE77q0
- 609ylRGMnLrjPWDtwg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MdefJ-1xJVtE1t2n-00cwom; Thu, 16
- Jul 2026 21:56:05 +0200
-Message-ID: <3e8d019c-a535-401a-9a7b-a012f3deca45@gmx.de>
-Date: Thu, 16 Jul 2026 21:56:04 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-448b0ff4a57so2292761fac.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 13:03:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784232203; x=1784837003; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=qVbGCImfvRRgVW6FGrHGptjeNKXUBfFtcynxgi+9YPM=;
+ b=tcVfPocJ82NR6HUrp0hB1ndOq6bO9sF3eicLpK3qrD53bM8Kb58mKO4o+GeaVBcY0c
+ i6A5RvL/+H9QF3s4ibrT1jJPPHavferontUq55nnivj4zgE9Pe4rRVBIWP8Rg3EVWMok
+ /2Kgxiekzi44btCEg8hW3qdqjQpjiG+EfheLU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784232203; x=1784837003;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=qVbGCImfvRRgVW6FGrHGptjeNKXUBfFtcynxgi+9YPM=;
+ b=DYG8hjuDWKs/fxeSjY9riyJa73lsJAo4QZ/1bN2nmaYqsfbtk/V2nXREEtvet2G4HE
+ R/pflf70nX0B3qdzteRLMjOXz017mrtvMt9KQKyyry0lyxf8CbV5D//BhCMoU0W3Yxz8
+ byYbo+egApkAw1YGd4Q8mxhYROTYDdIGvta0/hi5BGU2v/5sy+iVYGXrIXrz912npKny
+ 9luExlckAlq4x0tcBUnvUlYyOp4wiqGE7mswuXA+VIoCmXhIU1QalO3kjs1ou6+lRKsP
+ v3v/MSXS7XfurN1xYYWXS0JBk9VZtJ6yA9qOUHZyMsm8qItk9qVtHjz0UuOQbvvIFHxq
+ d4mA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrSv/ZJNJ4zyUTDqDdOYNEJaHF4ECm/ri8CS9bgHapNdmOLNXxPPMoFygaKC7eK3KteOc9Gc1o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzk37a9vjTBolBz/k9ou0LL6hqAc4J3U0GPjviKnx8lPxUG5fVA
+ QJdbiqrXlz2hy/K5edxpN5FCd+TT16F7NNtL7wlmhSDWQ7nfdbLkodTC2icS5Wohwxk=
+X-Gm-Gg: AfdE7ckJt5Xf6KAHziyC965Akbv2XEoAMykGnmVHjHrDD2AkPbK8V7JcPQJDmco+sYj
+ ubPTd2qCmLnVis84YfKRx2SACQWWzXp6i6sJ1Tj4BAX8bfB0LNuNglsFb6fzC5Uf6FyX6QbejP7
+ 7YxvD/7FVC6GFhLFyxjk4NE877mWgfUC30132G+7bZyBV6fkT531Tv15oKsPswTasxz8g9hPB/z
+ aZD19g3REkxVAYM9JbnjWEIOr/N+dec2Bd+2u5ZDhk/buPRnRN1DbfmIsTYrZ1NAzziDNCxNVQR
+ 2Mca9PUGdJvGXwXvd7DS+PZ5n1JZa4wUqKfqGtgSQhfLetW8mhvU9H4+q179mtI53kYMqOeUzlH
+ Q6kxREuroqVTbcWC+l1FwYKboLVAixD6bV5LR0tzltaBMAo2PIM89VwThy1J/OtzMFbudqe8MAZ
+ pTAhpE26Qn5rybz8MIQV2O/JLXAe2kv+Tf7SEXJrvuYtvz3zxIOC5jZ3EGuQkDWArfEZE+0+52a
+ PeHY8b1Fp3XmEy0Ep99Vc4gVNS6IiTilylv7A==
+X-Received: by 2002:a05:6870:b289:b0:448:ca54:6ba7 with SMTP id
+ 586e51a60fabf-45682b667b6mr352582fac.38.1784232202421; 
+ Thu, 16 Jul 2026 13:03:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4546f12a6casm15319175fac.8.2026.07.16.13.03.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jul 2026 13:03:20 -0700 (PDT)
+Date: Thu, 16 Jul 2026 14:03:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Bohdan Chubuk <chbgdn@gmail.com>
+Subject: Re: [PATCH] mmc: sunxi: support DM MMC in SPL
+Message-ID: <20260716200318.GA3179201@bill-the-cat>
+References: <20260626205153.2744981-1-james.hilliard1@gmail.com>
+ <20260628171716.4a9d7793@ryzen.lan>
+ <CADvTj4opB+XMbupiBZtmZnuvDUtyDFkjWR5E1u2QMTXzjMqzrA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] test: check default GUID selection of signature
- database variables
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260714094902.438079-1-aristo.chen@canonical.com>
- <20260714094902.438079-3-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260714094902.438079-3-aristo.chen@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HVDafi1Cjy4fAWRSkDVxNJkhM5V98eWP/iTIstlJ//X7FLIPaMO
- kUp7rYEdvcsSY6dn3uzfCryfFURj9yUqWAtY4Yk10G+yFVFxH31sZ8IHMHDRShSoJmEZad8
- oFexKnFB2bajk8OCJMC88P0MyA279U5uCOu6GRBNzSc9mtiXpgE7CvF9fgOMoxZva6rPPlG
- kJVk635sBuHHURXCPGw6g==
-UI-OutboundReport: notjunk:1;M01:P0:CGAOPsLonl0=;IMplpLLuogoNrKMEaQhzZHnND5Y
- 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
- ub/KrErrc1geYpTdmrtdsB3PSo39qY7ydQ==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JCTRB0fO6hTDqb/1"
+Content-Disposition: inline
+In-Reply-To: <CADvTj4opB+XMbupiBZtmZnuvDUtyDFkjWR5E1u2QMTXzjMqzrA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,99 +107,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/14/26 11:49, Aristo Chen wrote:
-> The name to GUID mapping that "env set -e" applies when no -guid
-> option is given was not covered by any test, which is how the wrong
-> default GUID for "dbr" went unnoticed until the previous commit.
+
+--JCTRB0fO6hTDqb/1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Jun 28, 2026 at 03:27:48PM -0600, James Hilliard wrote:
+> On Sun, Jun 28, 2026 at 10:16=E2=80=AFAM Andre Przywara <andre.przywara@a=
+rm.com> wrote:
+> >
+> > On Fri, 26 Jun 2026 14:51:50 -0600
+> > James Hilliard <james.hilliard1@gmail.com> wrote:
+> >
+> > Hi James,
+> >
+> > > sunxi SPL normally uses the legacy MMC interface while U-Boot
+> > > proper uses the DM driver. Boards which enable SPL_DM_MMC need
+> >
+> > I think I mentioned this before: enabling the device model in the SPL
+> > (or not) is not a *device* decision, but a platform one.
 >=20
-> Add a test case that enrolls each of db, dbx, dbt and dbr in setup
-> mode without an explicit -guid option and checks that every variable
-> is created under the image security database GUID and not under the
-> global variable GUID. This is also the first coverage of dbt and dbr
-> anywhere under test/. The enrollment happens in setup mode because
-> once secure boot is enabled, efi_variable_authenticate() only accepts
-> writes to PK, KEK, db and dbx.
+> I'm a bit confused here, uboot's configuration system from what I can tell
+> is designed to allow enabling device model for specific devices and even
+> for specific drivers.
+
+Right. And to be clear, in your tree you're working to upstream out of,
+only the h616 platforms end up enabling SPL_DM and not all of the
+existing ARCH_SUNXI, yes?
+
+> Why would this need to be a platform level decision? Given that boards
+> that don't have enough SRAM for SPL DM support tend to be older, we
+> will presumably want to migrate newer boards to SPL DM at some point
+> in the future anyways.
 >=20
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> ---
->   test/py/tests/test_efi_secboot/conftest.py    |  8 +++++
->   .../py/tests/test_efi_secboot/test_authvar.py | 30 +++++++++++++++++++
->   2 files changed, 38 insertions(+)
+> > And for
+> > technical reasons, mostly to support older devices, which have no other
+> > choice, but also to keep it simple and the SPL small, we do not use DM
+> > in the SPL on Allwinner boards.
 >=20
-> diff --git a/test/py/tests/test_efi_secboot/conftest.py b/test/py/tests/=
-test_efi_secboot/conftest.py
-> index 76b8f9fa0a3..0755497d46d 100644
-> --- a/test/py/tests/test_efi_secboot/conftest.py
-> +++ b/test/py/tests/test_efi_secboot/conftest.py
-> @@ -96,6 +96,14 @@ def efi_boot_env(request, ubman):
->           check_call('cd %s; %ssign-efi-sig-list -t "2020-04-05" -c KEK.=
-crt -k KEK.key dbx db.esl dbx_db.auth'
->                      % (mnt_point, EFITOOLS_PATH),
->                      shell=3DTrue)
-> +        # dbt (with TEST_db certificate)
-> +        check_call('cd %s; %ssign-efi-sig-list -t "2020-04-05" -c KEK.c=
-rt -k KEK.key dbt db.esl dbt.auth'
-> +                   % (mnt_point, EFITOOLS_PATH),
-> +                   shell=3DTrue)
-> +        # dbr (with TEST_db certificate)
-> +        check_call('cd %s; %ssign-efi-sig-list -t "2020-04-05" -c KEK.c=
-rt -k KEK.key dbr db.esl dbr.auth'
-> +                   % (mnt_point, EFITOOLS_PATH),
-> +                   shell=3DTrue)
->  =20
->           # Copy image
->           check_call('cp %s/lib/efi_loader/helloworld.efi %s' %
-> diff --git a/test/py/tests/test_efi_secboot/test_authvar.py b/test/py/te=
-sts/test_efi_secboot/test_authvar.py
-> index 7b45f8fb814..45350b19b06 100644
-> --- a/test/py/tests/test_efi_secboot/test_authvar.py
-> +++ b/test/py/tests/test_efi_secboot/test_authvar.py
-> @@ -279,3 +279,33 @@ class TestEfiAuthVar(object):
->               output =3D ubman.run_command(
->                   'printenv -e SetupMode')
->               assert '00000000: 01' in output
-> +
-> +    def test_efi_var_auth6(self, ubman, efi_boot_env):
-> +        """
-> +        Test Case 6 - Default GUID of signature database variables
-> +        """
-> +        ubman.restart_uboot()
-> +        disk_img =3D efi_boot_env
-> +        with ubman.log.section('Test Case 6a'):
-> +            # Test Case 6a, install signature database variables in set=
-up
-> +            # mode without -guid
-> +            output =3D ubman.run_command_list([
-> +                'host bind 0 %s' % disk_img,
-> +                'printenv -e SetupMode'])
-> +            assert '00000000: 01' in ''.join(output)
-> +
-> +            for var in ('db', 'dbx', 'dbt', 'dbr'):
+> I mean, this seems to me to be justification for continuing to support
+> legacy drivers, not justification for not supporting DM as well since the=
+re
+> are also many sunxi boards that don't have that limitation.
 
-Thank you Aristo for updating the test.
+This would be a separate set of potential cleanups to evaluate later on.
 
-Should we check the GUID of PK and KEK too?
+> > I see the SPL as the continuation of the
+> > BootROM, which is completely board agnostic.
+>=20
+> At a minimum SPL is still fairly SoC specific. Although in practice it se=
+ems
+> to not be all that board agnostic, I think if anything DM support makes it
+> more agnostic by allowing better factoring of the device specific stuff.
+>=20
+> > The SPL can mimic this
+> > behaviour, to follow the decisions that the BootROM made, for instance
+> > about the boot device. The only difference here is the DRAM
+> > initialisation, which requires some board specific data, but so far we
+> > got away with just hardcoding it.
+>=20
+> This is one of a few reasons I wanted to get SPL DM functional on sunxi.
+>=20
+> > If that is not good anymore, I think
+> > we can find other solutions than pulling in the whole world of SPL_DM
+> > support.
+> >
+> > So what is the purpose of this exercise, why do you want DM_SPL
+> > supported?
+>=20
+> Some cryptoengine uboot drivers I was working on adding seemed to
+> need DM_SPL, also I think handling DRAM profiles becomes easier with
+> it somewhat.
+>=20
+> > Keep in mind that there are 178 Allwinner boards supported in
+> > U-Boot, so there better would be good reasons to change something
+> > fundamental like this for all of them. It changing it for a number of
+> > them is not better, because this doubles the test matrix, so we have to
+> > test now that it works on both legacy and DM_SPL boards - which frankly
+> > nobody will do.
+>=20
+> Well it doesn't actually double the test matrix since presumably boards
+> that are not SPL DM compatible will continue to use non-DM drivers only.
 
-Best regards
+And today nothing ARCH_SUNXI enables SPL, but they all could enable it
+today and get an assortment of failures. With what James is doing, some
+could now enable it and have it work, or more easily work.
 
-Heinrich
+> Wouldn't we typically just pick either DM or non-DM configs for upstream
+> uboot testing/configs for any particular board to avoid maintaining more
+> configurations than necessary in the test matrix?
+>=20
+> > And aside from that, please do NOT add any more #ifdef's to the U-Boot
+> > code.
+>=20
+> This seemed to be how other subsystems handled both DM and non-DM
+> driver support, is there a better way?
 
-> +                output =3D ubman.run_command_list([
-> +                    'fatload host 0:1 4000000 %s.auth' % var,
-> +                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize %s'=
- % var,
-> +                    'printenv -e -n -guid d719b2cb-3d3a-4596-a3bc-dad00=
-e67656f %s' % var])
-> +                assert 'Failed to set EFI variable' not in ''.join(outp=
-ut)
-> +                assert '%s:' % var in ''.join(output)
-> +
-> +        with ubman.log.section('Test Case 6b'):
-> +            # Test Case 6b, variables must not exist under the global
-> +            # variable GUID
-> +            for var in ('db', 'dbx', 'dbt', 'dbr'):
-> +                output =3D ubman.run_command(
-> +                    'printenv -e -n -guid 8be4df61-93ca-11d2-aa0d-00e09=
-8032b8c %s' % var)
-> +                assert '\"%s\" not defined' % var in output
+So looking at this patch, it needs to be split up a whole lot more, to
+make it easier to review and clearer what's being changed. Also, there's
+a lot of places in code where it looks like you're handling
+dependencies that Kconfig should handle instead. By which I mean, if we
+have SPL_DM_MMC and we're in the driver, we don't need to handle
+SPL_DM_CLK=3Dn or SPL_OF_REAL=3Dn. You can find examples of that, but
+they're older code that also needs to be cleaned up. It might be the
+case that the driver itself needs some re-organization first to make
+what your end goal needs, easier to do.
 
+--=20
+Tom
+
+--JCTRB0fO6hTDqb/1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalk5AgAKCRAr4qD1Cr/k
+CvquAP9tevNMvFuX7neTsP5BzEXencq3HasymXy0bVzxnmFVhgEAqLUBsuIPuTYR
+G4VczU1rZC5BiwnLStxp+uNHBB5sggk=
+=k3dE
+-----END PGP SIGNATURE-----
+
+--JCTRB0fO6hTDqb/1--
