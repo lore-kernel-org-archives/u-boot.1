@@ -4,65 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DA2C4450E
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 11:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D6A1C44514
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 12:43:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0244A84CBC;
-	Thu, 16 Jul 2026 13:55:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B72D184C88;
+	Thu, 16 Jul 2026 14:43:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yodbcftJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q+trarTK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8121584CC4; Thu, 16 Jul 2026 13:55:24 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D92F284C83; Thu, 16 Jul 2026 14:42:59 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEE8E84CA3
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 13:55:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a79d=FK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1784202920;
- bh=xuAZEIozX39CslIC3m+BRG3BQyixodt/+qBst7EE9/Q=;
- b=yodbcftJ7DpBJtNfOcDd/C+V29ZPzTL3A6yg/kmgGwdwd5nWuY3jYRV4/lxP8w5MU4cgH7XMD
- /2t0cT1x25ixZAIMajVI2prU6Bl8brU0W8lk9OMyB/N3te6AqcoNXUOrzN7jrq5fuE1IXdjvHHq
- ylvxg8l5QSTTW6QRJr8lM+GxgJ1BopUl1Q8terq9IvEWAmnqYDhGZ3VEjAnPMcQ3t70fH+k7qO3
- BExPwvwm6igGuHlObS9tsBuNDhuC3vZOiqQ3JHGhutTRT2gfzaihKUmFlJypeqEIt15s7xAb+Qh
- H1fgV9jqHYScSu3Ql8UhLSx2dR/e2arSfrLxRNJOeScQ==
-X-Forward-Email-ID: 6a58c6a6e6d4cb6492957b5d
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.11.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d170674c-360e-400c-b263-a35aab640d71@kwiboo.se>
-Date: Thu, 16 Jul 2026 13:55:14 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 68CE984C9E
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 14:42:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-664ce3000e6so2853195d50.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 05:42:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784205776; cv=none;
+ d=google.com; s=arc-20260327;
+ b=IP0lbyMEwjTjBWQ8aK/9iIVjTTKhZfJdxzIYARCWoGSkOEVrwVru4jxOaFy8bXJlC9
+ j+Rm3DXhqBDjFwSGHkjr4zSajfn6P+S7bG88LdrjTmGfIIDkM3w/+yGvInddHZ9OJ6GW
+ oTip2oSQAJYGOXiPTzgAHKeEhukknwFQqi/nA5Eyjd0a0PObyeqmYKYJ3i81WIxMXkPW
+ dDyCOySqi5QW4eh+cTbZPoxY6oNcbB+vsKq9pDhiTT14FBtSmZdgydw3wIO72zHgi7KG
+ qMIvA7dsioV2+NhthSJx8sZVU59pL9XXPcpBB1vYir8+fVc4mTHj5bEhPAKGJFC92eR2
+ 94WA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=rvGwYV9B2JK9v60qa8txLF/IJD7XWSkGoM6gUAY4Buc=;
+ fh=62/sJvpbRSF7pznmbUTsXcnS+dZB4ci6XY2WwsRvBeI=;
+ b=rwkiXDmDUZ6MoUCk3FkgDtBc1FvAoFVXTKUvGK4FPFl4iSmwouNOpGdeFACJ9EYxfk
+ mQzcWpOiFklbYTMyZRieAYzasa+km/2bYy3L8x9D/fBNveCzYvxiYLYRpPUkvZshnM9l
+ LEZCb03y/JcEvYUXeZWwQm0bxIhiTtuMUvpqzoVSAMoXXtaFfMVogqv59yb1REaBbrYY
+ SNiE9192Brv06Lg4jdhWVS7YLsEOaew3Dh/1IDmOzHyUBAy/37MgCE87dbXTEzNpLYJO
+ 2A4kNPdXcq73G17z2yKdwP9kuFdMyhVq/KBK0qZOzzfu7MkzisAN9AcT4+BUBfFzoQkm
+ T4cg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1784205776; x=1784810576; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=rvGwYV9B2JK9v60qa8txLF/IJD7XWSkGoM6gUAY4Buc=;
+ b=Q+trarTKPTmT00jgH/pOXeWY/IgB6gzgeV1m/xVkPK1UU1/sjjzR/YETul9GXfmejJ
+ z7A3WSeWQCMmaLD/c5vXMCt8xvKRuQzc7URV1Su+OK3QrEOnOvlZuWY8BT2wjH84f9Jy
+ rF+wixHND86j3KV9+U0OU0Lwq/8cAjkBzgQkGiuX2pCa+JReuozpdfxJdWEjgfijwYep
+ Dv85MV3hO7i2RkvPD3LSNUI+nP1xsDg1B5fY3u1FTjLXxX22L2669dtyyxXVi2qJsKkW
+ Lwxui2lsMhwNN07J7tT5ux1J9EaLidjiFTLYhDD9jGTHLSZoIZ1hNV0aPt4r1/O4S94i
+ rxUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784205776; x=1784810576;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=rvGwYV9B2JK9v60qa8txLF/IJD7XWSkGoM6gUAY4Buc=;
+ b=Ql6OJ9GWTY9QT9dE8paTdTsbmlld6+V99ag8P/EX4RVw/YKtutBVw9K81A3/Zk0ueU
+ GEk6bPGPCUkk/D2Z01CpqVIwZZ04M82uCr9FERyys6+YFR7OP0FgStBMxVfrGG7wjVXK
+ +I7u+vrH076joEYpL+Jh4Rpqg9qcd2EUlxVAAZt9JrcES6vdUvQMQZ1kRysSG3YMGE6g
+ fIA8UOJGGE/Q8k9178kwhHXRLy/sYvCHDN8f7DhZu+fxIvMtwa0lxVGRBhQFk1UF5woI
+ lJ6gRDJEfx1zPYaDXJKMrBR7iuGFeo47V6Zbv8G+mvoF6adpGSC9wptonGZLDd2tsgRw
+ yhZg==
+X-Gm-Message-State: AOJu0YyubrrZeHaVqeDU0GWvVmjbKgJnkseQD+IVqpw0LwJc0mGpGNYo
+ +BajVW0qiCWyMqbQZUh+MGEQYUZgQA9CM5b/thsILmTs0PpvVGI1kHyq9MDk4PFUqoQTeisqUu7
+ cLcG0Dnzzy63+75RRdK4i9WmFOswUCvQ=
+X-Gm-Gg: AfdE7cm4MpkczK6ljwspwNbG2bhBvkE+7sARFpgS7Z4Bd6W1lbPEv+dLWZgWZkbTsS4
+ K9CHF/+vXxSISOVnb86hpfJpfWv9vJFe7CG3E751ycBkIkDnWC2yS1TR9NnXtvqZk3xFDlK/WFn
+ gJYFyPwri4IoIwuy5rwCEYt3WHRHwvGZodmaFkGXPUZS/iDNwmg/oa38zOjlPLD5w+RL7Ut71JP
+ 2fmbMdqLjZgC8z2aD3kTUZsJooWu3p8DuOE15LuwvJKQRBU1UCHNqtpqfKCJsA=
+X-Received: by 2002:a05:690e:4419:b0:667:97c4:7058 with SMTP id
+ 956f58d0204a3-667d7ae60cfmr10721086d50.37.1784205776163; Thu, 16 Jul 2026
+ 05:42:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot: image-fdt: downgrade -EINVAL reservation failure to
- debug
-To: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>,
- Joseph Guo <qijian.guo@nxp.com>, Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Randolph Sapp <rs@ti.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260713-downgrade-v1-1-183a2300741b@nxp.com>
- <e1a26574-4f7d-46f0-b757-55f419df326b@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <e1a26574-4f7d-46f0-b757-55f419df326b@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <CADt8U2LFgohjjFX8oQs2bM_2qfsWKgsvnO3HFSh-E0Q1wLEEvA@mail.gmail.com>
+In-Reply-To: <CADt8U2LFgohjjFX8oQs2bM_2qfsWKgsvnO3HFSh-E0Q1wLEEvA@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Thu, 16 Jul 2026 05:42:43 -0700
+X-Gm-Features: AUfX_mwGgLsT7tmwaqKB3nqp0F3sjlAQKVDMg70fEXlWA0KFj2Tv-tRGjAXRShE
+Message-ID: <CAJaLiFx3dj2m7s458GgagWFmqpz+DhccT0eypc2g2_=DraUQZg@mail.gmail.com>
+Subject: Re: Bug? SATA hard drives do not boot on Hardkernel Odroid HC4
+ (Amlogic S905X3)
+To: Lucas <bigheadrodeo@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,78 +114,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Joseph and Emanuele,
+Hi Lucas,
 
-On 7/16/2026 10:25 AM, Emanuele Ghidoli wrote:
-> 
-> 
-> On 7/13/26 10:45, Joseph Guo wrote:
->> When boot_fdt_handle_region() attempts to reserve a DTS reserved-memory
->> region via lmb_alloc_mem(), it may receive -EINVAL if the region's
->> physical address falls outside the LMB-managed memory range (i.e.
->> below PHYS_SDRAM on platforms where U-Boot does not manage the lower
->> DRAM window).
->>
->> A typical example is platforms like i.MX95 where PHYS_SDRAM starts at
->> 0x90000000, but remoteproc/rpmsg carveouts (vdev vrings, vdev buffer,
->> resource table) are placed at 0x88xxxxxx by hardware convention. Those
->> addresses are unreachable by U-Boot's allocator anyway, so failing to
->> mark them reserved has no practical consequence -- U-Boot will never
->> accidentally place the initrd or FDT blob there.
->>
->> Printing ERROR for a condition that is harmless and expected on many
->> platforms is misleading. Downgrade the -EINVAL case to debug() to
->> suppress the spurious output while preserving full visibility under
->> DEBUG/log builds.
->>
->> Real failures (e.g. -EEXIST from an overlapping reservation) continue
->> to be reported as ERROR.
+On Thu, Jul 9, 2026 at 8:54=E2=80=AFAM Lucas <bigheadrodeo@gmail.com> wrote=
+:
+>
+> I am trying to use the odroid HC4 with Armbian Linux and two 3.5 inch SAT=
+A
+> HDDs physically inserted. I believe I have traced a bug to uboot code at
+> the start of the boot process.
+>
+> The issue is documented here:
+> https://github.com/armbian/build/issues/9532
+>
+> I have two versions of Armbian, one works and one doesn't:
+> Armbian_26.5.1_Odroidhc4_trixie_current_6.18.33_minimal.img.xz - fails
+> Armbian_25.8.1_Odroidhc4_bookworm_current_6.12.41_minimal.img.xz - works
+>
+> Both versions boot fine with no HDDs inserted. Some SATA devices boot fin=
+e.
+> These are powerful WD Red enterprise drives. When I interrupt boot by
+> pressing any key, I can run `scsi scan` and `boot` and have it boot
+> successfully on both versions. I also see HDMI visual artifacts during th=
+e
+> scsi scan sequence (the text becomes garbled on a few lines) that always
+> means the boot will be successful.
+>
+> I tried compiling edits to /boot/boot.cmd. These edits did persist (I saw
+> my echo commands) but did not fix the problem. There is part of the boot
+> sequence that happens before the compiled boot.cmd runs.
+>
+> I tried setting preboot flags without recompilation, but can't figure out
+> if this is supported on Armbian / HC4.
+>
+> I believe this preboot portion is controlled by uboot.
+>
+> I made some edits to the armbian code and ran a `compile.sh` command that
+> seems to create a new uboot. I wrote that to the SD card and the board no
+> longer boots with that card.
+>
+> In order to diagnose further, I could use some help confirming that this
+> portion of boot is controlled by uboot.
 
-I sent a similar patch 2-3 weeks ago [1], and was planning to send a v2
-that also change lmb_free() to return -EINVAL to also catch the free
-scenario.
+PCI-based SATA drives could be spinning up either during preboot or
+after, depending how u-boot is configured. It would be more helpful if
+you can post the following info:
 
-[1] https://patch.msgid.link/20260627204851.1151419-1-jonas@kwiboo.se/
+- Which version of u-boot, and whether Armbian has any downstream
+patch applied on top of the mainline u-boot source. If you're not
+sure, post the GitHub URL of the Armbian u-boot source.
+- The content of the defconfig file used in this u-boot, ie.
+./configs/xxx_defconfig (where xxx is the board name). It probably can
+be found in some build shell scripts.
+- If possible, power up, interrupt u-boot countdown and list the following =
+info.
+ver
+printenv
 
-Regards,
-Jonas
+For reference, here is the commit to fix this problem, but I have
+tested only with <=3D 4TB HDDs.
+https://github.com/u-boot/u-boot/commit/53cc4332b3b37218a7cdab8bdb953da57ee=
+c2668
 
->>
->> Fixes: 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
->> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
->> ---
->>  boot/image-fdt.c | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
->> index 9e0e0f93edd34ae9056926883b1a802858e179d9..2175fa338f55110862100fa9f491a0957e85ce56 100644
->> --- a/boot/image-fdt.c
->> +++ b/boot/image-fdt.c
->> @@ -95,6 +95,9 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
->>  		debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
->>  		      free ? "freed" : "reserved", (unsigned long long)addr,
->>  		      (unsigned long long)size, flags);
->> +	} else if (ret == -EINVAL) {
->> +		debug("   skipping fdt memory region outside LMB range (addr=%llx size=%llx flags=%x)\n",
->> +		      (unsigned long long)addr, (unsigned long long)size, flags);
->>  	} else {
->>  		printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
->>  		       free ? "freeing" : "reserving", (unsigned long long)addr,
->>
->> ---
->> base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
->> change-id: 20260713-downgrade-f8319ab2d75b
->>
->> Best regards,
-> 
-> Hi Joseph,
-> 
-> Tested on Toradex Aquila iMX95, which has reserved-memory regions for
-> the Cortex-M7 (vrings, vdev buffer, resource table) below PHYS_SDRAM.
-> The spurious ERROR messages are gone and boot is unaffected.
-> 
-> Kind regards,
-> Emanuele
-> 
-> Tested-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-
+All the best,
+Tony
