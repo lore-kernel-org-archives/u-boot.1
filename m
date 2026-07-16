@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C1BEC44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 06:29:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB91C44501
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 06:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9272584D2F;
-	Thu, 16 Jul 2026 08:29:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 73A4784D65;
+	Thu, 16 Jul 2026 08:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WdQCByHc";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XkQLpp1w";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="oNMOFQe5";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="H8bZdMmJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAC3F84D76; Thu, 16 Jul 2026 08:29:42 +0200 (CEST)
+ id 49D0584ACE; Thu, 16 Jul 2026 08:29:48 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C8DF84ACE
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:29:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3931D84D8A
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:29:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=badhrinath.s@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G3wQVg1689599
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:37 GMT
+ 66G3wgSx1573758
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=b0TpRQol1LU
- lLB3rnDFo39dBPctdLG+uihBtenXYiYE=; b=WdQCByHcc3YMU9O/lHIlhUOz1W7
- 9kTCpcCvB6cda/1UEYsNwZmri6ALiaIO67darZu4w588xityfBOfriiKpVAa+QT9
- xQCjuWMSMu7++Ndb9fVfCaJQ0/x1c3Fan3yzjb4SVhOwNexxsjE6CWEKtzLZDbet
- ZcOCJ/rVvyagZaFTS2LnjSjH5jO18AyEaPb3ow+/xmv6wPW502tkQU2+Dsx08xuz
- FtH8pdeh5DGtwPAY9IOVrWg8utRHw4pe9C7nWSS8JmVheYckL7o0D7ZEOWGmBrIy
- bCOEae6s8Ru4VvgKWUGg11doTjFnQpnpZPmJ2ino4betvQ51oMfptugMfzw==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe7nmmbxg-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=yIoUbQeCQGD
+ bm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=; b=oNMOFQe5dVN56j18okiWF593gEP
+ V20g7l9RyO//+4HdkPUsO9AgWh39Kt/Y2uQHoPLD+eXdkN1Q23JRy4eoO689b32U
+ ouGMSW/6AgpUq2ZrnkVuR3RSSrS11oqYMNyW0lIlYJzCP/ePkn2UiZPPtoBobvZu
+ 9jyEkl/GqLqnl4s1Cs5Y3ZsGcVRlfl2sT+J/zv82BZAPtXLvSqD7GtSNnP8iL3cD
+ lNQbswKb6yQY5qFDlbaH1dXGCqkmzD6SY6BDjN/7eyFtODIaEnskz1DFM4vF437D
+ FN8qeZxKmAv25h1pXPTJMF9Oi/1eFGdmDLNiZxSxfDYD9t4PJpOd4F4ekcw==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe7q649v7-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:37 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-38dbf293831so6628556a91.3
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 23:29:37 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:44 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-c88aab7c1fcso14976762a12.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 23:29:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784183377; x=1784788177; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1784183384; x=1784788184; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=b0TpRQol1LUlLB3rnDFo39dBPctdLG+uihBtenXYiYE=;
- b=XkQLpp1w3tZYCtw7E3XWolq0JvEcdAAmPNzrZnkgO+XaaUwqf2+xLKWZzunv87fyDX
- zEuYK9Ub5HNfFMk39lc21whldDnBdYpj05Q3GCqM1JI5eQm1v4QgUWjEfOYXEfAQDPKu
- QM661iSy+l5yn1WqPd66kKy5gjbBzZJ8nG64QmO/UMawn4ZAX6kxlvd983gywFCdCQIf
- JIAGLAzmxIKb9g+2f/qFCyJ8VZt9lTFAU2qjhNDLbAdAgOCMrTNcPCMeajAqdhp/oACd
- /sOwu+hHtqdRMSFvhL9SkOmPEwdVOZ3KH6FrF1fXgyivhZk2+BWJkwb6LCjV4JhOAr0B
- Btng==
+ bh=yIoUbQeCQGDbm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=;
+ b=H8bZdMmJIwSasp2/mMBdTYVrrAukPYBKfv/7C0WeGYoQO97TVZLbPa3mLwsWYWtxt3
+ zJkWfpeRcYEUzg8A2Jy1Zc4uQDDkMWEn7InimaApTjav1HBODB3RaxL114+02KSW7Sre
+ Igj04XIagqBqL3u5TVNsmDI4n0uCXSMx2inn+EMdsLq6PswLjIGkeOzF+zmvnnWHmOcb
+ qGG9jq61yst/7zzpceHy7b0jFvdtlMegamhRycd37ImOPVMKR9s2WmaOKxKgR6qFkuJ8
+ 1YfXk554sDdFoNX4pphlH5fHceZpKwDc8/Zu3F2qm/0xNe3HmZlWhBtff7KaJ3LvBYiJ
+ j4Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784183377; x=1784788177;
+ d=1e100.net; s=20251104; t=1784183384; x=1784788184;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=b0TpRQol1LUlLB3rnDFo39dBPctdLG+uihBtenXYiYE=;
- b=LL84F/m4wA8c8BGR58RoKJRXi/k+Q++4852dG/BlMUnOnPn5Eys/gdOw8Q8PCPAL2L
- 8hWHtOzmVx3/6zUW5ngX1okzLS4sUgRitfz5rNLzMSGccPjfqjedv/kxE1lKhpWmVtfa
- H81OtdExk0vSMDEcwv1o4u3Phr+zGneb9pkGuCXh0EKGOYpOhncRQ+8vIJQ6Rz+u+4F3
- W3SRpj/qepaUhW9H9ReoPcqd2BuHCxZFoXf6Jqi7vU2eT61FUcIthk1WxIW5p4HN3ZeB
- 6Yf1lE2zDzQjyR7zLEdNzAjF19a24N79xkoo9NgEuRR0NFkuxRX7vr/8zMIyblxdX03I
- gCcg==
+ bh=yIoUbQeCQGDbm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=;
+ b=kNwKOYUddv0+yRifAkvdIcJlyBhOahRe4BS4ExdBsm/zAb1asGC/OPu7Nkx/jo+8Pa
+ x2YylXcr2E+HFz51uplET2ikvj+xeO7IkuqJvjWE2aDzcFL1ohQzq0Gl4vTWmmy8eARM
+ VOqo3W2N9Ll+Oj95rCwMZwsHjDEB+O2RKei1IS8/WPV49G5V1w3pCZJm0YqnAvM26mEF
+ JOt2o+S2ly6Kl05gYRneDj7ogFFL/sAYssuSheN4KdzlsObfTz2ydxc4rV4Wbj0NaEii
+ H/21eDJaOmAknYpgce9zIfrzCD8bKnFyxp6qHlejLqaVEr0A41S9fFX4MXygPaw0Hd86
+ /qsg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpB4V+2c5K/u895GKkdhvkssM/Ace3JVn5iRv3+7r29s6PYHfLIYKB/iBu4zWsVKQF2psJa1u8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKtbjrbSS1Fhjdp+sVVOGcbGEU/K8ODInKfPHMJAbRe24Xa8bs
- BTga6M216PTonUp7P/MHksA+0NzqHWXE0Zapsz5QMNzU4/IQxmzObgnwAFHiRg9R6BWj6rmcFYt
- bQsBYsEwluzzbDecrkyBi+N73n2vMuBoXhedxYQ0nwWCIZcsPvsl1cPU3
-X-Gm-Gg: AfdE7clfb3hPrwPaG9KzpPFE5L36mcM+Yukd7ICy3JKnn6W4svw+NyvkDYbPjlf/2XI
- eAfta6VJTMaN0JljEsI9uO5RV1jTyn62+jW0k00d9oJQ7Vzs8rOgfZOlbPnFTxRJTr/ARbo0rUh
- TJvHTJ3rJpzeEIGbFRcyzKhXucd4nvX5Y32XnL0H+DoeeSR+JcaFVv4KsyiPUeLfgusu2T9iib3
- 02UajMSBeFi/CmYWt1m0P2XtywRewfrR/st3RIziZHteDDj4nQApTnSyGqZ2gC9JvHwD24i5Y4H
- fjzc/KoZ9GvwqTpYqoLQiNLxzNYOeU3B42y+Av20dm8xCGCMRY3N6eYmbMXgSiITfJvYt4BAWSA
- fd10S/VGrpWEvU6nIRjmnFtRwtKTy5Ij7hMEZSki+OsxsNwAwdHMXYAK3tD4n+Nb7cC0p9HhatX
- JYokGmvtK8W4Xpp2s=
-X-Received: by 2002:a17:90a:c883:b0:38e:101f:c867 with SMTP id
- 98e67ed59e1d1-38e101fc92fmr10452650a91.18.1784183376706; 
- Wed, 15 Jul 2026 23:29:36 -0700 (PDT)
-X-Received: by 2002:a17:90a:c883:b0:38e:101f:c867 with SMTP id
- 98e67ed59e1d1-38e101fc92fmr10452624a91.18.1784183376258; 
- Wed, 15 Jul 2026 23:29:36 -0700 (PDT)
+ AHgh+RqwZI2h8vBspJUu08E0aBoBIL158wATI/oBoPTX+K0BR4gw8jTf0/jx75ymDlnzMAFFZVvDgVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJr2WcpaMwbZa+1R+6GaqGsOrCN2lGYqp/eBJ+JKMinM8+q+4U
+ RiYnrbOcDYXUYFE8fqYMwxZzV61RaB0SVLjtzWN/CJfr5fbqIs7D5K+2DltwOhi7VcaUhifgkio
+ 031kQ/vSRHpheLTJRfDwaJCFZiLMKZpDPrBrkSPvKhnc2pas6NeM8P/K6
+X-Gm-Gg: AfdE7cmDpnSPqi30d375S2TO64oIIcvOczDHXKwyGrUcfwl5ydOzpPmA2x2dN5SvCBx
+ cNcrYpIgX3MkaIoEmxgKf3iWMZYXE197powBU6JRyU4zKBhchPlX1koNbyw6HEyQyiuJ+Nn+G9M
+ +6nt49fp5pdaGw3xZHJewz/vSS977Mx9ByY9WHfVT5d2hXHrVMXMbZPam6DuOnHUiIz3wKr2oBQ
+ UlF3ZLtNcK5CHKsgI1oHyI0vpMwYmAMGJSSiuOIUBjEysnHBd+qC0kpGzpGLppiZfTdekyym+a/
+ aANqdAsv4XcplrbmYMl/PIEYatE7cGAGYQOPqSBjsL62PFgbsWB8co5eziTGm7yfm2qJzUI1jOV
+ Lblov2O8GuiWdecj0aCUItLaAc663B+ndyqY2bpZGJDFkE2emUqAFEu5flr3qqnhe61uQ8u0GGF
+ 8/LASXHbT2gHPPkeU=
+X-Received: by 2002:a05:6a21:4882:b0:3c3:7cf0:3874 with SMTP id
+ adf61e73a8af0-3c37cf06741mr3809040637.7.1784183383730; 
+ Wed, 15 Jul 2026 23:29:43 -0700 (PDT)
+X-Received: by 2002:a05:6a21:4882:b0:3c3:7cf0:3874 with SMTP id
+ adf61e73a8af0-3c37cf06741mr3809026637.7.1784183383331; 
+ Wed, 15 Jul 2026 23:29:43 -0700 (PDT)
 Received: from hu-badhrina-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3140e6c08eesm9895966eec.21.2026.07.15.23.29.30
+ 5a478bee46e88-3140e6c08eesm9895966eec.21.2026.07.15.23.29.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2026 23:29:35 -0700 (PDT)
+ Wed, 15 Jul 2026 23:29:42 -0700 (PDT)
 From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 X-Google-Original-From: Badhrinath S <badhrina@qti.qualcomm.com>
 To: trini@konsulko.com, peng.fan@nxp.com, jh80.chung@samsung.com,
@@ -104,40 +104,41 @@ To: trini@konsulko.com, peng.fan@nxp.com, jh80.chung@samsung.com,
  michal.simek@amd.com, luca.weiss@fairphone.com, adrian@mainlining.org,
  danila@jiaxyga.com, aswin.murugan@oss.qualcomm.com,
  david.wronek@mainlining.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v3 3/4] arm: dts: ipq9650: Add override dtsi
-Date: Thu, 16 Jul 2026 11:53:17 +0530
-Message-Id: <20260716062318.4121929-4-badhrina@qti.qualcomm.com>
+Subject: [PATCH v3 4/4] configs: Add defconfig for ipq9650 RDP488
+Date: Thu, 16 Jul 2026 11:53:18 +0530
+Message-Id: <20260716062318.4121929-5-badhrina@qti.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
 References: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfX5wTgAqNGWpUc
- vsf83LG+Az1RQ+IOUwsmlntEjJsBWZ1DRu1GbTwDP1YPvLOpDvUft5J7Qms7lahLF65vAStZDek
- BJqFSsx9u9M6sw1Wmsk1VCAQ21HAK8M=
-X-Authority-Analysis: v=2.4 cv=cuGrVV4i c=1 sm=1 tr=0 ts=6a587a51 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfX4Fj7kizXPQ/P
+ XKW29mVJy4+rpTK9BgrdjocHGDoBaaJRh6rWrkkj+WcB4sKgnfjFnoMicHydvv0q0t/WMU7GTUx
+ 9VX5vzdZSb1joCqZdy/pR/n58jVccYw=
+X-Proofpoint-ORIG-GUID: 7SMJKUqCQdl32dain7bdfIEoa4G0Tse7
+X-Proofpoint-GUID: 7SMJKUqCQdl32dain7bdfIEoa4G0Tse7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfXzLnvS8t+BZNX
+ Y7foZhO9xerHqwmxSL4Z+7xFTNqhZheRnqLHn8gGcnIdKPH0OJ6t0rZFH5SuJiSyCBFS8ijuN2o
+ eKBY5CVplgFP8Nnv5V2tr4qMsXB2Nt3uRqzluIbmkdeGaZYtcefFJY5JVPFKLeszjzcDiFa7vrV
+ M+IJ1a2zHKfE0AEEbI2bzRmFo016PjovQHgt7xvKY7hhyfyKYuObdmG3PCwhobn3DvXOWRLhrR5
+ bQO5r4ucAio9UlTtlIJbbPFSFvZczjJ1nTBXd8I3f40qAKyRFPVuaCvBPk1KQRbzoiUOtz7J4Bx
+ VOn/WH5wYL4MYvE5VoQqnQKBhMQLtDRc5CoZ22OgjQBdheFQMsg8Il8jr2uZJ/yGRf+5lLp4Hrh
+ rl30F1e4IbFAyr5tpDgSqeXVm0ttbsw3sMtbxxAsmw92BNHPpAZQxBsB8T/Z42xLRem/n9LNPb5
+ wEYauryCE4XAjnDMkcQ==
+X-Authority-Analysis: v=2.4 cv=BajoFLt2 c=1 sm=1 tr=0 ts=6a587a58 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=kOoMYcB8HEV07GVGuZsA:9 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-ORIG-GUID: jCzzUuOdjII-BOv969UtRcoS23L2j8S9
-X-Proofpoint-GUID: jCzzUuOdjII-BOv969UtRcoS23L2j8S9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfX2hhV2l9Cpi+n
- 0n9jjnLucTAwzznT9z8agNY2kEpyk7vESiuZxLkLfdiMGQCgZHEAazFbwuLwZUD7+W+DtxRUGUY
- gOskDyZCCMsmhKtx7cFdy88VQmAG3q4d9hMGsH4mFegEVmbFkl91FDzL8THWBYc0+8cDHBRHkas
- SAi4PlxUdat+05tvqqNnnEiq2hWj4T8SaomXgB0heQ6Bv8jLbg2V+FLWQUiT4vM8U7tKw+PJ3ns
- CG79XRZGyQdxGLkino60naKTN8ez8C1iou8kaOUb7tDFqjBfTX1Pg3pohmec7MmbREVYcPsSFQ4
- OfdXFY1qe+m2Ew27vPJnZsgD0EBzNBtG3qTJ58TELasW7BUq1UX8tgrcVz8IvfxpRKQC3g7EttO
- WQWL+1Kk8Km6uCbBx7f5OXpp+0NWX2ax8ciXJKJaP0AiMlmLb6f/7Sw8h/fhG3KdbJ9HV+vw7+S
- +ZDGh/QAKZNgQFaxjjA==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
+ a=wHs4SkhdiV1T9ea67W0A:9 a=bFCP_H2QrGi7Okbo017w:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_02,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 bulkscore=0 lowpriorityscore=0 malwarescore=0
- phishscore=0 priorityscore=1501 spamscore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160065
+ suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015 bulkscore=0
+ impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607160065
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,36 +157,87 @@ X-Virus-Status: Clean
 
 From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 
-Add U-Boot specific device tree overrides for IPQ9650 RDP488 board.
-This includes memory configuration and SDHCI reset configuration.
+Add default configuration for the IPQ9650 RDP488 board with eMMC boot
+support.
 
 Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
 ---
- arch/arm/dts/ipq9650-rdp488-u-boot.dtsi | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+ configs/qcom_ipq9650_mmc_defconfig | 21 +++++++++++++++++
+ configs/qcom_ipqdefconfig          | 37 ++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
+ create mode 100644 configs/qcom_ipq9650_mmc_defconfig
+ create mode 100644 configs/qcom_ipqdefconfig
 
-diff --git a/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
 new file mode 100644
-index 000000000000..dd03de98b921
+index 000000000000..de730067359c
 --- /dev/null
-+++ b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
-@@ -0,0 +1,15 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * IPQ9650 RDP488 board device tree source
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/ {
-+	/* Will be removed when SMEM parsing is updated */
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x0 0x20000000>;
-+	};
-+
-+};
++++ b/configs/qcom_ipq9650_mmc_defconfig
+@@ -0,0 +1,21 @@
++#include "qcom_ipqdefconfig"
++CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
++CONFIG_TEXT_BASE=0x8a280000
++CONFIG_NR_DRAM_BANKS=24
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_OFFSET=0
++CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
++CONFIG_SYS_LOAD_ADDR=0x90000000
++CONFIG_DEBUG_UART_BASE=0x1a98000
++CONFIG_DEBUG_UART_CLOCK=14745600
++CONFIG_SYS_PBSIZE=1024
++CONFIG_CLK_QCOM_IPQ9650=y
++CONFIG_CMD_MMC=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_MSM=y
++CONFIG_PINCTRL_QCOM_IPQ9650=y
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_SYS_MALLOC_LEN=0xC0000
+diff --git a/configs/qcom_ipqdefconfig b/configs/qcom_ipqdefconfig
+new file mode 100644
+index 000000000000..6a7f3c1b4ac6
+--- /dev/null
++++ b/configs/qcom_ipqdefconfig
+@@ -0,0 +1,37 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_DEBUG_UART=y
++CONFIG_REMAKE_ELF=y
++# CONFIG_EFI_LOADER is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_BOOTSTD is not set
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_PART=y
++CONFIG_OF_LIVE=y
++CONFIG_CLK=y
++CONFIG_MSM_GPIO=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++CONFIG_MISC=y
++CONFIG_QCOM_GENI=y
++CONFIG_MTD=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY=y
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_MSM_SERIAL=y
++CONFIG_MSM_GENI_SERIAL=y
++CONFIG_SOC_QCOM=y
 -- 
 2.34.1
 
