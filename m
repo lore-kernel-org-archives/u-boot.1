@@ -4,141 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB91C44501
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 06:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53006C44501
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 06:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73A4784D65;
-	Thu, 16 Jul 2026 08:29:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2161849AA;
+	Thu, 16 Jul 2026 08:32:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="oNMOFQe5";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="H8bZdMmJ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="lzNCpyB5";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PAj0arRF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D0584ACE; Thu, 16 Jul 2026 08:29:48 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 4622984B48; Thu, 16 Jul 2026 08:32:52 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3931D84D8A
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:29:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8231807C4
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 08:32:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=badhrinath.s@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66G3wgSx1573758
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:44 GMT
+ 66G3wamB1754298
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:32:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=yIoUbQeCQGD
- bm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=; b=oNMOFQe5dVN56j18okiWF593gEP
- V20g7l9RyO//+4HdkPUsO9AgWh39Kt/Y2uQHoPLD+eXdkN1Q23JRy4eoO689b32U
- ouGMSW/6AgpUq2ZrnkVuR3RSSrS11oqYMNyW0lIlYJzCP/ePkn2UiZPPtoBobvZu
- 9jyEkl/GqLqnl4s1Cs5Y3ZsGcVRlfl2sT+J/zv82BZAPtXLvSqD7GtSNnP8iL3cD
- lNQbswKb6yQY5qFDlbaH1dXGCqkmzD6SY6BDjN/7eyFtODIaEnskz1DFM4vF437D
- FN8qeZxKmAv25h1pXPTJMF9Oi/1eFGdmDLNiZxSxfDYD9t4PJpOd4F4ekcw==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe7q649v7-1
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ l5941pDUMVnKM3XD3V89uyPOys1ueGmcbKWNTHrieS4=; b=lzNCpyB5G01DuY3M
+ h6aU0Y2LFLq48oXjOtIkZjFKepXkGtll3w7jxcIW1wcDPb8kOy/Z8mu7Q1Sxenhe
+ FFUcC2k22nbdUYrktDvRommjw+V2pvlRpwSGvIDgsTg9Px9ugctIH6YoDQ2fAQ7n
+ HGaaWsztYz+zYlx9QkKYmaGtifELIgZNOYcQ2i4M18ATUdoLYdm84OVt9GOLZJIJ
+ 6btvN8XtXOmoxeA6ZJyJGFIfWIouyzK6X0Dx3weIIZ2hStN7qGE3AEhFeRsC9edS
+ yWh4CLHZ5HO2VU/98BeLSTx35sffw64gETsgUAxH5Iyb/6vE9TjQoH4klHmnOn+d
+ 3exQcQ==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe855cb8v-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:29:44 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-c88aab7c1fcso14976762a12.3
- for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 23:29:44 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:32:47 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-c856470fe9fso2703598a12.2
+ for <u-boot@lists.denx.de>; Wed, 15 Jul 2026 23:32:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784183384; x=1784788184; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=yIoUbQeCQGDbm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=;
- b=H8bZdMmJIwSasp2/mMBdTYVrrAukPYBKfv/7C0WeGYoQO97TVZLbPa3mLwsWYWtxt3
- zJkWfpeRcYEUzg8A2Jy1Zc4uQDDkMWEn7InimaApTjav1HBODB3RaxL114+02KSW7Sre
- Igj04XIagqBqL3u5TVNsmDI4n0uCXSMx2inn+EMdsLq6PswLjIGkeOzF+zmvnnWHmOcb
- qGG9jq61yst/7zzpceHy7b0jFvdtlMegamhRycd37ImOPVMKR9s2WmaOKxKgR6qFkuJ8
- 1YfXk554sDdFoNX4pphlH5fHceZpKwDc8/Zu3F2qm/0xNe3HmZlWhBtff7KaJ3LvBYiJ
- j4Fg==
+ d=oss.qualcomm.com; s=google; t=1784183567; x=1784788367; darn=lists.denx.de; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=l5941pDUMVnKM3XD3V89uyPOys1ueGmcbKWNTHrieS4=;
+ b=PAj0arRF9jkgH1BXffefLJsl2CSvCmJBSdbIge6mSoiZ+73te3+0i4RghXmjx8yBgT
+ 8Ow7GuZaxVo14sQokReOrykFbyyFXRIB4WqJzteBYis5iLAikcVFEKaGdACmqYOA7AL+
+ skStLhwN/5JvSSJ/DeF5UwkOXwKqT8eXFrAuDUwvHDSgx1vsXkekGs19r7J66LOWY9rr
+ CLsvHeyk2C2J/+0ZRrR+9dbB/FYADv29ZXjHhdMCkN+eXc5+wWC/MbrfKX40FRqv/rw5
+ aGUzG53wMFiT0JoUtqiREgB62olb8HgBkttfD/EeXafJdgZAeUaqzr7qBybV09jqZUkH
+ g3JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784183384; x=1784788184;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=yIoUbQeCQGDbm7WzNsgI3LppbHaTO/0R7jsLgtdAPnY=;
- b=kNwKOYUddv0+yRifAkvdIcJlyBhOahRe4BS4ExdBsm/zAb1asGC/OPu7Nkx/jo+8Pa
- x2YylXcr2E+HFz51uplET2ikvj+xeO7IkuqJvjWE2aDzcFL1ohQzq0Gl4vTWmmy8eARM
- VOqo3W2N9Ll+Oj95rCwMZwsHjDEB+O2RKei1IS8/WPV49G5V1w3pCZJm0YqnAvM26mEF
- JOt2o+S2ly6Kl05gYRneDj7ogFFL/sAYssuSheN4KdzlsObfTz2ydxc4rV4Wbj0NaEii
- H/21eDJaOmAknYpgce9zIfrzCD8bKnFyxp6qHlejLqaVEr0A41S9fFX4MXygPaw0Hd86
- /qsg==
+ d=1e100.net; s=20251104; t=1784183567; x=1784788367;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=l5941pDUMVnKM3XD3V89uyPOys1ueGmcbKWNTHrieS4=;
+ b=pixZhBM3hcKOyxmi7E29r5B1w0cNYEs48BRplqu2F8NA21qDJfYzAMMalizX/h8FHW
+ wNOeAwF1LZXsIOHiHRa9ouFDQ2CaSWeYpapOtMF+PKX6vRjcyZKybBXgyw7+PfU/N4ym
+ J2Z/5goa7f761URDbPGgAeupNicQvBwjNLvW5elaP6VNn9gOxfa2vOChz8xmdsRNFVsk
+ HTMUdmzz32InqN5OTS34dGvdj/NNn0dlodTQfidpSVykwJbgO5xhGCeR1vLf8nj+cCNF
+ ki0It4jEHJqfdOr0p/85BO3FdFFbtW4PIB2qrDVWG5DAEA9QOJZaTtR8VqtpwBwHrrcK
+ POLg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqwZI2h8vBspJUu08E0aBoBIL158wATI/oBoPTX+K0BR4gw8jTf0/jx75ymDlnzMAFFZVvDgVE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJr2WcpaMwbZa+1R+6GaqGsOrCN2lGYqp/eBJ+JKMinM8+q+4U
- RiYnrbOcDYXUYFE8fqYMwxZzV61RaB0SVLjtzWN/CJfr5fbqIs7D5K+2DltwOhi7VcaUhifgkio
- 031kQ/vSRHpheLTJRfDwaJCFZiLMKZpDPrBrkSPvKhnc2pas6NeM8P/K6
-X-Gm-Gg: AfdE7cmDpnSPqi30d375S2TO64oIIcvOczDHXKwyGrUcfwl5ydOzpPmA2x2dN5SvCBx
- cNcrYpIgX3MkaIoEmxgKf3iWMZYXE197powBU6JRyU4zKBhchPlX1koNbyw6HEyQyiuJ+Nn+G9M
- +6nt49fp5pdaGw3xZHJewz/vSS977Mx9ByY9WHfVT5d2hXHrVMXMbZPam6DuOnHUiIz3wKr2oBQ
- UlF3ZLtNcK5CHKsgI1oHyI0vpMwYmAMGJSSiuOIUBjEysnHBd+qC0kpGzpGLppiZfTdekyym+a/
- aANqdAsv4XcplrbmYMl/PIEYatE7cGAGYQOPqSBjsL62PFgbsWB8co5eziTGm7yfm2qJzUI1jOV
- Lblov2O8GuiWdecj0aCUItLaAc663B+ndyqY2bpZGJDFkE2emUqAFEu5flr3qqnhe61uQ8u0GGF
- 8/LASXHbT2gHPPkeU=
-X-Received: by 2002:a05:6a21:4882:b0:3c3:7cf0:3874 with SMTP id
- adf61e73a8af0-3c37cf06741mr3809040637.7.1784183383730; 
- Wed, 15 Jul 2026 23:29:43 -0700 (PDT)
-X-Received: by 2002:a05:6a21:4882:b0:3c3:7cf0:3874 with SMTP id
- adf61e73a8af0-3c37cf06741mr3809026637.7.1784183383331; 
- Wed, 15 Jul 2026 23:29:43 -0700 (PDT)
-Received: from hu-badhrina-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AHgh+Rq/+ZPNABy4meUDIUe+eZDKJg0F9svu8IPq8aOX5ADIFaXCo9vvHccAv1d1twij7L1ipsQ5qdU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBmUTI8BsGaAX61x5xpbCXH4d/qKTby9shRngMf5n7malUj0FC
+ 112QJ7y9ModA1h1fxhqBuRC/R0nhaq/rFJ1B01Ka7v2iKEw9DoX1dQOlZmtzinXhvjRA7E4LBNl
+ fuM3GDx49hRoKbBmQtKsDpe4QfUT1RHSCur89/7tUUhP/8EhaFR4LfEi8
+X-Gm-Gg: AfdE7cnCQVbxqwYZ/WZrBrrYtj74+W79QMeajZHk4aH1mSagMUQzot2CcBfq49RpiYL
+ i35NKte7QJqGmcerEUBVVRW1uCXj7rjr4FtplKslrsZh5IZrUbkPvemB11yAZXaS+hoA6a3kg7J
+ 8cmqN4MdBBCDWmZOJfpO8mUNgSmK55+HgQBFhg2qutJloYadf54sekhjmHZWGsf5iIv19zx6Hp5
+ QPgzbW7IYDud0hmp5tRcgy2821QiDtfPxm+rJktSGuvFX2aKjNxiuAIeheM/F/aQXI8dUq9Aygk
+ zo5KeLiNOgXkkha82mOKcia2giZpaVVsY7uVS3J1JCaeTwxOGXD/IN1ecyjvZWmTCIsaP7gjHbv
+ IA03Gfn1BiVLhiNCWYSnOj/ngK/8ws1k=
+X-Received: by 2002:a05:6a20:9149:b0:3bf:aa1f:4881 with SMTP id
+ adf61e73a8af0-3c110ad509cmr21301967637.56.1784183567065; 
+ Wed, 15 Jul 2026 23:32:47 -0700 (PDT)
+X-Received: by 2002:a05:6a20:9149:b0:3bf:aa1f:4881 with SMTP id
+ adf61e73a8af0-3c110ad509cmr21301939637.56.1784183566598; 
+ Wed, 15 Jul 2026 23:32:46 -0700 (PDT)
+Received: from [10.152.205.146] ([202.46.23.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3140e6c08eesm9895966eec.21.2026.07.15.23.29.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jul 2026 23:29:42 -0700 (PDT)
-From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
-X-Google-Original-From: Badhrinath S <badhrina@qti.qualcomm.com>
-To: trini@konsulko.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, lukma@denx.de, badhrinath.s@oss.qualcomm.com,
- michal.simek@amd.com, luca.weiss@fairphone.com, adrian@mainlining.org,
- danila@jiaxyga.com, aswin.murugan@oss.qualcomm.com,
- david.wronek@mainlining.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v3 4/4] configs: Add defconfig for ipq9650 RDP488
-Date: Thu, 16 Jul 2026 11:53:18 +0530
-Message-Id: <20260716062318.4121929-5-badhrina@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
-References: <20260716062318.4121929-1-badhrina@qti.qualcomm.com>
+ 5a478bee46e88-3140e531c6csm7824744eec.8.2026.07.15.23.32.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 15 Jul 2026 23:32:46 -0700 (PDT)
+Message-ID: <f47035e8-7dc0-4f37-a2c4-abb768acf0f0@oss.qualcomm.com>
+Date: Thu, 16 Jul 2026 12:02:36 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] arm: dts: ipq9650: Add override dtsi
+To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
+ peng.fan@nxp.com, jh80.chung@samsung.com, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, marek.vasut+renesas@mailbox.org,
+ michal.simek@amd.com, quic_varada@quicinc.com,
+ luca.weiss@fairphone.com, danila@jiaxyga.com,
+ balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com,
+ adrian@mainlining.org, david.wronek@mainlining.org,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20260610053655.2825589-1-badhrinath.s@oss.qualcomm.com>
+ <20260610053655.2825589-4-badhrinath.s@oss.qualcomm.com>
+ <c281dc48-a940-4d6f-a886-040a75d6a0b0@linaro.org>
+Content-Language: en-US
+From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+In-Reply-To: <c281dc48-a940-4d6f-a886-040a75d6a0b0@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfX4Fj7kizXPQ/P
- XKW29mVJy4+rpTK9BgrdjocHGDoBaaJRh6rWrkkj+WcB4sKgnfjFnoMicHydvv0q0t/WMU7GTUx
- 9VX5vzdZSb1joCqZdy/pR/n58jVccYw=
-X-Proofpoint-ORIG-GUID: 7SMJKUqCQdl32dain7bdfIEoa4G0Tse7
-X-Proofpoint-GUID: 7SMJKUqCQdl32dain7bdfIEoa4G0Tse7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NSBTYWx0ZWRfXzLnvS8t+BZNX
- Y7foZhO9xerHqwmxSL4Z+7xFTNqhZheRnqLHn8gGcnIdKPH0OJ6t0rZFH5SuJiSyCBFS8ijuN2o
- eKBY5CVplgFP8Nnv5V2tr4qMsXB2Nt3uRqzluIbmkdeGaZYtcefFJY5JVPFKLeszjzcDiFa7vrV
- M+IJ1a2zHKfE0AEEbI2bzRmFo016PjovQHgt7xvKY7hhyfyKYuObdmG3PCwhobn3DvXOWRLhrR5
- bQO5r4ucAio9UlTtlIJbbPFSFvZczjJ1nTBXd8I3f40qAKyRFPVuaCvBPk1KQRbzoiUOtz7J4Bx
- VOn/WH5wYL4MYvE5VoQqnQKBhMQLtDRc5CoZ22OgjQBdheFQMsg8Il8jr2uZJ/yGRf+5lLp4Hrh
- rl30F1e4IbFAyr5tpDgSqeXVm0ttbsw3sMtbxxAsmw92BNHPpAZQxBsB8T/Z42xLRem/n9LNPb5
- wEYauryCE4XAjnDMkcQ==
-X-Authority-Analysis: v=2.4 cv=BajoFLt2 c=1 sm=1 tr=0 ts=6a587a58 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=wHs4SkhdiV1T9ea67W0A:9 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: TLG0RaBxjSTJbaceRZZUwujdFcQC7uQ0
+X-Authority-Analysis: v=2.4 cv=KOlqylFo c=1 sm=1 tr=0 ts=6a587b0f cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=XqHo_Dx6wMs_QF-6aooA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NiBTYWx0ZWRfX1yxzDHns1ZkH
+ 6aNFUhZ02GwLuKS5/WWKivYv92OHkzPM+7NlKMyIcTsEscdIf4nDEsTvHGcvz3f84NYNFexQ8ES
+ OT4Poy94tHiR/He4H2wEBuraMt25rmG8W99ZIUvbrwtFr/i41spyaBOvKNW1bIcNYNJGmmX5VwM
+ LVeyZ23eAc9fw+6f/6Vo9HTZQOLETcUlrLK5UwjODXHU36QwX9jDi4i+OrvxAmPVR036w0BmntG
+ Q01q9kPQnJz21n3+nRJKIviRj8JoS7otrjQ7nhSixdTpeUkSEcG86m/gsLMCaLeKuSoiCU6COz2
+ +DpYcjcOYkrNMnXSbtfq86apFk3urdiy469W50F3xGTOd6tWvbuJ7jq8KkmoeUZ/xXal5fimn/O
+ /s/S7kJdLtx6Clr3KvtcfMBNr0d+XuFWPbfkUxkop4SSCK/QpZWJcqb5HvLYo1nhdt3KxxXTbX0
+ SpumbiW2Zxm8LEO7Kyg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NiBTYWx0ZWRfX9xr2zxwgqCh3
+ 6rgAMmJp9pE28DN15xzpL5SCAyHCeevsiAh+utJ5igijr2MWUroJzQj0VA86CH/rYTE6tZREqcY
+ NsGQl8xlooc+gz8sxy75UwYefuqIMMc=
+X-Proofpoint-ORIG-GUID: TLG0RaBxjSTJbaceRZZUwujdFcQC7uQ0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_02,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015 bulkscore=0
- impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 bulkscore=0 impostorscore=0 malwarescore=0 spamscore=0
+ clxscore=1015 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607160065
+ definitions=main-2607160066
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,89 +161,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+Hi Casey,
 
-Add default configuration for the IPQ9650 RDP488 board with eMMC boot
-support.
+On 6/30/2026 9:14 PM, Casey Connolly wrote:
+>
+>
+> On 6/10/26 07:36, Badhrinath S wrote:
+>> Add U-Boot specific device tree overrides for IPQ9650 RDP488 board.
+>> This includes memory configuration and SDHCI reset configuration.
+>>
+>> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+>> ---
+>> Changes in v2:
+>> - Fix SPDX license identifier to GPL-2.0-only (reported by Ferass)
+>>
+>>   arch/arm/dts/ipq9650-rdp488-u-boot.dtsi | 29 +++++++++++++++++++++++++
+>>   1 file changed, 29 insertions(+)
+>>   create mode 100644 arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+>>
+>> diff --git a/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi 
+>> b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+>> new file mode 100644
+>> index 000000000000..4733fc7ccd08
+>> --- /dev/null
+>> +++ b/arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+>> @@ -0,0 +1,29 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +/*
+>> + * IPQ9650 RDP488 board device tree source
+>> + *
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +/ {
+>> +    /* Will be removed when SMEM parsing is updated */
+>> +    memory@80000000 {
+>> +        device_type = "memory";
+>> +        reg = <0x0 0x80000000 0x0 0x20000000>;
+>> +    };
+>> +
+>> +};
+>> +
+>> +&sdhc {
+>> +    sdhci-caps-mask = <0x0 0x04000000>;
+>> +    sdhci-caps = <0x0 0x04000000>;    /* SDHCI_CAN_VDD_180 */
+>> +
+>> +    /*
+>> +     * This reset is needed to clear out the settings done by
+>> +     * previous boot loader. Without this the SDHCI_RESET_ALL
+>> +     * reset done sdhci_init() times out.
+>> +     */
+>> +    resets = <&gcc GCC_SDCC_BCR>;
+>
+> Send these fixes upstream please.> +
 
-Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
----
- configs/qcom_ipq9650_mmc_defconfig | 21 +++++++++++++++++
- configs/qcom_ipqdefconfig          | 37 ++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 configs/qcom_ipq9650_mmc_defconfig
- create mode 100644 configs/qcom_ipqdefconfig
+Removed the sdhc node from this patch as requested. The sdhc-related 
+changes will be upstreamed separately by the kernel team. Regarding the 
+memory node, it is currently required as a temporary workaround until 
+the SMEM parsing changes are merged.
 
-diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
-new file mode 100644
-index 000000000000..de730067359c
---- /dev/null
-+++ b/configs/qcom_ipq9650_mmc_defconfig
-@@ -0,0 +1,21 @@
-+#include "qcom_ipqdefconfig"
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_TEXT_BASE=0x8a280000
-+CONFIG_NR_DRAM_BANKS=24
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_DEBUG_UART_BASE=0x1a98000
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+CONFIG_SYS_PBSIZE=1024
-+CONFIG_CLK_QCOM_IPQ9650=y
-+CONFIG_CMD_MMC=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PINCTRL_QCOM_IPQ9650=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_SYS_MALLOC_LEN=0xC0000
-diff --git a/configs/qcom_ipqdefconfig b/configs/qcom_ipqdefconfig
-new file mode 100644
-index 000000000000..6a7f3c1b4ac6
---- /dev/null
-+++ b/configs/qcom_ipqdefconfig
-@@ -0,0 +1,37 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_LIVE=y
-+CONFIG_CLK=y
-+CONFIG_MSM_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
--- 
-2.34.1
+Link to v3 
+https://lore.kernel.org/u-boot/20260716062318.4121929-1-badhrina@qti.qualcomm.com/
 
+Thanks,
+
+Badhrinath S
+
+>> +    status = "okay";
+>> +};
+>
