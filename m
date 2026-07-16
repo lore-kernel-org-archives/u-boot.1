@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780F7C44512
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EFFDC44512
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jul 2026 16:19:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9646F84E8A;
+	by phobos.denx.de (Postfix) with ESMTP id D108F84E91;
 	Thu, 16 Jul 2026 18:09:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qTkt0zkh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jz2j54tF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E07284CCF; Thu, 16 Jul 2026 15:44:42 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 61D5884CE8; Thu, 16 Jul 2026 15:44:43 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCA4A84C3F
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56B5A84CC4
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 15:44:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anders.roxell@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-698bf274b3fso1003395a12.0
- for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:39 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-698af3e3620so1000379a12.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jul 2026 06:44:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784209479; x=1784814279; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784209481; x=1784814281; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NgVDZEa33AmpLjpyIwFmrOgMluwzlrXLxT23rM8Sabk=;
- b=qTkt0zkhDiTPWbNOpsywrTzS2hJwoyD8pVTgI4dQ49pCzSEvEAKE8lXOXW557oHQ80
- KZ2xJG6iR587jVg73CnTjJLQ44bfTHHBqFmMGphXRmbTNnfaT063QET07zsbNd4OkfYj
- zMxNE5Ow3yZ1pOGNCMzqlFrttYJTjy+u8BRn9NSohHQ+7Wm61IOQT0RTHxWvHYmzxf1f
- dvtJyclxPq7v8aa8jVTv7czWPDfMw0whJh5fRR3h96CGm9lxTX4aTmY1yDAqhYgH/asW
- O0EWvfDWHS3QVtog2XI0q47uQK3gcPFPPJTm0/+Wlo2MeAsC/jcUbQRBs3jpzSFtIjUi
- wF3A==
+ bh=iuD6vlQyk5/Gu1aQm/mSQHKeSHy379Hw1CkCioMdThc=;
+ b=jz2j54tFyl0k0nF+mhck8e8qhJiKwpUQ2BM1sU+bLCGK75JqGxMMVulkCU8SmqbX46
+ iJWyD21Im4NtycD/cUBRMMAk8ZQtc7HJbMewfrxRWqAPgRjckzyNYUc92LV2Dbqi1vza
+ a+G/csqDHR17BPD/w6eQd4lFHkPJhb09KJ9p67++FIqZ3voXWqmiMoL6FEixy/+mrBQt
+ PZAQMo7OXVvp1CYT+5aQZqiWWsJMkCNzQLD3KEldMp+W/IaPecPGR7XCMx8kc5i2nZIt
+ TWiJAhBHjLQUqUNy1xYApx4XiDewhN7VDO9ADPOms7sWq0c7MUEixNIi3mN71GT7cRP3
+ JDLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784209479; x=1784814279;
+ d=1e100.net; s=20251104; t=1784209481; x=1784814281;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=NgVDZEa33AmpLjpyIwFmrOgMluwzlrXLxT23rM8Sabk=;
- b=mTCx6MHRG/Ee4uK3QwX77EIlGapMikxwAYrVk+e5UR1u1ft20jv9NabUdbvQFCbT9X
- Uem7p/zYEiHoh50X5CD4M9oTYo0cgvErED9LL3SkdyLFpLRfTLFdrqVz28Kk8mzTL3N7
- hh7xdIS/YAOX3o/j/y8DaYwzR3lFPbvYQ6f3fAMLxKs+OfRKFu+d0+qQu/bDfY3CFOMW
- oGqW+GXK/74q6BOr9diDWX851riB6jBG/2ZXbm5Z9C4xvq7R2pYRrVhxE3roX6H8J86h
- nt8klJ3BknQ78tweKRL/udBb+OEaVbquknll0XZeVhqOlineKb036QLwkNvzrHwtfo4Z
- DnBw==
-X-Gm-Message-State: AOJu0Yx8a31Lp8knvwjSd0TscN+d5h3mUjz+q8FS1w1BiPd6xY79WJDy
- LutxWsu+yLdZF081FLhASSJjRQoONBHouluY9Ezt3OtO6HbEhhrdOrL8QAEcHXI6R5qEEPNHZDN
- slOBY
-X-Gm-Gg: AfdE7cmmw8wfmTzcQ19V4zJWhU8WzUcewb6q8XRIwnN8tmSAgBotLlkgNhKx5Bsgz0z
- Yc8oMCCBwImt/bBv7g92ARdjTEeuV0hEQc0+pqMwi65SiorzHgHaVPd22GyiQnU4N7Yb0RBtubW
- f4uWxn504XH4bcAeWPs0vKm0Qam5MkjZx3zakUEpyjzflaXPxBhw+utHd3OcQJwFJ5YvCjTu7GV
- eI/c91frwdevA0lpj2N/ENn+ZSMS8KtV9u/IebQtE4b5QVYGDmUodaAsfedFMYY2O8x9dI8nQCq
- 7uXbUW1tEUchMtL75HHsNNVBXbclFyecJP05MxyONCuyB2rouJ9xTs8B/nV0OOFHDifmMAt7+nY
- SjX+3EbsVH1GAq4KeejfyOn/fVsBnOL0wBfdtwi1/A0u5R9C2lt38NVbjA98wn5qniJ5/4RGoxT
- L6wPH7wFP0HiTH3JuBmPYCAyghRx0tptWn8SfAJg==
-X-Received: by 2002:a05:6402:a503:10b0:69c:7a0a:12f with SMTP id
- 4fb4d7f45d1cf-69c7a0a0206mr3661496a12.1.1784209479228; 
- Thu, 16 Jul 2026 06:44:39 -0700 (PDT)
+ bh=iuD6vlQyk5/Gu1aQm/mSQHKeSHy379Hw1CkCioMdThc=;
+ b=PxX+ekdvS13ebN12ShYMGLLntqETR3b2d8A/XymS4DNi0lt86Z02DdqaSoLpEAEnMk
+ ns7ewp+mLhUaY0z2qJ8A0sYPJsAjNQ2xxUEYRMvXHYTxvhxbZWTJldiUDEGI2BUIXhRK
+ pQVimpVhOppywyB6Fl2gQtIj/zP53xGOXKoAeizrVkb1yYhaPOT4nBSBWEa2Sag+hUbg
+ Z3BymO4Hv4dSegK4MzBDP+BobjNXiLYgX3lybdfeTbIZW1LS6kK6tOuXnDCCQoAME7xE
+ OPXysZr1N6/IH462MyjopcS8QgoM/tqRqpXIp9TalGDq8+3KgL/24zY7VApT5kEdsPfd
+ igtQ==
+X-Gm-Message-State: AOJu0Ywp+7xHy8rtwgao6xX/Ca9E39uKkpaJ7JxrYQs5roKZNXpBQNdS
+ U4Pjsm+M20/sAskPSAeQ6lEUu42xiZuqzuKGJofFintdSzQR2pYSCsLZWB26PMSZHmHC+5LRQxk
+ Bwt7G
+X-Gm-Gg: AfdE7clIDxg/plFkovN5R06rCOS+mAE/Son46561aLQT5dx8WexPn53sCFjKqJe7FwA
+ aJD40M4ZxjQLdYDf4DtCrwuiGKy8xYB3bO4FlVoK75+vpniBaovhjzchxzEi2fhCxvwfcr1IJk9
+ o4etpxGcRVyMXxpbVn5zHJqkWRob/ObIUmegGAfD4Cy28t8/LyNCOG6cubKQNKc33KgNccziu3Z
+ F3cg8R1YgnTcAeu8luiprGKr4+9obmyjKTity7Og9xP2mCfJZT+4DK9xjjjzccv1Y4VAfzXumHK
+ SH48H2oX1T2WrHH2Xq1M/Diu2LBf0A4OrdYTUILsxzPq+7IuM9+TPkMDsUn/HRItwWbxs4zOKWE
+ fpl7CP+j5pH53uYHOIKIf7A5S8M+1GI9GcZpw4lYZPjAQhEM7dpzHZAEz7PSOWO7z91SQxghosq
+ LMsEvZWakmQp7+ovuEvU4YvNUPrlJZbDPAgD93jw==
+X-Received: by 2002:a05:6402:40d3:b0:698:d8d2:df38 with SMTP id
+ 4fb4d7f45d1cf-69e2e3fcad3mr925065a12.2.1784209480639; 
+ Thu, 16 Jul 2026 06:44:40 -0700 (PDT)
 Received: from localhost (c-85-229-7-191.bbcust.telenor.se. [85.229.7.191])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-69cd292452bsm4851455a12.14.2026.07.16.06.44.37
+ 4fb4d7f45d1cf-69cd2937527sm4712868a12.20.2026.07.16.06.44.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 06:44:37 -0700 (PDT)
+ Thu, 16 Jul 2026 06:44:40 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.denx.de,
 	marex@denx.de
 Cc: mkorpershoek@kernel.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
  michal.simek@amd.com, alchark@flipper.net, jerome.forissier@arm.com,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v5 60/75] usb: dwc3: import from kernel v6.16
-Date: Thu, 16 Jul 2026 15:42:30 +0200
-Message-ID: <20260716134305.614278-61-anders.roxell@linaro.org>
+ Anders Roxell <anders.roxell@linaro.org>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v5 61/75] usb: host: re-import xhci-ext-caps.h from kernel
+ v6.16
+Date: Thu, 16 Jul 2026 15:42:31 +0200
+Message-ID: <20260716134305.614278-62-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260716134305.614278-1-anders.roxell@linaro.org>
 References: <20260716134305.614278-1-anders.roxell@linaro.org>
@@ -103,567 +105,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jens Wiklander <jens.wiklander@linaro.org>
+From: Jerome Forissier <jerome.forissier@linaro.org>
 
-Sync Linux kernel dwc3 changes from v6.15 to v6.16.
+Import drivers/usb/host/xhci-ext-caps.h from Linux v6.16. The file
+is needed by the updated DWC3 code.
 
-The following files are preserved accross the import:
-Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-dwc3-layerscape.c ti_usb_phy.c
-
-Skipping unused files:
-debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
-
-Note that this is a raw import and doesn't build.
-A fixup commit at the end of the series fixes that.
-
-List of commits: git log --oneline v6.15..v6.16
-Commits imported:
-ef8abc0ba49c usb: dwc3: qcom: Don't leave BCR asserted
-80e083943775 usb: dwc3: gadget: Fix TRB reclaim logic for short transfers and ZLPs
-630a1dec3b0e usb: dwc3: Abort suspend on soft disconnect failure
-657bfcbbfa38 usb: dwc3-exynos: add support for ExynosAutov920
-e33ebb133a24 usb: dwc3: qcom: Use bulk clock API and devres
-4c0fca65d105 usb: dwc3: qcom: Fix error handling in probe
-45ebb7baf235 usb: dwc3: qcom: use modern PM macros
-1881a32fe14d usb: dwc3: qcom: Transition to flattened model
-2dc9f137e194 usb: dwc3: qcom: Don't rely on drvdata during probe
-170940f7e685 usb: dwc3: core: Don't touch resets and clocks
-613a2e655d4d usb: dwc3: core: Expose core driver as library
-b958b03c82d2 usb: dwc3: qcom: Snapshot driver for backwards compatibilty
-00b157f8f64b usb: dwc3: exynos: add support for Exynos2200 variant
-850e634006f4 usb: dwc3: core: Avoid redundant system suspend/resume callbacks
-8da7644493b4 usb: dwc3: Specify maximum number of XHCI interrupters
-
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/core.c   | 206 ++++++++++++++++++++++++++++----------
- drivers/usb/dwc3/core.h   |   2 +
- drivers/usb/dwc3/gadget.c |  24 ++---
- drivers/usb/dwc3/glue.h   |  36 +++++++
- 4 files changed, 199 insertions(+), 69 deletions(-)
- create mode 100644 drivers/usb/dwc3/glue.h
+ drivers/usb/host/xhci-ext-caps.h | 158 +++++++++++++++++++++++++++++++
+ 1 file changed, 158 insertions(+)
+ create mode 100644 drivers/usb/host/xhci-ext-caps.h
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 66a08b527165..8002c23a5a02 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -26,6 +26,7 @@
- #include <linux/of_graph.h>
- #include <linux/acpi.h>
- #include <linux/pinctrl/consumer.h>
-+#include <linux/pinctrl/devinfo.h>
- #include <linux/reset.h>
- #include <linux/bitfield.h>
- 
-@@ -36,6 +37,7 @@
- 
- #include "core.h"
- #include "gadget.h"
-+#include "glue.h"
- #include "io.h"
- 
- #include "debug.h"
-@@ -1699,6 +1701,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	u8			tx_thr_num_pkt_prd = 0;
- 	u8			tx_max_burst_prd = 0;
- 	u8			tx_fifo_resize_max_num;
-+	u16			num_hc_interrupters;
- 
- 	/* default to highest possible threshold */
- 	lpm_nyet_threshold = 0xf;
-@@ -1719,6 +1722,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	 */
- 	tx_fifo_resize_max_num = 6;
- 
-+	/* default to a single XHCI interrupter */
-+	num_hc_interrupters = 1;
-+
- 	dwc->maximum_speed = usb_get_maximum_speed(dev);
- 	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
- 	dwc->dr_mode = usb_get_dr_mode(dev);
-@@ -1765,6 +1771,12 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 				&tx_thr_num_pkt_prd);
- 	device_property_read_u8(dev, "snps,tx-max-burst-prd",
- 				&tx_max_burst_prd);
-+	device_property_read_u16(dev, "num-hc-interrupters",
-+				 &num_hc_interrupters);
-+	/* DWC3 core allowed to have a max of 8 interrupters */
-+	if (num_hc_interrupters > 8)
-+		num_hc_interrupters = 8;
-+
- 	dwc->do_fifo_resize = device_property_read_bool(dev,
- 							"tx-fifo-resize");
- 	if (dwc->do_fifo_resize)
-@@ -1851,6 +1863,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 	dwc->tx_max_burst_prd = tx_max_burst_prd;
- 
- 	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
-+
-+	dwc->num_hc_interrupters = num_hc_interrupters;
- }
- 
- /* check whether the core supports IMOD */
-@@ -2148,27 +2162,16 @@ static struct power_supply *dwc3_get_usb_power_supply(struct dwc3 *dwc)
- 	return usb_psy;
- }
- 
--static int dwc3_probe(struct platform_device *pdev)
-+int dwc3_core_probe(const struct dwc3_probe_data *data)
- {
--	struct device		*dev = &pdev->dev;
--	struct resource		*res, dwc_res;
-+	struct dwc3		*dwc = data->dwc;
-+	struct device		*dev = dwc->dev;
-+	struct resource		dwc_res;
- 	unsigned int		hw_mode;
- 	void __iomem		*regs;
--	struct dwc3		*dwc;
-+	struct resource		*res = data->res;
- 	int			ret;
- 
--	dwc = devm_kzalloc(dev, sizeof(*dwc), GFP_KERNEL);
--	if (!dwc)
--		return -ENOMEM;
--
--	dwc->dev = dev;
--
--	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
--	if (!res) {
--		dev_err(dev, "missing memory resource\n");
--		return -ENODEV;
--	}
--
- 	dwc->xhci_resources[0].start = res->start;
- 	dwc->xhci_resources[0].end = dwc->xhci_resources[0].start +
- 					DWC3_XHCI_REGS_END;
-@@ -2208,15 +2211,17 @@ static int dwc3_probe(struct platform_device *pdev)
- 	if (IS_ERR(dwc->usb_psy))
- 		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
- 
--	dwc->reset = devm_reset_control_array_get_optional_shared(dev);
--	if (IS_ERR(dwc->reset)) {
--		ret = PTR_ERR(dwc->reset);
--		goto err_put_psy;
--	}
-+	if (!data->ignore_clocks_and_resets) {
-+		dwc->reset = devm_reset_control_array_get_optional_shared(dev);
-+		if (IS_ERR(dwc->reset)) {
-+			ret = PTR_ERR(dwc->reset);
-+			goto err_put_psy;
-+		}
- 
--	ret = dwc3_get_clocks(dwc);
--	if (ret)
--		goto err_put_psy;
-+		ret = dwc3_get_clocks(dwc);
-+		if (ret)
-+			goto err_put_psy;
-+	}
- 
- 	ret = reset_control_deassert(dwc->reset);
- 	if (ret)
-@@ -2232,7 +2237,7 @@ static int dwc3_probe(struct platform_device *pdev)
- 		goto err_disable_clks;
- 	}
- 
--	platform_set_drvdata(pdev, dwc);
-+	dev_set_drvdata(dev, dwc);
- 	dwc3_cache_hwparams(dwc);
- 
- 	if (!dwc->sysdev_is_parent &&
-@@ -2327,12 +2332,35 @@ err_put_psy:
- 
- 	return ret;
- }
-+EXPORT_SYMBOL_GPL(dwc3_core_probe);
- 
--static void dwc3_remove(struct platform_device *pdev)
-+static int dwc3_probe(struct platform_device *pdev)
- {
--	struct dwc3	*dwc = platform_get_drvdata(pdev);
-+	struct dwc3_probe_data probe_data = {};
-+	struct resource *res;
-+	struct dwc3 *dwc;
-+
-+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-+	if (!res) {
-+		dev_err(&pdev->dev, "missing memory resource\n");
-+		return -ENODEV;
-+	}
-+
-+	dwc = devm_kzalloc(&pdev->dev, sizeof(*dwc), GFP_KERNEL);
-+	if (!dwc)
-+		return -ENOMEM;
- 
--	pm_runtime_get_sync(&pdev->dev);
-+	dwc->dev = &pdev->dev;
-+
-+	probe_data.dwc = dwc;
-+	probe_data.res = res;
-+
-+	return dwc3_core_probe(&probe_data);
-+}
-+
-+void dwc3_core_remove(struct dwc3 *dwc)
-+{
-+	pm_runtime_get_sync(dwc->dev);
- 
- 	dwc3_core_exit_mode(dwc);
- 	dwc3_debugfs_exit(dwc);
-@@ -2340,22 +2368,28 @@ static void dwc3_remove(struct platform_device *pdev)
- 	dwc3_core_exit(dwc);
- 	dwc3_ulpi_exit(dwc);
- 
--	pm_runtime_allow(&pdev->dev);
--	pm_runtime_disable(&pdev->dev);
--	pm_runtime_dont_use_autosuspend(&pdev->dev);
--	pm_runtime_put_noidle(&pdev->dev);
-+	pm_runtime_allow(dwc->dev);
-+	pm_runtime_disable(dwc->dev);
-+	pm_runtime_dont_use_autosuspend(dwc->dev);
-+	pm_runtime_put_noidle(dwc->dev);
- 	/*
- 	 * HACK: Clear the driver data, which is currently accessed by parent
- 	 * glue drivers, before allowing the parent to suspend.
- 	 */
--	platform_set_drvdata(pdev, NULL);
--	pm_runtime_set_suspended(&pdev->dev);
-+	dev_set_drvdata(dwc->dev, NULL);
-+	pm_runtime_set_suspended(dwc->dev);
- 
- 	dwc3_free_event_buffers(dwc);
- 
- 	if (dwc->usb_psy)
- 		power_supply_put(dwc->usb_psy);
- }
-+EXPORT_SYMBOL_GPL(dwc3_core_remove);
-+
-+static void dwc3_remove(struct platform_device *pdev)
-+{
-+	dwc3_core_remove(platform_get_drvdata(pdev));
-+}
- 
- #ifdef CONFIG_PM
- static int dwc3_core_init_for_resume(struct dwc3 *dwc)
-@@ -2388,6 +2422,7 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- {
- 	u32 reg;
- 	int i;
-+	int ret;
- 
- 	if (!pm_runtime_suspended(dwc->dev) && !PMSG_IS_AUTO(msg)) {
- 		dwc->susphy_state = (dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0)) &
-@@ -2406,7 +2441,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- 	case DWC3_GCTL_PRTCAP_DEVICE:
- 		if (pm_runtime_suspended(dwc->dev))
- 			break;
--		dwc3_gadget_suspend(dwc);
-+		ret = dwc3_gadget_suspend(dwc);
-+		if (ret)
-+			return ret;
- 		synchronize_irq(dwc->irq_gadget);
- 		dwc3_core_exit(dwc);
- 		break;
-@@ -2441,7 +2478,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
- 			break;
- 
- 		if (dwc->current_otg_role == DWC3_OTG_ROLE_DEVICE) {
--			dwc3_gadget_suspend(dwc);
-+			ret = dwc3_gadget_suspend(dwc);
-+			if (ret)
-+				return ret;
- 			synchronize_irq(dwc->irq_gadget);
- 		}
- 
-@@ -2544,9 +2583,8 @@ static int dwc3_runtime_checks(struct dwc3 *dwc)
- 	return 0;
- }
- 
--static int dwc3_runtime_suspend(struct device *dev)
-+int dwc3_runtime_suspend(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
- 	int		ret;
- 
- 	if (dwc3_runtime_checks(dwc))
-@@ -2558,10 +2596,11 @@ static int dwc3_runtime_suspend(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_suspend);
- 
--static int dwc3_runtime_resume(struct device *dev)
-+int dwc3_runtime_resume(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret;
- 
- 	ret = dwc3_resume_common(dwc, PMSG_AUTO_RESUME);
-@@ -2571,7 +2610,7 @@ static int dwc3_runtime_resume(struct device *dev)
- 	switch (dwc->current_dr_role) {
- 	case DWC3_GCTL_PRTCAP_DEVICE:
- 		if (dwc->pending_events) {
--			pm_runtime_put(dwc->dev);
-+			pm_runtime_put(dev);
- 			dwc->pending_events = false;
- 			enable_irq(dwc->irq_gadget);
- 		}
-@@ -2586,10 +2625,11 @@ static int dwc3_runtime_resume(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_resume);
- 
--static int dwc3_runtime_idle(struct device *dev)
-+int dwc3_runtime_idle(struct dwc3 *dwc)
- {
--	struct dwc3     *dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 
- 	switch (dwc->current_dr_role) {
- 	case DWC3_GCTL_PRTCAP_DEVICE:
-@@ -2607,12 +2647,28 @@ static int dwc3_runtime_idle(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_runtime_idle);
-+
-+static int dwc3_plat_runtime_suspend(struct device *dev)
-+{
-+	return dwc3_runtime_suspend(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_runtime_resume(struct device *dev)
-+{
-+	return dwc3_runtime_resume(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_runtime_idle(struct device *dev)
-+{
-+	return dwc3_runtime_idle(dev_get_drvdata(dev));
-+}
- #endif /* CONFIG_PM */
- 
- #ifdef CONFIG_PM_SLEEP
--static int dwc3_suspend(struct device *dev)
-+int dwc3_pm_suspend(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret;
- 
- 	ret = dwc3_suspend_common(dwc, PMSG_SUSPEND);
-@@ -2623,10 +2679,11 @@ static int dwc3_suspend(struct device *dev)
- 
- 	return 0;
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_suspend);
- 
--static int dwc3_resume(struct device *dev)
-+int dwc3_pm_resume(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
-+	struct device *dev = dwc->dev;
- 	int		ret = 0;
- 
- 	pinctrl_pm_select_default_state(dev);
-@@ -2645,10 +2702,10 @@ out:
- 
- 	return ret;
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_resume);
- 
--static void dwc3_complete(struct device *dev)
-+void dwc3_pm_complete(struct dwc3 *dwc)
- {
--	struct dwc3	*dwc = dev_get_drvdata(dev);
- 	u32		reg;
- 
- 	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_HOST &&
-@@ -2658,21 +2715,60 @@ static void dwc3_complete(struct device *dev)
- 		dwc3_writel(dwc->regs, DWC3_GUCTL3, reg);
- 	}
- }
-+EXPORT_SYMBOL_GPL(dwc3_pm_complete);
-+
-+int dwc3_pm_prepare(struct dwc3 *dwc)
-+{
-+	struct device *dev = dwc->dev;
-+
-+	/*
-+	 * Indicate to the PM core that it may safely leave the device in
-+	 * runtime suspend if runtime-suspended already in device mode.
-+	 */
-+	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_DEVICE &&
-+	    pm_runtime_suspended(dev) &&
-+	    !dev_pinctrl(dev))
-+		return 1;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(dwc3_pm_prepare);
-+
-+static int dwc3_plat_suspend(struct device *dev)
-+{
-+	return dwc3_pm_suspend(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_resume(struct device *dev)
-+{
-+	return dwc3_pm_resume(dev_get_drvdata(dev));
-+}
-+
-+static void dwc3_plat_complete(struct device *dev)
-+{
-+	dwc3_pm_complete(dev_get_drvdata(dev));
-+}
-+
-+static int dwc3_plat_prepare(struct device *dev)
-+{
-+	return dwc3_pm_prepare(dev_get_drvdata(dev));
-+}
- #else
--#define dwc3_complete NULL
-+#define dwc3_plat_complete NULL
-+#define dwc3_plat_prepare NULL
- #endif /* CONFIG_PM_SLEEP */
- 
- static const struct dev_pm_ops dwc3_dev_pm_ops = {
--	SET_SYSTEM_SLEEP_PM_OPS(dwc3_suspend, dwc3_resume)
--	.complete = dwc3_complete,
--
-+	SET_SYSTEM_SLEEP_PM_OPS(dwc3_plat_suspend, dwc3_plat_resume)
-+	.complete = dwc3_plat_complete,
-+	.prepare = dwc3_plat_prepare,
- 	/*
- 	 * Runtime suspend halts the controller on disconnection. It relies on
- 	 * platforms with custom connection notification to start the controller
- 	 * again.
- 	 */
--	SET_RUNTIME_PM_OPS(dwc3_runtime_suspend, dwc3_runtime_resume,
--			dwc3_runtime_idle)
-+	SET_RUNTIME_PM_OPS(dwc3_plat_runtime_suspend, dwc3_plat_runtime_resume,
-+			   dwc3_plat_runtime_idle)
- };
- 
- #ifdef CONFIG_OF
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 27eae4cf223d..d5b985fa12f4 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -1083,6 +1083,7 @@ struct dwc3_scratchpad_array {
-  * @tx_max_burst_prd: max periodic ESS transmit burst size
-  * @tx_fifo_resize_max_num: max number of fifos allocated during txfifo resize
-  * @clear_stall_protocol: endpoint number that requires a delayed status phase
-+ * @num_hc_interrupters: number of host controller interrupters
-  * @hsphy_interface: "utmi" or "ulpi"
-  * @connected: true when we're connected to a host, false otherwise
-  * @softconnect: true when gadget connect is called, false when disconnect runs
-@@ -1333,6 +1334,7 @@ struct dwc3 {
- 	u8			tx_max_burst_prd;
- 	u8			tx_fifo_resize_max_num;
- 	u8			clear_stall_protocol;
-+	u16			num_hc_interrupters;
- 
- 	const char		*hsphy_interface;
- 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 321361288935..74968f93d4a3 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -3516,7 +3516,7 @@ static int dwc3_gadget_ep_reclaim_completed_trb(struct dwc3_ep *dep,
- 	 * We're going to do that here to avoid problems of HW trying
- 	 * to use bogus TRBs for transfers.
- 	 */
--	if (chain && (trb->ctrl & DWC3_TRB_CTRL_HWO))
-+	if (trb->ctrl & DWC3_TRB_CTRL_HWO)
- 		trb->ctrl &= ~DWC3_TRB_CTRL_HWO;
- 
- 	/*
-@@ -4821,26 +4821,22 @@ int dwc3_gadget_suspend(struct dwc3 *dwc)
- 	int ret;
- 
- 	ret = dwc3_gadget_soft_disconnect(dwc);
--	if (ret)
--		goto err;
--
--	spin_lock_irqsave(&dwc->lock, flags);
--	if (dwc->gadget_driver)
--		dwc3_disconnect_gadget(dwc);
--	spin_unlock_irqrestore(&dwc->lock, flags);
--
--	return 0;
--
--err:
- 	/*
- 	 * Attempt to reset the controller's state. Likely no
- 	 * communication can be established until the host
- 	 * performs a port reset.
- 	 */
--	if (dwc->softconnect)
-+	if (ret && dwc->softconnect) {
- 		dwc3_gadget_soft_connect(dwc);
-+		return -EAGAIN;
-+	}
- 
--	return ret;
-+	spin_lock_irqsave(&dwc->lock, flags);
-+	if (dwc->gadget_driver)
-+		dwc3_disconnect_gadget(dwc);
-+	spin_unlock_irqrestore(&dwc->lock, flags);
-+
-+	return 0;
- }
- 
- int dwc3_gadget_resume(struct dwc3 *dwc)
-diff --git a/drivers/usb/dwc3/glue.h b/drivers/usb/dwc3/glue.h
+diff --git a/drivers/usb/host/xhci-ext-caps.h b/drivers/usb/host/xhci-ext-caps.h
 new file mode 100644
-index 000000000000..2efd00e763be
+index 000000000000..c93bcf4f4f7d
 --- /dev/null
-+++ b/drivers/usb/dwc3/glue.h
-@@ -0,0 +1,36 @@
++++ b/drivers/usb/host/xhci-ext-caps.h
+@@ -0,0 +1,158 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
++/* Imported from Linux v6.16 */
 +/*
-+ * glue.h - DesignWare USB3 DRD glue header
++ * xHCI host controller driver
++ *
++ * Copyright (C) 2008 Intel Corp.
++ *
++ * Author: Sarah Sharp
++ * Some code borrowed from the Linux EHCI driver.
 + */
 +
-+#ifndef __DRIVERS_USB_DWC3_GLUE_H
-+#define __DRIVERS_USB_DWC3_GLUE_H
++/* HC should halt within 16 ms, but use 32 ms as some hosts take longer */
++#define XHCI_MAX_HALT_USEC	(32 * 1000)
++/* HC not running - set to 1 when run/stop bit is cleared. */
++#define XHCI_STS_HALT		(1<<0)
 +
-+#include <linux/types.h>
-+#include "core.h"
++/* HCCPARAMS offset from PCI base address */
++#define XHCI_HCC_PARAMS_OFFSET	0x10
++/* HCCPARAMS contains the first extended capability pointer */
++#define XHCI_HCC_EXT_CAPS(p)	(((p)>>16)&0xffff)
++
++/* Command and Status registers offset from the Operational Registers address */
++#define XHCI_CMD_OFFSET		0x00
++#define XHCI_STS_OFFSET		0x04
++
++#define XHCI_MAX_EXT_CAPS		50
++
++/* Capability Register */
++/* bits 7:0 - how long is the Capabilities register */
++#define XHCI_HC_LENGTH(p)	(((p)>>00)&0x00ff)
++
++/* Extended capability register fields */
++#define XHCI_EXT_CAPS_ID(p)	(((p)>>0)&0xff)
++#define XHCI_EXT_CAPS_NEXT(p)	(((p)>>8)&0xff)
++#define	XHCI_EXT_CAPS_VAL(p)	((p)>>16)
++/* Extended capability IDs - ID 0 reserved */
++#define XHCI_EXT_CAPS_LEGACY	1
++#define XHCI_EXT_CAPS_PROTOCOL	2
++#define XHCI_EXT_CAPS_PM	3
++#define XHCI_EXT_CAPS_VIRT	4
++#define XHCI_EXT_CAPS_ROUTE	5
++/* IDs 6-9 reserved */
++#define XHCI_EXT_CAPS_DEBUG	10
++/* Vendor caps */
++#define XHCI_EXT_CAPS_VENDOR_INTEL	192
++#define XHCI_EXT_CAPS_INTEL_SPR_SHADOW	206
++/* USB Legacy Support Capability - section 7.1.1 */
++#define XHCI_HC_BIOS_OWNED	(1 << 16)
++#define XHCI_HC_OS_OWNED	(1 << 24)
++
++/* USB Legacy Support Capability - section 7.1.1 */
++/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
++#define XHCI_LEGACY_SUPPORT_OFFSET	(0x00)
++
++/* USB Legacy Support Control and Status Register  - section 7.1.2 */
++/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
++#define XHCI_LEGACY_CONTROL_OFFSET	(0x04)
++/* bits 1:3, 5:12, and 17:19 need to be preserved; bits 21:28 should be zero */
++#define	XHCI_LEGACY_DISABLE_SMI		((0x7 << 1) + (0xff << 5) + (0x7 << 17))
++#define XHCI_LEGACY_SMI_EVENTS		(0x7 << 29)
++
++/* USB 2.0 xHCI 0.96 L1C capability - section 7.2.2.1.3.2 */
++#define XHCI_L1C               (1 << 16)
++
++/* USB 2.0 xHCI 1.0 hardware LMP capability - section 7.2.2.1.3.2 */
++#define XHCI_HLC               (1 << 19)
++#define XHCI_BLC               (1 << 20)
++
++/* Intel SPR shadow capability */
++#define XHCI_INTEL_SPR_ESS_PORT_OFFSET  0x8ac4	/* SuperSpeed port control */
++#define XHCI_INTEL_SPR_TUNEN	BIT(4)		/* Tunnel mode enabled */
++
++/* command register values to disable interrupts and halt the HC */
++/* start/stop HC execution - do not write unless HC is halted*/
++#define XHCI_CMD_RUN		(1 << 0)
++/* Event Interrupt Enable - get irq when EINT bit is set in USBSTS register */
++#define XHCI_CMD_EIE		(1 << 2)
++/* Host System Error Interrupt Enable - get irq when HSEIE bit set in USBSTS */
++#define XHCI_CMD_HSEIE		(1 << 3)
++/* Enable Wrap Event - '1' means xHC generates an event when MFINDEX wraps. */
++#define XHCI_CMD_EWE		(1 << 10)
++
++#define XHCI_IRQS		(XHCI_CMD_EIE | XHCI_CMD_HSEIE | XHCI_CMD_EWE)
++
++/* true: Controller Not Ready to accept doorbell or op reg writes after reset */
++#define XHCI_STS_CNR		(1 << 11)
 +
 +/**
-+ * dwc3_probe_data: Initialization parameters passed to dwc3_core_probe()
-+ * @dwc: Reference to dwc3 context structure
-+ * @res: resource for the DWC3 core mmio region
-+ * @ignore_clocks_and_resets: clocks and resets defined for the device should
-+ *		be ignored by the DWC3 core, as they are managed by the glue
++ * struct xhci_protocol_caps
++ * @revision:		major revision, minor revision, capability ID,
++ *			and next capability pointer.
++ * @name_string:	Four ASCII characters to say which spec this xHC
++ *			follows, typically "USB ".
++ * @port_info:		Port offset, count, and protocol-defined information.
 + */
-+struct dwc3_probe_data {
-+	struct dwc3 *dwc;
-+	struct resource *res;
-+	bool ignore_clocks_and_resets;
++struct xhci_protocol_caps {
++	u32	revision;
++	u32	name_string;
++	u32	port_info;
 +};
 +
-+int dwc3_core_probe(const struct dwc3_probe_data *data);
-+void dwc3_core_remove(struct dwc3 *dwc);
++#define	XHCI_EXT_PORT_MAJOR(x)	(((x) >> 24) & 0xff)
++#define	XHCI_EXT_PORT_MINOR(x)	(((x) >> 16) & 0xff)
++#define	XHCI_EXT_PORT_PSIC(x)	(((x) >> 28) & 0x0f)
++#define	XHCI_EXT_PORT_OFF(x)	((x) & 0xff)
++#define	XHCI_EXT_PORT_COUNT(x)	(((x) >> 8) & 0xff)
 +
-+int dwc3_runtime_suspend(struct dwc3 *dwc);
-+int dwc3_runtime_resume(struct dwc3 *dwc);
-+int dwc3_runtime_idle(struct dwc3 *dwc);
-+int dwc3_pm_suspend(struct dwc3 *dwc);
-+int dwc3_pm_resume(struct dwc3 *dwc);
-+void dwc3_pm_complete(struct dwc3 *dwc);
-+int dwc3_pm_prepare(struct dwc3 *dwc);
++#define	XHCI_EXT_PORT_PSIV(x)	(((x) >> 0) & 0x0f)
++#define	XHCI_EXT_PORT_PSIE(x)	(((x) >> 4) & 0x03)
++#define	XHCI_EXT_PORT_PLT(x)	(((x) >> 6) & 0x03)
++#define	XHCI_EXT_PORT_PFD(x)	(((x) >> 8) & 0x01)
++#define	XHCI_EXT_PORT_LP(x)	(((x) >> 14) & 0x03)
++#define	XHCI_EXT_PORT_PSIM(x)	(((x) >> 16) & 0xffff)
 +
-+#endif
++#include <linux/io.h>
++
++/**
++ * Find the offset of the extended capabilities with capability ID id.
++ *
++ * @base	PCI MMIO registers base address.
++ * @start	address at which to start looking, (0 or HCC_PARAMS to start at
++ *		beginning of list)
++ * @id		Extended capability ID to search for, or 0 for the next
++ *		capability
++ *
++ * Returns the offset of the next matching extended capability structure.
++ * Some capabilities can occur several times, e.g., the XHCI_EXT_CAPS_PROTOCOL,
++ * and this provides a way to find them all.
++ */
++
++static inline int xhci_find_next_ext_cap(void __iomem *base, u32 start, int id)
++{
++	u32 val;
++	u32 next;
++	u32 offset;
++
++	offset = start;
++	if (!start || start == XHCI_HCC_PARAMS_OFFSET) {
++		val = readl(base + XHCI_HCC_PARAMS_OFFSET);
++		if (val == ~0)
++			return 0;
++		offset = XHCI_HCC_EXT_CAPS(val) << 2;
++		if (!offset)
++			return 0;
++	}
++	do {
++		val = readl(base + offset);
++		if (val == ~0)
++			return 0;
++		if (offset != start && (id == 0 || XHCI_EXT_CAPS_ID(val) == id))
++			return offset;
++
++		next = XHCI_EXT_CAPS_NEXT(val);
++		offset += next << 2;
++	} while (next);
++
++	return 0;
++}
 -- 
 2.53.0
 
