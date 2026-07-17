@@ -4,93 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D05C4451B
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB38C4451C
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:55:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2140184DAA;
-	Fri, 17 Jul 2026 15:55:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEDF384E45;
+	Fri, 17 Jul 2026 15:55:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/03qFng";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JASpP38+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7115084E36; Fri, 17 Jul 2026 15:55:24 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id E75E784E4E; Fri, 17 Jul 2026 15:55:36 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F6FC84DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:55:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0724384E36
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c15b1da6b82so495127366b.1
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:55:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784296522; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-69e5f8a193bso1397556a12.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:55:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784296534; cv=none;
  d=google.com; s=arc-20260327;
- b=kyspEn5BbBUVTqj+MKHbeem2epBZwxBSas5MUCslo5VRw7uHXeZ7vvwBksfUiUagxU
- NpO9/dokRjKkevRvSZedFLdU08vsFTBeVpqDL3X2RgqDAaapoPmzmd7PS4yQlk180xY5
- T86Y48bEJcXrKoKBMoV6x2PKEnFbRWUKDhqXgdHKYOT1jbighDvATctkU3CPJRLksJyJ
- YgnGUpWRU6w5D+NwigWb8SkXTgCJQgjK2XN6ssV4DIR8kup8+6lqKpo/ukxiW70MhTDT
- 6TXrcKht3lkQ4owQdVC4AW4ooqtcDALyP4MPRCqxXEeNiBhzROkHXjfi0gdk0QV1fTiB
- laJQ==
+ b=ozA0+iOeIl3BaOLGgyjVA9p1kUBJI6BlfaffyG8A6bKPuYNDtFvTD5r5xuvC1QU1Jg
+ gDuJ1svupY6AIxHYq28E9KgKJ55N365dLmW3WoOHYBPSwucHDG14VgnUHyrMj4GhyRPl
+ uPw6yOZxM5aDesDiQ23NbcCHfr+IcENv9vrMsDsdeHGyXlqieUEZoLjh12gyjeJHfnnq
+ UMOQth+CxAkGukma5u7YZY6uVWG/UkE6VyhVzv7KrR9xmQiu5L21gW0EfLzsNXlm0Tan
+ AHvUxuV+Sc3aJwVhTOf6mHv+2Ymx/ugPwobLGeC/c4pBOfL80QA4G4O24EHSSnG1WpLS
+ IwGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Pls2svbqPAl7o/3bB48bsZfoX0uJflyn0HxZhmXknBg=;
- fh=WsvL9Gy+7YhkfwetOElIT2GFYIXjpgEIra69PTd8gJM=;
- b=dof/vAmqjpYc8ZyfknT8fXi9Vq0N+xF0EnjtMYT8m8+GQOb7nZTwAKHLMIRf1i7Q8C
- bZPnStHl0tdkcD7K5vYlU4iOjpOSH2hbJQszLq5Jc9/7juMSEsysLFXz14vIZgYG5eaz
- A8Alr4SqKMZ9hfFlocJNrieEPFBQ2+erbsZK67Y76xun53v9fmabHB5LYARymfF+NWPE
- nicl7XJcm2lm0fSDo9iDzPoQjbzDCNkXKu5GkFq3hrSQgYJlpHwom8Ksner7luY3Ugn3
- Xgrc9MwEB0jn8LFFXGtpIf2RZYMNuYblKFcUnwgrb1U+F7PwctIW3uNX1js9sIllZo/O
- aS9g==; darn=lists.denx.de
+ bh=eTSzut6yW+cN8rzFUgNh6i88vaSslgJ+/xGn4Nb8C5E=;
+ fh=xRMANhCuAIAE/s6h0kAA+Yz/4rMtMte3zGnd0xZ8qGM=;
+ b=L1Tdt5TNgv6666TJv8TwOcmmv6FzeOj0ES/uDtpyIxMmu5JXgT7lEkQrTs+OjAbFvv
+ Wswzytmde35/tsGHzOmQp/yH9EAINYvP8HsM+261GSXk0J2pkWfHAUc9mN1yy1bkp92Q
+ 2lf0xtVtSYnMk2JuGbQfKaZvjBXf555wGbXXtjKpuang64l5nTkkW2NGyLwUVm8SgGCK
+ d6PvojlzOgKbcN/mPEZqTwb/XoqjniIOlmSROc8KldtQfMGFMIZObQAD8FbGh99r1b5J
+ I6isZpFtiNhYHQfHL5smYXhd6iyDw4xQV/xqgHJSBypQPiNWUPFx1UWvDj7IiLeiRljD
+ FOEQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784296522; x=1784901322; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784296534; x=1784901334; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Pls2svbqPAl7o/3bB48bsZfoX0uJflyn0HxZhmXknBg=;
- b=g/03qFngFDiwlIpdwNDaLcmtYA8Z6dIjtrKqibHbGooeONtyDxnJgDfwHWCkSrgtNc
- Mp8Ky22Gq9IewkzCExQXwGJMQjzi8N/Et2XfbDzsg36pSYdiXzafC8UrwgoRAhBclH2L
- q46g533hCw5DeMNjJYEOzLEO7V3RP1O+SWQGs=
+ :content-type; bh=eTSzut6yW+cN8rzFUgNh6i88vaSslgJ+/xGn4Nb8C5E=;
+ b=JASpP38+KbGBeNEAEOrq/siYds9y5KM3mOYiI+ADVaNFQ8zh+g9NErV4cUVkXYOjc+
+ 247i3rJYpbZlrHXAMbHt4JBflAmyYsy08bhtkF/emF0tEQh7bIRA5TIeUKBrTAXJuW4J
+ MEB4W6hV2dV1EaTE4um9UMRvHvvl7poe5+L0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784296522; x=1784901322;
+ d=1e100.net; s=20251104; t=1784296534; x=1784901334;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=Pls2svbqPAl7o/3bB48bsZfoX0uJflyn0HxZhmXknBg=;
- b=SzDbNV3I8qqNpm4Sq9z3m8OENo5k5YWwMrJ3IESgRYQ0+DrScvgzmFSQIXRJIp/Ns5
- uPzvIxhOgR+paGbyCKdov5iEwKQ6Yfs2kaz6iQYoshbqDtkD2v//0YNM0WzShW4Qd/we
- bW+rp83VHEyp1WhIUDkU+B7zVTL/OTDgPNGCCCTtM6+2jtD0/asQAi5l/g5G095r4xvG
- 8ntaNxnzF7tAcPxWb6S+JvXJiMJ755vtksGBl/hYDM7QYdXIr9yQ0FOP91gY5wiVhdiQ
- +Qp2pHPWnPUuX1tRYt5YRboe9sA7gTIVQiyZyBBOLvuWx4qSWjZp6BCFf/Uef8ATLxeq
- Jerg==
+ bh=eTSzut6yW+cN8rzFUgNh6i88vaSslgJ+/xGn4Nb8C5E=;
+ b=ZHf0+LvVKmzAw606DsqwMmARpODKxmNX9yBrxBenVEmbQ8nqmsB/daIvQ3dLO3bavG
+ iwMebn5oP7Gs5PAQPyjUczlctFGnEinZd47Xn7fxVwJEekbOwFsjCSLi9IpTQNeYoPpl
+ sCz59QfkNNmDM+rYZGxGO/weZOO3HnRZSDcXGpQQwlIgYGeqIW82dv3Jf3T7RH8/v7iv
+ D7QZluza8IP2fhG8RxG0Kssu9hrza01OS0rDyoWXh/I99SDpMqdvMH4oyu6vfgmegNHc
+ vpAk7ko5j3v77pEnJtTllxmPYaxwY+iSU7x50gbkhbzzeJCB+Y7atVVHmxbXisgROTRz
+ V9Gg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrQ1RpdA2lHVq5ixi96/5oN2FZ717NfdNY0TD7SaV6bm1bN9orcdbVhsCcjbE7Vpwg2w6Ic7Rw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLI5V9tUncWAZ625yPIHNzXL8grqw72rBpAEgiHykkcXGDqc9a
- CB0Zdw5OCZeO5/0BUFysWlvJKMGrNwXOBMnlI1hCP86qe8iEz3A4MlgZRdv+62f1Gkd+3capJ2C
- wN7q8Byc89SBJ4i+VsX/LSWHDmtyEVSJQ4kO1B5d4
-X-Gm-Gg: AfdE7cnMU0ulFbmopTgh4YrjGlZ6RXmACIwmkd8Hol4QLUKpIyxyyAx9MJfqcanL9Qa
- A34fUu/2TIK9gWicDwhBInr1iAblW+fl9jRNGpIR2Wk5NfOTPqucqLC0/NwNna92XoW2qYEzHHf
- uSnYI5RbwveDkc2UU7KYIeHAx+WbkxKNMyKzd/H9yLRU6DCsYznRAudgxZd2r2vqYt6LKHEnAlt
- cvgsp5YbvBFW3rljirdGNfIAWmbkh6AyWQfk3b04t84GtQgFtI3MFVn7Y4e
-X-Received: by 2002:a17:906:4788:b0:c12:6c2e:ae9 with SMTP id
- a640c23a62f3a-c16b46de9bcmr118780266b.22.1784296521803; Fri, 17 Jul 2026
- 06:55:21 -0700 (PDT)
+ AHgh+RoYcvOGMmp5BHSn+rbOo/dqkSV/YxBEVHWJ+UQUaK/qVBJldB5O6shv/luxx40KKss1eIzL7vw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxv+2SopGJKUvo/ZYgBcK6x8xf7UUxEbq/1NuLxh+qsZo0xGMB+
+ 3Q0NioBwxeSFm4VVswU18l0uDDhRWLrjkF52OVA7k3Q/nHq1Yrn55RvhAfDMEifYzDuVpy11SiH
+ owWjw8+dnWBI0HYI1XBuFofSu5YkZcEstFypNyi2fZQ4bfqBwKrg=
+X-Gm-Gg: AfdE7clW+wrTwD23qQwb6aMr0bqqjjc82PGBqH4CXFWQn5j6d3QsxVmvjTFlYGb6LQS
+ I90o0Xb1MHv1CDJfGQ4bdAS5o5lTVZf1MBQrUBikWIHoFm3DjsB9oACvQrdxbffPFEPxsST36fh
+ Jz/3iMArHNDupGOBFgS7Q77fuARMSk/LsuWjCKKIAUalsatZlzjd/Eb92JaoxUGApHmCrO0XKHb
+ x9iXDrpzT3E90evgV7rP3gndSE7f9NpDWMJZDQ0s4B3xTGV0u6ViTSzXUtA
+X-Received: by 2002:a05:6402:4595:b0:698:3eda:1197 with SMTP id
+ 4fb4d7f45d1cf-69e652b0459mr1048948a12.20.1784296534384; Fri, 17 Jul 2026
+ 06:55:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <ex5nk6rhdq2xmoebwmbxtc3xxepoq42qlqb3u6ve3rd4inpxul@tuqk6be3rl22>
-In-Reply-To: <ex5nk6rhdq2xmoebwmbxtc3xxepoq42qlqb3u6ve3rd4inpxul@tuqk6be3rl22>
+References: <20260708-image-android-oob-fix-v1-1-a96de8ccd25e@flipper.net>
+In-Reply-To: <20260708-image-android-oob-fix-v1-1-a96de8ccd25e@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jul 2026 07:54:51 -0600
-X-Gm-Features: AUfX_mwSCftQF1bc9uH9t7XpAne1f4g8ZIuWaLzH6rtVr3oxmtt7xGQpxPQLUd8
-Message-ID: <CAFLszThptn1MekOUzBJ=xDzhgbVh4MMn_ycnBaY25=Mps30Frg@mail.gmail.com>
-Subject: Re: [PATCH] cmd: read: fix unsigned overflow bypassing range check
-To: naveen.osdev@gmail.com
-Cc: trini@konsulko.com, u-boot@lists.denx.de
+Date: Fri, 17 Jul 2026 07:54:56 -0600
+X-Gm-Features: AUfX_mxamGJ3bZkIurSB96NETXFv9PeRUiPSBrlJcH6kyhDMbH7SiKOfn9q0meE
+Message-ID: <CAFLszTg-usTXZ1=Luy5FGKiU7LbZHDnLA+nZCdqF0Ro2Bk0dBQ@mail.gmail.com>
+Subject: Re: [PATCH] boot: android: fix out-of-bounds access in bootconfig
+ parsing
+To: alchark@flipper.net
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Safae Ouajih <souajih@baylibre.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,33 +115,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-07-08T14:33:04, Naveen Kumar Chaudhary <naveen.osdev@gmail.com> wrote:
-> cmd: read: fix unsigned overflow bypassing range check
+On 2026-07-08T17:32:07, Alexey Charkov <alchark@flipper.net> wrote:
+> boot: android: fix out-of-bounds access in bootconfig parsing
 >
-> The bounds check in do_rw() was written as:
+> When android_image_get_vendor_bootimg_size is called, its buffer is only
+> allocated with enough space for the bootconfig header, but the
+> android_vendor_boot_image_v3_v4_parse_hdr helper attempts to append a
+> bootconfig trailer to it, causing an out-of-bounds access and heap
+> corruption in some cases (e.g. triggered in sandbox test builds when
+> extra bootmeths are added, resulting in a segfault of the sandbox
+> process).
 >
->     if (cnt + blk > limit)
+> Skip the dangerous memcpy operations altogether when the
+> android_vendor_boot_image_v3_v4_parse_hdr helper is only called for size
+> calculation purposes, and only append the bootconfig trailer when called
+> from the actual bootconfig parsing code path.
 >
-> with cnt and blk declared as uint (unsigned int) and limit as ulong.
-> C's usual arithmetic conversions are applied per binary operator, so
-> "cnt + blk" is evaluated entirely in unsigned int and wraps modulo
-> 2^32 before the result is widened for the comparison against limit.
-> With cnt = 0xFFFFFFFF and blk = 1 the sum wraps to 0 and the guard
-> passes, allowing blk_dread()/blk_dwrite() to be issued with a 4 GiB
-> transfer count that runs past the partition (or, when no partition
-> is selected, the entire device).
+> Fixes: 57e405e1f474 ("android: boot: support bootconfig")
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
 >
-> Rewrite the check as two comparisons that do not overflow:
->
->     if (blk > limit || cnt > limit - blk)
->
-> The subtraction is performed in ulong (limit's type), so no truncation
-> occurs, and the two sub-conditions cover both "start block past end"
-> and "count would push us past end" failure modes.
->
-> Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
->
-> cmd/read.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> boot/image-android.c | 30 +++++++++++++++++++++---------
+>  1 file changed, 21 insertions(+), 9 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
