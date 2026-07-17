@@ -4,96 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1238AC4451C
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 14:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6CCC4451B
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 14:51:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38DEE84E38;
-	Fri, 17 Jul 2026 16:12:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5266184E05;
+	Fri, 17 Jul 2026 16:51:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ImnH2+Jx";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mcAUgAj9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0953384E50; Fri, 17 Jul 2026 16:11:59 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C546F84E61; Fri, 17 Jul 2026 16:51:14 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32FE84E05
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 16:11:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DC1584E2E
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 16:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-69e7a5b61e4so446102a12.2
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 07:11:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784297515; cv=none;
- d=google.com; s=arc-20260327;
- b=QUrq2gSM6Zoe/tpm1MIcUwOiVNpL1nszaYkw4fNChlNSYsK4ANvma3v4AI71T5O7US
- jEysCgBpzlBFvsoAdtnrGj7WDB4D4Z/jOf+rz3CefYqaEUoQ8SZJ1mRVv0P01Oc4KYgJ
- 1MayA0k9Gzck2p4mA+EtQ7rdkWXvn0AtFBqVZDaaTfQ3ZAuwx85+BIZw9e0coc8ApM3k
- ENGjvQsuHNfzJMhh6/5H456z2TwTltUhM3hHCe2g6w9mNoTZGjnX41/PVYVw9FCHrNba
- XBO6Buk/ghZUNWkHLXugsBz4Krs9er4JQZIfxqIedtWASaSJvaW2DEJmhd9iKUJMwvoB
- T09w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
- fh=OqT8nV0sGx179V0pCjSZbhv8utV4J9HdN1hsQGVI7mE=;
- b=kYaURGbhKWmA4bmbZRK3sRlGEcPM1fZSrzU1U1Rsz44b5YfZ5WM9b9ElGQ/mKjIfHS
- GVwLqODx8ob0QdAtTmyKM2vMDlNFHWoAh174t34dN4GgrjYF1wcwT9gB36/x7HpYJP8+
- Pb40jibSefHFHtdv7t9ezFcKqWfU9WC2xyd+LfkqJiIz0mnpwUHzM9tNGfB4oFw6pYpk
- Xm7VZSrxuVrIt2cJ2gJUpVLNX8fLBn+lX2bA9i61widxJIty7oG8zfkU0zJIPLwh2+jg
- maAF5zQc27KB2wVSoi3R1Z0cidJoLL/M3Pd4dSTp5SAvLLdsiiPk+rniOT1/Hg/6Y+J5
- AObg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784297515; x=1784902315; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
- b=ImnH2+Jx6AidUMvR4LUKwQ+AfFpjnhj7kj71lhEe+a62KUHGWqYaCsXu3teV3B6rs0
- OevgXWk7REzdNLajsVwtFKt8raVq5b+kl/p4rbGtPo6xg/jKv+WzF18zW1e2Kt/ptHAJ
- ScsjJCthO8t2SIUt0eKZAeptOjnobNqTWiEOM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784297515; x=1784902315;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
- b=nckN43t6YnZCO9iaae42hfet1lIqX9/phE3PYsbLrBRZOaI+dU+qYwWbiRmxO6K+Ux
- gCyjHWC6AzundnpNoSwOXkXff5G7RV05AKUAqm+hfrorVGyNxYy1GNKiFXD8jupAzINZ
- 52rh3Gnm4+iak/KjL/KTwUCAPNPBLjHn5Pz+FtCUWlwS/e/R5QMafk8hBGFlLGqg2AVR
- BnE3u07HmDmD/OT0f1cOT8aJTVx4Uuq/U7M/Nx34NQbXMLbHOgcOxR21pPk5+NguKIkH
- 4DjAlq3ycfz8bPZRYSzf6Mal7V2oAv+ezScAAPcGu/7FiGIcFsPQqKuZHDUOI4fSkC5M
- oj4A==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rq8GZ6RA853H+EDKxxxSISt5qw/eD2LF5u5QzQsCNZiiO7+8pThaTlCdmsZ3RBND4KHZTabqbQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbVB9fba2NP9jK6U3cUfld1KEkELvA+nhZ7w9Gq09uG0ZkT7FF
- Ib/8EzuKk2k1x8jflilPHvCKpoLJCZsF7tDZt1o29+7Q26fPhGa1hgPMZnIql4xVCWwSKdguoj3
- msorcHeUdaTeFcV5G57LfFyeYL12YHud8K7Yijboi
-X-Gm-Gg: AfdE7cmsaAav6xv6Ycd3pj5BGaMMcRxbW7xmju3HUnYknEdHpkAgH94lcvjSTlaIugV
- USJEty0k0lxXcwHM0hj0HRmWGbJTbxKI/+JQHxFwLYM/vCtT0ssKqLyaWt/gzJN6yjbwEyw2MGJ
- 0HP/neMrJLIxfp5UGoj4WVEsHWrDTKPfSha5BeaeAA8VBeq8hI5leTbLiVmWB7K8JEuN2yJ2Wi1
- hqzbfG8jRljyIaBmQJcYAKcRED1GbcYGHAHu/R5lnuFN827aiPtd2nuQVvW
-X-Received: by 2002:a05:6402:3549:b0:698:3b7c:7e5c with SMTP id
- 4fb4d7f45d1cf-69e6531cc15mr1041003a12.40.1784297515029; Fri, 17 Jul 2026
- 07:11:55 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 74ED51A1065;
+ Fri, 17 Jul 2026 14:51:11 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 4012C60361;
+ Fri, 17 Jul 2026 14:51:11 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6A85B11BD0007; 
+ Fri, 17 Jul 2026 16:51:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1784299870; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=uUo5gH5+VtrcOITu8YYOQpfFbTIu15r4t3OqX9GlSEw=;
+ b=mcAUgAj90Vp1JYwrxPldGPXBQAW0d7ZF5g4gU7kRT+HqR2Z+xOC7gTqnJatsC4XkaOB9Me
+ LfN3B7muXGYqX4AmALoW62btJhnz3eDVaD7iCiHmeXobdY6i+tCFt3Zy0+PfpgiTs3pp9G
+ 2Itu7l+Tb9k0tNsIEKB88A4Cl30wWrHItFeDKSApVkEFB1u5gMD6xToIJ7V1UJI1/+qEKl
+ ch0fR0VQ9mnjpzAD9reHbDeysaccakMJjoZLvMUwwwR9PzoHUFVmiHyQBZqjSe0guD2/rX
+ kChD+3ryJTZptJtztu1dnXQ32tSNb5/7ys8DDeJL2yilX6o9KoxqWz4S+S4C3g==
+Message-ID: <1002cb3a-5f11-4d25-93de-f7965256903f@bootlin.com>
+Date: Fri, 17 Jul 2026 16:51:07 +0200
 MIME-Version: 1.0
-References: <20260713074539.32875-1-liulhong617@163.com>
-In-Reply-To: <20260713074539.32875-1-liulhong617@163.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jul 2026 08:11:42 -0600
-X-Gm-Features: AUfX_mwb8HYL2E8thzfp-zrKSSz7bzJx9FplbNuN5ycoCvIQa6CGFpPJ4bubODI
-Message-ID: <CAFLszTjMJq2C02Xc0YTX0+5Q-DOPK+zrKn62PwU1qE+vPBASCw@mail.gmail.com>
-Subject: Re: [PATCH v2] Makefile: depend on OF_LIST dts sources for
- fit-dtb.blob
-To: liulhong617@163.com
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/6] mtd: rawnand: zynq: Fixes and software ECC support
+To: "Kumar, Love" <love.kumar@amd.com>, Michal Simek <michal.simek@amd.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
+References: <20260702-dave-upstream-nand-fixes-v3-0-3814352982ad@bootlin.com>
+ <af5b229e-0466-45cf-9562-434dc0fa383f@amd.com>
+ <6a9f0530-ea41-491b-b4f4-f7d03ee2fd3a@amd.com>
+ <b22d644a-6d11-4ac8-9a38-82fd8ce5d5fb@bootlin.com>
+ <6051fd86-9f84-4a43-9788-1fa07510c4c0@amd.com>
+From: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Content-Language: en-US
+In-Reply-To: <6051fd86-9f84-4a43-9788-1fa07510c4c0@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,75 +83,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lianghong,
+Hi Love
 
-On 2026-07-13T07:45:39, lianghong617 <liulhong617@163.com> wrote:
-> Makefile: depend on OF_LIST dts sources for fit-dtb.blob
->
-> When CONFIG_MULTI_DTB_FIT is enabled, fit-dtb.blob is produced by
-> mkimage with one "-b <dtb>" argument for every entry in
-> CONFIG_OF_LIST.  The make rule, however, only listed dts/dt.dtb
-> (i.e. the CONFIG_DEFAULT_DEVICE_TREE blob) as a prerequisite:
->
->   fit-dtb.blob: dts/dt.dtb FORCE
->       $(call if_changed,mkimage)
->
-> Because FORCE is PHONY, if_changed ignores it and rebuilds only when
-> any-prereq or arg-check is non-empty.  Editing a non-default dts in
-> OF_LIST rebuilds its .dtb (tracked correctly via fixdep), but that
-> .dtb was not a prerequisite of fit-dtb.blob, so $? stayed empty; the
-> mkimage command line was unchanged too, so arg-check was empty as
-> well.  if_changed therefore skipped mkimage and fit-dtb.blob kept the
-> stale dtbs.  u-boot.bin, which appends fit-dtb.blob, then shipped the
-> old device tree and the dts change did not take effect.
->
-> A previous attempt to fix this added every OF_LIST .dtb *output* as a
-> [...]
->
-> Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On 7/13/26 3:52 PM, Kumar, Love wrote:
+> Hi Bastien,
+> 
+> On 7/13/2026 3:18 PM, Bastien Curutchet wrote:
+>> Hi Love,
+>>
+>> On 7/11/26 8:36 AM, Kumar, Love wrote:
+>>> Hi Michal,
+>>>
+>>> On 7/9/2026 11:23 AM, Michal Simek wrote:
+>>>> Hi Love,
+>>>>
+>>>> On 7/2/26 15:08, Bastien Curutchet wrote:
+>>>>> This driver is deeply broken in many ways. Miquèl has cleaned it up by:
+>>>>> - flagging the most hideous parts (where Micron on-die ECC support is
+>>>>>      hardcoded)
+>>>>> - enabling DT support, eg. for reading the ECC configuration
+>>>>> - fixing software ECC support
+>>>>> - aligning the software ECC OOB layout to the rest of the world and
+>>>>>      allow a working interoperability in Linux.
+>>>>>
+>>>>> I then added a patch to fix writes when soft ECC is on.
+>>>>>
+>>>>> Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
+>>>>> Signed-off-by: Bastien Curutchet (DAVE.eu) <bastien.curutchet@bootlin.com>
+>>>>> ---
+>>>>> Changes in v3:
+>>>>> - Add patch 6 to fix write issues in soft ECC.
+>>>>> - Link to v2: https://lore.kernel.org/r/20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com
+>>>>>
+>>>>> Changes in v2:
+>>>>> - Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
+>>>>> - Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
+>>>>>
+>>>>> ---
+>>>>> Bastien Curutchet (DAVE.eu) (1):
+>>>>>          mtd: rawnand: nand_base: Don't overwrite read/write_page_raw() for soft ECC
+>>>>>
+>>>>> Miquel Raynal (DAVE.eu) (5):
+>>>>>          mtd: rawnand: zynq: Align the layout structures with the driver namespace
+>>>>>          mtd: rawnand: zynq: Add comments about very bad practices
+>>>>>          mtd: rawnand: zynq: Make sure an of node is attached
+>>>>>          mtd: rawnand: zynq: Do not fail the probe for no reason
+>>>>>          mtd: rawnand: zynq: Fix Software ECC engine support
+>>>>>
+>>>>>     drivers/mtd/nand/raw/nand_base.c |   6 +-
+>>>>>     drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
+>>>>>     2 files changed, 32 insertions(+), 89 deletions(-)
+>>>>> ---
+>>>>> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+>>>>> change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
+>>>>>
+>>>>> Best regards,
+>>>>
+>>>> Please test this series.
+>>>
+>>> We are again seeing the NAND write issue with zynq-zc770-xm011 board.
+>>>
+>>> Below is the log snippet:
+>>>
+>>> Zynq> nand write 0x80000 0x0 0x126f80
+>>> nand write 0x80000 0x0 0x126f80
+>>> NAND write: device 0 offset 0x0, size 0x126f80
+>>> NAND write to offset 0 failed -5
+>>>
+>> The exact same command works in my setup:
+>>
+>> ```
+>> Zynq> nand write 0x80000 0x0 0x126f80
+>>
+>> NAND write: device 0 offset 0x0, size 0x126f80
+>>   1208192 bytes written: OK
+>> ```
+>>
+>> Can you please share your device-tree / defconfig ? I'd like to dig into this a bit.
+>>
+>> I'd also be interested in seeing the output of 'mtd list' and 'nand info' on your side.
+> 
+> I have used the xilinx_zynq_virt_defconfig with zynq-zc770-xm011 DT.
+> Below are the log snippets for 'nand info' and 'mtd list' commands:
+>   
+> Zynq> nand info
+>   
+> Device 0: nand0, sector size 128 KiB
+>    Page size         2048 b
+>    OOB size            64 b
+>    Erase size      131072 b
+>    ecc strength         0 bits
+>    ecc step size     2048 b
+>    subpagesize       2048 b
+>    options       0x40000000
+>    bbt options   0x00028000
+>   
+> Zynq> mtd list
+> List of MTD devices:
+> * nand0
+>    - type: NAND flash
+>    - block size: 0x20000 bytes
+>    - min I/O: 0x800 bytes
+>    - OOB size: 64 bytes
+>    - OOB available: 38 bytes
+>    - 0x000000000000-0x000008000000 : "nand0"
+> 	  - 0x000000000000-0x000001000000 : "nand-fsbl-uboot"
+> 	  - 0x000001000000-0x000003000000 : "nand-linux"
+> 	  - 0x000003000000-0x000003200000 : "nand-rootfs"
+> Zynq>
+> 
 
-> Signed-off-by: lianghong617 <liulhong617@163.com>
+Thank for these information.
 
-Please can you use your real name in the Signed-off-by tag? Also we
-don't normally use bullet points in a commit message.
+Have you explicitly enabled the soft ECC ? I don't find the 
+nand-ecc-mode property in the upstream zynq-zc770-xm011 DT.
 
->         edit still needs two make invocations to take effect under
->         parallel make (the bdm uboot flow runs make -j33).
 
-The 'bdm uboot' flow and the out/.../build/uboot path are specific to
-your downstream build system. Please can you generalise these to plain
-'make -j' and a normal out-of-tree build directory?
-
-> diff --git a/Makefile b/Makefile
-> @@ -1476,7 +1476,7 @@ fit-dtb.blob.gz: fit-dtb.blob
-> -fit-dtb.blob: dts/dt.dtb FORCE
-> +fit-dtb.blob: dts/dt.dtb $(patsubst %,arch/$(ARCH)/dts/%.dts,$(subst ",,$(CONFIG_OF_LIST))) FORCE
-
-This hardcodes arch/$(ARCH)/dts, but with CONFIG_OF_UPSTREAM the
-sources live under dts/upstream/src/<arch>. For example,
-rcar3_salvator-x has OF_LIST="renesas/r8a77951-salvator-x ..." with
-sources in dts/upstream/src/arm64/renesas, so this prerequisite points
-at arch/arm/dts/renesas/r8a77951-salvator-x.dts, which does not exist
-in either objtree or srctree. Make then fails with 'No rule to make
-target', breaking every OF_UPSTREAM board that uses MULTI_DTB_FIT.
-
-Please can you use $(dt_dir) instead, as MKIMAGEFLAGS_fit-dtb.blob
-already does just below? It handles both cases and VPATH finds the
-sources in srctree. A helper variable would also keep the line under
-80 columns as well as improving readability, e.g.
-
-    of_list_srcs := $(patsubst %,$(dt_dir)/%.dts,$(subst ",,$(CONFIG_OF_LIST)))
-
-> diff --git a/Makefile b/Makefile
-> @@ -1476,7 +1476,7 @@ fit-dtb.blob.gz: fit-dtb.blob
-> +fit-dtb.blob: dts/dt.dtb $(patsubst %,arch/$(ARCH)/dts/%.dts,$(subst ",,$(CONFIG_OF_LIST))) FORCE
-
-Just to check, this only catches edits to the top-level .dts files. An
-edit to an included .dtsi (including the *-u-boot.dtsi files) rebuilds
-the .dtb but still leaves fit-dtb.blob stale, so the two-build problem
-remains in that case. That seems an acceptable improvement, but please
-can you mention the limitation in the commit message?
-
-Regards,
-Simon
+Best regards,
+Bastien
