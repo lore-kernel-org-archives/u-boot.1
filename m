@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03312C44520
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41558C4451C
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:33:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EABA84DEA;
-	Fri, 17 Jul 2026 14:33:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E28584E1B;
+	Fri, 17 Jul 2026 14:33:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="VcGYX0Jz";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="E9MKGis8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F165584E14; Fri, 17 Jul 2026 14:33:45 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 4166384E19; Fri, 17 Jul 2026 14:33:47 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8FCA84DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:33:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51DC684DF4
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:33:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-493b27c7451so10627495e9.0
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:33:43 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-493b27c7451so10627695e9.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784291623; x=1784896423; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=giZjvpxZ6mEEIE0GCG1w1vvaXpwPsS77N3eEBJ1unt8=;
- b=VcGYX0JzailCKxJUTR/HWFOL64bCDigZSQP9ajNPO0PgXp9257tDNAP/O9YlLFJWBt
- QovimUj/wh5GjTaEXeUoIzBwNldtBInqR4FOk0MKhl+UANqrMkSwOLeaG/k9+VsvevG5
- VYhA7UyvwQVUc3WPfbmshvtDB2oMUbbdcERHMWBAkf8N52jr1qpIExPTFu0wbq/CtyEt
- f88hCon2GWRJSKh26sktTgcQx1KMV9uPMMiAcH3Hm3+srxpkFVBRAP+sJCvTCfTmFvWo
- UJWVpJHE4Nzu58J+TK0WFRRsZNiNIoY6TmQNlYKUCSyc+02+02eOXdGI5rRTZrI+Yomo
- ZYmQ==
+ d=baylibre.com; s=google; t=1784291625; x=1784896425; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=y1czgdexblSJpE3FBPmX/CgrZpz2BdA3W0z93Ni3efo=;
+ b=E9MKGis8A1SywKJJOdcBDmyZTEgXyVJVQEM1Bgv+oTVUQ1yMu8lWb5TAlKxE2TpUBq
+ 0jDVaQL9ulixoqYuumbSss+bfT9Q8gnIpL/Vxlq4oVV+IPffd5NeFpY9g5t9ZXF5fv5R
+ sLIKoqB2rr3hAE3SlGOIPwVCarHH7DDk9wa81Ykt6Z9LY+kdiGmt+CAaiHLREuc/CbdH
+ Iv2Sq+s7xA3bgZ3YTe771GrctLkAwb0+z/qeYhmxthHXvRfHJNBb1STmdByavHNCTYNA
+ Tvk0KfNuGgdywU3ucZ/9waKq0nF/bls4hUUY0ZAo+PR5UUAeYwKNK+BD0zeIwDxD01Xt
+ W1sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784291623; x=1784896423;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=giZjvpxZ6mEEIE0GCG1w1vvaXpwPsS77N3eEBJ1unt8=;
- b=hRNhVXwYZJZOZ6RVsj8B3FFwP0d/sXFRGQSZp9okhp8rnE+vSZimIsNBGjJjd7jZP7
- I/5h4k4dQsLEEF3wlJmrLYR1/kfk+iFFKm1g/pENz1ij5UWNPNk5Yod4/laKcAMUEXV2
- tOnaOfI/z+T/jwyZuFxzm7vt0DsTXEJqk19RX+GovsFQcK8rxpSbInlCBLU5K13z6Ce2
- yaQ0GHWplG4gBytK+NL9ZsKMLbpJvNneOaLnUCh18ZzCMq9a8NZRcCRO82ByBOMp2R5U
- nFj4GGwR1Be/V0ipc+e/mhAz6qw1PvPewBAbSNwioDglcDriQRd9DCKnmCnMNuMV0B/A
- LpTQ==
-X-Gm-Message-State: AOJu0Yy3230qXO3Nb/g9y/Z0fM+ZPrcp4nM0TW85yO5gpKb2RmOhgGcJ
- hWblOa5nRrJR8Ge6jX/DyVwq4ttltnIUc7L3l7u6t27EcUaV0oGoOxX/2oQyNbR3oHU=
-X-Gm-Gg: AfdE7ck631LqWhG9EfYWfymZZBXu0cb3WDMHX975/MUmIUBiX8QhBPMDbVF8CcEPMc2
- Q7hYwKzD+ThLXxJcjWFnsywHDqQe5BKI5lDOhvTbw+p5hSL/WJrQ8RTh6N3NayktOt3Um4tUrZR
- ivN6T0bb+f4eE2Y0PgNgKnhVsSXmH01tVUiqYl73gRe59ETfn7D1aicj1NoW9ALyLvtWGs4I5J9
- cht6m7SV5+LIoABKDGXJwDA/uFAMXVff1HqlLbQM4b11mi4Bz4Jxr1TiBqXX2TjSoLgGj+m4yCa
- 7yfX6uxN6F+99O6Btdf6HG9WuVxa7n14fBtKbJX0J7aoRhAWjldDpRrP8XRY7FY1YKBtunrMZHs
- WbwiYkyG8AxspxTLUjzF0FontEc4tW7xBq2TaGPaHGB/D/tx8iRyNQrG2bfNNjSVkLJCbwXoRmj
- Gnmt3rbxbJraLhSP9SEqF/fkukwXh8nGp1oBf6vpzw7IswiBNDxSiQmWIpLVzSD3WVm/NSKDrvh
- RZjyf9QjmkyUnxTGC+nfnQ+zXVB+NjYo6BwRBZ/AjW/EfEyqfkTstVvV+jOZdYubajmDBY=
-X-Received: by 2002:a05:600c:a210:b0:493:c566:7bd6 with SMTP id
- 5b1f17b1804b1-4954a341bcdmr16372265e9.18.1784291623191; 
- Fri, 17 Jul 2026 05:33:43 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1784291625; x=1784896425;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=y1czgdexblSJpE3FBPmX/CgrZpz2BdA3W0z93Ni3efo=;
+ b=XUk0w3TrjlTgMhUNARzKWx2uiJjYYwyU7pHHhAnmzSqe2RWh/9lKUkwk5hbq+sY9F6
+ vmPWs+SLzMHdex990RgyuYdN0gBBmpd4gl0XSEOT8d7ln6XcIMDl+rnlmElwADrx8Gzv
+ 0LTkr4on+pIKZUIKlX/mSQQnsxBnqwhfnFIZrm3D4GR7mLUCZ3DpP2O6Fi9GDhivYH3f
+ F3Sc8FghpfgIpEcV2GS6d3EjZHLDolykEk1FG5aG+IK0kjgDXzhHAtIkasgHxj+ChOFd
+ A5DUxofpNF8Xth20AE4UhVvTghTaw9tADvqrkj4SmOzVFkiDcxup4g10y2B9/sLaWSkI
+ /coA==
+X-Gm-Message-State: AOJu0YyY/HZCw2IpKlW+6+fYi1tYNbeWLaQk9DAnTf3FWOxmrcCBCUWq
+ cF96Ba9qCWaGzar9pCOBB7TXHK8sF+d8Juc1A3VUja/mN+7KJqZqPQp3U6EtSY1VRv8=
+X-Gm-Gg: AfdE7clNJ4uOHUHp+2Nn6XVYLBTQPygmNiP6gfVeC96dZ4OZoTSpymWC4+GZ0OrwNVQ
+ pDYT2Nm0rE/temAzCCn3jXyofsAxr4sRv6wT1oeGLk99b/gHcDiWkxZQPLTqGF0Do5KnCrQh3jg
+ +Bk565BD/JOW+kxITgnN6bd3h919gYUcf5p0NB7AmxIrMTmqtvxcHFiwN8jnD1COZCUIutypBn7
+ +e+XNciodpl+DZrFxVTQoMyoxTBdzSiTFziTl4GzrU9LsGGz/cIaPESjk/JO+E8WCURGR3gSrLG
+ rX6jfTUsu/NAcr8k0ZW3owUyEnA7YxTrijUcKjyK53j82jvko5103C5sVdKMagaIxBD2preCFeG
+ ArDKhhHE0tg2GZGh/w66XV2WELeOMa9i34iNiO9w3SKEolkk08f1MPsAyWBXCIRsfZCJNxfsFBc
+ jJeUJZN1FnrGx+fmjZAaxLm9K4lgMI5hSS2BCH3WON4fY9bJZDNr2l8Bb4ifBXSUpkVtcv8scpq
+ wPCkmnbk+g5oXq/oNUhFA1JsdHIGvhkU6FziDP1yi4I5LDxIR/UIdzup4QwVQCNkC8SkXA=
+X-Received: by 2002:a05:600c:1381:b0:493:b698:9247 with SMTP id
+ 5b1f17b1804b1-4954a33dd74mr30311965e9.14.1784291624505; 
+ Fri, 17 Jul 2026 05:33:44 -0700 (PDT)
 Received: from [192.168.1.65]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495499f3f99sm44199595e9.0.2026.07.17.05.33.41
+ 5b1f17b1804b1-495499f3f99sm44199595e9.0.2026.07.17.05.33.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 05:33:42 -0700 (PDT)
+ Fri, 17 Jul 2026 05:33:44 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH 0/2] i2c: add HDMI DDC driver for MT8188 and MT8195
-Date: Fri, 17 Jul 2026 14:33:39 +0200
-Message-Id: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
+Date: Fri, 17 Jul 2026 14:33:40 +0200
+Subject: [PATCH 1/2] edid: add default EDID_ADDR macro
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2N0QrCMAxFf2Xk2cDSQa3+ivjQNZlGcGraDWHs3
- 626xwPnnrtAFlPJcGwWMJk162OsQLsG0jWOF0HlyuBa59s9ebyXQCFgZEbmhOoSsukshhQ7dsN
- BPFMPdf80GfT9a5/Of85Tf5NUvsHNMHlN9bRs2rp+AElU0taSAAAA
-X-Change-ID: 20260716-mt8188-add-ddc-i2c-driver-1a3d2f9e6d1b
+Message-Id: <20260717-mt8188-add-ddc-i2c-driver-v1-1-e89ccd173567@baylibre.com>
+References: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
+In-Reply-To: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Tom Rini <trini@konsulko.com>, 
@@ -116,34 +115,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds an I2C driver for the HDMI DDC (Display Data Channel)
-found on MT8188 and MT8195 based SoCs, such as the Genio 510 and Genio
-700 EVK. The DDC channel is used to read the sink EDID over the HDMI
-connector.
+EDID info is most of the time stored at address 0x50, so define a macro
+for it in the common edid.h header.
 
-While at it, a generic EDID_ADDR macro is added to edid.h for the
-standard 0x50 EDID slave address.
-
-The full HDMI support will be added later, as a separate series to ease
-review.
+Also drop the now-duplicate definition from the Rockchip edp_rk3288.h
+header and rely on the common one.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Julien Stephan (2):
-      edid: add default EDID_ADDR macro
-      i2c: mtk_mt8195_i2c_ddc: add new driver
+ arch/arm/include/asm/arch-rockchip/edp_rk3288.h | 1 -
+ include/edid.h                                  | 3 +++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
- arch/arm/include/asm/arch-rockchip/edp_rk3288.h |   1 -
- drivers/i2c/Kconfig                             |  11 +
- drivers/i2c/Makefile                            |   1 +
- drivers/i2c/mtk_mt8195_i2c_ddc.c                | 398 ++++++++++++++++++++++++
- include/edid.h                                  |   3 +
- 5 files changed, 413 insertions(+), 1 deletion(-)
----
-base-commit: 78bfaf6281605509fd49262b0138cf1fb338ef62
-change-id: 20260716-mt8188-add-ddc-i2c-driver-1a3d2f9e6d1b
+diff --git a/arch/arm/include/asm/arch-rockchip/edp_rk3288.h b/arch/arm/include/asm/arch-rockchip/edp_rk3288.h
+index edacf102852..2332ae30953 100644
+--- a/arch/arm/include/asm/arch-rockchip/edp_rk3288.h
++++ b/arch/arm/include/asm/arch-rockchip/edp_rk3288.h
+@@ -527,7 +527,6 @@ check_member(rk3288_edp, pll_reg_5, 0xa00);
+ #define PLL_LOCK_TIMEOUT 10
+ #define DP_INIT_TRIES 10
+ 
+-#define EDID_ADDR				0x50
+ #define EDID_LENGTH				0x80
+ #define EDID_HEADER				0x00
+ #define EDID_EXTENSION_FLAG			0x7e
+diff --git a/include/edid.h b/include/edid.h
+index cee7c4c7637..77a5d258311 100644
+--- a/include/edid.h
++++ b/include/edid.h
+@@ -14,6 +14,9 @@
+ 
+ #include <linux/types.h>
+ 
++/* Default EDID address */
++#define EDID_ADDR	0x50
++
+ /* Size of the EDID data */
+ #define EDID_SIZE	128
+ #define EDID_EXT_SIZE	256
 
-Best regards,
---  
-Julien Stephan <jstephan@baylibre.com>
+-- 
+2.54.0
 
