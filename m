@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D3AC4451C
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 988B4C4451B
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8457584E23;
-	Fri, 17 Jul 2026 15:45:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5A8284E34;
+	Fri, 17 Jul 2026 15:45:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cp3+wLCk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QylYmt7t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99EB984E2E; Fri, 17 Jul 2026 15:45:24 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id CEDAF84E37; Fri, 17 Jul 2026 15:45:49 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9294684DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:45:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD4EC84DAA
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:45:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-c15ca7a7ca9so484661766b.0
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:45:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784295922; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-69c7c8accffso11221910a12.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:45:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784295947; cv=none;
  d=google.com; s=arc-20260327;
- b=EbwRh6l/NvqH6atwtX1h2FMH07/74v98SrfthckwMnK5fUWWroTndv9X3viA24Mx1u
- 1gL6edi5JbFbSDZzOpLXHB5dzJXojh1XylELRGhcMjsmp1T2j4ClISCnsivlATfgu0cX
- JXmmdZcFNBalIi6NdI+vdc4R1/ghU9mpWeSIXAqhOFCv6OxHiQ+jbQG1pdI504c+sLHM
- HgvvGIM4c0C7R4nzdt4H3Z1szq2xYg/VWDLww+hNIPG488oTQsQub6x5hE7L/LWdMCvt
- 9YwXcmDWvcDjVEnPo6SCRpvnmIhaOHHxu/9LaKCvvJuDaSsLLeDMMsP3L2rTTjyjrxJy
- W5Kw==
+ b=WgCsrlnbfq1HsmvyOSKg6xBY/ZTF/6KsncW1KEgEN5EOVaYjJoLNMScqPaCDngHTlB
+ zgv9F+2AYENS+IVtvpVU8snbiOF96g9B1Qz7cTwF77Di0SdiH9QM14uOTXf+tEMHOocF
+ cLEYUJzhEPKF6OQMxolEHBQ6ObZ8o1eUpZIpDdPavE9ZE8wS2kY8hGRL7HlKAL3azinF
+ RmF584bIUXrg/KgEciVjq7zvsDUGDWBOJkEy/PTLp1jARdlsOUC5r3fGCpfjEGi5VKqM
+ jwBaPoRLVhcU1hnOrbMo4NxPQQUFoBGVEaSz/ZhIVbgAOWpNPMxOJAe5HuUh/9niAzEg
+ D+xQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=PuPHGYNuRJJQIE+UG1gWl/EKuW2DzJ4NrR0CRIO6C88=;
- fh=of8ZGfO/quwI3Zl5OAHSMOkElCFSSYQ5UpwsifBviBY=;
- b=d+rytcTuIfc89g81KmBI4k3pfgPD1EPZqDRU3HOMN6U9sXe3cOSxR52VJMg33Uy18p
- Q6rWhV62ZaC9dGKT9uI4tiF27RkURL/AVyqT4WauvGZLnW52zFe2nI3/kGhlsCz4v2xY
- fq5cy6PJhx1yd0S7nCyXBq702ST8nHJ0wUWKX+/sxCq3Yjjr1qZtO3kBagjBi0KV3+28
- kHCrfFP10YNNya40hvoLWUO8qTd/PAVprw1D4szAL1yY/zZQTENxlZImx/XLDj0uSPAA
- jbGhs0KrASreOQpdVVLkICuvg0T0ol6cdDau1pQ3JUSqHmqpEaST4qVNmcRKx3xgC5W6
- 717Q==; darn=lists.denx.de
+ bh=lrh0O7Z/XXfl1XlHdPUpVSB++UzVKMXLzV8uD28fxNI=;
+ fh=RjrOloAlRaatDJGZC+avu9o5bJcMoMkqKRD10Z1QTkA=;
+ b=eM0huRyYa26JRVfMeeedxkjzcv9NMzdKTWYD4ZSsTP5ndhnLXViSojv3pIK+Z5XTFt
+ CcDVRjm9SB5fVOrbRQfPuMWcerWqKZLKmoZDDZPt5NfVEBHpNAVhs0DAl0qRn4f6TpLF
+ FIsGs+Ax+Rt3Rd23/Mk87qffEKipqjtkilvFSqWaWWG+7K3uZ1q+QV5+T+dDknx8+/rC
+ dlm7rIx4XAxhlmR6m2+v1W7CXS+0CCTdHeLgJoqx72/oD5fykOQkAvB3d82bO7lXXL/k
+ M37xYBbelKLPvInPtSqioSU0TPOjyny1mT0EYrsXHIyPlq4P29FC8zw+50+S7fRxqZGC
+ Opcw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784295922; x=1784900722; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784295947; x=1784900747; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=PuPHGYNuRJJQIE+UG1gWl/EKuW2DzJ4NrR0CRIO6C88=;
- b=Cp3+wLCk9+TP7J3n2MX5l3H1BRBFytYvejvouiSr0q/aCrQaAOJQSrKvi4vtHBXJZa
- zphfE+7i+OQFXXaiJ2sjLdPTmJbnZIf8aQAyAAV8tGxofn3qhdBFFz/4akQsKqH2ddmT
- pvx9aPVyoJuBBeLL7muyDYzUrNWenMVfJjWks=
+ :content-type; bh=lrh0O7Z/XXfl1XlHdPUpVSB++UzVKMXLzV8uD28fxNI=;
+ b=QylYmt7t6wFJx2Imk8EGsMYONCFsBssFUnH4aAkKgJbRzfoNLC1u1istYU75W7uccm
+ PHgqsE+97d6+9LzqXHySiVGrZoNS636zWMzkcK4/S+4Zf4rFpQVoaynfSlTjBH5LqBK6
+ lwPyD+6A0kuKtVh3GXCjBA9edBKW0Nvb7HHps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784295922; x=1784900722;
+ d=1e100.net; s=20251104; t=1784295947; x=1784900747;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=PuPHGYNuRJJQIE+UG1gWl/EKuW2DzJ4NrR0CRIO6C88=;
- b=NUpUyV4QPEEu5MdAS+/zCpkm+UBrytR1g5PP4XfiFW7gsmx2yrzWcMLiB8TS4RUFTB
- d9MH8iUJ3d/ctDByhjnrNy3H8SmZRfPM7Xbmy6rgLLz+c8l9oFk6sCBO5CUW65Vy/xDj
- ecXrYurBLFxgLMnVfyu7SPdikdp3tUE19k2Zpk0/w6v2M9dEoc0INvo6klZA+Ss+rpfl
- 5OspojjS8dp7E0MZpn4Cvq0AL/G3PGtVfvnDYK1KgtqeJjGGgzUomgae1zRJvtFOym8s
- /xk1ulD+Ricq6yhdNdqMTa29sDpP0aGAQZptIvEe5M0iWi/A9q3c+KSoO7atGqoJNUMc
- iLtQ==
+ bh=lrh0O7Z/XXfl1XlHdPUpVSB++UzVKMXLzV8uD28fxNI=;
+ b=aotaYLxaqwBUAGyL4RYoPLWhmuSpKb1KTDJu+jj1tBwGLfgoeu+LaRIIY7hziLU0pW
+ mh2tQSi4TmKrjCgiRMFeTBgrEW8aKb58j9Pu9xBmcEKfcXBWegIe18R0GbVHBZt5Hn+W
+ dfLilj9zxkqGVrQV8tPM6N5lPphI/k1Oyuz+GT6dw4ivqhoPzJs20ECIEkZkZOyyKV//
+ KB3sVKoMl0Dy3jFMrbdoQ2EsM12ZytlEAosQREw3DjK+cbexsVwz4Lvo32NauWqE3Xeo
+ oqTUe6Lzu9L95GvbcKbtSXa5kQSNIWiGzWb0dBWSffSwu0X7ufI1bkh/pYrS6yk+rHaR
+ nlbg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqEwfbn4m76gfyzuhJ0GAN+DWBL6Zd7/vPSZwg0GTXPduOXXRJ9k8MuyZO376myZyfT5z8FjUk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1WC6SIczqs6KMVplvKugPxq65WDBTdX/8Q6gQTWABXpWEzDMm
- rYB8Q6kyu5+Qo+BXKVQkI3vCkB1IacoUUTyR4Sb7rNNDSlCs/i4X5a6UaBpaol0234P0Qd/R4Sw
- aTmZr3hlXCJWztOPGAPiMJySz4V3aIVnwwfRjYk0U
-X-Gm-Gg: AfdE7cm/PfEJZ4tkg/mR/ybMsncQFjlDCDlj15JWKx/HdrpoQbLIROjnYeOPfROrSov
- aCRJkTsxhiSZ4D3EOhoIzSvvLofLBa5QyaVBT2WPoo2oXdKH0se1o7BY0UTOdY2ZR5sR/Owsq8/
- ljcl3ThLX3Xs0MHni7va6Pvf+5tp2sf+/GaYUUvrsS/lY7OAjKDHzHO15e2szUT3Upwo1JkRWKH
- JNqykkMvxpHDKP5E/xlB3TWsiISrxNjOmyUe9pnfypUZ9gsjFCQ9HD3ogNn
-X-Received: by 2002:a17:907:1c06:b0:c11:efec:6ca9 with SMTP id
- a640c23a62f3a-c16b4699a22mr123018166b.8.1784295921836; Fri, 17 Jul 2026
- 06:45:21 -0700 (PDT)
+ AHgh+RrdWuyjK7IqBlhbwOQX/UWQaqnv/7FTZcRSwXEDz7NdFsUqtELiLF2wy4diplsTqc+ilitHCyw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+0t0SjLPn+pGek2oLD7/s4VndBFkq076YgJEWqhqT4S7F3t5M
+ kRYPqKd/bUmas4ZpFjbjU2npOEEgaN4L8ji0GDHHgNAaLR4VOr00T/4YxvSmjOiWSq8bfZyeZHZ
+ pRdW30DOhVmVHw4Q+PBJxHso1ZEySm6phTl+SNCv5
+X-Gm-Gg: AfdE7cl81Up+tJvgH6C+/rVCWPI6rvYhb04wyA5eSiXa06fstKrQauDETFN4ZSuQiL9
+ hBIraCZ++JHrn2Fd8mPthwtLJcGmytEq+3A0XZRSFccwt3j2aZtCK0v5jz+mlQ1FTm37EQ0gcim
+ G2RZykIl2Ai+DisVb0m6VgmvRqN/gkp8TtfjHIBYXi+PPAANJSSJL8D6yLr+eTsfyq78aiP+tE/
+ 8/SmR8rykaV5q5niDZNIm+NEywCZARD+vOHx1kyIVJyjTW8aPstrdS1Jome
+X-Received: by 2002:a05:6402:354b:b0:69e:8ad:5162 with SMTP id
+ 4fb4d7f45d1cf-69e6525b110mr1060444a12.1.1784295947187; Fri, 17 Jul 2026
+ 06:45:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260711160808.2022242-1-jonas@kwiboo.se>
- <20260711160808.2022242-6-jonas@kwiboo.se>
-In-Reply-To: <20260711160808.2022242-6-jonas@kwiboo.se>
+ <20260711160808.2022242-7-jonas@kwiboo.se>
+In-Reply-To: <20260711160808.2022242-7-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jul 2026 07:45:10 -0600
-X-Gm-Features: AUfX_mxS14J54biaiq2_xW5aNvM_sEZbRP-FGNJOmwpuvgwYOAt_biIG13zzrBo
-Message-ID: <CAFLszThd==GttCZR+GvCxpn7mFLkjjOe7aVtjagWzSADkH=wHw@mail.gmail.com>
-Subject: Re: [PATCH 5/8] usb: eth: Add CDC ECM support
+Date: Fri, 17 Jul 2026 07:45:33 -0600
+X-Gm-Features: AUfX_mwYXIPYWKTJcmj4uLWMBFyLVQao0MDG4wFivxBnAy6902gKaxIBD56A2-M
+Message-ID: <CAFLszTg+OdWz8iW9v6An68EBwXMdi1RUfK3enQOWgjqwEjpypw@mail.gmail.com>
+Subject: Re: [PATCH 6/8] usb: eth: Add CDC NCM driver
 To: jonas@kwiboo.se
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
@@ -113,12 +113,13 @@ X-Virus-Status: Clean
 Hi Jonas,
 
 On 2026-07-11T16:07:58, Jonas Karlman <jonas@kwiboo.se> wrote:
-> usb: eth: Add CDC ECM support
+> usb: eth: Add CDC NCM driver
 >
-> Add support for CDC ECM (Communications Device Class, Ethernet Control
+> Add support for CDC NCM (Communications Device Class, Network Control
 > Model) devices.
 >
 > References:
+> - [USBNCM11] USB Subclass Specification for Network Control Model 1.1.
 > - [USBECM12] USB Subclass Specification for Ethernet Control Model 1.2.
 > - [USBCDC12] USB Class Definitions for Communications Devices 1.2.
 > - [USB20] USB Specification 2.0.
@@ -126,96 +127,71 @@ On 2026-07-11T16:07:58, Jonas Karlman <jonas@kwiboo.se> wrote:
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >
 > doc/README.usb               |   1 +
->  drivers/usb/eth/Kconfig      |   9 ++
+>  drivers/usb/eth/Kconfig      |   9 +
 >  drivers/usb/eth/Makefile     |   1 +
->  drivers/usb/eth/cdc_common.c | 153 +++++++++++++++++++++++
->  drivers/usb/eth/cdc_common.h |  26 ++++
->  drivers/usb/eth/cdc_ecm.c    | 284 +++++++++++++++++++++++++++++++++++++++++++
->  6 files changed, 474 insertions(+)
+>  drivers/usb/eth/cdc_common.c | 112 ++++++++++
+>  drivers/usb/eth/cdc_common.h |   9 +
+>  drivers/usb/eth/cdc_ncm.c    | 480 +++++++++++++++++++++++++++++++++++++++++++
+>  6 files changed, 612 insertions(+)
 
 > diff --git a/drivers/usb/eth/cdc_common.c b/drivers/usb/eth/cdc_common.c
-> @@ -0,0 +1,153 @@
-> +     maxpacket = usb_maxpacket(udev, pipe);
-> +     if (maxpacket < sizeof(struct usb_cdc_notification) || maxpacket > 64)
-> +             return -EINVAL;
+> @@ -74,6 +157,35 @@ int cdc_set_interface(struct usb_device *udev, u16 index, u16 value)
+> +     return ret == ETH_ALEN ? 0 : ret;
 
-Just to check, why reject devices with a notification endpoint larger
-than 64 bytes? A high-speed interrupt endpoint can be up to 1024 bytes,
-so this fails the connection wait (and thus start()) on such a device.
-Since ALLOC_CACHE_ALIGN_BUFFER() accepts a runtime size, you could size
-tmpbuf from maxpacket and drop the upper limit. What do you think?
+If the transfer is short (ret >= 0 but not ETH_ALEN) this returns a
+positive value, which cdc_ncm_write_hwaddr() then propagates out of the
+write_hwaddr op. Please can you return -EIO (or similar) for a short
+transfer? Same for cdc_set_ntb_input_size() below.
 
-> diff --git a/drivers/usb/eth/cdc_common.h b/drivers/usb/eth/cdc_common.h
-> @@ -0,0 +1,26 @@
-> +int cdc_bulk_xfer(struct usb_device *udev, u32 pipe, void *data, int length,
-> +               int *actual_length, int timeout);
+> diff --git a/drivers/usb/eth/cdc_ncm.c b/drivers/usb/eth/cdc_ncm.c
+> @@ -0,0 +1,480 @@
+> +             /* 7.2.6 SetNtbInputSize [USBNCM11] */
+> +             cdc_set_ntb_input_size(udev, priv->control, priv->rx_size);
 
-Please can you add function comments for the exported functions in this
-header, in the normal U-Boot style (see doc/develop/codingstyle.rst)?
-For example, it is not obvious that cdc_get_mac_address() zeroes the
-data on failure, or that cdc_wait_on_connection() treats a zero pipe as
-success.
+The return value is ignored here. If this request fails and rx_size has
+been reduced below dwNtbInMaxSize (which can happen via the
+usb_get_max_xfer_size() path in probe), the device may send NTBs larger
+than rx_buffer expects. Please can you check the return value and bail
+out, as you do for cdc_set_interface() just below?
 
-> diff --git a/drivers/usb/eth/cdc_ecm.c b/drivers/usb/eth/cdc_ecm.c
-> @@ -0,0 +1,284 @@
-> +     if (length < ETH_HLEN || length > priv->ether_desc.wMaxSegmentSize)
-> +             return -EINVAL;
-> +
-> +     return cdc_bulk_xfer(udev, priv->bulkoutpipe, packet, length,
-> +                          &actual_length, USB_BULK_SEND_TIMEOUT);
+> diff --git a/drivers/usb/eth/cdc_ncm.c b/drivers/usb/eth/cdc_ncm.c
+> @@ -0,0 +1,480 @@
+> +     dpe = (struct usb_cdc_ncm_dpe16 *)ndp->dpe16;
+> +     // FIXME: align using wNdpOutDivisor and wNdpOutPayloadRemainder ?
+> +     offset += ALIGN(le16_to_cpu(ndp->wLength), 16);
 
-I suspect this needs to handle a frame length that is an exact multiple
-of the bulk-out max packet size. The ECM spec (3.3.1) requires the
-segment to be terminated by a short packet, zero-length in that case,
-otherwise the device cannot tell where the frame ends. Linux handles
-this in usbnet by sending a ZLP (or padding by one byte). A zero-length
-usb_bulk_msg() after the transfer when length % maxpacket == 0 should
-be enough.
+Please can you resolve this FIXME before the driver lands? The device
+declares its required payload alignment via wNdpOutDivisor and
+wNdpOutPayloadRemainder, and Linux honours these when building the
+frame (see cdc_ncm_fill_tx_frame() and the tx_modulus / tx_remainder
+handling), so a device is entitled to reject a datagram that is not
+placed as requested. Since probe already fetches and validates the NTB
+parameters, using them here should be easy enough. If there is a
+good reason to hard-code 16, a /* */ comment explaining would be OK.
 
-> diff --git a/drivers/usb/eth/cdc_ecm.c b/drivers/usb/eth/cdc_ecm.c
-> @@ -0,0 +1,284 @@
-> +                     case USB_CDC_ETHERNET_TYPE:
-> +                             memcpy(&priv->ether_desc, head, sizeof(priv->ether_desc));
+> diff --git a/drivers/usb/eth/cdc_ncm.c b/drivers/usb/eth/cdc_ncm.c
+> @@ -0,0 +1,480 @@
+> +     } while (++dpe);
 
-This copies sizeof(priv->ether_desc) bytes but the earlier check only
-ensures bLength >= 4, so a malformed descriptor can cause a read past
-the end of the config buffer (or pull in bytes from the following
-descriptor). Please can you check that bLength matches
-sizeof(struct usb_cdc_ether_desc) before copying?
+This condition is always true since the pointer can never become NULL,
+so the loop only exits via the break or the return above. It does
+terminate, because the last DPE has already been verified to be a Null
+entry, but it took me a while to convince myself of that. A plain
+for (;;) loop, with a comment noting that the Null-entry check above
+bounds the walk, would be clearer. What do you think?
 
-> diff --git a/drivers/usb/eth/cdc_ecm.c b/drivers/usb/eth/cdc_ecm.c
-> @@ -0,0 +1,284 @@
+> diff --git a/drivers/usb/eth/cdc_ncm.c b/drivers/usb/eth/cdc_ncm.c
+> @@ -0,0 +1,480 @@
 > +     if (priv->control == U16_MAX || priv->data == U16_MAX ||
-> +         priv->data_default == U16_MAX || priv->data_normal == U16_MAX ||
-> +         !priv->bulkinpipe || !priv->bulkoutpipe)
+> +         !priv->intpipe || !priv->bulkinpipe || !priv->bulkoutpipe)
 > +             return -ENODEV;
 
-This does not check that the Ethernet Networking Functional Descriptor
-was found. If a non-compliant device omits it, probe succeeds but
-ether_desc stays zeroed, so cdc_ecm_send() rejects every packet
-(wMaxSegmentSize is 0) and read_rom_hwaddr() fails. Since the
-descriptor is mandatory per the ECM spec, please can you add it to this
-check, e.g. by testing wMaxSegmentSize?
-
-> diff --git a/drivers/usb/eth/cdc_ecm.c b/drivers/usb/eth/cdc_ecm.c
-> @@ -0,0 +1,284 @@
-> +             /* 9.4.3 Get Descriptor [USB20] */
-> +             config = cdc_get_config_descriptor(udev, cfgno);
-> +             if (!config)
-> +                     return -ENODEV;
-
-If reading one configuration fails, this gives up, whereas a parse
-failure moves on to the next one. It seems more consistent to
-'continue' here so that a device with a bad first config but a good ECM
-config can still work.
-
-> diff --git a/drivers/usb/eth/cdc_ecm.c b/drivers/usb/eth/cdc_ecm.c
-> @@ -0,0 +1,284 @@
-> +U_BOOT_DRIVER(usb_cdc_2_ecm) = {
-> +     .name = 'cdc_ecm',
-
-The numbering is so NCM gets preference to ECM, right? Could you
-please add a comment?
+As with the ECM driver, this does not check that the Ethernet
+Networking Functional Descriptor was found. If it is missing,
+cdc_ncm_read_rom_hwaddr() will still pass iMACAddress (i.e. string
+index 0) to cdc_get_mac_address() when NCAP_NET_ADDRESS is not set.
+Since [USBNCM11] requires this descriptor, please can you also check
+here that it was found, e.g. that iMACAddress is non-zero?
 
 Regards,
 Simon
