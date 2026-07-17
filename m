@@ -4,97 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD127C44520
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B93FC44520
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:31:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 856E684DDC;
-	Fri, 17 Jul 2026 14:20:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 72B1A84DF8;
+	Fri, 17 Jul 2026 14:31:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="d/a1tVtU";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="U4hcIATK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C9A84DEA; Fri, 17 Jul 2026 14:20:50 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2392F84E09; Fri, 17 Jul 2026 14:31:47 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E5C784DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:20:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6EDB84DAA
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:31:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-47362928f65so7003029f8f.2
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:20:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784290847; x=1784895647; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=pLzcxopIE3t997/xwvRFwJCq+GCoXN/TSSzjDnfTlQc=;
- b=d/a1tVtUleXOK67ic8ag0viEhbNm0l4Ma8D0hO8AWucTLb6jwaQMqbRYZcR3DvtRil
- lkGPbe9FKi4OwCBm6072DgYiqCqVuMkZ/UyQ/7nKQdI6QRtkkqSZqwL6NudgYMZiHlGU
- N8Q4GecZmFTO6pDyCGg1RA4nYekn9lMWHucS5aZ+pzxsvvohbQo6HWMwnu5wiIq65ln7
- DsJ9NIXu7NZB/26p4FuJbAn2qH3JUlyPbyAxeabNHIMQsEgqcPiWLjP0PVbtazraQfhO
- xCLE/6k+XQKEvHEi6PT1dQnqzSDmln/yYNvMrQPPEuTPvYzeBuzuEMxBCy8GxmdauYUK
- e/3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784290847; x=1784895647;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=pLzcxopIE3t997/xwvRFwJCq+GCoXN/TSSzjDnfTlQc=;
- b=itm6X49xG14qmPJ146bhF1bJJnPt5JYhsUzwJY8UslwQEnb3S5+DpGOe4J3a4sM4md
- lelfIwY/NwiUSRmT3YWC+a0IBfOtOfbiWau+VrtcNFpJB3FSlgtEkJMgp0Sg3s+AsYG0
- zHIPRBztPNCOwQZtipRGnvJ0b2JZ/oJZaAb7IIVMWTX22yqbxVf+ZHlq9jy1BV8ejJvm
- 1wXUnuMfgaZHYehObVziVSrOVy6+Sw0xkt9meCkTPmk0GRju52uyq/lePYUxC2P0eGGa
- 2w4AXYuihb2AmObLHnOYn59Hc5A/haq5aQOfO/f2PsEtfOXu5nNhpakVKYoGuL9tHir6
- TSww==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrG3R4cel5Svcgi3rxxmyME1cRl3g6BVW1lp2yOpzFxH/9VIzNeKl0aHi2GwMmNjlgI5qNiUso=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCn87Oqv2zX+Z4KKH+4DV0paxJTUay8ZrZnTkTrSjL+5Q1MDIN
- YGG8H/SOEHtamkftVTper+oJOns5Z1f+jnJSruQ7HX+RBCC46hZFVaWfvo2ZMv/8deb/eodfkIt
- q+Th7zbyBYA==
-X-Gm-Gg: AfdE7cktbtQGVEl+0XEZMqLeU21f42dEQo5HA8ZWlxKwQfD3vG/tdMsRA8DOHDGHxZd
- yXJ0T+yt7PCptcxk8JCVc135PeFOC/IFduuqJzGI1GC6pKjf3B042VbaNc3s0U5SCNRCG96CLD0
- YSzf+D7afIJZDq/CwIpQeHqHuVxu/hfurm2vep/dPDv7K8+ZdJxogeVBGshRI7YR8PwMBJSFLAy
- jjyddwSMB6uD9CnNnhVEhubRzxk9l6x9NPzGSpcTBE0b9kuJyXth3aNzqouvoRJXVXQWMQeMnHm
- LWh2vTZTIiXopk7Kj83D31c2x3LGSLw/WNU3XcFmTAfcEXhCMuDMaiWx8gBwJHNAsSW7ElKWUN2
- schbOPZdxa5TMKPUWCzERbRkLAXppLlx64z3JuVAmaxmodP4DQ4zRcJJaS70xSR3d/sqJiDcZtJ
- ZMKZ1FUvLDHyEE4gljGYmK8Ms4wyxWEQkMM1oAH+huH303BkkFVnFmP+2e5ADTyMvZ3rNh5nJol
- NN04kk/baPRuzUdJJob
-X-Received: by 2002:a05:6000:2084:b0:47e:81aa:3832 with SMTP id
- ffacd0b85a97d-47f6230e614mr3115045f8f.16.1784290847405; 
- Fri, 17 Jul 2026 05:20:47 -0700 (PDT)
-Received: from macbook.homenet.telecomitalia.it
- (host-79-16-115-126.retail.telecomitalia.it. [79.16.115.126])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63ec7e49sm3323491f8f.19.2026.07.17.05.20.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 05:20:46 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Fri, 17 Jul 2026 14:20:25 +0200
-Subject: [PATCH] usb: mtu3: support the current devicetree binding
+ spf=pass smtp.mailfrom=patrick.delaunay@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sfo/Pv94f9lLpC2NyY/I7mme6GFvosUjWMe1fl8lYv4inqbE1+4wDOfoojPA/wt3rMxRnR7oR2rN+vrjFyubR9y0lnnjwZslKOPveV3cEIC0f4eC/SdAnKeDokojnkSRtqFjXOXzDWytDfbyacuhfJUdDYDNOoE0JsEcOK/yBiNS7McRcJft6Og0zv8+JqPXNkLzHEuiklvgMUKwjGZHsncBPcXpmfvR2j7IBsmm7Cr+s2ivOaKvQdcrICBgy8lUKqkaMAMZPJj4A6QysO0onk5nV0kCmt+BltSyGuQYGq2Ad59PUdH4x2kzHO/jzswZGHX/UoBxDE/LjM3gD6trXw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Hs9Y0CylBr4EaODZ7pbc9GrKHcHUnRtmbLT3tlCEuQI=;
+ b=LEgxKUPcqNl3PWERbsINNwbjo5tcN7PvZjd5+zlOrxUiDotomItcC2zURlNZrQ8vyb1nee6aIfaqJP6EaizgkNHUfFEqYHnhQdZmNxlVSoiIhiigrYG8cZAZce8QTMYH5B+taYvla5l8snu6BzJdKkZKYioZO8isKUgvCzLZHYF4UFBYXF9OdGnOlDy0cNddWk7CktpF1LLjSJgFg4fFR+aF+JwPIafcXZiHg4WCMspqSeLA0TlHYDGU1JYeQ0f2GbV31WMzxnk7ziZ2YnJUEQwVVPQ61nH7+93KF+niHSmN+AUmVUjdAXIk2f6ArKXYoRWki/8Dyxik+oAGayD8vQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Hs9Y0CylBr4EaODZ7pbc9GrKHcHUnRtmbLT3tlCEuQI=;
+ b=U4hcIATKPLWORlWZPQwI7w4iEGKuo7Hs/ul5XDWnt1AU22p/jyXiSN60z6xmvzP2RPbm4P2lArXvsiLHDnFC90yp4NP4iSsmaygojVyaLsShbkAgBR4ox9XN85U4HmckmzoLDA3q/T6eafo24wDGG5aQInrhwZHVL3iCGsmMdGpy6R1FJcdGz5S4k/dbSaF9UcRA25UHXMuJbbY53rqbUdWpA4BU2eApeu3sSxUi9IfwG7Iwpss5X/ZNgeswfDiT5Q/rhHjOJBYDi+iTC6M/Mu3rrVkZ4uw1seauHjGk99tllo/6WcHHpXdkG0kQoCKLmJDoIhrMdq3AAKhLQI8RCw==
+Received: from AS4P192CA0028.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:5e1::13)
+ by FRWPR10MB9324.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:d10:177::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 12:31:41 +0000
+Received: from AM4PEPF00027A5D.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5e1:cafe::86) by AS4P192CA0028.outlook.office365.com
+ (2603:10a6:20b:5e1::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.13 via Frontend Transport; Fri,
+ 17 Jul 2026 12:31:41 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM4PEPF00027A5D.mail.protection.outlook.com (10.167.16.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 12:31:40 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
+ 2026 14:36:16 +0200
+Received: from localhost (10.48.87.227) by STKDAG1NODE2.st.com (10.75.128.133)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
+ 2026 14:31:40 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Tom Rini <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH] ARM: stm32mp2: fix TAMP_FWU_BOOT_IDX_MASK/OFFSET definition
+Date: Fri, 17 Jul 2026 14:31:32 +0200
+Message-ID: <20260717143131.1.I2460c17ad1978f8c5c5e85a6ba56cfd46ed975cf@changeid>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXN0QrCMAyF4VcZuTbQrbChryJeZGmsETdL04ow9
- u5Wvfzg8J8NTLKKwanbIMtLTZ9rQ3/ogG+0RkENzTC4YXRTPyEztYlgTVay0IJLqR4tPTBSiFK
- QyAd/ZApuJGiZlOWq79/F+fK31fkuXL5d2PcP0fBUWoQAAAA=
-X-Change-ID: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Carlo Caione <ccaione@baylibre.com>
-X-Mailer: b4 0.15.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.227]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
+ (10.75.128.133)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A5D:EE_|FRWPR10MB9324:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb6ee572-ba00-4cf0-19c9-08dee3ff5aad
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|376014|23010399003|1800799024|56012099006|11063799006|10067099003|18002099003;
+X-Microsoft-Antispam-Message-Info: OXSVJNAQJJ2sY4w+UUPfCllz55FsuhSSVT3X5OUVtJgLv7H+qASuNr6EolbmEahJNrybxMwD7Xq8QFxeKi4ihHyabgfp0mAaHODjyuk70voiDKokgy1+CfN2IdkhAFh034pAn8PzsLfdW/t3xVDqd6MySngL55CjgJU3k5s2u0qIJdRRK6azQIhTfGMV3AB9LE+I4wlYS/ez/dm4MBI406sDV3JQ72K2zwGU20HuFo8WIjyNkOO4dre4Nb5Rf7uZUnF+mPgQ1ITLiCP/QpLnBSHsnSCzBNEbQYmgMz6THAHNGeFuJLtAsmmP/P/+alRLOk1D5aWlg754nHj/9Kc2z9nFIOxGdMM+nP88OX95/Ow/sNogcBRdWX6o4p6n5qKp0/xhOMZ5bOC7KulSBO087kJ26+c3uF3G6M0CwYR+Ch4dMQZmvuE6p44efWQEM05HFaGFlmCSA568uEVQGhhRC4b8mvl7Pqvl5qApVU/4YtnW/vqH6sgQIpwjHrujHq/bt8/7j0WvIga+uB+L9vPpvzRBPC6kKQht3EMO8CJO+UHH8wocIC+4Z//HYd29IRoktMLLN1GX+suwzahNgV6CgXeymApwWoq2ppgfM2jvVVHnNoHhHUIRDrdtRAgLb9gDSkSYdW03PZ8ECOJprWFyHchq1aTptV4/CmBs1r/O4DAK6bYikWI43Zo2Gz/+EOXZ4dqfq+vg3uAMg63B86H1nQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(23010399003)(1800799024)(56012099006)(11063799006)(10067099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: sxssrTEcIB6Ab0mPiGnWFRkNMNGxoy9FvkigjUdtYEbpGeWPw1fI5yoNH5YWkNrRC8fSEjnyeXDygwbHsulGI/OxhNLast6nXjGKeHtZsArWMwy/ZlfWeeyZ9AfPCEgpJD0wSV+m5Tx/B+FYil3HxrcemUc7O99myBehQJtOe4uPQgjOO6ft7Ua5zKGHxRIpr+e9881ijcLQ2+dEpTBjHNfJLCmOut7nS6Az2imr22luX/I0Lc07YIEtCt5mQR6Y1Wha2r20Sz08obn2GpyopV/WkUaJzPUBVAlHFNcapmcKoV1BfBT/yIwBTAdtSHxPzq7VvW6w4my1T5ft26KtX/FxjC9aeBudAWg85wMhoLNhxACDnAUo9sCqmxTcWSdCm6XQHiyuFOUy1ZOpLphOqfL3881dNDFGaaBLddP71N2YkTsSj2ymei111yOdOc+o
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 12:31:40.9772 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb6ee572-ba00-4cf0-19c9-08dee3ff5aad
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A5D.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR10MB9324
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,104 +128,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MTU3 glue driver requires the legacy U-Boot layout, where a synthetic
-mediatek,ssusb child owns the gadget resources and dr_mode:
+Move the definition of TAMP_FWU_BOOT_IDX_MASK and
+TAMP_FWU_BOOT_IDX_OFFSET outside of config check for
+CONFIG_STM32MP15X and CONFIG_STM32MP13X.
 
-    usb@112b0000 {
-        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
+This patch solves a STM32MP2 compilation issue in
+board/st/common/stm32mp_fwu.c when CONFIG_FWU_MULTI_BANK_UPDATE
+is activated.
 
-        ssusb@112b0000 {
-            compatible = "mediatek,ssusb";
-            reg = <0 0x112b0000 0 0x3e00>,
-                  <0 0x112b3e00 0 0x0100>;
-            reg-names = "mac", "ippc";
-            dr_mode = "peripheral";
-        };
-    };
-
-The current binding requires these properties directly on the controller:
-
-    usb@112b1000 {
-        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
-        reg = <0 0x112b1000 0 0x2dff>,
-              <0 0x112b3e00 0 0x0100>;
-        reg-names = "mac", "ippc";
-        ranges = <0 0 0 0x112b0000 0 0x3f00>;
-        dr_mode = "peripheral";
-    };
-
-Modify the driver to look for a legacy node only among direct children
-of the controller and bind the gadget device to the controller node when
-none is present. This retains support for existing U-Boot devicetrees
-without requiring the synthetic node in devicetrees using the current
-binding.
-
-There is also a difference in the meaning of the mac resource: normalize
-the resource address by SSUSB_DEV_BASE for the current binding and leave
-the legacy resource unchanged.
-
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+Fixes: 5166658ac605 ("ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET definition")
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
- drivers/usb/mtu3/mtu3_plat.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
-index 26fee141f6e..8db7ef6d8fc 100644
---- a/drivers/usb/mtu3/mtu3_plat.c
-+++ b/drivers/usb/mtu3/mtu3_plat.c
-@@ -136,6 +136,7 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
- static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
- {
- 	struct udevice *child;
-+	bool legacy_binding;
- 	int ret;
- 
- 	ret = device_get_supply_regulator(dev, "vusb33-supply",
-@@ -166,12 +167,20 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
- 		return ret;
- 	}
- 
-+	legacy_binding =
-+		ofnode_device_is_compatible(dev_ofnode(child), "mediatek,ssusb");
- 	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
- 	if (!ssusb->mac_base) {
- 		dev_err(dev, "error mapping memory for mac\n");
- 		return -ENODEV;
- 	}
- 
-+	/* Current bindings describe the device block, not the whole MAC. */
-+	if (!legacy_binding) {
-+		ssusb->mac_base = (void __iomem *)((uintptr_t)ssusb->mac_base -
-+						   SSUSB_DEV_BASE);
-+	}
-+
- 	ssusb->dr_mode = usb_get_dr_mode(dev_ofnode(child));
- 
- 	if (ssusb->dr_mode == USB_DR_MODE_UNKNOWN ||
-@@ -317,9 +326,15 @@ static int mtu3_glue_bind(struct udevice *parent)
- 	ofnode node;
- 	int ret;
- 
--	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
-+	node = ofnode_null();
-+	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
-+		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
-+			break;
-+	}
-+
-+	/* Current bindings keep the gadget resources on the parent node. */
- 	if (!ofnode_valid(node))
--		return -ENODEV;
-+		node = dev_ofnode(parent);
- 
- 	name = ofnode_get_name(node);
- 	dr_mode = usb_get_dr_mode(node);
+ arch/arm/mach-stm32mp/include/mach/stm32.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 42e3735847a5..dfbd4f436294 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -67,6 +67,9 @@ enum forced_boot_mode {
+ 	BOOT_UMS_MMC2 = 0x12,
+ };
+ 
++#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
++#define TAMP_FWU_BOOT_IDX_OFFSET	0
++
+ #endif
+ 
+ /*
+@@ -135,9 +138,6 @@ enum forced_boot_mode {
+ /* TAMP registers */
+ #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
+ 
+-#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
+-#define TAMP_FWU_BOOT_IDX_OFFSET	0
+-
+ #ifdef CONFIG_STM32MP15X
+ #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
+ #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
 ---
 base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
-change-id: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
+branch: dfgdfgdf
 
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.43.0
 
