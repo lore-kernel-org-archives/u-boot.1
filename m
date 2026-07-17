@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00E7C4451C
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD127C44520
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5C484DCA;
-	Fri, 17 Jul 2026 14:00:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 856E684DDC;
+	Fri, 17 Jul 2026 14:20:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HUbybid9";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="d/a1tVtU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD27F84DDC; Fri, 17 Jul 2026 14:00:26 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 47C9A84DEA; Fri, 17 Jul 2026 14:20:50 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80F4A84DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:00:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E5C784DAA
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-493f60208a5so64665965e9.3
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:00:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=ccaione@baylibre.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-47362928f65so7003029f8f.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:20:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784289624; x=1784894424; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=7TiZqVqWdaENav/vK6sFKSMszXymT9PUHeExnibXZgg=;
- b=HUbybid9ymHfxTMdU/LVOhwucquUT0pnnHeutCC249n8FSuUY9zrmGbyJFNLt3qD/X
- RNKEL5QzqNzozVyTfD0AK/Z/haQaUp5ZbE1NrkSxbr5qrFtLwinCJsOkTUtSii2oqwkN
- aG3rgQ9uveMOF4mNmgzi3Gm4TgKbuhExS31VUHs8TIm+KkEl1rBQ6JL+V1oihbJUoxnS
- w8CxBzlBmEzD3BZ75PJx1iDrCHFg/rWcvTVXQ6PE6bIxXn0t7BONh0kgWL9q+2tmuVVb
- a5hw8khCgu23Rt1EDdb72g/vMDF+LqjgH5MiCwzkMGiKhTUi3jtdI9s5mxiSNzYABF5n
- lo2A==
+ d=baylibre.com; s=google; t=1784290847; x=1784895647; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=pLzcxopIE3t997/xwvRFwJCq+GCoXN/TSSzjDnfTlQc=;
+ b=d/a1tVtUleXOK67ic8ag0viEhbNm0l4Ma8D0hO8AWucTLb6jwaQMqbRYZcR3DvtRil
+ lkGPbe9FKi4OwCBm6072DgYiqCqVuMkZ/UyQ/7nKQdI6QRtkkqSZqwL6NudgYMZiHlGU
+ N8Q4GecZmFTO6pDyCGg1RA4nYekn9lMWHucS5aZ+pzxsvvohbQo6HWMwnu5wiIq65ln7
+ DsJ9NIXu7NZB/26p4FuJbAn2qH3JUlyPbyAxeabNHIMQsEgqcPiWLjP0PVbtazraQfhO
+ xCLE/6k+XQKEvHEi6PT1dQnqzSDmln/yYNvMrQPPEuTPvYzeBuzuEMxBCy8GxmdauYUK
+ e/3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784289624; x=1784894424;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=7TiZqVqWdaENav/vK6sFKSMszXymT9PUHeExnibXZgg=;
- b=evejPrV4EediTydc3hSsxoPVdeVcl+TPx37odY7XRYj6IaHA80VLM+wBBsD4b6t8A9
- rr8NkoZR31JjQFIQLxTb3oMCiNDduYTD6n4yJmitGiUitSG4falAhOzq3Am/zx18uI+r
- r/nryokab34YYIygkLasrJd/YX0SF/qNGmadBPnpfR3Hd4P6xDt+d4d6EhYyii/tcwOA
- owf4z4FvbrfvDg48sZb+E4X5VjDdbvyq+gJ7d0t5OSgPfyAf6qBk3wJq+VL7cxWQFVzj
- iRebrS5OuhN1zFzY2sZWlbGjmdxGkgxzJCdZK0rWTFeUlOaFd0N979nfA8WGrXId5u2b
- Uo0A==
+ d=1e100.net; s=20251104; t=1784290847; x=1784895647;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=pLzcxopIE3t997/xwvRFwJCq+GCoXN/TSSzjDnfTlQc=;
+ b=itm6X49xG14qmPJ146bhF1bJJnPt5JYhsUzwJY8UslwQEnb3S5+DpGOe4J3a4sM4md
+ lelfIwY/NwiUSRmT3YWC+a0IBfOtOfbiWau+VrtcNFpJB3FSlgtEkJMgp0Sg3s+AsYG0
+ zHIPRBztPNCOwQZtipRGnvJ0b2JZ/oJZaAb7IIVMWTX22yqbxVf+ZHlq9jy1BV8ejJvm
+ 1wXUnuMfgaZHYehObVziVSrOVy6+Sw0xkt9meCkTPmk0GRju52uyq/lePYUxC2P0eGGa
+ 2w4AXYuihb2AmObLHnOYn59Hc5A/haq5aQOfO/f2PsEtfOXu5nNhpakVKYoGuL9tHir6
+ TSww==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqk93/RW7YubD+RoPaS6h51XasaJ3oeCFMpmKR1Ji4OOyqYmLn75sePcOn1S0eTZFh3G207HYc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCF93JszGJfS5U6DS0ccXfWX1C7LwTUhjLHWhzZxEiT8twyIJQ
- 1wimWC25dUU9Xt/NPrLsV7X+rvOHQNxE44KVlWd+TLlytZAlRXXT34MS
-X-Gm-Gg: AfdE7cmO7IjCAijFJfqcZ0xpURLVaLDlF247PVzPTKmFqrw3j5WYPRnrvSGiHkKPUeg
- ljr1GeXWI3tJGFFbsrgVBV/lIus858O40RNlgSs876Q+sPT1gl5HrfnXogtjTxB4JkuBVTsMVUl
- +rHk0aON35dMCy+KagKH6FjW6cgAdTJSYperykDfzIyB84R2UINP63hxjGCsD9i+LdZQXRcy1m+
- uqRieCreT6EFGdDr/CozSRmq3e4BeciZSOc+rfhtjbchE1+bjCNDi31WcrLZxrj6XoO3IyD0OnN
- zxET/Gj7Wr3bh0dR3Cwin6vWc3BEG/HuHUPvMcZU3RObkzvaho6kMDW8gwS6QSjOC/4ijl6Aj/K
- KDt9tchdnVahofkDddJzOrXFrnkTnWxB1VDqFCBaDNV2JlThA8sv692OadJlujVGv0ZLsHzlmDO
- 6mGCUfCoKoGN2n/zlTcYaVOGW2uJ/kfDX0ElgG3aq1Q/iWknTGpjA7DO/L13oRk9eIaWLD3w==
-X-Received: by 2002:a05:600c:4ed1:b0:495:4cb8:42b9 with SMTP id
- 5b1f17b1804b1-4954cb842f7mr10009255e9.4.1784289620351; 
- Fri, 17 Jul 2026 05:00:20 -0700 (PDT)
-Received: from [192.168.68.84] (host-87-5-153-198.retail.telecomitalia.it.
- [87.5.153.198]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4954a2edbe4sm44355865e9.12.2026.07.17.05.00.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Jul 2026 05:00:19 -0700 (PDT)
-Message-ID: <df4a4fb2-643c-4d6a-a8de-edf15a375928@gmail.com>
-Date: Fri, 17 Jul 2026 14:00:18 +0200
+ AHgh+RrG3R4cel5Svcgi3rxxmyME1cRl3g6BVW1lp2yOpzFxH/9VIzNeKl0aHi2GwMmNjlgI5qNiUso=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCn87Oqv2zX+Z4KKH+4DV0paxJTUay8ZrZnTkTrSjL+5Q1MDIN
+ YGG8H/SOEHtamkftVTper+oJOns5Z1f+jnJSruQ7HX+RBCC46hZFVaWfvo2ZMv/8deb/eodfkIt
+ q+Th7zbyBYA==
+X-Gm-Gg: AfdE7cktbtQGVEl+0XEZMqLeU21f42dEQo5HA8ZWlxKwQfD3vG/tdMsRA8DOHDGHxZd
+ yXJ0T+yt7PCptcxk8JCVc135PeFOC/IFduuqJzGI1GC6pKjf3B042VbaNc3s0U5SCNRCG96CLD0
+ YSzf+D7afIJZDq/CwIpQeHqHuVxu/hfurm2vep/dPDv7K8+ZdJxogeVBGshRI7YR8PwMBJSFLAy
+ jjyddwSMB6uD9CnNnhVEhubRzxk9l6x9NPzGSpcTBE0b9kuJyXth3aNzqouvoRJXVXQWMQeMnHm
+ LWh2vTZTIiXopk7Kj83D31c2x3LGSLw/WNU3XcFmTAfcEXhCMuDMaiWx8gBwJHNAsSW7ElKWUN2
+ schbOPZdxa5TMKPUWCzERbRkLAXppLlx64z3JuVAmaxmodP4DQ4zRcJJaS70xSR3d/sqJiDcZtJ
+ ZMKZ1FUvLDHyEE4gljGYmK8Ms4wyxWEQkMM1oAH+huH303BkkFVnFmP+2e5ADTyMvZ3rNh5nJol
+ NN04kk/baPRuzUdJJob
+X-Received: by 2002:a05:6000:2084:b0:47e:81aa:3832 with SMTP id
+ ffacd0b85a97d-47f6230e614mr3115045f8f.16.1784290847405; 
+ Fri, 17 Jul 2026 05:20:47 -0700 (PDT)
+Received: from macbook.homenet.telecomitalia.it
+ (host-79-16-115-126.retail.telecomitalia.it. [79.16.115.126])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63ec7e49sm3323491f8f.19.2026.07.17.05.20.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Jul 2026 05:20:46 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+Date: Fri, 17 Jul 2026 14:20:25 +0200
+Subject: [PATCH] usb: mtu3: support the current devicetree binding
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot: image-fdt: downgrade -EINVAL reservation failure to
- debug
-To: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joseph Guo <qijian.guo@nxp.com>
-Cc: Randolph Sapp <rs@ti.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260713-downgrade-v1-1-183a2300741b@nxp.com>
- <e1a26574-4f7d-46f0-b757-55f419df326b@gmail.com>
- <d170674c-360e-400c-b263-a35aab640d71@kwiboo.se>
- <7e290ff6-0e97-4c9e-b82b-7425904efb8a@oss.nxp.com>
-Content-Language: en-US
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-In-Reply-To: <7e290ff6-0e97-4c9e-b82b-7425904efb8a@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXN0QrCMAyF4VcZuTbQrbChryJeZGmsETdL04ow9
+ u5Wvfzg8J8NTLKKwanbIMtLTZ9rQ3/ogG+0RkENzTC4YXRTPyEztYlgTVay0IJLqR4tPTBSiFK
+ QyAd/ZApuJGiZlOWq79/F+fK31fkuXL5d2PcP0fBUWoQAAAA=
+X-Change-ID: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
+To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ u-boot@lists.denx.de
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Carlo Caione <ccaione@baylibre.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,98 +111,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The MTU3 glue driver requires the legacy U-Boot layout, where a synthetic
+mediatek,ssusb child owns the gadget resources and dr_mode:
 
+    usb@112b0000 {
+        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
 
-On 7/17/26 07:18, Joseph Guo (OSS) wrote:
-> On 7/16/2026 7:55 PM, Jonas Karlman wrote:
->> [You don't often get email from jonas@kwiboo.se. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
->>
->> Hi Joseph and Emanuele,
->>
->> On 7/16/2026 10:25 AM, Emanuele Ghidoli wrote:
->>>
->>>
->>> On 7/13/26 10:45, Joseph Guo wrote:
->>>> When boot_fdt_handle_region() attempts to reserve a DTS reserved-memory
->>>> region via lmb_alloc_mem(), it may receive -EINVAL if the region's
->>>> physical address falls outside the LMB-managed memory range (i.e.
->>>> below PHYS_SDRAM on platforms where U-Boot does not manage the lower
->>>> DRAM window).
->>>>
->>>> A typical example is platforms like i.MX95 where PHYS_SDRAM starts at
->>>> 0x90000000, but remoteproc/rpmsg carveouts (vdev vrings, vdev buffer,
->>>> resource table) are placed at 0x88xxxxxx by hardware convention. Those
->>>> addresses are unreachable by U-Boot's allocator anyway, so failing to
->>>> mark them reserved has no practical consequence -- U-Boot will never
->>>> accidentally place the initrd or FDT blob there.
->>>>
->>>> Printing ERROR for a condition that is harmless and expected on many
->>>> platforms is misleading. Downgrade the -EINVAL case to debug() to
->>>> suppress the spurious output while preserving full visibility under
->>>> DEBUG/log builds.
->>>>
->>>> Real failures (e.g. -EEXIST from an overlapping reservation) continue
->>>> to be reported as ERROR.
->>
->> I sent a similar patch 2-3 weeks ago [1], and was planning to send a v2
->> that also change lmb_free() to return -EINVAL to also catch the free
->> scenario.
->>
->> [1] https://patch.msgid.link/20260627204851.1151419-1-jonas@kwiboo.se/
->>
->> Regards,
->> Jonas
->>
-> 
-> Hi Jonas,
-> 
-> Thanks for your information. This patch can be dropped in that case.
-> 
-> Regards,
-> Joseph>>>
-Hi Jonas,
-I agree with Joseph.
-Can you please add me in Cc to the v2?
+        ssusb@112b0000 {
+            compatible = "mediatek,ssusb";
+            reg = <0 0x112b0000 0 0x3e00>,
+                  <0 0x112b3e00 0 0x0100>;
+            reg-names = "mac", "ippc";
+            dr_mode = "peripheral";
+        };
+    };
 
-Thanks and regards,
-Emanuele
+The current binding requires these properties directly on the controller:
 
->>>> Fixes: 623f6c5b6ab7 ("boot: image-fdt: free old dtb reservations")
->>>> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
->>>> ---
->>>>  boot/image-fdt.c | 3 +++
->>>>  1 file changed, 3 insertions(+)
->>>>
->>>> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
->>>> index 9e0e0f93edd34ae9056926883b1a802858e179d9..2175fa338f55110862100fa9f491a0957e85ce56 100644
->>>> --- a/boot/image-fdt.c
->>>> +++ b/boot/image-fdt.c
->>>> @@ -95,6 +95,9 @@ static void boot_fdt_handle_region(u64 addr, u64 size, u32 flags, bool free)
->>>>              debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
->>>>                    free ? "freed" : "reserved", (unsigned long long)addr,
->>>>                    (unsigned long long)size, flags);
->>>> +    } else if (ret == -EINVAL) {
->>>> +            debug("   skipping fdt memory region outside LMB range (addr=%llx size=%llx flags=%x)\n",
->>>> +                  (unsigned long long)addr, (unsigned long long)size, flags);
->>>>      } else {
->>>>              printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
->>>>                     free ? "freeing" : "reserving", (unsigned long long)addr,
->>>>
->>>> ---
->>>> base-commit: 6741b0dfb41dc82a284ab1cff4c58af6ef2f3f9c
->>>> change-id: 20260713-downgrade-f8319ab2d75b
->>>>
->>>> Best regards,
->>>
->>> Hi Joseph,
->>>
->>> Tested on Toradex Aquila iMX95, which has reserved-memory regions for
->>> the Cortex-M7 (vrings, vdev buffer, resource table) below PHYS_SDRAM.
->>> The spurious ERROR messages are gone and boot is unaffected.
->>>
->>> Kind regards,
->>> Emanuele
->>>
->>> Tested-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
->>
+    usb@112b1000 {
+        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
+        reg = <0 0x112b1000 0 0x2dff>,
+              <0 0x112b3e00 0 0x0100>;
+        reg-names = "mac", "ippc";
+        ranges = <0 0 0 0x112b0000 0 0x3f00>;
+        dr_mode = "peripheral";
+    };
+
+Modify the driver to look for a legacy node only among direct children
+of the controller and bind the gadget device to the controller node when
+none is present. This retains support for existing U-Boot devicetrees
+without requiring the synthetic node in devicetrees using the current
+binding.
+
+There is also a difference in the meaning of the mac resource: normalize
+the resource address by SSUSB_DEV_BASE for the current binding and leave
+the legacy resource unchanged.
+
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+---
+ drivers/usb/mtu3/mtu3_plat.c | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
+index 26fee141f6e..8db7ef6d8fc 100644
+--- a/drivers/usb/mtu3/mtu3_plat.c
++++ b/drivers/usb/mtu3/mtu3_plat.c
+@@ -136,6 +136,7 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
+ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+ {
+ 	struct udevice *child;
++	bool legacy_binding;
+ 	int ret;
+ 
+ 	ret = device_get_supply_regulator(dev, "vusb33-supply",
+@@ -166,12 +167,20 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+ 		return ret;
+ 	}
+ 
++	legacy_binding =
++		ofnode_device_is_compatible(dev_ofnode(child), "mediatek,ssusb");
+ 	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
+ 	if (!ssusb->mac_base) {
+ 		dev_err(dev, "error mapping memory for mac\n");
+ 		return -ENODEV;
+ 	}
+ 
++	/* Current bindings describe the device block, not the whole MAC. */
++	if (!legacy_binding) {
++		ssusb->mac_base = (void __iomem *)((uintptr_t)ssusb->mac_base -
++						   SSUSB_DEV_BASE);
++	}
++
+ 	ssusb->dr_mode = usb_get_dr_mode(dev_ofnode(child));
+ 
+ 	if (ssusb->dr_mode == USB_DR_MODE_UNKNOWN ||
+@@ -317,9 +326,15 @@ static int mtu3_glue_bind(struct udevice *parent)
+ 	ofnode node;
+ 	int ret;
+ 
+-	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
++	node = ofnode_null();
++	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
++		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
++			break;
++	}
++
++	/* Current bindings keep the gadget resources on the parent node. */
+ 	if (!ofnode_valid(node))
+-		return -ENODEV;
++		node = dev_ofnode(parent);
+ 
+ 	name = ofnode_get_name(node);
+ 	dr_mode = usb_get_dr_mode(node);
+
+---
+base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
+change-id: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
+
+Best regards,
+--  
+Carlo Caione <ccaione@baylibre.com>
 
