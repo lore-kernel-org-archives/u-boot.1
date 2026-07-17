@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46351C4451C
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420FEC4451C
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 13:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0A6784E30;
-	Fri, 17 Jul 2026 15:47:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9212784E3F;
+	Fri, 17 Jul 2026 15:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fAmNaIV+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ODovXN19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BDD384E38; Fri, 17 Jul 2026 15:47:42 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id EFC0984E42; Fri, 17 Jul 2026 15:49:30 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C08F84DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:47:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94DD384DAA
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 15:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2ccdb73f0e1so41060575ad.3
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:47:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784296059; cv=none;
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-8485bd28dd0so9199051b3a.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 06:49:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784296167; cv=none;
  d=google.com; s=arc-20260327;
- b=WWv3smTjodPy6eYZbm+zxUtCVZNA04FAdQ/8LTulPth2ZlZXtSvbbS4yNHqTnA+Xve
- JVT1jNBSDqNdC7Bt+i8vet2iop5XY2rf8mfUE3MS9FpOgW2aZsLLru4zZkvQoXJNxWwn
- iKEpp/zvooQMEJAxVLTP9ra4xrZS3yCQlnmNtsJc4jTUZltyNeQddBFHIdsucjwYwKQF
- SwB0DCPIAp81Fzy3WZ1rpDsRHZTW6jb2ExstZmYMhkPJF03wiHQidaC55ryeoJg7f+uu
- udm2fIZDhJdEhHSC/d9wD+avAhIHNqg1X44ImRS+LvNbrdPt2FI5kBV994E7Hx/9Eksr
- Z3TQ==
+ b=pvCEOr/lwL8umrEog5chS51L6Rw3/fB10JRgmfpqlicTRmwHU58x4BdS2+kXJEzaUR
+ RfPBdo0Lc4G1HQa/dc9d4uBUx478bCsKaU1Q08czpYgx5fIGIXY9f7FVhf5XJDoXqs2z
+ r69JazKhEu2HHO6eCJnprumnF6ncCS28q0ys4NpRQcUHgLfWK9AAYJVtzIajTsrkwVA6
+ IBAVn8YSLVVTyqeWCt1/nON7nrdMA9YM3qFyCoBqyAlQo1ziRYXgzpttyKEIq0rkKE81
+ 08okq41e34/V31j0QnOBLHeay/BTRnJ+4FwjCSOcgvy3Cxc9oM6Zc86gu9LahG/8s6ne
+ 9RMw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=LXKbpDajiCrxAqTpGmNOruZlYWYItf3OKek2o8GBvV8=;
- fh=sYJEl6+nRqh9E1ET/JyMVreI5+I/7CZ9zjVJbNfsf/M=;
- b=s08zwuCtLy/vURauWAnpsZNlLqamrkhMUv4eM+nYyWUl10ZJwz77Cw7TXkYQNLt7iK
- 0D9NfXyzApV4/4naD1XhQrxcNfK5XyX/a35J9xbecznYYdiH8vBzqh+0OZFWtungr1en
- cB0k0vPsaPpfCJR1rl1i/e0osXYViKGvFWWnMqYKSfOO1spGygwanijZXZCPvDHg6m7O
- GQ2XRGm6LQQW6ELJwV/28amKc3GNuZwbZh1Oez50jkeuKzI6LYOrI7LLLEV7+4OcoOrJ
- HOvea/EiNuTTLaOQmyhYoHdh/RVux+7SV3Cen069fMJ10CFYrU0o3JMi+WjZ3c6xbmzK
- uGBQ==; darn=lists.denx.de
+ bh=dl5VNIyh9FlWG3euNH7OBA9eLlgIpgtUq8aKpOEc9u0=;
+ fh=di/tjh9gdyTl8BuYYPeR5CeC8Ml8xFjWsLim5p9otUk=;
+ b=fi4+NTg+M0WC31IqM9iFuYfjrck8rofns3IYZpkyhtiidTVTdWsJPnTT0txpUOd/ve
+ sJ6/qs5DspeVcMnFI7YNddaLar9vI20SvpZfcQjZiTKvVaE5+vOS+biT2iP59IeXHZhj
+ niEFvCfFU6c3kKZNRusVLE/FhhRocEAgMp/Yu5OrCzbHTMrieHfaBL+MCHpY/kb06x8J
+ Fd6b42UQ1DU009H/HatWTPFKVCveVICqcAzunF2pTtx/EBHFKkHjNuqIjBt4EHGWitvW
+ rLNA1x7eY/LejymCxb0kMJdyeulFOsWD7I0v5L0CABt7qF03HB/gsoFlOWiaapVm++42
+ XqdA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784296059; x=1784900859; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784296167; x=1784900967; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=LXKbpDajiCrxAqTpGmNOruZlYWYItf3OKek2o8GBvV8=;
- b=fAmNaIV+SI6M/7bFkIFQEP5a5NxxM6bXNvjlcvs9DBdcau2PedlhLriaAAJ9fec0ZQ
- n/YyBYWE8QPzt1tjCcsy+WLN8IhHNunUn7QYN+x+J4pfi8hviUyrJcs1ctfcz04pZ6NS
- R8dNqWpfTCQOU0xFPPIxzUxvNeNSjHSaSpLDc=
+ :content-type; bh=dl5VNIyh9FlWG3euNH7OBA9eLlgIpgtUq8aKpOEc9u0=;
+ b=ODovXN19a5chau3Wf0P+9NsmTHXxFCPLrNZi0YrGs1tuPbEXnE92ZBv5KQajDdDYIc
+ 1D9mrOmOoYI+jSY/reIKq5lGsbau9LjiwLfeP1wlEcUkZs8xUqZgv7LFmo7fmbwQPU90
+ brlETkbu8ZHjZwYTkdMoRRyC3jXMKwBw/3RI0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784296059; x=1784900859;
+ d=1e100.net; s=20251104; t=1784296167; x=1784900967;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=LXKbpDajiCrxAqTpGmNOruZlYWYItf3OKek2o8GBvV8=;
- b=cFwjcrgp1IKU8mquQPwxIuYHa6UVwQOwc42RV7i9llAfBXi6zOiVwanVSwchaAcjts
- ki4Vkg7n9QKgKlYfjfeI5+bZrUTnpLSIQJhSDwSAP8IXbpW3W5KTLeVQU8IAnCHpY9Zq
- FJPDmSTEYS8T2s3h5BoK49doPI2UhSNQOYufO6T5YMiLzjGL/EuyVjkg+/zN7LTQJUMz
- ZVUOsLt7QrJuqEfTtZhuThGPyMfi+MgD+EXbCuLyte/tlCJ598yBfwN1GohXA6aa2wv9
- LltyU/cFrFbMzdArE2AetiKKojGqeDMsh9/ajZIZJYMnolCMCG3hrjtYAmJby/pSof8p
- zH0g==
-X-Gm-Message-State: AOJu0YyjUy4Tm7cfESYp2D0mrzChXMJMpls94bq+W71LMytgboc2jwo8
- FUYSbrzG36W7GNb8I36jnfdpCiQ8W89kc+YOIIpDROQTz9x5mPQoVMHC90ubr3+vw10mjzQfcVY
- yDx8ErKbvSSaY6QIONGtUQZu0lbnBgeqR5u0+rdP6Z8IAaSuAg/M=
-X-Gm-Gg: AfdE7cmVwiudT7vPzjLbLzWuS6Z5yjd0fGa7R1Q7LgDa49vhvwG60m88WI+0D4KxO7P
- 4jcBbVu+B6INCgFVyNJ36F7lBY4qWXwa6cChOUlecaJVRVdHEGJyEKKYXP59gJ8Z+GcY6mOMekt
- 7Q8MuAB1KwVUPJ8narNJMbDogUQSOYUlB6H9fxAiRW78TOBAecZ3XMC2H/wA0EkIko+QTbqNM7Y
- 7zTq3bqSPJRZ3wELwogW9rEp0vQfghlTmqgTKtt3kqousC+FKx4ZF0ebcw/
-X-Received: by 2002:a17:903:15cf:b0:2ca:be8:62d with SMTP id
- d9443c01a7336-2cf349b5923mr28950545ad.32.1784296058713; Fri, 17 Jul 2026
- 06:47:38 -0700 (PDT)
+ bh=dl5VNIyh9FlWG3euNH7OBA9eLlgIpgtUq8aKpOEc9u0=;
+ b=tVey4JIApFzT7jQGwnKiR3QTqQFJSbhckzQiEcEGN7ufhQzvu4Htg7vKfEvJLpG35s
+ vIb3c5vMyga8leA9eHVAx260Um+1UaYmIrD7iAdnr1rN/5u1hlvTqNnqseHe2xDWkngc
+ fOlfAwZnaBXQHCRgbKMRlLaz6HuvMI2tS3mRoCDnuG7pnmieL1wDbX8IJ4dJ+qS9XGlP
+ hbHIA4h0sOyBD3qaDxVzScyd9GaPhD9XuZvu0pW7A0UDyNn0f6f20l58ISp+Y6sGznI9
+ ezq8Shr+VLFs4/8C7kT8phyfnUlxKk/ZSlOaCAL/TT408d160NJc1r8nk5s5n5IYgVTP
+ zrCw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrLi3BY4wyEw46rTYkxMeekwXJ/3TqLbpV6x67S8zH7MObf5bpl2R16Z9zy6hd7RZe47rJLpfQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yypad4P6IRSGH5iycE70AZ5BsTwVRLzZuaY3LdJWPQ7yQQsdhV1
+ tT1qf4UB8SgiPoZj4qemFobSDRv9qFV/M4bBcU9c1bB3Grt7Zp+N1uQ3R//V/4cSfXfUNHuGVXs
+ wpAk/YXCkI+CTT3nR9/RvO3sfuQSwK1e+0d+70z3A
+X-Gm-Gg: AfdE7cm9/pebsiQ+o/KQPKAz/hwG6Ip+9zzDX/sCCzuzXymn/zTGd4Q0aaXZjvtyHQV
+ vzgknbvAI/75aJremabecyc0rwyfsgVUwNUDmdk6RY57L1ZEbTzDfbbjIxG6muiId9FX0YI8T+i
+ 4yeprpsHhcLxewrsvnc7edeHtfJgQ8CKT06CYF0kfigYHgu8PfiepGcw+bU5VA3wMc5Agk+d8hd
+ xWkWrNBQ3XnqbwNa6gxIFA1fMDZ//mRy3nFrozyZwvFkrAIipQkYAQwDgEakoyCjlPoEjM=
+X-Received: by 2002:a05:6a00:240e:b0:848:79aa:5d37 with SMTP id
+ d2e1a72fcca58-84c294fc710mr2845438b3a.55.1784296166859; Fri, 17 Jul 2026
+ 06:49:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260711160808.2022242-1-jonas@kwiboo.se>
-In-Reply-To: <20260711160808.2022242-1-jonas@kwiboo.se>
+References: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
+In-Reply-To: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jul 2026 07:47:24 -0600
-X-Gm-Features: AUfX_myBQ4YzfQKyxkLBna_IjdQWbHkIBbWxW4qy6xhV_KTL2za7oe_QF8NNYKo
-Message-ID: <CAFLszTj7P8Gq4MeRq_SxNNShr4Mujbyg4YQy1LqzU8igxNqutA@mail.gmail.com>
-Subject: Re: [0/8] usb: eth: Add CDC ECM/NCM support
-To: jonas@kwiboo.se
-Cc: u-boot@lists.denx.de
+Date: Fri, 17 Jul 2026 07:49:09 -0600
+X-Gm-Features: AUfX_mx9NPrk9tNEku23NQCtxsGdJHmaNhVuFJBtWahBkh4elaeBkr2aNqd74qk
+Message-ID: <CAFLszTjSDn+q2dWN+sXmi7T=hzsfxjQ8VO+SyZgasVs7nocvUA@mail.gmail.com>
+Subject: Re: [PATCH v2] acpi: fix no display when serial console is disabled
+ in coreboot config
+To: jayaramudu.desapogu@amd.com
+Cc: sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,42 +109,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Desapogu,
 
-On 2026-07-11T16:07:58, Jonas Karlman <jonas@kwiboo.se> wrote:
+On 2026-07-15T13:40:49, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com> wrote:
+> acpi: fix no display when serial console is disabled in coreboot config
+>
+> From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+>
+> When the serial console is disabled in coreboot configuration,
+> no display output is observed during boot.
+>
+> coreboot can expose serial console/debug-port information either through
+> coreboot tables(lb_serial) in src/lib/coreboot_table.c or through
+> ACPI DBG2 tables(RSDT/XSDT) during write_acpi_tables().When coreboot generates
+> a DBG2 table,it is publishing UART/debug-port information (IO or MMIO) through
+> ACPI for the operating system.By default coreboot assigned subtype
+> (ACPI_DBG2_PORT_SERIAL_16550 = 0x12)for both IO/MEM in src/acpi/acpi.c.
+>
+> U-Boot as a coreboot payload consumes serial data either from coreboot table or
+> ACPI DBG2.When serial console is disabled in coreboot config , the coreboot table
+> contains no serial data.So U-boot fallback and check the ACPI DBG2 table for UART
+> serial console using read_dbg2() to find port type and subtype.Currently u-boot
+> reads subtype as 0x12.But u-boot in include/acpi/acpi_table.h subtype defined as
+> 0x0000 this value suppots only port I/O as per microsoft DBG2. For AMD platforms
+> [...]
+>
+> drivers/serial/serial_coreboot.c | 2 +-
+>  include/acpi/acpi_table.h        | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
 
-> U-Boot currently only has support for automatic binding of the first
-> device configuration for devices, so this implementaion works by adding
-> bindings for VID/PID pairs and letting the drivers try to change active
-> configuration during probe.
+> acpi: fix no display when serial console is disabled in coreboot config
 
-Since the VID/PID approach works around the USB core only matching
-against the first configuration, please can you record that limitation
-somewhere more permanent than the cover letter, e.g. a comment near
-the new helper?
+The change is mostly in drivers/serial, so please use a 'serial:
+coreboot:' prefix. The subject is also over the 60-character limit -
+something like 'serial: coreboot: Accept DBG2 subtype 0x12' would do.
 
-BTW there is a typo here: 'implementaion'
+> From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
 
-> Patch 5-6 adds drivers for CDC ECM and CDC NCM.
+The commit author is 'jayaram <jayaram@BLRJDESAPOG1.amd.com>', which
+looks like a local machine account. Please can you set git user.name
+and user.email to match your Signed-off-by, so this From: line is not
+needed.
 
-The config-descriptor walking code in the two drivers is nearly
-identical, with the same interface/endpoint/functional-descriptor loop
-in each. Since you already have a common file, please can you see
-whether that loop can be shared, with the drivers providing just the
-matching logic? Then any fixes to the parsing only need to be made
-once.
+> U-Boot as a coreboot payload consumes serial data either from coreboot table or
+> ACPI DBG2.When serial console is disabled in coreboot config , the coreboot table
 
-> The driver implementations was created based of the CDC ECM 1.2 and
-> CDC NCM 1.1 specifications and was tested on a few different USB
-> Ethernet adapters using ASIX or Realtek IC.
+Please can you tidy up the commit message: add a space after full
+stops and commas ('DBG2.When', 'config ,'), use 'U-Boot' consistently
+and wrap lines at 72 columns.
 
-This series has no tests. We already have sandbox USB emulators for
-flash, keyboard and hub devices in drivers/usb/emul, so it should be
-possible to add a CDC ECM emulator and a test which binds the driver
-and exercises the descriptor parsing. That parsing handles untrusted
-data from the device, so it is exactly the sort of code that benefits
-from tests. Even covering just the ECM driver would help. What do you
-think?
+> diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+> @@ -668,6 +668,7 @@ struct __packed acpi_dmar {
+>  #define ACPI_DBG2_16550_COMPATIBLE   0x0000
+> +#define ACPI_DBG2_16550_GAS             0x0012
+>  #define ACPI_DBG2_16550_SUBSET               0x0001
+
+Please keep this list sorted by value (after ACPI_DBG2_BCM2835) and
+use a tab for alignment like the other entries. The DBG2 spec calls
+0x0012 '16550-compatible with parameters defined in Generic Address
+Structure', so perhaps ACPI_DBG2_16550_WITH_GAS, with a short comment
+giving the spec description.
+
+> diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
+> @@ -59,7 +59,7 @@ static int read_dbg2(struct ns16550_plat *plat)
+> -     if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE) {
+> +     if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE && dbg->port_subtype != ACPI_DBG2_16550_GAS) {
+
+Just to check the semantics: for subtype 0x12 the access parameters
+are supposed to come from the GAS, yet the code below still hard-codes
+plat->reg_width = 4 (with the comment that coreboot sets bit_width to
+0) and derives reg_shift from access_size with a coreboot-specific
+adjustment. Does coreboot fill in the GAS the same way for 0x12 on
+your AMD platforms? If the GAS values are valid for this subtype, it
+would be better to honour them (bit_width, access_size) rather than
+relying on the workaround. What do you think? This could be a
+follow-up patch, if needed.
+
+Also please wrap this line to stay within 80 columns, e.g.
+
+    if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
+        dbg->port_subtype != ACPI_DBG2_16550_WITH_GAS) {
 
 Regards,
 Simon
