@@ -4,132 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41E8C44515
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 19:21:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3587C44515
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 20:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 473A9807C4;
-	Fri, 17 Jul 2026 21:20:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B0895807C4;
+	Fri, 17 Jul 2026 22:39:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LAi6Tmxl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kKJKzmzR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E9E58341A; Fri, 17 Jul 2026 21:20:57 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 98E4883314; Fri, 17 Jul 2026 22:39:26 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51BE180517
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 21:20:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3707E80517
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 22:39:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-80814edb536so51044657b3.2
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 12:20:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784316051; cv=none;
- d=google.com; s=arc-20260327;
- b=n5iaaFZfcskyZClK3+oReDnXA1e1UktAjZVC9SUusqDQPpUX8Vjd6AYM8dFbJpCoRH
- TptZtrLlpuBuTutZ1smLa5JMQra87JQQMwWjzozWBmu+R45Z2fCR6W4geYpzQ+SedJSH
- 7sUsjIX0VSCS3UTVD2PL3RMcNRP+wWhSjCEEU689b1Xt3WykHWCrhUuqeQRfdMXz4v7j
- mPV1kbkZIyFaa6qgB0gimED/3qz35c4mHsBnR80fIPwOQh5Se5yGEU3u6paiIzDqojEH
- A+31SALsgvzBRpcEAt1FVDZw0s1J2LF+QR9YUd4w4ps3NdMWMxYFbZn0veBqsPrPXBAn
- S3aQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=PbqsAbWLIQRdq1BiUOwyKGOlNUogsJ4kG4DEQ0PqgIs=;
- fh=Ftkd5Rs+kMVeiQJrUd+QrrAOIVOKbqzVSyXv8OyUx5A=;
- b=nxEZdWYlHsZHYb0SoaGNu5qKb/9vGrsXOpyHmpNj6BgVBr/CNnDDZLe3+rSP4KDbTJ
- hmJG0QnQuBBMfecOCiE7dYaG7ByfQrvObmJoOnW1nFhTnJsiHpHp0qGBkUe8SAMDQLB2
- yDk69wD7BQ6H0NkgfaNuu8LDLMD7o8IFImBxSOsE8j14h5vG0VJgyT9QelIcqqafBKbt
- C+khCNhPP5aSVphUi+QuLHgpS5FO3HUSh+TdJxVjxXA5dkUzv00NlIMEgXX/2Pr5eCGa
- +k87HlgSmEg33qpcNqG3UDCK12Z8TUlWhiHhFzg9jtcjh/ss3bXzsGiDlvDsXu8BX5gt
- roUg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-6a377223171so3674189eaf.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 13:39:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784316051; x=1784920851; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ d=konsulko.com; s=google; t=1784320762; x=1784925562; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=PbqsAbWLIQRdq1BiUOwyKGOlNUogsJ4kG4DEQ0PqgIs=;
- b=LAi6Tmxl3F2x4bWahG/tj9YyYEo+/vmOZl2wBiDgSOGk82KvqajePCOoBBtfaJmU3A
- kghHfvAmi3OSaKpYAyVoYv82mvzFbjU6CKEp18q4OAUNbQiHX/hwPrYczv83pOh4pGo6
- 33QbIS3HxAADMTfghSYvIvtTn9iq4V5H7qNp0dbkMGxZjSLUmGWQXyL2bIjiaZZnrJVy
- /KLd1LOJDCqLJ++pqen2+dTNQ0qLoLYqW7H7o3oibE+Jux7EbNDkiaL87AguAS6nfECe
- YC37sWZmYRwYOBo2ksQqM9QuyLjbLbpOPYrmPh1dhBPyuOv9UFYxZhTNBCcXrevzryuG
- TSWg==
+ bh=YG3tibqiQy+ZfyjfTvO2pUVj4Dzzn9emq2B3MJU1aag=;
+ b=kKJKzmzRK7UZVDNTs2sFaF0N6SD/1WREzYHH8lq1ZWTpMSY0RzJXUVb/Rii9TWwaAD
+ YuljAg7+EuTT1WMEFxD9eu9NWHJI7cfmuSaqoY50qWHLmO42M1sM1DbRq3+TW/7/pygu
+ EoNindPO/eK7U3SXEApG+96qqP7j1QkPhibIs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784316051; x=1784920851;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1784320762; x=1784925562;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=PbqsAbWLIQRdq1BiUOwyKGOlNUogsJ4kG4DEQ0PqgIs=;
- b=AuEvAbc3Tut+yqZQSvX5dZ0DMzsBM1cjSA7GWkwvW3vcb4mIZch1X9P5mKYgwQpvXD
- +d1wuBcWsQac/8/6hZLkmw3Psecu1WX/OKYXVRsVyi0QEaOJ1jSEdMGID37YyJ48P7Kl
- XkKtNDvqMMXXgGEFe8xDorMSMsE/Y0lcUWzg7ytFqW2hrBH9G0xhb6vUDtG1YIvUtI5D
- A9KrPD0tgMYcVr8reQS/9aUGJeMCOpMZ+R+fwIbjQXid9NmwvQDgEou/kGwGBV8yjepM
- OT0RTFH9kK6RIZL9i223hK38pEaASA81BFuMMXrkwK4smjyTjyKUrTUZLBoQ77nAcW2d
- wF3g==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr98B0B92624HZ6hi7MqtFam/+TFyrEGgqh8NfOrs4V9FQSggPjqCIA9G6d9LIzCk94uP3q6jI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsyPv/zsrBe+DsI+Csx/OrooT7hSZnZHadApeodR5v3eApRgKj
- 5wZURr013RyMvRc9iJvBD4krItVrcci/XKC4h400lOsvis9aMjtwiqVkiOWMRMBNX1B8sLAYPvy
- fnfTeQiLLr8/t7kYZ7pdiNC/p1GW/uCLcC3EGge0b6w==
-X-Gm-Gg: AfdE7cmMJeMV1SkRPIohVvJIGHPJcv9J45p0IN22AAhUI/CLLVSJAz9a4LRrXCj1kCG
- 4urAYSAiUtKotn/dWikuUmfHT4f2u+ms2zVOCHjVrJgq+d7P/3XBSaPPOs57ZpkpYd5JxSOZrQq
- jjWOUE+Sc1NNIv0EU35qcGHmOUFeMCO2Zbl2bFh6/+TbTGID4RATVWUSk5sB3yAN9RPzUNiBAGl
- UO32pW4IPcQ9/FA32LX3ufleJ1dDaVeKgJ8ia9tZGlEophT/zpyUEmsJbIoDXTkrocKqvxk+Cnz
- VNIQ/QZ8dO2qJCpdp0IWQiO7D7ysnIL3wxVEKxyMHiCr3ayUnxQJInbkioRijA1txYV+QQJTEKh
- SicYf+oGEZL7zaSy4N5YQ/n9jvPc8usbnHuXgkQ88I+69EhdgsVFImmKKa6I1zqB3ZVhilSZv0V
- 6JBXIUerkp1rHkL08b22c3WgkrT2OMO4ivFsh9N96/yJLzgtV+Gxc8hOC9zAk5kjT3iJojOjbT6
- D4v7Inm8xPPxuhC0pHB3uIdgDEzRO1zaFpf81XOuNvThc41k24LtBktzLsAPxd9gsqUl2lQrkqj
- tPVjzdhry9BJeXZK8/GbwJ/spKORElojpLrSRnK3w2eBBPSsfvJP6d8r8K9ONQ==
-X-Received: by 2002:a05:690c:4484:b0:81e:f102:aa02 with SMTP id
- 00721157ae682-81ef25e1749mr13509577b3.41.1784316050831; Fri, 17 Jul 2026
- 12:20:50 -0700 (PDT)
+ bh=YG3tibqiQy+ZfyjfTvO2pUVj4Dzzn9emq2B3MJU1aag=;
+ b=fOL+Ua+uuBLcsgjomh42GkOkDEF7X9PYwsIPwZclSKcKO5V52/AznsP6niQ6tm+rsZ
+ 7oJY40ShmwJByMFKCOeHDMU/TOF6nOXMAK85RxwyxapisjT+e1v0Vy9YNB++gmGkANV2
+ iueZCPHk27AeJitgJ6fB0UChWCmU8VPzFBGPsLJuKt0LGw3FcsMmZinQF8VGsg82j8iu
+ UNFtCMnZWyocTWlhTp/9LSdan2c8PLIvdLBmnTXMGktAKby/AlGNL2S1pLgOQbFwFLKR
+ C+Zy8dyzDeGSZtpiPwcUETpZBhmY5elNBzrOUhP7YOeID1IrQp5joEPCjyszEEKHazY0
+ Ibhw==
+X-Gm-Message-State: AOJu0Yy+qd4e9UHZX/1+v/tMZoo2tLqTOdOOADjoQa+qceQnvBTdSqJW
+ 08Boy55wUc7tGlRS63EIe1nm4iW7zU3F1rDnw2YPL9boxAMYgs73UMvJuNKOcuwJREY=
+X-Gm-Gg: AfdE7cmslVGne+RrFQQeRi+S8CPnPHUNy4n1B2vBs9EKTSHw0vGgOfTTFERA74GA63b
+ AAJyw/EQFM6D2xNvtWBohYzRujTTxYIho0sEIsevuRhOfrU/Mq1jb/OWHYYxyN1SupwOUKucrgq
+ zfhAWygf760jPNTkVo4D5N8FpwWjezWRwA1eRDU926RKMlehv2hBnVbzRzT84ZWz56b5Vr3268H
+ f33Oeg7jie2MA2tAe2G1BA74QRo9KvJa+8vv5VeiIK+8oj7KRPrPz1NbLIFiz8SjSJYfmOmUvZ9
+ gzF7+XVG4UZYC/O3f9cm3EFe+Z4b/LSmnd68IX/f49RjeOfKpBrNhKJ0fStqCF5/n479Iq/4C0F
+ ez/9nrK+S9KainucUs6hSv4QHuWJgRbLzbpwANXNDdiYdtueavFAbkUKxFTy4RVaKpeClra3rZ2
+ dFGrOSZdgJpMUsPaPgi/fBiOmlekK/JJ9AvAQoSinQrwqgoChenB8q4YWc0PFg152Gpm4z+lgTy
+ xijykKR4Zn+rQtpqz2sbtEYOYQ=
+X-Received: by 2002:a4a:ee0f:0:b0:6a3:1dc5:356c with SMTP id
+ 006d021491bc7-6a536869169mr1812452eaf.53.1784320761778; 
+ Fri, 17 Jul 2026 13:39:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-93-175.totalplay.net.
+ [187.190.93.175]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a516c048f5sm2128773eaf.8.2026.07.17.13.39.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Jul 2026 13:39:20 -0700 (PDT)
+Date: Fri, 17 Jul 2026 14:39:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: dmukhin@ford.com
+Cc: u-boot@lists.denx.de, sjg@chromium.org
+Subject: Re: [PATCH v1] x86: add support for CONFIG_REMAKE_ELF
+Message-ID: <20260717203918.GU749385@bill-the-cat>
+References: <20260716205213.340109-2-dmukhin@ford.com>
 MIME-Version: 1.0
-References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
- <20260522-capsule-v1-1-ff0ac9978d48@oss.qualcomm.com>
- <CAC_iWj+VQyO1Zy+mPqcQJY91aEFsrwXFT4dbObejar0fDpCaSg@mail.gmail.com>
- <a4b3eeed-0789-4bec-b29f-d13e3e3b3016@oss.qualcomm.com>
- <CAC_iWjLQxOVb7H-Mib7NAYLmzumhL5uBi8dZ_ufCksJMrcQ8OQ@mail.gmail.com>
- <89329f38-d2c5-4014-a1e1-44ccfd09b3bd@linaro.org>
- <242ab545-c274-4b65-afa9-2c3ab056a918@oss.qualcomm.com>
- <CAC_iWjK_U_TtNJsXjgVggXa28iHb9212tEQEdQn8wK2XqXmJiQ@mail.gmail.com>
- <19959cc3-40f6-4e9e-801d-8f7c40edbf70@oss.qualcomm.com>
- <CAC_iWjJSNekv73X0n3G-qPjh60F88R=CHybxHzBUo1DDgGzrqg@mail.gmail.com>
- <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
- <CAC_iWj+yLvqqunA_j6WX_0v_DSkf6xwXPSL+kysrUM7G3isSKw@mail.gmail.com>
- <8de79ca7-e826-4a61-b380-2bdf01c39871@oss.qualcomm.com>
- <4b344c4d-ef0e-4595-a6ff-10629cfaaa82@linaro.org>
- <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
-In-Reply-To: <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 17 Jul 2026 22:20:14 +0300
-X-Gm-Features: AUfX_my_iCaEROOAwVIm0kCHzWBFLvdyNNJNT3nhdgAK02RMz_26Hjt-yrW2y1k
-Message-ID: <CAC_iWjLojim-XKOT0VVJMqp6YvaeEpxJtnLsiCmtJae9T4nK0w@mail.gmail.com>
-Subject: Re: [PATCH 1/7] qcom: capsule: add FIT capsule support with
- multi-partition
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Minnekhanov <alexeymin@minlexx.ru>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OYbKICnknePckTf8"
+Content-Disposition: inline
+In-Reply-To: <20260716205213.340109-2-dmukhin@ford.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,91 +98,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
 
-On Fri, 17 Jul 2026 at 20:16, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
->
-> Hi Casey, Ilias, Simon,
->
-> On 5/26/2026 7:05 PM, Casey Connolly wrote:
-> > Hi Balaji,
-> >
-> > On 25/05/2026 13:24, Balaji Selvanathan wrote:
-> >> Hi Ilias,
-> >>
-> >> On 5/23/2026 6:23 PM, Ilias Apalodimas wrote:
-> >>> [...]
-> >>>
-> >>>>>> To support multi-image RAW capsules, we would need to:
-> >>>>>>
-> >>>>>> 1. Enhance mkeficapsule to create multi-image capsules?
-> >>>>> There's an equivalent tool in EDKII that can produce a capsule with
-> >>>>> multiple payloads. There were also patches posted for mkeficapsule,
-> >>>>> but need some minor tweaks to merge them
-> >>>> Can you please point me those patches? I did a search myself, but
-> >>>> couldnt find those patches.
-> >>> https://lore.kernel.org/u-boot/20240419065542.1160527-1-
-> >>> sughosh.ganu@linaro.org/
-> >> This patch you mentioned here can create capsule with only one payload=
-;
-> >> means for multiple binaries we need to create multiple capsules. I hav=
-e
-> >> also asked the person who made this series to respin, but havent heard
-> >> back from him.
-> >  From a quick look it seems like it would be fairly straightforward to
-> > extend mkeficapsule to support multiple images, the capsule header has
-> > an item_offset_list[] array with offsets to each image, today we just
-> > write 1 but it shouldn't be too much of a challenge to put a loop in
-> > here and extend the argument parsing.
-> >
-> > Given that we a) already use raw capsules and b) they are part of the
-> > EFI spec, I'm gonna try and save us all some time and just put my foot
-> > down here. A single raw EFI capsule file can already support updating
-> > multiple images, U-Boot already has all of the machinery for it with th=
-e
-> > exception of mkeficapsule but I expect that's something you can tackle.
-> >
-> > The upside to this is that you will be able to build capsule files for
-> > updating xbl/tz/hyp/aop that can be consumed by U-Boot and edk2!
-> Thanks for the detailed feedback.
->
-> We agree =E2=80=94 we'll drop the FIT capsule approach and move forward w=
-ith RAW
-> capsules.
->
-> Here's the plan:
->
-> 1. mkeficapsule tool: Extend Sughosh's multi-payload capsule series [1]
-> to support generating multi-image capsules from a config
->    file, so we can build a single capsule covering all the partitions we
-> need to update.
+--OYbKICnknePckTf8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, that would be useful.
-Keep the on different patchsets though. You can still add the capsule
-update machinery and use the EDKII capsule generation tool.
-I.e, you don't have to wait for mkeficapsule patches to go in, before
-your board code does.
+On Thu, Jul 16, 2026 at 01:52:14PM -0700, dmukhin@ford.com wrote:
 
-> 2. U-Boot (Qualcomm): Today the Qualcomm capsule update code only
-> supports a single firmware image (U-Boot itself) via a
->    single-entry fw_images[] array. We'll move to a SoC-specific,
-> multi-entry fw_images[] array (defined per board, e.g.
->    board/qualcomm/<board>/fw_images.c), so a single capsule update flow
-> can cover multiple firmware components =E2=80=94 each with its own
->    ESRT entry and FMP image_index =E2=80=94 instead of just U-Boot.
->
-> Will send an updated series once the mkeficapsule and qcom capsule
-> update changes are in shape.
+> From: Denis Mukhin <dmukhin@ford.com>=20
+>=20
+> Fix objcopy/ld parameters for x86 to enable CONFIG_REMAKE_ELF
+> configurations.
+>=20
+> That adds new 'PLATFORM_ELF_ELFLDFLAGS' make variable for injecting
+> proper linker arguments when u-boot.elf is requested.
+>=20
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 
-Thanks!
-/Ilias
->
-> [1]
-> https://lore.kernel.org/u-boot/20240419065542.1160527-1-sughosh.ganu@lina=
-ro.org/
->
-> Regards,
-> Balaji
-> >
-> > Kind regards,
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--OYbKICnknePckTf8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalqS8gAKCRAr4qD1Cr/k
+CkUBAP41OAj1kv8GX20892fIrhjInbULPsekLyHjJ2WjAT3quAD/R+AG6m7oYSuY
+TYMnQubitp1zHTMLAmIFulVfGxFD4Q4=
+=1tC/
+-----END PGP SIGNATURE-----
+
+--OYbKICnknePckTf8--
