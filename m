@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3587C44515
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 20:39:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E87E8C44515
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 21:02:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0895807C4;
-	Fri, 17 Jul 2026 22:39:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D2FB080517;
+	Fri, 17 Jul 2026 23:02:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kKJKzmzR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LdZiNbyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98E4883314; Fri, 17 Jul 2026 22:39:26 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 9861083314; Fri, 17 Jul 2026 23:02:01 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3707E80517
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 22:39:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EB9780117
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 23:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6a377223171so3674189eaf.2
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 13:39:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7ec49608332so1639295a34.3
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:01:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784320762; x=1784925562; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=YG3tibqiQy+ZfyjfTvO2pUVj4Dzzn9emq2B3MJU1aag=;
- b=kKJKzmzRK7UZVDNTs2sFaF0N6SD/1WREzYHH8lq1ZWTpMSY0RzJXUVb/Rii9TWwaAD
- YuljAg7+EuTT1WMEFxD9eu9NWHJI7cfmuSaqoY50qWHLmO42M1sM1DbRq3+TW/7/pygu
- EoNindPO/eK7U3SXEApG+96qqP7j1QkPhibIs=
+ d=gmail.com; s=20251104; t=1784322118; x=1784926918; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=wTwFTnbb9mxtXaAxGCk2iYM0UddcCeJbkiIyuiC+J28=;
+ b=LdZiNbyu/gr6A0eBeW30k9UqQUJ99cECg5xNBkT6+AvuJS7WV4QZb5gMFbuaZ5sI9E
+ qcss6gVUYKpm+5+k+QBoYHexWO0qjvrbMTgG5Hj8OkPxGzv3fZ5Nrtt6d2VwgpUk9cFf
+ ut4CPKSWv8b1j3/Y1XZnVnLw9v8PcoZRIzZgHJoXH4OAUVXCB9zc+PwYdYwxM8cXVFzz
+ EEq1hPk25L7Oq9KzVW1+BpXGkKiKKqJMdu7yl/UkP0FHo0e0GcgL8S1ZiFRzaXjduXYO
+ IjIhrzOrHMwTMpUrQWm6BQiaR8miwkVg2oruWyvDBBon8N9H2pZwneQjd/gC5urde0+c
+ YUMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784320762; x=1784925562;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YG3tibqiQy+ZfyjfTvO2pUVj4Dzzn9emq2B3MJU1aag=;
- b=fOL+Ua+uuBLcsgjomh42GkOkDEF7X9PYwsIPwZclSKcKO5V52/AznsP6niQ6tm+rsZ
- 7oJY40ShmwJByMFKCOeHDMU/TOF6nOXMAK85RxwyxapisjT+e1v0Vy9YNB++gmGkANV2
- iueZCPHk27AeJitgJ6fB0UChWCmU8VPzFBGPsLJuKt0LGw3FcsMmZinQF8VGsg82j8iu
- UNFtCMnZWyocTWlhTp/9LSdan2c8PLIvdLBmnTXMGktAKby/AlGNL2S1pLgOQbFwFLKR
- C+Zy8dyzDeGSZtpiPwcUETpZBhmY5elNBzrOUhP7YOeID1IrQp5joEPCjyszEEKHazY0
- Ibhw==
-X-Gm-Message-State: AOJu0Yy+qd4e9UHZX/1+v/tMZoo2tLqTOdOOADjoQa+qceQnvBTdSqJW
- 08Boy55wUc7tGlRS63EIe1nm4iW7zU3F1rDnw2YPL9boxAMYgs73UMvJuNKOcuwJREY=
-X-Gm-Gg: AfdE7cmslVGne+RrFQQeRi+S8CPnPHUNy4n1B2vBs9EKTSHw0vGgOfTTFERA74GA63b
- AAJyw/EQFM6D2xNvtWBohYzRujTTxYIho0sEIsevuRhOfrU/Mq1jb/OWHYYxyN1SupwOUKucrgq
- zfhAWygf760jPNTkVo4D5N8FpwWjezWRwA1eRDU926RKMlehv2hBnVbzRzT84ZWz56b5Vr3268H
- f33Oeg7jie2MA2tAe2G1BA74QRo9KvJa+8vv5VeiIK+8oj7KRPrPz1NbLIFiz8SjSJYfmOmUvZ9
- gzF7+XVG4UZYC/O3f9cm3EFe+Z4b/LSmnd68IX/f49RjeOfKpBrNhKJ0fStqCF5/n479Iq/4C0F
- ez/9nrK+S9KainucUs6hSv4QHuWJgRbLzbpwANXNDdiYdtueavFAbkUKxFTy4RVaKpeClra3rZ2
- dFGrOSZdgJpMUsPaPgi/fBiOmlekK/JJ9AvAQoSinQrwqgoChenB8q4YWc0PFg152Gpm4z+lgTy
- xijykKR4Zn+rQtpqz2sbtEYOYQ=
-X-Received: by 2002:a4a:ee0f:0:b0:6a3:1dc5:356c with SMTP id
- 006d021491bc7-6a536869169mr1812452eaf.53.1784320761778; 
- Fri, 17 Jul 2026 13:39:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-93-175.totalplay.net.
- [187.190.93.175]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a516c048f5sm2128773eaf.8.2026.07.17.13.39.20
+ d=1e100.net; s=20251104; t=1784322118; x=1784926918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=wTwFTnbb9mxtXaAxGCk2iYM0UddcCeJbkiIyuiC+J28=;
+ b=fKHyufXEwyJBIDKcCl8gWwOHtEuhMx4YBngGApg+9MN61GPulDxUPyzwaT0HN09aAi
+ IjnNUBhksRaVWA7cCnJAQbSFToRnofA8jvhFONCvAfItUesombLWyz0unnEP9tXOyfm1
+ 6YPP3oQjSsrz1e8sp8jvHRWIMFjkwc1O9mXwtVMy44oqz9DAZOfL3qWI9tiWnzLdlG+z
+ N9Ucn3Vk9O9fb4Hc98+/OyHzcPgmYwScb0x+j7jqHj5wdKkBse+wvPflHdrpPiFDPevJ
+ euzXOeyaeQGdt3NREKIwTxhGo4gkjVousiE1sQSqcftHsyl/M9VrRcFyyLXYFa0j82EM
+ ZqPQ==
+X-Gm-Message-State: AOJu0YxZWUrlSSLzpa8NDAUPBARTJG4gxrqDPVlxZpirQJKJ37tGuJYn
+ zgK2nULBJ7xkVt79g/ZD+Stk/LASAqVlgqwADYFp8H5sienB3ocd4KgegZrqtB/saw8=
+X-Gm-Gg: AfdE7cnoouJ7vLilgUPN4hLl5Ju3E0hPF7X/RO5zysg+hQc9BUjASGTQRaDdoSXDHdi
+ rSSYOwyu1KQ9gdILpI5NPpFdkZed3G/kwzSpcdKfAr+7dDhIMfh2RwSg0zEc6Zb4QgYHudu0MPD
+ qrhewDR8Vh6gViHvSw8uheiarBzlnPSBl9Yvk0Tt5liLDxB258AN+LyqT1vjCo+pgj4U7S6AwLG
+ OPnPGe6DqR7Ag5EY2X6ti6woDhcczEUUzas23kxvdvrXfUV6qLYILjL5q2nXC9zmBpBY4FCzmC+
+ 8mSc9KOLrtU/UivMM/zEKLjkUe0+uZeagRT4zT86uI8WkP1EntfbkwGxmyRtFe4ZWjZA5ucFX4a
+ ll78L1aY3yMcOA6Nx7HpmY2fGKU/VGjnJo+5ML7qp5oOxjwdMyK00M7HYy8bz2p2KbNMi8vkLSR
+ Q1SEyDWtTqqRfm/wA0Y9cxHUVWUufSdNjEoSqffMQmlREN8OWeGDqb8Ymu/G/vsR/6xZzk4h0aj
+ 5ccu9oQjJB41EDSwvVqHPj6M3zJWdoq0y1Fu+OWGRI+VjDQW6JvH4zZo81dmsKmuB2xA/zWnuo=
+X-Received: by 2002:a05:6830:2903:b0:7e9:d1f7:b728 with SMTP id
+ 46e09a7af769-7eda0945c2fmr2170770a34.21.1784322117425; 
+ Fri, 17 Jul 2026 14:01:57 -0700 (PDT)
+Received: from james-x399.tailafd1a.ts.net (174-29-11-8.hlrn.qwest.net.
+ [174.29.11.8]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7edad94f0absm2041138a34.8.2026.07.17.14.01.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 13:39:20 -0700 (PDT)
-Date: Fri, 17 Jul 2026 14:39:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH v1] x86: add support for CONFIG_REMAKE_ELF
-Message-ID: <20260717203918.GU749385@bill-the-cat>
-References: <20260716205213.340109-2-dmukhin@ford.com>
+ Fri, 17 Jul 2026 14:01:56 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v2] mmc: sunxi: support DM MMC in SPL
+Date: Fri, 17 Jul 2026 15:01:41 -0600
+Message-ID: <20260717210148.3391816-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OYbKICnknePckTf8"
-Content-Disposition: inline
-In-Reply-To: <20260716205213.340109-2-dmukhin@ford.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,38 +99,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+sunxi SPL normally uses the legacy MMC interface while U-Boot proper
+uses the driver-model path. When SPL_DM_MMC is enabled, the existing
+DM probe depends on the devicetree, clock and pinctrl providers being
+available in SPL.
 
---OYbKICnknePckTf8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Select the required SPL clock, OF control, pinctrl and pin configuration
+support from MMC_SUNXI. Retain the main CCU and PIO nodes when their SPL
+frameworks are enabled, and retain the MMC0 controller and pin
+configuration when SPL_DM_MMC is enabled.
 
-On Thu, Jul 16, 2026 at 01:52:14PM -0700, dmukhin@ford.com wrote:
+This reuses the existing DM path unchanged and leaves the legacy SPL path
+untouched when SPL_DM_MMC is disabled.
 
-> From: Denis Mukhin <dmukhin@ford.com>=20
->=20
-> Fix objcopy/ld parameters for x86 to enable CONFIG_REMAKE_ELF
-> configurations.
->=20
-> That adds new 'PLATFORM_ELF_ELFLDFLAGS' make variable for injecting
-> proper linker arguments when u-boot.elf is requested.
->=20
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - select the required SPL dependencies in Kconfig  (suggested by Tom)
+  - retain the common CCU, PIO, MMC0 and pin configuration nodes in the
+    SPL devicetree
+  - drop the new preprocessor fallback paths  (suggested by Andre)
+  - reuse the existing DM MMC probe unchanged
+  - drop the no-devicetree platform-data path and controller reinit hook
+  - reduce the driver change to four Kconfig selections
+  - validate an H616 SD boot through SPL FIT verification and U-Boot proper
+---
+ arch/arm/dts/sunxi-u-boot.dtsi | 22 ++++++++++++++++++++++
+ drivers/mmc/Kconfig            |  4 ++++
+ 2 files changed, 26 insertions(+)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
+index e1a9a7f5d4c..fdd8c78c8bf 100644
+--- a/arch/arm/dts/sunxi-u-boot.dtsi
++++ b/arch/arm/dts/sunxi-u-boot.dtsi
+@@ -19,6 +19,28 @@
+ 	};
+ };
+ 
++#ifdef CONFIG_SPL_CLK
++&ccu {
++	bootph-pre-ram;
++};
++#endif
++
++#ifdef CONFIG_SPL_PINCTRL
++&pio {
++	bootph-pre-ram;
++};
++#endif
++
++#ifdef CONFIG_SPL_DM_MMC
++&mmc0_pins {
++	bootph-pre-ram;
++};
++
++&mmc0 {
++	bootph-pre-ram;
++};
++#endif
++
+ /* Let U-Boot be the firmware layer that controls the watchdog. */
+ #ifdef CONFIG_MACH_SUN8I_R528
+ &wdt {
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 6c513328de2..40b6e6882aa 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -806,6 +806,10 @@ config MMC_SUNXI
+ 	bool "Allwinner sunxi SD/MMC Host Controller support"
+ 	depends on ARCH_SUNXI
+ 	default y
++	select SPL_CLK if SPL_DM_MMC
++	select SPL_OF_CONTROL if SPL_DM_MMC
++	select SPL_PINCONF if SPL_DM_MMC
++	select SPL_PINCTRL if SPL_DM_MMC
+ 	help
+ 	  This selects support for the SD/MMC Host Controller on
+ 	  Allwinner sunxi SoCs.
+-- 
+2.53.0
 
---=20
-Tom
-
---OYbKICnknePckTf8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCalqS8gAKCRAr4qD1Cr/k
-CkUBAP41OAj1kv8GX20892fIrhjInbULPsekLyHjJ2WjAT3quAD/R+AG6m7oYSuY
-TYMnQubitp1zHTMLAmIFulVfGxFD4Q4=
-=1tC/
------END PGP SIGNATURE-----
-
---OYbKICnknePckTf8--
