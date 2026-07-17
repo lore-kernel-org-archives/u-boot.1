@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A23C4451B
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 14:05:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1238AC4451C
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 14:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 859A084E42;
-	Fri, 17 Jul 2026 16:05:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 38DEE84E38;
+	Fri, 17 Jul 2026 16:12:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eYw9Q1sF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ImnH2+Jx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D37F484E46; Fri, 17 Jul 2026 16:05:25 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 0953384E50; Fri, 17 Jul 2026 16:11:59 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA41384E38
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 16:05:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A32FE84E05
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 16:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-69a50189d25so14095733a12.3
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 07:05:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784297123; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-69e7a5b61e4so446102a12.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 07:11:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784297515; cv=none;
  d=google.com; s=arc-20260327;
- b=JW4TYCCBLB21toStVX94w+NBPXCa4BQzYs5ofEWZ/vqPUL9E/Etr9/ylMMrXyOpFt6
- T/gVeYUFg7+alx2EVjEMviKyZ24u4itnbxJvOvrhXQqxs12RBpS7CQ5mL23L6iHqWjuL
- OFx0Wd7l2MJI2GZKpIdb+HuyhhFcV31te+i3DgOtFsvWTWB3cGmUEnOo0n9PcWofCQwV
- OFzQWru0CwL9p4AI1jdyWS8/5S8Z/OYei6m/KITwiInDjTEzeiqRCQC4IPFeD5PfIZIx
- iB4jQsMoRm7cl7V2BKRUqHjMRFQtoa/S3i2ioCYj0aZ5I4LUTQsN7yQTzn/ATVXwTooJ
- /3gg==
+ b=QUrq2gSM6Zoe/tpm1MIcUwOiVNpL1nszaYkw4fNChlNSYsK4ANvma3v4AI71T5O7US
+ jEysCgBpzlBFvsoAdtnrGj7WDB4D4Z/jOf+rz3CefYqaEUoQ8SZJ1mRVv0P01Oc4KYgJ
+ 1MayA0k9Gzck2p4mA+EtQ7rdkWXvn0AtFBqVZDaaTfQ3ZAuwx85+BIZw9e0coc8ApM3k
+ ENGjvQsuHNfzJMhh6/5H456z2TwTltUhM3hHCe2g6w9mNoTZGjnX41/PVYVw9FCHrNba
+ XBO6Buk/ghZUNWkHLXugsBz4Krs9er4JQZIfxqIedtWASaSJvaW2DEJmhd9iKUJMwvoB
+ T09w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=266rNNRwQ744yO/nby4D/G596h1ZPGzD1hwIp9WJ7zU=;
- fh=0Ck3+wBFRCQTDYxxJt1JJTgrKvHtPWROriE/svkzgkg=;
- b=E4YbsCq/vtdZw0JIYZgk9BxlH373Eq4+mxI2Uozeozr+jZzO6dVGkcypAwIBWn25xZ
- m4b5bsrm4Sd4IcQeU1h+oaoPMokFEw8lWICzG+fKIL2w8t8FfQFtKKIjQepii2HBKuG8
- NjAat0uYmACaKFLjBffPXwAxudng+uMR9BmMRyI8SorJU3jxGh5e4ZBFzxwyTuvPjb2k
- mXWDGcls2wcV1LipRupJvyuHuKGo+FXfN9gmi+YhmDMX46kUdezC1FVC5/cln5f4gWqZ
- cxfH4ZY7K7pP/Ng30mvhUJXzwdfUczwVZqhOoMs9Pg38/x10PEoaNt7L+ZSIkOEDOIrz
- ioHQ==; darn=lists.denx.de
+ bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
+ fh=OqT8nV0sGx179V0pCjSZbhv8utV4J9HdN1hsQGVI7mE=;
+ b=kYaURGbhKWmA4bmbZRK3sRlGEcPM1fZSrzU1U1Rsz44b5YfZ5WM9b9ElGQ/mKjIfHS
+ GVwLqODx8ob0QdAtTmyKM2vMDlNFHWoAh174t34dN4GgrjYF1wcwT9gB36/x7HpYJP8+
+ Pb40jibSefHFHtdv7t9ezFcKqWfU9WC2xyd+LfkqJiIz0mnpwUHzM9tNGfB4oFw6pYpk
+ Xm7VZSrxuVrIt2cJ2gJUpVLNX8fLBn+lX2bA9i61widxJIty7oG8zfkU0zJIPLwh2+jg
+ maAF5zQc27KB2wVSoi3R1Z0cidJoLL/M3Pd4dSTp5SAvLLdsiiPk+rniOT1/Hg/6Y+J5
+ AObg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784297123; x=1784901923; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784297515; x=1784902315; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=266rNNRwQ744yO/nby4D/G596h1ZPGzD1hwIp9WJ7zU=;
- b=eYw9Q1sFDotLRRts1ib3sFg4XOtaDsS0f2lS6aq3ezMg/7hTUPGQ/gEmdoAptEw4AJ
- 3hzdBBNY2z8JkMFOXc67tWoWXFvhM+VuILM8QsU2IxDoYO4uLDrplhpMNXNh59wol41m
- eSZCAaoLppk+pXl4ApFfsDcUSIhI+mk2RrfE8=
+ :content-type; bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
+ b=ImnH2+Jx6AidUMvR4LUKwQ+AfFpjnhj7kj71lhEe+a62KUHGWqYaCsXu3teV3B6rs0
+ OevgXWk7REzdNLajsVwtFKt8raVq5b+kl/p4rbGtPo6xg/jKv+WzF18zW1e2Kt/ptHAJ
+ ScsjJCthO8t2SIUt0eKZAeptOjnobNqTWiEOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784297123; x=1784901923;
+ d=1e100.net; s=20251104; t=1784297515; x=1784902315;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=266rNNRwQ744yO/nby4D/G596h1ZPGzD1hwIp9WJ7zU=;
- b=rBLTuWCEe2K9cheSnu4jyIAFIbgITdAs9oYgvgBA5y0QZ19XsfrqaKDmNoo4HdeT1E
- IRmU6ejirFG5Vz7TIqVrc6tmwLLp0kTLsPYGbXH4VaK4yIGEqZLC2B/9LMI5K8qf2R+L
- XBprL5MUFPC/V3A72KQJ2Q7Gc530SAWPEWgzp7D2au/f9I3RwaQKc1fO/BIa6Aj5QWRU
- 6hI3FZpden//LaY+82PqTdiKbTf0ENSB+tyhUar3/99ixUPNA2XdOf47HjkM3TDUUCxO
- nFJrwVG1QbDE+l8fYRFXJYjITbErtT5nK1kcwNvNFViptNRWiXJP66MEbq71elh3rOds
- NybA==
-X-Gm-Message-State: AOJu0YzBtuiXQnEi9zbYU4GnVe3R6FM6JiFRBCE4GSWvd9nMWaAYiTrC
- SXHGZw2BByyVT6he6GmXl0sErJDtWqK+i/PxlFIm0ywwn/zmqlUw5KfZvY+zyT/hQMKSHVqSrtS
- n1m4GRcRyjqdKaFNcbCurH3mn3W3XJCxJkVWJKY7O
-X-Gm-Gg: AfdE7cksjlL9tkBBG8U47v/mVwKtdXSs7rox0jBp7x7NfYFJeIgzpUd1vbfOn3FjKvH
- 0dQ3McTHOU/b2Y3/UjWF5H+AM0AJpdi9msSkVzeaDrwSpwGjymOLrMdh+unzsPcApgM29vdlHGb
- +/SyB0WIyBQ4vvy8XcWjZUA7UEuqVAdqrQU8UaPzBBn6DivhxvOCezoFgVwH32p8wu3R7f2r5ef
- VWUe9OWbWaHuOYsjfT5p1im3iET9W8mklwJvfDKSiB4veVb/8j0IYpCa11O
-X-Received: by 2002:a05:6402:5055:b0:69d:4ed6:449a with SMTP id
- 4fb4d7f45d1cf-69e6525a92fmr1049166a12.8.1784297122780; Fri, 17 Jul 2026
- 07:05:22 -0700 (PDT)
+ bh=QDRb8//P40qfcB4nK+/o/8no8J2jWq+oz7zqJLKDvIM=;
+ b=nckN43t6YnZCO9iaae42hfet1lIqX9/phE3PYsbLrBRZOaI+dU+qYwWbiRmxO6K+Ux
+ gCyjHWC6AzundnpNoSwOXkXff5G7RV05AKUAqm+hfrorVGyNxYy1GNKiFXD8jupAzINZ
+ 52rh3Gnm4+iak/KjL/KTwUCAPNPBLjHn5Pz+FtCUWlwS/e/R5QMafk8hBGFlLGqg2AVR
+ BnE3u07HmDmD/OT0f1cOT8aJTVx4Uuq/U7M/Nx34NQbXMLbHOgcOxR21pPk5+NguKIkH
+ 4DjAlq3ycfz8bPZRYSzf6Mal7V2oAv+ezScAAPcGu/7FiGIcFsPQqKuZHDUOI4fSkC5M
+ oj4A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq8GZ6RA853H+EDKxxxSISt5qw/eD2LF5u5QzQsCNZiiO7+8pThaTlCdmsZ3RBND4KHZTabqbQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbVB9fba2NP9jK6U3cUfld1KEkELvA+nhZ7w9Gq09uG0ZkT7FF
+ Ib/8EzuKk2k1x8jflilPHvCKpoLJCZsF7tDZt1o29+7Q26fPhGa1hgPMZnIql4xVCWwSKdguoj3
+ msorcHeUdaTeFcV5G57LfFyeYL12YHud8K7Yijboi
+X-Gm-Gg: AfdE7cmsaAav6xv6Ycd3pj5BGaMMcRxbW7xmju3HUnYknEdHpkAgH94lcvjSTlaIugV
+ USJEty0k0lxXcwHM0hj0HRmWGbJTbxKI/+JQHxFwLYM/vCtT0ssKqLyaWt/gzJN6yjbwEyw2MGJ
+ 0HP/neMrJLIxfp5UGoj4WVEsHWrDTKPfSha5BeaeAA8VBeq8hI5leTbLiVmWB7K8JEuN2yJ2Wi1
+ hqzbfG8jRljyIaBmQJcYAKcRED1GbcYGHAHu/R5lnuFN827aiPtd2nuQVvW
+X-Received: by 2002:a05:6402:3549:b0:698:3b7c:7e5c with SMTP id
+ 4fb4d7f45d1cf-69e6531cc15mr1041003a12.40.1784297515029; Fri, 17 Jul 2026
+ 07:11:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260715133716.10449-1-marex@nabladev.com>
-In-Reply-To: <20260715133716.10449-1-marex@nabladev.com>
+References: <20260713074539.32875-1-liulhong617@163.com>
+In-Reply-To: <20260713074539.32875-1-liulhong617@163.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jul 2026 08:05:09 -0600
-X-Gm-Features: AUfX_mw7uCQEi1ZOD2KZ7IryYVfBos6CBd-t0IUniTvFNOkRwAzKKn11FdbgJDY
-Message-ID: <CAFLszTgd-5XitS0XCDMVVboozbqmz_VhvyoU6=-NKJT6DZiuaw@mail.gmail.com>
-Subject: Re: [PATCH] binman: nxp_imx8mcst: Handle FCFB header during SPI NOR
- boot
-To: marex@nabladev.com
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Date: Fri, 17 Jul 2026 08:11:42 -0600
+X-Gm-Features: AUfX_mwb8HYL2E8thzfp-zrKSSz7bzJx9FplbNuN5ycoCvIQa6CGFpPJ4bubODI
+Message-ID: <CAFLszTjMJq2C02Xc0YTX0+5Q-DOPK+zrKn62PwU1qE+vPBASCw@mail.gmail.com>
+Subject: Re: [PATCH v2] Makefile: depend on OF_LIST dts sources for
+ fit-dtb.blob
+To: liulhong617@163.com
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,72 +110,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Lianghong,
 
-On 2026-07-15T13:37:04, Marek Vasut <marex@nabladev.com> wrote:
-> binman: nxp_imx8mcst: Handle FCFB header during SPI NOR boot
+On 2026-07-13T07:45:39, lianghong617 <liulhong617@163.com> wrote:
+> Makefile: depend on OF_LIST dts sources for fit-dtb.blob
 >
-> In case the image that is wrapped in the nxp_imx8mcst already contains
-> an FCFB header which is mandatory for SPI NOR boot, then the IVT is at
-> offset 0x1000 instead of offset 0x0, but the whole image including the
-> FCFB header must be signed to prevent attacker from tampering with any
-> of the headers. Add the FCFB handling.
+> When CONFIG_MULTI_DTB_FIT is enabled, fit-dtb.blob is produced by
+> mkimage with one "-b <dtb>" argument for every entry in
+> CONFIG_OF_LIST.  The make rule, however, only listed dts/dt.dtb
+> (i.e. the CONFIG_DEFAULT_DEVICE_TREE blob) as a prerequisite:
 >
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
+>   fit-dtb.blob: dts/dt.dtb FORCE
+>       $(call if_changed,mkimage)
 >
-> tools/binman/etype/nxp_imx8mcst.py | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
+> Because FORCE is PHONY, if_changed ignores it and rebuilds only when
+> any-prereq or arg-check is non-empty.  Editing a non-default dts in
+> OF_LIST rebuilds its .dtb (tracked correctly via fixdep), but that
+> .dtb was not a prerequisite of fit-dtb.blob, so $? stayed empty; the
+> mkimage command line was unchanged too, so arg-check was empty as
+> well.  if_changed therefore skipped mkimage and fit-dtb.blob kept the
+> stale dtbs.  u-boot.bin, which appends fit-dtb.blob, then shipped the
+> old device tree and the dts change did not take effect.
+>
+> A previous attempt to fix this added every OF_LIST .dtb *output* as a
+> [...]
+>
+> Makefile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -114,6 +115,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-> +        elif signtype == MAGIC_NXP_IMX_FCFB: # SPL/imx8mimage with FCFB
-> +            # Sign the payload including FCFB and imx8mimage headers
-> +            # (extra 0x1000 and 0x40 bytes before the payload)
-> +            signbase -= 0x1040
-> +            signsize = struct.unpack('<I', data[4120:4124])[0] - signbase
+> Signed-off-by: lianghong617 <liulhong617@163.com>
 
-Please see below for test ideas.
+Please can you use your real name in the Signed-off-by tag? Also we
+don't normally use bullet points in a commit message.
 
-Also, 4120 is quite obscure as a decimal literal. Since this branch is
-the IVT one shifted by 0x1000, perhaps the two could be merged, e.g.:
+>         edit still needs two make invocations to take effect under
+>         parallel make (the bdm uboot flow runs make -j33).
 
-    if signtype in (MAGIC_NXP_IMX_IVT, MAGIC_NXP_IMX_FCFB):
-        off = 0x1000 if signtype == MAGIC_NXP_IMX_FCFB else 0
-        signbase -= off + 0x40
-        signsize = struct.unpack(
-            '<I', data[off + 24:off + 28])[0] - signbase
-        data = data[:signsize]
+The 'bdm uboot' flow and the out/.../build/uboot path are specific to
+your downstream build system. Please can you generalise these to plain
+'make -j' and a normal out-of-tree build directory?
 
-That makes it clear the value being read is the csf pointer at IVT
-offset 24, same as the existing case. What do you think?
+> diff --git a/Makefile b/Makefile
+> @@ -1476,7 +1476,7 @@ fit-dtb.blob.gz: fit-dtb.blob
+> -fit-dtb.blob: dts/dt.dtb FORCE
+> +fit-dtb.blob: dts/dt.dtb $(patsubst %,arch/$(ARCH)/dts/%.dts,$(subst ",,$(CONFIG_OF_LIST))) FORCE
 
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -114,6 +115,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-> +        elif signtype == MAGIC_NXP_IMX_FCFB: # SPL/imx8mimage with FCFB
+This hardcodes arch/$(ARCH)/dts, but with CONFIG_OF_UPSTREAM the
+sources live under dts/upstream/src/<arch>. For example,
+rcar3_salvator-x has OF_LIST="renesas/r8a77951-salvator-x ..." with
+sources in dts/upstream/src/arm64/renesas, so this prerequisite points
+at arch/arm/dts/renesas/r8a77951-salvator-x.dts, which does not exist
+in either objtree or srctree. Make then fails with 'No rule to make
+target', breaking every OF_UPSTREAM board that uses MULTI_DTB_FIT.
 
-Please can you also update the block comment above this code ("Parse
-the input data and figure out what it is that is being signed") to
-mention the FCFB case?
+Please can you use $(dt_dir) instead, as MKIMAGEFLAGS_fit-dtb.blob
+already does just below? It handles both cases and VPATH finds the
+sources in srctree. A helper variable would also keep the line under
+80 columns as well as improving readability, e.g.
 
-Here is my attempt at a test (it doesn't actually check the output though):
+    of_list_srcs := $(patsubst %,$(dt_dir)/%.dts,$(subst ",,$(CONFIG_OF_LIST)))
 
-def testNxpImx8mCSTFcfb(self):
-    """Test CST signing with an FCFB header (SPI NOR boot)
+> diff --git a/Makefile b/Makefile
+> @@ -1476,7 +1476,7 @@ fit-dtb.blob.gz: fit-dtb.blob
+> +fit-dtb.blob: dts/dt.dtb $(patsubst %,arch/$(ARCH)/dts/%.dts,$(subst ",,$(CONFIG_OF_LIST))) FORCE
 
-    When the payload is wrapped for SPI NOR boot it starts with an FCFB
-    header, so the imx8mimage IVT sits at offset 0x1000 and the size word it
-    carries is at offset 0x1018 (4120). Build a fake blob with the FCFB magic
-    and that size word so the FCFB branch is exercised.
-    """
-    fcfb_data = struct.pack('<I', 0x42464346)
-    fcfb_data += b'\x00' * (4120 - 4)
-    fcfb_data += struct.pack('<I', 0)
-    self._MakeInputFile('imx8m-ivt.bin', fcfb_data)
-    with terminal.capture() as (_, stderr):
-        self._DoTestFile('vendor/nxp_imx8_csf.dts',
-force_missing_bintools='cst')
-    err = stderr.getvalue()
-    self.assertRegex(err, "Image 'image'.*missing bintools.*: cst")
+Just to check, this only catches edits to the top-level .dts files. An
+edit to an included .dtsi (including the *-u-boot.dtsi files) rebuilds
+the .dtb but still leaves fit-dtb.blob stale, so the two-build problem
+remains in that case. That seems an acceptable improvement, but please
+can you mention the limitation in the commit message?
 
 Regards,
 Simon
