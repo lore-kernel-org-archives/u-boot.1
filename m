@@ -4,101 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D10C4451C
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 122CAC4451C
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B584E84E16;
-	Fri, 17 Jul 2026 14:33:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 447D584DF4;
+	Fri, 17 Jul 2026 14:39:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Pw/BE/XV";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="JLo5+Zy2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9078784E1F; Fri, 17 Jul 2026 14:33:49 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98A6984D85; Fri, 17 Jul 2026 08:32:42 +0200 (CEST)
+Received: from smtp2.infineon.com (smtp2.infineon.com
+ [IPv6:2a00:18f0:1e00:4::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38A3984E16
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:33:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1780684D16
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 08:32:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4921eed3fa2so61955365e9.0
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:33:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784291627; x=1784896427; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=68Y2TJFuajYR6K096yjDN4i04kQv23f3m6rjbTCSPtI=;
- b=Pw/BE/XVyXivBJjWhZTe6fUVpkrjLTCsyyW+NOG25eqbQvxwkFh6onEajAOw0jsd03
- ae32gdBKDRr2AcZZyqbKlEzRjMxNuz26/BxXN9B5HDGJ6G6a7h/6DTnLGzbtg955bfOo
- NuO8W9Cg3lH/Jyc57BejBdtzQw5deI0dzQLY7bq1Eg9na0jZx6BNZJYxbJwnFzMbi096
- 495xK+LIj0L4gvjBFVLLn1qbnEnWVR9miVlGKUXQE46vd+2+xKf/DdfgjAXXFAza2+YK
- pX7YFRWwzXTL9ppWT2XPAXfHopvcxaCwnsdxN6V+F4mO6ENb8EhUwLoPWR3xbzS5uBzJ
- hNiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784291627; x=1784896427;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=68Y2TJFuajYR6K096yjDN4i04kQv23f3m6rjbTCSPtI=;
- b=EydUE5+k+y9HjxGKeh7PCMFdFd1QA51eNP/Xpcc7j1HOT0O0+xcx9KnRkyHqY0QHvm
- FyUhtA/5DjhcsYtLVgJwYPCg4LD/W8ZYNwvwV3H7owKSuzcRgNCD3lmmsv84MKudh5LB
- AH6U9rsqt4L/uYHSAqCnC2shJ8LCRN479Ywb+s2AZNe9dStPJSfwscd9wUYZj2icFdZM
- +ZWcK6dEAJE+enVg9sEUTf2oghyWTGy7mfcp2zK6ktomxREDn8Ll3g6puZqORg21HtKW
- Ed4U3gL1l4iU/SoTBNzm/vskfNu0E2rPoLk5GJFnA5+5XAiD+Hk88Z146uUeEN3AeSOE
- RvUA==
-X-Gm-Message-State: AOJu0YxfDXyN0JlcmUF3IEDWZyVX1swuqReFVNqzd4H16w/7r7WTICot
- pp9PWptauXGn9oTLNntZpCq52nIwQYQSbXUNzbxzj1udzYdivlcH6IwLmjoKFw+diK4=
-X-Gm-Gg: AfdE7ckwElx11v1qroZfDiOGHW9c+GVq1jYntZQBF5bdG4oOvYyDkBvvxg2K4rtxBmD
- d5oDTvaAUBm3HkK8HWrjx8G4f2J2Y6Q9T8YMqZSWaG4yKGV8Ap0xUrl0k9m4/LSDVcL6uMjZNIb
- KJ+xfOtPvtrlvpIN4ZQ3AkEnwbe89sG1dBOkE3eXaxO06xGJfGt/qaqchZC+gV98Ajk+iZIc/CS
- frQ4Y/Sx4w6fzm1XFxp/KjGA/wlC+mXgr2SNHHJ58jFhcU+kIkLSBSxNUCSd8KcKb0m+sPN9Xna
- ruWW542GdZMDK5S1l7eeQSheomoy4dQomPsL2is1tJG2odXmrXGn3hd/L6nxyCg0SsQgY4mjXWg
- /Pr18oiMMtoqc9c3eV5RLIEUxBR9xU1476l2HbC72PvqYrs7fQ27rjUGbWBMi1W/d6rYA3RP2Lk
- z32F/gWW37ZYa2+UYjGUjW3yB+wLYXIwfd6fQZjWSUizOhUn8O5s1b2cyrIJTnBVNp0w0LmtjrQ
- F6aVsf0yKQ4sp/0CBCC6DdVmeYRYsTv8EIpj0w6TxsBzrG+nPVaG/XVcWFN
-X-Received: by 2002:a05:600c:1c1b:b0:495:4b24:1b64 with SMTP id
- 5b1f17b1804b1-4954b241d02mr26432445e9.0.1784291626060; 
- Fri, 17 Jul 2026 05:33:46 -0700 (PDT)
-Received: from [192.168.1.65]
- (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
- [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495499f3f99sm44199595e9.0.2026.07.17.05.33.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 05:33:45 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 17 Jul 2026 14:33:41 +0200
-Subject: [PATCH 2/2] i2c: mtk_mt8195_i2c_ddc: add new driver
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1784269960; x=1815805960;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=VB5WXBQSke+BVgS+m3X7tMRSv4PJOjt+6JIiAvCRHgo=;
+ b=JLo5+Zy2xdf7U/Mi/CvV7gCOecJkkXgDtKlQAMq5jEXD/dAM2Se9lqol
+ 43NRNNlNr7vsTye0Pe7AsHldTmLyVB9e+7FgsvjOu+u6KU9IMzNMvy3b6
+ bzhQk9Y9NG9Jy47ymwfwwHhZZ65TQNUDUiDFI7mhA8G3EBvUU4qYNegXS w=;
+X-CSE-ConnectionGUID: RQjNaP5WTdidgpwJ305g0w==
+X-CSE-MsgGUID: AQoofzVLQ2WukoCHRtVgAw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11848"; a="168000424"
+X-IronPort-AV: E=Sophos;i="6.25,168,1779141600"; d="scan'208";a="168000424"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE805.infineon.com) ([172.23.29.31])
+ by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Jul 2026 08:32:40 +0200
+Received: from MUCSE813.infineon.com (172.23.29.39) by MUCSE805.infineon.com
+ (172.23.29.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
+ 2026 08:32:39 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE813.infineon.com
+ (172.23.29.39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
+ 2026 08:32:39 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.043; Fri, 17 Jul 2026 08:32:39 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v6 1/7] mtd: spi-nor-ids: Correct flash flags for ESMT/EON
+ flashes
+Thread-Topic: [PATCH v6 1/7] mtd: spi-nor-ids: Correct flash flags for
+ ESMT/EON flashes
+Thread-Index: AQHc/Jlf2JBwehz5N06ixsn9vXvgT7ZbmczQgBJXqACAA3tiYA==
+Date: Fri, 17 Jul 2026 06:32:38 +0000
+Message-ID: <1a1f02b8f5ef4037a748328cc293e0d4@infineon.com>
+References: <cover.1781508530.git.weijie.gao@mediatek.com>
+ <3facbb0d047ffeab20aacee385ce137bb8894716.1781508530.git.weijie.gao@mediatek.com>
+ <d8dfad96296b4654b206e08dc2156600@infineon.com>
+ <7be0c4e8dc3fe32bef1452de434a9812719d5dd3.camel@mediatek.com>
+In-Reply-To: <7be0c4e8dc3fe32bef1452de434a9812719d5dd3.camel@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260717-mt8188-add-ddc-i2c-driver-v1-2-e89ccd173567@baylibre.com>
-References: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
-In-Reply-To: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Heiko Schocher <hs@nabladev.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
- Justin Swartz <justin.swartz@risingedge.co.za>, 
- Johan Jonker <jbx6244@gmail.com>, Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.15.2
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Mailman-Approved-At: Fri, 17 Jul 2026 14:39:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,456 +99,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new driver for HDMI DDC channel reading for MT8195 based SoCs.
-The driver is based on the corresponding kernel driver.
-
-Signed-off-by: Pavlo Yadvychuk <pyadvychuk@baylibre.com>
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- drivers/i2c/Kconfig              |  11 ++
- drivers/i2c/Makefile             |   1 +
- drivers/i2c/mtk_mt8195_i2c_ddc.c | 398 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 410 insertions(+)
-
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index ab5af17858c..9c563655945 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -232,6 +232,17 @@ config SYS_I2C_DAVINCI
- 	help
- 	  Say yes here to add support for Davinci and Keystone I2C controller
- 
-+config SYS_I2C_DDC_MTK
-+	bool "MediaTek HDMI DDC driver"
-+	depends on DM_I2C
-+	depends on CLK
-+	help
-+	  This selects the MediaTek Inter-Integrated Circuit (I2C) bus driver
-+	  used for HDMI DDC communication. The driver supports MT8188 and
-+	  MT8195 compatible SoCs.
-+	  If you want to use the MediaTek DDC interface, say Y here.
-+	  If unsure, say N.
-+
- config SYS_I2C_DW
- 	bool "Designware I2C Controller"
- 	help
-diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
-index 2da649e97d3..8185753cd13 100644
---- a/drivers/i2c/Makefile
-+++ b/drivers/i2c/Makefile
-@@ -18,6 +18,7 @@ obj-$(CONFIG_SYS_I2C_AT91) += at91_i2c.o
- obj-$(CONFIG_SYS_I2C_CADENCE) += i2c-cdns.o
- obj-$(CONFIG_SYS_I2C_CA) += i2c-cortina.o
- obj-$(CONFIG_SYS_I2C_DAVINCI) += davinci_i2c.o
-+obj-$(CONFIG_SYS_I2C_DDC_MTK) += mtk_mt8195_i2c_ddc.o
- obj-$(CONFIG_SYS_I2C_DW) += designware_i2c.o
- obj-$(CONFIG_SYS_I2C_DW_PCI) += designware_i2c_pci.o
- obj-$(CONFIG_SYS_I2C_FSL) += fsl_i2c.o
-diff --git a/drivers/i2c/mtk_mt8195_i2c_ddc.c b/drivers/i2c/mtk_mt8195_i2c_ddc.c
-new file mode 100644
-index 00000000000..7b6e57929a9
---- /dev/null
-+++ b/drivers/i2c/mtk_mt8195_i2c_ddc.c
-@@ -0,0 +1,398 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2021 MediaTek Inc.
-+ * Copyright (c) 2026 BayLibre, SAS
-+ *
-+ */
-+
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <edid.h>
-+#include <i2c.h>
-+#include <linux/delay.h>
-+#include <time.h>
-+
-+#define DDC2_CLOCK 572 /* BIM=208M/(v*4) = 90Khz */
-+#define DDC2_CLOCK_EDID 832 /* BIM=208M/(v*4) = 62.5Khz */
-+
-+#define SCDC_I2C_SLAVE_ADDRESS 0x54
-+
-+#define HDCP2X_DDCM_STATUS 0xC68
-+
-+#define SCDC_CTRL 0xC18
-+
-+#define CLEAR_FIFO 0x9
-+
-+#define CLOCK_SCL 0xA
-+
-+#define ENH_READ_NO_ACK 0x4
-+
-+#define DDC_CMD GENMASK(31, 28)
-+#define DDC_CMD_SHIFT (28)
-+#define DDC_CTRL 0xC10
-+#define DDC_DATA_OUT GENMASK(23, 16)
-+#define DDC_DATA_OUT_SHIFT (16)
-+#define DDC_DELAY_CNT GENMASK(31, 16)
-+#define DDC_DELAY_CNT_SHIFT (16)
-+#define DDC_DIN_CNT_SHIFT (16)
-+#define DDC_I2C_BUS_LOW BIT(11)
-+#define DDC_I2C_IN_PROG BIT(13)
-+#define DDC_I2C_NO_ACK BIT(10)
-+#define DDC_OFFSET_SHIFT (8)
-+#define DDC_SEGMENT GENMASK(15, 8)
-+#define DDC_SEGMENT_SHIFT (8)
-+
-+#define HPD_DDC_CTRL 0xC08
-+#define HPD_DDC_STATUS 0xC60
-+
-+#define SEQ_READ_NO_ACK 0x2
-+#define SEQ_WRITE_REQ_ACK 0x7
-+
-+#define SI2C_CTRL 0xCAC
-+#define SI2C_ADDR_READ (0xF4)
-+#define SI2C_ADDR_SHIFT (16)
-+#define SI2C_WDATA GENMASK(15, 8)
-+#define SI2C_WDATA_SHIFT (8)
-+#define SI2C_CONFIRM_READ BIT(2)
-+#define SI2C_RD BIT(1)
-+#define SI2C_WR BIT(0)
-+
-+#define HDCP2X_POL_CTRL 0xC54
-+#define HDCP2X_DIS_POLL_EN BIT(16)
-+
-+struct mtk_hdmi_ddc {
-+	struct udevice *udev;
-+	struct clk clk;
-+	void __iomem *regs;
-+};
-+
-+enum sif_bit_t_hdmi {
-+	SIF_8_BIT_HDMI, /* 8 bits data address */
-+	SIF_16_BIT_HDMI, /* 16 bits data address */
-+};
-+
-+static inline unsigned int mtk_ddc_read(struct mtk_hdmi_ddc *ddc,
-+					unsigned int reg)
-+{
-+	return readl(ddc->regs + reg);
-+}
-+
-+static inline void mtk_ddc_write(struct mtk_hdmi_ddc *ddc, unsigned int reg,
-+				 unsigned int val)
-+{
-+	writel(val, ddc->regs + reg);
-+}
-+
-+static inline void mtk_ddc_mask(struct mtk_hdmi_ddc *ddc, unsigned int reg,
-+				unsigned int val, unsigned int mask)
-+{
-+	unsigned int tmp;
-+
-+	tmp = readl(ddc->regs + reg) & ~mask;
-+	tmp |= (val & mask);
-+	writel(tmp, ddc->regs + reg);
-+}
-+
-+static void mtk_ddc_disable_hdcp_polling(struct mtk_hdmi_ddc *ddc)
-+{
-+	mtk_ddc_mask(ddc, HDCP2X_POL_CTRL, HDCP2X_DIS_POLL_EN,
-+		     HDCP2X_DIS_POLL_EN);
-+}
-+
-+static void ddc_wr_one(struct mtk_hdmi_ddc *ddc, unsigned int addr_id,
-+		       unsigned int offset_id, unsigned char wr_data)
-+{
-+	if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-+		mtk_ddc_mask(ddc, DDC_CTRL, (CLOCK_SCL << DDC_CMD_SHIFT),
-+			     DDC_CMD);
-+		udelay(300);
-+	}
-+	mtk_ddc_mask(ddc, HPD_DDC_CTRL, DDC2_CLOCK << DDC_DELAY_CNT_SHIFT,
-+		     DDC_DELAY_CNT);
-+	mtk_ddc_write(ddc, SI2C_CTRL, SI2C_ADDR_READ << SI2C_ADDR_SHIFT);
-+	mtk_ddc_mask(ddc, SI2C_CTRL, wr_data << SI2C_WDATA_SHIFT, SI2C_WDATA);
-+	mtk_ddc_mask(ddc, SI2C_CTRL, SI2C_WR, SI2C_WR);
-+
-+	mtk_ddc_write(ddc, DDC_CTRL,
-+		      (SEQ_WRITE_REQ_ACK << DDC_CMD_SHIFT) +
-+		      (1 << DDC_DIN_CNT_SHIFT) +
-+		      (offset_id << DDC_OFFSET_SHIFT) + (addr_id << 1));
-+
-+	udelay(1250);
-+
-+	if ((mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-+	     (DDC_I2C_NO_ACK | DDC_I2C_BUS_LOW))) {
-+		if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-+			mtk_ddc_mask(ddc, DDC_CTRL,
-+				     (CLOCK_SCL << DDC_CMD_SHIFT), DDC_CMD);
-+			udelay(300);
-+		}
-+	}
-+}
-+
-+static unsigned int
-+ddcm_read_hdmi(struct mtk_hdmi_ddc *ddc, unsigned int u4_clk_div,
-+	       unsigned char uc_dev, unsigned int u4_addr,
-+	       unsigned char *puc_value, unsigned int u4_count)
-+{
-+	unsigned int i, temp_length, loop_counter;
-+	unsigned int uc_read_count = 0, uc_idx;
-+	unsigned long ddc_start_time, ddc_end_time, ddc_timeout;
-+
-+	if (!puc_value || !u4_count || !u4_clk_div)
-+		return 0;
-+
-+	if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) & DDC_I2C_BUS_LOW) {
-+		mtk_ddc_mask(ddc, DDC_CTRL, (CLOCK_SCL << DDC_CMD_SHIFT),
-+			     DDC_CMD);
-+		udelay(300);
-+	}
-+
-+	mtk_ddc_mask(ddc, DDC_CTRL, (CLEAR_FIFO << DDC_CMD_SHIFT), DDC_CMD);
-+
-+	if (u4_count >= 16) {
-+		temp_length = 16;
-+		loop_counter = u4_count / 16 + ((u4_count % 16 == 0) ? 0 : 1);
-+	} else {
-+		temp_length = u4_count;
-+		loop_counter = 1;
-+	}
-+
-+	if (uc_dev >= EDID_ADDR && u4_clk_div < DDC2_CLOCK_EDID)
-+		u4_clk_div = DDC2_CLOCK_EDID;
-+
-+	mtk_ddc_mask(ddc, HPD_DDC_CTRL, u4_clk_div << DDC_DELAY_CNT_SHIFT,
-+		     DDC_DELAY_CNT);
-+
-+	for (i = 0; i < loop_counter; i++) {
-+		if (i == (loop_counter - 1) && i != 0 && u4_count % 16)
-+			temp_length = u4_count % 16;
-+
-+		/* EDID_ADDR(0x50) + 1 .. 0x53 select an EDID segment */
-+		if (uc_dev > EDID_ADDR && uc_dev <= 0x53) {
-+			mtk_ddc_mask(ddc, SCDC_CTRL,
-+				     (uc_dev - EDID_ADDR)
-+				     << DDC_SEGMENT_SHIFT,
-+				     DDC_SEGMENT);
-+			mtk_ddc_write(ddc, DDC_CTRL,
-+				      (ENH_READ_NO_ACK << DDC_CMD_SHIFT) +
-+				      (temp_length << DDC_DIN_CNT_SHIFT) +
-+				      ((u4_addr + i * temp_length)
-+				       << DDC_OFFSET_SHIFT) +
-+				      (EDID_ADDR << 1));
-+		} else {
-+			mtk_ddc_write(ddc, DDC_CTRL,
-+				      (SEQ_READ_NO_ACK << DDC_CMD_SHIFT) +
-+				      (temp_length << DDC_DIN_CNT_SHIFT) +
-+				      ((u4_addr + i * 16)
-+				       << DDC_OFFSET_SHIFT) + (uc_dev << 1));
-+		}
-+		udelay(5500);
-+		ddc_start_time = get_timer(0);
-+		/* timeout in ms: about 1 ms per byte plus some margin */
-+		ddc_timeout = temp_length + 5;
-+		ddc_end_time = ddc_start_time + ddc_timeout;
-+		while (1) {
-+			if ((mtk_ddc_read(ddc, HPD_DDC_STATUS) &
-+			     DDC_I2C_IN_PROG) == 0)
-+				break;
-+
-+			if (time_after(get_timer(0), ddc_end_time)) {
-+				dev_err(ddc->udev, "DDC transfer timeout\n");
-+				return 0;
-+			}
-+			udelay(1500);
-+		}
-+		if ((mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-+		     (DDC_I2C_NO_ACK | DDC_I2C_BUS_LOW))) {
-+			if (mtk_ddc_read(ddc, HDCP2X_DDCM_STATUS) &
-+			    DDC_I2C_BUS_LOW) {
-+				mtk_ddc_mask(ddc, DDC_CTRL,
-+					     (CLOCK_SCL << DDC_CMD_SHIFT),
-+					     DDC_CMD);
-+				udelay(300);
-+			}
-+			return 0;
-+		}
-+
-+		/* get the DDC data from the FIFO */
-+		for (uc_idx = 0; uc_idx < temp_length; uc_idx++) {
-+			/* latch the FIFO output */
-+			mtk_ddc_write(ddc, SI2C_CTRL,
-+				      (SI2C_ADDR_READ << SI2C_ADDR_SHIFT) +
-+				      SI2C_RD);
-+
-+			/* read FIFO output value from DDC_STATUS */
-+			puc_value[i * 16 + uc_idx] =
-+				(mtk_ddc_read(ddc, HPD_DDC_STATUS) &
-+				 DDC_DATA_OUT) >> DDC_DATA_OUT_SHIFT;
-+
-+			/* increment FIFO read pointer, un-latch the FIFO */
-+			mtk_ddc_write(ddc, SI2C_CTRL,
-+				      (SI2C_ADDR_READ << SI2C_ADDR_SHIFT) +
-+				      SI2C_CONFIRM_READ);
-+			/*
-+			 * if the hdmi block was reset while reading, the DDC
-+			 * speed falls back below DDC2_CLOCK: abort
-+			 */
-+			if (((mtk_ddc_read(ddc, HPD_DDC_CTRL) >> 16) &
-+			     0xFFFF) < DDC2_CLOCK)
-+				return 0;
-+
-+			uc_read_count = i * 16 + uc_idx + 1;
-+		}
-+	}
-+
-+	return uc_read_count;
-+}
-+
-+static unsigned int vddc_read(struct mtk_hdmi_ddc *ddc,
-+			      unsigned int u4_clk_div, unsigned char uc_dev,
-+			      unsigned int u4_addr,
-+			      enum sif_bit_t_hdmi uc_addr_type,
-+			      unsigned char *puc_value, unsigned int u4_count)
-+{
-+	unsigned int u4_read_count = 0;
-+
-+	if (!puc_value || !u4_count || !u4_clk_div)
-+		return 0;
-+	if (uc_addr_type > SIF_16_BIT_HDMI)
-+		return 0;
-+	if (uc_addr_type == SIF_8_BIT_HDMI && u4_addr > 255)
-+		return 0;
-+	if (uc_addr_type == SIF_16_BIT_HDMI && u4_addr > 65535)
-+		return 0;
-+
-+	if (uc_addr_type == SIF_8_BIT_HDMI)
-+		u4_read_count = 255 - u4_addr + 1;
-+	else if (uc_addr_type == SIF_16_BIT_HDMI)
-+		u4_read_count = 65535 - u4_addr + 1;
-+
-+	u4_read_count = min(u4_read_count, u4_count);
-+
-+	return ddcm_read_hdmi(ddc, u4_clk_div, uc_dev, u4_addr, puc_value,
-+			      u4_read_count);
-+}
-+
-+static int fg_ddc_data_read(struct mtk_hdmi_ddc *ddc, unsigned char b_dev,
-+			    unsigned char b_data_addr,
-+			    unsigned int b_data_count, unsigned char *pr_data)
-+{
-+	mtk_ddc_disable_hdcp_polling(ddc);
-+	if (vddc_read(ddc, DDC2_CLOCK, b_dev, b_data_addr, SIF_8_BIT_HDMI,
-+		      pr_data, b_data_count) != b_data_count)
-+		return -EREMOTEIO;
-+
-+	return 0;
-+}
-+
-+static int fg_ddc_data_write(struct mtk_hdmi_ddc *ddc, unsigned char b_dev,
-+			     unsigned char b_data_addr,
-+			     unsigned int b_data_count,
-+			     unsigned char *pr_data)
-+{
-+	unsigned int i;
-+
-+	mtk_ddc_disable_hdcp_polling(ddc);
-+	for (i = 0; i < b_data_count; i++)
-+		ddc_wr_one(ddc, b_dev, b_data_addr + i, *(pr_data + i));
-+
-+	return 0;
-+}
-+
-+static int mtk_hdmi_ddc_xfer(struct udevice *dev, struct i2c_msg *msgs, int num)
-+{
-+	struct mtk_hdmi_ddc *ddc = dev_get_priv(dev);
-+	unsigned char offset = 0;
-+	int ret;
-+	int i;
-+
-+	if (!msgs)
-+		return -EINVAL;
-+
-+	if (!ddc || !ddc->regs)
-+		return -EINVAL;
-+
-+	for (i = 0; i < num; i++) {
-+		struct i2c_msg *msg = &msgs[i];
-+
-+		if (!msg->buf || !msg->len)
-+			return -EINVAL;
-+
-+		if (msg->flags & I2C_M_RD) {
-+			/*
-+			 * The underlying DDC hardware always issues a write
-+			 * request that assigns the read offset as part of the
-+			 * read operation, so use the offset value stored on
-+			 * the previous write request.
-+			 */
-+			ret = fg_ddc_data_read(ddc, msg->addr, offset,
-+					       msg->len, &msg->buf[0]);
-+		} else {
-+			ret = fg_ddc_data_write(ddc, msg->addr, msg->buf[0],
-+						msg->len - 1, &msg->buf[1]);
-+
-+			/*
-+			 * store the offset requested by the EDID/SCDC
-+			 * framework for use by subsequent read requests
-+			 */
-+			if ((msg->addr == EDID_ADDR ||
-+			     msg->addr == SCDC_I2C_SLAVE_ADDRESS) &&
-+			    msg->len == 1)
-+				offset = msg->buf[0];
-+		}
-+
-+		if (ret) {
-+			dev_err(dev, "ddc transfer failed: %d\n", ret);
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int mtk_hdmi_ddc_probe(struct udevice *dev)
-+{
-+	struct mtk_hdmi_ddc *ddc = dev_get_priv(dev);
-+	int ret;
-+
-+	ddc->udev = dev;
-+	/* the ddc node sits below the hdmi node, which holds the registers */
-+	ddc->regs = dev_read_addr_ptr(dev->parent);
-+	if (!ddc->regs)
-+		return -EINVAL;
-+
-+	ret = clk_get_by_index(dev, 0, &ddc->clk);
-+	if (ret) {
-+		dev_err(dev, "failed to get ddc clk: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = clk_enable(&ddc->clk);
-+	if (ret) {
-+		dev_err(dev, "failed to enable ddc clk: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct dm_i2c_ops mtk_hdmi_ddc_ops = {
-+	.xfer	= mtk_hdmi_ddc_xfer,
-+};
-+
-+static const struct udevice_id mtk_hdmi_ddc_ids[] = {
-+	{ .compatible = "mediatek,mt8195-hdmi-ddc", },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(mtk_i2c_ddc) = {
-+	.name		= "mtk_i2c_ddc",
-+	.id		= UCLASS_I2C,
-+	.of_match	= mtk_hdmi_ddc_ids,
-+	.probe		= mtk_hdmi_ddc_probe,
-+	.priv_auto	= sizeof(struct mtk_hdmi_ddc),
-+	.ops		= &mtk_hdmi_ddc_ops,
-+};
-
--- 
-2.54.0
-
+SGksDQoNCj4gT24gRnJpLCAyMDI2LTA3LTAzIGF0IDA5OjAzICswMDAwLCBUYWthaGlyby5LdXdh
+bm9AaW5maW5lb24uY29tIHdyb3RlOg0KPiA+IEV4dGVybmFsIGVtYWlsIDogUGxlYXNlIGRvIG5v
+dCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVudGlsDQo+ID4geW91IGhhdmUgdmVy
+aWZpZWQgdGhlIHNlbmRlciBvciB0aGUgY29udGVudC4NCj4gPg0KPiA+DQo+ID4gSGksDQo+ID4N
+Cj4gPiA+IEFsbCBjdXJyZW50bHkgc3VwcG9ydGVkIEVTTVQvRU9OIGZsYXNoZXMgc3VwcG9ydHMg
+NEtCIHNlY3RvciBhbmQNCj4gPiA+IGR1YWwgcmVhZC4NCj4gPiA+IEVOMjVRODBCIGFsc28gc3Vw
+cG9ydHMgMS0xLTQgcXVhZCByZWFkLg0KPiA+ID4NCj4gPiA+IExpbms6DQo+ID4gPg0KPiBodHRw
+czovL3VybGRlZmVuc2UuY29tL3YzL19faHR0cHM6Ly93d3cuZXNtdC5jb20udHcvdXBsb2FkL3Bk
+Zi9FU01UL2RhdGFzaGVldHMvRU4yNVE4MEIucGRmX187ISFDVFJOS0E5d01nMEFSYncNCj4gIWo3
+RTY4MVk0Vnp0NlM0YUlzaGVpVmRWT3E5bThkdjBZVEhEVTloOUJkM2Z1ODNBU3lJVHh0NGN4b3U1
+NWhlUkJPUzUycDhwT2ZzbXU1Y2pZNXVLN01kUW5BNVltT2dFJA0KPiA+ID4gTGluazoNCj4gPiA+
+DQo+IGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczovL3d3dy5lc210LmNvbS50dy91
+cGxvYWQvcGRmL0VTTVQvZGF0YXNoZWV0cy9FTjI1UUgxMjhBKjIwKDJUQykucGRmX187SlEhIUNU
+Ug0KPiBOS0E5d01nMEFSYnchajdFNjgxWTRWenQ2UzRhSXNoZWlWZFZPcTltOGR2MFlUSERVOWg5
+QmQzZnU4M0FTeUlUeHQ0Y3hvdTU1aGVSQk9TNTJwOHBPZnNtdTVjalk1dUs3TWRRbjZDdzNGWTAk
+DQo+ID4gPiBMaW5rOg0KPiA+ID4NCj4gaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBz
+Oi8vd3d3LmVzbXQuY29tLnR3L3VwbG9hZC9wZGYvRVNNVC9kYXRhc2hlZXRzL0VOMjVTNjRBKDJT
+QykucGRmX187ISFDVFJOS0E5d01nDQo+IDBBUmJ3IWo3RTY4MVk0Vnp0NlM0YUlzaGVpVmRWT3E5
+bThkdjBZVEhEVTloOUJkM2Z1ODNBU3lJVHh0NGN4b3U1NWhlUkJPUzUycDhwT2ZzbXU1Y2pZNXVL
+N01kUW5mUkx5MWpFJA0KPiA+ID4gU2lnbmVkLW9mZi1ieTogV2VpamllIEdhbyA8d2VpamllLmdh
+b0BtZWRpYXRlay5jb20+DQo+ID4gPiAtLS0NCj4gPiA+IHY2OiByZW1vdmVkIFNQSV9OT1JfUVVB
+RF9SRUFEIGZyb20gaW5jb21wYXRpYmxlIGZsYXNoZXMNCj4gPiA+IHY1OiBub3QgY2hhbmdlZA0K
+PiA+ID4gdjMtdjQ6IHVwZGF0ZWQgY29tbWl0IG1lc3NhZ2UNCj4gPiA+IHYyOiBub3QgY2hhbmdl
+ZA0KPiA+ID4gLS0tDQo+ID4gPiAgZHJpdmVycy9tdGQvc3BpL3NwaS1ub3ItaWRzLmMgfCAxMiAr
+KysrKystLS0tLS0NCj4gPiA+ICAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCA2IGRl
+bGV0aW9ucygtKQ0KPiA+ID4NCj4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL210ZC9zcGkvc3Bp
+LW5vci1pZHMuYyBiL2RyaXZlcnMvbXRkL3NwaS9zcGktDQo+ID4gPiBub3ItaWRzLmMNCj4gPiA+
+IGluZGV4IGMwZmE5ODQyNGFhLi4wZGFjYjRhYmRiYyAxMDA2NDQNCj4gPiA+IC0tLSBhL2RyaXZl
+cnMvbXRkL3NwaS9zcGktbm9yLWlkcy5jDQo+ID4gPiArKysgYi9kcml2ZXJzL210ZC9zcGkvc3Bp
+LW5vci1pZHMuYw0KPiA+ID4gQEAgLTkwLDEyICs5MCwxMiBAQCBjb25zdCBzdHJ1Y3QgZmxhc2hf
+aW5mbyBzcGlfbm9yX2lkc1tdID0gew0KPiA+ID4gICNlbmRpZg0KPiA+ID4gICNpZmRlZiBDT05G
+SUdfU1BJX0ZMQVNIX0VPTiAgICAgICAgICAgIC8qIEVPTiAqLw0KPiA+ID4gICAgICAgICAvKiBF
+T04gLS0gZW4yNXh4eCAqLw0KPiA+ID4gLSAgICAgICB7IElORk8oImVuMjVxODBiIiwgICAweDFj
+MzAxNCwgMCwgNjQgKiAxMDI0LCAgIDE2LCBTRUNUXzRLKQ0KPiA+ID4gfSwNCj4gPiA+IC0gICAg
+ICAgeyBJTkZPKCJlbjI1cTMyYiIsICAgMHgxYzMwMTYsIDAsIDY0ICogMTAyNCwgICA2NCwgMCkg
+fSwNCj4gPiA+IC0gICAgICAgeyBJTkZPKCJlbjI1cTY0IiwgICAgMHgxYzMwMTcsIDAsIDY0ICog
+MTAyNCwgIDEyOCwgU0VDVF80SykNCj4gPiA+IH0sDQo+ID4gPiAtICAgICAgIHsgSU5GTygiZW4y
+NXExMjhiIiwgIDB4MWMzMDE4LCAwLCA2NCAqIDEwMjQsICAyNTYsIDApIH0sDQo+ID4gPiAtICAg
+ICAgIHsgSU5GTygiZW4yNXFoMTI4IiwgIDB4MWM3MDE4LCAwLCA2NCAqIDEwMjQsICAyNTYsIDAp
+IH0sDQo+ID4gPiAtICAgICAgIHsgSU5GTygiZW4yNXM2NCIsICAgIDB4MWMzODE3LCAwLCA2NCAq
+IDEwMjQsICAxMjgsIFNFQ1RfNEspDQo+ID4gPiB9LA0KPiA+ID4gKyAgICAgICB7IElORk8oImVu
+MjVxODBiIiwgICAweDFjMzAxNCwgMCwgNjQgKiAxMDI0LCAgIDE2LCBTRUNUXzRLDQo+ID4gPiB8
+IFNQSV9OT1JfRFVBTF9SRUFEIHwgU1BJX05PUl9RVUFEX1JFQUQpIH0sDQo+ID4gPiArICAgICAg
+IHsgSU5GTygiZW4yNXEzMmIiLCAgIDB4MWMzMDE2LCAwLCA2NCAqIDEwMjQsICAgNjQsIFNFQ1Rf
+NEsNCj4gPiA+IHwgU1BJX05PUl9EVUFMX1JFQUQpIH0sDQo+ID4gPiArICAgICAgIHsgSU5GTygi
+ZW4yNXE2NCIsICAgIDB4MWMzMDE3LCAwLCA2NCAqIDEwMjQsICAxMjgsIFNFQ1RfNEsNCj4gPiA+
+IHwgU1BJX05PUl9EVUFMX1JFQUQpIH0sDQo+ID4gPiArICAgICAgIHsgSU5GTygiZW4yNXExMjhi
+IiwgIDB4MWMzMDE4LCAwLCA2NCAqIDEwMjQsICAyNTYsIFNFQ1RfNEsNCj4gPiA+IHwgU1BJX05P
+Ul9EVUFMX1JFQUQpIH0sDQo+ID4gPiArICAgICAgIHsgSU5GTygiZW4yNXFoMTI4IiwgIDB4MWM3
+MDE4LCAwLCA2NCAqIDEwMjQsICAyNTYsIFNFQ1RfNEsNCj4gPiA+IHwgU1BJX05PUl9EVUFMX1JF
+QUQpIH0sDQo+ID4gPiArICAgICAgIHsgSU5GTygiZW4yNXM2NCIsICAgIDB4MWMzODE3LCAwLCA2
+NCAqIDEwMjQsICAxMjgsIFNFQ1RfNEsNCj4gPiA+IHwgU1BJX05PUl9EVUFMX1JFQUQpIH0sDQo+
+ID4NCj4gPiBJbiBvdXIgZGlzY3Vzc2lvbiBpbiBwcmV2aW91cyByZXZpc2lvbiBbMV0sIG9ubHkg
+ZW4yNXFoMTI4IHN1cHBvcnRzDQo+ID4gMS0xLTQNCj4gPiByZWFkIGFuZCBwcm9ncmFtLCBidXQg
+eW91IHNldCBRVUFEX1JFQUQgZmxhZyBpbiBlbjI1cTgwYiBpbnN0ZWFkLg0KPiA+IFBsZWFzZSBm
+aXguDQo+IA0KPiBJIHJlc2VydmVkIHRoaXMgZmxhZyBiZWNhdXNlIEkgZm91bmQgYSBuZXdlciBk
+YXRhc2hlZXQgdGhhdCBjbGFpbXMgaXQNCj4gc3VwcG9ydHMgdGhlIDZCIG9wY29kZSBmb3IgMS0x
+LTQgcmVhZDoNCj4gDQo+IGh0dHBzOi8vd3d3Lm5vdml0cm9uaWMuY29tL0RhdGVuYmwlQzMlQTR0
+dGVyL0FrdGl2ZSUyMEtvbXBvbmVudGVuL0VOMjVRODBCJTI4MkMlMjkucGRmDQo+IA0KQnV0IHdo
+eSBkaWQgeW91IGRyb3AgUVVBRF9SRUFEIGZsYWcgZnJvbSBlbjI1cWgxMjg/DQpQZXIgZGF0YXNo
+ZWV0LCBpdCBzdXBwb3J0cyBib3RoIDEtMS00IHJlYWQgYW5kIHByb2dyYW0uDQoNCj4gQXMgdGhl
+IEVOMjVRODBCIGlzIEVPTCwgSSBjYW4ndCBidXkgb25lIGZvciB0ZXN0aW5nLiBJJ2xsIHJlbW92
+ZSB0aGlzDQo+IGZsYWcgaW4gbmV4dCBwYXRjaCBzZXJpZXMuDQo+IA0KSSB3b3VsZCByZWNvbW1l
+bmQgbm90IHRvIGFkZCBFT0wgY2hpcHMuDQpXZSBzaG91bGQgbm90IGV4cGFuZCBJRCBkYXRhYmFz
+ZSBmb3IgY2hpcHMgdGhhdCBub2JvZHkgaGFzIGNoYW5jZSB0byB1c2UuDQoNClRoYW5rcywNClRh
+a2FoaXJvDQoNCg==
