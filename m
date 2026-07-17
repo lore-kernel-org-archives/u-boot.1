@@ -4,107 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB20C4451C
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 15:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C80C4451B
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 15:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22FF4849BC;
+	by phobos.denx.de (Postfix) with ESMTP id 6658D84A0B;
 	Sat, 18 Jul 2026 17:03:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U9ErhNzL";
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZMh4I8Q3";
+	dkim=pass (2048-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kDtHxqgU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ln2mKTN3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67CC7838D7; Sat, 18 Jul 2026 01:24:01 +0200 (CEST)
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
+ id AFBDD841F2; Sat, 18 Jul 2026 01:24:01 +0200 (CEST)
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57EDF84105
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD3B84119
  for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 01:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66HNFhu03762455;
- Fri, 17 Jul 2026 18:23:41 -0500
+Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66HNGIkK3731461; Fri, 17 Jul 2026 18:23:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=proofpoint-05-2026; bh=GOFLNTbyw/e+u
- TDZLgSPm5DkXZ5QnvI9eR4075vYYrA=; b=U9ErhNzLNDCkZ9XCe2STO2l+9L1a2
- 3X9recK71JgerpmOmiArQWUMHpHhvhg7KOelQytDnWSYZfxLrAWktT1QCqzRW4Nw
- eyxGpvXp1e4R2LSU2mi+jXqCgtnJ5sQYrJN6R+eKvj1N8JePaGEcCFT2b+gEevbS
- vT87UYDUioizDlatKDWtIaJEelaJzqsG5GIwcyH4Lf9rctgK6iBD5PnVtb9iFWA3
- 2ZbA5dpkjjzsvvPweYPK3k28qLv/2VneimJ0IPtFIjMba53R9Xq9/mxfhQVmNLmq
- +K0RQDAwYabn/auP3hRuuag+8fmgAOpxBpbs8tB7d5Jq/dvueTJhM7ivQ==
-Received: from sn4pr0501cu005.outbound.protection.outlook.com
- (mail-southcentralusazon11011030.outbound.protection.outlook.com
- [40.93.194.30])
- by m0380145.ppops.net (PPS) with ESMTPS id 4ffks33tth-1
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=Np7h6dzd5PuDTkQadxjsAmhlmyYZO2dz0o3xkhYkN
+ /8=; b=kDtHxqgUztfpXvrPIYlhm1BcZguDlMoUQroSmB+3XPTjeIKf5JNpR9XIf
+ d3twT6lNVhp7qzUAfGoFbBpwPcewaI9fZ4sTn9+ikqOxisHZbe5yaTQqTM4ROLX4
+ qbjINRSGPndSIAeCoWTVNUS4P0MH9ovghXm2sJOIDYOTN/vKFqyP07X7T889E1Pb
+ j1H+TWD1iGt+AnegeM92B5h1YD82wjxMe3PlS94LnyWFMyPOa97uJ/tyRigepd9r
+ jZhVIPBjJ4RHENEqS9cqHom56UL5UPV4SYKqbNR/Cewr9KNw2/HzfyB9u7RI4zHH
+ wE8Ztvf0Uyg7102p6smmMNSjQHcdg==
+Received: from dm5pr21cu001.outbound.protection.outlook.com
+ (mail-centralusazon11011008.outbound.protection.outlook.com [52.101.62.8])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4ffkc3m34h-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 17 Jul 2026 18:23:41 -0500 (CDT)
+ Fri, 17 Jul 2026 18:23:45 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FvoDdesSkWYwv+EWa/pmcpcSPuQ0Ew8GKBJnTm1vUc1s07Ik6aEz1rl0WzWVl5g0pHjys02OtSZvKd2PNIRT5OZaiGHtoXqpAXCchFiZUIaaM6Ou1GaG84/pZFcWbKzA3Ae01G4wO67eZZFjutvfbyn6lc4+ABlibNG5TYH9kbPd5ZZF/KSKWBK+jNushm2bYf4Fo79ySDJoLtUzbUeP5DIF/GMXPVsxWdC/MIYmwEe2e9QKQg35qdY1XJlnNQr9Cq5b0xMHBOnha22dVDZdUZDiZDoWwVKncGtJUG7J/0uWJFi9pwHqBBopaAc5KORqKFnzUBTc+rHj4iwVN6iSbw==
+ b=ATGL/eyB82m7XrMu1nmCpXQNQgAjlroUix5Fxug5q2fgx5KbPDxVYiNAwRb06rJkQre5zjWTOfru4pskBeojj08LvI6ynAqg5RzKKonvk2sOKpiR0J9+5d+KDRN4O1vefLWR48FDSGQWwINIniGB9Wv5hh8HYmF8HxJ0KrWaVpiZJEBKx/GjFSWwGXbdrArfoF213blkGpb0J6JqR+z3IANJGfIXS7Qumb+b8MUZoi0FdOx8eZqY8nvuVZ5MitXdlSlTVgFhQ5rJ0rTBnagcbqsJmwwqVPvTDfuJud+84z4nEU0J/7sUBepMT0sgMWV3xoiTIU7aUospNKkFa7L6RQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GOFLNTbyw/e+uTDZLgSPm5DkXZ5QnvI9eR4075vYYrA=;
- b=D8NqFUsfMu137o5ZUzmPudRixH5RNJ8g3L7vxZqoQ1eQSWCOLVn2Y40yIKRdQKxB8Oq9JqoM+RxqZOGHpbSK05hCDg+Nq75NSr3BVeta73hlLVZiLIrS2AV3OXsWL5VkEJebiBbgOteVmu7PToJ5g6geXXENMyqW9qxWjMUbR8FVC2je3jDUAaS9o+NtDmmWNnPIMMdqEScXtvcSzffQwRz5tWAQHKzwsKI06HNiq2CToidIb95lFYlSJKDXCfet1iKmrSdHZr0q+huO7LGuBlOuG8ZFGW/ojLqO9UyyBfD0hVZHr0Fc8+IEYK3dGuzVdpw3vijkLJGLTfFZAtvdxg==
+ bh=Np7h6dzd5PuDTkQadxjsAmhlmyYZO2dz0o3xkhYkN/8=;
+ b=SzSgoFjhtW6D6Bp73qFEXJmHXtxvLqLeRBI4pdTKYatHy+ANZXET7U9bGScXh7LXRJ31dS2U0QvT8QRH9uUIww5hmVrMoAZ9l74U/MEGWviU+LlHueMWGFFeIsrx70TIN6eFF1MUDkKZaYXbLQ77J5BN+PyTrxQ0MhK8w/GXFbSD/Emcs4ZDINo/xAwgGm1676jg5o90NrQgA0m3CiLomMG5y+lV9weBIJPAsBpg1lDE+m1N/FjQ+bhhBJ21bHqyB1Pf3RenUtZ+0hdRDyXkMXUCI0RttrxJz4Q5691D4VSJCQ3C+BDgXmZY+Jbjclc2t6GUy0WwnNsa6mc97Zcqzw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GOFLNTbyw/e+uTDZLgSPm5DkXZ5QnvI9eR4075vYYrA=;
- b=ZMh4I8Q3W62mkT1am+Wo7OsEb4IkJGz4o/mTVUlxlBk0v8GfaA1p67mF0r6YAQrMlyuVz2vHMij5QWkB3iscJalItzrvVLybXeR2NhXEVqTBUnxj4EenIo38v0sf0wMnvAYMtdnrlqbTJSZARjtBbj9tG3/R/pP3L10hFoaedP8=
-Received: from DS7PR03CA0004.namprd03.prod.outlook.com (2603:10b6:5:3b8::9) by
- SJ0PR10MB6373.namprd10.prod.outlook.com (2603:10b6:a03:47d::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Fri, 17 Jul
- 2026 23:23:36 +0000
-Received: from DS1PEPF0001708F.namprd03.prod.outlook.com
- (2603:10b6:5:3b8:cafe::36) by DS7PR03CA0004.outlook.office365.com
- (2603:10b6:5:3b8::9) with Microsoft SMTP Server (version=TLS1_3,
+ bh=Np7h6dzd5PuDTkQadxjsAmhlmyYZO2dz0o3xkhYkN/8=;
+ b=ln2mKTN3YclSf0UjaMEYA8742ks8ofO8kxclIsaXI/DDcU2yztsmOhmynvlTXjT58bgR4ZGm2NprXNfFPfEzPXtajQzdXuBsoWYGPweojNPc/fhZ1vlBIKO8qEfaEcNyOGdw0+4wt0ze4RzYISkzvEFcOoe5969Df6v3cZiz480=
+Received: from MN0PR04CA0018.namprd04.prod.outlook.com (2603:10b6:208:52d::11)
+ by SJ5PPF871418173.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::7b2) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 23:23:40 +0000
+Received: from MN1PEPF0000F0DE.namprd04.prod.outlook.com
+ (2603:10b6:208:52d:cafe::3f) by MN0PR04CA0018.outlook.office365.com
+ (2603:10b6:208:52d::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.13 via Frontend Transport; Fri,
  17 Jul 2026 23:23:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- DS1PEPF0001708F.mail.protection.outlook.com (10.167.17.139) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ MN1PEPF0000F0DE.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 23:23:33 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 23:23:35 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 17 Jul
- 2026 18:23:33 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 18:23:34 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 17 Jul
- 2026 18:23:33 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 18:23:34 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 17 Jul 2026 18:23:33 -0500
+ Transport; Fri, 17 Jul 2026 18:23:34 -0500
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66HNNX5X150064;
- Fri, 17 Jul 2026 18:23:33 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66HNNYrF150159;
+ Fri, 17 Jul 2026 18:23:34 -0500
 From: Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 00/11] arm: mach-k3: introduce basic support for the AM62L
-Date: Fri, 17 Jul 2026 18:23:30 -0500
-Message-ID: <20260717-am62lx-v1-0-b9830633afb8@ti.com>
+Date: Fri, 17 Jul 2026 18:23:40 -0500
+Subject: [PATCH 10/11] doc: board: ti: correct path to tcl scripts
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAHK5WmoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxNDAyNT3cRcM6OcCl1zi+TkVDPjNBPjNDMloOKCotS0zAqwQdGxtbUAMCH
- qy1gAAAA=
-X-Change-ID: 20241025-am62lx-78cce63f43f6
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260717-am62lx-v1-10-b9830633afb8@ti.com>
+References: <20260717-am62lx-v1-0-b9830633afb8@ti.com>
+In-Reply-To: <20260717-am62lx-v1-0-b9830633afb8@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Alice Guo
  <alice.guo@nxp.com>, Anshul Dalal <anshuld@ti.com>, Dan Carpenter
@@ -131,55 +129,56 @@ X-Mailer: b4 0.16-dev-d5d98
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001708F:EE_|SJ0PR10MB6373:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2f729b90-4f71-4930-75ce-08dee45a6bbf
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DE:EE_|SJ5PPF871418173:EE_
+X-MS-Office365-Filtering-Correlation-Id: bbbee542-834e-476d-8dd9-08dee45a6cdc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|7416014|1800799024|82310400026|36860700016|18002099003|3023799007|13003099007|10067099003|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: dPx/FpCM6C63CfNkFIEWAP/ge7zHgbPsc1p+k4Ywp1V2vUMVakPLucOGK3DA287X9oX1j5S1jRFfzBJvwroMlfoT6l+Xt9qUa3R9+t7Eq2cpxmlriAwxLrMb6O4WM7R9/ZLNkdzmFhFmFrKPddhh2K6GpFGiJf10CIjdoHV3XRaNkcVJ9ryjKdp6+4Q6rIrC9fRBtN38Wao+7gKlthFr+EBz2pYg0eXdcw84RvWzYWq7bscEBdOKO6OVk6/bDpLI2G/Cm19gxNxxV1pKJguhq7HK9g+JnBRz/SQ8ks0KyaWsNMlcY9JJGms9/6sUl5VcJ2A0Vmo72z3BKUn5+R/CXuUOoLVIbKGGOGhxR6UMLkb+ULsQmcrBH2Af14Mkmf4mFuX3nraQkWEGUtVsDkXAPcRa2u0kzwXiiFTPyZjkdpnr81TacHZ1YuNg16fP+sYjL9EBA7Lbj+md0UUKbePr/1zy+VCIDDwYRB25vzPuoyrIM/XtZSeEwP7VoqGZPMWgmGjylHl1AVWVpt5XZKGz28cKvN3aNI6WygqWbldSLIjn0S6Nq1jdaU4AosoQB4UsighmE11kQeP4IzI8fO0nCTUG5/59Vi3AThwBwGXSyuYurEVBJ8jdJndAZD5qo+6p17nZY3XUqUgMXuDEEeFstJC33E4vAS5vMXC1nBsKIRU=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(7416014)(1800799024)(82310400026)(36860700016)(18002099003)(3023799007)(13003099007)(10067099003)(56012099006)(6133799003);
+ ARA:13230040|82310400026|36860700016|376014|7416014|23010399003|1800799024|6133799003|10067099003|22082099003|18002099003|56012099006|13003099007;
+X-Microsoft-Antispam-Message-Info: yXv2CvDqVOE5GXsz3ND/1FjT6VBkPgs02CXRW2J0xsRubU+fsNb+YdwgtFs+yXXkAZWJX1og5DmHXURs5YMSKqPj/BRlUZnxt9e7O6L6ipl5oCE5Ie3zCuvYwDnC0FqEg76CF27LllBf1nGIwD/jGtukGned1vOXB+lgRBBApcRVAcNarf5cjpW5Q/Ok1/uZ4Vg7O/4QntuH+Rd7o/ZjNlreRwGba3gSme8pWQ5XjSwO1FhhnXclx0O7Jupk7ni+h2/rol62ICCdOQIJ0/tJ4d+iaeo+dF7wczRD9ZANmHNLq4S3UogqzY2XHb2lAZ7j3OPsPwloWlt+RO/o2fe4tq1cdlKg7/OcxztnWkcmD2QZjLvjZQmaKF+TnA1pjNxf88DctqV9jLfuGCc3r0he3z+OYanFFjwlDNX73yizOGBzms0QKaaM3ZSxtbwnOdaCpQQe9zjCRL2nT7mxNh3jQucMa+RUxqJXNzOEHSADKXr1E6FTOcfTEme9cCjm4qriAmCSrSwKqmxYYwC0LO3BYsxmc/EGsfL3AME1zGV2ddlxxielYevjXjWTFkkJIg7kWwjboLuJevttitEmVYo0kqh1cT1WC9fA0EX6YsxN05kjwf3Jh2jvGEo8uPanT1eoIBV/cXHqOVCxvFaKS4DhdLmDl03IcLWGvX2gAlwt6PpbwWVIhGOMxjfbnbFP14WDlVtDov7/uXLT6Gu5VetW6g==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(7416014)(23010399003)(1800799024)(6133799003)(10067099003)(22082099003)(18002099003)(56012099006)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: u1/u1p61Ix9wBImfBQ7ZoaXTTYAeLTPAGI7ste6jmn/h/QQyeEzCnBnjMbl6d4PJ2iLbKvk57caTUzIw6dQDTOY4xbUayMimJjBWcnfRGPZb4Oe5lHqMNjbOPzCfh4pa9nD7qqH+Ds5jAcdNYysrR7QzxrItb9OidBUpRLGT8Vf0pWA/dL6pKxyo0BHPhsJTY1z7uYaWXNvsqhfjb5wz+qJ9tBFVEgFFrOEXPOkinhMOjHY/f6BOlNEJp5F9MkT9S5RnJZcvs6pyHSAuI5jQiKZvLt+JXPy9eNVmK3l2cduADCWXMF6xzc25O7vArCrxpAl+pgn5iArhoQILmMufJ/aEzTLcaJWljtwgC9kUwar1bbs9oD3osmrg2tTO7eXejMnvbJ9aPPYRc1gTvVHUDciq1UI9S2QfeejMdpRYkSQ3D968oEhpAJ22qAIPI8I3
-X-Exchange-RoutingPolicyChecked: REUSBU1Jy1ioUeILNVa4vP6Ddi4ZmOeD55t2cAscCwd92qM6Q0SN49G0XJtCwScxCsd2nkd+CYuWI/pRpZFoXtQbxaaY9/jX2RGkVC4q/5NUhS3igMgX8+RoW8l6HwMEfd1u3aVG0lB/d+wt+XcHe8N2ywhUgiZCSYMOq8SQPDtbgp0mp9FKlLj3fujdkHSZLgjDqmUyb212dpOjUZSes7/80VUtY/84AyIhEjnvK2zThfTZI6p08UdIu8wxeWr8ursAnuW+1haSOAnMfEWAXJHaU6e9a4VHFMOlfna+DKUx2c/ulCinFBfnpQxbIuMjpMnt/wInW1kTf89yHY2C+g==
+X-MS-Exchange-AntiSpam-MessageData-0: HiQZ161X9lVpRpvQC7EAdUsx6olA5QJDIsxj+lIOUcON16x2a+gDov1tr7kBQSyvtJ7F1Fm5bfajt4+eusgqHApCPgAiVaPOdWjFnbRWNaT5Ig7QO+2csTYtDYxLqSI2d3GeTEhfi3WZuihaIJNidysmRqWY3Gper049q18lXnJ/eBtClXHVBIsZtpT92QY22A2R5km2SMdI1jS3SVaquwt7/KI5xjgvi69QdPrqlViqE0wzsHYCbaqi5TRKsRDI7QtWxgrdTHFVAtFFAGySBXJQCyT9CGPI/PUaEgqRGFaaD0CxqRA/OoP/Jccd3fk/+yy40jWCVUFNoronGlEbpjYvQCT1l7au63B9oq52zQGr5bTDfx8nK+k9KQAu6lOZRkJFjAK94wZr+zUXDjWefWTaLaptVJ4Sge/TPygmcwTfUcvIo50EQx+uFZQUoG4w
+X-Exchange-RoutingPolicyChecked: nD07JsuZ68oXalmVkiYn3u9RgDZxWPQMU6q2EsiDNail6hEOUiU9AWogXAD8WSAwwxl8yonNMhzs3vHQBI8/HHs/MYyj3ogUXtHZan1BtnE9p6VX4yAArf8SCPrgcE+ztVK6sE8EOIPdpelpOHMlrH3IXQVR6YXbCVj3E/7Kfv2BgDr5LtgMiJHNG8xzTnXv1/4XXLafDTKI/d749nLJP5vETd4nSvXhus710sRD6SvpuH2gGC8rwrusXa19fQftQ4zu7lhbfMl0bgR2k5DVlDhnaojObajllvydldhoCTX9tXHYufLywNTNO3aexIhBdoPT+i/JApXE4wb/jtn/Wg==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 23:23:33.8065 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f729b90-4f71-4930-75ce-08dee45a6bbf
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 23:23:35.6595 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bbbee542-834e-476d-8dd9-08dee45a6cdc
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001708F.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0DE.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6373
-X-Authority-Analysis: v=2.4 cv=e9Y2j6p/ c=1 sm=1 tr=0 ts=6a5ab97d cx=c_pps
- a=e/sPstj0vE6DIEdYTBOJlw==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF871418173
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDI0MSBTYWx0ZWRfXx47OKR18t1+t
+ a2rUDt2M5Ax0dlfSedPWIavEa14o3OVCWprSuJrLXFxsxUic+gL+xsBkTRRXK1XAhg/ut5rM21Q
+ i2MHvttVg7xPW96LtDnxPCQkwnE3h1A=
+X-Proofpoint-GUID: mGo5WNsZ4r_YFze5UdUNSL06fKsWADQi
+X-Authority-Analysis: v=2.4 cv=M7F97Sws c=1 sm=1 tr=0 ts=6a5ab981 cx=c_pps
+ a=fYaSdR3m0whpxnlOBVIaHQ==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=qUjewLGzuT5_s0WiQqQA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDI0MSBTYWx0ZWRfX8+dVF3GLjARR
- z12s+THRlcw8cZCn/sYBa0rpTuVsieIClb7Gzsc6bryHIL6WLx1PtsMc3H8zMEMM7CULVkfVqAs
- TbEIQWP9e6/tmixaDGO1DbHbGReFMJGu2cGYs4aXAe0NJMFMSTP806VUEar2GqxFNtl+LcXstUm
- xUT5pwHahJY3AhVqDdeQXaFP5/C1Fbs80WIpSw1awsGHgrgyZN1B6cQ9uX8fu7fVYNm/sZMVOce
- hPVVuTz2vln1P57AXjRW7BspSzHPJ1icRaR1ioFMRl++EO2GPLoVD4n9omd5AZmkYfx4PHYdjG8
- oNP0G3QQ67GFZdmoGLzcf6dscPat0GfqBC6832ieQWAMfVtWcrz1qprIupu9loxqsLP/XUjC/nC
- iGckKfmyZSgU9Sy+Nmj7mrVRWgdz32o4gIPogzkJissFCbiDym329KXb5+QoQKyxR/H9KcpHdPe
- QiDngxKzeGdP1QDE7xA==
-X-Proofpoint-GUID: 28gE7mJj5ate243yKq7HhC9z_Gkzu5_A
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDI0MSBTYWx0ZWRfX0ubFNLKt6D2y
- G5RjsA+osNgCp3OjWSTDkpa5f9s+RzkN47UMJN30JnNuvQtwzLZ69lNm//x/LDl44xxsnZlwprS
- S8wfjiwV4IXM+b1ydeWSCkiReOe4wZM=
-X-Proofpoint-ORIG-GUID: 28gE7mJj5ate243yKq7HhC9z_Gkzu5_A
+ a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22 a=NEAV23lmAAAA:8
+ a=sozttTNsAAAA:8 a=3XqsQiwtXmu4FjQEjo0A:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: mGo5WNsZ4r_YFze5UdUNSL06fKsWADQi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDI0MSBTYWx0ZWRfX5R3iFnC22hYr
+ GH+Iuyhr6b9c3dfH0LmmlMANBWg/YoKMHOI0Bgo2NyfwPfHn78W8Yq8Llf3nkDJEVMr0YWoj8q8
+ DDXuR0p1oaEw9zfFM/OUmLrHAaBoNDRKjz3cLmXXPWCPnnaAYhrKrCOht4dyH88Jm9FKxco8hFS
+ 0jIQZ5sBjwakCSr1Bz8H+KUnpKEtjlTOe2eMwR5sjOXq8w0T+IH7CkQ5eEkPAiFigMKx+x99f2r
+ gHUrHBw/q6uRxw/WyDR+QgHAN5fqjCcXhTWmuShjiXCksGzHoLPeb39q51U19z2qqMFJH4v9UhH
+ tzuilOjpVePTJuTwsLzZe24gYzB/3OQmTgFfS4vQxSkpm8dh/M/iJ7yHo/6f4JRgRBXPC0OfTYL
+ 3g9O6vademrJlsis0ldDlbfGQz2B5PdP3aJIO4hhP/CFZDQmqEYgqbNMDfzPdW842DVjDQOdy4s
+ tOSQ6O9PLAxL1BSoWig==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-17_07,2026-07-17_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0
- lowpriorityscore=0 clxscore=1015 bulkscore=0 suspectscore=0 phishscore=0
+ clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0 spamscore=0
+ lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170241
 X-Mailman-Approved-At: Sat, 18 Jul 2026 17:03:16 +0200
@@ -199,128 +198,310 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Everyone,
-
-This series adds the initial support TI's AM62L SoC family along with 
-the AM62L-EVM reference board.
-
-The AM62L is a lite, low power and performance optimized family of
-application processors that are built for Linux application development.
-AM62L is well suited for a wide range of general-purpose applications
-with scalable ARM Cortex-A53 core performance and embedded features such
-as: Multimedia DSI/DPI support, integrated ADC on chip, advanced lower
-power management modes, and extensive security options for IP protection
-with the built-in security features.
-
-Additionally, the AM62Lx devices includes an extensive set of
-peripherals that make it a well-suited for a broad range of industrial
-applications while offering intelligent features and optimized power
-architecture as well. In addition, the extensive set of peripherals
-included in AM62Lx enables system-level connectivity, such as: USB,
-MMC/SD, OSPI, CAN-FD and an ADC.
-
-AM62L is a general purpose processor, however some of the applications
-well suited for it include: Human Machine Interfaces (HMI), Medical
-patient monitoring , Building automation, Smart secure gateways, Smart
-Thermostats, EV charging stations, Smart Metering, Solar energy and
-more.
-
-Some highlights of AM62L SoC are:
-
-- Single to Dual 64-bit Arm® Cortex®-A53 microprocessor subsystem up to
-  1.25GHz Integrated Giga-bit Ethernet switch supporting up to a total
-  of two external
-
-- 16-bit DDR Subsystem that supports LPDDR4, DDR4 memory types.
-
-- Display support: 1x display support over MIPI DSI (4 lanes DPHY) or
-  DPI (24-bit RGB LVCMOS)
-
-- Multiple low power modes support, ex: Deep sleep and Standby
-
-- Support for secure boot, Trusted Execution Environment (TEE) &
-  Cryptographic Acceleration
-
-For more information check out our Technical Reference Manual (TRM)
-which is located here:
-
-    https://www.ti.com/lit/ug/sprujb4/sprujb4.pdf
-
-Happy Hacking
-~Bryan
+OpenOCD has moved where it has placed the tcl scripts for TI's reference
+boards. Update their paths to the new locations
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
-Anshul Dalal (1):
-      firmware: scmi: switch to dev_ofnode during bind
+ doc/board/ti/am6254atl_sk.rst | 10 +---------
+ doc/board/ti/am62ax_sk.rst    | 10 +---------
+ doc/board/ti/am62dx_evm.rst   | 17 ++++++-----------
+ doc/board/ti/am62px_sk.rst    | 12 +-----------
+ doc/board/ti/am62x_sk.rst     |  9 +--------
+ doc/board/ti/am64x_evm.rst    | 17 +++++++++++++++++
+ doc/board/ti/am65x_evm.rst    | 10 +---------
+ doc/board/ti/j7200_evm.rst    | 10 +---------
+ doc/board/ti/j721e_evm.rst    | 10 +---------
+ doc/board/ti/j722s_evm.rst    | 12 +-----------
+ doc/board/ti/j784s4_evm.rst   | 10 +---------
+ 11 files changed, 32 insertions(+), 95 deletions(-)
 
-Bryan Brattlof (9):
-      tools: binman: extend ti_secure_rom to handle op-tee
-      soc: add data to identify the am62lx
-      boot/Kconfig: disable fit post processing for AM62L
-      arm: mach-k3: Add initial am62lx SoC support
-      board: ti: am62lx: add initial board files
-      configs: am62lx_evm: add initial defconfig
-      doc: ti: k3: fix pygments warning parsing device-tree
-      doc: board: ti: correct path to tcl scripts
-      doc: board: ti: am62lx_evm: add initial docs for the AM62L-EVM
+diff --git a/doc/board/ti/am6254atl_sk.rst b/doc/board/ti/am6254atl_sk.rst
+index 18a3520b39c7..7f919b10a8d7 100644
+--- a/doc/board/ti/am6254atl_sk.rst
++++ b/doc/board/ti/am6254atl_sk.rst
+@@ -289,14 +289,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: v0.12.0
+-
+-  If the default package version of OpenOCD in your development
+-  environment's distribution needs to be updated, it might be necessary to
+-  build OpenOCD from the source.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -305,4 +297,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash $
+ 
+-  openocd -f board/ti_am625evm.cfg
++   openocd -f board/ti/am625evm.cfg
+diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
+index 6f3432f7895c..2b338569aad6 100644
+--- a/doc/board/ti/am62ax_sk.rst
++++ b/doc/board/ti/am62ax_sk.rst
+@@ -224,14 +224,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: August 2023 (git master)
+-
+-  Until the next stable release of OpenOCD is available in your development
+-  environment's distribution, it might be necessary to build OpenOCD `from the
+-  source <https://github.com/openocd-org/openocd>`_.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -240,4 +232,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash
+ 
+-  openocd -f board/ti_am62a7evm.cfg
++   openocd -f board/ti/am62a7evm.cfg
+diff --git a/doc/board/ti/am62dx_evm.rst b/doc/board/ti/am62dx_evm.rst
+index 0d12e3ec1476..28f62914b3bc 100644
+--- a/doc/board/ti/am62dx_evm.rst
++++ b/doc/board/ti/am62dx_evm.rst
+@@ -235,16 +235,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **AM62A**: OpenOCD support since August 2023 (git master)
+-
+-  **AM62D**: Uses AM62A configuration (compatible due to same core architecture)
+-
+-  Until the next stable release of OpenOCD is available in your development
+-  environment's distribution, it might be necessary to build OpenOCD `from the
+-  source <https://github.com/openocd-org/openocd>`_.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -253,4 +243,9 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash
+ 
+-  openocd -f board/ti/am62a7evm.cfg
++   openocd -f board/ti/am62a7evm.cfg
++
++.. note::
++
++   The AM62D-EVM uses the same tcl configuration as the AM62A-SK due to
++   same core architecture.
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index 44dae4afc870..d2696282033c 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -329,16 +329,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support after**: v0.12.0
+-
+-  While support for the entire K3 generation including the am62xxx
+-  extended family was added before v0.12.0, the tcl scripts for the
+-  am62px have been accepted and will be available in the next release of
+-  OpenOCD. It may be necessary to build OpenOCD from source depending on
+-  the version your distribution has packaged.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -347,4 +337,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash
+ 
+-  openocd -f board/ti_am62pevm.cfg
++   openocd -f board/ti/am62pevm.cfg
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index ef9425035cb8..ab5dee1ac775 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -851,13 +851,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: v0.12.0
+-
+-  If the default package version of OpenOCD in your development
+-  environment's distribution needs to be updated, it might be necessary to
+-  build OpenOCD from the source.
+ 
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+@@ -867,4 +860,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash $
+ 
+-  openocd -f board/ti_am625evm.cfg
++   openocd -f board/ti/am625evm.cfg
+diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
+index 65c4c456528c..dbbdfe0e8036 100644
+--- a/doc/board/ti/am64x_evm.rst
++++ b/doc/board/ti/am64x_evm.rst
+@@ -227,3 +227,20 @@ https://www.ti.com/lit/pdf/spruim2 under the `Boot Mode Pins` section.
+ 
+   For SW2 and SW3, the switch state in the "ON" position = 1.
+   Boot bits on SK is reversed bits to the bootmode signals
++
++
++Debugging U-Boot
++----------------
++
++See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
++detailed setup information.
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
++    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
++
++To start OpenOCD and connect to the board
++
++.. prompt:: bash
++
++   openocd -f board/ti/am642evm.cfg
+diff --git a/doc/board/ti/am65x_evm.rst b/doc/board/ti/am65x_evm.rst
+index 60b08ceebf0f..12fa955d2bf5 100644
+--- a/doc/board/ti/am65x_evm.rst
++++ b/doc/board/ti/am65x_evm.rst
+@@ -305,14 +305,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: v0.12.0
+-
+-  If the default package version of OpenOCD in your development
+-  environment's distribution needs to be updated, it might be necessary to
+-  build OpenOCD from the source.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -321,4 +313,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash $
+ 
+-  openocd -f board/ti_am654evm.cfg
++   openocd -f board/ti/am654evm.cfg
+diff --git a/doc/board/ti/j7200_evm.rst b/doc/board/ti/j7200_evm.rst
+index 4fd2aff83547..74bce4b465d7 100644
+--- a/doc/board/ti/j7200_evm.rst
++++ b/doc/board/ti/j7200_evm.rst
+@@ -216,14 +216,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: v0.12.0
+-
+-  If the default package version of OpenOCD in your development
+-  environment's distribution needs to be updated, it might be necessary to
+-  build OpenOCD from the source.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -232,4 +224,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash $
+ 
+-  openocd -f board/ti_j7200evm.cfg
++  openocd -f board/ti/j7200evm.cfg
+diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
+index 41c8d4c72a8d..1302e080d8a8 100644
+--- a/doc/board/ti/j721e_evm.rst
++++ b/doc/board/ti/j721e_evm.rst
+@@ -245,14 +245,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: v0.12.0
+-
+-  If the default package version of OpenOCD in your development
+-  environment's distribution needs to be updated, it might be necessary to
+-  build OpenOCD from the source.
+-
+ .. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -261,4 +253,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash $
+ 
+-  openocd -f board/ti_j721eevm.cfg
++   openocd -f board/ti/j721evm.cfg
+diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
+index 4b5cf0275940..5a4ae11a2eb6 100644
+--- a/doc/board/ti/j722s_evm.rst
++++ b/doc/board/ti/j722s_evm.rst
+@@ -237,16 +237,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support after**: v0.12.0
+-
+-  While support for the entire K3 generation including the am62xxx
+-  extended family was added before v0.12.0, the tcl scripts for the
+-  am62px have been accepted and will be available in the next release of
+-  OpenOCD. It may be necessary to build OpenOCD from source depending on
+-  the version your distribution has packaged.
+-
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+@@ -255,4 +245,4 @@ To start OpenOCD and connect to the board
+ 
+ .. prompt:: bash
+ 
+-  openocd -f board/ti_j722sevm.cfg
++   openocd -f board/ti/j722sevm.cfg
+diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+index ec82228ab908..48decd8d3d64 100644
+--- a/doc/board/ti/j784s4_evm.rst
++++ b/doc/board/ti/j784s4_evm.rst
+@@ -643,14 +643,6 @@ Debugging U-Boot
+ See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+ detailed setup information.
+ 
+-.. warning::
+-
+-  **OpenOCD support since**: September 2023 (git master)
+-
+-  Until the next stable release of OpenOCD is available in your development
+-  environment's distribution, it might be necessary to build OpenOCD `from the
+-  source <https://github.com/openocd-org/openocd>`_.
+-
+ Debugging U-Boot on J784S4-EVM and AM69-SK
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+@@ -663,4 +655,4 @@ following.
+ 
+ .. prompt:: bash
+ 
+-  openocd -f board/ti_j784s4evm.cfg
++  openocd -f board/ti/j784s4evm.cfg
 
-Vignesh Raghavendra (1):
-      arm: dts: k3-am62lx: Add binman support
-
- arch/arm/dts/k3-am62l3-evm-binman.dtsi          | 226 ++++++++++
- arch/arm/dts/k3-am62l3-evm-u-boot.dtsi          |  16 +
- arch/arm/mach-k3/Kconfig                        |  34 +-
- arch/arm/mach-k3/Makefile                       |   2 +
- arch/arm/mach-k3/am62lx/Kconfig                 |  23 ++
- arch/arm/mach-k3/am62lx/Makefile                |   7 +
- arch/arm/mach-k3/am62lx/am62l3_fdt.c            |  12 +
- arch/arm/mach-k3/am62lx/am62l3_init.c           |  58 +++
- arch/arm/mach-k3/am62lx/boot.c                  |  82 ++++
- arch/arm/mach-k3/am62lx/schema.yaml             | 427 +++++++++++++++++++
- arch/arm/mach-k3/include/mach/am62l_hardware.h  |  48 +++
- arch/arm/mach-k3/include/mach/am62l_spl.h       |  41 ++
- arch/arm/mach-k3/include/mach/hardware.h        |   6 +
- arch/arm/mach-k3/include/mach/spl.h             |   4 +
- board/ti/am62lx/Kconfig                         |  19 +
- board/ti/am62lx/MAINTAINERS                     |   8 +
- board/ti/am62lx/Makefile                        |   7 +
- board/ti/am62lx/am62lx.env                      |   8 +
- board/ti/am62lx/board-cfg.yaml                  |  32 ++
- board/ti/am62lx/evm.c                           |  19 +
- board/ti/am62lx/sec-cfg.yaml                    | 380 +++++++++++++++++
- boot/Kconfig                                    |   2 +-
- configs/am62lx_evm_defconfig                    | 148 +++++++
- doc/board/ti/am6254atl_sk.rst                   |  10 +-
- doc/board/ti/am62ax_sk.rst                      |  10 +-
- doc/board/ti/am62dx_evm.rst                     |  17 +-
- doc/board/ti/am62lx_evm.rst                     | 222 ++++++++++
- doc/board/ti/am62px_sk.rst                      |  12 +-
- doc/board/ti/am62x_sk.rst                       |   9 +-
- doc/board/ti/am64x_evm.rst                      |  17 +
- doc/board/ti/am65x_evm.rst                      |  10 +-
- doc/board/ti/img/am62lx_boot_diagram_phase1.svg | 450 ++++++++++++++++++++
- doc/board/ti/img/am62lx_boot_diagram_phase2.svg | 525 ++++++++++++++++++++++++
- doc/board/ti/img/am62lx_tiboot3.bin.svg         | 170 ++++++++
- doc/board/ti/img/am62lx_tispl.bin.svg           | 222 ++++++++++
- doc/board/ti/img/am62lx_u-boot.img.svg          | 143 +++++++
- doc/board/ti/j7200_evm.rst                      |  10 +-
- doc/board/ti/j721e_evm.rst                      |  10 +-
- doc/board/ti/j722s_evm.rst                      |  12 +-
- doc/board/ti/j784s4_evm.rst                     |  10 +-
- doc/board/ti/k3.rst                             |  39 +-
- drivers/firmware/scmi/scmi_agent-uclass.c       |   2 +-
- drivers/soc/soc_ti_k3.c                         |  11 +
- include/configs/am62l3_evm.h                    |  14 +
- tools/binman/btool/openssl.py                   |  11 +-
- tools/binman/etype/ti_secure_rom.py             |  32 +-
- tools/binman/etype/x509_cert.py                 |   4 +
- 47 files changed, 3461 insertions(+), 120 deletions(-)
----
-base-commit: a66e02d219bedaca5aa8abaeac279c634dd2587d
-change-id: 20241025-am62lx-78cce63f43f6
-
-Best regards,
---  
-Bryan Brattlof <bb@ti.com>
+-- 
+2.54.0
 
