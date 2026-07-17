@@ -4,114 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B93FC44520
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:31:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03312C44520
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 12:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72B1A84DF8;
-	Fri, 17 Jul 2026 14:31:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EABA84DEA;
+	Fri, 17 Jul 2026 14:33:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="U4hcIATK";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="VcGYX0Jz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2392F84E09; Fri, 17 Jul 2026 14:31:47 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F165584E14; Fri, 17 Jul 2026 14:33:45 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6EDB84DAA
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:31:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8FCA84DAA
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:33:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.delaunay@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sfo/Pv94f9lLpC2NyY/I7mme6GFvosUjWMe1fl8lYv4inqbE1+4wDOfoojPA/wt3rMxRnR7oR2rN+vrjFyubR9y0lnnjwZslKOPveV3cEIC0f4eC/SdAnKeDokojnkSRtqFjXOXzDWytDfbyacuhfJUdDYDNOoE0JsEcOK/yBiNS7McRcJft6Og0zv8+JqPXNkLzHEuiklvgMUKwjGZHsncBPcXpmfvR2j7IBsmm7Cr+s2ivOaKvQdcrICBgy8lUKqkaMAMZPJj4A6QysO0onk5nV0kCmt+BltSyGuQYGq2Ad59PUdH4x2kzHO/jzswZGHX/UoBxDE/LjM3gD6trXw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hs9Y0CylBr4EaODZ7pbc9GrKHcHUnRtmbLT3tlCEuQI=;
- b=LEgxKUPcqNl3PWERbsINNwbjo5tcN7PvZjd5+zlOrxUiDotomItcC2zURlNZrQ8vyb1nee6aIfaqJP6EaizgkNHUfFEqYHnhQdZmNxlVSoiIhiigrYG8cZAZce8QTMYH5B+taYvla5l8snu6BzJdKkZKYioZO8isKUgvCzLZHYF4UFBYXF9OdGnOlDy0cNddWk7CktpF1LLjSJgFg4fFR+aF+JwPIafcXZiHg4WCMspqSeLA0TlHYDGU1JYeQ0f2GbV31WMzxnk7ziZ2YnJUEQwVVPQ61nH7+93KF+niHSmN+AUmVUjdAXIk2f6ArKXYoRWki/8Dyxik+oAGayD8vQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hs9Y0CylBr4EaODZ7pbc9GrKHcHUnRtmbLT3tlCEuQI=;
- b=U4hcIATKPLWORlWZPQwI7w4iEGKuo7Hs/ul5XDWnt1AU22p/jyXiSN60z6xmvzP2RPbm4P2lArXvsiLHDnFC90yp4NP4iSsmaygojVyaLsShbkAgBR4ox9XN85U4HmckmzoLDA3q/T6eafo24wDGG5aQInrhwZHVL3iCGsmMdGpy6R1FJcdGz5S4k/dbSaF9UcRA25UHXMuJbbY53rqbUdWpA4BU2eApeu3sSxUi9IfwG7Iwpss5X/ZNgeswfDiT5Q/rhHjOJBYDi+iTC6M/Mu3rrVkZ4uw1seauHjGk99tllo/6WcHHpXdkG0kQoCKLmJDoIhrMdq3AAKhLQI8RCw==
-Received: from AS4P192CA0028.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:5e1::13)
- by FRWPR10MB9324.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:d10:177::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
- 2026 12:31:41 +0000
-Received: from AM4PEPF00027A5D.eurprd04.prod.outlook.com
- (2603:10a6:20b:5e1:cafe::86) by AS4P192CA0028.outlook.office365.com
- (2603:10a6:20b:5e1::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.13 via Frontend Transport; Fri,
- 17 Jul 2026 12:31:41 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AM4PEPF00027A5D.mail.protection.outlook.com (10.167.16.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Fri, 17 Jul 2026 12:31:40 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
- 2026 14:36:16 +0200
-Received: from localhost (10.48.87.227) by STKDAG1NODE2.st.com (10.75.128.133)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Fri, 17 Jul
- 2026 14:31:40 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Tom Rini <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH] ARM: stm32mp2: fix TAMP_FWU_BOOT_IDX_MASK/OFFSET definition
-Date: Fri, 17 Jul 2026 14:31:32 +0200
-Message-ID: <20260717143131.1.I2460c17ad1978f8c5c5e85a6ba56cfd46ed975cf@changeid>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-493b27c7451so10627495e9.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 05:33:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1784291623; x=1784896423; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=giZjvpxZ6mEEIE0GCG1w1vvaXpwPsS77N3eEBJ1unt8=;
+ b=VcGYX0JzailCKxJUTR/HWFOL64bCDigZSQP9ajNPO0PgXp9257tDNAP/O9YlLFJWBt
+ QovimUj/wh5GjTaEXeUoIzBwNldtBInqR4FOk0MKhl+UANqrMkSwOLeaG/k9+VsvevG5
+ VYhA7UyvwQVUc3WPfbmshvtDB2oMUbbdcERHMWBAkf8N52jr1qpIExPTFu0wbq/CtyEt
+ f88hCon2GWRJSKh26sktTgcQx1KMV9uPMMiAcH3Hm3+srxpkFVBRAP+sJCvTCfTmFvWo
+ UJWVpJHE4Nzu58J+TK0WFRRsZNiNIoY6TmQNlYKUCSyc+02+02eOXdGI5rRTZrI+Yomo
+ ZYmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784291623; x=1784896423;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=giZjvpxZ6mEEIE0GCG1w1vvaXpwPsS77N3eEBJ1unt8=;
+ b=hRNhVXwYZJZOZ6RVsj8B3FFwP0d/sXFRGQSZp9okhp8rnE+vSZimIsNBGjJjd7jZP7
+ I/5h4k4dQsLEEF3wlJmrLYR1/kfk+iFFKm1g/pENz1ij5UWNPNk5Yod4/laKcAMUEXV2
+ tOnaOfI/z+T/jwyZuFxzm7vt0DsTXEJqk19RX+GovsFQcK8rxpSbInlCBLU5K13z6Ce2
+ yaQ0GHWplG4gBytK+NL9ZsKMLbpJvNneOaLnUCh18ZzCMq9a8NZRcCRO82ByBOMp2R5U
+ nFj4GGwR1Be/V0ipc+e/mhAz6qw1PvPewBAbSNwioDglcDriQRd9DCKnmCnMNuMV0B/A
+ LpTQ==
+X-Gm-Message-State: AOJu0Yy3230qXO3Nb/g9y/Z0fM+ZPrcp4nM0TW85yO5gpKb2RmOhgGcJ
+ hWblOa5nRrJR8Ge6jX/DyVwq4ttltnIUc7L3l7u6t27EcUaV0oGoOxX/2oQyNbR3oHU=
+X-Gm-Gg: AfdE7ck631LqWhG9EfYWfymZZBXu0cb3WDMHX975/MUmIUBiX8QhBPMDbVF8CcEPMc2
+ Q7hYwKzD+ThLXxJcjWFnsywHDqQe5BKI5lDOhvTbw+p5hSL/WJrQ8RTh6N3NayktOt3Um4tUrZR
+ ivN6T0bb+f4eE2Y0PgNgKnhVsSXmH01tVUiqYl73gRe59ETfn7D1aicj1NoW9ALyLvtWGs4I5J9
+ cht6m7SV5+LIoABKDGXJwDA/uFAMXVff1HqlLbQM4b11mi4Bz4Jxr1TiBqXX2TjSoLgGj+m4yCa
+ 7yfX6uxN6F+99O6Btdf6HG9WuVxa7n14fBtKbJX0J7aoRhAWjldDpRrP8XRY7FY1YKBtunrMZHs
+ WbwiYkyG8AxspxTLUjzF0FontEc4tW7xBq2TaGPaHGB/D/tx8iRyNQrG2bfNNjSVkLJCbwXoRmj
+ Gnmt3rbxbJraLhSP9SEqF/fkukwXh8nGp1oBf6vpzw7IswiBNDxSiQmWIpLVzSD3WVm/NSKDrvh
+ RZjyf9QjmkyUnxTGC+nfnQ+zXVB+NjYo6BwRBZ/AjW/EfEyqfkTstVvV+jOZdYubajmDBY=
+X-Received: by 2002:a05:600c:a210:b0:493:c566:7bd6 with SMTP id
+ 5b1f17b1804b1-4954a341bcdmr16372265e9.18.1784291623191; 
+ Fri, 17 Jul 2026 05:33:43 -0700 (PDT)
+Received: from [192.168.1.65]
+ (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
+ [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-495499f3f99sm44199595e9.0.2026.07.17.05.33.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Jul 2026 05:33:42 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 0/2] i2c: add HDMI DDC driver for MT8188 and MT8195
+Date: Fri, 17 Jul 2026 14:33:39 +0200
+Message-Id: <20260717-mt8188-add-ddc-i2c-driver-v1-0-e89ccd173567@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.227]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A5D:EE_|FRWPR10MB9324:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb6ee572-ba00-4cf0-19c9-08dee3ff5aad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|23010399003|1800799024|56012099006|11063799006|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info: OXSVJNAQJJ2sY4w+UUPfCllz55FsuhSSVT3X5OUVtJgLv7H+qASuNr6EolbmEahJNrybxMwD7Xq8QFxeKi4ihHyabgfp0mAaHODjyuk70voiDKokgy1+CfN2IdkhAFh034pAn8PzsLfdW/t3xVDqd6MySngL55CjgJU3k5s2u0qIJdRRK6azQIhTfGMV3AB9LE+I4wlYS/ez/dm4MBI406sDV3JQ72K2zwGU20HuFo8WIjyNkOO4dre4Nb5Rf7uZUnF+mPgQ1ITLiCP/QpLnBSHsnSCzBNEbQYmgMz6THAHNGeFuJLtAsmmP/P/+alRLOk1D5aWlg754nHj/9Kc2z9nFIOxGdMM+nP88OX95/Ow/sNogcBRdWX6o4p6n5qKp0/xhOMZ5bOC7KulSBO087kJ26+c3uF3G6M0CwYR+Ch4dMQZmvuE6p44efWQEM05HFaGFlmCSA568uEVQGhhRC4b8mvl7Pqvl5qApVU/4YtnW/vqH6sgQIpwjHrujHq/bt8/7j0WvIga+uB+L9vPpvzRBPC6kKQht3EMO8CJO+UHH8wocIC+4Z//HYd29IRoktMLLN1GX+suwzahNgV6CgXeymApwWoq2ppgfM2jvVVHnNoHhHUIRDrdtRAgLb9gDSkSYdW03PZ8ECOJprWFyHchq1aTptV4/CmBs1r/O4DAK6bYikWI43Zo2Gz/+EOXZ4dqfq+vg3uAMg63B86H1nQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(23010399003)(1800799024)(56012099006)(11063799006)(10067099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: sxssrTEcIB6Ab0mPiGnWFRkNMNGxoy9FvkigjUdtYEbpGeWPw1fI5yoNH5YWkNrRC8fSEjnyeXDygwbHsulGI/OxhNLast6nXjGKeHtZsArWMwy/ZlfWeeyZ9AfPCEgpJD0wSV+m5Tx/B+FYil3HxrcemUc7O99myBehQJtOe4uPQgjOO6ft7Ua5zKGHxRIpr+e9881ijcLQ2+dEpTBjHNfJLCmOut7nS6Az2imr22luX/I0Lc07YIEtCt5mQR6Y1Wha2r20Sz08obn2GpyopV/WkUaJzPUBVAlHFNcapmcKoV1BfBT/yIwBTAdtSHxPzq7VvW6w4my1T5ft26KtX/FxjC9aeBudAWg85wMhoLNhxACDnAUo9sCqmxTcWSdCm6XQHiyuFOUy1ZOpLphOqfL3881dNDFGaaBLddP71N2YkTsSj2ymei111yOdOc+o
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 12:31:40.9772 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb6ee572-ba00-4cf0-19c9-08dee3ff5aad
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A5D.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR10MB9324
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2N0QrCMAxFf2Xk2cDSQa3+ivjQNZlGcGraDWHs3
+ 626xwPnnrtAFlPJcGwWMJk162OsQLsG0jWOF0HlyuBa59s9ebyXQCFgZEbmhOoSsukshhQ7dsN
+ BPFMPdf80GfT9a5/Of85Tf5NUvsHNMHlN9bRs2rp+AElU0taSAAAA
+X-Change-ID: 20260716-mt8188-add-ddc-i2c-driver-1a3d2f9e6d1b
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Heiko Schocher <hs@nabladev.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Pavlo Yadvychuk <pyadvychuk@baylibre.com>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Johan Jonker <jbx6244@gmail.com>, Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,49 +116,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the definition of TAMP_FWU_BOOT_IDX_MASK and
-TAMP_FWU_BOOT_IDX_OFFSET outside of config check for
-CONFIG_STM32MP15X and CONFIG_STM32MP13X.
+This series adds an I2C driver for the HDMI DDC (Display Data Channel)
+found on MT8188 and MT8195 based SoCs, such as the Genio 510 and Genio
+700 EVK. The DDC channel is used to read the sink EDID over the HDMI
+connector.
 
-This patch solves a STM32MP2 compilation issue in
-board/st/common/stm32mp_fwu.c when CONFIG_FWU_MULTI_BANK_UPDATE
-is activated.
+While at it, a generic EDID_ADDR macro is added to edid.h for the
+standard 0x50 EDID slave address.
 
-Fixes: 5166658ac605 ("ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET definition")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+The full HDMI support will be added later, as a separate series to ease
+review.
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
+Julien Stephan (2):
+      edid: add default EDID_ADDR macro
+      i2c: mtk_mt8195_i2c_ddc: add new driver
 
- arch/arm/mach-stm32mp/include/mach/stm32.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 42e3735847a5..dfbd4f436294 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -67,6 +67,9 @@ enum forced_boot_mode {
- 	BOOT_UMS_MMC2 = 0x12,
- };
- 
-+#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-+#define TAMP_FWU_BOOT_IDX_OFFSET	0
-+
- #endif
- 
- /*
-@@ -135,9 +138,6 @@ enum forced_boot_mode {
- /* TAMP registers */
- #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
- 
--#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
--#define TAMP_FWU_BOOT_IDX_OFFSET	0
--
- #ifdef CONFIG_STM32MP15X
- #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
- #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
+ arch/arm/include/asm/arch-rockchip/edp_rk3288.h |   1 -
+ drivers/i2c/Kconfig                             |  11 +
+ drivers/i2c/Makefile                            |   1 +
+ drivers/i2c/mtk_mt8195_i2c_ddc.c                | 398 ++++++++++++++++++++++++
+ include/edid.h                                  |   3 +
+ 5 files changed, 413 insertions(+), 1 deletion(-)
 ---
-base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
-branch: dfgdfgdf
+base-commit: 78bfaf6281605509fd49262b0138cf1fb338ef62
+change-id: 20260716-mt8188-add-ddc-i2c-driver-1a3d2f9e6d1b
 
--- 
-2.43.0
+Best regards,
+--  
+Julien Stephan <jstephan@baylibre.com>
 
