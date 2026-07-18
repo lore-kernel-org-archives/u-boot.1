@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E87E8C44515
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jul 2026 21:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9995FC44516
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 00:08:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2FB080517;
-	Fri, 17 Jul 2026 23:02:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F0F383EEF;
+	Sat, 18 Jul 2026 02:08:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LdZiNbyu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iK41Kr4b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9861083314; Fri, 17 Jul 2026 23:02:01 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 82C3D80433; Sat, 18 Jul 2026 02:08:00 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EB9780117
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 23:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A0E180433
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 02:07:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7ec49608332so1639295a34.3
- for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 14:01:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-451a49abd8aso3172698fac.3
+ for <u-boot@lists.denx.de>; Fri, 17 Jul 2026 17:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784322118; x=1784926918; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=wTwFTnbb9mxtXaAxGCk2iYM0UddcCeJbkiIyuiC+J28=;
- b=LdZiNbyu/gr6A0eBeW30k9UqQUJ99cECg5xNBkT6+AvuJS7WV4QZb5gMFbuaZ5sI9E
- qcss6gVUYKpm+5+k+QBoYHexWO0qjvrbMTgG5Hj8OkPxGzv3fZ5Nrtt6d2VwgpUk9cFf
- ut4CPKSWv8b1j3/Y1XZnVnLw9v8PcoZRIzZgHJoXH4OAUVXCB9zc+PwYdYwxM8cXVFzz
- EEq1hPk25L7Oq9KzVW1+BpXGkKiKKqJMdu7yl/UkP0FHo0e0GcgL8S1ZiFRzaXjduXYO
- IjIhrzOrHMwTMpUrQWm6BQiaR8miwkVg2oruWyvDBBon8N9H2pZwneQjd/gC5urde0+c
- YUMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784322118; x=1784926918;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1784333277; x=1784938077; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wTwFTnbb9mxtXaAxGCk2iYM0UddcCeJbkiIyuiC+J28=;
- b=fKHyufXEwyJBIDKcCl8gWwOHtEuhMx4YBngGApg+9MN61GPulDxUPyzwaT0HN09aAi
- IjnNUBhksRaVWA7cCnJAQbSFToRnofA8jvhFONCvAfItUesombLWyz0unnEP9tXOyfm1
- 6YPP3oQjSsrz1e8sp8jvHRWIMFjkwc1O9mXwtVMy44oqz9DAZOfL3qWI9tiWnzLdlG+z
- N9Ucn3Vk9O9fb4Hc98+/OyHzcPgmYwScb0x+j7jqHj5wdKkBse+wvPflHdrpPiFDPevJ
- euzXOeyaeQGdt3NREKIwTxhGo4gkjVousiE1sQSqcftHsyl/M9VrRcFyyLXYFa0j82EM
- ZqPQ==
-X-Gm-Message-State: AOJu0YxZWUrlSSLzpa8NDAUPBARTJG4gxrqDPVlxZpirQJKJ37tGuJYn
- zgK2nULBJ7xkVt79g/ZD+Stk/LASAqVlgqwADYFp8H5sienB3ocd4KgegZrqtB/saw8=
-X-Gm-Gg: AfdE7cnoouJ7vLilgUPN4hLl5Ju3E0hPF7X/RO5zysg+hQc9BUjASGTQRaDdoSXDHdi
- rSSYOwyu1KQ9gdILpI5NPpFdkZed3G/kwzSpcdKfAr+7dDhIMfh2RwSg0zEc6Zb4QgYHudu0MPD
- qrhewDR8Vh6gViHvSw8uheiarBzlnPSBl9Yvk0Tt5liLDxB258AN+LyqT1vjCo+pgj4U7S6AwLG
- OPnPGe6DqR7Ag5EY2X6ti6woDhcczEUUzas23kxvdvrXfUV6qLYILjL5q2nXC9zmBpBY4FCzmC+
- 8mSc9KOLrtU/UivMM/zEKLjkUe0+uZeagRT4zT86uI8WkP1EntfbkwGxmyRtFe4ZWjZA5ucFX4a
- ll78L1aY3yMcOA6Nx7HpmY2fGKU/VGjnJo+5ML7qp5oOxjwdMyK00M7HYy8bz2p2KbNMi8vkLSR
- Q1SEyDWtTqqRfm/wA0Y9cxHUVWUufSdNjEoSqffMQmlREN8OWeGDqb8Ymu/G/vsR/6xZzk4h0aj
- 5ccu9oQjJB41EDSwvVqHPj6M3zJWdoq0y1Fu+OWGRI+VjDQW6JvH4zZo81dmsKmuB2xA/zWnuo=
-X-Received: by 2002:a05:6830:2903:b0:7e9:d1f7:b728 with SMTP id
- 46e09a7af769-7eda0945c2fmr2170770a34.21.1784322117425; 
- Fri, 17 Jul 2026 14:01:57 -0700 (PDT)
-Received: from james-x399.tailafd1a.ts.net (174-29-11-8.hlrn.qwest.net.
- [174.29.11.8]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7edad94f0absm2041138a34.8.2026.07.17.14.01.56
+ bh=TJqjKcJagKDdVvj4z+WgyzXOBW8h2Kn48e5dk7r/ze8=;
+ b=iK41Kr4bVxVkqBb65I2C+9CjO/W+uWNPiNyNZ1T+olKSLcRiVvYDwjZkvo6h76dWmV
+ I6CBwnLY4xL3WzO0nlefLCkTR3VysXvHygJfWDOXLxe5VHn7bcevmaxvReMDJSPO9PqV
+ feCSOa63hsjtPmfDLZSzZOf6wLqypHlpNb1fI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784333277; x=1784938077;
+ h=content-transfer-encoding:content-type:mime-version:date:message-id
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=TJqjKcJagKDdVvj4z+WgyzXOBW8h2Kn48e5dk7r/ze8=;
+ b=LsFm/hmLR9vrO2yLaOsJMSNVPrNgfFY/rynMDKugWh9RqxNK2eMPiSI3/TM/u8gLbY
+ U3hXLx5xwhmAGFxSuwgRFF/Np1q5wQrNsm3atuOkX3JnD5mynoP7B3xRUBsB5RDCymiQ
+ 4l0cXNWHNPGkaP+pl/FnFfDYwAdF2h6gey6MRwU7OGp7QmtAXZ5K7F/+dxGqfUO2UDpV
+ XUh2uFbQFq141ATzlr+QiDITr8AIpTg2q7Jv/USVbHEsaXAfTckEEMM1ciPhk9ee+PxC
+ LaxDecb+nFk8B+BW/b6duQUeJsnLbGiGfFC8q5PpDZ1T1LtdJ08WRiDlOZk8eyCehSOn
+ FJ6w==
+X-Gm-Message-State: AOJu0YxQFWc4iudk2yvtvs74WGB8PxRL4E6i07ypPMdjC5HnLMsYcXQ6
+ u1irwez7d7PkAqW1+GsPts6WoDXIoKYT196SR2MMx5GCm9r89yP7OuHcUHOXfznYv+4uKbBepie
+ 6Wfy8QWI=
+X-Gm-Gg: AfdE7cmw/59k7lyP9b6Hy3Te5+a+BsXr6XYggeNn2LR8M9g27lqkLdS9mRG/yaelPE+
+ Z9w/8gxZK84W9KtoeP+fG3zZMrqd8OUz+bmbzEanJKI5hWlf8oSBy81ZivTRgLRnhyKaxh1PbC1
+ khKq1uREhfw6hR25Fxmhhcb9HVLweaZ2CSaPC2/ogFXTTPBPw3l+Mgd3sDEq5jH86JA/tOEBk0i
+ LyMxzE+apIBDsVI7gci9f2aG5/MGNyvuBCYzeTcb774qIeNPCFevmsKt/rsY0pGdsC6wE06Q6Sz
+ 1+U+6QAXgoWTYP2tQGDrdq8FUGXD+BaF4eEm384taACbQmMQWCspmxXtBVOzsV6OYFXIV1j3qKY
+ f0lJIdOt4tdXFX/ocsYTc/JcwpaEsM1AOmirjeLKoDBnI3OHivOt4oEqkRsSdV2sPH2xMqHVivZ
+ S8KNuMcDFfoW6btkf5rgizJ8/OgvSD3NOjenbAuxMN8WcMiFUbH/vooRrYepUNZ/T3MWh/DSvZ6
+ 3T6/ZfBB7pMXMXFvYsQT2MZSA==
+X-Received: by 2002:a05:6870:16c1:b0:43d:3092:cf06 with SMTP id
+ 586e51a60fabf-456901045aemr2547602fac.2.1784333277037; 
+ Fri, 17 Jul 2026 17:07:57 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-93-175.totalplay.net.
+ [187.190.93.175]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4568e0be46asm2275893fac.2.2026.07.17.17.07.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 14:01:56 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v2] mmc: sunxi: support DM MMC in SPL
-Date: Fri, 17 Jul 2026 15:01:41 -0600
-Message-ID: <20260717210148.3391816-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ Fri, 17 Jul 2026 17:07:56 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: Chintan Vankar <c-vankar@ti.com>, T Pratham <t-pratham@ti.com>
+In-Reply-To: <20260713-am64x_sw_rst_fix-v2-1-3e0df7c88a96@ti.com>
+References: <20260713-am64x_sw_rst_fix-v2-1-3e0df7c88a96@ti.com>
+Subject: Re: [PATCH v2] mach-k3: am64x: clear MCU_RST_SRC before reset
+Message-Id: <178433327605.1719219.18313937187373613971.b4-ty@konsulko.com>
+Date: Fri, 17 Jul 2026 18:07:56 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,83 +98,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sunxi SPL normally uses the legacy MMC interface while U-Boot proper
-uses the driver-model path. When SPL_DM_MMC is enabled, the existing
-DM probe depends on the devicetree, clock and pinctrl providers being
-available in SPL.
+On Mon, 13 Jul 2026 11:07:05 +0530, Anshul Dalal wrote:
 
-Select the required SPL clock, OF control, pinctrl and pin configuration
-support from MMC_SUNXI. Retain the main CCU and PIO nodes when their SPL
-frameworks are enabled, and retain the MMC0 controller and pin
-configuration when SPL_DM_MMC is enabled.
+> In warm reset, the value of CTRLMMR_MCU_RST_SRC was not being reset.
+> 
+> This leads to a reset-loop boot failure when a warm reset is triggered
+> from the MAIN domain (by writing 0x2006 to MCU_RST_CTRL).
+> 
+> 
 
-This reuses the existing DM path unchanged and leaves the legacy SPL path
-untouched when SPL_DM_MMC is disabled.
+Applied to u-boot/main, thanks!
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
-Changes v1 -> v2:
-  - select the required SPL dependencies in Kconfig  (suggested by Tom)
-  - retain the common CCU, PIO, MMC0 and pin configuration nodes in the
-    SPL devicetree
-  - drop the new preprocessor fallback paths  (suggested by Andre)
-  - reuse the existing DM MMC probe unchanged
-  - drop the no-devicetree platform-data path and controller reinit hook
-  - reduce the driver change to four Kconfig selections
-  - validate an H616 SD boot through SPL FIT verification and U-Boot proper
----
- arch/arm/dts/sunxi-u-boot.dtsi | 22 ++++++++++++++++++++++
- drivers/mmc/Kconfig            |  4 ++++
- 2 files changed, 26 insertions(+)
-
-diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
-index e1a9a7f5d4c..fdd8c78c8bf 100644
---- a/arch/arm/dts/sunxi-u-boot.dtsi
-+++ b/arch/arm/dts/sunxi-u-boot.dtsi
-@@ -19,6 +19,28 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL_CLK
-+&ccu {
-+	bootph-pre-ram;
-+};
-+#endif
-+
-+#ifdef CONFIG_SPL_PINCTRL
-+&pio {
-+	bootph-pre-ram;
-+};
-+#endif
-+
-+#ifdef CONFIG_SPL_DM_MMC
-+&mmc0_pins {
-+	bootph-pre-ram;
-+};
-+
-+&mmc0 {
-+	bootph-pre-ram;
-+};
-+#endif
-+
- /* Let U-Boot be the firmware layer that controls the watchdog. */
- #ifdef CONFIG_MACH_SUN8I_R528
- &wdt {
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 6c513328de2..40b6e6882aa 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -806,6 +806,10 @@ config MMC_SUNXI
- 	bool "Allwinner sunxi SD/MMC Host Controller support"
- 	depends on ARCH_SUNXI
- 	default y
-+	select SPL_CLK if SPL_DM_MMC
-+	select SPL_OF_CONTROL if SPL_DM_MMC
-+	select SPL_PINCONF if SPL_DM_MMC
-+	select SPL_PINCTRL if SPL_DM_MMC
- 	help
- 	  This selects support for the SD/MMC Host Controller on
- 	  Allwinner sunxi SoCs.
+[1/1] mach-k3: am64x: clear MCU_RST_SRC before reset
+      commit: 28d09d6ab68c4a3ac3b95c508a79dabbaa9d3e89
 -- 
-2.53.0
+Tom
+
 
