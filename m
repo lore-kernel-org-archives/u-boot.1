@@ -4,114 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92805C44520
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 10:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D67C4451C
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 10:57:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FD0380117;
-	Sat, 18 Jul 2026 12:49:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B0DB84659;
+	Sat, 18 Jul 2026 12:57:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YGim/m1C";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JL32n5b1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3B8F80517; Sat, 18 Jul 2026 12:49:29 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 3F2768467B; Sat, 18 Jul 2026 12:57:10 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6314E800AE
- for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 12:49:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88FE780117
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 12:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4953ddae026so26415785e9.3
- for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 03:49:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2c7c61b5292so70297355ad.0
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 03:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784371766; x=1784976566; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=MOydETU1Vv2yZ4wAjvzP6Yk5d/H+WzVthki7JeuJhSQ=;
- b=YGim/m1CMcSvZEQknET9++QXTgWiBPwT3Awt340aipsbKYMFcfch6fUbr9oUSIlfUP
- 6YJW9qTnyc4/DcWx7FSCRRE7Av6GrpvUaKaDu8chUGjkg8khoPfNhqonC017763ztUw5
- ZMg+9RpVP7h/62yJ3LaYqt1THy2dL5Zva9pnPVD+dUgwIZFQwHaX3whQnsTeNbvAO/vf
- l26PyuNQUwgUOuRscO6R6Xy/8VP5hinhi6MnMIAbA8zfa5XEiRYvLwZ5SvE4MU35ALUu
- uK4v0BqU2JdFE11+o8WdhwZPw9oA/2UOPll0qNkjFaNpNM6LA/csz+wpbcuUWwAC4O/7
- LqcQ==
+ d=gmail.com; s=20251104; t=1784372225; x=1784977025; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=SnjKSNxE0XcL9mw8isAzngtFt7gXUh8mxnQvjykNN1I=;
+ b=JL32n5b1tbd9un8N+VJe6XRqAA0ags8Sg8QezuSGtqVOQ9GFZ6zjoXqSMN7H3EmJDX
+ 8izZdqQYpXHDLxkvWCNWvSMy4L9lXtcYA5CO2Bxu53b51zf4ltlOTXPvWtGzfbKF0hQJ
+ 7kcO5nhKC2AFSQMBIVGa1zgVGi4aUtLoThI7RppiDv2AkLdb25RV2eWy4x8q0C/3QXoh
+ ymihCMwlsqkRLhIyNS6GWJ3DolSTJnYHCM3y9BRkSWbee2QaPUMPuiPQDC08O6n2KnLG
+ nFBE90i4oAnUaHxzCoquhSmRsc5XK6XjVw5dHFpO9H105S3Vfmx/xsbBNDFShCS5wtnZ
+ mwkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784371766; x=1784976566;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1784372225; x=1784977025;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=MOydETU1Vv2yZ4wAjvzP6Yk5d/H+WzVthki7JeuJhSQ=;
- b=qFoZ8Jv2AWZgVsJJmtOjVQTi/bR3f0EYwESPd6tViMUFpCdcLi624NiQ46bd7MjrXq
- OnxgaQtlmfehsC/1PUrOdeKLG2su9GQlRxwQqo4Zo1T1xbqYJRnIeuVfRiVvdXIOikJu
- rz0/4XG2LTFNhJ0Vf5rv8rQL9krcvTEf1ZDL8jyDKNIDEUFDeDg5oWEPUvxubdij6Wsr
- wpk8syGIaE/L0jIRb4sqVQ+soGD/ZDOsck71OqKK55vDf5Nxmu8l2+b0obmUaJE3uu1/
- ZVbUWfS0yGTEw3yQ+CZCl5b1iaMD1J/hWodyzan4Q1S/d2t7+fQJ/mBA8DGdq7Wh2oV+
- 7c+Q==
+ bh=SnjKSNxE0XcL9mw8isAzngtFt7gXUh8mxnQvjykNN1I=;
+ b=sd+XP4yb7FnjV2k40CpfNdlM+HO98T/2cIPqy213YuWyZ/WBYS+kS3WH2RsyYot5rA
+ iDkcb7aIu5H+u2TjjckzuZl6VhDNT65ADpntxURVA7fFOuTxcZA9Qy2w1VsG+MG59yb7
+ ybqpdcwB6VG4zMw6UKeLmLqiIwKeynZ4/3sG7ZHp4pw0zBYoChspN6/gbgTmkbAhU1Pn
+ 4xBMcPAVdO2BiX4SCEAHqXxb6JovmytAxG47QDjuUHsmnyRI6eVHiZTITwHkNTR6UKR8
+ fS9gelRjd7+ZJIYPlxe/Y6O4Xl7RD+yKvOELdHqT90rMSucdrOEcZx3ya4wFILNKh/Oc
+ IwdA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpdEPJAMtMXgCU5/sAdSt6uFSiAma0Kimesyawcpca5Iq1erH4/5VUCnJyaI1eXjNl+5xArlqs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVATB3a+81NCYHN35NMOEXcV+1Z6HSTMgYS9+YeyGTZF0/slOk
- Nu49NIERiBq1n84UdUr/Y8UloXQkw2y2QvB6mvaE2x2GUIeG/P3pjsK135NUiidPPNI=
-X-Gm-Gg: AfdE7cmH4a7UNcfbLc3rJN1PwCBO/MrxoYGLIgkj33eueyy3u7GUDmZmLzmeiuE8nCZ
- FG6+iD7aw7b4OtJTXyx/aRogloo+HD2FKnjS4Cm/RiupL+qlpQfpub2xRhXAlYel3/RQnET9zK2
- Ysd4EZ+8hqBLQWIR1KhB6OlCAR+ZKY4BG3XoO9FuVqEtDSJ16qcEWdXKsGx69015xGDeX/TmGsP
- pIkJRQHEkH8o1bJ5czW2JgHUH/4pfgSAOJ7vtaJJE9m7MjDUUJR+iIvs52CbGuiyvgzUTpY7Acb
- 8HfY4Pi3qrrSHstbi9XzWfQf4iDz4YLV7P3RMJTGYj6sw4hF+3lW4xdxH/Qx9o6x/y6hvYvP4ll
- fg+7vcPsNvpuydQtsJzfJivGz8klRtfFCZfMYG+y6kRB1eNuJ5oxouo0fTKCaA+VIqLb5Xm28dc
- BY1hXaSaCZMtwmzaAIWtiwCV7v7cRYczMSUfeTHpbE4mAiIUhPUp5RYUiDh4M=
-X-Received: by 2002:a05:600c:138a:b0:493:f318:3bc6 with SMTP id
- 5b1f17b1804b1-4954a3dc7b1mr68952525e9.13.1784371765791; 
- Sat, 18 Jul 2026 03:49:25 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:1101:f76f:437b:dcb2:4cac?
- ([2a0a:ef40:1d11:1101:f76f:437b:dcb2:4cac])
+ AHgh+Ro38qW6XA7tsDrFl3NHcYFaA8zbLdyWjQQzJvgg5VlnAlfccEheVs/RUGcXk2LBcF4kzPO2iT0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4ih/6RriM6yd8KZqzSy0zAJdaezS/UhrdnFHk5/KnegHFnwv2
+ Ri5kDRGptpqQimHhmzL0vHyqLp96S9SQgVhuB3C4uMRRTIW3LiyrkSO5
+X-Gm-Gg: AfdE7cmVWuPEmrnaRlQ2ZsnI4mA51VkE1U0yf4S2Rz8o35JLlxXebxrHQlJN/EBCzRV
+ JIoHp4mggydZVpCzIx61RAX1RG422qcJb/GdnLCPHIiGrYH2FPDreBnFKSHSKH3XVN/H3VXgrUU
+ D+vUs0fY46pBHOaENNwd6tX5d9O8/CiGCtdWAcdfGmyrtJOazgxXluS0ZKW1khYZlQ9kiONwGnU
+ H2A575fGlDHJ+nOMvbagAVedJZQRionCtDMLlCujKKDk9byKlYj94ChI/ya2VHJBh7xZdTdMVhA
+ 2iYFwQ4nBB9EDZLB9lQcuVcMf+F/XDpFA0qfW8tRYQ/9qyUWt+Ef/cdMB6MdNNM1cx7k9ytjfDc
+ L6oUa2tZTAXyU4GeQJUWhfUh7wJ8jQXTwhzf2uxW54SkHj4pPMAxqA4cJlUie4gyBLaiyZmL+ml
+ w2EuMRvlnf9gw7KoJ7GUN8pyvJI6Cbhm57lXdMVMKoklHRFziUADcMdjRy5Q==
+X-Received: by 2002:a17:902:cec8:b0:2c9:e5ff:995d with SMTP id
+ d9443c01a7336-2cf3494ae23mr68930835ad.31.1784372225401; 
+ Sat, 18 Jul 2026 03:57:05 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:1b3:a801:a24:40fa:6e6d:ed28:7c2a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4954a2a2504sm126986775e9.2.2026.07.18.03.49.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 Jul 2026 03:49:24 -0700 (PDT)
-Message-ID: <6748951d-d720-46bd-82bd-19c4d97a6f20@linaro.org>
-Date: Sat, 18 Jul 2026 11:49:23 +0100
+ a92af1059eb24-13ce29c2a48sm11859799c88.2.2026.07.18.03.57.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Jul 2026 03:57:04 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: ilias.apalodimas@linaro.org
+Cc: Wojciech.Dubowik@mt.com, xypron.glpk@gmx.de, trini@konsulko.com,
+ u-boot@lists.denx.de, marex@nabladev.com, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Franz Schnyder <fra.schnyder@gmail.com>,
+ Fabio Estevam <festevam@nabladev.com>
+Subject: [PATCH v8] tools: mkeficapsule: Rework pkcs11 support
+Date: Sat, 18 Jul 2026 07:56:27 -0300
+Message-ID: <20260718105627.625235-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] qcom: capsule: add FIT capsule support with
- multi-partition
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Minnekhanov <alexeymin@minlexx.ru>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
- <20260522-capsule-v1-1-ff0ac9978d48@oss.qualcomm.com>
- <CAC_iWj+VQyO1Zy+mPqcQJY91aEFsrwXFT4dbObejar0fDpCaSg@mail.gmail.com>
- <a4b3eeed-0789-4bec-b29f-d13e3e3b3016@oss.qualcomm.com>
- <CAC_iWjLQxOVb7H-Mib7NAYLmzumhL5uBi8dZ_ufCksJMrcQ8OQ@mail.gmail.com>
- <89329f38-d2c5-4014-a1e1-44ccfd09b3bd@linaro.org>
- <242ab545-c274-4b65-afa9-2c3ab056a918@oss.qualcomm.com>
- <CAC_iWjK_U_TtNJsXjgVggXa28iHb9212tEQEdQn8wK2XqXmJiQ@mail.gmail.com>
- <19959cc3-40f6-4e9e-801d-8f7c40edbf70@oss.qualcomm.com>
- <CAC_iWjJSNekv73X0n3G-qPjh60F88R=CHybxHzBUo1DDgGzrqg@mail.gmail.com>
- <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
- <CAC_iWj+yLvqqunA_j6WX_0v_DSkf6xwXPSL+kysrUM7G3isSKw@mail.gmail.com>
- <8de79ca7-e826-4a61-b380-2bdf01c39871@oss.qualcomm.com>
- <4b344c4d-ef0e-4595-a6ff-10629cfaaa82@linaro.org>
- <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <936f99e6-bd6f-4168-bfea-8a8c777b4c52@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,87 +100,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 
+Some distros like OpenEmbedded are using gnutls library
+without pkcs11 support and linking of mkeficapsule will fail.
+It would make maintenance of default configs a hurdle.
+Add detection of pkcs11 support in gnutls so it's enabled
+when available and doesn't need to be set explicitly.
 
-On 7/17/26 18:16, Balaji Selvanathan wrote:
-> Hi Casey, Ilias, Simon,
-> 
-> On 5/26/2026 7:05 PM, Casey Connolly wrote:
->> Hi Balaji,
->>
->> On 25/05/2026 13:24, Balaji Selvanathan wrote:
->>> Hi Ilias,
->>>
->>> On 5/23/2026 6:23 PM, Ilias Apalodimas wrote:
->>>> [...]
->>>>
->>>>>>> To support multi-image RAW capsules, we would need to:
->>>>>>>
->>>>>>> 1. Enhance mkeficapsule to create multi-image capsules?
->>>>>> There's an equivalent tool in EDKII that can produce a capsule with
->>>>>> multiple payloads. There were also patches posted for mkeficapsule,
->>>>>> but need some minor tweaks to merge them
->>>>> Can you please point me those patches? I did a search myself, but
->>>>> couldnt find those patches.
->>>> https://lore.kernel.org/u-boot/20240419065542.1160527-1-
->>>> sughosh.ganu@linaro.org/
->>> This patch you mentioned here can create capsule with only one payload;
->>> means for multiple binaries we need to create multiple capsules. I have
->>> also asked the person who made this series to respin, but havent heard
->>> back from him.
->>  From a quick look it seems like it would be fairly straightforward to
->> extend mkeficapsule to support multiple images, the capsule header has
->> an item_offset_list[] array with offsets to each image, today we just
->> write 1 but it shouldn't be too much of a challenge to put a loop in
->> here and extend the argument parsing.
->>
->> Given that we a) already use raw capsules and b) they are part of the
->> EFI spec, I'm gonna try and save us all some time and just put my foot
->> down here. A single raw EFI capsule file can already support updating
->> multiple images, U-Boot already has all of the machinery for it with the
->> exception of mkeficapsule but I expect that's something you can tackle.
->>
->> The upside to this is that you will be able to build capsule files for
->> updating xbl/tz/hyp/aop that can be consumed by U-Boot and edk2!
-> Thanks for the detailed feedback.
-> 
-> We agree — we'll drop the FIT capsule approach and move forward with RAW 
-> capsules.
-> 
-> Here's the plan:
-> 
-> 1. mkeficapsule tool: Extend Sughosh's multi-payload capsule series [1] 
-> to support generating multi-image capsules from a config
->    file, so we can build a single capsule covering all the partitions we 
-> need to update.
-> 2. U-Boot (Qualcomm): Today the Qualcomm capsule update code only 
-> supports a single firmware image (U-Boot itself) via a
->    single-entry fw_images[] array. We'll move to a SoC-specific, multi- 
-> entry fw_images[] array (defined per board, e.g.
->    board/qualcomm/<board>/fw_images.c), so a single capsule update flow 
-> can cover multiple firmware components — each with its own
->    ESRT entry and FMP image_index — instead of just U-Boot.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+Suggested-by: Tom Rini <trini@konsulko.com>
+Cc: Franz Schnyder <fra.schnyder@gmail.com>
+Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+---
+Changes since v7:
+- Also handle gnutls_global_deinit() and gnutls_pkcs11_deinit() - Ilias.
 
-No need for this, just build fw_images[] on the fly derived from the 
-partition table on the board, with an entry for each partition that can 
-be updated. You just need to add a map from partition label to fw_name 
-string, starting with the xbl/uefi/boot partitions we already handle.
+ tools/Makefile       |   5 ++
+ tools/mkeficapsule.c | 111 ++++++++++++++++++++++++++++++++-----------
+ 2 files changed, 89 insertions(+), 27 deletions(-)
 
-The entire point of having logic here was to avoid per-board stuff, if 
-you're thinking "ah I'll do this per-board" you should immediately 
-wonder "but can we do it dynamically instead?".
-
-Thanks,
-Casey
-> 
-> Will send an updated series once the mkeficapsule and qcom capsule 
-> update changes are in shape.
-> 
-> [1] https://lore.kernel.org/u-boot/20240419065542.1160527-1- 
-> sughosh.ganu@linaro.org/
-> 
-> Regards,
-> Balaji
->>
->> Kind regards,
+diff --git a/tools/Makefile b/tools/Makefile
+index 1a5f425ecda..e85f5a354b8 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -271,6 +271,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
+ 	$(LIBFDT_OBJS) \
+ 	mkeficapsule.o
+ hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
++GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
++			 2> /dev/null | grep p11-kit-1)
++ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
++HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
++endif
+ 
+ include tools/fwumdata_src/fwumdata.mk
+ 
+diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+index ec640c57e8a..df64e1b7497 100644
+--- a/tools/mkeficapsule.c
++++ b/tools/mkeficapsule.c
+@@ -207,6 +207,81 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+ 	return 0;
+ }
+ 
++#ifdef MKEFICAPSULE_PKCS11
++static int pkcs11_init(void)
++{
++	const char *lib;
++	int ret;
++
++	lib = getenv("PKCS11_MODULE_PATH");
++	if (!lib) {
++		fprintf(stdout,
++			"PKCS11_MODULE_PATH not set in the environment\n");
++		return -1;
++	}
++
++	gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
++	gnutls_global_init();
++
++	ret = gnutls_pkcs11_add_provider(lib, "trusted");
++	if (ret < 0) {
++		fprintf(stdout, "Failed to add pkcs11 provider\n");
++		return -1;
++	}
++
++	return 0;
++}
++
++static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
++{
++	gnutls_pkcs11_obj_t *obj_list;
++	unsigned int obj_list_size = 0;
++	int ret;
++
++	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
++						 ctx->cert_file, 0);
++	if (ret < 0 || obj_list_size == 0)
++		return -1;
++
++	gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
++
++	return 0;
++}
++
++static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
++{
++	return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
++}
++
++static void pkcs11_deinit(void)
++{
++	gnutls_global_deinit();
++	gnutls_pkcs11_deinit();
++}
++#else
++static int pkcs11_init(void)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++
++static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++
++static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++
++static void pkcs11_deinit(void)
++{
++}
++#endif
++
+ /**
+  * create_auth_data - compose authentication data in capsule
+  * @auth_context:	Pointer to authentication context
+@@ -229,9 +304,6 @@ static int create_auth_data(struct auth_context *ctx)
+ 	gnutls_pkcs7_t pkcs7;
+ 	gnutls_datum_t data;
+ 	gnutls_datum_t signature;
+-	gnutls_pkcs11_obj_t *obj_list;
+-	unsigned int obj_list_size = 0;
+-	const char *lib;
+ 	int ret;
+ 	bool pkcs11_cert = false;
+ 	bool pkcs11_key = false;
+@@ -243,19 +315,8 @@ static int create_auth_data(struct auth_context *ctx)
+ 		pkcs11_key = true;
+ 
+ 	if (pkcs11_cert || pkcs11_key) {
+-		lib = getenv("PKCS11_MODULE_PATH");
+-		if (!lib) {
+-			fprintf(stdout,
+-				"PKCS11_MODULE_PATH not set in the environment\n");
+-			return -1;
+-		}
+-
+-		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
+-		gnutls_global_init();
+-
+-		ret = gnutls_pkcs11_add_provider(lib, "trusted");
++		ret = pkcs11_init();
+ 		if (ret < 0) {
+-			fprintf(stdout, "Failed to add pkcs11 provider\n");
+ 			return -1;
+ 		}
+ 	}
+@@ -301,14 +362,12 @@ static int create_auth_data(struct auth_context *ctx)
+ 
+ 	/* load x509 certificate */
+ 	if (pkcs11_cert) {
+-		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+-							 ctx->cert_file, 0);
+-		if (ret < 0 || obj_list_size == 0) {
+-			fprintf(stdout, "Failed to import crt_file URI objects\n");
++		ret =  import_pkcs11_crt(&x509, ctx);
++		if (ret < 0) {
++			fprintf(stderr, "error in import_pkcs11_crt(): %s\n",
++				gnutls_strerror(ret));
+ 			return -1;
+ 		}
+-
+-		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
+ 	} else {
+ 		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
+ 		if (ret < 0) {
+@@ -320,9 +379,9 @@ static int create_auth_data(struct auth_context *ctx)
+ 
+ 	/* load a private key */
+ 	if (pkcs11_key) {
+-		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
++		ret = import_pkcs11_key(&pkey, ctx);
+ 		if (ret < 0) {
+-			fprintf(stderr, "error in %d: %s\n", __LINE__,
++			fprintf(stderr,	"error in import_pkcs11_key(): %s\n",
+ 				gnutls_strerror(ret));
+ 			return -1;
+ 		}
+@@ -403,10 +462,8 @@ static int create_auth_data(struct auth_context *ctx)
+ 	 *   gnutls_free(signature.data);
+ 	 */
+ 
+-	if (pkcs11_cert || pkcs11_key) {
+-		gnutls_global_deinit();
+-		gnutls_pkcs11_deinit();
+-	}
++	if (pkcs11_cert || pkcs11_key)
++		pkcs11_deinit();
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
 
