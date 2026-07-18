@@ -4,66 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD5AC4451C
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 02:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A110BC4451B
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 08:10:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E7884105;
-	Sat, 18 Jul 2026 04:26:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FDDC80117;
+	Sat, 18 Jul 2026 10:10:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iHMkfjN+";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="kAhMvFKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A88584119; Sat, 18 Jul 2026 04:26:30 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 8ECF480287; Sat, 18 Jul 2026 10:10:49 +0200 (CEST)
+Received: from mail-106120.protonmail.ch (mail-106120.protonmail.ch
+ [79.135.106.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D21983FF5
- for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 04:26:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79EA580087
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 10:10:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4h29dG4t1hz8txr;
- Sat, 18 Jul 2026 04:26:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784341586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oevTnFwxd+5axqgZ+xYttra0EB+IslXJt+yyeaehfbI=;
- b=iHMkfjN+ANNwCWWgg5gOIr05zKAhh8XzYcybyacY7ysm65b4oes/NLFzMeFydSTF8xs3Ef
- 7sSVx5scy9DTUlbZ2Lx36Ahs+fhExIHTLQDQotMrME97JKnz2j93XgpQao71vp37cur+Ee
- E67i5Msa8dmuQSIRpdM37ffxtq9gC64ffub+lhPTV+Zh+arw7FLTE/gmrD7Izpj7RZbwj4
- 1P1eHx8Xmhq6xLH1AWlU/hqLVWSeXTIqWT/PZO6uQLcp22QWiBJTDgarp4Fxi+BCWkm3OC
- B3bZwTmV3EuYT8vBk7xXkwl1QnOSxGwjfHmt1/dE9T6Wqyes7Ku5Q65GHx5VkQ==
-Message-ID: <626b3219-d0c8-44b0-8947-0e216bd65713@mailbox.org>
-Date: Sat, 18 Jul 2026 00:08:58 +0200
+ spf=pass smtp.mailfrom=anoduck@protonmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1784362246; x=1784621446;
+ bh=1jW1n1ul4gHBsq7U7fqJBOqZ7xk9sNR0mJgddesY3u4=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=kAhMvFKNfZwdTtjtXDcUhDxcLQNCSQPfROJeGNpxSifq9mtmUyssL+gXiBIa1IUHl
+ GQZVInrN6uVUkJiTr11TebhPxFDsQxcy7VmyozRfPpPLi9GbfYeUM0PIFkOPr4enjJ
+ NTLa80/f+K2QA19ORN/NYKrercESxpHABP1UwZxfH8wJYeCwDPmJXBA1WYuza4ADow
+ Mc6WylKgo+5mgdVkZ5wi3cyjvVtT0oFArTMxDRorP3uy8nsmgJavFhuQoLGe7uuU7R
+ mK9coIlkfD8VdCuxqq1MYuYp/8C181Iw0VYMTRHf2U+d76a0Rhhfh+rLexGCtI5ajH
+ vv82Bebl2uMCw==
+Date: Sat, 18 Jul 2026 08:10:38 +0000
+To: u-boot@lists.denx.de
+From: anoduck <anoduck@protonmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Minda Chen <minda.chen@starfivetech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ anoduck <anoduck@protonmail.com>
+Subject: [PATCH RFC PineTab-V DTS File] RFC: Pine64 Pinetab-V dts Device Tree
+ File
+Message-ID: <20260718-develop-v1-1-d4b5c0675f87@protonmail.com>
+Feedback-ID: 3493375:user:proton
+X-Pm-Message-ID: 245398de1232b67226d0bd79ac3d626c678c4476
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: mtu3: support the current devicetree binding
-To: Carlo Caione <ccaione@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 652be14c1df955cfcaf
-X-MBO-RS-META: q1fwbrkf1sxfm9gwgx66s7znmktyniix
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,55 +67,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/17/26 2:20 PM, Carlo Caione wrote:
+Added compilable PineTab-V device-tree dts file derived from pine64 communi=
+ty distributed dts and additional parameters
+Community provided definitions:
+    - Audio Codec
+    - Accelerometer
 
-[...]
+Additional parameters include:
+    - Definitions for sd-card and on board EMMC devices
+    - Definitins for power supply to sd-card
 
-> @@ -166,12 +167,20 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
->   		return ret;
->   	}
->   
-> +	legacy_binding =
-> +		ofnode_device_is_compatible(dev_ofnode(child), "mediatek,ssusb");
->   	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
->   	if (!ssusb->mac_base) {
->   		dev_err(dev, "error mapping memory for mac\n");
->   		return -ENODEV;
->   	}
->   
-> +	/* Current bindings describe the device block, not the whole MAC. */
-> +	if (!legacy_binding) {
-> +		ssusb->mac_base = (void __iomem *)((uintptr_t)ssusb->mac_base -
-> +						   SSUSB_DEV_BASE);
+Signed-off-by: The Anoduck <anoduck@protonmail.com>
+---
+Provide support for the Pine64 Pinetab-V Risc-V 64bit Tablet
 
-Can we avoid this typecast horror ?
+Signed-off-by: anoduck <anoduck@protonmail.com>
+---
+ .../src/riscv/starfive/jh7110-pine64-pinetabv.dts  | 116 +++++++++++++++++=
+++++
+ 1 file changed, 116 insertions(+)
 
-> +	}
-> +
->   	ssusb->dr_mode = usb_get_dr_mode(dev_ofnode(child));
->   
->   	if (ssusb->dr_mode == USB_DR_MODE_UNKNOWN ||
-> @@ -317,9 +326,15 @@ static int mtu3_glue_bind(struct udevice *parent)
->   	ofnode node;
->   	int ret;
->   
-> -	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
-> +	node = ofnode_null();
-> +	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
-> +		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts b/d=
+ts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts
+new file mode 100644
+index 00000000000..1115b0be4cc
+--- /dev/null
++++ b/dts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts
+@@ -0,0 +1,116 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2026 T Anoduck <anoduck@protonmail.com>
++ * Through the Graces of: E Shattow <e@freeshell.de>
++ * REV-DATE: July 18, 2026
++ */
++
++/dts-v1/;
++#include "jh7110-common.dtsi"
++
++/ {
++=09compatible =3D "pine64,pinetabv", "starfive,jh7110";
++=09model =3D "Pine64 PinetabV";
++
++=09soc {
++=09=09i2c@10030000 {
++=09=09=09compatible =3D "snps,designware-i2c";
++=09=09=09reg =3D <0x00 0x10030000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x8a>;
++=09=09=09clock-names =3D "ref";
++=09=09=09resets =3D <0x03 0x4c>;
++=09=09=09interrupts =3D <0x23>;
++=09=09=09#address-cells =3D <0x01>;
++=09=09=09#size-cells =3D <0x00>;
++=09=09=09status =3D "okay";
++=09=09=09clock-frequency =3D <0x186a0>;
++=09=09=09i2c-sda-hold-time-ns =3D <0x12c>;
++=09=09=09i2c-sda-falling-time-ns =3D <0x1fe>;
++=09=09=09i2c-scl-falling-time-ns =3D <0x1fe>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x17>;
++
++=09=09=09audio-codec@11 {
++=09=09=09=09compatible =3D "everest,es8316";
++=09=09=09=09reg =3D <0x11>;
++=09=09=09=09clocks =3D <0x18>;
++=09=09=09=09clock-names =3D "mclk";
++=09=09=09=09#sound-dai-cells =3D <0x00>;
++=09=09=09=09papower-gpio =3D <0x19 0x32 0x00>;
++=09=09=09=09hp-det-gpio =3D <0x19 0x24 0x00>;
++=09=09=09=09phandle =3D <0x64>;
++=09=09=09};
++
++=09=09=09accelerometer@18 {
++=09=09=09=09compatible =3D "silan,sc7a20";
++=09=09=09=09reg =3D <0x18>;
++=09=09=09=09mount-matrix =3D "0", "0", "-1", "1", "0", "0", "0", "-1", "0"=
+;
++=09=09=09};
++=09=09};
++=09sd_vcc: sd-vcc {
++=09=09compatible =3D "regulator-fixed";
++=09=09regulator-name =3D "sd_vcc";
++=09=09regulator-min-microvolt =3D <3300000>;
++=09=09regulator-max-microvolt =3D <3300000>;
++=09=09gpio =3D <0x19 0x23 0x00>;
++=09=09enable-active-low;
++=09=09regulator-boot-on;
++=09=09regulator-always-on;
++=09};
++
++=09=09mmc@16010000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16010000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5b 0x03 0x5d>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x40>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4a>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1f 0x14 0x1a 0x7c000000>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5d>;
++=09=09=09vmmc-supply =3D <&sd_vcc>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x08>;
++=09=09=09cap-mmc-highspeed;
++=09=09=09mmc-ddr-1_8v;
++=09=09=09mmc-hs200-1_8v;
++=09=09=09non-removable;
++=09=09=09cap-mmc-hw-reset;
++=09=09=09post-power-on-delay-ms =3D <0xc8>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3c>;
++=09=09=09vqmmc-supply =3D <&sd_vcc>;
++=09=09};
++
++=09=09mmc@16020000 {
++=09=09=09compatible =3D "starfive,jh7110-mmc";
++=09=09=09reg =3D <0x00 0x16020000 0x00 0x10000>;
++=09=09=09clocks =3D <0x03 0x5c 0x03 0x5e>;
++=09=09=09clock-names =3D "biu", "ciu";
++=09=09=09resets =3D <0x03 0x41>;
++=09=09=09reset-names =3D "reset";
++=09=09=09interrupts =3D <0x4b>;
++=09=09=09fifo-depth =3D <0x20>;
++=09=09=09fifo-watermark-aligned;
++=09=09=09data-addr =3D <0x00>;
++=09=09=09starfive,sysreg =3D <0x1f 0x9c 0x01 0x3e>;
++=09=09=09status =3D "okay";
++=09=09=09max-frequency =3D <0x5f5e100>;
++=09=09=09assigned-clocks =3D <0x03 0x5e>;
++=09=09=09assigned-clock-rates =3D <0x2faf080>;
++=09=09=09bus-width =3D <0x04>;
++=09=09=09no-sdio;
++=09=09=09no-mmc;
++=09=09=09cd-gpios =3D <0x19 0x29 0x01>;
++=09=09=09cap-sd-highspeed;
++=09=09=09post-power-on-delay-ms =3D <0xc8>;
++=09=09=09pinctrl-names =3D "default";
++=09=09=09pinctrl-0 =3D <0x3e>;
++=09=09};
++=09};
++};
 
-This is already invoked in get_ssusb_rscs() above, can the value of 
-legacy_binding be cached somewhere ?
+---
+base-commit: 605d72111224172381a2a94d734183222d5b8952
+change-id: 20260718-develop-1e9fbc9b4fe0
 
-> +			break;
-> +	}
-> +
-> +	/* Current bindings keep the gadget resources on the parent node. */
->   	if (!ofnode_valid(node))
-> -		return -ENODEV;
-> +		node = dev_ofnode(parent);
->   
->   	name = ofnode_get_name(node);
->   	dr_mode = usb_get_dr_mode(node);
+Best regards,
+--=20
+anoduck <anoduck@protonmail.com>
 
-[...]
+
