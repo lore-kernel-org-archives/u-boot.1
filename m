@@ -4,104 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 260E1C44512
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 01:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065EEC4451B
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 02:58:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 046C580517;
-	Mon, 20 Jul 2026 03:53:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A0A8780517;
+	Mon, 20 Jul 2026 04:58:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GR2qvNQc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dxL4yaRu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A5C582991; Mon, 20 Jul 2026 03:53:44 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BD9B183FF5; Mon, 20 Jul 2026 04:58:18 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CAAD80433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 03:53:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92D5D80433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 04:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-9034b6b7674so77855456d6.0
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 18:53:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784512421; cv=none;
- d=google.com; s=arc-20260327;
- b=eZfWZ2gIErY6tfkSCvXgErtDE4EV8Y9zVqfoSaU6+X97HWSi79qsy0ZsXfQN2IT+TV
- Cba1R1aF7M0pw++kmZre51u6VGA6XZP317TXKe9shAwKRjAMUpUavBT8dc3N/Y0W3lRh
- 62CBLnO0SBz9pJoNKok1rTalkZJX4pTukoIZ3cq+gMyLJzFJ7Mtzg/3o++2nsNQ/Dcyc
- F6mgkuxBCSmVlZf7TeLyANByCq9IfGkBhlZLIb91u+TXpw0ynKTaxAY1cVQ4xdB383dQ
- Si7m0xeGIHq3QMpgjP3wKKVuXxCg1GVfckyU+V5gdmBbNh7akJ0XDT4Fca2dDVDPwCjB
- 7j1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=BWoRFFaEiNkrOJUwYWMehlqChLL3TJQ3G9ZQwc3gFUs=;
- fh=dePVnCh6v+jngadykHgK1XA7ACHCLhGSPRjAN5kJ4eU=;
- b=UL67AW8WIbo21gCgXRaNyZTWpGPMLW85ReuSukAc5H4Rrp/o78hOKh8YZXVSPCMyDC
- UuUtQka4Lj1z5NFYsyDTCPm/vX3ZNJ43WuoEcUZNfok6v6548q+xXkAYtfMIjFGA5Q2X
- u+vdOnXQkKTRzU6IgqmNPzK70tV+h43504i+q+hD+xHfumMGPYBeokl2VIEa4e96d4Lz
- gd3/e7djGLRYSGGb8wRz/FXYgzQOxEdHKXqnZ4TQINCD5TaEVhxKs5GihL1LBUsdNo7L
- w+JBQx7VNwKS6GsOpv0SNvTjPyYlD0pf4AgmUVciiW2IJ5jAerJiMMAaJIod8aayI4Ax
- tatA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784512421; x=1785117221; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=BWoRFFaEiNkrOJUwYWMehlqChLL3TJQ3G9ZQwc3gFUs=;
- b=GR2qvNQc849Lsd51zQNHSRlr0iN7E+TXjvy///wjiRH0Zn6wQezQlpUHOOYp57s5ca
- LGnmb8CT5mm0GuJYo8C7uWIx9A8/vmw/OISVdwU5sa8OyYMJialpA0+scaLJAGxGtAll
- dlB7ri0S7eqiyAC4Iknx+s/lVD8PJi9rMRvV5smNSlkC8cyIXPoF6x1PtqLzjxBV4Q4+
- vHC43Vipuycq+Hf3zY3kPR50dMeBwNCa1VWEPOCpBw4LzMfLhXvsd4slk3CGx4tpvD94
- 94nohfCALrrz095XMSDLYDHnYFW+Ubx3b6+bSWRUxFxdV8uSHkyQIY+Oy9MoChXwWdJa
- Vfdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784512421; x=1785117221;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=BWoRFFaEiNkrOJUwYWMehlqChLL3TJQ3G9ZQwc3gFUs=;
- b=A1NsgaOwl7yW2cmRwwSVaaIEidqLsyjjtwS0eKyvBtMyuTpDUGjd3OKbmXN8V4W1b8
- FZG7ZCtxP7AhhD0KOxHmg6bX3r6rBwkWw/Utaisk6u++7j5q8RyFzRD/wk3CK4nTIUth
- 2aPUl//EGMblEEBp9ESBVW5OXJJEOVWzNahvc/jASD+/Z1YPX4W3jv+XhQ4Bo6k/wkzH
- SrUg0YdMKL9IO8JnO2dMvam8KxDOS1eaAmF1TaFWO38VVHr8cVSPQvPz81o0R8ZcKqJm
- S6+IZPeZXpRT6dZuurM3uFtx8r7DMBXV/mQotkpChuqyiq1fOcqRZwkiWAhaMO20nbpv
- 5MlQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrLgmWfzfiLxSsXhZi2T5EG1LeVM3DeG5Nu2lG40hw163+aqWfAICb+RF2LdYa/PfHgZ5nSzQw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcUvKhQF3Wrc+jQSPS65s/0qdqOT8CR9ZPGGoxQgZGjsz7vcV7
- nGlcUCv3jKJKeybgM0/7jol8dES4vyR0GITQ9Jym/DeafsVT8EMm2qZQlIMl/rB5Tib4PUMiQqs
- 5OrvKNkQmzr6vdEE91b/ckwGjr6gji4c=
-X-Gm-Gg: AfdE7clhN/Rqr9UvD8P3dpa40TyHiLbSvfH6ILSfquE0OCiyumCgw43KzIHPQq4UAXK
- oM+evzQsFfrvqBfGfwBMerhwQZq1UYyLyr96AuP0K+ALgv4BbSy1wzzjk3eUHXgPQzikTf8zzJm
- eo5sdRLZ9TlmmYCcTHs6nx9a5ifww4fQ6icYKRvz8rETUQDIeyvVS+YFY1psPYmqcw+SI07sn6v
- MUXPnrzHcC1HBoXB5XRUuGg28eateoLGNcvBvfFB3a0aPXvDQ2RMe3RB0hLjA==
-X-Received: by 2002:a05:6214:5d8f:b0:907:5516:3d61 with SMTP id
- 6a1803df08f44-9077833840cmr130874626d6.21.1784512421135; Sun, 19 Jul 2026
- 18:53:41 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4h3QF20v32zMlFs;
+ Mon, 20 Jul 2026 04:58:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1784516294;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=c67RPxR4cADdGqeLzKNwb8BmyJm06l4OUdtd5OUeKSQ=;
+ b=dxL4yaRuskCXC6Hj/YhCoyry2Xjebb2o0GDmoDT3WJJ8yWO+SdSq0c3Dv0DRPBHIfg1m4Q
+ 2d2fq4pAP/DvrfKZ2H2IthbZZFK3UrOmyJRu3d/9CIrum6xYiPxHfEXhgH5XC+YC+T4Umz
+ 8qApP7Ilofl42fqPMvG19dE8fERs42aCm47YWH+rwbm3TF8/Cwtp7FF2Bwdu6X8B7woyVH
+ Z9qFyiVY4IFeheTl/Go9mfgdiL/FWnD8SQMmcOKnVnAqyNALwKpkLPuEAwdbVdVfPAZAVp
+ lN+ae9PT/7CIRAm0rMP+PFo46NaI7yB2qHF5PUoxvkkCjQ4shVHbYsP2OQ7Llw==
+Message-ID: <6f37728a-901b-4f39-9923-3852cbe95061@mailbox.org>
+Date: Sat, 18 Jul 2026 22:17:54 +0200
 MIME-Version: 1.0
-References: <09e8f60c19d19b1bef47594e89de52585e6405ad.1784423890.git.daniel@makrotopia.org>
-In-Reply-To: <09e8f60c19d19b1bef47594e89de52585e6405ad.1784423890.git.daniel@makrotopia.org>
-From: Tianling Shen <cnsztl@gmail.com>
-Date: Mon, 20 Jul 2026 09:53:29 +0800
-X-Gm-Features: AUfX_mxYmw6JU-aqyG6dXEw-KsZyZDiTejx57SHw5D1alsuMRPDAQP_nJ5od-Kg
-Message-ID: <CAOP2_ThcJNDU1Q8Otvg37LXjOTZGVoR5XruDBBypGqJ3Q8E=KQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: rk3568-nanopi-r5s: drop eMMC HS400 modes from
- the U-Boot FDT
-To: daniel@makrotopia.org
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Subject: Re: [PATCH v2] usb: mtu3: wait for TX FIFO to drain before disconnect
+To: Carlo Caione <ccaione@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ David Lechner <dlechner@baylibre.com>, Julien Stephan
+ <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Vitor Sato Eschholz <vsatoes@baylibre.com>
+References: <20260718-ccaione-upstream-mtu3-tx-fifo-drain-v2-1-837345048224@baylibre.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260718-ccaione-upstream-mtu3-tx-fifo-drain-v2-1-837345048224@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: d7cb9bf9063e5e26534
+X-MBO-RS-META: fiiiwst9h8b7ar9durohezf4a8rtny9i
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,46 +82,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+On 7/18/26 12:37 PM, Carlo Caione wrote:
 
-On Sun, Jul 19, 2026 at 9:53=E2=80=AFAM Daniel Golle <daniel@makrotopia.org=
-> wrote:
->
-> U-Boot passes its control FDT to Linux, so the &sdhci override adding
-> mmc-hs400-1_8v and mmc-hs400-enhanced-strobe reached the kernel, which
-> unlike U-Boot actually drives those modes and then failed on the eMMC.
-> Keep HS200, which works, and leave HS400 out. Affects the R5C too, which
-> includes this dtsi.
->
-> Fixes: 0ef326b5e92e ("rockchip: rk3568: Add support for FriendlyARM NanoP=
-i R5S")
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> ---
->  arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/rk=
-3568-nanopi-r5s-u-boot.dtsi
-> index 64c43374c04..7e0b2ba02e4 100644
-> --- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-> @@ -15,8 +15,6 @@
->  &sdhci {
->         cap-mmc-highspeed;
->         mmc-hs200-1_8v;
-> -       mmc-hs400-1_8v;
-> -       mmc-hs400-enhanced-strobe;
->         pinctrl-0 =3D <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
->  };
+[...]
 
-The whole sdhci node can be removed from u-boot.dtsi since these props
-are already included by upstream dts.
+> +static int mtu3_wait_for_tx_fifo_empty(struct mtu3 *mtu)
+> +{
+> +	struct mtu3_ep *mep;
+> +	u32 value;
+> +	int ret = 0;
+> +	int i;
+> +
+> +	for (i = 1; i < mtu->num_eps; i++) {
+> +		mep = mtu->in_eps + i;
+> +		if (!(mep->flags & MTU3_EP_ENABLED) ||
+> +		    !list_empty(&mep->req_list))
+> +			continue;
+> +
+> +		if (readl_poll_timeout(mtu->mac_base + MU3D_EP_TXCR0(i),
+> +				       value, value & TX_FIFOEMPTY,
+> +				       MTU3_TX_FIFO_DRAIN_TIMEOUT_US)) {
+> +			dev_warn(mtu->dev, "%s TX FIFO did not drain\n",
+> +				 mep->name);
+> +			mtu3_ep_reset(mep);
+> +			ret = -ETIMEDOUT;
 
-Thanks,
-Tianling.
+You could get the ETIMEDOUT return value from readl_poll_timeout().
 
->
->
-> base-commit: ece349ade2973e220f524ce59e59711cc919263f
-> --
-> 2.55.0
+> +		}
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>   /* set/clear the stall and toggle bits for non-ep0 */
+>   void mtu3_ep_stall_set(struct mtu3_ep *mep, bool set)
+>   {
+> @@ -261,8 +290,14 @@ void mtu3_ep_stall_set(struct mtu3_ep *mep, bool set)
+>   		set ? "SEND STALL" : "CLEAR STALL, with EP RESET");
+>   }
+>   
+> -void mtu3_dev_on_off(struct mtu3 *mtu, int is_on)
+> +int mtu3_dev_on_off(struct mtu3 *mtu, int is_on)
+>   {
+> +	int ret = 0;
+> +
+> +	/* QMU completion may precede transmission from the TX FIFO. */
+> +	if (!is_on)
+> +		ret = mtu3_wait_for_tx_fifo_empty(mtu);
+
+Shouldn't this bail early on ret != 0 ?
+
+
+[...]
