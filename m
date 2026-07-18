@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2635DC4451C
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 16:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADEDBC4451B
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jul 2026 16:16:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3AD28484A;
-	Sat, 18 Jul 2026 18:16:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 430D6849BD;
+	Sat, 18 Jul 2026 18:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="cl+uxsfi";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="HCV336Yy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E98849AA; Sat, 18 Jul 2026 18:16:39 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 98BEF84659; Sat, 18 Jul 2026 18:16:39 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08BBB84659
- for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 18:16:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E0BF848A1
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 18:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-49548e01d02so7917625e9.0
- for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 09:16:36 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4954a9e8490so7673065e9.1
+ for <u-boot@lists.denx.de>; Sat, 18 Jul 2026 09:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784391396; x=1784996196; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=RSkX9KCL8fnPNQzC+0knGwYIYBCDSeKLNAaP2Houirs=;
- b=cl+uxsfipbgrgwXT45e4ZRO9uMJoayVxFR/142XAefxUB4qE73Z6WSoohxs41op1Sa
- ArLzgzVyIo9F+Vd1z6VmjYwXSZP1gN2PYW82Yh0WwX/zI/2HauEWO1B2iCNr0cs2QqGi
- G3EK8NUjkTUm+irv8S88pX12HDw7FIFsHpcJv2tQ3bijLUckwczyvjSV1YCOa1dtQuRW
- nrd9NHCMj2lvIadMKIhLwZ6+ENd8kbKfsXDDUdYbaHzhwt2AMGf78ADqnSvaBmsUkdxx
- gksB9U5ImGhB9WUQ9B3bTREgl6jtmI1MA6hVFzwX7UkVr5L8OU1GmJf9/OodYSmI6j/X
- Gs8A==
+ d=baylibre.com; s=google; t=1784391397; x=1784996197; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=UfaiuGsGMlpTI7Z2M5Ujljl5XqmF1j7Y17WrOtdiHmY=;
+ b=HCV336YyWCNha2rWFjE9qRNQwBQNFs/opVnFo9br0JFavUnwY+wLAYUZbqqvFJa4B/
+ uN211YQVk/pSEXRj8yY04t6o3X3p/PkeTzzMCnTYsia5nOD6OTL18pWPblAEJ+KCG2xH
+ O0yZ+VWqEYJlM3bInfIjuQ03J/Vp6h+Qr8g+YDxZ1fyHPJ7vIK2+lWNejMLe8xWnjlIp
+ rMtxCZiWcng2KvqxBZMzLAGHbXf6afz3Ta4sCH0FNmRjEgOOB/n+7d34XWQ/16u+FwV2
+ 3F1CpryabEEzR6bAo1LzY8SAhV34RqNsl7ofwZhbzFDq4KBE4sNzhqT2NXG+vyqwa/XO
+ kUag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784391396; x=1784996196;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=RSkX9KCL8fnPNQzC+0knGwYIYBCDSeKLNAaP2Houirs=;
- b=qWfRRraefw6/ASFLARApG0NgIEbGoyjhv81ULpk4bljGxkXHBwE13qUn+Ok6bhf434
- CVVMH5Ysiszg1IiSqh7LVOqBOEW1CYwvFuGc99i/F3dHZIBEgIdU/S0ziPftikkT53H3
- 2A1TyfTuCLPKuZC0gOfztjiIZ04dBj2V7jdZndOlX4WfpG5r/mHuHw0hSiPY1pqTYK5J
- w5hArlqHiDbjn1Mkguea5zphpgUVMjGzc43XwvPvBsxbTI9va0fmcX2aCoDhB7WBVkvu
- 7MVOEuqQhFIPDqQJlqD/fSoqpKZWXTzl3BqSzXIgmtilsfdBGAYhe3t5y0Wd6izOaJdR
- E96w==
+ d=1e100.net; s=20251104; t=1784391397; x=1784996197;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=UfaiuGsGMlpTI7Z2M5Ujljl5XqmF1j7Y17WrOtdiHmY=;
+ b=LSr8LolCh/ulmkRIjyWbHQgMDg1bX0D2XYXJC8P0e+Ls2END5f2EAvbceS5NoBiFlV
+ JwVDgOcT5bkdrhRwBp2NmKLI+b93z4sVhNf3N5a111d/ix3p9tQvfg/FnAZkGEQbxfF4
+ ONTSioBqaGR0NVFUbxDDlDEcRYOmKQ+ymj4IiMTdIJjXUu85IdV8WuolKDX+r7uzPXG8
+ S+mvS69ugk6DM6JiQ3RB/QDgwqth/K5CvEptMt7eAHytU+Wo8KjsemUPcU1hNf2SuH02
+ i03XfasT1tgukUU7XeQRsxJ+kccIEMgf78ntKZ/Wz2YOjMuNZfZ1WO91MO8APoXNxVvP
+ SyzQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rourp7wUHxvErKgjVR2C53dpe3iIvKehEUzmF7YLwWMCI6tyryi/k7xuXabFvXvSJBYZEjbRNY=@lists.denx.de
-X-Gm-Message-State: AOJu0YweyefRnQcGqBioMoYsPxxlXG5J+9n5urGW3T9h6oaf8N7m7rdb
- jnJVnQSUyOIZeuf3UHvZtw/AcWGL3/eZ/qCJnZ6OxlywrE4dr/0lmnyvIm+KFt3MyG0=
-X-Gm-Gg: AfdE7cmeCaqVGKqUBG+FQQZfoJXOh1h64uyyZP+rRUlDlJf+taiP4+EbBCvFDagHTD3
- bPOFZfD1z1r9SldLOz5LbpV7Xkz1reBgt+golAq032WxOVnAWoyafhqLL3NBDIlnyYJeXBRKmWl
- Sn8mxSTFouWxIsvajb0O/rZqcfxUi74f0Oy2CJfqpEJ7zF3cXrdtvSW7MKw0Fy1qaB4czblsyAQ
- bwWi2mr/LFwijXAfMvl8C+ouxeVEW99CUQjUtGwEAInK7lNKi6KOT5xIQ5pHlcIpQ9iNsdy0+BI
- Me1lCs4OlNVyrm82xiYnbroreF//elGl/yzsfvo2AltkrSHNWyFn6k6MxcdnNSPR4aM6mKoA+kh
- 6gLIqTnnYYVOvpogYzn5FmHNr8euhMlLHsQoBKcPHXmsbLudIM6Z9rHLfiCBbuZMhIWK+wDoxwc
- 22rnb7l4WTtyCMvhByfQHgsBIGRoxJUGX1yINCy6GLwDB21rNfZTytfzSFZ7JadXoiibI7Q78jI
- LrWJC7JvISrVkNh/KaE
-X-Received: by 2002:a05:600c:45d3:b0:495:503f:cf9a with SMTP id
- 5b1f17b1804b1-495503fd2a0mr34515075e9.9.1784391395922; 
- Sat, 18 Jul 2026 09:16:35 -0700 (PDT)
+ AHgh+RqIyUHlteyNmqsKH5sXqgm8M+GxduMN+7GAPN3qU9qAp0mU+jPxGM1bHOPjVpijdk6eEzEJAZc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCQcrxRQ0hYkMxtKP6Z3Pk5m4Rixn5nq8NwJMh1k5fPKDxFdA3
+ Lk8JsOuLAiB3yd1SdyO6LEmkA0HyIdBJnpczUtWvknoPVYiaLE6d9Ub7iNz8sf2m/Uw=
+X-Gm-Gg: AfdE7cnKgFfoIMAykDeaeGNUTG1FQ/c51x2CtSTbhhCB7JFDZhqN6+/mgvcd4jLvGGA
+ EIm9X1yu04llKweqt7n8jEuyyoQfuD6DcdkUgOawBnxhfQyCJis1fcwMGeDIvStal8e8nHr2zM6
+ Nc09gceWwez6Yp/U9qN6gKgDh49t3iQsGlsuH+y9UgiidF3HOkW/r8ptQ8SWT7yo49gLk7jGp1Q
+ Di4XinkW8OuVUIzewMYH+YHz0F1tHTxjBufOrwhMTITh9q1E9lz2qWG/HeG+blUlNNv2+zUHdTD
+ cKQA7HCAPkEniX8RXEOEYQd2GW1LB+BAzlwwkG2ERLKuKyPVykl8gmd5ltqH8l6utaNqC5xfMIa
+ FP66wKR3LjrtZIIDr8yiVOhUszhI0yili8Na/nnUTrqhHXlh4MUNhVKldJ33CtU4oaGVDJzz7aA
+ s/THyL6B85saKxH9gN32gF9xlg7RO5Z9+EgfkRRvuf2vDmruxSfG3wuECZO2vJwDwTYMTDlBM51
+ 7eklbFSaYVdtzvBSTrG
+X-Received: by 2002:a05:600c:c053:b0:493:f13c:9c03 with SMTP id
+ 5b1f17b1804b1-4954a341bd8mr51330635e9.19.1784391396951; 
+ Sat, 18 Jul 2026 09:16:36 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-79-16-115-126.retail.telecomitalia.it. [79.16.115.126])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-495499d1d4asm88915955e9.2.2026.07.18.09.16.34
+ 5b1f17b1804b1-495499d1d4asm88915955e9.2.2026.07.18.09.16.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Jul 2026 09:16:35 -0700 (PDT)
+ Sat, 18 Jul 2026 09:16:36 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH 0/4] arm: mediatek: add Genio 700 SPL boot support
-Date: Sat, 18 Jul 2026 18:16:06 +0200
-Message-Id: <20260718-ccaione-upstream-mt8390-spl-v1-0-1256b6dfda3f@baylibre.com>
+Date: Sat, 18 Jul 2026 18:16:07 +0200
+Subject: [PATCH 1/4] arm: dts: mediatek: prepare Genio 700 devices for SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBBA0auUWTuQRGnUq0gX6WSiI7aGTCpC6
- d2Nunzw+SsoF2GFc7dC4ZeoPOcGu+uAbmG+MkpsBmdcb7z1SBRawrhkrYXDhFM97k8GNT/Qp/5
- AwbqYxgjtkAsnef/ul+FvXcY7U/0uYds+Th2fkX8AAAA=
-X-Change-ID: 20260717-ccaione-upstream-mt8390-spl-7f64ca12dfbd
+Message-Id: <20260718-ccaione-upstream-mt8390-spl-v1-1-1256b6dfda3f@baylibre.com>
+References: <20260718-ccaione-upstream-mt8390-spl-v1-0-1256b6dfda3f@baylibre.com>
+In-Reply-To: <20260718-ccaione-upstream-mt8390-spl-v1-0-1256b6dfda3f@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.denx.de
 Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -116,49 +115,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Genio 700 boot chain uses an external DDR loader to initialize DRAM
-before entering U-Boot SPL. Add the SPL devicetree and configuration
-needed to initialize the debug UART, watchdog, pinctrl, and eMMC, then
-load a conventional FIT from the bootloaders GPT partition.
+The Genio 700 boot flow enters U-Boot SPL after an external DDR loader
+has initialized DRAM. SPL then needs the debug UART and eMMC controller,
+together with their clock, syscon, pinctrl and watchdog providers, to
+load the firmware FIT.
 
-Add a binman description that generates the two images consumed by the
-MediaTek flashing flow:
-
-  mtk-boot.bin
-    MediaTek BootROM wrapper containing the external DDR loader and SPL
-
-  bootloaders.img
-    FIT containing BL31, OP-TEE, U-Boot proper, and its control DT
-
-The DDR loader, BL31, and OP-TEE remain external build inputs. Document the
-complete build and flashing procedure.
-
-Tested on a Genio 700 EVK using a full genio-flash cycle and a cold
-boot. SPL loaded the FIT from eMMC and passed OP-TEE as BL32 and U-Boot
-proper as BL33 to BL31. Linux 6.6.37 reached the RITY login prompt.
-
+Signed-off-by: Julien Masson <jmasson@baylibre.com>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Carlo Caione (4):
-      arm: dts: mediatek: prepare Genio 700 devices for SPL
-      configs: mt8390: enable eMMC FIT boot from SPL
-      arm: mediatek: mt8390: build boot images with binman
-      doc: board: mediatek: document Genio 700 SPL boot
+ arch/arm/dts/mt8188-u-boot.dtsi               | 40 ++++++++++++++++++
+ arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi | 58 +++++++++++++++++++++++++++
+ board/mediatek/MAINTAINERS                    |  2 +
+ 3 files changed, 100 insertions(+)
 
- MAINTAINERS                                   |   1 +
- arch/arm/dts/mt8188-u-boot.dtsi               |  40 ++++++
- arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi | 178 ++++++++++++++++++++++++++
- arch/arm/mach-mediatek/Kconfig                |   1 +
- board/mediatek/MAINTAINERS                    |   3 +
- configs/mt8390_genio_700_evk_defconfig        |  28 ++++
- doc/board/mediatek/index.rst                  |   1 +
- doc/board/mediatek/mt8390-genio-700-evk.rst   | 168 ++++++++++++++++++++++++
- 8 files changed, 420 insertions(+)
----
-base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
-change-id: 20260717-ccaione-upstream-mt8390-spl-7f64ca12dfbd
+diff --git a/arch/arm/dts/mt8188-u-boot.dtsi b/arch/arm/dts/mt8188-u-boot.dtsi
+index 6d1b2ab82da..131377d9a97 100644
+--- a/arch/arm/dts/mt8188-u-boot.dtsi
++++ b/arch/arm/dts/mt8188-u-boot.dtsi
+@@ -8,3 +8,43 @@
+ 	compatible = "mediatek,mt8188-tphy", "mediatek,generic-tphy-v3",
+ 		     "mediatek,generic-tphy-v2";
+ };
++
++&clk26m {
++	bootph-pre-ram;
++};
++
++&gic {
++	bootph-pre-ram;
++};
++
++&topckgen {
++	bootph-pre-ram;
++};
++
++&infracfg_ao {
++	bootph-pre-ram;
++};
++
++&pio {
++	bootph-pre-ram;
++};
++
++&watchdog {
++	bootph-pre-ram;
++};
++
++&apmixedsys {
++	bootph-pre-ram;
++};
++
++&uart0 {
++	bootph-pre-ram;
++};
++
++&pericfg_ao {
++	bootph-pre-ram;
++};
++
++&mmc0 {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+new file mode 100644
+index 00000000000..ace9944ec41
+--- /dev/null
++++ b/arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+@@ -0,0 +1,58 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (c) 2024, 2026 Baylibre SAS.
++ * Author: Julien Masson <jmasson@baylibre.com>
++ * Author: Carlo Caione <ccaione@baylibre.com>
++ */
++
++#include "mt8188-u-boot.dtsi"
++
++/ {
++	memory@40000000 {
++		bootph-pre-ram;
++	};
++};
++
++&mmc0_default_pins {
++	bootph-pre-ram;
++
++	pins-clk {
++		bootph-pre-ram;
++	};
++
++	pins-cmd-dat {
++		bootph-pre-ram;
++	};
++
++	pins-rst {
++		bootph-pre-ram;
++	};
++};
++
++&mmc0_uhs_pins {
++	bootph-pre-ram;
++
++	pins-clk {
++		bootph-pre-ram;
++	};
++
++	pins-cmd-dat {
++		bootph-pre-ram;
++	};
++
++	pins-ds {
++		bootph-pre-ram;
++	};
++
++	pins-rst {
++		bootph-pre-ram;
++	};
++};
++
++&uart0_pins {
++	bootph-pre-ram;
++
++	pins {
++		bootph-pre-ram;
++	};
++};
+diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+index 37ca35b4dd4..efd38d52338 100644
+--- a/board/mediatek/MAINTAINERS
++++ b/board/mediatek/MAINTAINERS
+@@ -21,6 +21,8 @@ MT8188/MT8370/MT8390
+ M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+ M:	Julien Stephan <jstephan@baylibre.com>
+ S:	Maintained
++F:	arch/arm/dts/mt8188-u-boot.dtsi
++F:	arch/arm/dts/mt8390-genio-700-evk-u-boot.dtsi
+ F:	configs/mt8188.config
+ F:	configs/mt8370_genio_510_evk_defconfig
+ F:	configs/mt8390_genio_700_evk_defconfig
 
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.55.0
 
