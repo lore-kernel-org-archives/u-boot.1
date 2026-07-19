@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979FDC44512
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8862EC4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2876784AC2;
+	by phobos.denx.de (Postfix) with ESMTP id 638B884AC8;
 	Sun, 19 Jul 2026 20:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="PPO6dPQd";
+	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="RZhbuVOa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE72F84A60; Sun, 19 Jul 2026 20:04:14 +0200 (CEST)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
+ id 3A03D84A5D; Sun, 19 Jul 2026 20:04:16 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A372284A4B
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 122BF8494B
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=asrinivasan@tenstorrent.com
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-6675db463b9so4855504d50.3
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:12 -0700 (PDT)
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-664b05d408bso5068318d50.1
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1784484251; x=1785089051; darn=lists.denx.de;
+ d=tenstorrent.com; s=google; t=1784484253; x=1785089053; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Xhxw8QWgTYAbmJzwrvYD7eUf/+87Wm+ysZHK04wr8wY=;
- b=PPO6dPQdvim/I4Md8n5rlfyIz6t2P5QDn+LXVZjSXNLAoOyczHnFOAFlosDrtGRo2c
- xx1YCGymfVdk3pqFdbqs8Fle+KsuvpGZRYNfxeP00HpQ6PF+jBXSatVh2gX9rjNDKNFi
- MV1KIppoO+5JqOVe39dFcetUu06oRAW+iu0+qDbP5JiaaiwljV0idlhjCHtrLX3gAwsn
- Za6ddnk3NO+YCtGkPA+j/DiF555DVvHhUTfxnqIsDgHZYLktOWG5vjUxNr6MIuv/qCj4
- ve+bhRWRyA8rjtQ6JKIt5Hx6VphBOaKP0g0oeF3+vApjoJGogd+XbCSLEgMIfLjIHvW0
- f3Cw==
+ bh=5jS28xxpTquQxiwMOs64s0zNF47bl4pH+0npvEUF6VQ=;
+ b=RZhbuVOaGDW85OqmQ9pvm/vjoZsJ8kLG7nTJ+8xIMppe5BiyytQMm6tP3YRIw1+inz
+ OzQa3rhcujZiMLOU+mieZrbgTqS2ntyvFuWDoNaPQTwosMnxso2GtGEWg0kpJLC7dUSS
+ vt4xm0isRWOKyzjQSpEocONQeqvoq4Ahsx7lIkd6LSJueeLYsCbc6MS22552WRKIY6UT
+ +3O1R7nF40yl86EJsN8bfIQconcuVw77VT/fc+rBjxp60zD0o0PSFQnZ7CQuOxmgR5Li
+ hBqO3JOS3ICBNvjD6daEneijh3mPPTz0r2C9m3mU2ZQYWcjDjkQJ0RGay/dAwlG+BXEf
+ sZzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784484251; x=1785089051;
+ d=1e100.net; s=20251104; t=1784484253; x=1785089053;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Xhxw8QWgTYAbmJzwrvYD7eUf/+87Wm+ysZHK04wr8wY=;
- b=OtU7TwVFeHksBMjXMba6ON2HvnhrDt0Syjxi6R6GR6X8X6FYatJPTvqIXWyN7f9ToQ
- RYqGSiJ7MUGfedXBFt/AaLiZfl+ZArc96lzJfgfjaMZXHAZq8qSiaMHtSVrkeZ16u/C4
- nHvmLO6UbYPpvrZAGj1EhQu6KmNlmAxsCknYVl2r9WDH31m8fWDdbC7o3smhjz1lM3sY
- DiBjaC+0IGOoewm3aN+K34oi+y9M8bsdTwXtaMdZ4KtXZ9YiWm9xIm0ZeH8kVTu0dSLm
- BO25rA75sdVHnT8o9xP7rN3km6A67VwCzq4yQ6lo8xyUgtk7aFfCssDUooFsaM7t4Ja6
- 5BVQ==
-X-Gm-Message-State: AOJu0Yx4+84MOM9UVy2VUkdoOEWYZi+Em4FKBZagsyqRGvg8UkkOheyW
- o39XRqdxhvzLH9chr0Iw512UyJTe+ErRdY1g3gsPM1cFH7VHpDzbfY4rQx0PqKu6GJA=
-X-Gm-Gg: AfdE7cm1b72B9QQ41bm8hAPWVOL4DilHdnAisEbB0wbxQuhT1lPKBVgjd95XUwgK5A3
- kC7CkKTk2fQJnf2l6k6X4nTnqsh9GLiQeh82zc4YVBWt1v0ac7r9vqQGo2gTROdgTFO0m0QcRk6
- n4XSP9mIfIWMijXkuMfhSBGwU0Rth0iRn5OH4GiMA4/nbgUAjIosrBAzrvfByPzrQJ/M7x/aV0l
- Nik3/w8fmv7zDTLQlenyhQwgNrCIQxB1rCbrybJdspDPWcI4FqraMrKGP7euJeQLa9aNZorObA6
- DgHtJBMee96ImZb7UIZ2rKgVs+JbDol39OuHsaIvtYtYVTlAdKA7rOreJtizY1ys2Wpdm2Y2Uzn
- XtCeO/rkgf9AQi+0hSHHTp+u9pwYClTVRcvZ9AZXRkxErLjjsrvSf1J4q0aXFEpT0WEuQRPP2tf
- 44ipTTv4bu34Ea1TD8LWlKwGyw2VFU7IsoRBETI7LqDZM72QVL672EQw==
-X-Received: by 2002:a05:690e:1c1c:b0:667:b57b:868a with SMTP id
- 956f58d0204a3-6683bbcc46dmr3272395d50.6.1784484251394; 
- Sun, 19 Jul 2026 11:04:11 -0700 (PDT)
+ bh=5jS28xxpTquQxiwMOs64s0zNF47bl4pH+0npvEUF6VQ=;
+ b=Yl4/o88RbpLRSx+65s7bTzpQ7risyW/bvi804f+QvX9swmiyQ8zJ0LLPWUqJ0uyjG4
+ 6HIqiF6yvgi1DklkTPG8E850SgHSZmHxLkQgAzT3aOgaIBo8gP3y/PP/0ZP44P7y+xW0
+ BT4PjX/1kYMfEGccn3LTy4zRA02H4g0CY3d3btUNAVrTiJSONDGizFWbmKZnl9M9UlKq
+ Z+gZRrNmeC56DhQq/SYkUAysJG65tDdzv0n9qRQga5Hh2Xj0j8OG2uFiStGdr/rzTnWL
+ tFaJ06f0tCkQagZTQldZta6ZQoD1bR5LSbVl8mUvyAjLzQqNWyWRqOZrrNE0ibHUCL5D
+ FZhw==
+X-Gm-Message-State: AOJu0YxxKfl5bbqFXieQz8KC1an6lth4/SuXgV6uVEdIJMPzqS9kCdkz
+ KoVg/2Cme0XXI5igN0Pmq6j1oSq4F2KIXHZBxlzOBjoDroNE+GuP79PkzWu1p47zfsk=
+X-Gm-Gg: AfdE7cma1jFD1UQuSYllg6H5Orjj9FgJ9SGR/hu0hi0qWWpjTHci3ssd5zuWdociOpn
+ 0yYfbfULv3cXFrRTbjNUSZrCPsexry0kMa8K/zskHrEYzZLKAGp9JvyCsIyVzmJ1Dz/yS3+1j1d
+ cs7FOj6gnLHKiKeCyt8moWnZV5Y0FI7fUXAFgVFYprB3ZZG7T/Xjl64gMSgnpSitdBL3QN6qdoj
+ X8DgOxOR7U/DOQol4z1UKBStWmhXR3ygeumShaf5slTDdUNWR2kzDfxHBTk55aKZMUnfAEfsRxd
+ 9Q+8m2Qba6Kh1MI/5N3hHybLKKJOQ6UHimYGj3b/rf+B69MiwYMij32z7xuYSBzSkfMkCSmtwrP
+ V7F76v10+jZOLt3lYi/n8qFvT3no/SjeBJd8JKLQYogjZp5eUjd5I0WVQQuamgAfq351WjgmYp/
+ O41Id7+ZX7Y7UF/8zxtILdTVAtGEY2Oz/VZoJTwJqrIX/a5vADhEFUupOlq801mivO
+X-Received: by 2002:a53:accb:0:20b0:668:110f:8c10 with SMTP id
+ 956f58d0204a3-6683bde88e3mr2440485d50.83.1784484252744; 
+ Sun, 19 Jul 2026 11:04:12 -0700 (PDT)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:423:c42:416:fc31])
  by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.10
+ 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 11:04:11 -0700 (PDT)
+ Sun, 19 Jul 2026 11:04:12 -0700 (PDT)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Sun, 19 Jul 2026 13:03:35 -0500
-Subject: [PATCH 4/8] bios_emulator: support 16-bit reads on VGA port
+Date: Sun, 19 Jul 2026 13:03:36 -0500
+Subject: [PATCH 5/8] bios_emulator: extend VGA I/O ports to include ports
+ 0x3B4-0x3DA
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260719-aspeed_vbios_fixes-v1-4-c94026f28250@oss.tenstorrent.com>
+Message-Id: <20260719-aspeed_vbios_fixes-v1-5-c94026f28250@oss.tenstorrent.com>
 References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 In-Reply-To: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -116,34 +117,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BE_inw currently doesn't handle 16 bit reads on VGA ports and falls back
-to LOG_inpw, which doesn't do anything on non x86 architectures that
-don't support I/O ports. Implement this 16 bit read as 2 8 bit reads
-(similar to how BE_outw implements 16 bit writes).
+The IS_VGA_PORT macro currently doesn't cover the 0x3B4, 0x3B5 and 0x3BA
+I/O ports. Reads/writes to this currently fall through to LOG_inpb/outb
+which are unimplemented on non x86 architectures (which don't support
+I/O ports).
 
-The Aspeed AST2600's VBIOS has these 16 bit read instructions in it, so
-this is needed to emulate that.
+Add these ports to the IS_VGA_PORT macro, and implement reads/writes to
+these ports. 0x3B4 and 0x3B5 are mirrors of 0x3D4 and 0x3D5 that are
+used in monochrome mode (bit 0 of 0x3C2 is not set). Implement these
+with the same logic and env state as 0x3D4/0x3D5, but with the bit check
+condition for 0x3C2 flipped. 0x3BA is a mirror of 0x3DA, so the
+implementation for this falls back to the same logic as 0x3DA.
+
+The Aspeed AST2600's VBIOS uses these I/O ports, and these changes are
+needed for it's VBIOS to run.
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- drivers/bios_emulator/besys.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/bios_emulator/besys.c | 30 +++++++++++++++++++++++++++++-
+ 1 file changed, 29 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
-index e02c9fc636c..1b0c29794e6 100644
+index 1b0c29794e6..7365e86a9e7 100644
 --- a/drivers/bios_emulator/besys.c
 +++ b/drivers/bios_emulator/besys.c
-@@ -612,7 +612,9 @@ u16 X86API BE_inw(X86EMU_pioAddr port)
- 	u16 val = 0;
+@@ -249,7 +249,7 @@ void X86API BE_wrl(u32 addr, u32 val)
+ #define IS_TIMER_PORT(port) (0x40 <= port && port <= 0x43)
+ #define IS_CMOS_PORT(port)  (0x70 <= port && port <= 0x71)
+ /*#define IS_VGA_PORT(port)   (_BE_env.emulateVGA && 0x3C0 <= port && port <= 0x3DA)*/
+-#define IS_VGA_PORT(port)   (0x3C0 <= port && port <= 0x3DA)
++#define IS_VGA_PORT(port)   (0x3B4 <= port && port <= 0x3DA)
+ #define IS_PCI_PORT(port)   (0xCF8 <= port && port <= 0xCFF)
+ #define IS_SPKR_PORT(port)  (port == 0x61)
  
- #if !defined(CONFIG_X86EMU_RAW_IO)
--	if (IS_PCI_PORT(port))
-+	if (IS_VGA_PORT(port))
-+		val = VGA_inpb(port) | ((u16)VGA_inpb(port + 1) << 8);
-+	else if (IS_PCI_PORT(port))
- 		val = PCI_inp(port, REG_READ_WORD);
- 	else if (port < 0x100) {
- 		DB(printf("WARN: Maybe INVALID inw.%04X -> %04X\n", (u16) port, val);)
+@@ -270,6 +270,18 @@ static u8 VGA_inpb (const int port)
+ 
+ 	debug_io("vga_inb.%04X -> ", (u16) port);
+ 	switch (port) {
++	/*
++	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
++	 * monochrome mode (i.e bit 0 of 3C2 is not set)
++	 */
++	case 0x3B4:
++		if (!(_BE_env.emu3C2 & 0x1))
++			return _BE_env.emu3D4;
++		break;
++	case 0x3B5:
++		if (!(_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
++			return _BE_env.emu3D5[_BE_env.emu3D4];
++		break;
+ 	case 0x3C0:
+ 		/* 3C0 has funky characteristics because it can act as either
+ 		   a data register or index register depending on the state
+@@ -321,6 +333,10 @@ static u8 VGA_inpb (const int port)
+ 		if ((_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
+ 			return _BE_env.emu3D5[_BE_env.emu3D4];
+ 		break;
++	/*
++	 * 3BA is a mirror of 3DA
++	 */
++	case 0x3BA:
+ 	case 0x3DA:
+ 		_BE_env.flipFlop3C0 = 0;
+ 		val = _BE_env.emu3DA;
+@@ -343,6 +359,18 @@ to use.
+ static void VGA_outpb (int port, u8 val)
+ {
+ 	switch (port) {
++	/*
++	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
++	 * monochrome mode (i.e bit 0 of 3C2 is not set)
++	 */
++	case 0x3B4:
++		if (!(_BE_env.emu3C2 & 0x1))
++			_BE_env.emu3D4 = val;
++		break;
++	case 0x3B5:
++		if (!(_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
++			_BE_env.emu3D5[_BE_env.emu3D4] = val;
++		break;
+ 	case 0x3C0:
+ 		/* 3C0 has funky characteristics because it can act as either
+ 		   a data register or index register depending on the state
 
 -- 
 2.43.0
