@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E930C44521
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 13:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26B82C4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 13:11:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A4A842FC;
+	by phobos.denx.de (Postfix) with ESMTP id AEF3C849BD;
 	Sun, 19 Jul 2026 15:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mhlllare";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HT5lGBa9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9205E846A4; Sun, 19 Jul 2026 12:43:42 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 15E608488B; Sun, 19 Jul 2026 14:18:06 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 751BD80517
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 12:43:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BF9E838D7
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 14:18:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grovesmx@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-8efbafa1bacso77414516d6.1
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 03:43:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=prasanth.padarthi10@gmail.com
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-c9eefcf9175so5184387a12.3
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 05:18:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784457819; x=1785062619; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=vkL5SN+N8jzOUJd3Va2M+hPaWdUNketPX2CT8l995VM=;
- b=mhlllarey5vlCzq7cz51/7/dP4ozQdlFSmwA6abRAj/5UqwVsxwPl3zQUA5qnE9Oh0
- 5vZMOWb/QN8mw6sTp6tmJ5/fUTuxYvGCp+8s3T4PJg20IpH38po1nhwgpPEjeKV3XS5X
- 77taOfMLvzpmfpYpXehaHo09h13ulyOt4hxHt89UZoye3OZeicelecGPa8AqTYP6OdUT
- 11azrejNjNs6qB2Pngt+q/Awnx9+atGnEe6ibh/RYZ+DkBfT7IIYq6FjTobO3rFaAFfI
- nHokWCIX8Y4Mu6nzcHD+7BG732WGw5HQvi52KuWpmLtNqdpxVIhM4ZQ6wYpVf+uuYKXw
- iiwg==
+ d=gmail.com; s=20251104; t=1784463482; x=1785068282; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=BMLJkil0IdgABfdSB+xdWXIGEEOsQFpukF8hCOSXdb4=;
+ b=HT5lGBa9giFnmXCQtui0IPYMgoDQO8pNdD3YEHSb4LzURw0NTzH3yl9wVrtnEjVNUj
+ zyFULK9NZ2nIWX+CpYfK6+FtmeMlDiQ0LJNSaBOE6zw/a93mQfObL0BOZr786sqWfg5W
+ MhMbUYONzmtDhEC5wXI1hxWJdGaR9NJdjQqYNLLTEWDB+Qt4CrG/EG0ttsMkA6jMA8ug
+ tDcrXuUJgPSxzfVPQnTVvIV/F3FI+nq6CNjPKJh2dBBiolLkr4AmdBkuJqcWEmY0AF8X
+ mxVx5yNmvwDPQ27mZGiXd0idxlO/MQ3DpLLXylZ6NhuowHOUwAg6mrSylu47bV7q5vhi
+ KbDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784457819; x=1785062619;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=vkL5SN+N8jzOUJd3Va2M+hPaWdUNketPX2CT8l995VM=;
- b=mqHZIBgJ20NmPc14qO/+qGNQA5YoQNlncULF21pwKoUOGInXjjeiFG7E1dz0NgH/7P
- RT/bLtLFRNCFohCQIx9SeUujbcTCsnqmLyfxsjxL4Y+TFSfHVXvW2zDoYytEOLn7syzu
- z0JSQd/fiNARevuwqq5CXoCcP6OwCr4PS3qRf6u4DV3Z5CZIy/giRnqd3bnscVBRDopB
- lDNskJzC/7eKYr8p+bwQNyh9/C/PySDkJBStaKZrsyZLEXq/5A/GJ6pctKd1GEfm4SwW
- QkJLPmaV1PLjpJDpFokzQol/9jsKJDnnYju3TuGnye4HaD+zd9ZRMW1MVdYwxz+3j1Ss
- KV/w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpbZQWlet4FqgMzZEy+txDOCbnrrRLjmkOMZtzqm4mZTr0ldy090pp1eTykD84xjsHnNrqIU/A=@lists.denx.de
-X-Gm-Message-State: AOJu0YyemvYC37TTBfoZ/76kPGxJrWYNpCxWVhmECF+nG14nrnPSfaQY
- dFHW3tb56x1dq0+6u4MSMabOSOOvNcBcXAWjrZ6mLNeSv2R7GSlJVs5p
-X-Gm-Gg: AfdE7ckAexwh9mIoDUloF84KchdCViUH1vXqvSqN8RAef9JzKQcxQ13jPYVfqgP2+Tg
- RnKQZ+6+YynjX9QPhbiwM0tacDbzMm5RdkQPyQn5AnLcANkix9gzt5xWgZhsnBMmFZdjOEGQ7lL
- lkSqC4nbH+L4m7xfprF0g/sZeIxSMf8BGbHH5L3yIeSu76T6HavWDJNVefNHCnI8KsPL2lWHMW5
- 0TjnAqJGlejPCym+BgoMSrT0osHUU7l+9iYIXD86kh3aspZLOaqWL4xjoyZ1U0HfO77AkbxtrRu
- LZ1jJ+/lZqpSLdqwyG1fX6db+qoRmd6h1tW+oLe1Ki/IkkOAPMe+SqA7TgC1tYx/g8xyj2bJtXi
- RDMg91Xg/M7Qk0Rb9lhh0bX75qUFArbeqllmpDo6CaG+yWulsgJntvWnCQRbRg9er02fz7qlTo9
- 949uz+5Om8OmKE7x0/UrBmikzN+tt4p8w732wV2SHCgsi/HNI0iCaih9J7fOh7vIjT
-X-Received: by 2002:a05:620a:3722:b0:92f:c78:559e with SMTP id
- af79cd13be357-930b3ee9343mr982381385a.35.1784457819194; 
- Sun, 19 Jul 2026 03:43:39 -0700 (PDT)
-Received: from pixel-lappy.pixel-brain.net ([153.66.209.226])
+ d=1e100.net; s=20251104; t=1784463482; x=1785068282;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=BMLJkil0IdgABfdSB+xdWXIGEEOsQFpukF8hCOSXdb4=;
+ b=VdyMBFJ0umov6Oe6EdVFtaiwI084PnGms6GQNBZ4TlLkmtG8Xyy/FQvo+RKWtB5a+j
+ uQqMpDqU3w5ErC+du5LUo3zY/wwNRdGRvQ6NpXpIonFJbTeJqdTWQqZsrS87TqoI3lvW
+ K1xJDGefDs9VVK6YeH6W23EKQJE0djXNsB00Mvqjv9DBXqg0+UMbeY799vRYTh/sMlTP
+ jARzMv/EKM7nim+T265Dm0HlI2zTH47xg6xQRSK7uiK/glIPxe+ABekqyi9vHBWw8r+G
+ rMwmh+8GN7IegzvXZQEYhZ+2gLF0HST5RyqmSk63DVK8QaRx3DJOag57g4vb6ae6xKZY
+ q/Jg==
+X-Gm-Message-State: AOJu0YzpcSdMdcYoa64UfgZXJHhxq8q1X5YA01AQ5s0F7jZv0Y/KMvj1
+ 75SCAPUPRdNTbcfXTgdklHMrkT+HiK7TDyvoEdzpVDY9ZLYmuEysyuTkNAv6HQ==
+X-Gm-Gg: AfdE7cnZu+4AMo+dtI3TMQ9oBXA36SUE11cEe2vKIER4m96utBZCVmvCaLQvcsu952m
+ t6tp3ovFLuw/4bpzI3vB/9uEr0D2J6pZ4mY4P0IS7w85H1xCpyKYdDivitYYrqC7pUnXly3DKGl
+ blNGviCthusLQT3DdIh/szvSKf5sGANhDr0kLR95i67xBcA6IYZ9P8ty6WvXtbYrwPcZSfVCZWo
+ lv+MSgHm6/px6qMR9/Y9x/t+Ab/1K0vaeJ2WweqqIuTWv051Cv+vb+9L750OJFDkSdOR0gDJUAN
+ bsWy6e1en3XC+rrbv1rBlTz5W4Xd6WW+OzH2im0z1yfVeNfuasZRcQ2EtU86QgA78+QSGfP04aY
+ sH8iGF2qkcr/74aPh8Pfm7NMokqV9MtFIaMcPKhEvA8rPvALlcW+0+ZZvMQJQVKimlhlFxWu3hS
+ oZzDjRumfytnxYkzyx3wKe
+X-Received: by 2002:a05:6a20:ae2f:b0:3c0:9c1b:d0b3 with SMTP id
+ adf61e73a8af0-3c3ad99f4e5mr9372365637.62.1784463481740; 
+ Sun, 19 Jul 2026 05:18:01 -0700 (PDT)
+Received: from debian.prasanth ([103.183.205.149])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90778728a50sm65277686d6.47.2026.07.19.03.43.36
+ 5a478bee46e88-3142a20c158sm28364130eec.29.2026.07.19.05.17.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 03:43:38 -0700 (PDT)
-From: Mike Groves <grovesmx@gmail.com>
-To: pbrobinson@gmail.com
-Cc: Oleksii_Moisieiev@epam.com, andrew.goodbody@linaro.org,
- ansuelsmth@gmail.com, chenjh@rock-chips.com, duwe@lst.de,
- gabriel.fernandez@foss.st.com, heiko@sntech.de,
- ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
- joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
- marek.vasut+renesas@mailbox.org, mbrugger@suse.com, me@per1cycle.org,
- patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com,
- paul.barker.ct@bp.renesas.com, quentin.schulz@cherry.de,
- rfried.dev@gmail.com, sairon@sairon.cz, sjg@chromium.org,
- trini@konsulko.com, u-boot@lists.denx.de, volodymyr_babchuk@epam.com,
- ycliang@andestech.com, zhangqing@rock-chips.com
-Subject: Re: [RESEND PATCH 0/4] Improve RaspBerry Pi 5 support part1: Fixes
-Date: Sun, 19 Jul 2026 06:43:34 -0400
-Message-ID: <20260719104335.211638-1-grovesmx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <CALeDE9Pwp9j4Nh-YS-ncx+HfXz4oVfabkd6-eDgQwS6JOO4ZxA@mail.gmail.com>
-References: <CALeDE9Pwp9j4Nh-YS-ncx+HfXz4oVfabkd6-eDgQwS6JOO4ZxA@mail.gmail.com>
+ Sun, 19 Jul 2026 05:18:01 -0700 (PDT)
+From: Prasanth Kumar Padarthi <prasanth.padarthi10@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com,
+ BMC-SW@aspeedtech.com, joel@jms.id.au,
+ Prasanth Kumar Padarthi <prasanth.padarthi10@gmail.com>
+Subject: [RFC PATCH v1 0/1] arm: aspeed: Add ASRock Rack B650D4U BMC support
+Date: Sun, 19 Jul 2026 17:47:51 +0530
+Message-ID: <20260719121752.88393-1-prasanth.padarthi10@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 19 Jul 2026 15:11:38 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -112,14 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter, Torsten, all,
+Add initial U-Boot support for the ASRock Rack B650D4U BMC,
+which is based on the ASPEED AST2600.
 
-I have not been part of this thread so far — some context: I have been running a forward-port of this same work (full set) in production for several weeks now, across four RPi 5 boards (revision e04171 / D0 stepping), as Kubernetes worker nodes booting from NVMe via a custom Talos installer overlay. This is what prompted me to start following this thread and look at contributing.
+The board description enables:
 
-The ask is understood, and tracks with what I ran into looking at this myself - happy to help with that cleanup if useful, deferring to Oleksii/Volodymyr/Torsten on attribution for anything I did not originally author.
+- 512 MiB BMC DRAM
+- UART5 debug console
+- AST2600 watchdog
+- 64 MiB Winbond W25Q512JV SPI NOR
+- MAC0 connected to a Realtek RTL8211F PHY using RGMII
+- MAC2 using RMII/NCSI
 
-The three-way split makes sense to me. One thing I want to make sure I understand correctly before anyone puts more work in: when you say RP1 support is now upstream, could you point me at exactly what's landed and where (kernel tree, specific commits/series)? I want to make sure part 3 gets built against whatever the actual current reference implementation is, rather than against the static BAR-configuration approach the original RFC used - my understanding was there was disagreement about that specific point, so if there is now a settled upstream answer I want to build on that correctly rather than repeat the same discussion.
+The environment is kept non-persistent to avoid modifying the vendor
+firmware environment.
 
-Once there is an agreed shape for this, I am glad to help test against real D0-stepping hardware - that's one gap I can concretely help close if not already tested. Happy to also help with the actual restructuring work if that's useful, or just stay out of the way if Torsten's already got it in hand - whichever is more helpful.
+Runtime validation was performed by loading main U-Boot into RAM from
+the vendor U-Boot using YMODEM. The following were verified:
 
-Mike
+- UART console input and output
+- board model detection
+- 512 MiB DRAM capacity and 440 MiB usable memory
+- SPI NOR detection
+- MAC0 link at 100 Mbps full duplex
+- bidirectional ARP and ICMP traffic
+
+SPL execution from reset and cold DRAM initialization have not yet been
+validated. MAC2 is described and the NCSI support is built, but complete
+end-to-end NCSI traffic remains to be validated. Therefore this series
+is being submitted as an RFC.
+
+The build completes with the existing AST2600 spi_bus_bridge node-name
+warning from ast2600.dtsi.
+
+Prasanth Kumar Padarthi (1):
+  arm: aspeed: Add ASRock Rack B650D4U BMC support
+
+ MAINTAINERS                      |   6 ++
+ arch/arm/dts/ast2600-b650d4u.dts |  74 ++++++++++++++++++++
+ configs/b650d4u_defconfig        | 115 +++++++++++++++++++++++++++++++
+ 3 files changed, 195 insertions(+)
+ create mode 100644 arch/arm/dts/ast2600-b650d4u.dts
+ create mode 100644 configs/b650d4u_defconfig
+
+-- 
+2.47.3
+
