@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C9CC44512
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 182C3C44512
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:13:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E50584A60;
+	by phobos.denx.de (Postfix) with ESMTP id 567C084A73;
 	Sun, 19 Jul 2026 20:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="O8qy2Ssk";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rw+pJ2KF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="F/nyHKo9";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="i5h4UtkG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA5AF84A29; Sun, 19 Jul 2026 20:13:14 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 705EB84A5D; Sun, 19 Jul 2026 20:13:16 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7800884A4C
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:13:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84B5C84A5B
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4h3BbD1y9Vz8tyV;
- Sun, 19 Jul 2026 20:13:12 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4h3BbG175fz8tyk;
+ Sun, 19 Jul 2026 20:13:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1784484794;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5LcqYlrpth7jd9qdXFnWMirp1tw9bNXQf89UY9tst6Y=;
+ b=F/nyHKo9Q87uc4eWRX+ZFk+z/V5o2xo7/BOwQbTD+PXuhooilk5Vv9QY4eN6nX1/Qti26Y
+ 2NHYwGQ36nQ/Ai+1ZelFiNdw+xTw8gz3acgq2KqqtHdlA6pGYepxVV5MNu7jcEjUOJ0kpL
+ IO9z8io4Yx9e8vNTXg7aWNOIVdh1Ah2Uwds5OiP6htEUOYW2+mK2OglU4/xKO0UJW/M1ZA
+ AmGZ4p3SE+IE28HZEcOsGU3qWk8vQTGW2mFCrbeg2GhjfhmWW0862TtNjXkdaP1h0AEDBi
+ yHq0AY36uiumrbpW9cBIW3Kcsq+ao0UoARAi1uzplxjfy19/J3tsoRfHb29c2A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1784484792;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j84fbVmbxU+v7iCd/HR66BesVHJFplgomcFUiorWIdY=;
- b=O8qy2SskCdIzxIvd7vFtsA6WCP9+d+50pzK/XL40PiO9DZdauhNwyusS2f5kKwuASvc67R
- DOP1DwPIRh2bQiCVCmfyj62KULaA7ro2Hf2ivgevx6wEQBRK5PHb8FJGp06KxexCl5KKOA
- /VE5+Ee9hioLAojbriBm+4skCa/dP6hAV94W5C7Z4zVXfC2+YTmoQR25X9iutNddJbz+rI
- z+A1qscMIahgTcylr9m4Dc78CKmH88rEAJaXtrdpAb/7dmX8HQq+bEI2QD1wqDM6znZSGj
- /Y9XMz4K8op4xRMfzqti81mCBB/btvdLywuOGhfRsNuttewpSV9qt53qTH8LZQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=rw+pJ2KF;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784484791;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=j84fbVmbxU+v7iCd/HR66BesVHJFplgomcFUiorWIdY=;
- b=rw+pJ2KFqjTr5CpZi2v0fBk17QvBzBlJ5xuSY7knr/OK4DCRpicb5m0rrDvZO/WX5Btr7P
- BBZsVX/Z84ElpzJvmVZouXNwqx0sPvc08Uqzb0IB99oM+VmZFvJFNj3btRMxSnti6lQWgi
- 6fWhOMajUGJowO+HuUyoGqd0hF+QxQXm4x0shtxITg1lnMXJde2/xkyxnXbf66WbpoqCVW
- XI1QJP/AIjIpD37d6Tw/Mq2kT6o/W3a4x9twTMLXprmrWOd0OE8RHd8dAjz7ewlpur9fiz
- G+ZExgIsrrsoIGh9sK87oGJusZN1i9bUHNYKEz7E/Xc3i58nxUsFtDyTd/Pc0w==
+ bh=5LcqYlrpth7jd9qdXFnWMirp1tw9bNXQf89UY9tst6Y=;
+ b=i5h4UtkGIHr/AmGI6HexzLLRBGJaAByW7HqICmHSS+Gywr9wOD9CntajGWa1Q0SciXiMSO
+ vqrlFlAbbmcB9GdCauAgM831doO8YNGdZBxNmV046PXx+q/RhbB9AHn7aJLnwV2cTBs6et
+ GtjM4GHJfD+iOnDtCinQxRJpN3px/RQDxFk9gQhiQ14mk3jEPn+ip19Bmpu846fzsP5Cjr
+ 0ekj0k/im8CJ7S/1lmRtKGNkT/qE/gBzRsVsFIkd425Y97FoojHDHdp2Iu3HqX0eYlM77O
+ XqnX7oHQBgJwbWHLLqSrpqUOn0M56R/tRTrNrw9DHcf6XVcKqGi9APgLXaYyEw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Lukasz Majewski <lukma@nabladev.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/4] pci: pcie-rcar-gen4: Handle always on reference clock
-Date: Sun, 19 Jul 2026 20:11:50 +0200
-Message-ID: <20260719181303.245004-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/4] arm64: renesas: r8a779g3: Enable PCIe clock generator and
+ I2C mux drivers on Retronix R-Car V4H Sparrow Hawk board
+Date: Sun, 19 Jul 2026 20:11:51 +0200
+Message-ID: <20260719181303.245004-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260719181303.245004-1-marek.vasut+renesas@mailbox.org>
 References: <20260719181303.245004-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fb52d615970e85ada71
-X-MBO-RS-META: 9k441wpo9auficqn17kt81ze9o3mz3ry
-X-Rspamd-Queue-Id: 4h3BbD1y9Vz8tyV
+X-MBO-RS-ID: c8756162176816ed5b0
+X-MBO-RS-META: 4hs96mmg3ohwfuhhkce5gqjbny7rzhef
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,12 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The clock controller driver for the device which supplies reference
-clock to the PCIe core and bus may not implement .enable / .disable
-callbacks in case the clock supplied by the device are always on,
-in which case the clk_prepare_enable() call returns -ENOSYS. This
-is the case on e.g. 9FGV0441. Handle the -ENOSYS as a valid return
-value and proceed with probing.
+Enable Renesas 9-series PCIe clock generator driver to operate the
+Renesas 9FGV0441 PCIe clock generator which supplies PCIe busses on
+this device with 100 MHz clock. Enable PCA954x I2C mux driver to
+access the PCIe clock generator which is attached to one of the
+muxed I2C busses.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -111,22 +103,25 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/pci/pci-rcar-gen4.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/r8a779g3_sparrowhawk_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/pci/pci-rcar-gen4.c b/drivers/pci/pci-rcar-gen4.c
-index e165271f58c..8c5c8095c73 100644
---- a/drivers/pci/pci-rcar-gen4.c
-+++ b/drivers/pci/pci-rcar-gen4.c
-@@ -451,7 +451,7 @@ static int rcar_gen4_pcie_probe(struct udevice *dev)
- 		return PTR_ERR(rcar->ref_clk);
- 
- 	ret = clk_prepare_enable(rcar->ref_clk);
--	if (ret)
-+	if (ret && ret != -ENOSYS)
- 		return ret;
- 
- 	ret = gpio_request_by_name(dev, "reset-gpios", 0, &rcar->pe_rst,
+diff --git a/configs/r8a779g3_sparrowhawk_defconfig b/configs/r8a779g3_sparrowhawk_defconfig
+index 8bbe9721d7b..e39d14df806 100644
+--- a/configs/r8a779g3_sparrowhawk_defconfig
++++ b/configs/r8a779g3_sparrowhawk_defconfig
+@@ -25,8 +25,11 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_REMOTEPROC_RENESAS_APMU=y
+ CONFIG_BITBANGMII=y
++CONFIG_CLK_RS9_PCIE=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NVME_PCI=y
+ CONFIG_PCI=y
 -- 
 2.53.0
 
