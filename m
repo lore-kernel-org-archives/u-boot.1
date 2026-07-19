@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C3AEC4450A
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 16:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1290C4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 17:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67195848BA;
-	Sun, 19 Jul 2026 18:56:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74C0B842FC;
+	Sun, 19 Jul 2026 19:01:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="anhGN4Zf";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="PvYE2xcc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB77684A0B; Sun, 19 Jul 2026 18:56:14 +0200 (CEST)
+ id A1F7B842FC; Sun, 19 Jul 2026 19:01:49 +0200 (CEST)
 Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
  [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AEEC838D7
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 18:56:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56FBE838D7
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 19:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1784480167; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1784480500; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=heGk+cioKSaYmvllXgFYaBDzhyS9OrfuSz8GpyLES1vHGF13OzumW+4cwNlyHoB5g7e5hSFzwzC3ocy/qvyVOegEz0dQ/qA8sqqP47q2OgoEOCU2WmrX208s2sMdO0aL1GzFC6YwuLsPE34dKwte7uw6JzuTZNH5dHHA4reUmlE=
+ b=CRtxJHMGBFIAAmvIYmxMCY84SMiRIufk8YW47ppiybfUItpbxtke7Hkm6C2SDQEfum9A2yh0Gqem3SfYF1MDqrsXMATlRcpvIO38dKqDKTQkvPe9f5jIUijSRTcupFrC+wqDlb5HFIvCZbfL0G5v/7uPinuxppeYPlpeVd//ays=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1784480167;
+ s=zohoarc; t=1784480500;
  h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=OqdwIHNpo9Rd9EF1IyA+TKpLiO0LTeCbjtRc8mWdQLw=; 
- b=bpESrM8hFaaRFD6zLA5+qo2QIVE53XMJ30f+PDpWQbyK+FMoNjkTpYgl+8v72foYxmC9iETKjk/ZBSM7ILN36JhjaHNfChxKnGNYjLuvJYUHtxQe/qOQqaUUX1idLtSxKH+1CjZX88Rp5f2PedNjck+5TuYvSE8BC/rIgHHLGZo=
+ bh=Z3ruDrGIc3DGbvMVqboIrwkZlXiPTmmmpr4AkwzTm64=; 
+ b=f7/ambQ0OWWj/Z2Fp28ADgst45hsTBEfyScsptZ2jjrz23tqZq1J1WGXJ1pTsYNLhUzT2ZPX1/ag2WbasoJsX7lXANr6Q0CyM2zk/fcF5LMrtJWJ2RfHcYTCC/a9ku0rSKAjTmTFDP/VBWUX8ZRAgBNP10E09omGRhD1QULWQUA=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784480167; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784480500; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=OqdwIHNpo9Rd9EF1IyA+TKpLiO0LTeCbjtRc8mWdQLw=;
- b=anhGN4Zfbn4NQ0gu5Ueljks6emxh8zp8sIoPmzuOjh5zT5i4WxbXY7yDkTiMsO8g
- LTc1rNcx8lGh0yyA/E/tkZcKTbTVepTH8OMSAxBt5gQUWtDYijVhgItxpPXXciIX9Mr
- F2HNX+g082AEOEc7+PVwKo/mgDjNlJTShrOt2+d0=
-Received: by mx.zohomail.com with SMTPS id 1784480164555489.23344660941746;
- Sun, 19 Jul 2026 09:56:04 -0700 (PDT)
-Date: Sun, 19 Jul 2026 16:55:51 +0000
+ bh=Z3ruDrGIc3DGbvMVqboIrwkZlXiPTmmmpr4AkwzTm64=;
+ b=PvYE2xccekfQmlYdUpb6NJCMJIMapJGzMgKpINyfqihFBAgV2emtAuftO7Zr6SXZ
+ 5ognkB5tRYrhIL8FaxwiG4D/bJFCXfLwsPsjSJUKTPpvTqrSuVZbqTGUKc/NYfNCru/
+ 5tj1sgaGxSjOcHgdKU7mTpTzwuoTQLPMDRHyCX2A=
+Received: by mx.zohomail.com with SMTPS id 1784480498530588.7915506450299;
+ Sun, 19 Jul 2026 10:01:38 -0700 (PDT)
+Date: Sun, 19 Jul 2026 17:01:25 +0000
 From: Yao Zi <me@ziyao.cc>
 To: Eric Chung <eric.chung@riscstar.com>, u-boot-spacemit@groups.io,
  u-boot@lists.denx.de
@@ -66,15 +66,15 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Guodong Xu <guodong.xu@riscstar.com>,
  Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
  Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH v4 01/10] spacemit: k1: select boot device via config
- registers
-Message-ID: <al0Bl_Uxd3SvfoJR@pie>
+Subject: Re: [PATCH v4 02/10] pinctrl: k1: add IO power domain configuration
+ support
+Message-ID: <al0C5dYG7SaWZHYo@pie>
 References: <20260707-m4-v4-0-dbd01185f911@riscstar.com>
- <20260707-m4-v4-1-dbd01185f911@riscstar.com>
+ <20260707-m4-v4-2-dbd01185f911@riscstar.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260707-m4-v4-1-dbd01185f911@riscstar.com>
+In-Reply-To: <20260707-m4-v4-2-dbd01185f911@riscstar.com>
 X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,83 +92,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 07, 2026 at 11:21:42PM +0800, Eric Chung wrote:
-> Add logic to determine the current boot device by reading the
-> SoC's configuration registers, rather than using a hardcoded
-> default.
+On Tue, Jul 07, 2026 at 11:21:43PM +0800, Eric Chung wrote:
+> Dual-voltage GPIO banks default to 3.3V, but when externally supplied
+> with 1.8V the internal logic must be explicitly reconfigured to match.
+> 
+> Add the ability to program IO power domain control registers through the
+> APBC block. These registers require unlocking the AIB Secure Access
+> Register (ASAR) before every read/write, since configuring a 1.8V domain
+> while 3.3V is externally supplied can cause back-powering and pin damage.
 > 
 > Signed-off-by: Eric Chung <eric.chung@riscstar.com>
 > 
 > ---
-> v2:
-> - Use FIELD_GET() to parse boot strap mode.
-> - Remove comments on hacking. Since the sequence between eMMC
->   and SD device is exchanged in the upstream DTS. So it isn't
->   a hacking any more.
+> v3:
+> - Add SYSCON dependency in Kconfig.
+> - Fix not sorted issue in the driver.
 > ---
->  board/spacemit/k1/spl.c | 69 ++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 68 insertions(+), 1 deletion(-)
-> 
-> diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-> index 0db362130e4..70579637b5e 100644
-> --- a/board/spacemit/k1/spl.c
-> +++ b/board/spacemit/k1/spl.c
+>  drivers/pinctrl/spacemit/Kconfig      |  2 +-
+>  drivers/pinctrl/spacemit/pinctrl-k1.c | 83 ++++++++++++++++++++++++++++++++++-
+>  2 files changed, 82 insertions(+), 3 deletions(-)
 
 ...
 
-> @@ -379,7 +402,51 @@ void board_init_f(ulong dummy)
+> diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+> index 3ebc397213b..95344f4ec72 100644
+> --- a/drivers/pinctrl/spacemit/pinctrl-k1.c
+> +++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+> @@ -12,6 +12,8 @@
+>  #include <linux/bitops.h>
+>  #include <linux/errno.h>
+>  #include <linux/io.h>
+> +#include <regmap.h>
+> +#include <syscon.h>
 >  
->  u32 spl_boot_device(void)
->  {
-> -	return BOOT_DEVICE_SPI;
-> +	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
-> +	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
-> +	u32 mode, sel, ret = 0;
+>  /*
+>   * +---------+----------+-----------+--------+--------+----------+--------+
+> @@ -34,8 +36,23 @@
+>  #define PAD_PULLUP		BIT(14)
+>  #define PAD_PULL_EN		BIT(15)
+>  
+> -#define PIN_POWER_STATE_1V8		1800
+> -#define PIN_POWER_STATE_3V3		3300
+> +#define IO_PWR_DOMAIN_OFFSET	0x800
 > +
-> +	mode = readl(boot_dev);
-> +	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
-> +		sel = FIELD_GET(BOOT_STRAP_MODE_MASK << BOOT_STRAP_MODE_OFFSET,
-> +				readl(boot_strap));
-> +		switch (sel) {
-> +		case BOOT_STRAP_MODE_EMMC:
-> +			mode = BOOT_MODE_EMMC;
-> +			break;
-> +		case BOOT_STRAP_MODE_NAND:
-> +			mode = BOOT_MODE_NAND;
-> +			break;
-> +		case BOOT_STRAP_MODE_SPI:
-> +			mode = BOOT_MODE_SPI;
-> +			break;
-> +		case BOOT_STRAP_MODE_SD:
-> +		default:
-> +			mode = BOOT_MODE_SD;
-> +			break;
-> +		}
-> +	}
-> +	switch (mode) {
-> +	case BOOT_MODE_EMMC:
-> +		ret = BOOT_DEVICE_MMC1;
-> +		break;
-> +	case BOOT_MODE_NAND:
-> +		ret = BOOT_DEVICE_NAND;
-> +		break;
-> +	case BOOT_MODE_SPI:
-> +		ret = BOOT_DEVICE_SPI;
-> +		break;
-> +	case BOOT_MODE_USB:
-> +		ret = BOOT_DEVICE_USB;
-> +		break;
-> +	case BOOT_MODE_SD:
-> +		ret = BOOT_DEVICE_MMC2;
-> +		break;
-> +	default:
-> +		ret = BOOT_DEVICE_MMC1;
-> +		break;
-> +	}
+> +#define IO_PWR_DOMAIN_GPIO2_Kx  0x0c
+> +#define IO_PWR_DOMAIN_GPIO3_K1  0x10
+> +#define IO_PWR_DOMAIN_MMC_Kx    0x1c
+> +#define IO_PWR_DOMAIN_QSPI_K1   0x20
+> +
+> +#define IO_PWR_DOMAIN_V18EN	BIT(2)
+> +
+> +#define APBC_ASFAR		0x50
+> +#define APBC_ASSAR		0x54
+> +
+> +#define APBC_ASFAR_AKEY		0xbaba
+> +#define APBC_ASSAR_AKEY		0xeb10
+> +
+> +#define PIN_POWER_STATE_1V8	1800
+> +#define PIN_POWER_STATE_3V3	3300
 
-Adding empty lines before and after this switch might make the code a
-little cleaner. Though being a little strange to me, checkpatch.pl
-doesn't complain about it, so I don't have a strong opinion for this.
+Space and TABs are both used to separate the identifiers with the
+values, please choose a unified style.
+
+With this fixed,
 
 Reviewed-by: Yao Zi <me@ziyao.cc>
 
