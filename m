@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29DBC44512
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8902FC44512
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AADEB84AA8;
+	by phobos.denx.de (Postfix) with ESMTP id E379D84AB5;
 	Sun, 19 Jul 2026 20:36:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="eaBdQHLh";
+	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="RxLmHrYw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3317A84A4B; Sun, 19 Jul 2026 20:04:12 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 50B7284A52; Sun, 19 Jul 2026 20:04:13 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B90E384A52
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30B3B8494B
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=asrinivasan@tenstorrent.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-81ec29f1d07so72566977b3.1
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:09 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-80c5cb9a888so80025727b3.3
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1784484248; x=1785089048; darn=lists.denx.de;
+ d=tenstorrent.com; s=google; t=1784484250; x=1785089050; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZXCBhGmZQB/xG5ArdQb8B7Qye6+garILwSkLoSV430k=;
- b=eaBdQHLhmEz3Jog1q/UV9DIEnuG98DKLVcxJ6/Xs2bzunIsbVwwr7qamX+JBMWPdG3
- zw7V+HXprXl3zNttOee2p1mCwCYcDabsK3cQ3/GyshFAh/cYD3QfSW1f07LIPXIsVWdz
- Qsp9CDRRLHO3PO5Bz+KybnR09UOlt7RxzM2f11lUcbX/wfmf+ZfTms7NHdaJI7N8Gxdg
- fipm1B90fwMrUotnu8S19pFi8s0osJLbdXjnDOArbAFh3EHNfzEQZxfZH6pCkE934sUL
- 40fetI1hjXzmu3MqEC4t2G9jeahXBF9YbBuiB7123k5UFqORh1kiFgA5gf3iUzviusNB
- uV8w==
+ bh=d4ADegBBN86KYaPAL5O2SQBuxFcj0wpERtGpku+4OqA=;
+ b=RxLmHrYwflKlwvPNCyD7B0WaIUKZoLvHXRNgyfgLEaZSHqU/cLa6jsTvSmoo9qXybt
+ YxJbZmISGEHw78G0wf4rCnNUlzEclnK2v2icd2Lh/1J6jD/t047YXQgo84BR4CkdISLv
+ zAUR6ucgKZ2FN8kba86xFMmVdEWQmCUJ74df/FdGD3/uZ5qAopXVO3pn/CxQ6EkBADml
+ araeCJA9/dorutNE35tJ+8008obCwB0NALgHJr0gTI6bAtzO1OXCbAH79d/ziaY3HzjN
+ 4SEm3gTda2Vfn8B6lAEaShAapQDAxbB/pBAkoxIGVk09QmxQtcYLfSqFxeu9KfCQprqs
+ 7uFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784484248; x=1785089048;
+ d=1e100.net; s=20251104; t=1784484250; x=1785089050;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ZXCBhGmZQB/xG5ArdQb8B7Qye6+garILwSkLoSV430k=;
- b=PePvYs1z84w2EvHjB+R4JRaUoe6fK0mLEfJvgmp1qktfDMnqoxKN0PERCUDzVroeAy
- cV2gbd7eGQdn9TxK7HgXEtdXy4gf9KoodyvkJGmNS4prJFOG/3rAhWiRsVJTwzy6OG8V
- W13YV41vGnWXbxe+Qzs4EbmRe/ZdcSiJda82XQlzKs/0osxMDcdDAPHBuO+OC6HuaAq2
- H5PvpanCI4EnvvaCUndVp/S+5hbxqaVUz23LaMHF3dYnerydRehKxVWvcJiNyj5IzdZV
- BBUvTlQ9TvKZzfFOemf1bfen/bGJ3MDnp14kwPoYcbV5WH5651pJLDDjr7+/S7f6IEHH
- aVkA==
-X-Gm-Message-State: AOJu0YwZLt2SSy8TKF4fmTA11pYwnjAmW0HeCoHLOkjVvaVGMp3pGVX9
- aOZ2R37OkZgoDP2xFwJXpamnMlRfVFokWd+AMyK93JRsII/4OeheKaIwalm7vBCt0hM=
-X-Gm-Gg: AfdE7clJFHMUgx0tS4G0vvP1XPVUuPZ/5m2Fl17HH7QNXgbNtw4KdqzSQGLGZ089gYB
- SiBLbB3i28DJy+lc/bbvUAj6EjoA5hn+xFexvcnMEY7NRcz9EQtCP0a/F+ZnLBwy8jYnnmMZ9Vo
- 2ZWUthZ76hn/QvIGDRvcOjJuyMXWbxPIInXec4jD5IriUFRSGCMynD9dBJNYxwkBPIl1gNT7PMQ
- Tr33GP+zgP1lCbqqaNQzIaJe+TIyKlR1P3jZC4eoNpsB5XyVRWlwoRpJMmv4p7/vSPe0aAgTwME
- uYZNNcNF1kHZPeD4PxOf4pU9ygnn0X5c10+AfK0kS8D7Pbfb+CbLl65XYRmn1wHxsKc116i1sVa
- BwhJOlzkwvcf9j+FXk3Wr4sGbTSIg2HDroTG2gdvqTdRaxhR2AHz9q/ev3FXRjR1UV1RoI2H8xA
- kLpNJ7nMLu9yJmb1z8J7fkZyFw1S1X4pLYfECtyloO6aYuNMQcc16VVGpY5y9l/U6KRnOL8uKum
- +w=
-X-Received: by 2002:a53:b84e:0:b0:667:8b95:31b3 with SMTP id
- 956f58d0204a3-6683bdfff02mr2224028d50.106.1784484248563; 
- Sun, 19 Jul 2026 11:04:08 -0700 (PDT)
+ bh=d4ADegBBN86KYaPAL5O2SQBuxFcj0wpERtGpku+4OqA=;
+ b=Kpvtv2EOcsasL/x9leNsMN9Kr0r96jG5BA60NJ17XHiQ/1UB9YhQ+kzZIOkPTo17Um
+ Yx99DWsR+VNHi5cvMkEEb6JLqo/b6nRAIfkdjjJ4jK6LEVRZnEvhme3u8SOVHxcrZ+Ky
+ 2timDFNXyVIuhXWqY1cv86cTNYrdhmomUbtKfkD5LsXTTyV6uz0DTg2UKjqGliFdevt9
+ zo5ASoVgMezUQI7EC03H3m5DqS7Y057ok85u+Z4Ame5JfZLP0OTw0IJR2PjM0au9AyuD
+ EYPJrKOVm6DptizuWZa0nHPtsXEONq7wQB/aIKovMbH6J+mqNyc7uiaxvYuKmRNZqOnD
+ drPw==
+X-Gm-Message-State: AOJu0YytxtZ5abIY3kED5/sJqC85fspcCP15jAxoCl5FYc0NAm9vXB2U
+ h1q9VPVtFC38EuscMmpx+wL4PyseE8oZDpAKDYIoPAnhe7lGUtJ4N/ELPbB8Pi+SJOE=
+X-Gm-Gg: AfdE7cnkEwyLTHNMrrjG+hxMd6i+ZFwONt0yPqKPtRPRxwbsJTScM83MmBBFVNxvwPe
+ oLLvHLGglFdsLKkL8GQO8ZjOzS4dsQLJF0DCFJltJKKq3cxJRW8Ey9xgEydQ7dOUubzB0h3IuYh
+ p2Q7/9Xfx5mLXkGWOVIDm6zJJYe3ZMVWpgDkGHDV7s24wJA356lw5t8Fd1LS5TKCDk62RlUEtmy
+ JtohS5u9MGb+idahiwtTAjoPohNy2dVunixsHWnMcII6JxnvHsA0ETyRjompFgVMSWzHvd7JaMp
+ QML+Q4UO74Mi9+BpcnuWGQ0TukFqm8/DQzEotBBnMtaXxS3NcmJ9JSECCX6s4rQPtxQQxBB16/f
+ YasYq0p40lClq9F36wdAsNKCSiGtJfig23QRofECSeL41wJf5dQ+CPSsi953XqzrxG+JqgKIoI+
+ 967V6lN9D/A5E4DVPi6NNzYfTv+zKUCinDI8rJ3kI24iJHktpsOEvYZA==
+X-Received: by 2002:a53:d60b:0:b0:664:def5:2ff0 with SMTP id
+ 956f58d0204a3-6683bb6899cmr2372181d50.34.1784484249869; 
+ Sun, 19 Jul 2026 11:04:09 -0700 (PDT)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:423:c42:416:fc31])
  by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.07
+ 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 11:04:08 -0700 (PDT)
+ Sun, 19 Jul 2026 11:04:09 -0700 (PDT)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Sun, 19 Jul 2026 13:03:33 -0500
-Subject: [PATCH 2/8] bios_emulator: don't free a caller-supplied BIOS image
- in biosemu_run
+Date: Sun, 19 Jul 2026 13:03:34 -0500
+Subject: [PATCH 3/8] bios_emulator: use driver-model functions for PCI
+ config acceses
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260719-aspeed_vbios_fixes-v1-2-c94026f28250@oss.tenstorrent.com>
+Message-Id: <20260719-aspeed_vbios_fixes-v1-3-c94026f28250@oss.tenstorrent.com>
 References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 In-Reply-To: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -118,41 +117,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-biosemu_run can be called with a BIOS image supplied by the caller
-(argument bios_rom is not NULL), or with no image so that it makes its
-own copy from the card's ROM (argument bios_rom is NULL).
-
-It subsequently calls PCI_postController, where the BIOS image it runs
-is stored in vga_info->BIOSImage. In the first case that pointer is the
-caller's buffer; in the second it is a buffer biosemu_run itself
-allocated.
-
-The clean_up path in biosemu_run always frees vga_info->BIOSImage. That
-is right for the second case, but in the first case it frees memory the
-caller still owns. This can cause a double free when the caller tries
-freeing this memory again.
-
-Only free vga_info->BIOSImage when biosemu_run made the copy itself (i.e
-bios_rom is not NULL)
+To allow BIOSEMU to build without CONFIG_DM_PCI_COMPAT, update the
+PCI config space read/write methods in BE_accessReg to use the
+dm_pci_read_config8/16/32 and dm_pci_write_config8/16/32 methods.
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- drivers/bios_emulator/atibios.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/bios_emulator/besys.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/bios_emulator/atibios.c b/drivers/bios_emulator/atibios.c
-index e992a1aa822..ebeeb178b7f 100644
---- a/drivers/bios_emulator/atibios.c
-+++ b/drivers/bios_emulator/atibios.c
-@@ -509,7 +509,7 @@ int biosemu_run(struct udevice *pcidev, uchar *bios_rom, int bios_len,
- 	*/
- 	if (clean_up) {
- 		BE_exit();
--		if (vga_info->BIOSImage &&
-+		if (!bios_rom && vga_info->BIOSImage &&
- 		    (ulong)(vga_info->BIOSImage) != 0xc0000)
- 			free(vga_info->BIOSImage);
- 		free(vga_info);
+diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
+index 23392d3c86e..e02c9fc636c 100644
+--- a/drivers/bios_emulator/besys.c
++++ b/drivers/bios_emulator/besys.c
+@@ -435,27 +435,27 @@ static u32 BE_accessReg(int regOffset, u32 value, int func)
+ 	if ((function == _BE_env.vgaInfo.function) &&
+ 	    (device == _BE_env.vgaInfo.device) &&
+ 	    (bus == _BE_env.vgaInfo.bus)) {
+-		pci_dev_t bdf = PCI_BDF(bus, device, function);
++		struct udevice *dev = _BE_env.vgaInfo.pcidev;
+ 		switch (func) {
+ 		case REG_READ_BYTE:
+-			pci_read_config_byte(bdf, regOffset, &val8);
++			dm_pci_read_config8(dev, regOffset, &val8);
+ 			return val8;
+ 		case REG_READ_WORD:
+-			pci_read_config_word(bdf, regOffset, &val16);
++			dm_pci_read_config16(dev, regOffset, &val16);
+ 			return val16;
+ 		case REG_READ_DWORD:
+-			pci_read_config_dword(bdf, regOffset, &val32);
++			dm_pci_read_config32(dev, regOffset, &val32);
+ 			return val32;
+ 		case REG_WRITE_BYTE:
+-			pci_write_config_byte(bdf, regOffset, value);
++			dm_pci_write_config8(dev, regOffset, value);
+ 
+ 			return 0;
+ 		case REG_WRITE_WORD:
+-			pci_write_config_word(bdf, regOffset, value);
++			dm_pci_write_config16(dev, regOffset, value);
+ 
+ 			return 0;
+ 		case REG_WRITE_DWORD:
+-			pci_write_config_dword(bdf, regOffset, value);
++			dm_pci_write_config32(dev, regOffset, value);
+ 
+ 			return 0;
+ 		}
 
 -- 
 2.43.0
