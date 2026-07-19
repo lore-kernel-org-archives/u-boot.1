@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AC84C44512
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28F7C4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EDFF84A5B;
-	Sun, 19 Jul 2026 20:13:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 75D4484A29;
+	Sun, 19 Jul 2026 20:20:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lcPGdM4C";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xWoWY0DJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SapxwZmV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62FAD84A7A; Sun, 19 Jul 2026 20:13:18 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 806CA8005D; Sun, 19 Jul 2026 20:20:11 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8085C84A4B
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:13:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A63B84A29
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:20:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4h3BbH5t85zKvrv;
- Sun, 19 Jul 2026 20:13:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784484795;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6wq28QaxUiMyrw8ZOkONZcYC67WQIupvG9g3iUA1rKQ=;
- b=lcPGdM4CAJr8w/TI8plJu0pfR1LCL0h7/lDfT3VsQTOS+XoMKh1I++nLZvfcMo8oZi4wrd
- HWtirDfVq/aEgOGTQh1g2QfzfXH2UkVqzur1JcRNpPKTczm0kV3s+ShyIdpm8jFjjF9n2S
- ZBWNIoGZh6AmloWEZI259mxmqoJAD7XPl+6X5EGvJ8m0PkalkXyvPWHJr+eR1pDWdXgG2X
- A4r13cTzgWB9l1iErxe/X4dRLR9tWmyLcUGvGImIdQ5ijhmrmVowcN77t6eqy+wBJFWu4A
- QssFVyTW1CuBLQEbVjydfXg6sy6wNdOG/n8Ir+knu/ZJrv1cIyTlOmrrKjnbGw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xWoWY0DJ;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784484794;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6wq28QaxUiMyrw8ZOkONZcYC67WQIupvG9g3iUA1rKQ=;
- b=xWoWY0DJFrkzDlljA+rQwas2YWu7T89iGl+KlxQJEVzd4FLu449De7AA15ZldGFBpY2WzN
- UHlJaUrcdRSw8FdMXO6mR2EzCAO6RON8QzK8pRK9w0LqG4cBM1SHqUpRgVezPl8Zysoo4t
- MsN9IeTySY65BUNnEt05vlAWD+U43x84NBoXpJd0d+bI3Gr+ynzAVbhGYa7l/4zXozuClU
- HSKnVA9fxIfBk7VNLm3EpsjsW57qBXjdiKm5y72JixW8sRD1iD9hkopccaTwbiK1muP9x4
- 4zWUphyx49peTmr1XVXuLlTCmtRZLYc6DeicI9+uZi4G1HNR4qDcrA+P5F4VCA==
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4a456e44e01so3133539b6e.1
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:20:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784485206; x=1785090006; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=iHithwn/KR6Sv3Grozzo07qbct8lQUvFKfbmAmeHH44=;
+ b=SapxwZmVY4U/RZRbj7joPuh6ofUI4Lh2Otu2O/ijcJeKMjJbIJ6sX5RfqPBEQfayG/
+ WU7cjxak/ZJC2IpwrchrCHQ4s3aQvE8V6lnr5JnM957zS0ZUSUo3ud1dHHxGMz08BKSq
+ DpU6lxyJhGnfouOG6gNJn6gOR1NqPyNLgLjc4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784485206; x=1785090006;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=iHithwn/KR6Sv3Grozzo07qbct8lQUvFKfbmAmeHH44=;
+ b=V3G0Y+jmiFqSPSqt1Ie9Lmefdbu1jkd47eJU4UFZsU+aU9df7GDrOaFBTvF+1wJ6WT
+ nIRj8ZbxJB4pvYVaEn4lrOiDDVWPIemwuUg5ZodD7KGBdnd8/DJIdoL8BLk7xiKyYIK9
+ iOnFu/OwFBcfX5uut2r7nei2eQVuAq/ZFQeYEqjsu2e/CCOcFDBJmoce2YzaKbIJL/ub
+ CmwaPxxQX+x0UAkv0ltapq8lQOy5Btg1+AIvSb28B0YXEYhZ2moUpmx8xodPkTgNBH62
+ eeHOHvKNFUZZBmX1sZoY6Cq/H/pyuUvtcWOlajHn8B8d0OwB8qviJjjAo4rwUiofkGLv
+ JOGA==
+X-Gm-Message-State: AOJu0YysqaugGhw1EpOcp9Z1KBKOInY9OrBNyDc8bcn6mgFNHK0blqJn
+ cfJ1o3EWKTwdG8ONWSxtDjPgpOrkL83cdDPLnpgI/eRU6EQ1HIvmu0D3fwWtAkinxRAVwys4N2v
+ whLSS2CQ=
+X-Gm-Gg: AfdE7cnNKY7kjxWs8G/C1ywiK3nee7t3oGsitHV5od9m7l0RlLValeaGI2Z51GMx//E
+ TfUplii1ZhuVDmc1U7VH52t3KOzt1R95xskQY9BmjM8YfdSNpaU7RAhwUMSsxrnmHQV7FC6Rz+s
+ WRtAXWNihrjxLd5UGh11g2veBy+0RIl9R79G9BSXRAG6uqa5aUIS6b1Qq4IpC+WDMIlxaApXEqx
+ RebWVjMmY9qat7IPbMsweK2k6OtEJcM/gtEDnV7egW48y83wqlqyIK4Mf3GDTGHNX52XUtzY1bz
+ KwOqeMBK12tq9xVICTrnewSiDh1QUZFSQSwiGd+cJwXgsCz+7HSqFxLaIB+EnttOWucpgvx2lJ0
+ K8Ip4vQbm1WtVBvp8P2DzS4DhhdsmJPLs140sCqrUIVhJobcx5xlb+aNCUpD+ZOe5QnDbszQpF6
+ voOeYuv/GHvUF0dAuCC3IJTSBZsjqIwRVnVtOYyTBzcawF06eZz7VGnOBYIzxbYaHybmsSlpgzV
+ T+2GVgo5qqVMXIZo7rGC8yvTSs=
+X-Received: by 2002:a05:6808:191e:b0:4a4:a06:43b3 with SMTP id
+ 5614622812f47-4a4d054a2c0mr7874873b6e.38.1784485205914; 
+ Sun, 19 Jul 2026 11:20:05 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4a4d3607ea1sm5452250b6e.0.2026.07.19.11.20.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Jul 2026 11:20:04 -0700 (PDT)
+Date: Sun, 19 Jul 2026 12:20:02 -0600
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@nabladev.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/4] Revert "arm64: dts: renesas: r8a779g3: Reinstate basic
- PCIe clock description for Sparrow Hawk"
-Date: Sun, 19 Jul 2026 20:11:52 +0200
-Message-ID: <20260719181303.245004-4-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260719181303.245004-1-marek.vasut+renesas@mailbox.org>
-References: <20260719181303.245004-1-marek.vasut+renesas@mailbox.org>
+Cc: u-boot-board-maintainers@lists.denx.de, u-boot-custodians@lists.denx.de
+Subject: Re: [ANN] Mailing list migration to lists.u-boot-project.org
+Message-ID: <20260719182002.GW749385@bill-the-cat>
+References: <20260715173119.GL749385@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 87c940914a35d685251
-X-MBO-RS-META: ir3hhmdfc97a5ezn35fw3u419y4h766q
-X-Rspamd-Queue-Id: 4h3BbH5t85zKvrv
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dRl3ajf9QbU64mbC"
+Content-Disposition: inline
+In-Reply-To: <20260715173119.GL749385@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,54 +99,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit a6f018b7b503c026cc66d25bd59868bac70150dc.
 
-The a6f018b7b503 ("arm64: dts: renesas: r8a779g3: Reinstate basic PCIe
-clock description for Sparrow Hawk") workaround for missing PCIe clock
-generator driver is no longer necessary, as the Renesas 9-series PCIe
-clock generator driver is now available. Drop the workaround.
+--dRl3ajf9QbU64mbC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Lukasz Majewski <lukma@nabladev.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi | 18 ------------------
- 1 file changed, 18 deletions(-)
+On Wed, Jul 15, 2026 at 11:31:19AM -0600, Tom Rini wrote:
 
-diff --git a/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-index 968cf6684c5..dff0355150d 100644
---- a/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-@@ -49,24 +49,6 @@
- 	status = "okay";
- };
- 
--&pcie0_clkref {
--	clock-frequency = <100000000>;
--	status = "okay";
--};
--
--&pciec0 {
--	clocks = <&cpg CPG_MOD 624>, <&pcie0_clkref>;
--};
--
--&pcie1_clkref {
--	clock-frequency = <100000000>;
--	status = "okay";
--};
--
--&pciec1 {
--	clocks = <&cpg CPG_MOD 625>, <&pcie1_clkref>;
--};
--
- &rpc {
- 	flash@0 {
- 		/*
--- 
-2.53.0
+> Hey all,
+>=20
+> As I've mentioned in previous release emails, we'll be migrating our
+> lists over to lists.u-boot-project.org. The news now is that we have a
+> date. This coming Monday the 20th of July, we'll be turning off the
+> receiving side of lists.denx.de and then importing everything over to
+> lists.u-boot-project.org.
+>=20
+> What do you need to do? Nothing much. All active subscribers and their
+> preferences will be moved. This includes how lore and patchwork are
+> linked, so all of that will work. We are going to try and ensure no new
+> emails get lost in the migration.
+>=20
+> Based on feedback from the test migration, we believe we know what was
+> missing to ensure that the archive links are stable, and so that should
+> be the case when we go live again.
+>=20
+> I'll send out a reminder about this Sunday.
 
+As a reminder, it's Sunday, and the plan is for this to happen Monday,
+late afternoon Europe, morning west coast US.
+
+--=20
+Tom
+
+--dRl3ajf9QbU64mbC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal0VTwAKCRAr4qD1Cr/k
+CkiXAPsFO6KlySdBLJFgE+053XT4zwAPx0vwoapvGepObOHvJgD/SFwtlKp2WEZc
+UYE5AICyI0hfna3v0tFiA8xwoQI1nQw=
+=6O5g
+-----END PGP SIGNATURE-----
+
+--dRl3ajf9QbU64mbC--
