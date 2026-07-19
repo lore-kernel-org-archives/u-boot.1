@@ -4,92 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD73C44512
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 17:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF2BC4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:13:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68D8B84A29;
-	Sun, 19 Jul 2026 19:59:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D92A384A4C;
+	Sun, 19 Jul 2026 20:13:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fKtGddnt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rjTUhUKp";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pBBn1rPN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC04584A49; Sun, 19 Jul 2026 19:59:43 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8AE7184A29; Sun, 19 Jul 2026 20:13:14 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59E2F8494B
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 19:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 563E384A29
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:13:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-697cee2eb6dso6296170a12.0
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 10:59:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784483981; cv=none;
- d=google.com; s=arc-20260327;
- b=SgZg+7NwCRnb1LyASxWnu6tD/PwFJIUVZpeBsxzp7QeGTYLZujptQfcK0cdkxqJ7VX
- 9XO9UQF4O+sSFvzPldzkBDUd7H6a7mVXM9tPKStNPsqrDLpbMlArfovv+6C1i8mxWlA1
- 63Ldr2t3PIXfwSypjgnqaC/ruR4el5AhqXQfmvESOLxqUOmFhdRmzvHtqlcTi+GXnJ5l
- 0p4eYfmBHsuUT4FPNSgMtzPqDMKow3xWlE+BX5gIB1KI/J+NczHFFIDD1caXfxOs0/Jw
- UGJUjhfHiZNJBGzNSYIs1o7tB7LjcgHDq5CVyOh6kwtslTZEQLp+qpxy/EcXd/AXQB7w
- 14PA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Sw725D5Zrn867ssn/DqZzXLcCxYHDU4qXLGy3H0rKEk=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=LvTb1AY6+NLEN0q/DgfZUZHkPvWcbshDOnvz6JwlTc46USYvm95R1vpRlK4SMZaXFI
- y11ImA1zFPJ1Czu2wRnPUnozApQ6J4qpjkyQ9MaO2u2zHjcGhq5EmF3cFLVDC+/oo5sQ
- uXNBxEkvNqk1Cp7HHiejGYCjlri+SHFydumQFtGbSE8JZq5JGp+dbyLtgXnToNn0y/NC
- RSWHMxLT3EWngkjxLs6iRxNn6HjP9/ASiJ8C72g+ECxxjmBceHLmFTrYd6bJycLVS56D
- if6Ll8/EI5s7qRw3CpQ2v9u535Ca8m4i9zgChxyWDtRAGEA6yDAagEy8qL02SYAw1zh1
- wLqg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784483981; x=1785088781; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Sw725D5Zrn867ssn/DqZzXLcCxYHDU4qXLGy3H0rKEk=;
- b=fKtGddntGIGdjVUHwfgUfUP2ZmESY3KXPfkW1GN6DgJLqu1lC6NG2ZMJihBricLw5/
- M+YWoe4cEAPUaPx806q8JiX8qfDn88n2LJDR/21ENuvMrtHmqh2FnPAj7L9lsANupC/y
- a5OTiD+GLwdVqjaUINj5luEXMl9HvbB0/dFhg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784483981; x=1785088781;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Sw725D5Zrn867ssn/DqZzXLcCxYHDU4qXLGy3H0rKEk=;
- b=HoEKOKbBnsQ0TTkIpKrN8sg2fsmJM+N6NGSGK876Z1B6wUTaS3la1yI8XlDQ+/JAWW
- w3WXmr1oqJI+SYOrbPN2NG4fxvPHMT2deChv4MVP7pT6oYeYTV3Gz8Z9y+jNAqtsA1Lw
- L0ppQKwk+eNUkx8G9w+AcaUkzM2IFxhlJbBjZrKGkebDrq/+GNp3xdF1f9C2caGp3N+R
- wQ/FPFuDvBQh3KvsACB4a8qk5pL/SYX+/E42sFlDiIumsWsem/w8dpVyvfrvTfCpMb/U
- y8/ViZDfhFI1udutWl1kVRMh14Xo6SvJE6IyeLBjhiaMPBnhpfVcE0hR89/SYVysx8zp
- /ksQ==
-X-Gm-Message-State: AOJu0YywLU4GjHO+ibmj9kcnXmxs/t/fBAwL8UHvtoioZ1CY3YZZMmSX
- OokMOspkfzQKdphwTMiBSrWKqX9Yo0rP+t7wGH481wPDSKcP1hojus/4ZraaSvE426GjpBUv6kH
- 2doBkm5ETuUBkhEvDL5/HtIk/25vEnWWwiDyLpyUU
-X-Gm-Gg: AfdE7ck9kEL2xGIB+AKGYAlvD5TtJqSlZ+KVW0ZDXDiWQdUF4M+BVAjvhCQmK9kT5Ne
- Fa2pz/6RhbwCQjncrjvZNpqqjSFxjlXKxVOpnAQEA3rrq3oF85gOHzBVNeSxZfP1pLN9cc4Sjlp
- hywlmN9p894PpGnZmoVJ+BYTO9/eWXbcGInPMnjOcscRaUsdZ1C89ToZHvsq8s+BH7/B4ihrHIi
- z5Ui2N0v92pYx9ysWdXRenlTfNf8XV2BsZGTF9xzSkQKBpmNNkjKNIENofq
-X-Received: by 2002:a05:6402:5292:b0:698:1504:bb23 with SMTP id
- 4fb4d7f45d1cf-69e652f9099mr3984317a12.29.1784483980718; Sun, 19 Jul 2026
- 10:59:40 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4h3BbC0xT0zMlGd;
+ Sun, 19 Jul 2026 20:13:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1784484791;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=SJI4dyAj/O4wrfQef434zEjYMhXYGcUp3jpsXXWvRMo=;
+ b=rjTUhUKpImyynuGA2USYr6kvme7dhB0zkCDjifN5fVCCuLdh5sasyFTfqpZSgW1U3zB/aY
+ MmB4rjBq5noBFSI8mEbGFB3ePbZY20W0WP9ESkL2wrCCxLqLntAN/NpyFtP5vnYswf6Wbe
+ n82vkrE+UNuWr2fJFMUuO3N7Fo5ATNgolK+ZA7lUQjzRph886GfzWewGgWcPEC8gPRslyL
+ xDMP9smvWrO1vXWMNx9wzlW4bImaYhcZZeoB/LA4tLyzAgx19g0MzX1bODV0aKYHBV3g73
+ h03HmeHZ/IEkPCMQBF30hEJjlXoNsZ6qyOsTRHA8kSJhyISEZdUwUCTt+ot9uQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1784484789;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=SJI4dyAj/O4wrfQef434zEjYMhXYGcUp3jpsXXWvRMo=;
+ b=pBBn1rPNRWof6OxWrWhGYIYdfYuEhJILW/ecBNYQVsrm6dtD/WP1YBsehQCUJ/oY0/h+hZ
+ asdxWam7qf5mNgKXQ+m6317gPJ8v/6eRDoWew5pd20cwuItp2PdX2dg5FYGrHPH5J8Pg9e
+ psmXaRGTRLUPEK2KGhrI6qI6aHx2xjw9yf4C/PhHN5uQiR3C4DzLFIpYLCLGOeLByZruGk
+ MUaO7QqEd5ORCltP7+dh87EP3rK8MLh5hj2k9cpe2oem+QZAF5KSPhWHrkDQVcjfVhlA45
+ 5CCg8zPNcSorSJhMGq5E9IQ22mEi3CIRQAKx7DsGZouz+TniAXmSz0gLmQ/wlA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/4] clk: rs9: Add Renesas 9-series PCIe clock generator driver
+Date: Sun, 19 Jul 2026 20:11:49 +0200
+Message-ID: <20260719181303.245004-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20260716205213.340109-2-dmukhin@ford.com>
-In-Reply-To: <20260716205213.340109-2-dmukhin@ford.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Jul 2026 11:59:29 -0600
-X-Gm-Features: AUfX_mxlwJbuo7fAvkHrWRbIp98b7jOfTbrmRsCRB0K8cAqmafaaLxTuuDhVgTU
-Message-ID: <CAFLszTgTACNfa+_LnLGvivq+vr1fjz9-c=Phfxe2Kgb4mLHh3A@mail.gmail.com>
-Subject: Re: [PATCH v1] x86: add support for CONFIG_REMAKE_ELF
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: a86f0e85984112f8b91
+X-MBO-RS-META: agdpioq5macwzo3h3nbznec8bywqfftb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,61 +84,394 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
+Add driver for Renesas 9-series PCIe clock generators. This driver
+is designed to support 9FGV/9DBV/9DMV/9FGL/9DML/9QXL/9SQ series I2C
+PCIe clock generators.
 
-On 2026-07-16T20:52:14, None <dmukhin@ford.com> wrote:
-> x86: add support for CONFIG_REMAKE_ELF
->
-> Fix objcopy/ld parameters for x86 to enable CONFIG_REMAKE_ELF
-> configurations.
->
-> That adds new 'PLATFORM_ELF_ELFLDFLAGS' make variable for injecting
-> proper linker arguments when u-boot.elf is requested.
->
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->
-> Makefile           | 1 +
->  arch/x86/config.mk | 8 ++++++--
->  2 files changed, 7 insertions(+), 2 deletions(-)
+The driver is capable of configuring per-chip spread spectrum mode
+and output amplitude, as well as per-output slew rate.
 
-> That adds new 'PLATFORM_ELF_ELFLDFLAGS' make variable for injecting
-> proper linker arguments when u-boot.elf is requested.
+Losely based on Linux 7.1 commit
+5ec820fc28d0 ("clk: rs9: Reserve 8 struct clk_hw slots for for 9FGV0841")
 
-The variable is actually called PLATFORM_ELFLDFLAGS - please can you
-fix the name here. Also, please use the imperative ("Add a new ...
-variable") and mention what fails today when CONFIG_REMAKE_ELF is
-enabled on x86 (presumably ld picking the wrong emulation).
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Lukasz Majewski <lukma@nabladev.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/clk/Kconfig            |   7 +
+ drivers/clk/Makefile           |   1 +
+ drivers/clk/clk-renesas-pcie.c | 327 +++++++++++++++++++++++++++++++++
+ 3 files changed, 335 insertions(+)
+ create mode 100644 drivers/clk/clk-renesas-pcie.c
 
-> diff --git a/Makefile b/Makefile
-> @@ -2003,6 +2003,7 @@ u-boot-with-spl-pbl.bin: spl/u-boot-spl.pbl $(UBOOT_BINLOAD) FORCE
->  quiet_cmd_u-boot-elf ?= LD      $@
->       cmd_u-boot-elf ?= $(LD) u-boot-elf.o -o $@ \
->       $(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
-> +     $(PLATFORM_ELFLDFLAGS) \
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index e69b0543817..382d7871230 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -215,6 +215,13 @@ config CLK_HSDK
+ 	  Enable this to support the cgu clocks on Synopsys ARC HSDK and
+ 	  Synopsys ARC HSDK-4xD boards
+ 
++config CLK_RS9_PCIE
++	tristate "Clock driver for Renesas 9-series PCIe clock generators"
++	depends on CLK
++	help
++	  This driver supports the Renesas 9-series PCIe clock generator
++	  models 9FGV/9DBV/9DMV/9FGL/9DML/9QXL/9SQ.
++
+ config CLK_VERSACLOCK
+ 	bool "Enable VersaClock 5/6 devices"
+ 	depends on CLK
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index c37ef75d420..1bc25924acb 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -45,6 +45,7 @@ obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
+ obj-$(CONFIG_CLK_OWL) += owl/
+ obj-$(CONFIG_CLK_QCOM) += qcom/
+ obj-$(CONFIG_CLK_RENESAS) += renesas/
++obj-$(CONFIG_$(PHASE_)CLK_RS9_PCIE) += clk-renesas-pcie.o
+ obj-$(CONFIG_$(PHASE_)CLK_SCMI) += clk_scmi.o
+ obj-$(CONFIG_CLK_SIFIVE) += sifive/
+ obj-$(CONFIG_CLK_SOPHGO) += sophgo/
+diff --git a/drivers/clk/clk-renesas-pcie.c b/drivers/clk/clk-renesas-pcie.c
+new file mode 100644
+index 00000000000..ad57cd4fd28
+--- /dev/null
++++ b/drivers/clk/clk-renesas-pcie.c
+@@ -0,0 +1,327 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Driver for Renesas 9-series PCIe clock generator driver
++ *
++ * The following series can be supported:
++ *   - 9FGV/9DBV/9DMV/9FGL/9DML/9QXL/9SQ
++ * Currently supported:
++ *   - 9FGV0241
++ *   - 9FGV0441
++ *   - 9FGV0841
++ *
++ * Copyright (C) 2022-2026 Marek Vasut
++ */
++
++#include <clk-uclass.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <errno.h>
++#include <i2c.h>
++#include <linux/bitops.h>
++
++#define RS9_REG_OE				0x0
++#define RS9_REG_SS				0x1
++#define RS9_REG_SS_AMP_0V6			0x0
++#define RS9_REG_SS_AMP_0V7			0x1
++#define RS9_REG_SS_AMP_0V8			0x2
++#define RS9_REG_SS_AMP_0V9			0x3
++#define RS9_REG_SS_AMP_DEFAULT			RS9_REG_SS_AMP_0V8
++#define RS9_REG_SS_AMP_MASK			0x3
++#define RS9_REG_SS_SSC_100			0
++#define RS9_REG_SS_SSC_M025			(1 << 3)
++#define RS9_REG_SS_SSC_M050			(3 << 3)
++#define RS9_REG_SS_SSC_DEFAULT			RS9_REG_SS_SSC_100
++#define RS9_REG_SS_SSC_MASK			(3 << 3)
++#define RS9_REG_SS_SSC_LOCK			BIT(5)
++#define RS9_REG_SR				0x2
++#define RS9_REG_REF				0x3
++#define RS9_REG_REF_OE				BIT(4)
++#define RS9_REG_REF_OD				BIT(5)
++#define RS9_REG_REF_SR_SLOWEST			0
++#define RS9_REG_REF_SR_SLOW			(1 << 6)
++#define RS9_REG_REF_SR_FAST			(2 << 6)
++#define RS9_REG_REF_SR_FASTER			(3 << 6)
++#define RS9_REG_VID				0x5
++#define RS9_REG_DID				0x6
++#define RS9_REG_BCP				0x7
++
++#define RS9_REG_VID_MASK			GENMASK(3, 0)
++#define RS9_REG_VID_IDT				0x01
++
++#define RS9_REG_DID_TYPE_FGV			(0x0 << RS9_REG_DID_TYPE_SHIFT)
++#define RS9_REG_DID_TYPE_DBV			(0x1 << RS9_REG_DID_TYPE_SHIFT)
++#define RS9_REG_DID_TYPE_DMV			(0x2 << RS9_REG_DID_TYPE_SHIFT)
++#define RS9_REG_DID_TYPE_SHIFT			0x6
++
++/* Structure to describe features of a particular 9-series model */
++struct rs9_chip_info {
++	unsigned int		num_clks;
++	u8			outshift;
++	u8			did;
++};
++
++struct rs9_driver_data {
++	struct udevice		*i2c;
++	struct rs9_chip_info	*chip_info;
++	unsigned long		rate;
++	u8			pll_amplitude;
++	u8			pll_ssc;
++	u8			clk_dif_sr;
++};
++
++static int clk_rs9_request(struct clk *clk)
++{
++	struct rs9_driver_data *rs9 = dev_get_priv(clk->dev);
++
++	if (clk->id > rs9->chip_info->num_clks)
++		return -EINVAL;
++
++	return 0;
++}
++
++static ulong clk_rs9_get_rate(struct clk *clk)
++{
++	struct rs9_driver_data *rs9 = dev_get_priv(clk->dev);
++
++	return rs9->rate * 4;
++}
++
++static const struct clk_ops clk_rs9_ops = {
++	.request = clk_rs9_request,
++	.get_rate = clk_rs9_get_rate,
++};
++
++static int rs9_write(struct udevice *dev, u8 reg, u8 val)
++{
++	u8 data[2] = { 1, val };
++
++	return dm_i2c_write(dev, reg, data, 2);
++}
++
++static int rs9_read(struct udevice *dev, u8 reg, u8 *val)
++{
++	struct dm_i2c_chip *chip = dev_get_parent_plat(dev);
++	struct i2c_msg xfer[2];
++	u8 txdata = reg;
++	u8 rxdata[2];
++	int ret;
++
++	xfer[0].addr = chip->chip_addr;
++	xfer[0].flags = 0;
++	xfer[0].len = 1;
++	xfer[0].buf = (void *)&txdata;
++
++	xfer[1].addr = chip->chip_addr;
++	xfer[1].flags = I2C_M_RD;
++	xfer[1].len = 2;
++	xfer[1].buf = (void *)rxdata;
++
++	ret = dm_i2c_xfer(dev, xfer, 2);
++	if (ret < 0)
++		return ret;
++
++	/*
++	 * Byte 0 is transfer length, which is always 1 due
++	 * to BCP register programming to 1 in rs9_probe(),
++	 * ignore it and use data from Byte 1.
++	 */
++	*val = rxdata[1];
++	return 0;
++}
++
++static u8 rs9_calc_dif(const struct rs9_driver_data *rs9, int idx)
++{
++	/*
++	 * On 9FGV0241, the DIF OE0 is BIT(1) and DIF OE(1) is BIT(2),
++	 * on 9FGV0441 and 9FGV0841 the DIF OE0 is BIT(0) and so on.
++	 * Increment the index in the 9FGV0241 special case here.
++	 */
++	return BIT(idx + rs9->chip_info->outshift);
++}
++
++static int rs9_get_output_config(struct rs9_driver_data *rs9, int idx)
++{
++	struct udevice *dev = rs9->i2c;
++	u8 dif = rs9_calc_dif(rs9, idx);
++	unsigned char name[5] = "DIF0";
++	ofnode np;
++	u32 sr;
++
++	/* Set defaults */
++	rs9->clk_dif_sr |= dif;
++
++	snprintf(name, 5, "DIF%d", idx);
++	np = dev_read_subnode(dev, name);
++	if (!ofnode_valid(np))
++		return 0;
++
++	/* Output clock slew rate */
++	sr = ofnode_read_u32_default(np, "renesas,slew-rate", 3000000);
++	if (sr == 2000000) {		/* 2V/ns */
++		rs9->clk_dif_sr &= ~dif;
++	} else if (sr == 3000000) {	/* 3V/ns (default) */
++		rs9->clk_dif_sr |= dif;
++	} else {
++		dev_err(dev, "Invalid renesas,slew-rate value\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int rs9_get_common_config(struct rs9_driver_data *rs9)
++{
++	struct udevice *dev = rs9->i2c;
++	unsigned int amp, ssc;
++
++	/* Set defaults */
++	rs9->pll_amplitude = RS9_REG_SS_AMP_DEFAULT;
++	rs9->pll_ssc = RS9_REG_SS_SSC_DEFAULT;
++
++	/* Output clock amplitude */
++	amp = dev_read_u32_default(dev, "renesas,out-amplitude-microvolt", 700000);
++	if (amp == 600000) {	/* 0.6V */
++		rs9->pll_amplitude = RS9_REG_SS_AMP_0V6;
++	} else if (amp == 700000) {	/* 0.7V (default) */
++		rs9->pll_amplitude = RS9_REG_SS_AMP_0V7;
++	} else if (amp == 800000) {	/* 0.8V */
++		rs9->pll_amplitude = RS9_REG_SS_AMP_0V8;
++	} else if (amp == 900000) {	/* 0.9V */
++		rs9->pll_amplitude = RS9_REG_SS_AMP_0V9;
++	} else {
++		dev_err(dev, "Invalid renesas,out-amplitude-microvolt value\n");
++		return -EINVAL;
++	}
++
++	/* Output clock spread spectrum */
++	ssc = dev_read_u32_default(dev, "renesas,out-spread-spectrum", 100000);
++	if (ssc == 100000) {	/* 100% ... no spread (default) */
++		rs9->pll_ssc = RS9_REG_SS_SSC_100;
++	} else if (ssc == 99750) {	/* -0.25% ... down spread */
++		rs9->pll_ssc = RS9_REG_SS_SSC_M025;
++	} else if (ssc == 99500) {	/* -0.50% ... down spread */
++		rs9->pll_ssc = RS9_REG_SS_SSC_M050;
++	} else {
++		dev_err(dev, "Invalid renesas,out-spread-spectrum value\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static void rs9_update_config(struct rs9_driver_data *rs9)
++{
++	struct udevice *dev = rs9->i2c;
++	int i;
++
++	/* If amplitude is non-default, update it. */
++	if (rs9->pll_amplitude != RS9_REG_SS_AMP_DEFAULT) {
++		dm_i2c_reg_clrset(dev, RS9_REG_SS, RS9_REG_SS_AMP_MASK,
++				  rs9->pll_amplitude);
++	}
++
++	/* If SSC is non-default, update it. */
++	if (rs9->pll_ssc != RS9_REG_SS_SSC_DEFAULT) {
++		dm_i2c_reg_clrset(dev, RS9_REG_SS, RS9_REG_SS_SSC_MASK,
++				  rs9->pll_ssc);
++	}
++
++	for (i = 0; i < rs9->chip_info->num_clks; i++) {
++		u8 dif = rs9_calc_dif(rs9, i);
++
++		if (rs9->clk_dif_sr & dif)
++			continue;
++
++		dm_i2c_reg_clrset(dev, RS9_REG_SR, dif,
++				  rs9->clk_dif_sr & dif);
++	}
++}
++
++static int clk_rs9_probe(struct udevice *dev)
++{
++	struct rs9_driver_data *rs9 = dev_get_priv(dev);
++	struct clk *clk;
++	u8 vid, did;
++	int i, ret;
++
++	rs9->i2c = dev;
++	rs9->chip_info = (struct rs9_chip_info *)dev_get_driver_data(dev);
++	if (!rs9->chip_info)
++		return -EINVAL;
++
++	clk = devm_clk_get(dev, NULL);
++	if (IS_ERR(clk))
++		return PTR_ERR(clk);
++
++	rs9->rate = clk_get_rate(clk);
++
++	/* Fetch common configuration from DT (if specified) */
++	ret = rs9_get_common_config(rs9);
++	if (ret)
++		return ret;
++
++	/* Fetch DIFx output configuration from DT (if specified) */
++	for (i = 0; i < rs9->chip_info->num_clks; i++) {
++		ret = rs9_get_output_config(rs9, i);
++		if (ret)
++			return ret;
++	}
++
++	/* Always read back 1 Byte via I2C */
++	ret = rs9_write(dev, RS9_REG_BCP, 1);
++	if (ret < 0)
++		return ret;
++
++	ret = rs9_read(dev, RS9_REG_VID, &vid);
++	if (ret < 0)
++		return ret;
++
++	ret = rs9_read(dev, RS9_REG_DID, &did);
++	if (ret < 0)
++		return ret;
++
++	vid &= RS9_REG_VID_MASK;
++	if (vid != RS9_REG_VID_IDT || did != rs9->chip_info->did) {
++		dev_err(dev, "Incorrect VID/DID: %#02x, %#02x. Expected %#02x, %#02x\n",
++			vid, did, RS9_REG_VID_IDT, rs9->chip_info->did);
++		return -ENODEV;
++	}
++
++	rs9_update_config(rs9);
++
++	return 0;
++}
++
++static const struct rs9_chip_info renesas_9fgv0241_info = {
++	.num_clks	= 2,
++	.outshift	= 1,
++	.did		= RS9_REG_DID_TYPE_FGV | 0x02,
++};
++
++static const struct rs9_chip_info renesas_9fgv0441_info = {
++	.num_clks	= 4,
++	.outshift	= 0,
++	.did		= RS9_REG_DID_TYPE_FGV | 0x04,
++};
++
++static const struct rs9_chip_info renesas_9fgv0841_info = {
++	.num_clks	= 8,
++	.outshift	= 0,
++	.did		= RS9_REG_DID_TYPE_FGV | 0x08,
++};
++
++static const struct udevice_id clk_rs9_of_match[] = {
++	{ .compatible = "renesas,9fgv0241", .data = (ulong)&renesas_9fgv0241_info },
++	{ .compatible = "renesas,9fgv0441", .data = (ulong)&renesas_9fgv0441_info },
++	{ .compatible = "renesas,9fgv0841", .data = (ulong)&renesas_9fgv0841_info },
++	{ /* sentinel */ },
++};
++
++U_BOOT_DRIVER(clk_rs9) = {
++	.name = "clk-renesas-pcie-9series",
++	.id = UCLASS_CLK,
++	.of_match = clk_rs9_of_match,
++	.ops = &clk_rs9_ops,
++	.probe = clk_rs9_probe,
++	.priv_auto = sizeof(struct rs9_driver_data),
++};
+-- 
+2.53.0
 
-Please can you add the same to cmd_u-boot-spl-elf just below,
-otherwise CONFIG_SPL_REMAKE_ELF still fails on x86 (SPL is always
-32-bit, so it wants -m elf_i386).
-
-> diff --git a/arch/x86/config.mk b/arch/x86/config.mk
-> @@ -24,9 +24,13 @@ EFI_IS_32BIT :=
-> -PLATFORM_CPPFLAGS += -march=i386 -m32
-> +PLATFORM_CPPFLAGS    += -march=i386 -m32
-> +PLATFORM_ELFFLAGS    += -O elf32-i386 -B i386
-> +PLATFORM_ELFLDFLAGS  += -m elf_i386
-
-Please drop the whitespace churn on the existing PLATFORM_CPPFLAGS
-lines - the rest of the file uses a single space before +=
-
-BTW, further down this file there is already:
-
-    KBUILD_LDFLAGS += -m $(if $(IS_32BIT),elf_i386,elf_x86_64)
-
-so you could set PLATFORM_ELFLDFLAGS the same way in one line outside
-the ifeq, next to that. What do you think?
-
-I'm also interested in which x86 platform you are using - I am working
-on getting Alder Lake supported at the moment.
-
-Regards,
-Simon
