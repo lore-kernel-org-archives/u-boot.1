@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BB2C44521
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 02:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5159DC4450A
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 02:00:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D4F5848A1;
-	Sun, 19 Jul 2026 04:00:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFA6D84A49;
+	Sun, 19 Jul 2026 04:00:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 866E4849A1; Sun, 19 Jul 2026 04:00:43 +0200 (CEST)
+ id 82D6184A30; Sun, 19 Jul 2026 04:00:55 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 767808467B
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 04:00:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5CC384A1A
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 04:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wlGpU-000000001rX-3KYv; Sun, 19 Jul 2026 02:00:32 +0000
-Date: Sun, 19 Jul 2026 03:00:29 +0100
+ id 1wlGpe-000000001rr-3cQp; Sun, 19 Jul 2026 02:00:42 +0000
+Date: Sun, 19 Jul 2026 03:00:40 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
@@ -39,9 +39,8 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Daniel Golle <daniel@makrotopia.org>, Peng Fan <peng.fan@nxp.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
  u-boot@lists.denx.de
-Subject: [PATCH 8/9] video: rockchip: rk3568: power the HDMI PHY analog
- supplies
-Message-ID: <112ed25a4d143e4f3aee97d5d2cc700c203dc05d.1784424101.git.daniel@makrotopia.org>
+Subject: [PATCH 9/9] configs: nanopi-r5c: enable HDMI video output
+Message-ID: <5f0e4fc51c9ec9b6662f3471f7c86763deb28a03.1784424101.git.daniel@makrotopia.org>
 References: <cover.1784424101.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -63,85 +62,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On a cold boot the RK3568 HDMI output stayed dead (no hot-plug detect),
-while after a warm reboot from Linux it worked, including graphical UEFI.
-The difference was the PHY analog supplies avdd-0v9 and avdd-1v8
-(vdda0v9_image and vcca1v8_image on the R5C): Linux enables them and a
-warm reset leaves the PMIC LDOs on, but U-Boot left them disabled at
-their minimum voltage on cold boot, so the PHY had no analog power and
-never asserted HPD.
-
-The driver did call rk_hdmi_probe_regulators() with "avdd-0v9"/"avdd-1v8",
-but that resolves regulators by their regulator-name via
-regulator_autoset_by_name(), which does not match the vdda0v9_image /
-vcca1v8_image names, so the lookup failed and the supplies were never
-enabled. regulator_autoset() would not have helped either: it returns
-early for regulators that are neither always-on nor boot-on.
-
-Resolve the supplies through the avdd-0v9-supply / avdd-1v8-supply
-phandles, set the constrained voltage and enable them, matching the
-kernel's dw_hdmi-rockchip behaviour.
+Enable the VOP2 display controller and RK3568 DesignWare HDMI so U-Boot
+drives the HDMI port: vidconsole for the boot menu on a monitor, and
+EFI GOP (which registers automatically once a UCLASS_VIDEO device
+exists) for graphical UEFI payloads. Uses the in-tree dw_hdmi driver;
+no separate PHY driver is needed on RK3568.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- drivers/video/rockchip/rk3568_hdmi.c | 29 +++++++++++++++++++++++-----
- 1 file changed, 24 insertions(+), 5 deletions(-)
+ configs/nanopi-r5c-rk3568_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/video/rockchip/rk3568_hdmi.c b/drivers/video/rockchip/rk3568_hdmi.c
-index 9b3e54ce6fd..4fd164cd40b 100644
---- a/drivers/video/rockchip/rk3568_hdmi.c
-+++ b/drivers/video/rockchip/rk3568_hdmi.c
-@@ -12,6 +12,7 @@
- #include <asm/arch-rockchip/cru_rk3568.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rk3568.h>
-+#include <power/regulator.h>
- #include "rk_hdmi.h"
- 
- /* Default HDMI PHY reference rate to bring HPLL up for hot-plug detect */
-@@ -47,11 +48,30 @@ static int rk3568_hdmi_of_to_plat(struct udevice *dev)
- 	return rk_hdmi_of_to_plat(dev);
- }
- 
--static const char * const rk3568_hdmi_reg_names[] = {
--	"avdd-0v9",
--	"avdd-1v8"
-+static const char * const rk3568_hdmi_supplies[] = {
-+	"avdd-0v9-supply",
-+	"avdd-1v8-supply",
- };
- 
-+static void rk3568_hdmi_enable_supplies(struct udevice *dev)
-+{
-+	struct dm_regulator_uclass_plat *plat;
-+	struct udevice *reg;
-+	int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(rk3568_hdmi_supplies); i++) {
-+		if (device_get_supply_regulator(dev, rk3568_hdmi_supplies[i],
-+						&reg))
-+			continue;
-+
-+		plat = dev_get_uclass_plat(reg);
-+		if (plat->min_uV)
-+			regulator_set_value(reg, plat->min_uV);
-+
-+		regulator_set_enable(reg, true);
-+	}
-+}
-+
- static int rk3568_hdmi_probe(struct udevice *dev)
- {
- 	struct rk_hdmi_priv *priv = dev_get_priv(dev);
-@@ -59,8 +79,7 @@ static int rk3568_hdmi_probe(struct udevice *dev)
- 	struct rk3568_cru *cru = rockchip_get_cru();
- 	struct clk ref_clk;
- 
--	rk_hdmi_probe_regulators(dev, rk3568_hdmi_reg_names,
--				 ARRAY_SIZE(rk3568_hdmi_reg_names));
-+	rk3568_hdmi_enable_supplies(dev);
- 
- 	/*
- 	 * Ungate the HDMI controller clocks. The RK3568 clock driver does
+diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
+index e75a24dadc8..a89ade9829b 100644
+--- a/configs/nanopi-r5c-rk3568_defconfig
++++ b/configs/nanopi-r5c-rk3568_defconfig
+@@ -68,4 +68,8 @@ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
++CONFIG_VIDEO=y
++CONFIG_DISPLAY=y
++CONFIG_VIDEO_ROCKCHIP=y
++CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.55.0
