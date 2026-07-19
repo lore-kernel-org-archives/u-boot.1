@@ -4,67 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E456CC4451B
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 02:58:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE273C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 04:33:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE22F83E76;
-	Mon, 20 Jul 2026 04:58:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D2F980517;
+	Mon, 20 Jul 2026 06:33:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=iro.umontreal.ca
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BDrKl1GR";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44DC184118; Mon, 20 Jul 2026 04:58:20 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 2FB1A84AA5; Sun, 19 Jul 2026 23:24:13 +0200 (CEST)
+Received: from ciao.gmane.io (ciao.gmane.io [116.202.254.214])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5983782991
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 04:58:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4h3QF426skzMlDF;
- Mon, 20 Jul 2026 04:58:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1784516296;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mPbcC5TNHgEEWxkIA7MyHNpOS6rHb48/OScObTsUUa0=;
- b=BDrKl1GR/sbIlAR3jSfJKZV2/2RmTedOkNa3IUojMCBw8aCP1GYXuZCzhgVyZ/X98BuIu7
- vsQXCWDmj6LuheW6r0pKzvYrzI05E4nn4yIrR+fFbmu+x40YpuHuQ81S5yNzvQoNMekHvm
- OxHfJXHh4bbQ0Tkq25W2mft8dP0CZTB57e5CxdmvLiwWdb29GaoCfSY7rRst0B8BH7T2mx
- 5kbSET+sCSnvlFInNXoVKBhUQ/GioqEc3fqaG7lriQaLhHfiihRAmyvvEEBpzaTfA6yTGE
- IesNx7B6yXloHbWEg1sGNXhy46j/CyAO77p6f0q+qJpe3NibyJWK76wPhbMPJA==
-Message-ID: <1c0aa375-b274-4171-801d-4ee7b857e61e@mailbox.org>
-Date: Sat, 18 Jul 2026 22:20:33 +0200
-MIME-Version: 1.0
-Subject: Re: [PATCH v2] usb: mtu3: support the current devicetree binding
-To: Carlo Caione <ccaione@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: e3b152384823227b743
-X-MBO-RS-META: n9zboy6tqbk89jadio1nr1qgrj83xak9
+ by phobos.denx.de (Postfix) with ESMTPS id B7C0384AA5
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 23:24:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=iro.umontreal.ca
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=gcbu-u-boot-users@m.gmane-mx.org
+Received: from list by ciao.gmane.io with local (Exim 4.92)
+ (envelope-from <gcbu-u-boot-users@m.gmane-mx.org>)
+ id 1wlYza-0003N8-7B
+ for u-boot@lists.denx.de; Sun, 19 Jul 2026 23:24:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: u-boot@lists.denx.de
+From: Stefan Monnier <monnier@iro.umontreal.ca>
+Subject: Re: [PATCH 0/9] video: rockchip: VOP2 and HDMI output for RK3568
+Date: Sun, 19 Jul 2026 17:24:01 -0400
+Message-ID: <jwvv7aasn6w.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
+References: <cover.1784424101.git.daniel@makrotopia.org>
+Mime-Version: 1.0
+Content-Type: text/plain
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Cancel-Lock: sha1:vnfrUT0dyZtRHO4e4ES3SizxJ1o=
+In-Reply-To: <cover.1784424101.git.daniel@makrotopia.org> (message from Daniel
+ Golle <daniel@makrotopia.org> on Sun, 19 Jul 2026 02:58:43 +0100)
+X-Mailman-Approved-At: Mon, 20 Jul 2026 06:33:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,105 +56,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/18/26 12:08 PM, Carlo Caione wrote:
+Daniel Golle [2026-07-19 02:58:43] wrote:
+> U-Boot has no video output support for the RK3568/RK3566 family: the
+> VOP2 display controller found in these SoCs (and newer Rockchip parts)
+> is unsupported, so boards cannot show a boot menu, the UEFI console or
+> any other firmware user interface on a locally attached display, while
+> the vendor firmware and the Linux kernel have long been able to drive
+> it.
 
-[...]
+Indeed, and this is a PITA for some boards.  Thank you for working
+on it.
+I just tried your patch set on an Odroid-M1 by applying the patches in
+sequence, and then adding the following to it:
 
-> +++ b/drivers/usb/mtu3/mtu3_plat.c
-> @@ -11,6 +11,11 @@
->   #include "mtu3.h"
->   #include "mtu3_dr.h"
->   
-> +struct mtu3_glue_plat {
-> +	struct udevice *child;
-> +	bool legacy_binding;
-> +};
-> +
->   void ssusb_set_force_mode(struct ssusb_mtk *ssusb,
->   			  enum mtu3_dr_force_mode mode)
->   {
-> @@ -135,7 +140,9 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
->   
->   static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
->   {
-> -	struct udevice *child;
-> +	struct mtu3_glue_plat *plat = dev_get_plat(dev);
-> +	struct udevice *child = plat->child;
-> +	fdt_addr_t mac_addr;
->   	int ret;
->   
->   	ret = device_get_supply_regulator(dev, "vusb33-supply",
-> @@ -160,13 +167,17 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
->   		return -ENODEV;
->   	}
->   
-> -	ret = device_find_first_child(dev, &child);
-> -	if (ret || !child) {
-> -		dev_err(dev, "failed to get child %d!\n", ret);
-> -		return ret;
-> +	mac_addr = devfdt_get_addr_name(child, "mac");
+    % git diff origin/master configs/odroid-m1-rk3568_defconfig  
+    diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk3568_defconfig
+    index b00985b0405..00f47245529 100644
+    --- a/configs/odroid-m1-rk3568_defconfig
+    +++ b/configs/odroid-m1-rk3568_defconfig
+    @@ -70,6 +70,7 @@ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+     CONFIG_PHY_REALTEK=y
+     CONFIG_NVME_PCI=y
+     CONFIG_PCIE_DW_ROCKCHIP=y
+    +#CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
+     CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+     CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+     CONFIG_SPL_PINCTRL=y
+    @@ -92,5 +93,13 @@ CONFIG_USB_OHCI_HCD=y
+     CONFIG_USB_OHCI_GENERIC=y
+     CONFIG_USB_DWC3=y
+     CONFIG_USB_DWC3_GENERIC=y
+    +CONFIG_USB_KEYBOARD=y
+     CONFIG_FS_CRAMFS=y
+    +CONFIG_VIDEO=y
+    +CONFIG_DISPLAY=y
+    +CONFIG_VIDEO_ROCKCHIP=y
+    +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+    +#CONFIG_VIDEO_DT_SIMPLEFB=y
+    +#CONFIG_VIDEO_BRIDGE=y
+    +#CONFIG_VIDEO_REMOVE=y
+     CONFIG_ERRNO_STR=y
+    % 
 
-Use device_*()/ofnode_*() DT accessors please, not the raw 
-fdt_*()/devfdt_*() ones.
+But I still can't see anything on my display (and hitting any key on
+the USB keyboard did not elicit any response, the timer kept going).
+The serial-port output is appended (tho I cut out the DDR
+initialization part).
 
-> +	if (mac_addr == FDT_ADDR_T_NONE) {
-> +		dev_err(dev, "error mapping memory for mac\n");
-> +		return -ENODEV;
->   	}
->   
-> -	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
-> +	/* Current bindings describe the device block, not the whole MAC. */
-> +	if (!plat->legacy_binding)
-> +		mac_addr -= SSUSB_DEV_BASE;
-> +
-> +	ssusb->mac_base = map_physmem(mac_addr, 0, MAP_NOCACHE);
->   	if (!ssusb->mac_base) {
->   		dev_err(dev, "error mapping memory for mac\n");
->   		return -ENODEV;
-> @@ -310,16 +321,24 @@ U_BOOT_DRIVER(mtu3_host) = {
->   
->   static int mtu3_glue_bind(struct udevice *parent)
->   {
-> -	struct udevice *dev;
-> +	struct mtu3_glue_plat *plat = dev_get_plat(parent);
->   	enum usb_dr_mode dr_mode;
->   	const char *driver;
->   	const char *name;
->   	ofnode node;
->   	int ret;
->   
-> -	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
-> +	node = ofnode_null();
-> +	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
-> +		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
-> +			break;
-> +	}
-> +
-> +	plat->legacy_binding = ofnode_valid(node);
-> +
-> +	/* Current bindings keep the gadget resources on the parent node. */
->   	if (!ofnode_valid(node))
-> -		return -ENODEV;
-> +		node = dev_ofnode(parent);
->   
->   	name = ofnode_get_name(node);
->   	dr_mode = usb_get_dr_mode(node);
-> @@ -349,7 +368,8 @@ static int mtu3_glue_bind(struct udevice *parent)
->   	dev_dbg(parent, "%s: node name: %s, driver %s, dr_mode %d\n",
->   		__func__, name, driver, dr_mode);
->   
-> -	ret = device_bind_driver_to_node(parent, driver, name, node, &dev);
-> +	ret = device_bind_driver_to_node(parent, driver, name, node,
-> +					 &plat->child);
->   	if (ret)
->   		dev_err(parent, "%s: not able to bind usb device mode\n",
->   			__func__);
-> @@ -369,5 +389,6 @@ U_BOOT_DRIVER(mtu3) = {
->   	.bind = mtu3_glue_bind,
->   	.probe = mtu3_probe,
->   	.remove = mtu3_remove,
-> +	.plat_auto	= sizeof(struct mtu3_glue_plat),
->   	.priv_auto	= sizeof(struct ssusb_mtk),
+Any idea what might be the problem?
 
-Can you extend struct ssusb_mtk with a new field instead of adding plat 
-data ?
+
+=== Stefan
+
+
+U-Boot SPL 2026.07-00012-gec560345eabb (Jul 19 2026 - 20:09:19 +0000)
+Trying to boot from MMC2
+## Checking hash(es) for config config-1 ... OK
+## Checking hash(es) for Image atf-1 ... sha256+ OK
+## Checking hash(es) for Image u-boot ... sha256+ OK
+## Checking hash(es) for Image fdt-1 ... sha256+ OK
+## Checking hash(es) for Image atf-2 ... sha256+ OK
+## Checking hash(es) for Image atf-3 ... sha256+ OK
+## Checking hash(es) for Image atf-4 ... sha256+ OK
+## Checking hash(es) for Image atf-5 ... sha256+ OK
+## Checking hash(es) for Image atf-6 ... sha256+ OK
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v2.3():v2.3-645-g8cea6ab0b:cl, fwver: v1.44
+NOTICE:  BL31: Built : 16:36:43, Sep 19 2023
+INFO:    GICv3 without legacy support detected.
+INFO:    ARM GICv3 driver initialized in EL3
+INFO:    pmu v1 is valid 220114
+INFO:    l3 cache partition cfg-0
+INFO:    dfs DDR fsp_param[0].freq_mhz= 1560MHz
+INFO:    dfs DDR fsp_param[1].freq_mhz= 324MHz
+INFO:    dfs DDR fsp_param[2].freq_mhz= 528MHz
+INFO:    dfs DDR fsp_param[3].freq_mhz= 780MHz
+INFO:    Using opteed sec cpu_context!
+INFO:    boot cpu mask: 0
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x800000
+INFO:    SPSR = 0x3c9
+ 
+ 
+U-Boot 2026.07-00012-gec560345eabb (Jul 19 2026 - 20:09:19 +0000)
+ 
+Model: Hardkernel ODROID-M1
+SoC:   RK3568B2
+DRAM:  4 GiB
+PMIC:  RK809 (on=0x40, off=0x00)
+Core:  629 devices, 35 uclasses, devicetree: separate
+MMC:   mmc@fe2b0000: 1, mmc@fe310000: 0
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial
+Err:   serial
+Model: Hardkernel ODROID-M1
+SoC:   RK3568B2
+Net:   eth0: ethernet@fe2a0000
+ 
+Hit any key to stop autoboot: 0
+
