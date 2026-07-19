@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8862EC4450A
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F6ABC44512
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jul 2026 18:37:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 638B884AC8;
+	by phobos.denx.de (Postfix) with ESMTP id 9C3A784ACF;
 	Sun, 19 Jul 2026 20:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="RZhbuVOa";
+	dkim=pass (2048-bit key; unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.b="Q3B8zh11";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A03D84A5D; Sun, 19 Jul 2026 20:04:16 +0200 (CEST)
+ id 945D884A5B; Sun, 19 Jul 2026 20:04:17 +0200 (CEST)
 Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
  [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 122BF8494B
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6066D84A4B
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 20:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.tenstorrent.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=asrinivasan@tenstorrent.com
 Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-664b05d408bso5068318d50.1
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:14 -0700 (PDT)
+ 956f58d0204a3-66825848551so2866641d50.0
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 11:04:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1784484253; x=1785089053; darn=lists.denx.de;
+ d=tenstorrent.com; s=google; t=1784484254; x=1785089054; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5jS28xxpTquQxiwMOs64s0zNF47bl4pH+0npvEUF6VQ=;
- b=RZhbuVOaGDW85OqmQ9pvm/vjoZsJ8kLG7nTJ+8xIMppe5BiyytQMm6tP3YRIw1+inz
- OzQa3rhcujZiMLOU+mieZrbgTqS2ntyvFuWDoNaPQTwosMnxso2GtGEWg0kpJLC7dUSS
- vt4xm0isRWOKyzjQSpEocONQeqvoq4Ahsx7lIkd6LSJueeLYsCbc6MS22552WRKIY6UT
- +3O1R7nF40yl86EJsN8bfIQconcuVw77VT/fc+rBjxp60zD0o0PSFQnZ7CQuOxmgR5Li
- hBqO3JOS3ICBNvjD6daEneijh3mPPTz0r2C9m3mU2ZQYWcjDjkQJ0RGay/dAwlG+BXEf
- sZzw==
+ bh=OS1agDURoZppaBMGKfF0miyVa+hh68F1CEGHY5gZ8Oc=;
+ b=Q3B8zh11+LByVql1xLr5e2ETbmn7U4DK+gU7QsWfJCxjlbWdVMZYPjo4V24jBE44JG
+ l78y2x3bi7+T7DY5aL6APvosA6A5cLHMFAxAWG+IjaR9zW1VqXshg14Yc8czUefbBXtE
+ p+FdmUNlngFbIss4rF/qBeTFCwZxd7rvZhWVpA5p6CYKNGYNFB06ScsTYdYEXB2Is4Ax
+ df2whwtzWNpovRiKVMooBpA6HaB9RQpJauyTyit/Ymr/FnAZF69CdRbR3s/9ue1EHvHD
+ Yq7gSQlQzSs81HTfVhMvU7O7o2KSlUlSGDk/eAKeZFRgd76ENIfUcI9R2nl5eqh9Oe8p
+ BAiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784484253; x=1785089053;
+ d=1e100.net; s=20251104; t=1784484254; x=1785089054;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5jS28xxpTquQxiwMOs64s0zNF47bl4pH+0npvEUF6VQ=;
- b=Yl4/o88RbpLRSx+65s7bTzpQ7risyW/bvi804f+QvX9swmiyQ8zJ0LLPWUqJ0uyjG4
- 6HIqiF6yvgi1DklkTPG8E850SgHSZmHxLkQgAzT3aOgaIBo8gP3y/PP/0ZP44P7y+xW0
- BT4PjX/1kYMfEGccn3LTy4zRA02H4g0CY3d3btUNAVrTiJSONDGizFWbmKZnl9M9UlKq
- Z+gZRrNmeC56DhQq/SYkUAysJG65tDdzv0n9qRQga5Hh2Xj0j8OG2uFiStGdr/rzTnWL
- tFaJ06f0tCkQagZTQldZta6ZQoD1bR5LSbVl8mUvyAjLzQqNWyWRqOZrrNE0ibHUCL5D
- FZhw==
-X-Gm-Message-State: AOJu0YxxKfl5bbqFXieQz8KC1an6lth4/SuXgV6uVEdIJMPzqS9kCdkz
- KoVg/2Cme0XXI5igN0Pmq6j1oSq4F2KIXHZBxlzOBjoDroNE+GuP79PkzWu1p47zfsk=
-X-Gm-Gg: AfdE7cma1jFD1UQuSYllg6H5Orjj9FgJ9SGR/hu0hi0qWWpjTHci3ssd5zuWdociOpn
- 0yYfbfULv3cXFrRTbjNUSZrCPsexry0kMa8K/zskHrEYzZLKAGp9JvyCsIyVzmJ1Dz/yS3+1j1d
- cs7FOj6gnLHKiKeCyt8moWnZV5Y0FI7fUXAFgVFYprB3ZZG7T/Xjl64gMSgnpSitdBL3QN6qdoj
- X8DgOxOR7U/DOQol4z1UKBStWmhXR3ygeumShaf5slTDdUNWR2kzDfxHBTk55aKZMUnfAEfsRxd
- 9Q+8m2Qba6Kh1MI/5N3hHybLKKJOQ6UHimYGj3b/rf+B69MiwYMij32z7xuYSBzSkfMkCSmtwrP
- V7F76v10+jZOLt3lYi/n8qFvT3no/SjeBJd8JKLQYogjZp5eUjd5I0WVQQuamgAfq351WjgmYp/
- O41Id7+ZX7Y7UF/8zxtILdTVAtGEY2Oz/VZoJTwJqrIX/a5vADhEFUupOlq801mivO
-X-Received: by 2002:a53:accb:0:20b0:668:110f:8c10 with SMTP id
- 956f58d0204a3-6683bde88e3mr2440485d50.83.1784484252744; 
- Sun, 19 Jul 2026 11:04:12 -0700 (PDT)
+ bh=OS1agDURoZppaBMGKfF0miyVa+hh68F1CEGHY5gZ8Oc=;
+ b=QD+g+fp5nzua05/Vwch0WzEAvuk77kQPTDLPrdg+MUbcgXKo6O/qzd8/7eJu6o2Sbi
+ aQNzkCjqLSReD1xYrAOdMAYccrqQVDFc373UtdZZr2ZGaHomzXrc0+gpKMwMfjlJkBKX
+ 4zNXic0fy61VjwPZ4hpRNFg5SHWIE25GgTnGR/rk8MJrjw7Fu6sgu2cypwNsfloWZInp
+ 65L3w2y++9fKPACkmAGDL2TNQ1UmwB/mrXj60oHG++UgIbMZv88INqnSj8P0BGHiNM7P
+ xf45efdKHQrMKy+ei7/atTyhMGYE8EryNPk56Sn2Jt1VjfQhWETxRTsN6Xz8xMKNlOza
+ V22w==
+X-Gm-Message-State: AOJu0YxgPAC8cVOhQ5Zxw0TwaE3xjZC42Xx+PEb00lmFe2G01M6v/Mz4
+ 7MrNdkvVyY2Nf6hRIAztBraDAHuxji2kpBULlvjSYtHGJ1pikwY5YNS6gJmyGXqQjjE=
+X-Gm-Gg: AfdE7ckOdiKgp5RFl7lo5FygALvO8e9qPlMFfjSq84HF9zWFCJAUjcKYZul5ZHmVYC6
+ f+lZpBUHBiPgau8bO0badcZzJW4bVlKBJZEKGAgGxUvi3+QpIs6TJE804EQ7Y9gMl802khTfueJ
+ hIa1xv+PGitSCeH0oAeTiqhaYAE9oHArw1Lc2IwGmA+cjvFo5HdT1l8PaX0T5SXAsmxxFV4XWhN
+ /gDDfk+MAvEQXTg+6I/fYMs/6Bw/O729rV+7FkSfSCQTwjkKP83Stv2bnO2oyTwnXK20V2e0rGp
+ pwcXzekZKxb/4uFrmVE2L+L8ke0/4iC/f5d9fGpHz6+CDl8opQAXjGUyuCv9M78S8OL2ACHQyyL
+ j2gIqkRDHD6rxKMTyln6EuSCm1u+b43rgufzs4EK+qMjRg7JFtT8nxaQNO1rp9KqoIfkUiziZ0h
+ EIToQDX2eG4hHQDGaizjVwewtqqDc/Hwz9cz23mBmH6i82CjUVCjwRbw==
+X-Received: by 2002:a53:a6d0:0:b0:667:e2e1:4c with SMTP id
+ 956f58d0204a3-6683bb03e7bmr1970606d50.2.1784484254208; 
+ Sun, 19 Jul 2026 11:04:14 -0700 (PDT)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:423:c42:416:fc31])
  by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.11
+ 956f58d0204a3-6683b513a3esm4879882d50.2.2026.07.19.11.04.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 11:04:12 -0700 (PDT)
+ Sun, 19 Jul 2026 11:04:13 -0700 (PDT)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Sun, 19 Jul 2026 13:03:36 -0500
-Subject: [PATCH 5/8] bios_emulator: extend VGA I/O ports to include ports
- 0x3B4-0x3DA
+Date: Sun, 19 Jul 2026 13:03:37 -0500
+Subject: [PATCH NOT-FOR-UPSTREAM 6/8] video: Add Aspeed VGA driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260719-aspeed_vbios_fixes-v1-5-c94026f28250@oss.tenstorrent.com>
+Message-Id: <20260719-aspeed_vbios_fixes-v1-6-c94026f28250@oss.tenstorrent.com>
 References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 In-Reply-To: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -117,88 +116,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IS_VGA_PORT macro currently doesn't cover the 0x3B4, 0x3B5 and 0x3BA
-I/O ports. Reads/writes to this currently fall through to LOG_inpb/outb
-which are unimplemented on non x86 architectures (which don't support
-I/O ports).
+Add a video driver for the Aspeed VGA device that relys on the vesa
+video implementation and VBIOS emulation. The VBIOS requires a custom
+INT15 handler, so that is added in this commit.
 
-Add these ports to the IS_VGA_PORT macro, and implement reads/writes to
-these ports. 0x3B4 and 0x3B5 are mirrors of 0x3D4 and 0x3D5 that are
-used in monochrome mode (bit 0 of 0x3C2 is not set). Implement these
-with the same logic and env state as 0x3D4/0x3D5, but with the bit check
-condition for 0x3C2 flipped. 0x3BA is a mirror of 0x3DA, so the
-implementation for this falls back to the same logic as 0x3DA.
-
-The Aspeed AST2600's VBIOS uses these I/O ports, and these changes are
-needed for it's VBIOS to run.
+This commit isn't usable as is, and depends on the next commit for the
+device to actually work. And I'm not sure if the next commit is suitable
+for upstream, so I've marked this one as such too.
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- drivers/bios_emulator/besys.c | 30 +++++++++++++++++++++++++++++-
- 1 file changed, 29 insertions(+), 1 deletion(-)
+ drivers/video/Kconfig      | 10 ++++++
+ drivers/video/Makefile     |  1 +
+ drivers/video/aspeed_vga.c | 81 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 92 insertions(+)
 
-diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
-index 1b0c29794e6..7365e86a9e7 100644
---- a/drivers/bios_emulator/besys.c
-+++ b/drivers/bios_emulator/besys.c
-@@ -249,7 +249,7 @@ void X86API BE_wrl(u32 addr, u32 val)
- #define IS_TIMER_PORT(port) (0x40 <= port && port <= 0x43)
- #define IS_CMOS_PORT(port)  (0x70 <= port && port <= 0x71)
- /*#define IS_VGA_PORT(port)   (_BE_env.emulateVGA && 0x3C0 <= port && port <= 0x3DA)*/
--#define IS_VGA_PORT(port)   (0x3C0 <= port && port <= 0x3DA)
-+#define IS_VGA_PORT(port)   (0x3B4 <= port && port <= 0x3DA)
- #define IS_PCI_PORT(port)   (0xCF8 <= port && port <= 0xCFF)
- #define IS_SPKR_PORT(port)  (port == 0x61)
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index c2acc13139c..012abcebebd 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -874,6 +874,16 @@ config LOGICORE_DP_TX
+ 	  Note that this is a pure transmitter device, and has no display
+ 	  capabilities by itself.
  
-@@ -270,6 +270,18 @@ static u8 VGA_inpb (const int port)
- 
- 	debug_io("vga_inb.%04X -> ", (u16) port);
- 	switch (port) {
-+	/*
-+	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
-+	 * monochrome mode (i.e bit 0 of 3C2 is not set)
-+	 */
-+	case 0x3B4:
-+		if (!(_BE_env.emu3C2 & 0x1))
-+			return _BE_env.emu3D4;
++config VIDEO_ASPEED_VGA
++	bool "Enable ASPEED AST2600 VGA support"
++	depends on BIOSEMU
++	help
++	  This enables support for the ASPEED AST2600 VGA controller. The
++	  display controller is initialised by running the card's x86 Video
++	  BIOS through the biosemu emulator, so this driver depends on
++	  CONFIG_BIOSEMU. A small INT 15h handler is supplied to satisfy the
++	  VBIOS's PLL/DRAM settle-time WAIT calls during POST.
++
+ config VIDEO_BROADWELL_IGD
+ 	bool "Enable Intel Broadwell integrated graphics device"
+ 	depends on X86
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 082b8967982..dffe018eb03 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -48,6 +48,7 @@ obj-$(CONFIG_NXP_TDA19988) += tda19988.o
+ obj-$(CONFIG_OSD) += video_osd-uclass.o
+ obj-$(CONFIG_SANDBOX_OSD) += sandbox_osd.o
+ obj-$(CONFIG_VIDEO_BCM2835) += bcm2835.o
++obj-$(CONFIG_VIDEO_ASPEED_VGA) += aspeed_vga.o
+ obj-$(CONFIG_VIDEO_BOCHS) += bochs.o
+ obj-$(CONFIG_VIDEO_BROADWELL_IGD) += broadwell_igd.o
+ obj-$(CONFIG_VIDEO_COREBOOT) += coreboot.o
+diff --git a/drivers/video/aspeed_vga.c b/drivers/video/aspeed_vga.c
+new file mode 100644
+index 00000000000..6595cd2e426
+--- /dev/null
++++ b/drivers/video/aspeed_vga.c
+@@ -0,0 +1,81 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * ASPEED AST2600 VGA driver. The display controller is initialised by
++ * running the card's x86 Video BIOS through the biosemu emulator.
++ * This driver sets up an INT 15h handler that is used by the ASPEED
++ * VBIOS for delays during PLL initialization.
++ */
++
++#include <bios_emul.h>
++#include <dm.h>
++#include <log.h>
++#include <pci.h>
++#include <vesa.h>
++#include <video.h>
++#include <linux/delay.h>
++
++/*
++ * INT 15h handler used by the ASPEED VBIOS. The WAIT subfunction
++ * is implemented and the rest are reported as unsupported.
++ */
++static int aspeed_vga_int15_handler(void)
++{
++	switch (M.x86.R_AH) {
++	case 0x86:		/* WAIT: CX:DX = interval in microseconds */
++		udelay(((u32)M.x86.R_CX << 16) | M.x86.R_DX);
++		CLEAR_FLAG(F_CF);
 +		break;
-+	case 0x3B5:
-+		if (!(_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
-+			return _BE_env.emu3D5[_BE_env.emu3D4];
++	default:
++		M.x86.R_AH = 0x86;	/* function not supported */
++		SET_FLAG(F_CF);
 +		break;
- 	case 0x3C0:
- 		/* 3C0 has funky characteristics because it can act as either
- 		   a data register or index register depending on the state
-@@ -321,6 +333,10 @@ static u8 VGA_inpb (const int port)
- 		if ((_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
- 			return _BE_env.emu3D5[_BE_env.emu3D4];
- 		break;
-+	/*
-+	 * 3BA is a mirror of 3DA
-+	 */
-+	case 0x3BA:
- 	case 0x3DA:
- 		_BE_env.flipFlop3C0 = 0;
- 		val = _BE_env.emu3DA;
-@@ -343,6 +359,18 @@ to use.
- static void VGA_outpb (int port, u8 val)
- {
- 	switch (port) {
-+	/*
-+	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
-+	 * monochrome mode (i.e bit 0 of 3C2 is not set)
-+	 */
-+	case 0x3B4:
-+		if (!(_BE_env.emu3C2 & 0x1))
-+			_BE_env.emu3D4 = val;
-+		break;
-+	case 0x3B5:
-+		if (!(_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
-+			_BE_env.emu3D5[_BE_env.emu3D4] = val;
-+		break;
- 	case 0x3C0:
- 		/* 3C0 has funky characteristics because it can act as either
- 		   a data register or index register depending on the state
++	}
++
++	return 1;
++}
++
++static int aspeed_vga_probe(struct udevice *dev)
++{
++	int ret;
++
++	ret = vesa_setup_video(dev, aspeed_vga_int15_handler);
++	if (ret)
++		return log_ret(ret);
++
++	return 0;
++}
++
++static int aspeed_vga_bind(struct udevice *dev)
++{
++	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
++
++	/* ASPEED exposes a 16 MiB VRAM BAR */
++	uc_plat->size = 16 << 20;
++	log_debug("%s: Frame buffer size %x\n", __func__, uc_plat->size);
++
++	return 0;
++}
++
++static const struct video_ops aspeed_vga_ops = {
++};
++
++static const struct udevice_id aspeed_vga_ids[] = {
++	{ .compatible = "aspeed,vga" },
++	{ }
++};
++
++U_BOOT_DRIVER(aspeed_vga) = {
++	.name		= "aspeed_vga",
++	.id		= UCLASS_VIDEO,
++	.of_match	= aspeed_vga_ids,
++	.bind		= aspeed_vga_bind,
++	.probe		= aspeed_vga_probe,
++	.ops		= &aspeed_vga_ops,
++};
++
++static struct pci_device_id aspeed_vga_supported[] = {
++	{ PCI_DEVICE(0x1a03, 0x2000) },
++	{ },
++};
++
++U_BOOT_PCI_DEVICE(aspeed_vga, aspeed_vga_supported);
 
 -- 
 2.43.0
