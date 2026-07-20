@@ -1,103 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE77C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C934C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A8B0080D91;
+	by smtp4.osuosl.org (Postfix) with ESMTP id E7436406F5;
 	Mon, 20 Jul 2026 18:10:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PmbBhO6cFgIk; Mon, 20 Jul 2026 18:10:14 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mtYHdk1xAExc; Mon, 20 Jul 2026 18:10:15 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D4C1F80D82
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AABA2406E2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571012;
-	bh=W1bfgW5KO1zqA/tD2PyiocEnms4V2CBW+DWiOiZOIiA=;
+	d=lists.u-boot-project.org ; s=default; t=1784571014;
+	bh=Oqo6ixlYsyk1iQ7M0B4fzUdeOpaX0QlUzEsGR6+ELqo=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=GKwE4aX/rsujZ5w1Ze5ostXEYBI2eF6TRBU409u8c966XSu+gXJnrofZyIEdjG4wT
-	 Brqn2ZHFQH7L4eyVjHHCGk9BWg3z/LkTaCfmXM955gLpYqQG4hXhlleV6KbXcyDuMG
-	 XqRqgBGjm8TYGJQXk/cB0Wjm9PxSKCPHFJfKZVW31O/FE0ALpT3jHxZz2QL4JcgUkn
-	 wwNRm4rTPUjpJRpQMH/8pWYEHl2xxj3JBekFE2JCeTiV47bGjwie76WnCjtTl1+0Gx
-	 IS8JmmNVoiUH6u0LrZc93YwWm8lNKulFt8UO/Z5ZvZ3elXzd1R6PAm/cthvTJ6rgFY
-	 feG8OFX7GDucg==
+	b=dd7gNEV8Yn3bNrO0Np8UszihOXLp5B8LYdXz8nhinj1h8X/zIlY/EhtIpKWBEQt4i
+	 L8GHdsdOerk259iE8fj5MPnD6Hy2R9Ziy3iCSTvvQcJOX8Z/82VRkRHtH7YZj7G/WV
+	 XKR+wbOBCR+vxW7YSlEf5hUsAE9ITYTpu9werdn/xPjAP5Ix4PB3S7TdzdBVi3gSPV
+	 wjWid/iZhKzHDnJymVlpsR4IZ1C48rIV0nk4GfOtLZwlwQQFhGOgFpaHc+qPvoUo1y
+	 lsMQnS1j19G00ImCZLMiOJK6LkpCugqaBk4+Kr182G44ycJ3QIwZpJ1eyf2jrbFs5s
+	 QkvAEvmhi5/gw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D4C1F80D82;
-	Mon, 20 Jul 2026 18:10:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4AC131DDB
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AABA2406E2;
+	Mon, 20 Jul 2026 18:10:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C76C51E11
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 30C1180BFA
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id AD5876060E
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YMnlbqE43RzB for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 30F4180D09
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 30F4180D09
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 30F4180D09
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VvAn4vUi4I6q for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=casey.connolly@linaro.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 5D8FA6071F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5D8FA6071F
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5D8FA6071F
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACC0F84949; Mon, 20 Jul 2026 18:41:10 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id D595884A12; Mon, 20 Jul 2026 18:41:36 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87814844F6
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:08 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-49553515a8bso23095635e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:08 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 65AC28484A
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:34 +0200 (CEST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-49545ba3d4eso20735045e9.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565668; x=1785170468;
+ d=1e100.net; s=20251104; t=1784565694; x=1785170494;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=W1bfgW5KO1zqA/tD2PyiocEnms4V2CBW+DWiOiZOIiA=;
- b=SQjdqdujqAFsFgSa78/tlfK/0yjKIJtnG0uxVeGXGMHNtWRRSU8E/gFx2jl+i5p5rh
- d3tJxIz8H73r0v4bqsell57s48RTT2nk3Ivxa1gz2NSXG7goFnaSfPJygxtLmwrf0aHH
- mEsTUA+uPl5LMF2uEOlgyHhTkoVbv+igLoYRp2+Cm57oYhzDXrojKXAxS5DuqegsAX6D
- mzOQgTcvwm4t5LhPdSNQVQKd9DtDgqJ1HwPeC2asQiqg4wTPkxByjd1OE6KbMh1xAJHI
- gLqaamIsZ/A+HyTYMe6+Qga+AfptXlGvaeJsKAt2OaseupfVWcYT1cFxZsp6zjc/kHbv
- J3JQ==
-X-Gm-Message-State: AOJu0YwgUoZlrNy06FdJUsVguAwHx2tie3dOJGW3O8X3bi42oT9LUK8/
- dAFA4Ic3pgqP3jsa1zsry+iadpvLBuYxvX3Qu9is4cArY9vGyBBl8sTjNgSpLXQjHXc=
-X-Gm-Gg: AfdE7clT95ZLvtEY3XUV8ozDfNiU1EL9JBA8XkhM7s9VttdlcdBjf/Rtue2oVO3vSFI
- YXVH2zFfMYUkWUEFUmVFkmvCY/h2Nm6za/8rOgDgPkBSn/6SnWTcfgImbcLVT/SUhIv5jL8HzCo
- cd6Sl5sIvgfwUJ8QgA4oWVF9VGyNgjJ8JS3nWIUQ3sW5hQ9yVI9oohVmZ4MSMDYopPYmFehHpXZ
- 6W8JTDNoi+/UAbpU44KASpJA1DxIaC3wMwe1MpF5evKn+xZ8ACHWZFetYx2Nu60fe74omJl4W/p
- KUIuNJn+ohQ5E1xoHzDah1/G1T54cBcmE5uWX1B19t/Ix6h4cIHVybEffAKoHhn6tBVp27SB56p
- Oy4O2eHwKDgMZ9Oqr6rIZBNBQ7vlSzf58Ugik5kAV5vg+DRTyJbNCjmv7MSm5lpFSwREMfOa4B3
- izSyiMDKhbytzQjqb4Go2wruwRpCELNw==
-X-Received: by 2002:a05:600c:3112:b0:495:472c:208d with SMTP id
- 5b1f17b1804b1-4954a41307cmr151953975e9.38.1784565667570; 
- Mon, 20 Jul 2026 09:41:07 -0700 (PDT)
+ bh=Oqo6ixlYsyk1iQ7M0B4fzUdeOpaX0QlUzEsGR6+ELqo=;
+ b=YMM0NSWmgYJZbGhUtjei5yPvsysOnyaaRMK3C2pL+JSZWfiPJSD9gRrfjvApaixDBs
+ MxmmPLZOs7+rkHvC0WQhXte/8N82vdXCe5k+UFzXBK+sY5ujO64jgxjDBqjIz6/mVl7U
+ NPVkrNznrKpYPStaN7WSE6PxHwKcCmey2ajiucpA2iepd2la4AOcefLkobisvqROvNJ4
+ tZEx/K0eQZ2NRkxc85VV2Zk4KhzrNoejdoFkU/GIORbi4p4mjKmZYdV/lvMZtXrJu1ig
+ 14ntz6Pya8AMMaBYeFCOVVd8ZU6unqj28vnTePXKvceQm6qbV/acD2juX78tTNJ3ckMh
+ 3aSA==
+X-Gm-Message-State: AOJu0Yya6HyT6hfQKS7ujTcaHqZjy2+TYQ32aqswQKmcUZgoELBuQQM1
+ aa17NgymM+cEQ677WoyVMwqYkKOvygJzOStkMozZ1eY6z3H9CPlKWQaiDDKzMgMdn9Y=
+X-Gm-Gg: AfdE7clAqds64ziGZnxFamdxEx1xpH8L5WPHcM2JRQq+mWxB0c46HetdwuigrXURrIt
+ WxFoPoeXyqSot78V5GXbuBlN54hGzdaTW6ble3VaN5LY1Y9Bq+fZ4a9u7D519ZTPXUy0duAc3aJ
+ isEVDd1CxiVwSkjNJ/33gjKt+37sFUjpj7cY0yPUTkf8tM+n4yC0ymnoU4NFYp9qTiiRduZVsKX
+ Fd11VSKD9jpyPO07WbpNUwBPM9/KV+YyZfQ9xmc2hZOy/dOb/MKxuFJZZ8IqtavKUN3omnsMK1p
+ bdTueho2ZNocFdA609yZvwdxGJSfvvarKg0kMrs0roV94ji6Bcem1+GRKXODwvBAVKiBkW4PmXv
+ TqYIJB4fV52/FQ2wtlbvVOYB3JX4ocUTK90Bod+SVE+UWccx3zi7yF3Rq7gPrGmIBT6hy3jmSFB
+ p75FisUvwk5WmXA98LP+inG4LJNI8cMQ==
+X-Received: by 2002:a05:600c:4585:b0:492:45a0:dcef with SMTP id
+ 5b1f17b1804b1-4954a3eeb63mr165332105e9.5.1784565693778; 
+ Mon, 20 Jul 2026 09:41:33 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.04
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:41:06 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:40:36 +0100
-Subject: [PATCH 09/36] clk: move clock flags to common clk-provider.h
+ Mon, 20 Jul 2026 09:41:32 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:40:45 +0100
+Subject: [PATCH 18/36] doc: describe Common Clock Framework
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-9-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-18-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -146,44 +145,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5656;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4521;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=d/3uB9MiQ1FHm7yOyedVgNNiozuNNemxsNlKRMUHV1I=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+CfDhxAIV+54iZqkG996Gn9vIC3MwvT3RCH
- D+CODQlZruJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PggAKCRAFgzErGV9k
- ti4wD/9RlqaCqCGHYSThA49InhfqRDIkjIuFXIWf3nylXmazyJyTUXT0hDb1VN8N+WZHfyqiynx
- TDVGE8MLFm1K6H9Ja55g2bGq1hgdy8IuPI2n78rv7/N4uljS6aPJRosXgCjux3l5Q7tEwRmgFS7
- DcT/vsqUYJAnQweguycI9gtPfIjxE9ZaJk7TLLNyijxPx67Xui7JVMyJaGnzQUWMFlfKRo1KbSy
- mK1hIjAXnjes102hdiUzatmUKky+Ihz+rz2E6bRwr132Hm7wIobzGX022O5HMaKWqp4Fg8iBiUx
- 0K4QTGQH1W/UqPzC4pio/KUdUZ1UgiIPfjL6+B2taeXMQ3oGGIrDnSoqRdfn+EVOqcGeDrLyp5r
- fFP7RxDkco4p8ud4/N7LAuLg03Fec+0Xh7WUBBr+pwrnbo5vB9XFS9cad0E5gUmzegzcPRomHNj
- KejPghd3b/IToy5mkm1caL0Rb9+bDpZ4WLXXbVNW6eYhQJ7cewlMGLilMPJBEmxsIVaNI53YyVa
- sBIaEopvZP26zjQRDFxoUhmlmEtBwPIXjJava4aE3fgRSzb1nSmuCuzPWyd/HAIvaZDJ54mn5ix
- tFzR+VBaSGLxA8KPp8YhnDFIVovVSqmH8t/xGIdf1xHDRmlYdYlb8tS4XQA7YD5F6wbQW0az0Xb
- m85gm1411rmnnJw==
+ bh=rSomRLjVVKCnU8cRpeI8BvmJsgQT9QMmhXl3h6TVXuI=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+Dufha9R5N/qvCKGFGKLnnP3/wgiaWgY6Cn
+ AE8yef3RuSJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgwAKCRAFgzErGV9k
+ tkCkEACOYWXk2wA+JoKdN07RlAB7Ctg1dsEtTklhsagm/YGbqxnvUCjpDyGH0lJqSd/bvr9q9Ol
+ XZBCqZil9l0cLm2SZv7aMeCPsFjeTCqVirIqKigYFlF7uKq6smzGf2VbVowXZIL9dDD8Lx6O8jg
+ vzXTU+SM1t5NGOutU5q6dQkWFsl1hM3aJwebJEmEZbNKg4eH445Uo5teVJ8ZzyVYnIVKGNoFxjJ
+ X0p4oM1x6Ns6DGeviE8HTxuzXEXWD3k5oPnYbowAFoi2kMKE6e/qZKqzD9PVVifqdrII5rxXrIs
+ jBMvGx11Ly17HCdwtFef/CjkU6WKnPDpYafll1WTpAJRYGh2RACcNrLbcNBN5RY5fGm6D8ubcHb
+ qSfrrmhtdV5u1woSlGPGt0eEHjNnBjfdZs4YkO+NE9Xe0Ba9AFzAPDOZmeL60OmIMv9QFfWcknV
+ TpU4lj8EApYVcS+eVgRDjs+oiSm4yDvZ2Jg2ZTUcu+/4jbMspCJLEo7+Fsd2hMmPNKdMbdDgJ0w
+ E9b3ZfZ7y+HdsYU21hbxTC1S9hiOdrHXPuvxrHw0Zx/wBoyKcJTPITEcjPHH+fcyIOwxKox53jH
+ cYLkn2ol3vn2ov/kP9g2Bp6ROtbpQMxKWL64z4PSngj20687mj77mosIeDNZJnesVGRUtObZ0Di
+ SPyd3cQ6tHiP92A==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565668; x=1785170468; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565694; x=1785170494; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=W1bfgW5KO1zqA/tD2PyiocEnms4V2CBW+DWiOiZOIiA=;
- b=h2Yt/llH5xEUr/0+Kx2yDZJDyzrzcxLLuMO3mcfF53UsTGd6UMAPt0l7rZE/9N7nHK
- 6cjZgraaMvVZPBMZf9lJ1/kwks0wW3GD4uvpZIb+WLOHtchcma/I0IdrJoB592caZjp5
- TDHUXV4tiR5IbR5BNxAgHU3jr0xyR4JktdaTATInRXlE8FBlKjc9cgb5x7GULLOie859
- GRRf2JJBf9adawZoINxKubbqLfvWNcIJSSOQUL0QdsO0gET6i0xOgjZqpff4Z403YUu0
- 2rE776GIZ6jFXvhlUkSRBc6gvY6xbNeYxoFDqPQQ40K+xXjnjmoknN6p40tnwcwBzZME
- rGdQ==
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ bh=Oqo6ixlYsyk1iQ7M0B4fzUdeOpaX0QlUzEsGR6+ELqo=;
+ b=SUfv4HU30QIBPg6S8cejeOtRfL/KxxCqgnsq4DwmBEe71BX8QyU1RWIOYrS4Siv1Sz
+ e1ZQsCTTPrO/JBYZWqCOKhaSqsHZu3hEHRN7aDuSSqm+QyU4QRwghpP4/MjWMBqSfrOV
+ DjPx6+2TBq55Pw7BR6WIXizPt1nZXNmH99a/eGlVyiGka0qdH7Vl36cU1NXjr54fnZ8s
+ ArT2RcvnVUY54tUwH9o0/APqwIHTWuk+OiiMRRza89EQM/03SXPqVndG/imhX8pfs03V
+ Ao6Xo1VngwRu0mqDjlWc8S/rp+N4oato7oDRz+plN2nglXPoh4x6jiXq0GvFrnSTw/Zm
+ o7Ag==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=h2Yt/llH
+ header.a=rsa-sha256 header.s=google header.b=SUfv4HU3
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -191,7 +190,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="h2Yt/llH"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="SUfv4HU3"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -209,127 +208,106 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-These are the same between uccf and ccf_full, move them out to
-clk-provider.h so we can ensure they stay in sync.
+Add some documentation outlining the two CCF ports in U-Boot as well
+as documentatig the limitations of CCF_FULL with respect to SPL and
+pre-reloc support.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/clk-provider-ccf_full.h | 24 ------------------------
- include/linux/clk-provider-uccf.h     | 24 ------------------------
- include/linux/clk-provider.h          | 24 ++++++++++++++++++++++++
- 3 files changed, 24 insertions(+), 48 deletions(-)
+ doc/api/clk.rst       | 25 +++++++++++++++++++++++++
+ doc/develop/ccf.rst   | 35 +++++++++++++++++++++++++++++++++++
+ doc/develop/index.rst |  1 +
+ 3 files changed, 61 insertions(+)
 
-diff --git a/include/linux/clk-provider-ccf_full.h b/include/linux/clk-provider-ccf_full.h
-index dfc2049feee5..0e160b13b3b2 100644
---- a/include/linux/clk-provider-ccf_full.h
-+++ b/include/linux/clk-provider-ccf_full.h
-@@ -9,32 +9,8 @@
- #include <linux/bitops.h>
- #include <linux/err.h>
- #include <clk-uclass.h>
+diff --git a/doc/api/clk.rst b/doc/api/clk.rst
+index 7c27066928e5..bce58cebef54 100644
+--- a/doc/api/clk.rst
++++ b/doc/api/clk.rst
+@@ -16,4 +16,29 @@ Driver API
+ ----------
  
--/*
-- * flags used across common struct clk.  these flags should only affect the
-- * top-level framework.  custom flags for dealing with hardware specifics
-- * belong in struct clk_foo
-- *
-- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-- */
--#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
--#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
--#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
--#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
--				/* unused */
--				/* unused */
--#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
--#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
--#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
--#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
--#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
--#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
--/* parents need enable during gate/ungate, set rate and re-parent */
--#define CLK_OPS_PARENT_ENABLE	BIT(12)
--/* duty cycle call may be forwarded to the parent clock */
--#define CLK_DUTY_CYCLE_PARENT	BIT(13)
--
- struct clk;
- struct clk_hw;
- struct clk_core;
- struct dentry;
-diff --git a/include/linux/clk-provider-uccf.h b/include/linux/clk-provider-uccf.h
-index 2380245b70a9..e9e96b988b91 100644
---- a/include/linux/clk-provider-uccf.h
-+++ b/include/linux/clk-provider-uccf.h
-@@ -27,32 +27,8 @@ static inline void clk_dm(ulong id, struct clk *clk)
- 	if (!IS_ERR(clk))
- 		clk->id = CLK_ID(clk->dev, id);
- }
- 
--/*
-- * flags used across common struct clk.  these flags should only affect the
-- * top-level framework.  custom flags for dealing with hardware specifics
-- * belong in struct clk_foo
-- *
-- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-- */
--#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
--#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
--#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
--#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
--				/* unused */
--#define CLK_IS_BASIC		BIT(5) /* Basic clk, can't do a to_clk_foo() */
--#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
--#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
--#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
--#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
--#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
--#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
--/* parents need enable during gate/ungate, set rate and re-parent */
--#define CLK_OPS_PARENT_ENABLE	BIT(12)
--/* duty cycle call may be forwarded to the parent clock */
--#define CLK_DUTY_CYCLE_PARENT	BIT(13)
--
- #define CLK_MUX_INDEX_ONE		BIT(0)
- #define CLK_MUX_INDEX_BIT		BIT(1)
- #define CLK_MUX_HIWORD_MASK		BIT(2)
- #define CLK_MUX_READ_ONLY		BIT(3) /* mux can't be changed */
-diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
-index 1140c2b10ac2..4fcdb5a86799 100644
---- a/include/linux/clk-provider.h
-+++ b/include/linux/clk-provider.h
-@@ -8,8 +8,32 @@
-  */
- #ifndef __LINUX_CLK_PROVIDER_H
- #define __LINUX_CLK_PROVIDER_H
- 
-+/*
-+ * flags used across common struct clk.  these flags should only affect the
-+ * top-level framework.  custom flags for dealing with hardware specifics
-+ * belong in struct clk_foo
-+ *
-+ * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
-+ */
-+#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
-+#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
-+#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
-+#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
-+				/* unused */
-+				/* unused */
-+#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
-+#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
-+#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
-+#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
-+#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
-+#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
-+/* parents need enable during gate/ungate, set rate and re-parent */
-+#define CLK_OPS_PARENT_ENABLE	BIT(12)
-+/* duty cycle call may be forwarded to the parent clock */
-+#define CLK_DUTY_CYCLE_PARENT	BIT(13)
+ .. kernel-doc:: include/clk-uclass.h
+    :internal:
 +
- /*
-  * U-Boot: for compatibility include the correct clk-provider.h
-  * for either uccf (U-Boot CCF) or ccf_full (Linux CCF)
-  */
++Common Clock Framework
++----------------------
++
++U-Boot includes optional support for the `Linux Common Clock Framework <https://www.kernel.org/doc/Documentation/clk.txt>`_
++in two forms:
++
++IMX U-Boot CCF
++^^^^^^^^^^^^^^
++
++Basic support for managing the clock tree, using per-clock ops, propagating rate change requests, and using common
++divider/mux/gate clocks is provided by the earlier ``uCCF`` or ``U-Boot CCF``, it uses ``UCLASS_CLK`` and the associated
++:c:struct:`clk_ops_uboot`. The clock tree itself is tracked through U-Boot driver model as each clock has a single ``udevice``.
++
++This is described in more detail in `The IMX CCF document <https://source.denx.de/u-boot/u-boot/-/blob/master/doc/imx/clk/ccf.txt>`_.
++
++CCF Full Port
++^^^^^^^^^^^^^
++
++The second version of CCF (*CCF Full*) focuses on maintaining compatibility with the Linux API. It introduces the
++typical ``struct clk_hw`` and other expected functionality. Clocks are tracked by the CCF core rather than through the driver model. This
++port uses ``struct clk_ops`` and allows drivers of any uclass to register clocks. This greatly simplifies the process of porting
++devices that like some phy's which also provide clocks, as it removes the need to declare an additional ``U_BOOT_DRIVER`` for uclass clk.
++
++:doc:`More information, recommendations, and limitations of CCF Full </develop/ccf>`
+diff --git a/doc/develop/ccf.rst b/doc/develop/ccf.rst
+new file mode 100644
+index 000000000000..d910ed44218f
+--- /dev/null
++++ b/doc/develop/ccf.rst
+@@ -0,0 +1,35 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Linux Common Clock Framework
++============================
++
++U-Boot includes an API-compatible port of the Linux CCF. This replaces the traditional
++``UCLASS_CLK`` and aims to simplify platform bringup by allowing straightforward reuse
++of existing Linux drivers.
++
++As a result, there are some important limitations when it comes to using CCF:
++
++1. It is NOT possible to combine CCF clocks with ``UCLASS_CLK`` since neither is aware
++   of the other. When CCF is enabled, the CCF drivers will be used for fixed clocks and
++   the typical ``clk_*`` functions will only work with CCF clocks, essentially making
++   clock drivers that use ``UCLASS_CLK`` unusable.
++2. CCF clocks can't currently be used pre-relocation. CCF expects to manage the entire
++   clock tree (and must in order to properly calculate clock rates) so while it would
++   be possible to probe only the minimum necessary clocks pre-reloc that can still be
++   a lot of associated clock provider logic.
++   There isn't today an ideal solution for this other than minimising/removing the use
++   of driver pre-relocation and relying on earlier bootloader stages to set up the UART.
++3. Similarly, CCF currently isn't supported in SPL although it could be enabled if there
++   is enough malloc space available and dcache is enabled. It may be desirable to add
++   a mechanism for only supporting a subset of clocks and providing "stubs" for parent
++   clocks that are already configured to a good known rate.
++
++Porting Linux Clock Drivers
++---------------------------
++
++By remaining as close as possible to the Linux API, the process of porting Linux clock
++drivers is fairly straightforward. The Qualcomm CCF drivers in ``drivers/clk/qcom/ccf/``
++can be used as an example.
++
++Predominantly, ``UCLASS_CLK`` should NOT be used, instead clock controller drivers should
++use ``UCLASS_NOP`` or another appropriate uclass.
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 3c044e679274..382de45221c9 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -32,8 +32,9 @@ Implementation
+ 
+    directories
+    bloblist
+    bootstd/index
++   ccf
+    ci_testing
+    commands
+    config_binding
+    cyclic
 
 -- 
 2.55.0
