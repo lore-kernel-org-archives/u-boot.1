@@ -4,95 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86813C44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 07:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3DFC4451B
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 08:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBF2782991;
-	Mon, 20 Jul 2026 09:53:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A49182991;
+	Mon, 20 Jul 2026 10:00:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="BLRfTdNU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EUVb3kB2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20AA3838D7; Mon, 20 Jul 2026 09:53:29 +0200 (CEST)
-Received: from mail-wr2-x02.google.com (mail-wr2-x02.google.com
- [IPv6:2a00:1450:4864:30::2])
+ id 659F083E76; Mon, 20 Jul 2026 10:00:13 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B710780517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:53:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE52080517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 10:00:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wr2-x02.google.com with SMTP id
- ffacd0b85a97d-4744516a312so1348246f8f.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 00:53:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-9063b380982so70930046d6.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 01:00:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784534410; cv=none;
+ d=google.com; s=arc-20260327;
+ b=o8iHM8YZ7O/apdBwfiQZnkN/tyQme+76euXQ8ip/epZoF6maocdM3Ds8+toMEZnxpj
+ v8JqZsKJVoPTxbw7mC+F4vsoTmzh0G0yTzNI66j72HdmpTqLOHvb1nil2IX2n5Z6i+K/
+ P3gwzW69fDDiSUA7/yckUnD02lw12ydL98SNyXuKap838lESBWxNAnroGw/UOQjGGVnm
+ G4WZ+fYjOdgwViQr6fhMpfJqtcJynUqM1m5cG+S+Nc7gTgvtk0WGibng9CBqqhMuAN+o
+ p9UQWQgty4x5Ccs9NBzA52bB2r3eJCFY2k4Pa43AjvNlpjjKQHnOgm/fGpoJB2Et91Kw
+ u1Jg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Eq0DiwfO/cI7KtBojXo02hrfwCwK9o/B+352sh/Ph3g=;
+ fh=Y6mMHk8/m+QDOd5xaaDvLtBkSaKqdM/AAf9kf88Cr9M=;
+ b=KHqpH28iCvwoGPDnsYJRLJBhML8+mIjSWh16rEMFvEXwhlB9ckLMh/r8XMKkMjWzPk
+ ciBUUX/SMIFHm7zm1eaTu1M62t3a2GiFy6cM1ByBzuXOIDUGbgebLmaKRwtVAl1KWWk7
+ 60B9k9g1WgzXIKT+9n6I1gsfJaeOP7Gwv9anaDAE955q2xGW1oZFqHDJWEfnhW1QLGus
+ GGVMXLT2Uuih7cGDBpdd+IztIjwJENIVWdDt2EWwtwEfbPUJ2a8Up3UkGq8AUKd6LDne
+ qKMJdfK+oi8zqfC020NngjfEcWUe9cCeM672uu/Roq78EiY5x/wVWBWy1zpT6f6fhSSL
+ 4YHQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784534006; x=1785138806; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=FzAchyy9u1UyjB+eEXlkD8TGJOqvd8rBdXjno/+M4RA=;
- b=BLRfTdNUWSQHwvjfoBaRAIykDmgKguCVemSKI7O0VhOYgxmgf0QJtob2ei9cVcykdh
- nlagG9O9FImKKN9J4MnzaxHAXYFx5yOXI9V0mKRhSTHN0xSDlfpk4vj1kFKg/vXAPxyd
- aITE+bZoLDMMEhCtFfZn4En/JkkpPPuFbZuDeFKzxfna96I4Cx6JO3m0cAuWpB82ByAu
- /wYrvLig3aXuhqlvBFQ01b8X995uB4MQ+LJN24DhCKOPGRlr7SyMo/w57S1U5ZKSrnnO
- UoHtEj1wWwI8hRXOg4SAmoVwyFe9eQiUGJDekDwSOZdGl6AjS/OgvJ3Kr471Mo6fXWDy
- 5fPQ==
+ d=gmail.com; s=20251104; t=1784534410; x=1785139210; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Eq0DiwfO/cI7KtBojXo02hrfwCwK9o/B+352sh/Ph3g=;
+ b=EUVb3kB2jzfNDrgDbyIZ6w9YuVAvrvMX+DOF2e1pOG6v+PQn3F/0mE2GuchFY+HcDP
+ I4GVeU3cuosS9ZOB1/PGUPF5K2UsoSV7ynGeX2qTaNSN2TaWthDrt6ITS53qg0tpP3uC
+ wh6weNzhB7ZnCcv1rVQvQ/EANcXw91toRaRgq6+iQi0HfgfyHdZPwVO0/yEiLcbKARWX
+ AV+3QAihSwfOxewaifDmPbNUezjypsL0ahH7piEKyXHHkjHD1+i1dmcFbLErndk4dV2B
+ ziuET6GeRuowlq7JsO47OMzRrdlifFUiOmIRpgiR4Kr3M8yQaiiZS+MCb2dWlEl0lcIm
+ s8Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784534006; x=1785138806;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=FzAchyy9u1UyjB+eEXlkD8TGJOqvd8rBdXjno/+M4RA=;
- b=FUTQDMSxTskIvSSPnAZFLp+17+YnGJxs1a0MQ9Fimh9ygdK+1hUtvF3pavFkg5rL8+
- v3tG9GjGKAegrBdsrYLriZfgD5qSLGF/oWSTuG9vRgyI4hELGqJoyHXgBJCsSXSdTuGf
- uaYwP3WLiXhyLPIi6dkle0rbXMCzc1IUA++WNUKMVBMKYx6Vj9RCBdVlrvB0Zbrt3Z7A
- +3IXbNSw1BpgysgNlbeqIf4H76ZkPoR6Rpdt6qRVxjdPftbFv3RglpbkA+atT7prOzah
- I4H5Aym6THdkyykUvdEh+kP95fbX7ti/LoziQBmh4y6Wa4mLnibKDc8EWKx/h7yzBEzb
- WRCQ==
+ d=1e100.net; s=20251104; t=1784534410; x=1785139210;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Eq0DiwfO/cI7KtBojXo02hrfwCwK9o/B+352sh/Ph3g=;
+ b=shz62LtPdYhJspIZamCT3MjkzGbDHa6OhT3pXOmt7rj2oD/ZCyhfLKyAXr1BXkLHup
+ /zBMfVE1D7d5PaLORO7byCLbqV7Dy7JkDyib/CKxX2+OJ4FezbMMmBGaRqXLavPrSatd
+ dS5G5DyNUbG21BHVkibH6LPR5Q0DF6z3ssRLkQ/RKDDK+eY6iI4gB3L9IGexwpVhQ7bL
+ IwhgITed0bibc4BK2XmJlENSade3eroX4rJYEvvPoubuD7VQQ1hpzScVvhdRj8hclaYz
+ lpMcJBQFDkD79t/AhjHtG0X7Os2vB9AZXxXFEg6qdwn5VSF2AV9AGoOZcfLH9evhUTiR
+ Rbbg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ros7m7dOnW1GU6I3AEFb8NbbUeO6WM6ldAARzUAghgNgI5IFp1aZv5fsU6jQpnT+xP2QMdY9Kk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzViCTl14mAehb+xsC+ESRsWME4lOU5Wq1JPVCrxHMsSiYAJGFi
- QTg+U/2vUvnKcXc+aKgv8zhTUVlZhVzxuok1G3FQ2IFf9ho8uUIIwVMRyhNs70Bbhtg=
-X-Gm-Gg: AfdE7clLXbh89WkawE3iDjrfaiWz4QKJhEw0Gg5VxwN2iibOxf+wwaWBit95vzwkHWs
- 9XPHasnzmK2a/EsdRrEEshYNC0zaUfSjanCc67oC8dpcE3z8spMHKErCVsoFfpzjNZmfBNipkDk
- na8fct653O/8pyKnaHBvAz/V7+iWC5Lp5D6wdiyWT21wv8EsCBgDpzpokFAMjNDgPkZngkgjYM1
- m/m7tRL+qRA86JBxwwEhKqmRFz6TdQ++LInccj+bKbiv7LEqD4k6vCMzBMNG0tA8HNX7WHxeeeg
- TwLVW+mD1KbFUdy5iNYNQRuKzAMyUw7ZTLLkgV7TGoRI1xTnehc4Y3b79upq+YTgiWF1ev1V1g0
- M9dxB1b/N+FftkU8p3syw3m8fXgp8qSEAWrSYky9WcNHyvV9FGpsbByTHrIYVE7ICCIsJg4Caz1
- YLv82dYiNSg2LGMzqIa8WnWaqRDaWZ1sLycdP7pUWXjZioXUjkg85EqE1b16w=
-X-Received: by 2002:a05:600c:3485:b0:495:6193:c6c0 with SMTP id
- 5b1f17b1804b1-49561a30bb3mr12473365e9.18.1784534006056; 
- Mon, 20 Jul 2026 00:53:26 -0700 (PDT)
-Received: from [127.0.0.1] (host-87-0-90-136.retail.telecomitalia.it.
- [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4954a2b87c6sm466113265e9.7.2026.07.20.00.53.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 00:53:25 -0700 (PDT)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 20 Jul 2026 09:53:21 +0200
-Subject: [PATCH v3] usb: mtu3: support the current devicetree binding
+ AHgh+RqXAtQU/YUKl3nsHsuHTxm3QxQcsYOrwBpTMrAJCVRXHG0HLt27TVBTpIxFmnPhL+h5IBDRLXk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeP809/H5gfWA4ure5bcTOpxADHJYvk3Qj9agl1gcvo61YAKRF
+ J9pZglhnI2XoHaxPW4FKK6FAUwo2aveSfi4Rd5ckAz1tC85O0GV40u6piu1OrJr7X4SoCRRMQzL
+ 4Abty9AhcFd+T09v0y65AeoPR/pJ2sN0=
+X-Gm-Gg: AfdE7cm4ZqSiK0jAp2OyjKbzwWg/YszekUsgsgDvb9ajFn2fp0grpKpjc6/51ybzMF2
+ Jm2FKDhsv0wMQ7zsfJ0IKlwFNb07KrlQ4LUB3H1wyWKV2BAt7lknUTshYFMC/WBU0+lYKKduDLO
+ dN9dPPwVa9yw/IcU0jn0hjZLM6jVYhfYNOcwSQgZQLEZjPBk0zbxSr6kDimVQz6dyhHPbBn/zkJ
+ 4lcA0ry0NvSaqlu3zCSP4sJE3/3ZVS4LSrJc74JqXRXgORRgCTsQ7/Kk9kmVA6fX7NuUcqaU7wR
+ dnzpVf3xCo7TBbwM4pkBd9kl4dnFLMC6NkDLOwmbiiF74bYZA7wAYw3shPrURQj3JgnEIo3Edom
+ +KSECt9pl3wT8zK90vHIdWletcUJv76em8KYcII05d1ZFYJDl2ZycCOO7
+X-Received: by 2002:a05:6214:43ca:b0:8e8:4c4:339a with SMTP id
+ 6a1803df08f44-90778312665mr138860796d6.12.1784534409584; Mon, 20 Jul 2026
+ 01:00:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-ccaione-upstream-mtu3-spl-gadget-v3-1-91cff44b1622@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5WPzQ6CMBAGX4X07JrSCogn38N4WNoFavhLW4iE8
- O4WvBhPevySyczuwhxZQ45dooVZmowzfReGPERM1dhVBEaHzQQXKc/iDJTCgBCMg/OWsIXWjxL
- c0ECFuiIPiFLLXKHmKbKgGSyV5rknbvf3dmPxIOU370bUxvnezvsNU7xxf+SmGGJIMpQkNEdR8
- GuBc2MKS0fVt2wrTuLTef7BKYIzK9PwxSkVSZJ/Odd1fQFcUz0XOQEAAA==
-X-Change-ID: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.denx.de
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Carlo Caione <ccaione@baylibre.com>
-X-Mailer: b4 0.15.2
+References: <09e8f60c19d19b1bef47594e89de52585e6405ad.1784423890.git.daniel@makrotopia.org>
+ <CAOP2_ThcJNDU1Q8Otvg37LXjOTZGVoR5XruDBBypGqJ3Q8E=KQ@mail.gmail.com>
+In-Reply-To: <CAOP2_ThcJNDU1Q8Otvg37LXjOTZGVoR5XruDBBypGqJ3Q8E=KQ@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 20 Jul 2026 08:59:57 +0100
+X-Gm-Features: AUfX_mzVfkTW8d_6YuWAigjDY_rn-l6ZD4Ol0jE-MN6vu0qzlr14lgQUyjMYRts
+Message-ID: <CALeDE9MQsvqUryOeHogR87t8Et7JZ6NbzqjXknxz9ipcjOFxXw@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: rk3568-nanopi-r5s: drop eMMC HS400 modes from
+ the U-Boot FDT
+To: Tianling Shen <cnsztl@gmail.com>
+Cc: daniel@makrotopia.org, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,112 +123,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MTU3 glue driver requires the legacy U-Boot layout, where a synthetic
-mediatek,ssusb child owns the gadget resources and dr_mode:
+On Mon, 20 Jul 2026 at 02:59, Tianling Shen <cnsztl@gmail.com> wrote:
+>
+> Hi Daniel,
+>
+> On Sun, Jul 19, 2026 at 9:53=E2=80=AFAM Daniel Golle <daniel@makrotopia.o=
+rg> wrote:
+> >
+> > U-Boot passes its control FDT to Linux, so the &sdhci override adding
+> > mmc-hs400-1_8v and mmc-hs400-enhanced-strobe reached the kernel, which
+> > unlike U-Boot actually drives those modes and then failed on the eMMC.
+> > Keep HS200, which works, and leave HS400 out. Affects the R5C too, whic=
+h
+> > includes this dtsi.
+> >
+> > Fixes: 0ef326b5e92e ("rockchip: rk3568: Add support for FriendlyARM Nan=
+oPi R5S")
+> > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> > ---
+> >  arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi | 2 --
+> >  1 file changed, 2 deletions(-)
+> >
+> > diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/=
+rk3568-nanopi-r5s-u-boot.dtsi
+> > index 64c43374c04..7e0b2ba02e4 100644
+> > --- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> > +++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> > @@ -15,8 +15,6 @@
+> >  &sdhci {
+> >         cap-mmc-highspeed;
+> >         mmc-hs200-1_8v;
+> > -       mmc-hs400-1_8v;
+> > -       mmc-hs400-enhanced-strobe;
+> >         pinctrl-0 =3D <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>=
+;
+> >  };
+>
+> The whole sdhci node can be removed from u-boot.dtsi since these props
+> are already included by upstream dts.
 
-    usb@112b0000 {
-        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
+I've already sent a patch to do exactly this, it was on my list to
+chase up for this cycle:
+https://lists.denx.de/pipermail/u-boot/2025-December/605369.html
 
-        ssusb@112b0000 {
-            compatible = "mediatek,ssusb";
-            reg = <0 0x112b0000 0 0x3e00>,
-                  <0 0x112b3e00 0 0x0100>;
-            reg-names = "mac", "ippc";
-            dr_mode = "peripheral";
-        };
-    };
-
-The current binding requires these properties directly on the controller:
-
-    usb@112b1000 {
-        compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
-        reg = <0 0x112b1000 0 0x2dff>,
-              <0 0x112b3e00 0 0x0100>;
-        reg-names = "mac", "ippc";
-        ranges = <0 0 0 0x112b0000 0 0x3f00>;
-        dr_mode = "peripheral";
-    };
-
-Modify the driver to look for a legacy node only among direct children
-of the controller and bind the gadget device to the controller node when
-none is present. This retains support for existing U-Boot devicetrees
-without requiring the synthetic node in devicetrees using the current
-binding.
-
-There is also a difference in the meaning of the mac resource: normalize
-the resource address by SSUSB_DEV_BASE for the current binding and leave
-the legacy resource unchanged.
-
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
-Changes in v3:
-- Remove the temporary platform data and derive the binding during probe
-- Use dev_read_addr_name() for the MAC resource
-- Link to v2: https://patch.msgid.link/20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com
-
-Changes in v2:
-- Removed typecast horror
-- Added platform storage to pass around legacy flags and device
-- Link to v1: https://patch.msgid.link/20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com
----
- drivers/usb/mtu3/mtu3_plat.c | 23 ++++++++++++++++++++---
- 1 file changed, 20 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
-index 26fee141f6e..f5c00cd5a8d 100644
---- a/drivers/usb/mtu3/mtu3_plat.c
-+++ b/drivers/usb/mtu3/mtu3_plat.c
-@@ -136,6 +136,7 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
- static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
- {
- 	struct udevice *child;
-+	fdt_addr_t mac_addr;
- 	int ret;
- 
- 	ret = device_get_supply_regulator(dev, "vusb33-supply",
-@@ -166,7 +167,17 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
- 		return ret;
- 	}
- 
--	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
-+	mac_addr = dev_read_addr_name(child, "mac");
-+	if (mac_addr == FDT_ADDR_T_NONE) {
-+		dev_err(dev, "error mapping memory for mac\n");
-+		return -ENODEV;
-+	}
-+
-+	/* Current bindings describe the device block, not the whole MAC. */
-+	if (ofnode_equal(dev_ofnode(dev), dev_ofnode(child)))
-+		mac_addr -= SSUSB_DEV_BASE;
-+
-+	ssusb->mac_base = map_physmem(mac_addr, 0, MAP_NOCACHE);
- 	if (!ssusb->mac_base) {
- 		dev_err(dev, "error mapping memory for mac\n");
- 		return -ENODEV;
-@@ -317,9 +328,15 @@ static int mtu3_glue_bind(struct udevice *parent)
- 	ofnode node;
- 	int ret;
- 
--	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
-+	node = ofnode_null();
-+	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
-+		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
-+			break;
-+	}
-+
-+	/* Current bindings keep the gadget resources on the parent node. */
- 	if (!ofnode_valid(node))
--		return -ENODEV;
-+		node = dev_ofnode(parent);
- 
- 	name = ofnode_get_name(node);
- 	dr_mode = usb_get_dr_mode(node);
-
----
-base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
-change-id: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
-
+> Thanks,
+> Tianling.
+>
+> >
+> >
+> > base-commit: ece349ade2973e220f524ce59e59711cc919263f
+> > --
+> > 2.55.0
