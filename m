@@ -4,86 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BFAC44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 15:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987E4C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 15:49:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CF0482991;
-	Mon, 20 Jul 2026 17:42:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D444C80517;
+	Mon, 20 Jul 2026 17:49:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bgIpt53L";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m4ZaoSEd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7318A80517; Mon, 20 Jul 2026 17:42:08 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D35582991; Mon, 20 Jul 2026 17:49:02 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D85380433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 17:42:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B53C180433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 17:48:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7eb6573bd52so5484813a34.3
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784562125; x=1785166925; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=hbwnJXEweHa7ml3YVI4R5k6Fl26RZoy0foG1iUaJeLM=;
- b=bgIpt53L6TukkpOHl4EAM+8QQ6psS6brsr+z8sAP3XfWmp3bFsloXnUHbvN5bBOehl
- rqIlBp4j85GjrprJys2Wu08XEN0k0cCiJo9evW9jBhcLCB0j34VsEL5Nlnb9EfxxJ9i0
- eucGH1WauVDsVkNiHL9R2YiwvJMnMZiyOFegE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784562125; x=1785166925;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=hbwnJXEweHa7ml3YVI4R5k6Fl26RZoy0foG1iUaJeLM=;
- b=rxorsrZloZ8j5LtAT5Ti6JtGscr9daU49IUiHONzpascUno1O33VvVj2mMayrMpxV+
- sYaCs9Ik+Mg4HU4uB2VWexdZ6nXxWbyKzTnaOO+xTB73Ic0oCt7GxONPNkSrO8JuRVxt
- c2dN2hV6zNprxsy2ZhfPRK28UGDhqWg+Eo0I9A02FM03xVD6WVUF4OWMuRALFN5ArRhC
- fEyZEBHc5Ni47TGNs7FovAUw94iT7qDRhnlwu9Xx8e1drK0MwRF+E1rMf9vwVaaKqXBp
- aCfTCed9+8xMCn/KqcJTdVOeVPO2nkLZ5dakVcveitxN2N/Ukdw/0Dn4O9agtc9i31u0
- FTnQ==
-X-Gm-Message-State: AOJu0YxfNNRnm9TcRo6EiErx8W2OnPywzPj8ECH0G2B56JhmV4R1MJqE
- PK+zC5R8eqYzaEa6/cducLqAOAhqxb18ecq+5OumZvXtdV4rcVnw0cFqPrcp24Bu5CD/nBAYB0B
- lieWDAaY=
-X-Gm-Gg: AfdE7cmrzmKcogyLQ3E17mLmF0teja5PaeuqkeRVMi6kN6iHOwEJZVqVLceC6r38EnG
- eqvwgvLuOZN1dsm8sKGv+/bD/CJ4eODv8pU6ErQhnirJyONAz22wRrsvFR2npwAgX71KvJLHW63
- YYA2YPMOmTKpzu9wnr5gCtzFNJFS81fuec8gOzkog4o4qn6r/QoTlEZQJe92UWVbYZRTsTWuITY
- QeBPsKCLPVKJHTI+/riVj1gw0/CRK+mdx4QnAmm5uEmrFtQc252vqHB8A725NedFArFVRauPR9B
- UbbAf05qbNTypfho9IM2YLd0q5TySqTjYH3Hlo+DN/eVE7WvzDm+O8jVYVRHZUNzYMrySq+FRSS
- uNXFLs6hb6/qDjUyzADDfkNFJpYxNaL6t5aBonM8YaO2gm1+NIqnlxGQIgGT7NGn3n/HsiJNYmw
- 84MTP4GsOaPiV12EqNH0s6fv8LLN9DU1QauYj/lSklMDQBqtIoUBfpUuIzBaYoXR7Z9IA+k2h9I
- YliaCzqIcgzEkdSO7V7E2z1tQ8b9xIg3opI0A==
-X-Received: by 2002:a05:6830:6adb:b0:7e9:e8a6:6389 with SMTP id
- 46e09a7af769-7ed9aa576e2mr7797923a34.4.1784562124953; 
- Mon, 20 Jul 2026 08:42:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7edad91b8a5sm8401609a34.5.2026.07.20.08.42.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 08:42:03 -0700 (PDT)
-Date: Mon, 20 Jul 2026 09:42:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] rtc: pcf8563: add haoyu,hym8563 compatible
-Message-ID: <20260720154201.GA749385@bill-the-cat>
-References: <cover.1784423738.git.daniel@makrotopia.org>
- <d9576ac4c07fe3055a76dcb1bd32ad605c9a68da.1784423738.git.daniel@makrotopia.org>
+ spf=fail smtp.mailfrom=Jayaramudu.Desapogu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lPygjj6V72p6huBG1Y42n5FkA3dYnf93jM18KWCHlphsDE1QOxvlrr4D6d+ch3guEgXQWXF3u/RpLRd9CeirNN3yiWC4rO+mN8mwnIoItp8dXkFMRKNa9YftVjj3sneqd9nqqyoUOu5TV2x6wUC12gC9rJvXp9wfSg8w3Fe/EPdhz1EEE92c2CkTGR72F0K2b562ft1rw7oQW1Ntd0EGiIUo/iM1hF1yxTRfhs9xUUeK/d6azY7IZzGqWvmrmsG4TEA6yS4fDeeBUY9x4KURKv48AueQ//LHOYYJjzmjBJjqK6T5mwDJSXgwDAExgWn/QEogb29yT9vtALvhPMsOTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GUwSw564M8cuF22i2j6qzp8NZmgd55qoT3VES6C9oVU=;
+ b=Fwdd7OWKqhVNtPn23z7CnMlrr8zWMlQHI6XHv03SX97Dfs5MzNqrjEMKRnB2jkm4iq4ldXAS5lmmXjSr59LOP00vKbnaRNbtOWP6Ku8bgYNgG7cfqv3vmUKVM+CZD8L4THQRHiMbseXfha4sYzSANYUg/bQvhMwTzMEW/EXecIaAEJiMtzK6yxHhaqd7mD7ufnzK4bjjVX2Q7fmp0WECsvFEZrP/wm2wUs3QzbBFLz4CgS4eJSlEfdtnIy0LsV/RclPnUd44jfeSgqqrfvUNcL4g5FlIBRXJCaLTCGtYbhBjCrOmeUIFT+w6H9FA+lDwoxNZ0pU1L6QReWgBDZWLmA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=chromium.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GUwSw564M8cuF22i2j6qzp8NZmgd55qoT3VES6C9oVU=;
+ b=m4ZaoSEd3lZFB4C8hHLEOtXfSNC5/l0/nFJ36f2jMQFzFEUFIl4guBR7vTNVlLEAN1Mjs2RqmxeLvyPFkRJkR2cZgkVRwY09sLcFVDOTZzYRnGhXRS4pd+LrqYLXRknj6j33bd+vSNl3EBHWBF/mJZAUR4gEug/yWurqXWYVEIw=
+Received: from SN7PR18CA0030.namprd18.prod.outlook.com (2603:10b6:806:f3::7)
+ by PH7PR12MB9255.namprd12.prod.outlook.com (2603:10b6:510:30c::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Mon, 20 Jul
+ 2026 15:48:55 +0000
+Received: from SA2PEPF00003AE4.namprd02.prod.outlook.com
+ (2603:10b6:806:f3:cafe::6c) by SN7PR18CA0030.outlook.office365.com
+ (2603:10b6:806:f3::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.18 via Frontend Transport; Mon,
+ 20 Jul 2026 15:48:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SA2PEPF00003AE4.mail.protection.outlook.com (10.167.248.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Mon, 20 Jul 2026 15:48:55 +0000
+Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 20 Jul
+ 2026 10:48:53 -0500
+From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+To: <sjg@chromium.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+Subject: [PATCH v3] serial: coreboot: Accept DBG2 subtype 0x12
+Date: Mon, 20 Jul 2026 21:18:26 +0530
+Message-ID: <20260720154826.42527-1-jayaramudu.desapogu@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
+References: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RoQOXL2g2bnLLg2k"
-Content-Disposition: inline
-In-Reply-To: <d9576ac4c07fe3055a76dcb1bd32ad605c9a68da.1784423738.git.daniel@makrotopia.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE4:EE_|PH7PR12MB9255:EE_
+X-MS-Office365-Filtering-Correlation-Id: f31be054-28d9-41bf-d964-08dee67667cd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|23010399003|82310400026|36860700016|18002099003|22082099003|3023799007|56012099006|11063799006|10067099003;
+X-Microsoft-Antispam-Message-Info: 587t5kJi1qXSBM9F5MwMGZW8CgTygxMdzdeZ/fGsdSc9S0AbLcrdGTTrT9Cl7kkeOgRozG/53g0r96RA5fO2Oz54rKznGQcVniIsqoz0rA4eaJvyJx2PQXqcAJ7z6hK4Ou90ZJDL9v1ZdpBebM9N5RAnmDDs0lG3rpkmuO+4i3Vk1PbiV92+RrBhqitGvrOZQ2GpAA5bln1sr2uz9skzb9YpVoXqMeBD5PIkenplQQREAW2xmuy1Kq8AV/C1MHxzqMJvz/NStHOobkLHnKC8EvldXzj14CfjnWpNJgBwvqf5be1dTrTC2SsYyrnyP1jcrsV7p43XAZZGIJB3DbIzYskP3DB0ahmzDTedpRnCzmdP+bMejEOCWJRN8R+YEX5P76OYYjMlF1B5lOt4P/j4BiREH/QOxAN4n4VAv9tb3AKj4OtA2mE8jpnsp9rmQs3LlOJaDAu7pVm5ILIcuWS+NSjeK5/Ig+S9EhmAOYMUFIw/sDfQbnQH+b7hZHTIFPQyArvgEJJV3FriQSuAOS9sADb78LcOKw3msoZeEdFF0/gjobFb9kZLLzwgRDYceE0laQDPqJusGgva/QvCjzoynTn+whOmcDIDMdYPMaf1SKcKMJ6PHdWKZE60YKpheTXpq4SHXLbzuqOYRP9kAQdlFsVD5ElDopmbZ4OscCRDUEFz2xphuTQLAMe5fbQWaj9u+ISMnYuC+AbaTUWUEIqDow==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(82310400026)(36860700016)(18002099003)(22082099003)(3023799007)(56012099006)(11063799006)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: H7UqMfipFCMH811PrxjFt/JwSfzbKr5rpj8JJ7HaEqC13MyGzPHEacKyO2x+Wpav9DyVsy2jx26fTafpEvOZ425D4ps3erqh20c74vYUzKdsVa78NRoA3qSduylb7PhrgFFRNNy++eteFLIKZHCbqC79tdnE6g175BiL8OLtMayh1VUrAgXJhOw181htAJk3OcCo7/QOjIqVK6wyRCgC/iZTGMZogWoqy6mhKRhWI9b1tJGfCWPvrAIudVmkPjKwzkNCN3t8fsC1a2w0zlfXtKIXF7xFAEZ+P9w3a0JkopJKboEv1iLR9PsjwEBT9yyfgFBtrZoP73VkSfTkT9c7pjhWA2qPsCYKgzyEZZRWuniR6/li14G2NdKQM3hY40W+xRDJOgb1ATiddjuSRjwABY7KNXErR80r+0MjCzoxaFVFbA5LRuddfnSY/Sq51uqz
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 15:48:55.4652 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f31be054-28d9-41bf-d964-08dee67667cd
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9255
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +122,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot running as a coreboot payload obtains serial console
+information either from the coreboot table or from the ACPI DBG2
+table.
 
---RoQOXL2g2bnLLg2k
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+When serial console support is disabled in coreboot, the coreboot
+table does not contain serial information. In this case U-Boot falls
+back to parsing the DBG2 table.
 
-On Sun, Jul 19, 2026 at 02:49:27AM +0100, Daniel Golle wrote:
+Some AMD platforms or any other platforms that uses memory-mapped I/O
+advertise the debug UART using DBG2 subtype 0x0012 ("16550-compatible
+with parameters defined in Generic Address Structure"). U-Boot
+currently accepts only subtype 0x0000, causing DBG2 UART detection to
+fail and leaving no console output.
 
-> The HYM8563 is a PCF8563 clone with an identical timekeeping register
-> layout and is found e.g. on the Radxa ROCK 5B. Match its compatible so
-> DM_RTC (and with it the EFI GetTime/SetTime runtime services) can use
-> the existing driver with upstream DT.
->=20
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+Accept subtype 0x0012 as well and keep the existing handling logic.
 
-I see this compatible upstream, so:
+Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+---
+v3:
+- Change subject prefix to "serial: coreboot:"
+- Shorten commit subject
+- Remove extra From: line by fixing git author identity
+- Rework commit message formatting and wrapping
+- Rename subtype constant to ACPI_DBG2_16550_WITH_GAS
+- Add comment describing DBG2 subtype 0x12
+- Keep subtype definitions sorted by value
+- Wrap long conditional to stay within 80 columns
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+ drivers/serial/serial_coreboot.c | 3 ++-
+ include/acpi/acpi_table.h        | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
---=20
-Tom
+diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
+index b1f69f6998cfa1..cb07173a80c0cc 100644
+--- a/drivers/serial/serial_coreboot.c
++++ b/drivers/serial/serial_coreboot.c
+@@ -59,7 +59,8 @@ static int read_dbg2(struct ns16550_plat *plat)
+ 		log_debug("Not a serial port\n");
+ 		return -EPROTOTYPE;
+ 	}
+-	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE) {
++	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
++            dbg->port_subtype != ACPI_DBG2_16550_WITH_GAS) {
+ 		log_debug("Incompatible serial port\n");
+ 		return -EPROTOTYPE;
+ 	}
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 4895366a6188ec..825652798166a4 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -674,6 +674,7 @@ struct __packed acpi_dmar {
+ #define ACPI_DBG2_ARM_SBSA_GENERIC	0x000E
+ #define ACPI_DBG2_ARM_DCC		0x000F
+ #define ACPI_DBG2_BCM2835		0x0010
++#define ACPI_DBG2_WITH_GAS		0x0012 /* 16550-compatible UART with GAS */
+ 
+ #define ACPI_DBG2_1394_STANDARD		0x0000
+ 
+-- 
+2.25.1
 
---RoQOXL2g2bnLLg2k
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal5BxgAKCRAr4qD1Cr/k
-CqldAP9tNoDODqwq8K+n+J4FQHrCKKR8VMU5xOK1egBK+ElzcQEA4h6pW8VBA3XE
-OHkumU1/e3q0NMCzZqrlN9dT9Kr1aQk=
-=bG2k
------END PGP SIGNATURE-----
-
---RoQOXL2g2bnLLg2k--
