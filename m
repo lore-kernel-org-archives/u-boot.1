@@ -1,102 +1,103 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46FEAC44520
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD1BC44520
 	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 12AA040728;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0AA7580D89;
 	Mon, 20 Jul 2026 18:10:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5erZfV5frb_h; Mon, 20 Jul 2026 18:10:38 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WVtfI2TcNa5v; Mon, 20 Jul 2026 18:10:37 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 52B4E40744
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B4FE880DFA
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571035;
-	bh=Gm8hvTA1oKzPPu4q5/uyeryNgApPNhESIIHaeN07K9c=;
+	d=lists.u-boot-project.org ; s=default; t=1784571036;
+	bh=eDfaGhTvIaZeKnlhK/69QlPp1YArSxor2r1KS5iYRwg=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=L4p6Bayfs+FUY9n96K2TzDyDafRJD3EkyXmwjJaA20bgxEEQ4jcdA+sknVyul9PQk
-	 75wL8NK0i16kM2vC37laKFtZzb0TQ7PJ+rRyL05nMehXH2FftEAtgcqgd4uprQ+JNn
-	 81+k2NFhoQ58hbJEejYUavOQbsI9+8ZFTHjKx46WVki05taeTqRfoPLKOR+YYHHEdY
-	 HdxcTAZty6Ie+w6KRkv5QYJo+fm4Xz4rJJr6bAi59ROZ0mX1AUCXuja14glUR4YZdv
-	 a9NStPIHxymWlpKycYhMNub78BV6FUu3fSvDUkw8FcrvzT8e0/OXiKIjxODChgtBEY
-	 Ps67+2XpGdgGA==
+	b=s2owpS393o2f5YBvG8SuaTNJyMWRGOguKuu2YeZtw4SI/3gveF9WPn1xNghGz3bBb
+	 lSBV9kynmYDWir/dr9gEXf1KHaIvb7YVKvorS3JLgujGaPQLP0itl2rZ9ZI2D9E7TB
+	 ZSieb5oAS/TxblUdRNwPZQ0lMmCzWd1wHCq1a7BJyhRruDO8YiecG/RRkRsiMJV47k
+	 yPGNNdBcLV+u7DRhm3Kyjvsx70SgiRtAH4Yb28ZDZuK3VKXZ1iB7stRDd/O6Giyw7I
+	 DZsNuCEWfScXnkGwpHRNbfmz8a3wtMwN6pUA2eufQWIrpFqupMt24N9Tb/YlviDwBE
+	 +LPsWKyGFM50w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 52B4E40744;
-	Mon, 20 Jul 2026 18:10:35 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3FDEF1DD6
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B4FE880DFA;
+	Mon, 20 Jul 2026 18:10:36 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3AD561DF5
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2584760716
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2C92580BFA
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id q5jRCeN_vUfG for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=casey.connolly@linaro.org;
- receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 25F4E6060E
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 25F4E6060E
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 25F4E6060E
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NONDQogzS4yh for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 2C60C80C04
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2C60C80C04
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2C60C80C04
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5761484A1A; Mon, 20 Jul 2026 18:41:39 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id E04048493F; Mon, 20 Jul 2026 18:42:21 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F376F8484A
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:36 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-493f6de72faso28134885e9.0
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:36 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id E106484A60
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:42:19 +0200 (CEST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-49546c690ffso26773875e9.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:42:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565696; x=1785170496;
+ d=1e100.net; s=20251104; t=1784565739; x=1785170539;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Gm8hvTA1oKzPPu4q5/uyeryNgApPNhESIIHaeN07K9c=;
- b=R6xYJVh1H+ZM3zShF0bmsv58yqaL6oTli3YzSmoSRUFcgAcRHQRb7JfUzagEsdZHQe
- 9pj+6aq1HctFdWlm1bFYuS1vdgqLX+SESaN4ZRgRlDf8ALqCr1uMJhq6PvJkoLJboQC+
- O0Py6XZcmshMhJd/dtdXbEHfYl6m43GgPoVrNVVcuwnJCVQm4fj44Ov1rnoyJ2OXuyD0
- Uioc4xEvp3Ab+TBPaz/KOsaL7mX7YT4xuuMK1dS8Vge2bu7unLcc/D5qoeFd6dulqdbl
- nYxmYuW6/zZ5nrY8l/x8H8PGeK5J8U2zaxTW6aWVYpt7F8YQcFXIo1u9kZEVOV30yf4/
- S1bQ==
-X-Gm-Message-State: AOJu0YyvXmTpqha/v0AJKAneSTvtS5GGQut3GBvp4K10qc8wWwc6efhG
- QOuYtoWe40um5EBTqOzxnFXuOh+koEhny0i2TZFcgkjRDQCRPSu6sbY4eok96ZxB5/w=
-X-Gm-Gg: AfdE7cniC0lsNAm6NS82yWX+U3B4qyPyJsZkNQA39hITMtx1MsftDjFBbJ0TBdbrU4t
- amNyQwWnQk+sIboSQMFo2dil79uwAXKB+IDd/gY1Qf7tnjE+cZxW2CMz9ZekiW12Plk35QVyC1I
- DRF9Hd/I1q1v6+eArqOiOX1kSq1e+Vq2TU8X1oAzIg8ZDGCiQ8gTqnnB8uHLILl77HP/SK1S7AF
- TbPYKto9tTszvWFqICgG7wTYotmyV1LvkOJqZdPIMGIYpbQ60TjaiGnJx5v7G+P6KQkLBD3I+ZF
- KT2DUJp4wIT56ljo63hRpep0nTqNUQ4VpW4+MjIVLNVKSxvouPf/g+U/Uqfvkd8QWY+iR/vERc4
- f134v+WCcpHC/Nefex275gsGtbYbAnDsDFQUCSP5Hl/IchbgoPHqVlSD307CbblB0UiqeHYDhpP
- j5h2/YGdeTHwmGFpyxjpE8NZ0H1wBGng==
-X-Received: by 2002:a05:600c:a48:b0:492:6f5c:fd8c with SMTP id
- 5b1f17b1804b1-4954a33dd95mr165474845e9.15.1784565696309; 
- Mon, 20 Jul 2026 09:41:36 -0700 (PDT)
+ bh=eDfaGhTvIaZeKnlhK/69QlPp1YArSxor2r1KS5iYRwg=;
+ b=XiM07PrqmhTJIHpQ1xt7dsC8Wd4Yw15PjJweY19r/9a91V/bhLcVGYM6j4/lAUEGTJ
+ qH2OTmKewdX166+4+2jHlUbUlu/ml9EurCwgHXl9AbHJFEwFEmedwVGJgl5IZbemo7S1
+ hoD33CBnyFvm2H8FXZ2IrBqRlPpxJFTwgoCHPrx3vfiHfL5cMX8jkLVmfmXQxK31RAFT
+ RO8pO5EVSSecxsKlVY6OEhvwTF/SOmJ/J3Mjer2dyAe9plgUW34mjU7mbJNBfBGMO/rG
+ 2UucgxOlJL30KOw6tmoYnQ2aFa0xF0hPEWVygZOKSznobxl1IT+35sx4fkFbx3yvomFB
+ Tkvg==
+X-Gm-Message-State: AOJu0Yzuh++QfrXjlZT2z9Y5he1+2Se9jtAGOhrSHZxJJw4JnYqH+hzx
+ kJfRBvwOpmXLigbczzRSd0Uu6/lTMYT34qsLnx3Pru7GB7ldkxenUAN6TYTnAZhI7G8=
+X-Gm-Gg: AfdE7cl9g5huQBPoD0wIyh10aKiHq1MFuZlmw8pANjOyo7RfgFba4cRpeJiRfVfYp72
+ M0OQTvD8GffHJXqnmWt8GkhBS+kcKpktBYllsSDgqv4Fx6dCHmLgiS45UcmVObzoRoVJ8AfZPvD
+ ya1ytZ7x+xp52Gz1k7FrKVad7v5Ozrz6Ksm7VIP4WjzTObWXa0szfj4skzKr07jEJ++qBW502NB
+ Xx8jE/AMz1UmDzXB9pOB5LFurroP8bbTMfWheOfMJv5+KudTBUsX99D2vCuR7B7+Yzp+JEeIgKA
+ QWo+hbI6suy7bhI/tc+a+S9d4fxPrcJoQnXQL4iNJvdhyEn6xIuxCxSHzDr4vdtRvGzGAMv/EFJ
+ LKetFw9SW6Wra2xUF20AFescyy9gf+Wb2bMmfE44X8y/CTI6p9UKK7DCE3KzqCses7U2C8FDaEV
+ s8tUHPLE0afKzzvr6v97lbLSXvl3y9CA==
+X-Received: by 2002:a05:600c:e548:10b0:493:b91c:6bf with SMTP id
+ 5b1f17b1804b1-4954a40e11dmr117107625e9.18.1784565739414; 
+ Mon, 20 Jul 2026 09:42:19 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.33
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.42.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:41:35 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:40:46 +0100
-Subject: [PATCH 19/36] clk/sandbox: add a CCF_FULL port of clk_sandbox
+ Mon, 20 Jul 2026 09:42:18 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:41:01 +0100
+Subject: [PATCH 34/36] ufs: qcom: use clk_prepare_enable_bulk()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-19-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-34-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -145,44 +146,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12675;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=734;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=PYj6/nhnnI1y8BA1U5hQj6dYDK9oqU0jVxl2NOr9QOI=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+DvaDCPbN9V3RfJpKYSZsQJRnULcYWcGM+T
- 8j2QrTjnrKJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgwAKCRAFgzErGV9k
- tiSxD/9nPDJSuujMFwclc3OkKvnClFfpMNcCOf3EHeZvvj/Cuhcd41wKKN50nJ6EVjcRV4UpwQ/
- 4KpwYFFxmgId408k7Shph3GJ1yIHRZFeoX9ZU75eR1P328yt3K9DsoMFyr2hKArJL5wERp4Kyd4
- fdP1n4gvFIx5icOfDkOXTUvRSAe4k+Y7asV1hk8Zf7AbYEOR3V6zxAfTYU/4YQwB6B2oPpqYhRK
- 9PpnxyqjQH9Xsp/T0lFNI2v5ELmMQeiAwXd0jw1+0nXfGQpuqie3rsMrccpF7JFKH7XcnUt94JX
- VvEJDAUDPxo3C4FI2EjLNGBusLLbrgjHVDAh+UJEtRADRTQh+6DHWapZkx+EzKUGWRT3akhFWPB
- qHwW41Rh6YnRT+f1ZUUccQnu74LB38qbRcEaIYI4ktyIkcdNaTEf0bT4RcstyyXoQyeSTVEat7s
- +JgvBZm6GRw7kgsq+mHT6jsU4gpjpDeXSvy/25z9mfSVJdkOww7IqxGTIpuryQP4wnZPUSeuokn
- 8W4jhl7f0ZrNsY53PfdThyw3QQ6cBPmWFqyFy/5nHjK4UiMM9ZReejfy2xamEJvsRaUh36u2hkz
- Ns+BqPBBE6z9N1fQ9c6lEg6F2qTkUOtl0S+icnNAgX4FMpfpIu3EI7fA1CDkPWUCSD0GhEGf/VW
- /FlqdLxc9dHXhGQ==
+ bh=y6OLVub7ZzJsvm9t0SIo7RimQsbVTY/xJjXd8t8dM1w=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+Htiz6Mr2siQsVRTN1kqkH8C9It91RKoTej
+ lJC0osd4COJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhwAKCRAFgzErGV9k
+ tlJ/D/0UD2Tn91GVHaccFivkCONzgfAUqLwG7poligyUOeMf15jSo/8qnOnFzI2Hti7cHlQExb5
+ rZ3RzMSEpxbW7FqpTISVV2sa0i/fmZVh/JboP6j+7Cl+XwtiC7QG4EV86OgpLcDjP8Ac7VS1uVq
+ atG1bBw3PjYHIC1Ck4STGAjwBRt+kdXVjICusuKW3lrMZdoV64ZgBHGjhV71kbkb3H94q4scsww
+ l6r6cZEaGKCuQBuxFwpqcyyt+tKL1xb+yL44HppRqQ+vW9Lw0dSbeZAmm+wnpFHMCFdMozbYpBM
+ 40ekmh4aHQDCkqdMuj5Q6kfSmS3Jpf6tc9ngEVdTiEs0oMC7mPoTTcDMTtGuDi4WzK7QUhzVGXj
+ z24F9lj1V8n4YG3j7BS0+IciYajZFaPwIwRGdeu8a8GlDC4WT7lnNEHQXCqA2fJzjL4Sn5ob1Ld
+ Y1TwkAL4YUGc9l5qmcC/CcjUDnP4NG6n4IqptBfvzhtG5l9jk/I3txsb7+9bt00pPrXAA7gAZlL
+ oXC6PDtMN4V8+/MDf1auODL+C8Kz0cfdMCPr0Sl+eYKDQdBbv9L+rqQRC47kHL6apI7xmr3e5Pn
+ Jmp5N5cnOSACYpNEI6xDSnICj35TxXlleBk6yv6sKJDnX932g1rpaj9CPGJn2er93Hfps5gLMpE
+ OfT939j0BOo9Bhg==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565696; x=1785170496; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565739; x=1785170539; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Gm8hvTA1oKzPPu4q5/uyeryNgApPNhESIIHaeN07K9c=;
- b=A453tbBGnIXcby49Pc7CLbS8bw+7owe2QtxdSUuzb2gF8Dw3VMrISp3fmfZpoSbWDz
- SuUoLINBsV9UlUNcn9gUrbG6OFbtUPq7wOmRKz3t4TIG4DDRFz7JoMNb2KEDVBq/R7Bz
- oLCiVCo+b8H1e6IxFoV1l6LIMCjMT9U6jqVhLgMqx7/wYZiWzbuoovN5crigAwznYTTk
- /c3vC75/Ud0julP7VBCUW0ZQludtZ3nxXW2VnApa3x+gMSTkWao7KLVunVIji+Qbecmy
- mgU5+mIq0YiI6KsLswjBdacx44Fae3bUb91U3Mz4S+K56iGz+Rl8r9cc0oVnikbWQXs0
- Wyaw==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=eDfaGhTvIaZeKnlhK/69QlPp1YArSxor2r1KS5iYRwg=;
+ b=CiuasS8LIlnTklqWSIjywEhm+5DPH58y5dIb5QP+Wr0R7X/Pl9sLdIWIb8cdlHyxmE
+ oo4S03a0g8hN9lWaqaf4PZ0ecTX/z3NUc71m5oX+Ttlg2tfT4FhT4hhVZ43vq1mQvc/I
+ b8n2CmEK0mBeDxU0SK6RWdpa4YxoN6qo/Tfg8WyXnySTKpqkwvL2/Q94elb2El6GJpOZ
+ F2lxXr21eARLuuoTbBYinLmoTATvzfQ+C7r1WWHf1qjlDDFDac69B1o7B+VoM96lblHd
+ hIelKNU+3U6z1pxCXtw94bm6u7JOc6mjXvXkA5+HIA9xkmxPCkc5Mfv0pUIhIc3aLVKM
+ 2ofw==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=A453tbBG
+ header.a=rsa-sha256 header.s=google header.b=CiuasS8L
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -190,7 +191,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="A453tbBG"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="CiuasS8L"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -208,420 +209,29 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This is based on the uCCF version with trivial changes to use the full
-CCF API and demonstrate how clk drivers can be ported from U-Boot CCF to
-full CCF.
-
-Notably, the line count drops by about 20% with the removal of the
-different U_BOOT_DRIVER definitions. It also becomes possible to
-register clocks with direct references to their parent clocks, avoiding
-the need for global string lookups.
-
-The test dts is also updated to give the clk-ccf device a proper handle
-to the fixed osc clock, enabling proper lookup via the clock-names DT
-property.
+With CCF the clocks have to be prepared before enabling. The CCF core
+will do this for us but it's much better to be explicit.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- arch/sandbox/dts/test.dts              |   4 +-
- arch/sandbox/include/asm/clk.h         |   2 +-
- drivers/clk/ccf/Makefile               |   1 +
- drivers/clk/ccf/clk_sandbox_ccf_full.c | 220 +++++++++++++++++++++++++++++++++
- drivers/clk/clk_sandbox.c              |  43 ++++++-
- drivers/clk/uccf/clk_sandbox_uccf.c    |   4 +-
- include/sandbox-clk.h                  |   3 +
- test/dm/clk_ccf.c                      |   2 +-
- 8 files changed, 273 insertions(+), 6 deletions(-)
+ drivers/ufs/ufs-qcom.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 1652848a6f5e..8ea9176ae68c 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -697,9 +697,9 @@
- 			clock-mult = <2>;
- 			clocks = <&clk_fixed>;
- 		};
+diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+index f5f5a6eb110c..3656c3861cb5 100644
+--- a/drivers/ufs/ufs-qcom.c
++++ b/drivers/ufs/ufs-qcom.c
+@@ -38,9 +38,9 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
  
--		osc {
-+		xo_board: osc {
- 			compatible = "fixed-clock";
- 			#clock-cells = <0>;
- 			clock-frequency = <20000000>;
- 		};
-@@ -740,8 +740,10 @@
- 	};
+ 	if (priv->is_clks_enabled)
+ 		return 0;
  
- 	ccf: clk-ccf {
- 		compatible = "sandbox,clk-ccf";
-+		clocks = <&xo_board>;
-+		clock-names = "osc";
- 		#clock-cells = <1>;
- 	};
+-	err = clk_enable_bulk(&priv->clks);
++	err = clk_prepare_enable_bulk(&priv->clks);
+ 	if (err)
+ 		return err;
  
- 	efi-media {
-diff --git a/arch/sandbox/include/asm/clk.h b/arch/sandbox/include/asm/clk.h
-index 37fe49c7fcf6..c67ea92d3331 100644
---- a/arch/sandbox/include/asm/clk.h
-+++ b/arch/sandbox/include/asm/clk.h
-@@ -145,9 +145,9 @@ ulong sandbox_clk_test_round_rate(struct udevice *dev, int id, ulong rate);
-  * @dev:	The sandbox clock test (client) device.
-  * @id:		The test device's clock ID to configure.
-  * @return:	The new rate of the clock.
-  */
--ulong sandbox_clk_test_set_rate(struct udevice *dev, int id, ulong rate);
-+long sandbox_clk_test_set_rate(struct udevice *dev, int id, ulong rate);
- /**
-  * sandbox_clk_test_enable - Ask the sandbox clock test device to enable a
-  * clock.
-  *
-diff --git a/drivers/clk/ccf/Makefile b/drivers/clk/ccf/Makefile
-index a337b9f29d7a..2d319eb24fff 100644
---- a/drivers/clk/ccf/Makefile
-+++ b/drivers/clk/ccf/Makefile
-@@ -14,4 +14,5 @@ obj-y += clk.o \
- 	clk-fixed-rate.o
- 
- obj-$(CONFIG_CLK_COMPOSITE_CCF) += clk-composite.o
- 
-+obj-$(CONFIG_SANDBOX_CLK_CCF) += clk_sandbox_ccf_full.o
-diff --git a/drivers/clk/ccf/clk_sandbox_ccf_full.c b/drivers/clk/ccf/clk_sandbox_ccf_full.c
-new file mode 100644
-index 000000000000..6e3b4fd69646
---- /dev/null
-+++ b/drivers/clk/ccf/clk_sandbox_ccf_full.c
-@@ -0,0 +1,220 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2019
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ *
-+ * Common Clock Framework [CCF] driver for Sandbox
-+ */
-+
-+#include <dm.h>
-+#include <clk.h>
-+#include <malloc.h>
-+#include <asm/clk.h>
-+#include <clk-uclass.h>
-+#include <dm/devres.h>
-+#include <linux/bitops.h>
-+#include <linux/clk-provider.h>
-+#include <sandbox-clk.h>
-+#include <linux/err.h>
-+
-+/*
-+ * Sandbox implementation of CCF primitives necessary for clk-uclass testing
-+ *
-+ * --- Sandbox PLLv3 ---
-+ */
-+struct clk_pllv3 {
-+	struct clk_hw	clk;
-+	u32		div_mask;
-+	u32		div_shift;
-+};
-+
-+#if CONFIG_IS_ENABLED(UNIT_TEST)
-+int clk_get_enable_count(struct clk *clk);
-+#else
-+#define clk_get_enable_count(clk) 0
-+#endif
-+
-+int sandbox_clk_enable_count(struct clk *clk)
-+{
-+	return clk_get_enable_count(clk);
-+}
-+
-+static ulong clk_pllv3_recalc_rate(struct clk_hw *hw, unsigned long parent_rate)
-+{
-+	return parent_rate * 24;
-+}
-+
-+static const struct clk_ops clk_pllv3_generic_ops = {
-+	.recalc_rate       = clk_pllv3_recalc_rate,
-+};
-+
-+static struct clk_hw *sb_clk_pllv3(enum sandbox_pllv3_type type, ofnode node, const char *name,
-+			      const char *parent_name, void __iomem *base,
-+			      u32 div_mask)
-+{
-+	struct clk_pllv3 *pll;
-+	struct clk_hw *hw;
-+	struct clk_init_data init = { 0 };
-+	int ret;
-+
-+	pll = kzalloc(sizeof(*pll), GFP_KERNEL);
-+	if (!pll)
-+		return ERR_PTR(-ENOMEM);
-+
-+	pll->div_mask = div_mask;
-+	hw = &pll->clk;
-+	hw->init = &init;
-+
-+	init.name = name;
-+	init.ops = &clk_pllv3_generic_ops;
-+	init.flags = CLK_SET_RATE_PARENT;
-+	init.parent_data = &(struct clk_parent_data){
-+		.fw_name = parent_name,
-+	};
-+	init.num_parents = 1;
-+
-+	ret = of_clk_hw_register(node, hw);
-+	if (ret) {
-+		kfree(pll);
-+		return ERR_PTR(ret);
-+	}
-+
-+	return hw;
-+}
-+
-+/* --- Sandbox PLLv3 --- */
-+
-+struct clk_hw *sandbox_clk_composite(const char *name,
-+				  const char * const *parent_names,
-+				  int num_parents, void __iomem *reg,
-+				  unsigned long flags)
-+{
-+	struct clk_hw *hw = ERR_PTR(-ENOMEM);
-+	struct clk_divider *div = NULL;
-+	struct clk_gate *gate = NULL;
-+	struct clk_mux *mux = NULL;
-+
-+	mux = kzalloc(sizeof(*mux), GFP_KERNEL);
-+	if (!mux)
-+		goto fail;
-+
-+	mux->reg = reg;
-+	mux->shift = 24;
-+	mux->mask = 0x7;
-+	mux->flags = flags;
-+
-+	div = kzalloc(sizeof(*div), GFP_KERNEL);
-+	if (!div)
-+		goto fail;
-+
-+	div->reg = reg;
-+	div->shift = 16;
-+	div->width = 3;
-+	div->flags = CLK_DIVIDER_ROUND_CLOSEST | flags;
-+
-+	gate = kzalloc(sizeof(*gate), GFP_KERNEL);
-+	if (!gate)
-+		goto fail;
-+
-+	gate->reg = reg;
-+	gate->bit_idx = 28;
-+	gate->flags = flags;
-+
-+	hw = clk_hw_register_composite(NULL, name,
-+				     parent_names, num_parents,
-+				     &mux->hw, &clk_mux_ops, &div->hw,
-+				     &clk_divider_ro_ops,
-+				     &gate->hw, &clk_gate_ops, flags);
-+	if (IS_ERR(hw))
-+		goto fail;
-+
-+	return hw;
-+
-+fail:
-+	kfree(gate);
-+	kfree(div);
-+	kfree(mux);
-+	return ERR_CAST(hw);
-+}
-+
-+/* --- Sandbox Gate --- */
-+/* The CCF core driver itself */
-+static const struct udevice_id sandbox_clk_ccf_test_ids[] = {
-+	{ .compatible = "sandbox,clk-ccf" },
-+	{ }
-+};
-+
-+static const char *const usdhc_sels[] = { "pll3_60m", "pll3_80m", };
-+static const char *const i2c_sels[] = { "pll3_60m", "pll3_80m", };
-+
-+static int sandbox_clk_ccf_probe(struct udevice *dev)
-+{
-+	ofnode node = dev_ofnode(dev);
-+	struct clk_hw_onecell_data *data;
-+	struct clk_hw **clks;
-+	void *base = NULL;
-+	u32 reg;
-+	u32 *clk_regs;
-+
-+	data = devm_kzalloc(dev, sizeof(*data) + sizeof(struct clk_hw) * SANDBOX_CLK_MAX, __GFP_ZERO);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	clk_regs = devm_kzalloc(dev, sizeof(u32) * SANDBOX_CLK_MAX, __GFP_ZERO);
-+	if (!clk_regs)
-+		return -ENOMEM;
-+
-+	data->num = SANDBOX_CLK_MAX;
-+	clks = data->hws;
-+
-+	clks[SANDBOX_CLK_PLL3] = sb_clk_pllv3(SANDBOX_PLLV3_USB, node, "pll3_usb_otg", "osc",
-+				     base + 0x10, 0x3);
-+
-+	clks[SANDBOX_CLK_PLL3_60M] =
-+		clk_hw_register_fixed_factor_parent_hw(dev, "pll3_60m",
-+						       clks[SANDBOX_CLK_PLL3],
-+						       CLK_SET_RATE_PARENT, 1, 8);
-+	
-+	clks[SANDBOX_CLK_PLL3_80M] =
-+		clk_hw_register_fixed_factor_parent_hw(dev, "pll3_80m",
-+						       clks[SANDBOX_CLK_PLL3],
-+						       CLK_SET_RATE_PARENT, 1, 6);
-+
-+	/* The HW adds +1 to the divider value (2+1) is the divider */
-+	clk_regs[SANDBOX_CLK_ECSPI_ROOT] = (2 << 19);
-+	clks[SANDBOX_CLK_ECSPI_ROOT] = clk_hw_register_divider_parent_hw(dev, "ecspi_root", clks[SANDBOX_CLK_PLL3_60M],
-+									 CLK_SET_RATE_PARENT, &clk_regs[SANDBOX_CLK_ECSPI_ROOT], 19, 6, CLK_DIVIDER_READ_ONLY);
-+	clk_regs[SANDBOX_CLK_ECSPI0] = 0;
-+	clks[SANDBOX_CLK_ECSPI0] = clk_hw_register_gate_parent_hw(dev, "ecspi0", clks[SANDBOX_CLK_ECSPI_ROOT],
-+								  CLK_SET_RATE_PARENT, &clk_regs[SANDBOX_CLK_ECSPI0], 0, 0);
-+
-+	clks[SANDBOX_CLK_ECSPI1] = clk_hw_register_gate_parent_hw(dev, "ecspi1", clks[SANDBOX_CLK_ECSPI_ROOT], CLK_SET_RATE_PARENT, base + 0x6c, 0, 0);
-+
-+	/* Select 'pll3_60m' */
-+	reg = 0;
-+	clk_regs[SANDBOX_CLK_USDHC1_SEL] = 0;
-+	clks[SANDBOX_CLK_USDHC1_SEL] = clk_hw_register_mux(dev, "usdhc1_sel", usdhc_sels, ARRAY_SIZE(usdhc_sels),
-+							   CLK_SET_RATE_NO_REPARENT, &clk_regs[SANDBOX_CLK_USDHC1_SEL], 16, 1, 0);
-+
-+	/* Select 'pll3_80m' */
-+	clk_regs[SANDBOX_CLK_USDHC2_SEL] = BIT(17);
-+	clks[SANDBOX_CLK_USDHC2_SEL] = clk_hw_register_mux(dev, "usdhc2_sel", usdhc_sels, ARRAY_SIZE(usdhc_sels),
-+							   CLK_SET_RATE_NO_REPARENT, &clk_regs[SANDBOX_CLK_USDHC2_SEL], 17, 1, 0);
-+
-+	clk_regs[SANDBOX_CLK_I2C] = BIT(28) | BIT(24) | BIT(16);
-+	clks[SANDBOX_CLK_I2C] = sandbox_clk_composite("i2c2", i2c_sels, ARRAY_SIZE(i2c_sels),
-+					 &clk_regs[SANDBOX_CLK_I2C], CLK_SET_RATE_UNGATE);
-+		   
-+
-+	clk_regs[SANDBOX_CLK_I2C_ROOT] = 0;
-+	clks[SANDBOX_CLK_I2C_ROOT] = clk_hw_register_gate(dev, "i2c_root", "i2c2", 0, &clk_regs[SANDBOX_CLK_I2C_ROOT], 0, 0);
-+
-+	return of_clk_add_hw_provider(node, of_clk_hw_onecell_get, data);
-+}
-+
-+U_BOOT_DRIVER(sandbox_clk_ccf_full) = {
-+	.name = "sandbox_clk_ccf_full",
-+	.id = UCLASS_NOP,
-+	.probe = sandbox_clk_ccf_probe,
-+	.of_match = sandbox_clk_ccf_test_ids,
-+};
-diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
-index 667526810fc2..36ca128892b5 100644
---- a/drivers/clk/clk_sandbox.c
-+++ b/drivers/clk/clk_sandbox.c
-@@ -165,9 +165,10 @@ int sandbox_clk_query_requested(struct udevice *dev, int id)
- 		return -EINVAL;
- 	return priv->requested[id];
- }
- 
--int clk_fixed_rate_of_to_plat(struct udevice *dev)
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+static int clk_fixed_rate_of_to_plat(struct udevice *dev)
- {
- 	struct clk_fixed_rate *cplat;
- 
- #if CONFIG_IS_ENABLED(OF_PLATDATA)
-@@ -196,4 +197,44 @@ U_BOOT_DRIVER(sandbox_fixed_clock) = {
- 	.plat_auto = sizeof(struct sandbox_clk_fixed_rate_plat),
- 	.ops = &clk_fixed_rate_ops,
- 	.flags = DM_FLAG_PRE_RELOC,
- };
-+#else
-+static int clk_fixed_rate_probe(struct udevice *dev)
-+{
-+	ofnode node = dev_ofnode(dev);
-+	const char *clk_name;
-+	struct clk_hw *hw;
-+	u32 rate = 0;
-+	int ret;
-+
-+	ofnode_read_u32(node, "clock-frequency", &rate);
-+
-+	clk_name = ofnode_read_string(node, "clock-output-names");
-+	if (!clk_name)
-+		clk_name = ofnode_get_name(node);
-+
-+	hw = clk_hw_register_fixed_rate(dev, clk_name, NULL, 0, rate);
-+	if (IS_ERR(hw))
-+		return PTR_ERR(hw);
-+
-+	ret = of_clk_add_hw_provider(node, of_clk_hw_simple_get, hw);
-+	if (ret) {
-+		clk_hw_unregister_fixed_rate(hw);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id sandbox_clk_fixed_rate_match[] = {
-+	{ .compatible = "sandbox,fixed-clock" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(sandbox_fixed_clock) = {
-+	.name = "sandbox_fixed_clock",
-+	.id = UCLASS_NOP,
-+	.of_match = sandbox_clk_fixed_rate_match,
-+	.probe = clk_fixed_rate_probe,
-+};
-+#endif
-diff --git a/drivers/clk/uccf/clk_sandbox_uccf.c b/drivers/clk/uccf/clk_sandbox_uccf.c
-index 9c7dc5007134..90e0eaa93247 100644
---- a/drivers/clk/uccf/clk_sandbox_uccf.c
-+++ b/drivers/clk/uccf/clk_sandbox_uccf.c
-@@ -270,13 +270,13 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
- 				   ARRAY_SIZE(usdhc_sels)));
- 
- 	reg = BIT(28) | BIT(24) | BIT(16);
- 	dev_clk_dm(dev, SANDBOX_CLK_I2C,
--		   sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
-+		   sandbox_clk_composite("i2c2", i2c_sels, ARRAY_SIZE(i2c_sels),
- 					 &reg, CLK_SET_RATE_UNGATE));
- 
- 	dev_clk_dm(dev, SANDBOX_CLK_I2C_ROOT,
--		   sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
-+		   sandbox_clk_gate2("i2c_root", "i2c2", base + 0x7c, 0));
- 
- 	return 0;
- }
- 
-diff --git a/include/sandbox-clk.h b/include/sandbox-clk.h
-index eb02a474c741..fd16aacf1a73 100644
---- a/include/sandbox-clk.h
-+++ b/include/sandbox-clk.h
-@@ -20,8 +20,11 @@ enum {
- 	SANDBOX_CLK_USDHC1_SEL,
- 	SANDBOX_CLK_USDHC2_SEL,
- 	SANDBOX_CLK_I2C,
- 	SANDBOX_CLK_I2C_ROOT,
-+
-+	_SANDBOX_CLK_MAX,
-+	SANDBOX_CLK_MAX = _SANDBOX_CLK_MAX,
- };
- 
- enum sandbox_pllv3_type {
- 	SANDBOX_PLLV3_GENERIC,
-diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
-index 9c06aadb7ed3..13f90ce53acf 100644
---- a/test/dm/clk_ccf.c
-+++ b/test/dm/clk_ccf.c
-@@ -108,9 +108,9 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
- 
- 	/* Test the composite of CCF */
- 	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C), &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("i2c", clk->dev->name);
-+	ut_asserteq_str("i2c2", clk->dev->name);
- 	ut_asserteq(CLK_SET_RATE_UNGATE, clk->flags);
- 
- 	rate = clk_get_rate(clk);
- 	ut_asserteq_64(60000000, rate);
+ 	priv->is_clks_enabled = true;
 
 -- 
 2.55.0
