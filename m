@@ -4,133 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0696C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:17:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCAD0C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:22:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A69DB40732;
-	Mon, 20 Jul 2026 18:17:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC51440598;
+	Mon, 20 Jul 2026 18:22:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4DecPIhR8NVd; Mon, 20 Jul 2026 18:17:36 +0000 (UTC)
+ id kh6VrAMf4TJn; Mon, 20 Jul 2026 18:22:33 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CCC7840719
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 68E894053C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571455;
-	bh=/86wRwUWrJv29mXJ6BAQOVTTjoktmT9HapcTAsUAPKk=;
+	d=lists.u-boot-project.org ; s=default; t=1784571753;
+	bh=k4MP+3Qchv7xKjDpUtGNmFRYeKoWZHKy69AeR8FviL8=;
 	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=UvFmlYOgGNhY6F0ENfiYeomoU/XVGS6y1dezSsWBSKJjY2b3aZRVWVbgRxIy9D0Wc
-	 k/dayNsrYpANgZZ66zPGZKDn7Njzti5W75kqch2J/cCfq5/q/O4aezDuCXQbYmf6ws
-	 jY+TWfi50NrQ0bvJE6L18GJv9PZPkk1RuJggvdcRAPSiWWFmCW84Tkq1/d7G1KbBiz
-	 WhTkh/Dkk835TS5V33zm5knZtzVIlVRHboi5R1oMQSKVSp0a+tAldNrrenoGggSLNL
-	 HRziBePFNZWzvp7TKM95rNkuGMq3mbhdDbsx2OpvyRzpT0biqqAqnXRLRkZIZvSbXy
-	 xrgydSC84AJcA==
+	b=QOskVMFzchjyNPF58z3kIAAoTPTetHZIr7rV/1eFqmirfDl6wJt6DBwmpbbSbWQPC
+	 htfSKptTWxIm5OWpVH9zn0rh8IwmvOKUSzuyswxYw4Y/x2PIxE/MCszzHUtd0/B2ij
+	 AzZ72HuTAAdrlW/+rpfYB4KdsBdZiOrEAvbxEV4OK9/884s4P18dRD2q/npVV3IwKk
+	 q8ML8hwe5eArN1LqIAx3bW9zEo0udVdkd4xb4pv7HeSWNt2CiomyrkwmKZqIg6VloU
+	 leAVS6XjkiiJb9Xk90mgiHFQ9McIvIAH1WBZ1d7CoefocA3w7CaQqk7JLehDdrp036
+	 5N4uygcmlR+Cw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CCC7840719;
-	Mon, 20 Jul 2026 18:17:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 68E894053C;
+	Mon, 20 Jul 2026 18:22:33 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2D9EB786
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:34 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C545B2E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:22:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1F8B940015
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:34 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B744840081
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:22:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YpWuAJPCbmgg for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:17:33 +0000 (UTC)
+ id xR_j4GsHG7hq for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:22:31 +0000 (UTC)
 Received-SPF: Neutral (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org C5CA140081
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C5CA140081
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7A42E40015
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7A42E40015
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C5CA140081
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:32 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7A42E40015
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:22:31 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 489B7844F6; Mon, 20 Jul 2026 20:17:31 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 021A8844F6; Mon, 20 Jul 2026 20:22:30 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 406D980433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:17:29 +0200 (CEST)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-69c5fda04a8so16767593a12.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:17:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784571449; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id F008A80433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:22:27 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c16794450aeso710673766b.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:22:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784571747; cv=none;
  d=google.com; s=arc-20260327;
- b=g4eiVZ2P/XN1be36P0AyCgHbPGlr04Efe98OHXY/WzBJh+RZjA9tdx4UtvIvb/u/Lr
- ZJ3938Pjs/cUGxDqIhwNAOmc2D76KoP2sgtAaqpvC8Vbn5HvobmyiudDbW7DA3f8jR3q
- V19L9Yi61YEgKAnuSCdaAYzBnuxKVkAvqpkPSqi4pXiFIMea8WTr3St3iTyeds6pgPq/
- kXCPUhoHJaVKKkE5apmqFwNytAnImTuXgn/isCGd200Q3dQuSi1G4B6n6W/Y3QSrIaYm
- PM6l/JRpyph4PBh8GWjmrS7X58Xx04ZvtfEqy5wRf5G/YmIIw4ZQNXTB/JU6ly+ZdAkw
- 6H1Q==
+ b=m227yV4nyrT+ZrbFFyRBGqT1LtvcPRIJjqtVnS8dWjvi7ieeATVIw72CM8rVpsO32V
+ DmAwWXrWwYD51j8I/SJq6ekn2HML9nsZm/nMMPflW71e8fFiNnCAhi2ejEmeRKjZ1CEF
+ zfPtGV00Z9Xa3c6ZaumFmOJTs5vRPGGFQuYkBKkn1KLIAUc12ZQc+Snp17BGUFMJCC4S
+ A8Tw0Wn8vYQHfQwnyo8QrD2Ef7b9R/RujRvi3HyzTL/dwbhl06riJdU1ZlhGaonCK9XA
+ +MJh5V4Ra/uRy2xYzjQbdX/whf8gYOHoLmwf9S0LXIulTlcU5L60dHRx559v3+J/QNrX
+ y8Fw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=/86wRwUWrJv29mXJ6BAQOVTTjoktmT9HapcTAsUAPKk=;
- fh=T2JeJNFo+6Nm/X4eDuP9FObcNFatCs2oxjGzZgUUZAM=;
- b=C5qa3j9Se8cnArtIA17GthCPSn2wDc+zoxVvE2whLxzEjLWF6A+K2vHK0NfovuA0JD
- x1Enlo/oxKPaUX3NUgV9YSpqtsjcFGes8xBmetHDFkwpcJuyjGuOEBy9VP2lqG47qH6M
- GureFePO24fQDBsgfrmHfYlkEqWqFy9kKxGwTgKG2/mXx4tLb6Yad7x5cji5fe7bpeZv
- A1IUL1rRLhT4+XvL2J+iZydUXFM+4VGyKxn5DNuDzqWfrvky3pJoa1XR4Bx4cFp8Wzi5
- TN+qi4BVB7yGupCq/BUECw4Tu6+cppPfpY0xwtQTYEEQZEKdg46oPy1fDQvAlyKS4Zcl
- sn5A==; darn=lists.denx.de
+ bh=k4MP+3Qchv7xKjDpUtGNmFRYeKoWZHKy69AeR8FviL8=;
+ fh=JcawS49slyrlb1DYn0onXZHqg/P1v/BnDUoxr7QpqQQ=;
+ b=dIfEqSW4MyIFlkHQqt0JuBTvxanInYxsgQabCwVIf6v7KPPD85/FBmhY5dZ2KWvt+v
+ FU0w60Ausc44mCBEL3Dz6UQj0RFZ965GMUKslolBd+2z9oLSa9yt7a8PvNYLwe0hdGre
+ skVM638EjIjXt1FzSzj4Y/DcZWCUK6ve+3PpgxnNJKTBFBC4T0bEpTCqmwhlsikpVHfu
+ 4ORweKTwLh2kHiARqY3s7NicSAdvMuLnSemm0+vlg8D1/Tee3gE0VLDw4QdG3pXK4lrx
+ h3dsepJ8VdeJBNwXVfCyXWRRnDtEYnpGM149bH3FBVk+YPFY2yYFrGeHOMxabBj10e+V
+ L52g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784571449; x=1785176249;
+ d=1e100.net; s=20251104; t=1784571747; x=1785176547;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=/86wRwUWrJv29mXJ6BAQOVTTjoktmT9HapcTAsUAPKk=;
- b=Zd9uy3Ju7kQam7ZX8yQn7cuBYswiEaAAMfuTpPKR+CRlCw8wBFrSDSIhLHY8eby0Z6
- 5S80PkvrVUgyzpTUZVE3i3K7BVgGOaS//eeExr8Exks+mt6uepuUY8mNt7eC5KhkF9K3
- gaa8RHBWXSbgdrTW38MQjyZNW9pWd6RXPoQodvW5xzoq1giT0s/Q7a9x6SyUmMG6L6Q8
- qqe6xbnWAq6HRSQcrlMTtiW3Y1Ca7ZLML3YNgH3GfAJdQDRHLD5eISvGbC7ud+rVj17H
- UsYO9m0tzPBJK05hw1Qo3yCwcvZA3Q1IXyRVvxzZmlv+neO1Nay+1QRPxmtlbmBzuOE4
- 07nw==
-X-Gm-Message-State: AOJu0YzL/JCQbZ04hDzl31Ss6pyFY8GP/EKzsbBRzjHWbZSPgAj2Tzwy
- qbjdAaNFJc7Lx5HMBO2FXTrGjXQnozyI76s+/fmz4DcL/DPUyzQinKzZd9jaHSLmMo9nFCEG45n
- iDqXHCvin85jQirLMCfoJueEbAKx0tEHjKrsUoAUhdLlnm+5SGzo=
-X-Gm-Gg: AR+sD10n1YbhKYkET7YD2iaZbuILqOuzl1QNZJ1ucd1EwEWbR5IJHpjdrluNZmru97N
- t9bdiMynu/Idmp8QAMWSW50GQ8K+T0wPliCxoik4bargdPvYuRasJL6JnPgtmEDwlm9R1NeFMcA
- bSZt1uC6vMlZX2atWQM2DoA3gXE3pVI77mw3WvRCspki4zOeCPPvz/qLhESuvqEvA1494ZEqhZr
- O8yC5SCBPuYn3hyhG72uQlIMOr3MLDc7FJJGK+0ZhQSsNPJLvUAA0tBMkV7YrqWzVAY8js=
-X-Received: by 2002:a05:6402:2425:b0:698:c163:65c with SMTP id
- 4fb4d7f45d1cf-69e652230c8mr5385211a12.2.1784571448709; Mon, 20 Jul 2026
- 11:17:28 -0700 (PDT)
+ bh=k4MP+3Qchv7xKjDpUtGNmFRYeKoWZHKy69AeR8FviL8=;
+ b=Z8tjYnds8cOeOhrjQd07ylg/OQocNWoGqQ0fDavYkuYfGR+QMotChSoas6sLdumcck
+ hCdRCn5SkFtrMXmcYjt9olLD3mRN4BX3MUgZEjfk9DvCdr+BdLyYwa4mUuNn0skQDJFJ
+ 9umOWtOukVzQL9ucROxUKhQQxqcoIdkJhUbIXmpAdZDPoqG35n79gpiU1MSAWehTCG0b
+ bBpWQPlHtzyIp9FvyKk9wC/NNet499Fai+X8EzTuSp8oebbfIMUl3HPSSf6odtB0qYeq
+ onfb6gekBC7CTtjtSE8es2Pp3+wy7nvHTyxe3SXoQAWozHMNDDwooLXJ3HxqSPZv87Ge
+ ew+Q==
+X-Gm-Message-State: AOJu0YzsDqR1Vvrb39vVCGGZcfZ2ps/q6CaRQel/RaTOh9TCBYpXOk0f
+ nHyJep2l5tyG/xTdX5ROQuAXuGnerXq+jK2cI5bHo3lSYcyYN3WreYnn9zSq0jDyxqcg79WtxGK
+ PyaqhMcf8CupwdtDwZp5Gk+7zT1KTSlzJCpky8FoE
+X-Gm-Gg: AfdE7clQuCDO9q8YCaSrM+vMVR+pkTgqJvHpnMoJQKcBwXhWowVDnhM+7k2Y3IjlqNf
+ hct9SkJ5dcypumamDdBl1Y7wXRo0S7gH+GiJcUcHjjo3j+TJwrsCpmhEcVx/CgVczNYFzqf6R9A
+ SVhd+WYOzmu1GqiflA+WT/RoVmk21DgV6mhOVnejljP45cmKjYh8cjNosRxPjHVwhqv80VC7T/J
+ 3xAShp9gOnNtZzb3V1q7YRvl7qAKVU934hTgNyWV+GeiJqNwmRG2uyrUSvF
+X-Received: by 2002:a17:907:9445:b0:c15:d0b6:495c with SMTP id
+ a640c23a62f3a-c16b4702c27mr604776266b.29.1784571747288; Mon, 20 Jul 2026
+ 11:22:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
-In-Reply-To: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
-Date: Mon, 20 Jul 2026 12:16:51 -0600
-X-Gm-Features: AUfX_mx_OQS-vAVOZyjz607AXhSBvBg0JECps9nvS0lI6o86TAUzlem5-6LjGa0
-Message-ID: <CAFLszTinPhEH9nCMV8u8SwMf9UJ5AG0z68En7+-T3e3RxpB6VA@mail.gmail.com>
-Subject: Re: [0/8] Misc Fixes for VGA BIOS Emulation
-To: asrinivasan@oss.tenstorrent.com
-Cc: u-boot@lists.denx.de
+References: <20260703214005.3818185-1-james.hilliard1@gmail.com>
+In-Reply-To: <20260703214005.3818185-1-james.hilliard1@gmail.com>
+Date: Mon, 20 Jul 2026 12:22:15 -0600
+X-Gm-Features: AUfX_mxM4fzQ6siMQPTQwmmpAKhaVs_uMkaSH42VtxBIa3wyTzcPEJwf4xV9Fmk
+Message-ID: <CAFLszTgmYkj+kWMkoP89Unv3DYeET+o2OTMk_yTwHnTfDr75Nw@mail.gmail.com>
+Subject: Re: [PATCH] lib: ecdsa: use .key extension for keydir keys
+To: james.hilliard1@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Lucas Dietrich <ld.adecy@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784571449; x=1785176249; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784571747; x=1785176547; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/86wRwUWrJv29mXJ6BAQOVTTjoktmT9HapcTAsUAPKk=;
- b=UhCZLyrQRW81JDM3QWOGOP37I0pKYi96Ea46peY8zQZ3GMgq3orNarkJvdVj/el+Xk
- BZ1ohG3WN64F1vIO0uLX7jqPrbXTXVg1zSXhl9x9NnL5d76A/G03EN5QEmJ2p09wdY3y
- RpAxxy6qalqn98THBTRN3Le0bQgwNy36V6A/M=
+ bh=k4MP+3Qchv7xKjDpUtGNmFRYeKoWZHKy69AeR8FviL8=;
+ b=Xw9/zmRWgVWBvsVEV5SZkNeG1UWuXJbS6ingzj6BX2vy3l7M4fim28vBkAcPg3050e
+ v6RVmH86Ct9GVNf9TEGcyiiloUTz2b1NRwRSJQZZbMAOXVhaBydUMvSSYPfDD7WvZOQR
+ uL1Dvzec/apEDZZsGVgBS1y4D4cKxl2Meq3Yw=
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=UhCZLyrQ
+ dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=Xw9/zmRW
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -138,7 +140,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="UhCZLyrQ";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xw9/zmRW";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -156,39 +158,46 @@ Reply-To: Simon Glass <sjg@chromium.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Anirudh,
+Hi James,
 
-On 2026-07-19T18:03:31, Anirudh Srinivasan
-<asrinivasan@oss.tenstorrent.com> wrote:
-
-> Patches 1-5 contain misc fixes to drivers/bios_emulator that are
-> suitable for upstream. I would like to get these reviewed and merged in
-> if possible.
+On 2026-07-03T21:40:03, James Hilliard <james.hilliard1@gmail.com> wrote:
+> lib: ecdsa: use .key extension for keydir keys
 >
-> Patches 6, 7, 8 are an implementation of how I got u-boot to actually
-> talk to to the Aspeed VGA card.
+> The keydir/keyname path should follow the FIT signing key convention and
+> read <key-name-hint>.key. Using .pem here is incorrect and does not match
+> the filenames used by mkimage and binman key-directory flows.
+>
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+>
+> lib/ecdsa/ecdsa-libcrypto.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks for looking at this. Please can you split this into two
-submissions? Patches 1-5 stand on their own; mixing them with the
-NOT-FOR-UPSTREAM material makes it awkward to pick up what is ready.
-Send the RFC portion as its own series marked [RFC] in the subject.
+> Using .pem here is incorrect and does not match
+> the filenames used by mkimage and binman key-directory flows.
 
-On the design: I suspect the right shape is a driver-specific hook
-rather than open-coding Aspeed knowledge inside drivers/bios_emulator.
-The emulator should stay generic and call out to the video driver (or
-a small ops table) to translate an I/O port access into whatever the
-card needs - MMIO on BAR2 here, real I/O on x86. See comment on patch
-7.
+Not quite - this has been the ECDSA behaviour since 2021 (commit
+eb22759e2be). It is inconsistent with the RSA path in
+rsa_get_priv_key() and binman's fit etype (which look for
+'<hint>.key'), but not incorrect as such. Anyone signing with 'mkimage
+-k <keydir>' and ECDSA today has keys named '<hint>.pem' and this
+patch silently breaks them. Please can you mention the compatibility
+impact in the commit message, rather than describing it as a straight
+bug fix?
 
-> This series contains a bunch of mischallaneous fixes to the BIOSEMU
-> codebase
+> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+> @@ -338,7 +338,7 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
+> -             snprintf(kname, sizeof(kname), "%s/%s.pem", info->keydir,
+> +             snprintf(kname, sizeof(kname), "%s/%s.key", info->keydir,
+>                        info->keyname);
 
-miscellaneous - also I noticed  'to to' and 'There some checkpatch warnings'.
+Given the existing users, I suspect this should try
+'<keydir>/<keyname>.key' first and fall back to .pem if the file does
+not exist, perhaps with a deprecation warning. That gives people a
+migration path instead of an abrupt failure. What do you think?
 
-For upstream this will need a doc/ entry (which board, which
-defconfig, what to expect) and ideally test coverage. The QEMU RISC-V
-enablement in patch 8 is a nice way to make that reproducible - please
-consider keeping it so it can run in CI.
+BTW test/py/tests/test_fit_ecdsa.py only exercises the keyfile path,
+so neither extension is covered by tests - it would be good to extend
+it to use keydir so this does not regress again.
 
 Regards,
 Simon
