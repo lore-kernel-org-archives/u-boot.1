@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FD7DC4452A
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:20:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FEEC4452A
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13855838D7;
-	Mon, 20 Jul 2026 15:20:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15EA1838D7;
+	Mon, 20 Jul 2026 15:25:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HKKDly/r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KayUKn2x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6103583E76; Mon, 20 Jul 2026 15:20:07 +0200 (CEST)
+ id 596E2842FC; Mon, 20 Jul 2026 15:25:43 +0200 (CEST)
 Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
  [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EB9780517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:20:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 184B680517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:25:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
 Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4954a2e73a9so18721455e9.3
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:20:03 -0700 (PDT)
+ 5b1f17b1804b1-49556f97a9dso9889905e9.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784553602; x=1785158402; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784553939; x=1785158739; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=CkFPp5FpU19LTgH2MSTEMS4eKP+IlL0hKyWdG6v9LKE=;
- b=HKKDly/r23o9gS6ybXAiHrFWz+e3cYuV1/4e4as/xoZdid+2F1I76ZyQF0r4quP9ZJ
- jlkdu655j490wA/2ZjocVEcKgvvAcXtNqB9nvemhiL7kfSZw1OcJ9hWUrxZMH02LPS2U
- x3v0mMuhRlILWNweZSgkRNCuadLu45ngwuaXxqUY3xtgE+/zHVIx8+CI4oH14+PPH7sx
- SiQoRMyaTeH7U5Tjl3qMncyQ9pgrf4Vgl3RN5ZlKPRLDRi4TjVsz4s90ewolP6Yfwom8
- nDWOcDpAkQ8/6D4Uja+TjDuBjlqVY/tutkjv/F98vOFstDTeGklosDRbIx7n8zDZGWBN
- +uCg==
+ :content-type; bh=ZehAxsvfZhH15aoQdLP+4oNr+iM17ios8rxa3P1nh70=;
+ b=KayUKn2xX5p3WceXXCM189EaQdwfnYAfimmI19yFoVp1A2tQpEDGCnYcOkPF0qmQNv
+ Qn2XprVvNIF8LPirZohIgEjE0o33W9aEO37afpUDVka9fS9JeJ1lFEWO6r8E0iA+4JEx
+ p1WM4IHfcEhJY37ukTQeCa5Pamv6h4ShF92SaNbx53xWb+TWIjzxzzTP5va1eNxxpe9m
+ kDOql/qvwFqR1pX8KQMKMNb+gylI1L36EQwtCpjz39R1IClRIBV4jdA3OaDwyZTxWmxT
+ WvZyTftLanmRGC8pOfR9C4S36yCwkCNO6qG9nbnYJVYyTW5LZ0rDSzc0KzXnkZ+DCrn9
+ JCOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784553602; x=1785158402;
+ d=1e100.net; s=20251104; t=1784553939; x=1785158739;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=CkFPp5FpU19LTgH2MSTEMS4eKP+IlL0hKyWdG6v9LKE=;
- b=PgSEci2wkm5W+DMeILqF38RCRXVvWd7DrxokVs6OCNgbB+f59BBT/EKX6tTCQpeCsC
- SfAIp1uYr4ctCR+Gt9f26rnEiKKke3MyByW/yI7IALCvw8316vP2LTe2g3GJUv+FslFz
- uWQB5XHTEYSGSGdZNcJnGU24fy7BS4cdvs61orIJx6ZL9AkP4zVYIOpq4Q3PWNzcSdB/
- j0dRFzYiswMEuyhacYswFkRXJ0nOzQ8dY62932mz45xNPUdj+0zf6bCv1uDKhEm1P9DX
- AqqxoYbuPfrC1590A1jtQQz9w5nf/4k3jy64ZwUS5Wi7ERc11zK12kjSlhv0se4URhKr
- V7MQ==
+ bh=ZehAxsvfZhH15aoQdLP+4oNr+iM17ios8rxa3P1nh70=;
+ b=FXeo5TzZjpBF8QyOhpxAzYcLXDLKuPT3bpChYyAH5p9kUjDQaVMN2LcwfWrCyd6MZP
+ 58b+8th7HMvVLo8FSrt52sqC7Dswsk/or+ML528MVDEDqtDbK7il1ZcgyaTqT1Wtzqzx
+ WP+H4eAmoWvNhJjKAjW+vucaiZCq3LGffoQMyv/Zjo7BdqNJ6Ek5gajn9P1yjAbH+IX0
+ 1B6+CbbnwSLeYH3RkLbg2yuxgLLAInt0Nd2TzmW2Knqahm34N9iMJ58GThoiU+sauQZr
+ 5KpFrozJgPxn137uGNSm4AY0HsD1FhIjltHFyiGzkSzuDhpkk7BknA4+vOQYotseFjY4
+ NElw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpICM2wRhtWRJvbEjU10NMSBRlPKlU3PmG6E554+hwztV8zczCgeRo7x7d041+ga0/7Gqc4Qgg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFDQHuJNYWyYDJxpR/D5onkNpOA0XjQXCCn4Su34FNEmGF/G0+
- m3pM4GWHsQ6ITvg1XUSR6ZUyLIRLzy1fBOgeTYcrkWEA1j9wX56sPddubQd4uUiP93k=
-X-Gm-Gg: AfdE7cmJbxG5m0Isri0xPsL0bzpoj2kDmGz6eklRe01fm0gdtV/197g1Y7YlgC9tK7N
- /fZ/WEzRKjcuKBJK3rdRJubckV5pQEv+ZtE9m8qMpc9Q0g4/r8ZJBpEnDbPk26eS6qhZRSrh4XG
- f01ZnT8fQ13ECXXHEVOHb5AC64OvCLmo1jaZYO84nxrCIXkQUL53G3K6ubMuuY6wLlu+h5nzZEi
- KkR3nGpl2GY/2VKPkEHMNZTUdcecqHJ9dDaCcfse5ux8hlZFMwxxnyWJOEe+eT84rc9l5OQh6RL
- oEKfUgaf2ptgRL4ggPEyrK6OoiUwGx1+VsmszurXXmYk+OIcvcdNFvW8mZw0plb95Nh6/wrMpv2
- gauLcaKb0YE6soL9GVQ9AuY/h5lq+OSAauvebpKpoGLmWMDvdeTIGwGj3Zdpv18uCFcLrCGR9d2
- 47xd1cS003VTd+10MzTx3DAT9SVD01Z5KAeuOS/Zq8JHg7/gSBlw5m4ukykBY=
-X-Received: by 2002:a05:600c:1911:b0:495:4fd4:619b with SMTP id
- 5b1f17b1804b1-4954fd46219mr122237835e9.1.1784553602196; 
- Mon, 20 Jul 2026 06:20:02 -0700 (PDT)
+ AHgh+RpUXVq59nlDZlvnO4LBPzOM0+ODmzjisbVVBsq7Mzne1tmEznJNu2eee9ZjQTHGpmqWfGnKOVA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzy7U31U70TMmqHnpz9tdKtkM5r6/OPs5FWLmqX6CtcU5gwedVs
+ FC3qbqWFfkn1PZ/r5vEf3AoMzuFffyvmwpZRAIzm7h8IxmfywRMH+mvizViwLmflGxM=
+X-Gm-Gg: AfdE7cnUhAY0plnH7dwBKkxrOEnDRtRnesLHmSvFOG62yVxMqvdQqJrAnAWr6EieeHS
+ YFNwxjbmvQ1MghOldLPGDa/k6tJZ/+Xum9Z16m7ATjhFGmZR3396ki+obHL3oyiMG7+MQAvnDfP
+ EDw7R8+V9XMkH/CiPThXsQPa46VIGb3b27fs/i+9pk6vj8qcCikB+jybzB8psUe5JxkUAimKKF9
+ mEnm80A6GsgWCnKgjcJF24fGdMHnPkX+HgDs4EAzRPqdalX6NWyLYDSAkfnolQ2lwrqj+TlGzJ/
+ LomDP9m1fYGcNNmp/BtxCafhpd80cjW4hI2DjeKH6Sw8lObxny2VV483wHpOVxkT31JPjzWZMh/
+ +/7ngjXWJ0bQTbIDtsJwkWSzBtNSLRrO7FL7J6AvTwLgENiVw0euFxur6w3nzw2jbXasRnMJJbk
+ YB4aaHRyMZ8Xfvqpr28JJnpychvg8e4E0rcDBIg/h9pMHwif2LOSOASMlIBeU=
+X-Received: by 2002:a05:600d:9:b0:495:5e07:649b with SMTP id
+ 5b1f17b1804b1-4955e16aca3mr48038415e9.24.1784553938920; 
+ Mon, 20 Jul 2026 06:25:38 -0700 (PDT)
 Received: from ?IPV6:2a0a:ef40:1d11:1101:a3b4:4010:a727:b812?
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4955dfa81b2sm55357465e9.4.2026.07.20.06.20.00
+ ffacd0b85a97d-47f6fa848fcsm20087936f8f.0.2026.07.20.06.25.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 06:20:01 -0700 (PDT)
-Message-ID: <9d437ed3-aacc-4e36-a49f-aa7f2931a468@linaro.org>
-Date: Mon, 20 Jul 2026 14:20:00 +0100
+ Mon, 20 Jul 2026 06:25:38 -0700 (PDT)
+Message-ID: <83cb6bab-ca75-4c26-8363-19c40ce8da21@linaro.org>
+Date: Mon, 20 Jul 2026 14:25:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] doc: board: qualcomm: document SM8550/QCS8550
- building/flashing
-To: William Bright <william.bright@imd-tec.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20260720-sm8550-hdk-v1-0-84f077937303@imd-tec.com>
- <20260720-sm8550-hdk-v1-1-84f077937303@imd-tec.com>
+Subject: Re: [PATCH 2/3] tools: qcom: mkmbn: Add support for ipq5210
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com>
+ <20260714-ipq5210-v1-2-0b98251aabbd@oss.qualcomm.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260720-sm8550-hdk-v1-1-84f077937303@imd-tec.com>
+In-Reply-To: <20260714-ipq5210-v1-2-0b98251aabbd@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,101 +106,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi William,
+Hi Varadarajan,
 
-On 7/20/26 10:52, William Bright wrote:
-> Introducing documentation support for Qualcomm SnapDragon Gen 2 SM8550
-> and QualComm Dragonwing Q8 QCS8550. Documents the build and flashing
-> steps.
-
-Thanks for sending this series!
-
-Do you think this could just be folded into dragonwing.rst? We're sorely 
-missing some nice broader overview of the list of supported 
-platforms/boards, but since there's a lot of overlap here I don't think 
-we need to duplicate the instructions.
-
-Please also rebase this on qcom-next from 
-https://source.denx.de/u-boot/custodians/u-boot-snapdragon and add 
-CONFIG_QCOM_GENERATE_MBN=y to the defconfig (instead of 
-CONFIG_REMAKE_ELF), that should actually spit out a ready to flash 
-u-boot.mbn.
-
-You should also be able to drop patch 2 since the memory map should be 
-parsed from SMEM automatically.
-
-Thanks,
-Casey
-
+On 7/14/26 10:52, Varadarajan Narayanan wrote:
+> - Add ipq5210 entry to the 'boards' table
+> - Add an argument to specify the SPL load address
+> - ipq5210's boot rom expects the SPL image size to be 4-byte aligned. To
+>    support this add an argument to specify the image size alignment to
+>    enable the mkmbn script to pad the image accordingly.
 > 
-> Signed-off-by: William Bright <william.bright@imd-tec.com>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
->   doc/board/qualcomm/index.rst  |  1 +
->   doc/board/qualcomm/sm8550.rst | 48 +++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 49 insertions(+)
+>   tools/qcom/mkmbn/mkmbn.py | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
 > 
-> diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-> index 3238a68e859..de5b24dd463 100644
-> --- a/doc/board/qualcomm/index.rst
-> +++ b/doc/board/qualcomm/index.rst
-> @@ -14,3 +14,4 @@ Qualcomm
->      iq8
->      phones
->      rdp
-> +   sm8550
-> diff --git a/doc/board/qualcomm/sm8550.rst b/doc/board/qualcomm/sm8550.rst
-> new file mode 100644
-> index 00000000000..200420dcaf8
-> --- /dev/null
-> +++ b/doc/board/qualcomm/sm8550.rst
-> @@ -0,0 +1,48 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +.. sectionauthor:: William Bright <william.bright@imd-tec.com>
+> diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
+> index 8d2078acc30..46edbcafb32 100755
+> --- a/tools/qcom/mkmbn/mkmbn.py
+> +++ b/tools/qcom/mkmbn/mkmbn.py
+> @@ -85,6 +85,7 @@ boards: dict[bytes, MbnData] = {
+>       b"qcom,sm8550\0": MbnData(0xA7000000, 7, SwId.uefi),  # C8550
+>       b"qcom,sm8650\0": MbnData(0xA7000000, 7, SwId.uefi),  # SM8650
+>       b"qcom,qcs615\0": MbnData(0x9FC00000, 6, SwId.uefi),  # Dragonwing IQ6
+> +    b"qcom,ipq5210\0": MbnData(0x87980000, 7, SwId.aboot),
+>       b"qcom,ipq5424\0": MbnData(0x8a380000, 7, SwId.aboot),
+>       b"qcom,ipq9574\0": MbnData(0x4A240000, 6, SwId.aboot),
+>   
+> @@ -100,9 +101,15 @@ parser = argparse.ArgumentParser(
+>   """
+>   )
+>   parser.register("type", "hex", lambda s: int(s, 16))
+> +parser.add_argument(
+> +    "-l", "--load", type=lambda x: int(x, 0), default=0, help="Load address"
+> +)
+
+How about we extend MbnData to support an optional SPL load address 
+option? Then just have a flag to indicate that we're building an SPL 
+image (since presumably you need to add an SPL specific build target for 
+u-boot-spl.mbn?).
+
+>   parser.add_argument(
+>       "-o", "--output", type=Path, default="u-boot.mbn", help="Output file"
+>   )
+> +parser.add_argument(
+> +    "-s", "--szalign", type=int, default=0, help="Size alignment"
+> +)
+
+Pretty sure it's safe to align all the images...... we really don't need 
+to be adding bogus flags for this kinda stuff.
+
+>   parser.add_argument(
+>       "-v", dest="verbose", action="store_true", default=False, help="Verbose"
+>   )
+> @@ -149,8 +156,15 @@ if not mbn:
+>       args.output.unlink(missing_ok=True)
+>       exit(1)
+>   
+> +if args.load != 0:
+> +	print("Using load address from command line: %s" % hex(args.load))
+> +	mbn.loadaddr = args.load
 > +
-> +Qualcomm SM8550
-> +===============
+>   log(f"Detected board {match.decode('UTF-8')} with load address {mbn.loadaddr:#x}")
+>   
+> +if args.szalign != 0:
+> +	data += b'\x00' * (-len(data) % args.szalign)
 > +
-> +The SM8550 (Snapdragon 8 Gen 2) is a Qualcomm mobile SoC featuring an octa-core
-> +Qualcomm Kryo CPU and a Qualcomm Adreno 740 GPU. The ``QCS8550``, part of the
-> +Qualcomm Dragonwing Q8 series, is a child SoC of the SM8550 that drops the
-> +RF modem. As the two SoCs are otherwise identical, the same
-> +``qcom_sm8550_defconfig`` and flashing process can be used for both SoCs.
-> +
-> +More information can be found on the `Qualcomm's SM8550 product page`_ and the
-> +`Qualcomm's QCS8550 product page`_.
-> +
-> +.. _Qualcomm's SM8550 product page:
-> +   https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-8-gen-2-mobile-platform
-> +.. _Qualcomm's QCS8550 product page:
-> +   https://www.qualcomm.com/internet-of-things/products/q8-series/qcs8550
-> +
-> +Installation
-> +------------
-> +First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for
-> +``SM8550``::
-> +
-> +   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> +   $ make qcom_sm8550_defconfig
-> +   $ make -j8
-> +
-> +This will build the signed ``u-boot.mbn`` in the configured output directory.
-> +The firmware expects firmware ELF images to be "signed". The signature does not
-> +provide any security in this case, but it provides the firmware with some
-> +required metadata.
-> +
-> +Then flash the resulting ``u-boot.mbn`` to the ``uefi_a`` partition on your
-> +device with ``fastboot flash uefi_a u-boot.mbn``.
-> +
-> +U-Boot should be running after a reboot (``fastboot reboot``).
-> +
-> +Note that fastboot is not yet supported in U-Boot on the SM8550-HDK, as a
-> +result, to flash back the original firmware, or new versions of the U-Boot, EDL
-> +mode must be used.
-> +
-> +A tool like bkerler's `edl`_ can be used for flashing::
-> +
-> +   $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
-> +
-> +.. _edl: https://github.com/bkerler/edl
+>   elf.phdrs.append(Phdr.from_bin(data, mbn.loadaddr))
+>   elf.ehdr.e_entry = mbn.loadaddr
+>   elf.update()
 > 
 
