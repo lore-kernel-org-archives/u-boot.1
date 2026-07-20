@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951BEC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 12:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC84AC44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 12:29:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B9DC849BC;
+	by phobos.denx.de (Postfix) with ESMTP id 7464B84A0F;
 	Mon, 20 Jul 2026 14:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=imd-tec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=imd-tec.com header.i=@imd-tec.com header.b="Vc0tnOCW";
+	dkim=pass (2048-bit key; unprotected) header.d=imd-tec.com header.i=@imd-tec.com header.b="VuigZ+2z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4102F80517; Mon, 20 Jul 2026 11:53:09 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 731F3838D7; Mon, 20 Jul 2026 11:53:10 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0558483E76
+ by phobos.denx.de (Postfix) with ESMTPS id C409B844F6
  for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=imd-tec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=william.bright@imd-tec.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-476d8e647e9so9012762f8f.0
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-47de0093c42so5246732f8f.3
  for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 02:53:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=imd-tec.com; s=google; t=1784541186; x=1785145986; darn=lists.denx.de;
+ d=imd-tec.com; s=google; t=1784541187; x=1785145987; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=oGR9O9HGi5wLKpcGwwa3Z4c44/JaUSf8+vMKcR9QYnk=;
- b=Vc0tnOCWO0fzpVENhzL8ohviOKXXQCoJsTcOI1uC8xW7lTzUNlhhHDtIS93pKiW/pW
- NqnuFJYINRNxdIyhbghmTI1egaVOL268RkYGrnIwAHPdZYKNG5JdbAROgLUzZzdNlMBu
- J/oYtIPBJJoSVeSaiyiBR+SmrjxgINLtLwt9Xvc+EseTc2nygwkwaPcPlOB58KeFOIkP
- A8YZ1dOu2atMLePoguQMaIE7ZPD1nKfiemW2p5Y3nhKU1cey9fToXy8yOMyr6/zZBI6q
- tWxBdl75rOu3ns0s9H01Kl+JCcR73+L093B01MF4f1Q+rmsj4eiBYXf+C1trpFKYQCsP
- iIxQ==
+ bh=rfLXdv5WUFEm4ibUJQJVdmgyCqtjqXs/KcyFWuKGtvc=;
+ b=VuigZ+2zRrcD6ItoSdU99t9mRfwB5/AtfSTX18Iv6P2EF1LD+KLPdR7Cy1WJpZ9MKX
+ BHiFyrFYc/Y6b8KSFmnX3JNApbLttaaZzonKdE6BXoVnL0g2Jyu+ehXGKzfmdyKHorSD
+ BY7qQZaxo2dLWou/vFQsDlyLTPBGmJuvzqi6Cjg3zSEOzz0TXjFt+P0Bspjrq48v0WY0
+ J2epu35QCnKa2Z9Pj09JOBbZhYdqoRmqRcDoURFUqBvqwjj8wpy+vkeNqE56VyZmGwF6
+ 8dED5CdxAYOm/mYatFcDeP2brne3XyYEYKSYwQwGSY8cNN3dyApphVbvHRmgofxTIZC2
+ GU7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784541186; x=1785145986;
+ d=1e100.net; s=20251104; t=1784541187; x=1785145987;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=oGR9O9HGi5wLKpcGwwa3Z4c44/JaUSf8+vMKcR9QYnk=;
- b=pIKgr+hSWp+Nfc+uiJXRbT1iHA2WiqGkIKeXCJacvQ6Ck/ZOyT6YPt/2hrhjehJP9B
- uVluh+Obc1fnXxhYZ7N2AgqEWMttUZYMBOyJpjp+g/YAqDagMTricEWzHABFgT/qtN1G
- AMhVLdNvjirdNqcb+AL/XpwIS8eCM/B8DzA7zn6Ei2L2m2WqD+/Ew+yZ2WN6OBV1x304
- V8HcKtWtH8BAV2HYg5v7Vg9vtJ8HVB19Oq+veztwV2X//B6y2dZ3kcxeS6bi1VVUObnb
- PHH1tbgNXdMMocapCyS76Xnm2aZ4pxCvRcI02AjQdOfvvmgKMVnhaqY28YheZqvJc6pt
- +3kA==
+ bh=rfLXdv5WUFEm4ibUJQJVdmgyCqtjqXs/KcyFWuKGtvc=;
+ b=C8Z8oUfWEjIsTZ1EOeh9KsEBr/l61Ym4qOB3DzoxdtoA8yXvIo7lTYD3oE+a7MqCct
+ Id/GbZqcplBzmnlPMNcaoyCY8eJmvCjqg6tbfhQEeJmC1Bi5yDtokLZze/SpmITGoR0U
+ aOgi/5Shd+4bcflAOJVySm4YY4OlB9pP/wznpI8GuWV5i2f6R8XcyjvDcNesNzKFOC9a
+ cxHjhF5arPZP/QQGddtle2yzqs98T1KMIQ2gL7vxkfTnp3bf7uP6Doi0DHmWkLVBoE+6
+ twl4ciJehsxtIaD11BlyBZYkuBV6Ltt7VP2CzyctLnrwQgKACOAwO4OKE+Q5HFA3Qana
+ 2Jcw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpXzkwzh5qANgs4PuMlIfxC6ksIr9M5joGITkkYplxIsQk60AdqEfG9WjdR1ayZRZy8U8tlHAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLftaVfL/PQQlGqAiF5/UKpnogF7APQAumaB4+nPPCteJf86f6
- 0uipTCgIc44yo2v0MUJZEYHu48NieEJFc1O78k/Dr0Z6iBsXH4RUodCru4GGByK3gpOSJq7AQkh
- u+BxnjLg=
-X-Gm-Gg: AfdE7cn2WWlDBxVBXFc+Gc+EiEfefqK2+YLgtTiNo8qeKkUE0EkQHcanE5xRugV+ltT
- 3EgLSNDPcUFR2eKQoxNQEPZ4T8MBxRACVCzfm9LyHKwiMPVHYYnRdyZaJq4c9clLJtOnmC71UhR
- qYZjkYOSCHRtIECbfaCECQ8VKjNOfogJvZ/OnVlJrLyL4uXuusmY7SGJ3Q54AjJJdkm+dQCk5on
- sEOKBAVZqRAtCcnmcu9GxzJDVo2ONWrLAYSwmgbfQptDkBFyUbgg9qqHz8B4Hv2iGvT+Z8QQoU9
- agsJsu2L2oF0GwPdwj6SCnkqVqPLlT2zagnidjcVW5+dx2g+CqAkDTgyr48Fy5bjGgb7DBdkQtD
- txUxO8FmslKMDLzMsD7HFjx8rRwQc/WA3jIaJmRybCxJCyakplTxewfQTe+Iq8/FavACbVHopw8
- fyXeafbjhWzpP5UR37lLwquBLxrO+tzOxdFPov19TBSFttmL6IlxZ8iVn5NikHISt11Mk61A==
-X-Received: by 2002:a05:6000:4904:b0:46f:7d90:8128 with SMTP id
- ffacd0b85a97d-47f6230e57fmr16732004f8f.14.1784541186495; 
- Mon, 20 Jul 2026 02:53:06 -0700 (PDT)
+ AHgh+RpxX7XINJpFcw69MknrIZUCTUJ/rPiPiDHmFjRXYaeoEm4ndU7eBMQbx0o3hB50qgkRmt43p9g=@lists.denx.de
+X-Gm-Message-State: AOJu0YwuUaACZ/32iWT/Fez+Z5Z5Vy80VwjOa0Yp/HhJdA3/HZmA64HB
+ y2ljmDyykBxWZa623Spx2UtheflKcymuZvfAvObDSWNXfHfAIq/d7pavMLzjkxf/T0c=
+X-Gm-Gg: AfdE7ckKygOehuh6xneEw/pUfWkgWgQ4p0/l80EZBg94xu843ajkcO9Ij5mEOiGj99E
+ UZDX2vEdzNf3qeGkUHFM+JEVqqh28YGv+D1Sr9t6mhDXVT+LQSV7/+UYrCNTJ9zjVNo79ITCsGR
+ GXa7GZl8u55CrVPXetRaBjaHiBswoS/NL1p8levhAIdsBMExNpHPy9VAbC1EIYqQdYC79ACmqDe
+ BfABKrtBltuyqqIJBXTBYbs39fWD7daw76VSGchkDY0D+8ycLcrwkWRMgHiQPQ9UzH50EhY62d5
+ oumQ6LgsfT9R0YcTVQ3ECE0cM0/aEpB0Rn1QlZkwb6rAy11kAL5k+RWu9sX9XLnkHzwdYaH/U/T
+ xQ84fOLEoz2tIN7zguYlOYX9FyIu1OXIv50UY0MJF0c9G+5P5EZy3IB5H9b/EAUQ/h56aLKzqr7
+ PGlpUS/yfYqWxngJC4dlU89MAupK21nHLXrl0g69EoETe+uYYCxhrSMtZIWf1Bc+RHRrheOA==
+X-Received: by 2002:a05:6000:712:b0:47f:6f2c:7303 with SMTP id
+ ffacd0b85a97d-47f6f2c73c3mr8222746f8f.33.1784541187233; 
+ Mon, 20 Jul 2026 02:53:07 -0700 (PDT)
 Received: from [127.0.1.1] ([82.71.135.85]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f63e51986sm32537104f8f.11.2026.07.20.02.53.05
+ ffacd0b85a97d-47f63e51986sm32537104f8f.11.2026.07.20.02.53.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 20 Jul 2026 02:53:06 -0700 (PDT)
 From: William Bright <william.bright@imd-tec.com>
-Date: Mon, 20 Jul 2026 10:52:11 +0100
-Subject: [PATCH 1/3] doc: board: qualcomm: document SM8550/QCS8550
- building/flashing
+Date: Mon, 20 Jul 2026 10:52:12 +0100
+Subject: [PATCH 2/3] dts: sm8550-hdk-u-boot.dtsi: Add memory entry to
+ bootup
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-sm8550-hdk-v1-1-84f077937303@imd-tec.com>
+Message-Id: <20260720-sm8550-hdk-v1-2-84f077937303@imd-tec.com>
 References: <20260720-sm8550-hdk-v1-0-84f077937303@imd-tec.com>
 In-Reply-To: <20260720-sm8550-hdk-v1-0-84f077937303@imd-tec.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
@@ -108,79 +107,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introducing documentation support for Qualcomm SnapDragon Gen 2 SM8550
-and QualComm Dragonwing Q8 QCS8550. Documents the build and flashing
-steps.
+Added the memory entry to bootup.
 
 Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
- doc/board/qualcomm/index.rst  |  1 +
- doc/board/qualcomm/sm8550.rst | 48 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 49 insertions(+)
+ arch/arm/dts/sm8550-hdk-u-boot.dtsi | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 3238a68e859..de5b24dd463 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -14,3 +14,4 @@ Qualcomm
-    iq8
-    phones
-    rdp
-+   sm8550
-diff --git a/doc/board/qualcomm/sm8550.rst b/doc/board/qualcomm/sm8550.rst
+diff --git a/arch/arm/dts/sm8550-hdk-u-boot.dtsi b/arch/arm/dts/sm8550-hdk-u-boot.dtsi
 new file mode 100644
-index 00000000000..200420dcaf8
+index 00000000000..4cf2ec32016
 --- /dev/null
-+++ b/doc/board/qualcomm/sm8550.rst
-@@ -0,0 +1,48 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: William Bright <william.bright@imd-tec.com>
++++ b/arch/arm/dts/sm8550-hdk-u-boot.dtsi
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026, IMD Technologies Ltd. All rights reserved.
++ */
++/ {
++	/delete-node/ memory@a0000000;
 +
-+Qualcomm SM8550
-+===============
-+
-+The SM8550 (Snapdragon 8 Gen 2) is a Qualcomm mobile SoC featuring an octa-core
-+Qualcomm Kryo CPU and a Qualcomm Adreno 740 GPU. The ``QCS8550``, part of the
-+Qualcomm Dragonwing Q8 series, is a child SoC of the SM8550 that drops the
-+RF modem. As the two SoCs are otherwise identical, the same
-+``qcom_sm8550_defconfig`` and flashing process can be used for both SoCs.
-+
-+More information can be found on the `Qualcomm's SM8550 product page`_ and the
-+`Qualcomm's QCS8550 product page`_.
-+
-+.. _Qualcomm's SM8550 product page:
-+   https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-8-gen-2-mobile-platform
-+.. _Qualcomm's QCS8550 product page:
-+   https://www.qualcomm.com/internet-of-things/products/q8-series/qcs8550
-+
-+Installation
-+------------
-+First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for
-+``SM8550``::
-+
-+   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-+   $ make qcom_sm8550_defconfig
-+   $ make -j8
-+
-+This will build the signed ``u-boot.mbn`` in the configured output directory.
-+The firmware expects firmware ELF images to be "signed". The signature does not
-+provide any security in this case, but it provides the firmware with some
-+required metadata.
-+
-+Then flash the resulting ``u-boot.mbn`` to the ``uefi_a`` partition on your
-+device with ``fastboot flash uefi_a u-boot.mbn``.
-+
-+U-Boot should be running after a reboot (``fastboot reboot``).
-+
-+Note that fastboot is not yet supported in U-Boot on the SM8550-HDK, as a
-+result, to flash back the original firmware, or new versions of the U-Boot, EDL
-+mode must be used.
-+
-+A tool like bkerler's `edl`_ can be used for flashing::
-+
-+   $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
-+
-+.. _edl: https://github.com/bkerler/edl
++	memory@81200000 {
++		device_type = "memory";
++		reg = <0x0 0x81200000 0x0 0x00800000>,
++		      <0x0 0x81cf4000 0x0 0x0000c000>,
++		      <0x0 0x81f20000 0x0 0x006e0000>,
++		      <0x0 0x86e00000 0x0 0x03a00000>,
++		      <0x0 0x9b09c000 0x0 0x00064000>,
++		      <0x0 0xa2a80000 0x0 0x32000000>,
++		      <0x8 0x88000000 0x0 0x39a00000>,
++		      <0x8 0x8c000000 0x0 0xd8000000>;
++	};
++};
 
 -- 
 2.43.0
