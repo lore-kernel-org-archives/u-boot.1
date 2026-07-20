@@ -4,83 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F01C4452A
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F24C6C4452A
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70CFB838D7;
-	Mon, 20 Jul 2026 15:10:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4DE784659;
+	Mon, 20 Jul 2026 15:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kQY+28PE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yGw4Y8NF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 864BD846A4; Mon, 20 Jul 2026 15:10:19 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 2FE73847AF; Mon, 20 Jul 2026 15:10:21 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39F8480517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:10:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 391F3844F6
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-47f71156e1aso699307f8f.3
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:10:17 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4954aff6088so18886195e9.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:10:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784553016; x=1785157816; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784553019; x=1785157819; darn=lists.denx.de;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:from:to:cc:subject:date
+ :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5Wtm5dzBS99EJQKTbjuSR7eeokTNr+u35q1yLYNC7CY=;
- b=kQY+28PE9ZXClnL+oqxu+S2sQ0dhI8qoVVAs808Lyp9hy8s1G1AIWdniohbM64LdAW
- xbG21oUJ39PTwNfpJG0MznUmVTsO3pOe9p3V/4WA63P63siz1wp6TvAoR4tdhoTm8ekA
- 7OpRf6xssCAqNbzhSVl8bb/ouT3K34Q2jtX129qHbV+lPFqWgv3JBw7iQb7/zZjSuEIE
- ffb9zcLwKXW+Ccb+Uy5AXedMKsGdfytruc3bAWKbfImWf3vrgexrL+4U7lPhQMPcoJ1D
- BUuBL6EL+xW84mOvHGx8u+d4WYOK/nbHeOMEtlYNRHD0srdId16Vtc+Y+Vjte8tpb+WD
- grEA==
+ bh=0ovD9gI47fkHaVM+1HFBhx0h6nLwbNF/wLl+j2AOmtU=;
+ b=yGw4Y8NFTGd8BH0cDl1nfDtBMAdPXlEUZ2isougYH/cd47SdIsqzGAOnQKnC3FBeWg
+ a0PCwi4jUUx17t9P7xQGlFyLGehU3WZEQLHpH4MSLKv59wSeD3srr5TrzkXAD8xjedG/
+ m/5Qd7Ti6trC8iJGsQjMcMBxvn8hHcXL/Vm/zoycUnGcYNIykzOM/RNWiRNdhep7wE+o
+ 63QJQlAgNHJA0F5hm5LgEDfyvK2zulsrsD7s+BRBoEoIaAv/BjDTqN5ETL+P29j87b4D
+ 05XIF8CjnoulRkqEVr5M5ydaY99PLmssq0anSIhDTQBS2R6KV9BaUxSP6Tm8fVCoevh5
+ 5Qlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784553016; x=1785157816;
+ d=1e100.net; s=20251104; t=1784553019; x=1785157819;
  h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:to:from:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=5Wtm5dzBS99EJQKTbjuSR7eeokTNr+u35q1yLYNC7CY=;
- b=ifvEEtxzpTBryytQEvDKqD9wZMVRGYcEH0jKjqkH053+R/DLUPdvcHN/BvCbNNuRPk
- zpe3n3z6l1l6eKJh+6Ia/m/GhDL9gVaAkZUK8Ori1UPoAKQ/aQLl5AZytIuPIAfuHZpJ
- +NpBgkKssbU6bP0L/NTmbcCnzBt/LGuH+7bGE8GQeav/8J3w0WF6fcNevCn9ImMwFYrH
- vvBw4NESATFv/j7tidD75KPX4SgRgK2scA/fZmk8s62x/ZgjMJCD+u1diZiCxq5Q7WOu
- hX4yxHaLY2CcDRzYqWltjwQRcUY/yLhb5XF9CeXahmaLq9pvcWWSwOwFy6oekcwG5+6d
- eOEg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqXzv7f5nJR0SIRnheBGfEN6k9/6RRg+/JP2hypw9q5sTNRfwqYIg45waL8tkRe10p07NCXzXg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzt9pCNYXExNk25tSJTIeQzhNtasosrVx65orHEoW7o7jmAbcYH
- dy/zvYqgxl+BksO91+MvIDt0OTCe2HBt+Dv3wcij2UdfOrJLGHhNTvXc7ZsdEAPexSw=
-X-Gm-Gg: AfdE7ckPEwtuZlJURhqYqZypMJ5l7MbZG5OwxOFBFM9XFDjDCfuyvKra/ClYR7BSEta
- SyG2tm0oMljjFnhJVuIAkicVKG2PhRrW7PYXndx+QN4loaCEaGcQeyoOkw8MUdpsmcpCvcHwlNB
- 8/Uh1WxE4HY1KKr3vfvarKVEOc26UByDrz/8qTGHwTOCT4gOZ4YDFGw5YzT2Yk0QHLA2DYAB+UU
- yDB6Zp8jXK2MTfoRQCXgsnXGHDXKJF8k1FevLhWOHLSNKIiOOYNRKaAYt6w9gKwi0F7qwEo6uhT
- d64A76n2lzlUyP3x13jwzzHJ5EiFb4Qx+tRdfbsC8dIsVMfoel7lmr0RmBzOpjj2nGFZaPeH6ZU
- DUe+a+qLnCpjSyH1UpDNRs/T1UP8tX8dTi6E5nZAMTToVno/63UBLgVuLleKDSkyRUYk3cg/T5y
- l66nv8/7iaWvvkZ/e83ILGL3eMdWnVYeCywsv2OvRjSLSR
-X-Received: by 2002:a05:600c:45d3:b0:495:503f:cf9a with SMTP id
- 5b1f17b1804b1-495503fd2a0mr104254675e9.9.1784553016473; 
- Mon, 20 Jul 2026 06:10:16 -0700 (PDT)
+ :subject:references:in-reply-to:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=0ovD9gI47fkHaVM+1HFBhx0h6nLwbNF/wLl+j2AOmtU=;
+ b=XmJY24TqPLPeZe1AuAhwjPn60dNrSDeiqYTKcqH+LQ7QXj3OrqRkrTtw5aGH/L8cLa
+ mxlmhk4NtmcslHUy1DKDwyInPvKMLiCXdqWL6YjZtpk/ylzQpVlRNwTdagH7oGYv9E4o
+ ObiQzVqiuGftXE+o/j4woNR6RoeOA5+wQ0FfK/4HHYb40pieJWxGN2TER/OFK2E3l+D9
+ bvaTgtNLSufr9S+cN9tzoBri01zzDzmtamDvOB9shH1jiFYdKKeLr5EM8c8PbelND01y
+ adchqSSVF/w8PmOlK8NKY60f5Ja4RV2pxSvHnutNCUJWieC01bqiWE3s85xW1Mzpjel6
+ OqnA==
+X-Gm-Message-State: AOJu0Ywm1GTzX/vYwrZAKzxogwQzJl00B+xy8Wlr0mx+Eo+3CYKWIcj/
+ a9xa6NXxWRBlDZJrgAhuAJqO2KMFimskgl4RHidvTMAI2iP/1imyWpthVh+xKUvXZ6Q=
+X-Gm-Gg: AfdE7ckCglOaNmj4HhCmStnw7PL48Tt1mryQIOYALjgLRwKdI5guZpRVAAwqPqCCKxM
+ itr+SPHk5xAQRDA1NKjLcm3fJ/ENaCzgzo2xsVkUwSpjssRfBowav4hNuWQu5QpN4VHG33/7a3W
+ 1oiJ9CpKAszgp8etiVEpl+kxDfJkfj5wOch23tMmgSWzTHJV4r+mvNAfgFpXoqQqmyr6q932nSv
+ 56eQ9QCr1mOVBi4IB7pq1/laAF52vuoxKhU5t0hga1TqIcONG7YZS02wa2twpLPWQZ3ESBms03j
+ mf1+4M/wfiEmwdj1aTl+nlqt/iHdRNkgcRg1qGm+f8UKKsAXa8N818m6B9pAbaIj0stqweRRUUv
+ iLBmxVSnW4i/VeyienTnmH+NTQxXdi7Q+m1WWTbqLszqWT5wmNobCe7+GgYskV1PHlibMiy1Bdi
+ HHH2TDNKJdarUhzs1BvWQM2IUl2QeGYLvx1OTZjLHIB25a
+X-Received: by 2002:a05:600c:6a08:b0:493:bcba:46a4 with SMTP id
+ 5b1f17b1804b1-4954a404528mr101789905e9.20.1784553018123; 
+ Mon, 20 Jul 2026 06:10:18 -0700 (PDT)
 Received: from lion.localdomain (p549d460b.dip0.t-ipconnect.de. [84.157.70.11])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4955fc42db7sm61531435e9.3.2026.07.20.06.10.15
+ 5b1f17b1804b1-4955fc42db7sm61531435e9.3.2026.07.20.06.10.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 06:10:15 -0700 (PDT)
+ Mon, 20 Jul 2026 06:10:17 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: hs@nabladev.com, trini@konsulko.com, neil.armstrong@linaro.org, 
- u-boot@lists.denx.de, Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260602064322.2409171-1-aswin.murugan@oss.qualcomm.com>
-References: <20260602064322.2409171-1-aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v1] i2c: geni: reset controller on NACK to recover from
- invalid bus state
-Message-Id: <178455301529.1001378.9800568671464819973.b4-ty@b4>
-Date: Mon, 20 Jul 2026 15:10:15 +0200
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io, Casey Connolly <casey.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
+References: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
+Subject: Re: [PATCH v7 0/6] Qualcomm: teach the build system to emit signed
+ ELF images
+Message-Id: <178455301657.1001378.15383299067683274944.b4-ty@b4>
+Date: Mon, 20 Jul 2026 15:10:16 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,20 +112,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Tue, 02 Jun 2026 12:13:22 +0530, Aswin Murugan wrote:
-> During i2c probe, repeated accesses to non-existent slave addresses
-> generate consecutive NACK responses. On GENI I2C controllers, these
-> back-to-back error conditions leaves the controller in an invalid
-> or busy state, especially at lower bus frequencies (100 kHz and
-> 400 kHz). As a result, subsequent transfers fails and valid slave
-> addresses are not detected.
+On Mon, 11 May 2026 15:57:42 +0200, Casey Connolly wrote:
+> Currently the build process for flashing U-Boot as the first-stage
+> bootloader on Qualcomm platforms requires a manual step of test-signing
+> the emitted ELF binary with the appropriate settings for it to be
+> properly accepted by the pre-loader.
+> 
+> To address this, let's introduce a new tool "mkmbn.py", this is based
+> on the existing qtestsign[1] tool but introduces lookup table that maps
+> from a boards DT compatible property to the load address it needs.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] i2c: geni: reset controller on NACK to recover from invalid bus state
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/97fe35f568e0
+[1/6] config.mk: support vendor generic includes
+      (no commit info)
+[2/6] tools: qcom: introduce mkmbn library
+      (no commit info)
+[3/6] tools: qcom: add mkmbn.py
+      (no commit info)
+[4/6] doc: board/qualcomm: update docs for new u-boot.mbn target
+      (no commit info)
+[5/6] mach-snapdragon: add kconfig infra for building MBN files
+      (no commit info)
+[6/6] configs: qcom: use mkmbn and stop building ELF files
+      (no commit info)
 
 Best regards,
 -- 
