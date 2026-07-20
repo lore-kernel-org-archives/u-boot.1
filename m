@@ -1,187 +1,160 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 174D5C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFD4C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:17:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A3B1D60766;
-	Mon, 20 Jul 2026 18:17:13 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gPMv10vG2nO4; Mon, 20 Jul 2026 18:17:11 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7011E60711
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571431;
-	bh=k5+UNlVOV8cfVeGeNeutDV6vCSP8OqeELkP5kp39+Lc=;
-	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=BLQ9ovSnr9maMZ+ME86nSZOvgC9Q6hBeFEvAuFLP72DZ0SZ721lpn5YeotvrIkI7Q
-	 p2JaODwyLfg3ovfjpCrkdcfW8wPnx1diBAVF7si2myvK1ta6sSg0Idw5AHQQG+zQgw
-	 Jv9JHHVALN2yAwzxXiFOUeflyMKWVRAV2u1Q9gDiS+Xpz1fiISiZbhX3G59x7r+I3Q
-	 kWHJNQ2simMXHyw4Y/M2BvJvlMEQxJHN/IFdISZZnfzhmEEvNZmK4Ip7kSc8g0T1ng
-	 BYuaa/QrCcz13yEdyB945N7hFLMYRvZJQmb7v+P+wY5DaRUyWO+39wJALT5c9OwGrR
-	 f2wksCjRaxzew==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7011E60711;
-	Mon, 20 Jul 2026 18:17:11 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 12D1B224
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:07 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id ED5F3406F1
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8EEA840737;
+	Mon, 20 Jul 2026 18:17:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U89iefdd7m7b for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:17:06 +0000 (UTC)
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 249C3406E2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 249C3406E2
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 249C3406E2
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:05 +0000 (UTC)
+ id IGXiYNxsz5vF; Mon, 20 Jul 2026 18:17:16 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 916B44072B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784571436;
+	bh=Qj0oL1CeXTpVer4whbAlj18kQ6aAJKgUlSGV0W74olk=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=JjbV8eOgX/DtRn7f+sRnGhNFPXOq+Z+a5aBNm5xm4OjLvUKCmYaa2+fcwZN14CRtW
+	 5HeBZXN9Uoo/p7ahS6rysfqUOmtIq+tng/1piM+YE6/8VcBoSCaN+Zl5mgqrA1neQt
+	 pT8tWJKsqa/FBlTh1a6PUDjNaVqtGE19tOX9UDj1Mo1NsLBNnxyrHOe97LvrdO89XT
+	 yshUyry1yB4qhGIvHwsZE9RjhhXWXaYzu6Xav7MB/abI+hqveicxfYZBxPgFjkQ1GC
+	 lw5DSTBx9FrbJ1PddA+/yK5ae1gYODXG5jvNklleYEGV72rXMOczXOtO/JxiRWY99Y
+	 1gjEuJqTGWpRQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 916B44072B;
+	Mon, 20 Jul 2026 18:17:16 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C254E42A
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:14 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id B3EA780AC7
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:14 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LXP4mTGWZsZo for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:17:13 +0000 (UTC)
+Received-SPF: Neutral (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 722F080AAB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 722F080AAB
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 722F080AAB
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:17:13 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EE89846A5; Mon, 20 Jul 2026 20:17:03 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B5280844F6; Mon, 20 Jul 2026 20:17:11 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 757C280433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:16:57 +0200 (CEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=w57c6HbF0nPimwku8crrN8BZs3E/WexFyFEmrzqKk6En8quMej4KKdfAFjFM9eRcl1VbGDUrY2qEvLrY0kkchouvE3U5Ix7e6fhwH7EJrzC4FG2b50VNYObPCQTa1/uV20XShEKCKiq1ouj6pktz2Nlvv0oSNGuIXEQCLmmPNpJDpfKXbEl9WWwlJuWVyi+/JcotztMkcTi2fZOqIKninB1fNWVOYyC/VscP7Okt5/19CyFI5WMhxNY3TQjtwBk1uk0F17OizHExO9NmMfbVQvEZAEdHLx39M/RLCa3o0jKtfZucRwKVi7mr6d624fOl5RJ2ZwTWTkT3OS4faADCgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k5+UNlVOV8cfVeGeNeutDV6vCSP8OqeELkP5kp39+Lc=;
- b=lW+oLe6inUt+6uZ6A0DhxuevCaO2YVwN8CzlRMsvHihPGaMgebpSWUQMgtnxIWM/0sACIZGhphJPNJy4uYav1UoT9STAsJ6R1ihuRc418YdVk9nFmEcTXP1meROL9pgfqHHFDA/H8/i8xe2bhVbpKLMoKSlvptAiMW7X9xjgbKLsMGW4WJ5kA0IfNv6bub7G9Nwa1JPI+KfEaPYgsZCAiwJLcc1nh0Zx6nG4sAse/t8+S4wCiVHdXwzoWq9HLbeJPk0wiCnHlGp1xHsEUHWouSS1zZt6g7q2BrlGij3qRtHJp6nLfu4F1mpgO9Zb1nDeVhhAOoxm+RcPV0ecgWYwZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AS8PR04MB8836.eurprd04.prod.outlook.com (2603:10a6:20b:42f::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Mon, 20 Jul
- 2026 18:16:54 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%5]) with mapi id 15.21.0223.012; Mon, 20 Jul 2026
- 18:16:54 +0000
-Message-ID: <de216e13-1c93-45e1-ae48-548d3effcfa5@cherry.de>
-Date: Mon, 20 Jul 2026 20:16:52 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] roc-pc-plus-rk3399: Enable USB Mass Storage support
-To: Fabio Estevam <festevam@gmail.com>, kever.yang@rock-chips.com
-Cc: djw@t-chip.com.cn, u-boot@lists.denx.de,
- Fabio Estevam <festevam@nabladev.com>
-References: <20260701175800.40141-1-festevam@gmail.com>
- <20260701175800.40141-5-festevam@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260701175800.40141-5-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0010.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::12) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ by phobos.denx.de (Postfix) with ESMTPS id A75AF80433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:17:09 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-697bd21fdc2so9505133a12.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:17:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784571429; cv=none;
+ d=google.com; s=arc-20260327;
+ b=bw0nbl7WCnPQkLM/qC479JFoWC3J2NwgBSqKorGJruqwZanEHtCLO13DvYI8y34EQe
+ PK0sFTaq96hwZ0TnPfONw3Uoz3dhZ13E82MPfVluEMqRYEvQsJFcMhu7GLB94y6sCZnT
+ uUDVmnsh+F62BXlEj1GNk5Z4mQt2oVhsAWBW2fhOvWt8TT/q9j+QvrLuv11w+C8HKF3z
+ zxOaUt7v7IOCMR6XTFsK0oXFwDlrLsPlkj7gzMse0fFYjdG+QsDhwXGRIWrdX06Kw2tE
+ zRq/rdfVCFXQmhEOhTriF1lXqtvCtVuVl93v4RYZGntYU/5HYJ/SauqLYpY+K24VEkwp
+ YpUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Qj0oL1CeXTpVer4whbAlj18kQ6aAJKgUlSGV0W74olk=;
+ fh=HGFxqjW7EmEVgkuAAKalGIiLGTacmvL3ctiAmCo/d5o=;
+ b=Yj806HGSzx13JnFh9oaeIMXVqKEhK0RhOYSv2Lb3dSJXY54i/1VJmEuHfuR3idL5up
+ mLc2zInIntgpzQNjdoVRXCio9LdtH7so0kw0CXuT6v8Tfbz5nM8g97wOcRljfuJLXYGL
+ V5GwM9VeTM6x9T//wDIdC7mialZTY/UUkjAYFQoaTXdKq7LYqTspCj3T7tcuJzzIQzXZ
+ syYRp6KkKEF9WK6FwNV0M9Ea2U22mQzjQmCtGjIO0BldBucK4oug7Y9dhH9ciHz/hRen
+ xzXHnSW1+Da4cgYwzTjfdP5O+9fLPhoE4ejHHxc76wamchfqwa9ZV4CkIsAKJ+T4Syq1
+ 6ekg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784571429; x=1785176229;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Qj0oL1CeXTpVer4whbAlj18kQ6aAJKgUlSGV0W74olk=;
+ b=lFjL7vK6Ns7mrvQ1faa+K0atzR5bJkCgE3rijM8lyc2qOy2qrjZztRAetHL4yRple6
+ RdM66gAgwwpiZ95PjbyifRW+WasRQHf9Tf1kqJwamagJpN+LcmAdXGhmRq8zJEZdczzf
+ DWMu+xP3IJPeHNKcy4doSaTs+IbD32PVWGklzZCiDP40pd643guPeIP8NMZ/YGCE6o5G
+ 2DZ5XI4GE5Mb5IMzLqJnRhbZMX5mfF/VeVdI6WGErNzCbnM5o+GzXQXmoI0EsI2uGv9O
+ 2IXieVqqvI27swhFnSHBxxYCREqt81n4NYgY1/ZPWlSeoRJNl5j2I0UaTvMTuSTOT+vs
+ /EfA==
+X-Gm-Message-State: AOJu0YyE+wUDL1wvisDNl8ZPcqPO4xaX0hL5JMiIKs7qobkk87j3E4Nr
+ B39MC8LTKHBMmGwdWz3gRSGeg7eJjqHJeIEz3RCQbDCO2gymRQoJsd0jljDYH1kR/CyL3XD3xcw
+ WDPSSCiHzQXQ58fNDLpMzi29CeltMaLMFV3P66kU3
+X-Gm-Gg: AR+sD10SeE/xS7SOG2KBYmMjHJcdFsBu64LfAjeKeuEOK8MOeqc2IvTTL1yHiPp2jnW
+ B8eWU94dLbfdSHhCkbeg3WNr1EdqrQ5i1lSvv+8IXMsw8MhyGWk0m9ffSnQA/kqMtas59xfRros
+ 9Z4M5thtTDrsXvTzTJ/dNLrLSlVzqEV36OeHaBSLM7dgvesILpr2DZO0ukAO01my1nt4EZZlJ0M
+ hbbzgNuioeH4+KzOWzDx+WX91SE2Krmu0bxN0SU3qM5cbtq59zmfLBv2l9m
+X-Received: by 2002:a05:6402:2394:b0:69e:95c9:14c1 with SMTP id
+ 4fb4d7f45d1cf-69e95c9180cmr2256224a12.17.1784571429149; Mon, 20 Jul 2026
+ 11:17:09 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8836:EE_
-X-MS-Office365-Filtering-Correlation-Id: 16eb69a6-c49b-4158-d649-08dee68b13d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|376014|6133799003|56012099006|11063799006|4143699003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 3i8hqkLzq1FQAF2B6SdULxwcmGpkixLJqPCdYSzl4NSpvNwbuYBtYt+1BJ/aCG/I0J6lefw0/2dxYLn+q/di1GZl5NoQ6DNUDfnofcVS+G/pVrwu2NBWUz8hUlYa/qJZzSKr7qPXCQutYdiLVApz1YcsgafFDBg5tSqZuTQFwzfVzLECrzXG57ZFNgFf2TcmVG2fu45y4TTdP3ZJP9M48yb6SoOtKQLAmElCpC5cAMFZf5Y/fQpyW0q9CqUmsgJ5e3w/dpPJq/64qBiEK0wbxqtV49bJ/4kJDO4irhY8XEDVO5dcIjidyamo4cfarOOXZSG/dx1IAhaOTEMzhnalcFt2OKSzO/K+rdEawIJYY/TrgwU2j+WWmftKe7ltxmWJm6KvVQH5aKDUZ++s7OoFGfuWxvSTxCKTJHShMGPpy7j2MVVBzAJxHhORowWT9CMNc4Sg+fqsQKV6tIKF969eRVjFBj4Xw64oL1uscC+sf6K+jdLoMydF0M2gg26hcksolDxVJKurgQgMCXBkm9A1+I3p3KbPbq+4DP9eKPdIA3ELFo1L6UMBl/UWuI1PHiDAxO2i6SazQWcvw+jRFS2v9afwniuKwKamRA1pOMwKN5vNYSKIyl0vOIT4nCA/bSdodHkpOp40GKih8uxnXxGb+krIuvUUj05k/StIs/L0Ckg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(6133799003)(56012099006)(11063799006)(4143699003)(10067099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UDhmU2krbXlCMmFKZ2hnQ3A1NHEvUVE1WFcrWUN1ZytoM2xHY2drSFlyMEFI?=
- =?utf-8?B?QUg0SFFwa0NuZ0xCeENheWtwRFJjRzF2Wm9wNFpYYzZLYkpZdS96S3VJS0Zz?=
- =?utf-8?B?cGpvM3VvMmJTRDhtR01HUTRvcnNyZXI0UmsyNjh5Y0tBSTFyblpPZlhVSEF1?=
- =?utf-8?B?azhXUWJaVFlaS1doY0JYWjRRaktNYjUyRjVFUmRDbUplTkJBbGN6WVpSNGdq?=
- =?utf-8?B?OUVENUg0K2tiTkVmQ0dNTzJGL1JrMUhVbjdtb2tadG5sY2NRV2hFQ2UxZDFP?=
- =?utf-8?B?NEw3SnREYjZLWXR3ZG5ZT1BCQ211bktBcDBqTXJQMXh5S1U4VXptaFdQOTFT?=
- =?utf-8?B?QzN3VDVXNXIwSWZtZjBGN1VLcjQrdVpHcVhZcmJjalVlVGo3MTRnN2Joalc2?=
- =?utf-8?B?aEhkL3RYajZ1NG4xREV6dHpQTUxwT244VXpJZm1raUg1MUJOdHFtVlFhVVFv?=
- =?utf-8?B?TGN2dk1waGFsbVp6bmNtNEQ5L1MzNDJGOWRYc0dXZG9OMzFqVE9MUFVJNEQ3?=
- =?utf-8?B?WjUyemQ3aU9aVWZTQks1dlFBeGVMSzdyYVdreU1TWGFhZ1ZoTEl5S1dlcktv?=
- =?utf-8?B?NDltcGdwdEZvRjB5N3FkSWxuOXlHSzdLTDB1UG10WnBINGoxY0ZLNUowUHcy?=
- =?utf-8?B?WVI3TkJMcUhPbE44MTdkK2JwM2xTNk1UeU9kMlZ3UnFUR1FWRFB6Q2lHWXVK?=
- =?utf-8?B?dE1McXR1WWZ2Y1dqRVNTNmQ0dVBvUHlZUTRKc2ErRVlLbUNZVWp0VitxMWlh?=
- =?utf-8?B?MEl3Tm9QdWFUY0VYS3J2RjFQSy9GcmVOMW5qYllZMVJFZlZmT2Z0VDgzdmVh?=
- =?utf-8?B?QTh2NkMwRWZaZVhlRWRDaHJXS1Iya2Y4QWZFa21zaHVVMWJCQ2tyZHJjN20y?=
- =?utf-8?B?R05ZRFpOV2o1WWxPUGFjbzhTblVXSkFyNzBsTGpRQ1YxdmIzcU4wZUN3enlP?=
- =?utf-8?B?ajJjL1RXc3VTbDFiRmtxdTlmUXhLb3hCWWRScmJYb2NpTThXczNES2ZCRHZk?=
- =?utf-8?B?OHRwYVhFcDhvSVJmNzRyV0JiQWwwM0J0UHRYNWZkcjlWMTVZazNDd2dyT254?=
- =?utf-8?B?eUxuZ0wrc0dYYVZHa1hiTFlNTmJMQmNGZmRWdHIzanVJQWlHL2FuLzNqeVRj?=
- =?utf-8?B?ZU42K1N2Sk5Dd2dWcVg0ZVRFcFU0bTBvcXlRdEx4bzVxcEJGNEI2bWJpMWl3?=
- =?utf-8?B?WXF6U2RkZTlmRXJwQThaWWdPcjlRRFdka3JrZFk4dmZGZ216di9CeE4zTWpn?=
- =?utf-8?B?QStQSkVacjRuUlJBTy90dEFvaEZERm9WVEhMUzh4SUtmOTZ6VlB6UUs3THIx?=
- =?utf-8?B?bU13TVlGdGY1a3VmaVhqeWhaU2xVbU5ReW8yWEtHZnY5S2NVNnlxSTFaNTJr?=
- =?utf-8?B?bjBSNVVGbmFJNDZMMFc1RGtUeWxxbDBESXlVdEpuSGtrNFozY3lRN1FGbERQ?=
- =?utf-8?B?Q0NjTkJOZlowcUthNHFhMXRaK2ZHb1BsOUV6ZzkvYzhYK3FsaXYxK2FzbHBz?=
- =?utf-8?B?UlgyR1ZhNFBkVGp3V2VHUVBmUkJzbklhaXZWQS9qeXBySXBkTTJ6Q2hLeUhh?=
- =?utf-8?B?LzNrM0JKRklicXhwbHpCQzlpSEZONVE0QXJscVNCSDQxWTlYeHdSUVRoU3JO?=
- =?utf-8?B?RnZjajQ2cWRiSWMzVUczeFdlakR0ZXJNSDBicnVkeWZ1bHFwSkNGc1BLL0l4?=
- =?utf-8?B?ZHdRUlNETkpVcDZqdUI2RGtqYWZKYW5uSjhvdnZ3Y1lnb2lDQTZBam9wYTF1?=
- =?utf-8?B?bTVnQnFLQ3lKYlcrL2FTNUh5Z3NEMmpoaVAvbmV4VS9JL0NPQWFjZWVsZGs4?=
- =?utf-8?B?VkNEMVZ1S1FUcG5rQ2tZQVJ1bmo2M0NIRjJQd29YZkdzYUlscFlaOTBIc3Fv?=
- =?utf-8?B?dHJpTGRxZ0tzY2VoQWxDcGU2Wmdtb291em5Lb0lrekRRZFlQaTdJTTVWY1pE?=
- =?utf-8?B?WExCalhBYlhoSUU3cGI0Q3hqY2ZZYy8xS2t5Qk16R3RiT3J1VGVGUEthdWtV?=
- =?utf-8?B?amlIWndwOGd2b1VhUHhoZEdidTB5dmVUZUlGRU9xSk82ME5CU241cGx1WjVx?=
- =?utf-8?B?cnovVDNqUGJOeU9jVUFxZDlLV2xOSEltK29kcU1tWVJaS1RCUVVLd0FFTlQr?=
- =?utf-8?B?cGdOSDR3NjIxQ2cxY2lUMHhLanBUT0EzYXBEdGZIODkzTzI4QXRHSUx2SnBo?=
- =?utf-8?B?Q0lDN3FxL3pRc240QmJWSm1DSllxOGZuTGVIaXZ3TnUyR0Q0ZW9vbE5OVGJF?=
- =?utf-8?B?c3R3OHZ1aUdBWUlUSlUrM3cyc2pxRG5XZzcyRUptZUZYbkRpRUg4c3dEcEVL?=
- =?utf-8?B?UHN1K0FsSDd3ajRxZVdxbzcrb2lKTWZ3RElwdTdHWXBjWUhjaEE5Zz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16eb69a6-c49b-4158-d649-08dee68b13d8
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 18:16:54.2169 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PiQqM3IR25gov5NnvYCrCN75pvv1OPXoIEfNQwdmKraSZja2HSXQ9ulwOvlGMewyczmHMDjFIfl8MsH8aUSoXSz76SW7U7JB6KGlmUd1l3I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8836
+References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
+ <20260719-aspeed_vbios_fixes-v1-5-c94026f28250@oss.tenstorrent.com>
+In-Reply-To: <20260719-aspeed_vbios_fixes-v1-5-c94026f28250@oss.tenstorrent.com>
+Date: Mon, 20 Jul 2026 12:16:29 -0600
+X-Gm-Features: AUfX_mwywhvEvlzHpwq-L19uX0f_DfXPxGIBZu_qGzGgtT95s4-DSHjYAwqP528
+Message-ID: <CAFLszTg5Q0cjN2G7GhOg8SVoOim1D6ZF79-Rksqdrnr1FjvPww@mail.gmail.com>
+Subject: Re: [PATCH 5/8] bios_emulator: extend VGA I/O ports to include ports
+ 0x3B4-0x3DA
+To: asrinivasan@oss.tenstorrent.com
+Cc: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Joel Stanley <joel@jms.id.au>, Tom Rini <trini@konsulko.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Rasmus Villemoes <ravi@prevas.dk>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>, Yao Zi <me@ziyao.cc>, 
+ Conor Dooley <conor.dooley@microchip.com>,
+ Martin Herren <sputnik@on-the-web.ch>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k5+UNlVOV8cfVeGeNeutDV6vCSP8OqeELkP5kp39+Lc=;
- b=Aesi6uPkbuoWGDQOm5gRS1f9s7RDDvB+YW2QoFYBoayOodpGwtTNssK/KTUUsTVtnUPvI9XSLZFyi80EstSgLXheDx0/OxCaD3bqp/YD0R8fu9xKBFZQC3yv61kQloiH74jnsXbMET1IHGYrK0a7m7JD3ZBEx5xThZjDgjB358A=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=Aesi6uPk
+ d=chromium.org; s=google; t=1784571429; x=1785176229; darn=lists.denx.de;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Qj0oL1CeXTpVer4whbAlj18kQ6aAJKgUlSGV0W74olk=;
+ b=VWAQVlEDdbBPq0Q4drg5QQe2U6HH2k61Ys7PgITJE+eGKbu2AY9x31RBV8ftWenNOT
+ rbLBVn9skgXGbgb+Ic51YdYjlMkH7t8b/DymBEixYRYupoZ0awqupTYTTH+WKs3oy+FM
+ CmtVut6x19jyHkWMf3yKOtqjfPtxCdZL9jf8g=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=VWAQVlED
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ dmarc=pass (p=none dis=none)
+ header.from=chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@cherry.de
+ smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=cherry.de header.i=@cherry.de header.b="Aesi6uPk"; 
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="VWAQVlED";
  dkim-atps=neutral
-X-Mailman-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -193,41 +166,71 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Quentin Schulz via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Quentin Schulz <quentin.schulz@cherry.de>
+From: Simon Glass via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Simon Glass <sjg@chromium.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Hi Fabio,
+Hi Anirudh,
 
-On 7/1/26 7:58 PM, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Configure the USB0 DWC3 controller for peripheral mode and enable the
+On 2026-07-19T18:03:31, Anirudh Srinivasan
+<asrinivasan@oss.tenstorrent.com> wrote:
+> bios_emulator: extend VGA I/O ports to include ports 0x3B4-0x3DA
+>
+> The IS_VGA_PORT macro currently doesn't cover the 0x3B4, 0x3B5 and 0x3BA
+> I/O ports. Reads/writes to this currently fall through to LOG_inpb/outb
+> which are unimplemented on non x86 architectures (which don't support
+> I/O ports).
+>
+> Add these ports to the IS_VGA_PORT macro, and implement reads/writes to
+> these ports. 0x3B4 and 0x3B5 are mirrors of 0x3D4 and 0x3D5 that are
+> used in monochrome mode (bit 0 of 0x3C2 is not set). Implement these
+> with the same logic and env state as 0x3D4/0x3D5, but with the bit check
+> condition for 0x3C2 flipped. 0x3BA is a mirror of 0x3DA, so the
+> implementation for this falls back to the same logic as 0x3DA.
+>
+> The Aspeed AST2600's VBIOS uses these I/O ports, and these changes are
+> needed for it's VBIOS to run.
+>
+> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+>
+> drivers/bios_emulator/besys.c | 30 +++++++++++++++++++++++++++++-
+>  1 file changed, 29 insertions(+), 1 deletion(-)
 
-Is this really required? I would have imagined "otg" to be enough. 
-Considering there are setups U-Boot DTS is passed to the Linux kernel, 
-the fewer changes we have compared to Linux kernel DTS, the better. I 
-wouldn't take too much inspiration from the generic Device Trees for 
-Rockchip SoCs if that's where you took it from, a lot is trying to 
-support as many devices as possible without necessarily doing things the 
-proper way.
+> diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
+> @@ -249,7 +249,7 @@ void X86API BE_wrl(u32 addr, u32 val)
+>  #define IS_TIMER_PORT(port) (0x40 <= port && port <= 0x43)
+>  #define IS_CMOS_PORT(port)  (0x70 <= port && port <= 0x71)
+>  /*#define IS_VGA_PORT(port)   (_BE_env.emulateVGA && 0x3C0 <= port && port <= 0x3DA)*/
+> -#define IS_VGA_PORT(port)   (0x3C0 <= port && port <= 0x3DA)
+> +#define IS_VGA_PORT(port)   (0x3B4 <= port && port <= 0x3DA)
 
-> required USB gadget options to support the U-Boot 'ums' command on the
-> ROC-RK3399-PC Plus.
-> 
-> The 'ums' command provides a convenient way to expose the on-board eMMC
-> as a USB Mass Storage device to a host computer, simplifying development,
-> image installation and recovery without requiring removable media or
-> network access.
-> 
+This also swallows 0x3b6..0x3b9 and 0x3bb..0x3bf, which are not VGA
+ports (0x3bc-0x3bf is the LPT1 range on legacy PCs). Any access to
+those from the VBIOS will silently return 0xff from VGA_inpb() rather
+than falling through to the real inpb/outb path. Probably harmless
+here, but please mention it in the commit message. Also update or
+remove the stale commented-out line just above.
 
-Sounds good.
+> diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
+> @@ -270,6 +270,18 @@ static u8 VGA_inpb (const int port)
+> +     /*
+> +      * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
+> +      * monochrome mode (i.e bit 0 of 3C2 is not set)
+> +      */
+> +     case 0x3B4:
+> +             if (!(_BE_env.emu3C2 & 0x1))
+> +                     return _BE_env.emu3D4;
+> +             break;
+> +     case 0x3B5:
+> +             if (!(_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
+> +                     return _BE_env.emu3D5[_BE_env.emu3D4];
+> +             break;
 
-> Limit the controller to High-Speed operation by using the USB2 OTG PHY.
-> 
+Please use 'i.e.' with a trailing period and a comma after it. Also,
+the outpb() side adds 0x3b4/0x3b5 but not 0x3ba - consistent with the
+existing code (no 0x3da write handler), so no change needed, but
+please call this out in the commit message.
 
-Why?
-
-Cheers,
-Quentin
+Regards,
+Simon
