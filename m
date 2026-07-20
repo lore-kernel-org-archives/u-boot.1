@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD73C4452A
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 13:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E55C4452A
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 14:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F36F2838D7;
-	Mon, 20 Jul 2026 15:28:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 77D68838D7;
+	Mon, 20 Jul 2026 16:32:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wGDBPBkm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EuMOTDyd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA875844F6; Mon, 20 Jul 2026 15:28:04 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id EBF1C838D7; Mon, 20 Jul 2026 16:32:03 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BD3780517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 15:28:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90A9180517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 16:32:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-49553515a8bso20521535e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:28:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6a374c190beso3525633eaf.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 07:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784554081; x=1785158881; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=RvHc8MItVSF3m7A8gsUK8HEgEe+ICE/Wo9CAMe9sH24=;
- b=wGDBPBkmE09j2DhDbHJVCzFQsmqazfT8V+n7iisf7F/NALRvTy+iHp5cLkPLyWfMKU
- ZCTTdUx63i7cFIh6SEErOWtDpqIi0V1CiXk2yZ3voZPIcbp/9iZijwKIYNFGBA0we+IS
- fox+9Llqd68JH7iE5JjZ0rGWecB5BwV3ZWwTkyDb4T2ye2zW2Msjku3SZnF5YzRH2ukn
- v0OhQIsISeLwJL1IRY0dQsq7+UhWL8XADvcEg4DBuoM1Wh6504AgdBrxjH3uoBv8lEAi
- XBJy5LBUTzehmSXKmjI8DURopL5cbcqZteo1o6LQPccGQpLADtLL+u2070CKnkf++Nqr
- Aayg==
+ d=konsulko.com; s=google; t=1784557920; x=1785162720; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Exlhzss4KEl214jaXPOmEM2aNxvZ5ZCb8cw06zCiv/I=;
+ b=EuMOTDyd+GNcEQ5UQVDPrx2tj1xpsTK0ItByeobqdPDnqXz1Q47R/bZk2Tydhw4JA2
+ GRJMUku4NdmAOBXT7eA//jauHe5iPQ7mPpuZREFz/RgbM2gP92rgcX6DcVclkBaTl/rT
+ U+bzNjQSfIfS0WMRYmc+PVi6DvKqvwvw2rIU8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784554081; x=1785158881;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=RvHc8MItVSF3m7A8gsUK8HEgEe+ICE/Wo9CAMe9sH24=;
- b=HNHgyxMY5n1FNEmfd40bhOUBHGKYimH91C2IHatPNVhUcjOhVWM0rWNuGmGnAMCxI7
- hZYVKkCHVIeDAuCoyEkF2Gx1/4PYnSSe+JlQdOtBWKb5i7XTa1yHlpsGf5l5WJP85/vB
- LTnW0w4uPvGw588mR7yZGFVu6vELf2VPiu2SXupfjr7WKw/0KamKoZxog2hMm45XU8DW
- ELlQigiyGsENy3oKNo/Ff9EDkAQx8wgydop8DuD83jfktHbOcuNbjp9ziEf7H/Sqt6fo
- EH6dmDsvOyU/+J8WVS2sfLEC+Of8zzDMhCT/XmrERRuSEP6ICys22+2gEI+jk7hZWLvj
- gTtQ==
+ d=1e100.net; s=20251104; t=1784557920; x=1785162720;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Exlhzss4KEl214jaXPOmEM2aNxvZ5ZCb8cw06zCiv/I=;
+ b=EkC6d8bRSvdIBmNoWQ9YXrXoqEsuYMzzSIwOzFa2GhoZtHoatI/T8mZ40nfl3BDIN/
+ mdtlKrCd7B2+cg0httPECZDRiG9/7IjS72JO/zIisrqGcGmNuAzzF63OIPY/9kozP/Ih
+ hvokwrd1sjVGGrxpbVhAHIA1qBYkntuFUSa6m3wgIz19DvTZ0/OeactDHulVuTYcxq40
+ SL36FmtiIqdYutka3zqdmrXPd9LNt0C9QUp+8FpKkMyxE8T1YYIGVIO1S70VeV5qslWW
+ RS1JzksCArSJ6Gv/PmlG4XU/D5Ddc34eNv0NrPrnARVDJME6WJ1QXVlhw7GBPS6fL/Pa
+ qGWw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoTljItUguNrKIMUuovQZyLsc3U2wYEzHYbHSQypyjauC6qHqCH9uECsEWX/CqyNnoc8R+fXJY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2iWGJUBdT2h5LSPFLjYz75uyKh/+LqSesGsQ+//5vCwHcg3Tr
- stXP8YohGociSeEQzrNiWe88khb4Cz6ZJo6JnXJT1bRWOpamtxnEYb0JFTgPfh8IuheltjWlZCQ
- u92H8jtI=
-X-Gm-Gg: AfdE7cnpc6adM9hGloNmLdzM5rqHzC1XGBN0Og81uzK2MM5L12SShszvHWkEZ6sxMKY
- +HDFYiy+YjSZBffqj5DzlkmFmJlM+zrbl3Jg1cQ2husxuBluzxisa9n5nvU7aNbggF5GxVxbURg
- Pg09qJjup2cgw0SmYaT0Riq3bXdK6sTZowkex+srXm4nr+BT1m6/oqOmYiaVyJlzIOurnwjZVjs
- lPjnJsk6F/0WugRkX2DkgxihwpzuYOulWH4XLoqd+V18QlSg7zhjBwDWnkHhJTq+bzgYyTu6Z/1
- k9g73ZHdkYjUS5Vf36jgIMgscKeru7yioilMmUKMEFyovTb/cBbYoAgel3iYhW7W8x1Zy+I/AQC
- Ozb4ya+QMPEhGwnZKXydOfmf9pnyOgAN4KLD/tTKmXD5Bm+/Wem2z5tP/Gm7lk99+4GC2VGk5TT
- UIKd82OLxMWPh6M4bU14g6bMiKSERbkffNBTMPddTXvj1oPvp0VCpRYARKfio=
-X-Received: by 2002:a05:600c:4f54:b0:495:4815:2c54 with SMTP id
- 5b1f17b1804b1-4954a41303amr158488835e9.34.1784554081398; 
- Mon, 20 Jul 2026 06:28:01 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:1101:a3b4:4010:a727:b812?
- ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49564011868sm12554085e9.3.2026.07.20.06.28.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 06:28:00 -0700 (PDT)
-Message-ID: <f234b113-2e18-429d-b77d-12a7e59be2da@linaro.org>
-Date: Mon, 20 Jul 2026 14:27:59 +0100
+ AHgh+RpK13kHGrInU+SL3ZanAoZtbN/2J1hTPG22YflsmJnWYREvbD4q0JFtnVBjTZ4BImQEd+IaOSw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw5yiIQuzf5bFwOtxiHSn78IyWv+dl0BM+Oyeaxn8xjUbE/58ME
+ QDPFLOydQr/xhomkyetMc9fKS4tmuOQ+q7n+H8N2wY31PkcfYAsEzcKt90SbuevK9Tg=
+X-Gm-Gg: AfdE7cnbEnuSVMfsK8QKiT58YEIIqXimOaj6JEtq/VOkN12XrccYe8OxQAzruhW2DZm
+ rfLfoM6xshPYJpxNFOv2sKisdiZToYMG0oJ8U1j0EPpi9wSUAOVvcPnuCVfKN75u1DWAnCb2LiI
+ Yq61EhQA72n8Dh7Vrv/dGeSJN/wO0E6oDlGk7nt4pMRZXuWdjNaKmWqtL3iYO4quxm8/ERD6M5B
+ 4VPzPZTZE0weAkBt+0MtO/OUfTqc80t0FPv8aatwzBlS8rIqqgMACnd7CYyfQpPOJLJlLcgaLl5
+ zzimmVnVuHnLNVt+l7Vm9R9zleTqIB9a04b5OL4mtT4X6+HQDxJ1RxISkvizP3mo665v0mx6YcP
+ 6F90evCD8QAsRHQIYP//zlmBF1dMtINz0iednMEb8nOgtI5Eluemw2yRFKqkUo5xtIGRijw9BG/
+ tjAritPIZ4rTycIId/q3J+K0AVWJlXarxW1VLbyZqNrjeJDLaTDeDhQPanvc76QZ4v0do8tpZja
+ GPLl7oqSlwx8k4oExKkwH1ZNoU=
+X-Received: by 2002:a05:6820:216:b0:6a3:5bd6:d9fc with SMTP id
+ 006d021491bc7-6a5368936bdmr7440057eaf.62.1784557919968; 
+ Mon, 20 Jul 2026 07:31:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4568e14afbcsm7867720fac.7.2026.07.20.07.31.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jul 2026 07:31:58 -0700 (PDT)
+Date: Mon, 20 Jul 2026 08:31:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] CI: install python-cryptography for world build
+Message-ID: <20260720143156.GZ749385@bill-the-cat>
+References: <20260720131325.37436-1-casey.connolly@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] tools: qcom: mkmbn: Add support to create multi-elf
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com>
- <20260714-ipq5210-v1-3-0b98251aabbd@oss.qualcomm.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260714-ipq5210-v1-3-0b98251aabbd@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BMpQicDrT/Uo/cOD"
+Content-Disposition: inline
+In-Reply-To: <20260720131325.37436-1-casey.connolly@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,55 +103,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--BMpQicDrT/Uo/cOD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 7/14/26 10:52, Varadarajan Narayanan wrote:
-> Add a command line argument to take a list of files to be combined to create a
-> multi-elf expected by the boot rom.
-> 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+On Mon, Jul 20, 2026 at 02:13:22PM +0100, Casey Connolly wrote:
+
+> The mkmbn Python tool used for some Qualcomm platforms needs the
+> cryptography module, make sure it's installed so the world build can
+> succeed.
+>=20
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   tools/qcom/mkmbn/mkmbn.py | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
-> 
-> diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
-> index 46edbcafb32..a2df1433129 100755
-> --- a/tools/qcom/mkmbn/mkmbn.py
-> +++ b/tools/qcom/mkmbn/mkmbn.py
-> @@ -104,6 +104,9 @@ parser.register("type", "hex", lambda s: int(s, 16))
->   parser.add_argument(
->       "-l", "--load", type=lambda x: int(x, 0), default=0, help="Load address"
->   )
-> +parser.add_argument(
-> +    "-m", "--melfs", nargs='+', default=[], help="List of ELFs to include in multi-elf"
-> +)
+>  .azure-pipelines.yml | 2 +-
+>  .gitlab-ci.yml       | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 4417ef4e5a50..562c5747c9d3 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -733,9 +733,9 @@ stages:
+>            python3 -m venv /tmp/venv
+>            . /tmp/venv/bin/activate
+>            pip install -r tools/binman/requirements.txt \
+>              -r tools/buildman/requirements.txt \
+> -            setuptools
+> +            setuptools cryptography
+>            if [[ "${BUILDMAN}" !=3D "" ]]; then
+>                ret=3D0;
+>                tools/buildman/buildman -o /tmp -PEWM ${BUILDMAN} ${OVERRI=
+DE} || ret=3D$?;
+>                if [[ $ret -ne 0 ]]; then
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 245e422d72fa..eb13fde82b86 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -153,9 +153,9 @@ build all platforms in a single job:
+>      - python3 -m venv /tmp/venv;
+>        . /tmp/venv/bin/activate;
+>        pip install -r tools/binman/requirements.txt
+>          -r tools/buildman/requirements.txt
+> -        setuptools
+> +        setuptools cryptography
+>      - ret=3D0;
+>        git config --global --add safe.directory "${CI_PROJECT_DIR}";
+>        ./tools/buildman/buildman -o /tmp -PEWM -x xtensa || ret=3D$?;
+>        if [[ $ret -ne 0 ]]; then
 
-Let's just make this positional after "bin", I don't think there's 
-anything else we could expect to go here.
+Ugh. This shows (a) the CI pipelines had another place that should have
+been installing scripts/dtc/pylibfdt/requirements.txt and (b) I don't
+know if we should make either boards/qualcomm/requirements.txt or try
+again with a top-level requirements.txt file. I believe before Heinrich
+disliked that I was including other requirements.txt files in it. I
+thought I had said something in reply, but it was a while ago.
 
-Thanks,
-Casey
+--=20
+Tom
 
->   parser.add_argument(
->       "-o", "--output", type=Path, default="u-boot.mbn", help="Output file"
->   )
-> @@ -119,6 +122,18 @@ parser.add_argument(
->   args = parser.parse_args()
->   verbose = args.verbose
->   
-> +if (len(args.melfs)):
-> +    try:
-> +        with open(args.output, "wb") as f:
-> +            for path in args.melfs:
-> +                with open(path, 'rb') as tmp:
-> +                    f.write(tmp.read())
-> +    except Exception as e:
-> +        print(f"Error: {e}")
-> +        sys.exit(1)
-> +
-> +    sys.exit(0)
-> +
->   elf = Elf()
->   
->   data: bytes = args.bin.read()
-> 
+--BMpQicDrT/Uo/cOD
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal4xWAAKCRAr4qD1Cr/k
+CnOPAQD4HP1EPOx88v1Bb/VQQVjzh3n82KZ2Z7/FBfOZlso5/QD/bvsFGHgXpeMy
+lvGF0575EyjTowT72t7UdN+e8fkHkgg=
+=RmOd
+-----END PGP SIGNATURE-----
+
+--BMpQicDrT/Uo/cOD--
