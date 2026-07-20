@@ -1,105 +1,105 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5C29C44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D09C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7FB1980E01;
-	Mon, 20 Jul 2026 18:10:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9183D406DD;
+	Mon, 20 Jul 2026 18:10:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o5MtV8FMgZ-C; Mon, 20 Jul 2026 18:10:33 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IjQPVf_rQFw9; Mon, 20 Jul 2026 18:10:34 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C171180DD8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C9B59406E7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571031;
-	bh=4zZvYMCqMKetb/5qSAxLLlu5eM0+W4XYFTVlUaUpOe8=;
-	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
-	b=pUumrp0FdF33ddXJxFxdQcg4OFhLbzYD1GKX6C2QrIHIrSyz3ftJ78k2HHlipGEGG
-	 bpEGKRtLbLfnf6XvFSnaZSqclXumUhAJcL3P16KuWx8tUtPwgyey45v6y9sX33cZOZ
-	 PsGMHLdGo65Ezenw1VdbKti/qG28tKuGCdAOOKV4d3J28Nni2FHoRRYxIDOBQfLlQT
-	 jPwUR6kAmPa/yXZBu1gIPlTvofeOwPons42Ey1syKlV+9dnqtaPV3eAFO3wTTP2bWf
-	 MCNeKJotTW86MwNdC23UixeahhqYlES3Qo/959qsrjKf7sWZg44bhxp9LJ6t+sTpJa
-	 e/2Cx2whdf4EA==
+	d=lists.u-boot-project.org ; s=default; t=1784571030;
+	bh=hPStC4Fvk/MXlnOHUlpmAJhjhNUv7ajzK27Sli3bXaU=;
+	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=qAPgEx5sei4mfcO8nG9cFOU7igEO58rIl94bh7m/+9aiXKix4oQspstJ/tmlRXfNj
+	 dMsGwwo9PvADOgR9rD1ZNw5lenkCuelmXHp4CfBy7qme00lBANVaxDpaPCIMxKqi7H
+	 ft0xHls0PeXXI63wwbZRUEaFHsUZVJLr50oQcyhzSkdEIyqM11xADQ/ouqvOmlrhRq
+	 rti1SjreoO9SWhi1UKpkvH72VPIQJmp4iRkS62SuFsRiPW6YNSiaSWtnkXAqd37jKb
+	 ad51IoVq4clZk4BQJ1C4I2Yv5i5VIVlcIfhJ6FSbTmgCatvoeaZOJvRRv/LHbfGF6r
+	 Ma2kv8zLMPTeQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C171180DD8;
-	Mon, 20 Jul 2026 18:10:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id EE57E1E65
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C9B59406E7;
+	Mon, 20 Jul 2026 18:10:30 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ECE9C150D
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EC11A6060E
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DE93140159
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jFvrhxCpOCrb for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dFhz9PiSK97C for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom;
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 255C7606ED
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 255C7606ED
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 2B81E40136
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2B81E40136
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 255C7606ED
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2B81E40136
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:05 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38DDD84659; Mon, 20 Jul 2026 18:40:46 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 90A9784A6B; Mon, 20 Jul 2026 18:42:17 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 249E680433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:40:42 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-47f752b3423so1144708f8f.3
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:40:42 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id D460B84A4B
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:42:14 +0200 (CEST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-49557167508so19209035e9.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:42:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565642; x=1785170442;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=4zZvYMCqMKetb/5qSAxLLlu5eM0+W4XYFTVlUaUpOe8=;
- b=k7Strh0h2OlfWkS/1R79F2llqJSY2+zur85CNAE8Up8LY7hLN19rroWUHODy8ujpen
- cslEUxVquKZsy4/KHp2dQrKd0z0tBVpjT4X3VJSkFxdn1IPTPvV7VU2yDMQ6ZT4lIZdU
- GkhDrsSe6GihOzeDRQYuVWM119VCs8VBdq0ngrwX1EiSC5E6Sahd0jDl8Z06maZpPbWU
- GyBFprczgfSBA6A0n+XWwWJwSq+f2lPwb+nTIcrOxr+ZEXYjcn0yrbjPDvrZtGre/T25
- 2gcf+DpPP7rWfpGHeTU7+xVz1tuzneLaFFMdVsVv6pfAhesAhqI/vN52si71I4e0fyqg
- 8rKQ==
-X-Gm-Message-State: AOJu0YzwD+wb+X6M8Tg3ub/3uUJMziC07lAfRQ2KWYTAyJ5R0Ef3GuzG
- SNzd1jSi7++W3GUfgxWaTwzqZFLgdSLMs9TSGDRUapeGP3L1yT6YS7cOfZgZP0nZZYs=
-X-Gm-Gg: AfdE7clN1HiA+nSRuU/YKvZOUKFByFmhF7ER20lUybazaJJogbmftZaJSWpqUf0JQ6L
- ZFTF0ZShYfFwGMThnOHst84hOlsk/iLY0QI3TLVKk5WlGJyvqzuX2XjVd8ru3k8FnYPf4vcBZU0
- ZQ25d7WELZQrD6P15ywPN2k7Ifr+WgPHc+DNmdRS19ipno5fD14QioU3e0ASUKIK/IYmQ1OmIvI
- TO+OZbCBAd6DqV3ZbQ50qhfwG9iB+tjvIS+JoDQNkTcuKUMcV9PAa/8DUhj+LOG+My4A9s7xKmY
- zLFUwKT5umz3/MPP2iwILJzVzubodKYxBzJh5WQQS7HdqJHMF/spGnaRiDrYosU4bRHTrhCLicv
- rnjesvrFsVx7qT58d1Qw+BMcKYiYs/bhVQ2IR3iNp0I8BACEffGRdsxJXBXeJMqoUDB432wCUlB
- n8U/cEwTDncQFZybSMze6O85Lz7JSb9g==
-X-Received: by 2002:a05:600c:1549:b0:493:c601:3e23 with SMTP id
- 5b1f17b1804b1-4954a3d08c0mr159935615e9.5.1784565642133; 
- Mon, 20 Jul 2026 09:40:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1784565734; x=1785170534;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=hPStC4Fvk/MXlnOHUlpmAJhjhNUv7ajzK27Sli3bXaU=;
+ b=TUumb0L6SYwQAsRIB4ZDaqEGeDn0xmC3uOEYvNsxQClrn/+2KcjcPbYZ4IAYlE8xZ0
+ 9FnMbItbOi7Kh9sXePiJ4iG/z+N3UvfBV7qEyo2yUpx5oxD7OojLFzTCrVG0lpPIhQUP
+ KOyxY3+YPJvE9z9sMtg6TVZCEZ7O+0LCu7jnzAFT/LRuyi8MgHDQRZAUlvVXxx9cDN70
+ xgcn40hO4cKTq6x6fr834mdm/q6Msm/8a8Ksh8H4L/cAWp3sP41xpFxbFrbSjpnGS7FL
+ /Q/rnbJ+30fwEDVCP3lKub/LrvTjprg/X6oOMjHtoL9gU738n2FeePVywO38fX26oRHj
+ lhCQ==
+X-Gm-Message-State: AOJu0Yz4kuIYQOAU8F5u+OwO2zwI6IdY1v1SQWH4KDMX8kcavmzHTdqf
+ 7SkRvVHt1orNmKYkV2nTQ5eK+4viJZULHPKMSb+QF/XO46BMgThyA8rMIHkH6t0tX4U=
+X-Gm-Gg: AfdE7ckPWw8AXhWArqJgQ/YN9y0N06c0eplJxffKu0l/A93EiTQEJL0e3jMCYErnn7h
+ FRhwZFiPW+n9+8Mqyh48Mr5rkTM3MjKtpuIDBv4xWouYQRYQR208eQtXywtv1vD4VEBhU2m8jiW
+ 44jfY84h6MlXqAoYXr6zw6LYAESybcJoJVf8dcNkSMMak8jm6wjdaVTcUH5TPLerZFXkbKeoHq7
+ fEFf4AKuUUMOt2RqBPuwCv6l3MtZnzLfymQF4fW5IUVc6NfiXX2khdCyaTMwaYBhrFtRQPQMAA+
+ drnWeqeqeJkPTnRro5GyvtOFzfaZY9X9e/M2o0tyt30VDJleOlgdJeN8T1qJnHFjl9Amu71UDF0
+ imEy6JLskCTSkn6CHh4A4mxs0YpQW80K0uCefNUhZ3sWYPw5+IHekFuTWRxZbZAK0EeXZshE9Nv
+ 5Xp6p/6cgu6XTyErSSJyTY9bjhlXKq2A==
+X-Received: by 2002:a05:600c:42c6:b0:495:4182:4456 with SMTP id
+ 5b1f17b1804b1-4954a4104e1mr102528005e9.29.1784565734059; 
+ Mon, 20 Jul 2026 09:42:14 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.40.39
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.42.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:40:41 -0700 (PDT)
-Subject: [PATCH 00/36] clk: port Linux Common Clock Framework to U-Boot
-Date: Mon, 20 Jul 2026 17:40:27 +0100
-Message-Id: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
+ Mon, 20 Jul 2026 09:42:12 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:40:59 +0100
+Subject: [PATCH 32/36] clk/qcom/ccf: adapt clocks for U-Boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBBG4auUWTuQhqjgVcRFMv7VKVpLpimW0
- rsbdfkt3lvJkBVGp2aljFlNX0NFu2tI7nG4gfVaTd75gzt6xxINC4t0XEabMuKT+/JY2LWyT1F
- CCgFU6zGj0/fvfL78bSX1kOm7o237AJwDGLN7AAAA
-X-Change-ID: 20260720-casey-ccf-upstream-july-01c5bac4b44e
+Message-Id: <20260720-casey-ccf-upstream-july-v1-32-8fece1b0333d@linaro.org>
+References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
+In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
  Joel Stanley <joel@jms.id.au>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
@@ -146,44 +146,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=23785;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=25499;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=Rk1YEzKS1DzTNaj4sarpSyrvgLc8cEydbdKWr9tf3Cs=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk9/VamDNMsy86qVmawnkSpUTgI6jIh1hjP3W
- rMXdHZvLYaJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PfwAKCRAFgzErGV9k
- tuqQD/9tgpIgD/Nj4cvUscds0FhSMz6cjwvgSarc5BOCKXlit4wJ5RZjI47FaazFgCwHzJLisde
- NBTVbz7ltONaDseTe/iPoysBEHCaNIiYkOc8UHFgtEeiYpUAOILXiqiaCQTK4DIWlwmfyxYGZ60
- ySNpPDAW/lCteZmlOZo/o3elChikzHR62prgfyCvuQZO+y57UxpOZ1g8dw/tsGO2XfGnWJ8JR0J
- W05wO5ty/vuWhq1QpPufA6tOCn1gXvEU0Ph1qcv0AKEhfuJmimq7S2axtOtxq9YzQZ9Er1fkxW9
- mS3Lp4wj4eD4okn8/VPKxwFpANBFeTiTz7gObT1GMhY4HKuR2RYAHWPV60+SC6PrcGhxqXelGgc
- x5ucCgkLGolALc2zolCX47x0gVeJHX3Er6NmRm+1IjrG9frui1ykIUnncEUbznyP3R8FkFnaUCM
- V2mTBz9r7+q2sHwIfrdOq7q38JnbTnTZ0FkQ9eTP6SzpO3jOE2SrdWjrtUX1VhHGmbbMqjL1IkL
- 6ozwHvVHsQb8saiyRFu/v7c1xTQCk30Mgj+mczNbB8o1+W/GH0/Iv5PTtt8j46IUtnMsVN0jq8g
- jwqZU2Myh3UdyEA6bRGIKSFJfXJjjgf6ABV3uFLesVjiWyugy2H/sTW6UrZjFyf/UDHb5HrArHt
- j/eFfXeyMI0RMFA==
+ bh=VeSyjSAQY1TC/PQ6aQluvHsRGtE/xFHxYpu17Lp2kgc=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+GiQQWSlpG9h9pRY2xQ8J0taIe1daG69Tpz
+ EevAMD9QNiJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhgAKCRAFgzErGV9k
+ tjWzEACUqSnRrbChcOQJx1nOl5GF1JJePkIWb5PYG9oEHwD1niWi2MZcI3LCUd/NyB+IRSIXcJ1
+ l7h3cBeLXXN22ZmEeXayXMAP1aC+55frAzw8JI5o2lfag2ZG1ANPXKd7WT6N5IUo588ddDluhqL
+ azRk618UN5J6AASpBtkY41Uf2B0yImRU4Nm0uLYxN+WcoCnXehme8ZYG6OYOpbZi90/LDwVzEII
+ WUhGIHlAgeXHh/32nO+Zfj6hUu5PoIV+Z/2YOepYmZ3WrLX6GIanIgyrDimrsmKDYIAueM7L8IQ
+ Ql9L9/rNq+DYPX4tH7J+pSzx9MxjQGLk9qqjJPydE6RNrxLSU08Df1FXQAkzraJpO2ffRAyeMPi
+ NR/THMAlJChYRP8XzWlxG5a3pivMKtjS76SfD9ccRUBWV0DoUs2ab7WPSXS0CWbOzmtaEqKiF6l
+ 1bK8sTMJ7alIyIvzJJnzPlpWJMK/+oDY49opuJv4qu/TNvHW8ZQbVP221gBjEenrV0zAhGdj8ln
+ EntxsJgnUai1aqEdbO9M0lLOt+gz8dvI04TpS7PgLDs/PjcHE/8R+cTOcE1OT6MG4rZ9t7pb2hq
+ hy01bkUP1zRWrXJBwGl45AyruhjIJMSZwO1VkvHA9ru2QXbdN/Cl7fY4mDLGKwhpexhEAsg3IO4
+ 9eBqNfTEeDOi/eQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565642; x=1785170442; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=4zZvYMCqMKetb/5qSAxLLlu5eM0+W4XYFTVlUaUpOe8=;
- b=GpOZRDhuYfu1673fuGTAnbF2NfyGMaw7FIKeMBzHivPv96CxbzY968ClWaO6I3dS8F
- i+6uIi4w/n6dmwXvnSfS/SqvTAjDW5VDeanj9zSRgVH5XI20j82ldaWxJjYh2F5YLuPw
- lZSjL4KUOPtKqldViy2zMgsmZAyVfwzza4IaIGVt+MKNDMZKy7C5O74DzMBw0VR0QxIB
- p3PAZ8CA1GE+TbKN1+PfFNuAEAbb7AY9TfmhCxQvZ5p1QeVss2sl4hLj1m2t2uZXoZFd
- VBeE5d9IT/IKUU/NqkV+PiHVEd0s+kRZMsd/QiErexMLRFm0tlNSFIzoclu8fva82HDv
- 74bg==
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ d=linaro.org; s=google; t=1784565734; x=1785170534; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=hPStC4Fvk/MXlnOHUlpmAJhjhNUv7ajzK27Sli3bXaU=;
+ b=lLnf+S7Y+St01/zuQ5hLNY/4mfWKf38MSWyzzGDW+cylvnEGgqmN1wOOrg/gMH/kyJ
+ v8+xMGN2d9GI6Kd/o9a5Mxp/K7ZqiTr0Ru3XGsy7Eyal9Fm23Z48Fk06XATp2pb33jnP
+ 9Uhv06uxUNrkVu2Cdy6OQIOSJLh1a24v96tOp78vAoLp7DSVzMW8GTgae/2aSUoosKkX
+ hcZ5xzsls3WoRvc2ltojDisEwmTD59zI9EAtYpur3uyWLWC3EojfoI4HKkcvm2O7sXbl
+ o1zeU4PBY9QJQ1xTBnsym6qQvYUMx8TI27k7h3njxLbFRisMtMFZW4qCmJhVmmw9X/kO
+ zMtQ==
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=GpOZRDhu
+ header.a=rsa-sha256 header.s=google header.b=lLnf+S7Y
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -191,7 +191,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="GpOZRDhu"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="lLnf+S7Y"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -209,414 +209,751 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-This series introduces support for the Linux Common Clock framework in
-U-Boot, when enabled it replaces UCLASS_CLK entirely, instead offering
-the typical clock provider API from Linux. This has the significant
-advantage of allowing one "udevice" to provide an arbitrary number
-of clocks without the need to populate U-Boot driver model with dummy
-devices.
+Adapt the various clock type helpers to work with U-Boot CCF, these
+changes are quite minor, predominantly just the superficial API
+differences.
 
-Historically, U-Boots clock support has focused on being small and
-simple, allowing platforms to configure the clocks they need to boot.
-But as we support more modern SoCs it's become clear that the existing
-API doesn't scale as we need to be able to calculate clock rates, handle
-reparenting, and other more complicated configurations. Rather than
-trying to re-invent the wheel here (which would likely never leave us
-with a truly satisfactory solution) adopting the Linux API solves a
-whole host of problems in U-Boot.
-
-With the Linux CCF, complicated Linux clock drivers can now be adopted
-with relative ease rather than having to painfully rewrite them to work
-in U-Boots limited clock model. This also drastically simplifies the
-bringup process for new platforms.
-
-To offer an example, the DSI PHY devices on most Qualcomm platforms
-have their own VCO, PLL, dividers, and muxes which are programmed
-based on the pixel clock of the display, if it's using D-phy or
-C-phy, display stream compression, etc. This isn't directly modelled
-in devicetree though since the PHY clock outputs are routed into the
-"dispcc" block which is what the DSI controller itself sees. Modelling
-the relationship between the pixel/byte clocks in dispcc and their
-parents in the phy must be handled by the clock framework and though
-assigned-clock-parents, something that U-Boots existing clock framework
-simply doesn't support. Additionally, dual-DSI panels are even more
-annoying since both sets of pixel/byte clocks are sourced from only one
-of the PHYs.
-
-U-Boot did already have some very limited support for "CCF", however
-this is essentially just using the driver model to maintain the clock
-tree and registering a device for each clock. This simply doesn't
-scale well for the huge number of clocks on modern platforms and still
-requires significant effort to port drivers from Linux.
-
-There is one notable limitation with the full CCF port, since it
-requires the entire clock tree to be modelled before it can actually
-manage any clocks it isn't feasible to run pre-relocation making it
-unsuitable for platforms that require clocks at this point. My hope is
-that we can continue to reduce the complexity of U-Boots pre-relocation
-stage to mitigate this issue, but since some platforms are already using
-CONFIG_SKIP_EARLY_DM I hope this won't be a blocking issue.
-
-When it comes to U-Boot SPL, it likely doesn't make sense to expect to
-use CCF in that environment. Since the scope of SPL is so much smaller
-it should still be acceptable to use UCLASS_CLK here and only build with
-CCF for full U-Boot images.
-
--- Overview --
-
-This series contains a few preparatory patches to align U-Boots
-existing clock API with upstream and rename clk_ops to clk_ops_uboot to
-differentiate UCLASS_CLK ops.
-
-The generic CCF mux/div/fixed clock drivers are in drivers/clk/ccf along
-with the CCF core.
-
-Sandbox also gets CCF_FULL support for the purposes of testing.
-
-Lastly, the Qualcomm clock drivers from Linux are ported over with
-minimal changes to enable CCF support on the SM8650 platform, this will
-be expanded in the future to other Qualcomm platforms. This demonstrates
-the ease of porting Linux drivers and acts as a template that others
-can follow.
-
--- Architecture --
-
-The CCF port is fairly straightforward, clk-uclass.c has some its common
-API split out into clk-common.c which either calls into clk-uclass or
-ccf/clk.c based on the configuration. To keep things simple, CLK_UCLASS
-is completely unsupported when CCF is enabled, by not building
-clk-uclass.c we don't provide any support for non-CCF clocks and they
-won't show up in the device model at runtime.
-
-Devices that provide clocks can be of any uclass, they will be probed
-via ofnode lookup and should register their clocks with CCF (via the
-typical clk_register helpers) during probe.
-
-Clock consumers still work the same way, although internal API
-differences may require changes to some drivers such as the UFS fixes in
-this series. Notably it may be necessary to actually call clk_set_rate()
-with a suitable rate, I think it's safe to say these calls being
-missing and relying on the clock driver to pick a suitable rate is a bug
-regardless of CCF.
-
--- Merging and maintenance --
-
-Given the scope and complexity of this change and that it's entirely
-opt-in, I'm hopeful that we can focus on issues that are important to
-solve before this can be merged, and focus on improving any rough edges
-after the fact. This will also make it easier for others to try it out
-and investigate using CCF_FULL for their platforms.
-
-In the short-medium term I'm happy to maintain this port and help others
-who are interested in using it. However I very much invite anyone with
-an interest in this to co-maintain it or take it over in the future.
-
-I previously sent an RFC for this which can be found below, it has gone
-through some significant rework since then and quite a bit of testing
-locally as I've used this as the basis for Qualcomm display bringup.
-
-https://lore.kernel.org/u-boot/20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org/
-
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
-Casey Connolly (36):
-      clk: move U-Boot CCF to clk/uccf
-      clk: rename clk_ops to clk_ops_uboot
-      clk: move fixed clocks to clk/basic
-      clk: make clk_set_rate() return signed long
-      clk: make clk_get_parent_rate return signed long
-      clk: compat: add clk (un)prepare and associated functions
-      dm: ofnode: fix parse_phandle_with_args API
-      clk: import full CCF from Linux
-      clk: move clock flags to common clk-provider.h
-      clk/ccf: adapt clk-conf for U-Boot
-      clk/ccf: adapt CCF core for U-Boot
-      clk/ccf: adapt CCF generic clocks for U-Boot
-      clk: split clk-uclass.c into clk-common.c
-      clk/common: add CCF_FULL support
-      clk/ccf: optimise orphan clock handling
-      clk/ccf: debug log enable/disable calls
-      cmd/clk: add CCF_FULL support
-      doc: describe Common Clock Framework
-      clk/sandbox: add a CCF_FULL port of clk_sandbox
-      clk: sandbox: fix set_rate and move to clk/basic
-      clk/ccf: add CCF_FULL port of clk_sandbox
-      test: dm: adjust clk tests for CCF_FULL
-      configs: add sandbox CCF_FULL defconfig
-      CI: add sandbox64_ccf_full
-      MAINTAINERS: add entry for CCF port
-      clk/qcom: move existing clock drivers to clk/qcom/basic
-      clk/qcom: drop in Linux Qualcomm CCF drivers
-      clk/qcom/ccf: drop in Linux rpmh clock driver
-      clk/qcom/ccf: add sm8650 GCC, dispcc and tcsrcc.
-      clk/qcom/ccf: add uboot common code
-      clk/qcom/ccf: adapt common, gdsc, and reset code for U-Boot
-      clk/qcom/ccf: adapt clocks for U-Boot
-      clk/qcom/ccf: adapt sm8650 clock drivers for U-Boot
-      ufs: qcom: use clk_prepare_enable_bulk()
-      qcom_sm8650_defconfig: enable CCF_FULL
-      ufs: qcom: fix core clk max rate setting
+ drivers/clk/qcom/Kconfig                  |   1 +
+ drivers/clk/qcom/ccf/Makefile             |  21 ++++
+ drivers/clk/qcom/ccf/clk-alpha-pll.c      |   5 +-
+ drivers/clk/qcom/ccf/clk-branch.c         |   7 +-
+ drivers/clk/qcom/ccf/clk-branch.h         |   1 +
+ drivers/clk/qcom/ccf/clk-rcg2.c           | 157 ++++++------------------------
+ drivers/clk/qcom/ccf/clk-regmap-divider.c |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap-mux-div.c |   1 +
+ drivers/clk/qcom/ccf/clk-regmap-mux.c     |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap-phy-mux.c |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap.c         |  10 +-
+ drivers/clk/qcom/ccf/clk-regmap.h         |   2 +-
+ drivers/clk/qcom/ccf/clk-rpmh.c           | 113 ++++++++++-----------
+ 13 files changed, 122 insertions(+), 202 deletions(-)
 
- .gitlab-ci.yml                                     |    5 +
- MAINTAINERS                                        |    7 +
- arch/arm/cpu/armv7/bcm281xx/clk-core.c             |    8 +-
- arch/arm/cpu/armv7/bcm281xx/clk-core.h             |   14 +-
- arch/sandbox/dts/test.dts                          |    4 +-
- arch/sandbox/include/asm/clk.h                     |    2 +-
- cmd/clk.c                                          |   21 +-
- configs/qcom_sm8650_defconfig                      |    1 +
- configs/sandbox64_ccf_full_defconfig               |    5 +
- doc/api/clk.rst                                    |   25 +
- doc/develop/ccf.rst                                |   35 +
- doc/develop/index.rst                              |    1 +
- drivers/clk/Kconfig                                |   54 +-
- drivers/clk/Makefile                               |   21 +-
- drivers/clk/adi/clk-adi-pll.c                      |    2 +-
- drivers/clk/adi/clk-shared.c                       |    4 +-
- drivers/clk/adi/clk.h                              |    2 +-
- drivers/clk/airoha/clk-airoha.c                    |    4 +-
- drivers/clk/altera/clk-agilex.c                    |    2 +-
- drivers/clk/altera/clk-agilex5.c                   |    2 +-
- drivers/clk/altera/clk-arria10.c                   |    2 +-
- drivers/clk/altera/clk-mem-n5x.c                   |    2 +-
- drivers/clk/altera/clk-n5x.c                       |    2 +-
- drivers/clk/aspeed/clk_ast2500.c                   |    4 +-
- drivers/clk/aspeed/clk_ast2600.c                   |    4 +-
- drivers/clk/aspeed/clk_ast2700.c                   |    4 +-
- drivers/clk/at91/clk-generic.c                     |    4 +-
- drivers/clk/at91/clk-main.c                        |    8 +-
- drivers/clk/at91/clk-master.c                      |    8 +-
- drivers/clk/at91/clk-peripheral.c                  |    6 +-
- drivers/clk/at91/clk-programmable.c                |    4 +-
- drivers/clk/at91/clk-sam9x60-pll.c                 |   10 +-
- drivers/clk/at91/clk-sam9x60-usb.c                 |    4 +-
- drivers/clk/at91/clk-system.c                      |    2 +-
- drivers/clk/at91/clk-utmi.c                        |    4 +-
- drivers/clk/at91/compat.c                          |   30 +-
- drivers/clk/at91/pmc.c                             |    2 +-
- drivers/clk/at91/pmc.h                             |    2 +-
- drivers/clk/at91/sckc.c                            |    4 +-
- drivers/clk/basic/Makefile                         |    8 +
- drivers/clk/{ => basic}/clk_fixed_factor.c         |    2 +-
- drivers/clk/{ => basic}/clk_fixed_rate.c           |    4 +-
- drivers/clk/{ => basic}/clk_sandbox.c              |   12 +-
- drivers/clk/ccf/Kconfig                            |    8 +
- drivers/clk/ccf/Makefile                           |   19 +
- drivers/clk/ccf/clk-composite.c                    |  495 +++
- drivers/clk/ccf/clk-conf.c                         |  189 +
- drivers/clk/ccf/clk-divider.c                      |  663 ++++
- drivers/clk/ccf/clk-fixed-factor.c                 |  409 +++
- drivers/clk/ccf/clk-fixed-rate.c                   |  217 ++
- drivers/clk/ccf/clk-gate.c                         |  260 ++
- drivers/clk/ccf/clk-mux.c                          |  282 ++
- drivers/clk/ccf/clk.c                              | 3250 +++++++++++++++++
- drivers/clk/ccf/clk.h                              |   53 +
- drivers/clk/ccf/clk_sandbox.c                      |  281 ++
- drivers/clk/ccf/clk_sandbox_ccf_full.c             |  220 ++
- drivers/clk/clk-cdce9xx.c                          |    4 +-
- drivers/clk/clk-common.c                           |  255 ++
- drivers/clk/clk-common.h                           |   45 +
- drivers/clk/clk-gpio.c                             |    2 +-
- drivers/clk/clk-hsdk-cgu.c                         |    4 +-
- drivers/clk/clk-stub.c                             |    4 +-
- drivers/clk/clk-uclass.c                           |  202 +-
- drivers/clk/clk-xlnx-clock-wizard.c                |    4 +-
- drivers/clk/clk_bcm6345.c                          |    2 +-
- drivers/clk/clk_boston.c                           |    2 +-
- drivers/clk/clk_k210.c                             |    8 +-
- drivers/clk/clk_octeon.c                           |    2 +-
- drivers/clk/clk_pic32.c                            |    4 +-
- drivers/clk/clk_sandbox_test.c                     |    2 +-
- drivers/clk/clk_scmi.c                             |    6 +-
- drivers/clk/clk_versaclock.c                       |   22 +-
- drivers/clk/clk_versal.c                           |    4 +-
- drivers/clk/clk_vexpress_osc.c                     |    4 +-
- drivers/clk/clk_zynq.c                             |    8 +-
- drivers/clk/clk_zynqmp.c                           |    6 +-
- drivers/clk/exynos/clk-exynos7420.c                |    6 +-
- drivers/clk/exynos/clk-pll.c                       |    4 +-
- drivers/clk/exynos/clk.h                           |    2 +-
- drivers/clk/ics8n3qv01.c                           |    4 +-
- drivers/clk/imx/clk-composite-8m.c                 |    6 +-
- drivers/clk/imx/clk-composite-93.c                 |    2 +-
- drivers/clk/imx/clk-fracn-gppll.c                  |    4 +-
- drivers/clk/imx/clk-gate-93.c                      |    4 +-
- drivers/clk/imx/clk-gate2.c                        |    4 +-
- drivers/clk/imx/clk-imx6q.c                        |    2 +-
- drivers/clk/imx/clk-imx6ul.c                       |    2 +-
- drivers/clk/imx/clk-imx8.c                         |    4 +-
- drivers/clk/imx/clk-imx8.h                         |    2 +-
- drivers/clk/imx/clk-imx8qm.c                       |    2 +-
- drivers/clk/imx/clk-imx8qxp.c                      |    2 +-
- drivers/clk/imx/clk-imxrt1020.c                    |    2 +-
- drivers/clk/imx/clk-imxrt1170.c                    |    4 +-
- drivers/clk/imx/clk-pfd.c                          |    4 +-
- drivers/clk/imx/clk-pll14xx.c                      |    8 +-
- drivers/clk/imx/clk-pllv3.c                        |   18 +-
- drivers/clk/intel/clk_intel.c                      |    2 +-
- drivers/clk/mediatek/clk-mtk.c                     |   14 +-
- drivers/clk/mediatek/clk-mtk.h                     |   10 +-
- drivers/clk/meson/a1.c                             |    8 +-
- drivers/clk/meson/axg-ao.c                         |    2 +-
- drivers/clk/meson/axg.c                            |    2 +-
- drivers/clk/meson/clk-measure.c                    |    2 +-
- drivers/clk/meson/g12a-ao.c                        |    2 +-
- drivers/clk/meson/g12a.c                           |   10 +-
- drivers/clk/meson/gxbb.c                           |    8 +-
- drivers/clk/microchip/mpfs_clk_cfg.c               |    4 +-
- drivers/clk/microchip/mpfs_clk_msspll.c            |    2 +-
- drivers/clk/microchip/mpfs_clk_periph.c            |    2 +-
- drivers/clk/mpc83xx_clk.c                          |    2 +-
- drivers/clk/mtmips/clk-mt7620.c                    |    2 +-
- drivers/clk/mtmips/clk-mt7621.c                    |    2 +-
- drivers/clk/mtmips/clk-mt7628.c                    |    2 +-
- drivers/clk/mvebu/armada-37xx-periph.c             |    4 +-
- drivers/clk/mvebu/armada-37xx-tbg.c                |    2 +-
- drivers/clk/nuvoton/clk_npcm.c                     |    4 +-
- drivers/clk/nuvoton/clk_npcm.h                     |    2 +-
- drivers/clk/owl/clk_owl.c                          |    6 +-
- drivers/clk/qcom/Kconfig                           |    1 +
- drivers/clk/qcom/Makefile                          |   31 +-
- drivers/clk/qcom/basic/Makefile                    |   28 +
- drivers/clk/qcom/{ => basic}/clock-apq8016.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-apq8096.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-ipq4019.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-ipq5424.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-ipq9574.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-milos.c         |    4 +-
- drivers/clk/qcom/{ => basic}/clock-qcm2290.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-qcom.c          |    4 +-
- drivers/clk/qcom/{ => basic}/clock-qcom.h          |    2 +-
- drivers/clk/qcom/{ => basic}/clock-qcs404.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-qcs615.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-qcs8300.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sa8775p.c       |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sc7280.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sdm845.c        |    4 +-
- drivers/clk/qcom/{ => basic}/clock-sm6115.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm6125.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm6350.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm7150.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm8150.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm8250.c        |    2 +-
- drivers/clk/qcom/{ => basic}/clock-sm8550.c        |    4 +-
- drivers/clk/qcom/{ => basic}/clock-sm8650.c        |    4 +-
- drivers/clk/qcom/{ => basic}/clock-x1e80100.c      |    4 +-
- drivers/clk/qcom/ccf/Makefile                      |   21 +
- drivers/clk/qcom/ccf/clk-alpha-pll.c               | 3196 ++++++++++++++++
- drivers/clk/qcom/ccf/clk-alpha-pll.h               |  251 ++
- drivers/clk/qcom/ccf/clk-branch.c                  |  203 ++
- drivers/clk/qcom/ccf/clk-branch.h                  |  125 +
- drivers/clk/qcom/ccf/clk-rcg.h                     |  217 ++
- drivers/clk/qcom/ccf/clk-rcg2.c                    | 1765 +++++++++
- drivers/clk/qcom/ccf/clk-regmap-divider.c          |   90 +
- drivers/clk/qcom/ccf/clk-regmap-divider.h          |   22 +
- drivers/clk/qcom/ccf/clk-regmap-mux-div.c          |  232 ++
- drivers/clk/qcom/ccf/clk-regmap-mux-div.h          |   44 +
- drivers/clk/qcom/ccf/clk-regmap-mux.c              |   57 +
- drivers/clk/qcom/ccf/clk-regmap-mux.h              |   23 +
- drivers/clk/qcom/ccf/clk-regmap-phy-mux.c          |   62 +
- drivers/clk/qcom/ccf/clk-regmap-phy-mux.h          |   33 +
- drivers/clk/qcom/ccf/clk-regmap.c                  |  104 +
- drivers/clk/qcom/ccf/clk-regmap.h                  |   38 +
- drivers/clk/qcom/ccf/clk-rpmh.c                    | 1030 ++++++
- drivers/clk/qcom/ccf/common-uboot.c                |  188 +
- drivers/clk/qcom/ccf/common-uboot.h                |   34 +
- drivers/clk/qcom/ccf/common.c                      |  248 ++
- drivers/clk/qcom/ccf/common.h                      |  106 +
- drivers/clk/qcom/ccf/dispcc-sm8550.c               | 1825 ++++++++++
- drivers/clk/qcom/ccf/gcc-sm8650.c                  | 3846 ++++++++++++++++++++
- drivers/clk/qcom/ccf/gdsc.c                        |  545 +++
- drivers/clk/qcom/ccf/gdsc.h                        |  103 +
- drivers/clk/qcom/ccf/reset.c                       |  112 +
- drivers/clk/qcom/ccf/reset.h                       |   29 +
- drivers/clk/qcom/ccf/tcsrcc-sm8650.c               |  174 +
- drivers/clk/qcom/clock-sc7180.c                    |    2 +-
- drivers/clk/renesas/clk-rcar-gen2.c                |    4 +-
- drivers/clk/renesas/clk-rcar-gen3.c                |    4 +-
- drivers/clk/renesas/compound-clock.c               |    4 +-
- drivers/clk/renesas/r8a78000-cpg.c                 |    6 +-
- drivers/clk/renesas/r9a06g032-clocks.c             |    6 +-
- drivers/clk/renesas/rcar-gen2-cpg.h                |    2 +-
- drivers/clk/renesas/rcar-gen3-cpg.h                |    2 +-
- drivers/clk/renesas/rzg2l-cpg.c                    |    8 +-
- drivers/clk/rockchip/clk_px30.c                    |   12 +-
- drivers/clk/rockchip/clk_rk3036.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3066.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3128.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3188.c                  |    4 +-
- drivers/clk/rockchip/clk_rk322x.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3288.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3308.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3328.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3368.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3399.c                  |    8 +-
- drivers/clk/rockchip/clk_rk3506.c                  |    4 +-
- drivers/clk/rockchip/clk_rk3528.c                  |   10 +-
- drivers/clk/rockchip/clk_rk3568.c                  |   14 +-
- drivers/clk/rockchip/clk_rk3576.c                  |    8 +-
- drivers/clk/rockchip/clk_rk3588.c                  |   12 +-
- drivers/clk/rockchip/clk_rv1108.c                  |    4 +-
- drivers/clk/rockchip/clk_rv1126.c                  |   12 +-
- drivers/clk/sifive/sifive-prci.c                   |    4 +-
- drivers/clk/sophgo/clk-cv1800b.c                   |    4 +-
- drivers/clk/sophgo/clk-ip.c                        |   30 +-
- drivers/clk/sophgo/clk-ip.h                        |   18 +-
- drivers/clk/sophgo/clk-pll.c                       |    8 +-
- drivers/clk/sophgo/clk-pll.h                       |    4 +-
- drivers/clk/starfive/clk-jh7110-pll.c              |    4 +-
- drivers/clk/starfive/clk.h                         |    2 +-
- drivers/clk/stm32/clk-stm32-core.c                 |   22 +-
- drivers/clk/stm32/clk-stm32-core.h                 |    2 +-
- drivers/clk/stm32/clk-stm32f.c                     |    4 +-
- drivers/clk/stm32/clk-stm32h7.c                    |    2 +-
- drivers/clk/stm32/clk-stm32mp1.c                   |    4 +-
- drivers/clk/sunxi/clk_sun6i_rtc.c                  |    2 +-
- drivers/clk/sunxi/clk_sunxi.c                      |    2 +-
- drivers/clk/tegra/tegra-car-clk.c                  |    4 +-
- drivers/clk/tegra/tegra186-clk.c                   |    4 +-
- drivers/clk/thead/clk-th1520-ap.c                  |    8 +-
- drivers/clk/ti/clk-am3-dpll-x2.c                   |    2 +-
- drivers/clk/ti/clk-am3-dpll.c                      |    4 +-
- drivers/clk/ti/clk-ctrl.c                          |    2 +-
- drivers/clk/ti/clk-divider.c                       |    4 +-
- drivers/clk/ti/clk-gate.c                          |    2 +-
- drivers/clk/ti/clk-k3-pll.c                        |    4 +-
- drivers/clk/ti/clk-k3.c                            |    6 +-
- drivers/clk/ti/clk-mux.c                           |    4 +-
- drivers/clk/ti/clk-sci.c                           |    4 +-
- drivers/clk/uccf/Kconfig                           |   22 +
- drivers/clk/uccf/Makefile                          |   11 +
- drivers/clk/{ => uccf}/clk-composite.c             |   20 +-
- drivers/clk/{ => uccf}/clk-divider.c               |    4 +-
- drivers/clk/{ => uccf}/clk-fixed-factor.c          |    2 +-
- drivers/clk/{ => uccf}/clk-gate.c                  |    2 +-
- drivers/clk/{ => uccf}/clk-mux.c                   |    2 +-
- drivers/clk/{ => uccf}/clk.c                       |    4 +-
- .../{clk_sandbox_ccf.c => uccf/clk_sandbox_uccf.c} |   12 +-
- drivers/clk/uniphier/clk-uniphier-core.c           |    6 +-
- drivers/core/ofnode.c                              |    4 +-
- drivers/phy/cadence/phy-cadence-sierra.c           |    2 +-
- drivers/phy/cadence/phy-cadence-torrent.c          |    2 +-
- drivers/phy/phy-stm32-usbphyc.c                    |    2 +-
- drivers/phy/phy-ti-am654.c                         |    2 +-
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |    2 +-
- drivers/phy/ti/phy-j721e-wiz.c                     |    6 +-
- drivers/power/domain/imx8mp-hsiomix.c              |    2 +-
- drivers/ufs/ufs-qcom.c                             |   31 +-
- include/clk-uclass.h                               |    6 +-
- include/clk.h                                      |  102 +-
- include/linux/clk-provider-ccf_full.h              | 1461 ++++++++
- include/linux/clk-provider-uccf.h                  |  256 ++
- include/linux/clk-provider.h                       |  253 +-
- include/linux/clk/clk-conf.h                       |   22 +
- include/sandbox-clk.h                              |    5 +-
- test/dm/Makefile                                   |    3 +-
- test/dm/clk.c                                      |   32 +-
- test/dm/clk_ccf.c                                  |  117 +-
- test/test-main.c                                   |    6 +
- 258 files changed, 24032 insertions(+), 997 deletions(-)
----
-base-commit: e0ef25054db31fee49d031ac337099b12c67e5b8
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 95b650831a39..1c15d21c01b3 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -2,8 +2,9 @@ if ARCH_SNAPDRAGON || ARCH_IPQ40XX
+ 
+ config CLK_QCOM
+ 	bool
+ 	depends on CLK && DM_RESET && POWER_DOMAIN
++	select REGMAP if CLK_CCF_FULL
+ 	def_bool n
+ 
+ menu "Qualcomm clock drivers"
+ 
+diff --git a/drivers/clk/qcom/ccf/Makefile b/drivers/clk/qcom/ccf/Makefile
+new file mode 100644
+index 000000000000..1d8fcdd3667f
+--- /dev/null
++++ b/drivers/clk/qcom/ccf/Makefile
+@@ -0,0 +1,21 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2023 Linaro
++
++obj-y += common.o common-uboot.o
++obj-y += clk-regmap.o
++obj-y += clk-alpha-pll.o
++obj-y += clk-rcg2.o
++obj-y += clk-branch.o
++obj-y += clk-regmap-divider.o
++obj-y += clk-regmap-mux.o
++obj-y += clk-regmap-mux-div.o
++obj-y += clk-regmap-phy-mux.o
++obj-y += clk-rpmh.o
++obj-y += reset.o
++obj-y += gdsc.o
++
++obj-$(CONFIG_CLK_QCOM_SM8650) += gcc-sm8650.o \
++				 dispcc-sm8550.o \
++				 tcsrcc-sm8650.o
++
+diff --git a/drivers/clk/qcom/ccf/clk-alpha-pll.c b/drivers/clk/qcom/ccf/clk-alpha-pll.c
+index 6aeba40358c1..58a13521abc3 100644
+--- a/drivers/clk/qcom/ccf/clk-alpha-pll.c
++++ b/drivers/clk/qcom/ccf/clk-alpha-pll.c
+@@ -3,16 +3,19 @@
+  * Copyright (c) 2015, 2018, The Linux Foundation. All rights reserved.
+  * Copyright (c) 2021, 2023-2024, Qualcomm Innovation Center, Inc. All rights reserved.
+  */
+ 
++#include <asm/io.h>
++#include <div64.h>
++#include <linux/bug.h>
+ #include <linux/kernel.h>
+-#include <linux/export.h>
+ #include <linux/clk-provider.h>
+ #include <linux/regmap.h>
+ #include <linux/delay.h>
+ 
+ #include "clk-alpha-pll.h"
+ #include "common.h"
++#include "common-uboot.h"
+ 
+ #define PLL_MODE(p)		((p)->offset + 0x0)
+ # define PLL_OUTCTRL		BIT(0)
+ # define PLL_BYPASSNL		BIT(1)
+diff --git a/drivers/clk/qcom/ccf/clk-branch.c b/drivers/clk/qcom/ccf/clk-branch.c
+index 444e7d8648d4..0b91a71289b2 100644
+--- a/drivers/clk/qcom/ccf/clk-branch.c
++++ b/drivers/clk/qcom/ccf/clk-branch.c
+@@ -3,13 +3,13 @@
+  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
+  */
+ 
++#include <linux/bug.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <linux/delay.h>
+-#include <linux/export.h>
+ #include <linux/clk-provider.h>
+ #include <linux/regmap.h>
+ 
+ #include "clk-branch.h"
+@@ -83,10 +83,13 @@ static int clk_branch_wait(const struct clk_branch *br, bool enabling,
+ 			if (check_halt(br, enabling))
+ 				return 0;
+ 			udelay(1);
+ 		}
+-		WARN(1, "%s status stuck at 'o%s'", name,
++		WARN(1, "%s status stuck at 'o%s'\n", name,
+ 				enabling ? "ff" : "n");
++		u32 val;
++		regmap_read(br->clkr.regmap, br->halt_reg, &val);
++		printf("%s: halt_reg %#x val %#x\n", name, br->halt_reg, val);
+ 		return -EBUSY;
+ 	}
+ 	return 0;
+ }
+diff --git a/drivers/clk/qcom/ccf/clk-branch.h b/drivers/clk/qcom/ccf/clk-branch.h
+index 6bc2ba2b5350..5cc5c2e9d165 100644
+--- a/drivers/clk/qcom/ccf/clk-branch.h
++++ b/drivers/clk/qcom/ccf/clk-branch.h
+@@ -5,8 +5,9 @@
+ #define __QCOM_CLK_BRANCH_H__
+ 
+ #include <linux/bitfield.h>
+ #include <linux/clk-provider.h>
++#include <linux/regmap.h>
+ 
+ #include "clk-regmap.h"
+ 
+ /**
+diff --git a/drivers/clk/qcom/ccf/clk-rcg2.c b/drivers/clk/qcom/ccf/clk-rcg2.c
+index e18cb8807d73..2f60830fc302 100644
+--- a/drivers/clk/qcom/ccf/clk-rcg2.c
++++ b/drivers/clk/qcom/ccf/clk-rcg2.c
+@@ -2,27 +2,23 @@
+ /*
+  * Copyright (c) 2013, 2018, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <div64.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <linux/bug.h>
+-#include <linux/export.h>
+-#include <linux/clk.h>
++#include <clk.h>
+ #include <linux/clk-provider.h>
+ #include <linux/delay.h>
+ #include <linux/rational.h>
+ #include <linux/regmap.h>
+ #include <linux/math64.h>
+-#include <linux/gcd.h>
+-#include <linux/minmax.h>
+-#include <linux/slab.h>
+-
+-#include <asm/div64.h>
+ 
+ #include "clk-rcg.h"
+ #include "common.h"
++#include "common-uboot.h"
+ 
+ #define CMD_REG			0x0
+ #define CMD_UPDATE		BIT(0)
+ #define CMD_ROOT_EN		BIT(1)
+@@ -132,9 +128,9 @@ static int update_config(struct clk_rcg2 *rcg)
+ 			return 0;
+ 		udelay(1);
+ 	}
+ 
+-	WARN(1, "%s: rcg didn't update its configuration.", name);
++	WARN(1, "%s: rcg didn't update its configuration.\n", name);
+ 	return -EBUSY;
+ }
+ 
+ static int clk_rcg2_set_parent(struct clk_hw *hw, u8 index)
+@@ -222,9 +218,11 @@ clk_rcg2_recalc_rate(struct clk_hw *hw, unsigned long parent_rate)
+ 	u32 cfg;
+ 
+ 	regmap_read(rcg->clkr.regmap, RCG_CFG_OFFSET(rcg), &cfg);
+ 
+-	return __clk_rcg2_recalc_rate(hw, parent_rate, cfg);
++	ulong rate = __clk_rcg2_recalc_rate(hw, parent_rate, cfg);
++	pr_debug("%s: %s: rate %lu parent_rate %lu\n", __func__, clk_hw_get_name(hw), rate, parent_rate);
++	return rate;
+ }
+ 
+ static int _freq_tbl_determine_rate(struct clk_hw *hw, const struct freq_tbl *f,
+ 				    struct clk_rate_request *req,
+@@ -349,22 +347,31 @@ static int _freq_tbl_fm_determine_rate(struct clk_hw *hw, const struct freq_mult
+ 	struct clk_hw *p;
+ 	int index;
+ 
+ 	f = qcom_find_freq_multi(f, rate);
+-	if (!f || !f->confs)
++	if (!f || !f->confs) {
++		dev_err(hw->clk->dev, "%s: couldn't match rate %lu\n", clk_hw_get_name(hw), rate);
+ 		return -EINVAL;
++	}
++
++	log_debug("%s: %s rate %lu table rate %lu\n", __func__,
++		clk_hw_get_name(hw), rate, f->freq);
+ 
+ 	conf = __clk_rcg2_select_conf(hw, f, rate);
+ 	if (IS_ERR(conf))
+ 		return PTR_ERR(conf);
+ 	index = qcom_find_src_index(hw, rcg->parent_map, conf->src);
+-	if (index < 0)
++	if (index < 0) {
++		dev_err(hw->clk->dev, "Couldn't find index for src %#x: %d\n", conf->src, index);
+ 		return index;
++	}
+ 
+ 	clk_flags = clk_hw_get_flags(hw);
+ 	p = clk_hw_get_parent_by_index(hw, index);
+-	if (!p)
++	if (!p) {
++		dev_err(hw->clk->dev, "%s: couldn't get parent index %d\n", clk_hw_get_name(hw), index);
+ 		return -EINVAL;
++	}
+ 
+ 	if (clk_flags & CLK_SET_RATE_PARENT) {
+ 		rate = f->freq;
+ 		if (conf->pre_div) {
+@@ -1203,122 +1210,8 @@ const struct clk_ops clk_pixel_ops = {
+ 	.determine_rate = clk_pixel_determine_rate,
+ };
+ EXPORT_SYMBOL_GPL(clk_pixel_ops);
+ 
+-static int clk_gfx3d_determine_rate(struct clk_hw *hw,
+-				    struct clk_rate_request *req)
+-{
+-	struct clk_rate_request parent_req = { .min_rate = 0, .max_rate = ULONG_MAX };
+-	struct clk_rcg2_gfx3d *cgfx = to_clk_rcg2_gfx3d(hw);
+-	struct clk_hw *xo, *p0, *p1, *p2;
+-	unsigned long p0_rate;
+-	u8 mux_div = cgfx->div;
+-	int ret;
+-
+-	p0 = cgfx->hws[0];
+-	p1 = cgfx->hws[1];
+-	p2 = cgfx->hws[2];
+-	/*
+-	 * This function does ping-pong the RCG between PLLs: if we don't
+-	 * have at least one fixed PLL and two variable ones,
+-	 * then it's not going to work correctly.
+-	 */
+-	if (WARN_ON(!p0 || !p1 || !p2))
+-		return -EINVAL;
+-
+-	xo = clk_hw_get_parent_by_index(hw, 0);
+-	if (req->rate == clk_hw_get_rate(xo)) {
+-		req->best_parent_hw = xo;
+-		return 0;
+-	}
+-
+-	if (mux_div == 0)
+-		mux_div = 1;
+-
+-	parent_req.rate = req->rate * mux_div;
+-
+-	/* This has to be a fixed rate PLL */
+-	p0_rate = clk_hw_get_rate(p0);
+-
+-	if (parent_req.rate == p0_rate) {
+-		req->rate = req->best_parent_rate = p0_rate;
+-		req->best_parent_hw = p0;
+-		return 0;
+-	}
+-
+-	if (req->best_parent_hw == p0) {
+-		/* Are we going back to a previously used rate? */
+-		if (clk_hw_get_rate(p2) == parent_req.rate)
+-			req->best_parent_hw = p2;
+-		else
+-			req->best_parent_hw = p1;
+-	} else if (req->best_parent_hw == p2) {
+-		req->best_parent_hw = p1;
+-	} else {
+-		req->best_parent_hw = p2;
+-	}
+-
+-	clk_hw_get_rate_range(req->best_parent_hw,
+-			      &parent_req.min_rate, &parent_req.max_rate);
+-
+-	if (req->min_rate > parent_req.min_rate)
+-		parent_req.min_rate = req->min_rate;
+-
+-	if (req->max_rate < parent_req.max_rate)
+-		parent_req.max_rate = req->max_rate;
+-
+-	ret = __clk_determine_rate(req->best_parent_hw, &parent_req);
+-	if (ret)
+-		return ret;
+-
+-	req->rate = req->best_parent_rate = parent_req.rate;
+-	req->rate /= mux_div;
+-
+-	return 0;
+-}
+-
+-static int clk_gfx3d_set_rate_and_parent(struct clk_hw *hw, unsigned long rate,
+-		unsigned long parent_rate, u8 index)
+-{
+-	struct clk_rcg2_gfx3d *cgfx = to_clk_rcg2_gfx3d(hw);
+-	struct clk_rcg2 *rcg = &cgfx->rcg;
+-	u32 cfg;
+-	int ret;
+-
+-	cfg = rcg->parent_map[index].cfg << CFG_SRC_SEL_SHIFT;
+-	/* On some targets, the GFX3D RCG may need to divide PLL frequency */
+-	if (cgfx->div > 1)
+-		cfg |= ((2 * cgfx->div) - 1) << CFG_SRC_DIV_SHIFT;
+-
+-	ret = regmap_write(rcg->clkr.regmap, rcg->cmd_rcgr + CFG_REG, cfg);
+-	if (ret)
+-		return ret;
+-
+-	return update_config(rcg);
+-}
+-
+-static int clk_gfx3d_set_rate(struct clk_hw *hw, unsigned long rate,
+-			      unsigned long parent_rate)
+-{
+-	/*
+-	 * We should never get here; clk_gfx3d_determine_rate() should always
+-	 * make us use a different parent than what we're currently using, so
+-	 * clk_gfx3d_set_rate_and_parent() should always be called.
+-	 */
+-	return 0;
+-}
+-
+-const struct clk_ops clk_gfx3d_ops = {
+-	.is_enabled = clk_rcg2_is_enabled,
+-	.get_parent = clk_rcg2_get_parent,
+-	.set_parent = clk_rcg2_set_parent,
+-	.recalc_rate = clk_rcg2_recalc_rate,
+-	.set_rate = clk_gfx3d_set_rate,
+-	.set_rate_and_parent = clk_gfx3d_set_rate_and_parent,
+-	.determine_rate = clk_gfx3d_determine_rate,
+-};
+-EXPORT_SYMBOL_GPL(clk_gfx3d_ops);
+-
+ static int clk_rcg2_set_force_enable(struct clk_hw *hw)
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 	const char *name = clk_hw_get_name(hw);
+@@ -1372,8 +1265,11 @@ static int __clk_rcg2_shared_set_rate(struct clk_hw *hw, unsigned long rate,
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 	const struct freq_tbl *f;
+ 
++	log_debug("%s: %s rate %lu parent_rate %lu policy %sp\n", __func__,
++		clk_hw_get_name(hw), rate, parent_rate, policy == FLOOR ? "floor" : "ceil");
++
+ 	switch (policy) {
+ 	case FLOOR:
+ 		f = qcom_find_freq_floor(rcg->freq_tbl, rate);
+ 		break;
+@@ -1383,8 +1279,15 @@ static int __clk_rcg2_shared_set_rate(struct clk_hw *hw, unsigned long rate,
+ 	default:
+ 		return -EINVAL;
+ 	}
+ 
++	if (!f) {
++		dev_err(hw->clk->dev, "%s: couldn't find frequency for rate %lu\n", clk_hw_get_name(hw), rate);
++		return -EINVAL;
++	}
++
++	log_debug("%s: found freq %p rate %lu\n", __func__, f, f ? f->freq : 10101010);
++
+ 	/*
+ 	 * In case clock is disabled, update the M, N and D registers, cache
+ 	 * the CFG value in parked_cfg and don't hit the update bit of CMD
+ 	 * register.
+@@ -1447,8 +1350,10 @@ static int clk_rcg2_shared_enable(struct clk_hw *hw)
+ static void clk_rcg2_shared_disable(struct clk_hw *hw)
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 
++	log_debug("%s: %s\n", __func__, clk_hw_get_name(hw));
++
+ 	/*
+ 	 * Store current configuration as switching to safe source would clear
+ 	 * the SRC and DIV of CFG register
+ 	 */
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-divider.c b/drivers/clk/qcom/ccf/clk-regmap-divider.c
+index 4f5395f0ab6d..f37556d31f4e 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-divider.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-divider.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap-divider.h"
+ 
+ static inline struct clk_regmap_div *to_clk_regmap_div(struct clk_hw *hw)
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-mux-div.c b/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
+index 6044839da85a..9c0eb8e1b8e2 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
+@@ -3,8 +3,9 @@
+  * Copyright (c) 2017, Linaro Limited
+  * Author: Georgi Djakov <georgi.djakov@linaro.org>
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/kernel.h>
+ #include <linux/regmap.h>
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-mux.c b/drivers/clk/qcom/ccf/clk-regmap-mux.c
+index 45d9cca28064..c6f95a3d4e5f 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-mux.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-mux.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap-mux.h"
+ 
+ static inline struct clk_regmap_mux *to_clk_regmap_mux(struct clk_hw *hw)
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c b/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
+index 7b7243b7107d..04f79591aef4 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2022, Linaro Ltd.
+  */
+ 
++#include <linux/bug.h>
+ #include <linux/clk-provider.h>
+ #include <linux/bitfield.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap.h"
+ #include "clk-regmap-phy-mux.h"
+ 
+diff --git a/drivers/clk/qcom/ccf/clk-regmap.c b/drivers/clk/qcom/ccf/clk-regmap.c
+index 92ac4e0d7dbe..bc59b2456a3e 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap.c
++++ b/drivers/clk/qcom/ccf/clk-regmap.c
+@@ -2,12 +2,13 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
++#include <dm/device.h>
+ #include <linux/device.h>
+ #include <linux/clk-provider.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap.h"
+ 
+ /**
+@@ -93,14 +94,11 @@ EXPORT_SYMBOL_GPL(clk_disable_regmap);
+  * Clocks that use regmap for their register I/O should register their
+  * clk_regmap struct via this function so that the regmap is initialized
+  * and so that the clock is registered with the common clock framework.
+  */
+-int devm_clk_register_regmap(struct device *dev, struct clk_regmap *rclk)
++int devm_clk_register_regmap(struct udevice *dev, struct clk_regmap *rclk, struct regmap *regmap)
+ {
+-	if (dev && dev_get_regmap(dev, NULL))
+-		rclk->regmap = dev_get_regmap(dev, NULL);
+-	else if (dev && dev->parent)
+-		rclk->regmap = dev_get_regmap(dev->parent, NULL);
++	rclk->regmap = regmap;
+ 
+ 	return devm_clk_hw_register(dev, &rclk->hw);
+ }
+ EXPORT_SYMBOL_GPL(devm_clk_register_regmap);
+diff --git a/drivers/clk/qcom/ccf/clk-regmap.h b/drivers/clk/qcom/ccf/clk-regmap.h
+index 14ec659a3a77..c23160f2b6e5 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap.h
++++ b/drivers/clk/qcom/ccf/clk-regmap.h
+@@ -32,7 +32,7 @@ static inline struct clk_regmap *to_clk_regmap(struct clk_hw *hw)
+ 
+ int clk_is_enabled_regmap(struct clk_hw *hw);
+ int clk_enable_regmap(struct clk_hw *hw);
+ void clk_disable_regmap(struct clk_hw *hw);
+-int devm_clk_register_regmap(struct device *dev, struct clk_regmap *rclk);
++int devm_clk_register_regmap(struct udevice *dev, struct clk_regmap *rclk, struct regmap *regmap);
+ 
+ #endif
+diff --git a/drivers/clk/qcom/ccf/clk-rpmh.c b/drivers/clk/qcom/ccf/clk-rpmh.c
+index 1a98b3a0c528..dc1a75c3ff50 100644
+--- a/drivers/clk/qcom/ccf/clk-rpmh.c
++++ b/drivers/clk/qcom/ccf/clk-rpmh.c
+@@ -5,18 +5,16 @@
+ 
+ #include <linux/clk-provider.h>
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/of.h>
+-#include <linux/platform_device.h>
+-#include <linux/string_choices.h>
+ #include <soc/qcom/cmd-db.h>
+ #include <soc/qcom/rpmh.h>
+ #include <soc/qcom/tcs.h>
+ 
+ #include <dt-bindings/clock/qcom,rpmh.h>
+ 
++#include "common-uboot.h"
++
+ #define CLK_RPMH_ARC_EN_OFFSET		0
+ #define CLK_RPMH_VRM_EN_OFFSET		4
+ 
+ /**
+@@ -58,9 +56,9 @@ struct clk_rpmh {
+ 	u32 aggr_state;
+ 	u32 last_sent_aggr_state;
+ 	u32 valid_state_mask;
+ 	u32 unit;
+-	struct device *dev;
++	struct udevice *dev;
+ 	struct clk_rpmh *peer;
+ };
+ 
+ struct clk_rpmh_desc {
+@@ -69,9 +67,9 @@ struct clk_rpmh_desc {
+ 	/* RPMh clock clkaN are optional for this platform */
+ 	bool clka_optional;
+ };
+ 
+-static DEFINE_MUTEX(rpmh_clk_lock);
++// static DEFINE_MUTEX(rpmh_clk_lock);
+ 
+ #define __DEFINE_CLK_RPMH(_name, _clk_name, _res_name,			\
+ 			  _res_en_offset, _res_on, _div)		\
+ 	static struct clk_rpmh clk_rpmh_##_clk_name##_ao;		\
+@@ -265,9 +263,9 @@ static int clk_rpmh_bcm_send_cmd(struct clk_rpmh *c, bool enable)
+ 	} else {
+ 		cmd_state = 0;
+ 	}
+ 
+-	cmd_state = min(cmd_state, BCM_TCS_CMD_VOTE_MASK);
++	cmd_state = min_t(u32, cmd_state, BCM_TCS_CMD_VOTE_MASK);
+ 
+ 	if (c->last_sent_aggr_state != cmd_state) {
+ 		cmd.addr = c->res_addr;
+ 		cmd.data = BCM_TCS_CMD(1, enable, 0, cmd_state);
+@@ -309,8 +307,10 @@ static int clk_rpmh_bcm_set_rate(struct clk_hw *hw, unsigned long rate,
+ 				 unsigned long parent_rate)
+ {
+ 	struct clk_rpmh *c = to_clk_rpmh(hw);
+ 
++	printf("%s: %s: rate %lu parent_rate %lu\n", __func__, clk_hw_get_name(hw), rate, parent_rate);
++
+ 	c->aggr_state = rate / c->unit;
+ 	/*
+ 	 * Since any non-zero value sent to hw would result in enabling the
+ 	 * clock, only send the value if the clock has already been prepared.
+@@ -900,9 +900,9 @@ static const struct clk_rpmh_desc clk_rpmh_glymur = {
+ 	.clks = glymur_rpmh_clocks,
+ 	.num_clks = ARRAY_SIZE(glymur_rpmh_clocks),
+ };
+ 
+-static struct clk_hw *of_clk_rpmh_hw_get(struct of_phandle_args *clkspec,
++static struct clk_hw *of_clk_rpmh_hw_get(struct ofnode_phandle_args *clkspec,
+ 					 void *data)
+ {
+ 	struct clk_rpmh_desc *rpmh = data;
+ 	unsigned int idx = clkspec->args[0];
+@@ -914,16 +914,16 @@ static struct clk_hw *of_clk_rpmh_hw_get(struct of_phandle_args *clkspec,
+ 
+ 	return rpmh->clks[idx];
+ }
+ 
+-static int clk_rpmh_probe(struct platform_device *pdev)
++static int clk_rpmh_probe(struct udevice *dev)
+ {
+ 	struct clk_hw **hw_clks;
+ 	struct clk_rpmh *rpmh_clk;
+ 	const struct clk_rpmh_desc *desc;
+ 	int ret, i;
+ 
+-	desc = of_device_get_match_data(&pdev->dev);
++	desc = (void *)dev_get_driver_data(dev);
+ 	if (!desc)
+ 		return -ENODEV;
+ 
+ 	hw_clks = desc->clks;
+@@ -947,17 +947,17 @@ static int clk_rpmh_probe(struct platform_device *pdev)
+ 			if (desc->clka_optional &&
+ 			    !strncmp(rpmh_clk->res_name, "clka", sizeof("clka") - 1))
+ 				continue;
+ 
+-			dev_err(&pdev->dev, "missing RPMh resource address for %s\n",
++			dev_err(dev, "missing RPMh resource address for %s\n",
+ 				rpmh_clk->res_name);
+ 			return -ENODEV;
+ 		}
+ 
+ 		data = cmd_db_read_aux_data(rpmh_clk->res_name, &aux_data_len);
+ 		if (IS_ERR(data)) {
+ 			ret = PTR_ERR(data);
+-			dev_err(&pdev->dev,
++			dev_err(dev,
+ 				"error reading RPMh aux data for %s (%d)\n",
+ 				rpmh_clk->res_name, ret);
+ 			return ret;
+ 		}
+@@ -966,78 +966,65 @@ static int clk_rpmh_probe(struct platform_device *pdev)
+ 		if (aux_data_len == sizeof(*data))
+ 			rpmh_clk->unit = le32_to_cpu(data->unit) * 1000ULL;
+ 
+ 		rpmh_clk->res_addr += res_addr;
+-		rpmh_clk->dev = &pdev->dev;
++		rpmh_clk->dev = dev;
+ 
+-		ret = devm_clk_hw_register(&pdev->dev, hw_clks[i]);
++		ret = devm_clk_hw_register(dev, hw_clks[i]);
+ 		if (ret) {
+-			dev_err(&pdev->dev, "failed to register %s\n", name);
++			dev_err(dev, "failed to register %s\n", name);
+ 			return ret;
+ 		}
+ 	}
+ 
+ 	/* typecast to silence compiler warning */
+-	ret = devm_of_clk_add_hw_provider(&pdev->dev, of_clk_rpmh_hw_get,
++	ret = devm_of_clk_add_hw_provider(dev, of_clk_rpmh_hw_get,
+ 					  (void *)desc);
+ 	if (ret) {
+-		dev_err(&pdev->dev, "Failed to add clock provider\n");
++		dev_err(dev, "Failed to add clock provider\n");
+ 		return ret;
+ 	}
+ 
+-	dev_dbg(&pdev->dev, "Registered RPMh clocks\n");
++	dev_dbg(dev, "Registered RPMh clocks\n");
+ 
+ 	return 0;
+ }
+ 
+-static const struct of_device_id clk_rpmh_match_table[] = {
+-	{ .compatible = "qcom,glymur-rpmh-clk", .data = &clk_rpmh_glymur},
+-	{ .compatible = "qcom,milos-rpmh-clk", .data = &clk_rpmh_milos},
+-	{ .compatible = "qcom,qcs615-rpmh-clk", .data = &clk_rpmh_qcs615},
+-	{ .compatible = "qcom,qdu1000-rpmh-clk", .data = &clk_rpmh_qdu1000},
+-	{ .compatible = "qcom,sa8775p-rpmh-clk", .data = &clk_rpmh_sa8775p},
+-	{ .compatible = "qcom,sar2130p-rpmh-clk", .data = &clk_rpmh_sar2130p},
+-	{ .compatible = "qcom,sc7180-rpmh-clk", .data = &clk_rpmh_sc7180},
+-	{ .compatible = "qcom,sc7280-rpmh-clk", .data = &clk_rpmh_sc7280},
+-	{ .compatible = "qcom,sc8180x-rpmh-clk", .data = &clk_rpmh_sc8180x},
+-	{ .compatible = "qcom,sc8280xp-rpmh-clk", .data = &clk_rpmh_sc8280xp},
+-	{ .compatible = "qcom,sdm845-rpmh-clk", .data = &clk_rpmh_sdm845},
+-	{ .compatible = "qcom,sdm670-rpmh-clk", .data = &clk_rpmh_sdm670},
+-	{ .compatible = "qcom,sdx55-rpmh-clk",  .data = &clk_rpmh_sdx55},
+-	{ .compatible = "qcom,sdx65-rpmh-clk",  .data = &clk_rpmh_sdx65},
+-	{ .compatible = "qcom,sdx75-rpmh-clk",  .data = &clk_rpmh_sdx75},
+-	{ .compatible = "qcom,sm4450-rpmh-clk", .data = &clk_rpmh_sm4450},
+-	{ .compatible = "qcom,sm6350-rpmh-clk", .data = &clk_rpmh_sm6350},
+-	{ .compatible = "qcom,sm8150-rpmh-clk", .data = &clk_rpmh_sm8150},
+-	{ .compatible = "qcom,sm8250-rpmh-clk", .data = &clk_rpmh_sm8250},
+-	{ .compatible = "qcom,sm8350-rpmh-clk", .data = &clk_rpmh_sm8350},
+-	{ .compatible = "qcom,sm8450-rpmh-clk", .data = &clk_rpmh_sm8450},
+-	{ .compatible = "qcom,sm8550-rpmh-clk", .data = &clk_rpmh_sm8550},
+-	{ .compatible = "qcom,sm8650-rpmh-clk", .data = &clk_rpmh_sm8650},
+-	{ .compatible = "qcom,sm8750-rpmh-clk", .data = &clk_rpmh_sm8750},
+-	{ .compatible = "qcom,x1e80100-rpmh-clk", .data = &clk_rpmh_x1e80100},
++static const struct udevice_id clk_rpmh_match_table[] = {
++	{ .compatible = "qcom,glymur-rpmh-clk", .data = (ulong)&clk_rpmh_glymur},
++	{ .compatible = "qcom,milos-rpmh-clk", .data = (ulong)&clk_rpmh_milos},
++	{ .compatible = "qcom,qcs615-rpmh-clk", .data = (ulong)&clk_rpmh_qcs615},
++	{ .compatible = "qcom,qdu1000-rpmh-clk", .data = (ulong)&clk_rpmh_qdu1000},
++	{ .compatible = "qcom,sa8775p-rpmh-clk", .data = (ulong)&clk_rpmh_sa8775p},
++	{ .compatible = "qcom,sar2130p-rpmh-clk", .data = (ulong)&clk_rpmh_sar2130p},
++	{ .compatible = "qcom,sc7180-rpmh-clk", .data = (ulong)&clk_rpmh_sc7180},
++	{ .compatible = "qcom,sc7280-rpmh-clk", .data = (ulong)&clk_rpmh_sc7280},
++	{ .compatible = "qcom,sc8180x-rpmh-clk", .data = (ulong)&clk_rpmh_sc8180x},
++	{ .compatible = "qcom,sc8280xp-rpmh-clk", .data = (ulong)&clk_rpmh_sc8280xp},
++	{ .compatible = "qcom,sdm845-rpmh-clk", .data = (ulong)&clk_rpmh_sdm845},
++	{ .compatible = "qcom,sdm670-rpmh-clk", .data = (ulong)&clk_rpmh_sdm670},
++	{ .compatible = "qcom,sdx55-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx55},
++	{ .compatible = "qcom,sdx65-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx65},
++	{ .compatible = "qcom,sdx75-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx75},
++	{ .compatible = "qcom,sm4450-rpmh-clk", .data = (ulong)&clk_rpmh_sm4450},
++	{ .compatible = "qcom,sm6350-rpmh-clk", .data = (ulong)&clk_rpmh_sm6350},
++	{ .compatible = "qcom,sm8150-rpmh-clk", .data = (ulong)&clk_rpmh_sm8150},
++	{ .compatible = "qcom,sm8250-rpmh-clk", .data = (ulong)&clk_rpmh_sm8250},
++	{ .compatible = "qcom,sm8350-rpmh-clk", .data = (ulong)&clk_rpmh_sm8350},
++	{ .compatible = "qcom,sm8450-rpmh-clk", .data = (ulong)&clk_rpmh_sm8450},
++	{ .compatible = "qcom,sm8550-rpmh-clk", .data = (ulong)&clk_rpmh_sm8550},
++	{ .compatible = "qcom,sm8650-rpmh-clk", .data = (ulong)&clk_rpmh_sm8650},
++	{ .compatible = "qcom,sm8750-rpmh-clk", .data = (ulong)&clk_rpmh_sm8750},
++	{ .compatible = "qcom,x1e80100-rpmh-clk", .data = (ulong)&clk_rpmh_x1e80100},
+ 	{ }
+ };
+-MODULE_DEVICE_TABLE(of, clk_rpmh_match_table);
+ 
+-static struct platform_driver clk_rpmh_driver = {
+-	.probe		= clk_rpmh_probe,
+-	.driver		= {
+-		.name	= "clk-rpmh",
+-		.of_match_table = clk_rpmh_match_table,
+-	},
++U_BOOT_DRIVER(clk_rpmh) = {
++	.name = "clk-rpmh",
++	.id = UCLASS_NOP,
++	.probe = clk_rpmh_probe,
++	.of_match = clk_rpmh_match_table,
++	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+ 
+-static int __init clk_rpmh_init(void)
+-{
+-	return platform_driver_register(&clk_rpmh_driver);
+-}
+-core_initcall(clk_rpmh_init);
+-
+-static void __exit clk_rpmh_exit(void)
+-{
+-	platform_driver_unregister(&clk_rpmh_driver);
+-}
+-module_exit(clk_rpmh_exit);
+-
+ MODULE_DESCRIPTION("QCOM RPMh Clock Driver");
+ MODULE_LICENSE("GPL v2");
 
-Casey Connolly <casey.connolly@linaro.org>
+-- 
+2.55.0
 
