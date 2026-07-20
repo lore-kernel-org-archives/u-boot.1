@@ -1,103 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF78C44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6FF5C44529
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:10:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0316480DB2;
-	Mon, 20 Jul 2026 18:10:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8559D4066E;
+	Mon, 20 Jul 2026 18:10:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XbK4VfzRg59n; Mon, 20 Jul 2026 18:10:19 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OC9i48IjJMf5; Mon, 20 Jul 2026 18:10:23 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 597B180D92
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F01D640707
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571016;
-	bh=L62KcZJMZM5fYllfbi5oyR5Nu1iE7a44Kfhk46KYCJk=;
+	d=lists.u-boot-project.org ; s=default; t=1784571023;
+	bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=lbax6W0a6MUh/2ZTR9S+JI4dfcYygOVk6tATv+2/esnXz7ag20zHI/rv6H0txwiWn
-	 /sXvnhhuRG04L9yKYHqQYxaaJ9jO80Uw6BKA2u1zk9TBT593wJbF1At5UQGR5wOlFu
-	 bPPx368QlBZcbMMU53MDUnScr8OzDaEHUKi7v3AJIZhYKfFO1J70CrMOJM6KEsWXjj
-	 Eokj9AWImrU8nVH8YsD+U8uD2q49psq/y1M2gT+tjwCBHLDegmwc3pZ/4pC6yckOsq
-	 LTQha14A8cEjboc0py6GMlOZIAlHdxExJJiNd8wIsXQjrjsk9XdEHZ3gedG09N0vr+
-	 M12iXQCCwtUYQ==
+	b=k0RgKsfOjPkH1FHUeES/zXnRhbrz13/DdDsYlHOV835rjge4u676cDTYvoZpwhHik
+	 +eZ3F14eHMdDLANNxesXV9v2bB+/Nd6PZgnWJYHLqn8sijBk5ou3TISWdjjMOOGvn4
+	 solgTsF4SXIpKsHRJFGv1+9PLsEai58m6R211s9PfdOrqO2wNMOleUnnEfWl/M/+jK
+	 ADs8uMuGHRsJic0ZXdSrVBa2YitJQdJfjuJ1S3s0m2yWgn8Kx8869zBLi7q8cvJqzi
+	 qgKdSIhik6Ziq44pJoUMbh5W3QCv9BhXcOGleQPKq9YrvmwJS3NC1G+MxOd4EYw8Zc
+	 xiPcnfERqmF6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 597B180D92;
-	Mon, 20 Jul 2026 18:10:16 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id CFDDA1A33
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F01D640707;
+	Mon, 20 Jul 2026 18:10:22 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 61BFC1DF3
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C154B40136
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5436160716
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id T9wXPKT31mn9 for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 6DBC340165
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6DBC340165
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6DBC340165
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xZ7hmSOszMeF for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=casey.connolly@linaro.org;
+ receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 399746071F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 399746071F
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 399746071F
  for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B569E84A51; Mon, 20 Jul 2026 18:41:59 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 3666A849BC; Mon, 20 Jul 2026 18:41:26 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78D818493F
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:57 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-49557167508so19205215e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:57 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 19F678484A
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:41:24 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4954df200ddso17635205e9.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:41:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565717; x=1785170517;
+ d=1e100.net; s=20251104; t=1784565683; x=1785170483;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=L62KcZJMZM5fYllfbi5oyR5Nu1iE7a44Kfhk46KYCJk=;
- b=ealMfC/QENHMnyxgSCd17FsGNGhXuNmqco1f9rBXi7kz9ahe/w9j5EiPkid+eyqvDa
- kOEtMNEes+QfSxXIV7VrP8Onhtc2tnjXqp+8kI/+JoI9eWabOFygE95kxUigBWzBqpbG
- D7kgqFm9FD735/5F99i8lS2I26uvIirsk6qDhlDE3fajin5IkL+JQI8hYLYlPzmvlAkr
- /mTbfbYPHk1aThLal/lFJABIpt03o0E3ErdokNapScjAVtyJkXcbID2t881YN8t828Zu
- 8epYTDWR1IX5U13c4uU+dQvYVDupjnyOxSPrYR6UhgSYf08H4qySeqzuYH6VZPqAuJ0v
- yXPQ==
-X-Gm-Message-State: AOJu0YwwWBdWtuKfHHGBQQltEmuQQHLmO5NUKS8dWWigqPAr3HWQkO+P
- rx3VGWo7SiNhExZWc8fzUFMchV4YLNO3x++DgyNNQybak5VEoM39weyeocyPKiyXBIQ=
-X-Gm-Gg: AfdE7clr4Su4xWGP+9W/c2JHWVaMboI1l3J/AmLKT+f6LsvoLbIHnoBl00BxBjl1kDi
- u6tyMBZsT/j7ys7tLg7WX4M5M1mD1U+GlL56aDyJVHhsFM/limSjf/Rb7elcWT2UqCarkxIWPbH
- oi6a/JUi1q/j4Qw7VoyodkLZ6nrikWgyoBk4DS4FJMYxcFJ80N79bDSoboICRVZDg5A+6AlwKra
- x6lB6PYAtwULp3XVViSDwBiVH7DMLfUOfb5mWsso9a5EBlUbrYxCxRHonivCy7B++H7+1a9ZLKl
- Stw1muelHSvu6g1MfDukse+zlZQNVg+A9aPT5Q+kzyJ4As2qvaMfSGZudeJ0qX5lBT9sP8nZRJP
- YL7Z0tLUc/zRECaDsM9V18TjAclC6Jfnl628vwmx9NGNQMpFEvYLbRPkp6mect1JfcoX/vElV33
- R78r1RCZzPLtUrwhZAf95MNOKdsF/4CWpX3Lk6Di2o
-X-Received: by 2002:a05:600c:5850:b0:495:406f:dff6 with SMTP id
- 5b1f17b1804b1-4954a4106ddmr120850085e9.33.1784565716833; 
- Mon, 20 Jul 2026 09:41:56 -0700 (PDT)
+ bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
+ b=DqPXIdTACFB8s2OqKPHju5DauCT0ayBj/L0WKldHfFWTnUohtUsf+TfN98yY3mxCtv
+ hl2EctDVOB0LC24UNxpcfnB4euN/Qp3FcMnmKTa86OVprqDOSiDBi07syRvwScxdrYSM
+ gIcidMh54cWNcMfoR0EEKDaYmql+2qrUsgnM7Ae3uCEleotkDX+JePm5WnG2wTfnTaAm
+ zGSIWGT93iKGaiUmpIppvOA81h49JIeHRD1oSUCG1SOpSgbRtbD+ZIekpc1qKVnbzgeL
+ eV4iqsKs2UXQMTT58Pj7FOCrkicVbfxAKS8gPqJjuKISt1CCHDXKMlEZdQioHrR//RAu
+ h3BQ==
+X-Gm-Message-State: AOJu0Yw/knbrU25qrzsCrHjhJ/08j8N/hOCp/WBHTQjx9WaliuXhDB98
+ VyExdl/Ltm8EbkCZMa4Y1ma4U9oxFhvldgXaj0eJdwoGL9UVlp92+A3+SlyUaBk57jw=
+X-Gm-Gg: AfdE7cliYRKsLtT2cugym8nyZ44lmMzNjQBIPzLgrg5+1ISOBr0yj8E0tEm3T+9ndol
+ YcMbwPJBK0gfhRrj+Ddg+yMd6JkWO88iKQiaxmrpGWPEuMD2wwTmhHKL2QZIItXTDdxJbPjEJmK
+ f9ieGz22GkdA69GOrIOakx7uNzJlUcgPosOXu73OUsrPRbd0SIJJf5oomWa1tevjXj4qZ0WFx67
+ kydUfHNuZZjQmAiSoa8IlNo58N1oTrdxTS298hkZ3OLupiz3i2bogPMcIRh1XYphtmKrqMi1eGF
+ ZtOq7TvnKXyrNIihhMs/Qqa7m3nGp41RFWGLkntMIqyVsmpxXk9ihuq+wcZMOZRittM7tSZzTCX
+ 3AS2HmuNeghPwQXeQWSgz/xAvlphQno+0WsJ81bhMqoRStV9ecDrQ8dRHQGAns/5j/m95vicNC1
+ tgTMn8LBGoeCS2N9cDKIc0Zb2tB/FjmQ==
+X-Received: by 2002:a05:600c:3baa:b0:493:b730:8d78 with SMTP id
+ 5b1f17b1804b1-4954a514007mr206346065e9.31.1784565683505; 
+ Mon, 20 Jul 2026 09:41:23 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.53
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.41.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:41:54 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:40:53 +0100
-Subject: [PATCH 26/36] clk/qcom: move existing clock drivers to clk/qcom/basic
+ Mon, 20 Jul 2026 09:41:22 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:40:41 +0100
+Subject: [PATCH 14/36] clk/common: add CCF_FULL support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-26-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-14-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -146,44 +145,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9567;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4353;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=z9SffBjeVfnijsq7n2pdL3PlnTUsXLMeHI6g1tsajSY=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+E62zX3fy/wtRDpViwOJaIYTXJjl+dyYOeO
- PXRV68y9SqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhAAKCRAFgzErGV9k
- tqoiD/0c7VGYU5OF8zqRSZplTUD6loVvcEa1s/kAgrz5qEDSo3d02meTr7lIbANq4jZEo5kS/iw
- pLLn9igapj9Mkk836vAacbAikNLimM8cMYHaLF6lgQo6z0XI1kxyqmIdeMTZBt08YavuWnZxcYk
- 19rovOl8/nx1YsQ+cSgnE0JqukAN2M0AO06HVoIrtcgON2zXd14LXNWfX1A6bxVHxdeu7CJ/cjt
- TZZvgqVrqqLpp5TXno4vqSK/sL953i/luw/as/s/3W+Sfyyiq2L8tFJqTF9xsHfPxUo1PN0jM33
- j1t5M2NTLlyFIxR/HKpYKxeOXIbSP91XNplHrJe/QJc49r8r4FJ4YNtdf/I3/ZtEQ1eKguJSlIY
- cqT8FId0x2qAFITnNKN4KNkRCQy04zpQxc5nTBqVmx6PNgxMlwSjmIuEyCfISQV5BnNAxkVllZI
- +JsAKn7k/CeqJHmbj0fXrG3YBJUu0CWqQl1u71/Rn3tBX49IRpnrv8Dc+AvqwyArbu2dgc2DM/G
- Ux835g3arEwRxnXASwsC4etFXrSFXgT57F+YVQytMA6MHLw8lveWPCUGzYWsDUxeMmOdoGJ4f7j
- 3FDqq2GCHGGY/O3QwLXIMewi+KX0idYcgplqDXJxRu+oeo5nhODro/AXi5eodIjvoKxlWErrLJQ
- jZxHxYJWB9co3yA==
+ bh=DkxGnpemrFJ4DESGb2/CIw06B19pgadx2pvnR5kdV9s=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+DSz9sFzt/GVgPg6XyZSggFTpGKa/WwrIjC
+ YaHNvkMphiJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PgwAKCRAFgzErGV9k
+ tuVoD/0dxY0VCuavqDf/rrgV96bOvW214dW2ppchfcF/v7bG447VypiPJ73nO6SKkOp2QfJFGRy
+ oeFhMxMg7djYiHKHoNUzwR+R0P4s7Z0fWRusp2YNv0R3jWAUORMlTMn/RuybPodalE+Qdqw8N4q
+ 3ouqP4LWLH0epkfbJYp9GR+OGmUdmgHgcG2J/FhmX8xj3cZVvr+E0u8NFQ3YISKIhwYIPz8rL0R
+ +f41R2U1cOKb20ZldEJQXa31+rAzqtX4VTdGFfbD3YZLH88IwI73ckGK/aZ+qq8XxSTVBI/Pjhu
+ SEt8p0g/mFuf5HmayG3coHjKMqkZ+jUmnNJxGx1SL90XR+arllL83Wn0i1TYWUtb3PUcifllfx+
+ BJ51mRCXul63cvve1kvbffFpKvIYzXMAG7vRxrccIwWnmxE1qrvB9YlR02wWt8icRN1dD+MEI5u
+ /xAyZ3nh+OgSG7FMRD0jnBk+/gmyTyLsQ+xPoh8q6wUZX6CKHTogHy4Bj69ERVib1iiTUnlChf3
+ y4qgsd+DD02ipL/X+3LvYSKIC8PBGbwumCfucL5UpZdTbXOqbIeW1bL8R9ES4F4saUOK2102RWT
+ pWDgh8mOwmMocPr6TnfPd5G6L6mrNpZYShAGxIMHkizqgOy2z6rn3NBjxP+n0TG4fDNLZJoonlI
+ s9vBsTfUwjV47pQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565717; x=1785170517; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565683; x=1785170483; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=L62KcZJMZM5fYllfbi5oyR5Nu1iE7a44Kfhk46KYCJk=;
- b=VAB3KMzBIErU1WfbzTUu/TnHvvWEz6UThwwdPGrX2wHAYMIkiW2DXPIfE4DgFiy92x
- 61w9lEbcDrnVSKK+RfFXzHO79jjSA3HJeW79scIXMEGXMmueRkB9k7MHRyVWv7O3XIz5
- BvaMr0SVxwzzhC8VWlnzoDFi8jpodbHWM2TFGgmiRF6zN6YKUyR4DcjqLW8479EA1O95
- jG8PB8VvmuiRdisdaJ7PVueIewaHqteEiLX4B/BFQdRYWwHKkQp0w3UEGaTDLKETFszb
- in3ESjPeQVB4fZXVhfaoZ3CVkKR/khtibuS65pIgWl/JInNXxU7Q0oUEBSpiZJXLlsqO
- pgBA==
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=D3AlHdiYSL6VJWWkYTDBsECcn24qaXE5oBvz5keOQWQ=;
+ b=bTJebHl+El7rBd1mnHkqYBQN/ufYug9wzEmJ9uOm0foOmhNH5fWyQeyfe1vlm6H4ec
+ GRGdxVtDs4HD8nXAa6xPOsPZreuXaNAqmbz2mLqCVadtMWmhcfCDYmtAnMP4ld9Kf5DZ
+ gh7fVvaZUX8NXXltf7eJYk/Nlu3eSNAsPks0eOUYHGs7yIJfacMH4d8K4p72nDkmik/c
+ ECfrtUcQ+jAENKPxG6he8lYYgzs2B/uR/Ta9sItX3Et6NIHwI8gBRrLEH2myDYcNZb+N
+ ieMxwIHwM6oz4m/pQDzFrMpPOl5XdcVbxLGeSGwDh1JuO6gPnNCIxS9BXXESCEg9Jgmv
+ kk/w==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=VAB3KMzB
+ header.a=rsa-sha256 header.s=google header.b=bTJebHl+
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -191,7 +190,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="VAB3KMzB"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="bTJebHl+"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -209,207 +208,156 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-These drivers will be deprecated and removed in favour of CCF.
+With CCF the implementation of functions like clk_get_* and
+clk_set_defaults() changes. Introduce support for calling the CCF
+implementations when it is enabled. When disabled this dead code will be
+compiled out.
+
+Additionally, adjust the Makefile so that we no longer build
+clk-uclass.c when CCF is enabled. This removes all the conflicting
+implementations of clk_enable() and friends as well as ensuring that
+we don't even try and probe any UCLASS_CLK drivers as they are not
+supported.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/qcom/Makefile                     | 31 ++++++---------------------
- drivers/clk/qcom/basic/Makefile               | 28 ++++++++++++++++++++++++
- drivers/clk/qcom/{ => basic}/clock-apq8016.c  |  0
- drivers/clk/qcom/{ => basic}/clock-apq8096.c  |  0
- drivers/clk/qcom/{ => basic}/clock-ipq4019.c  |  0
- drivers/clk/qcom/{ => basic}/clock-ipq5424.c  |  0
- drivers/clk/qcom/{ => basic}/clock-ipq9574.c  |  0
- drivers/clk/qcom/{ => basic}/clock-milos.c    |  0
- drivers/clk/qcom/{ => basic}/clock-qcm2290.c  |  0
- drivers/clk/qcom/{ => basic}/clock-qcom.c     |  0
- drivers/clk/qcom/{ => basic}/clock-qcom.h     |  0
- drivers/clk/qcom/{ => basic}/clock-qcs404.c   |  0
- drivers/clk/qcom/{ => basic}/clock-qcs615.c   |  0
- drivers/clk/qcom/{ => basic}/clock-qcs8300.c  |  0
- drivers/clk/qcom/{ => basic}/clock-sa8775p.c  |  0
- drivers/clk/qcom/{ => basic}/clock-sc7280.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sdm845.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm6115.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm6125.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm6350.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm7150.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm8150.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm8250.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm8550.c   |  0
- drivers/clk/qcom/{ => basic}/clock-sm8650.c   |  0
- drivers/clk/qcom/{ => basic}/clock-x1e80100.c |  0
- 26 files changed, 34 insertions(+), 25 deletions(-)
+ drivers/clk/Makefile     |  2 +-
+ drivers/clk/clk-common.c | 61 +++++++++++++++++++++++++++++++++++++-----------
+ 2 files changed, 49 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index 1adca029b110..71b0bf7f44a7 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -1,28 +1,9 @@
- # SPDX-License-Identifier: GPL-2.0+
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index ee06bffaef72..4bec2e4c61a8 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -3,9 +3,8 @@
+ # Copyright (c) 2015 Google, Inc
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
  #
--# (C) Copyright 2023 Linaro
-+# (C) Copyright 2026 Linaro
  
--obj-y += clock-qcom.o
--obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
--obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
--obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
--obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
--obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
--obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
--obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
--obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
--obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
--obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
--obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
--obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
--obj-$(CONFIG_CLK_QCOM_SC7180) += clock-sc7180.o
--obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
--obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
--obj-$(CONFIG_CLK_QCOM_SM6125) += clock-sm6125.o
--obj-$(CONFIG_CLK_QCOM_SM6350) += clock-sm6350.o
--obj-$(CONFIG_CLK_QCOM_SM7150) += clock-sm7150.o
--obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
--obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
--obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
--obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
--obj-$(CONFIG_CLK_QCOM_X1E80100) += clock-x1e80100.o
-+ifndef CONFIG_CLK_CCF_FULL
-+obj-y += basic/
-+else
-+obj-y += ccf/
-+endif
-diff --git a/drivers/clk/qcom/basic/Makefile b/drivers/clk/qcom/basic/Makefile
-new file mode 100644
-index 000000000000..1adca029b110
---- /dev/null
-+++ b/drivers/clk/qcom/basic/Makefile
-@@ -0,0 +1,28 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# (C) Copyright 2023 Linaro
+-obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
+ obj-$(CONFIG_$(PHASE_)CLK) += clk-common.o
+ obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
+ obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
+ 
+@@ -15,8 +14,9 @@ obj-y += ccf/
+ else
+ # U-Boot basic fixed clocks, full CCF has a
+ # different and incompatible implementation
+ obj-y += basic/
++obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
+ # U-Boot/IMX "micro" CCF port
+ obj-$(CONFIG_$(PHASE_)CLK_CCF) += uccf/
+ endif
+ 
+diff --git a/drivers/clk/clk-common.c b/drivers/clk/clk-common.c
+index 7f30ad496da2..a24878d7302e 100644
+--- a/drivers/clk/clk-common.c
++++ b/drivers/clk/clk-common.c
+@@ -22,8 +22,10 @@
+ #include <linux/bug.h>
+ #include <linux/clk-provider.h>
+ #include <linux/err.h>
+ 
++#include <linux/clk/clk-conf.h>
++#include "ccf/clk.h"
+ #include "clk-common.h"
+ 
+ #if CONFIG_IS_ENABLED(OF_REAL)
+ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
+@@ -32,16 +34,23 @@ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
+ }
+ 
+ int clk_get_by_index_nodev(ofnode node, int index, struct clk *clk)
+ {
+-	struct ofnode_phandle_args args;
+-	int ret;
++	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
++		struct clk_hw *hw;
+ 
+-	ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
+-					     index, &args);
++		hw = of_clk_get_hw(node, index, NULL);
++		return clk_hw_create_clk_uboot(clk, hw);
++	} else {
++		struct ofnode_phandle_args args;
++		int ret;
+ 
+-	return clk_get_by_index_tail(ret, node, &args, "clocks",
+-				     index, clk);
++		ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
++						index, &args);
 +
-+obj-y += clock-qcom.o
-+obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
-+obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
-+obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
-+obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-+obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
-+obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
-+obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
-+obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
-+obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-+obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
-+obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
-+obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
-+obj-$(CONFIG_CLK_QCOM_SC7180) += clock-sc7180.o
-+obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
-+obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
-+obj-$(CONFIG_CLK_QCOM_SM6125) += clock-sm6125.o
-+obj-$(CONFIG_CLK_QCOM_SM6350) += clock-sm6350.o
-+obj-$(CONFIG_CLK_QCOM_SM7150) += clock-sm7150.o
-+obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
-+obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
-+obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
-+obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
-+obj-$(CONFIG_CLK_QCOM_X1E80100) += clock-x1e80100.o
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/basic/clock-apq8016.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-apq8016.c
-rename to drivers/clk/qcom/basic/clock-apq8016.c
-diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/basic/clock-apq8096.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-apq8096.c
-rename to drivers/clk/qcom/basic/clock-apq8096.c
-diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/basic/clock-ipq4019.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-ipq4019.c
-rename to drivers/clk/qcom/basic/clock-ipq4019.c
-diff --git a/drivers/clk/qcom/clock-ipq5424.c b/drivers/clk/qcom/basic/clock-ipq5424.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-ipq5424.c
-rename to drivers/clk/qcom/basic/clock-ipq5424.c
-diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/basic/clock-ipq9574.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-ipq9574.c
-rename to drivers/clk/qcom/basic/clock-ipq9574.c
-diff --git a/drivers/clk/qcom/clock-milos.c b/drivers/clk/qcom/basic/clock-milos.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-milos.c
-rename to drivers/clk/qcom/basic/clock-milos.c
-diff --git a/drivers/clk/qcom/clock-qcm2290.c b/drivers/clk/qcom/basic/clock-qcm2290.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcm2290.c
-rename to drivers/clk/qcom/basic/clock-qcm2290.c
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/basic/clock-qcom.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcom.c
-rename to drivers/clk/qcom/basic/clock-qcom.c
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/basic/clock-qcom.h
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcom.h
-rename to drivers/clk/qcom/basic/clock-qcom.h
-diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/basic/clock-qcs404.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcs404.c
-rename to drivers/clk/qcom/basic/clock-qcs404.c
-diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/basic/clock-qcs615.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcs615.c
-rename to drivers/clk/qcom/basic/clock-qcs615.c
-diff --git a/drivers/clk/qcom/clock-qcs8300.c b/drivers/clk/qcom/basic/clock-qcs8300.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-qcs8300.c
-rename to drivers/clk/qcom/basic/clock-qcs8300.c
-diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/basic/clock-sa8775p.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sa8775p.c
-rename to drivers/clk/qcom/basic/clock-sa8775p.c
-diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/basic/clock-sc7280.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sc7280.c
-rename to drivers/clk/qcom/basic/clock-sc7280.c
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/basic/clock-sdm845.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sdm845.c
-rename to drivers/clk/qcom/basic/clock-sdm845.c
-diff --git a/drivers/clk/qcom/clock-sm6115.c b/drivers/clk/qcom/basic/clock-sm6115.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm6115.c
-rename to drivers/clk/qcom/basic/clock-sm6115.c
-diff --git a/drivers/clk/qcom/clock-sm6125.c b/drivers/clk/qcom/basic/clock-sm6125.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm6125.c
-rename to drivers/clk/qcom/basic/clock-sm6125.c
-diff --git a/drivers/clk/qcom/clock-sm6350.c b/drivers/clk/qcom/basic/clock-sm6350.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm6350.c
-rename to drivers/clk/qcom/basic/clock-sm6350.c
-diff --git a/drivers/clk/qcom/clock-sm7150.c b/drivers/clk/qcom/basic/clock-sm7150.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm7150.c
-rename to drivers/clk/qcom/basic/clock-sm7150.c
-diff --git a/drivers/clk/qcom/clock-sm8150.c b/drivers/clk/qcom/basic/clock-sm8150.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm8150.c
-rename to drivers/clk/qcom/basic/clock-sm8150.c
-diff --git a/drivers/clk/qcom/clock-sm8250.c b/drivers/clk/qcom/basic/clock-sm8250.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm8250.c
-rename to drivers/clk/qcom/basic/clock-sm8250.c
-diff --git a/drivers/clk/qcom/clock-sm8550.c b/drivers/clk/qcom/basic/clock-sm8550.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm8550.c
-rename to drivers/clk/qcom/basic/clock-sm8550.c
-diff --git a/drivers/clk/qcom/clock-sm8650.c b/drivers/clk/qcom/basic/clock-sm8650.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-sm8650.c
-rename to drivers/clk/qcom/basic/clock-sm8650.c
-diff --git a/drivers/clk/qcom/clock-x1e80100.c b/drivers/clk/qcom/basic/clock-x1e80100.c
-similarity index 100%
-rename from drivers/clk/qcom/clock-x1e80100.c
-rename to drivers/clk/qcom/basic/clock-x1e80100.c
++		return clk_get_by_index_tail(ret, node, &args, "clocks",
++					index, clk);
++	}
+ }
+ 
+ int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
+ {
+@@ -77,9 +86,18 @@ bulk_get_err:
+ }
+ 
+ int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
+ {
+-	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
++	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
++		struct clk_hw *hw;
++
++		hw = of_clk_get_hw(dev_ofnode(dev), 0, name);
++		if (IS_ERR(hw))
++			return -ENOENT;
++		return clk_hw_create_clk_uboot(clk, hw);
++	} else {
++		return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
++	}
+ }
+ #endif /* OF_REAL */
+ 
+ int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
+@@ -139,15 +157,19 @@ int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
+ 			return 0;
+ 
+ 	debug("%s(%s)\n", __func__, dev_read_name(dev));
+ 
+-	ret = clk_set_default_parents(dev, stage);
+-	if (ret)
+-		return ret;
++	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
++		return of_clk_set_defaults(dev_ofnode(dev), false);
++	} else {
++		ret = clk_set_default_parents(dev, stage);
++		if (ret)
++			return ret;
+ 
+-	ret = clk_set_default_rates(dev, stage);
+-	if (ret < 0)
+-		return ret;
++		ret = clk_set_default_rates(dev, stage);
++		if (ret < 0)
++			return ret;
++	}
+ 
+ 	return 0;
+ }
+ 
+@@ -217,4 +239,17 @@ int clk_disable_bulk(struct clk_bulk *bulk)
+ 	}
+ 
+ 	return 0;
+ }
++
++#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
++long clk_get_parent_rate(struct clk *clk)
++{
++	struct clk *pclk;
++
++	if (!clk)
++		return -EINVAL;
++
++	pclk = clk_get_parent(clk);
++	return clk_get_rate(pclk);
++}
++#endif
 
 -- 
 2.55.0
