@@ -4,113 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B8A3C44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 05:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0BFC4451B
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 05:36:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9ED882991;
-	Mon, 20 Jul 2026 07:24:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
+	by phobos.denx.de (Postfix) with ESMTP id 14FF582991;
+	Mon, 20 Jul 2026 07:36:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="tsPRRvB8";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="iSadSG0p";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gd7pOKM0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 031A883E76; Mon, 20 Jul 2026 07:24:00 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 6220483E76; Mon, 20 Jul 2026 07:36:41 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA6A580517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 07:23:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nokia.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=juuso.rinta@nokia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hp1BMUP7K4Kd+30EuyBZQSMtvqqrVsscthLCIDgvVZOM1lRpJSd9SzxVrZxBuG4K9vOoV4UGELbv35vQHkW6JQ+UhqfuAX/UOLS+vLs1b2w5Fsww9/Lu08rVOqKkn2iY2oiEM2cro9+k7tOfzhq2j7v1HQnoyqy61GYVXr7MfkbxHTvjnfP5S8ZbY6MSVJSVaarESfKZdfd2fODbPlpyUo9+dVsMwdCJVp+FR54EA6x+REY04hOxP2VXUVg01vWSMOjqXVuMIdsdOcce9jd68N8KiVWjv2TuUP2GBFgS6t9L2K/Qpcy+oQqtypZFi/WX8zO3AC6rZBMbN9F5ldP+2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OnbPUxIG1Jp0wN6nN+CnylVRwsMdwrKxYZpbVU5EO+I=;
- b=AzjhBBfQllN22Fx5kIGkDqs6bpg1q+6UfMz6T8R7JK1eqjTII2xh9bYfGR0WpJQIOthXTHRw/R3y6KQKiyLa6/dADZ1D+ACCUWSixzobcnKdCpBL8OTPVv0Hhfa9f51yHfpK3YYSU5oqej5f+cy1kGs4iivf4lST7nLhDxrlYoZwKlPqiKzj/S0ErUH/yJQds02oM6YsSPFCQFPDAg8XYpjRXu8zxqvoh6dhUfaqa/MmeUqqNOvyChmDU+7tb9Qa9QAmqvyAND8oQVQBzvdQWyFv2N/Rj5cTnSfs3yWSoVxpk+pin0L5LATMooMeqUVF3wDHSuw5p+9y/5iF+7znIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 131.228.6.100) smtp.rcpttodomain=chromium.org smtp.mailfrom=nokia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nokia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OnbPUxIG1Jp0wN6nN+CnylVRwsMdwrKxYZpbVU5EO+I=;
- b=tsPRRvB8HyxhmlSorrAlmDPP+zq+BWiIVJnK938r/NWcVkymAcJlJix9+MuY9k36TjGashiKXc0oKHuD2grdZFr8Zm/6XhNl8tezyX47JPrj8cJzs6UbrzitxzNYyx1R4heEY7tbgnjkV46vncstGPDNEgZoomBHuZqFT3Fsp96Sx2sUQKE0k3jwpgbk9YQb2yNHqTfdAZzC3TYa0/QCNtnBQb8neYUeCvju77MW7CB5cCh9dxdw6VYJxU5+Xrh7zmIzcgSQP6WUDlEP/+fFBVZH9dXMVhSnJv6J2cEmsLdQBZWzI66LYcMo/UVHe9HJi2ctWtm8mtrk8VzDoajKLA==
-Received: from AS4P189CA0009.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5d7::13)
- by GVXPR07MB11467.eurprd07.prod.outlook.com (2603:10a6:150:325::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.8; Mon, 20 Jul
- 2026 05:23:55 +0000
-Received: from AM4PEPF00025F96.EURPRD83.prod.outlook.com
- (2603:10a6:20b:5d7:cafe::4e) by AS4P189CA0009.outlook.office365.com
- (2603:10a6:20b:5d7::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.16 via Frontend Transport; Mon,
- 20 Jul 2026 05:23:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.6.100)
- smtp.mailfrom=nokia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nokia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
- 131.228.6.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=131.228.6.100; helo=fr711usmtp2.zeu.alcatel-lucent.com; pr=C
-Received: from fr711usmtp2.zeu.alcatel-lucent.com (131.228.6.100) by
- AM4PEPF00025F96.mail.protection.outlook.com (10.167.16.5) with Microsoft SMTP
- Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.0 via
- Frontend Transport; Mon, 20 Jul 2026 05:23:55 +0000
-Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
- (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
- by fr711usmtp2.zeu.alcatel-lucent.com (Postfix) with ESMTP id A6ECE680033;
- Mon, 20 Jul 2026 08:23:54 +0300 (EEST)
-From: juuso.rinta@nokia.com
-To: Simon Glass <sjg@chromium.org>
-Cc: Juuso Rinta <juuso.rinta@nokia.com>, u-boot@lists.denx.de,
- Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Aaro Koskinen <aaro.koskinen@nokia.com>
-Subject: Re: [PATCH 1/6] watchdog: wdt-uclass: add get_timeout operation and
- helper
-Date: Mon, 20 Jul 2026 08:23:24 +0300
-Message-Id: <20260720052324.1362574-1-juuso.rinta@nokia.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <CAFLszThP7wTW6h8__pwnK2t5vgU0fB4_M43y7F+TK_adKiyFbA@mail.gmail.com>
-References: <20260710-rinta-watchdog-gettime-v1-0-9a982fb93f49@nokia.com>
- <20260710-rinta-watchdog-gettime-v1-1-9a982fb93f49@nokia.com>
- <CAFLszThP7wTW6h8__pwnK2t5vgU0fB4_M43y7F+TK_adKiyFbA@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 31A5980517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 07:36:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66JNumbf853166
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 05:36:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=Z7jEZDLd8erVz5BWEld3D3Ks
+ oxmYkOu/rp2twG8w2Qg=; b=iSadSG0paj5vOIn7GpoJi4fqdZM7t6chI/PJeaIh
+ cVpxuRH5nT789Q94Fez0K+6bBuPorhvInyUt52jAWFqXQNHkPhdBkHehWvq4ulGJ
+ BKxjP9LFDdsOaTJwsGnvW+WHNKMuCIsHXqPo0561IKOkSE6hUv0UAMjbviOrmZ/M
+ KOlvCWVnpI/QlPaRF5YnnpOiK32EOpVEKsof5TGogqGrB8ET48o/TmB0Ygp/SFCE
+ ZCqx7a3sU/iQpprLrbzbPk2W1FkZm6vAjjXQCX7qWKB8ufY9UGcvk2gz0C1TsI77
+ l8FRPpM7RYObZ3qb6QSt/5hRiS6PRhqZ+Mq2P1KmGkaZJg==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2dc4hpk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 05:36:37 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-c9fe4c5eb39so6903198a12.1
+ for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 22:36:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784525796; x=1785130596; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Z7jEZDLd8erVz5BWEld3D3KsoxmYkOu/rp2twG8w2Qg=;
+ b=Gd7pOKM0kdLwFD+Ao5VKlwfgSUJ5w9tLiOAde3zh3n/nUEHfjhKn7BQ5rWcvdDF17e
+ xv+xfNlyje47O+kH2RNcqUSmjBH2azZQFEYXxr1XXVTqsGXQG7Czfig8sE1JQcxow1YY
+ QXkbkyThNg4YfecONn+uO6VWWFRk+yc3eLXawDy80UX/ws2xPhA+J2/v4jzlVqDDBvy3
+ 55w0BuqeP9VlyFqF7KXT16oygfwaAK9AoB3T7B77b7NytzFIczWz7zYIIfLbhpwtwMNQ
+ Fb2UCOjYcYie/+emNTwQ0N1IerloJb5nU5IY5a8eEvj579ChlcTG0/cr74+KFt3lkCqi
+ QmcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784525796; x=1785130596;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Z7jEZDLd8erVz5BWEld3D3KsoxmYkOu/rp2twG8w2Qg=;
+ b=LHUHwl3xHMjHPPqmsO9zxZonUCl7PicUulzkuU39tAfyU+mG56bQ8xc6dKSrVnFLfq
+ paAPJEr6UdgpcTz63tjrOLgkErWupZg30d027aPlUrZpLXQ+GJMnrYxHc3G1xkte/X26
+ jZBFXw7nuGz357co3OscPQbK2MuZhN+8Q59skrO6hHohYmTFUNZw6amKNF9ah8R7Fksc
+ 71HEQ3I3CVrnOgC9fx8Y4adCk3XLj4Punej5f6i/vylGPBGKdeUw7CIr1FxtZQPMth3W
+ ZhWTk6I8QN1paIBOLIUuUQ++fXfMNpPGcBHXL1aorGSSezkV9ecPxUIP/BpqFYnuJKoZ
+ WR4g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoTQ3VqBdkQVjwfyuQduCTpgAzgXqjLm9Bb2+cUkLdrY8fkDQ+bvQs40mik1NoS6xkNqSfaogc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywfiq1T7Qeafex/fS0LoCm5NNAzMezoiA1pYySLDP+0sSVnSIeT
+ SqVvBD+NG6IHiFP/0zCHMHmfBmfKnhPBHXhaAZ+L8mRMeviV8J0Bm0xGWBjlJwHwclPeatV6lgI
+ +GyA1/L5adRO+021XhJmHM80CuismTjAnnMJKvhO1ds0vUMPK+jWkUCl/
+X-Gm-Gg: AfdE7cnHveQV1zz1MxvmSzXuXX/0WJf+cbjsCJAK3hmm3iODHh9NUMKb2Q03faJyNVw
+ nB6UJ+DYV9GgRzo3uC1xkmmLDJk9T10tSsCCUD6C59N8D3zB7e8avtmcew6w2cnuxg7Zn1BmU6Z
+ EyCdolny9KhqbSIBGf9PWFwUVomMHIlC0e13iuGZT/q7BZkcuNgOwgOM8v+dU2RLmKQhjHEPbUF
+ fe/iKmZ2TWIwXz8qvo1+WYSzUvzMB4ABIyEN9X7edmrC2vsHt2y4o1VH7E+uFHXyslgjivGY/bT
+ A/mrQuwR3YYV1RPTy9Oeb/qAcq0iHbac3QGqGHJIJ8In34xKrcC4yCOZ2W0py61Q9WLsei9FMB2
+ jDNW4grQnIfTvJapbc9gji0cjQiZ7vGPh/qi6O+lTdhT4BN3TpcsY9xP7FMp7zOUZI/fn1WLMTh
+ uOuxKFPOlaceLlk3/xwOc2htCCbk8VgQ==
+X-Received: by 2002:a05:6a20:ae2f:b0:3bf:b68f:4685 with SMTP id
+ adf61e73a8af0-3c3ad7aa9efmr14063911637.23.1784525796546; 
+ Sun, 19 Jul 2026 22:36:36 -0700 (PDT)
+X-Received: by 2002:a05:6a20:ae2f:b0:3bf:b68f:4685 with SMTP id
+ adf61e73a8af0-3c3ad7aa9efmr14063882637.23.1784525796024; 
+ Sun, 19 Jul 2026 22:36:36 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-31429fdbd45sm32112360eec.12.2026.07.19.22.36.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Jul 2026 22:36:35 -0700 (PDT)
+Date: Mon, 20 Jul 2026 11:06:27 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Johan Jonker <jbx6244@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+Subject: Re: [PATCH v2] misc: qcom_geni: Add minicore support
+Message-ID: <al2z20ZrVAVl/RB9@hu-varada-blr.qualcomm.com>
+References: <20260716-minicore-v2-1-160af559b273@oss.qualcomm.com>
+ <178428299564.1171703.15456210253429165016.b4-review@b4>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00025F96:EE_|GVXPR07MB11467:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 60f92ba1-44c9-47a9-bc88-08dee61f17e1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|23010399003|376014|22082099003|18002099003|4143699003|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: 9xuBJ6pRLSdG8ocHMzo8jSUzdEibWQ+ulu2dqxjpiB5c70zeArCDpApD5zh/tnPpOhuzHuooH60PrF3zVokpgOM3XJziEMWcsISKEykJyWZHLqjvLgk0eQL/CYrb8q325UirociRs+gn91SqkXJTsdAsb634kkmXKr1FUZ1LN5TXHUywzvjESb3zMGYpYoOUYzO4c9zIWGSFRvJzSBtyqmjQOzbRP1SPQc0coi16zNJv7n9dn0vM76t0i2aFf2K4yCseCVRNVluaSlqzKTvlcmWsbB8L5KLoJSS358qlLUDC405qdD+0t0XHSfI3XjTlP7/Ox77d9eBYuRSiSCXwZDxNJGzgiuowzpX8ddtR0vxCkX9204k+l3SWn9wg0WAJaFnt4xfFA8o3eWWjfwPE/kapnF5X3HPE+qDBRb6555xoj0KxXYVlz+d9nF8CXIYeN3Ebljs4+yuE1a3VxUTmuTkGINXlWU1gtoc9ASPaWTaqibYdpeP9o3aCnq01cIWPXbABe3pw2kZeQmGesOGQBMadp3TXhzMtlF1MJJUqOaIvDlNUT04ar+c9pJ//w5T2nTMD0nb/FUcbWRbDMnzfp+W8WPPgt7GgULQbKJGUes/DMphRR+gDmNeriEmULl4doRorPaZU4b3tDY7U79BRfaJuN1/AZesnHe+g8K3jd7v+ieR0y6FkHaVa7k1fPI//8y7Y+3TADW1z/WpDR2fKnQ==
-X-Forefront-Antispam-Report: CIP:131.228.6.100; CTRY:FI; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:fr711usmtp2.zeu.alcatel-lucent.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(23010399003)(376014)(22082099003)(18002099003)(4143699003)(10067099003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: txbc0sxrvajDUJLfrUTMlXuDvsIQTMcs3JzQA1/p4+KvHwnSK0XJ5j4mLn1+P3Aapyd0JMZiljeIiDwlSPYZswddgqhM0GWHju4jgSIcocUgR9ut0EyctOZJi8kBzqqbTccBdCWbHh0EXNW53uVC1Vu12C4EZJjV2W+S4reDX9bUk0+R5TKU6bXOsPyhBI9ahDTFAeMW1Btjoqc/St/HGgY6bwcpDjK4m89PkusciQtGCkcgMUdi+/uP5SxFigJG2EJJSiFQUtFk4YuMF/du8cdVQ0kOFtZJYopYLDeQaKmfwc/uCLYNNRPHW3BjLHy1XaU+zXqZUxmxXgfDfmhi9fs9U2nNL97wYW48bgo+TFB4LWv36np+Pvol/DZV6oQayIq5BP4jHQHQ9W4HTTd+Pcuo75q+hiikvcRzKMy/acnNnbO9Y6lA06NBvwvMDbap
-X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 05:23:55.1284 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60f92ba1-44c9-47a9-bc88-08dee61f17e1
-X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.6.100];
- Helo=[fr711usmtp2.zeu.alcatel-lucent.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AM4PEPF00025F96.EURPRD83.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR07MB11467
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <178428299564.1171703.15456210253429165016.b4-review@b4>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA2MCBTYWx0ZWRfX2eEGR5OcrtDx
+ gMHOjcICf4ULWP99fxuP9jsYxAvTdngcYG6L8g/iJat/iCBxg6BtWg/Dblz8AlMffchVRmabN3J
+ VhhAyusnnGSEbuGEC8IJUjdpZ068RWA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA2MCBTYWx0ZWRfX6BGRZpDnuFNJ
+ 3jG8gVAJKfgJHpvFNUpQMekF2I6upTZyNL3NEeGQ3Z/W4D7tf6JHjio+kOZHl4+y594OYlIqTrw
+ 70+UPIMmvHNHX9apD22gu2a8IAuJx0w3XCxbklpelkqHld8YDe+J2uCEN6gDTbEF7A8w7RhY4iq
+ HuANDBM+NcZWZCvkTspccBZW1TQpkIBkHNiKtzIhTal2a08MEn1NwJFV08yXylGj9VBX95YqPYn
+ XxD3eCtGwGZbz3QbtSqBdZ7GrgfYLcM2LGSU39xFmSAzvtYi6KMHdwweKMABo+zpbxYRIRYHQOB
+ q9SAAOrmQ2T0B3EPFrc5G6eHVk+V+iASA/FDqChw9K0V5rD84sqdA2WrAMIbgZK7TOKvfo06wuf
+ GeMHqsi6/MVne0RRpbrACC7VjAUhZhwv+jeCRoXPFKAx3fnX13W0u9nT0UQ7BKYYTDU5hWGZSz8
+ aL0MKRbJFYLJQTrg6cQ==
+X-Proofpoint-ORIG-GUID: D2rIaSBkf4hUNOp-2a6mOTYCgSnX5-pd
+X-Proofpoint-GUID: D2rIaSBkf4hUNOp-2a6mOTYCgSnX5-pd
+X-Authority-Analysis: v=2.4 cv=FOQrAeos c=1 sm=1 tr=0 ts=6a5db3e5 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=OkA5tPPiBfA5EVN0eloA:9 a=CjuIK1q_8ugA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-19_08,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 adultscore=0 bulkscore=0 spamscore=0
+ malwarescore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607200060
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,30 +162,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Juuso Rinta <juuso.rinta@nokia.com>
+On Fri, Jul 17, 2026 at 03:39:55PM +0530, Neha Malcom Francis wrote:
+> On Thu, 16 Jul 2026 14:15:51 +0530, Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
+> > index a62ae6a2478..f3133f85885 100644
+> > --- a/drivers/misc/qcom_geni.c
+> > +++ b/drivers/misc/qcom_geni.c
+> > @@ -414,6 +468,9 @@ static int geni_se_of_to_plat(struct udevice *dev)
+> >
+> >  		if (proto == GENI_SE_INVALID_PROTO)
+> >  			plat->need_firmware_load = true;
+> > +
+> > +		if (readl(res.start + SE_HW_PARAM_2) & GENI_USE_MINICORES)
+> > +			plat->is_mini_core = true;
+>
+> Add IS_ENABLED(CONFIG_QCOM_GENI_MINICORE) to prevent accidental NULL
+> dereferencing in case CONFIG not set.
 
-Hi Simon,
+Not sure if I'm missing something. If plat was NULL, it would have crashed
+while doing 'plat->need_firmware_load = false' towards the beginning of the
+function itself.
 
-Thank you for the comments.
+> > diff --git a/include/soc/qcom/minicore.h b/include/soc/qcom/minicore.h
+> > new file mode 100644
+> > index 00000000000..9f2071ed86b
+> > --- /dev/null
+> > +++ b/include/soc/qcom/minicore.h
+> > @@ -0,0 +1,25 @@
+> > [ ... skip 16 lines ... ]
+> > +};
+> > +
+> > +#if IS_ENABLED(CONFIG_QCOM_GENI_MINICORE)
+> > +extern struct qup_mini_core_info qup_mini_cores[];
+> > +#else
+> > +struct qup_mini_core_info *qup_mini_cores;
+>
+> else #define qup_mini_cores NULL
 
-On 2026-07-15, Simon Glass wrote:
-> Assuming this is a static value, it might be more efficient (code size
-> and simplicity) to add a max_timeout_ms (max timeout in milliseconds)
-> uint to the per-device uclass-plat data - 0 could mean no limit, thus
-> allowing existing drivers to not set it.
+Ok.
 
-I agree, using a max_timeout_ms would make this patch series a bit simpler
-while still fixing the issue that motivated the series in the first place.
-In this case the wdt gettimeout subcommand would no longer make sense
-so I could also drop that. That's fine though, as the print we get from
-calling wdt_start() is the more important thing here, the subcommand was
-more of a by-product of the approach I had.
+> > diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
+> > index a67a93c72a4..df8a615b46b 100644
+> > --- a/include/soc/qcom/qup-fw-load.h
+> > +++ b/include/soc/qcom/qup-fw-load.h
+> > @@ -14,6 +14,7 @@
+> >  #define GENI_INIT_CFG_REVISION		0x0
+> >  #define GENI_S_INIT_CFG_REVISION	0x4
+> >  #define GENI_FORCE_DEFAULT_REG		0x20
+> > +#define GENI_OUTPUT_CTRL		0x24
+>
+> Redefinition from geni-se.h ?
 
-I will work out a v2 where drivers set their timeout value to the per-device
-plat data during probe time, and wdt_start() considers max_timeout_ms value
-of 0 as "limitless" or basically that the feature is not supported, in which
-case we stick to the current approach. I'll build and run a few tests. v2 to
-be delivered this week.
+Will remove.
 
-Best regards,
-Juuso
+Thanks
+Varada
