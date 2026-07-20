@@ -1,102 +1,102 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283A4C44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:09:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98009C44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:09:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E53B680D58;
-	Mon, 20 Jul 2026 18:09:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 57CD06073A;
+	Mon, 20 Jul 2026 18:09:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NMBQzBIoHSgQ; Mon, 20 Jul 2026 18:09:55 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IiASQH3I82MX; Mon, 20 Jul 2026 18:09:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D672180D32
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 22FCB606ED
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784570995;
-	bh=JeAGNJWMrw5Exle1NK4OypNjvUkCc3w2k6WuYdU89Lk=;
+	d=lists.u-boot-project.org ; s=default; t=1784570996;
+	bh=SiMvf/w1IPZ1Z6IocnW8dvZXWVcg+hS1rmyrq7/K/y0=;
 	h=Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=y+DwuviGjS5uGoxxJ8g3GiD4GVmJGzrkrec2N08ibFVkZMsCm4iAp9JbPnoDwHhrX
-	 2L+wOWDPkT+WrfbzDkUvHklK7fkeV/QmcejvYXbV7fgQs1v+rvE8CEo8y1em7u6VMZ
-	 Qa43z/1i41sSGQ8pQ2mkstMevyfwWx02J5bi6XVyl6bxP5yeXDTfaI3pLEd1/kcBaC
-	 SZ0L9gL8ZOn4p3zD/y1IZo0+y8G5TjjE36qyeEB71X/ni0u6ZAw0fl9d20BW9K5cqz
-	 CzbW0GYbGDxt+t7tCV29sw/YEOYZxm87ss+9cMxNIBXg1aGY+RF5GFeywVwMWHgVXP
-	 i5BimBGCUn5uw==
+	b=srcWcH6IAby81ObhS1wwisIjmAPVmA8TVEXx9RTd9bI51Ez1WnP/SD4Lk6U9T64lc
+	 OuNQmtiNQ60SYH/uTP75r58qGvQ9UBjdgbv4hZKQyMb3Q5WY/GwcVIwphbu+/WMiaL
+	 iEUT1POPaRgfEw89xG1dNXsfS1+FJ/Xd48DE2GPuREM1Cd8s0alHozSP7YeR4gE4V6
+	 7lRBb8nyH4pqBLuFpKy48lbOKfkIJLdNFa6kdICBDL/RRY0saUaeJmt7rqYHO9J+aH
+	 yxIUvr0ZFr9n5soKHt+uZ46AMqcU+xE05UjgfM1oJrtZ03R7GS3ZpchD9Do0FR4I4v
+	 rVFz9iHWfpaMA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D672180D32;
-	Mon, 20 Jul 2026 18:09:54 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D76341DC9
+	by smtp3.osuosl.org (Postfix) with ESMTP id 22FCB606ED;
+	Mon, 20 Jul 2026 18:09:56 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8F00B1C6E
  for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BCAF3406B0
+ by smtp1.osuosl.org (Postfix) with ESMTP id 737D280CED
  for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id S-bxTuGGQdQa for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 16:49:08 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id j09kSmtxZq2H for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=casey.connolly@linaro.org;
  receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 8A862406BE
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8A862406BE
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 45FDC80BFF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 45FDC80BFF
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8A862406BE
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 45FDC80BFF
  for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 16:49:07 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D9FA84A4B; Mon, 20 Jul 2026 18:42:20 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id B41CF84A67; Mon, 20 Jul 2026 18:42:24 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FB878493F
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:42:17 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso13768785e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:42:17 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id B7ED684A60
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 18:42:22 +0200 (CEST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-490cf322ed0so72852565e9.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:42:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784565737; x=1785170537;
+ d=1e100.net; s=20251104; t=1784565742; x=1785170542;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JeAGNJWMrw5Exle1NK4OypNjvUkCc3w2k6WuYdU89Lk=;
- b=UPsffV5AAa/cct8DwUraJVNyJHMUnLfreoN7x6GXMuF6VVtTFY2YLN/R7wZllw0oAw
- MC8rZjEx9o+CpEOdwjbAaxVj8dUGpRTETPbtAItl1azdg5XPLJwwIRSZPh4U+8w/7ZgX
- bi2pehq7D2C9prpSTHIgCAiJ73rB1HJMozA/Q4l3Mzge2gkAeoTMXfYrrgcONweR75KJ
- dm6qHL4IW682ZY3NViN038CNWaeJx2LfhfEQmjDTjiF/jFen3r4AcwpylUDGaPGLlyz5
- VWCaqQ+GIO7+pyodv9dZ52B1M8L/QwzT+LuRyV1Ex7D1w1lUGt0OzRHsDHweXBm/SF3U
- DFnQ==
-X-Gm-Message-State: AOJu0YxubllE0LXigT2Pb28x5g8wQ55kx7Gj9YIA0uhuKjsdlrdu+3BF
- 37iZxR2eiTGeSBilgAEZzG2Sp6c3jvoE277/WUfkfumyHoVwnDjmj502Yaea7/mM+No=
-X-Gm-Gg: AfdE7ckuQFB/zAWODiadND5rpNQP2fANgNNtLlQUVB5V7hFv7Yo0sFBvnN5pTE3ouZq
- 4Sqq9z8HfQXOA7cu3ink4WEgvUnEeVM0rd7gZddjGFBquzHTBenVvJKqrjB8dedVN5FNblzDS/1
- 1z+AnkEczRIVBYKTRM0Ra8C3gkfAdGa7BBhRyHG30+yM0ZwyCnbnO6UAHsu47po8VeEIp4B0wda
- V2RtOs2Po8wpeqBv3To9rmKcUdEk6WDcTZkbvMERZ+6C9zugTBc6xH6Nt+Z7VUZAOUP0QwUDCiQ
- rIhW9GMoS8QE6JFAG44Kw9JIK5p/Wv6vG8KccXZ/engdrJDPbBjt9l0rysqmu2o0Yn/Rig/gvlc
- fB6gkzwhzkZZtoFj/IAV356yDJZdjgHHRP/AEt7LnEqZGPDlH9OERuY1tHcsWrgir2tHDLGcVNS
- BSaxGm/irQppHwaXwcVUdBLN0YDhAPrg==
-X-Received: by 2002:a05:600c:48aa:b0:492:6efc:7c60 with SMTP id
- 5b1f17b1804b1-4954a516183mr112981185e9.28.1784565736697; 
- Mon, 20 Jul 2026 09:42:16 -0700 (PDT)
+ bh=SiMvf/w1IPZ1Z6IocnW8dvZXWVcg+hS1rmyrq7/K/y0=;
+ b=Q0PI8iDGFYkSrt4wC/UhuUeyQMoDz06/4HYHfZE7Jiz7Q0VZt30vCkhNI45TjqGwBP
+ dvMB7WksgY++bjJp/hhl/hBqamYrmqnLyGV2dzjz3i0HzHrh5YMjMYSeWhVxHDqPHnlx
+ DdX+z8YlfLAVXUr4DcDZMd4Z+9gcjQ12llTx1Go9/j/dEXuWZlh0vS/8BmLXJOrEUJ3p
+ 8paZzbN8RO/CkSQPcTURczQ8lI5PalgqJMxpK2C03Y2L52Buj1lvEq6vPOuEKk5lyEji
+ QgjzZ/FtiVzXGRQRzuFcsi+8yZbry2lsVSwkXn2uVieyq4duHYdd9WA3Gyg6Wmpu3/pd
+ x1ig==
+X-Gm-Message-State: AOJu0YzQGVDEErXStFCfqOXhzb2g4L40EDU7q0ThaZmAfvGIIv8GJNWO
+ CsD7Ljx6J6imaqh3rpQjMNlibMds8DozC6Da4P/KR0WPYUu7RmGx2UE4bvab79DcyiI=
+X-Gm-Gg: AfdE7clZ+1kQELGVtJs32Nnub/7ddExYC+brw246PhYIElFuTlv6nQ1biM/L8VnVx8/
+ KfgrUcltZUZqa0UFrOMdkDTeMSwbFGeQH2mCzLSqkARmKUDbVZYz1Z5/XPiSXauvAD+dZXeI0sE
+ hGLw2zdThJnWxvlcrfIAMDo+U57R+knPiJPZYKthHlAvzR2M4jiX6SL58/RGa1pji38MDzNNtFt
+ ddegq4RJ8K26leyhfX7NhvQn3yLOvfyD3JkMe55BAHkvdXWxzXfYJUr1STAkehXJwr0KOByEOyD
+ zfC9kLZxfDW/ji7Qp6Nu1Yz6JeFKvg++v1YJhJ8G8/P1S5nwMn7+Q2wQund6ucte/DXsoWPHYlD
+ FxKmP6NqlE1FDdFDsksfocr1m5WAnvA5HJlmqndFAaCezpK8nY+BMvrewLENak3KYq7HinxZhg2
+ r6ZIYBB/svbi0Zwflea40t7our9vq+mkgCOfe6FlWI
+X-Received: by 2002:a05:600c:b90:b0:493:c42c:7e87 with SMTP id
+ 5b1f17b1804b1-4954a50885emr155657825e9.33.1784565742252; 
+ Mon, 20 Jul 2026 09:42:22 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a0a:ef40:1d11:1101:a3b4:4010:a727:b812])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.42.14
+ 5b1f17b1804b1-4956536870esm2755665e9.3.2026.07.20.09.42.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 09:42:16 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:41:00 +0100
-Subject: [PATCH 33/36] clk/qcom/ccf: adapt sm8650 clock drivers for U-Boot
+ Mon, 20 Jul 2026 09:42:21 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:41:02 +0100
+Subject: [PATCH 35/36] qcom_sm8650_defconfig: enable CCF_FULL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-casey-ccf-upstream-july-v1-33-8fece1b0333d@linaro.org>
+Message-Id: <20260720-casey-ccf-upstream-july-v1-35-8fece1b0333d@linaro.org>
 References: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 In-Reply-To: <20260720-casey-ccf-upstream-july-v1-0-8fece1b0333d@linaro.org>
 To: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
@@ -145,44 +145,44 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10528;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=723;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=0/PqxxyD7xiUptUkcTM55hsnDcBzg4URVQ6S4w1SHqU=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+H+acnUUJGJzm//T+/AnTWg4FV9gW3E73jj
- PPgscfevPaJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhwAKCRAFgzErGV9k
- tgkdD/9YMAckU/f33orqkGRv9pkqg/ldfrsgYT12wO5K5TcLET68cEzS+XwnJU518nkY/vx1D6+
- DuxKjpS3hrAsiFwo9AFwFdn5/dQo2JwKxiW+t0zfMzAX/OH0tHY96CIhxhDj9DOr2R2C61nWo4w
- rzAy2yTs1xRddKrUk5wo3/NYqE4l/p7Gm03+7l31JZdaypUKVkM1PkDkGT1xXEQaA7SqJv0dNd6
- gtwOHgqrKOMXH0zHlf/tDw56wlirdILjEXau9dqeK2RZiEusutp2amdMarm1v9mvU1CgZZDBiM+
- g4XfZD9oKZlFr6OoeW6awf7Hg4QNV9BICAFUzimqVkD/nbmXuQHYQO6Ep7JXQtZ6q6vkdAVfWDe
- pidRYRrx+iOXqLfop+WzAoelwMjYU73q6rhw692sUGXrHP6buTQJ6ADfBV/JNYfH3zMWRa5DeYh
- 2SA1OIcnOFzmIHDu28BHDzHnaxYMrzetnyVxfEkWYPEdD5kRTpVloExDE8G006Dcter3CTSd+MD
- 8pjvlscCOutuvZ+NQ+TEPttXMqvm0cM5DOgbi/FhH8scoskONc7ppDM90ykEbRBmH5b5klik0OY
- +sxN+WKwDlCthMZgRli4rbaqxJ6OVFspiJlGOIqNKs6L0P0eQ5xKSs/zZpYS+3FXphc3RXZu2UZ
- LHuERA0ZhmSFUGA==
+ bh=zYazqlETbNKC2mPejyY4/IyUPsLmcVW8tUwZxhcFWHc=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBqXk+HHt+jT5Zblxay6laHIL6Wu9GWiFYJxoLHK
+ 629I2vht2KJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCal5PhwAKCRAFgzErGV9k
+ tsxrD/9cXy3On12Q09mIt/BvUnh4l2X2s2WfRZlXI1Wq7ySTYAmamm575MNFfuDjFm7vRaoYYX+
+ I/HE3RbzEGAou8gSCuS1lr0zB9Be/hbvjJl0FBzA78bfrxrCQn5gw433qZ2Wbtt/H/UaxUFxwcj
+ hxshu2vvvEtPM2X/EkJItgyu0MFtStGBsmJ+2pAGHGfDjcZKy0M1reoNM0RZZnsI3stmgxZD7Jz
+ 9BUT5sL47TC1HFW/qwrLsUD8vCbk3fwgZS4JJ8VIa22Yn7eoNhlSh4CI/xXR4VPkoNySc2arjTE
+ uevWF7gCselgNyEteZPL0VoEuwkb3nTJnEh0p4JjsI84/hOmaaKoCTWzHH0IZaqk6JGst/26wXO
+ zeazlxOEV/nOa06aB28a4DR06wtyZTTn39tmC0VB6kHgprvedScHYLI8DB1KAtjsCOBF8foYKZ/
+ NDswNjHn+2Xw+zVvL4u4d/2n0FlggBFAAhCJ7q/c8TtBi9oDMeys/YT+wQ+0m4Ou/4gbOzzBSv9
+ aCw9rlaC9b0Lb6SD13egMO2uZixKQUbc5VU4dw0MDIirBmUGLJTU2V+Mh/wcKqOJ+TdidEWI+CR
+ fFzpQHYeAcKJ8fyDi5LGwh2NZPYolygOpTGhU/QpXUI8HXM/8Ony9kuauueGZzk47m9yFEDYV9n
+ G+3JTulcxUtdtyQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 18:09:50 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784565737; x=1785170537; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1784565742; x=1785170542; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JeAGNJWMrw5Exle1NK4OypNjvUkCc3w2k6WuYdU89Lk=;
- b=MAvmwqnN26hYnwmdetpRW/JTrkw5Mzpo+a586MQcewDAtaa/59jaswFC2nIh2myUYg
- 3iFxkS7gYVSgFUEYfHaNfEEWXYdvGowmmdTmn0kpZVlLoHZFt/Wsd2nVpM7U3BTHIdbj
- PenyNhLgJ8r8sf0FHQl4edOpWqBsYBKhb0wOHXoOVg90qh5eSSrkXbFTxN6FNXtEuiZz
- pXbVGQiadHor8CXdUNBEhKD6fh6RNofarqyijAm2gDAp2BTRy9wDdbwNUOmXORxyv6/F
- fl4VNCzIr68+Ot54LEpb5+hrKR4p4kHGDFvxqP0HSJFZtTwrYh1k7RU57zPk2bfyhDad
- zf4w==
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=SiMvf/w1IPZ1Z6IocnW8dvZXWVcg+hS1rmyrq7/K/y0=;
+ b=UDMdFcQ1nfh9qGqsFwFp/cLyMBlfPhbZHGMo9y16VgocCDbRHV4tVoQlIxb0hGICDA
+ nD6P56MCvxGtioSUURfBWYw1wUhXNik7H38hL0sj+UNwGbQwO5s3IEQWZFoe65FFzEFU
+ 44K8h5AMUc2B4/RjWZoHwtYTALQdoXUKDfU4Ntf9ZVeELzYrqSjv62ZJ09P8jItmjBE3
+ EfFzVLvC2LsG2uD4krXt2zCTD+fp2CACo0Fdy4I7QWYuVf/hyqUcE5qS11DBnKfBzg6h
+ 7bdbXriEDEfT8yP6HUTitq0lYioDBIxuqab52qy4wGaFXqjtnVtSoDyLiNsEA4SVmfrk
+ txYQ==
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=MAvmwqnN
+ header.a=rsa-sha256 header.s=google header.b=UDMdFcQ1
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=linaro.org
@@ -190,7 +190,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=casey.connolly@linaro.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (2048-bit key;
- unprotected) header.d=linaro.org header.i=@linaro.org header.b="MAvmwqnN"; 
+ unprotected) header.d=linaro.org header.i=@linaro.org header.b="UDMdFcQ1"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -208,331 +208,28 @@ Reply-To: Casey Connolly <casey.connolly@linaro.org>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-Make the necessary changes for the gcc, dispcc, and tcsrcc clocks on
-SM8650 to work correctly in U-Boot, this basically just consists of
-adding a U_BOOT_DRIVER definition and adjusting a few types.
+Enable CCF_FULL for sm8650, this is the first platform to make use of
+CCF, more will be enabled as we roll it out and port more drivers.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/qcom/ccf/dispcc-sm8550.c | 51 ++++++++++++++++--------------------
- drivers/clk/qcom/ccf/gcc-sm8650.c    | 46 ++++++++++++++++----------------
- drivers/clk/qcom/ccf/tcsrcc-sm8650.c | 36 +++++++------------------
- 3 files changed, 54 insertions(+), 79 deletions(-)
+ configs/qcom_sm8650_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/clk/qcom/ccf/dispcc-sm8550.c b/drivers/clk/qcom/ccf/dispcc-sm8550.c
-index f27140c649f5..46fb0abbdd01 100644
---- a/drivers/clk/qcom/ccf/dispcc-sm8550.c
-+++ b/drivers/clk/qcom/ccf/dispcc-sm8550.c
-@@ -3,30 +3,27 @@
-  * Copyright (c) 2021, The Linux Foundation. All rights reserved.
-  * Copyright (c) 2023, Linaro Ltd.
-  */
+diff --git a/configs/qcom_sm8650_defconfig b/configs/qcom_sm8650_defconfig
+index e0a82c460337..c1b42f3fe60a 100644
+--- a/configs/qcom_sm8650_defconfig
++++ b/configs/qcom_sm8650_defconfig
+@@ -6,8 +6,9 @@
+ #include "qcom_defconfig"
  
-+#include <dm/device.h>
- #include <linux/clk-provider.h>
- #include <linux/err.h>
- #include <linux/kernel.h>
--#include <linux/mod_devicetable.h>
--#include <linux/module.h>
--#include <linux/platform_device.h>
- #include <linux/regmap.h>
--#include <linux/pm_runtime.h>
+ # Otherwise buildman thinks this isn't an ARM platform
+ CONFIG_ARM=y
++CONFIG_CLK_CCF_FULL=y
  
- #include <dt-bindings/clock/qcom,sm8550-dispcc.h>
- 
- #include "common.h"
- #include "clk-alpha-pll.h"
- #include "clk-branch.h"
--#include "clk-pll.h"
- #include "clk-rcg.h"
- #include "clk-regmap.h"
- #include "clk-regmap-divider.h"
--#include "clk-regmap-mux.h"
- #include "reset.h"
- #include "gdsc.h"
- 
-+#include "common-uboot.h"
-+
- /* Need to match the order of clocks in DT binding */
- enum {
- 	DT_BI_TCXO,
- 	DT_BI_TCXO_AO,
-@@ -1736,9 +1733,9 @@ static struct gdsc *disp_cc_sm8550_gdscs[] = {
- 	[MDSS_GDSC] = &mdss_gdsc,
- 	[MDSS_INT2_GDSC] = &mdss_int2_gdsc,
- };
- 
--static const struct regmap_config disp_cc_sm8550_regmap_config = {
-+static const struct compat_regmap_config disp_cc_sm8550_regmap_config = {
- 	.reg_bits = 32,
- 	.reg_stride = 4,
- 	.val_bits = 32,
- 	.max_register = 0x11008,
-@@ -1754,41 +1751,38 @@ static const struct qcom_cc_desc disp_cc_sm8550_desc = {
- 	.gdscs = disp_cc_sm8550_gdscs,
- 	.num_gdscs = ARRAY_SIZE(disp_cc_sm8550_gdscs),
- };
- 
--static const struct of_device_id disp_cc_sm8550_match_table[] = {
-+static const struct udevice_id disp_cc_sm8550_match_table[] = {
- 	{ .compatible = "qcom,sar2130p-dispcc" },
- 	{ .compatible = "qcom,sm8550-dispcc" },
- 	{ .compatible = "qcom,sm8650-dispcc" },
- 	{ }
- };
--MODULE_DEVICE_TABLE(of, disp_cc_sm8550_match_table);
- 
--static int disp_cc_sm8550_probe(struct platform_device *pdev)
-+static int dispcc_sm8650_bind(struct udevice *dev)
-+{
-+	dev->driver_data = (ulong)&disp_cc_sm8550_desc;
-+	return qcom_cc_bind_pd_reset(dev);
-+}
-+
-+static int disp_cc_sm8550_probe(struct udevice *dev)
- {
- 	struct regmap *regmap;
- 	int ret;
- 
--	ret = devm_pm_runtime_enable(&pdev->dev);
--	if (ret)
--		return ret;
--
--	ret = pm_runtime_resume_and_get(&pdev->dev);
--	if (ret)
--		return ret;
--
--	regmap = qcom_cc_map(pdev, &disp_cc_sm8550_desc);
-+	regmap = qcom_cc_map(dev, &disp_cc_sm8550_desc);
- 	if (IS_ERR(regmap)) {
- 		ret = PTR_ERR(regmap);
- 		goto err_put_rpm;
- 	}
- 
--	if (of_device_is_compatible(pdev->dev.of_node, "qcom,sm8650-dispcc")) {
-+	if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,sm8650-dispcc")) {
- 		lucid_ole_vco[0].max_freq = 2100000000;
- 		disp_cc_mdss_mdp_clk_src.freq_tbl = ftbl_disp_cc_mdss_mdp_clk_src_sm8650;
- 		disp_cc_mdss_dptx1_usb_router_link_intf_clk.clkr.hw.init->parent_hws[0] =
- 			&disp_cc_mdss_dptx1_link_div_clk_src.clkr.hw;
--	} else if (of_device_is_compatible(pdev->dev.of_node, "qcom,sar2130p-dispcc")) {
-+	} else if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,sar2130p-dispcc")) {
- 		disp_cc_pll0_config.l = 0x1f;
- 		disp_cc_pll0_config.alpha = 0x4000;
- 		disp_cc_pll0_config.user_ctl_val = 0x1;
- 		disp_cc_pll1_config.user_ctl_val = 0x1;
-@@ -1803,9 +1797,9 @@ static int disp_cc_sm8550_probe(struct platform_device *pdev)
- 
- 	/* Keep some clocks always-on */
- 	qcom_branch_set_clk_en(regmap, 0xe054); /* DISP_CC_XO_CLK */
- 
--	ret = qcom_cc_really_probe(&pdev->dev, &disp_cc_sm8550_desc, regmap);
-+	ret = qcom_cc_really_probe(dev, &disp_cc_sm8550_desc, regmap);
- 	if (ret)
- 		goto err_put_rpm;
- 
- 	pm_runtime_put(&pdev->dev);
-@@ -1817,16 +1811,15 @@ err_put_rpm:
- 
- 	return ret;
- }
- 
--static struct platform_driver disp_cc_sm8550_driver = {
-+U_BOOT_DRIVER(dispcc_sm8650) = {
-+	.name = "dispcc-sm8650",
-+	.id = UCLASS_NOP,
-+	.bind = dispcc_sm8650_bind,
- 	.probe = disp_cc_sm8550_probe,
--	.driver = {
--		.name = "disp_cc-sm8550",
--		.of_match_table = disp_cc_sm8550_match_table,
--	},
-+	.of_match = disp_cc_sm8550_match_table,
-+	// .flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
- };
- 
--module_platform_driver(disp_cc_sm8550_driver);
--
- MODULE_DESCRIPTION("QTI DISPCC SM8550 / SM8650  Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/ccf/gcc-sm8650.c b/drivers/clk/qcom/ccf/gcc-sm8650.c
-index 9067bd05f8f7..31d70c9c40b2 100644
---- a/drivers/clk/qcom/ccf/gcc-sm8650.c
-+++ b/drivers/clk/qcom/ccf/gcc-sm8650.c
-@@ -9,8 +9,10 @@
- #include <linux/regmap.h>
- 
- #include <dt-bindings/clock/qcom,sm8650-gcc.h>
- 
-+#include "common-uboot.h"
-+
- #include "clk-alpha-pll.h"
- #include "clk-branch.h"
- #include "clk-rcg.h"
- #include "clk-regmap.h"
-@@ -3766,9 +3768,9 @@ static struct gdsc *gcc_sm8650_gdscs[] = {
- 	[USB30_PRIM_GDSC] = &usb30_prim_gdsc,
- 	[USB3_PHY_GDSC] = &usb3_phy_gdsc,
- };
- 
--static const struct regmap_config gcc_sm8650_regmap_config = {
-+static const struct compat_regmap_config gcc_sm8650_regmap_config = {
- 	.reg_bits = 32,
- 	.reg_stride = 4,
- 	.val_bits = 32,
- 	.max_register = 0x1f41f0,
-@@ -3784,20 +3786,27 @@ static const struct qcom_cc_desc gcc_sm8650_desc = {
- 	.gdscs = gcc_sm8650_gdscs,
- 	.num_gdscs = ARRAY_SIZE(gcc_sm8650_gdscs),
- };
- 
--static const struct of_device_id gcc_sm8650_match_table[] = {
--	{ .compatible = "qcom,sm8650-gcc" },
-+static const struct udevice_id gcc_sm8650_match_table[] = {
-+	{
-+		.compatible = "qcom,sm8650-gcc",
-+		.data = (ulong)&gcc_sm8650_desc,
-+	},
- 	{ }
- };
--MODULE_DEVICE_TABLE(of, gcc_sm8650_match_table);
- 
--static int gcc_sm8650_probe(struct platform_device *pdev)
-+static int gcc_sm8650_bind(struct udevice *dev)
-+{
-+	return qcom_cc_bind_pd_reset(dev);
-+}
-+
-+static int gcc_sm8650_probe(struct udevice *dev)
- {
- 	struct regmap *regmap;
- 	int ret;
- 
--	regmap = qcom_cc_map(pdev, &gcc_sm8650_desc);
-+	regmap = qcom_cc_map(dev, (struct qcom_cc_desc *)dev_get_driver_data(dev));
- 	if (IS_ERR(regmap))
- 		return PTR_ERR(regmap);
- 
- 	ret = qcom_cc_register_rcg_dfs(regmap, gcc_dfs_clocks,
-@@ -3820,29 +3829,18 @@ static int gcc_sm8650_probe(struct platform_device *pdev)
- 
- 	/* Clear GDSC_SLEEP_ENA_VOTE to stop votes being auto-removed in sleep. */
- 	regmap_write(regmap, 0x52150, 0x0);
- 
--	return qcom_cc_really_probe(&pdev->dev, &gcc_sm8650_desc, regmap);
-+	return qcom_cc_really_probe(dev, &gcc_sm8650_desc, regmap);
- }
- 
--static struct platform_driver gcc_sm8650_driver = {
-+U_BOOT_DRIVER(gcc_sm8650) = {
-+	.name = "gcc-sm8650",
-+	.id = UCLASS_NOP,
-+	.bind = gcc_sm8650_bind,
- 	.probe = gcc_sm8650_probe,
--	.driver = {
--		.name = "gcc-sm8650",
--		.of_match_table = gcc_sm8650_match_table,
--	},
-+	.of_match = gcc_sm8650_match_table,
-+	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
- };
- 
--static int __init gcc_sm8650_init(void)
--{
--	return platform_driver_register(&gcc_sm8650_driver);
--}
--subsys_initcall(gcc_sm8650_init);
--
--static void __exit gcc_sm8650_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8650_driver);
--}
--module_exit(gcc_sm8650_exit);
--
- MODULE_DESCRIPTION("QTI GCC SM8650 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/ccf/tcsrcc-sm8650.c b/drivers/clk/qcom/ccf/tcsrcc-sm8650.c
-index 3685dcde9a4b..3f158a923203 100644
---- a/drivers/clk/qcom/ccf/tcsrcc-sm8650.c
-+++ b/drivers/clk/qcom/ccf/tcsrcc-sm8650.c
-@@ -5,11 +5,8 @@
-  * Copyright (c) 2023, Linaro Limited
-  */
- 
- #include <linux/clk-provider.h>
--#include <linux/mod_devicetable.h>
--#include <linux/module.h>
--#include <linux/platform_device.h>
- #include <linux/regmap.h>
- 
- #include <dt-bindings/clock/qcom,sm8650-tcsr.h>
- 
-@@ -132,9 +129,9 @@ static struct clk_regmap *tcsr_cc_sm8650_clocks[] = {
- 	[TCSR_USB2_CLKREF_EN] = &tcsr_usb2_clkref_en.clkr,
- 	[TCSR_USB3_CLKREF_EN] = &tcsr_usb3_clkref_en.clkr,
- };
- 
--static const struct regmap_config tcsr_cc_sm8650_regmap_config = {
-+static const struct compat_regmap_config tcsr_cc_sm8650_regmap_config = {
- 	.reg_bits = 32,
- 	.reg_stride = 4,
- 	.val_bits = 32,
- 	.max_register = 0x3b000,
-@@ -146,45 +143,32 @@ static const struct qcom_cc_desc tcsr_cc_sm8650_desc = {
- 	.clks = tcsr_cc_sm8650_clocks,
- 	.num_clks = ARRAY_SIZE(tcsr_cc_sm8650_clocks),
- };
- 
--static const struct of_device_id tcsr_cc_sm8650_match_table[] = {
-+static const struct udevice_id tcsr_cc_sm8650_match_table[] = {
- 	{ .compatible = "qcom,milos-tcsr" },
- 	{ .compatible = "qcom,sm8650-tcsr" },
- 	{ }
- };
--MODULE_DEVICE_TABLE(of, tcsr_cc_sm8650_match_table);
- 
--static int tcsr_cc_sm8650_probe(struct platform_device *pdev)
-+static int tcsr_cc_sm8650_probe(struct udevice *dev)
- {
--	if (of_device_is_compatible(pdev->dev.of_node, "qcom,milos-tcsr")) {
-+	if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,milos-tcsr")) {
- 		tcsr_ufs_clkref_en.halt_reg = 0x31118;
- 		tcsr_ufs_clkref_en.clkr.enable_reg = 0x31118;
- 		tcsr_cc_sm8650_clocks[TCSR_USB2_CLKREF_EN] = NULL;
- 		tcsr_cc_sm8650_clocks[TCSR_USB3_CLKREF_EN] = NULL;
- 	}
- 
--	return qcom_cc_probe(pdev, &tcsr_cc_sm8650_desc);
-+	return qcom_cc_probe(dev, &tcsr_cc_sm8650_desc);
- }
- 
--static struct platform_driver tcsr_cc_sm8650_driver = {
-+U_BOOT_DRIVER(tcsrcc_sm8650) = {
-+	.name = "tcsr_cc-sm8650",
-+	.id = UCLASS_NOP,
- 	.probe = tcsr_cc_sm8650_probe,
--	.driver = {
--		.name = "tcsr_cc-sm8650",
--		.of_match_table = tcsr_cc_sm8650_match_table,
--	},
-+	.of_match = tcsr_cc_sm8650_match_table,
-+	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
- };
- 
--static int __init tcsr_cc_sm8650_init(void)
--{
--	return platform_driver_register(&tcsr_cc_sm8650_driver);
--}
--subsys_initcall(tcsr_cc_sm8650_init);
--
--static void __exit tcsr_cc_sm8650_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_sm8650_driver);
--}
--module_exit(tcsr_cc_sm8650_exit);
--
- MODULE_DESCRIPTION("QTI TCSRCC SM8650 Driver");
- MODULE_LICENSE("GPL");
+ # Address where U-Boot will be loaded
+ CONFIG_TEXT_BASE=0xa7000000
+ CONFIG_REMAKE_ELF=y
 
 -- 
 2.55.0
