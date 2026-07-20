@@ -1,116 +1,118 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A59E4C44529
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:16:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0015FC44529
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:16:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2E6D160743;
-	Mon, 20 Jul 2026 18:16:41 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 645mB-uwEpZe; Mon, 20 Jul 2026 18:16:39 +0000 (UTC)
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0FEA6606E5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784571399;
-	bh=/z14BQ6La6H9+iMTDJd46fHujzBdUHrw1W0E7eqlrh8=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From:Reply-To:From;
-	b=cRJDLEP9Uni04HGK4a2iZY+xxVdK6+LfgOYC6dz3CzrLgSVofKPkcZFKUkhvvKjKm
-	 CCE163OD0vLF7Eu1KcELXaPjDl1X5+XdhAwDZxQCeExFfUBz+v3hgHhEjH7vD0JD23
-	 Ni/msLtWzeF8+taTnuNi+Cmi0uVGfdfUc9HgOAbciBlWgrIEXpEJbsZvl1BzqdBYcN
-	 1n0gRwG6wshhFAhg262053fUgZGWePqu9qsKysRsEe6N64sGrs3xjMJ2PPzl0jqhvo
-	 mZ+i5fX8y2wxc1NSRRhIlRyqO2g6/bzatUjI7LelgQhYEXKmmtXMNFOu4m5XVh/wN0
-	 mDhn/1oDa8MtQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0FEA6606E5;
-	Mon, 20 Jul 2026 18:16:39 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9DCCC42A
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:37 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 84A63406F1
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BEE5A406C3;
+	Mon, 20 Jul 2026 18:16:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tP3HHgjFXA5v for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:16:36 +0000 (UTC)
-Received-SPF: Neutral (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp4.osuosl.org 3506B406E2
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3506B406E2
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3506B406E2
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:36 +0000 (UTC)
+ id j4zlDKGZ5FKD; Mon, 20 Jul 2026 18:16:56 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 35800406CF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784571416;
+	bh=YAhUvMSw54viQx+Nfs0tptiO2KKi+yqgaGN9dxTtcn8=;
+	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From:Reply-To:From;
+	b=YCOfeRY4BRLGkuK0fpE2ahQWq5Q08VbX8zN8NCN0M/ovU82NUK3XkWAtMUJp0Orfg
+	 Q8zNrpnzKdmyLSZFTKTFLIQDpS21iiCixpvTgxg07n3WCa7PADZHvT+FM1Znhi4D3b
+	 FDLSZXx9BP8AsfTdLH9j+cd3aZUzZddcU9MZFNR0wQt6Y+r1jALahP4WtrK1kdVtEc
+	 WBqnx/dSIMIL4AJtU0z6BQZ+iemZGaqcPFIGu/oOPoX/1eW2uPT1yEXSouinneLVMw
+	 DQIKb2F3mINHn9KXM3byq3QtKHmcGvzh8a4dFqkGPpbsEbruwAzJHlcF2arHyVSOHn
+	 8Osg2DM8yo2Og==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 35800406CF;
+	Mon, 20 Jul 2026 18:16:56 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 684782E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:54 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5A0CA60703
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:54 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CgPz_WIjUCFM for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:16:53 +0000 (UTC)
+Received-SPF: Neutral (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 0B06C606ED
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0B06C606ED
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0B06C606ED
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:16:52 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DC79844F6; Mon, 20 Jul 2026 20:16:34 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 803A2844F6; Mon, 20 Jul 2026 20:16:51 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18C3E80433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:16:32 +0200 (CEST)
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-8484a0b998fso10307891b3a.2
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:16:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784571390; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 2844B80433
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:16:49 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-69a50b818c8so17009270a12.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:16:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784571408; cv=none;
  d=google.com; s=arc-20260327;
- b=lCv1QR9DzHbmBUv0pFIf3Mx84iSTIbUC2PwaAqPGdvpt0KF9Vw7mu8Uh0W4cDJ5vlv
- S2DjbTt4BJce60px9MUsrTKjzCPBmwqHsUoPXDd/daeIW9FXIikQAvTpgEZxBoBmvwpj
- cQCToYisoL9gmDPNEnyOByn56t9tI1IPkIvMPhGIFyXlC1VPa+bZjZywqvViFKTvXjJ8
- 4B1SwlUIszIQey2+fobdvLJf9pwsHKYRxhPv36GlkjIyy4Dyg3KVSOVl8VTIY0upbzMe
- pYjVDT7PD/TQKMKoMbT71PKk/gYfUSLMz0fqxkkHmr6PJL0VhYkndJ9SQ1UjbPNblEiZ
- 7nSQ==
+ b=NZHPzZcbNcNH2fE0VBVS/52hYSSx4ENSH300/sBDcu2da+4oIsonRLWADRXFYE9BX6
+ OnuMATDC63dY3wcMP3sLw/EsaA8E9jALabT19EmZ0VKYRB9mVBEoGrd6Dnc+rbKVLqhc
+ vLuZ1MGpz4A0NGPJeT91ibELrcmmg1RcRlxSDX/JApXcfi/7rFSxTWQUy30tGMKGWi3U
+ WDhlsXtnDaanrMZkA22vS6oubbLjI03KKZdEE6RkvNI/9BDsmX4I0CBTZ6n4e/vj+cD/
+ 4ua6SC8eY16XMeF2eu1w1g8oDFTS7YU9Mc8ZPHup/svx4AEvj8YaJQepMy10esBKapSZ
+ NHsA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=/z14BQ6La6H9+iMTDJd46fHujzBdUHrw1W0E7eqlrh8=;
+ bh=YAhUvMSw54viQx+Nfs0tptiO2KKi+yqgaGN9dxTtcn8=;
  fh=HGFxqjW7EmEVgkuAAKalGIiLGTacmvL3ctiAmCo/d5o=;
- b=nXXQZX3u6EbfvlMR+oe/mvVgNAiWEdTjanz4CgxvZSNV56BXMCha9M2rbI199tIGA+
- ELEDHHDO7+52SgiB91d0O2dk2z2s53UI2xppm0xnnA7njU1wi9rahj4gAaOUXTW/K2fu
- 8s5zDQ016S3Zk+PEpzPPXNSyV10qLY5fsC5UGuo7jUF22EmIEk+AzEdaQDih9iVxEIUc
- d4vx988jiAk5lp27DAum5+lD141gFn61no/X7UEtgr5RWWZmvVvdsJxjM0+pZEyLT+vH
- oyzF1sDHRA78eVNi409IXPFXsT4wJgBcESgqJK2izTegVOTG8E3e/nEcs3lkJ3lOY+tz
- onLA==; darn=lists.denx.de
+ b=HJq1Nk4Y0LBnhguKPzeB7xEm74UUbtjBnafIW1IWExxFU61zXo0Nxc5ewsn0b+N3Rw
+ X7gW2pdjHcHQErdwG4txwmHfmZFU9X+uVvRqtWTMzjGoH5F5RlbtCbgumyRYQAK5Uyhj
+ oqZYqGU09/cxvqIUZ9O14RWZYi50XeDiXmxRcx+Kcf7/9uC6gzVXnCJMM5ICNLoN3oIv
+ eAKde4uAs7ionxj7wG/eqrK2tyMpXvtsfZ/dz6PC88M9RZ9ii+x+VUa1R2KKhBYhJncr
+ 9SyrSBMs6fPP4CrYVxv2OnivYQTS1h5gM/4j5OwoAMdv6LOtxVol6w0bsFbpMlbbvHZs
+ G8zw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784571390; x=1785176190;
+ d=1e100.net; s=20251104; t=1784571408; x=1785176208;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=/z14BQ6La6H9+iMTDJd46fHujzBdUHrw1W0E7eqlrh8=;
- b=qKodxMIpssqzv/xt0rgdcFslB/ZW20eGIgnbjbG5C5sMixkr3t/sFfl7srTlbU55L6
- zFnNHXW3dxKDPu8ersuGRv5oM0dnXiBVXHig+9dvmHQSkKRSCoeS6Dli7MIbjkBuXs9q
- lqZwVQF0YcAMeuZemQcj8e6WWmjfEyelkKz0ppgoQqBwQhSw+BbXus/Skfa1hWUSw9pm
- rUL0hVaNWVMxr5G6gwSL//vbUf+sWlz3qQS4qLCUiryIP+zDj1l7pkKUvor3YGDOMCfi
- Qw486iQODRCpiySYoQ1hlp6ZkbpH/jKXqScIWCMd2LizrNrER2LUBHddBH0SJ8C99gYY
- ql0A==
-X-Gm-Message-State: AOJu0YyE3C5I4Y0ul0QA+BeHHQmMtqmnCL7pbwJPSgHch1unVFg61n4j
- TTbjtQU7qu/uPj7R3bcFMAkj4+wnfwHlHyIg6xa8zcm9EN9peGFfBbFKOYFWyFPHjao2jAnml61
- WeGciI7mAJFTsQVKQWFO8E8dkIwpFrfk2CQHX1w+n
-X-Gm-Gg: AfdE7cnEwzsQBxzmMZGeLoKK0M7fhSkb919HzICxjVeZYQevYawxUG/eRHw9eZpNnvk
- c9KeRz8vW8gNbXCb3zGY+h3W2s3SWAHi9uSIBXDJjLTvsSQeW7Pq3mPd0OT3YpZxj0JJbIdlE/W
- QayPjtjlHV9uLifY0Ftb3s7UPCbOAV+e2+BOSL/hZ5D6c31S6KNRKJtJU7oANfhUjpJsXjdpS5o
- Ov9dbZnj61vz0BdaCiggQZ2TcUTnMsq+X0qtYR//Hh0I9h6Y34LgpM78vV5
-X-Received: by 2002:a05:6a00:330f:b0:848:50a5:a70b with SMTP id
- d2e1a72fcca58-84c292c16abmr16786621b3a.21.1784571390525; Mon, 20 Jul 2026
- 11:16:30 -0700 (PDT)
+ bh=YAhUvMSw54viQx+Nfs0tptiO2KKi+yqgaGN9dxTtcn8=;
+ b=na35/ciEm1Y60zjEBBxzqACaz32xP9SnR2caIW041Z0Qq0KiKi1t1/xmhsB2oOJBfN
+ QdTc56gJ/g7KJWRocTm+SXOO5EaLMQ2qa5YUQ3zOpXMD0nfzAVcitRME1rt4lIwHMTNR
+ tMi77eGa5zrQuI/uIrKaFyY0JbM5YuaAWsgJWR1CjyAloTaYCHE8UP8N87Z+4E6j/5Sw
+ QHMC9PBVfJZSLMGH5Pn4Mgo+fIOSlwRP1mJNxdrX/5iFrApTjHmfQY83VjndZo/Sffjx
+ vC+07v8gZU9U2AOHPpNLqPzabOYRAkGe6xmUJ04atkoRrqP8koes6cQW64mid16lTnlX
+ Ut1w==
+X-Gm-Message-State: AOJu0Yzc4ckolYan2HY+NciqUnIJdGPl+nI7QwnaeaNHQExDcDTBeq0V
+ s2JOv9AIDEU6DCdV4fKrD0GylqFRk8+lATLLcLrzDFpHsMiM1B/o1CmUMrj3cm/yLPS1jzrSYB/
+ WV5TVdfZ7VlwKnKD0L3drHSJSsV/R41XNh7Z93a6J
+X-Gm-Gg: AR+sD12Q3GRYZLgirEwqMZwZjlpek3ND8REeniv/wu+EA2Yo40BNKy6gwRMp1hAroeT
+ 9EZunObCK5tCSnkAd7Ki/rGyLKscGUs9tILqDbj1XNe7dyDsPLUEP6GmaY3tNzgOzt9y/WUNMsG
+ NJO7qwNH5EjMDq3AM92HG5CYT1V7xKWCHmERKeRQ6WGkaaJVZOrRIRt9vkUfE5/inUIXys32vS2
+ eSzdsXbXlzMuwZHmLGcMqynE4h0suRRPKOKfyJJIl2X0snciVY87Q+VUx/M
+X-Received: by 2002:a05:6402:a0c9:b0:699:2448:be5a with SMTP id
+ 4fb4d7f45d1cf-69e652ed497mr5469800a12.26.1784571408604; Mon, 20 Jul 2026
+ 11:16:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260719-aspeed_vbios_fixes-v1-0-c94026f28250@oss.tenstorrent.com>
- <20260719-aspeed_vbios_fixes-v1-2-c94026f28250@oss.tenstorrent.com>
-In-Reply-To: <20260719-aspeed_vbios_fixes-v1-2-c94026f28250@oss.tenstorrent.com>
-Date: Mon, 20 Jul 2026 12:16:04 -0600
-X-Gm-Features: AUfX_mx79_G16hOhcckPqYLVpuU4jAfTqm0KIjBvlxf8r0_fylybMIYLvMtv2nM
-Message-ID: <CAFLszTh7f66CO-1=yJeO68L5gPMyTrT0U1XH30twHt5Dcv=Bew@mail.gmail.com>
-Subject: Re: [PATCH 2/8] bios_emulator: don't free a caller-supplied BIOS
- image in biosemu_run
+ <20260719-aspeed_vbios_fixes-v1-3-c94026f28250@oss.tenstorrent.com>
+In-Reply-To: <20260719-aspeed_vbios_fixes-v1-3-c94026f28250@oss.tenstorrent.com>
+Date: Mon, 20 Jul 2026 12:16:08 -0600
+X-Gm-Features: AUfX_mznZWmmUFbF9MCGlNjzqWBXYT77ek3ie9CHcMCj75lISEv9149qEFkwTpo
+Message-ID: <CAFLszThzOifNsfxRcgckrEYH_JXJ=oSxyOuAhoc4Qm+WW0WGnw@mail.gmail.com>
+Subject: Re: [PATCH 3/8] bios_emulator: use driver-model functions for PCI
+ config acceses
 To: asrinivasan@oss.tenstorrent.com
 Cc: u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
  Joel Stanley <joel@jms.id.au>, Tom Rini <trini@konsulko.com>, 
@@ -132,21 +134,21 @@ Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784571390; x=1785176190; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784571408; x=1785176208; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/z14BQ6La6H9+iMTDJd46fHujzBdUHrw1W0E7eqlrh8=;
- b=hLzxYwrW1wWN3oM2t3xu2VMKH5kVYYejrLGgvHl4wYXNi7GRaGBXSEwq6p+T40eyfd
- vopuE6ETwTQ/8vkDaL+fL0q+znI9l0AMddABMMfUhYs0s5BLiCjKcG+MvlO4/G8NS11x
- n1l4FQV5g3FsuQjoE2SP0v8LMIAo3GNOXgwn8=
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+ bh=YAhUvMSw54viQx+Nfs0tptiO2KKi+yqgaGN9dxTtcn8=;
+ b=UR/lFiNvMgh7F0EyeGOBWOiTjM6ebYes2fyzVo2TvPVUa4k/xxZnL6cvmD0bt42tde
+ GEAVkDfo3ooYNlPo3C3wN/ELrGgfHkm1LFE3HQJDcC2/kYicwG+gc6gaBNY7dOOquV1L
+ I2k5MxouEgwXbCgoJlkP7io5sBXvKlqZ2wJxo=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp4.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=hLzxYwrW
+ header.s=google header.b=UR/lFiNv
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -154,7 +156,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="hLzxYwrW";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="UR/lFiNv";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -176,54 +178,35 @@ Hi Anirudh,
 
 On 2026-07-19T18:03:31, Anirudh Srinivasan
 <asrinivasan@oss.tenstorrent.com> wrote:
-> bios_emulator: don't free a caller-supplied BIOS image in biosemu_run
->
-> biosemu_run can be called with a BIOS image supplied by the caller
-> (argument bios_rom is not NULL), or with no image so that it makes its
-> own copy from the card's ROM (argument bios_rom is NULL).
->
-> It subsequently calls PCI_postController, where the BIOS image it runs
-> is stored in vga_info->BIOSImage. In the first case that pointer is the
-> caller's buffer; in the second it is a buffer biosemu_run itself
-> allocated.
->
-> The clean_up path in biosemu_run always frees vga_info->BIOSImage. That
-> is right for the second case, but in the first case it frees memory the
-> caller still owns. This can cause a double free when the caller tries
-> freeing this memory again.
->
-> Only free vga_info->BIOSImage when biosemu_run made the copy itself (i.e
-> bios_rom is not NULL)
+> bios_emulator: use driver-model functions for PCI config acceses
 
-The parenthetical is backwards - biosemu_run allocates its own copy
-when bios_rom is NULL. The code correctly tests !bios_rom, so please
-fix the commit message to say 'i.e. bios_rom is NULL'.
+Typo in the subject: 'accesses'.
 
+>
+> To allow BIOSEMU to build without CONFIG_DM_PCI_COMPAT, update the
+> PCI config space read/write methods in BE_accessReg to use the
+> dm_pci_read_config8/16/32 and dm_pci_write_config8/16/32 methods.
 >
 > Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 >
-> drivers/bios_emulator/atibios.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> drivers/bios_emulator/besys.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 
-> diff --git a/drivers/bios_emulator/atibios.c b/drivers/bios_emulator/atibios.c
-> @@ -509,7 +509,7 @@ int biosemu_run(struct udevice *pcidev, uchar *bios_rom, int bios_len,
->       */
->       if (clean_up) {
->               BE_exit();
-> -             if (vga_info->BIOSImage &&
-> +             if (!bios_rom && vga_info->BIOSImage &&
->                   (ulong)(vga_info->BIOSImage) != 0xc0000)
->                       free(vga_info->BIOSImage);
->               free(vga_info);
+> diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
+> @@ -435,27 +435,27 @@ static u32 BE_accessReg(int regOffset, u32 value, int func)
+>       if ((function == _BE_env.vgaInfo.function) &&
+>           (device == _BE_env.vgaInfo.device) &&
+>           (bus == _BE_env.vgaInfo.bus)) {
+> -             pci_dev_t bdf = PCI_BDF(bus, device, function);
+> +             struct udevice *dev = _BE_env.vgaInfo.pcidev;
 
-The fix is correct - dm_pci_run_vga_bios() in drivers/pci/pci_rom.c
-frees 'ram' itself when 'alloced' is true, so freeing it here as well
-is a double free.
+With pcidev available, the bus/device/function fields in vgaInfo are
+only used for this comparison. Cleaner to compare the udevice pointer
+directly (or dm_pci_get_bdf(dev) against
+dm_pci_get_bdf(_BE_env.vgaInfo.pcidev)) and drop those fields.
+Follow-up, not required here.
 
-BTW with bios_rom non-NULL, vga_info->BIOSImage now always aliases the
-caller's buffer, so the (ulong)(...) != 0xc0000 check is only
-meaningful in the !bios_rom case. Not for this patch, but worth
-noting.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
