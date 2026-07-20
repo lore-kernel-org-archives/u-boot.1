@@ -1,143 +1,134 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 425EAC44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D3DC44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:05:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EF866406BE;
-	Mon, 20 Jul 2026 18:05:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B7FFE80D30;
+	Mon, 20 Jul 2026 18:05:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1Oe6XiSirbQR; Mon, 20 Jul 2026 18:05:56 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3LPAqZHNgOYR; Mon, 20 Jul 2026 18:05:59 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CDE1640620
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E889080C04
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784570755;
-	bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
+	d=lists.u-boot-project.org ; s=default; t=1784570759;
+	bh=wlyEWGv44SYwyU07Vk2GE/b7Y3Kitujp0LVDwIZ71/c=;
 	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=DIbMwGS+tgppFVcV7BaLmaWIJlf2SSSqTn8430Xz8rUYjRB8l5i1CCoMMAzNhGq53
-	 CQXzuArqkeVhCsVaXTR/fa4EjvivnrrK/DDrF+XGIP7zEHX4/E7CWFs8y4K7WA6a9e
-	 LO07IsnLYEbcfvWF2utjMS6LtvtwmTw3U4ug5Z100YZVA5r2hdi0UCJuLlmhXpeJiA
-	 LnRaaaTSLmnNPsoR9axIP4OwLho7zaORoOzaJThH1J5O6OJZSJzmKQ+qhLSFBEvxUN
-	 qPgX7U7/0+HvLeC05E3lBnSYSRn0AQRgZCVo8MYeSw7rmtuTHy9ejJ3obadq187MC3
-	 Bqx93xdcEvyqA==
+	b=jKr9SzaWqEtghcltcN7L46f/yBn/EhocOJGA0h0+pWo2LMAxwmOTOyeZgB7q0rq0u
+	 raFcel/SapaLEebalcGh3NxMc5nainYyyu90qVE3XDrixCyxuZqR/jQ5KuU2m6z0Wi
+	 h1YSxVNIx5UTDo5PG2z272y3ahViMaAdx060szoT1bbjO3h07FAybJxRXypHPsSEqj
+	 6iSoubxUIG0gyET7bK5GHnp3RZcdoRGy4GzI4TXZnD2AK07pEXHFLhOJ42i2Q52j56
+	 /25PWfOKWCgI+8bpHsA/MOHp2/JNwNYAs1KA6lg/x2ziJX6sMYTOJ+gUa2IkLcTOER
+	 EvQ1OTC29rv7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CDE1640620;
-	Mon, 20 Jul 2026 18:05:55 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 72D342E5
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E889080C04;
+	Mon, 20 Jul 2026 18:05:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 05CF6224
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 64D366060E
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:54 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id DFEE3606D6
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HrNl0zxTpK03 for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:05:53 +0000 (UTC)
-Received-SPF: Neutral (mailfrom) identity=mailfrom;
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 2F3DE606D6
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2F3DE606D6
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2F3DE606D6
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:53 +0000 (UTC)
+ id K1ZwaHmHb9qp for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:05:56 +0000 (UTC)
+Received-SPF: Neutral (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 976F56060E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 976F56060E
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 976F56060E
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:05:55 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88A3D80433; Mon, 20 Jul 2026 20:05:51 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id CBC5B80433; Mon, 20 Jul 2026 20:05:53 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A4F280433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:05:49 +0200 (CEST)
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2cc7e86e7aeso76934365ad.2
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:05:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784570747; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 6FBFC842FC
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:05:51 +0200 (CEST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2caea3f742bso125397735ad.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:05:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784570750; cv=none;
  d=google.com; s=arc-20260327;
- b=aKGSHlecGP6QjCS3LiSeZU8jDL6FY0z0pePLG0y5EsrhAPhvF8fnGamPx7ueRVVW0u
- O+NTy2moPEvZ4hef3ZLxNKReOLWJ6PKPRe6p2YvUjOiMSxvXVvvgcCfwkDxTsSm2TsgR
- 9nRrKcOT1fJQ1Sg0IjMLqERrJuiYSB7rph4QNJlsOU7yfVpai2t3CfSN8ONVowSKOaNc
- ZxJqfxXiNA0arOquSUhGGKrz8Y6PW9vaIgiQQGkup7sWIKyv+KOrHptTG8Y1C9RkSVDt
- qP/0FzeFF0OSnb8bJwQIQQlJl4q6RwvmApk3sKuoP3oALQzFrdLfbQOT/fmjiw2xgjru
- gJ8Q==
+ b=Pj5NQI/anrFoop6crXnJZVJMouvtuiXakV3NSTKQTgxm02C3tP2ly/56kWVi5ZOcLT
+ QkgVoGkY7JDjRskEHKaqjYnSR3vxrjV2/fxaB3eV7IpP5ohpbnr16H4sL54OqblwDT+T
+ yLQbsZcSPFcU0g0HxbpEsaYaPmtz62ltanDCqgMi+fhoA6OWHOIgn07WUnQnF8yJhCG2
+ HOv05HI5IViH3Equi+z08HdzQAcFYFFFhc41HFVScUUJRv46ZlLbsHDfxJ3Tk2Spn5tB
+ aPvhAXxgnt2iRuGeg4cER9b7D+ckBwC5t8ebRQ5vCdV6LZn2BYFSMC373Jfwr7ePFZ+3
+ rYAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
- fh=S5IsS0p2q/mDhy6CofKU3XdI4SX18ALJnocWEeQR4Xw=;
- b=e1br/Aus0ZWLcGycbhUM0n4K7hFtgsIEKjEFoP6GwNQmLyXsZGpxN9d56p3TVJNne3
- X+mwfEOjnLcuT77AbQg3cl5LWfQZMSghI/Sh9Zo6Q00rHw6dgsg4DExfQ1To5XPpuoed
- CRn+/DjPjK7XFaWbc7ReggXIWMjRYaqNBrcjSV/NAhx3oAGgavsWkLBE+Xkh3yuM4fER
- ykqOy86lozjLk+DNlSbw7wzDf5ZgBz0lUDtL2UHqyE6jTKAnz4s3h3JG+7cuTJ5bW10M
- Uj71f2aULuDW372TYjl6uVyAmCJgHcEwLcB6TXgiVLMVguMDyFgusHju7iQMPEZoD0Ek
- jFow==; darn=lists.denx.de
+ bh=wlyEWGv44SYwyU07Vk2GE/b7Y3Kitujp0LVDwIZ71/c=;
+ fh=3M+mieaR+CWw/x3pF/N4zwcSAHe4ijM5/L2oT7bBKro=;
+ b=h7PF7EH1CHa1bzFCeTJL/cZTrxaUkm4iwrxZpGWMlykbHvBLXtf23JcNf+tdzgy7eh
+ D5VBvyNTwGdpcjthKQ8gzaBZIbqy3AfJkAnCEdznKcpadqecS3djOyDoAzF+5tO3SNTR
+ G+gQDKBb6BTnQBuc1jjE5CLVLTq3xH/1VKaNv9zBI9Ji4mZ18i90yh7FQOFU0FMC/NDr
+ P6TAfqeD+Ez9Bp/VYUZgVSDZSCYih7N817RdD/JorFxZ7gkxc+wQQ+ZB54EwDJGk7eK3
+ Hfm8Rxq8ocp7KUmT29A20FJ8uG/+4IuDJRJgMuYjeTwBfM2lf59TZiCYDFFiLdfvY1Ru
+ ukHA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784570747; x=1785175547;
+ d=1e100.net; s=20251104; t=1784570750; x=1785175550;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
- b=DdRQwGj/3q6u4zLD5eZOBv4u/YN6JZgzrIa4RHWzlKYs+iGbzPQSImA0oXwDvO+EZz
- ZckLyl7yi/4rHUddQrg+CFTrhZlruO4uUcMJG0CCgQt5a0kVdEmN7BeJHaij/ykkc6Ld
- lGToRktwQyuPeEn/tAFeA2FMnAxKef8MiQDYmShegmDbFVJizMDcAtaa81/QLohpRSuC
- 3mfJ4DmHQPemurkGNaWIdoQFoCbzi3ZLgkQrZVcuPQOKo6w96z6BNAVSfqY961z0LXwJ
- mRmZRHxhY72BovYkXgtcts1snNDx8QSQLSlyDQMuWi/tYaZPsXgM2D88V0pb+gj62TSk
- 8Oyw==
-X-Gm-Message-State: AOJu0YzS3cw8ZAVucrWqJZrq43QIBNOhZqYzVS/pRgQlMl78Va8reVDU
- FPHqM4Z25LRjfWg3d9y0o+WgxInafYarMhHWmO5GoY3lp9kc/lEgqqsSiC+q6jC8T7kzzJczj5k
- cNbeD9EodU3WCYEjtUh2EPiFpLXdFzSxz73/N17Iw
-X-Gm-Gg: AR+sD10TuntyMWAjaQ6yAMI2Vajkj30lHwF9X30Nph3QGy4JMrcX6jCYk7fVG+/olmp
- Bz28PnpNKo7XpTJctwjc6ZW6Ob2Zh3+mf/I4whifmfat6FbSxhYDLWiePsDS5upL7vpPSe/sDw+
- N60+4dkPxRYXUFmFRdfPoecyxkgsB1IBFsu/fdXXQzZwHvShUzmP4dfVeI/3IGxXrIvaItkoZ48
- IiiLvz175nXp/slrpW8iQo00lrYphvQUDmYzR0QYfhTRpE7gOOrLE2vaq/n
-X-Received: by 2002:a17:903:a8f:b0:2ce:a600:6022 with SMTP id
- d9443c01a7336-2cf34850c21mr166073245ad.7.1784570747542; Mon, 20 Jul 2026
- 11:05:47 -0700 (PDT)
+ bh=wlyEWGv44SYwyU07Vk2GE/b7Y3Kitujp0LVDwIZ71/c=;
+ b=qNBWISey/JBjuQs35qZ528jKUez050Ye7p5bTAmGXvHnOS0LGL8kScAE0KH+dhsXCo
+ 5NtLPetv0IW+Um5YYyD8KDjwpBY7XtwqR5XJChCen9ih+WCypbFiR3R4Fnv0JjTK64So
+ tEYg9hmlIOJ7MkTvJW5ehIW8aOaVceg1ZOrN8/3LRqfnKSVK5aWXXVvvVo+yZMr/23Ck
+ 5THPiYmvL++BD+L8f++cAwD9BcEUW5vEYQCqVorEq3koyDeUuV5YwAy2BrC+Atnewxv1
+ 6UnHf1KD60MDzL0G3BpbIl+ErUIclHyGXF08sv5i+zMnP36o0wwr/1v83KixcH19Vst3
+ +Auw==
+X-Gm-Message-State: AOJu0Yzx495ITLoOtByDXlE4eiF5qCYNgBPS7mSd+pkDAq6IblVygVRr
+ LLSKO5+xNfoJCxmV4/wlrSveSQ6+XADswD6RvNeR4Jzs4WjqBNtLWxEgDiO46qufC7Avw4Y0LaD
+ WMR0gmGfnf7PY6QIuSFZunK/3yulHPd01WszmViC9y0IKLQ8ROvo=
+X-Gm-Gg: AR+sD12IGcO3ViPrliMF3fp8DHqIBN+dYI8cU9PY4QQbnaq7N4GCI48iZh5/VduHeAe
+ oXEiXopHsFuSYjGwhWKi17yljFNUOQGv+pQL5pTRv+05TEf8mU9U84HbZdU1nkJrLBWH7E9cWkY
+ xF5GuGxanMPC3uncQcHPMD0ayWyaSAnPFKVsHNGVNvRhK6KSN655vQ1uNXWJ8YvASRIa8jFkXME
+ J/Hy7j3gXfqJTMRYh8S2KmW1S+KHzEbyDNEC9lM4swLp2tjsZ0zMjVtgJ+j
+X-Received: by 2002:a17:903:3d0f:b0:2cf:477d:8a87 with SMTP id
+ d9443c01a7336-2cf477d8f76mr125155315ad.10.1784570749710; Mon, 20 Jul 2026
+ 11:05:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
- <20260713-rk3576-boost-v1-7-9d23aa08f674@flipper.net>
-In-Reply-To: <20260713-rk3576-boost-v1-7-9d23aa08f674@flipper.net>
-Date: Mon, 20 Jul 2026 12:05:20 -0600
-X-Gm-Features: AUfX_mzEFvXI6rtuwE132WjFjNvvWHZmfzfM_HyZAk8ygEgIP7QVQbcG0mz3kRk
-Message-ID: <CAFLszTjBfASHbKd2xivHghrACR6TR1ESyyPw9nLbox5fGnR71g@mail.gmail.com>
-Subject: Re: [PATCH 7/7] rockchip: mkimage: Add rk3576 align and sd-card
- workaround
+In-Reply-To: <20260713-rk3576-boost-v1-0-9d23aa08f674@flipper.net>
+Date: Mon, 20 Jul 2026 12:05:24 -0600
+X-Gm-Features: AUfX_myjvXKUbpn2VkaQAAcbKauJHkk25wl02eB7aQcWaDbzeUTPB8igV_nxyJg
+Message-ID: <CAFLszTjJUueHHf6xeKgmLMzG8NLbW0BK9x4iZfCj9PiQjN6s8w@mail.gmail.com>
+Subject: Re: [0/7] rockchip: fix boot from SDMMC on RK3576
 To: alchark@flipper.net
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784570747; x=1785175547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1784570750; x=1785175550; darn=lists.denx.de;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=oEh/J+sBGeHfqXgsWy5/H2rZvgni7gFRyeUP54cFCAY=;
- b=mMQUZ/Vq7Aei5rLG2FBzSC5yYSuycdXquz+R78wKpj125JiLnBr1XABwseMWOvT2zh
- Iq21MhsGCrdOBdKc2+jbXsB3wx3DV9d2doIFwQWtAuJZ1vqLaeS0Oo1lDbsbg86z9+lb
- iFCKP44HMo/KpMoiH3BC8l88fF1cp38fdupWw=
+ bh=wlyEWGv44SYwyU07Vk2GE/b7Y3Kitujp0LVDwIZ71/c=;
+ b=SMgeep7xHLlK/0zP/Ap0WEjEDs6wgCQBJ/D33LgE/VUkoEMoVYk4Pyg3CEGFNSpC9c
+ KwR2rmd9PoVw06WohxcorI0QGtdC74pSpAu+gKpUJk5F+HB0ZL63qDoLxZnjBKPNLW7l
+ o0DYSTRGMIGrqADIoZtycxAHOmM8LMBojhH1A=
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
 X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=mMQUZ/Vq
+ header.a=rsa-sha256 header.s=google header.b=SMgeep7x
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=chromium.org
@@ -145,7 +136,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sjg@chromium.org
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="mMQUZ/Vq";
+ unprotected) header.d=chromium.org header.i=@chromium.org header.b="SMgeep7x";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -166,78 +157,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 Hi Alexey,
 
 On 2026-07-13T10:02:41, Alexey Charkov <alchark@flipper.net> wrote:
-> rockchip: mkimage: Add rk3576 align and sd-card workaround
->
-> The BootROM on RK3576 has an issue loading boot images from an SD-card.
-> This issue can be worked around by injecting an initial boot image
-> before TPL that:
->
->   writel(0x3ffff800, 0x3ff803b0)
->
-> Prepend an image containing binary code that does this and return to
-> BootROM to load next image, TPL.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> [switch from pre-built binary to from-source build via existing Makefiles,
-> add commentary on what the magic write does based on JTAG debugging of
-> the boot process]
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
->
-> arch/arm/mach-rockchip/rk3576/Makefile       | 10 +++++++++
->  arch/arm/mach-rockchip/rk3576/rk3576-boost.c | 31 ++++++++++++++++++++++++++++
->  tools/rkcommon.c                             | 22 +++++++++++++++++++-
->  3 files changed, 62 insertions(+), 1 deletion(-)
 
-> diff --git a/arch/arm/mach-rockchip/rk3576/Makefile b/arch/arm/mach-rockchip/rk3576/Makefile
-> @@ -7,3 +7,13 @@
-> +quiet_cmd_rk3576boost = BOOST   $@
-> +      cmd_rk3576boost = $(CC) -nostdlib -ffreestanding -Os -c -o $@.o $< && \
-> +                     $(OBJCOPY) -O binary -j .text $@.o $@
+> The preparatory patches for the image tools are submitted verbatim from
+> Jonas' version, while the "boost" code doing the actual hotfix is
+> converted from using a pre-built tiny binary to a from-source build using
+> the existing U-Boot build system.
 
-Since the object is never linked, any relocations end up unapplied in
-the output binary. Toolchains defaulting to -fstack-protector-strong or
-PIE can emit references to __stack_chk_guard or GOT loads, which
-objcopy silently bakes in as broken code. Please can you add
--fno-stack-protector and -fno-pic (or reuse the kbuild flags)?
+Thanks for picking this up - building the stub from source is the right
+direction and the JTAG analysis of what the magic write actually does is
+great.
 
-Also, nothing guarantees that _start() is at offset 0 of .text if a
-second function is ever added to this file - a comment on that
-constraint would help. The intermediate $@.o file also needs adding to
-clean-files.
+I share Jonas' concern about the final patch baking a source-tree path
+and SoC-specific load addresses into mkimage (more on that patch).
+Since the image-packaging logic for Rockchip is already moving towards
+binman, I suspect the right long-term home for this is a binman entry
+type (or an extension of the existing mkimage etype) which passes the
+stub and its parameters explicitly. Failing that, the stub path and
+load addresses should at least be provided on the mkimage command line
+so the tool stays generic. What do you think?
 
-> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576-boost.c b/arch/arm/mach-rockchip/rk3576/rk3576-boost.c
-> @@ -0,0 +1,31 @@
-> +     uint32_t *sram = (void *)(SYS_SRAM_BASE + OFFSET);
+> Jonas Karlman (7):
+>       rockchip: mkimage: Split size_and_off and size_and_nimage
 
-This is effectively an MMIO-style poke into live ROM state, so please
-make it a volatile pointer (writel() semantics) rather than relying on
-the optimiser keeping a plain store.
+This series reworks a lot of the image-layout logic in the tool (header
+sizing, offset alignment, up to four embedded images) but there is no
+test coverage for the Rockchip image format, so regressions in the
+existing v1/v2 formats would go unnoticed. Please can you add some
+tests, e.g. a pytest which builds images with one, two and four input
+files and checks the listing output? The new -l output added in patches
+2 and 3 makes this easy to do.
 
-> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> @@ -288,6 +288,26 @@ int rkcommon_check_params(struct image_tool_params *params)
-> +     if (!strcmp(params->imagename, "rk3576")) {
-> +             char *boost = "arch/arm/mach-rockchip/rk3576/rk3576-boost.bin";
+A note in doc/board/rockchip/rockchip.rst about the RK3576 SD-card
+situation and the new stub would also be useful, since people currently
+carrying the vendor boost blob will want to know it is no longer needed.
 
-As mentioned on the cover letter, mkimage is shipped standalone (e.g.
-as u-boot-tools) and is documented for creating idbloader.img by hand,
-so with this change any rk3576 image can only be created from a U-Boot
-build tree containing this file. Passing the boost binary in as a
-normal datafile from the build system would keep the tool independent
-of the source layout. Also, just to check: this path is shared by rksd
-and rkspi, so the workaround is prepended to SPI images as well - is
-that intended, given the issue is SD-card specific?
+> This aims to upstream Jonas Karlman's long-standing patch series fixing
+> the boot from SDMMC on RK3576
 
-If binman is used to create the image, it could pass mkimage a
-parameter pointing to the file.
-
-> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> @@ -288,6 +288,26 @@ int rkcommon_check_params(struct image_tool_params *params)
-> +             for (i = ARRAY_SIZE(spl_params.images) - 1; i > 0; i--)
-> +                     spl_params.images[i] = spl_params.images[i - 1];
-
-Patch 5 allows four input files; if all four slots are used, this shift
-silently drops the last image. Please can you error out when images[3]
-is already set?
+OK, looking forward to the two of you getting this landed!
 
 Regards,
 Simon
