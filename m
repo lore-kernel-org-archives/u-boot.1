@@ -4,143 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B6FC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D6BC44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 18:59:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9EF1940500;
-	Mon, 20 Jul 2026 18:52:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC0B54035C;
+	Mon, 20 Jul 2026 18:59:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zkOwuUL3k6xH; Mon, 20 Jul 2026 18:52:22 +0000 (UTC)
+ id KMuLZ-bGee0X; Mon, 20 Jul 2026 18:59:46 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B4032404F4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E5A364056E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784573542;
-	bh=olHhLn8deehWI5Kcbb3yfUAmkhMiEkKDmH9Ur8pVdI8=;
-	h=References:In-Reply-To:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784573986;
+	bh=uRMCWM1nkNYV1tC5a0IhXbVC6dICkMhSJCUaP1d/IwQ=;
+	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=W0UVBFUmiuo+l7RPCuuC5fFQQgmcKFyKZsXzU05C2ZsY9+siFLLQZdQge6FbqkVBX
-	 6fj4gL0pMhM8UB/v5gAsYjOn6NGDdkhkJ9rZlwHDMX2tDxAsK9jEyixdSa3g3K0IU6
-	 celkwf5bRMy2iPDyf3oG4UlkhASS5L1hnkGFHoVnTXrn3go1Ewi0tylfI+01U1Czqu
-	 qletfzFc8vxBQv71PkDExtmKtqZ38B9wy3vkaROQR80/l1ApouBK94IKrbsWCpm5IN
-	 QG+1df39zqMS5sveqbhpfm8autm1kovqESRbudfbAzpjBVR5WMfM9Sk3syMDsKs3FQ
-	 L6B2AmNFIdPhA==
+	b=iDAvol7zmmXbsvo0puZe9Qdp50xngQKTZpDw+mNMe0SJuipXqrVByq8lTC6yz55St
+	 2/A5Kw4DE3A1C8Pr40erdsDg86l2PDkfbI78cx8/8VsHpZ7ExbbBe42IYy6VOVa4eZ
+	 fNT1xMghKfV9RIB5ncTGCr+DWblsdiCwkMXxbFSMIWlo9glcoaS94ELnW/1JMxqBD4
+	 Uqc2X1iLY6Ungk4XI2ZsTL4lIpgOXzG47NbJgyLkpO08oJ5aAKpnP6iu1XAsiA73VA
+	 GHM1gvN0ixGlhUG7uRuMo20U3EMYgwiPtB54g/EpXmaKheTFBckedMq08SLi61iljm
+	 hH5mtBEBj7KJw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B4032404F4;
-	Mon, 20 Jul 2026 18:52:22 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D536DDF0
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:52:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E5A364056E;
+	Mon, 20 Jul 2026 18:59:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5E9321142
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:59:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C6CBA40081
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:52:21 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5BF54606E5
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:59:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ito5Rhms9ndL for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 18:52:21 +0000 (UTC)
-Received-SPF: Neutral (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org D6EF740086
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D6EF740086
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D6EF740086
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:52:20 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 66C31844F6; Mon, 20 Jul 2026 20:52:18 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 971A780433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 20:52:15 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba320so9479008a12.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 11:52:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784573535; cv=none;
- d=google.com; s=arc-20260327;
- b=qOdW3VV/igzre9QHq4LydXbX6TJDVfn4P0382c10sHxyPb1AWHKlcDmMkupbh3H5yi
- T1zMGVpp2bVVZygS5Tvhwr/VyCYHRMAzVXjZ0ad1cQ+qa3WDkkTUW9gV5fcG2Jrwzkxb
- qiV53exd1vxtW4VhK3bQcJpMpCmJYEsxVmcSah6n3CUPchmzpb9qVGeYbNAbEwj7vd9K
- KenmNu2v5phLsS8E+MfBmsLNpmvHDubBydcBwbe9YWm7s8PnmMHAlUhgFBw6lmzVEAkO
- 9RybXzBxLsaVieYRk/49UlDxP1YFFdqjCO7xSBPiA2Q9UonRK5sxORubcwQO/fIlbBc3
- cJEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=olHhLn8deehWI5Kcbb3yfUAmkhMiEkKDmH9Ur8pVdI8=;
- fh=cTeGPM65qL55ReajylhrL4dzXlA2lcgdGJ1Y61Sr+gY=;
- b=XHH5iBoyuZ6CYTmdBOxjRX/UDeRLvgS9Gxe2GMAlz/gTTPeNaRKVfHGI48/Oag00O9
- R+X5n2DqpmGv5L6n3JsPDKbOYZ+e0REZyWXDTgh/4zescnupD1Ho4v/BSdn1dQw7AKTp
- ZiB5hXFl8jxatFlQwHSpb0VaU6BpAWwf8hjlRhkiSL16hdETXM9tUjPt3VthVPfzpxf4
- 6AKapgopunC2xGacynxbgRGwTVQ2mYSTjUjpss9tvggZDBWA2yRP0sMl/W8kgtvYMW9D
- 9vEOhhFoLk9rIv39NdkdU+nrgi618yu3jO3GJjVkPENB1x29rpf0NtonrdR4fRbKeE8J
- w6eQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bpiO8hROHBKu for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 18:59:42 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 0D165605E4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0D165605E4
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0D165605E4
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 18:59:41 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e6b554044fso8235823a34.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 11:59:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784573535; x=1785178335;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=olHhLn8deehWI5Kcbb3yfUAmkhMiEkKDmH9Ur8pVdI8=;
- b=BH+Gxi9fUd09mG6vsNoSn7iEYg49lIRju0XoKzaHW3bkCkwSx1GQNx5xzvIi+zAnFX
- rCCGWgx68sq46YpqTL6DahUHmm3wqVymvL3YlQn+gv1FHD5JuWAK3DzUnghk9NeXkNZP
- meKqZUSTdFd/nDy/KpVS8igMGVEhoL+qhF6vKK9wk1BnLNcIMb5JAAasnQs7lJ3S0PNn
- pMfqizvz5Yu6sVkiOyC2RmSnYASuRuuCKMe/HHb8b/FRvaqW3T8j0piFPJCEnz0l4CAm
- YbOUP76hFlBB6u1My6dhI+mUlrhJ5olbqxRRS5gPpmXPY1I8QUPmadoB3CC3H7vn67PD
- YGJw==
-X-Gm-Message-State: AOJu0YzdHyekA78S3rniOSb9cIVOzOg6+OpmkBpgHyjAE+fZgMIJB1VX
- L64KyrOR9FNHeTkaiI0N4Ki4zfltRZL1zjECP7Y+ZjtEr2mflWV0kcEPE+typextMBOWVmfujV9
- +BRHjHvi+k9INEIqeJtGsk6SWkuVe9mRE4p4gh18F
-X-Gm-Gg: AR+sD11h17L/jHnQkbh7YxmbY2B1MEoILj/SYP7yZR1et7qNXd7p3mNeZyXJ1p0JdFe
- 2t85teu21AydUakPId+ZukdQzxw806uVPh1UFzAXdqiSJxXEHJnJ1dpZkfPM2D6BrvQTEANCN+4
- 6Uht9lILqrN44oYGT7Pc+0OYqGyL55EwOGjNpraY8kEzGJnv/l7esWJUE71T8ZdTrLG5AGeswBg
- TZQ048GtxgsRorI12/t9hwUwOk66+e72m1ej6rhFmQRVKHKarvNwvGxIp/n
-X-Received: by 2002:a05:6402:21cc:b0:698:6e7c:a975 with SMTP id
- 4fb4d7f45d1cf-69e64e58551mr6376851a12.19.1784573535006; Mon, 20 Jul 2026
- 11:52:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260720-typo-contribute-v1-1-90e89c6d648f@cherry.de>
-In-Reply-To: <20260720-typo-contribute-v1-1-90e89c6d648f@cherry.de>
-Date: Mon, 20 Jul 2026 12:52:02 -0600
-X-Gm-Features: AUfX_mywUgfgK0FmfhzuuwkqZrcIUymWyHz-Vc9cCejCou49r6M2TrPo-3IFzfM
-Message-ID: <CAFLszTgt=wLB2kRrhHhULV4PvEQkwREsF-6FQ9QnbDB9JsM+-Q@mail.gmail.com>
-Subject: Re: [PATCH] doc: CONTRIBUTE: replace "as" with "like"
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1784573535; x=1785178335; darn=lists.denx.de;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ d=1e100.net; s=20251104; t=1784573981; x=1785178781;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=olHhLn8deehWI5Kcbb3yfUAmkhMiEkKDmH9Ur8pVdI8=;
- b=bo9eS+5kumav0feT7Aj6L0bmRxp1zgVvAtvmbxfcJxMn13OwjdzYtNRWOjaHq2UTh0
- 4sfW1tL9DNK3aBKEqPFuEn+9QcaQGOi5w47hmLWPyg0IrtgEaFpuElD7c/HL1J1oslTc
- xyrfJYXYz+c2ZM0Slcv/MMSQf8TQZ5yz1eZFg=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ bh=uRMCWM1nkNYV1tC5a0IhXbVC6dICkMhSJCUaP1d/IwQ=;
+ b=eHi2wT0yakh6zlUhzv+S7zHWu070v3ZlRGKQz1/kCHXCBpGEKMkGuq2w6Urn/nOUw5
+ EBMZga0umGUYpT6PX6yh172lh3xUaDItdaY4HKs4U2H6uAPKpXh2/brueiKfzzKF898+
+ x0GCoc6Hl/6zI8yeYdjIs1OGutmYK5HMNQCwuTY4F7NoTglCLUsNgulhAx3ZV99xT97F
+ 8FbqLhxYFL5Koo7MGjC+uNdgsfqQ256TnxF+DvKnI353tif7uEb59FQgzKpckmBSamM/
+ NhRsFVvvjIdKDMdrlN62znHoH8Vj2LdcSRCgDGUomy/GNGmPQD31nK1X5h9LXZptVJ35
+ 9S3A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqLncSRl+0246ehPqXoEU1eW49VMXDPUbSmubwwSTFySPX5SGTD2vuLN7PE9YQ5hPVCZ15Q25E=@lists.u-boot-project.org
+X-Gm-Message-State: AOJu0YzYTnUpwC54fhYvoYlm/E5cgQ28zaNrENZPqSqgE3dHrFR/2+i9
+ fb24jZiAFAy2xjBRN81gUHq5sd6ggJRA06AKDMifHFdo906a4rNjN2ruBMoCGm7ZUs0=
+X-Gm-Gg: AfdE7clRWPj3fFh+9KzranIRu1Zj2rYT2NDV70Jb/zQC0z70mB9HVuw1EfPsw3IOwbp
+ 1XEfSMrLaioDV0ZLLDp6DY3sRhEZcdtxhyHYBUMoFN5gGn4csViG/fi3Hmteas4D1kbKDV245Zt
+ nS10Qoi25tP0SQKBowyt2aQ2WJjVqsmgC/NYam2G+24LYMYijcjiQuR707csMe0YVuzVn2cjCK3
+ TuVRtflaTJroG5hxr5JerHhTqTgPEWq5Da6lOimxAbZZ9wB8nVbnuuR7Y3BNdGXVADBdKcZi+bk
+ zvCmCaFokSc69cCfwdKneFjMTD8MfWTMm5oiHq+7m1qmCcHKiP9pWd1QBgtKnGUzx5wAmXxWJEg
+ FFgwJJtqEqOZRjgKEOO8IjdEKnApe88PRLPmJ8Zxd7xpmMiJRbF3OykHqoitRLSTABrDW+pNSeS
+ tqzcISQCC2XqSi1TlytreERNf6oLvSH78yNgRcPpuGWV+pL7Unau/+m3+qtkWNZEnUuNt7Ry3eC
+ Bk/MojEATVR73TK+3M18dAI5bY=
+X-Received: by 2002:a05:6820:f003:b0:6a3:a335:1ccd with SMTP id
+ 006d021491bc7-6a53667fc6fmr7454905eaf.8.1784573980895; 
+ Mon, 20 Jul 2026 11:59:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7edad94f0absm8649145a34.8.2026.07.20.11.59.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jul 2026 11:59:40 -0700 (PDT)
+Date: Mon, 20 Jul 2026 12:59:37 -0600
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tony Dinh <mibodhi@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heiko Schocher <hs@nabladev.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Quentin Schulz <u-boot@0leil.net>, Heiko Stuebner <heiko@sntech.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: Re: [PATCH v4 3/3] MAINTAINERS/README: Migrate mailing-list to
+ lists.u-boot-project.org
+Message-ID: <20260720185937.GE749385@bill-the-cat>
+References: <20260720-osuosl-ml-switch-v4-0-20ec1c334dd2@linaro.org>
+ <20260720-osuosl-ml-switch-v4-3-20ec1c334dd2@linaro.org>
+ <CALeDE9MdxKmGbkWstnNxnA5jRQ0rkmYjQbsxf_sRXeAL+yHAew@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bzKSDDSaBaMrbjDw"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9MdxKmGbkWstnNxnA5jRQ0rkmYjQbsxf_sRXeAL+yHAew@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1784573981; x=1785178781;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=uRMCWM1nkNYV1tC5a0IhXbVC6dICkMhSJCUaP1d/IwQ=;
+ b=Bh0nY74wzZwPMHz/StF+BHGy+wGZC4XlbJuYH5ni4d8VI86DgfxCRvl5mHgFLP2qdW
+ lM6dZddYerVq9rFbBolKtt8CczRBiQDU10QT3QqfWB02wkOKumc/XAXEu6lo6+K1MgZH
+ PEKewpu4RjnEiP1kQOHEekmpMY4mzXZsnVDfA=
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
+ header.from=konsulko.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=bo9eS+5k
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=chromium.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sjg@chromium.org
-X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=chromium.org header.i=@chromium.org header.b="bo9eS+5k";
- dkim-atps=neutral
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=Bh0nY74w
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,25 +147,80 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Simon Glass via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Simon Glass <sjg@chromium.org>
+From: Tom Rini via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Tom Rini <trini@konsulko.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-On Mon, 20 Jul 2026 at 02:49, Quentin Schulz <foss+uboot@0leil.net> wrote:
->
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> It's either "as with" or "like" but not "as", as reported by Simon.
-> Let's fix this oversight.
->
-> Fixes: 06f014394594 ("doc: CONTRIBUTE: tell people reviewing *is* contributing")
-> Reported-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  doc/CONTRIBUTE.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--bzKSDDSaBaMrbjDw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 20, 2026 at 09:35:28AM +0100, Peter Robinson wrote:
+> On Mon, 20 Jul 2026 at 09:23, Neil Armstrong <neil.armstrong@linaro.org> =
+wrote:
+> >
+> > The U-Boot Mailing-list is moving to the lists.u-boot-project.org
+> > domain, so update all references of list.denx.de to the new
+> > domain in the main README and MAINTAINERS files.
+> >
+> > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> > ---
+> >  MAINTAINERS                   | 2 +-
+> >  README                        | 4 ++--
+> >  tools/u_boot_pylib/gitutil.py | 2 +-
+> >  3 files changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index e5b2a2e373c..177bc1fdc07 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -2022,7 +2022,7 @@ F:        test/py/tests/test_xxd/
+> >
+> >  THE REST
+> >  M:     Tom Rini <trini@konsulko.com>
+> > -L:     u-boot@lists.denx.de
+> > +L:     u-boot@lists.u-boot-project.org
+> >  Q:     http://patchwork.ozlabs.org/project/uboot/list/
+> >  S:     Maintained
+> >  T:     git https://source.denx.de/u-boot/u-boot.git
+> > diff --git a/README b/README
+> > index 472cf37d9cc..51e98d0f4cf 100644
+> > --- a/README
+> > +++ b/README
+> > @@ -45,9 +45,9 @@ Where to get help:
+> >
+> >  In case you have questions about, problems with or contributions for
+> >  U-Boot, you should send a message to the U-Boot mailing list at
+> > -<u-boot@lists.denx.de>. There is also an archive of previous traffic
+> > +<u-boot@lists.u-boot-project.org>. There is also an archive of previou=
+s traffic
+> >  on the mailing list - please search the archive before asking FAQ's.
+> > -Please see https://lists.denx.de/pipermail/u-boot and
+> > +Please see https://lists.u-boot-project.org/pipermail/u-boot and
+> >  https://marc.info/?l=3Du-boot
+>=20
+> Should we also add a reference to https://lore.kernel.org/u-boot/ here?
+
+No, only because it's the top-level README that we need to keep moving
+on cleaning out so that we can replace it with if not doc/index.rst then
+maybe doc/CONTRIBUTE.rst or similar.
+
+--=20
+Tom
+
+--bzKSDDSaBaMrbjDw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal5wGAAKCRAr4qD1Cr/k
+CnM3AP9ABEuQpS/EsrsHj2qr4tNAUNz96c5Za4MAVp0op+1Y3wEAlfyuM6trYLnk
+eHh6t5TauoV36P442qAGxSKS1k8rFQM=
+=BMPm
+-----END PGP SIGNATURE-----
+
+--bzKSDDSaBaMrbjDw--
