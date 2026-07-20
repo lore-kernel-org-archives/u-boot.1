@@ -4,127 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D74C44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 04:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B8A3C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 05:24:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAA9884A8F;
-	Mon, 20 Jul 2026 06:33:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A9ED882991;
+	Mon, 20 Jul 2026 07:24:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jQq5g69l";
+	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="tsPRRvB8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12CC9838D7; Mon, 20 Jul 2026 06:14:57 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 031A883E76; Mon, 20 Jul 2026 07:24:00 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E9A580517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 06:14:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA6A580517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 07:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7e6128bd9b3so4886312a34.1
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 21:14:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784520893; x=1785125693; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+Ao5RQqEcB97mDKWvw1SC24insrYFX7w+cPndluNjos=;
- b=jQq5g69ljF0JCnojnB3QWv71+hk42mnmY5L0piqS/yDFOazMUTnP36kg6RU+UMECfj
- ACC5FYAs7EQD1AVF5H7wi6ucVQOu7zE5TejVPYVgNTo+Oydk4gKoooK65jKlOoZB8UW6
- UmHjKq6BYditD8KXBKEHhl4xsxmGnOSZvD+601V1H5bPXU3suT0zzn9GxVFA80M8vCje
- 2oxBhaCaKCfXcs5f57+oZJgjQYjcpPg9oSvC/FBb5mbHwyLuqJ6xgdykTijYfeLuO1Py
- pxydX60c+2Brj8LCrmS3Dw5oJA/REiCGNbjiEgv4kGI2T9AdYp1zd8iKdwE0H24O3mFy
- MOhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784520893; x=1785125693;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+Ao5RQqEcB97mDKWvw1SC24insrYFX7w+cPndluNjos=;
- b=R4pRiVs9k7Df+HpdoYByP9vjTO8hs7tYqOSbfEiCOMv8YOFmTq0R76fGweAlOFrSxS
- V6qiUX6GmTAqfdAYefuaOUSA5lhaxUKA/j5mkj56c/z+LQCZhK66Xsjv4U+Rt3xzLJdA
- q+YB43Pdu/s4zN/92Ot3gAD3HRacp3ip6GR3Ajf7JPMLCdS29bDh8U9WYbjag7GSeUIF
- NQ1M5Y8HMVeF8npvevlA/7kE6WlB81Jg82dd+skN2xcAKDDC5aFqgDO+/O4JyItNNkJV
- lTmsSashH9qefXIM6K3PbRPVH4h3Aj/XITDis20d3/Q3jNMpc6D55RuuFgQ8kocM5R9w
- 34zg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqVZB6dok66arg8KroCb9g7cGwRIBS4UxSDJKGFSXwGFDJ6IxMtHT2Mmop4A3GDcToWMjzLVvE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNi1pd1+6SOyopmVUsSwVpqCug69/sExC0g3Swt6xSpHbvxakb
- Km1YNsDc3npGTIDCzmCD0FR6yZINu61bdgwRdIWhOJKGUIPuKRiJa6qO
-X-Gm-Gg: AfdE7cn01ZMwUzBKDY9Yx98db6xG23X+w2WpNDTEEBZQo1+g54OvCbRABXoEpcq5o3E
- InIU7Oc9o27KnjUbixU7edcKUYoqeKCJUlqw1iDW8VQB1BZ6XLJxGWJcUI2jT6DuHKxd0n7HE1d
- JOtMWo907mu1sML5uuINf6AMY7LlWiB+D73T6mSVAsz0yeMWjWyG6TjQ7d86LwsoZ3Nh+Wz5SAT
- fGASa2fRwEoiRAsba7ASKCDq35H6aCVZ1rzlbtcY9e6QftuTgaq66cORdP1Z5caF3eTc+bU/mrf
- WU17bDh1ool6xMETD0UhPFDMGjAEUuv1WGWofD+D3FJh26F8M1RbbJcH+ub+pn/xEmFe+v059Oa
- c+BvQYLyuD3j5vrCswYHuljrz/E9d9TslLs5ScZS2NiQm76+x4EvJWZCIax/dA3nSyYnHHsncXZ
- y34jljLsyeLQCrEZqGlvXSCvtkErwU6/Ahk76GUHn24wnA5dGI8MkHSdr7WUlPZXjYcxVcfaA31
- y7prSg41PyHWnECsTAEBKtfHL40bhrsltReZ6CNRTuk5Pk3JxOQnA==
-X-Received: by 2002:a05:6830:378a:b0:7e9:e860:6ee with SMTP id
- 46e09a7af769-7eda4d113dbmr6392322a34.31.1784520893107; 
- Sun, 19 Jul 2026 21:14:53 -0700 (PDT)
-Received: from [127.0.1.1] (174-29-11-8.hlrn.qwest.net. [174.29.11.8])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7edaf94a737sm7159191a34.15.2026.07.19.21.14.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 21:14:51 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 19 Jul 2026 22:13:58 -0600
-Subject: [PATCH v5 14/14] crypto: allwinner: add sun8i-ce hash driver
+ spf=fail smtp.mailfrom=juuso.rinta@nokia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Hp1BMUP7K4Kd+30EuyBZQSMtvqqrVsscthLCIDgvVZOM1lRpJSd9SzxVrZxBuG4K9vOoV4UGELbv35vQHkW6JQ+UhqfuAX/UOLS+vLs1b2w5Fsww9/Lu08rVOqKkn2iY2oiEM2cro9+k7tOfzhq2j7v1HQnoyqy61GYVXr7MfkbxHTvjnfP5S8ZbY6MSVJSVaarESfKZdfd2fODbPlpyUo9+dVsMwdCJVp+FR54EA6x+REY04hOxP2VXUVg01vWSMOjqXVuMIdsdOcce9jd68N8KiVWjv2TuUP2GBFgS6t9L2K/Qpcy+oQqtypZFi/WX8zO3AC6rZBMbN9F5ldP+2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OnbPUxIG1Jp0wN6nN+CnylVRwsMdwrKxYZpbVU5EO+I=;
+ b=AzjhBBfQllN22Fx5kIGkDqs6bpg1q+6UfMz6T8R7JK1eqjTII2xh9bYfGR0WpJQIOthXTHRw/R3y6KQKiyLa6/dADZ1D+ACCUWSixzobcnKdCpBL8OTPVv0Hhfa9f51yHfpK3YYSU5oqej5f+cy1kGs4iivf4lST7nLhDxrlYoZwKlPqiKzj/S0ErUH/yJQds02oM6YsSPFCQFPDAg8XYpjRXu8zxqvoh6dhUfaqa/MmeUqqNOvyChmDU+7tb9Qa9QAmqvyAND8oQVQBzvdQWyFv2N/Rj5cTnSfs3yWSoVxpk+pin0L5LATMooMeqUVF3wDHSuw5p+9y/5iF+7znIQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 131.228.6.100) smtp.rcpttodomain=chromium.org smtp.mailfrom=nokia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nokia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OnbPUxIG1Jp0wN6nN+CnylVRwsMdwrKxYZpbVU5EO+I=;
+ b=tsPRRvB8HyxhmlSorrAlmDPP+zq+BWiIVJnK938r/NWcVkymAcJlJix9+MuY9k36TjGashiKXc0oKHuD2grdZFr8Zm/6XhNl8tezyX47JPrj8cJzs6UbrzitxzNYyx1R4heEY7tbgnjkV46vncstGPDNEgZoomBHuZqFT3Fsp96Sx2sUQKE0k3jwpgbk9YQb2yNHqTfdAZzC3TYa0/QCNtnBQb8neYUeCvju77MW7CB5cCh9dxdw6VYJxU5+Xrh7zmIzcgSQP6WUDlEP/+fFBVZH9dXMVhSnJv6J2cEmsLdQBZWzI66LYcMo/UVHe9HJi2ctWtm8mtrk8VzDoajKLA==
+Received: from AS4P189CA0009.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5d7::13)
+ by GVXPR07MB11467.eurprd07.prod.outlook.com (2603:10a6:150:325::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.8; Mon, 20 Jul
+ 2026 05:23:55 +0000
+Received: from AM4PEPF00025F96.EURPRD83.prod.outlook.com
+ (2603:10a6:20b:5d7:cafe::4e) by AS4P189CA0009.outlook.office365.com
+ (2603:10a6:20b:5d7::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.16 via Frontend Transport; Mon,
+ 20 Jul 2026 05:23:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.6.100)
+ smtp.mailfrom=nokia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nokia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
+ 131.228.6.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=131.228.6.100; helo=fr711usmtp2.zeu.alcatel-lucent.com; pr=C
+Received: from fr711usmtp2.zeu.alcatel-lucent.com (131.228.6.100) by
+ AM4PEPF00025F96.mail.protection.outlook.com (10.167.16.5) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.0 via
+ Frontend Transport; Mon, 20 Jul 2026 05:23:55 +0000
+Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
+ (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
+ by fr711usmtp2.zeu.alcatel-lucent.com (Postfix) with ESMTP id A6ECE680033;
+ Mon, 20 Jul 2026 08:23:54 +0300 (EEST)
+From: juuso.rinta@nokia.com
+To: Simon Glass <sjg@chromium.org>
+Cc: Juuso Rinta <juuso.rinta@nokia.com>, u-boot@lists.denx.de,
+ Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Antonio Borneo <antonio.borneo@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Aaro Koskinen <aaro.koskinen@nokia.com>
+Subject: Re: [PATCH 1/6] watchdog: wdt-uclass: add get_timeout operation and
+ helper
+Date: Mon, 20 Jul 2026 08:23:24 +0300
+Message-Id: <20260720052324.1362574-1-juuso.rinta@nokia.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <CAFLszThP7wTW6h8__pwnK2t5vgU0fB4_M43y7F+TK_adKiyFbA@mail.gmail.com>
+References: <20260710-rinta-watchdog-gettime-v1-0-9a982fb93f49@nokia.com>
+ <20260710-rinta-watchdog-gettime-v1-1-9a982fb93f49@nokia.com>
+ <CAFLszThP7wTW6h8__pwnK2t5vgU0fB4_M43y7F+TK_adKiyFbA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260719-submit-ce-series-v2-v5-14-3c41f66d4522@gmail.com>
-References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
-In-Reply-To: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Joel Stanley <joel@jms.id.au>
-Cc: Chen-Yu Tsai <wens@kernel.org>, Samuel Holland <samuel@sholland.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- James Hilliard <james.hilliard1@gmail.com>, 
- Thierry Reding <treding@nvidia.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Quentin Schulz <u-boot@0leil.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>, 
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, 
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>, 
- Daniel Golle <daniel@makrotopia.org>, Francois Berder <fberder@outlook.fr>, 
- Peng Fan <peng.fan@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Randolph Sapp <rs@ti.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Alexey Charkov <alchark@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>, 
- Francesco Valla <francesco@valla.it>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michael Walle <mwalle@kernel.org>, 
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Heiko Stuebner <heiko@sntech.de>, Vincent Jardin <vjardin@free.fr>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Mon, 20 Jul 2026 06:33:25 +0200
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00025F96:EE_|GVXPR07MB11467:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 60f92ba1-44c9-47a9-bc88-08dee61f17e1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|23010399003|376014|22082099003|18002099003|4143699003|10067099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: 9xuBJ6pRLSdG8ocHMzo8jSUzdEibWQ+ulu2dqxjpiB5c70zeArCDpApD5zh/tnPpOhuzHuooH60PrF3zVokpgOM3XJziEMWcsISKEykJyWZHLqjvLgk0eQL/CYrb8q325UirociRs+gn91SqkXJTsdAsb634kkmXKr1FUZ1LN5TXHUywzvjESb3zMGYpYoOUYzO4c9zIWGSFRvJzSBtyqmjQOzbRP1SPQc0coi16zNJv7n9dn0vM76t0i2aFf2K4yCseCVRNVluaSlqzKTvlcmWsbB8L5KLoJSS358qlLUDC405qdD+0t0XHSfI3XjTlP7/Ox77d9eBYuRSiSCXwZDxNJGzgiuowzpX8ddtR0vxCkX9204k+l3SWn9wg0WAJaFnt4xfFA8o3eWWjfwPE/kapnF5X3HPE+qDBRb6555xoj0KxXYVlz+d9nF8CXIYeN3Ebljs4+yuE1a3VxUTmuTkGINXlWU1gtoc9ASPaWTaqibYdpeP9o3aCnq01cIWPXbABe3pw2kZeQmGesOGQBMadp3TXhzMtlF1MJJUqOaIvDlNUT04ar+c9pJ//w5T2nTMD0nb/FUcbWRbDMnzfp+W8WPPgt7GgULQbKJGUes/DMphRR+gDmNeriEmULl4doRorPaZU4b3tDY7U79BRfaJuN1/AZesnHe+g8K3jd7v+ieR0y6FkHaVa7k1fPI//8y7Y+3TADW1z/WpDR2fKnQ==
+X-Forefront-Antispam-Report: CIP:131.228.6.100; CTRY:FI; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:fr711usmtp2.zeu.alcatel-lucent.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(23010399003)(376014)(22082099003)(18002099003)(4143699003)(10067099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: txbc0sxrvajDUJLfrUTMlXuDvsIQTMcs3JzQA1/p4+KvHwnSK0XJ5j4mLn1+P3Aapyd0JMZiljeIiDwlSPYZswddgqhM0GWHju4jgSIcocUgR9ut0EyctOZJi8kBzqqbTccBdCWbHh0EXNW53uVC1Vu12C4EZJjV2W+S4reDX9bUk0+R5TKU6bXOsPyhBI9ahDTFAeMW1Btjoqc/St/HGgY6bwcpDjK4m89PkusciQtGCkcgMUdi+/uP5SxFigJG2EJJSiFQUtFk4YuMF/du8cdVQ0kOFtZJYopYLDeQaKmfwc/uCLYNNRPHW3BjLHy1XaU+zXqZUxmxXgfDfmhi9fs9U2nNL97wYW48bgo+TFB4LWv36np+Pvol/DZV6oQayIq5BP4jHQHQ9W4HTTd+Pcuo75q+hiikvcRzKMy/acnNnbO9Y6lA06NBvwvMDbap
+X-OriginatorOrg: nokia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 05:23:55.1284 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 60f92ba1-44c9-47a9-bc88-08dee61f17e1
+X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.6.100];
+ Helo=[fr711usmtp2.zeu.alcatel-lucent.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AM4PEPF00025F96.EURPRD83.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR07MB11467
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,496 +127,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner sun8i Crypto Engine includes hardware hash methods. Add a
-UCLASS_HASH child for the sun8i-ce parent so FIT hash verification can
-use the accelerator from U-Boot proper and SPL.
+From: Juuso Rinta <juuso.rinta@nokia.com>
 
-Support MD5, SHA1, SHA256, SHA384 and SHA512. Build the final hash padding
-in the driver. Stream directly addressable input through bounded 64 MiB
-zero-copy tasks and word-unaligned input through a fixed 128 KiB repack
-buffer. Feed each intermediate state back through hash input-IV mode,
-keeping heap use independent of input size while word-aligned cacheline
-offsets remain zero-copy.
+Hi Simon,
 
-Map input, padding, optional state and a cacheline-rounded private output
-through the parent's DMA objects. Keep the descriptor output length limited
-to the algorithm state, then submit hash work on the dedicated completion
-channel through the shared task-session API. Keep one session across every
-continuation chunk while retiring each task before releasing its mappings.
-Release mappings in reverse preparation order after the session retires.
+Thank you for the comments.
 
-H6 and H616 use bit-sized hash task lengths, so keep each submitted chunk
-within the 32-bit task descriptor field. Feed the watchdog from the shared
-CE polling path while waiting for hardware completion.
+On 2026-07-15, Simon Glass wrote:
+> Assuming this is a static value, it might be more efficient (code size
+> and simplicity) to add a max_timeout_ms (max timeout in milliseconds)
+> uint to the per-device uclass-plat data - 0 could mean no limit, thus
+> allowing existing drivers to not set it.
 
-In SPL, only advertise hash algorithms selected for that phase so
-SRAM-constrained builds do not accept wider algorithms unless requested.
+I agree, using a max_timeout_ms would make this patch series a bit simpler
+while still fixing the issue that motivated the series in the first place.
+In this case the wdt gettimeout subcommand would no longer make sense
+so I could also drop that. That's fine though, as the print we get from
+calling wdt_start() is the more important thing here, the subcommand was
+more of a by-product of the approach I had.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
-Changes v4 -> v5:
-  - Use the parent's explicit close-on-error blocking helper to populate
-    descriptor transport fields and abort failed chains before callers
-    release their DMA mappings
-  - Replace the algorithm switch and separate size lookups with one table
-  - Derive bounded padding without adding near the input-size limit, and
-    validate input ranges and descriptor-length arithmetic
-  - Replace the payload-sized word-unaligned bounce with a fixed 128 KiB
-    streaming repack while keeping word-aligned cacheline offsets zero-copy
-  - Split large direct input into bounded 64 MiB tasks and use one
-    continuation loop and one CE session for direct and repacked input
-  - Carry intermediate state through hash input-IV mode
-  - Use shared cacheline-safe DMA mappings and round private result storage
-    to complete cachelines
+I will work out a v2 where drivers set their timeout value to the per-device
+plat data during probe time, and wdt_start() considers max_timeout_ms value
+of 0 as "limitless" or basically that the feature is not supported, in which
+case we stick to the current approach. I'll build and run a few tests. v2 to
+be delivered this week.
 
-Changes v3 -> v4:
-  - Consolidate algorithm selection and invariant task sizing
-  - Use the dedicated hash channel and shared task-session path
-  - Return -EOPNOTSUPP for unavailable algorithms
-
-Changes v1 -> v2:
-  - Reject oversized bit-length hash tasks  (suggested by Simon Glass)
-  - Feed the watchdog during CE polling  (suggested by Simon Glass)
-  - Drop the post-operation schedule() call  (suggested by Simon Glass)
-  - Bounce only word-unaligned input
----
- drivers/crypto/allwinner/sun8i-ce/Kconfig         |  26 ++
- drivers/crypto/allwinner/sun8i-ce/Makefile        |   1 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c |   6 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c | 343 ++++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h      |   5 +
- 5 files changed, 381 insertions(+)
-
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Kconfig b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-index 49686d07aa3..c53c38cf5d6 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Kconfig
-+++ b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-@@ -40,6 +40,32 @@ config SPL_SUNXI_CE_AES
- 	  Engine found in Allwinner H6 and H616 compatible SoCs. This can be
- 	  used to decrypt FIT images before loading U-Boot proper.
- 
-+config SUNXI_CE_HASH
-+	bool "Allwinner sunxi CE hash"
-+	depends on ARCH_SUNXI
-+	depends on DM_HASH
-+	depends on CLK && DM_RESET
-+	select SUNXI_CE
-+	help
-+	  Select this option to enable hash calculation using the Crypto Engine
-+	  found in Allwinner sunxi SoCs. The driver supports MD5, SHA1,
-+	  SHA256, SHA384 and SHA512.
-+
-+config SPL_SUNXI_CE_HASH
-+	bool "Allwinner sunxi CE hash in SPL"
-+	depends on ARCH_SUNXI
-+	depends on MACH_SUN50I_H6 || MACH_SUN50I_H616
-+	depends on SPL_DM
-+	depends on SPL_OF_CONTROL
-+	select SPL_DM_HASH
-+	select SPL_CRYPTO
-+	select SPL_SUNXI_CE
-+	help
-+	  Select this option to enable hash calculation in SPL using the Crypto
-+	  Engine found in Allwinner H6 and H616 compatible SoCs. FIT image
-+	  hashes can then be calculated by the hardware accelerator before
-+	  U-Boot proper is loaded.
-+
- config SUNXI_CE_ECDSA
- 	bool "Allwinner sunxi CE ECDSA verifier"
- 	depends on ARCH_SUNXI
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Makefile b/drivers/crypto/allwinner/sun8i-ce/Makefile
-index 753ea827a0d..5baf65e40ec 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Makefile
-+++ b/drivers/crypto/allwinner/sun8i-ce/Makefile
-@@ -2,4 +2,5 @@
- 
- obj-$(CONFIG_$(PHASE_)SUNXI_CE) += sun8i-ce-core.o
- obj-$(CONFIG_$(PHASE_)SUNXI_CE_AES) += sun8i-ce-aes.o
-+obj-$(CONFIG_$(PHASE_)SUNXI_CE_HASH) += sun8i-ce-hash.o
- obj-$(CONFIG_$(PHASE_)SUNXI_CE_ECDSA) += sun8i-ce-ecdsa.o
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-index 4ce1ee70c14..201e9203bf1 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-@@ -679,6 +679,12 @@ static int sunxi_ce_bind(struct udevice *dev)
- 			return ret;
- 	}
- 
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_HASH)) {
-+		ret = sunxi_ce_bind_child(dev, "sun8i-ce-hash");
-+		if (ret)
-+			return ret;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c
-new file mode 100644
-index 00000000000..583d2e5de20
---- /dev/null
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c
-@@ -0,0 +1,343 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 James Hilliard
-+ */
-+
-+#define LOG_CATEGORY UCLASS_HASH
-+
-+#include <dm.h>
-+#include <limits.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <u-boot/hash.h>
-+#include <u-boot/md5.h>
-+#include <u-boot/sha1.h>
-+#include <u-boot/sha256.h>
-+#include <u-boot/sha512.h>
-+#include <linux/kernel.h>
-+#include "sun8i-ce.h"
-+
-+#define SUNXI_CE_HASH_MAX_BLOCK_SIZE	SHA512_BLOCK_SIZE
-+#define SUNXI_CE_HASH_MAX_DIGEST_SIZE	SHA512_SUM_LEN
-+#define SUNXI_CE_HASH_RESULT_SIZE	ALIGN(SUNXI_CE_HASH_MAX_DIGEST_SIZE, \
-+					      ARCH_DMA_MINALIGN)
-+#define SUNXI_CE_HASH_MAX_PAD_SIZE	(2 * SUNXI_CE_HASH_MAX_BLOCK_SIZE)
-+#define SUNXI_CE_HASH_REPACK_SIZE	(128 * 1024)
-+#define SUNXI_CE_HASH_DIRECT_SIZE	(64 * 1024 * 1024)
-+#define SUNXI_CE_HASH_IV_INPUT		BIT(16)
-+#define SUNXI_CE_HASH_BLOCK_SIZE		64
-+
-+static_assert(IS_ALIGNED(SUNXI_CE_HASH_REPACK_SIZE,
-+			 SUNXI_CE_HASH_MAX_BLOCK_SIZE));
-+static_assert(IS_ALIGNED(SUNXI_CE_HASH_DIRECT_SIZE,
-+			 SUNXI_CE_HASH_MAX_BLOCK_SIZE));
-+
-+struct sunxi_hash_job {
-+	struct sunxi_ce_task task __aligned(ARCH_DMA_MINALIGN);
-+	u8 pad[SUNXI_CE_HASH_MAX_PAD_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	u8 result[SUNXI_CE_HASH_RESULT_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	u8 state[SUNXI_CE_HASH_MAX_DIGEST_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+};
-+
-+struct sunxi_hash_alg {
-+	u8 method;
-+	u8 block_size;
-+	u8 digest_size;
-+	u8 state_size;
-+	bool little_endian_len;
-+	bool available;
-+};
-+
-+static const struct sunxi_hash_alg sunxi_hash_algs[HASH_ALGO_NUM] = {
-+	[HASH_ALGO_MD5] = {
-+		.method = SUNXI_CE_METHOD_MD5,
-+		.block_size = SUNXI_CE_HASH_BLOCK_SIZE,
-+		.digest_size = MD5_SUM_LEN,
-+		.state_size = MD5_SUM_LEN,
-+		.little_endian_len = true,
-+		.available = !IS_ENABLED(CONFIG_XPL_BUILD) ||
-+			     CONFIG_IS_ENABLED(MD5),
-+	},
-+	[HASH_ALGO_SHA1] = {
-+		.method = SUNXI_CE_METHOD_SHA1,
-+		.block_size = SUNXI_CE_HASH_BLOCK_SIZE,
-+		.digest_size = SHA1_SUM_LEN,
-+		.state_size = SHA1_SUM_LEN,
-+		.available = !IS_ENABLED(CONFIG_XPL_BUILD) ||
-+			     CONFIG_IS_ENABLED(SHA1),
-+	},
-+	[HASH_ALGO_SHA256] = {
-+		.method = SUNXI_CE_METHOD_SHA256,
-+		.block_size = SUNXI_CE_HASH_BLOCK_SIZE,
-+		.digest_size = SHA256_SUM_LEN,
-+		.state_size = SHA256_SUM_LEN,
-+		.available = !IS_ENABLED(CONFIG_XPL_BUILD) ||
-+			     CONFIG_IS_ENABLED(SHA256),
-+	},
-+	[HASH_ALGO_SHA384] = {
-+		.method = SUNXI_CE_METHOD_SHA384,
-+		.block_size = SHA512_BLOCK_SIZE,
-+		.digest_size = SHA384_SUM_LEN,
-+		.state_size = SHA512_SUM_LEN,
-+		.available = !IS_ENABLED(CONFIG_XPL_BUILD) ||
-+			     CONFIG_IS_ENABLED(SHA384),
-+	},
-+	[HASH_ALGO_SHA512] = {
-+		.method = SUNXI_CE_METHOD_SHA512,
-+		.block_size = SHA512_BLOCK_SIZE,
-+		.digest_size = SHA512_SUM_LEN,
-+		.state_size = SHA512_SUM_LEN,
-+		.available = !IS_ENABLED(CONFIG_XPL_BUILD) ||
-+			     CONFIG_IS_ENABLED(SHA512),
-+	},
-+};
-+
-+static const struct sunxi_hash_alg *sunxi_hash_get_alg(enum HASH_ALGO algo)
-+{
-+	if ((u32)algo >= ARRAY_SIZE(sunxi_hash_algs) ||
-+	    !sunxi_hash_algs[algo].available)
-+		return NULL;
-+
-+	return &sunxi_hash_algs[algo];
-+}
-+
-+static size_t sunxi_hash_pad(const struct sunxi_hash_alg *alg, u8 *pad,
-+			     const u8 *tail, size_t tail_len, size_t len)
-+{
-+	size_t block_size = alg->block_size;
-+	size_t rem = len % block_size;
-+	size_t len_size = block_size == SHA512_BLOCK_SIZE ? 16 : 8;
-+	size_t pad_len, len_off;
-+	u64 bits;
-+
-+	pad_len = tail_len + (rem < block_size - len_size ?
-+			       block_size - rem : 2 * block_size - rem);
-+
-+	memset(pad, 0, pad_len);
-+	if (tail_len)
-+		memcpy(pad, tail, tail_len);
-+	pad[tail_len] = 0x80;
-+
-+	bits = (u64)len << 3;
-+	len_off = pad_len - 8;
-+	if (alg->little_endian_len) {
-+		bits = cpu_to_le64(bits);
-+		memcpy(pad + len_off, &bits, sizeof(bits));
-+	} else {
-+		bits = cpu_to_be64(bits);
-+		memcpy(pad + len_off, &bits, sizeof(bits));
-+	}
-+
-+	return pad_len;
-+}
-+
-+static void sunxi_hash_fill_task(struct sunxi_ce_priv *ce,
-+				 struct sunxi_hash_job *job,
-+				 dma_addr_t iv,
-+				 dma_addr_t src, size_t src_len,
-+				 dma_addr_t pad, size_t pad_len,
-+				 dma_addr_t result, size_t state_len)
-+{
-+	struct sunxi_ce_task *task = &job->task;
-+	u32 total_len = src_len + pad_len;
-+	u32 sg = 0;
-+
-+	memset(task, 0, sizeof(*task));
-+
-+	task->t_common_ctl = iv ? SUNXI_CE_HASH_IV_INPUT : 0;
-+	if (iv)
-+		task->t_iv = sunxi_ce_desc_dma_addr(ce, iv);
-+	task->t_dlen = total_len * 8;
-+
-+	if (src_len) {
-+		task->t_src[sg].addr = sunxi_ce_desc_dma_addr(ce, src);
-+		task->t_src[sg].len = src_len / sizeof(u32);
-+		sg++;
-+	}
-+	if (pad_len) {
-+		task->t_src[sg].addr = sunxi_ce_desc_dma_addr(ce, pad);
-+		task->t_src[sg].len = pad_len / sizeof(u32);
-+	}
-+
-+	task->t_dst[0].addr = sunxi_ce_desc_dma_addr(ce, result);
-+	task->t_dst[0].len = state_len / sizeof(u32);
-+}
-+
-+static int sunxi_hash_run_chunk(struct sunxi_ce_priv *ce,
-+				struct sunxi_ce_session *session,
-+				struct sunxi_hash_job *job,
-+				u32 method,
-+				const void *src, size_t src_len, size_t pad_len,
-+				const void *iv, size_t state_len)
-+{
-+	struct sunxi_ce_dma_buf result_dma = { };
-+	struct sunxi_ce_dma_buf src_dma = { };
-+	struct sunxi_ce_dma_buf pad_dma = { };
-+	struct sunxi_ce_dma_buf iv_dma = { };
-+	int ret;
-+
-+	if (!IS_ALIGNED(src_len, sizeof(u32)) ||
-+	    !IS_ALIGNED(pad_len, sizeof(u32)) ||
-+	    src_len > U32_MAX / 8 || pad_len > U32_MAX / 8 - src_len)
-+		return -EINVAL;
-+
-+	ret = sunxi_ce_dma_map(ce, &src_dma, (void *)src, src_len,
-+			       DMA_TO_DEVICE);
-+	if (ret)
-+		goto out_unmap;
-+	ret = sunxi_ce_dma_map(ce, &pad_dma, job->pad, pad_len,
-+			       DMA_TO_DEVICE);
-+	if (ret)
-+		goto out_unmap;
-+	ret = sunxi_ce_dma_map(ce, &iv_dma, (void *)iv, iv ? state_len : 0,
-+			       DMA_TO_DEVICE);
-+	if (ret)
-+		goto out_unmap;
-+	ret = sunxi_ce_dma_map(ce, &result_dma, job->result,
-+			       sizeof(job->result),
-+			       DMA_FROM_DEVICE);
-+	if (ret)
-+		goto out_unmap;
-+
-+	sunxi_hash_fill_task(ce, job, iv_dma.dma, src_dma.dma,
-+			     src_len, pad_dma.dma, pad_len, result_dma.dma,
-+			     state_len);
-+
-+	ret = sunxi_ce_session_run_chain_or_close(session,
-+						  SUNXI_CE_CHANNEL_HASH, method,
-+						  &job->task, 1);
-+
-+out_unmap:
-+	sunxi_ce_dma_unmap(&result_dma);
-+	sunxi_ce_dma_unmap(&iv_dma);
-+	sunxi_ce_dma_unmap(&pad_dma);
-+	sunxi_ce_dma_unmap(&src_dma);
-+
-+	return ret;
-+}
-+
-+static int sunxi_hash_run_stream(struct sunxi_ce_priv *ce,
-+				 struct sunxi_hash_job *job,
-+				 u32 method,
-+				 const u8 *src, size_t src_len,
-+				 size_t pad_len, size_t state_len)
-+{
-+	struct sunxi_ce_session session;
-+	const void *iv = NULL;
-+	const void *chunk;
-+	size_t chunk_size;
-+	u8 *repack = NULL;
-+	int ret;
-+
-+	if (src_len && !IS_ALIGNED((uintptr_t)src, sizeof(u32))) {
-+		/* CE scatter-gather addresses require word-aligned chunks. */
-+		chunk_size = SUNXI_CE_HASH_REPACK_SIZE;
-+		repack = memalign(ARCH_DMA_MINALIGN, chunk_size);
-+		if (!repack)
-+			return -ENOMEM;
-+	} else {
-+		chunk_size = SUNXI_CE_HASH_DIRECT_SIZE;
-+	}
-+
-+	ret = sunxi_ce_session_begin(ce,
-+				     SUNXI_CE_CHAN_MASK(SUNXI_CE_CHANNEL_HASH),
-+				     &session);
-+	if (ret)
-+		goto out;
-+
-+	while (src_len > chunk_size) {
-+		chunk = src;
-+		if (repack) {
-+			memcpy(repack, src, chunk_size);
-+			chunk = repack;
-+		}
-+		ret = sunxi_hash_run_chunk(ce, &session, job, method, chunk,
-+					   chunk_size, 0, iv, state_len);
-+		if (ret)
-+			goto out_close;
-+
-+		memcpy(job->state, job->result, state_len);
-+		iv = job->state;
-+		src += chunk_size;
-+		src_len -= chunk_size;
-+	}
-+
-+	chunk = src;
-+	if (repack) {
-+		memcpy(repack, src, src_len);
-+		chunk = repack;
-+	}
-+	ret = sunxi_hash_run_chunk(ce, &session, job, method, chunk, src_len,
-+				   pad_len, iv, state_len);
-+out_close:
-+	ret = sunxi_ce_session_close(&session, ret);
-+out:
-+	free(repack);
-+
-+	return ret;
-+}
-+
-+static int sunxi_hash_digest(struct udevice *dev, enum HASH_ALGO hash_algo,
-+			     const void *ibuf, const uint32_t ilen, void *obuf)
-+{
-+	struct sunxi_ce_priv *ce = dev_get_priv(dev_get_parent(dev));
-+	const struct sunxi_hash_alg *alg;
-+	size_t src_len = ALIGN_DOWN(ilen, sizeof(u32));
-+	size_t tail_len = ilen - src_len;
-+	struct sunxi_hash_job *job;
-+	const u8 *tail = ibuf;
-+	size_t pad_len;
-+	u8 digest_size, state_size;
-+	u32 method;
-+	int ret;
-+
-+	alg = sunxi_hash_get_alg(hash_algo);
-+	if (!alg)
-+		return -EOPNOTSUPP;
-+	if ((!ibuf && ilen) || !obuf)
-+		return -EINVAL;
-+	if (ilen > UINTPTR_MAX - (uintptr_t)ibuf)
-+		return -EOVERFLOW;
-+	method = alg->method;
-+	digest_size = alg->digest_size;
-+	state_size = alg->state_size;
-+
-+	job = malloc_cache_aligned(sizeof(*job));
-+	if (!job)
-+		return -ENOMEM;
-+
-+	if (tail_len)
-+		tail += src_len;
-+
-+	pad_len = sunxi_hash_pad(alg, job->pad, tail, tail_len, ilen);
-+	ret = sunxi_hash_run_stream(ce, job, method, ibuf, src_len, pad_len,
-+				    state_size);
-+	if (ret)
-+		goto out;
-+
-+	memcpy(obuf, job->result, digest_size);
-+
-+out:
-+	free(job);
-+
-+	return ret;
-+}
-+
-+static int sunxi_hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
-+				const void *ibuf, const uint32_t ilen,
-+				void *obuf, uint32_t chunk_sz)
-+{
-+	return sunxi_hash_digest(dev, algo, ibuf, ilen, obuf);
-+}
-+
-+static const struct hash_ops sunxi_hash_ops = {
-+	.hash_digest = sunxi_hash_digest,
-+	.hash_digest_wd = sunxi_hash_digest_wd,
-+};
-+
-+U_BOOT_DRIVER(sun8i_ce_hash) = {
-+	.name = "sun8i-ce-hash",
-+	.id = UCLASS_HASH,
-+	.ops = &sunxi_hash_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-index d5b7edd357d..b7bb899c5f0 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-@@ -21,6 +21,11 @@
- #define SUNXI_CE_COMM_INT		BIT(31)
- #define SUNXI_CE_METHOD_AES		0
- #define SUNXI_CE_METHOD_RAES		0x30
-+#define SUNXI_CE_METHOD_MD5		16
-+#define SUNXI_CE_METHOD_SHA1		17
-+#define SUNXI_CE_METHOD_SHA256		19
-+#define SUNXI_CE_METHOD_SHA384		20
-+#define SUNXI_CE_METHOD_SHA512		21
- #define SUNXI_CE_METHOD_ECC		33
- #define SUNXI_CE_ECC_OP_VERIFY		7
- #define SUNXI_CE_ECC_OP_SHIFT		16
-
--- 
-2.53.0
-
+Best regards,
+Juuso
