@@ -4,67 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45486C44524
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 06:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FFEC44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 06:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 356D482991;
-	Mon, 20 Jul 2026 08:11:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E072E82991;
+	Mon, 20 Jul 2026 08:21:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="glyYQgK1";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pYdDg9oe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA56183E76; Mon, 20 Jul 2026 08:11:22 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 9599283E76; Mon, 20 Jul 2026 08:21:19 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com (unknown
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E26C80517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:11:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41A7580517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:21:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Revex1uVkzpcIGE9INNO9z1MA5HPtha25t1Xu9grFYjztjNPd4kOc279MsHwQVSGr5Tqcm7kZwwg+qxeqcsoZ3ioDQaYU3+ZjN3MNdQA/pLztTzDdoLRcRMZquHmfCha/ZJFRHWFsK0aU7TLYwQ8YEDhGQ27jr3xOf1loDTGR5w4x77gIky+jUNcSSU17SXSmyGQxEm/UXjwPx35BXbBtcZfEmJDQAr8lIWcb/qr4BeQWAmhGGykD2UCqkeNePNz8nPIKfKm3caQU6CVGNscOKw0XZlTcfBAFi7wTvgkxMOaKGVnBsAc6XuVGVFSHEij6Hkdcx1aBMmTl9yIedDVqw==
+ b=s8BRoBZAECJAHk6yMyNje70A9yRFmTV22uHHRs4SHHQikoVLpugOhkdmVdcl6I2z7I2sxtUgkn0zg0kBNgnhGE+b5Eo+PqEl8fHCA6ztaHldLZX5OsvU+gRF55l5ykm0Ah+av/8zRykqkEGHK8ocb+qCvZS79LDdLf6GaVBPb6f/dPC7y7FQqTKCtCnbHRINt9JH/itt87KM24E14OAxQCclcUtLmYChJtlJ6nKpb7QJqk+SBceMcdFVo0hP3YRJQO023JitxShtC5ilr0OqmlbBirzmR3L7XTzSDTQjBqTXkVQ3RAnWJFzHTZrHyT17Fkf90eQlpAnP+cyqxuUZwg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uSetMVuzrqpdruQn0ifg2ZYgp0D+vACzjFEWQscIhcg=;
- b=unaOdPvvWdfnauaG7vKGva2L2gYvfPfMWgvBRMjlTVGAYgx5s6LdqlrqZdzMs4/pYa51F2LTGh76ZeCI/tnwQsO4K9EFspCpo+s51GalWQNaUlkx918jG56kvMnKKaifB2qsDXJk+p2t1zWaK4wIFO6OHxoMRknhCZ7p0nYdlEU/WJD7fvmsP9vMTOPcNOJYxo0W+HFulRPyESdl0wt/A0f46DJV81DrafzzoUYP8aGr6u2kYFmaqAGGbAGy6iRCCg5gn4xQGiRgI9KEgXnNCds+fy6z22t4O7Wk6lqLt3OdRM2H98wwsSJPRdCRpEmxMhJHFo4AVjXTpnhH+F87Qg==
+ bh=MP91Yt7iWzZZLqLJbCsGGpEoP/jf6TY0B9/0d3S+BQ0=;
+ b=Fqu065RegCZYgyhoHi0Q5IscHV6WLjGFwIzJ+qGA9tY+FttimBy39UN0m2XEuGWhVj6tgin15s1i92kbHeFUSZaSo8SkjWki3oRISz6J9PAncvjBG/TCrQpJn3e6R7s0hB/a/AlngkN57QN2ugIIgQzcMIA4lH8cju5BBCj+JaXeioCn6sSWa69rJ58xewDmDU74Tg5W/wWNXISPfudj7zP3yPlV5w9N0GenaziIVmwREoq/id+R5tT9OD/PvZt39bRTxpnytD9jXqbJhaC3UDDfGvwWH5olhAXHSS/W4UFwlFVR8/3lK5AmT6MX+bDRYbHfcaN0A066AJfYcJejaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uSetMVuzrqpdruQn0ifg2ZYgp0D+vACzjFEWQscIhcg=;
- b=glyYQgK1qiO5X1SyL+AztOuvhlIkyYwOFUXL+dG/Eh2ZPeNZXeJ7ZzN6GunU45s0vSvWES3Nj4AanI1wFUB3vMVVYv0exYiIzGuJs4PdsWqGAW+kWjIj2CkBwQrw270ElENF0M6KBSDBDhZKB+UZs1pISmVbdB5+6Al2YUntNyA=
+ bh=MP91Yt7iWzZZLqLJbCsGGpEoP/jf6TY0B9/0d3S+BQ0=;
+ b=pYdDg9oeWFESaq/WOkQiXMsCpSRUQsdsK8N9+N5W7/yjQJlEWO4n0EbMUxO5L27xsNdBs4S2OGJdl1TwT4d4WrKY8yXYg4y+ECvQOSN1BBwg8j1GP2Kbcer+pYhbDYDh4bzxUjrPW5MuDg6gbIVSBIe90JOzf49copupWJ8i4PU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by MN0PR12MB6031.namprd12.prod.outlook.com (2603:10b6:208:3cd::7)
+ by SN7PR12MB7201.namprd12.prod.outlook.com (2603:10b6:806:2a8::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.16; Mon, 20 Jul
- 2026 06:11:16 +0000
+ 2026 06:21:08 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0223.013; Mon, 20 Jul 2026
- 06:11:16 +0000
-Message-ID: <179b7eb6-61ba-426f-9dd1-b0aad4a05426@amd.com>
-Date: Mon, 20 Jul 2026 08:11:11 +0200
+ 06:21:08 +0000
+Message-ID: <d38109ed-eab4-4fd1-9e61-9e5a3268ebd5@amd.com>
+Date: Mon, 20 Jul 2026 08:21:04 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] riscv: Skip riscv_cpu_setup() when CPU driver is
- disabled
+Subject: Re: [PATCH v2 1/2] arm64: versal2: Make hardware.h assembly safe
 From: Michal Simek <michal.simek@amd.com>
-To: Tim Ouyang <tim609@andestech.com>, u-boot@lists.u-boot-project.org,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, leo.liang@sifive.com
-References: <8953b5de682097450d7434e267380ac40cba6347.1778488310.git.michal.simek@amd.com>
- <967b6d66-15f2-4e5c-9de9-3c530700cd05@amd.com>
- <5q5jvub5st33a5i3wfepjbqjcvxmxfyrjun7wxptqfjccra54d@ceo2hhhzibnv>
- <d00b7401-d52e-4d49-bfd3-6330d8b31a94@amd.com>
+To: u-boot@lists.denx.de, git@amd.com
+Cc: Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+References: <de4de47ea457b285c5870e7ba25b4baf554561e7.1783493630.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -110,75 +104,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <d00b7401-d52e-4d49-bfd3-6330d8b31a94@amd.com>
+In-Reply-To: <de4de47ea457b285c5870e7ba25b4baf554561e7.1783493630.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BY5PR04CA0007.namprd04.prod.outlook.com
- (2603:10b6:a03:1d0::17) To LV5PR12MB9779.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR03CA0217.namprd03.prod.outlook.com
+ (2603:10b6:a03:39f::12) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|MN0PR12MB6031:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74747d26-8ace-4128-c936-08dee625b52b
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SN7PR12MB7201:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1598edf7-9dd0-4916-c3e8-08dee627164a
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|3023799007|6133799003|11063799006|10067099003|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: yhIvRzMYorplVBcTfTewxo2RoCxE+8/UxyT0sG8yV2NS8VtyCjDm+nKl7x6rUIGqiXdWY0+flVJmJY0P7LFtIiKV5Yl4I6++IssWA3sTlqakxe9fpyCjrcvdiD1wDz/REZteVAdcFSAFQzBpvvlytAEML8ta+KYFIiBuH86wau9LiYwcdW/VVAF9Ump/RP6bFzmYzvLltxOMmkfxGn1BbS/9gzg3xmoAbQxfj1CfZ/HQ+TsVxagGt9vHA096nqu2yA3Mk7cMYhnMxcY6MNthgIvQ7a5S47IE6VWTmnZo8sYQl1u/zeuUlTxlyTQQLEs60JDe0GfhcnDktiCoeAdEkh7sx/hjrZFbamz3qcqkMeEl+VKOfzFkyG+mAwkYCeQRYthI8AK77vR64dTkPLu91zSJNKyhvC4bQo5+PrOtyzpQykrghP1rlL5jZgMxi8YwnqTtyhdDNR27Dwrn0XRviYnlzTEb3r0No4749hwg8AIJoQpPKcig4NTJ4u/vqDWL64qDZqZVmwsO4eZxJvepSnH1fwTWLHmmhOm5ozgNxz0uESt2Ocnq6VjtyG0jIlEQEFrLOzhWQY8yNN9jmTS5KOwvAAuZsAexik+C84ffdyZR2lrOGVU4peiEB7PFwKXbRwcvWua20RgQ9BgcHTuZMuKiH2L9QbvZ3bOP4yotzqw=
+ ARA:13230040|366016|23010399003|1800799024|376014|10067099003|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: LIIna3VoGW2A8TXmBGD0eI0XLAB0AWTVK9vtwjg9QsXHq9Jz4bix3aDxNATjOxK2D3JScou62huM7MlwX/w+f3m11WDEgHRA6gPo0wcM0m+q75JMZxdVQzz9PVv5xiK9H8pv/2/qPU6AJ1xHZhuvYH8mtdro+BwOVEMNMSlicwZxpoRO+fvgGd84eA1E3AZgCPdSjDIW6rdnaAm2tKiSiHAxFbEYZiQM8cLqxHsEg+/QYFu3nnIpR3TWLFDrN44Nvrl674Odh+T932qIpP02u9AAhCC/cJMYo0K/nkM2MMsP0RfiroajBZCwKgN58Flms4wrmPlu430MVZ5ZbFQaheqTEUlJ2SWLYGFxsgqdDDMdA40eD9zNwS3cHohx8oTjPHcmEB48PgLFDRPsHn58ytPAMjxX2O2YqX93gyTHLl3WjSbIe8t0AlP3H9hYWOAgaXFzs6OopHVOfG9NOitToFG8Q7BMFsR1Kc2MLVYUGqBAhfLjYrff2qd+9pfVtkFlzlCuL+Q3PxH9+VjgHnyR+430LiUFkx2epbVmNb2oHMxOTSBfzwz2nSqd/BeEUwjCzJHQo0Cg8qkll/eZIwLxX9iM/eQKUl50A1OO2Av16cm/aDC6xergxQqpgOeN/fumSgw1hrKmeksgiW1QUk+BYKuB8P13gbpD/dLf0mQfprA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(3023799007)(6133799003)(11063799006)(10067099003)(4143699003)(56012099006)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RWVVQUF6UkFPa1U4ZTdON25wTEo2K0lsbmVEOEtkbmV6TnlnMnliZUdSeUJo?=
- =?utf-8?B?NDhJejdhUVF6YU1wS3NBWXVkekpnUldmczRZT09OVFJUZGV1aGpXVzd4TERP?=
- =?utf-8?B?MmtmRHlNRGlObDBKK05iSGEwaWJsY2lxZ3I0R1A5aUtBREdMNmhuQnJaaXNq?=
- =?utf-8?B?ZmF0cFZpUVpHOWdrVy9SSUM0UHhrb2szczJKUlFRZFRiblpvTFpOSGEyeFph?=
- =?utf-8?B?ZTdPcmVKais2aWRMQkF0UWRqNkt1cEpoUjV5WUMveTJPOG1HY3dvMXd5T3J2?=
- =?utf-8?B?QUNBVmZHalM1ZVBNRFNodStURFJ3ZUFGN0g3eVJDUWF3OENsYzkvLzZYWGxZ?=
- =?utf-8?B?RHBiaW9hbVN3dVcxcWZTcno3N2FpaXBmcXB2M3lFRGtWZkc4REFoZzAxZ3o4?=
- =?utf-8?B?N3VGYU14WWJFVWJPSmpwQVA2YzdLU1pDcXpXLzY3bGFWNFZqTEhmUkdOQ043?=
- =?utf-8?B?aGdRcDc0SUhON0NzWXVwVTZ3NDRIeFRlQ3UvbFZBbUd2d2lLS2xRRUZWT0U4?=
- =?utf-8?B?VjFiRGxiL3pmcWNaN0xoTC9ZQ2pweDBRVUVuQ0ExRlJGVkRqeWh1S2h4NER6?=
- =?utf-8?B?SXorZ2dtcm5aMVNtRjBCUi9XTGxaQ1YxcEV1UW56QmI3TmQrVk5iVkIrYzhL?=
- =?utf-8?B?TG9DTmQ3OGQ1M1A4Sm1YQWFXVXlyVFhhVjNkTmNHclNrWStRd0tLeXpvcFBD?=
- =?utf-8?B?QzJMVkhtYzJHQ2NIZC95R3V6Ri8zTGg2VGl4Vmc2Nnh4Tm1ULzVOempsMWNl?=
- =?utf-8?B?ZUV5L2xrOCsyanFvcStqUkNTK05PTUFnMWVkR0dVZk83Qm16TGV3dlpwbG1M?=
- =?utf-8?B?UENoNkpBUW1NdXZRWXlwcWlSbldaVDhIYkFPeWRZVytKU3FWUTNHRUtYcmFl?=
- =?utf-8?B?ekFIVUh4OENVei9RY2FMUFc5ejdVdlhGWjRybWdCNG43VTNYMFllMHFyb1Nz?=
- =?utf-8?B?eGJlY0JlU3JrdGwxS1ZNamZLOFdNTHJLeHV3ZEJ2N1lqOGtqcGtuMWl4VndU?=
- =?utf-8?B?UzJYMEZCQUo4UFhFakxIQUcvYnZ1eUoxMzdtbkpFdEtMTy9mOWpKSDg2TzBW?=
- =?utf-8?B?TFZ0MUlBVmRzVXYxeGRHUlJrckhzQjJ2NWNlNEVTd1g1MEt4SndHSmFaazda?=
- =?utf-8?B?NTM3TmlpZjJ5VkdTYWRqTUVxbnVKL3ZCWnFPbzdaOE50cU96ck81VkRZQWo1?=
- =?utf-8?B?MnFDVDNIUzFqWm9sNlZ4dEl0bE9UdFVHY293aUU3SktZRVJYaFJRYVdIQlNr?=
- =?utf-8?B?WmNzOHJGMGQrMUJOMzhQWlF4eUVFM1JzcEExREYvTXZwLzZXWDg2YTMrUUEw?=
- =?utf-8?B?UEx4RFNxbFFLb3d3aThyRVNPTHR2Yk0vK21PdWMvcklHOUMyY1AxdldVdlZD?=
- =?utf-8?B?bTBMNnVvVDlhaG9vRDk0THg5RHNuMURGYW5EMHU3M2JEZG45Yk1nVVVMRFoy?=
- =?utf-8?B?QUNIR3d4NmtITXFBbFo0OERjbWN6NENRZitGQVQ1WVhpS2dtSWNHVHBobzFQ?=
- =?utf-8?B?RHFZYlZoZWJ3N0Y1WjZIME5zd1B5ZmhtanBLdExiVWR6YU5WY2krdHMrMTkx?=
- =?utf-8?B?K3owZzdod3o0MlptSzZ3dHBYSGtVVzNybzZhc2tNM0publVKTTRGQUh5YU5V?=
- =?utf-8?B?UklTKy9lQTdEbzRYVFgwVzZmSGdrb2xXVzRWbngvNGlJRmdKUTd0NFd1Tm56?=
- =?utf-8?B?WkNjT0tWL1I3dzY0VkRxTGw2c3FQMjdOWmhYU21qZUxxUlFvbkc1cHVwamZR?=
- =?utf-8?B?K3lHNFpCMS9ZY0p4bUo5c2Erb0xTaXQwT2NiUWhvVmF5bEZQMjV4cSthOUdR?=
- =?utf-8?B?ZzFmendwdGFJaTRUVk51aEJ5QzVFVmtvWjJHM3pLa3NGRnpJY1g2N2lycUJQ?=
- =?utf-8?B?R3dGSFRnUlJnaVQ2b1lESDRPWVFtL2Irbzk4RjBCVndTRFRRekhMVm56c3FC?=
- =?utf-8?B?c3ZnVjl3OGp6ckt0VnMyQnR3NXpLYklkalF2NHBQM0tvb1NHMTA1TnJGZ0E2?=
- =?utf-8?B?STIxL0xaZzdybFhFR0tFTTJHZGtNVHhJMmVmTWJtVEZoZWJ2bmx3L2ZEdEJ3?=
- =?utf-8?B?WGxtbHEzL0c4N3lWU09tTUhqRTBma2xWcEZLRW1jMDhiQUllMTVQVmllWE5i?=
- =?utf-8?B?UG9Tak1PYk5qK0FpSGNNb1NHSDQ1a054aFl2ZEVCeWcrZDVDeXFVT05pc1hW?=
- =?utf-8?B?eFROTGtyNDhRSHRzTldKZHliRXhGeHpqZ1lXQXNwY2s3UWJ3V2Zud3RkUmY3?=
- =?utf-8?B?RldxQVh6ZnJKSHhyVGRUQmxsaTNnN0pVbUhsL080MFdnSHFvRnM0VXZaaUhq?=
- =?utf-8?B?eU5wbnZpdzZpRytnV0s4VlhtT0NpQmtiSEEvMm8rTWJ2bk5QNytZdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dTM0aWdibi9XcTFlR3BvWG9UQjVSMktiaTR1UFVCK1d2UDNFb2V5ODM4YW1J?=
+ =?utf-8?B?STdZNjRzMWFDWlVyUzNMRTh1cE9zc0ozQXlzOVBZRXNPeXI1UTdaYkN6WGJv?=
+ =?utf-8?B?dVhsWkFjKzJSVDl0eXluRVBoTDNTT0dibStDQ3RYdVdrUFF0YmNxUkRnSXg4?=
+ =?utf-8?B?Mjh1aWVjYkxVRTdNR2taNDlkT2FEcmZBQVNLaHNsZDdnaGFuVVhxRUdSU1Na?=
+ =?utf-8?B?VzFFdzFYL1RFWEZ4ckFZTlV0SFo1cjErTWRGUktPWGlXVW8zZkJBV3lQb01z?=
+ =?utf-8?B?WTUvWkhLQW9lUXdiNm9RbEpkSUcvaHBJVnNQVXpKMEd1TmN3dU5WTGwvcklh?=
+ =?utf-8?B?VnAvMEUrUGk4SzNUVDZtRC8vNG9seWJycGRTTlhqWEdRbE5iZ3NxRnF6UjJI?=
+ =?utf-8?B?NGdsenBjR3k2SE5XeUNBampLV2VvbCtmclNWTE1lYXRPSkQrK1dCOHJHZTIv?=
+ =?utf-8?B?QllPUWF4VmpHUjFzVHROeXNwSG1DdHFzbDNDSGhjUCtDYmFqTmsvdmZtU2Q4?=
+ =?utf-8?B?dXE5TU5QRy95Vmh0aTB2Ym0xQVhMTm56Z3lqSndhT2MveHFMdWEySVA4eGZL?=
+ =?utf-8?B?T2o2RWJydzl5T3NwV1V2OFg5RVc1ZWppNHJhdXE3aElPang3TktYVFB6YjJu?=
+ =?utf-8?B?cDg4WVczQmRPNUhGVG92dlo1SXRoa1JWWXFmZzdaV0tiSHlxSTJ0Q1hITDJH?=
+ =?utf-8?B?UUkwdWdtK0FSTE96MnVJakV5R2IwaEQ5cTdWanEzQllGcVVrRlpXb1dRK2ps?=
+ =?utf-8?B?YTVsMVVDaDVmT2taQkNIZzJQN2t1cFJtUHB3eFhkdTVBK2EzQXVtNlhySkEz?=
+ =?utf-8?B?MkRtakhJRmFuSG1lRTFoSGNibWRDMXBON2hFRndHMVhQK0NJRzg2QXFLU1Bq?=
+ =?utf-8?B?L0lLVGhIdlVoTE9HelhPczhQOGcybUpJRUM2b2hSN1B0Wm0vS0J1bm93VUlv?=
+ =?utf-8?B?RkhyZkhic0tJQXBDb1lxa25hdm13aXp3RUVmZkE4MExiM05RS2hlWEZKVmp0?=
+ =?utf-8?B?WjV1Y3ZPcFRHOFpTczBwQTAwdUprbEJZNkVPek95ZDFLZDdtZU5EdkhDbEl1?=
+ =?utf-8?B?b3ZMSWtkQjBKRDNvYW9iMkVSMzZWekp2UC9QRlBlam5QNTg2NUZLMWl3YWFu?=
+ =?utf-8?B?dWdEMWFDekx0ZW1Jam01bFdvM3RTZXlGV1ZicGk2dk51NU5jaTg5V0tia1pi?=
+ =?utf-8?B?VmhHK25YZmlQanU1MnFOeEIvODZrWmhyM29kTituVUNCazZheS9PSjQ1ZkFu?=
+ =?utf-8?B?anpJbk12cGRRbXh2QmNIUXBKT3lNelJaZkVvcDF5QXFXSUZlVTdpTTZpcXVZ?=
+ =?utf-8?B?MEdYNHBDMm1BQnI4QTZVQlF1L1VGRTJsTjJCZkxXZktJbDNEZTRFajByMmhx?=
+ =?utf-8?B?MjBUUjBlZk1TK21nWlhESmJ2WkwwM2w1cG5pWjFIWjdwMy8venV2WEpEYzRD?=
+ =?utf-8?B?MTJKdE0zUjl0Q1V4S2l5cTgvcjBWQ29wSktzQllhZW00Y0ExdGx6dmpSUmhQ?=
+ =?utf-8?B?OGh0VXUwb1FoWWduK3RwME5vanVxaHdDVmw1TU9sMWZDcEttdnRRYzV2bzhr?=
+ =?utf-8?B?S3c0WmRzZlVRelVoYnpXZmlZZ2hLK0hNeVd5RWd5N0tYN2VrYnBRdFZCdW0y?=
+ =?utf-8?B?cm9JdXl2bFVhd0Z3TEV4VkZUUUlQS3Q3MVFaOW5oTDlOa0IrYXV3QVB2UW9r?=
+ =?utf-8?B?QzF2a1AyYjY5NEI4aW9SclBtUEJra1ZnTnFBem5YU3B2L09CT1gwM2J0NDdL?=
+ =?utf-8?B?dHRyTXp1Qkp5VUJYWENENjVsVTRmdFo5RTdJamtSZnBUNUdGS2MySTlhbGdX?=
+ =?utf-8?B?bTVncmtZazRsL1oxd3FLanV0NEs2K3pOWGlOcnhzTjFlbmxPalcwUk9pUXdF?=
+ =?utf-8?B?eFhBV3JCbVlEMnM0ODcxVG5BZVhDdWlBVUg1dEs1MkYrbWtBc1VlaTBxeXE0?=
+ =?utf-8?B?aWljWUk2bU4yUDN5S1E0enlzUkxhL1NROFZMN2p6N2hJY3NEM1Q0RWlIZjFa?=
+ =?utf-8?B?U2Y1RWlMY2dPZHB6Z2tvcklkaDU3Tnl0NGs2SVdsTHhVZjRlZnc2enk5WDYx?=
+ =?utf-8?B?YVVST2J1aURzNWRBNzNUUFhFVVpPUTFVMER6bUNYMWFQUDN0OUM3SmtOL3o5?=
+ =?utf-8?B?b0ZpZ2E0bFhGSDQ4cTZxd2V6Zk82b1VjN0hEbUNzOWxpUlJ2STNmQUdEcWNT?=
+ =?utf-8?B?dDZ6OGhGczdqcEFPd2xXWjA3UURWcUZLRnRwdW5xaUFaOUx1WnV5TmFudWtu?=
+ =?utf-8?B?eC9XTFBobnZ3Y2RyN1EzOFJHMmxEYno3ZXVOMnFtSlRBQ25qc0dBSnoxd0Rk?=
+ =?utf-8?Q?gX7hRzRxzUzge3K2iL?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74747d26-8ace-4128-c936-08dee625b52b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1598edf7-9dd0-4916-c3e8-08dee627164a
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 06:11:16.2395 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 06:21:08.6526 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ParkWNDXM6jl8pboItdbnzLs/zjM7NH12+VyTVDTPfh9uuNdZi61m2k7uYErL9wp
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6031
+X-MS-Exchange-CrossTenant-UserPrincipalName: Rq0fAys71koQER4f7LsHnp9jgtRPb0YeHXDh2qhJ8Svo9E2/vvt8M73uOCT6Fzft
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7201
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -195,111 +190,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
-
-actually not sure why this was off the list. Let me add it.
 
 
-On 7/2/26 13:26, Michal Simek wrote:
+On 7/8/26 08:53, Michal Simek wrote:
+> The register address and bootmode defines in this header are useful from
+> early assembly (e.g. lowlevel_init reading PMC_TAP_IDCODE), but the file
+> could not be included from .S because the C-only declarations were not
+> guarded.
 > 
+> Reorder the header so all plain address/value defines are visible to both
+> C and assembly, and move every C-only construct (the linux/bitops.h
+> include, the register structs, the base pointer-cast macros and the
+> platform enum) into a single #ifndef __ASSEMBLY__ block.
 > 
-> On 7/2/26 10:57, Tim Ouyang wrote:
->> On Mon, Jun 29, 2026 at 11:00:40AM +0200, Michal Simek wrote:
->>> On 5/11/26 10:31, Michal Simek wrote:
->>>> Building on commit c64fc632a86a ("riscv: cpu: Use CONFIG_IS_ENABLED(CPU)
->>>> instead of plain ifdef"), add an early return in riscv_cpu_setup() when
->>>> CONFIG_CPU is not enabled. This allows platforms to save code space in
->>>> SPL by disabling CONFIG_SPL_CPU.
->>>>
->>>> Without this patch, building U-Boot with CONFIG_CPU=n and CONFIG_EVENT=y
->>>> is broken: riscv_cpu_setup() is registered as an EVT_DM_POST_INIT_F event
->>>> spy, and when the CPU uclass is unavailable uclass_find_first_device()
->>>> returns no device, so the function returns -ENODEV. That in turn makes
->>>> event_notify_null() in dm_init_and_scan() fail and triggers a boot hang
->>>> ("initcall initf_dm() failed"). Returning 0 early avoids that failure.
->>>>
->>>> The compiler's dead-code elimination combined with --gc-sections
->>>> removes the unreachable code and all associated static data,
->>>> achieving significant size reduction without preprocessor guards:
->>>>
->>>>     spl/u-boot-spl:all -4332 spl/u-boot-spl:rodata -2872
->>>>     spl/u-boot-spl:text -1460
->>>>
->>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>>> Reviewed-by: Yao Zi <me@ziyao.cc>
->>>> ---
->>>>
->>>> Changes in v2:
->>>> - extend commit message
->>>>
->>>>    arch/riscv/cpu/cpu.c | 3 +++
->>>>    1 file changed, 3 insertions(+)
->>>>
->>>> diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
->>>> index bbadd0c9a469..3bec7c7cb6d0 100644
->>>> --- a/arch/riscv/cpu/cpu.c
->>>> +++ b/arch/riscv/cpu/cpu.c
->>>> @@ -638,6 +638,9 @@ int riscv_cpu_setup(void)
->>>>        const char *isa, **exts;
->>>>        struct udevice *dev;
->>>>
->>>> +     if (!CONFIG_IS_ENABLED(CPU))
->>>> +             return 0;
->>>> +
->>>>        uclass_find_first_device(UCLASS_CPU, &dev);
->>>>        if (!dev) {
->>>>                debug("unable to find the RISC-V cpu device\n");
->>>
->>> Can you please take it directly to next branch?
->>>
->>> Thanks,
->>> Michal
->>
->> Hi Michal,
->>
->> The new RISC-V maintainer here. It seems your patch does not fix the
->> issue. I tested it with the following steps:
->> - mkdir -p $OUTPUT/test
->> - make qemu-riscv64_spl_defconfig O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
->> - make menuconfig O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
->>    Disable CONFIG_CPU manually
->> - make O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
->>
->> The build fails with:
->> riscv64-linux-ld: common/board_f.o: in function `initcall_run_f':
->> /work/u-boot-riscv/common/board_f.c:921:(.text.board_init_f+0x166): undefined 
->> reference to `print_cpuinfo'
->> riscv64-linux-ld: drivers/timer/riscv_aclint_timer.o: in function 
->> `riscv_aclint_timer_probe':
->> /work/u-boot-riscv/drivers/timer/riscv_aclint_timer.c:77: 
->> (.text.riscv_aclint_timer_probe+0x24): undefined reference to 
->> `timer_timebase_fallback'
->> make[1]: *** [/work/u-boot-riscv/Makefile:2112: u-boot] Error 1
->>
->> Please correct me if I missed something.
+> No functional change for C consumers.
 > 
-> It is not valid configuration because dependencies are not properly described in 
-> Kconfig.
-> drivers/timer/riscv_aclint_timer.c
-> calls timer_timebase_fallback() which is defined in drivers/timer/timer-uclass.c
-> as
->   90 #if CONFIG_IS_ENABLED(CPU)
->   91 int timer_timebase_fallback(struct udevice *dev)
->   92 {
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 > 
-> It means for this risc-v configuration in Kconfig when aclint_timer is selected 
-> it has to depends on CONFIG_CPU/CONFIG_SPL_CPU or should select it by default.
+> Changes in v2:
+> - new patch in series
 > 
-> Microblaze-V is not using this timer that's why no problem to disable it.
+>   arch/arm/mach-versal2/include/mach/hardware.h | 82 +++++++++----------
+>   1 file changed, 41 insertions(+), 41 deletions(-)
 > 
+> diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
+> index 1bebf20910a0..7977529fd6c1 100644
+> --- a/arch/arm/mach-versal2/include/mach/hardware.h
+> +++ b/arch/arm/mach-versal2/include/mach/hardware.h
+> @@ -4,34 +4,6 @@
+>    * Copyright (C) 2022 - 2025, Advanced Micro Devices, Inc.
+>    */
+>   
+> -#ifndef __ASSEMBLY__
+> -#include <linux/bitops.h>
+> -#endif
+> -
+> -struct crlapb_regs {
+> -	u32 reserved0[67];
+> -	u32 cpu_r5_ctrl;
+> -	u32 reserved;
+> -	u32 iou_switch_ctrl; /* 0x114 */
+> -	u32 reserved1[13];
+> -	u32 timestamp_ref_ctrl; /* 0x14c */
+> -	u32 reserved3[108];
+> -	u32 rst_cpu_r5;
+> -	u32 reserved2[17];
+> -	u32 rst_timestamp; /* 0x348 */
+> -};
+> -
+> -struct iou_scntrs_regs {
+> -	u32 counter_control_register; /* 0x0 */
+> -	u32 reserved0[7];
+> -	u32 base_frequency_id_register; /* 0x20 */
+> -};
+> -
+> -struct crp_regs {
+> -	u32 reserved0[128];
+> -	u32 boot_mode_usr;	/* 0x200 */
+> -};
+> -
+>   #define VERSAL2_CRL_APB_BASEADDR		0xEB5E0000
+>   #define VERSAL2_CRP_BASEADDR			0xF1260000
+>   #define VERSAL2_IOU_SCNTR_SECURE		0xEC920000
+> @@ -41,10 +13,6 @@ struct crp_regs {
+>   #define IOU_SWITCH_CTRL_DIVISOR0_SHIFT		8
+>   #define IOU_SCNTRS_CONTROL_EN			1
+>   
+> -#define crlapb_base ((struct crlapb_regs *)VERSAL2_CRL_APB_BASEADDR)
+> -#define crp_base ((struct crp_regs *)VERSAL2_CRP_BASEADDR)
+> -#define iou_scntr_secure ((struct iou_scntrs_regs *)VERSAL2_IOU_SCNTR_SECURE)
+> -
+>   #define PMC_TAP	0xF11A0000
+>   
+>   #define PMC_TAP_IDCODE		(PMC_TAP + 0)
+> @@ -76,15 +44,6 @@ struct crp_regs {
+>   #define PMC_MULTI_BOOT_REG	0xF1110004
+>   #define PMC_MULTI_BOOT_MASK	0x1FFF
+>   
+> -enum versal2_platform {
+> -	VERSAL2_SILICON = 0,
+> -	VERSAL2_SPP = 1,
+> -	VERSAL2_EMU = 2,
+> -	VERSAL2_QEMU = 3,
+> -	VERSAL2_SPP_MMD = 5,
+> -	VERSAL2_EMU_MMD = 6,
+> -};
+> -
+>   #define VERSAL2_SLCR_BASEADDR	0xF1060000
+>   #define VERSAL_AXI_MUX_SEL	(VERSAL2_SLCR_BASEADDR + 0x504)
+>   #define VERSAL_OSPI_LINEAR_MODE	BIT(1)
+> @@ -108,3 +67,44 @@ enum versal2_platform {
+>   
+>   #define PMC_GLOBAL_PGGS3_REG	0xF111005C
+>   #define PMC_GLOBAL_PGGS4_REG	0xF1110060
+> +
+> +#ifndef __ASSEMBLY__
+> +#include <linux/bitops.h>
+> +
+> +struct crlapb_regs {
+> +	u32 reserved0[67];
+> +	u32 cpu_r5_ctrl;
+> +	u32 reserved;
+> +	u32 iou_switch_ctrl; /* 0x114 */
+> +	u32 reserved1[13];
+> +	u32 timestamp_ref_ctrl; /* 0x14c */
+> +	u32 reserved3[108];
+> +	u32 rst_cpu_r5;
+> +	u32 reserved2[17];
+> +	u32 rst_timestamp; /* 0x348 */
+> +};
+> +
+> +struct iou_scntrs_regs {
+> +	u32 counter_control_register; /* 0x0 */
+> +	u32 reserved0[7];
+> +	u32 base_frequency_id_register; /* 0x20 */
+> +};
+> +
+> +struct crp_regs {
+> +	u32 reserved0[128];
+> +	u32 boot_mode_usr;	/* 0x200 */
+> +};
+> +
+> +#define crlapb_base ((struct crlapb_regs *)VERSAL2_CRL_APB_BASEADDR)
+> +#define crp_base ((struct crp_regs *)VERSAL2_CRP_BASEADDR)
+> +#define iou_scntr_secure ((struct iou_scntrs_regs *)VERSAL2_IOU_SCNTR_SECURE)
+> +
+> +enum versal2_platform {
+> +	VERSAL2_SILICON = 0,
+> +	VERSAL2_SPP = 1,
+> +	VERSAL2_EMU = 2,
+> +	VERSAL2_QEMU = 3,
+> +	VERSAL2_SPP_MMD = 5,
+> +	VERSAL2_EMU_MMD = 6,
+> +};
+> +#endif /* __ASSEMBLY__ */
+> ---
+> base-commit: 3278a671cb521d898e6f49d35f6bc034b2ac4d46
+> branch: debian-sent3
 > 
-> And the second issue around print_cpuinfo. When you disable CPU likely you need 
-> to also disable CONFIG_DISPLAY_CPUINFO. CONFIG_CPU is uclass but if you grep it 
-> I wouldn't be surprised that there are still platform which are able to print 
-> information about cpu without enabling cpu uclass. That's why there is not 
-> dependency between CONFIG_DISPLAY_CPUINFO and CONFIG_CPU.
 
-Any reaction?
-
-Thanks,
-Michal
+Applied all.
+M
