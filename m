@@ -1,185 +1,222 @@
-Return-Path: <u-boot-bounces@lists.denx.de>
+Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987E4C44520
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 15:49:04 +0000 (UTC)
-Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D444C80517;
-	Mon, 20 Jul 2026 17:49:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m4ZaoSEd";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D35582991; Mon, 20 Jul 2026 17:49:02 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B53C180433
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 17:48:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Jayaramudu.Desapogu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lPygjj6V72p6huBG1Y42n5FkA3dYnf93jM18KWCHlphsDE1QOxvlrr4D6d+ch3guEgXQWXF3u/RpLRd9CeirNN3yiWC4rO+mN8mwnIoItp8dXkFMRKNa9YftVjj3sneqd9nqqyoUOu5TV2x6wUC12gC9rJvXp9wfSg8w3Fe/EPdhz1EEE92c2CkTGR72F0K2b562ft1rw7oQW1Ntd0EGiIUo/iM1hF1yxTRfhs9xUUeK/d6azY7IZzGqWvmrmsG4TEA6yS4fDeeBUY9x4KURKv48AueQ//LHOYYJjzmjBJjqK6T5mwDJSXgwDAExgWn/QEogb29yT9vtALvhPMsOTA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GUwSw564M8cuF22i2j6qzp8NZmgd55qoT3VES6C9oVU=;
- b=Fwdd7OWKqhVNtPn23z7CnMlrr8zWMlQHI6XHv03SX97Dfs5MzNqrjEMKRnB2jkm4iq4ldXAS5lmmXjSr59LOP00vKbnaRNbtOWP6Ku8bgYNgG7cfqv3vmUKVM+CZD8L4THQRHiMbseXfha4sYzSANYUg/bQvhMwTzMEW/EXecIaAEJiMtzK6yxHhaqd7mD7ufnzK4bjjVX2Q7fmp0WECsvFEZrP/wm2wUs3QzbBFLz4CgS4eJSlEfdtnIy0LsV/RclPnUd44jfeSgqqrfvUNcL4g5FlIBRXJCaLTCGtYbhBjCrOmeUIFT+w6H9FA+lDwoxNZ0pU1L6QReWgBDZWLmA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=chromium.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GUwSw564M8cuF22i2j6qzp8NZmgd55qoT3VES6C9oVU=;
- b=m4ZaoSEd3lZFB4C8hHLEOtXfSNC5/l0/nFJ36f2jMQFzFEUFIl4guBR7vTNVlLEAN1Mjs2RqmxeLvyPFkRJkR2cZgkVRwY09sLcFVDOTZzYRnGhXRS4pd+LrqYLXRknj6j33bd+vSNl3EBHWBF/mJZAUR4gEug/yWurqXWYVEIw=
-Received: from SN7PR18CA0030.namprd18.prod.outlook.com (2603:10b6:806:f3::7)
- by PH7PR12MB9255.namprd12.prod.outlook.com (2603:10b6:510:30c::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Mon, 20 Jul
- 2026 15:48:55 +0000
-Received: from SA2PEPF00003AE4.namprd02.prod.outlook.com
- (2603:10b6:806:f3:cafe::6c) by SN7PR18CA0030.outlook.office365.com
- (2603:10b6:806:f3::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.18 via Frontend Transport; Mon,
- 20 Jul 2026 15:48:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF00003AE4.mail.protection.outlook.com (10.167.248.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.245.5 via Frontend Transport; Mon, 20 Jul 2026 15:48:55 +0000
-Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 20 Jul
- 2026 10:48:53 -0500
-From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
-To: <sjg@chromium.com>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
-Subject: [PATCH v3] serial: coreboot: Accept DBG2 subtype 0x12
-Date: Mon, 20 Jul 2026 21:18:26 +0530
-Message-ID: <20260720154826.42527-1-jayaramudu.desapogu@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
-References: <20260715134049.85424-1-jayaramudu.desapogu@amd.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0491CC4451B
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 08:23:43 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 768B2405A4;
+	Mon, 20 Jul 2026 08:23:42 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TMy8NhK89E0i; Mon, 20 Jul 2026 08:23:40 +0000 (UTC)
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7FF764058F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org ; s=default; t=1784535820;
+	bh=d1cjtFZoGMKQsHaIN3qf/ueH6RLLNG67KeSBcWNG+PU=;
+	h=Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From:Reply-To:From;
+	b=h1xgni77svRbicohuoJ9ZIGe/H1t/ZA7gNbg5XQk3Mc3+E+bHj1dXt6filjFfOM8l
+	 xMEJcpQlrTggEXiW5b0UEYxF549oUmvevZX8GSgSZIrttmQJgIk9eLgNGeekbUrKbp
+	 P410pVRcvd+TfJd/09ktw9RIC1M1lZg+oJVVDQ9ukvU0nawewEkwSXEhRiAojZ71zj
+	 tyQc2n4GsXp6vfgchCLShk64cJEtkjFQK8Mh3gvKFv1d3yNd/B8YZr6aDBew1tVP9D
+	 VHW5gEdkdObtKRk+cPqo8e97/c6afaqVoDLqsUzUkyHJS+txg8KKS7D+6zwHSmrCym
+	 zc/k2B6pd+3mg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7FF764058F;
+	Mon, 20 Jul 2026 08:23:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 33940206
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 08:23:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1C32C6064C
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 08:23:39 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7gg4WgwbcklS for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 08:23:38 +0000 (UTC)
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
+ envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 6B7D160643
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6B7D160643
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6B7D160643
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 08:23:37 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-495635a85d2so1047935e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 01:23:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784535815; x=1785140615;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=d1cjtFZoGMKQsHaIN3qf/ueH6RLLNG67KeSBcWNG+PU=;
+ b=tBvKGrlQtVmvO9tJZHAkg/Ap59FtXRZSCnM+d4UijbSbi9c3AEDN///AMJPGtlVuA/
+ e8Y7Jr2LJIEVIe4GdRDraBZ43VI01Td2jhim2yQ2GQvljBYpzhadBqnELdAkgpUXupPM
+ 2S+lcPnuwl9V/rsTZuWvHJABjj6ikpMkxhMZmIydY7aNbAys41/sRBHvSiUOZ2KHwDmu
+ 7rTwhsuNyKNJTp3hjk3keYP8t/eBuwsikSPH9kRRDZDozgq5Jf2YHqptvX2cKD7JnWhp
+ 6KurxJ5slqgvFHSBE+32bkBUnHGwBD19yckzd3ImveTFua9FPup5Eeua7GIc2ipuRCnS
+ 3/wg==
+X-Gm-Message-State: AOJu0YxT4gODGpFWNlKiK4xD7Ac2KJZFpBLJtKRP/cjzUJIko568pcUv
+ 4MgCDvQr3QNYx9TPSZl1/lHm0bC3Qon+/c2XKhTYFxt+n1fWMuIYNH+fyInbvJVIgow=
+X-Gm-Gg: AfdE7ckLlCRRt+UBdGD9r559ZYcfE9FjiAQ0l6SDTp4uJ6jGN6rsIKDJHptRNcbUCB7
+ 2Ec+Ew1q1JRa1BruBn5jf/026PclSeZoWVnXS0y5I5fk/sHljp1yvKiuJfzIR+jQW5Q0Xk+npUF
+ bbzYHyRUgwFVhUhkM/HLiwLe7OBNcb4cAW6PzI4RMp7CVnYyRP1xsKteVgwh3HKS3W9j1aKp4Kc
+ FdCUV4h+uU7SSQrsagMy4Cod8JMrnW5gTAYf/KZupmzLbJjmO+yvUPvcT3E9IsNgBfPbHBbYFvj
+ 5E4YKCHixbTs0tTyWHFDrUhJO9wuzjxllmLfRXOdJe1kXN+vYXyCpbYoitbO9lGOzXmLQ/PzPx/
+ 5TQyHYEwr+fLGKOAUw+Jb1IR2F3Sx0XgEIhuZTGU3NZbNUUw+G6T8pMs9sGr6OT41IbZGgJbC+P
+ +o4OoxKFvO+lsBic2a2qSPJwBpdm4EYL5rkw==
+X-Received: by 2002:a05:600c:5247:b0:495:573e:1c54 with SMTP id
+ 5b1f17b1804b1-495573e1da1mr84022345e9.9.1784535815026; 
+ Mon, 20 Jul 2026 01:23:35 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49549c9c940sm242852495e9.13.2026.07.20.01.23.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jul 2026 01:23:34 -0700 (PDT)
+Subject: [PATCH v4 0/3] treewide: migrate to the new mailing-list domain
+Date: Mon, 20 Jul 2026 10:23:28 +0200
+Message-ID: <20260720-osuosl-ml-switch-v4-0-20ec1c334dd2@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE4:EE_|PH7PR12MB9255:EE_
-X-MS-Office365-Filtering-Correlation-Id: f31be054-28d9-41bf-d964-08dee67667cd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|23010399003|82310400026|36860700016|18002099003|22082099003|3023799007|56012099006|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info: 587t5kJi1qXSBM9F5MwMGZW8CgTygxMdzdeZ/fGsdSc9S0AbLcrdGTTrT9Cl7kkeOgRozG/53g0r96RA5fO2Oz54rKznGQcVniIsqoz0rA4eaJvyJx2PQXqcAJ7z6hK4Ou90ZJDL9v1ZdpBebM9N5RAnmDDs0lG3rpkmuO+4i3Vk1PbiV92+RrBhqitGvrOZQ2GpAA5bln1sr2uz9skzb9YpVoXqMeBD5PIkenplQQREAW2xmuy1Kq8AV/C1MHxzqMJvz/NStHOobkLHnKC8EvldXzj14CfjnWpNJgBwvqf5be1dTrTC2SsYyrnyP1jcrsV7p43XAZZGIJB3DbIzYskP3DB0ahmzDTedpRnCzmdP+bMejEOCWJRN8R+YEX5P76OYYjMlF1B5lOt4P/j4BiREH/QOxAN4n4VAv9tb3AKj4OtA2mE8jpnsp9rmQs3LlOJaDAu7pVm5ILIcuWS+NSjeK5/Ig+S9EhmAOYMUFIw/sDfQbnQH+b7hZHTIFPQyArvgEJJV3FriQSuAOS9sADb78LcOKw3msoZeEdFF0/gjobFb9kZLLzwgRDYceE0laQDPqJusGgva/QvCjzoynTn+whOmcDIDMdYPMaf1SKcKMJ6PHdWKZE60YKpheTXpq4SHXLbzuqOYRP9kAQdlFsVD5ElDopmbZ4OscCRDUEFz2xphuTQLAMe5fbQWaj9u+ISMnYuC+AbaTUWUEIqDow==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(23010399003)(82310400026)(36860700016)(18002099003)(22082099003)(3023799007)(56012099006)(11063799006)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: H7UqMfipFCMH811PrxjFt/JwSfzbKr5rpj8JJ7HaEqC13MyGzPHEacKyO2x+Wpav9DyVsy2jx26fTafpEvOZ425D4ps3erqh20c74vYUzKdsVa78NRoA3qSduylb7PhrgFFRNNy++eteFLIKZHCbqC79tdnE6g175BiL8OLtMayh1VUrAgXJhOw181htAJk3OcCo7/QOjIqVK6wyRCgC/iZTGMZogWoqy6mhKRhWI9b1tJGfCWPvrAIudVmkPjKwzkNCN3t8fsC1a2w0zlfXtKIXF7xFAEZ+P9w3a0JkopJKboEv1iLR9PsjwEBT9yyfgFBtrZoP73VkSfTkT9c7pjhWA2qPsCYKgzyEZZRWuniR6/li14G2NdKQM3hY40W+xRDJOgb1ATiddjuSRjwABY7KNXErR80r+0MjCzoxaFVFbA5LRuddfnSY/Sq51uqz
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 15:48:55.4652 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f31be054-28d9-41bf-d964-08dee67667cd
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE4.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9255
-X-BeenThere: u-boot@lists.denx.de
-X-Mailman-Version: 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAADbXWoC/4XNTQ6CMBCG4auQrq2hP5TiynsYF6VMoQapaQE1h
+ LtbcGGMRpdv8s0zEwrgLQS0SybkYbTBui4G3yRIN6qrAdsqNqIpFamgDLswuNDic4vD1fa6wVJ
+ qk3GTgZQcxbOLB2NvK3k4PjsM5Ql0vzjLorGhd/6+/hzJsvvBjwSnWFQFU1mpqMnKfWs75d3W+
+ Rot/kj/CTQKVJqKC5AFcPEhsJeQk28CiwKXZU4q0ERR9ibM8/wAdA6k+UcBAAA=
+X-Change-ID: 20260623-osuosl-ml-switch-88cf54f5e884
+To: u-boot@lists.u-boot-project.org, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tony Dinh <mibodhi@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Heiko Schocher <hs@nabladev.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Quentin Schulz <u-boot@0leil.net>, Heiko Stuebner <heiko@sntech.de>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Walter Schweizer <walter.schweizer@siemens.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1933;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=RnPgBMoeVs4uIcGQwA6M3QWQ8qL84EickaJ31WakcnQ=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqXdsDrvV10VxOK9s+dYyuBeBubhhGHHf50mJwQ1up
+ mwxQfJGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCal3bAwAKCRB33NvayMhJ0fd9D/
+ 0YYEIwMoTebfEJvfot8BaW3UbNlrPk3GTiixia6LCzYTqTaL7Qn2J7juTKgXTQ5Ns1OnEB2ovdzm1V
+ nkw9Xgo5qbzcmdhvBu8KydXP7LRtfNMPqpsSzAdYeK/oNE5r2LB/9mcfHwEH1YLzIPAhc14036/SZQ
+ XlnZ9IHeyLbvyWyKSIeNVIkt+XwpPqN51CiN6YAt6OBfRyKIEGLMqZ2aJ1FaQY91NLUmrhPz4KE31P
+ V/BtPhiyUkrmbpcDbno16R4wKYyF/y/pDhyZoj2ASJEyS1fPsBZYWdmvIVeo0qdN8Vj+mOv6FQYA9H
+ 8y46e0HDdv3kaA9qqwLnExLXQqNSD0JeGbdtIEU7Fyco2EC8tcbvacQ/acL0nsEtKlLrixrigC5CSz
+ ttLXsCrNv4Kxh+H/0T3o/xOpbBt5RBpouN0WKtUe5Ab2+EixjW0+ap7eDSk4gS2BYFLDc0ycfNPwpE
+ E1iv5qn/jPsVkLPnvMRZsEtY8m6dsgu++KcWA5jlCJMp8GM6gwJhf91jchoUNm3MmKw8Nj3UU7qwsF
+ /UNB8D/hpVwfVso0iHpVR8lDIhzfnyp0kYDwfjDkcz1bszzcwrNVubZY2veZqEzCIT46ZJcR77HXzU
+ uylHlVtJO3WCcWnHGR+Dl9fBcJDfCkAiQ0Q7JUgH7T4howosf3Fp2oF0qY/g==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1784535815; x=1785140615;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=d1cjtFZoGMKQsHaIN3qf/ueH6RLLNG67KeSBcWNG+PU=;
+ b=eD8r0TjXXNuEaaBKfb3kBbv6gMGx2TTH4pS7wvyCjPAIDJJzqXiE9ohx3RYqBAQZj4
+ ch03DvCpIszLU+JlnGL/UqiOPxS5+n4DMPFt8CSS/SWyaNLmafeHfAQ6MmJul1ejPzqI
+ HmF/dJBWNWIecbD1PZOHnYk8LkaYDqHp+AAYImCXKdeXtqJhiYX4HDr2G1m5occU6wcG
+ 9CgJjScOM0q2q0uP/v88wnOIpT3OucaKxdiWYD9gWU5i1lt3qJGT+CxkPun+5ielcqfJ
+ AFpg6JqiHrQZn/kZRiDYWxtf2trNHkSimPF3IqazfUvqbuGE01tS/0BaiMpuHYx/5Phh
+ fDqQ==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none)
+ header.from=linaro.org
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=eD8r0TjX
+X-BeenThere: u-boot@lists.u-boot-project.org
+X-Mailman-Version: 2.1.30
 Precedence: list
-List-Id: U-Boot discussion <u-boot.lists.denx.de>
-List-Unsubscribe: <https://lists.denx.de/options/u-boot>,
- <mailto:u-boot-request@lists.denx.de?subject=unsubscribe>
-List-Archive: <https://lists.denx.de/pipermail/u-boot/>
-List-Post: <mailto:u-boot@lists.denx.de>
-List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
-List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
- <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Errors-To: u-boot-bounces@lists.denx.de
-Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+List-Id: U-Boot discussion <u-boot.lists.u-boot-project.org>
+List-Unsubscribe: <https://lists.u-boot-project.org/mailman/options/u-boot>,
+ <mailto:u-boot-request@lists.u-boot-project.org?subject=unsubscribe>
+List-Archive: <http://lists.u-boot-project.org/pipermail/u-boot/>
+List-Post: <mailto:u-boot@lists.u-boot-project.org>
+List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
+List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
+ <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
+From: Neil Armstrong via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Errors-To: u-boot-bounces@lists.u-boot-project.org
+Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
+Message-ID: <20260720082328.RXCq3OnN7jJi_rLDRoNOe6vX0cEavirsKmPwqs4STeY@z>
 
-U-Boot running as a coreboot payload obtains serial console
-information either from the coreboot table or from the ACPI DBG2
-table.
+We are migrating to the new U-Boot mailing-list server hosted by
+OSU-OSL on the new lists.u-boot-project.org domain.
 
-When serial console support is disabled in coreboot, the coreboot
-table does not contain serial information. In this case U-Boot falls
-back to parsing the DBG2 table.
+This changes all references of lists.denx.de in code, comments,
+documentation and MAINTAINERS/README files.
 
-Some AMD platforms or any other platforms that uses memory-mapped I/O
-advertise the debug UART using DBG2 subtype 0x0012 ("16550-compatible
-with parameters defined in Generic Address Structure"). U-Boot
-currently accepts only subtype 0x0000, causing DBG2 UART detection to
-fail and leaving no console output.
+Please review closely to ensure the transition goes smoothly.
 
-Accept subtype 0x0012 as well and keep the existing handling logic.
+The exact migration date is expected to be on July 20 2026, see [1].
 
-Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+[1] https://lore.kernel.org/all/20260715173119.GL749385@bill-the-cat/
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-v3:
-- Change subject prefix to "serial: coreboot:"
-- Shorten commit subject
-- Remove extra From: line by fixing git author identity
-- Rework commit message formatting and wrapping
-- Rename subtype constant to ACPI_DBG2_16550_WITH_GAS
-- Add comment describing DBG2 subtype 0x12
-- Keep subtype definitions sorted by value
-- Wrap long conditional to stay within 80 columns
+Changes in v4:
+- dropped RFC
+- rebased on main and changed the last links
+- reworded for the final migration date
+- Link to v3: https://patch.msgid.link/20260713-osuosl-ml-switch-v3-0-48b71dec1a23@linaro.org
 
- drivers/serial/serial_coreboot.c | 3 ++-
- include/acpi/acpi_table.h        | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+Changes in v3:
+- Rebased on master
+- Dropped the already applied links change
+- Link to v2: https://patch.msgid.link/20260623-osuosl-ml-switch-v2-0-28fd46e89e46@linaro.org
 
-diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
-index b1f69f6998cfa1..cb07173a80c0cc 100644
---- a/drivers/serial/serial_coreboot.c
-+++ b/drivers/serial/serial_coreboot.c
-@@ -59,7 +59,8 @@ static int read_dbg2(struct ns16550_plat *plat)
- 		log_debug("Not a serial port\n");
- 		return -EPROTOTYPE;
- 	}
--	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE) {
-+	if (dbg->port_subtype != ACPI_DBG2_16550_COMPATIBLE &&
-+            dbg->port_subtype != ACPI_DBG2_16550_WITH_GAS) {
- 		log_debug("Incompatible serial port\n");
- 		return -EPROTOTYPE;
- 	}
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 4895366a6188ec..825652798166a4 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -674,6 +674,7 @@ struct __packed acpi_dmar {
- #define ACPI_DBG2_ARM_SBSA_GENERIC	0x000E
- #define ACPI_DBG2_ARM_DCC		0x000F
- #define ACPI_DBG2_BCM2835		0x0010
-+#define ACPI_DBG2_WITH_GAS		0x0012 /* 16550-compatible UART with GAS */
- 
- #define ACPI_DBG2_1394_STANDARD		0x0000
- 
--- 
-2.25.1
+Changes in v2:
+- Also send to the lists.denx.de list... sorry for the noise
+- Link to v1: https://patch.msgid.link/20260623-osuosl-ml-switch-v1-0-6d93a5ba2f5b@linaro.org
+
+---
+Neil Armstrong (3):
+      tools/patman: Migrate mailing-list to lists.u-boot-project.org
+      doc: Migrate mailing-list to lists.u-boot-project.org
+      MAINTAINERS/README: Migrate mailing-list to lists.u-boot-project.org
+
+ MAINTAINERS                     |  2 +-
+ README                          |  4 ++--
+ doc/CONTRIBUTE.rst              |  4 ++--
+ doc/develop/security.rst        |  2 +-
+ doc/develop/sending_patches.rst | 12 ++++++------
+ doc/git-mailrc                  |  2 +-
+ doc/index.rst                   |  2 +-
+ tools/patman/settings.py        |  2 +-
+ tools/u_boot_pylib/gitutil.py   |  2 +-
+ 9 files changed, 16 insertions(+), 16 deletions(-)
+---
+base-commit: fdfe2ec48d5c1c2ed03073d73edd3fdd3fe1ffa1
+change-id: 20260623-osuosl-ml-switch-88cf54f5e884
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
