@@ -1,98 +1,98 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F5DC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 23:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D398BC44520
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 23:34:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 611AA4074E;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 593C380D89;
 	Mon, 20 Jul 2026 23:34:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1_5QWocj_yYa; Mon, 20 Jul 2026 23:34:57 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Eg8BePSUcyk0; Mon, 20 Jul 2026 23:34:56 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8A9CD406DA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 66D9280CAB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784590497;
-	bh=fHkmBpP6In4/YnFaXBXSRKkBI9yXemclV8UZ3iTDJN8=;
+	d=lists.u-boot-project.org ; s=default; t=1784590496;
+	bh=+F1xvD3zYVWGfgXua1B4QzCtMG9fq0NlNBxBSwoEAxE=;
 	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=fW3OLEjMX1NIqFQCxAdTwW9jjoAveF8E3xnb5/2ZN8TznFmLX1v7sK6dSWSjEQfa5
-	 IeYMdx82r9nX3PTDBmbxoCQl5YDzMtsmiB8NNHdUqUsthEn7voipwEMPiyybneeiiI
-	 rlCyujJbPNxsj0Q2SP6a6zRpRrynJIceV6ivGqal2jGVoaF3LMwuBP0ThFaXk8cutZ
-	 aMs8DfN+CNn2exFNxUDpZ9zU2/LdgEr7iSHmlEu5I9Wt1ga5qV7OlU9YC+tMBRY/Vk
-	 Jly59KIexZ3lkGXynrihIhVjEufLTYmiArvuBEjOEX8fO1TtxyrN7+nKNVzR/BryPl
-	 Afp74BzC+WFmA==
+	b=QJAd5BLnQdfYvBVeK64RWa1sMdoIHn1x7lORO+SN7l6qkYRI8aNHm6BDQeajMH1rX
+	 /QxNzoPo1hgUIUDCiieKRiW+6KlDDEbW7bxhHNygn2GTxE6SQElEEuk5cdg3DyiWcR
+	 XW4m5qtrFYlZiasNhH8q1TuJb+v3sWC4RZ3SHJwoJoXQ4ZmF49DxTAifxgBbLihWTK
+	 aPdzAuQNt5Is8+q0xfWJVxQSZ1C9uZ+O/hIlNIJCqqVSh3r9Yc8Gd6x+ecls/ujQR2
+	 +XwLR46fmmqA2wARhODMiFRFB2kjc1nNCpbG9O3ddIMk4qm2H8F0c9I3QRH1+xeFOD
+	 jLO9xfW5zDKQw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8A9CD406DA;
-	Mon, 20 Jul 2026 23:34:57 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 39AC038E
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:26:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66D9280CAB;
+	Mon, 20 Jul 2026 23:34:56 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 826E6132C
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:24:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 202C36076A
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:26:50 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7440080B83
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:24:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SR64R4EwwBj0 for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 23:26:49 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PCNJKX9r1r7f for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 23:24:22 +0000 (UTC)
 Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org D653560768
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D653560768
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp1.osuosl.org 71F5680B28
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 71F5680B28
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D653560768
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:26:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 71F5680B28
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:24:22 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EDA983C14; Tue, 21 Jul 2026 01:26:47 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 4EC4983C14; Tue, 21 Jul 2026 01:24:20 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D03182991
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 01:26:44 +0200 (CEST)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-44ae14b4fd6so3727115fac.2
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 16:26:44 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AF0082991
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 01:24:16 +0200 (CEST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-497d3e4460aso4349272b6e.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 16:24:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784590003; x=1785194803;
+ d=1e100.net; s=20251104; t=1784589855; x=1785194655;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fHkmBpP6In4/YnFaXBXSRKkBI9yXemclV8UZ3iTDJN8=;
- b=TZe4/eszeygN9lvPDbINOCm4xEgWERsdI2tZOblxyazCQSAy943ojR51GUqoGin+VY
- LbuiiqgVCxQ+JOVKPsrXYIoe6wxyq1wI6XpRkTQB2NPq9xnJF9nf/jbD+/HEgLZ4jXMT
- 4pSV3WBJ/4esb1VjWQGQaa1m6FBDZpXWFcUYv0SquyWk7t4hxGRXYOyUn2aY+wt6wGSE
- l8lCBGARgJl1rY2l2YgvUWdfUuEozASpH/And4HJeoOzxi/1ckiIQeui4Hmk0AypeU8T
- 8NlTEQlQAAdHTQrrNjzW6jm4xNLGtLeyBIR///lRr/tOaNnr224YWyMvUIlXVkyFrr5c
- dM2g==
+ bh=+F1xvD3zYVWGfgXua1B4QzCtMG9fq0NlNBxBSwoEAxE=;
+ b=sFlxd12qrOgZpLeZIdpqenvsCZu0vN/g3h9oX8Llr9xSHUw8xFpFkb4xxzNiD812Q0
+ m/z7SWQ4R3xo7mJJn6e6NpbW/IojN5MGiK4Qs7uiVLRztLO+LaLJEr67/LyM5JGRkkKN
+ Ar4f+mCOcNFReMd6BSos5z0OP+AruvsOR8IkHLHjJ4mGueuty44qIqWdznZPlbIn7FcI
+ Tr1dkzolgI7D7kLQTkpCsi4PeK0Wx2JBTh9j9sEvncuCxQZS9fP1V9yRQk90DBwCY/sB
+ v3kqaPNUfrZlMwdrcPWPR81RKMK2tnNeq5wQpIKYe192jbTO2wYrmv6MJI0Y8OgKp3X5
+ Uq0Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqXmqqjjbqSWMMbZJAoScqT/y1z8jyKE2rQCZ/wjafXNM/HEPzd733y8x2pzTdEhcIEkDbaI3k=@lists.denx.de
-X-Gm-Message-State: AOJu0YznzcYwEt2cKzexqrC1E0wnq1/7Bpxk453ahoP6PGSyC0TP4/Yc
- 0lS7j/bkMwndnrbhnP/oU32OjXLPG1kUDzJUxplegMD8iFk6klta6mLasirvkX5IR34=
-X-Gm-Gg: AfdE7cm2GLc6Pr955KM6jgEbkP5cEPU2rmRdfOCK4dOpY74XGCu4l0iXLJRfC6f1Hzk
- djUqlbjn4BaOtGtUxPRhJO35jJ1gs1itvDysCkqYJ8wQpjuI+GaABj3HRAl9zF2KtzmLyNxZ7By
- N+SWxjQdtoLk2CiE5oV5YRkFT1ddMh+ycq6nzAbn/1xfdAu1az8UJiTdCyV3RfkdA8/PtMgcxgO
- CeByn/afZMF1qLG3ah2EhBiGE1htjZft5V2XWhkonKYB1QngNogUpoCT8vsMzrVnxiEskcbECGy
- 04MroYTHWr2fG2mHn0oFCQmrDg5C5DRnug1VIO4oVlweGI83MSAk/b3PW7bdu5tT+OFW17u20Ga
- fe80o8962btcYMDG+jLD4CSSbRFoWny7Aou8nl3KIPSOi4IjZIRJ1rWTpToHea6nYyC0dsorlOE
- tnGbryVwLfvuIeRJzRs72T++S+yddmByWURf+SRaWgCIqc8tB9Vu52ZZCKQI/3NDLOwgMoe2K16
- FBYtLrTOw2dpDGGbzzszCmzhes=
-X-Received: by 2002:a05:6820:2d4a:b0:6a1:475f:1350 with SMTP id
- 006d021491bc7-6a5367e3632mr8086070eaf.19.1784590003196; 
- Mon, 20 Jul 2026 16:26:43 -0700 (PDT)
+ AHgh+RoDIPvGhwhT1fUYb1mnzNKM+7qhqpX1laJtvogimD9DA5GCimLRY4IGbDHg6IzsBYCxZ6De/Ys=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywm+wi+8B3U4xX1na4qL7dPjLAkBjBEQ8oVGl6vqEjtdU2/vrhZ
+ ++7uv+DVF+kOEamYzySVrn3IxMt7M+nEGzMaeuu/p0KKhrq+XRBPqZhFrsrsGisqqjY=
+X-Gm-Gg: AfdE7cm5V0eXWcb32Apfhf8KbnxctIVTeWMUvrB8SNkBwQPTUni2sY0XhoqNtywzmF8
+ mV+cGw/mo8ZZ6OCeEspztKJJY40j0PPPqtqkQiCzxE8WkISKSZLWfkt/3poSiZ4CYz0qjqzdhNe
+ RCfqwThoduto8c/73UeHvbpQQEYx/H2nB071gFiqeyOFaa946+ii7jL/eYUh/1QANx+l8r128Gw
+ SwbbXfYmmqL9bxyy3b0QLzTufd1f4yJn7rPzootjhz/blN4cU0eR+l4+5WKNdBveFOopOFtqJqp
+ kuUeYy9KWYvW87aqlO+YviRI909P/CRA/oHfJQWhw3jSW0noFEV7souIll/LKHGRO9QRD80Jc2l
+ XmLci9Pfm4x48iaWuvqAxz2PgoAGvMFYkm/ZRBFHIFaXAtrA3kOd7JtHu/rNi4kzP/PYlnxlPGm
+ s1MAHAuS0+xTMAlZjNPjFE0kR7kTdISCIyU9G0nQOT2LjkWsTzZwAHDuSXk6RYnu//Hrygb+F2R
+ Fhwa4JBhihAsJ6Un9+QFXI9t5ObhAguisizPw==
+X-Received: by 2002:a05:6808:1445:b0:492:3ad9:15d9 with SMTP id
+ 5614622812f47-4a4cf06c64emr7550449b6e.6.1784589855377; 
+ Mon, 20 Jul 2026 16:24:15 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6a51a25c857sm9096468eaf.14.2026.07.20.16.26.38
+ 5614622812f47-4a4d3d4aa0dsm8350460b6e.17.2026.07.20.16.24.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 16:26:42 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:26:37 -0600
+ Mon, 20 Jul 2026 16:24:14 -0700 (PDT)
+Date: Mon, 20 Jul 2026 17:24:09 -0600
 To: James Hilliard <james.hilliard1@gmail.com>
 Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
  u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
@@ -134,35 +134,35 @@ Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
  Mateusz Furdyna <mateusz.furdyna@nokia.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Heiko Stuebner <heiko@sntech.de>, Vincent Jardin <vjardin@free.fr>
-Subject: Re: [PATCH v5 03/14] crypto: aes: allow DM AES in SPL
-Message-ID: <20260720232637.GO749385@bill-the-cat>
+Subject: Re: [PATCH v5 02/14] crypto: hash: use DM providers from hash command
+Message-ID: <20260720232409.GN749385@bill-the-cat>
 References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
- <20260719-submit-ce-series-v2-v5-3-3c41f66d4522@gmail.com>
+ <20260719-submit-ce-series-v2-v5-2-3c41f66d4522@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7se7yjexunn6U8EA"
+ protocol="application/pgp-signature"; boundary="ktBM/SItblSAEpki"
 Content-Disposition: inline
-In-Reply-To: <20260719-submit-ce-series-v2-v5-3-3c41f66d4522@gmail.com>
+In-Reply-To: <20260719-submit-ce-series-v2-v5-2-3c41f66d4522@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 20 Jul 2026 23:34:55 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784590003; x=1785194803; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1784589855; x=1785194655; darn=lists.denx.de;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=fHkmBpP6In4/YnFaXBXSRKkBI9yXemclV8UZ3iTDJN8=;
- b=lEWyDdDH4sYsniBBb4DFBmrEWBSE7GgotgM2I+SYTzZndx+2B5miU96xLhxXW6F6fc
- Bb3UOKBwsnsdx+Dy+nGA/R1IdlY1GE9kcPrMR8fY3uHwL/0m+GzLM9wB21VlA9law+wU
- ESHmx9UIwAQlzlK90FHAb/1hKSJGrDFwWDTKc=
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ bh=+F1xvD3zYVWGfgXua1B4QzCtMG9fq0NlNBxBSwoEAxE=;
+ b=VY6mUCXMw94Ed9nQBTgFj6wlU30XUW8lzA1+vLBSqyTKVLnEvpVfuZK0DJissvAC7X
+ 1IJZ6U5573fv17xBNU7mXfDMLBeLKjgbJic6oUzkDmKq+kUegTgxI0nzlPLaUpxvd9cq
+ kZY7al8d6lzIrJyu7PpXBpRzVQWgCt0uYgcVU=
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+X-Mailman-Original-Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=lEWyDdDH
+ header.s=google header.b=VY6mUCXM
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none)
  header.from=konsulko.com
@@ -170,7 +170,7 @@ X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=trini@konsulko.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
  dkim=pass (1024-bit key;
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lEWyDdDH";
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VY6mUCXM";
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -189,66 +189,89 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
 
---7se7yjexunn6U8EA
+--ktBM/SItblSAEpki
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 19, 2026 at 10:13:47PM -0600, James Hilliard wrote:
-
-> The AES uclass Makefile is already keyed by CONFIG_$(PHASE_)DM_AES,
-> but there is no SPL_DM_AES symbol to build it for SPL.
+On Sun, Jul 19, 2026 at 10:13:46PM -0600, James Hilliard wrote:
+> The hash command currently always uses the software implementation for
+> the selected algorithm, even when driver-model hash providers are
+> available.
 >=20
-> Add the SPL variant so SPL code can use UCLASS_AES providers, for
-> example when decrypting FIT images before loading U-Boot proper. Select
-> SPL_CRYPTO from SPL_DM_AES as well, since drivers/Makefile only descends
-> into drivers/crypto/ for SPL when SPL_CRYPTO is enabled.
+> Add a hash_digest_wd_lookup() helper which probes UCLASS_HASH devices in
+> order and uses the first provider supporting the requested algorithm.
+> Continue past unavailable providers and unsupported operations, but
+> propagate a hard digest failure once a provider accepts the operation.
+> Remember probe failures so they are not silently hidden by software
+> fallback when no later provider succeeds.
 >=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Use the helper from the hash command and retain its software fallback
+> when no usable provider is present. Add sandbox tests covering provider
+> fallback and hard-error propagation.
+>=20
 > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 > ---
-> Changes v1 -> v2:
->   - Select SPL_CRYPTO from SPL_DM_AES  (suggested by Simon Glass)
-> ---
->  drivers/crypto/aes/Kconfig | 8 ++++++++
->  1 file changed, 8 insertions(+)
->=20
-> diff --git a/drivers/crypto/aes/Kconfig b/drivers/crypto/aes/Kconfig
-> index 7e1b1b2875d..254cb598568 100644
-> --- a/drivers/crypto/aes/Kconfig
-> +++ b/drivers/crypto/aes/Kconfig
-> @@ -4,6 +4,14 @@ config DM_AES
->  	help
->  	  If you want to use driver model for AES crypto operations, say Y.
+> Changes v3 -> v4:
+>   - New patch
+>   - Try all registered hash providers instead of only device zero
+>   - Add provider-selection and error-propagation tests
+>   - Reserve -EINVAL for hard errors
+>   - Use -EOPNOTSUPP for unsupported algorithms
+
+Putting new features in an unrelated patch series makes things harder to
+merge. I don't know that Andre will be comfortable taking some generic
+changes + sunxi support, but he might be. But it's even easier when
+something like this is standalone and can be reviewed and picked up on
+its own (I'm going to have some size questions about this, once I review
+it globally..).
+
+[snip]
+> diff --git a/drivers/crypto/hash/hash-uclass.c b/drivers/crypto/hash/hash=
+-uclass.c
+> index 5d9f1e0d59b..30929412856 100644
+> --- a/drivers/crypto/hash/hash-uclass.c
+> +++ b/drivers/crypto/hash/hash-uclass.c
+> @@ -73,8 +73,8 @@ int hash_digest(struct udevice *dev, enum HASH_ALGO alg=
+o,
+>  }
 > =20
-> +config SPL_DM_AES
-> +	bool "Enable Driver Model for AES crypto operations in SPL"
-> +	depends on SPL_DM
-> +	select SPL_CRYPTO
-> +	help
-> +	  If you want to use driver model for AES crypto operations in SPL,
-> +	  say Y.
-> +
->  config AES_SOFTWARE
->  	bool "Enable driver for AES in software"
->  	depends on DM_AES && AES
+>  int hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
+> -		   const void *ibuf, const uint32_t ilen,
+> -		   void *obuf, uint32_t chunk_sz)
+> +			   const void *ibuf, const uint32_t ilen,
+> +			   void *obuf, uint32_t chunk_sz)
+>  {
+>  	struct hash_ops *ops =3D (struct hash_ops *)device_get_ops(dev);
+> =20
 
-Since this gets used later on, this is fine.
+This isn't correct spacing before, or after? So as part of sending this
+standlone this part should just be dropped I believe.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+[snip]
+> @@ -29,8 +31,26 @@ int hash_digest(struct udevice *dev, enum HASH_ALGO al=
+go,
+>  		const void *ibuf, const uint32_t ilen,
+>  		void *obuf);
+>  int hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
+> -		   const void *ibuf, const uint32_t ilen,
+> -		   void *obuf, uint32_t chunk_sz);
+> +			   const void *ibuf, const uint32_t ilen,
+> +			   void *obuf, uint32_t chunk_sz);
 
+Same here.
 --=20
 Tom
 
---7se7yjexunn6U8EA
+--ktBM/SItblSAEpki
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal6urQAKCRAr4qD1Cr/k
-ClAvAP4kcUZ4ouzQSpYr8yhIusRJEfSCNDIPDCg6uDocYkc3pQEAgh+NArf6MYf6
-XtYRFrAurvsk94Mi7GYobVb5dH36ng8=
-=zsZP
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal6uFQAKCRAr4qD1Cr/k
+Ch2DAP9TrIystYOK9v23ylicGQyoWmcYVAuQ08km7Xvg7DtBTAD/axHHH1x3iNxG
+j8c7/B3Va9CxLun9a25CJzQzaTptBAk=
+=qpDT
 -----END PGP SIGNATURE-----
 
---7se7yjexunn6U8EA--
+--ktBM/SItblSAEpki--
