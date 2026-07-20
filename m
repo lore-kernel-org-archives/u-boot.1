@@ -4,94 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0C3C44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 07:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD970C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 07:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B7B3838D7;
-	Mon, 20 Jul 2026 09:15:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1E3582991;
+	Mon, 20 Jul 2026 09:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="HZWpAlZW";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Q1KWCuzZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEFB383E76; Mon, 20 Jul 2026 09:15:07 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id EE8D1838D7; Mon, 20 Jul 2026 09:32:58 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F10A980517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:15:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECFD680517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 09:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ccaione@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso8038135e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 00:15:05 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-47f752b3423so615104f8f.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 00:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1784531705; x=1785136505; darn=lists.denx.de;
- h=in-reply-to:references:from:to:cc:subject:message-id:date
+ d=baylibre.com; s=google; t=1784532776; x=1785137576; darn=lists.denx.de;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
  :content-type:content-transfer-encoding:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=ACeedMzc97dR/rQ0fmsz20ERufR2IlCPchlqi8JBpOE=;
- b=HZWpAlZW0pXsJt3fvQnwWvy6i6ZCAjCYvL3ATikk2djNNd8iT7yjTcmbsmOcxPQJlE
- hhMFTuWdEU3SDg4BEbBsdZ1ie9UlM9wISQ/v7gl2FKzHEy14b7aqAGQFJcuwE/TwISLA
- MVMawPlcBPp8/DofQ6+KLrIwlopT8NLN7pTQf2WtWgUC3LLVpHOyx7pPKpil7hLx94wu
- 11t1oeXNoIZRfvQbKchoDG5tgIT4kWC0xVhfnM2zyVNn4C/7x5zcQq7NKO++fVNklSsJ
- cy9PdoQtkMh4T3nd8xri1so9C6QFcoFW4rf03L8wbnow2PO2PkwoZsaB9Kj2EpMUWowM
- KudQ==
+ bh=opPtvZZ46OC6Sx9UjFW8QmaCCu5g+tE9rEz3TIixw1s=;
+ b=Q1KWCuzZl+8gBIoR8N6eZImEOavSbRjlFHhKOeWOhrvxTcmrzbV+Y+16yyO/T4sfKa
+ wma/VP8pThZS1Xj2mwNP4Qurrcq7Vzds3I5Q4uaSZZ7yfRUMioD3/ni9NQNWoJjPcEin
+ /U8krbDxrbnZyRCsla4WlOxu5FUxDZaSepjKGx6pCKTY2DlqkEy+zlTIBRULe5Aon9vo
+ AfLcKP2kwFw5m4oFxMwA7yrTtE7f9eqQ+DIIunD6jwcIhHSyRh61WABGRI4xKGVu2A7L
+ EB6wtGDY3rwBOAdA5HD+HZ+v1elu/bJtfTRrWkjflBfwJVdNBmBf245iBaf3L1e699nL
+ dtUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784531705; x=1785136505;
- h=in-reply-to:references:from:to:cc:subject:message-id:date
+ d=1e100.net; s=20251104; t=1784532776; x=1785137576;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
  :content-type:content-transfer-encoding:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ACeedMzc97dR/rQ0fmsz20ERufR2IlCPchlqi8JBpOE=;
- b=aVLzwPC2+t0+YAlh6rUf+6eagCaWrMXMsiW1b583TUqO3FrXQQQyYkEzFlgLg18F63
- W5oQd3tq+L2lRWo+W8pFSMWfsAqKJhLpmP6PKurnn7h0RzRjoXcvzZcMOPL5NcKLdWAS
- SppbRHubhr0i7sfPBFZSpVOeYHlkLpdyfYttyFy4YSQVyTimx20VyljCbZ/tuWbWrEk1
- IfyBDh/IXrubg7kusjWV9Qrh1l1ZLYxmbSVbx+VX9nsko2ZFp3B8Cbr2b5p1KCZ/vHlq
- WWoc+uKaHYBqrQ3BS08K+IZVNSgU9BdpHm1fpspSSuwy+9ovGRe5wV3mFndRp5OVBBAF
- HzaA==
+ bh=opPtvZZ46OC6Sx9UjFW8QmaCCu5g+tE9rEz3TIixw1s=;
+ b=qW4eRB416kvN6zHGAm3MIWc4ih73z1SZOGcAWTnYEUkcNbnI40tqGRdWBeqPhI3AC3
+ 7S+vLeACzkift3GbSxmDazh3QhsLjSG8K3/5aGbe5jmvsS2EM1TkKlmep5r+8uHGjTQB
+ Vm2lha18K/NLSimvEkLMtNmoG1zArtgTC9zRVc9+z3d4al6wkueJyPBPsh+jvcK16hSp
+ AvO+w0qYBZ0Ko3eWyTUbfCYX3C/YO+o6v7VdN3awjRRLDlOT37JYuHaYFSH4wzMd8O7r
+ 5pdd1Y7t2gr9pRNGCggNfoqc4Z2RKp4ablG8inYwG11HWEsx25wnl1EZQeKlsFpLuNSG
+ 2NOg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqu0Sfmu3rgR3yw3JRu79GTrPHKciCZDpVxqdu+oigft50EU9cHKZIjRPSCITuKodWwV+XzPqE=@lists.denx.de
-X-Gm-Message-State: AOJu0YweffaE/Ma1Voh/Sp/M0X1/BZC/ilF1orCAIpLFYNpUzFoEzV4I
- BJUAFzl35THvapjgC9AM6uCKny5h3XkiV/r+pYSFsHAvIuZuyKAVGsIValWHeaJ0auQ=
-X-Gm-Gg: AfdE7clRMqSUUsHzvP6/9lXznWKvVCucahr5Ei3uqbIb/ETH7IIZ8iParpDLHfkymBe
- fIhtkrKfa9983k9BNyAlpYf2b+EL0/a4d9BhqVddUmw+5i0WQVjL1bhJuArmCBfHnLA9trgkefv
- wLcRkd/fa+Cf0ncZf/MWxN5dpBhmAKhNIiIvMUrQZLbGrDTDuag4TuuYezlhr4ZFLVaJJRBEnVZ
- iYOQP8zyZCITwWecaavbn2IBAzD4iRr42HGY0f4xCVBsw+r7Wv2/l64ygP6dwnF/sKvEpqC5KC5
- tsf8hTvUS37jK54aMXeQ1KD3mb8aRwuuG4djUo+6VFGykTl6qvEzyoRN9eCc2Y2IsbwqL0sp1LA
- YxwMTghgbdjxXTGVJ+iadLA1VIDAWAmzyCe1OfvQLIEGZXeW3r5378+ewDJsuBouaPAdV9Y+V5+
- iHUo8q6BDZQZe0sFDA6gVfmYwHU+YDq/oKdHg6YqpyVgwk0Lh2v2tJ0E/b
-X-Received: by 2002:a05:600c:1509:b0:495:3f5e:e7a with SMTP id
- 5b1f17b1804b1-4954a51dee6mr98868955e9.34.1784531705244; 
- Mon, 20 Jul 2026 00:15:05 -0700 (PDT)
+ AHgh+RqO7nqGzjQfmEbWb9ucbFaSr3ngrzCy1CD0rbcIIDZiViJiB1fbyGm14eOJe9KlcSHQ32u2pLs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyY1Z2iKgU5vPEVPNRE+JLtLAGwuygV+Bzhz+gZnWGAE/LLvhfs
+ NNneYLGYkBEs0lCSbZDD7rRk3Pu93lEDZZ/8QGT8PMHBigJWx1CIrgzOynG1F1eNoQ4=
+X-Gm-Gg: AfdE7cmglypqiv8D9XUMqsrH58rw4SH8tJ28BdVeVfU2maspIphppTmV6Ue0kdmPcVP
+ 7EwLrvidwpepzi9jqignh+03Lbmf9omE1D9cFk+Y/zOCmjDMTox03FDXMxJPlNzY6iz/ksRveBV
+ NMX5jF8B9pV/yXiR3rIwsqtrM8qjxPSkBRbPUKRd4L7OahUKawNTVhqQLigP5mB2u7cD4UVWgSl
+ MtWgkWkgbIOD69ZxQnHgjCGbNiYQyJmPVhDDB10VVlG5H8Pzk+mV95yoMagnRWfM20GV7KutwHp
+ TF2+fZ7myGWgEwqBeeVDy84TIPIwD2wwW2/vSBOO4Na8AYy3G1Z3oR/TgyIFnP/marcqI9JFxaJ
+ 5gGuy0YCWvG/2yo9zCiAsA3jLojvLdloDutTOKFrfMit/ldQYRiZTY131wKH2/n/tcJi4Nq2J1h
+ BUR1B8z4H9uvtAKgQS1eu8EotzzZDHQr0jFrirDGnwbm9nLjcMeHZbA7/N
+X-Received: by 2002:adf:e189:0:b0:46e:7f72:b6fe with SMTP id
+ ffacd0b85a97d-47f6230be0amr15735261f8f.19.1784532776252; 
+ Mon, 20 Jul 2026 00:32:56 -0700 (PDT)
 Received: from localhost (host-87-0-90-136.retail.telecomitalia.it.
  [87.0.90.136]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4955de8895dsm57234595e9.4.2026.07.20.00.15.04
+ ffacd0b85a97d-47f63e49ab8sm28938009f8f.5.2026.07.20.00.32.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Jul 2026 00:15:04 -0700 (PDT)
+ Mon, 20 Jul 2026 00:32:55 -0700 (PDT)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 20 Jul 2026 09:15:03 +0200
-Message-Id: <DK37OZ6BC3H4.3ON0322LPYRB5@baylibre.com>
-Subject: Re: [PATCH v2] usb: mtu3: support the current devicetree binding
-Cc: "Ryder Lee" <ryder.lee@mediatek.com>, "Weijie Gao"
- <weijie.gao@mediatek.com>, "Chunfeng Yun" <chunfeng.yun@mediatek.com>,
- "Igor Belwon" <igor.belwon@mentallysanemainliners.org>, "David Lechner"
- <dlechner@baylibre.com>, "Julien Stephan" <jstephan@baylibre.com>, "Marek
- Vasut" <marex@denx.de>, "Tom Rini" <trini@konsulko.com>
+Date: Mon, 20 Jul 2026 09:32:54 +0200
+Message-Id: <DK382N861VQO.19D7SQAQ19GEW@baylibre.com>
 To: "Marek Vasut" <marek.vasut@mailbox.org>, "Carlo Caione"
  <ccaione@baylibre.com>, "GSS_MTK_Uboot_upstream"
- <GSS_MTK_Uboot_upstream@mediatek.com>, <u-boot@lists.denx.de>
+ <GSS_MTK_Uboot_upstream@mediatek.com>, "Bin Meng" <bmeng.cn@gmail.com>,
+ "Chunfeng Yun" <chunfeng.yun@mediatek.com>, <u-boot@lists.denx.de>
 From: "Carlo Caione" <ccaione@baylibre.com>
+Subject: Re: [PATCH v2] usb: mtu3: wait for TX FIFO to drain before disconnect
+Cc: "Ryder Lee" <ryder.lee@mediatek.com>, "Weijie Gao"
+ <weijie.gao@mediatek.com>, "Igor Belwon"
+ <igor.belwon@mentallysanemainliners.org>, "David Lechner"
+ <dlechner@baylibre.com>, "Julien Stephan" <jstephan@baylibre.com>, "Marek
+ Vasut" <marex@denx.de>, "Tom Rini" <trini@konsulko.com>, "Lukasz Majewski"
+ <lukma@denx.de>, "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Vitor
+ Sato Eschholz" <vsatoes@baylibre.com>
 X-Mailer: aerc 0.21.0
-References: <20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com>
- <1c0aa375-b274-4171-801d-4ee7b857e61e@mailbox.org>
-In-Reply-To: <1c0aa375-b274-4171-801d-4ee7b857e61e@mailbox.org>
+References: <20260718-ccaione-upstream-mtu3-tx-fifo-drain-v2-1-837345048224@baylibre.com>
+ <6f37728a-901b-4f39-9923-3852cbe95061@mailbox.org>
+In-Reply-To: <6f37728a-901b-4f39-9923-3852cbe95061@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,38 +111,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat Jul 18, 2026 at 10:20 PM CEST, Marek Vasut wrote:
-> On 7/18/26 12:08 PM, Carlo Caione wrote:
+On Sat Jul 18, 2026 at 10:17 PM CEST, Marek Vasut wrote:
+> On 7/18/26 12:37 PM, Carlo Caione wrote:
+>
+> [...]
+>
+>> +static int mtu3_wait_for_tx_fifo_empty(struct mtu3 *mtu)
+>> +{
+>> +	struct mtu3_ep *mep;
+>> +	u32 value;
+>> +	int ret =3D 0;
+>> +	int i;
+>> +
+>> +	for (i =3D 1; i < mtu->num_eps; i++) {
+>> +		mep =3D mtu->in_eps + i;
+>> +		if (!(mep->flags & MTU3_EP_ENABLED) ||
+>> +		    !list_empty(&mep->req_list))
+>> +			continue;
+>> +
+>> +		if (readl_poll_timeout(mtu->mac_base + MU3D_EP_TXCR0(i),
+>> +				       value, value & TX_FIFOEMPTY,
+>> +				       MTU3_TX_FIFO_DRAIN_TIMEOUT_US)) {
+>> +			dev_warn(mtu->dev, "%s TX FIFO did not drain\n",
+>> +				 mep->name);
+>> +			mtu3_ep_reset(mep);
+>> +			ret =3D -ETIMEDOUT;
+>
+> You could get the ETIMEDOUT return value from readl_poll_timeout().
 
->> @@ -160,13 +167,17 @@ static int get_ssusb_rscs(struct udevice *dev, str=
-uct ssusb_mtk *ssusb)
->>   		return -ENODEV;
->>   	}
+fair enough.
+
+>> +		}
+>> +	}
+>> +
+>> +	return ret;
+>> +}
+>> +
+>>   /* set/clear the stall and toggle bits for non-ep0 */
+>>   void mtu3_ep_stall_set(struct mtu3_ep *mep, bool set)
+>>   {
+>> @@ -261,8 +290,14 @@ void mtu3_ep_stall_set(struct mtu3_ep *mep, bool se=
+t)
+>>   		set ? "SEND STALL" : "CLEAR STALL, with EP RESET");
+>>   }
 >>  =20
->> -	ret =3D device_find_first_child(dev, &child);
->> -	if (ret || !child) {
->> -		dev_err(dev, "failed to get child %d!\n", ret);
->> -		return ret;
->> +	mac_addr =3D devfdt_get_addr_name(child, "mac");
+>> -void mtu3_dev_on_off(struct mtu3 *mtu, int is_on)
+>> +int mtu3_dev_on_off(struct mtu3 *mtu, int is_on)
+>>   {
+>> +	int ret =3D 0;
+>> +
+>> +	/* QMU completion may precede transmission from the TX FIFO. */
+>> +	if (!is_on)
+>> +		ret =3D mtu3_wait_for_tx_fifo_empty(mtu);
 >
-> Use device_*()/ofnode_*() DT accessors please, not the raw=20
-> fdt_*()/devfdt_*() ones.
+> Shouldn't this bail early on ret !=3D 0 ?
 
-Agree, I just used what was used before in the same line. I'll fix it.
-
->> @@ -369,5 +389,6 @@ U_BOOT_DRIVER(mtu3) =3D {
->>   	.bind =3D mtu3_glue_bind,
->>   	.probe =3D mtu3_probe,
->>   	.remove =3D mtu3_remove,
->> +	.plat_auto	=3D sizeof(struct mtu3_glue_plat),
->>   	.priv_auto	=3D sizeof(struct ssusb_mtk),
->
-> Can you extend struct ssusb_mtk with a new field instead of adding plat=
-=20
-> data ?
-
-I don't think ssusb_mtk is available and bind-time. Anyway, I think I
-can remove the two variables entirely and just rely on ofnode_equal().
+No, disconnect must still be forced after resetting a timed-out endpoint
+(we still want to disconnect it, even forcefully)
 
 cheers,
 
