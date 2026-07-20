@@ -1,176 +1,146 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0115BC44515
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 23:35:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B09C44515
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 23:47:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4817C406DA;
-	Mon, 20 Jul 2026 23:35:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8173780D92;
+	Mon, 20 Jul 2026 23:47:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Slz-usEKdQ0m; Mon, 20 Jul 2026 23:34:59 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MS5jAGJSLNKJ; Mon, 20 Jul 2026 23:47:58 +0000 (UTC)
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0EA3A40762
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 75CB780D6A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org ; s=default; t=1784590499;
-	bh=l/CxXS1s817TEeA9lJFiOmGixxe4hFKI34oyywipikE=;
-	h=Date:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org ; s=default; t=1784591278;
+	bh=Kia1PeMIdnwGm/rGAloo+avz3gUHW3j6C633xX/QZ7c=;
+	h=Date:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From:Reply-To:From;
-	b=OezO4xmOuaZLrGYioA8CTvZi12Rq3DScRBfeCZ2AV5pqqcHVU3iePDgctMzLb+tei
-	 fRuuAT4cJB7+Wt1FjOvoeWQ1Y4NdOeMCYsPlZAyIYCmwK7KqNM4KS1VRqy9r1WNpfe
-	 gqUa0QlwhbG4jcy4m5wQ7nkd2ZAfCh2JiNeOpohjKVhRfyjtL2VcdoIfyffv3l6v7I
-	 aIDj3/+pP/ZdQOdfVpTpDeQovw4KfLYaHgFx0wGh+5dWv0PvthJIRxojDBX/O0THak
-	 DhbkgML9SJ5QYMkBzsImxu+TJcxBMGjPEpV4dKgvuKWCMeNbIPign2A19txePQQShQ
-	 k6gU4apVcruZA==
+	b=beCk5ZLkaWy+YyvXnk2Fa10mT80b0lJ/zl8FHwmclcttF0vpCbERVcQoOpsQYZA2n
+	 rvFGs3z3vP+D5NyoT2A4zb//+RH0SBOcM+nQ1LsFTnmnY0ktn3bT6c7jtDyDXhTIT2
+	 Itz3QTp8TZCngOFpWhjfTJeQl8WnMtO4Nnof3P96iz1GjhSskpMBP07KOCCtFohYL9
+	 i8WvARkyhgSSR7B/vlEhVw6nlDeYx2G7XFMEHQkZnUSDG/ctlq7C5kdvLR3trPSFbp
+	 Ljr4oRxsk9JhPfFQb0ltMqB16so2aigTtQ83DAdYCnZaGe87YhmCxjRd2Dw7JvlMAv
+	 5ZEVebs3/Sqhw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0EA3A40762;
-	Mon, 20 Jul 2026 23:34:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DFB00313
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:30:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 75CB780D6A;
+	Mon, 20 Jul 2026 23:47:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 37EE4313
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:47:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D174140153
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:30:37 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1593B60704
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:47:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TzogcJc8RyAA for <u-boot@lists.u-boot-project.org>;
- Mon, 20 Jul 2026 23:30:37 +0000 (UTC)
-Received-SPF: Softfail (mailfrom) identity=mailfrom; client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp2.osuosl.org 7F6C2400FC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7F6C2400FC
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7F6C2400FC
- for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:30:36 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dI4PtSg7W_th for <u-boot@lists.u-boot-project.org>;
+ Mon, 20 Jul 2026 23:47:56 +0000 (UTC)
+Received-SPF: Softfail (mailfrom) identity=mailfrom;
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp3.osuosl.org 8F1AE60624
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8F1AE60624
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8F1AE60624
+ for <u-boot@lists.u-boot-project.org>; Mon, 20 Jul 2026 23:47:54 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F287683C14; Tue, 21 Jul 2026 01:30:34 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 6F4CD844F6; Tue, 21 Jul 2026 01:47:51 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 860DF82991
- for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 01:30:30 +0200 (CEST)
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-43bf9548df4so5514563fac.0
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 16:30:30 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id D0DD582991
+ for <u-boot@lists.denx.de>; Tue, 21 Jul 2026 01:47:48 +0200 (CEST)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6a3d915616fso1476498eaf.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 16:47:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784590229; x=1785195029;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=l/CxXS1s817TEeA9lJFiOmGixxe4hFKI34oyywipikE=;
- b=L5zQIwaRsTMxyAUnDP8t+cd2+BKTRT1pM/Lkl4LS4dW0gzzhm1f1kwEKB3fjPajWYi
- XluJReeDKPw+FkK0yMqUrpV4DflUuPgjz90kvHnv6HgvmN5+wzm0vh4bQElSPfLN+vzC
- /eM7DFJY0YseNnBZ0ZBagsSHfEW4UJUROThu4DAr4mUcel94ZaifuloBAIkptG4LwFbB
- GTF5yv5Xh8oeB0fcL/vgUmd30zBI8FXlqw14uaZ4GjcwB9OEf2sknbKW8Z6HjjpNV+m5
- sm0CLd2fGmZtXph8Js2iO3NVQDSVVCCmJDHfPHjja46DdFU3It/FmiAfTdG8qm2bNGcT
- Je7g==
+ d=1e100.net; s=20251104; t=1784591267; x=1785196067;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Kia1PeMIdnwGm/rGAloo+avz3gUHW3j6C633xX/QZ7c=;
+ b=l+qRW4FEpquvAotAdP/FlrxKe0j6bzRvanveGGXxTedSUIhf14TmjDm2IN78CkX1NM
+ fVKyF0yEvF3F7QjeaUYuZVIAGe+0N5OYLBBh1yT7bvb9X061Vv6im1YJZFt7GDziFHOw
+ vpURU+kYu1CoNhpjkVJx46Nv1DbcZB9o/UjdAo0ic1IfO+uc6lMPij2zWP1zPwBNT2w1
+ hMu8y25DlIvCKY1xhvbil9E7ziQoIo2E9FbvGLwbPLjm25Wn6IAtdr/GTPzGp+Fw+zvq
+ RF1iY7xLygbH9AIE6lCanzDE1HRSniyyzy/b+mVCPMe2fbBQckgmYhSnDDZKTYVYHx+r
+ UE8w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpiGAgwe+UAXLNi5Dy1eqjYvqd84Vcvcil9zLHvP6B6inJRi4A7mKKdrHdUWSo0bHwXkUz9sO0=@lists.denx.de
-X-Gm-Message-State: AOJu0YygRq6RmDq/bFMedtp61LN8TcBtgcI7SxJzQDebB79dUjT8GGRB
- JiIdDZaFMzsV6rjksrak+2g9TRxCjVty4oME/qPf75siAmwHLxXdeFgHFPa/5ICW+fE=
-X-Gm-Gg: AfdE7clfepAiyXERHRL+IKySEKxdBgvFNYEVejYqxfArNlxq4iiHSkLE8FBd2se7+gG
- 3WSCyKw75iDlbG9SpheFrfo4EU2nXSoPWcOnyGzL+yJYnWs4I3tziBiuKjVTgp3GNEvPDWFJSYQ
- fMfg4PjxIzxkG+aIpG+cu9Lpi7HS+RLroPLdM7xi1wRRq5OgdTTgm7csqsyIGHJ4ilBk0JlnNfv
- LHGPf38ZV69mWsVAN9/FSH5pMmqHvLxsds3RpaknDmCdcHeMeZlHNWfddK1FS1WRN5lwJ8S4W0Z
- a6Yir2j3URP+jD3PKrpiSjPCPcf5tAhEPEfKkbLfzJehbX48cVb1DiuyruviEhDfLtUZmyXVyTb
- NHsk+dqBVBgVqGFiM8oFHpltmwFRXtmVzfVDDl0TuE6anoRbh+pLR92SrxYlY3QkkQeoepM6fHw
- sgRdI/Cr+pqln4N3Tk7SNZV52rGR8jypQLePkxyilVMp8hLeo3oXGFHQSLD/5BbAIHqUzAc+ctf
- ewwMGTCG8W+i+YL4zQ/Duvnp6U=
-X-Received: by 2002:a05:6870:309:b0:448:558c:d82f with SMTP id
- 586e51a60fabf-45690ddc9e5mr7701574fac.40.1784590229135; 
- Mon, 20 Jul 2026 16:30:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4568e6a92f5sm9838535fac.15.2026.07.20.16.30.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 16:30:28 -0700 (PDT)
-Date: Mon, 20 Jul 2026 17:30:23 -0600
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>,
- u-boot@lists.denx.de, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Joel Stanley <joel@jms.id.au>, Chen-Yu Tsai <wens@kernel.org>,
- Samuel Holland <samuel@sholland.org>,
- Simon Glass <sjg@chromium.org>, Thierry Reding <treding@nvidia.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <u-boot@0leil.net>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marek.vasut@mailbox.org>, Rasmus Villemoes <ravi@prevas.dk>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Aristo Chen <aristo.chen@canonical.com>, Anton Ivanov <anton@binarly.io>,
- Daniel Golle <daniel@makrotopia.org>,
- Francois Berder <fberder@outlook.fr>, Peng Fan <peng.fan@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Randolph Sapp <rs@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Alexey Charkov <alchark@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Anshul Dalal <anshuld@ti.com>, Johan Jonker <jbx6244@gmail.com>,
- Francesco Valla <francesco@valla.it>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michael Walle <mwalle@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
- Lukasz Majewski <lukma@denx.de>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- E Shattow <e@freeshell.de>, Enric Balletbo i Serra <eballetbo@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lucas Dietrich <ld.adecy@gmail.com>, David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Mateusz Furdyna <mateusz.furdyna@nokia.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heiko Stuebner <heiko@sntech.de>, Vincent Jardin <vjardin@free.fr>
-Subject: Re: [PATCH v5 04/14] crypto: hash: allow DM hash in SPL
-Message-ID: <20260720233023.GP749385@bill-the-cat>
-References: <20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com>
- <20260719-submit-ce-series-v2-v5-4-3c41f66d4522@gmail.com>
+ AHgh+Rrg1ZOmo1O3c1EMKQl1jd9AiH3vQ3ePhpp+WVeY88iR2OS1z94Xq7GXOhahVkfLgzHtS0rYQwQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyuK502F/0ZnpFW6jHEiQrT6jiTTdmXzXHjWIeBoB8VZBSQCWRC
+ v3299h+KlwEDV3FUOyOou5dLhfiNqJCBdgRLXJmX3lItZG/u7sX1Rpdb6toiRaG9mFg=
+X-Gm-Gg: AfdE7cnrD2U/5VY/RUxZ9RQvQ7SAmC8yUgSbHqu4KGDGAkxboKWfjgK8brssf6DH5qU
+ aa6RewJRnfoH2Ywh705BwtYwk1WWbZ0Qkr2tQNF3AymrfhPznOfmnFYBY2jka/tS4M4Ug/ltYsS
+ CKU1d7P9iSDoAFRXW9ObYls5BVgznGUrADFvbxfPgkVidLKElRs0P1rlKoSRMVOIGl2V/xaLB2I
+ 7uyvgNm9oFNMXxNY6ysqRgWmv28VQ8gMqHY73HP3EZkf67EW7CHz5nAkloTDEmcWsh2RU57WTUV
+ j2xdFmFNuddpa1hFj1MCIn4l9QLts+AGBZV5Su9oFRyjVnVLf4qHhx6lnGFJWR4BqMUz+JfTems
+ dix8cVAdanXyO69sO0hrTB2N4cSu0Nclum8Dhb2jbOiZlCfrFMY4Oo/l6/gV7/EJEnJi11znFG4
+ ox22LyBWdZ6TbgmeT6glJd7mhnzxsj3d63MROt7CJCNxKIQf/kZCkk
+X-Received: by 2002:a05:6820:2910:b0:6a3:2368:4cc5 with SMTP id
+ 006d021491bc7-6a536863bffmr7066125eaf.35.1784591267400; 
+ Mon, 20 Jul 2026 16:47:47 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:8ce6:b98e:1126:f7f0?
+ ([2600:8803:e7e4:500:8ce6:b98e:1126:f7f0])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6a516c03f36sm9379343eaf.7.2026.07.20.16.47.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Jul 2026 16:47:45 -0700 (PDT)
+Message-ID: <ec3f60c9-4088-4767-a262-18453eb3c719@baylibre.com>
+Date: Mon, 20 Jul 2026 18:47:45 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Gx+3yW8HzLnqBE96"
-Content-Disposition: inline
-In-Reply-To: <20260719-submit-ce-series-v2-v5-4-3c41f66d4522@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] usb: mtu3: support the current devicetree binding
+To: Carlo Caione <ccaione@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>
+References: <20260720-ccaione-upstream-mtu3-spl-gadget-v3-1-91cff44b1622@baylibre.com>
+Content-Language: en-US
+In-Reply-To: <20260720-ccaione-upstream-mtu3-spl-gadget-v3-1-91cff44b1622@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-X-Mailman-Approved-At: Mon, 20 Jul 2026 23:34:55 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1784590229; x=1785195029; darn=lists.denx.de;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=l/CxXS1s817TEeA9lJFiOmGixxe4hFKI34oyywipikE=;
- b=DSPqClHIFHpyfEs3kGv4luPFPOhdEUSjUQKu6Hf0tZaFltb0nxSQT1Pn6M5AjCKET0
- DPsmzCYAfS2ZB/mgsa+pSaMwuChMlmaXGSkKyRlbcw1FPnJpj78uZyJj8NarTwlujVTO
- ildpi7LSYM6YTUUMH4jdJ38mmc9etbFHC1NPU=
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
-X-Mailman-Original-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=DSPqClHI
+ d=baylibre.com; s=google; t=1784591267; x=1785196067; darn=lists.denx.de;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Kia1PeMIdnwGm/rGAloo+avz3gUHW3j6C633xX/QZ7c=;
+ b=cLACvV7Alznji5XGPN2sDw9um+mvVL31Jd6AAIpvvSOTrLBU+CLgFG2iPDk/FX706k
+ czOMl2raxmQf5xPCU1UtQyn/0WikaFJXHljBW09XuuzVKCUQtKCTsWLkbjiz67b13/fy
+ M2XL5QR0RNahvN6PHNUsXMUfRELQ/G+PthMtnaPwxysuo1dkm7Zt6V7nJv881mnH6AdL
+ RHWMrXbosCxP3vpwGXCwm1EJ1jtzlD9ntXF45j9lrz6fe2Ab7mK5e+hBfCrptHM16a6O
+ 6oIUO5gvq6boe5VCnHupsS4Ku2eRLV/d6cg/4NwOK8alG3e3mMx/sMDCtW8SNgyiBs2Q
+ K3wg==
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
+X-Mailman-Original-Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=cLACvV7A
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none)
- header.from=konsulko.com
+ dmarc=none (p=none dis=none)
+ header.from=baylibre.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=trini@konsulko.com
+ smtp.mailfrom=dlechner@baylibre.com
 X-Mailman-Original-Authentication-Results: phobos.denx.de;
- dkim=pass (1024-bit key;
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DSPqClHI";
+ dkim=pass (2048-bit key;
+ secure) header.d=baylibre.com header.i=@baylibre.com header.b="cLACvV7A"; 
  dkim-atps=neutral
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -183,63 +153,138 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-From: Tom Rini via U-Boot <u-boot@lists.u-boot-project.org>
-Reply-To: Tom Rini <trini@konsulko.com>
+From: David Lechner via U-Boot <u-boot@lists.u-boot-project.org>
+Reply-To: David Lechner <dlechner@baylibre.com>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 Sender: "U-Boot" <u-boot-bounces@lists.u-boot-project.org>
 
-
---Gx+3yW8HzLnqBE96
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, Jul 19, 2026 at 10:13:48PM -0600, James Hilliard wrote:
-> The hash uclass is currently keyed only by CONFIG_DM_HASH, so SPL cannot
-> enable UCLASS_HASH independently. Any SPL code using hash_digest*() has to
-> rely on U-Boot proper also enabling DM_HASH, and the FIT hash path selects
-> the driver-model implementation with a non-phase-aware preprocessor check.
->=20
-> Add SPL_DM_HASH, build the hash uclass from CONFIG_$(PHASE_)DM_HASH and u=
-se
-> CONFIG_IS_ENABLED(DM_HASH) when selecting the FIT hash implementation. Th=
-is
-> lets SPL FIT verification use a UCLASS_HASH provider without requiring the
-> U-Boot proper hash uclass.
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+On 7/20/26 2:53 AM, Carlo Caione wrote:
+> The MTU3 glue driver requires the legacy U-Boot layout, where a synthetic
+> mediatek,ssusb child owns the gadget resources and dr_mode:
+> 
+>     usb@112b0000 {
+>         compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
+> 
+>         ssusb@112b0000 {
+>             compatible = "mediatek,ssusb";
+>             reg = <0 0x112b0000 0 0x3e00>,
+>                   <0 0x112b3e00 0 0x0100>;
+>             reg-names = "mac", "ippc";
+>             dr_mode = "peripheral";
+>         };
+>     };
+> 
+> The current binding requires these properties directly on the controller:
+> 
+>     usb@112b1000 {
+>         compatible = "mediatek,mt8188-mtu3", "mediatek,mtu3";
+>         reg = <0 0x112b1000 0 0x2dff>,
+>               <0 0x112b3e00 0 0x0100>;
+>         reg-names = "mac", "ippc";
+>         ranges = <0 0 0 0x112b0000 0 0x3f00>;
+>         dr_mode = "peripheral";
+>     };
+> 
+> Modify the driver to look for a legacy node only among direct children
+> of the controller and bind the gadget device to the controller node when
+> none is present. This retains support for existing U-Boot devicetrees
+> without requiring the synthetic node in devicetrees using the current
+> binding.
+> 
+> There is also a difference in the meaning of the mac resource: normalize
+> the resource address by SSUSB_DEV_BASE for the current binding and leave
+> the legacy resource unchanged.
+> 
+> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 > ---
-> Changes v2 -> v3:
->   - Remove the bare software-hash fallback scope
->     (suggested by Simon Glass)
->   - Document that SPL_DM_HASH needs a hardware provider unless a
->     phase-aware software hash provider is added
->     (suggested by Simon Glass)
+> Changes in v3:
+> - Remove the temporary platform data and derive the binding during probe
+> - Use dev_read_addr_name() for the MAC resource
+> - Link to v2: https://patch.msgid.link/20260718-ccaione-upstream-mtu3-spl-gadget-v2-1-7f69ca462559@baylibre.com
+> 
+> Changes in v2:
+> - Removed typecast horror
+> - Added platform storage to pass around legacy flags and device
+> - Link to v1: https://patch.msgid.link/20260717-ccaione-upstream-mtu3-spl-gadget-v1-1-57a3e2d0a2b0@baylibre.com
 > ---
->  boot/image-fit.c             | 50 +++++++++++++++++++++++---------------=
-------
->  drivers/crypto/hash/Kconfig  | 13 ++++++++++++
->  drivers/crypto/hash/Makefile |  2 +-
->  3 files changed, 40 insertions(+), 25 deletions(-)
+>  drivers/usb/mtu3/mtu3_plat.c | 23 ++++++++++++++++++++---
+>  1 file changed, 20 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
+> index 26fee141f6e..f5c00cd5a8d 100644
+> --- a/drivers/usb/mtu3/mtu3_plat.c
+> +++ b/drivers/usb/mtu3/mtu3_plat.c
+> @@ -136,6 +136,7 @@ static void ssusb_ip_sw_reset(struct ssusb_mtk *ssusb)
+>  static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+>  {
+>  	struct udevice *child;
+> +	fdt_addr_t mac_addr;
+>  	int ret;
+>  
+>  	ret = device_get_supply_regulator(dev, "vusb33-supply",
+> @@ -166,7 +167,17 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
+>  		return ret;
+>  	}
+>  
+> -	ssusb->mac_base = devfdt_remap_addr_name(child, "mac");
+> +	mac_addr = dev_read_addr_name(child, "mac");
+> +	if (mac_addr == FDT_ADDR_T_NONE) {
+> +		dev_err(dev, "error mapping memory for mac\n");
 
-The changes in here make me worry a bit about platforms relying on the
-current behavior (because of the Makefile change), did you put this
-through CI? https://docs.u-boot-project.org/en/latest/develop/ci_testing.ht=
-ml
+This looks like an error reading the address, not mapping the memory.
 
---=20
-Tom
+> +		return -ENODEV;
+> +	}
+> +
+> +	/* Current bindings describe the device block, not the whole MAC. */
+> +	if (ofnode_equal(dev_ofnode(dev), dev_ofnode(child)))
+> +		mac_addr -= SSUSB_DEV_BASE;
+> +
+> +	ssusb->mac_base = map_physmem(mac_addr, 0, MAP_NOCACHE);
+>  	if (!ssusb->mac_base) {
+>  		dev_err(dev, "error mapping memory for mac\n");
+>  		return -ENODEV;
+> @@ -317,9 +328,15 @@ static int mtu3_glue_bind(struct udevice *parent)
+>  	ofnode node;
+>  	int ret;
+>  
+> -	node = ofnode_by_compatible(dev_ofnode(parent), "mediatek,ssusb");
+> +	node = ofnode_null();
 
---Gx+3yW8HzLnqBE96
-Content-Type: application/pgp-signature; name="signature.asc"
+ofnode_for_each_subnode() initializes node, so I think setting it here
+is dead code.
 
------BEGIN PGP SIGNATURE-----
+> +	ofnode_for_each_subnode(node, dev_ofnode(parent)) {
+> +		if (ofnode_device_is_compatible(node, "mediatek,ssusb"))
+> +			break;
+> +	}
+> +
+> +	/* Current bindings keep the gadget resources on the parent node. */
+>  	if (!ofnode_valid(node))
+> -		return -ENODEV;
+> +		node = dev_ofnode(parent);
+>  
+>  	name = ofnode_get_name(node);
+>  	dr_mode = usb_get_dr_mode(node);
+> 
+> ---
+> base-commit: 96c308b8d2a6a1496c0a7366db9a7becf42d2454
+> change-id: 20260717-ccaione-upstream-mtu3-spl-gadget-aa3d39cad06a
+> 
+> Best regards,
+> --  
+> Carlo Caione <ccaione@baylibre.com>
+> 
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCal6vjgAKCRAr4qD1Cr/k
-CvqVAP9JAS0WRLyfw0ZL2e/is+7iwlSxxC2TT8QdihplMaZB2QD/TTe3+DF13liW
-O/N/mzNIU2kYc+f8VwlRN9TTK7vPgQc=
-=cYyw
------END PGP SIGNATURE-----
+This would be a bit more clear to me if we change "current bindings"
+to "upstream bindings" everywhere (I think that is what you mean?) and
+add some comments in the code that "mediatek,ssusb" is a U-Boot-only
+thing.
 
---Gx+3yW8HzLnqBE96--
+Also, can we remove the obsolete entries from the U-Boot devicetrees?
+arch/arm/dts/mt8183.dtsi already has "mac" in reg-names, so should be
+safe to remove ssusb child node. arch/arm/dts/mt8512.dtsi needs a bit
+more work.
+
+And we should be able to remove doc/device-tree-bindings/usb/mediatek,mtu3.txt
+since there are upstream bindings now.
