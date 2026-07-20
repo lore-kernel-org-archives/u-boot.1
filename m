@@ -4,148 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0BFC4451B
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 05:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45486C44524
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jul 2026 06:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14FF582991;
-	Mon, 20 Jul 2026 07:36:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 356D482991;
+	Mon, 20 Jul 2026 08:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="iSadSG0p";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gd7pOKM0";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="glyYQgK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6220483E76; Mon, 20 Jul 2026 07:36:41 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id AA56183E76; Mon, 20 Jul 2026 08:11:22 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31A5980517
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 07:36:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66JNumbf853166
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 05:36:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=Z7jEZDLd8erVz5BWEld3D3Ks
- oxmYkOu/rp2twG8w2Qg=; b=iSadSG0paj5vOIn7GpoJi4fqdZM7t6chI/PJeaIh
- cVpxuRH5nT789Q94Fez0K+6bBuPorhvInyUt52jAWFqXQNHkPhdBkHehWvq4ulGJ
- BKxjP9LFDdsOaTJwsGnvW+WHNKMuCIsHXqPo0561IKOkSE6hUv0UAMjbviOrmZ/M
- KOlvCWVnpI/QlPaRF5YnnpOiK32EOpVEKsof5TGogqGrB8ET48o/TmB0Ygp/SFCE
- ZCqx7a3sU/iQpprLrbzbPk2W1FkZm6vAjjXQCX7qWKB8ufY9UGcvk2gz0C1TsI77
- l8FRPpM7RYObZ3qb6QSt/5hRiS6PRhqZ+Mq2P1KmGkaZJg==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2dc4hpk-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 05:36:37 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c9fe4c5eb39so6903198a12.1
- for <u-boot@lists.denx.de>; Sun, 19 Jul 2026 22:36:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784525796; x=1785130596; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Z7jEZDLd8erVz5BWEld3D3KsoxmYkOu/rp2twG8w2Qg=;
- b=Gd7pOKM0kdLwFD+Ao5VKlwfgSUJ5w9tLiOAde3zh3n/nUEHfjhKn7BQ5rWcvdDF17e
- xv+xfNlyje47O+kH2RNcqUSmjBH2azZQFEYXxr1XXVTqsGXQG7Czfig8sE1JQcxow1YY
- QXkbkyThNg4YfecONn+uO6VWWFRk+yc3eLXawDy80UX/ws2xPhA+J2/v4jzlVqDDBvy3
- 55w0BuqeP9VlyFqF7KXT16oygfwaAK9AoB3T7B77b7NytzFIczWz7zYIIfLbhpwtwMNQ
- Fb2UCOjYcYie/+emNTwQ0N1IerloJb5nU5IY5a8eEvj579ChlcTG0/cr74+KFt3lkCqi
- QmcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784525796; x=1785130596;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Z7jEZDLd8erVz5BWEld3D3KsoxmYkOu/rp2twG8w2Qg=;
- b=LHUHwl3xHMjHPPqmsO9zxZonUCl7PicUulzkuU39tAfyU+mG56bQ8xc6dKSrVnFLfq
- paAPJEr6UdgpcTz63tjrOLgkErWupZg30d027aPlUrZpLXQ+GJMnrYxHc3G1xkte/X26
- jZBFXw7nuGz357co3OscPQbK2MuZhN+8Q59skrO6hHohYmTFUNZw6amKNF9ah8R7Fksc
- 71HEQ3I3CVrnOgC9fx8Y4adCk3XLj4Punej5f6i/vylGPBGKdeUw7CIr1FxtZQPMth3W
- ZhWTk6I8QN1paIBOLIUuUQ++fXfMNpPGcBHXL1aorGSSezkV9ecPxUIP/BpqFYnuJKoZ
- WR4g==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoTQ3VqBdkQVjwfyuQduCTpgAzgXqjLm9Bb2+cUkLdrY8fkDQ+bvQs40mik1NoS6xkNqSfaogc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywfiq1T7Qeafex/fS0LoCm5NNAzMezoiA1pYySLDP+0sSVnSIeT
- SqVvBD+NG6IHiFP/0zCHMHmfBmfKnhPBHXhaAZ+L8mRMeviV8J0Bm0xGWBjlJwHwclPeatV6lgI
- +GyA1/L5adRO+021XhJmHM80CuismTjAnnMJKvhO1ds0vUMPK+jWkUCl/
-X-Gm-Gg: AfdE7cnHveQV1zz1MxvmSzXuXX/0WJf+cbjsCJAK3hmm3iODHh9NUMKb2Q03faJyNVw
- nB6UJ+DYV9GgRzo3uC1xkmmLDJk9T10tSsCCUD6C59N8D3zB7e8avtmcew6w2cnuxg7Zn1BmU6Z
- EyCdolny9KhqbSIBGf9PWFwUVomMHIlC0e13iuGZT/q7BZkcuNgOwgOM8v+dU2RLmKQhjHEPbUF
- fe/iKmZ2TWIwXz8qvo1+WYSzUvzMB4ABIyEN9X7edmrC2vsHt2y4o1VH7E+uFHXyslgjivGY/bT
- A/mrQuwR3YYV1RPTy9Oeb/qAcq0iHbac3QGqGHJIJ8In34xKrcC4yCOZ2W0py61Q9WLsei9FMB2
- jDNW4grQnIfTvJapbc9gji0cjQiZ7vGPh/qi6O+lTdhT4BN3TpcsY9xP7FMp7zOUZI/fn1WLMTh
- uOuxKFPOlaceLlk3/xwOc2htCCbk8VgQ==
-X-Received: by 2002:a05:6a20:ae2f:b0:3bf:b68f:4685 with SMTP id
- adf61e73a8af0-3c3ad7aa9efmr14063911637.23.1784525796546; 
- Sun, 19 Jul 2026 22:36:36 -0700 (PDT)
-X-Received: by 2002:a05:6a20:ae2f:b0:3bf:b68f:4685 with SMTP id
- adf61e73a8af0-3c3ad7aa9efmr14063882637.23.1784525796024; 
- Sun, 19 Jul 2026 22:36:36 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31429fdbd45sm32112360eec.12.2026.07.19.22.36.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 22:36:35 -0700 (PDT)
-Date: Mon, 20 Jul 2026 11:06:27 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Simon Glass <sjg@chromium.org>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Anshul Dalal <anshuld@ti.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>
-Subject: Re: [PATCH v2] misc: qcom_geni: Add minicore support
-Message-ID: <al2z20ZrVAVl/RB9@hu-varada-blr.qualcomm.com>
-References: <20260716-minicore-v2-1-160af559b273@oss.qualcomm.com>
- <178428299564.1171703.15456210253429165016.b4-review@b4>
+ by phobos.denx.de (Postfix) with ESMTPS id 2E26C80517
+ for <u-boot@lists.denx.de>; Mon, 20 Jul 2026 08:11:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Revex1uVkzpcIGE9INNO9z1MA5HPtha25t1Xu9grFYjztjNPd4kOc279MsHwQVSGr5Tqcm7kZwwg+qxeqcsoZ3ioDQaYU3+ZjN3MNdQA/pLztTzDdoLRcRMZquHmfCha/ZJFRHWFsK0aU7TLYwQ8YEDhGQ27jr3xOf1loDTGR5w4x77gIky+jUNcSSU17SXSmyGQxEm/UXjwPx35BXbBtcZfEmJDQAr8lIWcb/qr4BeQWAmhGGykD2UCqkeNePNz8nPIKfKm3caQU6CVGNscOKw0XZlTcfBAFi7wTvgkxMOaKGVnBsAc6XuVGVFSHEij6Hkdcx1aBMmTl9yIedDVqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uSetMVuzrqpdruQn0ifg2ZYgp0D+vACzjFEWQscIhcg=;
+ b=unaOdPvvWdfnauaG7vKGva2L2gYvfPfMWgvBRMjlTVGAYgx5s6LdqlrqZdzMs4/pYa51F2LTGh76ZeCI/tnwQsO4K9EFspCpo+s51GalWQNaUlkx918jG56kvMnKKaifB2qsDXJk+p2t1zWaK4wIFO6OHxoMRknhCZ7p0nYdlEU/WJD7fvmsP9vMTOPcNOJYxo0W+HFulRPyESdl0wt/A0f46DJV81DrafzzoUYP8aGr6u2kYFmaqAGGbAGy6iRCCg5gn4xQGiRgI9KEgXnNCds+fy6z22t4O7Wk6lqLt3OdRM2H98wwsSJPRdCRpEmxMhJHFo4AVjXTpnhH+F87Qg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uSetMVuzrqpdruQn0ifg2ZYgp0D+vACzjFEWQscIhcg=;
+ b=glyYQgK1qiO5X1SyL+AztOuvhlIkyYwOFUXL+dG/Eh2ZPeNZXeJ7ZzN6GunU45s0vSvWES3Nj4AanI1wFUB3vMVVYv0exYiIzGuJs4PdsWqGAW+kWjIj2CkBwQrw270ElENF0M6KBSDBDhZKB+UZs1pISmVbdB5+6Al2YUntNyA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by MN0PR12MB6031.namprd12.prod.outlook.com (2603:10b6:208:3cd::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.16; Mon, 20 Jul
+ 2026 06:11:16 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0223.013; Mon, 20 Jul 2026
+ 06:11:16 +0000
+Message-ID: <179b7eb6-61ba-426f-9dd1-b0aad4a05426@amd.com>
+Date: Mon, 20 Jul 2026 08:11:11 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] riscv: Skip riscv_cpu_setup() when CPU driver is
+ disabled
+From: Michal Simek <michal.simek@amd.com>
+To: Tim Ouyang <tim609@andestech.com>, u-boot@lists.u-boot-project.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>, leo.liang@sifive.com
+References: <8953b5de682097450d7434e267380ac40cba6347.1778488310.git.michal.simek@amd.com>
+ <967b6d66-15f2-4e5c-9de9-3c530700cd05@amd.com>
+ <5q5jvub5st33a5i3wfepjbqjcvxmxfyrjun7wxptqfjccra54d@ceo2hhhzibnv>
+ <d00b7401-d52e-4d49-bfd3-6330d8b31a94@amd.com>
+Content-Language: en-US
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <d00b7401-d52e-4d49-bfd3-6330d8b31a94@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: BY5PR04CA0007.namprd04.prod.outlook.com
+ (2603:10b6:a03:1d0::17) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <178428299564.1171703.15456210253429165016.b4-review@b4>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA2MCBTYWx0ZWRfX2eEGR5OcrtDx
- gMHOjcICf4ULWP99fxuP9jsYxAvTdngcYG6L8g/iJat/iCBxg6BtWg/Dblz8AlMffchVRmabN3J
- VhhAyusnnGSEbuGEC8IJUjdpZ068RWA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA2MCBTYWx0ZWRfX6BGRZpDnuFNJ
- 3jG8gVAJKfgJHpvFNUpQMekF2I6upTZyNL3NEeGQ3Z/W4D7tf6JHjio+kOZHl4+y594OYlIqTrw
- 70+UPIMmvHNHX9apD22gu2a8IAuJx0w3XCxbklpelkqHld8YDe+J2uCEN6gDTbEF7A8w7RhY4iq
- HuANDBM+NcZWZCvkTspccBZW1TQpkIBkHNiKtzIhTal2a08MEn1NwJFV08yXylGj9VBX95YqPYn
- XxD3eCtGwGZbz3QbtSqBdZ7GrgfYLcM2LGSU39xFmSAzvtYi6KMHdwweKMABo+zpbxYRIRYHQOB
- q9SAAOrmQ2T0B3EPFrc5G6eHVk+V+iASA/FDqChw9K0V5rD84sqdA2WrAMIbgZK7TOKvfo06wuf
- GeMHqsi6/MVne0RRpbrACC7VjAUhZhwv+jeCRoXPFKAx3fnX13W0u9nT0UQ7BKYYTDU5hWGZSz8
- aL0MKRbJFYLJQTrg6cQ==
-X-Proofpoint-ORIG-GUID: D2rIaSBkf4hUNOp-2a6mOTYCgSnX5-pd
-X-Proofpoint-GUID: D2rIaSBkf4hUNOp-2a6mOTYCgSnX5-pd
-X-Authority-Analysis: v=2.4 cv=FOQrAeos c=1 sm=1 tr=0 ts=6a5db3e5 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=OkA5tPPiBfA5EVN0eloA:9 a=CjuIK1q_8ugA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-19_08,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 adultscore=0 bulkscore=0 spamscore=0
- malwarescore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607200060
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|MN0PR12MB6031:EE_
+X-MS-Office365-Filtering-Correlation-Id: 74747d26-8ace-4128-c936-08dee625b52b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|376014|366016|1800799024|3023799007|6133799003|11063799006|10067099003|4143699003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: yhIvRzMYorplVBcTfTewxo2RoCxE+8/UxyT0sG8yV2NS8VtyCjDm+nKl7x6rUIGqiXdWY0+flVJmJY0P7LFtIiKV5Yl4I6++IssWA3sTlqakxe9fpyCjrcvdiD1wDz/REZteVAdcFSAFQzBpvvlytAEML8ta+KYFIiBuH86wau9LiYwcdW/VVAF9Ump/RP6bFzmYzvLltxOMmkfxGn1BbS/9gzg3xmoAbQxfj1CfZ/HQ+TsVxagGt9vHA096nqu2yA3Mk7cMYhnMxcY6MNthgIvQ7a5S47IE6VWTmnZo8sYQl1u/zeuUlTxlyTQQLEs60JDe0GfhcnDktiCoeAdEkh7sx/hjrZFbamz3qcqkMeEl+VKOfzFkyG+mAwkYCeQRYthI8AK77vR64dTkPLu91zSJNKyhvC4bQo5+PrOtyzpQykrghP1rlL5jZgMxi8YwnqTtyhdDNR27Dwrn0XRviYnlzTEb3r0No4749hwg8AIJoQpPKcig4NTJ4u/vqDWL64qDZqZVmwsO4eZxJvepSnH1fwTWLHmmhOm5ozgNxz0uESt2Ocnq6VjtyG0jIlEQEFrLOzhWQY8yNN9jmTS5KOwvAAuZsAexik+C84ffdyZR2lrOGVU4peiEB7PFwKXbRwcvWua20RgQ9BgcHTuZMuKiH2L9QbvZ3bOP4yotzqw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(3023799007)(6133799003)(11063799006)(10067099003)(4143699003)(56012099006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RWVVQUF6UkFPa1U4ZTdON25wTEo2K0lsbmVEOEtkbmV6TnlnMnliZUdSeUJo?=
+ =?utf-8?B?NDhJejdhUVF6YU1wS3NBWXVkekpnUldmczRZT09OVFJUZGV1aGpXVzd4TERP?=
+ =?utf-8?B?MmtmRHlNRGlObDBKK05iSGEwaWJsY2lxZ3I0R1A5aUtBREdMNmhuQnJaaXNq?=
+ =?utf-8?B?ZmF0cFZpUVpHOWdrVy9SSUM0UHhrb2szczJKUlFRZFRiblpvTFpOSGEyeFph?=
+ =?utf-8?B?ZTdPcmVKais2aWRMQkF0UWRqNkt1cEpoUjV5WUMveTJPOG1HY3dvMXd5T3J2?=
+ =?utf-8?B?QUNBVmZHalM1ZVBNRFNodStURFJ3ZUFGN0g3eVJDUWF3OENsYzkvLzZYWGxZ?=
+ =?utf-8?B?RHBiaW9hbVN3dVcxcWZTcno3N2FpaXBmcXB2M3lFRGtWZkc4REFoZzAxZ3o4?=
+ =?utf-8?B?N3VGYU14WWJFVWJPSmpwQVA2YzdLU1pDcXpXLzY3bGFWNFZqTEhmUkdOQ043?=
+ =?utf-8?B?aGdRcDc0SUhON0NzWXVwVTZ3NDRIeFRlQ3UvbFZBbUd2d2lLS2xRRUZWT0U4?=
+ =?utf-8?B?VjFiRGxiL3pmcWNaN0xoTC9ZQ2pweDBRVUVuQ0ExRlJGVkRqeWh1S2h4NER6?=
+ =?utf-8?B?SXorZ2dtcm5aMVNtRjBCUi9XTGxaQ1YxcEV1UW56QmI3TmQrVk5iVkIrYzhL?=
+ =?utf-8?B?TG9DTmQ3OGQ1M1A4Sm1YQWFXVXlyVFhhVjNkTmNHclNrWStRd0tLeXpvcFBD?=
+ =?utf-8?B?QzJMVkhtYzJHQ2NIZC95R3V6Ri8zTGg2VGl4Vmc2Nnh4Tm1ULzVOempsMWNl?=
+ =?utf-8?B?ZUV5L2xrOCsyanFvcStqUkNTK05PTUFnMWVkR0dVZk83Qm16TGV3dlpwbG1M?=
+ =?utf-8?B?UENoNkpBUW1NdXZRWXlwcWlSbldaVDhIYkFPeWRZVytKU3FWUTNHRUtYcmFl?=
+ =?utf-8?B?ekFIVUh4OENVei9RY2FMUFc5ejdVdlhGWjRybWdCNG43VTNYMFllMHFyb1Nz?=
+ =?utf-8?B?eGJlY0JlU3JrdGwxS1ZNamZLOFdNTHJLeHV3ZEJ2N1lqOGtqcGtuMWl4VndU?=
+ =?utf-8?B?UzJYMEZCQUo4UFhFakxIQUcvYnZ1eUoxMzdtbkpFdEtMTy9mOWpKSDg2TzBW?=
+ =?utf-8?B?TFZ0MUlBVmRzVXYxeGRHUlJrckhzQjJ2NWNlNEVTd1g1MEt4SndHSmFaazda?=
+ =?utf-8?B?NTM3TmlpZjJ5VkdTYWRqTUVxbnVKL3ZCWnFPbzdaOE50cU96ck81VkRZQWo1?=
+ =?utf-8?B?MnFDVDNIUzFqWm9sNlZ4dEl0bE9UdFVHY293aUU3SktZRVJYaFJRYVdIQlNr?=
+ =?utf-8?B?WmNzOHJGMGQrMUJOMzhQWlF4eUVFM1JzcEExREYvTXZwLzZXWDg2YTMrUUEw?=
+ =?utf-8?B?UEx4RFNxbFFLb3d3aThyRVNPTHR2Yk0vK21PdWMvcklHOUMyY1AxdldVdlZD?=
+ =?utf-8?B?bTBMNnVvVDlhaG9vRDk0THg5RHNuMURGYW5EMHU3M2JEZG45Yk1nVVVMRFoy?=
+ =?utf-8?B?QUNIR3d4NmtITXFBbFo0OERjbWN6NENRZitGQVQ1WVhpS2dtSWNHVHBobzFQ?=
+ =?utf-8?B?RHFZYlZoZWJ3N0Y1WjZIME5zd1B5ZmhtanBLdExiVWR6YU5WY2krdHMrMTkx?=
+ =?utf-8?B?K3owZzdod3o0MlptSzZ3dHBYSGtVVzNybzZhc2tNM0publVKTTRGQUh5YU5V?=
+ =?utf-8?B?UklTKy9lQTdEbzRYVFgwVzZmSGdrb2xXVzRWbngvNGlJRmdKUTd0NFd1Tm56?=
+ =?utf-8?B?WkNjT0tWL1I3dzY0VkRxTGw2c3FQMjdOWmhYU21qZUxxUlFvbkc1cHVwamZR?=
+ =?utf-8?B?K3lHNFpCMS9ZY0p4bUo5c2Erb0xTaXQwT2NiUWhvVmF5bEZQMjV4cSthOUdR?=
+ =?utf-8?B?ZzFmendwdGFJaTRUVk51aEJ5QzVFVmtvWjJHM3pLa3NGRnpJY1g2N2lycUJQ?=
+ =?utf-8?B?R3dGSFRnUlJnaVQ2b1lESDRPWVFtL2Irbzk4RjBCVndTRFRRekhMVm56c3FC?=
+ =?utf-8?B?c3ZnVjl3OGp6ckt0VnMyQnR3NXpLYklkalF2NHBQM0tvb1NHMTA1TnJGZ0E2?=
+ =?utf-8?B?STIxL0xaZzdybFhFR0tFTTJHZGtNVHhJMmVmTWJtVEZoZWJ2bmx3L2ZEdEJ3?=
+ =?utf-8?B?WGxtbHEzL0c4N3lWU09tTUhqRTBma2xWcEZLRW1jMDhiQUllMTVQVmllWE5i?=
+ =?utf-8?B?UG9Tak1PYk5qK0FpSGNNb1NHSDQ1a054aFl2ZEVCeWcrZDVDeXFVT05pc1hW?=
+ =?utf-8?B?eFROTGtyNDhRSHRzTldKZHliRXhGeHpqZ1lXQXNwY2s3UWJ3V2Zud3RkUmY3?=
+ =?utf-8?B?RldxQVh6ZnJKSHhyVGRUQmxsaTNnN0pVbUhsL080MFdnSHFvRnM0VXZaaUhq?=
+ =?utf-8?B?eU5wbnZpdzZpRytnV0s4VlhtT0NpQmtiSEEvMm8rTWJ2bk5QNytZdz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74747d26-8ace-4128-c936-08dee625b52b
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2026 06:11:16.2395 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ParkWNDXM6jl8pboItdbnzLs/zjM7NH12+VyTVDTPfh9uuNdZi61m2k7uYErL9wp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6031
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,58 +195,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 17, 2026 at 03:39:55PM +0530, Neha Malcom Francis wrote:
-> On Thu, 16 Jul 2026 14:15:51 +0530, Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> > diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-> > index a62ae6a2478..f3133f85885 100644
-> > --- a/drivers/misc/qcom_geni.c
-> > +++ b/drivers/misc/qcom_geni.c
-> > @@ -414,6 +468,9 @@ static int geni_se_of_to_plat(struct udevice *dev)
-> >
-> >  		if (proto == GENI_SE_INVALID_PROTO)
-> >  			plat->need_firmware_load = true;
-> > +
-> > +		if (readl(res.start + SE_HW_PARAM_2) & GENI_USE_MINICORES)
-> > +			plat->is_mini_core = true;
->
-> Add IS_ENABLED(CONFIG_QCOM_GENI_MINICORE) to prevent accidental NULL
-> dereferencing in case CONFIG not set.
+Hi Tim,
 
-Not sure if I'm missing something. If plat was NULL, it would have crashed
-while doing 'plat->need_firmware_load = false' towards the beginning of the
-function itself.
+actually not sure why this was off the list. Let me add it.
 
-> > diff --git a/include/soc/qcom/minicore.h b/include/soc/qcom/minicore.h
-> > new file mode 100644
-> > index 00000000000..9f2071ed86b
-> > --- /dev/null
-> > +++ b/include/soc/qcom/minicore.h
-> > @@ -0,0 +1,25 @@
-> > [ ... skip 16 lines ... ]
-> > +};
-> > +
-> > +#if IS_ENABLED(CONFIG_QCOM_GENI_MINICORE)
-> > +extern struct qup_mini_core_info qup_mini_cores[];
-> > +#else
-> > +struct qup_mini_core_info *qup_mini_cores;
->
-> else #define qup_mini_cores NULL
 
-Ok.
+On 7/2/26 13:26, Michal Simek wrote:
+> 
+> 
+> On 7/2/26 10:57, Tim Ouyang wrote:
+>> On Mon, Jun 29, 2026 at 11:00:40AM +0200, Michal Simek wrote:
+>>> On 5/11/26 10:31, Michal Simek wrote:
+>>>> Building on commit c64fc632a86a ("riscv: cpu: Use CONFIG_IS_ENABLED(CPU)
+>>>> instead of plain ifdef"), add an early return in riscv_cpu_setup() when
+>>>> CONFIG_CPU is not enabled. This allows platforms to save code space in
+>>>> SPL by disabling CONFIG_SPL_CPU.
+>>>>
+>>>> Without this patch, building U-Boot with CONFIG_CPU=n and CONFIG_EVENT=y
+>>>> is broken: riscv_cpu_setup() is registered as an EVT_DM_POST_INIT_F event
+>>>> spy, and when the CPU uclass is unavailable uclass_find_first_device()
+>>>> returns no device, so the function returns -ENODEV. That in turn makes
+>>>> event_notify_null() in dm_init_and_scan() fail and triggers a boot hang
+>>>> ("initcall initf_dm() failed"). Returning 0 early avoids that failure.
+>>>>
+>>>> The compiler's dead-code elimination combined with --gc-sections
+>>>> removes the unreachable code and all associated static data,
+>>>> achieving significant size reduction without preprocessor guards:
+>>>>
+>>>>     spl/u-boot-spl:all -4332 spl/u-boot-spl:rodata -2872
+>>>>     spl/u-boot-spl:text -1460
+>>>>
+>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>>>> Reviewed-by: Yao Zi <me@ziyao.cc>
+>>>> ---
+>>>>
+>>>> Changes in v2:
+>>>> - extend commit message
+>>>>
+>>>>    arch/riscv/cpu/cpu.c | 3 +++
+>>>>    1 file changed, 3 insertions(+)
+>>>>
+>>>> diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+>>>> index bbadd0c9a469..3bec7c7cb6d0 100644
+>>>> --- a/arch/riscv/cpu/cpu.c
+>>>> +++ b/arch/riscv/cpu/cpu.c
+>>>> @@ -638,6 +638,9 @@ int riscv_cpu_setup(void)
+>>>>        const char *isa, **exts;
+>>>>        struct udevice *dev;
+>>>>
+>>>> +     if (!CONFIG_IS_ENABLED(CPU))
+>>>> +             return 0;
+>>>> +
+>>>>        uclass_find_first_device(UCLASS_CPU, &dev);
+>>>>        if (!dev) {
+>>>>                debug("unable to find the RISC-V cpu device\n");
+>>>
+>>> Can you please take it directly to next branch?
+>>>
+>>> Thanks,
+>>> Michal
+>>
+>> Hi Michal,
+>>
+>> The new RISC-V maintainer here. It seems your patch does not fix the
+>> issue. I tested it with the following steps:
+>> - mkdir -p $OUTPUT/test
+>> - make qemu-riscv64_spl_defconfig O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
+>> - make menuconfig O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
+>>    Disable CONFIG_CPU manually
+>> - make O=$OUTPUT/test CROSS_COMPILE=riscv64-linux-
+>>
+>> The build fails with:
+>> riscv64-linux-ld: common/board_f.o: in function `initcall_run_f':
+>> /work/u-boot-riscv/common/board_f.c:921:(.text.board_init_f+0x166): undefined 
+>> reference to `print_cpuinfo'
+>> riscv64-linux-ld: drivers/timer/riscv_aclint_timer.o: in function 
+>> `riscv_aclint_timer_probe':
+>> /work/u-boot-riscv/drivers/timer/riscv_aclint_timer.c:77: 
+>> (.text.riscv_aclint_timer_probe+0x24): undefined reference to 
+>> `timer_timebase_fallback'
+>> make[1]: *** [/work/u-boot-riscv/Makefile:2112: u-boot] Error 1
+>>
+>> Please correct me if I missed something.
+> 
+> It is not valid configuration because dependencies are not properly described in 
+> Kconfig.
+> drivers/timer/riscv_aclint_timer.c
+> calls timer_timebase_fallback() which is defined in drivers/timer/timer-uclass.c
+> as
+>   90 #if CONFIG_IS_ENABLED(CPU)
+>   91 int timer_timebase_fallback(struct udevice *dev)
+>   92 {
+> 
+> It means for this risc-v configuration in Kconfig when aclint_timer is selected 
+> it has to depends on CONFIG_CPU/CONFIG_SPL_CPU or should select it by default.
+> 
+> Microblaze-V is not using this timer that's why no problem to disable it.
+> 
+> 
+> And the second issue around print_cpuinfo. When you disable CPU likely you need 
+> to also disable CONFIG_DISPLAY_CPUINFO. CONFIG_CPU is uclass but if you grep it 
+> I wouldn't be surprised that there are still platform which are able to print 
+> information about cpu without enabling cpu uclass. That's why there is not 
+> dependency between CONFIG_DISPLAY_CPUINFO and CONFIG_CPU.
 
-> > diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
-> > index a67a93c72a4..df8a615b46b 100644
-> > --- a/include/soc/qcom/qup-fw-load.h
-> > +++ b/include/soc/qcom/qup-fw-load.h
-> > @@ -14,6 +14,7 @@
-> >  #define GENI_INIT_CFG_REVISION		0x0
-> >  #define GENI_S_INIT_CFG_REVISION	0x4
-> >  #define GENI_FORCE_DEFAULT_REG		0x20
-> > +#define GENI_OUTPUT_CTRL		0x24
->
-> Redefinition from geni-se.h ?
+Any reaction?
 
-Will remove.
-
-Thanks
-Varada
+Thanks,
+Michal
